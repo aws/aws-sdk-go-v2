@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/elasticbeanstalk/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -16,8 +15,9 @@ import (
 // a single application. Takes a list of version labels that specify application
 // source bundles for each of the environments to create or update. The name of
 // each environment and other required information must be included in the source
-// bundles in an environment manifest named env.yaml . See Compose Environments (https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/environment-mgmt-compose.html)
-// for details.
+// bundles in an environment manifest named env.yaml . See [Compose Environments] for details.
+//
+// [Compose Environments]: https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/environment-mgmt-compose.html
 func (c *Client) ComposeEnvironments(ctx context.Context, params *ComposeEnvironmentsInput, optFns ...func(*Options)) (*ComposeEnvironmentsOutput, error) {
 	if params == nil {
 		params = &ComposeEnvironmentsInput{}
@@ -41,8 +41,9 @@ type ComposeEnvironmentsInput struct {
 
 	// The name of the group to which the target environments belong. Specify a group
 	// name only if the environment name defined in each target environment's manifest
-	// ends with a + (plus) character. See Environment Manifest (env.yaml) (https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/environment-cfg-manifest.html)
-	// for details.
+	// ends with a + (plus) character. See [Environment Manifest (env.yaml)]for details.
+	//
+	// [Environment Manifest (env.yaml)]: https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/environment-cfg-manifest.html
 	GroupName *string
 
 	// A list of version labels, specifying one or more application source bundles
@@ -58,7 +59,7 @@ type ComposeEnvironmentsInput struct {
 // Result message containing a list of environment descriptions.
 type ComposeEnvironmentsOutput struct {
 
-	// Returns an EnvironmentDescription list.
+	//  Returns an EnvironmentDescription list.
 	Environments []types.EnvironmentDescription
 
 	// In a paginated request, the token that you can pass in a subsequent request to
@@ -93,25 +94,25 @@ func (c *Client) addOperationComposeEnvironmentsMiddlewares(stack *middleware.St
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -126,10 +127,13 @@ func (c *Client) addOperationComposeEnvironmentsMiddlewares(stack *middleware.St
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opComposeEnvironments(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

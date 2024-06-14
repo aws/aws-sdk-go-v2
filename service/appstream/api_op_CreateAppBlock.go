@@ -6,18 +6,20 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/appstream/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates an app block. App blocks are an Amazon AppStream 2.0 resource that
-// stores the details about the virtual hard disk in an S3 bucket. It also stores
-// the setup script with details about how to mount the virtual hard disk. The
-// virtual hard disk includes the application binaries and other files necessary to
-// launch your applications. Multiple applications can be assigned to a single app
-// block. This is only supported for Elastic fleets.
+// Creates an app block.
+//
+// App blocks are an Amazon AppStream 2.0 resource that stores the details about
+// the virtual hard disk in an S3 bucket. It also stores the setup script with
+// details about how to mount the virtual hard disk. The virtual hard disk includes
+// the application binaries and other files necessary to launch your applications.
+// Multiple applications can be assigned to a single app block.
+//
+// This is only supported for Elastic fleets.
 func (c *Client) CreateAppBlock(ctx context.Context, params *CreateAppBlockInput, optFns ...func(*Options)) (*CreateAppBlockOutput, error) {
 	if params == nil {
 		params = &CreateAppBlockInput{}
@@ -101,25 +103,25 @@ func (c *Client) addOperationCreateAppBlockMiddlewares(stack *middleware.Stack, 
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -134,13 +136,16 @@ func (c *Client) addOperationCreateAppBlockMiddlewares(stack *middleware.Stack, 
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpCreateAppBlockValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateAppBlock(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

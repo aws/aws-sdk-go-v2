@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/route53resolver/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -33,6 +32,7 @@ func (c *Client) ListResolverQueryLogConfigs(ctx context.Context, params *ListRe
 type ListResolverQueryLogConfigsInput struct {
 
 	// An optional specification to return a subset of query logging configurations.
+	//
 	// If you submit a second or subsequent ListResolverQueryLogConfigs request and
 	// specify the NextToken parameter, you must use the same values for Filters , if
 	// any, as in the previous request.
@@ -43,49 +43,70 @@ type ListResolverQueryLogConfigsInput struct {
 	// value for MaxResults , Resolver returns up to 100 query logging configurations.
 	MaxResults *int32
 
-	// For the first ListResolverQueryLogConfigs request, omit this value. If there
-	// are more than MaxResults query logging configurations that match the values
-	// that you specify for Filters , you can submit another
+	// For the first ListResolverQueryLogConfigs request, omit this value.
+	//
+	// If there are more than MaxResults query logging configurations that match the
+	// values that you specify for Filters , you can submit another
 	// ListResolverQueryLogConfigs request to get the next group of configurations. In
 	// the next request, specify the value of NextToken from the previous response.
 	NextToken *string
 
-	// The element that you want Resolver to sort query logging configurations by. If
-	// you submit a second or subsequent ListResolverQueryLogConfigs request and
+	// The element that you want Resolver to sort query logging configurations by.
+	//
+	// If you submit a second or subsequent ListResolverQueryLogConfigs request and
 	// specify the NextToken parameter, you must use the same value for SortBy , if
-	// any, as in the previous request. Valid values include the following elements:
+	// any, as in the previous request.
+	//
+	// Valid values include the following elements:
+	//
 	//   - Arn : The ARN of the query logging configuration
+	//
 	//   - AssociationCount : The number of VPCs that are associated with the specified
 	//   configuration
+	//
 	//   - CreationTime : The date and time that Resolver returned when the
 	//   configuration was created
+	//
 	//   - CreatorRequestId : The value that was specified for CreatorRequestId when
 	//   the configuration was created
+	//
 	//   - DestinationArn : The location that logs are sent to
+	//
 	//   - Id : The ID of the configuration
+	//
 	//   - Name : The name of the configuration
+	//
 	//   - OwnerId : The Amazon Web Services account number of the account that created
 	//   the configuration
+	//
 	//   - ShareStatus : Whether the configuration is shared with other Amazon Web
 	//   Services accounts or shared with the current account by another Amazon Web
 	//   Services account. Sharing is configured through Resource Access Manager (RAM).
+	//
 	//   - Status : The current status of the configuration. Valid values include the
 	//   following:
+	//
 	//   - CREATING : Resolver is creating the query logging configuration.
+	//
 	//   - CREATED : The query logging configuration was successfully created. Resolver
 	//   is logging queries that originate in the specified VPC.
+	//
 	//   - DELETING : Resolver is deleting this query logging configuration.
+	//
 	//   - FAILED : Resolver either couldn't create or couldn't delete the query
 	//   logging configuration. Here are two common causes:
+	//
 	//   - The specified destination (for example, an Amazon S3 bucket) was deleted.
+	//
 	//   - Permissions don't allow sending logs to the destination.
 	SortBy *string
 
 	// If you specified a value for SortBy , the order that you want query logging
-	// configurations to be listed in, ASCENDING or DESCENDING . If you submit a second
-	// or subsequent ListResolverQueryLogConfigs request and specify the NextToken
-	// parameter, you must use the same value for SortOrder , if any, as in the
-	// previous request.
+	// configurations to be listed in, ASCENDING or DESCENDING .
+	//
+	// If you submit a second or subsequent ListResolverQueryLogConfigs request and
+	// specify the NextToken parameter, you must use the same value for SortOrder , if
+	// any, as in the previous request.
 	SortOrder types.SortOrder
 
 	noSmithyDocumentSerde
@@ -145,25 +166,25 @@ func (c *Client) addOperationListResolverQueryLogConfigsMiddlewares(stack *middl
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -178,10 +199,13 @@ func (c *Client) addOperationListResolverQueryLogConfigsMiddlewares(stack *middl
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListResolverQueryLogConfigs(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

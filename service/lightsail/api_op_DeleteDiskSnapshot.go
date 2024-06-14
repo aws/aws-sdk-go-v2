@@ -6,22 +6,25 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/lightsail/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes the specified disk snapshot. When you make periodic snapshots of a
-// disk, the snapshots are incremental, and only the blocks on the device that have
-// changed since your last snapshot are saved in the new snapshot. When you delete
-// a snapshot, only the data not needed for any other snapshot is removed. So
-// regardless of which prior snapshots have been deleted, all active snapshots will
-// have access to all the information needed to restore the disk. The delete disk
-// snapshot operation supports tag-based access control via resource tags applied
-// to the resource identified by disk snapshot name . For more information, see the
-// Amazon Lightsail Developer Guide (https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-controlling-access-using-tags)
-// .
+// Deletes the specified disk snapshot.
+//
+// When you make periodic snapshots of a disk, the snapshots are incremental, and
+// only the blocks on the device that have changed since your last snapshot are
+// saved in the new snapshot. When you delete a snapshot, only the data not needed
+// for any other snapshot is removed. So regardless of which prior snapshots have
+// been deleted, all active snapshots will have access to all the information
+// needed to restore the disk.
+//
+// The delete disk snapshot operation supports tag-based access control via
+// resource tags applied to the resource identified by disk snapshot name . For
+// more information, see the [Amazon Lightsail Developer Guide].
+//
+// [Amazon Lightsail Developer Guide]: https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-controlling-access-using-tags
 func (c *Client) DeleteDiskSnapshot(ctx context.Context, params *DeleteDiskSnapshotInput, optFns ...func(*Options)) (*DeleteDiskSnapshotOutput, error) {
 	if params == nil {
 		params = &DeleteDiskSnapshotInput{}
@@ -82,25 +85,25 @@ func (c *Client) addOperationDeleteDiskSnapshotMiddlewares(stack *middleware.Sta
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -115,13 +118,16 @@ func (c *Client) addOperationDeleteDiskSnapshotMiddlewares(stack *middleware.Sta
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDeleteDiskSnapshotValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteDiskSnapshot(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

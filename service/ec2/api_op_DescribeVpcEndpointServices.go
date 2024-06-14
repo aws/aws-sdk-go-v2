@@ -6,14 +6,14 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Describes available services to which you can create a VPC endpoint. When the
-// service provider and the consumer have different accounts in multiple
+// Describes available services to which you can create a VPC endpoint.
+//
+// When the service provider and the consumer have different accounts in multiple
 // Availability Zones, and the consumer views the VPC endpoint service information,
 // the response only includes the common Availability Zones. For example, when the
 // service provider account uses us-east-1a and us-east-1c and the consumer uses
@@ -43,22 +43,29 @@ type DescribeVpcEndpointServicesInput struct {
 	DryRun *bool
 
 	// The filters.
+	//
 	//   - owner - The ID or alias of the Amazon Web Services account that owns the
 	//   service.
+	//
 	//   - service-name - The name of the service.
+	//
 	//   - service-type - The type of service ( Interface | Gateway |
 	//   GatewayLoadBalancer ).
+	//
 	//   - supported-ip-address-types - The IP address type ( ipv4 | ipv6 ).
+	//
 	//   - tag : - The key/value combination of a tag assigned to the resource. Use the
 	//   tag key in the filter name and the tag value as the filter value. For example,
 	//   to find all resources that have a tag with the key Owner and the value TeamA ,
 	//   specify tag:Owner for the filter name and TeamA for the filter value.
+	//
 	//   - tag-key - The key of a tag assigned to the resource. Use this filter to find
 	//   all resources assigned a tag with a specific key, regardless of the tag value.
 	Filters []types.Filter
 
 	// The maximum number of items to return for this request. The request returns a
 	// token that you can specify in a subsequent call to get the next set of results.
+	//
 	// Constraint: If the value is greater than 1,000, we return only 1,000 items.
 	MaxResults *int32
 
@@ -112,25 +119,25 @@ func (c *Client) addOperationDescribeVpcEndpointServicesMiddlewares(stack *middl
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -145,10 +152,13 @@ func (c *Client) addOperationDescribeVpcEndpointServicesMiddlewares(stack *middl
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeVpcEndpointServices(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

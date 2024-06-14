@@ -6,17 +6,17 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/outposts/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists the items in the catalog. Use filters to return specific results. If you
-// specify multiple filters, the results include only the resources that match all
-// of the specified filters. For a filter where you can specify multiple values,
-// the results include items that match any of the values that you specify for the
-// filter.
+// Lists the items in the catalog.
+//
+// Use filters to return specific results. If you specify multiple filters, the
+// results include only the resources that match all of the specified filters. For
+// a filter where you can specify multiple values, the results include items that
+// match any of the values that you specify for the filter.
 func (c *Client) ListCatalogItems(ctx context.Context, params *ListCatalogItemsInput, optFns ...func(*Options)) (*ListCatalogItemsOutput, error) {
 	if params == nil {
 		params = &ListCatalogItemsInput{}
@@ -88,25 +88,25 @@ func (c *Client) addOperationListCatalogItemsMiddlewares(stack *middleware.Stack
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -121,10 +121,13 @@ func (c *Client) addOperationListCatalogItemsMiddlewares(stack *middleware.Stack
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListCatalogItems(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

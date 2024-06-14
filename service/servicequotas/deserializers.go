@@ -18,7 +18,16 @@ import (
 	"io"
 	"math"
 	"strings"
+	"time"
 )
+
+func deserializeS3Expires(v string) (*time.Time, error) {
+	t, err := smithytime.ParseHTTPDate(v)
+	if err != nil {
+		return nil, nil
+	}
+	return &t, nil
+}
 
 type awsAwsjson11_deserializeOpAssociateServiceQuotaTemplate struct {
 }
@@ -88,9 +97,6 @@ func awsAwsjson11_deserializeOpErrorAssociateServiceQuotaTemplate(response *smit
 	errorMessage := errorCode
 
 	headerCode := response.Header.Get("X-Amzn-ErrorType")
-	if len(headerCode) != 0 {
-		errorCode = restjson.SanitizeErrorCode(headerCode)
-	}
 
 	var buff [1024]byte
 	ringBuffer := smithyio.NewRingBuffer(buff[:])
@@ -98,7 +104,7 @@ func awsAwsjson11_deserializeOpErrorAssociateServiceQuotaTemplate(response *smit
 	body := io.TeeReader(errorBody, ringBuffer)
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
-	jsonCode, message, err := restjson.GetErrorInfo(decoder)
+	bodyInfo, err := getProtocolErrorInfo(decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -110,13 +116,12 @@ func awsAwsjson11_deserializeOpErrorAssociateServiceQuotaTemplate(response *smit
 	}
 
 	errorBody.Seek(0, io.SeekStart)
-	if len(headerCode) == 0 && len(jsonCode) != 0 {
-		errorCode = restjson.SanitizeErrorCode(jsonCode)
+	if typ, ok := resolveProtocolErrorType(headerCode, bodyInfo); ok {
+		errorCode = restjson.SanitizeErrorCode(typ)
 	}
-	if len(message) != 0 {
-		errorMessage = message
+	if len(bodyInfo.Message) != 0 {
+		errorMessage = bodyInfo.Message
 	}
-
 	switch {
 	case strings.EqualFold("AWSServiceAccessNotEnabledException", errorCode):
 		return awsAwsjson11_deserializeErrorAWSServiceAccessNotEnabledException(response, errorBody)
@@ -220,9 +225,6 @@ func awsAwsjson11_deserializeOpErrorDeleteServiceQuotaIncreaseRequestFromTemplat
 	errorMessage := errorCode
 
 	headerCode := response.Header.Get("X-Amzn-ErrorType")
-	if len(headerCode) != 0 {
-		errorCode = restjson.SanitizeErrorCode(headerCode)
-	}
 
 	var buff [1024]byte
 	ringBuffer := smithyio.NewRingBuffer(buff[:])
@@ -230,7 +232,7 @@ func awsAwsjson11_deserializeOpErrorDeleteServiceQuotaIncreaseRequestFromTemplat
 	body := io.TeeReader(errorBody, ringBuffer)
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
-	jsonCode, message, err := restjson.GetErrorInfo(decoder)
+	bodyInfo, err := getProtocolErrorInfo(decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -242,13 +244,12 @@ func awsAwsjson11_deserializeOpErrorDeleteServiceQuotaIncreaseRequestFromTemplat
 	}
 
 	errorBody.Seek(0, io.SeekStart)
-	if len(headerCode) == 0 && len(jsonCode) != 0 {
-		errorCode = restjson.SanitizeErrorCode(jsonCode)
+	if typ, ok := resolveProtocolErrorType(headerCode, bodyInfo); ok {
+		errorCode = restjson.SanitizeErrorCode(typ)
 	}
-	if len(message) != 0 {
-		errorMessage = message
+	if len(bodyInfo.Message) != 0 {
+		errorMessage = bodyInfo.Message
 	}
-
 	switch {
 	case strings.EqualFold("AWSServiceAccessNotEnabledException", errorCode):
 		return awsAwsjson11_deserializeErrorAWSServiceAccessNotEnabledException(response, errorBody)
@@ -355,9 +356,6 @@ func awsAwsjson11_deserializeOpErrorDisassociateServiceQuotaTemplate(response *s
 	errorMessage := errorCode
 
 	headerCode := response.Header.Get("X-Amzn-ErrorType")
-	if len(headerCode) != 0 {
-		errorCode = restjson.SanitizeErrorCode(headerCode)
-	}
 
 	var buff [1024]byte
 	ringBuffer := smithyio.NewRingBuffer(buff[:])
@@ -365,7 +363,7 @@ func awsAwsjson11_deserializeOpErrorDisassociateServiceQuotaTemplate(response *s
 	body := io.TeeReader(errorBody, ringBuffer)
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
-	jsonCode, message, err := restjson.GetErrorInfo(decoder)
+	bodyInfo, err := getProtocolErrorInfo(decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -377,13 +375,12 @@ func awsAwsjson11_deserializeOpErrorDisassociateServiceQuotaTemplate(response *s
 	}
 
 	errorBody.Seek(0, io.SeekStart)
-	if len(headerCode) == 0 && len(jsonCode) != 0 {
-		errorCode = restjson.SanitizeErrorCode(jsonCode)
+	if typ, ok := resolveProtocolErrorType(headerCode, bodyInfo); ok {
+		errorCode = restjson.SanitizeErrorCode(typ)
 	}
-	if len(message) != 0 {
-		errorMessage = message
+	if len(bodyInfo.Message) != 0 {
+		errorMessage = bodyInfo.Message
 	}
-
 	switch {
 	case strings.EqualFold("AWSServiceAccessNotEnabledException", errorCode):
 		return awsAwsjson11_deserializeErrorAWSServiceAccessNotEnabledException(response, errorBody)
@@ -487,9 +484,6 @@ func awsAwsjson11_deserializeOpErrorGetAssociationForServiceQuotaTemplate(respon
 	errorMessage := errorCode
 
 	headerCode := response.Header.Get("X-Amzn-ErrorType")
-	if len(headerCode) != 0 {
-		errorCode = restjson.SanitizeErrorCode(headerCode)
-	}
 
 	var buff [1024]byte
 	ringBuffer := smithyio.NewRingBuffer(buff[:])
@@ -497,7 +491,7 @@ func awsAwsjson11_deserializeOpErrorGetAssociationForServiceQuotaTemplate(respon
 	body := io.TeeReader(errorBody, ringBuffer)
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
-	jsonCode, message, err := restjson.GetErrorInfo(decoder)
+	bodyInfo, err := getProtocolErrorInfo(decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -509,13 +503,12 @@ func awsAwsjson11_deserializeOpErrorGetAssociationForServiceQuotaTemplate(respon
 	}
 
 	errorBody.Seek(0, io.SeekStart)
-	if len(headerCode) == 0 && len(jsonCode) != 0 {
-		errorCode = restjson.SanitizeErrorCode(jsonCode)
+	if typ, ok := resolveProtocolErrorType(headerCode, bodyInfo); ok {
+		errorCode = restjson.SanitizeErrorCode(typ)
 	}
-	if len(message) != 0 {
-		errorMessage = message
+	if len(bodyInfo.Message) != 0 {
+		errorMessage = bodyInfo.Message
 	}
-
 	switch {
 	case strings.EqualFold("AWSServiceAccessNotEnabledException", errorCode):
 		return awsAwsjson11_deserializeErrorAWSServiceAccessNotEnabledException(response, errorBody)
@@ -619,9 +612,6 @@ func awsAwsjson11_deserializeOpErrorGetAWSDefaultServiceQuota(response *smithyht
 	errorMessage := errorCode
 
 	headerCode := response.Header.Get("X-Amzn-ErrorType")
-	if len(headerCode) != 0 {
-		errorCode = restjson.SanitizeErrorCode(headerCode)
-	}
 
 	var buff [1024]byte
 	ringBuffer := smithyio.NewRingBuffer(buff[:])
@@ -629,7 +619,7 @@ func awsAwsjson11_deserializeOpErrorGetAWSDefaultServiceQuota(response *smithyht
 	body := io.TeeReader(errorBody, ringBuffer)
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
-	jsonCode, message, err := restjson.GetErrorInfo(decoder)
+	bodyInfo, err := getProtocolErrorInfo(decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -641,13 +631,12 @@ func awsAwsjson11_deserializeOpErrorGetAWSDefaultServiceQuota(response *smithyht
 	}
 
 	errorBody.Seek(0, io.SeekStart)
-	if len(headerCode) == 0 && len(jsonCode) != 0 {
-		errorCode = restjson.SanitizeErrorCode(jsonCode)
+	if typ, ok := resolveProtocolErrorType(headerCode, bodyInfo); ok {
+		errorCode = restjson.SanitizeErrorCode(typ)
 	}
-	if len(message) != 0 {
-		errorMessage = message
+	if len(bodyInfo.Message) != 0 {
+		errorMessage = bodyInfo.Message
 	}
-
 	switch {
 	case strings.EqualFold("AccessDeniedException", errorCode):
 		return awsAwsjson11_deserializeErrorAccessDeniedException(response, errorBody)
@@ -742,9 +731,6 @@ func awsAwsjson11_deserializeOpErrorGetRequestedServiceQuotaChange(response *smi
 	errorMessage := errorCode
 
 	headerCode := response.Header.Get("X-Amzn-ErrorType")
-	if len(headerCode) != 0 {
-		errorCode = restjson.SanitizeErrorCode(headerCode)
-	}
 
 	var buff [1024]byte
 	ringBuffer := smithyio.NewRingBuffer(buff[:])
@@ -752,7 +738,7 @@ func awsAwsjson11_deserializeOpErrorGetRequestedServiceQuotaChange(response *smi
 	body := io.TeeReader(errorBody, ringBuffer)
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
-	jsonCode, message, err := restjson.GetErrorInfo(decoder)
+	bodyInfo, err := getProtocolErrorInfo(decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -764,13 +750,12 @@ func awsAwsjson11_deserializeOpErrorGetRequestedServiceQuotaChange(response *smi
 	}
 
 	errorBody.Seek(0, io.SeekStart)
-	if len(headerCode) == 0 && len(jsonCode) != 0 {
-		errorCode = restjson.SanitizeErrorCode(jsonCode)
+	if typ, ok := resolveProtocolErrorType(headerCode, bodyInfo); ok {
+		errorCode = restjson.SanitizeErrorCode(typ)
 	}
-	if len(message) != 0 {
-		errorMessage = message
+	if len(bodyInfo.Message) != 0 {
+		errorMessage = bodyInfo.Message
 	}
-
 	switch {
 	case strings.EqualFold("AccessDeniedException", errorCode):
 		return awsAwsjson11_deserializeErrorAccessDeniedException(response, errorBody)
@@ -865,9 +850,6 @@ func awsAwsjson11_deserializeOpErrorGetServiceQuota(response *smithyhttp.Respons
 	errorMessage := errorCode
 
 	headerCode := response.Header.Get("X-Amzn-ErrorType")
-	if len(headerCode) != 0 {
-		errorCode = restjson.SanitizeErrorCode(headerCode)
-	}
 
 	var buff [1024]byte
 	ringBuffer := smithyio.NewRingBuffer(buff[:])
@@ -875,7 +857,7 @@ func awsAwsjson11_deserializeOpErrorGetServiceQuota(response *smithyhttp.Respons
 	body := io.TeeReader(errorBody, ringBuffer)
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
-	jsonCode, message, err := restjson.GetErrorInfo(decoder)
+	bodyInfo, err := getProtocolErrorInfo(decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -887,13 +869,12 @@ func awsAwsjson11_deserializeOpErrorGetServiceQuota(response *smithyhttp.Respons
 	}
 
 	errorBody.Seek(0, io.SeekStart)
-	if len(headerCode) == 0 && len(jsonCode) != 0 {
-		errorCode = restjson.SanitizeErrorCode(jsonCode)
+	if typ, ok := resolveProtocolErrorType(headerCode, bodyInfo); ok {
+		errorCode = restjson.SanitizeErrorCode(typ)
 	}
-	if len(message) != 0 {
-		errorMessage = message
+	if len(bodyInfo.Message) != 0 {
+		errorMessage = bodyInfo.Message
 	}
-
 	switch {
 	case strings.EqualFold("AccessDeniedException", errorCode):
 		return awsAwsjson11_deserializeErrorAccessDeniedException(response, errorBody)
@@ -988,9 +969,6 @@ func awsAwsjson11_deserializeOpErrorGetServiceQuotaIncreaseRequestFromTemplate(r
 	errorMessage := errorCode
 
 	headerCode := response.Header.Get("X-Amzn-ErrorType")
-	if len(headerCode) != 0 {
-		errorCode = restjson.SanitizeErrorCode(headerCode)
-	}
 
 	var buff [1024]byte
 	ringBuffer := smithyio.NewRingBuffer(buff[:])
@@ -998,7 +976,7 @@ func awsAwsjson11_deserializeOpErrorGetServiceQuotaIncreaseRequestFromTemplate(r
 	body := io.TeeReader(errorBody, ringBuffer)
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
-	jsonCode, message, err := restjson.GetErrorInfo(decoder)
+	bodyInfo, err := getProtocolErrorInfo(decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -1010,13 +988,12 @@ func awsAwsjson11_deserializeOpErrorGetServiceQuotaIncreaseRequestFromTemplate(r
 	}
 
 	errorBody.Seek(0, io.SeekStart)
-	if len(headerCode) == 0 && len(jsonCode) != 0 {
-		errorCode = restjson.SanitizeErrorCode(jsonCode)
+	if typ, ok := resolveProtocolErrorType(headerCode, bodyInfo); ok {
+		errorCode = restjson.SanitizeErrorCode(typ)
 	}
-	if len(message) != 0 {
-		errorMessage = message
+	if len(bodyInfo.Message) != 0 {
+		errorMessage = bodyInfo.Message
 	}
-
 	switch {
 	case strings.EqualFold("AWSServiceAccessNotEnabledException", errorCode):
 		return awsAwsjson11_deserializeErrorAWSServiceAccessNotEnabledException(response, errorBody)
@@ -1123,9 +1100,6 @@ func awsAwsjson11_deserializeOpErrorListAWSDefaultServiceQuotas(response *smithy
 	errorMessage := errorCode
 
 	headerCode := response.Header.Get("X-Amzn-ErrorType")
-	if len(headerCode) != 0 {
-		errorCode = restjson.SanitizeErrorCode(headerCode)
-	}
 
 	var buff [1024]byte
 	ringBuffer := smithyio.NewRingBuffer(buff[:])
@@ -1133,7 +1107,7 @@ func awsAwsjson11_deserializeOpErrorListAWSDefaultServiceQuotas(response *smithy
 	body := io.TeeReader(errorBody, ringBuffer)
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
-	jsonCode, message, err := restjson.GetErrorInfo(decoder)
+	bodyInfo, err := getProtocolErrorInfo(decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -1145,13 +1119,12 @@ func awsAwsjson11_deserializeOpErrorListAWSDefaultServiceQuotas(response *smithy
 	}
 
 	errorBody.Seek(0, io.SeekStart)
-	if len(headerCode) == 0 && len(jsonCode) != 0 {
-		errorCode = restjson.SanitizeErrorCode(jsonCode)
+	if typ, ok := resolveProtocolErrorType(headerCode, bodyInfo); ok {
+		errorCode = restjson.SanitizeErrorCode(typ)
 	}
-	if len(message) != 0 {
-		errorMessage = message
+	if len(bodyInfo.Message) != 0 {
+		errorMessage = bodyInfo.Message
 	}
-
 	switch {
 	case strings.EqualFold("AccessDeniedException", errorCode):
 		return awsAwsjson11_deserializeErrorAccessDeniedException(response, errorBody)
@@ -1249,9 +1222,6 @@ func awsAwsjson11_deserializeOpErrorListRequestedServiceQuotaChangeHistory(respo
 	errorMessage := errorCode
 
 	headerCode := response.Header.Get("X-Amzn-ErrorType")
-	if len(headerCode) != 0 {
-		errorCode = restjson.SanitizeErrorCode(headerCode)
-	}
 
 	var buff [1024]byte
 	ringBuffer := smithyio.NewRingBuffer(buff[:])
@@ -1259,7 +1229,7 @@ func awsAwsjson11_deserializeOpErrorListRequestedServiceQuotaChangeHistory(respo
 	body := io.TeeReader(errorBody, ringBuffer)
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
-	jsonCode, message, err := restjson.GetErrorInfo(decoder)
+	bodyInfo, err := getProtocolErrorInfo(decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -1271,13 +1241,12 @@ func awsAwsjson11_deserializeOpErrorListRequestedServiceQuotaChangeHistory(respo
 	}
 
 	errorBody.Seek(0, io.SeekStart)
-	if len(headerCode) == 0 && len(jsonCode) != 0 {
-		errorCode = restjson.SanitizeErrorCode(jsonCode)
+	if typ, ok := resolveProtocolErrorType(headerCode, bodyInfo); ok {
+		errorCode = restjson.SanitizeErrorCode(typ)
 	}
-	if len(message) != 0 {
-		errorMessage = message
+	if len(bodyInfo.Message) != 0 {
+		errorMessage = bodyInfo.Message
 	}
-
 	switch {
 	case strings.EqualFold("AccessDeniedException", errorCode):
 		return awsAwsjson11_deserializeErrorAccessDeniedException(response, errorBody)
@@ -1375,9 +1344,6 @@ func awsAwsjson11_deserializeOpErrorListRequestedServiceQuotaChangeHistoryByQuot
 	errorMessage := errorCode
 
 	headerCode := response.Header.Get("X-Amzn-ErrorType")
-	if len(headerCode) != 0 {
-		errorCode = restjson.SanitizeErrorCode(headerCode)
-	}
 
 	var buff [1024]byte
 	ringBuffer := smithyio.NewRingBuffer(buff[:])
@@ -1385,7 +1351,7 @@ func awsAwsjson11_deserializeOpErrorListRequestedServiceQuotaChangeHistoryByQuot
 	body := io.TeeReader(errorBody, ringBuffer)
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
-	jsonCode, message, err := restjson.GetErrorInfo(decoder)
+	bodyInfo, err := getProtocolErrorInfo(decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -1397,13 +1363,12 @@ func awsAwsjson11_deserializeOpErrorListRequestedServiceQuotaChangeHistoryByQuot
 	}
 
 	errorBody.Seek(0, io.SeekStart)
-	if len(headerCode) == 0 && len(jsonCode) != 0 {
-		errorCode = restjson.SanitizeErrorCode(jsonCode)
+	if typ, ok := resolveProtocolErrorType(headerCode, bodyInfo); ok {
+		errorCode = restjson.SanitizeErrorCode(typ)
 	}
-	if len(message) != 0 {
-		errorMessage = message
+	if len(bodyInfo.Message) != 0 {
+		errorMessage = bodyInfo.Message
 	}
-
 	switch {
 	case strings.EqualFold("AccessDeniedException", errorCode):
 		return awsAwsjson11_deserializeErrorAccessDeniedException(response, errorBody)
@@ -1501,9 +1466,6 @@ func awsAwsjson11_deserializeOpErrorListServiceQuotaIncreaseRequestsInTemplate(r
 	errorMessage := errorCode
 
 	headerCode := response.Header.Get("X-Amzn-ErrorType")
-	if len(headerCode) != 0 {
-		errorCode = restjson.SanitizeErrorCode(headerCode)
-	}
 
 	var buff [1024]byte
 	ringBuffer := smithyio.NewRingBuffer(buff[:])
@@ -1511,7 +1473,7 @@ func awsAwsjson11_deserializeOpErrorListServiceQuotaIncreaseRequestsInTemplate(r
 	body := io.TeeReader(errorBody, ringBuffer)
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
-	jsonCode, message, err := restjson.GetErrorInfo(decoder)
+	bodyInfo, err := getProtocolErrorInfo(decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -1523,13 +1485,12 @@ func awsAwsjson11_deserializeOpErrorListServiceQuotaIncreaseRequestsInTemplate(r
 	}
 
 	errorBody.Seek(0, io.SeekStart)
-	if len(headerCode) == 0 && len(jsonCode) != 0 {
-		errorCode = restjson.SanitizeErrorCode(jsonCode)
+	if typ, ok := resolveProtocolErrorType(headerCode, bodyInfo); ok {
+		errorCode = restjson.SanitizeErrorCode(typ)
 	}
-	if len(message) != 0 {
-		errorMessage = message
+	if len(bodyInfo.Message) != 0 {
+		errorMessage = bodyInfo.Message
 	}
-
 	switch {
 	case strings.EqualFold("AWSServiceAccessNotEnabledException", errorCode):
 		return awsAwsjson11_deserializeErrorAWSServiceAccessNotEnabledException(response, errorBody)
@@ -1633,9 +1594,6 @@ func awsAwsjson11_deserializeOpErrorListServiceQuotas(response *smithyhttp.Respo
 	errorMessage := errorCode
 
 	headerCode := response.Header.Get("X-Amzn-ErrorType")
-	if len(headerCode) != 0 {
-		errorCode = restjson.SanitizeErrorCode(headerCode)
-	}
 
 	var buff [1024]byte
 	ringBuffer := smithyio.NewRingBuffer(buff[:])
@@ -1643,7 +1601,7 @@ func awsAwsjson11_deserializeOpErrorListServiceQuotas(response *smithyhttp.Respo
 	body := io.TeeReader(errorBody, ringBuffer)
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
-	jsonCode, message, err := restjson.GetErrorInfo(decoder)
+	bodyInfo, err := getProtocolErrorInfo(decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -1655,13 +1613,12 @@ func awsAwsjson11_deserializeOpErrorListServiceQuotas(response *smithyhttp.Respo
 	}
 
 	errorBody.Seek(0, io.SeekStart)
-	if len(headerCode) == 0 && len(jsonCode) != 0 {
-		errorCode = restjson.SanitizeErrorCode(jsonCode)
+	if typ, ok := resolveProtocolErrorType(headerCode, bodyInfo); ok {
+		errorCode = restjson.SanitizeErrorCode(typ)
 	}
-	if len(message) != 0 {
-		errorMessage = message
+	if len(bodyInfo.Message) != 0 {
+		errorMessage = bodyInfo.Message
 	}
-
 	switch {
 	case strings.EqualFold("AccessDeniedException", errorCode):
 		return awsAwsjson11_deserializeErrorAccessDeniedException(response, errorBody)
@@ -1759,9 +1716,6 @@ func awsAwsjson11_deserializeOpErrorListServices(response *smithyhttp.Response, 
 	errorMessage := errorCode
 
 	headerCode := response.Header.Get("X-Amzn-ErrorType")
-	if len(headerCode) != 0 {
-		errorCode = restjson.SanitizeErrorCode(headerCode)
-	}
 
 	var buff [1024]byte
 	ringBuffer := smithyio.NewRingBuffer(buff[:])
@@ -1769,7 +1723,7 @@ func awsAwsjson11_deserializeOpErrorListServices(response *smithyhttp.Response, 
 	body := io.TeeReader(errorBody, ringBuffer)
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
-	jsonCode, message, err := restjson.GetErrorInfo(decoder)
+	bodyInfo, err := getProtocolErrorInfo(decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -1781,13 +1735,12 @@ func awsAwsjson11_deserializeOpErrorListServices(response *smithyhttp.Response, 
 	}
 
 	errorBody.Seek(0, io.SeekStart)
-	if len(headerCode) == 0 && len(jsonCode) != 0 {
-		errorCode = restjson.SanitizeErrorCode(jsonCode)
+	if typ, ok := resolveProtocolErrorType(headerCode, bodyInfo); ok {
+		errorCode = restjson.SanitizeErrorCode(typ)
 	}
-	if len(message) != 0 {
-		errorMessage = message
+	if len(bodyInfo.Message) != 0 {
+		errorMessage = bodyInfo.Message
 	}
-
 	switch {
 	case strings.EqualFold("AccessDeniedException", errorCode):
 		return awsAwsjson11_deserializeErrorAccessDeniedException(response, errorBody)
@@ -1882,9 +1835,6 @@ func awsAwsjson11_deserializeOpErrorListTagsForResource(response *smithyhttp.Res
 	errorMessage := errorCode
 
 	headerCode := response.Header.Get("X-Amzn-ErrorType")
-	if len(headerCode) != 0 {
-		errorCode = restjson.SanitizeErrorCode(headerCode)
-	}
 
 	var buff [1024]byte
 	ringBuffer := smithyio.NewRingBuffer(buff[:])
@@ -1892,7 +1842,7 @@ func awsAwsjson11_deserializeOpErrorListTagsForResource(response *smithyhttp.Res
 	body := io.TeeReader(errorBody, ringBuffer)
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
-	jsonCode, message, err := restjson.GetErrorInfo(decoder)
+	bodyInfo, err := getProtocolErrorInfo(decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -1904,13 +1854,12 @@ func awsAwsjson11_deserializeOpErrorListTagsForResource(response *smithyhttp.Res
 	}
 
 	errorBody.Seek(0, io.SeekStart)
-	if len(headerCode) == 0 && len(jsonCode) != 0 {
-		errorCode = restjson.SanitizeErrorCode(jsonCode)
+	if typ, ok := resolveProtocolErrorType(headerCode, bodyInfo); ok {
+		errorCode = restjson.SanitizeErrorCode(typ)
 	}
-	if len(message) != 0 {
-		errorMessage = message
+	if len(bodyInfo.Message) != 0 {
+		errorMessage = bodyInfo.Message
 	}
-
 	switch {
 	case strings.EqualFold("AccessDeniedException", errorCode):
 		return awsAwsjson11_deserializeErrorAccessDeniedException(response, errorBody)
@@ -2005,9 +1954,6 @@ func awsAwsjson11_deserializeOpErrorPutServiceQuotaIncreaseRequestIntoTemplate(r
 	errorMessage := errorCode
 
 	headerCode := response.Header.Get("X-Amzn-ErrorType")
-	if len(headerCode) != 0 {
-		errorCode = restjson.SanitizeErrorCode(headerCode)
-	}
 
 	var buff [1024]byte
 	ringBuffer := smithyio.NewRingBuffer(buff[:])
@@ -2015,7 +1961,7 @@ func awsAwsjson11_deserializeOpErrorPutServiceQuotaIncreaseRequestIntoTemplate(r
 	body := io.TeeReader(errorBody, ringBuffer)
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
-	jsonCode, message, err := restjson.GetErrorInfo(decoder)
+	bodyInfo, err := getProtocolErrorInfo(decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -2027,13 +1973,12 @@ func awsAwsjson11_deserializeOpErrorPutServiceQuotaIncreaseRequestIntoTemplate(r
 	}
 
 	errorBody.Seek(0, io.SeekStart)
-	if len(headerCode) == 0 && len(jsonCode) != 0 {
-		errorCode = restjson.SanitizeErrorCode(jsonCode)
+	if typ, ok := resolveProtocolErrorType(headerCode, bodyInfo); ok {
+		errorCode = restjson.SanitizeErrorCode(typ)
 	}
-	if len(message) != 0 {
-		errorMessage = message
+	if len(bodyInfo.Message) != 0 {
+		errorMessage = bodyInfo.Message
 	}
-
 	switch {
 	case strings.EqualFold("AWSServiceAccessNotEnabledException", errorCode):
 		return awsAwsjson11_deserializeErrorAWSServiceAccessNotEnabledException(response, errorBody)
@@ -2143,9 +2088,6 @@ func awsAwsjson11_deserializeOpErrorRequestServiceQuotaIncrease(response *smithy
 	errorMessage := errorCode
 
 	headerCode := response.Header.Get("X-Amzn-ErrorType")
-	if len(headerCode) != 0 {
-		errorCode = restjson.SanitizeErrorCode(headerCode)
-	}
 
 	var buff [1024]byte
 	ringBuffer := smithyio.NewRingBuffer(buff[:])
@@ -2153,7 +2095,7 @@ func awsAwsjson11_deserializeOpErrorRequestServiceQuotaIncrease(response *smithy
 	body := io.TeeReader(errorBody, ringBuffer)
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
-	jsonCode, message, err := restjson.GetErrorInfo(decoder)
+	bodyInfo, err := getProtocolErrorInfo(decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -2165,13 +2107,12 @@ func awsAwsjson11_deserializeOpErrorRequestServiceQuotaIncrease(response *smithy
 	}
 
 	errorBody.Seek(0, io.SeekStart)
-	if len(headerCode) == 0 && len(jsonCode) != 0 {
-		errorCode = restjson.SanitizeErrorCode(jsonCode)
+	if typ, ok := resolveProtocolErrorType(headerCode, bodyInfo); ok {
+		errorCode = restjson.SanitizeErrorCode(typ)
 	}
-	if len(message) != 0 {
-		errorMessage = message
+	if len(bodyInfo.Message) != 0 {
+		errorMessage = bodyInfo.Message
 	}
-
 	switch {
 	case strings.EqualFold("AccessDeniedException", errorCode):
 		return awsAwsjson11_deserializeErrorAccessDeniedException(response, errorBody)
@@ -2278,9 +2219,6 @@ func awsAwsjson11_deserializeOpErrorTagResource(response *smithyhttp.Response, m
 	errorMessage := errorCode
 
 	headerCode := response.Header.Get("X-Amzn-ErrorType")
-	if len(headerCode) != 0 {
-		errorCode = restjson.SanitizeErrorCode(headerCode)
-	}
 
 	var buff [1024]byte
 	ringBuffer := smithyio.NewRingBuffer(buff[:])
@@ -2288,7 +2226,7 @@ func awsAwsjson11_deserializeOpErrorTagResource(response *smithyhttp.Response, m
 	body := io.TeeReader(errorBody, ringBuffer)
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
-	jsonCode, message, err := restjson.GetErrorInfo(decoder)
+	bodyInfo, err := getProtocolErrorInfo(decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -2300,13 +2238,12 @@ func awsAwsjson11_deserializeOpErrorTagResource(response *smithyhttp.Response, m
 	}
 
 	errorBody.Seek(0, io.SeekStart)
-	if len(headerCode) == 0 && len(jsonCode) != 0 {
-		errorCode = restjson.SanitizeErrorCode(jsonCode)
+	if typ, ok := resolveProtocolErrorType(headerCode, bodyInfo); ok {
+		errorCode = restjson.SanitizeErrorCode(typ)
 	}
-	if len(message) != 0 {
-		errorMessage = message
+	if len(bodyInfo.Message) != 0 {
+		errorMessage = bodyInfo.Message
 	}
-
 	switch {
 	case strings.EqualFold("AccessDeniedException", errorCode):
 		return awsAwsjson11_deserializeErrorAccessDeniedException(response, errorBody)
@@ -2407,9 +2344,6 @@ func awsAwsjson11_deserializeOpErrorUntagResource(response *smithyhttp.Response,
 	errorMessage := errorCode
 
 	headerCode := response.Header.Get("X-Amzn-ErrorType")
-	if len(headerCode) != 0 {
-		errorCode = restjson.SanitizeErrorCode(headerCode)
-	}
 
 	var buff [1024]byte
 	ringBuffer := smithyio.NewRingBuffer(buff[:])
@@ -2417,7 +2351,7 @@ func awsAwsjson11_deserializeOpErrorUntagResource(response *smithyhttp.Response,
 	body := io.TeeReader(errorBody, ringBuffer)
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
-	jsonCode, message, err := restjson.GetErrorInfo(decoder)
+	bodyInfo, err := getProtocolErrorInfo(decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -2429,13 +2363,12 @@ func awsAwsjson11_deserializeOpErrorUntagResource(response *smithyhttp.Response,
 	}
 
 	errorBody.Seek(0, io.SeekStart)
-	if len(headerCode) == 0 && len(jsonCode) != 0 {
-		errorCode = restjson.SanitizeErrorCode(jsonCode)
+	if typ, ok := resolveProtocolErrorType(headerCode, bodyInfo); ok {
+		errorCode = restjson.SanitizeErrorCode(typ)
 	}
-	if len(message) != 0 {
-		errorMessage = message
+	if len(bodyInfo.Message) != 0 {
+		errorMessage = bodyInfo.Message
 	}
-
 	switch {
 	case strings.EqualFold("AccessDeniedException", errorCode):
 		return awsAwsjson11_deserializeErrorAccessDeniedException(response, errorBody)
@@ -5483,4 +5416,33 @@ func awsAwsjson11_deserializeOpDocumentUntagResourceOutput(v **UntagResourceOutp
 	}
 	*v = sv
 	return nil
+}
+
+type protocolErrorInfo struct {
+	Type    string `json:"__type"`
+	Message string
+	Code    any // nonstandard for awsjson but some services do present the type here
+}
+
+func getProtocolErrorInfo(decoder *json.Decoder) (protocolErrorInfo, error) {
+	var errInfo protocolErrorInfo
+	if err := decoder.Decode(&errInfo); err != nil {
+		if err == io.EOF {
+			return errInfo, nil
+		}
+		return errInfo, err
+	}
+
+	return errInfo, nil
+}
+
+func resolveProtocolErrorType(headerType string, bodyInfo protocolErrorInfo) (string, bool) {
+	if len(headerType) != 0 {
+		return headerType, true
+	} else if len(bodyInfo.Type) != 0 {
+		return bodyInfo.Type, true
+	} else if code, ok := bodyInfo.Code.(string); ok && len(code) != 0 {
+		return code, true
+	}
+	return "", false
 }

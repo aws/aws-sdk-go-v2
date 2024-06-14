@@ -39,11 +39,12 @@ type AccessControl struct {
 	noSmithyDocumentSerde
 }
 
-// Performs an Amazon Q plugin action during a non-streaming chat conversation.
+// Performs an Amazon Q Business plugin action during a non-streaming chat
+// conversation.
 type ActionExecution struct {
 
 	// A mapping of field names to the field values in input that an end user provides
-	// to Amazon Q requests to perform their plugin action.
+	// to Amazon Q Business requests to perform their plugin action.
 	//
 	// This member is required.
 	Payload map[string]ActionExecutionPayloadField
@@ -62,6 +63,30 @@ type ActionExecution struct {
 	noSmithyDocumentSerde
 }
 
+// A request from an end user signalling an intent to perform an Amazon Q Business
+// plugin action during a streaming chat.
+type ActionExecutionEvent struct {
+
+	// A mapping of field names to the field values in input that an end user provides
+	// to Amazon Q Business requests to perform their plugin action.
+	//
+	// This member is required.
+	Payload map[string]ActionExecutionPayloadField
+
+	// A string used to retain information about the hierarchical contexts within a
+	// action execution event payload.
+	//
+	// This member is required.
+	PayloadFieldNameSeparator *string
+
+	// The identifier of the plugin for which the action is being requested.
+	//
+	// This member is required.
+	PluginId *string
+
+	noSmithyDocumentSerde
+}
+
 // A user input field in an plugin action execution payload.
 type ActionExecutionPayloadField struct {
 
@@ -73,14 +98,14 @@ type ActionExecutionPayloadField struct {
 	noSmithyDocumentSerde
 }
 
-// An output event that Amazon Q returns to an user who wants to perform a plugin
-// action during a non-streaming chat conversation. It contains information about
-// the selected action with a list of possible user input fields, some
-// pre-populated by Amazon Q.
+// An output event that Amazon Q Business returns to an user who wants to perform
+// a plugin action during a non-streaming chat conversation. It contains
+// information about the selected action with a list of possible user input fields,
+// some pre-populated by Amazon Q Business.
 type ActionReview struct {
 
-	// Field values that an end user needs to provide to Amazon Q for Amazon Q to
-	// perform the requested plugin action.
+	// Field values that an end user needs to provide to Amazon Q Business for Amazon
+	// Q Business to perform the requested plugin action.
 	Payload map[string]ActionReviewPayloadField
 
 	// A string used to retain information about the hierarchical contexts within an
@@ -96,14 +121,58 @@ type ActionReview struct {
 	noSmithyDocumentSerde
 }
 
+// An output event that Amazon Q Business returns to an user who wants to perform
+// a plugin action during a streaming chat conversation. It contains information
+// about the selected action with a list of possible user input fields, some
+// pre-populated by Amazon Q Business.
+type ActionReviewEvent struct {
+
+	// The identifier of the conversation with which the action review event is
+	// associated.
+	ConversationId *string
+
+	// Field values that an end user needs to provide to Amazon Q Business for Amazon
+	// Q Business to perform the requested plugin action.
+	Payload map[string]ActionReviewPayloadField
+
+	// A string used to retain information about the hierarchical contexts within an
+	// action review event payload.
+	PayloadFieldNameSeparator *string
+
+	// The identifier of the plugin associated with the action review event.
+	PluginId *string
+
+	// The type of plugin.
+	PluginType PluginType
+
+	// The identifier of an Amazon Q Business AI generated associated with the action
+	// review event.
+	SystemMessageId *string
+
+	// The identifier of the conversation with which the plugin action is associated.
+	UserMessageId *string
+
+	noSmithyDocumentSerde
+}
+
 // A user input field in an plugin action review payload.
 type ActionReviewPayloadField struct {
 
+	// The expected data format for the action review input field value. For example,
+	// in PTO request, from and to would be of datetime allowed format.
+	AllowedFormat *string
+
 	// Information about the field values that an end user can use to provide to
-	// Amazon Q for Amazon Q to perform the requested plugin action.
+	// Amazon Q Business for Amazon Q Business to perform the requested plugin action.
 	AllowedValues []ActionReviewPayloadFieldAllowedValue
 
-	// The name of the field.
+	// The field level description of each action review input field. This could be an
+	// explanation of the field. In the Amazon Q Business web experience, these
+	// descriptions could be used to display as tool tips to help users understand the
+	// field.
+	DisplayDescription *string
+
+	//  The name of the field.
 	DisplayName *string
 
 	// The display order of fields in a payload.
@@ -122,7 +191,7 @@ type ActionReviewPayloadField struct {
 }
 
 // Information about the field values that an end user can use to provide to
-// Amazon Q for Amazon Q to perform the requested plugin action.
+// Amazon Q Business for Amazon Q Business to perform the requested plugin action.
 type ActionReviewPayloadFieldAllowedValue struct {
 
 	// The name of the field.
@@ -134,23 +203,58 @@ type ActionReviewPayloadFieldAllowedValue struct {
 	noSmithyDocumentSerde
 }
 
-// Summary information for an Amazon Q application.
+// Contains details about the OpenAPI schema for a custom plugin. For more
+// information, see [custom plugin OpenAPI schemas]. You can either include the schema directly in the payload
+// field or you can upload it to an S3 bucket and specify the S3 bucket location in
+// the s3 field.
+//
+// The following types satisfy this interface:
+//
+//	APISchemaMemberPayload
+//	APISchemaMemberS3
+//
+// [custom plugin OpenAPI schemas]: https://docs.aws.amazon.com/amazonq/latest/qbusiness-ug/custom-plugin.html#plugins-api-schema
+type APISchema interface {
+	isAPISchema()
+}
+
+// The JSON or YAML-formatted payload defining the OpenAPI schema for a custom
+// plugin.
+type APISchemaMemberPayload struct {
+	Value string
+
+	noSmithyDocumentSerde
+}
+
+func (*APISchemaMemberPayload) isAPISchema() {}
+
+// Contains details about the S3 object containing the OpenAPI schema for a custom
+// plugin. The schema could be in either JSON or YAML format.
+type APISchemaMemberS3 struct {
+	Value S3
+
+	noSmithyDocumentSerde
+}
+
+func (*APISchemaMemberS3) isAPISchema() {}
+
+// Summary information for an Amazon Q Business application.
 type Application struct {
 
-	// The identifier for the Amazon Q application.
+	// The identifier for the Amazon Q Business application.
 	ApplicationId *string
 
-	// The Unix timestamp when the Amazon Q application was created.
+	// The Unix timestamp when the Amazon Q Business application was created.
 	CreatedAt *time.Time
 
-	// The name of the Amazon Q application.
+	// The name of the Amazon Q Business application.
 	DisplayName *string
 
-	// The status of the Amazon Q application. The application is ready to use when
-	// the status is ACTIVE .
+	// The status of the Amazon Q Business application. The application is ready to
+	// use when the status is ACTIVE .
 	Status ApplicationStatus
 
-	// The Unix timestamp when the Amazon Q application was last updated.
+	// The Unix timestamp when the Amazon Q Business application was last updated.
 	UpdatedAt *time.Time
 
 	noSmithyDocumentSerde
@@ -167,6 +271,25 @@ type AppliedAttachmentsConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+// The creator mode specific admin controls configured for an Amazon Q Business
+// application. Determines whether an end user can generate LLM-only responses when
+// they use the web experience.
+//
+// For more information, see [Admin controls and guardrails] and [Conversation settings].
+//
+// [Conversation settings]: https://docs.aws.amazon.com/amazonq/latest/business-use-dg/using-web-experience.html#chat-source-scope
+// [Admin controls and guardrails]: https://docs.aws.amazon.com/amazonq/latest/qbusiness-ug/guardrails.html
+type AppliedCreatorModeConfiguration struct {
+
+	//  Information about whether creator mode is enabled or disabled for an Amazon Q
+	// Business application.
+	//
+	// This member is required.
+	CreatorModeControl CreatorModeControl
+
+	noSmithyDocumentSerde
+}
+
 // A file directly uploaded into a web experience chat.
 type AttachmentInput struct {
 
@@ -179,6 +302,16 @@ type AttachmentInput struct {
 	//
 	// This member is required.
 	Name *string
+
+	noSmithyDocumentSerde
+}
+
+// A file input event activated by a end user request to upload files into their
+// web experience chat.
+type AttachmentInputEvent struct {
+
+	// A file directly uploaded into a web experience chat.
+	Attachment *AttachmentInput
 
 	noSmithyDocumentSerde
 }
@@ -210,45 +343,112 @@ type AttachmentsConfiguration struct {
 	noSmithyDocumentSerde
 }
 
-// Enables filtering of Amazon Q web experience responses based on document
-// attributes or metadata fields.
+// Enables filtering of responses based on document attributes or metadata fields.
 type AttributeFilter struct {
 
 	// Performs a logical AND operation on all supplied filters.
 	AndAllFilters []AttributeFilter
 
 	// Returns true when a document contains all the specified document attributes or
-	// metadata fields.
+	// metadata fields. Supported for the following [document attribute value types]: stringListValue .
+	//
+	// [document attribute value types]: https://docs.aws.amazon.com/amazonq/latest/api-reference/API_DocumentAttributeValue.html
 	ContainsAll *DocumentAttribute
 
 	// Returns true when a document contains any of the specified document attributes
-	// or metadata fields.
+	// or metadata fields. Supported for the following [document attribute value types]: dateValue , longValue ,
+	// stringListValue and stringValue .
+	//
+	// [document attribute value types]: https://docs.aws.amazon.com/amazonq/latest/api-reference/API_DocumentAttributeValue.html
 	ContainsAny *DocumentAttribute
 
 	// Performs an equals operation on two document attributes or metadata fields.
+	// Supported for the following [document attribute value types]: dateValue , longValue , stringListValue and
+	// stringValue .
+	//
+	// [document attribute value types]: https://docs.aws.amazon.com/amazonq/latest/api-reference/API_DocumentAttributeValue.html
 	EqualsTo *DocumentAttribute
 
 	// Performs a greater than operation on two document attributes or metadata
-	// fields. Use with a document attribute of type Date or Long .
+	// fields. Supported for the following [document attribute value types]: dateValue and longValue .
+	//
+	// [document attribute value types]: https://docs.aws.amazon.com/amazonq/latest/api-reference/API_DocumentAttributeValue.html
 	GreaterThan *DocumentAttribute
 
 	// Performs a greater or equals than operation on two document attributes or
-	// metadata fields. Use with a document attribute of type Date or Long .
+	// metadata fields. Supported for the following [document attribute value types]: dateValue and longValue .
+	//
+	// [document attribute value types]: https://docs.aws.amazon.com/amazonq/latest/api-reference/API_DocumentAttributeValue.html
 	GreaterThanOrEquals *DocumentAttribute
 
 	// Performs a less than operation on two document attributes or metadata fields.
-	// Use with a document attribute of type Date or Long .
+	// Supported for the following [document attribute value types]: dateValue and longValue .
+	//
+	// [document attribute value types]: https://docs.aws.amazon.com/amazonq/latest/api-reference/API_DocumentAttributeValue.html
 	LessThan *DocumentAttribute
 
 	// Performs a less than or equals operation on two document attributes or metadata
-	// fields. Use with a document attribute of type Date or Long .
+	// fields.Supported for the following [document attribute value type]: dateValue and longValue .
+	//
+	// [document attribute value type]: https://docs.aws.amazon.com/amazonq/latest/api-reference/API_DocumentAttributeValue.html
 	LessThanOrEquals *DocumentAttribute
 
 	// Performs a logical NOT operation on all supplied filters.
 	NotFilter *AttributeFilter
 
-	// Performs a logical OR operation on all supplied filters.
+	//  Performs a logical OR operation on all supplied filters.
 	OrAllFilters []AttributeFilter
+
+	noSmithyDocumentSerde
+}
+
+// A request made by Amazon Q Business to a third paty authentication server to
+// authenticate a custom plugin user.
+type AuthChallengeRequest struct {
+
+	// The URL sent by Amazon Q Business to the third party authentication server to
+	// authenticate a custom plugin user through an OAuth protocol.
+	//
+	// This member is required.
+	AuthorizationUrl *string
+
+	noSmithyDocumentSerde
+}
+
+// An authentication verification event activated by an end user request to use a
+// custom plugin.
+type AuthChallengeRequestEvent struct {
+
+	// The URL sent by Amazon Q Business to a third party authentication server in
+	// response to an authentication verification event activated by an end user
+	// request to use a custom plugin.
+	//
+	// This member is required.
+	AuthorizationUrl *string
+
+	noSmithyDocumentSerde
+}
+
+// Contains details of the authentication information received from a third party
+// authentication server in response to an authentication challenge.
+type AuthChallengeResponse struct {
+
+	// The mapping of key-value pairs in an authentication challenge response.
+	//
+	// This member is required.
+	ResponseMap map[string]string
+
+	noSmithyDocumentSerde
+}
+
+// An authentication verification event response by a third party authentication
+// server to Amazon Q Business.
+type AuthChallengeResponseEvent struct {
+
+	// The mapping of key-value pairs in an authentication challenge response.
+	//
+	// This member is required.
+	ResponseMap map[string]string
 
 	noSmithyDocumentSerde
 }
@@ -257,8 +457,8 @@ type AttributeFilter struct {
 // plugin.
 type BasicAuthConfiguration struct {
 
-	// The ARN of an IAM role used by Amazon Q to access the basic authentication
-	// credentials stored in a Secrets Manager secret.
+	// The ARN of an IAM role used by Amazon Q Business to access the basic
+	// authentication credentials stored in a Secrets Manager secret.
 	//
 	// This member is required.
 	RoleArn *string
@@ -276,7 +476,7 @@ type BasicAuthConfiguration struct {
 // configuration.
 type BlockedPhrasesConfiguration struct {
 
-	// A list of phrases blocked from a Amazon Q web experience chat.
+	// A list of phrases blocked from a Amazon Q Business web experience chat.
 	BlockedPhrases []string
 
 	// The configured custom message displayed to an end user informing them that
@@ -286,13 +486,14 @@ type BlockedPhrasesConfiguration struct {
 	noSmithyDocumentSerde
 }
 
-// Updates a blocked phrases configuration in your Amazon Q application.
+// Updates a blocked phrases configuration in your Amazon Q Business application.
 type BlockedPhrasesConfigurationUpdate struct {
 
-	// Creates or updates a blocked phrases configuration in your Amazon Q application.
+	// Creates or updates a blocked phrases configuration in your Amazon Q Business
+	// application.
 	BlockedPhrasesToCreateOrUpdate []string
 
-	// Deletes a blocked phrases configuration in your Amazon Q application.
+	// Deletes a blocked phrases configuration in your Amazon Q Business application.
 	BlockedPhrasesToDelete []string
 
 	// The configured custom message displayed to your end user when they use blocked
@@ -302,9 +503,204 @@ type BlockedPhrasesConfigurationUpdate struct {
 	noSmithyDocumentSerde
 }
 
-// A rule for configuring how Amazon Q responds when it encounters a a blocked
-// topic. You can configure a custom message to inform your end users that they
-// have asked about a restricted topic and suggest any next steps they should take.
+// The streaming input for the Chat API.
+//
+// The following types satisfy this interface:
+//
+//	ChatInputStreamMemberActionExecutionEvent
+//	ChatInputStreamMemberAttachmentEvent
+//	ChatInputStreamMemberAuthChallengeResponseEvent
+//	ChatInputStreamMemberConfigurationEvent
+//	ChatInputStreamMemberEndOfInputEvent
+//	ChatInputStreamMemberTextEvent
+type ChatInputStream interface {
+	isChatInputStream()
+}
+
+// A request from an end user to perform an Amazon Q Business plugin action.
+type ChatInputStreamMemberActionExecutionEvent struct {
+	Value ActionExecutionEvent
+
+	noSmithyDocumentSerde
+}
+
+func (*ChatInputStreamMemberActionExecutionEvent) isChatInputStream() {}
+
+// A request by an end user to upload a file during chat.
+type ChatInputStreamMemberAttachmentEvent struct {
+	Value AttachmentInputEvent
+
+	noSmithyDocumentSerde
+}
+
+func (*ChatInputStreamMemberAttachmentEvent) isChatInputStream() {}
+
+// An authentication verification event response by a third party authentication
+// server to Amazon Q Business.
+type ChatInputStreamMemberAuthChallengeResponseEvent struct {
+	Value AuthChallengeResponseEvent
+
+	noSmithyDocumentSerde
+}
+
+func (*ChatInputStreamMemberAuthChallengeResponseEvent) isChatInputStream() {}
+
+// A configuration event activated by an end user request to select a specific
+// chat mode.
+type ChatInputStreamMemberConfigurationEvent struct {
+	Value ConfigurationEvent
+
+	noSmithyDocumentSerde
+}
+
+func (*ChatInputStreamMemberConfigurationEvent) isChatInputStream() {}
+
+// The end of the streaming input for the Chat API.
+type ChatInputStreamMemberEndOfInputEvent struct {
+	Value EndOfInputEvent
+
+	noSmithyDocumentSerde
+}
+
+func (*ChatInputStreamMemberEndOfInputEvent) isChatInputStream() {}
+
+// Information about the payload of the ChatInputStream event containing the end
+// user message input.
+type ChatInputStreamMemberTextEvent struct {
+	Value TextInputEvent
+
+	noSmithyDocumentSerde
+}
+
+func (*ChatInputStreamMemberTextEvent) isChatInputStream() {}
+
+// Configuration information for Amazon Q Business conversation modes.
+//
+// For more information, see [Admin controls and guardrails] and [Conversation settings].
+//
+// The following types satisfy this interface:
+//
+//	ChatModeConfigurationMemberPluginConfiguration
+//
+// [Conversation settings]: https://docs.aws.amazon.com/amazonq/latest/business-use-dg/using-web-experience.html#chat-source-scope
+// [Admin controls and guardrails]: https://docs.aws.amazon.com/amazonq/latest/qbusiness-ug/guardrails.html
+type ChatModeConfiguration interface {
+	isChatModeConfiguration()
+}
+
+// Configuration information required to invoke chat in PLUGIN_MODE .
+type ChatModeConfigurationMemberPluginConfiguration struct {
+	Value PluginConfiguration
+
+	noSmithyDocumentSerde
+}
+
+func (*ChatModeConfigurationMemberPluginConfiguration) isChatModeConfiguration() {}
+
+// The streaming output for the Chat API.
+//
+// The following types satisfy this interface:
+//
+//	ChatOutputStreamMemberActionReviewEvent
+//	ChatOutputStreamMemberAuthChallengeRequestEvent
+//	ChatOutputStreamMemberFailedAttachmentEvent
+//	ChatOutputStreamMemberMetadataEvent
+//	ChatOutputStreamMemberTextEvent
+type ChatOutputStream interface {
+	isChatOutputStream()
+}
+
+// A request from Amazon Q Business to the end user for information Amazon Q
+// Business needs to successfully complete a requested plugin action.
+type ChatOutputStreamMemberActionReviewEvent struct {
+	Value ActionReviewEvent
+
+	noSmithyDocumentSerde
+}
+
+func (*ChatOutputStreamMemberActionReviewEvent) isChatOutputStream() {}
+
+// An authentication verification event activated by an end user request to use a
+// custom plugin.
+type ChatOutputStreamMemberAuthChallengeRequestEvent struct {
+	Value AuthChallengeRequestEvent
+
+	noSmithyDocumentSerde
+}
+
+func (*ChatOutputStreamMemberAuthChallengeRequestEvent) isChatOutputStream() {}
+
+// A failed file upload event during a web experience chat.
+type ChatOutputStreamMemberFailedAttachmentEvent struct {
+	Value FailedAttachmentEvent
+
+	noSmithyDocumentSerde
+}
+
+func (*ChatOutputStreamMemberFailedAttachmentEvent) isChatOutputStream() {}
+
+// A metadata event for a AI-generated text output message in a Amazon Q Business
+// conversation.
+type ChatOutputStreamMemberMetadataEvent struct {
+	Value MetadataEvent
+
+	noSmithyDocumentSerde
+}
+
+func (*ChatOutputStreamMemberMetadataEvent) isChatOutputStream() {}
+
+// Information about the payload of the ChatOutputStream event containing the
+// AI-generated message output.
+type ChatOutputStreamMemberTextEvent struct {
+	Value TextOutputEvent
+
+	noSmithyDocumentSerde
+}
+
+func (*ChatOutputStreamMemberTextEvent) isChatOutputStream() {}
+
+// A configuration event activated by an end user request to select a specific
+// chat mode.
+type ConfigurationEvent struct {
+
+	// Enables filtering of responses based on document attributes or metadata fields.
+	AttributeFilter *AttributeFilter
+
+	// The chat modes available to an Amazon Q Business end user.
+	//
+	//   - RETRIEVAL_MODE - The default chat mode for an Amazon Q Business application.
+	//   When this mode is enabled, Amazon Q Business generates responses only from data
+	//   sources connected to an Amazon Q Business application.
+	//
+	//   - CREATOR_MODE - By selecting this mode, users can choose to generate
+	//   responses only from the LLM knowledge, without consulting connected data
+	//   sources, for a chat request.
+	//
+	//   - PLUGIN_MODE - By selecting this mode, users can choose to use plugins in
+	//   chat.
+	//
+	// For more information, see [Admin controls and guardrails], [Plugins], and [Conversation settings].
+	//
+	// [Conversation settings]: https://docs.aws.amazon.com/amazonq/latest/business-use-dg/using-web-experience.html#chat-source-scope
+	// [Admin controls and guardrails]: https://docs.aws.amazon.com/amazonq/latest/qbusiness-ug/guardrails.html
+	// [Plugins]: https://docs.aws.amazon.com/amazonq/latest/qbusiness-ug/plugins.html
+	ChatMode ChatMode
+
+	// Configuration information for Amazon Q Business conversation modes.
+	//
+	// For more information, see [Admin controls and guardrails] and [Conversation settings].
+	//
+	// [Conversation settings]: https://docs.aws.amazon.com/amazonq/latest/business-use-dg/using-web-experience.html#chat-source-scope
+	// [Admin controls and guardrails]: https://docs.aws.amazon.com/amazonq/latest/qbusiness-ug/guardrails.html
+	ChatModeConfiguration ChatModeConfiguration
+
+	noSmithyDocumentSerde
+}
+
+// A rule for configuring how Amazon Q Business responds when it encounters a a
+// blocked topic. You can configure a custom message to inform your end users that
+// they have asked about a restricted topic and suggest any next steps they should
+// take.
 type ContentBlockerRule struct {
 
 	// The configured custom message displayed to an end user informing them that
@@ -314,20 +710,21 @@ type ContentBlockerRule struct {
 	noSmithyDocumentSerde
 }
 
-// Rules for retrieving content from data sources connected to a Amazon Q
+// Rules for retrieving content from data sources connected to a Amazon Q Business
 // application for a specific topic control configuration.
 type ContentRetrievalRule struct {
 
-	// Specifies data sources in a Amazon Q application to use for content generation.
+	// Specifies data sources in a Amazon Q Business application to use for content
+	// generation.
 	EligibleDataSources []EligibleDataSource
 
 	noSmithyDocumentSerde
 }
 
-// A conversation in an Amazon Q application.
+// A conversation in an Amazon Q Business application.
 type Conversation struct {
 
-	// The identifier of the Amazon Q conversation.
+	// The identifier of the Amazon Q Business conversation.
 	ConversationId *string
 
 	// The start time of the conversation.
@@ -339,32 +736,71 @@ type Conversation struct {
 	noSmithyDocumentSerde
 }
 
-// A data source in an Amazon Q application.
+// Configuration information required to invoke chat in CREATOR_MODE .
+//
+// For more information, see [Admin controls and guardrails] and [Conversation settings].
+//
+// [Conversation settings]: https://docs.aws.amazon.com/amazonq/latest/business-use-dg/using-web-experience.html#chat-source-scope
+// [Admin controls and guardrails]: https://docs.aws.amazon.com/amazonq/latest/qbusiness-ug/guardrails.html
+type CreatorModeConfiguration struct {
+
+	// Status information about whether CREATOR_MODE has been enabled or disabled. The
+	// default status is DISABLED .
+	//
+	// This member is required.
+	CreatorModeControl CreatorModeControl
+
+	noSmithyDocumentSerde
+}
+
+// Configuration information required to create a custom plugin.
+type CustomPluginConfiguration struct {
+
+	// Contains either details about the S3 object containing the OpenAPI schema for
+	// the action group or the JSON or YAML-formatted payload defining the schema.
+	//
+	// This member is required.
+	ApiSchema APISchema
+
+	// The type of OpenAPI schema to use.
+	//
+	// This member is required.
+	ApiSchemaType APISchemaType
+
+	// A description for your custom plugin configuration.
+	//
+	// This member is required.
+	Description *string
+
+	noSmithyDocumentSerde
+}
+
+// A data source in an Amazon Q Business application.
 type DataSource struct {
 
-	// The Unix timestamp when the Amazon Q data source was created.
+	// The Unix timestamp when the Amazon Q Business data source was created.
 	CreatedAt *time.Time
 
-	// The identifier of the Amazon Q data source.
+	// The identifier of the Amazon Q Business data source.
 	DataSourceId *string
 
-	// The name of the Amazon Q data source.
+	// The name of the Amazon Q Business data source.
 	DisplayName *string
 
-	// The status of the Amazon Q data source.
+	// The status of the Amazon Q Business data source.
 	Status DataSourceStatus
 
-	// The type of the Amazon Q data source.
+	// The type of the Amazon Q Business data source.
 	Type *string
 
-	// The Unix timestamp when the Amazon Q data source was last updated.
+	// The Unix timestamp when the Amazon Q Business data source was last updated.
 	UpdatedAt *time.Time
 
 	noSmithyDocumentSerde
 }
 
-// Provides information about an Amazon Q data source connector synchronization
-// job.
+// Provides information about an Amazon Q Business data source connector
+// synchronization job.
 type DataSourceSyncJob struct {
 
 	// If the reason that the synchronization failed is due to an error with the
@@ -397,8 +833,8 @@ type DataSourceSyncJob struct {
 	noSmithyDocumentSerde
 }
 
-// Maps a batch delete document request to a specific Amazon Q data source
-// connector sync job.
+// Maps a batch delete document request to a specific Amazon Q Business data
+// source connector sync job.
 type DataSourceSyncJobMetrics struct {
 
 	// The current count of documents added from the data source during the data
@@ -429,7 +865,7 @@ type DataSourceSyncJobMetrics struct {
 type DataSourceVpcConfiguration struct {
 
 	// A list of identifiers of security groups within your Amazon VPC. The security
-	// groups should enable Amazon Q to connect to the data source.
+	// groups should enable Amazon Q Business to connect to the data source.
 	//
 	// This member is required.
 	SecurityGroupIds []string
@@ -444,7 +880,27 @@ type DataSourceVpcConfiguration struct {
 	noSmithyDocumentSerde
 }
 
-// A document deleted from an Amazon Q data source connector.
+// Provides information on boosting DATE type document attributes.
+//
+// For more information on how boosting document attributes work in Amazon Q
+// Business, see [Boosting using document attributes].
+//
+// [Boosting using document attributes]: https://docs.aws.amazon.com/amazonq/latest/business-use-dg/metadata-boosting.html
+type DateAttributeBoostingConfiguration struct {
+
+	// Specifies how much a document attribute is boosted.
+	//
+	// This member is required.
+	BoostingLevel DocumentAttributeBoostingLevel
+
+	// Specifies the duration, in seconds, of a boost applies to a DATE type document
+	// attribute.
+	BoostingDurationInSeconds *int64
+
+	noSmithyDocumentSerde
+}
+
+// A document deleted from an Amazon Q Business data source connector.
 type DeleteDocument struct {
 
 	// The identifier of the deleted document.
@@ -455,7 +911,7 @@ type DeleteDocument struct {
 	noSmithyDocumentSerde
 }
 
-// A document in an Amazon Q application.
+// A document in an Amazon Q Business application.
 type Document struct {
 
 	// The identifier of the document.
@@ -466,16 +922,18 @@ type Document struct {
 	// Configuration information for access permission to a document.
 	AccessConfiguration *AccessConfiguration
 
-	// Custom attributes to apply to the document for refining Amazon Q web experience
-	// responses.
+	// Custom attributes to apply to the document for refining Amazon Q Business web
+	// experience responses.
 	Attributes []DocumentAttribute
 
 	// The contents of the document.
 	Content DocumentContent
 
-	// The file type of the document in the Blob field. If you want to index snippets
-	// or subsets of HTML documents instead of the entirety of the HTML documents, you
-	// add the HTML start and closing tags ( <HTML>content</HTML> ) around the content.
+	// The file type of the document in the Blob field.
+	//
+	// If you want to index snippets or subsets of HTML documents instead of the
+	// entirety of the HTML documents, you add the HTML start and closing tags (
+	// <HTML>content</HTML> ) around the content.
 	ContentType ContentType
 
 	// The configuration information for altering document metadata and content during
@@ -504,31 +962,109 @@ type DocumentAttribute struct {
 	noSmithyDocumentSerde
 }
 
+// Provides information on boosting supported Amazon Q Business document attribute
+// types. When an end user chat query matches document attributes that have been
+// boosted, Amazon Q Business prioritizes generating responses from content that
+// matches the boosted document attributes.
+//
+// For STRING and STRING_LIST type document attributes to be used for boosting on
+// the console and the API, they must be enabled for search using the [DocumentAttributeConfiguration]object of
+// the [UpdateIndex]API. If you haven't enabled searching on these attributes, you can't boost
+// attributes of these data types on either the console or the API.
+//
+// For more information on how boosting document attributes work in Amazon Q
+// Business, see [Boosting using document attributes].
+//
+// The following types satisfy this interface:
+//
+//	DocumentAttributeBoostingConfigurationMemberDateConfiguration
+//	DocumentAttributeBoostingConfigurationMemberNumberConfiguration
+//	DocumentAttributeBoostingConfigurationMemberStringConfiguration
+//	DocumentAttributeBoostingConfigurationMemberStringListConfiguration
+//
+// [Boosting using document attributes]: https://docs.aws.amazon.com/amazonq/latest/business-use-dg/metadata-boosting.html
+// [DocumentAttributeConfiguration]: https://docs.aws.amazon.com/amazonq/latest/api-reference/API_DocumentAttributeConfiguration.html
+// [UpdateIndex]: https://docs.aws.amazon.com/amazonq/latest/api-reference/API_UpdateIndex.html
+type DocumentAttributeBoostingConfiguration interface {
+	isDocumentAttributeBoostingConfiguration()
+}
+
+// Provides information on boosting DATE type document attributes.
+type DocumentAttributeBoostingConfigurationMemberDateConfiguration struct {
+	Value DateAttributeBoostingConfiguration
+
+	noSmithyDocumentSerde
+}
+
+func (*DocumentAttributeBoostingConfigurationMemberDateConfiguration) isDocumentAttributeBoostingConfiguration() {
+}
+
+// Provides information on boosting NUMBER type document attributes.
+type DocumentAttributeBoostingConfigurationMemberNumberConfiguration struct {
+	Value NumberAttributeBoostingConfiguration
+
+	noSmithyDocumentSerde
+}
+
+func (*DocumentAttributeBoostingConfigurationMemberNumberConfiguration) isDocumentAttributeBoostingConfiguration() {
+}
+
+// Provides information on boosting STRING type document attributes.
+type DocumentAttributeBoostingConfigurationMemberStringConfiguration struct {
+	Value StringAttributeBoostingConfiguration
+
+	noSmithyDocumentSerde
+}
+
+func (*DocumentAttributeBoostingConfigurationMemberStringConfiguration) isDocumentAttributeBoostingConfiguration() {
+}
+
+// Provides information on boosting STRING_LIST type document attributes.
+type DocumentAttributeBoostingConfigurationMemberStringListConfiguration struct {
+	Value StringListAttributeBoostingConfiguration
+
+	noSmithyDocumentSerde
+}
+
+func (*DocumentAttributeBoostingConfigurationMemberStringListConfiguration) isDocumentAttributeBoostingConfiguration() {
+}
+
 // The condition used for the target document attribute or metadata field when
-// ingesting documents into Amazon Q. You use this with DocumentAttributeTarget (https://docs.aws.amazon.com/enterpriseq/latest/APIReference/API_DocumentAttributeTarget.html)
-// to apply the condition. For example, you can create the 'Department' target
-// field and have it prefill department names associated with the documents based
-// on information in the 'Source_URI' field. Set the condition that if the
-// 'Source_URI' field contains 'financial' in its URI value, then prefill the
-// target field 'Department' with the target value 'Finance' for the document.
-// Amazon Q can't create a target field if it has not already been created as an
-// index field. After you create your index field, you can create a document
-// metadata field using DocumentAttributeTarget . Amazon Q then will map your newly
-// created metadata field to your index field.
+// ingesting documents into Amazon Q Business. You use this with [DocumentAttributeTarget]
+// DocumentAttributeTarget to apply the condition.
+//
+// For example, you can create the 'Department' target field and have it prefill
+// department names associated with the documents based on information in the
+// 'Source_URI' field. Set the condition that if the 'Source_URI' field contains
+// 'financial' in its URI value, then prefill the target field 'Department' with
+// the target value 'Finance' for the document.
+//
+// Amazon Q Business can't create a target field if it has not already been
+// created as an index field. After you create your index field, you can create a
+// document metadata field using DocumentAttributeTarget . Amazon Q Business then
+// will map your newly created metadata field to your index field.
+//
+// [DocumentAttributeTarget]: https://docs.aws.amazon.com/amazonq/latest/api-reference/API_DocumentAttributeTarget.html
 type DocumentAttributeCondition struct {
 
-	// The identifier of the document attribute used for the condition. For example,
-	// 'Source_URI' could be an identifier for the attribute or metadata field that
-	// contains source URIs associated with the documents. Amazon Q currently doesn't
-	// support _document_body as an attribute key used for the condition.
+	// The identifier of the document attribute used for the condition.
+	//
+	// For example, 'Source_URI' could be an identifier for the attribute or metadata
+	// field that contains source URIs associated with the documents.
+	//
+	// Amazon Q Business currently doesn't support _document_body as an attribute key
+	// used for the condition.
 	//
 	// This member is required.
 	Key *string
 
-	// The identifier of the document attribute used for the condition. For example,
-	// 'Source_URI' could be an identifier for the attribute or metadata field that
-	// contains source URIs associated with the documents. Amazon Kendra currently does
-	// not support _document_body as an attribute key used for the condition.
+	// The identifier of the document attribute used for the condition.
+	//
+	// For example, 'Source_URI' could be an identifier for the attribute or metadata
+	// field that contains source URIs associated with the documents.
+	//
+	// Amazon Q Business currently does not support _document_body as an attribute key
+	// used for the condition.
 	//
 	// This member is required.
 	Operator DocumentEnrichmentConditionOperator
@@ -542,9 +1078,11 @@ type DocumentAttributeCondition struct {
 
 // Configuration information for document attributes. Document attributes are
 // metadata or fields associated with your documents. For example, the company
-// department name associated with each document. For more information, see
-// Understanding document attributes (https://docs.aws.amazon.com/amazonq/latest/business-use-dg/doc-attributes.html)
-// .
+// department name associated with each document.
+//
+// For more information, see [Understanding document attributes].
+//
+// [Understanding document attributes]: https://docs.aws.amazon.com/amazonq/latest/business-use-dg/doc-attributes.html
 type DocumentAttributeConfiguration struct {
 
 	// The name of the document attribute.
@@ -561,17 +1099,23 @@ type DocumentAttributeConfiguration struct {
 }
 
 // The target document attribute or metadata field you want to alter when
-// ingesting documents into Amazon Q. For example, you can delete all customer
-// identification numbers associated with the documents, stored in the document
-// metadata field called 'Customer_ID' by setting the target key as 'Customer_ID'
-// and the deletion flag to TRUE . This removes all customer ID values in the field
-// 'Customer_ID'. This would scrub personally identifiable information from each
-// document's metadata. Amazon Q can't create a target field if it has not already
-// been created as an index field. After you create your index field, you can
-// create a document metadata field using DocumentAttributeTarget (https://docs.aws.amazon.com/enterpriseq/latest/APIReference/API_DocumentAttributeTarget.html)
-// . Amazon Q will then map your newly created document attribute to your index
-// field. You can also use this with DocumentAttributeCondition (https://docs.aws.amazon.com/enterpriseq/latest/APIReference/API_DocumentAttributeCondition.html)
-// .
+// ingesting documents into Amazon Q Business.
+//
+// For example, you can delete all customer identification numbers associated with
+// the documents, stored in the document metadata field called 'Customer_ID' by
+// setting the target key as 'Customer_ID' and the deletion flag to TRUE . This
+// removes all customer ID values in the field 'Customer_ID'. This would scrub
+// personally identifiable information from each document's metadata.
+//
+// Amazon Q Business can't create a target field if it has not already been
+// created as an index field. After you create your index field, you can create a
+// document metadata field using [DocumentAttributeTarget]DocumentAttributeTarget . Amazon Q Business will
+// then map your newly created document attribute to your index field.
+//
+// You can also use this with [DocumentAttributeCondition]DocumentAttributeCondition .
+//
+// [DocumentAttributeTarget]: https://docs.aws.amazon.com/amazonq/latest/api-reference/API_DocumentAttributeTarget.html
+// [DocumentAttributeCondition]: https://docs.aws.amazon.com/amazonq/latest/api-reference/API_DocumentAttributeCondition.html
 type DocumentAttributeTarget struct {
 
 	// The identifier of the target document attribute or metadata field. For example,
@@ -605,10 +1149,11 @@ type DocumentAttributeValue interface {
 	isDocumentAttributeValue()
 }
 
-// A date expressed as an ISO 8601 string. It's important for the time zone to be
-// included in the ISO 8601 date-time format. For example,
-// 2012-03-25T12:30:10+01:00 is the ISO 8601 date-time format for March 25th 2012
-// at 12:30PM (plus 10 seconds) in Central European Time.
+// A date expressed as an ISO 8601 string.
+//
+// It's important for the time zone to be included in the ISO 8601 date-time
+// format. For example, 2012-03-25T12:30:10+01:00 is the ISO 8601 date-time format
+// for March 25th 2012 at 12:30PM (plus 10 seconds) in Central European Time.
 type DocumentAttributeValueMemberDateValue struct {
 	Value time.Time
 
@@ -656,9 +1201,9 @@ type DocumentContent interface {
 
 // The contents of the document. Documents passed to the blob parameter must be
 // base64 encoded. Your code might not need to encode the document file bytes if
-// you're using an Amazon Web Services SDK to call Amazon Q APIs. If you are
-// calling the Amazon Q endpoint directly using REST, you must base64 encode the
-// contents before sending.
+// you're using an Amazon Web Services SDK to call Amazon Q Business APIs. If you
+// are calling the Amazon Q Business endpoint directly using REST, you must base64
+// encode the contents before sending.
 type DocumentContentMemberBlob struct {
 	Value []byte
 
@@ -676,7 +1221,7 @@ type DocumentContentMemberS3 struct {
 
 func (*DocumentContentMemberS3) isDocumentContent() {}
 
-// The details of a document within an Amazon Q index.
+// The details of a document within an Amazon Q Business index.
 type DocumentDetails struct {
 
 	// The timestamp for when the document was created.
@@ -698,43 +1243,62 @@ type DocumentDetails struct {
 }
 
 // Provides the configuration information for altering document metadata and
-// content during the document ingestion process. For more information, see Custom
-// document enrichment (https://docs.aws.amazon.com/amazonq/latest/business-use-dg/custom-document-enrichment.html)
-// .
+// content during the document ingestion process.
+//
+// For more information, see [Custom document enrichment].
+//
+// [Custom document enrichment]: https://docs.aws.amazon.com/amazonq/latest/business-use-dg/custom-document-enrichment.html
 type DocumentEnrichmentConfiguration struct {
 
 	// Configuration information to alter document attributes or metadata fields and
-	// content when ingesting documents into Amazon Q.
+	// content when ingesting documents into Amazon Q Business.
 	InlineConfigurations []InlineDocumentEnrichmentConfiguration
 
 	// Provides the configuration information for invoking a Lambda function in Lambda
-	// to alter document metadata and content when ingesting documents into Amazon Q.
-	// You can configure your Lambda function using PreExtractionHookConfiguration (https://docs.aws.amazon.com/enterpriseq/latest/APIReference/API_CustomDocumentEnrichmentConfiguration.html)
-	// if you want to apply advanced alterations on the original or raw documents. If
-	// you want to apply advanced alterations on the Amazon Q structured documents, you
-	// must configure your Lambda function using PostExtractionHookConfiguration (https://docs.aws.amazon.com/enterpriseq/latest/APIReference/API_CustomDocumentEnrichmentConfiguration.html)
-	// . You can only invoke one Lambda function. However, this function can invoke
-	// other functions it requires. For more information, see Custom document
-	// enrichment (https://docs.aws.amazon.com/amazonq/latest/business-use-dg/custom-document-enrichment.html)
-	// .
+	// to alter document metadata and content when ingesting documents into Amazon Q
+	// Business.
+	//
+	// You can configure your Lambda function using the PreExtractionHookConfiguration
+	// parameter if you want to apply advanced alterations on the original or raw
+	// documents.
+	//
+	// If you want to apply advanced alterations on the Amazon Q Business structured
+	// documents, you must configure your Lambda function using
+	// PostExtractionHookConfiguration .
+	//
+	// You can only invoke one Lambda function. However, this function can invoke
+	// other functions it requires.
+	//
+	// For more information, see [Custom document enrichment].
+	//
+	// [Custom document enrichment]: https://docs.aws.amazon.com/amazonq/latest/business-use-dg/custom-document-enrichment.html
 	PostExtractionHookConfiguration *HookConfiguration
 
 	// Provides the configuration information for invoking a Lambda function in Lambda
-	// to alter document metadata and content when ingesting documents into Amazon Q.
-	// You can configure your Lambda function using PreExtractionHookConfiguration (https://docs.aws.amazon.com/enterpriseq/latest/APIReference/API_CustomDocumentEnrichmentConfiguration.html)
-	// if you want to apply advanced alterations on the original or raw documents. If
-	// you want to apply advanced alterations on the Amazon Q structured documents, you
-	// must configure your Lambda function using PostExtractionHookConfiguration (https://docs.aws.amazon.com/enterpriseq/latest/APIReference/API_CustomDocumentEnrichmentConfiguration.html)
-	// . You can only invoke one Lambda function. However, this function can invoke
-	// other functions it requires. For more information, see Custom document
-	// enrichment (https://docs.aws.amazon.com/amazonq/latest/business-use-dg/custom-document-enrichment.html)
-	// .
+	// to alter document metadata and content when ingesting documents into Amazon Q
+	// Business.
+	//
+	// You can configure your Lambda function using the PreExtractionHookConfiguration
+	// parameter if you want to apply advanced alterations on the original or raw
+	// documents.
+	//
+	// If you want to apply advanced alterations on the Amazon Q Business structured
+	// documents, you must configure your Lambda function using
+	// PostExtractionHookConfiguration .
+	//
+	// You can only invoke one Lambda function. However, this function can invoke
+	// other functions it requires.
+	//
+	// For more information, see [Custom document enrichment].
+	//
+	// [Custom document enrichment]: https://docs.aws.amazon.com/amazonq/latest/business-use-dg/custom-document-enrichment.html
 	PreExtractionHookConfiguration *HookConfiguration
 
 	noSmithyDocumentSerde
 }
 
-// The identifier of the data source Amazon Q will generate responses from.
+// The identifier of the data source Amazon Q Business will generate responses
+// from.
 type EligibleDataSource struct {
 
 	// The identifier of the data source.
@@ -746,13 +1310,19 @@ type EligibleDataSource struct {
 	noSmithyDocumentSerde
 }
 
-// Provides the identifier of the KMS key used to encrypt data indexed by Amazon
-// Q. Amazon Q doesn't support asymmetric keys.
+// Provides the identifier of the KMS key used to encrypt data indexed by Amazon Q
+// Business. Amazon Q Business doesn't support asymmetric keys.
 type EncryptionConfiguration struct {
 
-	// The identifier of the KMS key. Amazon Q doesn't support asymmetric keys.
+	// The identifier of the KMS key. Amazon Q Business doesn't support asymmetric
+	// keys.
 	KmsKeyId *string
 
+	noSmithyDocumentSerde
+}
+
+// The end of the streaming input for the Chat API.
+type EndOfInputEvent struct {
 	noSmithyDocumentSerde
 }
 
@@ -768,26 +1338,45 @@ type ErrorDetail struct {
 	noSmithyDocumentSerde
 }
 
-// A list of documents that could not be removed from an Amazon Q index. Each
-// entry contains an error message that indicates why the document couldn't be
+// A failed file upload during web experience chat.
+type FailedAttachmentEvent struct {
+
+	// The details of a file uploaded during chat.
+	Attachment *AttachmentOutput
+
+	//  The identifier of the conversation associated with the failed file upload.
+	ConversationId *string
+
+	// The identifier of the AI-generated message associated with the file upload.
+	SystemMessageId *string
+
+	// The identifier of the end user chat message associated with the file upload.
+	UserMessageId *string
+
+	noSmithyDocumentSerde
+}
+
+// A list of documents that could not be removed from an Amazon Q Business index.
+// Each entry contains an error message that indicates why the document couldn't be
 // removed from the index.
 type FailedDocument struct {
 
-	// The identifier of the Amazon Q data source connector that contains the failed
-	// document.
+	// The identifier of the Amazon Q Business data source connector that contains the
+	// failed document.
 	DataSourceId *string
 
 	// An explanation for why the document couldn't be removed from the index.
 	Error *ErrorDetail
 
-	// The identifier of the document that couldn't be removed from the Amazon Q index.
+	// The identifier of the document that couldn't be removed from the Amazon Q
+	// Business index.
 	Id *string
 
 	noSmithyDocumentSerde
 }
 
 // A list of users or sub groups that belong to a group. This is for generating
-// Amazon Q chat results only from document a user has access to.
+// Amazon Q Business chat results only from document a user has access to.
 type GroupMembers struct {
 
 	// A list of sub groups that belong to a group. For example, the sub groups
@@ -808,7 +1397,7 @@ type GroupStatusDetail struct {
 	// The details of an error associated a group status.
 	ErrorDetail *ErrorDetail
 
-	// The Unix timestamp when the Amazon Q application was last updated.
+	// The Unix timestamp when the Amazon Q Business application was last updated.
 	LastUpdatedAt *time.Time
 
 	// The status of a group.
@@ -827,26 +1416,36 @@ type GroupSummary struct {
 }
 
 // Provides the configuration information for invoking a Lambda function in Lambda
-// to alter document metadata and content when ingesting documents into Amazon Q.
-// You can configure your Lambda function using PreExtractionHookConfiguration (https://docs.aws.amazon.com/enterpriseq/latest/APIReference/API_CustomDocumentEnrichmentConfiguration.html)
-// if you want to apply advanced alterations on the original or raw documents. If
-// you want to apply advanced alterations on the Amazon Q structured documents, you
-// must configure your Lambda function using PostExtractionHookConfiguration (https://docs.aws.amazon.com/enterpriseq/latest/APIReference/API_CustomDocumentEnrichmentConfiguration.html)
-// . You can only invoke one Lambda function. However, this function can invoke
-// other functions it requires. For more information, see Custom document
-// enrichment (https://docs.aws.amazon.com/amazonq/latest/business-use-dg/custom-document-enrichment.html)
-// .
+// to alter document metadata and content when ingesting documents into Amazon Q
+// Business.
+//
+// You can configure your Lambda function using the PreExtractionHookConfiguration
+// parameter if you want to apply advanced alterations on the original or raw
+// documents.
+//
+// If you want to apply advanced alterations on the Amazon Q Business structured
+// documents, you must configure your Lambda function using
+// PostExtractionHookConfiguration .
+//
+// You can only invoke one Lambda function. However, this function can invoke
+// other functions it requires.
+//
+// For more information, see [Custom document enrichment].
+//
+// [Custom document enrichment]: https://docs.aws.amazon.com/amazonq/latest/business-use-dg/custom-document-enrichment.html
 type HookConfiguration struct {
 
-	// The condition used for when a Lambda function should be invoked. For example,
-	// you can specify a condition that if there are empty date-time values, then
-	// Amazon Q should invoke a function that inserts the current date-time.
+	// The condition used for when a Lambda function should be invoked.
+	//
+	// For example, you can specify a condition that if there are empty date-time
+	// values, then Amazon Q Business should invoke a function that inserts the current
+	// date-time.
 	InvocationCondition *DocumentAttributeCondition
 
 	// The Amazon Resource Name (ARN) of a role with permission to run a Lambda
-	// function during ingestion. For more information, see IAM roles for Custom
-	// Document Enrichment (CDE) (https://docs.aws.amazon.com/amazonq/latest/business-use-dg/iam-roles.html#cde-iam-role)
-	// .
+	// function during ingestion. For more information, see [IAM roles for Custom Document Enrichment (CDE)].
+	//
+	// [IAM roles for Custom Document Enrichment (CDE)]: https://docs.aws.amazon.com/amazonq/latest/business-use-dg/iam-roles.html#cde-iam-role
 	LambdaArn *string
 
 	// The Amazon Resource Name (ARN) of a role with permission to run
@@ -855,15 +1454,15 @@ type HookConfiguration struct {
 	RoleArn *string
 
 	// Stores the original, raw documents or the structured, parsed documents before
-	// and after altering them. For more information, see Data contracts for Lambda
-	// functions (https://docs.aws.amazon.com/amazonq/latest/business-use-dg/cde-lambda-operations.html#cde-lambda-operations-data-contracts)
-	// .
+	// and after altering them. For more information, see [Data contracts for Lambda functions].
+	//
+	// [Data contracts for Lambda functions]: https://docs.aws.amazon.com/amazonq/latest/business-use-dg/cde-lambda-operations.html#cde-lambda-operations-data-contracts
 	S3BucketName *string
 
 	noSmithyDocumentSerde
 }
 
-// Summary information for your Amazon Q index.
+// Summary information for your Amazon Q Business index.
 type Index struct {
 
 	// The Unix timestamp when the index was created.
@@ -887,7 +1486,7 @@ type Index struct {
 // Provides information about index capacity configuration.
 type IndexCapacityConfiguration struct {
 
-	// The number of storage units configured for an Amazon Q index.
+	// The number of storage units configured for an Amazon Q Business index.
 	Units *int32
 
 	noSmithyDocumentSerde
@@ -903,41 +1502,56 @@ type IndexStatistics struct {
 }
 
 // Provides the configuration information for applying basic logic to alter
-// document metadata and content when ingesting documents into Amazon Q. To apply
-// advanced logic, to go beyond what you can do with basic logic, see
-// HookConfiguration (https://docs.aws.amazon.com/enterpriseq/latest/APIReference/API_HookConfiguration.html)
-// . For more information, see Custom document enrichment (https://docs.aws.amazon.com/amazonq/latest/business-use-dg/custom-document-enrichment.html)
-// .
+// document metadata and content when ingesting documents into Amazon Q Business.
+//
+// To apply advanced logic, to go beyond what you can do with basic logic, see [HookConfiguration]
+// HookConfiguration .
+//
+// For more information, see [Custom document enrichment].
+//
+// [Custom document enrichment]: https://docs.aws.amazon.com/amazonq/latest/business-use-dg/custom-document-enrichment.html
+// [HookConfiguration]: https://docs.aws.amazon.com/amazonq/latest/api-reference/API_HookConfiguration.html
 type InlineDocumentEnrichmentConfiguration struct {
 
 	// The condition used for the target document attribute or metadata field when
-	// ingesting documents into Amazon Q. You use this with DocumentAttributeTarget (https://docs.aws.amazon.com/enterpriseq/latest/APIReference/API_DocumentAttributeTarget.html)
-	// to apply the condition. For example, you can create the 'Department' target
-	// field and have it prefill department names associated with the documents based
-	// on information in the 'Source_URI' field. Set the condition that if the
-	// 'Source_URI' field contains 'financial' in its URI value, then prefill the
-	// target field 'Department' with the target value 'Finance' for the document.
-	// Amazon Q can't create a target field if it has not already been created as an
-	// index field. After you create your index field, you can create a document
-	// metadata field using DocumentAttributeTarget . Amazon Q then will map your newly
-	// created metadata field to your index field.
+	// ingesting documents into Amazon Q Business. You use this with [DocumentAttributeTarget]
+	// DocumentAttributeTarget to apply the condition.
+	//
+	// For example, you can create the 'Department' target field and have it prefill
+	// department names associated with the documents based on information in the
+	// 'Source_URI' field. Set the condition that if the 'Source_URI' field contains
+	// 'financial' in its URI value, then prefill the target field 'Department' with
+	// the target value 'Finance' for the document.
+	//
+	// Amazon Q Business can't create a target field if it has not already been
+	// created as an index field. After you create your index field, you can create a
+	// document metadata field using DocumentAttributeTarget . Amazon Q Business then
+	// will map your newly created metadata field to your index field.
+	//
+	// [DocumentAttributeTarget]: https://docs.aws.amazon.com/amazonq/latest/api-reference/API_DocumentAttributeTarget.html
 	Condition *DocumentAttributeCondition
 
 	// TRUE to delete content if the condition used for the target attribute is met.
 	DocumentContentOperator DocumentContentOperator
 
 	// The target document attribute or metadata field you want to alter when
-	// ingesting documents into Amazon Q. For example, you can delete all customer
-	// identification numbers associated with the documents, stored in the document
-	// metadata field called 'Customer_ID' by setting the target key as 'Customer_ID'
-	// and the deletion flag to TRUE . This removes all customer ID values in the field
-	// 'Customer_ID'. This would scrub personally identifiable information from each
-	// document's metadata. Amazon Q can't create a target field if it has not already
-	// been created as an index field. After you create your index field, you can
-	// create a document metadata field using DocumentAttributeTarget (https://docs.aws.amazon.com/enterpriseq/latest/APIReference/API_DocumentAttributeTarget.html)
-	// . Amazon Q will then map your newly created document attribute to your index
-	// field. You can also use this with DocumentAttributeCondition (https://docs.aws.amazon.com/enterpriseq/latest/APIReference/API_DocumentAttributeCondition.html)
-	// .
+	// ingesting documents into Amazon Q Business.
+	//
+	// For example, you can delete all customer identification numbers associated with
+	// the documents, stored in the document metadata field called 'Customer_ID' by
+	// setting the target key as 'Customer_ID' and the deletion flag to TRUE . This
+	// removes all customer ID values in the field 'Customer_ID'. This would scrub
+	// personally identifiable information from each document's metadata.
+	//
+	// Amazon Q Business can't create a target field if it has not already been
+	// created as an index field. After you create your index field, you can create a
+	// document metadata field using [DocumentAttributeTarget]DocumentAttributeTarget . Amazon Q Business will
+	// then map your newly created document attribute to your index field.
+	//
+	// You can also use this with [DocumentAttributeCondition]DocumentAttributeCondition .
+	//
+	// [DocumentAttributeTarget]: https://docs.aws.amazon.com/amazonq/latest/api-reference/API_DocumentAttributeTarget.html
+	// [DocumentAttributeCondition]: https://docs.aws.amazon.com/amazonq/latest/api-reference/API_DocumentAttributeCondition.html
 	Target *DocumentAttributeTarget
 
 	noSmithyDocumentSerde
@@ -982,34 +1596,35 @@ type MemberUser struct {
 	noSmithyDocumentSerde
 }
 
-// A message in an Amazon Q web experience.
+// A message in an Amazon Q Business web experience.
 type Message struct {
 
-	// Performs an Amazon Q plugin action during a non-streaming chat conversation.
+	// Performs an Amazon Q Business plugin action during a non-streaming chat
+	// conversation.
 	ActionExecution *ActionExecution
 
-	// An output event that Amazon Q returns to an user who wants to perform a plugin
-	// action during a non-streaming chat conversation. It contains information about
-	// the selected action with a list of possible user input fields, some
-	// pre-populated by Amazon Q.
+	// An output event that Amazon Q Business returns to an user who wants to perform
+	// a plugin action during a non-streaming chat conversation. It contains
+	// information about the selected action with a list of possible user input fields,
+	// some pre-populated by Amazon Q Business.
 	ActionReview *ActionReview
 
-	// A file directly uploaded into an Amazon Q web experience chat.
+	// A file directly uploaded into an Amazon Q Business web experience chat.
 	Attachments []AttachmentOutput
 
-	// The content of the Amazon Q web experience message.
+	// The content of the Amazon Q Business web experience message.
 	Body *string
 
-	// The identifier of the Amazon Q web experience message.
+	// The identifier of the Amazon Q Business web experience message.
 	MessageId *string
 
-	// The source documents used to generate Amazon Q web experience message.
+	// The source documents used to generate Amazon Q Business web experience message.
 	SourceAttribution []*SourceAttribution
 
-	// The timestamp of the first Amazon Q web experience message.
+	// The timestamp of the first Amazon Q Business web experience message.
 	Time *time.Time
 
-	// The type of Amazon Q message, whether HUMAN or AI generated.
+	// The type of Amazon Q Business message, whether HUMAN or AI generated.
 	Type MessageType
 
 	noSmithyDocumentSerde
@@ -1038,13 +1653,68 @@ type MessageUsefulnessFeedback struct {
 	noSmithyDocumentSerde
 }
 
-// Configuration information for an Amazon Q index.
+// A metadata event for a AI-generated text output message in a Amazon Q Business
+// conversation, containing associated metadata generated.
+type MetadataEvent struct {
+
+	// The identifier of the conversation with which the generated metadata is
+	// associated.
+	ConversationId *string
+
+	// The final text output message generated by the system.
+	FinalTextMessage *string
+
+	// The source documents used to generate the conversation response.
+	SourceAttributions []*SourceAttribution
+
+	// The identifier of an Amazon Q Business AI generated message within the
+	// conversation.
+	SystemMessageId *string
+
+	// The identifier of an Amazon Q Business end user text input message within the
+	// conversation.
+	UserMessageId *string
+
+	noSmithyDocumentSerde
+}
+
+// Configuration information for an Amazon Q Business index.
 type NativeIndexConfiguration struct {
 
-	// The identifier for the Amazon Q index.
+	// The identifier for the Amazon Q Business index.
 	//
 	// This member is required.
 	IndexId *string
+
+	// Overrides the default boosts applied by Amazon Q Business to supported document
+	// attribute data types.
+	BoostingOverride map[string]DocumentAttributeBoostingConfiguration
+
+	noSmithyDocumentSerde
+}
+
+// Information about invoking a custom plugin without any authentication or
+// authorization requirement.
+type NoAuthConfiguration struct {
+	noSmithyDocumentSerde
+}
+
+// Provides information on boosting NUMBER type document attributes.
+//
+// For more information on how boosting document attributes work in Amazon Q
+// Business, see [Boosting using document attributes].
+//
+// [Boosting using document attributes]: https://docs.aws.amazon.com/amazonq/latest/business-use-dg/metadata-boosting.html
+type NumberAttributeBoostingConfiguration struct {
+
+	// Specifies the duration, in seconds, of a boost applies to a NUMBER type
+	// document attribute.
+	//
+	// This member is required.
+	BoostingLevel DocumentAttributeBoostingLevel
+
+	// Specifies how much a document attribute is boosted.
+	BoostingType NumberAttributeBoostingType
 
 	noSmithyDocumentSerde
 }
@@ -1053,8 +1723,8 @@ type NativeIndexConfiguration struct {
 // configure a plugin.
 type OAuth2ClientCredentialConfiguration struct {
 
-	// The ARN of an IAM role used by Amazon Q to access the OAuth 2.0 authentication
-	// credentials stored in a Secrets Manager secret.
+	// The ARN of an IAM role used by Amazon Q Business to access the OAuth 2.0
+	// authentication credentials stored in a Secrets Manager secret.
 	//
 	// This member is required.
 	RoleArn *string
@@ -1068,8 +1738,11 @@ type OAuth2ClientCredentialConfiguration struct {
 	noSmithyDocumentSerde
 }
 
-// Information about an Amazon Q plugin and its configuration.
+// Information about an Amazon Q Business plugin and its configuration.
 type Plugin struct {
+
+	// The status of the plugin.
+	BuildStatus PluginBuildStatus
 
 	// The timestamp for when the plugin was created.
 	CreatedAt *time.Time
@@ -1095,11 +1768,12 @@ type Plugin struct {
 	noSmithyDocumentSerde
 }
 
-// Authentication configuration information for an Amazon Q plugin.
+// Authentication configuration information for an Amazon Q Business plugin.
 //
 // The following types satisfy this interface:
 //
 //	PluginAuthConfigurationMemberBasicAuthConfiguration
+//	PluginAuthConfigurationMemberNoAuthConfiguration
 //	PluginAuthConfigurationMemberOAuth2ClientCredentialConfiguration
 type PluginAuthConfiguration interface {
 	isPluginAuthConfiguration()
@@ -1115,6 +1789,15 @@ type PluginAuthConfigurationMemberBasicAuthConfiguration struct {
 
 func (*PluginAuthConfigurationMemberBasicAuthConfiguration) isPluginAuthConfiguration() {}
 
+// Information about invoking a custom plugin without any authentication.
+type PluginAuthConfigurationMemberNoAuthConfiguration struct {
+	Value NoAuthConfiguration
+
+	noSmithyDocumentSerde
+}
+
+func (*PluginAuthConfigurationMemberNoAuthConfiguration) isPluginAuthConfiguration() {}
+
 // Information about the OAuth 2.0 authentication credential/token used to
 // configure a plugin.
 type PluginAuthConfigurationMemberOAuth2ClientCredentialConfiguration struct {
@@ -1126,8 +1809,25 @@ type PluginAuthConfigurationMemberOAuth2ClientCredentialConfiguration struct {
 func (*PluginAuthConfigurationMemberOAuth2ClientCredentialConfiguration) isPluginAuthConfiguration() {
 }
 
+// Configuration information required to invoke chat in PLUGIN_MODE .
+//
+// For more information, see [Admin controls and guardrails], [Plugins], and [Conversation settings].
+//
+// [Conversation settings]: https://docs.aws.amazon.com/amazonq/latest/business-use-dg/using-web-experience.html#chat-source-scope
+// [Admin controls and guardrails]: https://docs.aws.amazon.com/amazonq/latest/qbusiness-ug/guardrails.html
+// [Plugins]: https://docs.aws.amazon.com/amazonq/latest/qbusiness-ug/plugins.html
+type PluginConfiguration struct {
+
+	//  The identifier of the plugin you want to use.
+	//
+	// This member is required.
+	PluginId *string
+
+	noSmithyDocumentSerde
+}
+
 // Provides user and group information used for filtering documents to use for
-// generating Amazon Q conversation responses.
+// generating Amazon Q Business conversation responses.
 //
 // The following types satisfy this interface:
 //
@@ -1180,7 +1880,7 @@ type PrincipalUser struct {
 	// This member is required.
 	Access ReadAccessType
 
-	// The identifier of the user.
+	//  The identifier of the user.
 	Id *string
 
 	// The type of group.
@@ -1189,16 +1889,17 @@ type PrincipalUser struct {
 	noSmithyDocumentSerde
 }
 
-// Summary information for the retriever used for your Amazon Q application.
+// Summary information for the retriever used for your Amazon Q Business
+// application.
 type Retriever struct {
 
-	// The identifier of the Amazon Q application using the retriever.
+	// The identifier of the Amazon Q Business application using the retriever.
 	ApplicationId *string
 
 	// The name of your retriever.
 	DisplayName *string
 
-	// The identifier of the retriever used by your Amazon Q application.
+	// The identifier of the retriever used by your Amazon Q Business application.
 	RetrieverId *string
 
 	// The status of your retriever.
@@ -1210,8 +1911,8 @@ type Retriever struct {
 	noSmithyDocumentSerde
 }
 
-// Provides information on how the retriever used for your Amazon Q application is
-// configured.
+// Provides information on how the retriever used for your Amazon Q Business
+// application is configured.
 //
 // The following types satisfy this interface:
 //
@@ -1222,7 +1923,7 @@ type RetrieverConfiguration interface {
 }
 
 // Provides information on how the Amazon Kendra index used as a retriever for
-// your Amazon Q application is configured.
+// your Amazon Q Business application is configured.
 type RetrieverConfigurationMemberKendraIndexConfiguration struct {
 	Value KendraIndexConfiguration
 
@@ -1231,8 +1932,8 @@ type RetrieverConfigurationMemberKendraIndexConfiguration struct {
 
 func (*RetrieverConfigurationMemberKendraIndexConfiguration) isRetrieverConfiguration() {}
 
-// Provides information on how a Amazon Q index used as a retriever for your
-// Amazon Q application is configured.
+// Provides information on how a Amazon Q Business index used as a retriever for
+// your Amazon Q Business application is configured.
 type RetrieverConfigurationMemberNativeIndexConfiguration struct {
 	Value NativeIndexConfiguration
 
@@ -1241,11 +1942,11 @@ type RetrieverConfigurationMemberNativeIndexConfiguration struct {
 
 func (*RetrieverConfigurationMemberNativeIndexConfiguration) isRetrieverConfiguration() {}
 
-// Guardrail rules for an Amazon Q application. Amazon Q supports only one rule at
-// a time.
+// Guardrail rules for an Amazon Q Business application. Amazon Q Business
+// supports only one rule at a time.
 type Rule struct {
 
-	// The type fo rule.
+	// The type of rule.
 	//
 	// This member is required.
 	RuleType RuleType
@@ -1272,8 +1973,8 @@ type RuleConfiguration interface {
 	isRuleConfiguration()
 }
 
-// A rule for configuring how Amazon Q responds when it encounters a a blocked
-// topic.
+// A rule for configuring how Amazon Q Business responds when it encounters a a
+// blocked topic.
 type RuleConfigurationMemberContentBlockerRule struct {
 	Value ContentBlockerRule
 
@@ -1282,7 +1983,7 @@ type RuleConfigurationMemberContentBlockerRule struct {
 
 func (*RuleConfigurationMemberContentBlockerRule) isRuleConfiguration() {}
 
-// Rules for retrieving content from data sources connected to a Amazon Q
+// Rules for retrieving content from data sources connected to a Amazon Q Business
 // application for a specific topic control configuration.
 type RuleConfigurationMemberContentRetrievalRule struct {
 	Value ContentRetrievalRule
@@ -1292,8 +1993,8 @@ type RuleConfigurationMemberContentRetrievalRule struct {
 
 func (*RuleConfigurationMemberContentRetrievalRule) isRuleConfiguration() {}
 
-// Information required for Amazon Q to find a specific file in an Amazon S3
-// bucket.
+// Information required for Amazon Q Business to find a specific file in an Amazon
+// S3 bucket.
 type S3 struct {
 
 	// The name of the S3 bucket that contains the file.
@@ -1310,7 +2011,8 @@ type S3 struct {
 }
 
 // Provides the SAML 2.0 compliant identity provider (IdP) configuration
-// information Amazon Q needs to deploy a Amazon Q web experience.
+// information Amazon Q Business needs to deploy a Amazon Q Business web
+// experience.
 type SamlConfiguration struct {
 
 	// The metadata XML that your IdP generated.
@@ -1319,8 +2021,8 @@ type SamlConfiguration struct {
 	MetadataXML *string
 
 	// The Amazon Resource Name (ARN) of an IAM role assumed by users when they
-	// authenticate into their Amazon Q web experience, containing the relevant Amazon
-	// Q permissions for conversing with Amazon Q.
+	// authenticate into their Amazon Q Business web experience, containing the
+	// relevant Amazon Q Business permissions for conversing with Amazon Q Business.
 	//
 	// This member is required.
 	RoleArn *string
@@ -1336,10 +2038,21 @@ type SamlConfiguration struct {
 	noSmithyDocumentSerde
 }
 
-// The documents used to generate an Amazon Q web experience response.
+// Contains the relevant text excerpt from a source that was used to generate a
+// citation text segment in an Amazon Q Business chat response.
+type SnippetExcerpt struct {
+
+	// The relevant text excerpt from a source that was used to generate a citation
+	// text segment in an Amazon Q chat response.
+	Text *string
+
+	noSmithyDocumentSerde
+}
+
+// The documents used to generate an Amazon Q Business web experience response.
 type SourceAttribution struct {
 
-	// The number attached to a citation in an Amazon Q generated response.
+	// The number attached to a citation in an Amazon Q Business generated response.
 	CitationNumber *int32
 
 	// The content extract from the document on which the generated response is based.
@@ -1348,15 +2061,65 @@ type SourceAttribution struct {
 	// A text extract from a source document that is used for source attribution.
 	TextMessageSegments []TextSegment
 
-	// The title of the document which is the source for the Amazon Q generated
-	// response.
+	// The title of the document which is the source for the Amazon Q Business
+	// generated response.
 	Title *string
 
-	// The Unix timestamp when the Amazon Q application was last updated.
+	// The Unix timestamp when the Amazon Q Business application was last updated.
 	UpdatedAt *time.Time
 
-	// The URL of the document which is the source for the Amazon Q generated response.
+	// The URL of the document which is the source for the Amazon Q Business generated
+	// response.
 	Url *string
+
+	noSmithyDocumentSerde
+}
+
+// Provides information on boosting STRING type document attributes.
+//
+// For STRING and STRING_LIST type document attributes to be used for boosting on
+// the console and the API, they must be enabled for search using the [DocumentAttributeConfiguration]object of
+// the [UpdateIndex]API. If you haven't enabled searching on these attributes, you can't boost
+// attributes of these data types on either the console or the API.
+//
+// For more information on how boosting document attributes work in Amazon Q
+// Business, see [Boosting using document attributes].
+//
+// [Boosting using document attributes]: https://docs.aws.amazon.com/amazonq/latest/business-use-dg/metadata-boosting.html
+// [DocumentAttributeConfiguration]: https://docs.aws.amazon.com/amazonq/latest/api-reference/API_DocumentAttributeConfiguration.html
+// [UpdateIndex]: https://docs.aws.amazon.com/amazonq/latest/api-reference/API_UpdateIndex.html
+type StringAttributeBoostingConfiguration struct {
+
+	// Specifies how much a document attribute is boosted.
+	//
+	// This member is required.
+	BoostingLevel DocumentAttributeBoostingLevel
+
+	// Specifies specific values of a STRING type document attribute being boosted.
+	AttributeValueBoosting map[string]StringAttributeValueBoostingLevel
+
+	noSmithyDocumentSerde
+}
+
+// Provides information on boosting STRING_LIST type document attributes.
+//
+// For STRING and STRING_LIST type document attributes to be used for boosting on
+// the console and the API, they must be enabled for search using the [DocumentAttributeConfiguration]object of
+// the [UpdateIndex]API. If you haven't enabled searching on these attributes, you can't boost
+// attributes of these data types on either the console or the API.
+//
+// For more information on how boosting document attributes work in Amazon Q
+// Business, see [Boosting using document attributes].
+//
+// [Boosting using document attributes]: https://docs.aws.amazon.com/amazonq/latest/business-use-dg/metadata-boosting.html
+// [DocumentAttributeConfiguration]: https://docs.aws.amazon.com/amazonq/latest/api-reference/API_DocumentAttributeConfiguration.html
+// [UpdateIndex]: https://docs.aws.amazon.com/amazonq/latest/api-reference/API_UpdateIndex.html
+type StringListAttributeBoostingConfiguration struct {
+
+	// Specifies how much a document attribute is boosted.
+	//
+	// This member is required.
+	BoostingLevel DocumentAttributeBoostingLevel
 
 	noSmithyDocumentSerde
 }
@@ -1366,8 +2129,8 @@ type SourceAttribution struct {
 // following symbols: _ . : / = + - @.
 type Tag struct {
 
-	// The key for the tag. Keys are not case sensitive and must be unique for the
-	// Amazon Q application or data source.
+	//  The key for the tag. Keys are not case sensitive and must be unique for the
+	// Amazon Q Business application or data source.
 	//
 	// This member is required.
 	Key *string
@@ -1393,6 +2156,37 @@ type TextDocumentStatistics struct {
 	noSmithyDocumentSerde
 }
 
+// An input event for a end user message in an Amazon Q Business web experience.
+type TextInputEvent struct {
+
+	// A user message in a text message input event.
+	//
+	// This member is required.
+	UserMessage *string
+
+	noSmithyDocumentSerde
+}
+
+// An output event for an AI-generated response in an Amazon Q Business web
+// experience.
+type TextOutputEvent struct {
+
+	// The identifier of the conversation with which the text output event is
+	// associated.
+	ConversationId *string
+
+	// An AI-generated message in a TextOutputEvent .
+	SystemMessage *string
+
+	// The identifier of an AI-generated message in a TextOutputEvent .
+	SystemMessageId *string
+
+	// The identifier of an end user message in a TextOutputEvent .
+	UserMessageId *string
+
+	noSmithyDocumentSerde
+}
+
 // Provides information about a text extract in a chat response that can be
 // attributed to a source document.
 type TextSegment struct {
@@ -1405,10 +2199,14 @@ type TextSegment struct {
 	// ends.
 	EndOffset *int32
 
+	// The relevant text excerpt from a source that was used to generate a citation
+	// text segment in an Amazon Q Business chat response.
+	SnippetExcerpt *SnippetExcerpt
+
 	noSmithyDocumentSerde
 }
 
-// The topic specific controls configured for an Amazon Q application.
+// The topic specific controls configured for an Amazon Q Business application.
 type TopicConfiguration struct {
 
 	// A name for your topic control configuration.
@@ -1421,7 +2219,7 @@ type TopicConfiguration struct {
 	// This member is required.
 	Rules []Rule
 
-	// A description for your topic control configuration. Use this outline how the
+	// A description for your topic control configuration. Use this to outline how the
 	// large language model (LLM) should use this topic control configuration.
 	Description *string
 
@@ -1432,7 +2230,7 @@ type TopicConfiguration struct {
 	noSmithyDocumentSerde
 }
 
-// Aliases attached to a user id within an Amazon Q application.
+// Aliases attached to a user id within an Amazon Q Business application.
 type UserAlias struct {
 
 	// The identifier of the user id associated with the user aliases.
@@ -1462,8 +2260,8 @@ type UsersAndGroups struct {
 	noSmithyDocumentSerde
 }
 
-// The input failed to meet the constraints specified by Amazon Q in a specified
-// field.
+// The input failed to meet the constraints specified by Amazon Q Business in a
+// specified field.
 type ValidationExceptionField struct {
 
 	// A message about the validation exception.
@@ -1479,30 +2277,30 @@ type ValidationExceptionField struct {
 	noSmithyDocumentSerde
 }
 
-// Provides information for an Amazon Q web experience.
+// Provides information for an Amazon Q Business web experience.
 type WebExperience struct {
 
-	// The Unix timestamp when the Amazon Q application was last updated.
+	// The Unix timestamp when the Amazon Q Business application was last updated.
 	CreatedAt *time.Time
 
-	// The endpoint URLs for your Amazon Q web experience. The URLs are unique and
-	// fully hosted by Amazon Web Services.
+	// The endpoint URLs for your Amazon Q Business web experience. The URLs are
+	// unique and fully hosted by Amazon Web Services.
 	DefaultEndpoint *string
 
-	// The status of your Amazon Q web experience.
+	// The status of your Amazon Q Business web experience.
 	Status WebExperienceStatus
 
-	// The Unix timestamp when your Amazon Q web experience was updated.
+	// The Unix timestamp when your Amazon Q Business web experience was updated.
 	UpdatedAt *time.Time
 
-	// The identifier of your Amazon Q web experience.
+	// The identifier of your Amazon Q Business web experience.
 	WebExperienceId *string
 
 	noSmithyDocumentSerde
 }
 
 // Provides the authorization configuration information needed to deploy a Amazon
-// Q web experience to end users.
+// Q Business web experience to end users.
 //
 // The following types satisfy this interface:
 //
@@ -1512,7 +2310,8 @@ type WebExperienceAuthConfiguration interface {
 }
 
 // Provides the SAML 2.0 compliant identity provider (IdP) configuration
-// information Amazon Q needs to deploy a Amazon Q web experience.
+// information Amazon Q Business needs to deploy a Amazon Q Business web
+// experience.
 type WebExperienceAuthConfigurationMemberSamlConfiguration struct {
 	Value SamlConfiguration
 
@@ -1532,10 +2331,15 @@ type UnknownUnionMember struct {
 	noSmithyDocumentSerde
 }
 
-func (*UnknownUnionMember) isDocumentAttributeValue()         {}
-func (*UnknownUnionMember) isDocumentContent()                {}
-func (*UnknownUnionMember) isPluginAuthConfiguration()        {}
-func (*UnknownUnionMember) isPrincipal()                      {}
-func (*UnknownUnionMember) isRetrieverConfiguration()         {}
-func (*UnknownUnionMember) isRuleConfiguration()              {}
-func (*UnknownUnionMember) isWebExperienceAuthConfiguration() {}
+func (*UnknownUnionMember) isAPISchema()                              {}
+func (*UnknownUnionMember) isChatInputStream()                        {}
+func (*UnknownUnionMember) isChatModeConfiguration()                  {}
+func (*UnknownUnionMember) isChatOutputStream()                       {}
+func (*UnknownUnionMember) isDocumentAttributeBoostingConfiguration() {}
+func (*UnknownUnionMember) isDocumentAttributeValue()                 {}
+func (*UnknownUnionMember) isDocumentContent()                        {}
+func (*UnknownUnionMember) isPluginAuthConfiguration()                {}
+func (*UnknownUnionMember) isPrincipal()                              {}
+func (*UnknownUnionMember) isRetrieverConfiguration()                 {}
+func (*UnknownUnionMember) isRuleConfiguration()                      {}
+func (*UnknownUnionMember) isWebExperienceAuthConfiguration()         {}

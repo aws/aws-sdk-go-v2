@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/ecs/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -37,13 +36,13 @@ type UpdateClusterSettingsInput struct {
 
 	// The setting to use by default for a cluster. This parameter is used to turn on
 	// CloudWatch Container Insights for a cluster. If this value is specified, it
-	// overrides the containerInsights value set with PutAccountSetting or
-	// PutAccountSettingDefault . Currently, if you delete an existing cluster that
-	// does not have Container Insights turned on, and then create a new cluster with
-	// the same name with Container Insights tuned on, Container Insights will not
-	// actually be turned on. If you want to preserve the same name for your existing
-	// cluster and turn on Container Insights, you must wait 7 days before you can
-	// re-create it.
+	// overrides the containerInsights value set with PutAccountSetting or PutAccountSettingDefault.
+	//
+	// Currently, if you delete an existing cluster that does not have Container
+	// Insights turned on, and then create a new cluster with the same name with
+	// Container Insights tuned on, Container Insights will not actually be turned on.
+	// If you want to preserve the same name for your existing cluster and turn on
+	// Container Insights, you must wait 7 days before you can re-create it.
 	//
 	// This member is required.
 	Settings []types.ClusterSetting
@@ -84,25 +83,25 @@ func (c *Client) addOperationUpdateClusterSettingsMiddlewares(stack *middleware.
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -117,13 +116,16 @@ func (c *Client) addOperationUpdateClusterSettingsMiddlewares(stack *middleware.
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpUpdateClusterSettingsValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateClusterSettings(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

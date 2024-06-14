@@ -6,24 +6,27 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/robomaker/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
-// Deploys a specific version of a robot application to robots in a fleet. This
-// API is no longer supported and will throw an error if used. The robot
-// application must have a numbered applicationVersion for consistency reasons. To
-// create a new version, use CreateRobotApplicationVersion or see Creating a Robot
-// Application Version (https://docs.aws.amazon.com/robomaker/latest/dg/create-robot-application-version.html)
-// . After 90 days, deployment jobs expire and will be deleted. They will no longer
+// Deploys a specific version of a robot application to robots in a fleet.
+//
+// This API is no longer supported and will throw an error if used.
+//
+// The robot application must have a numbered applicationVersion for consistency
+// reasons. To create a new version, use CreateRobotApplicationVersion or see [Creating a Robot Application Version].
+//
+// After 90 days, deployment jobs expire and will be deleted. They will no longer
 // be accessible.
 //
 // Deprecated: AWS RoboMaker is unable to process this request as the support for
 // the AWS RoboMaker application deployment feature has ended. For additional
 // information, see https://docs.aws.amazon.com/robomaker/latest/dg/fleets.html.
+//
+// [Creating a Robot Application Version]: https://docs.aws.amazon.com/robomaker/latest/dg/create-robot-application-version.html
 func (c *Client) CreateDeploymentJob(ctx context.Context, params *CreateDeploymentJobInput, optFns ...func(*Options)) (*CreateDeploymentJobOutput, error) {
 	if params == nil {
 		params = &CreateDeploymentJobInput{}
@@ -81,26 +84,45 @@ type CreateDeploymentJobOutput struct {
 	// The deployment configuration.
 	DeploymentConfig *types.DeploymentConfig
 
-	// The failure code of the simulation job if it failed: BadPermissionError AWS
-	// Greengrass requires a service-level role permission to access other services.
-	// The role must include the AWSGreengrassResourceAccessRolePolicy managed policy (https://console.aws.amazon.com/iam/home?#/policies/arn:aws:iam::aws:policy/service-role/AWSGreengrassResourceAccessRolePolicy$jsonEditor)
-	// . ExtractingBundleFailure The robot application could not be extracted from the
-	// bundle. FailureThresholdBreached The percentage of robots that could not be
-	// updated exceeded the percentage set for the deployment.
+	// The failure code of the simulation job if it failed:
+	//
+	// BadPermissionError AWS Greengrass requires a service-level role permission to
+	// access other services. The role must include the [AWSGreengrassResourceAccessRolePolicy managed policy]
+	// AWSGreengrassResourceAccessRolePolicy .
+	//
+	// ExtractingBundleFailure The robot application could not be extracted from the
+	// bundle.
+	//
+	// FailureThresholdBreached The percentage of robots that could not be updated
+	// exceeded the percentage set for the deployment.
+	//
 	// GreengrassDeploymentFailed The robot application could not be deployed to the
-	// robot. GreengrassGroupVersionDoesNotExist The AWS Greengrass group or version
-	// associated with a robot is missing. InternalServerError An internal error has
-	// occurred. Retry your request, but if the problem persists, contact us with
-	// details. MissingRobotApplicationArchitecture The robot application does not have
-	// a source that matches the architecture of the robot.
+	// robot.
+	//
+	// GreengrassGroupVersionDoesNotExist The AWS Greengrass group or version
+	// associated with a robot is missing.
+	//
+	// InternalServerError An internal error has occurred. Retry your request, but if
+	// the problem persists, contact us with details.
+	//
+	// MissingRobotApplicationArchitecture The robot application does not have a
+	// source that matches the architecture of the robot.
+	//
 	// MissingRobotDeploymentResource One or more of the resources specified for the
 	// robot application are missing. For example, does the robot application have the
-	// correct launch package and launch file? PostLaunchFileFailure The post-launch
-	// script failed. PreLaunchFileFailure The pre-launch script failed.
+	// correct launch package and launch file?
+	//
+	// PostLaunchFileFailure The post-launch script failed.
+	//
+	// PreLaunchFileFailure The pre-launch script failed.
+	//
 	// ResourceNotFound One or more deployment resources are missing. For example, do
-	// robot application source bundles still exist? RobotDeploymentNoResponse There is
-	// no response from the robot. It might not be powered on or connected to the
-	// internet.
+	// robot application source bundles still exist?
+	//
+	// RobotDeploymentNoResponse There is no response from the robot. It might not be
+	// powered on or connected to the internet.
+	//
+	// [AWSGreengrassResourceAccessRolePolicy managed policy]: https://console.aws.amazon.com/iam/home?#/policies/arn:aws:iam::aws:policy/service-role/AWSGreengrassResourceAccessRolePolicy$jsonEditor
 	FailureCode types.DeploymentJobErrorCode
 
 	// The failure reason of the deployment job if it failed.
@@ -143,25 +165,25 @@ func (c *Client) addOperationCreateDeploymentJobMiddlewares(stack *middleware.St
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -176,6 +198,9 @@ func (c *Client) addOperationCreateDeploymentJobMiddlewares(stack *middleware.St
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opCreateDeploymentJobMiddleware(stack, options); err != nil {
 		return err
 	}
@@ -185,7 +210,7 @@ func (c *Client) addOperationCreateDeploymentJobMiddlewares(stack *middleware.St
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateDeploymentJob(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

@@ -6,18 +6,21 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/iotthingsgraph/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Searches for things associated with the specified entity. You can search by
-// both device and device model. For example, if two different devices, camera1 and
-// camera2, implement the camera device model, the user can associate thing1 to
-// camera1 and thing2 to camera2. SearchThings(camera2) will return only thing2,
-// but SearchThings(camera) will return both thing1 and thing2. This action
-// searches for exact matches and doesn't perform partial text matching.
+// both device and device model.
+//
+// For example, if two different devices, camera1 and camera2, implement the
+// camera device model, the user can associate thing1 to camera1 and thing2 to
+// camera2. SearchThings(camera2) will return only thing2, but SearchThings(camera)
+// will return both thing1 and thing2.
+//
+// This action searches for exact matches and doesn't perform partial text
+// matching.
 //
 // Deprecated: since: 2022-08-30
 func (c *Client) SearchThings(ctx context.Context, params *SearchThingsInput, optFns ...func(*Options)) (*SearchThingsOutput, error) {
@@ -37,8 +40,11 @@ func (c *Client) SearchThings(ctx context.Context, params *SearchThingsInput, op
 
 type SearchThingsInput struct {
 
-	// The ID of the entity to which the things are associated. The IDs should be in
-	// the following format. urn:tdm:REGION/ACCOUNT ID/default:device:DEVICENAME
+	// The ID of the entity to which the things are associated.
+	//
+	// The IDs should be in the following format.
+	//
+	//     urn:tdm:REGION/ACCOUNT ID/default:device:DEVICENAME
 	//
 	// This member is required.
 	EntityId *string
@@ -93,25 +99,25 @@ func (c *Client) addOperationSearchThingsMiddlewares(stack *middleware.Stack, op
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -126,13 +132,16 @@ func (c *Client) addOperationSearchThingsMiddlewares(stack *middleware.Stack, op
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpSearchThingsValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opSearchThings(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

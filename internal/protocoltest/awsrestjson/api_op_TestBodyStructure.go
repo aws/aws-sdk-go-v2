@@ -11,9 +11,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// This example operation serializes a structure in the HTTP body. It should
-// ensure Content-Type: application/json is used in all requests and that an
-// "empty" body is an empty JSON document ({}).
+// This example operation serializes a structure in the HTTP body.
+//
+// It should ensure Content-Type: application/json is used in all requests and
+// that an "empty" body is an empty JSON document ({}).
 func (c *Client) TestBodyStructure(ctx context.Context, params *TestBodyStructureInput, optFns ...func(*Options)) (*TestBodyStructureOutput, error) {
 	if params == nil {
 		params = &TestBodyStructureInput{}
@@ -70,22 +71,25 @@ func (c *Client) addOperationTestBodyStructureMiddlewares(stack *middleware.Stac
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
+		return err
+	}
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -100,10 +104,13 @@ func (c *Client) addOperationTestBodyStructureMiddlewares(stack *middleware.Stac
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opTestBodyStructure(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

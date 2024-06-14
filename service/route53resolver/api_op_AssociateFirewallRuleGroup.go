@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/route53resolver/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -50,16 +49,19 @@ type AssociateFirewallRuleGroupInput struct {
 	// The setting that determines the processing order of the rule group among the
 	// rule groups that you associate with the specified VPC. DNS Firewall filters VPC
 	// traffic starting from the rule group with the lowest numeric priority setting.
-	// You must specify a unique priority for each rule group that you associate with a
-	// single VPC. To make it easier to insert rule groups later, leave space between
+	//
+	// You must specify a unique priority for each rule group that you associate with
+	// a single VPC. To make it easier to insert rule groups later, leave space between
 	// the numbers, for example, use 101, 200, and so on. You can change the priority
-	// setting for a rule group association after you create it. The allowed values for
-	// Priority are between 100 and 9900.
+	// setting for a rule group association after you create it.
+	//
+	// The allowed values for Priority are between 100 and 9900.
 	//
 	// This member is required.
 	Priority *int32
 
-	// The unique identifier of the VPC that you want to associate with the rule group.
+	// The unique identifier of the VPC that you want to associate with the rule
+	// group.
 	//
 	// This member is required.
 	VpcId *string
@@ -110,25 +112,25 @@ func (c *Client) addOperationAssociateFirewallRuleGroupMiddlewares(stack *middle
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -143,6 +145,9 @@ func (c *Client) addOperationAssociateFirewallRuleGroupMiddlewares(stack *middle
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opAssociateFirewallRuleGroupMiddleware(stack, options); err != nil {
 		return err
 	}
@@ -152,7 +157,7 @@ func (c *Client) addOperationAssociateFirewallRuleGroupMiddlewares(stack *middle
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opAssociateFirewallRuleGroup(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -36,16 +35,18 @@ type AssociateTimeSeriesToAssetPropertyInput struct {
 
 	// The ID of the asset in which the asset property was created. This can be either
 	// the actual ID in UUID format, or else externalId: followed by the external ID,
-	// if it has one. For more information, see Referencing objects with external IDs (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/object-ids.html#external-id-references)
-	// in the IoT SiteWise User Guide.
+	// if it has one. For more information, see [Referencing objects with external IDs]in the IoT SiteWise User Guide.
+	//
+	// [Referencing objects with external IDs]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/object-ids.html#external-id-references
 	//
 	// This member is required.
 	AssetId *string
 
 	// The ID of the asset property. This can be either the actual ID in UUID format,
 	// or else externalId: followed by the external ID, if it has one. For more
-	// information, see Referencing objects with external IDs (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/object-ids.html#external-id-references)
-	// in the IoT SiteWise User Guide.
+	// information, see [Referencing objects with external IDs]in the IoT SiteWise User Guide.
+	//
+	// [Referencing objects with external IDs]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/object-ids.html#external-id-references
 	//
 	// This member is required.
 	PropertyId *string
@@ -87,25 +88,25 @@ func (c *Client) addOperationAssociateTimeSeriesToAssetPropertyMiddlewares(stack
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -120,6 +121,9 @@ func (c *Client) addOperationAssociateTimeSeriesToAssetPropertyMiddlewares(stack
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addEndpointPrefix_opAssociateTimeSeriesToAssetPropertyMiddleware(stack); err != nil {
 		return err
 	}
@@ -132,7 +136,7 @@ func (c *Client) addOperationAssociateTimeSeriesToAssetPropertyMiddlewares(stack
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opAssociateTimeSeriesToAssetProperty(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

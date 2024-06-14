@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/fsx/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -15,18 +14,24 @@ import (
 // Returns the description of specific Amazon FSx for OpenZFS snapshots, if a
 // SnapshotIds value is provided. Otherwise, this operation returns all snapshots
 // owned by your Amazon Web Services account in the Amazon Web Services Region of
-// the endpoint that you're calling. When retrieving all snapshots, you can
-// optionally specify the MaxResults parameter to limit the number of snapshots in
-// a response. If more backups remain, Amazon FSx returns a NextToken value in the
-// response. In this case, send a later request with the NextToken request
-// parameter set to the value of NextToken from the last response. Use this
-// operation in an iterative process to retrieve a list of your snapshots.
-// DescribeSnapshots is called first without a NextToken value. Then the operation
-// continues to be called with the NextToken parameter set to the value of the
-// last NextToken value until a response has no NextToken value. When using this
-// operation, keep the following in mind:
+// the endpoint that you're calling.
+//
+// When retrieving all snapshots, you can optionally specify the MaxResults
+// parameter to limit the number of snapshots in a response. If more backups
+// remain, Amazon FSx returns a NextToken value in the response. In this case,
+// send a later request with the NextToken request parameter set to the value of
+// NextToken from the last response.
+//
+// Use this operation in an iterative process to retrieve a list of your
+// snapshots. DescribeSnapshots is called first without a NextToken value. Then
+// the operation continues to be called with the NextToken parameter set to the
+// value of the last NextToken value until a response has no NextToken value.
+//
+// When using this operation, keep the following in mind:
+//
 //   - The operation might return fewer than the MaxResults value of snapshot
 //     descriptions while still including a NextToken value.
+//
 //   - The order of snapshots returned in the response of one DescribeSnapshots
 //     call and the order of backups returned across the responses of a multi-call
 //     iteration is unspecified.
@@ -50,9 +55,9 @@ type DescribeSnapshotsInput struct {
 	// The filters structure. The supported names are file-system-id or volume-id .
 	Filters []types.SnapshotFilter
 
-	// Set to false (default) if you want to only see the snapshots in your Amazon Web
-	// Services account. Set to true if you want to see the snapshots in your account
-	// and the ones shared with you from another account.
+	// Set to false (default) if you want to only see the snapshots owned by your
+	// Amazon Web Services account. Set to true if you want to see the snapshots in
+	// your account and the ones shared with you from another account.
 	IncludeShared *bool
 
 	// The maximum number of resources to return in the response. This value must be
@@ -109,25 +114,25 @@ func (c *Client) addOperationDescribeSnapshotsMiddlewares(stack *middleware.Stac
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -142,10 +147,13 @@ func (c *Client) addOperationDescribeSnapshotsMiddlewares(stack *middleware.Stac
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeSnapshots(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

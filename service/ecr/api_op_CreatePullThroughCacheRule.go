@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/ecr/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -15,8 +14,10 @@ import (
 
 // Creates a pull through cache rule. A pull through cache rule provides a way to
 // cache images from an upstream registry source in your Amazon ECR private
-// registry. For more information, see Using pull through cache rules (https://docs.aws.amazon.com/AmazonECR/latest/userguide/pull-through-cache.html)
-// in the Amazon Elastic Container Registry User Guide.
+// registry. For more information, see [Using pull through cache rules]in the Amazon Elastic Container Registry
+// User Guide.
+//
+// [Using pull through cache rules]: https://docs.aws.amazon.com/AmazonECR/latest/userguide/pull-through-cache.html
 func (c *Client) CreatePullThroughCacheRule(ctx context.Context, params *CreatePullThroughCacheRuleInput, optFns ...func(*Options)) (*CreatePullThroughCacheRuleOutput, error) {
 	if params == nil {
 		params = &CreatePullThroughCacheRuleInput{}
@@ -42,13 +43,22 @@ type CreatePullThroughCacheRuleInput struct {
 	// The registry URL of the upstream public registry to use as the source for the
 	// pull through cache rule. The following is the syntax to use for each supported
 	// upstream registry.
+	//
 	//   - Amazon ECR Public ( ecr-public ) - public.ecr.aws
+	//
 	//   - Docker Hub ( docker-hub ) - registry-1.docker.io
+	//
 	//   - Quay ( quay ) - quay.io
+	//
 	//   - Kubernetes ( k8s ) - registry.k8s.io
+	//
 	//   - GitHub Container Registry ( github-container-registry ) - ghcr.io
+	//
 	//   - Microsoft Azure Container Registry ( azure-container-registry ) -
 	//   .azurecr.io
+	//
+	//   - GitLab Container Registry ( gitlab-container-registry ) -
+	//   registry.gitlab.com
 	//
 	// This member is required.
 	UpstreamRegistryUrl *string
@@ -118,25 +128,25 @@ func (c *Client) addOperationCreatePullThroughCacheRuleMiddlewares(stack *middle
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -151,13 +161,16 @@ func (c *Client) addOperationCreatePullThroughCacheRuleMiddlewares(stack *middle
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpCreatePullThroughCacheRuleValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreatePullThroughCacheRule(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

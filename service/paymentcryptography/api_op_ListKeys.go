@@ -6,23 +6,34 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/paymentcryptography/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Lists the keys in the caller's Amazon Web Services account and Amazon Web
-// Services Region. You can filter the list of keys. This is a paginated operation,
-// which means that each response might contain only a subset of all the keys. When
-// the response contains only a subset of keys, it includes a NextToken value. Use
-// this value in a subsequent ListKeys request to get more keys. When you receive
-// a response with no NextToken (or an empty or null value), that means there are
-// no more keys to get. Cross-account use: This operation can't be used across
-// different Amazon Web Services accounts. Related operations:
-//   - CreateKey
-//   - DeleteKey
-//   - GetKey
+// Services Region. You can filter the list of keys.
+//
+// This is a paginated operation, which means that each response might contain
+// only a subset of all the keys. When the response contains only a subset of keys,
+// it includes a NextToken value. Use this value in a subsequent ListKeys request
+// to get more keys. When you receive a response with no NextToken (or an empty or
+// null value), that means there are no more keys to get.
+//
+// Cross-account use: This operation can't be used across different Amazon Web
+// Services accounts.
+//
+// Related operations:
+//
+// [CreateKey]
+//
+// [DeleteKey]
+//
+// [GetKey]
+//
+// [DeleteKey]: https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_DeleteKey.html
+// [GetKey]: https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_GetKey.html
+// [CreateKey]: https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_CreateKey.html
 func (c *Client) ListKeys(ctx context.Context, params *ListKeysInput, optFns ...func(*Options)) (*ListKeysOutput, error) {
 	if params == nil {
 		params = &ListKeysInput{}
@@ -45,9 +56,10 @@ type ListKeysInput struct {
 
 	// Use this parameter to specify the maximum number of items to return. When this
 	// value is present, Amazon Web Services Payment Cryptography does not return more
-	// than the specified number of items, but it might return fewer. This value is
-	// optional. If you include a value, it must be between 1 and 100, inclusive. If
-	// you do not include a value, it defaults to 50.
+	// than the specified number of items, but it might return fewer.
+	//
+	// This value is optional. If you include a value, it must be between 1 and 100,
+	// inclusive. If you do not include a value, it defaults to 50.
 	MaxResults *int32
 
 	// Use this parameter in a subsequent request after you receive a response with
@@ -98,25 +110,25 @@ func (c *Client) addOperationListKeysMiddlewares(stack *middleware.Stack, option
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -131,10 +143,13 @@ func (c *Client) addOperationListKeysMiddlewares(stack *middleware.Stack, option
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListKeys(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -163,9 +178,10 @@ var _ ListKeysAPIClient = (*Client)(nil)
 type ListKeysPaginatorOptions struct {
 	// Use this parameter to specify the maximum number of items to return. When this
 	// value is present, Amazon Web Services Payment Cryptography does not return more
-	// than the specified number of items, but it might return fewer. This value is
-	// optional. If you include a value, it must be between 1 and 100, inclusive. If
-	// you do not include a value, it defaults to 50.
+	// than the specified number of items, but it might return fewer.
+	//
+	// This value is optional. If you include a value, it must be between 1 and 100,
+	// inclusive. If you do not include a value, it defaults to 50.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

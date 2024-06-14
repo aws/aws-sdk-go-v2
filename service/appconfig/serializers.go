@@ -2704,6 +2704,13 @@ func awsRestjson1_serializeOpDocumentStartDeploymentInput(v *StartDeploymentInpu
 		ok.String(*v.Description)
 	}
 
+	if v.DynamicExtensionParameters != nil {
+		ok := object.Key("DynamicExtensionParameters")
+		if err := awsRestjson1_serializeDocumentDynamicParameterMap(v.DynamicExtensionParameters, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.KmsKeyIdentifier != nil {
 		ok := object.Key("KmsKeyIdentifier")
 		ok.String(*v.KmsKeyIdentifier)
@@ -3736,6 +3743,17 @@ func awsRestjson1_serializeDocumentActionsMap(v map[string][]types.Action, value
 	return nil
 }
 
+func awsRestjson1_serializeDocumentDynamicParameterMap(v map[string]string, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	for key := range v {
+		om := object.Key(key)
+		om.String(v[key])
+	}
+	return nil
+}
+
 func awsRestjson1_serializeDocumentMonitor(v *types.Monitor, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -3773,6 +3791,11 @@ func awsRestjson1_serializeDocumentParameter(v *types.Parameter, value smithyjso
 	if v.Description != nil {
 		ok := object.Key("Description")
 		ok.String(*v.Description)
+	}
+
+	if v.Dynamic {
+		ok := object.Key("Dynamic")
+		ok.Boolean(v.Dynamic)
 	}
 
 	if v.Required {

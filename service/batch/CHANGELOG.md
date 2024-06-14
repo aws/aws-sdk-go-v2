@@ -1,3 +1,80 @@
+# v1.38.1 (2024-06-07)
+
+* **Bug Fix**: Add clock skew correction on all service clients
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.38.0 (2024-06-03)
+
+* **Feature**: This release adds support for the AWS Batch GetJobQueueSnapshot API operation.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.37.4 (2024-05-23)
+
+* No change notes available for this release.
+
+# v1.37.3 (2024-05-16)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.37.2 (2024-05-15)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.37.1 (2024-05-08)
+
+* **Bug Fix**: GoDoc improvement
+
+# v1.37.0 (2024-04-11)
+
+* **Feature**: This release adds the task properties field to attempt details and the name field on EKS container detail.
+
+# v1.36.1 (2024-03-29)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.36.0 (2024-03-27)
+
+* **Feature**: This feature allows AWS Batch to support configuration of imagePullSecrets and allowPrivilegeEscalation for jobs running on EKS
+
+# v1.35.1 (2024-03-18)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.35.0 (2024-03-08)
+
+* **Feature**: This release adds JobStateTimeLimitActions setting to the Job Queue API. It allows you to configure an action Batch can take for a blocking job in front of the queue after the defined period of time. The new parameter applies for ECS, EKS, and FARGATE Job Queues.
+
+# v1.34.1 (2024-03-07)
+
+* **Bug Fix**: Remove dependency on go-cmp.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.34.0 (2024-02-28)
+
+* **Feature**: This release adds Batch support for configuration of multicontainer jobs in ECS, Fargate, and EKS. This support is available for all types of jobs, including both array jobs and multi-node parallel jobs.
+
+# v1.33.1 (2024-02-23)
+
+* **Bug Fix**: Move all common, SDK-side middleware stack ops into the service client module to prevent cross-module compatibility issues in the future.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.33.0 (2024-02-22)
+
+* **Feature**: Add middleware stack snapshot tests.
+
+# v1.32.2 (2024-02-21)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.32.1 (2024-02-20)
+
+* **Bug Fix**: When sourcing values for a service's `EndpointParameters`, the lack of a configured region (i.e. `options.Region == ""`) will now translate to a `nil` value for `EndpointParameters.Region` instead of a pointer to the empty string `""`. This will result in a much more explicit error when calling an operation instead of an obscure hostname lookup failure.
+
+# v1.32.0 (2024-02-13)
+
+* **Feature**: Bump minimum Go version to 1.20 per our language support policy.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.31.0 (2024-02-09)
 
 * **Feature**: This feature allows Batch to support configuration of repository credentials for jobs running on ECS

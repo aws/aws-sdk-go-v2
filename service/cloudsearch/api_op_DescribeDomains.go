@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/cloudsearch/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -16,8 +15,9 @@ import (
 // to specific domains. Shows all domains by default. To get the number of
 // searchable documents in a domain, use the console or submit a matchall request
 // to your domain's search endpoint: q=matchall&q.parser=structured&size=0 . For
-// more information, see Getting Information about a Search Domain (http://docs.aws.amazon.com/cloudsearch/latest/developerguide/getting-domain-info.html)
-// in the Amazon CloudSearch Developer Guide.
+// more information, see [Getting Information about a Search Domain]in the Amazon CloudSearch Developer Guide.
+//
+// [Getting Information about a Search Domain]: http://docs.aws.amazon.com/cloudsearch/latest/developerguide/getting-domain-info.html
 func (c *Client) DescribeDomains(ctx context.Context, params *DescribeDomainsInput, optFns ...func(*Options)) (*DescribeDomainsOutput, error) {
 	if params == nil {
 		params = &DescribeDomainsInput{}
@@ -33,9 +33,9 @@ func (c *Client) DescribeDomains(ctx context.Context, params *DescribeDomainsInp
 	return out, nil
 }
 
-// Container for the parameters to the DescribeDomains operation. By default shows
-// the status of all domains. To restrict the response to particular domains,
-// specify the names of the domains you want to describe.
+// Container for the parameters to the DescribeDomains operation. By default shows the status of
+// all domains. To restrict the response to particular domains, specify the names
+// of the domains you want to describe.
 type DescribeDomainsInput struct {
 
 	// The names of the domains you want to include in the response.
@@ -81,25 +81,25 @@ func (c *Client) addOperationDescribeDomainsMiddlewares(stack *middleware.Stack,
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -114,10 +114,13 @@ func (c *Client) addOperationDescribeDomainsMiddlewares(stack *middleware.Stack,
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeDomains(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

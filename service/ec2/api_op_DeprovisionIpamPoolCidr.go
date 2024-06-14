@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -14,8 +13,9 @@ import (
 
 // Deprovision a CIDR provisioned from an IPAM pool. If you deprovision a CIDR
 // from a pool that has a source pool, the CIDR is recycled back into the source
-// pool. For more information, see Deprovision pool CIDRs (https://docs.aws.amazon.com/vpc/latest/ipam/depro-pool-cidr-ipam.html)
-// in the Amazon VPC IPAM User Guide.
+// pool. For more information, see [Deprovision pool CIDRs]in the Amazon VPC IPAM User Guide.
+//
+// [Deprovision pool CIDRs]: https://docs.aws.amazon.com/vpc/latest/ipam/depro-pool-cidr-ipam.html
 func (c *Client) DeprovisionIpamPoolCidr(ctx context.Context, params *DeprovisionIpamPoolCidrInput, optFns ...func(*Options)) (*DeprovisionIpamPoolCidrOutput, error) {
 	if params == nil {
 		params = &DeprovisionIpamPoolCidrInput{}
@@ -83,25 +83,25 @@ func (c *Client) addOperationDeprovisionIpamPoolCidrMiddlewares(stack *middlewar
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -116,13 +116,16 @@ func (c *Client) addOperationDeprovisionIpamPoolCidrMiddlewares(stack *middlewar
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDeprovisionIpamPoolCidrValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDeprovisionIpamPoolCidr(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

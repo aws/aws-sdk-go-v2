@@ -50,6 +50,26 @@ func (m *validateOpDeleteLandingZone) HandleInitialize(ctx context.Context, in m
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDisableBaseline struct {
+}
+
+func (*validateOpDisableBaseline) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDisableBaseline) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DisableBaselineInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDisableBaselineInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDisableControl struct {
 }
 
@@ -65,6 +85,26 @@ func (m *validateOpDisableControl) HandleInitialize(ctx context.Context, in midd
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDisableControlInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpEnableBaseline struct {
+}
+
+func (*validateOpEnableBaseline) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpEnableBaseline) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*EnableBaselineInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpEnableBaselineInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -90,6 +130,46 @@ func (m *validateOpEnableControl) HandleInitialize(ctx context.Context, in middl
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetBaseline struct {
+}
+
+func (*validateOpGetBaseline) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetBaseline) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetBaselineInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetBaselineInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetBaselineOperation struct {
+}
+
+func (*validateOpGetBaselineOperation) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetBaselineOperation) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetBaselineOperationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetBaselineOperationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetControlOperation struct {
 }
 
@@ -105,6 +185,26 @@ func (m *validateOpGetControlOperation) HandleInitialize(ctx context.Context, in
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpGetControlOperationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetEnabledBaseline struct {
+}
+
+func (*validateOpGetEnabledBaseline) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetEnabledBaseline) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetEnabledBaselineInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetEnabledBaselineInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -170,26 +270,6 @@ func (m *validateOpGetLandingZoneOperation) HandleInitialize(ctx context.Context
 	return next.HandleInitialize(ctx, in)
 }
 
-type validateOpListEnabledControls struct {
-}
-
-func (*validateOpListEnabledControls) ID() string {
-	return "OperationInputValidation"
-}
-
-func (m *validateOpListEnabledControls) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
-	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
-) {
-	input, ok := in.Parameters.(*ListEnabledControlsInput)
-	if !ok {
-		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
-	}
-	if err := validateOpListEnabledControlsInput(input); err != nil {
-		return out, metadata, err
-	}
-	return next.HandleInitialize(ctx, in)
-}
-
 type validateOpListTagsForResource struct {
 }
 
@@ -205,6 +285,26 @@ func (m *validateOpListTagsForResource) HandleInitialize(ctx context.Context, in
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpListTagsForResourceInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpResetEnabledBaseline struct {
+}
+
+func (*validateOpResetEnabledBaseline) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpResetEnabledBaseline) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ResetEnabledBaselineInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpResetEnabledBaselineInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -270,6 +370,26 @@ func (m *validateOpUntagResource) HandleInitialize(ctx context.Context, in middl
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateEnabledBaseline struct {
+}
+
+func (*validateOpUpdateEnabledBaseline) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateEnabledBaseline) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateEnabledBaselineInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateEnabledBaselineInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateEnabledControl struct {
 }
 
@@ -318,16 +438,36 @@ func addOpDeleteLandingZoneValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteLandingZone{}, middleware.After)
 }
 
+func addOpDisableBaselineValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDisableBaseline{}, middleware.After)
+}
+
 func addOpDisableControlValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDisableControl{}, middleware.After)
+}
+
+func addOpEnableBaselineValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpEnableBaseline{}, middleware.After)
 }
 
 func addOpEnableControlValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpEnableControl{}, middleware.After)
 }
 
+func addOpGetBaselineValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetBaseline{}, middleware.After)
+}
+
+func addOpGetBaselineOperationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetBaselineOperation{}, middleware.After)
+}
+
 func addOpGetControlOperationValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetControlOperation{}, middleware.After)
+}
+
+func addOpGetEnabledBaselineValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetEnabledBaseline{}, middleware.After)
 }
 
 func addOpGetEnabledControlValidationMiddleware(stack *middleware.Stack) error {
@@ -342,12 +482,12 @@ func addOpGetLandingZoneOperationValidationMiddleware(stack *middleware.Stack) e
 	return stack.Initialize.Add(&validateOpGetLandingZoneOperation{}, middleware.After)
 }
 
-func addOpListEnabledControlsValidationMiddleware(stack *middleware.Stack) error {
-	return stack.Initialize.Add(&validateOpListEnabledControls{}, middleware.After)
-}
-
 func addOpListTagsForResourceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListTagsForResource{}, middleware.After)
+}
+
+func addOpResetEnabledBaselineValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpResetEnabledBaseline{}, middleware.After)
 }
 
 func addOpResetLandingZoneValidationMiddleware(stack *middleware.Stack) error {
@@ -362,12 +502,51 @@ func addOpUntagResourceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUntagResource{}, middleware.After)
 }
 
+func addOpUpdateEnabledBaselineValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateEnabledBaseline{}, middleware.After)
+}
+
 func addOpUpdateEnabledControlValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateEnabledControl{}, middleware.After)
 }
 
 func addOpUpdateLandingZoneValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateLandingZone{}, middleware.After)
+}
+
+func validateEnabledBaselineParameter(v *types.EnabledBaselineParameter) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "EnabledBaselineParameter"}
+	if v.Key == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Key"))
+	}
+	if v.Value == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Value"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateEnabledBaselineParameters(v []types.EnabledBaselineParameter) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "EnabledBaselineParameters"}
+	for i := range v {
+		if err := validateEnabledBaselineParameter(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
 }
 
 func validateEnabledControlParameter(v *types.EnabledControlParameter) error {
@@ -438,6 +617,21 @@ func validateOpDeleteLandingZoneInput(v *DeleteLandingZoneInput) error {
 	}
 }
 
+func validateOpDisableBaselineInput(v *DisableBaselineInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DisableBaselineInput"}
+	if v.EnabledBaselineIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EnabledBaselineIdentifier"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDisableControlInput(v *DisableControlInput) error {
 	if v == nil {
 		return nil
@@ -445,6 +639,32 @@ func validateOpDisableControlInput(v *DisableControlInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "DisableControlInput"}
 	if v.ControlIdentifier == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ControlIdentifier"))
+	}
+	if v.TargetIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TargetIdentifier"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpEnableBaselineInput(v *EnableBaselineInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "EnableBaselineInput"}
+	if v.BaselineVersion == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("BaselineVersion"))
+	}
+	if v.Parameters != nil {
+		if err := validateEnabledBaselineParameters(v.Parameters); err != nil {
+			invalidParams.AddNested("Parameters", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.BaselineIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("BaselineIdentifier"))
 	}
 	if v.TargetIdentifier == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TargetIdentifier"))
@@ -479,6 +699,36 @@ func validateOpEnableControlInput(v *EnableControlInput) error {
 	}
 }
 
+func validateOpGetBaselineInput(v *GetBaselineInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetBaselineInput"}
+	if v.BaselineIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("BaselineIdentifier"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetBaselineOperationInput(v *GetBaselineOperationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetBaselineOperationInput"}
+	if v.OperationIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("OperationIdentifier"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpGetControlOperationInput(v *GetControlOperationInput) error {
 	if v == nil {
 		return nil
@@ -486,6 +736,21 @@ func validateOpGetControlOperationInput(v *GetControlOperationInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "GetControlOperationInput"}
 	if v.OperationIdentifier == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("OperationIdentifier"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetEnabledBaselineInput(v *GetEnabledBaselineInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetEnabledBaselineInput"}
+	if v.EnabledBaselineIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EnabledBaselineIdentifier"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -539,13 +804,13 @@ func validateOpGetLandingZoneOperationInput(v *GetLandingZoneOperationInput) err
 	}
 }
 
-func validateOpListEnabledControlsInput(v *ListEnabledControlsInput) error {
+func validateOpListTagsForResourceInput(v *ListTagsForResourceInput) error {
 	if v == nil {
 		return nil
 	}
-	invalidParams := smithy.InvalidParamsError{Context: "ListEnabledControlsInput"}
-	if v.TargetIdentifier == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("TargetIdentifier"))
+	invalidParams := smithy.InvalidParamsError{Context: "ListTagsForResourceInput"}
+	if v.ResourceArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -554,13 +819,13 @@ func validateOpListEnabledControlsInput(v *ListEnabledControlsInput) error {
 	}
 }
 
-func validateOpListTagsForResourceInput(v *ListTagsForResourceInput) error {
+func validateOpResetEnabledBaselineInput(v *ResetEnabledBaselineInput) error {
 	if v == nil {
 		return nil
 	}
-	invalidParams := smithy.InvalidParamsError{Context: "ListTagsForResourceInput"}
-	if v.ResourceArn == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ResourceArn"))
+	invalidParams := smithy.InvalidParamsError{Context: "ResetEnabledBaselineInput"}
+	if v.EnabledBaselineIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EnabledBaselineIdentifier"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -612,6 +877,29 @@ func validateOpUntagResourceInput(v *UntagResourceInput) error {
 	}
 	if v.TagKeys == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TagKeys"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateEnabledBaselineInput(v *UpdateEnabledBaselineInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateEnabledBaselineInput"}
+	if v.BaselineVersion == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("BaselineVersion"))
+	}
+	if v.Parameters != nil {
+		if err := validateEnabledBaselineParameters(v.Parameters); err != nil {
+			invalidParams.AddNested("Parameters", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.EnabledBaselineIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EnabledBaselineIdentifier"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

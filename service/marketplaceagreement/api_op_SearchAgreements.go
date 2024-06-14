@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/marketplaceagreement/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -14,23 +13,39 @@ import (
 
 // Searches across all agreements that a proposer or an acceptor has in AWS
 // Marketplace. The search returns a list of agreements with basic agreement
-// information. The following filter combinations are supported:
+// information.
+//
+// The following filter combinations are supported:
+//
 //   - PartyType as Proposer + AgreementType + ResourceIdentifier
+//
 //   - PartyType as Proposer + AgreementType + OfferId
+//
 //   - PartyType as Proposer + AgreementType + AcceptorAccountId
+//
 //   - PartyType as Proposer + AgreementType + Status
+//
 //   - PartyType as Proposer + AgreementType + ResourceIdentifier + Status
+//
 //   - PartyType as Proposer + AgreementType + OfferId + Status
+//
 //   - PartyType as Proposer + AgreementType + AcceptorAccountId + Status
+//
 //   - PartyType as Proposer + AgreementType + ResourceType + Status
+//
 //   - PartyType as Proposer + AgreementType + AcceptorAccountId + ResourceType +
 //     Status
+//
 //   - PartyType as Proposer + AgreementType + AcceptorAccountId + OfferId
+//
 //   - PartyType as Proposer + AgreementType + AcceptorAccountId + OfferId + Status
+//
 //   - PartyType as Proposer + AgreementType + AcceptorAccountId +
 //     ResourceIdentifier
+//
 //   - PartyType as Proposer + AgreementType + AcceptorAccountId +
 //     ResourceIdentifier + Status
+//
 //   - PartyType as Proposer + AgreementType + AcceptorAccountId + ResourceType
 func (c *Client) SearchAgreements(ctx context.Context, params *SearchAgreementsInput, optFns ...func(*Options)) (*SearchAgreementsOutput, error) {
 	if params == nil {
@@ -52,24 +67,34 @@ type SearchAgreementsInput struct {
 	// The catalog in which the agreement was created.
 	Catalog *string
 
-	// The filter name and value pair used to return a specific list of results. The
-	// following filters are supported:
+	// The filter name and value pair used to return a specific list of results.
+	//
+	// The following filters are supported:
+	//
 	//   - ResourceIdentifier – The unique identifier of the resource.
+	//
 	//   - ResourceType – Type of the resource, which is the product ( AmiProduct ,
 	//   ContainerProduct , or SaaSProduct ).
+	//
 	//   - PartyType – The party type (either Acceptor or Proposer ) of the caller. For
 	//   agreements where the caller is the proposer, use the Proposer filter. For
 	//   agreements where the caller is the acceptor, use the Acceptor filter.
+	//
 	//   - AcceptorAccountId – The AWS account ID of the party accepting the agreement
 	//   terms.
+	//
 	//   - OfferId – The unique identifier of the offer in which the terms are
 	//   registered in the agreement token.
+	//
 	//   - Status – The current status of the agreement. Values include ACTIVE ,
 	//   ARCHIVED , CANCELLED , EXPIRED , RENEWED , REPLACED , and TERMINATED .
+	//
 	//   - BeforeEndTime – A date used to filter agreements with a date before the
 	//   endTime of an agreement.
+	//
 	//   - AfterEndTime – A date used to filter agreements with a date after the
 	//   endTime of an agreement.
+	//
 	//   - AgreementType – The type of agreement. Values include PurchaseAgreement or
 	//   VendorInsightsAgreement .
 	Filters []types.Filter
@@ -123,25 +148,25 @@ func (c *Client) addOperationSearchAgreementsMiddlewares(stack *middleware.Stack
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -156,10 +181,13 @@ func (c *Client) addOperationSearchAgreementsMiddlewares(stack *middleware.Stack
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opSearchAgreements(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

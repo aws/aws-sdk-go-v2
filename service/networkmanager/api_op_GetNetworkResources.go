@@ -6,15 +6,15 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/networkmanager/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Describes the network resources for the specified global network. The results
-// include information from the corresponding Describe call for the resource, minus
-// any sensitive information such as pre-shared keys.
+// Describes the network resources for the specified global network.
+//
+// The results include information from the corresponding Describe call for the
+// resource, minus any sensitive information such as pre-shared keys.
 func (c *Client) GetNetworkResources(ctx context.Context, params *GetNetworkResourcesInput, optFns ...func(*Options)) (*GetNetworkResourcesOutput, error) {
 	if params == nil {
 		params = &GetNetworkResourcesInput{}
@@ -58,39 +58,47 @@ type GetNetworkResourcesInput struct {
 	// The ARN of the resource.
 	ResourceArn *string
 
-	// The resource type. The following are the supported resource types for Direct
-	// Connect:
-	//   - dxcon - The definition model is Connection (https://docs.aws.amazon.com/directconnect/latest/APIReference/API_Connection.html)
-	//   .
-	//   - dx-gateway - The definition model is DirectConnectGateway (https://docs.aws.amazon.com/directconnect/latest/APIReference/API_DirectConnectGateway.html)
-	//   .
-	//   - dx-vif - The definition model is VirtualInterface (https://docs.aws.amazon.com/directconnect/latest/APIReference/API_VirtualInterface.html)
-	//   .
+	// The resource type.
+	//
+	// The following are the supported resource types for Direct Connect:
+	//
+	//   - dxcon
+	//
+	//   - dx-gateway
+	//
+	//   - dx-vif
+	//
 	// The following are the supported resource types for Network Manager:
-	//   - connection - The definition model is Connection (https://docs.aws.amazon.com/networkmanager/latest/APIReference/API_Connection.html)
-	//   .
-	//   - device - The definition model is Device (https://docs.aws.amazon.com/networkmanager/latest/APIReference/API_Device.html)
-	//   .
-	//   - link - The definition model is Link (https://docs.aws.amazon.com/networkmanager/latest/APIReference/API_Link.html)
-	//   .
-	//   - site - The definition model is Site (https://docs.aws.amazon.com/networkmanager/latest/APIReference/API_Site.html)
-	//   .
+	//
+	//   - attachment
+	//
+	//   - connect-peer
+	//
+	//   - connection
+	//
+	//   - core-network
+	//
+	//   - device
+	//
+	//   - link
+	//
+	//   - peering
+	//
+	//   - site
+	//
 	// The following are the supported resource types for Amazon VPC:
-	//   - customer-gateway - The definition model is CustomerGateway (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CustomerGateway.html)
-	//   .
-	//   - transit-gateway - The definition model is TransitGateway (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_TransitGateway.html)
-	//   .
-	//   - transit-gateway-attachment - The definition model is
-	//   TransitGatewayAttachment (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_TransitGatewayAttachment.html)
-	//   .
-	//   - transit-gateway-connect-peer - The definition model is
-	//   TransitGatewayConnectPeer (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_TransitGatewayConnectPeer.html)
-	//   .
-	//   - transit-gateway-route-table - The definition model is
-	//   TransitGatewayRouteTable (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_TransitGatewayRouteTable.html)
-	//   .
-	//   - vpn-connection - The definition model is VpnConnection (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_VpnConnection.html)
-	//   .
+	//
+	//   - customer-gateway
+	//
+	//   - transit-gateway
+	//
+	//   - transit-gateway-attachment
+	//
+	//   - transit-gateway-connect-peer
+	//
+	//   - transit-gateway-route-table
+	//
+	//   - vpn-connection
 	ResourceType *string
 
 	noSmithyDocumentSerde
@@ -132,25 +140,25 @@ func (c *Client) addOperationGetNetworkResourcesMiddlewares(stack *middleware.St
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -165,13 +173,16 @@ func (c *Client) addOperationGetNetworkResourcesMiddlewares(stack *middleware.St
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpGetNetworkResourcesValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetNetworkResources(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

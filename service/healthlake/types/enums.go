@@ -11,8 +11,9 @@ const (
 )
 
 // Values returns all known values for AuthorizationStrategy. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (AuthorizationStrategy) Values() []AuthorizationStrategy {
 	return []AuthorizationStrategy{
 		"SMART_ON_FHIR_V1",
@@ -29,8 +30,9 @@ const (
 )
 
 // Values returns all known values for CmkType. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (CmkType) Values() []CmkType {
 	return []CmkType{
 		"CUSTOMER_MANAGED_KMS_KEY",
@@ -42,21 +44,43 @@ type DatastoreStatus string
 
 // Enum values for DatastoreStatus
 const (
-	DatastoreStatusCreating DatastoreStatus = "CREATING"
-	DatastoreStatusActive   DatastoreStatus = "ACTIVE"
-	DatastoreStatusDeleting DatastoreStatus = "DELETING"
-	DatastoreStatusDeleted  DatastoreStatus = "DELETED"
+	DatastoreStatusCreating     DatastoreStatus = "CREATING"
+	DatastoreStatusActive       DatastoreStatus = "ACTIVE"
+	DatastoreStatusDeleting     DatastoreStatus = "DELETING"
+	DatastoreStatusDeleted      DatastoreStatus = "DELETED"
+	DatastoreStatusCreateFailed DatastoreStatus = "CREATE_FAILED"
 )
 
 // Values returns all known values for DatastoreStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (DatastoreStatus) Values() []DatastoreStatus {
 	return []DatastoreStatus{
 		"CREATING",
 		"ACTIVE",
 		"DELETING",
 		"DELETED",
+		"CREATE_FAILED",
+	}
+}
+
+type ErrorCategory string
+
+// Enum values for ErrorCategory
+const (
+	ErrorCategoryRetryableError    ErrorCategory = "RETRYABLE_ERROR"
+	ErrorCategoryNonRetryableError ErrorCategory = "NON_RETRYABLE_ERROR"
+)
+
+// Values returns all known values for ErrorCategory. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ErrorCategory) Values() []ErrorCategory {
+	return []ErrorCategory{
+		"RETRYABLE_ERROR",
+		"NON_RETRYABLE_ERROR",
 	}
 }
 
@@ -68,8 +92,9 @@ const (
 )
 
 // Values returns all known values for FHIRVersion. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (FHIRVersion) Values() []FHIRVersion {
 	return []FHIRVersion{
 		"R4",
@@ -92,8 +117,9 @@ const (
 )
 
 // Values returns all known values for JobStatus. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (JobStatus) Values() []JobStatus {
 	return []JobStatus{
 		"SUBMITTED",
@@ -116,8 +142,9 @@ const (
 )
 
 // Values returns all known values for PreloadDataType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (PreloadDataType) Values() []PreloadDataType {
 	return []PreloadDataType{
 		"SYNTHEA",

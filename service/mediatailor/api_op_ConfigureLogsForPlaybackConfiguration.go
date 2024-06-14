@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -35,8 +34,11 @@ type ConfigureLogsForPlaybackConfigurationInput struct {
 	// percentEnabled is set to 60 , MediaTailor sends logs for 600 of the sessions to
 	// CloudWatch Logs. MediaTailor decides at random which of the playback
 	// configuration sessions to send logs for. If you want to view logs for a specific
-	// session, you can use the debug log mode (https://docs.aws.amazon.com/mediatailor/latest/ug/debug-log-mode.html)
-	// . Valid values: 0 - 100
+	// session, you can use the [debug log mode].
+	//
+	// Valid values: 0 - 100
+	//
+	// [debug log mode]: https://docs.aws.amazon.com/mediatailor/latest/ug/debug-log-mode.html
 	//
 	// This member is required.
 	PercentEnabled int32
@@ -88,25 +90,25 @@ func (c *Client) addOperationConfigureLogsForPlaybackConfigurationMiddlewares(st
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -121,13 +123,16 @@ func (c *Client) addOperationConfigureLogsForPlaybackConfigurationMiddlewares(st
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpConfigureLogsForPlaybackConfigurationValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opConfigureLogsForPlaybackConfiguration(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

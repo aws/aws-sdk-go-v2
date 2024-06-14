@@ -6,18 +6,21 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/directconnect/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Associates a MAC Security (MACsec) Connection Key Name (CKN)/ Connectivity
-// Association Key (CAK) pair with an Direct Connect dedicated connection. You must
-// supply either the secretARN, or the CKN/CAK ( ckn and cak ) pair in the request.
-// For information about MAC Security (MACsec) key considerations, see MACsec
-// pre-shared CKN/CAK key considerations  (https://docs.aws.amazon.com/directconnect/latest/UserGuide/direct-connect-mac-sec-getting-started.html#mac-sec-key-consideration)
-// in the Direct Connect User Guide.
+// Association Key (CAK) pair with an Direct Connect dedicated connection.
+//
+// You must supply either the secretARN, or the CKN/CAK ( ckn and cak ) pair in the
+// request.
+//
+// For information about MAC Security (MACsec) key considerations, see [MACsec pre-shared CKN/CAK key considerations] in the
+// Direct Connect User Guide.
+//
+// [MACsec pre-shared CKN/CAK key considerations]: https://docs.aws.amazon.com/directconnect/latest/UserGuide/direct-connect-mac-sec-getting-started.html#mac-sec-key-consideration
 func (c *Client) AssociateMacSecKey(ctx context.Context, params *AssociateMacSecKeyInput, optFns ...func(*Options)) (*AssociateMacSecKeyOutput, error) {
 	if params == nil {
 		params = &AssociateMacSecKeyInput{}
@@ -36,28 +39,40 @@ func (c *Client) AssociateMacSecKey(ctx context.Context, params *AssociateMacSec
 type AssociateMacSecKeyInput struct {
 
 	// The ID of the dedicated connection (dxcon-xxxx), or the ID of the LAG
-	// (dxlag-xxxx). You can use DescribeConnections or DescribeLags to retrieve
-	// connection ID.
+	// (dxlag-xxxx).
+	//
+	// You can use DescribeConnections or DescribeLags to retrieve connection ID.
 	//
 	// This member is required.
 	ConnectionId *string
 
-	// The MAC Security (MACsec) CAK to associate with the dedicated connection. You
-	// can create the CKN/CAK pair using an industry standard tool. The valid values
-	// are 64 hexadecimal characters (0-9, A-E). If you use this request parameter, you
-	// must use the ckn request parameter and not use the secretARN request parameter.
+	// The MAC Security (MACsec) CAK to associate with the dedicated connection.
+	//
+	// You can create the CKN/CAK pair using an industry standard tool.
+	//
+	// The valid values are 64 hexadecimal characters (0-9, A-E).
+	//
+	// If you use this request parameter, you must use the ckn request parameter and
+	// not use the secretARN request parameter.
 	Cak *string
 
-	// The MAC Security (MACsec) CKN to associate with the dedicated connection. You
-	// can create the CKN/CAK pair using an industry standard tool. The valid values
-	// are 64 hexadecimal characters (0-9, A-E). If you use this request parameter, you
-	// must use the cak request parameter and not use the secretARN request parameter.
+	// The MAC Security (MACsec) CKN to associate with the dedicated connection.
+	//
+	// You can create the CKN/CAK pair using an industry standard tool.
+	//
+	// The valid values are 64 hexadecimal characters (0-9, A-E).
+	//
+	// If you use this request parameter, you must use the cak request parameter and
+	// not use the secretARN request parameter.
 	Ckn *string
 
 	// The Amazon Resource Name (ARN) of the MAC Security (MACsec) secret key to
-	// associate with the dedicated connection. You can use DescribeConnections or
-	// DescribeLags to retrieve the MAC Security (MACsec) secret key. If you use this
-	// request parameter, you do not use the ckn and cak request parameters.
+	// associate with the dedicated connection.
+	//
+	// You can use DescribeConnections or DescribeLags to retrieve the MAC Security (MACsec) secret key.
+	//
+	// If you use this request parameter, you do not use the ckn and cak request
+	// parameters.
 	SecretARN *string
 
 	noSmithyDocumentSerde
@@ -101,25 +116,25 @@ func (c *Client) addOperationAssociateMacSecKeyMiddlewares(stack *middleware.Sta
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -134,13 +149,16 @@ func (c *Client) addOperationAssociateMacSecKeyMiddlewares(stack *middleware.Sta
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpAssociateMacSecKeyValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opAssociateMacSecKey(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

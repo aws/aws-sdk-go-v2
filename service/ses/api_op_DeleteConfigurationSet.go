@@ -6,15 +6,16 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Deletes a configuration set. Configuration sets enable you to publish email
-// sending events. For information about using configuration sets, see the Amazon
-// SES Developer Guide (https://docs.aws.amazon.com/ses/latest/dg/monitor-sending-activity.html)
-// . You can execute this operation no more than once per second.
+// sending events. For information about using configuration sets, see the [Amazon SES Developer Guide].
+//
+// You can execute this operation no more than once per second.
+//
+// [Amazon SES Developer Guide]: https://docs.aws.amazon.com/ses/latest/dg/monitor-sending-activity.html
 func (c *Client) DeleteConfigurationSet(ctx context.Context, params *DeleteConfigurationSetInput, optFns ...func(*Options)) (*DeleteConfigurationSetOutput, error) {
 	if params == nil {
 		params = &DeleteConfigurationSetInput{}
@@ -32,8 +33,9 @@ func (c *Client) DeleteConfigurationSet(ctx context.Context, params *DeleteConfi
 
 // Represents a request to delete a configuration set. Configuration sets enable
 // you to publish email sending events. For information about using configuration
-// sets, see the Amazon SES Developer Guide (https://docs.aws.amazon.com/ses/latest/dg/monitor-sending-activity.html)
-// .
+// sets, see the [Amazon SES Developer Guide].
+//
+// [Amazon SES Developer Guide]: https://docs.aws.amazon.com/ses/latest/dg/monitor-sending-activity.html
 type DeleteConfigurationSetInput struct {
 
 	// The name of the configuration set to delete.
@@ -74,25 +76,25 @@ func (c *Client) addOperationDeleteConfigurationSetMiddlewares(stack *middleware
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -107,13 +109,16 @@ func (c *Client) addOperationDeleteConfigurationSetMiddlewares(stack *middleware
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDeleteConfigurationSetValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteConfigurationSet(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

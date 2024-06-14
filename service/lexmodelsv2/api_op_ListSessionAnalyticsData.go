@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/lexmodelsv2/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -17,8 +16,10 @@ import (
 // startDateTime and endDateTime fields are required. These fields define a time
 // range for which you want to retrieve results. Of the optional fields, you can
 // organize the results in the following ways:
+//
 //   - Use the filters field to filter the results and the sortBy field to specify
 //     the values by which to sort the results.
+//
 //   - Use the maxResults field to limit the number of results to return in a
 //     single response and the nextToken field to return the next batch of results if
 //     the response does not return the full set of results.
@@ -67,10 +68,12 @@ type ListSessionAnalyticsDataInput struct {
 
 	// If the response from the ListSessionAnalyticsData operation contains more
 	// results than specified in the maxResults parameter, a token is returned in the
-	// response. Use the returned token in the nextToken parameter of a
-	// ListSessionAnalyticsData request to return the next page of results. For a
-	// complete set of results, call the ListSessionAnalyticsData operation until the
-	// nextToken returned in the response is null.
+	// response.
+	//
+	// Use the returned token in the nextToken parameter of a ListSessionAnalyticsData
+	// request to return the next page of results. For a complete set of results, call
+	// the ListSessionAnalyticsData operation until the nextToken returned in the
+	// response is null.
 	NextToken *string
 
 	// An object specifying the measure and method by which to sort the session
@@ -87,10 +90,12 @@ type ListSessionAnalyticsDataOutput struct {
 
 	// If the response from the ListSessionAnalyticsData operation contains more
 	// results than specified in the maxResults parameter, a token is returned in the
-	// response. Use the returned token in the nextToken parameter of a
-	// ListSessionAnalyticsData request to return the next page of results. For a
-	// complete set of results, call the ListSessionAnalyticsData operation until the
-	// nextToken returned in the response is null.
+	// response.
+	//
+	// Use the returned token in the nextToken parameter of a ListSessionAnalyticsData
+	// request to return the next page of results. For a complete set of results, call
+	// the ListSessionAnalyticsData operation until the nextToken returned in the
+	// response is null.
 	NextToken *string
 
 	// A list of objects, each of which contains information about a session with the
@@ -125,25 +130,25 @@ func (c *Client) addOperationListSessionAnalyticsDataMiddlewares(stack *middlewa
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -158,13 +163,16 @@ func (c *Client) addOperationListSessionAnalyticsDataMiddlewares(stack *middlewa
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpListSessionAnalyticsDataValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListSessionAnalyticsData(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

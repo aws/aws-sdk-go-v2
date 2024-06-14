@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/finspace/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -47,8 +46,28 @@ type CreateKxScalingGroupInput struct {
 	// This member is required.
 	EnvironmentId *string
 
-	// The memory and CPU capabilities of the scaling group host on which FinSpace
+	//  The memory and CPU capabilities of the scaling group host on which FinSpace
 	// Managed kdb clusters will be placed.
+	//
+	// You can add one of the following values:
+	//
+	//   - kx.sg.4xlarge – The host type with a configuration of 108 GiB memory and 16
+	//   vCPUs.
+	//
+	//   - kx.sg.8xlarge – The host type with a configuration of 216 GiB memory and 32
+	//   vCPUs.
+	//
+	//   - kx.sg.16xlarge – The host type with a configuration of 432 GiB memory and 64
+	//   vCPUs.
+	//
+	//   - kx.sg.32xlarge – The host type with a configuration of 864 GiB memory and
+	//   128 vCPUs.
+	//
+	//   - kx.sg1.16xlarge – The host type with a configuration of 1949 GiB memory and
+	//   64 vCPUs.
+	//
+	//   - kx.sg1.24xlarge – The host type with a configuration of 2948 GiB memory and
+	//   96 vCPUs.
 	//
 	// This member is required.
 	HostType *string
@@ -58,8 +77,8 @@ type CreateKxScalingGroupInput struct {
 	// This member is required.
 	ScalingGroupName *string
 
-	// A list of key-value pairs to label the scaling group. You can add up to 50 tags
-	// to a scaling group.
+	//  A list of key-value pairs to label the scaling group. You can add up to 50
+	// tags to a scaling group.
 	Tags map[string]string
 
 	noSmithyDocumentSerde
@@ -70,19 +89,20 @@ type CreateKxScalingGroupOutput struct {
 	// The identifier of the availability zones.
 	AvailabilityZoneId *string
 
-	// The timestamp at which the scaling group was created in FinSpace. The value is
+	//  The timestamp at which the scaling group was created in FinSpace. The value is
 	// determined as epoch time in milliseconds. For example, the value for Monday,
 	// November 1, 2021 12:00:00 PM UTC is specified as 1635768000000.
 	CreatedTimestamp *time.Time
 
-	// A unique identifier for the kdb environment, where you create the scaling group.
+	// A unique identifier for the kdb environment, where you create the scaling
+	// group.
 	EnvironmentId *string
 
-	// The memory and CPU capabilities of the scaling group host on which FinSpace
+	//  The memory and CPU capabilities of the scaling group host on which FinSpace
 	// Managed kdb clusters will be placed.
 	HostType *string
 
-	// The last time that the scaling group was updated in FinSpace. The value is
+	//  The last time that the scaling group was updated in FinSpace. The value is
 	// determined as epoch time in milliseconds. For example, the value for Monday,
 	// November 1, 2021 12:00:00 PM UTC is specified as 1635768000000.
 	LastModifiedTimestamp *time.Time
@@ -91,13 +111,21 @@ type CreateKxScalingGroupOutput struct {
 	ScalingGroupName *string
 
 	// The status of scaling group.
+	//
 	//   - CREATING – The scaling group creation is in progress.
+	//
 	//   - CREATE_FAILED – The scaling group creation has failed.
+	//
 	//   - ACTIVE – The scaling group is active.
+	//
 	//   - UPDATING – The scaling group is in the process of being updated.
+	//
 	//   - UPDATE_FAILED – The update action failed.
+	//
 	//   - DELETING – The scaling group is in the process of being deleted.
+	//
 	//   - DELETE_FAILED – The system failed to delete the scaling group.
+	//
 	//   - DELETED – The scaling group is successfully deleted.
 	Status types.KxScalingGroupStatus
 
@@ -129,25 +157,25 @@ func (c *Client) addOperationCreateKxScalingGroupMiddlewares(stack *middleware.S
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -165,6 +193,9 @@ func (c *Client) addOperationCreateKxScalingGroupMiddlewares(stack *middleware.S
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opCreateKxScalingGroupMiddleware(stack, options); err != nil {
 		return err
 	}
@@ -174,7 +205,7 @@ func (c *Client) addOperationCreateKxScalingGroupMiddlewares(stack *middleware.S
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateKxScalingGroup(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

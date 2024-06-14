@@ -6,15 +6,16 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/appfabric/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Updates an app authorization within an app bundle, which allows AppFabric to
-// connect to an application. If the app authorization was in a connected state,
-// updating the app authorization will set it back to a PendingConnect state.
+// connect to an application.
+//
+// If the app authorization was in a connected state, updating the app
+// authorization will set it back to a PendingConnect state.
 func (c *Client) UpdateAppAuthorization(ctx context.Context, params *UpdateAppAuthorizationInput, optFns ...func(*Options)) (*UpdateAppAuthorizationOutput, error) {
 	if params == nil {
 		params = &UpdateAppAuthorizationInput{}
@@ -45,10 +46,11 @@ type UpdateAppAuthorizationInput struct {
 	AppBundleIdentifier *string
 
 	// Contains credentials for the application, such as an API key or OAuth2 client
-	// ID and secret. Specify credentials that match the authorization type of the app
-	// authorization to update. For example, if the authorization type of the app
-	// authorization is OAuth2 ( oauth2 ), then you should provide only the OAuth2
-	// credentials.
+	// ID and secret.
+	//
+	// Specify credentials that match the authorization type of the app authorization
+	// to update. For example, if the authorization type of the app authorization is
+	// OAuth2 ( oauth2 ), then you should provide only the OAuth2 credentials.
 	Credential types.Credential
 
 	// Contains information about an application tenant, such as the application
@@ -93,25 +95,25 @@ func (c *Client) addOperationUpdateAppAuthorizationMiddlewares(stack *middleware
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -126,13 +128,16 @@ func (c *Client) addOperationUpdateAppAuthorizationMiddlewares(stack *middleware
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpUpdateAppAuthorizationValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateAppAuthorization(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

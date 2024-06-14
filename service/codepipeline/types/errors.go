@@ -735,6 +735,35 @@ func (e *PipelineExecutionNotStoppableException) ErrorFault() smithy.ErrorFault 
 	return smithy.FaultClient
 }
 
+// The specified pipeline execution is outdated and cannot be used as a target
+// pipeline execution for rollback.
+type PipelineExecutionOutdatedException struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *PipelineExecutionOutdatedException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *PipelineExecutionOutdatedException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *PipelineExecutionOutdatedException) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "PipelineExecutionOutdatedException"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *PipelineExecutionOutdatedException) ErrorFault() smithy.ErrorFault {
+	return smithy.FaultClient
+}
+
 // The specified pipeline name is already in use.
 type PipelineNameInUseException struct {
 	Message *string
@@ -943,6 +972,34 @@ func (e *TooManyTagsException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *TooManyTagsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// Unable to roll back the stage. The cause might be if the pipeline version has
+// changed since the target pipeline execution was deployed, the stage is currently
+// running, or an incorrect target pipeline execution ID was provided.
+type UnableToRollbackStageException struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *UnableToRollbackStageException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *UnableToRollbackStageException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *UnableToRollbackStageException) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "UnableToRollbackStageException"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *UnableToRollbackStageException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The validation was specified in an invalid format.
 type ValidationException struct {

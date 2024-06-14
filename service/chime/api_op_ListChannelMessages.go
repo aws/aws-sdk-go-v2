@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/chime/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -14,20 +13,27 @@ import (
 )
 
 // List all the messages in a channel. Returns a paginated list of ChannelMessages
-// . By default, sorted by creation timestamp in descending order. Redacted
-// messages appear in the results as empty, since they are only redacted, not
-// deleted. Deleted messages do not appear in the results. This action always
-// returns the latest version of an edited message. Also, the x-amz-chime-bearer
-// request header is mandatory. Use the AppInstanceUserArn of the user that makes
-// the API call as the value in the header. This API is is no longer supported and
-// will not be updated. We recommend using the latest version, ListChannelMessages (https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_messaging-chime_ListChannelMessages.html)
-// , in the Amazon Chime SDK. Using the latest version requires migrating to a
-// dedicated namespace. For more information, refer to Migrating from the Amazon
-// Chime namespace (https://docs.aws.amazon.com/chime-sdk/latest/dg/migrate-from-chm-namespace.html)
-// in the Amazon Chime SDK Developer Guide.
+// . By default, sorted by creation timestamp in descending order.
+//
+// Redacted messages appear in the results as empty, since they are only redacted,
+// not deleted. Deleted messages do not appear in the results. This action always
+// returns the latest version of an edited message.
+//
+// Also, the x-amz-chime-bearer request header is mandatory. Use the
+// AppInstanceUserArn of the user that makes the API call as the value in the
+// header.
+//
+// This API is is no longer supported and will not be updated. We recommend using
+// the latest version, [ListChannelMessages], in the Amazon Chime SDK.
+//
+// Using the latest version requires migrating to a dedicated namespace. For more
+// information, refer to [Migrating from the Amazon Chime namespace]in the Amazon Chime SDK Developer Guide.
 //
 // Deprecated: Replaced by ListChannelMessages in the Amazon Chime SDK Messaging
 // Namespace
+//
+// [Migrating from the Amazon Chime namespace]: https://docs.aws.amazon.com/chime-sdk/latest/dg/migrate-from-chm-namespace.html
+// [ListChannelMessages]: https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_messaging-chime_ListChannelMessages.html
 func (c *Client) ListChannelMessages(ctx context.Context, params *ListChannelMessagesInput, optFns ...func(*Options)) (*ListChannelMessagesOutput, error) {
 	if params == nil {
 		params = &ListChannelMessagesInput{}
@@ -113,25 +119,25 @@ func (c *Client) addOperationListChannelMessagesMiddlewares(stack *middleware.St
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -146,6 +152,9 @@ func (c *Client) addOperationListChannelMessagesMiddlewares(stack *middleware.St
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addEndpointPrefix_opListChannelMessagesMiddleware(stack); err != nil {
 		return err
 	}
@@ -155,7 +164,7 @@ func (c *Client) addOperationListChannelMessagesMiddlewares(stack *middleware.St
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListChannelMessages(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

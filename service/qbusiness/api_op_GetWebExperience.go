@@ -6,14 +6,13 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/qbusiness/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
-// Gets information about an existing Amazon Q web experience.
+// Gets information about an existing Amazon Q Business web experience.
 func (c *Client) GetWebExperience(ctx context.Context, params *GetWebExperienceInput, optFns ...func(*Options)) (*GetWebExperienceOutput, error) {
 	if params == nil {
 		params = &GetWebExperienceInput{}
@@ -31,12 +30,13 @@ func (c *Client) GetWebExperience(ctx context.Context, params *GetWebExperienceI
 
 type GetWebExperienceInput struct {
 
-	// The identifier of the Amazon Q application linked to the web experience.
+	// The identifier of the Amazon Q Business application linked to the web
+	// experience.
 	//
 	// This member is required.
 	ApplicationId *string
 
-	// The identifier of the Amazon Q web experience.
+	// The identifier of the Amazon Q Business web experience.
 	//
 	// This member is required.
 	WebExperienceId *string
@@ -46,48 +46,58 @@ type GetWebExperienceInput struct {
 
 type GetWebExperienceOutput struct {
 
-	// The identifier of the Amazon Q application linked to the web experience.
+	// The identifier of the Amazon Q Business application linked to the web
+	// experience.
 	ApplicationId *string
 
-	// The authentication configuration information for your Amazon Q web experience.
+	// The authentication configuration information for your Amazon Q Business web
+	// experience.
+	//
+	// Deprecated: Property associated with legacy SAML IdP flow. Deprecated in favor
+	// of using AWS IAM Identity Center for user management.
 	AuthenticationConfiguration types.WebExperienceAuthConfiguration
 
-	// The Unix timestamp when the retriever was created.
+	// The Unix timestamp when the Amazon Q Business web experience was last created.
 	CreatedAt *time.Time
 
-	// The endpoint of your Amazon Q web experience.
+	// The endpoint of your Amazon Q Business web experience.
 	DefaultEndpoint *string
 
 	// When the Status field value is FAILED , the ErrorMessage field contains a
 	// description of the error that caused the data source connector to fail.
 	Error *types.ErrorDetail
 
+	//  The Amazon Resource Name (ARN) of the service role attached to your web
+	// experience.
+	RoleArn *string
+
 	// Determines whether sample prompts are enabled in the web experience for an end
 	// user.
 	SamplePromptsControlMode types.WebExperienceSamplePromptsControlMode
 
-	// The current status of the Amazon Q web experience. When the Status field value
-	// is FAILED , the ErrorMessage field contains a description of the error that
-	// caused the data source connector to fail.
+	// The current status of the Amazon Q Business web experience. When the Status
+	// field value is FAILED , the ErrorMessage field contains a description of the
+	// error that caused the data source connector to fail.
 	Status types.WebExperienceStatus
 
-	// The subtitle for your Amazon Q web experience.
+	// The subtitle for your Amazon Q Business web experience.
 	Subtitle *string
 
-	// The title for your Amazon Q web experience.
+	// The title for your Amazon Q Business web experience.
 	Title *string
 
-	// The Unix timestamp when the data source connector was last updated.
+	// The Unix timestamp when the Amazon Q Business web experience was last updated.
 	UpdatedAt *time.Time
 
 	// The Amazon Resource Name (ARN) of the role with the permission to access the
-	// Amazon Q web experience and required resources.
+	// Amazon Q Business web experience and required resources.
 	WebExperienceArn *string
 
-	// The identifier of the Amazon Q web experience.
+	// The identifier of the Amazon Q Business web experience.
 	WebExperienceId *string
 
-	// The customized welcome message for end users of an Amazon Q web experience.
+	// The customized welcome message for end users of an Amazon Q Business web
+	// experience.
 	WelcomeMessage *string
 
 	// Metadata pertaining to the operation's result.
@@ -118,25 +128,25 @@ func (c *Client) addOperationGetWebExperienceMiddlewares(stack *middleware.Stack
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -151,13 +161,16 @@ func (c *Client) addOperationGetWebExperienceMiddlewares(stack *middleware.Stack
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpGetWebExperienceValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetWebExperience(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

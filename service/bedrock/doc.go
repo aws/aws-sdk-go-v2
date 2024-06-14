@@ -3,5 +3,6 @@
 // Package bedrock provides the API client, operations, and parameter types for
 // Amazon Bedrock.
 //
-// Describes the API operations for creating and managing Amazon Bedrock models.
+// Describes the API operations for creating, managing, fine-turning, and
+// evaluating Amazon Bedrock models.
 package bedrock

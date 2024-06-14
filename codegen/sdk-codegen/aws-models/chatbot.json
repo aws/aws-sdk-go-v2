@@ -1,0 +1,3835 @@
+{
+    "smithy": "2.0",
+    "metadata": {
+        "suppressions": [
+            {
+                "id": "HttpMethodSemantics",
+                "namespace": "*"
+            },
+            {
+                "id": "HttpResponseCodeSemantics",
+                "namespace": "*"
+            },
+            {
+                "id": "PaginatedTrait",
+                "namespace": "*"
+            },
+            {
+                "id": "HttpHeaderTrait",
+                "namespace": "*"
+            },
+            {
+                "id": "HttpUriConflict",
+                "namespace": "*"
+            },
+            {
+                "id": "Service",
+                "namespace": "*"
+            }
+        ]
+    },
+    "shapes": {
+        "com.amazonaws.chatbot#AccountPreferences": {
+            "type": "structure",
+            "members": {
+                "UserAuthorizationRequired": {
+                    "target": "com.amazonaws.chatbot#BooleanAccountPreference",
+                    "traits": {
+                        "smithy.api#documentation": "Enables use of a user role requirement in your chat configuration."
+                    }
+                },
+                "TrainingDataCollectionEnabled": {
+                    "target": "com.amazonaws.chatbot#BooleanAccountPreference",
+                    "traits": {
+                        "smithy.api#documentation": "Turns on training data collection. This helps improve the AWS Chatbot experience by allowing AWS Chatbot to store and use your customer information, such as AWS Chatbot configurations, notifications, user inputs, AWS Chatbot generated responses, and interaction data. This data helps us to continuously improve and develop Artificial Intelligence (AI) technologies. Your data is not shared with any third parties and is protected using sophisticated controls to prevent unauthorized access and misuse. AWS Chatbot does not store or use interactions in chat channels with Amazon Q for training AWS Chatbot’s AI technologies."
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Preferences which apply for AWS Chatbot usage in the calling AWS account."
+            }
+        },
+        "com.amazonaws.chatbot#AmazonResourceName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1011
+                },
+                "smithy.api#pattern": "^arn:aws:(wheatley|chatbot):[A-Za-z0-9_/.-]{0,63}:[A-Za-z0-9_/.-]{0,63}:[A-Za-z0-9][A-Za-z0-9:_/+=,@.-]{0,1023}$"
+            }
+        },
+        "com.amazonaws.chatbot#Arn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 12,
+                    "max": 1224
+                },
+                "smithy.api#pattern": "^arn:aws:[A-Za-z0-9][A-Za-z0-9_/.-]{0,62}:[A-Za-z0-9_/.-]{0,63}:[A-Za-z0-9_/.-]{0,63}:[A-Za-z0-9][A-Za-z0-9:_/+=,@.-]{0,1023}$"
+            }
+        },
+        "com.amazonaws.chatbot#AwsUserIdentity": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 15,
+                    "max": 1101
+                },
+                "smithy.api#pattern": "^arn:aws:(iam|sts)::[A-Za-z0-9_/.-]{0,63}:[A-Za-z0-9][A-Za-z0-9:_/+=,@.-]{0,1023}$"
+            }
+        },
+        "com.amazonaws.chatbot#BooleanAccountPreference": {
+            "type": "boolean"
+        },
+        "com.amazonaws.chatbot#ChatConfigurationArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 19,
+                    "max": 1169
+                },
+                "smithy.api#pattern": "^arn:aws:(wheatley|chatbot):[A-Za-z0-9_/.-]{0,63}:[A-Za-z0-9_/.-]{0,63}:[A-Za-z0-9][A-Za-z0-9:_/+=,@.-]{0,1023}$"
+            }
+        },
+        "com.amazonaws.chatbot#ChimeWebhookConfiguration": {
+            "type": "structure",
+            "members": {
+                "WebhookDescription": {
+                    "target": "com.amazonaws.chatbot#ChimeWebhookDescription",
+                    "traits": {
+                        "smithy.api#documentation": "Description of the webhook. Recommend using the convention `RoomName/WebhookName`. See Chime setup tutorial for more details: https://docs.aws.amazon.com/chatbot/latest/adminguide/chime-setup.html.",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ChatConfigurationArn": {
+                    "target": "com.amazonaws.chatbot#ChatConfigurationArn",
+                    "traits": {
+                        "smithy.api#documentation": "The ARN of the ChimeWebhookConfiguration.",
+                        "smithy.api#required": {}
+                    }
+                },
+                "IamRoleArn": {
+                    "target": "com.amazonaws.chatbot#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "The ARN of the IAM role that defines the permissions for AWS Chatbot. This is a user-defined role that AWS Chatbot will assume. This is not the service-linked role. For more information, see IAM Policies for AWS Chatbot.",
+                        "smithy.api#required": {}
+                    }
+                },
+                "SnsTopicArns": {
+                    "target": "com.amazonaws.chatbot#SnsTopicArnList",
+                    "traits": {
+                        "smithy.api#documentation": "The ARNs of the SNS topics that deliver notifications to AWS Chatbot.",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ConfigurationName": {
+                    "target": "com.amazonaws.chatbot#ConfigurationName",
+                    "traits": {
+                        "smithy.api#documentation": "The name of the configuration."
+                    }
+                },
+                "LoggingLevel": {
+                    "target": "com.amazonaws.chatbot#CustomerCwLogLevel",
+                    "traits": {
+                        "smithy.api#documentation": "Specifies the logging level for this configuration. This property affects the log entries pushed to Amazon CloudWatch Logs.Logging levels include ERROR, INFO, or NONE."
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.chatbot#Tags",
+                    "traits": {
+                        "smithy.api#documentation": "A list of tags applied to the configuration."
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "An AWS Chatbot configuration for Amazon Chime."
+            }
+        },
+        "com.amazonaws.chatbot#ChimeWebhookConfigurationList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.chatbot#ChimeWebhookConfiguration"
+            }
+        },
+        "com.amazonaws.chatbot#ChimeWebhookDescription": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 255
+                }
+            }
+        },
+        "com.amazonaws.chatbot#ChimeWebhookUrl": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 255
+                },
+                "smithy.api#pattern": "^https://hooks\\.chime\\.aws/incomingwebhooks/[A-Za-z0-9\\-]+?\\?token=[A-Za-z0-9\\-]+$"
+            }
+        },
+        "com.amazonaws.chatbot#ConfigurationName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 128
+                },
+                "smithy.api#pattern": "^[A-Za-z0-9-_]+$"
+            }
+        },
+        "com.amazonaws.chatbot#ConfiguredTeam": {
+            "type": "structure",
+            "members": {
+                "TenantId": {
+                    "target": "com.amazonaws.chatbot#UUID",
+                    "traits": {
+                        "smithy.api#documentation": "The ID of the Microsoft Teams tenant.",
+                        "smithy.api#required": {}
+                    }
+                },
+                "TeamId": {
+                    "target": "com.amazonaws.chatbot#UUID",
+                    "traits": {
+                        "smithy.api#documentation": "The ID of the Microsoft Team authorized with AWS Chatbot. To get the team ID, you must perform the initial authorization flow with Microsoft Teams in the AWS Chatbot console. Then you can copy and paste the team ID from the console. For more details, see steps 1-4 in Get started with Microsoft Teams in the AWS Chatbot Administrator Guide.",
+                        "smithy.api#required": {}
+                    }
+                },
+                "TeamName": {
+                    "target": "com.amazonaws.chatbot#UUID",
+                    "traits": {
+                        "smithy.api#documentation": "The name of the Microsoft Teams Team."
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "A Microsoft Teams team that has been authorized with AWS Chatbot."
+            }
+        },
+        "com.amazonaws.chatbot#ConfiguredTeamsList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.chatbot#ConfiguredTeam"
+            }
+        },
+        "com.amazonaws.chatbot#ConflictException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.chatbot#ErrorMessage"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "There was an issue processing your request.",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 409
+            }
+        },
+        "com.amazonaws.chatbot#CreateChimeWebhookConfiguration": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.chatbot#CreateChimeWebhookConfigurationRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.chatbot#CreateChimeWebhookConfigurationResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.chatbot#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.chatbot#CreateChimeWebhookConfigurationException"
+                },
+                {
+                    "target": "com.amazonaws.chatbot#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.chatbot#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.chatbot#LimitExceededException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "Creates Chime Webhook Configuration",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/create-chime-webhook-configuration",
+                    "code": 201
+                }
+            }
+        },
+        "com.amazonaws.chatbot#CreateChimeWebhookConfigurationException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.chatbot#ErrorMessage"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "We can’t process your request right now because of a server issue. Try again later.",
+                "smithy.api#error": "server",
+                "smithy.api#httpError": 500
+            }
+        },
+        "com.amazonaws.chatbot#CreateChimeWebhookConfigurationRequest": {
+            "type": "structure",
+            "members": {
+                "WebhookDescription": {
+                    "target": "com.amazonaws.chatbot#ChimeWebhookDescription",
+                    "traits": {
+                        "smithy.api#documentation": "Description of the webhook. Recommend using the convention `RoomName/WebhookName`. See Chime setup tutorial for more details: https://docs.aws.amazon.com/chatbot/latest/adminguide/chime-setup.html.",
+                        "smithy.api#required": {}
+                    }
+                },
+                "WebhookUrl": {
+                    "target": "com.amazonaws.chatbot#ChimeWebhookUrl",
+                    "traits": {
+                        "smithy.api#documentation": "URL for the Chime webhook.",
+                        "smithy.api#required": {}
+                    }
+                },
+                "SnsTopicArns": {
+                    "target": "com.amazonaws.chatbot#SnsTopicArnList",
+                    "traits": {
+                        "smithy.api#documentation": "The ARNs of the SNS topics that deliver notifications to AWS Chatbot.",
+                        "smithy.api#required": {}
+                    }
+                },
+                "IamRoleArn": {
+                    "target": "com.amazonaws.chatbot#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "This is a user-defined role that AWS Chatbot will assume. This is not the service-linked role. For more information, see IAM Policies for AWS Chatbot.",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ConfigurationName": {
+                    "target": "com.amazonaws.chatbot#ConfigurationName",
+                    "traits": {
+                        "smithy.api#documentation": "The name of the configuration.",
+                        "smithy.api#required": {}
+                    }
+                },
+                "LoggingLevel": {
+                    "target": "com.amazonaws.chatbot#CustomerCwLogLevel",
+                    "traits": {
+                        "smithy.api#documentation": "Logging levels include ERROR, INFO, or NONE."
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.chatbot#Tags",
+                    "traits": {
+                        "smithy.api#documentation": "A list of tags to apply to the configuration."
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.chatbot#CreateChimeWebhookConfigurationResult": {
+            "type": "structure",
+            "members": {
+                "WebhookConfiguration": {
+                    "target": "com.amazonaws.chatbot#ChimeWebhookConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "Chime webhook configuration."
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.chatbot#CreateMicrosoftTeamsChannelConfiguration": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.chatbot#CreateTeamsChannelConfigurationRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.chatbot#CreateTeamsChannelConfigurationResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.chatbot#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.chatbot#CreateTeamsChannelConfigurationException"
+                },
+                {
+                    "target": "com.amazonaws.chatbot#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.chatbot#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.chatbot#LimitExceededException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "Creates MS Teams Channel Configuration",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/create-ms-teams-channel-configuration",
+                    "code": 201
+                }
+            }
+        },
+        "com.amazonaws.chatbot#CreateSlackChannelConfiguration": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.chatbot#CreateSlackChannelConfigurationRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.chatbot#CreateSlackChannelConfigurationResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.chatbot#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.chatbot#CreateSlackChannelConfigurationException"
+                },
+                {
+                    "target": "com.amazonaws.chatbot#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.chatbot#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.chatbot#LimitExceededException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "Creates Slack Channel Configuration",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/create-slack-channel-configuration",
+                    "code": 201
+                }
+            }
+        },
+        "com.amazonaws.chatbot#CreateSlackChannelConfigurationException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.chatbot#ErrorMessage"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "We can’t process your request right now because of a server issue. Try again later.",
+                "smithy.api#error": "server",
+                "smithy.api#httpError": 500
+            }
+        },
+        "com.amazonaws.chatbot#CreateSlackChannelConfigurationRequest": {
+            "type": "structure",
+            "members": {
+                "SlackTeamId": {
+                    "target": "com.amazonaws.chatbot#SlackTeamId",
+                    "traits": {
+                        "smithy.api#documentation": "The ID of the Slack workspace authorized with AWS Chatbot.",
+                        "smithy.api#required": {}
+                    }
+                },
+                "SlackChannelId": {
+                    "target": "com.amazonaws.chatbot#SlackChannelId",
+                    "traits": {
+                        "smithy.api#documentation": "The ID of the Slack channel. To get the ID, open Slack, right click on the channel name in the left pane, then choose Copy Link. The channel ID is the 9-character string at the end of the URL. For example, ABCBBLZZZ.",
+                        "smithy.api#required": {}
+                    }
+                },
+                "SlackChannelName": {
+                    "target": "com.amazonaws.chatbot#SlackChannelDisplayName",
+                    "traits": {
+                        "smithy.api#documentation": "The name of the Slack Channel."
+                    }
+                },
+                "SnsTopicArns": {
+                    "target": "com.amazonaws.chatbot#SnsTopicArnList",
+                    "traits": {
+                        "smithy.api#documentation": "The ARNs of the SNS topics that deliver notifications to AWS Chatbot."
+                    }
+                },
+                "IamRoleArn": {
+                    "target": "com.amazonaws.chatbot#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "The ARN of the IAM role that defines the permissions for AWS Chatbot. This is a user-defined role that AWS Chatbot will assume. This is not the service-linked role. For more information, see IAM Policies for AWS Chatbot.",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ConfigurationName": {
+                    "target": "com.amazonaws.chatbot#ConfigurationName",
+                    "traits": {
+                        "smithy.api#documentation": "The name of the configuration.",
+                        "smithy.api#required": {}
+                    }
+                },
+                "LoggingLevel": {
+                    "target": "com.amazonaws.chatbot#CustomerCwLogLevel",
+                    "traits": {
+                        "smithy.api#documentation": "Logging levels include ERROR, INFO, or NONE."
+                    }
+                },
+                "GuardrailPolicyArns": {
+                    "target": "com.amazonaws.chatbot#GuardrailPolicyArnList",
+                    "traits": {
+                        "smithy.api#documentation": "The list of IAM policy ARNs that are applied as channel guardrails. The AWS managed 'AdministratorAccess' policy is applied by default if this is not set."
+                    }
+                },
+                "UserAuthorizationRequired": {
+                    "target": "com.amazonaws.chatbot#BooleanAccountPreference",
+                    "traits": {
+                        "smithy.api#documentation": "Enables use of a user role requirement in your chat configuration."
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.chatbot#Tags",
+                    "traits": {
+                        "smithy.api#documentation": "A list of tags to apply to the configuration."
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.chatbot#CreateSlackChannelConfigurationResult": {
+            "type": "structure",
+            "members": {
+                "ChannelConfiguration": {
+                    "target": "com.amazonaws.chatbot#SlackChannelConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "The configuration for a Slack channel configured with AWS Chatbot."
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.chatbot#CreateTeamsChannelConfigurationException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.chatbot#ErrorMessage"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "We can’t process your request right now because of a server issue. Try again later.",
+                "smithy.api#error": "server",
+                "smithy.api#httpError": 500
+            }
+        },
+        "com.amazonaws.chatbot#CreateTeamsChannelConfigurationRequest": {
+            "type": "structure",
+            "members": {
+                "ChannelId": {
+                    "target": "com.amazonaws.chatbot#TeamsChannelId",
+                    "traits": {
+                        "smithy.api#documentation": "The ID of the Microsoft Teams channel.",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ChannelName": {
+                    "target": "com.amazonaws.chatbot#TeamsChannelName",
+                    "traits": {
+                        "smithy.api#documentation": "The name of the Microsoft Teams channel."
+                    }
+                },
+                "TeamId": {
+                    "target": "com.amazonaws.chatbot#UUID",
+                    "traits": {
+                        "smithy.api#documentation": "The ID of the Microsoft Team authorized with AWS Chatbot. To get the team ID, you must perform the initial authorization flow with Microsoft Teams in the AWS Chatbot console. Then you can copy and paste the team ID from the console. For more details, see steps 1-4 in Get started with Microsoft Teams in the AWS Chatbot Administrator Guide.",
+                        "smithy.api#required": {}
+                    }
+                },
+                "TeamName": {
+                    "target": "com.amazonaws.chatbot#TeamName",
+                    "traits": {
+                        "smithy.api#documentation": "The name of the Microsoft Teams Team."
+                    }
+                },
+                "TenantId": {
+                    "target": "com.amazonaws.chatbot#UUID",
+                    "traits": {
+                        "smithy.api#documentation": "The ID of the Microsoft Teams tenant.",
+                        "smithy.api#required": {}
+                    }
+                },
+                "SnsTopicArns": {
+                    "target": "com.amazonaws.chatbot#SnsTopicArnList",
+                    "traits": {
+                        "smithy.api#documentation": "The ARNs of the SNS topics that deliver notifications to AWS Chatbot."
+                    }
+                },
+                "IamRoleArn": {
+                    "target": "com.amazonaws.chatbot#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "The ARN of the IAM role that defines the permissions for AWS Chatbot. This is a user-defined role that AWS Chatbot will assume. This is not the service-linked role. For more information, see IAM Policies for AWS Chatbot.",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ConfigurationName": {
+                    "target": "com.amazonaws.chatbot#ConfigurationName",
+                    "traits": {
+                        "smithy.api#documentation": "The name of the configuration.",
+                        "smithy.api#required": {}
+                    }
+                },
+                "LoggingLevel": {
+                    "target": "com.amazonaws.chatbot#CustomerCwLogLevel",
+                    "traits": {
+                        "smithy.api#documentation": "Logging levels include ERROR, INFO, or NONE."
+                    }
+                },
+                "GuardrailPolicyArns": {
+                    "target": "com.amazonaws.chatbot#GuardrailPolicyArnList",
+                    "traits": {
+                        "smithy.api#documentation": "The list of IAM policy ARNs that are applied as channel guardrails. The AWS managed 'AdministratorAccess' policy is applied by default if this is not set."
+                    }
+                },
+                "UserAuthorizationRequired": {
+                    "target": "com.amazonaws.chatbot#BooleanAccountPreference",
+                    "traits": {
+                        "smithy.api#documentation": "Enables use of a user role requirement in your chat configuration."
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.chatbot#Tags",
+                    "traits": {
+                        "smithy.api#documentation": "A list of tags to apply to the configuration."
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.chatbot#CreateTeamsChannelConfigurationResult": {
+            "type": "structure",
+            "members": {
+                "ChannelConfiguration": {
+                    "target": "com.amazonaws.chatbot#TeamsChannelConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "The configuration for a Microsoft Teams channel configured with AWS Chatbot."
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.chatbot#CustomerCwLogLevel": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 4,
+                    "max": 5
+                },
+                "smithy.api#pattern": "^(ERROR|INFO|NONE)$"
+            }
+        },
+        "com.amazonaws.chatbot#DeleteChimeWebhookConfiguration": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.chatbot#DeleteChimeWebhookConfigurationRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.chatbot#DeleteChimeWebhookConfigurationResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.chatbot#DeleteChimeWebhookConfigurationException"
+                },
+                {
+                    "target": "com.amazonaws.chatbot#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.chatbot#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.chatbot#ResourceNotFoundException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "Deletes a Chime Webhook Configuration",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/delete-chime-webhook-configuration",
+                    "code": 204
+                }
+            }
+        },
+        "com.amazonaws.chatbot#DeleteChimeWebhookConfigurationException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.chatbot#ErrorMessage"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "We can’t process your request right now because of a server issue. Try again later.",
+                "smithy.api#error": "server",
+                "smithy.api#httpError": 500
+            }
+        },
+        "com.amazonaws.chatbot#DeleteChimeWebhookConfigurationRequest": {
+            "type": "structure",
+            "members": {
+                "ChatConfigurationArn": {
+                    "target": "com.amazonaws.chatbot#ChatConfigurationArn",
+                    "traits": {
+                        "smithy.api#documentation": "The ARN of the ChimeWebhookConfiguration to delete.",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.chatbot#DeleteChimeWebhookConfigurationResult": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.chatbot#DeleteMicrosoftTeamsChannelConfiguration": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.chatbot#DeleteTeamsChannelConfigurationRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.chatbot#DeleteTeamsChannelConfigurationResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.chatbot#DeleteTeamsChannelConfigurationException"
+                },
+                {
+                    "target": "com.amazonaws.chatbot#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.chatbot#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.chatbot#ResourceNotFoundException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "Deletes MS Teams Channel Configuration",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/delete-ms-teams-channel-configuration",
+                    "code": 204
+                }
+            }
+        },
+        "com.amazonaws.chatbot#DeleteMicrosoftTeamsConfiguredTeam": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.chatbot#DeleteTeamsConfiguredTeamRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.chatbot#DeleteTeamsConfiguredTeamResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.chatbot#DeleteTeamsConfiguredTeamException"
+                },
+                {
+                    "target": "com.amazonaws.chatbot#InvalidParameterException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "Deletes the Microsoft Teams team authorization allowing for channels to be configured in that Microsoft Teams team. Note that the Microsoft Teams team must have no channels configured to remove it.",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/delete-ms-teams-configured-teams",
+                    "code": 204
+                }
+            }
+        },
+        "com.amazonaws.chatbot#DeleteMicrosoftTeamsUserIdentity": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.chatbot#DeleteMicrosoftTeamsUserIdentityRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.chatbot#DeleteMicrosoftTeamsUserIdentityResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.chatbot#DeleteMicrosoftTeamsUserIdentityException"
+                },
+                {
+                    "target": "com.amazonaws.chatbot#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.chatbot#ResourceNotFoundException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "Deletes a Teams user identity",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/delete-ms-teams-user-identity",
+                    "code": 204
+                }
+            }
+        },
+        "com.amazonaws.chatbot#DeleteMicrosoftTeamsUserIdentityException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.chatbot#ErrorMessage"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "We can’t process your request right now because of a server issue. Try again later.",
+                "smithy.api#error": "server",
+                "smithy.api#httpError": 500
+            }
+        },
+        "com.amazonaws.chatbot#DeleteMicrosoftTeamsUserIdentityRequest": {
+            "type": "structure",
+            "members": {
+                "ChatConfigurationArn": {
+                    "target": "com.amazonaws.chatbot#ChatConfigurationArn",
+                    "traits": {
+                        "smithy.api#documentation": "The ARN of the MicrosoftTeamsChannelConfiguration associated with the user identity to delete.",
+                        "smithy.api#required": {}
+                    }
+                },
+                "UserId": {
+                    "target": "com.amazonaws.chatbot#UUID",
+                    "traits": {
+                        "smithy.api#documentation": "Id from Microsoft Teams for user.",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.chatbot#DeleteMicrosoftTeamsUserIdentityResult": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.chatbot#DeleteSlackChannelConfiguration": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.chatbot#DeleteSlackChannelConfigurationRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.chatbot#DeleteSlackChannelConfigurationResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.chatbot#DeleteSlackChannelConfigurationException"
+                },
+                {
+                    "target": "com.amazonaws.chatbot#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.chatbot#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.chatbot#ResourceNotFoundException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "Deletes Slack Channel Configuration",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/delete-slack-channel-configuration",
+                    "code": 204
+                }
+            }
+        },
+        "com.amazonaws.chatbot#DeleteSlackChannelConfigurationException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.chatbot#ErrorMessage"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "We can’t process your request right now because of a server issue. Try again later.",
+                "smithy.api#error": "server",
+                "smithy.api#httpError": 500
+            }
+        },
+        "com.amazonaws.chatbot#DeleteSlackChannelConfigurationRequest": {
+            "type": "structure",
+            "members": {
+                "ChatConfigurationArn": {
+                    "target": "com.amazonaws.chatbot#ChatConfigurationArn",
+                    "traits": {
+                        "smithy.api#documentation": "The ARN of the SlackChannelConfiguration to delete.",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.chatbot#DeleteSlackChannelConfigurationResult": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.chatbot#DeleteSlackUserIdentity": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.chatbot#DeleteSlackUserIdentityRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.chatbot#DeleteSlackUserIdentityResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.chatbot#DeleteSlackUserIdentityException"
+                },
+                {
+                    "target": "com.amazonaws.chatbot#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.chatbot#ResourceNotFoundException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "Deletes a Slack user identity",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/delete-slack-user-identity",
+                    "code": 204
+                }
+            }
+        },
+        "com.amazonaws.chatbot#DeleteSlackUserIdentityException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.chatbot#ErrorMessage"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "We can’t process your request right now because of a server issue. Try again later.",
+                "smithy.api#error": "server",
+                "smithy.api#httpError": 500
+            }
+        },
+        "com.amazonaws.chatbot#DeleteSlackUserIdentityRequest": {
+            "type": "structure",
+            "members": {
+                "ChatConfigurationArn": {
+                    "target": "com.amazonaws.chatbot#ChatConfigurationArn",
+                    "traits": {
+                        "smithy.api#documentation": "The ARN of the SlackChannelConfiguration associated with the user identity to delete.",
+                        "smithy.api#required": {}
+                    }
+                },
+                "SlackTeamId": {
+                    "target": "com.amazonaws.chatbot#SlackTeamId",
+                    "traits": {
+                        "smithy.api#documentation": "The ID of the Slack workspace authorized with AWS Chatbot.",
+                        "smithy.api#required": {}
+                    }
+                },
+                "SlackUserId": {
+                    "target": "com.amazonaws.chatbot#SlackUserId",
+                    "traits": {
+                        "smithy.api#documentation": "The ID of the user in Slack.",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.chatbot#DeleteSlackUserIdentityResult": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.chatbot#DeleteSlackWorkspaceAuthorization": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.chatbot#DeleteSlackWorkspaceAuthorizationRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.chatbot#DeleteSlackWorkspaceAuthorizationResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.chatbot#DeleteSlackWorkspaceAuthorizationFault"
+                },
+                {
+                    "target": "com.amazonaws.chatbot#InvalidParameterException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "Deletes the Slack workspace authorization that allows channels to be configured in that workspace. This requires all configured channels in the workspace to be deleted.",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/delete-slack-workspace-authorization",
+                    "code": 204
+                }
+            }
+        },
+        "com.amazonaws.chatbot#DeleteSlackWorkspaceAuthorizationFault": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.chatbot#ErrorMessage"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "There was an issue deleting your Slack workspace.",
+                "smithy.api#error": "server",
+                "smithy.api#httpError": 500
+            }
+        },
+        "com.amazonaws.chatbot#DeleteSlackWorkspaceAuthorizationRequest": {
+            "type": "structure",
+            "members": {
+                "SlackTeamId": {
+                    "target": "com.amazonaws.chatbot#SlackTeamId",
+                    "traits": {
+                        "smithy.api#documentation": "The ID of the Slack workspace authorized with AWS Chatbot.",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.chatbot#DeleteSlackWorkspaceAuthorizationResult": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.chatbot#DeleteTeamsChannelConfigurationException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.chatbot#ErrorMessage"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "We can’t process your request right now because of a server issue. Try again later.",
+                "smithy.api#error": "server",
+                "smithy.api#httpError": 500
+            }
+        },
+        "com.amazonaws.chatbot#DeleteTeamsChannelConfigurationRequest": {
+            "type": "structure",
+            "members": {
+                "ChatConfigurationArn": {
+                    "target": "com.amazonaws.chatbot#ChatConfigurationArn",
+                    "traits": {
+                        "smithy.api#documentation": "The ARN of the MicrosoftTeamsChannelConfiguration to delete.",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.chatbot#DeleteTeamsChannelConfigurationResult": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.chatbot#DeleteTeamsConfiguredTeamException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.chatbot#ErrorMessage"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "We can’t process your request right now because of a server issue. Try again later.",
+                "smithy.api#error": "server",
+                "smithy.api#httpError": 500
+            }
+        },
+        "com.amazonaws.chatbot#DeleteTeamsConfiguredTeamRequest": {
+            "type": "structure",
+            "members": {
+                "TeamId": {
+                    "target": "com.amazonaws.chatbot#UUID",
+                    "traits": {
+                        "smithy.api#documentation": "The ID of the Microsoft Team authorized with AWS Chatbot. To get the team ID, you must perform the initial authorization flow with Microsoft Teams in the AWS Chatbot console. Then you can copy and paste the team ID from the console. For more details, see steps 1-4 in Get started with Microsoft Teams in the AWS Chatbot Administrator Guide.",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.chatbot#DeleteTeamsConfiguredTeamResult": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.chatbot#DescribeChimeWebhookConfigurations": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.chatbot#DescribeChimeWebhookConfigurationsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.chatbot#DescribeChimeWebhookConfigurationsResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.chatbot#DescribeChimeWebhookConfigurationsException"
+                },
+                {
+                    "target": "com.amazonaws.chatbot#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.chatbot#InvalidRequestException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "Lists Chime Webhook Configurations optionally filtered by ChatConfigurationArn",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/describe-chime-webhook-configurations",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "pageSize": "MaxResults"
+                }
+            }
+        },
+        "com.amazonaws.chatbot#DescribeChimeWebhookConfigurationsException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.chatbot#ErrorMessage"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "We can’t process your request right now because of a server issue. Try again later.",
+                "smithy.api#error": "server",
+                "smithy.api#httpError": 500
+            }
+        },
+        "com.amazonaws.chatbot#DescribeChimeWebhookConfigurationsRequest": {
+            "type": "structure",
+            "members": {
+                "MaxResults": {
+                    "target": "com.amazonaws.chatbot#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "The maximum number of results to include in the response. If more results exist than the specified MaxResults value, a token is included in the response so that the remaining results can be retrieved."
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.chatbot#PaginationToken",
+                    "traits": {
+                        "smithy.api#documentation": "An optional token returned from a prior request. Use this token for pagination of results from this action. If this parameter is specified, the response includes only results beyond the token, up to the value specified by MaxResults."
+                    }
+                },
+                "ChatConfigurationArn": {
+                    "target": "com.amazonaws.chatbot#ChatConfigurationArn",
+                    "traits": {
+                        "smithy.api#documentation": "An optional ARN of a ChimeWebhookConfiguration to describe."
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.chatbot#DescribeChimeWebhookConfigurationsResult": {
+            "type": "structure",
+            "members": {
+                "NextToken": {
+                    "target": "com.amazonaws.chatbot#PaginationToken",
+                    "traits": {
+                        "smithy.api#documentation": "An optional token returned from a prior request. Use this token for pagination of results from this action. If this parameter is specified, the response includes only results beyond the token, up to the value specified by MaxResults."
+                    }
+                },
+                "WebhookConfigurations": {
+                    "target": "com.amazonaws.chatbot#ChimeWebhookConfigurationList",
+                    "traits": {
+                        "smithy.api#documentation": "A list of Chime webhooks associated with the account."
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.chatbot#DescribeSlackChannelConfigurations": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.chatbot#DescribeSlackChannelConfigurationsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.chatbot#DescribeSlackChannelConfigurationsResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.chatbot#DescribeSlackChannelConfigurationsException"
+                },
+                {
+                    "target": "com.amazonaws.chatbot#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.chatbot#InvalidRequestException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "Lists Slack Channel Configurations optionally filtered by ChatConfigurationArn",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/describe-slack-channel-configurations",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "pageSize": "MaxResults"
+                }
+            }
+        },
+        "com.amazonaws.chatbot#DescribeSlackChannelConfigurationsException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.chatbot#ErrorMessage"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "We can’t process your request right now because of a server issue. Try again later.",
+                "smithy.api#error": "server",
+                "smithy.api#httpError": 500
+            }
+        },
+        "com.amazonaws.chatbot#DescribeSlackChannelConfigurationsRequest": {
+            "type": "structure",
+            "members": {
+                "MaxResults": {
+                    "target": "com.amazonaws.chatbot#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "The maximum number of results to include in the response. If more results exist than the specified MaxResults value, a token is included in the response so that the remaining results can be retrieved."
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.chatbot#PaginationToken",
+                    "traits": {
+                        "smithy.api#documentation": "An optional token returned from a prior request. Use this token for pagination of results from this action. If this parameter is specified, the response includes only results beyond the token, up to the value specified by MaxResults."
+                    }
+                },
+                "ChatConfigurationArn": {
+                    "target": "com.amazonaws.chatbot#ChatConfigurationArn",
+                    "traits": {
+                        "smithy.api#documentation": "An optional ARN of a SlackChannelConfiguration to describe."
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.chatbot#DescribeSlackChannelConfigurationsResult": {
+            "type": "structure",
+            "members": {
+                "NextToken": {
+                    "target": "com.amazonaws.chatbot#PaginationToken",
+                    "traits": {
+                        "smithy.api#documentation": "An optional token returned from a prior request. Use this token for pagination of results from this action. If this parameter is specified, the response includes only results beyond the token, up to the value specified by MaxResults."
+                    }
+                },
+                "SlackChannelConfigurations": {
+                    "target": "com.amazonaws.chatbot#SlackChannelConfigurationList",
+                    "traits": {
+                        "smithy.api#documentation": "A list of Slack channel configurations."
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.chatbot#DescribeSlackUserIdentities": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.chatbot#DescribeSlackUserIdentitiesRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.chatbot#DescribeSlackUserIdentitiesResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.chatbot#DescribeSlackUserIdentitiesException"
+                },
+                {
+                    "target": "com.amazonaws.chatbot#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.chatbot#InvalidRequestException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "Lists all Slack user identities with a mapped role.",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/describe-slack-user-identities",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "pageSize": "MaxResults"
+                }
+            }
+        },
+        "com.amazonaws.chatbot#DescribeSlackUserIdentitiesException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.chatbot#ErrorMessage"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "We can’t process your request right now because of a server issue. Try again later.",
+                "smithy.api#error": "server",
+                "smithy.api#httpError": 500
+            }
+        },
+        "com.amazonaws.chatbot#DescribeSlackUserIdentitiesRequest": {
+            "type": "structure",
+            "members": {
+                "ChatConfigurationArn": {
+                    "target": "com.amazonaws.chatbot#ChatConfigurationArn",
+                    "traits": {
+                        "smithy.api#documentation": "The ARN of the SlackChannelConfiguration associated with the user identities to describe."
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.chatbot#PaginationToken",
+                    "traits": {
+                        "smithy.api#documentation": "An optional token returned from a prior request. Use this token for pagination of results from this action. If this parameter is specified, the response includes only results beyond the token, up to the value specified by MaxResults."
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.chatbot#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "The maximum number of results to include in the response. If more results exist than the specified MaxResults value, a token is included in the response so that the remaining results can be retrieved."
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.chatbot#DescribeSlackUserIdentitiesResult": {
+            "type": "structure",
+            "members": {
+                "SlackUserIdentities": {
+                    "target": "com.amazonaws.chatbot#SlackUserIdentitiesList",
+                    "traits": {
+                        "smithy.api#documentation": "A list of Slack User Identities."
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.chatbot#PaginationToken",
+                    "traits": {
+                        "smithy.api#documentation": "An optional token returned from a prior request. Use this token for pagination of results from this action. If this parameter is specified, the response includes only results beyond the token, up to the value specified by MaxResults."
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.chatbot#DescribeSlackWorkspaces": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.chatbot#DescribeSlackWorkspacesRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.chatbot#DescribeSlackWorkspacesResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.chatbot#DescribeSlackWorkspacesException"
+                },
+                {
+                    "target": "com.amazonaws.chatbot#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.chatbot#InvalidRequestException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "Lists all authorized Slack Workspaces for AWS Account",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/describe-slack-workspaces",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "pageSize": "MaxResults"
+                }
+            }
+        },
+        "com.amazonaws.chatbot#DescribeSlackWorkspacesException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.chatbot#ErrorMessage"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "We can’t process your request right now because of a server issue. Try again later.",
+                "smithy.api#error": "server",
+                "smithy.api#httpError": 500
+            }
+        },
+        "com.amazonaws.chatbot#DescribeSlackWorkspacesRequest": {
+            "type": "structure",
+            "members": {
+                "MaxResults": {
+                    "target": "com.amazonaws.chatbot#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "The maximum number of results to include in the response. If more results exist than the specified MaxResults value, a token is included in the response so that the remaining results can be retrieved."
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.chatbot#PaginationToken",
+                    "traits": {
+                        "smithy.api#documentation": "An optional token returned from a prior request. Use this token for pagination of results from this action. If this parameter is specified, the response includes only results beyond the token, up to the value specified by MaxResults."
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.chatbot#DescribeSlackWorkspacesResult": {
+            "type": "structure",
+            "members": {
+                "SlackWorkspaces": {
+                    "target": "com.amazonaws.chatbot#SlackWorkspacesList",
+                    "traits": {
+                        "smithy.api#documentation": "A list of Slack Workspaces registered with AWS Chatbot."
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.chatbot#PaginationToken",
+                    "traits": {
+                        "smithy.api#documentation": "An optional token returned from a prior request. Use this token for pagination of results from this action. If this parameter is specified, the response includes only results beyond the token, up to the value specified by MaxResults."
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.chatbot#ErrorMessage": {
+            "type": "string"
+        },
+        "com.amazonaws.chatbot#GetAccountPreferences": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.chatbot#GetAccountPreferencesRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.chatbot#GetAccountPreferencesResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.chatbot#GetAccountPreferencesException"
+                },
+                {
+                    "target": "com.amazonaws.chatbot#InvalidRequestException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "Get Chatbot account level preferences",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/get-account-preferences",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.chatbot#GetAccountPreferencesException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.chatbot#ErrorMessage"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "We can’t process your request right now because of a server issue. Try again later.",
+                "smithy.api#error": "server",
+                "smithy.api#httpError": 500
+            }
+        },
+        "com.amazonaws.chatbot#GetAccountPreferencesRequest": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.chatbot#GetAccountPreferencesResult": {
+            "type": "structure",
+            "members": {
+                "AccountPreferences": {
+                    "target": "com.amazonaws.chatbot#AccountPreferences",
+                    "traits": {
+                        "smithy.api#documentation": "Preferences which apply for AWS Chatbot usage in the calling AWS account."
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.chatbot#GetMicrosoftTeamsChannelConfiguration": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.chatbot#GetTeamsChannelConfigurationRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.chatbot#GetTeamsChannelConfigurationResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.chatbot#GetTeamsChannelConfigurationException"
+                },
+                {
+                    "target": "com.amazonaws.chatbot#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.chatbot#InvalidRequestException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "Get a single MS Teams Channel Configurations",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/get-ms-teams-channel-configuration",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.chatbot#GetTeamsChannelConfigurationException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.chatbot#ErrorMessage"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "We can’t process your request right now because of a server issue. Try again later.",
+                "smithy.api#error": "server",
+                "smithy.api#httpError": 500
+            }
+        },
+        "com.amazonaws.chatbot#GetTeamsChannelConfigurationRequest": {
+            "type": "structure",
+            "members": {
+                "ChatConfigurationArn": {
+                    "target": "com.amazonaws.chatbot#ChatConfigurationArn",
+                    "traits": {
+                        "smithy.api#documentation": "The ARN of the MicrosoftTeamsChannelConfiguration to retrieve.",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.chatbot#GetTeamsChannelConfigurationResult": {
+            "type": "structure",
+            "members": {
+                "ChannelConfiguration": {
+                    "target": "com.amazonaws.chatbot#TeamsChannelConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "The configuration for a Microsoft Teams channel configured with AWS Chatbot."
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.chatbot#GuardrailPolicyArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 11,
+                    "max": 1163
+                },
+                "smithy.api#pattern": "^(^$|(?!.*\\/aws-service-role\\/.*)arn:aws:iam:[A-Za-z0-9_\\/.-]{0,63}:[A-Za-z0-9_\\/.-]{0,63}:[A-Za-z0-9][A-Za-z0-9:_\\/+=,@.-]{0,1023})$"
+            }
+        },
+        "com.amazonaws.chatbot#GuardrailPolicyArnList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.chatbot#GuardrailPolicyArn"
+            }
+        },
+        "com.amazonaws.chatbot#InternalServiceError": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.chatbot#ErrorMessage"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Customer/consumer-facing internal service exception.\n        https://w.amazon.com/index.php/AWS/API_Standards/Exceptions#InternalServiceError",
+                "smithy.api#error": "server",
+                "smithy.api#httpError": 500
+            }
+        },
+        "com.amazonaws.chatbot#InvalidParameterException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.chatbot#ErrorMessage"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Your request input doesn't meet the constraints that AWS Chatbot requires.",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400
+            }
+        },
+        "com.amazonaws.chatbot#InvalidRequestException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.chatbot#ErrorMessage"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Your request input doesn't meet the constraints that AWS Chatbot requires.",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400
+            }
+        },
+        "com.amazonaws.chatbot#LimitExceededException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.chatbot#ErrorMessage"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "You have exceeded a service limit for AWS Chatbot.",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 403
+            }
+        },
+        "com.amazonaws.chatbot#ListMicrosoftTeamsChannelConfigurations": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.chatbot#ListTeamsChannelConfigurationsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.chatbot#ListTeamsChannelConfigurationsResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.chatbot#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.chatbot#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.chatbot#ListTeamsChannelConfigurationsException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "Lists MS Teams Channel Configurations optionally filtered by TeamId",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/list-ms-teams-channel-configurations",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "pageSize": "MaxResults"
+                }
+            }
+        },
+        "com.amazonaws.chatbot#ListMicrosoftTeamsConfiguredTeams": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.chatbot#ListMicrosoftTeamsConfiguredTeamsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.chatbot#ListMicrosoftTeamsConfiguredTeamsResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.chatbot#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.chatbot#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.chatbot#ListMicrosoftTeamsConfiguredTeamsException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "Lists all authorized MS teams for AWS Account",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/list-ms-teams-configured-teams",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "pageSize": "MaxResults"
+                }
+            }
+        },
+        "com.amazonaws.chatbot#ListMicrosoftTeamsConfiguredTeamsException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.chatbot#ErrorMessage"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "We can’t process your request right now because of a server issue. Try again later.",
+                "smithy.api#error": "server",
+                "smithy.api#httpError": 500
+            }
+        },
+        "com.amazonaws.chatbot#ListMicrosoftTeamsConfiguredTeamsRequest": {
+            "type": "structure",
+            "members": {
+                "MaxResults": {
+                    "target": "com.amazonaws.chatbot#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "The maximum number of results to include in the response. If more results exist than the specified MaxResults value, a token is included in the response so that the remaining results can be retrieved."
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.chatbot#PaginationToken",
+                    "traits": {
+                        "smithy.api#documentation": "An optional token returned from a prior request. Use this token for pagination of results from this action. If this parameter is specified, the response includes only results beyond the token, up to the value specified by MaxResults."
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.chatbot#ListMicrosoftTeamsConfiguredTeamsResult": {
+            "type": "structure",
+            "members": {
+                "ConfiguredTeams": {
+                    "target": "com.amazonaws.chatbot#ConfiguredTeamsList",
+                    "traits": {
+                        "smithy.api#documentation": "A list of teams in Microsoft Teams that have been configured with AWS Chatbot."
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.chatbot#PaginationToken",
+                    "traits": {
+                        "smithy.api#documentation": "An optional token returned from a prior request. Use this token for pagination of results from this action. If this parameter is specified, the response includes only results beyond the token, up to the value specified by MaxResults."
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.chatbot#ListMicrosoftTeamsUserIdentities": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.chatbot#ListMicrosoftTeamsUserIdentitiesRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.chatbot#ListMicrosoftTeamsUserIdentitiesResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.chatbot#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.chatbot#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.chatbot#ListMicrosoftTeamsUserIdentitiesException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "Lists all Microsoft Teams user identities with a mapped role.",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/list-ms-teams-user-identities",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "pageSize": "MaxResults"
+                }
+            }
+        },
+        "com.amazonaws.chatbot#ListMicrosoftTeamsUserIdentitiesException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.chatbot#ErrorMessage"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "We can’t process your request right now because of a server issue. Try again later.",
+                "smithy.api#error": "server",
+                "smithy.api#httpError": 500
+            }
+        },
+        "com.amazonaws.chatbot#ListMicrosoftTeamsUserIdentitiesRequest": {
+            "type": "structure",
+            "members": {
+                "ChatConfigurationArn": {
+                    "target": "com.amazonaws.chatbot#ChatConfigurationArn",
+                    "traits": {
+                        "smithy.api#documentation": "The ARN of the MicrosoftTeamsChannelConfiguration associated with the user identities to list."
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.chatbot#PaginationToken",
+                    "traits": {
+                        "smithy.api#documentation": "An optional token returned from a prior request. Use this token for pagination of results from this action. If this parameter is specified, the response includes only results beyond the token, up to the value specified by MaxResults."
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.chatbot#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "The maximum number of results to include in the response. If more results exist than the specified MaxResults value, a token is included in the response so that the remaining results can be retrieved."
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.chatbot#ListMicrosoftTeamsUserIdentitiesResult": {
+            "type": "structure",
+            "members": {
+                "TeamsUserIdentities": {
+                    "target": "com.amazonaws.chatbot#TeamsUserIdentitiesList",
+                    "traits": {
+                        "smithy.api#documentation": "User level permissions associated to a channel configuration."
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.chatbot#PaginationToken",
+                    "traits": {
+                        "smithy.api#documentation": "An optional token returned from a prior request. Use this token for pagination of results from this action. If this parameter is specified, the response includes only results beyond the token, up to the value specified by MaxResults."
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.chatbot#ListTagsForResource": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.chatbot#ListTagsForResourceRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.chatbot#ListTagsForResourceResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.chatbot#InternalServiceError"
+                },
+                {
+                    "target": "com.amazonaws.chatbot#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.chatbot#ServiceUnavailableException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "Retrieves the list of tags applied to a configuration.",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/list-tags-for-resource",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.chatbot#ListTagsForResourceRequest": {
+            "type": "structure",
+            "members": {
+                "ResourceARN": {
+                    "target": "com.amazonaws.chatbot#AmazonResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "The ARN of the configuration.",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.chatbot#ListTagsForResourceResponse": {
+            "type": "structure",
+            "members": {
+                "Tags": {
+                    "target": "com.amazonaws.chatbot#TagList",
+                    "traits": {
+                        "smithy.api#documentation": "A list of tags applied to the configuration."
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.chatbot#ListTeamsChannelConfigurationsException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.chatbot#ErrorMessage"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "We can’t process your request right now because of a server issue. Try again later.",
+                "smithy.api#error": "server",
+                "smithy.api#httpError": 500
+            }
+        },
+        "com.amazonaws.chatbot#ListTeamsChannelConfigurationsRequest": {
+            "type": "structure",
+            "members": {
+                "MaxResults": {
+                    "target": "com.amazonaws.chatbot#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "The maximum number of results to include in the response. If more results exist than the specified MaxResults value, a token is included in the response so that the remaining results can be retrieved."
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.chatbot#PaginationToken",
+                    "traits": {
+                        "smithy.api#documentation": "An optional token returned from a prior request. Use this token for pagination of results from this action. If this parameter is specified, the response includes only results beyond the token, up to the value specified by MaxResults."
+                    }
+                },
+                "TeamId": {
+                    "target": "com.amazonaws.chatbot#UUID",
+                    "traits": {
+                        "smithy.api#documentation": "The ID of the Microsoft Team authorized with AWS Chatbot. To get the team ID, you must perform the initial authorization flow with Microsoft Teams in the AWS Chatbot console. Then you can copy and paste the team ID from the console. For more details, see steps 1-4 in Get started with Microsoft Teams in the AWS Chatbot Administrator Guide."
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.chatbot#ListTeamsChannelConfigurationsResult": {
+            "type": "structure",
+            "members": {
+                "NextToken": {
+                    "target": "com.amazonaws.chatbot#PaginationToken",
+                    "traits": {
+                        "smithy.api#documentation": "An optional token returned from a prior request. Use this token for pagination of results from this action. If this parameter is specified, the response includes only results beyond the token, up to the value specified by MaxResults."
+                    }
+                },
+                "TeamChannelConfigurations": {
+                    "target": "com.amazonaws.chatbot#TeamChannelConfigurationsList",
+                    "traits": {
+                        "smithy.api#documentation": "A list of AWS Chatbot channel configurations for Microsoft Teams."
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.chatbot#MaxResults": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 100
+                }
+            }
+        },
+        "com.amazonaws.chatbot#PaginationToken": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1276
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9=\\/+_.\\-,#:\\\\\"{}]{4,1276}$"
+            }
+        },
+        "com.amazonaws.chatbot#ResourceNotFoundException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.chatbot#ErrorMessage"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "We were not able to find the resource for your request.",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 404
+            }
+        },
+        "com.amazonaws.chatbot#ServiceUnavailableException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.chatbot#ErrorMessage"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "We can’t process your request right now because of a server issue. Try again later.",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 429
+            }
+        },
+        "com.amazonaws.chatbot#SlackChannelConfiguration": {
+            "type": "structure",
+            "members": {
+                "SlackTeamName": {
+                    "target": "com.amazonaws.chatbot#SlackTeamName",
+                    "traits": {
+                        "smithy.api#documentation": "Name of the Slack Workspace.",
+                        "smithy.api#required": {}
+                    }
+                },
+                "SlackTeamId": {
+                    "target": "com.amazonaws.chatbot#SlackTeamId",
+                    "traits": {
+                        "smithy.api#documentation": "The ID of the Slack workspace authorized with AWS Chatbot.",
+                        "smithy.api#required": {}
+                    }
+                },
+                "SlackChannelId": {
+                    "target": "com.amazonaws.chatbot#SlackChannelId",
+                    "traits": {
+                        "smithy.api#documentation": "The ID of the Slack channel. To get the ID, open Slack, right click on the channel name in the left pane, then choose Copy Link. The channel ID is the 9-character string at the end of the URL. For example, ABCBBLZZZ.",
+                        "smithy.api#required": {}
+                    }
+                },
+                "SlackChannelName": {
+                    "target": "com.amazonaws.chatbot#SlackChannelDisplayName",
+                    "traits": {
+                        "smithy.api#documentation": "The name of the Slack Channel.",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ChatConfigurationArn": {
+                    "target": "com.amazonaws.chatbot#ChatConfigurationArn",
+                    "traits": {
+                        "smithy.api#documentation": "The ARN of the SlackChannelConfiguration.",
+                        "smithy.api#required": {}
+                    }
+                },
+                "IamRoleArn": {
+                    "target": "com.amazonaws.chatbot#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "The ARN of the IAM role that defines the permissions for AWS Chatbot. This is a user-defined role that AWS Chatbot will assume. This is not the service-linked role. For more information, see IAM Policies for AWS Chatbot.",
+                        "smithy.api#required": {}
+                    }
+                },
+                "SnsTopicArns": {
+                    "target": "com.amazonaws.chatbot#SnsTopicArnList",
+                    "traits": {
+                        "smithy.api#documentation": "The ARNs of the SNS topics that deliver notifications to AWS Chatbot.",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ConfigurationName": {
+                    "target": "com.amazonaws.chatbot#ConfigurationName",
+                    "traits": {
+                        "smithy.api#documentation": "The name of the configuration."
+                    }
+                },
+                "LoggingLevel": {
+                    "target": "com.amazonaws.chatbot#CustomerCwLogLevel",
+                    "traits": {
+                        "smithy.api#documentation": "Logging levels include ERROR, INFO, or NONE."
+                    }
+                },
+                "GuardrailPolicyArns": {
+                    "target": "com.amazonaws.chatbot#GuardrailPolicyArnList",
+                    "traits": {
+                        "smithy.api#documentation": "The list of IAM policy ARNs that are applied as channel guardrails. The AWS managed 'AdministratorAccess' policy is applied by default if this is not set."
+                    }
+                },
+                "UserAuthorizationRequired": {
+                    "target": "com.amazonaws.chatbot#BooleanAccountPreference",
+                    "traits": {
+                        "smithy.api#documentation": "Enables use of a user role requirement in your chat configuration."
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.chatbot#Tags",
+                    "traits": {
+                        "smithy.api#documentation": "A list of tags applied to the configuration."
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "An AWS Chatbot configuration for Slack."
+            }
+        },
+        "com.amazonaws.chatbot#SlackChannelConfigurationList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.chatbot#SlackChannelConfiguration"
+            }
+        },
+        "com.amazonaws.chatbot#SlackChannelDisplayName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 255
+                }
+            }
+        },
+        "com.amazonaws.chatbot#SlackChannelId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 255
+                },
+                "smithy.api#pattern": "^[A-Za-z0-9]+$"
+            }
+        },
+        "com.amazonaws.chatbot#SlackTeamId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 255
+                },
+                "smithy.api#pattern": "^[0-9A-Z]{1,255}$"
+            }
+        },
+        "com.amazonaws.chatbot#SlackTeamName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 255
+                }
+            }
+        },
+        "com.amazonaws.chatbot#SlackUserId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 255
+                },
+                "smithy.api#pattern": "^(.*)$"
+            }
+        },
+        "com.amazonaws.chatbot#SlackUserIdentitiesList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.chatbot#SlackUserIdentity"
+            }
+        },
+        "com.amazonaws.chatbot#SlackUserIdentity": {
+            "type": "structure",
+            "members": {
+                "IamRoleArn": {
+                    "target": "com.amazonaws.chatbot#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "The ARN of the IAM role that defines the permissions for AWS Chatbot. This is a user-defined role that AWS Chatbot will assume. This is not the service-linked role. For more information, see IAM Policies for AWS Chatbot.",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ChatConfigurationArn": {
+                    "target": "com.amazonaws.chatbot#ChatConfigurationArn",
+                    "traits": {
+                        "smithy.api#documentation": "The ARN of the SlackChannelConfiguration associated with the user identity.",
+                        "smithy.api#required": {}
+                    }
+                },
+                "SlackTeamId": {
+                    "target": "com.amazonaws.chatbot#SlackTeamId",
+                    "traits": {
+                        "smithy.api#documentation": "The ID of the Slack workspace authorized with AWS Chatbot.",
+                        "smithy.api#required": {}
+                    }
+                },
+                "SlackUserId": {
+                    "target": "com.amazonaws.chatbot#SlackUserId",
+                    "traits": {
+                        "smithy.api#documentation": "The ID of the user in Slack.",
+                        "smithy.api#required": {}
+                    }
+                },
+                "AwsUserIdentity": {
+                    "target": "com.amazonaws.chatbot#AwsUserIdentity",
+                    "traits": {
+                        "smithy.api#documentation": "The AWS user identity ARN used to associate a Slack User Identity with an IAM Role."
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Identifes a User level permission for a channel configuration."
+            }
+        },
+        "com.amazonaws.chatbot#SlackWorkspace": {
+            "type": "structure",
+            "members": {
+                "SlackTeamId": {
+                    "target": "com.amazonaws.chatbot#SlackTeamId",
+                    "traits": {
+                        "smithy.api#documentation": "The ID of the Slack workspace authorized with AWS Chatbot.",
+                        "smithy.api#required": {}
+                    }
+                },
+                "SlackTeamName": {
+                    "target": "com.amazonaws.chatbot#SlackTeamName",
+                    "traits": {
+                        "smithy.api#documentation": "Name of the Slack Workspace.",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "A Slack Workspace."
+            }
+        },
+        "com.amazonaws.chatbot#SlackWorkspacesList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.chatbot#SlackWorkspace"
+            }
+        },
+        "com.amazonaws.chatbot#SnsTopicArnList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.chatbot#Arn"
+            }
+        },
+        "com.amazonaws.chatbot#String": {
+            "type": "string"
+        },
+        "com.amazonaws.chatbot#Tag": {
+            "type": "structure",
+            "members": {
+                "TagKey": {
+                    "target": "com.amazonaws.chatbot#TagKey",
+                    "traits": {
+                        "smithy.api#documentation": "The tag key.",
+                        "smithy.api#required": {}
+                    }
+                },
+                "TagValue": {
+                    "target": "com.amazonaws.chatbot#TagValue",
+                    "traits": {
+                        "smithy.api#documentation": "The tag value.",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "A tag applied to the configuration."
+            }
+        },
+        "com.amazonaws.chatbot#TagKey": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 128
+                }
+            }
+        },
+        "com.amazonaws.chatbot#TagKeyList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.chatbot#TagKey"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 200
+                }
+            }
+        },
+        "com.amazonaws.chatbot#TagList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.chatbot#Tag"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 200
+                }
+            }
+        },
+        "com.amazonaws.chatbot#TagResource": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.chatbot#TagResourceRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.chatbot#TagResourceResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.chatbot#InternalServiceError"
+                },
+                {
+                    "target": "com.amazonaws.chatbot#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.chatbot#ServiceUnavailableException"
+                },
+                {
+                    "target": "com.amazonaws.chatbot#TooManyTagsException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "Applies the supplied tags to a configuration.",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/tag-resource",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.chatbot#TagResourceRequest": {
+            "type": "structure",
+            "members": {
+                "ResourceARN": {
+                    "target": "com.amazonaws.chatbot#AmazonResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "The ARN of the configuration.",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.chatbot#TagList",
+                    "traits": {
+                        "smithy.api#documentation": "A list of tags to apply to the configuration.",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.chatbot#TagResourceResponse": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.chatbot#TagValue": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 256
+                }
+            }
+        },
+        "com.amazonaws.chatbot#Tags": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.chatbot#Tag"
+            }
+        },
+        "com.amazonaws.chatbot#TeamChannelConfigurationsList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.chatbot#TeamsChannelConfiguration"
+            }
+        },
+        "com.amazonaws.chatbot#TeamName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 255
+                },
+                "smithy.api#pattern": "^(.*)$"
+            }
+        },
+        "com.amazonaws.chatbot#TeamsChannelConfiguration": {
+            "type": "structure",
+            "members": {
+                "ChannelId": {
+                    "target": "com.amazonaws.chatbot#TeamsChannelId",
+                    "traits": {
+                        "smithy.api#documentation": "The ID of the Microsoft Teams channel.",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ChannelName": {
+                    "target": "com.amazonaws.chatbot#TeamsChannelName",
+                    "traits": {
+                        "smithy.api#documentation": "The name of the Microsoft Teams channel."
+                    }
+                },
+                "TeamId": {
+                    "target": "com.amazonaws.chatbot#UUID",
+                    "traits": {
+                        "smithy.api#documentation": "The ID of the Microsoft Team authorized with AWS Chatbot. To get the team ID, you must perform the initial authorization flow with Microsoft Teams in the AWS Chatbot console. Then you can copy and paste the team ID from the console. For more details, see steps 1-4 in Get started with Microsoft Teams in the AWS Chatbot Administrator Guide.",
+                        "smithy.api#required": {}
+                    }
+                },
+                "TeamName": {
+                    "target": "com.amazonaws.chatbot#String",
+                    "traits": {
+                        "smithy.api#documentation": "The name of the Microsoft Teams Team."
+                    }
+                },
+                "TenantId": {
+                    "target": "com.amazonaws.chatbot#UUID",
+                    "traits": {
+                        "smithy.api#documentation": "The ID of the Microsoft Teams tenant.",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ChatConfigurationArn": {
+                    "target": "com.amazonaws.chatbot#ChatConfigurationArn",
+                    "traits": {
+                        "smithy.api#documentation": "The ARN of the MicrosoftTeamsChannelConfiguration.",
+                        "smithy.api#required": {}
+                    }
+                },
+                "IamRoleArn": {
+                    "target": "com.amazonaws.chatbot#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "The ARN of the IAM role that defines the permissions for AWS Chatbot. This is a user-defined role that AWS Chatbot will assume. This is not the service-linked role. For more information, see IAM Policies for AWS Chatbot.",
+                        "smithy.api#required": {}
+                    }
+                },
+                "SnsTopicArns": {
+                    "target": "com.amazonaws.chatbot#SnsTopicArnList",
+                    "traits": {
+                        "smithy.api#documentation": "The ARNs of the SNS topics that deliver notifications to AWS Chatbot.",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ConfigurationName": {
+                    "target": "com.amazonaws.chatbot#ConfigurationName",
+                    "traits": {
+                        "smithy.api#documentation": "The name of the configuration."
+                    }
+                },
+                "LoggingLevel": {
+                    "target": "com.amazonaws.chatbot#CustomerCwLogLevel",
+                    "traits": {
+                        "smithy.api#documentation": "Logging levels include ERROR, INFO, or NONE."
+                    }
+                },
+                "GuardrailPolicyArns": {
+                    "target": "com.amazonaws.chatbot#GuardrailPolicyArnList",
+                    "traits": {
+                        "smithy.api#documentation": "The list of IAM policy ARNs that are applied as channel guardrails. The AWS managed 'AdministratorAccess' policy is applied by default if this is not set."
+                    }
+                },
+                "UserAuthorizationRequired": {
+                    "target": "com.amazonaws.chatbot#BooleanAccountPreference",
+                    "traits": {
+                        "smithy.api#documentation": "Enables use of a user role requirement in your chat configuration."
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.chatbot#Tags",
+                    "traits": {
+                        "smithy.api#documentation": "A list of tags applied to the configuration."
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "An AWS Chatbot configuration for Microsoft Teams."
+            }
+        },
+        "com.amazonaws.chatbot#TeamsChannelId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 255
+                },
+                "smithy.api#pattern": "^([a-zA-Z0-9-_=+\\/.,])*%3[aA]([a-zA-Z0-9-_=+\\/.,])*%40([a-zA-Z0-9-_=+\\/.,])*$"
+            }
+        },
+        "com.amazonaws.chatbot#TeamsChannelName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1000
+                },
+                "smithy.api#pattern": "^(.*)$"
+            }
+        },
+        "com.amazonaws.chatbot#TeamsUserIdentitiesList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.chatbot#TeamsUserIdentity"
+            }
+        },
+        "com.amazonaws.chatbot#TeamsUserIdentity": {
+            "type": "structure",
+            "members": {
+                "IamRoleArn": {
+                    "target": "com.amazonaws.chatbot#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "The ARN of the IAM role that defines the permissions for AWS Chatbot. This is a user-defined role that AWS Chatbot will assume. This is not the service-linked role. For more information, see IAM Policies for AWS Chatbot.",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ChatConfigurationArn": {
+                    "target": "com.amazonaws.chatbot#ChatConfigurationArn",
+                    "traits": {
+                        "smithy.api#documentation": "The ARN of the MicrosoftTeamsChannelConfiguration associated with the user identity.",
+                        "smithy.api#required": {}
+                    }
+                },
+                "TeamId": {
+                    "target": "com.amazonaws.chatbot#UUID",
+                    "traits": {
+                        "smithy.api#documentation": "The ID of the Microsoft Team authorized with AWS Chatbot. To get the team ID, you must perform the initial authorization flow with Microsoft Teams in the AWS Chatbot console. Then you can copy and paste the team ID from the console. For more details, see steps 1-4 in Get started with Microsoft Teams in the AWS Chatbot Administrator Guide.",
+                        "smithy.api#required": {}
+                    }
+                },
+                "UserId": {
+                    "target": "com.amazonaws.chatbot#UUID",
+                    "traits": {
+                        "smithy.api#documentation": "Id from Microsoft Teams for user."
+                    }
+                },
+                "AwsUserIdentity": {
+                    "target": "com.amazonaws.chatbot#AwsUserIdentity",
+                    "traits": {
+                        "smithy.api#documentation": "The AWS user identity ARN used to associate a Microsoft Teams User Identity with an IAM Role."
+                    }
+                },
+                "TeamsChannelId": {
+                    "target": "com.amazonaws.chatbot#TeamsChannelId",
+                    "traits": {
+                        "smithy.api#documentation": "The ID of the Microsoft Teams channel."
+                    }
+                },
+                "TeamsTenantId": {
+                    "target": "com.amazonaws.chatbot#UUID",
+                    "traits": {
+                        "smithy.api#documentation": "The ID of the Microsoft Teams tenant."
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Identifes a user level permission for a channel configuration."
+            }
+        },
+        "com.amazonaws.chatbot#TooManyTagsException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.chatbot#ErrorMessage"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "The supplied list of tags contains too many tags.",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400
+            }
+        },
+        "com.amazonaws.chatbot#UUID": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 36,
+                    "max": 36
+                },
+                "smithy.api#pattern": "^[0-9A-Fa-f]{8}(?:-[0-9A-Fa-f]{4}){3}-[0-9A-Fa-f]{12}$"
+            }
+        },
+        "com.amazonaws.chatbot#UntagResource": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.chatbot#UntagResourceRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.chatbot#UntagResourceResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.chatbot#InternalServiceError"
+                },
+                {
+                    "target": "com.amazonaws.chatbot#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.chatbot#ServiceUnavailableException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "Removes the supplied tags from a configuration",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/untag-resource",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.chatbot#UntagResourceRequest": {
+            "type": "structure",
+            "members": {
+                "ResourceARN": {
+                    "target": "com.amazonaws.chatbot#AmazonResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "The ARN of the configuration.",
+                        "smithy.api#required": {}
+                    }
+                },
+                "TagKeys": {
+                    "target": "com.amazonaws.chatbot#TagKeyList",
+                    "traits": {
+                        "smithy.api#documentation": "A list of tag keys to remove from the configuration.",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.chatbot#UntagResourceResponse": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.chatbot#UpdateAccountPreferences": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.chatbot#UpdateAccountPreferencesRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.chatbot#UpdateAccountPreferencesResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.chatbot#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.chatbot#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.chatbot#UpdateAccountPreferencesException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "Update Chatbot account level preferences",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/update-account-preferences",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.chatbot#UpdateAccountPreferencesException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.chatbot#ErrorMessage"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "We can’t process your request right now because of a server issue. Try again later.",
+                "smithy.api#error": "server",
+                "smithy.api#httpError": 500
+            }
+        },
+        "com.amazonaws.chatbot#UpdateAccountPreferencesRequest": {
+            "type": "structure",
+            "members": {
+                "UserAuthorizationRequired": {
+                    "target": "com.amazonaws.chatbot#BooleanAccountPreference",
+                    "traits": {
+                        "smithy.api#documentation": "Enables use of a user role requirement in your chat configuration."
+                    }
+                },
+                "TrainingDataCollectionEnabled": {
+                    "target": "com.amazonaws.chatbot#BooleanAccountPreference",
+                    "traits": {
+                        "smithy.api#documentation": "Turns on training data collection. This helps improve the AWS Chatbot experience by allowing AWS Chatbot to store and use your customer information, such as AWS Chatbot configurations, notifications, user inputs, AWS Chatbot generated responses, and interaction data. This data helps us to continuously improve and develop Artificial Intelligence (AI) technologies. Your data is not shared with any third parties and is protected using sophisticated controls to prevent unauthorized access and misuse. AWS Chatbot does not store or use interactions in chat channels with Amazon Q for training AWS Chatbot’s AI technologies."
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.chatbot#UpdateAccountPreferencesResult": {
+            "type": "structure",
+            "members": {
+                "AccountPreferences": {
+                    "target": "com.amazonaws.chatbot#AccountPreferences",
+                    "traits": {
+                        "smithy.api#documentation": "Preferences which apply for AWS Chatbot usage in the calling AWS account."
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.chatbot#UpdateChimeWebhookConfiguration": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.chatbot#UpdateChimeWebhookConfigurationRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.chatbot#UpdateChimeWebhookConfigurationResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.chatbot#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.chatbot#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.chatbot#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.chatbot#UpdateChimeWebhookConfigurationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "Updates a Chime Webhook Configuration",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/update-chime-webhook-configuration",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.chatbot#UpdateChimeWebhookConfigurationException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.chatbot#ErrorMessage"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "We can’t process your request right now because of a server issue. Try again later.",
+                "smithy.api#error": "server",
+                "smithy.api#httpError": 500
+            }
+        },
+        "com.amazonaws.chatbot#UpdateChimeWebhookConfigurationRequest": {
+            "type": "structure",
+            "members": {
+                "ChatConfigurationArn": {
+                    "target": "com.amazonaws.chatbot#ChatConfigurationArn",
+                    "traits": {
+                        "smithy.api#documentation": "The ARN of the ChimeWebhookConfiguration to update.",
+                        "smithy.api#required": {}
+                    }
+                },
+                "WebhookDescription": {
+                    "target": "com.amazonaws.chatbot#ChimeWebhookDescription",
+                    "traits": {
+                        "smithy.api#documentation": "Description of the webhook. Recommend using the convention `RoomName/WebhookName`. See Chime setup tutorial for more details: https://docs.aws.amazon.com/chatbot/latest/adminguide/chime-setup.html."
+                    }
+                },
+                "WebhookUrl": {
+                    "target": "com.amazonaws.chatbot#ChimeWebhookUrl",
+                    "traits": {
+                        "smithy.api#documentation": "URL for the Chime webhook."
+                    }
+                },
+                "SnsTopicArns": {
+                    "target": "com.amazonaws.chatbot#SnsTopicArnList",
+                    "traits": {
+                        "smithy.api#documentation": "The ARNs of the SNS topics that deliver notifications to AWS Chatbot."
+                    }
+                },
+                "IamRoleArn": {
+                    "target": "com.amazonaws.chatbot#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "The ARN of the IAM role that defines the permissions for AWS Chatbot. This is a user-defined role that AWS Chatbot will assume. This is not the service-linked role. For more information, see IAM Policies for AWS Chatbot."
+                    }
+                },
+                "LoggingLevel": {
+                    "target": "com.amazonaws.chatbot#CustomerCwLogLevel",
+                    "traits": {
+                        "smithy.api#documentation": "Logging levels include ERROR, INFO, or NONE."
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.chatbot#UpdateChimeWebhookConfigurationResult": {
+            "type": "structure",
+            "members": {
+                "WebhookConfiguration": {
+                    "target": "com.amazonaws.chatbot#ChimeWebhookConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "Chime webhook configuration."
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.chatbot#UpdateMicrosoftTeamsChannelConfiguration": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.chatbot#UpdateTeamsChannelConfigurationRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.chatbot#UpdateTeamsChannelConfigurationResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.chatbot#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.chatbot#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.chatbot#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.chatbot#UpdateTeamsChannelConfigurationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "Updates MS Teams Channel Configuration",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/update-ms-teams-channel-configuration",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.chatbot#UpdateSlackChannelConfiguration": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.chatbot#UpdateSlackChannelConfigurationRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.chatbot#UpdateSlackChannelConfigurationResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.chatbot#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.chatbot#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.chatbot#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.chatbot#UpdateSlackChannelConfigurationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "Updates Slack Channel Configuration",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/update-slack-channel-configuration",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.chatbot#UpdateSlackChannelConfigurationException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.chatbot#ErrorMessage"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "We can’t process your request right now because of a server issue. Try again later.",
+                "smithy.api#error": "server",
+                "smithy.api#httpError": 500
+            }
+        },
+        "com.amazonaws.chatbot#UpdateSlackChannelConfigurationRequest": {
+            "type": "structure",
+            "members": {
+                "ChatConfigurationArn": {
+                    "target": "com.amazonaws.chatbot#ChatConfigurationArn",
+                    "traits": {
+                        "smithy.api#documentation": "The ARN of the SlackChannelConfiguration to update.",
+                        "smithy.api#required": {}
+                    }
+                },
+                "SlackChannelId": {
+                    "target": "com.amazonaws.chatbot#SlackChannelId",
+                    "traits": {
+                        "smithy.api#documentation": "The ID of the Slack channel. To get the ID, open Slack, right click on the channel name in the left pane, then choose Copy Link. The channel ID is the 9-character string at the end of the URL. For example, ABCBBLZZZ.",
+                        "smithy.api#required": {}
+                    }
+                },
+                "SlackChannelName": {
+                    "target": "com.amazonaws.chatbot#SlackChannelDisplayName",
+                    "traits": {
+                        "smithy.api#documentation": "The name of the Slack Channel."
+                    }
+                },
+                "SnsTopicArns": {
+                    "target": "com.amazonaws.chatbot#SnsTopicArnList",
+                    "traits": {
+                        "smithy.api#documentation": "The ARNs of the SNS topics that deliver notifications to AWS Chatbot."
+                    }
+                },
+                "IamRoleArn": {
+                    "target": "com.amazonaws.chatbot#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "The ARN of the IAM role that defines the permissions for AWS Chatbot. This is a user-defined role that AWS Chatbot will assume. This is not the service-linked role. For more information, see IAM Policies for AWS Chatbot."
+                    }
+                },
+                "LoggingLevel": {
+                    "target": "com.amazonaws.chatbot#CustomerCwLogLevel",
+                    "traits": {
+                        "smithy.api#documentation": "Logging levels include ERROR, INFO, or NONE."
+                    }
+                },
+                "GuardrailPolicyArns": {
+                    "target": "com.amazonaws.chatbot#GuardrailPolicyArnList",
+                    "traits": {
+                        "smithy.api#documentation": "The list of IAM policy ARNs that are applied as channel guardrails. The AWS managed 'AdministratorAccess' policy is applied by default if this is not set."
+                    }
+                },
+                "UserAuthorizationRequired": {
+                    "target": "com.amazonaws.chatbot#BooleanAccountPreference",
+                    "traits": {
+                        "smithy.api#documentation": "Enables use of a user role requirement in your chat configuration."
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.chatbot#UpdateSlackChannelConfigurationResult": {
+            "type": "structure",
+            "members": {
+                "ChannelConfiguration": {
+                    "target": "com.amazonaws.chatbot#SlackChannelConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "The configuration for a Slack channel configured with AWS Chatbot."
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.chatbot#UpdateTeamsChannelConfigurationException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.chatbot#ErrorMessage"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "We can’t process your request right now because of a server issue. Try again later.",
+                "smithy.api#error": "server",
+                "smithy.api#httpError": 500
+            }
+        },
+        "com.amazonaws.chatbot#UpdateTeamsChannelConfigurationRequest": {
+            "type": "structure",
+            "members": {
+                "ChatConfigurationArn": {
+                    "target": "com.amazonaws.chatbot#ChatConfigurationArn",
+                    "traits": {
+                        "smithy.api#documentation": "The ARN of the MicrosoftTeamsChannelConfiguration to update.",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ChannelId": {
+                    "target": "com.amazonaws.chatbot#TeamsChannelId",
+                    "traits": {
+                        "smithy.api#documentation": "The ID of the Microsoft Teams channel.",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ChannelName": {
+                    "target": "com.amazonaws.chatbot#TeamsChannelName",
+                    "traits": {
+                        "smithy.api#documentation": "The name of the Microsoft Teams channel."
+                    }
+                },
+                "SnsTopicArns": {
+                    "target": "com.amazonaws.chatbot#SnsTopicArnList",
+                    "traits": {
+                        "smithy.api#documentation": "The ARNs of the SNS topics that deliver notifications to AWS Chatbot."
+                    }
+                },
+                "IamRoleArn": {
+                    "target": "com.amazonaws.chatbot#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "The ARN of the IAM role that defines the permissions for AWS Chatbot. This is a user-defined role that AWS Chatbot will assume. This is not the service-linked role. For more information, see IAM Policies for AWS Chatbot."
+                    }
+                },
+                "LoggingLevel": {
+                    "target": "com.amazonaws.chatbot#CustomerCwLogLevel",
+                    "traits": {
+                        "smithy.api#documentation": "Logging levels include ERROR, INFO, or NONE."
+                    }
+                },
+                "GuardrailPolicyArns": {
+                    "target": "com.amazonaws.chatbot#GuardrailPolicyArnList",
+                    "traits": {
+                        "smithy.api#documentation": "The list of IAM policy ARNs that are applied as channel guardrails. The AWS managed 'AdministratorAccess' policy is applied by default if this is not set."
+                    }
+                },
+                "UserAuthorizationRequired": {
+                    "target": "com.amazonaws.chatbot#BooleanAccountPreference",
+                    "traits": {
+                        "smithy.api#documentation": "Enables use of a user role requirement in your chat configuration."
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.chatbot#UpdateTeamsChannelConfigurationResult": {
+            "type": "structure",
+            "members": {
+                "ChannelConfiguration": {
+                    "target": "com.amazonaws.chatbot#TeamsChannelConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "The configuration for a Microsoft Teams channel configured with AWS Chatbot."
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.chatbot#WheatleyOrchestration_20171011": {
+            "type": "service",
+            "version": "2017-10-11",
+            "operations": [
+                {
+                    "target": "com.amazonaws.chatbot#CreateChimeWebhookConfiguration"
+                },
+                {
+                    "target": "com.amazonaws.chatbot#CreateMicrosoftTeamsChannelConfiguration"
+                },
+                {
+                    "target": "com.amazonaws.chatbot#CreateSlackChannelConfiguration"
+                },
+                {
+                    "target": "com.amazonaws.chatbot#DeleteChimeWebhookConfiguration"
+                },
+                {
+                    "target": "com.amazonaws.chatbot#DeleteMicrosoftTeamsChannelConfiguration"
+                },
+                {
+                    "target": "com.amazonaws.chatbot#DeleteMicrosoftTeamsConfiguredTeam"
+                },
+                {
+                    "target": "com.amazonaws.chatbot#DeleteMicrosoftTeamsUserIdentity"
+                },
+                {
+                    "target": "com.amazonaws.chatbot#DeleteSlackChannelConfiguration"
+                },
+                {
+                    "target": "com.amazonaws.chatbot#DeleteSlackUserIdentity"
+                },
+                {
+                    "target": "com.amazonaws.chatbot#DeleteSlackWorkspaceAuthorization"
+                },
+                {
+                    "target": "com.amazonaws.chatbot#DescribeChimeWebhookConfigurations"
+                },
+                {
+                    "target": "com.amazonaws.chatbot#DescribeSlackChannelConfigurations"
+                },
+                {
+                    "target": "com.amazonaws.chatbot#DescribeSlackUserIdentities"
+                },
+                {
+                    "target": "com.amazonaws.chatbot#DescribeSlackWorkspaces"
+                },
+                {
+                    "target": "com.amazonaws.chatbot#GetAccountPreferences"
+                },
+                {
+                    "target": "com.amazonaws.chatbot#GetMicrosoftTeamsChannelConfiguration"
+                },
+                {
+                    "target": "com.amazonaws.chatbot#ListMicrosoftTeamsChannelConfigurations"
+                },
+                {
+                    "target": "com.amazonaws.chatbot#ListMicrosoftTeamsConfiguredTeams"
+                },
+                {
+                    "target": "com.amazonaws.chatbot#ListMicrosoftTeamsUserIdentities"
+                },
+                {
+                    "target": "com.amazonaws.chatbot#ListTagsForResource"
+                },
+                {
+                    "target": "com.amazonaws.chatbot#TagResource"
+                },
+                {
+                    "target": "com.amazonaws.chatbot#UntagResource"
+                },
+                {
+                    "target": "com.amazonaws.chatbot#UpdateAccountPreferences"
+                },
+                {
+                    "target": "com.amazonaws.chatbot#UpdateChimeWebhookConfiguration"
+                },
+                {
+                    "target": "com.amazonaws.chatbot#UpdateMicrosoftTeamsChannelConfiguration"
+                },
+                {
+                    "target": "com.amazonaws.chatbot#UpdateSlackChannelConfiguration"
+                }
+            ],
+            "traits": {
+                "aws.api#service": {
+                    "sdkId": "chatbot",
+                    "arnNamespace": "chatbot",
+                    "cloudFormationName": "Chatbot",
+                    "cloudTrailEventSource": "chatbot.amazonaws.com",
+                    "endpointPrefix": "chatbot"
+                },
+                "aws.auth#sigv4": {
+                    "name": "chatbot"
+                },
+                "aws.protocols#restJson1": {},
+                "smithy.api#documentation": "AWS Chatbot API",
+                "smithy.api#title": "AWS Chatbot",
+                "smithy.api#xmlNamespace": {
+                    "uri": "http://wheatley.amazonaws.com/orchestration/2017-10-11/"
+                },
+                "smithy.rules#endpointRuleSet": {
+                    "version": "1.0",
+                    "parameters": {
+                        "Region": {
+                            "builtIn": "AWS::Region",
+                            "required": false,
+                            "documentation": "The AWS region used to dispatch the request.",
+                            "type": "String"
+                        },
+                        "UseDualStack": {
+                            "builtIn": "AWS::UseDualStack",
+                            "required": true,
+                            "default": false,
+                            "documentation": "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.",
+                            "type": "Boolean"
+                        },
+                        "UseFIPS": {
+                            "builtIn": "AWS::UseFIPS",
+                            "required": true,
+                            "default": false,
+                            "documentation": "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.",
+                            "type": "Boolean"
+                        },
+                        "Endpoint": {
+                            "builtIn": "SDK::Endpoint",
+                            "required": false,
+                            "documentation": "Override the endpoint used to send this request",
+                            "type": "String"
+                        }
+                    },
+                    "rules": [
+                        {
+                            "conditions": [
+                                {
+                                    "fn": "isSet",
+                                    "argv": [
+                                        {
+                                            "ref": "Endpoint"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "rules": [
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "booleanEquals",
+                                            "argv": [
+                                                {
+                                                    "ref": "UseFIPS"
+                                                },
+                                                true
+                                            ]
+                                        }
+                                    ],
+                                    "error": "Invalid Configuration: FIPS and custom endpoint are not supported",
+                                    "type": "error"
+                                },
+                                {
+                                    "conditions": [],
+                                    "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "UseDualStack"
+                                                        },
+                                                        true
+                                                    ]
+                                                }
+                                            ],
+                                            "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
+                                            "type": "error"
+                                        },
+                                        {
+                                            "conditions": [],
+                                            "endpoint": {
+                                                "url": {
+                                                    "ref": "Endpoint"
+                                                },
+                                                "properties": {},
+                                                "headers": {}
+                                            },
+                                            "type": "endpoint"
+                                        }
+                                    ],
+                                    "type": "tree"
+                                }
+                            ],
+                            "type": "tree"
+                        },
+                        {
+                            "conditions": [],
+                            "rules": [
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "isSet",
+                                            "argv": [
+                                                {
+                                                    "ref": "Region"
+                                                }
+                                            ]
+                                        }
+                                    ],
+                                    "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "aws.partition",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "Region"
+                                                        }
+                                                    ],
+                                                    "assign": "PartitionResult"
+                                                }
+                                            ],
+                                            "rules": [
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseFIPS"
+                                                                },
+                                                                true
+                                                            ]
+                                                        },
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseDualStack"
+                                                                },
+                                                                true
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [
+                                                                {
+                                                                    "fn": "booleanEquals",
+                                                                    "argv": [
+                                                                        true,
+                                                                        {
+                                                                            "fn": "getAttr",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "ref": "PartitionResult"
+                                                                                },
+                                                                                "supportsFIPS"
+                                                                            ]
+                                                                        }
+                                                                    ]
+                                                                },
+                                                                {
+                                                                    "fn": "booleanEquals",
+                                                                    "argv": [
+                                                                        true,
+                                                                        {
+                                                                            "fn": "getAttr",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "ref": "PartitionResult"
+                                                                                },
+                                                                                "supportsDualStack"
+                                                                            ]
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ],
+                                                            "rules": [
+                                                                {
+                                                                    "conditions": [],
+                                                                    "rules": [
+                                                                        {
+                                                                            "conditions": [],
+                                                                            "endpoint": {
+                                                                                "url": "https://chatbot-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                                                "properties": {},
+                                                                                "headers": {}
+                                                                            },
+                                                                            "type": "endpoint"
+                                                                        }
+                                                                    ],
+                                                                    "type": "tree"
+                                                                }
+                                                            ],
+                                                            "type": "tree"
+                                                        },
+                                                        {
+                                                            "conditions": [],
+                                                            "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
+                                                            "type": "error"
+                                                        }
+                                                    ],
+                                                    "type": "tree"
+                                                },
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseFIPS"
+                                                                },
+                                                                true
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [
+                                                                {
+                                                                    "fn": "booleanEquals",
+                                                                    "argv": [
+                                                                        {
+                                                                            "fn": "getAttr",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "ref": "PartitionResult"
+                                                                                },
+                                                                                "supportsFIPS"
+                                                                            ]
+                                                                        },
+                                                                        true
+                                                                    ]
+                                                                }
+                                                            ],
+                                                            "rules": [
+                                                                {
+                                                                    "conditions": [],
+                                                                    "rules": [
+                                                                        {
+                                                                            "conditions": [],
+                                                                            "endpoint": {
+                                                                                "url": "https://chatbot-fips.{Region}.{PartitionResult#dnsSuffix}",
+                                                                                "properties": {},
+                                                                                "headers": {}
+                                                                            },
+                                                                            "type": "endpoint"
+                                                                        }
+                                                                    ],
+                                                                    "type": "tree"
+                                                                }
+                                                            ],
+                                                            "type": "tree"
+                                                        },
+                                                        {
+                                                            "conditions": [],
+                                                            "error": "FIPS is enabled but this partition does not support FIPS",
+                                                            "type": "error"
+                                                        }
+                                                    ],
+                                                    "type": "tree"
+                                                },
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseDualStack"
+                                                                },
+                                                                true
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [
+                                                                {
+                                                                    "fn": "booleanEquals",
+                                                                    "argv": [
+                                                                        true,
+                                                                        {
+                                                                            "fn": "getAttr",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "ref": "PartitionResult"
+                                                                                },
+                                                                                "supportsDualStack"
+                                                                            ]
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ],
+                                                            "rules": [
+                                                                {
+                                                                    "conditions": [],
+                                                                    "rules": [
+                                                                        {
+                                                                            "conditions": [],
+                                                                            "endpoint": {
+                                                                                "url": "https://chatbot.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                                                "properties": {},
+                                                                                "headers": {}
+                                                                            },
+                                                                            "type": "endpoint"
+                                                                        }
+                                                                    ],
+                                                                    "type": "tree"
+                                                                }
+                                                            ],
+                                                            "type": "tree"
+                                                        },
+                                                        {
+                                                            "conditions": [],
+                                                            "error": "DualStack is enabled but this partition does not support DualStack",
+                                                            "type": "error"
+                                                        }
+                                                    ],
+                                                    "type": "tree"
+                                                },
+                                                {
+                                                    "conditions": [],
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [],
+                                                            "endpoint": {
+                                                                "url": "https://chatbot.{Region}.{PartitionResult#dnsSuffix}",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        }
+                                                    ],
+                                                    "type": "tree"
+                                                }
+                                            ],
+                                            "type": "tree"
+                                        }
+                                    ],
+                                    "type": "tree"
+                                },
+                                {
+                                    "conditions": [],
+                                    "error": "Invalid Configuration: Missing Region",
+                                    "type": "error"
+                                }
+                            ],
+                            "type": "tree"
+                        }
+                    ]
+                },
+                "smithy.rules#endpointTests": {
+                    "testCases": [
+                        {
+                            "documentation": "For region us-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://chatbot-fips.us-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://chatbot-fips.us-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://chatbot.us-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://chatbot.us-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-north-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://chatbot-fips.cn-north-1.api.amazonwebservices.com.cn"
+                                }
+                            },
+                            "params": {
+                                "Region": "cn-north-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-north-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://chatbot-fips.cn-north-1.amazonaws.com.cn"
+                                }
+                            },
+                            "params": {
+                                "Region": "cn-north-1",
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-north-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://chatbot.cn-north-1.api.amazonwebservices.com.cn"
+                                }
+                            },
+                            "params": {
+                                "Region": "cn-north-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-north-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://chatbot.cn-north-1.amazonaws.com.cn"
+                                }
+                            },
+                            "params": {
+                                "Region": "cn-north-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://chatbot-fips.us-gov-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://chatbot-fips.us-gov-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://chatbot.us-gov-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://chatbot.us-gov-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://chatbot-fips.us-iso-east-1.c2s.ic.gov"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "error": "DualStack is enabled but this partition does not support DualStack"
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://chatbot.us-iso-east-1.c2s.ic.gov"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
+                            },
+                            "params": {
+                                "Region": "us-isob-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://chatbot-fips.us-isob-east-1.sc2s.sgov.gov"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-isob-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "error": "DualStack is enabled but this partition does not support DualStack"
+                            },
+                            "params": {
+                                "Region": "us-isob-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://chatbot.us-isob-east-1.sc2s.sgov.gov"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-isob-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with region set and fips disabled and dualstack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://example.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false,
+                                "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with region not set and fips disabled and dualstack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://example.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "UseDualStack": false,
+                                "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with fips enabled and dualstack disabled",
+                            "expect": {
+                                "error": "Invalid Configuration: FIPS and custom endpoint are not supported"
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": false,
+                                "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with fips disabled and dualstack enabled",
+                            "expect": {
+                                "error": "Invalid Configuration: Dualstack and custom endpoint are not supported"
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true,
+                                "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "Missing region",
+                            "expect": {
+                                "error": "Invalid Configuration: Missing Region"
+                            }
+                        }
+                    ],
+                    "version": "1.0"
+                }
+            }
+        }
+    }
+}

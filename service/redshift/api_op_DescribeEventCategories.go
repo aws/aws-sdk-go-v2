@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/redshift/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -14,8 +13,9 @@ import (
 
 // Displays a list of event categories for all event source types, or for a
 // specified source type. For a list of the event categories and source types, go
-// to Amazon Redshift Event Notifications (https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-event-notifications.html)
-// .
+// to [Amazon Redshift Event Notifications].
+//
+// [Amazon Redshift Event Notifications]: https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-event-notifications.html
 func (c *Client) DescribeEventCategories(ctx context.Context, params *DescribeEventCategoriesInput, optFns ...func(*Options)) (*DescribeEventCategoriesOutput, error) {
 	if params == nil {
 		params = &DescribeEventCategoriesInput{}
@@ -34,8 +34,10 @@ func (c *Client) DescribeEventCategories(ctx context.Context, params *DescribeEv
 type DescribeEventCategoriesInput struct {
 
 	// The source type, such as cluster or parameter group, to which the described
-	// event categories apply. Valid values: cluster, cluster-snapshot,
-	// cluster-parameter-group, cluster-security-group, and scheduled-action.
+	// event categories apply.
+	//
+	// Valid values: cluster, cluster-snapshot, cluster-parameter-group,
+	// cluster-security-group, and scheduled-action.
 	SourceType *string
 
 	noSmithyDocumentSerde
@@ -74,25 +76,25 @@ func (c *Client) addOperationDescribeEventCategoriesMiddlewares(stack *middlewar
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -107,10 +109,13 @@ func (c *Client) addOperationDescribeEventCategoriesMiddlewares(stack *middlewar
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeEventCategories(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

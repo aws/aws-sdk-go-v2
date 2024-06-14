@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/budgets/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -35,22 +34,22 @@ type DescribeBudgetActionHistoriesInput struct {
 	// This member is required.
 	AccountId *string
 
-	// A system-generated universally unique identifier (UUID) for the action.
+	//  A system-generated universally unique identifier (UUID) for the action.
 	//
 	// This member is required.
 	ActionId *string
 
-	// A string that represents the budget name. The ":" and "\" characters, and the
+	//  A string that represents the budget name. The ":" and "\" characters, and the
 	// "/action/" substring, aren't allowed.
 	//
 	// This member is required.
 	BudgetName *string
 
-	// An integer that represents how many entries a paginated response contains. The
+	//  An integer that represents how many entries a paginated response contains. The
 	// maximum is 100.
 	MaxResults *int32
 
-	// A generic string.
+	//  A generic string.
 	NextToken *string
 
 	// The period of time that's covered by a budget. The period has a start date and
@@ -63,12 +62,12 @@ type DescribeBudgetActionHistoriesInput struct {
 
 type DescribeBudgetActionHistoriesOutput struct {
 
-	// The historical record of the budget action resource.
+	//  The historical record of the budget action resource.
 	//
 	// This member is required.
 	ActionHistories []types.ActionHistory
 
-	// A generic string.
+	//  A generic string.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -99,25 +98,25 @@ func (c *Client) addOperationDescribeBudgetActionHistoriesMiddlewares(stack *mid
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -132,13 +131,16 @@ func (c *Client) addOperationDescribeBudgetActionHistoriesMiddlewares(stack *mid
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDescribeBudgetActionHistoriesValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeBudgetActionHistories(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -167,7 +169,7 @@ var _ DescribeBudgetActionHistoriesAPIClient = (*Client)(nil)
 // DescribeBudgetActionHistoriesPaginatorOptions is the paginator options for
 // DescribeBudgetActionHistories
 type DescribeBudgetActionHistoriesPaginatorOptions struct {
-	// An integer that represents how many entries a paginated response contains. The
+	//  An integer that represents how many entries a paginated response contains. The
 	// maximum is 100.
 	Limit int32
 

@@ -73,7 +73,7 @@ type ClusterListEntry struct {
 	ClusterId *string
 
 	// The current state of this cluster. For information about the state of a
-	// specific node, see JobListEntry$JobState .
+	// specific node, see JobListEntry$JobState.
 	ClusterState ClusterState
 
 	// The creation date for this cluster.
@@ -113,8 +113,9 @@ type ClusterMetadata struct {
 	JobType JobType
 
 	// The KmsKeyARN Amazon Resource Name (ARN) associated with this cluster. This ARN
-	// was created using the CreateKey (https://docs.aws.amazon.com/kms/latest/APIReference/API_CreateKey.html)
-	// API action in Key Management Service (KMS.
+	// was created using the [CreateKey]API action in Key Management Service (KMS.
+	//
+	// [CreateKey]: https://docs.aws.amazon.com/kms/latest/APIReference/API_CreateKey.html
 	KmsKeyARN *string
 
 	// The Amazon Simple Notification Service (Amazon SNS) notification settings for
@@ -125,31 +126,37 @@ type ClusterMetadata struct {
 	// Services Snow Family device.
 	OnDeviceServiceConfiguration *OnDeviceServiceConfiguration
 
-	// The arrays of JobResource objects that can include updated S3Resource objects
-	// or LambdaResource objects.
+	// The arrays of JobResource objects that can include updated S3Resource objects or LambdaResource objects.
 	Resources *JobResource
 
-	// The role ARN associated with this cluster. This ARN was created using the
-	// CreateRole (https://docs.aws.amazon.com/IAM/latest/APIReference/API_CreateRole.html)
-	// API action in Identity and Access Management (IAM).
+	// The role ARN associated with this cluster. This ARN was created using the [CreateRole] API
+	// action in Identity and Access Management (IAM).
+	//
+	// [CreateRole]: https://docs.aws.amazon.com/IAM/latest/APIReference/API_CreateRole.html
 	RoleARN *string
 
 	// The shipping speed for each node in this cluster. This speed doesn't dictate
 	// how soon you'll get each device, rather it represents how quickly each device
 	// moves to its destination while in transit. Regional shipping speeds are as
 	// follows:
+	//
 	//   - In Australia, you have access to express shipping. Typically, devices
 	//   shipped express are delivered in about a day.
+	//
 	//   - In the European Union (EU), you have access to express shipping. Typically,
 	//   Snow devices shipped express are delivered in about a day. In addition, most
 	//   countries in the EU have access to standard shipping, which typically takes less
 	//   than a week, one way.
+	//
 	//   - In India, Snow devices are delivered in one to seven days.
+	//
 	//   - In the US, you have access to one-day shipping and two-day shipping.
 	ShippingOption ShippingOption
 
-	// The type of Snowcone device to use for this cluster. For cluster jobs, Amazon
-	// Web Services Snow Family currently supports only the EDGE device type.
+	// The type of Snowcone device to use for this cluster.
+	//
+	// For cluster jobs, Amazon Web Services Snow Family currently supports only the
+	// EDGE device type.
 	SnowballType SnowballType
 
 	// The tax documents required in your Amazon Web Services Region.
@@ -239,7 +246,7 @@ type Ec2AmiResource struct {
 // on the Snow Family device.
 type EKSOnDeviceServiceConfiguration struct {
 
-	// The version of EKS Anywhere on the Snow Family device.
+	// The optional version of EKS Anywhere on the Snow Family device.
 	EKSAnywhereVersion *string
 
 	// The Kubernetes version for EKS Anywhere on the Snow Family device.
@@ -248,7 +255,7 @@ type EKSOnDeviceServiceConfiguration struct {
 	noSmithyDocumentSerde
 }
 
-// The container for the EventTriggerDefinition$EventResourceARN .
+// The container for the EventTriggerDefinition$EventResourceARN.
 type EventTriggerDefinition struct {
 
 	// The Amazon Resource Name (ARN) for any local Amazon S3 resource that is an
@@ -308,16 +315,20 @@ type JobListEntry struct {
 // Job logs are returned as a part of the response syntax of the DescribeJob
 // action in the JobMetadata data type. The job logs can be accessed for up to 60
 // minutes after this request has been made. To access any of the job logs after 60
-// minutes have passed, you'll have to make another call to the DescribeJob
-// action. For import jobs, the PDF job report becomes available at the end of the
-// import process. For export jobs, your job report typically becomes available
-// while the Snow device for your job part is being delivered to you. The job
-// report provides you insight into the state of your Amazon S3 data transfer. The
-// report includes details about your job or job part for your records. For deeper
-// visibility into the status of your transferred objects, you can look at the two
-// associated logs: a success log and a failure log. The logs are saved in
-// comma-separated value (CSV) format, and the name of each log includes the ID of
-// the job or job part that the log describes.
+// minutes have passed, you'll have to make another call to the DescribeJob action.
+//
+// For import jobs, the PDF job report becomes available at the end of the import
+// process. For export jobs, your job report typically becomes available while the
+// Snow device for your job part is being delivered to you.
+//
+// The job report provides you insight into the state of your Amazon S3 data
+// transfer. The report includes details about your job or job part for your
+// records.
+//
+// For deeper visibility into the status of your transferred objects, you can look
+// at the two associated logs: a success log and a failure log. The logs are saved
+// in comma-separated value (CSV) format, and the name of each log includes the ID
+// of the job or job part that the log describes.
 type JobLogs struct {
 
 	// A link to an Amazon S3 presigned URL where the job completion report is located.
@@ -383,8 +394,9 @@ type JobMetadata struct {
 	JobType JobType
 
 	// The Amazon Resource Name (ARN) for the Key Management Service (KMS) key
-	// associated with this job. This ARN was created using the CreateKey (https://docs.aws.amazon.com/kms/latest/APIReference/API_CreateKey.html)
-	// API action in KMS.
+	// associated with this job. This ARN was created using the [CreateKey]API action in KMS.
+	//
+	// [CreateKey]: https://docs.aws.amazon.com/kms/latest/APIReference/API_CreateKey.html
 	KmsKeyARN *string
 
 	// The ID of the long-term pricing type for the device.
@@ -412,8 +424,10 @@ type JobMetadata struct {
 	// bucket that your transferred data will be exported from or imported into.
 	Resources *JobResource
 
-	// The role ARN associated with this job. This ARN was created using the CreateRole (https://docs.aws.amazon.com/IAM/latest/APIReference/API_CreateRole.html)
-	// API action in Identity and Access Management.
+	// The role ARN associated with this job. This ARN was created using the [CreateRole] API
+	// action in Identity and Access Management.
+	//
+	// [CreateRole]: https://docs.aws.amazon.com/IAM/latest/APIReference/API_CreateRole.html
 	RoleARN *string
 
 	// A job's shipping information, including inbound and outbound tracking numbers
@@ -422,7 +436,9 @@ type JobMetadata struct {
 
 	// The Snow device capacity preference for this job, specified at job creation. In
 	// US regions, you can choose between 50 TB and 80 TB Snowballs. All other regions
-	// use 80 TB capacity Snowballs. For more information, see
+	// use 80 TB capacity Snowballs.
+	//
+	// For more information, see
 	// "https://docs.aws.amazon.com/snowball/latest/snowcone-guide/snow-device-types.html"
 	// (Snow Family Devices and Capacity) in the Snowcone User Guide or
 	// "https://docs.aws.amazon.com/snowball/latest/developer-guide/snow-device-types.html"
@@ -479,8 +495,7 @@ type KeyRange struct {
 // Identifies
 type LambdaResource struct {
 
-	// The array of ARNs for S3Resource objects to trigger the LambdaResource objects
-	// associated with this job.
+	// The array of ARNs for S3Resource objects to trigger the LambdaResource objects associated with this job.
 	EventTriggers []EventTriggerDefinition
 
 	// An Amazon Resource Name (ARN) that represents an Lambda function to be
@@ -536,7 +551,9 @@ type NFSOnDeviceServiceConfiguration struct {
 	// The maximum NFS storage for one Snow Family device.
 	StorageLimit int32
 
-	// The scale unit of the NFS storage on the device. Valid values: TB.
+	// The scale unit of the NFS storage on the device.
+	//
+	// Valid values: TB.
 	StorageUnit StorageUnit
 
 	noSmithyDocumentSerde
@@ -545,6 +562,7 @@ type NFSOnDeviceServiceConfiguration struct {
 // The Amazon Simple Notification Service (Amazon SNS) notification settings
 // associated with a specific job. The Notification object is returned as a part
 // of the response syntax of the DescribeJob action in the JobMetadata data type.
+//
 // When the notification settings are defined during job creation, you can choose
 // to notify based on a specific set of job states using the JobStatesToNotify
 // array of strings, or you can specify that you want to have Amazon SNS
@@ -562,10 +580,14 @@ type Notification struct {
 	NotifyAll bool
 
 	// The new SNS TopicArn that you want to associate with this job. You can create
-	// Amazon Resource Names (ARNs) for topics by using the CreateTopic (https://docs.aws.amazon.com/sns/latest/api/API_CreateTopic.html)
-	// Amazon SNS API action. You can subscribe email addresses to an Amazon SNS topic
-	// through the Amazon Web Services Management Console, or by using the Subscribe (https://docs.aws.amazon.com/sns/latest/api/API_Subscribe.html)
-	// Amazon Simple Notification Service (Amazon SNS) API action.
+	// Amazon Resource Names (ARNs) for topics by using the [CreateTopic]Amazon SNS API action.
+	//
+	// You can subscribe email addresses to an Amazon SNS topic through the Amazon Web
+	// Services Management Console, or by using the [Subscribe]Amazon Simple Notification Service
+	// (Amazon SNS) API action.
+	//
+	// [CreateTopic]: https://docs.aws.amazon.com/sns/latest/api/API_CreateTopic.html
+	// [Subscribe]: https://docs.aws.amazon.com/sns/latest/api/API_Subscribe.html
 	SnsTopicARN *string
 
 	noSmithyDocumentSerde
@@ -686,8 +708,9 @@ type Shipment struct {
 	Status *string
 
 	// The tracking number for this job. Using this tracking number with your region's
-	// carrier's website, you can track a Snow device as the carrier transports it. For
-	// India, the carrier is Amazon Logistics. For all other regions, UPS is the
+	// carrier's website, you can track a Snow device as the carrier transports it.
+	//
+	// For India, the carrier is Amazon Logistics. For all other regions, UPS is the
 	// carrier.
 	TrackingNumber *string
 
@@ -710,13 +733,17 @@ type ShippingDetails struct {
 	// you'll get the Snow device from the job's creation date. This speed represents
 	// how quickly it moves to its destination while in transit. Regional shipping
 	// speeds are as follows:
+	//
 	//   - In Australia, you have access to express shipping. Typically, Snow devices
 	//   shipped express are delivered in about a day.
+	//
 	//   - In the European Union (EU), you have access to express shipping. Typically,
 	//   Snow devices shipped express are delivered in about a day. In addition, most
 	//   countries in the EU have access to standard shipping, which typically takes less
 	//   than a week, one way.
+	//
 	//   - In India, Snow devices are delivered in one to seven days.
+	//
 	//   - In the United States of America (US), you have access to one-day shipping
 	//   and two-day shipping.
 	ShippingOption ShippingOption

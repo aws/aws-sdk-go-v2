@@ -6,13 +6,13 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/mturk/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// The UpdateNotificationSettings operation creates, updates, disables or
+//	The UpdateNotificationSettings operation creates, updates, disables or
+//
 // re-enables notifications for a HIT type. If you call the
 // UpdateNotificationSettings operation for a HIT type that already has a
 // notification specification, the operation replaces the old specification with a
@@ -40,18 +40,18 @@ func (c *Client) UpdateNotificationSettings(ctx context.Context, params *UpdateN
 
 type UpdateNotificationSettingsInput struct {
 
-	// The ID of the HIT type whose notification specification is being updated.
+	//  The ID of the HIT type whose notification specification is being updated.
 	//
 	// This member is required.
 	HITTypeId *string
 
-	// Specifies whether notifications are sent for HITs of this HIT type, according
+	//  Specifies whether notifications are sent for HITs of this HIT type, according
 	// to the notification specification. You must specify either the Notification
 	// parameter or the Active parameter for the call to UpdateNotificationSettings to
 	// succeed.
 	Active *bool
 
-	// The notification specification for the HIT type.
+	//  The notification specification for the HIT type.
 	Notification *types.NotificationSpecification
 
 	noSmithyDocumentSerde
@@ -86,25 +86,25 @@ func (c *Client) addOperationUpdateNotificationSettingsMiddlewares(stack *middle
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -119,13 +119,16 @@ func (c *Client) addOperationUpdateNotificationSettingsMiddlewares(stack *middle
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpUpdateNotificationSettingsValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateNotificationSettings(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

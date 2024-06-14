@@ -17,7 +17,16 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"io"
 	"strings"
+	"time"
 )
+
+func deserializeS3Expires(v string) (*time.Time, error) {
+	t, err := smithytime.ParseHTTPDate(v)
+	if err != nil {
+		return nil, nil
+	}
+	return &t, nil
+}
 
 type awsAwsjson10_deserializeOpBatchIsAuthorized struct {
 }
@@ -87,9 +96,6 @@ func awsAwsjson10_deserializeOpErrorBatchIsAuthorized(response *smithyhttp.Respo
 	errorMessage := errorCode
 
 	headerCode := response.Header.Get("X-Amzn-ErrorType")
-	if len(headerCode) != 0 {
-		errorCode = restjson.SanitizeErrorCode(headerCode)
-	}
 
 	var buff [1024]byte
 	ringBuffer := smithyio.NewRingBuffer(buff[:])
@@ -97,7 +103,7 @@ func awsAwsjson10_deserializeOpErrorBatchIsAuthorized(response *smithyhttp.Respo
 	body := io.TeeReader(errorBody, ringBuffer)
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
-	jsonCode, message, err := restjson.GetErrorInfo(decoder)
+	bodyInfo, err := getProtocolErrorInfo(decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -109,13 +115,131 @@ func awsAwsjson10_deserializeOpErrorBatchIsAuthorized(response *smithyhttp.Respo
 	}
 
 	errorBody.Seek(0, io.SeekStart)
-	if len(headerCode) == 0 && len(jsonCode) != 0 {
-		errorCode = restjson.SanitizeErrorCode(jsonCode)
+	if typ, ok := resolveProtocolErrorType(headerCode, bodyInfo); ok {
+		errorCode = restjson.SanitizeErrorCode(typ)
 	}
-	if len(message) != 0 {
-		errorMessage = message
+	if len(bodyInfo.Message) != 0 {
+		errorMessage = bodyInfo.Message
+	}
+	switch {
+	case strings.EqualFold("AccessDeniedException", errorCode):
+		return awsAwsjson10_deserializeErrorAccessDeniedException(response, errorBody)
+
+	case strings.EqualFold("InternalServerException", errorCode):
+		return awsAwsjson10_deserializeErrorInternalServerException(response, errorBody)
+
+	case strings.EqualFold("ResourceNotFoundException", errorCode):
+		return awsAwsjson10_deserializeErrorResourceNotFoundException(response, errorBody)
+
+	case strings.EqualFold("ThrottlingException", errorCode):
+		return awsAwsjson10_deserializeErrorThrottlingException(response, errorBody)
+
+	case strings.EqualFold("ValidationException", errorCode):
+		return awsAwsjson10_deserializeErrorValidationException(response, errorBody)
+
+	default:
+		genericError := &smithy.GenericAPIError{
+			Code:    errorCode,
+			Message: errorMessage,
+		}
+		return genericError
+
+	}
+}
+
+type awsAwsjson10_deserializeOpBatchIsAuthorizedWithToken struct {
+}
+
+func (*awsAwsjson10_deserializeOpBatchIsAuthorizedWithToken) ID() string {
+	return "OperationDeserializer"
+}
+
+func (m *awsAwsjson10_deserializeOpBatchIsAuthorizedWithToken) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
+) {
+	out, metadata, err = next.HandleDeserialize(ctx, in)
+	if err != nil {
+		return out, metadata, err
 	}
 
+	response, ok := out.RawResponse.(*smithyhttp.Response)
+	if !ok {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
+	}
+
+	if response.StatusCode < 200 || response.StatusCode >= 300 {
+		return out, metadata, awsAwsjson10_deserializeOpErrorBatchIsAuthorizedWithToken(response, &metadata)
+	}
+	output := &BatchIsAuthorizedWithTokenOutput{}
+	out.Result = output
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(response.Body, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
+	}
+
+	err = awsAwsjson10_deserializeOpDocumentBatchIsAuthorizedWithTokenOutput(&output, shape)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
+	}
+
+	return out, metadata, err
+}
+
+func awsAwsjson10_deserializeOpErrorBatchIsAuthorizedWithToken(response *smithyhttp.Response, metadata *middleware.Metadata) error {
+	var errorBuffer bytes.Buffer
+	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
+		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
+	}
+	errorBody := bytes.NewReader(errorBuffer.Bytes())
+
+	errorCode := "UnknownError"
+	errorMessage := errorCode
+
+	headerCode := response.Header.Get("X-Amzn-ErrorType")
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(errorBody, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	bodyInfo, err := getProtocolErrorInfo(decoder)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	errorBody.Seek(0, io.SeekStart)
+	if typ, ok := resolveProtocolErrorType(headerCode, bodyInfo); ok {
+		errorCode = restjson.SanitizeErrorCode(typ)
+	}
+	if len(bodyInfo.Message) != 0 {
+		errorMessage = bodyInfo.Message
+	}
 	switch {
 	case strings.EqualFold("AccessDeniedException", errorCode):
 		return awsAwsjson10_deserializeErrorAccessDeniedException(response, errorBody)
@@ -210,9 +334,6 @@ func awsAwsjson10_deserializeOpErrorCreateIdentitySource(response *smithyhttp.Re
 	errorMessage := errorCode
 
 	headerCode := response.Header.Get("X-Amzn-ErrorType")
-	if len(headerCode) != 0 {
-		errorCode = restjson.SanitizeErrorCode(headerCode)
-	}
 
 	var buff [1024]byte
 	ringBuffer := smithyio.NewRingBuffer(buff[:])
@@ -220,7 +341,7 @@ func awsAwsjson10_deserializeOpErrorCreateIdentitySource(response *smithyhttp.Re
 	body := io.TeeReader(errorBody, ringBuffer)
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
-	jsonCode, message, err := restjson.GetErrorInfo(decoder)
+	bodyInfo, err := getProtocolErrorInfo(decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -232,13 +353,12 @@ func awsAwsjson10_deserializeOpErrorCreateIdentitySource(response *smithyhttp.Re
 	}
 
 	errorBody.Seek(0, io.SeekStart)
-	if len(headerCode) == 0 && len(jsonCode) != 0 {
-		errorCode = restjson.SanitizeErrorCode(jsonCode)
+	if typ, ok := resolveProtocolErrorType(headerCode, bodyInfo); ok {
+		errorCode = restjson.SanitizeErrorCode(typ)
 	}
-	if len(message) != 0 {
-		errorMessage = message
+	if len(bodyInfo.Message) != 0 {
+		errorMessage = bodyInfo.Message
 	}
-
 	switch {
 	case strings.EqualFold("AccessDeniedException", errorCode):
 		return awsAwsjson10_deserializeErrorAccessDeniedException(response, errorBody)
@@ -339,9 +459,6 @@ func awsAwsjson10_deserializeOpErrorCreatePolicy(response *smithyhttp.Response, 
 	errorMessage := errorCode
 
 	headerCode := response.Header.Get("X-Amzn-ErrorType")
-	if len(headerCode) != 0 {
-		errorCode = restjson.SanitizeErrorCode(headerCode)
-	}
 
 	var buff [1024]byte
 	ringBuffer := smithyio.NewRingBuffer(buff[:])
@@ -349,7 +466,7 @@ func awsAwsjson10_deserializeOpErrorCreatePolicy(response *smithyhttp.Response, 
 	body := io.TeeReader(errorBody, ringBuffer)
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
-	jsonCode, message, err := restjson.GetErrorInfo(decoder)
+	bodyInfo, err := getProtocolErrorInfo(decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -361,13 +478,12 @@ func awsAwsjson10_deserializeOpErrorCreatePolicy(response *smithyhttp.Response, 
 	}
 
 	errorBody.Seek(0, io.SeekStart)
-	if len(headerCode) == 0 && len(jsonCode) != 0 {
-		errorCode = restjson.SanitizeErrorCode(jsonCode)
+	if typ, ok := resolveProtocolErrorType(headerCode, bodyInfo); ok {
+		errorCode = restjson.SanitizeErrorCode(typ)
 	}
-	if len(message) != 0 {
-		errorMessage = message
+	if len(bodyInfo.Message) != 0 {
+		errorMessage = bodyInfo.Message
 	}
-
 	switch {
 	case strings.EqualFold("AccessDeniedException", errorCode):
 		return awsAwsjson10_deserializeErrorAccessDeniedException(response, errorBody)
@@ -468,9 +584,6 @@ func awsAwsjson10_deserializeOpErrorCreatePolicyStore(response *smithyhttp.Respo
 	errorMessage := errorCode
 
 	headerCode := response.Header.Get("X-Amzn-ErrorType")
-	if len(headerCode) != 0 {
-		errorCode = restjson.SanitizeErrorCode(headerCode)
-	}
 
 	var buff [1024]byte
 	ringBuffer := smithyio.NewRingBuffer(buff[:])
@@ -478,7 +591,7 @@ func awsAwsjson10_deserializeOpErrorCreatePolicyStore(response *smithyhttp.Respo
 	body := io.TeeReader(errorBody, ringBuffer)
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
-	jsonCode, message, err := restjson.GetErrorInfo(decoder)
+	bodyInfo, err := getProtocolErrorInfo(decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -490,13 +603,12 @@ func awsAwsjson10_deserializeOpErrorCreatePolicyStore(response *smithyhttp.Respo
 	}
 
 	errorBody.Seek(0, io.SeekStart)
-	if len(headerCode) == 0 && len(jsonCode) != 0 {
-		errorCode = restjson.SanitizeErrorCode(jsonCode)
+	if typ, ok := resolveProtocolErrorType(headerCode, bodyInfo); ok {
+		errorCode = restjson.SanitizeErrorCode(typ)
 	}
-	if len(message) != 0 {
-		errorMessage = message
+	if len(bodyInfo.Message) != 0 {
+		errorMessage = bodyInfo.Message
 	}
-
 	switch {
 	case strings.EqualFold("AccessDeniedException", errorCode):
 		return awsAwsjson10_deserializeErrorAccessDeniedException(response, errorBody)
@@ -594,9 +706,6 @@ func awsAwsjson10_deserializeOpErrorCreatePolicyTemplate(response *smithyhttp.Re
 	errorMessage := errorCode
 
 	headerCode := response.Header.Get("X-Amzn-ErrorType")
-	if len(headerCode) != 0 {
-		errorCode = restjson.SanitizeErrorCode(headerCode)
-	}
 
 	var buff [1024]byte
 	ringBuffer := smithyio.NewRingBuffer(buff[:])
@@ -604,7 +713,7 @@ func awsAwsjson10_deserializeOpErrorCreatePolicyTemplate(response *smithyhttp.Re
 	body := io.TeeReader(errorBody, ringBuffer)
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
-	jsonCode, message, err := restjson.GetErrorInfo(decoder)
+	bodyInfo, err := getProtocolErrorInfo(decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -616,13 +725,12 @@ func awsAwsjson10_deserializeOpErrorCreatePolicyTemplate(response *smithyhttp.Re
 	}
 
 	errorBody.Seek(0, io.SeekStart)
-	if len(headerCode) == 0 && len(jsonCode) != 0 {
-		errorCode = restjson.SanitizeErrorCode(jsonCode)
+	if typ, ok := resolveProtocolErrorType(headerCode, bodyInfo); ok {
+		errorCode = restjson.SanitizeErrorCode(typ)
 	}
-	if len(message) != 0 {
-		errorMessage = message
+	if len(bodyInfo.Message) != 0 {
+		errorMessage = bodyInfo.Message
 	}
-
 	switch {
 	case strings.EqualFold("AccessDeniedException", errorCode):
 		return awsAwsjson10_deserializeErrorAccessDeniedException(response, errorBody)
@@ -723,9 +831,6 @@ func awsAwsjson10_deserializeOpErrorDeleteIdentitySource(response *smithyhttp.Re
 	errorMessage := errorCode
 
 	headerCode := response.Header.Get("X-Amzn-ErrorType")
-	if len(headerCode) != 0 {
-		errorCode = restjson.SanitizeErrorCode(headerCode)
-	}
 
 	var buff [1024]byte
 	ringBuffer := smithyio.NewRingBuffer(buff[:])
@@ -733,7 +838,7 @@ func awsAwsjson10_deserializeOpErrorDeleteIdentitySource(response *smithyhttp.Re
 	body := io.TeeReader(errorBody, ringBuffer)
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
-	jsonCode, message, err := restjson.GetErrorInfo(decoder)
+	bodyInfo, err := getProtocolErrorInfo(decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -745,13 +850,12 @@ func awsAwsjson10_deserializeOpErrorDeleteIdentitySource(response *smithyhttp.Re
 	}
 
 	errorBody.Seek(0, io.SeekStart)
-	if len(headerCode) == 0 && len(jsonCode) != 0 {
-		errorCode = restjson.SanitizeErrorCode(jsonCode)
+	if typ, ok := resolveProtocolErrorType(headerCode, bodyInfo); ok {
+		errorCode = restjson.SanitizeErrorCode(typ)
 	}
-	if len(message) != 0 {
-		errorMessage = message
+	if len(bodyInfo.Message) != 0 {
+		errorMessage = bodyInfo.Message
 	}
-
 	switch {
 	case strings.EqualFold("AccessDeniedException", errorCode):
 		return awsAwsjson10_deserializeErrorAccessDeniedException(response, errorBody)
@@ -849,9 +953,6 @@ func awsAwsjson10_deserializeOpErrorDeletePolicy(response *smithyhttp.Response, 
 	errorMessage := errorCode
 
 	headerCode := response.Header.Get("X-Amzn-ErrorType")
-	if len(headerCode) != 0 {
-		errorCode = restjson.SanitizeErrorCode(headerCode)
-	}
 
 	var buff [1024]byte
 	ringBuffer := smithyio.NewRingBuffer(buff[:])
@@ -859,7 +960,7 @@ func awsAwsjson10_deserializeOpErrorDeletePolicy(response *smithyhttp.Response, 
 	body := io.TeeReader(errorBody, ringBuffer)
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
-	jsonCode, message, err := restjson.GetErrorInfo(decoder)
+	bodyInfo, err := getProtocolErrorInfo(decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -871,13 +972,12 @@ func awsAwsjson10_deserializeOpErrorDeletePolicy(response *smithyhttp.Response, 
 	}
 
 	errorBody.Seek(0, io.SeekStart)
-	if len(headerCode) == 0 && len(jsonCode) != 0 {
-		errorCode = restjson.SanitizeErrorCode(jsonCode)
+	if typ, ok := resolveProtocolErrorType(headerCode, bodyInfo); ok {
+		errorCode = restjson.SanitizeErrorCode(typ)
 	}
-	if len(message) != 0 {
-		errorMessage = message
+	if len(bodyInfo.Message) != 0 {
+		errorMessage = bodyInfo.Message
 	}
-
 	switch {
 	case strings.EqualFold("AccessDeniedException", errorCode):
 		return awsAwsjson10_deserializeErrorAccessDeniedException(response, errorBody)
@@ -975,9 +1075,6 @@ func awsAwsjson10_deserializeOpErrorDeletePolicyStore(response *smithyhttp.Respo
 	errorMessage := errorCode
 
 	headerCode := response.Header.Get("X-Amzn-ErrorType")
-	if len(headerCode) != 0 {
-		errorCode = restjson.SanitizeErrorCode(headerCode)
-	}
 
 	var buff [1024]byte
 	ringBuffer := smithyio.NewRingBuffer(buff[:])
@@ -985,7 +1082,7 @@ func awsAwsjson10_deserializeOpErrorDeletePolicyStore(response *smithyhttp.Respo
 	body := io.TeeReader(errorBody, ringBuffer)
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
-	jsonCode, message, err := restjson.GetErrorInfo(decoder)
+	bodyInfo, err := getProtocolErrorInfo(decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -997,13 +1094,12 @@ func awsAwsjson10_deserializeOpErrorDeletePolicyStore(response *smithyhttp.Respo
 	}
 
 	errorBody.Seek(0, io.SeekStart)
-	if len(headerCode) == 0 && len(jsonCode) != 0 {
-		errorCode = restjson.SanitizeErrorCode(jsonCode)
+	if typ, ok := resolveProtocolErrorType(headerCode, bodyInfo); ok {
+		errorCode = restjson.SanitizeErrorCode(typ)
 	}
-	if len(message) != 0 {
-		errorMessage = message
+	if len(bodyInfo.Message) != 0 {
+		errorMessage = bodyInfo.Message
 	}
-
 	switch {
 	case strings.EqualFold("AccessDeniedException", errorCode):
 		return awsAwsjson10_deserializeErrorAccessDeniedException(response, errorBody)
@@ -1095,9 +1191,6 @@ func awsAwsjson10_deserializeOpErrorDeletePolicyTemplate(response *smithyhttp.Re
 	errorMessage := errorCode
 
 	headerCode := response.Header.Get("X-Amzn-ErrorType")
-	if len(headerCode) != 0 {
-		errorCode = restjson.SanitizeErrorCode(headerCode)
-	}
 
 	var buff [1024]byte
 	ringBuffer := smithyio.NewRingBuffer(buff[:])
@@ -1105,7 +1198,7 @@ func awsAwsjson10_deserializeOpErrorDeletePolicyTemplate(response *smithyhttp.Re
 	body := io.TeeReader(errorBody, ringBuffer)
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
-	jsonCode, message, err := restjson.GetErrorInfo(decoder)
+	bodyInfo, err := getProtocolErrorInfo(decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -1117,13 +1210,12 @@ func awsAwsjson10_deserializeOpErrorDeletePolicyTemplate(response *smithyhttp.Re
 	}
 
 	errorBody.Seek(0, io.SeekStart)
-	if len(headerCode) == 0 && len(jsonCode) != 0 {
-		errorCode = restjson.SanitizeErrorCode(jsonCode)
+	if typ, ok := resolveProtocolErrorType(headerCode, bodyInfo); ok {
+		errorCode = restjson.SanitizeErrorCode(typ)
 	}
-	if len(message) != 0 {
-		errorMessage = message
+	if len(bodyInfo.Message) != 0 {
+		errorMessage = bodyInfo.Message
 	}
-
 	switch {
 	case strings.EqualFold("AccessDeniedException", errorCode):
 		return awsAwsjson10_deserializeErrorAccessDeniedException(response, errorBody)
@@ -1221,9 +1313,6 @@ func awsAwsjson10_deserializeOpErrorGetIdentitySource(response *smithyhttp.Respo
 	errorMessage := errorCode
 
 	headerCode := response.Header.Get("X-Amzn-ErrorType")
-	if len(headerCode) != 0 {
-		errorCode = restjson.SanitizeErrorCode(headerCode)
-	}
 
 	var buff [1024]byte
 	ringBuffer := smithyio.NewRingBuffer(buff[:])
@@ -1231,7 +1320,7 @@ func awsAwsjson10_deserializeOpErrorGetIdentitySource(response *smithyhttp.Respo
 	body := io.TeeReader(errorBody, ringBuffer)
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
-	jsonCode, message, err := restjson.GetErrorInfo(decoder)
+	bodyInfo, err := getProtocolErrorInfo(decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -1243,13 +1332,12 @@ func awsAwsjson10_deserializeOpErrorGetIdentitySource(response *smithyhttp.Respo
 	}
 
 	errorBody.Seek(0, io.SeekStart)
-	if len(headerCode) == 0 && len(jsonCode) != 0 {
-		errorCode = restjson.SanitizeErrorCode(jsonCode)
+	if typ, ok := resolveProtocolErrorType(headerCode, bodyInfo); ok {
+		errorCode = restjson.SanitizeErrorCode(typ)
 	}
-	if len(message) != 0 {
-		errorMessage = message
+	if len(bodyInfo.Message) != 0 {
+		errorMessage = bodyInfo.Message
 	}
-
 	switch {
 	case strings.EqualFold("AccessDeniedException", errorCode):
 		return awsAwsjson10_deserializeErrorAccessDeniedException(response, errorBody)
@@ -1344,9 +1432,6 @@ func awsAwsjson10_deserializeOpErrorGetPolicy(response *smithyhttp.Response, met
 	errorMessage := errorCode
 
 	headerCode := response.Header.Get("X-Amzn-ErrorType")
-	if len(headerCode) != 0 {
-		errorCode = restjson.SanitizeErrorCode(headerCode)
-	}
 
 	var buff [1024]byte
 	ringBuffer := smithyio.NewRingBuffer(buff[:])
@@ -1354,7 +1439,7 @@ func awsAwsjson10_deserializeOpErrorGetPolicy(response *smithyhttp.Response, met
 	body := io.TeeReader(errorBody, ringBuffer)
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
-	jsonCode, message, err := restjson.GetErrorInfo(decoder)
+	bodyInfo, err := getProtocolErrorInfo(decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -1366,13 +1451,12 @@ func awsAwsjson10_deserializeOpErrorGetPolicy(response *smithyhttp.Response, met
 	}
 
 	errorBody.Seek(0, io.SeekStart)
-	if len(headerCode) == 0 && len(jsonCode) != 0 {
-		errorCode = restjson.SanitizeErrorCode(jsonCode)
+	if typ, ok := resolveProtocolErrorType(headerCode, bodyInfo); ok {
+		errorCode = restjson.SanitizeErrorCode(typ)
 	}
-	if len(message) != 0 {
-		errorMessage = message
+	if len(bodyInfo.Message) != 0 {
+		errorMessage = bodyInfo.Message
 	}
-
 	switch {
 	case strings.EqualFold("AccessDeniedException", errorCode):
 		return awsAwsjson10_deserializeErrorAccessDeniedException(response, errorBody)
@@ -1467,9 +1551,6 @@ func awsAwsjson10_deserializeOpErrorGetPolicyStore(response *smithyhttp.Response
 	errorMessage := errorCode
 
 	headerCode := response.Header.Get("X-Amzn-ErrorType")
-	if len(headerCode) != 0 {
-		errorCode = restjson.SanitizeErrorCode(headerCode)
-	}
 
 	var buff [1024]byte
 	ringBuffer := smithyio.NewRingBuffer(buff[:])
@@ -1477,7 +1558,7 @@ func awsAwsjson10_deserializeOpErrorGetPolicyStore(response *smithyhttp.Response
 	body := io.TeeReader(errorBody, ringBuffer)
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
-	jsonCode, message, err := restjson.GetErrorInfo(decoder)
+	bodyInfo, err := getProtocolErrorInfo(decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -1489,13 +1570,12 @@ func awsAwsjson10_deserializeOpErrorGetPolicyStore(response *smithyhttp.Response
 	}
 
 	errorBody.Seek(0, io.SeekStart)
-	if len(headerCode) == 0 && len(jsonCode) != 0 {
-		errorCode = restjson.SanitizeErrorCode(jsonCode)
+	if typ, ok := resolveProtocolErrorType(headerCode, bodyInfo); ok {
+		errorCode = restjson.SanitizeErrorCode(typ)
 	}
-	if len(message) != 0 {
-		errorMessage = message
+	if len(bodyInfo.Message) != 0 {
+		errorMessage = bodyInfo.Message
 	}
-
 	switch {
 	case strings.EqualFold("AccessDeniedException", errorCode):
 		return awsAwsjson10_deserializeErrorAccessDeniedException(response, errorBody)
@@ -1590,9 +1670,6 @@ func awsAwsjson10_deserializeOpErrorGetPolicyTemplate(response *smithyhttp.Respo
 	errorMessage := errorCode
 
 	headerCode := response.Header.Get("X-Amzn-ErrorType")
-	if len(headerCode) != 0 {
-		errorCode = restjson.SanitizeErrorCode(headerCode)
-	}
 
 	var buff [1024]byte
 	ringBuffer := smithyio.NewRingBuffer(buff[:])
@@ -1600,7 +1677,7 @@ func awsAwsjson10_deserializeOpErrorGetPolicyTemplate(response *smithyhttp.Respo
 	body := io.TeeReader(errorBody, ringBuffer)
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
-	jsonCode, message, err := restjson.GetErrorInfo(decoder)
+	bodyInfo, err := getProtocolErrorInfo(decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -1612,13 +1689,12 @@ func awsAwsjson10_deserializeOpErrorGetPolicyTemplate(response *smithyhttp.Respo
 	}
 
 	errorBody.Seek(0, io.SeekStart)
-	if len(headerCode) == 0 && len(jsonCode) != 0 {
-		errorCode = restjson.SanitizeErrorCode(jsonCode)
+	if typ, ok := resolveProtocolErrorType(headerCode, bodyInfo); ok {
+		errorCode = restjson.SanitizeErrorCode(typ)
 	}
-	if len(message) != 0 {
-		errorMessage = message
+	if len(bodyInfo.Message) != 0 {
+		errorMessage = bodyInfo.Message
 	}
-
 	switch {
 	case strings.EqualFold("AccessDeniedException", errorCode):
 		return awsAwsjson10_deserializeErrorAccessDeniedException(response, errorBody)
@@ -1713,9 +1789,6 @@ func awsAwsjson10_deserializeOpErrorGetSchema(response *smithyhttp.Response, met
 	errorMessage := errorCode
 
 	headerCode := response.Header.Get("X-Amzn-ErrorType")
-	if len(headerCode) != 0 {
-		errorCode = restjson.SanitizeErrorCode(headerCode)
-	}
 
 	var buff [1024]byte
 	ringBuffer := smithyio.NewRingBuffer(buff[:])
@@ -1723,7 +1796,7 @@ func awsAwsjson10_deserializeOpErrorGetSchema(response *smithyhttp.Response, met
 	body := io.TeeReader(errorBody, ringBuffer)
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
-	jsonCode, message, err := restjson.GetErrorInfo(decoder)
+	bodyInfo, err := getProtocolErrorInfo(decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -1735,13 +1808,12 @@ func awsAwsjson10_deserializeOpErrorGetSchema(response *smithyhttp.Response, met
 	}
 
 	errorBody.Seek(0, io.SeekStart)
-	if len(headerCode) == 0 && len(jsonCode) != 0 {
-		errorCode = restjson.SanitizeErrorCode(jsonCode)
+	if typ, ok := resolveProtocolErrorType(headerCode, bodyInfo); ok {
+		errorCode = restjson.SanitizeErrorCode(typ)
 	}
-	if len(message) != 0 {
-		errorMessage = message
+	if len(bodyInfo.Message) != 0 {
+		errorMessage = bodyInfo.Message
 	}
-
 	switch {
 	case strings.EqualFold("AccessDeniedException", errorCode):
 		return awsAwsjson10_deserializeErrorAccessDeniedException(response, errorBody)
@@ -1836,9 +1908,6 @@ func awsAwsjson10_deserializeOpErrorIsAuthorized(response *smithyhttp.Response, 
 	errorMessage := errorCode
 
 	headerCode := response.Header.Get("X-Amzn-ErrorType")
-	if len(headerCode) != 0 {
-		errorCode = restjson.SanitizeErrorCode(headerCode)
-	}
 
 	var buff [1024]byte
 	ringBuffer := smithyio.NewRingBuffer(buff[:])
@@ -1846,7 +1915,7 @@ func awsAwsjson10_deserializeOpErrorIsAuthorized(response *smithyhttp.Response, 
 	body := io.TeeReader(errorBody, ringBuffer)
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
-	jsonCode, message, err := restjson.GetErrorInfo(decoder)
+	bodyInfo, err := getProtocolErrorInfo(decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -1858,13 +1927,12 @@ func awsAwsjson10_deserializeOpErrorIsAuthorized(response *smithyhttp.Response, 
 	}
 
 	errorBody.Seek(0, io.SeekStart)
-	if len(headerCode) == 0 && len(jsonCode) != 0 {
-		errorCode = restjson.SanitizeErrorCode(jsonCode)
+	if typ, ok := resolveProtocolErrorType(headerCode, bodyInfo); ok {
+		errorCode = restjson.SanitizeErrorCode(typ)
 	}
-	if len(message) != 0 {
-		errorMessage = message
+	if len(bodyInfo.Message) != 0 {
+		errorMessage = bodyInfo.Message
 	}
-
 	switch {
 	case strings.EqualFold("AccessDeniedException", errorCode):
 		return awsAwsjson10_deserializeErrorAccessDeniedException(response, errorBody)
@@ -1959,9 +2027,6 @@ func awsAwsjson10_deserializeOpErrorIsAuthorizedWithToken(response *smithyhttp.R
 	errorMessage := errorCode
 
 	headerCode := response.Header.Get("X-Amzn-ErrorType")
-	if len(headerCode) != 0 {
-		errorCode = restjson.SanitizeErrorCode(headerCode)
-	}
 
 	var buff [1024]byte
 	ringBuffer := smithyio.NewRingBuffer(buff[:])
@@ -1969,7 +2034,7 @@ func awsAwsjson10_deserializeOpErrorIsAuthorizedWithToken(response *smithyhttp.R
 	body := io.TeeReader(errorBody, ringBuffer)
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
-	jsonCode, message, err := restjson.GetErrorInfo(decoder)
+	bodyInfo, err := getProtocolErrorInfo(decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -1981,13 +2046,12 @@ func awsAwsjson10_deserializeOpErrorIsAuthorizedWithToken(response *smithyhttp.R
 	}
 
 	errorBody.Seek(0, io.SeekStart)
-	if len(headerCode) == 0 && len(jsonCode) != 0 {
-		errorCode = restjson.SanitizeErrorCode(jsonCode)
+	if typ, ok := resolveProtocolErrorType(headerCode, bodyInfo); ok {
+		errorCode = restjson.SanitizeErrorCode(typ)
 	}
-	if len(message) != 0 {
-		errorMessage = message
+	if len(bodyInfo.Message) != 0 {
+		errorMessage = bodyInfo.Message
 	}
-
 	switch {
 	case strings.EqualFold("AccessDeniedException", errorCode):
 		return awsAwsjson10_deserializeErrorAccessDeniedException(response, errorBody)
@@ -2082,9 +2146,6 @@ func awsAwsjson10_deserializeOpErrorListIdentitySources(response *smithyhttp.Res
 	errorMessage := errorCode
 
 	headerCode := response.Header.Get("X-Amzn-ErrorType")
-	if len(headerCode) != 0 {
-		errorCode = restjson.SanitizeErrorCode(headerCode)
-	}
 
 	var buff [1024]byte
 	ringBuffer := smithyio.NewRingBuffer(buff[:])
@@ -2092,7 +2153,7 @@ func awsAwsjson10_deserializeOpErrorListIdentitySources(response *smithyhttp.Res
 	body := io.TeeReader(errorBody, ringBuffer)
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
-	jsonCode, message, err := restjson.GetErrorInfo(decoder)
+	bodyInfo, err := getProtocolErrorInfo(decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -2104,13 +2165,12 @@ func awsAwsjson10_deserializeOpErrorListIdentitySources(response *smithyhttp.Res
 	}
 
 	errorBody.Seek(0, io.SeekStart)
-	if len(headerCode) == 0 && len(jsonCode) != 0 {
-		errorCode = restjson.SanitizeErrorCode(jsonCode)
+	if typ, ok := resolveProtocolErrorType(headerCode, bodyInfo); ok {
+		errorCode = restjson.SanitizeErrorCode(typ)
 	}
-	if len(message) != 0 {
-		errorMessage = message
+	if len(bodyInfo.Message) != 0 {
+		errorMessage = bodyInfo.Message
 	}
-
 	switch {
 	case strings.EqualFold("AccessDeniedException", errorCode):
 		return awsAwsjson10_deserializeErrorAccessDeniedException(response, errorBody)
@@ -2205,9 +2265,6 @@ func awsAwsjson10_deserializeOpErrorListPolicies(response *smithyhttp.Response, 
 	errorMessage := errorCode
 
 	headerCode := response.Header.Get("X-Amzn-ErrorType")
-	if len(headerCode) != 0 {
-		errorCode = restjson.SanitizeErrorCode(headerCode)
-	}
 
 	var buff [1024]byte
 	ringBuffer := smithyio.NewRingBuffer(buff[:])
@@ -2215,7 +2272,7 @@ func awsAwsjson10_deserializeOpErrorListPolicies(response *smithyhttp.Response, 
 	body := io.TeeReader(errorBody, ringBuffer)
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
-	jsonCode, message, err := restjson.GetErrorInfo(decoder)
+	bodyInfo, err := getProtocolErrorInfo(decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -2227,13 +2284,12 @@ func awsAwsjson10_deserializeOpErrorListPolicies(response *smithyhttp.Response, 
 	}
 
 	errorBody.Seek(0, io.SeekStart)
-	if len(headerCode) == 0 && len(jsonCode) != 0 {
-		errorCode = restjson.SanitizeErrorCode(jsonCode)
+	if typ, ok := resolveProtocolErrorType(headerCode, bodyInfo); ok {
+		errorCode = restjson.SanitizeErrorCode(typ)
 	}
-	if len(message) != 0 {
-		errorMessage = message
+	if len(bodyInfo.Message) != 0 {
+		errorMessage = bodyInfo.Message
 	}
-
 	switch {
 	case strings.EqualFold("AccessDeniedException", errorCode):
 		return awsAwsjson10_deserializeErrorAccessDeniedException(response, errorBody)
@@ -2328,9 +2384,6 @@ func awsAwsjson10_deserializeOpErrorListPolicyStores(response *smithyhttp.Respon
 	errorMessage := errorCode
 
 	headerCode := response.Header.Get("X-Amzn-ErrorType")
-	if len(headerCode) != 0 {
-		errorCode = restjson.SanitizeErrorCode(headerCode)
-	}
 
 	var buff [1024]byte
 	ringBuffer := smithyio.NewRingBuffer(buff[:])
@@ -2338,7 +2391,7 @@ func awsAwsjson10_deserializeOpErrorListPolicyStores(response *smithyhttp.Respon
 	body := io.TeeReader(errorBody, ringBuffer)
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
-	jsonCode, message, err := restjson.GetErrorInfo(decoder)
+	bodyInfo, err := getProtocolErrorInfo(decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -2350,13 +2403,12 @@ func awsAwsjson10_deserializeOpErrorListPolicyStores(response *smithyhttp.Respon
 	}
 
 	errorBody.Seek(0, io.SeekStart)
-	if len(headerCode) == 0 && len(jsonCode) != 0 {
-		errorCode = restjson.SanitizeErrorCode(jsonCode)
+	if typ, ok := resolveProtocolErrorType(headerCode, bodyInfo); ok {
+		errorCode = restjson.SanitizeErrorCode(typ)
 	}
-	if len(message) != 0 {
-		errorMessage = message
+	if len(bodyInfo.Message) != 0 {
+		errorMessage = bodyInfo.Message
 	}
-
 	switch {
 	case strings.EqualFold("AccessDeniedException", errorCode):
 		return awsAwsjson10_deserializeErrorAccessDeniedException(response, errorBody)
@@ -2448,9 +2500,6 @@ func awsAwsjson10_deserializeOpErrorListPolicyTemplates(response *smithyhttp.Res
 	errorMessage := errorCode
 
 	headerCode := response.Header.Get("X-Amzn-ErrorType")
-	if len(headerCode) != 0 {
-		errorCode = restjson.SanitizeErrorCode(headerCode)
-	}
 
 	var buff [1024]byte
 	ringBuffer := smithyio.NewRingBuffer(buff[:])
@@ -2458,7 +2507,7 @@ func awsAwsjson10_deserializeOpErrorListPolicyTemplates(response *smithyhttp.Res
 	body := io.TeeReader(errorBody, ringBuffer)
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
-	jsonCode, message, err := restjson.GetErrorInfo(decoder)
+	bodyInfo, err := getProtocolErrorInfo(decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -2470,13 +2519,12 @@ func awsAwsjson10_deserializeOpErrorListPolicyTemplates(response *smithyhttp.Res
 	}
 
 	errorBody.Seek(0, io.SeekStart)
-	if len(headerCode) == 0 && len(jsonCode) != 0 {
-		errorCode = restjson.SanitizeErrorCode(jsonCode)
+	if typ, ok := resolveProtocolErrorType(headerCode, bodyInfo); ok {
+		errorCode = restjson.SanitizeErrorCode(typ)
 	}
-	if len(message) != 0 {
-		errorMessage = message
+	if len(bodyInfo.Message) != 0 {
+		errorMessage = bodyInfo.Message
 	}
-
 	switch {
 	case strings.EqualFold("AccessDeniedException", errorCode):
 		return awsAwsjson10_deserializeErrorAccessDeniedException(response, errorBody)
@@ -2571,9 +2619,6 @@ func awsAwsjson10_deserializeOpErrorPutSchema(response *smithyhttp.Response, met
 	errorMessage := errorCode
 
 	headerCode := response.Header.Get("X-Amzn-ErrorType")
-	if len(headerCode) != 0 {
-		errorCode = restjson.SanitizeErrorCode(headerCode)
-	}
 
 	var buff [1024]byte
 	ringBuffer := smithyio.NewRingBuffer(buff[:])
@@ -2581,7 +2626,7 @@ func awsAwsjson10_deserializeOpErrorPutSchema(response *smithyhttp.Response, met
 	body := io.TeeReader(errorBody, ringBuffer)
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
-	jsonCode, message, err := restjson.GetErrorInfo(decoder)
+	bodyInfo, err := getProtocolErrorInfo(decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -2593,13 +2638,12 @@ func awsAwsjson10_deserializeOpErrorPutSchema(response *smithyhttp.Response, met
 	}
 
 	errorBody.Seek(0, io.SeekStart)
-	if len(headerCode) == 0 && len(jsonCode) != 0 {
-		errorCode = restjson.SanitizeErrorCode(jsonCode)
+	if typ, ok := resolveProtocolErrorType(headerCode, bodyInfo); ok {
+		errorCode = restjson.SanitizeErrorCode(typ)
 	}
-	if len(message) != 0 {
-		errorMessage = message
+	if len(bodyInfo.Message) != 0 {
+		errorMessage = bodyInfo.Message
 	}
-
 	switch {
 	case strings.EqualFold("AccessDeniedException", errorCode):
 		return awsAwsjson10_deserializeErrorAccessDeniedException(response, errorBody)
@@ -2700,9 +2744,6 @@ func awsAwsjson10_deserializeOpErrorUpdateIdentitySource(response *smithyhttp.Re
 	errorMessage := errorCode
 
 	headerCode := response.Header.Get("X-Amzn-ErrorType")
-	if len(headerCode) != 0 {
-		errorCode = restjson.SanitizeErrorCode(headerCode)
-	}
 
 	var buff [1024]byte
 	ringBuffer := smithyio.NewRingBuffer(buff[:])
@@ -2710,7 +2751,7 @@ func awsAwsjson10_deserializeOpErrorUpdateIdentitySource(response *smithyhttp.Re
 	body := io.TeeReader(errorBody, ringBuffer)
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
-	jsonCode, message, err := restjson.GetErrorInfo(decoder)
+	bodyInfo, err := getProtocolErrorInfo(decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -2722,13 +2763,12 @@ func awsAwsjson10_deserializeOpErrorUpdateIdentitySource(response *smithyhttp.Re
 	}
 
 	errorBody.Seek(0, io.SeekStart)
-	if len(headerCode) == 0 && len(jsonCode) != 0 {
-		errorCode = restjson.SanitizeErrorCode(jsonCode)
+	if typ, ok := resolveProtocolErrorType(headerCode, bodyInfo); ok {
+		errorCode = restjson.SanitizeErrorCode(typ)
 	}
-	if len(message) != 0 {
-		errorMessage = message
+	if len(bodyInfo.Message) != 0 {
+		errorMessage = bodyInfo.Message
 	}
-
 	switch {
 	case strings.EqualFold("AccessDeniedException", errorCode):
 		return awsAwsjson10_deserializeErrorAccessDeniedException(response, errorBody)
@@ -2826,9 +2866,6 @@ func awsAwsjson10_deserializeOpErrorUpdatePolicy(response *smithyhttp.Response, 
 	errorMessage := errorCode
 
 	headerCode := response.Header.Get("X-Amzn-ErrorType")
-	if len(headerCode) != 0 {
-		errorCode = restjson.SanitizeErrorCode(headerCode)
-	}
 
 	var buff [1024]byte
 	ringBuffer := smithyio.NewRingBuffer(buff[:])
@@ -2836,7 +2873,7 @@ func awsAwsjson10_deserializeOpErrorUpdatePolicy(response *smithyhttp.Response, 
 	body := io.TeeReader(errorBody, ringBuffer)
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
-	jsonCode, message, err := restjson.GetErrorInfo(decoder)
+	bodyInfo, err := getProtocolErrorInfo(decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -2848,13 +2885,12 @@ func awsAwsjson10_deserializeOpErrorUpdatePolicy(response *smithyhttp.Response, 
 	}
 
 	errorBody.Seek(0, io.SeekStart)
-	if len(headerCode) == 0 && len(jsonCode) != 0 {
-		errorCode = restjson.SanitizeErrorCode(jsonCode)
+	if typ, ok := resolveProtocolErrorType(headerCode, bodyInfo); ok {
+		errorCode = restjson.SanitizeErrorCode(typ)
 	}
-	if len(message) != 0 {
-		errorMessage = message
+	if len(bodyInfo.Message) != 0 {
+		errorMessage = bodyInfo.Message
 	}
-
 	switch {
 	case strings.EqualFold("AccessDeniedException", errorCode):
 		return awsAwsjson10_deserializeErrorAccessDeniedException(response, errorBody)
@@ -2955,9 +2991,6 @@ func awsAwsjson10_deserializeOpErrorUpdatePolicyStore(response *smithyhttp.Respo
 	errorMessage := errorCode
 
 	headerCode := response.Header.Get("X-Amzn-ErrorType")
-	if len(headerCode) != 0 {
-		errorCode = restjson.SanitizeErrorCode(headerCode)
-	}
 
 	var buff [1024]byte
 	ringBuffer := smithyio.NewRingBuffer(buff[:])
@@ -2965,7 +2998,7 @@ func awsAwsjson10_deserializeOpErrorUpdatePolicyStore(response *smithyhttp.Respo
 	body := io.TeeReader(errorBody, ringBuffer)
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
-	jsonCode, message, err := restjson.GetErrorInfo(decoder)
+	bodyInfo, err := getProtocolErrorInfo(decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -2977,13 +3010,12 @@ func awsAwsjson10_deserializeOpErrorUpdatePolicyStore(response *smithyhttp.Respo
 	}
 
 	errorBody.Seek(0, io.SeekStart)
-	if len(headerCode) == 0 && len(jsonCode) != 0 {
-		errorCode = restjson.SanitizeErrorCode(jsonCode)
+	if typ, ok := resolveProtocolErrorType(headerCode, bodyInfo); ok {
+		errorCode = restjson.SanitizeErrorCode(typ)
 	}
-	if len(message) != 0 {
-		errorMessage = message
+	if len(bodyInfo.Message) != 0 {
+		errorMessage = bodyInfo.Message
 	}
-
 	switch {
 	case strings.EqualFold("AccessDeniedException", errorCode):
 		return awsAwsjson10_deserializeErrorAccessDeniedException(response, errorBody)
@@ -3081,9 +3113,6 @@ func awsAwsjson10_deserializeOpErrorUpdatePolicyTemplate(response *smithyhttp.Re
 	errorMessage := errorCode
 
 	headerCode := response.Header.Get("X-Amzn-ErrorType")
-	if len(headerCode) != 0 {
-		errorCode = restjson.SanitizeErrorCode(headerCode)
-	}
 
 	var buff [1024]byte
 	ringBuffer := smithyio.NewRingBuffer(buff[:])
@@ -3091,7 +3120,7 @@ func awsAwsjson10_deserializeOpErrorUpdatePolicyTemplate(response *smithyhttp.Re
 	body := io.TeeReader(errorBody, ringBuffer)
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
-	jsonCode, message, err := restjson.GetErrorInfo(decoder)
+	bodyInfo, err := getProtocolErrorInfo(decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -3103,13 +3132,12 @@ func awsAwsjson10_deserializeOpErrorUpdatePolicyTemplate(response *smithyhttp.Re
 	}
 
 	errorBody.Seek(0, io.SeekStart)
-	if len(headerCode) == 0 && len(jsonCode) != 0 {
-		errorCode = restjson.SanitizeErrorCode(jsonCode)
+	if typ, ok := resolveProtocolErrorType(headerCode, bodyInfo); ok {
+		errorCode = restjson.SanitizeErrorCode(typ)
 	}
-	if len(message) != 0 {
-		errorMessage = message
+	if len(bodyInfo.Message) != 0 {
+		errorMessage = bodyInfo.Message
 	}
-
 	switch {
 	case strings.EqualFold("AccessDeniedException", errorCode):
 		return awsAwsjson10_deserializeErrorAccessDeniedException(response, errorBody)
@@ -3473,6 +3501,40 @@ func awsAwsjson10_deserializeDocumentActionIdentifier(v **types.ActionIdentifier
 	return nil
 }
 
+func awsAwsjson10_deserializeDocumentActionIdentifierList(v *[]types.ActionIdentifier, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.ActionIdentifier
+	if *v == nil {
+		cv = []types.ActionIdentifier{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.ActionIdentifier
+		destAddr := &col
+		if err := awsAwsjson10_deserializeDocumentActionIdentifier(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsAwsjson10_deserializeDocumentAttributeValue(v *types.AttributeValue, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -3566,6 +3628,42 @@ loop:
 		}
 	}
 	*v = uv
+	return nil
+}
+
+func awsAwsjson10_deserializeDocumentAudiences(v *[]string, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []string
+	if *v == nil {
+		cv = []string{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col string
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected Audience to be of type string, got %T instead", value)
+			}
+			col = jtv
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
 	return nil
 }
 
@@ -3709,6 +3807,141 @@ func awsAwsjson10_deserializeDocumentBatchIsAuthorizedOutputList(v *[]types.Batc
 	return nil
 }
 
+func awsAwsjson10_deserializeDocumentBatchIsAuthorizedWithTokenInputItem(v **types.BatchIsAuthorizedWithTokenInputItem, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.BatchIsAuthorizedWithTokenInputItem
+	if *v == nil {
+		sv = &types.BatchIsAuthorizedWithTokenInputItem{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "action":
+			if err := awsAwsjson10_deserializeDocumentActionIdentifier(&sv.Action, value); err != nil {
+				return err
+			}
+
+		case "context":
+			if err := awsAwsjson10_deserializeDocumentContextDefinition(&sv.Context, value); err != nil {
+				return err
+			}
+
+		case "resource":
+			if err := awsAwsjson10_deserializeDocumentEntityIdentifier(&sv.Resource, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson10_deserializeDocumentBatchIsAuthorizedWithTokenOutputItem(v **types.BatchIsAuthorizedWithTokenOutputItem, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.BatchIsAuthorizedWithTokenOutputItem
+	if *v == nil {
+		sv = &types.BatchIsAuthorizedWithTokenOutputItem{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "decision":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Decision to be of type string, got %T instead", value)
+				}
+				sv.Decision = types.Decision(jtv)
+			}
+
+		case "determiningPolicies":
+			if err := awsAwsjson10_deserializeDocumentDeterminingPolicyList(&sv.DeterminingPolicies, value); err != nil {
+				return err
+			}
+
+		case "errors":
+			if err := awsAwsjson10_deserializeDocumentEvaluationErrorList(&sv.Errors, value); err != nil {
+				return err
+			}
+
+		case "request":
+			if err := awsAwsjson10_deserializeDocumentBatchIsAuthorizedWithTokenInputItem(&sv.Request, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson10_deserializeDocumentBatchIsAuthorizedWithTokenOutputList(v *[]types.BatchIsAuthorizedWithTokenOutputItem, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.BatchIsAuthorizedWithTokenOutputItem
+	if *v == nil {
+		cv = []types.BatchIsAuthorizedWithTokenOutputItem{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.BatchIsAuthorizedWithTokenOutputItem
+		destAddr := &col
+		if err := awsAwsjson10_deserializeDocumentBatchIsAuthorizedWithTokenOutputItem(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsAwsjson10_deserializeDocumentClientIds(v *[]string, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -3742,6 +3975,304 @@ func awsAwsjson10_deserializeDocumentClientIds(v *[]string, value interface{}) e
 
 	}
 	*v = cv
+	return nil
+}
+
+func awsAwsjson10_deserializeDocumentCognitoGroupConfigurationDetail(v **types.CognitoGroupConfigurationDetail, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.CognitoGroupConfigurationDetail
+	if *v == nil {
+		sv = &types.CognitoGroupConfigurationDetail{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "groupEntityType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected GroupEntityType to be of type string, got %T instead", value)
+				}
+				sv.GroupEntityType = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson10_deserializeDocumentCognitoGroupConfigurationItem(v **types.CognitoGroupConfigurationItem, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.CognitoGroupConfigurationItem
+	if *v == nil {
+		sv = &types.CognitoGroupConfigurationItem{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "groupEntityType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected GroupEntityType to be of type string, got %T instead", value)
+				}
+				sv.GroupEntityType = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson10_deserializeDocumentCognitoUserPoolConfigurationDetail(v **types.CognitoUserPoolConfigurationDetail, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.CognitoUserPoolConfigurationDetail
+	if *v == nil {
+		sv = &types.CognitoUserPoolConfigurationDetail{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "clientIds":
+			if err := awsAwsjson10_deserializeDocumentClientIds(&sv.ClientIds, value); err != nil {
+				return err
+			}
+
+		case "groupConfiguration":
+			if err := awsAwsjson10_deserializeDocumentCognitoGroupConfigurationDetail(&sv.GroupConfiguration, value); err != nil {
+				return err
+			}
+
+		case "issuer":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Issuer to be of type string, got %T instead", value)
+				}
+				sv.Issuer = ptr.String(jtv)
+			}
+
+		case "userPoolArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected UserPoolArn to be of type string, got %T instead", value)
+				}
+				sv.UserPoolArn = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson10_deserializeDocumentCognitoUserPoolConfigurationItem(v **types.CognitoUserPoolConfigurationItem, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.CognitoUserPoolConfigurationItem
+	if *v == nil {
+		sv = &types.CognitoUserPoolConfigurationItem{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "clientIds":
+			if err := awsAwsjson10_deserializeDocumentClientIds(&sv.ClientIds, value); err != nil {
+				return err
+			}
+
+		case "groupConfiguration":
+			if err := awsAwsjson10_deserializeDocumentCognitoGroupConfigurationItem(&sv.GroupConfiguration, value); err != nil {
+				return err
+			}
+
+		case "issuer":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Issuer to be of type string, got %T instead", value)
+				}
+				sv.Issuer = ptr.String(jtv)
+			}
+
+		case "userPoolArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected UserPoolArn to be of type string, got %T instead", value)
+				}
+				sv.UserPoolArn = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson10_deserializeDocumentConfigurationDetail(v *types.ConfigurationDetail, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var uv types.ConfigurationDetail
+loop:
+	for key, value := range shape {
+		if value == nil {
+			continue
+		}
+		switch key {
+		case "cognitoUserPoolConfiguration":
+			var mv types.CognitoUserPoolConfigurationDetail
+			destAddr := &mv
+			if err := awsAwsjson10_deserializeDocumentCognitoUserPoolConfigurationDetail(&destAddr, value); err != nil {
+				return err
+			}
+			mv = *destAddr
+			uv = &types.ConfigurationDetailMemberCognitoUserPoolConfiguration{Value: mv}
+			break loop
+
+		case "openIdConnectConfiguration":
+			var mv types.OpenIdConnectConfigurationDetail
+			destAddr := &mv
+			if err := awsAwsjson10_deserializeDocumentOpenIdConnectConfigurationDetail(&destAddr, value); err != nil {
+				return err
+			}
+			mv = *destAddr
+			uv = &types.ConfigurationDetailMemberOpenIdConnectConfiguration{Value: mv}
+			break loop
+
+		default:
+			uv = &types.UnknownUnionMember{Tag: key}
+			break loop
+
+		}
+	}
+	*v = uv
+	return nil
+}
+
+func awsAwsjson10_deserializeDocumentConfigurationItem(v *types.ConfigurationItem, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var uv types.ConfigurationItem
+loop:
+	for key, value := range shape {
+		if value == nil {
+			continue
+		}
+		switch key {
+		case "cognitoUserPoolConfiguration":
+			var mv types.CognitoUserPoolConfigurationItem
+			destAddr := &mv
+			if err := awsAwsjson10_deserializeDocumentCognitoUserPoolConfigurationItem(&destAddr, value); err != nil {
+				return err
+			}
+			mv = *destAddr
+			uv = &types.ConfigurationItemMemberCognitoUserPoolConfiguration{Value: mv}
+			break loop
+
+		case "openIdConnectConfiguration":
+			var mv types.OpenIdConnectConfigurationItem
+			destAddr := &mv
+			if err := awsAwsjson10_deserializeDocumentOpenIdConnectConfigurationItem(&destAddr, value); err != nil {
+				return err
+			}
+			mv = *destAddr
+			uv = &types.ConfigurationItemMemberOpenIdConnectConfiguration{Value: mv}
+			break loop
+
+		default:
+			uv = &types.UnknownUnionMember{Tag: key}
+			break loop
+
+		}
+	}
+	*v = uv
 	return nil
 }
 
@@ -4144,6 +4675,11 @@ func awsAwsjson10_deserializeDocumentIdentitySourceItem(v **types.IdentitySource
 
 	for key, value := range shape {
 		switch key {
+		case "configuration":
+			if err := awsAwsjson10_deserializeDocumentConfigurationItem(&sv.Configuration, value); err != nil {
+				return err
+			}
+
 		case "createdDate":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4384,6 +4920,502 @@ func awsAwsjson10_deserializeDocumentNamespaceList(v *[]string, value interface{
 	return nil
 }
 
+func awsAwsjson10_deserializeDocumentOpenIdConnectAccessTokenConfigurationDetail(v **types.OpenIdConnectAccessTokenConfigurationDetail, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.OpenIdConnectAccessTokenConfigurationDetail
+	if *v == nil {
+		sv = &types.OpenIdConnectAccessTokenConfigurationDetail{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "audiences":
+			if err := awsAwsjson10_deserializeDocumentAudiences(&sv.Audiences, value); err != nil {
+				return err
+			}
+
+		case "principalIdClaim":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Claim to be of type string, got %T instead", value)
+				}
+				sv.PrincipalIdClaim = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson10_deserializeDocumentOpenIdConnectAccessTokenConfigurationItem(v **types.OpenIdConnectAccessTokenConfigurationItem, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.OpenIdConnectAccessTokenConfigurationItem
+	if *v == nil {
+		sv = &types.OpenIdConnectAccessTokenConfigurationItem{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "audiences":
+			if err := awsAwsjson10_deserializeDocumentAudiences(&sv.Audiences, value); err != nil {
+				return err
+			}
+
+		case "principalIdClaim":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Claim to be of type string, got %T instead", value)
+				}
+				sv.PrincipalIdClaim = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson10_deserializeDocumentOpenIdConnectConfigurationDetail(v **types.OpenIdConnectConfigurationDetail, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.OpenIdConnectConfigurationDetail
+	if *v == nil {
+		sv = &types.OpenIdConnectConfigurationDetail{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "entityIdPrefix":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected EntityIdPrefix to be of type string, got %T instead", value)
+				}
+				sv.EntityIdPrefix = ptr.String(jtv)
+			}
+
+		case "groupConfiguration":
+			if err := awsAwsjson10_deserializeDocumentOpenIdConnectGroupConfigurationDetail(&sv.GroupConfiguration, value); err != nil {
+				return err
+			}
+
+		case "issuer":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Issuer to be of type string, got %T instead", value)
+				}
+				sv.Issuer = ptr.String(jtv)
+			}
+
+		case "tokenSelection":
+			if err := awsAwsjson10_deserializeDocumentOpenIdConnectTokenSelectionDetail(&sv.TokenSelection, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson10_deserializeDocumentOpenIdConnectConfigurationItem(v **types.OpenIdConnectConfigurationItem, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.OpenIdConnectConfigurationItem
+	if *v == nil {
+		sv = &types.OpenIdConnectConfigurationItem{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "entityIdPrefix":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected EntityIdPrefix to be of type string, got %T instead", value)
+				}
+				sv.EntityIdPrefix = ptr.String(jtv)
+			}
+
+		case "groupConfiguration":
+			if err := awsAwsjson10_deserializeDocumentOpenIdConnectGroupConfigurationItem(&sv.GroupConfiguration, value); err != nil {
+				return err
+			}
+
+		case "issuer":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Issuer to be of type string, got %T instead", value)
+				}
+				sv.Issuer = ptr.String(jtv)
+			}
+
+		case "tokenSelection":
+			if err := awsAwsjson10_deserializeDocumentOpenIdConnectTokenSelectionItem(&sv.TokenSelection, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson10_deserializeDocumentOpenIdConnectGroupConfigurationDetail(v **types.OpenIdConnectGroupConfigurationDetail, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.OpenIdConnectGroupConfigurationDetail
+	if *v == nil {
+		sv = &types.OpenIdConnectGroupConfigurationDetail{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "groupClaim":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Claim to be of type string, got %T instead", value)
+				}
+				sv.GroupClaim = ptr.String(jtv)
+			}
+
+		case "groupEntityType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected GroupEntityType to be of type string, got %T instead", value)
+				}
+				sv.GroupEntityType = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson10_deserializeDocumentOpenIdConnectGroupConfigurationItem(v **types.OpenIdConnectGroupConfigurationItem, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.OpenIdConnectGroupConfigurationItem
+	if *v == nil {
+		sv = &types.OpenIdConnectGroupConfigurationItem{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "groupClaim":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Claim to be of type string, got %T instead", value)
+				}
+				sv.GroupClaim = ptr.String(jtv)
+			}
+
+		case "groupEntityType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected GroupEntityType to be of type string, got %T instead", value)
+				}
+				sv.GroupEntityType = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson10_deserializeDocumentOpenIdConnectIdentityTokenConfigurationDetail(v **types.OpenIdConnectIdentityTokenConfigurationDetail, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.OpenIdConnectIdentityTokenConfigurationDetail
+	if *v == nil {
+		sv = &types.OpenIdConnectIdentityTokenConfigurationDetail{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "clientIds":
+			if err := awsAwsjson10_deserializeDocumentClientIds(&sv.ClientIds, value); err != nil {
+				return err
+			}
+
+		case "principalIdClaim":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Claim to be of type string, got %T instead", value)
+				}
+				sv.PrincipalIdClaim = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson10_deserializeDocumentOpenIdConnectIdentityTokenConfigurationItem(v **types.OpenIdConnectIdentityTokenConfigurationItem, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.OpenIdConnectIdentityTokenConfigurationItem
+	if *v == nil {
+		sv = &types.OpenIdConnectIdentityTokenConfigurationItem{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "clientIds":
+			if err := awsAwsjson10_deserializeDocumentClientIds(&sv.ClientIds, value); err != nil {
+				return err
+			}
+
+		case "principalIdClaim":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Claim to be of type string, got %T instead", value)
+				}
+				sv.PrincipalIdClaim = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson10_deserializeDocumentOpenIdConnectTokenSelectionDetail(v *types.OpenIdConnectTokenSelectionDetail, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var uv types.OpenIdConnectTokenSelectionDetail
+loop:
+	for key, value := range shape {
+		if value == nil {
+			continue
+		}
+		switch key {
+		case "accessTokenOnly":
+			var mv types.OpenIdConnectAccessTokenConfigurationDetail
+			destAddr := &mv
+			if err := awsAwsjson10_deserializeDocumentOpenIdConnectAccessTokenConfigurationDetail(&destAddr, value); err != nil {
+				return err
+			}
+			mv = *destAddr
+			uv = &types.OpenIdConnectTokenSelectionDetailMemberAccessTokenOnly{Value: mv}
+			break loop
+
+		case "identityTokenOnly":
+			var mv types.OpenIdConnectIdentityTokenConfigurationDetail
+			destAddr := &mv
+			if err := awsAwsjson10_deserializeDocumentOpenIdConnectIdentityTokenConfigurationDetail(&destAddr, value); err != nil {
+				return err
+			}
+			mv = *destAddr
+			uv = &types.OpenIdConnectTokenSelectionDetailMemberIdentityTokenOnly{Value: mv}
+			break loop
+
+		default:
+			uv = &types.UnknownUnionMember{Tag: key}
+			break loop
+
+		}
+	}
+	*v = uv
+	return nil
+}
+
+func awsAwsjson10_deserializeDocumentOpenIdConnectTokenSelectionItem(v *types.OpenIdConnectTokenSelectionItem, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var uv types.OpenIdConnectTokenSelectionItem
+loop:
+	for key, value := range shape {
+		if value == nil {
+			continue
+		}
+		switch key {
+		case "accessTokenOnly":
+			var mv types.OpenIdConnectAccessTokenConfigurationItem
+			destAddr := &mv
+			if err := awsAwsjson10_deserializeDocumentOpenIdConnectAccessTokenConfigurationItem(&destAddr, value); err != nil {
+				return err
+			}
+			mv = *destAddr
+			uv = &types.OpenIdConnectTokenSelectionItemMemberAccessTokenOnly{Value: mv}
+			break loop
+
+		case "identityTokenOnly":
+			var mv types.OpenIdConnectIdentityTokenConfigurationItem
+			destAddr := &mv
+			if err := awsAwsjson10_deserializeDocumentOpenIdConnectIdentityTokenConfigurationItem(&destAddr, value); err != nil {
+				return err
+			}
+			mv = *destAddr
+			uv = &types.OpenIdConnectTokenSelectionItemMemberIdentityTokenOnly{Value: mv}
+			break loop
+
+		default:
+			uv = &types.UnknownUnionMember{Tag: key}
+			break loop
+
+		}
+	}
+	*v = uv
+	return nil
+}
+
 func awsAwsjson10_deserializeDocumentPolicyDefinitionDetail(v *types.PolicyDefinitionDetail, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -4506,6 +5538,11 @@ func awsAwsjson10_deserializeDocumentPolicyItem(v **types.PolicyItem, value inte
 
 	for key, value := range shape {
 		switch key {
+		case "actions":
+			if err := awsAwsjson10_deserializeDocumentActionIdentifierList(&sv.Actions, value); err != nil {
+				return err
+			}
+
 		case "createdDate":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4522,6 +5559,15 @@ func awsAwsjson10_deserializeDocumentPolicyItem(v **types.PolicyItem, value inte
 		case "definition":
 			if err := awsAwsjson10_deserializeDocumentPolicyDefinitionItem(&sv.Definition, value); err != nil {
 				return err
+			}
+
+		case "effect":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected PolicyEffect to be of type string, got %T instead", value)
+				}
+				sv.Effect = types.PolicyEffect(jtv)
 			}
 
 		case "lastUpdatedDate":
@@ -5587,6 +6633,47 @@ func awsAwsjson10_deserializeOpDocumentBatchIsAuthorizedOutput(v **BatchIsAuthor
 	return nil
 }
 
+func awsAwsjson10_deserializeOpDocumentBatchIsAuthorizedWithTokenOutput(v **BatchIsAuthorizedWithTokenOutput, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *BatchIsAuthorizedWithTokenOutput
+	if *v == nil {
+		sv = &BatchIsAuthorizedWithTokenOutput{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "principal":
+			if err := awsAwsjson10_deserializeDocumentEntityIdentifier(&sv.Principal, value); err != nil {
+				return err
+			}
+
+		case "results":
+			if err := awsAwsjson10_deserializeDocumentBatchIsAuthorizedWithTokenOutputList(&sv.Results, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson10_deserializeOpDocumentCreateIdentitySourceOutput(v **CreateIdentitySourceOutput, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -5684,6 +6771,11 @@ func awsAwsjson10_deserializeOpDocumentCreatePolicyOutput(v **CreatePolicyOutput
 
 	for key, value := range shape {
 		switch key {
+		case "actions":
+			if err := awsAwsjson10_deserializeDocumentActionIdentifierList(&sv.Actions, value); err != nil {
+				return err
+			}
+
 		case "createdDate":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5695,6 +6787,15 @@ func awsAwsjson10_deserializeOpDocumentCreatePolicyOutput(v **CreatePolicyOutput
 					return err
 				}
 				sv.CreatedDate = ptr.Time(t)
+			}
+
+		case "effect":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected PolicyEffect to be of type string, got %T instead", value)
+				}
+				sv.Effect = types.PolicyEffect(jtv)
 			}
 
 		case "lastUpdatedDate":
@@ -6052,6 +7153,11 @@ func awsAwsjson10_deserializeOpDocumentGetIdentitySourceOutput(v **GetIdentitySo
 
 	for key, value := range shape {
 		switch key {
+		case "configuration":
+			if err := awsAwsjson10_deserializeDocumentConfigurationDetail(&sv.Configuration, value); err != nil {
+				return err
+			}
+
 		case "createdDate":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6141,6 +7247,11 @@ func awsAwsjson10_deserializeOpDocumentGetPolicyOutput(v **GetPolicyOutput, valu
 
 	for key, value := range shape {
 		switch key {
+		case "actions":
+			if err := awsAwsjson10_deserializeDocumentActionIdentifierList(&sv.Actions, value); err != nil {
+				return err
+			}
+
 		case "createdDate":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6157,6 +7268,15 @@ func awsAwsjson10_deserializeOpDocumentGetPolicyOutput(v **GetPolicyOutput, valu
 		case "definition":
 			if err := awsAwsjson10_deserializeDocumentPolicyDefinitionDetail(&sv.Definition, value); err != nil {
 				return err
+			}
+
+		case "effect":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected PolicyEffect to be of type string, got %T instead", value)
+				}
+				sv.Effect = types.PolicyEffect(jtv)
 			}
 
 		case "lastUpdatedDate":
@@ -6571,6 +7691,11 @@ func awsAwsjson10_deserializeOpDocumentIsAuthorizedWithTokenOutput(v **IsAuthori
 				return err
 			}
 
+		case "principal":
+			if err := awsAwsjson10_deserializeDocumentEntityIdentifier(&sv.Principal, value); err != nil {
+				return err
+			}
+
 		default:
 			_, _ = key, value
 
@@ -6928,6 +8053,11 @@ func awsAwsjson10_deserializeOpDocumentUpdatePolicyOutput(v **UpdatePolicyOutput
 
 	for key, value := range shape {
 		switch key {
+		case "actions":
+			if err := awsAwsjson10_deserializeDocumentActionIdentifierList(&sv.Actions, value); err != nil {
+				return err
+			}
+
 		case "createdDate":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6939,6 +8069,15 @@ func awsAwsjson10_deserializeOpDocumentUpdatePolicyOutput(v **UpdatePolicyOutput
 					return err
 				}
 				sv.CreatedDate = ptr.Time(t)
+			}
+
+		case "effect":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected PolicyEffect to be of type string, got %T instead", value)
+				}
+				sv.Effect = types.PolicyEffect(jtv)
 			}
 
 		case "lastUpdatedDate":
@@ -7148,4 +8287,33 @@ func awsAwsjson10_deserializeOpDocumentUpdatePolicyTemplateOutput(v **UpdatePoli
 	}
 	*v = sv
 	return nil
+}
+
+type protocolErrorInfo struct {
+	Type    string `json:"__type"`
+	Message string
+	Code    any // nonstandard for awsjson but some services do present the type here
+}
+
+func getProtocolErrorInfo(decoder *json.Decoder) (protocolErrorInfo, error) {
+	var errInfo protocolErrorInfo
+	if err := decoder.Decode(&errInfo); err != nil {
+		if err == io.EOF {
+			return errInfo, nil
+		}
+		return errInfo, err
+	}
+
+	return errInfo, nil
+}
+
+func resolveProtocolErrorType(headerType string, bodyInfo protocolErrorInfo) (string, bool) {
+	if len(headerType) != 0 {
+		return headerType, true
+	} else if len(bodyInfo.Type) != 0 {
+		return bodyInfo.Type, true
+	} else if code, ok := bodyInfo.Code.(string); ok && len(code) != 0 {
+		return code, true
+	}
+	return "", false
 }

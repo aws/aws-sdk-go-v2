@@ -6,14 +6,16 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/iot/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Describes a search index. Requires permission to access the DescribeIndex (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
-// action.
+// Describes a search index.
+//
+// Requires permission to access the [DescribeIndex] action.
+//
+// [DescribeIndex]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions
 func (c *Client) DescribeIndex(ctx context.Context, params *DescribeIndexInput, optFns ...func(*Options)) (*DescribeIndexOutput, error) {
 	if params == nil {
 		params = &DescribeIndexInput{}
@@ -49,16 +51,22 @@ type DescribeIndexOutput struct {
 
 	// Contains a value that specifies the type of indexing performed. Valid values
 	// are:
+	//
 	//   - REGISTRY – Your thing index contains only registry data.
+	//
 	//   - REGISTRY_AND_SHADOW - Your thing index contains registry data and shadow
 	//   data.
+	//
 	//   - REGISTRY_AND_CONNECTIVITY_STATUS - Your thing index contains registry data
 	//   and thing connectivity status data.
+	//
 	//   - REGISTRY_AND_SHADOW_AND_CONNECTIVITY_STATUS - Your thing index contains
 	//   registry data, shadow data, and thing connectivity status data.
+	//
 	//   - MULTI_INDEXING_MODE - Your thing index contains multiple data sources. For
-	//   more information, see GetIndexingConfiguration (https://docs.aws.amazon.com/iot/latest/apireference/API_GetIndexingConfiguration.html)
-	//   .
+	//   more information, see [GetIndexingConfiguration].
+	//
+	// [GetIndexingConfiguration]: https://docs.aws.amazon.com/iot/latest/apireference/API_GetIndexingConfiguration.html
 	Schema *string
 
 	// Metadata pertaining to the operation's result.
@@ -89,25 +97,25 @@ func (c *Client) addOperationDescribeIndexMiddlewares(stack *middleware.Stack, o
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -122,13 +130,16 @@ func (c *Client) addOperationDescribeIndexMiddlewares(stack *middleware.Stack, o
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDescribeIndexValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeIndex(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

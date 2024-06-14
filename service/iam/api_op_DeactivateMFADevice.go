@@ -6,16 +6,17 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Deactivates the specified MFA device and removes it from association with the
-// user name for which it was originally enabled. For more information about
-// creating and working with virtual MFA devices, see Enabling a virtual
-// multi-factor authentication (MFA) device (https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_VirtualMFA.html)
+// user name for which it was originally enabled.
+//
+// For more information about creating and working with virtual MFA devices, see [Enabling a virtual multi-factor authentication (MFA) device]
 // in the IAM User Guide.
+//
+// [Enabling a virtual multi-factor authentication (MFA) device]: https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_VirtualMFA.html
 func (c *Client) DeactivateMFADevice(ctx context.Context, params *DeactivateMFADeviceInput, optFns ...func(*Options)) (*DeactivateMFADeviceOutput, error) {
 	if params == nil {
 		params = &DeactivateMFADeviceInput{}
@@ -34,18 +35,24 @@ func (c *Client) DeactivateMFADevice(ctx context.Context, params *DeactivateMFAD
 type DeactivateMFADeviceInput struct {
 
 	// The serial number that uniquely identifies the MFA device. For virtual MFA
-	// devices, the serial number is the device ARN. This parameter allows (through its
-	// regex pattern (http://wikipedia.org/wiki/regex) ) a string of characters
-	// consisting of upper and lowercase alphanumeric characters with no spaces. You
-	// can also include any of the following characters: =,.@:/-
+	// devices, the serial number is the device ARN.
+	//
+	// This parameter allows (through its [regex pattern]) a string of characters consisting of upper
+	// and lowercase alphanumeric characters with no spaces. You can also include any
+	// of the following characters: =,.@:/-
+	//
+	// [regex pattern]: http://wikipedia.org/wiki/regex
 	//
 	// This member is required.
 	SerialNumber *string
 
-	// The name of the user whose MFA device you want to deactivate. This parameter
-	// allows (through its regex pattern (http://wikipedia.org/wiki/regex) ) a string
-	// of characters consisting of upper and lowercase alphanumeric characters with no
-	// spaces. You can also include any of the following characters: _+=,.@-
+	// The name of the user whose MFA device you want to deactivate.
+	//
+	// This parameter allows (through its [regex pattern]) a string of characters consisting of upper
+	// and lowercase alphanumeric characters with no spaces. You can also include any
+	// of the following characters: _+=,.@-
+	//
+	// [regex pattern]: http://wikipedia.org/wiki/regex
 	//
 	// This member is required.
 	UserName *string
@@ -82,25 +89,25 @@ func (c *Client) addOperationDeactivateMFADeviceMiddlewares(stack *middleware.St
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -115,13 +122,16 @@ func (c *Client) addOperationDeactivateMFADeviceMiddlewares(stack *middleware.St
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDeactivateMFADeviceValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDeactivateMFADevice(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

@@ -6,16 +6,16 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/lexmodelsv2/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
-// Creates a custom slot type To create a custom slot type, specify a name for the
-// slot type and a set of enumeration values, the values that a slot of this type
-// can assume.
+// Creates a custom slot type
+//
+// To create a custom slot type, specify a name for the slot type and a set of
+// enumeration values, the values that a slot of this type can assume.
 func (c *Client) CreateSlotType(ctx context.Context, params *CreateSlotTypeInput, optFns ...func(*Options)) (*CreateSlotTypeOutput, error) {
 	if params == nil {
 		params = &CreateSlotTypeInput{}
@@ -46,8 +46,9 @@ type CreateSlotTypeInput struct {
 	// The identifier of the language and locale that the slot type will be used in.
 	// The string must match one of the supported locales. All of the bots, intents,
 	// and slots used by the slot type must have the same locale. For more information,
-	// see Supported languages (https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html)
-	// .
+	// see [Supported languages].
+	//
+	// [Supported languages]: https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html
 	//
 	// This member is required.
 	LocaleId *string
@@ -69,7 +70,9 @@ type CreateSlotTypeInput struct {
 
 	// The built-in slot type used as a parent of this slot type. When you define a
 	// parent slot type, the new slot type has the configuration of the parent slot
-	// type. Only AMAZON.AlphaNumeric is supported.
+	// type.
+	//
+	// Only AMAZON.AlphaNumeric is supported.
 	ParentSlotTypeSignature *string
 
 	// A list of SlotTypeValue objects that defines the values that the slot type can
@@ -79,8 +82,10 @@ type CreateSlotTypeInput struct {
 
 	// Determines the strategy that Amazon Lex uses to select a value from the list of
 	// possible values. The field can be set to one of the following values:
+	//
 	//   - ORIGINAL_VALUE - Returns the value entered by the user, if the user value is
 	//   similar to the slot value.
+	//
 	//   - TOP_RESOLUTION - If there is a resolution list for the slot, return the
 	//   first value in the resolution list. If there is no resolution list, return null.
 	//
@@ -159,25 +164,25 @@ func (c *Client) addOperationCreateSlotTypeMiddlewares(stack *middleware.Stack, 
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -192,13 +197,16 @@ func (c *Client) addOperationCreateSlotTypeMiddlewares(stack *middleware.Stack, 
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpCreateSlotTypeValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateSlotType(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

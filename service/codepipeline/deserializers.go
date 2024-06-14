@@ -18,7 +18,16 @@ import (
 	"io"
 	"io/ioutil"
 	"strings"
+	"time"
 )
+
+func deserializeS3Expires(v string) (*time.Time, error) {
+	t, err := smithytime.ParseHTTPDate(v)
+	if err != nil {
+		return nil, nil
+	}
+	return &t, nil
+}
 
 type awsAwsjson11_deserializeOpAcknowledgeJob struct {
 }
@@ -88,9 +97,6 @@ func awsAwsjson11_deserializeOpErrorAcknowledgeJob(response *smithyhttp.Response
 	errorMessage := errorCode
 
 	headerCode := response.Header.Get("X-Amzn-ErrorType")
-	if len(headerCode) != 0 {
-		errorCode = restjson.SanitizeErrorCode(headerCode)
-	}
 
 	var buff [1024]byte
 	ringBuffer := smithyio.NewRingBuffer(buff[:])
@@ -98,7 +104,7 @@ func awsAwsjson11_deserializeOpErrorAcknowledgeJob(response *smithyhttp.Response
 	body := io.TeeReader(errorBody, ringBuffer)
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
-	jsonCode, message, err := restjson.GetErrorInfo(decoder)
+	bodyInfo, err := getProtocolErrorInfo(decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -110,13 +116,12 @@ func awsAwsjson11_deserializeOpErrorAcknowledgeJob(response *smithyhttp.Response
 	}
 
 	errorBody.Seek(0, io.SeekStart)
-	if len(headerCode) == 0 && len(jsonCode) != 0 {
-		errorCode = restjson.SanitizeErrorCode(jsonCode)
+	if typ, ok := resolveProtocolErrorType(headerCode, bodyInfo); ok {
+		errorCode = restjson.SanitizeErrorCode(typ)
 	}
-	if len(message) != 0 {
-		errorMessage = message
+	if len(bodyInfo.Message) != 0 {
+		errorMessage = bodyInfo.Message
 	}
-
 	switch {
 	case strings.EqualFold("InvalidNonceException", errorCode):
 		return awsAwsjson11_deserializeErrorInvalidNonceException(response, errorBody)
@@ -205,9 +210,6 @@ func awsAwsjson11_deserializeOpErrorAcknowledgeThirdPartyJob(response *smithyhtt
 	errorMessage := errorCode
 
 	headerCode := response.Header.Get("X-Amzn-ErrorType")
-	if len(headerCode) != 0 {
-		errorCode = restjson.SanitizeErrorCode(headerCode)
-	}
 
 	var buff [1024]byte
 	ringBuffer := smithyio.NewRingBuffer(buff[:])
@@ -215,7 +217,7 @@ func awsAwsjson11_deserializeOpErrorAcknowledgeThirdPartyJob(response *smithyhtt
 	body := io.TeeReader(errorBody, ringBuffer)
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
-	jsonCode, message, err := restjson.GetErrorInfo(decoder)
+	bodyInfo, err := getProtocolErrorInfo(decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -227,13 +229,12 @@ func awsAwsjson11_deserializeOpErrorAcknowledgeThirdPartyJob(response *smithyhtt
 	}
 
 	errorBody.Seek(0, io.SeekStart)
-	if len(headerCode) == 0 && len(jsonCode) != 0 {
-		errorCode = restjson.SanitizeErrorCode(jsonCode)
+	if typ, ok := resolveProtocolErrorType(headerCode, bodyInfo); ok {
+		errorCode = restjson.SanitizeErrorCode(typ)
 	}
-	if len(message) != 0 {
-		errorMessage = message
+	if len(bodyInfo.Message) != 0 {
+		errorMessage = bodyInfo.Message
 	}
-
 	switch {
 	case strings.EqualFold("InvalidClientTokenException", errorCode):
 		return awsAwsjson11_deserializeErrorInvalidClientTokenException(response, errorBody)
@@ -325,9 +326,6 @@ func awsAwsjson11_deserializeOpErrorCreateCustomActionType(response *smithyhttp.
 	errorMessage := errorCode
 
 	headerCode := response.Header.Get("X-Amzn-ErrorType")
-	if len(headerCode) != 0 {
-		errorCode = restjson.SanitizeErrorCode(headerCode)
-	}
 
 	var buff [1024]byte
 	ringBuffer := smithyio.NewRingBuffer(buff[:])
@@ -335,7 +333,7 @@ func awsAwsjson11_deserializeOpErrorCreateCustomActionType(response *smithyhttp.
 	body := io.TeeReader(errorBody, ringBuffer)
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
-	jsonCode, message, err := restjson.GetErrorInfo(decoder)
+	bodyInfo, err := getProtocolErrorInfo(decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -347,13 +345,12 @@ func awsAwsjson11_deserializeOpErrorCreateCustomActionType(response *smithyhttp.
 	}
 
 	errorBody.Seek(0, io.SeekStart)
-	if len(headerCode) == 0 && len(jsonCode) != 0 {
-		errorCode = restjson.SanitizeErrorCode(jsonCode)
+	if typ, ok := resolveProtocolErrorType(headerCode, bodyInfo); ok {
+		errorCode = restjson.SanitizeErrorCode(typ)
 	}
-	if len(message) != 0 {
-		errorMessage = message
+	if len(bodyInfo.Message) != 0 {
+		errorMessage = bodyInfo.Message
 	}
-
 	switch {
 	case strings.EqualFold("ConcurrentModificationException", errorCode):
 		return awsAwsjson11_deserializeErrorConcurrentModificationException(response, errorBody)
@@ -448,9 +445,6 @@ func awsAwsjson11_deserializeOpErrorCreatePipeline(response *smithyhttp.Response
 	errorMessage := errorCode
 
 	headerCode := response.Header.Get("X-Amzn-ErrorType")
-	if len(headerCode) != 0 {
-		errorCode = restjson.SanitizeErrorCode(headerCode)
-	}
 
 	var buff [1024]byte
 	ringBuffer := smithyio.NewRingBuffer(buff[:])
@@ -458,7 +452,7 @@ func awsAwsjson11_deserializeOpErrorCreatePipeline(response *smithyhttp.Response
 	body := io.TeeReader(errorBody, ringBuffer)
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
-	jsonCode, message, err := restjson.GetErrorInfo(decoder)
+	bodyInfo, err := getProtocolErrorInfo(decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -470,13 +464,12 @@ func awsAwsjson11_deserializeOpErrorCreatePipeline(response *smithyhttp.Response
 	}
 
 	errorBody.Seek(0, io.SeekStart)
-	if len(headerCode) == 0 && len(jsonCode) != 0 {
-		errorCode = restjson.SanitizeErrorCode(jsonCode)
+	if typ, ok := resolveProtocolErrorType(headerCode, bodyInfo); ok {
+		errorCode = restjson.SanitizeErrorCode(typ)
 	}
-	if len(message) != 0 {
-		errorMessage = message
+	if len(bodyInfo.Message) != 0 {
+		errorMessage = bodyInfo.Message
 	}
-
 	switch {
 	case strings.EqualFold("ConcurrentModificationException", errorCode):
 		return awsAwsjson11_deserializeErrorConcurrentModificationException(response, errorBody)
@@ -564,9 +557,6 @@ func awsAwsjson11_deserializeOpErrorDeleteCustomActionType(response *smithyhttp.
 	errorMessage := errorCode
 
 	headerCode := response.Header.Get("X-Amzn-ErrorType")
-	if len(headerCode) != 0 {
-		errorCode = restjson.SanitizeErrorCode(headerCode)
-	}
 
 	var buff [1024]byte
 	ringBuffer := smithyio.NewRingBuffer(buff[:])
@@ -574,7 +564,7 @@ func awsAwsjson11_deserializeOpErrorDeleteCustomActionType(response *smithyhttp.
 	body := io.TeeReader(errorBody, ringBuffer)
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
-	jsonCode, message, err := restjson.GetErrorInfo(decoder)
+	bodyInfo, err := getProtocolErrorInfo(decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -586,13 +576,12 @@ func awsAwsjson11_deserializeOpErrorDeleteCustomActionType(response *smithyhttp.
 	}
 
 	errorBody.Seek(0, io.SeekStart)
-	if len(headerCode) == 0 && len(jsonCode) != 0 {
-		errorCode = restjson.SanitizeErrorCode(jsonCode)
+	if typ, ok := resolveProtocolErrorType(headerCode, bodyInfo); ok {
+		errorCode = restjson.SanitizeErrorCode(typ)
 	}
-	if len(message) != 0 {
-		errorMessage = message
+	if len(bodyInfo.Message) != 0 {
+		errorMessage = bodyInfo.Message
 	}
-
 	switch {
 	case strings.EqualFold("ConcurrentModificationException", errorCode):
 		return awsAwsjson11_deserializeErrorConcurrentModificationException(response, errorBody)
@@ -656,9 +645,6 @@ func awsAwsjson11_deserializeOpErrorDeletePipeline(response *smithyhttp.Response
 	errorMessage := errorCode
 
 	headerCode := response.Header.Get("X-Amzn-ErrorType")
-	if len(headerCode) != 0 {
-		errorCode = restjson.SanitizeErrorCode(headerCode)
-	}
 
 	var buff [1024]byte
 	ringBuffer := smithyio.NewRingBuffer(buff[:])
@@ -666,7 +652,7 @@ func awsAwsjson11_deserializeOpErrorDeletePipeline(response *smithyhttp.Response
 	body := io.TeeReader(errorBody, ringBuffer)
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
-	jsonCode, message, err := restjson.GetErrorInfo(decoder)
+	bodyInfo, err := getProtocolErrorInfo(decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -678,13 +664,12 @@ func awsAwsjson11_deserializeOpErrorDeletePipeline(response *smithyhttp.Response
 	}
 
 	errorBody.Seek(0, io.SeekStart)
-	if len(headerCode) == 0 && len(jsonCode) != 0 {
-		errorCode = restjson.SanitizeErrorCode(jsonCode)
+	if typ, ok := resolveProtocolErrorType(headerCode, bodyInfo); ok {
+		errorCode = restjson.SanitizeErrorCode(typ)
 	}
-	if len(message) != 0 {
-		errorMessage = message
+	if len(bodyInfo.Message) != 0 {
+		errorMessage = bodyInfo.Message
 	}
-
 	switch {
 	case strings.EqualFold("ConcurrentModificationException", errorCode):
 		return awsAwsjson11_deserializeErrorConcurrentModificationException(response, errorBody)
@@ -770,9 +755,6 @@ func awsAwsjson11_deserializeOpErrorDeleteWebhook(response *smithyhttp.Response,
 	errorMessage := errorCode
 
 	headerCode := response.Header.Get("X-Amzn-ErrorType")
-	if len(headerCode) != 0 {
-		errorCode = restjson.SanitizeErrorCode(headerCode)
-	}
 
 	var buff [1024]byte
 	ringBuffer := smithyio.NewRingBuffer(buff[:])
@@ -780,7 +762,7 @@ func awsAwsjson11_deserializeOpErrorDeleteWebhook(response *smithyhttp.Response,
 	body := io.TeeReader(errorBody, ringBuffer)
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
-	jsonCode, message, err := restjson.GetErrorInfo(decoder)
+	bodyInfo, err := getProtocolErrorInfo(decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -792,13 +774,12 @@ func awsAwsjson11_deserializeOpErrorDeleteWebhook(response *smithyhttp.Response,
 	}
 
 	errorBody.Seek(0, io.SeekStart)
-	if len(headerCode) == 0 && len(jsonCode) != 0 {
-		errorCode = restjson.SanitizeErrorCode(jsonCode)
+	if typ, ok := resolveProtocolErrorType(headerCode, bodyInfo); ok {
+		errorCode = restjson.SanitizeErrorCode(typ)
 	}
-	if len(message) != 0 {
-		errorMessage = message
+	if len(bodyInfo.Message) != 0 {
+		errorMessage = bodyInfo.Message
 	}
-
 	switch {
 	case strings.EqualFold("ConcurrentModificationException", errorCode):
 		return awsAwsjson11_deserializeErrorConcurrentModificationException(response, errorBody)
@@ -884,9 +865,6 @@ func awsAwsjson11_deserializeOpErrorDeregisterWebhookWithThirdParty(response *sm
 	errorMessage := errorCode
 
 	headerCode := response.Header.Get("X-Amzn-ErrorType")
-	if len(headerCode) != 0 {
-		errorCode = restjson.SanitizeErrorCode(headerCode)
-	}
 
 	var buff [1024]byte
 	ringBuffer := smithyio.NewRingBuffer(buff[:])
@@ -894,7 +872,7 @@ func awsAwsjson11_deserializeOpErrorDeregisterWebhookWithThirdParty(response *sm
 	body := io.TeeReader(errorBody, ringBuffer)
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
-	jsonCode, message, err := restjson.GetErrorInfo(decoder)
+	bodyInfo, err := getProtocolErrorInfo(decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -906,13 +884,12 @@ func awsAwsjson11_deserializeOpErrorDeregisterWebhookWithThirdParty(response *sm
 	}
 
 	errorBody.Seek(0, io.SeekStart)
-	if len(headerCode) == 0 && len(jsonCode) != 0 {
-		errorCode = restjson.SanitizeErrorCode(jsonCode)
+	if typ, ok := resolveProtocolErrorType(headerCode, bodyInfo); ok {
+		errorCode = restjson.SanitizeErrorCode(typ)
 	}
-	if len(message) != 0 {
-		errorMessage = message
+	if len(bodyInfo.Message) != 0 {
+		errorMessage = bodyInfo.Message
 	}
-
 	switch {
 	case strings.EqualFold("ValidationException", errorCode):
 		return awsAwsjson11_deserializeErrorValidationException(response, errorBody)
@@ -976,9 +953,6 @@ func awsAwsjson11_deserializeOpErrorDisableStageTransition(response *smithyhttp.
 	errorMessage := errorCode
 
 	headerCode := response.Header.Get("X-Amzn-ErrorType")
-	if len(headerCode) != 0 {
-		errorCode = restjson.SanitizeErrorCode(headerCode)
-	}
 
 	var buff [1024]byte
 	ringBuffer := smithyio.NewRingBuffer(buff[:])
@@ -986,7 +960,7 @@ func awsAwsjson11_deserializeOpErrorDisableStageTransition(response *smithyhttp.
 	body := io.TeeReader(errorBody, ringBuffer)
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
-	jsonCode, message, err := restjson.GetErrorInfo(decoder)
+	bodyInfo, err := getProtocolErrorInfo(decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -998,13 +972,12 @@ func awsAwsjson11_deserializeOpErrorDisableStageTransition(response *smithyhttp.
 	}
 
 	errorBody.Seek(0, io.SeekStart)
-	if len(headerCode) == 0 && len(jsonCode) != 0 {
-		errorCode = restjson.SanitizeErrorCode(jsonCode)
+	if typ, ok := resolveProtocolErrorType(headerCode, bodyInfo); ok {
+		errorCode = restjson.SanitizeErrorCode(typ)
 	}
-	if len(message) != 0 {
-		errorMessage = message
+	if len(bodyInfo.Message) != 0 {
+		errorMessage = bodyInfo.Message
 	}
-
 	switch {
 	case strings.EqualFold("PipelineNotFoundException", errorCode):
 		return awsAwsjson11_deserializeErrorPipelineNotFoundException(response, errorBody)
@@ -1071,9 +1044,6 @@ func awsAwsjson11_deserializeOpErrorEnableStageTransition(response *smithyhttp.R
 	errorMessage := errorCode
 
 	headerCode := response.Header.Get("X-Amzn-ErrorType")
-	if len(headerCode) != 0 {
-		errorCode = restjson.SanitizeErrorCode(headerCode)
-	}
 
 	var buff [1024]byte
 	ringBuffer := smithyio.NewRingBuffer(buff[:])
@@ -1081,7 +1051,7 @@ func awsAwsjson11_deserializeOpErrorEnableStageTransition(response *smithyhttp.R
 	body := io.TeeReader(errorBody, ringBuffer)
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
-	jsonCode, message, err := restjson.GetErrorInfo(decoder)
+	bodyInfo, err := getProtocolErrorInfo(decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -1093,13 +1063,12 @@ func awsAwsjson11_deserializeOpErrorEnableStageTransition(response *smithyhttp.R
 	}
 
 	errorBody.Seek(0, io.SeekStart)
-	if len(headerCode) == 0 && len(jsonCode) != 0 {
-		errorCode = restjson.SanitizeErrorCode(jsonCode)
+	if typ, ok := resolveProtocolErrorType(headerCode, bodyInfo); ok {
+		errorCode = restjson.SanitizeErrorCode(typ)
 	}
-	if len(message) != 0 {
-		errorMessage = message
+	if len(bodyInfo.Message) != 0 {
+		errorMessage = bodyInfo.Message
 	}
-
 	switch {
 	case strings.EqualFold("PipelineNotFoundException", errorCode):
 		return awsAwsjson11_deserializeErrorPipelineNotFoundException(response, errorBody)
@@ -1188,9 +1157,6 @@ func awsAwsjson11_deserializeOpErrorGetActionType(response *smithyhttp.Response,
 	errorMessage := errorCode
 
 	headerCode := response.Header.Get("X-Amzn-ErrorType")
-	if len(headerCode) != 0 {
-		errorCode = restjson.SanitizeErrorCode(headerCode)
-	}
 
 	var buff [1024]byte
 	ringBuffer := smithyio.NewRingBuffer(buff[:])
@@ -1198,7 +1164,7 @@ func awsAwsjson11_deserializeOpErrorGetActionType(response *smithyhttp.Response,
 	body := io.TeeReader(errorBody, ringBuffer)
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
-	jsonCode, message, err := restjson.GetErrorInfo(decoder)
+	bodyInfo, err := getProtocolErrorInfo(decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -1210,13 +1176,12 @@ func awsAwsjson11_deserializeOpErrorGetActionType(response *smithyhttp.Response,
 	}
 
 	errorBody.Seek(0, io.SeekStart)
-	if len(headerCode) == 0 && len(jsonCode) != 0 {
-		errorCode = restjson.SanitizeErrorCode(jsonCode)
+	if typ, ok := resolveProtocolErrorType(headerCode, bodyInfo); ok {
+		errorCode = restjson.SanitizeErrorCode(typ)
 	}
-	if len(message) != 0 {
-		errorMessage = message
+	if len(bodyInfo.Message) != 0 {
+		errorMessage = bodyInfo.Message
 	}
-
 	switch {
 	case strings.EqualFold("ActionTypeNotFoundException", errorCode):
 		return awsAwsjson11_deserializeErrorActionTypeNotFoundException(response, errorBody)
@@ -1302,9 +1267,6 @@ func awsAwsjson11_deserializeOpErrorGetJobDetails(response *smithyhttp.Response,
 	errorMessage := errorCode
 
 	headerCode := response.Header.Get("X-Amzn-ErrorType")
-	if len(headerCode) != 0 {
-		errorCode = restjson.SanitizeErrorCode(headerCode)
-	}
 
 	var buff [1024]byte
 	ringBuffer := smithyio.NewRingBuffer(buff[:])
@@ -1312,7 +1274,7 @@ func awsAwsjson11_deserializeOpErrorGetJobDetails(response *smithyhttp.Response,
 	body := io.TeeReader(errorBody, ringBuffer)
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
-	jsonCode, message, err := restjson.GetErrorInfo(decoder)
+	bodyInfo, err := getProtocolErrorInfo(decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -1324,13 +1286,12 @@ func awsAwsjson11_deserializeOpErrorGetJobDetails(response *smithyhttp.Response,
 	}
 
 	errorBody.Seek(0, io.SeekStart)
-	if len(headerCode) == 0 && len(jsonCode) != 0 {
-		errorCode = restjson.SanitizeErrorCode(jsonCode)
+	if typ, ok := resolveProtocolErrorType(headerCode, bodyInfo); ok {
+		errorCode = restjson.SanitizeErrorCode(typ)
 	}
-	if len(message) != 0 {
-		errorMessage = message
+	if len(bodyInfo.Message) != 0 {
+		errorMessage = bodyInfo.Message
 	}
-
 	switch {
 	case strings.EqualFold("JobNotFoundException", errorCode):
 		return awsAwsjson11_deserializeErrorJobNotFoundException(response, errorBody)
@@ -1416,9 +1377,6 @@ func awsAwsjson11_deserializeOpErrorGetPipeline(response *smithyhttp.Response, m
 	errorMessage := errorCode
 
 	headerCode := response.Header.Get("X-Amzn-ErrorType")
-	if len(headerCode) != 0 {
-		errorCode = restjson.SanitizeErrorCode(headerCode)
-	}
 
 	var buff [1024]byte
 	ringBuffer := smithyio.NewRingBuffer(buff[:])
@@ -1426,7 +1384,7 @@ func awsAwsjson11_deserializeOpErrorGetPipeline(response *smithyhttp.Response, m
 	body := io.TeeReader(errorBody, ringBuffer)
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
-	jsonCode, message, err := restjson.GetErrorInfo(decoder)
+	bodyInfo, err := getProtocolErrorInfo(decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -1438,13 +1396,12 @@ func awsAwsjson11_deserializeOpErrorGetPipeline(response *smithyhttp.Response, m
 	}
 
 	errorBody.Seek(0, io.SeekStart)
-	if len(headerCode) == 0 && len(jsonCode) != 0 {
-		errorCode = restjson.SanitizeErrorCode(jsonCode)
+	if typ, ok := resolveProtocolErrorType(headerCode, bodyInfo); ok {
+		errorCode = restjson.SanitizeErrorCode(typ)
 	}
-	if len(message) != 0 {
-		errorMessage = message
+	if len(bodyInfo.Message) != 0 {
+		errorMessage = bodyInfo.Message
 	}
-
 	switch {
 	case strings.EqualFold("PipelineNotFoundException", errorCode):
 		return awsAwsjson11_deserializeErrorPipelineNotFoundException(response, errorBody)
@@ -1533,9 +1490,6 @@ func awsAwsjson11_deserializeOpErrorGetPipelineExecution(response *smithyhttp.Re
 	errorMessage := errorCode
 
 	headerCode := response.Header.Get("X-Amzn-ErrorType")
-	if len(headerCode) != 0 {
-		errorCode = restjson.SanitizeErrorCode(headerCode)
-	}
 
 	var buff [1024]byte
 	ringBuffer := smithyio.NewRingBuffer(buff[:])
@@ -1543,7 +1497,7 @@ func awsAwsjson11_deserializeOpErrorGetPipelineExecution(response *smithyhttp.Re
 	body := io.TeeReader(errorBody, ringBuffer)
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
-	jsonCode, message, err := restjson.GetErrorInfo(decoder)
+	bodyInfo, err := getProtocolErrorInfo(decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -1555,13 +1509,12 @@ func awsAwsjson11_deserializeOpErrorGetPipelineExecution(response *smithyhttp.Re
 	}
 
 	errorBody.Seek(0, io.SeekStart)
-	if len(headerCode) == 0 && len(jsonCode) != 0 {
-		errorCode = restjson.SanitizeErrorCode(jsonCode)
+	if typ, ok := resolveProtocolErrorType(headerCode, bodyInfo); ok {
+		errorCode = restjson.SanitizeErrorCode(typ)
 	}
-	if len(message) != 0 {
-		errorMessage = message
+	if len(bodyInfo.Message) != 0 {
+		errorMessage = bodyInfo.Message
 	}
-
 	switch {
 	case strings.EqualFold("PipelineExecutionNotFoundException", errorCode):
 		return awsAwsjson11_deserializeErrorPipelineExecutionNotFoundException(response, errorBody)
@@ -1650,9 +1603,6 @@ func awsAwsjson11_deserializeOpErrorGetPipelineState(response *smithyhttp.Respon
 	errorMessage := errorCode
 
 	headerCode := response.Header.Get("X-Amzn-ErrorType")
-	if len(headerCode) != 0 {
-		errorCode = restjson.SanitizeErrorCode(headerCode)
-	}
 
 	var buff [1024]byte
 	ringBuffer := smithyio.NewRingBuffer(buff[:])
@@ -1660,7 +1610,7 @@ func awsAwsjson11_deserializeOpErrorGetPipelineState(response *smithyhttp.Respon
 	body := io.TeeReader(errorBody, ringBuffer)
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
-	jsonCode, message, err := restjson.GetErrorInfo(decoder)
+	bodyInfo, err := getProtocolErrorInfo(decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -1672,13 +1622,12 @@ func awsAwsjson11_deserializeOpErrorGetPipelineState(response *smithyhttp.Respon
 	}
 
 	errorBody.Seek(0, io.SeekStart)
-	if len(headerCode) == 0 && len(jsonCode) != 0 {
-		errorCode = restjson.SanitizeErrorCode(jsonCode)
+	if typ, ok := resolveProtocolErrorType(headerCode, bodyInfo); ok {
+		errorCode = restjson.SanitizeErrorCode(typ)
 	}
-	if len(message) != 0 {
-		errorMessage = message
+	if len(bodyInfo.Message) != 0 {
+		errorMessage = bodyInfo.Message
 	}
-
 	switch {
 	case strings.EqualFold("PipelineNotFoundException", errorCode):
 		return awsAwsjson11_deserializeErrorPipelineNotFoundException(response, errorBody)
@@ -1764,9 +1713,6 @@ func awsAwsjson11_deserializeOpErrorGetThirdPartyJobDetails(response *smithyhttp
 	errorMessage := errorCode
 
 	headerCode := response.Header.Get("X-Amzn-ErrorType")
-	if len(headerCode) != 0 {
-		errorCode = restjson.SanitizeErrorCode(headerCode)
-	}
 
 	var buff [1024]byte
 	ringBuffer := smithyio.NewRingBuffer(buff[:])
@@ -1774,7 +1720,7 @@ func awsAwsjson11_deserializeOpErrorGetThirdPartyJobDetails(response *smithyhttp
 	body := io.TeeReader(errorBody, ringBuffer)
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
-	jsonCode, message, err := restjson.GetErrorInfo(decoder)
+	bodyInfo, err := getProtocolErrorInfo(decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -1786,13 +1732,12 @@ func awsAwsjson11_deserializeOpErrorGetThirdPartyJobDetails(response *smithyhttp
 	}
 
 	errorBody.Seek(0, io.SeekStart)
-	if len(headerCode) == 0 && len(jsonCode) != 0 {
-		errorCode = restjson.SanitizeErrorCode(jsonCode)
+	if typ, ok := resolveProtocolErrorType(headerCode, bodyInfo); ok {
+		errorCode = restjson.SanitizeErrorCode(typ)
 	}
-	if len(message) != 0 {
-		errorMessage = message
+	if len(bodyInfo.Message) != 0 {
+		errorMessage = bodyInfo.Message
 	}
-
 	switch {
 	case strings.EqualFold("InvalidClientTokenException", errorCode):
 		return awsAwsjson11_deserializeErrorInvalidClientTokenException(response, errorBody)
@@ -1884,9 +1829,6 @@ func awsAwsjson11_deserializeOpErrorListActionExecutions(response *smithyhttp.Re
 	errorMessage := errorCode
 
 	headerCode := response.Header.Get("X-Amzn-ErrorType")
-	if len(headerCode) != 0 {
-		errorCode = restjson.SanitizeErrorCode(headerCode)
-	}
 
 	var buff [1024]byte
 	ringBuffer := smithyio.NewRingBuffer(buff[:])
@@ -1894,7 +1836,7 @@ func awsAwsjson11_deserializeOpErrorListActionExecutions(response *smithyhttp.Re
 	body := io.TeeReader(errorBody, ringBuffer)
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
-	jsonCode, message, err := restjson.GetErrorInfo(decoder)
+	bodyInfo, err := getProtocolErrorInfo(decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -1906,13 +1848,12 @@ func awsAwsjson11_deserializeOpErrorListActionExecutions(response *smithyhttp.Re
 	}
 
 	errorBody.Seek(0, io.SeekStart)
-	if len(headerCode) == 0 && len(jsonCode) != 0 {
-		errorCode = restjson.SanitizeErrorCode(jsonCode)
+	if typ, ok := resolveProtocolErrorType(headerCode, bodyInfo); ok {
+		errorCode = restjson.SanitizeErrorCode(typ)
 	}
-	if len(message) != 0 {
-		errorMessage = message
+	if len(bodyInfo.Message) != 0 {
+		errorMessage = bodyInfo.Message
 	}
-
 	switch {
 	case strings.EqualFold("InvalidNextTokenException", errorCode):
 		return awsAwsjson11_deserializeErrorInvalidNextTokenException(response, errorBody)
@@ -2004,9 +1945,6 @@ func awsAwsjson11_deserializeOpErrorListActionTypes(response *smithyhttp.Respons
 	errorMessage := errorCode
 
 	headerCode := response.Header.Get("X-Amzn-ErrorType")
-	if len(headerCode) != 0 {
-		errorCode = restjson.SanitizeErrorCode(headerCode)
-	}
 
 	var buff [1024]byte
 	ringBuffer := smithyio.NewRingBuffer(buff[:])
@@ -2014,7 +1952,7 @@ func awsAwsjson11_deserializeOpErrorListActionTypes(response *smithyhttp.Respons
 	body := io.TeeReader(errorBody, ringBuffer)
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
-	jsonCode, message, err := restjson.GetErrorInfo(decoder)
+	bodyInfo, err := getProtocolErrorInfo(decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -2026,13 +1964,12 @@ func awsAwsjson11_deserializeOpErrorListActionTypes(response *smithyhttp.Respons
 	}
 
 	errorBody.Seek(0, io.SeekStart)
-	if len(headerCode) == 0 && len(jsonCode) != 0 {
-		errorCode = restjson.SanitizeErrorCode(jsonCode)
+	if typ, ok := resolveProtocolErrorType(headerCode, bodyInfo); ok {
+		errorCode = restjson.SanitizeErrorCode(typ)
 	}
-	if len(message) != 0 {
-		errorMessage = message
+	if len(bodyInfo.Message) != 0 {
+		errorMessage = bodyInfo.Message
 	}
-
 	switch {
 	case strings.EqualFold("InvalidNextTokenException", errorCode):
 		return awsAwsjson11_deserializeErrorInvalidNextTokenException(response, errorBody)
@@ -2118,9 +2055,6 @@ func awsAwsjson11_deserializeOpErrorListPipelineExecutions(response *smithyhttp.
 	errorMessage := errorCode
 
 	headerCode := response.Header.Get("X-Amzn-ErrorType")
-	if len(headerCode) != 0 {
-		errorCode = restjson.SanitizeErrorCode(headerCode)
-	}
 
 	var buff [1024]byte
 	ringBuffer := smithyio.NewRingBuffer(buff[:])
@@ -2128,7 +2062,7 @@ func awsAwsjson11_deserializeOpErrorListPipelineExecutions(response *smithyhttp.
 	body := io.TeeReader(errorBody, ringBuffer)
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
-	jsonCode, message, err := restjson.GetErrorInfo(decoder)
+	bodyInfo, err := getProtocolErrorInfo(decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -2140,13 +2074,12 @@ func awsAwsjson11_deserializeOpErrorListPipelineExecutions(response *smithyhttp.
 	}
 
 	errorBody.Seek(0, io.SeekStart)
-	if len(headerCode) == 0 && len(jsonCode) != 0 {
-		errorCode = restjson.SanitizeErrorCode(jsonCode)
+	if typ, ok := resolveProtocolErrorType(headerCode, bodyInfo); ok {
+		errorCode = restjson.SanitizeErrorCode(typ)
 	}
-	if len(message) != 0 {
-		errorMessage = message
+	if len(bodyInfo.Message) != 0 {
+		errorMessage = bodyInfo.Message
 	}
-
 	switch {
 	case strings.EqualFold("InvalidNextTokenException", errorCode):
 		return awsAwsjson11_deserializeErrorInvalidNextTokenException(response, errorBody)
@@ -2235,9 +2168,6 @@ func awsAwsjson11_deserializeOpErrorListPipelines(response *smithyhttp.Response,
 	errorMessage := errorCode
 
 	headerCode := response.Header.Get("X-Amzn-ErrorType")
-	if len(headerCode) != 0 {
-		errorCode = restjson.SanitizeErrorCode(headerCode)
-	}
 
 	var buff [1024]byte
 	ringBuffer := smithyio.NewRingBuffer(buff[:])
@@ -2245,7 +2175,7 @@ func awsAwsjson11_deserializeOpErrorListPipelines(response *smithyhttp.Response,
 	body := io.TeeReader(errorBody, ringBuffer)
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
-	jsonCode, message, err := restjson.GetErrorInfo(decoder)
+	bodyInfo, err := getProtocolErrorInfo(decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -2257,13 +2187,12 @@ func awsAwsjson11_deserializeOpErrorListPipelines(response *smithyhttp.Response,
 	}
 
 	errorBody.Seek(0, io.SeekStart)
-	if len(headerCode) == 0 && len(jsonCode) != 0 {
-		errorCode = restjson.SanitizeErrorCode(jsonCode)
+	if typ, ok := resolveProtocolErrorType(headerCode, bodyInfo); ok {
+		errorCode = restjson.SanitizeErrorCode(typ)
 	}
-	if len(message) != 0 {
-		errorMessage = message
+	if len(bodyInfo.Message) != 0 {
+		errorMessage = bodyInfo.Message
 	}
-
 	switch {
 	case strings.EqualFold("InvalidNextTokenException", errorCode):
 		return awsAwsjson11_deserializeErrorInvalidNextTokenException(response, errorBody)
@@ -2349,9 +2278,6 @@ func awsAwsjson11_deserializeOpErrorListTagsForResource(response *smithyhttp.Res
 	errorMessage := errorCode
 
 	headerCode := response.Header.Get("X-Amzn-ErrorType")
-	if len(headerCode) != 0 {
-		errorCode = restjson.SanitizeErrorCode(headerCode)
-	}
 
 	var buff [1024]byte
 	ringBuffer := smithyio.NewRingBuffer(buff[:])
@@ -2359,7 +2285,7 @@ func awsAwsjson11_deserializeOpErrorListTagsForResource(response *smithyhttp.Res
 	body := io.TeeReader(errorBody, ringBuffer)
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
-	jsonCode, message, err := restjson.GetErrorInfo(decoder)
+	bodyInfo, err := getProtocolErrorInfo(decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -2371,13 +2297,12 @@ func awsAwsjson11_deserializeOpErrorListTagsForResource(response *smithyhttp.Res
 	}
 
 	errorBody.Seek(0, io.SeekStart)
-	if len(headerCode) == 0 && len(jsonCode) != 0 {
-		errorCode = restjson.SanitizeErrorCode(jsonCode)
+	if typ, ok := resolveProtocolErrorType(headerCode, bodyInfo); ok {
+		errorCode = restjson.SanitizeErrorCode(typ)
 	}
-	if len(message) != 0 {
-		errorMessage = message
+	if len(bodyInfo.Message) != 0 {
+		errorMessage = bodyInfo.Message
 	}
-
 	switch {
 	case strings.EqualFold("InvalidArnException", errorCode):
 		return awsAwsjson11_deserializeErrorInvalidArnException(response, errorBody)
@@ -2469,9 +2394,6 @@ func awsAwsjson11_deserializeOpErrorListWebhooks(response *smithyhttp.Response, 
 	errorMessage := errorCode
 
 	headerCode := response.Header.Get("X-Amzn-ErrorType")
-	if len(headerCode) != 0 {
-		errorCode = restjson.SanitizeErrorCode(headerCode)
-	}
 
 	var buff [1024]byte
 	ringBuffer := smithyio.NewRingBuffer(buff[:])
@@ -2479,7 +2401,7 @@ func awsAwsjson11_deserializeOpErrorListWebhooks(response *smithyhttp.Response, 
 	body := io.TeeReader(errorBody, ringBuffer)
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
-	jsonCode, message, err := restjson.GetErrorInfo(decoder)
+	bodyInfo, err := getProtocolErrorInfo(decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -2491,13 +2413,12 @@ func awsAwsjson11_deserializeOpErrorListWebhooks(response *smithyhttp.Response, 
 	}
 
 	errorBody.Seek(0, io.SeekStart)
-	if len(headerCode) == 0 && len(jsonCode) != 0 {
-		errorCode = restjson.SanitizeErrorCode(jsonCode)
+	if typ, ok := resolveProtocolErrorType(headerCode, bodyInfo); ok {
+		errorCode = restjson.SanitizeErrorCode(typ)
 	}
-	if len(message) != 0 {
-		errorMessage = message
+	if len(bodyInfo.Message) != 0 {
+		errorMessage = bodyInfo.Message
 	}
-
 	switch {
 	case strings.EqualFold("InvalidNextTokenException", errorCode):
 		return awsAwsjson11_deserializeErrorInvalidNextTokenException(response, errorBody)
@@ -2583,9 +2504,6 @@ func awsAwsjson11_deserializeOpErrorPollForJobs(response *smithyhttp.Response, m
 	errorMessage := errorCode
 
 	headerCode := response.Header.Get("X-Amzn-ErrorType")
-	if len(headerCode) != 0 {
-		errorCode = restjson.SanitizeErrorCode(headerCode)
-	}
 
 	var buff [1024]byte
 	ringBuffer := smithyio.NewRingBuffer(buff[:])
@@ -2593,7 +2511,7 @@ func awsAwsjson11_deserializeOpErrorPollForJobs(response *smithyhttp.Response, m
 	body := io.TeeReader(errorBody, ringBuffer)
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
-	jsonCode, message, err := restjson.GetErrorInfo(decoder)
+	bodyInfo, err := getProtocolErrorInfo(decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -2605,13 +2523,12 @@ func awsAwsjson11_deserializeOpErrorPollForJobs(response *smithyhttp.Response, m
 	}
 
 	errorBody.Seek(0, io.SeekStart)
-	if len(headerCode) == 0 && len(jsonCode) != 0 {
-		errorCode = restjson.SanitizeErrorCode(jsonCode)
+	if typ, ok := resolveProtocolErrorType(headerCode, bodyInfo); ok {
+		errorCode = restjson.SanitizeErrorCode(typ)
 	}
-	if len(message) != 0 {
-		errorMessage = message
+	if len(bodyInfo.Message) != 0 {
+		errorMessage = bodyInfo.Message
 	}
-
 	switch {
 	case strings.EqualFold("ActionTypeNotFoundException", errorCode):
 		return awsAwsjson11_deserializeErrorActionTypeNotFoundException(response, errorBody)
@@ -2697,9 +2614,6 @@ func awsAwsjson11_deserializeOpErrorPollForThirdPartyJobs(response *smithyhttp.R
 	errorMessage := errorCode
 
 	headerCode := response.Header.Get("X-Amzn-ErrorType")
-	if len(headerCode) != 0 {
-		errorCode = restjson.SanitizeErrorCode(headerCode)
-	}
 
 	var buff [1024]byte
 	ringBuffer := smithyio.NewRingBuffer(buff[:])
@@ -2707,7 +2621,7 @@ func awsAwsjson11_deserializeOpErrorPollForThirdPartyJobs(response *smithyhttp.R
 	body := io.TeeReader(errorBody, ringBuffer)
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
-	jsonCode, message, err := restjson.GetErrorInfo(decoder)
+	bodyInfo, err := getProtocolErrorInfo(decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -2719,13 +2633,12 @@ func awsAwsjson11_deserializeOpErrorPollForThirdPartyJobs(response *smithyhttp.R
 	}
 
 	errorBody.Seek(0, io.SeekStart)
-	if len(headerCode) == 0 && len(jsonCode) != 0 {
-		errorCode = restjson.SanitizeErrorCode(jsonCode)
+	if typ, ok := resolveProtocolErrorType(headerCode, bodyInfo); ok {
+		errorCode = restjson.SanitizeErrorCode(typ)
 	}
-	if len(message) != 0 {
-		errorMessage = message
+	if len(bodyInfo.Message) != 0 {
+		errorMessage = bodyInfo.Message
 	}
-
 	switch {
 	case strings.EqualFold("ActionTypeNotFoundException", errorCode):
 		return awsAwsjson11_deserializeErrorActionTypeNotFoundException(response, errorBody)
@@ -2811,9 +2724,6 @@ func awsAwsjson11_deserializeOpErrorPutActionRevision(response *smithyhttp.Respo
 	errorMessage := errorCode
 
 	headerCode := response.Header.Get("X-Amzn-ErrorType")
-	if len(headerCode) != 0 {
-		errorCode = restjson.SanitizeErrorCode(headerCode)
-	}
 
 	var buff [1024]byte
 	ringBuffer := smithyio.NewRingBuffer(buff[:])
@@ -2821,7 +2731,7 @@ func awsAwsjson11_deserializeOpErrorPutActionRevision(response *smithyhttp.Respo
 	body := io.TeeReader(errorBody, ringBuffer)
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
-	jsonCode, message, err := restjson.GetErrorInfo(decoder)
+	bodyInfo, err := getProtocolErrorInfo(decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -2833,13 +2743,12 @@ func awsAwsjson11_deserializeOpErrorPutActionRevision(response *smithyhttp.Respo
 	}
 
 	errorBody.Seek(0, io.SeekStart)
-	if len(headerCode) == 0 && len(jsonCode) != 0 {
-		errorCode = restjson.SanitizeErrorCode(jsonCode)
+	if typ, ok := resolveProtocolErrorType(headerCode, bodyInfo); ok {
+		errorCode = restjson.SanitizeErrorCode(typ)
 	}
-	if len(message) != 0 {
-		errorMessage = message
+	if len(bodyInfo.Message) != 0 {
+		errorMessage = bodyInfo.Message
 	}
-
 	switch {
 	case strings.EqualFold("ActionNotFoundException", errorCode):
 		return awsAwsjson11_deserializeErrorActionNotFoundException(response, errorBody)
@@ -2931,9 +2840,6 @@ func awsAwsjson11_deserializeOpErrorPutApprovalResult(response *smithyhttp.Respo
 	errorMessage := errorCode
 
 	headerCode := response.Header.Get("X-Amzn-ErrorType")
-	if len(headerCode) != 0 {
-		errorCode = restjson.SanitizeErrorCode(headerCode)
-	}
 
 	var buff [1024]byte
 	ringBuffer := smithyio.NewRingBuffer(buff[:])
@@ -2941,7 +2847,7 @@ func awsAwsjson11_deserializeOpErrorPutApprovalResult(response *smithyhttp.Respo
 	body := io.TeeReader(errorBody, ringBuffer)
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
-	jsonCode, message, err := restjson.GetErrorInfo(decoder)
+	bodyInfo, err := getProtocolErrorInfo(decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -2953,13 +2859,12 @@ func awsAwsjson11_deserializeOpErrorPutApprovalResult(response *smithyhttp.Respo
 	}
 
 	errorBody.Seek(0, io.SeekStart)
-	if len(headerCode) == 0 && len(jsonCode) != 0 {
-		errorCode = restjson.SanitizeErrorCode(jsonCode)
+	if typ, ok := resolveProtocolErrorType(headerCode, bodyInfo); ok {
+		errorCode = restjson.SanitizeErrorCode(typ)
 	}
-	if len(message) != 0 {
-		errorMessage = message
+	if len(bodyInfo.Message) != 0 {
+		errorMessage = bodyInfo.Message
 	}
-
 	switch {
 	case strings.EqualFold("ActionNotFoundException", errorCode):
 		return awsAwsjson11_deserializeErrorActionNotFoundException(response, errorBody)
@@ -3035,9 +2940,6 @@ func awsAwsjson11_deserializeOpErrorPutJobFailureResult(response *smithyhttp.Res
 	errorMessage := errorCode
 
 	headerCode := response.Header.Get("X-Amzn-ErrorType")
-	if len(headerCode) != 0 {
-		errorCode = restjson.SanitizeErrorCode(headerCode)
-	}
 
 	var buff [1024]byte
 	ringBuffer := smithyio.NewRingBuffer(buff[:])
@@ -3045,7 +2947,7 @@ func awsAwsjson11_deserializeOpErrorPutJobFailureResult(response *smithyhttp.Res
 	body := io.TeeReader(errorBody, ringBuffer)
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
-	jsonCode, message, err := restjson.GetErrorInfo(decoder)
+	bodyInfo, err := getProtocolErrorInfo(decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -3057,13 +2959,12 @@ func awsAwsjson11_deserializeOpErrorPutJobFailureResult(response *smithyhttp.Res
 	}
 
 	errorBody.Seek(0, io.SeekStart)
-	if len(headerCode) == 0 && len(jsonCode) != 0 {
-		errorCode = restjson.SanitizeErrorCode(jsonCode)
+	if typ, ok := resolveProtocolErrorType(headerCode, bodyInfo); ok {
+		errorCode = restjson.SanitizeErrorCode(typ)
 	}
-	if len(message) != 0 {
-		errorMessage = message
+	if len(bodyInfo.Message) != 0 {
+		errorMessage = bodyInfo.Message
 	}
-
 	switch {
 	case strings.EqualFold("InvalidJobStateException", errorCode):
 		return awsAwsjson11_deserializeErrorInvalidJobStateException(response, errorBody)
@@ -3130,9 +3031,6 @@ func awsAwsjson11_deserializeOpErrorPutJobSuccessResult(response *smithyhttp.Res
 	errorMessage := errorCode
 
 	headerCode := response.Header.Get("X-Amzn-ErrorType")
-	if len(headerCode) != 0 {
-		errorCode = restjson.SanitizeErrorCode(headerCode)
-	}
 
 	var buff [1024]byte
 	ringBuffer := smithyio.NewRingBuffer(buff[:])
@@ -3140,7 +3038,7 @@ func awsAwsjson11_deserializeOpErrorPutJobSuccessResult(response *smithyhttp.Res
 	body := io.TeeReader(errorBody, ringBuffer)
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
-	jsonCode, message, err := restjson.GetErrorInfo(decoder)
+	bodyInfo, err := getProtocolErrorInfo(decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -3152,13 +3050,12 @@ func awsAwsjson11_deserializeOpErrorPutJobSuccessResult(response *smithyhttp.Res
 	}
 
 	errorBody.Seek(0, io.SeekStart)
-	if len(headerCode) == 0 && len(jsonCode) != 0 {
-		errorCode = restjson.SanitizeErrorCode(jsonCode)
+	if typ, ok := resolveProtocolErrorType(headerCode, bodyInfo); ok {
+		errorCode = restjson.SanitizeErrorCode(typ)
 	}
-	if len(message) != 0 {
-		errorMessage = message
+	if len(bodyInfo.Message) != 0 {
+		errorMessage = bodyInfo.Message
 	}
-
 	switch {
 	case strings.EqualFold("InvalidJobStateException", errorCode):
 		return awsAwsjson11_deserializeErrorInvalidJobStateException(response, errorBody)
@@ -3228,9 +3125,6 @@ func awsAwsjson11_deserializeOpErrorPutThirdPartyJobFailureResult(response *smit
 	errorMessage := errorCode
 
 	headerCode := response.Header.Get("X-Amzn-ErrorType")
-	if len(headerCode) != 0 {
-		errorCode = restjson.SanitizeErrorCode(headerCode)
-	}
 
 	var buff [1024]byte
 	ringBuffer := smithyio.NewRingBuffer(buff[:])
@@ -3238,7 +3132,7 @@ func awsAwsjson11_deserializeOpErrorPutThirdPartyJobFailureResult(response *smit
 	body := io.TeeReader(errorBody, ringBuffer)
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
-	jsonCode, message, err := restjson.GetErrorInfo(decoder)
+	bodyInfo, err := getProtocolErrorInfo(decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -3250,13 +3144,12 @@ func awsAwsjson11_deserializeOpErrorPutThirdPartyJobFailureResult(response *smit
 	}
 
 	errorBody.Seek(0, io.SeekStart)
-	if len(headerCode) == 0 && len(jsonCode) != 0 {
-		errorCode = restjson.SanitizeErrorCode(jsonCode)
+	if typ, ok := resolveProtocolErrorType(headerCode, bodyInfo); ok {
+		errorCode = restjson.SanitizeErrorCode(typ)
 	}
-	if len(message) != 0 {
-		errorMessage = message
+	if len(bodyInfo.Message) != 0 {
+		errorMessage = bodyInfo.Message
 	}
-
 	switch {
 	case strings.EqualFold("InvalidClientTokenException", errorCode):
 		return awsAwsjson11_deserializeErrorInvalidClientTokenException(response, errorBody)
@@ -3326,9 +3219,6 @@ func awsAwsjson11_deserializeOpErrorPutThirdPartyJobSuccessResult(response *smit
 	errorMessage := errorCode
 
 	headerCode := response.Header.Get("X-Amzn-ErrorType")
-	if len(headerCode) != 0 {
-		errorCode = restjson.SanitizeErrorCode(headerCode)
-	}
 
 	var buff [1024]byte
 	ringBuffer := smithyio.NewRingBuffer(buff[:])
@@ -3336,7 +3226,7 @@ func awsAwsjson11_deserializeOpErrorPutThirdPartyJobSuccessResult(response *smit
 	body := io.TeeReader(errorBody, ringBuffer)
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
-	jsonCode, message, err := restjson.GetErrorInfo(decoder)
+	bodyInfo, err := getProtocolErrorInfo(decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -3348,13 +3238,12 @@ func awsAwsjson11_deserializeOpErrorPutThirdPartyJobSuccessResult(response *smit
 	}
 
 	errorBody.Seek(0, io.SeekStart)
-	if len(headerCode) == 0 && len(jsonCode) != 0 {
-		errorCode = restjson.SanitizeErrorCode(jsonCode)
+	if typ, ok := resolveProtocolErrorType(headerCode, bodyInfo); ok {
+		errorCode = restjson.SanitizeErrorCode(typ)
 	}
-	if len(message) != 0 {
-		errorMessage = message
+	if len(bodyInfo.Message) != 0 {
+		errorMessage = bodyInfo.Message
 	}
-
 	switch {
 	case strings.EqualFold("InvalidClientTokenException", errorCode):
 		return awsAwsjson11_deserializeErrorInvalidClientTokenException(response, errorBody)
@@ -3446,9 +3335,6 @@ func awsAwsjson11_deserializeOpErrorPutWebhook(response *smithyhttp.Response, me
 	errorMessage := errorCode
 
 	headerCode := response.Header.Get("X-Amzn-ErrorType")
-	if len(headerCode) != 0 {
-		errorCode = restjson.SanitizeErrorCode(headerCode)
-	}
 
 	var buff [1024]byte
 	ringBuffer := smithyio.NewRingBuffer(buff[:])
@@ -3456,7 +3342,7 @@ func awsAwsjson11_deserializeOpErrorPutWebhook(response *smithyhttp.Response, me
 	body := io.TeeReader(errorBody, ringBuffer)
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
-	jsonCode, message, err := restjson.GetErrorInfo(decoder)
+	bodyInfo, err := getProtocolErrorInfo(decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -3468,13 +3354,12 @@ func awsAwsjson11_deserializeOpErrorPutWebhook(response *smithyhttp.Response, me
 	}
 
 	errorBody.Seek(0, io.SeekStart)
-	if len(headerCode) == 0 && len(jsonCode) != 0 {
-		errorCode = restjson.SanitizeErrorCode(jsonCode)
+	if typ, ok := resolveProtocolErrorType(headerCode, bodyInfo); ok {
+		errorCode = restjson.SanitizeErrorCode(typ)
 	}
-	if len(message) != 0 {
-		errorMessage = message
+	if len(bodyInfo.Message) != 0 {
+		errorMessage = bodyInfo.Message
 	}
-
 	switch {
 	case strings.EqualFold("ConcurrentModificationException", errorCode):
 		return awsAwsjson11_deserializeErrorConcurrentModificationException(response, errorBody)
@@ -3578,9 +3463,6 @@ func awsAwsjson11_deserializeOpErrorRegisterWebhookWithThirdParty(response *smit
 	errorMessage := errorCode
 
 	headerCode := response.Header.Get("X-Amzn-ErrorType")
-	if len(headerCode) != 0 {
-		errorCode = restjson.SanitizeErrorCode(headerCode)
-	}
 
 	var buff [1024]byte
 	ringBuffer := smithyio.NewRingBuffer(buff[:])
@@ -3588,7 +3470,7 @@ func awsAwsjson11_deserializeOpErrorRegisterWebhookWithThirdParty(response *smit
 	body := io.TeeReader(errorBody, ringBuffer)
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
-	jsonCode, message, err := restjson.GetErrorInfo(decoder)
+	bodyInfo, err := getProtocolErrorInfo(decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -3600,13 +3482,12 @@ func awsAwsjson11_deserializeOpErrorRegisterWebhookWithThirdParty(response *smit
 	}
 
 	errorBody.Seek(0, io.SeekStart)
-	if len(headerCode) == 0 && len(jsonCode) != 0 {
-		errorCode = restjson.SanitizeErrorCode(jsonCode)
+	if typ, ok := resolveProtocolErrorType(headerCode, bodyInfo); ok {
+		errorCode = restjson.SanitizeErrorCode(typ)
 	}
-	if len(message) != 0 {
-		errorMessage = message
+	if len(bodyInfo.Message) != 0 {
+		errorMessage = bodyInfo.Message
 	}
-
 	switch {
 	case strings.EqualFold("ValidationException", errorCode):
 		return awsAwsjson11_deserializeErrorValidationException(response, errorBody)
@@ -3692,9 +3573,6 @@ func awsAwsjson11_deserializeOpErrorRetryStageExecution(response *smithyhttp.Res
 	errorMessage := errorCode
 
 	headerCode := response.Header.Get("X-Amzn-ErrorType")
-	if len(headerCode) != 0 {
-		errorCode = restjson.SanitizeErrorCode(headerCode)
-	}
 
 	var buff [1024]byte
 	ringBuffer := smithyio.NewRingBuffer(buff[:])
@@ -3702,7 +3580,7 @@ func awsAwsjson11_deserializeOpErrorRetryStageExecution(response *smithyhttp.Res
 	body := io.TeeReader(errorBody, ringBuffer)
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
-	jsonCode, message, err := restjson.GetErrorInfo(decoder)
+	bodyInfo, err := getProtocolErrorInfo(decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -3714,13 +3592,12 @@ func awsAwsjson11_deserializeOpErrorRetryStageExecution(response *smithyhttp.Res
 	}
 
 	errorBody.Seek(0, io.SeekStart)
-	if len(headerCode) == 0 && len(jsonCode) != 0 {
-		errorCode = restjson.SanitizeErrorCode(jsonCode)
+	if typ, ok := resolveProtocolErrorType(headerCode, bodyInfo); ok {
+		errorCode = restjson.SanitizeErrorCode(typ)
 	}
-	if len(message) != 0 {
-		errorMessage = message
+	if len(bodyInfo.Message) != 0 {
+		errorMessage = bodyInfo.Message
 	}
-
 	switch {
 	case strings.EqualFold("ConflictException", errorCode):
 		return awsAwsjson11_deserializeErrorConflictException(response, errorBody)
@@ -3736,6 +3613,131 @@ func awsAwsjson11_deserializeOpErrorRetryStageExecution(response *smithyhttp.Res
 
 	case strings.EqualFold("StageNotRetryableException", errorCode):
 		return awsAwsjson11_deserializeErrorStageNotRetryableException(response, errorBody)
+
+	case strings.EqualFold("ValidationException", errorCode):
+		return awsAwsjson11_deserializeErrorValidationException(response, errorBody)
+
+	default:
+		genericError := &smithy.GenericAPIError{
+			Code:    errorCode,
+			Message: errorMessage,
+		}
+		return genericError
+
+	}
+}
+
+type awsAwsjson11_deserializeOpRollbackStage struct {
+}
+
+func (*awsAwsjson11_deserializeOpRollbackStage) ID() string {
+	return "OperationDeserializer"
+}
+
+func (m *awsAwsjson11_deserializeOpRollbackStage) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
+) {
+	out, metadata, err = next.HandleDeserialize(ctx, in)
+	if err != nil {
+		return out, metadata, err
+	}
+
+	response, ok := out.RawResponse.(*smithyhttp.Response)
+	if !ok {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
+	}
+
+	if response.StatusCode < 200 || response.StatusCode >= 300 {
+		return out, metadata, awsAwsjson11_deserializeOpErrorRollbackStage(response, &metadata)
+	}
+	output := &RollbackStageOutput{}
+	out.Result = output
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(response.Body, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
+	}
+
+	err = awsAwsjson11_deserializeOpDocumentRollbackStageOutput(&output, shape)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
+	}
+
+	return out, metadata, err
+}
+
+func awsAwsjson11_deserializeOpErrorRollbackStage(response *smithyhttp.Response, metadata *middleware.Metadata) error {
+	var errorBuffer bytes.Buffer
+	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
+		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
+	}
+	errorBody := bytes.NewReader(errorBuffer.Bytes())
+
+	errorCode := "UnknownError"
+	errorMessage := errorCode
+
+	headerCode := response.Header.Get("X-Amzn-ErrorType")
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(errorBody, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	bodyInfo, err := getProtocolErrorInfo(decoder)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	errorBody.Seek(0, io.SeekStart)
+	if typ, ok := resolveProtocolErrorType(headerCode, bodyInfo); ok {
+		errorCode = restjson.SanitizeErrorCode(typ)
+	}
+	if len(bodyInfo.Message) != 0 {
+		errorMessage = bodyInfo.Message
+	}
+	switch {
+	case strings.EqualFold("ConflictException", errorCode):
+		return awsAwsjson11_deserializeErrorConflictException(response, errorBody)
+
+	case strings.EqualFold("PipelineExecutionNotFoundException", errorCode):
+		return awsAwsjson11_deserializeErrorPipelineExecutionNotFoundException(response, errorBody)
+
+	case strings.EqualFold("PipelineExecutionOutdatedException", errorCode):
+		return awsAwsjson11_deserializeErrorPipelineExecutionOutdatedException(response, errorBody)
+
+	case strings.EqualFold("PipelineNotFoundException", errorCode):
+		return awsAwsjson11_deserializeErrorPipelineNotFoundException(response, errorBody)
+
+	case strings.EqualFold("StageNotFoundException", errorCode):
+		return awsAwsjson11_deserializeErrorStageNotFoundException(response, errorBody)
+
+	case strings.EqualFold("UnableToRollbackStageException", errorCode):
+		return awsAwsjson11_deserializeErrorUnableToRollbackStageException(response, errorBody)
 
 	case strings.EqualFold("ValidationException", errorCode):
 		return awsAwsjson11_deserializeErrorValidationException(response, errorBody)
@@ -3818,9 +3820,6 @@ func awsAwsjson11_deserializeOpErrorStartPipelineExecution(response *smithyhttp.
 	errorMessage := errorCode
 
 	headerCode := response.Header.Get("X-Amzn-ErrorType")
-	if len(headerCode) != 0 {
-		errorCode = restjson.SanitizeErrorCode(headerCode)
-	}
 
 	var buff [1024]byte
 	ringBuffer := smithyio.NewRingBuffer(buff[:])
@@ -3828,7 +3827,7 @@ func awsAwsjson11_deserializeOpErrorStartPipelineExecution(response *smithyhttp.
 	body := io.TeeReader(errorBody, ringBuffer)
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
-	jsonCode, message, err := restjson.GetErrorInfo(decoder)
+	bodyInfo, err := getProtocolErrorInfo(decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -3840,13 +3839,12 @@ func awsAwsjson11_deserializeOpErrorStartPipelineExecution(response *smithyhttp.
 	}
 
 	errorBody.Seek(0, io.SeekStart)
-	if len(headerCode) == 0 && len(jsonCode) != 0 {
-		errorCode = restjson.SanitizeErrorCode(jsonCode)
+	if typ, ok := resolveProtocolErrorType(headerCode, bodyInfo); ok {
+		errorCode = restjson.SanitizeErrorCode(typ)
 	}
-	if len(message) != 0 {
-		errorMessage = message
+	if len(bodyInfo.Message) != 0 {
+		errorMessage = bodyInfo.Message
 	}
-
 	switch {
 	case strings.EqualFold("ConcurrentPipelineExecutionsLimitExceededException", errorCode):
 		return awsAwsjson11_deserializeErrorConcurrentPipelineExecutionsLimitExceededException(response, errorBody)
@@ -3938,9 +3936,6 @@ func awsAwsjson11_deserializeOpErrorStopPipelineExecution(response *smithyhttp.R
 	errorMessage := errorCode
 
 	headerCode := response.Header.Get("X-Amzn-ErrorType")
-	if len(headerCode) != 0 {
-		errorCode = restjson.SanitizeErrorCode(headerCode)
-	}
 
 	var buff [1024]byte
 	ringBuffer := smithyio.NewRingBuffer(buff[:])
@@ -3948,7 +3943,7 @@ func awsAwsjson11_deserializeOpErrorStopPipelineExecution(response *smithyhttp.R
 	body := io.TeeReader(errorBody, ringBuffer)
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
-	jsonCode, message, err := restjson.GetErrorInfo(decoder)
+	bodyInfo, err := getProtocolErrorInfo(decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -3960,13 +3955,12 @@ func awsAwsjson11_deserializeOpErrorStopPipelineExecution(response *smithyhttp.R
 	}
 
 	errorBody.Seek(0, io.SeekStart)
-	if len(headerCode) == 0 && len(jsonCode) != 0 {
-		errorCode = restjson.SanitizeErrorCode(jsonCode)
+	if typ, ok := resolveProtocolErrorType(headerCode, bodyInfo); ok {
+		errorCode = restjson.SanitizeErrorCode(typ)
 	}
-	if len(message) != 0 {
-		errorMessage = message
+	if len(bodyInfo.Message) != 0 {
+		errorMessage = bodyInfo.Message
 	}
-
 	switch {
 	case strings.EqualFold("ConflictException", errorCode):
 		return awsAwsjson11_deserializeErrorConflictException(response, errorBody)
@@ -4061,9 +4055,6 @@ func awsAwsjson11_deserializeOpErrorTagResource(response *smithyhttp.Response, m
 	errorMessage := errorCode
 
 	headerCode := response.Header.Get("X-Amzn-ErrorType")
-	if len(headerCode) != 0 {
-		errorCode = restjson.SanitizeErrorCode(headerCode)
-	}
 
 	var buff [1024]byte
 	ringBuffer := smithyio.NewRingBuffer(buff[:])
@@ -4071,7 +4062,7 @@ func awsAwsjson11_deserializeOpErrorTagResource(response *smithyhttp.Response, m
 	body := io.TeeReader(errorBody, ringBuffer)
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
-	jsonCode, message, err := restjson.GetErrorInfo(decoder)
+	bodyInfo, err := getProtocolErrorInfo(decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -4083,13 +4074,12 @@ func awsAwsjson11_deserializeOpErrorTagResource(response *smithyhttp.Response, m
 	}
 
 	errorBody.Seek(0, io.SeekStart)
-	if len(headerCode) == 0 && len(jsonCode) != 0 {
-		errorCode = restjson.SanitizeErrorCode(jsonCode)
+	if typ, ok := resolveProtocolErrorType(headerCode, bodyInfo); ok {
+		errorCode = restjson.SanitizeErrorCode(typ)
 	}
-	if len(message) != 0 {
-		errorMessage = message
+	if len(bodyInfo.Message) != 0 {
+		errorMessage = bodyInfo.Message
 	}
-
 	switch {
 	case strings.EqualFold("ConcurrentModificationException", errorCode):
 		return awsAwsjson11_deserializeErrorConcurrentModificationException(response, errorBody)
@@ -4187,9 +4177,6 @@ func awsAwsjson11_deserializeOpErrorUntagResource(response *smithyhttp.Response,
 	errorMessage := errorCode
 
 	headerCode := response.Header.Get("X-Amzn-ErrorType")
-	if len(headerCode) != 0 {
-		errorCode = restjson.SanitizeErrorCode(headerCode)
-	}
 
 	var buff [1024]byte
 	ringBuffer := smithyio.NewRingBuffer(buff[:])
@@ -4197,7 +4184,7 @@ func awsAwsjson11_deserializeOpErrorUntagResource(response *smithyhttp.Response,
 	body := io.TeeReader(errorBody, ringBuffer)
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
-	jsonCode, message, err := restjson.GetErrorInfo(decoder)
+	bodyInfo, err := getProtocolErrorInfo(decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -4209,13 +4196,12 @@ func awsAwsjson11_deserializeOpErrorUntagResource(response *smithyhttp.Response,
 	}
 
 	errorBody.Seek(0, io.SeekStart)
-	if len(headerCode) == 0 && len(jsonCode) != 0 {
-		errorCode = restjson.SanitizeErrorCode(jsonCode)
+	if typ, ok := resolveProtocolErrorType(headerCode, bodyInfo); ok {
+		errorCode = restjson.SanitizeErrorCode(typ)
 	}
-	if len(message) != 0 {
-		errorMessage = message
+	if len(bodyInfo.Message) != 0 {
+		errorMessage = bodyInfo.Message
 	}
-
 	switch {
 	case strings.EqualFold("ConcurrentModificationException", errorCode):
 		return awsAwsjson11_deserializeErrorConcurrentModificationException(response, errorBody)
@@ -4288,9 +4274,6 @@ func awsAwsjson11_deserializeOpErrorUpdateActionType(response *smithyhttp.Respon
 	errorMessage := errorCode
 
 	headerCode := response.Header.Get("X-Amzn-ErrorType")
-	if len(headerCode) != 0 {
-		errorCode = restjson.SanitizeErrorCode(headerCode)
-	}
 
 	var buff [1024]byte
 	ringBuffer := smithyio.NewRingBuffer(buff[:])
@@ -4298,7 +4281,7 @@ func awsAwsjson11_deserializeOpErrorUpdateActionType(response *smithyhttp.Respon
 	body := io.TeeReader(errorBody, ringBuffer)
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
-	jsonCode, message, err := restjson.GetErrorInfo(decoder)
+	bodyInfo, err := getProtocolErrorInfo(decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -4310,13 +4293,12 @@ func awsAwsjson11_deserializeOpErrorUpdateActionType(response *smithyhttp.Respon
 	}
 
 	errorBody.Seek(0, io.SeekStart)
-	if len(headerCode) == 0 && len(jsonCode) != 0 {
-		errorCode = restjson.SanitizeErrorCode(jsonCode)
+	if typ, ok := resolveProtocolErrorType(headerCode, bodyInfo); ok {
+		errorCode = restjson.SanitizeErrorCode(typ)
 	}
-	if len(message) != 0 {
-		errorMessage = message
+	if len(bodyInfo.Message) != 0 {
+		errorMessage = bodyInfo.Message
 	}
-
 	switch {
 	case strings.EqualFold("ActionTypeNotFoundException", errorCode):
 		return awsAwsjson11_deserializeErrorActionTypeNotFoundException(response, errorBody)
@@ -4405,9 +4387,6 @@ func awsAwsjson11_deserializeOpErrorUpdatePipeline(response *smithyhttp.Response
 	errorMessage := errorCode
 
 	headerCode := response.Header.Get("X-Amzn-ErrorType")
-	if len(headerCode) != 0 {
-		errorCode = restjson.SanitizeErrorCode(headerCode)
-	}
 
 	var buff [1024]byte
 	ringBuffer := smithyio.NewRingBuffer(buff[:])
@@ -4415,7 +4394,7 @@ func awsAwsjson11_deserializeOpErrorUpdatePipeline(response *smithyhttp.Response
 	body := io.TeeReader(errorBody, ringBuffer)
 	decoder := json.NewDecoder(body)
 	decoder.UseNumber()
-	jsonCode, message, err := restjson.GetErrorInfo(decoder)
+	bodyInfo, err := getProtocolErrorInfo(decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -4427,13 +4406,12 @@ func awsAwsjson11_deserializeOpErrorUpdatePipeline(response *smithyhttp.Response
 	}
 
 	errorBody.Seek(0, io.SeekStart)
-	if len(headerCode) == 0 && len(jsonCode) != 0 {
-		errorCode = restjson.SanitizeErrorCode(jsonCode)
+	if typ, ok := resolveProtocolErrorType(headerCode, bodyInfo); ok {
+		errorCode = restjson.SanitizeErrorCode(typ)
 	}
-	if len(message) != 0 {
-		errorMessage = message
+	if len(bodyInfo.Message) != 0 {
+		errorMessage = bodyInfo.Message
 	}
-
 	switch {
 	case strings.EqualFold("InvalidActionDeclarationException", errorCode):
 		return awsAwsjson11_deserializeErrorInvalidActionDeclarationException(response, errorBody)
@@ -5408,6 +5386,41 @@ func awsAwsjson11_deserializeErrorPipelineExecutionNotStoppableException(respons
 	return output
 }
 
+func awsAwsjson11_deserializeErrorPipelineExecutionOutdatedException(response *smithyhttp.Response, errorBody *bytes.Reader) error {
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(errorBody, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	output := &types.PipelineExecutionOutdatedException{}
+	err := awsAwsjson11_deserializeDocumentPipelineExecutionOutdatedException(&output, shape)
+
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	errorBody.Seek(0, io.SeekStart)
+	return output
+}
+
 func awsAwsjson11_deserializeErrorPipelineNameInUseException(response *smithyhttp.Response, errorBody *bytes.Reader) error {
 	var buff [1024]byte
 	ringBuffer := smithyio.NewRingBuffer(buff[:])
@@ -5673,6 +5686,41 @@ func awsAwsjson11_deserializeErrorTooManyTagsException(response *smithyhttp.Resp
 
 	output := &types.TooManyTagsException{}
 	err := awsAwsjson11_deserializeDocumentTooManyTagsException(&output, shape)
+
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	errorBody.Seek(0, io.SeekStart)
+	return output
+}
+
+func awsAwsjson11_deserializeErrorUnableToRollbackStageException(response *smithyhttp.Response, errorBody *bytes.Reader) error {
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(errorBody, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	output := &types.UnableToRollbackStageException{}
+	err := awsAwsjson11_deserializeDocumentUnableToRollbackStageException(&output, shape)
 
 	if err != nil {
 		var snapshot bytes.Buffer
@@ -6096,6 +6144,19 @@ func awsAwsjson11_deserializeDocumentActionDeclaration(v **types.ActionDeclarati
 					return err
 				}
 				sv.RunOrder = ptr.Int32(int32(i64))
+			}
+
+		case "timeoutInMinutes":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected ActionTimeout to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.TimeoutInMinutes = ptr.Int32(int32(i64))
 			}
 
 		default:
@@ -8570,6 +8631,46 @@ func awsAwsjson11_deserializeDocumentExecutorConfiguration(v **types.ExecutorCon
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentFailureConditions(v **types.FailureConditions, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.FailureConditions
+	if *v == nil {
+		sv = &types.FailureConditions{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "result":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Result to be of type string, got %T instead", value)
+				}
+				sv.Result = types.Result(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentGitBranchFilterCriteria(v **types.GitBranchFilterCriteria, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -10560,6 +10661,15 @@ func awsAwsjson11_deserializeDocumentPipelineExecution(v **types.PipelineExecuti
 				sv.ExecutionMode = types.ExecutionMode(jtv)
 			}
 
+		case "executionType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ExecutionType to be of type string, got %T instead", value)
+				}
+				sv.ExecutionType = types.ExecutionType(jtv)
+			}
+
 		case "pipelineExecutionId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10589,6 +10699,11 @@ func awsAwsjson11_deserializeDocumentPipelineExecution(v **types.PipelineExecuti
 					return err
 				}
 				sv.PipelineVersion = ptr.Int32(int32(i64))
+			}
+
+		case "rollbackMetadata":
+			if err := awsAwsjson11_deserializeDocumentPipelineRollbackMetadata(&sv.RollbackMetadata, value); err != nil {
+				return err
 			}
 
 		case "status":
@@ -10708,6 +10823,46 @@ func awsAwsjson11_deserializeDocumentPipelineExecutionNotStoppableException(v **
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentPipelineExecutionOutdatedException(v **types.PipelineExecutionOutdatedException, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.PipelineExecutionOutdatedException
+	if *v == nil {
+		sv = &types.PipelineExecutionOutdatedException{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "message":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Message to be of type string, got %T instead", value)
+				}
+				sv.Message = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentPipelineExecutionSummary(v **types.PipelineExecutionSummary, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -10739,6 +10894,15 @@ func awsAwsjson11_deserializeDocumentPipelineExecutionSummary(v **types.Pipeline
 				sv.ExecutionMode = types.ExecutionMode(jtv)
 			}
 
+		case "executionType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ExecutionType to be of type string, got %T instead", value)
+				}
+				sv.ExecutionType = types.ExecutionType(jtv)
+			}
+
 		case "lastUpdateTime":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -10762,6 +10926,11 @@ func awsAwsjson11_deserializeDocumentPipelineExecutionSummary(v **types.Pipeline
 					return fmt.Errorf("expected PipelineExecutionId to be of type string, got %T instead", value)
 				}
 				sv.PipelineExecutionId = ptr.String(jtv)
+			}
+
+		case "rollbackMetadata":
+			if err := awsAwsjson11_deserializeDocumentPipelineRollbackMetadata(&sv.RollbackMetadata, value); err != nil {
+				return err
 			}
 
 		case "sourceRevisions":
@@ -10792,6 +10961,15 @@ func awsAwsjson11_deserializeDocumentPipelineExecutionSummary(v **types.Pipeline
 					return fmt.Errorf("expected PipelineExecutionStatus to be of type string, got %T instead", value)
 				}
 				sv.Status = types.PipelineExecutionStatus(jtv)
+			}
+
+		case "statusSummary":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected PipelineExecutionStatusSummary to be of type string, got %T instead", value)
+				}
+				sv.StatusSummary = ptr.String(jtv)
 			}
 
 		case "stopTrigger":
@@ -11038,6 +11216,46 @@ func awsAwsjson11_deserializeDocumentPipelineNotFoundException(v **types.Pipelin
 					return fmt.Errorf("expected Message to be of type string, got %T instead", value)
 				}
 				sv.Message = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentPipelineRollbackMetadata(v **types.PipelineRollbackMetadata, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.PipelineRollbackMetadata
+	if *v == nil {
+		sv = &types.PipelineRollbackMetadata{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "rollbackTargetPipelineExecutionId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected PipelineExecutionId to be of type string, got %T instead", value)
+				}
+				sv.RollbackTargetPipelineExecutionId = ptr.String(jtv)
 			}
 
 		default:
@@ -12016,6 +12234,11 @@ func awsAwsjson11_deserializeDocumentStageDeclaration(v **types.StageDeclaration
 				sv.Name = ptr.String(jtv)
 			}
 
+		case "onFailure":
+			if err := awsAwsjson11_deserializeDocumentFailureConditions(&sv.OnFailure, value); err != nil {
+				return err
+			}
+
 		default:
 			_, _ = key, value
 
@@ -12063,6 +12286,15 @@ func awsAwsjson11_deserializeDocumentStageExecution(v **types.StageExecution, va
 					return fmt.Errorf("expected StageExecutionStatus to be of type string, got %T instead", value)
 				}
 				sv.Status = types.StageExecutionStatus(jtv)
+			}
+
+		case "type":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ExecutionType to be of type string, got %T instead", value)
+				}
+				sv.Type = types.ExecutionType(jtv)
 			}
 
 		default:
@@ -12725,6 +12957,46 @@ func awsAwsjson11_deserializeDocumentTransitionState(v **types.TransitionState, 
 					return fmt.Errorf("expected LastChangedBy to be of type string, got %T instead", value)
 				}
 				sv.LastChangedBy = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentUnableToRollbackStageException(v **types.UnableToRollbackStageException, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.UnableToRollbackStageException
+	if *v == nil {
+		sv = &types.UnableToRollbackStageException{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "message":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.Message = ptr.String(jtv)
 			}
 
 		default:
@@ -14094,6 +14366,46 @@ func awsAwsjson11_deserializeOpDocumentRetryStageExecutionOutput(v **RetryStageE
 	return nil
 }
 
+func awsAwsjson11_deserializeOpDocumentRollbackStageOutput(v **RollbackStageOutput, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *RollbackStageOutput
+	if *v == nil {
+		sv = &RollbackStageOutput{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "pipelineExecutionId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected PipelineExecutionId to be of type string, got %T instead", value)
+				}
+				sv.PipelineExecutionId = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson11_deserializeOpDocumentStartPipelineExecutionOutput(v **StartPipelineExecutionOutput, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -14270,4 +14582,33 @@ func awsAwsjson11_deserializeOpDocumentUpdatePipelineOutput(v **UpdatePipelineOu
 	}
 	*v = sv
 	return nil
+}
+
+type protocolErrorInfo struct {
+	Type    string `json:"__type"`
+	Message string
+	Code    any // nonstandard for awsjson but some services do present the type here
+}
+
+func getProtocolErrorInfo(decoder *json.Decoder) (protocolErrorInfo, error) {
+	var errInfo protocolErrorInfo
+	if err := decoder.Decode(&errInfo); err != nil {
+		if err == io.EOF {
+			return errInfo, nil
+		}
+		return errInfo, err
+	}
+
+	return errInfo, nil
+}
+
+func resolveProtocolErrorType(headerType string, bodyInfo protocolErrorInfo) (string, bool) {
+	if len(headerType) != 0 {
+		return headerType, true
+	} else if len(bodyInfo.Type) != 0 {
+		return bodyInfo.Type, true
+	} else if code, ok := bodyInfo.Code.(string); ok && len(code) != 0 {
+		return code, true
+	}
+	return "", false
 }

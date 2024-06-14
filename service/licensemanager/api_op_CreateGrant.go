@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/licensemanager/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -14,9 +13,10 @@ import (
 
 // Creates a grant for the specified license. A grant shares the use of license
 // entitlements with a specific Amazon Web Services account, an organization, or an
-// organizational unit (OU). For more information, see Granted licenses in License
-// Manager (https://docs.aws.amazon.com/license-manager/latest/userguide/granted-licenses.html)
-// in the License Manager User Guide.
+// organizational unit (OU). For more information, see [Granted licenses in License Manager]in the License Manager User
+// Guide.
+//
+// [Granted licenses in License Manager]: https://docs.aws.amazon.com/license-manager/latest/userguide/granted-licenses.html
 func (c *Client) CreateGrant(ctx context.Context, params *CreateGrantInput, optFns ...func(*Options)) (*CreateGrantOutput, error) {
 	if params == nil {
 		params = &CreateGrantInput{}
@@ -62,6 +62,7 @@ type CreateGrantInput struct {
 
 	// The grant principals. You can specify one of the following as an Amazon
 	// Resource Name (ARN):
+	//
 	//   - An Amazon Web Services account, which includes only the account specified.
 	//
 	//   - An organizational unit (OU), which includes all accounts in the OU.
@@ -113,25 +114,25 @@ func (c *Client) addOperationCreateGrantMiddlewares(stack *middleware.Stack, opt
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -146,13 +147,16 @@ func (c *Client) addOperationCreateGrantMiddlewares(stack *middleware.Stack, opt
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpCreateGrantValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateGrant(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

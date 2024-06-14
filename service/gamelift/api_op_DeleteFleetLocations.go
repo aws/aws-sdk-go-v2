@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/gamelift/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -14,11 +13,20 @@ import (
 
 // Removes locations from a multi-location fleet. When deleting a location, all
 // game server process and all instances that are still active in the location are
-// shut down. To delete fleet locations, identify the fleet ID and provide a list
-// of the locations to be deleted. If successful, GameLift sets the location status
-// to DELETING , and begins to shut down existing server processes and terminate
-// instances in each location being deleted. When completed, the location status
-// changes to TERMINATED . Learn more Setting up Amazon GameLift fleets (https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-intro.html)
+// shut down.
+//
+// To delete fleet locations, identify the fleet ID and provide a list of the
+// locations to be deleted.
+//
+// If successful, GameLift sets the location status to DELETING , and begins to
+// shut down existing server processes and terminate instances in each location
+// being deleted. When completed, the location status changes to TERMINATED .
+//
+// # Learn more
+//
+// [Setting up Amazon GameLift fleets]
+//
+// [Setting up Amazon GameLift fleets]: https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-intro.html
 func (c *Client) DeleteFleetLocations(ctx context.Context, params *DeleteFleetLocationsInput, optFns ...func(*Options)) (*DeleteFleetLocationsOutput, error) {
 	if params == nil {
 		params = &DeleteFleetLocationsInput{}
@@ -53,10 +61,11 @@ type DeleteFleetLocationsInput struct {
 
 type DeleteFleetLocationsOutput struct {
 
-	// The Amazon Resource Name ( ARN (https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-arn-format.html)
-	// ) that is assigned to a Amazon GameLift fleet resource and uniquely identifies
-	// it. ARNs are unique across all Regions. Format is
-	// arn:aws:gamelift:::fleet/fleet-a1234567-b8c9-0d1e-2fa3-b45c6d7e8912 .
+	// The Amazon Resource Name ([ARN] ) that is assigned to a Amazon GameLift fleet
+	// resource and uniquely identifies it. ARNs are unique across all Regions. Format
+	// is arn:aws:gamelift:::fleet/fleet-a1234567-b8c9-0d1e-2fa3-b45c6d7e8912 .
+	//
+	// [ARN]: https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-arn-format.html
 	FleetArn *string
 
 	// A unique identifier for the fleet that location attributes are being deleted
@@ -95,25 +104,25 @@ func (c *Client) addOperationDeleteFleetLocationsMiddlewares(stack *middleware.S
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -128,13 +137,16 @@ func (c *Client) addOperationDeleteFleetLocationsMiddlewares(stack *middleware.S
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDeleteFleetLocationsValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteFleetLocations(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

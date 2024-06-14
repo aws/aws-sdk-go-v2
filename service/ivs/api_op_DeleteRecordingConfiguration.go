@@ -6,15 +6,15 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes the recording configuration for the specified ARN. If you try to delete
-// a recording configuration that is associated with a channel, you will get an
-// error (409 ConflictException). To avoid this, for all channels that reference
-// the recording configuration, first use UpdateChannel to set the
+// Deletes the recording configuration for the specified ARN.
+//
+// If you try to delete a recording configuration that is associated with a
+// channel, you will get an error (409 ConflictException). To avoid this, for all
+// channels that reference the recording configuration, first use UpdateChannelto set the
 // recordingConfigurationArn field to an empty string, then use
 // DeleteRecordingConfiguration.
 func (c *Client) DeleteRecordingConfiguration(ctx context.Context, params *DeleteRecordingConfigurationInput, optFns ...func(*Options)) (*DeleteRecordingConfigurationOutput, error) {
@@ -71,25 +71,25 @@ func (c *Client) addOperationDeleteRecordingConfigurationMiddlewares(stack *midd
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -104,13 +104,16 @@ func (c *Client) addOperationDeleteRecordingConfigurationMiddlewares(stack *midd
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDeleteRecordingConfigurationValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteRecordingConfiguration(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

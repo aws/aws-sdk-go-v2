@@ -14,8 +14,9 @@ const (
 
 // Values returns all known values for AdditionalConstraintsElement. Note that
 // this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (AdditionalConstraintsElement) Values() []AdditionalConstraintsElement {
 	return []AdditionalConstraintsElement{
 		"REQUIRE_DIGIT",
@@ -35,8 +36,9 @@ const (
 )
 
 // Values returns all known values for AuthenticatedElement. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (AuthenticatedElement) Values() []AuthenticatedElement {
 	return []AuthenticatedElement{
 		"READ",
@@ -54,8 +56,9 @@ const (
 )
 
 // Values returns all known values for AuthResources. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (AuthResources) Values() []AuthResources {
 	return []AuthResources{
 		"USER_POOL_ONLY",
@@ -72,8 +75,9 @@ const (
 )
 
 // Values returns all known values for DeliveryMethod. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (DeliveryMethod) Values() []DeliveryMethod {
 	return []DeliveryMethod{
 		"EMAIL",
@@ -91,8 +95,9 @@ const (
 )
 
 // Values returns all known values for MFAMode. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (MFAMode) Values() []MFAMode {
 	return []MFAMode{
 		"ON",
@@ -110,8 +115,9 @@ const (
 )
 
 // Values returns all known values for MfaTypesElement. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (MfaTypesElement) Values() []MfaTypesElement {
 	return []MfaTypesElement{
 		"SMS",
@@ -130,8 +136,9 @@ const (
 )
 
 // Values returns all known values for Mode. Note that this can be expanded in the
-// future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (Mode) Values() []Mode {
 	return []Mode{
 		"API_KEY",
@@ -150,8 +157,9 @@ const (
 )
 
 // Values returns all known values for OAuthGrantType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (OAuthGrantType) Values() []OAuthGrantType {
 	return []OAuthGrantType{
 		"CODE",
@@ -171,8 +179,9 @@ const (
 )
 
 // Values returns all known values for OAuthScopesElement. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (OAuthScopesElement) Values() []OAuthScopesElement {
 	return []OAuthScopesElement{
 		"PHONE",
@@ -208,8 +217,9 @@ const (
 
 // Values returns all known values for RequiredSignUpAttributesElement. Note that
 // this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (RequiredSignUpAttributesElement) Values() []RequiredSignUpAttributesElement {
 	return []RequiredSignUpAttributesElement{
 		"ADDRESS",
@@ -243,8 +253,9 @@ const (
 )
 
 // Values returns all known values for ResolutionStrategy. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ResolutionStrategy) Values() []ResolutionStrategy {
 	return []ResolutionStrategy{
 		"OPTIMISTIC_CONCURRENCY",
@@ -262,8 +273,9 @@ const (
 )
 
 // Values returns all known values for Service. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (Service) Values() []Service {
 	return []Service{
 		"COGNITO",
@@ -278,8 +290,9 @@ const (
 )
 
 // Values returns all known values for ServiceName. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ServiceName) Values() []ServiceName {
 	return []ServiceName{
 		"S3",
@@ -297,8 +310,9 @@ const (
 )
 
 // Values returns all known values for SignInMethod. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (SignInMethod) Values() []SignInMethod {
 	return []SignInMethod{
 		"EMAIL",
@@ -317,8 +331,9 @@ const (
 )
 
 // Values returns all known values for Status. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (Status) Values() []Status {
 	return []Status{
 		"LATEST",
@@ -336,8 +351,9 @@ const (
 )
 
 // Values returns all known values for UnAuthenticatedElement. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (UnAuthenticatedElement) Values() []UnAuthenticatedElement {
 	return []UnAuthenticatedElement{
 		"READ",

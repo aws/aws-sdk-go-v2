@@ -185,9 +185,9 @@
                     }
                 },
                 "EnableMachineLearning": {
-                    "target": "com.amazonaws.wafv2#Boolean",
+                    "target": "com.amazonaws.wafv2#EnableMachineLearning",
                     "traits": {
-                        "smithy.api#default": false,
+                        "smithy.api#default": true,
                         "smithy.api#documentation": "<p>Applies only to the targeted inspection level. </p>\n         <p>Determines whether to use machine learning (ML) to\n      analyze your web traffic for bot-related activity. Machine learning is required for the Bot Control rules <code>TGT_ML_CoordinatedActivityLow</code> and <code>TGT_ML_CoordinatedActivityMedium</code>, which\ninspect for anomalous behavior that might indicate distributed, coordinated bot activity.</p>\n         <p>For more information about this choice, see the listing for these rules in the table at <a href=\"https://docs.aws.amazon.com/waf/latest/developerguide/aws-managed-rule-groups-bot.html#aws-managed-rule-groups-bot-rules\">Bot Control rules listing</a> in the\n            <i>WAF Developer Guide</i>.</p>\n         <p>Default: <code>TRUE</code>\n         </p>"
                     }
                 }
@@ -1797,6 +1797,30 @@
                     "traits": {
                         "smithy.api#enumValue": "CLOUDFRONT"
                     }
+                },
+                "API_GATEWAY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "API_GATEWAY"
+                    }
+                },
+                "COGNITO_USER_POOL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "COGNITO_USER_POOL"
+                    }
+                },
+                "APP_RUNNER_SERVICE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "APP_RUNNER_SERVICE"
+                    }
+                },
+                "VERIFIED_ACCESS_INSTANCE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "VERIFIED_ACCESS_INSTANCE"
+                    }
                 }
             }
         },
@@ -1806,12 +1830,12 @@
                 "RequestBody": {
                     "target": "com.amazonaws.wafv2#RequestBody",
                     "traits": {
-                        "smithy.api#documentation": "<p>Customizes the maximum size of the request body that your protected CloudFront distributions forward to WAF for inspection. The default size is 16 KB (16,384 bytes). </p>\n         <note>\n            <p>You are charged additional fees when your protected resources forward body sizes that are larger than the default. For more information, see <a href=\"http://aws.amazon.com/waf/pricing/\">WAF Pricing</a>.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>Customizes the maximum size of the request body that your protected CloudFront, API Gateway, Amazon Cognito, App Runner, and Verified Access resources forward to WAF for inspection. The default size is 16 KB (16,384 bytes). You can change the setting for any of the available resource types. </p>\n         <note>\n            <p>You are charged additional fees when your protected resources forward body sizes that are larger than the default. For more information, see <a href=\"http://aws.amazon.com/waf/pricing/\">WAF Pricing</a>.</p>\n         </note>\n         <p>Example JSON: <code> {\n    \"API_GATEWAY\": \"KB_48\",\n    \"APP_RUNNER_SERVICE\": \"KB_32\"\n    }</code>\n         </p>\n         <p>For Application Load Balancer and AppSync, the limit is fixed at 8 KB (8,192 bytes).</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Specifies custom configurations for the associations between the web ACL and protected resources.  </p>\n         <p>Use this to customize the maximum size of the request body that your protected CloudFront distributions forward to WAF for inspection. The default is 16 KB (16,384 bytes). </p>\n         <note>\n            <p>You are charged additional fees when your protected resources forward body sizes that are larger than the default. For more information, see <a href=\"http://aws.amazon.com/waf/pricing/\">WAF Pricing</a>.</p>\n         </note>"
+                "smithy.api#documentation": "<p>Specifies custom configurations for the associations between the web ACL and protected resources.  </p>\n         <p>Use this to customize the maximum size of the request body that your protected resources forward to WAF for inspection. You can \n    customize this setting for CloudFront, API Gateway, Amazon Cognito, App Runner, or Verified Access resources. The default setting is 16 KB (16,384 bytes). </p>\n         <note>\n            <p>You are charged additional fees when your protected resources forward body sizes that are larger than the default. For more information, see <a href=\"http://aws.amazon.com/waf/pricing/\">WAF Pricing</a>.</p>\n         </note>\n         <p>For Application Load Balancer and AppSync, the limit is fixed at 8 KB (8,192 bytes).</p>"
             }
         },
         "com.amazonaws.wafv2#BlockAction": {
@@ -1834,7 +1858,7 @@
                 "OversizeHandling": {
                     "target": "com.amazonaws.wafv2#OversizeHandling",
                     "traits": {
-                        "smithy.api#documentation": "<p>What WAF should do if the body is larger than WAF can inspect. \n    WAF does not support inspecting the entire contents of the web request body if the body \n    exceeds the limit for the resource type. If the body is larger than the limit, the underlying host service \n    only forwards the contents that are below the limit to WAF for inspection. </p>\n         <p>The default limit is 8 KB (8,192 bytes) for regional resources and 16 KB (16,384 bytes) for CloudFront distributions. For CloudFront distributions, \n    you can increase the limit in the web ACL <code>AssociationConfig</code>, for additional processing fees. </p>\n         <p>The options for oversize handling are the following:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>CONTINUE</code> - Inspect the available body contents normally, according to the rule inspection criteria. </p>\n            </li>\n            <li>\n               <p>\n                  <code>MATCH</code> - Treat the web request as matching the rule statement. WAF\n               applies the rule action to the request.</p>\n            </li>\n            <li>\n               <p>\n                  <code>NO_MATCH</code> - Treat the web request as not matching the rule\n               statement.</p>\n            </li>\n         </ul>\n         <p>You can combine the <code>MATCH</code> or <code>NO_MATCH</code>\n      settings for oversize handling with your rule and web ACL action settings, so that you block any request whose body is over the limit. </p>\n         <p>Default: <code>CONTINUE</code>\n         </p>"
+                        "smithy.api#documentation": "<p>What WAF should do if the body is larger than WAF can inspect. </p>\n         <p>WAF does not support inspecting the entire contents of the web request body if the body \n    exceeds the limit for the resource type. When a web request body is larger than the limit, the underlying host service \n    only forwards the contents that are within the limit to WAF for inspection. </p>\n         <ul>\n            <li>\n               <p>For Application Load Balancer and AppSync, the limit is fixed at 8 KB (8,192 bytes).</p>\n            </li>\n            <li>\n               <p>For CloudFront, API Gateway, Amazon Cognito, App Runner, and Verified Access, the default limit is 16 KB (16,384 bytes), and \n          you can increase the limit for each resource type in the web ACL <code>AssociationConfig</code>, for additional processing fees. </p>\n            </li>\n         </ul>\n         <p>The options for oversize handling are the following:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>CONTINUE</code> - Inspect the available body contents normally, according to the rule inspection criteria. </p>\n            </li>\n            <li>\n               <p>\n                  <code>MATCH</code> - Treat the web request as matching the rule statement. WAF\n               applies the rule action to the request.</p>\n            </li>\n            <li>\n               <p>\n                  <code>NO_MATCH</code> - Treat the web request as not matching the rule\n               statement.</p>\n            </li>\n         </ul>\n         <p>You can combine the <code>MATCH</code> or <code>NO_MATCH</code>\n      settings for oversize handling with your rule and web ACL action settings, so that you block any request whose body is over the limit. </p>\n         <p>Default: <code>CONTINUE</code>\n         </p>"
                     }
                 }
             },
@@ -1877,7 +1901,7 @@
                 "SearchString": {
                     "target": "com.amazonaws.wafv2#SearchString",
                     "traits": {
-                        "smithy.api#documentation": "<p>A string value that you want WAF to search for. WAF searches only in the part of\n         web requests that you designate for inspection in <a>FieldToMatch</a>. The\n         maximum length of the value is 200 bytes.</p>\n         <p>Valid values depend on the component that you specify for inspection in\n            <code>FieldToMatch</code>:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>Method</code>: The HTTP method that you want WAF to search for. This\n               indicates the type of operation specified in the request. </p>\n            </li>\n            <li>\n               <p>\n                  <code>UriPath</code>: The value that you want WAF to search for in the URI path,\n               for example, <code>/images/daily-ad.jpg</code>. </p>\n            </li>\n            <li>\n               <p>\n                  <code>JA3Fingerprint</code>: Match against the request's JA3 fingerprint. The JA3 fingerprint is a 32-character hash derived from the TLS Client Hello of an incoming request. This fingerprint serves as a unique identifier for the client's TLS configuration. You can use this choice only with a string match <code>ByteMatchStatement</code> with the <code>PositionalConstraint</code> set to \n       <code>EXACTLY</code>. </p>\n               <p>You can obtain the JA3 fingerprint for client requests from the web ACL logs. \n\t\t\t\t\t\tIf WAF is able to calculate the fingerprint, it includes it in the logs.  \n\t\t\t\t\t\tFor information about the logging fields, \nsee <a href=\"https://docs.aws.amazon.com/waf/latest/developerguide/logging-fields.html\">Log fields</a> in the <i>WAF Developer Guide</i>. </p>\n            </li>\n            <li>\n               <p>\n                  <code>HeaderOrder</code>: The list of header names to match for. WAF creates a \n                 string that contains the ordered list of header names, from the headers in the web request, and then matches against that string. </p>\n            </li>\n         </ul>\n         <p>If <code>SearchString</code> includes alphabetic characters A-Z and a-z, note that the\n         value is case sensitive.</p>\n         <p>\n            <b>If you're using the WAF API</b>\n         </p>\n         <p>Specify a base64-encoded version of the value. The maximum length of the value before\n         you base64-encode it is 200 bytes.</p>\n         <p>For example, suppose the value of <code>Type</code> is <code>HEADER</code> and the value\n         of <code>Data</code> is <code>User-Agent</code>. If you want to search the\n            <code>User-Agent</code> header for the value <code>BadBot</code>, you base64-encode\n            <code>BadBot</code> using MIME base64-encoding and include the resulting value,\n            <code>QmFkQm90</code>, in the value of <code>SearchString</code>.</p>\n         <p>\n            <b>If you're using the CLI or one of the Amazon Web Services SDKs</b>\n         </p>\n         <p>The value that you want WAF to search for. The SDK automatically base64 encodes the\n         value.</p>",
+                        "smithy.api#documentation": "<p>A string value that you want WAF to search for. WAF searches only in the part of\n         web requests that you designate for inspection in <a>FieldToMatch</a>. The\n         maximum length of the value is 200 bytes.</p>\n         <p>Valid values depend on the component that you specify for inspection in\n            <code>FieldToMatch</code>:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>Method</code>: The HTTP method that you want WAF to search for. This\n               indicates the type of operation specified in the request. </p>\n            </li>\n            <li>\n               <p>\n                  <code>UriPath</code>: The value that you want WAF to search for in the URI path,\n               for example, <code>/images/daily-ad.jpg</code>. </p>\n            </li>\n            <li>\n               <p>\n                  <code>JA3Fingerprint</code>: Available for use with Amazon CloudFront distributions and Application Load Balancers. Match against the request's JA3 fingerprint. The JA3 fingerprint is a 32-character hash derived from the TLS Client Hello of an incoming request. This fingerprint serves as a unique identifier for the client's TLS configuration. You can use this choice only with a string match <code>ByteMatchStatement</code> with the <code>PositionalConstraint</code> set to \n       <code>EXACTLY</code>. </p>\n               <p>You can obtain the JA3 fingerprint for client requests from the web ACL logs. \n\t\t\t\t\t\tIf WAF is able to calculate the fingerprint, it includes it in the logs.  \n\t\t\t\t\t\tFor information about the logging fields, \nsee <a href=\"https://docs.aws.amazon.com/waf/latest/developerguide/logging-fields.html\">Log fields</a> in the <i>WAF Developer Guide</i>. </p>\n            </li>\n            <li>\n               <p>\n                  <code>HeaderOrder</code>: The list of header names to match for. WAF creates a \n                 string that contains the ordered list of header names, from the headers in the web request, and then matches against that string. </p>\n            </li>\n         </ul>\n         <p>If <code>SearchString</code> includes alphabetic characters A-Z and a-z, note that the\n         value is case sensitive.</p>\n         <p>\n            <b>If you're using the WAF API</b>\n         </p>\n         <p>Specify a base64-encoded version of the value. The maximum length of the value before\n         you base64-encode it is 200 bytes.</p>\n         <p>For example, suppose the value of <code>Type</code> is <code>HEADER</code> and the value\n         of <code>Data</code> is <code>User-Agent</code>. If you want to search the\n            <code>User-Agent</code> header for the value <code>BadBot</code>, you base64-encode\n            <code>BadBot</code> using MIME base64-encoding and include the resulting value,\n            <code>QmFkQm90</code>, in the value of <code>SearchString</code>.</p>\n         <p>\n            <b>If you're using the CLI or one of the Amazon Web Services SDKs</b>\n         </p>\n         <p>The value that you want WAF to search for. The SDK automatically base64 encodes the\n         value.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -4290,7 +4314,7 @@
                 "AssociationConfig": {
                     "target": "com.amazonaws.wafv2#AssociationConfig",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies custom configurations for the associations between the web ACL and protected resources.  </p>\n         <p>Use this to customize the maximum size of the request body that your protected CloudFront distributions forward to WAF for inspection. The default is 16 KB (16,384 bytes). </p>\n         <note>\n            <p>You are charged additional fees when your protected resources forward body sizes that are larger than the default. For more information, see <a href=\"http://aws.amazon.com/waf/pricing/\">WAF Pricing</a>.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>Specifies custom configurations for the associations between the web ACL and protected resources.  </p>\n         <p>Use this to customize the maximum size of the request body that your protected resources forward to WAF for inspection. You can \n    customize this setting for CloudFront, API Gateway, Amazon Cognito, App Runner, or Verified Access resources. The default setting is 16 KB (16,384 bytes). </p>\n         <note>\n            <p>You are charged additional fees when your protected resources forward body sizes that are larger than the default. For more information, see <a href=\"http://aws.amazon.com/waf/pricing/\">WAF Pricing</a>.</p>\n         </note>\n         <p>For Application Load Balancer and AppSync, the limit is fixed at 8 KB (8,192 bytes).</p>"
                     }
                 }
             },
@@ -4715,6 +4739,18 @@
                         "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the web ACL from which you want to delete the <a>LoggingConfiguration</a>.</p>",
                         "smithy.api#required": {}
                     }
+                },
+                "LogType": {
+                    "target": "com.amazonaws.wafv2#LogType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Used to distinguish between various logging options. Currently, there is one option.</p>\n         <p>Default: <code>WAF_LOGS</code>\n         </p>"
+                    }
+                },
+                "LogScope": {
+                    "target": "com.amazonaws.wafv2#LogScope",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The owner of the logging configuration, which must be set to <code>CUSTOMER</code> for the configurations that you manage. </p>\n         <p>The log scope <code>SECURITY_LAKE</code> indicates a configuration that is managed through Amazon Security Lake. You can use Security Lake to collect log and event data from various sources for normalization, analysis, and management. For information, see \n       <a href=\"https://docs.aws.amazon.com/security-lake/latest/userguide/internal-sources.html\">Collecting data from Amazon Web Services services</a>\n       in the <i>Amazon Security Lake user guide</i>. </p>\n         <p>Default: <code>CUSTOMER</code>\n         </p>"
+                    }
                 }
             },
             "traits": {
@@ -5030,6 +5066,9 @@
                 },
                 {
                     "target": "com.amazonaws.wafv2#WAFInvalidOperationException"
+                },
+                {
+                    "target": "com.amazonaws.wafv2#WAFInvalidParameterException"
                 }
             ],
             "traits": {
@@ -5307,6 +5346,9 @@
                 "smithy.api#documentation": "<p>The name of the field in the request payload that contains your customer's email. </p>\n         <p>This data type is used in the <code>RequestInspectionACFP</code> data type. </p>"
             }
         },
+        "com.amazonaws.wafv2#EnableMachineLearning": {
+            "type": "boolean"
+        },
         "com.amazonaws.wafv2#EntityDescription": {
             "type": "string",
             "traits": {
@@ -5342,6 +5384,12 @@
         },
         "com.amazonaws.wafv2#ErrorReason": {
             "type": "string"
+        },
+        "com.amazonaws.wafv2#EvaluationWindowSec": {
+            "type": "long",
+            "traits": {
+                "smithy.api#default": 0
+            }
         },
         "com.amazonaws.wafv2#ExcludedRule": {
             "type": "structure",
@@ -5482,7 +5530,7 @@
                 "Body": {
                     "target": "com.amazonaws.wafv2#Body",
                     "traits": {
-                        "smithy.api#documentation": "<p>Inspect the request body as plain text. The request body immediately follows the request\n         headers. This is the part of a request that contains any additional data that you want to\n         send to your web server as the HTTP request body, such as data from a form. </p>\n         <p>A limited amount of the request body is forwarded to WAF for\n      inspection by the underlying host service. For regional resources, the limit is 8 KB (8,192 bytes) and for CloudFront distributions, the limit is 16 KB (16,384 bytes). For CloudFront distributions,\n    you can increase the limit in the web ACL's <code>AssociationConfig</code>, for additional processing fees. </p>\n         <p>For information about how to handle oversized\n         request bodies, see the <code>Body</code> object configuration. </p>"
+                        "smithy.api#documentation": "<p>Inspect the request body as plain text. The request body immediately follows the request\n         headers. This is the part of a request that contains any additional data that you want to\n         send to your web server as the HTTP request body, such as data from a form. </p>\n         <p>WAF does not support inspecting the entire contents of the web request body if the body \n    exceeds the limit for the resource type. When a web request body is larger than the limit, the underlying host service \n    only forwards the contents that are within the limit to WAF for inspection. </p>\n         <ul>\n            <li>\n               <p>For Application Load Balancer and AppSync, the limit is fixed at 8 KB (8,192 bytes).</p>\n            </li>\n            <li>\n               <p>For CloudFront, API Gateway, Amazon Cognito, App Runner, and Verified Access, the default limit is 16 KB (16,384 bytes), and \n          you can increase the limit for each resource type in the web ACL <code>AssociationConfig</code>, for additional processing fees. </p>\n            </li>\n         </ul>\n         <p>For information about how to handle oversized\n         request bodies, see the <code>Body</code> object configuration. </p>"
                     }
                 },
                 "Method": {
@@ -5494,7 +5542,7 @@
                 "JsonBody": {
                     "target": "com.amazonaws.wafv2#JsonBody",
                     "traits": {
-                        "smithy.api#documentation": "<p>Inspect the request body as JSON. The request body immediately follows the request\n         headers. This is the part of a request that contains any additional data that you want to\n         send to your web server as the HTTP request body, such as data from a form. </p>\n         <p>A limited amount of the request body is forwarded to WAF for\n      inspection by the underlying host service. For regional resources, the limit is 8 KB (8,192 bytes) and for CloudFront distributions, the limit is 16 KB (16,384 bytes). For CloudFront distributions,\n    you can increase the limit in the web ACL's <code>AssociationConfig</code>, for additional processing fees. </p>\n         <p>For information about how to handle oversized\n         request bodies, see the <code>JsonBody</code> object configuration. </p>"
+                        "smithy.api#documentation": "<p>Inspect the request body as JSON. The request body immediately follows the request\n         headers. This is the part of a request that contains any additional data that you want to\n         send to your web server as the HTTP request body, such as data from a form. </p>\n         <p>WAF does not support inspecting the entire contents of the web request body if the body \n    exceeds the limit for the resource type. When a web request body is larger than the limit, the underlying host service \n    only forwards the contents that are within the limit to WAF for inspection. </p>\n         <ul>\n            <li>\n               <p>For Application Load Balancer and AppSync, the limit is fixed at 8 KB (8,192 bytes).</p>\n            </li>\n            <li>\n               <p>For CloudFront, API Gateway, Amazon Cognito, App Runner, and Verified Access, the default limit is 16 KB (16,384 bytes), and \n          you can increase the limit for each resource type in the web ACL <code>AssociationConfig</code>, for additional processing fees. </p>\n            </li>\n         </ul>\n         <p>For information about how to handle oversized\n         request bodies, see the <code>JsonBody</code> object configuration. </p>"
                     }
                 },
                 "Headers": {
@@ -5518,12 +5566,12 @@
                 "JA3Fingerprint": {
                     "target": "com.amazonaws.wafv2#JA3Fingerprint",
                     "traits": {
-                        "smithy.api#documentation": "<p>Match against the request's JA3 fingerprint. The JA3 fingerprint is a 32-character hash derived from the TLS Client Hello of an incoming request. This fingerprint serves as a unique identifier for the client's TLS configuration. WAF calculates and logs this fingerprint for each\n\t\t\t\t\t\trequest that has enough TLS Client Hello information for the calculation. Almost \n                        all web requests include this information.</p>\n         <note>\n            <p>You can use this choice only with a string match <code>ByteMatchStatement</code> with the <code>PositionalConstraint</code> set to \n       <code>EXACTLY</code>.  </p>\n         </note>\n         <p>You can obtain the JA3 fingerprint for client requests from the web ACL logs. \n\t\t\t\t\t\tIf WAF is able to calculate the fingerprint, it includes it in the logs.  \n\t\t\t\t\t\tFor information about the logging fields, \nsee <a href=\"https://docs.aws.amazon.com/waf/latest/developerguide/logging-fields.html\">Log fields</a> in the <i>WAF Developer Guide</i>. </p>\n         <p>Provide the JA3 fingerprint string from the logs in your string match statement\n\t\t\t\t\t\t\tspecification, to match with any future requests that have the same TLS configuration.</p>"
+                        "smithy.api#documentation": "<p>Available for use with Amazon CloudFront distributions and Application Load Balancers. Match against the request's JA3 fingerprint. The JA3 fingerprint is a 32-character hash derived from the TLS Client Hello of an incoming request. This fingerprint serves as a unique identifier for the client's TLS configuration. WAF calculates and logs this fingerprint for each\n\t\t\t\t\t\trequest that has enough TLS Client Hello information for the calculation. Almost \n                        all web requests include this information.</p>\n         <note>\n            <p>You can use this choice only with a string match <code>ByteMatchStatement</code> with the <code>PositionalConstraint</code> set to \n       <code>EXACTLY</code>.  </p>\n         </note>\n         <p>You can obtain the JA3 fingerprint for client requests from the web ACL logs. \n\t\t\t\t\t\tIf WAF is able to calculate the fingerprint, it includes it in the logs.  \n\t\t\t\t\t\tFor information about the logging fields, \nsee <a href=\"https://docs.aws.amazon.com/waf/latest/developerguide/logging-fields.html\">Log fields</a> in the <i>WAF Developer Guide</i>. </p>\n         <p>Provide the JA3 fingerprint string from the logs in your string match statement\n\t\t\t\t\t\t\tspecification, to match with any future requests that have the same TLS configuration.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The part of the web request that you want WAF to inspect. Include the single\n            <code>FieldToMatch</code> type that you want to inspect, with additional specifications\n         as needed, according to the type. You specify a single request component in\n            <code>FieldToMatch</code> for each rule statement that requires it. To inspect more than\n         one component of the web request, create a separate rule statement for each\n         component.</p>\n         <p>Example JSON for a <code>QueryString</code> field to match: </p>\n         <p>\n            <code> \"FieldToMatch\": { \"QueryString\": {} }</code>\n         </p>\n         <p>Example JSON for a <code>Method</code> field to match specification:</p>\n         <p>\n            <code> \"FieldToMatch\": { \"Method\": { \"Name\": \"DELETE\" } }</code>\n         </p>"
+                "smithy.api#documentation": "<p>Specifies a web request component to be used in a rule match statement or in a logging configuration. </p>\n         <ul>\n            <li>\n               <p>In a rule statement, this is the part of the web request that you want WAF to inspect. Include the single\n                    <code>FieldToMatch</code> type that you want to inspect, with additional specifications\n                 as needed, according to the type. You specify a single request component in\n                    <code>FieldToMatch</code> for each rule statement that requires it. To inspect more than\n                 one component of the web request, create a separate rule statement for each\n                 component.</p>\n               <p>Example JSON for a <code>QueryString</code> field to match: </p>\n               <p>\n                  <code> \"FieldToMatch\": { \"QueryString\": {} }</code>\n               </p>\n               <p>Example JSON for a <code>Method</code> field to match specification:</p>\n               <p>\n                  <code> \"FieldToMatch\": { \"Method\": { \"Name\": \"DELETE\" } }</code>\n               </p>\n            </li>\n            <li>\n               <p>In a logging configuration, this is used in the <code>RedactedFields</code> property to specify a field to \n              redact from the logging records. For this use case, note the following: </p>\n               <ul>\n                  <li>\n                     <p>Even though all <code>FieldToMatch</code> settings \n                  are available, the only valid settings for field redaction are <code>UriPath</code>, <code>QueryString</code>, <code>SingleHeader</code>, and <code>Method</code>.</p>\n                  </li>\n                  <li>\n                     <p>In this documentation, the descriptions of the individual fields talk about specifying the web request component to inspect, \n                      but for field redaction, you are specifying the component type to redact from the logs. </p>\n                  </li>\n                  <li>\n                     <p>If you have request sampling enabled, the redacted fields configuration for logging has no impact on sampling. \n                  The only way to exclude fields from request sampling is by disabling sampling in the web ACL visibility configuration. </p>\n                  </li>\n               </ul>\n            </li>\n         </ul>"
             }
         },
         "com.amazonaws.wafv2#FieldToMatchData": {
@@ -5837,6 +5885,9 @@
                 },
                 {
                     "target": "com.amazonaws.wafv2#WAFInvalidResourceException"
+                },
+                {
+                    "target": "com.amazonaws.wafv2#WAFNonexistentItemException"
                 }
             ],
             "traits": {
@@ -5994,6 +6045,18 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the web ACL for which you want to get the <a>LoggingConfiguration</a>.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "LogType": {
+                    "target": "com.amazonaws.wafv2#LogType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Used to distinguish between various logging options. Currently, there is one option.</p>\n         <p>Default: <code>WAF_LOGS</code>\n         </p>"
+                    }
+                },
+                "LogScope": {
+                    "target": "com.amazonaws.wafv2#LogScope",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The owner of the logging configuration, which must be set to <code>CUSTOMER</code> for the configurations that you manage. </p>\n         <p>The log scope <code>SECURITY_LAKE</code> indicates a configuration that is managed through Amazon Security Lake. You can use Security Lake to collect log and event data from various sources for normalization, analysis, and management. For information, see \n       <a href=\"https://docs.aws.amazon.com/security-lake/latest/userguide/internal-sources.html\">Collecting data from Amazon Web Services services</a>\n       in the <i>Amazon Security Lake user guide</i>. </p>\n         <p>Default: <code>CUSTOMER</code>\n         </p>"
                     }
                 }
             },
@@ -7067,7 +7130,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Match against the request's JA3 fingerprint. The JA3 fingerprint is a 32-character hash derived from the TLS Client Hello of an incoming request. This fingerprint serves as a unique identifier for the client's TLS configuration. WAF calculates and logs this fingerprint for each\n\t\t\t\t\t\trequest that has enough TLS Client Hello information for the calculation. Almost \n                        all web requests include this information.</p>\n         <note>\n            <p>You can use this choice only with a string match <code>ByteMatchStatement</code> with the <code>PositionalConstraint</code> set to \n       <code>EXACTLY</code>.  </p>\n         </note>\n         <p>You can obtain the JA3 fingerprint for client requests from the web ACL logs. \n\t\t\t\t\t\tIf WAF is able to calculate the fingerprint, it includes it in the logs.  \n\t\t\t\t\t\tFor information about the logging fields, \nsee <a href=\"https://docs.aws.amazon.com/waf/latest/developerguide/logging-fields.html\">Log fields</a> in the <i>WAF Developer Guide</i>. </p>\n         <p>Provide the JA3 fingerprint string from the logs in your string match statement\n\t\t\t\t\t\t\tspecification, to match with any future requests that have the same TLS configuration.</p>"
+                "smithy.api#documentation": "<p>Available for use with Amazon CloudFront distributions and Application Load Balancers. Match against the request's JA3 fingerprint. The JA3 fingerprint is a 32-character hash derived from the TLS Client Hello of an incoming request. This fingerprint serves as a unique identifier for the client's TLS configuration. WAF calculates and logs this fingerprint for each\n\t\t\t\t\t\trequest that has enough TLS Client Hello information for the calculation. Almost \n                        all web requests include this information.</p>\n         <note>\n            <p>You can use this choice only with a string match <code>ByteMatchStatement</code> with the <code>PositionalConstraint</code> set to \n       <code>EXACTLY</code>.  </p>\n         </note>\n         <p>You can obtain the JA3 fingerprint for client requests from the web ACL logs. \n\t\t\t\t\t\tIf WAF is able to calculate the fingerprint, it includes it in the logs.  \n\t\t\t\t\t\tFor information about the logging fields, \nsee <a href=\"https://docs.aws.amazon.com/waf/latest/developerguide/logging-fields.html\">Log fields</a> in the <i>WAF Developer Guide</i>. </p>\n         <p>Provide the JA3 fingerprint string from the logs in your string match statement\n\t\t\t\t\t\t\tspecification, to match with any future requests that have the same TLS configuration.</p>"
             }
         },
         "com.amazonaws.wafv2#JsonBody": {
@@ -7096,7 +7159,7 @@
                 "OversizeHandling": {
                     "target": "com.amazonaws.wafv2#OversizeHandling",
                     "traits": {
-                        "smithy.api#documentation": "<p>What WAF should do if the body is larger than WAF can inspect. \n    WAF does not support inspecting the entire contents of the web request body if the body \n    exceeds the limit for the resource type. If the body is larger than the limit, the underlying host service \n    only forwards the contents that are below the limit to WAF for inspection. </p>\n         <p>The default limit is 8 KB (8,192 bytes) for regional resources and 16 KB (16,384 bytes) for CloudFront distributions. For CloudFront distributions, \n    you can increase the limit in the web ACL <code>AssociationConfig</code>, for additional processing fees. </p>\n         <p>The options for oversize handling are the following:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>CONTINUE</code> - Inspect the available body contents normally, according to the rule inspection criteria. </p>\n            </li>\n            <li>\n               <p>\n                  <code>MATCH</code> - Treat the web request as matching the rule statement. WAF\n               applies the rule action to the request.</p>\n            </li>\n            <li>\n               <p>\n                  <code>NO_MATCH</code> - Treat the web request as not matching the rule\n               statement.</p>\n            </li>\n         </ul>\n         <p>You can combine the <code>MATCH</code> or <code>NO_MATCH</code>\n      settings for oversize handling with your rule and web ACL action settings, so that you block any request whose body is over the limit. </p>\n         <p>Default: <code>CONTINUE</code>\n         </p>"
+                        "smithy.api#documentation": "<p>What WAF should do if the body is larger than WAF can inspect. </p>\n         <p>WAF does not support inspecting the entire contents of the web request body if the body \n    exceeds the limit for the resource type. When a web request body is larger than the limit, the underlying host service \n    only forwards the contents that are within the limit to WAF for inspection. </p>\n         <ul>\n            <li>\n               <p>For Application Load Balancer and AppSync, the limit is fixed at 8 KB (8,192 bytes).</p>\n            </li>\n            <li>\n               <p>For CloudFront, API Gateway, Amazon Cognito, App Runner, and Verified Access, the default limit is 16 KB (16,384 bytes), and \n          you can increase the limit for each resource type in the web ACL <code>AssociationConfig</code>, for additional processing fees. </p>\n            </li>\n         </ul>\n         <p>The options for oversize handling are the following:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>CONTINUE</code> - Inspect the available body contents normally, according to the rule inspection criteria. </p>\n            </li>\n            <li>\n               <p>\n                  <code>MATCH</code> - Treat the web request as matching the rule statement. WAF\n               applies the rule action to the request.</p>\n            </li>\n            <li>\n               <p>\n                  <code>NO_MATCH</code> - Treat the web request as not matching the rule\n               statement.</p>\n            </li>\n         </ul>\n         <p>You can combine the <code>MATCH</code> or <code>NO_MATCH</code>\n      settings for oversize handling with your rule and web ACL action settings, so that you block any request whose body is over the limit. </p>\n         <p>Default: <code>CONTINUE</code>\n         </p>"
                     }
                 }
             },
@@ -7649,6 +7712,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The maximum number of objects that you want WAF to return for this request. If more \n          objects are available, in the response, WAF provides a \n         <code>NextMarker</code> value that you can use in a subsequent call to get the next batch of objects.</p>"
                     }
+                },
+                "LogScope": {
+                    "target": "com.amazonaws.wafv2#LogScope",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The owner of the logging configuration, which must be set to <code>CUSTOMER</code> for the configurations that you manage. </p>\n         <p>The log scope <code>SECURITY_LAKE</code> indicates a configuration that is managed through Amazon Security Lake. You can use Security Lake to collect log and event data from various sources for normalization, analysis, and management. For information, see \n       <a href=\"https://docs.aws.amazon.com/security-lake/latest/userguide/internal-sources.html\">Collecting data from Amazon Web Services services</a>\n       in the <i>Amazon Security Lake user guide</i>. </p>\n         <p>Default: <code>CUSTOMER</code>\n         </p>"
+                    }
                 }
             },
             "traits": {
@@ -8124,7 +8193,23 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Retrieves an array of <a>WebACLSummary</a> objects for the web ACLs that you\n         manage.</p>"
+                "smithy.api#documentation": "<p>Retrieves an array of <a>WebACLSummary</a> objects for the web ACLs that you\n         manage.</p>",
+                "smithy.test#smokeTests": [
+                    {
+                        "id": "ListWebACLsSuccess",
+                        "params": {
+                            "Scope": "REGIONAL",
+                            "Limit": 20
+                        },
+                        "vendorParams": {
+                            "region": "us-east-1"
+                        },
+                        "vendorParamsShape": "aws.test#AwsVendorParams",
+                        "expect": {
+                            "success": {}
+                        }
+                    }
+                ]
             }
         },
         "com.amazonaws.wafv2#ListWebACLsRequest": {
@@ -8196,6 +8281,34 @@
                 }
             }
         },
+        "com.amazonaws.wafv2#LogScope": {
+            "type": "enum",
+            "members": {
+                "CUSTOMER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CUSTOMER"
+                    }
+                },
+                "SECURITY_LAKE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SECURITY_LAKE"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.wafv2#LogType": {
+            "type": "enum",
+            "members": {
+                "WAF_LOGS": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "WAF_LOGS"
+                    }
+                }
+            }
+        },
         "com.amazonaws.wafv2#LoggingConfiguration": {
             "type": "structure",
             "members": {
@@ -8216,7 +8329,7 @@
                 "RedactedFields": {
                     "target": "com.amazonaws.wafv2#RedactedFields",
                     "traits": {
-                        "smithy.api#documentation": "<p>The parts of the request that you want to keep out of the logs.</p>\n         <p>For example, if you\n         redact the <code>SingleHeader</code> field, the <code>HEADER</code> field in the logs will\n         be <code>REDACTED</code> for all rules that use the <code>SingleHeader</code>\n            <code>FieldToMatch</code> setting. </p>\n         <p>Redaction applies only to the component that's specified in the rule's <code>FieldToMatch</code> setting, so the <code>SingleHeader</code> redaction \n         doesn't apply to rules that use the <code>Headers</code>\n            <code>FieldToMatch</code>.</p>\n         <note>\n            <p>You can specify only the following fields for redaction: <code>UriPath</code>,\n         <code>QueryString</code>, <code>SingleHeader</code>, and <code>Method</code>.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>The parts of the request that you want to keep out of the logs.</p>\n         <p>For example, if you\n         redact the <code>SingleHeader</code> field, the <code>HEADER</code> field in the logs will\n         be <code>REDACTED</code> for all rules that use the <code>SingleHeader</code>\n            <code>FieldToMatch</code> setting. </p>\n         <p>Redaction applies only to the component that's specified in the rule's <code>FieldToMatch</code> setting, so the <code>SingleHeader</code> redaction \n         doesn't apply to rules that use the <code>Headers</code>\n            <code>FieldToMatch</code>.</p>\n         <note>\n            <p>You can specify only the following fields for redaction: <code>UriPath</code>,\n         <code>QueryString</code>, <code>SingleHeader</code>, and <code>Method</code>.</p>\n         </note>\n         <note>\n            <p>This setting has no impact on request sampling. With request sampling, \n                the only way to exclude fields is by disabling sampling in the web ACL visibility configuration. </p>\n         </note>"
                     }
                 },
                 "ManagedByFirewallManager": {
@@ -8230,6 +8343,18 @@
                     "target": "com.amazonaws.wafv2#LoggingFilter",
                     "traits": {
                         "smithy.api#documentation": "<p>Filtering that specifies which web requests are kept in the logs and which are dropped.\n         You can filter on the rule action and on the web request labels that were applied by\n         matching rules during web ACL evaluation. </p>"
+                    }
+                },
+                "LogType": {
+                    "target": "com.amazonaws.wafv2#LogType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Used to distinguish between various logging options. Currently, there is one option.</p>\n         <p>Default: <code>WAF_LOGS</code>\n         </p>"
+                    }
+                },
+                "LogScope": {
+                    "target": "com.amazonaws.wafv2#LogScope",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The owner of the logging configuration, which must be set to <code>CUSTOMER</code> for the configurations that you manage. </p>\n         <p>The log scope <code>SECURITY_LAKE</code> indicates a configuration that is managed through Amazon Security Lake. You can use Security Lake to collect log and event data from various sources for normalization, analysis, and management. For information, see \n       <a href=\"https://docs.aws.amazon.com/security-lake/latest/userguide/internal-sources.html\">Collecting data from Amazon Web Services services</a>\n       in the <i>Amazon Security Lake user guide</i>. </p>\n         <p>Default: <code>CUSTOMER</code>\n         </p>"
                     }
                 }
             },
@@ -9682,6 +9807,13 @@
                         "smithy.api#required": {}
                     }
                 },
+                "EvaluationWindowSec": {
+                    "target": "com.amazonaws.wafv2#EvaluationWindowSec",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The amount of time, in seconds, that WAF\n            should include in its request counts, looking back from the current time. For example, \n            for a setting of 120, when WAF checks the rate, it counts the requests for the 2 minutes immediately preceding \n            the current time. Valid settings are 60, 120, 300, and 600. </p>\n         <p>This setting doesn't determine how often WAF checks the rate, but how far back it looks each \n            time it checks. WAF checks the rate about every 10 seconds.</p>\n         <p>Default: <code>300</code> (5 minutes)</p>"
+                    }
+                },
                 "AggregateKeyType": {
                     "target": "com.amazonaws.wafv2#RateBasedStatementAggregateKeyType",
                     "traits": {
@@ -9709,7 +9841,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A rate-based rule counts incoming requests and rate limits requests when they are coming at too fast a rate. The rule categorizes requests according to your aggregation criteria, collects them into aggregation instances, and counts and rate limits the requests for each instance. </p>\n         <p>You can specify individual aggregation keys, like IP address or HTTP method. You can also specify aggregation key combinations, like IP address and HTTP method, or HTTP method, query argument, and cookie. </p>\n         <p>Each unique set of values for the aggregation keys that you specify is a separate aggregation instance, with the value from each key contributing to the aggregation instance definition. </p>\n         <p>For example, assume the rule evaluates web requests with the following IP address and HTTP method values: </p>\n         <ul>\n            <li>\n               <p>IP address 10.1.1.1, HTTP method POST</p>\n            </li>\n            <li>\n               <p>IP address 10.1.1.1, HTTP method GET</p>\n            </li>\n            <li>\n               <p>IP address 127.0.0.0, HTTP method POST</p>\n            </li>\n            <li>\n               <p>IP address 10.1.1.1, HTTP method GET</p>\n            </li>\n         </ul>\n         <p>The rule would create different aggregation instances according to your aggregation criteria, for example: </p>\n         <ul>\n            <li>\n               <p>If the aggregation criteria is just the IP address, then each individual address is an aggregation instance, and WAF counts requests separately for each. The aggregation instances and request counts for our example would be the following: </p>\n               <ul>\n                  <li>\n                     <p>IP address 10.1.1.1: count 3</p>\n                  </li>\n                  <li>\n                     <p>IP address 127.0.0.0: count 1</p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>If the aggregation criteria is HTTP method, then each individual HTTP method is an aggregation instance. The aggregation instances and request counts for our example would be the following: </p>\n               <ul>\n                  <li>\n                     <p>HTTP method POST: count 2</p>\n                  </li>\n                  <li>\n                     <p>HTTP method GET: count 2</p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>If the aggregation criteria is IP address and HTTP method, then each IP address and each HTTP method would contribute to the combined aggregation instance. The aggregation instances and request counts for our example would be the following: </p>\n               <ul>\n                  <li>\n                     <p>IP address 10.1.1.1, HTTP method POST: count 1</p>\n                  </li>\n                  <li>\n                     <p>IP address 10.1.1.1, HTTP method GET: count 2</p>\n                  </li>\n                  <li>\n                     <p>IP address 127.0.0.0, HTTP method POST: count 1</p>\n                  </li>\n               </ul>\n            </li>\n         </ul>\n         <p>For any n-tuple of aggregation keys, each unique combination of values for the keys defines a separate aggregation instance, which WAF counts and rate-limits individually. </p>\n         <p>You can optionally nest another statement inside the rate-based statement, to narrow the scope of the rule so that it only counts and rate limits requests that match the nested statement. You can use this nested scope-down statement in conjunction with your aggregation key specifications or you can just count and rate limit all requests that match the scope-down statement, without additional aggregation. When you choose to just manage all requests that match a scope-down statement, the aggregation instance is singular for the rule. </p>\n         <p>You cannot nest a <code>RateBasedStatement</code> inside another statement, for example inside a <code>NotStatement</code> or <code>OrStatement</code>. You can define a <code>RateBasedStatement</code> inside a web ACL and inside a rule group. </p>\n         <p>For additional information about the options, see <a href=\"https://docs.aws.amazon.com/waf/latest/developerguide/waf-rate-based-rules.html\">Rate limiting web requests using rate-based rules</a> \n    in the <i>WAF Developer Guide</i>. </p>\n         <p>If you only aggregate on the individual IP address or forwarded IP address, you can retrieve the list of IP addresses that WAF \n          is currently rate limiting for a rule through the API call <code>GetRateBasedStatementManagedKeys</code>. This option is not available\n      for other aggregation configurations.</p>\n         <p>WAF tracks and manages web requests separately for each instance of a rate-based rule that you use. For example, if you provide the same rate-based rule settings in two web ACLs, each of the two rule statements represents a separate instance of the rate-based rule and gets its own tracking and management by WAF. If you define a rate-based rule inside a rule group, and then use that rule group in multiple places, each use creates a separate instance of the rate-based rule that gets its own tracking and management by WAF. </p>"
+                "smithy.api#documentation": "<p>A rate-based rule counts incoming requests and rate limits requests when they are coming at too fast a rate. The rule categorizes requests according to your aggregation criteria, collects them into aggregation instances, and counts and rate limits the requests for each instance. </p>\n         <note>\n            <p>If you change any of these settings in a rule that's currently in use, the change resets the rule's rate limiting counts. This can pause the rule's rate limiting activities for up to a minute. </p>\n         </note>\n         <p>You can specify individual aggregation keys, like IP address or HTTP method. You can also specify aggregation key combinations, like IP address and HTTP method, or HTTP method, query argument, and cookie. </p>\n         <p>Each unique set of values for the aggregation keys that you specify is a separate aggregation instance, with the value from each key contributing to the aggregation instance definition. </p>\n         <p>For example, assume the rule evaluates web requests with the following IP address and HTTP method values: </p>\n         <ul>\n            <li>\n               <p>IP address 10.1.1.1, HTTP method POST</p>\n            </li>\n            <li>\n               <p>IP address 10.1.1.1, HTTP method GET</p>\n            </li>\n            <li>\n               <p>IP address 127.0.0.0, HTTP method POST</p>\n            </li>\n            <li>\n               <p>IP address 10.1.1.1, HTTP method GET</p>\n            </li>\n         </ul>\n         <p>The rule would create different aggregation instances according to your aggregation criteria, for example: </p>\n         <ul>\n            <li>\n               <p>If the aggregation criteria is just the IP address, then each individual address is an aggregation instance, and WAF counts requests separately for each. The aggregation instances and request counts for our example would be the following: </p>\n               <ul>\n                  <li>\n                     <p>IP address 10.1.1.1: count 3</p>\n                  </li>\n                  <li>\n                     <p>IP address 127.0.0.0: count 1</p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>If the aggregation criteria is HTTP method, then each individual HTTP method is an aggregation instance. The aggregation instances and request counts for our example would be the following: </p>\n               <ul>\n                  <li>\n                     <p>HTTP method POST: count 2</p>\n                  </li>\n                  <li>\n                     <p>HTTP method GET: count 2</p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>If the aggregation criteria is IP address and HTTP method, then each IP address and each HTTP method would contribute to the combined aggregation instance. The aggregation instances and request counts for our example would be the following: </p>\n               <ul>\n                  <li>\n                     <p>IP address 10.1.1.1, HTTP method POST: count 1</p>\n                  </li>\n                  <li>\n                     <p>IP address 10.1.1.1, HTTP method GET: count 2</p>\n                  </li>\n                  <li>\n                     <p>IP address 127.0.0.0, HTTP method POST: count 1</p>\n                  </li>\n               </ul>\n            </li>\n         </ul>\n         <p>For any n-tuple of aggregation keys, each unique combination of values for the keys defines a separate aggregation instance, which WAF counts and rate-limits individually. </p>\n         <p>You can optionally nest another statement inside the rate-based statement, to narrow the scope of the rule so that it only counts and rate limits requests that match the nested statement. You can use this nested scope-down statement in conjunction with your aggregation key specifications or you can just count and rate limit all requests that match the scope-down statement, without additional aggregation. When you choose to just manage all requests that match a scope-down statement, the aggregation instance is singular for the rule. </p>\n         <p>You cannot nest a <code>RateBasedStatement</code> inside another statement, for example inside a <code>NotStatement</code> or <code>OrStatement</code>. You can define a <code>RateBasedStatement</code> inside a web ACL and inside a rule group. </p>\n         <p>For additional information about the options, see <a href=\"https://docs.aws.amazon.com/waf/latest/developerguide/waf-rate-based-rules.html\">Rate limiting web requests using rate-based rules</a> \n    in the <i>WAF Developer Guide</i>. </p>\n         <p>If you only aggregate on the individual IP address or forwarded IP address, you can retrieve the list of IP addresses that WAF \n          is currently rate limiting for a rule through the API call <code>GetRateBasedStatementManagedKeys</code>. This option is not available\n      for other aggregation configurations.</p>\n         <p>WAF tracks and manages web requests separately for each instance of a rate-based rule that you use. For example, if you provide the same rate-based rule settings in two web ACLs, each of the two rule statements represents a separate instance of the rate-based rule and gets its own tracking and management by WAF. If you define a rate-based rule inside a rule group, and then use that rule group in multiple places, each use creates a separate instance of the rate-based rule that gets its own tracking and management by WAF. </p>"
             }
         },
         "com.amazonaws.wafv2#RateBasedStatementAggregateKeyType": {
@@ -9810,7 +9942,7 @@
             },
             "traits": {
                 "smithy.api#length": {
-                    "min": 1,
+                    "min": 0,
                     "max": 5
                 }
             }
@@ -10212,13 +10344,13 @@
                 "DefaultSizeInspectionLimit": {
                     "target": "com.amazonaws.wafv2#SizeInspectionLimit",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the maximum size of the web request body component that an associated CloudFront distribution should send to WAF for inspection. This applies to statements in the web ACL that inspect the body or JSON body. </p>\n         <p>Default: <code>16 KB (16,384 bytes)</code>\n         </p>",
+                        "smithy.api#documentation": "<p>Specifies the maximum size of the web request body component that an associated CloudFront, API Gateway, Amazon Cognito, App Runner, or Verified Access resource should send to WAF for inspection. This applies to statements in the web ACL that inspect the body or JSON body. </p>\n         <p>Default: <code>16 KB (16,384 bytes)</code>\n         </p>",
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Customizes the maximum size of the request body that your protected CloudFront distributions forward to WAF for inspection. The default size is 16 KB (16,384 bytes). </p>\n         <note>\n            <p>You are charged additional fees when your protected resources forward body sizes that are larger than the default. For more information, see <a href=\"http://aws.amazon.com/waf/pricing/\">WAF Pricing</a>.</p>\n         </note>\n         <p>This is used in the <code>AssociationConfig</code> of the web ACL. </p>"
+                "smithy.api#documentation": "<p>Customizes the maximum size of the request body that your protected CloudFront, API Gateway, Amazon Cognito, App Runner, and Verified Access resources forward to WAF for inspection. The default size is 16 KB (16,384 bytes). You can change the setting for any of the available resource types. </p>\n         <note>\n            <p>You are charged additional fees when your protected resources forward body sizes that are larger than the default. For more information, see <a href=\"http://aws.amazon.com/waf/pricing/\">WAF Pricing</a>.</p>\n         </note>\n         <p>Example JSON: <code> {\n    \"API_GATEWAY\": \"KB_48\",\n    \"APP_RUNNER_SERVICE\": \"KB_32\"\n    }</code>\n         </p>\n         <p>For Application Load Balancer and AppSync, the limit is fixed at 8 KB (8,192 bytes).</p>\n         <p>This is used in the <code>AssociationConfig</code> of the web ACL. </p>"
             }
         },
         "com.amazonaws.wafv2#RequestInspection": {
@@ -10771,7 +10903,7 @@
             },
             "traits": {
                 "smithy.api#length": {
-                    "min": 1,
+                    "min": 0,
                     "max": 100
                 }
             }
@@ -11180,7 +11312,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A rule statement that compares a number of bytes against the size of a request component, using a comparison operator, such as greater than (>) or less than (<). For example, you can use a size constraint statement to look for query strings that are longer than 100 bytes. </p>\n         <p>If you configure WAF to inspect the request body, WAF inspects only the number of bytes of the body up to the limit for the web ACL. By default, for regional web ACLs, this limit is 8 KB (8,192 bytes) and for CloudFront web ACLs, this limit is 16 KB (16,384 bytes). For CloudFront web ACLs, you can increase the limit in the web ACL <code>AssociationConfig</code>, for additional fees. If you know that the request body for your web requests should never exceed the inspection limit, you could use a size constraint statement to block requests that have a larger request body size.</p>\n         <p>If you choose URI for the value of Part of the request to filter on, the slash (/) in the URI counts as one character. For example, the URI <code>/logo.jpg</code> is nine characters long.</p>"
+                "smithy.api#documentation": "<p>A rule statement that compares a number of bytes against the size of a request component, using a comparison operator, such as greater than (>) or less than (<). For example, you can use a size constraint statement to look for query strings that are longer than 100 bytes. </p>\n         <p>If you configure WAF to inspect the request body, WAF inspects only the number of bytes in the body up to the limit for the web ACL and protected resource type. If you know that the request body for your web requests should never exceed the inspection limit, you can use a size constraint statement to block requests that have a larger request body size. For more information about the inspection limits, see <code>Body</code> and <code>JsonBody</code> settings for the <code>FieldToMatch</code> data type. </p>\n         <p>If you choose URI for the value of Part of the request to filter on, the slash (/) in the URI counts as one character. For example, the URI <code>/logo.jpg</code> is nine characters long.</p>"
             }
         },
         "com.amazonaws.wafv2#SizeInspectionLimit": {
@@ -11214,6 +11346,9 @@
         },
         "com.amazonaws.wafv2#SolveTimestamp": {
             "type": "long"
+        },
+        "com.amazonaws.wafv2#SourceType": {
+            "type": "string"
         },
         "com.amazonaws.wafv2#SqliMatchStatement": {
             "type": "structure",
@@ -11267,7 +11402,7 @@
                 "SizeConstraintStatement": {
                     "target": "com.amazonaws.wafv2#SizeConstraintStatement",
                     "traits": {
-                        "smithy.api#documentation": "<p>A rule statement that compares a number of bytes against the size of a request component, using a comparison operator, such as greater than (>) or less than (<). For example, you can use a size constraint statement to look for query strings that are longer than 100 bytes. </p>\n         <p>If you configure WAF to inspect the request body, WAF inspects only the number of bytes of the body up to the limit for the web ACL. By default, for regional web ACLs, this limit is 8 KB (8,192 bytes) and for CloudFront web ACLs, this limit is 16 KB (16,384 bytes). For CloudFront web ACLs, you can increase the limit in the web ACL <code>AssociationConfig</code>, for additional fees. If you know that the request body for your web requests should never exceed the inspection limit, you could use a size constraint statement to block requests that have a larger request body size.</p>\n         <p>If you choose URI for the value of Part of the request to filter on, the slash (/) in the URI counts as one character. For example, the URI <code>/logo.jpg</code> is nine characters long.</p>"
+                        "smithy.api#documentation": "<p>A rule statement that compares a number of bytes against the size of a request component, using a comparison operator, such as greater than (>) or less than (<). For example, you can use a size constraint statement to look for query strings that are longer than 100 bytes. </p>\n         <p>If you configure WAF to inspect the request body, WAF inspects only the number of bytes in the body up to the limit for the web ACL and protected resource type. If you know that the request body for your web requests should never exceed the inspection limit, you can use a size constraint statement to block requests that have a larger request body size. For more information about the inspection limits, see <code>Body</code> and <code>JsonBody</code> settings for the <code>FieldToMatch</code> data type. </p>\n         <p>If you choose URI for the value of Part of the request to filter on, the slash (/) in the URI counts as one character. For example, the URI <code>/logo.jpg</code> is nine characters long.</p>"
                     }
                 },
                 "GeoMatchStatement": {
@@ -11297,7 +11432,7 @@
                 "RateBasedStatement": {
                     "target": "com.amazonaws.wafv2#RateBasedStatement",
                     "traits": {
-                        "smithy.api#documentation": "<p>A rate-based rule counts incoming requests and rate limits requests when they are coming at too fast a rate. The rule categorizes requests according to your aggregation criteria, collects them into aggregation instances, and counts and rate limits the requests for each instance. </p>\n         <p>You can specify individual aggregation keys, like IP address or HTTP method. You can also specify aggregation key combinations, like IP address and HTTP method, or HTTP method, query argument, and cookie. </p>\n         <p>Each unique set of values for the aggregation keys that you specify is a separate aggregation instance, with the value from each key contributing to the aggregation instance definition. </p>\n         <p>For example, assume the rule evaluates web requests with the following IP address and HTTP method values: </p>\n         <ul>\n            <li>\n               <p>IP address 10.1.1.1, HTTP method POST</p>\n            </li>\n            <li>\n               <p>IP address 10.1.1.1, HTTP method GET</p>\n            </li>\n            <li>\n               <p>IP address 127.0.0.0, HTTP method POST</p>\n            </li>\n            <li>\n               <p>IP address 10.1.1.1, HTTP method GET</p>\n            </li>\n         </ul>\n         <p>The rule would create different aggregation instances according to your aggregation criteria, for example: </p>\n         <ul>\n            <li>\n               <p>If the aggregation criteria is just the IP address, then each individual address is an aggregation instance, and WAF counts requests separately for each. The aggregation instances and request counts for our example would be the following: </p>\n               <ul>\n                  <li>\n                     <p>IP address 10.1.1.1: count 3</p>\n                  </li>\n                  <li>\n                     <p>IP address 127.0.0.0: count 1</p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>If the aggregation criteria is HTTP method, then each individual HTTP method is an aggregation instance. The aggregation instances and request counts for our example would be the following: </p>\n               <ul>\n                  <li>\n                     <p>HTTP method POST: count 2</p>\n                  </li>\n                  <li>\n                     <p>HTTP method GET: count 2</p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>If the aggregation criteria is IP address and HTTP method, then each IP address and each HTTP method would contribute to the combined aggregation instance. The aggregation instances and request counts for our example would be the following: </p>\n               <ul>\n                  <li>\n                     <p>IP address 10.1.1.1, HTTP method POST: count 1</p>\n                  </li>\n                  <li>\n                     <p>IP address 10.1.1.1, HTTP method GET: count 2</p>\n                  </li>\n                  <li>\n                     <p>IP address 127.0.0.0, HTTP method POST: count 1</p>\n                  </li>\n               </ul>\n            </li>\n         </ul>\n         <p>For any n-tuple of aggregation keys, each unique combination of values for the keys defines a separate aggregation instance, which WAF counts and rate-limits individually. </p>\n         <p>You can optionally nest another statement inside the rate-based statement, to narrow the scope of the rule so that it only counts and rate limits requests that match the nested statement. You can use this nested scope-down statement in conjunction with your aggregation key specifications or you can just count and rate limit all requests that match the scope-down statement, without additional aggregation. When you choose to just manage all requests that match a scope-down statement, the aggregation instance is singular for the rule. </p>\n         <p>You cannot nest a <code>RateBasedStatement</code> inside another statement, for example inside a <code>NotStatement</code> or <code>OrStatement</code>. You can define a <code>RateBasedStatement</code> inside a web ACL and inside a rule group. </p>\n         <p>For additional information about the options, see <a href=\"https://docs.aws.amazon.com/waf/latest/developerguide/waf-rate-based-rules.html\">Rate limiting web requests using rate-based rules</a> \n    in the <i>WAF Developer Guide</i>. </p>\n         <p>If you only aggregate on the individual IP address or forwarded IP address, you can retrieve the list of IP addresses that WAF \n          is currently rate limiting for a rule through the API call <code>GetRateBasedStatementManagedKeys</code>. This option is not available\n      for other aggregation configurations.</p>\n         <p>WAF tracks and manages web requests separately for each instance of a rate-based rule that you use. For example, if you provide the same rate-based rule settings in two web ACLs, each of the two rule statements represents a separate instance of the rate-based rule and gets its own tracking and management by WAF. If you define a rate-based rule inside a rule group, and then use that rule group in multiple places, each use creates a separate instance of the rate-based rule that gets its own tracking and management by WAF. </p>"
+                        "smithy.api#documentation": "<p>A rate-based rule counts incoming requests and rate limits requests when they are coming at too fast a rate. The rule categorizes requests according to your aggregation criteria, collects them into aggregation instances, and counts and rate limits the requests for each instance. </p>\n         <note>\n            <p>If you change any of these settings in a rule that's currently in use, the change resets the rule's rate limiting counts. This can pause the rule's rate limiting activities for up to a minute. </p>\n         </note>\n         <p>You can specify individual aggregation keys, like IP address or HTTP method. You can also specify aggregation key combinations, like IP address and HTTP method, or HTTP method, query argument, and cookie. </p>\n         <p>Each unique set of values for the aggregation keys that you specify is a separate aggregation instance, with the value from each key contributing to the aggregation instance definition. </p>\n         <p>For example, assume the rule evaluates web requests with the following IP address and HTTP method values: </p>\n         <ul>\n            <li>\n               <p>IP address 10.1.1.1, HTTP method POST</p>\n            </li>\n            <li>\n               <p>IP address 10.1.1.1, HTTP method GET</p>\n            </li>\n            <li>\n               <p>IP address 127.0.0.0, HTTP method POST</p>\n            </li>\n            <li>\n               <p>IP address 10.1.1.1, HTTP method GET</p>\n            </li>\n         </ul>\n         <p>The rule would create different aggregation instances according to your aggregation criteria, for example: </p>\n         <ul>\n            <li>\n               <p>If the aggregation criteria is just the IP address, then each individual address is an aggregation instance, and WAF counts requests separately for each. The aggregation instances and request counts for our example would be the following: </p>\n               <ul>\n                  <li>\n                     <p>IP address 10.1.1.1: count 3</p>\n                  </li>\n                  <li>\n                     <p>IP address 127.0.0.0: count 1</p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>If the aggregation criteria is HTTP method, then each individual HTTP method is an aggregation instance. The aggregation instances and request counts for our example would be the following: </p>\n               <ul>\n                  <li>\n                     <p>HTTP method POST: count 2</p>\n                  </li>\n                  <li>\n                     <p>HTTP method GET: count 2</p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>If the aggregation criteria is IP address and HTTP method, then each IP address and each HTTP method would contribute to the combined aggregation instance. The aggregation instances and request counts for our example would be the following: </p>\n               <ul>\n                  <li>\n                     <p>IP address 10.1.1.1, HTTP method POST: count 1</p>\n                  </li>\n                  <li>\n                     <p>IP address 10.1.1.1, HTTP method GET: count 2</p>\n                  </li>\n                  <li>\n                     <p>IP address 127.0.0.0, HTTP method POST: count 1</p>\n                  </li>\n               </ul>\n            </li>\n         </ul>\n         <p>For any n-tuple of aggregation keys, each unique combination of values for the keys defines a separate aggregation instance, which WAF counts and rate-limits individually. </p>\n         <p>You can optionally nest another statement inside the rate-based statement, to narrow the scope of the rule so that it only counts and rate limits requests that match the nested statement. You can use this nested scope-down statement in conjunction with your aggregation key specifications or you can just count and rate limit all requests that match the scope-down statement, without additional aggregation. When you choose to just manage all requests that match a scope-down statement, the aggregation instance is singular for the rule. </p>\n         <p>You cannot nest a <code>RateBasedStatement</code> inside another statement, for example inside a <code>NotStatement</code> or <code>OrStatement</code>. You can define a <code>RateBasedStatement</code> inside a web ACL and inside a rule group. </p>\n         <p>For additional information about the options, see <a href=\"https://docs.aws.amazon.com/waf/latest/developerguide/waf-rate-based-rules.html\">Rate limiting web requests using rate-based rules</a> \n    in the <i>WAF Developer Guide</i>. </p>\n         <p>If you only aggregate on the individual IP address or forwarded IP address, you can retrieve the list of IP addresses that WAF \n          is currently rate limiting for a rule through the API call <code>GetRateBasedStatementManagedKeys</code>. This option is not available\n      for other aggregation configurations.</p>\n         <p>WAF tracks and manages web requests separately for each instance of a rate-based rule that you use. For example, if you provide the same rate-based rule settings in two web ACLs, each of the two rule statements represents a separate instance of the rate-based rule and gets its own tracking and management by WAF. If you define a rate-based rule inside a rule group, and then use that rule group in multiple places, each use creates a separate instance of the rate-based rule that gets its own tracking and management by WAF. </p>"
                     }
                 },
                 "AndStatement": {
@@ -12368,7 +12503,7 @@
                 "AssociationConfig": {
                     "target": "com.amazonaws.wafv2#AssociationConfig",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies custom configurations for the associations between the web ACL and protected resources.  </p>\n         <p>Use this to customize the maximum size of the request body that your protected CloudFront distributions forward to WAF for inspection. The default is 16 KB (16,384 bytes). </p>\n         <note>\n            <p>You are charged additional fees when your protected resources forward body sizes that are larger than the default. For more information, see <a href=\"http://aws.amazon.com/waf/pricing/\">WAF Pricing</a>.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>Specifies custom configurations for the associations between the web ACL and protected resources.  </p>\n         <p>Use this to customize the maximum size of the request body that your protected resources forward to WAF for inspection. You can \n    customize this setting for CloudFront, API Gateway, Amazon Cognito, App Runner, or Verified Access resources. The default setting is 16 KB (16,384 bytes). </p>\n         <note>\n            <p>You are charged additional fees when your protected resources forward body sizes that are larger than the default. For more information, see <a href=\"http://aws.amazon.com/waf/pricing/\">WAF Pricing</a>.</p>\n         </note>\n         <p>For Application Load Balancer and AppSync, the limit is fixed at 8 KB (8,192 bytes).</p>"
                     }
                 }
             },
@@ -12468,7 +12603,7 @@
                     "target": "com.amazonaws.wafv2#Boolean",
                     "traits": {
                         "smithy.api#default": false,
-                        "smithy.api#documentation": "<p>Indicates whether WAF should store a sampling of the web requests that\n         match the rules. You can view the sampled requests through the WAF console. </p>",
+                        "smithy.api#documentation": "<p>Indicates whether WAF should store a sampling of the web requests that\n         match the rules. You can view the sampled requests through the WAF console. </p>\n         <note>\n            <p>Request sampling doesn't provide a field redaction option, and any field redaction that you specify in your logging configuration doesn't affect sampling. \n                  The only way to exclude fields from request sampling is by disabling sampling in the web ACL visibility configuration. </p>\n         </note>",
                         "smithy.api#required": {}
                     }
                 },
@@ -12623,6 +12758,12 @@
             "members": {
                 "Message": {
                     "target": "com.amazonaws.wafv2#ErrorMessage"
+                },
+                "SourceType": {
+                    "target": "com.amazonaws.wafv2#SourceType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Source type for the exception. </p>"
+                    }
                 }
             },
             "traits": {
@@ -12847,7 +12988,7 @@
                 "AssociationConfig": {
                     "target": "com.amazonaws.wafv2#AssociationConfig",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies custom configurations for the associations between the web ACL and protected resources.  </p>\n         <p>Use this to customize the maximum size of the request body that your protected CloudFront distributions forward to WAF for inspection. The default is 16 KB (16,384 bytes). </p>\n         <note>\n            <p>You are charged additional fees when your protected resources forward body sizes that are larger than the default. For more information, see <a href=\"http://aws.amazon.com/waf/pricing/\">WAF Pricing</a>.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>Specifies custom configurations for the associations between the web ACL and protected resources.  </p>\n         <p>Use this to customize the maximum size of the request body that your protected resources forward to WAF for inspection. You can \n    customize this setting for CloudFront, API Gateway, Amazon Cognito, App Runner, or Verified Access resources. The default setting is 16 KB (16,384 bytes). </p>\n         <note>\n            <p>You are charged additional fees when your protected resources forward body sizes that are larger than the default. For more information, see <a href=\"http://aws.amazon.com/waf/pricing/\">WAF Pricing</a>.</p>\n         </note>\n         <p>For Application Load Balancer and AppSync, the limit is fixed at 8 KB (8,192 bytes).</p>"
                     }
                 }
             },

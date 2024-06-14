@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/mq/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -51,14 +50,15 @@ type UpdateBrokerInput struct {
 	// Defines whether this broker is a part of a data replication pair.
 	DataReplicationMode types.DataReplicationMode
 
-	// The broker engine version. For a list of supported engine versions, see
-	// Supported engines (https://docs.aws.amazon.com//amazon-mq/latest/developer-guide/broker-engine.html)
-	// .
+	// The broker engine version. For a list of supported engine versions, see [Supported engines].
+	//
+	// [Supported engines]: https://docs.aws.amazon.com//amazon-mq/latest/developer-guide/broker-engine.html
 	EngineVersion *string
 
 	// The broker's host instance type to upgrade to. For a list of supported instance
-	// types, see Broker instance types (https://docs.aws.amazon.com//amazon-mq/latest/developer-guide/broker.html#broker-instance-types)
-	// .
+	// types, see [Broker instance types].
+	//
+	// [Broker instance types]: https://docs.aws.amazon.com//amazon-mq/latest/developer-guide/broker.html#broker-instance-types
 	HostInstanceType *string
 
 	// Optional. The metadata of the LDAP server used to authenticate and authorize
@@ -103,13 +103,15 @@ type UpdateBrokerOutput struct {
 	DataReplicationMode types.DataReplicationMode
 
 	// The broker engine version to upgrade to. For a list of supported engine
-	// versions, see Supported engines (https://docs.aws.amazon.com//amazon-mq/latest/developer-guide/broker-engine.html)
-	// .
+	// versions, see [Supported engines].
+	//
+	// [Supported engines]: https://docs.aws.amazon.com//amazon-mq/latest/developer-guide/broker-engine.html
 	EngineVersion *string
 
 	// The broker's host instance type to upgrade to. For a list of supported instance
-	// types, see Broker instance types (https://docs.aws.amazon.com//amazon-mq/latest/developer-guide/broker.html#broker-instance-types)
-	// .
+	// types, see [Broker instance types].
+	//
+	// [Broker instance types]: https://docs.aws.amazon.com//amazon-mq/latest/developer-guide/broker.html#broker-instance-types
 	HostInstanceType *string
 
 	// Optional. The metadata of the LDAP server used to authenticate and authorize
@@ -162,25 +164,25 @@ func (c *Client) addOperationUpdateBrokerMiddlewares(stack *middleware.Stack, op
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -195,13 +197,16 @@ func (c *Client) addOperationUpdateBrokerMiddlewares(stack *middleware.Stack, op
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpUpdateBrokerValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateBroker(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

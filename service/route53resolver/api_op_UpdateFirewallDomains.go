@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/route53resolver/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -30,12 +29,18 @@ func (c *Client) UpdateFirewallDomains(ctx context.Context, params *UpdateFirewa
 
 type UpdateFirewallDomainsInput struct {
 
-	// A list of domains to use in the update operation. There is a limit of 1000
-	// domains per request. Each domain specification in your domain list must satisfy
-	// the following requirements:
+	// A list of domains to use in the update operation.
+	//
+	// There is a limit of 1000 domains per request.
+	//
+	// Each domain specification in your domain list must satisfy the following
+	// requirements:
+	//
 	//   - It can optionally start with * (asterisk).
+	//
 	//   - With the exception of the optional starting asterisk, it must only contain
 	//   the following characters: A-Z , a-z , 0-9 , - (hyphen).
+	//
 	//   - It must be from 1-255 characters in length.
 	//
 	// This member is required.
@@ -47,9 +52,12 @@ type UpdateFirewallDomainsInput struct {
 	FirewallDomainListId *string
 
 	// What you want DNS Firewall to do with the domains that you are providing:
+	//
 	//   - ADD - Add the domains to the ones that are already in the domain list.
+	//
 	//   - REMOVE - Search the domain list for the domains and remove them from the
 	//   list.
+	//
 	//   - REPLACE - Update the domain list to exactly match the list that you are
 	//   providing.
 	//
@@ -101,25 +109,25 @@ func (c *Client) addOperationUpdateFirewallDomainsMiddlewares(stack *middleware.
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -134,13 +142,16 @@ func (c *Client) addOperationUpdateFirewallDomainsMiddlewares(stack *middleware.
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpUpdateFirewallDomainsValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateFirewallDomains(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

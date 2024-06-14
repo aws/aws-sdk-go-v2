@@ -6,13 +6,13 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/billingconductor/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a billing group that resembles a consolidated billing family that
+//	Creates a billing group that resembles a consolidated billing family that
+//
 // Amazon Web Services charges, based off of the predefined pricing plan
 // computation.
 func (c *Client) CreateBillingGroup(ctx context.Context, params *CreateBillingGroupInput, optFns ...func(*Options)) (*CreateBillingGroupOutput, error) {
@@ -32,34 +32,34 @@ func (c *Client) CreateBillingGroup(ctx context.Context, params *CreateBillingGr
 
 type CreateBillingGroupInput struct {
 
-	// The set of accounts that will be under the billing group. The set of accounts
+	//  The set of accounts that will be under the billing group. The set of accounts
 	// resemble the linked accounts in a consolidated billing family.
 	//
 	// This member is required.
 	AccountGrouping *types.AccountGrouping
 
-	// The preferences and settings that will be used to compute the Amazon Web
+	//  The preferences and settings that will be used to compute the Amazon Web
 	// Services charges for a billing group.
 	//
 	// This member is required.
 	ComputationPreference *types.ComputationPreference
 
-	// The billing group name. The names must be unique.
+	//  The billing group name. The names must be unique.
 	//
 	// This member is required.
 	Name *string
 
-	// The token that is needed to support idempotency. Idempotency isn't currently
+	//  The token that is needed to support idempotency. Idempotency isn't currently
 	// supported, but will be implemented in a future update.
 	ClientToken *string
 
 	// The description of the billing group.
 	Description *string
 
-	// The account ID that serves as the main account in a billing group.
+	//  The account ID that serves as the main account in a billing group.
 	PrimaryAccountId *string
 
-	// A map that contains tag keys and tag values that are attached to a billing
+	//  A map that contains tag keys and tag values that are attached to a billing
 	// group. This feature isn't available during the beta.
 	Tags map[string]string
 
@@ -99,25 +99,25 @@ func (c *Client) addOperationCreateBillingGroupMiddlewares(stack *middleware.Sta
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -132,6 +132,9 @@ func (c *Client) addOperationCreateBillingGroupMiddlewares(stack *middleware.Sta
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opCreateBillingGroupMiddleware(stack, options); err != nil {
 		return err
 	}
@@ -141,7 +144,7 @@ func (c *Client) addOperationCreateBillingGroupMiddlewares(stack *middleware.Sta
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateBillingGroup(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

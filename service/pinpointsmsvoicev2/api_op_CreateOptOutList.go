@@ -6,20 +6,24 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/pinpointsmsvoicev2/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
-// Creates a new opt-out list. If the opt-out list name already exists, an error
-// is returned. An opt-out list is a list of phone numbers that are opted out,
-// meaning you can't send SMS or voice messages to them. If end user replies with
-// the keyword "STOP," an entry for the phone number is added to the opt-out list.
-// In addition to STOP, your recipients can use any supported opt-out keyword, such
-// as CANCEL or OPTOUT. For a list of supported opt-out keywords, see SMS opt out  (https://docs.aws.amazon.com/pinpoint/latest/userguide/channels-sms-manage.html#channels-sms-manage-optout)
-// in the Amazon Pinpoint User Guide.
+// Creates a new opt-out list.
+//
+// If the opt-out list name already exists, an error is returned.
+//
+// An opt-out list is a list of phone numbers that are opted out, meaning you
+// can't send SMS or voice messages to them. If end user replies with the keyword
+// "STOP," an entry for the phone number is added to the opt-out list. In addition
+// to STOP, your recipients can use any supported opt-out keyword, such as CANCEL
+// or OPTOUT. For a list of supported opt-out keywords, see [SMS opt out]in the Amazon Pinpoint
+// User Guide.
+//
+// [SMS opt out]: https://docs.aws.amazon.com/pinpoint/latest/userguide/channels-sms-manage.html#channels-sms-manage-optout
 func (c *Client) CreateOptOutList(ctx context.Context, params *CreateOptOutListInput, optFns ...func(*Options)) (*CreateOptOutListOutput, error) {
 	if params == nil {
 		params = &CreateOptOutListInput{}
@@ -55,8 +59,9 @@ type CreateOptOutListInput struct {
 
 type CreateOptOutListOutput struct {
 
-	// The time when the pool was created, in UNIX epoch time (https://www.epochconverter.com/)
-	// format.
+	// The time when the pool was created, in [UNIX epoch time] format.
+	//
+	// [UNIX epoch time]: https://www.epochconverter.com/
 	CreatedTimestamp *time.Time
 
 	// The Amazon Resource Name (ARN) for the OptOutList.
@@ -96,25 +101,25 @@ func (c *Client) addOperationCreateOptOutListMiddlewares(stack *middleware.Stack
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -129,6 +134,9 @@ func (c *Client) addOperationCreateOptOutListMiddlewares(stack *middleware.Stack
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opCreateOptOutListMiddleware(stack, options); err != nil {
 		return err
 	}
@@ -138,7 +146,7 @@ func (c *Client) addOperationCreateOptOutListMiddlewares(stack *middleware.Stack
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateOptOutList(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

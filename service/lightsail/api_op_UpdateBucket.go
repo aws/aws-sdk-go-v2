@@ -6,15 +6,16 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/lightsail/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates an existing Amazon Lightsail bucket. Use this action to update the
-// configuration of an existing bucket, such as versioning, public accessibility,
-// and the Amazon Web Services accounts that can access the bucket.
+// Updates an existing Amazon Lightsail bucket.
+//
+// Use this action to update the configuration of an existing bucket, such as
+// versioning, public accessibility, and the Amazon Web Services accounts that can
+// access the bucket.
 func (c *Client) UpdateBucket(ctx context.Context, params *UpdateBucketInput, optFns ...func(*Options)) (*UpdateBucketOutput, error) {
 	if params == nil {
 		params = &UpdateBucketInput{}
@@ -44,13 +45,17 @@ type UpdateBucketInput struct {
 	AccessRules *types.AccessRules
 
 	// An array of strings to specify the Amazon Web Services account IDs that can
-	// access the bucket. You can give a maximum of 10 Amazon Web Services accounts
-	// access to a bucket.
+	// access the bucket.
+	//
+	// You can give a maximum of 10 Amazon Web Services accounts access to a bucket.
 	ReadonlyAccessAccounts []string
 
-	// Specifies whether to enable or suspend versioning of objects in the bucket. The
-	// following options can be specified:
+	// Specifies whether to enable or suspend versioning of objects in the bucket.
+	//
+	// The following options can be specified:
+	//
 	//   - Enabled - Enables versioning of objects in the specified bucket.
+	//
 	//   - Suspended - Suspends versioning of objects in the specified bucket. Existing
 	//   object versions are retained.
 	Versioning *string
@@ -96,25 +101,25 @@ func (c *Client) addOperationUpdateBucketMiddlewares(stack *middleware.Stack, op
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -129,13 +134,16 @@ func (c *Client) addOperationUpdateBucketMiddlewares(stack *middleware.Stack, op
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpUpdateBucketValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateBucket(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

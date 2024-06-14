@@ -6,18 +6,17 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/redshift/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists the status of one or more table restore requests made using the
-// RestoreTableFromClusterSnapshot API action. If you don't specify a value for the
-// TableRestoreRequestId parameter, then DescribeTableRestoreStatus returns the
-// status of all table restore requests ordered by the date and time of the request
-// in ascending order. Otherwise DescribeTableRestoreStatus returns the status of
-// the table specified by TableRestoreRequestId .
+// Lists the status of one or more table restore requests made using the RestoreTableFromClusterSnapshot API
+// action. If you don't specify a value for the TableRestoreRequestId parameter,
+// then DescribeTableRestoreStatus returns the status of all table restore
+// requests ordered by the date and time of the request in ascending order.
+// Otherwise DescribeTableRestoreStatus returns the status of the table specified
+// by TableRestoreRequestId .
 func (c *Client) DescribeTableRestoreStatus(ctx context.Context, params *DescribeTableRestoreStatusInput, optFns ...func(*Options)) (*DescribeTableRestoreStatusOutput, error) {
 	if params == nil {
 		params = &DescribeTableRestoreStatusInput{}
@@ -58,8 +57,7 @@ type DescribeTableRestoreStatusInput struct {
 
 type DescribeTableRestoreStatusOutput struct {
 
-	// A pagination token that can be used in a subsequent DescribeTableRestoreStatus
-	// request.
+	// A pagination token that can be used in a subsequent DescribeTableRestoreStatus request.
 	Marker *string
 
 	// A list of status details for one or more table restore requests.
@@ -93,25 +91,25 @@ func (c *Client) addOperationDescribeTableRestoreStatusMiddlewares(stack *middle
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -126,10 +124,13 @@ func (c *Client) addOperationDescribeTableRestoreStatusMiddlewares(stack *middle
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeTableRestoreStatus(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

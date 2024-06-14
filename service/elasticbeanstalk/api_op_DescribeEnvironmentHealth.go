@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/elasticbeanstalk/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -38,12 +37,14 @@ type DescribeEnvironmentHealthInput struct {
 	// . If no attribute names are specified, returns the name of the environment.
 	AttributeNames []types.EnvironmentHealthAttribute
 
-	// Specify the environment by ID. You must specify either this or an
-	// EnvironmentName, or both.
+	// Specify the environment by ID.
+	//
+	// You must specify either this or an EnvironmentName, or both.
 	EnvironmentId *string
 
-	// Specify the environment by name. You must specify either this or an
-	// EnvironmentName, or both.
+	// Specify the environment by name.
+	//
+	// You must specify either this or an EnvironmentName, or both.
 	EnvironmentName *string
 
 	noSmithyDocumentSerde
@@ -59,15 +60,17 @@ type DescribeEnvironmentHealthOutput struct {
 	// status.
 	Causes []string
 
-	// The health color (https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/health-enhanced-status.html)
-	// of the environment.
+	// The [health color] of the environment.
+	//
+	// [health color]: https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/health-enhanced-status.html
 	Color *string
 
 	// The environment's name.
 	EnvironmentName *string
 
-	// The health status (https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/health-enhanced-status.html)
-	// of the environment. For example, Ok .
+	// The [health status] of the environment. For example, Ok .
+	//
+	// [health status]: https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/health-enhanced-status.html
 	HealthStatus *string
 
 	// Summary health information for the instances in the environment.
@@ -108,25 +111,25 @@ func (c *Client) addOperationDescribeEnvironmentHealthMiddlewares(stack *middlew
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -141,10 +144,13 @@ func (c *Client) addOperationDescribeEnvironmentHealthMiddlewares(stack *middlew
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeEnvironmentHealth(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

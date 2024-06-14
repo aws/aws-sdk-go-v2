@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/ssmincidents/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -44,8 +43,9 @@ type CreateTimelineEventInput struct {
 	// This member is required.
 	EventTime *time.Time
 
-	// The type of event. You can create timeline events of type Custom Event and Note
-	// . To make a Note-type event appear on the Incident notes panel in the console,
+	// The type of event. You can create timeline events of type Custom Event and Note .
+	//
+	// To make a Note-type event appear on the Incident notes panel in the console,
 	// specify eventType as Note and enter the Amazon Resource Name (ARN) of the
 	// incident as the value for eventReference .
 	//
@@ -113,25 +113,25 @@ func (c *Client) addOperationCreateTimelineEventMiddlewares(stack *middleware.St
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -146,6 +146,9 @@ func (c *Client) addOperationCreateTimelineEventMiddlewares(stack *middleware.St
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opCreateTimelineEventMiddleware(stack, options); err != nil {
 		return err
 	}
@@ -155,7 +158,7 @@ func (c *Client) addOperationCreateTimelineEventMiddlewares(stack *middleware.St
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateTimelineEvent(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

@@ -6,13 +6,12 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/omics/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Retrieves the metadata for a share.
+// Retrieves the metadata for the specified resource share.
 func (c *Client) GetShare(ctx context.Context, params *GetShareInput, optFns ...func(*Options)) (*GetShareOutput, error) {
 	if params == nil {
 		params = &GetShareInput{}
@@ -30,7 +29,7 @@ func (c *Client) GetShare(ctx context.Context, params *GetShareInput, optFns ...
 
 type GetShareInput struct {
 
-	// The generated ID for a share.
+	// The ID of the share.
 	//
 	// This member is required.
 	ShareId *string
@@ -40,8 +39,8 @@ type GetShareInput struct {
 
 type GetShareOutput struct {
 
-	// An analytic store share details object. contains status, resourceArn, ownerId,
-	// etc.
+	// A resource share details object. The object includes the status, the
+	// resourceArn, and ownerId.
 	Share *types.ShareDetails
 
 	// Metadata pertaining to the operation's result.
@@ -72,25 +71,25 @@ func (c *Client) addOperationGetShareMiddlewares(stack *middleware.Stack, option
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -105,6 +104,9 @@ func (c *Client) addOperationGetShareMiddlewares(stack *middleware.Stack, option
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addEndpointPrefix_opGetShareMiddleware(stack); err != nil {
 		return err
 	}
@@ -114,7 +116,7 @@ func (c *Client) addOperationGetShareMiddlewares(stack *middleware.Stack, option
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetShare(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

@@ -992,6 +992,13 @@ func awsRestjson1_serializeOpDocumentCreateWorkloadInput(v *CreateWorkloadInput,
 		ok.String(*v.IndustryType)
 	}
 
+	if v.JiraConfiguration != nil {
+		ok := object.Key("JiraConfiguration")
+		if err := awsRestjson1_serializeDocumentWorkloadJiraConfigurationInput(v.JiraConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.Lenses != nil {
 		ok := object.Key("Lenses")
 		if err := awsRestjson1_serializeDocumentWorkloadLenses(v.Lenses, ok); err != nil {
@@ -2145,6 +2152,58 @@ func awsRestjson1_serializeOpHttpBindingsGetConsolidatedReportInput(v *GetConsol
 
 	if v.NextToken != nil {
 		encoder.SetQuery("NextToken").String(*v.NextToken)
+	}
+
+	return nil
+}
+
+type awsRestjson1_serializeOpGetGlobalSettings struct {
+}
+
+func (*awsRestjson1_serializeOpGetGlobalSettings) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpGetGlobalSettings) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*GetGlobalSettingsInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/global-settings")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "GET"
+	var restEncoder *httpbinding.Encoder
+	if request.URL.RawPath == "" {
+		restEncoder, err = httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	} else {
+		request.URL.RawPath = smithyhttp.JoinPath(request.URL.RawPath, opPath)
+		restEncoder, err = httpbinding.NewEncoderWithRawPath(request.URL.Path, request.URL.RawPath, request.URL.RawQuery, request.Header)
+	}
+
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsGetGlobalSettingsInput(v *GetGlobalSettingsInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
 	return nil
@@ -4983,9 +5042,109 @@ func awsRestjson1_serializeOpDocumentUpdateGlobalSettingsInput(v *UpdateGlobalSe
 		ok.String(string(v.DiscoveryIntegrationStatus))
 	}
 
+	if v.JiraConfiguration != nil {
+		ok := object.Key("JiraConfiguration")
+		if err := awsRestjson1_serializeDocumentAccountJiraConfigurationInput(v.JiraConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
 	if len(v.OrganizationSharingStatus) > 0 {
 		ok := object.Key("OrganizationSharingStatus")
 		ok.String(string(v.OrganizationSharingStatus))
+	}
+
+	return nil
+}
+
+type awsRestjson1_serializeOpUpdateIntegration struct {
+}
+
+func (*awsRestjson1_serializeOpUpdateIntegration) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpUpdateIntegration) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*UpdateIntegrationInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/workloads/{WorkloadId}/updateIntegration")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "POST"
+	var restEncoder *httpbinding.Encoder
+	if request.URL.RawPath == "" {
+		restEncoder, err = httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	} else {
+		request.URL.RawPath = smithyhttp.JoinPath(request.URL.RawPath, opPath)
+		restEncoder, err = httpbinding.NewEncoderWithRawPath(request.URL.Path, request.URL.RawPath, request.URL.RawQuery, request.Header)
+	}
+
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsUpdateIntegrationInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentUpdateIntegrationInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsUpdateIntegrationInput(v *UpdateIntegrationInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.WorkloadId == nil || len(*v.WorkloadId) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member WorkloadId must not be empty")}
+	}
+	if v.WorkloadId != nil {
+		if err := encoder.SetURI("WorkloadId").String(*v.WorkloadId); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentUpdateIntegrationInput(v *UpdateIntegrationInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ClientRequestToken != nil {
+		ok := object.Key("ClientRequestToken")
+		ok.String(*v.ClientRequestToken)
+	}
+
+	if len(v.IntegratingService) > 0 {
+		ok := object.Key("IntegratingService")
+		ok.String(string(v.IntegratingService))
 	}
 
 	return nil
@@ -5079,6 +5238,13 @@ func awsRestjson1_serializeOpHttpBindingsUpdateLensReviewInput(v *UpdateLensRevi
 func awsRestjson1_serializeOpDocumentUpdateLensReviewInput(v *UpdateLensReviewInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.JiraConfiguration != nil {
+		ok := object.Key("JiraConfiguration")
+		if err := awsRestjson1_serializeDocumentJiraSelectedQuestionConfiguration(v.JiraConfiguration, ok); err != nil {
+			return err
+		}
+	}
 
 	if v.LensNotes != nil {
 		ok := object.Key("LensNotes")
@@ -5767,6 +5933,13 @@ func awsRestjson1_serializeOpDocumentUpdateWorkloadInput(v *UpdateWorkloadInput,
 		ok.Boolean(*v.IsReviewOwnerUpdateAcknowledged)
 	}
 
+	if v.JiraConfiguration != nil {
+		ok := object.Key("JiraConfiguration")
+		if err := awsRestjson1_serializeDocumentWorkloadJiraConfigurationInput(v.JiraConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.NonAwsRegions != nil {
 		ok := object.Key("NonAwsRegions")
 		if err := awsRestjson1_serializeDocumentWorkloadNonAwsRegions(v.NonAwsRegions, ok); err != nil {
@@ -6197,6 +6370,33 @@ func awsRestjson1_serializeOpDocumentUpgradeReviewTemplateLensReviewInput(v *Upg
 	return nil
 }
 
+func awsRestjson1_serializeDocumentAccountJiraConfigurationInput(v *types.AccountJiraConfigurationInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.IntegrationStatus) > 0 {
+		ok := object.Key("IntegrationStatus")
+		ok.String(string(v.IntegrationStatus))
+	}
+
+	if len(v.IssueManagementStatus) > 0 {
+		ok := object.Key("IssueManagementStatus")
+		ok.String(string(v.IssueManagementStatus))
+	}
+
+	if len(v.IssueManagementType) > 0 {
+		ok := object.Key("IssueManagementType")
+		ok.String(string(v.IssueManagementType))
+	}
+
+	if v.JiraProjectKey != nil {
+		ok := object.Key("JiraProjectKey")
+		ok.String(*v.JiraProjectKey)
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentChoiceUpdate(v *types.ChoiceUpdate, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -6230,6 +6430,20 @@ func awsRestjson1_serializeDocumentChoiceUpdates(v map[string]types.ChoiceUpdate
 			return err
 		}
 	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentJiraSelectedQuestionConfiguration(v *types.JiraSelectedQuestionConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.SelectedPillars != nil {
+		ok := object.Key("SelectedPillars")
+		if err := awsRestjson1_serializeDocumentSelectedPillars(v.SelectedPillars, ok); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -6342,7 +6556,50 @@ func awsRestjson1_serializeDocumentSelectedChoices(v []string, value smithyjson.
 	return nil
 }
 
+func awsRestjson1_serializeDocumentSelectedPillar(v *types.SelectedPillar, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.PillarId != nil {
+		ok := object.Key("PillarId")
+		ok.String(*v.PillarId)
+	}
+
+	if v.SelectedQuestionIds != nil {
+		ok := object.Key("SelectedQuestionIds")
+		if err := awsRestjson1_serializeDocumentSelectedQuestionIds(v.SelectedQuestionIds, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentSelectedPillars(v []types.SelectedPillar, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentSelectedPillar(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
 func awsRestjson1_serializeDocumentSelectedProfileChoiceIds(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentSelectedQuestionIds(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
@@ -6411,6 +6668,28 @@ func awsRestjson1_serializeDocumentWorkloadDiscoveryConfig(v *types.WorkloadDisc
 		if err := awsRestjson1_serializeDocumentWorkloadResourceDefinition(v.WorkloadResourceDefinition, ok); err != nil {
 			return err
 		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentWorkloadJiraConfigurationInput(v *types.WorkloadJiraConfigurationInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.IssueManagementStatus) > 0 {
+		ok := object.Key("IssueManagementStatus")
+		ok.String(string(v.IssueManagementStatus))
+	}
+
+	if len(v.IssueManagementType) > 0 {
+		ok := object.Key("IssueManagementType")
+		ok.String(string(v.IssueManagementType))
+	}
+
+	if v.JiraProjectKey != nil {
+		ok := object.Key("JiraProjectKey")
+		ok.String(*v.JiraProjectKey)
 	}
 
 	return nil

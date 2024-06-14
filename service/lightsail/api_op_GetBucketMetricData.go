@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/lightsail/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -14,6 +13,7 @@ import (
 )
 
 // Returns the data points of a specific metric for an Amazon Lightsail bucket.
+//
 // Metrics report the utilization of a bucket. View and collect metric data
 // regularly to monitor the number of objects stored in a bucket (including object
 // versions) and the storage space used by those objects.
@@ -44,27 +44,38 @@ type GetBucketMetricDataInput struct {
 	// This member is required.
 	EndTime *time.Time
 
-	// The metric for which you want to return information. Valid bucket metric names
-	// are listed below, along with the most useful statistics to include in your
-	// request, and the published unit value. These bucket metrics are reported once
-	// per day.
+	// The metric for which you want to return information.
+	//
+	// Valid bucket metric names are listed below, along with the most useful
+	// statistics to include in your request, and the published unit value.
+	//
+	// These bucket metrics are reported once per day.
+	//
 	//   - BucketSizeBytes - The amount of data in bytes stored in a bucket. This value
 	//   is calculated by summing the size of all objects in the bucket (including object
 	//   versions), including the size of all parts for all incomplete multipart uploads
-	//   to the bucket. Statistics: The most useful statistic is Maximum . Unit: The
-	//   published unit is Bytes .
+	//   to the bucket.
+	//
+	// Statistics: The most useful statistic is Maximum .
+	//
+	// Unit: The published unit is Bytes .
+	//
 	//   - NumberOfObjects - The total number of objects stored in a bucket. This value
 	//   is calculated by counting all objects in the bucket (including object versions)
 	//   and the total number of parts for all incomplete multipart uploads to the
-	//   bucket. Statistics: The most useful statistic is Average . Unit: The published
-	//   unit is Count .
+	//   bucket.
+	//
+	// Statistics: The most useful statistic is Average .
+	//
+	// Unit: The published unit is Count .
 	//
 	// This member is required.
 	MetricName types.BucketMetricName
 
-	// The granularity, in seconds, of the returned data points. Bucket storage
-	// metrics are reported once per day. Therefore, you should specify a period of
-	// 86400 seconds, which is the number of seconds in a day.
+	// The granularity, in seconds, of the returned data points.
+	//
+	// Bucket storage metrics are reported once per day. Therefore, you should specify
+	// a period of 86400 seconds, which is the number of seconds in a day.
 	//
 	// This member is required.
 	Period *int32
@@ -74,27 +85,35 @@ type GetBucketMetricDataInput struct {
 	// This member is required.
 	StartTime *time.Time
 
-	// The statistic for the metric. The following statistics are available:
+	// The statistic for the metric.
+	//
+	// The following statistics are available:
+	//
 	//   - Minimum - The lowest value observed during the specified period. Use this
 	//   value to determine low volumes of activity for your application.
+	//
 	//   - Maximum - The highest value observed during the specified period. Use this
 	//   value to determine high volumes of activity for your application.
+	//
 	//   - Sum - The sum of all values submitted for the matching metric. You can use
 	//   this statistic to determine the total volume of a metric.
+	//
 	//   - Average - The value of Sum / SampleCount during the specified period. By
 	//   comparing this statistic with the Minimum and Maximum values, you can
 	//   determine the full scope of a metric and how close the average use is to the
 	//   Minimum and Maximum values. This comparison helps you to know when to increase
 	//   or decrease your resources.
+	//
 	//   - SampleCount - The count, or number, of data points used for the statistical
 	//   calculation.
 	//
 	// This member is required.
 	Statistics []types.MetricStatistic
 
-	// The unit for the metric data request. Valid units depend on the metric data
-	// being requested. For the valid units with each available metric, see the
-	// metricName parameter.
+	// The unit for the metric data request.
+	//
+	// Valid units depend on the metric data being requested. For the valid units with
+	// each available metric, see the metricName parameter.
 	//
 	// This member is required.
 	Unit types.MetricUnit
@@ -138,25 +157,25 @@ func (c *Client) addOperationGetBucketMetricDataMiddlewares(stack *middleware.St
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -171,13 +190,16 @@ func (c *Client) addOperationGetBucketMetricDataMiddlewares(stack *middleware.St
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpGetBucketMetricDataValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetBucketMetricData(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

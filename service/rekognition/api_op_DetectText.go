@@ -6,33 +6,43 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/rekognition/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Detects text in the input image and converts it into machine-readable text.
-// Pass the input image as base64-encoded image bytes or as a reference to an image
-// in an Amazon S3 bucket. If you use the AWS CLI to call Amazon Rekognition
+//
+// Pass the input image as base64-encoded image bytes or as a reference to an
+// image in an Amazon S3 bucket. If you use the AWS CLI to call Amazon Rekognition
 // operations, you must pass it as a reference to an image in an Amazon S3 bucket.
 // For the AWS CLI, passing image bytes is not supported. The image must be either
-// a .png or .jpeg formatted file. The DetectText operation returns text in an
-// array of TextDetection elements, TextDetections . Each TextDetection element
-// provides information about a single word or line of text that was detected in
-// the image. A word is one or more script characters that are not separated by
-// spaces. DetectText can detect up to 100 words in an image. A line is a string
-// of equally spaced words. A line isn't necessarily a complete sentence. For
-// example, a driver's license number is detected as a line. A line ends when there
-// is no aligned text after it. Also, a line ends when there is a large gap between
-// words, relative to the length of the words. This means, depending on the gap
-// between words, Amazon Rekognition may detect multiple lines in text aligned in
-// the same direction. Periods don't represent the end of a line. If a sentence
-// spans multiple lines, the DetectText operation returns multiple lines. To
-// determine whether a TextDetection element is a line of text or a word, use the
-// TextDetection object Type field. To be detected, text must be within +/- 90
-// degrees orientation of the horizontal axis. For more information, see Detecting
-// text in the Amazon Rekognition Developer Guide.
+// a .png or .jpeg formatted file.
+//
+// The DetectText operation returns text in an array of TextDetection elements, TextDetections .
+// Each TextDetection element provides information about a single word or line of
+// text that was detected in the image.
+//
+// A word is one or more script characters that are not separated by spaces.
+// DetectText can detect up to 100 words in an image.
+//
+// A line is a string of equally spaced words. A line isn't necessarily a complete
+// sentence. For example, a driver's license number is detected as a line. A line
+// ends when there is no aligned text after it. Also, a line ends when there is a
+// large gap between words, relative to the length of the words. This means,
+// depending on the gap between words, Amazon Rekognition may detect multiple lines
+// in text aligned in the same direction. Periods don't represent the end of a
+// line. If a sentence spans multiple lines, the DetectText operation returns
+// multiple lines.
+//
+// To determine whether a TextDetection element is a line of text or a word, use
+// the TextDetection object Type field.
+//
+// To be detected, text must be within +/- 90 degrees orientation of the
+// horizontal axis.
+//
+// For more information, see Detecting text in the Amazon Rekognition Developer
+// Guide.
 func (c *Client) DetectText(ctx context.Context, params *DetectTextInput, optFns ...func(*Options)) (*DetectTextOutput, error) {
 	if params == nil {
 		params = &DetectTextInput{}
@@ -51,8 +61,9 @@ func (c *Client) DetectText(ctx context.Context, params *DetectTextInput, optFns
 type DetectTextInput struct {
 
 	// The input image as base64-encoded bytes or an Amazon S3 object. If you use the
-	// AWS CLI to call Amazon Rekognition operations, you can't pass image bytes. If
-	// you are using an AWS SDK to call Amazon Rekognition, you might not need to
+	// AWS CLI to call Amazon Rekognition operations, you can't pass image bytes.
+	//
+	// If you are using an AWS SDK to call Amazon Rekognition, you might not need to
 	// base64-encode image bytes passed using the Bytes field. For more information,
 	// see Images in the Amazon Rekognition developer guide.
 	//
@@ -102,25 +113,25 @@ func (c *Client) addOperationDetectTextMiddlewares(stack *middleware.Stack, opti
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -135,13 +146,16 @@ func (c *Client) addOperationDetectTextMiddlewares(stack *middleware.Stack, opti
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDetectTextValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDetectText(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

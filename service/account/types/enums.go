@@ -12,13 +12,33 @@ const (
 )
 
 // Values returns all known values for AlternateContactType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (AlternateContactType) Values() []AlternateContactType {
 	return []AlternateContactType{
 		"BILLING",
 		"OPERATIONS",
 		"SECURITY",
+	}
+}
+
+type PrimaryEmailUpdateStatus string
+
+// Enum values for PrimaryEmailUpdateStatus
+const (
+	PrimaryEmailUpdateStatusPending  PrimaryEmailUpdateStatus = "PENDING"
+	PrimaryEmailUpdateStatusAccepted PrimaryEmailUpdateStatus = "ACCEPTED"
+)
+
+// Values returns all known values for PrimaryEmailUpdateStatus. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (PrimaryEmailUpdateStatus) Values() []PrimaryEmailUpdateStatus {
+	return []PrimaryEmailUpdateStatus{
+		"PENDING",
+		"ACCEPTED",
 	}
 }
 
@@ -34,8 +54,9 @@ const (
 )
 
 // Values returns all known values for RegionOptStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (RegionOptStatus) Values() []RegionOptStatus {
 	return []RegionOptStatus{
 		"ENABLED",
@@ -56,6 +77,7 @@ const (
 
 // Values returns all known values for ValidationExceptionReason. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (ValidationExceptionReason) Values() []ValidationExceptionReason {
 	return []ValidationExceptionReason{

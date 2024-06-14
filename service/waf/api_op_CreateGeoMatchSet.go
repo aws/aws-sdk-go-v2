@@ -6,33 +6,42 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/waf/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// This is AWS WAF Classic documentation. For more information, see AWS WAF Classic (https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html)
-// in the developer guide. For the latest version of AWS WAF, use the AWS WAFV2 API
-// and see the AWS WAF Developer Guide (https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html)
-// . With the latest version, AWS WAF has a single set of endpoints for regional
-// and global use. Creates an GeoMatchSet , which you use to specify which web
-// requests you want to allow or block based on the country that the requests
-// originate from. For example, if you're receiving a lot of requests from one or
-// more countries and you want to block the requests, you can create an GeoMatchSet
-// that contains those countries and then configure AWS WAF to block the requests.
+// This is AWS WAF Classic documentation. For more information, see [AWS WAF Classic] in the
+// developer guide.
+//
+// For the latest version of AWS WAF, use the AWS WAFV2 API and see the [AWS WAF Developer Guide]. With the
+// latest version, AWS WAF has a single set of endpoints for regional and global
+// use.
+//
+// Creates an GeoMatchSet, which you use to specify which web requests you want to allow or
+// block based on the country that the requests originate from. For example, if
+// you're receiving a lot of requests from one or more countries and you want to
+// block the requests, you can create an GeoMatchSet that contains those countries
+// and then configure AWS WAF to block the requests.
+//
 // To create and configure a GeoMatchSet , perform the following steps:
-//   - Use GetChangeToken to get the change token that you provide in the
-//     ChangeToken parameter of a CreateGeoMatchSet request.
+//
+//   - Use GetChangeTokento get the change token that you provide in the ChangeToken parameter of
+//     a CreateGeoMatchSet request.
+//
 //   - Submit a CreateGeoMatchSet request.
+//
 //   - Use GetChangeToken to get the change token that you provide in the
-//     ChangeToken parameter of an UpdateGeoMatchSet request.
+//     ChangeToken parameter of an UpdateGeoMatchSetrequest.
+//
 //   - Submit an UpdateGeoMatchSetSet request to specify the countries that you
 //     want AWS WAF to watch for.
 //
 // For more information about how to use the AWS WAF API to allow or block HTTP
-// requests, see the AWS WAF Developer Guide (https://docs.aws.amazon.com/waf/latest/developerguide/)
-// .
+// requests, see the [AWS WAF Developer Guide].
+//
+// [AWS WAF Classic]: https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html
+// [AWS WAF Developer Guide]: https://docs.aws.amazon.com/waf/latest/developerguide/
 func (c *Client) CreateGeoMatchSet(ctx context.Context, params *CreateGeoMatchSetInput, optFns ...func(*Options)) (*CreateGeoMatchSetOutput, error) {
 	if params == nil {
 		params = &CreateGeoMatchSetInput{}
@@ -50,13 +59,13 @@ func (c *Client) CreateGeoMatchSet(ctx context.Context, params *CreateGeoMatchSe
 
 type CreateGeoMatchSetInput struct {
 
-	// The value returned by the most recent call to GetChangeToken .
+	// The value returned by the most recent call to GetChangeToken.
 	//
 	// This member is required.
 	ChangeToken *string
 
-	// A friendly name or description of the GeoMatchSet . You can't change Name after
-	// you create the GeoMatchSet .
+	// A friendly name or description of the GeoMatchSet. You can't change Name after you create
+	// the GeoMatchSet .
 	//
 	// This member is required.
 	Name *string
@@ -68,11 +77,11 @@ type CreateGeoMatchSetOutput struct {
 
 	// The ChangeToken that you used to submit the CreateGeoMatchSet request. You can
 	// also use this value to query the status of the request. For more information,
-	// see GetChangeTokenStatus .
+	// see GetChangeTokenStatus.
 	ChangeToken *string
 
-	// The GeoMatchSet returned in the CreateGeoMatchSet response. The GeoMatchSet
-	// contains no GeoMatchConstraints .
+	// The GeoMatchSet returned in the CreateGeoMatchSet response. The GeoMatchSet contains no
+	// GeoMatchConstraints .
 	GeoMatchSet *types.GeoMatchSet
 
 	// Metadata pertaining to the operation's result.
@@ -103,25 +112,25 @@ func (c *Client) addOperationCreateGeoMatchSetMiddlewares(stack *middleware.Stac
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -136,13 +145,16 @@ func (c *Client) addOperationCreateGeoMatchSetMiddlewares(stack *middleware.Stac
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpCreateGeoMatchSetValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateGeoMatchSet(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

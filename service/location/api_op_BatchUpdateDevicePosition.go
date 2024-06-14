@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/location/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -15,21 +14,27 @@ import (
 // Uploads position update data for one or more devices to a tracker resource (up
 // to 10 devices per batch). Amazon Location uses the data when it reports the last
 // known device position and position history. Amazon Location retains location
-// data for 30 days. Position updates are handled based on the PositionFiltering
-// property of the tracker. When PositionFiltering is set to TimeBased , updates
-// are evaluated against linked geofence collections, and location data is stored
-// at a maximum of one position per 30 second interval. If your update frequency is
-// more often than every 30 seconds, only one update per 30 seconds is stored for
-// each unique device ID. When PositionFiltering is set to DistanceBased
-// filtering, location data is stored and evaluated against linked geofence
-// collections only if the device has moved more than 30 m (98.4 ft). When
-// PositionFiltering is set to AccuracyBased filtering, location data is stored
-// and evaluated against linked geofence collections only if the device has moved
-// more than the measured accuracy. For example, if two consecutive updates from a
-// device have a horizontal accuracy of 5 m and 10 m, the second update is neither
-// stored or evaluated if the device has moved less than 15 m. If PositionFiltering
-// is set to AccuracyBased filtering, Amazon Location uses the default value {
-// "Horizontal": 0} when accuracy is not provided on a DevicePositionUpdate .
+// data for 30 days.
+//
+// Position updates are handled based on the PositionFiltering property of the
+// tracker. When PositionFiltering is set to TimeBased , updates are evaluated
+// against linked geofence collections, and location data is stored at a maximum of
+// one position per 30 second interval. If your update frequency is more often than
+// every 30 seconds, only one update per 30 seconds is stored for each unique
+// device ID.
+//
+// When PositionFiltering is set to DistanceBased filtering, location data is
+// stored and evaluated against linked geofence collections only if the device has
+// moved more than 30 m (98.4 ft).
+//
+// When PositionFiltering is set to AccuracyBased filtering, location data is
+// stored and evaluated against linked geofence collections only if the device has
+// moved more than the measured accuracy. For example, if two consecutive updates
+// from a device have a horizontal accuracy of 5 m and 10 m, the second update is
+// neither stored or evaluated if the device has moved less than 15 m. If
+// PositionFiltering is set to AccuracyBased filtering, Amazon Location uses the
+// default value { "Horizontal": 0} when accuracy is not provided on a
+// DevicePositionUpdate .
 func (c *Client) BatchUpdateDevicePosition(ctx context.Context, params *BatchUpdateDevicePositionInput, optFns ...func(*Options)) (*BatchUpdateDevicePositionOutput, error) {
 	if params == nil {
 		params = &BatchUpdateDevicePositionInput{}
@@ -95,25 +100,25 @@ func (c *Client) addOperationBatchUpdateDevicePositionMiddlewares(stack *middlew
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -128,6 +133,9 @@ func (c *Client) addOperationBatchUpdateDevicePositionMiddlewares(stack *middlew
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addEndpointPrefix_opBatchUpdateDevicePositionMiddleware(stack); err != nil {
 		return err
 	}
@@ -137,7 +145,7 @@ func (c *Client) addOperationBatchUpdateDevicePositionMiddlewares(stack *middlew
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opBatchUpdateDevicePosition(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

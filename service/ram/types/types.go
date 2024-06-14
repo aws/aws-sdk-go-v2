@@ -10,8 +10,9 @@ import (
 // An object that describes a managed permission associated with a resource share.
 type AssociatedPermission struct {
 
-	// The Amazon Resource Name (ARN) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
-	// of the associated managed permission.
+	// The [Amazon Resource Name (ARN)] of the associated managed permission.
+	//
+	// [Amazon Resource Name (ARN)]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
 	Arn *string
 
 	// Indicates whether the associated resource share is using the default version of
@@ -20,22 +21,24 @@ type AssociatedPermission struct {
 
 	// Indicates what features are available for this resource share. This parameter
 	// can have one of the following values:
+	//
 	//   - STANDARD – A resource share that supports all functionality. These resource
 	//   shares are visible to all principals you share the resource share with. You can
 	//   modify these resource shares in RAM using the console or APIs. This resource
 	//   share might have been created by RAM, or it might have been CREATED_FROM_POLICY
 	//   and then promoted.
+	//
 	//   - CREATED_FROM_POLICY – The customer manually shared a resource by attaching
 	//   a resource-based policy. That policy did not match any existing managed
 	//   permissions, so RAM created this customer managed permission automatically on
 	//   the customer's behalf based on the attached policy document. This type of
 	//   resource share is visible only to the Amazon Web Services account that created
-	//   it. You can't modify it in RAM unless you promote it. For more information, see
-	//   PromoteResourceShareCreatedFromPolicy .
+	//   it. You can't modify it in RAM unless you promote it. For more information, see PromoteResourceShareCreatedFromPolicy
+	//   .
+	//
 	//   - PROMOTING_TO_STANDARD – This resource share was originally
-	//   CREATED_FROM_POLICY , but the customer ran the
-	//   PromoteResourceShareCreatedFromPolicy and that operation is still in progress.
-	//   This value changes to STANDARD when complete.
+	//   CREATED_FROM_POLICY , but the customer ran the PromoteResourceShareCreatedFromPolicyand that operation is still in
+	//   progress. This value changes to STANDARD when complete.
 	FeatureSet PermissionFeatureSet
 
 	// The date and time when the association between the permission and the resource
@@ -45,8 +48,9 @@ type AssociatedPermission struct {
 	// The version of the permission currently associated with the resource share.
 	PermissionVersion *string
 
-	// The Amazon Resource Name (ARN) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
-	// of a resource share associated with this permission.
+	// The [Amazon Resource Name (ARN)] of a resource share associated with this permission.
+	//
+	// [Amazon Resource Name (ARN)]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
 	ResourceShareArn *string
 
 	// The resource type to which this permission applies.
@@ -54,11 +58,15 @@ type AssociatedPermission struct {
 
 	// The current status of the association between the permission and the resource
 	// share. The following are the possible values:
+	//
 	//   - ATTACHABLE – This permission or version can be associated with resource
 	//   shares.
+	//
 	//   - UNATTACHABLE – This permission or version can't currently be associated with
 	//   resource shares.
+	//
 	//   - DELETING – This permission or version is in the process of being deleted.
+	//
 	//   - DELETED – This permission or version is deleted.
 	Status *string
 
@@ -73,7 +81,9 @@ type Principal struct {
 
 	// Indicates the relationship between the Amazon Web Services account the
 	// principal belongs to and the account that owns the resource share:
+	//
 	//   - True – The two accounts belong to same organization.
+	//
 	//   - False – The two accounts do not belong to the same organization.
 	External *bool
 
@@ -84,29 +94,30 @@ type Principal struct {
 	// principal was last updated.
 	LastUpdatedTime *time.Time
 
-	// The Amazon Resource Name (ARN) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
-	// of a resource share the principal is associated with.
+	// The [Amazon Resource Name (ARN)] of a resource share the principal is associated with.
+	//
+	// [Amazon Resource Name (ARN)]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
 	ResourceShareArn *string
 
 	noSmithyDocumentSerde
 }
 
 // A structure that represents the background work that RAM performs when you
-// invoke the ReplacePermissionAssociations operation.
+// invoke the ReplacePermissionAssociationsoperation.
 type ReplacePermissionAssociationsWork struct {
 
 	// The date and time when this asynchronous background task was created.
 	CreationTime *time.Time
 
-	// The Amazon Resource Name (ARN) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
-	// of the managed permission that this background task is replacing.
+	// The [Amazon Resource Name (ARN)] of the managed permission that this background task is replacing.
+	//
+	// [Amazon Resource Name (ARN)]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
 	FromPermissionArn *string
 
 	// The version of the managed permission that this background task is replacing.
 	FromPermissionVersion *string
 
-	// The unique identifier for the background task associated with one
-	// ReplacePermissionAssociations request.
+	// The unique identifier for the background task associated with one ReplacePermissionAssociations request.
 	Id *string
 
 	// The date and time when the status of this background task was last updated.
@@ -114,8 +125,11 @@ type ReplacePermissionAssociationsWork struct {
 
 	// Specifies the current status of the background tasks for the specified ID. The
 	// output is one of the following strings:
+	//
 	//   - IN_PROGRESS
+	//
 	//   - COMPLETED
+	//
 	//   - FAILED
 	Status ReplacePermissionAssociationsWorkStatus
 
@@ -139,8 +153,9 @@ type ReplacePermissionAssociationsWork struct {
 // Describes a resource associated with a resource share in RAM.
 type Resource struct {
 
-	// The Amazon Resource Name (ARN) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
-	// of the resource.
+	// The [Amazon Resource Name (ARN)] of the resource.
+	//
+	// [Amazon Resource Name (ARN)]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
 	Arn *string
 
 	// The date and time when the resource was associated with the resource share.
@@ -150,19 +165,23 @@ type Resource struct {
 	// share was last updated.
 	LastUpdatedTime *time.Time
 
-	// The Amazon Resource Name (ARN) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
-	// of the resource group. This value is available only if the resource is part of a
-	// resource group.
+	// The [Amazon Resource Name (ARN)] of the resource group. This value is available only if the resource is
+	// part of a resource group.
+	//
+	// [Amazon Resource Name (ARN)]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
 	ResourceGroupArn *string
 
 	// Specifies the scope of visibility of this resource:
+	//
 	//   - REGIONAL – The resource can be accessed only by using requests that target
 	//   the Amazon Web Services Region in which the resource exists.
+	//
 	//   - GLOBAL – The resource can be accessed from any Amazon Web Services Region.
 	ResourceRegionScope ResourceRegionScope
 
-	// The Amazon Resource Name (ARN) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
-	// of the resource share this resource is associated with.
+	// The [Amazon Resource Name (ARN)] of the resource share this resource is associated with.
+	//
+	// [Amazon Resource Name (ARN)]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
 	ResourceShareArn *string
 
 	// The current status of the resource.
@@ -184,8 +203,9 @@ type ResourceShare struct {
 
 	// Indicates whether principals outside your organization in Organizations can be
 	// associated with a resource share.
-	//   - True – the resource share can be shared with any Amazon Web Services
-	//   account.
+	//
+	//   - True – the resource share can be shared with any Amazon Web Services account.
+	//
 	//   - False – the resource share can be shared with only accounts in the same
 	//   organization as the account that owns the resource share.
 	AllowExternalPrincipals *bool
@@ -195,22 +215,24 @@ type ResourceShare struct {
 
 	// Indicates what features are available for this resource share. This parameter
 	// can have one of the following values:
+	//
 	//   - STANDARD – A resource share that supports all functionality. These resource
 	//   shares are visible to all principals you share the resource share with. You can
 	//   modify these resource shares in RAM using the console or APIs. This resource
 	//   share might have been created by RAM, or it might have been CREATED_FROM_POLICY
 	//   and then promoted.
+	//
 	//   - CREATED_FROM_POLICY – The customer manually shared a resource by attaching
 	//   a resource-based policy. That policy did not match any existing managed
 	//   permissions, so RAM created this customer managed permission automatically on
 	//   the customer's behalf based on the attached policy document. This type of
 	//   resource share is visible only to the Amazon Web Services account that created
-	//   it. You can't modify it in RAM unless you promote it. For more information, see
-	//   PromoteResourceShareCreatedFromPolicy .
+	//   it. You can't modify it in RAM unless you promote it. For more information, see PromoteResourceShareCreatedFromPolicy
+	//   .
+	//
 	//   - PROMOTING_TO_STANDARD – This resource share was originally
-	//   CREATED_FROM_POLICY , but the customer ran the
-	//   PromoteResourceShareCreatedFromPolicy and that operation is still in progress.
-	//   This value changes to STANDARD when complete.
+	//   CREATED_FROM_POLICY , but the customer ran the PromoteResourceShareCreatedFromPolicyand that operation is still in
+	//   progress. This value changes to STANDARD when complete.
 	FeatureSet ResourceShareFeatureSet
 
 	// The date and time when the resource share was last updated.
@@ -222,8 +244,9 @@ type ResourceShare struct {
 	// The ID of the Amazon Web Services account that owns the resource share.
 	OwningAccountId *string
 
-	// The Amazon Resource Name (ARN) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
-	// of the resource share
+	// The [Amazon Resource Name (ARN)] of the resource share
+	//
+	// [Amazon Resource Name (ARN)]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
 	ResourceShareArn *string
 
 	// The current status of the resource share.
@@ -243,15 +266,22 @@ type ResourceShare struct {
 type ResourceShareAssociation struct {
 
 	// The associated entity. This can be either of the following:
-	//   - For a resource association, this is the Amazon Resource Name (ARN) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
-	//   of the resource.
+	//
+	//   - For a resource association, this is the [Amazon Resource Name (ARN)]of the resource.
+	//
 	//   - For principal associations, this is one of the following:
+	//
 	//   - The ID of an Amazon Web Services account
-	//   - The Amazon Resource Name (ARN) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
-	//   of an organization in Organizations
+	//
+	//   - The [Amazon Resource Name (ARN)]of an organization in Organizations
+	//
 	//   - The ARN of an organizational unit (OU) in Organizations
+	//
 	//   - The ARN of an IAM role
+	//
 	//   - The ARN of an IAM user
+	//
+	// [Amazon Resource Name (ARN)]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
 	AssociatedEntity *string
 
 	// The type of entity included in this association.
@@ -267,8 +297,9 @@ type ResourceShareAssociation struct {
 	// The date and time when the association was last updated.
 	LastUpdatedTime *time.Time
 
-	// The Amazon Resource Name (ARN) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
-	// of the resource share.
+	// The [Amazon Resource Name (ARN)] of the resource share.
+	//
+	// [Amazon Resource Name (ARN)]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
 	ResourceShareArn *string
 
 	// The name of the resource share.
@@ -293,22 +324,24 @@ type ResourceShareInvitation struct {
 	// The ID of the Amazon Web Services account that received the invitation.
 	ReceiverAccountId *string
 
-	// The Amazon Resource Name (ARN) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
-	// of the IAM user or role that received the invitation.
+	// The [Amazon Resource Name (ARN)] of the IAM user or role that received the invitation.
+	//
+	// [Amazon Resource Name (ARN)]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
 	ReceiverArn *string
 
-	// The Amazon Resource Name (ARN) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
-	// of the resource share
+	// The [Amazon Resource Name (ARN)] of the resource share
+	//
+	// [Amazon Resource Name (ARN)]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
 	ResourceShareArn *string
 
-	// To view the resources associated with a pending resource share invitation, use
-	// ListPendingInvitationResources .
+	// To view the resources associated with a pending resource share invitation, use ListPendingInvitationResources.
 	//
 	// Deprecated: This member has been deprecated. Use ListPendingInvitationResources.
 	ResourceShareAssociations []ResourceShareAssociation
 
-	// The Amazon Resource Name (ARN) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
-	// of the invitation.
+	// The [Amazon Resource Name (ARN)] of the invitation.
+	//
+	// [Amazon Resource Name (ARN)]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
 	ResourceShareInvitationArn *string
 
 	// The name of the resource share.
@@ -326,8 +359,9 @@ type ResourceShareInvitation struct {
 // Information about a RAM managed permission.
 type ResourceSharePermissionDetail struct {
 
-	// The Amazon Resource Name (ARN) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
-	// of this RAM managed permission.
+	// The [Amazon Resource Name (ARN)] of this RAM managed permission.
+	//
+	// [Amazon Resource Name (ARN)]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
 	Arn *string
 
 	// The date and time when the permission was created.
@@ -339,22 +373,24 @@ type ResourceSharePermissionDetail struct {
 
 	// Indicates what features are available for this resource share. This parameter
 	// can have one of the following values:
+	//
 	//   - STANDARD – A resource share that supports all functionality. These resource
 	//   shares are visible to all principals you share the resource share with. You can
 	//   modify these resource shares in RAM using the console or APIs. This resource
 	//   share might have been created by RAM, or it might have been CREATED_FROM_POLICY
 	//   and then promoted.
+	//
 	//   - CREATED_FROM_POLICY – The customer manually shared a resource by attaching
 	//   a resource-based policy. That policy did not match any existing managed
 	//   permissions, so RAM created this customer managed permission automatically on
 	//   the customer's behalf based on the attached policy document. This type of
 	//   resource share is visible only to the Amazon Web Services account that created
-	//   it. You can't modify it in RAM unless you promote it. For more information, see
-	//   PromoteResourceShareCreatedFromPolicy .
+	//   it. You can't modify it in RAM unless you promote it. For more information, see PromoteResourceShareCreatedFromPolicy
+	//   .
+	//
 	//   - PROMOTING_TO_STANDARD – This resource share was originally
-	//   CREATED_FROM_POLICY , but the customer ran the
-	//   PromoteResourceShareCreatedFromPolicy and that operation is still in progress.
-	//   This value changes to STANDARD when complete.
+	//   CREATED_FROM_POLICY , but the customer ran the PromoteResourceShareCreatedFromPolicyand that operation is still in
+	//   progress. This value changes to STANDARD when complete.
 	FeatureSet PermissionFeatureSet
 
 	// Specifies whether the version of the permission represented in this response is
@@ -373,9 +409,11 @@ type ResourceSharePermissionDetail struct {
 	Permission *string
 
 	// The type of managed permission. This can be one of the following values:
+	//
 	//   - AWS_MANAGED – Amazon Web Services created and manages this managed
 	//   permission. You can associate it with your resource shares, but you can't modify
 	//   it.
+	//
 	//   - CUSTOMER_MANAGED – You, or another principal in your account created this
 	//   managed permission. You can associate it with your resource shares and create
 	//   new versions that have different permissions.
@@ -386,11 +424,15 @@ type ResourceSharePermissionDetail struct {
 
 	// The current status of the association between the permission and the resource
 	// share. The following are the possible values:
+	//
 	//   - ATTACHABLE – This permission or version can be associated with resource
 	//   shares.
+	//
 	//   - UNATTACHABLE – This permission or version can't currently be associated with
 	//   resource shares.
+	//
 	//   - DELETING – This permission or version is in the process of being deleted.
+	//
 	//   - DELETED – This permission or version is deleted.
 	Status PermissionStatus
 
@@ -406,8 +448,9 @@ type ResourceSharePermissionDetail struct {
 // Information about an RAM permission.
 type ResourceSharePermissionSummary struct {
 
-	// The Amazon Resource Name (ARN) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
-	// of the permission you want information about.
+	// The [Amazon Resource Name (ARN)] of the permission you want information about.
+	//
+	// [Amazon Resource Name (ARN)]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
 	Arn *string
 
 	// The date and time when the permission was created.
@@ -419,22 +462,24 @@ type ResourceSharePermissionSummary struct {
 
 	// Indicates what features are available for this resource share. This parameter
 	// can have one of the following values:
+	//
 	//   - STANDARD – A resource share that supports all functionality. These resource
 	//   shares are visible to all principals you share the resource share with. You can
 	//   modify these resource shares in RAM using the console or APIs. This resource
 	//   share might have been created by RAM, or it might have been CREATED_FROM_POLICY
 	//   and then promoted.
+	//
 	//   - CREATED_FROM_POLICY – The customer manually shared a resource by attaching
 	//   a resource-based policy. That policy did not match any existing managed
 	//   permissions, so RAM created this customer managed permission automatically on
 	//   the customer's behalf based on the attached policy document. This type of
 	//   resource share is visible only to the Amazon Web Services account that created
-	//   it. You can't modify it in RAM unless you promote it. For more information, see
-	//   PromoteResourceShareCreatedFromPolicy .
+	//   it. You can't modify it in RAM unless you promote it. For more information, see PromoteResourceShareCreatedFromPolicy
+	//   .
+	//
 	//   - PROMOTING_TO_STANDARD – This resource share was originally
-	//   CREATED_FROM_POLICY , but the customer ran the
-	//   PromoteResourceShareCreatedFromPolicy and that operation is still in progress.
-	//   This value changes to STANDARD when complete.
+	//   CREATED_FROM_POLICY , but the customer ran the PromoteResourceShareCreatedFromPolicyand that operation is still in
+	//   progress. This value changes to STANDARD when complete.
 	FeatureSet PermissionFeatureSet
 
 	// Specifies whether the managed permission associated with this resource share is
@@ -448,9 +493,11 @@ type ResourceSharePermissionSummary struct {
 	Name *string
 
 	// The type of managed permission. This can be one of the following values:
+	//
 	//   - AWS_MANAGED – Amazon Web Services created and manages this managed
 	//   permission. You can associate it with your resource shares, but you can't modify
 	//   it.
+	//
 	//   - CUSTOMER_MANAGED – You, or another principal in your account created this
 	//   managed permission. You can associate it with your resource shares and create
 	//   new versions that have different permissions.
@@ -478,8 +525,10 @@ type ResourceSharePermissionSummary struct {
 type ServiceNameAndResourceType struct {
 
 	// Specifies the scope of visibility of resources of this type:
+	//
 	//   - REGIONAL – The resource can be accessed only by using requests that target
 	//   the Amazon Web Services Region in which the resource exists.
+	//
 	//   - GLOBAL – The resource can be accessed from any Amazon Web Services Region.
 	ResourceRegionScope ResourceRegionScope
 
@@ -497,10 +546,13 @@ type ServiceNameAndResourceType struct {
 
 // A structure containing a tag. A tag is metadata that you can attach to your
 // resources to help organize and categorize them. You can also use them to help
-// you secure your resources. For more information, see Controlling access to
-// Amazon Web Services resources using tags (https://docs.aws.amazon.com/IAM/latest/UserGuide/access_tags.html)
-// . For more information about tags, see Tagging Amazon Web Services resources (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html)
-// in the Amazon Web Services General Reference Guide.
+// you secure your resources. For more information, see [Controlling access to Amazon Web Services resources using tags].
+//
+// For more information about tags, see [Tagging Amazon Web Services resources] in the Amazon Web Services General
+// Reference Guide.
+//
+// [Controlling access to Amazon Web Services resources using tags]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access_tags.html
+// [Tagging Amazon Web Services resources]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
 type Tag struct {
 
 	// The key, or name, attached to the tag. Every tag must have a key. Key names are

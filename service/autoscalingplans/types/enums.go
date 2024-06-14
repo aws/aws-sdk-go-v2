@@ -13,8 +13,9 @@ const (
 )
 
 // Values returns all known values for ForecastDataType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ForecastDataType) Values() []ForecastDataType {
 	return []ForecastDataType{
 		"CapacityForecast",
@@ -35,8 +36,9 @@ const (
 )
 
 // Values returns all known values for LoadMetricType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (LoadMetricType) Values() []LoadMetricType {
 	return []LoadMetricType{
 		"ASGTotalCPUUtilization",
@@ -58,8 +60,9 @@ const (
 )
 
 // Values returns all known values for MetricStatistic. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (MetricStatistic) Values() []MetricStatistic {
 	return []MetricStatistic{
 		"Average",
@@ -78,8 +81,9 @@ const (
 )
 
 // Values returns all known values for PolicyType. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (PolicyType) Values() []PolicyType {
 	return []PolicyType{
 		"TargetTrackingScaling",
@@ -97,8 +101,9 @@ const (
 
 // Values returns all known values for PredictiveScalingMaxCapacityBehavior. Note
 // that this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (PredictiveScalingMaxCapacityBehavior) Values() []PredictiveScalingMaxCapacityBehavior {
 	return []PredictiveScalingMaxCapacityBehavior{
 		"SetForecastCapacityToMaxCapacity",
@@ -116,8 +121,9 @@ const (
 )
 
 // Values returns all known values for PredictiveScalingMode. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (PredictiveScalingMode) Values() []PredictiveScalingMode {
 	return []PredictiveScalingMode{
 		"ForecastAndScale",
@@ -140,8 +146,9 @@ const (
 )
 
 // Values returns all known values for ScalableDimension. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ScalableDimension) Values() []ScalableDimension {
 	return []ScalableDimension{
 		"autoscaling:autoScalingGroup:DesiredCapacity",
@@ -175,8 +182,9 @@ const (
 )
 
 // Values returns all known values for ScalingMetricType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ScalingMetricType) Values() []ScalingMetricType {
 	return []ScalingMetricType{
 		"ASGAverageCPUUtilization",
@@ -210,8 +218,9 @@ const (
 )
 
 // Values returns all known values for ScalingPlanStatusCode. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ScalingPlanStatusCode) Values() []ScalingPlanStatusCode {
 	return []ScalingPlanStatusCode{
 		"Active",
@@ -235,6 +244,7 @@ const (
 
 // Values returns all known values for ScalingPolicyUpdateBehavior. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (ScalingPolicyUpdateBehavior) Values() []ScalingPolicyUpdateBehavior {
 	return []ScalingPolicyUpdateBehavior{
@@ -253,8 +263,9 @@ const (
 )
 
 // Values returns all known values for ScalingStatusCode. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ScalingStatusCode) Values() []ScalingStatusCode {
 	return []ScalingStatusCode{
 		"Inactive",
@@ -275,8 +286,9 @@ const (
 )
 
 // Values returns all known values for ServiceNamespace. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ServiceNamespace) Values() []ServiceNamespace {
 	return []ServiceNamespace{
 		"autoscaling",

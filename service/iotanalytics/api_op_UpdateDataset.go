@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/iotanalytics/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -45,8 +44,9 @@ type UpdateDatasetInput struct {
 	ContentDeliveryRules []types.DatasetContentDeliveryRule
 
 	// A list of data rules that send notifications to CloudWatch, when data arrives
-	// late. To specify lateDataRules , the dataset must use a DeltaTimer (https://docs.aws.amazon.com/iotanalytics/latest/APIReference/API_DeltaTime.html)
-	// filter.
+	// late. To specify lateDataRules , the dataset must use a [DeltaTimer] filter.
+	//
+	// [DeltaTimer]: https://docs.aws.amazon.com/iotanalytics/latest/APIReference/API_DeltaTime.html
 	LateDataRules []types.LateDataRule
 
 	// How long, in days, dataset contents are kept for the dataset.
@@ -59,9 +59,9 @@ type UpdateDatasetInput struct {
 	// Optional. How many versions of dataset contents are kept. If not specified or
 	// set to null, only the latest version plus the latest succeeded version (if they
 	// are different) are kept for the time period specified by the retentionPeriod
-	// parameter. For more information, see Keeping Multiple Versions of IoT Analytics
-	// datasets (https://docs.aws.amazon.com/iotanalytics/latest/userguide/getting-started.html#aws-iot-analytics-dataset-versions)
-	// in the IoT Analytics User Guide.
+	// parameter. For more information, see [Keeping Multiple Versions of IoT Analytics datasets]in the IoT Analytics User Guide.
+	//
+	// [Keeping Multiple Versions of IoT Analytics datasets]: https://docs.aws.amazon.com/iotanalytics/latest/userguide/getting-started.html#aws-iot-analytics-dataset-versions
 	VersioningConfiguration *types.VersioningConfiguration
 
 	noSmithyDocumentSerde
@@ -96,25 +96,25 @@ func (c *Client) addOperationUpdateDatasetMiddlewares(stack *middleware.Stack, o
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -129,13 +129,16 @@ func (c *Client) addOperationUpdateDatasetMiddlewares(stack *middleware.Stack, o
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpUpdateDatasetValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateDataset(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

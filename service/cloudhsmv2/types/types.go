@@ -35,6 +35,12 @@ type Backup struct {
 	// The date and time when the backup will be permanently deleted.
 	DeleteTimestamp *time.Time
 
+	// The HSM type of the cluster that was backed up.
+	HsmType *string
+
+	// The mode of the cluster that was backed up.
+	Mode ClusterMode
+
 	// Specifies whether the service should exempt a backup from the retention policy
 	// for the cluster. True exempts a backup from the retention policy. False means
 	// the service applies the backup retention policy defined at the cluster.
@@ -117,6 +123,9 @@ type Cluster struct {
 	// Contains information about the HSMs in the cluster.
 	Hsms []Hsm
 
+	// The mode of the cluster.
+	Mode ClusterMode
+
 	// The default password for the cluster's Pre-Crypto Officer (PRECO) user.
 	PreCoPassword *string
 
@@ -146,8 +155,8 @@ type Cluster struct {
 	noSmithyDocumentSerde
 }
 
-// Contains information about the backup that will be copied and created by the
-// CopyBackupToRegion operation.
+// Contains information about the backup that will be copied and created by the CopyBackupToRegion
+// operation.
 type DestinationBackup struct {
 
 	// The date and time when both the source backup was created.

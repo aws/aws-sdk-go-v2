@@ -7,24 +7,23 @@ import (
 	"time"
 )
 
-// A summary of findings metrics in an account.
+// A summary of findings metrics for an account on a specified date.
 type AccountFindingsMetric struct {
 
-	// The number of closed findings of each severity in an account on the specified
-	// date.
+	// The number of closed findings of each severity on the specified date.
 	ClosedFindings *FindingMetricsValuePerSeverity
 
-	// The date from which the finding metrics were retrieved.
+	// The date from which the findings metrics were retrieved.
 	Date *time.Time
 
-	// The average time it takes to close findings of each severity in days.
+	// The average time in days it takes to close findings of each severity as of a
+	// specified date.
 	MeanTimeToClose *FindingMetricsValuePerSeverity
 
-	// The number of new findings of each severity in account on the specified date.
+	// The number of new findings of each severity on the specified date.
 	NewFindings *FindingMetricsValuePerSeverity
 
-	// The number of open findings of each severity in an account as of the specified
-	// date.
+	// The number of open findings of each severity as of the specified date.
 	OpenFindings *FindingMetricsValuePerSeverity
 
 	noSmithyDocumentSerde
@@ -82,11 +81,12 @@ type CodeLine struct {
 	noSmithyDocumentSerde
 }
 
-// Information about account-level configuration.
+// Information about the encryption configuration for an account. Required to call
+// UpdateAccountConfiguration .
 type EncryptionConfig struct {
 
-	// The KMS key ARN to use for encryption. This must be provided as a header when
-	// uploading your code resource.
+	// The KMS key ARN that is used for encryption. If an AWS-managed key is used for
+	// encryption, returns empty.
 	KmsKeyArn *string
 
 	noSmithyDocumentSerde
@@ -140,7 +140,7 @@ type Finding struct {
 	DetectorTags []string
 
 	// The identifier for the component that generated a finding such as
-	// AWSCodeGuruSecurity or AWSInspector.
+	// AmazonCodeGuruSecurity.
 	GeneratorId *string
 
 	// The identifier for a finding.
@@ -155,7 +155,11 @@ type Finding struct {
 	// The identifier for the rule that generated the finding.
 	RuleId *string
 
-	// The severity of the finding.
+	// The severity of the finding. Severity can be critical, high, medium, low, or
+	// informational. For information on severity levels, see [Finding severity]in the Amazon CodeGuru
+	// Security User Guide.
+	//
+	// [Finding severity]: https://docs.aws.amazon.com/codeguru/latest/security-ug/findings-overview.html#severity-distribution
 	Severity Severity
 
 	// The status of the finding. A finding status can be open or closed.
@@ -194,49 +198,48 @@ type FindingIdentifier struct {
 	noSmithyDocumentSerde
 }
 
-// The severity of the issue in the code that generated a finding.
+// A numeric value corresponding to the severity of a finding, such as the number
+// of open findings or the average time it takes to close findings of a given
+// severity.
 type FindingMetricsValuePerSeverity struct {
 
-	// The severity of the finding is critical and should be addressed immediately.
+	// A numeric value corresponding to a critical finding.
 	Critical *float64
 
-	// The severity of the finding is high and should be addressed as a near-term
-	// priority.
+	// A numeric value corresponding to a high severity finding.
 	High *float64
 
-	// The finding is related to quality or readability improvements and not
-	// considered actionable.
+	// A numeric value corresponding to an informational finding.
 	Info *float64
 
-	// The severity of the finding is low and does require action on its own.
+	// A numeric value corresponding to a low severity finding.
 	Low *float64
 
-	// The severity of the finding is medium and should be addressed as a mid-term
-	// priority.
+	// A numeric value corresponding to a medium severity finding.
 	Medium *float64
 
 	noSmithyDocumentSerde
 }
 
-// Information about summary metrics in an account.
+// A summary of metrics for an account as of a specified date.
 type MetricsSummary struct {
 
 	// A list of CategoryWithFindingNum objects for the top 5 finding categories with
-	// the most open findings in an account.
+	// the most findings.
 	CategoriesWithMostFindings []CategoryWithFindingNum
 
 	// The date from which the metrics summary information was retrieved.
 	Date *time.Time
 
-	// The number of open findings of each severity in an account.
+	// The number of open findings of each severity.
 	OpenFindings *FindingMetricsValuePerSeverity
 
 	// A list of ScanNameWithFindingNum objects for the top 3 scans with the most
-	// number of open findings in an account.
+	// number of open critical findings.
 	ScansWithMostOpenCriticalFindings []ScanNameWithFindingNum
 
 	// A list of ScanNameWithFindingNum objects for the top 3 scans with the most
-	// number of open critical findings in an account.
+	// number of open findings.
 	ScansWithMostOpenFindings []ScanNameWithFindingNum
 
 	noSmithyDocumentSerde
@@ -268,21 +271,20 @@ type Remediation struct {
 	noSmithyDocumentSerde
 }
 
-// Information about a resource, such as an Amazon S3 bucket or AWS Lambda
-// function, that contains a finding.
+// Information about a resource that contains a finding.
 type Resource struct {
 
-	// The identifier for the resource.
+	// The scanName of the scan that was run on the resource.
 	Id *string
 
-	// The identifier for a section of the resource, such as an AWS Lambda layer.
+	// The identifier for a section of the resource.
 	SubResourceId *string
 
 	noSmithyDocumentSerde
 }
 
-// The identifier for a resource object that contains resources where a finding
-// was detected.
+// The identifier for a resource object that contains resources to scan.
+// Specifying a codeArtifactId is required to create a scan.
 //
 // The following types satisfy this interface:
 //
@@ -291,8 +293,8 @@ type ResourceId interface {
 	isResourceId()
 }
 
-// The identifier for the code file uploaded to the resource where a finding was
-// detected.
+// The identifier for the code file uploaded to the resource object. Returned by
+// CreateUploadUrl when you upload resources to be scanned.
 type ResourceIdMemberCodeArtifactId struct {
 	Value string
 
@@ -301,10 +303,10 @@ type ResourceIdMemberCodeArtifactId struct {
 
 func (*ResourceIdMemberCodeArtifactId) isResourceId() {}
 
-// Information about a scan with open findings.
+// Information about the number of findings generated by a scan.
 type ScanNameWithFindingNum struct {
 
-	// The number of open findings generated by a scan.
+	// The number of findings generated by a scan.
 	FindingNumber *int32
 
 	// The name of the scan.
@@ -316,7 +318,7 @@ type ScanNameWithFindingNum struct {
 // Information about a scan.
 type ScanSummary struct {
 
-	// The time when the scan was created.
+	//  The time when the scan was created.
 	//
 	// This member is required.
 	CreatedAt *time.Time
@@ -348,7 +350,8 @@ type ScanSummary struct {
 // Information about the suggested code fix to remediate a finding.
 type SuggestedFix struct {
 
-	// The suggested code to add to your file.
+	// The suggested code fix. If applicable, includes code patch to replace your
+	// source code.
 	Code *string
 
 	// A description of the suggested code fix and why it is being suggested.
@@ -377,14 +380,16 @@ type ValidationExceptionField struct {
 // detected.
 type Vulnerability struct {
 
-	// An object that describes the location of the detected security vulnerability in
-	// your code.
+	//  An object that describes the location of the detected security vulnerability
+	// in your code.
 	FilePath *FilePath
 
 	// The identifier for the vulnerability.
 	Id *string
 
 	// The number of times the vulnerability appears in your code.
+	//
+	// Deprecated: This shape is not used.
 	ItemCount *int32
 
 	// One or more URL addresses that contain details about a vulnerability.

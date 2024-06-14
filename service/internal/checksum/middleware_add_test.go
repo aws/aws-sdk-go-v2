@@ -5,11 +5,12 @@ package checksum
 
 import (
 	"context"
+	"fmt"
+	"reflect"
 	"testing"
 
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
-	"github.com/google/go-cmp/cmp"
 )
 
 func TestAddInputMiddleware(t *testing.T) {
@@ -136,7 +137,7 @@ func TestAddInputMiddleware(t *testing.T) {
 				t.Fatalf("expect no error, got %v", err)
 			}
 
-			if diff := cmp.Diff(c.expectMiddleware, stack.List()); diff != "" {
+			if diff := cmpDiff(c.expectMiddleware, stack.List()); diff != "" {
 				t.Fatalf("expect stack list match:\n%s", diff)
 			}
 
@@ -217,7 +218,7 @@ func TestRemoveInputMiddleware(t *testing.T) {
 		"Deserialize stack step",
 	}
 
-	if diff := cmp.Diff(expectStack, stack.List()); diff != "" {
+	if diff := cmpDiff(expectStack, stack.List()); diff != "" {
 		t.Fatalf("expect stack list match:\n%s", diff)
 	}
 }
@@ -307,7 +308,7 @@ func TestAddOutputMiddleware(t *testing.T) {
 				t.Fatalf("expect no error, got %v", err)
 			}
 
-			if diff := cmp.Diff(c.expectMiddleware, stack.List()); diff != "" {
+			if diff := cmpDiff(c.expectMiddleware, stack.List()); diff != "" {
 				t.Fatalf("expect stack list match:\n%s", diff)
 			}
 
@@ -336,7 +337,7 @@ func TestAddOutputMiddleware(t *testing.T) {
 			}
 			if c.expectDeserialize != nil && ok {
 				validateOutput := deserializeMiddleware.(*validateOutputPayloadChecksum)
-				if diff := cmp.Diff(c.expectDeserialize.Algorithms, validateOutput.Algorithms); diff != "" {
+				if diff := cmpDiff(c.expectDeserialize.Algorithms, validateOutput.Algorithms); diff != "" {
 					t.Errorf("expect algorithms match:\n%s", diff)
 				}
 				if e, a := c.expectDeserialize.IgnoreMultipartValidation, validateOutput.IgnoreMultipartValidation; e != a {
@@ -372,7 +373,7 @@ func TestRemoveOutputMiddleware(t *testing.T) {
 		"Deserialize stack step",
 	}
 
-	if diff := cmp.Diff(expectStack, stack.List()); diff != "" {
+	if diff := cmpDiff(expectStack, stack.List()); diff != "" {
 		t.Fatalf("expect stack list match:\n%s", diff)
 	}
 }
@@ -403,4 +404,11 @@ func nopFinalizeMiddleware(id string) middleware.FinalizeMiddleware {
 		) {
 			return next.HandleFinalize(ctx, input)
 		})
+}
+
+func cmpDiff(e, a interface{}) string {
+	if !reflect.DeepEqual(e, a) {
+		return fmt.Sprintf("%v != %v", e, a)
+	}
+	return ""
 }

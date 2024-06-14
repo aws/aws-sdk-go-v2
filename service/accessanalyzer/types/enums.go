@@ -11,12 +11,64 @@ const (
 )
 
 // Values returns all known values for AccessCheckPolicyType. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (AccessCheckPolicyType) Values() []AccessCheckPolicyType {
 	return []AccessCheckPolicyType{
 		"IDENTITY_POLICY",
 		"RESOURCE_POLICY",
+	}
+}
+
+type AccessCheckResourceType string
+
+// Enum values for AccessCheckResourceType
+const (
+	AccessCheckResourceTypeDynamodbTable            AccessCheckResourceType = "AWS::DynamoDB::Table"
+	AccessCheckResourceTypeDynamodbStream           AccessCheckResourceType = "AWS::DynamoDB::Stream"
+	AccessCheckResourceTypeEfsFilesystem            AccessCheckResourceType = "AWS::EFS::FileSystem"
+	AccessCheckResourceTypeOpensearchserviceDomain  AccessCheckResourceType = "AWS::OpenSearchService::Domain"
+	AccessCheckResourceTypeKinesisDataStream        AccessCheckResourceType = "AWS::Kinesis::Stream"
+	AccessCheckResourceTypeKinesisStreamConsumer    AccessCheckResourceType = "AWS::Kinesis::StreamConsumer"
+	AccessCheckResourceTypeKmsKey                   AccessCheckResourceType = "AWS::KMS::Key"
+	AccessCheckResourceTypeLambdaFunction           AccessCheckResourceType = "AWS::Lambda::Function"
+	AccessCheckResourceTypeS3Bucket                 AccessCheckResourceType = "AWS::S3::Bucket"
+	AccessCheckResourceTypeS3AccessPoint            AccessCheckResourceType = "AWS::S3::AccessPoint"
+	AccessCheckResourceTypeS3expressDirectorybucket AccessCheckResourceType = "AWS::S3Express::DirectoryBucket"
+	AccessCheckResourceTypeS3Glacier                AccessCheckResourceType = "AWS::S3::Glacier"
+	AccessCheckResourceTypeS3OutpostsBucket         AccessCheckResourceType = "AWS::S3Outposts::Bucket"
+	AccessCheckResourceTypeS3OutpostsAccessPoint    AccessCheckResourceType = "AWS::S3Outposts::AccessPoint"
+	AccessCheckResourceTypeSecretsmanagerSecret     AccessCheckResourceType = "AWS::SecretsManager::Secret"
+	AccessCheckResourceTypeSnsTopic                 AccessCheckResourceType = "AWS::SNS::Topic"
+	AccessCheckResourceTypeSqsQueue                 AccessCheckResourceType = "AWS::SQS::Queue"
+	AccessCheckResourceTypeRoleTrust                AccessCheckResourceType = "AWS::IAM::AssumeRolePolicyDocument"
+)
+
+// Values returns all known values for AccessCheckResourceType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (AccessCheckResourceType) Values() []AccessCheckResourceType {
+	return []AccessCheckResourceType{
+		"AWS::DynamoDB::Table",
+		"AWS::DynamoDB::Stream",
+		"AWS::EFS::FileSystem",
+		"AWS::OpenSearchService::Domain",
+		"AWS::Kinesis::Stream",
+		"AWS::Kinesis::StreamConsumer",
+		"AWS::KMS::Key",
+		"AWS::Lambda::Function",
+		"AWS::S3::Bucket",
+		"AWS::S3::AccessPoint",
+		"AWS::S3Express::DirectoryBucket",
+		"AWS::S3::Glacier",
+		"AWS::S3Outposts::Bucket",
+		"AWS::S3Outposts::AccessPoint",
+		"AWS::SecretsManager::Secret",
+		"AWS::SNS::Topic",
+		"AWS::SQS::Queue",
+		"AWS::IAM::AssumeRolePolicyDocument",
 	}
 }
 
@@ -30,8 +82,9 @@ const (
 )
 
 // Values returns all known values for AccessPreviewStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (AccessPreviewStatus) Values() []AccessPreviewStatus {
 	return []AccessPreviewStatus{
 		"COMPLETED",
@@ -50,8 +103,9 @@ const (
 
 // Values returns all known values for AccessPreviewStatusReasonCode. Note that
 // this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (AccessPreviewStatusReasonCode) Values() []AccessPreviewStatusReasonCode {
 	return []AccessPreviewStatusReasonCode{
 		"INTERNAL_ERROR",
@@ -71,8 +125,9 @@ const (
 )
 
 // Values returns all known values for AclPermission. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (AclPermission) Values() []AclPermission {
 	return []AclPermission{
 		"READ",
@@ -94,8 +149,9 @@ const (
 )
 
 // Values returns all known values for AnalyzerStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (AnalyzerStatus) Values() []AnalyzerStatus {
 	return []AnalyzerStatus{
 		"ACTIVE",
@@ -115,6 +171,7 @@ const (
 
 // Values returns all known values for CheckAccessNotGrantedResult. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (CheckAccessNotGrantedResult) Values() []CheckAccessNotGrantedResult {
 	return []CheckAccessNotGrantedResult{
@@ -132,10 +189,30 @@ const (
 )
 
 // Values returns all known values for CheckNoNewAccessResult. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (CheckNoNewAccessResult) Values() []CheckNoNewAccessResult {
 	return []CheckNoNewAccessResult{
+		"PASS",
+		"FAIL",
+	}
+}
+
+type CheckNoPublicAccessResult string
+
+// Enum values for CheckNoPublicAccessResult
+const (
+	CheckNoPublicAccessResultPass CheckNoPublicAccessResult = "PASS"
+	CheckNoPublicAccessResultFail CheckNoPublicAccessResult = "FAIL"
+)
+
+// Values returns all known values for CheckNoPublicAccessResult. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (CheckNoPublicAccessResult) Values() []CheckNoPublicAccessResult {
+	return []CheckNoPublicAccessResult{
 		"PASS",
 		"FAIL",
 	}
@@ -151,8 +228,9 @@ const (
 )
 
 // Values returns all known values for FindingChangeType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (FindingChangeType) Values() []FindingChangeType {
 	return []FindingChangeType{
 		"CHANGED",
@@ -172,8 +250,9 @@ const (
 )
 
 // Values returns all known values for FindingSourceType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (FindingSourceType) Values() []FindingSourceType {
 	return []FindingSourceType{
 		"POLICY",
@@ -193,8 +272,9 @@ const (
 )
 
 // Values returns all known values for FindingStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (FindingStatus) Values() []FindingStatus {
 	return []FindingStatus{
 		"ACTIVE",
@@ -212,8 +292,9 @@ const (
 )
 
 // Values returns all known values for FindingStatusUpdate. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (FindingStatusUpdate) Values() []FindingStatusUpdate {
 	return []FindingStatusUpdate{
 		"ACTIVE",
@@ -233,8 +314,9 @@ const (
 )
 
 // Values returns all known values for FindingType. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (FindingType) Values() []FindingType {
 	return []FindingType{
 		"ExternalAccess",
@@ -256,8 +338,9 @@ const (
 )
 
 // Values returns all known values for JobErrorCode. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (JobErrorCode) Values() []JobErrorCode {
 	return []JobErrorCode{
 		"AUTHORIZATION_ERROR",
@@ -278,8 +361,9 @@ const (
 )
 
 // Values returns all known values for JobStatus. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (JobStatus) Values() []JobStatus {
 	return []JobStatus{
 		"IN_PROGRESS",
@@ -310,8 +394,9 @@ const (
 )
 
 // Values returns all known values for KmsGrantOperation. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (KmsGrantOperation) Values() []KmsGrantOperation {
 	return []KmsGrantOperation{
 		"CreateGrant",
@@ -348,8 +433,9 @@ const (
 )
 
 // Values returns all known values for Locale. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (Locale) Values() []Locale {
 	return []Locale{
 		"DE",
@@ -374,8 +460,9 @@ const (
 )
 
 // Values returns all known values for OrderBy. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (OrderBy) Values() []OrderBy {
 	return []OrderBy{
 		"ASC",
@@ -393,8 +480,9 @@ const (
 )
 
 // Values returns all known values for PolicyType. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (PolicyType) Values() []PolicyType {
 	return []PolicyType{
 		"IDENTITY_POLICY",
@@ -414,14 +502,52 @@ const (
 )
 
 // Values returns all known values for ReasonCode. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ReasonCode) Values() []ReasonCode {
 	return []ReasonCode{
 		"AWS_SERVICE_ACCESS_DISABLED",
 		"DELEGATED_ADMINISTRATOR_DEREGISTERED",
 		"ORGANIZATION_DELETED",
 		"SERVICE_LINKED_ROLE_CREATION_FAILED",
+	}
+}
+
+type RecommendationType string
+
+// Enum values for RecommendationType
+const (
+	RecommendationTypeUnusedPermissionRecommendation RecommendationType = "UnusedPermissionRecommendation"
+)
+
+// Values returns all known values for RecommendationType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (RecommendationType) Values() []RecommendationType {
+	return []RecommendationType{
+		"UnusedPermissionRecommendation",
+	}
+}
+
+type RecommendedRemediationAction string
+
+// Enum values for RecommendedRemediationAction
+const (
+	RecommendedRemediationActionCreatePolicy RecommendedRemediationAction = "CREATE_POLICY"
+	RecommendedRemediationActionDetachPolicy RecommendedRemediationAction = "DETACH_POLICY"
+)
+
+// Values returns all known values for RecommendedRemediationAction. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (RecommendedRemediationAction) Values() []RecommendedRemediationAction {
+	return []RecommendedRemediationAction{
+		"CREATE_POLICY",
+		"DETACH_POLICY",
 	}
 }
 
@@ -443,11 +569,14 @@ const (
 	ResourceTypeAwsRdsDbclustersnapshot     ResourceType = "AWS::RDS::DBClusterSnapshot"
 	ResourceTypeAwsSnsTopic                 ResourceType = "AWS::SNS::Topic"
 	ResourceTypeAwsS3expressDirectorybucket ResourceType = "AWS::S3Express::DirectoryBucket"
+	ResourceTypeAwsDynamodbTable            ResourceType = "AWS::DynamoDB::Table"
+	ResourceTypeAwsDynamodbStream           ResourceType = "AWS::DynamoDB::Stream"
 )
 
 // Values returns all known values for ResourceType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ResourceType) Values() []ResourceType {
 	return []ResourceType{
 		"AWS::S3::Bucket",
@@ -464,6 +593,29 @@ func (ResourceType) Values() []ResourceType {
 		"AWS::RDS::DBClusterSnapshot",
 		"AWS::SNS::Topic",
 		"AWS::S3Express::DirectoryBucket",
+		"AWS::DynamoDB::Table",
+		"AWS::DynamoDB::Stream",
+	}
+}
+
+type Status string
+
+// Enum values for Status
+const (
+	StatusSucceeded  Status = "SUCCEEDED"
+	StatusFailed     Status = "FAILED"
+	StatusInProgress Status = "IN_PROGRESS"
+)
+
+// Values returns all known values for Status. Note that this can be expanded in
+// the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (Status) Values() []Status {
+	return []Status{
+		"SUCCEEDED",
+		"FAILED",
+		"IN_PROGRESS",
 	}
 }
 
@@ -478,8 +630,9 @@ const (
 )
 
 // Values returns all known values for Type. Note that this can be expanded in the
-// future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (Type) Values() []Type {
 	return []Type{
 		"ACCOUNT",
@@ -501,6 +654,7 @@ const (
 
 // Values returns all known values for ValidatePolicyFindingType. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (ValidatePolicyFindingType) Values() []ValidatePolicyFindingType {
 	return []ValidatePolicyFindingType{
@@ -520,10 +674,12 @@ const (
 	ValidatePolicyResourceTypeS3MultiRegionAccessPoint  ValidatePolicyResourceType = "AWS::S3::MultiRegionAccessPoint"
 	ValidatePolicyResourceTypeS3ObjectLambdaAccessPoint ValidatePolicyResourceType = "AWS::S3ObjectLambda::AccessPoint"
 	ValidatePolicyResourceTypeRoleTrust                 ValidatePolicyResourceType = "AWS::IAM::AssumeRolePolicyDocument"
+	ValidatePolicyResourceTypeDynamodbTable             ValidatePolicyResourceType = "AWS::DynamoDB::Table"
 )
 
 // Values returns all known values for ValidatePolicyResourceType. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (ValidatePolicyResourceType) Values() []ValidatePolicyResourceType {
 	return []ValidatePolicyResourceType{
@@ -532,6 +688,7 @@ func (ValidatePolicyResourceType) Values() []ValidatePolicyResourceType {
 		"AWS::S3::MultiRegionAccessPoint",
 		"AWS::S3ObjectLambda::AccessPoint",
 		"AWS::IAM::AssumeRolePolicyDocument",
+		"AWS::DynamoDB::Table",
 	}
 }
 
@@ -543,10 +700,12 @@ const (
 	ValidationExceptionReasonCannotParse           ValidationExceptionReason = "cannotParse"
 	ValidationExceptionReasonFieldValidationFailed ValidationExceptionReason = "fieldValidationFailed"
 	ValidationExceptionReasonOther                 ValidationExceptionReason = "other"
+	ValidationExceptionReasonNotSupported          ValidationExceptionReason = "notSupported"
 )
 
 // Values returns all known values for ValidationExceptionReason. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (ValidationExceptionReason) Values() []ValidationExceptionReason {
 	return []ValidationExceptionReason{
@@ -554,5 +713,6 @@ func (ValidationExceptionReason) Values() []ValidationExceptionReason {
 		"cannotParse",
 		"fieldValidationFailed",
 		"other",
+		"notSupported",
 	}
 }

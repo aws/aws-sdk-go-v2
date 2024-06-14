@@ -6,25 +6,31 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/iotthingsgraph/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Greengrass and Cloud Deployments Deploys the system instance to the target
-// specified in CreateSystemInstance . Greengrass Deployments If the system or any
-// workflows and entities have been updated before this action is called, then the
-// deployment will create a new Amazon Simple Storage Service resource file and
-// then deploy it. Since this action creates a Greengrass deployment on the
-// caller's behalf, the calling identity must have write permissions to the
-// specified Greengrass group. Otherwise, the call will fail with an authorization
-// error. For information about the artifacts that get added to your Greengrass
-// core device when you use this API, see AWS IoT Things Graph and AWS IoT
-// Greengrass (https://docs.aws.amazon.com/thingsgraph/latest/ug/iot-tg-greengrass.html)
-// .
+//	Greengrass and Cloud Deployments
+//
+// Deploys the system instance to the target specified in CreateSystemInstance .
+//
+// # Greengrass Deployments
+//
+// If the system or any workflows and entities have been updated before this
+// action is called, then the deployment will create a new Amazon Simple Storage
+// Service resource file and then deploy it.
+//
+// Since this action creates a Greengrass deployment on the caller's behalf, the
+// calling identity must have write permissions to the specified Greengrass group.
+// Otherwise, the call will fail with an authorization error.
+//
+// For information about the artifacts that get added to your Greengrass core
+// device when you use this API, see [AWS IoT Things Graph and AWS IoT Greengrass].
 //
 // Deprecated: since: 2022-08-30
+//
+// [AWS IoT Things Graph and AWS IoT Greengrass]: https://docs.aws.amazon.com/thingsgraph/latest/ug/iot-tg-greengrass.html
 func (c *Client) DeploySystemInstance(ctx context.Context, params *DeploySystemInstanceInput, optFns ...func(*Options)) (*DeploySystemInstanceOutput, error) {
 	if params == nil {
 		params = &DeploySystemInstanceInput{}
@@ -43,8 +49,11 @@ func (c *Client) DeploySystemInstance(ctx context.Context, params *DeploySystemI
 type DeploySystemInstanceInput struct {
 
 	// The ID of the system instance. This value is returned by the
-	// CreateSystemInstance action. The ID should be in the following format.
-	// urn:tdm:REGION/ACCOUNT ID/default:deployment:DEPLOYMENTNAME
+	// CreateSystemInstance action.
+	//
+	// The ID should be in the following format.
+	//
+	//     urn:tdm:REGION/ACCOUNT ID/default:deployment:DEPLOYMENTNAME
 	Id *string
 
 	noSmithyDocumentSerde
@@ -89,25 +98,25 @@ func (c *Client) addOperationDeploySystemInstanceMiddlewares(stack *middleware.S
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -122,10 +131,13 @@ func (c *Client) addOperationDeploySystemInstanceMiddlewares(stack *middleware.S
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDeploySystemInstance(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

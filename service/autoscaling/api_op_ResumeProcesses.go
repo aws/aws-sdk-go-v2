@@ -6,15 +6,16 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Resumes the specified suspended auto scaling processes, or all suspended
-// process, for the specified Auto Scaling group. For more information, see
-// Suspending and resuming scaling processes (https://docs.aws.amazon.com/autoscaling/ec2/userguide/as-suspend-resume-processes.html)
-// in the Amazon EC2 Auto Scaling User Guide.
+// process, for the specified Auto Scaling group.
+//
+// For more information, see [Suspending and resuming scaling processes] in the Amazon EC2 Auto Scaling User Guide.
+//
+// [Suspending and resuming scaling processes]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/as-suspend-resume-processes.html
 func (c *Client) ResumeProcesses(ctx context.Context, params *ResumeProcessesInput, optFns ...func(*Options)) (*ResumeProcessesOutput, error) {
 	if params == nil {
 		params = &ResumeProcessesInput{}
@@ -38,15 +39,25 @@ type ResumeProcessesInput struct {
 	AutoScalingGroupName *string
 
 	// One or more of the following processes:
+	//
 	//   - Launch
+	//
 	//   - Terminate
+	//
 	//   - AddToLoadBalancer
+	//
 	//   - AlarmNotification
+	//
 	//   - AZRebalance
+	//
 	//   - HealthCheck
+	//
 	//   - InstanceRefresh
+	//
 	//   - ReplaceUnhealthy
+	//
 	//   - ScheduledActions
+	//
 	// If you omit this property, all processes are specified.
 	ScalingProcesses []string
 
@@ -82,25 +93,25 @@ func (c *Client) addOperationResumeProcessesMiddlewares(stack *middleware.Stack,
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -115,13 +126,16 @@ func (c *Client) addOperationResumeProcessesMiddlewares(stack *middleware.Stack,
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpResumeProcessesValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opResumeProcesses(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

@@ -6,18 +6,18 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/directoryservice/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates an AD Connector to connect to a self-managed directory. Before you call
-// ConnectDirectory , ensure that all of the required permissions have been
-// explicitly granted through a policy. For details about what permissions are
-// required to run the ConnectDirectory operation, see Directory Service API
-// Permissions: Actions, Resources, and Conditions Reference (http://docs.aws.amazon.com/directoryservice/latest/admin-guide/UsingWithDS_IAM_ResourcePermissions.html)
-// .
+// Creates an AD Connector to connect to a self-managed directory.
+//
+// Before you call ConnectDirectory , ensure that all of the required permissions
+// have been explicitly granted through a policy. For details about what
+// permissions are required to run the ConnectDirectory operation, see [Directory Service API Permissions: Actions, Resources, and Conditions Reference].
+//
+// [Directory Service API Permissions: Actions, Resources, and Conditions Reference]: http://docs.aws.amazon.com/directoryservice/latest/admin-guide/UsingWithDS_IAM_ResourcePermissions.html
 func (c *Client) ConnectDirectory(ctx context.Context, params *ConnectDirectoryInput, optFns ...func(*Options)) (*ConnectDirectoryOutput, error) {
 	if params == nil {
 		params = &ConnectDirectoryInput{}
@@ -36,8 +36,7 @@ func (c *Client) ConnectDirectory(ctx context.Context, params *ConnectDirectoryI
 // Contains the inputs for the ConnectDirectory operation.
 type ConnectDirectoryInput struct {
 
-	// A DirectoryConnectSettings object that contains additional information for the
-	// operation.
+	// A DirectoryConnectSettings object that contains additional information for the operation.
 	//
 	// This member is required.
 	ConnectSettings *types.DirectoryConnectSettings
@@ -104,25 +103,25 @@ func (c *Client) addOperationConnectDirectoryMiddlewares(stack *middleware.Stack
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -137,13 +136,16 @@ func (c *Client) addOperationConnectDirectoryMiddlewares(stack *middleware.Stack
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpConnectDirectoryValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opConnectDirectory(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

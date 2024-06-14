@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/omics/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -31,24 +30,24 @@ func (c *Client) CreateAnnotationStoreVersion(ctx context.Context, params *Creat
 
 type CreateAnnotationStoreVersionInput struct {
 
-	// The name of an annotation store version from which versions are being created.
+	//  The name of an annotation store version from which versions are being created.
 	//
 	// This member is required.
 	Name *string
 
-	// The name given to an annotation store version to distinguish it from other
+	//  The name given to an annotation store version to distinguish it from other
 	// versions.
 	//
 	// This member is required.
 	VersionName *string
 
-	// The description of an annotation store version.
+	//  The description of an annotation store version.
 	Description *string
 
-	// Any tags added to annotation store version.
+	//  Any tags added to annotation store version.
 	Tags map[string]string
 
-	// The options for an annotation store version.
+	//  The options for an annotation store version.
 	VersionOptions types.VersionOptions
 
 	noSmithyDocumentSerde
@@ -56,39 +55,39 @@ type CreateAnnotationStoreVersionInput struct {
 
 type CreateAnnotationStoreVersionOutput struct {
 
-	// The time stamp for the creation of an annotation store version.
+	//  The time stamp for the creation of an annotation store version.
 	//
 	// This member is required.
 	CreationTime *time.Time
 
-	// A generated ID for the annotation store
+	//  A generated ID for the annotation store
 	//
 	// This member is required.
 	Id *string
 
-	// The name given to an annotation store version to distinguish it from other
+	//  The name given to an annotation store version to distinguish it from other
 	// versions.
 	//
 	// This member is required.
 	Name *string
 
-	// The status of a annotation store version.
+	//  The status of a annotation store version.
 	//
 	// This member is required.
 	Status types.VersionStatus
 
-	// The ID for the annotation store from which new versions are being created.
+	//  The ID for the annotation store from which new versions are being created.
 	//
 	// This member is required.
 	StoreId *string
 
-	// The name given to an annotation store version to distinguish it from other
+	//  The name given to an annotation store version to distinguish it from other
 	// versions.
 	//
 	// This member is required.
 	VersionName *string
 
-	// The options for an annotation store version.
+	//  The options for an annotation store version.
 	VersionOptions types.VersionOptions
 
 	// Metadata pertaining to the operation's result.
@@ -119,25 +118,25 @@ func (c *Client) addOperationCreateAnnotationStoreVersionMiddlewares(stack *midd
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -152,6 +151,9 @@ func (c *Client) addOperationCreateAnnotationStoreVersionMiddlewares(stack *midd
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addEndpointPrefix_opCreateAnnotationStoreVersionMiddleware(stack); err != nil {
 		return err
 	}
@@ -161,7 +163,7 @@ func (c *Client) addOperationCreateAnnotationStoreVersionMiddlewares(stack *midd
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateAnnotationStoreVersion(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

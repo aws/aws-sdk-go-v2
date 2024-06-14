@@ -6,20 +6,21 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/lambda/types"
 	"github.com/aws/smithy-go/middleware"
 	smithysync "github.com/aws/smithy-go/sync"
-	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"sync"
 )
 
 // Configure your Lambda functions to stream response payloads back to clients.
-// For more information, see Configuring a Lambda function to stream responses (https://docs.aws.amazon.com/lambda/latest/dg/configuration-response-streaming.html)
-// . This operation requires permission for the lambda:InvokeFunction (https://docs.aws.amazon.com/IAM/latest/UserGuide/list_awslambda.html)
-// action. For details on how to set up permissions for cross-account invocations,
-// see Granting function access to other accounts (https://docs.aws.amazon.com/lambda/latest/dg/access-control-resource-based.html#permissions-resource-xaccountinvoke)
-// .
+// For more information, see [Configuring a Lambda function to stream responses].
+//
+// This operation requires permission for the [lambda:InvokeFunction] action. For details on how to set
+// up permissions for cross-account invocations, see [Granting function access to other accounts].
+//
+// [Configuring a Lambda function to stream responses]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-response-streaming.html
+// [lambda:InvokeFunction]: https://docs.aws.amazon.com/IAM/latest/UserGuide/list_awslambda.html
+// [Granting function access to other accounts]: https://docs.aws.amazon.com/lambda/latest/dg/access-control-resource-based.html#permissions-resource-xaccountinvoke
 func (c *Client) InvokeWithResponseStream(ctx context.Context, params *InvokeWithResponseStreamInput, optFns ...func(*Options)) (*InvokeWithResponseStreamOutput, error) {
 	if params == nil {
 		params = &InvokeWithResponseStreamInput{}
@@ -37,10 +38,16 @@ func (c *Client) InvokeWithResponseStream(ctx context.Context, params *InvokeWit
 
 type InvokeWithResponseStreamInput struct {
 
-	// The name of the Lambda function. Name formats
+	// The name or ARN of the Lambda function.
+	//
+	// Name formats
+	//
 	//   - Function name – my-function .
+	//
 	//   - Function ARN – arn:aws:lambda:us-west-2:123456789012:function:my-function .
+	//
 	//   - Partial ARN – 123456789012:function:my-function .
+	//
 	// The length constraint applies only to the full ARN. If you specify only the
 	// function name, it is limited to 64 characters in length.
 	//
@@ -52,9 +59,11 @@ type InvokeWithResponseStreamInput struct {
 	ClientContext *string
 
 	// Use one of the following options:
+	//
 	//   - RequestResponse (default) – Invoke the function synchronously. Keep the
 	//   connection open until the function returns a response or times out. The API
 	//   operation response includes the function response and additional data.
+	//
 	//   - DryRun – Validate parameter values and verify that the IAM user or role has
 	//   permission to invoke the function.
 	InvocationType types.ResponseStreamingInvocationType
@@ -63,9 +72,10 @@ type InvokeWithResponseStreamInput struct {
 	// synchronously invoked functions only.
 	LogType types.LogType
 
-	// The JSON that you want to provide to your Lambda function as input. You can
-	// enter the JSON directly. For example, --payload '{ "key": "value" }' . You can
-	// also specify a file path. For example, --payload file://payload.json .
+	// The JSON that you want to provide to your Lambda function as input.
+	//
+	// You can enter the JSON directly. For example, --payload '{ "key": "value" }' .
+	// You can also specify a file path. For example, --payload file://payload.json .
 	Payload []byte
 
 	// The alias name.
@@ -126,25 +136,25 @@ func (c *Client) addOperationInvokeWithResponseStreamMiddlewares(stack *middlewa
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -153,13 +163,16 @@ func (c *Client) addOperationInvokeWithResponseStreamMiddlewares(stack *middlewa
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpInvokeWithResponseStreamValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opInvokeWithResponseStream(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

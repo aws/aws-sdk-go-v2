@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/cloudformation/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -15,10 +14,12 @@ import (
 // Returns information about a new or existing template. The GetTemplateSummary
 // action is useful for viewing parameter information, such as default parameter
 // values and parameter types, before you create or update a stack or stack set.
+//
 // You can use the GetTemplateSummary action when you submit a template, or you
-// can get template information for a stack set, or a running or deleted stack. For
-// deleted stacks, GetTemplateSummary returns the template information for up to
-// 90 days after the stack has been deleted. If the template doesn't exist, a
+// can get template information for a stack set, or a running or deleted stack.
+//
+// For deleted stacks, GetTemplateSummary returns the template information for up
+// to 90 days after the stack has been deleted. If the template doesn't exist, a
 // ValidationError is returned.
 func (c *Client) GetTemplateSummary(ctx context.Context, params *GetTemplateSummaryInput, optFns ...func(*Options)) (*GetTemplateSummaryOutput, error) {
 	if params == nil {
@@ -40,33 +41,45 @@ type GetTemplateSummaryInput struct {
 
 	// [Service-managed permissions] Specifies whether you are acting as an account
 	// administrator in the organization's management account or as a delegated
-	// administrator in a member account. By default, SELF is specified. Use SELF for
-	// stack sets with self-managed permissions.
+	// administrator in a member account.
+	//
+	// By default, SELF is specified. Use SELF for stack sets with self-managed
+	// permissions.
+	//
 	//   - If you are signed in to the management account, specify SELF .
+	//
 	//   - If you are signed in to a delegated administrator account, specify
-	//   DELEGATED_ADMIN . Your Amazon Web Services account must be registered as a
-	//   delegated administrator in the management account. For more information, see
-	//   Register a delegated administrator (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-orgs-delegated-admin.html)
-	//   in the CloudFormation User Guide.
+	//   DELEGATED_ADMIN .
+	//
+	// Your Amazon Web Services account must be registered as a delegated
+	//   administrator in the management account. For more information, see [Register a delegated administrator]in the
+	//   CloudFormation User Guide.
+	//
+	// [Register a delegated administrator]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-orgs-delegated-admin.html
 	CallAs types.CallAs
 
 	// The name or the stack ID that's associated with the stack, which aren't always
 	// interchangeable. For running stacks, you can specify either the stack's name or
 	// its unique stack ID. For deleted stack, you must specify the unique stack ID.
+	//
 	// Conditional: You must specify only one of the following parameters: StackName ,
 	// StackSetName , TemplateBody , or TemplateURL .
 	StackName *string
 
 	// The name or unique ID of the stack set from which the stack was created.
+	//
 	// Conditional: You must specify only one of the following parameters: StackName ,
 	// StackSetName , TemplateBody , or TemplateURL .
 	StackSetName *string
 
 	// Structure containing the template body with a minimum length of 1 byte and a
-	// maximum length of 51,200 bytes. For more information about templates, see
-	// Template anatomy (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/template-anatomy.html)
-	// in the CloudFormation User Guide. Conditional: You must specify only one of the
-	// following parameters: StackName , StackSetName , TemplateBody , or TemplateURL .
+	// maximum length of 51,200 bytes. For more information about templates, see [Template anatomy]in
+	// the CloudFormation User Guide.
+	//
+	// Conditional: You must specify only one of the following parameters: StackName ,
+	// StackSetName , TemplateBody , or TemplateURL .
+	//
+	// [Template anatomy]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/template-anatomy.html
 	TemplateBody *string
 
 	// Specifies options for the GetTemplateSummary API action.
@@ -74,9 +87,14 @@ type GetTemplateSummaryInput struct {
 
 	// Location of file containing the template body. The URL must point to a template
 	// (max size: 460,800 bytes) that's located in an Amazon S3 bucket or a Systems
-	// Manager document. For more information about templates, see Template anatomy (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/template-anatomy.html)
-	// in the CloudFormation User Guide. Conditional: You must specify only one of the
-	// following parameters: StackName , StackSetName , TemplateBody , or TemplateURL .
+	// Manager document. For more information about templates, see [Template anatomy]in the
+	// CloudFormation User Guide. The location for an Amazon S3 bucket must start with
+	// https:// .
+	//
+	// Conditional: You must specify only one of the following parameters: StackName ,
+	// StackSetName , TemplateBody , or TemplateURL .
+	//
+	// [Template anatomy]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/template-anatomy.html
 	TemplateURL *string
 
 	noSmithyDocumentSerde
@@ -87,11 +105,12 @@ type GetTemplateSummaryOutput struct {
 
 	// The capabilities found within the template. If your template contains IAM
 	// resources, you must specify the CAPABILITY_IAM or CAPABILITY_NAMED_IAM value
-	// for this parameter when you use the CreateStack or UpdateStack actions with
-	// your template; otherwise, those actions return an InsufficientCapabilities
-	// error. For more information, see Acknowledging IAM Resources in CloudFormation
-	// Templates (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-iam-template.html#capabilities)
-	// .
+	// for this parameter when you use the CreateStackor UpdateStack actions with your template; otherwise,
+	// those actions return an InsufficientCapabilities error.
+	//
+	// For more information, see [Acknowledging IAM Resources in CloudFormation Templates].
+	//
+	// [Acknowledging IAM Resources in CloudFormation Templates]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-iam-template.html#capabilities
 	Capabilities []types.Capability
 
 	// The list of resources that generated the values in the Capabilities response
@@ -156,25 +175,25 @@ func (c *Client) addOperationGetTemplateSummaryMiddlewares(stack *middleware.Sta
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -189,10 +208,13 @@ func (c *Client) addOperationGetTemplateSummaryMiddlewares(stack *middleware.Sta
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetTemplateSummary(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

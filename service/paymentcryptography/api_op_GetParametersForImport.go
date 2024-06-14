@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/paymentcryptography/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -15,14 +14,24 @@ import (
 
 // Gets the import token and the wrapping key certificate in PEM format (base64
 // encoded) to initiate a TR-34 WrappedKeyBlock or a RSA WrappedKeyCryptogram
-// import into Amazon Web Services Payment Cryptography. The wrapping key
-// certificate wraps the key under import. The import token and wrapping key
-// certificate must be in place and operational before calling ImportKey . The
+// import into Amazon Web Services Payment Cryptography.
+//
+// The wrapping key certificate wraps the key under import. The import token and
+// wrapping key certificate must be in place and operational before calling [ImportKey]. The
 // import token expires in 7 days. You can use the same import token to import
-// multiple keys into your service account. Cross-account use: This operation can't
-// be used across different Amazon Web Services accounts. Related operations:
-//   - GetParametersForExport
-//   - ImportKey
+// multiple keys into your service account.
+//
+// Cross-account use: This operation can't be used across different Amazon Web
+// Services accounts.
+//
+// Related operations:
+//
+// [GetParametersForExport]
+//
+// [ImportKey]
+//
+// [GetParametersForExport]: https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_GetParametersForExport.html
+// [ImportKey]: https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_ImportKey.html
 func (c *Client) GetParametersForImport(ctx context.Context, params *GetParametersForImportInput, optFns ...func(*Options)) (*GetParametersForImportOutput, error) {
 	if params == nil {
 		params = &GetParametersForImportInput{}
@@ -42,16 +51,20 @@ type GetParametersForImportInput struct {
 
 	// The method to use for key material import. Import token is only required for
 	// TR-34 WrappedKeyBlock ( TR34_KEY_BLOCK ) and RSA WrappedKeyCryptogram (
-	// KEY_CRYPTOGRAM ). Import token is not required for TR-31, root public key
-	// cerificate or trusted public key certificate.
+	// KEY_CRYPTOGRAM ).
+	//
+	// Import token is not required for TR-31, root public key cerificate or trusted
+	// public key certificate.
 	//
 	// This member is required.
 	KeyMaterialType types.KeyMaterialType
 
 	// The wrapping key algorithm to generate a wrapping key certificate. This
-	// certificate wraps the key under import. At this time, RSA_2048 is the allowed
-	// algorithm for TR-34 WrappedKeyBlock import. Additionally, RSA_2048 , RSA_3072 ,
-	// RSA_4096 are the allowed algorithms for RSA WrappedKeyCryptogram import.
+	// certificate wraps the key under import.
+	//
+	// At this time, RSA_2048 is the allowed algorithm for TR-34 WrappedKeyBlock
+	// import. Additionally, RSA_2048 , RSA_3072 , RSA_4096 are the allowed algorithms
+	// for RSA WrappedKeyCryptogram import.
 	//
 	// This member is required.
 	WrappingKeyAlgorithm types.KeyAlgorithm
@@ -119,25 +132,25 @@ func (c *Client) addOperationGetParametersForImportMiddlewares(stack *middleware
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -152,13 +165,16 @@ func (c *Client) addOperationGetParametersForImportMiddlewares(stack *middleware
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpGetParametersForImportValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetParametersForImport(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

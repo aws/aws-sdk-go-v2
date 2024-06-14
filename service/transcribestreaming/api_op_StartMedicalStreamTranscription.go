@@ -7,7 +7,6 @@ import (
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/protocol/eventstream/eventstreamapi"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/transcribestreaming/types"
 	"github.com/aws/smithy-go/middleware"
 	smithysync "github.com/aws/smithy-go/sync"
@@ -18,14 +17,19 @@ import (
 
 // Starts a bidirectional HTTP/2 or WebSocket stream where audio is streamed to
 // Amazon Transcribe Medical and the transcription results are streamed to your
-// application. The following parameters are required:
+// application.
+//
+// The following parameters are required:
+//
 //   - language-code
+//
 //   - media-encoding
+//
 //   - sample-rate
 //
-// For more information on streaming with Amazon Transcribe Medical, see
-// Transcribing streaming audio (https://docs.aws.amazon.com/transcribe/latest/dg/streaming.html)
-// .
+// For more information on streaming with Amazon Transcribe Medical, see [Transcribing streaming audio].
+//
+// [Transcribing streaming audio]: https://docs.aws.amazon.com/transcribe/latest/dg/streaming.html
 func (c *Client) StartMedicalStreamTranscription(ctx context.Context, params *StartMedicalStreamTranscriptionInput, optFns ...func(*Options)) (*StartMedicalStreamTranscriptionOutput, error) {
 	if params == nil {
 		params = &StartMedicalStreamTranscriptionInput{}
@@ -44,18 +48,24 @@ func (c *Client) StartMedicalStreamTranscription(ctx context.Context, params *St
 type StartMedicalStreamTranscriptionInput struct {
 
 	// Specify the language code that represents the language spoken in your audio.
+	//
 	// Amazon Transcribe Medical only supports US English ( en-US ).
 	//
 	// This member is required.
 	LanguageCode types.LanguageCode
 
 	// Specify the encoding used for the input audio. Supported formats are:
+	//
 	//   - FLAC
+	//
 	//   - OPUS-encoded audio in an Ogg container
+	//
 	//   - PCM (only signed 16-bit little-endian audio formats, which does not include
 	//   WAV)
-	// For more information, see Media formats (https://docs.aws.amazon.com/transcribe/latest/dg/how-input.html#how-input-audio)
-	// .
+	//
+	// For more information, see [Media formats].
+	//
+	// [Media formats]: https://docs.aws.amazon.com/transcribe/latest/dg/how-input.html#how-input-audio
 	//
 	// This member is required.
 	MediaEncoding types.MediaEncoding
@@ -80,19 +90,27 @@ type StartMedicalStreamTranscriptionInput struct {
 	Type types.Type
 
 	// Labels all personal health information (PHI) identified in your transcript.
+	//
 	// Content identification is performed at the segment level; PHI is flagged upon
-	// complete transcription of an audio segment. For more information, see
-	// Identifying personal health information (PHI) in a transcription (https://docs.aws.amazon.com/transcribe/latest/dg/phi-id.html)
-	// .
+	// complete transcription of an audio segment.
+	//
+	// For more information, see [Identifying personal health information (PHI) in a transcription].
+	//
+	// [Identifying personal health information (PHI) in a transcription]: https://docs.aws.amazon.com/transcribe/latest/dg/phi-id.html
 	ContentIdentificationType types.MedicalContentIdentificationType
 
-	// Enables channel identification in multi-channel audio. Channel identification
-	// transcribes the audio on each channel independently, then appends the output for
-	// each channel into one transcript. If you have multi-channel audio and do not
-	// enable channel identification, your audio is transcribed in a continuous manner
-	// and your transcript is not separated by channel. For more information, see
-	// Transcribing multi-channel audio (https://docs.aws.amazon.com/transcribe/latest/dg/channel-id.html)
-	// .
+	// Enables channel identification in multi-channel audio.
+	//
+	// Channel identification transcribes the audio on each channel independently,
+	// then appends the output for each channel into one transcript.
+	//
+	// If you have multi-channel audio and do not enable channel identification, your
+	// audio is transcribed in a continuous manner and your transcript is not separated
+	// by channel.
+	//
+	// For more information, see [Transcribing multi-channel audio].
+	//
+	// [Transcribing multi-channel audio]: https://docs.aws.amazon.com/transcribe/latest/dg/channel-id.html
 	EnableChannelIdentification bool
 
 	// Specify the number of channels in your audio stream. Up to two channels are
@@ -101,13 +119,18 @@ type StartMedicalStreamTranscriptionInput struct {
 
 	// Specify a name for your transcription session. If you don't include this
 	// parameter in your request, Amazon Transcribe Medical generates an ID and returns
-	// it in the response. You can use a session ID to retry a streaming session.
+	// it in the response.
+	//
+	// You can use a session ID to retry a streaming session.
 	SessionId *string
 
 	// Enables speaker partitioning (diarization) in your transcription output.
 	// Speaker partitioning labels the speech from individual speakers in your media
-	// file. For more information, see Partitioning speakers (diarization) (https://docs.aws.amazon.com/transcribe/latest/dg/diarization.html)
-	// .
+	// file.
+	//
+	// For more information, see [Partitioning speakers (diarization)].
+	//
+	// [Partitioning speakers (diarization)]: https://docs.aws.amazon.com/transcribe/latest/dg/diarization.html
 	ShowSpeakerLabel bool
 
 	// Specify the name of the custom vocabulary that you want to use when processing
@@ -197,25 +220,25 @@ func (c *Client) addOperationStartMedicalStreamTranscriptionMiddlewares(stack *m
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddStreamingEventsPayload(stack); err != nil {
+	if err = addStreamingEventsPayload(stack); err != nil {
 		return err
 	}
-	if err = v4.AddContentSHA256HeaderMiddleware(stack); err != nil {
+	if err = addContentSHA256Header(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -227,13 +250,16 @@ func (c *Client) addOperationStartMedicalStreamTranscriptionMiddlewares(stack *m
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpStartMedicalStreamTranscriptionValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opStartMedicalStreamTranscription(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

@@ -6,13 +6,12 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/qbusiness/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists Amazon Q applications.
+// Lists Amazon Q Business applications.
 func (c *Client) ListApplications(ctx context.Context, params *ListApplicationsInput, optFns ...func(*Options)) (*ListApplicationsOutput, error) {
 	if params == nil {
 		params = &ListApplicationsInput{}
@@ -30,12 +29,13 @@ func (c *Client) ListApplications(ctx context.Context, params *ListApplicationsI
 
 type ListApplicationsInput struct {
 
-	// The maximum number of Amazon Q applications to return.
+	// The maximum number of Amazon Q Business applications to return.
 	MaxResults *int32
 
 	// If the maxResults response was incomplete because there is more data to
-	// retrieve, Amazon Q returns a pagination token in the response. You can use this
-	// pagination token to retrieve the next set of Amazon Q applications.
+	// retrieve, Amazon Q Business returns a pagination token in the response. You can
+	// use this pagination token to retrieve the next set of Amazon Q Business
+	// applications.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -44,11 +44,11 @@ type ListApplicationsInput struct {
 type ListApplicationsOutput struct {
 
 	// An array of summary information on the configuration of one or more Amazon Q
-	// applications.
+	// Business applications.
 	Applications []types.Application
 
-	// If the response is truncated, Amazon Q returns this token. You can use this
-	// token in a subsequent request to retrieve the next set of applications.
+	// If the response is truncated, Amazon Q Business returns this token. You can use
+	// this token in a subsequent request to retrieve the next set of applications.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -79,25 +79,25 @@ func (c *Client) addOperationListApplicationsMiddlewares(stack *middleware.Stack
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -112,10 +112,13 @@ func (c *Client) addOperationListApplicationsMiddlewares(stack *middleware.Stack
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListApplications(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -143,7 +146,7 @@ var _ ListApplicationsAPIClient = (*Client)(nil)
 
 // ListApplicationsPaginatorOptions is the paginator options for ListApplications
 type ListApplicationsPaginatorOptions struct {
-	// The maximum number of Amazon Q applications to return.
+	// The maximum number of Amazon Q Business applications to return.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

@@ -82,8 +82,11 @@ type ContactChannel struct {
 
 	// The type of the contact channel. Incident Manager supports three contact
 	// methods:
+	//
 	//   - SMS
+	//
 	//   - VOICE
+	//
 	//   - EMAIL
 	Type ChannelType
 
@@ -96,8 +99,11 @@ type ContactChannelAddress struct {
 
 	// The format is dependent on the type of the contact channel. The following are
 	// the expected formats:
+	//
 	//   - SMS - '+' followed by the country code and phone number
+	//
 	//   - VOICE - '+' followed by the country code and phone number
+	//
 	//   - EMAIL - any standard email format
 	SimpleAddress *string
 
@@ -132,8 +138,9 @@ type CoverageTime struct {
 }
 
 // Information about a resource that another resource is related to or depends on.
-// For example, if a contact is a member of a rotation, the rotation is a dependent
-// entity of the contact.
+//
+// For example, if a contact is a member of a rotation, the rotation is a
+// dependent entity of the contact.
 type DependentEntity struct {
 
 	// The Amazon Resource Names (ARNs) of the dependent resources.
@@ -337,10 +344,11 @@ type RecurrenceSettings struct {
 
 // Information about the engagement resolution steps. The resolution starts from
 // the first contact, which can be an escalation plan, then resolves to an on-call
-// rotation, and finally to a personal contact. The ResolutionContact structure
-// describes the information for each node or step in that process. It contains
-// information about different contact types, such as the escalation, rotation, and
-// personal contacts.
+// rotation, and finally to a personal contact.
+//
+// The ResolutionContact structure describes the information for each node or step
+// in that process. It contains information about different contact types, such as
+// the escalation, rotation, and personal contacts.
 type ResolutionContact struct {
 
 	// The Amazon Resource Name (ARN) of a contact in the engagement resolution

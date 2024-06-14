@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/lookoutequipment/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -31,7 +30,7 @@ func (c *Client) StartDataIngestionJob(ctx context.Context, params *StartDataIng
 
 type StartDataIngestionJobInput struct {
 
-	// A unique identifier for the request. If you do not set the client request
+	//  A unique identifier for the request. If you do not set the client request
 	// token, Amazon Lookout for Equipment generates one.
 	//
 	// This member is required.
@@ -42,13 +41,13 @@ type StartDataIngestionJobInput struct {
 	// This member is required.
 	DatasetName *string
 
-	// Specifies information for the input data for the data ingestion job, including
+	//  Specifies information for the input data for the data ingestion job, including
 	// dataset S3 location.
 	//
 	// This member is required.
 	IngestionInputConfiguration *types.IngestionInputConfiguration
 
-	// The Amazon Resource Name (ARN) of a role with permission to access the data
+	//  The Amazon Resource Name (ARN) of a role with permission to access the data
 	// source for the data ingestion job.
 	//
 	// This member is required.
@@ -93,25 +92,25 @@ func (c *Client) addOperationStartDataIngestionJobMiddlewares(stack *middleware.
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -126,6 +125,9 @@ func (c *Client) addOperationStartDataIngestionJobMiddlewares(stack *middleware.
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opStartDataIngestionJobMiddleware(stack, options); err != nil {
 		return err
 	}
@@ -135,7 +137,7 @@ func (c *Client) addOperationStartDataIngestionJobMiddlewares(stack *middleware.
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opStartDataIngestionJob(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

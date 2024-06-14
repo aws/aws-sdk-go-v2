@@ -6,20 +6,21 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/opsworkscm/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Disassociates a node from an AWS OpsWorks CM server, and removes the node from
+//	Disassociates a node from an AWS OpsWorks CM server, and removes the node from
+//
 // the server's managed nodes. After a node is disassociated, the node key pair is
 // no longer valid for accessing the configuration manager's API. For more
-// information about how to associate a node, see AssociateNode . A node can can
-// only be disassociated from a server that is in a HEALTHY state. Otherwise, an
-// InvalidStateException is thrown. A ResourceNotFoundException is thrown when the
-// server does not exist. A ValidationException is raised when parameters of the
-// request are not valid.
+// information about how to associate a node, see AssociateNode.
+//
+// A node can can only be disassociated from a server that is in a HEALTHY state.
+// Otherwise, an InvalidStateException is thrown. A ResourceNotFoundException is
+// thrown when the server does not exist. A ValidationException is raised when
+// parameters of the request are not valid.
 func (c *Client) DisassociateNode(ctx context.Context, params *DisassociateNodeInput, optFns ...func(*Options)) (*DisassociateNodeOutput, error) {
 	if params == nil {
 		params = &DisassociateNodeInput{}
@@ -48,7 +49,10 @@ type DisassociateNodeInput struct {
 	ServerName *string
 
 	// Engine attributes that are used for disassociating the node. No attributes are
-	// required for Puppet. Attributes required in a DisassociateNode request for Chef
+	// required for Puppet.
+	//
+	// Attributes required in a DisassociateNode request for Chef
+	//
 	//   - CHEF_ORGANIZATION : The Chef organization with which the node was
 	//   associated. By default only one organization named default can exist.
 	EngineAttributes []types.EngineAttribute
@@ -90,25 +94,25 @@ func (c *Client) addOperationDisassociateNodeMiddlewares(stack *middleware.Stack
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -123,13 +127,16 @@ func (c *Client) addOperationDisassociateNodeMiddlewares(stack *middleware.Stack
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDisassociateNodeValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDisassociateNode(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

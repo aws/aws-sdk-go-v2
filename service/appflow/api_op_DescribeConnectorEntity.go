@@ -6,13 +6,13 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/appflow/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Provides details regarding the entity used with the connector, with a
+//	Provides details regarding the entity used with the connector, with a
+//
 // description of the data model for each field in that entity.
 func (c *Client) DescribeConnectorEntity(ctx context.Context, params *DescribeConnectorEntityInput, optFns ...func(*Options)) (*DescribeConnectorEntityOutput, error) {
 	if params == nil {
@@ -31,7 +31,7 @@ func (c *Client) DescribeConnectorEntity(ctx context.Context, params *DescribeCo
 
 type DescribeConnectorEntityInput struct {
 
-	// The entity name for that connector.
+	//  The entity name for that connector.
 	//
 	// This member is required.
 	ConnectorEntityName *string
@@ -39,11 +39,11 @@ type DescribeConnectorEntityInput struct {
 	// The version of the API that's used by the connector.
 	ApiVersion *string
 
-	// The name of the connector profile. The name is unique for each ConnectorProfile
+	//  The name of the connector profile. The name is unique for each ConnectorProfile
 	// in the Amazon Web Services account.
 	ConnectorProfileName *string
 
-	// The type of connector application, such as Salesforce, Amplitude, and so on.
+	//  The type of connector application, such as Salesforce, Amplitude, and so on.
 	ConnectorType types.ConnectorType
 
 	noSmithyDocumentSerde
@@ -51,7 +51,7 @@ type DescribeConnectorEntityInput struct {
 
 type DescribeConnectorEntityOutput struct {
 
-	// Describes the fields for that connector entity. For example, for an account
+	//  Describes the fields for that connector entity. For example, for an account
 	// entity, the fields would be account name, account ID, and so on.
 	//
 	// This member is required.
@@ -85,25 +85,25 @@ func (c *Client) addOperationDescribeConnectorEntityMiddlewares(stack *middlewar
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -118,13 +118,16 @@ func (c *Client) addOperationDescribeConnectorEntityMiddlewares(stack *middlewar
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDescribeConnectorEntityValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeConnectorEntity(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

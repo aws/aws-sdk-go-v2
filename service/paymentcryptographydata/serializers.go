@@ -1523,6 +1523,43 @@ func awsRestjson1_serializeDocumentDynamicCardVerificationValue(v *types.Dynamic
 	return nil
 }
 
+func awsRestjson1_serializeDocumentEmvEncryptionAttributes(v *types.EmvEncryptionAttributes, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.InitializationVector != nil {
+		ok := object.Key("InitializationVector")
+		ok.String(*v.InitializationVector)
+	}
+
+	if len(v.MajorKeyDerivationMode) > 0 {
+		ok := object.Key("MajorKeyDerivationMode")
+		ok.String(string(v.MajorKeyDerivationMode))
+	}
+
+	if len(v.Mode) > 0 {
+		ok := object.Key("Mode")
+		ok.String(string(v.Mode))
+	}
+
+	if v.PanSequenceNumber != nil {
+		ok := object.Key("PanSequenceNumber")
+		ok.String(*v.PanSequenceNumber)
+	}
+
+	if v.PrimaryAccountNumber != nil {
+		ok := object.Key("PrimaryAccountNumber")
+		ok.String(*v.PrimaryAccountNumber)
+	}
+
+	if v.SessionDerivationData != nil {
+		ok := object.Key("SessionDerivationData")
+		ok.String(*v.SessionDerivationData)
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentEncryptionDecryptionAttributes(v types.EncryptionDecryptionAttributes, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -1537,6 +1574,12 @@ func awsRestjson1_serializeDocumentEncryptionDecryptionAttributes(v types.Encryp
 	case *types.EncryptionDecryptionAttributesMemberDukpt:
 		av := object.Key("Dukpt")
 		if err := awsRestjson1_serializeDocumentDukptEncryptionAttributes(&uv.Value, av); err != nil {
+			return err
+		}
+
+	case *types.EncryptionDecryptionAttributesMemberEmv:
+		av := object.Key("Emv")
+		if err := awsRestjson1_serializeDocumentEmvEncryptionAttributes(&uv.Value, av); err != nil {
 			return err
 		}
 

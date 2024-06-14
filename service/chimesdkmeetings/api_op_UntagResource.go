@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -15,18 +14,24 @@ import (
 // key, the action removes both that key and its associated value. The operation
 // succeeds even if you attempt to remove tags from a resource that were already
 // removed. Note the following:
+//
 //   - To remove tags from a resource, you need the necessary permissions for the
 //     service that the resource belongs to as well as permissions for removing tags.
 //     For more information, see the documentation for the service whose resource you
 //     want to untag.
+//
 //   - You can only tag resources that are located in the specified Amazon Web
 //     Services Region for the calling Amazon Web Services account.
 //
-// Minimum permissions In addition to the tag:UntagResources permission required
-// by this operation, you must also have the remove tags permission defined by the
-// service that created the resource. For example, to remove the tags from an
-// Amazon EC2 instance using the UntagResources operation, you must have both of
-// the following permissions: tag:UntagResource
+// # Minimum permissions
+//
+// In addition to the tag:UntagResources permission required by this operation,
+// you must also have the remove tags permission defined by the service that
+// created the resource. For example, to remove the tags from an Amazon EC2
+// instance using the UntagResources operation, you must have both of the
+// following permissions:
+//
+//	tag:UntagResource
 //
 //	ChimeSDKMeetings:DeleteTags
 func (c *Client) UntagResource(ctx context.Context, params *UntagResourceInput, optFns ...func(*Options)) (*UntagResourceOutput, error) {
@@ -88,25 +93,25 @@ func (c *Client) addOperationUntagResourceMiddlewares(stack *middleware.Stack, o
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -121,13 +126,16 @@ func (c *Client) addOperationUntagResourceMiddlewares(stack *middleware.Stack, o
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpUntagResourceValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUntagResource(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/organizations/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -14,13 +13,16 @@ import (
 
 // Lists the policies that are directly attached to the specified target root,
 // organizational unit (OU), or account. You must specify the policy type that you
-// want included in the returned list. Always check the NextToken response
-// parameter for a null value when calling a List* operation. These operations can
-// occasionally return an empty set of results even when there are more results
-// available. The NextToken response parameter value is null only when there are
-// no more results to display. This operation can be called only from the
-// organization's management account or by a member account that is a delegated
-// administrator for an Amazon Web Services service.
+// want included in the returned list.
+//
+// Always check the NextToken response parameter for a null value when calling a
+// List* operation. These operations can occasionally return an empty set of
+// results even when there are more results available. The NextToken response
+// parameter value is null only when there are no more results to display.
+//
+// This operation can be called only from the organization's management account or
+// by a member account that is a delegated administrator for an Amazon Web Services
+// service.
 func (c *Client) ListPoliciesForTarget(ctx context.Context, params *ListPoliciesForTargetInput, optFns ...func(*Options)) (*ListPoliciesForTargetOutput, error) {
 	if params == nil {
 		params = &ListPoliciesForTargetInput{}
@@ -40,24 +42,39 @@ type ListPoliciesForTargetInput struct {
 
 	// The type of policy that you want to include in the returned list. You must
 	// specify one of the following values:
-	//   - AISERVICES_OPT_OUT_POLICY (https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_ai-opt-out.html)
-	//   - BACKUP_POLICY (https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_backup.html)
-	//   - SERVICE_CONTROL_POLICY (https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_scp.html)
-	//   - TAG_POLICY (https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_tag-policies.html)
+	//
+	// [AISERVICES_OPT_OUT_POLICY]
+	//
+	// [BACKUP_POLICY]
+	//
+	// [SERVICE_CONTROL_POLICY]
+	//
+	// [TAG_POLICY]
+	//
+	// [AISERVICES_OPT_OUT_POLICY]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_ai-opt-out.html
+	// [BACKUP_POLICY]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_backup.html
+	// [SERVICE_CONTROL_POLICY]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_scp.html
+	// [TAG_POLICY]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_tag-policies.html
 	//
 	// This member is required.
 	Filter types.PolicyType
 
 	// The unique identifier (ID) of the root, organizational unit, or account whose
-	// policies you want to list. The regex pattern (http://wikipedia.org/wiki/regex)
-	// for a target ID string requires one of the following:
+	// policies you want to list.
+	//
+	// The [regex pattern] for a target ID string requires one of the following:
+	//
 	//   - Root - A string that begins with "r-" followed by from 4 to 32 lowercase
 	//   letters or digits.
+	//
 	//   - Account - A string that consists of exactly 12 digits.
+	//
 	//   - Organizational unit (OU) - A string that begins with "ou-" followed by from
 	//   4 to 32 lowercase letters or digits (the ID of the root that the OU is in). This
 	//   string is followed by a second "-" dash and from 8 to 32 additional lowercase
 	//   letters or digits.
+	//
+	// [regex pattern]: http://wikipedia.org/wiki/regex
 	//
 	// This member is required.
 	TargetId *string
@@ -121,25 +138,25 @@ func (c *Client) addOperationListPoliciesForTargetMiddlewares(stack *middleware.
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -154,13 +171,16 @@ func (c *Client) addOperationListPoliciesForTargetMiddlewares(stack *middleware.
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpListPoliciesForTargetValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListPoliciesForTarget(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

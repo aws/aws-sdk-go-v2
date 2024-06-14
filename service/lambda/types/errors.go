@@ -38,8 +38,9 @@ func (e *CodeSigningConfigNotFoundException) ErrorFault() smithy.ErrorFault {
 }
 
 // Your Amazon Web Services account has exceeded its maximum total code size. For
-// more information, see Lambda quotas (https://docs.aws.amazon.com/lambda/latest/dg/gettingstarted-limits.html)
-// .
+// more information, see [Lambda quotas].
+//
+// [Lambda quotas]: https://docs.aws.amazon.com/lambda/latest/dg/gettingstarted-limits.html
 type CodeStorageExceededException struct {
 	Message *string
 
@@ -301,8 +302,9 @@ func (e *EFSMountTimeoutException) ErrorFault() smithy.ErrorFault { return smith
 
 // Lambda couldn't create an elastic network interface in the VPC, specified as
 // part of Lambda function configuration, because the limit for network interfaces
-// has been reached. For more information, see Lambda quotas (https://docs.aws.amazon.com/lambda/latest/dg/gettingstarted-limits.html)
-// .
+// has been reached. For more information, see [Lambda quotas].
+//
+// [Lambda quotas]: https://docs.aws.amazon.com/lambda/latest/dg/gettingstarted-limits.html
 type ENILimitReachedException struct {
 	Message *string
 
@@ -644,9 +646,10 @@ func (e *KMSNotFoundException) ErrorCode() string {
 }
 func (e *KMSNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
-// The permissions policy for the resource is too large. For more information, see
-// Lambda quotas (https://docs.aws.amazon.com/lambda/latest/dg/gettingstarted-limits.html)
+// The permissions policy for the resource is too large. For more information, see [Lambda quotas]
 // .
+//
+// [Lambda quotas]: https://docs.aws.amazon.com/lambda/latest/dg/gettingstarted-limits.html
 type PolicyLengthExceededException struct {
 	Message *string
 
@@ -764,8 +767,9 @@ func (e *RecursiveInvocationException) ErrorCode() string {
 func (e *RecursiveInvocationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The request payload exceeded the Invoke request body JSON input quota. For more
-// information, see Lambda quotas (https://docs.aws.amazon.com/lambda/latest/dg/gettingstarted-limits.html)
-// .
+// information, see [Lambda quotas].
+//
+// [Lambda quotas]: https://docs.aws.amazon.com/lambda/latest/dg/gettingstarted-limits.html
 type RequestTooLargeException struct {
 	Message *string
 
@@ -936,8 +940,10 @@ func (e *ServiceException) ErrorCode() string {
 }
 func (e *ServiceException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
-// The afterRestore() runtime hook (https://docs.aws.amazon.com/lambda/latest/dg/snapstart-runtime-hooks.html)
-// encountered an error. For more information, check the Amazon CloudWatch logs.
+// The afterRestore()[runtime hook] encountered an error. For more information, check the Amazon
+// CloudWatch logs.
+//
+// [runtime hook]: https://docs.aws.amazon.com/lambda/latest/dg/snapstart-runtime-hooks.html
 type SnapStartException struct {
 	Message *string
 
@@ -965,9 +971,10 @@ func (e *SnapStartException) ErrorCode() string {
 }
 func (e *SnapStartException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// Lambda is initializing your function. You can invoke the function when the
-// function state (https://docs.aws.amazon.com/lambda/latest/dg/functions-states.html)
+// Lambda is initializing your function. You can invoke the function when the [function state]
 // becomes Active .
+//
+// [function state]: https://docs.aws.amazon.com/lambda/latest/dg/functions-states.html
 type SnapStartNotReadyException struct {
 	Message *string
 
@@ -1054,9 +1061,9 @@ func (e *SubnetIPAddressLimitReachedException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultServer
 }
 
-// The request throughput limit was exceeded. For more information, see Lambda
-// quotas (https://docs.aws.amazon.com/lambda/latest/dg/gettingstarted-limits.html#api-requests)
-// .
+// The request throughput limit was exceeded. For more information, see [Lambda quotas].
+//
+// [Lambda quotas]: https://docs.aws.amazon.com/lambda/latest/dg/gettingstarted-limits.html#api-requests
 type TooManyRequestsException struct {
 	Message *string
 

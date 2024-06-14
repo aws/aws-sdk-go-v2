@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -14,8 +13,9 @@ import (
 // Add or change the operations role used by an environment. After this call is
 // made, Elastic Beanstalk uses the associated operations role for permissions to
 // downstream services during subsequent calls acting on this environment. For more
-// information, see Operations roles (https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/iam-operationsrole.html)
-// in the AWS Elastic Beanstalk Developer Guide.
+// information, see [Operations roles]in the AWS Elastic Beanstalk Developer Guide.
+//
+// [Operations roles]: https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/iam-operationsrole.html
 func (c *Client) AssociateEnvironmentOperationsRole(ctx context.Context, params *AssociateEnvironmentOperationsRoleInput, optFns ...func(*Options)) (*AssociateEnvironmentOperationsRoleOutput, error) {
 	if params == nil {
 		params = &AssociateEnvironmentOperationsRoleInput{}
@@ -77,25 +77,25 @@ func (c *Client) addOperationAssociateEnvironmentOperationsRoleMiddlewares(stack
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -110,13 +110,16 @@ func (c *Client) addOperationAssociateEnvironmentOperationsRoleMiddlewares(stack
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpAssociateEnvironmentOperationsRoleValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opAssociateEnvironmentOperationsRole(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

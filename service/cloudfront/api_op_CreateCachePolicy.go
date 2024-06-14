@@ -6,18 +6,21 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/cloudfront/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a cache policy. After you create a cache policy, you can attach it to
-// one or more cache behaviors. When it's attached to a cache behavior, the cache
-// policy determines the following:
+// Creates a cache policy.
+//
+// After you create a cache policy, you can attach it to one or more cache
+// behaviors. When it's attached to a cache behavior, the cache policy determines
+// the following:
+//
 //   - The values that CloudFront includes in the cache key. These values can
 //     include HTTP headers, cookies, and URL query strings. CloudFront uses the cache
 //     key to find an object in its cache that it can return to the viewer.
+//
 //   - The default, minimum, and maximum time to live (TTL) values that you want
 //     objects to stay in the CloudFront cache.
 //
@@ -25,9 +28,12 @@ import (
 // also included in requests that CloudFront sends to the origin. CloudFront sends
 // a request when it can't find an object in its cache that matches the request's
 // cache key. If you want to send values to the origin but not include them in the
-// cache key, use OriginRequestPolicy . For more information about cache policies,
-// see Controlling the cache key (https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/controlling-the-cache-key.html)
-// in the Amazon CloudFront Developer Guide.
+// cache key, use OriginRequestPolicy .
+//
+// For more information about cache policies, see [Controlling the cache key] in the Amazon CloudFront
+// Developer Guide.
+//
+// [Controlling the cache key]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/controlling-the-cache-key.html
 func (c *Client) CreateCachePolicy(ctx context.Context, params *CreateCachePolicyInput, optFns ...func(*Options)) (*CreateCachePolicyOutput, error) {
 	if params == nil {
 		params = &CreateCachePolicyInput{}
@@ -92,25 +98,25 @@ func (c *Client) addOperationCreateCachePolicyMiddlewares(stack *middleware.Stac
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -125,13 +131,16 @@ func (c *Client) addOperationCreateCachePolicyMiddlewares(stack *middleware.Stac
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpCreateCachePolicyValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateCachePolicy(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/computeoptimizer/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -14,12 +13,14 @@ import (
 )
 
 // Returns the projected utilization metrics of Amazon EC2 instance
-// recommendations. The Cpu and Memory metrics are the only projected utilization
-// metrics returned when you run this action. Additionally, the Memory metric is
-// returned only for resources that have the unified CloudWatch agent installed on
-// them. For more information, see Enabling Memory Utilization with the CloudWatch
-// Agent (https://docs.aws.amazon.com/compute-optimizer/latest/ug/metrics.html#cw-agent)
-// .
+// recommendations.
+//
+// The Cpu and Memory metrics are the only projected utilization metrics returned
+// when you run this action. Additionally, the Memory metric is returned only for
+// resources that have the unified CloudWatch agent installed on them. For more
+// information, see [Enabling Memory Utilization with the CloudWatch Agent].
+//
+// [Enabling Memory Utilization with the CloudWatch Agent]: https://docs.aws.amazon.com/compute-optimizer/latest/ug/metrics.html#cw-agent
 func (c *Client) GetEC2RecommendationProjectedMetrics(ctx context.Context, params *GetEC2RecommendationProjectedMetricsInput, optFns ...func(*Options)) (*GetEC2RecommendationProjectedMetricsOutput, error) {
 	if params == nil {
 		params = &GetEC2RecommendationProjectedMetricsInput{}
@@ -103,25 +104,25 @@ func (c *Client) addOperationGetEC2RecommendationProjectedMetricsMiddlewares(sta
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -136,13 +137,16 @@ func (c *Client) addOperationGetEC2RecommendationProjectedMetricsMiddlewares(sta
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpGetEC2RecommendationProjectedMetricsValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetEC2RecommendationProjectedMetrics(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

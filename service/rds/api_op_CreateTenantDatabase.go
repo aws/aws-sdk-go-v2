@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/rds/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -38,8 +37,12 @@ type CreateTenantDatabaseInput struct {
 	// This member is required.
 	DBInstanceIdentifier *string
 
-	// The password for the master user in your tenant database. Constraints:
+	// The password for the master user in your tenant database.
+	//
+	// Constraints:
+	//
 	//   - Must be 8 to 30 characters.
+	//
 	//   - Can include any printable ASCII character except forward slash ( / ), double
 	//   quote ( " ), at symbol ( @ ), ampersand ( & ), or single quote ( ' ).
 	//
@@ -48,9 +51,14 @@ type CreateTenantDatabaseInput struct {
 
 	// The name for the master user account in your tenant database. RDS creates this
 	// user account in the tenant database and grants privileges to the master user.
-	// This parameter is case-sensitive. Constraints:
+	// This parameter is case-sensitive.
+	//
+	// Constraints:
+	//
 	//   - Must be 1 to 16 letters, numbers, or underscores.
+	//
 	//   - First character must be a letter.
+	//
 	//   - Can't be a reserved word for the chosen database engine.
 	//
 	// This member is required.
@@ -70,8 +78,9 @@ type CreateTenantDatabaseInput struct {
 	// The NCHAR value for the tenant database.
 	NcharCharacterSetName *string
 
-	// A list of tags. For more information, see Tagging Amazon RDS Resources (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html)
-	// in the Amazon RDS User Guide.
+	// A list of tags. For more information, see [Tagging Amazon RDS Resources] in the Amazon RDS User Guide.
+	//
+	// [Tagging Amazon RDS Resources]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html
 	Tags []types.Tag
 
 	noSmithyDocumentSerde
@@ -111,25 +120,25 @@ func (c *Client) addOperationCreateTenantDatabaseMiddlewares(stack *middleware.S
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -144,13 +153,16 @@ func (c *Client) addOperationCreateTenantDatabaseMiddlewares(stack *middleware.S
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpCreateTenantDatabaseValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateTenantDatabase(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

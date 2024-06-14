@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/autoscaling/types"
 	"github.com/aws/smithy-go/middleware"
 	smithytime "github.com/aws/smithy-go/time"
@@ -17,14 +16,17 @@ import (
 	"time"
 )
 
-// Gets information about the Auto Scaling groups in the account and Region. If
-// you specify Auto Scaling group names, the output includes information for only
-// the specified Auto Scaling groups. If you specify filters, the output includes
-// information for only those Auto Scaling groups that meet the filter criteria. If
-// you do not specify group names or filters, the output includes information for
-// all Auto Scaling groups. This operation also returns information about instances
-// in Auto Scaling groups. To retrieve information about the instances in a warm
-// pool, you must call the DescribeWarmPool API.
+// Gets information about the Auto Scaling groups in the account and Region.
+//
+// If you specify Auto Scaling group names, the output includes information for
+// only the specified Auto Scaling groups. If you specify filters, the output
+// includes information for only those Auto Scaling groups that meet the filter
+// criteria. If you do not specify group names or filters, the output includes
+// information for all Auto Scaling groups.
+//
+// This operation also returns information about instances in Auto Scaling groups.
+// To retrieve information about the instances in a warm pool, you must call the DescribeWarmPool
+// API.
 func (c *Client) DescribeAutoScalingGroups(ctx context.Context, params *DescribeAutoScalingGroupsInput, optFns ...func(*Options)) (*DescribeAutoScalingGroupsOutput, error) {
 	if params == nil {
 		params = &DescribeAutoScalingGroupsInput{}
@@ -43,8 +45,9 @@ func (c *Client) DescribeAutoScalingGroups(ctx context.Context, params *Describe
 type DescribeAutoScalingGroupsInput struct {
 
 	// The names of the Auto Scaling groups. By default, you can only specify up to 50
-	// names. You can optionally increase this limit using the MaxRecords property. If
-	// you omit this property, all Auto Scaling groups are described.
+	// names. You can optionally increase this limit using the MaxRecords property.
+	//
+	// If you omit this property, all Auto Scaling groups are described.
 	AutoScalingGroupNames []string
 
 	// One or more filters to limit the results based on specific tags.
@@ -102,25 +105,25 @@ func (c *Client) addOperationDescribeAutoScalingGroupsMiddlewares(stack *middlew
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -135,10 +138,13 @@ func (c *Client) addOperationDescribeAutoScalingGroupsMiddlewares(stack *middlew
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeAutoScalingGroups(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -255,7 +261,16 @@ type GroupExistsWaiterOptions struct {
 	// Set of options to modify how an operation is invoked. These apply to all
 	// operations invoked for this client. Use functional options on operation call to
 	// modify this list for per operation behavior.
+	//
+	// Passing options here is functionally equivalent to passing values to this
+	// config's ClientOptions field that extend the inner client's APIOptions directly.
 	APIOptions []func(*middleware.Stack) error
+
+	// Functional options to be passed to all operations invoked by this client.
+	//
+	// Function values that modify the inner APIOptions are applied after the waiter
+	// config's own APIOptions modifiers.
+	ClientOptions []func(*Options)
 
 	// MinDelay is the minimum amount of time to delay between retries. If unset,
 	// GroupExistsWaiter will use default minimum delay of 5 seconds. Note that
@@ -272,12 +287,13 @@ type GroupExistsWaiterOptions struct {
 
 	// Retryable is function that can be used to override the service defined
 	// waiter-behavior based on operation output, or returned error. This function is
-	// used by the waiter to decide if a state is retryable or a terminal state. By
-	// default service-modeled logic will populate this option. This option can thus be
-	// used to define a custom waiter state with fall-back to service-modeled waiter
-	// state mutators.The function returns an error in case of a failure state. In case
-	// of retry state, this function returns a bool value of true and nil error, while
-	// in case of success it returns a bool value of false and nil error.
+	// used by the waiter to decide if a state is retryable or a terminal state.
+	//
+	// By default service-modeled logic will populate this option. This option can
+	// thus be used to define a custom waiter state with fall-back to service-modeled
+	// waiter state mutators.The function returns an error in case of a failure state.
+	// In case of retry state, this function returns a bool value of true and nil
+	// error, while in case of success it returns a bool value of false and nil error.
 	Retryable func(context.Context, *DescribeAutoScalingGroupsInput, *DescribeAutoScalingGroupsOutput, error) (bool, error)
 }
 
@@ -354,6 +370,9 @@ func (w *GroupExistsWaiter) WaitForOutput(ctx context.Context, params *DescribeA
 
 		out, err := w.client.DescribeAutoScalingGroups(ctx, params, func(o *Options) {
 			o.APIOptions = append(o.APIOptions, apiOptions...)
+			for _, opt := range options.ClientOptions {
+				opt(o)
+			}
 		})
 
 		retryable, err := options.Retryable(ctx, params, out, err)
@@ -439,7 +458,16 @@ type GroupInServiceWaiterOptions struct {
 	// Set of options to modify how an operation is invoked. These apply to all
 	// operations invoked for this client. Use functional options on operation call to
 	// modify this list for per operation behavior.
+	//
+	// Passing options here is functionally equivalent to passing values to this
+	// config's ClientOptions field that extend the inner client's APIOptions directly.
 	APIOptions []func(*middleware.Stack) error
+
+	// Functional options to be passed to all operations invoked by this client.
+	//
+	// Function values that modify the inner APIOptions are applied after the waiter
+	// config's own APIOptions modifiers.
+	ClientOptions []func(*Options)
 
 	// MinDelay is the minimum amount of time to delay between retries. If unset,
 	// GroupInServiceWaiter will use default minimum delay of 15 seconds. Note that
@@ -456,12 +484,13 @@ type GroupInServiceWaiterOptions struct {
 
 	// Retryable is function that can be used to override the service defined
 	// waiter-behavior based on operation output, or returned error. This function is
-	// used by the waiter to decide if a state is retryable or a terminal state. By
-	// default service-modeled logic will populate this option. This option can thus be
-	// used to define a custom waiter state with fall-back to service-modeled waiter
-	// state mutators.The function returns an error in case of a failure state. In case
-	// of retry state, this function returns a bool value of true and nil error, while
-	// in case of success it returns a bool value of false and nil error.
+	// used by the waiter to decide if a state is retryable or a terminal state.
+	//
+	// By default service-modeled logic will populate this option. This option can
+	// thus be used to define a custom waiter state with fall-back to service-modeled
+	// waiter state mutators.The function returns an error in case of a failure state.
+	// In case of retry state, this function returns a bool value of true and nil
+	// error, while in case of success it returns a bool value of false and nil error.
 	Retryable func(context.Context, *DescribeAutoScalingGroupsInput, *DescribeAutoScalingGroupsOutput, error) (bool, error)
 }
 
@@ -539,6 +568,9 @@ func (w *GroupInServiceWaiter) WaitForOutput(ctx context.Context, params *Descri
 
 		out, err := w.client.DescribeAutoScalingGroups(ctx, params, func(o *Options) {
 			o.APIOptions = append(o.APIOptions, apiOptions...)
+			for _, opt := range options.ClientOptions {
+				opt(o)
+			}
 		})
 
 		retryable, err := options.Retryable(ctx, params, out, err)
@@ -624,7 +656,16 @@ type GroupNotExistsWaiterOptions struct {
 	// Set of options to modify how an operation is invoked. These apply to all
 	// operations invoked for this client. Use functional options on operation call to
 	// modify this list for per operation behavior.
+	//
+	// Passing options here is functionally equivalent to passing values to this
+	// config's ClientOptions field that extend the inner client's APIOptions directly.
 	APIOptions []func(*middleware.Stack) error
+
+	// Functional options to be passed to all operations invoked by this client.
+	//
+	// Function values that modify the inner APIOptions are applied after the waiter
+	// config's own APIOptions modifiers.
+	ClientOptions []func(*Options)
 
 	// MinDelay is the minimum amount of time to delay between retries. If unset,
 	// GroupNotExistsWaiter will use default minimum delay of 15 seconds. Note that
@@ -641,12 +682,13 @@ type GroupNotExistsWaiterOptions struct {
 
 	// Retryable is function that can be used to override the service defined
 	// waiter-behavior based on operation output, or returned error. This function is
-	// used by the waiter to decide if a state is retryable or a terminal state. By
-	// default service-modeled logic will populate this option. This option can thus be
-	// used to define a custom waiter state with fall-back to service-modeled waiter
-	// state mutators.The function returns an error in case of a failure state. In case
-	// of retry state, this function returns a bool value of true and nil error, while
-	// in case of success it returns a bool value of false and nil error.
+	// used by the waiter to decide if a state is retryable or a terminal state.
+	//
+	// By default service-modeled logic will populate this option. This option can
+	// thus be used to define a custom waiter state with fall-back to service-modeled
+	// waiter state mutators.The function returns an error in case of a failure state.
+	// In case of retry state, this function returns a bool value of true and nil
+	// error, while in case of success it returns a bool value of false and nil error.
 	Retryable func(context.Context, *DescribeAutoScalingGroupsInput, *DescribeAutoScalingGroupsOutput, error) (bool, error)
 }
 
@@ -724,6 +766,9 @@ func (w *GroupNotExistsWaiter) WaitForOutput(ctx context.Context, params *Descri
 
 		out, err := w.client.DescribeAutoScalingGroups(ctx, params, func(o *Options) {
 			o.APIOptions = append(o.APIOptions, apiOptions...)
+			for _, opt := range options.ClientOptions {
+				opt(o)
+			}
 		})
 
 		retryable, err := options.Retryable(ctx, params, out, err)

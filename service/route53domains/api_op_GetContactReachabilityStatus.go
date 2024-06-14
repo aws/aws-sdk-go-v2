@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/route53domains/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -14,8 +13,10 @@ import (
 
 // For operations that require confirmation that the email address for the
 // registrant contact is valid, such as registering a new domain, this operation
-// returns information about whether the registrant contact has responded. If you
-// want us to resend the email, use the ResendContactReachabilityEmail operation.
+// returns information about whether the registrant contact has responded.
+//
+// If you want us to resend the email, use the ResendContactReachabilityEmail
+// operation.
 func (c *Client) GetContactReachabilityStatus(ctx context.Context, params *GetContactReachabilityStatusInput, optFns ...func(*Options)) (*GetContactReachabilityStatusOutput, error) {
 	if params == nil {
 		params = &GetContactReachabilityStatusInput{}
@@ -46,9 +47,12 @@ type GetContactReachabilityStatusOutput struct {
 	DomainName *string
 
 	// Whether the registrant contact has responded. Values include the following:
-	// PENDING We sent the confirmation email and haven't received a response yet. DONE
-	// We sent the email and got confirmation from the registrant contact. EXPIRED The
-	// time limit expired before the registrant contact responded.
+	//
+	// PENDING We sent the confirmation email and haven't received a response yet.
+	//
+	// DONE We sent the email and got confirmation from the registrant contact.
+	//
+	// EXPIRED The time limit expired before the registrant contact responded.
 	Status types.ReachabilityStatus
 
 	// Metadata pertaining to the operation's result.
@@ -79,25 +83,25 @@ func (c *Client) addOperationGetContactReachabilityStatusMiddlewares(stack *midd
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -112,10 +116,13 @@ func (c *Client) addOperationGetContactReachabilityStatusMiddlewares(stack *midd
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetContactReachabilityStatus(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

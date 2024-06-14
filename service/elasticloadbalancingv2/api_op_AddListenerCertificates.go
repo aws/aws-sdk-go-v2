@@ -6,18 +6,22 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/elasticloadbalancingv2/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Adds the specified SSL server certificate to the certificate list for the
-// specified HTTPS or TLS listener. If the certificate in already in the
-// certificate list, the call is successful but the certificate is not added again.
-// For more information, see HTTPS listeners (https://docs.aws.amazon.com/elasticloadbalancing/latest/application/create-https-listener.html)
-// in the Application Load Balancers Guide or TLS listeners (https://docs.aws.amazon.com/elasticloadbalancing/latest/network/create-tls-listener.html)
-// in the Network Load Balancers Guide.
+// specified HTTPS or TLS listener.
+//
+// If the certificate in already in the certificate list, the call is successful
+// but the certificate is not added again.
+//
+// For more information, see [HTTPS listeners] in the Application Load Balancers Guide or [TLS listeners] in the
+// Network Load Balancers Guide.
+//
+// [TLS listeners]: https://docs.aws.amazon.com/elasticloadbalancing/latest/network/create-tls-listener.html
+// [HTTPS listeners]: https://docs.aws.amazon.com/elasticloadbalancing/latest/application/create-https-listener.html
 func (c *Client) AddListenerCertificates(ctx context.Context, params *AddListenerCertificatesInput, optFns ...func(*Options)) (*AddListenerCertificatesOutput, error) {
 	if params == nil {
 		params = &AddListenerCertificatesInput{}
@@ -82,25 +86,25 @@ func (c *Client) addOperationAddListenerCertificatesMiddlewares(stack *middlewar
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -115,13 +119,16 @@ func (c *Client) addOperationAddListenerCertificatesMiddlewares(stack *middlewar
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpAddListenerCertificatesValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opAddListenerCertificates(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

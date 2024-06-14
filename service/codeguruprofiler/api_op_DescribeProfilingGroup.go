@@ -6,14 +6,16 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/codeguruprofiler/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns a ProfilingGroupDescription (https://docs.aws.amazon.com/codeguru/latest/profiler-api/API_ProfilingGroupDescription.html)
-// object that contains information about the requested profiling group.
+//	Returns a [ProfilingGroupDescription]ProfilingGroupDescription object that contains information about the
+//
+// requested profiling group.
+//
+// [ProfilingGroupDescription]: https://docs.aws.amazon.com/codeguru/latest/profiler-api/API_ProfilingGroupDescription.html
 func (c *Client) DescribeProfilingGroup(ctx context.Context, params *DescribeProfilingGroupInput, optFns ...func(*Options)) (*DescribeProfilingGroupOutput, error) {
 	if params == nil {
 		params = &DescribeProfilingGroupInput{}
@@ -32,7 +34,7 @@ func (c *Client) DescribeProfilingGroup(ctx context.Context, params *DescribePro
 // The structure representing the describeProfilingGroupRequest.
 type DescribeProfilingGroupInput struct {
 
-	// The name of the profiling group to get information about.
+	//  The name of the profiling group to get information about.
 	//
 	// This member is required.
 	ProfilingGroupName *string
@@ -43,8 +45,10 @@ type DescribeProfilingGroupInput struct {
 // The structure representing the describeProfilingGroupResponse.
 type DescribeProfilingGroupOutput struct {
 
-	// The returned ProfilingGroupDescription (https://docs.aws.amazon.com/codeguru/latest/profiler-api/API_ProfilingGroupDescription.html)
-	// object that contains information about the requested profiling group.
+	//  The returned [ProfilingGroupDescription]ProfilingGroupDescription object that contains information about
+	// the requested profiling group.
+	//
+	// [ProfilingGroupDescription]: https://docs.aws.amazon.com/codeguru/latest/profiler-api/API_ProfilingGroupDescription.html
 	//
 	// This member is required.
 	ProfilingGroup *types.ProfilingGroupDescription
@@ -77,25 +81,25 @@ func (c *Client) addOperationDescribeProfilingGroupMiddlewares(stack *middleware
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -110,13 +114,16 @@ func (c *Client) addOperationDescribeProfilingGroupMiddlewares(stack *middleware
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDescribeProfilingGroupValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeProfilingGroup(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

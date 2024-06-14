@@ -15,8 +15,9 @@ const (
 )
 
 // Values returns all known values for LifeCycleState. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (LifeCycleState) Values() []LifeCycleState {
 	return []LifeCycleState{
 		"creating",
@@ -37,8 +38,9 @@ const (
 )
 
 // Values returns all known values for PerformanceMode. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (PerformanceMode) Values() []PerformanceMode {
 	return []PerformanceMode{
 		"generalPurpose",
@@ -57,8 +59,9 @@ const (
 
 // Values returns all known values for ReplicationOverwriteProtection. Note that
 // this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ReplicationOverwriteProtection) Values() []ReplicationOverwriteProtection {
 	return []ReplicationOverwriteProtection{
 		"ENABLED",
@@ -80,8 +83,9 @@ const (
 )
 
 // Values returns all known values for ReplicationStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ReplicationStatus) Values() []ReplicationStatus {
 	return []ReplicationStatus{
 		"ENABLED",
@@ -102,8 +106,9 @@ const (
 )
 
 // Values returns all known values for Resource. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (Resource) Values() []Resource {
 	return []Resource{
 		"FILE_SYSTEM",
@@ -120,8 +125,9 @@ const (
 )
 
 // Values returns all known values for ResourceIdType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ResourceIdType) Values() []ResourceIdType {
 	return []ResourceIdType{
 		"LONG_ID",
@@ -140,8 +146,9 @@ const (
 )
 
 // Values returns all known values for Status. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (Status) Values() []Status {
 	return []Status{
 		"ENABLED",
@@ -161,8 +168,9 @@ const (
 )
 
 // Values returns all known values for ThroughputMode. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ThroughputMode) Values() []ThroughputMode {
 	return []ThroughputMode{
 		"bursting",
@@ -188,6 +196,7 @@ const (
 
 // Values returns all known values for TransitionToArchiveRules. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (TransitionToArchiveRules) Values() []TransitionToArchiveRules {
 	return []TransitionToArchiveRules{
@@ -219,8 +228,9 @@ const (
 )
 
 // Values returns all known values for TransitionToIARules. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (TransitionToIARules) Values() []TransitionToIARules {
 	return []TransitionToIARules{
 		"AFTER_7_DAYS",
@@ -244,8 +254,9 @@ const (
 
 // Values returns all known values for TransitionToPrimaryStorageClassRules. Note
 // that this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (TransitionToPrimaryStorageClassRules) Values() []TransitionToPrimaryStorageClassRules {
 	return []TransitionToPrimaryStorageClassRules{
 		"AFTER_1_ACCESS",

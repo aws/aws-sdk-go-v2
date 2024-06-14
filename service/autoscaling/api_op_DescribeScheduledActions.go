@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/autoscaling/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -14,8 +13,10 @@ import (
 )
 
 // Gets information about the scheduled actions that haven't run or that have not
-// reached their end time. To describe the scaling activities for scheduled actions
-// that have already run, call the DescribeScalingActivities API.
+// reached their end time.
+//
+// To describe the scaling activities for scheduled actions that have already run,
+// call the DescribeScalingActivitiesAPI.
 func (c *Client) DescribeScheduledActions(ctx context.Context, params *DescribeScheduledActionsInput, optFns ...func(*Options)) (*DescribeScheduledActionsOutput, error) {
 	if params == nil {
 		params = &DescribeScheduledActionsInput{}
@@ -50,7 +51,9 @@ type DescribeScheduledActionsInput struct {
 
 	// The names of one or more scheduled actions. If you omit this property, all
 	// scheduled actions are described. If you specify an unknown scheduled action, it
-	// is ignored with no error. Array Members: Maximum number of 50 actions.
+	// is ignored with no error.
+	//
+	// Array Members: Maximum number of 50 actions.
 	ScheduledActionNames []string
 
 	// The earliest scheduled start time to return. If scheduled action names are
@@ -99,25 +102,25 @@ func (c *Client) addOperationDescribeScheduledActionsMiddlewares(stack *middlewa
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -132,10 +135,13 @@ func (c *Client) addOperationDescribeScheduledActionsMiddlewares(stack *middlewa
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeScheduledActions(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

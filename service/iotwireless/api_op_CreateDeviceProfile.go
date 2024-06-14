@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/iotwireless/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -30,10 +29,15 @@ func (c *Client) CreateDeviceProfile(ctx context.Context, params *CreateDevicePr
 
 type CreateDeviceProfileInput struct {
 
-	// Each resource must have a unique client request token. If you try to create a
-	// new resource with the same token as a resource that already exists, an exception
-	// occurs. If you omit this value, AWS SDKs will automatically generate a unique
-	// client request.
+	// Each resource must have a unique client request token. The client token is used
+	// to implement idempotency. It ensures that the request completes no more than one
+	// time. If you retry a request with the same token and the same parameters, the
+	// request will complete successfully. However, if you try to create a new resource
+	// using the same token but different parameters, an HTTP 409 conflict occurs. If
+	// you omit this value, AWS SDKs will automatically generate a unique client
+	// request. For more information about idempotency, see [Ensuring idempotency in Amazon EC2 API requests].
+	//
+	// [Ensuring idempotency in Amazon EC2 API requests]: https://docs.aws.amazon.com/ec2/latest/devguide/ec2-api-idempotency.html
 	ClientRequestToken *string
 
 	// The device profile information to use to create the device profile.
@@ -88,25 +92,25 @@ func (c *Client) addOperationCreateDeviceProfileMiddlewares(stack *middleware.St
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -121,6 +125,9 @@ func (c *Client) addOperationCreateDeviceProfileMiddlewares(stack *middleware.St
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opCreateDeviceProfileMiddleware(stack, options); err != nil {
 		return err
 	}
@@ -130,7 +137,7 @@ func (c *Client) addOperationCreateDeviceProfileMiddlewares(stack *middleware.St
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateDeviceProfile(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

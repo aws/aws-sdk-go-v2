@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/imagebuilder/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -31,8 +30,9 @@ func (c *Client) CreateWorkflow(ctx context.Context, params *CreateWorkflowInput
 type CreateWorkflowInput struct {
 
 	// Unique, case-sensitive identifier you provide to ensure idempotency of the
-	// request. For more information, see Ensuring idempotency (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html)
-	// in the Amazon EC2 API Reference.
+	// request. For more information, see [Ensuring idempotency]in the Amazon EC2 API Reference.
+	//
+	// [Ensuring idempotency]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
 	//
 	// This member is required.
 	ClientToken *string
@@ -43,11 +43,15 @@ type CreateWorkflowInput struct {
 	Name *string
 
 	// The semantic version of this workflow resource. The semantic version syntax
-	// adheres to the following rules. The semantic version has four nodes: ../. You
-	// can assign values for the first three, and can filter on all of them.
-	// Assignment: For the first three nodes you can assign any positive integer value,
-	// including zero, with an upper limit of 2^30-1, or 1073741823 for each node.
-	// Image Builder automatically assigns the build number to the fourth node.
+	// adheres to the following rules.
+	//
+	// The semantic version has four nodes: ../. You can assign values for the first
+	// three, and can filter on all of them.
+	//
+	// Assignment: For the first three nodes you can assign any positive integer
+	// value, including zero, with an upper limit of 2^30-1, or 1073741823 for each
+	// node. Image Builder automatically assigns the build number to the fourth node.
+	//
 	// Patterns: You can use any numeric pattern that adheres to the assignment
 	// requirements for the nodes that you can assign. For example, you might choose a
 	// software version pattern, such as 1.0.0, or a date, such as 2021.01.01.
@@ -82,8 +86,10 @@ type CreateWorkflowInput struct {
 	// The uri of a YAML component document file. This must be an S3 URL (
 	// s3://bucket/key ), and the requester must have permission to access the S3
 	// bucket it points to. If you use Amazon S3, you can specify component content up
-	// to your service quota. Alternatively, you can specify the YAML document inline,
-	// using the component data property. You cannot specify both properties.
+	// to your service quota.
+	//
+	// Alternatively, you can specify the YAML document inline, using the component
+	// data property. You cannot specify both properties.
 	Uri *string
 
 	noSmithyDocumentSerde
@@ -126,25 +132,25 @@ func (c *Client) addOperationCreateWorkflowMiddlewares(stack *middleware.Stack, 
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -159,6 +165,9 @@ func (c *Client) addOperationCreateWorkflowMiddlewares(stack *middleware.Stack, 
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opCreateWorkflowMiddleware(stack, options); err != nil {
 		return err
 	}
@@ -168,7 +177,7 @@ func (c *Client) addOperationCreateWorkflowMiddlewares(stack *middleware.Stack, 
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateWorkflow(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

@@ -6,16 +6,19 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/kendra/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists the block lists used for query suggestions for an index. For information
-// on the current quota limits for block lists, see Quotas for Amazon Kendra (https://docs.aws.amazon.com/kendra/latest/dg/quotas.html)
-// . ListQuerySuggestionsBlockLists is currently not supported in the Amazon Web
+// Lists the block lists used for query suggestions for an index.
+//
+// For information on the current quota limits for block lists, see [Quotas for Amazon Kendra].
+//
+// ListQuerySuggestionsBlockLists is currently not supported in the Amazon Web
 // Services GovCloud (US-West) region.
+//
+// [Quotas for Amazon Kendra]: https://docs.aws.amazon.com/kendra/latest/dg/quotas.html
 func (c *Client) ListQuerySuggestionsBlockLists(ctx context.Context, params *ListQuerySuggestionsBlockListsInput, optFns ...func(*Options)) (*ListQuerySuggestionsBlockListsOutput, error) {
 	if params == nil {
 		params = &ListQuerySuggestionsBlockListsInput{}
@@ -34,8 +37,11 @@ func (c *Client) ListQuerySuggestionsBlockLists(ctx context.Context, params *Lis
 type ListQuerySuggestionsBlockListsInput struct {
 
 	// The identifier of the index for a list of all block lists that exist for that
-	// index. For information on the current quota limits for block lists, see Quotas
-	// for Amazon Kendra (https://docs.aws.amazon.com/kendra/latest/dg/quotas.html) .
+	// index.
+	//
+	// For information on the current quota limits for block lists, see [Quotas for Amazon Kendra].
+	//
+	// [Quotas for Amazon Kendra]: https://docs.aws.amazon.com/kendra/latest/dg/quotas.html
 	//
 	// This member is required.
 	IndexId *string
@@ -54,11 +60,15 @@ type ListQuerySuggestionsBlockListsInput struct {
 
 type ListQuerySuggestionsBlockListsOutput struct {
 
-	// Summary items for a block list. This includes summary items on the block list
-	// ID, block list name, when the block list was created, when the block list was
-	// last updated, and the count of block words/phrases in the block list. For
-	// information on the current quota limits for block lists, see Quotas for Amazon
-	// Kendra (https://docs.aws.amazon.com/kendra/latest/dg/quotas.html) .
+	// Summary items for a block list.
+	//
+	// This includes summary items on the block list ID, block list name, when the
+	// block list was created, when the block list was last updated, and the count of
+	// block words/phrases in the block list.
+	//
+	// For information on the current quota limits for block lists, see [Quotas for Amazon Kendra].
+	//
+	// [Quotas for Amazon Kendra]: https://docs.aws.amazon.com/kendra/latest/dg/quotas.html
 	BlockListSummaryItems []types.QuerySuggestionsBlockListSummary
 
 	// If the response is truncated, Amazon Kendra returns this token that you can use
@@ -93,25 +103,25 @@ func (c *Client) addOperationListQuerySuggestionsBlockListsMiddlewares(stack *mi
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -126,13 +136,16 @@ func (c *Client) addOperationListQuerySuggestionsBlockListsMiddlewares(stack *mi
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpListQuerySuggestionsBlockListsValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListQuerySuggestionsBlockLists(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

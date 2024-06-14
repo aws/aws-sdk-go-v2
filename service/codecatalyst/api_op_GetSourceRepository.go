@@ -50,15 +50,17 @@ type GetSourceRepositoryInput struct {
 type GetSourceRepositoryOutput struct {
 
 	// The time the source repository was created, in coordinated universal time (UTC)
-	// timestamp format as specified in RFC 3339 (https://www.rfc-editor.org/rfc/rfc3339#section-5.6)
-	// .
+	// timestamp format as specified in [RFC 3339].
+	//
+	// [RFC 3339]: https://www.rfc-editor.org/rfc/rfc3339#section-5.6
 	//
 	// This member is required.
 	CreatedTime *time.Time
 
 	// The time the source repository was last updated, in coordinated universal time
-	// (UTC) timestamp format as specified in RFC 3339 (https://www.rfc-editor.org/rfc/rfc3339#section-5.6)
-	// .
+	// (UTC) timestamp format as specified in [RFC 3339].
+	//
+	// [RFC 3339]: https://www.rfc-editor.org/rfc/rfc3339#section-5.6
 	//
 	// This member is required.
 	LastUpdatedTime *time.Time
@@ -109,22 +111,22 @@ func (c *Client) addOperationGetSourceRepositoryMiddlewares(stack *middleware.St
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -139,13 +141,16 @@ func (c *Client) addOperationGetSourceRepositoryMiddlewares(stack *middleware.St
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpGetSourceRepositoryValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetSourceRepository(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

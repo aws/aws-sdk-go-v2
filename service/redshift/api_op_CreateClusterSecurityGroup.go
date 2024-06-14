@@ -6,16 +6,18 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/redshift/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates a new Amazon Redshift security group. You use security groups to
-// control access to non-VPC clusters. For information about managing security
-// groups, go to Amazon Redshift Cluster Security Groups (https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-security-groups.html)
-// in the Amazon Redshift Cluster Management Guide.
+// control access to non-VPC clusters.
+//
+// For information about managing security groups, go to [Amazon Redshift Cluster Security Groups] in the Amazon Redshift
+// Cluster Management Guide.
+//
+// [Amazon Redshift Cluster Security Groups]: https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-security-groups.html
 func (c *Client) CreateClusterSecurityGroup(ctx context.Context, params *CreateClusterSecurityGroupInput, optFns ...func(*Options)) (*CreateClusterSecurityGroupOutput, error) {
 	if params == nil {
 		params = &CreateClusterSecurityGroupInput{}
@@ -34,11 +36,17 @@ func (c *Client) CreateClusterSecurityGroup(ctx context.Context, params *CreateC
 type CreateClusterSecurityGroupInput struct {
 
 	// The name for the security group. Amazon Redshift stores the value as a
-	// lowercase string. Constraints:
+	// lowercase string.
+	//
+	// Constraints:
+	//
 	//   - Must contain no more than 255 alphanumeric characters or hyphens.
+	//
 	//   - Must not be "Default".
+	//
 	//   - Must be unique for all security groups that are created by your Amazon Web
 	//   Services account.
+	//
 	// Example: examplesecuritygroup
 	//
 	// This member is required.
@@ -88,25 +96,25 @@ func (c *Client) addOperationCreateClusterSecurityGroupMiddlewares(stack *middle
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -121,13 +129,16 @@ func (c *Client) addOperationCreateClusterSecurityGroupMiddlewares(stack *middle
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpCreateClusterSecurityGroupValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateClusterSecurityGroup(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

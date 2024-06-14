@@ -64,12 +64,19 @@ type AudienceExportJobSummary struct {
 	noSmithyDocumentSerde
 }
 
-// Defines the Amazon S3 bucket where the training data for the configured
+// Defines the Amazon S3 bucket where the seed audience for the generating
 // audience is stored.
 type AudienceGenerationJobDataSource struct {
 
-	// The Amazon S3 bucket where the training data for the configured audience is
-	// stored.
+	// Defines the Amazon S3 bucket where the seed audience for the generating
+	// audience is stored. A valid data source is a JSON line file in the following
+	// format:
+	//
+	//     {"user_id": "111111"}
+	//
+	//     {"user_id": "222222"}
+	//
+	//     ...
 	//
 	// This member is required.
 	DataSource *S3ConfigMap
@@ -129,27 +136,6 @@ type AudienceGenerationJobSummary struct {
 	noSmithyDocumentSerde
 }
 
-// The audience model metrics.
-type AudienceModelMetric struct {
-
-	// The number of users that were used to generate these model metrics.
-	//
-	// This member is required.
-	ForTopKItemPredictions *int32
-
-	// The audience model metric.
-	//
-	// This member is required.
-	Type AudienceModelMetricType
-
-	// The value of the audience model metric
-	//
-	// This member is required.
-	Value *float64
-
-	noSmithyDocumentSerde
-}
-
 // Information about the audience model.
 type AudienceModelSummary struct {
 
@@ -198,6 +184,14 @@ type AudienceQualityMetrics struct {
 	// This member is required.
 	RelevanceMetrics []RelevanceMetric
 
+	// The recall score of the generated audience. Recall is the percentage of the
+	// most similar users (by default, the most similar 20%) from a sample of the
+	// training data that are included in the seed audience by the audience generation
+	// job. Values range from 0-1, larger values indicate a better audience. A recall
+	// value approximately equal to the maximum bin size indicates that the audience
+	// model is equivalent to random selection.
+	RecallMetric *float64
+
 	noSmithyDocumentSerde
 }
 
@@ -206,9 +200,9 @@ type AudienceQualityMetrics struct {
 type AudienceSize struct {
 
 	// Whether the audience size is defined in absolute terms or as a percentage. You
-	// can use the ABSOLUTE AudienceSize to configure out audience sizes using the
-	// count of identifiers in the output. You can use the Percentage AudienceSize to
-	// configure sizes in the range 1-100 percent.
+	// can use the ABSOLUTEAudienceSize to configure out audience sizes using the count of
+	// identifiers in the output. You can use the PercentageAudienceSize to configure sizes in the
+	// range 1-100 percent.
 	//
 	// This member is required.
 	Type AudienceSizeType
@@ -221,12 +215,11 @@ type AudienceSize struct {
 	noSmithyDocumentSerde
 }
 
-// Configure the list of audience output sizes that can be created. A request to
-// StartAudienceGenerationJob that uses this configured audience model must have an
-// audienceSize selected from this list. You can use the ABSOLUTE AudienceSize to
-// configure out audience sizes using the count of identifiers in the output. You
-// can use the Percentage AudienceSize to configure sizes in the range 1-100
-// percent.
+// Configure the list of audience output sizes that can be created. A request to StartAudienceGenerationJob
+// that uses this configured audience model must have an audienceSize selected
+// from this list. You can use the ABSOLUTEAudienceSize to configure out audience sizes using
+// the count of identifiers in the output. You can use the PercentageAudienceSize to configure
+// sizes in the range 1-100 percent.
 type AudienceSizeConfig struct {
 
 	// An array of the different audience output sizes.

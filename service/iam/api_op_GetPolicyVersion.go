@@ -6,27 +6,33 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/iam/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Retrieves information about the specified version of the specified managed
-// policy, including the policy document. Policies returned by this operation are
-// URL-encoded compliant with RFC 3986 (https://tools.ietf.org/html/rfc3986) . You
-// can use a URL decoding method to convert the policy back to plain JSON text. For
+// policy, including the policy document.
+//
+// Policies returned by this operation are URL-encoded compliant with [RFC 3986]. You can
+// use a URL decoding method to convert the policy back to plain JSON text. For
 // example, if you use Java, you can use the decode method of the
 // java.net.URLDecoder utility class in the Java SDK. Other languages and SDKs
-// provide similar functionality. To list the available versions for a policy, use
-// ListPolicyVersions . This operation retrieves information about managed
-// policies. To retrieve information about an inline policy that is embedded in a
-// user, group, or role, use GetUserPolicy , GetGroupPolicy , or GetRolePolicy .
-// For more information about the types of policies, see Managed policies and
-// inline policies (https://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html)
-// in the IAM User Guide. For more information about managed policy versions, see
-// Versioning for managed policies (https://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-versions.html)
-// in the IAM User Guide.
+// provide similar functionality.
+//
+// To list the available versions for a policy, use ListPolicyVersions.
+//
+// This operation retrieves information about managed policies. To retrieve
+// information about an inline policy that is embedded in a user, group, or role,
+// use GetUserPolicy, GetGroupPolicy, or GetRolePolicy.
+//
+// For more information about the types of policies, see [Managed policies and inline policies] in the IAM User Guide.
+//
+// For more information about managed policy versions, see [Versioning for managed policies] in the IAM User Guide.
+//
+// [RFC 3986]: https://tools.ietf.org/html/rfc3986
+// [Versioning for managed policies]: https://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-versions.html
+// [Managed policies and inline policies]: https://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html
 func (c *Client) GetPolicyVersion(ctx context.Context, params *GetPolicyVersionInput, optFns ...func(*Options)) (*GetPolicyVersionOutput, error) {
 	if params == nil {
 		params = &GetPolicyVersionInput{}
@@ -45,16 +51,23 @@ func (c *Client) GetPolicyVersion(ctx context.Context, params *GetPolicyVersionI
 type GetPolicyVersionInput struct {
 
 	// The Amazon Resource Name (ARN) of the managed policy that you want information
-	// about. For more information about ARNs, see Amazon Resource Names (ARNs) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
-	// in the Amazon Web Services General Reference.
+	// about.
+	//
+	// For more information about ARNs, see [Amazon Resource Names (ARNs)] in the Amazon Web Services General
+	// Reference.
+	//
+	// [Amazon Resource Names (ARNs)]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
 	//
 	// This member is required.
 	PolicyArn *string
 
-	// Identifies the policy version to retrieve. This parameter allows (through its
-	// regex pattern (http://wikipedia.org/wiki/regex) ) a string of characters that
-	// consists of the lowercase letter 'v' followed by one or two digits, and
-	// optionally followed by a period '.' and a string of letters and digits.
+	// Identifies the policy version to retrieve.
+	//
+	// This parameter allows (through its [regex pattern]) a string of characters that consists of
+	// the lowercase letter 'v' followed by one or two digits, and optionally followed
+	// by a period '.' and a string of letters and digits.
+	//
+	// [regex pattern]: http://wikipedia.org/wiki/regex
 	//
 	// This member is required.
 	VersionId *string
@@ -96,25 +109,25 @@ func (c *Client) addOperationGetPolicyVersionMiddlewares(stack *middleware.Stack
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -129,13 +142,16 @@ func (c *Client) addOperationGetPolicyVersionMiddlewares(stack *middleware.Stack
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpGetPolicyVersionValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetPolicyVersion(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

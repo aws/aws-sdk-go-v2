@@ -39,9 +39,12 @@ func (e *WAFAssociatedItemException) ErrorFault() smithy.ErrorFault { return smi
 // inspect the body must either provide an OversizeHandling configuration or they
 // must be preceded by a SizeConstraintStatement that blocks the body content from
 // being too large. Rules that inspect the headers or cookies must provide an
-// OversizeHandling configuration. Provide the handling configuration and retry
-// your operation. Alternately, you can suppress this warning by adding the
-// following tag to the resource that you provide to this operation: Tag (key:
+// OversizeHandling configuration.
+//
+// Provide the handling configuration and retry your operation.
+//
+// Alternately, you can suppress this warning by adding the following tag to the
+// resource that you provide to this operation: Tag (key:
 // WAF:OversizeFieldsHandlingConstraintOptOut , value: true ).
 type WAFConfigurationWarningException struct {
 	Message *string
@@ -97,7 +100,7 @@ func (e *WAFDuplicateItemException) ErrorFault() smithy.ErrorFault { return smit
 
 // The operation failed because the specified version for the managed rule group
 // has expired. You can retrieve the available versions for the managed rule group
-// by calling ListAvailableManagedRuleGroupVersions .
+// by calling ListAvailableManagedRuleGroupVersions.
 type WAFExpiredManagedRuleGroupVersionException struct {
 	Message *string
 
@@ -180,11 +183,15 @@ func (e *WAFInvalidOperationException) ErrorFault() smithy.ErrorFault { return s
 
 // The operation failed because WAF didn't recognize a parameter in the request.
 // For example:
+//
 //   - You specified a parameter name or value that isn't valid.
+//
 //   - Your nested statement isn't valid. You might have tried to nest a statement
 //     that can’t be nested.
+//
 //   - You tried to update a WebACL with a DefaultAction that isn't among the types
-//     available at DefaultAction .
+//     available at DefaultAction.
+//
 //   - Your request references an ARN that is malformed, or corresponds to a
 //     resource with which a web ACL can't be associated.
 type WAFInvalidParameterException struct {
@@ -217,18 +224,25 @@ func (e *WAFInvalidParameterException) ErrorCode() string {
 func (e *WAFInvalidParameterException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The operation failed because the specified policy isn't in the proper format.
+//
 // The policy specifications must conform to the following:
+//
 //   - The policy must be composed using IAM Policy version 2012-10-17.
+//
 //   - The policy must include specifications for Effect , Action , and Principal .
+//
 //   - Effect must specify Allow .
+//
 //   - Action must specify wafv2:CreateWebACL , wafv2:UpdateWebACL , and
 //     wafv2:PutFirewallManagerRuleGroups and may optionally specify
 //     wafv2:GetRuleGroup . WAF rejects any extra actions or wildcard actions in the
 //     policy.
+//
 //   - The policy must not include a Resource parameter.
 //
-// For more information, see IAM Policies (https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies.html)
-// .
+// For more information, see [IAM Policies].
+//
+// [IAM Policies]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies.html
 type WAFInvalidPermissionPolicyException struct {
 	Message *string
 
@@ -285,12 +299,16 @@ func (e *WAFInvalidResourceException) ErrorFault() smithy.ErrorFault { return sm
 
 // WAF couldn’t perform the operation because you exceeded your resource limit.
 // For example, the maximum number of WebACL objects that you can create for an
-// Amazon Web Services account. For more information, see WAF quotas (https://docs.aws.amazon.com/waf/latest/developerguide/limits.html)
-// in the WAF Developer Guide.
+// Amazon Web Services account. For more information, see [WAF quotas]in the WAF Developer
+// Guide.
+//
+// [WAF quotas]: https://docs.aws.amazon.com/waf/latest/developerguide/limits.html
 type WAFLimitsExceededException struct {
 	Message *string
 
 	ErrorCodeOverride *string
+
+	SourceType *string
 
 	noSmithyDocumentSerde
 }
@@ -313,8 +331,9 @@ func (e *WAFLimitsExceededException) ErrorCode() string {
 func (e *WAFLimitsExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The operation failed because you don't have the permissions that your logging
-// configuration requires. For information, see Logging web ACL traffic information (https://docs.aws.amazon.com/waf/latest/developerguide/logging.html)
-// in the WAF Developer Guide.
+// configuration requires. For information, see [Logging web ACL traffic information]in the WAF Developer Guide.
+//
+// [Logging web ACL traffic information]: https://docs.aws.amazon.com/waf/latest/developerguide/logging.html
 type WAFLogDestinationPermissionIssueException struct {
 	Message *string
 

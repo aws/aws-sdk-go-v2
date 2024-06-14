@@ -6,19 +6,22 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/ses/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Enables or disables the custom MAIL FROM domain setup for a verified identity
-// (an email address or a domain). To send emails using the specified MAIL FROM
-// domain, you must add an MX record to your MAIL FROM domain's DNS settings. To
-// ensure that your emails pass Sender Policy Framework (SPF) checks, you must also
-// add or update an SPF record. For more information, see the Amazon SES Developer
-// Guide (https://docs.aws.amazon.com/ses/latest/dg/mail-from.html) . You can
-// execute this operation no more than once per second.
+// (an email address or a domain).
+//
+// To send emails using the specified MAIL FROM domain, you must add an MX record
+// to your MAIL FROM domain's DNS settings. To ensure that your emails pass Sender
+// Policy Framework (SPF) checks, you must also add or update an SPF record. For
+// more information, see the [Amazon SES Developer Guide].
+//
+// You can execute this operation no more than once per second.
+//
+// [Amazon SES Developer Guide]: https://docs.aws.amazon.com/ses/latest/dg/mail-from.html
 func (c *Client) SetIdentityMailFromDomain(ctx context.Context, params *SetIdentityMailFromDomainInput, optFns ...func(*Options)) (*SetIdentityMailFromDomainOutput, error) {
 	if params == nil {
 		params = &SetIdentityMailFromDomainInput{}
@@ -36,8 +39,9 @@ func (c *Client) SetIdentityMailFromDomain(ctx context.Context, params *SetIdent
 
 // Represents a request to enable or disable the Amazon SES custom MAIL FROM
 // domain setup for a verified identity. For information about using a custom MAIL
-// FROM domain, see the Amazon SES Developer Guide (https://docs.aws.amazon.com/ses/latest/dg/mail-from.html)
-// .
+// FROM domain, see the [Amazon SES Developer Guide].
+//
+// [Amazon SES Developer Guide]: https://docs.aws.amazon.com/ses/latest/dg/mail-from.html
 type SetIdentityMailFromDomainInput struct {
 
 	// The verified identity.
@@ -49,17 +53,19 @@ type SetIdentityMailFromDomainInput struct {
 	// MX record when you send an email. If you choose UseDefaultValue , Amazon SES
 	// uses amazonses.com (or a subdomain of that) as the MAIL FROM domain. If you
 	// choose RejectMessage , Amazon SES returns a MailFromDomainNotVerified error and
-	// not send the email. The action specified in BehaviorOnMXFailure is taken when
-	// the custom MAIL FROM domain setup is in the Pending , Failed , and
-	// TemporaryFailure states.
+	// not send the email.
+	//
+	// The action specified in BehaviorOnMXFailure is taken when the custom MAIL FROM
+	// domain setup is in the Pending , Failed , and TemporaryFailure states.
 	BehaviorOnMXFailure types.BehaviorOnMXFailure
 
 	// The custom MAIL FROM domain for the verified identity to use. The MAIL FROM
 	// domain must 1) be a subdomain of the verified identity, 2) not be used in a
 	// "From" address if the MAIL FROM domain is the destination of email feedback
-	// forwarding (for more information, see the Amazon SES Developer Guide (https://docs.aws.amazon.com/ses/latest/dg/mail-from.html)
-	// ), and 3) not be used to receive emails. A value of null disables the custom
-	// MAIL FROM setting for the identity.
+	// forwarding (for more information, see the [Amazon SES Developer Guide]), and 3) not be used to receive
+	// emails. A value of null disables the custom MAIL FROM setting for the identity.
+	//
+	// [Amazon SES Developer Guide]: https://docs.aws.amazon.com/ses/latest/dg/mail-from.html
 	MailFromDomain *string
 
 	noSmithyDocumentSerde
@@ -95,25 +101,25 @@ func (c *Client) addOperationSetIdentityMailFromDomainMiddlewares(stack *middlew
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -128,13 +134,16 @@ func (c *Client) addOperationSetIdentityMailFromDomainMiddlewares(stack *middlew
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpSetIdentityMailFromDomainValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opSetIdentityMailFromDomain(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

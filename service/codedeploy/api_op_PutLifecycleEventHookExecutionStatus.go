@@ -6,22 +6,23 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/codedeploy/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Sets the result of a Lambda validation function. The function validates
+//	Sets the result of a Lambda validation function. The function validates
+//
 // lifecycle hooks during a deployment that uses the Lambda or Amazon ECS compute
 // platform. For Lambda deployments, the available lifecycle hooks are
 // BeforeAllowTraffic and AfterAllowTraffic . For Amazon ECS deployments, the
 // available lifecycle hooks are BeforeInstall , AfterInstall ,
 // AfterAllowTestTraffic , BeforeAllowTraffic , and AfterAllowTraffic . Lambda
-// validation functions return Succeeded or Failed . For more information, see
-// AppSpec 'hooks' Section for an Lambda Deployment  (https://docs.aws.amazon.com/codedeploy/latest/userguide/reference-appspec-file-structure-hooks.html#appspec-hooks-lambda)
-// and AppSpec 'hooks' Section for an Amazon ECS Deployment (https://docs.aws.amazon.com/codedeploy/latest/userguide/reference-appspec-file-structure-hooks.html#appspec-hooks-ecs)
-// .
+// validation functions return Succeeded or Failed . For more information, see [AppSpec 'hooks' Section for an Lambda Deployment]
+// and [AppSpec 'hooks' Section for an Amazon ECS Deployment].
+//
+// [AppSpec 'hooks' Section for an Amazon ECS Deployment]: https://docs.aws.amazon.com/codedeploy/latest/userguide/reference-appspec-file-structure-hooks.html#appspec-hooks-ecs
+// [AppSpec 'hooks' Section for an Lambda Deployment]: https://docs.aws.amazon.com/codedeploy/latest/userguide/reference-appspec-file-structure-hooks.html#appspec-hooks-lambda
 func (c *Client) PutLifecycleEventHookExecutionStatus(ctx context.Context, params *PutLifecycleEventHookExecutionStatusInput, optFns ...func(*Options)) (*PutLifecycleEventHookExecutionStatusOutput, error) {
 	if params == nil {
 		params = &PutLifecycleEventHookExecutionStatusInput{}
@@ -39,11 +40,11 @@ func (c *Client) PutLifecycleEventHookExecutionStatus(ctx context.Context, param
 
 type PutLifecycleEventHookExecutionStatusInput struct {
 
-	// The unique ID of a deployment. Pass this ID to a Lambda function that validates
-	// a deployment lifecycle event.
+	//  The unique ID of a deployment. Pass this ID to a Lambda function that
+	// validates a deployment lifecycle event.
 	DeploymentId *string
 
-	// The execution ID of a deployment's lifecycle hook. A deployment lifecycle hook
+	//  The execution ID of a deployment's lifecycle hook. A deployment lifecycle hook
 	// is specified in the hooks section of the AppSpec file.
 	LifecycleEventHookExecutionId *string
 
@@ -89,25 +90,25 @@ func (c *Client) addOperationPutLifecycleEventHookExecutionStatusMiddlewares(sta
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -122,10 +123,13 @@ func (c *Client) addOperationPutLifecycleEventHookExecutionStatusMiddlewares(sta
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opPutLifecycleEventHookExecutionStatus(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

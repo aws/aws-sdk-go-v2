@@ -670,6 +670,26 @@ func (m *validateOpUpdateStateMachine) HandleInitialize(ctx context.Context, in 
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpValidateStateMachineDefinition struct {
+}
+
+func (*validateOpValidateStateMachineDefinition) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpValidateStateMachineDefinition) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ValidateStateMachineDefinitionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpValidateStateMachineDefinitionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 func addOpCreateActivityValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateActivity{}, middleware.After)
 }
@@ -800,6 +820,10 @@ func addOpUpdateStateMachineAliasValidationMiddleware(stack *middleware.Stack) e
 
 func addOpUpdateStateMachineValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateStateMachine{}, middleware.After)
+}
+
+func addOpValidateStateMachineDefinitionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpValidateStateMachineDefinition{}, middleware.After)
 }
 
 func validateRoutingConfigurationList(v []types.RoutingConfigurationListItem) error {
@@ -1351,6 +1375,21 @@ func validateOpUpdateStateMachineInput(v *UpdateStateMachineInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateStateMachineInput"}
 	if v.StateMachineArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("StateMachineArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpValidateStateMachineDefinitionInput(v *ValidateStateMachineDefinitionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ValidateStateMachineDefinitionInput"}
+	if v.Definition == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Definition"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

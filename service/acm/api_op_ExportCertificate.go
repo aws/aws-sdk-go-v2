@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -15,10 +14,12 @@ import (
 // for use anywhere. The exported file contains the certificate, the certificate
 // chain, and the encrypted private 2048-bit RSA key associated with the public key
 // that is embedded in the certificate. For security, you must assign a passphrase
-// for the private key when exporting it. For information about exporting and
-// formatting a certificate using the ACM console or CLI, see Export a Private
-// Certificate (https://docs.aws.amazon.com/acm/latest/userguide/gs-acm-export-private.html)
-// .
+// for the private key when exporting it.
+//
+// For information about exporting and formatting a certificate using the ACM
+// console or CLI, see [Export a Private Certificate].
+//
+// [Export a Private Certificate]: https://docs.aws.amazon.com/acm/latest/userguide/gs-acm-export-private.html
 func (c *Client) ExportCertificate(ctx context.Context, params *ExportCertificateInput, optFns ...func(*Options)) (*ExportCertificateOutput, error) {
 	if params == nil {
 		params = &ExportCertificateInput{}
@@ -38,17 +39,22 @@ type ExportCertificateInput struct {
 
 	// An Amazon Resource Name (ARN) of the issued certificate. This must be of the
 	// form:
-	// arn:aws:acm:region:account:certificate/12345678-1234-1234-1234-123456789012
+	//
+	//     arn:aws:acm:region:account:certificate/12345678-1234-1234-1234-123456789012
 	//
 	// This member is required.
 	CertificateArn *string
 
-	// Passphrase to associate with the encrypted exported private key. When creating
-	// your passphrase, you can use any ASCII character except #, $, or %. If you want
-	// to later decrypt the private key, you must have the passphrase. You can use the
-	// following OpenSSL command to decrypt a private key. After entering the command,
-	// you are prompted for the passphrase. openssl rsa -in encrypted_key.pem -out
-	// decrypted_key.pem
+	// Passphrase to associate with the encrypted exported private key.
+	//
+	// When creating your passphrase, you can use any ASCII character except #, $, or
+	// %.
+	//
+	// If you want to later decrypt the private key, you must have the passphrase. You
+	// can use the following OpenSSL command to decrypt a private key. After entering
+	// the command, you are prompted for the passphrase.
+	//
+	//     openssl rsa -in encrypted_key.pem -out decrypted_key.pem
 	//
 	// This member is required.
 	Passphrase []byte
@@ -97,25 +103,25 @@ func (c *Client) addOperationExportCertificateMiddlewares(stack *middleware.Stac
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -130,13 +136,16 @@ func (c *Client) addOperationExportCertificateMiddlewares(stack *middleware.Stac
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpExportCertificateValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opExportCertificate(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/robomaker/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -57,27 +56,47 @@ type DescribeSimulationJobOutput struct {
 	// The failure behavior for the simulation job.
 	FailureBehavior types.FailureBehavior
 
-	// The failure code of the simulation job if it failed: InternalServiceError
-	// Internal service error. RobotApplicationCrash Robot application exited
-	// abnormally. SimulationApplicationCrash Simulation application exited abnormally.
+	// The failure code of the simulation job if it failed:
+	//
+	// InternalServiceError Internal service error.
+	//
+	// RobotApplicationCrash Robot application exited abnormally.
+	//
+	// SimulationApplicationCrash  Simulation application exited abnormally.
+	//
 	// BadPermissionsRobotApplication Robot application bundle could not be downloaded.
+	//
 	// BadPermissionsSimulationApplication Simulation application bundle could not be
-	// downloaded. BadPermissionsS3Output Unable to publish outputs to
-	// customer-provided S3 bucket. BadPermissionsCloudwatchLogs Unable to publish logs
-	// to customer-provided CloudWatch Logs resource. SubnetIpLimitExceeded Subnet IP
-	// limit exceeded. ENILimitExceeded ENI limit exceeded.
+	// downloaded.
+	//
+	// BadPermissionsS3Output Unable to publish outputs to customer-provided S3 bucket.
+	//
+	// BadPermissionsCloudwatchLogs Unable to publish logs to customer-provided
+	// CloudWatch Logs resource.
+	//
+	// SubnetIpLimitExceeded Subnet IP limit exceeded.
+	//
+	// ENILimitExceeded ENI limit exceeded.
+	//
 	// BadPermissionsUserCredentials Unable to use the Role provided.
+	//
 	// InvalidBundleRobotApplication Robot bundle cannot be extracted (invalid format,
-	// bundling error, or other issue). InvalidBundleSimulationApplication Simulation
-	// bundle cannot be extracted (invalid format, bundling error, or other issue).
+	// bundling error, or other issue).
+	//
+	// InvalidBundleSimulationApplication Simulation bundle cannot be extracted
+	// (invalid format, bundling error, or other issue).
+	//
 	// RobotApplicationVersionMismatchedEtag Etag for RobotApplication does not match
-	// value during version creation. SimulationApplicationVersionMismatchedEtag Etag
-	// for SimulationApplication does not match value during version creation.
+	// value during version creation.
+	//
+	// SimulationApplicationVersionMismatchedEtag Etag for SimulationApplication does
+	// not match value during version creation.
 	FailureCode types.SimulationJobErrorCode
 
 	// Details about why the simulation job failed. For more information about
-	// troubleshooting, see Troubleshooting (https://docs.aws.amazon.com/robomaker/latest/dg/troubleshooting.html)
-	// .
+	// troubleshooting, see [Troubleshooting].
+	//
+	// [Troubleshooting]: https://docs.aws.amazon.com/robomaker/latest/dg/troubleshooting.html
 	FailureReason *string
 
 	// The IAM role that allows the simulation instance to call the AWS APIs that are
@@ -154,25 +173,25 @@ func (c *Client) addOperationDescribeSimulationJobMiddlewares(stack *middleware.
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -187,13 +206,16 @@ func (c *Client) addOperationDescribeSimulationJobMiddlewares(stack *middleware.
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDescribeSimulationJobValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeSimulationJob(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

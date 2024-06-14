@@ -6,16 +6,17 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/lakeformation/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Grants permissions to the principal to access metadata in the Data Catalog and
-// data organized in underlying data storage such as Amazon S3. For information
-// about permissions, see Security and Access Control to Metadata and Data (https://docs.aws.amazon.com/lake-formation/latest/dg/security-data-access.html)
-// .
+// data organized in underlying data storage such as Amazon S3.
+//
+// For information about permissions, see [Security and Access Control to Metadata and Data].
+//
+// [Security and Access Control to Metadata and Data]: https://docs.aws.amazon.com/lake-formation/latest/dg/security-data-access.html
 func (c *Client) GrantPermissions(ctx context.Context, params *GrantPermissionsInput, optFns ...func(*Options)) (*GrantPermissionsOutput, error) {
 	if params == nil {
 		params = &GrantPermissionsInput{}
@@ -44,9 +45,11 @@ type GrantPermissionsInput struct {
 
 	// The principal to be granted the permissions on the resource. Supported
 	// principals are IAM users or IAM roles, and they are defined by their principal
-	// type and their ARN. Note that if you define a resource with a particular ARN,
-	// then later delete, and recreate a resource with that same ARN, the resource
-	// maintains the permissions already granted.
+	// type and their ARN.
+	//
+	// Note that if you define a resource with a particular ARN, then later delete,
+	// and recreate a resource with that same ARN, the resource maintains the
+	// permissions already granted.
 	//
 	// This member is required.
 	Principal *types.DataLakePrincipal
@@ -100,25 +103,25 @@ func (c *Client) addOperationGrantPermissionsMiddlewares(stack *middleware.Stack
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -133,13 +136,16 @@ func (c *Client) addOperationGrantPermissionsMiddlewares(stack *middleware.Stack
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpGrantPermissionsValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGrantPermissions(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

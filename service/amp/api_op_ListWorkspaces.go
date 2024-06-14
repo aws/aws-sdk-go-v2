@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/amp/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -33,9 +32,10 @@ func (c *Client) ListWorkspaces(ctx context.Context, params *ListWorkspacesInput
 type ListWorkspacesInput struct {
 
 	// If this is included, it filters the results to only the workspaces with names
-	// that start with the value that you specify here. Amazon Managed Service for
-	// Prometheus will automatically strip any blank spaces from the beginning and end
-	// of the alias that you specify.
+	// that start with the value that you specify here.
+	//
+	// Amazon Managed Service for Prometheus will automatically strip any blank spaces
+	// from the beginning and end of the alias that you specify.
 	Alias *string
 
 	// The maximum number of workspaces to return per request. The default is 100.
@@ -43,10 +43,12 @@ type ListWorkspacesInput struct {
 
 	// The token for the next set of items to return. You receive this token from a
 	// previous call, and use it to get the next page of results. The other parameters
-	// must be the same as the initial call. For example, if your initial request has
-	// maxResults of 10, and there are 12 workspaces to return, then your initial
-	// request will return 10 and a nextToken . Using the next token in a subsequent
-	// call will return the remaining 2 workspaces.
+	// must be the same as the initial call.
+	//
+	// For example, if your initial request has maxResults of 10, and there are 12
+	// workspaces to return, then your initial request will return 10 and a nextToken .
+	// Using the next token in a subsequent call will return the remaining 2
+	// workspaces.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -93,25 +95,25 @@ func (c *Client) addOperationListWorkspacesMiddlewares(stack *middleware.Stack, 
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -126,10 +128,13 @@ func (c *Client) addOperationListWorkspacesMiddlewares(stack *middleware.Stack, 
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListWorkspaces(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

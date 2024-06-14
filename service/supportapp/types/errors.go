@@ -35,15 +35,21 @@ func (e *AccessDeniedException) ErrorFault() smithy.ErrorFault { return smithy.F
 
 // Your request has a conflict. For example, you might receive this error if you
 // try the following:
+//
 //   - Add, update, or delete a Slack channel configuration before you add a Slack
 //     workspace to your Amazon Web Services account.
+//
 //   - Add a Slack channel configuration that already exists in your Amazon Web
 //     Services account.
+//
 //   - Delete a Slack channel configuration for a live chat channel.
+//
 //   - Delete a Slack workspace from your Amazon Web Services account that has an
 //     active live chat channel.
+//
 //   - Call the RegisterSlackWorkspaceForOrganization API from an Amazon Web
 //     Services account that doesn't belong to an organization.
+//
 //   - Call the RegisterSlackWorkspaceForOrganization API from a member account,
 //     but the management account hasn't registered that workspace yet for the
 //     organization.

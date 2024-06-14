@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/forecast/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -43,21 +42,27 @@ type CreateWhatIfForecastInput struct {
 	// This member is required.
 	WhatIfForecastName *string
 
-	// A list of tags (https://docs.aws.amazon.com/forecast/latest/dg/tagging-forecast-resources.html)
-	// to apply to the what if forecast.
+	// A list of [tags] to apply to the what if forecast.
+	//
+	// [tags]: https://docs.aws.amazon.com/forecast/latest/dg/tagging-forecast-resources.html
 	Tags []types.Tag
 
 	// The replacement time series dataset, which contains the rows that you want to
 	// change in the related time series dataset. A replacement time series does not
 	// need to contain all rows that are in the baseline related time series. Include
 	// only the rows (measure-dimension combinations) that you want to include in the
-	// what-if forecast. This dataset is merged with the original time series to create
-	// a transformed dataset that is used for the what-if analysis. This dataset should
-	// contain the items to modify (such as item_id or workforce_type), any relevant
-	// dimensions, the timestamp column, and at least one of the related time series
-	// columns. This file should not contain duplicate timestamps for the same time
-	// series. Timestamps and item_ids not included in this dataset are not included in
-	// the what-if analysis.
+	// what-if forecast.
+	//
+	// This dataset is merged with the original time series to create a transformed
+	// dataset that is used for the what-if analysis.
+	//
+	// This dataset should contain the items to modify (such as item_id or
+	// workforce_type), any relevant dimensions, the timestamp column, and at least one
+	// of the related time series columns. This file should not contain duplicate
+	// timestamps for the same time series.
+	//
+	// Timestamps and item_ids not included in this dataset are not included in the
+	// what-if analysis.
 	TimeSeriesReplacementsDataSource *types.TimeSeriesReplacementsDataSource
 
 	// The transformations that are applied to the baseline time series. Each
@@ -102,25 +107,25 @@ func (c *Client) addOperationCreateWhatIfForecastMiddlewares(stack *middleware.S
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -135,13 +140,16 @@ func (c *Client) addOperationCreateWhatIfForecastMiddlewares(stack *middleware.S
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpCreateWhatIfForecastValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateWhatIfForecast(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

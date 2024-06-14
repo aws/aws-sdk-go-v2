@@ -6,17 +6,19 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/groundstation/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates a DataflowEndpoint group containing the specified list of
-// DataflowEndpoint objects. The name field in each endpoint is used in your
-// mission profile DataflowEndpointConfig to specify which endpoints to use during
-// a contact. When a contact uses multiple DataflowEndpointConfig objects, each
-// Config must match a DataflowEndpoint in the same group.
+// DataflowEndpoint objects.
+//
+// The name field in each endpoint is used in your mission profile
+// DataflowEndpointConfig to specify which endpoints to use during a contact.
+//
+// When a contact uses multiple DataflowEndpointConfig objects, each Config must
+// match a DataflowEndpoint in the same group.
 func (c *Client) CreateDataflowEndpointGroup(ctx context.Context, params *CreateDataflowEndpointGroupInput, optFns ...func(*Options)) (*CreateDataflowEndpointGroupOutput, error) {
 	if params == nil {
 		params = &CreateDataflowEndpointGroupInput{}
@@ -90,25 +92,25 @@ func (c *Client) addOperationCreateDataflowEndpointGroupMiddlewares(stack *middl
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -123,13 +125,16 @@ func (c *Client) addOperationCreateDataflowEndpointGroupMiddlewares(stack *middl
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpCreateDataflowEndpointGroupValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateDataflowEndpointGroup(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

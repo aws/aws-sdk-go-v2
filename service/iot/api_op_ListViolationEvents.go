@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/iot/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -15,9 +14,11 @@ import (
 
 // Lists the Device Defender security profile violations discovered during the
 // given time period. You can use filters to limit the results to those alerts
-// issued for a particular security profile, behavior, or thing (device). Requires
-// permission to access the ListViolationEvents (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
-// action.
+// issued for a particular security profile, behavior, or thing (device).
+//
+// Requires permission to access the [ListViolationEvents] action.
+//
+// [ListViolationEvents]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions
 func (c *Client) ListViolationEvents(ctx context.Context, params *ListViolationEventsInput, optFns ...func(*Options)) (*ListViolationEventsOutput, error) {
 	if params == nil {
 		params = &ListViolationEventsInput{}
@@ -45,10 +46,10 @@ type ListViolationEventsInput struct {
 	// This member is required.
 	StartTime *time.Time
 
-	// The criteria for a behavior.
+	//  The criteria for a behavior.
 	BehaviorCriteriaType types.BehaviorCriteriaType
 
-	// A list of all suppressed alerts.
+	//  A list of all suppressed alerts.
 	ListSuppressedAlerts *bool
 
 	// The maximum number of results to return at one time.
@@ -109,25 +110,25 @@ func (c *Client) addOperationListViolationEventsMiddlewares(stack *middleware.St
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -142,13 +143,16 @@ func (c *Client) addOperationListViolationEventsMiddlewares(stack *middleware.St
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpListViolationEventsValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListViolationEvents(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

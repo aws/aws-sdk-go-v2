@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -48,8 +47,11 @@ type UpdateImageVersionInput struct {
 	Horovod *bool
 
 	// Indicates SageMaker job type compatibility.
+	//
 	//   - TRAINING : The image version is compatible with SageMaker training jobs.
+	//
 	//   - INFERENCE : The image version is compatible with SageMaker inference jobs.
+	//
 	//   - NOTEBOOK_KERNEL : The image version is compatible with SageMaker notebook
 	//   kernels.
 	JobType types.JobType
@@ -58,7 +60,9 @@ type UpdateImageVersionInput struct {
 	MLFramework *string
 
 	// Indicates CPU or GPU compatibility.
+	//
 	//   - CPU : The image version is compatible with CPU.
+	//
 	//   - GPU : The image version is compatible with GPU.
 	Processor types.Processor
 
@@ -69,12 +73,16 @@ type UpdateImageVersionInput struct {
 	ReleaseNotes *string
 
 	// The availability of the image version specified by the maintainer.
+	//
 	//   - NOT_PROVIDED : The maintainers did not provide a status for image version
 	//   stability.
+	//
 	//   - STABLE : The image version is stable.
+	//
 	//   - TO_BE_ARCHIVED : The image version is set to be archived. Custom image
 	//   versions that are set to be archived are automatically archived after three
 	//   months.
+	//
 	//   - ARCHIVED : The image version is archived. Archived image versions are not
 	//   searchable and are no longer actively supported.
 	VendorGuidance types.VendorGuidance
@@ -118,25 +126,25 @@ func (c *Client) addOperationUpdateImageVersionMiddlewares(stack *middleware.Sta
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -151,13 +159,16 @@ func (c *Client) addOperationUpdateImageVersionMiddlewares(stack *middleware.Sta
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpUpdateImageVersionValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateImageVersion(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

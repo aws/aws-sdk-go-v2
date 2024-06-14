@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/iam/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -17,8 +16,9 @@ import (
 // service-specific credentials returned by this operation are used only for
 // authenticating the IAM user to a specific service. For more information about
 // using service-specific credentials to authenticate to an Amazon Web Services
-// service, see Set up service-specific credentials (https://docs.aws.amazon.com/codecommit/latest/userguide/setting-up-gc.html)
-// in the CodeCommit User Guide.
+// service, see [Set up service-specific credentials]in the CodeCommit User Guide.
+//
+// [Set up service-specific credentials]: https://docs.aws.amazon.com/codecommit/latest/userguide/setting-up-gc.html
 func (c *Client) ListServiceSpecificCredentials(ctx context.Context, params *ListServiceSpecificCredentialsInput, optFns ...func(*Options)) (*ListServiceSpecificCredentialsOutput, error) {
 	if params == nil {
 		params = &ListServiceSpecificCredentialsInput{}
@@ -43,10 +43,13 @@ type ListServiceSpecificCredentialsInput struct {
 
 	// The name of the user whose service-specific credentials you want information
 	// about. If this value is not specified, then the operation assumes the user whose
-	// credentials are used to call the operation. This parameter allows (through its
-	// regex pattern (http://wikipedia.org/wiki/regex) ) a string of characters
-	// consisting of upper and lowercase alphanumeric characters with no spaces. You
-	// can also include any of the following characters: _+=,.@-
+	// credentials are used to call the operation.
+	//
+	// This parameter allows (through its [regex pattern]) a string of characters consisting of upper
+	// and lowercase alphanumeric characters with no spaces. You can also include any
+	// of the following characters: _+=,.@-
+	//
+	// [regex pattern]: http://wikipedia.org/wiki/regex
 	UserName *string
 
 	noSmithyDocumentSerde
@@ -86,25 +89,25 @@ func (c *Client) addOperationListServiceSpecificCredentialsMiddlewares(stack *mi
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -119,10 +122,13 @@ func (c *Client) addOperationListServiceSpecificCredentialsMiddlewares(stack *mi
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListServiceSpecificCredentials(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

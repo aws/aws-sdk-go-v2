@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/ram/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -14,8 +13,10 @@ import (
 
 // Adds the specified tag keys and values to a resource share or managed
 // permission. If you choose a resource share, the tags are attached to only the
-// resource share, not to the resources that are in the resource share. The tags on
-// a managed permission are the same for all versions of the managed permission.
+// resource share, not to the resources that are in the resource share.
+//
+// The tags on a managed permission are the same for all versions of the managed
+// permission.
 func (c *Client) TagResource(ctx context.Context, params *TagResourceInput, optFns ...func(*Options)) (*TagResourceOutput, error) {
 	if params == nil {
 		params = &TagResourceInput{}
@@ -40,14 +41,16 @@ type TagResourceInput struct {
 	// This member is required.
 	Tags []types.Tag
 
-	// Specifies the Amazon Resource Name (ARN) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
-	// of the managed permission that you want to add tags to. You must specify either
-	// resourceArn , or resourceShareArn , but not both.
+	// Specifies the [Amazon Resource Name (ARN)] of the managed permission that you want to add tags to. You must
+	// specify either resourceArn , or resourceShareArn , but not both.
+	//
+	// [Amazon Resource Name (ARN)]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
 	ResourceArn *string
 
-	// Specifies the Amazon Resource Name (ARN) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
-	// of the resource share that you want to add tags to. You must specify either
-	// resourceShareArn , or resourceArn , but not both.
+	// Specifies the [Amazon Resource Name (ARN)] of the resource share that you want to add tags to. You must
+	// specify either resourceShareArn , or resourceArn , but not both.
+	//
+	// [Amazon Resource Name (ARN)]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
 	ResourceShareArn *string
 
 	noSmithyDocumentSerde
@@ -82,25 +85,25 @@ func (c *Client) addOperationTagResourceMiddlewares(stack *middleware.Stack, opt
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -115,13 +118,16 @@ func (c *Client) addOperationTagResourceMiddlewares(stack *middleware.Stack, opt
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpTagResourceValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opTagResource(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

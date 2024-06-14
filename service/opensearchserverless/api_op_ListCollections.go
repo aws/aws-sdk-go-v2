@@ -6,16 +6,17 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/opensearchserverless/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists all OpenSearch Serverless collections. For more information, see Creating
-// and managing Amazon OpenSearch Serverless collections (https://docs.aws.amazon.com/opensearch-service/latest/developerguide/serverless-manage.html)
-// . Make sure to include an empty request body {} if you don't include any
+// Lists all OpenSearch Serverless collections. For more information, see [Creating and managing Amazon OpenSearch Serverless collections].
+//
+// Make sure to include an empty request body {} if you don't include any
 // collection filters in the request.
+//
+// [Creating and managing Amazon OpenSearch Serverless collections]: https://docs.aws.amazon.com/opensearch-service/latest/developerguide/serverless-manage.html
 func (c *Client) ListCollections(ctx context.Context, params *ListCollectionsInput, optFns ...func(*Options)) (*ListCollectionsOutput, error) {
 	if params == nil {
 		params = &ListCollectionsInput{}
@@ -33,7 +34,7 @@ func (c *Client) ListCollections(ctx context.Context, params *ListCollectionsInp
 
 type ListCollectionsInput struct {
 
-	// A list of filter names and values that you can use for requests.
+	//  A list of filter names and values that you can use for requests.
 	CollectionFilters *types.CollectionFilters
 
 	// The maximum number of results to return. Default is 20. You can use nextToken
@@ -86,25 +87,25 @@ func (c *Client) addOperationListCollectionsMiddlewares(stack *middleware.Stack,
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -119,10 +120,13 @@ func (c *Client) addOperationListCollectionsMiddlewares(stack *middleware.Stack,
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListCollections(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

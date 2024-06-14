@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/bedrock/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -14,8 +13,11 @@ import (
 )
 
 // Returns a list of the custom models that you have created with the
-// CreateModelCustomizationJob operation. For more information, see Custom models (https://docs.aws.amazon.com/bedrock/latest/userguide/custom-models.html)
-// in the Bedrock User Guide.
+// CreateModelCustomizationJob operation.
+//
+// For more information, see [Custom models] in the Amazon Bedrock User Guide.
+//
+// [Custom models]: https://docs.aws.amazon.com/bedrock/latest/userguide/custom-models.html
 func (c *Client) ListCustomModels(ctx context.Context, params *ListCustomModelsInput, optFns ...func(*Options)) (*ListCustomModelsOutput, error) {
 	if params == nil {
 		params = &ListCustomModelsInput{}
@@ -33,7 +35,8 @@ func (c *Client) ListCustomModels(ctx context.Context, params *ListCustomModelsI
 
 type ListCustomModelsInput struct {
 
-	// Return custom models only if the base model ARN matches this parameter.
+	// Return custom models only if the base model Amazon Resource Name (ARN) matches
+	// this parameter.
 	BaseModelArnEquals *string
 
 	// Return custom models created after the specified time.
@@ -42,7 +45,8 @@ type ListCustomModelsInput struct {
 	// Return custom models created before the specified time.
 	CreationTimeBefore *time.Time
 
-	// Return custom models only if the foundation model ARN matches this parameter.
+	// Return custom models only if the foundation model Amazon Resource Name (ARN)
+	// matches this parameter.
 	FoundationModelArnEquals *string
 
 	// Maximum number of results to return in the response.
@@ -100,25 +104,25 @@ func (c *Client) addOperationListCustomModelsMiddlewares(stack *middleware.Stack
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -133,10 +137,13 @@ func (c *Client) addOperationListCustomModelsMiddlewares(stack *middleware.Stack
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListCustomModels(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

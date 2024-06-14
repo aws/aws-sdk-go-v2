@@ -6,16 +6,16 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/opensearch/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Reschedules a planned domain configuration change for a later time. This change
-// can be a scheduled service software update (https://docs.aws.amazon.com/opensearch-service/latest/developerguide/service-software.html)
-// or a blue/green Auto-Tune enhancement (https://docs.aws.amazon.com/opensearch-service/latest/developerguide/auto-tune.html#auto-tune-types)
-// .
+// can be a scheduled [service software update]or a [blue/green Auto-Tune enhancement].
+//
+// [service software update]: https://docs.aws.amazon.com/opensearch-service/latest/developerguide/service-software.html
+// [blue/green Auto-Tune enhancement]: https://docs.aws.amazon.com/opensearch-service/latest/developerguide/auto-tune.html#auto-tune-types
 func (c *Client) UpdateScheduledAction(ctx context.Context, params *UpdateScheduledActionInput, optFns ...func(*Options)) (*UpdateScheduledActionOutput, error) {
 	if params == nil {
 		params = &UpdateScheduledActionInput{}
@@ -33,17 +33,19 @@ func (c *Client) UpdateScheduledAction(ctx context.Context, params *UpdateSchedu
 
 type UpdateScheduledActionInput struct {
 
-	// The unique identifier of the action to reschedule. To retrieve this ID, send a
-	// ListScheduledActions (https://docs.aws.amazon.com/opensearch-service/latest/APIReference/API_ListScheduledActions.html)
+	// The unique identifier of the action to reschedule. To retrieve this ID, send a [ListScheduledActions]
 	// request.
+	//
+	// [ListScheduledActions]: https://docs.aws.amazon.com/opensearch-service/latest/APIReference/API_ListScheduledActions.html
 	//
 	// This member is required.
 	ActionID *string
 
 	// The type of action to reschedule. Can be one of SERVICE_SOFTWARE_UPDATE ,
-	// JVM_HEAP_SIZE_TUNING , or JVM_YOUNG_GEN_TUNING . To retrieve this value, send a
-	// ListScheduledActions (https://docs.aws.amazon.com/opensearch-service/latest/APIReference/API_ListScheduledActions.html)
+	// JVM_HEAP_SIZE_TUNING , or JVM_YOUNG_GEN_TUNING . To retrieve this value, send a [ListScheduledActions]
 	// request.
+	//
+	// [ListScheduledActions]: https://docs.aws.amazon.com/opensearch-service/latest/APIReference/API_ListScheduledActions.html
 	//
 	// This member is required.
 	ActionType types.ActionType
@@ -54,10 +56,13 @@ type UpdateScheduledActionInput struct {
 	DomainName *string
 
 	// When to schedule the action.
+	//
 	//   - NOW - Immediately schedules the update to happen in the current hour if
 	//   there's capacity available.
+	//
 	//   - TIMESTAMP - Lets you specify a custom date and time to apply the update. If
 	//   you specify this value, you must also provide a value for DesiredStartTime .
+	//
 	//   - OFF_PEAK_WINDOW - Marks the action to be picked up during an upcoming
 	//   off-peak window. There's no guarantee that the change will be implemented during
 	//   the next immediate window. Depending on capacity, it might happen in subsequent
@@ -106,25 +111,25 @@ func (c *Client) addOperationUpdateScheduledActionMiddlewares(stack *middleware.
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -139,13 +144,16 @@ func (c *Client) addOperationUpdateScheduledActionMiddlewares(stack *middleware.
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpUpdateScheduledActionValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateScheduledAction(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

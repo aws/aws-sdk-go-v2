@@ -6,15 +6,16 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Adds a Secure Shell (SSH) public key to a Transfer Family user identified by a
 // UserName value assigned to the specific file transfer protocol-enabled server,
-// identified by ServerId . The response returns the UserName value, the ServerId
-// value, and the name of the SshPublicKeyId .
+// identified by ServerId .
+//
+// The response returns the UserName value, the ServerId value, and the name of
+// the SshPublicKeyId .
 func (c *Client) ImportSshPublicKey(ctx context.Context, params *ImportSshPublicKeyInput, optFns ...func(*Options)) (*ImportSshPublicKeyOutput, error) {
 	if params == nil {
 		params = &ImportSshPublicKeyInput{}
@@ -37,8 +38,9 @@ type ImportSshPublicKeyInput struct {
 	// This member is required.
 	ServerId *string
 
-	// The public key portion of an SSH key pair. Transfer Family accepts RSA, ECDSA,
-	// and ED25519 keys.
+	// The public key portion of an SSH key pair.
+	//
+	// Transfer Family accepts RSA, ECDSA, and ED25519 keys.
 	//
 	// This member is required.
 	SshPublicKeyBody *string
@@ -99,25 +101,25 @@ func (c *Client) addOperationImportSshPublicKeyMiddlewares(stack *middleware.Sta
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -132,13 +134,16 @@ func (c *Client) addOperationImportSshPublicKeyMiddlewares(stack *middleware.Sta
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpImportSshPublicKeyValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opImportSshPublicKey(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

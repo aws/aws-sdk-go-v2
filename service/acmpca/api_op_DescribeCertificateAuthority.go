@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/acmpca/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -16,17 +15,24 @@ import (
 // been shared with you. You specify the private CA on input by its ARN (Amazon
 // Resource Name). The output contains the status of your CA. This can be any of
 // the following:
+//
 //   - CREATING - Amazon Web Services Private CA is creating your private
 //     certificate authority.
+//
 //   - PENDING_CERTIFICATE - The certificate is pending. You must use your Amazon
 //     Web Services Private CA-hosted or on-premises root or subordinate CA to sign
 //     your private CA CSR and then import it into Amazon Web Services Private CA.
+//
 //   - ACTIVE - Your private CA is active.
+//
 //   - DISABLED - Your private CA has been disabled.
+//
 //   - EXPIRED - Your private CA certificate has expired.
+//
 //   - FAILED - Your private CA has failed. Your CA can fail because of problems
 //     such a network outage or back-end Amazon Web Services failure or other errors. A
 //     failed CA can never return to the pending state. You must create a new CA.
+//
 //   - DELETED - Your private CA is within the restoration period, after which it
 //     is permanently deleted. The length of time remaining in the CA's restoration
 //     period is also included in this action's output.
@@ -47,11 +53,13 @@ func (c *Client) DescribeCertificateAuthority(ctx context.Context, params *Descr
 
 type DescribeCertificateAuthorityInput struct {
 
-	// The Amazon Resource Name (ARN) that was returned when you called
-	// CreateCertificateAuthority (https://docs.aws.amazon.com/privateca/latest/APIReference/API_CreateCertificateAuthority.html)
-	// . This must be of the form:
+	// The Amazon Resource Name (ARN) that was returned when you called [CreateCertificateAuthority]. This must be
+	// of the form:
+	//
 	// arn:aws:acm-pca:region:account:certificate-authority/12345678-1234-1234-1234-123456789012
 	// .
+	//
+	// [CreateCertificateAuthority]: https://docs.aws.amazon.com/privateca/latest/APIReference/API_CreateCertificateAuthority.html
 	//
 	// This member is required.
 	CertificateAuthorityArn *string
@@ -61,8 +69,9 @@ type DescribeCertificateAuthorityInput struct {
 
 type DescribeCertificateAuthorityOutput struct {
 
-	// A CertificateAuthority (https://docs.aws.amazon.com/privateca/latest/APIReference/API_CertificateAuthority.html)
-	// structure that contains information about your private CA.
+	// A [CertificateAuthority] structure that contains information about your private CA.
+	//
+	// [CertificateAuthority]: https://docs.aws.amazon.com/privateca/latest/APIReference/API_CertificateAuthority.html
 	CertificateAuthority *types.CertificateAuthority
 
 	// Metadata pertaining to the operation's result.
@@ -93,25 +102,25 @@ func (c *Client) addOperationDescribeCertificateAuthorityMiddlewares(stack *midd
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -126,13 +135,16 @@ func (c *Client) addOperationDescribeCertificateAuthorityMiddlewares(stack *midd
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDescribeCertificateAuthorityValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeCertificateAuthority(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

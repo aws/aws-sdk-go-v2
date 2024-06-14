@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/simspaceweaver/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -42,8 +41,9 @@ type DescribeSimulationInput struct {
 type DescribeSimulationOutput struct {
 
 	// The Amazon Resource Name (ARN) of the simulation. For more information about
-	// ARNs, see Amazon Resource Names (ARNs) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
-	// in the Amazon Web Services General Reference.
+	// ARNs, see [Amazon Resource Names (ARNs)]in the Amazon Web Services General Reference.
+	//
+	// [Amazon Resource Names (ARNs)]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
 	Arn *string
 
 	// The time when the simulation was created, expressed as the number of seconds
@@ -75,10 +75,11 @@ type DescribeSimulationOutput struct {
 
 	// The Amazon Resource Name (ARN) of the Identity and Access Management (IAM) role
 	// that the simulation assumes to perform actions. For more information about ARNs,
-	// see Amazon Resource Names (ARNs) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
-	// in the Amazon Web Services General Reference. For more information about IAM
-	// roles, see IAM roles (https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles.html)
-	// in the Identity and Access Management User Guide.
+	// see [Amazon Resource Names (ARNs)]in the Amazon Web Services General Reference. For more information about
+	// IAM roles, see [IAM roles]in the Identity and Access Management User Guide.
+	//
+	// [IAM roles]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles.html
+	// [Amazon Resource Names (ARNs)]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
 	RoleArn *string
 
 	// An error message that SimSpace Weaver returns only if there is a problem with
@@ -88,15 +89,16 @@ type DescribeSimulationOutput struct {
 	SchemaError *string
 
 	// The location of the simulation schema in Amazon Simple Storage Service (Amazon
-	// S3). For more information about Amazon S3, see the Amazon Simple Storage
-	// Service User Guide  (https://docs.aws.amazon.com/AmazonS3/latest/userguide/Welcome.html)
-	// .
+	// S3). For more information about Amazon S3, see the [Amazon Simple Storage Service User Guide].
+	//
+	// [Amazon Simple Storage Service User Guide]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/Welcome.html
 	SchemaS3Location *types.S3Location
 
 	// A location in Amazon Simple Storage Service (Amazon S3) where SimSpace Weaver
 	// stores simulation data, such as your app .zip files and schema file. For more
-	// information about Amazon S3, see the Amazon Simple Storage Service User Guide  (https://docs.aws.amazon.com/AmazonS3/latest/userguide/Welcome.html)
-	// .
+	// information about Amazon S3, see the [Amazon Simple Storage Service User Guide].
+	//
+	// [Amazon Simple Storage Service User Guide]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/Welcome.html
 	SnapshotS3Location *types.S3Location
 
 	// An error message that SimSpace Weaver returns only if a problem occurs when the
@@ -137,25 +139,25 @@ func (c *Client) addOperationDescribeSimulationMiddlewares(stack *middleware.Sta
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -170,13 +172,16 @@ func (c *Client) addOperationDescribeSimulationMiddlewares(stack *middleware.Sta
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDescribeSimulationValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeSimulation(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

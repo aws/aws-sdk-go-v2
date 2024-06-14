@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/codedeploy/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -33,12 +32,12 @@ func (c *Client) GetDeploymentInstance(ctx context.Context, params *GetDeploymen
 // Represents the input of a GetDeploymentInstance operation.
 type GetDeploymentInstanceInput struct {
 
-	// The unique ID of a deployment.
+	//  The unique ID of a deployment.
 	//
 	// This member is required.
 	DeploymentId *string
 
-	// The unique ID of an instance in the deployment group.
+	//  The unique ID of an instance in the deployment group.
 	//
 	// This member is required.
 	InstanceId *string
@@ -49,7 +48,7 @@ type GetDeploymentInstanceInput struct {
 // Represents the output of a GetDeploymentInstance operation.
 type GetDeploymentInstanceOutput struct {
 
-	// Information about the instance.
+	//  Information about the instance.
 	//
 	// Deprecated: InstanceSummary is deprecated, use DeploymentTarget instead.
 	InstanceSummary *types.InstanceSummary
@@ -82,25 +81,25 @@ func (c *Client) addOperationGetDeploymentInstanceMiddlewares(stack *middleware.
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -115,13 +114,16 @@ func (c *Client) addOperationGetDeploymentInstanceMiddlewares(stack *middleware.
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpGetDeploymentInstanceValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetDeploymentInstance(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

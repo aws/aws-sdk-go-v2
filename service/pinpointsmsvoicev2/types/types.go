@@ -48,8 +48,8 @@ type AccountLimit struct {
 // events.
 type CloudWatchLogsDestination struct {
 
-	// The Amazon Resource Name (ARN) of an Amazon Identity and Access Management
-	// (IAM) role that is able to write event data to an Amazon CloudWatch destination.
+	// The Amazon Resource Name (ARN) of an Identity and Access Management role that
+	// is able to write event data to an Amazon CloudWatch destination.
 	//
 	// This member is required.
 	IamRoleArn *string
@@ -92,8 +92,9 @@ type ConfigurationSetInformation struct {
 	// This member is required.
 	ConfigurationSetName *string
 
-	// The time when the ConfigurationSet was created, in UNIX epoch time (https://www.epochconverter.com/)
-	// format.
+	// The time when the ConfigurationSet was created, in [UNIX epoch time] format.
+	//
+	// [UNIX epoch time]: https://www.epochconverter.com/
 	//
 	// This member is required.
 	CreatedTimestamp *time.Time
@@ -112,12 +113,17 @@ type ConfigurationSetInformation struct {
 	// The default sender ID used by the ConfigurationSet.
 	DefaultSenderId *string
 
+	// The unique identifier for the protect configuration.
+	ProtectConfigurationId *string
+
 	noSmithyDocumentSerde
 }
 
-// Contains information about an event destination. Event destinations are
-// associated with configuration sets, which enable you to publish message sending
-// events to CloudWatch, Kinesis Data Firehose,or Amazon SNS.
+// Contains information about an event destination.
+//
+// Event destinations are associated with configuration sets, which enable you to
+// publish message sending events to CloudWatch, Kinesis Data Firehose, or Amazon
+// SNS.
 type EventDestination struct {
 
 	// When set to true events will be logged.
@@ -130,8 +136,9 @@ type EventDestination struct {
 	// This member is required.
 	EventDestinationName *string
 
-	// An array of event types that determine which events to log. The TEXT_SENT event
-	// type is not supported.
+	// An array of event types that determine which events to log.
+	//
+	// The TEXT_SENT event type is not supported.
 	//
 	// This member is required.
 	MatchingEventTypes []EventType
@@ -189,10 +196,11 @@ type KeywordInformation struct {
 }
 
 // Contains the delivery stream Amazon Resource Name (ARN), and the ARN of the
-// Identity and Access Management (IAM) role associated with an Kinesis Data
-// Firehose event destination. Event destinations, such as Kinesis Data Firehose,
-// are associated with configuration sets, which enable you to publish message
-// sending events.
+// Identity and Access Management (IAM) role associated with a Kinesis Data
+// Firehose event destination.
+//
+// Event destinations, such as Kinesis Data Firehose, are associated with
+// configuration sets, which enable you to publish message sending events.
 type KinesisFirehoseDestination struct {
 
 	// The Amazon Resource Name (ARN) of the delivery stream.
@@ -200,8 +208,8 @@ type KinesisFirehoseDestination struct {
 	// This member is required.
 	DeliveryStreamArn *string
 
-	// The ARN of an Amazon Identity and Access Management (IAM) role that is able to
-	// write event data to an Amazon Firehose destination.
+	// The ARN of an Identity and Access Management role that is able to write event
+	// data to an Amazon Kinesis Data Firehose destination.
 	//
 	// This member is required.
 	IamRoleArn *string
@@ -238,8 +246,9 @@ type OptedOutNumberInformation struct {
 	// This member is required.
 	OptedOutNumber *string
 
-	// The time that the op tout occurred, in UNIX epoch time (https://www.epochconverter.com/)
-	// format.
+	// The time that the op tout occurred, in [UNIX epoch time] format.
+	//
+	// [UNIX epoch time]: https://www.epochconverter.com/
 	//
 	// This member is required.
 	OptedOutTimestamp *time.Time
@@ -250,8 +259,9 @@ type OptedOutNumberInformation struct {
 // The information for all OptOutList in an Amazon Web Services account.
 type OptOutListInformation struct {
 
-	// The time when the OutOutList was created, in UNIX epoch time (https://www.epochconverter.com/)
-	// format.
+	// The time when the OutOutList was created, in [UNIX epoch time] format.
+	//
+	// [UNIX epoch time]: https://www.epochconverter.com/
 	//
 	// This member is required.
 	CreatedTimestamp *time.Time
@@ -272,7 +282,8 @@ type OptOutListInformation struct {
 // The metadata for an origination identity associated with a pool.
 type OriginationIdentityMetadata struct {
 
-	// The two-character code, in ISO 3166-1 alpha-2 format, for the country or region.
+	// The two-character code, in ISO 3166-1 alpha-2 format, for the country or
+	// region.
 	//
 	// This member is required.
 	IsoCountryCode *string
@@ -319,8 +330,9 @@ type PhoneNumberFilter struct {
 // account.
 type PhoneNumberInformation struct {
 
-	// The time when the phone number was created, in UNIX epoch time (https://www.epochconverter.com/)
-	// format.
+	// The time when the phone number was created, in [UNIX epoch time] format.
+	//
+	// [UNIX epoch time]: https://www.epochconverter.com/
 	//
 	// This member is required.
 	CreatedTimestamp *time.Time
@@ -330,7 +342,8 @@ type PhoneNumberInformation struct {
 	// This member is required.
 	DeletionProtectionEnabled bool
 
-	// The two-character code, in ISO 3166-1 alpha-2 format, for the country or region.
+	// The two-character code, in ISO 3166-1 alpha-2 format, for the country or
+	// region.
 	//
 	// This member is required.
 	IsoCountryCode *string
@@ -378,7 +391,9 @@ type PhoneNumberInformation struct {
 	// with a customizable message and adds the end recipient to the OptOutList. When
 	// set to true you're responsible for responding to HELP and STOP requests. You're
 	// also responsible for tracking and honoring opt-out request. For more information
-	// see Self-managed opt-outs (https://docs.aws.amazon.com/pinpoint/latest/userguide/settings-sms-managing.html#settings-account-sms-self-managed-opt-out)
+	// see [Self-managed opt-outs]
+	//
+	// [Self-managed opt-outs]: https://docs.aws.amazon.com/pinpoint/latest/userguide/settings-sms-managing.html#settings-account-sms-self-managed-opt-out
 	//
 	// This member is required.
 	SelfManagedOptOutsEnabled bool
@@ -432,8 +447,9 @@ type PoolFilter struct {
 // The information for a pool in an Amazon Web Services account.
 type PoolInformation struct {
 
-	// The time when the pool was created, in UNIX epoch time (https://www.epochconverter.com/)
-	// format.
+	// The time when the pool was created, in [UNIX epoch time] format.
+	//
+	// [UNIX epoch time]: https://www.epochconverter.com/
 	//
 	// This member is required.
 	CreatedTimestamp *time.Time
@@ -470,17 +486,20 @@ type PoolInformation struct {
 	// with a customizable message and adds the end recipient to the OptOutList. When
 	// set to true you're responsible for responding to HELP and STOP requests. You're
 	// also responsible for tracking and honoring opt-out requests. For more
-	// information see Self-managed opt-outs (https://docs.aws.amazon.com/pinpoint/latest/userguide/settings-sms-managing.html#settings-account-sms-self-managed-opt-out)
+	// information see [Self-managed opt-outs]
+	//
+	// [Self-managed opt-outs]: https://docs.aws.amazon.com/pinpoint/latest/userguide/settings-sms-managing.html#settings-account-sms-self-managed-opt-out
 	//
 	// This member is required.
 	SelfManagedOptOutsEnabled bool
 
-	// Allows you to enable shared routes on your pool. By default, this is set to
-	// False . If you set this value to True , your messages are sent using phone
-	// numbers or sender IDs (depending on the country) that are shared with other
-	// Amazon Pinpoint users. In some countries, such as the United States, senders
-	// aren't allowed to use shared routes and must use a dedicated phone number or
-	// short code.
+	// Allows you to enable shared routes on your pool.
+	//
+	// By default, this is set to False . If you set this value to True , your messages
+	// are sent using phone numbers or sender IDs (depending on the country) that are
+	// shared with other Amazon Pinpoint users. In some countries, such as the United
+	// States, senders aren't allowed to use shared routes and must use a dedicated
+	// phone number or short code.
 	//
 	// This member is required.
 	SharedRoutesEnabled bool
@@ -519,6 +538,69 @@ type PoolOriginationIdentitiesFilter struct {
 	//
 	// This member is required.
 	Values []string
+
+	noSmithyDocumentSerde
+}
+
+// The types of statuses that can be used.
+type ProtectConfigurationCountryRuleSetInformation struct {
+
+	// The types of protection that can be used.
+	//
+	// This member is required.
+	ProtectStatus ProtectStatus
+
+	noSmithyDocumentSerde
+}
+
+// The filter definition for filtering protect configurations that meet a
+// specified criteria.
+type ProtectConfigurationFilter struct {
+
+	// The name of the attribute to filter on.
+	//
+	// This member is required.
+	Name ProtectConfigurationFilterName
+
+	// An array of values to filter for.
+	//
+	// This member is required.
+	Values []string
+
+	noSmithyDocumentSerde
+}
+
+// Provides information on the specified protect configuration.
+type ProtectConfigurationInformation struct {
+
+	// This is true if the protect configuration is set as your account default
+	// protect configuration.
+	//
+	// This member is required.
+	AccountDefault bool
+
+	// The time when the protect configuration was created, in [UNIX epoch time] format.
+	//
+	// [UNIX epoch time]: https://www.epochconverter.com/
+	//
+	// This member is required.
+	CreatedTimestamp *time.Time
+
+	// The status of deletion protection for the protect configuration. When set to
+	// true deletion protection is enabled. By default this is set to false.
+	//
+	// This member is required.
+	DeletionProtectionEnabled bool
+
+	// The Amazon Resource Name (ARN) of the protect configuration.
+	//
+	// This member is required.
+	ProtectConfigurationArn *string
+
+	// The unique identifier for the protect configuration.
+	//
+	// This member is required.
+	ProtectConfigurationId *string
 
 	noSmithyDocumentSerde
 }
@@ -590,16 +672,21 @@ type RegistrationAttachmentFilter struct {
 type RegistrationAttachmentsInformation struct {
 
 	// The status of the registration attachment.
+	//
 	//   - UPLOAD_IN_PROGRESS The attachment is being uploaded.
+	//
 	//   - UPLOAD_COMPLETE The attachment has been uploaded.
+	//
 	//   - UPLOAD_FAILED The attachment failed to uploaded.
+	//
 	//   - DELETED The attachment has been deleted..
 	//
 	// This member is required.
 	AttachmentStatus AttachmentStatus
 
-	// The time when the registration attachment was created, in UNIX epoch time (https://www.epochconverter.com/)
-	// format.
+	// The time when the registration attachment was created, in [UNIX epoch time] format.
+	//
+	// [UNIX epoch time]: https://www.epochconverter.com/
 	//
 	// This member is required.
 	CreatedTimestamp *time.Time
@@ -653,8 +740,7 @@ type RegistrationFieldDefinition struct {
 	// This member is required.
 	DisplayHints *RegistrationFieldDisplayHints
 
-	// The path to the registration form field. You can use
-	// DescribeRegistrationFieldDefinitions for a list of FieldPaths.
+	// The path to the registration form field. You can use DescribeRegistrationFieldDefinitions for a list of FieldPaths.
 	//
 	// This member is required.
 	FieldPath *string
@@ -721,8 +807,7 @@ type RegistrationFieldDisplayHints struct {
 // Provides the values of the specified field.
 type RegistrationFieldValueInformation struct {
 
-	// The path to the registration form field. You can use
-	// DescribeRegistrationFieldDefinitions for a list of FieldPaths.
+	// The path to the registration form field. You can use DescribeRegistrationFieldDefinitions for a list of FieldPaths.
 	//
 	// This member is required.
 	FieldPath *string
@@ -762,8 +847,9 @@ type RegistrationFilter struct {
 // Provides information about the requested registration.
 type RegistrationInformation struct {
 
-	// The time when the registration was created, in UNIX epoch time (https://www.epochconverter.com/)
-	// format.
+	// The time when the registration was created, in [UNIX epoch time] format.
+	//
+	// [UNIX epoch time]: https://www.epochconverter.com/
 	//
 	// This member is required.
 	CreatedTimestamp *time.Time
@@ -784,23 +870,31 @@ type RegistrationInformation struct {
 	RegistrationId *string
 
 	// The status of the registration.
+	//
 	//   - CREATED : Your registration is created but not submitted.
+	//
 	//   - SUBMITTED : Your registration has been submitted and is awaiting review.
+	//
 	//   - REVIEWING : Your registration has been accepted and is being reviewed.
+	//
 	//   - PROVISIONING : Your registration has been approved and your origination
 	//   identity is being created.
+	//
 	//   - COMPLETE : Your registration has been approved and and your origination
 	//   identity has been created.
+	//
 	//   - REQUIRES_UPDATES : You must fix your registration and resubmit it.
+	//
 	//   - CLOSED : The phone number or sender ID has been deleted and you must also
 	//   delete the registration for the number.
+	//
 	//   - DELETED : The registration has been deleted.
 	//
 	// This member is required.
 	RegistrationStatus RegistrationStatus
 
 	// The type of registration form. The list of RegistrationTypes can be found using
-	// the DescribeRegistrationTypeDefinitions action.
+	// the DescribeRegistrationTypeDefinitionsaction.
 	//
 	// This member is required.
 	RegistrationType *string
@@ -867,7 +961,7 @@ type RegistrationTypeDefinition struct {
 	DisplayHints *RegistrationTypeDisplayHints
 
 	// The type of registration form. The list of RegistrationTypes can be found using
-	// the DescribeRegistrationTypeDefinitions action.
+	// the DescribeRegistrationTypeDefinitionsaction.
 	//
 	// This member is required.
 	RegistrationType *string
@@ -939,14 +1033,22 @@ type RegistrationVersionFilter struct {
 type RegistrationVersionInformation struct {
 
 	// The status of the registration.
+	//
 	//   - DRAFT : The initial status of a registration version after it’s created.
+	//
 	//   - SUBMITTED : Your registration has been submitted.
+	//
 	//   - REVIEWING : Your registration has been accepted and is being reviewed.
+	//
 	//   - APPROVED : Your registration has been approved.
+	//
 	//   - DISCARDED : You've abandon this version of their registration to start over
 	//   with a new version.
+	//
 	//   - DENIED : You must fix your registration and resubmit it.
+	//
 	//   - REVOKED : Your previously approved registration has been revoked.
+	//
 	//   - ARCHIVED : Your previously approved registration version moves into this
 	//   status when a more recently submitted version is approved.
 	//
@@ -974,38 +1076,46 @@ type RegistrationVersionInformation struct {
 // the reservations status changes.
 type RegistrationVersionStatusHistory struct {
 
-	// The time when the registration was in the draft state, in UNIX epoch time (https://www.epochconverter.com/)
-	// format.
+	// The time when the registration was in the draft state, in [UNIX epoch time] format.
+	//
+	// [UNIX epoch time]: https://www.epochconverter.com/
 	//
 	// This member is required.
 	DraftTimestamp *time.Time
 
-	// The time when the registration was in the approved state, in UNIX epoch time (https://www.epochconverter.com/)
-	// format.
+	// The time when the registration was in the approved state, in [UNIX epoch time] format.
+	//
+	// [UNIX epoch time]: https://www.epochconverter.com/
 	ApprovedTimestamp *time.Time
 
-	// The time when the registration was in the archived state, in UNIX epoch time (https://www.epochconverter.com/)
-	// format.
+	// The time when the registration was in the archived state, in [UNIX epoch time] format.
+	//
+	// [UNIX epoch time]: https://www.epochconverter.com/
 	ArchivedTimestamp *time.Time
 
-	// The time when the registration was in the denied state, in UNIX epoch time (https://www.epochconverter.com/)
-	// format.
+	// The time when the registration was in the denied state, in [UNIX epoch time] format.
+	//
+	// [UNIX epoch time]: https://www.epochconverter.com/
 	DeniedTimestamp *time.Time
 
-	// The time when the registration was in the discarded state, in UNIX epoch time (https://www.epochconverter.com/)
-	// format.
+	// The time when the registration was in the discarded state, in [UNIX epoch time] format.
+	//
+	// [UNIX epoch time]: https://www.epochconverter.com/
 	DiscardedTimestamp *time.Time
 
-	// The time when the registration was in the reviewing state, in UNIX epoch time (https://www.epochconverter.com/)
-	// format.
+	// The time when the registration was in the reviewing state, in [UNIX epoch time] format.
+	//
+	// [UNIX epoch time]: https://www.epochconverter.com/
 	ReviewingTimestamp *time.Time
 
-	// The time when the registration was in the revoked state, in UNIX epoch time (https://www.epochconverter.com/)
-	// format.
+	// The time when the registration was in the revoked state, in [UNIX epoch time] format.
+	//
+	// [UNIX epoch time]: https://www.epochconverter.com/
 	RevokedTimestamp *time.Time
 
-	// The time when the registration was in the submitted state, in UNIX epoch time (https://www.epochconverter.com/)
-	// format.
+	// The time when the registration was in the submitted state, in [UNIX epoch time] format.
+	//
+	// [UNIX epoch time]: https://www.epochconverter.com/
 	SubmittedTimestamp *time.Time
 
 	noSmithyDocumentSerde
@@ -1049,13 +1159,15 @@ type SelectValidation struct {
 	noSmithyDocumentSerde
 }
 
-// The alphanumeric sender ID in a specific country that you want to describe. For
-// more information on sender IDs see Requesting sender IDs for SMS messaging with
-// Amazon Pinpoint  (https://docs.aws.amazon.com/pinpoint/latest/userguide/channels-sms-awssupport-sender-id.html)
-// in the Amazon Pinpoint User Guide.
+//	The alphanumeric sender ID in a specific country that you want to describe.
+//
+// For more information on sender IDs see [Requesting sender IDs for SMS messaging with Amazon Pinpoint]in the Amazon Pinpoint User Guide.
+//
+// [Requesting sender IDs for SMS messaging with Amazon Pinpoint]: https://docs.aws.amazon.com/pinpoint/latest/userguide/channels-sms-awssupport-sender-id.html
 type SenderIdAndCountry struct {
 
-	// The two-character code, in ISO 3166-1 alpha-2 format, for the country or region.
+	// The two-character code, in ISO 3166-1 alpha-2 format, for the country or
+	// region.
 	//
 	// This member is required.
 	IsoCountryCode *string
@@ -1093,7 +1205,8 @@ type SenderIdInformation struct {
 	// This member is required.
 	DeletionProtectionEnabled bool
 
-	// The two-character code, in ISO 3166-1 alpha-2 format, for the country or region.
+	// The two-character code, in ISO 3166-1 alpha-2 format, for the country or
+	// region.
 	//
 	// This member is required.
 	IsoCountryCode *string
@@ -1146,8 +1259,9 @@ type SnsDestination struct {
 
 // Describes the current Amazon Pinpoint monthly spend limits for sending voice
 // and text messages. For more information on increasing your monthly spend limit,
-// see Requesting increases to your monthly SMS spending quota for Amazon Pinpoint  (https://docs.aws.amazon.com/pinpoint/latest/userguide/channels-sms-awssupport-spend-threshold.html)
-// in the Amazon Pinpoint User Guide.
+// see [Requesting increases to your monthly SMS spending quota for Amazon Pinpoint]in the Amazon Pinpoint User Guide.
+//
+// [Requesting increases to your monthly SMS spending quota for Amazon Pinpoint]: https://docs.aws.amazon.com/pinpoint/latest/userguide/channels-sms-awssupport-spend-threshold.html
 type SpendLimit struct {
 
 	// The maximum amount of money, in US dollars, that you want to be able to spend
@@ -1157,7 +1271,7 @@ type SpendLimit struct {
 	// This member is required.
 	EnforcedLimit int64
 
-	// The maximum amount of money that you are able to spend to send messages each
+	//  The maximum amount of money that you are able to spend to send messages each
 	// month, in US dollars.
 	//
 	// This member is required.
@@ -1183,10 +1297,13 @@ type SpendLimit struct {
 type SupportedAssociation struct {
 
 	// The association behavior.
+	//
 	//   - ASSOCIATE_BEFORE_SUBMIT The origination identity has to be supplied when
 	//   creating a registration.
+	//
 	//   - ASSOCIATE_ON_APPROVAL This applies to all short code registrations. The
 	//   short code will be automatically provisioned once the registration is approved.
+	//
 	//   - ASSOCIATE_AFTER_COMPLETE This applies to phone number registrations when you
 	//   must complete a registration first, then associate one or more phone numbers
 	//   later. For example 10DLC campaigns and long codes.
@@ -1195,10 +1312,13 @@ type SupportedAssociation struct {
 	AssociationBehavior RegistrationAssociationBehavior
 
 	// The disassociation behavior.
+	//
 	//   - DISASSOCIATE_ALL_CLOSES_REGISTRATION All origination identities must be
 	//   disassociated from the registration before the registration can be closed.
+	//
 	//   - DISASSOCIATE_ALL_ALLOWS_DELETE_REGISTRATION All origination identities must
 	//   be disassociated from the registration before the registration can be deleted.
+	//
 	//   - DELETE_REGISTRATION_DISASSOCIATES The registration can be deleted and all
 	//   origination identities will be disasscoiated.
 	//
@@ -1291,8 +1411,9 @@ type VerifiedDestinationNumberFilter struct {
 // Provides information about the requested verified destintion phone number.
 type VerifiedDestinationNumberInformation struct {
 
-	// The time when the destination phone number was created, in UNIX epoch time (https://www.epochconverter.com/)
-	// format.
+	// The time when the destination phone number was created, in [UNIX epoch time] format.
+	//
+	// [UNIX epoch time]: https://www.epochconverter.com/
 	//
 	// This member is required.
 	CreatedTimestamp *time.Time
@@ -1303,7 +1424,9 @@ type VerifiedDestinationNumberInformation struct {
 	DestinationPhoneNumber *string
 
 	// The status of the verified destination phone number.
+	//
 	//   - PENDING : The phone number hasn't been verified yet.
+	//
 	//   - VERIFIED : The phone number is verified and can receive messages.
 	//
 	// This member is required.

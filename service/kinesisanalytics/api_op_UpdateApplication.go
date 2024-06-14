@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/kinesisanalytics/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -14,11 +13,14 @@ import (
 
 // This documentation is for version 1 of the Amazon Kinesis Data Analytics API,
 // which only supports SQL applications. Version 2 of the API supports SQL and Java
-// applications. For more information about version 2, see Amazon Kinesis Data
-// Analytics API V2 Documentation . Updates an existing Amazon Kinesis Analytics
-// application. Using this API, you can update application code, input
-// configuration, and output configuration. Note that Amazon Kinesis Analytics
-// updates the CurrentApplicationVersionId each time you update your application.
+// applications. For more information about version 2, see Amazon Kinesis Data Analytics API V2 Documentation.
+//
+// Updates an existing Amazon Kinesis Analytics application. Using this API, you
+// can update application code, input configuration, and output configuration.
+//
+// Note that Amazon Kinesis Analytics updates the CurrentApplicationVersionId each
+// time you update your application.
+//
 // This operation requires permission for the kinesisanalytics:UpdateApplication
 // action.
 func (c *Client) UpdateApplication(ctx context.Context, params *UpdateApplicationInput, optFns ...func(*Options)) (*UpdateApplicationOutput, error) {
@@ -48,8 +50,10 @@ type UpdateApplicationInput struct {
 	// This member is required.
 	ApplicationUpdate *types.ApplicationUpdate
 
-	// The current application version ID. You can use the DescribeApplication (https://docs.aws.amazon.com/kinesisanalytics/latest/dev/API_DescribeApplication.html)
-	// operation to get this value.
+	// The current application version ID. You can use the [DescribeApplication] operation to get this
+	// value.
+	//
+	// [DescribeApplication]: https://docs.aws.amazon.com/kinesisanalytics/latest/dev/API_DescribeApplication.html
 	//
 	// This member is required.
 	CurrentApplicationVersionId *int64
@@ -86,25 +90,25 @@ func (c *Client) addOperationUpdateApplicationMiddlewares(stack *middleware.Stac
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -119,13 +123,16 @@ func (c *Client) addOperationUpdateApplicationMiddlewares(stack *middleware.Stac
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpUpdateApplicationValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateApplication(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

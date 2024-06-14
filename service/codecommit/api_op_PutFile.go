@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/codecommit/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -43,8 +42,10 @@ type PutFileInput struct {
 	FileContent []byte
 
 	// The name of the file you want to add or update, including the relative path to
-	// the file in the repository. If the path does not currently exist in the
-	// repository, the path is created as part of adding the file.
+	// the file in the repository.
+	//
+	// If the path does not currently exist in the repository, the path is created as
+	// part of adding the file.
 	//
 	// This member is required.
 	FilePath *string
@@ -71,9 +72,10 @@ type PutFileInput struct {
 
 	// The full commit ID of the head commit in the branch where you want to add or
 	// update the file. If this is an empty repository, no commit ID is required. If
-	// this is not an empty repository, a commit ID is required. The commit ID must
-	// match the ID of the head commit at the time of the operation. Otherwise, an
-	// error occurs, and the file is not added or updated.
+	// this is not an empty repository, a commit ID is required.
+	//
+	// The commit ID must match the ID of the head commit at the time of the
+	// operation. Otherwise, an error occurs, and the file is not added or updated.
 	ParentCommitId *string
 
 	noSmithyDocumentSerde
@@ -125,25 +127,25 @@ func (c *Client) addOperationPutFileMiddlewares(stack *middleware.Stack, options
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -158,13 +160,16 @@ func (c *Client) addOperationPutFileMiddlewares(stack *middleware.Stack, options
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpPutFileValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opPutFile(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

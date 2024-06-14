@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -30,29 +29,38 @@ func (c *Client) GetMapGlyphs(ctx context.Context, params *GetMapGlyphsInput, op
 type GetMapGlyphsInput struct {
 
 	// A comma-separated list of fonts to load glyphs from in order of preference. For
-	// example, Noto Sans Regular, Arial Unicode . Valid font stacks for Esri (https://docs.aws.amazon.com/location/latest/developerguide/esri.html)
-	// styles:
+	// example, Noto Sans Regular, Arial Unicode .
+	//
+	// Valid font stacks for [Esri] styles:
+	//
 	//   - VectorEsriDarkGrayCanvas – Ubuntu Medium Italic | Ubuntu Medium | Ubuntu
 	//   Italic | Ubuntu Regular | Ubuntu Bold
+	//
 	//   - VectorEsriLightGrayCanvas – Ubuntu Italic | Ubuntu Regular | Ubuntu Light |
 	//   Ubuntu Bold
+	//
 	//   - VectorEsriTopographic – Noto Sans Italic | Noto Sans Regular | Noto Sans
 	//   Bold | Noto Serif Regular | Roboto Condensed Light Italic
+	//
 	//   - VectorEsriStreets – Arial Regular | Arial Italic | Arial Bold
-	//   - VectorEsriNavigation – Arial Regular | Arial Italic | Arial Bold | Arial
-	//   Unicode MS Bold | Arial Unicode MS Regular
-	// Valid font stacks for HERE Technologies (https://docs.aws.amazon.com/location/latest/developerguide/HERE.html)
-	// styles:
+	//
+	//   - VectorEsriNavigation – Arial Regular | Arial Italic | Arial Bold
+	//
+	// Valid font stacks for [HERE Technologies] styles:
+	//
 	//   - VectorHereContrast – Fira GO Regular | Fira GO Bold
+	//
 	//   - VectorHereExplore, VectorHereExploreTruck, HybridHereExploreSatellite –
 	//   Fira GO Italic | Fira GO Map | Fira GO Map Bold | Noto Sans CJK JP Bold |
 	//   Noto Sans CJK JP Light | Noto Sans CJK JP Regular
-	// Valid font stacks for GrabMaps (https://docs.aws.amazon.com/location/latest/developerguide/grab.html)
-	// styles:
+	//
+	// Valid font stacks for [GrabMaps] styles:
+	//
 	//   - VectorGrabStandardLight, VectorGrabStandardDark – Noto Sans Regular | Noto
 	//   Sans Medium | Noto Sans Bold
-	// Valid font stacks for Open Data (https://docs.aws.amazon.com/location/latest/developerguide/open-data.html)
-	// styles:
+	//
+	// Valid font stacks for [Open Data] styles:
+	//
 	//   - VectorOpenDataStandardLight, VectorOpenDataStandardDark,
 	//   VectorOpenDataVisualizationLight, VectorOpenDataVisualizationDark – Amazon
 	//   Ember Regular,Noto Sans Regular | Amazon Ember Bold,Noto Sans Bold | Amazon
@@ -64,8 +72,14 @@ type GetMapGlyphsInput struct {
 	//   | Amazon Ember Regular Italic,Noto Sans Italic,Noto Sans Arabic Regular |
 	//   Amazon Ember Condensed RC Regular,Noto Sans Regular,Noto Sans Arabic Condensed
 	//   Regular | Amazon Ember Medium,Noto Sans Medium,Noto Sans Arabic Medium
+	//
 	// The fonts used by the Open Data map styles are combined fonts that use Amazon
 	// Ember for most glyphs but Noto Sans for glyphs unsupported by Amazon Ember .
+	//
+	// [Esri]: https://docs.aws.amazon.com/location/latest/developerguide/esri.html
+	// [HERE Technologies]: https://docs.aws.amazon.com/location/latest/developerguide/HERE.html
+	// [GrabMaps]: https://docs.aws.amazon.com/location/latest/developerguide/grab.html
+	// [Open Data]: https://docs.aws.amazon.com/location/latest/developerguide/open-data.html
 	//
 	// This member is required.
 	FontStack *string
@@ -82,8 +96,9 @@ type GetMapGlyphsInput struct {
 	// This member is required.
 	MapName *string
 
-	// The optional API key (https://docs.aws.amazon.com/location/latest/developerguide/using-apikeys.html)
-	// to authorize the request.
+	// The optional [API key] to authorize the request.
+	//
+	// [API key]: https://docs.aws.amazon.com/location/latest/developerguide/using-apikeys.html
 	Key *string
 
 	noSmithyDocumentSerde
@@ -128,25 +143,25 @@ func (c *Client) addOperationGetMapGlyphsMiddlewares(stack *middleware.Stack, op
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -161,6 +176,9 @@ func (c *Client) addOperationGetMapGlyphsMiddlewares(stack *middleware.Stack, op
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addEndpointPrefix_opGetMapGlyphsMiddleware(stack); err != nil {
 		return err
 	}
@@ -170,7 +188,7 @@ func (c *Client) addOperationGetMapGlyphsMiddlewares(stack *middleware.Stack, op
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetMapGlyphs(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

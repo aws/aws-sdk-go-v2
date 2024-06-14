@@ -6,15 +6,15 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Gets a list of TrainingJobSummary (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_TrainingJobSummary.html)
-// objects that describe the training jobs that a hyperparameter tuning job
-// launched.
+// Gets a list of [TrainingJobSummary] objects that describe the training jobs that a hyperparameter
+// tuning job launched.
+//
+// [TrainingJobSummary]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_TrainingJobSummary.html
 func (c *Client) ListTrainingJobsForHyperParameterTuningJob(ctx context.Context, params *ListTrainingJobsForHyperParameterTuningJobInput, optFns ...func(*Options)) (*ListTrainingJobsForHyperParameterTuningJobOutput, error) {
 	if params == nil {
 		params = &ListTrainingJobsForHyperParameterTuningJobInput{}
@@ -45,9 +45,10 @@ type ListTrainingJobsForHyperParameterTuningJobInput struct {
 	// set of training jobs, use the token in the next request.
 	NextToken *string
 
-	// The field to sort results by. The default is Name . If the value of this field
-	// is FinalObjectiveMetricValue , any training jobs that did not return an
-	// objective metric are not listed.
+	// The field to sort results by. The default is Name .
+	//
+	// If the value of this field is FinalObjectiveMetricValue , any training jobs that
+	// did not return an objective metric are not listed.
 	SortBy types.TrainingJobSortByOptions
 
 	// The sort order for results. The default is Ascending .
@@ -61,9 +62,10 @@ type ListTrainingJobsForHyperParameterTuningJobInput struct {
 
 type ListTrainingJobsForHyperParameterTuningJobOutput struct {
 
-	// A list of TrainingJobSummary (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_TrainingJobSummary.html)
-	// objects that describe the training jobs that the
+	// A list of [TrainingJobSummary] objects that describe the training jobs that the
 	// ListTrainingJobsForHyperParameterTuningJob request returned.
+	//
+	// [TrainingJobSummary]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_TrainingJobSummary.html
 	//
 	// This member is required.
 	TrainingJobSummaries []types.HyperParameterTrainingJobSummary
@@ -101,25 +103,25 @@ func (c *Client) addOperationListTrainingJobsForHyperParameterTuningJobMiddlewar
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -134,13 +136,16 @@ func (c *Client) addOperationListTrainingJobsForHyperParameterTuningJobMiddlewar
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpListTrainingJobsForHyperParameterTuningJobValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListTrainingJobsForHyperParameterTuningJob(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

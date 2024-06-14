@@ -6,19 +6,20 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/connect/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a new view with the possible status of SAVED or PUBLISHED . The views
-// will have a unique name for each connect instance. It performs basic content
-// validation if the status is SAVED or full content validation if the status is
-// set to PUBLISHED . An error is returned if validation fails. It associates
-// either the $SAVED qualifier or both of the $SAVED and $LATEST qualifiers with
-// the provided view content based on the status. The view is idempotent if
-// ClientToken is provided.
+// Creates a new view with the possible status of SAVED or PUBLISHED .
+//
+// The views will have a unique name for each connect instance.
+//
+// It performs basic content validation if the status is SAVED or full content
+// validation if the status is set to PUBLISHED . An error is returned if
+// validation fails. It associates either the $SAVED qualifier or both of the
+// $SAVED and $LATEST qualifiers with the provided view content based on the
+// status. The view is idempotent if ClientToken is provided.
 func (c *Client) CreateView(ctx context.Context, params *CreateViewInput, optFns ...func(*Options)) (*CreateViewOutput, error) {
 	if params == nil {
 		params = &CreateViewInput{}
@@ -37,8 +38,9 @@ func (c *Client) CreateView(ctx context.Context, params *CreateViewInput, optFns
 type CreateViewInput struct {
 
 	// View content containing all content necessary to render a view except for
-	// runtime input data. The total uncompressed content has a maximum file size of
-	// 400kB.
+	// runtime input data.
+	//
+	// The total uncompressed content has a maximum file size of 400kB.
 	//
 	// This member is required.
 	Content *types.ViewInputContent
@@ -109,25 +111,25 @@ func (c *Client) addOperationCreateViewMiddlewares(stack *middleware.Stack, opti
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -142,13 +144,16 @@ func (c *Client) addOperationCreateViewMiddlewares(stack *middleware.Stack, opti
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpCreateViewValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateView(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

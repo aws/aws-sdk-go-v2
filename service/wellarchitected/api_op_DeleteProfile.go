@@ -6,16 +6,19 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Delete a profile. Disclaimer By sharing your profile with other Amazon Web
-// Services accounts, you acknowledge that Amazon Web Services will make your
-// profile available to those other accounts. Those other accounts may continue to
-// access and use your shared profile even if you delete the profile from your own
-// Amazon Web Services account or terminate your Amazon Web Services account.
+// Delete a profile.
+//
+// # Disclaimer
+//
+// By sharing your profile with other Amazon Web Services accounts, you
+// acknowledge that Amazon Web Services will make your profile available to those
+// other accounts. Those other accounts may continue to access and use your shared
+// profile even if you delete the profile from your own Amazon Web Services account
+// or terminate your Amazon Web Services account.
 func (c *Client) DeleteProfile(ctx context.Context, params *DeleteProfileInput, optFns ...func(*Options)) (*DeleteProfileOutput, error) {
 	if params == nil {
 		params = &DeleteProfileInput{}
@@ -34,13 +37,17 @@ func (c *Client) DeleteProfile(ctx context.Context, params *DeleteProfileInput, 
 type DeleteProfileInput struct {
 
 	// A unique case-sensitive string used to ensure that this request is idempotent
-	// (executes only once). You should not reuse the same token for other requests. If
-	// you retry a request with the same client request token and the same parameters
-	// after the original request has completed successfully, the result of the
-	// original request is returned. This token is listed as required, however, if you
-	// do not specify it, the Amazon Web Services SDKs automatically generate one for
-	// you. If you are not using the Amazon Web Services SDK or the CLI, you must
-	// provide this token or the request will fail.
+	// (executes only once).
+	//
+	// You should not reuse the same token for other requests. If you retry a request
+	// with the same client request token and the same parameters after the original
+	// request has completed successfully, the result of the original request is
+	// returned.
+	//
+	// This token is listed as required, however, if you do not specify it, the Amazon
+	// Web Services SDKs automatically generate one for you. If you are not using the
+	// Amazon Web Services SDK or the CLI, you must provide this token or the request
+	// will fail.
 	//
 	// This member is required.
 	ClientRequestToken *string
@@ -82,25 +89,25 @@ func (c *Client) addOperationDeleteProfileMiddlewares(stack *middleware.Stack, o
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -115,6 +122,9 @@ func (c *Client) addOperationDeleteProfileMiddlewares(stack *middleware.Stack, o
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opDeleteProfileMiddleware(stack, options); err != nil {
 		return err
 	}
@@ -124,7 +134,7 @@ func (c *Client) addOperationDeleteProfileMiddlewares(stack *middleware.Stack, o
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteProfile(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

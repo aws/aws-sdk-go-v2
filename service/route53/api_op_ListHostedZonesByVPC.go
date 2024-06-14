@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/route53/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -16,9 +15,11 @@ import (
 // regardless of which Amazon Web Services account or Amazon Web Services service
 // owns the hosted zones. The HostedZoneOwner structure in the response contains
 // one of the following values:
+//
 //   - An OwningAccount element, which contains the account number of either the
 //     current Amazon Web Services account or another Amazon Web Services account. Some
 //     services, such as Cloud Map, create hosted zones using the current account.
+//
 //   - An OwningService element, which identifies the Amazon Web Services service
 //     that created and owns the hosted zone. For example, if a hosted zone was created
 //     by Amazon Elastic File System (Amazon EFS), the value of Owner is
@@ -27,13 +28,19 @@ import (
 // When listing private hosted zones, the hosted zone and the Amazon VPC must
 // belong to the same partition where the hosted zones were created. A partition is
 // a group of Amazon Web Services Regions. Each Amazon Web Services account is
-// scoped to one partition. The following are the supported partitions:
+// scoped to one partition.
+//
+// The following are the supported partitions:
+//
 //   - aws - Amazon Web Services Regions
+//
 //   - aws-cn - China Regions
+//
 //   - aws-us-gov - Amazon Web Services GovCloud (US) Region
 //
-// For more information, see Access Management (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
-// in the Amazon Web Services General Reference.
+// For more information, see [Access Management] in the Amazon Web Services General Reference.
+//
+// [Access Management]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
 func (c *Client) ListHostedZonesByVPC(ctx context.Context, params *ListHostedZonesByVPCInput, optFns ...func(*Options)) (*ListHostedZonesByVPCOutput, error) {
 	if params == nil {
 		params = &ListHostedZonesByVPCInput{}
@@ -73,9 +80,13 @@ type ListHostedZonesByVPCInput struct {
 
 	// If the previous response included a NextToken element, the specified VPC is
 	// associated with more hosted zones. To get more hosted zones, submit another
-	// ListHostedZonesByVPC request. For the value of NextToken , specify the value of
-	// NextToken from the previous response. If the previous response didn't include a
-	// NextToken element, there are no more hosted zones to get.
+	// ListHostedZonesByVPC request.
+	//
+	// For the value of NextToken , specify the value of NextToken from the previous
+	// response.
+	//
+	// If the previous response didn't include a NextToken element, there are no more
+	// hosted zones to get.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -129,25 +140,25 @@ func (c *Client) addOperationListHostedZonesByVPCMiddlewares(stack *middleware.S
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -162,13 +173,16 @@ func (c *Client) addOperationListHostedZonesByVPCMiddlewares(stack *middleware.S
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpListHostedZonesByVPCValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListHostedZonesByVPC(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

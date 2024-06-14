@@ -6,16 +6,15 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/opensearch/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Returns the list of optimizations that Auto-Tune has made to an Amazon
-// OpenSearch Service domain. For more information, see Auto-Tune for Amazon
-// OpenSearch Service (https://docs.aws.amazon.com/opensearch-service/latest/developerguide/auto-tune.html)
-// .
+// OpenSearch Service domain. For more information, see [Auto-Tune for Amazon OpenSearch Service].
+//
+// [Auto-Tune for Amazon OpenSearch Service]: https://docs.aws.amazon.com/opensearch-service/latest/developerguide/auto-tune.html
 func (c *Client) DescribeDomainAutoTunes(ctx context.Context, params *DescribeDomainAutoTunesInput, optFns ...func(*Options)) (*DescribeDomainAutoTunesOutput, error) {
 	if params == nil {
 		params = &DescribeDomainAutoTunesInput{}
@@ -58,8 +57,8 @@ type DescribeDomainAutoTunesOutput struct {
 	AutoTunes []types.AutoTune
 
 	// When nextToken is returned, there are more results available. The value of
-	// nextToken is a unique pagination token for each page. Make the call again using
-	// the returned token to retrieve the next page.
+	// nextToken is a unique pagination token for each page. Send the request again
+	// using the returned token to retrieve the next page.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -90,25 +89,25 @@ func (c *Client) addOperationDescribeDomainAutoTunesMiddlewares(stack *middlewar
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -123,13 +122,16 @@ func (c *Client) addOperationDescribeDomainAutoTunesMiddlewares(stack *middlewar
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDescribeDomainAutoTunesValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeDomainAutoTunes(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

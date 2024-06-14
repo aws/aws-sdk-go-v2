@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -29,7 +28,7 @@ func (c *Client) ValidateAssessmentReportIntegrity(ctx context.Context, params *
 
 type ValidateAssessmentReportIntegrityInput struct {
 
-	// The relative path of the Amazon S3 bucket that the assessment report is stored
+	//  The relative path of the Amazon S3 bucket that the assessment report is stored
 	// in.
 	//
 	// This member is required.
@@ -40,20 +39,20 @@ type ValidateAssessmentReportIntegrityInput struct {
 
 type ValidateAssessmentReportIntegrityOutput struct {
 
-	// The signature algorithm that's used to code sign the assessment report file.
+	//  The signature algorithm that's used to code sign the assessment report file.
 	SignatureAlgorithm *string
 
-	// The date and time signature that specifies when the assessment report was
+	//  The date and time signature that specifies when the assessment report was
 	// created.
 	SignatureDateTime *string
 
-	// The unique identifier for the validation signature key.
+	//  The unique identifier for the validation signature key.
 	SignatureKeyId *string
 
-	// Specifies whether the signature key is valid.
+	//  Specifies whether the signature key is valid.
 	SignatureValid *bool
 
-	// Represents any errors that occurred when validating the assessment report.
+	//  Represents any errors that occurred when validating the assessment report.
 	ValidationErrors []string
 
 	// Metadata pertaining to the operation's result.
@@ -84,25 +83,25 @@ func (c *Client) addOperationValidateAssessmentReportIntegrityMiddlewares(stack 
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -117,13 +116,16 @@ func (c *Client) addOperationValidateAssessmentReportIntegrityMiddlewares(stack 
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpValidateAssessmentReportIntegrityValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opValidateAssessmentReportIntegrity(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

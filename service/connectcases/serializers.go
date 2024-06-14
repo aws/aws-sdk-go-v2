@@ -867,6 +867,228 @@ func awsRestjson1_serializeOpHttpBindingsDeleteDomainInput(v *DeleteDomainInput,
 	return nil
 }
 
+type awsRestjson1_serializeOpDeleteField struct {
+}
+
+func (*awsRestjson1_serializeOpDeleteField) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpDeleteField) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*DeleteFieldInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/domains/{domainId}/fields/{fieldId}")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "DELETE"
+	var restEncoder *httpbinding.Encoder
+	if request.URL.RawPath == "" {
+		restEncoder, err = httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	} else {
+		request.URL.RawPath = smithyhttp.JoinPath(request.URL.RawPath, opPath)
+		restEncoder, err = httpbinding.NewEncoderWithRawPath(request.URL.Path, request.URL.RawPath, request.URL.RawQuery, request.Header)
+	}
+
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsDeleteFieldInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsDeleteFieldInput(v *DeleteFieldInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.DomainId == nil || len(*v.DomainId) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member domainId must not be empty")}
+	}
+	if v.DomainId != nil {
+		if err := encoder.SetURI("domainId").String(*v.DomainId); err != nil {
+			return err
+		}
+	}
+
+	if v.FieldId == nil || len(*v.FieldId) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member fieldId must not be empty")}
+	}
+	if v.FieldId != nil {
+		if err := encoder.SetURI("fieldId").String(*v.FieldId); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+type awsRestjson1_serializeOpDeleteLayout struct {
+}
+
+func (*awsRestjson1_serializeOpDeleteLayout) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpDeleteLayout) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*DeleteLayoutInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/domains/{domainId}/layouts/{layoutId}")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "DELETE"
+	var restEncoder *httpbinding.Encoder
+	if request.URL.RawPath == "" {
+		restEncoder, err = httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	} else {
+		request.URL.RawPath = smithyhttp.JoinPath(request.URL.RawPath, opPath)
+		restEncoder, err = httpbinding.NewEncoderWithRawPath(request.URL.Path, request.URL.RawPath, request.URL.RawQuery, request.Header)
+	}
+
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsDeleteLayoutInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsDeleteLayoutInput(v *DeleteLayoutInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.DomainId == nil || len(*v.DomainId) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member domainId must not be empty")}
+	}
+	if v.DomainId != nil {
+		if err := encoder.SetURI("domainId").String(*v.DomainId); err != nil {
+			return err
+		}
+	}
+
+	if v.LayoutId == nil || len(*v.LayoutId) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member layoutId must not be empty")}
+	}
+	if v.LayoutId != nil {
+		if err := encoder.SetURI("layoutId").String(*v.LayoutId); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+type awsRestjson1_serializeOpDeleteTemplate struct {
+}
+
+func (*awsRestjson1_serializeOpDeleteTemplate) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpDeleteTemplate) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*DeleteTemplateInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/domains/{domainId}/templates/{templateId}")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "DELETE"
+	var restEncoder *httpbinding.Encoder
+	if request.URL.RawPath == "" {
+		restEncoder, err = httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	} else {
+		request.URL.RawPath = smithyhttp.JoinPath(request.URL.RawPath, opPath)
+		restEncoder, err = httpbinding.NewEncoderWithRawPath(request.URL.Path, request.URL.RawPath, request.URL.RawQuery, request.Header)
+	}
+
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsDeleteTemplateInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsDeleteTemplateInput(v *DeleteTemplateInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.DomainId == nil || len(*v.DomainId) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member domainId must not be empty")}
+	}
+	if v.DomainId != nil {
+		if err := encoder.SetURI("domainId").String(*v.DomainId); err != nil {
+			return err
+		}
+	}
+
+	if v.TemplateId == nil || len(*v.TemplateId) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member templateId must not be empty")}
+	}
+	if v.TemplateId != nil {
+		if err := encoder.SetURI("templateId").String(*v.TemplateId); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 type awsRestjson1_serializeOpGetCase struct {
 }
 
@@ -3247,6 +3469,30 @@ func awsRestjson1_serializeDocumentFieldValueUnion(v types.FieldValueUnion, valu
 	return nil
 }
 
+func awsRestjson1_serializeDocumentFileContent(v *types.FileContent, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.FileArn != nil {
+		ok := object.Key("fileArn")
+		ok.String(*v.FileArn)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentFileFilter(v *types.FileFilter, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.FileArn != nil {
+		ok := object.Key("fileArn")
+		ok.String(*v.FileArn)
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentLayoutConfiguration(v *types.LayoutConfiguration, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -3336,6 +3582,12 @@ func awsRestjson1_serializeDocumentRelatedItemInputContent(v types.RelatedItemIn
 			return err
 		}
 
+	case *types.RelatedItemInputContentMemberFile:
+		av := object.Key("file")
+		if err := awsRestjson1_serializeDocumentFileContent(&uv.Value, av); err != nil {
+			return err
+		}
+
 	default:
 		return fmt.Errorf("attempted to serialize unknown member type %T for union %T", uv, v)
 
@@ -3357,6 +3609,12 @@ func awsRestjson1_serializeDocumentRelatedItemTypeFilter(v types.RelatedItemType
 	case *types.RelatedItemTypeFilterMemberContact:
 		av := object.Key("contact")
 		if err := awsRestjson1_serializeDocumentContactFilter(&uv.Value, av); err != nil {
+			return err
+		}
+
+	case *types.RelatedItemTypeFilterMemberFile:
+		av := object.Key("file")
+		if err := awsRestjson1_serializeDocumentFileFilter(&uv.Value, av); err != nil {
 			return err
 		}
 

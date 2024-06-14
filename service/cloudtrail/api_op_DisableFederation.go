@@ -6,18 +6,19 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/cloudtrail/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Disables Lake query federation on the specified event data store. When you
+//	Disables Lake query federation on the specified event data store. When you
+//
 // disable federation, CloudTrail disables the integration with Glue, Lake
 // Formation, and Amazon Athena. After disabling Lake query federation, you can no
-// longer query your event data in Amazon Athena. No CloudTrail Lake data is
-// deleted when you disable federation and you can continue to run queries in
-// CloudTrail Lake.
+// longer query your event data in Amazon Athena.
+//
+// No CloudTrail Lake data is deleted when you disable federation and you can
+// continue to run queries in CloudTrail Lake.
 func (c *Client) DisableFederation(ctx context.Context, params *DisableFederationInput, optFns ...func(*Options)) (*DisableFederationOutput, error) {
 	if params == nil {
 		params = &DisableFederationInput{}
@@ -35,8 +36,8 @@ func (c *Client) DisableFederation(ctx context.Context, params *DisableFederatio
 
 type DisableFederationInput struct {
 
-	// The ARN (or ID suffix of the ARN) of the event data store for which you want to
-	// disable Lake query federation.
+	//  The ARN (or ID suffix of the ARN) of the event data store for which you want
+	// to disable Lake query federation.
 	//
 	// This member is required.
 	EventDataStore *string
@@ -46,10 +47,10 @@ type DisableFederationInput struct {
 
 type DisableFederationOutput struct {
 
-	// The ARN of the event data store for which you disabled Lake query federation.
+	//  The ARN of the event data store for which you disabled Lake query federation.
 	EventDataStoreArn *string
 
-	// The federation status.
+	//  The federation status.
 	FederationStatus types.FederationStatus
 
 	// Metadata pertaining to the operation's result.
@@ -80,25 +81,25 @@ func (c *Client) addOperationDisableFederationMiddlewares(stack *middleware.Stac
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -113,13 +114,16 @@ func (c *Client) addOperationDisableFederationMiddlewares(stack *middleware.Stac
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDisableFederationValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDisableFederation(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

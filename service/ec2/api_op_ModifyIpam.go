@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -38,9 +37,12 @@ type ModifyIpamInput struct {
 	// Choose the operating Regions for the IPAM. Operating Regions are Amazon Web
 	// Services Regions where the IPAM is allowed to manage IP address CIDRs. IPAM only
 	// discovers and monitors resources in the Amazon Web Services Regions you select
-	// as operating Regions. For more information about operating Regions, see Create
-	// an IPAM (https://docs.aws.amazon.com/vpc/latest/ipam/create-ipam.html) in the
-	// Amazon VPC IPAM User Guide.
+	// as operating Regions.
+	//
+	// For more information about operating Regions, see [Create an IPAM] in the Amazon VPC IPAM User
+	// Guide.
+	//
+	// [Create an IPAM]: https://docs.aws.amazon.com/vpc/latest/ipam/create-ipam.html
 	AddOperatingRegions []types.AddIpamOperatingRegion
 
 	// The description of the IPAM you want to modify.
@@ -57,7 +59,9 @@ type ModifyIpamInput struct {
 
 	// IPAM is offered in a Free Tier and an Advanced Tier. For more information about
 	// the features available in each tier and the costs associated with the tiers, see
-	// Amazon VPC pricing > IPAM tab (http://aws.amazon.com/vpc/pricing/) .
+	// [Amazon VPC pricing > IPAM tab].
+	//
+	// [Amazon VPC pricing > IPAM tab]: http://aws.amazon.com/vpc/pricing/
 	Tier types.IpamTier
 
 	noSmithyDocumentSerde
@@ -96,25 +100,25 @@ func (c *Client) addOperationModifyIpamMiddlewares(stack *middleware.Stack, opti
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -129,13 +133,16 @@ func (c *Client) addOperationModifyIpamMiddlewares(stack *middleware.Stack, opti
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpModifyIpamValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opModifyIpam(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

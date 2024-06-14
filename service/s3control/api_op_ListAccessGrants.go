@@ -17,6 +17,7 @@ import (
 )
 
 // Returns the list of access grants in your S3 Access Grants instance.
+//
 // Permissions You must have the s3:ListAccessGrants permission to use this
 // operation.
 func (c *Client) ListAccessGrants(ctx context.Context, params *ListAccessGrantsInput, optFns ...func(*Options)) (*ListAccessGrantsOutput, error) {
@@ -61,7 +62,9 @@ type ListAccessGrantsInput struct {
 
 	// The type of the grantee to which access has been granted. It can be one of the
 	// following values:
+	//
 	//   - IAM - An IAM user or role.
+	//
 	//   - DIRECTORY_USER - Your corporate directory user. You can use this option if
 	//   you have added your corporate identity directory to IAM Identity Center and
 	//   associated the IAM Identity Center instance with your S3 Access Grants instance.
@@ -83,8 +86,11 @@ type ListAccessGrantsInput struct {
 
 	// The type of permission granted to your S3 data, which can be set to one of the
 	// following values:
+	//
 	//   - READ – Grant read-only access to the S3 data.
+	//
 	//   - WRITE – Grant write-only access to the S3 data.
+	//
 	//   - READWRITE – Grant both read and write access to the S3 data.
 	Permission types.Permission
 
@@ -134,25 +140,25 @@ func (c *Client) addOperationListAccessGrantsMiddlewares(stack *middleware.Stack
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -170,6 +176,9 @@ func (c *Client) addOperationListAccessGrantsMiddlewares(stack *middleware.Stack
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = smithyhttp.AddContentChecksumMiddleware(stack); err != nil {
 		return err
 	}
@@ -185,7 +194,7 @@ func (c *Client) addOperationListAccessGrantsMiddlewares(stack *middleware.Stack
 	if err = addMetadataRetrieverMiddleware(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addListAccessGrantsUpdateEndpoint(stack, options); err != nil {

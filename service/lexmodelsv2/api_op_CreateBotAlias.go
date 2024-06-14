@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/lexmodelsv2/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -15,8 +14,9 @@ import (
 
 // Creates an alias for the specified version of a bot. Use an alias to enable you
 // to change the version of a bot without updating applications that use the bot.
-// For example, you can create an alias called "PROD" that your applications use to
-// call the Amazon Lex bot.
+//
+// For example, you can create an alias called "PROD" that your applications use
+// to call the Amazon Lex bot.
 func (c *Client) CreateBotAlias(ctx context.Context, params *CreateBotAliasInput, optFns ...func(*Options)) (*CreateBotAliasOutput, error) {
 	if params == nil {
 		params = &CreateBotAliasInput{}
@@ -49,8 +49,10 @@ type CreateBotAliasInput struct {
 	// locales.
 	BotAliasLocaleSettings map[string]types.BotAliasLocaleSettings
 
-	// The version of the bot that this alias points to. You can use the UpdateBotAlias (https://docs.aws.amazon.com/lexv2/latest/APIReference/API_UpdateBotAlias.html)
-	// operation to change the bot version associated with the alias.
+	// The version of the bot that this alias points to. You can use the [UpdateBotAlias] operation to
+	// change the bot version associated with the alias.
+	//
+	// [UpdateBotAlias]: https://docs.aws.amazon.com/lexv2/latest/APIReference/API_UpdateBotAlias.html
 	BotVersion *string
 
 	// Specifies whether Amazon Lex logs text and audio for a conversation with the
@@ -140,25 +142,25 @@ func (c *Client) addOperationCreateBotAliasMiddlewares(stack *middleware.Stack, 
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -173,13 +175,16 @@ func (c *Client) addOperationCreateBotAliasMiddlewares(stack *middleware.Stack, 
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpCreateBotAliasValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateBotAlias(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

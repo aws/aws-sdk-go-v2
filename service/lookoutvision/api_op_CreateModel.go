@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/lookoutvision/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -14,16 +13,22 @@ import (
 
 // Creates a new version of a model within an an Amazon Lookout for Vision
 // project. CreateModel is an asynchronous operation in which Amazon Lookout for
-// Vision trains, tests, and evaluates a new version of a model. To get the current
-// status, check the Status field returned in the response from DescribeModel . If
-// the project has a single dataset, Amazon Lookout for Vision internally splits
-// the dataset to create a training and a test dataset. If the project has a
+// Vision trains, tests, and evaluates a new version of a model.
+//
+// To get the current status, check the Status field returned in the response from DescribeModel
+// .
+//
+// If the project has a single dataset, Amazon Lookout for Vision internally
+// splits the dataset to create a training and a test dataset. If the project has a
 // training and a test dataset, Lookout for Vision uses the respective datasets to
-// train and test the model. After training completes, the evaluation metrics are
-// stored at the location specified in OutputConfig . This operation requires
-// permissions to perform the lookoutvision:CreateModel operation. If you want to
-// tag your model, you also require permission to the lookoutvision:TagResource
-// operation.
+// train and test the model.
+//
+// After training completes, the evaluation metrics are stored at the location
+// specified in OutputConfig .
+//
+// This operation requires permissions to perform the lookoutvision:CreateModel
+// operation. If you want to tag your model, you also require permission to the
+// lookoutvision:TagResource operation.
 func (c *Client) CreateModel(ctx context.Context, params *CreateModelInput, optFns ...func(*Options)) (*CreateModelOutput, error) {
 	if params == nil {
 		params = &CreateModelInput{}
@@ -55,12 +60,15 @@ type CreateModelInput struct {
 	// completes only once. You choose the value to pass. For example, An issue might
 	// prevent you from getting a response from CreateModel . In this case, safely
 	// retry your call to CreateModel by using the same ClientToken parameter value.
+	//
 	// If you don't supply a value for ClientToken , the AWS SDK you are using inserts
 	// a value for you. This prevents retries after a network error from starting
 	// multiple training jobs. You'll need to provide your own value for other use
-	// cases. An error occurs if the other input parameters are not the same as in the
-	// first request. Using a different value for ClientToken is considered a new call
-	// to CreateModel . An idempotency token is active for 8 hours.
+	// cases.
+	//
+	// An error occurs if the other input parameters are not the same as in the first
+	// request. Using a different value for ClientToken is considered a new call to
+	// CreateModel . An idempotency token is active for 8 hours.
 	ClientToken *string
 
 	// A description for the version of the model.
@@ -111,25 +119,25 @@ func (c *Client) addOperationCreateModelMiddlewares(stack *middleware.Stack, opt
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -144,6 +152,9 @@ func (c *Client) addOperationCreateModelMiddlewares(stack *middleware.Stack, opt
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opCreateModelMiddleware(stack, options); err != nil {
 		return err
 	}
@@ -153,7 +164,7 @@ func (c *Client) addOperationCreateModelMiddlewares(stack *middleware.Stack, opt
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateModel(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

@@ -6,14 +6,13 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/route53resolver/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates an empty DNS Firewall rule group for filtering DNS network traffic in a
-// VPC. You can add rules to the new rule group by calling CreateFirewallRule .
+// VPC. You can add rules to the new rule group by calling CreateFirewallRule.
 func (c *Client) CreateFirewallRuleGroup(ctx context.Context, params *CreateFirewallRuleGroupInput, optFns ...func(*Options)) (*CreateFirewallRuleGroupOutput, error) {
 	if params == nil {
 		params = &CreateFirewallRuleGroupInput{}
@@ -83,25 +82,25 @@ func (c *Client) addOperationCreateFirewallRuleGroupMiddlewares(stack *middlewar
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -116,6 +115,9 @@ func (c *Client) addOperationCreateFirewallRuleGroupMiddlewares(stack *middlewar
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opCreateFirewallRuleGroupMiddleware(stack, options); err != nil {
 		return err
 	}
@@ -125,7 +127,7 @@ func (c *Client) addOperationCreateFirewallRuleGroupMiddlewares(stack *middlewar
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateFirewallRuleGroup(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

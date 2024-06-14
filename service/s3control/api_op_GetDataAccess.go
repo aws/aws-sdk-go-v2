@@ -17,13 +17,18 @@ import (
 )
 
 // Returns a temporary access credential from S3 Access Grants to the grantee or
-// client application. The temporary credential (https://docs.aws.amazon.com/STS/latest/APIReference/API_Credentials.html)
-// is an Amazon Web Services STS token that grants them access to the S3 data.
+// client application. The [temporary credential]is an Amazon Web Services STS token that grants them
+// access to the S3 data.
+//
 // Permissions You must have the s3:GetDataAccess permission to use this
-// operation. Additional Permissions The IAM role that S3 Access Grants assumes
-// must have the following permissions specified in the trust policy when
-// registering the location: sts:AssumeRole , for directory users or groups
-// sts:SetContext , and for IAM users or roles sts:SourceIdentity .
+// operation.
+//
+// Additional Permissions The IAM role that S3 Access Grants assumes must have the
+// following permissions specified in the trust policy when registering the
+// location: sts:AssumeRole , for directory users or groups sts:SetContext , and
+// for IAM users or roles sts:SetSourceIdentity .
+//
+// [temporary credential]: https://docs.aws.amazon.com/STS/latest/APIReference/API_Credentials.html
 func (c *Client) GetDataAccess(ctx context.Context, params *GetDataAccessInput, optFns ...func(*Options)) (*GetDataAccessOutput, error) {
 	if params == nil {
 		params = &GetDataAccessInput{}
@@ -48,8 +53,11 @@ type GetDataAccessInput struct {
 
 	// The type of permission granted to your S3 data, which can be set to one of the
 	// following values:
+	//
 	//   - READ – Grant read-only access to the S3 data.
+	//
 	//   - WRITE – Grant write-only access to the S3 data.
+	//
 	//   - READWRITE – Grant both read and write access to the S3 data.
 	//
 	// This member is required.
@@ -71,8 +79,10 @@ type GetDataAccessInput struct {
 
 	// The scope of the temporary access credential that S3 Access Grants vends to the
 	// grantee or client application.
+	//
 	//   - Default – The scope of the returned temporary access token is the scope of
 	//   the grant that is closest to the target scope.
+	//
 	//   - Minimal – The scope of the returned temporary access token is the same as
 	//   the requested target scope as long as the requested scope is the same as or a
 	//   subset of the grant scope.
@@ -128,25 +138,25 @@ func (c *Client) addOperationGetDataAccessMiddlewares(stack *middleware.Stack, o
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -164,6 +174,9 @@ func (c *Client) addOperationGetDataAccessMiddlewares(stack *middleware.Stack, o
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = smithyhttp.AddContentChecksumMiddleware(stack); err != nil {
 		return err
 	}
@@ -179,7 +192,7 @@ func (c *Client) addOperationGetDataAccessMiddlewares(stack *middleware.Stack, o
 	if err = addMetadataRetrieverMiddleware(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addGetDataAccessUpdateEndpoint(stack, options); err != nil {

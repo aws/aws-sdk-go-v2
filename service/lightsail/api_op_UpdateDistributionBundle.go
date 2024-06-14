@@ -6,21 +6,25 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/lightsail/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Updates the bundle of your Amazon Lightsail content delivery network (CDN)
-// distribution. A distribution bundle specifies the monthly network transfer quota
-// and monthly cost of your distribution. Update your distribution's bundle if your
-// distribution is going over its monthly network transfer quota and is incurring
-// an overage fee. You can update your distribution's bundle only one time within
-// your monthly Amazon Web Services billing cycle. To determine if you can update
-// your distribution's bundle, use the GetDistributions action. The
-// ableToUpdateBundle parameter in the result will indicate whether you can
-// currently update your distribution's bundle.
+// distribution.
+//
+// A distribution bundle specifies the monthly network transfer quota and monthly
+// cost of your distribution.
+//
+// Update your distribution's bundle if your distribution is going over its
+// monthly network transfer quota and is incurring an overage fee.
+//
+// You can update your distribution's bundle only one time within your monthly
+// Amazon Web Services billing cycle. To determine if you can update your
+// distribution's bundle, use the GetDistributions action. The ableToUpdateBundle
+// parameter in the result will indicate whether you can currently update your
+// distribution's bundle.
 func (c *Client) UpdateDistributionBundle(ctx context.Context, params *UpdateDistributionBundleInput, optFns ...func(*Options)) (*UpdateDistributionBundleOutput, error) {
 	if params == nil {
 		params = &UpdateDistributionBundleInput{}
@@ -38,13 +42,16 @@ func (c *Client) UpdateDistributionBundle(ctx context.Context, params *UpdateDis
 
 type UpdateDistributionBundleInput struct {
 
-	// The bundle ID of the new bundle to apply to your distribution. Use the
-	// GetDistributionBundles action to get a list of distribution bundle IDs that you
-	// can specify.
+	// The bundle ID of the new bundle to apply to your distribution.
+	//
+	// Use the GetDistributionBundles action to get a list of distribution bundle IDs
+	// that you can specify.
 	BundleId *string
 
-	// The name of the distribution for which to update the bundle. Use the
-	// GetDistributions action to get a list of distribution names that you can specify.
+	// The name of the distribution for which to update the bundle.
+	//
+	// Use the GetDistributions action to get a list of distribution names that you
+	// can specify.
 	DistributionName *string
 
 	noSmithyDocumentSerde
@@ -85,25 +92,25 @@ func (c *Client) addOperationUpdateDistributionBundleMiddlewares(stack *middlewa
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -118,10 +125,13 @@ func (c *Client) addOperationUpdateDistributionBundleMiddlewares(stack *middlewa
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateDistributionBundle(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

@@ -6,22 +6,25 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Deletes the specified Amazon Chime Voice Connector group. Any
 // VoiceConnectorItems and phone numbers associated with the group must be removed
-// before it can be deleted. This API is is no longer supported and will not be
-// updated. We recommend using the latest version, DeleteVoiceConnectorGroup (https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_voice-chime_DeleteVoiceConnectorGroup.html)
-// , in the Amazon Chime SDK. Using the latest version requires migrating to a
-// dedicated namespace. For more information, refer to Migrating from the Amazon
-// Chime namespace (https://docs.aws.amazon.com/chime-sdk/latest/dg/migrate-from-chm-namespace.html)
-// in the Amazon Chime SDK Developer Guide.
+// before it can be deleted.
+//
+// This API is is no longer supported and will not be updated. We recommend using
+// the latest version, [DeleteVoiceConnectorGroup], in the Amazon Chime SDK.
+//
+// Using the latest version requires migrating to a dedicated namespace. For more
+// information, refer to [Migrating from the Amazon Chime namespace]in the Amazon Chime SDK Developer Guide.
 //
 // Deprecated: Replaced by DeleteVoiceConnectorGroup in the Amazon Chime SDK Voice
 // Namespace
+//
+// [Migrating from the Amazon Chime namespace]: https://docs.aws.amazon.com/chime-sdk/latest/dg/migrate-from-chm-namespace.html
+// [DeleteVoiceConnectorGroup]: https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_voice-chime_DeleteVoiceConnectorGroup.html
 func (c *Client) DeleteVoiceConnectorGroup(ctx context.Context, params *DeleteVoiceConnectorGroupInput, optFns ...func(*Options)) (*DeleteVoiceConnectorGroupOutput, error) {
 	if params == nil {
 		params = &DeleteVoiceConnectorGroupInput{}
@@ -76,25 +79,25 @@ func (c *Client) addOperationDeleteVoiceConnectorGroupMiddlewares(stack *middlew
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -109,13 +112,16 @@ func (c *Client) addOperationDeleteVoiceConnectorGroupMiddlewares(stack *middlew
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDeleteVoiceConnectorGroupValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteVoiceConnectorGroup(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

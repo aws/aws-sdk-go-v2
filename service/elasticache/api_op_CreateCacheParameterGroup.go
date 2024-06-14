@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/elasticache/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -15,14 +14,21 @@ import (
 // Creates a new Amazon ElastiCache cache parameter group. An ElastiCache cache
 // parameter group is a collection of parameters and their values that are applied
 // to all of the nodes in any cluster or replication group using the
-// CacheParameterGroup. A newly created CacheParameterGroup is an exact duplicate
-// of the default parameter group for the CacheParameterGroupFamily. To customize
-// the newly created CacheParameterGroup you can change the values of specific
-// parameters. For more information, see:
-//   - ModifyCacheParameterGroup (https://docs.aws.amazon.com/AmazonElastiCache/latest/APIReference/API_ModifyCacheParameterGroup.html)
-//     in the ElastiCache API Reference.
-//   - Parameters and Parameter Groups (https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/ParameterGroups.html)
-//     in the ElastiCache User Guide.
+// CacheParameterGroup.
+//
+// A newly created CacheParameterGroup is an exact duplicate of the default
+// parameter group for the CacheParameterGroupFamily. To customize the newly
+// created CacheParameterGroup you can change the values of specific parameters.
+// For more information, see:
+//
+// [ModifyCacheParameterGroup]
+//   - in the ElastiCache API Reference.
+//
+// [Parameters and Parameter Groups]
+//   - in the ElastiCache User Guide.
+//
+// [ModifyCacheParameterGroup]: https://docs.aws.amazon.com/AmazonElastiCache/latest/APIReference/API_ModifyCacheParameterGroup.html
+// [Parameters and Parameter Groups]: https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/ParameterGroups.html
 func (c *Client) CreateCacheParameterGroup(ctx context.Context, params *CreateCacheParameterGroupInput, optFns ...func(*Options)) (*CreateCacheParameterGroupOutput, error) {
 	if params == nil {
 		params = &CreateCacheParameterGroupInput{}
@@ -42,8 +48,10 @@ func (c *Client) CreateCacheParameterGroup(ctx context.Context, params *CreateCa
 type CreateCacheParameterGroupInput struct {
 
 	// The name of the cache parameter group family that the cache parameter group can
-	// be used with. Valid values are: memcached1.4 | memcached1.5 | memcached1.6 |
-	// redis2.6 | redis2.8 | redis3.2 | redis4.0 | redis5.0 | redis6.x | redis7
+	// be used with.
+	//
+	// Valid values are: memcached1.4 | memcached1.5 | memcached1.6 | redis2.6 |
+	// redis2.8 | redis3.2 | redis4.0 | redis5.0 | redis6.x | redis7
 	//
 	// This member is required.
 	CacheParameterGroupFamily *string
@@ -98,25 +106,25 @@ func (c *Client) addOperationCreateCacheParameterGroupMiddlewares(stack *middlew
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -131,13 +139,16 @@ func (c *Client) addOperationCreateCacheParameterGroupMiddlewares(stack *middlew
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpCreateCacheParameterGroupValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateCacheParameterGroup(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

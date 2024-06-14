@@ -6,22 +6,23 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/rekognition/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Starts asynchronous detection of text in a stored video. Amazon Rekognition
-// Video can detect text in a video stored in an Amazon S3 bucket. Use Video to
-// specify the bucket name and the filename of the video. StartTextDetection
-// returns a job identifier ( JobId ) which you use to get the results of the
-// operation. When text detection is finished, Amazon Rekognition Video publishes a
-// completion status to the Amazon Simple Notification Service topic that you
-// specify in NotificationChannel . To get the results of the text detection
-// operation, first check that the status value published to the Amazon SNS topic
-// is SUCCEEDED . if so, call GetTextDetection and pass the job identifier ( JobId
-// ) from the initial call to StartTextDetection .
+// Starts asynchronous detection of text in a stored video.
+//
+// Amazon Rekognition Video can detect text in a video stored in an Amazon S3
+// bucket. Use Videoto specify the bucket name and the filename of the video.
+// StartTextDetection returns a job identifier ( JobId ) which you use to get the
+// results of the operation. When text detection is finished, Amazon Rekognition
+// Video publishes a completion status to the Amazon Simple Notification Service
+// topic that you specify in NotificationChannel .
+//
+// To get the results of the text detection operation, first check that the status
+// value published to the Amazon SNS topic is SUCCEEDED . if so, call GetTextDetection and pass
+// the job identifier ( JobId ) from the initial call to StartTextDetection .
 func (c *Client) StartTextDetection(ctx context.Context, params *StartTextDetectionInput, optFns ...func(*Options)) (*StartTextDetectionOutput, error) {
 	if params == nil {
 		params = &StartTextDetectionInput{}
@@ -40,8 +41,8 @@ func (c *Client) StartTextDetection(ctx context.Context, params *StartTextDetect
 type StartTextDetectionInput struct {
 
 	// Video file stored in an Amazon S3 bucket. Amazon Rekognition video start
-	// operations such as StartLabelDetection use Video to specify a video for
-	// analysis. The supported file formats are .mp4, .mov and .avi.
+	// operations such as StartLabelDetectionuse Video to specify a video for analysis. The supported
+	// file formats are .mp4, .mov and .avi.
 	//
 	// This member is required.
 	Video *types.Video
@@ -63,12 +64,12 @@ type StartTextDetectionInput struct {
 
 	// The Amazon Simple Notification Service topic to which Amazon Rekognition
 	// publishes the completion status of a video analysis operation. For more
-	// information, see Calling Amazon Rekognition Video operations (https://docs.aws.amazon.com/rekognition/latest/dg/api-video.html)
-	// . Note that the Amazon SNS topic must have a topic name that begins with
-	// AmazonRekognition if you are using the AmazonRekognitionServiceRole permissions
-	// policy to access the topic. For more information, see Giving access to multiple
-	// Amazon SNS topics (https://docs.aws.amazon.com/rekognition/latest/dg/api-video-roles.html#api-video-roles-all-topics)
-	// .
+	// information, see [Calling Amazon Rekognition Video operations]. Note that the Amazon SNS topic must have a topic name that
+	// begins with AmazonRekognition if you are using the AmazonRekognitionServiceRole
+	// permissions policy to access the topic. For more information, see [Giving access to multiple Amazon SNS topics].
+	//
+	// [Calling Amazon Rekognition Video operations]: https://docs.aws.amazon.com/rekognition/latest/dg/api-video.html
+	// [Giving access to multiple Amazon SNS topics]: https://docs.aws.amazon.com/rekognition/latest/dg/api-video-roles.html#api-video-roles-all-topics
 	NotificationChannel *types.NotificationChannel
 
 	noSmithyDocumentSerde
@@ -108,25 +109,25 @@ func (c *Client) addOperationStartTextDetectionMiddlewares(stack *middleware.Sta
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -141,13 +142,16 @@ func (c *Client) addOperationStartTextDetectionMiddlewares(stack *middleware.Sta
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpStartTextDetectionValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opStartTextDetection(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

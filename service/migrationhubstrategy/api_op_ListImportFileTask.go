@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/migrationhubstrategy/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -30,10 +29,10 @@ func (c *Client) ListImportFileTask(ctx context.Context, params *ListImportFileT
 
 type ListImportFileTaskInput struct {
 
-	// The total number of items to return. The maximum value is 100.
+	//  The total number of items to return. The maximum value is 100.
 	MaxResults *int32
 
-	// The token from a previous call that you use to retrieve the next set of
+	//  The token from a previous call that you use to retrieve the next set of
 	// results. For example, if a previous call to this action returned 100 items, but
 	// you set maxResults to 10. You'll receive a set of 10 results along with a
 	// token. You then use the returned token to retrieve the next set of 10.
@@ -44,11 +43,11 @@ type ListImportFileTaskInput struct {
 
 type ListImportFileTaskOutput struct {
 
-	// The token you use to retrieve the next set of results, or null if there are no
+	//  The token you use to retrieve the next set of results, or null if there are no
 	// more results.
 	NextToken *string
 
-	// Lists information about the files you import.
+	//  Lists information about the files you import.
 	TaskInfos []types.ImportFileTaskInformation
 
 	// Metadata pertaining to the operation's result.
@@ -79,25 +78,25 @@ func (c *Client) addOperationListImportFileTaskMiddlewares(stack *middleware.Sta
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -112,10 +111,13 @@ func (c *Client) addOperationListImportFileTaskMiddlewares(stack *middleware.Sta
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListImportFileTask(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -144,7 +146,7 @@ var _ ListImportFileTaskAPIClient = (*Client)(nil)
 // ListImportFileTaskPaginatorOptions is the paginator options for
 // ListImportFileTask
 type ListImportFileTaskPaginatorOptions struct {
-	// The total number of items to return. The maximum value is 100.
+	//  The total number of items to return. The maximum value is 100.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/marketplaceagreement/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -43,6 +42,7 @@ type DescribeAgreementInput struct {
 type DescribeAgreementOutput struct {
 
 	// The date and time the offer was accepted or the agreement was created.
+	//
 	// AcceptanceTime and StartTime can differ for future dated agreements (FDAs).
 	AcceptanceTime *time.Time
 
@@ -73,19 +73,30 @@ type DescribeAgreementOutput struct {
 	// The date and time when the agreement starts.
 	StartTime *time.Time
 
-	// The current status of the agreement. Statuses include:
+	// The current status of the agreement.
+	//
+	// Statuses include:
+	//
 	//   - ACTIVE – The terms of the agreement are active.
+	//
 	//   - ARCHIVED – The agreement ended without a specified reason.
+	//
 	//   - CANCELLED – The acceptor ended the agreement before the defined end date.
+	//
 	//   - EXPIRED – The agreement ended on the defined end date.
+	//
 	//   - RENEWED – The agreement was renewed into a new agreement (for example, an
 	//   auto-renewal).
+	//
 	//   - REPLACED – The agreement was replaced using an agreement replacement offer.
+	//
 	//   - ROLLED_BACK (Only applicable to inactive agreement revisions) – The
 	//   agreement revision has been rolled back because of an error. An earlier revision
 	//   is now active.
+	//
 	//   - SUPERCEDED (Only applicable to inactive agreement revisions) – The agreement
 	//   revision is no longer active and another agreement revision is now active.
+	//
 	//   - TERMINATED – The agreement ended before the defined end date because of an
 	//   AWS termination (for example, a payment failure).
 	Status types.AgreementStatus
@@ -118,25 +129,25 @@ func (c *Client) addOperationDescribeAgreementMiddlewares(stack *middleware.Stac
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -151,13 +162,16 @@ func (c *Client) addOperationDescribeAgreementMiddlewares(stack *middleware.Stac
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDescribeAgreementValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeAgreement(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

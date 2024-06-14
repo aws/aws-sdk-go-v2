@@ -3,4 +3,4 @@
 package acm
 
 // goModuleVersion is the tagged release for this module
-const goModuleVersion = "1.22.7"
+const goModuleVersion = "1.26.2"

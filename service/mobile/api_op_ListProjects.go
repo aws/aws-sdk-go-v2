@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/mobile/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -31,12 +30,12 @@ func (c *Client) ListProjects(ctx context.Context, params *ListProjectsInput, op
 // Request structure used to request projects list in AWS Mobile Hub.
 type ListProjectsInput struct {
 
-	// Maximum number of records to list in a single response.
+	//  Maximum number of records to list in a single response.
 	MaxResults int32
 
-	// Pagination token. Set to null to start listing projects from start. If non-null
-	// pagination token is returned in a result, then pass its value in here in another
-	// request to list more projects.
+	//  Pagination token. Set to null to start listing projects from start. If
+	// non-null pagination token is returned in a result, then pass its value in here
+	// in another request to list more projects.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -45,12 +44,12 @@ type ListProjectsInput struct {
 // Result structure used for requests to list projects in AWS Mobile Hub.
 type ListProjectsOutput struct {
 
-	// Pagination token. Set to null to start listing records from start. If non-null
+	//  Pagination token. Set to null to start listing records from start. If non-null
 	// pagination token is returned in a result, then pass its value in here in another
 	// request to list more entries.
 	NextToken *string
 
-	// List of projects.
+	//  List of projects.
 	Projects []types.ProjectSummary
 
 	// Metadata pertaining to the operation's result.
@@ -81,25 +80,25 @@ func (c *Client) addOperationListProjectsMiddlewares(stack *middleware.Stack, op
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -114,10 +113,13 @@ func (c *Client) addOperationListProjectsMiddlewares(stack *middleware.Stack, op
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListProjects(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -144,7 +146,7 @@ var _ ListProjectsAPIClient = (*Client)(nil)
 
 // ListProjectsPaginatorOptions is the paginator options for ListProjects
 type ListProjectsPaginatorOptions struct {
-	// Maximum number of records to list in a single response.
+	//  Maximum number of records to list in a single response.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

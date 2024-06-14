@@ -6,16 +6,16 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/kinesisanalyticsv2/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Adds an InputProcessingConfiguration to a SQL-based Kinesis Data Analytics
-// application. An input processor pre-processes records on the input stream before
-// the application's SQL code executes. Currently, the only input processor
-// available is Amazon Lambda (https://docs.aws.amazon.com/lambda/) .
+// Adds an InputProcessingConfiguration to a SQL-based Kinesis Data Analytics application. An input processor
+// pre-processes records on the input stream before the application's SQL code
+// executes. Currently, the only input processor available is [Amazon Lambda].
+//
+// [Amazon Lambda]: https://docs.aws.amazon.com/lambda/
 func (c *Client) AddApplicationInputProcessingConfiguration(ctx context.Context, params *AddApplicationInputProcessingConfigurationInput, optFns ...func(*Options)) (*AddApplicationInputProcessingConfigurationOutput, error) {
 	if params == nil {
 		params = &AddApplicationInputProcessingConfigurationInput{}
@@ -40,16 +40,15 @@ type AddApplicationInputProcessingConfigurationInput struct {
 	ApplicationName *string
 
 	// The version of the application to which you want to add the input processing
-	// configuration. You can use the DescribeApplication operation to get the current
-	// application version. If the version specified is not the current version, the
+	// configuration. You can use the DescribeApplicationoperation to get the current application
+	// version. If the version specified is not the current version, the
 	// ConcurrentModificationException is returned.
 	//
 	// This member is required.
 	CurrentApplicationVersionId *int64
 
 	// The ID of the input configuration to add the input processing configuration to.
-	// You can get a list of the input IDs for an application using the
-	// DescribeApplication operation.
+	// You can get a list of the input IDs for an application using the DescribeApplicationoperation.
 	//
 	// This member is required.
 	InputId *string
@@ -107,25 +106,25 @@ func (c *Client) addOperationAddApplicationInputProcessingConfigurationMiddlewar
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -140,13 +139,16 @@ func (c *Client) addOperationAddApplicationInputProcessingConfigurationMiddlewar
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpAddApplicationInputProcessingConfigurationValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opAddApplicationInputProcessingConfiguration(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

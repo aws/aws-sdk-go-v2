@@ -6,13 +6,12 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/qbusiness/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists one or more Amazon Q Web Experiences.
+// Lists one or more Amazon Q Business Web Experiences.
 func (c *Client) ListWebExperiences(ctx context.Context, params *ListWebExperiencesInput, optFns ...func(*Options)) (*ListWebExperiencesOutput, error) {
 	if params == nil {
 		params = &ListWebExperiencesInput{}
@@ -30,17 +29,19 @@ func (c *Client) ListWebExperiences(ctx context.Context, params *ListWebExperien
 
 type ListWebExperiencesInput struct {
 
-	// The identifier of the Amazon Q application linked to the listed web experiences.
+	// The identifier of the Amazon Q Business application linked to the listed web
+	// experiences.
 	//
 	// This member is required.
 	ApplicationId *string
 
-	// The maximum number of Amazon Q Web Experiences to return.
+	// The maximum number of Amazon Q Business Web Experiences to return.
 	MaxResults *int32
 
 	// If the maxResults response was incomplete because there is more data to
-	// retrieve, Amazon Q returns a pagination token in the response. You can use this
-	// pagination token to retrieve the next set of Amazon Q conversations.
+	// retrieve, Amazon Q Business returns a pagination token in the response. You can
+	// use this pagination token to retrieve the next set of Amazon Q Business
+	// conversations.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -48,11 +49,11 @@ type ListWebExperiencesInput struct {
 
 type ListWebExperiencesOutput struct {
 
-	// If the response is truncated, Amazon Q returns this token, which you can use in
-	// a later request to list the next set of messages.
+	// If the response is truncated, Amazon Q Business returns this token, which you
+	// can use in a later request to list the next set of messages.
 	NextToken *string
 
-	// An array of summary information for one or more Amazon Q experiences.
+	// An array of summary information for one or more Amazon Q Business experiences.
 	WebExperiences []types.WebExperience
 
 	// Metadata pertaining to the operation's result.
@@ -83,25 +84,25 @@ func (c *Client) addOperationListWebExperiencesMiddlewares(stack *middleware.Sta
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -116,13 +117,16 @@ func (c *Client) addOperationListWebExperiencesMiddlewares(stack *middleware.Sta
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpListWebExperiencesValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListWebExperiences(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -151,7 +155,7 @@ var _ ListWebExperiencesAPIClient = (*Client)(nil)
 // ListWebExperiencesPaginatorOptions is the paginator options for
 // ListWebExperiences
 type ListWebExperiencesPaginatorOptions struct {
-	// The maximum number of Amazon Q Web Experiences to return.
+	// The maximum number of Amazon Q Business Web Experiences to return.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

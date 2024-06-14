@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/mediapackagev2/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -16,8 +15,10 @@ import (
 // Update the specified channel. You can edit if MediaPackage sends ingest or
 // egress access logs to the CloudWatch log group, if content will be encrypted,
 // the description on a channel, and your channel's policy settings. You can't edit
-// the name of the channel or CloudFront distribution details. Any edits you make
-// that impact the video output may not be reflected for a few minutes.
+// the name of the channel or CloudFront distribution details.
+//
+// Any edits you make that impact the video output may not be reflected for a few
+// minutes.
 func (c *Client) UpdateChannel(ctx context.Context, params *UpdateChannelInput, optFns ...func(*Options)) (*UpdateChannelOutput, error) {
 	if params == nil {
 		params = &UpdateChannelInput{}
@@ -51,6 +52,11 @@ type UpdateChannelInput struct {
 	// Any descriptive information that you want to add to the channel for future
 	// identification purposes.
 	Description *string
+
+	// The expected current Entity Tag (ETag) for the resource. If the specified ETag
+	// does not match the resource's current entity tag, the update request will be
+	// rejected.
+	ETag *string
 
 	noSmithyDocumentSerde
 }
@@ -88,8 +94,25 @@ type UpdateChannelOutput struct {
 	// The description for your channel.
 	Description *string
 
+	// The current Entity Tag (ETag) associated with this resource. The entity tag can
+	// be used to safely make concurrent updates to the resource.
+	ETag *string
+
 	// The list of ingest endpoints.
 	IngestEndpoints []types.IngestEndpoint
+
+	// The input type will be an immutable field which will be used to define whether
+	// the channel will allow CMAF ingest or HLS ingest. If unprovided, it will default
+	// to HLS to preserve current behavior.
+	//
+	// The allowed values are:
+	//
+	//   - HLS - The HLS streaming specification (which defines M3U8 manifests and TS
+	//   segments).
+	//
+	//   - CMAF - The DASH-IF CMAF Ingest specification (which defines CMAF segments
+	//   with optional DASH manifests).
+	InputType types.InputType
 
 	// The comma-separated list of tag key:value pairs assigned to the channel.
 	Tags map[string]string
@@ -122,25 +145,25 @@ func (c *Client) addOperationUpdateChannelMiddlewares(stack *middleware.Stack, o
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -155,13 +178,16 @@ func (c *Client) addOperationUpdateChannelMiddlewares(stack *middleware.Stack, o
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpUpdateChannelValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateChannel(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

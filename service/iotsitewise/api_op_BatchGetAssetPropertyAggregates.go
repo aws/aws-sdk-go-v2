@@ -6,15 +6,15 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/iotsitewise/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Gets aggregated values (for example, average, minimum, and maximum) for one or
-// more asset properties. For more information, see Querying aggregates (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/query-industrial-data.html#aggregates)
-// in the IoT SiteWise User Guide.
+// more asset properties. For more information, see [Querying aggregates]in the IoT SiteWise User Guide.
+//
+// [Querying aggregates]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/query-industrial-data.html#aggregates
 func (c *Client) BatchGetAssetPropertyAggregates(ctx context.Context, params *BatchGetAssetPropertyAggregatesInput, optFns ...func(*Options)) (*BatchGetAssetPropertyAggregatesOutput, error) {
 	if params == nil {
 		params = &BatchGetAssetPropertyAggregatesInput{}
@@ -40,7 +40,9 @@ type BatchGetAssetPropertyAggregatesInput struct {
 
 	// The maximum number of results to return for each paginated request. A result
 	// set is returned in the two cases, whichever occurs first.
+	//
 	//   - The size of the result set is equal to 1 MB.
+	//
 	//   - The number of data points in the result set is equal to the value of
 	//   maxResults . The maximum value of maxResults is 4000.
 	MaxResults *int32
@@ -105,25 +107,25 @@ func (c *Client) addOperationBatchGetAssetPropertyAggregatesMiddlewares(stack *m
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -138,6 +140,9 @@ func (c *Client) addOperationBatchGetAssetPropertyAggregatesMiddlewares(stack *m
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addEndpointPrefix_opBatchGetAssetPropertyAggregatesMiddleware(stack); err != nil {
 		return err
 	}
@@ -147,7 +152,7 @@ func (c *Client) addOperationBatchGetAssetPropertyAggregatesMiddlewares(stack *m
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opBatchGetAssetPropertyAggregates(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -205,7 +210,9 @@ var _ BatchGetAssetPropertyAggregatesAPIClient = (*Client)(nil)
 type BatchGetAssetPropertyAggregatesPaginatorOptions struct {
 	// The maximum number of results to return for each paginated request. A result
 	// set is returned in the two cases, whichever occurs first.
+	//
 	//   - The size of the result set is equal to 1 MB.
+	//
 	//   - The number of data points in the result set is equal to the value of
 	//   maxResults . The maximum value of maxResults is 4000.
 	Limit int32

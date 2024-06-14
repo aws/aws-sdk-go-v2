@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/docdb/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -15,7 +14,9 @@ import (
 // Modify a setting for an Amazon DocumentDB global cluster. You can change one or
 // more configuration parameters (for example: deletion protection), or the global
 // cluster identifier by specifying these parameters and the new values in the
-// request. This action only applies to Amazon DocumentDB clusters.
+// request.
+//
+// This action only applies to Amazon DocumentDB clusters.
 func (c *Client) ModifyGlobalCluster(ctx context.Context, params *ModifyGlobalClusterInput, optFns ...func(*Options)) (*ModifyGlobalClusterOutput, error) {
 	if params == nil {
 		params = &ModifyGlobalClusterInput{}
@@ -31,11 +32,14 @@ func (c *Client) ModifyGlobalCluster(ctx context.Context, params *ModifyGlobalCl
 	return out, nil
 }
 
-// Represents the input to ModifyGlobalCluster .
+// Represents the input to ModifyGlobalCluster.
 type ModifyGlobalClusterInput struct {
 
 	// The identifier for the global cluster being modified. This parameter isn't
-	// case-sensitive. Constraints:
+	// case-sensitive.
+	//
+	// Constraints:
+	//
 	//   - Must match the identifier of an existing global cluster.
 	//
 	// This member is required.
@@ -47,8 +51,13 @@ type ModifyGlobalClusterInput struct {
 
 	// The new identifier for a global cluster when you modify a global cluster. This
 	// value is stored as a lowercase string.
-	//   - Must contain from 1 to 63 letters, numbers, or hyphens The first character
-	//   must be a letter Can't end with a hyphen or contain two consecutive hyphens
+	//
+	//   - Must contain from 1 to 63 letters, numbers, or hyphens
+	//
+	// The first character must be a letter
+	//
+	// Can't end with a hyphen or contain two consecutive hyphens
+	//
 	// Example: my-cluster2
 	NewGlobalClusterIdentifier *string
 
@@ -88,25 +97,25 @@ func (c *Client) addOperationModifyGlobalClusterMiddlewares(stack *middleware.St
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -121,13 +130,16 @@ func (c *Client) addOperationModifyGlobalClusterMiddlewares(stack *middleware.St
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpModifyGlobalClusterValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opModifyGlobalCluster(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/configservice/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -18,8 +17,10 @@ import (
 // combinations in the conformance pack. This metric provides you with a high-level
 // view of the compliance state of your conformance packs. You can use it to
 // identify, investigate, and understand the level of compliance in your
-// conformance packs. Conformance packs with no evaluation results will have a
-// compliance score of INSUFFICIENT_DATA .
+// conformance packs.
+//
+// Conformance packs with no evaluation results will have a compliance score of
+// INSUFFICIENT_DATA .
 func (c *Client) ListConformancePackComplianceScores(ctx context.Context, params *ListConformancePackComplianceScoresInput, optFns ...func(*Options)) (*ListConformancePackComplianceScoresOutput, error) {
 	if params == nil {
 		params = &ListConformancePackComplianceScoresInput{}
@@ -48,21 +49,25 @@ type ListConformancePackComplianceScoresInput struct {
 	NextToken *string
 
 	// Sorts your conformance pack compliance scores in either ascending or descending
-	// order, depending on SortOrder . By default, conformance pack compliance scores
-	// are sorted in alphabetical order by name of the conformance pack. Enter SCORE ,
-	// to sort conformance pack compliance scores by the numerical value of the
-	// compliance score.
+	// order, depending on SortOrder .
+	//
+	// By default, conformance pack compliance scores are sorted in alphabetical order
+	// by name of the conformance pack. Enter SCORE , to sort conformance pack
+	// compliance scores by the numerical value of the compliance score.
 	SortBy types.SortBy
 
 	// Determines the order in which conformance pack compliance scores are sorted.
-	// Either in ascending or descending order. By default, conformance pack compliance
-	// scores are sorted in alphabetical order by name of the conformance pack.
-	// Conformance pack compliance scores are sorted in reverse alphabetical order if
-	// you enter DESCENDING . You can sort conformance pack compliance scores by the
-	// numerical value of the compliance score by entering SCORE in the SortBy action.
-	// When compliance scores are sorted by SCORE , conformance packs with a compliance
-	// score of INSUFFICIENT_DATA will be last when sorting by ascending order and
-	// first when sorting by descending order.
+	// Either in ascending or descending order.
+	//
+	// By default, conformance pack compliance scores are sorted in alphabetical order
+	// by name of the conformance pack. Conformance pack compliance scores are sorted
+	// in reverse alphabetical order if you enter DESCENDING .
+	//
+	// You can sort conformance pack compliance scores by the numerical value of the
+	// compliance score by entering SCORE in the SortBy action. When compliance scores
+	// are sorted by SCORE , conformance packs with a compliance score of
+	// INSUFFICIENT_DATA will be last when sorting by ascending order and first when
+	// sorting by descending order.
 	SortOrder types.SortOrder
 
 	noSmithyDocumentSerde
@@ -107,25 +112,25 @@ func (c *Client) addOperationListConformancePackComplianceScoresMiddlewares(stac
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -140,13 +145,16 @@ func (c *Client) addOperationListConformancePackComplianceScoresMiddlewares(stac
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpListConformancePackComplianceScoresValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListConformancePackComplianceScores(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

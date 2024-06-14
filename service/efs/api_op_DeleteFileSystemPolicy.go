@@ -6,17 +6,18 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Deletes the FileSystemPolicy for the specified file system. The default
 // FileSystemPolicy goes into effect once the existing policy is deleted. For more
-// information about the default file system policy, see Using Resource-based
-// Policies with EFS (https://docs.aws.amazon.com/efs/latest/ug/res-based-policies-efs.html)
-// . This operation requires permissions for the
+// information about the default file system policy, see [Using Resource-based Policies with EFS].
+//
+// This operation requires permissions for the
 // elasticfilesystem:DeleteFileSystemPolicy action.
+//
+// [Using Resource-based Policies with EFS]: https://docs.aws.amazon.com/efs/latest/ug/res-based-policies-efs.html
 func (c *Client) DeleteFileSystemPolicy(ctx context.Context, params *DeleteFileSystemPolicyInput, optFns ...func(*Options)) (*DeleteFileSystemPolicyOutput, error) {
 	if params == nil {
 		params = &DeleteFileSystemPolicyInput{}
@@ -71,25 +72,25 @@ func (c *Client) addOperationDeleteFileSystemPolicyMiddlewares(stack *middleware
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -104,13 +105,16 @@ func (c *Client) addOperationDeleteFileSystemPolicyMiddlewares(stack *middleware
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDeleteFileSystemPolicyValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteFileSystemPolicy(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

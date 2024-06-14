@@ -16,8 +16,9 @@ const (
 )
 
 // Values returns all known values for AuthenticationDecision. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (AuthenticationDecision) Values() []AuthenticationDecision {
 	return []AuthenticationDecision{
 		"ACCEPT",
@@ -47,8 +48,9 @@ const (
 )
 
 // Values returns all known values for ConflictType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ConflictType) Values() []ConflictType {
 	return []ConflictType{
 		"ANOTHER_ACTIVE_STREAM",
@@ -74,8 +76,9 @@ const (
 )
 
 // Values returns all known values for DomainStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (DomainStatus) Values() []DomainStatus {
 	return []DomainStatus{
 		"ACTIVE",
@@ -94,6 +97,7 @@ const (
 
 // Values returns all known values for DuplicateRegistrationAction. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (DuplicateRegistrationAction) Values() []DuplicateRegistrationAction {
 	return []DuplicateRegistrationAction{
@@ -112,6 +116,7 @@ const (
 
 // Values returns all known values for ExistingEnrollmentAction. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (ExistingEnrollmentAction) Values() []ExistingEnrollmentAction {
 	return []ExistingEnrollmentAction{
@@ -129,8 +134,9 @@ const (
 )
 
 // Values returns all known values for FraudDetectionAction. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (FraudDetectionAction) Values() []FraudDetectionAction {
 	return []FraudDetectionAction{
 		"IGNORE",
@@ -148,8 +154,9 @@ const (
 )
 
 // Values returns all known values for FraudDetectionDecision. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (FraudDetectionDecision) Values() []FraudDetectionDecision {
 	return []FraudDetectionDecision{
 		"HIGH_RISK",
@@ -167,8 +174,9 @@ const (
 )
 
 // Values returns all known values for FraudDetectionReason. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (FraudDetectionReason) Values() []FraudDetectionReason {
 	return []FraudDetectionReason{
 		"KNOWN_FRAUDSTER",
@@ -189,8 +197,9 @@ const (
 
 // Values returns all known values for FraudsterRegistrationJobStatus. Note that
 // this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (FraudsterRegistrationJobStatus) Values() []FraudsterRegistrationJobStatus {
 	return []FraudsterRegistrationJobStatus{
 		"SUBMITTED",
@@ -215,8 +224,9 @@ const (
 )
 
 // Values returns all known values for ResourceType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ResourceType) Values() []ResourceType {
 	return []ResourceType{
 		"BATCH_JOB",
@@ -240,8 +250,9 @@ const (
 
 // Values returns all known values for ServerSideEncryptionUpdateStatus. Note that
 // this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ServerSideEncryptionUpdateStatus) Values() []ServerSideEncryptionUpdateStatus {
 	return []ServerSideEncryptionUpdateStatus{
 		"IN_PROGRESS",
@@ -263,6 +274,7 @@ const (
 
 // Values returns all known values for SpeakerEnrollmentJobStatus. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (SpeakerEnrollmentJobStatus) Values() []SpeakerEnrollmentJobStatus {
 	return []SpeakerEnrollmentJobStatus{
@@ -285,8 +297,9 @@ const (
 )
 
 // Values returns all known values for SpeakerStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (SpeakerStatus) Values() []SpeakerStatus {
 	return []SpeakerStatus{
 		"ENROLLED",
@@ -306,8 +319,9 @@ const (
 )
 
 // Values returns all known values for StreamingStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (StreamingStatus) Values() []StreamingStatus {
 	return []StreamingStatus{
 		"PENDING_CONFIGURATION",

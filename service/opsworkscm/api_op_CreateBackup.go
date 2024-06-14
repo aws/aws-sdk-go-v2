@@ -6,21 +6,26 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/opsworkscm/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates an application-level backup of a server. While the server is in the
+//	Creates an application-level backup of a server. While the server is in the
+//
 // BACKING_UP state, the server cannot be changed, and no additional backup can be
-// created. Backups can be created for servers in RUNNING , HEALTHY , and UNHEALTHY
-// states. By default, you can create a maximum of 50 manual backups. This
-// operation is asynchronous. A LimitExceededException is thrown when the maximum
-// number of manual backups is reached. An InvalidStateException is thrown when
-// the server is not in any of the following states: RUNNING, HEALTHY, or
-// UNHEALTHY. A ResourceNotFoundException is thrown when the server is not found.
-// A ValidationException is thrown when parameters of the request are not valid.
+// created.
+//
+// Backups can be created for servers in RUNNING , HEALTHY , and UNHEALTHY states.
+// By default, you can create a maximum of 50 manual backups.
+//
+// This operation is asynchronous.
+//
+// A LimitExceededException is thrown when the maximum number of manual backups is
+// reached. An InvalidStateException is thrown when the server is not in any of
+// the following states: RUNNING, HEALTHY, or UNHEALTHY. A
+// ResourceNotFoundException is thrown when the server is not found. A
+// ValidationException is thrown when parameters of the request are not valid.
 func (c *Client) CreateBackup(ctx context.Context, params *CreateBackupInput, optFns ...func(*Options)) (*CreateBackupOutput, error) {
 	if params == nil {
 		params = &CreateBackupInput{}
@@ -43,19 +48,24 @@ type CreateBackupInput struct {
 	// This member is required.
 	ServerName *string
 
-	// A user-defined description of the backup.
+	//  A user-defined description of the backup.
 	Description *string
 
 	// A map that contains tag keys and tag values to attach to an AWS OpsWorks-CM
 	// server backup.
+	//
 	//   - The key cannot be empty.
+	//
 	//   - The key can be a maximum of 127 characters, and can contain only Unicode
 	//   letters, numbers, or separators, or the following special characters: + - = .
 	//   _ : /
+	//
 	//   - The value can be a maximum 255 characters, and contain only Unicode
 	//   letters, numbers, or separators, or the following special characters: + - = .
 	//   _ : /
+	//
 	//   - Leading and trailing white spaces are trimmed from both the key and value.
+	//
 	//   - A maximum of 50 user-applied tags is allowed for tag-supported AWS
 	//   OpsWorks-CM resources.
 	Tags []types.Tag
@@ -96,25 +106,25 @@ func (c *Client) addOperationCreateBackupMiddlewares(stack *middleware.Stack, op
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -129,13 +139,16 @@ func (c *Client) addOperationCreateBackupMiddlewares(stack *middleware.Stack, op
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpCreateBackupValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateBackup(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

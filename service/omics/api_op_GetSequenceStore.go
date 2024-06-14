@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/omics/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -59,11 +58,18 @@ type GetSequenceStoreOutput struct {
 	// The store's description.
 	Description *string
 
+	// The algorithm family of the ETag.
+	ETagAlgorithmFamily types.ETagAlgorithmFamily
+
 	// An S3 location that is used to store files that have failed a direct upload.
 	FallbackLocation *string
 
 	// The store's name.
 	Name *string
+
+	// The S3 metadata of a sequence store, including the ARN and S3 URI of the S3
+	// bucket.
+	S3Access *types.SequenceStoreS3Access
 
 	// The store's server-side encryption (SSE) settings.
 	SseConfig *types.SseConfig
@@ -96,25 +102,25 @@ func (c *Client) addOperationGetSequenceStoreMiddlewares(stack *middleware.Stack
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -129,6 +135,9 @@ func (c *Client) addOperationGetSequenceStoreMiddlewares(stack *middleware.Stack
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addEndpointPrefix_opGetSequenceStoreMiddleware(stack); err != nil {
 		return err
 	}
@@ -138,7 +147,7 @@ func (c *Client) addOperationGetSequenceStoreMiddlewares(stack *middleware.Stack
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetSequenceStore(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

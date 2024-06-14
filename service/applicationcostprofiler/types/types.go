@@ -67,9 +67,10 @@ type SourceS3Location struct {
 	Key *string
 
 	// Region of the bucket. Only required for Regions that are disabled by default.
-	// For more infomration about Regions that are disabled by default, see Enabling a
-	// Region (https://docs.aws.amazon.com/general/latest/gr/rande-manage.html#rande-manage-enable)
-	// in the AWS General Reference guide.
+	// For more infomration about Regions that are disabled by default, see [Enabling a Region]in the AWS
+	// General Reference guide.
+	//
+	// [Enabling a Region]: https://docs.aws.amazon.com/general/latest/gr/rande-manage.html#rande-manage-enable
 	Region S3BucketRegion
 
 	noSmithyDocumentSerde

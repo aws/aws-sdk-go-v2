@@ -6,14 +6,14 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/rds/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns a list of DB log files for the DB instance. This command doesn't apply
-// to RDS Custom.
+// Returns a list of DB log files for the DB instance.
+//
+// This command doesn't apply to RDS Custom.
 func (c *Client) DescribeDBLogFiles(ctx context.Context, params *DescribeDBLogFilesInput, optFns ...func(*Options)) (*DescribeDBLogFilesOutput, error) {
 	if params == nil {
 		params = &DescribeDBLogFilesInput{}
@@ -32,7 +32,10 @@ func (c *Client) DescribeDBLogFiles(ctx context.Context, params *DescribeDBLogFi
 type DescribeDBLogFilesInput struct {
 
 	// The customer-assigned name of the DB instance that contains the log files you
-	// want to list. Constraints:
+	// want to list.
+	//
+	// Constraints:
+	//
 	//   - Must match the identifier of an existing DBInstance.
 	//
 	// This member is required.
@@ -102,25 +105,25 @@ func (c *Client) addOperationDescribeDBLogFilesMiddlewares(stack *middleware.Sta
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -135,13 +138,16 @@ func (c *Client) addOperationDescribeDBLogFilesMiddlewares(stack *middleware.Sta
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDescribeDBLogFilesValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeDBLogFiles(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

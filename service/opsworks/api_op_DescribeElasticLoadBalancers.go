@@ -6,18 +6,20 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/opsworks/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Describes a stack's Elastic Load Balancing instances. This call accepts only
-// one resource-identifying parameter. Required Permissions: To use this action, an
-// IAM user must have a Show, Deploy, or Manage permissions level for the stack, or
-// an attached policy that explicitly grants permissions. For more information
-// about user permissions, see Managing User Permissions (https://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html)
-// .
+// Describes a stack's Elastic Load Balancing instances.
+//
+// This call accepts only one resource-identifying parameter.
+//
+// Required Permissions: To use this action, an IAM user must have a Show, Deploy,
+// or Manage permissions level for the stack, or an attached policy that explicitly
+// grants permissions. For more information about user permissions, see [Managing User Permissions].
+//
+// [Managing User Permissions]: https://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html
 func (c *Client) DescribeElasticLoadBalancers(ctx context.Context, params *DescribeElasticLoadBalancersInput, optFns ...func(*Options)) (*DescribeElasticLoadBalancersOutput, error) {
 	if params == nil {
 		params = &DescribeElasticLoadBalancersInput{}
@@ -80,25 +82,25 @@ func (c *Client) addOperationDescribeElasticLoadBalancersMiddlewares(stack *midd
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -113,10 +115,13 @@ func (c *Client) addOperationDescribeElasticLoadBalancersMiddlewares(stack *midd
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeElasticLoadBalancers(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

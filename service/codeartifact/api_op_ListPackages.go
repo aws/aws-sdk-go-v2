@@ -6,14 +6,16 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/codeartifact/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns a list of PackageSummary (https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_PackageSummary.html)
-// objects for packages in a repository that match the request parameters.
+//	Returns a list of [PackageSummary] objects for packages in a repository that match the request
+//
+// parameters.
+//
+// [PackageSummary]: https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_PackageSummary.html
 func (c *Client) ListPackages(ctx context.Context, params *ListPackagesInput, optFns ...func(*Options)) (*ListPackagesOutput, error) {
 	if params == nil {
 		params = &ListPackagesInput{}
@@ -31,18 +33,18 @@ func (c *Client) ListPackages(ctx context.Context, params *ListPackagesInput, op
 
 type ListPackagesInput struct {
 
-	// The name of the domain that contains the repository that contains the requested
-	// packages.
+	//  The name of the domain that contains the repository that contains the
+	// requested packages.
 	//
 	// This member is required.
 	Domain *string
 
-	// The name of the repository that contains the requested packages.
+	//  The name of the repository that contains the requested packages.
 	//
 	// This member is required.
 	Repository *string
 
-	// The 12-digit account number of the Amazon Web Services account that owns the
+	//  The 12-digit account number of the Amazon Web Services account that owns the
 	// domain. It does not include dashes or spaces.
 	DomainOwner *string
 
@@ -50,38 +52,46 @@ type ListPackagesInput struct {
 	// format will be returned.
 	Format types.PackageFormat
 
-	// The maximum number of results to return per page.
+	//  The maximum number of results to return per page.
 	MaxResults *int32
 
 	// The namespace prefix used to filter requested packages. Only packages with a
 	// namespace that starts with the provided string value are returned. Note that
 	// although this option is called --namespace and not --namespace-prefix , it has
-	// prefix-matching behavior. Each package format uses namespace as follows:
-	//   - The namespace of a Maven package is its groupId .
-	//   - The namespace of an npm package is its scope .
-	//   - Python and NuGet packages do not contain a corresponding component,
-	//   packages of those formats do not have a namespace.
+	// prefix-matching behavior.
+	//
+	// Each package format uses namespace as follows:
+	//
+	//   - The namespace of a Maven package version is its groupId .
+	//
+	//   - The namespace of an npm or Swift package version is its scope .
+	//
 	//   - The namespace of a generic package is its namespace .
+	//
+	//   - Python, NuGet, and Ruby package versions do not contain a corresponding
+	//   component, package versions of those formats do not have a namespace.
 	Namespace *string
 
-	// The token for the next set of results. Use the value returned in the previous
+	//  The token for the next set of results. Use the value returned in the previous
 	// response in the next request to retrieve the next set of results.
 	NextToken *string
 
-	// A prefix used to filter requested packages. Only packages with names that start
-	// with packagePrefix are returned.
+	//  A prefix used to filter requested packages. Only packages with names that
+	// start with packagePrefix are returned.
 	PackagePrefix *string
 
 	// The value of the Publish package origin control restriction used to filter
 	// requested packages. Only packages with the provided restriction are returned.
-	// For more information, see PackageOriginRestrictions (https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_PackageOriginRestrictions.html)
-	// .
+	// For more information, see [PackageOriginRestrictions].
+	//
+	// [PackageOriginRestrictions]: https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_PackageOriginRestrictions.html
 	Publish types.AllowPublish
 
 	// The value of the Upstream package origin control restriction used to filter
 	// requested packages. Only packages with the provided restriction are returned.
-	// For more information, see PackageOriginRestrictions (https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_PackageOriginRestrictions.html)
-	// .
+	// For more information, see [PackageOriginRestrictions].
+	//
+	// [PackageOriginRestrictions]: https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_PackageOriginRestrictions.html
 	Upstream types.AllowUpstream
 
 	noSmithyDocumentSerde
@@ -89,11 +99,13 @@ type ListPackagesInput struct {
 
 type ListPackagesOutput struct {
 
-	// If there are additional results, this is the token for the next set of results.
+	//  If there are additional results, this is the token for the next set of
+	// results.
 	NextToken *string
 
-	// The list of returned PackageSummary (https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_PackageSummary.html)
-	// objects.
+	//  The list of returned [PackageSummary] objects.
+	//
+	// [PackageSummary]: https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_PackageSummary.html
 	Packages []types.PackageSummary
 
 	// Metadata pertaining to the operation's result.
@@ -124,25 +136,25 @@ func (c *Client) addOperationListPackagesMiddlewares(stack *middleware.Stack, op
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -157,13 +169,16 @@ func (c *Client) addOperationListPackagesMiddlewares(stack *middleware.Stack, op
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpListPackagesValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListPackages(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -190,7 +205,7 @@ var _ ListPackagesAPIClient = (*Client)(nil)
 
 // ListPackagesPaginatorOptions is the paginator options for ListPackages
 type ListPackagesPaginatorOptions struct {
-	// The maximum number of results to return per page.
+	//  The maximum number of results to return per page.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

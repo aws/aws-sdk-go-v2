@@ -6,20 +6,21 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/iam/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Adds one or more tags to an IAM server certificate. If a tag with the same key
-// name already exists, then that tag is overwritten with the new value. For
-// certificates in a Region supported by Certificate Manager (ACM), we recommend
-// that you don't use IAM server certificates. Instead, use ACM to provision,
-// manage, and deploy your server certificates. For more information about IAM
-// server certificates, Working with server certificates (https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_server-certs.html)
-// in the IAM User Guide. A tag consists of a key name and an associated value. By
-// assigning tags to your resources, you can do the following:
+// name already exists, then that tag is overwritten with the new value.
+//
+// For certificates in a Region supported by Certificate Manager (ACM), we
+// recommend that you don't use IAM server certificates. Instead, use ACM to
+// provision, manage, and deploy your server certificates. For more information
+// about IAM server certificates, [Working with server certificates]in the IAM User Guide.
+//
+// A tag consists of a key name and an associated value. By assigning tags to your
+// resources, you can do the following:
 //
 //   - Administrative grouping and discovery - Attach tags to resources to aid in
 //     organization and search. For example, you could search for all resources with
@@ -29,20 +30,22 @@ import (
 //   - Access control - Include tags in IAM user-based and resource-based
 //     policies. You can use tags to restrict access to only a server certificate that
 //     has a specified tag attached. For examples of policies that show how to use tags
-//     to control access, see Control access using IAM tags (https://docs.aws.amazon.com/IAM/latest/UserGuide/access_tags.html)
-//     in the IAM User Guide.
+//     to control access, see [Control access using IAM tags]in the IAM User Guide.
 //
 //   - Cost allocation - Use tags to help track which individuals and teams are
 //     using which Amazon Web Services resources.
 //
 //   - If any one of the tags is invalid or if you exceed the allowed maximum
 //     number of tags, then the entire request fails and the resource is not created.
-//     For more information about tagging, see Tagging IAM resources (https://docs.aws.amazon.com/IAM/latest/UserGuide/id_tags.html)
-//     in the IAM User Guide.
+//     For more information about tagging, see [Tagging IAM resources]in the IAM User Guide.
 //
 //   - Amazon Web Services always interprets the tag Value as a single string. If
 //     you need to store an array, you can store comma-separated values in the string.
 //     However, you must interpret the value in your code.
+//
+// [Control access using IAM tags]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access_tags.html
+// [Working with server certificates]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_server-certs.html
+// [Tagging IAM resources]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_tags.html
 func (c *Client) TagServerCertificate(ctx context.Context, params *TagServerCertificateInput, optFns ...func(*Options)) (*TagServerCertificateOutput, error) {
 	if params == nil {
 		params = &TagServerCertificateInput{}
@@ -60,10 +63,13 @@ func (c *Client) TagServerCertificate(ctx context.Context, params *TagServerCert
 
 type TagServerCertificateInput struct {
 
-	// The name of the IAM server certificate to which you want to add tags. This
-	// parameter allows (through its regex pattern (http://wikipedia.org/wiki/regex) )
-	// a string of characters consisting of upper and lowercase alphanumeric characters
-	// with no spaces. You can also include any of the following characters: _+=,.@-
+	// The name of the IAM server certificate to which you want to add tags.
+	//
+	// This parameter allows (through its [regex pattern]) a string of characters consisting of upper
+	// and lowercase alphanumeric characters with no spaces. You can also include any
+	// of the following characters: _+=,.@-
+	//
+	// [regex pattern]: http://wikipedia.org/wiki/regex
 	//
 	// This member is required.
 	ServerCertificateName *string
@@ -106,25 +112,25 @@ func (c *Client) addOperationTagServerCertificateMiddlewares(stack *middleware.S
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -139,13 +145,16 @@ func (c *Client) addOperationTagServerCertificateMiddlewares(stack *middleware.S
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpTagServerCertificateValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opTagServerCertificate(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

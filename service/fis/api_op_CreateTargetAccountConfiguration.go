@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/fis/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -14,8 +13,10 @@ import (
 
 // Creates a target account configuration for the experiment template. A target
 // account configuration is required when accountTargeting of experimentOptions is
-// set to multi-account . For more information, see experiment options (https://docs.aws.amazon.com/fis/latest/userguide/experiment-options.html)
-// in the Fault Injection Simulator User Guide.
+// set to multi-account . For more information, see [experiment options] in the Fault Injection
+// Service User Guide.
+//
+// [experiment options]: https://docs.aws.amazon.com/fis/latest/userguide/experiment-options.html
 func (c *Client) CreateTargetAccountConfiguration(ctx context.Context, params *CreateTargetAccountConfigurationInput, optFns ...func(*Options)) (*CreateTargetAccountConfigurationOutput, error) {
 	if params == nil {
 		params = &CreateTargetAccountConfigurationInput{}
@@ -33,7 +34,7 @@ func (c *Client) CreateTargetAccountConfiguration(ctx context.Context, params *C
 
 type CreateTargetAccountConfigurationInput struct {
 
-	// The AWS account ID of the target account.
+	// The Amazon Web Services account ID of the target account.
 	//
 	// This member is required.
 	AccountId *string
@@ -91,25 +92,25 @@ func (c *Client) addOperationCreateTargetAccountConfigurationMiddlewares(stack *
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -124,6 +125,9 @@ func (c *Client) addOperationCreateTargetAccountConfigurationMiddlewares(stack *
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opCreateTargetAccountConfigurationMiddleware(stack, options); err != nil {
 		return err
 	}
@@ -133,7 +137,7 @@ func (c *Client) addOperationCreateTargetAccountConfigurationMiddlewares(stack *
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateTargetAccountConfiguration(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

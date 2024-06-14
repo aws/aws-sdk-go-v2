@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/databasemigrationservice/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -31,10 +30,12 @@ func (c *Client) DescribeFleetAdvisorSchemaObjectSummary(ctx context.Context, pa
 
 type DescribeFleetAdvisorSchemaObjectSummaryInput struct {
 
-	// If you specify any of the following filters, the output includes information
+	//  If you specify any of the following filters, the output includes information
 	// for only those schema objects that meet the filter criteria:
+	//
 	//   - schema-id – The ID of the schema, for example
 	//   d4610ac5-e323-4ad9-bc50-eaf7249dfe9d .
+	//
 	// Example: describe-fleet-advisor-schema-object-summary --filter
 	// Name="schema-id",Values="50"
 	Filters []types.Filter
@@ -90,25 +91,25 @@ func (c *Client) addOperationDescribeFleetAdvisorSchemaObjectSummaryMiddlewares(
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -123,13 +124,16 @@ func (c *Client) addOperationDescribeFleetAdvisorSchemaObjectSummaryMiddlewares(
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDescribeFleetAdvisorSchemaObjectSummaryValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeFleetAdvisorSchemaObjectSummary(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

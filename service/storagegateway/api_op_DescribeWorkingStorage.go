@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -14,8 +13,10 @@ import (
 // Returns information about the working storage of a gateway. This operation is
 // only supported in the stored volumes gateway type. This operation is deprecated
 // in cached volumes API version (20120630). Use DescribeUploadBuffer instead.
+//
 // Working storage is also referred to as upload buffer. You can also use the
 // DescribeUploadBuffer operation to add upload buffer to a stored volume gateway.
+//
 // The response includes disk IDs that are configured as working storage, and it
 // includes the amount of working storage allocated and used.
 func (c *Client) DescribeWorkingStorage(ctx context.Context, params *DescribeWorkingStorageInput, optFns ...func(*Options)) (*DescribeWorkingStorageOutput, error) {
@@ -36,8 +37,8 @@ func (c *Client) DescribeWorkingStorage(ctx context.Context, params *DescribeWor
 // A JSON object containing the Amazon Resource Name (ARN) of the gateway.
 type DescribeWorkingStorageInput struct {
 
-	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation
-	// to return a list of gateways for your account and Amazon Web Services Region.
+	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation to return a
+	// list of gateways for your account and Amazon Web Services Region.
 	//
 	// This member is required.
 	GatewayARN *string
@@ -54,8 +55,8 @@ type DescribeWorkingStorageOutput struct {
 	// then the DiskIds array is empty.
 	DiskIds []string
 
-	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation
-	// to return a list of gateways for your account and Amazon Web Services Region.
+	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation to return a
+	// list of gateways for your account and Amazon Web Services Region.
 	GatewayARN *string
 
 	// The total working storage in bytes allocated for the gateway. If no working
@@ -94,25 +95,25 @@ func (c *Client) addOperationDescribeWorkingStorageMiddlewares(stack *middleware
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -127,13 +128,16 @@ func (c *Client) addOperationDescribeWorkingStorageMiddlewares(stack *middleware
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDescribeWorkingStorageValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeWorkingStorage(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

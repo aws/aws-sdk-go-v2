@@ -1,3 +1,71 @@
+# v1.10.6 (2024-06-07)
+
+* **Bug Fix**: Add clock skew correction on all service clients
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.10.5 (2024-06-03)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.10.4 (2024-05-23)
+
+* No change notes available for this release.
+
+# v1.10.3 (2024-05-16)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.10.2 (2024-05-15)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.10.1 (2024-05-08)
+
+* **Bug Fix**: GoDoc improvement
+
+# v1.10.0 (2024-04-22)
+
+* **Feature**: Adding support to TR-31/TR-34 exports for optional headers, allowing customers to add additional metadata (such as key version and KSN) when exporting keys from the service.
+
+# v1.9.4 (2024-03-29)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.9.3 (2024-03-18)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.9.2 (2024-03-07)
+
+* **Bug Fix**: Remove dependency on go-cmp.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.9.1 (2024-02-23)
+
+* **Bug Fix**: Move all common, SDK-side middleware stack ops into the service client module to prevent cross-module compatibility issues in the future.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.9.0 (2024-02-22)
+
+* **Feature**: Add middleware stack snapshot tests.
+
+# v1.8.3 (2024-02-21)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.8.2 (2024-02-20)
+
+* **Bug Fix**: When sourcing values for a service's `EndpointParameters`, the lack of a configured region (i.e. `options.Region == ""`) will now translate to a `nil` value for `EndpointParameters.Region` instead of a pointer to the empty string `""`. This will result in a much more explicit error when calling an operation instead of an obscure hostname lookup failure.
+
+# v1.8.1 (2024-02-15)
+
+* **Bug Fix**: Correct failure to determine the error type in awsJson services that could occur when errors were modeled with a non-string `code` field.
+
+# v1.8.0 (2024-02-13)
+
+* **Feature**: Bump minimum Go version to 1.20 per our language support policy.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.7.0 (2024-01-16)
 
 * **Feature**: Provide an additional option for key exchange using RSA wrap/unwrap in addition to tr-34/tr-31 in ImportKey and ExportKey operations. Added new key usage (type) TR31_M1_ISO_9797_1_MAC_KEY, for use with Generate/VerifyMac dataplane operations  with ISO9797 Algorithm 1 MAC calculations.

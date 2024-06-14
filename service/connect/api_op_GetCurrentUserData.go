@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/connect/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -32,21 +31,31 @@ type GetCurrentUserDataInput struct {
 
 	// The filters to apply to returned user data. You can filter up to the following
 	// limits:
+	//
 	//   - Queues: 100
+	//
 	//   - Routing profiles: 100
+	//
 	//   - Agents: 100
+	//
 	//   - Contact states: 9
+	//
 	//   - User hierarchy groups: 1
+	//
 	// The user data is retrieved for only the specified values/resources in the
 	// filter. A maximum of one filter can be passed from queues, routing profiles,
-	// agents, and user hierarchy groups. Currently tagging is only supported on the
-	// resources that are passed in the filter.
+	// agents, and user hierarchy groups.
+	//
+	// Currently tagging is only supported on the resources that are passed in the
+	// filter.
 	//
 	// This member is required.
 	Filters *types.UserDataFilters
 
-	// The identifier of the Amazon Connect instance. You can find the instance ID (https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html)
-	// in the Amazon Resource Name (ARN) of the instance.
+	// The identifier of the Amazon Connect instance. You can [find the instance ID] in the Amazon Resource
+	// Name (ARN) of the instance.
+	//
+	// [find the instance ID]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
 	//
 	// This member is required.
 	InstanceId *string
@@ -100,25 +109,25 @@ func (c *Client) addOperationGetCurrentUserDataMiddlewares(stack *middleware.Sta
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -133,13 +142,16 @@ func (c *Client) addOperationGetCurrentUserDataMiddlewares(stack *middleware.Sta
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpGetCurrentUserDataValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetCurrentUserData(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

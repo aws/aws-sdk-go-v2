@@ -6,15 +6,15 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
-// Creates an opted out destination phone number in the opt-out list. If the
-// destination phone number isn't valid or if the specified opt-out list doesn't
-// exist, an error is returned.
+// Creates an opted out destination phone number in the opt-out list.
+//
+// If the destination phone number isn't valid or if the specified opt-out list
+// doesn't exist, an error is returned.
 func (c *Client) PutOptedOutNumber(ctx context.Context, params *PutOptedOutNumberInput, optFns ...func(*Options)) (*PutOptedOutNumberOutput, error) {
 	if params == nil {
 		params = &PutOptedOutNumberInput{}
@@ -47,7 +47,8 @@ type PutOptedOutNumberInput struct {
 
 type PutOptedOutNumberOutput struct {
 
-	// This is true if it was the end user who requested their phone number be removed.
+	// This is true if it was the end user who requested their phone number be
+	// removed.
 	EndUserOptedOut bool
 
 	// The OptOutListArn that the phone number was removed from.
@@ -59,8 +60,9 @@ type PutOptedOutNumberOutput struct {
 	// The phone number that was added to the OptOutList.
 	OptedOutNumber *string
 
-	// The time that the phone number was added to the OptOutList, in UNIX epoch time (https://www.epochconverter.com/)
-	// format.
+	// The time that the phone number was added to the OptOutList, in [UNIX epoch time] format.
+	//
+	// [UNIX epoch time]: https://www.epochconverter.com/
 	OptedOutTimestamp *time.Time
 
 	// Metadata pertaining to the operation's result.
@@ -91,25 +93,25 @@ func (c *Client) addOperationPutOptedOutNumberMiddlewares(stack *middleware.Stac
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -124,13 +126,16 @@ func (c *Client) addOperationPutOptedOutNumberMiddlewares(stack *middleware.Stac
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpPutOptedOutNumberValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opPutOptedOutNumber(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

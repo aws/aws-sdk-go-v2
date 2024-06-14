@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -15,8 +14,9 @@ import (
 // Availability monitoring in your host environment. This request only initiates
 // the test and that a successful response only indicates that the test was
 // started. It doesn't indicate that the test passed. For the status of the test,
-// invoke the DescribeAvailabilityMonitorTest API. Starting this test will cause
-// your gateway to go offline for a brief period.
+// invoke the DescribeAvailabilityMonitorTest API.
+//
+// Starting this test will cause your gateway to go offline for a brief period.
 func (c *Client) StartAvailabilityMonitorTest(ctx context.Context, params *StartAvailabilityMonitorTestInput, optFns ...func(*Options)) (*StartAvailabilityMonitorTestOutput, error) {
 	if params == nil {
 		params = &StartAvailabilityMonitorTestInput{}
@@ -34,8 +34,8 @@ func (c *Client) StartAvailabilityMonitorTest(ctx context.Context, params *Start
 
 type StartAvailabilityMonitorTestInput struct {
 
-	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation
-	// to return a list of gateways for your account and Amazon Web Services Region.
+	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation to return a
+	// list of gateways for your account and Amazon Web Services Region.
 	//
 	// This member is required.
 	GatewayARN *string
@@ -45,8 +45,8 @@ type StartAvailabilityMonitorTestInput struct {
 
 type StartAvailabilityMonitorTestOutput struct {
 
-	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation
-	// to return a list of gateways for your account and Amazon Web Services Region.
+	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation to return a
+	// list of gateways for your account and Amazon Web Services Region.
 	GatewayARN *string
 
 	// Metadata pertaining to the operation's result.
@@ -77,25 +77,25 @@ func (c *Client) addOperationStartAvailabilityMonitorTestMiddlewares(stack *midd
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -110,13 +110,16 @@ func (c *Client) addOperationStartAvailabilityMonitorTestMiddlewares(stack *midd
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpStartAvailabilityMonitorTestValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opStartAvailabilityMonitorTest(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

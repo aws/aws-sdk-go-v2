@@ -1,18 +1,14 @@
 module github.com/aws/aws-sdk-go-v2/service/internal/eventstreamtesting
 
-go 1.19
+go 1.20
 
 require (
-	github.com/aws/aws-sdk-go-v2 v1.24.1
-	github.com/aws/aws-sdk-go-v2/aws/protocol/eventstream v1.5.4
-	github.com/aws/aws-sdk-go-v2/credentials v1.16.16
-	golang.org/x/net v0.19.0
+	github.com/aws/aws-sdk-go-v2 v1.27.2
+	github.com/aws/aws-sdk-go-v2/aws/protocol/eventstream v1.6.2
+	github.com/aws/aws-sdk-go-v2/credentials v1.17.18
 )
 
-require (
-	github.com/aws/smithy-go v1.19.0 // indirect
-	golang.org/x/text v0.14.0 // indirect
-)
+require github.com/aws/smithy-go v1.20.2 // indirect
 
 replace github.com/aws/aws-sdk-go-v2 => ../../../
 

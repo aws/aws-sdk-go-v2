@@ -6,17 +6,20 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/elasticloadbalancing/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Adds the specified tags to the specified load balancer. Each load balancer can
-// have a maximum of 10 tags. Each tag consists of a key and an optional value. If
-// a tag with the same key is already associated with the load balancer, AddTags
-// updates its value. For more information, see Tag Your Classic Load Balancer (https://docs.aws.amazon.com/elasticloadbalancing/latest/classic/add-remove-tags.html)
-// in the Classic Load Balancers Guide.
+// have a maximum of 10 tags.
+//
+// Each tag consists of a key and an optional value. If a tag with the same key is
+// already associated with the load balancer, AddTags updates its value.
+//
+// For more information, see [Tag Your Classic Load Balancer] in the Classic Load Balancers Guide.
+//
+// [Tag Your Classic Load Balancer]: https://docs.aws.amazon.com/elasticloadbalancing/latest/classic/add-remove-tags.html
 func (c *Client) AddTags(ctx context.Context, params *AddTagsInput, optFns ...func(*Options)) (*AddTagsOutput, error) {
 	if params == nil {
 		params = &AddTagsInput{}
@@ -78,25 +81,25 @@ func (c *Client) addOperationAddTagsMiddlewares(stack *middleware.Stack, options
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -111,13 +114,16 @@ func (c *Client) addOperationAddTagsMiddlewares(stack *middleware.Stack, options
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpAddTagsValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opAddTags(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

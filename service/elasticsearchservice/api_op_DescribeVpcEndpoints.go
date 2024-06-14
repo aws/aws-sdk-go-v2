@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/elasticsearchservice/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -28,8 +27,8 @@ func (c *Client) DescribeVpcEndpoints(ctx context.Context, params *DescribeVpcEn
 	return out, nil
 }
 
-// Container for request parameters to the DescribeVpcEndpoints operation.
-// Specifies the list of VPC endpoints to be described.
+// Container for request parameters to the DescribeVpcEndpoints operation. Specifies the list of VPC
+// endpoints to be described.
 type DescribeVpcEndpointsInput struct {
 
 	// The unique identifiers of the endpoints to get information about.
@@ -40,10 +39,9 @@ type DescribeVpcEndpointsInput struct {
 	noSmithyDocumentSerde
 }
 
-// Container for response parameters to the DescribeVpcEndpoints operation.
-// Returns a list containing configuration details and status of the VPC Endpoints
-// as well as a list containing error responses of the endpoints that could not be
-// described
+// Container for response parameters to the DescribeVpcEndpoints operation. Returns a list containing
+// configuration details and status of the VPC Endpoints as well as a list
+// containing error responses of the endpoints that could not be described
 type DescribeVpcEndpointsOutput struct {
 
 	// Any errors associated with the request.
@@ -84,25 +82,25 @@ func (c *Client) addOperationDescribeVpcEndpointsMiddlewares(stack *middleware.S
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -117,13 +115,16 @@ func (c *Client) addOperationDescribeVpcEndpointsMiddlewares(stack *middleware.S
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDescribeVpcEndpointsValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeVpcEndpoints(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

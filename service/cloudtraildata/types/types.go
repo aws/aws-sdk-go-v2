@@ -23,8 +23,9 @@ type AuditEvent struct {
 
 	// A checksum is a base64-SHA256 algorithm that helps you verify that CloudTrail
 	// receives the event that matches with the checksum. Calculate the checksum by
-	// running a command like the following: printf %s $eventdata | openssl dgst
-	// -binary -sha256 | base64
+	// running a command like the following:
+	//
+	//     printf %s $eventdata | openssl dgst -binary -sha256 | base64
 	EventDataChecksum *string
 
 	noSmithyDocumentSerde

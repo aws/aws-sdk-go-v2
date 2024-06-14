@@ -6,12 +6,12 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Enables your application to delete an existing flow. Before deleting the flow,
+//	Enables your application to delete an existing flow. Before deleting the flow,
+//
 // Amazon AppFlow validates the request by checking the flow configuration and
 // status. You can delete flows one at a time.
 func (c *Client) DeleteFlow(ctx context.Context, params *DeleteFlowInput, optFns ...func(*Options)) (*DeleteFlowOutput, error) {
@@ -31,13 +31,13 @@ func (c *Client) DeleteFlow(ctx context.Context, params *DeleteFlowInput, optFns
 
 type DeleteFlowInput struct {
 
-	// The specified name of the flow. Spaces are not allowed. Use underscores (_) or
+	//  The specified name of the flow. Spaces are not allowed. Use underscores (_) or
 	// hyphens (-) only.
 	//
 	// This member is required.
 	FlowName *string
 
-	// Indicates whether Amazon AppFlow should delete the flow, even if it is
+	//  Indicates whether Amazon AppFlow should delete the flow, even if it is
 	// currently in use.
 	ForceDelete bool
 
@@ -73,25 +73,25 @@ func (c *Client) addOperationDeleteFlowMiddlewares(stack *middleware.Stack, opti
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -106,13 +106,16 @@ func (c *Client) addOperationDeleteFlowMiddlewares(stack *middleware.Stack, opti
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDeleteFlowValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteFlow(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

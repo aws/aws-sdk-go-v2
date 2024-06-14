@@ -6,16 +6,19 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/opsworkscm/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists all configuration management servers that are identified with your
+//	Lists all configuration management servers that are identified with your
+//
 // account. Only the stored results from Amazon DynamoDB are returned. AWS OpsWorks
-// CM does not query other services. This operation is synchronous. A
-// ResourceNotFoundException is thrown when the server does not exist. A
+// CM does not query other services.
+//
+// This operation is synchronous.
+//
+// A ResourceNotFoundException is thrown when the server does not exist. A
 // ValidationException is raised when parameters of the request are not valid.
 func (c *Client) DescribeServers(ctx context.Context, params *DescribeServersInput, optFns ...func(*Options)) (*DescribeServersOutput, error) {
 	if params == nil {
@@ -51,21 +54,25 @@ type DescribeServersOutput struct {
 	// This is not currently implemented for DescribeServers requests.
 	NextToken *string
 
-	// Contains the response to a DescribeServers request. For Chef Automate servers:
-	// If DescribeServersResponse$Servers$EngineAttributes includes
-	// CHEF_MAJOR_UPGRADE_AVAILABLE, you can upgrade the Chef Automate server to Chef
-	// Automate 2. To be eligible for upgrade, a server running Chef Automate 1 must
-	// have had at least one successful maintenance run after November 1, 2019. For
-	// Puppet servers: DescribeServersResponse$Servers$EngineAttributes contains the
-	// following two responses:
+	// Contains the response to a DescribeServers request.
+	//
+	// For Chef Automate servers: If DescribeServersResponse$Servers$EngineAttributes
+	// includes CHEF_MAJOR_UPGRADE_AVAILABLE, you can upgrade the Chef Automate server
+	// to Chef Automate 2. To be eligible for upgrade, a server running Chef Automate 1
+	// must have had at least one successful maintenance run after November 1, 2019.
+	//
+	// For Puppet servers: DescribeServersResponse$Servers$EngineAttributes contains
+	// the following two responses:
+	//
 	//   - PUPPET_API_CA_CERT , the PEM-encoded CA certificate that is used by the
 	//   Puppet API over TCP port number 8140. The CA certificate is also used to sign
 	//   node certificates.
+	//
 	//   - PUPPET_API_CRL , a certificate revocation list. The certificate revocation
 	//   list is for internal maintenance purposes only. For more information about the
-	//   Puppet certificate revocation list, see Man Page: puppet
-	//   certificate_revocation_list (https://puppet.com/docs/puppet/5.5/man/certificate_revocation_list.html)
-	//   in the Puppet documentation.
+	//   Puppet certificate revocation list, see [Man Page: puppet certificate_revocation_list]in the Puppet documentation.
+	//
+	// [Man Page: puppet certificate_revocation_list]: https://puppet.com/docs/puppet/5.5/man/certificate_revocation_list.html
 	Servers []types.Server
 
 	// Metadata pertaining to the operation's result.
@@ -96,25 +103,25 @@ func (c *Client) addOperationDescribeServersMiddlewares(stack *middleware.Stack,
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -129,10 +136,13 @@ func (c *Client) addOperationDescribeServersMiddlewares(stack *middleware.Stack,
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeServers(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

@@ -5,6 +5,7 @@ package oam
 import (
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/oam/types"
 	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 )
@@ -321,6 +322,58 @@ func addOpUpdateLinkValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateLink{}, middleware.After)
 }
 
+func validateLinkConfiguration(v *types.LinkConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "LinkConfiguration"}
+	if v.LogGroupConfiguration != nil {
+		if err := validateLogGroupConfiguration(v.LogGroupConfiguration); err != nil {
+			invalidParams.AddNested("LogGroupConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.MetricConfiguration != nil {
+		if err := validateMetricConfiguration(v.MetricConfiguration); err != nil {
+			invalidParams.AddNested("MetricConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateLogGroupConfiguration(v *types.LogGroupConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "LogGroupConfiguration"}
+	if v.Filter == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Filter"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateMetricConfiguration(v *types.MetricConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "MetricConfiguration"}
+	if v.Filter == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Filter"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCreateLinkInput(v *CreateLinkInput) error {
 	if v == nil {
 		return nil
@@ -334,6 +387,11 @@ func validateOpCreateLinkInput(v *CreateLinkInput) error {
 	}
 	if v.SinkIdentifier == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("SinkIdentifier"))
+	}
+	if v.LinkConfiguration != nil {
+		if err := validateLinkConfiguration(v.LinkConfiguration); err != nil {
+			invalidParams.AddNested("LinkConfiguration", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -526,6 +584,11 @@ func validateOpUpdateLinkInput(v *UpdateLinkInput) error {
 	}
 	if v.ResourceTypes == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ResourceTypes"))
+	}
+	if v.LinkConfiguration != nil {
+		if err := validateLinkConfiguration(v.LinkConfiguration); err != nil {
+			invalidParams.AddNested("LinkConfiguration", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

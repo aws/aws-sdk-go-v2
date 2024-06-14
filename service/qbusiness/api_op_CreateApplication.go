@@ -6,13 +6,20 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/qbusiness/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates an Amazon Q application.
+// Creates an Amazon Q Business application.
+//
+// There are new tiers for Amazon Q Business. Not all features in Amazon Q
+// Business Pro are also available in Amazon Q Business Lite. For information on
+// what's included in Amazon Q Business Lite and what's included in Amazon Q
+// Business Pro, see [Amazon Q Business tiers]. You must use the Amazon Q Business console to assign
+// subscription tiers to users.
+//
+// [Amazon Q Business tiers]: https://docs.aws.amazon.com/amazonq/latest/qbusiness-ug/what-is.html#tiers
 func (c *Client) CreateApplication(ctx context.Context, params *CreateApplicationInput, optFns ...func(*Options)) (*CreateApplicationOutput, error) {
 	if params == nil {
 		params = &CreateApplicationInput{}
@@ -30,32 +37,34 @@ func (c *Client) CreateApplication(ctx context.Context, params *CreateApplicatio
 
 type CreateApplicationInput struct {
 
-	// A name for the Amazon Q application.
+	// A name for the Amazon Q Business application.
 	//
 	// This member is required.
 	DisplayName *string
-
-	// The Amazon Resource Name (ARN) of an IAM role with permissions to access your
-	// Amazon CloudWatch logs and metrics.
-	//
-	// This member is required.
-	RoleArn *string
 
 	// An option to allow end users to upload files directly during chat.
 	AttachmentsConfiguration *types.AttachmentsConfiguration
 
 	// A token that you provide to identify the request to create your Amazon Q
-	// application.
+	// Business application.
 	ClientToken *string
 
-	// A description for the Amazon Q application.
+	// A description for the Amazon Q Business application.
 	Description *string
 
 	// The identifier of the KMS key that is used to encrypt your data. Amazon Q
-	// doesn't support asymmetric keys.
+	// Business doesn't support asymmetric keys.
 	EncryptionConfiguration *types.EncryptionConfiguration
 
-	// A list of key-value pairs that identify or categorize your Amazon Q
+	//  The Amazon Resource Name (ARN) of the IAM Identity Center instance you are
+	// either creating for—or connecting to—your Amazon Q Business application.
+	IdentityCenterInstanceArn *string
+
+	//  The Amazon Resource Name (ARN) of an IAM role with permissions to access your
+	// Amazon CloudWatch logs and metrics.
+	RoleArn *string
+
+	// A list of key-value pairs that identify or categorize your Amazon Q Business
 	// application. You can also use tags to help control access to the application.
 	// Tag keys and values can consist of Unicode letters, digits, white space, and any
 	// of the following symbols: _ . : / = + - @.
@@ -66,10 +75,10 @@ type CreateApplicationInput struct {
 
 type CreateApplicationOutput struct {
 
-	// The Amazon Resource Name (ARN) of the Amazon Q application.
+	//  The Amazon Resource Name (ARN) of the Amazon Q Business application.
 	ApplicationArn *string
 
-	// The identifier of the Amazon Q application.
+	// The identifier of the Amazon Q Business application.
 	ApplicationId *string
 
 	// Metadata pertaining to the operation's result.
@@ -100,25 +109,25 @@ func (c *Client) addOperationCreateApplicationMiddlewares(stack *middleware.Stac
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -133,6 +142,9 @@ func (c *Client) addOperationCreateApplicationMiddlewares(stack *middleware.Stac
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opCreateApplicationMiddleware(stack, options); err != nil {
 		return err
 	}
@@ -142,7 +154,7 @@ func (c *Client) addOperationCreateApplicationMiddlewares(stack *middleware.Stac
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateApplication(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

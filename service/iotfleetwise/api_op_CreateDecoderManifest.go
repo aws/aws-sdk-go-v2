@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/iotfleetwise/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -14,9 +13,13 @@ import (
 
 // Creates the decoder manifest associated with a model manifest. To create a
 // decoder manifest, the following must be true:
+//
 //   - Every signal decoder has a unique name.
+//
 //   - Each signal decoder is associated with a network interface.
+//
 //   - Each network interface has a unique ID.
+//
 //   - The signal decoders are specified in the model manifest.
 func (c *Client) CreateDecoderManifest(ctx context.Context, params *CreateDecoderManifestInput, optFns ...func(*Options)) (*CreateDecoderManifestOutput, error) {
 	if params == nil {
@@ -35,23 +38,23 @@ func (c *Client) CreateDecoderManifest(ctx context.Context, params *CreateDecode
 
 type CreateDecoderManifestInput struct {
 
-	// The Amazon Resource Name (ARN) of the vehicle model (model manifest).
+	//  The Amazon Resource Name (ARN) of the vehicle model (model manifest).
 	//
 	// This member is required.
 	ModelManifestArn *string
 
-	// The unique name of the decoder manifest to create.
+	//  The unique name of the decoder manifest to create.
 	//
 	// This member is required.
 	Name *string
 
-	// A brief description of the decoder manifest.
+	//  A brief description of the decoder manifest.
 	Description *string
 
-	// A list of information about available network interfaces.
+	//  A list of information about available network interfaces.
 	NetworkInterfaces []types.NetworkInterface
 
-	// A list of information about signal decoders.
+	//  A list of information about signal decoders.
 	SignalDecoders []types.SignalDecoder
 
 	// Metadata that can be used to manage the decoder manifest.
@@ -62,12 +65,12 @@ type CreateDecoderManifestInput struct {
 
 type CreateDecoderManifestOutput struct {
 
-	// The ARN of the created decoder manifest.
+	//  The ARN of the created decoder manifest.
 	//
 	// This member is required.
 	Arn *string
 
-	// The name of the created decoder manifest.
+	//  The name of the created decoder manifest.
 	//
 	// This member is required.
 	Name *string
@@ -100,25 +103,25 @@ func (c *Client) addOperationCreateDecoderManifestMiddlewares(stack *middleware.
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -133,13 +136,16 @@ func (c *Client) addOperationCreateDecoderManifestMiddlewares(stack *middleware.
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpCreateDecoderManifestValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateDecoderManifest(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

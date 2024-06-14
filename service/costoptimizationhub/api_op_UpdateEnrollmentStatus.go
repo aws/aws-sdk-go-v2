@@ -6,19 +6,20 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/costoptimizationhub/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Updates the enrollment (opt in and opt out) status of an account to the Cost
-// Optimization Hub service. If the account is a management account of an
-// organization, this action can also be used to enroll member accounts of the
-// organization. You must have the appropriate permissions to opt in to Cost
-// Optimization Hub and to view its recommendations. When you opt in, Cost
-// Optimization Hub automatically creates a service-linked role in your account to
-// access its data.
+// Optimization Hub service.
+//
+// If the account is a management account of an organization, this action can also
+// be used to enroll member accounts of the organization.
+//
+// You must have the appropriate permissions to opt in to Cost Optimization Hub
+// and to view its recommendations. When you opt in, Cost Optimization Hub
+// automatically creates a service-linked role in your account to access its data.
 func (c *Client) UpdateEnrollmentStatus(ctx context.Context, params *UpdateEnrollmentStatusInput, optFns ...func(*Options)) (*UpdateEnrollmentStatusOutput, error) {
 	if params == nil {
 		params = &UpdateEnrollmentStatusInput{}
@@ -81,25 +82,25 @@ func (c *Client) addOperationUpdateEnrollmentStatusMiddlewares(stack *middleware
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -114,13 +115,16 @@ func (c *Client) addOperationUpdateEnrollmentStatusMiddlewares(stack *middleware
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpUpdateEnrollmentStatusValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateEnrollmentStatus(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/elasticbeanstalk/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -31,14 +30,18 @@ func (c *Client) DescribeEnvironmentResources(ctx context.Context, params *Descr
 // Request to describe the resources in an environment.
 type DescribeEnvironmentResourcesInput struct {
 
-	// The ID of the environment to retrieve AWS resource usage data. Condition: You
-	// must specify either this or an EnvironmentName, or both. If you do not specify
-	// either, AWS Elastic Beanstalk returns MissingRequiredParameter error.
+	// The ID of the environment to retrieve AWS resource usage data.
+	//
+	// Condition: You must specify either this or an EnvironmentName, or both. If you
+	// do not specify either, AWS Elastic Beanstalk returns MissingRequiredParameter
+	// error.
 	EnvironmentId *string
 
-	// The name of the environment to retrieve AWS resource usage data. Condition: You
-	// must specify either this or an EnvironmentId, or both. If you do not specify
-	// either, AWS Elastic Beanstalk returns MissingRequiredParameter error.
+	// The name of the environment to retrieve AWS resource usage data.
+	//
+	// Condition: You must specify either this or an EnvironmentId, or both. If you do
+	// not specify either, AWS Elastic Beanstalk returns MissingRequiredParameter
+	// error.
 	EnvironmentName *string
 
 	noSmithyDocumentSerde
@@ -47,7 +50,7 @@ type DescribeEnvironmentResourcesInput struct {
 // Result message containing a list of environment resource descriptions.
 type DescribeEnvironmentResourcesOutput struct {
 
-	// A list of EnvironmentResourceDescription .
+	//  A list of EnvironmentResourceDescription.
 	EnvironmentResources *types.EnvironmentResourceDescription
 
 	// Metadata pertaining to the operation's result.
@@ -78,25 +81,25 @@ func (c *Client) addOperationDescribeEnvironmentResourcesMiddlewares(stack *midd
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -111,10 +114,13 @@ func (c *Client) addOperationDescribeEnvironmentResourcesMiddlewares(stack *midd
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeEnvironmentResources(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

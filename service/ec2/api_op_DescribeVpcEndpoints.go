@@ -6,13 +6,14 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Describes your VPC endpoints.
+// Describes your VPC endpoints. The default is to describe all your VPC
+// endpoints. Alternatively, you can specify specific VPC endpoint IDs or filter
+// the results to include only the VPC endpoints that match specific criteria.
 func (c *Client) DescribeVpcEndpoints(ctx context.Context, params *DescribeVpcEndpointsInput, optFns ...func(*Options)) (*DescribeVpcEndpointsOutput, error) {
 	if params == nil {
 		params = &DescribeVpcEndpointsInput{}
@@ -37,24 +38,33 @@ type DescribeVpcEndpointsInput struct {
 	DryRun *bool
 
 	// The filters.
+	//
 	//   - ip-address-type - The IP address type ( ipv4 | ipv6 ).
+	//
 	//   - service-name - The name of the service.
+	//
 	//   - tag : - The key/value combination of a tag assigned to the resource. Use the
 	//   tag key in the filter name and the tag value as the filter value. For example,
 	//   to find all resources that have a tag with the key Owner and the value TeamA ,
 	//   specify tag:Owner for the filter name and TeamA for the filter value.
+	//
 	//   - tag-key - The key of a tag assigned to the resource. Use this filter to find
 	//   all resources assigned a tag with a specific key, regardless of the tag value.
+	//
 	//   - vpc-id - The ID of the VPC in which the endpoint resides.
+	//
 	//   - vpc-endpoint-id - The ID of the endpoint.
+	//
 	//   - vpc-endpoint-state - The state of the endpoint ( pendingAcceptance | pending
 	//   | available | deleting | deleted | rejected | failed ).
+	//
 	//   - vpc-endpoint-type - The type of VPC endpoint ( Interface | Gateway |
 	//   GatewayLoadBalancer ).
 	Filters []types.Filter
 
 	// The maximum number of items to return for this request. The request returns a
 	// token that you can specify in a subsequent call to get the next set of results.
+	//
 	// Constraint: If the value is greater than 1,000, we return only 1,000 items.
 	MaxResults *int32
 
@@ -74,7 +84,7 @@ type DescribeVpcEndpointsOutput struct {
 	// additional items to return, the string is empty.
 	NextToken *string
 
-	// Information about the endpoints.
+	// Information about the VPC endpoints.
 	VpcEndpoints []types.VpcEndpoint
 
 	// Metadata pertaining to the operation's result.
@@ -105,25 +115,25 @@ func (c *Client) addOperationDescribeVpcEndpointsMiddlewares(stack *middleware.S
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -138,10 +148,13 @@ func (c *Client) addOperationDescribeVpcEndpointsMiddlewares(stack *middleware.S
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeVpcEndpoints(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -172,6 +185,7 @@ var _ DescribeVpcEndpointsAPIClient = (*Client)(nil)
 type DescribeVpcEndpointsPaginatorOptions struct {
 	// The maximum number of items to return for this request. The request returns a
 	// token that you can specify in a subsequent call to get the next set of results.
+	//
 	// Constraint: If the value is greater than 1,000, we return only 1,000 items.
 	Limit int32
 

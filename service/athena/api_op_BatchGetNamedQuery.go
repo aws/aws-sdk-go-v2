@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/athena/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -14,13 +13,11 @@ import (
 
 // Returns the details of a single named query or a list of up to 50 queries,
 // which you provide as an array of query ID strings. Requires you to have access
-// to the workgroup in which the queries were saved. Use ListNamedQueriesInput to
-// get the list of named query IDs in the specified workgroup. If information could
-// not be retrieved for a submitted query ID, information about the query ID
-// submitted is listed under UnprocessedNamedQueryId . Named queries differ from
-// executed queries. Use BatchGetQueryExecutionInput to get details about each
-// unique query execution, and ListQueryExecutionsInput to get a list of query
-// execution IDs.
+// to the workgroup in which the queries were saved. Use ListNamedQueriesInputto get the list of named
+// query IDs in the specified workgroup. If information could not be retrieved for
+// a submitted query ID, information about the query ID submitted is listed under UnprocessedNamedQueryId
+// . Named queries differ from executed queries. Use BatchGetQueryExecutionInputto get details about each
+// unique query execution, and ListQueryExecutionsInputto get a list of query execution IDs.
 func (c *Client) BatchGetNamedQuery(ctx context.Context, params *BatchGetNamedQueryInput, optFns ...func(*Options)) (*BatchGetNamedQueryOutput, error) {
 	if params == nil {
 		params = &BatchGetNamedQueryInput{}
@@ -83,25 +80,25 @@ func (c *Client) addOperationBatchGetNamedQueryMiddlewares(stack *middleware.Sta
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -116,13 +113,16 @@ func (c *Client) addOperationBatchGetNamedQueryMiddlewares(stack *middleware.Sta
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpBatchGetNamedQueryValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opBatchGetNamedQuery(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

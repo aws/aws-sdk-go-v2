@@ -6,18 +6,20 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/efs/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // DEPRECATED - CreateTags is deprecated and not maintained. To create tags for
-// EFS resources, use the API action. Creates or overwrites tags associated with a
-// file system. Each tag is a key-value pair. If a tag key specified in the request
-// already exists on the file system, this operation overwrites its value with the
-// value provided in the request. If you add the Name tag to your file system,
-// Amazon EFS returns it in the response to the DescribeFileSystems operation.
+// EFS resources, use the API action.
+//
+// Creates or overwrites tags associated with a file system. Each tag is a
+// key-value pair. If a tag key specified in the request already exists on the file
+// system, this operation overwrites its value with the value provided in the
+// request. If you add the Name tag to your file system, Amazon EFS returns it in
+// the response to the DescribeFileSystemsoperation.
+//
 // This operation requires permission for the elasticfilesystem:CreateTags action.
 //
 // Deprecated: Use TagResource.
@@ -81,25 +83,25 @@ func (c *Client) addOperationCreateTagsMiddlewares(stack *middleware.Stack, opti
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -114,13 +116,16 @@ func (c *Client) addOperationCreateTagsMiddlewares(stack *middleware.Stack, opti
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpCreateTagsValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateTags(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

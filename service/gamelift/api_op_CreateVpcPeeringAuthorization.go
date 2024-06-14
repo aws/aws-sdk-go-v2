@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/gamelift/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -16,26 +15,37 @@ import (
 // for your Amazon GameLift fleet and a virtual private cloud (VPC) in your Amazon
 // Web Services account. VPC peering enables the game servers on your fleet to
 // communicate directly with other Amazon Web Services resources. After you've
-// received authorization, use CreateVpcPeeringConnection (https://docs.aws.amazon.com/gamelift/latest/apireference/API_CreateVpcPeeringConnection.html)
-// to establish the peering connection. For more information, see VPC Peering with
-// Amazon GameLift Fleets (https://docs.aws.amazon.com/gamelift/latest/developerguide/vpc-peering.html)
-// . You can peer with VPCs that are owned by any Amazon Web Services account you
+// received authorization, use [CreateVpcPeeringConnection]to establish the peering connection. For more
+// information, see [VPC Peering with Amazon GameLift Fleets].
+//
+// You can peer with VPCs that are owned by any Amazon Web Services account you
 // have access to, including the account that you use to manage your Amazon
-// GameLift fleets. You cannot peer with VPCs that are in different Regions. To
-// request authorization to create a connection, call this operation from the
+// GameLift fleets. You cannot peer with VPCs that are in different Regions.
+//
+// To request authorization to create a connection, call this operation from the
 // Amazon Web Services account with the VPC that you want to peer to your Amazon
 // GameLift fleet. For example, to enable your game servers to retrieve data from a
 // DynamoDB table, use the account that manages that DynamoDB resource. Identify
 // the following values: (1) The ID of the VPC that you want to peer with, and (2)
 // the ID of the Amazon Web Services account that you use to manage Amazon
-// GameLift. If successful, VPC peering is authorized for the specified VPC. To
-// request authorization to delete a connection, call this operation from the
+// GameLift. If successful, VPC peering is authorized for the specified VPC.
+//
+// To request authorization to delete a connection, call this operation from the
 // Amazon Web Services account with the VPC that is peered with your Amazon
 // GameLift fleet. Identify the following values: (1) VPC ID that you want to
 // delete the peering connection for, and (2) ID of the Amazon Web Services account
-// that you use to manage Amazon GameLift. The authorization remains valid for 24
-// hours unless it is canceled. You must create or delete the peering connection
-// while the authorization is valid. Related actions All APIs by task (https://docs.aws.amazon.com/gamelift/latest/developerguide/reference-awssdk.html#reference-awssdk-resources-fleets)
+// that you use to manage Amazon GameLift.
+//
+// The authorization remains valid for 24 hours unless it is canceled. You must
+// create or delete the peering connection while the authorization is valid.
+//
+// # Related actions
+//
+// [All APIs by task]
+//
+// [CreateVpcPeeringConnection]: https://docs.aws.amazon.com/gamelift/latest/apireference/API_CreateVpcPeeringConnection.html
+// [VPC Peering with Amazon GameLift Fleets]: https://docs.aws.amazon.com/gamelift/latest/developerguide/vpc-peering.html
+// [All APIs by task]: https://docs.aws.amazon.com/gamelift/latest/developerguide/reference-awssdk.html#reference-awssdk-resources-fleets
 func (c *Client) CreateVpcPeeringAuthorization(ctx context.Context, params *CreateVpcPeeringAuthorizationInput, optFns ...func(*Options)) (*CreateVpcPeeringAuthorizationOutput, error) {
 	if params == nil {
 		params = &CreateVpcPeeringAuthorizationInput{}
@@ -62,10 +72,11 @@ type CreateVpcPeeringAuthorizationInput struct {
 
 	// A unique identifier for a VPC with resources to be accessed by your Amazon
 	// GameLift fleet. The VPC must be in the same Region as your fleet. To look up a
-	// VPC ID, use the VPC Dashboard (https://console.aws.amazon.com/vpc/) in the
-	// Amazon Web Services Management Console. Learn more about VPC peering in VPC
-	// Peering with Amazon GameLift Fleets (https://docs.aws.amazon.com/gamelift/latest/developerguide/vpc-peering.html)
-	// .
+	// VPC ID, use the [VPC Dashboard]in the Amazon Web Services Management Console. Learn more about
+	// VPC peering in [VPC Peering with Amazon GameLift Fleets].
+	//
+	// [VPC Dashboard]: https://console.aws.amazon.com/vpc/
+	// [VPC Peering with Amazon GameLift Fleets]: https://docs.aws.amazon.com/gamelift/latest/developerguide/vpc-peering.html
 	//
 	// This member is required.
 	PeerVpcId *string
@@ -106,25 +117,25 @@ func (c *Client) addOperationCreateVpcPeeringAuthorizationMiddlewares(stack *mid
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -139,13 +150,16 @@ func (c *Client) addOperationCreateVpcPeeringAuthorizationMiddlewares(stack *mid
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpCreateVpcPeeringAuthorizationValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateVpcPeeringAuthorization(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

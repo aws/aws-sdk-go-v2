@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/databasemigrationservice/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -44,10 +43,11 @@ type DescribeExtensionPackAssociationsInput struct {
 
 	// Specifies the unique pagination token that makes it possible to display the
 	// next page of results. If this parameter is specified, the response includes only
-	// records beyond the marker, up to the value specified by MaxRecords . If Marker
-	// is returned by a previous response, there are more results available. The value
-	// of Marker is a unique pagination token for each page. To retrieve the next
-	// page, make the call again using the returned token and keeping all other
+	// records beyond the marker, up to the value specified by MaxRecords .
+	//
+	// If Marker is returned by a previous response, there are more results available.
+	// The value of Marker is a unique pagination token for each page. To retrieve the
+	// next page, make the call again using the returned token and keeping all other
 	// arguments unchanged.
 	Marker *string
 
@@ -63,10 +63,11 @@ type DescribeExtensionPackAssociationsOutput struct {
 
 	// Specifies the unique pagination token that makes it possible to display the
 	// next page of results. If this parameter is specified, the response includes only
-	// records beyond the marker, up to the value specified by MaxRecords . If Marker
-	// is returned by a previous response, there are more results available. The value
-	// of Marker is a unique pagination token for each page. To retrieve the next
-	// page, make the call again using the returned token and keeping all other
+	// records beyond the marker, up to the value specified by MaxRecords .
+	//
+	// If Marker is returned by a previous response, there are more results available.
+	// The value of Marker is a unique pagination token for each page. To retrieve the
+	// next page, make the call again using the returned token and keeping all other
 	// arguments unchanged.
 	Marker *string
 
@@ -102,25 +103,25 @@ func (c *Client) addOperationDescribeExtensionPackAssociationsMiddlewares(stack 
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -135,13 +136,16 @@ func (c *Client) addOperationDescribeExtensionPackAssociationsMiddlewares(stack 
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDescribeExtensionPackAssociationsValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeExtensionPackAssociations(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

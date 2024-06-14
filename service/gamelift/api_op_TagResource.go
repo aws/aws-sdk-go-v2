@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/gamelift/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -16,13 +15,25 @@ import (
 // resources, create IAM permissions policies to manage access to groups of
 // resources, customize Amazon Web Services cost breakdowns, and more. This
 // operation handles the permissions necessary to manage tags for Amazon GameLift
-// resources that support tagging. To add a tag to a resource, specify the unique
-// ARN value for the resource and provide a tag list containing one or more tags.
-// The operation succeeds even if the list includes tags that are already assigned
-// to the resource. Learn more Tagging Amazon Web Services Resources (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html)
-// in the Amazon Web Services General Reference Amazon Web Services Tagging
-// Strategies (http://aws.amazon.com/answers/account-management/aws-tagging-strategies/)
-// Related actions All APIs by task (https://docs.aws.amazon.com/gamelift/latest/developerguide/reference-awssdk.html#reference-awssdk-resources-fleets)
+// resources that support tagging.
+//
+// To add a tag to a resource, specify the unique ARN value for the resource and
+// provide a tag list containing one or more tags. The operation succeeds even if
+// the list includes tags that are already assigned to the resource.
+//
+// # Learn more
+//
+// [Tagging Amazon Web Services Resources]in the Amazon Web Services General Reference
+//
+// [Amazon Web Services Tagging Strategies]
+//
+// # Related actions
+//
+// [All APIs by task]
+//
+// [Tagging Amazon Web Services Resources]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
+// [Amazon Web Services Tagging Strategies]: http://aws.amazon.com/answers/account-management/aws-tagging-strategies/
+// [All APIs by task]: https://docs.aws.amazon.com/gamelift/latest/developerguide/reference-awssdk.html#reference-awssdk-resources-fleets
 func (c *Client) TagResource(ctx context.Context, params *TagResourceInput, optFns ...func(*Options)) (*TagResourceOutput, error) {
 	if params == nil {
 		params = &TagResourceInput{}
@@ -40,19 +51,21 @@ func (c *Client) TagResource(ctx context.Context, params *TagResourceInput, optF
 
 type TagResourceInput struct {
 
-	// The Amazon Resource Name ( ARN (https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-arn-format.html)
-	// ) that uniquely identifies the Amazon GameLift resource that you want to assign
-	// tags to. Amazon GameLift includes resource ARNs in the data object for the
-	// resource. You can retrieve the ARN by calling a List or Describe operation for
-	// the resource type.
+	// The Amazon Resource Name ([ARN] ) that uniquely identifies the Amazon GameLift
+	// resource that you want to assign tags to. Amazon GameLift includes resource ARNs
+	// in the data object for the resource. You can retrieve the ARN by calling a List
+	// or Describe operation for the resource type.
+	//
+	// [ARN]: https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-arn-format.html
 	//
 	// This member is required.
 	ResourceARN *string
 
 	// A list of one or more tags to assign to the specified Amazon GameLift resource.
 	// Tags are developer-defined and structured as key-value pairs. The maximum tag
-	// limit may be lower than stated. See Tagging Amazon Web Services Resources (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html)
-	// for tagging limits.
+	// limit may be lower than stated. See [Tagging Amazon Web Services Resources]for tagging limits.
+	//
+	// [Tagging Amazon Web Services Resources]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
 	//
 	// This member is required.
 	Tags []types.Tag
@@ -89,25 +102,25 @@ func (c *Client) addOperationTagResourceMiddlewares(stack *middleware.Stack, opt
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -122,13 +135,16 @@ func (c *Client) addOperationTagResourceMiddlewares(stack *middleware.Stack, opt
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpTagResourceValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opTagResource(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

@@ -6,25 +6,29 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/tnb/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a network package. A network package is a .zip file in CSAR (Cloud
-// Service Archive) format defines the function packages you want to deploy and the
-// Amazon Web Services infrastructure you want to deploy them on. For more
-// information, see Network instances (https://docs.aws.amazon.com/tnb/latest/ug/network-instances.html)
-// in the Amazon Web Services Telco Network Builder User Guide. A network package
-// consists of a network service descriptor (NSD) file (required) and any
-// additional files (optional), such as scripts specific to your needs. For
-// example, if you have multiple function packages in your network package, you can
-// use the NSD to define which network functions should run in certain VPCs,
-// subnets, or EKS clusters. This request creates an empty network package
-// container with an ID. Once you create a network package, you can upload the
-// network package content using PutSolNetworkPackageContent (https://docs.aws.amazon.com/tnb/latest/APIReference/API_PutSolNetworkPackageContent.html)
-// .
+// Creates a network package.
+//
+// A network package is a .zip file in CSAR (Cloud Service Archive) format defines
+// the function packages you want to deploy and the Amazon Web Services
+// infrastructure you want to deploy them on. For more information, see [Network instances]in the
+// Amazon Web Services Telco Network Builder User Guide.
+//
+// A network package consists of a network service descriptor (NSD) file
+// (required) and any additional files (optional), such as scripts specific to your
+// needs. For example, if you have multiple function packages in your network
+// package, you can use the NSD to define which network functions should run in
+// certain VPCs, subnets, or EKS clusters.
+//
+// This request creates an empty network package container with an ID. Once you
+// create a network package, you can upload the network package content using [PutSolNetworkPackageContent].
+//
+// [Network instances]: https://docs.aws.amazon.com/tnb/latest/ug/network-instances.html
+// [PutSolNetworkPackageContent]: https://docs.aws.amazon.com/tnb/latest/APIReference/API_PutSolNetworkPackageContent.html
 func (c *Client) CreateSolNetworkPackage(ctx context.Context, params *CreateSolNetworkPackageInput, optFns ...func(*Options)) (*CreateSolNetworkPackageOutput, error) {
 	if params == nil {
 		params = &CreateSolNetworkPackageInput{}
@@ -110,25 +114,25 @@ func (c *Client) addOperationCreateSolNetworkPackageMiddlewares(stack *middlewar
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -143,10 +147,13 @@ func (c *Client) addOperationCreateSolNetworkPackageMiddlewares(stack *middlewar
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateSolNetworkPackage(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

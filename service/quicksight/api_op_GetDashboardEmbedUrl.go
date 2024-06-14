@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/quicksight/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -15,23 +14,31 @@ import (
 // Generates a temporary session URL and authorization code(bearer token) that you
 // can use to embed an Amazon QuickSight read-only dashboard in your website or
 // application. Before you use this command, make sure that you have configured the
-// dashboards and permissions. Currently, you can use GetDashboardEmbedURL only
-// from the server, not from the user's browser. The following rules apply to the
-// generated URL:
+// dashboards and permissions.
+//
+// Currently, you can use GetDashboardEmbedURL only from the server, not from the
+// user's browser. The following rules apply to the generated URL:
+//
 //   - They must be used together.
+//
 //   - They can be used one time only.
+//
 //   - They are valid for 5 minutes after you run this command.
+//
 //   - You are charged only when the URL is used or there is interaction with
 //     Amazon QuickSight.
+//
 //   - The resulting user session is valid for 15 minutes (default) up to 10 hours
 //     (maximum). You can use the optional SessionLifetimeInMinutes parameter to
 //     customize session duration.
 //
-// For more information, see Embedding Analytics Using GetDashboardEmbedUrl (https://docs.aws.amazon.com/quicksight/latest/user/embedded-analytics-deprecated.html)
-// in the Amazon QuickSight User Guide. For more information about the high-level
-// steps for embedding and for an interactive demo of the ways you can customize
-// embedding, visit the Amazon QuickSight Developer Portal (https://docs.aws.amazon.com/quicksight/latest/user/quicksight-dev-portal.html)
-// .
+// For more information, see [Embedding Analytics Using GetDashboardEmbedUrl] in the Amazon QuickSight User Guide.
+//
+// For more information about the high-level steps for embedding and for an
+// interactive demo of the ways you can customize embedding, visit the [Amazon QuickSight Developer Portal].
+//
+// [Amazon QuickSight Developer Portal]: https://docs.aws.amazon.com/quicksight/latest/user/quicksight-dev-portal.html
+// [Embedding Analytics Using GetDashboardEmbedUrl]: https://docs.aws.amazon.com/quicksight/latest/user/embedded-analytics-deprecated.html
 func (c *Client) GetDashboardEmbedUrl(ctx context.Context, params *GetDashboardEmbedUrlInput, optFns ...func(*Options)) (*GetDashboardEmbedUrlOutput, error) {
 	if params == nil {
 		params = &GetDashboardEmbedUrlInput{}
@@ -101,10 +108,14 @@ type GetDashboardEmbedUrlInput struct {
 	// The Amazon QuickSight user's Amazon Resource Name (ARN), for use with QUICKSIGHT
 	// identity type. You can use this for any Amazon QuickSight users in your account
 	// (readers, authors, or admins) authenticated as one of the following:
+	//
 	//   - Active Directory (AD) users or group members
+	//
 	//   - Invited nonfederated users
+	//
 	//   - IAM users and IAM role-based sessions authenticated through Federated
 	//   Single Sign-On using SAML, OpenID Connect, or IAM federation.
+	//
 	// Omit this parameter for users in the third group – IAM users and IAM role-based
 	// sessions.
 	UserArn *string
@@ -155,25 +166,25 @@ func (c *Client) addOperationGetDashboardEmbedUrlMiddlewares(stack *middleware.S
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -188,13 +199,16 @@ func (c *Client) addOperationGetDashboardEmbedUrlMiddlewares(stack *middleware.S
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpGetDashboardEmbedUrlValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetDashboardEmbedUrl(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

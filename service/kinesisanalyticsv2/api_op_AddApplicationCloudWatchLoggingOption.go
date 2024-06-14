@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/kinesisanalyticsv2/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -43,16 +42,15 @@ type AddApplicationCloudWatchLoggingOptionInput struct {
 
 	// A value you use to implement strong concurrency for application updates. You
 	// must provide the CurrentApplicationVersionId or the ConditionalToken . You get
-	// the application's current ConditionalToken using DescribeApplication . For
-	// better concurrency support, use the ConditionalToken parameter instead of
+	// the application's current ConditionalToken using DescribeApplication. For better concurrency
+	// support, use the ConditionalToken parameter instead of
 	// CurrentApplicationVersionId .
 	ConditionalToken *string
 
-	// The version ID of the Kinesis Data Analytics application. You must provide the
-	// CurrentApplicationVersionId or the ConditionalToken .You can retrieve the
-	// application version ID using DescribeApplication . For better concurrency
-	// support, use the ConditionalToken parameter instead of
-	// CurrentApplicationVersionId .
+	// The version ID of the SQL-based Kinesis Data Analytics application. You must
+	// provide the CurrentApplicationVersionId or the ConditionalToken .You can
+	// retrieve the application version ID using DescribeApplication. For better concurrency support, use
+	// the ConditionalToken parameter instead of CurrentApplicationVersionId .
 	CurrentApplicationVersionId *int64
 
 	noSmithyDocumentSerde
@@ -63,13 +61,13 @@ type AddApplicationCloudWatchLoggingOptionOutput struct {
 	// The application's ARN.
 	ApplicationARN *string
 
-	// The new version ID of the Kinesis Data Analytics application. Kinesis Data
-	// Analytics updates the ApplicationVersionId each time you change the CloudWatch
-	// logging options.
+	// The new version ID of the SQL-based Kinesis Data Analytics application. Kinesis
+	// Data Analytics updates the ApplicationVersionId each time you change the
+	// CloudWatch logging options.
 	ApplicationVersionId *int64
 
-	// The descriptions of the current CloudWatch logging options for the Kinesis Data
-	// Analytics application.
+	// The descriptions of the current CloudWatch logging options for the SQL-based
+	// Kinesis Data Analytics application.
 	CloudWatchLoggingOptionDescriptions []types.CloudWatchLoggingOptionDescription
 
 	// Metadata pertaining to the operation's result.
@@ -100,25 +98,25 @@ func (c *Client) addOperationAddApplicationCloudWatchLoggingOptionMiddlewares(st
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -133,13 +131,16 @@ func (c *Client) addOperationAddApplicationCloudWatchLoggingOptionMiddlewares(st
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpAddApplicationCloudWatchLoggingOptionValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opAddApplicationCloudWatchLoggingOption(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

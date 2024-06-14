@@ -6,21 +6,23 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Describes the specified event windows or all event windows. If you specify
-// event window IDs, the output includes information for only the specified event
-// windows. If you specify filters, the output includes information for only those
-// event windows that meet the filter criteria. If you do not specify event windows
-// IDs or filters, the output includes information for all event windows, which can
-// affect performance. We recommend that you use pagination to ensure that the
-// operation returns quickly and successfully. For more information, see Define
-// event windows for scheduled events (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/event-windows.html)
-// in the Amazon EC2 User Guide.
+// Describes the specified event windows or all event windows.
+//
+// If you specify event window IDs, the output includes information for only the
+// specified event windows. If you specify filters, the output includes information
+// for only those event windows that meet the filter criteria. If you do not
+// specify event windows IDs or filters, the output includes information for all
+// event windows, which can affect performance. We recommend that you use
+// pagination to ensure that the operation returns quickly and successfully.
+//
+// For more information, see [Define event windows for scheduled events] in the Amazon EC2 User Guide.
+//
+// [Define event windows for scheduled events]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/event-windows.html
 func (c *Client) DescribeInstanceEventWindows(ctx context.Context, params *DescribeInstanceEventWindowsInput, optFns ...func(*Options)) (*DescribeInstanceEventWindowsOutput, error) {
 	if params == nil {
 		params = &DescribeInstanceEventWindowsInput{}
@@ -46,24 +48,32 @@ type DescribeInstanceEventWindowsInput struct {
 	DryRun *bool
 
 	// One or more filters.
+	//
 	//   - dedicated-host-id - The event windows associated with the specified
 	//   Dedicated Host ID.
+	//
 	//   - event-window-name - The event windows associated with the specified names.
+	//
 	//   - instance-id - The event windows associated with the specified instance ID.
-	//   - instance-tag - The event windows associated with the specified tag and
-	//   value.
+	//
+	//   - instance-tag - The event windows associated with the specified tag and value.
+	//
 	//   - instance-tag-key - The event windows associated with the specified tag key,
 	//   regardless of the value.
+	//
 	//   - instance-tag-value - The event windows associated with the specified tag
 	//   value, regardless of the key.
+	//
 	//   - tag: - The key/value combination of a tag assigned to the event window. Use
 	//   the tag key in the filter name and the tag value as the filter value. For
 	//   example, to find all resources that have a tag with the key Owner and the
 	//   value CMX , specify tag:Owner for the filter name and CMX for the filter
 	//   value.
+	//
 	//   - tag-key - The key of a tag assigned to the event window. Use this filter to
 	//   find all event windows that have a tag with a specific key, regardless of the
 	//   tag value.
+	//
 	//   - tag-value - The value of a tag assigned to the event window. Use this filter
 	//   to find all event windows that have a tag with a specific value, regardless of
 	//   the tag key.
@@ -121,25 +131,25 @@ func (c *Client) addOperationDescribeInstanceEventWindowsMiddlewares(stack *midd
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -154,10 +164,13 @@ func (c *Client) addOperationDescribeInstanceEventWindowsMiddlewares(stack *midd
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeInstanceEventWindows(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

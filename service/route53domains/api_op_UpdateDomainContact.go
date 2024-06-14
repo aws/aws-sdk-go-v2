@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/route53domains/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -14,10 +13,11 @@ import (
 
 // This operation updates the contact information for a particular domain. You
 // must specify information for at least one contact: registrant, administrator, or
-// technical. If the update is successful, this method returns an operation ID that
-// you can use to track the progress and completion of the operation. If the
-// request is not completed successfully, the domain registrant will be notified by
-// email.
+// technical.
+//
+// If the update is successful, this method returns an operation ID that you can
+// use to track the progress and completion of the operation. If the request is not
+// completed successfully, the domain registrant will be notified by email.
 func (c *Client) UpdateDomainContact(ctx context.Context, params *UpdateDomainContactInput, optFns ...func(*Options)) (*UpdateDomainContactOutput, error) {
 	if params == nil {
 		params = &UpdateDomainContactInput{}
@@ -47,7 +47,7 @@ type UpdateDomainContactInput struct {
 	// Provides detailed contact information.
 	BillingContact *types.ContactDetail
 
-	// Customer's consent for the owner change request. Required if the domain is not
+	//  Customer's consent for the owner change request. Required if the domain is not
 	// free (consent price is more than $0.00).
 	Consent *types.Consent
 
@@ -64,8 +64,9 @@ type UpdateDomainContactInput struct {
 type UpdateDomainContactOutput struct {
 
 	// Identifier for tracking the progress of the request. To query the operation
-	// status, use GetOperationDetail (https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_GetOperationDetail.html)
-	// .
+	// status, use [GetOperationDetail].
+	//
+	// [GetOperationDetail]: https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_GetOperationDetail.html
 	OperationId *string
 
 	// Metadata pertaining to the operation's result.
@@ -96,25 +97,25 @@ func (c *Client) addOperationUpdateDomainContactMiddlewares(stack *middleware.St
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -129,13 +130,16 @@ func (c *Client) addOperationUpdateDomainContactMiddlewares(stack *middleware.St
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpUpdateDomainContactValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateDomainContact(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

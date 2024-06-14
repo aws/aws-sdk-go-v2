@@ -70,6 +70,46 @@ func (m *validateOpCreateWorkspace) HandleInitialize(ctx context.Context, in mid
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateWorkspaceServiceAccount struct {
+}
+
+func (*validateOpCreateWorkspaceServiceAccount) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateWorkspaceServiceAccount) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateWorkspaceServiceAccountInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateWorkspaceServiceAccountInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpCreateWorkspaceServiceAccountToken struct {
+}
+
+func (*validateOpCreateWorkspaceServiceAccountToken) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateWorkspaceServiceAccountToken) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateWorkspaceServiceAccountTokenInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateWorkspaceServiceAccountTokenInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDeleteWorkspaceApiKey struct {
 }
 
@@ -105,6 +145,46 @@ func (m *validateOpDeleteWorkspace) HandleInitialize(ctx context.Context, in mid
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDeleteWorkspaceInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteWorkspaceServiceAccount struct {
+}
+
+func (*validateOpDeleteWorkspaceServiceAccount) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteWorkspaceServiceAccount) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteWorkspaceServiceAccountInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteWorkspaceServiceAccountInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteWorkspaceServiceAccountToken struct {
+}
+
+func (*validateOpDeleteWorkspaceServiceAccountToken) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteWorkspaceServiceAccountToken) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteWorkspaceServiceAccountTokenInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteWorkspaceServiceAccountTokenInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -225,6 +305,46 @@ func (m *validateOpListTagsForResource) HandleInitialize(ctx context.Context, in
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpListTagsForResourceInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListWorkspaceServiceAccounts struct {
+}
+
+func (*validateOpListWorkspaceServiceAccounts) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListWorkspaceServiceAccounts) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListWorkspaceServiceAccountsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListWorkspaceServiceAccountsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListWorkspaceServiceAccountTokens struct {
+}
+
+func (*validateOpListWorkspaceServiceAccountTokens) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListWorkspaceServiceAccountTokens) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListWorkspaceServiceAccountTokensInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListWorkspaceServiceAccountTokensInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -362,12 +482,28 @@ func addOpCreateWorkspaceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateWorkspace{}, middleware.After)
 }
 
+func addOpCreateWorkspaceServiceAccountValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateWorkspaceServiceAccount{}, middleware.After)
+}
+
+func addOpCreateWorkspaceServiceAccountTokenValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateWorkspaceServiceAccountToken{}, middleware.After)
+}
+
 func addOpDeleteWorkspaceApiKeyValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteWorkspaceApiKey{}, middleware.After)
 }
 
 func addOpDeleteWorkspaceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteWorkspace{}, middleware.After)
+}
+
+func addOpDeleteWorkspaceServiceAccountValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteWorkspaceServiceAccount{}, middleware.After)
+}
+
+func addOpDeleteWorkspaceServiceAccountTokenValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteWorkspaceServiceAccountToken{}, middleware.After)
 }
 
 func addOpDescribeWorkspaceAuthenticationValidationMiddleware(stack *middleware.Stack) error {
@@ -392,6 +528,14 @@ func addOpListPermissionsValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpListTagsForResourceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListTagsForResource{}, middleware.After)
+}
+
+func addOpListWorkspaceServiceAccountsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListWorkspaceServiceAccounts{}, middleware.After)
+}
+
+func addOpListWorkspaceServiceAccountTokensValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListWorkspaceServiceAccountTokens{}, middleware.After)
 }
 
 func addOpTagResourceValidationMiddleware(stack *middleware.Stack) error {
@@ -619,6 +763,51 @@ func validateOpCreateWorkspaceInput(v *CreateWorkspaceInput) error {
 	}
 }
 
+func validateOpCreateWorkspaceServiceAccountInput(v *CreateWorkspaceServiceAccountInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateWorkspaceServiceAccountInput"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if len(v.GrafanaRole) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("GrafanaRole"))
+	}
+	if v.WorkspaceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("WorkspaceId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateWorkspaceServiceAccountTokenInput(v *CreateWorkspaceServiceAccountTokenInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateWorkspaceServiceAccountTokenInput"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.SecondsToLive == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SecondsToLive"))
+	}
+	if v.ServiceAccountId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ServiceAccountId"))
+	}
+	if v.WorkspaceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("WorkspaceId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDeleteWorkspaceApiKeyInput(v *DeleteWorkspaceApiKeyInput) error {
 	if v == nil {
 		return nil
@@ -642,6 +831,45 @@ func validateOpDeleteWorkspaceInput(v *DeleteWorkspaceInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteWorkspaceInput"}
+	if v.WorkspaceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("WorkspaceId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteWorkspaceServiceAccountInput(v *DeleteWorkspaceServiceAccountInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteWorkspaceServiceAccountInput"}
+	if v.ServiceAccountId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ServiceAccountId"))
+	}
+	if v.WorkspaceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("WorkspaceId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteWorkspaceServiceAccountTokenInput(v *DeleteWorkspaceServiceAccountTokenInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteWorkspaceServiceAccountTokenInput"}
+	if v.TokenId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TokenId"))
+	}
+	if v.ServiceAccountId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ServiceAccountId"))
+	}
 	if v.WorkspaceId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("WorkspaceId"))
 	}
@@ -737,6 +965,39 @@ func validateOpListTagsForResourceInput(v *ListTagsForResourceInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "ListTagsForResourceInput"}
 	if v.ResourceArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ResourceArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListWorkspaceServiceAccountsInput(v *ListWorkspaceServiceAccountsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListWorkspaceServiceAccountsInput"}
+	if v.WorkspaceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("WorkspaceId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListWorkspaceServiceAccountTokensInput(v *ListWorkspaceServiceAccountTokensInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListWorkspaceServiceAccountTokensInput"}
+	if v.ServiceAccountId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ServiceAccountId"))
+	}
+	if v.WorkspaceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("WorkspaceId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

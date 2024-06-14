@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -38,7 +37,9 @@ type GetTrailStatusInput struct {
 	// Specifies the name or the CloudTrail ARN of the trail for which you are
 	// requesting status. To get the status of a shadow trail (a replication of the
 	// trail in another Region), you must specify its ARN. The following is the format
-	// of a trail ARN. arn:aws:cloudtrail:us-east-2:123456789012:trail/MyTrail
+	// of a trail ARN.
+	//
+	//     arn:aws:cloudtrail:us-east-2:123456789012:trail/MyTrail
 	//
 	// This member is required.
 	Name *string
@@ -68,13 +69,16 @@ type GetTrailStatusOutput struct {
 	LatestDeliveryAttemptTime *string
 
 	// Displays any Amazon S3 error that CloudTrail encountered when attempting to
-	// deliver log files to the designated bucket. For more information, see Error
-	// Responses (https://docs.aws.amazon.com/AmazonS3/latest/API/ErrorResponses.html)
-	// in the Amazon S3 API Reference. This error occurs only when there is a problem
-	// with the destination S3 bucket, and does not occur for requests that time out.
-	// To resolve the issue, create a new bucket, and then call UpdateTrail to specify
-	// the new bucket; or fix the existing objects so that CloudTrail can again write
-	// to the bucket.
+	// deliver log files to the designated bucket. For more information, see [Error Responses]in the
+	// Amazon S3 API Reference.
+	//
+	// This error occurs only when there is a problem with the destination S3 bucket,
+	// and does not occur for requests that time out. To resolve the issue, fix the [bucket policy]so
+	// that CloudTrail can write to the bucket; or create a new bucket and call
+	// UpdateTrail to specify the new bucket.
+	//
+	// [Error Responses]: https://docs.aws.amazon.com/AmazonS3/latest/API/ErrorResponses.html
+	// [bucket policy]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/create-s3-bucket-policy-for-cloudtrail.html
 	LatestDeliveryError *string
 
 	// Specifies the date and time that CloudTrail last delivered log files to an
@@ -82,13 +86,16 @@ type GetTrailStatusOutput struct {
 	LatestDeliveryTime *time.Time
 
 	// Displays any Amazon S3 error that CloudTrail encountered when attempting to
-	// deliver a digest file to the designated bucket. For more information, see Error
-	// Responses (https://docs.aws.amazon.com/AmazonS3/latest/API/ErrorResponses.html)
-	// in the Amazon S3 API Reference. This error occurs only when there is a problem
-	// with the destination S3 bucket, and does not occur for requests that time out.
-	// To resolve the issue, create a new bucket, and then call UpdateTrail to specify
-	// the new bucket; or fix the existing objects so that CloudTrail can again write
-	// to the bucket.
+	// deliver a digest file to the designated bucket. For more information, see [Error Responses]in
+	// the Amazon S3 API Reference.
+	//
+	// This error occurs only when there is a problem with the destination S3 bucket,
+	// and does not occur for requests that time out. To resolve the issue, fix the [bucket policy]so
+	// that CloudTrail can write to the bucket; or create a new bucket and call
+	// UpdateTrail to specify the new bucket.
+	//
+	// [Error Responses]: https://docs.aws.amazon.com/AmazonS3/latest/API/ErrorResponses.html
+	// [bucket policy]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/create-s3-bucket-policy-for-cloudtrail.html
 	LatestDigestDeliveryError *string
 
 	// Specifies the date and time that CloudTrail last delivered a digest file to an
@@ -102,9 +109,9 @@ type GetTrailStatusOutput struct {
 	LatestNotificationAttemptTime *string
 
 	// Displays any Amazon SNS error that CloudTrail encountered when attempting to
-	// send a notification. For more information about Amazon SNS errors, see the
-	// Amazon SNS Developer Guide (https://docs.aws.amazon.com/sns/latest/dg/welcome.html)
-	// .
+	// send a notification. For more information about Amazon SNS errors, see the [Amazon SNS Developer Guide].
+	//
+	// [Amazon SNS Developer Guide]: https://docs.aws.amazon.com/sns/latest/dg/welcome.html
 	LatestNotificationError *string
 
 	// Specifies the date and time of the most recent Amazon SNS notification that
@@ -153,25 +160,25 @@ func (c *Client) addOperationGetTrailStatusMiddlewares(stack *middleware.Stack, 
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -186,13 +193,16 @@ func (c *Client) addOperationGetTrailStatusMiddlewares(stack *middleware.Stack, 
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpGetTrailStatusValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetTrailStatus(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

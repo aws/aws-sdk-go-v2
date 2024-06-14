@@ -6,40 +6,51 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/auditmanager/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a share request for a custom framework in Audit Manager. The share
-// request specifies a recipient and notifies them that a custom framework is
-// available. Recipients have 120 days to accept or decline the request. If no
-// action is taken, the share request expires. When you create a share request,
-// Audit Manager stores a snapshot of your custom framework in the US East (N.
-// Virginia) Amazon Web Services Region. Audit Manager also stores a backup of the
-// same snapshot in the US West (Oregon) Amazon Web Services Region. Audit Manager
-// deletes the snapshot and the backup snapshot when one of the following events
-// occurs:
+//	Creates a share request for a custom framework in Audit Manager.
+//
+// The share request specifies a recipient and notifies them that a custom
+// framework is available. Recipients have 120 days to accept or decline the
+// request. If no action is taken, the share request expires.
+//
+// When you create a share request, Audit Manager stores a snapshot of your custom
+// framework in the US East (N. Virginia) Amazon Web Services Region. Audit Manager
+// also stores a backup of the same snapshot in the US West (Oregon) Amazon Web
+// Services Region.
+//
+// Audit Manager deletes the snapshot and the backup snapshot when one of the
+// following events occurs:
+//
 //   - The sender revokes the share request.
+//
 //   - The recipient declines the share request.
+//
 //   - The recipient encounters an error and doesn't successfully accept the share
 //     request.
+//
 //   - The share request expires before the recipient responds to the request.
 //
-// When a sender resends a share request (https://docs.aws.amazon.com/audit-manager/latest/userguide/framework-sharing.html#framework-sharing-resend)
-// , the snapshot is replaced with an updated version that corresponds with the
-// latest version of the custom framework. When a recipient accepts a share
-// request, the snapshot is replicated into their Amazon Web Services account under
-// the Amazon Web Services Region that was specified in the share request. When you
-// invoke the StartAssessmentFrameworkShare API, you are about to share a custom
-// framework with another Amazon Web Services account. You may not share a custom
-// framework that is derived from a standard framework if the standard framework is
-// designated as not eligible for sharing by Amazon Web Services, unless you have
-// obtained permission to do so from the owner of the standard framework. To learn
-// more about which standard frameworks are eligible for sharing, see Framework
-// sharing eligibility (https://docs.aws.amazon.com/audit-manager/latest/userguide/share-custom-framework-concepts-and-terminology.html#eligibility)
-// in the Audit Manager User Guide.
+// When a sender [resends a share request], the snapshot is replaced with an updated version that
+// corresponds with the latest version of the custom framework.
+//
+// When a recipient accepts a share request, the snapshot is replicated into their
+// Amazon Web Services account under the Amazon Web Services Region that was
+// specified in the share request.
+//
+// When you invoke the StartAssessmentFrameworkShare API, you are about to share a
+// custom framework with another Amazon Web Services account. You may not share a
+// custom framework that is derived from a standard framework if the standard
+// framework is designated as not eligible for sharing by Amazon Web Services,
+// unless you have obtained permission to do so from the owner of the standard
+// framework. To learn more about which standard frameworks are eligible for
+// sharing, see [Framework sharing eligibility]in the Audit Manager User Guide.
+//
+// [resends a share request]: https://docs.aws.amazon.com/audit-manager/latest/userguide/framework-sharing.html#framework-sharing-resend
+// [Framework sharing eligibility]: https://docs.aws.amazon.com/audit-manager/latest/userguide/share-custom-framework-concepts-and-terminology.html#eligibility
 func (c *Client) StartAssessmentFrameworkShare(ctx context.Context, params *StartAssessmentFrameworkShareInput, optFns ...func(*Options)) (*StartAssessmentFrameworkShareOutput, error) {
 	if params == nil {
 		params = &StartAssessmentFrameworkShareInput{}
@@ -57,22 +68,22 @@ func (c *Client) StartAssessmentFrameworkShare(ctx context.Context, params *Star
 
 type StartAssessmentFrameworkShareInput struct {
 
-	// The Amazon Web Services account of the recipient.
+	//  The Amazon Web Services account of the recipient.
 	//
 	// This member is required.
 	DestinationAccount *string
 
-	// The Amazon Web Services Region of the recipient.
+	//  The Amazon Web Services Region of the recipient.
 	//
 	// This member is required.
 	DestinationRegion *string
 
-	// The unique identifier for the custom framework to be shared.
+	//  The unique identifier for the custom framework to be shared.
 	//
 	// This member is required.
 	FrameworkId *string
 
-	// An optional comment from the sender about the share request.
+	//  An optional comment from the sender about the share request.
 	Comment *string
 
 	noSmithyDocumentSerde
@@ -80,7 +91,7 @@ type StartAssessmentFrameworkShareInput struct {
 
 type StartAssessmentFrameworkShareOutput struct {
 
-	// The share request that's created by the StartAssessmentFrameworkShare API.
+	//  The share request that's created by the StartAssessmentFrameworkShare API.
 	AssessmentFrameworkShareRequest *types.AssessmentFrameworkShareRequest
 
 	// Metadata pertaining to the operation's result.
@@ -111,25 +122,25 @@ func (c *Client) addOperationStartAssessmentFrameworkShareMiddlewares(stack *mid
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -144,13 +155,16 @@ func (c *Client) addOperationStartAssessmentFrameworkShareMiddlewares(stack *mid
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpStartAssessmentFrameworkShareValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opStartAssessmentFrameworkShare(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

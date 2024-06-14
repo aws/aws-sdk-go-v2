@@ -6,23 +6,27 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// This API operation is superseded by DetachTrafficSources , which can detach
-// multiple traffic sources types. We recommend using DetachTrafficSources to
-// simplify how you manage traffic sources. However, we continue to support
-// DetachLoadBalancers . You can use both the original DetachLoadBalancers API
-// operation and DetachTrafficSources on the same Auto Scaling group. Detaches one
-// or more Classic Load Balancers from the specified Auto Scaling group. This
-// operation detaches only Classic Load Balancers. If you have Application Load
-// Balancers, Network Load Balancers, or Gateway Load Balancers, use the
-// DetachLoadBalancerTargetGroups API instead. When you detach a load balancer, it
-// enters the Removing state while deregistering the instances in the group. When
-// all instances are deregistered, then you can no longer describe the load
-// balancer using the DescribeLoadBalancers API call. The instances remain running.
+// This API operation is superseded by DetachTrafficSources, which can detach multiple traffic sources
+// types. We recommend using DetachTrafficSources to simplify how you manage
+// traffic sources. However, we continue to support DetachLoadBalancers . You can
+// use both the original DetachLoadBalancers API operation and DetachTrafficSources
+// on the same Auto Scaling group.
+//
+// Detaches one or more Classic Load Balancers from the specified Auto Scaling
+// group.
+//
+// This operation detaches only Classic Load Balancers. If you have Application
+// Load Balancers, Network Load Balancers, or Gateway Load Balancers, use the DetachLoadBalancerTargetGroupsAPI
+// instead.
+//
+// When you detach a load balancer, it enters the Removing state while
+// deregistering the instances in the group. When all instances are deregistered,
+// then you can no longer describe the load balancer using the DescribeLoadBalancersAPI call. The
+// instances remain running.
 func (c *Client) DetachLoadBalancers(ctx context.Context, params *DetachLoadBalancersInput, optFns ...func(*Options)) (*DetachLoadBalancersOutput, error) {
 	if params == nil {
 		params = &DetachLoadBalancersInput{}
@@ -82,25 +86,25 @@ func (c *Client) addOperationDetachLoadBalancersMiddlewares(stack *middleware.St
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -115,13 +119,16 @@ func (c *Client) addOperationDetachLoadBalancersMiddlewares(stack *middleware.St
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDetachLoadBalancersValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDetachLoadBalancers(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

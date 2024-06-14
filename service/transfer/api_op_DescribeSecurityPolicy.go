@@ -6,17 +6,17 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/transfer/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Describes the security policy that is attached to your file transfer
-// protocol-enabled server. The response contains a description of the security
-// policy's properties. For more information about security policies, see Working
-// with security policies (https://docs.aws.amazon.com/transfer/latest/userguide/security-policies.html)
-// .
+// Describes the security policy that is attached to your server or SFTP
+// connector. The response contains a description of the security policy's
+// properties. For more information about security policies, see [Working with security policies for servers]or [Working with security policies for SFTP connectors].
+//
+// [Working with security policies for SFTP connectors]: https://docs.aws.amazon.com/transfer/latest/userguide/security-policies-connectors.html
+// [Working with security policies for servers]: https://docs.aws.amazon.com/transfer/latest/userguide/security-policies.html
 func (c *Client) DescribeSecurityPolicy(ctx context.Context, params *DescribeSecurityPolicyInput, optFns ...func(*Options)) (*DescribeSecurityPolicyOutput, error) {
 	if params == nil {
 		params = &DescribeSecurityPolicyInput{}
@@ -34,7 +34,7 @@ func (c *Client) DescribeSecurityPolicy(ctx context.Context, params *DescribeSec
 
 type DescribeSecurityPolicyInput struct {
 
-	// Specifies the name of the security policy that is attached to the server.
+	// Specify the text name of the security policy for which you want the details.
 	//
 	// This member is required.
 	SecurityPolicyName *string
@@ -77,25 +77,25 @@ func (c *Client) addOperationDescribeSecurityPolicyMiddlewares(stack *middleware
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -110,13 +110,16 @@ func (c *Client) addOperationDescribeSecurityPolicyMiddlewares(stack *middleware
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDescribeSecurityPolicyValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeSecurityPolicy(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

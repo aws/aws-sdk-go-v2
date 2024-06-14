@@ -6,15 +6,13 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/wafv2/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a RegexPatternSet , which you reference in a
-// RegexPatternSetReferenceStatement , to have WAF inspect a web request component
-// for the specified patterns.
+// Creates a RegexPatternSet, which you reference in a RegexPatternSetReferenceStatement, to have WAF inspect a web request
+// component for the specified patterns.
 func (c *Client) CreateRegexPatternSet(ctx context.Context, params *CreateRegexPatternSetInput, optFns ...func(*Options)) (*CreateRegexPatternSetOutput, error) {
 	if params == nil {
 		params = &CreateRegexPatternSetInput{}
@@ -46,10 +44,14 @@ type CreateRegexPatternSetInput struct {
 	// regional application. A regional application can be an Application Load Balancer
 	// (ALB), an Amazon API Gateway REST API, an AppSync GraphQL API, an Amazon Cognito
 	// user pool, an App Runner service, or an Amazon Web Services Verified Access
-	// instance. To work with CloudFront, you must also specify the Region US East (N.
-	// Virginia) as follows:
+	// instance.
+	//
+	// To work with CloudFront, you must also specify the Region US East (N. Virginia)
+	// as follows:
+	//
 	//   - CLI - Specify the Region when you use the CloudFront scope:
 	//   --scope=CLOUDFRONT --region=us-east-1 .
+	//
 	//   - API and SDKs - For all calls, use the Region endpoint us-east-1.
 	//
 	// This member is required.
@@ -66,10 +68,10 @@ type CreateRegexPatternSetInput struct {
 
 type CreateRegexPatternSetOutput struct {
 
-	// High-level information about a RegexPatternSet , returned by operations like
-	// create and list. This provides information like the ID, that you can use to
-	// retrieve and manage a RegexPatternSet , and the ARN, that you provide to the
-	// RegexPatternSetReferenceStatement to use the pattern set in a Rule .
+	// High-level information about a RegexPatternSet, returned by operations like create and list.
+	// This provides information like the ID, that you can use to retrieve and manage a
+	// RegexPatternSet , and the ARN, that you provide to the RegexPatternSetReferenceStatement to use the pattern set
+	// in a Rule.
 	Summary *types.RegexPatternSetSummary
 
 	// Metadata pertaining to the operation's result.
@@ -100,25 +102,25 @@ func (c *Client) addOperationCreateRegexPatternSetMiddlewares(stack *middleware.
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -133,13 +135,16 @@ func (c *Client) addOperationCreateRegexPatternSetMiddlewares(stack *middleware.
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpCreateRegexPatternSetValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateRegexPatternSet(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

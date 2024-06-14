@@ -6,22 +6,24 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/lightsail/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a deployment for your Amazon Lightsail container service. A deployment
-// specifies the containers that will be launched on the container service and
-// their settings, such as the ports to open, the environment variables to apply,
-// and the launch command to run. It also specifies the container that will serve
-// as the public endpoint of the deployment and its settings, such as the HTTP or
-// HTTPS port to use, and the health check configuration. You can deploy containers
-// to your container service using container images from a public registry such as
-// Amazon ECR Public, or from your local machine. For more information, see
-// Creating container images for your Amazon Lightsail container services (https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-creating-container-images)
-// in the Amazon Lightsail Developer Guide.
+// Creates a deployment for your Amazon Lightsail container service.
+//
+// A deployment specifies the containers that will be launched on the container
+// service and their settings, such as the ports to open, the environment variables
+// to apply, and the launch command to run. It also specifies the container that
+// will serve as the public endpoint of the deployment and its settings, such as
+// the HTTP or HTTPS port to use, and the health check configuration.
+//
+// You can deploy containers to your container service using container images from
+// a public registry such as Amazon ECR Public, or from your local machine. For
+// more information, see [Creating container images for your Amazon Lightsail container services]in the Amazon Lightsail Developer Guide.
+//
+// [Creating container images for your Amazon Lightsail container services]: https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-creating-container-images
 func (c *Client) CreateContainerServiceDeployment(ctx context.Context, params *CreateContainerServiceDeploymentInput, optFns ...func(*Options)) (*CreateContainerServiceDeploymentOutput, error) {
 	if params == nil {
 		params = &CreateContainerServiceDeploymentInput{}
@@ -88,25 +90,25 @@ func (c *Client) addOperationCreateContainerServiceDeploymentMiddlewares(stack *
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -121,13 +123,16 @@ func (c *Client) addOperationCreateContainerServiceDeploymentMiddlewares(stack *
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpCreateContainerServiceDeploymentValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateContainerServiceDeployment(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

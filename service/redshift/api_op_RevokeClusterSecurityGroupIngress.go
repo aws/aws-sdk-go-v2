@@ -6,17 +6,17 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/redshift/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Revokes an ingress rule in an Amazon Redshift security group for a previously
-// authorized IP range or Amazon EC2 security group. To add an ingress rule, see
-// AuthorizeClusterSecurityGroupIngress . For information about managing security
-// groups, go to Amazon Redshift Cluster Security Groups (https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-security-groups.html)
-// in the Amazon Redshift Cluster Management Guide.
+// authorized IP range or Amazon EC2 security group. To add an ingress rule, see AuthorizeClusterSecurityGroupIngress.
+// For information about managing security groups, go to [Amazon Redshift Cluster Security Groups]in the Amazon Redshift
+// Cluster Management Guide.
+//
+// [Amazon Redshift Cluster Security Groups]: https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-security-groups.html
 func (c *Client) RevokeClusterSecurityGroupIngress(ctx context.Context, params *RevokeClusterSecurityGroupIngressInput, optFns ...func(*Options)) (*RevokeClusterSecurityGroupIngressOutput, error) {
 	if params == nil {
 		params = &RevokeClusterSecurityGroupIngressInput{}
@@ -53,6 +53,7 @@ type RevokeClusterSecurityGroupIngressInput struct {
 	// specified in the EC2SecurityGroupName parameter. The Amazon Web Services access
 	// key ID is not an acceptable value. If EC2SecurityGroupOwnerId is specified,
 	// EC2SecurityGroupName must also be provided. and CIDRIP cannot be provided.
+	//
 	// Example: 111122223333
 	EC2SecurityGroupOwnerId *string
 
@@ -92,25 +93,25 @@ func (c *Client) addOperationRevokeClusterSecurityGroupIngressMiddlewares(stack 
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -125,13 +126,16 @@ func (c *Client) addOperationRevokeClusterSecurityGroupIngressMiddlewares(stack 
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpRevokeClusterSecurityGroupIngressValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opRevokeClusterSecurityGroupIngress(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -16,14 +15,18 @@ import (
 // instances. The default credit option is set at the account level per Amazon Web
 // Services Region, and is specified per instance family. All new burstable
 // performance instances in the account launch using the default credit option.
-// ModifyDefaultCreditSpecification is an asynchronous operation, which works at an
-// Amazon Web Services Region level and modifies the credit option for each
+//
+// ModifyDefaultCreditSpecification is an asynchronous operation, which works at
+// an Amazon Web Services Region level and modifies the credit option for each
 // Availability Zone. All zones in a Region are updated within five minutes. But if
 // instances are launched during this operation, they might not get the new credit
 // option until the zone is updated. To verify whether the update has occurred, you
 // can call GetDefaultCreditSpecification and check DefaultCreditSpecification for
-// updates. For more information, see Burstable performance instances (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/burstable-performance-instances.html)
-// in the Amazon EC2 User Guide.
+// updates.
+//
+// For more information, see [Burstable performance instances] in the Amazon EC2 User Guide.
+//
+// [Burstable performance instances]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/burstable-performance-instances.html
 func (c *Client) ModifyDefaultCreditSpecification(ctx context.Context, params *ModifyDefaultCreditSpecificationInput, optFns ...func(*Options)) (*ModifyDefaultCreditSpecificationOutput, error) {
 	if params == nil {
 		params = &ModifyDefaultCreditSpecificationInput{}
@@ -41,8 +44,9 @@ func (c *Client) ModifyDefaultCreditSpecification(ctx context.Context, params *M
 
 type ModifyDefaultCreditSpecificationInput struct {
 
-	// The credit option for CPU usage of the instance family. Valid Values: standard
-	// | unlimited
+	// The credit option for CPU usage of the instance family.
+	//
+	// Valid Values: standard | unlimited
 	//
 	// This member is required.
 	CpuCredits *string
@@ -94,25 +98,25 @@ func (c *Client) addOperationModifyDefaultCreditSpecificationMiddlewares(stack *
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -127,13 +131,16 @@ func (c *Client) addOperationModifyDefaultCreditSpecificationMiddlewares(stack *
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpModifyDefaultCreditSpecificationValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opModifyDefaultCreditSpecification(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

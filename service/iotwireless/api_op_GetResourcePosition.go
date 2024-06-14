@@ -6,15 +6,15 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/iotwireless/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Get the position information for a given wireless device or a wireless gateway
-// resource. The position information uses the World Geodetic System (WGS84) (https://gisgeography.com/wgs84-world-geodetic-system/)
-// .
+// resource. The position information uses the [World Geodetic System (WGS84)].
+//
+// [World Geodetic System (WGS84)]: https://gisgeography.com/wgs84-world-geodetic-system/
 func (c *Client) GetResourcePosition(ctx context.Context, params *GetResourcePositionInput, optFns ...func(*Options)) (*GetResourcePositionOutput, error) {
 	if params == nil {
 		params = &GetResourcePositionInput{}
@@ -52,7 +52,9 @@ type GetResourcePositionOutput struct {
 
 	// The position information of the resource, displayed as a JSON payload. The
 	// payload uses the GeoJSON format, which a format that's used to encode geographic
-	// data structures. For more information, see GeoJSON (https://geojson.org/) .
+	// data structures. For more information, see [GeoJSON].
+	//
+	// [GeoJSON]: https://geojson.org/
 	GeoJsonPayload []byte
 
 	// Metadata pertaining to the operation's result.
@@ -83,25 +85,25 @@ func (c *Client) addOperationGetResourcePositionMiddlewares(stack *middleware.St
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -116,13 +118,16 @@ func (c *Client) addOperationGetResourcePositionMiddlewares(stack *middleware.St
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpGetResourcePositionValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetResourcePosition(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

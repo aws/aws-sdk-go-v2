@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/configservice/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -16,7 +15,9 @@ import (
 // operation also returns a list of resources that are not processed in the current
 // request. If there are no unprocessed resources, the operation returns an empty
 // unprocessedResourceKeys list.
+//
 //   - The API does not return results for deleted resources.
+//
 //   - The API does not return any tags for the requested resources. This
 //     information is filtered out of the supplementaryConfiguration section of the API
 //     response.
@@ -53,8 +54,9 @@ type BatchGetResourceConfigOutput struct {
 
 	// A list of resource keys that were not processed with the current response. The
 	// unprocessesResourceKeys value is in the same form as ResourceKeys, so the value
-	// can be directly provided to a subsequent BatchGetResourceConfig operation. If
-	// there are no unprocessed resource keys, the response contains an empty
+	// can be directly provided to a subsequent BatchGetResourceConfig operation.
+	//
+	// If there are no unprocessed resource keys, the response contains an empty
 	// unprocessedResourceKeys list.
 	UnprocessedResourceKeys []types.ResourceKey
 
@@ -86,25 +88,25 @@ func (c *Client) addOperationBatchGetResourceConfigMiddlewares(stack *middleware
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -119,13 +121,16 @@ func (c *Client) addOperationBatchGetResourceConfigMiddlewares(stack *middleware
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpBatchGetResourceConfigValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opBatchGetResourceConfig(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

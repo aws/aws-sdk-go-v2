@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/cloudformation/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -41,7 +40,9 @@ type ImportStacksToStackSetInput struct {
 
 	// By default, SELF is specified. Use SELF for stack sets with self-managed
 	// permissions.
+	//
 	//   - If you are signed in to the management account, specify SELF .
+	//
 	//   - For service managed stack sets, specify DELEGATED_ADMIN .
 	CallAs types.CallAs
 
@@ -49,9 +50,12 @@ type ImportStacksToStackSetInput struct {
 	OperationId *string
 
 	// The user-specified preferences for how CloudFormation performs a stack set
-	// operation. For more information about maximum concurrent accounts and failure
-	// tolerance, see Stack set operation options (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-concepts.html#stackset-ops-options)
-	// .
+	// operation.
+	//
+	// For more information about maximum concurrent accounts and failure tolerance,
+	// see [Stack set operation options].
+	//
+	// [Stack set operation options]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-concepts.html#stackset-ops-options
 	OperationPreferences *types.StackSetOperationPreferences
 
 	// The list of OU ID's to which the stacks being imported has to be mapped as
@@ -59,11 +63,14 @@ type ImportStacksToStackSetInput struct {
 	OrganizationalUnitIds []string
 
 	// The IDs of the stacks you are importing into a stack set. You import up to 10
-	// stacks per stack set at a time. Specify either StackIds or StackIdsUrl .
+	// stacks per stack set at a time.
+	//
+	// Specify either StackIds or StackIdsUrl .
 	StackIds []string
 
-	// The Amazon S3 URL which contains list of stack ids to be inputted. Specify
-	// either StackIds or StackIdsUrl .
+	// The Amazon S3 URL which contains list of stack ids to be inputted.
+	//
+	// Specify either StackIds or StackIdsUrl .
 	StackIdsUrl *string
 
 	noSmithyDocumentSerde
@@ -102,25 +109,25 @@ func (c *Client) addOperationImportStacksToStackSetMiddlewares(stack *middleware
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -135,6 +142,9 @@ func (c *Client) addOperationImportStacksToStackSetMiddlewares(stack *middleware
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opImportStacksToStackSetMiddleware(stack, options); err != nil {
 		return err
 	}
@@ -144,7 +154,7 @@ func (c *Client) addOperationImportStacksToStackSetMiddlewares(stack *middleware
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opImportStacksToStackSet(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

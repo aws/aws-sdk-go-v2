@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/health/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -18,19 +17,31 @@ import (
 // detailed description, any additional metadata that depends on the event type, or
 // any affected resources. To retrieve that information, use the following
 // operations:
-//   - DescribeAffectedAccountsForOrganization (https://docs.aws.amazon.com/health/latest/APIReference/API_DescribeAffectedAccountsForOrganization.html)
-//   - DescribeEventDetailsForOrganization (https://docs.aws.amazon.com/health/latest/APIReference/API_DescribeEventDetailsForOrganization.html)
-//   - DescribeAffectedEntitiesForOrganization (https://docs.aws.amazon.com/health/latest/APIReference/API_DescribeAffectedEntitiesForOrganization.html)
+//
+// [DescribeAffectedAccountsForOrganization]
+//
+// [DescribeEventDetailsForOrganization]
+//
+// [DescribeAffectedEntitiesForOrganization]
 //
 // If you don't specify a filter , the DescribeEventsForOrganizations returns all
 // events across your organization. Results are sorted by lastModifiedTime ,
-// starting with the most recent event. For more information about the different
-// types of Health events, see Event (https://docs.aws.amazon.com/health/latest/APIReference/API_Event.html)
-// . Before you can call this operation, you must first enable Health to work with
-// Organizations. To do this, call the EnableHealthServiceAccessForOrganization (https://docs.aws.amazon.com/health/latest/APIReference/API_EnableHealthServiceAccessForOrganization.html)
-// operation from your organization's management account. This API operation uses
-// pagination. Specify the nextToken parameter in the next request to return more
-// results.
+// starting with the most recent event.
+//
+// For more information about the different types of Health events, see [Event].
+//
+// Before you can call this operation, you must first enable Health to work with
+// Organizations. To do this, call the [EnableHealthServiceAccessForOrganization]operation from your organization's
+// management account.
+//
+// This API operation uses pagination. Specify the nextToken parameter in the next
+// request to return more results.
+//
+// [DescribeEventDetailsForOrganization]: https://docs.aws.amazon.com/health/latest/APIReference/API_DescribeEventDetailsForOrganization.html
+// [DescribeAffectedEntitiesForOrganization]: https://docs.aws.amazon.com/health/latest/APIReference/API_DescribeAffectedEntitiesForOrganization.html
+// [DescribeAffectedAccountsForOrganization]: https://docs.aws.amazon.com/health/latest/APIReference/API_DescribeAffectedAccountsForOrganization.html
+// [Event]: https://docs.aws.amazon.com/health/latest/APIReference/API_Event.html
+// [EnableHealthServiceAccessForOrganization]: https://docs.aws.amazon.com/health/latest/APIReference/API_EnableHealthServiceAccessForOrganization.html
 func (c *Client) DescribeEventsForOrganization(ctx context.Context, params *DescribeEventsForOrganizationInput, optFns ...func(*Options)) (*DescribeEventsForOrganizationOutput, error) {
 	if params == nil {
 		params = &DescribeEventsForOrganizationInput{}
@@ -109,25 +120,25 @@ func (c *Client) addOperationDescribeEventsForOrganizationMiddlewares(stack *mid
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -142,10 +153,13 @@ func (c *Client) addOperationDescribeEventsForOrganizationMiddlewares(stack *mid
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeEventsForOrganization(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

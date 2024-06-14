@@ -6,19 +6,23 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/iot/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Updates the status of the specified certificate. This operation is idempotent.
-// Requires permission to access the UpdateCertificate (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
-// action. Certificates must be in the ACTIVE state to authenticate devices that
-// use a certificate to connect to IoT. Within a few minutes of updating a
-// certificate from the ACTIVE state to any other state, IoT disconnects all
-// devices that used that certificate to connect. Devices cannot use a certificate
-// that is not in the ACTIVE state to reconnect.
+//
+// Requires permission to access the [UpdateCertificate] action.
+//
+// Certificates must be in the ACTIVE state to authenticate devices that use a
+// certificate to connect to IoT.
+//
+// Within a few minutes of updating a certificate from the ACTIVE state to any
+// other state, IoT disconnects all devices that used that certificate to connect.
+// Devices cannot use a certificate that is not in the ACTIVE state to reconnect.
+//
+// [UpdateCertificate]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions
 func (c *Client) UpdateCertificate(ctx context.Context, params *UpdateCertificateInput, optFns ...func(*Options)) (*UpdateCertificateOutput, error) {
 	if params == nil {
 		params = &UpdateCertificateInput{}
@@ -43,11 +47,13 @@ type UpdateCertificateInput struct {
 	// This member is required.
 	CertificateId *string
 
-	// The new status. Note: Setting the status to PENDING_TRANSFER or
-	// PENDING_ACTIVATION will result in an exception being thrown. PENDING_TRANSFER
-	// and PENDING_ACTIVATION are statuses used internally by IoT. They are not
-	// intended for developer use. Note: The status value REGISTER_INACTIVE is
-	// deprecated and should not be used.
+	// The new status.
+	//
+	// Note: Setting the status to PENDING_TRANSFER or PENDING_ACTIVATION will result
+	// in an exception being thrown. PENDING_TRANSFER and PENDING_ACTIVATION are
+	// statuses used internally by IoT. They are not intended for developer use.
+	//
+	// Note: The status value REGISTER_INACTIVE is deprecated and should not be used.
 	//
 	// This member is required.
 	NewStatus types.CertificateStatus
@@ -84,25 +90,25 @@ func (c *Client) addOperationUpdateCertificateMiddlewares(stack *middleware.Stac
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -117,13 +123,16 @@ func (c *Client) addOperationUpdateCertificateMiddlewares(stack *middleware.Stac
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpUpdateCertificateValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateCertificate(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

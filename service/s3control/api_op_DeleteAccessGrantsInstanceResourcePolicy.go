@@ -18,8 +18,10 @@ import (
 // Deletes the resource policy of the S3 Access Grants instance. The resource
 // policy is used to manage cross-account access to your S3 Access Grants instance.
 // By deleting the resource policy, you delete any cross-account permissions to
-// your S3 Access Grants instance. Permissions You must have the
-// s3:DeleteAccessGrantsInstanceResourcePolicy permission to use this operation.
+// your S3 Access Grants instance.
+//
+// Permissions You must have the s3:DeleteAccessGrantsInstanceResourcePolicy
+// permission to use this operation.
 func (c *Client) DeleteAccessGrantsInstanceResourcePolicy(ctx context.Context, params *DeleteAccessGrantsInstanceResourcePolicyInput, optFns ...func(*Options)) (*DeleteAccessGrantsInstanceResourcePolicyOutput, error) {
 	if params == nil {
 		params = &DeleteAccessGrantsInstanceResourcePolicyInput{}
@@ -79,25 +81,25 @@ func (c *Client) addOperationDeleteAccessGrantsInstanceResourcePolicyMiddlewares
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -115,6 +117,9 @@ func (c *Client) addOperationDeleteAccessGrantsInstanceResourcePolicyMiddlewares
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = smithyhttp.AddContentChecksumMiddleware(stack); err != nil {
 		return err
 	}
@@ -130,7 +135,7 @@ func (c *Client) addOperationDeleteAccessGrantsInstanceResourcePolicyMiddlewares
 	if err = addMetadataRetrieverMiddleware(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addDeleteAccessGrantsInstanceResourcePolicyUpdateEndpoint(stack, options); err != nil {

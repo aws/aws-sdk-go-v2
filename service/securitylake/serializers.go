@@ -2113,6 +2113,11 @@ func awsRestjson1_serializeOpDocumentUpdateDataLakeInput(v *UpdateDataLakeInput,
 		}
 	}
 
+	if v.MetaStoreManagerRoleArn != nil {
+		ok := object.Key("metaStoreManagerRoleArn")
+		ok.String(*v.MetaStoreManagerRoleArn)
+	}
+
 	return nil
 }
 

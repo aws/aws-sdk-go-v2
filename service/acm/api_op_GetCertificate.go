@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -14,8 +13,9 @@ import (
 // Retrieves an Amazon-issued certificate and its certificate chain. The chain
 // consists of the certificate of the issuing CA and the intermediate certificates
 // of any other subordinate CAs. All of the certificates are base64 encoded. You
-// can use OpenSSL (https://wiki.openssl.org/index.php/Command_Line_Utilities) to
-// decode the certificates and inspect individual fields.
+// can use [OpenSSL]to decode the certificates and inspect individual fields.
+//
+// [OpenSSL]: https://wiki.openssl.org/index.php/Command_Line_Utilities
 func (c *Client) GetCertificate(ctx context.Context, params *GetCertificateInput, optFns ...func(*Options)) (*GetCertificateOutput, error) {
 	if params == nil {
 		params = &GetCertificateInput{}
@@ -34,9 +34,12 @@ func (c *Client) GetCertificate(ctx context.Context, params *GetCertificateInput
 type GetCertificateInput struct {
 
 	// String that contains a certificate ARN in the following format:
-	// arn:aws:acm:region:123456789012:certificate/12345678-1234-1234-1234-123456789012
-	// For more information about ARNs, see Amazon Resource Names (ARNs) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
-	// .
+	//
+	//     arn:aws:acm:region:123456789012:certificate/12345678-1234-1234-1234-123456789012
+	//
+	// For more information about ARNs, see [Amazon Resource Names (ARNs)].
+	//
+	// [Amazon Resource Names (ARNs)]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
 	//
 	// This member is required.
 	CertificateArn *string
@@ -82,25 +85,25 @@ func (c *Client) addOperationGetCertificateMiddlewares(stack *middleware.Stack, 
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -115,13 +118,16 @@ func (c *Client) addOperationGetCertificateMiddlewares(stack *middleware.Stack, 
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpGetCertificateValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetCertificate(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

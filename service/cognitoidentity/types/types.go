@@ -18,11 +18,15 @@ type CognitoIdentityProvider struct {
 	ProviderName *string
 
 	// TRUE if server-side token validation is enabled for the identity provider’s
-	// token. Once you set ServerSideTokenCheck to TRUE for an identity pool, that
-	// identity pool will check with the integrated user pools to make sure that the
-	// user has not been globally signed out or deleted before the identity pool
-	// provides an OIDC token or AWS credentials for the user. If the user is signed
-	// out or deleted, the identity pool will return a 400 Not Authorized error.
+	// token.
+	//
+	// Once you set ServerSideTokenCheck to TRUE for an identity pool, that identity
+	// pool will check with the integrated user pools to make sure that the user has
+	// not been globally signed out or deleted before the identity pool provides an
+	// OIDC token or AWS credentials for the user.
+	//
+	// If the user is signed out or deleted, the identity pool will return a 400 Not
+	// Authorized error.
 	ServerSideTokenCheck *bool
 
 	noSmithyDocumentSerde
@@ -114,14 +118,16 @@ type RoleMapping struct {
 	// This member is required.
 	Type RoleMappingType
 
-	// If you specify Token or Rules as the Type , AmbiguousRoleResolution is
-	// required. Specifies the action to be taken if either no rules match the claim
-	// value for the Rules type, or there is no cognito:preferred_role claim and there
-	// are multiple cognito:roles matches for the Token type.
+	// If you specify Token or Rules as the Type , AmbiguousRoleResolution is required.
+	//
+	// Specifies the action to be taken if either no rules match the claim value for
+	// the Rules type, or there is no cognito:preferred_role claim and there are
+	// multiple cognito:roles matches for the Token type.
 	AmbiguousRoleResolution AmbiguousRoleResolutionType
 
-	// The rules to be used for mapping users to roles. If you specify Rules as the
-	// role mapping type, RulesConfiguration is required.
+	// The rules to be used for mapping users to roles.
+	//
+	// If you specify Rules as the role mapping type, RulesConfiguration is required.
 	RulesConfiguration *RulesConfigurationType
 
 	noSmithyDocumentSerde
@@ -130,8 +136,9 @@ type RoleMapping struct {
 // A container for rules.
 type RulesConfigurationType struct {
 
-	// An array of rules. You can specify up to 25 rules per identity provider. Rules
-	// are evaluated in order. The first one to match specifies the role.
+	// An array of rules. You can specify up to 25 rules per identity provider.
+	//
+	// Rules are evaluated in order. The first one to match specifies the role.
 	//
 	// This member is required.
 	Rules []MappingRule

@@ -6,14 +6,15 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/connect/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // This API is in preview release for Amazon Connect and is subject to change.
+//
 // Creates a new queue for the specified Amazon Connect instance.
+//
 //   - If the phone number is claimed to a traffic distribution group that was
 //     created in the same Region as the Amazon Connect instance where you are calling
 //     this API, then you can use a full phone number ARN or a UUID for
@@ -23,15 +24,16 @@ import (
 //     the traffic distribution group, you must provide a full phone number ARN. If a
 //     UUID is provided in this scenario, you will receive a
 //     ResourceNotFoundException .
+//
 //   - Only use the phone number ARN format that doesn't contain instance in the
 //     path, for example, arn:aws:connect:us-east-1:1234567890:phone-number/uuid .
-//     This is the same ARN format that is returned when you call the
-//     ListPhoneNumbersV2 (https://docs.aws.amazon.com/connect/latest/APIReference/API_ListPhoneNumbersV2.html)
-//     API.
+//     This is the same ARN format that is returned when you call the [ListPhoneNumbersV2]API.
+//
 //   - If you plan to use IAM policies to allow/deny access to this API for phone
-//     number resources claimed to a traffic distribution group, see Allow or Deny
-//     queue API actions for phone numbers in a replica Region (https://docs.aws.amazon.com/connect/latest/adminguide/security_iam_resource-level-policy-examples.html#allow-deny-queue-actions-replica-region)
-//     .
+//     number resources claimed to a traffic distribution group, see [Allow or Deny queue API actions for phone numbers in a replica Region].
+//
+// [ListPhoneNumbersV2]: https://docs.aws.amazon.com/connect/latest/APIReference/API_ListPhoneNumbersV2.html
+// [Allow or Deny queue API actions for phone numbers in a replica Region]: https://docs.aws.amazon.com/connect/latest/adminguide/security_iam_resource-level-policy-examples.html#allow-deny-queue-actions-replica-region
 func (c *Client) CreateQueue(ctx context.Context, params *CreateQueueInput, optFns ...func(*Options)) (*CreateQueueOutput, error) {
 	if params == nil {
 		params = &CreateQueueInput{}
@@ -54,8 +56,10 @@ type CreateQueueInput struct {
 	// This member is required.
 	HoursOfOperationId *string
 
-	// The identifier of the Amazon Connect instance. You can find the instance ID (https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html)
-	// in the Amazon Resource Name (ARN) of the instance.
+	// The identifier of the Amazon Connect instance. You can [find the instance ID] in the Amazon Resource
+	// Name (ARN) of the instance.
+	//
+	// [find the instance ID]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
 	//
 	// This member is required.
 	InstanceId *string
@@ -121,25 +125,25 @@ func (c *Client) addOperationCreateQueueMiddlewares(stack *middleware.Stack, opt
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -154,13 +158,16 @@ func (c *Client) addOperationCreateQueueMiddlewares(stack *middleware.Stack, opt
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpCreateQueueValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateQueue(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

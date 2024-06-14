@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/databasemigrationservice/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -50,9 +49,14 @@ type CreateReplicationConfigInput struct {
 	ReplicationConfigIdentifier *string
 
 	// The type of DMS Serverless replication to provision using this replication
-	// configuration. Possible values:
+	// configuration.
+	//
+	// Possible values:
+	//
 	//   - "full-load"
+	//
 	//   - "cdc"
+	//
 	//   - "full-load-and-cdc"
 	//
 	// This member is required.
@@ -65,9 +69,9 @@ type CreateReplicationConfigInput struct {
 	SourceEndpointArn *string
 
 	// JSON table mappings for DMS Serverless replications that are provisioned using
-	// this replication configuration. For more information, see Specifying table
-	// selection and transformations rules using JSON (https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Tasks.CustomizingTasks.TableMapping.SelectionTransformation.html)
-	// .
+	// this replication configuration. For more information, see [Specifying table selection and transformations rules using JSON].
+	//
+	// [Specifying table selection and transformations rules using JSON]: https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Tasks.CustomizingTasks.TableMapping.SelectionTransformation.html
 	//
 	// This member is required.
 	TableMappings *string
@@ -79,25 +83,28 @@ type CreateReplicationConfigInput struct {
 	TargetEndpointArn *string
 
 	// Optional JSON settings for DMS Serverless replications that are provisioned
-	// using this replication configuration. For example, see Change processing tuning
-	// settings (https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Tasks.CustomizingTasks.TaskSettings.ChangeProcessingTuning.html)
-	// .
+	// using this replication configuration. For example, see [Change processing tuning settings].
+	//
+	// [Change processing tuning settings]: https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Tasks.CustomizingTasks.TaskSettings.ChangeProcessingTuning.html
 	ReplicationSettings *string
 
 	// Optional unique value or name that you set for a given resource that can be
 	// used to construct an Amazon Resource Name (ARN) for that resource. For more
-	// information, see Fine-grained access control using resource names and tags (https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Security.html#CHAP_Security.FineGrainedAccess)
-	// .
+	// information, see [Fine-grained access control using resource names and tags].
+	//
+	// [Fine-grained access control using resource names and tags]: https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Security.html#CHAP_Security.FineGrainedAccess
 	ResourceIdentifier *string
 
 	// Optional JSON settings for specifying supplemental data. For more information,
-	// see Specifying supplemental data for task settings (https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Tasks.TaskData.html)
-	// .
+	// see [Specifying supplemental data for task settings].
+	//
+	// [Specifying supplemental data for task settings]: https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Tasks.TaskData.html
 	SupplementalSettings *string
 
 	// One or more optional tags associated with resources used by the DMS Serverless
-	// replication. For more information, see Tagging resources in Database Migration
-	// Service (https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Tagging.html) .
+	// replication. For more information, see [Tagging resources in Database Migration Service].
+	//
+	// [Tagging resources in Database Migration Service]: https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Tagging.html
 	Tags []types.Tag
 
 	noSmithyDocumentSerde
@@ -137,25 +144,25 @@ func (c *Client) addOperationCreateReplicationConfigMiddlewares(stack *middlewar
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -170,13 +177,16 @@ func (c *Client) addOperationCreateReplicationConfigMiddlewares(stack *middlewar
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpCreateReplicationConfigValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateReplicationConfig(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

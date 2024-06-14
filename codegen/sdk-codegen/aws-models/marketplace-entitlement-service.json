@@ -349,6 +349,25 @@
                                                 {
                                                     "fn": "stringEquals",
                                                     "argv": [
+                                                        {
+                                                            "ref": "Region"
+                                                        },
+                                                        "cn-northwest-1"
+                                                    ]
+                                                }
+                                            ],
+                                            "endpoint": {
+                                                "url": "https://entitlement-marketplace.cn-northwest-1.amazonaws.com.cn",
+                                                "properties": {},
+                                                "headers": {}
+                                            },
+                                            "type": "endpoint"
+                                        },
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "stringEquals",
+                                                    "argv": [
                                                         "aws",
                                                         {
                                                             "fn": "getAttr",
@@ -443,6 +462,19 @@
                                 "Region": "us-east-1",
                                 "UseFIPS": false,
                                 "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-northwest-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://entitlement-marketplace.cn-northwest-1.amazonaws.com.cn"
+                                }
+                            },
+                            "params": {
+                                "Region": "cn-northwest-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false
                             }
                         },
                         {

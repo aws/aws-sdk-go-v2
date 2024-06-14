@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/textract/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -16,14 +15,18 @@ import (
 // text in a lending document. The returned summary consists of information about
 // documents grouped together by a common document type. Information like detected
 // signatures, page numbers, and split documents is returned with respect to the
-// type of grouped document. You start asynchronous text analysis by calling
-// StartLendingAnalysis , which returns a job identifier ( JobId ). When the text
-// analysis operation finishes, Amazon Textract publishes a completion status to
-// the Amazon Simple Notification Service (Amazon SNS) topic that's registered in
-// the initial call to StartLendingAnalysis . To get the results of the text
-// analysis operation, first check that the status value published to the Amazon
-// SNS topic is SUCCEEDED. If so, call GetLendingAnalysisSummary , and pass the job
-// identifier ( JobId ) from the initial call to StartLendingAnalysis .
+// type of grouped document.
+//
+// You start asynchronous text analysis by calling StartLendingAnalysis , which
+// returns a job identifier ( JobId ). When the text analysis operation finishes,
+// Amazon Textract publishes a completion status to the Amazon Simple Notification
+// Service (Amazon SNS) topic that's registered in the initial call to
+// StartLendingAnalysis .
+//
+// To get the results of the text analysis operation, first check that the status
+// value published to the Amazon SNS topic is SUCCEEDED. If so, call
+// GetLendingAnalysisSummary , and pass the job identifier ( JobId ) from the
+// initial call to StartLendingAnalysis .
 func (c *Client) GetLendingAnalysisSummary(ctx context.Context, params *GetLendingAnalysisSummaryInput, optFns ...func(*Options)) (*GetLendingAnalysisSummaryOutput, error) {
 	if params == nil {
 		params = &GetLendingAnalysisSummaryInput{}
@@ -41,7 +44,7 @@ func (c *Client) GetLendingAnalysisSummary(ctx context.Context, params *GetLendi
 
 type GetLendingAnalysisSummaryInput struct {
 
-	// A unique identifier for the lending or text-detection job. The JobId is
+	//  A unique identifier for the lending or text-detection job. The JobId is
 	// returned from StartLendingAnalysis. A JobId value is only valid for 7 days.
 	//
 	// This member is required.
@@ -58,14 +61,14 @@ type GetLendingAnalysisSummaryOutput struct {
 	// Information about the input document.
 	DocumentMetadata *types.DocumentMetadata
 
-	// The current status of the lending analysis job.
+	//  The current status of the lending analysis job.
 	JobStatus types.JobStatus
 
 	// Returns if the lending analysis could not be completed. Contains explanation
 	// for what error occurred.
 	StatusMessage *string
 
-	// Contains summary information for documents grouped by type.
+	//  Contains summary information for documents grouped by type.
 	Summary *types.LendingSummary
 
 	// A list of warnings that occurred during the lending analysis operation.
@@ -99,25 +102,25 @@ func (c *Client) addOperationGetLendingAnalysisSummaryMiddlewares(stack *middlew
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -132,13 +135,16 @@ func (c *Client) addOperationGetLendingAnalysisSummaryMiddlewares(stack *middlew
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpGetLendingAnalysisSummaryValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetLendingAnalysisSummary(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/iotwireless/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -62,12 +61,13 @@ type GetPositionEstimateInput struct {
 type GetPositionEstimateOutput struct {
 
 	// The position information of the resource, displayed as a JSON payload. The
-	// payload is of type blob and uses the GeoJSON (https://geojson.org/) format,
-	// which a format that's used to encode geographic data structures. A sample
-	// payload contains the timestamp information, the WGS84 coordinates of the
-	// location, and the accuracy and confidence level. For more information and
-	// examples, see Resolve device location (console) (https://docs.aws.amazon.com/iot/latest/developerguide/location-resolve-console.html)
-	// .
+	// payload is of type blob and uses the [GeoJSON]format, which a format that's used to
+	// encode geographic data structures. A sample payload contains the timestamp
+	// information, the WGS84 coordinates of the location, and the accuracy and
+	// confidence level. For more information and examples, see [Resolve device location (console)].
+	//
+	// [Resolve device location (console)]: https://docs.aws.amazon.com/iot/latest/developerguide/location-resolve-console.html
+	// [GeoJSON]: https://geojson.org/
 	GeoJsonPayload []byte
 
 	// Metadata pertaining to the operation's result.
@@ -98,25 +98,25 @@ func (c *Client) addOperationGetPositionEstimateMiddlewares(stack *middleware.St
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -131,13 +131,16 @@ func (c *Client) addOperationGetPositionEstimateMiddlewares(stack *middleware.St
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpGetPositionEstimateValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetPositionEstimate(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

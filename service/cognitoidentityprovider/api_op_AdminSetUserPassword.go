@@ -6,34 +6,47 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Sets the specified user's password in a user pool as an administrator. Works on
-// any user. The password can be temporary or permanent. If it is temporary, the
-// user status enters the FORCE_CHANGE_PASSWORD state. When the user next tries to
-// sign in, the InitiateAuth/AdminInitiateAuth response will contain the
+// any user.
+//
+// The password can be temporary or permanent. If it is temporary, the user status
+// enters the FORCE_CHANGE_PASSWORD state. When the user next tries to sign in,
+// the InitiateAuth/AdminInitiateAuth response will contain the
 // NEW_PASSWORD_REQUIRED challenge. If the user doesn't sign in before it expires,
 // the user won't be able to sign in, and an administrator must reset their
-// password. Once the user has set a new password, or the password is permanent,
-// the user status is set to Confirmed . AdminSetUserPassword can set a password
-// for the user profile that Amazon Cognito creates for third-party federated
-// users. When you set a password, the federated user's status changes from
-// EXTERNAL_PROVIDER to CONFIRMED . A user in this state can sign in as a federated
-// user, and initiate authentication flows in the API like a linked native user.
-// They can also modify their password and attributes in token-authenticated API
-// requests like ChangePassword and UpdateUserAttributes . As a best security
-// practice and to keep users in sync with your external IdP, don't set passwords
-// on federated user profiles. To set up a federated user for native sign-in with a
-// linked native user, refer to Linking federated users to an existing user profile (https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pools-identity-federation-consolidate-users.html)
-// . Amazon Cognito evaluates Identity and Access Management (IAM) policies in
+// password.
+//
+// Once the user has set a new password, or the password is permanent, the user
+// status is set to Confirmed .
+//
+// AdminSetUserPassword can set a password for the user profile that Amazon
+// Cognito creates for third-party federated users. When you set a password, the
+// federated user's status changes from EXTERNAL_PROVIDER to CONFIRMED . A user in
+// this state can sign in as a federated user, and initiate authentication flows in
+// the API like a linked native user. They can also modify their password and
+// attributes in token-authenticated API requests like ChangePassword and
+// UpdateUserAttributes . As a best security practice and to keep users in sync
+// with your external IdP, don't set passwords on federated user profiles. To set
+// up a federated user for native sign-in with a linked native user, refer to [Linking federated users to an existing user profile].
+//
+// Amazon Cognito evaluates Identity and Access Management (IAM) policies in
 // requests for this API operation. For this operation, you must use IAM
 // credentials to authorize requests, and you must grant yourself the corresponding
-// IAM permission in a policy. Learn more
-//   - Signing Amazon Web Services API Requests (https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_aws-signing.html)
-//   - Using the Amazon Cognito user pools API and user pool endpoints (https://docs.aws.amazon.com/cognito/latest/developerguide/user-pools-API-operations.html)
+// IAM permission in a policy.
+//
+// # Learn more
+//
+// [Signing Amazon Web Services API Requests]
+//
+// [Using the Amazon Cognito user pools API and user pool endpoints]
+//
+// [Linking federated users to an existing user profile]: https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pools-identity-federation-consolidate-users.html
+// [Using the Amazon Cognito user pools API and user pool endpoints]: https://docs.aws.amazon.com/cognito/latest/developerguide/user-pools-API-operations.html
+// [Signing Amazon Web Services API Requests]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_aws-signing.html
 func (c *Client) AdminSetUserPassword(ctx context.Context, params *AdminSetUserPasswordInput, optFns ...func(*Options)) (*AdminSetUserPasswordOutput, error) {
 	if params == nil {
 		params = &AdminSetUserPasswordInput{}
@@ -63,8 +76,9 @@ type AdminSetUserPasswordInput struct {
 
 	// The username of the user that you want to query or modify. The value of this
 	// parameter is typically your user's username, but it can be any of their alias
-	// attributes. If username isn't an alias attribute in your user pool, you can
-	// also use their sub in this request.
+	// attributes. If username isn't an alias attribute in your user pool, this value
+	// must be the sub of a local user or the username of a user from a third-party
+	// IdP.
 	//
 	// This member is required.
 	Username *string
@@ -104,25 +118,25 @@ func (c *Client) addOperationAdminSetUserPasswordMiddlewares(stack *middleware.S
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -137,13 +151,16 @@ func (c *Client) addOperationAdminSetUserPasswordMiddlewares(stack *middleware.S
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpAdminSetUserPasswordValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opAdminSetUserPassword(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

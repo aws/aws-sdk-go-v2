@@ -6,16 +6,17 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/transcribe/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Adds one or more custom tags, each in the form of a key:value pair, to the
-// specified resource. To learn more about using tags with Amazon Transcribe, refer
-// to Tagging resources (https://docs.aws.amazon.com/transcribe/latest/dg/tagging.html)
-// .
+// specified resource.
+//
+// To learn more about using tags with Amazon Transcribe, refer to [Tagging resources].
+//
+// [Tagging resources]: https://docs.aws.amazon.com/transcribe/latest/dg/tagging.html
 func (c *Client) TagResource(ctx context.Context, params *TagResourceInput, optFns ...func(*Options)) (*TagResourceOutput, error) {
 	if params == nil {
 		params = &TagResourceInput{}
@@ -34,10 +35,13 @@ func (c *Client) TagResource(ctx context.Context, params *TagResourceInput, optF
 type TagResourceInput struct {
 
 	// The Amazon Resource Name (ARN) of the resource you want to tag. ARNs have the
-	// format arn:partition:service:region:account-id:resource-type/resource-id . For
-	// example,
+	// format arn:partition:service:region:account-id:resource-type/resource-id .
+	//
+	// For example,
 	// arn:aws:transcribe:us-west-2:111122223333:transcription-job/transcription-job-name
-	// . Valid values for resource-type are: transcription-job ,
+	// .
+	//
+	// Valid values for resource-type are: transcription-job ,
 	// medical-transcription-job , vocabulary , medical-vocabulary , vocabulary-filter
 	// , and language-model .
 	//
@@ -45,9 +49,11 @@ type TagResourceInput struct {
 	ResourceArn *string
 
 	// Adds one or more custom tags, each in the form of a key:value pair, to the
-	// specified resource. To learn more about using tags with Amazon Transcribe, refer
-	// to Tagging resources (https://docs.aws.amazon.com/transcribe/latest/dg/tagging.html)
-	// .
+	// specified resource.
+	//
+	// To learn more about using tags with Amazon Transcribe, refer to [Tagging resources].
+	//
+	// [Tagging resources]: https://docs.aws.amazon.com/transcribe/latest/dg/tagging.html
 	//
 	// This member is required.
 	Tags []types.Tag
@@ -84,25 +90,25 @@ func (c *Client) addOperationTagResourceMiddlewares(stack *middleware.Stack, opt
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -117,13 +123,16 @@ func (c *Client) addOperationTagResourceMiddlewares(stack *middleware.Stack, opt
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpTagResourceValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opTagResource(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

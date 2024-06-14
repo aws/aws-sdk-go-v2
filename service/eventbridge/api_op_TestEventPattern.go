@@ -6,14 +6,14 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Tests whether the specified event pattern matches the provided event. Most
-// services in Amazon Web Services treat : or / as the same character in Amazon
-// Resource Names (ARNs). However, EventBridge uses an exact match in event
+// Tests whether the specified event pattern matches the provided event.
+//
+// Most services in Amazon Web Services treat : or / as the same character in
+// Amazon Resource Names (ARNs). However, EventBridge uses an exact match in event
 // patterns and rules. Be sure to use the correct ARN characters when creating
 // event patterns so that they match the ARN syntax in the event you want to match.
 func (c *Client) TestEventPattern(ctx context.Context, params *TestEventPatternInput, optFns ...func(*Options)) (*TestEventPatternOutput, error) {
@@ -34,21 +34,31 @@ func (c *Client) TestEventPattern(ctx context.Context, params *TestEventPatternI
 type TestEventPatternInput struct {
 
 	// The event, in JSON format, to test against the event pattern. The JSON must
-	// follow the format specified in Amazon Web Services Events (https://docs.aws.amazon.com/eventbridge/latest/userguide/aws-events.html)
-	// , and the following fields are mandatory:
+	// follow the format specified in [Amazon Web Services Events], and the following fields are mandatory:
+	//
 	//   - id
+	//
 	//   - account
+	//
 	//   - source
+	//
 	//   - time
+	//
 	//   - region
+	//
 	//   - resources
+	//
 	//   - detail-type
+	//
+	// [Amazon Web Services Events]: https://docs.aws.amazon.com/eventbridge/latest/userguide/aws-events.html
 	//
 	// This member is required.
 	Event *string
 
-	// The event pattern. For more information, see Events and Event Patterns (https://docs.aws.amazon.com/eventbridge/latest/userguide/eventbridge-and-event-patterns.html)
-	// in the Amazon EventBridge User Guide.
+	// The event pattern. For more information, see [Events and Event Patterns] in the Amazon EventBridge User
+	// Guide .
+	//
+	// [Events and Event Patterns]: https://docs.aws.amazon.com/eventbridge/latest/userguide/eventbridge-and-event-patterns.html
 	//
 	// This member is required.
 	EventPattern *string
@@ -89,25 +99,25 @@ func (c *Client) addOperationTestEventPatternMiddlewares(stack *middleware.Stack
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -122,13 +132,16 @@ func (c *Client) addOperationTestEventPatternMiddlewares(stack *middleware.Stack
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpTestEventPatternValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opTestEventPattern(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

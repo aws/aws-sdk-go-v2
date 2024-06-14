@@ -6,16 +6,18 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/frauddetector/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a list. List is a set of input data for a variable in your event
-// dataset. You use the input data in a rule that's associated with your detector.
-// For more information, see Lists (https://docs.aws.amazon.com/frauddetector/latest/ug/lists.html)
-// .
+//	Creates a list.
+//
+// List is a set of input data for a variable in your event dataset. You use the
+// input data in a rule that's associated with your detector. For more information,
+// see [Lists].
+//
+// [Lists]: https://docs.aws.amazon.com/frauddetector/latest/ug/lists.html
 func (c *Client) CreateList(ctx context.Context, params *CreateListInput, optFns ...func(*Options)) (*CreateListOutput, error) {
 	if params == nil {
 		params = &CreateListInput{}
@@ -33,25 +35,27 @@ func (c *Client) CreateList(ctx context.Context, params *CreateListInput, optFns
 
 type CreateListInput struct {
 
-	// The name of the list.
+	//  The name of the list.
 	//
 	// This member is required.
 	Name *string
 
-	// The description of the list.
+	//  The description of the list.
 	Description *string
 
-	// The names of the elements, if providing. You can also create an empty list and
-	// add elements later using the UpdateList (https://docs.aws.amazon.com/frauddetector/latest/api/API_Updatelist.html)
-	// API.
+	//  The names of the elements, if providing. You can also create an empty list and
+	// add elements later using the [UpdateList]API.
+	//
+	// [UpdateList]: https://docs.aws.amazon.com/frauddetector/latest/api/API_Updatelist.html
 	Elements []string
 
-	// A collection of the key and value pairs.
+	//  A collection of the key and value pairs.
 	Tags []types.Tag
 
-	// The variable type of the list. You can only assign the variable type with
-	// String data type. For more information, see Variable types (https://docs.aws.amazon.com/frauddetector/latest/ug/create-a-variable.html#variable-types)
-	// .
+	//  The variable type of the list. You can only assign the variable type with
+	// String data type. For more information, see [Variable types].
+	//
+	// [Variable types]: https://docs.aws.amazon.com/frauddetector/latest/ug/create-a-variable.html#variable-types
 	VariableType *string
 
 	noSmithyDocumentSerde
@@ -86,25 +90,25 @@ func (c *Client) addOperationCreateListMiddlewares(stack *middleware.Stack, opti
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -119,13 +123,16 @@ func (c *Client) addOperationCreateListMiddlewares(stack *middleware.Stack, opti
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpCreateListValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateList(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

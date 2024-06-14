@@ -6,13 +6,13 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/omics/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists all shares associated with an account.
+// Retrieves the resource shares associated with an account. Use the filter
+// parameter to retrieve a specific subset of the shares.
 func (c *Client) ListShares(ctx context.Context, params *ListSharesInput, optFns ...func(*Options)) (*ListSharesOutput, error) {
 	if params == nil {
 		params = &ListSharesInput{}
@@ -30,12 +30,12 @@ func (c *Client) ListShares(ctx context.Context, params *ListSharesInput, optFns
 
 type ListSharesInput struct {
 
-	// The account that owns the analytics store shared.
+	// The account that owns the resource shares.
 	//
 	// This member is required.
 	ResourceOwner types.ResourceOwner
 
-	// Attributes used to filter for a specific subset of shares.
+	// Attributes that you use to filter for a specific subset of resource shares.
 	Filter *types.Filter
 
 	// The maximum number of shares to return in one page of results.
@@ -50,13 +50,13 @@ type ListSharesInput struct {
 
 type ListSharesOutput struct {
 
-	// The shares available and their meta details.
+	// The shares available and their metadata details.
 	//
 	// This member is required.
 	Shares []types.ShareDetails
 
-	// Next token returned in the response of a previous ListSharesResponse call. Used
-	// to get the next page of results.
+	//  Next token returned in the response of a previous ListSharesResponse call.
+	// Used to get the next page of results.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -87,25 +87,25 @@ func (c *Client) addOperationListSharesMiddlewares(stack *middleware.Stack, opti
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -120,6 +120,9 @@ func (c *Client) addOperationListSharesMiddlewares(stack *middleware.Stack, opti
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addEndpointPrefix_opListSharesMiddleware(stack); err != nil {
 		return err
 	}
@@ -129,7 +132,7 @@ func (c *Client) addOperationListSharesMiddlewares(stack *middleware.Stack, opti
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListShares(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

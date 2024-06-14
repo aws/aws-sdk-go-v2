@@ -6,24 +6,30 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
-// Lists training jobs. When StatusEquals and MaxResults are set at the same time,
-// the MaxResults number of training jobs are first retrieved ignoring the
-// StatusEquals parameter and then they are filtered by the StatusEquals
-// parameter, which is returned as a response. For example, if ListTrainingJobs is
-// invoked with the following parameters: { ... MaxResults: 100, StatusEquals:
-// InProgress ... } First, 100 trainings jobs with any status, including those
-// other than InProgress , are selected (sorted according to the creation time,
-// from the most current to the oldest). Next, those with a status of InProgress
-// are returned. You can quickly test the API using the following Amazon Web
-// Services CLI code. aws sagemaker list-training-jobs --max-results 100
-// --status-equals InProgress
+// Lists training jobs.
+//
+// When StatusEquals and MaxResults are set at the same time, the MaxResults
+// number of training jobs are first retrieved ignoring the StatusEquals parameter
+// and then they are filtered by the StatusEquals parameter, which is returned as
+// a response.
+//
+// For example, if ListTrainingJobs is invoked with the following parameters:
+//
+//	{ ... MaxResults: 100, StatusEquals: InProgress ... }
+//
+// First, 100 trainings jobs with any status, including those other than InProgress
+// , are selected (sorted according to the creation time, from the most current to
+// the oldest). Next, those with a status of InProgress are returned.
+//
+// You can quickly test the API using the following Amazon Web Services CLI code.
+//
+//	aws sagemaker list-training-jobs --max-results 100 --status-equals InProgress
 func (c *Client) ListTrainingJobs(ctx context.Context, params *ListTrainingJobsInput, optFns ...func(*Options)) (*ListTrainingJobsOutput, error) {
 	if params == nil {
 		params = &ListTrainingJobsInput{}
@@ -123,25 +129,25 @@ func (c *Client) addOperationListTrainingJobsMiddlewares(stack *middleware.Stack
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -156,10 +162,13 @@ func (c *Client) addOperationListTrainingJobsMiddlewares(stack *middleware.Stack
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListTrainingJobs(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

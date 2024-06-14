@@ -6,23 +6,27 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/ecs/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Deregisters an Amazon ECS container instance from the specified cluster. This
-// instance is no longer available to run tasks. If you intend to use the container
-// instance for some other purpose after deregistration, we recommend that you stop
-// all of the tasks running on the container instance before deregistration. That
-// prevents any orphaned tasks from consuming resources. Deregistering a container
-// instance removes the instance from a cluster, but it doesn't terminate the EC2
-// instance. If you are finished using the instance, be sure to terminate it in the
-// Amazon EC2 console to stop billing. If you terminate a running container
-// instance, Amazon ECS automatically deregisters the instance from your cluster
-// (stopped container instances or instances with disconnected agents aren't
-// automatically deregistered when terminated).
+// instance is no longer available to run tasks.
+//
+// If you intend to use the container instance for some other purpose after
+// deregistration, we recommend that you stop all of the tasks running on the
+// container instance before deregistration. That prevents any orphaned tasks from
+// consuming resources.
+//
+// Deregistering a container instance removes the instance from a cluster, but it
+// doesn't terminate the EC2 instance. If you are finished using the instance, be
+// sure to terminate it in the Amazon EC2 console to stop billing.
+//
+// If you terminate a running container instance, Amazon ECS automatically
+// deregisters the instance from your cluster (stopped container instances or
+// instances with disconnected agents aren't automatically deregistered when
+// terminated).
 func (c *Client) DeregisterContainerInstance(ctx context.Context, params *DeregisterContainerInstanceInput, optFns ...func(*Options)) (*DeregisterContainerInstanceOutput, error) {
 	if params == nil {
 		params = &DeregisterContainerInstanceInput{}
@@ -41,8 +45,10 @@ func (c *Client) DeregisterContainerInstance(ctx context.Context, params *Deregi
 type DeregisterContainerInstanceInput struct {
 
 	// The container instance ID or full ARN of the container instance to deregister.
-	// For more information about the ARN format, see Amazon Resource Name (ARN) (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-account-settings.html#ecs-resource-ids)
-	// in the Amazon ECS Developer Guide.
+	// For more information about the ARN format, see [Amazon Resource Name (ARN)]in the Amazon ECS Developer
+	// Guide.
+	//
+	// [Amazon Resource Name (ARN)]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-account-settings.html#ecs-resource-ids
 	//
 	// This member is required.
 	ContainerInstance *string
@@ -58,10 +64,12 @@ type DeregisterContainerInstanceInput struct {
 	// some other means, but they're orphaned (no longer monitored or accounted for by
 	// Amazon ECS). If an orphaned task on your container instance is part of an Amazon
 	// ECS service, then the service scheduler starts another copy of that task, on a
-	// different container instance if possible. Any containers in orphaned service
-	// tasks that are registered with a Classic Load Balancer or an Application Load
-	// Balancer target group are deregistered. They begin connection draining according
-	// to the settings on the load balancer or target group.
+	// different container instance if possible.
+	//
+	// Any containers in orphaned service tasks that are registered with a Classic
+	// Load Balancer or an Application Load Balancer target group are deregistered.
+	// They begin connection draining according to the settings on the load balancer or
+	// target group.
 	Force *bool
 
 	noSmithyDocumentSerde
@@ -100,25 +108,25 @@ func (c *Client) addOperationDeregisterContainerInstanceMiddlewares(stack *middl
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -133,13 +141,16 @@ func (c *Client) addOperationDeregisterContainerInstanceMiddlewares(stack *middl
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDeregisterContainerInstanceValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDeregisterContainerInstance(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

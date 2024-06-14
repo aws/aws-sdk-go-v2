@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/iam/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -14,9 +13,11 @@ import (
 )
 
 // Returns the SAML provider metadocument that was uploaded when the IAM SAML
-// provider resource object was created or updated. This operation requires
-// Signature Version 4 (https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html)
-// .
+// provider resource object was created or updated.
+//
+// This operation requires [Signature Version 4].
+//
+// [Signature Version 4]: https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html
 func (c *Client) GetSAMLProvider(ctx context.Context, params *GetSAMLProviderInput, optFns ...func(*Options)) (*GetSAMLProviderOutput, error) {
 	if params == nil {
 		params = &GetSAMLProviderInput{}
@@ -35,9 +36,12 @@ func (c *Client) GetSAMLProvider(ctx context.Context, params *GetSAMLProviderInp
 type GetSAMLProviderInput struct {
 
 	// The Amazon Resource Name (ARN) of the SAML provider resource object in IAM to
-	// get information about. For more information about ARNs, see Amazon Resource
-	// Names (ARNs) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
-	// in the Amazon Web Services General Reference.
+	// get information about.
+	//
+	// For more information about ARNs, see [Amazon Resource Names (ARNs)] in the Amazon Web Services General
+	// Reference.
+	//
+	// [Amazon Resource Names (ARNs)]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
 	//
 	// This member is required.
 	SAMLProviderArn *string
@@ -56,8 +60,9 @@ type GetSAMLProviderOutput struct {
 
 	// A list of tags that are attached to the specified IAM SAML provider. The
 	// returned list of tags is sorted by tag key. For more information about tagging,
-	// see Tagging IAM resources (https://docs.aws.amazon.com/IAM/latest/UserGuide/id_tags.html)
-	// in the IAM User Guide.
+	// see [Tagging IAM resources]in the IAM User Guide.
+	//
+	// [Tagging IAM resources]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_tags.html
 	Tags []types.Tag
 
 	// The expiration date and time for the SAML provider.
@@ -91,25 +96,25 @@ func (c *Client) addOperationGetSAMLProviderMiddlewares(stack *middleware.Stack,
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -124,13 +129,16 @@ func (c *Client) addOperationGetSAMLProviderMiddlewares(stack *middleware.Stack,
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpGetSAMLProviderValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetSAMLProvider(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

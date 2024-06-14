@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/pipes/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -21,9 +20,11 @@ import (
 // . EventBridge updates the fields in these objects atomically as one and
 // overrides existing values. This is by design, and means that if you don't
 // specify an optional field in one of these Parameters objects, EventBridge sets
-// that field to its system-default value during the update. For more information
-// about pipes, see Amazon EventBridge Pipes (https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-pipes.html)
-// in the Amazon EventBridge User Guide.
+// that field to its system-default value during the update.
+//
+// For more information about pipes, see [Amazon EventBridge Pipes] in the Amazon EventBridge User Guide.
+//
+// [Amazon EventBridge Pipes]: https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-pipes.html
 func (c *Client) UpdatePipe(ctx context.Context, params *UpdatePipeInput, optFns ...func(*Options)) (*UpdatePipeOutput, error) {
 	if params == nil {
 		params = &UpdatePipeInput{}
@@ -72,10 +73,12 @@ type UpdatePipeInput struct {
 	// The ARN of the target resource.
 	Target *string
 
-	// The parameters required to set up a target for your pipe. For more information
-	// about pipe target parameters, including how to use dynamic path parameters, see
-	// Target parameters (https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-pipes-event-target.html)
-	// in the Amazon EventBridge User Guide.
+	// The parameters required to set up a target for your pipe.
+	//
+	// For more information about pipe target parameters, including how to use dynamic
+	// path parameters, see [Target parameters]in the Amazon EventBridge User Guide.
+	//
+	// [Target parameters]: https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-pipes-event-target.html
 	TargetParameters *types.PipeTargetParameters
 
 	noSmithyDocumentSerde
@@ -95,8 +98,9 @@ type UpdatePipeOutput struct {
 	// The state the pipe should be in.
 	DesiredState types.RequestedPipeState
 
-	// When the pipe was last updated, in ISO-8601 format (https://www.w3.org/TR/NOTE-datetime)
-	// (YYYY-MM-DDThh:mm:ss.sTZD).
+	// When the pipe was last updated, in [ISO-8601 format] (YYYY-MM-DDThh:mm:ss.sTZD).
+	//
+	// [ISO-8601 format]: https://www.w3.org/TR/NOTE-datetime
 	LastModifiedTime *time.Time
 
 	// The name of the pipe.
@@ -130,25 +134,25 @@ func (c *Client) addOperationUpdatePipeMiddlewares(stack *middleware.Stack, opti
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -163,13 +167,16 @@ func (c *Client) addOperationUpdatePipeMiddlewares(stack *middleware.Stack, opti
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpUpdatePipeValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdatePipe(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

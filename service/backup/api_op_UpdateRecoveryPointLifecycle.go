@@ -6,24 +6,29 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/backup/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Sets the transition lifecycle of a recovery point. The lifecycle defines when a
-// protected resource is transitioned to cold storage and when it expires. Backup
-// transitions and expires backups automatically according to the lifecycle that
-// you define. Backups transitioned to cold storage must be stored in cold storage
-// for a minimum of 90 days. Therefore, the “retention” setting must be 90 days
-// greater than the “transition to cold after days” setting. The “transition to
-// cold after days” setting cannot be changed after a backup has been transitioned
-// to cold. Resource types that are able to be transitioned to cold storage are
-// listed in the "Lifecycle to cold storage" section of the Feature availability
-// by resource (https://docs.aws.amazon.com/aws-backup/latest/devguide/whatisbackup.html#features-by-resource)
-// table. Backup ignores this expression for other resource types. This operation
-// does not support continuous backups.
+// Sets the transition lifecycle of a recovery point.
+//
+// The lifecycle defines when a protected resource is transitioned to cold storage
+// and when it expires. Backup transitions and expires backups automatically
+// according to the lifecycle that you define.
+//
+// Backups transitioned to cold storage must be stored in cold storage for a
+// minimum of 90 days. Therefore, the “retention” setting must be 90 days greater
+// than the “transition to cold after days” setting. The “transition to cold after
+// days” setting cannot be changed after a backup has been transitioned to cold.
+//
+// Resource types that are able to be transitioned to cold storage are listed in
+// the "Lifecycle to cold storage" section of the [Feature availability by resource]table. Backup ignores this
+// expression for other resource types.
+//
+// This operation does not support continuous backups.
+//
+// [Feature availability by resource]: https://docs.aws.amazon.com/aws-backup/latest/devguide/whatisbackup.html#features-by-resource
 func (c *Client) UpdateRecoveryPointLifecycle(ctx context.Context, params *UpdateRecoveryPointLifecycleInput, optFns ...func(*Options)) (*UpdateRecoveryPointLifecycleOutput, error) {
 	if params == nil {
 		params = &UpdateRecoveryPointLifecycleInput{}
@@ -59,11 +64,12 @@ type UpdateRecoveryPointLifecycleInput struct {
 
 	// The lifecycle defines when a protected resource is transitioned to cold storage
 	// and when it expires. Backup transitions and expires backups automatically
-	// according to the lifecycle that you define. Backups transitioned to cold storage
-	// must be stored in cold storage for a minimum of 90 days. Therefore, the
-	// “retention” setting must be 90 days greater than the “transition to cold after
-	// days” setting. The “transition to cold after days” setting cannot be changed
-	// after a backup has been transitioned to cold.
+	// according to the lifecycle that you define.
+	//
+	// Backups transitioned to cold storage must be stored in cold storage for a
+	// minimum of 90 days. Therefore, the “retention” setting must be 90 days greater
+	// than the “transition to cold after days” setting. The “transition to cold after
+	// days” setting cannot be changed after a backup has been transitioned to cold.
 	Lifecycle *types.Lifecycle
 
 	noSmithyDocumentSerde
@@ -81,14 +87,18 @@ type UpdateRecoveryPointLifecycleOutput struct {
 
 	// The lifecycle defines when a protected resource is transitioned to cold storage
 	// and when it expires. Backup transitions and expires backups automatically
-	// according to the lifecycle that you define. Backups transitioned to cold storage
-	// must be stored in cold storage for a minimum of 90 days. Therefore, the
-	// “retention” setting must be 90 days greater than the “transition to cold after
-	// days” setting. The “transition to cold after days” setting cannot be changed
-	// after a backup has been transitioned to cold. Resource types that are able to be
-	// transitioned to cold storage are listed in the "Lifecycle to cold storage"
-	// section of the Feature availability by resource (https://docs.aws.amazon.com/aws-backup/latest/devguide/whatisbackup.html#features-by-resource)
-	// table. Backup ignores this expression for other resource types.
+	// according to the lifecycle that you define.
+	//
+	// Backups transitioned to cold storage must be stored in cold storage for a
+	// minimum of 90 days. Therefore, the “retention” setting must be 90 days greater
+	// than the “transition to cold after days” setting. The “transition to cold after
+	// days” setting cannot be changed after a backup has been transitioned to cold.
+	//
+	// Resource types that are able to be transitioned to cold storage are listed in
+	// the "Lifecycle to cold storage" section of the [Feature availability by resource]table. Backup ignores this
+	// expression for other resource types.
+	//
+	// [Feature availability by resource]: https://docs.aws.amazon.com/aws-backup/latest/devguide/whatisbackup.html#features-by-resource
 	Lifecycle *types.Lifecycle
 
 	// An Amazon Resource Name (ARN) that uniquely identifies a recovery point; for
@@ -125,25 +135,25 @@ func (c *Client) addOperationUpdateRecoveryPointLifecycleMiddlewares(stack *midd
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -158,13 +168,16 @@ func (c *Client) addOperationUpdateRecoveryPointLifecycleMiddlewares(stack *midd
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpUpdateRecoveryPointLifecycleValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateRecoveryPointLifecycle(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

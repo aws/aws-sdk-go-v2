@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/docdb/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -30,29 +29,42 @@ func (c *Client) DeleteDBCluster(ctx context.Context, params *DeleteDBClusterInp
 	return out, nil
 }
 
-// Represents the input to DeleteDBCluster .
+// Represents the input to DeleteDBCluster.
 type DeleteDBClusterInput struct {
 
 	// The cluster identifier for the cluster to be deleted. This parameter isn't case
-	// sensitive. Constraints:
+	// sensitive.
+	//
+	// Constraints:
+	//
 	//   - Must match an existing DBClusterIdentifier .
 	//
 	// This member is required.
 	DBClusterIdentifier *string
 
-	// The cluster snapshot identifier of the new cluster snapshot created when
-	// SkipFinalSnapshot is set to false . Specifying this parameter and also setting
-	// the SkipFinalShapshot parameter to true results in an error. Constraints:
+	//  The cluster snapshot identifier of the new cluster snapshot created when
+	// SkipFinalSnapshot is set to false .
+	//
+	// Specifying this parameter and also setting the SkipFinalShapshot parameter to
+	// true results in an error.
+	//
+	// Constraints:
+	//
 	//   - Must be from 1 to 255 letters, numbers, or hyphens.
+	//
 	//   - The first character must be a letter.
+	//
 	//   - Cannot end with a hyphen or contain two consecutive hyphens.
 	FinalDBSnapshotIdentifier *string
 
-	// Determines whether a final cluster snapshot is created before the cluster is
+	//  Determines whether a final cluster snapshot is created before the cluster is
 	// deleted. If true is specified, no cluster snapshot is created. If false is
-	// specified, a cluster snapshot is created before the DB cluster is deleted. If
-	// SkipFinalSnapshot is false , you must specify a FinalDBSnapshotIdentifier
-	// parameter. Default: false
+	// specified, a cluster snapshot is created before the DB cluster is deleted.
+	//
+	// If SkipFinalSnapshot is false , you must specify a FinalDBSnapshotIdentifier
+	// parameter.
+	//
+	// Default: false
 	SkipFinalSnapshot *bool
 
 	noSmithyDocumentSerde
@@ -91,25 +103,25 @@ func (c *Client) addOperationDeleteDBClusterMiddlewares(stack *middleware.Stack,
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -124,13 +136,16 @@ func (c *Client) addOperationDeleteDBClusterMiddlewares(stack *middleware.Stack,
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDeleteDBClusterValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteDBCluster(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

@@ -6,17 +6,17 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/storagegateway/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Returns a description of the gateway volumes specified in the request. This
-// operation is only supported in the cached volume gateway types. The list of
-// gateway volumes in the request must be from one gateway. In the response,
-// Storage Gateway returns volume information sorted by volume Amazon Resource Name
-// (ARN).
+// operation is only supported in the cached volume gateway types.
+//
+// The list of gateway volumes in the request must be from one gateway. In the
+// response, Storage Gateway returns volume information sorted by volume Amazon
+// Resource Name (ARN).
 func (c *Client) DescribeCachediSCSIVolumes(ctx context.Context, params *DescribeCachediSCSIVolumesInput, optFns ...func(*Options)) (*DescribeCachediSCSIVolumesOutput, error) {
 	if params == nil {
 		params = &DescribeCachediSCSIVolumesInput{}
@@ -36,7 +36,7 @@ type DescribeCachediSCSIVolumesInput struct {
 
 	// An array of strings where each string represents the Amazon Resource Name (ARN)
 	// of a cached volume. All of the specified cached volumes must be from the same
-	// gateway. Use ListVolumes to get volume ARNs for a gateway.
+	// gateway. Use ListVolumesto get volume ARNs for a gateway.
 	//
 	// This member is required.
 	VolumeARNs []string
@@ -78,25 +78,25 @@ func (c *Client) addOperationDescribeCachediSCSIVolumesMiddlewares(stack *middle
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -111,13 +111,16 @@ func (c *Client) addOperationDescribeCachediSCSIVolumesMiddlewares(stack *middle
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDescribeCachediSCSIVolumesValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeCachediSCSIVolumes(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

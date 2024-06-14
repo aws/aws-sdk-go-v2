@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/redshift/types"
 	"github.com/aws/smithy-go/middleware"
 	smithytime "github.com/aws/smithy-go/time"
@@ -19,15 +18,18 @@ import (
 // Returns one or more snapshot objects, which contain metadata about your cluster
 // snapshots. By default, this operation returns information about all snapshots of
 // all clusters that are owned by your Amazon Web Services account. No information
-// is returned for snapshots owned by inactive Amazon Web Services accounts. If you
-// specify both tag keys and tag values in the same request, Amazon Redshift
-// returns all snapshots that match any combination of the specified keys and
-// values. For example, if you have owner and environment for tag keys, and admin
-// and test for tag values, all snapshots that have any combination of those
+// is returned for snapshots owned by inactive Amazon Web Services accounts.
+//
+// If you specify both tag keys and tag values in the same request, Amazon
+// Redshift returns all snapshots that match any combination of the specified keys
+// and values. For example, if you have owner and environment for tag keys, and
+// admin and test for tag values, all snapshots that have any combination of those
 // values are returned. Only snapshots that you own are returned in the response;
 // shared snapshots are not returned with the tag key and tag value request
-// parameters. If both tag keys and values are omitted from the request, snapshots
-// are returned regardless of whether they have tag keys or values associated with
+// parameters.
+//
+// If both tag keys and values are omitted from the request, snapshots are
+// returned regardless of whether they have tag keys or values associated with
 // them.
 func (c *Client) DescribeClusterSnapshots(ctx context.Context, params *DescribeClusterSnapshotsInput, optFns ...func(*Options)) (*DescribeClusterSnapshotsOutput, error) {
 	if params == nil {
@@ -50,11 +52,15 @@ type DescribeClusterSnapshotsInput struct {
 	// cluster. You can perform table-level restore only by using a snapshot of an
 	// existing cluster, that is, a cluster that has not been deleted. Values for this
 	// parameter work as follows:
+	//
 	//   - If ClusterExists is set to true , ClusterIdentifier is required.
+	//
 	//   - If ClusterExists is set to false and ClusterIdentifier isn't specified, all
 	//   snapshots associated with deleted clusters (orphaned snapshots) are returned.
+	//
 	//   - If ClusterExists is set to false and ClusterIdentifier is specified for a
 	//   deleted cluster, snapshots associated with that cluster are returned.
+	//
 	//   - If ClusterExists is set to false and ClusterIdentifier is specified for an
 	//   existing cluster, no snapshots are returned.
 	ClusterExists *bool
@@ -64,22 +70,27 @@ type DescribeClusterSnapshotsInput struct {
 
 	// A time value that requests only snapshots created at or before the specified
 	// time. The time value is specified in ISO 8601 format. For more information about
-	// ISO 8601, go to the ISO8601 Wikipedia page. (http://en.wikipedia.org/wiki/ISO_8601)
+	// ISO 8601, go to the [ISO8601 Wikipedia page.]
+	//
 	// Example: 2012-07-16T18:00:00Z
+	//
+	// [ISO8601 Wikipedia page.]: http://en.wikipedia.org/wiki/ISO_8601
 	EndTime *time.Time
 
 	// An optional parameter that specifies the starting point to return a set of
-	// response records. When the results of a DescribeClusterSnapshots request exceed
-	// the value specified in MaxRecords , Amazon Web Services returns a value in the
-	// Marker field of the response. You can retrieve the next set of response records
-	// by providing the returned marker value in the Marker parameter and retrying the
-	// request.
+	// response records. When the results of a DescribeClusterSnapshotsrequest exceed the value specified in
+	// MaxRecords , Amazon Web Services returns a value in the Marker field of the
+	// response. You can retrieve the next set of response records by providing the
+	// returned marker value in the Marker parameter and retrying the request.
 	Marker *string
 
 	// The maximum number of response records to return in each call. If the number of
 	// remaining response records exceeds the specified MaxRecords value, a value is
 	// returned in a marker field of the response. You can retrieve the next set of
-	// records by retrying the command with the returned marker value. Default: 100
+	// records by retrying the command with the returned marker value.
+	//
+	// Default: 100
+	//
 	// Constraints: minimum 20, maximum 100.
 	MaxRecords *int32
 
@@ -97,7 +108,9 @@ type DescribeClusterSnapshotsInput struct {
 	SnapshotIdentifier *string
 
 	// The type of snapshots for which you are requesting information. By default,
-	// snapshots of all types are returned. Valid Values: automated | manual
+	// snapshots of all types are returned.
+	//
+	// Valid Values: automated | manual
 	SnapshotType *string
 
 	//
@@ -105,8 +118,11 @@ type DescribeClusterSnapshotsInput struct {
 
 	// A value that requests only snapshots created at or after the specified time.
 	// The time value is specified in ISO 8601 format. For more information about ISO
-	// 8601, go to the ISO8601 Wikipedia page. (http://en.wikipedia.org/wiki/ISO_8601)
+	// 8601, go to the [ISO8601 Wikipedia page.]
+	//
 	// Example: 2012-07-16T18:00:00Z
+	//
+	// [ISO8601 Wikipedia page.]: http://en.wikipedia.org/wiki/ISO_8601
 	StartTime *time.Time
 
 	// A tag key or keys for which you want to return all matching cluster snapshots
@@ -169,25 +185,25 @@ func (c *Client) addOperationDescribeClusterSnapshotsMiddlewares(stack *middlewa
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -202,13 +218,16 @@ func (c *Client) addOperationDescribeClusterSnapshotsMiddlewares(stack *middlewa
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDescribeClusterSnapshotsValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeClusterSnapshots(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -240,7 +259,10 @@ type DescribeClusterSnapshotsPaginatorOptions struct {
 	// The maximum number of response records to return in each call. If the number of
 	// remaining response records exceeds the specified MaxRecords value, a value is
 	// returned in a marker field of the response. You can retrieve the next set of
-	// records by retrying the command with the returned marker value. Default: 100
+	// records by retrying the command with the returned marker value.
+	//
+	// Default: 100
+	//
 	// Constraints: minimum 20, maximum 100.
 	Limit int32
 
@@ -328,7 +350,16 @@ type SnapshotAvailableWaiterOptions struct {
 	// Set of options to modify how an operation is invoked. These apply to all
 	// operations invoked for this client. Use functional options on operation call to
 	// modify this list for per operation behavior.
+	//
+	// Passing options here is functionally equivalent to passing values to this
+	// config's ClientOptions field that extend the inner client's APIOptions directly.
 	APIOptions []func(*middleware.Stack) error
+
+	// Functional options to be passed to all operations invoked by this client.
+	//
+	// Function values that modify the inner APIOptions are applied after the waiter
+	// config's own APIOptions modifiers.
+	ClientOptions []func(*Options)
 
 	// MinDelay is the minimum amount of time to delay between retries. If unset,
 	// SnapshotAvailableWaiter will use default minimum delay of 15 seconds. Note that
@@ -345,12 +376,13 @@ type SnapshotAvailableWaiterOptions struct {
 
 	// Retryable is function that can be used to override the service defined
 	// waiter-behavior based on operation output, or returned error. This function is
-	// used by the waiter to decide if a state is retryable or a terminal state. By
-	// default service-modeled logic will populate this option. This option can thus be
-	// used to define a custom waiter state with fall-back to service-modeled waiter
-	// state mutators.The function returns an error in case of a failure state. In case
-	// of retry state, this function returns a bool value of true and nil error, while
-	// in case of success it returns a bool value of false and nil error.
+	// used by the waiter to decide if a state is retryable or a terminal state.
+	//
+	// By default service-modeled logic will populate this option. This option can
+	// thus be used to define a custom waiter state with fall-back to service-modeled
+	// waiter state mutators.The function returns an error in case of a failure state.
+	// In case of retry state, this function returns a bool value of true and nil
+	// error, while in case of success it returns a bool value of false and nil error.
 	Retryable func(context.Context, *DescribeClusterSnapshotsInput, *DescribeClusterSnapshotsOutput, error) (bool, error)
 }
 
@@ -428,6 +460,9 @@ func (w *SnapshotAvailableWaiter) WaitForOutput(ctx context.Context, params *Des
 
 		out, err := w.client.DescribeClusterSnapshots(ctx, params, func(o *Options) {
 			o.APIOptions = append(o.APIOptions, apiOptions...)
+			for _, opt := range options.ClientOptions {
+				opt(o)
+			}
 		})
 
 		retryable, err := options.Retryable(ctx, params, out, err)

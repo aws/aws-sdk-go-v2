@@ -6,19 +6,21 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes the knowledge base. When you use this API to delete an external
-// knowledge base such as Salesforce or ServiceNow, you must also delete the
-// Amazon AppIntegrations (https://docs.aws.amazon.com/appintegrations/latest/APIReference/Welcome.html)
-// DataIntegration. This is because you can't reuse the DataIntegration after it's
-// been associated with an external knowledge base. However, you can delete and
-// recreate it. See DeleteDataIntegration (https://docs.aws.amazon.com/appintegrations/latest/APIReference/API_DeleteDataIntegration.html)
-// and CreateDataIntegration (https://docs.aws.amazon.com/appintegrations/latest/APIReference/API_CreateDataIntegration.html)
-// in the Amazon AppIntegrations API Reference.
+// Deletes the knowledge base.
+//
+// When you use this API to delete an external knowledge base such as Salesforce
+// or ServiceNow, you must also delete the [Amazon AppIntegrations]DataIntegration. This is because you
+// can't reuse the DataIntegration after it's been associated with an external
+// knowledge base. However, you can delete and recreate it. See [DeleteDataIntegration]and [CreateDataIntegration] in the Amazon
+// AppIntegrations API Reference.
+//
+// [Amazon AppIntegrations]: https://docs.aws.amazon.com/appintegrations/latest/APIReference/Welcome.html
+// [DeleteDataIntegration]: https://docs.aws.amazon.com/appintegrations/latest/APIReference/API_DeleteDataIntegration.html
+// [CreateDataIntegration]: https://docs.aws.amazon.com/appintegrations/latest/APIReference/API_CreateDataIntegration.html
 func (c *Client) DeleteKnowledgeBase(ctx context.Context, params *DeleteKnowledgeBaseInput, optFns ...func(*Options)) (*DeleteKnowledgeBaseOutput, error) {
 	if params == nil {
 		params = &DeleteKnowledgeBaseInput{}
@@ -74,25 +76,25 @@ func (c *Client) addOperationDeleteKnowledgeBaseMiddlewares(stack *middleware.St
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -107,13 +109,16 @@ func (c *Client) addOperationDeleteKnowledgeBaseMiddlewares(stack *middleware.St
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDeleteKnowledgeBaseValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteKnowledgeBase(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/shield/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -17,13 +16,15 @@ import (
 // Global Accelerator standard accelerator, Elastic IP Address, Application Load
 // Balancer, or a Classic Load Balancer. You can protect Amazon EC2 instances and
 // Network Load Balancers by association with protected Amazon EC2 Elastic IP
-// addresses. You can add protection to only a single resource with each
-// CreateProtection request. You can add protection to multiple resources at once
-// through the Shield Advanced console at
-// https://console.aws.amazon.com/wafv2/shieldv2#/ (https://console.aws.amazon.com/wafv2/shieldv2#/)
-// . For more information see Getting Started with Shield Advanced (https://docs.aws.amazon.com/waf/latest/developerguide/getting-started-ddos.html)
-// and Adding Shield Advanced protection to Amazon Web Services resources (https://docs.aws.amazon.com/waf/latest/developerguide/configure-new-protection.html)
-// .
+// addresses.
+//
+// You can add protection to only a single resource with each CreateProtection
+// request. You can add protection to multiple resources at once through the Shield
+// Advanced console at [https://console.aws.amazon.com/wafv2/shieldv2#/]. For more information see [Getting Started with Shield Advanced] and [Adding Shield Advanced protection to Amazon Web Services resources].
+//
+// [Adding Shield Advanced protection to Amazon Web Services resources]: https://docs.aws.amazon.com/waf/latest/developerguide/configure-new-protection.html
+// [https://console.aws.amazon.com/wafv2/shieldv2#/]: https://console.aws.amazon.com/wafv2/shieldv2#/
+// [Getting Started with Shield Advanced]: https://docs.aws.amazon.com/waf/latest/developerguide/getting-started-ddos.html
 func (c *Client) CreateProtection(ctx context.Context, params *CreateProtectionInput, optFns ...func(*Options)) (*CreateProtectionOutput, error) {
 	if params == nil {
 		params = &CreateProtectionInput{}
@@ -46,18 +47,24 @@ type CreateProtectionInput struct {
 	// This member is required.
 	Name *string
 
-	// The ARN (Amazon Resource Name) of the resource to be protected. The ARN should
-	// be in one of the following formats:
+	// The ARN (Amazon Resource Name) of the resource to be protected.
+	//
+	// The ARN should be in one of the following formats:
+	//
 	//   - For an Application Load Balancer:
 	//   arn:aws:elasticloadbalancing:region:account-id:loadbalancer/app/load-balancer-name/load-balancer-id
 	//
 	//   - For an Elastic Load Balancer (Classic Load Balancer):
 	//   arn:aws:elasticloadbalancing:region:account-id:loadbalancer/load-balancer-name
+	//
 	//   - For an Amazon CloudFront distribution:
 	//   arn:aws:cloudfront::account-id:distribution/distribution-id
+	//
 	//   - For an Global Accelerator standard accelerator:
 	//   arn:aws:globalaccelerator::account-id:accelerator/accelerator-id
+	//
 	//   - For Amazon Route 53: arn:aws:route53:::hostedzone/hosted-zone-id
+	//
 	//   - For an Elastic IP address:
 	//   arn:aws:ec2:region:account-id:eip-allocation/allocation-id
 	//
@@ -103,25 +110,25 @@ func (c *Client) addOperationCreateProtectionMiddlewares(stack *middleware.Stack
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -136,13 +143,16 @@ func (c *Client) addOperationCreateProtectionMiddlewares(stack *middleware.Stack
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpCreateProtectionValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateProtection(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

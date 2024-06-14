@@ -6,19 +6,22 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Removes the Detective administrator account in the current Region. Deletes the
-// organization behavior graph. Can only be called by the organization management
-// account. Removing the Detective administrator account does not affect the
-// delegated administrator account for Detective in Organizations. To remove the
-// delegated administrator account in Organizations, use the Organizations API.
-// Removing the delegated administrator account also removes the Detective
-// administrator account in all Regions, except for Regions where the Detective
-// administrator account is the organization management account.
+// organization behavior graph.
+//
+// Can only be called by the organization management account.
+//
+// Removing the Detective administrator account does not affect the delegated
+// administrator account for Detective in Organizations.
+//
+// To remove the delegated administrator account in Organizations, use the
+// Organizations API. Removing the delegated administrator account also removes the
+// Detective administrator account in all Regions, except for Regions where the
+// Detective administrator account is the organization management account.
 func (c *Client) DisableOrganizationAdminAccount(ctx context.Context, params *DisableOrganizationAdminAccountInput, optFns ...func(*Options)) (*DisableOrganizationAdminAccountOutput, error) {
 	if params == nil {
 		params = &DisableOrganizationAdminAccountInput{}
@@ -67,25 +70,25 @@ func (c *Client) addOperationDisableOrganizationAdminAccountMiddlewares(stack *m
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -100,10 +103,13 @@ func (c *Client) addOperationDisableOrganizationAdminAccountMiddlewares(stack *m
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDisableOrganizationAdminAccount(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

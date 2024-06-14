@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/pi/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -15,9 +14,11 @@ import (
 
 // Retrieve Performance Insights metrics for a set of data sources over a time
 // period. You can provide specific dimension groups and dimensions, and provide
-// aggregation and filtering criteria for each group. Each response element returns
-// a maximum of 500 bytes. For larger elements, such as SQL statements, only the
-// first 500 bytes are returned.
+// filtering criteria for each group. You must specify an aggregate function for
+// each metric.
+//
+// Each response element returns a maximum of 500 bytes. For larger elements, such
+// as SQL statements, only the first 500 bytes are returned.
 func (c *Client) GetResourceMetrics(ctx context.Context, params *GetResourceMetricsInput, optFns ...func(*Options)) (*GetResourceMetricsOutput, error) {
 	if params == nil {
 		params = &GetResourceMetricsInput{}
@@ -37,8 +38,9 @@ type GetResourceMetricsInput struct {
 
 	// The date and time specifying the end of the requested time series query range.
 	// The value specified is exclusive. Thus, the command returns data points less
-	// than (but not equal to) EndTime . The value for EndTime must be later than the
-	// value for StartTime .
+	// than (but not equal to) EndTime .
+	//
+	// The value for EndTime must be later than the value for StartTime .
 	//
 	// This member is required.
 	EndTime *time.Time
@@ -46,23 +48,29 @@ type GetResourceMetricsInput struct {
 	// An immutable identifier for a data source that is unique for an Amazon Web
 	// Services Region. Performance Insights gathers metrics from this data source. In
 	// the console, the identifier is shown as ResourceID. When you call
-	// DescribeDBInstances , the identifier is returned as DbiResourceId . To use a DB
-	// instance as a data source, specify its DbiResourceId value. For example,
-	// specify db-ABCDEFGHIJKLMNOPQRSTU1VW2X .
+	// DescribeDBInstances , the identifier is returned as DbiResourceId .
+	//
+	// To use a DB instance as a data source, specify its DbiResourceId value. For
+	// example, specify db-ABCDEFGHIJKLMNOPQRSTU1VW2X .
 	//
 	// This member is required.
 	Identifier *string
 
 	// An array of one or more queries to perform. Each query must specify a
-	// Performance Insights metric, and can optionally specify aggregation and
-	// filtering criteria.
+	// Performance Insights metric and specify an aggregate function, and you can
+	// provide filtering criteria. You must append the aggregate function to the
+	// metric. For example, to find the average for the metric db.load you must use
+	// db.load.avg . Valid values for aggregate functions include .avg , .min , .max ,
+	// and .sum .
 	//
 	// This member is required.
 	MetricQueries []types.MetricQuery
 
 	// The Amazon Web Services service for which Performance Insights returns metrics.
 	// Valid values are as follows:
+	//
 	//   - RDS
+	//
 	//   - DOCDB
 	//
 	// This member is required.
@@ -72,8 +80,9 @@ type GetResourceMetricsInput struct {
 	// range. You can't specify a StartTime that is earlier than 7 days ago. By
 	// default, Performance Insights has 7 days of retention, but you can extend this
 	// range up to 2 years. The value specified is inclusive. Thus, the command returns
-	// data points equal to or greater than StartTime . The value for StartTime must
-	// be earlier than the value for EndTime .
+	// data points equal to or greater than StartTime .
+	//
+	// The value for StartTime must be earlier than the value for EndTime .
 	//
 	// This member is required.
 	StartTime *time.Time
@@ -95,11 +104,17 @@ type GetResourceMetricsInput struct {
 	// The granularity, in seconds, of the data points returned from Performance
 	// Insights. A period can be as short as one second, or as long as one day (86400
 	// seconds). Valid values are:
+	//
 	//   - 1 (one second)
+	//
 	//   - 60 (one minute)
+	//
 	//   - 300 (five minutes)
+	//
 	//   - 3600 (one hour)
+	//
 	//   - 86400 (twenty-four hours)
+	//
 	// If you don't specify PeriodInSeconds , then Performance Insights will choose a
 	// value for you, with a goal of returning roughly 100-200 data points in the
 	// response.
@@ -163,25 +178,25 @@ func (c *Client) addOperationGetResourceMetricsMiddlewares(stack *middleware.Sta
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -196,13 +211,16 @@ func (c *Client) addOperationGetResourceMetricsMiddlewares(stack *middleware.Sta
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpGetResourceMetricsValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetResourceMetrics(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

@@ -85,8 +85,8 @@ func (e *InternalServerException) ErrorCode() string {
 }
 func (e *InternalServerException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
-// The specified resource ARN was not found. Check the ARN and try your request
-// again.
+// The specified resource Amazon Resource Name (ARN) was not found. Check the
+// Amazon Resource Name (ARN) and try your request again.
 type ResourceNotFoundException struct {
 	Message *string
 

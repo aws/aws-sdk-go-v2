@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/configservice/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -15,10 +14,11 @@ import (
 // Returns the current status of the specified configuration recorder as well as
 // the status of the last recording event for the recorder. If a configuration
 // recorder is not specified, this action returns the status of all configuration
-// recorders associated with the account. >You can specify only one configuration
-// recorder for each Amazon Web Services Region for each account. For a detailed
-// status of recording events over time, add your Config events to Amazon
-// CloudWatch metrics and use CloudWatch metrics.
+// recorders associated with the account.
+//
+// >You can specify only one configuration recorder for each Amazon Web Services
+// Region for each account. For a detailed status of recording events over time,
+// add your Config events to Amazon CloudWatch metrics and use CloudWatch metrics.
 func (c *Client) DescribeConfigurationRecorderStatus(ctx context.Context, params *DescribeConfigurationRecorderStatusInput, optFns ...func(*Options)) (*DescribeConfigurationRecorderStatusOutput, error) {
 	if params == nil {
 		params = &DescribeConfigurationRecorderStatusInput{}
@@ -79,25 +79,25 @@ func (c *Client) addOperationDescribeConfigurationRecorderStatusMiddlewares(stac
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -112,10 +112,13 @@ func (c *Client) addOperationDescribeConfigurationRecorderStatusMiddlewares(stac
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeConfigurationRecorderStatus(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

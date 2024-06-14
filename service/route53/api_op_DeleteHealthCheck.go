@@ -6,24 +6,26 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes a health check. Amazon Route 53 does not prevent you from deleting a
-// health check even if the health check is associated with one or more resource
-// record sets. If you delete a health check and you don't update the associated
-// resource record sets, the future status of the health check can't be predicted
-// and may change. This will affect the routing of DNS queries for your DNS
-// failover configuration. For more information, see Replacing and Deleting Health
-// Checks (https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/health-checks-creating-deleting.html#health-checks-deleting.html)
-// in the Amazon Route 53 Developer Guide. If you're using Cloud Map and you
-// configured Cloud Map to create a Route 53 health check when you register an
-// instance, you can't use the Route 53 DeleteHealthCheck command to delete the
-// health check. The health check is deleted automatically when you deregister the
-// instance; there can be a delay of several hours before the health check is
-// deleted from Route 53.
+// Deletes a health check.
+//
+// Amazon Route 53 does not prevent you from deleting a health check even if the
+// health check is associated with one or more resource record sets. If you delete
+// a health check and you don't update the associated resource record sets, the
+// future status of the health check can't be predicted and may change. This will
+// affect the routing of DNS queries for your DNS failover configuration. For more
+// information, see [Replacing and Deleting Health Checks]in the Amazon Route 53 Developer Guide.
+//
+// If you're using Cloud Map and you configured Cloud Map to create a Route 53
+// health check when you register an instance, you can't use the Route 53
+// DeleteHealthCheck command to delete the health check. The health check is
+// deleted automatically when you deregister the instance; there can be a delay of
+// several hours before the health check is deleted from Route 53.
+//
+// [Replacing and Deleting Health Checks]: https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/health-checks-creating-deleting.html#health-checks-deleting.html
 func (c *Client) DeleteHealthCheck(ctx context.Context, params *DeleteHealthCheckInput, optFns ...func(*Options)) (*DeleteHealthCheckOutput, error) {
 	if params == nil {
 		params = &DeleteHealthCheckInput{}
@@ -80,25 +82,25 @@ func (c *Client) addOperationDeleteHealthCheckMiddlewares(stack *middleware.Stac
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -113,13 +115,16 @@ func (c *Client) addOperationDeleteHealthCheckMiddlewares(stack *middleware.Stac
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDeleteHealthCheckValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteHealthCheck(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

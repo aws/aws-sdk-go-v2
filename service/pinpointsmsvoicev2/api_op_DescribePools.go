@@ -6,20 +6,24 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/pinpointsmsvoicev2/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Retrieves the specified pools or all pools associated with your Amazon Web
-// Services account. If you specify pool IDs, the output includes information for
-// only the specified pools. If you specify filters, the output includes
-// information for only those pools that meet the filter criteria. If you don't
-// specify pool IDs or filters, the output includes information for all pools. If
-// you specify a pool ID that isn't valid, an error is returned. A pool is a
-// collection of phone numbers and SenderIds. A pool can include one or more phone
-// numbers and SenderIds that are associated with your Amazon Web Services account.
+// Services account.
+//
+// If you specify pool IDs, the output includes information for only the specified
+// pools. If you specify filters, the output includes information for only those
+// pools that meet the filter criteria. If you don't specify pool IDs or filters,
+// the output includes information for all pools.
+//
+// If you specify a pool ID that isn't valid, an error is returned.
+//
+// A pool is a collection of phone numbers and SenderIds. A pool can include one
+// or more phone numbers and SenderIds that are associated with your Amazon Web
+// Services account.
 func (c *Client) DescribePools(ctx context.Context, params *DescribePoolsInput, optFns ...func(*Options)) (*DescribePoolsOutput, error) {
 	if params == nil {
 		params = &DescribePoolsInput{}
@@ -92,25 +96,25 @@ func (c *Client) addOperationDescribePoolsMiddlewares(stack *middleware.Stack, o
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -125,13 +129,16 @@ func (c *Client) addOperationDescribePoolsMiddlewares(stack *middleware.Stack, o
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDescribePoolsValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribePools(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

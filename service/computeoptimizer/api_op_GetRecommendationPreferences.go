@@ -6,18 +6,21 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/computeoptimizer/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Returns existing recommendation preferences, such as enhanced infrastructure
-// metrics. Use the scope parameter to specify which preferences to return. You
-// can specify to return preferences for an organization, a specific account ID, or
-// a specific EC2 instance or Auto Scaling group Amazon Resource Name (ARN). For
-// more information, see Activating enhanced infrastructure metrics (https://docs.aws.amazon.com/compute-optimizer/latest/ug/enhanced-infrastructure-metrics.html)
-// in the Compute Optimizer User Guide.
+// metrics.
+//
+// Use the scope parameter to specify which preferences to return. You can specify
+// to return preferences for an organization, a specific account ID, or a specific
+// EC2 instance or Auto Scaling group Amazon Resource Name (ARN).
+//
+// For more information, see [Activating enhanced infrastructure metrics] in the Compute Optimizer User Guide.
+//
+// [Activating enhanced infrastructure metrics]: https://docs.aws.amazon.com/compute-optimizer/latest/ug/enhanced-infrastructure-metrics.html
 func (c *Client) GetRecommendationPreferences(ctx context.Context, params *GetRecommendationPreferencesInput, optFns ...func(*Options)) (*GetRecommendationPreferencesOutput, error) {
 	if params == nil {
 		params = &GetRecommendationPreferencesInput{}
@@ -36,28 +39,34 @@ func (c *Client) GetRecommendationPreferences(ctx context.Context, params *GetRe
 type GetRecommendationPreferencesInput struct {
 
 	// The target resource type of the recommendation preference for which to return
-	// preferences. The Ec2Instance option encompasses standalone instances and
-	// instances that are part of Auto Scaling groups. The AutoScalingGroup option
-	// encompasses only instances that are part of an Auto Scaling group. The valid
-	// values for this parameter are Ec2Instance and AutoScalingGroup .
+	// preferences.
+	//
+	// The Ec2Instance option encompasses standalone instances and instances that are
+	// part of Auto Scaling groups. The AutoScalingGroup option encompasses only
+	// instances that are part of an Auto Scaling group.
+	//
+	// The valid values for this parameter are Ec2Instance and AutoScalingGroup .
 	//
 	// This member is required.
 	ResourceType types.ResourceType
 
 	// The maximum number of recommendation preferences to return with a single
-	// request. To retrieve the remaining results, make another request with the
-	// returned nextToken value.
+	// request.
+	//
+	// To retrieve the remaining results, make another request with the returned
+	// nextToken value.
 	MaxResults *int32
 
 	// The token to advance to the next page of recommendation preferences.
 	NextToken *string
 
 	// An object that describes the scope of the recommendation preference to return.
+	//
 	// You can return recommendation preferences that are created at the organization
 	// level (for management accounts of an organization only), account level, and
-	// resource level. For more information, see Activating enhanced infrastructure
-	// metrics (https://docs.aws.amazon.com/compute-optimizer/latest/ug/enhanced-infrastructure-metrics.html)
-	// in the Compute Optimizer User Guide.
+	// resource level. For more information, see [Activating enhanced infrastructure metrics]in the Compute Optimizer User Guide.
+	//
+	// [Activating enhanced infrastructure metrics]: https://docs.aws.amazon.com/compute-optimizer/latest/ug/enhanced-infrastructure-metrics.html
 	Scope *types.Scope
 
 	noSmithyDocumentSerde
@@ -66,8 +75,9 @@ type GetRecommendationPreferencesInput struct {
 type GetRecommendationPreferencesOutput struct {
 
 	// The token to use to advance to the next page of recommendation preferences.
-	// This value is null when there are no more pages of recommendation preferences to
-	// return.
+	//
+	// This value is null when there are no more pages of recommendation preferences
+	// to return.
 	NextToken *string
 
 	// An array of objects that describe recommendation preferences.
@@ -101,25 +111,25 @@ func (c *Client) addOperationGetRecommendationPreferencesMiddlewares(stack *midd
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -134,13 +144,16 @@ func (c *Client) addOperationGetRecommendationPreferencesMiddlewares(stack *midd
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpGetRecommendationPreferencesValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetRecommendationPreferences(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -170,8 +183,10 @@ var _ GetRecommendationPreferencesAPIClient = (*Client)(nil)
 // GetRecommendationPreferences
 type GetRecommendationPreferencesPaginatorOptions struct {
 	// The maximum number of recommendation preferences to return with a single
-	// request. To retrieve the remaining results, make another request with the
-	// returned nextToken value.
+	// request.
+	//
+	// To retrieve the remaining results, make another request with the returned
+	// nextToken value.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

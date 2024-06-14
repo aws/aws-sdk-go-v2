@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/gamelift/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -16,10 +15,14 @@ import (
 // are JavaScript that provide configuration settings and optional custom game
 // logic for your game. The script is deployed when you create a Realtime Servers
 // fleet to host your game sessions. Script logic is executed during an active game
-// session. To create a new script record, specify a script name and provide the
-// script file(s). The script files and all dependencies must be zipped into a
-// single file. You can pull the zip file from either of these locations:
+// session.
+//
+// To create a new script record, specify a script name and provide the script
+// file(s). The script files and all dependencies must be zipped into a single
+// file. You can pull the zip file from either of these locations:
+//
 //   - A locally available directory. Use the ZipFile parameter for this option.
+//
 //   - An Amazon Simple Storage Service (Amazon S3) bucket under your Amazon Web
 //     Services account. Use the StorageLocation parameter for this option. You'll need
 //     to have an Identity Access Management (IAM) role that allows the Amazon GameLift
@@ -30,9 +33,20 @@ import (
 // Amazon GameLift-owned S3 bucket and the script record's storage location
 // reflects this location. If the script file is provided as an S3 bucket, Amazon
 // GameLift accesses the file at this storage location as needed for deployment.
-// Learn more Amazon GameLift Realtime Servers (https://docs.aws.amazon.com/gamelift/latest/developerguide/realtime-intro.html)
-// Set Up a Role for Amazon GameLift Access (https://docs.aws.amazon.com/gamelift/latest/developerguide/setting-up-role.html)
-// Related actions All APIs by task (https://docs.aws.amazon.com/gamelift/latest/developerguide/reference-awssdk.html#reference-awssdk-resources-fleets)
+//
+// # Learn more
+//
+// [Amazon GameLift Realtime Servers]
+//
+// [Set Up a Role for Amazon GameLift Access]
+//
+// # Related actions
+//
+// [All APIs by task]
+//
+// [Set Up a Role for Amazon GameLift Access]: https://docs.aws.amazon.com/gamelift/latest/developerguide/setting-up-role.html
+// [Amazon GameLift Realtime Servers]: https://docs.aws.amazon.com/gamelift/latest/developerguide/realtime-intro.html
+// [All APIs by task]: https://docs.aws.amazon.com/gamelift/latest/developerguide/reference-awssdk.html#reference-awssdk-resources-fleets
 func (c *Client) CreateScript(ctx context.Context, params *CreateScriptInput, optFns ...func(*Options)) (*CreateScriptOutput, error) {
 	if params == nil {
 		params = &CreateScriptInput{}
@@ -51,8 +65,9 @@ func (c *Client) CreateScript(ctx context.Context, params *CreateScriptInput, op
 type CreateScriptInput struct {
 
 	// A descriptive label that is associated with a script. Script names don't need
-	// to be unique. You can use UpdateScript (https://docs.aws.amazon.com/gamelift/latest/apireference/API_UpdateScript.html)
-	// to change this value later.
+	// to be unique. You can use [UpdateScript]to change this value later.
+	//
+	// [UpdateScript]: https://docs.aws.amazon.com/gamelift/latest/apireference/API_UpdateScript.html
 	Name *string
 
 	// The location of the Amazon S3 bucket where a zipped file containing your
@@ -68,22 +83,26 @@ type CreateScriptInput struct {
 	// A list of labels to assign to the new script resource. Tags are
 	// developer-defined key-value pairs. Tagging Amazon Web Services resources are
 	// useful for resource management, access management and cost allocation. For more
-	// information, see Tagging Amazon Web Services Resources (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html)
-	// in the Amazon Web Services General Reference. Once the resource is created, you
-	// can use TagResource (https://docs.aws.amazon.com/gamelift/latest/apireference/API_TagResource.html)
-	// , UntagResource (https://docs.aws.amazon.com/gamelift/latest/apireference/API_UntagResource.html)
-	// , and ListTagsForResource (https://docs.aws.amazon.com/gamelift/latest/apireference/API_ListTagsForResource.html)
-	// to add, remove, and view tags. The maximum tag limit may be lower than stated.
-	// See the Amazon Web Services General Reference for actual tagging limits.
+	// information, see [Tagging Amazon Web Services Resources]in the Amazon Web Services General Reference. Once the
+	// resource is created, you can use [TagResource], [UntagResource], and [ListTagsForResource] to add, remove, and view tags. The
+	// maximum tag limit may be lower than stated. See the Amazon Web Services General
+	// Reference for actual tagging limits.
+	//
+	// [Tagging Amazon Web Services Resources]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
+	// [TagResource]: https://docs.aws.amazon.com/gamelift/latest/apireference/API_TagResource.html
+	// [UntagResource]: https://docs.aws.amazon.com/gamelift/latest/apireference/API_UntagResource.html
+	// [ListTagsForResource]: https://docs.aws.amazon.com/gamelift/latest/apireference/API_ListTagsForResource.html
 	Tags []types.Tag
 
 	// Version information associated with a build or script. Version strings don't
-	// need to be unique. You can use UpdateScript (https://docs.aws.amazon.com/gamelift/latest/apireference/API_UpdateScript.html)
-	// to change this value later.
+	// need to be unique. You can use [UpdateScript]to change this value later.
+	//
+	// [UpdateScript]: https://docs.aws.amazon.com/gamelift/latest/apireference/API_UpdateScript.html
 	Version *string
 
 	// A data object containing your Realtime scripts and dependencies as a zip file.
 	// The zip file can have one or multiple files. Maximum size of a zip file is 5 MB.
+	//
 	// When using the Amazon Web Services CLI tool to create a script, this parameter
 	// is set to the zip file name. It must be prepended with the string "fileb://" to
 	// indicate that the file data is a binary object. For example: --zip-file
@@ -131,25 +150,25 @@ func (c *Client) addOperationCreateScriptMiddlewares(stack *middleware.Stack, op
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -164,13 +183,16 @@ func (c *Client) addOperationCreateScriptMiddlewares(stack *middleware.Stack, op
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpCreateScriptValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateScript(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

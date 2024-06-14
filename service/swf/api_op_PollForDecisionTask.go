@@ -6,42 +6,52 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/swf/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Used by deciders to get a DecisionTask from the specified decision taskList . A
-// decision task may be returned for any open workflow execution that is using the
-// specified task list. The task includes a paginated view of the history of the
-// workflow execution. The decider should use the workflow type and the history to
-// determine how to properly handle the task. This action initiates a long poll,
-// where the service holds the HTTP connection open and responds as soon a task
-// becomes available. If no decision task is available in the specified task list
-// before the timeout of 60 seconds expires, an empty result is returned. An empty
-// result, in this context, means that a DecisionTask is returned, but that the
-// value of taskToken is an empty string. Deciders should set their client side
-// socket timeout to at least 70 seconds (10 seconds higher than the timeout).
+// Used by deciders to get a DecisionTask from the specified decision taskList . A decision
+// task may be returned for any open workflow execution that is using the specified
+// task list. The task includes a paginated view of the history of the workflow
+// execution. The decider should use the workflow type and the history to determine
+// how to properly handle the task.
+//
+// This action initiates a long poll, where the service holds the HTTP connection
+// open and responds as soon a task becomes available. If no decision task is
+// available in the specified task list before the timeout of 60 seconds expires,
+// an empty result is returned. An empty result, in this context, means that a
+// DecisionTask is returned, but that the value of taskToken is an empty string.
+//
+// Deciders should set their client side socket timeout to at least 70 seconds (10
+// seconds higher than the timeout).
+//
 // Because the number of workflow history events for a single workflow execution
 // might be very large, the result returned might be split up across a number of
 // pages. To retrieve subsequent pages, make additional calls to
 // PollForDecisionTask using the nextPageToken returned by the initial call. Note
 // that you do not call GetWorkflowExecutionHistory with this nextPageToken .
-// Instead, call PollForDecisionTask again. Access Control You can use IAM
-// policies to control this action's access to Amazon SWF resources as follows:
+// Instead, call PollForDecisionTask again.
+//
+// # Access Control
+//
+// You can use IAM policies to control this action's access to Amazon SWF
+// resources as follows:
+//
 //   - Use a Resource element with the domain name to limit the action to only
 //     specified domains.
+//
 //   - Use an Action element to allow or deny permission to call this action.
+//
 //   - Constrain the taskList.name parameter by using a Condition element with the
 //     swf:taskList.name key to allow the action to access only certain task lists.
 //
 // If the caller doesn't have sufficient permissions to invoke the action, or the
 // parameter values fall outside the specified constraints, the action fails. The
 // associated event attribute's cause parameter is set to OPERATION_NOT_PERMITTED .
-// For details and example IAM policies, see Using IAM to Manage Access to Amazon
-// SWF Workflows (https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html)
-// in the Amazon SWF Developer Guide.
+// For details and example IAM policies, see [Using IAM to Manage Access to Amazon SWF Workflows]in the Amazon SWF Developer Guide.
+//
+// [Using IAM to Manage Access to Amazon SWF Workflows]: https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html
 func (c *Client) PollForDecisionTask(ctx context.Context, params *PollForDecisionTaskInput, optFns ...func(*Options)) (*PollForDecisionTaskOutput, error) {
 	if params == nil {
 		params = &PollForDecisionTaskInput{}
@@ -64,9 +74,11 @@ type PollForDecisionTaskInput struct {
 	// This member is required.
 	Domain *string
 
-	// Specifies the task list to poll for decision tasks. The specified string must
-	// not contain a : (colon), / (slash), | (vertical bar), or any control characters
-	// ( \u0000-\u001f | \u007f-\u009f ). Also, it must not be the literal string arn .
+	// Specifies the task list to poll for decision tasks.
+	//
+	// The specified string must not contain a : (colon), / (slash), | (vertical bar),
+	// or any control characters ( \u0000-\u001f | \u007f-\u009f ). Also, it must not
+	// be the literal string arn .
 	//
 	// This member is required.
 	TaskList *types.TaskList
@@ -77,8 +89,10 @@ type PollForDecisionTaskInput struct {
 	Identity *string
 
 	// The maximum number of results that are returned per call. Use nextPageToken to
-	// obtain further pages of results. This is an upper limit only; the actual number
-	// of results returned per call may be fewer than the specified maximum.
+	// obtain further pages of results.
+	//
+	// This is an upper limit only; the actual number of results returned per call may
+	// be fewer than the specified maximum.
 	MaximumPageSize int32
 
 	// If NextPageToken is returned there are more results available. The value of
@@ -86,12 +100,15 @@ type PollForDecisionTaskInput struct {
 	// using the returned token to retrieve the next page. Keep all other arguments
 	// unchanged. Each pagination token expires after 24 hours. Using an expired
 	// pagination token will return a 400 error: " Specified token has exceeded its
-	// maximum lifetime ". The configured maximumPageSize determines how many results
-	// can be returned in a single call. The nextPageToken returned by this action
-	// cannot be used with GetWorkflowExecutionHistory to get the next page. You must
-	// call PollForDecisionTask again (with the nextPageToken ) to retrieve the next
-	// page of history records. Calling PollForDecisionTask with a nextPageToken
-	// doesn't return a new decision task.
+	// maximum lifetime ".
+	//
+	// The configured maximumPageSize determines how many results can be returned in a
+	// single call.
+	//
+	// The nextPageToken returned by this action cannot be used with GetWorkflowExecutionHistory to get the next
+	// page. You must call PollForDecisionTaskagain (with the nextPageToken ) to retrieve the next page of
+	// history records. Calling PollForDecisionTaskwith a nextPageToken doesn't return a new decision
+	// task.
 	NextPageToken *string
 
 	// When set to true , returns the events in reverse order. By default the results
@@ -140,8 +157,9 @@ type PollForDecisionTaskOutput struct {
 
 	// If a NextPageToken was returned by a previous call, there are more results
 	// available. To retrieve the next page of results, make the call again using the
-	// returned token in nextPageToken . Keep all other arguments unchanged. The
-	// configured maximumPageSize determines how many results can be returned in a
+	// returned token in nextPageToken . Keep all other arguments unchanged.
+	//
+	// The configured maximumPageSize determines how many results can be returned in a
 	// single call.
 	NextPageToken *string
 
@@ -179,25 +197,25 @@ func (c *Client) addOperationPollForDecisionTaskMiddlewares(stack *middleware.St
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -212,13 +230,16 @@ func (c *Client) addOperationPollForDecisionTaskMiddlewares(stack *middleware.St
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpPollForDecisionTaskValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opPollForDecisionTask(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -248,8 +269,10 @@ var _ PollForDecisionTaskAPIClient = (*Client)(nil)
 // PollForDecisionTask
 type PollForDecisionTaskPaginatorOptions struct {
 	// The maximum number of results that are returned per call. Use nextPageToken to
-	// obtain further pages of results. This is an upper limit only; the actual number
-	// of results returned per call may be fewer than the specified maximum.
+	// obtain further pages of results.
+	//
+	// This is an upper limit only; the actual number of results returned per call may
+	// be fewer than the specified maximum.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

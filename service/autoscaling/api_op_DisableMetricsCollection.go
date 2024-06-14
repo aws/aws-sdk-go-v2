@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -34,31 +33,55 @@ type DisableMetricsCollectionInput struct {
 	// This member is required.
 	AutoScalingGroupName *string
 
-	// Identifies the metrics to disable. You can specify one or more of the following
-	// metrics:
+	// Identifies the metrics to disable.
+	//
+	// You can specify one or more of the following metrics:
+	//
 	//   - GroupMinSize
+	//
 	//   - GroupMaxSize
+	//
 	//   - GroupDesiredCapacity
+	//
 	//   - GroupInServiceInstances
+	//
 	//   - GroupPendingInstances
+	//
 	//   - GroupStandbyInstances
+	//
 	//   - GroupTerminatingInstances
+	//
 	//   - GroupTotalInstances
+	//
 	//   - GroupInServiceCapacity
+	//
 	//   - GroupPendingCapacity
+	//
 	//   - GroupStandbyCapacity
+	//
 	//   - GroupTerminatingCapacity
+	//
 	//   - GroupTotalCapacity
+	//
 	//   - WarmPoolDesiredCapacity
+	//
 	//   - WarmPoolWarmedCapacity
+	//
 	//   - WarmPoolPendingCapacity
+	//
 	//   - WarmPoolTerminatingCapacity
+	//
 	//   - WarmPoolTotalCapacity
+	//
 	//   - GroupAndWarmPoolDesiredCapacity
+	//
 	//   - GroupAndWarmPoolTotalCapacity
-	// If you omit this property, all metrics are disabled. For more information, see
-	// Auto Scaling group metrics (https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-cloudwatch-monitoring.html#as-group-metrics)
-	// in the Amazon EC2 Auto Scaling User Guide.
+	//
+	// If you omit this property, all metrics are disabled.
+	//
+	// For more information, see [Auto Scaling group metrics] in the Amazon EC2 Auto Scaling User Guide.
+	//
+	// [Auto Scaling group metrics]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-cloudwatch-monitoring.html#as-group-metrics
 	Metrics []string
 
 	noSmithyDocumentSerde
@@ -93,25 +116,25 @@ func (c *Client) addOperationDisableMetricsCollectionMiddlewares(stack *middlewa
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -126,13 +149,16 @@ func (c *Client) addOperationDisableMetricsCollectionMiddlewares(stack *middlewa
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDisableMetricsCollectionValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDisableMetricsCollection(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

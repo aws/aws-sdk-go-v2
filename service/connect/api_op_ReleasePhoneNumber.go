@@ -6,31 +6,38 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Releases a phone number previously claimed to an Amazon Connect instance or
 // traffic distribution group. You can call this API only in the Amazon Web
-// Services Region where the number was claimed. To release phone numbers from a
-// traffic distribution group, use the ReleasePhoneNumber API, not the Amazon
-// Connect admin website. After releasing a phone number, the phone number enters
-// into a cooldown period of 30 days. It cannot be searched for or claimed again
-// until the period has ended. If you accidentally release a phone number, contact
-// Amazon Web Services Support. If you plan to claim and release numbers frequently
-// during a 30 day period, contact us for a service quota exception. Otherwise, it
-// is possible you will be blocked from claiming and releasing any more numbers
-// until 30 days past the oldest number released has expired. By default you can
-// claim and release up to 200% of your maximum number of active phone numbers
-// during any 30 day period. If you claim and release phone numbers using the UI or
-// API during a rolling 30 day cycle that exceeds 200% of your phone number service
-// level quota, you will be blocked from claiming any more numbers until 30 days
-// past the oldest number released has expired. For example, if you already have 99
-// claimed numbers and a service level quota of 99 phone numbers, and in any 30 day
-// period you release 99, claim 99, and then release 99, you will have exceeded the
-// 200% limit. At that point you are blocked from claiming any more numbers until
-// you open an Amazon Web Services support ticket.
+// Services Region where the number was claimed.
+//
+// To release phone numbers from a traffic distribution group, use the
+// ReleasePhoneNumber API, not the Amazon Connect admin website.
+//
+// After releasing a phone number, the phone number enters into a cooldown period
+// for up to 180 days. It cannot be searched for or claimed again until the period
+// has ended. If you accidentally release a phone number, contact Amazon Web
+// Services Support.
+//
+// If you plan to claim and release numbers frequently, contact us for a service
+// quota exception. Otherwise, it is possible you will be blocked from claiming and
+// releasing any more numbers until up to 180 days past the oldest number released
+// has expired.
+//
+// By default you can claim and release up to 200% of your maximum number of
+// active phone numbers. If you claim and release phone numbers using the UI or API
+// during a rolling 180 day cycle that exceeds 200% of your phone number service
+// level quota, you will be blocked from claiming any more numbers until 180 days
+// past the oldest number released has expired.
+//
+// For example, if you already have 99 claimed numbers and a service level quota
+// of 99 phone numbers, and in any 180 day period you release 99, claim 99, and
+// then release 99, you will have exceeded the 200% limit. At that point you are
+// blocked from claiming any more numbers until you open an Amazon Web Services
+// support ticket.
 func (c *Client) ReleasePhoneNumber(ctx context.Context, params *ReleasePhoneNumberInput, optFns ...func(*Options)) (*ReleasePhoneNumberOutput, error) {
 	if params == nil {
 		params = &ReleasePhoneNumberInput{}
@@ -55,9 +62,9 @@ type ReleasePhoneNumberInput struct {
 
 	// A unique, case-sensitive identifier that you provide to ensure the idempotency
 	// of the request. If not provided, the Amazon Web Services SDK populates this
-	// field. For more information about idempotency, see Making retries safe with
-	// idempotent APIs (https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/)
-	// .
+	// field. For more information about idempotency, see [Making retries safe with idempotent APIs].
+	//
+	// [Making retries safe with idempotent APIs]: https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/
 	ClientToken *string
 
 	noSmithyDocumentSerde
@@ -92,25 +99,25 @@ func (c *Client) addOperationReleasePhoneNumberMiddlewares(stack *middleware.Sta
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -125,6 +132,9 @@ func (c *Client) addOperationReleasePhoneNumberMiddlewares(stack *middleware.Sta
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opReleasePhoneNumberMiddleware(stack, options); err != nil {
 		return err
 	}
@@ -134,7 +144,7 @@ func (c *Client) addOperationReleasePhoneNumberMiddlewares(stack *middleware.Sta
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opReleasePhoneNumber(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

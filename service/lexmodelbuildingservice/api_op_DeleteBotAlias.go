@@ -6,18 +6,19 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes an alias for the specified bot. You can't delete an alias that is used
-// in the association between a bot and a messaging channel. If an alias is used in
-// a channel association, the DeleteBot operation returns a ResourceInUseException
-// exception that includes a reference to the channel association that refers to
-// the bot. You can remove the reference to the alias by deleting the channel
-// association. If you get the same exception again, delete the referring
-// association until the DeleteBotAlias operation is successful.
+// Deletes an alias for the specified bot.
+//
+// You can't delete an alias that is used in the association between a bot and a
+// messaging channel. If an alias is used in a channel association, the DeleteBot
+// operation returns a ResourceInUseException exception that includes a reference
+// to the channel association that refers to the bot. You can remove the reference
+// to the alias by deleting the channel association. If you get the same exception
+// again, delete the referring association until the DeleteBotAlias operation is
+// successful.
 func (c *Client) DeleteBotAlias(ctx context.Context, params *DeleteBotAliasInput, optFns ...func(*Options)) (*DeleteBotAliasOutput, error) {
 	if params == nil {
 		params = &DeleteBotAliasInput{}
@@ -77,25 +78,25 @@ func (c *Client) addOperationDeleteBotAliasMiddlewares(stack *middleware.Stack, 
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -110,13 +111,16 @@ func (c *Client) addOperationDeleteBotAliasMiddlewares(stack *middleware.Stack, 
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDeleteBotAliasValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteBotAlias(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

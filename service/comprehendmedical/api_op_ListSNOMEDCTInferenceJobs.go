@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/comprehendmedical/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -33,10 +32,10 @@ type ListSNOMEDCTInferenceJobsInput struct {
 	// Provides information for filtering a list of detection jobs.
 	Filter *types.ComprehendMedicalAsyncJobFilter
 
-	// The maximum number of results to return in each page. The default is 100.
+	//  The maximum number of results to return in each page. The default is 100.
 	MaxResults *int32
 
-	// Identifies the next page of InferSNOMEDCT results to return.
+	//  Identifies the next page of InferSNOMEDCT results to return.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -44,10 +43,10 @@ type ListSNOMEDCTInferenceJobsInput struct {
 
 type ListSNOMEDCTInferenceJobsOutput struct {
 
-	// A list containing the properties of each job that is returned.
+	//  A list containing the properties of each job that is returned.
 	ComprehendMedicalAsyncJobPropertiesList []types.ComprehendMedicalAsyncJobProperties
 
-	// Identifies the next page of results to return.
+	//  Identifies the next page of results to return.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -78,25 +77,25 @@ func (c *Client) addOperationListSNOMEDCTInferenceJobsMiddlewares(stack *middlew
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -111,10 +110,13 @@ func (c *Client) addOperationListSNOMEDCTInferenceJobsMiddlewares(stack *middlew
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListSNOMEDCTInferenceJobs(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	mlcust "github.com/aws/aws-sdk-go-v2/service/machinelearning/internal/customizations"
 	"github.com/aws/aws-sdk-go-v2/service/machinelearning/types"
 	smithy "github.com/aws/smithy-go"
@@ -14,9 +13,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Generates a prediction for the observation using the specified ML Model . Note:
-// Not all response parameters will be populated. Whether a response parameter is
-// populated depends on the type of model requested.
+// Generates a prediction for the observation using the specified ML Model .
+//
+// Note: Not all response parameters will be populated. Whether a response
+// parameter is populated depends on the type of model requested.
 func (c *Client) Predict(ctx context.Context, params *PredictInput, optFns ...func(*Options)) (*PredictOutput, error) {
 	if params == nil {
 		params = &PredictInput{}
@@ -53,12 +53,16 @@ type PredictInput struct {
 type PredictOutput struct {
 
 	// The output from a Predict operation:
+	//
 	//   - Details - Contains the following attributes:
 	//   DetailsAttributes.PREDICTIVE_MODEL_TYPE - REGRESSION | BINARY | MULTICLASS
 	//   DetailsAttributes.ALGORITHM - SGD
+	//
 	//   - PredictedLabel - Present for either a BINARY or MULTICLASS MLModel request.
+	//
 	//   - PredictedScores - Contains the raw classification score corresponding to
 	//   each label.
+	//
 	//   - PredictedValue - Present for a REGRESSION MLModel request.
 	Prediction *types.Prediction
 
@@ -90,25 +94,25 @@ func (c *Client) addOperationPredictMiddlewares(stack *middleware.Stack, options
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -123,6 +127,9 @@ func (c *Client) addOperationPredictMiddlewares(stack *middleware.Stack, options
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpPredictValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -132,7 +139,7 @@ func (c *Client) addOperationPredictMiddlewares(stack *middleware.Stack, options
 	if err = mlcust.AddPredictEndpointMiddleware(stack, getPredictEndpoint); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

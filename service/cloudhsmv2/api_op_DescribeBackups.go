@@ -6,18 +6,19 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/cloudhsmv2/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Gets information about backups of AWS CloudHSM clusters. This is a paginated
-// operation, which means that each response might contain only a subset of all the
-// backups. When the response contains only a subset of backups, it includes a
-// NextToken value. Use this value in a subsequent DescribeBackups request to get
-// more backups. When you receive a response with no NextToken (or an empty or
-// null value), that means there are no more backups to get.
+// Gets information about backups of AWS CloudHSM clusters.
+//
+// This is a paginated operation, which means that each response might contain
+// only a subset of all the backups. When the response contains only a subset of
+// backups, it includes a NextToken value. Use this value in a subsequent
+// DescribeBackups request to get more backups. When you receive a response with no
+// NextToken (or an empty or null value), that means there are no more backups to
+// get.
 func (c *Client) DescribeBackups(ctx context.Context, params *DescribeBackupsInput, optFns ...func(*Options)) (*DescribeBackupsOutput, error) {
 	if params == nil {
 		params = &DescribeBackupsInput{}
@@ -35,17 +36,23 @@ func (c *Client) DescribeBackups(ctx context.Context, params *DescribeBackupsInp
 
 type DescribeBackupsInput struct {
 
-	// One or more filters to limit the items returned in the response. Use the
-	// backupIds filter to return only the specified backups. Specify backups by their
-	// backup identifier (ID). Use the sourceBackupIds filter to return only the
-	// backups created from a source backup. The sourceBackupID of a source backup is
-	// returned by the CopyBackupToRegion operation. Use the clusterIds filter to
-	// return only the backups for the specified clusters. Specify clusters by their
-	// cluster identifier (ID). Use the states filter to return only backups that
-	// match the specified state. Use the neverExpires filter to return backups
-	// filtered by the value in the neverExpires parameter. True returns all backups
-	// exempt from the backup retention policy. False returns all backups with a
-	// backup retention policy defined at the cluster.
+	// One or more filters to limit the items returned in the response.
+	//
+	// Use the backupIds filter to return only the specified backups. Specify backups
+	// by their backup identifier (ID).
+	//
+	// Use the sourceBackupIds filter to return only the backups created from a source
+	// backup. The sourceBackupID of a source backup is returned by the CopyBackupToRegion operation.
+	//
+	// Use the clusterIds filter to return only the backups for the specified
+	// clusters. Specify clusters by their cluster identifier (ID).
+	//
+	// Use the states filter to return only backups that match the specified state.
+	//
+	// Use the neverExpires filter to return backups filtered by the value in the
+	// neverExpires parameter. True returns all backups exempt from the backup
+	// retention policy. False returns all backups with a backup retention policy
+	// defined at the cluster.
 	Filters map[string][]string
 
 	// The maximum number of backups to return in the response. When there are more
@@ -101,25 +108,25 @@ func (c *Client) addOperationDescribeBackupsMiddlewares(stack *middleware.Stack,
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -134,10 +141,13 @@ func (c *Client) addOperationDescribeBackupsMiddlewares(stack *middleware.Stack,
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeBackups(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -28,31 +27,41 @@ func (c *Client) DeleteDistribution(ctx context.Context, params *DeleteDistribut
 }
 
 // This action deletes a web distribution. To delete a web distribution using the
-// CloudFront API, perform the following steps. To delete a web distribution using
-// the CloudFront API:
+// CloudFront API, perform the following steps.
+//
+// To delete a web distribution using the CloudFront API:
+//
 //   - Disable the web distribution
+//
 //   - Submit a GET Distribution Config request to get the current configuration
 //     and the Etag header for the distribution.
+//
 //   - Update the XML document that was returned in the response to your GET
 //     Distribution Config request to change the value of Enabled to false .
+//
 //   - Submit a PUT Distribution Config request to update the configuration for
 //     your distribution. In the request body, include the XML document that you
 //     updated in Step 3. Set the value of the HTTP If-Match header to the value of
 //     the ETag header that CloudFront returned when you submitted the GET
 //     Distribution Config request in Step 2.
+//
 //   - Review the response to the PUT Distribution Config request to confirm that
 //     the distribution was successfully disabled.
+//
 //   - Submit a GET Distribution request to confirm that your changes have
 //     propagated. When propagation is complete, the value of Status is Deployed .
+//
 //   - Submit a DELETE Distribution request. Set the value of the HTTP If-Match
 //     header to the value of the ETag header that CloudFront returned when you
 //     submitted the GET Distribution Config request in Step 6.
+//
 //   - Review the response to your DELETE Distribution request to confirm that the
 //     distribution was successfully deleted.
 //
-// For information about deleting a distribution using the CloudFront console, see
-// Deleting a Distribution (https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/HowToDeleteDistribution.html)
+// For information about deleting a distribution using the CloudFront console, see [Deleting a Distribution]
 // in the Amazon CloudFront Developer Guide.
+//
+// [Deleting a Distribution]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/HowToDeleteDistribution.html
 type DeleteDistributionInput struct {
 
 	// The distribution ID.
@@ -96,25 +105,25 @@ func (c *Client) addOperationDeleteDistributionMiddlewares(stack *middleware.Sta
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -129,13 +138,16 @@ func (c *Client) addOperationDeleteDistributionMiddlewares(stack *middleware.Sta
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDeleteDistributionValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteDistribution(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

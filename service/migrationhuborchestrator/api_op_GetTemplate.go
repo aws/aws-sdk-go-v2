@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/migrationhuborchestrator/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -56,8 +55,41 @@ type GetTemplateOutput struct {
 	// The name of the template.
 	Name *string
 
+	// The owner of the migration workflow template.
+	Owner *string
+
 	// The status of the template.
 	Status types.TemplateStatus
+
+	// The status message of retrieving migration workflow templates.
+	StatusMessage *string
+
+	// The tags added to the migration workflow template.
+	Tags map[string]string
+
+	// >The Amazon Resource Name (ARN) of the migration workflow template. The format
+	// for an Migration Hub Orchestrator template ARN is
+	// arn:aws:migrationhub-orchestrator:region:account:template/template-abcd1234 .
+	// For more information about ARNs, see [Amazon Resource Names (ARNs)]in the AWS General Reference.
+	//
+	// [Amazon Resource Names (ARNs)]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference-arns.html
+	TemplateArn *string
+
+	// The class of the migration workflow template. The available template classes
+	// are:
+	//
+	//   - A2C
+	//
+	//   - MGN
+	//
+	//   - SAP_MULTI
+	//
+	//   - SQL_EC2
+	//
+	//   - SQL_RDS
+	//
+	//   - VMIE
+	TemplateClass *string
 
 	// List of AWS services utilized in a migration workflow.
 	Tools []types.Tool
@@ -90,25 +122,25 @@ func (c *Client) addOperationGetTemplateMiddlewares(stack *middleware.Stack, opt
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -123,13 +155,16 @@ func (c *Client) addOperationGetTemplateMiddlewares(stack *middleware.Stack, opt
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpGetTemplateValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetTemplate(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

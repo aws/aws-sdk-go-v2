@@ -405,5 +405,43 @@ var defaultPartitions = endpoints.Partitions{
 		},
 		RegionRegex:    partitionRegexp.AwsUsGov,
 		IsRegionalized: true,
+		Endpoints: endpoints.Endpoints{
+			endpoints.EndpointKey{
+				Region: "us-gov-east-1",
+			}: endpoints.Endpoint{},
+			endpoints.EndpointKey{
+				Region:  "us-gov-east-1",
+				Variant: endpoints.FIPSVariant,
+			}: {
+				Hostname: "securitylake.us-gov-east-1.amazonaws.com",
+			},
+			endpoints.EndpointKey{
+				Region: "us-gov-east-1-fips",
+			}: endpoints.Endpoint{
+				Hostname: "securitylake.us-gov-east-1.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "us-gov-east-1",
+				},
+				Deprecated: aws.TrueTernary,
+			},
+			endpoints.EndpointKey{
+				Region: "us-gov-west-1",
+			}: endpoints.Endpoint{},
+			endpoints.EndpointKey{
+				Region:  "us-gov-west-1",
+				Variant: endpoints.FIPSVariant,
+			}: {
+				Hostname: "securitylake.us-gov-west-1.amazonaws.com",
+			},
+			endpoints.EndpointKey{
+				Region: "us-gov-west-1-fips",
+			}: endpoints.Endpoint{
+				Hostname: "securitylake.us-gov-west-1.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "us-gov-west-1",
+				},
+				Deprecated: aws.TrueTernary,
+			},
+		},
 	},
 }

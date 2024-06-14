@@ -6,13 +6,12 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/globalaccelerator/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// List the cross-account endpoints available to add to an accelerator.
+// List the cross-account resources available to work with.
 func (c *Client) ListCrossAccountResources(ctx context.Context, params *ListCrossAccountResourcesInput, optFns ...func(*Options)) (*ListCrossAccountResourcesOutput, error) {
 	if params == nil {
 		params = &ListCrossAccountResourcesInput{}
@@ -38,7 +37,7 @@ type ListCrossAccountResourcesInput struct {
 	// The Amazon Resource Name (ARN) of an accelerator in a cross-account attachment.
 	AcceleratorArn *string
 
-	// The number of cross-account endpoints objects that you want to return with this
+	// The number of cross-account resource objects that you want to return with this
 	// call. The default value is 10.
 	MaxResults *int32
 
@@ -51,7 +50,7 @@ type ListCrossAccountResourcesInput struct {
 
 type ListCrossAccountResourcesOutput struct {
 
-	// The endpoints attached to an accelerator in a cross-account attachment.
+	// The cross-account resources used with an accelerator.
 	CrossAccountResources []types.CrossAccountResource
 
 	// The token for the next set of results. You receive this token from a previous
@@ -86,25 +85,25 @@ func (c *Client) addOperationListCrossAccountResourcesMiddlewares(stack *middlew
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -119,13 +118,16 @@ func (c *Client) addOperationListCrossAccountResourcesMiddlewares(stack *middlew
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpListCrossAccountResourcesValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListCrossAccountResources(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -154,7 +156,7 @@ var _ ListCrossAccountResourcesAPIClient = (*Client)(nil)
 // ListCrossAccountResourcesPaginatorOptions is the paginator options for
 // ListCrossAccountResources
 type ListCrossAccountResourcesPaginatorOptions struct {
-	// The number of cross-account endpoints objects that you want to return with this
+	// The number of cross-account resource objects that you want to return with this
 	// call. The default value is 10.
 	Limit int32
 

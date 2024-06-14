@@ -6,14 +6,14 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/elasticbeanstalk/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates the specified application version to have the specified properties. If
-// a property (for example, description ) is not provided, the value remains
+// Updates the specified application version to have the specified properties.
+//
+// If a property (for example, description ) is not provided, the value remains
 // unchanged. To clear properties, specify an empty string.
 func (c *Client) UpdateApplicationVersion(ctx context.Context, params *UpdateApplicationVersionInput, optFns ...func(*Options)) (*UpdateApplicationVersionOutput, error) {
 	if params == nil {
@@ -32,14 +32,18 @@ func (c *Client) UpdateApplicationVersion(ctx context.Context, params *UpdateApp
 
 type UpdateApplicationVersionInput struct {
 
-	// The name of the application associated with this version. If no application is
-	// found with this name, UpdateApplication returns an InvalidParameterValue error.
+	// The name of the application associated with this version.
+	//
+	// If no application is found with this name, UpdateApplication returns an
+	// InvalidParameterValue error.
 	//
 	// This member is required.
 	ApplicationName *string
 
-	// The name of the version to update. If no application version is found with this
-	// label, UpdateApplication returns an InvalidParameterValue error.
+	// The name of the version to update.
+	//
+	// If no application version is found with this label, UpdateApplication returns
+	// an InvalidParameterValue error.
 	//
 	// This member is required.
 	VersionLabel *string
@@ -53,7 +57,7 @@ type UpdateApplicationVersionInput struct {
 // Result message wrapping a single description of an application version.
 type UpdateApplicationVersionOutput struct {
 
-	// The ApplicationVersionDescription of the application version.
+	//  The ApplicationVersionDescription of the application version.
 	ApplicationVersion *types.ApplicationVersionDescription
 
 	// Metadata pertaining to the operation's result.
@@ -84,25 +88,25 @@ func (c *Client) addOperationUpdateApplicationVersionMiddlewares(stack *middlewa
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -117,13 +121,16 @@ func (c *Client) addOperationUpdateApplicationVersionMiddlewares(stack *middlewa
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpUpdateApplicationVersionValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateApplicationVersion(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

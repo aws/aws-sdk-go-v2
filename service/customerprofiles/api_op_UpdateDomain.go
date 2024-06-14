@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/customerprofiles/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -14,15 +13,22 @@ import (
 )
 
 // Updates the properties of a domain, including creating or selecting a dead
-// letter queue or an encryption key. After a domain is created, the name can’t be
-// changed. Use this API or CreateDomain (https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_CreateDomain.html)
-// to enable identity resolution (https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_GetMatches.html)
-// : set Matching to true. To prevent cross-service impersonation when you call
-// this API, see Cross-service confused deputy prevention (https://docs.aws.amazon.com/connect/latest/adminguide/cross-service-confused-deputy-prevention.html)
-// for sample policies that you should apply. To add or remove tags on an existing
-// Domain, see TagResource (https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_TagResource.html)
-// / UntagResource (https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_UntagResource.html)
-// .
+// letter queue or an encryption key.
+//
+// After a domain is created, the name can’t be changed.
+//
+// Use this API or [CreateDomain] to enable [identity resolution]: set Matching to true.
+//
+// To prevent cross-service impersonation when you call this API, see [Cross-service confused deputy prevention] for sample
+// policies that you should apply.
+//
+// To add or remove tags on an existing Domain, see [TagResource]/[UntagResource] .
+//
+// [CreateDomain]: https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_CreateDomain.html
+// [TagResource]: https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_TagResource.html
+// [Cross-service confused deputy prevention]: https://docs.aws.amazon.com/connect/latest/adminguide/cross-service-confused-deputy-prevention.html
+// [UntagResource]: https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_UntagResource.html
+// [identity resolution]: https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_GetMatches.html
 func (c *Client) UpdateDomain(ctx context.Context, params *UpdateDomainInput, optFns ...func(*Options)) (*UpdateDomainOutput, error) {
 	if params == nil {
 		params = &UpdateDomainInput{}
@@ -65,9 +71,13 @@ type UpdateDomainInput struct {
 	// Customer Profiles starts a weekly batch process called Identity Resolution Job.
 	// If you do not specify a date and time for Identity Resolution Job to run, by
 	// default it runs every Saturday at 12AM UTC to detect duplicate profiles in your
-	// domains. After the Identity Resolution Job completes, use the GetMatches (https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_GetMatches.html)
-	// API to return and review the results. Or, if you have configured ExportingConfig
-	// in the MatchingRequest , you can download the results from S3.
+	// domains.
+	//
+	// After the Identity Resolution Job completes, use the [GetMatches] API to return and review
+	// the results. Or, if you have configured ExportingConfig in the MatchingRequest ,
+	// you can download the results from S3.
+	//
+	// [GetMatches]: https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_GetMatches.html
 	Matching *types.MatchingRequest
 
 	// The process of matching duplicate profiles using the rule-Based matching. If
@@ -118,9 +128,13 @@ type UpdateDomainOutput struct {
 	// Customer Profiles starts a weekly batch process called Identity Resolution Job.
 	// If you do not specify a date and time for Identity Resolution Job to run, by
 	// default it runs every Saturday at 12AM UTC to detect duplicate profiles in your
-	// domains. After the Identity Resolution Job completes, use the GetMatches (https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_GetMatches.html)
-	// API to return and review the results. Or, if you have configured ExportingConfig
-	// in the MatchingRequest , you can download the results from S3.
+	// domains.
+	//
+	// After the Identity Resolution Job completes, use the [GetMatches] API to return and review
+	// the results. Or, if you have configured ExportingConfig in the MatchingRequest ,
+	// you can download the results from S3.
+	//
+	// [GetMatches]: https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_GetMatches.html
 	Matching *types.MatchingResponse
 
 	// The process of matching duplicate profiles using the rule-Based matching. If
@@ -163,25 +177,25 @@ func (c *Client) addOperationUpdateDomainMiddlewares(stack *middleware.Stack, op
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -196,13 +210,16 @@ func (c *Client) addOperationUpdateDomainMiddlewares(stack *middleware.Stack, op
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpUpdateDomainValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateDomain(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/appfabric/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -57,10 +56,15 @@ type CreateIngestionDestinationInput struct {
 	// idempotency of the request. This lets you safely retry the request without
 	// accidentally performing the same operation a second time. Passing the same value
 	// to a later call to an operation requires that you also pass the same value for
-	// all other parameters. We recommend that you use a UUID type of value (https://wikipedia.org/wiki/Universally_unique_identifier)
-	// . If you don't provide this value, then Amazon Web Services generates a random
-	// one for you. If you retry the operation with the same ClientToken , but with
-	// different parameters, the retry fails with an IdempotentParameterMismatch error.
+	// all other parameters. We recommend that you use a [UUID type of value].
+	//
+	// If you don't provide this value, then Amazon Web Services generates a random
+	// one for you.
+	//
+	// If you retry the operation with the same ClientToken , but with different
+	// parameters, the retry fails with an IdempotentParameterMismatch error.
+	//
+	// [UUID type of value]: https://wikipedia.org/wiki/Universally_unique_identifier
 	ClientToken *string
 
 	// A map of the key-value pairs of the tag or tags to assign to the resource.
@@ -104,25 +108,25 @@ func (c *Client) addOperationCreateIngestionDestinationMiddlewares(stack *middle
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -137,6 +141,9 @@ func (c *Client) addOperationCreateIngestionDestinationMiddlewares(stack *middle
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opCreateIngestionDestinationMiddleware(stack, options); err != nil {
 		return err
 	}
@@ -146,7 +153,7 @@ func (c *Client) addOperationCreateIngestionDestinationMiddlewares(stack *middle
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateIngestionDestination(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

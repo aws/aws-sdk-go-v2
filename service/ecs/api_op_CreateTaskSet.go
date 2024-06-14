@@ -6,18 +6,24 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/ecs/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Create a task set in the specified cluster and service. This is used when a
-// service uses the EXTERNAL deployment controller type. For more information, see
-// Amazon ECS deployment types (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/deployment-types.html)
-// in the Amazon Elastic Container Service Developer Guide. For information about
-// the maximum number of task sets and otther quotas, see Amazon ECS service quotas (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-quotas.html)
+// service uses the EXTERNAL deployment controller type. For more information, see [Amazon ECS deployment types]
 // in the Amazon Elastic Container Service Developer Guide.
+//
+// On March 21, 2024, a change was made to resolve the task definition revision
+// before authorization. When a task definition revision is not specified,
+// authorization will occur using the latest revision of a task definition.
+//
+// For information about the maximum number of task sets and otther quotas, see [Amazon ECS service quotas]
+// in the Amazon Elastic Container Service Developer Guide.
+//
+// [Amazon ECS deployment types]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/deployment-types.html
+// [Amazon ECS service quotas]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-quotas.html
 func (c *Client) CreateTaskSet(ctx context.Context, params *CreateTaskSetInput, optFns ...func(*Options)) (*CreateTaskSetOutput, error) {
 	if params == nil {
 		params = &CreateTaskSetInput{}
@@ -53,23 +59,28 @@ type CreateTaskSetInput struct {
 	// This member is required.
 	TaskDefinition *string
 
-	// The capacity provider strategy to use for the task set. A capacity provider
-	// strategy consists of one or more capacity providers along with the base and
-	// weight to assign to them. A capacity provider must be associated with the
-	// cluster to be used in a capacity provider strategy. The
-	// PutClusterCapacityProviders API is used to associate a capacity provider with a
-	// cluster. Only capacity providers with an ACTIVE or UPDATING status can be used.
+	// The capacity provider strategy to use for the task set.
+	//
+	// A capacity provider strategy consists of one or more capacity providers along
+	// with the base and weight to assign to them. A capacity provider must be
+	// associated with the cluster to be used in a capacity provider strategy. The PutClusterCapacityProvidersAPI
+	// is used to associate a capacity provider with a cluster. Only capacity providers
+	// with an ACTIVE or UPDATING status can be used.
+	//
 	// If a capacityProviderStrategy is specified, the launchType parameter must be
 	// omitted. If no capacityProviderStrategy or launchType is specified, the
-	// defaultCapacityProviderStrategy for the cluster is used. If specifying a
-	// capacity provider that uses an Auto Scaling group, the capacity provider must
-	// already be created. New capacity providers can be created with the
-	// CreateCapacityProvider API operation. To use a Fargate capacity provider,
-	// specify either the FARGATE or FARGATE_SPOT capacity providers. The Fargate
-	// capacity providers are available to all accounts and only need to be associated
-	// with a cluster to be used. The PutClusterCapacityProviders API operation is
-	// used to update the list of available capacity providers for a cluster after the
-	// cluster is created.
+	// defaultCapacityProviderStrategy for the cluster is used.
+	//
+	// If specifying a capacity provider that uses an Auto Scaling group, the capacity
+	// provider must already be created. New capacity providers can be created with the
+	// CreateCapacityProviderAPI operation.
+	//
+	// To use a Fargate capacity provider, specify either the FARGATE or FARGATE_SPOT
+	// capacity providers. The Fargate capacity providers are available to all accounts
+	// and only need to be associated with a cluster to be used.
+	//
+	// The PutClusterCapacityProviders API operation is used to update the list of available capacity providers
+	// for a cluster after the cluster is created.
 	CapacityProviderStrategy []types.CapacityProviderStrategyItem
 
 	// An identifier that you provide to ensure the idempotency of the request. It
@@ -83,10 +94,13 @@ type CreateTaskSetInput struct {
 	// the provided value.
 	ExternalId *string
 
-	// The launch type that new tasks in the task set uses. For more information, see
-	// Amazon ECS launch types (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/launch_types.html)
-	// in the Amazon Elastic Container Service Developer Guide. If a launchType is
-	// specified, the capacityProviderStrategy parameter must be omitted.
+	// The launch type that new tasks in the task set uses. For more information, see [Amazon ECS launch types]
+	// in the Amazon Elastic Container Service Developer Guide.
+	//
+	// If a launchType is specified, the capacityProviderStrategy parameter must be
+	// omitted.
+	//
+	// [Amazon ECS launch types]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/launch_types.html
 	LaunchType types.LaunchType
 
 	// A load balancer object representing the load balancer to use with the task set.
@@ -107,24 +121,33 @@ type CreateTaskSetInput struct {
 	Scale *types.Scale
 
 	// The details of the service discovery registries to assign to this task set. For
-	// more information, see Service discovery (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-discovery.html)
-	// .
+	// more information, see [Service discovery].
+	//
+	// [Service discovery]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-discovery.html
 	ServiceRegistries []types.ServiceRegistry
 
 	// The metadata that you apply to the task set to help you categorize and organize
 	// them. Each tag consists of a key and an optional value. You define both. When a
-	// service is deleted, the tags are deleted. The following basic restrictions apply
-	// to tags:
+	// service is deleted, the tags are deleted.
+	//
+	// The following basic restrictions apply to tags:
+	//
 	//   - Maximum number of tags per resource - 50
+	//
 	//   - For each resource, each tag key must be unique, and each tag key can have
 	//   only one value.
+	//
 	//   - Maximum key length - 128 Unicode characters in UTF-8
+	//
 	//   - Maximum value length - 256 Unicode characters in UTF-8
+	//
 	//   - If your tagging schema is used across multiple services and resources,
 	//   remember that other services may have restrictions on allowed characters.
 	//   Generally allowed characters are: letters, numbers, and spaces representable in
 	//   UTF-8, and the following characters: + - = . _ : / @.
+	//
 	//   - Tag keys and values are case-sensitive.
+	//
 	//   - Do not use aws: , AWS: , or any upper or lowercase combination of such as a
 	//   prefix for either keys or values as it is reserved for Amazon Web Services use.
 	//   You cannot edit or delete tag keys or values with this prefix. Tags with this
@@ -170,25 +193,25 @@ func (c *Client) addOperationCreateTaskSetMiddlewares(stack *middleware.Stack, o
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -203,13 +226,16 @@ func (c *Client) addOperationCreateTaskSetMiddlewares(stack *middleware.Stack, o
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpCreateTaskSetValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateTaskSet(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

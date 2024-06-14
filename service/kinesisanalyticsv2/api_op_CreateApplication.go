@@ -6,15 +6,15 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/kinesisanalyticsv2/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a Kinesis Data Analytics application. For information about creating a
-// Kinesis Data Analytics application, see Creating an Application (https://docs.aws.amazon.com/kinesisanalytics/latest/java/getting-started.html)
-// .
+// Creates a Managed Service for Apache Flink application. For information about
+// creating a Managed Service for Apache Flink application, see [Creating an Application].
+//
+// [Creating an Application]: https://docs.aws.amazon.com/kinesisanalytics/latest/java/getting-started.html
 func (c *Client) CreateApplication(ctx context.Context, params *CreateApplicationInput, optFns ...func(*Options)) (*CreateApplicationOutput, error) {
 	if params == nil {
 		params = &CreateApplicationInput{}
@@ -54,9 +54,9 @@ type CreateApplicationInput struct {
 	// A summary description of the application.
 	ApplicationDescription *string
 
-	// Use the STREAMING mode to create a Kinesis Data Analytics For Flink
-	// application. To create a Kinesis Data Analytics Studio notebook, use the
-	// INTERACTIVE mode.
+	// Use the STREAMING mode to create a Managed Service for Apache Flink
+	// application. To create a Managed Service for Apache Flink Studio notebook, use
+	// the INTERACTIVE mode.
 	ApplicationMode types.ApplicationMode
 
 	// Use this parameter to configure an Amazon CloudWatch log stream to monitor
@@ -66,8 +66,9 @@ type CreateApplicationInput struct {
 	// A list of one or more tags to assign to the application. A tag is a key-value
 	// pair that identifies an application. Note that the maximum number of application
 	// tags includes system tags. The maximum number of user-defined application tags
-	// is 50. For more information, see Using Tagging (https://docs.aws.amazon.com/kinesisanalytics/latest/java/how-tagging.html)
-	// .
+	// is 50. For more information, see [Using Tagging].
+	//
+	// [Using Tagging]: https://docs.aws.amazon.com/kinesisanalytics/latest/java/how-tagging.html
 	Tags []types.Tag
 
 	noSmithyDocumentSerde
@@ -75,8 +76,8 @@ type CreateApplicationInput struct {
 
 type CreateApplicationOutput struct {
 
-	// In response to your CreateApplication request, Kinesis Data Analytics returns a
-	// response with details of the application it created.
+	// In response to your CreateApplication request, Managed Service for Apache Flink
+	// returns a response with details of the application it created.
 	//
 	// This member is required.
 	ApplicationDetail *types.ApplicationDetail
@@ -109,25 +110,25 @@ func (c *Client) addOperationCreateApplicationMiddlewares(stack *middleware.Stac
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -142,13 +143,16 @@ func (c *Client) addOperationCreateApplicationMiddlewares(stack *middleware.Stac
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpCreateApplicationValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateApplication(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

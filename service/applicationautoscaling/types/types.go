@@ -24,34 +24,42 @@ type Alarm struct {
 }
 
 // Represents a CloudWatch metric of your choosing for a target tracking scaling
-// policy to use with Application Auto Scaling. For information about the available
-// metrics for a service, see Amazon Web Services services that publish CloudWatch
-// metrics (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/aws-services-cloudwatch-metrics.html)
-// in the Amazon CloudWatch User Guide. To create your customized metric
-// specification:
+// policy to use with Application Auto Scaling.
+//
+// For information about the available metrics for a service, see [Amazon Web Services services that publish CloudWatch metrics] in the Amazon
+// CloudWatch User Guide.
+//
+// To create your customized metric specification:
+//
 //   - Add values for each required parameter from CloudWatch. You can use an
 //     existing metric, or a new metric that you create. To use your own metric, you
-//     must first publish the metric to CloudWatch. For more information, see
-//     Publish custom metrics (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/publishingMetrics.html)
-//     in the Amazon CloudWatch User Guide.
+//     must first publish the metric to CloudWatch. For more information, see [Publish custom metrics]in the
+//     Amazon CloudWatch User Guide.
+//
 //   - Choose a metric that changes proportionally with capacity. The value of the
 //     metric should increase or decrease in inverse proportion to the number of
 //     capacity units. That is, the value of the metric should decrease when capacity
 //     increases, and increase when capacity decreases.
 //
-// For more information about the CloudWatch terminology below, see Amazon
-// CloudWatch concepts (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/cloudwatch_concepts.html)
-// in the Amazon CloudWatch User Guide.
+// For more information about the CloudWatch terminology below, see [Amazon CloudWatch concepts] in the Amazon
+// CloudWatch User Guide.
+//
+// [Amazon Web Services services that publish CloudWatch metrics]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/aws-services-cloudwatch-metrics.html
+// [Amazon CloudWatch concepts]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/cloudwatch_concepts.html
+// [Publish custom metrics]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/publishingMetrics.html
 type CustomizedMetricSpecification struct {
 
-	// The dimensions of the metric. Conditional: If you published your metric with
-	// dimensions, you must specify the same dimensions in your scaling policy.
+	// The dimensions of the metric.
+	//
+	// Conditional: If you published your metric with dimensions, you must specify the
+	// same dimensions in your scaling policy.
 	Dimensions []MetricDimension
 
 	// The name of the metric. To get the exact metric name, namespace, and
-	// dimensions, inspect the Metric (https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_Metric.html)
-	// object that's returned by a call to ListMetrics (https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_ListMetrics.html)
-	// .
+	// dimensions, inspect the [Metric]object that's returned by a call to [ListMetrics].
+	//
+	// [ListMetrics]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_ListMetrics.html
+	// [Metric]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_Metric.html
 	MetricName *string
 
 	// The metrics to include in the target tracking scaling policy, as a metric data
@@ -65,8 +73,9 @@ type CustomizedMetricSpecification struct {
 	Statistic MetricStatistic
 
 	// The unit of the metric. For a complete list of the units that CloudWatch
-	// supports, see the MetricDatum (https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_MetricDatum.html)
-	// data type in the Amazon CloudWatch API Reference.
+	// supports, see the [MetricDatum]data type in the Amazon CloudWatch API Reference.
+	//
+	// [MetricDatum]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_MetricDatum.html
 	Unit *string
 
 	noSmithyDocumentSerde
@@ -90,15 +99,23 @@ type MetricDimension struct {
 
 // Describes the reason for an activity that isn't scaled (not scaled activity),
 // in machine-readable format. For help interpreting the not scaled reason details,
-// see Scaling activities for Application Auto Scaling (https://docs.aws.amazon.com/autoscaling/application/userguide/application-auto-scaling-scaling-activities.html)
-// .
+// see [Scaling activities for Application Auto Scaling].
+//
+// [Scaling activities for Application Auto Scaling]: https://docs.aws.amazon.com/autoscaling/application/userguide/application-auto-scaling-scaling-activities.html
 type NotScaledReason struct {
 
-	// A code that represents the reason for not scaling. Valid values:
+	// A code that represents the reason for not scaling.
+	//
+	// Valid values:
+	//
 	//   - AutoScalingAnticipatedFlapping
+	//
 	//   - TargetServicePutResourceAsUnscalable
+	//
 	//   - AlreadyAtMaxCapacity
+	//
 	//   - AlreadyAtMinCapacity
+	//
 	//   - AlreadyAtDesiredCapacity
 	//
 	// This member is required.
@@ -117,12 +134,14 @@ type NotScaledReason struct {
 }
 
 // Represents a predefined metric for a target tracking scaling policy to use with
-// Application Auto Scaling. Only the Amazon Web Services that you're using send
-// metrics to Amazon CloudWatch. To determine whether a desired metric already
-// exists by looking up its namespace and dimension using the CloudWatch metrics
-// dashboard in the console, follow the procedure in Monitor your resources using
-// CloudWatch (https://docs.aws.amazon.com/autoscaling/application/userguide/monitoring-cloudwatch.html)
-// in the Application Auto Scaling User Guide.
+// Application Auto Scaling.
+//
+// Only the Amazon Web Services that you're using send metrics to Amazon
+// CloudWatch. To determine whether a desired metric already exists by looking up
+// its namespace and dimension using the CloudWatch metrics dashboard in the
+// console, follow the procedure in [Monitor your resources using CloudWatch]in the Application Auto Scaling User Guide.
+//
+// [Monitor your resources using CloudWatch]: https://docs.aws.amazon.com/autoscaling/application/userguide/monitoring-cloudwatch.html
 type PredefinedMetricSpecification struct {
 
 	// The metric type. The ALBRequestCountPerTarget metric type applies only to Spot
@@ -133,18 +152,25 @@ type PredefinedMetricSpecification struct {
 
 	// Identifies the resource associated with the metric type. You can't specify a
 	// resource label unless the metric type is ALBRequestCountPerTarget and there is
-	// a target group attached to the Spot Fleet or ECS service. You create the
-	// resource label by appending the final portion of the load balancer ARN and the
-	// final portion of the target group ARN into a single value, separated by a
-	// forward slash (/). The format of the resource label is:
+	// a target group attached to the Spot Fleet or ECS service.
+	//
+	// You create the resource label by appending the final portion of the load
+	// balancer ARN and the final portion of the target group ARN into a single value,
+	// separated by a forward slash (/). The format of the resource label is:
+	//
 	// app/my-alb/778d41231b141a0f/targetgroup/my-alb-target-group/943f017f100becff .
+	//
 	// Where:
+	//
 	//   - app// is the final portion of the load balancer ARN
+	//
 	//   - targetgroup// is the final portion of the target group ARN.
-	// To find the ARN for an Application Load Balancer, use the DescribeLoadBalancers (https://docs.aws.amazon.com/elasticloadbalancing/latest/APIReference/API_DescribeLoadBalancers.html)
-	// API operation. To find the ARN for the target group, use the
-	// DescribeTargetGroups (https://docs.aws.amazon.com/elasticloadbalancing/latest/APIReference/API_DescribeTargetGroups.html)
-	// API operation.
+	//
+	// To find the ARN for an Application Load Balancer, use the [DescribeLoadBalancers] API operation. To
+	// find the ARN for the target group, use the [DescribeTargetGroups]API operation.
+	//
+	// [DescribeTargetGroups]: https://docs.aws.amazon.com/elasticloadbalancing/latest/APIReference/API_DescribeTargetGroups.html
+	// [DescribeLoadBalancers]: https://docs.aws.amazon.com/elasticloadbalancing/latest/APIReference/API_DescribeLoadBalancers.html
 	ResourceLabel *string
 
 	noSmithyDocumentSerde
@@ -170,58 +196,77 @@ type ScalableTarget struct {
 
 	// The identifier of the resource associated with the scalable target. This string
 	// consists of the resource type and unique identifier.
+	//
 	//   - ECS service - The resource type is service and the unique identifier is the
 	//   cluster name and service name. Example: service/default/sample-webapp .
+	//
 	//   - Spot Fleet - The resource type is spot-fleet-request and the unique
 	//   identifier is the Spot Fleet request ID. Example:
 	//   spot-fleet-request/sfr-73fbd2ce-aa30-494c-8788-1cee4EXAMPLE .
+	//
 	//   - EMR cluster - The resource type is instancegroup and the unique identifier
 	//   is the cluster ID and instance group ID. Example:
 	//   instancegroup/j-2EEZNYKUA1NTV/ig-1791Y4E1L8YI0 .
+	//
 	//   - AppStream 2.0 fleet - The resource type is fleet and the unique identifier
 	//   is the fleet name. Example: fleet/sample-fleet .
+	//
 	//   - DynamoDB table - The resource type is table and the unique identifier is the
 	//   table name. Example: table/my-table .
+	//
 	//   - DynamoDB global secondary index - The resource type is index and the unique
 	//   identifier is the index name. Example: table/my-table/index/my-table-index .
+	//
 	//   - Aurora DB cluster - The resource type is cluster and the unique identifier
 	//   is the cluster name. Example: cluster:my-db-cluster .
+	//
 	//   - SageMaker endpoint variant - The resource type is variant and the unique
 	//   identifier is the resource ID. Example:
 	//   endpoint/my-end-point/variant/KMeansClustering .
+	//
 	//   - Custom resources are not supported with a resource type. This parameter
 	//   must specify the OutputValue from the CloudFormation template stack used to
 	//   access the resources. The unique identifier is defined by the service provider.
-	//   More information is available in our GitHub repository (https://github.com/aws/aws-auto-scaling-custom-resource)
-	//   .
+	//   More information is available in our [GitHub repository].
+	//
 	//   - Amazon Comprehend document classification endpoint - The resource type and
 	//   unique identifier are specified using the endpoint ARN. Example:
 	//   arn:aws:comprehend:us-west-2:123456789012:document-classifier-endpoint/EXAMPLE
 	//   .
+	//
 	//   - Amazon Comprehend entity recognizer endpoint - The resource type and unique
 	//   identifier are specified using the endpoint ARN. Example:
 	//   arn:aws:comprehend:us-west-2:123456789012:entity-recognizer-endpoint/EXAMPLE .
+	//
 	//   - Lambda provisioned concurrency - The resource type is function and the
 	//   unique identifier is the function name with a function version or alias name
 	//   suffix that is not $LATEST . Example: function:my-function:prod or
 	//   function:my-function:1 .
+	//
 	//   - Amazon Keyspaces table - The resource type is table and the unique
 	//   identifier is the table name. Example: keyspace/mykeyspace/table/mytable .
+	//
 	//   - Amazon MSK cluster - The resource type and unique identifier are specified
 	//   using the cluster ARN. Example:
 	//   arn:aws:kafka:us-east-1:123456789012:cluster/demo-cluster-1/6357e0b2-0e6a-4b86-a0b4-70df934c2e31-5
 	//   .
+	//
 	//   - Amazon ElastiCache replication group - The resource type is
 	//   replication-group and the unique identifier is the replication group name.
 	//   Example: replication-group/mycluster .
+	//
 	//   - Neptune cluster - The resource type is cluster and the unique identifier is
 	//   the cluster name. Example: cluster:mycluster .
+	//
 	//   - SageMaker Serverless endpoint - The resource type is variant and the unique
 	//   identifier is the resource ID. Example:
 	//   endpoint/my-end-point/variant/KMeansClustering .
+	//
 	//   - SageMaker inference component - The resource type is inference-component and
 	//   the unique identifier is the resource ID. Example:
 	//   inference-component/my-inference-component .
+	//
+	// [GitHub repository]: https://github.com/aws/aws-auto-scaling-custom-resource
 	//
 	// This member is required.
 	ResourceId *string
@@ -234,47 +279,69 @@ type ScalableTarget struct {
 
 	// The scalable dimension associated with the scalable target. This string
 	// consists of the service namespace, resource type, and scaling property.
+	//
 	//   - ecs:service:DesiredCount - The desired task count of an ECS service.
+	//
 	//   - elasticmapreduce:instancegroup:InstanceCount - The instance count of an EMR
 	//   Instance Group.
+	//
 	//   - ec2:spot-fleet-request:TargetCapacity - The target capacity of a Spot Fleet.
+	//
 	//   - appstream:fleet:DesiredCapacity - The desired capacity of an AppStream 2.0
 	//   fleet.
+	//
 	//   - dynamodb:table:ReadCapacityUnits - The provisioned read capacity for a
 	//   DynamoDB table.
+	//
 	//   - dynamodb:table:WriteCapacityUnits - The provisioned write capacity for a
 	//   DynamoDB table.
+	//
 	//   - dynamodb:index:ReadCapacityUnits - The provisioned read capacity for a
 	//   DynamoDB global secondary index.
+	//
 	//   - dynamodb:index:WriteCapacityUnits - The provisioned write capacity for a
 	//   DynamoDB global secondary index.
+	//
 	//   - rds:cluster:ReadReplicaCount - The count of Aurora Replicas in an Aurora DB
 	//   cluster. Available for Aurora MySQL-compatible edition and Aurora
 	//   PostgreSQL-compatible edition.
+	//
 	//   - sagemaker:variant:DesiredInstanceCount - The number of EC2 instances for a
 	//   SageMaker model endpoint variant.
+	//
 	//   - custom-resource:ResourceType:Property - The scalable dimension for a custom
 	//   resource provided by your own application or service.
+	//
 	//   - comprehend:document-classifier-endpoint:DesiredInferenceUnits - The number
 	//   of inference units for an Amazon Comprehend document classification endpoint.
+	//
 	//   - comprehend:entity-recognizer-endpoint:DesiredInferenceUnits - The number of
 	//   inference units for an Amazon Comprehend entity recognizer endpoint.
+	//
 	//   - lambda:function:ProvisionedConcurrency - The provisioned concurrency for a
 	//   Lambda function.
+	//
 	//   - cassandra:table:ReadCapacityUnits - The provisioned read capacity for an
 	//   Amazon Keyspaces table.
+	//
 	//   - cassandra:table:WriteCapacityUnits - The provisioned write capacity for an
 	//   Amazon Keyspaces table.
+	//
 	//   - kafka:broker-storage:VolumeSize - The provisioned volume size (in GiB) for
 	//   brokers in an Amazon MSK cluster.
+	//
 	//   - elasticache:replication-group:NodeGroups - The number of node groups for an
 	//   Amazon ElastiCache replication group.
+	//
 	//   - elasticache:replication-group:Replicas - The number of replicas per node
 	//   group for an Amazon ElastiCache replication group.
+	//
 	//   - neptune:cluster:ReadReplicaCount - The count of read replicas in an Amazon
 	//   Neptune DB cluster.
+	//
 	//   - sagemaker:variant:DesiredProvisionedConcurrency - The provisioned
 	//   concurrency for a SageMaker Serverless endpoint.
+	//
 	//   - sagemaker:inference-component:DesiredCopyCount - The number of copies across
 	//   an endpoint for a SageMaker inference component.
 	//
@@ -300,18 +367,23 @@ type ScalableTarget struct {
 // Represents the minimum and maximum capacity for a scheduled action.
 type ScalableTargetAction struct {
 
-	// The maximum capacity. Although you can specify a large maximum capacity, note
-	// that service quotas may impose lower limits. Each service has its own default
-	// quotas for the maximum capacity of the resource. If you want to specify a higher
-	// limit, you can request an increase. For more information, consult the
-	// documentation for that service. For information about the default quotas for
-	// each service, see Service endpoints and quotas (https://docs.aws.amazon.com/general/latest/gr/aws-service-information.html)
-	// in the Amazon Web Services General Reference.
+	// The maximum capacity.
+	//
+	// Although you can specify a large maximum capacity, note that service quotas may
+	// impose lower limits. Each service has its own default quotas for the maximum
+	// capacity of the resource. If you want to specify a higher limit, you can request
+	// an increase. For more information, consult the documentation for that service.
+	// For information about the default quotas for each service, see [Service endpoints and quotas]in the Amazon
+	// Web Services General Reference.
+	//
+	// [Service endpoints and quotas]: https://docs.aws.amazon.com/general/latest/gr/aws-service-information.html
 	MaxCapacity *int32
 
-	// The minimum capacity. When the scheduled action runs, the resource will have at
-	// least this much capacity, but it might have more depending on other settings,
-	// such as the target utilization level of a target tracking scaling policy.
+	// The minimum capacity.
+	//
+	// When the scheduled action runs, the resource will have at least this much
+	// capacity, but it might have more depending on other settings, such as the target
+	// utilization level of a target tracking scaling policy.
 	MinCapacity *int32
 
 	noSmithyDocumentSerde
@@ -337,105 +409,146 @@ type ScalingActivity struct {
 
 	// The identifier of the resource associated with the scaling activity. This
 	// string consists of the resource type and unique identifier.
+	//
 	//   - ECS service - The resource type is service and the unique identifier is the
 	//   cluster name and service name. Example: service/default/sample-webapp .
+	//
 	//   - Spot Fleet - The resource type is spot-fleet-request and the unique
 	//   identifier is the Spot Fleet request ID. Example:
 	//   spot-fleet-request/sfr-73fbd2ce-aa30-494c-8788-1cee4EXAMPLE .
+	//
 	//   - EMR cluster - The resource type is instancegroup and the unique identifier
 	//   is the cluster ID and instance group ID. Example:
 	//   instancegroup/j-2EEZNYKUA1NTV/ig-1791Y4E1L8YI0 .
+	//
 	//   - AppStream 2.0 fleet - The resource type is fleet and the unique identifier
 	//   is the fleet name. Example: fleet/sample-fleet .
+	//
 	//   - DynamoDB table - The resource type is table and the unique identifier is the
 	//   table name. Example: table/my-table .
+	//
 	//   - DynamoDB global secondary index - The resource type is index and the unique
 	//   identifier is the index name. Example: table/my-table/index/my-table-index .
+	//
 	//   - Aurora DB cluster - The resource type is cluster and the unique identifier
 	//   is the cluster name. Example: cluster:my-db-cluster .
+	//
 	//   - SageMaker endpoint variant - The resource type is variant and the unique
 	//   identifier is the resource ID. Example:
 	//   endpoint/my-end-point/variant/KMeansClustering .
+	//
 	//   - Custom resources are not supported with a resource type. This parameter
 	//   must specify the OutputValue from the CloudFormation template stack used to
 	//   access the resources. The unique identifier is defined by the service provider.
-	//   More information is available in our GitHub repository (https://github.com/aws/aws-auto-scaling-custom-resource)
-	//   .
+	//   More information is available in our [GitHub repository].
+	//
 	//   - Amazon Comprehend document classification endpoint - The resource type and
 	//   unique identifier are specified using the endpoint ARN. Example:
 	//   arn:aws:comprehend:us-west-2:123456789012:document-classifier-endpoint/EXAMPLE
 	//   .
+	//
 	//   - Amazon Comprehend entity recognizer endpoint - The resource type and unique
 	//   identifier are specified using the endpoint ARN. Example:
 	//   arn:aws:comprehend:us-west-2:123456789012:entity-recognizer-endpoint/EXAMPLE .
+	//
 	//   - Lambda provisioned concurrency - The resource type is function and the
 	//   unique identifier is the function name with a function version or alias name
 	//   suffix that is not $LATEST . Example: function:my-function:prod or
 	//   function:my-function:1 .
+	//
 	//   - Amazon Keyspaces table - The resource type is table and the unique
 	//   identifier is the table name. Example: keyspace/mykeyspace/table/mytable .
+	//
 	//   - Amazon MSK cluster - The resource type and unique identifier are specified
 	//   using the cluster ARN. Example:
 	//   arn:aws:kafka:us-east-1:123456789012:cluster/demo-cluster-1/6357e0b2-0e6a-4b86-a0b4-70df934c2e31-5
 	//   .
+	//
 	//   - Amazon ElastiCache replication group - The resource type is
 	//   replication-group and the unique identifier is the replication group name.
 	//   Example: replication-group/mycluster .
+	//
 	//   - Neptune cluster - The resource type is cluster and the unique identifier is
 	//   the cluster name. Example: cluster:mycluster .
+	//
 	//   - SageMaker Serverless endpoint - The resource type is variant and the unique
 	//   identifier is the resource ID. Example:
 	//   endpoint/my-end-point/variant/KMeansClustering .
+	//
 	//   - SageMaker inference component - The resource type is inference-component and
 	//   the unique identifier is the resource ID. Example:
 	//   inference-component/my-inference-component .
+	//
+	// [GitHub repository]: https://github.com/aws/aws-auto-scaling-custom-resource
 	//
 	// This member is required.
 	ResourceId *string
 
 	// The scalable dimension. This string consists of the service namespace, resource
 	// type, and scaling property.
+	//
 	//   - ecs:service:DesiredCount - The desired task count of an ECS service.
+	//
 	//   - elasticmapreduce:instancegroup:InstanceCount - The instance count of an EMR
 	//   Instance Group.
+	//
 	//   - ec2:spot-fleet-request:TargetCapacity - The target capacity of a Spot Fleet.
+	//
 	//   - appstream:fleet:DesiredCapacity - The desired capacity of an AppStream 2.0
 	//   fleet.
+	//
 	//   - dynamodb:table:ReadCapacityUnits - The provisioned read capacity for a
 	//   DynamoDB table.
+	//
 	//   - dynamodb:table:WriteCapacityUnits - The provisioned write capacity for a
 	//   DynamoDB table.
+	//
 	//   - dynamodb:index:ReadCapacityUnits - The provisioned read capacity for a
 	//   DynamoDB global secondary index.
+	//
 	//   - dynamodb:index:WriteCapacityUnits - The provisioned write capacity for a
 	//   DynamoDB global secondary index.
+	//
 	//   - rds:cluster:ReadReplicaCount - The count of Aurora Replicas in an Aurora DB
 	//   cluster. Available for Aurora MySQL-compatible edition and Aurora
 	//   PostgreSQL-compatible edition.
+	//
 	//   - sagemaker:variant:DesiredInstanceCount - The number of EC2 instances for a
 	//   SageMaker model endpoint variant.
+	//
 	//   - custom-resource:ResourceType:Property - The scalable dimension for a custom
 	//   resource provided by your own application or service.
+	//
 	//   - comprehend:document-classifier-endpoint:DesiredInferenceUnits - The number
 	//   of inference units for an Amazon Comprehend document classification endpoint.
+	//
 	//   - comprehend:entity-recognizer-endpoint:DesiredInferenceUnits - The number of
 	//   inference units for an Amazon Comprehend entity recognizer endpoint.
+	//
 	//   - lambda:function:ProvisionedConcurrency - The provisioned concurrency for a
 	//   Lambda function.
+	//
 	//   - cassandra:table:ReadCapacityUnits - The provisioned read capacity for an
 	//   Amazon Keyspaces table.
+	//
 	//   - cassandra:table:WriteCapacityUnits - The provisioned write capacity for an
 	//   Amazon Keyspaces table.
+	//
 	//   - kafka:broker-storage:VolumeSize - The provisioned volume size (in GiB) for
 	//   brokers in an Amazon MSK cluster.
+	//
 	//   - elasticache:replication-group:NodeGroups - The number of node groups for an
 	//   Amazon ElastiCache replication group.
+	//
 	//   - elasticache:replication-group:Replicas - The number of replicas per node
 	//   group for an Amazon ElastiCache replication group.
+	//
 	//   - neptune:cluster:ReadReplicaCount - The count of read replicas in an Amazon
 	//   Neptune DB cluster.
+	//
 	//   - sagemaker:variant:DesiredProvisionedConcurrency - The provisioned
 	//   concurrency for a SageMaker Serverless endpoint.
+	//
 	//   - sagemaker:inference-component:DesiredCopyCount - The number of copies across
 	//   an endpoint for a SageMaker inference component.
 	//
@@ -465,8 +578,9 @@ type ScalingActivity struct {
 	EndTime *time.Time
 
 	// Machine-readable data that describes the reason for a not scaled activity. Only
-	// available when DescribeScalingActivities (https://docs.aws.amazon.com/autoscaling/application/APIReference/API_DescribeScalingActivities.html)
-	// includes not scaled activities.
+	// available when [DescribeScalingActivities]includes not scaled activities.
+	//
+	// [DescribeScalingActivities]: https://docs.aws.amazon.com/autoscaling/application/APIReference/API_DescribeScalingActivities.html
 	NotScaledReasons []NotScaledReason
 
 	// A simple message about the current status of the scaling activity.
@@ -475,10 +589,12 @@ type ScalingActivity struct {
 	noSmithyDocumentSerde
 }
 
-// Represents a scaling policy to use with Application Auto Scaling. For more
-// information about configuring scaling policies for a specific service, see
-// Amazon Web Services services that you can use with Application Auto Scaling (https://docs.aws.amazon.com/autoscaling/application/userguide/integrated-services-list.html)
-// in the Application Auto Scaling User Guide.
+// Represents a scaling policy to use with Application Auto Scaling.
+//
+// For more information about configuring scaling policies for a specific service,
+// see [Amazon Web Services services that you can use with Application Auto Scaling]in the Application Auto Scaling User Guide.
+//
+// [Amazon Web Services services that you can use with Application Auto Scaling]: https://docs.aws.amazon.com/autoscaling/application/userguide/integrated-services-list.html
 type ScalingPolicy struct {
 
 	// The Unix timestamp for when the scaling policy was created.
@@ -496,115 +612,160 @@ type ScalingPolicy struct {
 	// This member is required.
 	PolicyName *string
 
-	// The scaling policy type. The following policy types are supported:
-	// TargetTrackingScaling —Not supported for Amazon EMR StepScaling —Not supported
-	// for DynamoDB, Amazon Comprehend, Lambda, Amazon Keyspaces, Amazon MSK, Amazon
-	// ElastiCache, or Neptune.
+	// The scaling policy type.
+	//
+	// The following policy types are supported:
+	//
+	// TargetTrackingScaling —Not supported for Amazon EMR
+	//
+	// StepScaling —Not supported for DynamoDB, Amazon Comprehend, Lambda, Amazon
+	// Keyspaces, Amazon MSK, Amazon ElastiCache, or Neptune.
 	//
 	// This member is required.
 	PolicyType PolicyType
 
 	// The identifier of the resource associated with the scaling policy. This string
 	// consists of the resource type and unique identifier.
+	//
 	//   - ECS service - The resource type is service and the unique identifier is the
 	//   cluster name and service name. Example: service/default/sample-webapp .
+	//
 	//   - Spot Fleet - The resource type is spot-fleet-request and the unique
 	//   identifier is the Spot Fleet request ID. Example:
 	//   spot-fleet-request/sfr-73fbd2ce-aa30-494c-8788-1cee4EXAMPLE .
+	//
 	//   - EMR cluster - The resource type is instancegroup and the unique identifier
 	//   is the cluster ID and instance group ID. Example:
 	//   instancegroup/j-2EEZNYKUA1NTV/ig-1791Y4E1L8YI0 .
+	//
 	//   - AppStream 2.0 fleet - The resource type is fleet and the unique identifier
 	//   is the fleet name. Example: fleet/sample-fleet .
+	//
 	//   - DynamoDB table - The resource type is table and the unique identifier is the
 	//   table name. Example: table/my-table .
+	//
 	//   - DynamoDB global secondary index - The resource type is index and the unique
 	//   identifier is the index name. Example: table/my-table/index/my-table-index .
+	//
 	//   - Aurora DB cluster - The resource type is cluster and the unique identifier
 	//   is the cluster name. Example: cluster:my-db-cluster .
+	//
 	//   - SageMaker endpoint variant - The resource type is variant and the unique
 	//   identifier is the resource ID. Example:
 	//   endpoint/my-end-point/variant/KMeansClustering .
+	//
 	//   - Custom resources are not supported with a resource type. This parameter
 	//   must specify the OutputValue from the CloudFormation template stack used to
 	//   access the resources. The unique identifier is defined by the service provider.
-	//   More information is available in our GitHub repository (https://github.com/aws/aws-auto-scaling-custom-resource)
-	//   .
+	//   More information is available in our [GitHub repository].
+	//
 	//   - Amazon Comprehend document classification endpoint - The resource type and
 	//   unique identifier are specified using the endpoint ARN. Example:
 	//   arn:aws:comprehend:us-west-2:123456789012:document-classifier-endpoint/EXAMPLE
 	//   .
+	//
 	//   - Amazon Comprehend entity recognizer endpoint - The resource type and unique
 	//   identifier are specified using the endpoint ARN. Example:
 	//   arn:aws:comprehend:us-west-2:123456789012:entity-recognizer-endpoint/EXAMPLE .
+	//
 	//   - Lambda provisioned concurrency - The resource type is function and the
 	//   unique identifier is the function name with a function version or alias name
 	//   suffix that is not $LATEST . Example: function:my-function:prod or
 	//   function:my-function:1 .
+	//
 	//   - Amazon Keyspaces table - The resource type is table and the unique
 	//   identifier is the table name. Example: keyspace/mykeyspace/table/mytable .
+	//
 	//   - Amazon MSK cluster - The resource type and unique identifier are specified
 	//   using the cluster ARN. Example:
 	//   arn:aws:kafka:us-east-1:123456789012:cluster/demo-cluster-1/6357e0b2-0e6a-4b86-a0b4-70df934c2e31-5
 	//   .
+	//
 	//   - Amazon ElastiCache replication group - The resource type is
 	//   replication-group and the unique identifier is the replication group name.
 	//   Example: replication-group/mycluster .
+	//
 	//   - Neptune cluster - The resource type is cluster and the unique identifier is
 	//   the cluster name. Example: cluster:mycluster .
+	//
 	//   - SageMaker Serverless endpoint - The resource type is variant and the unique
 	//   identifier is the resource ID. Example:
 	//   endpoint/my-end-point/variant/KMeansClustering .
+	//
 	//   - SageMaker inference component - The resource type is inference-component and
 	//   the unique identifier is the resource ID. Example:
 	//   inference-component/my-inference-component .
+	//
+	// [GitHub repository]: https://github.com/aws/aws-auto-scaling-custom-resource
 	//
 	// This member is required.
 	ResourceId *string
 
 	// The scalable dimension. This string consists of the service namespace, resource
 	// type, and scaling property.
+	//
 	//   - ecs:service:DesiredCount - The desired task count of an ECS service.
+	//
 	//   - elasticmapreduce:instancegroup:InstanceCount - The instance count of an EMR
 	//   Instance Group.
+	//
 	//   - ec2:spot-fleet-request:TargetCapacity - The target capacity of a Spot Fleet.
+	//
 	//   - appstream:fleet:DesiredCapacity - The desired capacity of an AppStream 2.0
 	//   fleet.
+	//
 	//   - dynamodb:table:ReadCapacityUnits - The provisioned read capacity for a
 	//   DynamoDB table.
+	//
 	//   - dynamodb:table:WriteCapacityUnits - The provisioned write capacity for a
 	//   DynamoDB table.
+	//
 	//   - dynamodb:index:ReadCapacityUnits - The provisioned read capacity for a
 	//   DynamoDB global secondary index.
+	//
 	//   - dynamodb:index:WriteCapacityUnits - The provisioned write capacity for a
 	//   DynamoDB global secondary index.
+	//
 	//   - rds:cluster:ReadReplicaCount - The count of Aurora Replicas in an Aurora DB
 	//   cluster. Available for Aurora MySQL-compatible edition and Aurora
 	//   PostgreSQL-compatible edition.
+	//
 	//   - sagemaker:variant:DesiredInstanceCount - The number of EC2 instances for a
 	//   SageMaker model endpoint variant.
+	//
 	//   - custom-resource:ResourceType:Property - The scalable dimension for a custom
 	//   resource provided by your own application or service.
+	//
 	//   - comprehend:document-classifier-endpoint:DesiredInferenceUnits - The number
 	//   of inference units for an Amazon Comprehend document classification endpoint.
+	//
 	//   - comprehend:entity-recognizer-endpoint:DesiredInferenceUnits - The number of
 	//   inference units for an Amazon Comprehend entity recognizer endpoint.
+	//
 	//   - lambda:function:ProvisionedConcurrency - The provisioned concurrency for a
 	//   Lambda function.
+	//
 	//   - cassandra:table:ReadCapacityUnits - The provisioned read capacity for an
 	//   Amazon Keyspaces table.
+	//
 	//   - cassandra:table:WriteCapacityUnits - The provisioned write capacity for an
 	//   Amazon Keyspaces table.
+	//
 	//   - kafka:broker-storage:VolumeSize - The provisioned volume size (in GiB) for
 	//   brokers in an Amazon MSK cluster.
+	//
 	//   - elasticache:replication-group:NodeGroups - The number of node groups for an
 	//   Amazon ElastiCache replication group.
+	//
 	//   - elasticache:replication-group:Replicas - The number of replicas per node
 	//   group for an Amazon ElastiCache replication group.
+	//
 	//   - neptune:cluster:ReadReplicaCount - The count of read replicas in an Amazon
 	//   Neptune DB cluster.
+	//
 	//   - sagemaker:variant:DesiredProvisionedConcurrency - The provisioned
 	//   concurrency for a SageMaker Serverless endpoint.
+	//
 	//   - sagemaker:inference-component:DesiredCopyCount - The number of copies across
 	//   an endpoint for a SageMaker inference component.
 	//
@@ -639,76 +800,106 @@ type ScheduledAction struct {
 
 	// The identifier of the resource associated with the scaling policy. This string
 	// consists of the resource type and unique identifier.
+	//
 	//   - ECS service - The resource type is service and the unique identifier is the
 	//   cluster name and service name. Example: service/default/sample-webapp .
+	//
 	//   - Spot Fleet - The resource type is spot-fleet-request and the unique
 	//   identifier is the Spot Fleet request ID. Example:
 	//   spot-fleet-request/sfr-73fbd2ce-aa30-494c-8788-1cee4EXAMPLE .
+	//
 	//   - EMR cluster - The resource type is instancegroup and the unique identifier
 	//   is the cluster ID and instance group ID. Example:
 	//   instancegroup/j-2EEZNYKUA1NTV/ig-1791Y4E1L8YI0 .
+	//
 	//   - AppStream 2.0 fleet - The resource type is fleet and the unique identifier
 	//   is the fleet name. Example: fleet/sample-fleet .
+	//
 	//   - DynamoDB table - The resource type is table and the unique identifier is the
 	//   table name. Example: table/my-table .
+	//
 	//   - DynamoDB global secondary index - The resource type is index and the unique
 	//   identifier is the index name. Example: table/my-table/index/my-table-index .
+	//
 	//   - Aurora DB cluster - The resource type is cluster and the unique identifier
 	//   is the cluster name. Example: cluster:my-db-cluster .
+	//
 	//   - SageMaker endpoint variant - The resource type is variant and the unique
 	//   identifier is the resource ID. Example:
 	//   endpoint/my-end-point/variant/KMeansClustering .
+	//
 	//   - Custom resources are not supported with a resource type. This parameter
 	//   must specify the OutputValue from the CloudFormation template stack used to
 	//   access the resources. The unique identifier is defined by the service provider.
-	//   More information is available in our GitHub repository (https://github.com/aws/aws-auto-scaling-custom-resource)
-	//   .
+	//   More information is available in our [GitHub repository].
+	//
 	//   - Amazon Comprehend document classification endpoint - The resource type and
 	//   unique identifier are specified using the endpoint ARN. Example:
 	//   arn:aws:comprehend:us-west-2:123456789012:document-classifier-endpoint/EXAMPLE
 	//   .
+	//
 	//   - Amazon Comprehend entity recognizer endpoint - The resource type and unique
 	//   identifier are specified using the endpoint ARN. Example:
 	//   arn:aws:comprehend:us-west-2:123456789012:entity-recognizer-endpoint/EXAMPLE .
+	//
 	//   - Lambda provisioned concurrency - The resource type is function and the
 	//   unique identifier is the function name with a function version or alias name
 	//   suffix that is not $LATEST . Example: function:my-function:prod or
 	//   function:my-function:1 .
+	//
 	//   - Amazon Keyspaces table - The resource type is table and the unique
 	//   identifier is the table name. Example: keyspace/mykeyspace/table/mytable .
+	//
 	//   - Amazon MSK cluster - The resource type and unique identifier are specified
 	//   using the cluster ARN. Example:
 	//   arn:aws:kafka:us-east-1:123456789012:cluster/demo-cluster-1/6357e0b2-0e6a-4b86-a0b4-70df934c2e31-5
 	//   .
+	//
 	//   - Amazon ElastiCache replication group - The resource type is
 	//   replication-group and the unique identifier is the replication group name.
 	//   Example: replication-group/mycluster .
+	//
 	//   - Neptune cluster - The resource type is cluster and the unique identifier is
 	//   the cluster name. Example: cluster:mycluster .
+	//
 	//   - SageMaker Serverless endpoint - The resource type is variant and the unique
 	//   identifier is the resource ID. Example:
 	//   endpoint/my-end-point/variant/KMeansClustering .
+	//
 	//   - SageMaker inference component - The resource type is inference-component and
 	//   the unique identifier is the resource ID. Example:
 	//   inference-component/my-inference-component .
+	//
+	// [GitHub repository]: https://github.com/aws/aws-auto-scaling-custom-resource
 	//
 	// This member is required.
 	ResourceId *string
 
 	// The schedule for this action. The following formats are supported:
+	//
 	//   - At expressions - " at(yyyy-mm-ddThh:mm:ss) "
+	//
 	//   - Rate expressions - " rate(value unit) "
+	//
 	//   - Cron expressions - " cron(fields) "
+	//
 	// At expressions are useful for one-time schedules. Cron expressions are useful
 	// for scheduled actions that run periodically at a specified date and time, and
 	// rate expressions are useful for scheduled actions that run at a regular
-	// interval. At and cron expressions use Universal Coordinated Time (UTC) by
-	// default. The cron format consists of six fields separated by white spaces:
-	// [Minutes] [Hours] [Day_of_Month] [Month] [Day_of_Week] [Year]. For rate
-	// expressions, value is a positive integer and unit is minute | minutes | hour |
-	// hours | day | days . For more information and examples, see Example scheduled
-	// actions for Application Auto Scaling (https://docs.aws.amazon.com/autoscaling/application/userguide/examples-scheduled-actions.html)
-	// in the Application Auto Scaling User Guide.
+	// interval.
+	//
+	// At and cron expressions use Universal Coordinated Time (UTC) by default.
+	//
+	// The cron format consists of six fields separated by white spaces: [Minutes]
+	// [Hours] [Day_of_Month] [Month] [Day_of_Week] [Year].
+	//
+	// For rate expressions, value is a positive integer and unit is minute | minutes
+	// | hour | hours | day | days .
+	//
+	// For more information and examples, see [Example scheduled actions for Application Auto Scaling] in the Application Auto Scaling User
+	// Guide.
+	//
+	// [Example scheduled actions for Application Auto Scaling]: https://docs.aws.amazon.com/autoscaling/application/userguide/examples-scheduled-actions.html
 	//
 	// This member is required.
 	Schedule *string
@@ -734,47 +925,69 @@ type ScheduledAction struct {
 
 	// The scalable dimension. This string consists of the service namespace, resource
 	// type, and scaling property.
+	//
 	//   - ecs:service:DesiredCount - The desired task count of an ECS service.
+	//
 	//   - elasticmapreduce:instancegroup:InstanceCount - The instance count of an EMR
 	//   Instance Group.
+	//
 	//   - ec2:spot-fleet-request:TargetCapacity - The target capacity of a Spot Fleet.
+	//
 	//   - appstream:fleet:DesiredCapacity - The desired capacity of an AppStream 2.0
 	//   fleet.
+	//
 	//   - dynamodb:table:ReadCapacityUnits - The provisioned read capacity for a
 	//   DynamoDB table.
+	//
 	//   - dynamodb:table:WriteCapacityUnits - The provisioned write capacity for a
 	//   DynamoDB table.
+	//
 	//   - dynamodb:index:ReadCapacityUnits - The provisioned read capacity for a
 	//   DynamoDB global secondary index.
+	//
 	//   - dynamodb:index:WriteCapacityUnits - The provisioned write capacity for a
 	//   DynamoDB global secondary index.
+	//
 	//   - rds:cluster:ReadReplicaCount - The count of Aurora Replicas in an Aurora DB
 	//   cluster. Available for Aurora MySQL-compatible edition and Aurora
 	//   PostgreSQL-compatible edition.
+	//
 	//   - sagemaker:variant:DesiredInstanceCount - The number of EC2 instances for a
 	//   SageMaker model endpoint variant.
+	//
 	//   - custom-resource:ResourceType:Property - The scalable dimension for a custom
 	//   resource provided by your own application or service.
+	//
 	//   - comprehend:document-classifier-endpoint:DesiredInferenceUnits - The number
 	//   of inference units for an Amazon Comprehend document classification endpoint.
+	//
 	//   - comprehend:entity-recognizer-endpoint:DesiredInferenceUnits - The number of
 	//   inference units for an Amazon Comprehend entity recognizer endpoint.
+	//
 	//   - lambda:function:ProvisionedConcurrency - The provisioned concurrency for a
 	//   Lambda function.
+	//
 	//   - cassandra:table:ReadCapacityUnits - The provisioned read capacity for an
 	//   Amazon Keyspaces table.
+	//
 	//   - cassandra:table:WriteCapacityUnits - The provisioned write capacity for an
 	//   Amazon Keyspaces table.
+	//
 	//   - kafka:broker-storage:VolumeSize - The provisioned volume size (in GiB) for
 	//   brokers in an Amazon MSK cluster.
+	//
 	//   - elasticache:replication-group:NodeGroups - The number of node groups for an
 	//   Amazon ElastiCache replication group.
+	//
 	//   - elasticache:replication-group:Replicas - The number of replicas per node
 	//   group for an Amazon ElastiCache replication group.
+	//
 	//   - neptune:cluster:ReadReplicaCount - The count of read replicas in an Amazon
 	//   Neptune DB cluster.
+	//
 	//   - sagemaker:variant:DesiredProvisionedConcurrency - The provisioned
 	//   concurrency for a SageMaker Serverless endpoint.
+	//
 	//   - sagemaker:inference-component:DesiredCopyCount - The number of copies across
 	//   an endpoint for a SageMaker inference component.
 	ScalableDimension ScalableDimension
@@ -796,25 +1009,34 @@ type ScheduledAction struct {
 	noSmithyDocumentSerde
 }
 
-// Represents a step adjustment for a StepScalingPolicyConfiguration (https://docs.aws.amazon.com/autoscaling/application/APIReference/API_StepScalingPolicyConfiguration.html)
-// . Describes an adjustment based on the difference between the value of the
-// aggregated CloudWatch metric and the breach threshold that you've defined for
-// the alarm. For the following examples, suppose that you have an alarm with a
-// breach threshold of 50:
+// Represents a step adjustment for a [StepScalingPolicyConfiguration]. Describes an adjustment based on the
+// difference between the value of the aggregated CloudWatch metric and the breach
+// threshold that you've defined for the alarm.
+//
+// For the following examples, suppose that you have an alarm with a breach
+// threshold of 50:
+//
 //   - To initiate the adjustment when the metric is greater than or equal to 50
 //     and less than 60, specify a lower bound of 0 and an upper bound of 10 .
+//
 //   - To initiate the adjustment when the metric is greater than 40 and less than
 //     or equal to 50, specify a lower bound of -10 and an upper bound of 0 .
 //
 // There are a few rules for the step adjustments for your step policy:
+//
 //   - The ranges of your step adjustments can't overlap or have a gap.
+//
 //   - At most one step adjustment can have a null lower bound. If one step
 //     adjustment has a negative lower bound, then there must be a step adjustment with
 //     a null lower bound.
+//
 //   - At most one step adjustment can have a null upper bound. If one step
 //     adjustment has a positive upper bound, then there must be a step adjustment with
 //     a null upper bound.
+//
 //   - The upper and lower bound can't be null in the same step adjustment.
+//
+// [StepScalingPolicyConfiguration]: https://docs.aws.amazon.com/autoscaling/application/APIReference/API_StepScalingPolicyConfiguration.html
 type StepAdjustment struct {
 
 	// The amount by which to scale, based on the specified adjustment type. A
@@ -836,29 +1058,37 @@ type StepAdjustment struct {
 	// CloudWatch metric. If the metric value is above the breach threshold, the upper
 	// bound is exclusive (the metric must be less than the threshold plus the upper
 	// bound). Otherwise, it's inclusive (the metric must be less than or equal to the
-	// threshold plus the upper bound). A null value indicates positive infinity. The
-	// upper bound must be greater than the lower bound.
+	// threshold plus the upper bound). A null value indicates positive infinity.
+	//
+	// The upper bound must be greater than the lower bound.
 	MetricIntervalUpperBound *float64
 
 	noSmithyDocumentSerde
 }
 
 // Represents a step scaling policy configuration to use with Application Auto
-// Scaling. For more information, see Step scaling policies (https://docs.aws.amazon.com/autoscaling/application/userguide/application-auto-scaling-step-scaling-policies.html)
-// in the Application Auto Scaling User Guide.
+// Scaling.
+//
+// For more information, see [Step scaling policies] in the Application Auto Scaling User Guide.
+//
+// [Step scaling policies]: https://docs.aws.amazon.com/autoscaling/application/userguide/application-auto-scaling-step-scaling-policies.html
 type StepScalingPolicyConfiguration struct {
 
-	// Specifies how the ScalingAdjustment value in a StepAdjustment (https://docs.aws.amazon.com/autoscaling/application/APIReference/API_StepAdjustment.html)
-	// is interpreted (for example, an absolute number or a percentage). The valid
-	// values are ChangeInCapacity , ExactCapacity , and PercentChangeInCapacity .
+	// Specifies how the ScalingAdjustment value in a [StepAdjustment] is interpreted (for example, an
+	// absolute number or a percentage). The valid values are ChangeInCapacity ,
+	// ExactCapacity , and PercentChangeInCapacity .
+	//
 	// AdjustmentType is required if you are adding a new step scaling policy
 	// configuration.
+	//
+	// [StepAdjustment]: https://docs.aws.amazon.com/autoscaling/application/APIReference/API_StepAdjustment.html
 	AdjustmentType AdjustmentType
 
 	// The amount of time, in seconds, to wait for a previous scaling activity to take
-	// effect. If not specified, the default value is 300. For more information, see
-	// Cooldown period (https://docs.aws.amazon.com/autoscaling/application/userguide/step-scaling-policy-overview.html#step-scaling-cooldown)
+	// effect. If not specified, the default value is 300. For more information, see [Cooldown period]
 	// in the Application Auto Scaling User Guide.
+	//
+	// [Cooldown period]: https://docs.aws.amazon.com/autoscaling/application/userguide/step-scaling-policy-overview.html#step-scaling-cooldown
 	Cooldown *int32
 
 	// The aggregation type for the CloudWatch metrics. Valid values are Minimum ,
@@ -876,8 +1106,10 @@ type StepScalingPolicyConfiguration struct {
 	MinAdjustmentMagnitude *int32
 
 	// A set of adjustments that enable you to scale based on the size of the alarm
-	// breach. At least one step adjustment is required if you are adding a new step
-	// scaling policy configuration.
+	// breach.
+	//
+	// At least one step adjustment is required if you are adding a new step scaling
+	// policy configuration.
 	StepAdjustments []StepAdjustment
 
 	noSmithyDocumentSerde
@@ -905,23 +1137,28 @@ type SuspendedState struct {
 	noSmithyDocumentSerde
 }
 
-// Represents a specific metric. Metric is a property of the
-// TargetTrackingMetricStat object.
+// Represents a specific metric.
+//
+// Metric is a property of the TargetTrackingMetricStat object.
 type TargetTrackingMetric struct {
 
 	// The dimensions for the metric. For the list of available dimensions, see the
-	// Amazon Web Services documentation available from the table in Amazon Web
-	// Services services that publish CloudWatch metrics  (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/aws-services-cloudwatch-metrics.html)
-	// in the Amazon CloudWatch User Guide. Conditional: If you published your metric
-	// with dimensions, you must specify the same dimensions in your scaling policy.
+	// Amazon Web Services documentation available from the table in [Amazon Web Services services that publish CloudWatch metrics]in the Amazon
+	// CloudWatch User Guide.
+	//
+	// Conditional: If you published your metric with dimensions, you must specify the
+	// same dimensions in your scaling policy.
+	//
+	// [Amazon Web Services services that publish CloudWatch metrics]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/aws-services-cloudwatch-metrics.html
 	Dimensions []TargetTrackingMetricDimension
 
 	// The name of the metric.
 	MetricName *string
 
-	// The namespace of the metric. For more information, see the table in Amazon Web
-	// Services services that publish CloudWatch metrics  (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/aws-services-cloudwatch-metrics.html)
-	// in the Amazon CloudWatch User Guide.
+	// The namespace of the metric. For more information, see the table in [Amazon Web Services services that publish CloudWatch metrics] in the
+	// Amazon CloudWatch User Guide.
+	//
+	// [Amazon Web Services services that publish CloudWatch metrics]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/aws-services-cloudwatch-metrics.html
 	Namespace *string
 
 	noSmithyDocumentSerde
@@ -930,10 +1167,12 @@ type TargetTrackingMetric struct {
 // The metric data to return. Also defines whether this call is returning data for
 // one metric only, or whether it is performing a math expression on the values of
 // returned metric statistics to create a new time series. A time series is a
-// series of data points, each of which is associated with a timestamp. For more
-// information and examples, see Create a target tracking scaling policy for
-// Application Auto Scaling using metric math (https://docs.aws.amazon.com/autoscaling/application/userguide/application-auto-scaling-target-tracking-metric-math.html)
-// in the Application Auto Scaling User Guide.
+// series of data points, each of which is associated with a timestamp.
+//
+// For more information and examples, see [Create a target tracking scaling policy for Application Auto Scaling using metric math] in the Application Auto Scaling User
+// Guide.
+//
+// [Create a target tracking scaling policy for Application Auto Scaling using metric math]: https://docs.aws.amazon.com/autoscaling/application/userguide/application-auto-scaling-target-tracking-metric-math.html
 type TargetTrackingMetricDataQuery struct {
 
 	// A short name that identifies the object's results in the response. This name
@@ -949,27 +1188,31 @@ type TargetTrackingMetricDataQuery struct {
 	// The math expression to perform on the returned data, if this object is
 	// performing a math expression. This expression can use the Id of the other
 	// metrics to refer to those metrics, and can also use the Id of other expressions
-	// to use the result of those expressions. Conditional: Within each
-	// TargetTrackingMetricDataQuery object, you must specify either Expression or
-	// MetricStat , but not both.
+	// to use the result of those expressions.
+	//
+	// Conditional: Within each TargetTrackingMetricDataQuery object, you must specify
+	// either Expression or MetricStat , but not both.
 	Expression *string
 
 	// A human-readable label for this metric or expression. This is especially useful
 	// if this is a math expression, so that you know what the value represents.
 	Label *string
 
-	// Information about the metric data to return. Conditional: Within each
-	// MetricDataQuery object, you must specify either Expression or MetricStat , but
-	// not both.
+	// Information about the metric data to return.
+	//
+	// Conditional: Within each MetricDataQuery object, you must specify either
+	// Expression or MetricStat , but not both.
 	MetricStat *TargetTrackingMetricStat
 
 	// Indicates whether to return the timestamps and raw data values of this metric.
+	//
 	// If you use any math expressions, specify true for this value for only the final
 	// math expression that the metric specification is based on. You must specify
 	// false for ReturnData for all the other metrics and expressions used in the
-	// metric specification. If you are only retrieving metrics and not performing any
-	// math expressions, do not specify anything for ReturnData . This sets it to its
-	// default ( true ).
+	// metric specification.
+	//
+	// If you are only retrieving metrics and not performing any math expressions, do
+	// not specify anything for ReturnData . This sets it to its default ( true ).
 	ReturnData *bool
 
 	noSmithyDocumentSerde
@@ -992,40 +1235,51 @@ type TargetTrackingMetricDimension struct {
 }
 
 // This structure defines the CloudWatch metric to return, along with the
-// statistic, period, and unit. For more information about the CloudWatch
-// terminology below, see Amazon CloudWatch concepts (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/cloudwatch_concepts.html)
-// in the Amazon CloudWatch User Guide.
+// statistic, period, and unit.
+//
+// For more information about the CloudWatch terminology below, see [Amazon CloudWatch concepts] in the Amazon
+// CloudWatch User Guide.
+//
+// [Amazon CloudWatch concepts]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/cloudwatch_concepts.html
 type TargetTrackingMetricStat struct {
 
 	// The CloudWatch metric to return, including the metric name, namespace, and
 	// dimensions. To get the exact metric name, namespace, and dimensions, inspect the
-	// Metric (https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_Metric.html)
-	// object that is returned by a call to ListMetrics (https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_ListMetrics.html)
-	// .
+	// [Metric]object that is returned by a call to [ListMetrics].
+	//
+	// [ListMetrics]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_ListMetrics.html
+	// [Metric]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_Metric.html
 	//
 	// This member is required.
 	Metric *TargetTrackingMetric
 
 	// The statistic to return. It can include any CloudWatch statistic or extended
-	// statistic. For a list of valid values, see the table in Statistics (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/cloudwatch_concepts.html#Statistic)
-	// in the Amazon CloudWatch User Guide. The most commonly used metric for scaling
-	// is Average .
+	// statistic. For a list of valid values, see the table in [Statistics]in the Amazon
+	// CloudWatch User Guide.
+	//
+	// The most commonly used metric for scaling is Average .
+	//
+	// [Statistics]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/cloudwatch_concepts.html#Statistic
 	//
 	// This member is required.
 	Stat *string
 
 	// The unit to use for the returned data points. For a complete list of the units
-	// that CloudWatch supports, see the MetricDatum (https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_MetricDatum.html)
-	// data type in the Amazon CloudWatch API Reference.
+	// that CloudWatch supports, see the [MetricDatum]data type in the Amazon CloudWatch API
+	// Reference.
+	//
+	// [MetricDatum]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_MetricDatum.html
 	Unit *string
 
 	noSmithyDocumentSerde
 }
 
 // Represents a target tracking scaling policy configuration to use with
-// Application Auto Scaling. For more information, see Target tracking scaling
-// policies (https://docs.aws.amazon.com/autoscaling/application/userguide/application-auto-scaling-target-tracking.html)
-// in the Application Auto Scaling User Guide.
+// Application Auto Scaling.
+//
+// For more information, see [Target tracking scaling policies] in the Application Auto Scaling User Guide.
+//
+// [Target tracking scaling policies]: https://docs.aws.amazon.com/autoscaling/application/userguide/application-auto-scaling-target-tracking.html
 type TargetTrackingScalingPolicyConfiguration struct {
 
 	// The target value for the metric. Although this property accepts numbers of type
@@ -1033,9 +1287,11 @@ type TargetTrackingScalingPolicyConfiguration struct {
 	// must be in the range of -2^360 to 2^360. The value must be a valid number based
 	// on the choice of metric. For example, if the metric is CPU utilization, then the
 	// target value is a percent value that represents how much of the CPU can be used
-	// before scaling out. If the scaling policy specifies the ALBRequestCountPerTarget
-	// predefined metric, specify the target utilization as the optimal average request
-	// count per target during any one-minute interval.
+	// before scaling out.
+	//
+	// If the scaling policy specifies the ALBRequestCountPerTarget predefined metric,
+	// specify the target utilization as the optimal average request count per target
+	// during any one-minute interval.
 	//
 	// This member is required.
 	TargetValue *float64
@@ -1057,14 +1313,16 @@ type TargetTrackingScalingPolicyConfiguration struct {
 
 	// The amount of time, in seconds, after a scale-in activity completes before
 	// another scale-in activity can start. For more information and for default
-	// values, see Define cooldown periods (https://docs.aws.amazon.com/autoscaling/application/userguide/target-tracking-scaling-policy-overview.html#target-tracking-cooldown)
-	// in the Application Auto Scaling User Guide.
+	// values, see [Define cooldown periods]in the Application Auto Scaling User Guide.
+	//
+	// [Define cooldown periods]: https://docs.aws.amazon.com/autoscaling/application/userguide/target-tracking-scaling-policy-overview.html#target-tracking-cooldown
 	ScaleInCooldown *int32
 
 	// The amount of time, in seconds, to wait for a previous scale-out activity to
-	// take effect. For more information and for default values, see Define cooldown
-	// periods (https://docs.aws.amazon.com/autoscaling/application/userguide/target-tracking-scaling-policy-overview.html#target-tracking-cooldown)
-	// in the Application Auto Scaling User Guide.
+	// take effect. For more information and for default values, see [Define cooldown periods]in the
+	// Application Auto Scaling User Guide.
+	//
+	// [Define cooldown periods]: https://docs.aws.amazon.com/autoscaling/application/userguide/target-tracking-scaling-policy-overview.html#target-tracking-cooldown
 	ScaleOutCooldown *int32
 
 	noSmithyDocumentSerde

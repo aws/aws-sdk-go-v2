@@ -6,20 +6,22 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/cloudfront/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Gets a list of response headers policies. You can optionally apply a filter to
-// get only the managed policies created by Amazon Web Services, or only the custom
-// policies created in your Amazon Web Services account. You can optionally specify
-// the maximum number of items to receive in the response. If the total number of
-// items in the list exceeds the maximum that you specify, or the default maximum,
-// the response is paginated. To get the next page of items, send a subsequent
-// request that specifies the NextMarker value from the current response as the
-// Marker value in the subsequent request.
+// Gets a list of response headers policies.
+//
+// You can optionally apply a filter to get only the managed policies created by
+// Amazon Web Services, or only the custom policies created in your Amazon Web
+// Services account.
+//
+// You can optionally specify the maximum number of items to receive in the
+// response. If the total number of items in the list exceeds the maximum that you
+// specify, or the default maximum, the response is paginated. To get the next page
+// of items, send a subsequent request that specifies the NextMarker value from
+// the current response as the Marker value in the subsequent request.
 func (c *Client) ListResponseHeadersPolicies(ctx context.Context, params *ListResponseHeadersPoliciesInput, optFns ...func(*Options)) (*ListResponseHeadersPoliciesOutput, error) {
 	if params == nil {
 		params = &ListResponseHeadersPoliciesInput{}
@@ -49,7 +51,9 @@ type ListResponseHeadersPoliciesInput struct {
 
 	// A filter to get only the specified kind of response headers policies. Valid
 	// values are:
+	//
 	//   - managed – Gets only the managed policies created by Amazon Web Services.
+	//
 	//   - custom – Gets only the custom policies created in your Amazon Web Services
 	//   account.
 	Type types.ResponseHeadersPolicyType
@@ -90,25 +94,25 @@ func (c *Client) addOperationListResponseHeadersPoliciesMiddlewares(stack *middl
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -123,10 +127,13 @@ func (c *Client) addOperationListResponseHeadersPoliciesMiddlewares(stack *middl
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListResponseHeadersPolicies(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

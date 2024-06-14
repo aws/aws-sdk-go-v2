@@ -18,7 +18,16 @@ import (
 	"io"
 	"io/ioutil"
 	"strings"
+	"time"
 )
+
+func deserializeS3Expires(v string) (*time.Time, error) {
+	t, err := smithytime.ParseHTTPDate(v)
+	if err != nil {
+		return nil, nil
+	}
+	return &t, nil
+}
 
 type awsRestjson1_deserializeOpAssociateLenses struct {
 }
@@ -3381,6 +3390,180 @@ func awsRestjson1_deserializeOpDocumentGetConsolidatedReportOutput(v **GetConsol
 					return fmt.Errorf("expected NextToken to be of type string, got %T instead", value)
 				}
 				sv.NextToken = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+type awsRestjson1_deserializeOpGetGlobalSettings struct {
+}
+
+func (*awsRestjson1_deserializeOpGetGlobalSettings) ID() string {
+	return "OperationDeserializer"
+}
+
+func (m *awsRestjson1_deserializeOpGetGlobalSettings) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
+) {
+	out, metadata, err = next.HandleDeserialize(ctx, in)
+	if err != nil {
+		return out, metadata, err
+	}
+
+	response, ok := out.RawResponse.(*smithyhttp.Response)
+	if !ok {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
+	}
+
+	if response.StatusCode < 200 || response.StatusCode >= 300 {
+		return out, metadata, awsRestjson1_deserializeOpErrorGetGlobalSettings(response, &metadata)
+	}
+	output := &GetGlobalSettingsOutput{}
+	out.Result = output
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(response.Body, ringBuffer)
+
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
+	}
+
+	err = awsRestjson1_deserializeOpDocumentGetGlobalSettingsOutput(&output, shape)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return out, metadata, &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body with invalid JSON, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	return out, metadata, err
+}
+
+func awsRestjson1_deserializeOpErrorGetGlobalSettings(response *smithyhttp.Response, metadata *middleware.Metadata) error {
+	var errorBuffer bytes.Buffer
+	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
+		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
+	}
+	errorBody := bytes.NewReader(errorBuffer.Bytes())
+
+	errorCode := "UnknownError"
+	errorMessage := errorCode
+
+	headerCode := response.Header.Get("X-Amzn-ErrorType")
+	if len(headerCode) != 0 {
+		errorCode = restjson.SanitizeErrorCode(headerCode)
+	}
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(errorBody, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	jsonCode, message, err := restjson.GetErrorInfo(decoder)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	errorBody.Seek(0, io.SeekStart)
+	if len(headerCode) == 0 && len(jsonCode) != 0 {
+		errorCode = restjson.SanitizeErrorCode(jsonCode)
+	}
+	if len(message) != 0 {
+		errorMessage = message
+	}
+
+	switch {
+	case strings.EqualFold("AccessDeniedException", errorCode):
+		return awsRestjson1_deserializeErrorAccessDeniedException(response, errorBody)
+
+	case strings.EqualFold("InternalServerException", errorCode):
+		return awsRestjson1_deserializeErrorInternalServerException(response, errorBody)
+
+	case strings.EqualFold("ThrottlingException", errorCode):
+		return awsRestjson1_deserializeErrorThrottlingException(response, errorBody)
+
+	case strings.EqualFold("ValidationException", errorCode):
+		return awsRestjson1_deserializeErrorValidationException(response, errorBody)
+
+	default:
+		genericError := &smithy.GenericAPIError{
+			Code:    errorCode,
+			Message: errorMessage,
+		}
+		return genericError
+
+	}
+}
+
+func awsRestjson1_deserializeOpDocumentGetGlobalSettingsOutput(v **GetGlobalSettingsOutput, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *GetGlobalSettingsOutput
+	if *v == nil {
+		sv = &GetGlobalSettingsOutput{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "DiscoveryIntegrationStatus":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected DiscoveryIntegrationStatus to be of type string, got %T instead", value)
+				}
+				sv.DiscoveryIntegrationStatus = types.DiscoveryIntegrationStatus(jtv)
+			}
+
+		case "JiraConfiguration":
+			if err := awsRestjson1_deserializeDocumentAccountJiraConfigurationOutput(&sv.JiraConfiguration, value); err != nil {
+				return err
+			}
+
+		case "OrganizationSharingStatus":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected OrganizationSharingStatus to be of type string, got %T instead", value)
+				}
+				sv.OrganizationSharingStatus = types.OrganizationSharingStatus(jtv)
 			}
 
 		default:
@@ -9206,6 +9389,110 @@ func awsRestjson1_deserializeOpErrorUpdateGlobalSettings(response *smithyhttp.Re
 	}
 }
 
+type awsRestjson1_deserializeOpUpdateIntegration struct {
+}
+
+func (*awsRestjson1_deserializeOpUpdateIntegration) ID() string {
+	return "OperationDeserializer"
+}
+
+func (m *awsRestjson1_deserializeOpUpdateIntegration) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
+) {
+	out, metadata, err = next.HandleDeserialize(ctx, in)
+	if err != nil {
+		return out, metadata, err
+	}
+
+	response, ok := out.RawResponse.(*smithyhttp.Response)
+	if !ok {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
+	}
+
+	if response.StatusCode < 200 || response.StatusCode >= 300 {
+		return out, metadata, awsRestjson1_deserializeOpErrorUpdateIntegration(response, &metadata)
+	}
+	output := &UpdateIntegrationOutput{}
+	out.Result = output
+
+	if _, err = io.Copy(ioutil.Discard, response.Body); err != nil {
+		return out, metadata, &smithy.DeserializationError{
+			Err: fmt.Errorf("failed to discard response body, %w", err),
+		}
+	}
+
+	return out, metadata, err
+}
+
+func awsRestjson1_deserializeOpErrorUpdateIntegration(response *smithyhttp.Response, metadata *middleware.Metadata) error {
+	var errorBuffer bytes.Buffer
+	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
+		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
+	}
+	errorBody := bytes.NewReader(errorBuffer.Bytes())
+
+	errorCode := "UnknownError"
+	errorMessage := errorCode
+
+	headerCode := response.Header.Get("X-Amzn-ErrorType")
+	if len(headerCode) != 0 {
+		errorCode = restjson.SanitizeErrorCode(headerCode)
+	}
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(errorBody, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	jsonCode, message, err := restjson.GetErrorInfo(decoder)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	errorBody.Seek(0, io.SeekStart)
+	if len(headerCode) == 0 && len(jsonCode) != 0 {
+		errorCode = restjson.SanitizeErrorCode(jsonCode)
+	}
+	if len(message) != 0 {
+		errorMessage = message
+	}
+
+	switch {
+	case strings.EqualFold("AccessDeniedException", errorCode):
+		return awsRestjson1_deserializeErrorAccessDeniedException(response, errorBody)
+
+	case strings.EqualFold("ConflictException", errorCode):
+		return awsRestjson1_deserializeErrorConflictException(response, errorBody)
+
+	case strings.EqualFold("InternalServerException", errorCode):
+		return awsRestjson1_deserializeErrorInternalServerException(response, errorBody)
+
+	case strings.EqualFold("ResourceNotFoundException", errorCode):
+		return awsRestjson1_deserializeErrorResourceNotFoundException(response, errorBody)
+
+	case strings.EqualFold("ThrottlingException", errorCode):
+		return awsRestjson1_deserializeErrorThrottlingException(response, errorBody)
+
+	case strings.EqualFold("ValidationException", errorCode):
+		return awsRestjson1_deserializeErrorValidationException(response, errorBody)
+
+	default:
+		genericError := &smithy.GenericAPIError{
+			Code:    errorCode,
+			Message: errorMessage,
+		}
+		return genericError
+
+	}
+}
+
 type awsRestjson1_deserializeOpUpdateLensReview struct {
 }
 
@@ -10635,6 +10922,9 @@ func awsRestjson1_deserializeOpErrorUpgradeLensReview(response *smithyhttp.Respo
 	case strings.EqualFold("ResourceNotFoundException", errorCode):
 		return awsRestjson1_deserializeErrorResourceNotFoundException(response, errorBody)
 
+	case strings.EqualFold("ServiceQuotaExceededException", errorCode):
+		return awsRestjson1_deserializeErrorServiceQuotaExceededException(response, errorBody)
+
 	case strings.EqualFold("ThrottlingException", errorCode):
 		return awsRestjson1_deserializeErrorThrottlingException(response, errorBody)
 
@@ -10738,6 +11028,9 @@ func awsRestjson1_deserializeOpErrorUpgradeProfileVersion(response *smithyhttp.R
 
 	case strings.EqualFold("ResourceNotFoundException", errorCode):
 		return awsRestjson1_deserializeErrorResourceNotFoundException(response, errorBody)
+
+	case strings.EqualFold("ServiceQuotaExceededException", errorCode):
+		return awsRestjson1_deserializeErrorServiceQuotaExceededException(response, errorBody)
 
 	case strings.EqualFold("ThrottlingException", errorCode):
 		return awsRestjson1_deserializeErrorThrottlingException(response, errorBody)
@@ -11151,6 +11444,91 @@ func awsRestjson1_deserializeDocumentAccessDeniedException(v **types.AccessDenie
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentAccountJiraConfigurationOutput(v **types.AccountJiraConfigurationOutput, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AccountJiraConfigurationOutput
+	if *v == nil {
+		sv = &types.AccountJiraConfigurationOutput{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "IntegrationStatus":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected IntegrationStatus to be of type string, got %T instead", value)
+				}
+				sv.IntegrationStatus = types.IntegrationStatus(jtv)
+			}
+
+		case "IssueManagementStatus":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AccountJiraIssueManagementStatus to be of type string, got %T instead", value)
+				}
+				sv.IssueManagementStatus = types.AccountJiraIssueManagementStatus(jtv)
+			}
+
+		case "IssueManagementType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected IssueManagementType to be of type string, got %T instead", value)
+				}
+				sv.IssueManagementType = types.IssueManagementType(jtv)
+			}
+
+		case "JiraProjectKey":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected JiraProjectKey to be of type string, got %T instead", value)
+				}
+				sv.JiraProjectKey = ptr.String(jtv)
+			}
+
+		case "StatusMessage":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected StatusMessage to be of type string, got %T instead", value)
+				}
+				sv.StatusMessage = ptr.String(jtv)
+			}
+
+		case "Subdomain":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Subdomain to be of type string, got %T instead", value)
+				}
+				sv.Subdomain = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentAccountSummary(v *map[string]int32, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -11338,6 +11716,11 @@ func awsRestjson1_deserializeDocumentAnswer(v **types.Answer, value interface{})
 				sv.IsApplicable = ptr.Bool(jtv)
 			}
 
+		case "JiraConfiguration":
+			if err := awsRestjson1_deserializeDocumentJiraConfiguration(&sv.JiraConfiguration, value); err != nil {
+				return err
+			}
+
 		case "Notes":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11488,6 +11871,11 @@ func awsRestjson1_deserializeDocumentAnswerSummary(v **types.AnswerSummary, valu
 					return fmt.Errorf("expected IsApplicable to be of type *bool, got %T instead", value)
 				}
 				sv.IsApplicable = ptr.Bool(jtv)
+			}
+
+		case "JiraConfiguration":
+			if err := awsRestjson1_deserializeDocumentJiraConfiguration(&sv.JiraConfiguration, value); err != nil {
+				return err
 			}
 
 		case "PillarId":
@@ -12710,6 +13098,11 @@ func awsRestjson1_deserializeDocumentImprovementSummary(v **types.ImprovementSum
 				sv.ImprovementPlanUrl = ptr.String(jtv)
 			}
 
+		case "JiraConfiguration":
+			if err := awsRestjson1_deserializeDocumentJiraConfiguration(&sv.JiraConfiguration, value); err != nil {
+				return err
+			}
+
 		case "PillarId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -12784,6 +13177,98 @@ func awsRestjson1_deserializeDocumentInternalServerException(v **types.InternalS
 					return fmt.Errorf("expected ExceptionMessage to be of type string, got %T instead", value)
 				}
 				sv.Message = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentJiraConfiguration(v **types.JiraConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.JiraConfiguration
+	if *v == nil {
+		sv = &types.JiraConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "JiraIssueUrl":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected JiraIssueUrl to be of type string, got %T instead", value)
+				}
+				sv.JiraIssueUrl = ptr.String(jtv)
+			}
+
+		case "LastSyncedTime":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.LastSyncedTime = ptr.Time(smithytime.ParseEpochSeconds(f64))
+
+				default:
+					return fmt.Errorf("expected Timestamp to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentJiraSelectedQuestionConfiguration(v **types.JiraSelectedQuestionConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.JiraSelectedQuestionConfiguration
+	if *v == nil {
+		sv = &types.JiraSelectedQuestionConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "SelectedPillars":
+			if err := awsRestjson1_deserializeDocumentSelectedPillars(&sv.SelectedPillars, value); err != nil {
+				return err
 			}
 
 		default:
@@ -12991,6 +13476,11 @@ func awsRestjson1_deserializeDocumentLensReview(v **types.LensReview, value inte
 
 	for key, value := range shape {
 		switch key {
+		case "JiraConfiguration":
+			if err := awsRestjson1_deserializeDocumentJiraSelectedQuestionConfiguration(&sv.JiraConfiguration, value); err != nil {
+				return err
+			}
+
 		case "LensAlias":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -16378,6 +16868,121 @@ func awsRestjson1_deserializeDocumentSelectedChoices(v *[]string, value interfac
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentSelectedPillar(v **types.SelectedPillar, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.SelectedPillar
+	if *v == nil {
+		sv = &types.SelectedPillar{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "PillarId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected PillarId to be of type string, got %T instead", value)
+				}
+				sv.PillarId = ptr.String(jtv)
+			}
+
+		case "SelectedQuestionIds":
+			if err := awsRestjson1_deserializeDocumentSelectedQuestionIds(&sv.SelectedQuestionIds, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentSelectedPillars(v *[]types.SelectedPillar, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.SelectedPillar
+	if *v == nil {
+		cv = []types.SelectedPillar{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.SelectedPillar
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentSelectedPillar(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentSelectedQuestionIds(v *[]string, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []string
+	if *v == nil {
+		cv = []string{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col string
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected SelectedQuestionId to be of type string, got %T instead", value)
+			}
+			col = jtv
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentServiceQuotaExceededException(v **types.ServiceQuotaExceededException, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -17271,6 +17876,11 @@ func awsRestjson1_deserializeDocumentWorkload(v **types.Workload, value interfac
 				sv.IsReviewOwnerUpdateAcknowledged = ptr.Bool(jtv)
 			}
 
+		case "JiraConfiguration":
+			if err := awsRestjson1_deserializeDocumentWorkloadJiraConfigurationOutput(&sv.JiraConfiguration, value); err != nil {
+				return err
+			}
+
 		case "Lenses":
 			if err := awsRestjson1_deserializeDocumentWorkloadLenses(&sv.Lenses, value); err != nil {
 				return err
@@ -17552,6 +18162,73 @@ func awsRestjson1_deserializeDocumentWorkloadDiscoveryConfig(v **types.WorkloadD
 		case "WorkloadResourceDefinition":
 			if err := awsRestjson1_deserializeDocumentWorkloadResourceDefinition(&sv.WorkloadResourceDefinition, value); err != nil {
 				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentWorkloadJiraConfigurationOutput(v **types.WorkloadJiraConfigurationOutput, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.WorkloadJiraConfigurationOutput
+	if *v == nil {
+		sv = &types.WorkloadJiraConfigurationOutput{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "IssueManagementStatus":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected WorkloadIssueManagementStatus to be of type string, got %T instead", value)
+				}
+				sv.IssueManagementStatus = types.WorkloadIssueManagementStatus(jtv)
+			}
+
+		case "IssueManagementType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected IssueManagementType to be of type string, got %T instead", value)
+				}
+				sv.IssueManagementType = types.IssueManagementType(jtv)
+			}
+
+		case "JiraProjectKey":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected JiraProjectKey to be of type string, got %T instead", value)
+				}
+				sv.JiraProjectKey = ptr.String(jtv)
+			}
+
+		case "StatusMessage":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected StatusMessage to be of type string, got %T instead", value)
+				}
+				sv.StatusMessage = ptr.String(jtv)
 			}
 
 		default:

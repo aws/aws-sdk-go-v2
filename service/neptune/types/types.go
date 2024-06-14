@@ -29,12 +29,15 @@ type CharacterSet struct {
 }
 
 // The configuration setting for the log types to be enabled for export to
-// CloudWatch Logs for a specific DB instance or DB cluster. The EnableLogTypes
-// and DisableLogTypes arrays determine which logs will be exported (or not
-// exported) to CloudWatch Logs. Valid log types are: audit (to publish audit
-// logs) and slowquery (to publish slow-query logs). See Publishing Neptune logs
-// to Amazon CloudWatch logs (https://docs.aws.amazon.com/neptune/latest/userguide/cloudwatch-logs.html)
-// .
+// CloudWatch Logs for a specific DB instance or DB cluster.
+//
+// The EnableLogTypes and DisableLogTypes arrays determine which logs will be
+// exported (or not exported) to CloudWatch Logs.
+//
+// Valid log types are: audit (to publish audit logs) and slowquery (to publish
+// slow-query logs). See [Publishing Neptune logs to Amazon CloudWatch logs].
+//
+// [Publishing Neptune logs to Amazon CloudWatch logs]: https://docs.aws.amazon.com/neptune/latest/userguide/cloudwatch-logs.html
 type CloudwatchLogsExportConfiguration struct {
 
 	// The list of log types to disable.
@@ -82,8 +85,9 @@ type ClusterPendingModifiedValues struct {
 	noSmithyDocumentSerde
 }
 
-// Contains the details of an Amazon Neptune DB cluster. This data type is used as
-// a response element in the DescribeDBClusters .
+// Contains the details of an Amazon Neptune DB cluster.
+//
+// This data type is used as a response element in the DescribeDBClusters.
 type DBCluster struct {
 
 	// AllocatedStorage always returns 1, because Neptune DB cluster storage size is
@@ -116,7 +120,7 @@ type DBCluster struct {
 	// Time (UTC).
 	ClusterCreateTime *time.Time
 
-	// If set to true , tags are copied to any snapshot of the DB cluster that is
+	//  If set to true , tags are copied to any snapshot of the DB cluster that is
 	// created.
 	CopyTagsToSnapshot *bool
 
@@ -163,9 +167,9 @@ type DBCluster struct {
 
 	// A list of the log types that this DB cluster is configured to export to
 	// CloudWatch Logs. Valid log types are: audit (to publish audit logs to
-	// CloudWatch) and slowquery (to publish slow-query logs to CloudWatch). See
-	// Publishing Neptune logs to Amazon CloudWatch logs (https://docs.aws.amazon.com/neptune/latest/userguide/cloudwatch-logs.html)
-	// .
+	// CloudWatch) and slowquery (to publish slow-query logs to CloudWatch). See [Publishing Neptune logs to Amazon CloudWatch logs].
+	//
+	// [Publishing Neptune logs to Amazon CloudWatch logs]: https://docs.aws.amazon.com/neptune/latest/userguide/cloudwatch-logs.html
 	EnabledCloudwatchLogsExports []string
 
 	// Specifies the connection endpoint for the primary instance of the DB cluster.
@@ -232,18 +236,22 @@ type DBCluster struct {
 	// cluster. As clients request new connections to the reader endpoint, Neptune
 	// distributes the connection requests among the Read Replicas in the DB cluster.
 	// This functionality can help balance your read workload across multiple Read
-	// Replicas in your DB cluster. If a failover occurs, and the Read Replica that you
-	// are connected to is promoted to be the primary instance, your connection is
-	// dropped. To continue sending your read workload to other Read Replicas in the
-	// cluster, you can then reconnect to the reader endpoint.
+	// Replicas in your DB cluster.
+	//
+	// If a failover occurs, and the Read Replica that you are connected to is
+	// promoted to be the primary instance, your connection is dropped. To continue
+	// sending your read workload to other Read Replicas in the cluster, you can then
+	// reconnect to the reader endpoint.
 	ReaderEndpoint *string
 
 	// Not supported by Neptune.
 	ReplicationSourceIdentifier *string
 
-	// Shows the scaling configuration for a Neptune Serverless DB cluster. For more
-	// information, see Using Amazon Neptune Serverless (https://docs.aws.amazon.com/neptune/latest/userguide/neptune-serverless-using.html)
-	// in the Amazon Neptune User Guide.
+	// Shows the scaling configuration for a Neptune Serverless DB cluster.
+	//
+	// For more information, see [Using Amazon Neptune Serverless] in the Amazon Neptune User Guide.
+	//
+	// [Using Amazon Neptune Serverless]: https://docs.aws.amazon.com/neptune/latest/userguide/neptune-serverless-using.html
 	ServerlessV2ScalingConfiguration *ServerlessV2ScalingConfigurationInfo
 
 	// Specifies the current state of this DB cluster.
@@ -264,9 +272,13 @@ type DBCluster struct {
 // This data type represents the information you need to connect to an Amazon
 // Neptune DB cluster. This data type is used as a response element in the
 // following actions:
+//
 //   - CreateDBClusterEndpoint
+//
 //   - DescribeDBClusterEndpoints
+//
 //   - ModifyDBClusterEndpoint
+//
 //   - DeleteDBClusterEndpoint
 //
 // For the data structure that represents Amazon Neptune DB instance endpoints,
@@ -347,9 +359,9 @@ type DBClusterOptionGroupStatus struct {
 	noSmithyDocumentSerde
 }
 
-// Contains the details of an Amazon Neptune DB cluster parameter group. This data
-// type is used as a response element in the DescribeDBClusterParameterGroups
-// action.
+// Contains the details of an Amazon Neptune DB cluster parameter group.
+//
+// This data type is used as a response element in the DescribeDBClusterParameterGroups action.
 type DBClusterParameterGroup struct {
 
 	// The Amazon Resource Name (ARN) for the DB cluster parameter group.
@@ -373,8 +385,7 @@ type DBClusterParameterGroup struct {
 type DBClusterRole struct {
 
 	// The name of the feature associated with the Amazon Identity and Access
-	// Management (IAM) role. For the list of supported feature names, see
-	// DescribeDBEngineVersions .
+	// Management (IAM) role. For the list of supported feature names, see DescribeDBEngineVersions.
 	FeatureName *string
 
 	// The Amazon Resource Name (ARN) of the IAM role that is associated with the DB
@@ -383,9 +394,12 @@ type DBClusterRole struct {
 
 	// Describes the state of association between the IAM role and the DB cluster. The
 	// Status property returns one of the following values:
+	//
 	//   - ACTIVE - the IAM role ARN is associated with the DB cluster and can be used
 	//   to access other Amazon services on your behalf.
+	//
 	//   - PENDING - the IAM role ARN is being associated with the DB cluster.
+	//
 	//   - INVALID - the IAM role ARN is associated with the DB cluster, but the DB
 	//   cluster is unable to assume the IAM role in order to access other Amazon
 	//   services on your behalf.
@@ -394,8 +408,9 @@ type DBClusterRole struct {
 	noSmithyDocumentSerde
 }
 
-// Contains the details for an Amazon Neptune DB cluster snapshot This data type
-// is used as a response element in the DescribeDBClusterSnapshots action.
+// Contains the details for an Amazon Neptune DB cluster snapshot
+//
+// This data type is used as a response element in the DescribeDBClusterSnapshots action.
 type DBClusterSnapshot struct {
 
 	// Specifies the allocated storage size in gibibytes (GiB).
@@ -417,16 +432,18 @@ type DBClusterSnapshot struct {
 	DBClusterSnapshotArn *string
 
 	// Specifies the identifier for a DB cluster snapshot. Must match the identifier
-	// of an existing snapshot. After you restore a DB cluster using a
-	// DBClusterSnapshotIdentifier , you must specify the same
-	// DBClusterSnapshotIdentifier for any future updates to the DB cluster. When you
-	// specify this property for an update, the DB cluster is not restored from the
-	// snapshot again, and the data in the database is not changed. However, if you
-	// don't specify the DBClusterSnapshotIdentifier , an empty DB cluster is created,
-	// and the original DB cluster is deleted. If you specify a property that is
-	// different from the previous snapshot restore property, the DB cluster is
-	// restored from the snapshot specified by the DBClusterSnapshotIdentifier , and
-	// the original DB cluster is deleted.
+	// of an existing snapshot.
+	//
+	// After you restore a DB cluster using a DBClusterSnapshotIdentifier , you must
+	// specify the same DBClusterSnapshotIdentifier for any future updates to the DB
+	// cluster. When you specify this property for an update, the DB cluster is not
+	// restored from the snapshot again, and the data in the database is not changed.
+	//
+	// However, if you don't specify the DBClusterSnapshotIdentifier , an empty DB
+	// cluster is created, and the original DB cluster is deleted. If you specify a
+	// property that is different from the previous snapshot restore property, the DB
+	// cluster is restored from the snapshot specified by the
+	// DBClusterSnapshotIdentifier , and the original DB cluster is deleted.
 	DBClusterSnapshotIdentifier *string
 
 	// Specifies the name of the database engine.
@@ -483,33 +500,37 @@ type DBClusterSnapshot struct {
 	noSmithyDocumentSerde
 }
 
-// Contains the name and values of a manual DB cluster snapshot attribute. Manual
-// DB cluster snapshot attributes are used to authorize other Amazon accounts to
-// restore a manual DB cluster snapshot. For more information, see the
-// ModifyDBClusterSnapshotAttribute API action.
+// Contains the name and values of a manual DB cluster snapshot attribute.
+//
+// Manual DB cluster snapshot attributes are used to authorize other Amazon
+// accounts to restore a manual DB cluster snapshot. For more information, see the ModifyDBClusterSnapshotAttribute
+// API action.
 type DBClusterSnapshotAttribute struct {
 
-	// The name of the manual DB cluster snapshot attribute. The attribute named
-	// restore refers to the list of Amazon accounts that have permission to copy or
-	// restore the manual DB cluster snapshot. For more information, see the
-	// ModifyDBClusterSnapshotAttribute API action.
+	// The name of the manual DB cluster snapshot attribute.
+	//
+	// The attribute named restore refers to the list of Amazon accounts that have
+	// permission to copy or restore the manual DB cluster snapshot. For more
+	// information, see the ModifyDBClusterSnapshotAttributeAPI action.
 	AttributeName *string
 
-	// The value(s) for the manual DB cluster snapshot attribute. If the AttributeName
-	// field is set to restore , then this element returns a list of IDs of the Amazon
-	// accounts that are authorized to copy or restore the manual DB cluster snapshot.
-	// If a value of all is in the list, then the manual DB cluster snapshot is public
-	// and available for any Amazon account to copy or restore.
+	// The value(s) for the manual DB cluster snapshot attribute.
+	//
+	// If the AttributeName field is set to restore , then this element returns a list
+	// of IDs of the Amazon accounts that are authorized to copy or restore the manual
+	// DB cluster snapshot. If a value of all is in the list, then the manual DB
+	// cluster snapshot is public and available for any Amazon account to copy or
+	// restore.
 	AttributeValues []string
 
 	noSmithyDocumentSerde
 }
 
-// Contains the results of a successful call to the
-// DescribeDBClusterSnapshotAttributes API action. Manual DB cluster snapshot
-// attributes are used to authorize other Amazon accounts to copy or restore a
-// manual DB cluster snapshot. For more information, see the
-// ModifyDBClusterSnapshotAttribute API action.
+// Contains the results of a successful call to the DescribeDBClusterSnapshotAttributes API action.
+//
+// Manual DB cluster snapshot attributes are used to authorize other Amazon
+// accounts to copy or restore a manual DB cluster snapshot. For more information,
+// see the ModifyDBClusterSnapshotAttributeAPI action.
 type DBClusterSnapshotAttributesResult struct {
 
 	// The list of attributes and values for the manual DB cluster snapshot.
@@ -521,8 +542,7 @@ type DBClusterSnapshotAttributesResult struct {
 	noSmithyDocumentSerde
 }
 
-// This data type is used as a response element in the action
-// DescribeDBEngineVersions .
+// This data type is used as a response element in the action DescribeDBEngineVersions.
 type DBEngineVersion struct {
 
 	// The description of the database engine.
@@ -534,7 +554,7 @@ type DBEngineVersion struct {
 	// The name of the DB parameter group family for the database engine.
 	DBParameterGroupFamily *string
 
-	// (Not supported by Neptune)
+	//  (Not supported by Neptune)
 	DefaultCharacterSet *CharacterSet
 
 	// The name of the database engine.
@@ -547,7 +567,7 @@ type DBEngineVersion struct {
 	// CloudWatch Logs.
 	ExportableLogTypes []string
 
-	// (Not supported by Neptune)
+	//  (Not supported by Neptune)
 	SupportedCharacterSets []CharacterSet
 
 	// A list of the time zones supported by this engine for the Timezone parameter of
@@ -571,8 +591,9 @@ type DBEngineVersion struct {
 	noSmithyDocumentSerde
 }
 
-// Contains the details of an Amazon Neptune DB instance. This data type is used
-// as a response element in the DescribeDBInstances action.
+// Contains the details of an Amazon Neptune DB instance.
+//
+// This data type is used as a response element in the DescribeDBInstances action.
 type DBInstance struct {
 
 	// Not supported by Neptune.
@@ -590,7 +611,7 @@ type DBInstance struct {
 	// The identifier of the CA certificate for this DB instance.
 	CACertificateIdentifier *string
 
-	// (Not supported by Neptune)
+	//  (Not supported by Neptune)
 	CharacterSetName *string
 
 	// Specifies whether tags are copied from the DB instance to snapshots of the DB
@@ -620,8 +641,8 @@ type DBInstance struct {
 	// Provides the list of DB parameter groups applied to this DB instance.
 	DBParameterGroups []DBParameterGroupStatus
 
-	// Provides List of DB security group elements containing only DBSecurityGroup.Name
-	// and DBSecurityGroup.Status subelements.
+	//  Provides List of DB security group elements containing only
+	// DBSecurityGroup.Name and DBSecurityGroup.Status subelements.
 	DBSecurityGroups []DBSecurityGroupMembership
 
 	// Specifies information on the subnet group associated with the DB instance,
@@ -638,9 +659,9 @@ type DBInstance struct {
 	DbiResourceId *string
 
 	// Indicates whether or not the DB instance has deletion protection enabled. The
-	// instance can't be deleted when deletion protection is enabled. See Deleting a
-	// DB Instance (https://docs.aws.amazon.com/neptune/latest/userguide/manage-console-instances-delete.html)
-	// .
+	// instance can't be deleted when deletion protection is enabled. See [Deleting a DB Instance].
+	//
+	// [Deleting a DB Instance]: https://docs.aws.amazon.com/neptune/latest/userguide/manage-console-instances-delete.html
 	DeletionProtection *bool
 
 	// Not supported
@@ -673,7 +694,7 @@ type DBInstance struct {
 	// Specifies the Provisioned IOPS (I/O operations per second) value.
 	Iops *int32
 
-	// Not supported: The encryption for DB instances is managed by the DB cluster.
+	//  Not supported: The encryption for DB instances is managed by the DB cluster.
 	KmsKeyId *string
 
 	// Specifies the latest time to which a database can be restored with
@@ -697,7 +718,7 @@ type DBInstance struct {
 	// Specifies if the DB instance is a Multi-AZ deployment.
 	MultiAZ *bool
 
-	// (Not supported by Neptune)
+	//  (Not supported by Neptune)
 	OptionGroupMemberships []OptionGroupMembership
 
 	// Specifies that changes to the DB instance are pending. This element is only
@@ -705,13 +726,13 @@ type DBInstance struct {
 	// subelements.
 	PendingModifiedValues *PendingModifiedValues
 
-	// (Not supported by Neptune)
+	//  (Not supported by Neptune)
 	PerformanceInsightsEnabled *bool
 
-	// (Not supported by Neptune)
+	//  (Not supported by Neptune)
 	PerformanceInsightsKMSKeyId *string
 
-	// Specifies the daily time range during which automated backups are created if
+	//  Specifies the daily time range during which automated backups are created if
 	// automated backups are enabled, as determined by the BackupRetentionPeriod .
 	PreferredBackupWindow *string
 
@@ -788,8 +809,9 @@ type DBInstanceStatusInfo struct {
 	noSmithyDocumentSerde
 }
 
-// Contains the details of an Amazon Neptune DB parameter group. This data type is
-// used as a response element in the DescribeDBParameterGroups action.
+// Contains the details of an Amazon Neptune DB parameter group.
+//
+// This data type is used as a response element in the DescribeDBParameterGroups action.
 type DBParameterGroup struct {
 
 	// The Amazon Resource Name (ARN) for the DB parameter group.
@@ -808,12 +830,17 @@ type DBParameterGroup struct {
 	noSmithyDocumentSerde
 }
 
-// The status of the DB parameter group. This data type is used as a response
-// element in the following actions:
-//   - CreateDBInstance
-//   - DeleteDBInstance
-//   - ModifyDBInstance
-//   - RebootDBInstance
+// The status of the DB parameter group.
+//
+// This data type is used as a response element in the following actions:
+//
+// # CreateDBInstance
+//
+// # DeleteDBInstance
+//
+// # ModifyDBInstance
+//
+// RebootDBInstance
 type DBParameterGroupStatus struct {
 
 	// The name of the DP parameter group.
@@ -837,8 +864,9 @@ type DBSecurityGroupMembership struct {
 	noSmithyDocumentSerde
 }
 
-// Contains the details of an Amazon Neptune DB subnet group. This data type is
-// used as a response element in the DescribeDBSubnetGroups action.
+// Contains the details of an Amazon Neptune DB subnet group.
+//
+// This data type is used as a response element in the DescribeDBSubnetGroups action.
 type DBSubnetGroup struct {
 
 	// The Amazon Resource Name (ARN) for the DB subnet group.
@@ -853,7 +881,7 @@ type DBSubnetGroup struct {
 	// Provides the status of the DB subnet group.
 	SubnetGroupStatus *string
 
-	// Contains a list of Subnet elements.
+	//  Contains a list of Subnet elements.
 	Subnets []Subnet
 
 	// Provides the VpcId of the DB subnet group.
@@ -894,8 +922,10 @@ type DoubleRange struct {
 	noSmithyDocumentSerde
 }
 
-// Specifies a connection endpoint. For the data structure that represents Amazon
-// Neptune DB cluster endpoints, see DBClusterEndpoint .
+// Specifies a connection endpoint.
+//
+// For the data structure that represents Amazon Neptune DB cluster endpoints, see
+// DBClusterEndpoint .
 type Endpoint struct {
 
 	// Specifies the DNS address of the DB instance.
@@ -910,15 +940,14 @@ type Endpoint struct {
 	noSmithyDocumentSerde
 }
 
-// Contains the result of a successful invocation of the
-// DescribeEngineDefaultParameters action.
+// Contains the result of a successful invocation of the DescribeEngineDefaultParameters action.
 type EngineDefaults struct {
 
 	// Specifies the name of the DB parameter group family that the engine default
 	// parameters apply to.
 	DBParameterGroupFamily *string
 
-	// An optional pagination token provided by a previous EngineDefaults request. If
+	//  An optional pagination token provided by a previous EngineDefaults request. If
 	// this parameter is specified, the response includes only records beyond the
 	// marker, up to the value specified by MaxRecords .
 	Marker *string
@@ -953,8 +982,7 @@ type Event struct {
 	noSmithyDocumentSerde
 }
 
-// Contains the results of a successful invocation of the DescribeEventCategories
-// action.
+// Contains the results of a successful invocation of the DescribeEventCategories action.
 type EventCategoriesMap struct {
 
 	// The event categories for the specified source type
@@ -966,8 +994,7 @@ type EventCategoriesMap struct {
 	noSmithyDocumentSerde
 }
 
-// Contains the results of a successful invocation of the
-// DescribeEventSubscriptions action.
+// Contains the results of a successful invocation of the DescribeEventSubscriptions action.
 type EventSubscription struct {
 
 	// The event notification subscription Id.
@@ -995,11 +1022,16 @@ type EventSubscription struct {
 	// The source type for the event notification subscription.
 	SourceType *string
 
-	// The status of the event notification subscription. Constraints: Can be one of
-	// the following: creating | modifying | deleting | active | no-permission |
-	// topic-not-exist The status "no-permission" indicates that Neptune no longer has
-	// permission to post to the SNS topic. The status "topic-not-exist" indicates that
-	// the topic was deleted after the subscription was created.
+	// The status of the event notification subscription.
+	//
+	// Constraints:
+	//
+	// Can be one of the following: creating | modifying | deleting | active |
+	// no-permission | topic-not-exist
+	//
+	// The status "no-permission" indicates that Neptune no longer has permission to
+	// post to the SNS topic. The status "topic-not-exist" indicates that the topic was
+	// deleted after the subscription was created.
 	Status *string
 
 	// The time the event notification subscription was created.
@@ -1024,10 +1056,9 @@ type Filter struct {
 	noSmithyDocumentSerde
 }
 
-// Contains the details of an Amazon Neptune global database. This data type is
-// used as a response element for the CreateGlobalCluster , DescribeGlobalClusters
-// , ModifyGlobalCluster , DeleteGlobalCluster , FailoverGlobalCluster , and
-// RemoveFromGlobalCluster actions.
+// Contains the details of an Amazon Neptune global database.
+//
+// This data type is used as a response element for the CreateGlobalCluster, DescribeGlobalClusters, ModifyGlobalCluster, DeleteGlobalCluster, FailoverGlobalCluster, and RemoveFromGlobalCluster actions.
 type GlobalCluster struct {
 
 	// The deletion protection setting for the global database.
@@ -1064,19 +1095,20 @@ type GlobalCluster struct {
 	noSmithyDocumentSerde
 }
 
-// A data structure with information about any primary and secondary clusters
+//	A data structure with information about any primary and secondary clusters
+//
 // associated with an Neptune global database.
 type GlobalClusterMember struct {
 
-	// The Amazon Resource Name (ARN) for each Neptune cluster.
+	//  The Amazon Resource Name (ARN) for each Neptune cluster.
 	DBClusterArn *string
 
-	// Specifies whether the Neptune cluster is the primary cluster (that is, has
+	//  Specifies whether the Neptune cluster is the primary cluster (that is, has
 	// read-write capability) for the Neptune global database with which it is
 	// associated.
 	IsWriter *bool
 
-	// The Amazon Resource Name (ARN) for each read-only secondary cluster associated
+	//  The Amazon Resource Name (ARN) for each read-only secondary cluster associated
 	// with the Neptune global database.
 	Readers []string
 
@@ -1095,8 +1127,9 @@ type OptionGroupMembership struct {
 	noSmithyDocumentSerde
 }
 
-// Contains a list of available options for a DB instance. This data type is used
-// as a response element in the DescribeOrderableDBInstanceOptions action.
+// Contains a list of available options for a DB instance.
+//
+// This data type is used as a response element in the DescribeOrderableDBInstanceOptions action.
 type OrderableDBInstanceOption struct {
 
 	// A list of Availability Zones for a DB instance.
@@ -1155,7 +1188,7 @@ type OrderableDBInstanceOption struct {
 	// Indicates whether a DB instance supports provisioned IOPS.
 	SupportsIops *bool
 
-	// (Not supported by Neptune)
+	//  (Not supported by Neptune)
 	SupportsPerformanceInsights *bool
 
 	// Indicates whether a DB instance supports encrypted storage.
@@ -1185,7 +1218,7 @@ type Parameter struct {
 	// Provides a description of the parameter.
 	Description *string
 
-	// Indicates whether ( true ) or not ( false ) the parameter can be modified. Some
+	//  Indicates whether ( true ) or not ( false ) the parameter can be modified. Some
 	// parameters have security or operational implications that prevent them from
 	// being changed.
 	IsModifiable *bool
@@ -1206,10 +1239,12 @@ type Parameter struct {
 }
 
 // A list of the log types whose configuration is still pending. In other words,
-// these log types are in the process of being activated or deactivated. Valid log
-// types are: audit (to publish audit logs) and slowquery (to publish slow-query
-// logs). See Publishing Neptune logs to Amazon CloudWatch logs (https://docs.aws.amazon.com/neptune/latest/userguide/cloudwatch-logs.html)
-// .
+// these log types are in the process of being activated or deactivated.
+//
+// Valid log types are: audit (to publish audit logs) and slowquery (to publish
+// slow-query logs). See [Publishing Neptune logs to Amazon CloudWatch logs].
+//
+// [Publishing Neptune logs to Amazon CloudWatch logs]: https://docs.aws.amazon.com/neptune/latest/userguide/cloudwatch-logs.html
 type PendingCloudwatchLogsExports struct {
 
 	// Log types that are in the process of being enabled. After they are enabled,
@@ -1236,10 +1271,10 @@ type PendingMaintenanceAction struct {
 	AutoAppliedAfterDate *time.Time
 
 	// The effective date when the pending maintenance action is applied to the
-	// resource. This date takes into account opt-in requests received from the
-	// ApplyPendingMaintenanceAction API, the AutoAppliedAfterDate , and the
-	// ForcedApplyDate . This value is blank if an opt-in request has not been received
-	// and nothing has been specified as AutoAppliedAfterDate or ForcedApplyDate .
+	// resource. This date takes into account opt-in requests received from the ApplyPendingMaintenanceActionAPI,
+	// the AutoAppliedAfterDate , and the ForcedApplyDate . This value is blank if an
+	// opt-in request has not been received and nothing has been specified as
+	// AutoAppliedAfterDate or ForcedApplyDate .
 	CurrentApplyDate *time.Time
 
 	// A description providing more detail about the maintenance action.
@@ -1260,8 +1295,8 @@ type PendingMaintenanceAction struct {
 // This data type is used as a response element in the ModifyDBInstance action.
 type PendingModifiedValues struct {
 
-	// Contains the new AllocatedStorage size for the DB instance that will be applied
-	// or is currently being applied.
+	//  Contains the new AllocatedStorage size for the DB instance that will be
+	// applied or is currently being applied.
 	AllocatedStorage *int32
 
 	// Specifies the pending number of days for which automated backups are retained.
@@ -1270,11 +1305,11 @@ type PendingModifiedValues struct {
 	// Specifies the identifier of the CA certificate for the DB instance.
 	CACertificateIdentifier *string
 
-	// Contains the new DBInstanceClass for the DB instance that will be applied or is
-	// currently being applied.
+	//  Contains the new DBInstanceClass for the DB instance that will be applied or
+	// is currently being applied.
 	DBInstanceClass *string
 
-	// Contains the new DBInstanceIdentifier for the DB instance that will be applied
+	//  Contains the new DBInstanceIdentifier for the DB instance that will be applied
 	// or is currently being applied.
 	DBInstanceIdentifier *string
 
@@ -1341,9 +1376,11 @@ type ResourcePendingMaintenanceActions struct {
 	noSmithyDocumentSerde
 }
 
-// Contains the scaling configuration of a Neptune Serverless DB cluster. For more
-// information, see Using Amazon Neptune Serverless (https://docs.aws.amazon.com/neptune/latest/userguide/neptune-serverless-using.html)
-// in the Amazon Neptune User Guide.
+// Contains the scaling configuration of a Neptune Serverless DB cluster.
+//
+// For more information, see [Using Amazon Neptune Serverless] in the Amazon Neptune User Guide.
+//
+// [Using Amazon Neptune Serverless]: https://docs.aws.amazon.com/neptune/latest/userguide/neptune-serverless-using.html
 type ServerlessV2ScalingConfiguration struct {
 
 	// The maximum number of Neptune capacity units (NCUs) for a DB instance in a
@@ -1359,9 +1396,11 @@ type ServerlessV2ScalingConfiguration struct {
 	noSmithyDocumentSerde
 }
 
-// Shows the scaling configuration for a Neptune Serverless DB cluster. For more
-// information, see Using Amazon Neptune Serverless (https://docs.aws.amazon.com/neptune/latest/userguide/neptune-serverless-using.html)
-// in the Amazon Neptune User Guide.
+// Shows the scaling configuration for a Neptune Serverless DB cluster.
+//
+// For more information, see [Using Amazon Neptune Serverless] in the Amazon Neptune User Guide.
+//
+// [Using Amazon Neptune Serverless]: https://docs.aws.amazon.com/neptune/latest/userguide/neptune-serverless-using.html
 type ServerlessV2ScalingConfigurationInfo struct {
 
 	// The maximum number of Neptune capacity units (NCUs) for a DB instance in a
@@ -1377,8 +1416,9 @@ type ServerlessV2ScalingConfigurationInfo struct {
 	noSmithyDocumentSerde
 }
 
-// Specifies a subnet. This data type is used as a response element in the
-// DescribeDBSubnetGroups action.
+// Specifies a subnet.
+//
+// This data type is used as a response element in the DescribeDBSubnetGroups action.
 type Subnet struct {
 
 	// Specifies the EC2 Availability Zone that the subnet is in.
@@ -1411,7 +1451,7 @@ type Tag struct {
 	noSmithyDocumentSerde
 }
 
-// A time zone associated with a DBInstance .
+// A time zone associated with a DBInstance.
 type Timezone struct {
 
 	// The name of the time zone.
@@ -1447,9 +1487,8 @@ type UpgradeTarget struct {
 }
 
 // Information about valid modifications that you can make to your DB instance.
-// Contains the result of a successful call to the
-// DescribeValidDBInstanceModifications action. You can use this information when
-// you call ModifyDBInstance .
+// Contains the result of a successful call to the DescribeValidDBInstanceModificationsaction. You can use this
+// information when you call ModifyDBInstance.
 type ValidDBInstanceModificationsMessage struct {
 
 	// Valid storage options for your DB instance.
@@ -1459,8 +1498,8 @@ type ValidDBInstanceModificationsMessage struct {
 }
 
 // Information about valid modifications that you can make to your DB instance.
-// Contains the result of a successful call to the
-// DescribeValidDBInstanceModifications action.
+//
+// Contains the result of a successful call to the DescribeValidDBInstanceModifications action.
 type ValidStorageOptions struct {
 
 	// The valid range of Provisioned IOPS to gibibytes of storage multiplier. For

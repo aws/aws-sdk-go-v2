@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/acm/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -14,8 +13,9 @@ import (
 
 // Updates a certificate. Currently, you can use this function to specify whether
 // to opt in to or out of recording your certificate in a certificate transparency
-// log. For more information, see Opting Out of Certificate Transparency Logging (https://docs.aws.amazon.com/acm/latest/userguide/acm-bestpractices.html#best-practices-transparency)
-// .
+// log. For more information, see [Opting Out of Certificate Transparency Logging].
+//
+// [Opting Out of Certificate Transparency Logging]: https://docs.aws.amazon.com/acm/latest/userguide/acm-bestpractices.html#best-practices-transparency
 func (c *Client) UpdateCertificateOptions(ctx context.Context, params *UpdateCertificateOptionsInput, optFns ...func(*Options)) (*UpdateCertificateOptionsOutput, error) {
 	if params == nil {
 		params = &UpdateCertificateOptionsInput{}
@@ -34,7 +34,8 @@ func (c *Client) UpdateCertificateOptions(ctx context.Context, params *UpdateCer
 type UpdateCertificateOptionsInput struct {
 
 	// ARN of the requested certificate to update. This must be of the form:
-	// arn:aws:acm:us-east-1:account:certificate/12345678-1234-1234-1234-123456789012
+	//
+	//     arn:aws:acm:us-east-1:account:certificate/12345678-1234-1234-1234-123456789012
 	//
 	// This member is required.
 	CertificateArn *string
@@ -80,25 +81,25 @@ func (c *Client) addOperationUpdateCertificateOptionsMiddlewares(stack *middlewa
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -113,13 +114,16 @@ func (c *Client) addOperationUpdateCertificateOptionsMiddlewares(stack *middlewa
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpUpdateCertificateOptionsValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateCertificateOptions(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

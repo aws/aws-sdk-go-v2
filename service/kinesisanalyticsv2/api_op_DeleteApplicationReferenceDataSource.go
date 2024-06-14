@@ -6,15 +6,15 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Deletes a reference data source configuration from the specified SQL-based
-// Kinesis Data Analytics application's configuration. If the application is
-// running, Kinesis Data Analytics immediately removes the in-application table
-// that you created using the AddApplicationReferenceDataSource operation.
+// Kinesis Data Analytics application's configuration.
+//
+// If the application is running, Kinesis Data Analytics immediately removes the
+// in-application table that you created using the AddApplicationReferenceDataSourceoperation.
 func (c *Client) DeleteApplicationReferenceDataSource(ctx context.Context, params *DeleteApplicationReferenceDataSourceInput, optFns ...func(*Options)) (*DeleteApplicationReferenceDataSourceOutput, error) {
 	if params == nil {
 		params = &DeleteApplicationReferenceDataSourceInput{}
@@ -37,17 +37,16 @@ type DeleteApplicationReferenceDataSourceInput struct {
 	// This member is required.
 	ApplicationName *string
 
-	// The current application version. You can use the DescribeApplication operation
-	// to get the current application version. If the version specified is not the
-	// current version, the ConcurrentModificationException is returned.
+	// The current application version. You can use the DescribeApplication operation to get the current
+	// application version. If the version specified is not the current version, the
+	// ConcurrentModificationException is returned.
 	//
 	// This member is required.
 	CurrentApplicationVersionId *int64
 
 	// The ID of the reference data source. When you add a reference data source to
-	// your application using the AddApplicationReferenceDataSource , Kinesis Data
-	// Analytics assigns an ID. You can use the DescribeApplication operation to get
-	// the reference ID.
+	// your application using the AddApplicationReferenceDataSource, Kinesis Data Analytics assigns an ID. You can use
+	// the DescribeApplicationoperation to get the reference ID.
 	//
 	// This member is required.
 	ReferenceId *string
@@ -91,25 +90,25 @@ func (c *Client) addOperationDeleteApplicationReferenceDataSourceMiddlewares(sta
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -124,13 +123,16 @@ func (c *Client) addOperationDeleteApplicationReferenceDataSourceMiddlewares(sta
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDeleteApplicationReferenceDataSourceValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteApplicationReferenceDataSource(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

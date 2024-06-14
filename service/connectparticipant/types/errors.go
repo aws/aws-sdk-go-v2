@@ -33,7 +33,8 @@ func (e *AccessDeniedException) ErrorCode() string {
 }
 func (e *AccessDeniedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// An attachment with that identifier is already being uploaded.
+// The requested operation conflicts with the current state of a service resource
+// associated with the request.
 type ConflictException struct {
 	Message *string
 

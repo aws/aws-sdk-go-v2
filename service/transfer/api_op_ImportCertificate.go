@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/transfer/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -35,13 +34,20 @@ type ImportCertificateInput struct {
 	//   - For the CLI, provide a file path for a certificate in URI format. For
 	//   example, --certificate file://encryption-cert.pem . Alternatively, you can
 	//   provide the raw content.
+	//
 	//   - For the SDK, specify the raw content of a certificate file. For example,
 	//   --certificate "`cat encryption-cert.pem`" .
 	//
 	// This member is required.
 	Certificate *string
 
-	// Specifies whether this certificate is used for signing or encryption.
+	// Specifies how this certificate is used. It can be used in the following ways:
+	//
+	//   - SIGNING : For signing AS2 messages
+	//
+	//   - ENCRYPTION : For encrypting AS2 messages
+	//
+	//   - TLS : For securing AS2 communications sent over HTTPS
 	//
 	// This member is required.
 	Usage types.CertificateUsageType
@@ -62,6 +68,7 @@ type ImportCertificateInput struct {
 	//   - For the CLI, provide a file path for a private key in URI format.For
 	//   example, --private-key file://encryption-key.pem . Alternatively, you can
 	//   provide the raw content of the private key file.
+	//
 	//   - For the SDK, specify the raw content of a private key file. For example,
 	//   --private-key "`cat encryption-key.pem`"
 	PrivateKey *string
@@ -108,25 +115,25 @@ func (c *Client) addOperationImportCertificateMiddlewares(stack *middleware.Stac
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -141,13 +148,16 @@ func (c *Client) addOperationImportCertificateMiddlewares(stack *middleware.Stac
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpImportCertificateValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opImportCertificate(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

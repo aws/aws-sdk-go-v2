@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/route53/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -14,11 +13,14 @@ import (
 
 // Gets the value that Amazon Route 53 returns in response to a DNS request for a
 // specified record name and type. You can optionally specify the IP address of a
-// DNS resolver, an EDNS0 client subnet IP address, and a subnet mask. This call
-// only supports querying public hosted zones. The TestDnsAnswer  returns
-// information similar to what you would expect from the answer section of the dig
-// command. Therefore, if you query for the name servers of a subdomain that point
-// to the parent name servers, those will not be returned.
+// DNS resolver, an EDNS0 client subnet IP address, and a subnet mask.
+//
+// This call only supports querying public hosted zones.
+//
+// The TestDnsAnswer  returns information similar to what you would expect from
+// the answer section of the dig command. Therefore, if you query for the name
+// servers of a subdomain that point to the parent name servers, those will not be
+// returned.
 func (c *Client) TestDNSAnswer(ctx context.Context, params *TestDNSAnswerInput, optFns ...func(*Options)) (*TestDNSAnswerOutput, error) {
 	if params == nil {
 		params = &TestDNSAnswerInput{}
@@ -65,9 +67,13 @@ type TestDNSAnswerInput struct {
 	// include in the DNS query. For example, if you specify 192.0.2.44 for
 	// edns0clientsubnetip and 24 for edns0clientsubnetmask , the checking tool will
 	// simulate a request from 192.0.2.0/24. The default value is 24 bits for IPv4
-	// addresses and 64 bits for IPv6 addresses. The range of valid values depends on
-	// whether edns0clientsubnetip is an IPv4 or an IPv6 address:
+	// addresses and 64 bits for IPv6 addresses.
+	//
+	// The range of valid values depends on whether edns0clientsubnetip is an IPv4 or
+	// an IPv6 address:
+	//
 	//   - IPv4: Specify a value between 0 and 32
+	//
 	//   - IPv6: Specify a value between 0 and 128
 	EDNS0ClientSubnetMask *string
 
@@ -113,8 +119,9 @@ type TestDNSAnswerOutput struct {
 	// A code that indicates whether the request is valid or not. The most common
 	// response code is NOERROR , meaning that the request is valid. If the response is
 	// not valid, Amazon Route 53 returns a response code that describes the error. For
-	// a list of possible response codes, see DNS RCODES (http://www.iana.org/assignments/dns-parameters/dns-parameters.xhtml#dns-parameters-6)
-	// on the IANA website.
+	// a list of possible response codes, see [DNS RCODES]on the IANA website.
+	//
+	// [DNS RCODES]: http://www.iana.org/assignments/dns-parameters/dns-parameters.xhtml#dns-parameters-6
 	//
 	// This member is required.
 	ResponseCode *string
@@ -147,25 +154,25 @@ func (c *Client) addOperationTestDNSAnswerMiddlewares(stack *middleware.Stack, o
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -180,13 +187,16 @@ func (c *Client) addOperationTestDNSAnswerMiddlewares(stack *middleware.Stack, o
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpTestDNSAnswerValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opTestDNSAnswer(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

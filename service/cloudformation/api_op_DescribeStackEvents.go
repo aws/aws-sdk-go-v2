@@ -6,17 +6,19 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/cloudformation/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Returns all stack related events for a specified stack in reverse chronological
-// order. For more information about a stack's event history, go to Stacks (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/concept-stack.html)
-// in the CloudFormation User Guide. You can list events for stacks that have
-// failed to create or have been deleted by specifying the unique stack identifier
-// (stack ID).
+// order. For more information about a stack's event history, see [CloudFormation stack creation events]in the
+// CloudFormation User Guide.
+//
+// You can list events for stacks that have failed to create or have been deleted
+// by specifying the unique stack identifier (stack ID).
+//
+// [CloudFormation stack creation events]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stack-resource-configuration-complete.html
 func (c *Client) DescribeStackEvents(ctx context.Context, params *DescribeStackEventsInput, optFns ...func(*Options)) (*DescribeStackEventsOutput, error) {
 	if params == nil {
 		params = &DescribeStackEventsInput{}
@@ -40,9 +42,12 @@ type DescribeStackEventsInput struct {
 
 	// The name or the unique stack ID that's associated with the stack, which aren't
 	// always interchangeable:
+	//
 	//   - Running stacks: You can specify either the stack's name or its unique stack
 	//   ID.
+	//
 	//   - Deleted stacks: You must specify the unique stack ID.
+	//
 	// Default: There is no default value.
 	StackName *string
 
@@ -87,25 +92,25 @@ func (c *Client) addOperationDescribeStackEventsMiddlewares(stack *middleware.St
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -120,10 +125,13 @@ func (c *Client) addOperationDescribeStackEventsMiddlewares(stack *middleware.St
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeStackEvents(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

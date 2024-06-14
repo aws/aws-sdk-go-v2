@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/directconnect/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -14,14 +13,19 @@ import (
 )
 
 // Creates a connection between a customer network and a specific Direct Connect
-// location. A connection links your internal network to an Direct Connect location
-// over a standard Ethernet fiber-optic cable. One end of the cable is connected to
-// your router, the other to an Direct Connect router. To find the locations for
-// your Region, use DescribeLocations . You can automatically add the new
-// connection to a link aggregation group (LAG) by specifying a LAG ID in the
-// request. This ensures that the new connection is allocated on the same Direct
-// Connect endpoint that hosts the specified LAG. If there are no available ports
-// on the endpoint, the request fails and no connection is created.
+// location.
+//
+// A connection links your internal network to an Direct Connect location over a
+// standard Ethernet fiber-optic cable. One end of the cable is connected to your
+// router, the other to an Direct Connect router.
+//
+// To find the locations for your Region, use DescribeLocations.
+//
+// You can automatically add the new connection to a link aggregation group (LAG)
+// by specifying a LAG ID in the request. This ensures that the new connection is
+// allocated on the same Direct Connect endpoint that hosts the specified LAG. If
+// there are no available ports on the endpoint, the request fails and no
+// connection is created.
 func (c *Client) CreateConnection(ctx context.Context, params *CreateConnectionInput, optFns ...func(*Options)) (*CreateConnectionOutput, error) {
 	if params == nil {
 		params = &CreateConnectionInput{}
@@ -60,10 +64,13 @@ type CreateConnectionInput struct {
 	// The name of the service provider associated with the requested connection.
 	ProviderName *string
 
-	// Indicates whether you want the connection to support MAC Security (MACsec). MAC
-	// Security (MACsec) is only available on dedicated connections. For information
-	// about MAC Security (MACsec) prerequisties, see MACsec prerequisties (https://docs.aws.amazon.com/directconnect/latest/UserGuide/direct-connect-mac-sec-getting-started.html#mac-sec-prerequisites)
-	// in the Direct Connect User Guide.
+	// Indicates whether you want the connection to support MAC Security (MACsec).
+	//
+	// MAC Security (MACsec) is only available on dedicated connections. For
+	// information about MAC Security (MACsec) prerequisties, see [MACsec prerequisties]in the Direct
+	// Connect User Guide.
+	//
+	// [MACsec prerequisties]: https://docs.aws.amazon.com/directconnect/latest/UserGuide/direct-connect-mac-sec-getting-started.html#mac-sec-prerequisites
 	RequestMACSec *bool
 
 	// The tags to associate with the lag.
@@ -97,24 +104,34 @@ type CreateConnectionOutput struct {
 	ConnectionName *string
 
 	// The state of the connection. The following are the possible values:
+	//
 	//   - ordering : The initial state of a hosted connection provisioned on an
 	//   interconnect. The connection stays in the ordering state until the owner of the
 	//   hosted connection confirms or declines the connection order.
+	//
 	//   - requested : The initial state of a standard connection. The connection stays
 	//   in the requested state until the Letter of Authorization (LOA) is sent to the
 	//   customer.
+	//
 	//   - pending : The connection has been approved and is being initialized.
+	//
 	//   - available : The network link is up and the connection is ready for use.
+	//
 	//   - down : The network link is down.
+	//
 	//   - deleting : The connection is being deleted.
+	//
 	//   - deleted : The connection has been deleted.
+	//
 	//   - rejected : A hosted connection in the ordering state enters the rejected
 	//   state if it is deleted by the customer.
+	//
 	//   - unknown : The state of the connection is not available.
 	ConnectionState types.ConnectionState
 
-	// The MAC Security (MACsec) connection encryption mode. The valid values are
-	// no_encrypt , should_encrypt , and must_encrypt .
+	// The MAC Security (MACsec) connection encryption mode.
+	//
+	// The valid values are no_encrypt , should_encrypt , and must_encrypt .
 	EncryptionMode *string
 
 	// Indicates whether the connection supports a secondary BGP peer in the same
@@ -145,9 +162,10 @@ type CreateConnectionOutput struct {
 	// The name of the Direct Connect service provider associated with the connection.
 	PartnerName *string
 
-	// The MAC Security (MACsec) port link status of the connection. The valid values
-	// are Encryption Up , which means that there is an active Connection Key Name, or
-	// Encryption Down .
+	// The MAC Security (MACsec) port link status of the connection.
+	//
+	// The valid values are Encryption Up , which means that there is an active
+	// Connection Key Name, or Encryption Down .
 	PortEncryptionStatus *string
 
 	// The name of the service provider associated with the connection.
@@ -190,25 +208,25 @@ func (c *Client) addOperationCreateConnectionMiddlewares(stack *middleware.Stack
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -223,13 +241,16 @@ func (c *Client) addOperationCreateConnectionMiddlewares(stack *middleware.Stack
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpCreateConnectionValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateConnection(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

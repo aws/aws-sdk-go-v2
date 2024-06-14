@@ -1,3 +1,105 @@
+# v1.37.3 (2024-06-07)
+
+* **Bug Fix**: Add clock skew correction on all service clients
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.37.2 (2024-06-03)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.37.1 (2024-05-31)
+
+* **Documentation**: AWS CodeBuild now supports Self-hosted GitHub Actions runners for Github Enterprise
+
+# v1.37.0 (2024-05-29)
+
+* **Feature**: AWS CodeBuild now supports manually creating GitHub webhooks
+
+# v1.36.1 (2024-05-23)
+
+* No change notes available for this release.
+
+# v1.36.0 (2024-05-17)
+
+* **Feature**: Aws CodeBuild now supports 36 hours build timeout
+
+# v1.35.1 (2024-05-16)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.35.0 (2024-05-15)
+
+* **Feature**: CodeBuild Reserved Capacity VPC Support
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.34.2 (2024-05-08)
+
+* **Bug Fix**: GoDoc improvement
+
+# v1.34.1 (2024-04-11)
+
+* **Documentation**: Support access tokens for Bitbucket sources
+
+# v1.34.0 (2024-04-09)
+
+* **Feature**: Add new webhook filter types for GitHub webhooks
+
+# v1.33.0 (2024-03-29)
+
+* **Feature**: Add new fleet status code for Reserved Capacity.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.32.0 (2024-03-25)
+
+* **Feature**: Supporting GitLab and GitLab Self Managed as source types in AWS CodeBuild.
+
+# v1.31.2 (2024-03-20)
+
+* **Documentation**: This release adds support for new webhook events (RELEASED and PRERELEASED) and filter types (TAG_NAME and RELEASE_NAME).
+
+# v1.31.1 (2024-03-18)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.31.0 (2024-03-15)
+
+* **Feature**: AWS CodeBuild now supports overflow behavior on Reserved Capacity.
+
+# v1.30.3 (2024-03-08)
+
+* **Documentation**: This release adds support for a new webhook event: PULL_REQUEST_CLOSED.
+
+# v1.30.2 (2024-03-07)
+
+* **Bug Fix**: Remove dependency on go-cmp.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.30.1 (2024-02-23)
+
+* **Bug Fix**: Move all common, SDK-side middleware stack ops into the service client module to prevent cross-module compatibility issues in the future.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.30.0 (2024-02-22)
+
+* **Feature**: Add middleware stack snapshot tests.
+
+# v1.29.3 (2024-02-21)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.29.2 (2024-02-20)
+
+* **Bug Fix**: When sourcing values for a service's `EndpointParameters`, the lack of a configured region (i.e. `options.Region == ""`) will now translate to a `nil` value for `EndpointParameters.Region` instead of a pointer to the empty string `""`. This will result in a much more explicit error when calling an operation instead of an obscure hostname lookup failure.
+
+# v1.29.1 (2024-02-15)
+
+* **Bug Fix**: Correct failure to determine the error type in awsJson services that could occur when errors were modeled with a non-string `code` field.
+
+# v1.29.0 (2024-02-13)
+
+* **Feature**: Bump minimum Go version to 1.20 per our language support policy.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.28.0 (2024-01-19)
 
 * **Feature**: Release CodeBuild Reserved Capacity feature

@@ -6,31 +6,43 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Called by an SaaS partner to create a partner event source. This operation is
-// not used by Amazon Web Services customers. Each partner event source can be used
-// by one Amazon Web Services account to create a matching partner event bus in
-// that Amazon Web Services account. A SaaS partner must create one partner event
-// source for each Amazon Web Services account that wants to receive those event
-// types. A partner event source creates events based on resources within the SaaS
-// partner's service or application. An Amazon Web Services account that creates a
-// partner event bus that matches the partner event source can use that event bus
-// to receive events from the partner, and then process them using Amazon Web
-// Services Events rules and targets. Partner event source names follow this
-// format: partner_name/event_namespace/event_name
-//   - partner_name is determined during partner registration, and identifies the
-//     partner to Amazon Web Services customers.
-//   - event_namespace is determined by the partner, and is a way for the partner
-//     to categorize their events.
-//   - event_name is determined by the partner, and should uniquely identify an
-//     event-generating resource within the partner system. The event_name must be
-//     unique across all Amazon Web Services customers. This is because the event
-//     source is a shared resource between the partner and customer accounts, and each
-//     partner event source unique in the partner account.
+// not used by Amazon Web Services customers.
+//
+// Each partner event source can be used by one Amazon Web Services account to
+// create a matching partner event bus in that Amazon Web Services account. A SaaS
+// partner must create one partner event source for each Amazon Web Services
+// account that wants to receive those event types.
+//
+// A partner event source creates events based on resources within the SaaS
+// partner's service or application.
+//
+// An Amazon Web Services account that creates a partner event bus that matches
+// the partner event source can use that event bus to receive events from the
+// partner, and then process them using Amazon Web Services Events rules and
+// targets.
+//
+// Partner event source names follow this format:
+//
+//	  partner_name/event_namespace/event_name
+//
+//	- partner_name is determined during partner registration, and identifies the
+//	partner to Amazon Web Services customers.
+//
+//	- event_namespace is determined by the partner, and is a way for the partner
+//	to categorize their events.
+//
+//	- event_name is determined by the partner, and should uniquely identify an
+//	event-generating resource within the partner system.
+//
+// The event_name must be unique across all Amazon Web Services customers. This is
+//
+//	because the event source is a shared resource between the partner and customer
+//	accounts, and each partner event source unique in the partner account.
 //
 // The combination of event_namespace and event_name should help Amazon Web
 // Services customers decide whether to create an event bus to receive these
@@ -102,25 +114,25 @@ func (c *Client) addOperationCreatePartnerEventSourceMiddlewares(stack *middlewa
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -135,13 +147,16 @@ func (c *Client) addOperationCreatePartnerEventSourceMiddlewares(stack *middlewa
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpCreatePartnerEventSourceValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreatePartnerEventSource(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

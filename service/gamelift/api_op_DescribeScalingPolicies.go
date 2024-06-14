@@ -6,19 +6,20 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/gamelift/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Retrieves all scaling policies applied to a fleet. To get a fleet's scaling
-// policies, specify the fleet ID. You can filter this request by policy status,
-// such as to retrieve only active scaling policies. Use the pagination parameters
-// to retrieve results as a set of sequential pages. If successful, set of
-// ScalingPolicy objects is returned for the fleet. A fleet may have all of its
-// scaling policies suspended. This operation does not affect the status of the
-// scaling policies, which remains ACTIVE.
+// Retrieves all scaling policies applied to a fleet.
+//
+// To get a fleet's scaling policies, specify the fleet ID. You can filter this
+// request by policy status, such as to retrieve only active scaling policies. Use
+// the pagination parameters to retrieve results as a set of sequential pages. If
+// successful, set of ScalingPolicy objects is returned for the fleet.
+//
+// A fleet may have all of its scaling policies suspended. This operation does not
+// affect the status of the scaling policies, which remains ACTIVE.
 func (c *Client) DescribeScalingPolicies(ctx context.Context, params *DescribeScalingPoliciesInput, optFns ...func(*Options)) (*DescribeScalingPoliciesOutput, error) {
 	if params == nil {
 		params = &DescribeScalingPoliciesInput{}
@@ -46,7 +47,7 @@ type DescribeScalingPoliciesInput struct {
 	// get results as a set of sequential pages.
 	Limit *int32
 
-	// The fleet location. If you don't specify this value, the response contains the
+	//  The fleet location. If you don't specify this value, the response contains the
 	// scaling policies of every location in the fleet.
 	Location *string
 
@@ -57,14 +58,19 @@ type DescribeScalingPoliciesInput struct {
 
 	// Scaling policy status to filter results on. A scaling policy is only in force
 	// when in an ACTIVE status.
+	//
 	//   - ACTIVE -- The scaling policy is currently in force.
-	//   - UPDATEREQUESTED -- A request to update the scaling policy has been
-	//   received.
+	//
+	//   - UPDATEREQUESTED -- A request to update the scaling policy has been received.
+	//
 	//   - UPDATING -- A change is being made to the scaling policy.
-	//   - DELETEREQUESTED -- A request to delete the scaling policy has been
-	//   received.
+	//
+	//   - DELETEREQUESTED -- A request to delete the scaling policy has been received.
+	//
 	//   - DELETING -- The scaling policy is being deleted.
+	//
 	//   - DELETED -- The scaling policy has been deleted.
+	//
 	//   - ERROR -- An error occurred in creating the policy. It should be removed and
 	//   recreated.
 	StatusFilter types.ScalingStatusType
@@ -110,25 +116,25 @@ func (c *Client) addOperationDescribeScalingPoliciesMiddlewares(stack *middlewar
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -143,13 +149,16 @@ func (c *Client) addOperationDescribeScalingPoliciesMiddlewares(stack *middlewar
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDescribeScalingPoliciesValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeScalingPolicies(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

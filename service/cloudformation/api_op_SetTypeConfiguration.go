@@ -6,21 +6,25 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/cloudformation/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Specifies the configuration data for a registered CloudFormation extension, in
-// the given account and Region. To view the current configuration data for an
-// extension, refer to the ConfigurationSchema element of DescribeType (https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_DescribeType.html)
-// . For more information, see Configuring extensions at the account level (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/registry-register.html#registry-set-configuration)
-// in the CloudFormation User Guide. It's strongly recommended that you use dynamic
-// references to restrict sensitive configuration definitions, such as third-party
-// credentials. For more details on dynamic references, see Using dynamic
-// references to specify template values (https://docs.aws.amazon.com/) in the
+// the given account and Region.
+//
+// To view the current configuration data for an extension, refer to the
+// ConfigurationSchema element of [DescribeType]. For more information, see [Configuring extensions at the account level] in the
 // CloudFormation User Guide.
+//
+// It's strongly recommended that you use dynamic references to restrict sensitive
+// configuration definitions, such as third-party credentials. For more details on
+// dynamic references, see [Using dynamic references to specify template values]in the CloudFormation User Guide.
+//
+// [DescribeType]: https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_DescribeType.html
+// [Using dynamic references to specify template values]: https://docs.aws.amazon.com/
+// [Configuring extensions at the account level]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/registry-private.html#registry-set-configuration
 func (c *Client) SetTypeConfiguration(ctx context.Context, params *SetTypeConfigurationInput, optFns ...func(*Options)) (*SetTypeConfigurationOutput, error) {
 	if params == nil {
 		params = &SetTypeConfigurationInput{}
@@ -38,36 +42,45 @@ func (c *Client) SetTypeConfiguration(ctx context.Context, params *SetTypeConfig
 
 type SetTypeConfigurationInput struct {
 
-	// The configuration data for the extension, in this account and Region. The
-	// configuration data must be formatted as JSON, and validate against the schema
-	// returned in the ConfigurationSchema response element of DescribeType (https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_DescribeType.html)
-	// . For more information, see Defining account-level configuration data for an
-	// extension (https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/resource-type-model.html#resource-type-howto-configuration)
-	// in the CloudFormation CLI User Guide.
+	// The configuration data for the extension, in this account and Region.
+	//
+	// The configuration data must be formatted as JSON, and validate against the
+	// schema returned in the ConfigurationSchema response element of [DescribeType]. For more
+	// information, see [Defining account-level configuration data for an extension]in the CloudFormation CLI User Guide.
+	//
+	// [DescribeType]: https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_DescribeType.html
+	// [Defining account-level configuration data for an extension]: https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/resource-type-model.html#resource-type-howto-configuration
 	//
 	// This member is required.
 	Configuration *string
 
-	// An alias by which to refer to this extension configuration data. Conditional:
-	// Specifying a configuration alias is required when setting a configuration for a
-	// resource type extension.
+	// An alias by which to refer to this extension configuration data.
+	//
+	// Conditional: Specifying a configuration alias is required when setting a
+	// configuration for a resource type extension.
 	ConfigurationAlias *string
 
-	// The type of extension. Conditional: You must specify ConfigurationArn , or Type
-	// and TypeName .
+	// The type of extension.
+	//
+	// Conditional: You must specify ConfigurationArn , or Type and TypeName .
 	Type types.ThirdPartyType
 
 	// The Amazon Resource Name (ARN) for the extension, in this account and Region.
-	// For public extensions, this will be the ARN assigned when you activate the type (https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_ActivateType.html)
-	// in this account and Region. For private extensions, this will be the ARN
-	// assigned when you register the type (https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_RegisterType.html)
-	// in this account and Region. Do not include the extension versions suffix at the
-	// end of the ARN. You can set the configuration for an extension, but not for a
-	// specific extension version.
+	//
+	// For public extensions, this will be the ARN assigned when you call the [ActivateType] API
+	// operation in this account and Region. For private extensions, this will be the
+	// ARN assigned when you call the [RegisterType]API operation in this account and Region.
+	//
+	// Do not include the extension versions suffix at the end of the ARN. You can set
+	// the configuration for an extension, but not for a specific extension version.
+	//
+	// [ActivateType]: https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_ActivateType.html
+	// [RegisterType]: https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_RegisterType.html
 	TypeArn *string
 
-	// The name of the extension. Conditional: You must specify ConfigurationArn , or
-	// Type and TypeName .
+	// The name of the extension.
+	//
+	// Conditional: You must specify ConfigurationArn , or Type and TypeName .
 	TypeName *string
 
 	noSmithyDocumentSerde
@@ -76,7 +89,9 @@ type SetTypeConfigurationInput struct {
 type SetTypeConfigurationOutput struct {
 
 	// The Amazon Resource Name (ARN) for the configuration data, in this account and
-	// Region. Conditional: You must specify ConfigurationArn , or Type and TypeName .
+	// Region.
+	//
+	// Conditional: You must specify ConfigurationArn , or Type and TypeName .
 	ConfigurationArn *string
 
 	// Metadata pertaining to the operation's result.
@@ -107,25 +122,25 @@ func (c *Client) addOperationSetTypeConfigurationMiddlewares(stack *middleware.S
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -140,13 +155,16 @@ func (c *Client) addOperationSetTypeConfigurationMiddlewares(stack *middleware.S
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpSetTypeConfigurationValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opSetTypeConfiguration(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

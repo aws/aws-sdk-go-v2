@@ -6,20 +6,23 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/chime/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists up to 100 active Amazon Chime SDK meetings. ListMeetings is not supported
-// in the Amazon Chime SDK Meetings Namespace. Update your application to remove
-// calls to this API. For more information about the Amazon Chime SDK, see Using
-// the Amazon Chime SDK (https://docs.aws.amazon.com/chime-sdk/latest/dg/meetings-sdk.html)
-// in the Amazon Chime SDK Developer Guide.
+// Lists up to 100 active Amazon Chime SDK meetings.
+//
+// ListMeetings is not supported in the Amazon Chime SDK Meetings Namespace.
+// Update your application to remove calls to this API.
+//
+// For more information about the Amazon Chime SDK, see [Using the Amazon Chime SDK] in the Amazon Chime SDK
+// Developer Guide.
 //
 // Deprecated: ListMeetings is not supported in the Amazon Chime SDK Meetings
 // Namespace. Update your application to remove calls to this API.
+//
+// [Using the Amazon Chime SDK]: https://docs.aws.amazon.com/chime-sdk/latest/dg/meetings-sdk.html
 func (c *Client) ListMeetings(ctx context.Context, params *ListMeetingsInput, optFns ...func(*Options)) (*ListMeetingsOutput, error) {
 	if params == nil {
 		params = &ListMeetingsInput{}
@@ -82,25 +85,25 @@ func (c *Client) addOperationListMeetingsMiddlewares(stack *middleware.Stack, op
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -115,10 +118,13 @@ func (c *Client) addOperationListMeetingsMiddlewares(stack *middleware.Stack, op
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListMeetings(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

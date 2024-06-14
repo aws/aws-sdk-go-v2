@@ -6,15 +6,15 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/sesv2/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Lists the recommendations present in your Amazon SES account in the current
-// Amazon Web Services Region. You can execute this operation no more than once per
-// second.
+// Amazon Web Services Region.
+//
+// You can execute this operation no more than once per second.
 func (c *Client) ListRecommendations(ctx context.Context, params *ListRecommendationsInput, optFns ...func(*Options)) (*ListRecommendationsOutput, error) {
 	if params == nil {
 		params = &ListRecommendationsInput{}
@@ -44,8 +44,9 @@ type ListRecommendationsInput struct {
 	// The number of results to show in a single call to ListRecommendations . If the
 	// number of results is larger than the number you specified in this parameter,
 	// then the response includes a NextToken element, which you can use to obtain
-	// additional results. The value you specify has to be at least 1, and can be no
-	// more than 100.
+	// additional results.
+	//
+	// The value you specify has to be at least 1, and can be no more than 100.
 	PageSize *int32
 
 	noSmithyDocumentSerde
@@ -92,25 +93,25 @@ func (c *Client) addOperationListRecommendationsMiddlewares(stack *middleware.St
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -125,10 +126,13 @@ func (c *Client) addOperationListRecommendationsMiddlewares(stack *middleware.St
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListRecommendations(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -160,8 +164,9 @@ type ListRecommendationsPaginatorOptions struct {
 	// The number of results to show in a single call to ListRecommendations . If the
 	// number of results is larger than the number you specified in this parameter,
 	// then the response includes a NextToken element, which you can use to obtain
-	// additional results. The value you specify has to be at least 1, and can be no
-	// more than 100.
+	// additional results.
+	//
+	// The value you specify has to be at least 1, and can be no more than 100.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

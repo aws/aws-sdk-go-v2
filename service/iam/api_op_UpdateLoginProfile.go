@@ -6,17 +6,18 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Changes the password for the specified IAM user. You can use the CLI, the
 // Amazon Web Services API, or the Users page in the IAM console to change the
-// password for any IAM user. Use ChangePassword to change your own password in
-// the My Security Credentials page in the Amazon Web Services Management Console.
-// For more information about modifying passwords, see Managing passwords (https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_ManagingLogins.html)
-// in the IAM User Guide.
+// password for any IAM user. Use ChangePasswordto change your own password in the My Security
+// Credentials page in the Amazon Web Services Management Console.
+//
+// For more information about modifying passwords, see [Managing passwords] in the IAM User Guide.
+//
+// [Managing passwords]: https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_ManagingLogins.html
 func (c *Client) UpdateLoginProfile(ctx context.Context, params *UpdateLoginProfileInput, optFns ...func(*Options)) (*UpdateLoginProfileOutput, error) {
 	if params == nil {
 		params = &UpdateLoginProfileInput{}
@@ -34,26 +35,36 @@ func (c *Client) UpdateLoginProfile(ctx context.Context, params *UpdateLoginProf
 
 type UpdateLoginProfileInput struct {
 
-	// The name of the user whose password you want to update. This parameter allows
-	// (through its regex pattern (http://wikipedia.org/wiki/regex) ) a string of
-	// characters consisting of upper and lowercase alphanumeric characters with no
-	// spaces. You can also include any of the following characters: _+=,.@-
+	// The name of the user whose password you want to update.
+	//
+	// This parameter allows (through its [regex pattern]) a string of characters consisting of upper
+	// and lowercase alphanumeric characters with no spaces. You can also include any
+	// of the following characters: _+=,.@-
+	//
+	// [regex pattern]: http://wikipedia.org/wiki/regex
 	//
 	// This member is required.
 	UserName *string
 
-	// The new password for the specified IAM user. The regex pattern (http://wikipedia.org/wiki/regex)
-	// used to validate this parameter is a string of characters consisting of the
-	// following:
+	// The new password for the specified IAM user.
+	//
+	// The [regex pattern] used to validate this parameter is a string of characters consisting of
+	// the following:
+	//
 	//   - Any printable ASCII character ranging from the space character ( \u0020 )
 	//   through the end of the ASCII character range
+	//
 	//   - The printable characters in the Basic Latin and Latin-1 Supplement
 	//   character set (through \u00FF )
+	//
 	//   - The special characters tab ( \u0009 ), line feed ( \u000A ), and carriage
 	//   return ( \u000D )
+	//
 	// However, the format can be further restricted by the account administrator by
 	// setting a password policy on the Amazon Web Services account. For more
-	// information, see UpdateAccountPasswordPolicy .
+	// information, see UpdateAccountPasswordPolicy.
+	//
+	// [regex pattern]: http://wikipedia.org/wiki/regex
 	Password *string
 
 	// Allows this new password to be used only once by requiring the specified IAM
@@ -92,25 +103,25 @@ func (c *Client) addOperationUpdateLoginProfileMiddlewares(stack *middleware.Sta
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -125,13 +136,16 @@ func (c *Client) addOperationUpdateLoginProfileMiddlewares(stack *middleware.Sta
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpUpdateLoginProfileValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateLoginProfile(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

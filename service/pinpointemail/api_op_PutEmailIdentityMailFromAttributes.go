@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/pinpointemail/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -42,15 +41,19 @@ type PutEmailIdentityMailFromAttributesInput struct {
 	// MX record when you send an email. When you set this value to UseDefaultValue ,
 	// Amazon Pinpoint uses amazonses.com as the MAIL FROM domain. When you set this
 	// value to RejectMessage , Amazon Pinpoint returns a MailFromDomainNotVerified
-	// error, and doesn't attempt to deliver the email. These behaviors are taken when
-	// the custom MAIL FROM domain configuration is in the Pending , Failed , and
-	// TemporaryFailure states.
+	// error, and doesn't attempt to deliver the email.
+	//
+	// These behaviors are taken when the custom MAIL FROM domain configuration is in
+	// the Pending , Failed , and TemporaryFailure states.
 	BehaviorOnMxFailure types.BehaviorOnMxFailure
 
-	// The custom MAIL FROM domain that you want the verified identity to use. The
+	//  The custom MAIL FROM domain that you want the verified identity to use. The
 	// MAIL FROM domain must meet the following criteria:
+	//
 	//   - It has to be a subdomain of the verified identity.
+	//
 	//   - It can't be used to receive email.
+	//
 	//   - It can't be used in a "From" address if the MAIL FROM domain is a
 	//   destination for feedback forwarding emails.
 	MailFromDomain *string
@@ -89,25 +92,25 @@ func (c *Client) addOperationPutEmailIdentityMailFromAttributesMiddlewares(stack
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -122,13 +125,16 @@ func (c *Client) addOperationPutEmailIdentityMailFromAttributesMiddlewares(stack
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpPutEmailIdentityMailFromAttributesValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opPutEmailIdentityMailFromAttributes(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

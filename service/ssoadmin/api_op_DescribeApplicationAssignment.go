@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/ssoadmin/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -15,8 +14,7 @@ import (
 // Retrieves a direct assignment of a user or group to an application. If the user
 // doesn’t have a direct assignment to the application, the user may still have
 // access to the application through a group. Therefore, don’t use this API to test
-// access to an application for a user. Instead use
-// ListApplicationAssignmentsForPrincipal .
+// access to an application for a user. Instead use ListApplicationAssignmentsForPrincipal.
 func (c *Client) DescribeApplicationAssignment(ctx context.Context, params *DescribeApplicationAssignmentInput, optFns ...func(*Options)) (*DescribeApplicationAssignmentOutput, error) {
 	if params == nil {
 		params = &DescribeApplicationAssignmentInput{}
@@ -34,17 +32,15 @@ func (c *Client) DescribeApplicationAssignment(ctx context.Context, params *Desc
 
 type DescribeApplicationAssignmentInput struct {
 
-	// Specifies the ARN of the application. For more information about ARNs, see
-	// Amazon Resource Names (ARNs) and Amazon Web Services Service Namespaces in the
-	// Amazon Web Services General Reference.
+	// Specifies the ARN of the application. For more information about ARNs, see Amazon Resource Names (ARNs) and Amazon Web Services Service Namespaces in
+	// the Amazon Web Services General Reference.
 	//
 	// This member is required.
 	ApplicationArn *string
 
 	// An identifier for an object in IAM Identity Center, such as a user or group.
 	// PrincipalIds are GUIDs (For example, f81d4fae-7dec-11d0-a765-00a0c91e6bf6). For
-	// more information about PrincipalIds in IAM Identity Center, see the IAM
-	// Identity Center Identity Store API Reference .
+	// more information about PrincipalIds in IAM Identity Center, see the IAM Identity Center Identity Store API Reference.
 	//
 	// This member is required.
 	PrincipalId *string
@@ -59,15 +55,13 @@ type DescribeApplicationAssignmentInput struct {
 
 type DescribeApplicationAssignmentOutput struct {
 
-	// Specifies the ARN of the application. For more information about ARNs, see
-	// Amazon Resource Names (ARNs) and Amazon Web Services Service Namespaces in the
-	// Amazon Web Services General Reference.
+	// Specifies the ARN of the application. For more information about ARNs, see Amazon Resource Names (ARNs) and Amazon Web Services Service Namespaces in
+	// the Amazon Web Services General Reference.
 	ApplicationArn *string
 
 	// An identifier for an object in IAM Identity Center, such as a user or group.
 	// PrincipalIds are GUIDs (For example, f81d4fae-7dec-11d0-a765-00a0c91e6bf6). For
-	// more information about PrincipalIds in IAM Identity Center, see the IAM
-	// Identity Center Identity Store API Reference .
+	// more information about PrincipalIds in IAM Identity Center, see the IAM Identity Center Identity Store API Reference.
 	PrincipalId *string
 
 	// The entity type for which the assignment will be created.
@@ -101,25 +95,25 @@ func (c *Client) addOperationDescribeApplicationAssignmentMiddlewares(stack *mid
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -134,13 +128,16 @@ func (c *Client) addOperationDescribeApplicationAssignmentMiddlewares(stack *mid
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDescribeApplicationAssignmentValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeApplicationAssignment(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

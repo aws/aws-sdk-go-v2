@@ -6,23 +6,34 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/paymentcryptography/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Adds or edits tags on an Amazon Web Services Payment Cryptography key. Tagging
-// or untagging an Amazon Web Services Payment Cryptography key can allow or deny
-// permission to the key. Each tag consists of a tag key and a tag value, both of
-// which are case-sensitive strings. The tag value can be an empty (null) string.
-// To add a tag, specify a new tag key and a tag value. To edit a tag, specify an
-// existing tag key and a new tag value. You can also add tags to an Amazon Web
-// Services Payment Cryptography key when you create it with CreateKey .
+// Adds or edits tags on an Amazon Web Services Payment Cryptography key.
+//
+// Tagging or untagging an Amazon Web Services Payment Cryptography key can allow
+// or deny permission to the key.
+//
+// Each tag consists of a tag key and a tag value, both of which are
+// case-sensitive strings. The tag value can be an empty (null) string. To add a
+// tag, specify a new tag key and a tag value. To edit a tag, specify an existing
+// tag key and a new tag value. You can also add tags to an Amazon Web Services
+// Payment Cryptography key when you create it with [CreateKey].
+//
 // Cross-account use: This operation can't be used across different Amazon Web
-// Services accounts. Related operations:
-//   - ListTagsForResource
-//   - UntagResource
+// Services accounts.
+//
+// Related operations:
+//
+// [ListTagsForResource]
+//
+// [UntagResource]
+//
+// [UntagResource]: https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_UntagResource.html
+// [CreateKey]: https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_CreateKey.html
+// [ListTagsForResource]: https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_ListTagsForResource.html
 func (c *Client) TagResource(ctx context.Context, params *TagResourceInput, optFns ...func(*Options)) (*TagResourceOutput, error) {
 	if params == nil {
 		params = &TagResourceInput{}
@@ -49,12 +60,17 @@ type TagResourceInput struct {
 	// can be an empty (null) string. You can't have more than one tag on an Amazon Web
 	// Services Payment Cryptography key with the same tag key. If you specify an
 	// existing tag key with a different tag value, Amazon Web Services Payment
-	// Cryptography replaces the current tag value with the new one. Don't include
-	// personal, confidential or sensitive information in this field. This field may be
-	// displayed in plaintext in CloudTrail logs and other output. To use this
-	// parameter, you must have TagResource permission in an IAM policy. Don't include
-	// personal, confidential or sensitive information in this field. This field may be
-	// displayed in plaintext in CloudTrail logs and other output.
+	// Cryptography replaces the current tag value with the new one.
+	//
+	// Don't include personal, confidential or sensitive information in this field.
+	// This field may be displayed in plaintext in CloudTrail logs and other output.
+	//
+	// To use this parameter, you must have [TagResource] permission in an IAM policy.
+	//
+	// Don't include personal, confidential or sensitive information in this field.
+	// This field may be displayed in plaintext in CloudTrail logs and other output.
+	//
+	// [TagResource]: https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_TagResource.html
 	//
 	// This member is required.
 	Tags []types.Tag
@@ -91,25 +107,25 @@ func (c *Client) addOperationTagResourceMiddlewares(stack *middleware.Stack, opt
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -124,13 +140,16 @@ func (c *Client) addOperationTagResourceMiddlewares(stack *middleware.Stack, opt
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpTagResourceValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opTagResource(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

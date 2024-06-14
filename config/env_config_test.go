@@ -10,7 +10,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/feature/ec2/imds"
 	"github.com/aws/aws-sdk-go-v2/internal/awstesting"
 	"github.com/aws/smithy-go/ptr"
-	"github.com/google/go-cmp/cmp"
 )
 
 var _ sharedConfigProfileProvider = (*EnvConfig)(nil)
@@ -539,7 +538,7 @@ func TestNewEnvConfig(t *testing.T) {
 				t.Fatalf("WantErr=%v, got err=%v", c.WantErr, err)
 			}
 
-			if diff := cmp.Diff(c.Config, cfg); len(diff) > 0 {
+			if diff := cmpDiff(c.Config, cfg); len(diff) > 0 {
 				t.Errorf("expect config to match.\n%s",
 					diff)
 			}

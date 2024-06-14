@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -20,8 +19,9 @@ import (
 // 72 hours of requesting the ACM certificate. If more than 72 hours have elapsed
 // since your original request or since your last attempt to resend validation
 // mail, you must request a new certificate. For more information about setting up
-// your contact email addresses, see Configure Email for your Domain (https://docs.aws.amazon.com/acm/latest/userguide/setup-email.html)
-// .
+// your contact email addresses, see [Configure Email for your Domain].
+//
+// [Configure Email for your Domain]: https://docs.aws.amazon.com/acm/latest/userguide/setup-email.html
 func (c *Client) ResendValidationEmail(ctx context.Context, params *ResendValidationEmailInput, optFns ...func(*Options)) (*ResendValidationEmailOutput, error) {
 	if params == nil {
 		params = &ResendValidationEmailInput{}
@@ -40,11 +40,11 @@ func (c *Client) ResendValidationEmail(ctx context.Context, params *ResendValida
 type ResendValidationEmailInput struct {
 
 	// String that contains the ARN of the requested certificate. The certificate ARN
-	// is generated and returned by the RequestCertificate action as soon as the
-	// request is made. By default, using this parameter causes email to be sent to all
-	// top-level domains you specified in the certificate request. The ARN must be of
-	// the form:
-	// arn:aws:acm:us-east-1:123456789012:certificate/12345678-1234-1234-1234-123456789012
+	// is generated and returned by the RequestCertificateaction as soon as the request is made. By
+	// default, using this parameter causes email to be sent to all top-level domains
+	// you specified in the certificate request. The ARN must be of the form:
+	//
+	//     arn:aws:acm:us-east-1:123456789012:certificate/12345678-1234-1234-1234-123456789012
 	//
 	// This member is required.
 	CertificateArn *string
@@ -61,10 +61,15 @@ type ResendValidationEmailInput struct {
 	// for site.subdomain.example.com and specify a ValidationDomain of
 	// subdomain.example.com , ACM sends email to the domain registrant, technical
 	// contact, and administrative contact in WHOIS and the following five addresses:
+	//
 	//   - admin@subdomain.example.com
+	//
 	//   - administrator@subdomain.example.com
+	//
 	//   - hostmaster@subdomain.example.com
+	//
 	//   - postmaster@subdomain.example.com
+	//
 	//   - webmaster@subdomain.example.com
 	//
 	// This member is required.
@@ -102,25 +107,25 @@ func (c *Client) addOperationResendValidationEmailMiddlewares(stack *middleware.
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -135,13 +140,16 @@ func (c *Client) addOperationResendValidationEmailMiddlewares(stack *middleware.
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpResendValidationEmailValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opResendValidationEmail(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

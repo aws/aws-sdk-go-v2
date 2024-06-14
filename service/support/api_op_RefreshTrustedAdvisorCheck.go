@@ -6,31 +6,35 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/support/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Refreshes the Trusted Advisor check that you specify using the check ID. You
-// can get the check IDs by calling the DescribeTrustedAdvisorChecks operation.
+// can get the check IDs by calling the DescribeTrustedAdvisorChecksoperation.
+//
 // Some checks are refreshed automatically. If you call the
 // RefreshTrustedAdvisorCheck operation to refresh them, you might see the
-// InvalidParameterValue error. The response contains a
-// TrustedAdvisorCheckRefreshStatus object.
+// InvalidParameterValue error.
+//
+// The response contains a TrustedAdvisorCheckRefreshStatus object.
+//
 //   - You must have a Business, Enterprise On-Ramp, or Enterprise Support plan to
 //     use the Amazon Web Services Support API.
+//
 //   - If you call the Amazon Web Services Support API from an account that
 //     doesn't have a Business, Enterprise On-Ramp, or Enterprise Support plan, the
 //     SubscriptionRequiredException error message appears. For information about
-//     changing your support plan, see Amazon Web Services Support (http://aws.amazon.com/premiumsupport/)
-//     .
+//     changing your support plan, see [Amazon Web Services Support].
 //
 // To call the Trusted Advisor operations in the Amazon Web Services Support API,
 // you must use the US East (N. Virginia) endpoint. Currently, the US West (Oregon)
 // and Europe (Ireland) endpoints don't support the Trusted Advisor operations. For
-// more information, see About the Amazon Web Services Support API (https://docs.aws.amazon.com/awssupport/latest/user/about-support-api.html#endpoint)
-// in the Amazon Web Services Support User Guide.
+// more information, see [About the Amazon Web Services Support API]in the Amazon Web Services Support User Guide.
+//
+// [Amazon Web Services Support]: http://aws.amazon.com/premiumsupport/
+// [About the Amazon Web Services Support API]: https://docs.aws.amazon.com/awssupport/latest/user/about-support-api.html#endpoint
 func (c *Client) RefreshTrustedAdvisorCheck(ctx context.Context, params *RefreshTrustedAdvisorCheckInput, optFns ...func(*Options)) (*RefreshTrustedAdvisorCheckOutput, error) {
 	if params == nil {
 		params = &RefreshTrustedAdvisorCheckInput{}
@@ -48,8 +52,9 @@ func (c *Client) RefreshTrustedAdvisorCheck(ctx context.Context, params *Refresh
 
 type RefreshTrustedAdvisorCheckInput struct {
 
-	// The unique identifier for the Trusted Advisor check to refresh. Specifying the
-	// check ID of a check that is automatically refreshed causes an
+	// The unique identifier for the Trusted Advisor check to refresh.
+	//
+	// Specifying the check ID of a check that is automatically refreshed causes an
 	// InvalidParameterValue error.
 	//
 	// This member is required.
@@ -95,25 +100,25 @@ func (c *Client) addOperationRefreshTrustedAdvisorCheckMiddlewares(stack *middle
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -128,13 +133,16 @@ func (c *Client) addOperationRefreshTrustedAdvisorCheckMiddlewares(stack *middle
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpRefreshTrustedAdvisorCheckValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opRefreshTrustedAdvisorCheck(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

@@ -6,19 +6,20 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/translate/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Stops an asynchronous batch translation job that is in progress. If the job's
-// state is IN_PROGRESS , the job will be marked for termination and put into the
-// STOP_REQUESTED state. If the job completes before it can be stopped, it is put
-// into the COMPLETED state. Otherwise, the job is put into the STOPPED state.
-// Asynchronous batch translation jobs are started with the StartTextTranslationJob
-// operation. You can use the DescribeTextTranslationJob or ListTextTranslationJobs
-// operations to get a batch translation job's JobId .
+// Stops an asynchronous batch translation job that is in progress.
+//
+// If the job's state is IN_PROGRESS , the job will be marked for termination and
+// put into the STOP_REQUESTED state. If the job completes before it can be
+// stopped, it is put into the COMPLETED state. Otherwise, the job is put into the
+// STOPPED state.
+//
+// Asynchronous batch translation jobs are started with the StartTextTranslationJob operation. You can
+// use the DescribeTextTranslationJobor ListTextTranslationJobs operations to get a batch translation job's JobId .
 func (c *Client) StopTextTranslationJob(ctx context.Context, params *StopTextTranslationJobInput, optFns ...func(*Options)) (*StopTextTranslationJobOutput, error) {
 	if params == nil {
 		params = &StopTextTranslationJobInput{}
@@ -81,25 +82,25 @@ func (c *Client) addOperationStopTextTranslationJobMiddlewares(stack *middleware
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -114,13 +115,16 @@ func (c *Client) addOperationStopTextTranslationJobMiddlewares(stack *middleware
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpStopTextTranslationJobValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opStopTextTranslationJob(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

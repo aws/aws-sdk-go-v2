@@ -6,22 +6,24 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/neptune/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Initiates the failover process for a Neptune global database. A failover for a
-// Neptune global database promotes one of secondary read-only DB clusters to be
-// the primary DB cluster and demotes the primary DB cluster to being a secondary
-// (read-only) DB cluster. In other words, the role of the current primary DB
-// cluster and the selected target secondary DB cluster are switched. The selected
-// secondary DB cluster assumes full read/write capabilities for the Neptune global
-// database. This action applies only to Neptune global databases. This action is
-// only intended for use on healthy Neptune global databases with healthy Neptune
-// DB clusters and no region-wide outages, to test disaster recovery scenarios or
-// to reconfigure the global database topology.
+// Initiates the failover process for a Neptune global database.
+//
+// A failover for a Neptune global database promotes one of secondary read-only DB
+// clusters to be the primary DB cluster and demotes the primary DB cluster to
+// being a secondary (read-only) DB cluster. In other words, the role of the
+// current primary DB cluster and the selected target secondary DB cluster are
+// switched. The selected secondary DB cluster assumes full read/write capabilities
+// for the Neptune global database.
+//
+// This action applies only to Neptune global databases. This action is only
+// intended for use on healthy Neptune global databases with healthy Neptune DB
+// clusters and no region-wide outages, to test disaster recovery scenarios or to
+// reconfigure the global database topology.
 func (c *Client) FailoverGlobalCluster(ctx context.Context, params *FailoverGlobalClusterInput, optFns ...func(*Options)) (*FailoverGlobalClusterOutput, error) {
 	if params == nil {
 		params = &FailoverGlobalClusterInput{}
@@ -42,8 +44,9 @@ type FailoverGlobalClusterInput struct {
 	// Identifier of the Neptune global database that should be failed over. The
 	// identifier is the unique key assigned by the user when the Neptune global
 	// database was created. In other words, it's the name of the global database that
-	// you want to fail over. Constraints: Must match the identifier of an existing
-	// Neptune global database.
+	// you want to fail over.
+	//
+	// Constraints: Must match the identifier of an existing Neptune global database.
 	//
 	// This member is required.
 	GlobalClusterIdentifier *string
@@ -59,10 +62,9 @@ type FailoverGlobalClusterInput struct {
 
 type FailoverGlobalClusterOutput struct {
 
-	// Contains the details of an Amazon Neptune global database. This data type is
-	// used as a response element for the CreateGlobalCluster , DescribeGlobalClusters
-	// , ModifyGlobalCluster , DeleteGlobalCluster , FailoverGlobalCluster , and
-	// RemoveFromGlobalCluster actions.
+	// Contains the details of an Amazon Neptune global database.
+	//
+	// This data type is used as a response element for the CreateGlobalCluster, DescribeGlobalClusters, ModifyGlobalCluster, DeleteGlobalCluster, FailoverGlobalCluster, and RemoveFromGlobalCluster actions.
 	GlobalCluster *types.GlobalCluster
 
 	// Metadata pertaining to the operation's result.
@@ -93,25 +95,25 @@ func (c *Client) addOperationFailoverGlobalClusterMiddlewares(stack *middleware.
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -126,13 +128,16 @@ func (c *Client) addOperationFailoverGlobalClusterMiddlewares(stack *middleware.
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpFailoverGlobalClusterValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opFailoverGlobalCluster(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

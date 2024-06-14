@@ -6,16 +6,17 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes a custom control in Audit Manager. When you invoke this operation, the
-// custom control is deleted from any frameworks or assessments that it’s currently
-// part of. As a result, Audit Manager will stop collecting evidence for that
-// custom control in all of your assessments. This includes assessments that you
-// previously created before you deleted the custom control.
+//	Deletes a custom control in Audit Manager.
+//
+// When you invoke this operation, the custom control is deleted from any
+// frameworks or assessments that it’s currently part of. As a result, Audit
+// Manager will stop collecting evidence for that custom control in all of your
+// assessments. This includes assessments that you previously created before you
+// deleted the custom control.
 func (c *Client) DeleteControl(ctx context.Context, params *DeleteControlInput, optFns ...func(*Options)) (*DeleteControlOutput, error) {
 	if params == nil {
 		params = &DeleteControlInput{}
@@ -33,7 +34,7 @@ func (c *Client) DeleteControl(ctx context.Context, params *DeleteControlInput, 
 
 type DeleteControlInput struct {
 
-	// The unique identifier for the control.
+	//  The unique identifier for the control.
 	//
 	// This member is required.
 	ControlId *string
@@ -70,25 +71,25 @@ func (c *Client) addOperationDeleteControlMiddlewares(stack *middleware.Stack, o
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -103,13 +104,16 @@ func (c *Client) addOperationDeleteControlMiddlewares(stack *middleware.Stack, o
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDeleteControlValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteControl(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

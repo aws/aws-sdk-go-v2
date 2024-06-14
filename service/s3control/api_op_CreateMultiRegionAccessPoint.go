@@ -16,22 +16,37 @@ import (
 	"strings"
 )
 
-// This operation is not supported by directory buckets. Creates a Multi-Region
-// Access Point and associates it with the specified buckets. For more information
-// about creating Multi-Region Access Points, see Creating Multi-Region Access
-// Points (https://docs.aws.amazon.com/AmazonS3/latest/userguide/CreatingMultiRegionAccessPoints.html)
-// in the Amazon S3 User Guide. This action will always be routed to the US West
-// (Oregon) Region. For more information about the restrictions around managing
-// Multi-Region Access Points, see Managing Multi-Region Access Points (https://docs.aws.amazon.com/AmazonS3/latest/userguide/ManagingMultiRegionAccessPoints.html)
-// in the Amazon S3 User Guide. This request is asynchronous, meaning that you
-// might receive a response before the command has completed. When this request
-// provides a response, it provides a token that you can use to monitor the status
-// of the request with DescribeMultiRegionAccessPointOperation . The following
-// actions are related to CreateMultiRegionAccessPoint :
-//   - DeleteMultiRegionAccessPoint (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteMultiRegionAccessPoint.html)
-//   - DescribeMultiRegionAccessPointOperation (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DescribeMultiRegionAccessPointOperation.html)
-//   - GetMultiRegionAccessPoint (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetMultiRegionAccessPoint.html)
-//   - ListMultiRegionAccessPoints (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_ListMultiRegionAccessPoints.html)
+// This operation is not supported by directory buckets.
+//
+// Creates a Multi-Region Access Point and associates it with the specified
+// buckets. For more information about creating Multi-Region Access Points, see [Creating Multi-Region Access Points]in
+// the Amazon S3 User Guide.
+//
+// This action will always be routed to the US West (Oregon) Region. For more
+// information about the restrictions around working with Multi-Region Access
+// Points, see [Multi-Region Access Point restrictions and limitations]in the Amazon S3 User Guide.
+//
+// This request is asynchronous, meaning that you might receive a response before
+// the command has completed. When this request provides a response, it provides a
+// token that you can use to monitor the status of the request with
+// DescribeMultiRegionAccessPointOperation .
+//
+// The following actions are related to CreateMultiRegionAccessPoint :
+//
+// [DeleteMultiRegionAccessPoint]
+//
+// [DescribeMultiRegionAccessPointOperation]
+//
+// [GetMultiRegionAccessPoint]
+//
+// [ListMultiRegionAccessPoints]
+//
+// [Creating Multi-Region Access Points]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/CreatingMultiRegionAccessPoints.html
+// [DeleteMultiRegionAccessPoint]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteMultiRegionAccessPoint.html
+// [GetMultiRegionAccessPoint]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetMultiRegionAccessPoint.html
+// [ListMultiRegionAccessPoints]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_ListMultiRegionAccessPoints.html
+// [DescribeMultiRegionAccessPointOperation]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DescribeMultiRegionAccessPointOperation.html
+// [Multi-Region Access Point restrictions and limitations]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/MultiRegionAccessPointRestrictions.html
 func (c *Client) CreateMultiRegionAccessPoint(ctx context.Context, params *CreateMultiRegionAccessPointInput, optFns ...func(*Options)) (*CreateMultiRegionAccessPointOutput, error) {
 	if params == nil {
 		params = &CreateMultiRegionAccessPointInput{}
@@ -77,9 +92,10 @@ func (in *CreateMultiRegionAccessPointInput) bindEndpointParams(p *EndpointParam
 
 type CreateMultiRegionAccessPointOutput struct {
 
-	// The request token associated with the request. You can use this token with
-	// DescribeMultiRegionAccessPointOperation (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DescribeMultiRegionAccessPointOperation.html)
-	// to determine the status of asynchronous requests.
+	// The request token associated with the request. You can use this token with [DescribeMultiRegionAccessPointOperation] to
+	// determine the status of asynchronous requests.
+	//
+	// [DescribeMultiRegionAccessPointOperation]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DescribeMultiRegionAccessPointOperation.html
 	RequestTokenARN *string
 
 	// Metadata pertaining to the operation's result.
@@ -110,25 +126,25 @@ func (c *Client) addOperationCreateMultiRegionAccessPointMiddlewares(stack *midd
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -144,6 +160,9 @@ func (c *Client) addOperationCreateMultiRegionAccessPointMiddlewares(stack *midd
 		return err
 	}
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
+		return err
+	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
 	if err = smithyhttp.AddContentChecksumMiddleware(stack); err != nil {
@@ -164,7 +183,7 @@ func (c *Client) addOperationCreateMultiRegionAccessPointMiddlewares(stack *midd
 	if err = addMetadataRetrieverMiddleware(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addCreateMultiRegionAccessPointUpdateEndpoint(stack, options); err != nil {

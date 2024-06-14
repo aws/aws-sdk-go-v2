@@ -6,14 +6,14 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/codeartifact/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns a DomainDescription (https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_DomainDescription.html)
-// object that contains information about the requested domain.
+//	Returns a [DomainDescription] object that contains information about the requested domain.
+//
+// [DomainDescription]: https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_DomainDescription.html
 func (c *Client) DescribeDomain(ctx context.Context, params *DescribeDomainInput, optFns ...func(*Options)) (*DescribeDomainOutput, error) {
 	if params == nil {
 		params = &DescribeDomainInput{}
@@ -31,12 +31,12 @@ func (c *Client) DescribeDomain(ctx context.Context, params *DescribeDomainInput
 
 type DescribeDomainInput struct {
 
-	// A string that specifies the name of the requested domain.
+	//  A string that specifies the name of the requested domain.
 	//
 	// This member is required.
 	Domain *string
 
-	// The 12-digit account number of the Amazon Web Services account that owns the
+	//  The 12-digit account number of the Amazon Web Services account that owns the
 	// domain. It does not include dashes or spaces.
 	DomainOwner *string
 
@@ -45,7 +45,7 @@ type DescribeDomainInput struct {
 
 type DescribeDomainOutput struct {
 
-	// Information about a domain. A domain is a container for repositories. When you
+	//  Information about a domain. A domain is a container for repositories. When you
 	// create a domain, it is empty until you add one or more repositories.
 	Domain *types.DomainDescription
 
@@ -77,25 +77,25 @@ func (c *Client) addOperationDescribeDomainMiddlewares(stack *middleware.Stack, 
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -110,13 +110,16 @@ func (c *Client) addOperationDescribeDomainMiddlewares(stack *middleware.Stack, 
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDescribeDomainValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeDomain(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

@@ -129,8 +129,10 @@ type SqlParameter struct {
 	Name *string
 
 	// The value of the parameter. Amazon Redshift implicitly converts to the proper
-	// data type. For more information, see Data types (https://docs.aws.amazon.com/redshift/latest/dg/c_Supported_data_types.html)
-	// in the Amazon Redshift Database Developer Guide.
+	// data type. For more information, see [Data types]in the Amazon Redshift Database Developer
+	// Guide.
+	//
+	// [Data types]: https://docs.aws.amazon.com/redshift/latest/dg/c_Supported_data_types.html
 	//
 	// This member is required.
 	Value *string

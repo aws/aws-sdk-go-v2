@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/mediastoredata/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -36,6 +35,7 @@ type ListItemsInput struct {
 	// match your request, the service returns no more than the first 500 items. (The
 	// service also returns a NextToken value that you can use to fetch the next batch
 	// of results.) The service might return fewer results than the MaxResults value.
+	//
 	// If MaxResults is not included in the request, the service defaults to
 	// pagination with a maximum of 1,000 results per page.
 	MaxResults *int32
@@ -44,7 +44,9 @@ type ListItemsInput struct {
 	// example, you submit a ListItems request with MaxResults set at 500. The service
 	// returns the first batch of results (up to 500) and a NextToken value. To see
 	// the next batch of results, you can submit the ListItems request a second time
-	// and specify the NextToken value. Tokens expire after 15 minutes.
+	// and specify the NextToken value.
+	//
+	// Tokens expire after 15 minutes.
 	NextToken *string
 
 	// The path in the container from which to retrieve items. Format: //
@@ -92,25 +94,25 @@ func (c *Client) addOperationListItemsMiddlewares(stack *middleware.Stack, optio
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -125,10 +127,13 @@ func (c *Client) addOperationListItemsMiddlewares(stack *middleware.Stack, optio
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListItems(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -160,6 +165,7 @@ type ListItemsPaginatorOptions struct {
 	// match your request, the service returns no more than the first 500 items. (The
 	// service also returns a NextToken value that you can use to fetch the next batch
 	// of results.) The service might return fewer results than the MaxResults value.
+	//
 	// If MaxResults is not included in the request, the service defaults to
 	// pagination with a maximum of 1,000 results per page.
 	Limit int32

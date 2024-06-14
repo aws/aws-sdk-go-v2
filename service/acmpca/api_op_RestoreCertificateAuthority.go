@@ -6,26 +6,28 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Restores a certificate authority (CA) that is in the DELETED state. You can
 // restore a CA during the period that you defined in the
-// PermanentDeletionTimeInDays parameter of the DeleteCertificateAuthority (https://docs.aws.amazon.com/privateca/latest/APIReference/API_DeleteCertificateAuthority.html)
-// action. Currently, you can specify 7 to 30 days. If you did not specify a
-// PermanentDeletionTimeInDays value, by default you can restore the CA at any time
-// in a 30 day period. You can check the time remaining in the restoration period
-// of a private CA in the DELETED state by calling the DescribeCertificateAuthority (https://docs.aws.amazon.com/privateca/latest/APIReference/API_DescribeCertificateAuthority.html)
-// or ListCertificateAuthorities (https://docs.aws.amazon.com/privateca/latest/APIReference/API_ListCertificateAuthorities.html)
-// actions. The status of a restored CA is set to its pre-deletion status when the
-// RestoreCertificateAuthority action returns. To change its status to ACTIVE ,
-// call the UpdateCertificateAuthority (https://docs.aws.amazon.com/privateca/latest/APIReference/API_UpdateCertificateAuthority.html)
-// action. If the private CA was in the PENDING_CERTIFICATE state at deletion, you
-// must use the ImportCertificateAuthorityCertificate (https://docs.aws.amazon.com/privateca/latest/APIReference/API_ImportCertificateAuthorityCertificate.html)
-// action to import a certificate authority into the private CA before it can be
-// activated. You cannot restore a CA after the restoration period has ended.
+// PermanentDeletionTimeInDays parameter of the [DeleteCertificateAuthority]action. Currently, you can specify
+// 7 to 30 days. If you did not specify a PermanentDeletionTimeInDays value, by
+// default you can restore the CA at any time in a 30 day period. You can check the
+// time remaining in the restoration period of a private CA in the DELETED state
+// by calling the [DescribeCertificateAuthority]or [ListCertificateAuthorities] actions. The status of a restored CA is set to its
+// pre-deletion status when the RestoreCertificateAuthority action returns. To
+// change its status to ACTIVE , call the [UpdateCertificateAuthority] action. If the private CA was in the
+// PENDING_CERTIFICATE state at deletion, you must use the [ImportCertificateAuthorityCertificate] action to import a
+// certificate authority into the private CA before it can be activated. You cannot
+// restore a CA after the restoration period has ended.
+//
+// [ListCertificateAuthorities]: https://docs.aws.amazon.com/privateca/latest/APIReference/API_ListCertificateAuthorities.html
+// [ImportCertificateAuthorityCertificate]: https://docs.aws.amazon.com/privateca/latest/APIReference/API_ImportCertificateAuthorityCertificate.html
+// [UpdateCertificateAuthority]: https://docs.aws.amazon.com/privateca/latest/APIReference/API_UpdateCertificateAuthority.html
+// [DeleteCertificateAuthority]: https://docs.aws.amazon.com/privateca/latest/APIReference/API_DeleteCertificateAuthority.html
+// [DescribeCertificateAuthority]: https://docs.aws.amazon.com/privateca/latest/APIReference/API_DescribeCertificateAuthority.html
 func (c *Client) RestoreCertificateAuthority(ctx context.Context, params *RestoreCertificateAuthorityInput, optFns ...func(*Options)) (*RestoreCertificateAuthorityOutput, error) {
 	if params == nil {
 		params = &RestoreCertificateAuthorityInput{}
@@ -43,10 +45,12 @@ func (c *Client) RestoreCertificateAuthority(ctx context.Context, params *Restor
 
 type RestoreCertificateAuthorityInput struct {
 
-	// The Amazon Resource Name (ARN) that was returned when you called the
-	// CreateCertificateAuthority (https://docs.aws.amazon.com/privateca/latest/APIReference/API_CreateCertificateAuthority.html)
-	// action. This must be of the form:
-	// arn:aws:acm-pca:region:account:certificate-authority/12345678-1234-1234-1234-123456789012
+	// The Amazon Resource Name (ARN) that was returned when you called the [CreateCertificateAuthority] action.
+	// This must be of the form:
+	//
+	//     arn:aws:acm-pca:region:account:certificate-authority/12345678-1234-1234-1234-123456789012
+	//
+	// [CreateCertificateAuthority]: https://docs.aws.amazon.com/privateca/latest/APIReference/API_CreateCertificateAuthority.html
 	//
 	// This member is required.
 	CertificateAuthorityArn *string
@@ -83,25 +87,25 @@ func (c *Client) addOperationRestoreCertificateAuthorityMiddlewares(stack *middl
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -116,13 +120,16 @@ func (c *Client) addOperationRestoreCertificateAuthorityMiddlewares(stack *middl
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpRestoreCertificateAuthorityValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opRestoreCertificateAuthority(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

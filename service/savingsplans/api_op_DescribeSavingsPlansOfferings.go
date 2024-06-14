@@ -6,13 +6,12 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/savingsplans/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Describes the specified Savings Plans offerings.
+// Describes the offerings for the specified Savings Plans.
 func (c *Client) DescribeSavingsPlansOfferings(ctx context.Context, params *DescribeSavingsPlansOfferingsInput, optFns ...func(*Options)) (*DescribeSavingsPlansOfferingsOutput, error) {
 	if params == nil {
 		params = &DescribeSavingsPlansOfferingsInput{}
@@ -36,7 +35,7 @@ type DescribeSavingsPlansOfferingsInput struct {
 	// The descriptions.
 	Descriptions []string
 
-	// The durations, in seconds.
+	// The duration, in seconds.
 	Durations []int64
 
 	// The filters.
@@ -52,13 +51,14 @@ type DescribeSavingsPlansOfferingsInput struct {
 	// The IDs of the offerings.
 	OfferingIds []string
 
-	// The specific AWS operation for the line item in the billing report.
+	// The specific Amazon Web Services operation for the line item in the billing
+	// report.
 	Operations []string
 
 	// The payment options.
 	PaymentOptions []types.SavingsPlanPaymentOption
 
-	// The plan type.
+	// The plan types.
 	PlanTypes []types.SavingsPlanType
 
 	// The product type.
@@ -110,25 +110,25 @@ func (c *Client) addOperationDescribeSavingsPlansOfferingsMiddlewares(stack *mid
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -143,10 +143,13 @@ func (c *Client) addOperationDescribeSavingsPlansOfferingsMiddlewares(stack *mid
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeSavingsPlansOfferings(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

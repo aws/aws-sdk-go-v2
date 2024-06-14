@@ -6,13 +6,13 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/billingconductor/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// This is a paginated call to list linked accounts that are linked to the payer
+//	This is a paginated call to list linked accounts that are linked to the payer
+//
 // account for the specified time period. If no information is provided, the
 // current billing period is used. The response will optionally include the billing
 // group that's associated with the linked account.
@@ -33,16 +33,20 @@ func (c *Client) ListAccountAssociations(ctx context.Context, params *ListAccoun
 
 type ListAccountAssociationsInput struct {
 
-	// The preferred billing period to get account associations.
+	//  The preferred billing period to get account associations.
 	BillingPeriod *string
 
 	// The filter on the account ID of the linked account, or any of the following:
-	// MONITORED : linked accounts that are associated to billing groups. UNMONITORED :
-	// linked accounts that aren't associated to billing groups. Billing Group Arn :
-	// linked accounts that are associated to the provided billing group Arn.
+	//
+	// MONITORED : linked accounts that are associated to billing groups.
+	//
+	// UNMONITORED : linked accounts that aren't associated to billing groups.
+	//
+	// Billing Group Arn : linked accounts that are associated to the provided billing
+	// group Arn.
 	Filters *types.ListAccountAssociationsFilter
 
-	// The pagination token that's used on subsequent calls to retrieve accounts.
+	//  The pagination token that's used on subsequent calls to retrieve accounts.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -50,10 +54,10 @@ type ListAccountAssociationsInput struct {
 
 type ListAccountAssociationsOutput struct {
 
-	// The list of linked accounts in the payer account.
+	//  The list of linked accounts in the payer account.
 	LinkedAccounts []types.AccountAssociationsListElement
 
-	// The pagination token that's used on subsequent calls to get accounts.
+	//  The pagination token that's used on subsequent calls to get accounts.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -84,25 +88,25 @@ func (c *Client) addOperationListAccountAssociationsMiddlewares(stack *middlewar
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -117,10 +121,13 @@ func (c *Client) addOperationListAccountAssociationsMiddlewares(stack *middlewar
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListAccountAssociations(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

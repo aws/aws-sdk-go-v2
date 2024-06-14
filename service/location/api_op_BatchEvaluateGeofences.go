@@ -6,27 +6,33 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/location/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Evaluates device positions against the geofence geometries from a given
-// geofence collection. This operation always returns an empty response because
-// geofences are asynchronously evaluated. The evaluation determines if the device
-// has entered or exited a geofenced area, and then publishes one of the following
-// events to Amazon EventBridge:
+// geofence collection.
+//
+// This operation always returns an empty response because geofences are
+// asynchronously evaluated. The evaluation determines if the device has entered or
+// exited a geofenced area, and then publishes one of the following events to
+// Amazon EventBridge:
+//
 //   - ENTER if Amazon Location determines that the tracked device has entered a
 //     geofenced area.
+//
 //   - EXIT if Amazon Location determines that the tracked device has exited a
 //     geofenced area.
 //
 // The last geofence that a device was observed within is tracked for 30 days
-// after the most recent device position update. Geofence evaluation uses the given
-// device position. It does not account for the optional Accuracy of a
-// DevicePositionUpdate . The DeviceID is used as a string to represent the
-// device. You do not need to have a Tracker associated with the DeviceID .
+// after the most recent device position update.
+//
+// Geofence evaluation uses the given device position. It does not account for the
+// optional Accuracy of a DevicePositionUpdate .
+//
+// The DeviceID is used as a string to represent the device. You do not need to
+// have a Tracker associated with the DeviceID .
 func (c *Client) BatchEvaluateGeofences(ctx context.Context, params *BatchEvaluateGeofencesInput, optFns ...func(*Options)) (*BatchEvaluateGeofencesOutput, error) {
 	if params == nil {
 		params = &BatchEvaluateGeofencesInput{}
@@ -95,25 +101,25 @@ func (c *Client) addOperationBatchEvaluateGeofencesMiddlewares(stack *middleware
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -128,6 +134,9 @@ func (c *Client) addOperationBatchEvaluateGeofencesMiddlewares(stack *middleware
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addEndpointPrefix_opBatchEvaluateGeofencesMiddleware(stack); err != nil {
 		return err
 	}
@@ -137,7 +146,7 @@ func (c *Client) addOperationBatchEvaluateGeofencesMiddlewares(stack *middleware
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opBatchEvaluateGeofences(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

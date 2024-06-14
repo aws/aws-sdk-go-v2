@@ -6,16 +6,18 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/cloudformation/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Returns the template body for a specified stack. You can get the template for
-// running or deleted stacks. For deleted stacks, GetTemplate returns the template
-// for up to 90 days after the stack has been deleted. If the template doesn't
-// exist, a ValidationError is returned.
+// running or deleted stacks.
+//
+// For deleted stacks, GetTemplate returns the template for up to 90 days after
+// the stack has been deleted.
+//
+// If the template doesn't exist, a ValidationError is returned.
 func (c *Client) GetTemplate(ctx context.Context, params *GetTemplateInput, optFns ...func(*Options)) (*GetTemplateOutput, error) {
 	if params == nil {
 		params = &GetTemplateInput{}
@@ -41,17 +43,22 @@ type GetTemplateInput struct {
 
 	// The name or the unique stack ID that's associated with the stack, which aren't
 	// always interchangeable:
+	//
 	//   - Running stacks: You can specify either the stack's name or its unique stack
 	//   ID.
+	//
 	//   - Deleted stacks: You must specify the unique stack ID.
+	//
 	// Default: There is no default value.
 	StackName *string
 
 	// For templates that include transforms, the stage of the template that
 	// CloudFormation returns. To get the user-submitted template, specify Original .
 	// To get the template after CloudFormation has processed all transforms, specify
-	// Processed . If the template doesn't include transforms, Original and Processed
-	// return the same template. By default, CloudFormation specifies Processed .
+	// Processed .
+	//
+	// If the template doesn't include transforms, Original and Processed return the
+	// same template. By default, CloudFormation specifies Processed .
 	TemplateStage types.TemplateStage
 
 	noSmithyDocumentSerde
@@ -66,10 +73,13 @@ type GetTemplateOutput struct {
 	// set, the Processed template becomes available.
 	StagesAvailable []types.TemplateStage
 
-	// Structure containing the template body. (For more information, go to Template
-	// Anatomy (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/template-anatomy.html)
-	// in the CloudFormation User Guide.) CloudFormation returns the same template that
-	// was used when the stack was created.
+	// Structure containing the template body. (For more information, go to [Template Anatomy] in the
+	// CloudFormation User Guide.)
+	//
+	// CloudFormation returns the same template that was used when the stack was
+	// created.
+	//
+	// [Template Anatomy]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/template-anatomy.html
 	TemplateBody *string
 
 	// Metadata pertaining to the operation's result.
@@ -100,25 +110,25 @@ func (c *Client) addOperationGetTemplateMiddlewares(stack *middleware.Stack, opt
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -133,10 +143,13 @@ func (c *Client) addOperationGetTemplateMiddlewares(stack *middleware.Stack, opt
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetTemplate(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/cleanroomsml/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -56,49 +55,59 @@ type CreateConfiguredAudienceModelInput struct {
 	SharedAudienceMetrics []types.SharedAudienceMetrics
 
 	// Configure the list of output sizes of audiences that can be created using this
-	// configured audience model. A request to StartAudienceGenerationJob that uses
-	// this configured audience model must have an audienceSize selected from this
-	// list. You can use the ABSOLUTE AudienceSize to configure out audience sizes
-	// using the count of identifiers in the output. You can use the Percentage
-	// AudienceSize to configure sizes in the range 1-100 percent.
+	// configured audience model. A request to StartAudienceGenerationJobthat uses this configured audience
+	// model must have an audienceSize selected from this list. You can use the
+	// ABSOLUTEAudienceSize to configure out audience sizes using the count of identifiers in the
+	// output. You can use the PercentageAudienceSize to configure sizes in the range 1-100
+	// percent.
 	AudienceSizeConfig *types.AudienceSizeConfig
 
 	// Configure how the service tags audience generation jobs created using this
-	// configured audience model. If you specify NONE , the tags from the
-	// StartAudienceGenerationJob request determine the tags of the audience generation
-	// job. If you specify FROM_PARENT_RESOURCE , the audience generation job inherits
-	// the tags from the configured audience model, by default. Tags in the
-	// StartAudienceGenerationJob will override the default. When the client is in a
-	// different account than the configured audience model, the tags from the client
-	// are never applied to a resource in the caller's account.
+	// configured audience model. If you specify NONE , the tags from the StartAudienceGenerationJob request
+	// determine the tags of the audience generation job. If you specify
+	// FROM_PARENT_RESOURCE , the audience generation job inherits the tags from the
+	// configured audience model, by default. Tags in the StartAudienceGenerationJobwill override the default.
+	//
+	// When the client is in a different account than the configured audience model,
+	// the tags from the client are never applied to a resource in the caller's
+	// account.
 	ChildResourceTagOnCreatePolicy types.TagOnCreatePolicy
 
 	// The description of the configured audience model.
 	Description *string
 
 	// The minimum number of users from the seed audience that must match with users
-	// in the training data of the audience model.
+	// in the training data of the audience model. The default value is 500.
 	MinMatchingSeedSize *int32
 
 	// The optional metadata that you apply to the resource to help you categorize and
 	// organize them. Each tag consists of a key and an optional value, both of which
-	// you define. The following basic restrictions apply to tags:
+	// you define.
+	//
+	// The following basic restrictions apply to tags:
+	//
 	//   - Maximum number of tags per resource - 50.
+	//
 	//   - For each resource, each tag key must be unique, and each tag key can have
 	//   only one value.
+	//
 	//   - Maximum key length - 128 Unicode characters in UTF-8.
+	//
 	//   - Maximum value length - 256 Unicode characters in UTF-8.
+	//
 	//   - If your tagging schema is used across multiple services and resources,
 	//   remember that other services may have restrictions on allowed characters.
 	//   Generally allowed characters are: letters, numbers, and spaces representable in
 	//   UTF-8, and the following characters: + - = . _ : / @.
+	//
 	//   - Tag keys and values are case sensitive.
+	//
 	//   - Do not use aws:, AWS:, or any upper or lowercase combination of such as a
 	//   prefix for keys as it is reserved for AWS use. You cannot edit or delete tag
 	//   keys with this prefix. Values can have this prefix. If a tag value has aws as
-	//   its prefix but the key does not, then Forecast considers it to be a user tag and
-	//   will count against the limit of 50 tags. Tags with only the key prefix of aws do
-	//   not count against your tags per resource limit.
+	//   its prefix but the key does not, then Clean Rooms ML considers it to be a user
+	//   tag and will count against the limit of 50 tags. Tags with only the key prefix
+	//   of aws do not count against your tags per resource limit.
 	Tags map[string]string
 
 	noSmithyDocumentSerde
@@ -139,25 +148,25 @@ func (c *Client) addOperationCreateConfiguredAudienceModelMiddlewares(stack *mid
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -172,13 +181,16 @@ func (c *Client) addOperationCreateConfiguredAudienceModelMiddlewares(stack *mid
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpCreateConfiguredAudienceModelValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateConfiguredAudienceModel(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

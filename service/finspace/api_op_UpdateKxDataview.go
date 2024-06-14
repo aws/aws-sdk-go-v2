@@ -6,14 +6,14 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/finspace/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
-// Updates the specified dataview. The dataviews get automatically updated when
+//	Updates the specified dataview. The dataviews get automatically updated when
+//
 // any new changesets are ingested. Each update of the dataview creates a new
 // version, including changeset details and cache configurations
 func (c *Client) UpdateKxDataview(ctx context.Context, params *UpdateKxDataviewInput, optFns ...func(*Options)) (*UpdateKxDataviewOutput, error) {
@@ -38,7 +38,7 @@ type UpdateKxDataviewInput struct {
 	// This member is required.
 	ClientToken *string
 
-	// The name of the database.
+	//  The name of the database.
 	//
 	// This member is required.
 	DatabaseName *string
@@ -57,10 +57,10 @@ type UpdateKxDataviewInput struct {
 	// A unique identifier for the changeset.
 	ChangesetId *string
 
-	// The description for a dataview.
+	//  The description for a dataview.
 	Description *string
 
-	// The configuration that contains the database path of the data that you want to
+	//  The configuration that contains the database path of the data that you want to
 	// place on each selected volume. Each segment must have a unique database path for
 	// each volume. If you do not explicitly specify any database path for a volume,
 	// they are accessible from the cluster through the default S3/object store
@@ -72,7 +72,7 @@ type UpdateKxDataviewInput struct {
 
 type UpdateKxDataviewOutput struct {
 
-	// The current active changeset versions of the database on the given dataview.
+	//  The current active changeset versions of the database on the given dataview.
 	ActiveVersions []types.KxDataviewActiveVersion
 
 	// The option to specify whether you want to apply all the future additions and
@@ -80,27 +80,25 @@ type UpdateKxDataviewOutput struct {
 	// default value is false.
 	AutoUpdate bool
 
-	// The identifier of the availability zones.
+	//  The identifier of the availability zones.
 	AvailabilityZoneId *string
 
-	// The number of availability zones you want to assign per cluster. This can be
-	// one of the following
-	//   - SINGLE – Assigns one availability zone per cluster.
-	//   - MULTI – Assigns all the availability zones per cluster.
+	// The number of availability zones you want to assign per volume. Currently,
+	// FinSpace only supports SINGLE for volumes. This places dataview in a single AZ.
 	AzMode types.KxAzMode
 
 	// A unique identifier for the changeset.
 	ChangesetId *string
 
-	// The timestamp at which the dataview was created in FinSpace. The value is
+	//  The timestamp at which the dataview was created in FinSpace. The value is
 	// determined as epoch time in milliseconds. For example, the value for Monday,
 	// November 1, 2021 12:00:00 PM UTC is specified as 1635768000000.
 	CreatedTimestamp *time.Time
 
-	// The name of the database.
+	//  The name of the database.
 	DatabaseName *string
 
-	// The name of the database under which the dataview was created.
+	//  The name of the database under which the dataview was created.
 	DataviewName *string
 
 	// A description of the dataview.
@@ -110,21 +108,27 @@ type UpdateKxDataviewOutput struct {
 	// dataview.
 	EnvironmentId *string
 
-	// The last time that the dataview was updated in FinSpace. The value is
+	//  The last time that the dataview was updated in FinSpace. The value is
 	// determined as epoch time in milliseconds. For example, the value for Monday,
 	// November 1, 2021 12:00:00 PM UTC is specified as 1635768000000.
 	LastModifiedTimestamp *time.Time
 
-	// The configuration that contains the database path of the data that you want to
+	// Returns True if the dataview is created as writeable and False otherwise.
+	ReadWrite bool
+
+	//  The configuration that contains the database path of the data that you want to
 	// place on each selected volume. Each segment must have a unique database path for
 	// each volume. If you do not explicitly specify any database path for a volume,
 	// they are accessible from the cluster through the default S3/object store
 	// segment.
 	SegmentConfigurations []types.KxDataviewSegmentConfiguration
 
-	// The status of dataview creation.
+	//  The status of dataview creation.
+	//
 	//   - CREATING – The dataview creation is in progress.
+	//
 	//   - UPDATING – The dataview is in the process of being updated.
+	//
 	//   - ACTIVE – The dataview is active.
 	Status types.KxDataviewStatus
 
@@ -156,25 +160,25 @@ func (c *Client) addOperationUpdateKxDataviewMiddlewares(stack *middleware.Stack
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -192,6 +196,9 @@ func (c *Client) addOperationUpdateKxDataviewMiddlewares(stack *middleware.Stack
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opUpdateKxDataviewMiddleware(stack, options); err != nil {
 		return err
 	}
@@ -201,7 +208,7 @@ func (c *Client) addOperationUpdateKxDataviewMiddlewares(stack *middleware.Stack
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateKxDataview(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

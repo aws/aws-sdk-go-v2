@@ -107,8 +107,8 @@ type ClientCertAuthSettings struct {
 // Contains information about a computer account in a directory.
 type Computer struct {
 
-	// An array of Attribute objects containing the LDAP attributes that belong to the
-	// computer account.
+	// An array of Attribute objects containing the LDAP attributes that belong to the computer
+	// account.
 	ComputerAttributes []Attribute
 
 	// The identifier of the computer.
@@ -142,8 +142,8 @@ type ConditionalForwarder struct {
 	noSmithyDocumentSerde
 }
 
-// Contains information for the ConnectDirectory operation when an AD Connector
-// directory is being created.
+// Contains information for the ConnectDirectory operation when an AD Connector directory is being
+// created.
 type DirectoryConnectSettings struct {
 
 	// A list of one or more IP addresses of DNS servers or domain controllers in your
@@ -154,8 +154,11 @@ type DirectoryConnectSettings struct {
 
 	// The user name of an account in your self-managed directory that is used to
 	// connect to the directory. This account must have the following permissions:
+	//
 	//   - Read users and groups
+	//
 	//   - Create computer objects
+	//
 	//   - Join computers to the domain
 	//
 	// This member is required.
@@ -210,9 +213,8 @@ type DirectoryDescription struct {
 	// the alias is the directory identifier, such as d-XXXXXXXXXX .
 	Alias *string
 
-	// A DirectoryConnectSettingsDescription object that contains additional
-	// information about an AD Connector directory. This member is only present if the
-	// directory is an AD Connector directory.
+	// A DirectoryConnectSettingsDescription object that contains additional information about an AD Connector directory.
+	// This member is only present if the directory is an AD Connector directory.
 	ConnectSettings *DirectoryConnectSettingsDescription
 
 	// The description for the directory.
@@ -247,8 +249,8 @@ type DirectoryDescription struct {
 	// Describes the Managed Microsoft AD directory in the directory owner account.
 	OwnerDirectoryDescription *OwnerDirectoryDescription
 
-	// A RadiusSettings object that contains information about the RADIUS server
-	// configured for this directory.
+	// A RadiusSettings object that contains information about the RADIUS server configured for this
+	// directory.
 	RadiusSettings *RadiusSettings
 
 	// The status of the RADIUS MFA server connection.
@@ -278,7 +280,7 @@ type DirectoryDescription struct {
 	Size DirectorySize
 
 	// Indicates if single sign-on is enabled for the directory. For more information,
-	// see EnableSso and DisableSso .
+	// see EnableSsoand DisableSso.
 	SsoEnabled bool
 
 	// The current stage of the directory.
@@ -293,9 +295,9 @@ type DirectoryDescription struct {
 	// The directory size.
 	Type DirectoryType
 
-	// A DirectoryVpcSettingsDescription object that contains additional information
-	// about a directory. This member is only present if the directory is a Simple AD
-	// or Managed Microsoft AD directory.
+	// A DirectoryVpcSettingsDescription object that contains additional information about a directory. This member
+	// is only present if the directory is a Simple AD or Managed Microsoft AD
+	// directory.
 	VpcSettings *DirectoryVpcSettingsDescription
 
 	noSmithyDocumentSerde
@@ -450,10 +452,10 @@ type IpRouteInfo struct {
 	// The date and time the address block was added to the directory.
 	AddedDateTime *time.Time
 
-	// IP address block in the IpRoute .
+	// IP address block in the IpRoute.
 	CidrIp *string
 
-	// Description of the IpRouteInfo .
+	// Description of the IpRouteInfo.
 	Description *string
 
 	// Identifier (ID) of the directory associated with the IP addresses.
@@ -503,7 +505,7 @@ type LogSubscription struct {
 // OS version that the directory needs to be updated to.
 type OSUpdateSettings struct {
 
-	// OS version that the directory needs to be updated to.
+	//  OS version that the directory needs to be updated to.
 	OSVersion OSVersion
 
 	noSmithyDocumentSerde
@@ -649,7 +651,9 @@ type SchemaExtensionInfo struct {
 // Contains information about the configurable settings for a directory.
 type Setting struct {
 
-	// The name of the directory setting. For example: TLS_1_0
+	// The name of the directory setting. For example:
+	//
+	//     TLS_1_0
 	//
 	// This member is required.
 	Name *string
@@ -685,7 +689,9 @@ type SettingEntry struct {
 	// The date and time when the directory setting was last updated.
 	LastUpdatedDateTime *time.Time
 
-	// The name of the directory setting. For example: TLS_1_0
+	// The name of the directory setting. For example:
+	//
+	//     TLS_1_0
 	Name *string
 
 	// Details about the status of the request to update the directory setting. If the
@@ -891,29 +897,29 @@ type UnshareTarget struct {
 // An entry of update information related to a requested update type.
 type UpdateInfoEntry struct {
 
-	// This specifies if the update was initiated by the customer or by the service
+	//  This specifies if the update was initiated by the customer or by the service
 	// team.
 	InitiatedBy *string
 
-	// The last updated date and time of a particular directory setting.
+	//  The last updated date and time of a particular directory setting.
 	LastUpdatedDateTime *time.Time
 
-	// The new value of the target setting.
+	//  The new value of the target setting.
 	NewValue *UpdateValue
 
-	// The old value of the target setting.
+	//  The old value of the target setting.
 	PreviousValue *UpdateValue
 
-	// The name of the Region.
+	//  The name of the Region.
 	Region *string
 
-	// The start time of the UpdateDirectorySetup for the particular type.
+	//  The start time of the UpdateDirectorySetup for the particular type.
 	StartTime *time.Time
 
-	// The status of the update performed on the directory.
+	//  The status of the update performed on the directory.
 	Status UpdateStatus
 
-	// The reason for the current status of the update type activity.
+	//  The reason for the current status of the update type activity.
 	StatusReason *string
 
 	noSmithyDocumentSerde
@@ -922,7 +928,7 @@ type UpdateInfoEntry struct {
 // The value for a given type of UpdateSettings .
 type UpdateValue struct {
 
-	// The OS update related settings.
+	//  The OS update related settings.
 	OSUpdateSettings *OSUpdateSettings
 
 	noSmithyDocumentSerde

@@ -6,20 +6,20 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/directoryservice/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates a Microsoft AD directory in the Amazon Web Services Cloud. For more
-// information, see Managed Microsoft AD (https://docs.aws.amazon.com/directoryservice/latest/admin-guide/directory_microsoft_ad.html)
-// in the Directory Service Admin Guide. Before you call CreateMicrosoftAD, ensure
-// that all of the required permissions have been explicitly granted through a
-// policy. For details about what permissions are required to run the
-// CreateMicrosoftAD operation, see Directory Service API Permissions: Actions,
-// Resources, and Conditions Reference (http://docs.aws.amazon.com/directoryservice/latest/admin-guide/UsingWithDS_IAM_ResourcePermissions.html)
-// .
+// information, see [Managed Microsoft AD]in the Directory Service Admin Guide.
+//
+// Before you call CreateMicrosoftAD, ensure that all of the required permissions
+// have been explicitly granted through a policy. For details about what
+// permissions are required to run the CreateMicrosoftAD operation, see [Directory Service API Permissions: Actions, Resources, and Conditions Reference].
+//
+// [Managed Microsoft AD]: https://docs.aws.amazon.com/directoryservice/latest/admin-guide/directory_microsoft_ad.html
+// [Directory Service API Permissions: Actions, Resources, and Conditions Reference]: http://docs.aws.amazon.com/directoryservice/latest/admin-guide/UsingWithDS_IAM_ResourcePermissions.html
 func (c *Client) CreateMicrosoftAD(ctx context.Context, params *CreateMicrosoftADInput, optFns ...func(*Options)) (*CreateMicrosoftADOutput, error) {
 	if params == nil {
 		params = &CreateMicrosoftADInput{}
@@ -45,9 +45,10 @@ type CreateMicrosoftADInput struct {
 	// This member is required.
 	Name *string
 
-	// The password for the default administrative user named Admin . If you need to
-	// change the password for the administrator account, you can use the
-	// ResetUserPassword API call.
+	// The password for the default administrative user named Admin .
+	//
+	// If you need to change the password for the administrator account, you can use
+	// the ResetUserPasswordAPI call.
 	//
 	// This member is required.
 	Password *string
@@ -110,25 +111,25 @@ func (c *Client) addOperationCreateMicrosoftADMiddlewares(stack *middleware.Stac
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -143,13 +144,16 @@ func (c *Client) addOperationCreateMicrosoftADMiddlewares(stack *middleware.Stac
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpCreateMicrosoftADValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateMicrosoftAD(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

@@ -6,15 +6,16 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/lightsail/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Sets the Amazon Lightsail resources that can access the specified Lightsail
-// bucket. Lightsail buckets currently support setting access for Lightsail
-// instances in the same Amazon Web Services Region.
+// bucket.
+//
+// Lightsail buckets currently support setting access for Lightsail instances in
+// the same Amazon Web Services Region.
 func (c *Client) SetResourceAccessForBucket(ctx context.Context, params *SetResourceAccessForBucketInput, optFns ...func(*Options)) (*SetResourceAccessForBucketOutput, error) {
 	if params == nil {
 		params = &SetResourceAccessForBucketInput{}
@@ -32,8 +33,12 @@ func (c *Client) SetResourceAccessForBucket(ctx context.Context, params *SetReso
 
 type SetResourceAccessForBucketInput struct {
 
-	// The access setting. The following access settings are available:
+	// The access setting.
+	//
+	// The following access settings are available:
+	//
 	//   - allow - Allows access to the bucket and its objects.
+	//
 	//   - deny - Denies access to the bucket and its objects. Use this setting to
 	//   remove access for a resource previously set to allow .
 	//
@@ -89,25 +94,25 @@ func (c *Client) addOperationSetResourceAccessForBucketMiddlewares(stack *middle
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -122,13 +127,16 @@ func (c *Client) addOperationSetResourceAccessForBucketMiddlewares(stack *middle
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpSetResourceAccessForBucketValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opSetResourceAccessForBucket(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

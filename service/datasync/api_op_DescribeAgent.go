@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/datasync/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -48,12 +47,14 @@ type DescribeAgentOutput struct {
 	// The ARN of the agent.
 	AgentArn *string
 
-	// The time that the agent was activated (https://docs.aws.amazon.com/datasync/latest/userguide/activate-agent.html)
-	// .
+	// The time that the agent was [activated].
+	//
+	// [activated]: https://docs.aws.amazon.com/datasync/latest/userguide/activate-agent.html
 	CreationTime *time.Time
 
-	// The type of service endpoint (https://docs.aws.amazon.com/datasync/latest/userguide/choose-service-endpoint.html)
-	// that your agent is connected to.
+	// The type of [service endpoint] that your agent is connected to.
+	//
+	// [service endpoint]: https://docs.aws.amazon.com/datasync/latest/userguide/choose-service-endpoint.html
 	EndpointType types.EndpointType
 
 	// The last time that the agent was communicating with the DataSync service.
@@ -65,16 +66,20 @@ type DescribeAgentOutput struct {
 	// The platform-related details about the agent, such as the version number.
 	Platform *types.Platform
 
-	// The network configuration that the agent uses when connecting to a VPC service
-	// endpoint (https://docs.aws.amazon.com/datasync/latest/userguide/choose-service-endpoint.html#choose-service-endpoint-vpc)
-	// .
+	// The network configuration that the agent uses when connecting to a [VPC service endpoint].
+	//
+	// [VPC service endpoint]: https://docs.aws.amazon.com/datasync/latest/userguide/choose-service-endpoint.html#choose-service-endpoint-vpc
 	PrivateLinkConfig *types.PrivateLinkConfig
 
 	// The status of the agent.
+	//
 	//   - If the status is ONLINE , the agent is configured properly and ready to use.
+	//
 	//   - If the status is OFFLINE , the agent has been out of contact with DataSync
 	//   for five minutes or longer. This can happen for a few reasons. For more
-	//   information, see What do I do if my agent is offline? (https://docs.aws.amazon.com/datasync/latest/userguide/troubleshooting-datasync-agents.html#troubleshoot-agent-offline)
+	//   information, see [What do I do if my agent is offline?]
+	//
+	// [What do I do if my agent is offline?]: https://docs.aws.amazon.com/datasync/latest/userguide/troubleshooting-datasync-agents.html#troubleshoot-agent-offline
 	Status types.AgentStatus
 
 	// Metadata pertaining to the operation's result.
@@ -105,25 +110,25 @@ func (c *Client) addOperationDescribeAgentMiddlewares(stack *middleware.Stack, o
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -138,13 +143,16 @@ func (c *Client) addOperationDescribeAgentMiddlewares(stack *middleware.Stack, o
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDescribeAgentValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeAgent(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

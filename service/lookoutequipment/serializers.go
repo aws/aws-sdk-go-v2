@@ -2913,6 +2913,42 @@ func awsAwsjson10_serializeDocumentLabelsS3InputConfiguration(v *types.LabelsS3I
 	return nil
 }
 
+func awsAwsjson10_serializeDocumentModelDiagnosticsOutputConfiguration(v *types.ModelDiagnosticsOutputConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.KmsKeyId != nil {
+		ok := object.Key("KmsKeyId")
+		ok.String(*v.KmsKeyId)
+	}
+
+	if v.S3OutputConfiguration != nil {
+		ok := object.Key("S3OutputConfiguration")
+		if err := awsAwsjson10_serializeDocumentModelDiagnosticsS3OutputConfiguration(v.S3OutputConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsAwsjson10_serializeDocumentModelDiagnosticsS3OutputConfiguration(v *types.ModelDiagnosticsS3OutputConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Bucket != nil {
+		ok := object.Key("Bucket")
+		ok.String(*v.Bucket)
+	}
+
+	if v.Prefix != nil {
+		ok := object.Key("Prefix")
+		ok.String(*v.Prefix)
+	}
+
+	return nil
+}
+
 func awsAwsjson10_serializeDocumentTag(v *types.Tag, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -3172,6 +3208,13 @@ func awsAwsjson10_serializeOpDocumentCreateModelInput(v *CreateModelInput, value
 	if v.LabelsInputConfiguration != nil {
 		ok := object.Key("LabelsInputConfiguration")
 		if err := awsAwsjson10_serializeDocumentLabelsInputConfiguration(v.LabelsInputConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.ModelDiagnosticsOutputConfiguration != nil {
+		ok := object.Key("ModelDiagnosticsOutputConfiguration")
+		if err := awsAwsjson10_serializeDocumentModelDiagnosticsOutputConfiguration(v.ModelDiagnosticsOutputConfiguration, ok); err != nil {
 			return err
 		}
 	}
@@ -4140,6 +4183,13 @@ func awsAwsjson10_serializeOpDocumentUpdateModelInput(v *UpdateModelInput, value
 	if v.LabelsInputConfiguration != nil {
 		ok := object.Key("LabelsInputConfiguration")
 		if err := awsAwsjson10_serializeDocumentLabelsInputConfiguration(v.LabelsInputConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.ModelDiagnosticsOutputConfiguration != nil {
+		ok := object.Key("ModelDiagnosticsOutputConfiguration")
+		if err := awsAwsjson10_serializeDocumentModelDiagnosticsOutputConfiguration(v.ModelDiagnosticsOutputConfiguration, ok); err != nil {
 			return err
 		}
 	}

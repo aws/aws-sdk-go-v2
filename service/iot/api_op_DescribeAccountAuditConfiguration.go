@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/iot/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -14,9 +13,11 @@ import (
 
 // Gets information about the Device Defender audit settings for this account.
 // Settings include how audit notifications are sent and which audit checks are
-// enabled or disabled. Requires permission to access the
-// DescribeAccountAuditConfiguration (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
-// action.
+// enabled or disabled.
+//
+// Requires permission to access the [DescribeAccountAuditConfiguration] action.
+//
+// [DescribeAccountAuditConfiguration]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions
 func (c *Client) DescribeAccountAuditConfiguration(ctx context.Context, params *DescribeAccountAuditConfigurationInput, optFns ...func(*Options)) (*DescribeAccountAuditConfigurationOutput, error) {
 	if params == nil {
 		params = &DescribeAccountAuditConfigurationInput{}
@@ -47,8 +48,10 @@ type DescribeAccountAuditConfigurationOutput struct {
 
 	// The ARN of the role that grants permission to IoT to access information about
 	// your devices, policies, certificates, and other items as required when
-	// performing an audit. On the first call to UpdateAccountAuditConfiguration , this
-	// parameter is required.
+	// performing an audit.
+	//
+	// On the first call to UpdateAccountAuditConfiguration , this parameter is
+	// required.
 	RoleArn *string
 
 	// Metadata pertaining to the operation's result.
@@ -79,25 +82,25 @@ func (c *Client) addOperationDescribeAccountAuditConfigurationMiddlewares(stack 
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -112,10 +115,13 @@ func (c *Client) addOperationDescribeAccountAuditConfigurationMiddlewares(stack 
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeAccountAuditConfiguration(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

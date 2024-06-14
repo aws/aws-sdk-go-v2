@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/route53domains/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -33,14 +32,19 @@ type CheckDomainTransferabilityInput struct {
 
 	// The name of the domain that you want to transfer to Route 53. The top-level
 	// domain (TLD), such as .com, must be a TLD that Route 53 supports. For a list of
-	// supported TLDs, see Domains that You Can Register with Amazon Route 53 (https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/registrar-tld-list.html)
-	// in the Amazon Route 53 Developer Guide. The domain name can contain only the
-	// following characters:
+	// supported TLDs, see [Domains that You Can Register with Amazon Route 53]in the Amazon Route 53 Developer Guide.
+	//
+	// The domain name can contain only the following characters:
+	//
 	//   - Letters a through z. Domain names are not case sensitive.
+	//
 	//   - Numbers 0 through 9.
+	//
 	//   - Hyphen (-). You can't specify a hyphen at the beginning or end of a label.
-	//   - Period (.) to separate the labels in the name, such as the . in example.com
-	//   .
+	//
+	//   - Period (.) to separate the labels in the name, such as the . in example.com .
+	//
+	// [Domains that You Can Register with Amazon Route 53]: https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/registrar-tld-list.html
 	//
 	// This member is required.
 	DomainName *string
@@ -91,25 +95,25 @@ func (c *Client) addOperationCheckDomainTransferabilityMiddlewares(stack *middle
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -124,13 +128,16 @@ func (c *Client) addOperationCheckDomainTransferabilityMiddlewares(stack *middle
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpCheckDomainTransferabilityValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCheckDomainTransferability(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

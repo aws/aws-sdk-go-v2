@@ -6,19 +6,20 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/rds/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Starts an Amazon RDS DB instance that was stopped using the Amazon Web Services
-// console, the stop-db-instance CLI command, or the StopDBInstance operation. For
-// more information, see Starting an Amazon RDS DB instance That Was Previously
-// Stopped (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_StartInstance.html)
-// in the Amazon RDS User Guide. This command doesn't apply to RDS Custom, Aurora
-// MySQL, and Aurora PostgreSQL. For Aurora DB clusters, use StartDBCluster
-// instead.
+// console, the stop-db-instance CLI command, or the StopDBInstance operation.
+//
+// For more information, see [Starting an Amazon RDS DB instance That Was Previously Stopped] in the Amazon RDS User Guide.
+//
+// This command doesn't apply to RDS Custom, Aurora MySQL, and Aurora PostgreSQL.
+// For Aurora DB clusters, use StartDBCluster instead.
+//
+// [Starting an Amazon RDS DB instance That Was Previously Stopped]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_StartInstance.html
 func (c *Client) StartDBInstance(ctx context.Context, params *StartDBInstanceInput, optFns ...func(*Options)) (*StartDBInstanceOutput, error) {
 	if params == nil {
 		params = &StartDBInstanceInput{}
@@ -46,9 +47,10 @@ type StartDBInstanceInput struct {
 
 type StartDBInstanceOutput struct {
 
-	// Contains the details of an Amazon RDS DB instance. This data type is used as a
-	// response element in the operations CreateDBInstance ,
-	// CreateDBInstanceReadReplica , DeleteDBInstance , DescribeDBInstances ,
+	// Contains the details of an Amazon RDS DB instance.
+	//
+	// This data type is used as a response element in the operations CreateDBInstance
+	// , CreateDBInstanceReadReplica , DeleteDBInstance , DescribeDBInstances ,
 	// ModifyDBInstance , PromoteReadReplica , RebootDBInstance ,
 	// RestoreDBInstanceFromDBSnapshot , RestoreDBInstanceFromS3 ,
 	// RestoreDBInstanceToPointInTime , StartDBInstance , and StopDBInstance .
@@ -82,25 +84,25 @@ func (c *Client) addOperationStartDBInstanceMiddlewares(stack *middleware.Stack,
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -115,13 +117,16 @@ func (c *Client) addOperationStartDBInstanceMiddlewares(stack *middleware.Stack,
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpStartDBInstanceValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opStartDBInstance(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

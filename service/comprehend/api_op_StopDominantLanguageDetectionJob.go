@@ -6,20 +6,24 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/comprehend/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Stops a dominant language detection job in progress. If the job state is
-// IN_PROGRESS the job is marked for termination and put into the STOP_REQUESTED
-// state. If the job completes before it can be stopped, it is put into the
-// COMPLETED state; otherwise the job is stopped and put into the STOPPED state.
+// Stops a dominant language detection job in progress.
+//
+// If the job state is IN_PROGRESS the job is marked for termination and put into
+// the STOP_REQUESTED state. If the job completes before it can be stopped, it is
+// put into the COMPLETED state; otherwise the job is stopped and put into the
+// STOPPED state.
+//
 // If the job is in the COMPLETED or FAILED state when you call the
 // StopDominantLanguageDetectionJob operation, the operation returns a 400 Internal
-// Request Exception. When a job is stopped, any documents already processed are
-// written to the output location.
+// Request Exception.
+//
+// When a job is stopped, any documents already processed are written to the
+// output location.
 func (c *Client) StopDominantLanguageDetectionJob(ctx context.Context, params *StopDominantLanguageDetectionJobInput, optFns ...func(*Options)) (*StopDominantLanguageDetectionJobOutput, error) {
 	if params == nil {
 		params = &StopDominantLanguageDetectionJobInput{}
@@ -82,25 +86,25 @@ func (c *Client) addOperationStopDominantLanguageDetectionJobMiddlewares(stack *
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -115,13 +119,16 @@ func (c *Client) addOperationStopDominantLanguageDetectionJobMiddlewares(stack *
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpStopDominantLanguageDetectionJobValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opStopDominantLanguageDetectionJob(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

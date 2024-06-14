@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/marketplacecatalog/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -18,16 +17,20 @@ import (
 // different changes are locked until the change set has completed (either
 // succeeded, cancelled, or failed). If you try to start a change set containing a
 // change against an entity that is already locked, you will receive a
-// ResourceInUseException error. For example, you can't start the ChangeSet
-// described in the example (https://docs.aws.amazon.com/marketplace-catalog/latest/api-reference/API_StartChangeSet.html#API_StartChangeSet_Examples)
-// later in this topic because it contains two changes to run the same change type
-// ( AddRevisions ) against the same entity ( entity-id@1 ). For more information
-// about working with change sets, see Working with change sets (https://docs.aws.amazon.com/marketplace-catalog/latest/api-reference/welcome.html#working-with-change-sets)
-// . For information about change types for single-AMI products, see Working with
-// single-AMI products (https://docs.aws.amazon.com/marketplace-catalog/latest/api-reference/ami-products.html#working-with-single-AMI-products)
-// . Also, for more information about change types available for container-based
-// products, see Working with container products (https://docs.aws.amazon.com/marketplace-catalog/latest/api-reference/container-products.html#working-with-container-products)
-// .
+// ResourceInUseException error.
+//
+// For example, you can't start the ChangeSet described in the [example] later in this
+// topic because it contains two changes to run the same change type ( AddRevisions
+// ) against the same entity ( entity-id@1 ).
+//
+// For more information about working with change sets, see [Working with change sets]. For information
+// about change types for single-AMI products, see [Working with single-AMI products]. Also, for more information
+// about change types available for container-based products, see [Working with container products].
+//
+// [Working with single-AMI products]: https://docs.aws.amazon.com/marketplace-catalog/latest/api-reference/ami-products.html#working-with-single-AMI-products
+// [Working with change sets]: https://docs.aws.amazon.com/marketplace-catalog/latest/api-reference/welcome.html#working-with-change-sets
+// [Working with container products]: https://docs.aws.amazon.com/marketplace-catalog/latest/api-reference/container-products.html#working-with-container-products
+// [example]: https://docs.aws.amazon.com/marketplace-catalog/latest/api-reference/API_StartChangeSet.html#API_StartChangeSet_Examples
 func (c *Client) StartChangeSet(ctx context.Context, params *StartChangeSetInput, optFns ...func(*Options)) (*StartChangeSetOutput, error) {
 	if params == nil {
 		params = &StartChangeSetInput{}
@@ -65,6 +68,14 @@ type StartChangeSetInput struct {
 
 	// A unique token to identify the request to ensure idempotency.
 	ClientRequestToken *string
+
+	// The intent related to the request. The default is APPLY . To test your request
+	// before applying changes to your entities, use VALIDATE . This feature is
+	// currently available for adding versions to single-AMI products. For more
+	// information, see [Add a new version].
+	//
+	// [Add a new version]: https://docs.aws.amazon.com/marketplace-catalog/latest/api-reference/ami-products.html#ami-add-version
+	Intent types.Intent
 
 	noSmithyDocumentSerde
 }
@@ -105,25 +116,25 @@ func (c *Client) addOperationStartChangeSetMiddlewares(stack *middleware.Stack, 
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -138,6 +149,9 @@ func (c *Client) addOperationStartChangeSetMiddlewares(stack *middleware.Stack, 
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opStartChangeSetMiddleware(stack, options); err != nil {
 		return err
 	}
@@ -147,7 +161,7 @@ func (c *Client) addOperationStartChangeSetMiddlewares(stack *middleware.Stack, 
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opStartChangeSet(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

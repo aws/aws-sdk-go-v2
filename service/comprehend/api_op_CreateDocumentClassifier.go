@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/comprehend/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -14,9 +13,10 @@ import (
 
 // Creates a new document classifier that you can use to categorize documents. To
 // create a classifier, you provide a set of training documents that are labeled
-// with the categories that you want to use. For more information, see Training
-// classifier models (https://docs.aws.amazon.com/comprehend/latest/dg/training-classifier-model.html)
-// in the Comprehend Developer Guide.
+// with the categories that you want to use. For more information, see [Training classifier models]in the
+// Comprehend Developer Guide.
+//
+// [Training classifier models]: https://docs.aws.amazon.com/comprehend/latest/dg/training-classifier-model.html
 func (c *Client) CreateDocumentClassifier(ctx context.Context, params *CreateDocumentClassifierInput, optFns ...func(*Options)) (*CreateDocumentClassifierOutput, error) {
 	if params == nil {
 		params = &CreateDocumentClassifierInput{}
@@ -70,21 +70,28 @@ type CreateDocumentClassifierInput struct {
 
 	// ID for the KMS key that Amazon Comprehend uses to encrypt trained custom
 	// models. The ModelKmsKeyId can be either of the following formats:
+	//
 	//   - KMS Key ID: "1234abcd-12ab-34cd-56ef-1234567890ab"
+	//
 	//   - Amazon Resource Name (ARN) of a KMS Key:
 	//   "arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"
 	ModelKmsKeyId *string
 
 	// The resource-based policy to attach to your custom document classifier model.
 	// You can use this policy to allow another Amazon Web Services account to import
-	// your custom model. Provide your policy as a JSON body that you enter as a UTF-8
-	// encoded string without line breaks. To provide valid JSON, enclose the attribute
-	// names and values in double quotes. If the JSON body is also enclosed in double
-	// quotes, then you must escape the double quotes that are inside the policy:
-	// "{\"attribute\": \"value\", \"attribute\": [\"value\"]}" To avoid escaping
-	// quotes, you can use single quotes to enclose the policy and double quotes to
-	// enclose the JSON names and values: '{"attribute": "value", "attribute":
-	// ["value"]}'
+	// your custom model.
+	//
+	// Provide your policy as a JSON body that you enter as a UTF-8 encoded string
+	// without line breaks. To provide valid JSON, enclose the attribute names and
+	// values in double quotes. If the JSON body is also enclosed in double quotes,
+	// then you must escape the double quotes that are inside the policy:
+	//
+	//     "{\"attribute\": \"value\", \"attribute\": [\"value\"]}"
+	//
+	// To avoid escaping quotes, you can use single quotes to enclose the policy and
+	// double quotes to enclose the JSON names and values:
+	//
+	//     '{"attribute": "value", "attribute": ["value"]}'
 	ModelPolicy *string
 
 	// Specifies the location for the output files from a custom classifier job. This
@@ -108,15 +115,18 @@ type CreateDocumentClassifierInput struct {
 	// Comprehend uses to encrypt data on the storage volume attached to the ML compute
 	// instance(s) that process the analysis job. The VolumeKmsKeyId can be either of
 	// the following formats:
+	//
 	//   - KMS Key ID: "1234abcd-12ab-34cd-56ef-1234567890ab"
+	//
 	//   - Amazon Resource Name (ARN) of a KMS Key:
 	//   "arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"
 	VolumeKmsKeyId *string
 
 	// Configuration parameters for an optional private Virtual Private Cloud (VPC)
 	// containing the resources you are using for your custom classifier. For more
-	// information, see Amazon VPC (https://docs.aws.amazon.com/vpc/latest/userguide/what-is-amazon-vpc.html)
-	// .
+	// information, see [Amazon VPC].
+	//
+	// [Amazon VPC]: https://docs.aws.amazon.com/vpc/latest/userguide/what-is-amazon-vpc.html
 	VpcConfig *types.VpcConfig
 
 	noSmithyDocumentSerde
@@ -155,25 +165,25 @@ func (c *Client) addOperationCreateDocumentClassifierMiddlewares(stack *middlewa
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -188,6 +198,9 @@ func (c *Client) addOperationCreateDocumentClassifierMiddlewares(stack *middlewa
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opCreateDocumentClassifierMiddleware(stack, options); err != nil {
 		return err
 	}
@@ -197,7 +210,7 @@ func (c *Client) addOperationCreateDocumentClassifierMiddlewares(stack *middlewa
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateDocumentClassifier(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

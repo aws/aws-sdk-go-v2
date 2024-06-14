@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/billingconductor/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -30,23 +29,23 @@ func (c *Client) ListResourcesAssociatedToCustomLineItem(ctx context.Context, pa
 
 type ListResourcesAssociatedToCustomLineItemInput struct {
 
-	// The ARN of the custom line item for which the resource associations will be
+	//  The ARN of the custom line item for which the resource associations will be
 	// listed.
 	//
 	// This member is required.
 	Arn *string
 
-	// The billing period for which the resource associations will be listed.
+	//  The billing period for which the resource associations will be listed.
 	BillingPeriod *string
 
-	// (Optional) A ListResourcesAssociatedToCustomLineItemFilter that can specify the
-	// types of resources that should be retrieved.
+	//  (Optional) A ListResourcesAssociatedToCustomLineItemFilter that can specify
+	// the types of resources that should be retrieved.
 	Filters *types.ListResourcesAssociatedToCustomLineItemFilter
 
-	// (Optional) The maximum number of resource associations to be retrieved.
+	//  (Optional) The maximum number of resource associations to be retrieved.
 	MaxResults *int32
 
-	// (Optional) The pagination token that's returned by a previous request.
+	//  (Optional) The pagination token that's returned by a previous request.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -54,14 +53,14 @@ type ListResourcesAssociatedToCustomLineItemInput struct {
 
 type ListResourcesAssociatedToCustomLineItemOutput struct {
 
-	// The custom line item ARN for which the resource associations are listed.
+	//  The custom line item ARN for which the resource associations are listed.
 	Arn *string
 
-	// A list of ListResourcesAssociatedToCustomLineItemResponseElement for each
+	//  A list of ListResourcesAssociatedToCustomLineItemResponseElement for each
 	// resource association retrieved.
 	AssociatedResources []types.ListResourcesAssociatedToCustomLineItemResponseElement
 
-	// The pagination token to be used in subsequent requests to retrieve additional
+	//  The pagination token to be used in subsequent requests to retrieve additional
 	// results.
 	NextToken *string
 
@@ -93,25 +92,25 @@ func (c *Client) addOperationListResourcesAssociatedToCustomLineItemMiddlewares(
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -126,13 +125,16 @@ func (c *Client) addOperationListResourcesAssociatedToCustomLineItemMiddlewares(
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpListResourcesAssociatedToCustomLineItemValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListResourcesAssociatedToCustomLineItem(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -161,7 +163,7 @@ var _ ListResourcesAssociatedToCustomLineItemAPIClient = (*Client)(nil)
 // ListResourcesAssociatedToCustomLineItemPaginatorOptions is the paginator
 // options for ListResourcesAssociatedToCustomLineItem
 type ListResourcesAssociatedToCustomLineItemPaginatorOptions struct {
-	// (Optional) The maximum number of resource associations to be retrieved.
+	//  (Optional) The maximum number of resource associations to be retrieved.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

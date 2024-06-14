@@ -17,11 +17,14 @@ import (
 
 // Deregisters a location from your S3 Access Grants instance. You can only delete
 // a location registration from an S3 Access Grants instance if there are no grants
-// associated with this location. See Delete a grant (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteAccessGrant.html)
-// for information on how to delete grants. You need to have at least one
-// registered location in your S3 Access Grants instance in order to create access
-// grants. Permissions You must have the s3:DeleteAccessGrantsLocation permission
-// to use this operation.
+// associated with this location. See [Delete a grant]for information on how to delete grants. You
+// need to have at least one registered location in your S3 Access Grants instance
+// in order to create access grants.
+//
+// Permissions You must have the s3:DeleteAccessGrantsLocation permission to use
+// this operation.
+//
+// [Delete a grant]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteAccessGrant.html
 func (c *Client) DeleteAccessGrantsLocation(ctx context.Context, params *DeleteAccessGrantsLocationInput, optFns ...func(*Options)) (*DeleteAccessGrantsLocationOutput, error) {
 	if params == nil {
 		params = &DeleteAccessGrantsLocationInput{}
@@ -89,25 +92,25 @@ func (c *Client) addOperationDeleteAccessGrantsLocationMiddlewares(stack *middle
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -125,6 +128,9 @@ func (c *Client) addOperationDeleteAccessGrantsLocationMiddlewares(stack *middle
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = smithyhttp.AddContentChecksumMiddleware(stack); err != nil {
 		return err
 	}
@@ -140,7 +146,7 @@ func (c *Client) addOperationDeleteAccessGrantsLocationMiddlewares(stack *middle
 	if err = addMetadataRetrieverMiddleware(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addDeleteAccessGrantsLocationUpdateEndpoint(stack, options); err != nil {

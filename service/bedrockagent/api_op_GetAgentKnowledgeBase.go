@@ -6,13 +6,12 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockagent/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Gets a knowledge base associated to an existing Amazon Bedrock Agent Version
+// Gets information about a knowledge base associated with an agent.
 func (c *Client) GetAgentKnowledgeBase(ctx context.Context, params *GetAgentKnowledgeBaseInput, optFns ...func(*Options)) (*GetAgentKnowledgeBaseOutput, error) {
 	if params == nil {
 		params = &GetAgentKnowledgeBaseInput{}
@@ -28,20 +27,19 @@ func (c *Client) GetAgentKnowledgeBase(ctx context.Context, params *GetAgentKnow
 	return out, nil
 }
 
-// Get Agent Knowledge Base Request
 type GetAgentKnowledgeBaseInput struct {
 
-	// Id generated at the server side when an Agent is created
+	// The unique identifier of the agent with which the knowledge base is associated.
 	//
 	// This member is required.
 	AgentId *string
 
-	// Version number generated when a version is created
+	// The version of the agent with which the knowledge base is associated.
 	//
 	// This member is required.
 	AgentVersion *string
 
-	// Id generated at the server side when a Knowledge Base is associated
+	// The unique identifier of the knowledge base associated with the agent.
 	//
 	// This member is required.
 	KnowledgeBaseId *string
@@ -49,10 +47,9 @@ type GetAgentKnowledgeBaseInput struct {
 	noSmithyDocumentSerde
 }
 
-// Get Agent Knowledge Base Response
 type GetAgentKnowledgeBaseOutput struct {
 
-	// Contains the information of an Agent Knowledge Base.
+	// Contains details about a knowledge base attached to an agent.
 	//
 	// This member is required.
 	AgentKnowledgeBase *types.AgentKnowledgeBase
@@ -85,25 +82,25 @@ func (c *Client) addOperationGetAgentKnowledgeBaseMiddlewares(stack *middleware.
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -118,13 +115,16 @@ func (c *Client) addOperationGetAgentKnowledgeBaseMiddlewares(stack *middleware.
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpGetAgentKnowledgeBaseValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetAgentKnowledgeBase(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

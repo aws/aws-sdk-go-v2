@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/globalaccelerator/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -36,9 +35,11 @@ type UpdateAcceleratorAttributesInput struct {
 	AcceleratorArn *string
 
 	// Update whether flow logs are enabled. The default value is false. If the value
-	// is true, FlowLogsS3Bucket and FlowLogsS3Prefix must be specified. For more
-	// information, see Flow Logs (https://docs.aws.amazon.com/global-accelerator/latest/dg/monitoring-global-accelerator.flow-logs.html)
-	// in the Global Accelerator Developer Guide.
+	// is true, FlowLogsS3Bucket and FlowLogsS3Prefix must be specified.
+	//
+	// For more information, see [Flow Logs] in the Global Accelerator Developer Guide.
+	//
+	// [Flow Logs]: https://docs.aws.amazon.com/global-accelerator/latest/dg/monitoring-global-accelerator.flow-logs.html
 	FlowLogsEnabled *bool
 
 	// The name of the Amazon S3 bucket for the flow logs. Attribute is required if
@@ -47,9 +48,12 @@ type UpdateAcceleratorAttributesInput struct {
 	FlowLogsS3Bucket *string
 
 	// Update the prefix for the location in the Amazon S3 bucket for the flow logs.
-	// Attribute is required if FlowLogsEnabled is true . If you specify slash (/) for
-	// the S3 bucket prefix, the log file bucket folder structure will include a double
-	// slash (//), like the following: s3-bucket_name//AWSLogs/aws_account_id
+	// Attribute is required if FlowLogsEnabled is true .
+	//
+	// If you specify slash (/) for the S3 bucket prefix, the log file bucket folder
+	// structure will include a double slash (//), like the following:
+	//
+	// s3-bucket_name//AWSLogs/aws_account_id
 	FlowLogsS3Prefix *string
 
 	noSmithyDocumentSerde
@@ -88,25 +92,25 @@ func (c *Client) addOperationUpdateAcceleratorAttributesMiddlewares(stack *middl
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -121,13 +125,16 @@ func (c *Client) addOperationUpdateAcceleratorAttributesMiddlewares(stack *middl
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpUpdateAcceleratorAttributesValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateAcceleratorAttributes(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

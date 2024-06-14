@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -15,15 +14,20 @@ import (
 // profile can contain only one role, and this quota cannot be increased. You can
 // remove the existing role and then add a different role to an instance profile.
 // You must then wait for the change to appear across all of Amazon Web Services
-// because of eventual consistency (https://en.wikipedia.org/wiki/Eventual_consistency)
-// . To force the change, you must disassociate the instance profile (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DisassociateIamInstanceProfile.html)
-// and then associate the instance profile (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_AssociateIamInstanceProfile.html)
-// , or you can stop your instance and then restart it. The caller of this
-// operation must be granted the PassRole permission on the IAM role by a
-// permissions policy. For more information about roles, see IAM roles (https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles.html)
-// in the IAM User Guide. For more information about instance profiles, see Using
-// instance profiles (https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use_switch-role-ec2_instance-profiles.html)
-// in the IAM User Guide.
+// because of [eventual consistency]. To force the change, you must [disassociate the instance profile] and then [associate the instance profile], or you can stop your
+// instance and then restart it.
+//
+// The caller of this operation must be granted the PassRole permission on the IAM
+// role by a permissions policy.
+//
+// For more information about roles, see [IAM roles] in the IAM User Guide. For more
+// information about instance profiles, see [Using instance profiles]in the IAM User Guide.
+//
+// [disassociate the instance profile]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DisassociateIamInstanceProfile.html
+// [associate the instance profile]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_AssociateIamInstanceProfile.html
+// [Using instance profiles]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use_switch-role-ec2_instance-profiles.html
+// [eventual consistency]: https://en.wikipedia.org/wiki/Eventual_consistency
+// [IAM roles]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles.html
 func (c *Client) AddRoleToInstanceProfile(ctx context.Context, params *AddRoleToInstanceProfileInput, optFns ...func(*Options)) (*AddRoleToInstanceProfileOutput, error) {
 	if params == nil {
 		params = &AddRoleToInstanceProfileInput{}
@@ -41,18 +45,24 @@ func (c *Client) AddRoleToInstanceProfile(ctx context.Context, params *AddRoleTo
 
 type AddRoleToInstanceProfileInput struct {
 
-	// The name of the instance profile to update. This parameter allows (through its
-	// regex pattern (http://wikipedia.org/wiki/regex) ) a string of characters
-	// consisting of upper and lowercase alphanumeric characters with no spaces. You
-	// can also include any of the following characters: _+=,.@-
+	// The name of the instance profile to update.
+	//
+	// This parameter allows (through its [regex pattern]) a string of characters consisting of upper
+	// and lowercase alphanumeric characters with no spaces. You can also include any
+	// of the following characters: _+=,.@-
+	//
+	// [regex pattern]: http://wikipedia.org/wiki/regex
 	//
 	// This member is required.
 	InstanceProfileName *string
 
-	// The name of the role to add. This parameter allows (through its regex pattern (http://wikipedia.org/wiki/regex)
-	// ) a string of characters consisting of upper and lowercase alphanumeric
-	// characters with no spaces. You can also include any of the following characters:
-	// _+=,.@-
+	// The name of the role to add.
+	//
+	// This parameter allows (through its [regex pattern]) a string of characters consisting of upper
+	// and lowercase alphanumeric characters with no spaces. You can also include any
+	// of the following characters: _+=,.@-
+	//
+	// [regex pattern]: http://wikipedia.org/wiki/regex
 	//
 	// This member is required.
 	RoleName *string
@@ -89,25 +99,25 @@ func (c *Client) addOperationAddRoleToInstanceProfileMiddlewares(stack *middlewa
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -122,13 +132,16 @@ func (c *Client) addOperationAddRoleToInstanceProfileMiddlewares(stack *middlewa
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpAddRoleToInstanceProfileValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opAddRoleToInstanceProfile(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

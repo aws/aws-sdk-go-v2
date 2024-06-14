@@ -6,25 +6,29 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Deletes the specified role. Unlike the Amazon Web Services Management Console,
 // when you delete a role programmatically, you must delete the items attached to
-// the role manually, or the deletion fails. For more information, see Deleting an
-// IAM role (https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_manage_delete.html#roles-managingrole-deleting-cli)
-// . Before attempting to delete a role, remove the following attached items:
-//   - Inline policies ( DeleteRolePolicy )
-//   - Attached managed policies ( DetachRolePolicy )
-//   - Instance profile ( RemoveRoleFromInstanceProfile )
+// the role manually, or the deletion fails. For more information, see [Deleting an IAM role]. Before
+// attempting to delete a role, remove the following attached items:
+//
+//   - Inline policies (DeleteRolePolicy )
+//
+//   - Attached managed policies (DetachRolePolicy )
+//
+//   - Instance profile (RemoveRoleFromInstanceProfile )
+//
 //   - Optional – Delete instance profile after detaching from role for resource
-//     clean up ( DeleteInstanceProfile )
+//     clean up (DeleteInstanceProfile )
 //
 // Make sure that you do not have any Amazon EC2 instances running with the role
 // you are about to delete. Deleting a role or instance profile that is associated
 // with a running instance will break any applications running on the instance.
+//
+// [Deleting an IAM role]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_manage_delete.html#roles-managingrole-deleting-cli
 func (c *Client) DeleteRole(ctx context.Context, params *DeleteRoleInput, optFns ...func(*Options)) (*DeleteRoleOutput, error) {
 	if params == nil {
 		params = &DeleteRoleInput{}
@@ -42,10 +46,13 @@ func (c *Client) DeleteRole(ctx context.Context, params *DeleteRoleInput, optFns
 
 type DeleteRoleInput struct {
 
-	// The name of the role to delete. This parameter allows (through its regex pattern (http://wikipedia.org/wiki/regex)
-	// ) a string of characters consisting of upper and lowercase alphanumeric
-	// characters with no spaces. You can also include any of the following characters:
-	// _+=,.@-
+	// The name of the role to delete.
+	//
+	// This parameter allows (through its [regex pattern]) a string of characters consisting of upper
+	// and lowercase alphanumeric characters with no spaces. You can also include any
+	// of the following characters: _+=,.@-
+	//
+	// [regex pattern]: http://wikipedia.org/wiki/regex
 	//
 	// This member is required.
 	RoleName *string
@@ -82,25 +89,25 @@ func (c *Client) addOperationDeleteRoleMiddlewares(stack *middleware.Stack, opti
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -115,13 +122,16 @@ func (c *Client) addOperationDeleteRoleMiddlewares(stack *middleware.Stack, opti
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDeleteRoleValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteRole(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

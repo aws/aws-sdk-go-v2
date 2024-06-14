@@ -7,7 +7,6 @@ import (
 	"errors"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/omics/types"
 	"github.com/aws/smithy-go/middleware"
 	smithytime "github.com/aws/smithy-go/time"
@@ -35,12 +34,12 @@ func (c *Client) GetAnnotationStoreVersion(ctx context.Context, params *GetAnnot
 
 type GetAnnotationStoreVersionInput struct {
 
-	// The name given to an annotation store version to distinguish it from others.
+	//  The name given to an annotation store version to distinguish it from others.
 	//
 	// This member is required.
 	Name *string
 
-	// The name given to an annotation store version to distinguish it from others.
+	//  The name given to an annotation store version to distinguish it from others.
 	//
 	// This member is required.
 	VersionName *string
@@ -50,67 +49,67 @@ type GetAnnotationStoreVersionInput struct {
 
 type GetAnnotationStoreVersionOutput struct {
 
-	// The time stamp for when an annotation store version was created.
+	//  The time stamp for when an annotation store version was created.
 	//
 	// This member is required.
 	CreationTime *time.Time
 
-	// The description for an annotation store version.
+	//  The description for an annotation store version.
 	//
 	// This member is required.
 	Description *string
 
-	// The annotation store version ID.
+	//  The annotation store version ID.
 	//
 	// This member is required.
 	Id *string
 
-	// The name of the annotation store.
+	//  The name of the annotation store.
 	//
 	// This member is required.
 	Name *string
 
-	// The status of an annotation store version.
+	//  The status of an annotation store version.
 	//
 	// This member is required.
 	Status types.VersionStatus
 
-	// The status of an annotation store version.
+	//  The status of an annotation store version.
 	//
 	// This member is required.
 	StatusMessage *string
 
-	// The store ID for annotation store version.
+	//  The store ID for annotation store version.
 	//
 	// This member is required.
 	StoreId *string
 
-	// Any tags associated with an annotation store version.
+	//  Any tags associated with an annotation store version.
 	//
 	// This member is required.
 	Tags map[string]string
 
-	// The time stamp for when an annotation store version was updated.
+	//  The time stamp for when an annotation store version was updated.
 	//
 	// This member is required.
 	UpdateTime *time.Time
 
-	// The Arn for the annotation store.
+	//  The Arn for the annotation store.
 	//
 	// This member is required.
 	VersionArn *string
 
-	// The name given to an annotation store version to distinguish it from others.
+	//  The name given to an annotation store version to distinguish it from others.
 	//
 	// This member is required.
 	VersionName *string
 
-	// The size of the annotation store version in Bytes.
+	//  The size of the annotation store version in Bytes.
 	//
 	// This member is required.
 	VersionSizeBytes *int64
 
-	// The options for an annotation store version.
+	//  The options for an annotation store version.
 	VersionOptions types.VersionOptions
 
 	// Metadata pertaining to the operation's result.
@@ -141,25 +140,25 @@ func (c *Client) addOperationGetAnnotationStoreVersionMiddlewares(stack *middlew
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -174,6 +173,9 @@ func (c *Client) addOperationGetAnnotationStoreVersionMiddlewares(stack *middlew
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addEndpointPrefix_opGetAnnotationStoreVersionMiddleware(stack); err != nil {
 		return err
 	}
@@ -183,7 +185,7 @@ func (c *Client) addOperationGetAnnotationStoreVersionMiddlewares(stack *middlew
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetAnnotationStoreVersion(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -243,7 +245,16 @@ type AnnotationStoreVersionCreatedWaiterOptions struct {
 	// Set of options to modify how an operation is invoked. These apply to all
 	// operations invoked for this client. Use functional options on operation call to
 	// modify this list for per operation behavior.
+	//
+	// Passing options here is functionally equivalent to passing values to this
+	// config's ClientOptions field that extend the inner client's APIOptions directly.
 	APIOptions []func(*middleware.Stack) error
+
+	// Functional options to be passed to all operations invoked by this client.
+	//
+	// Function values that modify the inner APIOptions are applied after the waiter
+	// config's own APIOptions modifiers.
+	ClientOptions []func(*Options)
 
 	// MinDelay is the minimum amount of time to delay between retries. If unset,
 	// AnnotationStoreVersionCreatedWaiter will use default minimum delay of 30
@@ -262,12 +273,13 @@ type AnnotationStoreVersionCreatedWaiterOptions struct {
 
 	// Retryable is function that can be used to override the service defined
 	// waiter-behavior based on operation output, or returned error. This function is
-	// used by the waiter to decide if a state is retryable or a terminal state. By
-	// default service-modeled logic will populate this option. This option can thus be
-	// used to define a custom waiter state with fall-back to service-modeled waiter
-	// state mutators.The function returns an error in case of a failure state. In case
-	// of retry state, this function returns a bool value of true and nil error, while
-	// in case of success it returns a bool value of false and nil error.
+	// used by the waiter to decide if a state is retryable or a terminal state.
+	//
+	// By default service-modeled logic will populate this option. This option can
+	// thus be used to define a custom waiter state with fall-back to service-modeled
+	// waiter state mutators.The function returns an error in case of a failure state.
+	// In case of retry state, this function returns a bool value of true and nil
+	// error, while in case of success it returns a bool value of false and nil error.
 	Retryable func(context.Context, *GetAnnotationStoreVersionInput, *GetAnnotationStoreVersionOutput, error) (bool, error)
 }
 
@@ -347,6 +359,9 @@ func (w *AnnotationStoreVersionCreatedWaiter) WaitForOutput(ctx context.Context,
 
 		out, err := w.client.GetAnnotationStoreVersion(ctx, params, func(o *Options) {
 			o.APIOptions = append(o.APIOptions, apiOptions...)
+			for _, opt := range options.ClientOptions {
+				opt(o)
+			}
 		})
 
 		retryable, err := options.Retryable(ctx, params, out, err)
@@ -459,7 +474,16 @@ type AnnotationStoreVersionDeletedWaiterOptions struct {
 	// Set of options to modify how an operation is invoked. These apply to all
 	// operations invoked for this client. Use functional options on operation call to
 	// modify this list for per operation behavior.
+	//
+	// Passing options here is functionally equivalent to passing values to this
+	// config's ClientOptions field that extend the inner client's APIOptions directly.
 	APIOptions []func(*middleware.Stack) error
+
+	// Functional options to be passed to all operations invoked by this client.
+	//
+	// Function values that modify the inner APIOptions are applied after the waiter
+	// config's own APIOptions modifiers.
+	ClientOptions []func(*Options)
 
 	// MinDelay is the minimum amount of time to delay between retries. If unset,
 	// AnnotationStoreVersionDeletedWaiter will use default minimum delay of 30
@@ -478,12 +502,13 @@ type AnnotationStoreVersionDeletedWaiterOptions struct {
 
 	// Retryable is function that can be used to override the service defined
 	// waiter-behavior based on operation output, or returned error. This function is
-	// used by the waiter to decide if a state is retryable or a terminal state. By
-	// default service-modeled logic will populate this option. This option can thus be
-	// used to define a custom waiter state with fall-back to service-modeled waiter
-	// state mutators.The function returns an error in case of a failure state. In case
-	// of retry state, this function returns a bool value of true and nil error, while
-	// in case of success it returns a bool value of false and nil error.
+	// used by the waiter to decide if a state is retryable or a terminal state.
+	//
+	// By default service-modeled logic will populate this option. This option can
+	// thus be used to define a custom waiter state with fall-back to service-modeled
+	// waiter state mutators.The function returns an error in case of a failure state.
+	// In case of retry state, this function returns a bool value of true and nil
+	// error, while in case of success it returns a bool value of false and nil error.
 	Retryable func(context.Context, *GetAnnotationStoreVersionInput, *GetAnnotationStoreVersionOutput, error) (bool, error)
 }
 
@@ -563,6 +588,9 @@ func (w *AnnotationStoreVersionDeletedWaiter) WaitForOutput(ctx context.Context,
 
 		out, err := w.client.GetAnnotationStoreVersion(ctx, params, func(o *Options) {
 			o.APIOptions = append(o.APIOptions, apiOptions...)
+			for _, opt := range options.ClientOptions {
+				opt(o)
+			}
 		})
 
 		retryable, err := options.Retryable(ctx, params, out, err)

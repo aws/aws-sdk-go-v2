@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/m2/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -78,6 +77,9 @@ type GetBatchJobExecutionOutput struct {
 	// The name of this batch job.
 	JobName *string
 
+	// The restart steps information for the most recent restart operation.
+	JobStepRestartMarker *types.JobStepRestartMarker
+
 	// The type of job.
 	JobType types.BatchJobType
 
@@ -85,8 +87,10 @@ type GetBatchJobExecutionOutput struct {
 	JobUser *string
 
 	// The batch job return code from either the Blu Age or Micro Focus runtime
-	// engines. For more information, see Batch return codes (https://www.ibm.com/docs/en/was/8.5.5?topic=model-batch-return-codes)
-	// in the IBM WebSphere Application Server documentation.
+	// engines. For more information, see [Batch return codes]in the IBM WebSphere Application Server
+	// documentation.
+	//
+	// [Batch return codes]: https://www.ibm.com/docs/en/was/8.5.5?topic=model-batch-return-codes
 	ReturnCode *string
 
 	// The reason for the reported status.
@@ -120,25 +124,25 @@ func (c *Client) addOperationGetBatchJobExecutionMiddlewares(stack *middleware.S
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -153,13 +157,16 @@ func (c *Client) addOperationGetBatchJobExecutionMiddlewares(stack *middleware.S
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpGetBatchJobExecutionValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetBatchJobExecution(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

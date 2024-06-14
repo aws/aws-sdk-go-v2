@@ -6,20 +6,24 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/lightsail/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns the deployments for your Amazon Lightsail container service A
-// deployment specifies the settings, such as the ports and launch command, of
-// containers that are deployed to your container service. The deployments are
-// ordered by version in ascending order. The newest version is listed at the top
-// of the response. A set number of deployments are kept before the oldest one is
-// replaced with the newest one. For more information, see Amazon Lightsail
-// endpoints and quotas (https://docs.aws.amazon.com/general/latest/gr/lightsail.html)
-// in the Amazon Web Services General Reference.
+// Returns the deployments for your Amazon Lightsail container service
+//
+// A deployment specifies the settings, such as the ports and launch command, of
+// containers that are deployed to your container service.
+//
+// The deployments are ordered by version in ascending order. The newest version
+// is listed at the top of the response.
+//
+// A set number of deployments are kept before the oldest one is replaced with the
+// newest one. For more information, see [Amazon Lightsail endpoints and quotas]in the Amazon Web Services General
+// Reference.
+//
+// [Amazon Lightsail endpoints and quotas]: https://docs.aws.amazon.com/general/latest/gr/lightsail.html
 func (c *Client) GetContainerServiceDeployments(ctx context.Context, params *GetContainerServiceDeploymentsInput, optFns ...func(*Options)) (*GetContainerServiceDeploymentsOutput, error) {
 	if params == nil {
 		params = &GetContainerServiceDeploymentsInput{}
@@ -78,25 +82,25 @@ func (c *Client) addOperationGetContainerServiceDeploymentsMiddlewares(stack *mi
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -111,13 +115,16 @@ func (c *Client) addOperationGetContainerServiceDeploymentsMiddlewares(stack *mi
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpGetContainerServiceDeploymentsValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetContainerServiceDeployments(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

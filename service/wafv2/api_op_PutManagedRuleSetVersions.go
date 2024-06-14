@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/wafv2/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -14,19 +13,23 @@ import (
 
 // Defines the versions of your managed rule set that you are offering to the
 // customers. Customers see your offerings as managed rule groups with versioning.
+//
 // This is intended for use only by vendors of managed rule sets. Vendors are
-// Amazon Web Services and Amazon Web Services Marketplace sellers. Vendors, you
-// can use the managed rule set APIs to provide controlled rollout of your
-// versioned managed rule group offerings for your customers. The APIs are
+// Amazon Web Services and Amazon Web Services Marketplace sellers.
+//
+// Vendors, you can use the managed rule set APIs to provide controlled rollout of
+// your versioned managed rule group offerings for your customers. The APIs are
 // ListManagedRuleSets , GetManagedRuleSet , PutManagedRuleSetVersions , and
-// UpdateManagedRuleSetVersionExpiryDate . Customers retrieve their managed rule
-// group list by calling ListAvailableManagedRuleGroups . The name that you provide
-// here for your managed rule set is the name the customer sees for the
+// UpdateManagedRuleSetVersionExpiryDate .
+//
+// Customers retrieve their managed rule group list by calling ListAvailableManagedRuleGroups. The name that you
+// provide here for your managed rule set is the name the customer sees for the
 // corresponding managed rule group. Customers can retrieve the available versions
-// for a managed rule group by calling ListAvailableManagedRuleGroupVersions . You
-// provide a rule group specification for each version. For each managed rule set,
-// you must specify a version that you recommend using. To initiate the expiration
-// of a managed rule group version, use UpdateManagedRuleSetVersionExpiryDate .
+// for a managed rule group by calling ListAvailableManagedRuleGroupVersions. You provide a rule group specification
+// for each version. For each managed rule set, you must specify a version that you
+// recommend using.
+//
+// To initiate the expiration of a managed rule group version, use UpdateManagedRuleSetVersionExpiryDate.
 func (c *Client) PutManagedRuleSetVersions(ctx context.Context, params *PutManagedRuleSetVersionsInput, optFns ...func(*Options)) (*PutManagedRuleSetVersionsOutput, error) {
 	if params == nil {
 		params = &PutManagedRuleSetVersionsInput{}
@@ -63,8 +66,10 @@ type PutManagedRuleSetVersionsInput struct {
 	LockToken *string
 
 	// The name of the managed rule set. You use this, along with the rule set ID, to
-	// identify the rule set. This name is assigned to the corresponding managed rule
-	// group, which your customers can access and use.
+	// identify the rule set.
+	//
+	// This name is assigned to the corresponding managed rule group, which your
+	// customers can access and use.
 	//
 	// This member is required.
 	Name *string
@@ -73,10 +78,14 @@ type PutManagedRuleSetVersionsInput struct {
 	// regional application. A regional application can be an Application Load Balancer
 	// (ALB), an Amazon API Gateway REST API, an AppSync GraphQL API, an Amazon Cognito
 	// user pool, an App Runner service, or an Amazon Web Services Verified Access
-	// instance. To work with CloudFront, you must also specify the Region US East (N.
-	// Virginia) as follows:
+	// instance.
+	//
+	// To work with CloudFront, you must also specify the Region US East (N. Virginia)
+	// as follows:
+	//
 	//   - CLI - Specify the Region when you use the CloudFront scope:
 	//   --scope=CLOUDFRONT --region=us-east-1 .
+	//
 	//   - API and SDKs - For all calls, use the Region endpoint us-east-1.
 	//
 	// This member is required.
@@ -132,25 +141,25 @@ func (c *Client) addOperationPutManagedRuleSetVersionsMiddlewares(stack *middlew
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -165,13 +174,16 @@ func (c *Client) addOperationPutManagedRuleSetVersionsMiddlewares(stack *middlew
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpPutManagedRuleSetVersionsValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opPutManagedRuleSetVersions(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

@@ -6,19 +6,19 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Adds the specified tags to an Elastic Inference Accelerator. February 15, 2023:
-// Starting April 15, 2023, AWS will not onboard new customers to Amazon Elastic
-// Inference (EI), and will help current customers migrate their workloads to
-// options that offer better price and performance. After April 15, 2023, new
-// customers will not be able to launch instances with Amazon EI accelerators in
-// Amazon SageMaker, Amazon ECS, or Amazon EC2. However, customers who have used
-// Amazon EI at least once during the past 30-day period are considered current
-// customers and will be able to continue using the service.
+//	Adds the specified tags to an Elastic Inference Accelerator.
+//
+// February 15, 2023: Starting April 15, 2023, AWS will not onboard new customers
+// to Amazon Elastic Inference (EI), and will help current customers migrate their
+// workloads to options that offer better price and performance. After April 15,
+// 2023, new customers will not be able to launch instances with Amazon EI
+// accelerators in Amazon SageMaker, Amazon ECS, or Amazon EC2. However, customers
+// who have used Amazon EI at least once during the past 30-day period are
+// considered current customers and will be able to continue using the service.
 func (c *Client) TagResource(ctx context.Context, params *TagResourceInput, optFns ...func(*Options)) (*TagResourceOutput, error) {
 	if params == nil {
 		params = &TagResourceInput{}
@@ -36,12 +36,12 @@ func (c *Client) TagResource(ctx context.Context, params *TagResourceInput, optF
 
 type TagResourceInput struct {
 
-	// The ARN of the Elastic Inference Accelerator to tag.
+	//  The ARN of the Elastic Inference Accelerator to tag.
 	//
 	// This member is required.
 	ResourceArn *string
 
-	// The tags to add to the Elastic Inference Accelerator.
+	//  The tags to add to the Elastic Inference Accelerator.
 	//
 	// This member is required.
 	Tags map[string]string
@@ -78,25 +78,25 @@ func (c *Client) addOperationTagResourceMiddlewares(stack *middleware.Stack, opt
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -111,13 +111,16 @@ func (c *Client) addOperationTagResourceMiddlewares(stack *middleware.Stack, opt
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpTagResourceValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opTagResource(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

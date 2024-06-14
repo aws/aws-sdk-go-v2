@@ -16,8 +16,9 @@ const (
 )
 
 // Values returns all known values for ApplicationState. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ApplicationState) Values() []ApplicationState {
 	return []ApplicationState{
 		"CREATING",
@@ -39,12 +40,32 @@ const (
 )
 
 // Values returns all known values for Architecture. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (Architecture) Values() []Architecture {
 	return []Architecture{
 		"ARM64",
 		"X86_64",
+	}
+}
+
+type JobRunMode string
+
+// Enum values for JobRunMode
+const (
+	JobRunModeBatch     JobRunMode = "BATCH"
+	JobRunModeStreaming JobRunMode = "STREAMING"
+)
+
+// Values returns all known values for JobRunMode. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (JobRunMode) Values() []JobRunMode {
+	return []JobRunMode{
+		"BATCH",
+		"STREAMING",
 	}
 }
 
@@ -63,8 +84,9 @@ const (
 )
 
 // Values returns all known values for JobRunState. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (JobRunState) Values() []JobRunState {
 	return []JobRunState{
 		"SUBMITTED",

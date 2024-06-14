@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -14,11 +13,15 @@ import (
 
 // Finds SageMaker resources that match a search query. Matching resources are
 // returned as a list of SearchRecord objects in the response. You can sort the
-// search results by any resource property in a ascending or descending order. You
-// can query against the following value types: numeric, text, Boolean, and
-// timestamp. The Search API may provide access to otherwise restricted data. See
-// Amazon SageMaker API Permissions: Actions, Permissions, and Resources Reference (https://docs.aws.amazon.com/sagemaker/latest/dg/api-permissions-reference.html)
-// for more information.
+// search results by any resource property in a ascending or descending order.
+//
+// You can query against the following value types: numeric, text, Boolean, and
+// timestamp.
+//
+// The Search API may provide access to otherwise restricted data. See [Amazon SageMaker API Permissions: Actions, Permissions, and Resources Reference] for more
+// information.
+//
+// [Amazon SageMaker API Permissions: Actions, Permissions, and Resources Reference]: https://docs.aws.amazon.com/sagemaker/latest/dg/api-permissions-reference.html
 func (c *Client) Search(ctx context.Context, params *SearchInput, optFns ...func(*Options)) (*SearchOutput, error) {
 	if params == nil {
 		params = &SearchInput{}
@@ -41,14 +44,14 @@ type SearchInput struct {
 	// This member is required.
 	Resource types.ResourceType
 
-	// A cross account filter option. When the value is "CrossAccount" the search
+	//  A cross account filter option. When the value is "CrossAccount" the search
 	// results will only include resources made discoverable to you from other
 	// accounts. When the value is "SameAccount" or null the search results will only
 	// include resources from your account. Default is null . For more information on
-	// searching for resources made discoverable to your account, see Search
-	// discoverable resources (https://docs.aws.amazon.com/sagemaker/latest/dg/feature-store-cross-account-discoverability-use.html)
-	// in the SageMaker Developer Guide. The maximum number of ResourceCatalog s
-	// viewable is 1000.
+	// searching for resources made discoverable to your account, see [Search discoverable resources]in the SageMaker
+	// Developer Guide. The maximum number of ResourceCatalog s viewable is 1000.
+	//
+	// [Search discoverable resources]: https://docs.aws.amazon.com/sagemaker/latest/dg/feature-store-cross-account-discoverability-use.html
 	CrossAccountFilterOption types.CrossAccountFilterOption
 
 	// The maximum number of results to return.
@@ -73,7 +76,8 @@ type SearchInput struct {
 	// default is Descending .
 	SortOrder types.SearchSortOrder
 
-	// Limits the results of your search request to the resources that you can access.
+	//  Limits the results of your search request to the resources that you can
+	// access.
 	VisibilityConditions []types.VisibilityConditions
 
 	noSmithyDocumentSerde
@@ -117,25 +121,25 @@ func (c *Client) addOperationSearchMiddlewares(stack *middleware.Stack, options 
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -150,13 +154,16 @@ func (c *Client) addOperationSearchMiddlewares(stack *middleware.Stack, options 
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpSearchValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opSearch(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

@@ -6,18 +6,19 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/licensemanager/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a license configuration. A license configuration is an abstraction of a
-// customer license agreement that can be consumed and enforced by License Manager.
-// Components include specifications for the license type (licensing by instance,
-// socket, CPU, or vCPU), allowed tenancy (shared tenancy, Dedicated Instance,
-// Dedicated Host, or all of these), license affinity to host (how long a license
-// must be associated with a host), and the number of licenses purchased and used.
+// Creates a license configuration.
+//
+// A license configuration is an abstraction of a customer license agreement that
+// can be consumed and enforced by License Manager. Components include
+// specifications for the license type (licensing by instance, socket, CPU, or
+// vCPU), allowed tenancy (shared tenancy, Dedicated Instance, Dedicated Host, or
+// all of these), license affinity to host (how long a license must be associated
+// with a host), and the number of licenses purchased and used.
 func (c *Client) CreateLicenseConfiguration(ctx context.Context, params *CreateLicenseConfigurationInput, optFns ...func(*Options)) (*CreateLicenseConfigurationOutput, error) {
 	if params == nil {
 		params = &CreateLicenseConfigurationInput{}
@@ -61,14 +62,19 @@ type CreateLicenseConfigurationInput struct {
 	// License rules. The syntax is #name=value (for example,
 	// #allowedTenancy=EC2-DedicatedHost). The available rules vary by dimension, as
 	// follows.
+	//
 	//   - Cores dimension: allowedTenancy | licenseAffinityToHost | maximumCores |
 	//   minimumCores
+	//
 	//   - Instances dimension: allowedTenancy | maximumCores | minimumCores |
 	//   maximumSockets | minimumSockets | maximumVcpus | minimumVcpus
+	//
 	//   - Sockets dimension: allowedTenancy | licenseAffinityToHost | maximumSockets |
 	//   minimumSockets
+	//
 	//   - vCPUs dimension: allowedTenancy | honorVcpuOptimization | maximumVcpus |
 	//   minimumVcpus
+	//
 	// The unit for licenseAffinityToHost is days and the range is 1 to 180. The
 	// possible values for allowedTenancy are EC2-Default , EC2-DedicatedHost , and
 	// EC2-DedicatedInstance . The possible values for honorVcpuOptimization are True
@@ -117,25 +123,25 @@ func (c *Client) addOperationCreateLicenseConfigurationMiddlewares(stack *middle
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -150,13 +156,16 @@ func (c *Client) addOperationCreateLicenseConfigurationMiddlewares(stack *middle
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpCreateLicenseConfigurationValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateLicenseConfiguration(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

@@ -6,13 +6,12 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/docdbelastic/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns information about a specific Elastic DocumentDB cluster.
+// Returns information about a specific elastic cluster.
 func (c *Client) GetCluster(ctx context.Context, params *GetClusterInput, optFns ...func(*Options)) (*GetClusterOutput, error) {
 	if params == nil {
 		params = &GetClusterInput{}
@@ -30,7 +29,7 @@ func (c *Client) GetCluster(ctx context.Context, params *GetClusterInput, optFns
 
 type GetClusterInput struct {
 
-	// The arn of the Elastic DocumentDB cluster.
+	// The ARN identifier of the elastic cluster.
 	//
 	// This member is required.
 	ClusterArn *string
@@ -40,7 +39,7 @@ type GetClusterInput struct {
 
 type GetClusterOutput struct {
 
-	// Returns information about a specific Elastic DocumentDB cluster.
+	// Returns information about a specific elastic cluster.
 	//
 	// This member is required.
 	Cluster *types.Cluster
@@ -73,25 +72,25 @@ func (c *Client) addOperationGetClusterMiddlewares(stack *middleware.Stack, opti
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -106,13 +105,16 @@ func (c *Client) addOperationGetClusterMiddlewares(stack *middleware.Stack, opti
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpGetClusterValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetCluster(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

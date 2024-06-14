@@ -6,13 +6,13 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/iotfleetwise/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a decoder manifest using your existing CAN DBC file from your local
+//	Creates a decoder manifest using your existing CAN DBC file from your local
+//
 // device.
 func (c *Client) ImportDecoderManifest(ctx context.Context, params *ImportDecoderManifestInput, optFns ...func(*Options)) (*ImportDecoderManifestOutput, error) {
 	if params == nil {
@@ -31,12 +31,12 @@ func (c *Client) ImportDecoderManifest(ctx context.Context, params *ImportDecode
 
 type ImportDecoderManifestInput struct {
 
-	// The name of the decoder manifest to import.
+	//  The name of the decoder manifest to import.
 	//
 	// This member is required.
 	Name *string
 
-	// The file to load into an Amazon Web Services account.
+	//  The file to load into an Amazon Web Services account.
 	//
 	// This member is required.
 	NetworkFileDefinitions []types.NetworkFileDefinition
@@ -46,12 +46,12 @@ type ImportDecoderManifestInput struct {
 
 type ImportDecoderManifestOutput struct {
 
-	// The Amazon Resource Name (ARN) of the decoder manifest that was imported.
+	//  The Amazon Resource Name (ARN) of the decoder manifest that was imported.
 	//
 	// This member is required.
 	Arn *string
 
-	// The name of the imported decoder manifest.
+	//  The name of the imported decoder manifest.
 	//
 	// This member is required.
 	Name *string
@@ -84,25 +84,25 @@ func (c *Client) addOperationImportDecoderManifestMiddlewares(stack *middleware.
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -117,13 +117,16 @@ func (c *Client) addOperationImportDecoderManifestMiddlewares(stack *middleware.
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpImportDecoderManifestValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opImportDecoderManifest(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/costexplorer/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -17,9 +16,13 @@ import (
 // account can see the coverage of the associated member accounts. This supports
 // dimensions, Cost Categories, and nested expressions. For any time period, you
 // can filter data for Savings Plans usage with the following dimensions:
+//
 //   - LINKED_ACCOUNT
+//
 //   - REGION
+//
 //   - SERVICE
+//
 //   - INSTANCE_FAMILY
 //
 // To determine valid values for a dimension, use the GetDimensionValues operation.
@@ -49,19 +52,29 @@ type GetSavingsPlansCoverageInput struct {
 
 	// Filters Savings Plans coverage data by dimensions. You can filter data for
 	// Savings Plans usage with the following dimensions:
+	//
 	//   - LINKED_ACCOUNT
+	//
 	//   - REGION
+	//
 	//   - SERVICE
+	//
 	//   - INSTANCE_FAMILY
-	// GetSavingsPlansCoverage uses the same Expression (https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_Expression.html)
-	// object as the other operations, but only AND is supported among each dimension.
-	// If there are multiple values for a dimension, they are OR'd together. Cost
-	// category is also supported.
+	//
+	// GetSavingsPlansCoverage uses the same [Expression] object as the other operations, but only
+	// AND is supported among each dimension. If there are multiple values for a
+	// dimension, they are OR'd together.
+	//
+	// Cost category is also supported.
+	//
+	// [Expression]: https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_Expression.html
 	Filter *types.Expression
 
 	// The granularity of the Amazon Web Services cost data for your Savings Plans.
-	// Granularity can't be set if GroupBy is set. The GetSavingsPlansCoverage
-	// operation supports only DAILY and MONTHLY granularities.
+	// Granularity can't be set if GroupBy is set.
+	//
+	// The GetSavingsPlansCoverage operation supports only DAILY and MONTHLY
+	// granularities.
 	Granularity types.Granularity
 
 	// You can group the data using the attributes INSTANCE_FAMILY , REGION , or
@@ -81,15 +94,24 @@ type GetSavingsPlansCoverageInput struct {
 	// page size.
 	NextToken *string
 
-	// The value that you want to sort the data by. The following values are supported
-	// for Key :
+	// The value that you want to sort the data by.
+	//
+	// The following values are supported for Key :
+	//
 	//   - SpendCoveredBySavingsPlan
+	//
 	//   - OnDemandCost
+	//
 	//   - CoveragePercentage
+	//
 	//   - TotalCost
+	//
 	//   - InstanceFamily
+	//
 	//   - Region
+	//
 	//   - Service
+	//
 	// The supported values for SortOrder are ASCENDING and DESCENDING .
 	SortBy *types.SortDefinition
 
@@ -136,25 +158,25 @@ func (c *Client) addOperationGetSavingsPlansCoverageMiddlewares(stack *middlewar
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -169,13 +191,16 @@ func (c *Client) addOperationGetSavingsPlansCoverageMiddlewares(stack *middlewar
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpGetSavingsPlansCoverageValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetSavingsPlansCoverage(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/comprehend/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -45,10 +44,10 @@ type CreateEntityRecognizerInput struct {
 	// This member is required.
 	InputDataConfig *types.EntityRecognizerInputDataConfig
 
-	// You can specify any of the following languages: English ("en"), Spanish ("es"),
-	// French ("fr"), Italian ("it"), German ("de"), or Portuguese ("pt"). If you plan
-	// to use this entity recognizer with PDF, Word, or image input files, you must
-	// specify English as the language. All training documents must be in the same
+	//  You can specify any of the following languages: English ("en"), Spanish
+	// ("es"), French ("fr"), Italian ("it"), German ("de"), or Portuguese ("pt"). If
+	// you plan to use this entity recognizer with PDF, Word, or image input files, you
+	// must specify English as the language. All training documents must be in the same
 	// language.
 	//
 	// This member is required.
@@ -61,27 +60,34 @@ type CreateEntityRecognizerInput struct {
 	// This member is required.
 	RecognizerName *string
 
-	// A unique identifier for the request. If you don't set the client request token,
-	// Amazon Comprehend generates one.
+	//  A unique identifier for the request. If you don't set the client request
+	// token, Amazon Comprehend generates one.
 	ClientRequestToken *string
 
 	// ID for the KMS key that Amazon Comprehend uses to encrypt trained custom
 	// models. The ModelKmsKeyId can be either of the following formats:
+	//
 	//   - KMS Key ID: "1234abcd-12ab-34cd-56ef-1234567890ab"
+	//
 	//   - Amazon Resource Name (ARN) of a KMS Key:
 	//   "arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"
 	ModelKmsKeyId *string
 
 	// The JSON resource-based policy to attach to your custom entity recognizer
 	// model. You can use this policy to allow another Amazon Web Services account to
-	// import your custom model. Provide your JSON as a UTF-8 encoded string without
-	// line breaks. To provide valid JSON for your policy, enclose the attribute names
-	// and values in double quotes. If the JSON body is also enclosed in double quotes,
-	// then you must escape the double quotes that are inside the policy:
-	// "{\"attribute\": \"value\", \"attribute\": [\"value\"]}" To avoid escaping
-	// quotes, you can use single quotes to enclose the policy and double quotes to
-	// enclose the JSON names and values: '{"attribute": "value", "attribute":
-	// ["value"]}'
+	// import your custom model.
+	//
+	// Provide your JSON as a UTF-8 encoded string without line breaks. To provide
+	// valid JSON for your policy, enclose the attribute names and values in double
+	// quotes. If the JSON body is also enclosed in double quotes, then you must escape
+	// the double quotes that are inside the policy:
+	//
+	//     "{\"attribute\": \"value\", \"attribute\": [\"value\"]}"
+	//
+	// To avoid escaping quotes, you can use single quotes to enclose the policy and
+	// double quotes to enclose the JSON names and values:
+	//
+	//     '{"attribute": "value", "attribute": ["value"]}'
 	ModelPolicy *string
 
 	// Tags to associate with the entity recognizer. A tag is a key-value pair that
@@ -100,15 +106,18 @@ type CreateEntityRecognizerInput struct {
 	// Comprehend uses to encrypt data on the storage volume attached to the ML compute
 	// instance(s) that process the analysis job. The VolumeKmsKeyId can be either of
 	// the following formats:
+	//
 	//   - KMS Key ID: "1234abcd-12ab-34cd-56ef-1234567890ab"
+	//
 	//   - Amazon Resource Name (ARN) of a KMS Key:
 	//   "arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"
 	VolumeKmsKeyId *string
 
 	// Configuration parameters for an optional private Virtual Private Cloud (VPC)
 	// containing the resources you are using for your custom entity recognizer. For
-	// more information, see Amazon VPC (https://docs.aws.amazon.com/vpc/latest/userguide/what-is-amazon-vpc.html)
-	// .
+	// more information, see [Amazon VPC].
+	//
+	// [Amazon VPC]: https://docs.aws.amazon.com/vpc/latest/userguide/what-is-amazon-vpc.html
 	VpcConfig *types.VpcConfig
 
 	noSmithyDocumentSerde
@@ -147,25 +156,25 @@ func (c *Client) addOperationCreateEntityRecognizerMiddlewares(stack *middleware
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -180,6 +189,9 @@ func (c *Client) addOperationCreateEntityRecognizerMiddlewares(stack *middleware
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opCreateEntityRecognizerMiddleware(stack, options); err != nil {
 		return err
 	}
@@ -189,7 +201,7 @@ func (c *Client) addOperationCreateEntityRecognizerMiddlewares(stack *middleware
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateEntityRecognizer(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

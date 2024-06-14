@@ -1782,6 +1782,86 @@ func awsRestjson1_serializeOpDocumentPutPolicyInput(v *PutPolicyInput, value smi
 	return nil
 }
 
+type awsRestjson1_serializeOpSearchJobs struct {
+}
+
+func (*awsRestjson1_serializeOpSearchJobs) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpSearchJobs) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*SearchJobsInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/2017-08-29/search")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "GET"
+	var restEncoder *httpbinding.Encoder
+	if request.URL.RawPath == "" {
+		restEncoder, err = httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	} else {
+		request.URL.RawPath = smithyhttp.JoinPath(request.URL.RawPath, opPath)
+		restEncoder, err = httpbinding.NewEncoderWithRawPath(request.URL.Path, request.URL.RawPath, request.URL.RawQuery, request.Header)
+	}
+
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsSearchJobsInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsSearchJobsInput(v *SearchJobsInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.InputFile != nil {
+		encoder.SetQuery("inputFile").String(*v.InputFile)
+	}
+
+	if v.MaxResults != nil {
+		encoder.SetQuery("maxResults").Integer(*v.MaxResults)
+	}
+
+	if v.NextToken != nil {
+		encoder.SetQuery("nextToken").String(*v.NextToken)
+	}
+
+	if len(v.Order) > 0 {
+		encoder.SetQuery("order").String(string(v.Order))
+	}
+
+	if v.Queue != nil {
+		encoder.SetQuery("queue").String(*v.Queue)
+	}
+
+	if len(v.Status) > 0 {
+		encoder.SetQuery("status").String(string(v.Status))
+	}
+
+	return nil
+}
+
 type awsRestjson1_serializeOpTagResource struct {
 }
 
@@ -3658,6 +3738,26 @@ func awsRestjson1_serializeDocumentBurninDestinationSettings(v *types.BurninDest
 		ok.String(string(v.FontColor))
 	}
 
+	if v.FontFileBold != nil {
+		ok := object.Key("fontFileBold")
+		ok.String(*v.FontFileBold)
+	}
+
+	if v.FontFileBoldItalic != nil {
+		ok := object.Key("fontFileBoldItalic")
+		ok.String(*v.FontFileBoldItalic)
+	}
+
+	if v.FontFileItalic != nil {
+		ok := object.Key("fontFileItalic")
+		ok.String(*v.FontFileItalic)
+	}
+
+	if v.FontFileRegular != nil {
+		ok := object.Key("fontFileRegular")
+		ok.String(*v.FontFileRegular)
+	}
+
 	if v.FontOpacity != nil {
 		ok := object.Key("fontOpacity")
 		ok.Integer(*v.FontOpacity)
@@ -4932,6 +5032,26 @@ func awsRestjson1_serializeDocumentDvbSubDestinationSettings(v *types.DvbSubDest
 	if len(v.FontColor) > 0 {
 		ok := object.Key("fontColor")
 		ok.String(string(v.FontColor))
+	}
+
+	if v.FontFileBold != nil {
+		ok := object.Key("fontFileBold")
+		ok.String(*v.FontFileBold)
+	}
+
+	if v.FontFileBoldItalic != nil {
+		ok := object.Key("fontFileBoldItalic")
+		ok.String(*v.FontFileBoldItalic)
+	}
+
+	if v.FontFileItalic != nil {
+		ok := object.Key("fontFileItalic")
+		ok.String(*v.FontFileItalic)
+	}
+
+	if v.FontFileRegular != nil {
+		ok := object.Key("fontFileRegular")
+		ok.String(*v.FontFileRegular)
 	}
 
 	if v.FontOpacity != nil {
@@ -7591,6 +7711,11 @@ func awsRestjson1_serializeDocumentM2tsSettings(v *types.M2tsSettings, value smi
 	if v.PmtPid != nil {
 		ok := object.Key("pmtPid")
 		ok.Integer(*v.PmtPid)
+	}
+
+	if len(v.PreventBufferUnderflow) > 0 {
+		ok := object.Key("preventBufferUnderflow")
+		ok.String(string(v.PreventBufferUnderflow))
 	}
 
 	if v.PrivateMetadataPid != nil {

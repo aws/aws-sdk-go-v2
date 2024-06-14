@@ -6,29 +6,36 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/cloudhsm/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// This is documentation for AWS CloudHSM Classic. For more information, see AWS
-// CloudHSM Classic FAQs (http://aws.amazon.com/cloudhsm/faqs-classic/) , the AWS
-// CloudHSM Classic User Guide (https://docs.aws.amazon.com/cloudhsm/classic/userguide/)
-// , and the AWS CloudHSM Classic API Reference (https://docs.aws.amazon.com/cloudhsm/classic/APIReference/)
-// . For information about the current version of AWS CloudHSM, see AWS CloudHSM (http://aws.amazon.com/cloudhsm/)
-// , the AWS CloudHSM User Guide (https://docs.aws.amazon.com/cloudhsm/latest/userguide/)
-// , and the AWS CloudHSM API Reference (https://docs.aws.amazon.com/cloudhsm/latest/APIReference/)
-// . Creates an uninitialized HSM instance. There is an upfront fee charged for
-// each HSM instance that you create with the CreateHsm operation. If you
-// accidentally provision an HSM and want to request a refund, delete the instance
-// using the DeleteHsm operation, go to the AWS Support Center (https://console.aws.amazon.com/support/home)
-// , create a new case, and select Account and Billing Support. It can take up to
-// 20 minutes to create and provision an HSM. You can monitor the status of the HSM
-// with the DescribeHsm operation. The HSM is ready to be initialized when the
-// status changes to RUNNING .
+// This is documentation for AWS CloudHSM Classic. For more information, see [AWS CloudHSM Classic FAQs], the [AWS CloudHSM Classic User Guide]
+// , and the [AWS CloudHSM Classic API Reference].
+//
+// For information about the current version of AWS CloudHSM, see [AWS CloudHSM], the [AWS CloudHSM User Guide], and the [AWS CloudHSM API Reference].
+//
+// Creates an uninitialized HSM instance.
+//
+// There is an upfront fee charged for each HSM instance that you create with the
+// CreateHsm operation. If you accidentally provision an HSM and want to request a
+// refund, delete the instance using the DeleteHsmoperation, go to the [AWS Support Center], create a new case,
+// and select Account and Billing Support.
+//
+// It can take up to 20 minutes to create and provision an HSM. You can monitor
+// the status of the HSM with the DescribeHsmoperation. The HSM is ready to be initialized
+// when the status changes to RUNNING .
 //
 // Deprecated: This API is deprecated.
+//
+// [AWS CloudHSM User Guide]: https://docs.aws.amazon.com/cloudhsm/latest/userguide/
+// [AWS CloudHSM Classic FAQs]: http://aws.amazon.com/cloudhsm/faqs-classic/
+// [AWS CloudHSM]: http://aws.amazon.com/cloudhsm/
+// [AWS CloudHSM API Reference]: https://docs.aws.amazon.com/cloudhsm/latest/APIReference/
+// [AWS CloudHSM Classic User Guide]: https://docs.aws.amazon.com/cloudhsm/classic/userguide/
+// [AWS CloudHSM Classic API Reference]: https://docs.aws.amazon.com/cloudhsm/classic/APIReference/
+// [AWS Support Center]: https://console.aws.amazon.com/support/home
 func (c *Client) CreateHsm(ctx context.Context, params *CreateHsmInput, optFns ...func(*Options)) (*CreateHsmOutput, error) {
 	if params == nil {
 		params = &CreateHsmInput{}
@@ -64,7 +71,9 @@ type CreateHsmInput struct {
 	SubnetId *string
 
 	// Specifies the type of subscription for the HSM.
+	//
 	//   - PRODUCTION - The HSM is being used in a production environment.
+	//
 	//   - TRIAL - The HSM is being used in a product trial.
 	//
 	// This member is required.
@@ -74,8 +83,10 @@ type CreateHsmInput struct {
 	// with the same token will be ignored.
 	ClientToken *string
 
-	// The IP address to assign to the HSM's ENI. If an IP address is not specified,
-	// an IP address will be randomly chosen from the CIDR range of the subnet.
+	// The IP address to assign to the HSM's ENI.
+	//
+	// If an IP address is not specified, an IP address will be randomly chosen from
+	// the CIDR range of the subnet.
 	EniIp *string
 
 	// The external ID from IamRoleArn , if present.
@@ -122,25 +133,25 @@ func (c *Client) addOperationCreateHsmMiddlewares(stack *middleware.Stack, optio
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -155,13 +166,16 @@ func (c *Client) addOperationCreateHsmMiddlewares(stack *middleware.Stack, optio
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpCreateHsmValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateHsm(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

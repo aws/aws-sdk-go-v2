@@ -6,14 +6,15 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/iotsitewise/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates an asset's name. For more information, see Updating assets and models (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/update-assets-and-models.html)
-// in the IoT SiteWise User Guide.
+// Updates an asset's name. For more information, see [Updating assets and models] in the IoT SiteWise User
+// Guide.
+//
+// [Updating assets and models]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/update-assets-and-models.html
 func (c *Client) UpdateAsset(ctx context.Context, params *UpdateAssetInput, optFns ...func(*Options)) (*UpdateAssetOutput, error) {
 	if params == nil {
 		params = &UpdateAssetInput{}
@@ -33,8 +34,9 @@ type UpdateAssetInput struct {
 
 	// The ID of the asset to update. This can be either the actual ID in UUID format,
 	// or else externalId: followed by the external ID, if it has one. For more
-	// information, see Referencing objects with external IDs (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/object-ids.html#external-id-references)
-	// in the IoT SiteWise User Guide.
+	// information, see [Referencing objects with external IDs]in the IoT SiteWise User Guide.
+	//
+	// [Referencing objects with external IDs]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/object-ids.html#external-id-references
 	//
 	// This member is required.
 	AssetId *string
@@ -49,8 +51,9 @@ type UpdateAssetInput struct {
 
 	// An external ID to assign to the asset. The asset must not already have an
 	// external ID. The external ID must be unique within your Amazon Web Services
-	// account. For more information, see Using external IDs (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/object-ids.html#external-ids)
-	// in the IoT SiteWise User Guide.
+	// account. For more information, see [Using external IDs]in the IoT SiteWise User Guide.
+	//
+	// [Using external IDs]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/object-ids.html#external-ids
 	AssetExternalId *string
 
 	// A unique case-sensitive identifier that you can provide to ensure the
@@ -97,25 +100,25 @@ func (c *Client) addOperationUpdateAssetMiddlewares(stack *middleware.Stack, opt
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -130,6 +133,9 @@ func (c *Client) addOperationUpdateAssetMiddlewares(stack *middleware.Stack, opt
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addEndpointPrefix_opUpdateAssetMiddleware(stack); err != nil {
 		return err
 	}
@@ -142,7 +148,7 @@ func (c *Client) addOperationUpdateAssetMiddlewares(stack *middleware.Stack, opt
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateAsset(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

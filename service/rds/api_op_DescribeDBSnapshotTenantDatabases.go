@@ -6,17 +6,17 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/rds/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Describes the tenant databases that exist in a DB snapshot. This command only
-// applies to RDS for Oracle DB instances in the multi-tenant configuration. You
-// can use this command to inspect the tenant databases within a snapshot before
-// restoring it. You can't directly interact with the tenant databases in a DB
-// snapshot. If you restore a snapshot that was taken from DB instance using the
+// applies to RDS for Oracle DB instances in the multi-tenant configuration.
+//
+// You can use this command to inspect the tenant databases within a snapshot
+// before restoring it. You can't directly interact with the tenant databases in a
+// DB snapshot. If you restore a snapshot that was taken from DB instance using the
 // multi-tenant configuration, you restore all its tenant databases.
 func (c *Client) DescribeDBSnapshotTenantDatabases(ctx context.Context, params *DescribeDBSnapshotTenantDatabasesInput, optFns ...func(*Options)) (*DescribeDBSnapshotTenantDatabasesOutput, error) {
 	if params == nil {
@@ -36,33 +36,47 @@ func (c *Client) DescribeDBSnapshotTenantDatabases(ctx context.Context, params *
 type DescribeDBSnapshotTenantDatabasesInput struct {
 
 	// The ID of the DB instance used to create the DB snapshots. This parameter isn't
-	// case-sensitive. Constraints:
+	// case-sensitive.
+	//
+	// Constraints:
+	//
 	//   - If supplied, must match the identifier of an existing DBInstance .
 	DBInstanceIdentifier *string
 
 	// The ID of a DB snapshot that contains the tenant databases to describe. This
-	// value is stored as a lowercase string. Constraints:
+	// value is stored as a lowercase string.
+	//
+	// Constraints:
+	//
 	//   - If you specify this parameter, the value must match the ID of an existing
 	//   DB snapshot.
+	//
 	//   - If you specify an automatic snapshot, you must also specify SnapshotType .
 	DBSnapshotIdentifier *string
 
 	// A specific DB resource identifier to describe.
 	DbiResourceId *string
 
-	// A filter that specifies one or more tenant databases to describe. Supported
-	// filters:
+	// A filter that specifies one or more tenant databases to describe.
+	//
+	// Supported filters:
+	//
 	//   - tenant-db-name - Tenant database names. The results list only includes
 	//   information about the tenant databases that match these tenant DB names.
+	//
 	//   - tenant-database-resource-id - Tenant database resource identifiers. The
 	//   results list only includes information about the tenant databases contained
 	//   within the DB snapshots.
+	//
 	//   - dbi-resource-id - DB instance resource identifiers. The results list only
 	//   includes information about snapshots containing tenant databases contained
 	//   within the DB instances identified by these resource identifiers.
+	//
 	//   - db-instance-id - Accepts DB instance identifiers and DB instance Amazon
 	//   Resource Names (ARNs).
+	//
 	//   - db-snapshot-id - Accepts DB snapshot identifiers.
+	//
 	//   - snapshot-type - Accepts types of DB snapshots.
 	Filters []types.Filter
 
@@ -79,13 +93,18 @@ type DescribeDBSnapshotTenantDatabasesInput struct {
 
 	// The type of DB snapshots to be returned. You can specify one of the following
 	// values:
+	//
 	//   - automated – All DB snapshots that have been automatically taken by Amazon
 	//   RDS for my Amazon Web Services account.
+	//
 	//   - manual – All DB snapshots that have been taken by my Amazon Web Services
 	//   account.
+	//
 	//   - shared – All manual DB snapshots that have been shared to my Amazon Web
 	//   Services account.
+	//
 	//   - public – All DB snapshots that have been marked as public.
+	//
 	//   - awsbackup – All DB snapshots managed by the Amazon Web Services Backup
 	//   service.
 	SnapshotType *string
@@ -131,25 +150,25 @@ func (c *Client) addOperationDescribeDBSnapshotTenantDatabasesMiddlewares(stack 
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -164,13 +183,16 @@ func (c *Client) addOperationDescribeDBSnapshotTenantDatabasesMiddlewares(stack 
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDescribeDBSnapshotTenantDatabasesValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeDBSnapshotTenantDatabases(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

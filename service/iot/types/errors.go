@@ -674,7 +674,8 @@ func (e *SqlParseException) ErrorCode() string {
 }
 func (e *SqlParseException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// This exception occurs if you attempt to start a task with the same task-id as
+//	This exception occurs if you attempt to start a task with the same task-id as
+//
 // an existing task but with a different clientRequestToken.
 type TaskAlreadyExistsException struct {
 	Message *string

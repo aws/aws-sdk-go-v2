@@ -164,6 +164,32 @@ func (e *NotFoundException) ErrorCode() string {
 }
 func (e *NotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// The requested resource can't be found.
+type ResourceNotFoundException struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *ResourceNotFoundException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *ResourceNotFoundException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *ResourceNotFoundException) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "ResourceNotFoundException"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
 // You've made too many requests exceeding service quotas.
 type ThrottlingException struct {
 	Message *string

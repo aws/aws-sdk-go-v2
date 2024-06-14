@@ -6,20 +6,21 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/pinpointsmsvoicev2/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Describes the specified opted out destination numbers or all opted out
-// destination numbers in an opt-out list. If you specify opted out numbers, the
-// output includes information for only the specified opted out numbers. If you
-// specify filters, the output includes information for only those opted out
-// numbers that meet the filter criteria. If you don't specify opted out numbers or
-// filters, the output includes information for all opted out destination numbers
-// in your opt-out list. If you specify an opted out number that isn't valid, an
-// error is returned.
+// destination numbers in an opt-out list.
+//
+// If you specify opted out numbers, the output includes information for only the
+// specified opted out numbers. If you specify filters, the output includes
+// information for only those opted out numbers that meet the filter criteria. If
+// you don't specify opted out numbers or filters, the output includes information
+// for all opted out destination numbers in your opt-out list.
+//
+// If you specify an opted out number that isn't valid, an error is returned.
 func (c *Client) DescribeOptedOutNumbers(ctx context.Context, params *DescribeOptedOutNumbersInput, optFns ...func(*Options)) (*DescribeOptedOutNumbersOutput, error) {
 	if params == nil {
 		params = &DescribeOptedOutNumbersInput{}
@@ -37,8 +38,8 @@ func (c *Client) DescribeOptedOutNumbers(ctx context.Context, params *DescribeOp
 
 type DescribeOptedOutNumbersInput struct {
 
-	// The OptOutListName or OptOutListArn of the OptOutList. You can use
-	// DescribeOptOutLists to find the values for OptOutListName and OptOutListArn.
+	// The OptOutListName or OptOutListArn of the OptOutList. You can use DescribeOptOutLists to find the
+	// values for OptOutListName and OptOutListArn.
 	//
 	// This member is required.
 	OptOutListName *string
@@ -103,25 +104,25 @@ func (c *Client) addOperationDescribeOptedOutNumbersMiddlewares(stack *middlewar
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -136,13 +137,16 @@ func (c *Client) addOperationDescribeOptedOutNumbersMiddlewares(stack *middlewar
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDescribeOptedOutNumbersValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeOptedOutNumbers(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

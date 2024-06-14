@@ -6,17 +6,17 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/pinpointsmsvoicev2/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
-// Deletes an existing configuration set. A configuration set is a set of rules
-// that you apply to voice and SMS messages that you send. In a configuration set,
-// you can specify a destination for specific types of events related to voice and
-// SMS messages.
+// Deletes an existing configuration set.
+//
+// A configuration set is a set of rules that you apply to voice and SMS messages
+// that you send. In a configuration set, you can specify a destination for
+// specific types of events related to voice and SMS messages.
 func (c *Client) DeleteConfigurationSet(ctx context.Context, params *DeleteConfigurationSetInput, optFns ...func(*Options)) (*DeleteConfigurationSetOutput, error) {
 	if params == nil {
 		params = &DeleteConfigurationSetInput{}
@@ -35,8 +35,8 @@ func (c *Client) DeleteConfigurationSet(ctx context.Context, params *DeleteConfi
 type DeleteConfigurationSetInput struct {
 
 	// The name of the configuration set or the configuration set ARN that you want to
-	// delete. The ConfigurationSetName and ConfigurationSetArn can be found using the
-	// DescribeConfigurationSets action.
+	// delete. The ConfigurationSetName and ConfigurationSetArn can be found using the DescribeConfigurationSets
+	// action.
 	//
 	// This member is required.
 	ConfigurationSetName *string
@@ -52,8 +52,9 @@ type DeleteConfigurationSetOutput struct {
 	// The name of the deleted configuration set.
 	ConfigurationSetName *string
 
-	// The time that the deleted configuration set was created in UNIX epoch time (https://www.epochconverter.com/)
-	// format.
+	// The time that the deleted configuration set was created in [UNIX epoch time] format.
+	//
+	// [UNIX epoch time]: https://www.epochconverter.com/
 	CreatedTimestamp *time.Time
 
 	// The default message type of the configuration set that was deleted.
@@ -94,25 +95,25 @@ func (c *Client) addOperationDeleteConfigurationSetMiddlewares(stack *middleware
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -127,13 +128,16 @@ func (c *Client) addOperationDeleteConfigurationSetMiddlewares(stack *middleware
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDeleteConfigurationSetValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteConfigurationSet(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

@@ -6,21 +6,24 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Modifies the set of security groups in effect for a mount target. When you
-// create a mount target, Amazon EFS also creates a new network interface. For more
-// information, see CreateMountTarget . This operation replaces the security groups
-// in effect for the network interface associated with a mount target, with the
-// SecurityGroups provided in the request. This operation requires that the network
-// interface of the mount target has been created and the lifecycle state of the
-// mount target is not deleted . The operation requires permissions for the
-// following actions:
+// Modifies the set of security groups in effect for a mount target.
+//
+// When you create a mount target, Amazon EFS also creates a new network
+// interface. For more information, see CreateMountTarget. This operation replaces the security
+// groups in effect for the network interface associated with a mount target, with
+// the SecurityGroups provided in the request. This operation requires that the
+// network interface of the mount target has been created and the lifecycle state
+// of the mount target is not deleted .
+//
+// The operation requires permissions for the following actions:
+//
 //   - elasticfilesystem:ModifyMountTargetSecurityGroups action on the mount
 //     target's file system.
+//
 //   - ec2:ModifyNetworkInterfaceAttribute action on the mount target's network
 //     interface.
 func (c *Client) ModifyMountTargetSecurityGroups(ctx context.Context, params *ModifyMountTargetSecurityGroupsInput, optFns ...func(*Options)) (*ModifyMountTargetSecurityGroupsOutput, error) {
@@ -80,25 +83,25 @@ func (c *Client) addOperationModifyMountTargetSecurityGroupsMiddlewares(stack *m
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -113,13 +116,16 @@ func (c *Client) addOperationModifyMountTargetSecurityGroupsMiddlewares(stack *m
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpModifyMountTargetSecurityGroupsValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opModifyMountTargetSecurityGroups(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

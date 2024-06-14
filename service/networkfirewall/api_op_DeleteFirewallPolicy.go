@@ -6,13 +6,12 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/networkfirewall/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes the specified FirewallPolicy .
+// Deletes the specified FirewallPolicy.
 func (c *Client) DeleteFirewallPolicy(ctx context.Context, params *DeleteFirewallPolicyInput, optFns ...func(*Options)) (*DeleteFirewallPolicyOutput, error) {
 	if params == nil {
 		params = &DeleteFirewallPolicyInput{}
@@ -30,13 +29,15 @@ func (c *Client) DeleteFirewallPolicy(ctx context.Context, params *DeleteFirewal
 
 type DeleteFirewallPolicyInput struct {
 
-	// The Amazon Resource Name (ARN) of the firewall policy. You must specify the ARN
-	// or the name, and you can specify both.
+	// The Amazon Resource Name (ARN) of the firewall policy.
+	//
+	// You must specify the ARN or the name, and you can specify both.
 	FirewallPolicyArn *string
 
 	// The descriptive name of the firewall policy. You can't change the name of a
-	// firewall policy after you create it. You must specify the ARN or the name, and
-	// you can specify both.
+	// firewall policy after you create it.
+	//
+	// You must specify the ARN or the name, and you can specify both.
 	FirewallPolicyName *string
 
 	noSmithyDocumentSerde
@@ -44,8 +45,7 @@ type DeleteFirewallPolicyInput struct {
 
 type DeleteFirewallPolicyOutput struct {
 
-	// The object containing the definition of the FirewallPolicyResponse that you
-	// asked to delete.
+	// The object containing the definition of the FirewallPolicyResponse that you asked to delete.
 	//
 	// This member is required.
 	FirewallPolicyResponse *types.FirewallPolicyResponse
@@ -78,25 +78,25 @@ func (c *Client) addOperationDeleteFirewallPolicyMiddlewares(stack *middleware.S
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -111,10 +111,13 @@ func (c *Client) addOperationDeleteFirewallPolicyMiddlewares(stack *middleware.S
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteFirewallPolicy(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

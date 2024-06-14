@@ -141,6 +141,9 @@
                     "target": "com.amazonaws.personalize#CreateCampaign"
                 },
                 {
+                    "target": "com.amazonaws.personalize#CreateDataDeletionJob"
+                },
+                {
                     "target": "com.amazonaws.personalize#CreateDataset"
                 },
                 {
@@ -213,6 +216,9 @@
                     "target": "com.amazonaws.personalize#DescribeCampaign"
                 },
                 {
+                    "target": "com.amazonaws.personalize#DescribeDataDeletionJob"
+                },
+                {
                     "target": "com.amazonaws.personalize#DescribeDataset"
                 },
                 {
@@ -262,6 +268,9 @@
                 },
                 {
                     "target": "com.amazonaws.personalize#ListCampaigns"
+                },
+                {
+                    "target": "com.amazonaws.personalize#ListDataDeletionJobs"
                 },
                 {
                     "target": "com.amazonaws.personalize#ListDatasetExportJobs"
@@ -1163,6 +1172,20 @@
                 "smithy.api#documentation": "<p>When the solution performs AutoML (<code>performAutoML</code> is true in\n      <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_CreateSolution.html\">CreateSolution</a>), specifies the recipe that best optimized the\n      specified metric.</p>"
             }
         },
+        "com.amazonaws.personalize#AutoTrainingConfig": {
+            "type": "structure",
+            "members": {
+                "schedulingExpression": {
+                    "target": "com.amazonaws.personalize#SchedulingExpression",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies how often to automatically train new solution versions. Specify a rate expression in rate(<i>value</i>\n            <i>unit</i>) format.\n      For value, specify a number between 1 and 30. For unit, specify <code>day</code> or <code>days</code>.\n      For example, to automatically create a new solution version every 5 days, specify <code>rate(5 days)</code>. The default is every 7 days.</p>\n         <p>For more information about auto training, see <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/customizing-solution-config.html\">Creating and configuring a solution</a>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The automatic training configuration to use when <code>performAutoTraining</code> is true.</p>"
+            }
+        },
         "com.amazonaws.personalize#AvroSchema": {
             "type": "string",
             "traits": {
@@ -1590,7 +1613,7 @@
                 "solutionVersionArn": {
                     "target": "com.amazonaws.personalize#Arn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of a specific version of the solution.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the solution version the campaign uses.</p>"
                     }
                 },
                 "minProvisionedTPS": {
@@ -1650,6 +1673,12 @@
                     "target": "com.amazonaws.personalize#Boolean",
                     "traits": {
                         "smithy.api#documentation": "<p>Whether metadata with recommendations is enabled for the campaign. \n      If enabled, you can specify the columns from your Items dataset in your request for recommendations. Amazon Personalize returns this data for each item in the recommendation response.\n    For information about enabling metadata for a campaign, see <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/campaigns.html#create-campaign-return-metadata\">Enabling metadata in recommendations for a campaign</a>.</p>\n         <p>\n      If you enable metadata in recommendations, you will incur additional costs. For more information, see <a href=\"https://aws.amazon.com/personalize/pricing/\">Amazon Personalize pricing</a>.\n    </p>"
+                    }
+                },
+                "syncWithLatestSolutionVersion": {
+                    "target": "com.amazonaws.personalize#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Whether the campaign automatically updates to use the latest solution version (trained model) of a solution. If you specify <code>True</code>, \n      you must specify the ARN of your <i>solution</i> for the <code>SolutionVersionArn</code> parameter. It must be in <code>SolutionArn/$LATEST</code> format.\n      The default is <code>False</code> and you must manually update the campaign to deploy the latest solution version. \n    </p>\n         <p>\n      For more information about automatic campaign updates, see \n      <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/campaigns.html#create-campaign-automatic-latest-sv-update\">Enabling automatic campaign updates</a>.\n    </p>"
                     }
                 }
             },
@@ -2153,7 +2182,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a campaign that deploys a solution version. When a client calls the\n      <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_RS_GetRecommendations.html\">GetRecommendations</a>\n      and\n      <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_RS_GetPersonalizedRanking.html\">GetPersonalizedRanking</a>\n      APIs, a campaign is specified in the request.</p>\n         <p>\n            <b>Minimum Provisioned TPS and Auto-Scaling</b>\n         </p>\n         <important>\n            <p> A high <code>minProvisionedTPS</code> will increase your cost. We recommend starting with 1 for <code>minProvisionedTPS</code> (the default). Track\n        your usage using Amazon CloudWatch metrics, and increase the <code>minProvisionedTPS</code>\n        as necessary.</p>\n         </important>\n         <p>\n      When you create an Amazon Personalize campaign, you can specify the minimum provisioned transactions per second\n      (<code>minProvisionedTPS</code>) for the campaign. This is the baseline transaction throughput for the campaign provisioned by\n      Amazon Personalize. It sets the minimum billing charge for the campaign while it is active. A transaction is a single <code>GetRecommendations</code> or\n      <code>GetPersonalizedRanking</code> request. The default <code>minProvisionedTPS</code> is 1.</p>\n         <p> If your TPS increases beyond the <code>minProvisionedTPS</code>, Amazon Personalize auto-scales the provisioned capacity up\n      and down, but never below <code>minProvisionedTPS</code>. \n      There's a short time delay while the capacity is increased\n      that might cause loss of transactions. When your traffic reduces, capacity returns to the <code>minProvisionedTPS</code>.\n    </p>\n         <p>You are charged for the\n      the minimum provisioned TPS or, if your requests exceed the <code>minProvisionedTPS</code>, the actual TPS. \n      The actual TPS is the total number of recommendation requests you make.\n      We recommend starting with a low <code>minProvisionedTPS</code>, track\n      your usage using Amazon CloudWatch metrics, and then increase the <code>minProvisionedTPS</code> as necessary.</p>\n         <p>For more information about campaign costs, see <a href=\"https://aws.amazon.com/personalize/pricing/\">Amazon Personalize pricing</a>.</p>\n         <p>\n            <b>Status</b>\n         </p>\n         <p>A campaign can be in one of the following states:</p>\n         <ul>\n            <li>\n               <p>CREATE PENDING > CREATE IN_PROGRESS > ACTIVE -or- CREATE FAILED</p>\n            </li>\n            <li>\n               <p>DELETE PENDING > DELETE IN_PROGRESS</p>\n            </li>\n         </ul>\n         <p>To get the campaign status, call <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_DescribeCampaign.html\">DescribeCampaign</a>.</p>\n         <note>\n            <p>Wait until the <code>status</code> of the campaign\n        is <code>ACTIVE</code> before asking the campaign for recommendations.</p>\n         </note>\n         <p class=\"title\">\n            <b>Related APIs</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_ListCampaigns.html\">ListCampaigns</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_DescribeCampaign.html\">DescribeCampaign</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_UpdateCampaign.html\">UpdateCampaign</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_DeleteCampaign.html\">DeleteCampaign</a>\n               </p>\n            </li>\n         </ul>",
+                "smithy.api#documentation": "<important>\n            <p> You incur campaign costs while it is active. To avoid unnecessary costs, make sure to delete the campaign when you are finished. For information about campaign\n        costs, see <a href=\"https://aws.amazon.com/personalize/pricing/\">Amazon Personalize pricing</a>.</p>\n         </important>\n         <p>Creates a campaign that deploys a solution version. When a client calls the\n      <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_RS_GetRecommendations.html\">GetRecommendations</a>\n      and\n      <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_RS_GetPersonalizedRanking.html\">GetPersonalizedRanking</a>\n      APIs, a campaign is specified in the request.</p>\n         <p>\n            <b>Minimum Provisioned TPS and Auto-Scaling</b>\n         </p>\n         <important>\n            <p> A high <code>minProvisionedTPS</code> will increase your cost. We recommend starting with 1 for <code>minProvisionedTPS</code> (the default). Track\n        your usage using Amazon CloudWatch metrics, and increase the <code>minProvisionedTPS</code>\n        as necessary.</p>\n         </important>\n         <p>\n      When you create an Amazon Personalize campaign, you can specify the minimum provisioned transactions per second\n      (<code>minProvisionedTPS</code>) for the campaign. This is the baseline transaction throughput for the campaign provisioned by\n      Amazon Personalize. It sets the minimum billing charge for the campaign while it is active. A transaction is a single <code>GetRecommendations</code> or\n      <code>GetPersonalizedRanking</code> request. The default <code>minProvisionedTPS</code> is 1.</p>\n         <p> If your TPS increases beyond the <code>minProvisionedTPS</code>, Amazon Personalize auto-scales the provisioned capacity up\n      and down, but never below <code>minProvisionedTPS</code>. \n      There's a short time delay while the capacity is increased\n      that might cause loss of transactions. When your traffic reduces, capacity returns to the <code>minProvisionedTPS</code>.\n    </p>\n         <p>You are charged for the\n      the minimum provisioned TPS or, if your requests exceed the <code>minProvisionedTPS</code>, the actual TPS. \n      The actual TPS is the total number of recommendation requests you make.\n      We recommend starting with a low <code>minProvisionedTPS</code>, track\n      your usage using Amazon CloudWatch metrics, and then increase the <code>minProvisionedTPS</code> as necessary.</p>\n         <p>For more information about campaign costs, see <a href=\"https://aws.amazon.com/personalize/pricing/\">Amazon Personalize pricing</a>.</p>\n         <p>\n            <b>Status</b>\n         </p>\n         <p>A campaign can be in one of the following states:</p>\n         <ul>\n            <li>\n               <p>CREATE PENDING > CREATE IN_PROGRESS > ACTIVE -or- CREATE FAILED</p>\n            </li>\n            <li>\n               <p>DELETE PENDING > DELETE IN_PROGRESS</p>\n            </li>\n         </ul>\n         <p>To get the campaign status, call <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_DescribeCampaign.html\">DescribeCampaign</a>.</p>\n         <note>\n            <p>Wait until the <code>status</code> of the campaign\n        is <code>ACTIVE</code> before asking the campaign for recommendations.</p>\n         </note>\n         <p class=\"title\">\n            <b>Related APIs</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_ListCampaigns.html\">ListCampaigns</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_DescribeCampaign.html\">DescribeCampaign</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_UpdateCampaign.html\">UpdateCampaign</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_DeleteCampaign.html\">DeleteCampaign</a>\n               </p>\n            </li>\n         </ul>",
                 "smithy.api#idempotent": {}
             }
         },
@@ -2170,7 +2199,7 @@
                 "solutionVersionArn": {
                     "target": "com.amazonaws.personalize#Arn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the solution version to deploy.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the trained model to deploy with the campaign. To specify the latest solution version of your solution, \n      specify the ARN of your <i>solution</i> in <code>SolutionArn/$LATEST</code> format.\n      You must use this format if you set <code>syncWithLatestSolutionVersion</code> to <code>True</code> in the \n      <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_CampaignConfig.html\">CampaignConfig</a>.\n    </p>\n         <p>\n      To deploy a model that isn't the latest solution version of your solution, specify the ARN of the solution version.\n    </p>\n         <p>\n      For more information about automatic campaign updates, see \n      <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/campaigns.html#create-campaign-automatic-latest-sv-update\">Enabling automatic campaign updates</a>.\n    </p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -2204,6 +2233,94 @@
                     "target": "com.amazonaws.personalize#Arn",
                     "traits": {
                         "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the campaign.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.personalize#CreateDataDeletionJob": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.personalize#CreateDataDeletionJobRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.personalize#CreateDataDeletionJobResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.personalize#InvalidInputException"
+                },
+                {
+                    "target": "com.amazonaws.personalize#LimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.personalize#ResourceAlreadyExistsException"
+                },
+                {
+                    "target": "com.amazonaws.personalize#ResourceInUseException"
+                },
+                {
+                    "target": "com.amazonaws.personalize#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.personalize#TooManyTagsException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates a batch job that deletes all\n      references to specific users from an Amazon Personalize dataset group in batches. You specify the users to delete in a CSV file of userIds in \n      an Amazon S3 bucket. After a job completes, Amazon Personalize no longer trains\n      on the users’ data and no longer considers the users when generating user segments. \n      For more information about creating a data deletion job, see <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/delete-records.html\">Deleting users</a>.</p>\n         <ul>\n            <li>\n               <p>Your input file must be a CSV file with a single USER_ID column that lists the users IDs. For more information\n          about preparing the CSV file, see <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/prepare-deletion-input-file.html\">Preparing your data deletion file and uploading it to Amazon S3</a>.</p>\n            </li>\n            <li>\n               <p>To give Amazon Personalize permission to access your input CSV file of userIds, you must specify an IAM service role that has permission to\n          read from the data source. This role \n          needs <code>GetObject</code> and <code>ListBucket</code> permissions for the bucket and its content.\n          These permissions are the same as importing data. For information on granting access to your Amazon S3\n          bucket, see <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/granting-personalize-s3-access.html\">Giving\n            Amazon Personalize Access to Amazon S3 Resources</a>. </p>\n            </li>\n         </ul>\n         <p>\n      After you create a job, it can take up to a day to delete all references to the users from datasets and models. Until the job completes, \n      Amazon Personalize continues to use the data when training. And if you use a User Segmentation recipe, the users might appear in user segments. \n    </p>\n         <p>\n            <b>Status</b>\n         </p>\n         <p>A data deletion job can have one of the following statuses:</p>\n         <ul>\n            <li>\n               <p>PENDING > IN_PROGRESS > COMPLETED -or- FAILED</p>\n            </li>\n         </ul>\n         <p>To get the status of the data deletion job, call <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_DescribeDataDeletionJob.html\">DescribeDataDeletionJob</a> API operation and specify the Amazon Resource Name\n      (ARN) of the job. If the status is FAILED, the response\n      includes a <code>failureReason</code> key, which describes why the job\n      failed.</p>\n         <p class=\"title\">\n            <b>Related APIs</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_ListDataDeletionJobs.html\">ListDataDeletionJobs</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_DescribeDataDeletionJob.html\">DescribeDataDeletionJob</a>\n               </p>\n            </li>\n         </ul>"
+            }
+        },
+        "com.amazonaws.personalize#CreateDataDeletionJobRequest": {
+            "type": "structure",
+            "members": {
+                "jobName": {
+                    "target": "com.amazonaws.personalize#Name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name for the data deletion job.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "datasetGroupArn": {
+                    "target": "com.amazonaws.personalize#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the dataset group that has the datasets you want to\n    delete records from.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "dataSource": {
+                    "target": "com.amazonaws.personalize#DataSource",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon S3 bucket that contains the list of userIds of the users to delete.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "roleArn": {
+                    "target": "com.amazonaws.personalize#RoleArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the IAM role that has permissions to read from the Amazon S3\n      data source.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.personalize#Tags",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/tagging-resources.html\">tags</a> to apply to the data deletion job.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.personalize#CreateDataDeletionJobResponse": {
+            "type": "structure",
+            "members": {
+                "dataDeletionJobArn": {
+                    "target": "com.amazonaws.personalize#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the data deletion job.</p>"
                     }
                 }
             },
@@ -3001,7 +3118,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates the configuration for training a model. A trained model is known as\n      a solution version. After the configuration is created, you train the model (create a solution version)\n      by calling the <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_CreateSolutionVersion.html\">CreateSolutionVersion</a> operation. Every time you call\n      <code>CreateSolutionVersion</code>, a new version of the solution is created.</p>\n         <p>After creating a solution version, you check its accuracy by calling\n      <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_GetSolutionMetrics.html\">GetSolutionMetrics</a>. When you are satisfied with the version, you\n      deploy it using <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_CreateCampaign.html\">CreateCampaign</a>. The campaign provides recommendations\n      to a client through the\n      <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_RS_GetRecommendations.html\">GetRecommendations</a> API.</p>\n         <p>To train a model, Amazon Personalize requires training data and a recipe. The training data\n      comes from the dataset group that you provide in the request. A recipe specifies\n      the training algorithm and a feature transformation. You can specify one of the predefined\n      recipes provided by Amazon Personalize. </p>\n         <note>\n            <p>Amazon Personalize doesn't support configuring the <code>hpoObjective</code> \n        for solution hyperparameter optimization at this time.</p>\n         </note>\n         <p>\n            <b>Status</b>\n         </p>\n         <p>A solution can be in one of the following states:</p>\n         <ul>\n            <li>\n               <p>CREATE PENDING > CREATE IN_PROGRESS > ACTIVE -or- CREATE FAILED</p>\n            </li>\n            <li>\n               <p>DELETE PENDING > DELETE IN_PROGRESS</p>\n            </li>\n         </ul>\n         <p>To get the status of the solution, call <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_DescribeSolution.html\">DescribeSolution</a>. Wait\n      until the status shows as ACTIVE before calling <code>CreateSolutionVersion</code>.</p>\n         <p class=\"title\">\n            <b>Related APIs</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_ListSolutions.html\">ListSolutions</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_CreateSolutionVersion.html\">CreateSolutionVersion</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_DescribeSolution.html\">DescribeSolution</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_DeleteSolution.html\">DeleteSolution</a>\n               </p>\n            </li>\n         </ul>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_ListSolutionVersions.html\">ListSolutionVersions</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_DescribeSolutionVersion.html\">DescribeSolutionVersion</a>\n               </p>\n            </li>\n         </ul>"
+                "smithy.api#documentation": "<important>\n            <p>After you create a solution, you can’t change its configuration. By default, all new solutions use automatic training. With automatic training, you incur training costs while\n           your solution is active. You can't stop automatic training for a solution. To avoid unnecessary costs, make sure to delete the solution when you are finished. For information about training\n  costs, see <a href=\"https://aws.amazon.com/personalize/pricing/\">Amazon Personalize pricing</a>.</p>\n         </important>\n         <p>Creates the configuration for training a model (creating a solution version). This configuration\n      includes the recipe to use for model training and optional training configuration, such as columns to use\n      in training and feature transformation parameters. For more information about configuring a solution, see <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/customizing-solution-config.html\">Creating and configuring a solution</a>.\n    </p>\n         <p>\n      By default, new solutions use automatic training to create solution versions every 7 days. You can change the training frequency.\n      Automatic solution version creation starts one hour after the solution is ACTIVE. If you manually create a solution version within\n      the hour, the solution skips the first automatic training. For more information,\n        see <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/solution-config-auto-training.html\">Configuring automatic training</a>.</p>\n         <p>\n      To turn off automatic training, set <code>performAutoTraining</code> to false. If you turn off automatic training, you must manually create a solution version\n      by calling the <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_CreateSolutionVersion.html\">CreateSolutionVersion</a> operation.</p>\n         <p>After training starts, you can\n        get the solution version's Amazon Resource Name (ARN) with the <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_ListSolutionVersions.html\">ListSolutionVersions</a> API operation. \n        To get its status, use the <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_DescribeSolutionVersion.html\">DescribeSolutionVersion</a>.\n      </p>\n         <p>After training completes you can evaluate model accuracy by calling\n      <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_GetSolutionMetrics.html\">GetSolutionMetrics</a>. When you are satisfied with the solution version, you\n      deploy it using <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_CreateCampaign.html\">CreateCampaign</a>. The campaign provides recommendations\n      to a client through the\n      <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_RS_GetRecommendations.html\">GetRecommendations</a> API.</p>\n         <note>\n            <p>Amazon Personalize doesn't support configuring the <code>hpoObjective</code> \n        for solution hyperparameter optimization at this time.</p>\n         </note>\n         <p>\n            <b>Status</b>\n         </p>\n         <p>A solution can be in one of the following states:</p>\n         <ul>\n            <li>\n               <p>CREATE PENDING > CREATE IN_PROGRESS > ACTIVE -or- CREATE FAILED</p>\n            </li>\n            <li>\n               <p>DELETE PENDING > DELETE IN_PROGRESS</p>\n            </li>\n         </ul>\n         <p>To get the status of the solution, call <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_DescribeSolution.html\">DescribeSolution</a>. If you use\n      manual training, the status must be ACTIVE before you call <code>CreateSolutionVersion</code>.</p>\n         <p class=\"title\">\n            <b>Related APIs</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_ListSolutions.html\">ListSolutions</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_CreateSolutionVersion.html\">CreateSolutionVersion</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_DescribeSolution.html\">DescribeSolution</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_DeleteSolution.html\">DeleteSolution</a>\n               </p>\n            </li>\n         </ul>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_ListSolutionVersions.html\">ListSolutionVersions</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_DescribeSolutionVersion.html\">DescribeSolutionVersion</a>\n               </p>\n            </li>\n         </ul>"
             }
         },
         "com.amazonaws.personalize#CreateSolutionRequest": {
@@ -3027,10 +3144,16 @@
                         "smithy.api#documentation": "<important>\n            <p>We don't recommend enabling automated machine learning. Instead, match your use case to the available Amazon Personalize \n        recipes. For more information, see <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/working-with-predefined-recipes.html\">Choosing a recipe</a>.</p>\n         </important>\n         <p>Whether to perform automated machine learning (AutoML). The default is <code>false</code>.\n      For this case, you must specify <code>recipeArn</code>.</p>\n         <p>When set to <code>true</code>, Amazon Personalize analyzes your training data and selects\n      the optimal USER_PERSONALIZATION recipe and hyperparameters. In this case, you must omit\n      <code>recipeArn</code>. Amazon Personalize determines the optimal recipe by running tests with\n      different values for the hyperparameters.\n      AutoML lengthens the training process as compared to selecting a specific recipe.</p>"
                     }
                 },
+                "performAutoTraining": {
+                    "target": "com.amazonaws.personalize#PerformAutoTraining",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Whether the solution uses automatic training to create new solution versions (trained models). The default is\n        <code>True</code> and the solution automatically creates new solution versions every 7 days. You can change the training\n      frequency by specifying a <code>schedulingExpression</code> in the <code>AutoTrainingConfig</code> as part of solution\n      configuration. For more information about automatic training,\n      see <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/solution-config-auto-training.html\">Configuring automatic training</a>.</p>\n         <p>\n      Automatic solution version creation starts one hour after the solution is ACTIVE. If you manually create a solution version within\n      the hour, the solution skips the first automatic training.\n    </p>\n         <p>\n      After training starts, you can\n      get the solution version's Amazon Resource Name (ARN) with the <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_ListSolutionVersions.html\">ListSolutionVersions</a> API operation. \n      To get its status, use the <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_DescribeSolutionVersion.html\">DescribeSolutionVersion</a>.\n    </p>"
+                    }
+                },
                 "recipeArn": {
                     "target": "com.amazonaws.personalize#Arn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the recipe to use for model training. This is required when\n      <code>performAutoML</code> is false. For information about different Amazon Personalize recipes and their ARNs, \n      see <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/working-with-predefined-recipes.html\">Choosing a recipe</a>.\n    \n    </p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the recipe to use for model training. This is required when\n      <code>performAutoML</code> is false. For information about different Amazon Personalize recipes and their ARNs, \n      see <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/working-with-predefined-recipes.html\">Choosing a recipe</a>.\n    </p>"
                     }
                 },
                 "datasetGroupArn": {
@@ -3156,18 +3279,145 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.personalize#DataDeletionJob": {
+            "type": "structure",
+            "members": {
+                "jobName": {
+                    "target": "com.amazonaws.personalize#Name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the data deletion job.</p>"
+                    }
+                },
+                "dataDeletionJobArn": {
+                    "target": "com.amazonaws.personalize#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the data deletion job.</p>"
+                    }
+                },
+                "datasetGroupArn": {
+                    "target": "com.amazonaws.personalize#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the dataset group the job deletes records from.</p>"
+                    }
+                },
+                "dataSource": {
+                    "target": "com.amazonaws.personalize#DataSource"
+                },
+                "roleArn": {
+                    "target": "com.amazonaws.personalize#RoleArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the IAM role that has permissions to read from the Amazon S3\n      data source.</p>"
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.personalize#Status",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the data deletion job.</p>\n         <p>A data deletion job can have one of the following statuses:</p>\n         <ul>\n            <li>\n               <p>PENDING > IN_PROGRESS > COMPLETED -or- FAILED</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "numDeleted": {
+                    "target": "com.amazonaws.personalize#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of records deleted by a COMPLETED job.</p>"
+                    }
+                },
+                "creationDateTime": {
+                    "target": "com.amazonaws.personalize#Date",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The creation date and time (in Unix time) of the data deletion\n      job.</p>"
+                    }
+                },
+                "lastUpdatedDateTime": {
+                    "target": "com.amazonaws.personalize#Date",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time (in Unix time) the data deletion job was last updated.</p>"
+                    }
+                },
+                "failureReason": {
+                    "target": "com.amazonaws.personalize#FailureReason",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If a data deletion job fails, provides the reason why.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes a job that deletes all\n      references to specific users from an Amazon Personalize dataset group in batches. For information about creating a data deletion job, \n      see <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/delete-records.html\">Deleting users</a>.</p>"
+            }
+        },
+        "com.amazonaws.personalize#DataDeletionJobSummary": {
+            "type": "structure",
+            "members": {
+                "dataDeletionJobArn": {
+                    "target": "com.amazonaws.personalize#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the data deletion job.</p>"
+                    }
+                },
+                "datasetGroupArn": {
+                    "target": "com.amazonaws.personalize#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the dataset group the job deleted records from.</p>"
+                    }
+                },
+                "jobName": {
+                    "target": "com.amazonaws.personalize#Name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the data deletion job.</p>"
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.personalize#Status",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the data deletion job.</p>\n         <p>A data deletion job can have one of the following statuses:</p>\n         <ul>\n            <li>\n               <p>PENDING > IN_PROGRESS > COMPLETED -or- FAILED</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "creationDateTime": {
+                    "target": "com.amazonaws.personalize#Date",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The creation date and time (in Unix time) of the data deletion\n      job.</p>"
+                    }
+                },
+                "lastUpdatedDateTime": {
+                    "target": "com.amazonaws.personalize#Date",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time (in Unix time) the data deletion job was last updated.</p>"
+                    }
+                },
+                "failureReason": {
+                    "target": "com.amazonaws.personalize#FailureReason",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If a data deletion job fails, provides the reason why.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Provides a summary of the properties of a data deletion job. For a complete listing, call the <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_DescribeDataDeletionJob.html\">DescribeDataDeletionJob</a>\n      API operation.</p>"
+            }
+        },
+        "com.amazonaws.personalize#DataDeletionJobs": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.personalize#DataDeletionJobSummary"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 100
+                }
+            }
+        },
         "com.amazonaws.personalize#DataSource": {
             "type": "structure",
             "members": {
                 "dataLocation": {
                     "target": "com.amazonaws.personalize#S3Location",
                     "traits": {
-                        "smithy.api#documentation": "<p>The path to the Amazon S3 bucket where the data that you want to upload to\n      your dataset is stored. For example: </p>\n         <p>\n            <code>s3://bucket-name/folder-name/</code>\n         </p>"
+                        "smithy.api#documentation": "<p>For dataset import jobs, the path to the Amazon S3 bucket where the data that you want to upload to\n      your dataset is stored. For data deletion jobs, the path to the Amazon S3 bucket that stores the list of records to delete.\n    </p>\n         <p>\n      For example: </p>\n         <p>\n            <code>s3://bucket-name/folder-name/fileName.csv</code>\n         </p>\n         <p>If your CSV files are in a folder in your Amazon S3 bucket and you want your import job or data deletion job\n      to consider multiple files, you can specify the path to the folder.  With a data deletion job, Amazon Personalize uses all files in the folder and any sub folder. Use the following syntax with a <code>/</code> after the folder\n      name:</p>\n         <p>\n            <code>s3://bucket-name/folder-name/</code>\n         </p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Describes the data source that contains the data to upload to a\n      dataset.</p>"
+                "smithy.api#documentation": "<p>Describes the data source that contains the data to upload to a dataset, or the list of \n      records to delete from Amazon Personalize.</p>"
             }
         },
         "com.amazonaws.personalize#Dataset": {
@@ -4533,6 +4783,56 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.personalize#DescribeDataDeletionJob": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.personalize#DescribeDataDeletionJobRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.personalize#DescribeDataDeletionJobResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.personalize#InvalidInputException"
+                },
+                {
+                    "target": "com.amazonaws.personalize#ResourceNotFoundException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Describes the data deletion job created by <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_CreateDataDeletionJob.html\">CreateDataDeletionJob</a>, including the job status.</p>",
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.personalize#DescribeDataDeletionJobRequest": {
+            "type": "structure",
+            "members": {
+                "dataDeletionJobArn": {
+                    "target": "com.amazonaws.personalize#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the data deletion job.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.personalize#DescribeDataDeletionJobResponse": {
+            "type": "structure",
+            "members": {
+                "dataDeletionJob": {
+                    "target": "com.amazonaws.personalize#DataDeletionJob",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about the data deletion job, including the status.</p>\n         <p>The status is one of the following values:</p>\n         <ul>\n            <li>\n               <p>PENDING</p>\n            </li>\n            <li>\n               <p>IN_PROGRESS</p>\n            </li>\n            <li>\n               <p>COMPLETED</p>\n            </li>\n            <li>\n               <p>FAILED</p>\n            </li>\n         </ul>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.personalize#DescribeDataset": {
             "type": "operation",
             "input": {
@@ -5802,6 +6102,9 @@
                 }
             }
         },
+        "com.amazonaws.personalize#Integer": {
+            "type": "integer"
+        },
         "com.amazonaws.personalize#IntegerHyperParameterRange": {
             "type": "structure",
             "members": {
@@ -6130,6 +6433,73 @@
                     "target": "com.amazonaws.personalize#NextToken",
                     "traits": {
                         "smithy.api#documentation": "<p>A token for getting the next set of campaigns (if they exist).</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.personalize#ListDataDeletionJobs": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.personalize#ListDataDeletionJobsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.personalize#ListDataDeletionJobsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.personalize#InvalidInputException"
+                },
+                {
+                    "target": "com.amazonaws.personalize#InvalidNextTokenException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns a list of data deletion jobs for a dataset group ordered by creation time,\n      with the most recent first.\n      When\n      a dataset group is not specified, all the data deletion jobs associated with\n      the account are listed. The response provides the properties for each\n      job, including the Amazon Resource Name (ARN). For more\n      information on data deletion jobs, see <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/delete-records.html\">Deleting users</a>.</p>",
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.personalize#ListDataDeletionJobsRequest": {
+            "type": "structure",
+            "members": {
+                "datasetGroupArn": {
+                    "target": "com.amazonaws.personalize#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the dataset group to list data deletion jobs for.</p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.personalize#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A token returned from the previous call to\n      <code>ListDataDeletionJobs</code> for getting the next set of jobs (if they exist).</p>"
+                    }
+                },
+                "maxResults": {
+                    "target": "com.amazonaws.personalize#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of data deletion jobs to return.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.personalize#ListDataDeletionJobsResponse": {
+            "type": "structure",
+            "members": {
+                "dataDeletionJobs": {
+                    "target": "com.amazonaws.personalize#DataDeletionJobs",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of data deletion jobs.</p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.personalize#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A token for getting the next set of data deletion jobs (if they\n      exist).</p>"
                     }
                 }
             },
@@ -7021,7 +7391,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns a list of solutions that use the given dataset group.\n      When a dataset group is not specified, all the solutions associated with the account are listed.\n      The response provides the properties for each solution, including the Amazon Resource Name (ARN).\n      For more information on solutions, see <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_CreateSolution.html\">CreateSolution</a>.</p>",
+                "smithy.api#documentation": "<p>Returns a list of solutions in a given dataset group.\n      When a dataset group is not specified, all the solutions associated with the account are listed.\n      The response provides the properties for each solution, including the Amazon Resource Name (ARN).\n      For more information on solutions, see <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_CreateSolution.html\">CreateSolution</a>.</p>",
                 "smithy.api#idempotent": {},
                 "smithy.api#paginated": {
                     "inputToken": "nextToken",
@@ -7106,7 +7476,7 @@
                 "resourceArn": {
                     "target": "com.amazonaws.personalize#Arn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The resource's Amazon Resource Name.</p>",
+                        "smithy.api#documentation": "<p>The resource's Amazon Resource Name (ARN).</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -7385,7 +7755,8 @@
                 "smithy.api#length": {
                     "min": 0,
                     "max": 1500
-                }
+                },
+                "smithy.api#pattern": "^\\p{ASCII}{0,1500}$"
             }
         },
         "com.amazonaws.personalize#NumBatchResults": {
@@ -7463,6 +7834,9 @@
             "traits": {
                 "smithy.api#default": false
             }
+        },
+        "com.amazonaws.personalize#PerformAutoTraining": {
+            "type": "boolean"
         },
         "com.amazonaws.personalize#PerformHPO": {
             "type": "boolean",
@@ -7915,6 +8289,16 @@
                 "smithy.api#pattern": "^(s3|http|https)://.+$"
             }
         },
+        "com.amazonaws.personalize#SchedulingExpression": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 16
+                },
+                "smithy.api#pattern": "^rate\\(\\d+ days?\\)$"
+            }
+        },
         "com.amazonaws.personalize#Schemas": {
             "type": "list",
             "member": {
@@ -7954,6 +8338,12 @@
                     "traits": {
                         "smithy.api#default": false,
                         "smithy.api#documentation": "<important>\n            <p>We don't recommend enabling automated machine learning. Instead, match your use case to the available Amazon Personalize \n        recipes. For more information, see <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/determining-use-case.html\">Determining your use case.</a>\n            </p>\n         </important>\n         <p>When true, Amazon Personalize performs a search for the best USER_PERSONALIZATION recipe from\n      the list specified in the solution configuration (<code>recipeArn</code> must not be specified).\n      When false (the default), Amazon Personalize uses <code>recipeArn</code> for training.</p>"
+                    }
+                },
+                "performAutoTraining": {
+                    "target": "com.amazonaws.personalize#PerformAutoTraining",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether the solution automatically creates solution versions. The default is <code>True</code>\n      and the solution automatically creates new solution versions every 7 days.</p>\n         <p>For more information about auto training, see <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/customizing-solution-config.html\">Creating and configuring a solution</a>.</p>"
                     }
                 },
                 "recipeArn": {
@@ -8012,7 +8402,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>An object that provides information about a solution. A solution is a trained model\n      that can be deployed as a campaign.</p>"
+                "smithy.api#documentation": "<important>\n            <p>After you create a solution, you can’t change its configuration. By default, all new solutions use automatic training. With automatic training, you incur training costs while\n           your solution is active. You can't stop automatic training for a solution. To avoid unnecessary costs, make sure to delete the solution when you are finished. For information about training\n  costs, see <a href=\"https://aws.amazon.com/personalize/pricing/\">Amazon Personalize pricing</a>.</p>\n         </important>\n         <p>An object that provides information about a solution. A solution includes the custom recipe, customized parameters, and\n      trained models (Solution Versions) that Amazon Personalize uses to generate recommendations. </p>\n         <p>After you create a solution, you can’t change its configuration. If you need to make changes, you can <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/cloning-solution.html\">clone the solution</a> with the Amazon Personalize console\n      or create a new one.</p>"
             }
         },
         "com.amazonaws.personalize#SolutionConfig": {
@@ -8058,6 +8448,12 @@
                     "target": "com.amazonaws.personalize#TrainingDataConfig",
                     "traits": {
                         "smithy.api#documentation": "<p>\n     Specifies the training data configuration to use when creating a custom solution version (trained model).\n    </p>"
+                    }
+                },
+                "autoTrainingConfig": {
+                    "target": "com.amazonaws.personalize#AutoTrainingConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the automatic training configuration to use.</p>"
                     }
                 }
             },
@@ -8177,7 +8573,7 @@
                 "trainingMode": {
                     "target": "com.amazonaws.personalize#TrainingMode",
                     "traits": {
-                        "smithy.api#documentation": "<p>The scope of training to be performed when creating the solution version. The\n      <code>FULL</code> option trains the solution version based on the entirety of the input\n      solution's training data, while the <code>UPDATE</code> option processes only the data that\n      has changed in comparison to the input solution. Choose <code>UPDATE</code> when you want to\n      incrementally update your solution version instead of creating an entirely new one.</p>\n         <important>\n            <p>The <code>UPDATE</code> option can only be used when you already have an active solution\n        version created from the input solution using the <code>FULL</code> option and the input\n        solution was trained with the \n        <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/native-recipe-new-item-USER_PERSONALIZATION.html\">User-Personalization</a>\n        recipe or the \n        <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/native-recipe-hrnn-coldstart.html\">HRNN-Coldstart</a> recipe.</p>\n         </important>"
+                        "smithy.api#documentation": "<p>The scope of training to be performed when creating the solution version. A\n      <code>FULL</code> training considers all of the data in your dataset group.\n      An <code>UPDATE</code> processes only the data that\n      has changed since the latest training. Only solution versions created with the User-Personalization\n      recipe can use <code>UPDATE</code>.\n    </p>"
                     }
                 },
                 "tunedHPOParams": {
@@ -8209,6 +8605,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The date and time (in\n      Unix\n      time) that the solution was last updated.</p>"
                     }
+                },
+                "trainingType": {
+                    "target": "com.amazonaws.personalize#TrainingType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Whether the solution version was created automatically or manually.</p>"
+                    }
                 }
             },
             "traits": {
@@ -8228,6 +8630,18 @@
                     "target": "com.amazonaws.personalize#Status",
                     "traits": {
                         "smithy.api#documentation": "<p>The status of the solution version.</p>\n         <p>A solution version can be in one of the following states:</p>\n         <ul>\n            <li>\n               <p>CREATE PENDING > CREATE IN_PROGRESS > ACTIVE -or- CREATE FAILED</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "trainingMode": {
+                    "target": "com.amazonaws.personalize#TrainingMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The scope of training to be performed when creating the solution version. A\n      <code>FULL</code> training considers all of the data in your dataset group.\n      An <code>UPDATE</code> processes only the data that\n      has changed since the latest training. Only solution versions created with the User-Personalization\n      recipe can use <code>UPDATE</code>.\n    </p>"
+                    }
+                },
+                "trainingType": {
+                    "target": "com.amazonaws.personalize#TrainingType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Whether the solution version was created automatically or manually.</p>"
                     }
                 },
                 "creationDateTime": {
@@ -8450,7 +8864,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The optional metadata that you apply to resources to help you categorize and organize them. Each tag consists of a key and an optional value, both of which you define.\n      For more information see <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/tagging-resources.html\">Tagging Amazon Personalize recources</a>.\n    </p>"
+                "smithy.api#documentation": "<p>The optional metadata that you apply to resources to help you categorize and organize them. Each tag consists of a key and an optional value, both of which you define.\n      For more information see <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/tagging-resources.html\">Tagging Amazon Personalize resources</a>.\n    </p>"
             }
         },
         "com.amazonaws.personalize#TagKey": {
@@ -8517,7 +8931,7 @@
                 "tags": {
                     "target": "com.amazonaws.personalize#Tags",
                     "traits": {
-                        "smithy.api#documentation": "<p>Tags to apply to the resource. For more information see <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/tagging-resources.html\">Tagging Amazon Personalize recources</a>.</p>",
+                        "smithy.api#documentation": "<p>Tags to apply to the resource. For more information see <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/tagging-resources.html\">Tagging Amazon Personalize resources</a>.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -8611,7 +9025,7 @@
                 "excludedDatasetColumns": {
                     "target": "com.amazonaws.personalize#ExcludedDatasetColumns",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the columns to exclude from training. Each key is a dataset type, and each value is a list of columns.\n      Exclude columns to control what data Amazon Personalize uses to generate recommendations.  \n      For example, you might have a column that you want to use only to filter recommendations. You can\n      exclude this column from training and Amazon Personalize considers it only when filtering.\n    </p>"
+                        "smithy.api#documentation": "<p>Specifies the columns to exclude from training. Each key is a dataset type, and each value is a list of columns.\n      Exclude columns to control what data Amazon Personalize uses to generate recommendations.</p>\n         <p>\n      For example, you might have a column that you want to use only to filter recommendations. You can\n      exclude this column from training and Amazon Personalize considers it only when filtering.\n    </p>"
                     }
                 }
             },
@@ -8649,6 +9063,29 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "UPDATE"
+                    }
+                },
+                "AUTOTRAIN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AUTOTRAIN"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.personalize#TrainingType": {
+            "type": "enum",
+            "members": {
+                "AUTOMATIC": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AUTOMATIC"
+                    }
+                },
+                "MANUAL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MANUAL"
                     }
                 }
             }
@@ -8704,7 +9141,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Remove <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/tagging-resources.html\">tags</a> that are attached to a resource.</p>"
+                "smithy.api#documentation": "<p>Removes the specified tags that are attached to a resource. For more information, see <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/tags-remove.html\">Removing tags from Amazon Personalize resources</a>.</p>"
             }
         },
         "com.amazonaws.personalize#UntagResourceRequest": {
@@ -8720,7 +9157,7 @@
                 "tagKeys": {
                     "target": "com.amazonaws.personalize#TagKeys",
                     "traits": {
-                        "smithy.api#documentation": "<p>Keys to remove from the resource's tags.</p>",
+                        "smithy.api#documentation": "<p>The keys of the tags to be removed.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -8756,7 +9193,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>\n      Updates a campaign to deploy a retrained solution version with an existing campaign, change your campaign's <code>minProvisionedTPS</code>,\n      or modify your campaign's configuration, such as the exploration configuration.\n    </p>\n         <p>To update a campaign, the campaign status must be ACTIVE or CREATE FAILED.\n      Check the campaign status using the <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_DescribeCampaign.html\">DescribeCampaign</a> operation.</p>\n         <note>\n            <p>You can still get recommendations from a campaign while an update is in progress.\n        The campaign will use the previous solution version and campaign configuration to generate recommendations until the latest campaign update status is <code>Active</code>.\n      </p>\n         </note>\n         <p>For more information about updating a campaign, including code samples, see <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/update-campaigns.html\">Updating a campaign</a>.\n      For more information about campaigns, see <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/campaigns.html\">Creating a campaign</a>.</p>",
+                "smithy.api#documentation": "<p>\n      Updates a campaign to deploy a retrained solution version with an existing campaign, change your campaign's <code>minProvisionedTPS</code>,\n      or modify your campaign's configuration. For example, you can set <code>enableMetadataWithRecommendations</code> to true for an existing campaign.</p>\n         <p>\n      To update a campaign to start automatically using the latest solution version, specify the following:</p>\n         <ul>\n            <li>\n               <p>For the <code>SolutionVersionArn</code> parameter, specify the Amazon Resource Name (ARN) of your solution in\n            <code>SolutionArn/$LATEST</code> format. </p>\n            </li>\n            <li>\n               <p> In the <code>campaignConfig</code>, set <code>syncWithLatestSolutionVersion</code> to <code>true</code>.\n        </p>\n            </li>\n         </ul>\n         <p>To update a campaign, the campaign status must be ACTIVE or CREATE FAILED.\n      Check the campaign status using the <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_DescribeCampaign.html\">DescribeCampaign</a> operation.</p>\n         <note>\n            <p>You can still get recommendations from a campaign while an update is in progress.\n        The campaign will use the previous solution version and campaign configuration to generate recommendations until the latest campaign update status is <code>Active</code>.\n      </p>\n         </note>\n         <p>For more information about updating a campaign, including code samples, see <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/update-campaigns.html\">Updating a campaign</a>.\n      For more information about campaigns, see <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/campaigns.html\">Creating a campaign</a>.</p>",
                 "smithy.api#idempotent": {}
             }
         },
@@ -8773,7 +9210,7 @@
                 "solutionVersionArn": {
                     "target": "com.amazonaws.personalize#Arn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of a new solution version to deploy.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of a new model to deploy. To specify the latest solution version of your solution, \n      specify the ARN of your <i>solution</i> in <code>SolutionArn/$LATEST</code> format.\n      You must use this format if you set <code>syncWithLatestSolutionVersion</code> to <code>True</code> in the \n      <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/API_CampaignConfig.html\">CampaignConfig</a>.\n    </p>\n         <p>\n      To deploy a model that isn't the latest solution version of your solution, specify the ARN of the solution version.\n    </p>\n         <p>\n      For more information about automatic campaign updates, see \n      <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/campaigns.html#create-campaign-automatic-latest-sv-update\">Enabling automatic campaign updates</a>.\n    </p>"
                     }
                 },
                 "minProvisionedTPS": {

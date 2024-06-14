@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/storagegateway/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -14,6 +13,7 @@ import (
 
 // Returns a description of virtual tape library (VTL) devices for the specified
 // tape gateway. In the response, Storage Gateway returns VTL device information.
+//
 // This operation is only supported in the tape gateway type.
 func (c *Client) DescribeVTLDevices(ctx context.Context, params *DescribeVTLDevicesInput, optFns ...func(*Options)) (*DescribeVTLDevicesOutput, error) {
 	if params == nil {
@@ -33,8 +33,8 @@ func (c *Client) DescribeVTLDevices(ctx context.Context, params *DescribeVTLDevi
 // DescribeVTLDevicesInput
 type DescribeVTLDevicesInput struct {
 
-	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation
-	// to return a list of gateways for your account and Amazon Web Services Region.
+	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation to return a
+	// list of gateways for your account and Amazon Web Services Region.
 	//
 	// This member is required.
 	GatewayARN *string
@@ -48,9 +48,11 @@ type DescribeVTLDevicesInput struct {
 	Marker *string
 
 	// An array of strings, where each string represents the Amazon Resource Name
-	// (ARN) of a VTL device. All of the specified VTL devices must be from the same
-	// gateway. If no VTL devices are specified, the result will contain all devices on
-	// the specified gateway.
+	// (ARN) of a VTL device.
+	//
+	// All of the specified VTL devices must be from the same gateway. If no VTL
+	// devices are specified, the result will contain all devices on the specified
+	// gateway.
 	VTLDeviceARNs []string
 
 	noSmithyDocumentSerde
@@ -59,8 +61,8 @@ type DescribeVTLDevicesInput struct {
 // DescribeVTLDevicesOutput
 type DescribeVTLDevicesOutput struct {
 
-	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation
-	// to return a list of gateways for your account and Amazon Web Services Region.
+	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation to return a
+	// list of gateways for your account and Amazon Web Services Region.
 	GatewayARN *string
 
 	// An opaque string that indicates the position at which the VTL devices that were
@@ -101,25 +103,25 @@ func (c *Client) addOperationDescribeVTLDevicesMiddlewares(stack *middleware.Sta
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -134,13 +136,16 @@ func (c *Client) addOperationDescribeVTLDevicesMiddlewares(stack *middleware.Sta
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDescribeVTLDevicesValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeVTLDevices(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

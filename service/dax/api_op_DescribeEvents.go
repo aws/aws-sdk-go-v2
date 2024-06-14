@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/dax/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -15,9 +14,10 @@ import (
 
 // Returns events related to DAX clusters and parameter groups. You can obtain
 // events specific to a particular DAX cluster or parameter group by providing the
-// name as a parameter. By default, only the events occurring within the last 24
-// hours are returned; however, you can retrieve up to 14 days' worth of events if
-// necessary.
+// name as a parameter.
+//
+// By default, only the events occurring within the last 24 hours are returned;
+// however, you can retrieve up to 14 days' worth of events if necessary.
 func (c *Client) DescribeEvents(ctx context.Context, params *DescribeEventsInput, optFns ...func(*Options)) (*DescribeEventsOutput, error) {
 	if params == nil {
 		params = &DescribeEventsInput{}
@@ -44,8 +44,9 @@ type DescribeEventsInput struct {
 
 	// The maximum number of results to include in the response. If more results exist
 	// than the specified MaxResults value, a token is included in the response so
-	// that the remaining results can be retrieved. The value for MaxResults must be
-	// between 20 and 100.
+	// that the remaining results can be retrieved.
+	//
+	// The value for MaxResults must be between 20 and 100.
 	MaxResults *int32
 
 	// An optional token returned from a prior request. Use this token for pagination
@@ -104,25 +105,25 @@ func (c *Client) addOperationDescribeEventsMiddlewares(stack *middleware.Stack, 
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -137,10 +138,13 @@ func (c *Client) addOperationDescribeEventsMiddlewares(stack *middleware.Stack, 
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeEvents(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

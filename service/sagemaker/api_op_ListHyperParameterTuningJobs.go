@@ -6,15 +6,16 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
-// Gets a list of HyperParameterTuningJobSummary (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_HyperParameterTuningJobSummary.html)
-// objects that describe the hyperparameter tuning jobs launched in your account.
+// Gets a list of [HyperParameterTuningJobSummary] objects that describe the hyperparameter tuning jobs launched
+// in your account.
+//
+// [HyperParameterTuningJobSummary]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_HyperParameterTuningJobSummary.html
 func (c *Client) ListHyperParameterTuningJobs(ctx context.Context, params *ListHyperParameterTuningJobsInput, optFns ...func(*Options)) (*ListHyperParameterTuningJobsOutput, error) {
 	if params == nil {
 		params = &ListHyperParameterTuningJobsInput{}
@@ -74,9 +75,10 @@ type ListHyperParameterTuningJobsInput struct {
 
 type ListHyperParameterTuningJobsOutput struct {
 
-	// A list of HyperParameterTuningJobSummary (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_HyperParameterTuningJobSummary.html)
-	// objects that describe the tuning jobs that the ListHyperParameterTuningJobs
-	// request returned.
+	// A list of [HyperParameterTuningJobSummary] objects that describe the tuning jobs that the
+	// ListHyperParameterTuningJobs request returned.
+	//
+	// [HyperParameterTuningJobSummary]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_HyperParameterTuningJobSummary.html
 	//
 	// This member is required.
 	HyperParameterTuningJobSummaries []types.HyperParameterTuningJobSummary
@@ -114,25 +116,25 @@ func (c *Client) addOperationListHyperParameterTuningJobsMiddlewares(stack *midd
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -147,10 +149,13 @@ func (c *Client) addOperationListHyperParameterTuningJobsMiddlewares(stack *midd
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListHyperParameterTuningJobs(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

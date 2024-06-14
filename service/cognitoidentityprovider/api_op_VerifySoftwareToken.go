@@ -13,13 +13,15 @@ import (
 
 // Use this API to register a user's entered time-based one-time password (TOTP)
 // code and mark the user's software token MFA status as "verified" if successful.
-// The request takes an access token or a session string, but not both. Amazon
-// Cognito doesn't evaluate Identity and Access Management (IAM) policies in
-// requests for this API operation. For this operation, you can't use IAM
+// The request takes an access token or a session string, but not both.
+//
+// Amazon Cognito doesn't evaluate Identity and Access Management (IAM) policies
+// in requests for this API operation. For this operation, you can't use IAM
 // credentials to authorize requests, and you can't grant IAM permissions in
 // policies. For more information about authorization models in Amazon Cognito, see
-// Using the Amazon Cognito user pools API and user pool endpoints (https://docs.aws.amazon.com/cognito/latest/developerguide/user-pools-API-operations.html)
-// .
+// [Using the Amazon Cognito user pools API and user pool endpoints].
+//
+// [Using the Amazon Cognito user pools API and user pool endpoints]: https://docs.aws.amazon.com/cognito/latest/developerguide/user-pools-API-operations.html
 func (c *Client) VerifySoftwareToken(ctx context.Context, params *VerifySoftwareTokenInput, optFns ...func(*Options)) (*VerifySoftwareTokenOutput, error) {
 	if params == nil {
 		params = &VerifySoftwareTokenInput{}
@@ -37,9 +39,9 @@ func (c *Client) VerifySoftwareToken(ctx context.Context, params *VerifySoftware
 
 type VerifySoftwareTokenInput struct {
 
-	// The one- time password computed using the secret code returned by
-	// AssociateSoftwareToken (https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_AssociateSoftwareToken.html)
-	// .
+	// The one- time password computed using the secret code returned by [AssociateSoftwareToken].
+	//
+	// [AssociateSoftwareToken]: https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_AssociateSoftwareToken.html
 	//
 	// This member is required.
 	UserCode *string
@@ -95,22 +97,22 @@ func (c *Client) addOperationVerifySoftwareTokenMiddlewares(stack *middleware.St
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -125,13 +127,16 @@ func (c *Client) addOperationVerifySoftwareTokenMiddlewares(stack *middleware.St
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpVerifySoftwareTokenValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opVerifySoftwareToken(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

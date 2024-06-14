@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/rds/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -32,24 +31,34 @@ func (c *Client) CreateDBSnapshot(ctx context.Context, params *CreateDBSnapshotI
 type CreateDBSnapshotInput struct {
 
 	// The identifier of the DB instance that you want to create the snapshot of.
+	//
 	// Constraints:
+	//
 	//   - Must match the identifier of an existing DBInstance.
 	//
 	// This member is required.
 	DBInstanceIdentifier *string
 
-	// The identifier for the DB snapshot. Constraints:
+	// The identifier for the DB snapshot.
+	//
+	// Constraints:
+	//
 	//   - Can't be null, empty, or blank
+	//
 	//   - Must contain from 1 to 255 letters, numbers, or hyphens
+	//
 	//   - First character must be a letter
+	//
 	//   - Can't end with a hyphen or contain two consecutive hyphens
+	//
 	// Example: my-snapshot-id
 	//
 	// This member is required.
 	DBSnapshotIdentifier *string
 
-	// A list of tags. For more information, see Tagging Amazon RDS Resources (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html)
-	// in the Amazon RDS User Guide.
+	// A list of tags. For more information, see [Tagging Amazon RDS Resources] in the Amazon RDS User Guide.
+	//
+	// [Tagging Amazon RDS Resources]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html
 	Tags []types.Tag
 
 	noSmithyDocumentSerde
@@ -57,8 +66,9 @@ type CreateDBSnapshotInput struct {
 
 type CreateDBSnapshotOutput struct {
 
-	// Contains the details of an Amazon RDS DB snapshot. This data type is used as a
-	// response element in the DescribeDBSnapshots action.
+	// Contains the details of an Amazon RDS DB snapshot.
+	//
+	// This data type is used as a response element in the DescribeDBSnapshots action.
 	DBSnapshot *types.DBSnapshot
 
 	// Metadata pertaining to the operation's result.
@@ -89,25 +99,25 @@ func (c *Client) addOperationCreateDBSnapshotMiddlewares(stack *middleware.Stack
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -122,13 +132,16 @@ func (c *Client) addOperationCreateDBSnapshotMiddlewares(stack *middleware.Stack
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpCreateDBSnapshotValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateDBSnapshot(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

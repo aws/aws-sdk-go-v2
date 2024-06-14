@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/neptunedata/document"
 	"github.com/aws/aws-sdk-go-v2/service/neptunedata/types"
 	"github.com/aws/smithy-go/middleware"
@@ -15,22 +14,30 @@ import (
 
 // This commands executes a Gremlin query. Amazon Neptune is compatible with
 // Apache TinkerPop3 and Gremlin, so you can use the Gremlin traversal language to
-// query the graph, as described under The Graph (https://tinkerpop.apache.org/docs/current/reference/#graph)
-// in the Apache TinkerPop3 documentation. More details can also be found in
-// Accessing a Neptune graph with Gremlin (https://docs.aws.amazon.com/neptune/latest/userguide/access-graph-gremlin.html)
-// . When invoking this operation in a Neptune cluster that has IAM authentication
+// query the graph, as described under [The Graph]in the Apache TinkerPop3 documentation.
+// More details can also be found in [Accessing a Neptune graph with Gremlin].
+//
+// When invoking this operation in a Neptune cluster that has IAM authentication
 // enabled, the IAM user or role making the request must have a policy attached
 // that enables one of the following IAM actions in that cluster, depending on the
 // query:
-//   - neptune-db:ReadDataViaQuery (https://docs.aws.amazon.com/neptune/latest/userguide/iam-dp-actions.html#readdataviaquery)
-//   - neptune-db:WriteDataViaQuery (https://docs.aws.amazon.com/neptune/latest/userguide/iam-dp-actions.html#writedataviaquery)
-//   - neptune-db:DeleteDataViaQuery (https://docs.aws.amazon.com/neptune/latest/userguide/iam-dp-actions.html#deletedataviaquery)
 //
-// Note that the neptune-db:QueryLanguage:Gremlin (https://docs.aws.amazon.com/neptune/latest/userguide/iam-data-condition-keys.html#iam-neptune-condition-keys)
-// IAM condition key can be used in the policy document to restrict the use of
-// Gremlin queries (see Condition keys available in Neptune IAM data-access policy
-// statements (https://docs.aws.amazon.com/neptune/latest/userguide/iam-data-condition-keys.html)
-// ).
+// [neptune-db:ReadDataViaQuery]
+//
+// [neptune-db:WriteDataViaQuery]
+//
+// [neptune-db:DeleteDataViaQuery]
+//
+// Note that the [neptune-db:QueryLanguage:Gremlin] IAM condition key can be used in the policy document to restrict
+// the use of Gremlin queries (see [Condition keys available in Neptune IAM data-access policy statements]).
+//
+// [neptune-db:DeleteDataViaQuery]: https://docs.aws.amazon.com/neptune/latest/userguide/iam-dp-actions.html#deletedataviaquery
+// [Condition keys available in Neptune IAM data-access policy statements]: https://docs.aws.amazon.com/neptune/latest/userguide/iam-data-condition-keys.html
+// [The Graph]: https://tinkerpop.apache.org/docs/current/reference/#graph
+// [Accessing a Neptune graph with Gremlin]: https://docs.aws.amazon.com/neptune/latest/userguide/access-graph-gremlin.html
+// [neptune-db:ReadDataViaQuery]: https://docs.aws.amazon.com/neptune/latest/userguide/iam-dp-actions.html#readdataviaquery
+// [neptune-db:WriteDataViaQuery]: https://docs.aws.amazon.com/neptune/latest/userguide/iam-dp-actions.html#writedataviaquery
+// [neptune-db:QueryLanguage:Gremlin]: https://docs.aws.amazon.com/neptune/latest/userguide/iam-data-condition-keys.html#iam-neptune-condition-keys
 func (c *Client) ExecuteGremlinQuery(ctx context.Context, params *ExecuteGremlinQueryInput, optFns ...func(*Options)) (*ExecuteGremlinQueryOutput, error) {
 	if params == nil {
 		params = &ExecuteGremlinQueryInput{}
@@ -50,16 +57,19 @@ type ExecuteGremlinQueryInput struct {
 
 	// Using this API, you can run Gremlin queries in string format much as you can
 	// using the HTTP endpoint. The interface is compatible with whatever Gremlin
-	// version your DB cluster is using (see the Tinkerpop client section (https://docs.aws.amazon.com/neptune/latest/userguide/access-graph-gremlin-client.html#best-practices-gremlin-java-latest)
-	// to determine which Gremlin releases your engine version supports).
+	// version your DB cluster is using (see the [Tinkerpop client section]to determine which Gremlin releases
+	// your engine version supports).
+	//
+	// [Tinkerpop client section]: https://docs.aws.amazon.com/neptune/latest/userguide/access-graph-gremlin-client.html#best-practices-gremlin-java-latest
 	//
 	// This member is required.
 	GremlinQuery *string
 
 	// If non-null, the query results are returned in a serialized response message in
-	// the format specified by this parameter. See the GraphSON (https://tinkerpop.apache.org/docs/current/reference/#_graphson)
-	// section in the TinkerPop documentation for a list of the formats that are
-	// currently supported.
+	// the format specified by this parameter. See the [GraphSON]section in the TinkerPop
+	// documentation for a list of the formats that are currently supported.
+	//
+	// [GraphSON]: https://tinkerpop.apache.org/docs/current/reference/#_graphson
 	Serializer *string
 
 	noSmithyDocumentSerde
@@ -107,25 +117,25 @@ func (c *Client) addOperationExecuteGremlinQueryMiddlewares(stack *middleware.St
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -140,13 +150,16 @@ func (c *Client) addOperationExecuteGremlinQueryMiddlewares(stack *middleware.St
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpExecuteGremlinQueryValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opExecuteGremlinQuery(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

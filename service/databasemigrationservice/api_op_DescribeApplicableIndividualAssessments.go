@@ -6,29 +6,32 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/databasemigrationservice/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Provides a list of individual assessments that you can specify for a new
-// premigration assessment run, given one or more parameters. If you specify an
-// existing migration task, this operation provides the default individual
-// assessments you can specify for that task. Otherwise, the specified parameters
-// model elements of a possible migration task on which to base a premigration
-// assessment run. To use these migration task modeling parameters, you must
-// specify an existing replication instance, a source database engine, a target
-// database engine, and a migration type. This combination of parameters
-// potentially limits the default individual assessments available for an
-// assessment run created for a corresponding migration task. If you specify no
-// parameters, this operation provides a list of all possible individual
-// assessments that you can specify for an assessment run. If you specify any one
-// of the task modeling parameters, you must specify all of them or the operation
-// cannot provide a list of individual assessments. The only parameter that you can
-// specify alone is for an existing migration task. The specified task definition
-// then determines the default list of individual assessments that you can specify
-// in an assessment run for the task.
+// premigration assessment run, given one or more parameters.
+//
+// If you specify an existing migration task, this operation provides the default
+// individual assessments you can specify for that task. Otherwise, the specified
+// parameters model elements of a possible migration task on which to base a
+// premigration assessment run.
+//
+// To use these migration task modeling parameters, you must specify an existing
+// replication instance, a source database engine, a target database engine, and a
+// migration type. This combination of parameters potentially limits the default
+// individual assessments available for an assessment run created for a
+// corresponding migration task.
+//
+// If you specify no parameters, this operation provides a list of all possible
+// individual assessments that you can specify for an assessment run. If you
+// specify any one of the task modeling parameters, you must specify all of them or
+// the operation cannot provide a list of individual assessments. The only
+// parameter that you can specify alone is for an existing migration task. The
+// specified task definition then determines the default list of individual
+// assessments that you can specify in an assessment run for the task.
 func (c *Client) DescribeApplicableIndividualAssessments(ctx context.Context, params *DescribeApplicableIndividualAssessmentsInput, optFns ...func(*Options)) (*DescribeApplicableIndividualAssessmentsOutput, error) {
 	if params == nil {
 		params = &DescribeApplicableIndividualAssessmentsInput{}
@@ -84,9 +87,10 @@ type DescribeApplicableIndividualAssessmentsOutput struct {
 	// List of names for the individual assessments supported by the premigration
 	// assessment run that you start based on the specified request parameters. For
 	// more information on the available individual assessments, including
-	// compatibility with different migration task configurations, see Working with
-	// premigration assessment runs (https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Tasks.AssessmentReport.html)
-	// in the Database Migration Service User Guide.
+	// compatibility with different migration task configurations, see [Working with premigration assessment runs]in the Database
+	// Migration Service User Guide.
+	//
+	// [Working with premigration assessment runs]: https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Tasks.AssessmentReport.html
 	IndividualAssessmentNames []string
 
 	// Pagination token returned for you to pass to a subsequent request. If you pass
@@ -123,25 +127,25 @@ func (c *Client) addOperationDescribeApplicableIndividualAssessmentsMiddlewares(
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -156,10 +160,13 @@ func (c *Client) addOperationDescribeApplicableIndividualAssessmentsMiddlewares(
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeApplicableIndividualAssessments(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

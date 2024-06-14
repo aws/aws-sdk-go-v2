@@ -6,16 +6,17 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/lightsail/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a new database in Amazon Lightsail. The create relational database
-// operation supports tag-based access control via request tags. For more
-// information, see the Amazon Lightsail Developer Guide (https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-controlling-access-using-tags)
-// .
+// Creates a new database in Amazon Lightsail.
+//
+// The create relational database operation supports tag-based access control via
+// request tags. For more information, see the [Amazon Lightsail Developer Guide].
+//
+// [Amazon Lightsail Developer Guide]: https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-controlling-access-using-tags
 func (c *Client) CreateRelationalDatabase(ctx context.Context, params *CreateRelationalDatabaseInput, optFns ...func(*Options)) (*CreateRelationalDatabaseOutput, error) {
 	if params == nil {
 		params = &CreateRelationalDatabaseInput{}
@@ -34,111 +35,185 @@ func (c *Client) CreateRelationalDatabase(ctx context.Context, params *CreateRel
 type CreateRelationalDatabaseInput struct {
 
 	// The meaning of this parameter differs according to the database engine you use.
-	// MySQL The name of the database to create when the Lightsail database resource is
+	//
+	// MySQL
+	//
+	// The name of the database to create when the Lightsail database resource is
 	// created. If this parameter isn't specified, no database is created in the
-	// database resource. Constraints:
+	// database resource.
+	//
+	// Constraints:
+	//
 	//   - Must contain 1 to 64 letters or numbers.
+	//
 	//   - Must begin with a letter. Subsequent characters can be letters,
 	//   underscores, or digits (0- 9).
-	//   - Can't be a word reserved by the specified database engine. For more
-	//   information about reserved words in MySQL, see the Keywords and Reserved Words
-	//   articles for MySQL 5.6 (https://dev.mysql.com/doc/refman/5.6/en/keywords.html)
-	//   , MySQL 5.7 (https://dev.mysql.com/doc/refman/5.7/en/keywords.html) , and
-	//   MySQL 8.0 (https://dev.mysql.com/doc/refman/8.0/en/keywords.html) .
-	// PostgreSQL The name of the database to create when the Lightsail database
-	// resource is created. If this parameter isn't specified, a database named
-	// postgres is created in the database resource. Constraints:
+	//
+	//   - Can't be a word reserved by the specified database engine.
+	//
+	// For more information about reserved words in MySQL, see the Keywords and
+	//   Reserved Words articles for [MySQL 5.6], [MySQL 5.7], and [MySQL 8.0].
+	//
+	// PostgreSQL
+	//
+	// The name of the database to create when the Lightsail database resource is
+	// created. If this parameter isn't specified, a database named postgres is
+	// created in the database resource.
+	//
+	// Constraints:
+	//
 	//   - Must contain 1 to 63 letters or numbers.
+	//
 	//   - Must begin with a letter. Subsequent characters can be letters,
 	//   underscores, or digits (0- 9).
-	//   - Can't be a word reserved by the specified database engine. For more
-	//   information about reserved words in PostgreSQL, see the SQL Key Words articles
-	//   for PostgreSQL 9.6 (https://www.postgresql.org/docs/9.6/sql-keywords-appendix.html)
-	//   , PostgreSQL 10 (https://www.postgresql.org/docs/10/sql-keywords-appendix.html)
-	//   , PostgreSQL 11 (https://www.postgresql.org/docs/11/sql-keywords-appendix.html)
-	//   , and PostgreSQL 12 (https://www.postgresql.org/docs/12/sql-keywords-appendix.html)
-	//   .
+	//
+	//   - Can't be a word reserved by the specified database engine.
+	//
+	// For more information about reserved words in PostgreSQL, see the SQL Key Words
+	//   articles for [PostgreSQL 9.6], [PostgreSQL 10], [PostgreSQL 11], and [PostgreSQL 12].
+	//
+	// [MySQL 5.6]: https://dev.mysql.com/doc/refman/5.6/en/keywords.html
+	// [PostgreSQL 9.6]: https://www.postgresql.org/docs/9.6/sql-keywords-appendix.html
+	// [PostgreSQL 10]: https://www.postgresql.org/docs/10/sql-keywords-appendix.html
+	// [MySQL 8.0]: https://dev.mysql.com/doc/refman/8.0/en/keywords.html
+	// [PostgreSQL 12]: https://www.postgresql.org/docs/12/sql-keywords-appendix.html
+	// [PostgreSQL 11]: https://www.postgresql.org/docs/11/sql-keywords-appendix.html
+	// [MySQL 5.7]: https://dev.mysql.com/doc/refman/5.7/en/keywords.html
 	//
 	// This member is required.
 	MasterDatabaseName *string
 
-	// The name for the master user. MySQL Constraints:
+	// The name for the master user.
+	//
+	// MySQL
+	//
+	// Constraints:
+	//
 	//   - Required for MySQL.
+	//
 	//   - Must be 1 to 16 letters or numbers. Can contain underscores.
+	//
 	//   - First character must be a letter.
-	//   - Can't be a reserved word for the chosen database engine. For more
-	//   information about reserved words in MySQL 5.6 or 5.7, see the Keywords and
-	//   Reserved Words articles for MySQL 5.6 (https://dev.mysql.com/doc/refman/5.6/en/keywords.html)
-	//   , MySQL 5.7 (https://dev.mysql.com/doc/refman/5.7/en/keywords.html) , or
-	//   MySQL 8.0 (https://dev.mysql.com/doc/refman/8.0/en/keywords.html) .
-	// PostgreSQL Constraints:
+	//
+	//   - Can't be a reserved word for the chosen database engine.
+	//
+	// For more information about reserved words in MySQL 5.6 or 5.7, see the Keywords
+	//   and Reserved Words articles for [MySQL 5.6], [MySQL 5.7], or [MySQL 8.0].
+	//
+	// PostgreSQL
+	//
+	// Constraints:
+	//
 	//   - Required for PostgreSQL.
+	//
 	//   - Must be 1 to 63 letters or numbers. Can contain underscores.
+	//
 	//   - First character must be a letter.
-	//   - Can't be a reserved word for the chosen database engine. For more
-	//   information about reserved words in MySQL 5.6 or 5.7, see the Keywords and
-	//   Reserved Words articles for PostgreSQL 9.6 (https://www.postgresql.org/docs/9.6/sql-keywords-appendix.html)
-	//   , PostgreSQL 10 (https://www.postgresql.org/docs/10/sql-keywords-appendix.html)
-	//   , PostgreSQL 11 (https://www.postgresql.org/docs/11/sql-keywords-appendix.html)
-	//   , and PostgreSQL 12 (https://www.postgresql.org/docs/12/sql-keywords-appendix.html)
-	//   .
+	//
+	//   - Can't be a reserved word for the chosen database engine.
+	//
+	// For more information about reserved words in MySQL 5.6 or 5.7, see the Keywords
+	//   and Reserved Words articles for [PostgreSQL 9.6], [PostgreSQL 10], [PostgreSQL 11], and [PostgreSQL 12].
+	//
+	// [MySQL 5.6]: https://dev.mysql.com/doc/refman/5.6/en/keywords.html
+	// [PostgreSQL 9.6]: https://www.postgresql.org/docs/9.6/sql-keywords-appendix.html
+	// [PostgreSQL 10]: https://www.postgresql.org/docs/10/sql-keywords-appendix.html
+	// [MySQL 8.0]: https://dev.mysql.com/doc/refman/8.0/en/keywords.html
+	// [PostgreSQL 12]: https://www.postgresql.org/docs/12/sql-keywords-appendix.html
+	// [PostgreSQL 11]: https://www.postgresql.org/docs/11/sql-keywords-appendix.html
+	// [MySQL 5.7]: https://dev.mysql.com/doc/refman/5.7/en/keywords.html
 	//
 	// This member is required.
 	MasterUsername *string
 
 	// The blueprint ID for your new database. A blueprint describes the major engine
-	// version of a database. You can get a list of database blueprints IDs by using
-	// the get relational database blueprints operation.
+	// version of a database.
+	//
+	// You can get a list of database blueprints IDs by using the get relational
+	// database blueprints operation.
 	//
 	// This member is required.
 	RelationalDatabaseBlueprintId *string
 
 	// The bundle ID for your new database. A bundle describes the performance
-	// specifications for your database. You can get a list of database bundle IDs by
-	// using the get relational database bundles operation.
+	// specifications for your database.
+	//
+	// You can get a list of database bundle IDs by using the get relational database
+	// bundles operation.
 	//
 	// This member is required.
 	RelationalDatabaseBundleId *string
 
-	// The name to use for your new Lightsail database resource. Constraints:
+	// The name to use for your new Lightsail database resource.
+	//
+	// Constraints:
+	//
 	//   - Must contain from 2 to 255 alphanumeric characters, or hyphens.
+	//
 	//   - The first and last character must be a letter or number.
 	//
 	// This member is required.
 	RelationalDatabaseName *string
 
 	// The Availability Zone in which to create your new database. Use the us-east-2a
-	// case-sensitive format. You can get a list of Availability Zones by using the
-	// get regions operation. Be sure to add the include relational database
-	// Availability Zones parameter to your request.
+	// case-sensitive format.
+	//
+	// You can get a list of Availability Zones by using the get regions operation. Be
+	// sure to add the include relational database Availability Zones parameter to
+	// your request.
 	AvailabilityZone *string
 
 	// The password for the master user. The password can include any printable ASCII
-	// character except "/", """, or "@". It cannot contain spaces. MySQL Constraints:
-	// Must contain from 8 to 41 characters. PostgreSQL Constraints: Must contain from
-	// 8 to 128 characters.
+	// character except "/", """, or "@". It cannot contain spaces.
+	//
+	// MySQL
+	//
+	// Constraints: Must contain from 8 to 41 characters.
+	//
+	// PostgreSQL
+	//
+	// Constraints: Must contain from 8 to 128 characters.
 	MasterUserPassword *string
 
 	// The daily time range during which automated backups are created for your new
-	// database if automated backups are enabled. The default is a 30-minute window
-	// selected at random from an 8-hour block of time for each AWS Region. For more
-	// information about the preferred backup window time blocks for each region, see
-	// the Working With Backups (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_WorkingWithAutomatedBackups.html#USER_WorkingWithAutomatedBackups.BackupWindow)
-	// guide in the Amazon Relational Database Service documentation. Constraints:
-	//   - Must be in the hh24:mi-hh24:mi format. Example: 16:00-16:30
+	// database if automated backups are enabled.
+	//
+	// The default is a 30-minute window selected at random from an 8-hour block of
+	// time for each AWS Region. For more information about the preferred backup window
+	// time blocks for each region, see the [Working With Backups]guide in the Amazon Relational Database
+	// Service documentation.
+	//
+	// Constraints:
+	//
+	//   - Must be in the hh24:mi-hh24:mi format.
+	//
+	// Example: 16:00-16:30
+	//
 	//   - Specified in Coordinated Universal Time (UTC).
+	//
 	//   - Must not conflict with the preferred maintenance window.
+	//
 	//   - Must be at least 30 minutes.
+	//
+	// [Working With Backups]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_WorkingWithAutomatedBackups.html#USER_WorkingWithAutomatedBackups.BackupWindow
 	PreferredBackupWindow *string
 
 	// The weekly time range during which system maintenance can occur on your new
-	// database. The default is a 30-minute window selected at random from an 8-hour
-	// block of time for each AWS Region, occurring on a random day of the week.
+	// database.
+	//
+	// The default is a 30-minute window selected at random from an 8-hour block of
+	// time for each AWS Region, occurring on a random day of the week.
+	//
 	// Constraints:
+	//
 	//   - Must be in the ddd:hh24:mi-ddd:hh24:mi format.
+	//
 	//   - Valid days: Mon, Tue, Wed, Thu, Fri, Sat, Sun.
+	//
 	//   - Must be at least 30 minutes.
+	//
 	//   - Specified in Coordinated Universal Time (UTC).
+	//
 	//   - Example: Tue:17:00-Tue:17:30
 	PreferredMaintenanceWindow *string
 
@@ -148,8 +223,9 @@ type CreateRelationalDatabaseInput struct {
 	// Lightsail resources in the same region as your database.
 	PubliclyAccessible *bool
 
-	// The tag keys and optional values to add to the resource during create. Use the
-	// TagResource action to tag a resource after it's created.
+	// The tag keys and optional values to add to the resource during create.
+	//
+	// Use the TagResource action to tag a resource after it's created.
 	Tags []types.Tag
 
 	noSmithyDocumentSerde
@@ -190,25 +266,25 @@ func (c *Client) addOperationCreateRelationalDatabaseMiddlewares(stack *middlewa
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -223,13 +299,16 @@ func (c *Client) addOperationCreateRelationalDatabaseMiddlewares(stack *middlewa
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpCreateRelationalDatabaseValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateRelationalDatabase(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

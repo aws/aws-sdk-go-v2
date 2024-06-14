@@ -6,22 +6,27 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/autoscaling/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Removes one or more instances from the specified Auto Scaling group. After the
-// instances are detached, you can manage them independent of the Auto Scaling
-// group. If you do not specify the option to decrement the desired capacity,
-// Amazon EC2 Auto Scaling launches instances to replace the ones that are
-// detached. If there is a Classic Load Balancer attached to the Auto Scaling
-// group, the instances are deregistered from the load balancer. If there are
-// target groups attached to the Auto Scaling group, the instances are deregistered
-// from the target groups. For more information, see Detach EC2 instances from
-// your Auto Scaling group (https://docs.aws.amazon.com/autoscaling/ec2/userguide/detach-instance-asg.html)
-// in the Amazon EC2 Auto Scaling User Guide.
+// Removes one or more instances from the specified Auto Scaling group.
+//
+// After the instances are detached, you can manage them independent of the Auto
+// Scaling group.
+//
+// If you do not specify the option to decrement the desired capacity, Amazon EC2
+// Auto Scaling launches instances to replace the ones that are detached.
+//
+// If there is a Classic Load Balancer attached to the Auto Scaling group, the
+// instances are deregistered from the load balancer. If there are target groups
+// attached to the Auto Scaling group, the instances are deregistered from the
+// target groups.
+//
+// For more information, see [Detach EC2 instances from your Auto Scaling group] in the Amazon EC2 Auto Scaling User Guide.
+//
+// [Detach EC2 instances from your Auto Scaling group]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/detach-instance-asg.html
 func (c *Client) DetachInstances(ctx context.Context, params *DetachInstancesInput, optFns ...func(*Options)) (*DetachInstancesOutput, error) {
 	if params == nil {
 		params = &DetachInstancesInput{}
@@ -89,25 +94,25 @@ func (c *Client) addOperationDetachInstancesMiddlewares(stack *middleware.Stack,
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -122,13 +127,16 @@ func (c *Client) addOperationDetachInstancesMiddlewares(stack *middleware.Stack,
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDetachInstancesValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDetachInstances(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

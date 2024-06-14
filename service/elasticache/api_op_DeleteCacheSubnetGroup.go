@@ -6,13 +6,14 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes a cache subnet group. You cannot delete a default cache subnet group or
-// one that is associated with any clusters.
+// Deletes a cache subnet group.
+//
+// You cannot delete a default cache subnet group or one that is associated with
+// any clusters.
 func (c *Client) DeleteCacheSubnetGroup(ctx context.Context, params *DeleteCacheSubnetGroupInput, optFns ...func(*Options)) (*DeleteCacheSubnetGroupOutput, error) {
 	if params == nil {
 		params = &DeleteCacheSubnetGroupInput{}
@@ -31,8 +32,9 @@ func (c *Client) DeleteCacheSubnetGroup(ctx context.Context, params *DeleteCache
 // Represents the input of a DeleteCacheSubnetGroup operation.
 type DeleteCacheSubnetGroupInput struct {
 
-	// The name of the cache subnet group to delete. Constraints: Must contain no more
-	// than 255 alphanumeric characters or hyphens.
+	// The name of the cache subnet group to delete.
+	//
+	// Constraints: Must contain no more than 255 alphanumeric characters or hyphens.
 	//
 	// This member is required.
 	CacheSubnetGroupName *string
@@ -69,25 +71,25 @@ func (c *Client) addOperationDeleteCacheSubnetGroupMiddlewares(stack *middleware
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -102,13 +104,16 @@ func (c *Client) addOperationDeleteCacheSubnetGroupMiddlewares(stack *middleware
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDeleteCacheSubnetGroupValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteCacheSubnetGroup(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

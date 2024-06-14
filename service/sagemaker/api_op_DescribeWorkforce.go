@@ -6,16 +6,18 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Lists private workforce information, including workforce name, Amazon Resource
-// Name (ARN), and, if applicable, allowed IP address ranges ( CIDRs (https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Subnets.html)
-// ). Allowable IP address ranges are the IP addresses that workers can use to
-// access tasks. This operation applies only to private workforces.
+// Name (ARN), and, if applicable, allowed IP address ranges ([CIDRs] ). Allowable IP
+// address ranges are the IP addresses that workers can use to access tasks.
+//
+// This operation applies only to private workforces.
+//
+// [CIDRs]: https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Subnets.html
 func (c *Client) DescribeWorkforce(ctx context.Context, params *DescribeWorkforceInput, optFns ...func(*Options)) (*DescribeWorkforceOutput, error) {
 	if params == nil {
 		params = &DescribeWorkforceInput{}
@@ -49,8 +51,9 @@ type DescribeWorkforceOutput struct {
 	// first private work team. You can create one private work force in each Amazon
 	// Web Services Region. By default, any workforce-related API operation used in a
 	// specific region will apply to the workforce created in that region. To learn how
-	// to create a private workforce, see Create a Private Workforce (https://docs.aws.amazon.com/sagemaker/latest/dg/sms-workforce-create-private.html)
-	// .
+	// to create a private workforce, see [Create a Private Workforce].
+	//
+	// [Create a Private Workforce]: https://docs.aws.amazon.com/sagemaker/latest/dg/sms-workforce-create-private.html
 	//
 	// This member is required.
 	Workforce *types.Workforce
@@ -83,25 +86,25 @@ func (c *Client) addOperationDescribeWorkforceMiddlewares(stack *middleware.Stac
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -116,13 +119,16 @@ func (c *Client) addOperationDescribeWorkforceMiddlewares(stack *middleware.Stac
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDescribeWorkforceValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeWorkforce(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

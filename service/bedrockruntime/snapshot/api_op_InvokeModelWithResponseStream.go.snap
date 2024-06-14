@@ -1,0 +1,35 @@
+InvokeModelWithResponseStream
+	Initialize stack step
+		RegisterServiceMetadata
+		legacyEndpointContextSetter
+		SetLogger
+		OperationInputValidation
+	Serialize stack step
+		setOperationInput
+		ResolveEndpoint
+		OperationSerializer
+	Build stack step
+		ClientRequestID
+		ComputeContentLength
+		UserAgent
+		AddTimeOffsetMiddleware
+		RecursionDetection
+	Finalize stack step
+		ResolveAuthScheme
+		GetIdentity
+		ResolveEndpointV2
+		disableHTTPS
+		ComputePayloadHash
+		Retry
+		RetryMetricsHeader
+		setLegacyContextSigningOptions
+		Signing
+	Deserialize stack step
+		AddRawResponseToMetadata
+		OperationEventStreamDeserializer
+		ResponseErrorWrapper
+		RequestIDRetriever
+		OperationDeserializer
+		AddTimeOffsetMiddleware
+		RecordResponseTiming
+		RequestResponseLogger

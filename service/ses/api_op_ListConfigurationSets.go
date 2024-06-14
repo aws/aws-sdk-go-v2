@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/ses/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -14,13 +13,16 @@ import (
 
 // Provides a list of the configuration sets associated with your Amazon SES
 // account in the current Amazon Web Services Region. For information about using
-// configuration sets, see Monitoring Your Amazon SES Sending Activity (https://docs.aws.amazon.com/ses/latest/dg/monitor-sending-activity.html)
-// in the Amazon SES Developer Guide. You can execute this operation no more than
-// once per second. This operation returns up to 1,000 configuration sets each time
-// it is run. If your Amazon SES account has more than 1,000 configuration sets,
-// this operation also returns NextToken . You can then execute the
-// ListConfigurationSets operation again, passing the NextToken parameter and the
-// value of the NextToken element to retrieve additional results.
+// configuration sets, see [Monitoring Your Amazon SES Sending Activity]in the Amazon SES Developer Guide.
+//
+// You can execute this operation no more than once per second. This operation
+// returns up to 1,000 configuration sets each time it is run. If your Amazon SES
+// account has more than 1,000 configuration sets, this operation also returns
+// NextToken . You can then execute the ListConfigurationSets operation again,
+// passing the NextToken parameter and the value of the NextToken element to
+// retrieve additional results.
+//
+// [Monitoring Your Amazon SES Sending Activity]: https://docs.aws.amazon.com/ses/latest/dg/monitor-sending-activity.html
 func (c *Client) ListConfigurationSets(ctx context.Context, params *ListConfigurationSetsInput, optFns ...func(*Options)) (*ListConfigurationSetsOutput, error) {
 	if params == nil {
 		params = &ListConfigurationSetsInput{}
@@ -38,9 +40,9 @@ func (c *Client) ListConfigurationSets(ctx context.Context, params *ListConfigur
 
 // Represents a request to list the configuration sets associated with your Amazon
 // Web Services account. Configuration sets enable you to publish email sending
-// events. For information about using configuration sets, see the Amazon SES
-// Developer Guide (https://docs.aws.amazon.com/ses/latest/dg/monitor-sending-activity.html)
-// .
+// events. For information about using configuration sets, see the [Amazon SES Developer Guide].
+//
+// [Amazon SES Developer Guide]: https://docs.aws.amazon.com/ses/latest/dg/monitor-sending-activity.html
 type ListConfigurationSetsInput struct {
 
 	// The number of configuration sets to return.
@@ -55,8 +57,9 @@ type ListConfigurationSetsInput struct {
 
 // A list of configuration sets associated with your Amazon Web Services account.
 // Configuration sets enable you to publish email sending events. For information
-// about using configuration sets, see the Amazon SES Developer Guide (https://docs.aws.amazon.com/ses/latest/dg/monitor-sending-activity.html)
-// .
+// about using configuration sets, see the [Amazon SES Developer Guide].
+//
+// [Amazon SES Developer Guide]: https://docs.aws.amazon.com/ses/latest/dg/monitor-sending-activity.html
 type ListConfigurationSetsOutput struct {
 
 	// A list of configuration sets.
@@ -94,25 +97,25 @@ func (c *Client) addOperationListConfigurationSetsMiddlewares(stack *middleware.
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -127,10 +130,13 @@ func (c *Client) addOperationListConfigurationSetsMiddlewares(stack *middleware.
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListConfigurationSets(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

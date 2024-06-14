@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/internetmonitor/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -31,13 +30,24 @@ func (c *Client) ListMonitors(ctx context.Context, params *ListMonitorsInput, op
 
 type ListMonitorsInput struct {
 
+	// A boolean option that you can set to TRUE to include monitors for linked
+	// accounts in a list of monitors, when you've set up cross-account sharing in
+	// Amazon CloudWatch Internet Monitor. You configure cross-account sharing by using
+	// Amazon CloudWatch Observability Access Manager. For more information, see [Internet Monitor cross-account observability]in
+	// the Amazon CloudWatch Internet Monitor User Guide.
+	//
+	// [Internet Monitor cross-account observability]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/cwim-cross-account.html
+	IncludeLinkedAccounts *bool
+
 	// The number of monitor objects that you want to return with this call.
 	MaxResults *int32
 
 	// The status of a monitor. This includes the status of the data processing for
-	// the monitor and the status of the monitor itself. For information about the
-	// statuses for a monitor, see Monitor (https://docs.aws.amazon.com/internet-monitor/latest/api/API_Monitor.html)
-	// .
+	// the monitor and the status of the monitor itself.
+	//
+	// For information about the statuses for a monitor, see [Monitor].
+	//
+	// [Monitor]: https://docs.aws.amazon.com/internet-monitor/latest/api/API_Monitor.html
 	MonitorStatus *string
 
 	// The token for the next set of results. You receive this token from a previous
@@ -86,25 +96,25 @@ func (c *Client) addOperationListMonitorsMiddlewares(stack *middleware.Stack, op
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -119,10 +129,13 @@ func (c *Client) addOperationListMonitorsMiddlewares(stack *middleware.Stack, op
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListMonitors(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/resourceexplorer2/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -18,12 +17,12 @@ import (
 // Explorer stops discovering and indexing resources in that Region. Resource
 // Explorer also deletes all views in that Region. These actions occur as
 // asynchronous background tasks. You can check to see when the actions are
-// complete by using the GetIndex operation and checking the Status response
-// value. If the index you delete is the aggregator index for the Amazon Web
-// Services account, you must wait 24 hours before you can promote another local
-// index to be the aggregator index for the account. Users can't perform
-// account-wide searches using Resource Explorer until another aggregator index is
-// configured.
+// complete by using the GetIndexoperation and checking the Status response value.
+//
+// If the index you delete is the aggregator index for the Amazon Web Services
+// account, you must wait 24 hours before you can promote another local index to be
+// the aggregator index for the account. Users can't perform account-wide searches
+// using Resource Explorer until another aggregator index is configured.
 func (c *Client) DeleteIndex(ctx context.Context, params *DeleteIndexInput, optFns ...func(*Options)) (*DeleteIndexOutput, error) {
 	if params == nil {
 		params = &DeleteIndexInput{}
@@ -41,8 +40,9 @@ func (c *Client) DeleteIndex(ctx context.Context, params *DeleteIndexInput, optF
 
 type DeleteIndexInput struct {
 
-	// The Amazon resource name (ARN) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
-	// of the index that you want to delete.
+	// The [Amazon resource name (ARN)] of the index that you want to delete.
+	//
+	// [Amazon resource name (ARN)]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
 	//
 	// This member is required.
 	Arn *string
@@ -52,9 +52,11 @@ type DeleteIndexInput struct {
 
 type DeleteIndexOutput struct {
 
-	// The Amazon resource name (ARN) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
-	// of the index that you successfully started the deletion process. This operation
-	// is asynchronous. To check its status, call the GetIndex operation.
+	// The [Amazon resource name (ARN)] of the index that you successfully started the deletion process.
+	//
+	// This operation is asynchronous. To check its status, call the GetIndex operation.
+	//
+	// [Amazon resource name (ARN)]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
 	Arn *string
 
 	// The date and time when you last updated this index.
@@ -91,25 +93,25 @@ func (c *Client) addOperationDeleteIndexMiddlewares(stack *middleware.Stack, opt
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -124,13 +126,16 @@ func (c *Client) addOperationDeleteIndexMiddlewares(stack *middleware.Stack, opt
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDeleteIndexValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteIndex(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

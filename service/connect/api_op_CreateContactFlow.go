@@ -6,15 +6,16 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/connect/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a flow for the specified Amazon Connect instance. You can also create
-// and update flows using the Amazon Connect Flow language (https://docs.aws.amazon.com/connect/latest/APIReference/flow-language.html)
-// .
+// Creates a flow for the specified Amazon Connect instance.
+//
+// You can also create and update flows using the [Amazon Connect Flow language].
+//
+// [Amazon Connect Flow language]: https://docs.aws.amazon.com/connect/latest/APIReference/flow-language.html
 func (c *Client) CreateContactFlow(ctx context.Context, params *CreateContactFlowInput, optFns ...func(*Options)) (*CreateContactFlowOutput, error) {
 	if params == nil {
 		params = &CreateContactFlowInput{}
@@ -32,9 +33,11 @@ func (c *Client) CreateContactFlow(ctx context.Context, params *CreateContactFlo
 
 type CreateContactFlowInput struct {
 
-	// The JSON string that represents the content of the flow. For an example, see
-	// Example flow in Amazon Connect Flow language (https://docs.aws.amazon.com/connect/latest/APIReference/flow-language-example.html)
-	// . Length Constraints: Minimum length of 1. Maximum length of 256000.
+	// The JSON string that represents the content of the flow. For an example, see [Example flow in Amazon Connect Flow language].
+	//
+	// Length Constraints: Minimum length of 1. Maximum length of 256000.
+	//
+	// [Example flow in Amazon Connect Flow language]: https://docs.aws.amazon.com/connect/latest/APIReference/flow-language-example.html
 	//
 	// This member is required.
 	Content *string
@@ -49,15 +52,21 @@ type CreateContactFlowInput struct {
 	// This member is required.
 	Name *string
 
-	// The type of the flow. For descriptions of the available types, see Choose a
-	// flow type (https://docs.aws.amazon.com/connect/latest/adminguide/create-contact-flow.html#contact-flow-types)
-	// in the Amazon Connect Administrator Guide.
+	// The type of the flow. For descriptions of the available types, see [Choose a flow type] in the
+	// Amazon Connect Administrator Guide.
+	//
+	// [Choose a flow type]: https://docs.aws.amazon.com/connect/latest/adminguide/create-contact-flow.html#contact-flow-types
 	//
 	// This member is required.
 	Type types.ContactFlowType
 
 	// The description of the flow.
 	Description *string
+
+	// Indicates the flow status as either SAVED or PUBLISHED . The PUBLISHED status
+	// will initiate validation on the content. the SAVED status does not initiate
+	// validation of the content. SAVED | PUBLISHED .
+	Status types.ContactFlowStatus
 
 	// The tags used to organize, track, or control access for this resource. For
 	// example, { "Tags": {"key1":"value1", "key2":"value2"} }.
@@ -102,25 +111,25 @@ func (c *Client) addOperationCreateContactFlowMiddlewares(stack *middleware.Stac
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -135,13 +144,16 @@ func (c *Client) addOperationCreateContactFlowMiddlewares(stack *middleware.Stac
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpCreateContactFlowValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateContactFlow(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

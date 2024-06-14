@@ -6,33 +6,44 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/customerprofiles/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
-// Before calling this API, use CreateDomain (https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_CreateDomain.html)
-// or UpdateDomain (https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_UpdateDomain.html)
-// to enable identity resolution: set Matching to true. GetMatches returns
-// potentially matching profiles, based on the results of the latest run of a
-// machine learning process. The process of matching duplicate profiles. If
-// Matching = true , Amazon Connect Customer Profiles starts a weekly batch process
-// called Identity Resolution Job. If you do not specify a date and time for
-// Identity Resolution Job to run, by default it runs every Saturday at 12AM UTC to
-// detect duplicate profiles in your domains. After the Identity Resolution Job
-// completes, use the GetMatches (https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_GetMatches.html)
-// API to return and review the results. Or, if you have configured ExportingConfig
-// in the MatchingRequest , you can download the results from S3. Amazon Connect
-// uses the following profile attributes to identify matches:
+// Before calling this API, use [CreateDomain] or [UpdateDomain] to enable identity resolution: set Matching
+// to true.
+//
+// GetMatches returns potentially matching profiles, based on the results of the
+// latest run of a machine learning process.
+//
+// The process of matching duplicate profiles. If Matching = true , Amazon Connect
+// Customer Profiles starts a weekly batch process called Identity Resolution Job.
+// If you do not specify a date and time for Identity Resolution Job to run, by
+// default it runs every Saturday at 12AM UTC to detect duplicate profiles in your
+// domains.
+//
+// After the Identity Resolution Job completes, use the [GetMatches] API to return and review
+// the results. Or, if you have configured ExportingConfig in the MatchingRequest ,
+// you can download the results from S3.
+//
+// Amazon Connect uses the following profile attributes to identify matches:
+//
 //   - PhoneNumber
+//
 //   - HomePhoneNumber
+//
 //   - BusinessPhoneNumber
+//
 //   - MobilePhoneNumber
+//
 //   - EmailAddress
+//
 //   - PersonalEmailAddress
+//
 //   - BusinessEmailAddress
+//
 //   - FullName
 //
 // For example, two or more profiles—with spelling mistakes such as John Doe and
@@ -40,6 +51,10 @@ import (
 // johndoe@anycompany.com, or different phone number formats such as 555-010-0000
 // and +1-555-010-0000—can be detected as belonging to the same customer John Doe
 // and merged into a unified profile.
+//
+// [GetMatches]: https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_GetMatches.html
+// [UpdateDomain]: https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_UpdateDomain.html
+// [CreateDomain]: https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_CreateDomain.html
 func (c *Client) GetMatches(ctx context.Context, params *GetMatchesInput, optFns ...func(*Options)) (*GetMatchesOutput, error) {
 	if params == nil {
 		params = &GetMatchesInput{}
@@ -114,25 +129,25 @@ func (c *Client) addOperationGetMatchesMiddlewares(stack *middleware.Stack, opti
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -147,13 +162,16 @@ func (c *Client) addOperationGetMatchesMiddlewares(stack *middleware.Stack, opti
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpGetMatchesValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetMatches(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

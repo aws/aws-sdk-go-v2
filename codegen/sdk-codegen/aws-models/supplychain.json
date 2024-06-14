@@ -259,12 +259,162 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.supplychain#DataIntegrationEventData": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1048576
+                },
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.supplychain#DataIntegrationEventGroupId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 255
+                }
+            }
+        },
+        "com.amazonaws.supplychain#DataIntegrationEventResource": {
+            "type": "resource",
+            "identifiers": {
+                "instanceId": {
+                    "target": "com.amazonaws.supplychain#UUID"
+                },
+                "eventId": {
+                    "target": "com.amazonaws.supplychain#UUID"
+                }
+            },
+            "properties": {
+                "eventType": {
+                    "target": "com.amazonaws.supplychain#DataIntegrationEventType"
+                },
+                "data": {
+                    "target": "com.amazonaws.supplychain#DataIntegrationEventData"
+                },
+                "eventGroupId": {
+                    "target": "com.amazonaws.supplychain#DataIntegrationEventGroupId"
+                },
+                "eventTimestamp": {
+                    "target": "smithy.api#Timestamp"
+                }
+            },
+            "create": {
+                "target": "com.amazonaws.supplychain#SendDataIntegrationEvent"
+            },
+            "traits": {
+                "aws.api#arn": {
+                    "template": "instance/{instanceId}/data-integration-events/{eventId}"
+                }
+            }
+        },
+        "com.amazonaws.supplychain#DataIntegrationEventType": {
+            "type": "enum",
+            "members": {
+                "FORECAST": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "scn.data.forecast"
+                    }
+                },
+                "INVENTORY_LEVEL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "scn.data.inventorylevel"
+                    }
+                },
+                "INBOUND_ORDER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "scn.data.inboundorder"
+                    }
+                },
+                "INBOUND_ORDER_LINE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "scn.data.inboundorderline"
+                    }
+                },
+                "INBOUND_ORDER_LINE_SCHEDULE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "scn.data.inboundorderlineschedule"
+                    }
+                },
+                "OUTBOUND_ORDER_LINE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "scn.data.outboundorderline"
+                    }
+                },
+                "OUTBOUND_SHIPMENT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "scn.data.outboundshipment"
+                    }
+                },
+                "PROCESS_HEADER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "scn.data.processheader"
+                    }
+                },
+                "PROCESS_OPERATION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "scn.data.processoperation"
+                    }
+                },
+                "PROCESS_PRODUCT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "scn.data.processproduct"
+                    }
+                },
+                "RESERVATION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "scn.data.reservation"
+                    }
+                },
+                "SHIPMENT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "scn.data.shipment"
+                    }
+                },
+                "SHIPMENT_STOP": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "scn.data.shipmentstop"
+                    }
+                },
+                "SHIPMENT_STOP_ORDER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "scn.data.shipmentstoporder"
+                    }
+                },
+                "SUPPLY_PLAN": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "scn.data.supplyplan"
+                    }
+                }
+            }
+        },
         "com.amazonaws.supplychain#GalaxyPublicAPIGateway": {
             "type": "service",
             "version": "2024-01-01",
             "resources": [
                 {
                     "target": "com.amazonaws.supplychain#BillOfMaterialsImportJobResource"
+                },
+                {
+                    "target": "com.amazonaws.supplychain#DataIntegrationEventResource"
                 }
             ],
             "errors": [
@@ -1119,6 +1269,312 @@
                 "smithy.api#documentation": "<p>Request references a resource which does not exist.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 404
+            }
+        },
+        "com.amazonaws.supplychain#SendDataIntegrationEvent": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.supplychain#SendDataIntegrationEventRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.supplychain#SendDataIntegrationEventResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.supplychain#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.supplychain#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.supplychain#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.supplychain#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.supplychain#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.supplychain#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.supplychain#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Send transactional data events with real-time data for analysis or monitoring.</p>",
+                "smithy.api#examples": [
+                    {
+                        "title": "Successful SendDataIntegrationEvent for inboundorder event type",
+                        "input": {
+                            "instanceId": "8928ae12-15e5-4441-825d-ec2184f0a43a",
+                            "eventType": "scn.data.inboundorder",
+                            "data": "{\"id\": \"inbound-order-id-test-123\", \"tpartner_id\": \"partner-id-test-123\" }",
+                            "eventGroupId": "inboundOrderId",
+                            "eventTimestamp": 1.515531081123E9
+                        },
+                        "output": {
+                            "eventId": "c4132c1d-8f60-44a2-9932-f723c4f7b8a7"
+                        }
+                    },
+                    {
+                        "title": "Successful SendDataIntegrationEvent for inboundorderline event type",
+                        "input": {
+                            "instanceId": "8928ae12-15e5-4441-825d-ec2184f0a43a",
+                            "eventType": "scn.data.inboundorderline",
+                            "data": "{\"id\": \"inbound-order-line-id-test-123\", \"order_id\": \"order-id-test-123\", \"tpartner_id\": \"partner-id-test-123\", \"product_id\": \"product-id-test-123\", \"quantity_submitted\": \"100.0\" }",
+                            "eventGroupId": "inboundOrderLineId",
+                            "eventTimestamp": 1.515531081123E9
+                        },
+                        "output": {
+                            "eventId": "45d95db2-d106-40e0-aa98-f1204230a691"
+                        }
+                    },
+                    {
+                        "title": "Successful SendDataIntegrationEvent for inboundorderlineschedule event type",
+                        "input": {
+                            "instanceId": "8928ae12-15e5-4441-825d-ec2184f0a43a",
+                            "eventType": "scn.data.inboundorderlineschedule",
+                            "data": "{\"id\": \"inbound-order-line-schedule-id-test-123\", \"order_id\": \"order-id-test-123\", \"order_line_id\": \"order-line-id-test-123\", \"product_id\": \"product-id-test-123\"}",
+                            "eventGroupId": "inboundOrderLineScheduleId",
+                            "eventTimestamp": 1.515531081123E9
+                        },
+                        "output": {
+                            "eventId": "5abba995-7735-4d1e-95c4-7cc93e48cf9f"
+                        }
+                    },
+                    {
+                        "title": "Successful SendDataIntegrationEvent for forecast event type",
+                        "input": {
+                            "instanceId": "8928ae12-15e5-4441-825d-ec2184f0a43a",
+                            "eventType": "scn.data.forecast",
+                            "data": "{\"snapshot_date\": \"1672470400000\", \"product_id\": \"product-id-test-123\", \"site_id\": \"site-id-test-123\", \"region_id\": \"region-id-test-123\", \"product_group_id\": \"product-group-id-test-123\", \"forecast_start_dttm\": \"1672470400000\", \"forecast_end_dttm\": \"1672470400000\" }",
+                            "eventGroupId": "forecastId",
+                            "eventTimestamp": 1.515531081123E9
+                        },
+                        "output": {
+                            "eventId": "29312d5b-f499-4dcd-b017-3dab3cd34d61"
+                        }
+                    },
+                    {
+                        "title": "Successful SendDataIntegrationEvent for inventorylevel event type",
+                        "input": {
+                            "instanceId": "8928ae12-15e5-4441-825d-ec2184f0a43a",
+                            "eventType": "scn.data.inventorylevel",
+                            "data": "{\"snapshot_date\": \"1672470400000\", \"site_id\": \"site-id-test-123\", \"product_id\": \"product-id-test-123\", \"on_hand_inventory\": \"100.0\", \"inv_condition\": \"good\", \"lot_number\": \"lot-number-test-123\"}",
+                            "eventGroupId": "inventoryLevelId",
+                            "eventTimestamp": 1.515531081123E9
+                        },
+                        "output": {
+                            "eventId": "3aa78324-acd8-4fdd-a19e-231ea003c2b3"
+                        }
+                    },
+                    {
+                        "title": "Successful SendDataIntegrationEvent for outboundorderline event type",
+                        "input": {
+                            "instanceId": "8928ae12-15e5-4441-825d-ec2184f0a43a",
+                            "eventType": "scn.data.outboundorderline",
+                            "data": "{\"id\": \"outbound-orderline-id-test-123\", \"cust_order_id\": \"cust-order-id-test-123\", \"product_id\": \"product-id-test-123\" }",
+                            "eventGroupId": "outboundOrderLineId",
+                            "eventTimestamp": 1.515531081123E9
+                        },
+                        "output": {
+                            "eventId": "959b7ef9-5e2d-4795-b1ca-5b16a3eb6b89"
+                        }
+                    },
+                    {
+                        "title": "Successful SendDataIntegrationEvent for outboundshipment event type",
+                        "input": {
+                            "instanceId": "8928ae12-15e5-4441-825d-ec2184f0a43a",
+                            "eventType": "scn.data.outboundshipment",
+                            "data": "{\"id\": \"outbound-shipment-id-test-123\", \"cust_order_id\": \"cust-order-id-test-123\", \"cust_order_line_id\": \"cust-order-line-id-test-123\", \"product_id\": \"product-id-test-123\" }",
+                            "eventGroupId": "outboundShipmentId",
+                            "eventTimestamp": 1.515531081123E9
+                        },
+                        "output": {
+                            "eventId": "59feded3-5e46-4126-81bf-0137ca176ee0"
+                        }
+                    },
+                    {
+                        "title": "Successful SendDataIntegrationEvent for processheader event type",
+                        "input": {
+                            "instanceId": "8928ae12-15e5-4441-825d-ec2184f0a43a",
+                            "eventType": "scn.data.processheader",
+                            "data": "{\"process_id\": \"process-id-test-123\" }",
+                            "eventGroupId": "processHeaderId",
+                            "eventTimestamp": 1.515531081123E9
+                        },
+                        "output": {
+                            "eventId": "564130eb-2d8a-4550-a768-ddf0daf7b4a9"
+                        }
+                    },
+                    {
+                        "title": "Successful SendDataIntegrationEvent for processoperation event type",
+                        "input": {
+                            "instanceId": "8928ae12-15e5-4441-825d-ec2184f0a43a",
+                            "eventType": "scn.data.processoperation",
+                            "data": "{\"process_operation_id\": \"process-operation-id-test-123\", \"process_id\": \"process-id-test-123\" }",
+                            "eventGroupId": "processOperationId",
+                            "eventTimestamp": 1.515531081123E9
+                        },
+                        "output": {
+                            "eventId": "db5df408-89c7-4b9f-a326-016f6c2b3396"
+                        }
+                    },
+                    {
+                        "title": "Successful SendDataIntegrationEvent for processproduct event type",
+                        "input": {
+                            "instanceId": "8928ae12-15e5-4441-825d-ec2184f0a43a",
+                            "eventType": "scn.data.processproduct",
+                            "data": "{\"process_product_id\": \"process-product-id-test-123\", \"process_id\": \"process-id-test-123\" }",
+                            "eventGroupId": "processProductId",
+                            "eventTimestamp": 1.515531081123E9
+                        },
+                        "output": {
+                            "eventId": "6929b275-485e-4035-a798-99077ca6d669"
+                        }
+                    },
+                    {
+                        "title": "Successful SendDataIntegrationEvent for reservation event type",
+                        "input": {
+                            "instanceId": "8928ae12-15e5-4441-825d-ec2184f0a43a",
+                            "eventType": "scn.data.reservation",
+                            "data": "{\"reservation_id\": \"reservation-id-test-123\", \"reservation_detail_id\": \"reservation-detail-id-test-123\" }",
+                            "eventGroupId": "reservationId",
+                            "eventTimestamp": 1.515531081123E9
+                        },
+                        "output": {
+                            "eventId": "f6c55a8b-fde2-44f6-848a-9b4336c77209"
+                        }
+                    },
+                    {
+                        "title": "Successful SendDataIntegrationEvent for shipment event type",
+                        "input": {
+                            "instanceId": "8928ae12-15e5-4441-825d-ec2184f0a43a",
+                            "eventType": "scn.data.shipment",
+                            "data": "{\"id\": \"shipment-id-test-123\", \"supplier_tpartner_id\": \"supplier-tpartner-id-test-123\", \"product_id\": \"product-id-test-123\", \"order_id\": \"order-id-test-123\", \"order_line_id\": \"order-line-id-test-123\", \"package_id\": \"package-id-test-123\" }",
+                            "eventGroupId": "shipmentId",
+                            "eventTimestamp": 1.515531081123E9
+                        },
+                        "output": {
+                            "eventId": "61d079d8-3f56-49bb-b35a-c0271a4e4f0a"
+                        }
+                    },
+                    {
+                        "title": "Successful SendDataIntegrationEvent for shipmentstop event type",
+                        "input": {
+                            "instanceId": "8928ae12-15e5-4441-825d-ec2184f0a43a",
+                            "eventType": "scn.data.shipmentstop",
+                            "data": "{\"shipment_stop_id\": \"shipment-stop-id-test-123\", \"shipment_id\": \"shipment-id-test-123\" }",
+                            "eventGroupId": "shipmentStopId",
+                            "eventTimestamp": 1.515531081123E9
+                        },
+                        "output": {
+                            "eventId": "3610992a-fc2f-4da4-9beb-724994622ba1"
+                        }
+                    },
+                    {
+                        "title": "Successful SendDataIntegrationEvent for shipmentstoporder event type",
+                        "input": {
+                            "instanceId": "8928ae12-15e5-4441-825d-ec2184f0a43a",
+                            "eventType": "scn.data.shipmentstoporder",
+                            "data": "{\"shipment_stop_order_id\": \"shipment-stop-order-id-test-123\", \"shipment_stop_id\": \"shipment-stop-id-test-123\", \"shipment_id\": \"shipment-id-test-123\" }",
+                            "eventGroupId": "shipmentStopOrderId",
+                            "eventTimestamp": 1.515531081123E9
+                        },
+                        "output": {
+                            "eventId": "1d550a60-9321-4d25-a132-9dd4b2d9e934"
+                        }
+                    },
+                    {
+                        "title": "Successful SendDataIntegrationEvent for supplyplan event type",
+                        "input": {
+                            "instanceId": "8928ae12-15e5-4441-825d-ec2184f0a43a",
+                            "eventType": "scn.data.supplyplan",
+                            "data": "{\"supply_plan_id\": \"supply-plan-id-test-123\" }",
+                            "eventGroupId": "supplyPlanId",
+                            "eventTimestamp": 1.515531081123E9
+                        },
+                        "output": {
+                            "eventId": "9abaee56-5dc4-4c31-8250-3206a651d8a1"
+                        }
+                    }
+                ],
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "POST",
+                    "uri": "/api-data/data-integration/instance/{instanceId}/data-integration-events"
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.supplychain#SendDataIntegrationEventRequest": {
+            "type": "structure",
+            "members": {
+                "instanceId": {
+                    "target": "com.amazonaws.supplychain#UUID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The AWS Supply Chain instance identifier.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "eventType": {
+                    "target": "com.amazonaws.supplychain#DataIntegrationEventType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The data event type.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "data": {
+                    "target": "com.amazonaws.supplychain#DataIntegrationEventData",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The data payload of the event.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "eventGroupId": {
+                    "target": "com.amazonaws.supplychain#DataIntegrationEventGroupId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Event identifier (for example, orderId for InboundOrder) used for data sharing or partitioning.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "eventTimestamp": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The event timestamp (in epoch seconds).</p>",
+                        "smithy.api#timestampFormat": "epoch-seconds"
+                    }
+                },
+                "clientToken": {
+                    "target": "com.amazonaws.supplychain#ClientToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The idempotent client token.</p>",
+                        "smithy.api#idempotencyToken": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The request parameters for SendDataIntegrationEvent.</p>",
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.supplychain#SendDataIntegrationEventResponse": {
+            "type": "structure",
+            "members": {
+                "eventId": {
+                    "target": "com.amazonaws.supplychain#UUID",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique event identifier.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The response parameters for SendDataIntegrationEvent.</p>",
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.supplychain#ServiceQuotaExceededException": {

@@ -6,14 +6,13 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockagent/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
-// Prepares an existing Amazon Bedrock Agent to receive runtime requests
+// Creates a DRAFT version of the agent that can be used for internal testing.
 func (c *Client) PrepareAgent(ctx context.Context, params *PrepareAgentInput, optFns ...func(*Options)) (*PrepareAgentOutput, error) {
 	if params == nil {
 		params = &PrepareAgentInput{}
@@ -29,10 +28,9 @@ func (c *Client) PrepareAgent(ctx context.Context, params *PrepareAgentInput, op
 	return out, nil
 }
 
-// PrepareAgent Request
 type PrepareAgentInput struct {
 
-	// Id generated at the server side when an Agent is created
+	// The unique identifier of the agent for which to create a DRAFT version.
 	//
 	// This member is required.
 	AgentId *string
@@ -40,25 +38,24 @@ type PrepareAgentInput struct {
 	noSmithyDocumentSerde
 }
 
-// PrepareAgent Response
 type PrepareAgentOutput struct {
 
-	// Identifier for a resource.
+	// The unique identifier of the agent for which the DRAFT version was created.
 	//
 	// This member is required.
 	AgentId *string
 
-	// Schema Type for Action APIs.
+	// The status of the DRAFT version and whether it is ready for use.
 	//
 	// This member is required.
 	AgentStatus types.AgentStatus
 
-	// Agent Version.
+	// The version of the agent.
 	//
 	// This member is required.
 	AgentVersion *string
 
-	// Time Stamp.
+	// The time at which the DRAFT version of the agent was last prepared.
 	//
 	// This member is required.
 	PreparedAt *time.Time
@@ -91,25 +88,25 @@ func (c *Client) addOperationPrepareAgentMiddlewares(stack *middleware.Stack, op
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -124,13 +121,16 @@ func (c *Client) addOperationPrepareAgentMiddlewares(stack *middleware.Stack, op
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpPrepareAgentValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opPrepareAgent(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

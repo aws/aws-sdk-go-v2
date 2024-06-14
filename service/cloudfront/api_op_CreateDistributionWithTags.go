@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/cloudfront/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -14,8 +13,13 @@ import (
 
 // Create a new distribution with tags. This API operation requires the following
 // IAM permissions:
-//   - CreateDistribution (https://docs.aws.amazon.com/cloudfront/latest/APIReference/API_CreateDistribution.html)
-//   - TagResource (https://docs.aws.amazon.com/cloudfront/latest/APIReference/API_TagResource.html)
+//
+// [CreateDistribution]
+//
+// [TagResource]
+//
+// [TagResource]: https://docs.aws.amazon.com/cloudfront/latest/APIReference/API_TagResource.html
+// [CreateDistribution]: https://docs.aws.amazon.com/cloudfront/latest/APIReference/API_CreateDistribution.html
 func (c *Client) CreateDistributionWithTags(ctx context.Context, params *CreateDistributionWithTagsInput, optFns ...func(*Options)) (*CreateDistributionWithTagsOutput, error) {
 	if params == nil {
 		params = &CreateDistributionWithTagsInput{}
@@ -82,25 +86,25 @@ func (c *Client) addOperationCreateDistributionWithTagsMiddlewares(stack *middle
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -115,13 +119,16 @@ func (c *Client) addOperationCreateDistributionWithTagsMiddlewares(stack *middle
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpCreateDistributionWithTagsValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateDistributionWithTags(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

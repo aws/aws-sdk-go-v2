@@ -6,15 +6,16 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/glue/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Retrieves table metadata from the Data Catalog that contains unfiltered
-// metadata. For IAM authorization, the public IAM action associated with this API
-// is glue:GetTable .
+// Allows a third-party analytical engine to retrieve unfiltered table metadata
+// from the Data Catalog.
+//
+// For IAM authorization, the public IAM action associated with this API is
+// glue:GetTable .
 func (c *Client) GetUnfilteredTableMetadata(ctx context.Context, params *GetUnfilteredTableMetadataInput, optFns ...func(*Options)) (*GetUnfilteredTableMetadataOutput, error) {
 	if params == nil {
 		params = &GetUnfilteredTableMetadataInput{}
@@ -47,13 +48,46 @@ type GetUnfilteredTableMetadataInput struct {
 	// This member is required.
 	Name *string
 
-	// (Required) A list of supported permission types.
+	// Indicates the level of filtering a third-party analytical engine is capable of
+	// enforcing when calling the GetUnfilteredTableMetadata API operation. Accepted
+	// values are:
+	//
+	//   - COLUMN_PERMISSION - Column permissions ensure that users can access only
+	//   specific columns in the table. If there are particular columns contain sensitive
+	//   data, data lake administrators can define column filters that exclude access to
+	//   specific columns.
+	//
+	//   - CELL_FILTER_PERMISSION - Cell-level filtering combines column filtering
+	//   (include or exclude columns) and row filter expressions to restrict access to
+	//   individual elements in the table.
+	//
+	//   - NESTED_PERMISSION - Nested permissions combines cell-level filtering and
+	//   nested column filtering to restrict access to columns and/or nested columns in
+	//   specific rows based on row filter expressions.
+	//
+	//   - NESTED_CELL_PERMISSION - Nested cell permissions combines nested permission
+	//   with nested cell-level filtering. This allows different subsets of nested
+	//   columns to be restricted based on an array of row filter expressions.
+	//
+	// Note: Each of these permission types follows a hierarchical order where each
+	// subsequent permission type includes all permission of the previous type.
+	//
+	// Important: If you provide a supported permission type that doesn't match the
+	// user's level of permissions on the table, then Lake Formation raises an
+	// exception. For example, if the third-party engine calling the
+	// GetUnfilteredTableMetadata operation can enforce only column-level filtering,
+	// and the user has nested cell filtering applied on the table, Lake Formation
+	// throws an exception, and will not return unfiltered table metadata and data
+	// access credentials.
 	//
 	// This member is required.
 	SupportedPermissionTypes []types.PermissionType
 
 	// A structure containing Lake Formation audit context information.
 	AuditContext *types.AuditContext
+
+	// The resource ARN of the view.
+	ParentResourceArn *string
 
 	// The Lake Formation data permissions of the caller on the table. Used to
 	// authorize the call when no view context is found.
@@ -67,6 +101,9 @@ type GetUnfilteredTableMetadataInput struct {
 	// Specified only if the base tables belong to a different Amazon Web Services
 	// Region.
 	Region *string
+
+	// The resource ARN of the root view in a chain of nested views.
+	RootResourceArn *string
 
 	// A structure specifying the dialect and dialect version used by the query engine.
 	SupportedDialect *types.SupportedDialect
@@ -82,6 +119,16 @@ type GetUnfilteredTableMetadataOutput struct {
 	// A list of column row filters.
 	CellFilters []types.ColumnRowFilter
 
+	// Specifies whether the view supports the SQL dialects of one or more different
+	// query engines and can therefore be read by those engines.
+	IsMultiDialectView bool
+
+	// A flag that instructs the engine not to push user-provided operations into the
+	// logical plan of the view during query planning. However, if set this flag does
+	// not guarantee that the engine will comply. Refer to the engine's documentation
+	// to understand the guarantees provided, if any.
+	IsProtected bool
+
 	// A Boolean value that indicates whether the partition location is registered
 	// with Lake Formation.
 	IsRegisteredWithLakeFormation bool
@@ -96,6 +143,11 @@ type GetUnfilteredTableMetadataOutput struct {
 
 	// The resource ARN of the parent resource extracted from the request.
 	ResourceArn *string
+
+	// The filter that applies to the table. For example when applying the filter in
+	// SQL, it would go in the WHERE clause and can be evaluated by using an AND
+	// operator with any other predicates applied by the user querying the table.
+	RowFilter *string
 
 	// A Table object containing the table metadata.
 	Table *types.Table
@@ -128,25 +180,25 @@ func (c *Client) addOperationGetUnfilteredTableMetadataMiddlewares(stack *middle
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -161,13 +213,16 @@ func (c *Client) addOperationGetUnfilteredTableMetadataMiddlewares(stack *middle
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpGetUnfilteredTableMetadataValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetUnfilteredTableMetadata(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

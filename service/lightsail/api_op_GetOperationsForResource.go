@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/lightsail/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -35,10 +34,11 @@ type GetOperationsForResourceInput struct {
 	// This member is required.
 	ResourceName *string
 
-	// The token to advance to the next page of results from your request. To get a
-	// page token, perform an initial GetOperationsForResource request. If your
-	// results are paginated, the response will return a next page token that you can
-	// specify as the page token in a subsequent request.
+	// The token to advance to the next page of results from your request.
+	//
+	// To get a page token, perform an initial GetOperationsForResource request. If
+	// your results are paginated, the response will return a next page token that you
+	// can specify as the page token in a subsequent request.
 	PageToken *string
 
 	noSmithyDocumentSerde
@@ -46,17 +46,20 @@ type GetOperationsForResourceInput struct {
 
 type GetOperationsForResourceOutput struct {
 
-	// (Discontinued) Returns the number of pages of results that remain. In releases
-	// prior to June 12, 2017, this parameter returned null by the API. It is now
-	// discontinued, and the API returns the next page token parameter instead.
+	// (Discontinued) Returns the number of pages of results that remain.
+	//
+	// In releases prior to June 12, 2017, this parameter returned null by the API. It
+	// is now discontinued, and the API returns the next page token parameter instead.
 	//
 	// Deprecated: This member has been deprecated.
 	NextPageCount *string
 
-	// The token to advance to the next page of results from your request. A next page
-	// token is not returned if there are no more results to display. To get the next
-	// page of results, perform another GetOperationsForResource request and specify
-	// the next page token using the pageToken parameter.
+	// The token to advance to the next page of results from your request.
+	//
+	// A next page token is not returned if there are no more results to display.
+	//
+	// To get the next page of results, perform another GetOperationsForResource
+	// request and specify the next page token using the pageToken parameter.
 	NextPageToken *string
 
 	// An array of objects that describe the result of the action, such as the status
@@ -92,25 +95,25 @@ func (c *Client) addOperationGetOperationsForResourceMiddlewares(stack *middlewa
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -125,13 +128,16 @@ func (c *Client) addOperationGetOperationsForResourceMiddlewares(stack *middlewa
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpGetOperationsForResourceValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetOperationsForResource(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

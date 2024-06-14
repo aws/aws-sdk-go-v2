@@ -24,6 +24,9 @@ type AnswerMachineDetectionConfig struct {
 	// This member is required.
 	EnableAnswerMachineDetection *bool
 
+	// Enable or disable await answer machine prompt
+	AwaitAnswerMachinePrompt *bool
+
 	noSmithyDocumentSerde
 }
 

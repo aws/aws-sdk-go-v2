@@ -6,16 +6,16 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/quicksight/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
-// Describes an existing snapshot job. Poll job descriptions after a job starts to
-// know the status of the job. For information on available status codes, see
-// JobStatus .
+// Describes an existing snapshot job.
+//
+// Poll job descriptions after a job starts to know the status of the job. For
+// information on available status codes, see JobStatus .
 func (c *Client) DescribeDashboardSnapshotJob(ctx context.Context, params *DescribeDashboardSnapshotJobInput, optFns ...func(*Options)) (*DescribeDashboardSnapshotJobOutput, error) {
 	if params == nil {
 		params = &DescribeDashboardSnapshotJobInput{}
@@ -59,11 +59,11 @@ type DescribeDashboardSnapshotJobOutput struct {
 	// when you start a new job with a StartDashboardSnapshotJob API call.
 	Arn *string
 
-	// The ID of the Amazon Web Services account that the dashboard snapshot job is
+	//  The ID of the Amazon Web Services account that the dashboard snapshot job is
 	// executed in.
 	AwsAccountId *string
 
-	// The time that the snapshot job was created.
+	//  The time that the snapshot job was created.
 	CreatedTime *time.Time
 
 	// The ID of the dashboard that you have started a snapshot job for.
@@ -71,16 +71,20 @@ type DescribeDashboardSnapshotJobOutput struct {
 
 	// Indicates the status of a job. The status updates as the job executes. This
 	// shows one of the following values.
+	//
 	//   - COMPLETED - The job was completed successfully.
+	//
 	//   - FAILED - The job failed to execute.
+	//
 	//   - QUEUED - The job is queued and hasn't started yet.
+	//
 	//   - RUNNING - The job is still running.
 	JobStatus types.SnapshotJobStatus
 
-	// The time that the snapshot job status was last updated.
+	//  The time that the snapshot job status was last updated.
 	LastUpdatedTime *time.Time
 
-	// The Amazon Web Services request ID for this operation.
+	//  The Amazon Web Services request ID for this operation.
 	RequestId *string
 
 	// The snapshot configuration of the job. This information is provided when you
@@ -126,25 +130,25 @@ func (c *Client) addOperationDescribeDashboardSnapshotJobMiddlewares(stack *midd
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -159,13 +163,16 @@ func (c *Client) addOperationDescribeDashboardSnapshotJobMiddlewares(stack *midd
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDescribeDashboardSnapshotJobValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeDashboardSnapshotJob(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

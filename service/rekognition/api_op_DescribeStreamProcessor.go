@@ -6,16 +6,15 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/rekognition/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
-// Provides information about a stream processor created by CreateStreamProcessor .
-// You can get information about the input and output streams, the input parameters
-// for the face recognition being performed, and the current status of the stream
+// Provides information about a stream processor created by CreateStreamProcessor. You can get
+// information about the input and output streams, the input parameters for the
+// face recognition being performed, and the current status of the stream
 // processor.
 func (c *Client) DescribeStreamProcessor(ctx context.Context, params *DescribeStreamProcessorInput, optFns ...func(*Options)) (*DescribeStreamProcessorOutput, error) {
 	if params == nil {
@@ -47,7 +46,7 @@ type DescribeStreamProcessorOutput struct {
 	// Date and time the stream processor was created
 	CreationTimestamp *time.Time
 
-	// Shows whether you are sharing data with Rekognition to improve model
+	//  Shows whether you are sharing data with Rekognition to improve model
 	// performance. You can choose this option at the account level or on a per-stream
 	// basis. Note that if you opt out at the account level this setting is ignored on
 	// individual streams.
@@ -56,7 +55,7 @@ type DescribeStreamProcessorOutput struct {
 	// Kinesis video stream that provides the source streaming video.
 	Input *types.StreamProcessorInput
 
-	// The identifier for your AWS Key Management Service key (AWS KMS key). This is
+	//  The identifier for your AWS Key Management Service key (AWS KMS key). This is
 	// an optional parameter for label detection stream processors.
 	KmsKeyId *string
 
@@ -70,19 +69,22 @@ type DescribeStreamProcessorOutput struct {
 
 	// The Amazon Simple Notification Service topic to which Amazon Rekognition
 	// publishes the object detection results and completion status of a video analysis
-	// operation. Amazon Rekognition publishes a notification the first time an object
-	// of interest or a person is detected in the video stream. For example, if Amazon
+	// operation.
+	//
+	// Amazon Rekognition publishes a notification the first time an object of
+	// interest or a person is detected in the video stream. For example, if Amazon
 	// Rekognition detects a person at second 2, a pet at second 4, and a person again
 	// at second 5, Amazon Rekognition sends 2 object class detected notifications, one
-	// for a person at second 2 and one for a pet at second 4. Amazon Rekognition also
-	// publishes an an end-of-session notification with a summary when the stream
-	// processing session is complete.
+	// for a person at second 2 and one for a pet at second 4.
+	//
+	// Amazon Rekognition also publishes an an end-of-session notification with a
+	// summary when the stream processing session is complete.
 	NotificationChannel *types.StreamProcessorNotificationChannel
 
 	// Kinesis data stream to which Amazon Rekognition Video puts the analysis results.
 	Output *types.StreamProcessorOutput
 
-	// Specifies locations in the frames where Amazon Rekognition checks for objects
+	//  Specifies locations in the frames where Amazon Rekognition checks for objects
 	// or people. This is an optional parameter for label detection stream processors.
 	RegionsOfInterest []types.RegionOfInterest
 
@@ -131,25 +133,25 @@ func (c *Client) addOperationDescribeStreamProcessorMiddlewares(stack *middlewar
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -164,13 +166,16 @@ func (c *Client) addOperationDescribeStreamProcessorMiddlewares(stack *middlewar
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDescribeStreamProcessorValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeStreamProcessor(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

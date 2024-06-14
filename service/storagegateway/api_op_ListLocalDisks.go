@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/storagegateway/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -14,12 +13,14 @@ import (
 
 // Returns a list of the gateway's local disks. To specify which gateway to
 // describe, you use the Amazon Resource Name (ARN) of the gateway in the body of
-// the request. The request returns a list of all disks, specifying which are
-// configured as working storage, cache storage, or stored volume or not configured
-// at all. The response includes a DiskStatus field. This field can have a value
-// of present (the disk is available to use), missing (the disk is no longer
-// connected to the gateway), or mismatch (the disk node is occupied by a disk that
-// has incorrect metadata or the disk content is corrupted).
+// the request.
+//
+// The request returns a list of all disks, specifying which are configured as
+// working storage, cache storage, or stored volume or not configured at all. The
+// response includes a DiskStatus field. This field can have a value of present
+// (the disk is available to use), missing (the disk is no longer connected to the
+// gateway), or mismatch (the disk node is occupied by a disk that has incorrect
+// metadata or the disk content is corrupted).
 func (c *Client) ListLocalDisks(ctx context.Context, params *ListLocalDisksInput, optFns ...func(*Options)) (*ListLocalDisksOutput, error) {
 	if params == nil {
 		params = &ListLocalDisksInput{}
@@ -38,8 +39,8 @@ func (c *Client) ListLocalDisks(ctx context.Context, params *ListLocalDisksInput
 // A JSON object containing the Amazon Resource Name (ARN) of the gateway.
 type ListLocalDisksInput struct {
 
-	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation
-	// to return a list of gateways for your account and Amazon Web Services Region.
+	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation to return a
+	// list of gateways for your account and Amazon Web Services Region.
 	//
 	// This member is required.
 	GatewayARN *string
@@ -50,11 +51,12 @@ type ListLocalDisksInput struct {
 type ListLocalDisksOutput struct {
 
 	// A JSON object containing the following fields:
-	//   - ListLocalDisksOutput$Disks
+	//
+	// ListLocalDisksOutput$Disks
 	Disks []types.Disk
 
-	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation
-	// to return a list of gateways for your account and Amazon Web Services Region.
+	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation to return a
+	// list of gateways for your account and Amazon Web Services Region.
 	GatewayARN *string
 
 	// Metadata pertaining to the operation's result.
@@ -85,25 +87,25 @@ func (c *Client) addOperationListLocalDisksMiddlewares(stack *middleware.Stack, 
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -118,13 +120,16 @@ func (c *Client) addOperationListLocalDisksMiddlewares(stack *middleware.Stack, 
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpListLocalDisksValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListLocalDisks(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

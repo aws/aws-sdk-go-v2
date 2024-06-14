@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/chimesdkmessaging/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -15,12 +14,23 @@ import (
 // Gets message status for a specified messageId . Use this API to determine the
 // intermediate status of messages going through channel flow processing. The API
 // provides an alternative to retrieving message status if the event was not
-// received because a client wasn't connected to a websocket. Messages can have any
-// one of these statuses. SENT Message processed successfully PENDING Ongoing
-// processing FAILED Processing failed DENIED Message denied by the processor
+// received because a client wasn't connected to a websocket.
+//
+// Messages can have any one of these statuses.
+//
+// # SENT Message processed successfully
+//
+// # PENDING Ongoing processing
+//
+// # FAILED Processing failed
+//
+// DENIED Message denied by the processor
+//
 //   - This API does not return statuses for denied messages, because we don't
 //     store them once the processor denies them.
+//
 //   - Only the message sender can invoke this API.
+//
 //   - The x-amz-chime-bearer request header is mandatory. Use the ARN of the
 //     AppInstanceUser or AppInstanceBot that makes the API call as the value in the
 //     header.
@@ -56,8 +66,10 @@ type GetChannelMessageStatusInput struct {
 	// This member is required.
 	MessageId *string
 
-	// The ID of the SubChannel in the request. Only required when getting message
-	// status in a SubChannel that the user belongs to.
+	// The ID of the SubChannel in the request.
+	//
+	// Only required when getting message status in a SubChannel that the user belongs
+	// to.
 	SubChannelId *string
 
 	noSmithyDocumentSerde
@@ -96,25 +108,25 @@ func (c *Client) addOperationGetChannelMessageStatusMiddlewares(stack *middlewar
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -129,13 +141,16 @@ func (c *Client) addOperationGetChannelMessageStatusMiddlewares(stack *middlewar
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpGetChannelMessageStatusValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetChannelMessageStatus(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

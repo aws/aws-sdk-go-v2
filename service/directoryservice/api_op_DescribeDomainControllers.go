@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/directoryservice/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -43,8 +42,8 @@ type DescribeDomainControllersInput struct {
 	// The maximum number of items to return.
 	Limit *int32
 
-	// The DescribeDomainControllers.NextToken value from a previous call to
-	// DescribeDomainControllers . Pass null if this is the first call.
+	// The DescribeDomainControllers.NextToken value from a previous call to DescribeDomainControllers. Pass
+	// null if this is the first call.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -56,8 +55,7 @@ type DescribeDomainControllersOutput struct {
 	DomainControllers []types.DomainController
 
 	// If not null, more results are available. Pass this value for the NextToken
-	// parameter in a subsequent call to DescribeDomainControllers retrieve the next
-	// set of items.
+	// parameter in a subsequent call to DescribeDomainControllersretrieve the next set of items.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -88,25 +86,25 @@ func (c *Client) addOperationDescribeDomainControllersMiddlewares(stack *middlew
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -121,13 +119,16 @@ func (c *Client) addOperationDescribeDomainControllersMiddlewares(stack *middlew
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDescribeDomainControllersValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeDomainControllers(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

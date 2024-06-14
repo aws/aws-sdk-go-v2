@@ -6,20 +6,25 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/workspaces/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates one or more WorkSpaces. This operation is asynchronous and returns
-// before the WorkSpaces are created.
+// Creates one or more WorkSpaces.
+//
+// This operation is asynchronous and returns before the WorkSpaces are created.
+//
 //   - The MANUAL running mode value is only supported by Amazon WorkSpaces Core.
 //     Contact your account team to be allow-listed to use this value. For more
-//     information, see Amazon WorkSpaces Core (http://aws.amazon.com/workspaces/core/)
-//     .
+//     information, see [Amazon WorkSpaces Core].
+//
 //   - You don't need to specify the PCOIP protocol for Linux bundles because WSP
 //     is the default protocol for those bundles.
+//
+//   - User-decoupled WorkSpaces are only supported by Amazon WorkSpaces Core.
+//
+// [Amazon WorkSpaces Core]: http://aws.amazon.com/workspaces/core/
 func (c *Client) CreateWorkspaces(ctx context.Context, params *CreateWorkspacesInput, optFns ...func(*Options)) (*CreateWorkspacesOutput, error) {
 	if params == nil {
 		params = &CreateWorkspacesInput{}
@@ -50,10 +55,11 @@ type CreateWorkspacesOutput struct {
 	// Information about the WorkSpaces that could not be created.
 	FailedRequests []types.FailedCreateWorkspaceRequest
 
-	// Information about the WorkSpaces that were created. Because this operation is
-	// asynchronous, the identifier returned is not immediately available for use with
-	// other operations. For example, if you call DescribeWorkspaces before the
-	// WorkSpace is created, the information returned can be incomplete.
+	// Information about the WorkSpaces that were created.
+	//
+	// Because this operation is asynchronous, the identifier returned is not
+	// immediately available for use with other operations. For example, if you call DescribeWorkspaces
+	// before the WorkSpace is created, the information returned can be incomplete.
 	PendingRequests []types.Workspace
 
 	// Metadata pertaining to the operation's result.
@@ -84,25 +90,25 @@ func (c *Client) addOperationCreateWorkspacesMiddlewares(stack *middleware.Stack
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -117,13 +123,16 @@ func (c *Client) addOperationCreateWorkspacesMiddlewares(stack *middleware.Stack
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpCreateWorkspacesValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateWorkspaces(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

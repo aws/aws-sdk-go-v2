@@ -11,8 +11,9 @@ const (
 )
 
 // Values returns all known values for AuthPolicyState. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (AuthPolicyState) Values() []AuthPolicyState {
 	return []AuthPolicyState{
 		"Active",
@@ -29,8 +30,9 @@ const (
 )
 
 // Values returns all known values for AuthType. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (AuthType) Values() []AuthType {
 	return []AuthType{
 		"NONE",
@@ -50,6 +52,7 @@ const (
 
 // Values returns all known values for HealthCheckProtocolVersion. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (HealthCheckProtocolVersion) Values() []HealthCheckProtocolVersion {
 	return []HealthCheckProtocolVersion{
@@ -69,8 +72,9 @@ const (
 )
 
 // Values returns all known values for IpAddressType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (IpAddressType) Values() []IpAddressType {
 	return []IpAddressType{
 		"IPV4",
@@ -90,6 +94,7 @@ const (
 
 // Values returns all known values for LambdaEventStructureVersion. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (LambdaEventStructureVersion) Values() []LambdaEventStructureVersion {
 	return []LambdaEventStructureVersion{
@@ -106,15 +111,19 @@ const (
 	ListenerProtocolHttp ListenerProtocol = "HTTP"
 	// Indicates HTTPS protocol
 	ListenerProtocolHttps ListenerProtocol = "HTTPS"
+	// Indicates TLS_PASSTHROUGH protocol
+	ListenerProtocolTlsPassthrough ListenerProtocol = "TLS_PASSTHROUGH"
 )
 
 // Values returns all known values for ListenerProtocol. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ListenerProtocol) Values() []ListenerProtocol {
 	return []ListenerProtocol{
 		"HTTP",
 		"HTTPS",
+		"TLS_PASSTHROUGH",
 	}
 }
 
@@ -136,8 +145,9 @@ const (
 
 // Values returns all known values for ServiceNetworkServiceAssociationStatus.
 // Note that this can be expanded in the future, and so it is only as up to date as
-// the client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ServiceNetworkServiceAssociationStatus) Values() []ServiceNetworkServiceAssociationStatus {
 	return []ServiceNetworkServiceAssociationStatus{
 		"CREATE_IN_PROGRESS",
@@ -170,8 +180,9 @@ const (
 
 // Values returns all known values for ServiceNetworkVpcAssociationStatus. Note
 // that this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ServiceNetworkVpcAssociationStatus) Values() []ServiceNetworkVpcAssociationStatus {
 	return []ServiceNetworkVpcAssociationStatus{
 		"CREATE_IN_PROGRESS",
@@ -201,8 +212,9 @@ const (
 )
 
 // Values returns all known values for ServiceStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ServiceStatus) Values() []ServiceStatus {
 	return []ServiceStatus{
 		"ACTIVE",
@@ -221,15 +233,19 @@ const (
 	TargetGroupProtocolHttp TargetGroupProtocol = "HTTP"
 	// Indicates HTTPS protocol
 	TargetGroupProtocolHttps TargetGroupProtocol = "HTTPS"
+	// Indicates TCP protocol
+	TargetGroupProtocolTcp TargetGroupProtocol = "TCP"
 )
 
 // Values returns all known values for TargetGroupProtocol. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (TargetGroupProtocol) Values() []TargetGroupProtocol {
 	return []TargetGroupProtocol{
 		"HTTP",
 		"HTTPS",
+		"TCP",
 	}
 }
 
@@ -247,6 +263,7 @@ const (
 
 // Values returns all known values for TargetGroupProtocolVersion. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (TargetGroupProtocolVersion) Values() []TargetGroupProtocolVersion {
 	return []TargetGroupProtocolVersion{
@@ -273,8 +290,9 @@ const (
 )
 
 // Values returns all known values for TargetGroupStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (TargetGroupStatus) Values() []TargetGroupStatus {
 	return []TargetGroupStatus{
 		"CREATE_IN_PROGRESS",
@@ -300,8 +318,9 @@ const (
 )
 
 // Values returns all known values for TargetGroupType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (TargetGroupType) Values() []TargetGroupType {
 	return []TargetGroupType{
 		"IP",
@@ -330,8 +349,9 @@ const (
 )
 
 // Values returns all known values for TargetStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (TargetStatus) Values() []TargetStatus {
 	return []TargetStatus{
 		"DRAINING",
@@ -355,6 +375,7 @@ const (
 
 // Values returns all known values for ValidationExceptionReason. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (ValidationExceptionReason) Values() []ValidationExceptionReason {
 	return []ValidationExceptionReason{

@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/organizations/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -15,13 +14,17 @@ import (
 // Returns a list of the Amazon Web Services services that you enabled to
 // integrate with your organization. After a service on this list creates the
 // resources that it requires for the integration, it can perform operations on
-// your organization and its accounts. For more information about integrating other
-// services with Organizations, including the list of services that currently work
-// with Organizations, see Using Organizations with other Amazon Web Services
-// services (https://docs.aws.amazon.com/organizations/latest/userguide/orgs_integrate_services.html)
-// in the Organizations User Guide. This operation can be called only from the
-// organization's management account or by a member account that is a delegated
-// administrator for an Amazon Web Services service.
+// your organization and its accounts.
+//
+// For more information about integrating other services with Organizations,
+// including the list of services that currently work with Organizations, see [Using Organizations with other Amazon Web Services services]in
+// the Organizations User Guide.
+//
+// This operation can be called only from the organization's management account or
+// by a member account that is a delegated administrator for an Amazon Web Services
+// service.
+//
+// [Using Organizations with other Amazon Web Services services]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_integrate_services.html
 func (c *Client) ListAWSServiceAccessForOrganization(ctx context.Context, params *ListAWSServiceAccessForOrganizationInput, optFns ...func(*Options)) (*ListAWSServiceAccessForOrganizationOutput, error) {
 	if params == nil {
 		params = &ListAWSServiceAccessForOrganizationInput{}
@@ -100,25 +103,25 @@ func (c *Client) addOperationListAWSServiceAccessForOrganizationMiddlewares(stac
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -133,10 +136,13 @@ func (c *Client) addOperationListAWSServiceAccessForOrganizationMiddlewares(stac
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListAWSServiceAccessForOrganization(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

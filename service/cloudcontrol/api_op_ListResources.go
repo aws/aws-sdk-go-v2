@@ -6,18 +6,19 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/cloudcontrol/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns information about the specified resources. For more information, see
-// Discovering resources (https://docs.aws.amazon.com/cloudcontrolapi/latest/userguide/resource-operations-list.html)
-// in the Amazon Web Services Cloud Control API User Guide. You can use this action
-// to return information about existing resources in your account and Amazon Web
-// Services Region, whether those resources were provisioned using Cloud Control
-// API.
+// Returns information about the specified resources. For more information, see [Discovering resources]
+// in the Amazon Web Services Cloud Control API User Guide.
+//
+// You can use this action to return information about existing resources in your
+// account and Amazon Web Services Region, whether those resources were provisioned
+// using Cloud Control API.
+//
+// [Discovering resources]: https://docs.aws.amazon.com/cloudcontrolapi/latest/userguide/resource-operations-list.html
 func (c *Client) ListResources(ctx context.Context, params *ListResourcesInput, optFns ...func(*Options)) (*ListResourcesOutput, error) {
 	if params == nil {
 		params = &ListResourcesInput{}
@@ -56,12 +57,17 @@ type ListResourcesInput struct {
 	// The Amazon Resource Name (ARN) of the Identity and Access Management (IAM) role
 	// for Cloud Control API to use when performing this resource operation. The role
 	// specified must have the permissions required for this operation. The necessary
-	// permissions for each event handler are defined in the handlers (https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/resource-type-schema.html#schema-properties-handlers)
-	// section of the resource type definition schema (https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/resource-type-schema.html)
-	// . If you do not specify a role, Cloud Control API uses a temporary session
-	// created using your Amazon Web Services user credentials. For more information,
-	// see Specifying credentials (https://docs.aws.amazon.com/cloudcontrolapi/latest/userguide/resource-operations.html#resource-operations-permissions)
-	// in the Amazon Web Services Cloud Control API User Guide.
+	// permissions for each event handler are defined in the [handlers]section of the [resource type definition schema].
+	//
+	// If you do not specify a role, Cloud Control API uses a temporary session
+	// created using your Amazon Web Services user credentials.
+	//
+	// For more information, see [Specifying credentials] in the Amazon Web Services Cloud Control API User
+	// Guide.
+	//
+	// [handlers]: https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/resource-type-schema.html#schema-properties-handlers
+	// [Specifying credentials]: https://docs.aws.amazon.com/cloudcontrolapi/latest/userguide/resource-operations.html#resource-operations-permissions
+	// [resource type definition schema]: https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/resource-type-schema.html
 	RoleArn *string
 
 	// For private resource types, the type version to use in this resource operation.
@@ -115,25 +121,25 @@ func (c *Client) addOperationListResourcesMiddlewares(stack *middleware.Stack, o
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -148,13 +154,16 @@ func (c *Client) addOperationListResourcesMiddlewares(stack *middleware.Stack, o
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpListResourcesValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListResources(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

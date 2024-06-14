@@ -6,16 +6,16 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/elasticbeanstalk/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Takes a set of configuration settings and either a configuration template or
-// environment, and determines whether those values are valid. This action returns
-// a list of messages indicating any errors or warnings associated with the
-// selection of option values.
+// environment, and determines whether those values are valid.
+//
+// This action returns a list of messages indicating any errors or warnings
+// associated with the selection of option values.
 func (c *Client) ValidateConfigurationSettings(ctx context.Context, params *ValidateConfigurationSettingsInput, optFns ...func(*Options)) (*ValidateConfigurationSettingsOutput, error) {
 	if params == nil {
 		params = &ValidateConfigurationSettingsInput{}
@@ -45,11 +45,13 @@ type ValidateConfigurationSettingsInput struct {
 	// This member is required.
 	OptionSettings []types.ConfigurationOptionSetting
 
-	// The name of the environment to validate the settings against. Condition: You
-	// cannot specify both this and a configuration template name.
+	// The name of the environment to validate the settings against.
+	//
+	// Condition: You cannot specify both this and a configuration template name.
 	EnvironmentName *string
 
 	// The name of the configuration template to validate the settings against.
+	//
 	// Condition: You cannot specify both this and an environment name.
 	TemplateName *string
 
@@ -59,7 +61,7 @@ type ValidateConfigurationSettingsInput struct {
 // Provides a list of validation messages.
 type ValidateConfigurationSettingsOutput struct {
 
-	// A list of ValidationMessage .
+	//  A list of ValidationMessage.
 	Messages []types.ValidationMessage
 
 	// Metadata pertaining to the operation's result.
@@ -90,25 +92,25 @@ func (c *Client) addOperationValidateConfigurationSettingsMiddlewares(stack *mid
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -123,13 +125,16 @@ func (c *Client) addOperationValidateConfigurationSettingsMiddlewares(stack *mid
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpValidateConfigurationSettingsValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opValidateConfigurationSettings(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

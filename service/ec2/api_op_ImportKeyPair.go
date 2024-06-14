@@ -6,20 +6,22 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Imports the public key from an RSA or ED25519 key pair that you created with a
-// third-party tool. Compare this with CreateKeyPair , in which Amazon Web Services
-// creates the key pair and gives the keys to you (Amazon Web Services keeps a copy
-// of the public key). With ImportKeyPair, you create the key pair and give Amazon
-// Web Services just the public key. The private key is never transferred between
-// you and Amazon Web Services. For more information about key pairs, see Amazon
-// EC2 key pairs (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-key-pairs.html)
-// in the Amazon Elastic Compute Cloud User Guide.
+// third-party tool. Compare this with CreateKeyPair, in which Amazon Web Services creates the
+// key pair and gives the keys to you (Amazon Web Services keeps a copy of the
+// public key). With ImportKeyPair, you create the key pair and give Amazon Web
+// Services just the public key. The private key is never transferred between you
+// and Amazon Web Services.
+//
+// For more information about key pairs, see [Amazon EC2 key pairs] in the Amazon Elastic Compute Cloud
+// User Guide.
+//
+// [Amazon EC2 key pairs]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-key-pairs.html
 func (c *Client) ImportKeyPair(ctx context.Context, params *ImportKeyPairInput, optFns ...func(*Options)) (*ImportKeyPairOutput, error) {
 	if params == nil {
 		params = &ImportKeyPairInput{}
@@ -64,9 +66,11 @@ type ImportKeyPairOutput struct {
 
 	//   - For RSA key pairs, the key fingerprint is the MD5 public key fingerprint as
 	//   specified in section 4 of RFC 4716.
+	//
 	//   - For ED25519 key pairs, the key fingerprint is the base64-encoded SHA-256
-	//   digest, which is the default for OpenSSH, starting with OpenSSH 6.8 (http://www.openssh.com/txt/release-6.8)
-	//   .
+	//   digest, which is the default for OpenSSH, starting with [OpenSSH 6.8].
+	//
+	// [OpenSSH 6.8]: http://www.openssh.com/txt/release-6.8
 	KeyFingerprint *string
 
 	// The key pair name that you provided.
@@ -106,25 +110,25 @@ func (c *Client) addOperationImportKeyPairMiddlewares(stack *middleware.Stack, o
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -139,13 +143,16 @@ func (c *Client) addOperationImportKeyPairMiddlewares(stack *middleware.Stack, o
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpImportKeyPairValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opImportKeyPair(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

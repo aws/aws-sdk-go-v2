@@ -6,15 +6,16 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/iot/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a dynamic thing group. Requires permission to access the
-// CreateDynamicThingGroup (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
-// action.
+// Creates a dynamic thing group.
+//
+// Requires permission to access the [CreateDynamicThingGroup] action.
+//
+// [CreateDynamicThingGroup]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions
 func (c *Client) CreateDynamicThingGroup(ctx context.Context, params *CreateDynamicThingGroupInput, optFns ...func(*Options)) (*CreateDynamicThingGroupOutput, error) {
 	if params == nil {
 		params = &CreateDynamicThingGroupInput{}
@@ -32,8 +33,11 @@ func (c *Client) CreateDynamicThingGroup(ctx context.Context, params *CreateDyna
 
 type CreateDynamicThingGroupInput struct {
 
-	// The dynamic thing group search query string. See Query Syntax (https://docs.aws.amazon.com/iot/latest/developerguide/query-syntax.html)
-	// for information about query string syntax.
+	// The dynamic thing group search query string.
+	//
+	// See [Query Syntax] for information about query string syntax.
+	//
+	// [Query Syntax]: https://docs.aws.amazon.com/iot/latest/developerguide/query-syntax.html
 	//
 	// This member is required.
 	QueryString *string
@@ -43,13 +47,15 @@ type CreateDynamicThingGroupInput struct {
 	// This member is required.
 	ThingGroupName *string
 
-	// The dynamic thing group index name. Currently one index is supported: AWS_Things
-	// .
+	// The dynamic thing group index name.
+	//
+	// Currently one index is supported: AWS_Things .
 	IndexName *string
 
-	// The dynamic thing group query version. Currently one query version is
-	// supported: "2017-09-30". If not specified, the query version defaults to this
-	// value.
+	// The dynamic thing group query version.
+	//
+	// Currently one query version is supported: "2017-09-30". If not specified, the
+	// query version defaults to this value.
 	QueryVersion *string
 
 	// Metadata which can be used to manage the dynamic thing group.
@@ -109,25 +115,25 @@ func (c *Client) addOperationCreateDynamicThingGroupMiddlewares(stack *middlewar
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -142,13 +148,16 @@ func (c *Client) addOperationCreateDynamicThingGroupMiddlewares(stack *middlewar
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpCreateDynamicThingGroupValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateDynamicThingGroup(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

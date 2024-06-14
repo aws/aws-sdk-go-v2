@@ -6,19 +6,20 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/imagebuilder/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns the list of component build versions for the specified semantic
-// version. The semantic version has four nodes: ../. You can assign values for the
-// first three, and can filter on all of them. Filtering: With semantic versioning,
-// you have the flexibility to use wildcards (x) to specify the most recent
-// versions or nodes when selecting the base image or components for your recipe.
-// When you use a wildcard in any node, all nodes to the right of the first
-// wildcard must also be wildcards.
+// Returns the list of component build versions for the specified semantic version.
+//
+// The semantic version has four nodes: ../. You can assign values for the first
+// three, and can filter on all of them.
+//
+// Filtering: With semantic versioning, you have the flexibility to use wildcards
+// (x) to specify the most recent versions or nodes when selecting the base image
+// or components for your recipe. When you use a wildcard in any node, all nodes to
+// the right of the first wildcard must also be wildcards.
 func (c *Client) ListComponentBuildVersions(ctx context.Context, params *ListComponentBuildVersionsInput, optFns ...func(*Options)) (*ListComponentBuildVersionsOutput, error) {
 	if params == nil {
 		params = &ListComponentBuildVersionsInput{}
@@ -93,25 +94,25 @@ func (c *Client) addOperationListComponentBuildVersionsMiddlewares(stack *middle
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -126,13 +127,16 @@ func (c *Client) addOperationListComponentBuildVersionsMiddlewares(stack *middle
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpListComponentBuildVersionsValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListComponentBuildVersions(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

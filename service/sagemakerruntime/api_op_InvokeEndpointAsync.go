@@ -6,25 +6,28 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // After you deploy a model into production using Amazon SageMaker hosting
 // services, your client applications use this API to get inferences from the model
-// hosted at the specified endpoint in an asynchronous manner. Inference requests
-// sent to this API are enqueued for asynchronous processing. The processing of the
-// inference request may or may not complete before you receive a response from
-// this API. The response from this API will not contain the result of the
-// inference request but contain information about where you can locate it. Amazon
-// SageMaker strips all POST headers except those supported by the API. Amazon
-// SageMaker might add additional headers. You should not rely on the behavior of
-// headers outside those enumerated in the request syntax. Calls to
-// InvokeEndpointAsync are authenticated by using Amazon Web Services Signature
-// Version 4. For information, see Authenticating Requests (Amazon Web Services
-// Signature Version 4) (https://docs.aws.amazon.com/AmazonS3/latest/API/sig-v4-authenticating-requests.html)
-// in the Amazon S3 API Reference.
+// hosted at the specified endpoint in an asynchronous manner.
+//
+// Inference requests sent to this API are enqueued for asynchronous processing.
+// The processing of the inference request may or may not complete before you
+// receive a response from this API. The response from this API will not contain
+// the result of the inference request but contain information about where you can
+// locate it.
+//
+// Amazon SageMaker strips all POST headers except those supported by the API.
+// Amazon SageMaker might add additional headers. You should not rely on the
+// behavior of headers outside those enumerated in the request syntax.
+//
+// Calls to InvokeEndpointAsync are authenticated by using Amazon Web Services
+// Signature Version 4. For information, see [Authenticating Requests (Amazon Web Services Signature Version 4)]in the Amazon S3 API Reference.
+//
+// [Authenticating Requests (Amazon Web Services Signature Version 4)]: https://docs.aws.amazon.com/AmazonS3/latest/API/sig-v4-authenticating-requests.html
 func (c *Client) InvokeEndpointAsync(ctx context.Context, params *InvokeEndpointAsyncInput, optFns ...func(*Options)) (*InvokeEndpointAsyncOutput, error) {
 	if params == nil {
 		params = &InvokeEndpointAsyncInput{}
@@ -43,8 +46,9 @@ func (c *Client) InvokeEndpointAsync(ctx context.Context, params *InvokeEndpoint
 type InvokeEndpointAsyncInput struct {
 
 	// The name of the endpoint that you specified when you created the endpoint using
-	// the CreateEndpoint (https://docs.aws.amazon.com/sagemaker/latest/dg/API_CreateEndpoint.html)
-	// API.
+	// the [CreateEndpoint]API.
+	//
+	// [CreateEndpoint]: https://docs.aws.amazon.com/sagemaker/latest/dg/API_CreateEndpoint.html
 	//
 	// This member is required.
 	EndpointName *string
@@ -65,15 +69,19 @@ type InvokeEndpointAsyncInput struct {
 	// that is forwarded verbatim. You could use this value, for example, to provide an
 	// ID that you can use to track a request or to provide other metadata that a
 	// service endpoint was programmed to process. The value must consist of no more
-	// than 1024 visible US-ASCII characters as specified in Section 3.3.6. Field
-	// Value Components (https://datatracker.ietf.org/doc/html/rfc7230#section-3.2.6)
-	// of the Hypertext Transfer Protocol (HTTP/1.1). The code in your model is
-	// responsible for setting or updating any custom attributes in the response. If
-	// your code does not set this value in the response, an empty value is returned.
-	// For example, if a custom attribute represents the trace ID, your model can
-	// prepend the custom attribute with Trace ID: in your post-processing function.
+	// than 1024 visible US-ASCII characters as specified in [Section 3.3.6. Field Value Components]of the Hypertext Transfer
+	// Protocol (HTTP/1.1).
+	//
+	// The code in your model is responsible for setting or updating any custom
+	// attributes in the response. If your code does not set this value in the
+	// response, an empty value is returned. For example, if a custom attribute
+	// represents the trace ID, your model can prepend the custom attribute with Trace
+	// ID: in your post-processing function.
+	//
 	// This feature is currently supported in the Amazon Web Services SDKs but not in
 	// the Amazon SageMaker Python SDK.
+	//
+	// [Section 3.3.6. Field Value Components]: https://datatracker.ietf.org/doc/html/rfc7230#section-3.2.6
 	CustomAttributes *string
 
 	// The identifier for the inference request. Amazon SageMaker will generate an
@@ -132,25 +140,25 @@ func (c *Client) addOperationInvokeEndpointAsyncMiddlewares(stack *middleware.St
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -165,13 +173,16 @@ func (c *Client) addOperationInvokeEndpointAsyncMiddlewares(stack *middleware.St
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpInvokeEndpointAsyncValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opInvokeEndpointAsync(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

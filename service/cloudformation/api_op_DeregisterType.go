@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/cloudformation/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -14,16 +13,21 @@ import (
 
 // Marks an extension or extension version as DEPRECATED in the CloudFormation
 // registry, removing it from active use. Deprecated extensions or extension
-// versions cannot be used in CloudFormation operations. To deregister an entire
-// extension, you must individually deregister all active versions of that
-// extension. If an extension has only a single active version, deregistering that
-// version results in the extension itself being deregistered and marked as
-// deprecated in the registry. You can't deregister the default version of an
-// extension if there are other active version of that extension. If you do
-// deregister the default version of an extension, the extension type itself is
-// deregistered as well and marked as deprecated. To view the deprecation status of
-// an extension or extension version, use DescribeType (https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_DescribeType.html)
-// .
+// versions cannot be used in CloudFormation operations.
+//
+// To deregister an entire extension, you must individually deregister all active
+// versions of that extension. If an extension has only a single active version,
+// deregistering that version results in the extension itself being deregistered
+// and marked as deprecated in the registry.
+//
+// You can't deregister the default version of an extension if there are other
+// active version of that extension. If you do deregister the default version of an
+// extension, the extension type itself is deregistered as well and marked as
+// deprecated.
+//
+// To view the deprecation status of an extension or extension version, use [DescribeType].
+//
+// [DescribeType]: https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_DescribeType.html
 func (c *Client) DeregisterType(ctx context.Context, params *DeregisterTypeInput, optFns ...func(*Options)) (*DeregisterTypeOutput, error) {
 	if params == nil {
 		params = &DeregisterTypeInput{}
@@ -41,16 +45,19 @@ func (c *Client) DeregisterType(ctx context.Context, params *DeregisterTypeInput
 
 type DeregisterTypeInput struct {
 
-	// The Amazon Resource Name (ARN) of the extension. Conditional: You must specify
-	// either TypeName and Type , or Arn .
+	// The Amazon Resource Name (ARN) of the extension.
+	//
+	// Conditional: You must specify either TypeName and Type , or Arn .
 	Arn *string
 
-	// The kind of extension. Conditional: You must specify either TypeName and Type ,
-	// or Arn .
+	// The kind of extension.
+	//
+	// Conditional: You must specify either TypeName and Type , or Arn .
 	Type types.RegistryType
 
-	// The name of the extension. Conditional: You must specify either TypeName and
-	// Type , or Arn .
+	// The name of the extension.
+	//
+	// Conditional: You must specify either TypeName and Type , or Arn .
 	TypeName *string
 
 	// The ID of a specific version of the extension. The version ID is the value at
@@ -90,25 +97,25 @@ func (c *Client) addOperationDeregisterTypeMiddlewares(stack *middleware.Stack, 
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -123,10 +130,13 @@ func (c *Client) addOperationDeregisterTypeMiddlewares(stack *middleware.Stack, 
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDeregisterType(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

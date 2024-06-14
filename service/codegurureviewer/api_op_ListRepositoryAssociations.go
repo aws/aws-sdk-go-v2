@@ -6,19 +6,19 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/codegurureviewer/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns a list of RepositoryAssociationSummary (https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_RepositoryAssociationSummary.html)
-// objects that contain summary information about a repository association. You can
-// filter the returned list by ProviderType (https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_RepositoryAssociationSummary.html#reviewer-Type-RepositoryAssociationSummary-ProviderType)
-// , Name (https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_RepositoryAssociationSummary.html#reviewer-Type-RepositoryAssociationSummary-Name)
-// , State (https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_RepositoryAssociationSummary.html#reviewer-Type-RepositoryAssociationSummary-State)
-// , and Owner (https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_RepositoryAssociationSummary.html#reviewer-Type-RepositoryAssociationSummary-Owner)
-// .
+// Returns a list of [RepositoryAssociationSummary] objects that contain summary information about a repository
+// association. You can filter the returned list by [ProviderType], [Name], [State], and [Owner].
+//
+// [Owner]: https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_RepositoryAssociationSummary.html#reviewer-Type-RepositoryAssociationSummary-Owner
+// [State]: https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_RepositoryAssociationSummary.html#reviewer-Type-RepositoryAssociationSummary-State
+// [RepositoryAssociationSummary]: https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_RepositoryAssociationSummary.html
+// [ProviderType]: https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_RepositoryAssociationSummary.html#reviewer-Type-RepositoryAssociationSummary-ProviderType
+// [Name]: https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_RepositoryAssociationSummary.html#reviewer-Type-RepositoryAssociationSummary-Name
 func (c *Client) ListRepositoryAssociations(ctx context.Context, params *ListRepositoryAssociationsInput, optFns ...func(*Options)) (*ListRepositoryAssociationsOutput, error) {
 	if params == nil {
 		params = &ListRepositoryAssociationsInput{}
@@ -52,9 +52,10 @@ type ListRepositoryAssociationsInput struct {
 	// The nextToken value returned from a previous paginated
 	// ListRepositoryAssociations request where maxResults was used and the results
 	// exceeded the value of that parameter. Pagination continues from the end of the
-	// previous results that returned the nextToken value. Treat this token as an
-	// opaque identifier that is only used to retrieve the next items in a list and not
-	// for other programmatic purposes.
+	// previous results that returned the nextToken value.
+	//
+	// Treat this token as an opaque identifier that is only used to retrieve the next
+	// items in a list and not for other programmatic purposes.
 	NextToken *string
 
 	// List of owners to use as a filter. For Amazon Web Services CodeCommit, it is
@@ -66,26 +67,37 @@ type ListRepositoryAssociationsInput struct {
 	// List of provider types to use as a filter.
 	ProviderTypes []types.ProviderType
 
-	// List of repository association states to use as a filter. The valid repository
-	// association states are:
+	// List of repository association states to use as a filter.
+	//
+	// The valid repository association states are:
+	//
 	//   - Associated: The repository association is complete.
+	//
 	//   - Associating: CodeGuru Reviewer is:
+	//
 	//   - Setting up pull request notifications. This is required for pull requests
-	//   to trigger a CodeGuru Reviewer review. If your repository ProviderType is
-	//   GitHub , GitHub Enterprise Server , or Bitbucket , CodeGuru Reviewer creates
-	//   webhooks in your repository to trigger CodeGuru Reviewer reviews. If you delete
-	//   these webhooks, reviews of code in your repository cannot be triggered.
+	//   to trigger a CodeGuru Reviewer review.
+	//
+	// If your repository ProviderType is GitHub , GitHub Enterprise Server , or
+	//   Bitbucket , CodeGuru Reviewer creates webhooks in your repository to trigger
+	//   CodeGuru Reviewer reviews. If you delete these webhooks, reviews of code in your
+	//   repository cannot be triggered.
+	//
 	//   - Setting up source code access. This is required for CodeGuru Reviewer to
 	//   securely clone code in your repository.
+	//
 	//   - Failed: The repository failed to associate or disassociate.
+	//
 	//   - Disassociating: CodeGuru Reviewer is removing the repository's pull request
 	//   notifications and source code access.
+	//
 	//   - Disassociated: CodeGuru Reviewer successfully disassociated the repository.
 	//   You can create a new association with this repository if you want to review
 	//   source code in it later. You can control access to code reviews created in
 	//   anassociated repository with tags after it has been disassociated. For more
-	//   information, see Using tags to control access to associated repositories (https://docs.aws.amazon.com/codeguru/latest/reviewer-ug/auth-and-access-control-using-tags.html)
-	//   in the Amazon CodeGuru Reviewer User Guide.
+	//   information, see [Using tags to control access to associated repositories]in the Amazon CodeGuru Reviewer User Guide.
+	//
+	// [Using tags to control access to associated repositories]: https://docs.aws.amazon.com/codeguru/latest/reviewer-ug/auth-and-access-control-using-tags.html
 	States []types.RepositoryAssociationState
 
 	noSmithyDocumentSerde
@@ -130,25 +142,25 @@ func (c *Client) addOperationListRepositoryAssociationsMiddlewares(stack *middle
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -163,10 +175,13 @@ func (c *Client) addOperationListRepositoryAssociationsMiddlewares(stack *middle
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListRepositoryAssociations(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

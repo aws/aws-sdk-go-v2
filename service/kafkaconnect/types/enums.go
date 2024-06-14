@@ -14,8 +14,9 @@ const (
 )
 
 // Values returns all known values for ConnectorState. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ConnectorState) Values() []ConnectorState {
 	return []ConnectorState{
 		"RUNNING",
@@ -35,8 +36,9 @@ const (
 )
 
 // Values returns all known values for CustomPluginContentType. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (CustomPluginContentType) Values() []CustomPluginContentType {
 	return []CustomPluginContentType{
 		"JAR",
@@ -57,8 +59,9 @@ const (
 )
 
 // Values returns all known values for CustomPluginState. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (CustomPluginState) Values() []CustomPluginState {
 	return []CustomPluginState{
 		"CREATING",
@@ -80,8 +83,9 @@ const (
 
 // Values returns all known values for KafkaClusterClientAuthenticationType. Note
 // that this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (KafkaClusterClientAuthenticationType) Values() []KafkaClusterClientAuthenticationType {
 	return []KafkaClusterClientAuthenticationType{
 		"NONE",
@@ -99,11 +103,31 @@ const (
 
 // Values returns all known values for KafkaClusterEncryptionInTransitType. Note
 // that this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (KafkaClusterEncryptionInTransitType) Values() []KafkaClusterEncryptionInTransitType {
 	return []KafkaClusterEncryptionInTransitType{
 		"PLAINTEXT",
 		"TLS",
+	}
+}
+
+type WorkerConfigurationState string
+
+// Enum values for WorkerConfigurationState
+const (
+	WorkerConfigurationStateActive   WorkerConfigurationState = "ACTIVE"
+	WorkerConfigurationStateDeleting WorkerConfigurationState = "DELETING"
+)
+
+// Values returns all known values for WorkerConfigurationState. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (WorkerConfigurationState) Values() []WorkerConfigurationState {
+	return []WorkerConfigurationState{
+		"ACTIVE",
+		"DELETING",
 	}
 }

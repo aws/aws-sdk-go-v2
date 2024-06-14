@@ -6,21 +6,23 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/quicksight/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Starts an Asset Bundle import job. An Asset Bundle import job imports specified
-// Amazon QuickSight assets into an Amazon QuickSight account. You can also choose
-// to import a naming prefix and specified configuration overrides. The assets that
-// are contained in the bundle file that you provide are used to create or update a
-// new or existing asset in your Amazon QuickSight account. Each Amazon QuickSight
-// account can run up to 5 import jobs concurrently. The API caller must have the
-// necessary "create" , "describe" , and "update" permissions in their IAM role to
-// access each resource type that is contained in the bundle file before the
-// resources can be imported.
+// Starts an Asset Bundle import job.
+//
+// An Asset Bundle import job imports specified Amazon QuickSight assets into an
+// Amazon QuickSight account. You can also choose to import a naming prefix and
+// specified configuration overrides. The assets that are contained in the bundle
+// file that you provide are used to create or update a new or existing asset in
+// your Amazon QuickSight account. Each Amazon QuickSight account can run up to 5
+// import jobs concurrently.
+//
+// The API caller must have the necessary "create" , "describe" , and "update"
+// permissions in their IAM role to access each resource type that is contained in
+// the bundle file before the resources can be imported.
 func (c *Client) StartAssetBundleImportJob(ctx context.Context, params *StartAssetBundleImportJobInput, optFns ...func(*Options)) (*StartAssetBundleImportJobOutput, error) {
 	if params == nil {
 		params = &StartAssetBundleImportJobInput{}
@@ -55,11 +57,14 @@ type StartAssetBundleImportJobInput struct {
 	// This member is required.
 	AwsAccountId *string
 
-	// The failure action for the import job. If you choose ROLLBACK , failed import
-	// jobs will attempt to undo any asset changes caused by the failed job. If you
-	// choose DO_NOTHING , failed import jobs will not attempt to roll back any asset
-	// changes caused by the failed job, possibly keeping the Amazon QuickSight account
-	// in an inconsistent state.
+	// The failure action for the import job.
+	//
+	// If you choose ROLLBACK , failed import jobs will attempt to undo any asset
+	// changes caused by the failed job.
+	//
+	// If you choose DO_NOTHING , failed import jobs will not attempt to roll back any
+	// asset changes caused by the failed job, possibly keeping the Amazon QuickSight
+	// account in an inconsistent state.
 	FailureAction types.AssetBundleImportFailureAction
 
 	// Optional overrides that are applied to the resource configuration before import.
@@ -123,25 +128,25 @@ func (c *Client) addOperationStartAssetBundleImportJobMiddlewares(stack *middlew
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -156,13 +161,16 @@ func (c *Client) addOperationStartAssetBundleImportJobMiddlewares(stack *middlew
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpStartAssetBundleImportJobValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opStartAssetBundleImportJob(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

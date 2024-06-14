@@ -6,17 +6,18 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/cloudfront/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Gets a key group configuration. To get a key group configuration, you must
-// provide the key group's identifier. If the key group is referenced in a
-// distribution's cache behavior, you can get the key group's identifier using
-// ListDistributions or GetDistribution . If the key group is not referenced in a
-// cache behavior, you can get the identifier using ListKeyGroups .
+// Gets a key group configuration.
+//
+// To get a key group configuration, you must provide the key group's identifier.
+// If the key group is referenced in a distribution's cache behavior, you can get
+// the key group's identifier using ListDistributions or GetDistribution . If the
+// key group is not referenced in a cache behavior, you can get the identifier
+// using ListKeyGroups .
 func (c *Client) GetKeyGroupConfig(ctx context.Context, params *GetKeyGroupConfigInput, optFns ...func(*Options)) (*GetKeyGroupConfigOutput, error) {
 	if params == nil {
 		params = &GetKeyGroupConfigInput{}
@@ -79,25 +80,25 @@ func (c *Client) addOperationGetKeyGroupConfigMiddlewares(stack *middleware.Stac
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -112,13 +113,16 @@ func (c *Client) addOperationGetKeyGroupConfigMiddlewares(stack *middleware.Stac
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpGetKeyGroupConfigValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetKeyGroupConfig(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

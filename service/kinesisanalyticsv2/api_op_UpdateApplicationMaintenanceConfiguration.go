@@ -6,28 +6,33 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/kinesisanalyticsv2/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates the maintenance configuration of the Kinesis Data Analytics
-// application. You can invoke this operation on an application that is in one of
-// the two following states: READY or RUNNING . If you invoke it when the
-// application is in a state other than these two states, it throws a
-// ResourceInUseException . The service makes use of the updated configuration the
-// next time it schedules maintenance for the application. If you invoke this
-// operation after the service schedules maintenance, the service will apply the
-// configuration update the next time it schedules maintenance for the application.
-// This means that you might not see the maintenance configuration update applied
-// to the maintenance process that follows a successful invocation of this
-// operation, but to the following maintenance process instead. To see the current
-// maintenance configuration of your application, invoke the DescribeApplication
-// operation. For information about application maintenance, see Kinesis Data
-// Analytics for Apache Flink Maintenance (https://docs.aws.amazon.com/kinesisanalytics/latest/java/maintenance.html)
-// . This operation is supported only for Amazon Kinesis Data Analytics for Apache
-// Flink.
+// Updates the maintenance configuration of the Managed Service for Apache Flink
+// application.
+//
+// You can invoke this operation on an application that is in one of the two
+// following states: READY or RUNNING . If you invoke it when the application is in
+// a state other than these two states, it throws a ResourceInUseException . The
+// service makes use of the updated configuration the next time it schedules
+// maintenance for the application. If you invoke this operation after the service
+// schedules maintenance, the service will apply the configuration update the next
+// time it schedules maintenance for the application. This means that you might not
+// see the maintenance configuration update applied to the maintenance process that
+// follows a successful invocation of this operation, but to the following
+// maintenance process instead.
+//
+// To see the current maintenance configuration of your application, invoke the DescribeApplication
+// operation.
+//
+// For information about application maintenance, see [Managed Service for Apache Flink for Apache Flink Maintenance].
+//
+// This operation is supported only for Managed Service for Apache Flink.
+//
+// [Managed Service for Apache Flink for Apache Flink Maintenance]: https://docs.aws.amazon.com/kinesisanalytics/latest/java/maintenance.html
 func (c *Client) UpdateApplicationMaintenanceConfiguration(ctx context.Context, params *UpdateApplicationMaintenanceConfigurationInput, optFns ...func(*Options)) (*UpdateApplicationMaintenanceConfigurationOutput, error) {
 	if params == nil {
 		params = &UpdateApplicationMaintenanceConfigurationInput{}
@@ -95,25 +100,25 @@ func (c *Client) addOperationUpdateApplicationMaintenanceConfigurationMiddleware
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -128,13 +133,16 @@ func (c *Client) addOperationUpdateApplicationMaintenanceConfigurationMiddleware
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpUpdateApplicationMaintenanceConfigurationValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateApplicationMaintenanceConfiguration(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

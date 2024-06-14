@@ -6,26 +6,30 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Associates Elastic IP addresses (EIPs) and private IPv4 addresses with a public
-// NAT gateway. For more information, see Work with NAT gateways (https://docs.aws.amazon.com/vpc/latest/userguide/vpc-nat-gateway.html#nat-gateway-working-with)
-// in the Amazon VPC User Guide. By default, you can associate up to 2 Elastic IP
-// addresses per public NAT gateway. You can increase the limit by requesting a
-// quota adjustment. For more information, see Elastic IP address quotas (https://docs.aws.amazon.com/vpc/latest/userguide/amazon-vpc-limits.html#vpc-limits-eips)
-// in the Amazon VPC User Guide. When you associate an EIP or secondary EIPs with a
-// public NAT gateway, the network border group of the EIPs must match the network
-// border group of the Availability Zone (AZ) that the public NAT gateway is in. If
-// it's not the same, the EIP will fail to associate. You can see the network
-// border group for the subnet's AZ by viewing the details of the subnet.
-// Similarly, you can view the network border group of an EIP by viewing the
-// details of the EIP address. For more information about network border groups and
-// EIPs, see Allocate an Elastic IP address (https://docs.aws.amazon.com/vpc/latest/userguide/vpc-eips.html#allocate-eip)
-// in the Amazon VPC User Guide.
+// NAT gateway. For more information, see [Work with NAT gateways]in the Amazon VPC User Guide.
+//
+// By default, you can associate up to 2 Elastic IP addresses per public NAT
+// gateway. You can increase the limit by requesting a quota adjustment. For more
+// information, see [Elastic IP address quotas]in the Amazon VPC User Guide.
+//
+// When you associate an EIP or secondary EIPs with a public NAT gateway, the
+// network border group of the EIPs must match the network border group of the
+// Availability Zone (AZ) that the public NAT gateway is in. If it's not the same,
+// the EIP will fail to associate. You can see the network border group for the
+// subnet's AZ by viewing the details of the subnet. Similarly, you can view the
+// network border group of an EIP by viewing the details of the EIP address. For
+// more information about network border groups and EIPs, see [Allocate an Elastic IP address]in the Amazon VPC
+// User Guide.
+//
+// [Elastic IP address quotas]: https://docs.aws.amazon.com/vpc/latest/userguide/amazon-vpc-limits.html#vpc-limits-eips
+// [Work with NAT gateways]: https://docs.aws.amazon.com/vpc/latest/userguide/vpc-nat-gateway.html#nat-gateway-working-with
+// [Allocate an Elastic IP address]: https://docs.aws.amazon.com/vpc/latest/userguide/vpc-eips.html#allocate-eip
 func (c *Client) AssociateNatGatewayAddress(ctx context.Context, params *AssociateNatGatewayAddressInput, optFns ...func(*Options)) (*AssociateNatGatewayAddressOutput, error) {
 	if params == nil {
 		params = &AssociateNatGatewayAddressInput{}
@@ -101,25 +105,25 @@ func (c *Client) addOperationAssociateNatGatewayAddressMiddlewares(stack *middle
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -134,13 +138,16 @@ func (c *Client) addOperationAssociateNatGatewayAddressMiddlewares(stack *middle
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpAssociateNatGatewayAddressValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opAssociateNatGatewayAddress(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

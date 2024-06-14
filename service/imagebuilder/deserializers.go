@@ -18,7 +18,16 @@ import (
 	"io"
 	"math"
 	"strings"
+	"time"
 )
+
+func deserializeS3Expires(v string) (*time.Time, error) {
+	t, err := smithytime.ParseHTTPDate(v)
+	if err != nil {
+		return nil, nil
+	}
+	return &t, nil
+}
 
 type awsRestjson1_deserializeOpCancelImageCreation struct {
 }
@@ -19537,6 +19546,22 @@ func awsRestjson1_deserializeDocumentLifecycleExecutionResource(v **types.Lifecy
 				return err
 			}
 
+		case "endTime":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.EndTime = ptr.Time(smithytime.ParseEpochSeconds(f64))
+
+				default:
+					return fmt.Errorf("expected DateTimeTimestamp to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
 		case "imageUris":
 			if err := awsRestjson1_deserializeDocumentStringList(&sv.ImageUris, value); err != nil {
 				return err
@@ -19563,6 +19588,22 @@ func awsRestjson1_deserializeDocumentLifecycleExecutionResource(v **types.Lifecy
 		case "snapshots":
 			if err := awsRestjson1_deserializeDocumentLifecycleExecutionSnapshotResourceList(&sv.Snapshots, value); err != nil {
 				return err
+			}
+
+		case "startTime":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.StartTime = ptr.Time(smithytime.ParseEpochSeconds(f64))
+
+				default:
+					return fmt.Errorf("expected DateTimeTimestamp to be a JSON Number, got %T instead", value)
+
+				}
 			}
 
 		case "state":

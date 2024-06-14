@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/personalize/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -15,10 +14,15 @@ import (
 // Creates an empty dataset group. A dataset group is a container for Amazon
 // Personalize resources. A dataset group can contain at most three datasets, one
 // for each type of dataset:
+//
 //   - Item interactions
+//
 //   - Items
+//
 //   - Users
+//
 //   - Actions
+//
 //   - Action interactions
 //
 // A dataset group can be a Domain dataset group, where you specify a domain and
@@ -26,27 +30,47 @@ import (
 // you use custom resources, such as a solution with a solution version, that you
 // deploy with a campaign. If you start with a Domain dataset group, you can still
 // add custom resources such as solutions and solution versions trained with
-// recipes for custom use cases and deployed with campaigns. A dataset group can be
-// in one of the following states:
+// recipes for custom use cases and deployed with campaigns.
+//
+// A dataset group can be in one of the following states:
+//
 //   - CREATE PENDING > CREATE IN_PROGRESS > ACTIVE -or- CREATE FAILED
+//
 //   - DELETE PENDING
 //
-// To get the status of the dataset group, call DescribeDatasetGroup (https://docs.aws.amazon.com/personalize/latest/dg/API_DescribeDatasetGroup.html)
-// . If the status shows as CREATE FAILED, the response includes a failureReason
-// key, which describes why the creation failed. You must wait until the status of
-// the dataset group is ACTIVE before adding a dataset to the group. You can
-// specify an Key Management Service (KMS) key to encrypt the datasets in the
-// group. If you specify a KMS key, you must also include an Identity and Access
-// Management (IAM) role that has permission to access the key. APIs that require a
-// dataset group ARN in the request
-//   - CreateDataset (https://docs.aws.amazon.com/personalize/latest/dg/API_CreateDataset.html)
-//   - CreateEventTracker (https://docs.aws.amazon.com/personalize/latest/dg/API_CreateEventTracker.html)
-//   - CreateSolution (https://docs.aws.amazon.com/personalize/latest/dg/API_CreateSolution.html)
+// To get the status of the dataset group, call [DescribeDatasetGroup]. If the status shows as CREATE
+// FAILED, the response includes a failureReason key, which describes why the
+// creation failed.
 //
-// Related APIs
-//   - ListDatasetGroups (https://docs.aws.amazon.com/personalize/latest/dg/API_ListDatasetGroups.html)
-//   - DescribeDatasetGroup (https://docs.aws.amazon.com/personalize/latest/dg/API_DescribeDatasetGroup.html)
-//   - DeleteDatasetGroup (https://docs.aws.amazon.com/personalize/latest/dg/API_DeleteDatasetGroup.html)
+// You must wait until the status of the dataset group is ACTIVE before adding a
+// dataset to the group.
+//
+// You can specify an Key Management Service (KMS) key to encrypt the datasets in
+// the group. If you specify a KMS key, you must also include an Identity and
+// Access Management (IAM) role that has permission to access the key.
+//
+// # APIs that require a dataset group ARN in the request
+//
+// [CreateDataset]
+//
+// [CreateEventTracker]
+//
+// [CreateSolution]
+//
+// # Related APIs
+//
+// [ListDatasetGroups]
+//
+// [DescribeDatasetGroup]
+//
+// [DeleteDatasetGroup]
+//
+// [CreateDataset]: https://docs.aws.amazon.com/personalize/latest/dg/API_CreateDataset.html
+// [ListDatasetGroups]: https://docs.aws.amazon.com/personalize/latest/dg/API_ListDatasetGroups.html
+// [CreateSolution]: https://docs.aws.amazon.com/personalize/latest/dg/API_CreateSolution.html
+// [DescribeDatasetGroup]: https://docs.aws.amazon.com/personalize/latest/dg/API_DescribeDatasetGroup.html
+// [CreateEventTracker]: https://docs.aws.amazon.com/personalize/latest/dg/API_CreateEventTracker.html
+// [DeleteDatasetGroup]: https://docs.aws.amazon.com/personalize/latest/dg/API_DeleteDatasetGroup.html
 func (c *Client) CreateDatasetGroup(ctx context.Context, params *CreateDatasetGroupInput, optFns ...func(*Options)) (*CreateDatasetGroupOutput, error) {
 	if params == nil {
 		params = &CreateDatasetGroupInput{}
@@ -85,8 +109,9 @@ type CreateDatasetGroupInput struct {
 	// valid when also specifying a KMS key.
 	RoleArn *string
 
-	// A list of tags (https://docs.aws.amazon.com/personalize/latest/dg/tagging-resources.html)
-	// to apply to the dataset group.
+	// A list of [tags] to apply to the dataset group.
+	//
+	// [tags]: https://docs.aws.amazon.com/personalize/latest/dg/tagging-resources.html
 	Tags []types.Tag
 
 	noSmithyDocumentSerde
@@ -128,25 +153,25 @@ func (c *Client) addOperationCreateDatasetGroupMiddlewares(stack *middleware.Sta
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -161,13 +186,16 @@ func (c *Client) addOperationCreateDatasetGroupMiddlewares(stack *middleware.Sta
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpCreateDatasetGroupValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateDatasetGroup(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

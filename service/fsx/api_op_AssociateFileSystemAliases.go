@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/fsx/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -16,13 +15,16 @@ import (
 // an existing Amazon FSx for Windows File Server file system. A file system can
 // have a maximum of 50 DNS aliases associated with it at any one time. If you try
 // to associate a DNS alias that is already associated with the file system, FSx
-// takes no action on that alias in the request. For more information, see Working
-// with DNS Aliases (https://docs.aws.amazon.com/fsx/latest/WindowsGuide/managing-dns-aliases.html)
-// and Walkthrough 5: Using DNS aliases to access your file system (https://docs.aws.amazon.com/fsx/latest/WindowsGuide/walkthrough05-file-system-custom-CNAME.html)
-// , including additional steps you must take to be able to access your file system
-// using a DNS alias. The system response shows the DNS aliases that Amazon FSx is
-// attempting to associate with the file system. Use the API operation to monitor
-// the status of the aliases Amazon FSx is associating with the file system.
+// takes no action on that alias in the request. For more information, see [Working with DNS Aliases]and [Walkthrough 5: Using DNS aliases to access your file system],
+// including additional steps you must take to be able to access your file system
+// using a DNS alias.
+//
+// The system response shows the DNS aliases that Amazon FSx is attempting to
+// associate with the file system. Use the API operation to monitor the status of
+// the aliases Amazon FSx is associating with the file system.
+//
+// [Walkthrough 5: Using DNS aliases to access your file system]: https://docs.aws.amazon.com/fsx/latest/WindowsGuide/walkthrough05-file-system-custom-CNAME.html
+// [Working with DNS Aliases]: https://docs.aws.amazon.com/fsx/latest/WindowsGuide/managing-dns-aliases.html
 func (c *Client) AssociateFileSystemAliases(ctx context.Context, params *AssociateFileSystemAliasesInput, optFns ...func(*Options)) (*AssociateFileSystemAliasesOutput, error) {
 	if params == nil {
 		params = &AssociateFileSystemAliasesInput{}
@@ -44,11 +46,16 @@ type AssociateFileSystemAliasesInput struct {
 
 	// An array of one or more DNS alias names to associate with the file system. The
 	// alias name has to comply with the following formatting requirements:
+	//
 	//   - Formatted as a fully-qualified domain name (FQDN), hostname.domain , for
 	//   example, accounting.corp.example.com .
+	//
 	//   - Can contain alphanumeric characters and the hyphen (-).
+	//
 	//   - Cannot start or end with a hyphen.
+	//
 	//   - Can start with a numeric.
+	//
 	// For DNS alias names, Amazon FSx stores alphabetic characters as lowercase
 	// letters (a-z), regardless of how you specify them: as uppercase letters,
 	// lowercase letters, or the corresponding letters in escape codes.
@@ -108,25 +115,25 @@ func (c *Client) addOperationAssociateFileSystemAliasesMiddlewares(stack *middle
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -141,6 +148,9 @@ func (c *Client) addOperationAssociateFileSystemAliasesMiddlewares(stack *middle
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opAssociateFileSystemAliasesMiddleware(stack, options); err != nil {
 		return err
 	}
@@ -150,7 +160,7 @@ func (c *Client) addOperationAssociateFileSystemAliasesMiddlewares(stack *middle
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opAssociateFileSystemAliases(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

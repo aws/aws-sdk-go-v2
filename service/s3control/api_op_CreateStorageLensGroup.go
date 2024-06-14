@@ -16,22 +16,25 @@ import (
 	"strings"
 )
 
-// Creates a new S3 Storage Lens group and associates it with the specified Amazon
-// Web Services account ID. An S3 Storage Lens group is a custom grouping of
+//	Creates a new S3 Storage Lens group and associates it with the specified
+//
+// Amazon Web Services account ID. An S3 Storage Lens group is a custom grouping of
 // objects based on prefix, suffix, object tags, object size, object age, or a
 // combination of these filters. For each Storage Lens group that you’ve created,
 // you can also optionally add Amazon Web Services resource tags. For more
-// information about S3 Storage Lens groups, see Working with S3 Storage Lens
-// groups (https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage-lens-groups-overview.html)
-// . To use this operation, you must have the permission to perform the
+// information about S3 Storage Lens groups, see [Working with S3 Storage Lens groups].
+//
+// To use this operation, you must have the permission to perform the
 // s3:CreateStorageLensGroup action. If you’re trying to create a Storage Lens
 // group with Amazon Web Services resource tags, you must also have permission to
 // perform the s3:TagResource action. For more information about the required
-// Storage Lens Groups permissions, see Setting account permissions to use S3
-// Storage Lens groups (https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage_lens_iam_permissions.html#storage_lens_groups_permissions)
-// . For information about Storage Lens groups errors, see List of Amazon S3
-// Storage Lens error codes (https://docs.aws.amazon.com/AmazonS3/latest/API/ErrorResponses.html#S3LensErrorCodeList)
-// .
+// Storage Lens Groups permissions, see [Setting account permissions to use S3 Storage Lens groups].
+//
+// For information about Storage Lens groups errors, see [List of Amazon S3 Storage Lens error codes].
+//
+// [Setting account permissions to use S3 Storage Lens groups]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage_lens_iam_permissions.html#storage_lens_groups_permissions
+// [List of Amazon S3 Storage Lens error codes]: https://docs.aws.amazon.com/AmazonS3/latest/API/ErrorResponses.html#S3LensErrorCodeList
+// [Working with S3 Storage Lens groups]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage-lens-groups-overview.html
 func (c *Client) CreateStorageLensGroup(ctx context.Context, params *CreateStorageLensGroupInput, optFns ...func(*Options)) (*CreateStorageLensGroupOutput, error) {
 	if params == nil {
 		params = &CreateStorageLensGroupInput{}
@@ -49,18 +52,18 @@ func (c *Client) CreateStorageLensGroup(ctx context.Context, params *CreateStora
 
 type CreateStorageLensGroupInput struct {
 
-	// The Amazon Web Services account ID that the Storage Lens group is created from
+	//  The Amazon Web Services account ID that the Storage Lens group is created from
 	// and associated with.
 	//
 	// This member is required.
 	AccountId *string
 
-	// The Storage Lens group configuration.
+	//  The Storage Lens group configuration.
 	//
 	// This member is required.
 	StorageLensGroup *types.StorageLensGroup
 
-	// The Amazon Web Services resource tags that you're adding to your Storage Lens
+	//  The Amazon Web Services resource tags that you're adding to your Storage Lens
 	// group. This parameter is optional.
 	Tags []types.Tag
 
@@ -101,25 +104,25 @@ func (c *Client) addOperationCreateStorageLensGroupMiddlewares(stack *middleware
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -137,6 +140,9 @@ func (c *Client) addOperationCreateStorageLensGroupMiddlewares(stack *middleware
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addEndpointPrefix_opCreateStorageLensGroupMiddleware(stack); err != nil {
 		return err
 	}
@@ -149,7 +155,7 @@ func (c *Client) addOperationCreateStorageLensGroupMiddlewares(stack *middleware
 	if err = addMetadataRetrieverMiddleware(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addCreateStorageLensGroupUpdateEndpoint(stack, options); err != nil {

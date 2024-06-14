@@ -6,17 +6,18 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/cognitosync/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Sets the necessary configuration for push sync.This API can only be called with
-// developer credentials. You cannot call this API with the temporary user
-// credentials provided by Cognito Identity. SetIdentityPoolConfiguration The
-// following examples have been edited for readability. POST / HTTP/1.1
-// CONTENT-TYPE: application/json X-AMZN-REQUESTID:
+// Sets the necessary configuration for push sync.
+//
+// This API can only be called with developer credentials. You cannot call this
+// API with the temporary user credentials provided by Cognito Identity.
+//
+// SetIdentityPoolConfiguration The following examples have been edited for
+// readability. POST / HTTP/1.1 CONTENT-TYPE: application/json X-AMZN-REQUESTID:
 // a46db021-f5dd-45d6-af5b-7069fa4a211b X-AMZ-TARGET:
 // com.amazonaws.cognito.sync.model.AWSCognitoSyncService.SetIdentityPoolConfiguration
 // HOST: cognito-sync.us-east-1.amazonaws.com X-AMZ-DATE: 20141004T200006Z
@@ -28,8 +29,9 @@ import (
 // "IdentityPoolId": "ID_POOL_ID", "PushSync": { "ApplicationArns":
 // ["PLATFORMARN1", "PLATFORMARN2"], "RoleArn": "ROLEARN" } } } 1.1 200 OK
 // x-amzn-requestid: a46db021-f5dd-45d6-af5b-7069fa4a211b date: Sat, 04 Oct 2014
-// 20:00:06 GMT content-type: application/json content-length: 332 { "Output": {
-// "__type":
+// 20:00:06 GMT content-type: application/json content-length: 332
+//
+// { "Output": { "__type":
 // "com.amazonaws.cognito.sync.model#SetIdentityPoolConfigurationResponse",
 // "IdentityPoolId": "ID_POOL_ID", "PushSync": { "ApplicationArns":
 // ["PLATFORMARN1", "PLATFORMARN2"], "RoleArn": "ROLEARN" } }, "Version": "1.0" }
@@ -108,25 +110,25 @@ func (c *Client) addOperationSetIdentityPoolConfigurationMiddlewares(stack *midd
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -141,13 +143,16 @@ func (c *Client) addOperationSetIdentityPoolConfigurationMiddlewares(stack *midd
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpSetIdentityPoolConfigurationValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opSetIdentityPoolConfiguration(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

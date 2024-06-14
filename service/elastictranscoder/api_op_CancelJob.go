@@ -6,14 +6,14 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// The CancelJob operation cancels an unfinished job. You can only cancel a job
-// that has a status of Submitted . To prevent a pipeline from starting to process
-// a job while you're getting the job identifier, use UpdatePipelineStatus to
+// The CancelJob operation cancels an unfinished job.
+//
+// You can only cancel a job that has a status of Submitted . To prevent a pipeline
+// from starting to process a job while you're getting the job identifier, use UpdatePipelineStatusto
 // temporarily pause the pipeline.
 func (c *Client) CancelJob(ctx context.Context, params *CancelJobInput, optFns ...func(*Options)) (*CancelJobOutput, error) {
 	if params == nil {
@@ -33,9 +33,10 @@ func (c *Client) CancelJob(ctx context.Context, params *CancelJobInput, optFns .
 // The CancelJobRequest structure.
 type CancelJobInput struct {
 
-	// The identifier of the job that you want to cancel. To get a list of the jobs
-	// (including their jobId ) that have a status of Submitted , use the
-	// ListJobsByStatus API action.
+	// The identifier of the job that you want to cancel.
+	//
+	// To get a list of the jobs (including their jobId ) that have a status of
+	// Submitted , use the ListJobsByStatus API action.
 	//
 	// This member is required.
 	Id *string
@@ -74,25 +75,25 @@ func (c *Client) addOperationCancelJobMiddlewares(stack *middleware.Stack, optio
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -107,13 +108,16 @@ func (c *Client) addOperationCancelJobMiddlewares(stack *middleware.Stack, optio
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpCancelJobValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCancelJob(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

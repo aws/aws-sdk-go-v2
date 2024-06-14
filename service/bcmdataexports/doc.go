@@ -5,7 +5,9 @@
 //
 // You can use the Data Exports API to create customized exports from multiple
 // Amazon Web Services cost management and billing datasets, such as cost and usage
-// data and cost optimization recommendations. The Data Exports API provides the
-// following endpoint:
+// data and cost optimization recommendations.
+//
+// The Data Exports API provides the following endpoint:
+//
 //   - https://bcm-data-exports.us-east-1.api.aws
 package bcmdataexports

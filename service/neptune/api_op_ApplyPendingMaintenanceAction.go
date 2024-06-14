@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/neptune/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -31,26 +30,32 @@ func (c *Client) ApplyPendingMaintenanceAction(ctx context.Context, params *Appl
 
 type ApplyPendingMaintenanceActionInput struct {
 
-	// The pending maintenance action to apply to this resource. Valid values:
-	// system-update , db-upgrade
+	// The pending maintenance action to apply to this resource.
+	//
+	// Valid values: system-update , db-upgrade
 	//
 	// This member is required.
 	ApplyAction *string
 
 	// A value that specifies the type of opt-in request, or undoes an opt-in request.
-	// An opt-in request of type immediate can't be undone. Valid values:
+	// An opt-in request of type immediate can't be undone.
+	//
+	// Valid values:
+	//
 	//   - immediate - Apply the maintenance action immediately.
+	//
 	//   - next-maintenance - Apply the maintenance action during the next maintenance
 	//   window for the resource.
+	//
 	//   - undo-opt-in - Cancel any existing next-maintenance opt-in requests.
 	//
 	// This member is required.
 	OptInType *string
 
 	// The Amazon Resource Name (ARN) of the resource that the pending maintenance
-	// action applies to. For information about creating an ARN, see Constructing an
-	// Amazon Resource Name (ARN) (https://docs.aws.amazon.com/neptune/latest/UserGuide/tagging.ARN.html#tagging.ARN.Constructing)
-	// .
+	// action applies to. For information about creating an ARN, see [Constructing an Amazon Resource Name (ARN)].
+	//
+	// [Constructing an Amazon Resource Name (ARN)]: https://docs.aws.amazon.com/neptune/latest/UserGuide/tagging.ARN.html#tagging.ARN.Constructing
 	//
 	// This member is required.
 	ResourceIdentifier *string
@@ -91,25 +96,25 @@ func (c *Client) addOperationApplyPendingMaintenanceActionMiddlewares(stack *mid
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -124,13 +129,16 @@ func (c *Client) addOperationApplyPendingMaintenanceActionMiddlewares(stack *mid
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpApplyPendingMaintenanceActionValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opApplyPendingMaintenanceAction(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

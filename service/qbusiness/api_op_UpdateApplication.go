@@ -6,13 +6,12 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/qbusiness/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates an existing Amazon Q application.
+// Updates an existing Amazon Q Business application.
 func (c *Client) UpdateApplication(ctx context.Context, params *UpdateApplicationInput, optFns ...func(*Options)) (*UpdateApplicationOutput, error) {
 	if params == nil {
 		params = &UpdateApplicationInput{}
@@ -30,7 +29,7 @@ func (c *Client) UpdateApplication(ctx context.Context, params *UpdateApplicatio
 
 type UpdateApplicationInput struct {
 
-	// The identifier of the Amazon Q application.
+	// The identifier of the Amazon Q Business application.
 	//
 	// This member is required.
 	ApplicationId *string
@@ -38,14 +37,18 @@ type UpdateApplicationInput struct {
 	// An option to allow end users to upload files directly during chat.
 	AttachmentsConfiguration *types.AttachmentsConfiguration
 
-	// A description for the Amazon Q application.
+	// A description for the Amazon Q Business application.
 	Description *string
 
-	// A name for the Amazon Q application.
+	// A name for the Amazon Q Business application.
 	DisplayName *string
 
+	//  The Amazon Resource Name (ARN) of the IAM Identity Center instance you are
+	// either creating for—or connecting to—your Amazon Q Business application.
+	IdentityCenterInstanceArn *string
+
 	// An Amazon Web Services Identity and Access Management (IAM) role that gives
-	// Amazon Q permission to access Amazon CloudWatch logs and metrics.
+	// Amazon Q Business permission to access Amazon CloudWatch logs and metrics.
 	RoleArn *string
 
 	noSmithyDocumentSerde
@@ -80,25 +83,25 @@ func (c *Client) addOperationUpdateApplicationMiddlewares(stack *middleware.Stac
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -113,13 +116,16 @@ func (c *Client) addOperationUpdateApplicationMiddlewares(stack *middleware.Stac
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpUpdateApplicationValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateApplication(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -14,12 +13,12 @@ import (
 // Returns the bandwidth rate limits of a gateway. By default, these limits are
 // not set, which means no bandwidth rate limiting is in effect. This operation is
 // supported only for the stored volume, cached volume, and tape gateway types. To
-// describe bandwidth rate limits for S3 file gateways, use
-// DescribeBandwidthRateLimitSchedule . This operation returns a value for a
-// bandwidth rate limit only if the limit is set. If no limits are set for the
-// gateway, then this operation returns only the gateway ARN in the response body.
-// To specify which gateway to describe, use the Amazon Resource Name (ARN) of the
-// gateway in your request.
+// describe bandwidth rate limits for S3 file gateways, use DescribeBandwidthRateLimitSchedule.
+//
+// This operation returns a value for a bandwidth rate limit only if the limit is
+// set. If no limits are set for the gateway, then this operation returns only the
+// gateway ARN in the response body. To specify which gateway to describe, use the
+// Amazon Resource Name (ARN) of the gateway in your request.
 func (c *Client) DescribeBandwidthRateLimit(ctx context.Context, params *DescribeBandwidthRateLimitInput, optFns ...func(*Options)) (*DescribeBandwidthRateLimitOutput, error) {
 	if params == nil {
 		params = &DescribeBandwidthRateLimitInput{}
@@ -38,8 +37,8 @@ func (c *Client) DescribeBandwidthRateLimit(ctx context.Context, params *Describ
 // A JSON object containing the Amazon Resource Name (ARN) of the gateway.
 type DescribeBandwidthRateLimitInput struct {
 
-	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation
-	// to return a list of gateways for your account and Amazon Web Services Region.
+	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation to return a
+	// list of gateways for your account and Amazon Web Services Region.
 	//
 	// This member is required.
 	GatewayARN *string
@@ -58,8 +57,8 @@ type DescribeBandwidthRateLimitOutput struct {
 	// appear in the response if the upload rate limit is not set.
 	AverageUploadRateLimitInBitsPerSec *int64
 
-	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation
-	// to return a list of gateways for your account and Amazon Web Services Region.
+	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation to return a
+	// list of gateways for your account and Amazon Web Services Region.
 	GatewayARN *string
 
 	// Metadata pertaining to the operation's result.
@@ -90,25 +89,25 @@ func (c *Client) addOperationDescribeBandwidthRateLimitMiddlewares(stack *middle
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -123,13 +122,16 @@ func (c *Client) addOperationDescribeBandwidthRateLimitMiddlewares(stack *middle
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDescribeBandwidthRateLimitValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeBandwidthRateLimit(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

@@ -6,17 +6,17 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/elasticbeanstalk/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Describes a platform version. Provides full details. Compare to
-// ListPlatformVersions , which provides summary information about a list of
-// platform versions. For definitions of platform version and other
-// platform-related terms, see AWS Elastic Beanstalk Platforms Glossary (https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/platforms-glossary.html)
-// .
+// Describes a platform version. Provides full details. Compare to ListPlatformVersions, which
+// provides summary information about a list of platform versions.
+//
+// For definitions of platform version and other platform-related terms, see [AWS Elastic Beanstalk Platforms Glossary].
+//
+// [AWS Elastic Beanstalk Platforms Glossary]: https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/platforms-glossary.html
 func (c *Client) DescribePlatformVersion(ctx context.Context, params *DescribePlatformVersionInput, optFns ...func(*Options)) (*DescribePlatformVersionOutput, error) {
 	if params == nil {
 		params = &DescribePlatformVersionInput{}
@@ -73,25 +73,25 @@ func (c *Client) addOperationDescribePlatformVersionMiddlewares(stack *middlewar
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -106,10 +106,13 @@ func (c *Client) addOperationDescribePlatformVersionMiddlewares(stack *middlewar
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribePlatformVersion(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/macie2/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -72,10 +71,12 @@ type GetBucketStatisticsOutput struct {
 
 	// The total storage size, in bytes, of all the objects that Amazon Macie can
 	// analyze in the buckets. These objects use a supported storage class and have a
-	// file name extension for a supported file or storage format. If versioning is
-	// enabled for any of the buckets, this value is based on the size of the latest
-	// version of each applicable object in the buckets. This value doesn't reflect the
-	// storage size of all versions of all applicable objects in the buckets.
+	// file name extension for a supported file or storage format.
+	//
+	// If versioning is enabled for any of the buckets, this value is based on the
+	// size of the latest version of each applicable object in the buckets. This value
+	// doesn't reflect the storage size of all versions of all applicable objects in
+	// the buckets.
 	ClassifiableSizeInBytes *int64
 
 	// The date and time, in UTC and extended ISO 8601 format, when Amazon Macie most
@@ -85,17 +86,20 @@ type GetBucketStatisticsOutput struct {
 	// The total number of objects in the buckets.
 	ObjectCount *int64
 
-	// The total storage size, in bytes, of the buckets. If versioning is enabled for
-	// any of the buckets, this value is based on the size of the latest version of
-	// each object in the buckets. This value doesn't reflect the storage size of all
-	// versions of the objects in the buckets.
+	// The total storage size, in bytes, of the buckets.
+	//
+	// If versioning is enabled for any of the buckets, this value is based on the
+	// size of the latest version of each object in the buckets. This value doesn't
+	// reflect the storage size of all versions of the objects in the buckets.
 	SizeInBytes *int64
 
 	// The total storage size, in bytes, of the objects that are compressed (.gz,
-	// .gzip, .zip) files in the buckets. If versioning is enabled for any of the
-	// buckets, this value is based on the size of the latest version of each
-	// applicable object in the buckets. This value doesn't reflect the storage size of
-	// all versions of the applicable objects in the buckets.
+	// .gzip, .zip) files in the buckets.
+	//
+	// If versioning is enabled for any of the buckets, this value is based on the
+	// size of the latest version of each applicable object in the buckets. This value
+	// doesn't reflect the storage size of all versions of the applicable objects in
+	// the buckets.
 	SizeInBytesCompressed *int64
 
 	// The total number of objects that Amazon Macie can't analyze in the buckets.
@@ -136,25 +140,25 @@ func (c *Client) addOperationGetBucketStatisticsMiddlewares(stack *middleware.St
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -169,10 +173,13 @@ func (c *Client) addOperationGetBucketStatisticsMiddlewares(stack *middleware.St
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetBucketStatistics(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/iotsitewise/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -14,20 +13,26 @@ import (
 
 // Creates a custom composite model from specified property and hierarchy
 // definitions. There are two types of custom composite models, inline and
-// component-model-based . Use component-model-based custom composite models to
-// define standard, reusable components. A component-model-based custom composite
-// model consists of a name, a description, and the ID of the component model it
-// references. A component-model-based custom composite model has no properties of
-// its own; its referenced component model provides its associated properties to
-// any created assets. For more information, see Custom composite models
-// (Components) (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/custom-composite-models.html)
-// in the IoT SiteWise User Guide. Use inline custom composite models to organize
-// the properties of an asset model. The properties of inline custom composite
-// models are local to the asset model where they are included and can't be used to
-// create multiple assets. To create a component-model-based model, specify the
-// composedAssetModelId of an existing asset model with assetModelType of
-// COMPONENT_MODEL . To create an inline model, specify the
-// assetModelCompositeModelProperties and don't include an composedAssetModelId .
+// component-model-based .
+//
+// Use component-model-based custom composite models to define standard, reusable
+// components. A component-model-based custom composite model consists of a name, a
+// description, and the ID of the component model it references. A
+// component-model-based custom composite model has no properties of its own; its
+// referenced component model provides its associated properties to any created
+// assets. For more information, see [Custom composite models (Components)]in the IoT SiteWise User Guide.
+//
+// Use inline custom composite models to organize the properties of an asset
+// model. The properties of inline custom composite models are local to the asset
+// model where they are included and can't be used to create multiple assets.
+//
+// To create a component-model-based model, specify the composedAssetModelId of an
+// existing asset model with assetModelType of COMPONENT_MODEL .
+//
+// To create an inline model, specify the assetModelCompositeModelProperties and
+// don't include an composedAssetModelId .
+//
+// [Custom composite models (Components)]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/custom-composite-models.html
 func (c *Client) CreateAssetModelCompositeModel(ctx context.Context, params *CreateAssetModelCompositeModelInput, optFns ...func(*Options)) (*CreateAssetModelCompositeModelOutput, error) {
 	if params == nil {
 		params = &CreateAssetModelCompositeModelInput{}
@@ -64,10 +69,12 @@ type CreateAssetModelCompositeModelInput struct {
 	// A description for the composite model.
 	AssetModelCompositeModelDescription *string
 
-	// An external ID to assign to the composite model. If the composite model is a
-	// derived composite model, or one nested inside a component model, you can only
-	// set the external ID using UpdateAssetModelCompositeModel and specifying the
-	// derived ID of the model or property from the created model it's a part of.
+	// An external ID to assign to the composite model.
+	//
+	// If the composite model is a derived composite model, or one nested inside a
+	// component model, you can only set the external ID using
+	// UpdateAssetModelCompositeModel and specifying the derived ID of the model or
+	// property from the created model it's a part of.
 	AssetModelCompositeModelExternalId *string
 
 	// The ID of the composite model. IoT SiteWise automatically generates a unique ID
@@ -77,9 +84,11 @@ type CreateAssetModelCompositeModelInput struct {
 	AssetModelCompositeModelId *string
 
 	// The property definitions of the composite model. For more information, see .
+	//
 	// You can specify up to 200 properties per composite model. For more information,
-	// see Quotas (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/quotas.html)
-	// in the IoT SiteWise User Guide.
+	// see [Quotas]in the IoT SiteWise User Guide.
+	//
+	// [Quotas]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/quotas.html
 	AssetModelCompositeModelProperties []types.AssetModelPropertyDefinition
 
 	// A unique case-sensitive identifier that you can provide to ensure the
@@ -110,8 +119,9 @@ type CreateAssetModelCompositeModelOutput struct {
 	AssetModelCompositeModelPath []types.AssetModelCompositeModelPathSegment
 
 	// Contains current status information for an asset model. For more information,
-	// see Asset and model states (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/asset-and-model-states.html)
-	// in the IoT SiteWise User Guide.
+	// see [Asset and model states]in the IoT SiteWise User Guide.
+	//
+	// [Asset and model states]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/asset-and-model-states.html
 	//
 	// This member is required.
 	AssetModelStatus *types.AssetModelStatus
@@ -144,25 +154,25 @@ func (c *Client) addOperationCreateAssetModelCompositeModelMiddlewares(stack *mi
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -177,6 +187,9 @@ func (c *Client) addOperationCreateAssetModelCompositeModelMiddlewares(stack *mi
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addEndpointPrefix_opCreateAssetModelCompositeModelMiddleware(stack); err != nil {
 		return err
 	}
@@ -189,7 +202,7 @@ func (c *Client) addOperationCreateAssetModelCompositeModelMiddlewares(stack *mi
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateAssetModelCompositeModel(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

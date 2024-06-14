@@ -6,13 +6,13 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/devopsguru/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns the list of all log groups that are being monitored and tagged by
+//	Returns the list of all log groups that are being monitored and tagged by
+//
 // DevOps Guru.
 func (c *Client) ListMonitoredResources(ctx context.Context, params *ListMonitoredResourcesInput, optFns ...func(*Options)) (*ListMonitoredResourcesOutput, error) {
 	if params == nil {
@@ -31,7 +31,7 @@ func (c *Client) ListMonitoredResources(ctx context.Context, params *ListMonitor
 
 type ListMonitoredResourcesInput struct {
 
-	// Filters to determine which monitored resources you want to retrieve. You can
+	//  Filters to determine which monitored resources you want to retrieve. You can
 	// filter by resource type or resource permission status.
 	Filters *types.ListMonitoredResourcesFilters
 
@@ -48,7 +48,7 @@ type ListMonitoredResourcesInput struct {
 
 type ListMonitoredResourcesOutput struct {
 
-	// Information about the resource that is being monitored, including the name of
+	//  Information about the resource that is being monitored, including the name of
 	// the resource, the type of resource, and whether or not permission is given to
 	// DevOps Guru to access that resource.
 	//
@@ -87,25 +87,25 @@ func (c *Client) addOperationListMonitoredResourcesMiddlewares(stack *middleware
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -120,13 +120,16 @@ func (c *Client) addOperationListMonitoredResourcesMiddlewares(stack *middleware
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpListMonitoredResourcesValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListMonitoredResources(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

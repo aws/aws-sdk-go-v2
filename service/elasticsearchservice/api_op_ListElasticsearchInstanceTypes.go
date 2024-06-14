@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/elasticsearchservice/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -43,7 +42,7 @@ type ListElasticsearchInstanceTypesInput struct {
 	// instance types when modifying existing domain.
 	DomainName *string
 
-	// Set this value to limit the number of results returned. Value provided must be
+	//  Set this value to limit the number of results returned. Value provided must be
 	// greater than 30 else it wont be honored.
 	MaxResults int32
 
@@ -54,12 +53,10 @@ type ListElasticsearchInstanceTypesInput struct {
 	noSmithyDocumentSerde
 }
 
-// Container for the parameters returned by ListElasticsearchInstanceTypes
-// operation.
+// Container for the parameters returned by ListElasticsearchInstanceTypes operation.
 type ListElasticsearchInstanceTypesOutput struct {
 
-	// List of instance types supported by Amazon Elasticsearch service for given
-	// ElasticsearchVersion
+	//  List of instance types supported by Amazon Elasticsearch service for given ElasticsearchVersion
 	ElasticsearchInstanceTypes []types.ESPartitionInstanceType
 
 	// In case if there are more results available NextToken would be present, make
@@ -95,25 +92,25 @@ func (c *Client) addOperationListElasticsearchInstanceTypesMiddlewares(stack *mi
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -128,13 +125,16 @@ func (c *Client) addOperationListElasticsearchInstanceTypesMiddlewares(stack *mi
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpListElasticsearchInstanceTypesValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListElasticsearchInstanceTypes(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -163,7 +163,7 @@ var _ ListElasticsearchInstanceTypesAPIClient = (*Client)(nil)
 // ListElasticsearchInstanceTypesPaginatorOptions is the paginator options for
 // ListElasticsearchInstanceTypes
 type ListElasticsearchInstanceTypesPaginatorOptions struct {
-	// Set this value to limit the number of results returned. Value provided must be
+	//  Set this value to limit the number of results returned. Value provided must be
 	// greater than 30 else it wont be honored.
 	Limit int32
 

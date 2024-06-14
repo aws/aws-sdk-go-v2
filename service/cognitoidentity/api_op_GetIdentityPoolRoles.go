@@ -6,14 +6,14 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/cognitoidentity/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Gets the roles for an identity pool. You must use AWS Developer credentials to
-// call this API.
+// Gets the roles for an identity pool.
+//
+// You must use AWS Developer credentials to call this API.
 func (c *Client) GetIdentityPoolRoles(ctx context.Context, params *GetIdentityPoolRolesInput, optFns ...func(*Options)) (*GetIdentityPoolRolesOutput, error) {
 	if params == nil {
 		params = &GetIdentityPoolRolesInput{}
@@ -47,8 +47,8 @@ type GetIdentityPoolRolesOutput struct {
 	IdentityPoolId *string
 
 	// How users for a specific identity provider are to mapped to roles. This is a
-	// String-to- RoleMapping object map. The string identifies the identity provider,
-	// for example, "graph.facebook.com" or
+	// String-to-RoleMapping object map. The string identifies the identity provider, for example,
+	// "graph.facebook.com" or
 	// "cognito-idp.us-east-1.amazonaws.com/us-east-1_abcdefghi:app_client_id".
 	RoleMappings map[string]types.RoleMapping
 
@@ -84,25 +84,25 @@ func (c *Client) addOperationGetIdentityPoolRolesMiddlewares(stack *middleware.S
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -117,13 +117,16 @@ func (c *Client) addOperationGetIdentityPoolRolesMiddlewares(stack *middleware.S
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpGetIdentityPoolRolesValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetIdentityPoolRoles(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

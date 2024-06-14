@@ -6,13 +6,12 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockagent/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates an existing Alias for an Amazon Bedrock Agent
+// Updates configurations for an alias of an agent.
 func (c *Client) UpdateAgentAlias(ctx context.Context, params *UpdateAgentAliasInput, optFns ...func(*Options)) (*UpdateAgentAliasOutput, error) {
 	if params == nil {
 		params = &UpdateAgentAliasInput{}
@@ -28,37 +27,35 @@ func (c *Client) UpdateAgentAlias(ctx context.Context, params *UpdateAgentAliasI
 	return out, nil
 }
 
-// Update Agent Alias Request
 type UpdateAgentAliasInput struct {
 
-	// Id generated at the server side when an Agent Alias is created
+	// The unique identifier of the alias.
 	//
 	// This member is required.
 	AgentAliasId *string
 
-	// Name for a resource.
+	// Specifies a new name for the alias.
 	//
 	// This member is required.
 	AgentAliasName *string
 
-	// Id generated at the server side when an Agent is created
+	// The unique identifier of the agent.
 	//
 	// This member is required.
 	AgentId *string
 
-	// Description of the Resource.
+	// Specifies a new description for the alias.
 	Description *string
 
-	// Routing configuration for an Agent alias.
+	// Contains details about the routing configuration of the alias.
 	RoutingConfiguration []types.AgentAliasRoutingConfigurationListItem
 
 	noSmithyDocumentSerde
 }
 
-// Update Agent Alias Response
 type UpdateAgentAliasOutput struct {
 
-	// Contains the information of an agent alias
+	// Contains details about the alias that was updated.
 	//
 	// This member is required.
 	AgentAlias *types.AgentAlias
@@ -91,25 +88,25 @@ func (c *Client) addOperationUpdateAgentAliasMiddlewares(stack *middleware.Stack
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -124,13 +121,16 @@ func (c *Client) addOperationUpdateAgentAliasMiddlewares(stack *middleware.Stack
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpUpdateAgentAliasValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateAgentAlias(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

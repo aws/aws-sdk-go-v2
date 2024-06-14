@@ -6,19 +6,20 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/chimesdkmediapipelines/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Starts a voice tone analysis task. For more information about voice tone
-// analysis, see Using Amazon Chime SDK voice analytics (https://docs.aws.amazon.com/chime-sdk/latest/dg/voice-analytics.html)
-// in the Amazon Chime SDK Developer Guide. Before starting any voice tone analysis
-// tasks, you must provide all notices and obtain all consents from the speaker as
-// required under applicable privacy and biometrics laws, and as required under the
-// AWS service terms (https://aws.amazon.com/service-terms/) for the Amazon Chime
-// SDK.
+// analysis, see [Using Amazon Chime SDK voice analytics]in the Amazon Chime SDK Developer Guide.
+//
+// Before starting any voice tone analysis tasks, you must provide all notices and
+// obtain all consents from the speaker as required under applicable privacy and
+// biometrics laws, and as required under the [AWS service terms]for the Amazon Chime SDK.
+//
+// [Using Amazon Chime SDK voice analytics]: https://docs.aws.amazon.com/chime-sdk/latest/dg/voice-analytics.html
+// [AWS service terms]: https://aws.amazon.com/service-terms/
 func (c *Client) StartVoiceToneAnalysisTask(ctx context.Context, params *StartVoiceToneAnalysisTaskInput, optFns ...func(*Options)) (*StartVoiceToneAnalysisTaskOutput, error) {
 	if params == nil {
 		params = &StartVoiceToneAnalysisTaskInput{}
@@ -91,25 +92,25 @@ func (c *Client) addOperationStartVoiceToneAnalysisTaskMiddlewares(stack *middle
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -124,6 +125,9 @@ func (c *Client) addOperationStartVoiceToneAnalysisTaskMiddlewares(stack *middle
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opStartVoiceToneAnalysisTaskMiddleware(stack, options); err != nil {
 		return err
 	}
@@ -133,7 +137,7 @@ func (c *Client) addOperationStartVoiceToneAnalysisTaskMiddlewares(stack *middle
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opStartVoiceToneAnalysisTask(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

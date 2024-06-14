@@ -6,19 +6,22 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/iotfleetwise/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
-// Retrieves information about the status of registering your Amazon Web Services
+//	Retrieves information about the status of registering your Amazon Web Services
+//
 // account, IAM, and Amazon Timestream resources so that Amazon Web Services IoT
-// FleetWise can transfer your vehicle data to the Amazon Web Services Cloud. For
-// more information, including step-by-step procedures, see Setting up Amazon Web
-// Services IoT FleetWise (https://docs.aws.amazon.com/iot-fleetwise/latest/developerguide/setting-up.html)
-// . This API operation doesn't require input parameters.
+// FleetWise can transfer your vehicle data to the Amazon Web Services Cloud.
+//
+// For more information, including step-by-step procedures, see [Setting up Amazon Web Services IoT FleetWise].
+//
+// This API operation doesn't require input parameters.
+//
+// [Setting up Amazon Web Services IoT FleetWise]: https://docs.aws.amazon.com/iot-fleetwise/latest/developerguide/setting-up.html
 func (c *Client) GetRegisterAccountStatus(ctx context.Context, params *GetRegisterAccountStatusInput, optFns ...func(*Options)) (*GetRegisterAccountStatusOutput, error) {
 	if params == nil {
 		params = &GetRegisterAccountStatusInput{}
@@ -40,9 +43,11 @@ type GetRegisterAccountStatusInput struct {
 
 type GetRegisterAccountStatusOutput struct {
 
-	// The status of registering your account and resources. The status can be one of:
+	//  The status of registering your account and resources. The status can be one of:
+	//
 	//   - REGISTRATION_SUCCESS - The Amazon Web Services resource is successfully
 	//   registered.
+	//
 	//   - REGISTRATION_PENDING - Amazon Web Services IoT FleetWise is processing the
 	//   registration request. This process takes approximately five minutes to complete.
 	//
@@ -52,29 +57,30 @@ type GetRegisterAccountStatusOutput struct {
 	// This member is required.
 	AccountStatus types.RegistrationStatus
 
-	// The time the account was registered, in seconds since epoch (January 1, 1970 at
-	// midnight UTC time).
+	//  The time the account was registered, in seconds since epoch (January 1, 1970
+	// at midnight UTC time).
 	//
 	// This member is required.
 	CreationTime *time.Time
 
-	// The unique ID of the Amazon Web Services account, provided at account creation.
+	//  The unique ID of the Amazon Web Services account, provided at account
+	// creation.
 	//
 	// This member is required.
 	CustomerAccountId *string
 
-	// Information about the registered IAM resources or errors, if any.
+	//  Information about the registered IAM resources or errors, if any.
 	//
 	// This member is required.
 	IamRegistrationResponse *types.IamRegistrationResponse
 
-	// The time this registration was last updated, in seconds since epoch (January 1,
-	// 1970 at midnight UTC time).
+	//  The time this registration was last updated, in seconds since epoch (January
+	// 1, 1970 at midnight UTC time).
 	//
 	// This member is required.
 	LastModificationTime *time.Time
 
-	// Information about the registered Amazon Timestream resources or errors, if any.
+	//  Information about the registered Amazon Timestream resources or errors, if any.
 	TimestreamRegistrationResponse *types.TimestreamRegistrationResponse
 
 	// Metadata pertaining to the operation's result.
@@ -105,25 +111,25 @@ func (c *Client) addOperationGetRegisterAccountStatusMiddlewares(stack *middlewa
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -138,10 +144,13 @@ func (c *Client) addOperationGetRegisterAccountStatusMiddlewares(stack *middlewa
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetRegisterAccountStatus(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

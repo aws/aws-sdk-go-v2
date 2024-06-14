@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/servicecatalog/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -14,8 +13,10 @@ import (
 
 // Lists the organization nodes that have access to the specified portfolio. This
 // API can only be called by the management account in the organization or by a
-// delegated admin. If a delegated admin is de-registered, they can no longer
-// perform this operation.
+// delegated admin.
+//
+// If a delegated admin is de-registered, they can no longer perform this
+// operation.
 func (c *Client) ListOrganizationPortfolioAccess(ctx context.Context, params *ListOrganizationPortfolioAccessInput, optFns ...func(*Options)) (*ListOrganizationPortfolioAccessOutput, error) {
 	if params == nil {
 		params = &ListOrganizationPortfolioAccessInput{}
@@ -34,9 +35,12 @@ func (c *Client) ListOrganizationPortfolioAccess(ctx context.Context, params *Li
 type ListOrganizationPortfolioAccessInput struct {
 
 	// The organization node type that will be returned in the output.
+	//
 	//   - ORGANIZATION - Organization that has access to the portfolio.
+	//
 	//   - ORGANIZATIONAL_UNIT - Organizational unit that has access to the portfolio
 	//   within your organization.
+	//
 	//   - ACCOUNT - Account that has access to the portfolio within your organization.
 	//
 	// This member is required.
@@ -48,7 +52,9 @@ type ListOrganizationPortfolioAccessInput struct {
 	PortfolioId *string
 
 	// The language code.
+	//
 	//   - jp - Japanese
+	//
 	//   - zh - Chinese
 	AcceptLanguage *string
 
@@ -99,25 +105,25 @@ func (c *Client) addOperationListOrganizationPortfolioAccessMiddlewares(stack *m
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -132,13 +138,16 @@ func (c *Client) addOperationListOrganizationPortfolioAccessMiddlewares(stack *m
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpListOrganizationPortfolioAccessValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListOrganizationPortfolioAccess(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

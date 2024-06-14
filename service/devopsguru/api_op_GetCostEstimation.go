@@ -6,16 +6,16 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/devopsguru/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Returns an estimate of the monthly cost for DevOps Guru to analyze your Amazon
-// Web Services resources. For more information, see Estimate your Amazon DevOps
-// Guru costs (https://docs.aws.amazon.com/devops-guru/latest/userguide/cost-estimate.html)
-// and Amazon DevOps Guru pricing (http://aws.amazon.com/devops-guru/pricing/) .
+// Web Services resources. For more information, see [Estimate your Amazon DevOps Guru costs]and [Amazon DevOps Guru pricing].
+//
+// [Amazon DevOps Guru pricing]: http://aws.amazon.com/devops-guru/pricing/
+// [Estimate your Amazon DevOps Guru costs]: https://docs.aws.amazon.com/devops-guru/latest/userguide/cost-estimate.html
 func (c *Client) GetCostEstimation(ctx context.Context, params *GetCostEstimationInput, optFns ...func(*Options)) (*GetCostEstimationOutput, error) {
 	if params == nil {
 		params = &GetCostEstimationInput{}
@@ -94,25 +94,25 @@ func (c *Client) addOperationGetCostEstimationMiddlewares(stack *middleware.Stac
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -127,10 +127,13 @@ func (c *Client) addOperationGetCostEstimationMiddlewares(stack *middleware.Stac
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetCostEstimation(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

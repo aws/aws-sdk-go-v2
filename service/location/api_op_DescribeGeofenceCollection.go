@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/location/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -43,6 +42,7 @@ type DescribeGeofenceCollectionOutput struct {
 
 	// The Amazon Resource Name (ARN) for the geofence collection resource. Used when
 	// you need to specify a resource across all Amazon Web Services.
+	//
 	//   - Format example:
 	//   arn:aws:geo:region:account-id:geofence-collection/ExampleGeofenceCollection
 	//
@@ -54,8 +54,10 @@ type DescribeGeofenceCollectionOutput struct {
 	// This member is required.
 	CollectionName *string
 
-	// The timestamp for when the geofence resource was created in ISO 8601 (https://www.iso.org/iso-8601-date-and-time-format.html)
-	// format: YYYY-MM-DDThh:mm:ss.sssZ
+	// The timestamp for when the geofence resource was created in [ISO 8601] format:
+	// YYYY-MM-DDThh:mm:ss.sssZ
+	//
+	// [ISO 8601]: https://www.iso.org/iso-8601-date-and-time-format.html
 	//
 	// This member is required.
 	CreateTime *time.Time
@@ -65,8 +67,10 @@ type DescribeGeofenceCollectionOutput struct {
 	// This member is required.
 	Description *string
 
-	// The timestamp for when the geofence collection was last updated in ISO 8601 (https://www.iso.org/iso-8601-date-and-time-format.html)
-	// format: YYYY-MM-DDThh:mm:ss.sssZ
+	// The timestamp for when the geofence collection was last updated in [ISO 8601] format:
+	// YYYY-MM-DDThh:mm:ss.sssZ
+	//
+	// [ISO 8601]: https://www.iso.org/iso-8601-date-and-time-format.html
 	//
 	// This member is required.
 	UpdateTime *time.Time
@@ -74,8 +78,9 @@ type DescribeGeofenceCollectionOutput struct {
 	// The number of geofences in the geofence collection.
 	GeofenceCount *int32
 
-	// A key identifier for an Amazon Web Services KMS customer managed key (https://docs.aws.amazon.com/kms/latest/developerguide/create-keys.html)
-	// assigned to the Amazon Location resource
+	// A key identifier for an [Amazon Web Services KMS customer managed key] assigned to the Amazon Location resource
+	//
+	// [Amazon Web Services KMS customer managed key]: https://docs.aws.amazon.com/kms/latest/developerguide/create-keys.html
 	KmsKeyId *string
 
 	// No longer used. Always returns RequestBasedUsage .
@@ -119,25 +124,25 @@ func (c *Client) addOperationDescribeGeofenceCollectionMiddlewares(stack *middle
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -152,6 +157,9 @@ func (c *Client) addOperationDescribeGeofenceCollectionMiddlewares(stack *middle
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addEndpointPrefix_opDescribeGeofenceCollectionMiddleware(stack); err != nil {
 		return err
 	}
@@ -161,7 +169,7 @@ func (c *Client) addOperationDescribeGeofenceCollectionMiddlewares(stack *middle
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeGeofenceCollection(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

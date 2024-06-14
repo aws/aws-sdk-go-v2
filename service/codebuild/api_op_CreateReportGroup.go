@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/codebuild/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -30,25 +29,26 @@ func (c *Client) CreateReportGroup(ctx context.Context, params *CreateReportGrou
 
 type CreateReportGroupInput struct {
 
-	// A ReportExportConfig object that contains information about where the report
+	//  A ReportExportConfig object that contains information about where the report
 	// group test results are exported.
 	//
 	// This member is required.
 	ExportConfig *types.ReportExportConfig
 
-	// The name of the report group.
+	//  The name of the report group.
 	//
 	// This member is required.
 	Name *string
 
-	// The type of report group.
+	//  The type of report group.
 	//
 	// This member is required.
 	Type types.ReportType
 
-	// A list of tag key and value pairs associated with this report group. These tags
-	// are available for use by Amazon Web Services services that support CodeBuild
-	// report group tags.
+	//  A list of tag key and value pairs associated with this report group.
+	//
+	// These tags are available for use by Amazon Web Services services that support
+	// CodeBuild report group tags.
 	Tags []types.Tag
 
 	noSmithyDocumentSerde
@@ -56,7 +56,7 @@ type CreateReportGroupInput struct {
 
 type CreateReportGroupOutput struct {
 
-	// Information about the report group that was created.
+	//  Information about the report group that was created.
 	ReportGroup *types.ReportGroup
 
 	// Metadata pertaining to the operation's result.
@@ -87,25 +87,25 @@ func (c *Client) addOperationCreateReportGroupMiddlewares(stack *middleware.Stac
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -120,13 +120,16 @@ func (c *Client) addOperationCreateReportGroupMiddlewares(stack *middleware.Stac
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpCreateReportGroupValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateReportGroup(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

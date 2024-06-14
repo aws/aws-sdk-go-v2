@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/rds/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -33,33 +32,49 @@ func (c *Client) ModifyTenantDatabase(ctx context.Context, params *ModifyTenantD
 type ModifyTenantDatabaseInput struct {
 
 	// The identifier of the DB instance that contains the tenant database that you
-	// are modifying. This parameter isn't case-sensitive. Constraints:
+	// are modifying. This parameter isn't case-sensitive.
+	//
+	// Constraints:
+	//
 	//   - Must match the identifier of an existing DB instance.
 	//
 	// This member is required.
 	DBInstanceIdentifier *string
 
 	// The user-supplied name of the tenant database that you want to modify. This
-	// parameter isn’t case-sensitive. Constraints:
+	// parameter isn’t case-sensitive.
+	//
+	// Constraints:
+	//
 	//   - Must match the identifier of an existing tenant database.
 	//
 	// This member is required.
 	TenantDBName *string
 
 	// The new password for the master user of the specified tenant database in your
-	// DB instance. Amazon RDS operations never return the password, so this action
-	// provides a way to regain access to a tenant database user if the password is
-	// lost. This includes restoring privileges that might have been accidentally
-	// revoked. Constraints:
+	// DB instance.
+	//
+	// Amazon RDS operations never return the password, so this action provides a way
+	// to regain access to a tenant database user if the password is lost. This
+	// includes restoring privileges that might have been accidentally revoked.
+	//
+	// Constraints:
+	//
 	//   - Can include any printable ASCII character except / , " (double quote), @ , &
 	//   (ampersand), and ' (single quote).
+	//
 	// Length constraints:
+	//
 	//   - Must contain between 8 and 30 characters.
 	MasterUserPassword *string
 
 	// The new name of the tenant database when renaming a tenant database. This
-	// parameter isn’t case-sensitive. Constraints:
+	// parameter isn’t case-sensitive.
+	//
+	// Constraints:
+	//
 	//   - Can't be the string null or any other reserved word.
+	//
 	//   - Can't be longer than 8 characters.
 	NewTenantDBName *string
 
@@ -100,25 +115,25 @@ func (c *Client) addOperationModifyTenantDatabaseMiddlewares(stack *middleware.S
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -133,13 +148,16 @@ func (c *Client) addOperationModifyTenantDatabaseMiddlewares(stack *middleware.S
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpModifyTenantDatabaseValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opModifyTenantDatabase(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

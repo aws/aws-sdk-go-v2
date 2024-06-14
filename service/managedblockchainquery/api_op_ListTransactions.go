@@ -6,14 +6,12 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/managedblockchainquery/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists all of the transactions on a given wallet address or to a specific
-// contract.
+// Lists all the transaction events for a transaction.
 func (c *Client) ListTransactions(ctx context.Context, params *ListTransactionsInput, optFns ...func(*Options)) (*ListTransactionsOutput, error) {
 	if params == nil {
 		params = &ListTransactionsInput{}
@@ -43,25 +41,31 @@ type ListTransactionsInput struct {
 	Network types.QueryNetwork
 
 	// This filter is used to include transactions in the response that haven't
-	// reached finality  (https://docs.aws.amazon.com/managed-blockchain/latest/ambq-dg/key-concepts.html#finality)
-	// . Transactions that have reached finiality are always part of the response.
+	// reached [finality]. Transactions that have reached finality are always part of the
+	// response.
+	//
+	// [finality]: https://docs.aws.amazon.com/managed-blockchain/latest/ambq-dg/key-concepts.html#finality
 	ConfirmationStatusFilter *types.ConfirmationStatusFilter
 
 	// The container for time.
 	FromBlockchainInstant *types.BlockchainInstant
 
-	// The maximum number of transactions to list. Default: 100 Even if additional
-	// results can be retrieved, the request can return less results than maxResults
-	// or an empty array of results. To retrieve the next set of results, make another
-	// request with the returned nextToken value. The value of nextToken is null when
-	// there are no more results to return
+	// The maximum number of transactions to list.
+	//
+	// Default: 100
+	//
+	// Even if additional results can be retrieved, the request can return less
+	// results than maxResults or an empty array of results.
+	//
+	// To retrieve the next set of results, make another request with the returned
+	// nextToken value. The value of nextToken is null when there are no more results
+	// to return
 	MaxResults *int32
 
 	// The pagination token that indicates the next set of results to retrieve.
 	NextToken *string
 
-	// The order by which the results will be sorted. If ASCENNDING is selected, the
-	// results will be ordered by fromTime .
+	// The order by which the results will be sorted.
 	Sort *types.ListTransactionsSort
 
 	// The container for time.
@@ -108,25 +112,25 @@ func (c *Client) addOperationListTransactionsMiddlewares(stack *middleware.Stack
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -141,13 +145,16 @@ func (c *Client) addOperationListTransactionsMiddlewares(stack *middleware.Stack
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpListTransactionsValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListTransactions(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -175,11 +182,16 @@ var _ ListTransactionsAPIClient = (*Client)(nil)
 
 // ListTransactionsPaginatorOptions is the paginator options for ListTransactions
 type ListTransactionsPaginatorOptions struct {
-	// The maximum number of transactions to list. Default: 100 Even if additional
-	// results can be retrieved, the request can return less results than maxResults
-	// or an empty array of results. To retrieve the next set of results, make another
-	// request with the returned nextToken value. The value of nextToken is null when
-	// there are no more results to return
+	// The maximum number of transactions to list.
+	//
+	// Default: 100
+	//
+	// Even if additional results can be retrieved, the request can return less
+	// results than maxResults or an empty array of results.
+	//
+	// To retrieve the next set of results, make another request with the returned
+	// nextToken value. The value of nextToken is null when there are no more results
+	// to return
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

@@ -6,13 +6,12 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/kendra/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates an existing Amazon Kendra index.
+// Updates an Amazon Kendra index.
 func (c *Client) UpdateIndex(ctx context.Context, params *UpdateIndexInput, optFns ...func(*Options)) (*UpdateIndexOutput, error) {
 	if params == nil {
 		params = &UpdateIndexInput{}
@@ -37,9 +36,10 @@ type UpdateIndexInput struct {
 
 	// Sets the number of additional document storage and query capacity units that
 	// should be used by the index. You can change the capacity of the index up to 5
-	// times per day, or make 5 API calls. If you are using extra storage units, you
-	// can't reduce the storage capacity below what is required to meet the storage
-	// needs for your index.
+	// times per day, or make 5 API calls.
+	//
+	// If you are using extra storage units, you can't reduce the storage capacity
+	// below what is required to meet the storage needs for your index.
 	CapacityUnits *types.CapacityUnitsConfiguration
 
 	// A new description for the index.
@@ -50,7 +50,7 @@ type UpdateIndexInput struct {
 	// the company department name associated with each document.
 	DocumentMetadataConfigurationUpdates []types.DocumentMetadataConfiguration
 
-	// The name of the index you want to update.
+	// A new name for the index.
 	Name *string
 
 	// An Identity and Access Management (IAM) role that gives Amazon Kendra
@@ -60,9 +60,11 @@ type UpdateIndexInput struct {
 	// The user context policy.
 	UserContextPolicy types.UserContextPolicy
 
-	// Enables fetching access levels of groups and users from an IAM Identity Center
-	// identity source. To configure this, see UserGroupResolutionConfiguration (https://docs.aws.amazon.com/kendra/latest/dg/API_UserGroupResolutionConfiguration.html)
-	// .
+	// Gets users and groups from IAM Identity Center identity source. To configure
+	// this, see [UserGroupResolutionConfiguration]. This is useful for user context filtering, where search results are
+	// filtered based on the user or their group access to documents.
+	//
+	// [UserGroupResolutionConfiguration]: https://docs.aws.amazon.com/kendra/latest/dg/API_UserGroupResolutionConfiguration.html
 	UserGroupResolutionConfiguration *types.UserGroupResolutionConfiguration
 
 	// The user token configuration.
@@ -100,25 +102,25 @@ func (c *Client) addOperationUpdateIndexMiddlewares(stack *middleware.Stack, opt
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -133,13 +135,16 @@ func (c *Client) addOperationUpdateIndexMiddlewares(stack *middleware.Stack, opt
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpUpdateIndexValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateIndex(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

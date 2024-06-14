@@ -6,15 +6,16 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/backup/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Returns detailed information about all the recovery points of the type
-// specified by a resource Amazon Resource Name (ARN). For Amazon EFS and Amazon
-// EC2, this action only lists recovery points created by Backup.
+// specified by a resource Amazon Resource Name (ARN).
+//
+// For Amazon EFS and Amazon EC2, this action only lists recovery points created
+// by Backup.
 func (c *Client) ListRecoveryPointsByResource(ctx context.Context, params *ListRecoveryPointsByResourceInput, optFns ...func(*Options)) (*ListRecoveryPointsByResourceOutput, error) {
 	if params == nil {
 		params = &ListRecoveryPointsByResourceInput{}
@@ -38,8 +39,20 @@ type ListRecoveryPointsByResourceInput struct {
 	// This member is required.
 	ResourceArn *string
 
-	// The maximum number of items to be returned. Amazon RDS requires a value of at
-	// least 20.
+	// This attribute filters recovery points based on ownership.
+	//
+	// If this is set to TRUE , the response will contain recovery points associated
+	// with the selected resources that are managed by Backup.
+	//
+	// If this is set to FALSE , the response will contain all recovery points
+	// associated with the selected resource.
+	//
+	// Type: Boolean
+	ManagedByAWSBackupOnly bool
+
+	// The maximum number of items to be returned.
+	//
+	// Amazon RDS requires a value of at least 20.
 	MaxResults *int32
 
 	// The next item following a partial list of returned items. For example, if a
@@ -60,8 +73,9 @@ type ListRecoveryPointsByResourceOutput struct {
 	NextToken *string
 
 	// An array of objects that contain detailed information about recovery points of
-	// the specified resource type. Only Amazon EFS and Amazon EC2 recovery points
-	// return BackupVaultName.
+	// the specified resource type.
+	//
+	// Only Amazon EFS and Amazon EC2 recovery points return BackupVaultName.
 	RecoveryPoints []types.RecoveryPointByResource
 
 	// Metadata pertaining to the operation's result.
@@ -92,25 +106,25 @@ func (c *Client) addOperationListRecoveryPointsByResourceMiddlewares(stack *midd
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -125,13 +139,16 @@ func (c *Client) addOperationListRecoveryPointsByResourceMiddlewares(stack *midd
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpListRecoveryPointsByResourceValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListRecoveryPointsByResource(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -160,8 +177,9 @@ var _ ListRecoveryPointsByResourceAPIClient = (*Client)(nil)
 // ListRecoveryPointsByResourcePaginatorOptions is the paginator options for
 // ListRecoveryPointsByResource
 type ListRecoveryPointsByResourcePaginatorOptions struct {
-	// The maximum number of items to be returned. Amazon RDS requires a value of at
-	// least 20.
+	// The maximum number of items to be returned.
+	//
+	// Amazon RDS requires a value of at least 20.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

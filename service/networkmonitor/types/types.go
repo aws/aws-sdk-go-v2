@@ -10,13 +10,13 @@ import (
 // Creates a monitor probe.
 type CreateMonitorProbeInput struct {
 
-	// The destination IP address. This will be either IPV4 or IPV6 .
+	// The destination IP address. This must be either IPV4 or IPV6 .
 	//
 	// This member is required.
 	Destination *string
 
 	// The protocol used for the network traffic between the source and destination .
-	// This will be either TCP or ICMP .
+	// This must be either TCP or ICMP .
 	//
 	// This member is required.
 	Protocol Protocol
@@ -30,7 +30,7 @@ type CreateMonitorProbeInput struct {
 	// is TCP and must be a number between 1 and 65536 .
 	DestinationPort *int32
 
-	// The size of the packets sent between the source and destination. This will be a
+	// The size of the packets sent between the source and destination. This must be a
 	// number between 56 and 8500 .
 	PacketSize *int32
 
@@ -68,7 +68,7 @@ type MonitorSummary struct {
 	noSmithyDocumentSerde
 }
 
-// Describes information about a monitor probe.
+// Describes information about a network monitor probe.
 type Probe struct {
 
 	// The destination for the probe. This should be either an IPV4 or IPV6 .
@@ -125,13 +125,13 @@ type Probe struct {
 // Defines a probe when creating a probe or monitor.
 type ProbeInput struct {
 
-	// The destination IP address. This will be either IPV4 or IPV6 .
+	// The destination IP address. This must be either IPV4 or IPV6 .
 	//
 	// This member is required.
 	Destination *string
 
 	// The protocol used for the network traffic between the source and destination .
-	// This will be either TCP or ICMP .
+	// This must be either TCP or ICMP .
 	//
 	// This member is required.
 	Protocol Protocol
@@ -145,7 +145,7 @@ type ProbeInput struct {
 	// is TCP and must be a number between 1 and 65536 .
 	DestinationPort *int32
 
-	// The size of the packets sent between the source and destination. This will be a
+	// The size of the packets sent between the source and destination. This must be a
 	// number between 56 and 8500 .
 	PacketSize *int32
 

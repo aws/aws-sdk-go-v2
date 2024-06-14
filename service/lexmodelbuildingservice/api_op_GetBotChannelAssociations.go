@@ -6,14 +6,14 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/lexmodelbuildingservice/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns a list of all of the channels associated with the specified bot. The
-// GetBotChannelAssociations operation requires permissions for the
+//	Returns a list of all of the channels associated with the specified bot.
+//
+// The GetBotChannelAssociations operation requires permissions for the
 // lex:GetBotChannelAssociations action.
 func (c *Client) GetBotChannelAssociations(ctx context.Context, params *GetBotChannelAssociationsInput, optFns ...func(*Options)) (*GetBotChannelAssociationsOutput, error) {
 	if params == nil {
@@ -43,7 +43,8 @@ type GetBotChannelAssociationsInput struct {
 	// This member is required.
 	BotName *string
 
-	// The maximum number of associations to return in the response. The default is 50.
+	// The maximum number of associations to return in the response. The default is
+	// 50.
 	MaxResults *int32
 
 	// Substring to match in channel association names. An association will be
@@ -101,25 +102,25 @@ func (c *Client) addOperationGetBotChannelAssociationsMiddlewares(stack *middlew
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -134,13 +135,16 @@ func (c *Client) addOperationGetBotChannelAssociationsMiddlewares(stack *middlew
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpGetBotChannelAssociationsValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetBotChannelAssociations(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -169,7 +173,8 @@ var _ GetBotChannelAssociationsAPIClient = (*Client)(nil)
 // GetBotChannelAssociationsPaginatorOptions is the paginator options for
 // GetBotChannelAssociations
 type GetBotChannelAssociationsPaginatorOptions struct {
-	// The maximum number of associations to return in the response. The default is 50.
+	// The maximum number of associations to return in the response. The default is
+	// 50.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

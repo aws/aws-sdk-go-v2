@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/storagegateway/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -15,9 +14,10 @@ import (
 // Creates a virtual tape by using your own barcode. You write data to the virtual
 // tape and then archive the tape. A barcode is unique and cannot be reused if it
 // has already been used on a tape. This applies to barcodes used on deleted tapes.
-// This operation is only supported in the tape gateway type. Cache storage must be
-// allocated to the gateway before you can create a virtual tape. Use the AddCache
-// operation to add cache storage to a gateway.
+// This operation is only supported in the tape gateway type.
+//
+// Cache storage must be allocated to the gateway before you can create a virtual
+// tape. Use the AddCacheoperation to add cache storage to a gateway.
 func (c *Client) CreateTapeWithBarcode(ctx context.Context, params *CreateTapeWithBarcodeInput, optFns ...func(*Options)) (*CreateTapeWithBarcodeOutput, error) {
 	if params == nil {
 		params = &CreateTapeWithBarcodeInput{}
@@ -37,26 +37,31 @@ func (c *Client) CreateTapeWithBarcode(ctx context.Context, params *CreateTapeWi
 type CreateTapeWithBarcodeInput struct {
 
 	// The unique Amazon Resource Name (ARN) that represents the gateway to associate
-	// the virtual tape with. Use the ListGateways operation to return a list of
-	// gateways for your account and Amazon Web Services Region.
+	// the virtual tape with. Use the ListGatewaysoperation to return a list of gateways for your
+	// account and Amazon Web Services Region.
 	//
 	// This member is required.
 	GatewayARN *string
 
-	// The barcode that you want to assign to the tape. Barcodes cannot be reused.
-	// This includes barcodes used for tapes that have been deleted.
+	// The barcode that you want to assign to the tape.
+	//
+	// Barcodes cannot be reused. This includes barcodes used for tapes that have been
+	// deleted.
 	//
 	// This member is required.
 	TapeBarcode *string
 
-	// The size, in bytes, of the virtual tape that you want to create. The size must
-	// be aligned by gigabyte (1024*1024*1024 bytes).
+	// The size, in bytes, of the virtual tape that you want to create.
+	//
+	// The size must be aligned by gigabyte (1024*1024*1024 bytes).
 	//
 	// This member is required.
 	TapeSizeInBytes *int64
 
 	// Set to true to use Amazon S3 server-side encryption with your own KMS key, or
-	// false to use a key managed by Amazon S3. Optional. Valid Values: true | false
+	// false to use a key managed by Amazon S3. Optional.
+	//
+	// Valid Values: true | false
 	KMSEncrypted *bool
 
 	// The Amazon Resource Name (ARN) of a symmetric customer master key (CMK) used
@@ -72,10 +77,12 @@ type CreateTapeWithBarcodeInput struct {
 	PoolId *string
 
 	// A list of up to 50 tags that can be assigned to a virtual tape that has a
-	// barcode. Each tag is a key-value pair. Valid characters for key and value are
-	// letters, spaces, and numbers representable in UTF-8 format, and the following
-	// special characters: + - = . _ : / @. The maximum length of a tag's key is 128
-	// characters, and the maximum length for a tag's value is 256.
+	// barcode. Each tag is a key-value pair.
+	//
+	// Valid characters for key and value are letters, spaces, and numbers
+	// representable in UTF-8 format, and the following special characters: + - = . _ :
+	// / @. The maximum length of a tag's key is 128 characters, and the maximum length
+	// for a tag's value is 256.
 	Tags []types.Tag
 
 	// Set to TRUE if the tape you are creating is to be configured as a
@@ -120,25 +127,25 @@ func (c *Client) addOperationCreateTapeWithBarcodeMiddlewares(stack *middleware.
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -153,13 +160,16 @@ func (c *Client) addOperationCreateTapeWithBarcodeMiddlewares(stack *middleware.
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpCreateTapeWithBarcodeValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateTapeWithBarcode(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

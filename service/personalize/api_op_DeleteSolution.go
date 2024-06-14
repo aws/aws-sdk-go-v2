@@ -6,18 +6,19 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Deletes all versions of a solution and the Solution object itself. Before
 // deleting a solution, you must delete all campaigns based on the solution. To
-// determine what campaigns are using the solution, call ListCampaigns (https://docs.aws.amazon.com/personalize/latest/dg/API_ListCampaigns.html)
-// and supply the Amazon Resource Name (ARN) of the solution. You can't delete a
-// solution if an associated SolutionVersion is in the CREATE PENDING or IN
-// PROGRESS state. For more information on solutions, see CreateSolution (https://docs.aws.amazon.com/personalize/latest/dg/API_CreateSolution.html)
-// .
+// determine what campaigns are using the solution, call [ListCampaigns]and supply the Amazon
+// Resource Name (ARN) of the solution. You can't delete a solution if an
+// associated SolutionVersion is in the CREATE PENDING or IN PROGRESS state. For
+// more information on solutions, see [CreateSolution].
+//
+// [CreateSolution]: https://docs.aws.amazon.com/personalize/latest/dg/API_CreateSolution.html
+// [ListCampaigns]: https://docs.aws.amazon.com/personalize/latest/dg/API_ListCampaigns.html
 func (c *Client) DeleteSolution(ctx context.Context, params *DeleteSolutionInput, optFns ...func(*Options)) (*DeleteSolutionOutput, error) {
 	if params == nil {
 		params = &DeleteSolutionInput{}
@@ -72,25 +73,25 @@ func (c *Client) addOperationDeleteSolutionMiddlewares(stack *middleware.Stack, 
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -105,13 +106,16 @@ func (c *Client) addOperationDeleteSolutionMiddlewares(stack *middleware.Stack, 
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDeleteSolutionValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteSolution(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

@@ -6,18 +6,20 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/accessanalyzer/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Checks whether new access is allowed for an updated policy when compared to the
-// existing policy. You can find examples for reference policies and learn how to
-// set up and run a custom policy check for new access in the IAM Access Analyzer
-// custom policy checks samples (https://github.com/aws-samples/iam-access-analyzer-custom-policy-check-samples)
-// repository on GitHub. The reference policies in this repository are meant to be
-// passed to the existingPolicyDocument request parameter.
+// existing policy.
+//
+// You can find examples for reference policies and learn how to set up and run a
+// custom policy check for new access in the [IAM Access Analyzer custom policy checks samples]repository on GitHub. The reference
+// policies in this repository are meant to be passed to the existingPolicyDocument
+// request parameter.
+//
+// [IAM Access Analyzer custom policy checks samples]: https://github.com/aws-samples/iam-access-analyzer-custom-policy-check-samples
 func (c *Client) CheckNoNewAccess(ctx context.Context, params *CheckNoNewAccessInput, optFns ...func(*Options)) (*CheckNoNewAccessOutput, error) {
 	if params == nil {
 		params = &CheckNoNewAccessInput{}
@@ -47,11 +49,12 @@ type CheckNoNewAccessInput struct {
 
 	// The type of policy to compare. Identity policies grant permissions to IAM
 	// principals. Identity policies include managed and inline policies for IAM roles,
-	// users, and groups. Resource policies grant permissions on Amazon Web Services
-	// resources. Resource policies include trust policies for IAM roles and bucket
-	// policies for Amazon S3 buckets. You can provide a generic input such as identity
-	// policy or resource policy or a specific input such as managed policy or Amazon
-	// S3 bucket policy.
+	// users, and groups.
+	//
+	// Resource policies grant permissions on Amazon Web Services resources. Resource
+	// policies include trust policies for IAM roles and bucket policies for Amazon S3
+	// buckets. You can provide a generic input such as identity policy or resource
+	// policy or a specific input such as managed policy or Amazon S3 bucket policy.
 	//
 	// This member is required.
 	PolicyType types.AccessCheckPolicyType
@@ -100,25 +103,25 @@ func (c *Client) addOperationCheckNoNewAccessMiddlewares(stack *middleware.Stack
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -133,13 +136,16 @@ func (c *Client) addOperationCheckNoNewAccessMiddlewares(stack *middleware.Stack
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpCheckNoNewAccessValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCheckNoNewAccess(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

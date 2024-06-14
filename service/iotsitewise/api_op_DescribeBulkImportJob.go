@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/iotsitewise/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -14,8 +13,9 @@ import (
 )
 
 // Retrieves information about a bulk import job request. For more information,
-// see Describe a bulk import job (CLI) (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/DescribeBulkImportJob.html)
-// in the Amazon Simple Storage Service User Guide.
+// see [Describe a bulk import job (CLI)]in the Amazon Simple Storage Service User Guide.
+//
+// [Describe a bulk import job (CLI)]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/DescribeBulkImportJob.html
 func (c *Client) DescribeBulkImportJob(ctx context.Context, params *DescribeBulkImportJobInput, optFns ...func(*Options)) (*DescribeBulkImportJobOutput, error) {
 	if params == nil {
 		params = &DescribeBulkImportJobInput{}
@@ -80,22 +80,29 @@ type DescribeBulkImportJobOutput struct {
 	// This member is required.
 	JobName *string
 
-	// The ARN (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
-	// of the IAM role that allows IoT SiteWise to read Amazon S3 data.
+	// The [ARN] of the IAM role that allows IoT SiteWise to read Amazon S3 data.
+	//
+	// [ARN]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
 	//
 	// This member is required.
 	JobRoleArn *string
 
 	// The status of the bulk import job can be one of following values:
+	//
 	//   - PENDING – IoT SiteWise is waiting for the current bulk import job to finish.
+	//
 	//   - CANCELLED – The bulk import job has been canceled.
+	//
 	//   - RUNNING – IoT SiteWise is processing your request to import your data from
 	//   Amazon S3.
+	//
 	//   - COMPLETED – IoT SiteWise successfully completed your request to import data
 	//   from Amazon S3.
+	//
 	//   - FAILED – IoT SiteWise couldn't process your request to import data from
 	//   Amazon S3. You can use logs saved in the specified error report location in
 	//   Amazon S3 to troubleshoot issues.
+	//
 	//   - COMPLETED_WITH_FAILURES – IoT SiteWise completed your request to import data
 	//   from Amazon S3 with errors. You can use logs saved in the specified error report
 	//   location in Amazon S3 to troubleshoot issues.
@@ -140,25 +147,25 @@ func (c *Client) addOperationDescribeBulkImportJobMiddlewares(stack *middleware.
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -173,6 +180,9 @@ func (c *Client) addOperationDescribeBulkImportJobMiddlewares(stack *middleware.
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addEndpointPrefix_opDescribeBulkImportJobMiddleware(stack); err != nil {
 		return err
 	}
@@ -182,7 +192,7 @@ func (c *Client) addOperationDescribeBulkImportJobMiddlewares(stack *middleware.
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeBulkImportJob(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/macie2/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -41,8 +40,8 @@ type DescribeClassificationJobInput struct {
 
 type DescribeClassificationJobOutput struct {
 
-	// An array of unique identifiers, one for each allow list that the job uses when
-	// it analyzes data.
+	// An array of unique identifiers, one for each allow list that the job is
+	// configured to use when it analyzes data.
 	AllowListIds []string
 
 	// The token that was provided to ensure the idempotency of the request to create
@@ -54,8 +53,8 @@ type DescribeClassificationJobOutput struct {
 	CreatedAt *time.Time
 
 	// An array of unique identifiers, one for each custom data identifier that the
-	// job uses when it analyzes data. This value is null if the job uses only managed
-	// data identifiers to analyze data.
+	// job is configured to use when it analyzes data. This value is null if the job is
+	// configured to use only managed data identifiers to analyze data.
 	CustomDataIdentifierIds []string
 
 	// The custom description of the job.
@@ -75,17 +74,23 @@ type DescribeClassificationJobOutput struct {
 	JobId *string
 
 	// The current status of the job. Possible values are:
+	//
 	//   - CANCELLED - You cancelled the job or, if it's a one-time job, you paused
 	//   the job and didn't resume it within 30 days.
+	//
 	//   - COMPLETE - For a one-time job, Amazon Macie finished processing the data
 	//   specified for the job. This value doesn't apply to recurring jobs.
+	//
 	//   - IDLE - For a recurring job, the previous scheduled run is complete and the
 	//   next scheduled run is pending. This value doesn't apply to one-time jobs.
+	//
 	//   - PAUSED - Macie started running the job but additional processing would
 	//   exceed the monthly sensitive data discovery quota for your account or one or
 	//   more member accounts that the job analyzes data for.
+	//
 	//   - RUNNING - For a one-time job, the job is in progress. For a recurring job,
 	//   a scheduled run is in progress.
+	//
 	//   - USER_PAUSED - You paused the job. If you paused the job while it had a
 	//   status of RUNNING and you don't resume it within 30 days of pausing it, the job
 	//   or job run will expire and be cancelled, depending on the job's type. To check
@@ -93,7 +98,9 @@ type DescribeClassificationJobOutput struct {
 	JobStatus types.JobStatus
 
 	// The schedule for running the job. Possible values are:
+	//
 	//   - ONE_TIME - The job runs only once.
+	//
 	//   - SCHEDULED - The job runs on a daily, weekly, or monthly basis. The
 	//   scheduleFrequency property indicates the recurrence pattern for the job.
 	JobType types.JobType
@@ -111,31 +118,41 @@ type DescribeClassificationJobOutput struct {
 	// An array of unique identifiers, one for each managed data identifier that the
 	// job is explicitly configured to include (use) or exclude (not use) when it
 	// analyzes data. Inclusion or exclusion depends on the managed data identifier
-	// selection type specified for the job (managedDataIdentifierSelector).This value
-	// is null if the job's managed data identifier selection type is ALL, NONE, or
-	// RECOMMENDED.
+	// selection type specified for the job (managedDataIdentifierSelector).
+	//
+	// This value is null if the job's managed data identifier selection type is ALL,
+	// NONE, or RECOMMENDED.
 	ManagedDataIdentifierIds []string
 
 	// The selection type that determines which managed data identifiers the job uses
 	// when it analyzes data. Possible values are:
+	//
 	//   - ALL - Use all managed data identifiers.
+	//
 	//   - EXCLUDE - Use all managed data identifiers except the ones specified by the
 	//   managedDataIdentifierIds property.
+	//
 	//   - INCLUDE - Use only the managed data identifiers specified by the
 	//   managedDataIdentifierIds property.
+	//
 	//   - NONE - Don't use any managed data identifiers. Use only custom data
 	//   identifiers (customDataIdentifierIds).
+	//
 	//   - RECOMMENDED (default) - Use the recommended set of managed data identifiers.
+	//
 	// If this value is null, the job uses the recommended set of managed data
-	// identifiers. If the job is a recurring job and this value is ALL or EXCLUDE,
-	// each job run automatically uses new managed data identifiers that are released.
-	// If this value is null or RECOMMENDED for a recurring job, each job run uses all
-	// the managed data identifiers that are in the recommended set when the run
-	// starts. For information about individual managed data identifiers or to
-	// determine which ones are in the recommended set, see Using managed data
-	// identifiers (https://docs.aws.amazon.com/macie/latest/user/managed-data-identifiers.html)
-	// and Recommended managed data identifiers (https://docs.aws.amazon.com/macie/latest/user/discovery-jobs-mdis-recommended.html)
-	// in the Amazon Macie User Guide.
+	// identifiers.
+	//
+	// If the job is a recurring job and this value is ALL or EXCLUDE, each job run
+	// automatically uses new managed data identifiers that are released. If this value
+	// is null or RECOMMENDED for a recurring job, each job run uses all the managed
+	// data identifiers that are in the recommended set when the run starts.
+	//
+	// To learn about individual managed data identifiers or determine which ones are
+	// in the recommended set, see [Using managed data identifiers]or [Recommended managed data identifiers] in the Amazon Macie User Guide.
+	//
+	// [Using managed data identifiers]: https://docs.aws.amazon.com/macie/latest/user/managed-data-identifiers.html
+	// [Recommended managed data identifiers]: https://docs.aws.amazon.com/macie/latest/user/discovery-jobs-mdis-recommended.html
 	ManagedDataIdentifierSelector types.ManagedDataIdentifierSelector
 
 	// The custom name of the job.
@@ -158,7 +175,7 @@ type DescribeClassificationJobOutput struct {
 	Statistics *types.Statistics
 
 	// A map of key-value pairs that specifies which tags (keys and values) are
-	// associated with the classification job.
+	// associated with the job.
 	Tags map[string]string
 
 	// If the current status of the job is USER_PAUSED, specifies when the job was
@@ -194,25 +211,25 @@ func (c *Client) addOperationDescribeClassificationJobMiddlewares(stack *middlew
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -227,13 +244,16 @@ func (c *Client) addOperationDescribeClassificationJobMiddlewares(stack *middlew
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDescribeClassificationJobValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeClassificationJob(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

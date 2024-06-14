@@ -10,8 +10,9 @@ const (
 )
 
 // Values returns all known values for ConflictExceptionReason. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ConflictExceptionReason) Values() []ConflictExceptionReason {
 	return []ConflictExceptionReason{
 		"CONCURRENT_MODIFICATION",
@@ -27,8 +28,9 @@ const (
 )
 
 // Values returns all known values for ExplainMode. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ExplainMode) Values() []ExplainMode {
 	return []ExplainMode{
 		"STATIC",
@@ -45,8 +47,9 @@ const (
 )
 
 // Values returns all known values for Format. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (Format) Values() []Format {
 	return []Format{
 		"CSV",
@@ -65,11 +68,13 @@ const (
 	GraphStatusUpdating     GraphStatus = "UPDATING"
 	GraphStatusSnapshotting GraphStatus = "SNAPSHOTTING"
 	GraphStatusFailed       GraphStatus = "FAILED"
+	GraphStatusImporting    GraphStatus = "IMPORTING"
 )
 
 // Values returns all known values for GraphStatus. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (GraphStatus) Values() []GraphStatus {
 	return []GraphStatus{
 		"CREATING",
@@ -79,6 +84,7 @@ func (GraphStatus) Values() []GraphStatus {
 		"UPDATING",
 		"SNAPSHOTTING",
 		"FAILED",
+		"IMPORTING",
 	}
 }
 
@@ -91,8 +97,9 @@ const (
 )
 
 // Values returns all known values for GraphSummaryMode. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (GraphSummaryMode) Values() []GraphSummaryMode {
 	return []GraphSummaryMode{
 		"BASIC",
@@ -117,8 +124,9 @@ const (
 )
 
 // Values returns all known values for ImportTaskStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ImportTaskStatus) Values() []ImportTaskStatus {
 	return []ImportTaskStatus{
 		"INITIALIZING",
@@ -144,8 +152,9 @@ const (
 )
 
 // Values returns all known values for PlanCacheType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (PlanCacheType) Values() []PlanCacheType {
 	return []PlanCacheType{
 		"ENABLED",
@@ -166,6 +175,7 @@ const (
 
 // Values returns all known values for PrivateGraphEndpointStatus. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (PrivateGraphEndpointStatus) Values() []PrivateGraphEndpointStatus {
 	return []PrivateGraphEndpointStatus{
@@ -184,8 +194,9 @@ const (
 )
 
 // Values returns all known values for QueryLanguage. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (QueryLanguage) Values() []QueryLanguage {
 	return []QueryLanguage{
 		"OPEN_CYPHER",
@@ -202,8 +213,9 @@ const (
 )
 
 // Values returns all known values for QueryState. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (QueryState) Values() []QueryState {
 	return []QueryState{
 		"RUNNING",
@@ -223,8 +235,9 @@ const (
 )
 
 // Values returns all known values for QueryStateInput. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (QueryStateInput) Values() []QueryStateInput {
 	return []QueryStateInput{
 		"ALL",
@@ -245,8 +258,9 @@ const (
 )
 
 // Values returns all known values for SnapshotStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (SnapshotStatus) Values() []SnapshotStatus {
 	return []SnapshotStatus{
 		"CREATING",
@@ -269,8 +283,9 @@ const (
 
 // Values returns all known values for UnprocessableExceptionReason. Note that
 // this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (UnprocessableExceptionReason) Values() []UnprocessableExceptionReason {
 	return []UnprocessableExceptionReason{
 		"QUERY_TIMEOUT",
@@ -296,6 +311,7 @@ const (
 
 // Values returns all known values for ValidationExceptionReason. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (ValidationExceptionReason) Values() []ValidationExceptionReason {
 	return []ValidationExceptionReason{

@@ -4550,6 +4550,26 @@ func (m *validateOpDisableImageDeprecation) HandleInitialize(ctx context.Context
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDisableImageDeregistrationProtection struct {
+}
+
+func (*validateOpDisableImageDeregistrationProtection) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDisableImageDeregistrationProtection) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DisableImageDeregistrationProtectionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDisableImageDeregistrationProtectionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDisableImage struct {
 }
 
@@ -5030,6 +5050,26 @@ func (m *validateOpEnableImageDeprecation) HandleInitialize(ctx context.Context,
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpEnableImageDeregistrationProtection struct {
+}
+
+func (*validateOpEnableImageDeregistrationProtection) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpEnableImageDeregistrationProtection) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*EnableImageDeregistrationProtectionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpEnableImageDeregistrationProtectionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpEnableImage struct {
 }
 
@@ -5445,6 +5485,26 @@ func (m *validateOpGetHostReservationPurchasePreview) HandleInitialize(ctx conte
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpGetHostReservationPurchasePreviewInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetInstanceTpmEkPub struct {
+}
+
+func (*validateOpGetInstanceTpmEkPub) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetInstanceTpmEkPub) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetInstanceTpmEkPubInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetInstanceTpmEkPubInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -9598,6 +9658,10 @@ func addOpDisableImageDeprecationValidationMiddleware(stack *middleware.Stack) e
 	return stack.Initialize.Add(&validateOpDisableImageDeprecation{}, middleware.After)
 }
 
+func addOpDisableImageDeregistrationProtectionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDisableImageDeregistrationProtection{}, middleware.After)
+}
+
 func addOpDisableImageValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDisableImage{}, middleware.After)
 }
@@ -9694,6 +9758,10 @@ func addOpEnableImageDeprecationValidationMiddleware(stack *middleware.Stack) er
 	return stack.Initialize.Add(&validateOpEnableImageDeprecation{}, middleware.After)
 }
 
+func addOpEnableImageDeregistrationProtectionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpEnableImageDeregistrationProtection{}, middleware.After)
+}
+
 func addOpEnableImageValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpEnableImage{}, middleware.After)
 }
@@ -9776,6 +9844,10 @@ func addOpGetGroupsForCapacityReservationValidationMiddleware(stack *middleware.
 
 func addOpGetHostReservationPurchasePreviewValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetHostReservationPurchasePreview{}, middleware.After)
+}
+
+func addOpGetInstanceTpmEkPubValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetInstanceTpmEkPub{}, middleware.After)
 }
 
 func addOpGetInstanceTypesFromInstanceRequirementsValidationMiddleware(stack *middleware.Stack) error {
@@ -15130,6 +15202,21 @@ func validateOpDisableImageDeprecationInput(v *DisableImageDeprecationInput) err
 	}
 }
 
+func validateOpDisableImageDeregistrationProtectionInput(v *DisableImageDeregistrationProtectionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DisableImageDeregistrationProtectionInput"}
+	if v.ImageId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ImageId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDisableImageInput(v *DisableImageInput) error {
 	if v == nil {
 		return nil
@@ -15534,6 +15621,21 @@ func validateOpEnableImageDeprecationInput(v *EnableImageDeprecationInput) error
 	}
 }
 
+func validateOpEnableImageDeregistrationProtectionInput(v *EnableImageDeregistrationProtectionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "EnableImageDeregistrationProtectionInput"}
+	if v.ImageId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ImageId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpEnableImageInput(v *EnableImageInput) error {
 	if v == nil {
 		return nil
@@ -15870,6 +15972,27 @@ func validateOpGetHostReservationPurchasePreviewInput(v *GetHostReservationPurch
 	}
 	if v.OfferingId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("OfferingId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetInstanceTpmEkPubInput(v *GetInstanceTpmEkPubInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetInstanceTpmEkPubInput"}
+	if v.InstanceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
+	}
+	if len(v.KeyType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("KeyType"))
+	}
+	if len(v.KeyFormat) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("KeyFormat"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

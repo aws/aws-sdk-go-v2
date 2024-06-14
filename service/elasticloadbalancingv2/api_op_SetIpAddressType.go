@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/elasticloadbalancingv2/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -31,9 +30,19 @@ func (c *Client) SetIpAddressType(ctx context.Context, params *SetIpAddressTypeI
 
 type SetIpAddressTypeInput struct {
 
-	// The IP address type. The possible values are ipv4 (for IPv4 addresses) and
-	// dualstack (for IPv4 and IPv6 addresses). You can’t specify dualstack for a load
-	// balancer with a UDP or TCP_UDP listener.
+	// Note: Internal load balancers must use the ipv4 IP address type.
+	//
+	// [Application Load Balancers] The IP address type. The possible values are ipv4
+	// (for only IPv4 addresses), dualstack (for IPv4 and IPv6 addresses), and
+	// dualstack-without-public-ipv4 (for IPv6 only public addresses, with private IPv4
+	// and IPv6 addresses).
+	//
+	// [Network Load Balancers] The IP address type. The possible values are ipv4 (for
+	// only IPv4 addresses) and dualstack (for IPv4 and IPv6 addresses). You can’t
+	// specify dualstack for a load balancer with a UDP or TCP_UDP listener.
+	//
+	// [Gateway Load Balancers] The IP address type. The possible values are ipv4 (for
+	// only IPv4 addresses) and dualstack (for IPv4 and IPv6 addresses).
 	//
 	// This member is required.
 	IpAddressType types.IpAddressType
@@ -79,25 +88,25 @@ func (c *Client) addOperationSetIpAddressTypeMiddlewares(stack *middleware.Stack
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -112,13 +121,16 @@ func (c *Client) addOperationSetIpAddressTypeMiddlewares(stack *middleware.Stack
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpSetIpAddressTypeValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opSetIpAddressType(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

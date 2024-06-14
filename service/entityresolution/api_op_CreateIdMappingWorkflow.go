@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/entityresolution/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -43,12 +42,6 @@ type CreateIdMappingWorkflowInput struct {
 	// This member is required.
 	InputSourceConfig []types.IdMappingWorkflowInputSource
 
-	// A list of IdMappingWorkflowOutputSource objects, each of which contains fields
-	// OutputS3Path and Output .
-	//
-	// This member is required.
-	OutputSourceConfig []types.IdMappingWorkflowOutputSource
-
 	// The Amazon Resource Name (ARN) of the IAM role. Entity Resolution assumes this
 	// role to create resources on your behalf as part of workflow execution.
 	//
@@ -63,6 +56,10 @@ type CreateIdMappingWorkflowInput struct {
 
 	// A description of the workflow.
 	Description *string
+
+	// A list of IdMappingWorkflowOutputSource objects, each of which contains fields
+	// OutputS3Path and Output .
+	OutputSourceConfig []types.IdMappingWorkflowOutputSource
 
 	// The tags used to organize, track, or control access for this resource.
 	Tags map[string]string
@@ -83,12 +80,6 @@ type CreateIdMappingWorkflowOutput struct {
 	// This member is required.
 	InputSourceConfig []types.IdMappingWorkflowInputSource
 
-	// A list of IdMappingWorkflowOutputSource objects, each of which contains fields
-	// OutputS3Path and Output .
-	//
-	// This member is required.
-	OutputSourceConfig []types.IdMappingWorkflowOutputSource
-
 	// The Amazon Resource Name (ARN) of the IAM role. Entity Resolution assumes this
 	// role to create resources on your behalf as part of workflow execution.
 	//
@@ -108,6 +99,10 @@ type CreateIdMappingWorkflowOutput struct {
 
 	// A description of the workflow.
 	Description *string
+
+	// A list of IdMappingWorkflowOutputSource objects, each of which contains fields
+	// OutputS3Path and Output .
+	OutputSourceConfig []types.IdMappingWorkflowOutputSource
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -137,25 +132,25 @@ func (c *Client) addOperationCreateIdMappingWorkflowMiddlewares(stack *middlewar
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -170,13 +165,16 @@ func (c *Client) addOperationCreateIdMappingWorkflowMiddlewares(stack *middlewar
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpCreateIdMappingWorkflowValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateIdMappingWorkflow(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

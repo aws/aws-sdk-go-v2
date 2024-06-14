@@ -6,19 +6,23 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/forecast/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
-// Describes the what-if forecast created using the CreateWhatIfForecast
-// operation. In addition to listing the properties provided in the
-// CreateWhatIfForecast request, this operation lists the following properties:
+// Describes the what-if forecast created using the CreateWhatIfForecast operation.
+//
+// In addition to listing the properties provided in the CreateWhatIfForecast
+// request, this operation lists the following properties:
+//
 //   - CreationTime
+//
 //   - LastModificationTime
+//
 //   - Message - If an error occurred, information about the error.
+//
 //   - Status
 func (c *Client) DescribeWhatIfForecast(ctx context.Context, params *DescribeWhatIfForecastInput, optFns ...func(*Options)) (*DescribeWhatIfForecastOutput, error) {
 	if params == nil {
@@ -55,17 +59,21 @@ type DescribeWhatIfForecastOutput struct {
 	EstimatedTimeRemainingInMinutes *int64
 
 	// The quantiles at which probabilistic forecasts are generated. You can specify
-	// up to five quantiles per what-if forecast in the CreateWhatIfForecast
-	// operation. If you didn't specify quantiles, the default values are ["0.1",
-	// "0.5", "0.9"] .
+	// up to five quantiles per what-if forecast in the CreateWhatIfForecastoperation. If you didn't
+	// specify quantiles, the default values are ["0.1", "0.5", "0.9"] .
 	ForecastTypes []string
 
 	// The last time the resource was modified. The timestamp depends on the status of
 	// the job:
+	//
 	//   - CREATE_PENDING - The CreationTime .
+	//
 	//   - CREATE_IN_PROGRESS - The current timestamp.
+	//
 	//   - CREATE_STOPPING - The current timestamp.
+	//
 	//   - CREATE_STOPPED - When the job stopped.
+	//
 	//   - ACTIVE or CREATE_FAILED - When the job finished or failed.
 	LastModificationTime *time.Time
 
@@ -73,10 +81,15 @@ type DescribeWhatIfForecastOutput struct {
 	Message *string
 
 	// The status of the what-if forecast. States include:
+	//
 	//   - ACTIVE
+	//
 	//   - CREATE_PENDING , CREATE_IN_PROGRESS , CREATE_FAILED
+	//
 	//   - CREATE_STOPPING , CREATE_STOPPED
+	//
 	//   - DELETE_PENDING , DELETE_IN_PROGRESS , DELETE_FAILED
+	//
 	// The Status of the what-if forecast must be ACTIVE before you can access the
 	// forecast.
 	Status *string
@@ -127,25 +140,25 @@ func (c *Client) addOperationDescribeWhatIfForecastMiddlewares(stack *middleware
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -160,13 +173,16 @@ func (c *Client) addOperationDescribeWhatIfForecastMiddlewares(stack *middleware
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDescribeWhatIfForecastValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeWhatIfForecast(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

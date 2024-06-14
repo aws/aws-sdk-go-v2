@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/vpclattice/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -14,8 +13,11 @@ import (
 
 // Creates a service. A service is any software application that can run on
 // instances containers, or serverless functions within an account or virtual
-// private cloud (VPC). For more information, see Services (https://docs.aws.amazon.com/vpc-lattice/latest/ug/services.html)
-// in the Amazon VPC Lattice User Guide.
+// private cloud (VPC).
+//
+// For more information, see [Services] in the Amazon VPC Lattice User Guide.
+//
+// [Services]: https://docs.aws.amazon.com/vpc-lattice/latest/ug/services.html
 func (c *Client) CreateService(ctx context.Context, params *CreateServiceInput, optFns ...func(*Options)) (*CreateServiceOutput, error) {
 	if params == nil {
 		params = &CreateServiceInput{}
@@ -41,7 +43,9 @@ type CreateServiceInput struct {
 	Name *string
 
 	// The type of IAM policy.
+	//
 	//   - NONE : The resource does not use an IAM policy. This is the default.
+	//
 	//   - AWS_IAM : The resource uses an IAM policy. When this type is used, auth is
 	//   enabled and an auth policy is required.
 	AuthType types.AuthType
@@ -87,8 +91,8 @@ type CreateServiceOutput struct {
 	// The name of the service.
 	Name *string
 
-	// The status. If the status is CREATE_FAILED , you will have to delete and
-	// recreate the service.
+	// The status. If the status is CREATE_FAILED , you must delete and recreate the
+	// service.
 	Status types.ServiceStatus
 
 	// Metadata pertaining to the operation's result.
@@ -119,25 +123,25 @@ func (c *Client) addOperationCreateServiceMiddlewares(stack *middleware.Stack, o
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -152,6 +156,9 @@ func (c *Client) addOperationCreateServiceMiddlewares(stack *middleware.Stack, o
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opCreateServiceMiddleware(stack, options); err != nil {
 		return err
 	}
@@ -161,7 +168,7 @@ func (c *Client) addOperationCreateServiceMiddlewares(stack *middleware.Stack, o
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateService(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

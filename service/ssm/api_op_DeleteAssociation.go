@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -14,10 +13,12 @@ import (
 // Disassociates the specified Amazon Web Services Systems Manager document (SSM
 // document) from the specified managed node. If you created the association by
 // using the Targets parameter, then you must delete the association by using the
-// association ID. When you disassociate a document from a managed node, it doesn't
-// change the configuration of the node. To change the configuration state of a
-// managed node after you disassociate a document, you must create a new document
-// with the desired configuration and associate it with the node.
+// association ID.
+//
+// When you disassociate a document from a managed node, it doesn't change the
+// configuration of the node. To change the configuration state of a managed node
+// after you disassociate a document, you must create a new document with the
+// desired configuration and associate it with the node.
 func (c *Client) DeleteAssociation(ctx context.Context, params *DeleteAssociationInput, optFns ...func(*Options)) (*DeleteAssociationOutput, error) {
 	if params == nil {
 		params = &DeleteAssociationInput{}
@@ -38,13 +39,15 @@ type DeleteAssociationInput struct {
 	// The association ID that you want to delete.
 	AssociationId *string
 
-	// The managed node ID. InstanceId has been deprecated. To specify a managed node
-	// ID for an association, use the Targets parameter. Requests that include the
-	// parameter InstanceID with Systems Manager documents (SSM documents) that use
-	// schema version 2.0 or later will fail. In addition, if you use the parameter
-	// InstanceId , you can't use the parameters AssociationName , DocumentVersion ,
-	// MaxErrors , MaxConcurrency , OutputLocation , or ScheduleExpression . To use
-	// these parameters, you must use the Targets parameter.
+	// The managed node ID.
+	//
+	// InstanceId has been deprecated. To specify a managed node ID for an
+	// association, use the Targets parameter. Requests that include the parameter
+	// InstanceID with Systems Manager documents (SSM documents) that use schema
+	// version 2.0 or later will fail. In addition, if you use the parameter InstanceId
+	// , you can't use the parameters AssociationName , DocumentVersion , MaxErrors ,
+	// MaxConcurrency , OutputLocation , or ScheduleExpression . To use these
+	// parameters, you must use the Targets parameter.
 	InstanceId *string
 
 	// The name of the SSM document.
@@ -82,25 +85,25 @@ func (c *Client) addOperationDeleteAssociationMiddlewares(stack *middleware.Stac
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -115,10 +118,13 @@ func (c *Client) addOperationDeleteAssociationMiddlewares(stack *middleware.Stac
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteAssociation(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

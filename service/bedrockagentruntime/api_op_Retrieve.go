@@ -6,13 +6,12 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockagentruntime/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Retrieve from knowledge base.
+// Queries a knowledge base and retrieves information from it.
 func (c *Client) Retrieve(ctx context.Context, params *RetrieveInput, optFns ...func(*Options)) (*RetrieveOutput, error) {
 	if params == nil {
 		params = &RetrieveInput{}
@@ -30,20 +29,25 @@ func (c *Client) Retrieve(ctx context.Context, params *RetrieveInput, optFns ...
 
 type RetrieveInput struct {
 
-	// Identifier of the KnowledgeBase
+	// The unique identifier of the knowledge base to query.
 	//
 	// This member is required.
 	KnowledgeBaseId *string
 
-	// Knowledge base input query.
+	// Contains the query to send the knowledge base.
 	//
 	// This member is required.
 	RetrievalQuery *types.KnowledgeBaseQuery
 
-	// Opaque continuation token of previous paginated response.
+	// If there are more results than can fit in the response, the response returns a
+	// nextToken . Use this token in the nextToken field of another request to
+	// retrieve the next batch of results.
 	NextToken *string
 
-	// Search parameters for retrieving from knowledge base.
+	// Contains configurations for the knowledge base query and retrieval process. For
+	// more information, see [Query configurations].
+	//
+	// [Query configurations]: https://docs.aws.amazon.com/bedrock/latest/userguide/kb-test-config.html
 	RetrievalConfiguration *types.KnowledgeBaseRetrievalConfiguration
 
 	noSmithyDocumentSerde
@@ -51,12 +55,14 @@ type RetrieveInput struct {
 
 type RetrieveOutput struct {
 
-	// List of knowledge base retrieval results
+	// A list of results from querying the knowledge base.
 	//
 	// This member is required.
 	RetrievalResults []types.KnowledgeBaseRetrievalResult
 
-	// Opaque continuation token of previous paginated response.
+	// If there are more results than can fit in the response, the response returns a
+	// nextToken . Use this token in the nextToken field of another request to
+	// retrieve the next batch of results.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -87,25 +93,25 @@ func (c *Client) addOperationRetrieveMiddlewares(stack *middleware.Stack, option
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -120,13 +126,16 @@ func (c *Client) addOperationRetrieveMiddlewares(stack *middleware.Stack, option
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpRetrieveValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opRetrieve(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

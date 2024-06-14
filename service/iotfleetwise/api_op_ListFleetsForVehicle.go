@@ -6,12 +6,12 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Retrieves a list of IDs for all fleets that the vehicle is associated with.
+//
 // This API operation uses pagination. Specify the nextToken parameter in the
 // request to return more results.
 func (c *Client) ListFleetsForVehicle(ctx context.Context, params *ListFleetsForVehicleInput, optFns ...func(*Options)) (*ListFleetsForVehicleOutput, error) {
@@ -31,19 +31,21 @@ func (c *Client) ListFleetsForVehicle(ctx context.Context, params *ListFleetsFor
 
 type ListFleetsForVehicleInput struct {
 
-	// The ID of the vehicle to retrieve information about.
+	//  The ID of the vehicle to retrieve information about.
 	//
 	// This member is required.
 	VehicleName *string
 
-	// The maximum number of items to return, between 1 and 100, inclusive.
+	//  The maximum number of items to return, between 1 and 100, inclusive.
 	MaxResults *int32
 
-	// A pagination token for the next set of results. If the results of a search are
-	// large, only a portion of the results are returned, and a nextToken pagination
-	// token is returned in the response. To retrieve the next set of results, reissue
-	// the search request and include the returned token. When all results have been
-	// returned, the response does not contain a pagination token value.
+	// A pagination token for the next set of results.
+	//
+	// If the results of a search are large, only a portion of the results are
+	// returned, and a nextToken pagination token is returned in the response. To
+	// retrieve the next set of results, reissue the search request and include the
+	// returned token. When all results have been returned, the response does not
+	// contain a pagination token value.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -51,10 +53,10 @@ type ListFleetsForVehicleInput struct {
 
 type ListFleetsForVehicleOutput struct {
 
-	// A list of fleet IDs that the vehicle is associated with.
+	//  A list of fleet IDs that the vehicle is associated with.
 	Fleets []string
 
-	// The token to retrieve the next set of results, or null if there are no more
+	//  The token to retrieve the next set of results, or null if there are no more
 	// results.
 	NextToken *string
 
@@ -86,25 +88,25 @@ func (c *Client) addOperationListFleetsForVehicleMiddlewares(stack *middleware.S
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -119,13 +121,16 @@ func (c *Client) addOperationListFleetsForVehicleMiddlewares(stack *middleware.S
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpListFleetsForVehicleValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListFleetsForVehicle(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -154,7 +159,7 @@ var _ ListFleetsForVehicleAPIClient = (*Client)(nil)
 // ListFleetsForVehiclePaginatorOptions is the paginator options for
 // ListFleetsForVehicle
 type ListFleetsForVehiclePaginatorOptions struct {
-	// The maximum number of items to return, between 1 and 100, inclusive.
+	//  The maximum number of items to return, between 1 and 100, inclusive.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

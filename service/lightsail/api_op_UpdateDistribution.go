@@ -6,15 +6,15 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/lightsail/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Updates an existing Amazon Lightsail content delivery network (CDN)
-// distribution. Use this action to update the configuration of your existing
 // distribution.
+//
+// Use this action to update the configuration of your existing distribution.
 func (c *Client) UpdateDistribution(ctx context.Context, params *UpdateDistributionInput, optFns ...func(*Options)) (*UpdateDistributionOutput, error) {
 	if params == nil {
 		params = &UpdateDistributionInput{}
@@ -32,20 +32,32 @@ func (c *Client) UpdateDistribution(ctx context.Context, params *UpdateDistribut
 
 type UpdateDistributionInput struct {
 
-	// The name of the distribution to update. Use the GetDistributions action to get
-	// a list of distribution names that you can specify.
+	// The name of the distribution to update.
+	//
+	// Use the GetDistributions action to get a list of distribution names that you
+	// can specify.
 	//
 	// This member is required.
 	DistributionName *string
 
-	// An object that describes the cache behavior settings for the distribution. The
-	// cacheBehaviorSettings specified in your UpdateDistributionRequest will replace
-	// your distribution's existing settings.
+	// An object that describes the cache behavior settings for the distribution.
+	//
+	// The cacheBehaviorSettings specified in your UpdateDistributionRequest will
+	// replace your distribution's existing settings.
 	CacheBehaviorSettings *types.CacheSettings
 
 	// An array of objects that describe the per-path cache behavior for the
 	// distribution.
 	CacheBehaviors []types.CacheBehaviorPerPath
+
+	// The name of the SSL/TLS certificate that you want to attach to the distribution.
+	//
+	// Only certificates with a status of ISSUED can be attached to a distribution.
+	//
+	// Use the [GetCertificates] action to get a list of certificate names that you can specify.
+	//
+	// [GetCertificates]: https://docs.aws.amazon.com/lightsail/2016-11-28/api-reference/API_GetCertificates.html
+	CertificateName *string
 
 	// An object that describes the default cache behavior for the distribution.
 	DefaultCacheBehavior *types.CacheBehavior
@@ -54,9 +66,21 @@ type UpdateDistributionInput struct {
 	IsEnabled *bool
 
 	// An object that describes the origin resource for the distribution, such as a
-	// Lightsail instance, bucket, or load balancer. The distribution pulls, caches,
-	// and serves content from the origin.
+	// Lightsail instance, bucket, or load balancer.
+	//
+	// The distribution pulls, caches, and serves content from the origin.
 	Origin *types.InputOrigin
+
+	// Indicates whether the default SSL/TLS certificate is attached to the
+	// distribution. The default value is true . When true , the distribution uses the
+	// default domain name such as d111111abcdef8.cloudfront.net .
+	//
+	// Set this value to false to attach a new certificate to the distribution.
+	UseDefaultCertificate *bool
+
+	// Use this parameter to update the minimum TLS protocol version for the SSL/TLS
+	// certificate that's attached to the distribution.
+	ViewerMinimumTlsProtocolVersion types.ViewerMinimumTlsProtocolVersionEnum
 
 	noSmithyDocumentSerde
 }
@@ -96,25 +120,25 @@ func (c *Client) addOperationUpdateDistributionMiddlewares(stack *middleware.Sta
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -129,13 +153,16 @@ func (c *Client) addOperationUpdateDistributionMiddlewares(stack *middleware.Sta
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpUpdateDistributionValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateDistribution(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

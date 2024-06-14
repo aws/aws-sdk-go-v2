@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/elasticbeanstalk/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -14,6 +13,7 @@ import (
 )
 
 // Returns list of event descriptions matching criteria up to the last 6 weeks.
+//
 // This action returns the most recent 1,000 events from the specified NextToken .
 func (c *Client) DescribeEvents(ctx context.Context, params *DescribeEventsInput, optFns ...func(*Options)) (*DescribeEventsOutput, error) {
 	if params == nil {
@@ -37,7 +37,7 @@ type DescribeEventsInput struct {
 	// include only those associated with this application.
 	ApplicationName *string
 
-	// If specified, AWS Elastic Beanstalk restricts the returned descriptions to
+	//  If specified, AWS Elastic Beanstalk restricts the returned descriptions to
 	// those that occur up to, but not including, the EndTime .
 	EndTime *time.Time
 
@@ -87,11 +87,11 @@ type DescribeEventsInput struct {
 // Result message wrapping a list of event descriptions.
 type DescribeEventsOutput struct {
 
-	// A list of EventDescription .
+	//  A list of EventDescription.
 	Events []types.EventDescription
 
-	// If returned, this indicates that there are more results to obtain. Use this
-	// token in the next DescribeEvents call to get the next batch of events.
+	//  If returned, this indicates that there are more results to obtain. Use this
+	// token in the next DescribeEventscall to get the next batch of events.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -122,25 +122,25 @@ func (c *Client) addOperationDescribeEventsMiddlewares(stack *middleware.Stack, 
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -155,10 +155,13 @@ func (c *Client) addOperationDescribeEventsMiddlewares(stack *middleware.Stack, 
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeEvents(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

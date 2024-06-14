@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/cloudtrail/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -15,13 +14,19 @@ import (
 
 // Returns Insights metrics data for trails that have enabled Insights. The
 // request must include the EventSource , EventName , and InsightType parameters.
+//
 // If the InsightType is set to ApiErrorRateInsight , the request must also include
-// the ErrorCode parameter. The following are the available time periods for
-// ListInsightsMetricData . Each cutoff is inclusive.
+// the ErrorCode parameter.
+//
+// The following are the available time periods for ListInsightsMetricData . Each
+// cutoff is inclusive.
+//
 //   - Data points with a period of 60 seconds (1-minute) are available for 15
 //     days.
+//
 //   - Data points with a period of 300 seconds (5-minute) are available for 63
 //     days.
+//
 //   - Data points with a period of 3600 seconds (1 hour) are available for 90
 //     days.
 //
@@ -71,13 +76,16 @@ type ListInsightsMetricDataInput struct {
 	DataType types.InsightsMetricDataType
 
 	// Specifies, in UTC, the end time for time-series data. The value specified is
-	// exclusive; results include data points up to the specified time stamp. The
-	// default is the time of request.
+	// exclusive; results include data points up to the specified time stamp.
+	//
+	// The default is the time of request.
 	EndTime *time.Time
 
 	// Conditionally required if the InsightType parameter is set to
-	// ApiErrorRateInsight . If returning metrics for the ApiErrorRateInsight Insights
-	// type, this is the error to retrieve data for. For example, AccessDenied .
+	// ApiErrorRateInsight .
+	//
+	// If returning metrics for the ApiErrorRateInsight Insights type, this is the
+	// error to retrieve data for. For example, AccessDenied .
 	ErrorCode *string
 
 	// The maximum number of datapoints to return. Valid values are integers from 1 to
@@ -85,8 +93,10 @@ type ListInsightsMetricDataInput struct {
 	MaxResults *int32
 
 	// Returned if all datapoints can't be returned in a single call. For example, due
-	// to reaching MaxResults . Add this parameter to the request to continue
-	// retrieving results starting from the last evaluated point.
+	// to reaching MaxResults .
+	//
+	// Add this parameter to the request to continue retrieving results starting from
+	// the last evaluated point.
 	NextToken *string
 
 	// Granularity of data to retrieve, in seconds. Valid values are 60 , 300 , and
@@ -95,8 +105,9 @@ type ListInsightsMetricDataInput struct {
 	Period *int32
 
 	// Specifies, in UTC, the start time for time-series data. The value specified is
-	// inclusive; results include data points with the specified time stamp. The
-	// default is 90 days before the time of request.
+	// inclusive; results include data points with the specified time stamp.
+	//
+	// The default is 90 days before the time of request.
 	StartTime *time.Time
 
 	noSmithyDocumentSerde
@@ -104,9 +115,10 @@ type ListInsightsMetricDataInput struct {
 
 type ListInsightsMetricDataOutput struct {
 
-	// Only returned if InsightType parameter was set to ApiErrorRateInsight . If
-	// returning metrics for the ApiErrorRateInsight Insights type, this is the error
-	// to retrieve data for. For example, AccessDenied .
+	// Only returned if InsightType parameter was set to ApiErrorRateInsight .
+	//
+	// If returning metrics for the ApiErrorRateInsight Insights type, this is the
+	// error to retrieve data for. For example, AccessDenied .
 	ErrorCode *string
 
 	// The name of the event, typically the Amazon Web Services API on which unusual
@@ -164,25 +176,25 @@ func (c *Client) addOperationListInsightsMetricDataMiddlewares(stack *middleware
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -197,13 +209,16 @@ func (c *Client) addOperationListInsightsMetricDataMiddlewares(stack *middleware
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpListInsightsMetricDataValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListInsightsMetricData(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

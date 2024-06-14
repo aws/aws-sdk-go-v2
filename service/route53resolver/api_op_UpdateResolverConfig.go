@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/route53resolver/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -33,13 +32,18 @@ type UpdateResolverConfigInput struct {
 
 	// Indicates whether or not the Resolver will create autodefined rules for reverse
 	// DNS lookups. This is enabled by default. Disabling this option will also affect
-	// EC2-Classic instances using ClassicLink. For more information, see ClassicLink (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/vpc-classiclink.html)
-	// in the Amazon EC2 guide. We are retiring EC2-Classic on August 15, 2022. We
-	// recommend that you migrate from EC2-Classic to a VPC. For more information, see
-	// Migrate from EC2-Classic to a VPC (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/vpc-migrate.html)
-	// in the Amazon EC2 guide and the blog EC2-Classic Networking is Retiring –
-	// Here’s How to Prepare (http://aws.amazon.com/blogs/aws/ec2-classic-is-retiring-heres-how-to-prepare/)
-	// . It can take some time for the status change to be completed.
+	// EC2-Classic instances using ClassicLink. For more information, see [ClassicLink]in the
+	// Amazon EC2 guide.
+	//
+	// We are retiring EC2-Classic on August 15, 2022. We recommend that you migrate
+	// from EC2-Classic to a VPC. For more information, see [Migrate from EC2-Classic to a VPC]in the Amazon EC2 guide
+	// and the blog [EC2-Classic Networking is Retiring – Here’s How to Prepare].
+	//
+	// It can take some time for the status change to be completed.
+	//
+	// [ClassicLink]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/vpc-classiclink.html
+	// [Migrate from EC2-Classic to a VPC]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/vpc-migrate.html
+	// [EC2-Classic Networking is Retiring – Here’s How to Prepare]: http://aws.amazon.com/blogs/aws/ec2-classic-is-retiring-heres-how-to-prepare/
 	//
 	// This member is required.
 	AutodefinedReverseFlag types.AutodefinedReverseFlag
@@ -86,25 +90,25 @@ func (c *Client) addOperationUpdateResolverConfigMiddlewares(stack *middleware.S
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -119,13 +123,16 @@ func (c *Client) addOperationUpdateResolverConfigMiddlewares(stack *middleware.S
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpUpdateResolverConfigValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateResolverConfig(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

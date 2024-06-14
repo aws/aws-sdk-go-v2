@@ -6,16 +6,17 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/grafana/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Assigns a Grafana Enterprise license to a workspace. Upgrading to Grafana
-// Enterprise incurs additional fees. For more information, see Upgrade a
-// workspace to Grafana Enterprise (https://docs.aws.amazon.com/grafana/latest/userguide/upgrade-to-Grafana-Enterprise.html)
-// .
+// Assigns a Grafana Enterprise license to a workspace. To upgrade, you must use
+// ENTERPRISE for the licenseType , and pass in a valid Grafana Labs token for the
+// grafanaToken . Upgrading to Grafana Enterprise incurs additional fees. For more
+// information, see [Upgrade a workspace to Grafana Enterprise].
+//
+// [Upgrade a workspace to Grafana Enterprise]: https://docs.aws.amazon.com/grafana/latest/userguide/upgrade-to-Grafana-Enterprise.html
 func (c *Client) AssociateLicense(ctx context.Context, params *AssociateLicenseInput, optFns ...func(*Options)) (*AssociateLicenseOutput, error) {
 	if params == nil {
 		params = &AssociateLicenseInput{}
@@ -35,6 +36,9 @@ type AssociateLicenseInput struct {
 
 	// The type of license to associate with the workspace.
 	//
+	// Amazon Managed Grafana workspaces no longer support Grafana Enterprise free
+	// trials.
+	//
 	// This member is required.
 	LicenseType types.LicenseType
 
@@ -42,6 +46,12 @@ type AssociateLicenseInput struct {
 	//
 	// This member is required.
 	WorkspaceId *string
+
+	// A token from Grafana Labs that ties your Amazon Web Services account with a
+	// Grafana Labs account. For more information, see [Link your account with Grafana Labs].
+	//
+	// [Link your account with Grafana Labs]: https://docs.aws.amazon.com/grafana/latest/userguide/upgrade-to-Grafana-Enterprise.html#AMG-workspace-register-enterprise
+	GrafanaToken *string
 
 	noSmithyDocumentSerde
 }
@@ -81,25 +91,25 @@ func (c *Client) addOperationAssociateLicenseMiddlewares(stack *middleware.Stack
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -114,13 +124,16 @@ func (c *Client) addOperationAssociateLicenseMiddlewares(stack *middleware.Stack
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpAssociateLicenseValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opAssociateLicense(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

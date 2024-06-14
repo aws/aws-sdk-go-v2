@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/backup/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -109,10 +108,12 @@ type DescribeBackupJobOutput struct {
 	// This returns the boolean value that a backup job is a parent (composite) job.
 	IsParent bool
 
-	// This is the job count for the specified message category. Example strings may
-	// include AccessDenied , SUCCESS , AGGREGATE_ALL , and INVALIDPARAMETERS . View
-	// Monitoring (https://docs.aws.amazon.com/aws-backup/latest/devguide/monitoring.html)
-	// for a list of accepted MessageCategory strings.
+	// This is the job count for the specified message category.
+	//
+	// Example strings may include AccessDenied , SUCCESS , AGGREGATE_ALL , and
+	// INVALIDPARAMETERS . View [Monitoring] for a list of accepted MessageCategory strings.
+	//
+	// [Monitoring]: https://docs.aws.amazon.com/aws-backup/latest/devguide/monitoring.html
 	MessageCategory *string
 
 	// This returns the number of child (nested) backup jobs.
@@ -186,25 +187,25 @@ func (c *Client) addOperationDescribeBackupJobMiddlewares(stack *middleware.Stac
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -219,13 +220,16 @@ func (c *Client) addOperationDescribeBackupJobMiddlewares(stack *middleware.Stac
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDescribeBackupJobValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeBackupJob(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

@@ -6,16 +6,16 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/mediatailor/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
-// Describes a channel. For information about MediaTailor channels, see Working
-// with channels (https://docs.aws.amazon.com/mediatailor/latest/ug/channel-assembly-channels.html)
-// in the MediaTailor User Guide.
+// Describes a channel. For information about MediaTailor channels, see [Working with channels] in the
+// MediaTailor User Guide.
+//
+// [Working with channels]: https://docs.aws.amazon.com/mediatailor/latest/ug/channel-assembly-channels.html
 func (c *Client) DescribeChannel(ctx context.Context, params *DescribeChannelInput, optFns ...func(*Options)) (*DescribeChannelOutput, error) {
 	if params == nil {
 		params = &DescribeChannelInput{}
@@ -51,6 +51,9 @@ type DescribeChannelOutput struct {
 	// The ARN of the channel.
 	Arn *string
 
+	// The list of audiences defined in channel.
+	Audiences []string
+
 	// The name of the channel.
 	ChannelName *string
 
@@ -75,14 +78,15 @@ type DescribeChannelOutput struct {
 
 	// The tags assigned to the channel. Tags are key-value pairs that you can
 	// associate with Amazon resources to help with organization, access control, and
-	// cost tracking. For more information, see Tagging AWS Elemental MediaTailor
-	// Resources (https://docs.aws.amazon.com/mediatailor/latest/ug/tagging.html) .
+	// cost tracking. For more information, see [Tagging AWS Elemental MediaTailor Resources].
+	//
+	// [Tagging AWS Elemental MediaTailor Resources]: https://docs.aws.amazon.com/mediatailor/latest/ug/tagging.html
 	Tags map[string]string
 
 	// The channel's tier.
 	Tier *string
 
-	// The time-shifted viewing configuration for the channel.
+	//  The time-shifted viewing configuration for the channel.
 	TimeShiftConfiguration *types.TimeShiftConfiguration
 
 	// Metadata pertaining to the operation's result.
@@ -113,25 +117,25 @@ func (c *Client) addOperationDescribeChannelMiddlewares(stack *middleware.Stack,
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -146,13 +150,16 @@ func (c *Client) addOperationDescribeChannelMiddlewares(stack *middleware.Stack,
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDescribeChannelValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeChannel(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

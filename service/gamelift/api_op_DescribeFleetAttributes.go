@@ -6,26 +6,41 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/gamelift/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Retrieves core fleet-wide properties, including the computing hardware and
-// deployment configuration for all instances in the fleet. This operation can be
-// used in the following ways:
-//   - To get attributes for one or more specific fleets, provide a list of fleet
-//     IDs or fleet ARNs.
+//	This operation has been expanded to use with the Amazon GameLift containers
+//
+// feature, which is currently in public preview.
+//
+// Retrieves core fleet-wide properties for fleets in an Amazon Web Services
+// Region. Properties include the computing hardware and deployment configuration
+// for instances in the fleet.
+//
+// You can use this operation in the following ways:
+//
+//   - To get attributes for specific fleets, provide a list of fleet IDs or fleet
+//     ARNs.
+//
 //   - To get attributes for all fleets, do not provide a fleet identifier.
 //
 // When requesting attributes for multiple fleets, use the pagination parameters
-// to retrieve results as a set of sequential pages. If successful, a
-// FleetAttributes object is returned for each fleet requested, unless the fleet
-// identifier is not found. Some API operations limit the number of fleet IDs that
-// allowed in one request. If a request exceeds this limit, the request fails and
-// the error message contains the maximum allowed number. Learn more Setting up
-// Amazon GameLift fleets (https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-intro.html)
+// to retrieve results as a set of sequential pages.
+//
+// If successful, a FleetAttributes object is returned for each fleet requested,
+// unless the fleet identifier is not found.
+//
+// Some API operations limit the number of fleet IDs that allowed in one request.
+// If a request exceeds this limit, the request fails and the error message
+// contains the maximum allowed number.
+//
+// # Learn more
+//
+// [Setting up Amazon GameLift fleets]
+//
+// [Setting up Amazon GameLift fleets]: https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-intro.html
 func (c *Client) DescribeFleetAttributes(ctx context.Context, params *DescribeFleetAttributesInput, optFns ...func(*Options)) (*DescribeFleetAttributesOutput, error) {
 	if params == nil {
 		params = &DescribeFleetAttributesInput{}
@@ -101,25 +116,25 @@ func (c *Client) addOperationDescribeFleetAttributesMiddlewares(stack *middlewar
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -134,10 +149,13 @@ func (c *Client) addOperationDescribeFleetAttributesMiddlewares(stack *middlewar
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeFleetAttributes(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

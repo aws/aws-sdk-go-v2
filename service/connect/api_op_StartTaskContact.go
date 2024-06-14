@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/connect/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -14,18 +13,26 @@ import (
 )
 
 // Initiates a flow to start a new task contact. For more information about task
-// contacts, see Concepts: Tasks in Amazon Connect (https://docs.aws.amazon.com/connect/latest/adminguide/tasks.html)
-// in the Amazon Connect Administrator Guide. When using PreviousContactId and
-// RelatedContactId input parameters, note the following:
+// contacts, see [Concepts: Tasks in Amazon Connect]in the Amazon Connect Administrator Guide.
+//
+// When using PreviousContactId and RelatedContactId input parameters, note the
+// following:
+//
 //   - PreviousContactId
+//
 //   - Any updates to user-defined task contact attributes on any contact linked
 //     through the same PreviousContactId will affect every contact in the chain.
+//
 //   - There can be a maximum of 12 linked task contacts in a chain. That is, 12
 //     task contacts can be created that share the same PreviousContactId .
+//
 //   - RelatedContactId
+//
 //   - Copies contact attributes from the related task contact to the new contact.
+//
 //   - Any update on attributes in a new task contact does not update attributes
 //     on previous contact.
+//
 //   - There’s no limit on the number of task contacts that can be created that
 //     use the same RelatedContactId .
 //
@@ -35,11 +42,15 @@ import (
 // it. If more than one parameter is specified, or only the TaskTemplateID is
 // specified but it does not have a flow configured, the request returns an error
 // because Amazon Connect cannot identify the unique flow to run when the task is
-// created. A ServiceQuotaExceededException occurs when the number of open tasks
-// exceeds the active tasks quota or there are already 12 tasks referencing the
-// same PreviousContactId . For more information about service quotas for task
-// contacts, see Amazon Connect service quotas (https://docs.aws.amazon.com/connect/latest/adminguide/amazon-connect-service-limits.html)
-// in the Amazon Connect Administrator Guide.
+// created.
+//
+// A ServiceQuotaExceededException occurs when the number of open tasks exceeds
+// the active tasks quota or there are already 12 tasks referencing the same
+// PreviousContactId . For more information about service quotas for task contacts,
+// see [Amazon Connect service quotas]in the Amazon Connect Administrator Guide.
+//
+// [Amazon Connect service quotas]: https://docs.aws.amazon.com/connect/latest/adminguide/amazon-connect-service-limits.html
+// [Concepts: Tasks in Amazon Connect]: https://docs.aws.amazon.com/connect/latest/adminguide/tasks.html
 func (c *Client) StartTaskContact(ctx context.Context, params *StartTaskContactInput, optFns ...func(*Options)) (*StartTaskContactOutput, error) {
 	if params == nil {
 		params = &StartTaskContactInput{}
@@ -57,8 +68,10 @@ func (c *Client) StartTaskContact(ctx context.Context, params *StartTaskContactI
 
 type StartTaskContactInput struct {
 
-	// The identifier of the Amazon Connect instance. You can find the instance ID (https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html)
-	// in the Amazon Resource Name (ARN) of the instance.
+	// The identifier of the Amazon Connect instance. You can [find the instance ID] in the Amazon Resource
+	// Name (ARN) of the instance.
+	//
+	// [find the instance ID]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
 	//
 	// This member is required.
 	InstanceId *string
@@ -70,16 +83,17 @@ type StartTaskContactInput struct {
 
 	// A custom key-value pair using an attribute map. The attributes are standard
 	// Amazon Connect attributes, and can be accessed in flows just like any other
-	// contact attributes. There can be up to 32,768 UTF-8 bytes across all key-value
-	// pairs per contact. Attribute keys can include only alphanumeric, dash, and
-	// underscore characters.
+	// contact attributes.
+	//
+	// There can be up to 32,768 UTF-8 bytes across all key-value pairs per contact.
+	// Attribute keys can include only alphanumeric, dash, and underscore characters.
 	Attributes map[string]string
 
 	// A unique, case-sensitive identifier that you provide to ensure the idempotency
 	// of the request. If not provided, the Amazon Web Services SDK populates this
-	// field. For more information about idempotency, see Making retries safe with
-	// idempotent APIs (https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/)
-	// .
+	// field. For more information about idempotency, see [Making retries safe with idempotent APIs].
+	//
+	// [Making retries safe with idempotent APIs]: https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/
 	ClientToken *string
 
 	// The identifier of the flow for initiating the tasks. To see the ContactFlowId
@@ -87,6 +101,7 @@ type StartTaskContactInput struct {
 	// Contact Flows. Choose the flow. On the flow page, under the name of the flow,
 	// choose Show additional flow information. The ContactFlowId is the last part of
 	// the ARN, shown here in bold:
+	//
 	// arn:aws:connect:us-west-2:xxxxxxxxxxxx:instance/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/contact-flow/846ec553-a005-41c0-8341-xxxxxxxxxxxx
 	ContactFlowId *string
 
@@ -102,8 +117,9 @@ type StartTaskContactInput struct {
 
 	// The identifier for the quick connect. Tasks that are created by using
 	// QuickConnectId will use the flow that is defined on agent or queue quick
-	// connect. For more information about quick connects, see Create quick connects (https://docs.aws.amazon.com/connect/latest/adminguide/quick-connects.html)
-	// .
+	// connect. For more information about quick connects, see [Create quick connects].
+	//
+	// [Create quick connects]: https://docs.aws.amazon.com/connect/latest/adminguide/quick-connects.html
 	QuickConnectId *string
 
 	// A formatted URL that is shown to an agent in the Contact Control Panel (CCP).
@@ -112,13 +128,14 @@ type StartTaskContactInput struct {
 	// during task creation.
 	References map[string]types.Reference
 
-	// The contactId that is related (https://docs.aws.amazon.com/connect/latest/adminguide/tasks.html#linked-tasks)
-	// to this contact. Linking tasks together by using RelatedContactID copies over
-	// contact attributes from the related task contact to the new task contact. All
-	// updates to user-defined attributes in the new task contact are limited to the
-	// individual contact ID, unlike what happens when tasks are linked by using
-	// PreviousContactID . There are no limits to the number of contacts that can be
-	// linked by using RelatedContactId .
+	// The contactId that is [related] to this contact. Linking tasks together by using
+	// RelatedContactID copies over contact attributes from the related task contact to
+	// the new task contact. All updates to user-defined attributes in the new task
+	// contact are limited to the individual contact ID, unlike what happens when tasks
+	// are linked by using PreviousContactID . There are no limits to the number of
+	// contacts that can be linked by using RelatedContactId .
+	//
+	// [related]: https://docs.aws.amazon.com/connect/latest/adminguide/tasks.html#linked-tasks
 	RelatedContactId *string
 
 	// The timestamp, in Unix Epoch seconds format, at which to start running the
@@ -127,8 +144,9 @@ type StartTaskContactInput struct {
 	ScheduledTime *time.Time
 
 	// A unique identifier for the task template. For more information about task
-	// templates, see Create task templates (https://docs.aws.amazon.com/connect/latest/adminguide/task-templates.html)
-	// in the Amazon Connect Administrator Guide.
+	// templates, see [Create task templates]in the Amazon Connect Administrator Guide.
+	//
+	// [Create task templates]: https://docs.aws.amazon.com/connect/latest/adminguide/task-templates.html
 	TaskTemplateId *string
 
 	noSmithyDocumentSerde
@@ -167,25 +185,25 @@ func (c *Client) addOperationStartTaskContactMiddlewares(stack *middleware.Stack
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -200,6 +218,9 @@ func (c *Client) addOperationStartTaskContactMiddlewares(stack *middleware.Stack
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opStartTaskContactMiddleware(stack, options); err != nil {
 		return err
 	}
@@ -209,7 +230,7 @@ func (c *Client) addOperationStartTaskContactMiddlewares(stack *middleware.Stack
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opStartTaskContact(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

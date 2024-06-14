@@ -6,16 +6,18 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/rds/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Stops automated backup replication for a DB instance. This command doesn't
-// apply to RDS Custom, Aurora MySQL, and Aurora PostgreSQL. For more information,
-// see Replicating Automated Backups to Another Amazon Web Services Region (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_ReplicateBackups.html)
-// in the Amazon RDS User Guide.
+// Stops automated backup replication for a DB instance.
+//
+// This command doesn't apply to RDS Custom, Aurora MySQL, and Aurora PostgreSQL.
+//
+// For more information, see [Replicating Automated Backups to Another Amazon Web Services Region] in the Amazon RDS User Guide.
+//
+// [Replicating Automated Backups to Another Amazon Web Services Region]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_ReplicateBackups.html
 func (c *Client) StopDBInstanceAutomatedBackupsReplication(ctx context.Context, params *StopDBInstanceAutomatedBackupsReplicationInput, optFns ...func(*Options)) (*StopDBInstanceAutomatedBackupsReplicationOutput, error) {
 	if params == nil {
 		params = &StopDBInstanceAutomatedBackupsReplicationInput{}
@@ -78,25 +80,25 @@ func (c *Client) addOperationStopDBInstanceAutomatedBackupsReplicationMiddleware
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -111,13 +113,16 @@ func (c *Client) addOperationStopDBInstanceAutomatedBackupsReplicationMiddleware
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpStopDBInstanceAutomatedBackupsReplicationValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opStopDBInstanceAutomatedBackupsReplication(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

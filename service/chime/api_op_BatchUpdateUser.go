@@ -6,15 +6,14 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/chime/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates user details within the UpdateUserRequestItem object for up to 20 users
-// for the specified Amazon Chime account. Currently, only LicenseType updates are
-// supported for this action.
+// Updates user details within the UpdateUserRequestItem object for up to 20 users for the specified
+// Amazon Chime account. Currently, only LicenseType updates are supported for
+// this action.
 func (c *Client) BatchUpdateUser(ctx context.Context, params *BatchUpdateUserInput, optFns ...func(*Options)) (*BatchUpdateUserOutput, error) {
 	if params == nil {
 		params = &BatchUpdateUserInput{}
@@ -47,9 +46,8 @@ type BatchUpdateUserInput struct {
 
 type BatchUpdateUserOutput struct {
 
-	// If the BatchUpdateUser action fails for one or more of the user IDs in the
-	// request, a list of the user IDs is returned, along with error codes and error
-	// messages.
+	// If the BatchUpdateUser action fails for one or more of the user IDs in the request, a list of
+	// the user IDs is returned, along with error codes and error messages.
 	UserErrors []types.UserError
 
 	// Metadata pertaining to the operation's result.
@@ -80,25 +78,25 @@ func (c *Client) addOperationBatchUpdateUserMiddlewares(stack *middleware.Stack,
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -113,13 +111,16 @@ func (c *Client) addOperationBatchUpdateUserMiddlewares(stack *middleware.Stack,
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpBatchUpdateUserValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opBatchUpdateUser(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

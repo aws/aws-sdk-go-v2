@@ -6,19 +6,20 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/databasemigrationservice/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Starts a new premigration assessment run for one or more individual assessments
-// of a migration task. The assessments that you can specify depend on the source
-// and target database engine and the migration type defined for the given task. To
-// run this operation, your migration task must already be created. After you run
-// this operation, you can review the status of each individual assessment. You can
-// also run the migration task manually after the assessment run and its individual
-// assessments complete.
+// of a migration task.
+//
+// The assessments that you can specify depend on the source and target database
+// engine and the migration type defined for the given task. To run this operation,
+// your migration task must already be created. After you run this operation, you
+// can review the status of each individual assessment. You can also run the
+// migration task manually after the assessment run and its individual assessments
+// complete.
 func (c *Client) StartReplicationTaskAssessmentRun(ctx context.Context, params *StartReplicationTaskAssessmentRunInput, optFns ...func(*Options)) (*StartReplicationTaskAssessmentRunOutput, error) {
 	if params == nil {
 		params = &StartReplicationTaskAssessmentRunInput{}
@@ -61,27 +62,37 @@ type StartReplicationTaskAssessmentRunInput struct {
 	// Space-separated list of names for specific individual assessments that you want
 	// to exclude. These names come from the default list of individual assessments
 	// that DMS supports for the associated migration task. This task is specified by
-	// ReplicationTaskArn . You can't set a value for Exclude if you also set a value
-	// for IncludeOnly in the API operation. To identify the names of the default
-	// individual assessments that DMS supports for the associated migration task, run
-	// the DescribeApplicableIndividualAssessments operation using its own
+	// ReplicationTaskArn .
+	//
+	// You can't set a value for Exclude if you also set a value for IncludeOnly in
+	// the API operation.
+	//
+	// To identify the names of the default individual assessments that DMS supports
+	// for the associated migration task, run the
+	// DescribeApplicableIndividualAssessments operation using its own
 	// ReplicationTaskArn request parameter.
 	Exclude []string
 
 	// Space-separated list of names for specific individual assessments that you want
 	// to include. These names come from the default list of individual assessments
 	// that DMS supports for the associated migration task. This task is specified by
-	// ReplicationTaskArn . You can't set a value for IncludeOnly if you also set a
-	// value for Exclude in the API operation. To identify the names of the default
-	// individual assessments that DMS supports for the associated migration task, run
-	// the DescribeApplicableIndividualAssessments operation using its own
+	// ReplicationTaskArn .
+	//
+	// You can't set a value for IncludeOnly if you also set a value for Exclude in
+	// the API operation.
+	//
+	// To identify the names of the default individual assessments that DMS supports
+	// for the associated migration task, run the
+	// DescribeApplicableIndividualAssessments operation using its own
 	// ReplicationTaskArn request parameter.
 	IncludeOnly []string
 
 	// Encryption mode that you can specify to encrypt the results of this assessment
 	// run. If you don't specify this request parameter, DMS stores the assessment run
 	// results without encryption. You can specify one of the options following:
+	//
 	//   - "SSE_S3" – The server-side encryption provided as a default by Amazon S3.
+	//
 	//   - "SSE_KMS" – Key Management Service (KMS) encryption. This encryption can use
 	//   either a custom KMS encryption key that you specify or the default KMS
 	//   encryption key that DMS provides.
@@ -131,25 +142,25 @@ func (c *Client) addOperationStartReplicationTaskAssessmentRunMiddlewares(stack 
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -164,13 +175,16 @@ func (c *Client) addOperationStartReplicationTaskAssessmentRunMiddlewares(stack 
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpStartReplicationTaskAssessmentRunValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opStartReplicationTaskAssessmentRun(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

@@ -6,21 +6,30 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// This action is no longer supported. You can use it to configure only SMS MFA.
+//	This action is no longer supported. You can use it to configure only SMS MFA.
+//
 // You can't use it to configure time-based one-time password (TOTP) software token
-// MFA. To configure either type of MFA, use AdminSetUserMFAPreference (https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_AdminSetUserMFAPreference.html)
-// instead. Amazon Cognito evaluates Identity and Access Management (IAM) policies
-// in requests for this API operation. For this operation, you must use IAM
+// MFA. To configure either type of MFA, use [AdminSetUserMFAPreference]instead.
+//
+// Amazon Cognito evaluates Identity and Access Management (IAM) policies in
+// requests for this API operation. For this operation, you must use IAM
 // credentials to authorize requests, and you must grant yourself the corresponding
-// IAM permission in a policy. Learn more
-//   - Signing Amazon Web Services API Requests (https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_aws-signing.html)
-//   - Using the Amazon Cognito user pools API and user pool endpoints (https://docs.aws.amazon.com/cognito/latest/developerguide/user-pools-API-operations.html)
+// IAM permission in a policy.
+//
+// # Learn more
+//
+// [Signing Amazon Web Services API Requests]
+//
+// [Using the Amazon Cognito user pools API and user pool endpoints]
+//
+// [Using the Amazon Cognito user pools API and user pool endpoints]: https://docs.aws.amazon.com/cognito/latest/developerguide/user-pools-API-operations.html
+// [Signing Amazon Web Services API Requests]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_aws-signing.html
+// [AdminSetUserMFAPreference]: https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_AdminSetUserMFAPreference.html
 func (c *Client) AdminSetUserSettings(ctx context.Context, params *AdminSetUserSettingsInput, optFns ...func(*Options)) (*AdminSetUserSettingsOutput, error) {
 	if params == nil {
 		params = &AdminSetUserSettingsInput{}
@@ -53,8 +62,9 @@ type AdminSetUserSettingsInput struct {
 
 	// The username of the user that you want to query or modify. The value of this
 	// parameter is typically your user's username, but it can be any of their alias
-	// attributes. If username isn't an alias attribute in your user pool, you can
-	// also use their sub in this request.
+	// attributes. If username isn't an alias attribute in your user pool, this value
+	// must be the sub of a local user or the username of a user from a third-party
+	// IdP.
 	//
 	// This member is required.
 	Username *string
@@ -93,25 +103,25 @@ func (c *Client) addOperationAdminSetUserSettingsMiddlewares(stack *middleware.S
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -126,13 +136,16 @@ func (c *Client) addOperationAdminSetUserSettingsMiddlewares(stack *middleware.S
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpAdminSetUserSettingsValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opAdminSetUserSettings(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

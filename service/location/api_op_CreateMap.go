@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/location/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -14,11 +13,13 @@ import (
 )
 
 // Creates a map resource in your Amazon Web Services account, which provides map
-// tiles of different styles sourced from global location data providers. If your
-// application is tracking or routing assets you use in your business, such as
-// delivery vehicles or employees, you must not use Esri as your geolocation
-// provider. See section 82 of the Amazon Web Services service terms (http://aws.amazon.com/service-terms)
-// for more details.
+// tiles of different styles sourced from global location data providers.
+//
+// If your application is tracking or routing assets you use in your business,
+// such as delivery vehicles or employees, you must not use Esri as your
+// geolocation provider. See section 82 of the [Amazon Web Services service terms]for more details.
+//
+// [Amazon Web Services service terms]: http://aws.amazon.com/service-terms
 func (c *Client) CreateMap(ctx context.Context, params *CreateMapInput, optFns ...func(*Options)) (*CreateMapOutput, error) {
 	if params == nil {
 		params = &CreateMapInput{}
@@ -43,10 +44,15 @@ type CreateMapInput struct {
 	// This member is required.
 	Configuration *types.MapConfiguration
 
-	// The name for the map resource. Requirements:
+	// The name for the map resource.
+	//
+	// Requirements:
+	//
 	//   - Must contain only alphanumeric characters (A–Z, a–z, 0–9), hyphens (-),
 	//   periods (.), and underscores (_).
+	//
 	//   - Must be a unique map resource name.
+	//
 	//   - No spaces allowed. For example, ExampleMap .
 	//
 	// This member is required.
@@ -62,14 +68,23 @@ type CreateMapInput struct {
 	PricingPlan types.PricingPlan
 
 	// Applies one or more tags to the map resource. A tag is a key-value pair helps
-	// manage, identify, search, and filter your resources by labelling them. Format:
-	// "key" : "value" Restrictions:
+	// manage, identify, search, and filter your resources by labelling them.
+	//
+	// Format: "key" : "value"
+	//
+	// Restrictions:
+	//
 	//   - Maximum 50 tags per resource
+	//
 	//   - Each resource tag must be unique with a maximum of one value.
+	//
 	//   - Maximum key length: 128 Unicode characters in UTF-8
+	//
 	//   - Maximum value length: 256 Unicode characters in UTF-8
+	//
 	//   - Can use alphanumeric characters (A–Z, a–z, 0–9), and the following
 	//   characters: + - = . _ : / @.
+	//
 	//   - Cannot use "aws:" as a prefix for a key.
 	Tags map[string]string
 
@@ -78,14 +93,17 @@ type CreateMapInput struct {
 
 type CreateMapOutput struct {
 
-	// The timestamp for when the map resource was created in ISO 8601 (https://www.iso.org/iso-8601-date-and-time-format.html)
-	// format: YYYY-MM-DDThh:mm:ss.sssZ .
+	// The timestamp for when the map resource was created in [ISO 8601] format:
+	// YYYY-MM-DDThh:mm:ss.sssZ .
+	//
+	// [ISO 8601]: https://www.iso.org/iso-8601-date-and-time-format.html
 	//
 	// This member is required.
 	CreateTime *time.Time
 
 	// The Amazon Resource Name (ARN) for the map resource. Used to specify a resource
 	// across all Amazon Web Services.
+	//
 	//   - Format example: arn:aws:geo:region:account-id:map/ExampleMap
 	//
 	// This member is required.
@@ -124,25 +142,25 @@ func (c *Client) addOperationCreateMapMiddlewares(stack *middleware.Stack, optio
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -157,6 +175,9 @@ func (c *Client) addOperationCreateMapMiddlewares(stack *middleware.Stack, optio
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addEndpointPrefix_opCreateMapMiddleware(stack); err != nil {
 		return err
 	}
@@ -166,7 +187,7 @@ func (c *Client) addOperationCreateMapMiddlewares(stack *middleware.Stack, optio
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateMap(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

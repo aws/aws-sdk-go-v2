@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/sfn/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -16,10 +15,12 @@ import (
 // Provides information about a state machine's definition, its execution role
 // ARN, and configuration. If a Map Run dispatched the execution, this action
 // returns the Map Run Amazon Resource Name (ARN) in the response. The state
-// machine returned is the state machine associated with the Map Run. This
-// operation is eventually consistent. The results are best effort and may not
-// reflect very recent updates and changes. This API action is not supported by
-// EXPRESS state machines.
+// machine returned is the state machine associated with the Map Run.
+//
+// This operation is eventually consistent. The results are best effort and may
+// not reflect very recent updates and changes.
+//
+// This API action is not supported by EXPRESS state machines.
 func (c *Client) DescribeStateMachineForExecution(ctx context.Context, params *DescribeStateMachineForExecutionInput, optFns ...func(*Options)) (*DescribeStateMachineForExecutionOutput, error) {
 	if params == nil {
 		params = &DescribeStateMachineForExecutionInput{}
@@ -48,9 +49,9 @@ type DescribeStateMachineForExecutionInput struct {
 
 type DescribeStateMachineForExecutionOutput struct {
 
-	// The Amazon States Language definition of the state machine. See Amazon States
-	// Language (https://docs.aws.amazon.com/step-functions/latest/dg/concepts-amazon-states-language.html)
-	// .
+	// The Amazon States Language definition of the state machine. See [Amazon States Language].
+	//
+	// [Amazon States Language]: https://docs.aws.amazon.com/step-functions/latest/dg/concepts-amazon-states-language.html
 	//
 	// This member is required.
 	Definition *string
@@ -92,10 +93,11 @@ type DescribeStateMachineForExecutionOutput struct {
 	MapRunArn *string
 
 	// The revision identifier for the state machine. The first revision ID when you
-	// create the state machine is null. Use the state machine revisionId parameter to
-	// compare the revision of a state machine with the configuration of the state
-	// machine used for executions without performing a diff of the properties, such as
-	// definition and roleArn .
+	// create the state machine is null.
+	//
+	// Use the state machine revisionId parameter to compare the revision of a state
+	// machine with the configuration of the state machine used for executions without
+	// performing a diff of the properties, such as definition and roleArn .
 	RevisionId *string
 
 	// Selects whether X-Ray tracing is enabled.
@@ -129,25 +131,25 @@ func (c *Client) addOperationDescribeStateMachineForExecutionMiddlewares(stack *
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -162,13 +164,16 @@ func (c *Client) addOperationDescribeStateMachineForExecutionMiddlewares(stack *
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDescribeStateMachineForExecutionValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeStateMachineForExecution(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

@@ -6,14 +6,18 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"io"
 )
 
-// For asynchronous function invocation, use Invoke . Invokes a function
-// asynchronously.
+// For asynchronous function invocation, use Invoke.
+//
+// Invokes a function asynchronously.
+//
+// If you do use the InvokeAsync action, note that it doesn't support the use of
+// X-Ray active tracing. Trace ID is not propagated to the function, even if X-Ray
+// active tracing is turned on.
 //
 // Deprecated: This operation has been deprecated.
 func (c *Client) InvokeAsync(ctx context.Context, params *InvokeAsyncInput, optFns ...func(*Options)) (*InvokeAsyncOutput, error) {
@@ -33,10 +37,16 @@ func (c *Client) InvokeAsync(ctx context.Context, params *InvokeAsyncInput, optF
 
 type InvokeAsyncInput struct {
 
-	// The name of the Lambda function. Name formats
+	// The name or ARN of the Lambda function.
+	//
+	// Name formats
+	//
 	//   - Function name – my-function .
+	//
 	//   - Function ARN – arn:aws:lambda:us-west-2:123456789012:function:my-function .
+	//
 	//   - Partial ARN – 123456789012:function:my-function .
+	//
 	// The length constraint applies only to the full ARN. If you specify only the
 	// function name, it is limited to 64 characters in length.
 	//
@@ -86,25 +96,25 @@ func (c *Client) addOperationInvokeAsyncMiddlewares(stack *middleware.Stack, opt
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -119,13 +129,16 @@ func (c *Client) addOperationInvokeAsyncMiddlewares(stack *middleware.Stack, opt
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpInvokeAsyncValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opInvokeAsync(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/paymentcryptography/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -14,15 +13,24 @@ import (
 )
 
 // Gets the export token and the signing key certificate to initiate a TR-34 key
-// export from Amazon Web Services Payment Cryptography. The signing key
-// certificate signs the wrapped key under export within the TR-34 key payload. The
-// export token and signing key certificate must be in place and operational before
-// calling ExportKey . The export token expires in 7 days. You can use the same
-// export token to export multiple keys from your service account. Cross-account
-// use: This operation can't be used across different Amazon Web Services accounts.
+// export from Amazon Web Services Payment Cryptography.
+//
+// The signing key certificate signs the wrapped key under export within the TR-34
+// key payload. The export token and signing key certificate must be in place and
+// operational before calling [ExportKey]. The export token expires in 7 days. You can use
+// the same export token to export multiple keys from your service account.
+//
+// Cross-account use: This operation can't be used across different Amazon Web
+// Services accounts.
+//
 // Related operations:
-//   - ExportKey
-//   - GetParametersForImport
+//
+// [ExportKey]
+//
+// [GetParametersForImport]
+//
+// [ExportKey]: https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_ExportKey.html
+// [GetParametersForImport]: https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_GetParametersForImport.html
 func (c *Client) GetParametersForExport(ctx context.Context, params *GetParametersForExportInput, optFns ...func(*Options)) (*GetParametersForExportOutput, error) {
 	if params == nil {
 		params = &GetParametersForExportInput{}
@@ -117,25 +125,25 @@ func (c *Client) addOperationGetParametersForExportMiddlewares(stack *middleware
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -150,13 +158,16 @@ func (c *Client) addOperationGetParametersForExportMiddlewares(stack *middleware
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpGetParametersForExportValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetParametersForExport(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

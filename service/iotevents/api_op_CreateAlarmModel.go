@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/iotevents/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -15,8 +14,9 @@ import (
 
 // Creates an alarm model to monitor an AWS IoT Events input attribute. You can
 // use the alarm to get notified when the value is outside a specified range. For
-// more information, see Create an alarm model (https://docs.aws.amazon.com/iotevents/latest/developerguide/create-alarms.html)
-// in the AWS IoT Events Developer Guide.
+// more information, see [Create an alarm model]in the AWS IoT Events Developer Guide.
+//
+// [Create an alarm model]: https://docs.aws.amazon.com/iotevents/latest/developerguide/create-alarms.html
 func (c *Client) CreateAlarmModel(ctx context.Context, params *CreateAlarmModelInput, optFns ...func(*Options)) (*CreateAlarmModelOutput, error) {
 	if params == nil {
 		params = &CreateAlarmModelInput{}
@@ -46,8 +46,9 @@ type CreateAlarmModelInput struct {
 	AlarmRule *types.AlarmRule
 
 	// The ARN of the IAM role that allows the alarm to perform actions and access AWS
-	// resources. For more information, see Amazon Resource Names (ARNs) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
-	// in the AWS General Reference.
+	// resources. For more information, see [Amazon Resource Names (ARNs)]in the AWS General Reference.
+	//
+	// [Amazon Resource Names (ARNs)]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
 	//
 	// This member is required.
 	RoleArn *string
@@ -64,19 +65,22 @@ type CreateAlarmModelInput struct {
 	// Contains information about one or more notification actions.
 	AlarmNotification *types.AlarmNotification
 
-	// An input attribute used as a key to create an alarm. AWS IoT Events routes
-	// inputs (https://docs.aws.amazon.com/iotevents/latest/apireference/API_Input.html)
+	// An input attribute used as a key to create an alarm. AWS IoT Events routes [inputs]
 	// associated with this key to the alarm.
+	//
+	// [inputs]: https://docs.aws.amazon.com/iotevents/latest/apireference/API_Input.html
 	Key *string
 
 	// A non-negative integer that reflects the severity level of the alarm.
 	Severity *int32
 
 	// A list of key-value pairs that contain metadata for the alarm model. The tags
-	// help you manage the alarm model. For more information, see Tagging your AWS IoT
-	// Events resources (https://docs.aws.amazon.com/iotevents/latest/developerguide/tagging-iotevents.html)
-	// in the AWS IoT Events Developer Guide. You can create up to 50 tags for one
-	// alarm model.
+	// help you manage the alarm model. For more information, see [Tagging your AWS IoT Events resources]in the AWS IoT
+	// Events Developer Guide.
+	//
+	// You can create up to 50 tags for one alarm model.
+	//
+	// [Tagging your AWS IoT Events resources]: https://docs.aws.amazon.com/iotevents/latest/developerguide/tagging-iotevents.html
 	Tags []types.Tag
 
 	noSmithyDocumentSerde
@@ -84,9 +88,10 @@ type CreateAlarmModelInput struct {
 
 type CreateAlarmModelOutput struct {
 
-	// The ARN of the alarm model. For more information, see Amazon Resource Names
-	// (ARNs) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
-	// in the AWS General Reference.
+	// The ARN of the alarm model. For more information, see [Amazon Resource Names (ARNs)] in the AWS General
+	// Reference.
+	//
+	// [Amazon Resource Names (ARNs)]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
 	AlarmModelArn *string
 
 	// The version of the alarm model.
@@ -99,11 +104,15 @@ type CreateAlarmModelOutput struct {
 	LastUpdateTime *time.Time
 
 	// The status of the alarm model. The status can be one of the following values:
+	//
 	//   - ACTIVE - The alarm model is active and it's ready to evaluate data.
+	//
 	//   - ACTIVATING - AWS IoT Events is activating your alarm model. Activating an
 	//   alarm model can take up to a few minutes.
+	//
 	//   - INACTIVE - The alarm model is inactive, so it isn't ready to evaluate data.
 	//   Check your alarm model information and update the alarm model.
+	//
 	//   - FAILED - You couldn't create or update the alarm model. Check your alarm
 	//   model information and try again.
 	Status types.AlarmModelVersionStatus
@@ -136,25 +145,25 @@ func (c *Client) addOperationCreateAlarmModelMiddlewares(stack *middleware.Stack
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -169,13 +178,16 @@ func (c *Client) addOperationCreateAlarmModelMiddlewares(stack *middleware.Stack
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpCreateAlarmModelValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateAlarmModel(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

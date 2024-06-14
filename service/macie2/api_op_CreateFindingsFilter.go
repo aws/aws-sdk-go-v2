@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/macie2/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -43,10 +42,11 @@ type CreateFindingsFilterInput struct {
 	FindingCriteria *types.FindingCriteria
 
 	// A custom name for the filter. The name must contain at least 3 characters and
-	// can contain as many as 64 characters. We strongly recommend that you avoid
-	// including any sensitive data in the name of a filter. Other users of your
-	// account might be able to see this name, depending on the actions that they're
-	// allowed to perform in Amazon Macie.
+	// can contain as many as 64 characters.
+	//
+	// We strongly recommend that you avoid including any sensitive data in the name
+	// of a filter. Other users of your account might be able to see this name,
+	// depending on the actions that they're allowed to perform in Amazon Macie.
 	//
 	// This member is required.
 	Name *string
@@ -56,10 +56,12 @@ type CreateFindingsFilterInput struct {
 	ClientToken *string
 
 	// A custom description of the filter. The description can contain as many as 512
-	// characters. We strongly recommend that you avoid including any sensitive data in
-	// the description of a filter. Other users of your account might be able to see
-	// this description, depending on the actions that they're allowed to perform in
-	// Amazon Macie.
+	// characters.
+	//
+	// We strongly recommend that you avoid including any sensitive data in the
+	// description of a filter. Other users of your account might be able to see this
+	// description, depending on the actions that they're allowed to perform in Amazon
+	// Macie.
 	Description *string
 
 	// The position of the filter in the list of saved filters on the Amazon Macie
@@ -68,6 +70,7 @@ type CreateFindingsFilterInput struct {
 	Position *int32
 
 	// A map of key-value pairs that specifies the tags to associate with the filter.
+	//
 	// A findings filter can have a maximum of 50 tags. Each tag consists of a tag key
 	// and an associated tag value. The maximum length of a tag key is 128 characters.
 	// The maximum length of a tag value is 256 characters.
@@ -112,25 +115,25 @@ func (c *Client) addOperationCreateFindingsFilterMiddlewares(stack *middleware.S
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -145,6 +148,9 @@ func (c *Client) addOperationCreateFindingsFilterMiddlewares(stack *middleware.S
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opCreateFindingsFilterMiddleware(stack, options); err != nil {
 		return err
 	}
@@ -154,7 +160,7 @@ func (c *Client) addOperationCreateFindingsFilterMiddlewares(stack *middleware.S
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateFindingsFilter(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

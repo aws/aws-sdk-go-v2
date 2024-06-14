@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/personalizeevents/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -14,11 +13,13 @@ import (
 
 // Records action interaction event data. An action interaction event is an
 // interaction between a user and an action. For example, a user taking an action,
-// such a enrolling in a membership program or downloading your app. For more
-// information about recording action interactions, see Recording action
-// interaction events (https://docs.aws.amazon.com/personalize/latest/dg/recording-action-interaction-events.html)
-// . For more information about actions in an Actions dataset, see Actions dataset (https://docs.aws.amazon.com/personalize/latest/dg/actions-datasets.html)
-// .
+// such a enrolling in a membership program or downloading your app.
+//
+// For more information about recording action interactions, see [Recording action interaction events]. For more
+// information about actions in an Actions dataset, see [Actions dataset].
+//
+// [Recording action interaction events]: https://docs.aws.amazon.com/personalize/latest/dg/recording-action-interaction-events.html
+// [Actions dataset]: https://docs.aws.amazon.com/personalize/latest/dg/actions-datasets.html
 func (c *Client) PutActionInteractions(ctx context.Context, params *PutActionInteractionsInput, optFns ...func(*Options)) (*PutActionInteractionsOutput, error) {
 	if params == nil {
 		params = &PutActionInteractionsInput{}
@@ -43,8 +44,9 @@ type PutActionInteractionsInput struct {
 
 	// The ID of your action interaction event tracker. When you create an Action
 	// interactions dataset, Amazon Personalize creates an action interaction event
-	// tracker for you. For more information, see Action interaction event tracker ID (https://docs.aws.amazon.com/personalize/latest/dg/action-interaction-tracker-id.html)
-	// .
+	// tracker for you. For more information, see [Action interaction event tracker ID].
+	//
+	// [Action interaction event tracker ID]: https://docs.aws.amazon.com/personalize/latest/dg/action-interaction-tracker-id.html
 	//
 	// This member is required.
 	TrackingId *string
@@ -81,25 +83,25 @@ func (c *Client) addOperationPutActionInteractionsMiddlewares(stack *middleware.
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -114,13 +116,16 @@ func (c *Client) addOperationPutActionInteractionsMiddlewares(stack *middleware.
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpPutActionInteractionsValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opPutActionInteractions(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

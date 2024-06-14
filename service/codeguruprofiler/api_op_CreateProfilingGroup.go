@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/codeguruprofiler/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -31,7 +30,7 @@ func (c *Client) CreateProfilingGroup(ctx context.Context, params *CreateProfili
 // The structure representing the createProfiliingGroupRequest.
 type CreateProfilingGroupInput struct {
 
-	// Amazon CodeGuru Profiler uses this universally unique identifier (UUID) to
+	//  Amazon CodeGuru Profiler uses this universally unique identifier (UUID) to
 	// prevent the accidental creation of duplicate profiling groups if there are
 	// failures and retries.
 	//
@@ -43,17 +42,17 @@ type CreateProfilingGroupInput struct {
 	// This member is required.
 	ProfilingGroupName *string
 
-	// Specifies whether profiling is enabled or disabled for the created profiling
+	//  Specifies whether profiling is enabled or disabled for the created profiling
 	// group.
 	AgentOrchestrationConfig *types.AgentOrchestrationConfig
 
-	// The compute platform of the profiling group. Use AWSLambda if your application
+	//  The compute platform of the profiling group. Use AWSLambda if your application
 	// runs on AWS Lambda. Use Default if your application runs on a compute platform
 	// that is not AWS Lambda, such an Amazon EC2 instance, an on-premises server, or a
 	// different platform. If not specified, Default is used.
 	ComputePlatform types.ComputePlatform
 
-	// A list of tags to add to the created profiling group.
+	//  A list of tags to add to the created profiling group.
 	Tags map[string]string
 
 	noSmithyDocumentSerde
@@ -62,8 +61,10 @@ type CreateProfilingGroupInput struct {
 // The structure representing the createProfilingGroupResponse.
 type CreateProfilingGroupOutput struct {
 
-	// The returned ProfilingGroupDescription (https://docs.aws.amazon.com/codeguru/latest/profiler-api/API_ProfilingGroupDescription.html)
-	// object that contains information about the created profiling group.
+	//  The returned [ProfilingGroupDescription]ProfilingGroupDescription object that contains information about
+	// the created profiling group.
+	//
+	// [ProfilingGroupDescription]: https://docs.aws.amazon.com/codeguru/latest/profiler-api/API_ProfilingGroupDescription.html
 	//
 	// This member is required.
 	ProfilingGroup *types.ProfilingGroupDescription
@@ -96,25 +97,25 @@ func (c *Client) addOperationCreateProfilingGroupMiddlewares(stack *middleware.S
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -129,6 +130,9 @@ func (c *Client) addOperationCreateProfilingGroupMiddlewares(stack *middleware.S
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opCreateProfilingGroupMiddleware(stack, options); err != nil {
 		return err
 	}
@@ -138,7 +142,7 @@ func (c *Client) addOperationCreateProfilingGroupMiddlewares(stack *middleware.S
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateProfilingGroup(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

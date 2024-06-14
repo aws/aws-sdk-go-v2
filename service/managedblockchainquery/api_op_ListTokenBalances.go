@@ -6,16 +6,18 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/managedblockchainquery/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // This action returns the following for a given blockchain network:
+//
 //   - Lists all token balances owned by an address (either a contract address or
 //     a wallet address).
+//
 //   - Lists all token balances for all tokens created by a contract.
+//
 //   - Lists all token balances for a given token.
 //
 // You must always specify the network property of the tokenFilter when using this
@@ -39,17 +41,24 @@ type ListTokenBalancesInput struct {
 
 	// The contract address or a token identifier on the blockchain network by which
 	// to filter the request. You must specify the contractAddress property of this
-	// container when listing tokens minted by a contract. You must always specify the
-	// network property of this container when using this operation.
+	// container when listing tokens minted by a contract.
+	//
+	// You must always specify the network property of this container when using this
+	// operation.
 	//
 	// This member is required.
 	TokenFilter *types.TokenFilter
 
-	// The maximum number of token balances to return. Default: 100 Even if additional
-	// results can be retrieved, the request can return less results than maxResults
-	// or an empty array of results. To retrieve the next set of results, make another
-	// request with the returned nextToken value. The value of nextToken is null when
-	// there are no more results to return
+	// The maximum number of token balances to return.
+	//
+	// Default: 100
+	//
+	// Even if additional results can be retrieved, the request can return less
+	// results than maxResults or an empty array of results.
+	//
+	// To retrieve the next set of results, make another request with the returned
+	// nextToken value. The value of nextToken is null when there are no more results
+	// to return
 	MaxResults *int32
 
 	// The pagination token that indicates the next set of results to retrieve.
@@ -102,25 +111,25 @@ func (c *Client) addOperationListTokenBalancesMiddlewares(stack *middleware.Stac
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -135,13 +144,16 @@ func (c *Client) addOperationListTokenBalancesMiddlewares(stack *middleware.Stac
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpListTokenBalancesValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListTokenBalances(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -169,11 +181,16 @@ var _ ListTokenBalancesAPIClient = (*Client)(nil)
 
 // ListTokenBalancesPaginatorOptions is the paginator options for ListTokenBalances
 type ListTokenBalancesPaginatorOptions struct {
-	// The maximum number of token balances to return. Default: 100 Even if additional
-	// results can be retrieved, the request can return less results than maxResults
-	// or an empty array of results. To retrieve the next set of results, make another
-	// request with the returned nextToken value. The value of nextToken is null when
-	// there are no more results to return
+	// The maximum number of token balances to return.
+	//
+	// Default: 100
+	//
+	// Even if additional results can be retrieved, the request can return less
+	// results than maxResults or an empty array of results.
+	//
+	// To retrieve the next set of results, make another request with the returned
+	// nextToken value. The value of nextToken is null when there are no more results
+	// to return
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

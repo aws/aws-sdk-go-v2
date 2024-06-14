@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/lookoutequipment/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -30,13 +29,13 @@ func (c *Client) ListLabelGroups(ctx context.Context, params *ListLabelGroupsInp
 
 type ListLabelGroupsInput struct {
 
-	// The beginning of the name of the label groups to be listed.
+	//  The beginning of the name of the label groups to be listed.
 	LabelGroupNameBeginsWith *string
 
-	// Specifies the maximum number of label groups to list.
+	//  Specifies the maximum number of label groups to list.
 	MaxResults *int32
 
-	// An opaque pagination token indicating where to continue the listing of label
+	//  An opaque pagination token indicating where to continue the listing of label
 	// groups.
 	NextToken *string
 
@@ -45,10 +44,10 @@ type ListLabelGroupsInput struct {
 
 type ListLabelGroupsOutput struct {
 
-	// A summary of the label groups.
+	//  A summary of the label groups.
 	LabelGroupSummaries []types.LabelGroupSummary
 
-	// An opaque pagination token indicating where to continue the listing of label
+	//  An opaque pagination token indicating where to continue the listing of label
 	// groups.
 	NextToken *string
 
@@ -80,25 +79,25 @@ func (c *Client) addOperationListLabelGroupsMiddlewares(stack *middleware.Stack,
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -113,10 +112,13 @@ func (c *Client) addOperationListLabelGroupsMiddlewares(stack *middleware.Stack,
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListLabelGroups(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -144,7 +146,7 @@ var _ ListLabelGroupsAPIClient = (*Client)(nil)
 
 // ListLabelGroupsPaginatorOptions is the paginator options for ListLabelGroups
 type ListLabelGroupsPaginatorOptions struct {
-	// Specifies the maximum number of label groups to list.
+	//  Specifies the maximum number of label groups to list.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

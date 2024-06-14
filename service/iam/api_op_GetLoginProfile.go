@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/iam/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -15,13 +14,16 @@ import (
 // Retrieves the user name for the specified IAM user. A login profile is created
 // when you create a password for the user to access the Amazon Web Services
 // Management Console. If the user does not exist or does not have a password, the
-// operation returns a 404 ( NoSuchEntity ) error. If you create an IAM user with
-// access to the console, the CreateDate reflects the date you created the initial
-// password for the user. If you create an IAM user with programmatic access, and
-// then later add a password for the user to access the Amazon Web Services
-// Management Console, the CreateDate reflects the initial password creation date.
-// A user with programmatic access does not have a login profile unless you create
-// a password for the user to access the Amazon Web Services Management Console.
+// operation returns a 404 ( NoSuchEntity ) error.
+//
+// If you create an IAM user with access to the console, the CreateDate reflects
+// the date you created the initial password for the user.
+//
+// If you create an IAM user with programmatic access, and then later add a
+// password for the user to access the Amazon Web Services Management Console, the
+// CreateDate reflects the initial password creation date. A user with programmatic
+// access does not have a login profile unless you create a password for the user
+// to access the Amazon Web Services Management Console.
 func (c *Client) GetLoginProfile(ctx context.Context, params *GetLoginProfileInput, optFns ...func(*Options)) (*GetLoginProfileOutput, error) {
 	if params == nil {
 		params = &GetLoginProfileInput{}
@@ -39,10 +41,13 @@ func (c *Client) GetLoginProfile(ctx context.Context, params *GetLoginProfileInp
 
 type GetLoginProfileInput struct {
 
-	// The name of the user whose login profile you want to retrieve. This parameter
-	// allows (through its regex pattern (http://wikipedia.org/wiki/regex) ) a string
-	// of characters consisting of upper and lowercase alphanumeric characters with no
-	// spaces. You can also include any of the following characters: _+=,.@-
+	// The name of the user whose login profile you want to retrieve.
+	//
+	// This parameter allows (through its [regex pattern]) a string of characters consisting of upper
+	// and lowercase alphanumeric characters with no spaces. You can also include any
+	// of the following characters: _+=,.@-
+	//
+	// [regex pattern]: http://wikipedia.org/wiki/regex
 	//
 	// This member is required.
 	UserName *string
@@ -86,25 +91,25 @@ func (c *Client) addOperationGetLoginProfileMiddlewares(stack *middleware.Stack,
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -119,13 +124,16 @@ func (c *Client) addOperationGetLoginProfileMiddlewares(stack *middleware.Stack,
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpGetLoginProfileValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetLoginProfile(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

@@ -6,18 +6,19 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/opsworks/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates an app for a specified stack. For more information, see Creating Apps (https://docs.aws.amazon.com/opsworks/latest/userguide/workingapps-creating.html)
-// . Required Permissions: To use this action, an IAM user must have a Manage
+// Creates an app for a specified stack. For more information, see [Creating Apps].
+//
+// Required Permissions: To use this action, an IAM user must have a Manage
 // permissions level for the stack, or an attached policy that explicitly grants
-// permissions. For more information on user permissions, see Managing User
-// Permissions (https://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html)
-// .
+// permissions. For more information on user permissions, see [Managing User Permissions].
+//
+// [Creating Apps]: https://docs.aws.amazon.com/opsworks/latest/userguide/workingapps-creating.html
+// [Managing User Permissions]: https://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html
 func (c *Client) CreateApp(ctx context.Context, params *CreateAppInput, optFns ...func(*Options)) (*CreateAppOutput, error) {
 	if params == nil {
 		params = &CreateAppInput{}
@@ -46,7 +47,7 @@ type CreateAppInput struct {
 	StackId *string
 
 	// The app type. Each supported type is associated with a particular layer. For
-	// example, PHP applications are associated with a PHP layer. AWS OpsWorks Stacks
+	// example, PHP applications are associated with a PHP layer. OpsWorks Stacks
 	// deploys an application to those instances that are members of the corresponding
 	// layer. If your app isn't one of the standard types, or you prefer to implement
 	// your own Deploy recipes, specify other .
@@ -75,15 +76,18 @@ type CreateAppInput struct {
 
 	// An array of EnvironmentVariable objects that specify environment variables to
 	// be associated with the app. After you deploy the app, these variables are
-	// defined on the associated app server instance. For more information, see
-	// Environment Variables (https://docs.aws.amazon.com/opsworks/latest/userguide/workingapps-creating.html#workingapps-creating-environment)
-	// . There is no specific limit on the number of environment variables. However,
-	// the size of the associated data structure - which includes the variables' names,
+	// defined on the associated app server instance. For more information, see [Environment Variables].
+	//
+	// There is no specific limit on the number of environment variables. However, the
+	// size of the associated data structure - which includes the variables' names,
 	// values, and protected flag values - cannot exceed 20 KB. This limit should
 	// accommodate most if not all use cases. Exceeding it will cause an exception with
-	// the message, "Environment: is too large (maximum is 20KB)." If you have
-	// specified one or more environment variables, you cannot modify the stack's Chef
-	// version.
+	// the message, "Environment: is too large (maximum is 20KB)."
+	//
+	// If you have specified one or more environment variables, you cannot modify the
+	// stack's Chef version.
+	//
+	// [Environment Variables]: https://docs.aws.amazon.com/opsworks/latest/userguide/workingapps-creating.html#workingapps-creating-environment
 	Environment []types.EnvironmentVariable
 
 	// The app's short name.
@@ -129,25 +133,25 @@ func (c *Client) addOperationCreateAppMiddlewares(stack *middleware.Stack, optio
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -162,13 +166,16 @@ func (c *Client) addOperationCreateAppMiddlewares(stack *middleware.Stack, optio
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpCreateAppValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateApp(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

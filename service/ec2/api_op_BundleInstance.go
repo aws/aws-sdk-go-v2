@@ -6,16 +6,18 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Bundles an Amazon instance store-backed Windows instance. During bundling, only
-// the root device volume (C:\) is bundled. Data on other instance store volumes is
-// not preserved. This action is not applicable for Linux/Unix instances or Windows
-// instances that are backed by Amazon EBS.
+// Bundles an Amazon instance store-backed Windows instance.
+//
+// During bundling, only the root device volume (C:\) is bundled. Data on other
+// instance store volumes is not preserved.
+//
+// This action is not applicable for Linux/Unix instances or Windows instances
+// that are backed by Amazon EBS.
 func (c *Client) BundleInstance(ctx context.Context, params *BundleInstanceInput, optFns ...func(*Options)) (*BundleInstanceOutput, error) {
 	if params == nil {
 		params = &BundleInstanceInput{}
@@ -34,7 +36,9 @@ func (c *Client) BundleInstance(ctx context.Context, params *BundleInstanceInput
 // Contains the parameters for BundleInstance.
 type BundleInstanceInput struct {
 
-	// The ID of the instance to bundle. Type: String Default: None Required: Yes
+	// The ID of the instance to bundle.
+	//
+	// Default: None
 	//
 	// This member is required.
 	InstanceId *string
@@ -89,25 +93,25 @@ func (c *Client) addOperationBundleInstanceMiddlewares(stack *middleware.Stack, 
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -122,13 +126,16 @@ func (c *Client) addOperationBundleInstanceMiddlewares(stack *middleware.Stack, 
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpBundleInstanceValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opBundleInstance(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

@@ -6,18 +6,19 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/elasticache/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates a new cache security group. Use a cache security group to control
-// access to one or more clusters. Cache security groups are only used when you are
-// creating a cluster outside of an Amazon Virtual Private Cloud (Amazon VPC). If
-// you are creating a cluster inside of a VPC, use a cache subnet group instead.
-// For more information, see CreateCacheSubnetGroup (https://docs.aws.amazon.com/AmazonElastiCache/latest/APIReference/API_CreateCacheSubnetGroup.html)
-// .
+// access to one or more clusters.
+//
+// Cache security groups are only used when you are creating a cluster outside of
+// an Amazon Virtual Private Cloud (Amazon VPC). If you are creating a cluster
+// inside of a VPC, use a cache subnet group instead. For more information, see [CreateCacheSubnetGroup].
+//
+// [CreateCacheSubnetGroup]: https://docs.aws.amazon.com/AmazonElastiCache/latest/APIReference/API_CreateCacheSubnetGroup.html
 func (c *Client) CreateCacheSecurityGroup(ctx context.Context, params *CreateCacheSecurityGroupInput, optFns ...func(*Options)) (*CreateCacheSecurityGroupOutput, error) {
 	if params == nil {
 		params = &CreateCacheSecurityGroupInput{}
@@ -36,9 +37,12 @@ func (c *Client) CreateCacheSecurityGroup(ctx context.Context, params *CreateCac
 // Represents the input of a CreateCacheSecurityGroup operation.
 type CreateCacheSecurityGroupInput struct {
 
-	// A name for the cache security group. This value is stored as a lowercase
-	// string. Constraints: Must contain no more than 255 alphanumeric characters.
-	// Cannot be the word "Default". Example: mysecuritygroup
+	// A name for the cache security group. This value is stored as a lowercase string.
+	//
+	// Constraints: Must contain no more than 255 alphanumeric characters. Cannot be
+	// the word "Default".
+	//
+	// Example: mysecuritygroup
 	//
 	// This member is required.
 	CacheSecurityGroupName *string
@@ -58,8 +62,11 @@ type CreateCacheSecurityGroupInput struct {
 type CreateCacheSecurityGroupOutput struct {
 
 	// Represents the output of one of the following operations:
+	//
 	//   - AuthorizeCacheSecurityGroupIngress
+	//
 	//   - CreateCacheSecurityGroup
+	//
 	//   - RevokeCacheSecurityGroupIngress
 	CacheSecurityGroup *types.CacheSecurityGroup
 
@@ -91,25 +98,25 @@ func (c *Client) addOperationCreateCacheSecurityGroupMiddlewares(stack *middlewa
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -124,13 +131,16 @@ func (c *Client) addOperationCreateCacheSecurityGroupMiddlewares(stack *middlewa
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpCreateCacheSecurityGroupValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateCacheSecurityGroup(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

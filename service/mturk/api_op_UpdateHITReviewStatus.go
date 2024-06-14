@@ -6,12 +6,12 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// The UpdateHITReviewStatus operation updates the status of a HIT. If the status
+//	The UpdateHITReviewStatus operation updates the status of a HIT. If the status
+//
 // is Reviewable, this operation can update the status to Reviewing, or it can
 // revert a Reviewing HIT back to the Reviewable status.
 func (c *Client) UpdateHITReviewStatus(ctx context.Context, params *UpdateHITReviewStatusInput, optFns ...func(*Options)) (*UpdateHITReviewStatusOutput, error) {
@@ -31,14 +31,16 @@ func (c *Client) UpdateHITReviewStatus(ctx context.Context, params *UpdateHITRev
 
 type UpdateHITReviewStatusInput struct {
 
-	// The ID of the HIT to update.
+	//  The ID of the HIT to update.
 	//
 	// This member is required.
 	HITId *string
 
-	// Specifies how to update the HIT status. Default is False .
+	//  Specifies how to update the HIT status. Default is False .
+	//
 	//   - Setting this to false will only transition a HIT from Reviewable to
 	//   Reviewing
+	//
 	//   - Setting this to true will only transition a HIT from Reviewing to Reviewable
 	Revert *bool
 
@@ -74,25 +76,25 @@ func (c *Client) addOperationUpdateHITReviewStatusMiddlewares(stack *middleware.
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -107,13 +109,16 @@ func (c *Client) addOperationUpdateHITReviewStatusMiddlewares(stack *middleware.
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpUpdateHITReviewStatusValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateHITReviewStatus(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

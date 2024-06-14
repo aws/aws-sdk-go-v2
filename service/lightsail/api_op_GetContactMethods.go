@@ -6,20 +6,21 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/lightsail/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Returns information about the configured contact methods. Specify a protocol in
-// your request to return information about a specific contact method. A contact
-// method is used to send you notifications about your Amazon Lightsail resources.
-// You can add one email address and one mobile phone number contact method in each
-// Amazon Web Services Region. However, SMS text messaging is not supported in some
-// Amazon Web Services Regions, and SMS text messages cannot be sent to some
-// countries/regions. For more information, see Notifications in Amazon Lightsail (https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-notifications)
-// .
+// your request to return information about a specific contact method.
+//
+// A contact method is used to send you notifications about your Amazon Lightsail
+// resources. You can add one email address and one mobile phone number contact
+// method in each Amazon Web Services Region. However, SMS text messaging is not
+// supported in some Amazon Web Services Regions, and SMS text messages cannot be
+// sent to some countries/regions. For more information, see [Notifications in Amazon Lightsail].
+//
+// [Notifications in Amazon Lightsail]: https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-notifications
 func (c *Client) GetContactMethods(ctx context.Context, params *GetContactMethodsInput, optFns ...func(*Options)) (*GetContactMethodsOutput, error) {
 	if params == nil {
 		params = &GetContactMethodsInput{}
@@ -38,8 +39,10 @@ func (c *Client) GetContactMethods(ctx context.Context, params *GetContactMethod
 type GetContactMethodsInput struct {
 
 	// The protocols used to send notifications, such as Email , or SMS (text
-	// messaging). Specify a protocol in your request to return information about a
-	// specific contact method protocol.
+	// messaging).
+	//
+	// Specify a protocol in your request to return information about a specific
+	// contact method protocol.
 	Protocols []types.ContactProtocol
 
 	noSmithyDocumentSerde
@@ -78,25 +81,25 @@ func (c *Client) addOperationGetContactMethodsMiddlewares(stack *middleware.Stac
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -111,10 +114,13 @@ func (c *Client) addOperationGetContactMethodsMiddlewares(stack *middleware.Stac
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetContactMethods(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

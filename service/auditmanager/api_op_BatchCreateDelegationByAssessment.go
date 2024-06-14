@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/auditmanager/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -30,12 +29,12 @@ func (c *Client) BatchCreateDelegationByAssessment(ctx context.Context, params *
 
 type BatchCreateDelegationByAssessmentInput struct {
 
-	// The identifier for the assessment.
+	//  The identifier for the assessment.
 	//
 	// This member is required.
 	AssessmentId *string
 
-	// The API request to batch create delegations in Audit Manager.
+	//  The API request to batch create delegations in Audit Manager.
 	//
 	// This member is required.
 	CreateDelegationRequests []types.CreateDelegationRequest
@@ -45,10 +44,10 @@ type BatchCreateDelegationByAssessmentInput struct {
 
 type BatchCreateDelegationByAssessmentOutput struct {
 
-	// The delegations that are associated with the assessment.
+	//  The delegations that are associated with the assessment.
 	Delegations []types.Delegation
 
-	// A list of errors that the BatchCreateDelegationByAssessment API returned.
+	//  A list of errors that the BatchCreateDelegationByAssessment API returned.
 	Errors []types.BatchCreateDelegationByAssessmentError
 
 	// Metadata pertaining to the operation's result.
@@ -79,25 +78,25 @@ func (c *Client) addOperationBatchCreateDelegationByAssessmentMiddlewares(stack 
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -112,13 +111,16 @@ func (c *Client) addOperationBatchCreateDelegationByAssessmentMiddlewares(stack 
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpBatchCreateDelegationByAssessmentValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opBatchCreateDelegationByAssessment(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

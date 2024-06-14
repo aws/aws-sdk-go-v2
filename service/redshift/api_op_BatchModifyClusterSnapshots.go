@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/redshift/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -40,11 +39,14 @@ type BatchModifyClusterSnapshotsInput struct {
 	Force *bool
 
 	// The number of days that a manual snapshot is retained. If you specify the value
-	// -1, the manual snapshot is retained indefinitely. The number must be either -1
-	// or an integer between 1 and 3,653. If you decrease the manual snapshot retention
-	// period from its current value, existing manual snapshots that fall outside of
-	// the new retention period will return an error. If you want to suppress the
-	// errors and delete the snapshots, use the force option.
+	// -1, the manual snapshot is retained indefinitely.
+	//
+	// The number must be either -1 or an integer between 1 and 3,653.
+	//
+	// If you decrease the manual snapshot retention period from its current value,
+	// existing manual snapshots that fall outside of the new retention period will
+	// return an error. If you want to suppress the errors and delete the snapshots,
+	// use the force option.
 	ManualSnapshotRetentionPeriod *int32
 
 	noSmithyDocumentSerde
@@ -86,25 +88,25 @@ func (c *Client) addOperationBatchModifyClusterSnapshotsMiddlewares(stack *middl
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -119,13 +121,16 @@ func (c *Client) addOperationBatchModifyClusterSnapshotsMiddlewares(stack *middl
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpBatchModifyClusterSnapshotsValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opBatchModifyClusterSnapshots(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

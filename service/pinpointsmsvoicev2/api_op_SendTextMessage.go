@@ -6,18 +6,19 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/pinpointsmsvoicev2/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a new text message and sends it to a recipient's phone number. SMS
-// throughput limits are measured in Message Parts per Second (MPS). Your MPS limit
-// depends on the destination country of your messages, as well as the type of
-// phone number (origination number) that you use to send the message. For more
-// information, see Message Parts per Second (MPS) limits (https://docs.aws.amazon.com/pinpoint/latest/userguide/channels-sms-limitations-mps.html)
-// in the Amazon Pinpoint User Guide.
+// Creates a new text message and sends it to a recipient's phone number.
+//
+// SMS throughput limits are measured in Message Parts per Second (MPS). Your MPS
+// limit depends on the destination country of your messages, as well as the type
+// of phone number (origination number) that you use to send the message. For more
+// information, see [Message Parts per Second (MPS) limits]in the Amazon Pinpoint User Guide.
+//
+// [Message Parts per Second (MPS) limits]: https://docs.aws.amazon.com/pinpoint/latest/userguide/channels-sms-limitations-mps.html
 func (c *Client) SendTextMessage(ctx context.Context, params *SendTextMessageInput, optFns ...func(*Options)) (*SendTextMessageOutput, error) {
 	if params == nil {
 		params = &SendTextMessageInput{}
@@ -50,9 +51,9 @@ type SendTextMessageInput struct {
 
 	// This field is used for any country-specific registration requirements.
 	// Currently, this setting is only used when you send messages to recipients in
-	// India using a sender ID. For more information see Special requirements for
-	// sending SMS messages to recipients in India (https://docs.aws.amazon.com/pinpoint/latest/userguide/channels-sms-senderid-india.html)
-	// .
+	// India using a sender ID. For more information see [Special requirements for sending SMS messages to recipients in India].
+	//
+	// [Special requirements for sending SMS messages to recipients in India]: https://docs.aws.amazon.com/pinpoint/latest/userguide/channels-sms-senderid-india.html
 	DestinationCountryParameters map[string]string
 
 	// When set to true, the message is checked and validated, but isn't sent to the
@@ -78,6 +79,9 @@ type SendTextMessageInput struct {
 	// The origination identity of the message. This can be either the PhoneNumber,
 	// PhoneNumberId, PhoneNumberArn, SenderId, SenderIdArn, PoolId, or PoolArn.
 	OriginationIdentity *string
+
+	// The unique identifier for the protect configuration.
+	ProtectConfigurationId *string
 
 	// How long the text message is valid for. By default this is 72 hours.
 	TimeToLive *int32
@@ -118,25 +122,25 @@ func (c *Client) addOperationSendTextMessageMiddlewares(stack *middleware.Stack,
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -151,13 +155,16 @@ func (c *Client) addOperationSendTextMessageMiddlewares(stack *middleware.Stack,
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpSendTextMessageValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opSendTextMessage(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

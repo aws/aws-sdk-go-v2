@@ -6,14 +6,15 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/databasemigrationservice/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Modifies the specified data provider using the provided settings. You must
-// remove the data provider from all migration projects before you can modify it.
+// Modifies the specified data provider using the provided settings.
+//
+// You must remove the data provider from all migration projects before you can
+// modify it.
 func (c *Client) ModifyDataProvider(ctx context.Context, params *ModifyDataProviderInput, optFns ...func(*Options)) (*ModifyDataProviderOutput, error) {
 	if params == nil {
 		params = &ModifyDataProviderInput{}
@@ -54,8 +55,10 @@ type ModifyDataProviderInput struct {
 	// existing data provider settings with the exact settings that you specify in this
 	// call. If this attribute is N, the current call to ModifyDataProvider does two
 	// things:
+	//
 	//   - It replaces any data provider settings that already exist with new values,
 	//   for settings with the same names.
+	//
 	//   - It creates new data provider settings that you specify in the call, for
 	//   settings with different names.
 	ExactSettings *bool
@@ -99,25 +102,25 @@ func (c *Client) addOperationModifyDataProviderMiddlewares(stack *middleware.Sta
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -132,13 +135,16 @@ func (c *Client) addOperationModifyDataProviderMiddlewares(stack *middleware.Sta
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpModifyDataProviderValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opModifyDataProvider(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

@@ -6,16 +6,18 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes the specified Config rule and all of its evaluation results. Config
-// sets the state of a rule to DELETING until the deletion is complete. You cannot
-// update a rule while it is in this state. If you make a PutConfigRule or
+// Deletes the specified Config rule and all of its evaluation results.
+//
+// Config sets the state of a rule to DELETING until the deletion is complete. You
+// cannot update a rule while it is in this state. If you make a PutConfigRule or
 // DeleteConfigRule request for the rule, you will receive a ResourceInUseException
-// . You can check the state of a rule by using the DescribeConfigRules request.
+// .
+//
+// You can check the state of a rule by using the DescribeConfigRules request.
 func (c *Client) DeleteConfigRule(ctx context.Context, params *DeleteConfigRuleInput, optFns ...func(*Options)) (*DeleteConfigRuleOutput, error) {
 	if params == nil {
 		params = &DeleteConfigRuleInput{}
@@ -70,25 +72,25 @@ func (c *Client) addOperationDeleteConfigRuleMiddlewares(stack *middleware.Stack
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -103,13 +105,16 @@ func (c *Client) addOperationDeleteConfigRuleMiddlewares(stack *middleware.Stack
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDeleteConfigRuleValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteConfigRule(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -29,18 +28,20 @@ func (c *Client) ListDeploymentTargets(ctx context.Context, params *ListDeployme
 
 type ListDeploymentTargetsInput struct {
 
-	// The unique ID of a deployment.
+	//  The unique ID of a deployment.
 	//
 	// This member is required.
 	DeploymentId *string
 
-	// A token identifier returned from the previous ListDeploymentTargets call. It
+	//  A token identifier returned from the previous ListDeploymentTargets call. It
 	// can be used to return the next set of deployment targets in the list.
 	NextToken *string
 
-	// A key used to filter the returned targets. The two valid values are:
+	//  A key used to filter the returned targets. The two valid values are:
+	//
 	//   - TargetStatus - A TargetStatus filter string can be Failed , InProgress ,
 	//   Pending , Ready , Skipped , Succeeded , or Unknown .
+	//
 	//   - ServerInstanceLabel - A ServerInstanceLabel filter string can be Blue or
 	//   Green .
 	TargetFilters map[string][]string
@@ -50,12 +51,12 @@ type ListDeploymentTargetsInput struct {
 
 type ListDeploymentTargetsOutput struct {
 
-	// If a large amount of information is returned, a token identifier is also
+	//  If a large amount of information is returned, a token identifier is also
 	// returned. It can be used in a subsequent ListDeploymentTargets call to return
 	// the next set of deployment targets in the list.
 	NextToken *string
 
-	// The unique IDs of deployment targets.
+	//  The unique IDs of deployment targets.
 	TargetIds []string
 
 	// Metadata pertaining to the operation's result.
@@ -86,25 +87,25 @@ func (c *Client) addOperationListDeploymentTargetsMiddlewares(stack *middleware.
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -119,13 +120,16 @@ func (c *Client) addOperationListDeploymentTargetsMiddlewares(stack *middleware.
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpListDeploymentTargetsValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListDeploymentTargets(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

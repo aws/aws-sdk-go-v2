@@ -6,13 +6,14 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes a subnet group. The specified database subnet group must not be
-// associated with any DB instances.
+// Deletes a subnet group.
+//
+// The specified database subnet group must not be associated with any DB
+// instances.
 func (c *Client) DeleteDBSubnetGroup(ctx context.Context, params *DeleteDBSubnetGroupInput, optFns ...func(*Options)) (*DeleteDBSubnetGroupOutput, error) {
 	if params == nil {
 		params = &DeleteDBSubnetGroupInput{}
@@ -28,12 +29,18 @@ func (c *Client) DeleteDBSubnetGroup(ctx context.Context, params *DeleteDBSubnet
 	return out, nil
 }
 
-// Represents the input to DeleteDBSubnetGroup .
+// Represents the input to DeleteDBSubnetGroup.
 type DeleteDBSubnetGroupInput struct {
 
-	// The name of the database subnet group to delete. You can't delete the default
-	// subnet group. Constraints: Must match the name of an existing DBSubnetGroup .
-	// Must not be default. Example: mySubnetgroup
+	// The name of the database subnet group to delete.
+	//
+	// You can't delete the default subnet group.
+	//
+	// Constraints:
+	//
+	// Must match the name of an existing DBSubnetGroup . Must not be default.
+	//
+	// Example: mySubnetgroup
 	//
 	// This member is required.
 	DBSubnetGroupName *string
@@ -70,25 +77,25 @@ func (c *Client) addOperationDeleteDBSubnetGroupMiddlewares(stack *middleware.St
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -103,13 +110,16 @@ func (c *Client) addOperationDeleteDBSubnetGroupMiddlewares(stack *middleware.St
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDeleteDBSubnetGroupValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteDBSubnetGroup(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

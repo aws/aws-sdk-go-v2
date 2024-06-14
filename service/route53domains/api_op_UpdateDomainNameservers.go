@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/route53domains/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -15,9 +14,11 @@ import (
 // This operation replaces the current set of name servers for the domain with the
 // specified set of name servers. If you use Amazon Route 53 as your DNS service,
 // specify the four name servers in the delegation set for the hosted zone for the
-// domain. If successful, this operation returns an operation ID that you can use
-// to track the progress and completion of the action. If the request is not
-// completed successfully, the domain registrant will be notified by email.
+// domain.
+//
+// If successful, this operation returns an operation ID that you can use to track
+// the progress and completion of the action. If the request is not completed
+// successfully, the domain registrant will be notified by email.
 func (c *Client) UpdateDomainNameservers(ctx context.Context, params *UpdateDomainNameserversInput, optFns ...func(*Options)) (*UpdateDomainNameserversOutput, error) {
 	if params == nil {
 		params = &UpdateDomainNameserversInput{}
@@ -35,9 +36,10 @@ func (c *Client) UpdateDomainNameservers(ctx context.Context, params *UpdateDoma
 
 // Replaces the current set of name servers for the domain with the specified set
 // of name servers. If you use Amazon Route 53 as your DNS service, specify the
-// four name servers in the delegation set for the hosted zone for the domain. If
-// successful, this operation returns an operation ID that you can use to track the
-// progress and completion of the action. If the request is not completed
+// four name servers in the delegation set for the hosted zone for the domain.
+//
+// If successful, this operation returns an operation ID that you can use to track
+// the progress and completion of the action. If the request is not completed
 // successfully, the domain registrant will be notified by email.
 type UpdateDomainNameserversInput struct {
 
@@ -63,8 +65,9 @@ type UpdateDomainNameserversInput struct {
 type UpdateDomainNameserversOutput struct {
 
 	// Identifier for tracking the progress of the request. To query the operation
-	// status, use GetOperationDetail (https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_GetOperationDetail.html)
-	// .
+	// status, use [GetOperationDetail].
+	//
+	// [GetOperationDetail]: https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_GetOperationDetail.html
 	OperationId *string
 
 	// Metadata pertaining to the operation's result.
@@ -95,25 +98,25 @@ func (c *Client) addOperationUpdateDomainNameserversMiddlewares(stack *middlewar
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -128,13 +131,16 @@ func (c *Client) addOperationUpdateDomainNameserversMiddlewares(stack *middlewar
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpUpdateDomainNameserversValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateDomainNameservers(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

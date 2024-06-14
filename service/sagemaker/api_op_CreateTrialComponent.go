@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -15,13 +14,20 @@ import (
 
 // Creates a trial component, which is a stage of a machine learning trial. A
 // trial is composed of one or more trial components. A trial component can be used
-// in multiple trials. Trial components include pre-processing jobs, training jobs,
-// and batch transform jobs. When you use SageMaker Studio or the SageMaker Python
-// SDK, all experiments, trials, and trial components are automatically tracked,
-// logged, and indexed. When you use the Amazon Web Services SDK for Python (Boto),
-// you must use the logging APIs provided by the SDK. You can add tags to a trial
-// component and then use the Search (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_Search.html)
-// API to search for the tags.
+// in multiple trials.
+//
+// Trial components include pre-processing jobs, training jobs, and batch
+// transform jobs.
+//
+// When you use SageMaker Studio or the SageMaker Python SDK, all experiments,
+// trials, and trial components are automatically tracked, logged, and indexed.
+// When you use the Amazon Web Services SDK for Python (Boto), you must use the
+// logging APIs provided by the SDK.
+//
+// You can add tags to a trial component and then use the [Search] API to search for the
+// tags.
+//
+// [Search]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_Search.html
 func (c *Client) CreateTrialComponent(ctx context.Context, params *CreateTrialComponentInput, optFns ...func(*Options)) (*CreateTrialComponentOutput, error) {
 	if params == nil {
 		params = &CreateTrialComponentInput{}
@@ -70,13 +76,18 @@ type CreateTrialComponentInput struct {
 	StartTime *time.Time
 
 	// The status of the component. States include:
+	//
 	//   - InProgress
+	//
 	//   - Completed
+	//
 	//   - Failed
 	Status *types.TrialComponentStatus
 
-	// A list of tags to associate with the component. You can use Search (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_Search.html)
-	// API to search on the tags.
+	// A list of tags to associate with the component. You can use [Search] API to search on
+	// the tags.
+	//
+	// [Search]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_Search.html
 	Tags []types.Tag
 
 	noSmithyDocumentSerde
@@ -115,25 +126,25 @@ func (c *Client) addOperationCreateTrialComponentMiddlewares(stack *middleware.S
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -148,13 +159,16 @@ func (c *Client) addOperationCreateTrialComponentMiddlewares(stack *middleware.S
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpCreateTrialComponentValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateTrialComponent(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

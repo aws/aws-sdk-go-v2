@@ -6,16 +6,15 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/clouddirectory/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates an object in a Directory . Additionally attaches the object to a parent,
-// if a parent reference and LinkName is specified. An object is simply a
-// collection of Facet attributes. You can also use this API call to create a
-// policy object, if the facet from which you create the object is a policy facet.
+// Creates an object in a Directory. Additionally attaches the object to a parent, if a
+// parent reference and LinkName is specified. An object is simply a collection of Facet
+// attributes. You can also use this API call to create a policy object, if the
+// facet from which you create the object is a policy facet.
 func (c *Client) CreateObject(ctx context.Context, params *CreateObjectInput, optFns ...func(*Options)) (*CreateObjectOutput, error) {
 	if params == nil {
 		params = &CreateObjectInput{}
@@ -33,14 +32,14 @@ func (c *Client) CreateObject(ctx context.Context, params *CreateObjectInput, op
 
 type CreateObjectInput struct {
 
-	// The Amazon Resource Name (ARN) that is associated with the Directory in which
-	// the object will be created. For more information, see arns .
+	// The Amazon Resource Name (ARN) that is associated with the Directory in which the object
+	// will be created. For more information, see arns.
 	//
 	// This member is required.
 	DirectoryArn *string
 
 	// A list of schema facets to be associated with the object. Do not provide minor
-	// version components. See SchemaFacet for details.
+	// version components. See SchemaFacetfor details.
 	//
 	// This member is required.
 	SchemaFacets []types.SchemaFacet
@@ -91,25 +90,25 @@ func (c *Client) addOperationCreateObjectMiddlewares(stack *middleware.Stack, op
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -124,13 +123,16 @@ func (c *Client) addOperationCreateObjectMiddlewares(stack *middleware.Stack, op
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpCreateObjectValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateObject(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

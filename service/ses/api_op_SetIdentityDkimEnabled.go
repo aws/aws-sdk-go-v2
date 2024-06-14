@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -15,14 +14,21 @@ import (
 // DKIM signing is enabled for a domain, then Amazon SES uses DKIM to sign all
 // email that it sends from addresses on that domain. If Easy DKIM signing is
 // enabled for an email address, then Amazon SES uses DKIM to sign all email it
-// sends from that address. For email addresses (for example, user@example.com ),
-// you can only enable DKIM signing if the corresponding domain (in this case,
-// example.com ) has been set up to use Easy DKIM. You can enable DKIM signing for
-// an identity at any time after you start the verification process for the
-// identity, even if the verification process isn't complete. You can execute this
-// operation no more than once per second. For more information about Easy DKIM
-// signing, go to the Amazon SES Developer Guide (https://docs.aws.amazon.com/ses/latest/dg/send-email-authentication-dkim-easy.html)
-// .
+// sends from that address.
+//
+// For email addresses (for example, user@example.com ), you can only enable DKIM
+// signing if the corresponding domain (in this case, example.com ) has been set up
+// to use Easy DKIM.
+//
+// You can enable DKIM signing for an identity at any time after you start the
+// verification process for the identity, even if the verification process isn't
+// complete.
+//
+// You can execute this operation no more than once per second.
+//
+// For more information about Easy DKIM signing, go to the [Amazon SES Developer Guide].
+//
+// [Amazon SES Developer Guide]: https://docs.aws.amazon.com/ses/latest/dg/send-email-authentication-dkim-easy.html
 func (c *Client) SetIdentityDkimEnabled(ctx context.Context, params *SetIdentityDkimEnabledInput, optFns ...func(*Options)) (*SetIdentityDkimEnabledOutput, error) {
 	if params == nil {
 		params = &SetIdentityDkimEnabledInput{}
@@ -39,9 +45,9 @@ func (c *Client) SetIdentityDkimEnabled(ctx context.Context, params *SetIdentity
 }
 
 // Represents a request to enable or disable Amazon SES Easy DKIM signing for an
-// identity. For more information about setting up Easy DKIM, see the Amazon SES
-// Developer Guide (https://docs.aws.amazon.com/ses/latest/dg/send-email-authentication-dkim-easy.html)
-// .
+// identity. For more information about setting up Easy DKIM, see the [Amazon SES Developer Guide].
+//
+// [Amazon SES Developer Guide]: https://docs.aws.amazon.com/ses/latest/dg/send-email-authentication-dkim-easy.html
 type SetIdentityDkimEnabledInput struct {
 
 	// Sets whether DKIM signing is enabled for an identity. Set to true to enable
@@ -88,25 +94,25 @@ func (c *Client) addOperationSetIdentityDkimEnabledMiddlewares(stack *middleware
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -121,13 +127,16 @@ func (c *Client) addOperationSetIdentityDkimEnabledMiddlewares(stack *middleware
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpSetIdentityDkimEnabledValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opSetIdentityDkimEnabled(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

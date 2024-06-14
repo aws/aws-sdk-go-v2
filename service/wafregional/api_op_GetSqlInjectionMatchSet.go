@@ -6,18 +6,22 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/wafregional/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// This is AWS WAF Classic documentation. For more information, see AWS WAF Classic (https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html)
-// in the developer guide. For the latest version of AWS WAF, use the AWS WAFV2 API
-// and see the AWS WAF Developer Guide (https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html)
-// . With the latest version, AWS WAF has a single set of endpoints for regional
-// and global use. Returns the SqlInjectionMatchSet that is specified by
-// SqlInjectionMatchSetId .
+// This is AWS WAF Classic documentation. For more information, see [AWS WAF Classic] in the
+// developer guide.
+//
+// For the latest version of AWS WAF, use the AWS WAFV2 API and see the [AWS WAF Developer Guide]. With the
+// latest version, AWS WAF has a single set of endpoints for regional and global
+// use.
+//
+// Returns the SqlInjectionMatchSet that is specified by SqlInjectionMatchSetId .
+//
+// [AWS WAF Classic]: https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html
+// [AWS WAF Developer Guide]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html
 func (c *Client) GetSqlInjectionMatchSet(ctx context.Context, params *GetSqlInjectionMatchSetInput, optFns ...func(*Options)) (*GetSqlInjectionMatchSetOutput, error) {
 	if params == nil {
 		params = &GetSqlInjectionMatchSetInput{}
@@ -33,12 +37,11 @@ func (c *Client) GetSqlInjectionMatchSet(ctx context.Context, params *GetSqlInje
 	return out, nil
 }
 
-// A request to get a SqlInjectionMatchSet .
+// A request to get a SqlInjectionMatchSet.
 type GetSqlInjectionMatchSetInput struct {
 
-	// The SqlInjectionMatchSetId of the SqlInjectionMatchSet that you want to get.
-	// SqlInjectionMatchSetId is returned by CreateSqlInjectionMatchSet and by
-	// ListSqlInjectionMatchSets .
+	// The SqlInjectionMatchSetId of the SqlInjectionMatchSet that you want to get. SqlInjectionMatchSetId
+	// is returned by CreateSqlInjectionMatchSetand by ListSqlInjectionMatchSets.
 	//
 	// This member is required.
 	SqlInjectionMatchSetId *string
@@ -49,13 +52,19 @@ type GetSqlInjectionMatchSetInput struct {
 // The response to a GetSqlInjectionMatchSet request.
 type GetSqlInjectionMatchSetOutput struct {
 
-	// Information about the SqlInjectionMatchSet that you specified in the
-	// GetSqlInjectionMatchSet request. For more information, see the following topics:
-	//   - SqlInjectionMatchSet : Contains Name , SqlInjectionMatchSetId , and an array
-	//   of SqlInjectionMatchTuple objects
-	//   - SqlInjectionMatchTuple : Each SqlInjectionMatchTuple object contains
-	//   FieldToMatch and TextTransformation
-	//   - FieldToMatch : Contains Data and Type
+	// Information about the SqlInjectionMatchSet that you specified in the GetSqlInjectionMatchSet
+	// request. For more information, see the following topics:
+	//
+	// SqlInjectionMatchSet
+	//   - : Contains Name , SqlInjectionMatchSetId , and an array of
+	//   SqlInjectionMatchTuple objects
+	//
+	// SqlInjectionMatchTuple
+	//   - : Each SqlInjectionMatchTuple object contains FieldToMatch and
+	//   TextTransformation
+	//
+	// FieldToMatch
+	//   - : Contains Data and Type
 	SqlInjectionMatchSet *types.SqlInjectionMatchSet
 
 	// Metadata pertaining to the operation's result.
@@ -86,25 +95,25 @@ func (c *Client) addOperationGetSqlInjectionMatchSetMiddlewares(stack *middlewar
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -119,13 +128,16 @@ func (c *Client) addOperationGetSqlInjectionMatchSetMiddlewares(stack *middlewar
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpGetSqlInjectionMatchSetValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetSqlInjectionMatchSet(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

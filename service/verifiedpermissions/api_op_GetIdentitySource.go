@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/verifiedpermissions/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -52,11 +51,6 @@ type GetIdentitySourceOutput struct {
 	// This member is required.
 	CreatedDate *time.Time
 
-	// A structure that describes the configuration of the identity source.
-	//
-	// This member is required.
-	Details *types.IdentitySourceDetails
-
 	// The ID of the identity source.
 	//
 	// This member is required.
@@ -77,6 +71,15 @@ type GetIdentitySourceOutput struct {
 	//
 	// This member is required.
 	PrincipalEntityType *string
+
+	// Contains configuration information about an identity source.
+	Configuration types.ConfigurationDetail
+
+	// A structure that describes the configuration of the identity source.
+	//
+	// Deprecated: This attribute has been replaced by
+	// configuration.cognitoUserPoolConfiguration
+	Details *types.IdentitySourceDetails
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -106,25 +109,25 @@ func (c *Client) addOperationGetIdentitySourceMiddlewares(stack *middleware.Stac
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -139,13 +142,16 @@ func (c *Client) addOperationGetIdentitySourceMiddlewares(stack *middleware.Stac
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpGetIdentitySourceValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetIdentitySource(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

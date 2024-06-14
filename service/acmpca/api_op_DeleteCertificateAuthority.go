@@ -6,32 +6,38 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Deletes a private certificate authority (CA). You must provide the Amazon
 // Resource Name (ARN) of the private CA that you want to delete. You can find the
-// ARN by calling the ListCertificateAuthorities (https://docs.aws.amazon.com/privateca/latest/APIReference/API_ListCertificateAuthorities.html)
-// action. Deleting a CA will invalidate other CAs and certificates below it in
-// your CA hierarchy. Before you can delete a CA that you have created and
-// activated, you must disable it. To do this, call the UpdateCertificateAuthority (https://docs.aws.amazon.com/privateca/latest/APIReference/API_UpdateCertificateAuthority.html)
-// action and set the CertificateAuthorityStatus parameter to DISABLED .
+// ARN by calling the [ListCertificateAuthorities]action.
+//
+// Deleting a CA will invalidate other CAs and certificates below it in your CA
+// hierarchy.
+//
+// Before you can delete a CA that you have created and activated, you must
+// disable it. To do this, call the [UpdateCertificateAuthority]action and set the CertificateAuthorityStatus
+// parameter to DISABLED .
+//
 // Additionally, you can delete a CA if you are waiting for it to be created (that
 // is, the status of the CA is CREATING ). You can also delete it if the CA has
 // been created but you haven't yet imported the signed certificate into Amazon Web
 // Services Private CA (that is, the status of the CA is PENDING_CERTIFICATE ).
-// When you successfully call DeleteCertificateAuthority (https://docs.aws.amazon.com/privateca/latest/APIReference/API_DeleteCertificateAuthority.html)
-// , the CA's status changes to DELETED . However, the CA won't be permanently
-// deleted until the restoration period has passed. By default, if you do not set
-// the PermanentDeletionTimeInDays parameter, the CA remains restorable for 30
-// days. You can set the parameter from 7 to 30 days. The
-// DescribeCertificateAuthority (https://docs.aws.amazon.com/privateca/latest/APIReference/API_DescribeCertificateAuthority.html)
-// action returns the time remaining in the restoration window of a private CA in
-// the DELETED state. To restore an eligible CA, call the
-// RestoreCertificateAuthority (https://docs.aws.amazon.com/privateca/latest/APIReference/API_RestoreCertificateAuthority.html)
-// action.
+//
+// When you successfully call [DeleteCertificateAuthority], the CA's status changes to DELETED . However, the
+// CA won't be permanently deleted until the restoration period has passed. By
+// default, if you do not set the PermanentDeletionTimeInDays parameter, the CA
+// remains restorable for 30 days. You can set the parameter from 7 to 30 days. The
+// [DescribeCertificateAuthority]action returns the time remaining in the restoration window of a private CA in
+// the DELETED state. To restore an eligible CA, call the [RestoreCertificateAuthority] action.
+//
+// [ListCertificateAuthorities]: https://docs.aws.amazon.com/privateca/latest/APIReference/API_ListCertificateAuthorities.html
+// [RestoreCertificateAuthority]: https://docs.aws.amazon.com/privateca/latest/APIReference/API_RestoreCertificateAuthority.html
+// [UpdateCertificateAuthority]: https://docs.aws.amazon.com/privateca/latest/APIReference/API_UpdateCertificateAuthority.html
+// [DeleteCertificateAuthority]: https://docs.aws.amazon.com/privateca/latest/APIReference/API_DeleteCertificateAuthority.html
+// [DescribeCertificateAuthority]: https://docs.aws.amazon.com/privateca/latest/APIReference/API_DescribeCertificateAuthority.html
 func (c *Client) DeleteCertificateAuthority(ctx context.Context, params *DeleteCertificateAuthorityInput, optFns ...func(*Options)) (*DeleteCertificateAuthorityOutput, error) {
 	if params == nil {
 		params = &DeleteCertificateAuthorityInput{}
@@ -49,11 +55,13 @@ func (c *Client) DeleteCertificateAuthority(ctx context.Context, params *DeleteC
 
 type DeleteCertificateAuthorityInput struct {
 
-	// The Amazon Resource Name (ARN) that was returned when you called
-	// CreateCertificateAuthority (https://docs.aws.amazon.com/privateca/latest/APIReference/API_CreateCertificateAuthority.html)
-	// . This must have the following form:
+	// The Amazon Resource Name (ARN) that was returned when you called [CreateCertificateAuthority]. This must
+	// have the following form:
+	//
 	// arn:aws:acm-pca:region:account:certificate-authority/12345678-1234-1234-1234-123456789012
 	// .
+	//
+	// [CreateCertificateAuthority]: https://docs.aws.amazon.com/privateca/latest/APIReference/API_CreateCertificateAuthority.html
 	//
 	// This member is required.
 	CertificateAuthorityArn *string
@@ -94,25 +102,25 @@ func (c *Client) addOperationDeleteCertificateAuthorityMiddlewares(stack *middle
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -127,13 +135,16 @@ func (c *Client) addOperationDeleteCertificateAuthorityMiddlewares(stack *middle
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDeleteCertificateAuthorityValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteCertificateAuthority(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

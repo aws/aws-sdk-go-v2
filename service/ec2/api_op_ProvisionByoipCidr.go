@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -15,18 +14,22 @@ import (
 // Provisions an IPv4 or IPv6 address range for use with your Amazon Web Services
 // resources through bring your own IP addresses (BYOIP) and creates a
 // corresponding address pool. After the address range is provisioned, it is ready
-// to be advertised using AdvertiseByoipCidr . Amazon Web Services verifies that
-// you own the address range and are authorized to advertise it. You must ensure
-// that the address range is registered to you and that you created an RPKI ROA to
-// authorize Amazon ASNs 16509 and 14618 to advertise the address range. For more
-// information, see Bring your own IP addresses (BYOIP) (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-byoip.html)
-// in the Amazon Elastic Compute Cloud User Guide. Provisioning an address range is
-// an asynchronous operation, so the call returns immediately, but the address
-// range is not ready to use until its status changes from pending-provision to
-// provisioned . To monitor the status of an address range, use DescribeByoipCidrs
-// . To allocate an Elastic IP address from your IPv4 address pool, use
-// AllocateAddress with either the specific address from the address pool or the ID
-// of the address pool.
+// to be advertised using AdvertiseByoipCidr.
+//
+// Amazon Web Services verifies that you own the address range and are authorized
+// to advertise it. You must ensure that the address range is registered to you and
+// that you created an RPKI ROA to authorize Amazon ASNs 16509 and 14618 to
+// advertise the address range. For more information, see [Bring your own IP addresses (BYOIP)]in the Amazon EC2 User
+// Guide.
+//
+// Provisioning an address range is an asynchronous operation, so the call returns
+// immediately, but the address range is not ready to use until its status changes
+// from pending-provision to provisioned . To monitor the status of an address
+// range, use DescribeByoipCidrs. To allocate an Elastic IP address from your IPv4 address pool, use AllocateAddress
+// with either the specific address from the address pool or the ID of the address
+// pool.
+//
+// [Bring your own IP addresses (BYOIP)]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-byoip.html
 func (c *Client) ProvisionByoipCidr(ctx context.Context, params *ProvisionByoipCidrInput, optFns ...func(*Options)) (*ProvisionByoipCidrOutput, error) {
 	if params == nil {
 		params = &ProvisionByoipCidrInput{}
@@ -45,9 +48,10 @@ func (c *Client) ProvisionByoipCidr(ctx context.Context, params *ProvisionByoipC
 type ProvisionByoipCidrInput struct {
 
 	// The public IPv4 or IPv6 address range, in CIDR notation. The most specific IPv4
-	// prefix that you can specify is /24. The most specific IPv6 prefix you can
-	// specify is /56. The address range cannot overlap with another address range that
-	// you've brought to this or another Region.
+	// prefix that you can specify is /24. The most specific IPv6 address range that
+	// you can bring is /48 for CIDRs that are publicly advertisable and /56 for CIDRs
+	// that are not publicly advertisable. The address range cannot overlap with
+	// another address range that you've brought to this or another Region.
 	//
 	// This member is required.
 	Cidr *string
@@ -68,24 +72,33 @@ type ProvisionByoipCidrInput struct {
 	// Reserved.
 	MultiRegion *bool
 
-	// If you have Local Zones (https://docs.aws.amazon.com/local-zones/latest/ug/how-local-zones-work.html)
-	// enabled, you can choose a network border group for Local Zones when you
-	// provision and advertise a BYOIPv4 CIDR. Choose the network border group
+	// If you have [Local Zones] enabled, you can choose a network border group for Local Zones
+	// when you provision and advertise a BYOIPv4 CIDR. Choose the network border group
 	// carefully as the EIP and the Amazon Web Services resource it is associated with
-	// must reside in the same network border group. You can provision BYOIP address
-	// ranges to and advertise them in the following Local Zone network border groups:
+	// must reside in the same network border group.
+	//
+	// You can provision BYOIP address ranges to and advertise them in the following
+	// Local Zone network border groups:
+	//
 	//   - us-east-1-dfw-2
+	//
 	//   - us-west-2-lax-1
+	//
 	//   - us-west-2-phx-2
+	//
 	// You cannot provision or advertise BYOIPv6 address ranges in Local Zones at this
 	// time.
+	//
+	// [Local Zones]: https://docs.aws.amazon.com/local-zones/latest/ug/how-local-zones-work.html
 	NetworkBorderGroup *string
 
 	// The tags to apply to the address pool.
 	PoolTagSpecifications []types.TagSpecification
 
 	// (IPv6 only) Indicate whether the address range will be publicly advertised to
-	// the internet. Default: true
+	// the internet.
+	//
+	// Default: true
 	PubliclyAdvertisable *bool
 
 	noSmithyDocumentSerde
@@ -124,25 +137,25 @@ func (c *Client) addOperationProvisionByoipCidrMiddlewares(stack *middleware.Sta
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -157,13 +170,16 @@ func (c *Client) addOperationProvisionByoipCidrMiddlewares(stack *middleware.Sta
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpProvisionByoipCidrValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opProvisionByoipCidr(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

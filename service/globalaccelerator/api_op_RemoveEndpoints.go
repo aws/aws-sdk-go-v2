@@ -6,24 +6,28 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/globalaccelerator/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Remove endpoints from an endpoint group. The RemoveEndpoints API operation is
-// the recommended option for removing endpoints. The alternative is to remove
-// endpoints by updating an endpoint group by using the UpdateEndpointGroup (https://docs.aws.amazon.com/global-accelerator/latest/api/API_UpdateEndpointGroup.html)
-// API operation. There are two advantages to using AddEndpoints to remove
-// endpoints instead:
+// Remove endpoints from an endpoint group.
+//
+// The RemoveEndpoints API operation is the recommended option for removing
+// endpoints. The alternative is to remove endpoints by updating an endpoint group
+// by using the [UpdateEndpointGroup]API operation. There are two advantages to using AddEndpoints to
+// remove endpoints instead:
+//
 //   - It's more convenient, because you only need to specify the endpoints that
 //     you want to remove. With the UpdateEndpointGroup API operation, you must
 //     specify all of the endpoints in the endpoint group except the ones that you want
 //     to remove from the group.
+//
 //   - It's faster, because Global Accelerator doesn't need to resolve any
 //     endpoints. With the UpdateEndpointGroup API operation, Global Accelerator must
 //     resolve all of the endpoints that remain in the group.
+//
+// [UpdateEndpointGroup]: https://docs.aws.amazon.com/global-accelerator/latest/api/API_UpdateEndpointGroup.html
 func (c *Client) RemoveEndpoints(ctx context.Context, params *RemoveEndpointsInput, optFns ...func(*Options)) (*RemoveEndpointsOutput, error) {
 	if params == nil {
 		params = &RemoveEndpointsInput{}
@@ -83,25 +87,25 @@ func (c *Client) addOperationRemoveEndpointsMiddlewares(stack *middleware.Stack,
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -116,13 +120,16 @@ func (c *Client) addOperationRemoveEndpointsMiddlewares(stack *middleware.Stack,
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpRemoveEndpointsValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opRemoveEndpoints(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

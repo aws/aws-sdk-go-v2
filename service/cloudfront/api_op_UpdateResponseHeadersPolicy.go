@@ -6,19 +6,22 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/cloudfront/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates a response headers policy. When you update a response headers policy,
-// the entire policy is replaced. You cannot update some policy fields independent
-// of others. To update a response headers policy configuration:
-//   - Use GetResponseHeadersPolicyConfig to get the current policy's
-//     configuration.
+// Updates a response headers policy.
+//
+// When you update a response headers policy, the entire policy is replaced. You
+// cannot update some policy fields independent of others. To update a response
+// headers policy configuration:
+//
+//   - Use GetResponseHeadersPolicyConfig to get the current policy's configuration.
+//
 //   - Modify the fields in the response headers policy configuration that you
 //     want to update.
+//
 //   - Call UpdateResponseHeadersPolicy , providing the entire response headers
 //     policy configuration, including the fields that you modified and those that you
 //     didn't.
@@ -49,8 +52,9 @@ type UpdateResponseHeadersPolicyInput struct {
 	// This member is required.
 	ResponseHeadersPolicyConfig *types.ResponseHeadersPolicyConfig
 
-	// The version of the response headers policy that you are updating. The version
-	// is returned in the cache policy's ETag field in the response to
+	// The version of the response headers policy that you are updating.
+	//
+	// The version is returned in the cache policy's ETag field in the response to
 	// GetResponseHeadersPolicyConfig .
 	IfMatch *string
 
@@ -93,25 +97,25 @@ func (c *Client) addOperationUpdateResponseHeadersPolicyMiddlewares(stack *middl
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -126,13 +130,16 @@ func (c *Client) addOperationUpdateResponseHeadersPolicyMiddlewares(stack *middl
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpUpdateResponseHeadersPolicyValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateResponseHeadersPolicy(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

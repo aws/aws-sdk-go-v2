@@ -772,6 +772,12 @@
                 }
             }
         },
+        "com.amazonaws.osis#BlueprintFormat": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "^(YAML|JSON)$"
+            }
+        },
         "com.amazonaws.osis#Boolean": {
             "type": "boolean"
         },
@@ -787,7 +793,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Options that specify the configuration of a persistent buffer.\n   To configure how OpenSearch Ingestion encrypts this data, set the EncryptionAtRestOptions.</p>"
+                "smithy.api#documentation": "<p>Options that specify the configuration of a persistent buffer.\n   To configure how OpenSearch Ingestion encrypts this data, set the <code>EncryptionAtRestOptions</code>. For more information, see <a href=\"https://docs.aws.amazon.com/opensearch-service/latest/developerguide/osis-features-overview.html#persistent-buffering\">Persistent buffering</a>.</p>"
             }
         },
         "com.amazonaws.osis#ChangeProgressStage": {
@@ -925,13 +931,19 @@
                 }
             }
         },
+        "com.amazonaws.osis#CidrBlock": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "^((25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)/(3[0-2]|[12]?[0-9])$"
+            }
+        },
         "com.amazonaws.osis#CloudWatchLogDestination": {
             "type": "structure",
             "members": {
                 "LogGroup": {
                     "target": "com.amazonaws.osis#LogGroup",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the CloudWatch Logs group to send pipeline logs to. You can specify an existing\n   log group or create a new one. For example,\n    <code>/aws/OpenSearchService/IngestionService/my-pipeline</code>.</p>",
+                        "smithy.api#documentation": "<p>The name of the CloudWatch Logs group to send pipeline logs to. You can specify an existing\n   log group or create a new one. For example,\n   <code>/aws/vendedlogs/OpenSearchService/pipelines</code>.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -964,6 +976,9 @@
             "errors": [
                 {
                     "target": "com.amazonaws.osis#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.osis#DisabledOperationException"
                 },
                 {
                     "target": "com.amazonaws.osis#InternalException"
@@ -1086,6 +1101,9 @@
                     "target": "com.amazonaws.osis#ConflictException"
                 },
                 {
+                    "target": "com.amazonaws.osis#DisabledOperationException"
+                },
+                {
                     "target": "com.amazonaws.osis#InternalException"
                 },
                 {
@@ -1127,19 +1145,32 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.osis#DisabledOperationException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.osis#ErrorMessage"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Exception is thrown when an operation has been disabled.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 409
+            }
+        },
         "com.amazonaws.osis#EncryptionAtRestOptions": {
             "type": "structure",
             "members": {
                 "KmsKeyArn": {
                     "target": "com.amazonaws.osis#KmsKeyArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the KMS key used to encrypt data-at-rest in OpenSearch Ingestion.\n   By default, data is encrypted using an AWS owned key.</p>",
+                        "smithy.api#documentation": "<p>The ARN of the KMS key used to encrypt buffer data.\n   By default, data is encrypted using an Amazon Web Services owned key.</p>",
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Options to control how OpenSearch encrypts all data-at-rest.</p>"
+                "smithy.api#documentation": "<p>Options to control how OpenSearch encrypts buffer data.</p>"
             }
         },
         "com.amazonaws.osis#ErrorMessage": {
@@ -1156,6 +1187,9 @@
             "errors": [
                 {
                     "target": "com.amazonaws.osis#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.osis#DisabledOperationException"
                 },
                 {
                     "target": "com.amazonaws.osis#InternalException"
@@ -1189,6 +1223,9 @@
                     "target": "com.amazonaws.osis#AccessDeniedException"
                 },
                 {
+                    "target": "com.amazonaws.osis#DisabledOperationException"
+                },
+                {
                     "target": "com.amazonaws.osis#InternalException"
                 },
                 {
@@ -1217,6 +1254,13 @@
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
+                },
+                "Format": {
+                    "target": "com.amazonaws.osis#BlueprintFormat",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The format format of the blueprint to retrieve.</p>",
+                        "smithy.api#httpQuery": "format"
+                    }
                 }
             },
             "traits": {
@@ -1230,6 +1274,12 @@
                     "target": "com.amazonaws.osis#PipelineBlueprint",
                     "traits": {
                         "smithy.api#documentation": "<p>The requested blueprint in YAML format.</p>"
+                    }
+                },
+                "Format": {
+                    "target": "com.amazonaws.osis#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The format of the blueprint.</p>"
                     }
                 }
             },
@@ -1248,6 +1298,9 @@
             "errors": [
                 {
                     "target": "com.amazonaws.osis#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.osis#DisabledOperationException"
                 },
                 {
                     "target": "com.amazonaws.osis#InternalException"
@@ -1304,7 +1357,7 @@
                 "PipelineName": {
                     "target": "com.amazonaws.osis#PipelineName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the pipeline to get information about.</p>",
+                        "smithy.api#documentation": "<p>The name of the pipeline.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -1401,6 +1454,9 @@
                     "target": "com.amazonaws.osis#AccessDeniedException"
                 },
                 {
+                    "target": "com.amazonaws.osis#DisabledOperationException"
+                },
+                {
                     "target": "com.amazonaws.osis#InternalException"
                 },
                 {
@@ -1451,6 +1507,9 @@
             "errors": [
                 {
                     "target": "com.amazonaws.osis#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.osis#DisabledOperationException"
                 },
                 {
                     "target": "com.amazonaws.osis#InternalException"
@@ -1529,6 +1588,9 @@
             "errors": [
                 {
                     "target": "com.amazonaws.osis#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.osis#DisabledOperationException"
                 },
                 {
                     "target": "com.amazonaws.osis#InternalException"
@@ -1711,10 +1773,22 @@
                 "EncryptionAtRestOptions": {
                     "target": "com.amazonaws.osis#EncryptionAtRestOptions"
                 },
+                "VpcEndpointService": {
+                    "target": "com.amazonaws.osis#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The VPC endpoint service name for the pipeline.</p>"
+                    }
+                },
                 "ServiceVpcEndpoints": {
                     "target": "com.amazonaws.osis#ServiceVpcEndpointsList",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of VPC endpoints that OpenSearch Ingestion has created to other AWS services.</p>"
+                        "smithy.api#documentation": "<p>A list of VPC endpoints that OpenSearch Ingestion has created to other Amazon Web Services services.</p>"
+                    }
+                },
+                "Destinations": {
+                    "target": "com.amazonaws.osis#PipelineDestinationList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Destinations to which the pipeline writes data.</p>"
                     }
                 },
                 "Tags": {
@@ -1752,6 +1826,30 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The YAML configuration of the blueprint.</p>"
                     }
+                },
+                "DisplayName": {
+                    "target": "com.amazonaws.osis#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The display name of the blueprint.</p>"
+                    }
+                },
+                "DisplayDescription": {
+                    "target": "com.amazonaws.osis#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A description of the blueprint.</p>"
+                    }
+                },
+                "Service": {
+                    "target": "com.amazonaws.osis#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the service that the blueprint is associated with.</p>"
+                    }
+                },
+                "UseCase": {
+                    "target": "com.amazonaws.osis#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The use case that the blueprint relates to.</p>"
+                    }
                 }
             },
             "traits": {
@@ -1765,6 +1863,30 @@
                     "target": "com.amazonaws.osis#String",
                     "traits": {
                         "smithy.api#documentation": "<p>The name of the blueprint.</p>"
+                    }
+                },
+                "DisplayName": {
+                    "target": "com.amazonaws.osis#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The display name of the blueprint.</p>"
+                    }
+                },
+                "DisplayDescription": {
+                    "target": "com.amazonaws.osis#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A description of the blueprint.</p>"
+                    }
+                },
+                "Service": {
+                    "target": "com.amazonaws.osis#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the service that the blueprint is associated with.</p>"
+                    }
+                },
+                "UseCase": {
+                    "target": "com.amazonaws.osis#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The use case that the blueprint relates to.</p>"
                     }
                 }
             },
@@ -1785,6 +1907,32 @@
                     "min": 1,
                     "max": 24000
                 }
+            }
+        },
+        "com.amazonaws.osis#PipelineDestination": {
+            "type": "structure",
+            "members": {
+                "ServiceName": {
+                    "target": "com.amazonaws.osis#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the service receiving data from the pipeline.</p>"
+                    }
+                },
+                "Endpoint": {
+                    "target": "com.amazonaws.osis#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The endpoint receiving data from the pipeline.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An object representing the destination of a pipeline.</p>"
+            }
+        },
+        "com.amazonaws.osis#PipelineDestinationList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.osis#PipelineDestination"
             }
         },
         "com.amazonaws.osis#PipelineName": {
@@ -1924,6 +2072,12 @@
                         "smithy.api#documentation": "<p>The date and time when the pipeline was last updated.</p>"
                     }
                 },
+                "Destinations": {
+                    "target": "com.amazonaws.osis#PipelineDestinationList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of destinations to which the pipeline writes data.</p>"
+                    }
+                },
                 "Tags": {
                     "target": "com.amazonaws.osis#TagList",
                     "traits": {
@@ -2009,7 +2163,7 @@
                 "VpcEndpointId": {
                     "target": "com.amazonaws.osis#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ID of the VPC endpoint that was created.</p>"
+                        "smithy.api#documentation": "<p>The unique identifier of the VPC endpoint that was created.</p>"
                     }
                 }
             },
@@ -2037,6 +2191,9 @@
                 },
                 {
                     "target": "com.amazonaws.osis#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.osis#DisabledOperationException"
                 },
                 {
                     "target": "com.amazonaws.osis#InternalException"
@@ -2098,6 +2255,9 @@
                 },
                 {
                     "target": "com.amazonaws.osis#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.osis#DisabledOperationException"
                 },
                 {
                     "target": "com.amazonaws.osis#InternalException"
@@ -2227,6 +2387,9 @@
                     "target": "com.amazonaws.osis#AccessDeniedException"
                 },
                 {
+                    "target": "com.amazonaws.osis#DisabledOperationException"
+                },
+                {
                     "target": "com.amazonaws.osis#InternalException"
                 },
                 {
@@ -2304,6 +2467,9 @@
                     "target": "com.amazonaws.osis#AccessDeniedException"
                 },
                 {
+                    "target": "com.amazonaws.osis#DisabledOperationException"
+                },
+                {
                     "target": "com.amazonaws.osis#InternalException"
                 },
                 {
@@ -2366,6 +2532,9 @@
                 },
                 {
                     "target": "com.amazonaws.osis#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.osis#DisabledOperationException"
                 },
                 {
                     "target": "com.amazonaws.osis#InternalException"
@@ -2465,6 +2634,9 @@
                     "target": "com.amazonaws.osis#AccessDeniedException"
                 },
                 {
+                    "target": "com.amazonaws.osis#DisabledOperationException"
+                },
+                {
                     "target": "com.amazonaws.osis#InternalException"
                 },
                 {
@@ -2548,6 +2720,27 @@
                 "target": "com.amazonaws.osis#ValidationMessage"
             }
         },
+        "com.amazonaws.osis#VpcAttachmentOptions": {
+            "type": "structure",
+            "members": {
+                "AttachToVpc": {
+                    "target": "com.amazonaws.osis#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Whether a VPC is attached to the pipeline.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "CidrBlock": {
+                    "target": "com.amazonaws.osis#CidrBlock",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The CIDR block to be reserved for OpenSearch Ingestion to create elastic network interfaces (ENIs).</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Options for attaching a VPC to pipeline.</p>"
+            }
+        },
         "com.amazonaws.osis#VpcEndpoint": {
             "type": "structure",
             "members": {
@@ -2572,6 +2765,23 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>An OpenSearch Ingestion-managed VPC endpoint that will access one or more\n   pipelines.</p>"
+            }
+        },
+        "com.amazonaws.osis#VpcEndpointManagement": {
+            "type": "enum",
+            "members": {
+                "CUSTOMER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CUSTOMER"
+                    }
+                },
+                "SERVICE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SERVICE"
+                    }
+                }
             }
         },
         "com.amazonaws.osis#VpcEndpointServiceName": {
@@ -2605,6 +2815,18 @@
                     "target": "com.amazonaws.osis#SecurityGroupIds",
                     "traits": {
                         "smithy.api#documentation": "<p>A list of security groups associated with the VPC endpoint.</p>"
+                    }
+                },
+                "VpcAttachmentOptions": {
+                    "target": "com.amazonaws.osis#VpcAttachmentOptions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Options for attaching a VPC to a pipeline.</p>"
+                    }
+                },
+                "VpcEndpointManagement": {
+                    "target": "com.amazonaws.osis#VpcEndpointManagement",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Defines whether you or Amazon OpenSearch Ingestion service create and manage the VPC endpoint configured for the pipeline.</p>"
                     }
                 }
             },

@@ -6,21 +6,24 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates an import volume task using metadata from the specified disk image.
-// This API action supports only single-volume VMs. To import multi-volume VMs, use
-// ImportImage instead. To import a disk to a snapshot, use ImportSnapshot
-// instead. This API action is not supported by the Command Line Interface (CLI).
-// For information about using the Amazon EC2 CLI, which is deprecated, see
-// Importing Disks to Amazon EBS (https://awsdocs.s3.amazonaws.com/EC2/ec2-clt.pdf#importing-your-volumes-into-amazon-ebs)
-// in the Amazon EC2 CLI Reference PDF file. For information about the import
-// manifest referenced by this API action, see VM Import Manifest (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/manifest.html)
-// .
+//
+// This API action supports only single-volume VMs. To import multi-volume VMs,
+// use ImportImageinstead. To import a disk to a snapshot, use ImportSnapshot instead.
+//
+// This API action is not supported by the Command Line Interface (CLI). For
+// information about using the Amazon EC2 CLI, which is deprecated, see [Importing Disks to Amazon EBS]in the
+// Amazon EC2 CLI Reference PDF file.
+//
+// For information about the import manifest referenced by this API action, see [VM Import Manifest].
+//
+// [Importing Disks to Amazon EBS]: https://awsdocs.s3.amazonaws.com/EC2/ec2-clt.pdf#importing-your-volumes-into-amazon-ebs
+// [VM Import Manifest]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/manifest.html
 func (c *Client) ImportVolume(ctx context.Context, params *ImportVolumeInput, optFns ...func(*Options)) (*ImportVolumeOutput, error) {
 	if params == nil {
 		params = &ImportVolumeInput{}
@@ -98,25 +101,25 @@ func (c *Client) addOperationImportVolumeMiddlewares(stack *middleware.Stack, op
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -131,13 +134,16 @@ func (c *Client) addOperationImportVolumeMiddlewares(stack *middleware.Stack, op
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpImportVolumeValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opImportVolume(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

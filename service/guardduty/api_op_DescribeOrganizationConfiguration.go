@@ -6,17 +6,19 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/guardduty/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Returns information about the account selected as the delegated administrator
-// for GuardDuty. There might be regional differences because some data sources
-// might not be available in all the Amazon Web Services Regions where GuardDuty is
-// presently supported. For more information, see Regions and endpoints (https://docs.aws.amazon.com/guardduty/latest/ug/guardduty_regions.html)
-// .
+// for GuardDuty.
+//
+// There might be regional differences because some data sources might not be
+// available in all the Amazon Web Services Regions where GuardDuty is presently
+// supported. For more information, see [Regions and endpoints].
+//
+// [Regions and endpoints]: https://docs.aws.amazon.com/guardduty/latest/ug/guardduty_regions.html
 func (c *Client) DescribeOrganizationConfiguration(ctx context.Context, params *DescribeOrganizationConfigurationInput, optFns ...func(*Options)) (*DescribeOrganizationConfigurationOutput, error) {
 	if params == nil {
 		params = &DescribeOrganizationConfigurationInput{}
@@ -62,23 +64,36 @@ type DescribeOrganizationConfigurationOutput struct {
 	MemberAccountLimitReached *bool
 
 	// Indicates whether GuardDuty is automatically enabled for accounts added to the
-	// organization. Even though this is still supported, we recommend using
+	// organization.
+	//
+	// Even though this is still supported, we recommend using
 	// AutoEnableOrganizationMembers to achieve the similar results.
 	//
 	// Deprecated: This field is deprecated, use AutoEnableOrganizationMembers instead
 	AutoEnable *bool
 
-	// Indicates the auto-enablement configuration of GuardDuty for the member
-	// accounts in the organization.
+	// Indicates the auto-enablement configuration of GuardDuty or any of the
+	// corresponding protection plans for the member accounts in the organization.
+	//
 	//   - NEW : Indicates that when a new account joins the organization, they will
-	//   have GuardDuty enabled automatically.
-	//   - ALL : Indicates that all accounts in the organization have GuardDuty enabled
-	//   automatically. This includes NEW accounts that join the organization and
-	//   accounts that may have been suspended or removed from the organization in
-	//   GuardDuty.
-	//   - NONE : Indicates that GuardDuty will not be automatically enabled for any
-	//   account in the organization. The administrator must manage GuardDuty for each
-	//   account in the organization individually.
+	//   have GuardDuty or any of the corresponding protection plans enabled
+	//   automatically.
+	//
+	//   - ALL : Indicates that all accounts in the organization have GuardDuty and any
+	//   of the corresponding protection plans enabled automatically. This includes NEW
+	//   accounts that join the organization and accounts that may have been suspended or
+	//   removed from the organization in GuardDuty.
+	//
+	//   - NONE : Indicates that GuardDuty or any of the corresponding protection plans
+	//   will not be automatically enabled for any account in the organization. The
+	//   administrator must manage GuardDuty for each account in the organization
+	//   individually.
+	//
+	// When you update the auto-enable setting from ALL or NEW to NONE , this action
+	//   doesn't disable the corresponding option for your existing accounts. This
+	//   configuration will apply to the new accounts that join the organization. After
+	//   you update the auto-enable settings, no new account will have the corresponding
+	//   option as enabled.
 	AutoEnableOrganizationMembers types.AutoEnableMembers
 
 	// Describes which data sources are enabled automatically for member accounts.
@@ -121,25 +136,25 @@ func (c *Client) addOperationDescribeOrganizationConfigurationMiddlewares(stack 
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -154,13 +169,16 @@ func (c *Client) addOperationDescribeOrganizationConfigurationMiddlewares(stack 
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDescribeOrganizationConfigurationValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeOrganizationConfiguration(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -14,11 +13,17 @@ import (
 // Creates or updates the resource policy that grants permissions to source
 // accounts to link to the monitoring account sink. When you create a sink policy,
 // you can grant permissions to all accounts in an organization or to individual
-// accounts. You can also use a sink policy to limit the types of data that is
-// shared. The three types that you can allow or deny are:
+// accounts.
+//
+// You can also use a sink policy to limit the types of data that is shared. The
+// three types that you can allow or deny are:
+//
 //   - Metrics - Specify with AWS::CloudWatch::Metric
+//
 //   - Log groups - Specify with AWS::Logs::LogGroup
+//
 //   - Traces - Specify with AWS::XRay::Trace
+//
 //   - Application Insights - Applications - Specify with
 //     AWS::ApplicationInsights::Application
 //
@@ -42,9 +47,13 @@ func (c *Client) PutSinkPolicy(ctx context.Context, params *PutSinkPolicyInput, 
 type PutSinkPolicyInput struct {
 
 	// The JSON policy to use. If you are updating an existing policy, the entire
-	// existing policy is replaced by what you specify here. The policy must be in JSON
-	// string format with quotation marks escaped and no newlines. For examples of
-	// different types of policies, see the Examples section on this page.
+	// existing policy is replaced by what you specify here.
+	//
+	// The policy must be in JSON string format with quotation marks escaped and no
+	// newlines.
+	//
+	// For examples of different types of policies, see the Examples section on this
+	// page.
 	//
 	// This member is required.
 	Policy *string
@@ -96,25 +105,25 @@ func (c *Client) addOperationPutSinkPolicyMiddlewares(stack *middleware.Stack, o
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -129,13 +138,16 @@ func (c *Client) addOperationPutSinkPolicyMiddlewares(stack *middleware.Stack, o
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpPutSinkPolicyValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opPutSinkPolicy(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

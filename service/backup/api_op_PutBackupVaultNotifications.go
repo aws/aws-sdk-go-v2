@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/backup/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -31,16 +30,25 @@ func (c *Client) PutBackupVaultNotifications(ctx context.Context, params *PutBac
 type PutBackupVaultNotificationsInput struct {
 
 	// An array of events that indicate the status of jobs to back up resources to the
-	// backup vault. For common use cases and code samples, see Using Amazon SNS to
-	// track Backup events (https://docs.aws.amazon.com/aws-backup/latest/devguide/sns-notifications.html)
-	// . The following events are supported:
+	// backup vault.
+	//
+	// For common use cases and code samples, see [Using Amazon SNS to track Backup events].
+	//
+	// The following events are supported:
+	//
 	//   - BACKUP_JOB_STARTED | BACKUP_JOB_COMPLETED
+	//
 	//   - COPY_JOB_STARTED | COPY_JOB_SUCCESSFUL | COPY_JOB_FAILED
+	//
 	//   - RESTORE_JOB_STARTED | RESTORE_JOB_COMPLETED | RECOVERY_POINT_MODIFIED
+	//
 	//   - S3_BACKUP_OBJECT_FAILED | S3_RESTORE_OBJECT_FAILED
+	//
 	// The list below shows items that are deprecated events (for reference) and are
 	// no longer in use. They are no longer supported and will not return statuses or
 	// notifications. Refer to the list above for current supported events.
+	//
+	// [Using Amazon SNS to track Backup events]: https://docs.aws.amazon.com/aws-backup/latest/devguide/sns-notifications.html
 	//
 	// This member is required.
 	BackupVaultEvents []types.BackupVaultEvent
@@ -91,25 +99,25 @@ func (c *Client) addOperationPutBackupVaultNotificationsMiddlewares(stack *middl
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -124,13 +132,16 @@ func (c *Client) addOperationPutBackupVaultNotificationsMiddlewares(stack *middl
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpPutBackupVaultNotificationsValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opPutBackupVaultNotifications(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

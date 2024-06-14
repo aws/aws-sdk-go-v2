@@ -1,3 +1,68 @@
+# v1.33.0 (2024-06-07)
+
+* **Feature**: New feature: common controls. When creating custom controls, you can now use pre-grouped AWS data sources based on common compliance themes. Also, the awsServices parameter is deprecated because we now manage services in scope for you. If used, the input is ignored and an empty list is returned.
+* **Bug Fix**: Add clock skew correction on all service clients
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.32.9 (2024-06-03)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.32.8 (2024-05-23)
+
+* No change notes available for this release.
+
+# v1.32.7 (2024-05-16)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.32.6 (2024-05-15)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.32.5 (2024-05-08)
+
+* **Bug Fix**: GoDoc improvement
+
+# v1.32.4 (2024-03-29)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.32.3 (2024-03-18)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.32.2 (2024-03-07)
+
+* **Bug Fix**: Remove dependency on go-cmp.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.32.1 (2024-02-23)
+
+* **Bug Fix**: Move all common, SDK-side middleware stack ops into the service client module to prevent cross-module compatibility issues in the future.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.32.0 (2024-02-22)
+
+* **Feature**: Add middleware stack snapshot tests.
+
+# v1.31.3 (2024-02-21)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.31.2 (2024-02-20)
+
+* **Bug Fix**: When sourcing values for a service's `EndpointParameters`, the lack of a configured region (i.e. `options.Region == ""`) will now translate to a `nil` value for `EndpointParameters.Region` instead of a pointer to the empty string `""`. This will result in a much more explicit error when calling an operation instead of an obscure hostname lookup failure.
+
+# v1.31.1 (2024-02-16)
+
+* No change notes available for this release.
+
+# v1.31.0 (2024-02-13)
+
+* **Feature**: Bump minimum Go version to 1.20 per our language support policy.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.30.6 (2024-01-04)
 
 * **Dependency Update**: Updated to the latest SDK module versions

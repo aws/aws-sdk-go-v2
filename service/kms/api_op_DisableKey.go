@@ -6,25 +6,33 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Sets the state of a KMS key to disabled. This change temporarily prevents use
-// of the KMS key for cryptographic operations (https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#cryptographic-operations)
-// . For more information about how key state affects the use of a KMS key, see
-// Key states of KMS keys (https://docs.aws.amazon.com/kms/latest/developerguide/key-state.html)
-// in the Key Management Service Developer Guide . The KMS key that you use for
-// this operation must be in a compatible key state. For details, see Key states
-// of KMS keys (https://docs.aws.amazon.com/kms/latest/developerguide/key-state.html)
-// in the Key Management Service Developer Guide. Cross-account use: No. You cannot
-// perform this operation on a KMS key in a different Amazon Web Services account.
-// Required permissions: kms:DisableKey (https://docs.aws.amazon.com/kms/latest/developerguide/kms-api-permissions-reference.html)
-// (key policy) Related operations: EnableKey Eventual consistency: The KMS API
-// follows an eventual consistency model. For more information, see KMS eventual
-// consistency (https://docs.aws.amazon.com/kms/latest/developerguide/programming-eventual-consistency.html)
-// .
+// of the KMS key for [cryptographic operations].
+//
+// For more information about how key state affects the use of a KMS key, see [Key states of KMS keys] in
+// the Key Management Service Developer Guide .
+//
+// The KMS key that you use for this operation must be in a compatible key state.
+// For details, see [Key states of KMS keys]in the Key Management Service Developer Guide.
+//
+// Cross-account use: No. You cannot perform this operation on a KMS key in a
+// different Amazon Web Services account.
+//
+// Required permissions: [kms:DisableKey] (key policy)
+//
+// Related operations: EnableKey
+//
+// Eventual consistency: The KMS API follows an eventual consistency model. For
+// more information, see [KMS eventual consistency].
+//
+// [Key states of KMS keys]: https://docs.aws.amazon.com/kms/latest/developerguide/key-state.html
+// [cryptographic operations]: https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#cryptographic-operations
+// [kms:DisableKey]: https://docs.aws.amazon.com/kms/latest/developerguide/kms-api-permissions-reference.html
+// [KMS eventual consistency]: https://docs.aws.amazon.com/kms/latest/developerguide/programming-eventual-consistency.html
 func (c *Client) DisableKey(ctx context.Context, params *DisableKeyInput, optFns ...func(*Options)) (*DisableKeyOutput, error) {
 	if params == nil {
 		params = &DisableKeyInput{}
@@ -42,12 +50,18 @@ func (c *Client) DisableKey(ctx context.Context, params *DisableKeyInput, optFns
 
 type DisableKeyInput struct {
 
-	// Identifies the KMS key to disable. Specify the key ID or key ARN of the KMS
-	// key. For example:
+	// Identifies the KMS key to disable.
+	//
+	// Specify the key ID or key ARN of the KMS key.
+	//
+	// For example:
+	//
 	//   - Key ID: 1234abcd-12ab-34cd-56ef-1234567890ab
+	//
 	//   - Key ARN:
 	//   arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab
-	// To get the key ID and key ARN for a KMS key, use ListKeys or DescribeKey .
+	//
+	// To get the key ID and key ARN for a KMS key, use ListKeys or DescribeKey.
 	//
 	// This member is required.
 	KeyId *string
@@ -84,25 +98,25 @@ func (c *Client) addOperationDisableKeyMiddlewares(stack *middleware.Stack, opti
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -117,13 +131,16 @@ func (c *Client) addOperationDisableKeyMiddlewares(stack *middleware.Stack, opti
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDisableKeyValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDisableKey(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

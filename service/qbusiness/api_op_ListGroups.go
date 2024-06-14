@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/qbusiness/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -54,8 +53,9 @@ type ListGroupsInput struct {
 	MaxResults *int32
 
 	// If the previous response was incomplete (because there is more data to
-	// retrieve), Amazon Q returns a pagination token in the response. You can use this
-	// pagination token to retrieve the next set of groups that are mapped to users.
+	// retrieve), Amazon Q Business returns a pagination token in the response. You can
+	// use this pagination token to retrieve the next set of groups that are mapped to
+	// users.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -66,9 +66,9 @@ type ListGroupsOutput struct {
 	// Summary information for list of groups that are mapped to users.
 	Items []types.GroupSummary
 
-	// If the response is truncated, Amazon Q returns this token that you can use in
-	// the subsequent request to retrieve the next set of groups that are mapped to
-	// users.
+	// If the response is truncated, Amazon Q Business returns this token that you can
+	// use in the subsequent request to retrieve the next set of groups that are mapped
+	// to users.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -99,25 +99,25 @@ func (c *Client) addOperationListGroupsMiddlewares(stack *middleware.Stack, opti
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -132,13 +132,16 @@ func (c *Client) addOperationListGroupsMiddlewares(stack *middleware.Stack, opti
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpListGroupsValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListGroups(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

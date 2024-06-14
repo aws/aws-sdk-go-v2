@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/ssoadmin/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -32,20 +31,19 @@ func (c *Client) ListAccountsForProvisionedPermissionSet(ctx context.Context, pa
 type ListAccountsForProvisionedPermissionSetInput struct {
 
 	// The ARN of the IAM Identity Center instance under which the operation will be
-	// executed. For more information about ARNs, see Amazon Resource Names (ARNs) and
-	// Amazon Web Services Service Namespaces in the Amazon Web Services General
-	// Reference.
+	// executed. For more information about ARNs, see Amazon Resource Names (ARNs) and Amazon Web Services Service Namespacesin the Amazon Web Services
+	// General Reference.
 	//
 	// This member is required.
 	InstanceArn *string
 
-	// The ARN of the PermissionSet from which the associated Amazon Web Services
-	// accounts will be listed.
+	// The ARN of the PermissionSet from which the associated Amazon Web Services accounts will be
+	// listed.
 	//
 	// This member is required.
 	PermissionSetArn *string
 
-	// The maximum number of results to display for the PermissionSet .
+	// The maximum number of results to display for the PermissionSet.
 	MaxResults *int32
 
 	// The pagination token for the list API. Initially the value is null. Use the
@@ -95,25 +93,25 @@ func (c *Client) addOperationListAccountsForProvisionedPermissionSetMiddlewares(
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -128,13 +126,16 @@ func (c *Client) addOperationListAccountsForProvisionedPermissionSetMiddlewares(
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpListAccountsForProvisionedPermissionSetValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListAccountsForProvisionedPermissionSet(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -163,7 +164,7 @@ var _ ListAccountsForProvisionedPermissionSetAPIClient = (*Client)(nil)
 // ListAccountsForProvisionedPermissionSetPaginatorOptions is the paginator
 // options for ListAccountsForProvisionedPermissionSet
 type ListAccountsForProvisionedPermissionSetPaginatorOptions struct {
-	// The maximum number of results to display for the PermissionSet .
+	// The maximum number of results to display for the PermissionSet.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

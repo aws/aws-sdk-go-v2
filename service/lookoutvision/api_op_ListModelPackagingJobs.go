@@ -6,17 +6,20 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/lookoutvision/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists the model packaging jobs created for an Amazon Lookout for Vision
-// project. This operation requires permissions to perform the
-// lookoutvision:ListModelPackagingJobs operation. For more information, see Using
-// your Amazon Lookout for Vision model on an edge device in the Amazon Lookout for
-// Vision Developer Guide.
+//	Lists the model packaging jobs created for an Amazon Lookout for Vision
+//
+// project.
+//
+// This operation requires permissions to perform the
+// lookoutvision:ListModelPackagingJobs operation.
+//
+// For more information, see Using your Amazon Lookout for Vision model on an edge
+// device in the Amazon Lookout for Vision Developer Guide.
 func (c *Client) ListModelPackagingJobs(ctx context.Context, params *ListModelPackagingJobsInput, optFns ...func(*Options)) (*ListModelPackagingJobsOutput, error) {
 	if params == nil {
 		params = &ListModelPackagingJobsInput{}
@@ -34,7 +37,7 @@ func (c *Client) ListModelPackagingJobs(ctx context.Context, params *ListModelPa
 
 type ListModelPackagingJobsInput struct {
 
-	// The name of the project for which you want to list the model packaging jobs.
+	//  The name of the project for which you want to list the model packaging jobs.
 	//
 	// This member is required.
 	ProjectName *string
@@ -54,8 +57,8 @@ type ListModelPackagingJobsInput struct {
 
 type ListModelPackagingJobsOutput struct {
 
-	// A list of the model packaging jobs created for the specified Amazon Lookout for
-	// Vision project.
+	//  A list of the model packaging jobs created for the specified Amazon Lookout
+	// for Vision project.
 	ModelPackagingJobs []types.ModelPackagingJobMetadata
 
 	// If the previous response was incomplete (because there is more results to
@@ -91,25 +94,25 @@ func (c *Client) addOperationListModelPackagingJobsMiddlewares(stack *middleware
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -124,13 +127,16 @@ func (c *Client) addOperationListModelPackagingJobsMiddlewares(stack *middleware
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpListModelPackagingJobsValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListModelPackagingJobs(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

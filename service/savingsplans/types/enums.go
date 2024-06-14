@@ -11,8 +11,9 @@ const (
 )
 
 // Values returns all known values for CurrencyCode. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (CurrencyCode) Values() []CurrencyCode {
 	return []CurrencyCode{
 		"CNY",
@@ -30,8 +31,9 @@ const (
 
 // Values returns all known values for SavingsPlanOfferingFilterAttribute. Note
 // that this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (SavingsPlanOfferingFilterAttribute) Values() []SavingsPlanOfferingFilterAttribute {
 	return []SavingsPlanOfferingFilterAttribute{
 		"region",
@@ -49,8 +51,9 @@ const (
 
 // Values returns all known values for SavingsPlanOfferingPropertyKey. Note that
 // this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (SavingsPlanOfferingPropertyKey) Values() []SavingsPlanOfferingPropertyKey {
 	return []SavingsPlanOfferingPropertyKey{
 		"region",
@@ -69,6 +72,7 @@ const (
 
 // Values returns all known values for SavingsPlanPaymentOption. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (SavingsPlanPaymentOption) Values() []SavingsPlanPaymentOption {
 	return []SavingsPlanPaymentOption{
@@ -89,8 +93,9 @@ const (
 )
 
 // Values returns all known values for SavingsPlanProductType. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (SavingsPlanProductType) Values() []SavingsPlanProductType {
 	return []SavingsPlanProductType{
 		"EC2",
@@ -114,8 +119,9 @@ const (
 
 // Values returns all known values for SavingsPlanRateFilterAttribute. Note that
 // this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (SavingsPlanRateFilterAttribute) Values() []SavingsPlanRateFilterAttribute {
 	return []SavingsPlanRateFilterAttribute{
 		"region",
@@ -143,6 +149,7 @@ const (
 
 // Values returns all known values for SavingsPlanRateFilterName. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (SavingsPlanRateFilterName) Values() []SavingsPlanRateFilterName {
 	return []SavingsPlanRateFilterName{
@@ -170,6 +177,7 @@ const (
 
 // Values returns all known values for SavingsPlanRatePropertyKey. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (SavingsPlanRatePropertyKey) Values() []SavingsPlanRatePropertyKey {
 	return []SavingsPlanRatePropertyKey{
@@ -194,6 +202,7 @@ const (
 
 // Values returns all known values for SavingsPlanRateServiceCode. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (SavingsPlanRateServiceCode) Values() []SavingsPlanRateServiceCode {
 	return []SavingsPlanRateServiceCode{
@@ -215,8 +224,9 @@ const (
 )
 
 // Values returns all known values for SavingsPlanRateUnit. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (SavingsPlanRateUnit) Values() []SavingsPlanRateUnit {
 	return []SavingsPlanRateUnit{
 		"Hrs",
@@ -241,8 +251,9 @@ const (
 )
 
 // Values returns all known values for SavingsPlansFilterName. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (SavingsPlansFilterName) Values() []SavingsPlansFilterName {
 	return []SavingsPlansFilterName{
 		"region",
@@ -267,11 +278,14 @@ const (
 	SavingsPlanStateRetired        SavingsPlanState = "retired"
 	SavingsPlanStateQueued         SavingsPlanState = "queued"
 	SavingsPlanStateQueuedDeleted  SavingsPlanState = "queued-deleted"
+	SavingsPlanStatePendingReturn  SavingsPlanState = "pending-return"
+	SavingsPlanStateReturned       SavingsPlanState = "returned"
 )
 
 // Values returns all known values for SavingsPlanState. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (SavingsPlanState) Values() []SavingsPlanState {
 	return []SavingsPlanState{
 		"payment-pending",
@@ -280,6 +294,8 @@ func (SavingsPlanState) Values() []SavingsPlanState {
 		"retired",
 		"queued",
 		"queued-deleted",
+		"pending-return",
+		"returned",
 	}
 }
 
@@ -293,8 +309,9 @@ const (
 )
 
 // Values returns all known values for SavingsPlanType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (SavingsPlanType) Values() []SavingsPlanType {
 	return []SavingsPlanType{
 		"Compute",

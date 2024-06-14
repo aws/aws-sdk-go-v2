@@ -6,15 +6,13 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/inspector/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Lists all the event subscriptions for the assessment template that is specified
-// by the ARN of the assessment template. For more information, see
-// SubscribeToEvent and UnsubscribeFromEvent .
+// by the ARN of the assessment template. For more information, see SubscribeToEventand UnsubscribeFromEvent.
 func (c *Client) ListEventSubscriptions(ctx context.Context, params *ListEventSubscriptionsInput, optFns ...func(*Options)) (*ListEventSubscriptionsOutput, error) {
 	if params == nil {
 		params = &ListEventSubscriptionsInput{}
@@ -56,7 +54,7 @@ type ListEventSubscriptionsOutput struct {
 	// This member is required.
 	Subscriptions []types.Subscription
 
-	// When a response is generated, if there is more data to be listed, this
+	//  When a response is generated, if there is more data to be listed, this
 	// parameter is present in the response and contains the value to use for the
 	// nextToken parameter in a subsequent pagination request. If there is no more data
 	// to be listed, this parameter is set to null.
@@ -90,25 +88,25 @@ func (c *Client) addOperationListEventSubscriptionsMiddlewares(stack *middleware
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -123,10 +121,13 @@ func (c *Client) addOperationListEventSubscriptionsMiddlewares(stack *middleware
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListEventSubscriptions(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

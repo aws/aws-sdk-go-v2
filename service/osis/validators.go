@@ -395,6 +395,21 @@ func validateTagList(v []types.Tag) error {
 	}
 }
 
+func validateVpcAttachmentOptions(v *types.VpcAttachmentOptions) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "VpcAttachmentOptions"}
+	if v.AttachToVpc == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AttachToVpc"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateVpcOptions(v *types.VpcOptions) error {
 	if v == nil {
 		return nil
@@ -402,6 +417,11 @@ func validateVpcOptions(v *types.VpcOptions) error {
 	invalidParams := smithy.InvalidParamsError{Context: "VpcOptions"}
 	if v.SubnetIds == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("SubnetIds"))
+	}
+	if v.VpcAttachmentOptions != nil {
+		if err := validateVpcAttachmentOptions(v.VpcAttachmentOptions); err != nil {
+			invalidParams.AddNested("VpcAttachmentOptions", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

@@ -1831,6 +1831,61 @@ func (m *awsAwsjson11_serializeOpRetryStageExecution) HandleSerialize(ctx contex
 	return next.HandleSerialize(ctx, in)
 }
 
+type awsAwsjson11_serializeOpRollbackStage struct {
+}
+
+func (*awsAwsjson11_serializeOpRollbackStage) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson11_serializeOpRollbackStage) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*RollbackStageInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("CodePipeline_20150709.RollbackStage")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeOpDocumentRollbackStageInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
 type awsAwsjson11_serializeOpStartPipelineExecution struct {
 }
 
@@ -2281,6 +2336,11 @@ func awsAwsjson11_serializeDocumentActionDeclaration(v *types.ActionDeclaration,
 	if v.RunOrder != nil {
 		ok := object.Key("runOrder")
 		ok.Integer(*v.RunOrder)
+	}
+
+	if v.TimeoutInMinutes != nil {
+		ok := object.Key("timeoutInMinutes")
+		ok.Integer(*v.TimeoutInMinutes)
 	}
 
 	return nil
@@ -2793,6 +2853,18 @@ func awsAwsjson11_serializeDocumentExecutorConfiguration(v *types.ExecutorConfig
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentFailureConditions(v *types.FailureConditions, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.Result) > 0 {
+		ok := object.Key("result")
+		ok.String(string(v.Result))
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentFailureDetails(v *types.FailureDetails, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -3208,6 +3280,20 @@ func awsAwsjson11_serializeDocumentPipelineDeclaration(v *types.PipelineDeclarat
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentPipelineExecutionFilter(v *types.PipelineExecutionFilter, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.SucceededInStage != nil {
+		ok := object.Key("succeededInStage")
+		if err := awsAwsjson11_serializeDocumentSucceededInStageFilter(v.SucceededInStage, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentPipelineStageDeclarationList(v []types.StageDeclaration, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
@@ -3433,6 +3519,25 @@ func awsAwsjson11_serializeDocumentStageDeclaration(v *types.StageDeclaration, v
 	if v.Name != nil {
 		ok := object.Key("name")
 		ok.String(*v.Name)
+	}
+
+	if v.OnFailure != nil {
+		ok := object.Key("onFailure")
+		if err := awsAwsjson11_serializeDocumentFailureConditions(v.OnFailure, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentSucceededInStageFilter(v *types.SucceededInStageFilter, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.StageName != nil {
+		ok := object.Key("stageName")
+		ok.String(*v.StageName)
 	}
 
 	return nil
@@ -3948,6 +4053,13 @@ func awsAwsjson11_serializeOpDocumentListPipelineExecutionsInput(v *ListPipeline
 	object := value.Object()
 	defer object.Close()
 
+	if v.Filter != nil {
+		ok := object.Key("filter")
+		if err := awsAwsjson11_serializeDocumentPipelineExecutionFilter(v.Filter, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.MaxResults != nil {
 		ok := object.Key("maxResults")
 		ok.Integer(*v.MaxResults)
@@ -4302,6 +4414,28 @@ func awsAwsjson11_serializeOpDocumentRetryStageExecutionInput(v *RetryStageExecu
 	if v.StageName != nil {
 		ok := object.Key("stageName")
 		ok.String(*v.StageName)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeOpDocumentRollbackStageInput(v *RollbackStageInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.PipelineName != nil {
+		ok := object.Key("pipelineName")
+		ok.String(*v.PipelineName)
+	}
+
+	if v.StageName != nil {
+		ok := object.Key("stageName")
+		ok.String(*v.StageName)
+	}
+
+	if v.TargetPipelineExecutionId != nil {
+		ok := object.Key("targetPipelineExecutionId")
+		ok.String(*v.TargetPipelineExecutionId)
 	}
 
 	return nil

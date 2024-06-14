@@ -61,7 +61,7 @@ func TestClient_QueryLists_awsEc2querySerialize(t *testing.T) {
 				return smithytesting.CompareURLFormReaderBytes(actual, []byte(`Action=QueryLists&Version=2020-01-08&ListArg.1=foo&ListArg.2=bar&ListArg.3=baz&ComplexListArg.1.Hi=hello&ComplexListArg.2.Hi=hola`))
 			},
 		},
-		// Serializes empty query lists
+		// Does not serialize empty query lists.
 		"Ec2EmptyQueryLists": {
 			Params: &QueryListsInput{
 				ListArg: []string{},
@@ -74,7 +74,7 @@ func TestClient_QueryLists_awsEc2querySerialize(t *testing.T) {
 			},
 			BodyMediaType: "application/x-www-form-urlencoded",
 			BodyAssert: func(actual io.Reader) error {
-				return smithytesting.CompareURLFormReaderBytes(actual, []byte(`Action=QueryLists&Version=2020-01-08&ListArg=`))
+				return smithytesting.CompareURLFormReaderBytes(actual, []byte(`Action=QueryLists&Version=2020-01-08`))
 			},
 		},
 		// An xmlName trait in the member of a list has no effect on the list

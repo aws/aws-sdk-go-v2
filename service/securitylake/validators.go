@@ -798,7 +798,9 @@ func validateOpCreateCustomLogSourceInput(v *CreateCustomLogSourceInput) error {
 	if v.SourceName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("SourceName"))
 	}
-	if v.Configuration != nil {
+	if v.Configuration == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Configuration"))
+	} else if v.Configuration != nil {
 		if err := validateCustomLogSourceConfiguration(v.Configuration); err != nil {
 			invalidParams.AddNested("Configuration", err.(smithy.InvalidParamsError))
 		}
@@ -860,9 +862,7 @@ func validateOpCreateDataLakeOrganizationConfigurationInput(v *CreateDataLakeOrg
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateDataLakeOrganizationConfigurationInput"}
-	if v.AutoEnableNewAccount == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("AutoEnableNewAccount"))
-	} else if v.AutoEnableNewAccount != nil {
+	if v.AutoEnableNewAccount != nil {
 		if err := validateDataLakeAutoEnableNewAccountConfigurationList(v.AutoEnableNewAccount); err != nil {
 			invalidParams.AddNested("AutoEnableNewAccount", err.(smithy.InvalidParamsError))
 		}
@@ -980,9 +980,7 @@ func validateOpDeleteDataLakeOrganizationConfigurationInput(v *DeleteDataLakeOrg
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteDataLakeOrganizationConfigurationInput"}
-	if v.AutoEnableNewAccount == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("AutoEnableNewAccount"))
-	} else if v.AutoEnableNewAccount != nil {
+	if v.AutoEnableNewAccount != nil {
 		if err := validateDataLakeAutoEnableNewAccountConfigurationList(v.AutoEnableNewAccount); err != nil {
 			invalidParams.AddNested("AutoEnableNewAccount", err.(smithy.InvalidParamsError))
 		}

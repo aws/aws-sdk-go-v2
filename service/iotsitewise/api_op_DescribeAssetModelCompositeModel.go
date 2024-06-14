@@ -6,16 +6,16 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/iotsitewise/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Retrieves information about an asset model composite model (also known as an
-// asset model component). For more information, see Custom composite models
-// (Components) (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/custom-composite-models.html)
-// in the IoT SiteWise User Guide.
+// asset model component). For more information, see [Custom composite models (Components)]in the IoT SiteWise User
+// Guide.
+//
+// [Custom composite models (Components)]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/custom-composite-models.html
 func (c *Client) DescribeAssetModelCompositeModel(ctx context.Context, params *DescribeAssetModelCompositeModelInput, optFns ...func(*Options)) (*DescribeAssetModelCompositeModelOutput, error) {
 	if params == nil {
 		params = &DescribeAssetModelCompositeModelInput{}
@@ -35,16 +35,18 @@ type DescribeAssetModelCompositeModelInput struct {
 
 	// The ID of a composite model on this asset model. This can be either the actual
 	// ID in UUID format, or else externalId: followed by the external ID, if it has
-	// one. For more information, see Referencing objects with external IDs (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/object-ids.html#external-id-references)
-	// in the IoT SiteWise User Guide.
+	// one. For more information, see [Referencing objects with external IDs]in the IoT SiteWise User Guide.
+	//
+	// [Referencing objects with external IDs]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/object-ids.html#external-id-references
 	//
 	// This member is required.
 	AssetModelCompositeModelId *string
 
 	// The ID of the asset model. This can be either the actual ID in UUID format, or
 	// else externalId: followed by the external ID, if it has one. For more
-	// information, see Referencing objects with external IDs (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/object-ids.html#external-id-references)
-	// in the IoT SiteWise User Guide.
+	// information, see [Referencing objects with external IDs]in the IoT SiteWise User Guide.
+	//
+	// [Referencing objects with external IDs]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/object-ids.html#external-id-references
 	//
 	// This member is required.
 	AssetModelId *string
@@ -102,9 +104,10 @@ type DescribeAssetModelCompositeModelOutput struct {
 	AssetModelCompositeModelExternalId *string
 
 	// Metadata for the composition relationship established by using
-	// composedAssetModelId in CreateAssetModelCompositeModel (https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_CreateAssetModelCompositeModel.html)
-	// . For instance, an array detailing the path of the composition relationship for
-	// this composite model.
+	// composedAssetModelId in [CreateAssetModelCompositeModel]CreateAssetModelCompositeModel . For instance, an array
+	// detailing the path of the composition relationship for this composite model.
+	//
+	// [CreateAssetModelCompositeModel]: https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_CreateAssetModelCompositeModel.html
 	CompositionDetails *types.CompositionDetails
 
 	// Metadata pertaining to the operation's result.
@@ -135,25 +138,25 @@ func (c *Client) addOperationDescribeAssetModelCompositeModelMiddlewares(stack *
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -168,6 +171,9 @@ func (c *Client) addOperationDescribeAssetModelCompositeModelMiddlewares(stack *
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addEndpointPrefix_opDescribeAssetModelCompositeModelMiddleware(stack); err != nil {
 		return err
 	}
@@ -177,7 +183,7 @@ func (c *Client) addOperationDescribeAssetModelCompositeModelMiddlewares(stack *
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeAssetModelCompositeModel(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

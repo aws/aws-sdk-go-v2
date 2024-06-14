@@ -6,14 +6,13 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/vpclattice/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Deletes the association between a specified service and the specific service
-// network. This request will fail if an association is still in progress.
+// network. This operation fails if an association is still in progress.
 func (c *Client) DeleteServiceNetworkServiceAssociation(ctx context.Context, params *DeleteServiceNetworkServiceAssociationInput, optFns ...func(*Options)) (*DeleteServiceNetworkServiceAssociationOutput, error) {
 	if params == nil {
 		params = &DeleteServiceNetworkServiceAssociationInput{}
@@ -47,9 +46,9 @@ type DeleteServiceNetworkServiceAssociationOutput struct {
 	// The ID of the association.
 	Id *string
 
-	// The operation's status. You can retry the operation if the status is
-	// DELETE_FAILED . However, if you retry it when the status is DELETE_IN_PROGRESS ,
-	// there is no change in the status.
+	// The status. You can retry the operation if the status is DELETE_FAILED .
+	// However, if you retry it when the status is DELETE_IN_PROGRESS , there is no
+	// change in the status.
 	Status types.ServiceNetworkServiceAssociationStatus
 
 	// Metadata pertaining to the operation's result.
@@ -80,25 +79,25 @@ func (c *Client) addOperationDeleteServiceNetworkServiceAssociationMiddlewares(s
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -113,13 +112,16 @@ func (c *Client) addOperationDeleteServiceNetworkServiceAssociationMiddlewares(s
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDeleteServiceNetworkServiceAssociationValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteServiceNetworkServiceAssociation(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

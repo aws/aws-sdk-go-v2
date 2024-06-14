@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/appstream/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -34,13 +33,14 @@ type CreateUsageReportSubscriptionInput struct {
 
 type CreateUsageReportSubscriptionOutput struct {
 
-	// The Amazon S3 bucket where generated reports are stored. If you enabled
-	// on-instance session scripts and Amazon S3 logging for your session script
-	// configuration, AppStream 2.0 created an S3 bucket to store the script output.
-	// The bucket is unique to your account and Region. When you enable usage reporting
-	// in this case, AppStream 2.0 uses the same bucket to store your usage reports. If
-	// you haven't already enabled on-instance session scripts, when you enable usage
-	// reports, AppStream 2.0 creates a new S3 bucket.
+	// The Amazon S3 bucket where generated reports are stored.
+	//
+	// If you enabled on-instance session scripts and Amazon S3 logging for your
+	// session script configuration, AppStream 2.0 created an S3 bucket to store the
+	// script output. The bucket is unique to your account and Region. When you enable
+	// usage reporting in this case, AppStream 2.0 uses the same bucket to store your
+	// usage reports. If you haven't already enabled on-instance session scripts, when
+	// you enable usage reports, AppStream 2.0 creates a new S3 bucket.
 	S3BucketName *string
 
 	// The schedule for generating usage reports.
@@ -74,25 +74,25 @@ func (c *Client) addOperationCreateUsageReportSubscriptionMiddlewares(stack *mid
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -107,10 +107,13 @@ func (c *Client) addOperationCreateUsageReportSubscriptionMiddlewares(stack *mid
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateUsageReportSubscription(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

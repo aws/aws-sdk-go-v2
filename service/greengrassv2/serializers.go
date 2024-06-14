@@ -999,6 +999,15 @@ func awsRestjson1_serializeOpHttpBindingsGetComponentVersionArtifactInput(v *Get
 		}
 	}
 
+	if len(v.IotEndpointType) > 0 {
+		locationName := "X-Amz-Iot-Endpoint-Type"
+		encoder.SetHeader(locationName).String(string(v.IotEndpointType))
+	}
+
+	if len(v.S3EndpointType) > 0 {
+		encoder.SetQuery("s3EndpointType").String(string(v.S3EndpointType))
+	}
+
 	return nil
 }
 

@@ -16,17 +16,26 @@ import (
 	"strings"
 )
 
-// This operation is not supported by directory buckets. Associates an access
-// control policy with the specified Multi-Region Access Point. Each Multi-Region
-// Access Point can have only one policy, so a request made to this action replaces
-// any existing policy that is associated with the specified Multi-Region Access
-// Point. This action will always be routed to the US West (Oregon) Region. For
-// more information about the restrictions around managing Multi-Region Access
-// Points, see Managing Multi-Region Access Points (https://docs.aws.amazon.com/AmazonS3/latest/userguide/ManagingMultiRegionAccessPoints.html)
-// in the Amazon S3 User Guide. The following actions are related to
-// PutMultiRegionAccessPointPolicy :
-//   - GetMultiRegionAccessPointPolicy (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetMultiRegionAccessPointPolicy.html)
-//   - GetMultiRegionAccessPointPolicyStatus (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetMultiRegionAccessPointPolicyStatus.html)
+// This operation is not supported by directory buckets.
+//
+// Associates an access control policy with the specified Multi-Region Access
+// Point. Each Multi-Region Access Point can have only one policy, so a request
+// made to this action replaces any existing policy that is associated with the
+// specified Multi-Region Access Point.
+//
+// This action will always be routed to the US West (Oregon) Region. For more
+// information about the restrictions around working with Multi-Region Access
+// Points, see [Multi-Region Access Point restrictions and limitations]in the Amazon S3 User Guide.
+//
+// The following actions are related to PutMultiRegionAccessPointPolicy :
+//
+// [GetMultiRegionAccessPointPolicy]
+//
+// [GetMultiRegionAccessPointPolicyStatus]
+//
+// [GetMultiRegionAccessPointPolicyStatus]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetMultiRegionAccessPointPolicyStatus.html
+// [GetMultiRegionAccessPointPolicy]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetMultiRegionAccessPointPolicy.html
+// [Multi-Region Access Point restrictions and limitations]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/MultiRegionAccessPointRestrictions.html
 func (c *Client) PutMultiRegionAccessPointPolicy(ctx context.Context, params *PutMultiRegionAccessPointPolicyInput, optFns ...func(*Options)) (*PutMultiRegionAccessPointPolicyOutput, error) {
 	if params == nil {
 		params = &PutMultiRegionAccessPointPolicyInput{}
@@ -72,9 +81,10 @@ func (in *PutMultiRegionAccessPointPolicyInput) bindEndpointParams(p *EndpointPa
 
 type PutMultiRegionAccessPointPolicyOutput struct {
 
-	// The request token associated with the request. You can use this token with
-	// DescribeMultiRegionAccessPointOperation (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DescribeMultiRegionAccessPointOperation.html)
-	// to determine the status of asynchronous requests.
+	// The request token associated with the request. You can use this token with [DescribeMultiRegionAccessPointOperation] to
+	// determine the status of asynchronous requests.
+	//
+	// [DescribeMultiRegionAccessPointOperation]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DescribeMultiRegionAccessPointOperation.html
 	RequestTokenARN *string
 
 	// Metadata pertaining to the operation's result.
@@ -105,25 +115,25 @@ func (c *Client) addOperationPutMultiRegionAccessPointPolicyMiddlewares(stack *m
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -139,6 +149,9 @@ func (c *Client) addOperationPutMultiRegionAccessPointPolicyMiddlewares(stack *m
 		return err
 	}
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
+		return err
+	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
 		return err
 	}
 	if err = smithyhttp.AddContentChecksumMiddleware(stack); err != nil {
@@ -159,7 +172,7 @@ func (c *Client) addOperationPutMultiRegionAccessPointPolicyMiddlewares(stack *m
 	if err = addMetadataRetrieverMiddleware(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addPutMultiRegionAccessPointPolicyUpdateEndpoint(stack, options); err != nil {

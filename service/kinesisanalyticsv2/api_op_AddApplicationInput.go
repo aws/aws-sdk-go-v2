@@ -6,19 +6,20 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/kinesisanalyticsv2/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Adds a streaming source to your SQL-based Kinesis Data Analytics application.
+//	Adds a streaming source to your SQL-based Kinesis Data Analytics application.
+//
 // You can add a streaming source when you create an application, or you can use
 // this operation to add a streaming source after you create an application. For
-// more information, see CreateApplication . Any configuration update, including
-// adding a streaming source using this operation, results in a new version of the
-// application. You can use the DescribeApplication operation to find the current
-// application version.
+// more information, see CreateApplication.
+//
+// Any configuration update, including adding a streaming source using this
+// operation, results in a new version of the application. You can use the DescribeApplication
+// operation to find the current application version.
 func (c *Client) AddApplicationInput(ctx context.Context, params *AddApplicationInputInput, optFns ...func(*Options)) (*AddApplicationInputOutput, error) {
 	if params == nil {
 		params = &AddApplicationInputInput{}
@@ -43,8 +44,8 @@ type AddApplicationInputInput struct {
 	ApplicationName *string
 
 	// The current version of your application. You must provide the
-	// ApplicationVersionID or the ConditionalToken .You can use the
-	// DescribeApplication operation to find the current application version.
+	// ApplicationVersionID or the ConditionalToken .You can use the DescribeApplication operation to
+	// find the current application version.
 	//
 	// This member is required.
 	CurrentApplicationVersionId *int64
@@ -96,25 +97,25 @@ func (c *Client) addOperationAddApplicationInputMiddlewares(stack *middleware.St
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -129,13 +130,16 @@ func (c *Client) addOperationAddApplicationInputMiddlewares(stack *middleware.St
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpAddApplicationInputValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opAddApplicationInput(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

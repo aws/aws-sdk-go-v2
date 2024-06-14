@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/elasticache/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -45,8 +44,11 @@ type DescribeCacheSubnetGroupsInput struct {
 
 	// The maximum number of records to include in the response. If more records exist
 	// than the specified MaxRecords value, a marker is included in the response so
-	// that the remaining results can be retrieved. Default: 100 Constraints: minimum
-	// 20; maximum 100.
+	// that the remaining results can be retrieved.
+	//
+	// Default: 100
+	//
+	// Constraints: minimum 20; maximum 100.
 	MaxRecords *int32
 
 	noSmithyDocumentSerde
@@ -90,25 +92,25 @@ func (c *Client) addOperationDescribeCacheSubnetGroupsMiddlewares(stack *middlew
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -123,10 +125,13 @@ func (c *Client) addOperationDescribeCacheSubnetGroupsMiddlewares(stack *middlew
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeCacheSubnetGroups(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -157,8 +162,11 @@ var _ DescribeCacheSubnetGroupsAPIClient = (*Client)(nil)
 type DescribeCacheSubnetGroupsPaginatorOptions struct {
 	// The maximum number of records to include in the response. If more records exist
 	// than the specified MaxRecords value, a marker is included in the response so
-	// that the remaining results can be retrieved. Default: 100 Constraints: minimum
-	// 20; maximum 100.
+	// that the remaining results can be retrieved.
+	//
+	// Default: 100
+	//
+	// Constraints: minimum 20; maximum 100.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

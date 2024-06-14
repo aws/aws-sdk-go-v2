@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -35,7 +34,7 @@ type CreateProcessingJobInput struct {
 	// This member is required.
 	AppSpecification *types.AppSpecification
 
-	// The name of the processing job. The name must be unique within an Amazon Web
+	//  The name of the processing job. The name must be unique within an Amazon Web
 	// Services Region in the Amazon Web Services account.
 	//
 	// This member is required.
@@ -60,9 +59,16 @@ type CreateProcessingJobInput struct {
 
 	// Associates a SageMaker job as a trial component with an experiment and trial.
 	// Specified when you call the following APIs:
-	//   - CreateProcessingJob (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateProcessingJob.html)
-	//   - CreateTrainingJob (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateTrainingJob.html)
-	//   - CreateTransformJob (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateTransformJob.html)
+	//
+	// [CreateProcessingJob]
+	//
+	// [CreateTrainingJob]
+	//
+	// [CreateTransformJob]
+	//
+	// [CreateTransformJob]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateTransformJob.html
+	// [CreateTrainingJob]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateTrainingJob.html
+	// [CreateProcessingJob]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateProcessingJob.html
 	ExperimentConfig *types.ExperimentConfig
 
 	// Networking options for a processing job, such as whether to allow inbound and
@@ -80,9 +86,10 @@ type CreateProcessingJobInput struct {
 	// The time limit for how long the processing job is allowed to run.
 	StoppingCondition *types.ProcessingStoppingCondition
 
-	// (Optional) An array of key-value pairs. For more information, see Using Cost
-	// Allocation Tags (https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html#allocation-whatURL)
-	// in the Amazon Web Services Billing and Cost Management User Guide.
+	// (Optional) An array of key-value pairs. For more information, see [Using Cost Allocation Tags] in the
+	// Amazon Web Services Billing and Cost Management User Guide.
+	//
+	// [Using Cost Allocation Tags]: https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html#allocation-whatURL
 	Tags []types.Tag
 
 	noSmithyDocumentSerde
@@ -123,25 +130,25 @@ func (c *Client) addOperationCreateProcessingJobMiddlewares(stack *middleware.St
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -156,13 +163,16 @@ func (c *Client) addOperationCreateProcessingJobMiddlewares(stack *middleware.St
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpCreateProcessingJobValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateProcessingJob(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

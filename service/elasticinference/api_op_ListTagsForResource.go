@@ -6,19 +6,19 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns all tags of an Elastic Inference Accelerator. February 15, 2023:
-// Starting April 15, 2023, AWS will not onboard new customers to Amazon Elastic
-// Inference (EI), and will help current customers migrate their workloads to
-// options that offer better price and performance. After April 15, 2023, new
-// customers will not be able to launch instances with Amazon EI accelerators in
-// Amazon SageMaker, Amazon ECS, or Amazon EC2. However, customers who have used
-// Amazon EI at least once during the past 30-day period are considered current
-// customers and will be able to continue using the service.
+//	Returns all tags of an Elastic Inference Accelerator.
+//
+// February 15, 2023: Starting April 15, 2023, AWS will not onboard new customers
+// to Amazon Elastic Inference (EI), and will help current customers migrate their
+// workloads to options that offer better price and performance. After April 15,
+// 2023, new customers will not be able to launch instances with Amazon EI
+// accelerators in Amazon SageMaker, Amazon ECS, or Amazon EC2. However, customers
+// who have used Amazon EI at least once during the past 30-day period are
+// considered current customers and will be able to continue using the service.
 func (c *Client) ListTagsForResource(ctx context.Context, params *ListTagsForResourceInput, optFns ...func(*Options)) (*ListTagsForResourceOutput, error) {
 	if params == nil {
 		params = &ListTagsForResourceInput{}
@@ -36,7 +36,7 @@ func (c *Client) ListTagsForResource(ctx context.Context, params *ListTagsForRes
 
 type ListTagsForResourceInput struct {
 
-	// The ARN of the Elastic Inference Accelerator to list the tags for.
+	//  The ARN of the Elastic Inference Accelerator to list the tags for.
 	//
 	// This member is required.
 	ResourceArn *string
@@ -46,7 +46,7 @@ type ListTagsForResourceInput struct {
 
 type ListTagsForResourceOutput struct {
 
-	// The tags of the Elastic Inference Accelerator.
+	//  The tags of the Elastic Inference Accelerator.
 	Tags map[string]string
 
 	// Metadata pertaining to the operation's result.
@@ -77,25 +77,25 @@ func (c *Client) addOperationListTagsForResourceMiddlewares(stack *middleware.St
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -110,13 +110,16 @@ func (c *Client) addOperationListTagsForResourceMiddlewares(stack *middleware.St
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpListTagsForResourceValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListTagsForResource(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

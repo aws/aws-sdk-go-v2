@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -17,7 +16,9 @@ import (
 // schedules are deleted. Schedules associated with the group that are set to run
 // while the schedule group is in the process of being deleted might continue to
 // invoke their targets until the schedule group and its associated schedules are
-// deleted. This operation is eventually consistent.
+// deleted.
+//
+// This operation is eventually consistent.
 func (c *Client) DeleteScheduleGroup(ctx context.Context, params *DeleteScheduleGroupInput, optFns ...func(*Options)) (*DeleteScheduleGroupOutput, error) {
 	if params == nil {
 		params = &DeleteScheduleGroupInput{}
@@ -40,7 +41,7 @@ type DeleteScheduleGroupInput struct {
 	// This member is required.
 	Name *string
 
-	// Unique, case-sensitive identifier you provide to ensure the idempotency of the
+	//  Unique, case-sensitive identifier you provide to ensure the idempotency of the
 	// request. If you do not specify a client token, EventBridge Scheduler uses a
 	// randomly generated token for the request to ensure idempotency.
 	ClientToken *string
@@ -77,25 +78,25 @@ func (c *Client) addOperationDeleteScheduleGroupMiddlewares(stack *middleware.St
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -110,6 +111,9 @@ func (c *Client) addOperationDeleteScheduleGroupMiddlewares(stack *middleware.St
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opDeleteScheduleGroupMiddleware(stack, options); err != nil {
 		return err
 	}
@@ -119,7 +123,7 @@ func (c *Client) addOperationDeleteScheduleGroupMiddlewares(stack *middleware.St
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteScheduleGroup(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

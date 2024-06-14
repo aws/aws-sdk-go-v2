@@ -11,13 +11,18 @@ import (
 // and the target (for example, a column name) that can be accepted.
 type AcceptChoice struct {
 
+	// Specifies the target (for example, a column name) where a prediction can be
+	// accepted.
+	//
+	// This member is required.
+	PredictionTarget *string
+
+	// The edit of the prediction.
+	EditedValue *string
+
 	// Specifies the prediction (aka, the automatically generated piece of metadata)
 	// that can be accepted.
 	PredictionChoice *int32
-
-	// Specifies the target (for example, a column name) where a prediction can be
-	// accepted.
-	PredictionTarget *string
 
 	noSmithyDocumentSerde
 }
@@ -34,6 +39,24 @@ type AcceptRule struct {
 
 	noSmithyDocumentSerde
 }
+
+// The parameters of the environment action.
+//
+// The following types satisfy this interface:
+//
+//	ActionParametersMemberAwsConsoleLink
+type ActionParameters interface {
+	isActionParameters()
+}
+
+// The console link specified as part of the environment action.
+type ActionParametersMemberAwsConsoleLink struct {
+	Value AwsConsoleLinkParameters
+
+	noSmithyDocumentSerde
+}
+
+func (*ActionParametersMemberAwsConsoleLink) isActionParameters() {}
 
 // A Amazon DataZone inventory asset.
 type AssetItem struct {
@@ -103,6 +126,10 @@ type AssetItemAdditionalAttributes struct {
 	// The forms included in the additional attributes of an inventory asset.
 	FormsOutput []FormOutput
 
+	// The latest time series data points forms included in the additional attributes
+	// of an asset.
+	LatestTimeSeriesDataPointFormsOutput []TimeSeriesDataPointSummaryFormOutput
+
 	// The read-only forms included in the additional attributes of an inventory asset.
 	ReadOnlyFormsOutput []FormOutput
 
@@ -125,11 +152,17 @@ type AssetListing struct {
 	// created.
 	CreatedAt *time.Time
 
-	// The metadata forms attached to an asset published in an Amazon DataZone catalog.
+	// The metadata forms attached to an asset published in an Amazon DataZone
+	// catalog.
 	Forms *string
 
-	// The glossary terms attached to an asset published in an Amazon DataZone catalog.
+	// The glossary terms attached to an asset published in an Amazon DataZone
+	// catalog.
 	GlossaryTerms []DetailedGlossaryTerm
+
+	// The latest time series data points forms included in the additional attributes
+	// of an asset.
+	LatestTimeSeriesDataPointForms []TimeSeriesDataPointSummaryFormOutput
 
 	// The identifier of the project where an asset published in an Amazon DataZone
 	// catalog exists.
@@ -206,6 +239,10 @@ type AssetListingItemAdditionalAttributes struct {
 	// The metadata forms that form additional attributes of the metadata asset.
 	Forms *string
 
+	// The latest time series data points forms included in the additional attributes
+	// of an asset.
+	LatestTimeSeriesDataPointForms []TimeSeriesDataPointSummaryFormOutput
+
 	noSmithyDocumentSerde
 }
 
@@ -230,6 +267,7 @@ type AssetRevision struct {
 	noSmithyDocumentSerde
 }
 
+// The name map for assets.
 type AssetTargetNameMap struct {
 
 	// The identifier of the inventory asset.
@@ -294,6 +332,15 @@ type AssetTypeItem struct {
 
 	// The Amazon DataZone user who updated the asset type.
 	UpdatedBy *string
+
+	noSmithyDocumentSerde
+}
+
+// The parameters of the console link specified as part of the environment action.
+type AwsConsoleLinkParameters struct {
+
+	// The URI of the console link specified as part of the environment action.
+	Uri *string
 
 	noSmithyDocumentSerde
 }
@@ -769,6 +816,42 @@ type DomainSummary struct {
 	noSmithyDocumentSerde
 }
 
+// The details about the specified action configured for an environment. For
+// example, the details of the specified console links for an analytics tool that
+// is available in this environment.
+type EnvironmentActionSummary struct {
+
+	// The Amazon DataZone domain ID of the environment action.
+	//
+	// This member is required.
+	DomainId *string
+
+	// The environment ID of the environment action.
+	//
+	// This member is required.
+	EnvironmentId *string
+
+	// The ID of the environment action.
+	//
+	// This member is required.
+	Id *string
+
+	// The name of the environment action.
+	//
+	// This member is required.
+	Name *string
+
+	// The parameters of the environment action.
+	//
+	// This member is required.
+	Parameters ActionParameters
+
+	// The environment action description.
+	Description *string
+
+	noSmithyDocumentSerde
+}
+
 // The configuration details of an environment blueprint.
 type EnvironmentBlueprintConfigurationItem struct {
 
@@ -931,12 +1014,6 @@ type EnvironmentSummary struct {
 	// This member is required.
 	DomainId *string
 
-	// The identifier of the environment profile with which the environment was
-	// created.
-	//
-	// This member is required.
-	EnvironmentProfileId *string
-
 	// The name of the environment.
 	//
 	// This member is required.
@@ -964,6 +1041,10 @@ type EnvironmentSummary struct {
 
 	// The description of the environment.
 	Description *string
+
+	// The identifier of the environment profile with which the environment was
+	// created.
+	EnvironmentProfileId *string
 
 	// The identifier of the environment.
 	Id *string
@@ -1293,6 +1374,10 @@ type GlueRunConfigurationInput struct {
 	// This member is required.
 	RelationalFilterConfigurations []RelationalFilterConfiguration
 
+	// Specifies whether to automatically import data quality metrics as part of the
+	// data source run.
+	AutoImportDataQualityResult *bool
+
 	// The data access role included in the configuration details of the Amazon Web
 	// Services Glue data source.
 	DataAccessRole *string
@@ -1313,6 +1398,10 @@ type GlueRunConfigurationOutput struct {
 	// Amazon Web Services Glue data source.
 	AccountId *string
 
+	// Specifies whether to automatically import data quality metrics as part of the
+	// data source run.
+	AutoImportDataQualityResult *bool
+
 	// The data access role included in the configuration details of the Amazon Web
 	// Services Glue data source.
 	DataAccessRole *string
@@ -1320,6 +1409,17 @@ type GlueRunConfigurationOutput struct {
 	// The Amazon Web Services region included in the configuration details of the
 	// Amazon Web Services Glue data source.
 	Region *string
+
+	noSmithyDocumentSerde
+}
+
+// The details of the self granting status.
+type GlueSelfGrantStatusOutput struct {
+
+	// The details for the self granting status for a Glue data source.
+	//
+	// This member is required.
+	SelfGrantStatusDetails []SelfGrantStatusDetail
 
 	noSmithyDocumentSerde
 }
@@ -1522,6 +1622,65 @@ type MemberDetailsMemberUser struct {
 
 func (*MemberDetailsMemberUser) isMemberDetails() {}
 
+// The metadata generation run.
+type MetadataGenerationRunItem struct {
+
+	// The ID of the Amazon DataZone domain in which the metadata generation run was
+	// created.
+	//
+	// This member is required.
+	DomainId *string
+
+	// The ID of the metadata generation run.
+	//
+	// This member is required.
+	Id *string
+
+	// The ID of the project that owns the asset for which the metadata generation was
+	// ran.
+	//
+	// This member is required.
+	OwningProjectId *string
+
+	// The timestamp at which the metadata generation run was created.
+	CreatedAt *time.Time
+
+	// The user who created the metadata generation run.
+	CreatedBy *string
+
+	// The status of the metadata generation run.
+	Status MetadataGenerationRunStatus
+
+	// The asset for which metadata was generated.
+	Target *MetadataGenerationRunTarget
+
+	// The type of the metadata generation run.
+	Type MetadataGenerationRunType
+
+	noSmithyDocumentSerde
+}
+
+// The asset for which metadata was generated.
+type MetadataGenerationRunTarget struct {
+
+	// The ID of the metadata generation run's target.
+	//
+	// This member is required.
+	Identifier *string
+
+	// The type of the asset for which metadata was generated.
+	//
+	// This member is required.
+	Type MetadataGenerationTargetType
+
+	// The revision of the asset for which metadata was generated.
+	Revision *string
+
+	noSmithyDocumentSerde
+}
+
+// The model of the API.
+//
 // The following types satisfy this interface:
 //
 //	ModelMemberSmithy
@@ -1529,6 +1688,7 @@ type Model interface {
 	isModel()
 }
 
+// Indicates the smithy model of the API.
 type ModelMemberSmithy struct {
 	Value string
 
@@ -1622,13 +1782,14 @@ type PredictionConfiguration struct {
 	noSmithyDocumentSerde
 }
 
-// Error that occurred during project deletion
+// Specifies the error message that is returned if the operation cannot be
+// successfully completed.
 type ProjectDeletionError struct {
 
-	// Project Deletion Error Code
+	// The code of the project deletion error.
 	Code *string
 
-	// Project Deletion Error Message
+	// The message of the project deletion error.
 	Message *string
 
 	noSmithyDocumentSerde
@@ -1679,10 +1840,11 @@ type ProjectSummary struct {
 	// The description of a project.
 	Description *string
 
-	// Reasons for failed project deletion
+	// Specifies the error message that is returned if the operation cannot be
+	// successfully completed.
 	FailureReasons []ProjectDeletionError
 
-	// Status of the project
+	// The status of the project.
 	ProjectStatus ProjectStatus
 
 	// The timestamp of when the project was updated.
@@ -1804,6 +1966,17 @@ type RedshiftRunConfigurationOutput struct {
 	noSmithyDocumentSerde
 }
 
+// The details for the self granting status for an Amazon Redshift data source.
+type RedshiftSelfGrantStatusOutput struct {
+
+	// The details for the self granting status for an Amazon Redshift data source.
+	//
+	// This member is required.
+	SelfGrantStatusDetails []SelfGrantStatusDetail
+
+	noSmithyDocumentSerde
+}
+
 // The details of the Amazon Redshift Serverless workgroup storage.
 type RedshiftServerlessStorage struct {
 
@@ -1847,13 +2020,15 @@ func (*RedshiftStorageMemberRedshiftServerlessSource) isRedshiftStorage() {}
 // The details of the automatically generated business metadata that is rejected.
 type RejectChoice struct {
 
+	// Specifies the target (for example, a column name) where a prediction can be
+	// rejected.
+	//
+	// This member is required.
+	PredictionTarget *string
+
 	// Specifies the the automatically generated business metadata that can be
 	// rejected.
 	PredictionChoices []int32
-
-	// Specifies the target (for example, a column name) where a prediction can be
-	// rejected.
-	PredictionTarget *string
 
 	noSmithyDocumentSerde
 }
@@ -2064,6 +2239,56 @@ type SearchTypesResultItemMemberFormTypeItem struct {
 }
 
 func (*SearchTypesResultItemMemberFormTypeItem) isSearchTypesResultItem() {}
+
+// The details for the self granting status.
+type SelfGrantStatusDetail struct {
+
+	// The name of the database used for the data source.
+	//
+	// This member is required.
+	DatabaseName *string
+
+	// The self granting status of the data source.
+	//
+	// This member is required.
+	Status SelfGrantStatus
+
+	// The reason for why the operation failed.
+	FailureCause *string
+
+	// The name of the schema used in the data source.
+	SchemaName *string
+
+	noSmithyDocumentSerde
+}
+
+// The details for the self granting status for a data source.
+//
+// The following types satisfy this interface:
+//
+//	SelfGrantStatusOutputMemberGlueSelfGrantStatus
+//	SelfGrantStatusOutputMemberRedshiftSelfGrantStatus
+type SelfGrantStatusOutput interface {
+	isSelfGrantStatusOutput()
+}
+
+// The details for the self granting status for a Glue data source.
+type SelfGrantStatusOutputMemberGlueSelfGrantStatus struct {
+	Value GlueSelfGrantStatusOutput
+
+	noSmithyDocumentSerde
+}
+
+func (*SelfGrantStatusOutputMemberGlueSelfGrantStatus) isSelfGrantStatusOutput() {}
+
+// The details for the self granting status for an Amazon Redshift data source.
+type SelfGrantStatusOutputMemberRedshiftSelfGrantStatus struct {
+	Value RedshiftSelfGrantStatusOutput
+
+	noSmithyDocumentSerde
+}
+
+func (*SelfGrantStatusOutputMemberRedshiftSelfGrantStatus) isSelfGrantStatusOutput() {}
 
 // The single sign-on details in Amazon DataZone.
 type SingleSignOn struct {
@@ -2557,6 +2782,93 @@ type TermRelations struct {
 	noSmithyDocumentSerde
 }
 
+// The time series data points form.
+type TimeSeriesDataPointFormInput struct {
+
+	// The name of the time series data points form.
+	//
+	// This member is required.
+	FormName *string
+
+	// The timestamp of the time series data points form.
+	//
+	// This member is required.
+	Timestamp *time.Time
+
+	// The ID of the type of the time series data points form.
+	//
+	// This member is required.
+	TypeIdentifier *string
+
+	// The content of the time series data points form.
+	Content *string
+
+	// The revision type of the time series data points form.
+	TypeRevision *string
+
+	noSmithyDocumentSerde
+}
+
+// The time series data points form.
+type TimeSeriesDataPointFormOutput struct {
+
+	// The name of the time series data points form.
+	//
+	// This member is required.
+	FormName *string
+
+	// The timestamp of the time series data points form.
+	//
+	// This member is required.
+	Timestamp *time.Time
+
+	// The ID of the type of the time series data points form.
+	//
+	// This member is required.
+	TypeIdentifier *string
+
+	// The content of the time series data points form.
+	Content *string
+
+	// The ID of the time series data points form.
+	Id *string
+
+	// The revision type of the time series data points form.
+	TypeRevision *string
+
+	noSmithyDocumentSerde
+}
+
+// The summary of the time series data points form.
+type TimeSeriesDataPointSummaryFormOutput struct {
+
+	// The name of the time series data points summary form.
+	//
+	// This member is required.
+	FormName *string
+
+	// The timestamp of the time series data points summary form.
+	//
+	// This member is required.
+	Timestamp *time.Time
+
+	// The type ID of the time series data points summary form.
+	//
+	// This member is required.
+	TypeIdentifier *string
+
+	// The content of the summary of the time series data points form.
+	ContentSummary *string
+
+	// The ID of the time series data points summary form.
+	Id *string
+
+	// The type revision of the time series data points summary form.
+	TypeRevision *string
+
+	noSmithyDocumentSerde
+}
+
 // The topic of the notification.
 type Topic struct {
 
@@ -2649,6 +2961,7 @@ type UnknownUnionMember struct {
 	noSmithyDocumentSerde
 }
 
+func (*UnknownUnionMember) isActionParameters()              {}
 func (*UnknownUnionMember) isDataSourceConfigurationInput()  {}
 func (*UnknownUnionMember) isDataSourceConfigurationOutput() {}
 func (*UnknownUnionMember) isFilterClause()                  {}
@@ -2663,6 +2976,7 @@ func (*UnknownUnionMember) isRedshiftStorage()               {}
 func (*UnknownUnionMember) isSearchInventoryResultItem()     {}
 func (*UnknownUnionMember) isSearchResultItem()              {}
 func (*UnknownUnionMember) isSearchTypesResultItem()         {}
+func (*UnknownUnionMember) isSelfGrantStatusOutput()         {}
 func (*UnknownUnionMember) isSubscribedListingItem()         {}
 func (*UnknownUnionMember) isSubscribedPrincipal()           {}
 func (*UnknownUnionMember) isSubscribedPrincipalInput()      {}

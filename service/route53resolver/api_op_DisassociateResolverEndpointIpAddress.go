@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/route53resolver/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -14,9 +13,11 @@ import (
 
 // Removes IP addresses from an inbound or an outbound Resolver endpoint. If you
 // want to remove more than one IP address, submit one
-// DisassociateResolverEndpointIpAddress request for each IP address. To add an IP
-// address to an endpoint, see AssociateResolverEndpointIpAddress (https://docs.aws.amazon.com/Route53/latest/APIReference/API_route53resolver_AssociateResolverEndpointIpAddress.html)
-// .
+// DisassociateResolverEndpointIpAddress request for each IP address.
+//
+// To add an IP address to an endpoint, see [AssociateResolverEndpointIpAddress].
+//
+// [AssociateResolverEndpointIpAddress]: https://docs.aws.amazon.com/Route53/latest/APIReference/API_route53resolver_AssociateResolverEndpointIpAddress.html
 func (c *Client) DisassociateResolverEndpointIpAddress(ctx context.Context, params *DisassociateResolverEndpointIpAddressInput, optFns ...func(*Options)) (*DisassociateResolverEndpointIpAddressOutput, error) {
 	if params == nil {
 		params = &DisassociateResolverEndpointIpAddressInput{}
@@ -81,25 +82,25 @@ func (c *Client) addOperationDisassociateResolverEndpointIpAddressMiddlewares(st
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -114,13 +115,16 @@ func (c *Client) addOperationDisassociateResolverEndpointIpAddressMiddlewares(st
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDisassociateResolverEndpointIpAddressValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDisassociateResolverEndpointIpAddress(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

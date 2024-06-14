@@ -16,19 +16,34 @@ import (
 	"strings"
 )
 
-// This operation creates an S3 Batch Operations job. You can use S3 Batch
-// Operations to perform large-scale batch actions on Amazon S3 objects. Batch
-// Operations can run a single action on lists of Amazon S3 objects that you
-// specify. For more information, see S3 Batch Operations (https://docs.aws.amazon.com/AmazonS3/latest/userguide/batch-ops.html)
-// in the Amazon S3 User Guide. Permissions For information about permissions
-// required to use the Batch Operations, see Granting permissions for S3 Batch
-// Operations (https://docs.aws.amazon.com/AmazonS3/latest/dev/mpuAndPermissions.html)
-// in the Amazon S3 User Guide. Related actions include:
-//   - DescribeJob (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DescribeJob.html)
-//   - ListJobs (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_ListJobs.html)
-//   - UpdateJobPriority (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_UpdateJobPriority.html)
-//   - UpdateJobStatus (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_UpdateJobStatus.html)
-//   - JobOperation (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_JobOperation.html)
+// This operation creates an S3 Batch Operations job.
+//
+// You can use S3 Batch Operations to perform large-scale batch actions on Amazon
+// S3 objects. Batch Operations can run a single action on lists of Amazon S3
+// objects that you specify. For more information, see [S3 Batch Operations]in the Amazon S3 User Guide.
+//
+// Permissions For information about permissions required to use the Batch
+// Operations, see [Granting permissions for S3 Batch Operations]in the Amazon S3 User Guide.
+//
+// Related actions include:
+//
+// [DescribeJob]
+//
+// [ListJobs]
+//
+// [UpdateJobPriority]
+//
+// [UpdateJobStatus]
+//
+// [JobOperation]
+//
+// [DescribeJob]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DescribeJob.html
+// [S3 Batch Operations]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/batch-ops.html
+// [Granting permissions for S3 Batch Operations]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/batch-ops-iam-role-policies.html
+// [JobOperation]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_JobOperation.html
+// [UpdateJobPriority]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_UpdateJobPriority.html
+// [UpdateJobStatus]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_UpdateJobStatus.html
+// [ListJobs]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_ListJobs.html
 func (c *Client) CreateJob(ctx context.Context, params *CreateJobInput, optFns ...func(*Options)) (*CreateJobOutput, error) {
 	if params == nil {
 		params = &CreateJobInput{}
@@ -58,8 +73,10 @@ type CreateJobInput struct {
 	ClientRequestToken *string
 
 	// The action that you want this job to perform on every object listed in the
-	// manifest. For more information about the available actions, see Operations (https://docs.aws.amazon.com/AmazonS3/latest/dev/batch-ops-actions.html)
-	// in the Amazon S3 User Guide.
+	// manifest. For more information about the available actions, see [Operations]in the Amazon
+	// S3 User Guide.
+	//
+	// [Operations]: https://docs.aws.amazon.com/AmazonS3/latest/dev/batch-ops-actions.html
 	//
 	// This member is required.
 	Operation *types.JobOperation
@@ -142,25 +159,25 @@ func (c *Client) addOperationCreateJobMiddlewares(stack *middleware.Stack, optio
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -178,6 +195,9 @@ func (c *Client) addOperationCreateJobMiddlewares(stack *middleware.Stack, optio
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addEndpointPrefix_opCreateJobMiddleware(stack); err != nil {
 		return err
 	}
@@ -193,7 +213,7 @@ func (c *Client) addOperationCreateJobMiddlewares(stack *middleware.Stack, optio
 	if err = addMetadataRetrieverMiddleware(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addCreateJobUpdateEndpoint(stack, options); err != nil {

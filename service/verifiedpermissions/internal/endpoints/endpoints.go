@@ -176,6 +176,21 @@ var defaultPartitions = endpoints.Partitions{
 				Region: "ca-central-1",
 			}: endpoints.Endpoint{},
 			endpoints.EndpointKey{
+				Region:  "ca-central-1",
+				Variant: endpoints.FIPSVariant,
+			}: {
+				Hostname: "verifiedpermissions-fips.ca-central-1.amazonaws.com",
+			},
+			endpoints.EndpointKey{
+				Region: "ca-west-1",
+			}: endpoints.Endpoint{},
+			endpoints.EndpointKey{
+				Region:  "ca-west-1",
+				Variant: endpoints.FIPSVariant,
+			}: {
+				Hostname: "verifiedpermissions-fips.ca-west-1.amazonaws.com",
+			},
+			endpoints.EndpointKey{
 				Region: "eu-central-1",
 			}: endpoints.Endpoint{},
 			endpoints.EndpointKey{
@@ -200,6 +215,63 @@ var defaultPartitions = endpoints.Partitions{
 				Region: "eu-west-3",
 			}: endpoints.Endpoint{},
 			endpoints.EndpointKey{
+				Region: "fips-ca-central-1",
+			}: endpoints.Endpoint{
+				Hostname: "verifiedpermissions-fips.ca-central-1.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "ca-central-1",
+				},
+				Deprecated: aws.TrueTernary,
+			},
+			endpoints.EndpointKey{
+				Region: "fips-ca-west-1",
+			}: endpoints.Endpoint{
+				Hostname: "verifiedpermissions-fips.ca-west-1.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "ca-west-1",
+				},
+				Deprecated: aws.TrueTernary,
+			},
+			endpoints.EndpointKey{
+				Region: "fips-us-east-1",
+			}: endpoints.Endpoint{
+				Hostname: "verifiedpermissions-fips.us-east-1.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "us-east-1",
+				},
+				Deprecated: aws.TrueTernary,
+			},
+			endpoints.EndpointKey{
+				Region: "fips-us-east-2",
+			}: endpoints.Endpoint{
+				Hostname: "verifiedpermissions-fips.us-east-2.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "us-east-2",
+				},
+				Deprecated: aws.TrueTernary,
+			},
+			endpoints.EndpointKey{
+				Region: "fips-us-west-1",
+			}: endpoints.Endpoint{
+				Hostname: "verifiedpermissions-fips.us-west-1.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "us-west-1",
+				},
+				Deprecated: aws.TrueTernary,
+			},
+			endpoints.EndpointKey{
+				Region: "fips-us-west-2",
+			}: endpoints.Endpoint{
+				Hostname: "verifiedpermissions-fips.us-west-2.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "us-west-2",
+				},
+				Deprecated: aws.TrueTernary,
+			},
+			endpoints.EndpointKey{
+				Region: "il-central-1",
+			}: endpoints.Endpoint{},
+			endpoints.EndpointKey{
 				Region: "me-central-1",
 			}: endpoints.Endpoint{},
 			endpoints.EndpointKey{
@@ -212,14 +284,38 @@ var defaultPartitions = endpoints.Partitions{
 				Region: "us-east-1",
 			}: endpoints.Endpoint{},
 			endpoints.EndpointKey{
+				Region:  "us-east-1",
+				Variant: endpoints.FIPSVariant,
+			}: {
+				Hostname: "verifiedpermissions-fips.us-east-1.amazonaws.com",
+			},
+			endpoints.EndpointKey{
 				Region: "us-east-2",
 			}: endpoints.Endpoint{},
+			endpoints.EndpointKey{
+				Region:  "us-east-2",
+				Variant: endpoints.FIPSVariant,
+			}: {
+				Hostname: "verifiedpermissions-fips.us-east-2.amazonaws.com",
+			},
 			endpoints.EndpointKey{
 				Region: "us-west-1",
 			}: endpoints.Endpoint{},
 			endpoints.EndpointKey{
+				Region:  "us-west-1",
+				Variant: endpoints.FIPSVariant,
+			}: {
+				Hostname: "verifiedpermissions-fips.us-west-1.amazonaws.com",
+			},
+			endpoints.EndpointKey{
 				Region: "us-west-2",
 			}: endpoints.Endpoint{},
+			endpoints.EndpointKey{
+				Region:  "us-west-2",
+				Variant: endpoints.FIPSVariant,
+			}: {
+				Hostname: "verifiedpermissions-fips.us-west-2.amazonaws.com",
+			},
 		},
 	},
 	{
@@ -375,5 +471,43 @@ var defaultPartitions = endpoints.Partitions{
 		},
 		RegionRegex:    partitionRegexp.AwsUsGov,
 		IsRegionalized: true,
+		Endpoints: endpoints.Endpoints{
+			endpoints.EndpointKey{
+				Region: "fips-us-gov-east-1",
+			}: endpoints.Endpoint{
+				Hostname: "verifiedpermissions-fips.us-gov-east-1.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "us-gov-east-1",
+				},
+				Deprecated: aws.TrueTernary,
+			},
+			endpoints.EndpointKey{
+				Region: "fips-us-gov-west-1",
+			}: endpoints.Endpoint{
+				Hostname: "verifiedpermissions-fips.us-gov-west-1.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "us-gov-west-1",
+				},
+				Deprecated: aws.TrueTernary,
+			},
+			endpoints.EndpointKey{
+				Region: "us-gov-east-1",
+			}: endpoints.Endpoint{},
+			endpoints.EndpointKey{
+				Region:  "us-gov-east-1",
+				Variant: endpoints.FIPSVariant,
+			}: {
+				Hostname: "verifiedpermissions-fips.us-gov-east-1.amazonaws.com",
+			},
+			endpoints.EndpointKey{
+				Region: "us-gov-west-1",
+			}: endpoints.Endpoint{},
+			endpoints.EndpointKey{
+				Region:  "us-gov-west-1",
+				Variant: endpoints.FIPSVariant,
+			}: {
+				Hostname: "verifiedpermissions-fips.us-gov-west-1.amazonaws.com",
+			},
+		},
 	},
 }

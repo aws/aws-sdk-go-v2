@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/emr/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -49,19 +48,29 @@ type ListNotebookExecutionsInput struct {
 	Marker *string
 
 	// The status filter for listing notebook executions.
+	//
 	//   - START_PENDING indicates that the cluster has received the execution request
 	//   but execution has not begun.
+	//
 	//   - STARTING indicates that the execution is starting on the cluster.
+	//
 	//   - RUNNING indicates that the execution is being processed by the cluster.
+	//
 	//   - FINISHING indicates that execution processing is in the final stages.
+	//
 	//   - FINISHED indicates that the execution has completed without error.
+	//
 	//   - FAILING indicates that the execution is failing and will not finish
 	//   successfully.
+	//
 	//   - FAILED indicates that the execution failed.
+	//
 	//   - STOP_PENDING indicates that the cluster has received a StopNotebookExecution
 	//   request and the stop is pending.
+	//
 	//   - STOPPING indicates that the cluster is in the process of stopping the
 	//   execution as a result of a StopNotebookExecution request.
+	//
 	//   - STOPPED indicates that the execution stopped because of a
 	//   StopNotebookExecution request.
 	Status types.NotebookExecutionStatus
@@ -110,25 +119,25 @@ func (c *Client) addOperationListNotebookExecutionsMiddlewares(stack *middleware
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -143,10 +152,13 @@ func (c *Client) addOperationListNotebookExecutionsMiddlewares(stack *middleware
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListNotebookExecutions(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

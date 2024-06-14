@@ -6,18 +6,20 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates and returns a URL that you can use to access the application UIs for a
-// job run. For jobs in a running state, the application UI is a live user
-// interface such as the Spark or Tez web UI. For completed jobs, the application
-// UI is a persistent application user interface such as the Spark History Server
-// or persistent Tez UI. The URL is valid for one hour after you generate it. To
-// access the application UI after that hour elapses, you must invoke the API again
-// to generate a new URL.
+// job run.
+//
+// For jobs in a running state, the application UI is a live user interface such
+// as the Spark or Tez web UI. For completed jobs, the application UI is a
+// persistent application user interface such as the Spark History Server or
+// persistent Tez UI.
+//
+// The URL is valid for one hour after you generate it. To access the application
+// UI after that hour elapses, you must invoke the API again to generate a new URL.
 func (c *Client) GetDashboardForJobRun(ctx context.Context, params *GetDashboardForJobRunInput, optFns ...func(*Options)) (*GetDashboardForJobRunOutput, error) {
 	if params == nil {
 		params = &GetDashboardForJobRunInput{}
@@ -44,6 +46,10 @@ type GetDashboardForJobRunInput struct {
 	//
 	// This member is required.
 	JobRunId *string
+
+	// An optimal parameter that indicates the amount of attempts for the job. If not
+	// specified, this value defaults to the attempt of the latest job.
+	Attempt *int32
 
 	noSmithyDocumentSerde
 }
@@ -81,25 +87,25 @@ func (c *Client) addOperationGetDashboardForJobRunMiddlewares(stack *middleware.
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -114,13 +120,16 @@ func (c *Client) addOperationGetDashboardForJobRunMiddlewares(stack *middleware.
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpGetDashboardForJobRunValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetDashboardForJobRun(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

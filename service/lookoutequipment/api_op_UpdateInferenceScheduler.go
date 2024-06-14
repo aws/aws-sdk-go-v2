@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/lookoutequipment/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -35,7 +34,7 @@ type UpdateInferenceSchedulerInput struct {
 	// This member is required.
 	InferenceSchedulerName *string
 
-	// A period of time (in minutes) by which inference on the data is delayed after
+	//  A period of time (in minutes) by which inference on the data is delayed after
 	// the data starts. For instance, if you select an offset delay time of five
 	// minutes, inference will not begin on the data until the first data measurement
 	// after the five minute mark. For example, if five minutes is selected, the
@@ -45,11 +44,11 @@ type UpdateInferenceSchedulerInput struct {
 	// when uploading new data.
 	DataDelayOffsetInMinutes *int64
 
-	// Specifies information for the input data for the inference scheduler, including
-	// delimiter, format, and dataset location.
+	//  Specifies information for the input data for the inference scheduler,
+	// including delimiter, format, and dataset location.
 	DataInputConfiguration *types.InferenceInputConfiguration
 
-	// Specifies information for the output results from the inference scheduler,
+	//  Specifies information for the output results from the inference scheduler,
 	// including the output S3 location.
 	DataOutputConfiguration *types.InferenceOutputConfiguration
 
@@ -61,7 +60,7 @@ type UpdateInferenceSchedulerInput struct {
 	// example, it starts once every 5 minutes.
 	DataUploadFrequency types.DataUploadFrequency
 
-	// The Amazon Resource Name (ARN) of a role with permission to access the data
+	//  The Amazon Resource Name (ARN) of a role with permission to access the data
 	// source for the inference scheduler.
 	RoleArn *string
 
@@ -97,25 +96,25 @@ func (c *Client) addOperationUpdateInferenceSchedulerMiddlewares(stack *middlewa
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -130,13 +129,16 @@ func (c *Client) addOperationUpdateInferenceSchedulerMiddlewares(stack *middlewa
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpUpdateInferenceSchedulerValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateInferenceScheduler(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

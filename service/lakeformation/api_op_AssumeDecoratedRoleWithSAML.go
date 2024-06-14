@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -18,12 +17,14 @@ import (
 // operation requires SAML federation setup in the caller’s account as it can only
 // be called with valid SAML assertions. Lake Formation does not scope down the
 // permission of the assumed role. All permissions attached to the role via the
-// SAML federation setup will be included in the role session. This decorated role
-// is expected to access data in Amazon S3 by getting temporary access from Lake
-// Formation which is authorized via the virtual API GetDataAccess . Therefore, all
-// SAML roles that can be assumed via AssumeDecoratedRoleWithSAML must at a
-// minimum include lakeformation:GetDataAccess in their role policies. A typical
-// IAM policy attached to such a role would look as follows:
+// SAML federation setup will be included in the role session.
+//
+// This decorated role is expected to access data in Amazon S3 by getting
+// temporary access from Lake Formation which is authorized via the virtual API
+// GetDataAccess . Therefore, all SAML roles that can be assumed via
+// AssumeDecoratedRoleWithSAML must at a minimum include
+// lakeformation:GetDataAccess in their role policies. A typical IAM policy
+// attached to such a role would look as follows:
 func (c *Client) AssumeDecoratedRoleWithSAML(ctx context.Context, params *AssumeDecoratedRoleWithSAMLInput, optFns ...func(*Options)) (*AssumeDecoratedRoleWithSAMLOutput, error) {
 	if params == nil {
 		params = &AssumeDecoratedRoleWithSAMLInput{}
@@ -112,25 +113,25 @@ func (c *Client) addOperationAssumeDecoratedRoleWithSAMLMiddlewares(stack *middl
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -145,13 +146,16 @@ func (c *Client) addOperationAssumeDecoratedRoleWithSAMLMiddlewares(stack *middl
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpAssumeDecoratedRoleWithSAMLValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opAssumeDecoratedRoleWithSAML(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

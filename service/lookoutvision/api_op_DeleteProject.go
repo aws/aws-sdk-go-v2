@@ -6,17 +6,21 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes an Amazon Lookout for Vision project. To delete a project, you must
-// first delete each version of the model associated with the project. To delete a
-// model use the DeleteModel operation. You also have to delete the dataset(s)
-// associated with the model. For more information, see DeleteDataset . The images
-// referenced by the training and test datasets aren't deleted. This operation
-// requires permissions to perform the lookoutvision:DeleteProject operation.
+// Deletes an Amazon Lookout for Vision project.
+//
+// To delete a project, you must first delete each version of the model associated
+// with the project. To delete a model use the DeleteModeloperation.
+//
+// You also have to delete the dataset(s) associated with the model. For more
+// information, see DeleteDataset. The images referenced by the training and test datasets
+// aren't deleted.
+//
+// This operation requires permissions to perform the lookoutvision:DeleteProject
+// operation.
 func (c *Client) DeleteProject(ctx context.Context, params *DeleteProjectInput, optFns ...func(*Options)) (*DeleteProjectOutput, error) {
 	if params == nil {
 		params = &DeleteProjectInput{}
@@ -43,12 +47,15 @@ type DeleteProjectInput struct {
 	// completes only once. You choose the value to pass. For example, An issue might
 	// prevent you from getting a response from DeleteProject . In this case, safely
 	// retry your call to DeleteProject by using the same ClientToken parameter value.
+	//
 	// If you don't supply a value for ClientToken , the AWS SDK you are using inserts
 	// a value for you. This prevents retries after a network error from making
 	// multiple project deletion requests. You'll need to provide your own value for
-	// other use cases. An error occurs if the other input parameters are not the same
-	// as in the first request. Using a different value for ClientToken is considered
-	// a new call to DeleteProject . An idempotency token is active for 8 hours.
+	// other use cases.
+	//
+	// An error occurs if the other input parameters are not the same as in the first
+	// request. Using a different value for ClientToken is considered a new call to
+	// DeleteProject . An idempotency token is active for 8 hours.
 	ClientToken *string
 
 	noSmithyDocumentSerde
@@ -87,25 +94,25 @@ func (c *Client) addOperationDeleteProjectMiddlewares(stack *middleware.Stack, o
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -120,6 +127,9 @@ func (c *Client) addOperationDeleteProjectMiddlewares(stack *middleware.Stack, o
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opDeleteProjectMiddleware(stack, options); err != nil {
 		return err
 	}
@@ -129,7 +139,7 @@ func (c *Client) addOperationDeleteProjectMiddlewares(stack *middleware.Stack, o
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteProject(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

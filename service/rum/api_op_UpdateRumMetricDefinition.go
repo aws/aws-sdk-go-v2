@@ -6,16 +6,15 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/rum/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Modifies one existing metric definition for CloudWatch RUM extended metrics.
-// For more information about extended metrics, see
-// BatchCreateRumMetricsDefinitions (https://docs.aws.amazon.com/cloudwatchrum/latest/APIReference/API_BatchCreateRumMetricsDefinitions.html)
-// .
+// For more information about extended metrics, see [BatchCreateRumMetricsDefinitions].
+//
+// [BatchCreateRumMetricsDefinitions]: https://docs.aws.amazon.com/cloudwatchrum/latest/APIReference/API_BatchCreateRumMetricsDefinitions.html
 func (c *Client) UpdateRumMetricDefinition(ctx context.Context, params *UpdateRumMetricDefinitionInput, optFns ...func(*Options)) (*UpdateRumMetricDefinitionOutput, error) {
 	if params == nil {
 		params = &UpdateRumMetricDefinitionInput{}
@@ -58,11 +57,13 @@ type UpdateRumMetricDefinitionInput struct {
 	MetricDefinitionId *string
 
 	// This parameter is required if Destination is Evidently . If Destination is
-	// CloudWatch , do not use this parameter. This parameter specifies the ARN of the
-	// Evidently experiment that is to receive the metrics. You must have already
-	// defined this experiment as a valid destination. For more information, see
-	// PutRumMetricsDestination (https://docs.aws.amazon.com/cloudwatchrum/latest/APIReference/API_PutRumMetricsDestination.html)
-	// .
+	// CloudWatch , do not use this parameter.
+	//
+	// This parameter specifies the ARN of the Evidently experiment that is to receive
+	// the metrics. You must have already defined this experiment as a valid
+	// destination. For more information, see [PutRumMetricsDestination].
+	//
+	// [PutRumMetricsDestination]: https://docs.aws.amazon.com/cloudwatchrum/latest/APIReference/API_PutRumMetricsDestination.html
 	DestinationArn *string
 
 	noSmithyDocumentSerde
@@ -97,25 +98,25 @@ func (c *Client) addOperationUpdateRumMetricDefinitionMiddlewares(stack *middlew
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -130,13 +131,16 @@ func (c *Client) addOperationUpdateRumMetricDefinitionMiddlewares(stack *middlew
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpUpdateRumMetricDefinitionValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateRumMetricDefinition(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/neptune/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -30,15 +29,20 @@ func (c *Client) AddSourceIdentifierToSubscription(ctx context.Context, params *
 
 type AddSourceIdentifierToSubscriptionInput struct {
 
-	// The identifier of the event source to be added. Constraints:
+	// The identifier of the event source to be added.
+	//
+	// Constraints:
+	//
 	//   - If the source type is a DB instance, then a DBInstanceIdentifier must be
 	//   supplied.
+	//
 	//   - If the source type is a DB security group, a DBSecurityGroupName must be
 	//   supplied.
+	//
 	//   - If the source type is a DB parameter group, a DBParameterGroupName must be
 	//   supplied.
-	//   - If the source type is a DB snapshot, a DBSnapshotIdentifier must be
-	//   supplied.
+	//
+	//   - If the source type is a DB snapshot, a DBSnapshotIdentifier must be supplied.
 	//
 	// This member is required.
 	SourceIdentifier *string
@@ -54,8 +58,7 @@ type AddSourceIdentifierToSubscriptionInput struct {
 
 type AddSourceIdentifierToSubscriptionOutput struct {
 
-	// Contains the results of a successful invocation of the
-	// DescribeEventSubscriptions action.
+	// Contains the results of a successful invocation of the DescribeEventSubscriptions action.
 	EventSubscription *types.EventSubscription
 
 	// Metadata pertaining to the operation's result.
@@ -86,25 +89,25 @@ func (c *Client) addOperationAddSourceIdentifierToSubscriptionMiddlewares(stack 
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -119,13 +122,16 @@ func (c *Client) addOperationAddSourceIdentifierToSubscriptionMiddlewares(stack 
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpAddSourceIdentifierToSubscriptionValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opAddSourceIdentifierToSubscription(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

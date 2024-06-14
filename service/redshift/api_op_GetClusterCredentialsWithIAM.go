@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -15,13 +14,16 @@ import (
 // Returns a database user name and temporary password with temporary
 // authorization to log in to an Amazon Redshift database. The database user is
 // mapped 1:1 to the source Identity and Access Management (IAM) identity. For more
-// information about IAM identities, see IAM Identities (users, user groups, and
-// roles) (https://docs.aws.amazon.com/IAM/latest/UserGuide/id.html) in the Amazon
-// Web Services Identity and Access Management User Guide. The Identity and Access
-// Management (IAM) identity that runs this operation must have an IAM policy
-// attached that allows access to all necessary actions and resources. For more
-// information about permissions, see Using identity-based policies (IAM policies) (https://docs.aws.amazon.com/redshift/latest/mgmt/redshift-iam-access-control-identity-based.html)
-// in the Amazon Redshift Cluster Management Guide.
+// information about IAM identities, see [IAM Identities (users, user groups, and roles)]in the Amazon Web Services Identity and
+// Access Management User Guide.
+//
+// The Identity and Access Management (IAM) identity that runs this operation must
+// have an IAM policy attached that allows access to all necessary actions and
+// resources. For more information about permissions, see [Using identity-based policies (IAM policies)]in the Amazon Redshift
+// Cluster Management Guide.
+//
+// [IAM Identities (users, user groups, and roles)]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id.html
+// [Using identity-based policies (IAM policies)]: https://docs.aws.amazon.com/redshift/latest/mgmt/redshift-iam-access-control-identity-based.html
 func (c *Client) GetClusterCredentialsWithIAM(ctx context.Context, params *GetClusterCredentialsWithIAMInput, optFns ...func(*Options)) (*GetClusterCredentialsWithIAMOutput, error) {
 	if params == nil {
 		params = &GetClusterCredentialsWithIAMInput{}
@@ -52,8 +54,9 @@ type GetClusterCredentialsWithIAMInput struct {
 	// access to all databases is allowed.
 	DbName *string
 
-	// The number of seconds until the returned temporary password expires. Range:
-	// 900-3600. Default: 900.
+	// The number of seconds until the returned temporary password expires.
+	//
+	// Range: 900-3600. Default: 900.
 	DurationSeconds *int32
 
 	noSmithyDocumentSerde
@@ -103,25 +106,25 @@ func (c *Client) addOperationGetClusterCredentialsWithIAMMiddlewares(stack *midd
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -136,10 +139,13 @@ func (c *Client) addOperationGetClusterCredentialsWithIAMMiddlewares(stack *midd
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetClusterCredentialsWithIAM(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

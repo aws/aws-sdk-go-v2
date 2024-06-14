@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/lexmodelsv2/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -15,24 +14,29 @@ import (
 
 // Retrieves summary metrics for the intents in your bot. The following fields are
 // required:
-//   - metrics – A list of AnalyticsIntentMetric (https://docs.aws.amazon.com/lexv2/latest/APIReference/API_AnalyticsIntentMetric.html)
-//     objects. In each object, use the name field to specify the metric to
-//     calculate, the statistic field to specify whether to calculate the Sum ,
-//     Average , or Max number, and the order field to specify whether to sort the
-//     results in Ascending or Descending order.
+//
+//   - metrics – A list of [AnalyticsIntentMetric]objects. In each object, use the name field to specify
+//     the metric to calculate, the statistic field to specify whether to calculate
+//     the Sum , Average , or Max number, and the order field to specify whether to
+//     sort the results in Ascending or Descending order.
+//
 //   - startDateTime and endDateTime – Define a time range for which you want to
 //     retrieve results.
 //
 // Of the optional fields, you can organize the results in the following ways:
+//
 //   - Use the filters field to filter the results, the groupBy field to specify
 //     categories by which to group the results, and the binBy field to specify time
 //     intervals by which to group the results.
+//
 //   - Use the maxResults field to limit the number of results to return in a
 //     single response and the nextToken field to return the next batch of results if
 //     the response does not return the full set of results.
 //
 // Note that an order field exists in both binBy and metrics . You can specify only
 // one order in a given request.
+//
+// [AnalyticsIntentMetric]: https://docs.aws.amazon.com/lexv2/latest/APIReference/API_AnalyticsIntentMetric.html
 func (c *Client) ListIntentMetrics(ctx context.Context, params *ListIntentMetricsInput, optFns ...func(*Options)) (*ListIntentMetricsOutput, error) {
 	if params == nil {
 		params = &ListIntentMetricsInput{}
@@ -84,10 +88,13 @@ type ListIntentMetricsInput struct {
 
 	// A list of objects, each of which specifies how to group the results. You can
 	// group by the following criteria:
+	//
 	//   - IntentName – The name of the intent.
+	//
 	//   - IntentEndState – The final state of the intent. The possible end states are
-	//   detailed in Key definitions (https://docs.aws.amazon.com/analytics-key-definitions-intents)
-	//   in the user guide.
+	//   detailed in [Key definitions]in the user guide.
+	//
+	// [Key definitions]: https://docs.aws.amazon.com/analytics-key-definitions-intents
 	GroupBy []types.AnalyticsIntentGroupBySpecification
 
 	// The maximum number of results to return in each page of results. If there are
@@ -96,10 +103,11 @@ type ListIntentMetricsInput struct {
 	MaxResults *int32
 
 	// If the response from the ListIntentMetrics operation contains more results than
-	// specified in the maxResults parameter, a token is returned in the response. Use
-	// the returned token in the nextToken parameter of a ListIntentMetrics request to
-	// return the next page of results. For a complete set of results, call the
-	// ListIntentMetrics operation until the nextToken returned in the response is
+	// specified in the maxResults parameter, a token is returned in the response.
+	//
+	// Use the returned token in the nextToken parameter of a ListIntentMetrics
+	// request to return the next page of results. For a complete set of results, call
+	// the ListIntentMetrics operation until the nextToken returned in the response is
 	// null.
 	NextToken *string
 
@@ -112,10 +120,11 @@ type ListIntentMetricsOutput struct {
 	BotId *string
 
 	// If the response from the ListIntentMetrics operation contains more results than
-	// specified in the maxResults parameter, a token is returned in the response. Use
-	// the returned token in the nextToken parameter of a ListIntentMetrics request to
-	// return the next page of results. For a complete set of results, call the
-	// ListIntentMetrics operation until the nextToken returned in the response is
+	// specified in the maxResults parameter, a token is returned in the response.
+	//
+	// Use the returned token in the nextToken parameter of a ListIntentMetrics
+	// request to return the next page of results. For a complete set of results, call
+	// the ListIntentMetrics operation until the nextToken returned in the response is
 	// null.
 	NextToken *string
 
@@ -150,25 +159,25 @@ func (c *Client) addOperationListIntentMetricsMiddlewares(stack *middleware.Stac
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -183,13 +192,16 @@ func (c *Client) addOperationListIntentMetricsMiddlewares(stack *middleware.Stac
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpListIntentMetricsValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListIntentMetrics(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

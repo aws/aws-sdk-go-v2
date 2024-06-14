@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/rds/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -14,18 +13,23 @@ import (
 
 // Switches over the specified secondary DB cluster to be the new primary DB
 // cluster in the global database cluster. Switchover operations were previously
-// called "managed planned failovers." Aurora promotes the specified secondary
-// cluster to assume full read/write capabilities and demotes the current primary
-// cluster to a secondary (read-only) cluster, maintaining the orginal replication
-// topology. All secondary clusters are synchronized with the primary at the
-// beginning of the process so the new primary continues operations for the Aurora
-// global database without losing any data. Your database is unavailable for a
-// short time while the primary and selected secondary clusters are assuming their
-// new roles. For more information about switching over an Aurora global database,
-// see Performing switchovers for Amazon Aurora global databases (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-global-database-disaster-recovery.html#aurora-global-database-disaster-recovery.managed-failover)
-// in the Amazon Aurora User Guide. This operation is intended for controlled
-// environments, for operations such as "regional rotation" or to fall back to the
-// original primary after a global database failover.
+// called "managed planned failovers."
+//
+// Aurora promotes the specified secondary cluster to assume full read/write
+// capabilities and demotes the current primary cluster to a secondary (read-only)
+// cluster, maintaining the orginal replication topology. All secondary clusters
+// are synchronized with the primary at the beginning of the process so the new
+// primary continues operations for the Aurora global database without losing any
+// data. Your database is unavailable for a short time while the primary and
+// selected secondary clusters are assuming their new roles. For more information
+// about switching over an Aurora global database, see [Performing switchovers for Amazon Aurora global databases]in the Amazon Aurora User
+// Guide.
+//
+// This operation is intended for controlled environments, for operations such as
+// "regional rotation" or to fall back to the original primary after a global
+// database failover.
+//
+// [Performing switchovers for Amazon Aurora global databases]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-global-database-disaster-recovery.html#aurora-global-database-disaster-recovery.managed-failover
 func (c *Client) SwitchoverGlobalCluster(ctx context.Context, params *SwitchoverGlobalClusterInput, optFns ...func(*Options)) (*SwitchoverGlobalClusterOutput, error) {
 	if params == nil {
 		params = &SwitchoverGlobalClusterInput{}
@@ -44,7 +48,10 @@ func (c *Client) SwitchoverGlobalCluster(ctx context.Context, params *Switchover
 type SwitchoverGlobalClusterInput struct {
 
 	// The identifier of the global database cluster to switch over. This parameter
-	// isn't case-sensitive. Constraints:
+	// isn't case-sensitive.
+	//
+	// Constraints:
+	//
 	//   - Must match the identifier of an existing global database cluster (Aurora
 	//   global database).
 	//
@@ -95,25 +102,25 @@ func (c *Client) addOperationSwitchoverGlobalClusterMiddlewares(stack *middlewar
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -128,13 +135,16 @@ func (c *Client) addOperationSwitchoverGlobalClusterMiddlewares(stack *middlewar
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpSwitchoverGlobalClusterValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opSwitchoverGlobalCluster(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

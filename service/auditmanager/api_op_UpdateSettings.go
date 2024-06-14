@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/auditmanager/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -30,13 +29,13 @@ func (c *Client) UpdateSettings(ctx context.Context, params *UpdateSettingsInput
 
 type UpdateSettingsInput struct {
 
-	// The default S3 destination bucket for storing assessment reports.
+	//  The default S3 destination bucket for storing assessment reports.
 	DefaultAssessmentReportsDestination *types.AssessmentReportsDestination
 
-	// The default S3 destination bucket for storing evidence finder exports.
+	//  The default S3 destination bucket for storing evidence finder exports.
 	DefaultExportDestination *types.DefaultExportDestination
 
-	// A list of the default audit owners.
+	//  A list of the default audit owners.
 	DefaultProcessOwners []types.Role
 
 	// The deregistration policy for your Audit Manager data. You can use this
@@ -45,18 +44,21 @@ type UpdateSettingsInput struct {
 	DeregistrationPolicy *types.DeregistrationPolicy
 
 	// Specifies whether the evidence finder feature is enabled. Change this attribute
-	// to enable or disable evidence finder. When you use this attribute to disable
-	// evidence finder, Audit Manager deletes the event data store that’s used to query
-	// your evidence data. As a result, you can’t re-enable evidence finder and use the
-	// feature again. Your only alternative is to deregister (https://docs.aws.amazon.com/audit-manager/latest/APIReference/API_DeregisterAccount.html)
-	// and then re-register (https://docs.aws.amazon.com/audit-manager/latest/APIReference/API_RegisterAccount.html)
-	// Audit Manager.
+	// to enable or disable evidence finder.
+	//
+	// When you use this attribute to disable evidence finder, Audit Manager deletes
+	// the event data store that’s used to query your evidence data. As a result, you
+	// can’t re-enable evidence finder and use the feature again. Your only alternative
+	// is to [deregister]and then [re-register] Audit Manager.
+	//
+	// [deregister]: https://docs.aws.amazon.com/audit-manager/latest/APIReference/API_DeregisterAccount.html
+	// [re-register]: https://docs.aws.amazon.com/audit-manager/latest/APIReference/API_RegisterAccount.html
 	EvidenceFinderEnabled *bool
 
-	// The KMS key details.
+	//  The KMS key details.
 	KmsKey *string
 
-	// The Amazon Simple Notification Service (Amazon SNS) topic that Audit Manager
+	//  The Amazon Simple Notification Service (Amazon SNS) topic that Audit Manager
 	// sends notifications to.
 	SnsTopic *string
 
@@ -65,7 +67,7 @@ type UpdateSettingsInput struct {
 
 type UpdateSettingsOutput struct {
 
-	// The current list of settings.
+	//  The current list of settings.
 	Settings *types.Settings
 
 	// Metadata pertaining to the operation's result.
@@ -96,25 +98,25 @@ func (c *Client) addOperationUpdateSettingsMiddlewares(stack *middleware.Stack, 
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -129,13 +131,16 @@ func (c *Client) addOperationUpdateSettingsMiddlewares(stack *middleware.Stack, 
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpUpdateSettingsValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateSettings(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

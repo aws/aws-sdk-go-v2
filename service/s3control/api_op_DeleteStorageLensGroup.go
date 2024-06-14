@@ -15,13 +15,16 @@ import (
 	"strings"
 )
 
-// Deletes an existing S3 Storage Lens group. To use this operation, you must have
-// the permission to perform the s3:DeleteStorageLensGroup action. For more
-// information about the required Storage Lens Groups permissions, see Setting
-// account permissions to use S3 Storage Lens groups (https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage_lens_iam_permissions.html#storage_lens_groups_permissions)
-// . For information about Storage Lens groups errors, see List of Amazon S3
-// Storage Lens error codes (https://docs.aws.amazon.com/AmazonS3/latest/API/ErrorResponses.html#S3LensErrorCodeList)
-// .
+//	Deletes an existing S3 Storage Lens group.
+//
+// To use this operation, you must have the permission to perform the
+// s3:DeleteStorageLensGroup action. For more information about the required
+// Storage Lens Groups permissions, see [Setting account permissions to use S3 Storage Lens groups].
+//
+// For information about Storage Lens groups errors, see [List of Amazon S3 Storage Lens error codes].
+//
+// [Setting account permissions to use S3 Storage Lens groups]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage_lens_iam_permissions.html#storage_lens_groups_permissions
+// [List of Amazon S3 Storage Lens error codes]: https://docs.aws.amazon.com/AmazonS3/latest/API/ErrorResponses.html#S3LensErrorCodeList
 func (c *Client) DeleteStorageLensGroup(ctx context.Context, params *DeleteStorageLensGroupInput, optFns ...func(*Options)) (*DeleteStorageLensGroupOutput, error) {
 	if params == nil {
 		params = &DeleteStorageLensGroupInput{}
@@ -39,13 +42,13 @@ func (c *Client) DeleteStorageLensGroup(ctx context.Context, params *DeleteStora
 
 type DeleteStorageLensGroupInput struct {
 
-	// The Amazon Web Services account ID used to create the Storage Lens group that
+	//  The Amazon Web Services account ID used to create the Storage Lens group that
 	// you're trying to delete.
 	//
 	// This member is required.
 	AccountId *string
 
-	// The name of the Storage Lens group that you're trying to delete.
+	//  The name of the Storage Lens group that you're trying to delete.
 	//
 	// This member is required.
 	Name *string
@@ -87,25 +90,25 @@ func (c *Client) addOperationDeleteStorageLensGroupMiddlewares(stack *middleware
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -123,6 +126,9 @@ func (c *Client) addOperationDeleteStorageLensGroupMiddlewares(stack *middleware
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addEndpointPrefix_opDeleteStorageLensGroupMiddleware(stack); err != nil {
 		return err
 	}
@@ -135,7 +141,7 @@ func (c *Client) addOperationDeleteStorageLensGroupMiddlewares(stack *middleware
 	if err = addMetadataRetrieverMiddleware(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addDeleteStorageLensGroupUpdateEndpoint(stack, options); err != nil {

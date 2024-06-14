@@ -17,6 +17,7 @@ import (
 
 // Deletes the access grant from the S3 Access Grants instance. You cannot undo an
 // access grant deletion and the grantee will no longer have access to the S3 data.
+//
 // Permissions You must have the s3:DeleteAccessGrant permission to use this
 // operation.
 func (c *Client) DeleteAccessGrant(ctx context.Context, params *DeleteAccessGrantInput, optFns ...func(*Options)) (*DeleteAccessGrantOutput, error) {
@@ -84,25 +85,25 @@ func (c *Client) addOperationDeleteAccessGrantMiddlewares(stack *middleware.Stac
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -120,6 +121,9 @@ func (c *Client) addOperationDeleteAccessGrantMiddlewares(stack *middleware.Stac
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = smithyhttp.AddContentChecksumMiddleware(stack); err != nil {
 		return err
 	}
@@ -135,7 +139,7 @@ func (c *Client) addOperationDeleteAccessGrantMiddlewares(stack *middleware.Stac
 	if err = addMetadataRetrieverMiddleware(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addDeleteAccessGrantUpdateEndpoint(stack, options); err != nil {

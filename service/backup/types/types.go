@@ -11,20 +11,31 @@ import (
 type AdvancedBackupSetting struct {
 
 	// Specifies the backup option for a selected resource. This option is only
-	// available for Windows VSS backup jobs. Valid values: Set to
-	// "WindowsVSS":"enabled" to enable the WindowsVSS backup option and create a
-	// Windows VSS backup. Set to "WindowsVSS":"disabled" to create a regular backup.
-	// The WindowsVSS option is not enabled by default. If you specify an invalid
-	// option, you get an InvalidParameterValueException exception. For more
-	// information about Windows VSS backups, see Creating a VSS-Enabled Windows Backup (https://docs.aws.amazon.com/aws-backup/latest/devguide/windows-backups.html)
-	// .
+	// available for Windows VSS backup jobs.
+	//
+	// Valid values:
+	//
+	// Set to "WindowsVSS":"enabled" to enable the WindowsVSS backup option and create
+	// a Windows VSS backup.
+	//
+	// Set to "WindowsVSS":"disabled" to create a regular backup. The WindowsVSS
+	// option is not enabled by default.
+	//
+	// If you specify an invalid option, you get an InvalidParameterValueException
+	// exception.
+	//
+	// For more information about Windows VSS backups, see [Creating a VSS-Enabled Windows Backup].
+	//
+	// [Creating a VSS-Enabled Windows Backup]: https://docs.aws.amazon.com/aws-backup/latest/devguide/windows-backups.html
 	BackupOptions map[string]string
 
 	// Specifies an object containing resource type and backup options. The only
 	// supported resource type is Amazon EC2 instances with Windows Volume Shadow Copy
-	// Service (VSS). For a CloudFormation example, see the sample CloudFormation
-	// template to enable Windows VSS (https://docs.aws.amazon.com/aws-backup/latest/devguide/integrate-cloudformation-with-aws-backup.html)
-	// in the Backup User Guide. Valid values: EC2 .
+	// Service (VSS). For a CloudFormation example, see the [sample CloudFormation template to enable Windows VSS]in the Backup User Guide.
+	//
+	// Valid values: EC2 .
+	//
+	// [sample CloudFormation template to enable Windows VSS]: https://docs.aws.amazon.com/aws-backup/latest/devguide/integrate-cloudformation-with-aws-backup.html
 	ResourceType *string
 
 	noSmithyDocumentSerde
@@ -40,10 +51,11 @@ type BackupJob struct {
 	BackupJobId *string
 
 	// Specifies the backup option for a selected resource. This option is only
-	// available for Windows Volume Shadow Copy Service (VSS) backup jobs. Valid
-	// values: Set to "WindowsVSS":"enabled" to enable the WindowsVSS backup option
-	// and create a Windows VSS backup. Set to "WindowsVSS":"disabled" to create a
-	// regular backup. If you specify an invalid option, you get an
+	// available for Windows Volume Shadow Copy Service (VSS) backup jobs.
+	//
+	// Valid values: Set to "WindowsVSS":"enabled" to enable the WindowsVSS backup
+	// option and create a Windows VSS backup. Set to "WindowsVSS":"disabled" to
+	// create a regular backup. If you specify an invalid option, you get an
 	// InvalidParameterValueException exception.
 	BackupOptions map[string]string
 
@@ -102,12 +114,17 @@ type BackupJob struct {
 	// This is a boolean value indicating this is a parent (composite) backup job.
 	IsParent bool
 
-	// This parameter is the job count for the specified message category. Example
-	// strings may include AccessDenied , SUCCESS , AGGREGATE_ALL , and
-	// INVALIDPARAMETERS . See Monitoring (https://docs.aws.amazon.com/aws-backup/latest/devguide/monitoring.html)
-	// for a list of MessageCategory strings. The the value ANY returns count of all
-	// message categories. AGGREGATE_ALL aggregates job counts for all message
-	// categories and returns the sum.
+	// This parameter is the job count for the specified message category.
+	//
+	// Example strings may include AccessDenied , SUCCESS , AGGREGATE_ALL , and
+	// INVALIDPARAMETERS . See [Monitoring] for a list of MessageCategory strings.
+	//
+	// The the value ANY returns count of all message categories.
+	//
+	// AGGREGATE_ALL aggregates job counts for all message categories and returns the
+	// sum.
+	//
+	// [Monitoring]: https://docs.aws.amazon.com/aws-backup/latest/devguide/monitoring.html
 	MessageCategory *string
 
 	// This uniquely identifies a request to Backup to back up a resource. The return
@@ -156,6 +173,7 @@ type BackupJob struct {
 }
 
 // This is a summary of jobs created or running within the most recent 30 days.
+//
 // The returned summary may contain the following: Region, Account, State,
 // RestourceType, MessageCategory, StartTime, EndTime, and Count of included jobs.
 type BackupJobSummary struct {
@@ -166,17 +184,24 @@ type BackupJobSummary struct {
 	// The value as a number of jobs in a job summary.
 	Count int32
 
-	// The value of time in number format of a job end time. This value is the time in
-	// Unix format, Coordinated Universal Time (UTC), and accurate to milliseconds. For
-	// example, the value 1516925490.087 represents Friday, January 26, 2018
-	// 12:11:30.087 AM.
+	// The value of time in number format of a job end time.
+	//
+	// This value is the time in Unix format, Coordinated Universal Time (UTC), and
+	// accurate to milliseconds. For example, the value 1516925490.087 represents
+	// Friday, January 26, 2018 12:11:30.087 AM.
 	EndTime *time.Time
 
-	// This parameter is the job count for the specified message category. Example
-	// strings include AccessDenied , Success , and InvalidParameters . See Monitoring (https://docs.aws.amazon.com/aws-backup/latest/devguide/monitoring.html)
-	// for a list of MessageCategory strings. The the value ANY returns count of all
-	// message categories. AGGREGATE_ALL aggregates job counts for all message
-	// categories and returns the sum.
+	// This parameter is the job count for the specified message category.
+	//
+	// Example strings include AccessDenied , Success , and InvalidParameters . See [Monitoring]
+	// for a list of MessageCategory strings.
+	//
+	// The the value ANY returns count of all message categories.
+	//
+	// AGGREGATE_ALL aggregates job counts for all message categories and returns the
+	// sum.
+	//
+	// [Monitoring]: https://docs.aws.amazon.com/aws-backup/latest/devguide/monitoring.html
 	MessageCategory *string
 
 	// The Amazon Web Services Regions within the job summary.
@@ -186,10 +211,11 @@ type BackupJobSummary struct {
 	// GetSupportedResourceTypes returns strings for supported resource types.
 	ResourceType *string
 
-	// The value of time in number format of a job start time. This value is the time
-	// in Unix format, Coordinated Universal Time (UTC), and accurate to milliseconds.
-	// For example, the value 1516925490.087 represents Friday, January 26, 2018
-	// 12:11:30.087 AM.
+	// The value of time in number format of a job start time.
+	//
+	// This value is the time in Unix format, Coordinated Universal Time (UTC), and
+	// accurate to milliseconds. For example, the value 1516925490.087 represents
+	// Friday, January 26, 2018 12:11:30.087 AM.
 	StartTime *time.Time
 
 	// This value is job count for jobs with the specified state.
@@ -271,8 +297,9 @@ type BackupPlansListMember struct {
 
 	// A unique string that identifies the request and allows failed requests to be
 	// retried without the risk of running the operation twice. This parameter is
-	// optional. If used, this parameter must contain 1 to 50 alphanumeric or '-_.'
-	// characters.
+	// optional.
+	//
+	// If used, this parameter must contain 1 to 50 alphanumeric or '-_.' characters.
 	CreatorRequestId *string
 
 	// The date and time a backup plan is deleted, in Unix format and Coordinated
@@ -338,14 +365,18 @@ type BackupRule struct {
 
 	// The lifecycle defines when a protected resource is transitioned to cold storage
 	// and when it expires. Backup transitions and expires backups automatically
-	// according to the lifecycle that you define. Backups transitioned to cold storage
-	// must be stored in cold storage for a minimum of 90 days. Therefore, the
-	// “retention” setting must be 90 days greater than the “transition to cold after
-	// days” setting. The “transition to cold after days” setting cannot be changed
-	// after a backup has been transitioned to cold. Resource types that are able to be
-	// transitioned to cold storage are listed in the "Lifecycle to cold storage"
-	// section of the Feature availability by resource (https://docs.aws.amazon.com/aws-backup/latest/devguide/whatisbackup.html#features-by-resource)
-	// table. Backup ignores this expression for other resource types.
+	// according to the lifecycle that you define.
+	//
+	// Backups transitioned to cold storage must be stored in cold storage for a
+	// minimum of 90 days. Therefore, the “retention” setting must be 90 days greater
+	// than the “transition to cold after days” setting. The “transition to cold after
+	// days” setting cannot be changed after a backup has been transitioned to cold.
+	//
+	// Resource types that are able to be transitioned to cold storage are listed in
+	// the "Lifecycle to cold storage" section of the [Feature availability by resource]table. Backup ignores this
+	// expression for other resource types.
+	//
+	// [Feature availability by resource]: https://docs.aws.amazon.com/aws-backup/latest/devguide/whatisbackup.html#features-by-resource
 	Lifecycle *Lifecycle
 
 	// An array of key-value pair strings that are assigned to resources that are
@@ -357,12 +388,13 @@ type BackupRule struct {
 	RuleId *string
 
 	// A cron expression in UTC specifying when Backup initiates a backup job. For
-	// more information about Amazon Web Services cron expressions, see Schedule
-	// Expressions for Rules (https://docs.aws.amazon.com/AmazonCloudWatch/latest/events/ScheduledEvents.html)
-	// in the Amazon CloudWatch Events User Guide.. Two examples of Amazon Web Services
-	// cron expressions are 15 * ? * * * (take a backup every hour at 15 minutes past
-	// the hour) and 0 12 * * ? * (take a backup every day at 12 noon UTC). For a
-	// table of examples, click the preceding link and scroll down the page.
+	// more information about Amazon Web Services cron expressions, see [Schedule Expressions for Rules]in the Amazon
+	// CloudWatch Events User Guide.. Two examples of Amazon Web Services cron
+	// expressions are 15 * ? * * * (take a backup every hour at 15 minutes past the
+	// hour) and 0 12 * * ? * (take a backup every day at 12 noon UTC). For a table of
+	// examples, click the preceding link and scroll down the page.
+	//
+	// [Schedule Expressions for Rules]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/events/ScheduledEvents.html
 	ScheduleExpression *string
 
 	// This is the timezone in which the schedule expression is set. By default,
@@ -371,14 +403,15 @@ type BackupRule struct {
 
 	// A value in minutes after a backup is scheduled before a job will be canceled if
 	// it doesn't start successfully. This value is optional. If this value is
-	// included, it must be at least 60 minutes to avoid errors. During the start
-	// window, the backup job status remains in CREATED status until it has
-	// successfully begun or until the start window time has run out. If within the
-	// start window time Backup receives an error that allows the job to be retried,
-	// Backup will automatically retry to begin the job at least every 10 minutes until
-	// the backup successfully begins (the job status changes to RUNNING ) or until the
-	// job status changes to EXPIRED (which is expected to occur when the start window
-	// time is over).
+	// included, it must be at least 60 minutes to avoid errors.
+	//
+	// During the start window, the backup job status remains in CREATED status until
+	// it has successfully begun or until the start window time has run out. If within
+	// the start window time Backup receives an error that allows the job to be
+	// retried, Backup will automatically retry to begin the job at least every 10
+	// minutes until the backup successfully begins (the job status changes to RUNNING
+	// ) or until the job status changes to EXPIRED (which is expected to occur when
+	// the start window time is over).
 	StartWindowMinutes *int64
 
 	noSmithyDocumentSerde
@@ -416,15 +449,20 @@ type BackupRuleInput struct {
 
 	// The lifecycle defines when a protected resource is transitioned to cold storage
 	// and when it expires. Backup will transition and expire backups automatically
-	// according to the lifecycle that you define. Backups transitioned to cold storage
-	// must be stored in cold storage for a minimum of 90 days. Therefore, the
-	// “retention” setting must be 90 days greater than the “transition to cold after
-	// days” setting. The “transition to cold after days” setting cannot be changed
-	// after a backup has been transitioned to cold. Resource types that are able to be
-	// transitioned to cold storage are listed in the "Lifecycle to cold storage"
-	// section of the Feature availability by resource (https://docs.aws.amazon.com/aws-backup/latest/devguide/whatisbackup.html#features-by-resource)
-	// table. Backup ignores this expression for other resource types. This parameter
-	// has a maximum value of 100 years (36,500 days).
+	// according to the lifecycle that you define.
+	//
+	// Backups transitioned to cold storage must be stored in cold storage for a
+	// minimum of 90 days. Therefore, the “retention” setting must be 90 days greater
+	// than the “transition to cold after days” setting. The “transition to cold after
+	// days” setting cannot be changed after a backup has been transitioned to cold.
+	//
+	// Resource types that are able to be transitioned to cold storage are listed in
+	// the "Lifecycle to cold storage" section of the [Feature availability by resource]table. Backup ignores this
+	// expression for other resource types.
+	//
+	// This parameter has a maximum value of 100 years (36,500 days).
+	//
+	// [Feature availability by resource]: https://docs.aws.amazon.com/aws-backup/latest/devguide/whatisbackup.html#features-by-resource
 	Lifecycle *Lifecycle
 
 	// To help organize your resources, you can assign your own metadata to the
@@ -440,23 +478,28 @@ type BackupRuleInput struct {
 
 	// A value in minutes after a backup is scheduled before a job will be canceled if
 	// it doesn't start successfully. This value is optional. If this value is
-	// included, it must be at least 60 minutes to avoid errors. This parameter has a
-	// maximum value of 100 years (52,560,000 minutes). During the start window, the
-	// backup job status remains in CREATED status until it has successfully begun or
-	// until the start window time has run out. If within the start window time Backup
-	// receives an error that allows the job to be retried, Backup will automatically
-	// retry to begin the job at least every 10 minutes until the backup successfully
-	// begins (the job status changes to RUNNING ) or until the job status changes to
-	// EXPIRED (which is expected to occur when the start window time is over).
+	// included, it must be at least 60 minutes to avoid errors.
+	//
+	// This parameter has a maximum value of 100 years (52,560,000 minutes).
+	//
+	// During the start window, the backup job status remains in CREATED status until
+	// it has successfully begun or until the start window time has run out. If within
+	// the start window time Backup receives an error that allows the job to be
+	// retried, Backup will automatically retry to begin the job at least every 10
+	// minutes until the backup successfully begins (the job status changes to RUNNING
+	// ) or until the job status changes to EXPIRED (which is expected to occur when
+	// the start window time is over).
 	StartWindowMinutes *int64
 
 	noSmithyDocumentSerde
 }
 
-// Used to specify a set of resources to a backup plan. Specifying your desired
-// Conditions , ListOfTags , NotResources , and/or Resources is recommended. If
-// none of these are specified, Backup will attempt to select all supported and
-// opted-in storage resources, which could have unintended cost implications.
+// Used to specify a set of resources to a backup plan.
+//
+// Specifying your desired Conditions , ListOfTags , NotResources , and/or
+// Resources is recommended. If none of these are specified, Backup will attempt to
+// select all supported and opted-in storage resources, which could have unintended
+// cost implications.
 type BackupSelection struct {
 
 	// The ARN of the IAM role that Backup uses to authenticate when backing up the
@@ -474,9 +517,13 @@ type BackupSelection struct {
 	// A list of conditions that you define to assign resources to your backup plans
 	// using tags. For example, "StringEquals": { "Key":
 	// "aws:ResourceTag/CreatedByCryo", "Value": "true" }, . Condition operators are
-	// case sensitive. Conditions differs from ListOfTags as follows:
+	// case sensitive.
+	//
+	// Conditions differs from ListOfTags as follows:
+	//
 	//   - When you specify more than one condition, you only assign the resources
 	//   that match ALL conditions (using AND logic).
+	//
 	//   - Conditions supports StringEquals , StringLike , StringNotEquals , and
 	//   StringNotLike . ListOfTags only supports StringEquals .
 	Conditions *Conditions
@@ -484,25 +531,31 @@ type BackupSelection struct {
 	// A list of conditions that you define to assign resources to your backup plans
 	// using tags. For example, "StringEquals": { "Key":
 	// "aws:ResourceTag/CreatedByCryo", "Value": "true" }, . Condition operators are
-	// case sensitive. ListOfTags differs from Conditions as follows:
+	// case sensitive.
+	//
+	// ListOfTags differs from Conditions as follows:
+	//
 	//   - When you specify more than one condition, you assign all resources that
 	//   match AT LEAST ONE condition (using OR logic).
+	//
 	//   - ListOfTags only supports StringEquals . Conditions supports StringEquals ,
 	//   StringLike , StringNotEquals , and StringNotLike .
 	ListOfTags []Condition
 
 	// A list of Amazon Resource Names (ARNs) to exclude from a backup plan. The
-	// maximum number of ARNs is 500 without wildcards, or 30 ARNs with wildcards. If
-	// you need to exclude many resources from a backup plan, consider a different
+	// maximum number of ARNs is 500 without wildcards, or 30 ARNs with wildcards.
+	//
+	// If you need to exclude many resources from a backup plan, consider a different
 	// resource selection strategy, such as assigning only one or a few resource types
 	// or refining your resource selection using tags.
 	NotResources []string
 
 	// A list of Amazon Resource Names (ARNs) to assign to a backup plan. The maximum
-	// number of ARNs is 500 without wildcards, or 30 ARNs with wildcards. If you need
-	// to assign many resources to a backup plan, consider a different resource
-	// selection strategy, such as assigning all resources of a resource type or
-	// refining your resource selection using tags.
+	// number of ARNs is 500 without wildcards, or 30 ARNs with wildcards.
+	//
+	// If you need to assign many resources to a backup plan, consider a different
+	// resource selection strategy, such as assigning all resources of a resource type
+	// or refining your resource selection using tags.
 	Resources []string
 
 	noSmithyDocumentSerde
@@ -522,8 +575,9 @@ type BackupSelectionsListMember struct {
 
 	// A unique string that identifies the request and allows failed requests to be
 	// retried without the risk of running the operation twice. This parameter is
-	// optional. If used, this parameter must contain 1 to 50 alphanumeric or '-_.'
-	// characters.
+	// optional.
+	//
+	// If used, this parameter must contain 1 to 50 alphanumeric or '-_.' characters.
 	CreatorRequestId *string
 
 	// Specifies the IAM role Amazon Resource Name (ARN) to create the target recovery
@@ -560,27 +614,34 @@ type BackupVaultListMember struct {
 
 	// A unique string that identifies the request and allows failed requests to be
 	// retried without the risk of running the operation twice. This parameter is
-	// optional. If used, this parameter must contain 1 to 50 alphanumeric or '-_.'
-	// characters.
+	// optional.
+	//
+	// If used, this parameter must contain 1 to 50 alphanumeric or '-_.' characters.
 	CreatorRequestId *string
 
 	// A server-side encryption key you can specify to encrypt your backups from
 	// services that support full Backup management; for example,
 	// arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab . If
 	// you specify a key, you must specify its ARN, not its alias. If you do not
-	// specify a key, Backup creates a KMS key for you by default. To learn which
-	// Backup services support full Backup management and how Backup handles encryption
-	// for backups from services that do not yet support full Backup, see Encryption
-	// for backups in Backup (https://docs.aws.amazon.com/aws-backup/latest/devguide/encryption.html)
+	// specify a key, Backup creates a KMS key for you by default.
+	//
+	// To learn which Backup services support full Backup management and how Backup
+	// handles encryption for backups from services that do not yet support full
+	// Backup, see [Encryption for backups in Backup]
+	//
+	// [Encryption for backups in Backup]: https://docs.aws.amazon.com/aws-backup/latest/devguide/encryption.html
 	EncryptionKeyArn *string
 
 	// The date and time when Backup Vault Lock configuration becomes immutable,
-	// meaning it cannot be changed or deleted. If you applied Vault Lock to your vault
-	// without specifying a lock date, you can change your Vault Lock settings, or
-	// delete Vault Lock from the vault entirely, at any time. This value is in Unix
-	// format, Coordinated Universal Time (UTC), and accurate to milliseconds. For
-	// example, the value 1516925490.087 represents Friday, January 26, 2018
-	// 12:11:30.087 AM.
+	// meaning it cannot be changed or deleted.
+	//
+	// If you applied Vault Lock to your vault without specifying a lock date, you can
+	// change your Vault Lock settings, or delete Vault Lock from the vault entirely,
+	// at any time.
+	//
+	// This value is in Unix format, Coordinated Universal Time (UTC), and accurate to
+	// milliseconds. For example, the value 1516925490.087 represents Friday, January
+	// 26, 2018 12:11:30.087 AM.
 	LockDate *time.Time
 
 	// A Boolean value that indicates whether Backup Vault Lock applies to the
@@ -591,24 +652,26 @@ type BackupVaultListMember struct {
 	// The Backup Vault Lock setting that specifies the maximum retention period that
 	// the vault retains its recovery points. If this parameter is not specified, Vault
 	// Lock does not enforce a maximum retention period on the recovery points in the
-	// vault (allowing indefinite storage). If specified, any backup or copy job to the
-	// vault must have a lifecycle policy with a retention period equal to or shorter
-	// than the maximum retention period. If the job's retention period is longer than
-	// that maximum retention period, then the vault fails the backup or copy job, and
-	// you should either modify your lifecycle settings or use a different vault.
-	// Recovery points already stored in the vault prior to Vault Lock are not
-	// affected.
+	// vault (allowing indefinite storage).
+	//
+	// If specified, any backup or copy job to the vault must have a lifecycle policy
+	// with a retention period equal to or shorter than the maximum retention period.
+	// If the job's retention period is longer than that maximum retention period, then
+	// the vault fails the backup or copy job, and you should either modify your
+	// lifecycle settings or use a different vault. Recovery points already stored in
+	// the vault prior to Vault Lock are not affected.
 	MaxRetentionDays *int64
 
 	// The Backup Vault Lock setting that specifies the minimum retention period that
 	// the vault retains its recovery points. If this parameter is not specified, Vault
-	// Lock does not enforce a minimum retention period. If specified, any backup or
-	// copy job to the vault must have a lifecycle policy with a retention period equal
-	// to or longer than the minimum retention period. If the job's retention period is
-	// shorter than that minimum retention period, then the vault fails the backup or
-	// copy job, and you should either modify your lifecycle settings or use a
-	// different vault. Recovery points already stored in the vault prior to Vault Lock
-	// are not affected.
+	// Lock does not enforce a minimum retention period.
+	//
+	// If specified, any backup or copy job to the vault must have a lifecycle policy
+	// with a retention period equal to or longer than the minimum retention period. If
+	// the job's retention period is shorter than that minimum retention period, then
+	// the vault fails the backup or copy job, and you should either modify your
+	// lifecycle settings or use a different vault. Recovery points already stored in
+	// the vault prior to Vault Lock are not affected.
 	MinRetentionDays *int64
 
 	// The number of recovery points that are stored in a backup vault.
@@ -618,16 +681,22 @@ type BackupVaultListMember struct {
 }
 
 // Contains DeleteAt and MoveToColdStorageAt timestamps, which are used to specify
-// a lifecycle for a recovery point. The lifecycle defines when a protected
-// resource is transitioned to cold storage and when it expires. Backup transitions
-// and expires backups automatically according to the lifecycle that you define.
+// a lifecycle for a recovery point.
+//
+// The lifecycle defines when a protected resource is transitioned to cold storage
+// and when it expires. Backup transitions and expires backups automatically
+// according to the lifecycle that you define.
+//
 // Backups transitioned to cold storage must be stored in cold storage for a
 // minimum of 90 days. Therefore, the “retention” setting must be 90 days greater
 // than the “transition to cold after days” setting. The “transition to cold after
 // days” setting cannot be changed after a backup has been transitioned to cold.
+//
 // Resource types that are able to be transitioned to cold storage are listed in
-// the "Lifecycle to cold storage" section of the Feature availability by resource (https://docs.aws.amazon.com/aws-backup/latest/devguide/whatisbackup.html#features-by-resource)
-// table. Backup ignores this expression for other resource types.
+// the "Lifecycle to cold storage" section of the [Feature availability by resource]table. Backup ignores this
+// expression for other resource types.
+//
+// [Feature availability by resource]: https://docs.aws.amazon.com/aws-backup/latest/devguide/whatisbackup.html#features-by-resource
 type CalculatedLifecycle struct {
 
 	// A timestamp that specifies when to delete a recovery point.
@@ -653,8 +722,9 @@ type Condition struct {
 	// An operation applied to a key-value pair used to assign resources to your
 	// backup plan. Condition only supports StringEquals . For more flexible assignment
 	// options, including StringLike and the ability to exclude resources from your
-	// backup plan, use Conditions (with an "s" on the end) for your BackupSelection (https://docs.aws.amazon.com/aws-backup/latest/devguide/API_BackupSelection.html)
-	// .
+	// backup plan, use Conditions (with an "s" on the end) for your [BackupSelection]BackupSelection .
+	//
+	// [BackupSelection]: https://docs.aws.amazon.com/aws-backup/latest/devguide/API_BackupSelection.html
 	//
 	// This member is required.
 	ConditionType ConditionType
@@ -726,9 +796,10 @@ type ControlInputParameter struct {
 // scope. The control scope can include one or more resource types, a combination
 // of a tag key and value, or a combination of one resource type and one resource
 // ID. If no scope is specified, evaluations for the rule are triggered when any
-// resource in your recording group changes in configuration. To set a control
-// scope that includes all of a particular resource, leave the ControlScope empty
-// or do not pass it when calling CreateFramework .
+// resource in your recording group changes in configuration.
+//
+// To set a control scope that includes all of a particular resource, leave the
+// ControlScope empty or do not pass it when calling CreateFramework .
 type ControlScope struct {
 
 	// The ID of the only Amazon Web Services resource that you want your control
@@ -759,14 +830,19 @@ type CopyAction struct {
 	DestinationBackupVaultArn *string
 
 	// Contains an array of Transition objects specifying how long in days before a
-	// recovery point transitions to cold storage or is deleted. Backups transitioned
-	// to cold storage must be stored in cold storage for a minimum of 90 days.
-	// Therefore, on the console, the “retention” setting must be 90 days greater than
-	// the “transition to cold after days” setting. The “transition to cold after days”
-	// setting cannot be changed after a backup has been transitioned to cold. Resource
-	// types that are able to be transitioned to cold storage are listed in the
-	// "Lifecycle to cold storage" section of the Feature availability by resource (https://docs.aws.amazon.com/aws-backup/latest/devguide/whatisbackup.html#features-by-resource)
-	// table. Backup ignores this expression for other resource types.
+	// recovery point transitions to cold storage or is deleted.
+	//
+	// Backups transitioned to cold storage must be stored in cold storage for a
+	// minimum of 90 days. Therefore, on the console, the “retention” setting must be
+	// 90 days greater than the “transition to cold after days” setting. The
+	// “transition to cold after days” setting cannot be changed after a backup has
+	// been transitioned to cold.
+	//
+	// Resource types that are able to be transitioned to cold storage are listed in
+	// the "Lifecycle to cold storage" section of the [Feature availability by resource]table. Backup ignores this
+	// expression for other resource types.
+	//
+	// [Feature availability by resource]: https://docs.aws.amazon.com/aws-backup/latest/devguide/whatisbackup.html#features-by-resource
 	Lifecycle *Lifecycle
 
 	noSmithyDocumentSerde
@@ -792,8 +868,9 @@ type CopyJob struct {
 
 	// This is the identifier of a resource within a composite group, such as nested
 	// (child) recovery point belonging to a composite (parent) stack. The ID is
-	// transferred from the logical ID (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/resources-section-structure.html#resources-section-structure-syntax)
-	// within a stack.
+	// transferred from the [logical ID]within a stack.
+	//
+	// [logical ID]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/resources-section-structure.html#resources-section-structure-syntax
 	CompositeMemberIdentifier *string
 
 	// Uniquely identifies a copy job.
@@ -825,12 +902,17 @@ type CopyJob struct {
 	// This is a boolean value indicating this is a parent (composite) copy job.
 	IsParent bool
 
-	// This parameter is the job count for the specified message category. Example
-	// strings may include AccessDenied , SUCCESS , AGGREGATE_ALL , and
-	// InvalidParameters . See Monitoring (https://docs.aws.amazon.com/aws-backup/latest/devguide/monitoring.html)
-	// for a list of MessageCategory strings. The the value ANY returns count of all
-	// message categories. AGGREGATE_ALL aggregates job counts for all message
-	// categories and returns the sum
+	// This parameter is the job count for the specified message category.
+	//
+	// Example strings may include AccessDenied , SUCCESS , AGGREGATE_ALL , and
+	// InvalidParameters . See [Monitoring] for a list of MessageCategory strings.
+	//
+	// The the value ANY returns count of all message categories.
+	//
+	// AGGREGATE_ALL aggregates job counts for all message categories and returns the
+	// sum
+	//
+	// [Monitoring]: https://docs.aws.amazon.com/aws-backup/latest/devguide/monitoring.html
 	MessageCategory *string
 
 	// This is the number of child (nested) copy jobs.
@@ -873,7 +955,9 @@ type CopyJob struct {
 }
 
 // This is a summary of copy jobs created or running within the most recent 30
-// days. The returned summary may contain the following: Region, Account, State,
+// days.
+//
+// The returned summary may contain the following: Region, Account, State,
 // RestourceType, MessageCategory, StartTime, EndTime, and Count of included jobs.
 type CopyJobSummary struct {
 
@@ -883,17 +967,24 @@ type CopyJobSummary struct {
 	// The value as a number of jobs in a job summary.
 	Count int32
 
-	// The value of time in number format of a job end time. This value is the time in
-	// Unix format, Coordinated Universal Time (UTC), and accurate to milliseconds. For
-	// example, the value 1516925490.087 represents Friday, January 26, 2018
-	// 12:11:30.087 AM.
+	// The value of time in number format of a job end time.
+	//
+	// This value is the time in Unix format, Coordinated Universal Time (UTC), and
+	// accurate to milliseconds. For example, the value 1516925490.087 represents
+	// Friday, January 26, 2018 12:11:30.087 AM.
 	EndTime *time.Time
 
-	// This parameter is the job count for the specified message category. Example
-	// strings include AccessDenied , Success , and InvalidParameters . See Monitoring (https://docs.aws.amazon.com/aws-backup/latest/devguide/monitoring.html)
-	// for a list of MessageCategory strings. The the value ANY returns count of all
-	// message categories. AGGREGATE_ALL aggregates job counts for all message
-	// categories and returns the sum.
+	// This parameter is the job count for the specified message category.
+	//
+	// Example strings include AccessDenied , Success , and InvalidParameters . See [Monitoring]
+	// for a list of MessageCategory strings.
+	//
+	// The the value ANY returns count of all message categories.
+	//
+	// AGGREGATE_ALL aggregates job counts for all message categories and returns the
+	// sum.
+	//
+	// [Monitoring]: https://docs.aws.amazon.com/aws-backup/latest/devguide/monitoring.html
 	MessageCategory *string
 
 	// This is the Amazon Web Services Regions within the job summary.
@@ -903,10 +994,11 @@ type CopyJobSummary struct {
 	// GetSupportedResourceTypes returns strings for supported resource types
 	ResourceType *string
 
-	// The value of time in number format of a job start time. This value is the time
-	// in Unix format, Coordinated Universal Time (UTC), and accurate to milliseconds.
-	// For example, the value 1516925490.087 represents Friday, January 26, 2018
-	// 12:11:30.087 AM.
+	// The value of time in number format of a job start time.
+	//
+	// This value is the time in Unix format, Coordinated Universal Time (UTC), and
+	// accurate to milliseconds. For example, the value 1516925490.087 represents
+	// Friday, January 26, 2018 12:11:30.087 AM.
 	StartTime *time.Time
 
 	// This value is job count for jobs with the specified state.
@@ -916,22 +1008,25 @@ type CopyJobSummary struct {
 }
 
 // This is a resource filter containing FromDate: DateTime and ToDate: DateTime.
-// Both values are required. Future DateTime values are not permitted. The date and
-// time are in Unix format and Coordinated Universal Time (UTC), and it is accurate
-// to milliseconds ((milliseconds are optional). For example, the value
-// 1516925490.087 represents Friday, January 26, 2018 12:11:30.087 AM.
+// Both values are required. Future DateTime values are not permitted.
+//
+// The date and time are in Unix format and Coordinated Universal Time (UTC), and
+// it is accurate to milliseconds ((milliseconds are optional). For example, the
+// value 1516925490.087 represents Friday, January 26, 2018 12:11:30.087 AM.
 type DateRange struct {
 
-	// This value is the beginning date, inclusive. The date and time are in Unix
-	// format and Coordinated Universal Time (UTC), and it is accurate to milliseconds
-	// (milliseconds are optional).
+	// This value is the beginning date, inclusive.
+	//
+	// The date and time are in Unix format and Coordinated Universal Time (UTC), and
+	// it is accurate to milliseconds (milliseconds are optional).
 	//
 	// This member is required.
 	FromDate *time.Time
 
-	// This value is the end date, inclusive. The date and time are in Unix format and
-	// Coordinated Universal Time (UTC), and it is accurate to milliseconds
-	// (milliseconds are optional).
+	// This value is the end date, inclusive.
+	//
+	// The date and time are in Unix format and Coordinated Universal Time (UTC), and
+	// it is accurate to milliseconds (milliseconds are optional).
 	//
 	// This member is required.
 	ToDate *time.Time
@@ -950,8 +1045,10 @@ type Framework struct {
 	// hours behind UTC.
 	CreationTime *time.Time
 
-	// The deployment status of a framework. The statuses are: CREATE_IN_PROGRESS |
-	// UPDATE_IN_PROGRESS | DELETE_IN_PROGRESS | COMPLETED | FAILED
+	// The deployment status of a framework. The statuses are:
+	//
+	//     CREATE_IN_PROGRESS | UPDATE_IN_PROGRESS | DELETE_IN_PROGRESS | COMPLETED |
+	//     FAILED
 	DeploymentStatus *string
 
 	// An Amazon Resource Name (ARN) that uniquely identifies a resource. The format
@@ -987,6 +1084,10 @@ type FrameworkControl struct {
 	// The scope of a control. The control scope defines what the control will
 	// evaluate. Three examples of control scopes are: a specific backup plan, all
 	// backup plans with a specific tag, or all backup plans.
+	//
+	// For more information, see [ControlScope.]ControlScope
+	//
+	// [ControlScope.]: https://docs.aws.amazon.com/aws-backup/latest/devguide/API_ControlScope.html
 	ControlScope *ControlScope
 
 	noSmithyDocumentSerde
@@ -997,15 +1098,20 @@ type FrameworkControl struct {
 // _ : /
 type KeyValue struct {
 
-	// The tag key (String). The key can't start with aws: . Length Constraints:
-	// Minimum length of 1. Maximum length of 128. Pattern:
-	// ^(?![aA]{1}[wW]{1}[sS]{1}:)([\p{L}\p{Z}\p{N}_.:/=+\-@]+)$
+	// The tag key (String). The key can't start with aws: .
+	//
+	// Length Constraints: Minimum length of 1. Maximum length of 128.
+	//
+	// Pattern: ^(?![aA]{1}[wW]{1}[sS]{1}:)([\p{L}\p{Z}\p{N}_.:/=+\-@]+)$
 	//
 	// This member is required.
 	Key *string
 
-	// The value of the key. Length Constraints: Maximum length of 256. Pattern:
-	// ^([\p{L}\p{Z}\p{N}_.:/=+\-@]*)$
+	// The value of the key.
+	//
+	// Length Constraints: Maximum length of 256.
+	//
+	// Pattern: ^([\p{L}\p{Z}\p{N}_.:/=+\-@]*)$
 	//
 	// This member is required.
 	Value *string
@@ -1051,14 +1157,19 @@ type LegalHold struct {
 }
 
 // Contains an array of Transition objects specifying how long in days before a
-// recovery point transitions to cold storage or is deleted. Backups transitioned
-// to cold storage must be stored in cold storage for a minimum of 90 days.
-// Therefore, on the console, the “retention” setting must be 90 days greater than
-// the “transition to cold after days” setting. The “transition to cold after days”
-// setting cannot be changed after a backup has been transitioned to cold. Resource
-// types that are able to be transitioned to cold storage are listed in the
-// "Lifecycle to cold storage" section of the Feature availability by resource (https://docs.aws.amazon.com/aws-backup/latest/devguide/whatisbackup.html#features-by-resource)
-// table. Backup ignores this expression for other resource types.
+// recovery point transitions to cold storage or is deleted.
+//
+// Backups transitioned to cold storage must be stored in cold storage for a
+// minimum of 90 days. Therefore, on the console, the “retention” setting must be
+// 90 days greater than the “transition to cold after days” setting. The
+// “transition to cold after days” setting cannot be changed after a backup has
+// been transitioned to cold.
+//
+// Resource types that are able to be transitioned to cold storage are listed in
+// the "Lifecycle to cold storage" section of the [Feature availability by resource]table. Backup ignores this
+// expression for other resource types.
+//
+// [Feature availability by resource]: https://docs.aws.amazon.com/aws-backup/latest/devguide/whatisbackup.html#features-by-resource
 type Lifecycle struct {
 
 	// Specifies the number of days after creation that a recovery point is deleted.
@@ -1111,9 +1222,10 @@ type ProtectedResource struct {
 }
 
 // A list of conditions that you define for resources in your restore testing plan
-// using tags. For example, "StringEquals": { "Key":
-// "aws:ResourceTag/CreatedByCryo", "Value": "true" }, . Condition operators are
-// case sensitive.
+// using tags.
+//
+// For example, "StringEquals": { "Key": "aws:ResourceTag/CreatedByCryo", "Value":
+// "true" }, . Condition operators are case sensitive.
 type ProtectedResourceConditions struct {
 
 	// Filters the values of your tagged resources for only those resources that you
@@ -1156,8 +1268,9 @@ type RecoveryPointByBackupVault struct {
 
 	// This is the identifier of a resource within a composite group, such as nested
 	// (child) recovery point belonging to a composite (parent) stack. The ID is
-	// transferred from the logical ID (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/resources-section-structure.html#resources-section-structure-syntax)
-	// within a stack.
+	// transferred from the [logical ID]within a stack.
+	//
+	// [logical ID]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/resources-section-structure.html#resources-section-structure-syntax
 	CompositeMemberIdentifier *string
 
 	// Contains identifying information about the creation of a recovery point,
@@ -1195,14 +1308,18 @@ type RecoveryPointByBackupVault struct {
 
 	// The lifecycle defines when a protected resource is transitioned to cold storage
 	// and when it expires. Backup transitions and expires backups automatically
-	// according to the lifecycle that you define. Backups transitioned to cold storage
-	// must be stored in cold storage for a minimum of 90 days. Therefore, the
-	// “retention” setting must be 90 days greater than the “transition to cold after
-	// days” setting. The “transition to cold after days” setting cannot be changed
-	// after a backup has been transitioned to cold. Resource types that are able to be
-	// transitioned to cold storage are listed in the "Lifecycle to cold storage"
-	// section of the Feature availability by resource (https://docs.aws.amazon.com/aws-backup/latest/devguide/whatisbackup.html#features-by-resource)
-	// table. Backup ignores this expression for other resource types.
+	// according to the lifecycle that you define.
+	//
+	// Backups transitioned to cold storage must be stored in cold storage for a
+	// minimum of 90 days. Therefore, the “retention” setting must be 90 days greater
+	// than the “transition to cold after days” setting. The “transition to cold after
+	// days” setting cannot be changed after a backup has been transitioned to cold.
+	//
+	// Resource types that are able to be transitioned to cold storage are listed in
+	// the "Lifecycle to cold storage" section of the [Feature availability by resource]table. Backup ignores this
+	// expression for other resource types.
+	//
+	// [Feature availability by resource]: https://docs.aws.amazon.com/aws-backup/latest/devguide/whatisbackup.html#features-by-resource
 	Lifecycle *Lifecycle
 
 	// This is the Amazon Resource Name (ARN) of the parent (composite) recovery point.
@@ -1289,6 +1406,9 @@ type RecoveryPointByResource struct {
 	// A message explaining the reason of the recovery point deletion failure.
 	StatusMessage *string
 
+	// This is the type of vault in which the described recovery point is stored.
+	VaultType VaultType
+
 	noSmithyDocumentSerde
 }
 
@@ -1343,10 +1463,11 @@ type RecoveryPointMember struct {
 type RecoveryPointSelection struct {
 
 	// This is a resource filter containing FromDate: DateTime and ToDate: DateTime.
-	// Both values are required. Future DateTime values are not permitted. The date and
-	// time are in Unix format and Coordinated Universal Time (UTC), and it is accurate
-	// to milliseconds ((milliseconds are optional). For example, the value
-	// 1516925490.087 represents Friday, January 26, 2018 12:11:30.087 AM.
+	// Both values are required. Future DateTime values are not permitted.
+	//
+	// The date and time are in Unix format and Coordinated Universal Time (UTC), and
+	// it is accurate to milliseconds ((milliseconds are optional). For example, the
+	// value 1516925490.087 represents Friday, January 26, 2018 12:11:30.087 AM.
 	DateRange *DateRange
 
 	// These are the resources included in the resource selection (including type of
@@ -1425,15 +1546,18 @@ type ReportJob struct {
 	ReportPlanArn *string
 
 	// Identifies the report template for the report. Reports are built using a report
-	// template. The report templates are: RESOURCE_COMPLIANCE_REPORT |
-	// CONTROL_COMPLIANCE_REPORT | BACKUP_JOB_REPORT | COPY_JOB_REPORT |
-	// RESTORE_JOB_REPORT
+	// template. The report templates are:
+	//
+	//     RESOURCE_COMPLIANCE_REPORT | CONTROL_COMPLIANCE_REPORT | BACKUP_JOB_REPORT |
+	//     COPY_JOB_REPORT | RESTORE_JOB_REPORT
 	ReportTemplate *string
 
-	// The status of a report job. The statuses are: CREATED | RUNNING | COMPLETED |
-	// FAILED COMPLETED means that the report is available for your review at your
-	// designated destination. If the status is FAILED , review the StatusMessage for
-	// the reason.
+	// The status of a report job. The statuses are:
+	//
+	//     CREATED | RUNNING | COMPLETED | FAILED
+	//
+	// COMPLETED means that the report is available for your review at your designated
+	// destination. If the status is FAILED , review the StatusMessage for the reason.
 	Status *string
 
 	// A message explaining the status of the report job.
@@ -1451,8 +1575,9 @@ type ReportPlan struct {
 	// 12:11:30.087 AM.
 	CreationTime *time.Time
 
-	// The deployment status of a report plan. The statuses are: CREATE_IN_PROGRESS |
-	// UPDATE_IN_PROGRESS | DELETE_IN_PROGRESS | COMPLETED
+	// The deployment status of a report plan. The statuses are:
+	//
+	//     CREATE_IN_PROGRESS | UPDATE_IN_PROGRESS | DELETE_IN_PROGRESS | COMPLETED
 	DeploymentStatus *string
 
 	// The date and time that a report job associated with this report plan last
@@ -1484,9 +1609,12 @@ type ReportPlan struct {
 	ReportPlanName *string
 
 	// Identifies the report template for the report. Reports are built using a report
-	// template. The report templates are: RESOURCE_COMPLIANCE_REPORT |
-	// CONTROL_COMPLIANCE_REPORT | BACKUP_JOB_REPORT | COPY_JOB_REPORT |
-	// RESTORE_JOB_REPORT If the report template is RESOURCE_COMPLIANCE_REPORT or
+	// template. The report templates are:
+	//
+	//     RESOURCE_COMPLIANCE_REPORT | CONTROL_COMPLIANCE_REPORT | BACKUP_JOB_REPORT |
+	//     COPY_JOB_REPORT | RESTORE_JOB_REPORT
+	//
+	// If the report template is RESOURCE_COMPLIANCE_REPORT or
 	// CONTROL_COMPLIANCE_REPORT , this API resource also describes the report coverage
 	// by Amazon Web Services Regions and frameworks.
 	ReportSetting *ReportSetting
@@ -1498,9 +1626,10 @@ type ReportPlan struct {
 type ReportSetting struct {
 
 	// Identifies the report template for the report. Reports are built using a report
-	// template. The report templates are: RESOURCE_COMPLIANCE_REPORT |
-	// CONTROL_COMPLIANCE_REPORT | BACKUP_JOB_REPORT | COPY_JOB_REPORT |
-	// RESTORE_JOB_REPORT
+	// template. The report templates are:
+	//
+	//     RESOURCE_COMPLIANCE_REPORT | CONTROL_COMPLIANCE_REPORT | BACKUP_JOB_REPORT |
+	//     COPY_JOB_REPORT | RESTORE_JOB_REPORT
 	//
 	// This member is required.
 	ReportTemplate *string
@@ -1614,7 +1743,9 @@ type RestoreJobsListMember struct {
 }
 
 // This is a summary of restore jobs created or running within the most recent 30
-// days. The returned summary may contain the following: Region, Account, State,
+// days.
+//
+// The returned summary may contain the following: Region, Account, State,
 // ResourceType, MessageCategory, StartTime, EndTime, and Count of included jobs.
 type RestoreJobSummary struct {
 
@@ -1624,10 +1755,11 @@ type RestoreJobSummary struct {
 	// The value as a number of jobs in a job summary.
 	Count int32
 
-	// The value of time in number format of a job end time. This value is the time in
-	// Unix format, Coordinated Universal Time (UTC), and accurate to milliseconds. For
-	// example, the value 1516925490.087 represents Friday, January 26, 2018
-	// 12:11:30.087 AM.
+	// The value of time in number format of a job end time.
+	//
+	// This value is the time in Unix format, Coordinated Universal Time (UTC), and
+	// accurate to milliseconds. For example, the value 1516925490.087 represents
+	// Friday, January 26, 2018 12:11:30.087 AM.
 	EndTime *time.Time
 
 	// The Amazon Web Services Regions within the job summary.
@@ -1637,10 +1769,11 @@ type RestoreJobSummary struct {
 	// GetSupportedResourceTypes returns strings for supported resource types.
 	ResourceType *string
 
-	// The value of time in number format of a job start time. This value is the time
-	// in Unix format, Coordinated Universal Time (UTC), and accurate to milliseconds.
-	// For example, the value 1516925490.087 represents Friday, January 26, 2018
-	// 12:11:30.087 AM.
+	// The value of time in number format of a job start time.
+	//
+	// This value is the time in Unix format, Coordinated Universal Time (UTC), and
+	// accurate to milliseconds. For example, the value 1516925490.087 represents
+	// Friday, January 26, 2018 12:11:30.087 AM.
 	StartTime *time.Time
 
 	// This value is job count for jobs with the specified state.
@@ -1676,10 +1809,11 @@ type RestoreTestingPlanForCreate struct {
 	// timezone.
 	ScheduleExpressionTimezone *string
 
-	// Defaults to 24 hours. A value in hours after a restore test is scheduled before
-	// a job will be canceled if it doesn't start successfully. This value is optional.
-	// If this value is included, this parameter has a maximum value of 168 hours (one
-	// week).
+	// Defaults to 24 hours.
+	//
+	// A value in hours after a restore test is scheduled before a job will be
+	// canceled if it doesn't start successfully. This value is optional. If this value
+	// is included, this parameter has a maximum value of 168 hours (one week).
 	StartWindowHours int32
 
 	noSmithyDocumentSerde
@@ -1720,8 +1854,9 @@ type RestoreTestingPlanForGet struct {
 	// This identifies the request and allows failed requests to be retried without
 	// the risk of running the operation twice. If the request includes a
 	// CreatorRequestId that matches an existing backup plan, that plan is returned.
-	// This parameter is optional. If used, this parameter must contain 1 to 50
-	// alphanumeric or '-_.' characters.
+	// This parameter is optional.
+	//
+	// If used, this parameter must contain 1 to 50 alphanumeric or '-_.' characters.
 	CreatorRequestId *string
 
 	// The last time a restore test was run with the specified restore testing plan. A
@@ -1741,10 +1876,11 @@ type RestoreTestingPlanForGet struct {
 	// timezone.
 	ScheduleExpressionTimezone *string
 
-	// Defaults to 24 hours. A value in hours after a restore test is scheduled before
-	// a job will be canceled if it doesn't start successfully. This value is optional.
-	// If this value is included, this parameter has a maximum value of 168 hours (one
-	// week).
+	// Defaults to 24 hours.
+	//
+	// A value in hours after a restore test is scheduled before a job will be
+	// canceled if it doesn't start successfully. This value is optional. If this value
+	// is included, this parameter has a maximum value of 168 hours (one week).
 	StartWindowHours int32
 
 	noSmithyDocumentSerde
@@ -1793,10 +1929,11 @@ type RestoreTestingPlanForList struct {
 	// timezone.
 	ScheduleExpressionTimezone *string
 
-	// Defaults to 24 hours. A value in hours after a restore test is scheduled before
-	// a job will be canceled if it doesn't start successfully. This value is optional.
-	// If this value is included, this parameter has a maximum value of 168 hours (one
-	// week).
+	// Defaults to 24 hours.
+	//
+	// A value in hours after a restore test is scheduled before a job will be
+	// canceled if it doesn't start successfully. This value is optional. If this value
+	// is included, this parameter has a maximum value of 168 hours (one week).
 	StartWindowHours int32
 
 	noSmithyDocumentSerde
@@ -1806,6 +1943,7 @@ type RestoreTestingPlanForList struct {
 type RestoreTestingPlanForUpdate struct {
 
 	// Required: Algorithm ; RecoveryPointTypes ; IncludeVaults (one or more).
+	//
 	// Optional: SelectionWindowDays ('30' if not specified); ExcludeVaults (defaults
 	// to empty list if not listed).
 	RecoveryPointSelection *RestoreTestingRecoveryPointSelection
@@ -1818,10 +1956,11 @@ type RestoreTestingPlanForUpdate struct {
 	// timezone.
 	ScheduleExpressionTimezone *string
 
-	// Defaults to 24 hours. A value in hours after a restore test is scheduled before
-	// a job will be canceled if it doesn't start successfully. This value is optional.
-	// If this value is included, this parameter has a maximum value of 168 hours (one
-	// week).
+	// Defaults to 24 hours.
+	//
+	// A value in hours after a restore test is scheduled before a job will be
+	// canceled if it doesn't start successfully. This value is optional. If this value
+	// is included, this parameter has a maximum value of 168 hours (one week).
 	StartWindowHours int32
 
 	noSmithyDocumentSerde
@@ -1854,16 +1993,23 @@ type RestoreTestingRecoveryPointSelection struct {
 }
 
 // This contains metadata about a specific restore testing selection.
-// ProtectedResourceType is required, such as Amazon EBS or Amazon EC2. This
-// consists of RestoreTestingSelectionName , ProtectedResourceType , and one of the
-// following:
+//
+// ProtectedResourceType is required, such as Amazon EBS or Amazon EC2.
+//
+// This consists of RestoreTestingSelectionName , ProtectedResourceType , and one
+// of the following:
+//
 //   - ProtectedResourceArns
+//
 //   - ProtectedResourceConditions
 //
-// Each protected resource type can have one single value. A restore testing
-// selection can include a wildcard value ("*") for ProtectedResourceArns along
-// with ProtectedResourceConditions . Alternatively, you can include up to 30
-// specific protected resource ARNs in ProtectedResourceArns .
+// Each protected resource type can have one single value.
+//
+// A restore testing selection can include a wildcard value ("*") for
+// ProtectedResourceArns along with ProtectedResourceConditions . Alternatively,
+// you can include up to 30 specific protected resource ARNs in
+// ProtectedResourceArns .
+//
 // ProtectedResourceConditions examples include as StringEquals and StringNotEquals
 // .
 type RestoreTestingSelectionForCreate struct {
@@ -1876,16 +2022,27 @@ type RestoreTestingSelectionForCreate struct {
 
 	// The type of Amazon Web Services resource included in a restore testing
 	// selection; for example, an Amazon EBS volume or an Amazon RDS database.
+	//
 	// Supported resource types accepted include:
+	//
 	//   - Aurora for Amazon Aurora
+	//
 	//   - DocumentDB for Amazon DocumentDB (with MongoDB compatibility)
+	//
 	//   - DynamoDB for Amazon DynamoDB
+	//
 	//   - EBS for Amazon Elastic Block Store
+	//
 	//   - EC2 for Amazon Elastic Compute Cloud
+	//
 	//   - EFS for Amazon Elastic File System
+	//
 	//   - FSx for Amazon FSx
+	//
 	//   - Neptune for Amazon Neptune
+	//
 	//   - RDS for Amazon Relational Database Service
+	//
 	//   - S3 for Amazon S3
 	//
 	// This member is required.
@@ -1909,8 +2066,11 @@ type RestoreTestingSelectionForCreate struct {
 
 	// You can override certain restore metadata keys by including the parameter
 	// RestoreMetadataOverrides in the body of RestoreTestingSelection . Key values are
-	// not case sensitive. See the complete list of restore testing inferred metadata (https://docs.aws.amazon.com/aws-backup/latest/devguide/restore-testing-inferred-metadata.html)
-	// .
+	// not case sensitive.
+	//
+	// See the complete list of [restore testing inferred metadata].
+	//
+	// [restore testing inferred metadata]: https://docs.aws.amazon.com/aws-backup/latest/devguide/restore-testing-inferred-metadata.html
 	RestoreMetadataOverrides map[string]string
 
 	// This is amount of hours (1 to 168) available to run a validation script on the
@@ -1959,8 +2119,9 @@ type RestoreTestingSelectionForGet struct {
 	// This identifies the request and allows failed requests to be retried without
 	// the risk of running the operation twice. If the request includes a
 	// CreatorRequestId that matches an existing backup plan, that plan is returned.
-	// This parameter is optional. If used, this parameter must contain 1 to 50
-	// alphanumeric or '-_.' characters.
+	// This parameter is optional.
+	//
+	// If used, this parameter must contain 1 to 50 alphanumeric or '-_.' characters.
 	CreatorRequestId *string
 
 	// You can include specific ARNs, such as ProtectedResourceArns: ["arn:aws:...",
@@ -1974,8 +2135,11 @@ type RestoreTestingSelectionForGet struct {
 
 	// You can override certain restore metadata keys by including the parameter
 	// RestoreMetadataOverrides in the body of RestoreTestingSelection . Key values are
-	// not case sensitive. See the complete list of restore testing inferred metadata (https://docs.aws.amazon.com/aws-backup/latest/devguide/restore-testing-inferred-metadata.html)
-	// .
+	// not case sensitive.
+	//
+	// See the complete list of [restore testing inferred metadata].
+	//
+	// [restore testing inferred metadata]: https://docs.aws.amazon.com/aws-backup/latest/devguide/restore-testing-inferred-metadata.html
 	RestoreMetadataOverrides map[string]string
 
 	// This is amount of hours (1 to 168) available to run a validation script on the
@@ -2009,9 +2173,10 @@ type RestoreTestingSelectionForList struct {
 	// This member is required.
 	ProtectedResourceType *string
 
-	// Unique string that is the name of the restore testing plan. The name cannot be
-	// changed after creation. The name must consist of only alphanumeric characters
-	// and underscores. Maximum length is 50.
+	// Unique string that is the name of the restore testing plan.
+	//
+	// The name cannot be changed after creation. The name must consist of only
+	// alphanumeric characters and underscores. Maximum length is 50.
 	//
 	// This member is required.
 	RestoreTestingPlanName *string
@@ -2022,8 +2187,10 @@ type RestoreTestingSelectionForList struct {
 	RestoreTestingSelectionName *string
 
 	// This value represents the time, in hours, data is retained after a restore test
-	// so that optional validation can be completed. Accepted value is an integer
-	// between 0 and 168 (the hourly equivalent of seven days).
+	// so that optional validation can be completed.
+	//
+	// Accepted value is an integer between 0 and 168 (the hourly equivalent of seven
+	// days).
 	ValidationWindowHours int32
 
 	noSmithyDocumentSerde
@@ -2042,20 +2209,26 @@ type RestoreTestingSelectionForUpdate struct {
 	ProtectedResourceArns []string
 
 	// A list of conditions that you define for resources in your restore testing plan
-	// using tags. For example, "StringEquals": { "Key":
-	// "aws:ResourceTag/CreatedByCryo", "Value": "true" }, . Condition operators are
-	// case sensitive.
+	// using tags.
+	//
+	// For example, "StringEquals": { "Key": "aws:ResourceTag/CreatedByCryo", "Value":
+	// "true" }, . Condition operators are case sensitive.
 	ProtectedResourceConditions *ProtectedResourceConditions
 
 	// You can override certain restore metadata keys by including the parameter
 	// RestoreMetadataOverrides in the body of RestoreTestingSelection . Key values are
-	// not case sensitive. See the complete list of restore testing inferred metadata (https://docs.aws.amazon.com/aws-backup/latest/devguide/restore-testing-inferred-metadata.html)
-	// .
+	// not case sensitive.
+	//
+	// See the complete list of [restore testing inferred metadata].
+	//
+	// [restore testing inferred metadata]: https://docs.aws.amazon.com/aws-backup/latest/devguide/restore-testing-inferred-metadata.html
 	RestoreMetadataOverrides map[string]string
 
 	// This value represents the time, in hours, data is retained after a restore test
-	// so that optional validation can be completed. Accepted value is an integer
-	// between 0 and 168 (the hourly equivalent of seven days).
+	// so that optional validation can be completed.
+	//
+	// Accepted value is an integer between 0 and 168 (the hourly equivalent of seven
+	// days).
 	ValidationWindowHours int32
 
 	noSmithyDocumentSerde

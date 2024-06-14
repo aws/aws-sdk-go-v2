@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/storagegateway/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -14,12 +13,13 @@ import (
 
 // Lists custom tape pools. You specify custom tape pools to list by specifying
 // one or more custom tape pool Amazon Resource Names (ARNs). If you don't specify
-// a custom tape pool ARN, the operation lists all custom tape pools. This
-// operation supports pagination. You can optionally specify the Limit parameter
-// in the body to limit the number of tape pools in the response. If the number of
-// tape pools returned in the response is truncated, the response includes a Marker
-// element that you can use in your subsequent request to retrieve the next set of
-// tape pools.
+// a custom tape pool ARN, the operation lists all custom tape pools.
+//
+// This operation supports pagination. You can optionally specify the Limit
+// parameter in the body to limit the number of tape pools in the response. If the
+// number of tape pools returned in the response is truncated, the response
+// includes a Marker element that you can use in your subsequent request to
+// retrieve the next set of tape pools.
 func (c *Client) ListTapePools(ctx context.Context, params *ListTapePoolsInput, optFns ...func(*Options)) (*ListTapePoolsOutput, error) {
 	if params == nil {
 		params = &ListTapePoolsInput{}
@@ -92,25 +92,25 @@ func (c *Client) addOperationListTapePoolsMiddlewares(stack *middleware.Stack, o
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -125,10 +125,13 @@ func (c *Client) addOperationListTapePoolsMiddlewares(stack *middleware.Stack, o
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListTapePools(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

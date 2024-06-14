@@ -6,15 +6,17 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/servicecatalog/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Terminates the specified provisioned product. This operation does not delete
-// any records associated with the provisioned product. You can check the status of
-// this request using DescribeRecord .
+// Terminates the specified provisioned product.
+//
+// This operation does not delete any records associated with the provisioned
+// product.
+//
+// You can check the status of this request using DescribeRecord.
 func (c *Client) TerminateProvisionedProduct(ctx context.Context, params *TerminateProvisionedProductInput, optFns ...func(*Options)) (*TerminateProvisionedProductOutput, error) {
 	if params == nil {
 		params = &TerminateProvisionedProductInput{}
@@ -41,7 +43,9 @@ type TerminateProvisionedProductInput struct {
 	TerminateToken *string
 
 	// The language code.
+	//
 	//   - jp - Japanese
+	//
 	//   - zh - Chinese
 	AcceptLanguage *string
 
@@ -99,25 +103,25 @@ func (c *Client) addOperationTerminateProvisionedProductMiddlewares(stack *middl
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -132,6 +136,9 @@ func (c *Client) addOperationTerminateProvisionedProductMiddlewares(stack *middl
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opTerminateProvisionedProductMiddleware(stack, options); err != nil {
 		return err
 	}
@@ -141,7 +148,7 @@ func (c *Client) addOperationTerminateProvisionedProductMiddlewares(stack *middl
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opTerminateProvisionedProduct(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

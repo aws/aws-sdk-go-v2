@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/pinpointsmsvoicev2/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -14,9 +13,10 @@ import (
 )
 
 // Releases an existing origination phone number in your account. Once released, a
-// phone number is no longer available for sending messages. If the origination
-// phone number has deletion protection enabled or is associated with a pool, an
-// error is returned.
+// phone number is no longer available for sending messages.
+//
+// If the origination phone number has deletion protection enabled or is
+// associated with a pool, an error is returned.
 func (c *Client) ReleasePhoneNumber(ctx context.Context, params *ReleasePhoneNumberInput, optFns ...func(*Options)) (*ReleasePhoneNumberOutput, error) {
 	if params == nil {
 		params = &ReleasePhoneNumberInput{}
@@ -34,8 +34,8 @@ func (c *Client) ReleasePhoneNumber(ctx context.Context, params *ReleasePhoneNum
 
 type ReleasePhoneNumberInput struct {
 
-	// The PhoneNumberId or PhoneNumberArn of the phone number to release. You can use
-	// DescribePhoneNumbers to get the values for PhoneNumberId and PhoneNumberArn.
+	// The PhoneNumberId or PhoneNumberArn of the phone number to release. You can use DescribePhoneNumbers
+	// to get the values for PhoneNumberId and PhoneNumberArn.
 	//
 	// This member is required.
 	PhoneNumberId *string
@@ -45,8 +45,9 @@ type ReleasePhoneNumberInput struct {
 
 type ReleasePhoneNumberOutput struct {
 
-	// The time when the phone number was created, in UNIX epoch time (https://www.epochconverter.com/)
-	// format.
+	// The time when the phone number was created, in [UNIX epoch time] format.
+	//
+	// [UNIX epoch time]: https://www.epochconverter.com/
 	CreatedTimestamp *time.Time
 
 	// The two-character code, in ISO 3166-1 alpha-2 format, for the country or region.
@@ -129,25 +130,25 @@ func (c *Client) addOperationReleasePhoneNumberMiddlewares(stack *middleware.Sta
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -162,13 +163,16 @@ func (c *Client) addOperationReleasePhoneNumberMiddlewares(stack *middleware.Sta
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpReleasePhoneNumberValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opReleasePhoneNumber(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

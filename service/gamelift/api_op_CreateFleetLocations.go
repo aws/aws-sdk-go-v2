@@ -6,25 +6,40 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/gamelift/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Adds remote locations to a fleet and begins populating the new locations with
-// EC2 instances. The new instances conform to the fleet's instance type,
-// auto-scaling, and other configuration settings. This operation cannot be used
-// with fleets that don't support remote locations. Fleets can have multiple
-// locations only if they reside in Amazon Web Services Regions that support this
-// feature and were created after the feature was released in March 2021. To add
-// fleet locations, specify the fleet to be updated and provide a list of one or
-// more locations. If successful, this operation returns the list of added
-// locations with their status set to NEW . Amazon GameLift initiates the process
-// of starting an instance in each added location. You can track the status of each
-// new location by monitoring location creation events using DescribeFleetEvents (https://docs.aws.amazon.com/gamelift/latest/apireference/API_DescribeFleetEvents.html)
-// . Learn more Setting up fleets (https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-intro.html)
-// Multi-location fleets (https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-intro.html)
+//	This operation has been expanded to use with the Amazon GameLift containers
+//
+// feature, which is currently in public preview.
+//
+// Adds remote locations to an EC2 or container fleet and begins populating the
+// new locations with instances. The new instances conform to the fleet's instance
+// type, auto-scaling, and other configuration settings.
+//
+// You can't add remote locations to a fleet that resides in an Amazon Web
+// Services Region that doesn't support multiple locations. Fleets created prior to
+// March 2021 can't support multiple locations.
+//
+// To add fleet locations, specify the fleet to be updated and provide a list of
+// one or more locations.
+//
+// If successful, this operation returns the list of added locations with their
+// status set to NEW . Amazon GameLift initiates the process of starting an
+// instance in each added location. You can track the status of each new location
+// by monitoring location creation events using [DescribeFleetEvents].
+//
+// # Learn more
+//
+// [Setting up fleets]
+//
+// [Multi-location fleets]
+//
+// [DescribeFleetEvents]: https://docs.aws.amazon.com/gamelift/latest/apireference/API_DescribeFleetEvents.html
+// [Multi-location fleets]: https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-intro.html
+// [Setting up fleets]: https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-intro.html
 func (c *Client) CreateFleetLocations(ctx context.Context, params *CreateFleetLocationsInput, optFns ...func(*Options)) (*CreateFleetLocationsOutput, error) {
 	if params == nil {
 		params = &CreateFleetLocationsInput{}
@@ -61,10 +76,11 @@ type CreateFleetLocationsInput struct {
 
 type CreateFleetLocationsOutput struct {
 
-	// The Amazon Resource Name ( ARN (https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-arn-format.html)
-	// ) that is assigned to a Amazon GameLift fleet resource and uniquely identifies
-	// it. ARNs are unique across all Regions. Format is
-	// arn:aws:gamelift:::fleet/fleet-a1234567-b8c9-0d1e-2fa3-b45c6d7e8912 .
+	// The Amazon Resource Name ([ARN] ) that is assigned to a Amazon GameLift fleet
+	// resource and uniquely identifies it. ARNs are unique across all Regions. Format
+	// is arn:aws:gamelift:::fleet/fleet-a1234567-b8c9-0d1e-2fa3-b45c6d7e8912 .
+	//
+	// [ARN]: https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-arn-format.html
 	FleetArn *string
 
 	// A unique identifier for the fleet that was updated with new locations.
@@ -105,25 +121,25 @@ func (c *Client) addOperationCreateFleetLocationsMiddlewares(stack *middleware.S
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -138,13 +154,16 @@ func (c *Client) addOperationCreateFleetLocationsMiddlewares(stack *middleware.S
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpCreateFleetLocationsValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateFleetLocations(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

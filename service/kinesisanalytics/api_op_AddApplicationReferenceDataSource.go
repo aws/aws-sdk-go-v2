@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/kinesisanalytics/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -14,18 +13,25 @@ import (
 
 // This documentation is for version 1 of the Amazon Kinesis Data Analytics API,
 // which only supports SQL applications. Version 2 of the API supports SQL and Java
-// applications. For more information about version 2, see Amazon Kinesis Data
-// Analytics API V2 Documentation . Adds a reference data source to an existing
-// application. Amazon Kinesis Analytics reads reference data (that is, an Amazon
-// S3 object) and creates an in-application table within your application. In the
-// request, you provide the source (S3 bucket name and object key name), name of
-// the in-application table to create, and the necessary mapping information that
+// applications. For more information about version 2, see Amazon Kinesis Data Analytics API V2 Documentation.
+//
+// Adds a reference data source to an existing application.
+//
+// Amazon Kinesis Analytics reads reference data (that is, an Amazon S3 object)
+// and creates an in-application table within your application. In the request, you
+// provide the source (S3 bucket name and object key name), name of the
+// in-application table to create, and the necessary mapping information that
 // describes how data in Amazon S3 object maps to columns in the resulting
-// in-application table. For conceptual information, see Configuring Application
-// Input (https://docs.aws.amazon.com/kinesisanalytics/latest/dev/how-it-works-input.html)
-// . For the limits on data sources you can add to your application, see Limits (https://docs.aws.amazon.com/kinesisanalytics/latest/dev/limits.html)
-// . This operation requires permissions to perform the
+// in-application table.
+//
+// For conceptual information, see [Configuring Application Input]. For the limits on data sources you can add to
+// your application, see [Limits].
+//
+// This operation requires permissions to perform the
 // kinesisanalytics:AddApplicationOutput action.
+//
+// [Limits]: https://docs.aws.amazon.com/kinesisanalytics/latest/dev/limits.html
+// [Configuring Application Input]: https://docs.aws.amazon.com/kinesisanalytics/latest/dev/how-it-works-input.html
 func (c *Client) AddApplicationReferenceDataSource(ctx context.Context, params *AddApplicationReferenceDataSourceInput, optFns ...func(*Options)) (*AddApplicationReferenceDataSourceOutput, error) {
 	if params == nil {
 		params = &AddApplicationReferenceDataSourceInput{}
@@ -49,9 +55,11 @@ type AddApplicationReferenceDataSourceInput struct {
 	ApplicationName *string
 
 	// Version of the application for which you are adding the reference data source.
-	// You can use the DescribeApplication (https://docs.aws.amazon.com/kinesisanalytics/latest/dev/API_DescribeApplication.html)
-	// operation to get the current application version. If the version specified is
-	// not the current version, the ConcurrentModificationException is returned.
+	// You can use the [DescribeApplication]operation to get the current application version. If the
+	// version specified is not the current version, the
+	// ConcurrentModificationException is returned.
+	//
+	// [DescribeApplication]: https://docs.aws.amazon.com/kinesisanalytics/latest/dev/API_DescribeApplication.html
 	//
 	// This member is required.
 	CurrentApplicationVersionId *int64
@@ -98,25 +106,25 @@ func (c *Client) addOperationAddApplicationReferenceDataSourceMiddlewares(stack 
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -131,13 +139,16 @@ func (c *Client) addOperationAddApplicationReferenceDataSourceMiddlewares(stack 
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpAddApplicationReferenceDataSourceValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opAddApplicationReferenceDataSource(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

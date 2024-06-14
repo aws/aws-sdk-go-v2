@@ -6,18 +6,22 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/kinesisanalyticsv2/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Reverts the application to the previous running version. You can roll back an
-// application if you suspect it is stuck in a transient status. You can roll back
-// an application only if it is in the UPDATING or AUTOSCALING status. When you
-// rollback an application, it loads state data from the last successful snapshot.
-// If the application has no snapshots, Kinesis Data Analytics rejects the rollback
-// request. This action is not supported for Kinesis Data Analytics for SQL
+// application if you suspect it is stuck in a transient status.
+//
+// You can roll back an application only if it is in the UPDATING or AUTOSCALING
+// status.
+//
+// When you rollback an application, it loads state data from the last successful
+// snapshot. If the application has no snapshots, Managed Service for Apache Flink
+// rejects the rollback request.
+//
+// This action is not supported for Managed Service for Apache Flink for SQL
 // applications.
 func (c *Client) RollbackApplication(ctx context.Context, params *RollbackApplicationInput, optFns ...func(*Options)) (*RollbackApplicationOutput, error) {
 	if params == nil {
@@ -42,7 +46,7 @@ type RollbackApplicationInput struct {
 	ApplicationName *string
 
 	// The current application version ID. You can retrieve the application version ID
-	// using DescribeApplication .
+	// using DescribeApplication.
 	//
 	// This member is required.
 	CurrentApplicationVersionId *int64
@@ -86,25 +90,25 @@ func (c *Client) addOperationRollbackApplicationMiddlewares(stack *middleware.St
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -119,13 +123,16 @@ func (c *Client) addOperationRollbackApplicationMiddlewares(stack *middleware.St
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpRollbackApplicationValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opRollbackApplication(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/paymentcryptographydata/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -14,24 +13,35 @@ import (
 
 // Verifies card-related validation data using algorithms such as Card
 // Verification Values (CVV/CVV2), Dynamic Card Verification Values (dCVV/dCVV2)
-// and Card Security Codes (CSC). For more information, see Verify card data (https://docs.aws.amazon.com/payment-cryptography/latest/userguide/verify-card-data.html)
-// in the Amazon Web Services Payment Cryptography User Guide. This operation
-// validates the CVV or CSC codes that is printed on a payment credit or debit card
-// during card payment transaction. The input values are typically provided as part
-// of an inbound transaction to an issuer or supporting platform partner. Amazon
-// Web Services Payment Cryptography uses CVV or CSC, PAN (Primary Account Number)
-// and expiration date of the card to check its validity during transaction
-// processing. In this operation, the CVK (Card Verification Key) encryption key
-// for use with card data verification is same as the one in used for
-// GenerateCardValidationData . For information about valid keys for this
-// operation, see Understanding key attributes (https://docs.aws.amazon.com/payment-cryptography/latest/userguide/keys-validattributes.html)
-// and Key types for specific data operations (https://docs.aws.amazon.com/payment-cryptography/latest/userguide/crypto-ops-validkeys-ops.html)
-// in the Amazon Web Services Payment Cryptography User Guide. Cross-account use:
-// This operation can't be used across different Amazon Web Services accounts.
+// and Card Security Codes (CSC). For more information, see [Verify card data]in the Amazon Web
+// Services Payment Cryptography User Guide.
+//
+// This operation validates the CVV or CSC codes that is printed on a payment
+// credit or debit card during card payment transaction. The input values are
+// typically provided as part of an inbound transaction to an issuer or supporting
+// platform partner. Amazon Web Services Payment Cryptography uses CVV or CSC, PAN
+// (Primary Account Number) and expiration date of the card to check its validity
+// during transaction processing. In this operation, the CVK (Card Verification
+// Key) encryption key for use with card data verification is same as the one in
+// used for GenerateCardValidationData.
+//
+// For information about valid keys for this operation, see [Understanding key attributes] and [Key types for specific data operations] in the Amazon
+// Web Services Payment Cryptography User Guide.
+//
+// Cross-account use: This operation can't be used across different Amazon Web
+// Services accounts.
+//
 // Related operations:
-//   - GenerateCardValidationData
-//   - VerifyAuthRequestCryptogram
-//   - VerifyPinData
+//
+// # GenerateCardValidationData
+//
+// # VerifyAuthRequestCryptogram
+//
+// # VerifyPinData
+//
+// [Verify card data]: https://docs.aws.amazon.com/payment-cryptography/latest/userguide/verify-card-data.html
+// [Key types for specific data operations]: https://docs.aws.amazon.com/payment-cryptography/latest/userguide/crypto-ops-validkeys-ops.html
+// [Understanding key attributes]: https://docs.aws.amazon.com/payment-cryptography/latest/userguide/keys-validattributes.html
 func (c *Client) VerifyCardValidationData(ctx context.Context, params *VerifyCardValidationDataInput, optFns ...func(*Options)) (*VerifyCardValidationDataOutput, error) {
 	if params == nil {
 		params = &VerifyCardValidationDataInput{}
@@ -86,10 +96,10 @@ type VerifyCardValidationDataOutput struct {
 
 	// The key check value (KCV) of the encryption key. The KCV is used to check if
 	// all parties holding a given key have the same key or to detect that a key has
-	// changed. Amazon Web Services Payment Cryptography calculates the KCV by using
-	// standard algorithms, typically by encrypting 8 or 16 bytes or "00" or "01" and
-	// then truncating the result to the first 3 bytes, or 6 hex digits, of the
-	// resulting cryptogram.
+	// changed.
+	//
+	// Amazon Web Services Payment Cryptography computes the KCV according to the CMAC
+	// specification.
 	//
 	// This member is required.
 	KeyCheckValue *string
@@ -122,25 +132,25 @@ func (c *Client) addOperationVerifyCardValidationDataMiddlewares(stack *middlewa
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -155,13 +165,16 @@ func (c *Client) addOperationVerifyCardValidationDataMiddlewares(stack *middlewa
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpVerifyCardValidationDataValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opVerifyCardValidationData(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

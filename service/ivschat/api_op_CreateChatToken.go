@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/ivschat/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -17,13 +16,19 @@ import (
 // individual WebSocket chat connection to a room. When the token is used to
 // connect to chat, the connection is valid for the session duration specified in
 // the request. The token becomes invalid at the token-expiration timestamp
-// included in the response. Use the capabilities field to permit an end user to
-// send messages or moderate a room. The attributes field securely attaches
-// structured data to the chat session; the data is included within each message
-// sent by the end user and received by other participants in the room. Common use
-// cases for attributes include passing end-user profile data like an icon, display
-// name, colors, badges, and other display features. Encryption keys are owned by
-// Amazon IVS Chat and never used directly by your application.
+// included in the response.
+//
+// Use the capabilities field to permit an end user to send messages or moderate a
+// room.
+//
+// The attributes field securely attaches structured data to the chat session; the
+// data is included within each message sent by the end user and received by other
+// participants in the room. Common use cases for attributes include passing
+// end-user profile data like an icon, display name, colors, badges, and other
+// display features.
+//
+// Encryption keys are owned by Amazon IVS Chat and never used directly by your
+// application.
 func (c *Client) CreateChatToken(ctx context.Context, params *CreateChatTokenInput, optFns ...func(*Options)) (*CreateChatTokenOutput, error) {
 	if params == nil {
 		params = &CreateChatTokenInput{}
@@ -110,25 +115,25 @@ func (c *Client) addOperationCreateChatTokenMiddlewares(stack *middleware.Stack,
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -143,13 +148,16 @@ func (c *Client) addOperationCreateChatTokenMiddlewares(stack *middleware.Stack,
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpCreateChatTokenValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateChatToken(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

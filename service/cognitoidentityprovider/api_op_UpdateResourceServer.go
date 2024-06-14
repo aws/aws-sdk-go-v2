@@ -6,20 +6,28 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Updates the name and scopes of resource server. All other fields are read-only.
+//
 // If you don't provide a value for an attribute, it is set to the default value.
+//
 // Amazon Cognito evaluates Identity and Access Management (IAM) policies in
 // requests for this API operation. For this operation, you must use IAM
 // credentials to authorize requests, and you must grant yourself the corresponding
-// IAM permission in a policy. Learn more
-//   - Signing Amazon Web Services API Requests (https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_aws-signing.html)
-//   - Using the Amazon Cognito user pools API and user pool endpoints (https://docs.aws.amazon.com/cognito/latest/developerguide/user-pools-API-operations.html)
+// IAM permission in a policy.
+//
+// # Learn more
+//
+// [Signing Amazon Web Services API Requests]
+//
+// [Using the Amazon Cognito user pools API and user pool endpoints]
+//
+// [Using the Amazon Cognito user pools API and user pool endpoints]: https://docs.aws.amazon.com/cognito/latest/developerguide/user-pools-API-operations.html
+// [Signing Amazon Web Services API Requests]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_aws-signing.html
 func (c *Client) UpdateResourceServer(ctx context.Context, params *UpdateResourceServerInput, optFns ...func(*Options)) (*UpdateResourceServerOutput, error) {
 	if params == nil {
 		params = &UpdateResourceServerInput{}
@@ -37,7 +45,13 @@ func (c *Client) UpdateResourceServer(ctx context.Context, params *UpdateResourc
 
 type UpdateResourceServerInput struct {
 
-	// The identifier for the resource server.
+	// A unique resource server identifier for the resource server. The identifier can
+	// be an API friendly name like solar-system-data . You can also set an API URL
+	// like https://solar-system-data-api.example.com as your identifier.
+	//
+	// Amazon Cognito represents scopes in the access token in the format
+	// $resource-server-identifier/$scope . Longer scope-identifier strings increase
+	// the size of your access tokens.
 	//
 	// This member is required.
 	Identifier *string
@@ -93,25 +107,25 @@ func (c *Client) addOperationUpdateResourceServerMiddlewares(stack *middleware.S
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -126,13 +140,16 @@ func (c *Client) addOperationUpdateResourceServerMiddlewares(stack *middleware.S
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpUpdateResourceServerValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateResourceServer(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

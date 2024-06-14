@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/cloudformation/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -14,14 +13,18 @@ import (
 
 // Returns drift information for the resources that have been checked for drift in
 // the specified stack. This includes actual and expected configuration values for
-// resources where CloudFormation detects configuration drift. For a given stack,
-// there will be one StackResourceDrift for each stack resource that has been
-// checked for drift. Resources that haven't yet been checked for drift aren't
-// included. Resources that don't currently support drift detection aren't checked,
-// and so not included. For a list of resources that support drift detection, see
-// Resources that Support Drift Detection (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-stack-drift-resource-list.html)
-// . Use DetectStackResourceDrift to detect drift on individual resources, or
-// DetectStackDrift to detect drift on all supported resources for a given stack.
+// resources where CloudFormation detects configuration drift.
+//
+// For a given stack, there will be one StackResourceDrift for each stack resource
+// that has been checked for drift. Resources that haven't yet been checked for
+// drift aren't included. Resources that don't currently support drift detection
+// aren't checked, and so not included. For a list of resources that support drift
+// detection, see [Resources that Support Drift Detection].
+//
+// Use DetectStackResourceDrift to detect drift on individual resources, or DetectStackDrift to detect drift on all
+// supported resources for a given stack.
+//
+// [Resources that Support Drift Detection]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-stack-drift-resource-list.html
 func (c *Client) DescribeStackResourceDrifts(ctx context.Context, params *DescribeStackResourceDriftsInput, optFns ...func(*Options)) (*DescribeStackResourceDriftsOutput, error) {
 	if params == nil {
 		params = &DescribeStackResourceDriftsInput{}
@@ -55,12 +58,16 @@ type DescribeStackResourceDriftsInput struct {
 
 	// The resource drift status values to use as filters for the resource drift
 	// results returned.
+	//
 	//   - DELETED : The resource differs from its expected template configuration in
 	//   that the resource has been deleted.
+	//
 	//   - MODIFIED : One or more resource properties differ from their expected
 	//   template values.
+	//
 	//   - IN_SYNC : The resource's actual configuration matches its expected template
 	//   configuration.
+	//
 	//   - NOT_CHECKED : CloudFormation doesn't currently return this value.
 	StackResourceDriftStatusFilters []types.StackResourceDriftStatus
 
@@ -71,13 +78,15 @@ type DescribeStackResourceDriftsOutput struct {
 
 	// Drift information for the resources that have been checked for drift in the
 	// specified stack. This includes actual and expected configuration values for
-	// resources where CloudFormation detects drift. For a given stack, there will be
-	// one StackResourceDrift for each stack resource that has been checked for drift.
-	// Resources that haven't yet been checked for drift aren't included. Resources
-	// that do not currently support drift detection aren't checked, and so not
-	// included. For a list of resources that support drift detection, see Resources
-	// that Support Drift Detection (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-stack-drift-resource-list.html)
-	// .
+	// resources where CloudFormation detects drift.
+	//
+	// For a given stack, there will be one StackResourceDrift for each stack resource
+	// that has been checked for drift. Resources that haven't yet been checked for
+	// drift aren't included. Resources that do not currently support drift detection
+	// aren't checked, and so not included. For a list of resources that support drift
+	// detection, see [Resources that Support Drift Detection].
+	//
+	// [Resources that Support Drift Detection]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-stack-drift-resource-list.html
 	//
 	// This member is required.
 	StackResourceDrifts []types.StackResourceDrift
@@ -116,25 +125,25 @@ func (c *Client) addOperationDescribeStackResourceDriftsMiddlewares(stack *middl
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -149,13 +158,16 @@ func (c *Client) addOperationDescribeStackResourceDriftsMiddlewares(stack *middl
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDescribeStackResourceDriftsValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeStackResourceDrifts(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

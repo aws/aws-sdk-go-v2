@@ -6,21 +6,27 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes all resources and information related a fleet. Any current fleet
-// instances, including those in remote locations, are shut down. You don't need to
-// call DeleteFleetLocations separately. If the fleet being deleted has a VPC
-// peering connection, you first need to get a valid authorization (good for 24
-// hours) by calling CreateVpcPeeringAuthorization (https://docs.aws.amazon.com/gamelift/latest/apireference/API_CreateVpcPeeringAuthorization.html)
-// . You do not need to explicitly delete the VPC peering connection. To delete a
-// fleet, specify the fleet ID to be terminated. During the deletion process the
-// fleet status is changed to DELETING . When completed, the status switches to
-// TERMINATED and the fleet event FLEET_DELETED is sent. Learn more Setting up
-// Amazon GameLift Fleets (https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-intro.html)
+// Deletes all resources and information related to a fleet and shuts down any
+// currently running fleet instances, including those in remote locations.
+//
+// If the fleet being deleted has a VPC peering connection, you first need to get
+// a valid authorization (good for 24 hours) by calling [CreateVpcPeeringAuthorization]. You don't need to
+// explicitly delete the VPC peering connection.
+//
+// To delete a fleet, specify the fleet ID to be terminated. During the deletion
+// process, the fleet status is changed to DELETING . When completed, the status
+// switches to TERMINATED and the fleet event FLEET_DELETED is emitted.
+//
+// # Learn more
+//
+// [Setting up Amazon GameLift Fleets]
+//
+// [CreateVpcPeeringAuthorization]: https://docs.aws.amazon.com/gamelift/latest/apireference/API_CreateVpcPeeringAuthorization.html
+// [Setting up Amazon GameLift Fleets]: https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-intro.html
 func (c *Client) DeleteFleet(ctx context.Context, params *DeleteFleetInput, optFns ...func(*Options)) (*DeleteFleetOutput, error) {
 	if params == nil {
 		params = &DeleteFleetInput{}
@@ -76,25 +82,25 @@ func (c *Client) addOperationDeleteFleetMiddlewares(stack *middleware.Stack, opt
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -109,13 +115,16 @@ func (c *Client) addOperationDeleteFleetMiddlewares(stack *middleware.Stack, opt
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDeleteFleetValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteFleet(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

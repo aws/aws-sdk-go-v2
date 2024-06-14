@@ -19,7 +19,16 @@ import (
 	"io/ioutil"
 	"strconv"
 	"strings"
+	"time"
 )
+
+func deserializeS3Expires(v string) (*time.Time, error) {
+	t, err := smithytime.ParseHTTPDate(v)
+	if err != nil {
+		return nil, nil
+	}
+	return &t, nil
+}
 
 type awsRestjson1_deserializeOpAssociateSourceNetworkStack struct {
 }
@@ -8956,6 +8965,11 @@ func awsRestjson1_deserializeDocumentConversionProperties(v **types.ConversionPr
 				return err
 			}
 
+		case "volumeToProductCodes":
+			if err := awsRestjson1_deserializeDocumentVolumeToProductCodes(&sv.VolumeToProductCodes, value); err != nil {
+				return err
+			}
+
 		case "volumeToVolumeSize":
 			if err := awsRestjson1_deserializeDocumentVolumeToSizeMap(&sv.VolumeToVolumeSize, value); err != nil {
 				return err
@@ -9179,6 +9193,15 @@ func awsRestjson1_deserializeDocumentDataReplicationInfo(v **types.DataReplicati
 				sv.StagingAvailabilityZone = ptr.String(jtv)
 			}
 
+		case "stagingOutpostArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected OutpostARN to be of type string, got %T instead", value)
+				}
+				sv.StagingOutpostArn = ptr.String(jtv)
+			}
+
 		default:
 			_, _ = key, value
 
@@ -9269,6 +9292,15 @@ func awsRestjson1_deserializeDocumentDataReplicationInfoReplicatedDisk(v **types
 					return err
 				}
 				sv.TotalStorageBytes = i64
+			}
+
+		case "volumeStatus":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected VolumeStatus to be of type string, got %T instead", value)
+				}
+				sv.VolumeStatus = types.VolumeStatus(jtv)
 			}
 
 		default:
@@ -11381,6 +11413,89 @@ func awsRestjson1_deserializeDocumentPITPolicyRule(v **types.PITPolicyRule, valu
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentProductCode(v **types.ProductCode, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ProductCode
+	if *v == nil {
+		sv = &types.ProductCode{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "productCodeId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ProductCodeId to be of type string, got %T instead", value)
+				}
+				sv.ProductCodeId = ptr.String(jtv)
+			}
+
+		case "productCodeMode":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ProductCodeMode to be of type string, got %T instead", value)
+				}
+				sv.ProductCodeMode = types.ProductCodeMode(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentProductCodes(v *[]types.ProductCode, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.ProductCode
+	if *v == nil {
+		cv = []types.ProductCode{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.ProductCode
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentProductCode(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentRecoveryInstance(v **types.RecoveryInstance, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -11506,6 +11621,15 @@ func awsRestjson1_deserializeDocumentRecoveryInstance(v **types.RecoveryInstance
 		case "recoveryInstanceProperties":
 			if err := awsRestjson1_deserializeDocumentRecoveryInstanceProperties(&sv.RecoveryInstanceProperties, value); err != nil {
 				return err
+			}
+
+		case "sourceOutpostArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected OutpostARN to be of type string, got %T instead", value)
+				}
+				sv.SourceOutpostArn = ptr.String(jtv)
 			}
 
 		case "sourceServerID":
@@ -11651,6 +11775,15 @@ func awsRestjson1_deserializeDocumentRecoveryInstanceDataReplicationInfo(v **typ
 					return fmt.Errorf("expected AwsAvailabilityZone to be of type string, got %T instead", value)
 				}
 				sv.StagingAvailabilityZone = ptr.String(jtv)
+			}
+
+		case "stagingOutpostArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected OutpostARN to be of type string, got %T instead", value)
+				}
+				sv.StagingOutpostArn = ptr.String(jtv)
 			}
 
 		default:
@@ -12949,6 +13082,15 @@ func awsRestjson1_deserializeDocumentSourceCloudProperties(v **types.SourceCloud
 				sv.OriginRegion = ptr.String(jtv)
 			}
 
+		case "sourceOutpostArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected OutpostARN to be of type string, got %T instead", value)
+				}
+				sv.SourceOutpostArn = ptr.String(jtv)
+			}
+
 		default:
 			_, _ = key, value
 
@@ -13921,6 +14063,40 @@ func awsRestjson1_deserializeDocumentVolumeToConversionMap(v *map[string]map[str
 		var parsedVal map[string]string
 		mapVar := parsedVal
 		if err := awsRestjson1_deserializeDocumentConversionMap(&mapVar, value); err != nil {
+			return err
+		}
+		parsedVal = mapVar
+		mv[key] = parsedVal
+
+	}
+	*v = mv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentVolumeToProductCodes(v *map[string][]types.ProductCode, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var mv map[string][]types.ProductCode
+	if *v == nil {
+		mv = map[string][]types.ProductCode{}
+	} else {
+		mv = *v
+	}
+
+	for key, value := range shape {
+		var parsedVal []types.ProductCode
+		mapVar := parsedVal
+		if err := awsRestjson1_deserializeDocumentProductCodes(&mapVar, value); err != nil {
 			return err
 		}
 		parsedVal = mapVar

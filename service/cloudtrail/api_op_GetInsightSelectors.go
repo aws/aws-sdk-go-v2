@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/cloudtrail/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -17,12 +16,15 @@ import (
 // Insights event logging is enabled on the trail or event data store, and if it
 // is, which Insights types are enabled. If you run GetInsightSelectors on a trail
 // or event data store that does not have Insights events enabled, the operation
-// throws the exception InsightNotEnabledException Specify either the
-// EventDataStore parameter to get Insights event selectors for an event data
-// store, or the TrailName parameter to the get Insights event selectors for a
-// trail. You cannot specify these parameters together. For more information, see
-// Logging CloudTrail Insights events (https://docs.aws.amazon.com/awscloudtrail/latest/userguide/logging-insights-events-with-cloudtrail.html)
-// in the CloudTrail User Guide.
+// throws the exception InsightNotEnabledException
+//
+// Specify either the EventDataStore parameter to get Insights event selectors for
+// an event data store, or the TrailName parameter to the get Insights event
+// selectors for a trail. You cannot specify these parameters together.
+//
+// For more information, see [Logging CloudTrail Insights events] in the CloudTrail User Guide.
+//
+// [Logging CloudTrail Insights events]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/logging-insights-events-with-cloudtrail.html
 func (c *Client) GetInsightSelectors(ctx context.Context, params *GetInsightSelectorsInput, optFns ...func(*Options)) (*GetInsightSelectorsOutput, error) {
 	if params == nil {
 		params = &GetInsightSelectorsInput{}
@@ -40,23 +42,32 @@ func (c *Client) GetInsightSelectors(ctx context.Context, params *GetInsightSele
 
 type GetInsightSelectorsInput struct {
 
-	// Specifies the ARN (or ID suffix of the ARN) of the event data store for which
-	// you want to get Insights selectors. You cannot use this parameter with the
-	// TrailName parameter.
+	//  Specifies the ARN (or ID suffix of the ARN) of the event data store for which
+	// you want to get Insights selectors.
+	//
+	// You cannot use this parameter with the TrailName parameter.
 	EventDataStore *string
 
 	// Specifies the name of the trail or trail ARN. If you specify a trail name, the
 	// string must meet the following requirements:
+	//
 	//   - Contain only ASCII letters (a-z, A-Z), numbers (0-9), periods (.),
 	//   underscores (_), or dashes (-)
+	//
 	//   - Start with a letter or number, and end with a letter or number
+	//
 	//   - Be between 3 and 128 characters
+	//
 	//   - Have no adjacent periods, underscores or dashes. Names like my-_namespace
 	//   and my--namespace are not valid.
+	//
 	//   - Not be in IP address format (for example, 192.168.5.4)
+	//
 	// If you specify a trail ARN, it must be in the format:
-	// arn:aws:cloudtrail:us-east-2:123456789012:trail/MyTrail You cannot use this
-	// parameter with the EventDataStore parameter.
+	//
+	//     arn:aws:cloudtrail:us-east-2:123456789012:trail/MyTrail
+	//
+	// You cannot use this parameter with the EventDataStore parameter.
 	TrailName *string
 
 	noSmithyDocumentSerde
@@ -64,7 +75,7 @@ type GetInsightSelectorsInput struct {
 
 type GetInsightSelectorsOutput struct {
 
-	// The ARN of the source event data store that enabled Insights events.
+	//  The ARN of the source event data store that enabled Insights events.
 	EventDataStoreArn *string
 
 	// A JSON string that contains the Insight types you want to log on a trail or
@@ -72,7 +83,7 @@ type GetInsightSelectorsOutput struct {
 	// Insights types.
 	InsightSelectors []types.InsightSelector
 
-	// The ARN of the destination event data store that logs Insights events.
+	//  The ARN of the destination event data store that logs Insights events.
 	InsightsDestination *string
 
 	// The Amazon Resource Name (ARN) of a trail for which you want to get Insights
@@ -107,25 +118,25 @@ func (c *Client) addOperationGetInsightSelectorsMiddlewares(stack *middleware.St
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -140,10 +151,13 @@ func (c *Client) addOperationGetInsightSelectorsMiddlewares(stack *middleware.St
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetInsightSelectors(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

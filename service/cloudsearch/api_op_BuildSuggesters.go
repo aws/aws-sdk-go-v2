@@ -6,13 +6,14 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Indexes the search suggestions. For more information, see Configuring Suggesters (http://docs.aws.amazon.com/cloudsearch/latest/developerguide/getting-suggestions.html#configuring-suggesters)
-// in the Amazon CloudSearch Developer Guide.
+// Indexes the search suggestions. For more information, see [Configuring Suggesters] in the Amazon
+// CloudSearch Developer Guide.
+//
+// [Configuring Suggesters]: http://docs.aws.amazon.com/cloudsearch/latest/developerguide/getting-suggestions.html#configuring-suggesters
 func (c *Client) BuildSuggesters(ctx context.Context, params *BuildSuggestersInput, optFns ...func(*Options)) (*BuildSuggestersOutput, error) {
 	if params == nil {
 		params = &BuildSuggestersInput{}
@@ -28,8 +29,8 @@ func (c *Client) BuildSuggesters(ctx context.Context, params *BuildSuggestersInp
 	return out, nil
 }
 
-// Container for the parameters to the BuildSuggester operation. Specifies the
-// name of the domain you want to update.
+// Container for the parameters to the BuildSuggester operation. Specifies the name of the
+// domain you want to update.
 type BuildSuggestersInput struct {
 
 	// A string that represents the name of a domain. Domain names are unique across
@@ -78,25 +79,25 @@ func (c *Client) addOperationBuildSuggestersMiddlewares(stack *middleware.Stack,
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -111,13 +112,16 @@ func (c *Client) addOperationBuildSuggestersMiddlewares(stack *middleware.Stack,
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpBuildSuggestersValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opBuildSuggesters(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

@@ -7,9 +7,9 @@ import (
 	smithy "github.com/aws/smithy-go"
 	smithyendpoints "github.com/aws/smithy-go/endpoints"
 	"github.com/aws/smithy-go/ptr"
-	"github.com/google/go-cmp/cmp"
 	"net/http"
 	"net/url"
+	"reflect"
 	"strings"
 	"testing"
 )
@@ -42,14 +42,12 @@ func TestEndpointCase0(t *testing.T) {
 		t.Errorf("expect %v URI, got %v", e, a)
 	}
 
-	if diff := cmp.Diff(expectEndpoint.Headers, result.Headers); diff != "" {
-		t.Errorf("expect headers to match\n%s", diff)
+	if !reflect.DeepEqual(expectEndpoint.Headers, result.Headers) {
+		t.Errorf("expect headers to match\n%v != %v", expectEndpoint.Headers, result.Headers)
 	}
 
-	if diff := cmp.Diff(expectEndpoint.Properties, result.Properties,
-		cmp.AllowUnexported(smithy.Properties{}),
-	); diff != "" {
-		t.Errorf("expect properties to match\n%s", diff)
+	if !reflect.DeepEqual(expectEndpoint.Properties, result.Properties) {
+		t.Errorf("expect properties to match\n%v != %v", expectEndpoint.Properties, result.Properties)
 	}
 }
 
@@ -81,14 +79,12 @@ func TestEndpointCase1(t *testing.T) {
 		t.Errorf("expect %v URI, got %v", e, a)
 	}
 
-	if diff := cmp.Diff(expectEndpoint.Headers, result.Headers); diff != "" {
-		t.Errorf("expect headers to match\n%s", diff)
+	if !reflect.DeepEqual(expectEndpoint.Headers, result.Headers) {
+		t.Errorf("expect headers to match\n%v != %v", expectEndpoint.Headers, result.Headers)
 	}
 
-	if diff := cmp.Diff(expectEndpoint.Properties, result.Properties,
-		cmp.AllowUnexported(smithy.Properties{}),
-	); diff != "" {
-		t.Errorf("expect properties to match\n%s", diff)
+	if !reflect.DeepEqual(expectEndpoint.Properties, result.Properties) {
+		t.Errorf("expect properties to match\n%v != %v", expectEndpoint.Properties, result.Properties)
 	}
 }
 
@@ -120,14 +116,12 @@ func TestEndpointCase2(t *testing.T) {
 		t.Errorf("expect %v URI, got %v", e, a)
 	}
 
-	if diff := cmp.Diff(expectEndpoint.Headers, result.Headers); diff != "" {
-		t.Errorf("expect headers to match\n%s", diff)
+	if !reflect.DeepEqual(expectEndpoint.Headers, result.Headers) {
+		t.Errorf("expect headers to match\n%v != %v", expectEndpoint.Headers, result.Headers)
 	}
 
-	if diff := cmp.Diff(expectEndpoint.Properties, result.Properties,
-		cmp.AllowUnexported(smithy.Properties{}),
-	); diff != "" {
-		t.Errorf("expect properties to match\n%s", diff)
+	if !reflect.DeepEqual(expectEndpoint.Properties, result.Properties) {
+		t.Errorf("expect properties to match\n%v != %v", expectEndpoint.Properties, result.Properties)
 	}
 }
 
@@ -159,14 +153,12 @@ func TestEndpointCase3(t *testing.T) {
 		t.Errorf("expect %v URI, got %v", e, a)
 	}
 
-	if diff := cmp.Diff(expectEndpoint.Headers, result.Headers); diff != "" {
-		t.Errorf("expect headers to match\n%s", diff)
+	if !reflect.DeepEqual(expectEndpoint.Headers, result.Headers) {
+		t.Errorf("expect headers to match\n%v != %v", expectEndpoint.Headers, result.Headers)
 	}
 
-	if diff := cmp.Diff(expectEndpoint.Properties, result.Properties,
-		cmp.AllowUnexported(smithy.Properties{}),
-	); diff != "" {
-		t.Errorf("expect properties to match\n%s", diff)
+	if !reflect.DeepEqual(expectEndpoint.Properties, result.Properties) {
+		t.Errorf("expect properties to match\n%v != %v", expectEndpoint.Properties, result.Properties)
 	}
 }
 
@@ -198,14 +190,12 @@ func TestEndpointCase4(t *testing.T) {
 		t.Errorf("expect %v URI, got %v", e, a)
 	}
 
-	if diff := cmp.Diff(expectEndpoint.Headers, result.Headers); diff != "" {
-		t.Errorf("expect headers to match\n%s", diff)
+	if !reflect.DeepEqual(expectEndpoint.Headers, result.Headers) {
+		t.Errorf("expect headers to match\n%v != %v", expectEndpoint.Headers, result.Headers)
 	}
 
-	if diff := cmp.Diff(expectEndpoint.Properties, result.Properties,
-		cmp.AllowUnexported(smithy.Properties{}),
-	); diff != "" {
-		t.Errorf("expect properties to match\n%s", diff)
+	if !reflect.DeepEqual(expectEndpoint.Properties, result.Properties) {
+		t.Errorf("expect properties to match\n%v != %v", expectEndpoint.Properties, result.Properties)
 	}
 }
 
@@ -237,14 +227,12 @@ func TestEndpointCase5(t *testing.T) {
 		t.Errorf("expect %v URI, got %v", e, a)
 	}
 
-	if diff := cmp.Diff(expectEndpoint.Headers, result.Headers); diff != "" {
-		t.Errorf("expect headers to match\n%s", diff)
+	if !reflect.DeepEqual(expectEndpoint.Headers, result.Headers) {
+		t.Errorf("expect headers to match\n%v != %v", expectEndpoint.Headers, result.Headers)
 	}
 
-	if diff := cmp.Diff(expectEndpoint.Properties, result.Properties,
-		cmp.AllowUnexported(smithy.Properties{}),
-	); diff != "" {
-		t.Errorf("expect properties to match\n%s", diff)
+	if !reflect.DeepEqual(expectEndpoint.Properties, result.Properties) {
+		t.Errorf("expect properties to match\n%v != %v", expectEndpoint.Properties, result.Properties)
 	}
 }
 
@@ -276,14 +264,12 @@ func TestEndpointCase6(t *testing.T) {
 		t.Errorf("expect %v URI, got %v", e, a)
 	}
 
-	if diff := cmp.Diff(expectEndpoint.Headers, result.Headers); diff != "" {
-		t.Errorf("expect headers to match\n%s", diff)
+	if !reflect.DeepEqual(expectEndpoint.Headers, result.Headers) {
+		t.Errorf("expect headers to match\n%v != %v", expectEndpoint.Headers, result.Headers)
 	}
 
-	if diff := cmp.Diff(expectEndpoint.Properties, result.Properties,
-		cmp.AllowUnexported(smithy.Properties{}),
-	); diff != "" {
-		t.Errorf("expect properties to match\n%s", diff)
+	if !reflect.DeepEqual(expectEndpoint.Properties, result.Properties) {
+		t.Errorf("expect properties to match\n%v != %v", expectEndpoint.Properties, result.Properties)
 	}
 }
 
@@ -315,14 +301,12 @@ func TestEndpointCase7(t *testing.T) {
 		t.Errorf("expect %v URI, got %v", e, a)
 	}
 
-	if diff := cmp.Diff(expectEndpoint.Headers, result.Headers); diff != "" {
-		t.Errorf("expect headers to match\n%s", diff)
+	if !reflect.DeepEqual(expectEndpoint.Headers, result.Headers) {
+		t.Errorf("expect headers to match\n%v != %v", expectEndpoint.Headers, result.Headers)
 	}
 
-	if diff := cmp.Diff(expectEndpoint.Properties, result.Properties,
-		cmp.AllowUnexported(smithy.Properties{}),
-	); diff != "" {
-		t.Errorf("expect properties to match\n%s", diff)
+	if !reflect.DeepEqual(expectEndpoint.Properties, result.Properties) {
+		t.Errorf("expect properties to match\n%v != %v", expectEndpoint.Properties, result.Properties)
 	}
 }
 
@@ -354,14 +338,12 @@ func TestEndpointCase8(t *testing.T) {
 		t.Errorf("expect %v URI, got %v", e, a)
 	}
 
-	if diff := cmp.Diff(expectEndpoint.Headers, result.Headers); diff != "" {
-		t.Errorf("expect headers to match\n%s", diff)
+	if !reflect.DeepEqual(expectEndpoint.Headers, result.Headers) {
+		t.Errorf("expect headers to match\n%v != %v", expectEndpoint.Headers, result.Headers)
 	}
 
-	if diff := cmp.Diff(expectEndpoint.Properties, result.Properties,
-		cmp.AllowUnexported(smithy.Properties{}),
-	); diff != "" {
-		t.Errorf("expect properties to match\n%s", diff)
+	if !reflect.DeepEqual(expectEndpoint.Properties, result.Properties) {
+		t.Errorf("expect properties to match\n%v != %v", expectEndpoint.Properties, result.Properties)
 	}
 }
 
@@ -393,14 +375,12 @@ func TestEndpointCase9(t *testing.T) {
 		t.Errorf("expect %v URI, got %v", e, a)
 	}
 
-	if diff := cmp.Diff(expectEndpoint.Headers, result.Headers); diff != "" {
-		t.Errorf("expect headers to match\n%s", diff)
+	if !reflect.DeepEqual(expectEndpoint.Headers, result.Headers) {
+		t.Errorf("expect headers to match\n%v != %v", expectEndpoint.Headers, result.Headers)
 	}
 
-	if diff := cmp.Diff(expectEndpoint.Properties, result.Properties,
-		cmp.AllowUnexported(smithy.Properties{}),
-	); diff != "" {
-		t.Errorf("expect properties to match\n%s", diff)
+	if !reflect.DeepEqual(expectEndpoint.Properties, result.Properties) {
+		t.Errorf("expect properties to match\n%v != %v", expectEndpoint.Properties, result.Properties)
 	}
 }
 
@@ -432,14 +412,12 @@ func TestEndpointCase10(t *testing.T) {
 		t.Errorf("expect %v URI, got %v", e, a)
 	}
 
-	if diff := cmp.Diff(expectEndpoint.Headers, result.Headers); diff != "" {
-		t.Errorf("expect headers to match\n%s", diff)
+	if !reflect.DeepEqual(expectEndpoint.Headers, result.Headers) {
+		t.Errorf("expect headers to match\n%v != %v", expectEndpoint.Headers, result.Headers)
 	}
 
-	if diff := cmp.Diff(expectEndpoint.Properties, result.Properties,
-		cmp.AllowUnexported(smithy.Properties{}),
-	); diff != "" {
-		t.Errorf("expect properties to match\n%s", diff)
+	if !reflect.DeepEqual(expectEndpoint.Properties, result.Properties) {
+		t.Errorf("expect properties to match\n%v != %v", expectEndpoint.Properties, result.Properties)
 	}
 }
 
@@ -471,14 +449,12 @@ func TestEndpointCase11(t *testing.T) {
 		t.Errorf("expect %v URI, got %v", e, a)
 	}
 
-	if diff := cmp.Diff(expectEndpoint.Headers, result.Headers); diff != "" {
-		t.Errorf("expect headers to match\n%s", diff)
+	if !reflect.DeepEqual(expectEndpoint.Headers, result.Headers) {
+		t.Errorf("expect headers to match\n%v != %v", expectEndpoint.Headers, result.Headers)
 	}
 
-	if diff := cmp.Diff(expectEndpoint.Properties, result.Properties,
-		cmp.AllowUnexported(smithy.Properties{}),
-	); diff != "" {
-		t.Errorf("expect properties to match\n%s", diff)
+	if !reflect.DeepEqual(expectEndpoint.Properties, result.Properties) {
+		t.Errorf("expect properties to match\n%v != %v", expectEndpoint.Properties, result.Properties)
 	}
 }
 
@@ -530,14 +506,12 @@ func TestEndpointCase13(t *testing.T) {
 		t.Errorf("expect %v URI, got %v", e, a)
 	}
 
-	if diff := cmp.Diff(expectEndpoint.Headers, result.Headers); diff != "" {
-		t.Errorf("expect headers to match\n%s", diff)
+	if !reflect.DeepEqual(expectEndpoint.Headers, result.Headers) {
+		t.Errorf("expect headers to match\n%v != %v", expectEndpoint.Headers, result.Headers)
 	}
 
-	if diff := cmp.Diff(expectEndpoint.Properties, result.Properties,
-		cmp.AllowUnexported(smithy.Properties{}),
-	); diff != "" {
-		t.Errorf("expect properties to match\n%s", diff)
+	if !reflect.DeepEqual(expectEndpoint.Properties, result.Properties) {
+		t.Errorf("expect properties to match\n%v != %v", expectEndpoint.Properties, result.Properties)
 	}
 }
 
@@ -589,14 +563,12 @@ func TestEndpointCase15(t *testing.T) {
 		t.Errorf("expect %v URI, got %v", e, a)
 	}
 
-	if diff := cmp.Diff(expectEndpoint.Headers, result.Headers); diff != "" {
-		t.Errorf("expect headers to match\n%s", diff)
+	if !reflect.DeepEqual(expectEndpoint.Headers, result.Headers) {
+		t.Errorf("expect headers to match\n%v != %v", expectEndpoint.Headers, result.Headers)
 	}
 
-	if diff := cmp.Diff(expectEndpoint.Properties, result.Properties,
-		cmp.AllowUnexported(smithy.Properties{}),
-	); diff != "" {
-		t.Errorf("expect properties to match\n%s", diff)
+	if !reflect.DeepEqual(expectEndpoint.Properties, result.Properties) {
+		t.Errorf("expect properties to match\n%v != %v", expectEndpoint.Properties, result.Properties)
 	}
 }
 
@@ -648,14 +620,12 @@ func TestEndpointCase17(t *testing.T) {
 		t.Errorf("expect %v URI, got %v", e, a)
 	}
 
-	if diff := cmp.Diff(expectEndpoint.Headers, result.Headers); diff != "" {
-		t.Errorf("expect headers to match\n%s", diff)
+	if !reflect.DeepEqual(expectEndpoint.Headers, result.Headers) {
+		t.Errorf("expect headers to match\n%v != %v", expectEndpoint.Headers, result.Headers)
 	}
 
-	if diff := cmp.Diff(expectEndpoint.Properties, result.Properties,
-		cmp.AllowUnexported(smithy.Properties{}),
-	); diff != "" {
-		t.Errorf("expect properties to match\n%s", diff)
+	if !reflect.DeepEqual(expectEndpoint.Properties, result.Properties) {
+		t.Errorf("expect properties to match\n%v != %v", expectEndpoint.Properties, result.Properties)
 	}
 }
 
@@ -707,14 +677,12 @@ func TestEndpointCase19(t *testing.T) {
 		t.Errorf("expect %v URI, got %v", e, a)
 	}
 
-	if diff := cmp.Diff(expectEndpoint.Headers, result.Headers); diff != "" {
-		t.Errorf("expect headers to match\n%s", diff)
+	if !reflect.DeepEqual(expectEndpoint.Headers, result.Headers) {
+		t.Errorf("expect headers to match\n%v != %v", expectEndpoint.Headers, result.Headers)
 	}
 
-	if diff := cmp.Diff(expectEndpoint.Properties, result.Properties,
-		cmp.AllowUnexported(smithy.Properties{}),
-	); diff != "" {
-		t.Errorf("expect properties to match\n%s", diff)
+	if !reflect.DeepEqual(expectEndpoint.Properties, result.Properties) {
+		t.Errorf("expect properties to match\n%v != %v", expectEndpoint.Properties, result.Properties)
 	}
 }
 
@@ -747,14 +715,12 @@ func TestEndpointCase20(t *testing.T) {
 		t.Errorf("expect %v URI, got %v", e, a)
 	}
 
-	if diff := cmp.Diff(expectEndpoint.Headers, result.Headers); diff != "" {
-		t.Errorf("expect headers to match\n%s", diff)
+	if !reflect.DeepEqual(expectEndpoint.Headers, result.Headers) {
+		t.Errorf("expect headers to match\n%v != %v", expectEndpoint.Headers, result.Headers)
 	}
 
-	if diff := cmp.Diff(expectEndpoint.Properties, result.Properties,
-		cmp.AllowUnexported(smithy.Properties{}),
-	); diff != "" {
-		t.Errorf("expect properties to match\n%s", diff)
+	if !reflect.DeepEqual(expectEndpoint.Properties, result.Properties) {
+		t.Errorf("expect properties to match\n%v != %v", expectEndpoint.Properties, result.Properties)
 	}
 }
 
@@ -786,14 +752,12 @@ func TestEndpointCase21(t *testing.T) {
 		t.Errorf("expect %v URI, got %v", e, a)
 	}
 
-	if diff := cmp.Diff(expectEndpoint.Headers, result.Headers); diff != "" {
-		t.Errorf("expect headers to match\n%s", diff)
+	if !reflect.DeepEqual(expectEndpoint.Headers, result.Headers) {
+		t.Errorf("expect headers to match\n%v != %v", expectEndpoint.Headers, result.Headers)
 	}
 
-	if diff := cmp.Diff(expectEndpoint.Properties, result.Properties,
-		cmp.AllowUnexported(smithy.Properties{}),
-	); diff != "" {
-		t.Errorf("expect properties to match\n%s", diff)
+	if !reflect.DeepEqual(expectEndpoint.Properties, result.Properties) {
+		t.Errorf("expect properties to match\n%v != %v", expectEndpoint.Properties, result.Properties)
 	}
 }
 
@@ -851,26 +815,6 @@ func TestEndpointCase24(t *testing.T) {
 		t.Fatalf("expect error, got none")
 	}
 	if e, a := "Invalid Configuration: Missing Region", err.Error(); !strings.Contains(a, e) {
-		t.Errorf("expect %v error in %v", e, a)
-	}
-}
-
-// Partition doesn't support DualStack
-func TestEndpointCase25(t *testing.T) {
-	var params = EndpointParameters{
-		Region:       ptr.String("us-isob-east-1"),
-		UseFIPS:      ptr.Bool(false),
-		UseDualStack: ptr.Bool(true),
-	}
-
-	resolver := NewDefaultEndpointResolverV2()
-	result, err := resolver.ResolveEndpoint(context.Background(), params)
-	_, _ = result, err
-
-	if err == nil {
-		t.Fatalf("expect error, got none")
-	}
-	if e, a := "DualStack is enabled but this partition does not support DualStack", err.Error(); !strings.Contains(a, e) {
 		t.Errorf("expect %v error in %v", e, a)
 	}
 }

@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -14,8 +13,9 @@ import (
 // Deletes an account level monthly spend limit override for sending voice
 // messages. Deleting a spend limit override sets the EnforcedLimit equal to the
 // MaxLimit , which is controlled by Amazon Web Services. For more information on
-// spending limits (quotas) see Amazon Pinpoint quotas (https://docs.aws.amazon.com/pinpoint/latest/developerguide/quotas.html)
-// in the Amazon Pinpoint Developer Guide.
+// spending limits (quotas) see [Amazon Pinpoint quotas]in the Amazon Pinpoint Developer Guide.
+//
+// [Amazon Pinpoint quotas]: https://docs.aws.amazon.com/pinpoint/latest/developerguide/quotas.html
 func (c *Client) DeleteVoiceMessageSpendLimitOverride(ctx context.Context, params *DeleteVoiceMessageSpendLimitOverrideInput, optFns ...func(*Options)) (*DeleteVoiceMessageSpendLimitOverrideOutput, error) {
 	if params == nil {
 		params = &DeleteVoiceMessageSpendLimitOverrideInput{}
@@ -68,25 +68,25 @@ func (c *Client) addOperationDeleteVoiceMessageSpendLimitOverrideMiddlewares(sta
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -101,10 +101,13 @@ func (c *Client) addOperationDeleteVoiceMessageSpendLimitOverrideMiddlewares(sta
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteVoiceMessageSpendLimitOverride(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

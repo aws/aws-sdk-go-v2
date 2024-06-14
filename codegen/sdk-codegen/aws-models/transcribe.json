@@ -141,6 +141,17 @@
                 }
             }
         },
+        "com.amazonaws.transcribe#CallAnalyticsFeature": {
+            "type": "enum",
+            "members": {
+                "GENERATIVE_SUMMARIZATION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "GENERATIVE_SUMMARIZATION"
+                    }
+                }
+            }
+        },
         "com.amazonaws.transcribe#CallAnalyticsJob": {
             "type": "structure",
             "members": {
@@ -154,6 +165,12 @@
                     "target": "com.amazonaws.transcribe#CallAnalyticsJobStatus",
                     "traits": {
                         "smithy.api#documentation": "<p>Provides the status of the specified Call Analytics job.</p>\n         <p>If the status is <code>COMPLETED</code>, the job is finished and you can find the\n            results at the location specified in <code>TranscriptFileUri</code> (or\n                <code>RedactedTranscriptFileUri</code>, if you requested transcript redaction). If\n            the status is <code>FAILED</code>, <code>FailureReason</code> provides details on why\n            your transcription job failed.</p>"
+                    }
+                },
+                "CallAnalyticsJobDetails": {
+                    "target": "com.amazonaws.transcribe#CallAnalyticsJobDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Provides detailed information about a call analytics job, including information about skipped analytics features.</p>"
                     }
                 },
                 "LanguageCode": {
@@ -234,6 +251,20 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Provides detailed information about a Call Analytics job.</p>\n         <p>To view the job's status, refer to <code>CallAnalyticsJobStatus</code>. If the status\n            is <code>COMPLETED</code>, the job is finished. You can find your completed transcript\n            at the URI specified in <code>TranscriptFileUri</code>. If the status is\n                <code>FAILED</code>, <code>FailureReason</code> provides details on why your\n            transcription job failed.</p>\n         <p>If you enabled personally identifiable information (PII) redaction, the redacted\n            transcript appears at the location specified in\n            <code>RedactedTranscriptFileUri</code>.</p>\n         <p>If you chose to redact the audio in your media file, you can find your redacted media\n            file at the location specified in the <code>RedactedMediaFileUri</code> field of your\n            response.</p>"
+            }
+        },
+        "com.amazonaws.transcribe#CallAnalyticsJobDetails": {
+            "type": "structure",
+            "members": {
+                "Skipped": {
+                    "target": "com.amazonaws.transcribe#CallAnalyticsSkippedFeatureList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains information about any skipped analytics features during the analysis of a call analytics job.</p>\n         <p>This array lists all the analytics features that were skipped, along with their corresponding reason code and message.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains details about a call analytics job, including information about skipped analytics features.</p>"
             }
         },
         "com.amazonaws.transcribe#CallAnalyticsJobName": {
@@ -373,6 +404,12 @@
                         "smithy.api#documentation": "<p>Provides the status of your Call Analytics job.</p>\n         <p>If the status is <code>COMPLETED</code>, the job is finished and you can find the\n            results at the location specified in <code>TranscriptFileUri</code> (or\n                <code>RedactedTranscriptFileUri</code>, if you requested transcript redaction). If\n            the status is <code>FAILED</code>, <code>FailureReason</code> provides details on why\n            your transcription job failed.</p>"
                     }
                 },
+                "CallAnalyticsJobDetails": {
+                    "target": "com.amazonaws.transcribe#CallAnalyticsJobDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Provides detailed information about a call analytics job, including information about skipped analytics features.</p>"
+                    }
+                },
                 "FailureReason": {
                     "target": "com.amazonaws.transcribe#FailureReason",
                     "traits": {
@@ -382,6 +419,55 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Provides detailed information about a specific Call Analytics job.</p>"
+            }
+        },
+        "com.amazonaws.transcribe#CallAnalyticsSkippedFeature": {
+            "type": "structure",
+            "members": {
+                "Feature": {
+                    "target": "com.amazonaws.transcribe#CallAnalyticsFeature",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates the type of analytics feature that was skipped during the analysis of a call analytics job.</p>"
+                    }
+                },
+                "ReasonCode": {
+                    "target": "com.amazonaws.transcribe#CallAnalyticsSkippedReasonCode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Provides a code indicating the reason why a specific analytics feature was skipped during the analysis of a call analytics job.</p>"
+                    }
+                },
+                "Message": {
+                    "target": "com.amazonaws.transcribe#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains additional information or a message explaining why a specific analytics feature was skipped during the analysis of a call analytics job.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Represents a skipped analytics feature during the analysis of a call analytics job.</p>\n         <p>The <code>Feature</code> field indicates the type of analytics feature that was skipped.</p>\n         <p>The <code>Message</code> field contains additional information or a message explaining why the analytics feature was skipped.</p>\n         <p>The <code>ReasonCode</code> field provides a code indicating the reason why the analytics feature was skipped.</p>"
+            }
+        },
+        "com.amazonaws.transcribe#CallAnalyticsSkippedFeatureList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.transcribe#CallAnalyticsSkippedFeature"
+            }
+        },
+        "com.amazonaws.transcribe#CallAnalyticsSkippedReasonCode": {
+            "type": "enum",
+            "members": {
+                "INSUFFICIENT_CONVERSATION_CONTENT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INSUFFICIENT_CONVERSATION_CONTENT"
+                    }
+                },
+                "FAILED_SAFETY_GUIDELINES": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FAILED_SAFETY_GUIDELINES"
+                    }
+                }
             }
         },
         "com.amazonaws.transcribe#CategoryName": {
@@ -3927,7 +4013,7 @@
             "traits": {
                 "smithy.api#range": {
                     "min": 2,
-                    "max": 10
+                    "max": 30
                 }
             }
         },

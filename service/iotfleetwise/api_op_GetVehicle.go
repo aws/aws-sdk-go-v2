@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -30,7 +29,7 @@ func (c *Client) GetVehicle(ctx context.Context, params *GetVehicleInput, optFns
 
 type GetVehicleInput struct {
 
-	// The ID of the vehicle to retrieve information about.
+	//  The ID of the vehicle to retrieve information about.
 	//
 	// This member is required.
 	VehicleName *string
@@ -40,25 +39,26 @@ type GetVehicleInput struct {
 
 type GetVehicleOutput struct {
 
-	// The Amazon Resource Name (ARN) of the vehicle to retrieve information about.
+	//  The Amazon Resource Name (ARN) of the vehicle to retrieve information about.
 	Arn *string
 
 	// Static information about a vehicle in a key-value pair. For example:
+	//
 	// "engineType" : "1.3 L R2"
 	Attributes map[string]string
 
-	// The time the vehicle was created in seconds since epoch (January 1, 1970 at
+	//  The time the vehicle was created in seconds since epoch (January 1, 1970 at
 	// midnight UTC time).
 	CreationTime *time.Time
 
-	// The ARN of a decoder manifest associated with the vehicle.
+	//  The ARN of a decoder manifest associated with the vehicle.
 	DecoderManifestArn *string
 
-	// The time the vehicle was last updated in seconds since epoch (January 1, 1970
+	//  The time the vehicle was last updated in seconds since epoch (January 1, 1970
 	// at midnight UTC time).
 	LastModificationTime *time.Time
 
-	// The ARN of a vehicle model (model manifest) associated with the vehicle.
+	//  The ARN of a vehicle model (model manifest) associated with the vehicle.
 	ModelManifestArn *string
 
 	// The ID of the vehicle.
@@ -92,25 +92,25 @@ func (c *Client) addOperationGetVehicleMiddlewares(stack *middleware.Stack, opti
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -125,13 +125,16 @@ func (c *Client) addOperationGetVehicleMiddlewares(stack *middleware.Stack, opti
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpGetVehicleValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetVehicle(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

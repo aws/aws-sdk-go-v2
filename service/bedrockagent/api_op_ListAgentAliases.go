@@ -6,13 +6,12 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockagent/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists all the Aliases for an Amazon Bedrock Agent
+// Lists the aliases of an agent and information about each one.
 func (c *Client) ListAgentAliases(ctx context.Context, params *ListAgentAliasesInput, optFns ...func(*Options)) (*ListAgentAliasesOutput, error) {
 	if params == nil {
 		params = &ListAgentAliasesInput{}
@@ -28,32 +27,38 @@ func (c *Client) ListAgentAliases(ctx context.Context, params *ListAgentAliasesI
 	return out, nil
 }
 
-// List Agent Aliases Request
 type ListAgentAliasesInput struct {
 
-	// Id generated at the server side when an Agent is created
+	// The unique identifier of the agent.
 	//
 	// This member is required.
 	AgentId *string
 
-	// Max Results.
+	// The maximum number of results to return in the response. If the total number of
+	// results is greater than this value, use the token returned in the response in
+	// the nextToken field when making another request to return the next batch of
+	// results.
 	MaxResults *int32
 
-	// Opaque continuation token of previous paginated response.
+	// If the total number of results is greater than the maxResults value provided in
+	// the request, enter the token returned in the nextToken field in the response in
+	// this field to return the next batch of results.
 	NextToken *string
 
 	noSmithyDocumentSerde
 }
 
-// List Agent Aliases Response
 type ListAgentAliasesOutput struct {
 
-	// The list of summaries of all the aliases for an Agent.
+	// A list of objects, each of which contains information about an alias of the
+	// agent.
 	//
 	// This member is required.
 	AgentAliasSummaries []types.AgentAliasSummary
 
-	// Opaque continuation token of previous paginated response.
+	// If the total number of results is greater than the maxResults value provided in
+	// the request, use this token when making another request in the nextToken field
+	// to return the next batch of results.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -84,25 +89,25 @@ func (c *Client) addOperationListAgentAliasesMiddlewares(stack *middleware.Stack
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -117,13 +122,16 @@ func (c *Client) addOperationListAgentAliasesMiddlewares(stack *middleware.Stack
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpListAgentAliasesValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListAgentAliases(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -151,7 +159,10 @@ var _ ListAgentAliasesAPIClient = (*Client)(nil)
 
 // ListAgentAliasesPaginatorOptions is the paginator options for ListAgentAliases
 type ListAgentAliasesPaginatorOptions struct {
-	// Max Results.
+	// The maximum number of results to return in the response. If the total number of
+	// results is greater than this value, use the token returned in the response in
+	// the nextToken field when making another request to return the next batch of
+	// results.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

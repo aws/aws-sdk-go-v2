@@ -6,16 +6,18 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Cancels a Gremlin query. See Gremlin query cancellation (https://docs.aws.amazon.com/neptune/latest/userguide/gremlin-api-status-cancel.html)
-// for more information. When invoking this operation in a Neptune cluster that has
-// IAM authentication enabled, the IAM user or role making the request must have a
-// policy attached that allows the neptune-db:CancelQuery (https://docs.aws.amazon.com/neptune/latest/userguide/iam-dp-actions.html#cancelquery)
-// IAM action in that cluster.
+// Cancels a Gremlin query. See [Gremlin query cancellation] for more information.
+//
+// When invoking this operation in a Neptune cluster that has IAM authentication
+// enabled, the IAM user or role making the request must have a policy attached
+// that allows the [neptune-db:CancelQuery]IAM action in that cluster.
+//
+// [neptune-db:CancelQuery]: https://docs.aws.amazon.com/neptune/latest/userguide/iam-dp-actions.html#cancelquery
+// [Gremlin query cancellation]: https://docs.aws.amazon.com/neptune/latest/userguide/gremlin-api-status-cancel.html
 func (c *Client) CancelGremlinQuery(ctx context.Context, params *CancelGremlinQueryInput, optFns ...func(*Options)) (*CancelGremlinQueryOutput, error) {
 	if params == nil {
 		params = &CancelGremlinQueryInput{}
@@ -74,25 +76,25 @@ func (c *Client) addOperationCancelGremlinQueryMiddlewares(stack *middleware.Sta
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -107,13 +109,16 @@ func (c *Client) addOperationCancelGremlinQueryMiddlewares(stack *middleware.Sta
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpCancelGremlinQueryValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCancelGremlinQuery(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

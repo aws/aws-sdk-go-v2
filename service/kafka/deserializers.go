@@ -20,7 +20,16 @@ import (
 	"io/ioutil"
 	"math"
 	"strings"
+	"time"
 )
+
+func deserializeS3Expires(v string) (*time.Time, error) {
+	t, err := smithytime.ParseHTTPDate(v)
+	if err != nil {
+		return nil, nil
+	}
+	return &t, nil
+}
 
 type awsRestjson1_deserializeOpBatchAssociateScramSecret struct {
 }
@@ -9301,6 +9310,67 @@ func awsRestjson1_deserializeErrorUnauthorizedException(response *smithyhttp.Res
 	return output
 }
 
+func awsRestjson1_deserializeDocument__listOf__double(v *[]float64, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []float64
+	if *v == nil {
+		cv = []float64{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col float64
+		if value != nil {
+			switch jtv := value.(type) {
+			case json.Number:
+				f64, err := jtv.Float64()
+				if err != nil {
+					return err
+				}
+				col = f64
+
+			case string:
+				var f64 float64
+				switch {
+				case strings.EqualFold(jtv, "NaN"):
+					f64 = math.NaN()
+
+				case strings.EqualFold(jtv, "Infinity"):
+					f64 = math.Inf(1)
+
+				case strings.EqualFold(jtv, "-Infinity"):
+					f64 = math.Inf(-1)
+
+				default:
+					return fmt.Errorf("unknown JSON number value: %s", jtv)
+
+				}
+				col = f64
+
+			default:
+				return fmt.Errorf("expected __double to be a JSON Number, got %T instead", value)
+
+			}
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsRestjson1_deserializeDocument__listOf__string(v *[]string, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -10203,6 +10273,47 @@ func awsRestjson1_deserializeDocumentBadRequestException(v **types.BadRequestExc
 					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
 				}
 				sv.Message = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentBrokerCountUpdateInfo(v **types.BrokerCountUpdateInfo, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.BrokerCountUpdateInfo
+	if *v == nil {
+		sv = &types.BrokerCountUpdateInfo{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "createdBrokerIds":
+			if err := awsRestjson1_deserializeDocument__listOf__double(&sv.CreatedBrokerIds, value); err != nil {
+				return err
+			}
+
+		case "deletedBrokerIds":
+			if err := awsRestjson1_deserializeDocument__listOf__double(&sv.DeletedBrokerIds, value); err != nil {
+				return err
 			}
 
 		default:
@@ -11957,6 +12068,42 @@ func awsRestjson1_deserializeDocumentConsumerGroupReplication(v **types.Consumer
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentControllerNodeInfo(v **types.ControllerNodeInfo, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ControllerNodeInfo
+	if *v == nil {
+		sv = &types.ControllerNodeInfo{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "endpoints":
+			if err := awsRestjson1_deserializeDocument__listOf__string(&sv.Endpoints, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentEBSStorageInfo(v **types.EBSStorageInfo, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -12695,6 +12842,11 @@ func awsRestjson1_deserializeDocumentMutableClusterInfo(v **types.MutableCluster
 
 	for key, value := range shape {
 		switch key {
+		case "brokerCountUpdateInfo":
+			if err := awsRestjson1_deserializeDocumentBrokerCountUpdateInfo(&sv.BrokerCountUpdateInfo, value); err != nil {
+				return err
+			}
+
 		case "brokerEBSVolumeInfo":
 			if err := awsRestjson1_deserializeDocument__listOfBrokerEBSVolumeInfo(&sv.BrokerEBSVolumeInfo, value); err != nil {
 				return err
@@ -12901,6 +13053,11 @@ func awsRestjson1_deserializeDocumentNodeInfo(v **types.NodeInfo, value interfac
 
 		case "brokerNodeInfo":
 			if err := awsRestjson1_deserializeDocumentBrokerNodeInfo(&sv.BrokerNodeInfo, value); err != nil {
+				return err
+			}
+
+		case "controllerNodeInfo":
+			if err := awsRestjson1_deserializeDocumentControllerNodeInfo(&sv.ControllerNodeInfo, value); err != nil {
 				return err
 			}
 
@@ -13466,6 +13623,46 @@ func awsRestjson1_deserializeDocumentReplicationInfoSummary(v **types.Replicatio
 					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
 				}
 				sv.TargetKafkaClusterAlias = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentReplicationStartingPosition(v **types.ReplicationStartingPosition, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ReplicationStartingPosition
+	if *v == nil {
+		sv = &types.ReplicationStartingPosition{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "type":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ReplicationStartingPositionType to be of type string, got %T instead", value)
+				}
+				sv.Type = types.ReplicationStartingPositionType(jtv)
 			}
 
 		default:
@@ -14161,6 +14358,11 @@ func awsRestjson1_deserializeDocumentTopicReplication(v **types.TopicReplication
 					return fmt.Errorf("expected __boolean to be of type *bool, got %T instead", value)
 				}
 				sv.DetectAndCopyNewTopics = ptr.Bool(jtv)
+			}
+
+		case "startingPosition":
+			if err := awsRestjson1_deserializeDocumentReplicationStartingPosition(&sv.StartingPosition, value); err != nil {
+				return err
 			}
 
 		case "topicsToExclude":

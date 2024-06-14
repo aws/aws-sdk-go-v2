@@ -6,13 +6,12 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/codegurusecurity/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Use to update account-level configuration with an encryption key.
+// Use to update the encryption configuration for an account.
 func (c *Client) UpdateAccountConfiguration(ctx context.Context, params *UpdateAccountConfigurationInput, optFns ...func(*Options)) (*UpdateAccountConfigurationOutput, error) {
 	if params == nil {
 		params = &UpdateAccountConfigurationInput{}
@@ -30,8 +29,10 @@ func (c *Client) UpdateAccountConfiguration(ctx context.Context, params *UpdateA
 
 type UpdateAccountConfigurationInput struct {
 
-	// The KMS key ARN you want to use for encryption. Defaults to service-side
-	// encryption if missing.
+	// The customer-managed KMS key ARN you want to use for encryption. If not
+	// specified, CodeGuru Security will use an AWS-managed key for encryption. If you
+	// previously specified a customer-managed KMS key and want CodeGuru Security to
+	// use an AWS-managed key for encryption instead, pass nothing.
 	//
 	// This member is required.
 	EncryptionConfig *types.EncryptionConfig
@@ -41,7 +42,9 @@ type UpdateAccountConfigurationInput struct {
 
 type UpdateAccountConfigurationOutput struct {
 
-	// An EncryptionConfig object that contains the KMS key ARN to use for encryption.
+	// An EncryptionConfig object that contains the KMS key ARN that is used for
+	// encryption. If you did not specify a customer-managed KMS key in the request,
+	// returns empty.
 	//
 	// This member is required.
 	EncryptionConfig *types.EncryptionConfig
@@ -74,25 +77,25 @@ func (c *Client) addOperationUpdateAccountConfigurationMiddlewares(stack *middle
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -107,13 +110,16 @@ func (c *Client) addOperationUpdateAccountConfigurationMiddlewares(stack *middle
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpUpdateAccountConfigurationValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateAccountConfiguration(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

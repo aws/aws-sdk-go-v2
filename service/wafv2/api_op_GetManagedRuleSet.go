@@ -6,18 +6,20 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/wafv2/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Retrieves the specified managed rule set. This is intended for use only by
-// vendors of managed rule sets. Vendors are Amazon Web Services and Amazon Web
-// Services Marketplace sellers. Vendors, you can use the managed rule set APIs to
-// provide controlled rollout of your versioned managed rule group offerings for
-// your customers. The APIs are ListManagedRuleSets , GetManagedRuleSet ,
-// PutManagedRuleSetVersions , and UpdateManagedRuleSetVersionExpiryDate .
+// Retrieves the specified managed rule set.
+//
+// This is intended for use only by vendors of managed rule sets. Vendors are
+// Amazon Web Services and Amazon Web Services Marketplace sellers.
+//
+// Vendors, you can use the managed rule set APIs to provide controlled rollout of
+// your versioned managed rule group offerings for your customers. The APIs are
+// ListManagedRuleSets , GetManagedRuleSet , PutManagedRuleSetVersions , and
+// UpdateManagedRuleSetVersionExpiryDate .
 func (c *Client) GetManagedRuleSet(ctx context.Context, params *GetManagedRuleSetInput, optFns ...func(*Options)) (*GetManagedRuleSetOutput, error) {
 	if params == nil {
 		params = &GetManagedRuleSetInput{}
@@ -43,8 +45,10 @@ type GetManagedRuleSetInput struct {
 	Id *string
 
 	// The name of the managed rule set. You use this, along with the rule set ID, to
-	// identify the rule set. This name is assigned to the corresponding managed rule
-	// group, which your customers can access and use.
+	// identify the rule set.
+	//
+	// This name is assigned to the corresponding managed rule group, which your
+	// customers can access and use.
 	//
 	// This member is required.
 	Name *string
@@ -53,10 +57,14 @@ type GetManagedRuleSetInput struct {
 	// regional application. A regional application can be an Application Load Balancer
 	// (ALB), an Amazon API Gateway REST API, an AppSync GraphQL API, an Amazon Cognito
 	// user pool, an App Runner service, or an Amazon Web Services Verified Access
-	// instance. To work with CloudFront, you must also specify the Region US East (N.
-	// Virginia) as follows:
+	// instance.
+	//
+	// To work with CloudFront, you must also specify the Region US East (N. Virginia)
+	// as follows:
+	//
 	//   - CLI - Specify the Region when you use the CloudFront scope:
 	//   --scope=CLOUDFRONT --region=us-east-1 .
+	//
 	//   - API and SDKs - For all calls, use the Region endpoint us-east-1.
 	//
 	// This member is required.
@@ -107,25 +115,25 @@ func (c *Client) addOperationGetManagedRuleSetMiddlewares(stack *middleware.Stac
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -140,13 +148,16 @@ func (c *Client) addOperationGetManagedRuleSetMiddlewares(stack *middleware.Stac
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpGetManagedRuleSetValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetManagedRuleSet(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

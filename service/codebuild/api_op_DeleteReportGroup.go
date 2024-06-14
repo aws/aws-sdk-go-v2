@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -36,11 +35,15 @@ type DeleteReportGroupInput struct {
 	Arn *string
 
 	// If true , deletes any reports that belong to a report group before deleting the
-	// report group. If false , you must delete any reports in the report group. Use
-	// ListReportsForReportGroup (https://docs.aws.amazon.com/codebuild/latest/APIReference/API_ListReportsForReportGroup.html)
-	// to get the reports in a report group. Use DeleteReport (https://docs.aws.amazon.com/codebuild/latest/APIReference/API_DeleteReport.html)
-	// to delete the reports. If you call DeleteReportGroup for a report group that
-	// contains one or more reports, an exception is thrown.
+	// report group.
+	//
+	// If false , you must delete any reports in the report group. Use [ListReportsForReportGroup] to get the
+	// reports in a report group. Use [DeleteReport]to delete the reports. If you call
+	// DeleteReportGroup for a report group that contains one or more reports, an
+	// exception is thrown.
+	//
+	// [ListReportsForReportGroup]: https://docs.aws.amazon.com/codebuild/latest/APIReference/API_ListReportsForReportGroup.html
+	// [DeleteReport]: https://docs.aws.amazon.com/codebuild/latest/APIReference/API_DeleteReport.html
 	DeleteReports bool
 
 	noSmithyDocumentSerde
@@ -75,25 +78,25 @@ func (c *Client) addOperationDeleteReportGroupMiddlewares(stack *middleware.Stac
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -108,13 +111,16 @@ func (c *Client) addOperationDeleteReportGroupMiddlewares(stack *middleware.Stac
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDeleteReportGroupValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteReportGroup(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

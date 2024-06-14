@@ -6,13 +6,13 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/securityhub/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// For a batch of security controls and standards, this operation updates the
+//	For a batch of security controls and standards, this operation updates the
+//
 // enablement status of a control in a standard.
 func (c *Client) BatchUpdateStandardsControlAssociations(ctx context.Context, params *BatchUpdateStandardsControlAssociationsInput, optFns ...func(*Options)) (*BatchUpdateStandardsControlAssociationsOutput, error) {
 	if params == nil {
@@ -31,7 +31,7 @@ func (c *Client) BatchUpdateStandardsControlAssociations(ctx context.Context, pa
 
 type BatchUpdateStandardsControlAssociationsInput struct {
 
-	// Updates the enablement status of a security control in a specified standard.
+	//  Updates the enablement status of a security control in a specified standard.
 	//
 	// This member is required.
 	StandardsControlAssociationUpdates []types.StandardsControlAssociationUpdate
@@ -41,7 +41,7 @@ type BatchUpdateStandardsControlAssociationsInput struct {
 
 type BatchUpdateStandardsControlAssociationsOutput struct {
 
-	// A security control (identified with SecurityControlId , SecurityControlArn , or
+	//  A security control (identified with SecurityControlId , SecurityControlArn , or
 	// a mix of both parameters) whose enablement status in a specified standard
 	// couldn't be updated.
 	UnprocessedAssociationUpdates []types.UnprocessedStandardsControlAssociationUpdate
@@ -74,25 +74,25 @@ func (c *Client) addOperationBatchUpdateStandardsControlAssociationsMiddlewares(
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -107,13 +107,16 @@ func (c *Client) addOperationBatchUpdateStandardsControlAssociationsMiddlewares(
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpBatchUpdateStandardsControlAssociationsValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opBatchUpdateStandardsControlAssociations(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

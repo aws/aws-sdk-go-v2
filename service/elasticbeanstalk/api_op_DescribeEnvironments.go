@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/elasticbeanstalk/types"
 	"github.com/aws/smithy-go/middleware"
 	smithytime "github.com/aws/smithy-go/time"
@@ -47,24 +46,30 @@ type DescribeEnvironmentsInput struct {
 	// include only those that have the specified names.
 	EnvironmentNames []string
 
-	// Indicates whether to include deleted environments: true : Environments that have
-	// been deleted after IncludedDeletedBackTo are displayed. false : Do not include
-	// deleted environments.
+	// Indicates whether to include deleted environments:
+	//
+	// true : Environments that have been deleted after IncludedDeletedBackTo are
+	// displayed.
+	//
+	// false : Do not include deleted environments.
 	IncludeDeleted *bool
 
-	// If specified when IncludeDeleted is set to true , then environments deleted
+	//  If specified when IncludeDeleted is set to true , then environments deleted
 	// after this date are displayed.
 	IncludedDeletedBackTo *time.Time
 
 	// For a paginated request. Specify a maximum number of environments to include in
-	// each response. If no MaxRecords is specified, all available environments are
-	// retrieved in a single response.
+	// each response.
+	//
+	// If no MaxRecords is specified, all available environments are retrieved in a
+	// single response.
 	MaxRecords *int32
 
 	// For a paginated request. Specify a token from a previous response page to
 	// retrieve the next response page. All other parameter values must be identical to
-	// the ones specified in the initial request. If no NextToken is specified, the
-	// first page is retrieved.
+	// the ones specified in the initial request.
+	//
+	// If no NextToken is specified, the first page is retrieved.
 	NextToken *string
 
 	// If specified, AWS Elastic Beanstalk restricts the returned descriptions to
@@ -77,7 +82,7 @@ type DescribeEnvironmentsInput struct {
 // Result message containing a list of environment descriptions.
 type DescribeEnvironmentsOutput struct {
 
-	// Returns an EnvironmentDescription list.
+	//  Returns an EnvironmentDescription list.
 	Environments []types.EnvironmentDescription
 
 	// In a paginated request, the token that you can pass in a subsequent request to
@@ -112,25 +117,25 @@ func (c *Client) addOperationDescribeEnvironmentsMiddlewares(stack *middleware.S
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -145,10 +150,13 @@ func (c *Client) addOperationDescribeEnvironmentsMiddlewares(stack *middleware.S
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeEnvironments(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -180,7 +188,16 @@ type EnvironmentExistsWaiterOptions struct {
 	// Set of options to modify how an operation is invoked. These apply to all
 	// operations invoked for this client. Use functional options on operation call to
 	// modify this list for per operation behavior.
+	//
+	// Passing options here is functionally equivalent to passing values to this
+	// config's ClientOptions field that extend the inner client's APIOptions directly.
 	APIOptions []func(*middleware.Stack) error
+
+	// Functional options to be passed to all operations invoked by this client.
+	//
+	// Function values that modify the inner APIOptions are applied after the waiter
+	// config's own APIOptions modifiers.
+	ClientOptions []func(*Options)
 
 	// MinDelay is the minimum amount of time to delay between retries. If unset,
 	// EnvironmentExistsWaiter will use default minimum delay of 20 seconds. Note that
@@ -197,12 +214,13 @@ type EnvironmentExistsWaiterOptions struct {
 
 	// Retryable is function that can be used to override the service defined
 	// waiter-behavior based on operation output, or returned error. This function is
-	// used by the waiter to decide if a state is retryable or a terminal state. By
-	// default service-modeled logic will populate this option. This option can thus be
-	// used to define a custom waiter state with fall-back to service-modeled waiter
-	// state mutators.The function returns an error in case of a failure state. In case
-	// of retry state, this function returns a bool value of true and nil error, while
-	// in case of success it returns a bool value of false and nil error.
+	// used by the waiter to decide if a state is retryable or a terminal state.
+	//
+	// By default service-modeled logic will populate this option. This option can
+	// thus be used to define a custom waiter state with fall-back to service-modeled
+	// waiter state mutators.The function returns an error in case of a failure state.
+	// In case of retry state, this function returns a bool value of true and nil
+	// error, while in case of success it returns a bool value of false and nil error.
 	Retryable func(context.Context, *DescribeEnvironmentsInput, *DescribeEnvironmentsOutput, error) (bool, error)
 }
 
@@ -280,6 +298,9 @@ func (w *EnvironmentExistsWaiter) WaitForOutput(ctx context.Context, params *Des
 
 		out, err := w.client.DescribeEnvironments(ctx, params, func(o *Options) {
 			o.APIOptions = append(o.APIOptions, apiOptions...)
+			for _, opt := range options.ClientOptions {
+				opt(o)
+			}
 		})
 
 		retryable, err := options.Retryable(ctx, params, out, err)
@@ -388,7 +409,16 @@ type EnvironmentTerminatedWaiterOptions struct {
 	// Set of options to modify how an operation is invoked. These apply to all
 	// operations invoked for this client. Use functional options on operation call to
 	// modify this list for per operation behavior.
+	//
+	// Passing options here is functionally equivalent to passing values to this
+	// config's ClientOptions field that extend the inner client's APIOptions directly.
 	APIOptions []func(*middleware.Stack) error
+
+	// Functional options to be passed to all operations invoked by this client.
+	//
+	// Function values that modify the inner APIOptions are applied after the waiter
+	// config's own APIOptions modifiers.
+	ClientOptions []func(*Options)
 
 	// MinDelay is the minimum amount of time to delay between retries. If unset,
 	// EnvironmentTerminatedWaiter will use default minimum delay of 20 seconds. Note
@@ -406,12 +436,13 @@ type EnvironmentTerminatedWaiterOptions struct {
 
 	// Retryable is function that can be used to override the service defined
 	// waiter-behavior based on operation output, or returned error. This function is
-	// used by the waiter to decide if a state is retryable or a terminal state. By
-	// default service-modeled logic will populate this option. This option can thus be
-	// used to define a custom waiter state with fall-back to service-modeled waiter
-	// state mutators.The function returns an error in case of a failure state. In case
-	// of retry state, this function returns a bool value of true and nil error, while
-	// in case of success it returns a bool value of false and nil error.
+	// used by the waiter to decide if a state is retryable or a terminal state.
+	//
+	// By default service-modeled logic will populate this option. This option can
+	// thus be used to define a custom waiter state with fall-back to service-modeled
+	// waiter state mutators.The function returns an error in case of a failure state.
+	// In case of retry state, this function returns a bool value of true and nil
+	// error, while in case of success it returns a bool value of false and nil error.
 	Retryable func(context.Context, *DescribeEnvironmentsInput, *DescribeEnvironmentsOutput, error) (bool, error)
 }
 
@@ -489,6 +520,9 @@ func (w *EnvironmentTerminatedWaiter) WaitForOutput(ctx context.Context, params 
 
 		out, err := w.client.DescribeEnvironments(ctx, params, func(o *Options) {
 			o.APIOptions = append(o.APIOptions, apiOptions...)
+			for _, opt := range options.ClientOptions {
+				opt(o)
+			}
 		})
 
 		retryable, err := options.Retryable(ctx, params, out, err)
@@ -596,7 +630,16 @@ type EnvironmentUpdatedWaiterOptions struct {
 	// Set of options to modify how an operation is invoked. These apply to all
 	// operations invoked for this client. Use functional options on operation call to
 	// modify this list for per operation behavior.
+	//
+	// Passing options here is functionally equivalent to passing values to this
+	// config's ClientOptions field that extend the inner client's APIOptions directly.
 	APIOptions []func(*middleware.Stack) error
+
+	// Functional options to be passed to all operations invoked by this client.
+	//
+	// Function values that modify the inner APIOptions are applied after the waiter
+	// config's own APIOptions modifiers.
+	ClientOptions []func(*Options)
 
 	// MinDelay is the minimum amount of time to delay between retries. If unset,
 	// EnvironmentUpdatedWaiter will use default minimum delay of 20 seconds. Note that
@@ -613,12 +656,13 @@ type EnvironmentUpdatedWaiterOptions struct {
 
 	// Retryable is function that can be used to override the service defined
 	// waiter-behavior based on operation output, or returned error. This function is
-	// used by the waiter to decide if a state is retryable or a terminal state. By
-	// default service-modeled logic will populate this option. This option can thus be
-	// used to define a custom waiter state with fall-back to service-modeled waiter
-	// state mutators.The function returns an error in case of a failure state. In case
-	// of retry state, this function returns a bool value of true and nil error, while
-	// in case of success it returns a bool value of false and nil error.
+	// used by the waiter to decide if a state is retryable or a terminal state.
+	//
+	// By default service-modeled logic will populate this option. This option can
+	// thus be used to define a custom waiter state with fall-back to service-modeled
+	// waiter state mutators.The function returns an error in case of a failure state.
+	// In case of retry state, this function returns a bool value of true and nil
+	// error, while in case of success it returns a bool value of false and nil error.
 	Retryable func(context.Context, *DescribeEnvironmentsInput, *DescribeEnvironmentsOutput, error) (bool, error)
 }
 
@@ -696,6 +740,9 @@ func (w *EnvironmentUpdatedWaiter) WaitForOutput(ctx context.Context, params *De
 
 		out, err := w.client.DescribeEnvironments(ctx, params, func(o *Options) {
 			o.APIOptions = append(o.APIOptions, apiOptions...)
+			for _, opt := range options.ClientOptions {
+				opt(o)
+			}
 		})
 
 		retryable, err := options.Retryable(ctx, params, out, err)

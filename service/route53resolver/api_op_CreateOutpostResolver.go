@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/route53resolver/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -31,8 +30,9 @@ func (c *Client) CreateOutpostResolver(ctx context.Context, params *CreateOutpos
 type CreateOutpostResolverInput struct {
 
 	// A unique string that identifies the request and that allows failed requests to
-	// be retried without the risk of running the operation twice. CreatorRequestId
-	// can be any unique string, for example, a date/time stamp.
+	// be retried without the risk of running the operation twice.
+	//
+	// CreatorRequestId can be any unique string, for example, a date/time stamp.
 	//
 	// This member is required.
 	CreatorRequestId *string
@@ -49,7 +49,7 @@ type CreateOutpostResolverInput struct {
 	// This member is required.
 	OutpostArn *string
 
-	// The Amazon EC2 instance type. If you specify this, you must also specify a
+	//  The Amazon EC2 instance type. If you specify this, you must also specify a
 	// value for the OutpostArn .
 	//
 	// This member is required.
@@ -59,7 +59,7 @@ type CreateOutpostResolverInput struct {
 	// minimal value is 4.
 	InstanceCount *int32
 
-	// A string that helps identify the Route 53 Resolvers on Outpost.
+	//  A string that helps identify the Route 53 Resolvers on Outpost.
 	Tags []types.Tag
 
 	noSmithyDocumentSerde
@@ -99,25 +99,25 @@ func (c *Client) addOperationCreateOutpostResolverMiddlewares(stack *middleware.
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -132,13 +132,16 @@ func (c *Client) addOperationCreateOutpostResolverMiddlewares(stack *middleware.
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpCreateOutpostResolverValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateOutpostResolver(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

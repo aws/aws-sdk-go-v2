@@ -6,15 +6,14 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/fms/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Returns information about the specified account's administrative scope. The
-// admistrative scope defines the resources that an Firewall Manager administrator
-// can manage.
+// administrative scope defines the resources that an Firewall Manager
+// administrator can manage.
 func (c *Client) GetAdminScope(ctx context.Context, params *GetAdminScopeInput, optFns ...func(*Options)) (*GetAdminScopeOutput, error) {
 	if params == nil {
 		params = &GetAdminScopeInput{}
@@ -32,7 +31,7 @@ func (c *Client) GetAdminScope(ctx context.Context, params *GetAdminScopeInput, 
 
 type GetAdminScopeInput struct {
 
-	// The administator account that you want to get the details for.
+	// The administrator account that you want to get the details for.
 	//
 	// This member is required.
 	AdminAccount *string
@@ -46,14 +45,18 @@ type GetAdminScopeOutput struct {
 	AdminScope *types.AdminScope
 
 	// The current status of the request to onboard a member account as an Firewall
-	// Manager administator.
+	// Manager administrator.
+	//
 	//   - ONBOARDING - The account is onboarding to Firewall Manager as an
 	//   administrator.
+	//
 	//   - ONBOARDING_COMPLETE - Firewall Manager The account is onboarded to Firewall
 	//   Manager as an administrator, and can perform actions on the resources defined in
-	//   their AdminScope .
+	//   their AdminScope.
+	//
 	//   - OFFBOARDING - The account is being removed as an Firewall Manager
 	//   administrator.
+	//
 	//   - OFFBOARDING_COMPLETE - The account has been removed as an Firewall Manager
 	//   administrator.
 	Status types.OrganizationStatus
@@ -86,25 +89,25 @@ func (c *Client) addOperationGetAdminScopeMiddlewares(stack *middleware.Stack, o
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -119,13 +122,16 @@ func (c *Client) addOperationGetAdminScopeMiddlewares(stack *middleware.Stack, o
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpGetAdminScopeValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetAdminScope(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

@@ -409,8 +409,9 @@ func (e *ServiceException) ErrorCode() string {
 func (e *ServiceException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
 // You have exceeded the number of permitted resources or operations for this
-// service. For service quotas, see EC2 Image Builder endpoints and quotas (https://docs.aws.amazon.com/general/latest/gr/imagebuilder.html#limits_imagebuilder)
-// .
+// service. For service quotas, see [EC2 Image Builder endpoints and quotas].
+//
+// [EC2 Image Builder endpoints and quotas]: https://docs.aws.amazon.com/general/latest/gr/imagebuilder.html#limits_imagebuilder
 type ServiceQuotaExceededException struct {
 	Message *string
 

@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/computeoptimizer/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -31,28 +30,31 @@ func (c *Client) GetECSServiceRecommendationProjectedMetrics(ctx context.Context
 
 type GetECSServiceRecommendationProjectedMetricsInput struct {
 
-	// The timestamp of the last projected metrics data point to return.
+	//  The timestamp of the last projected metrics data point to return.
 	//
 	// This member is required.
 	EndTime *time.Time
 
-	// The granularity, in seconds, of the projected metrics data points.
+	//  The granularity, in seconds, of the projected metrics data points.
 	//
 	// This member is required.
 	Period int32
 
-	// The ARN that identifies the Amazon ECS service. The following is the format of
-	// the ARN: arn:aws:ecs:region:aws_account_id:service/cluster-name/service-name
+	//  The ARN that identifies the Amazon ECS service.
+	//
+	// The following is the format of the ARN:
+	//
+	//     arn:aws:ecs:region:aws_account_id:service/cluster-name/service-name
 	//
 	// This member is required.
 	ServiceArn *string
 
-	// The timestamp of the first projected metrics data point to return.
+	//  The timestamp of the first projected metrics data point to return.
 	//
 	// This member is required.
 	StartTime *time.Time
 
-	// The statistic of the projected metrics.
+	//  The statistic of the projected metrics.
 	//
 	// This member is required.
 	Stat types.MetricStatistic
@@ -62,7 +64,7 @@ type GetECSServiceRecommendationProjectedMetricsInput struct {
 
 type GetECSServiceRecommendationProjectedMetricsOutput struct {
 
-	// An array of objects that describes the projected metrics.
+	//  An array of objects that describes the projected metrics.
 	RecommendedOptionProjectedMetrics []types.ECSServiceRecommendedOptionProjectedMetric
 
 	// Metadata pertaining to the operation's result.
@@ -93,25 +95,25 @@ func (c *Client) addOperationGetECSServiceRecommendationProjectedMetricsMiddlewa
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -126,13 +128,16 @@ func (c *Client) addOperationGetECSServiceRecommendationProjectedMetricsMiddlewa
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpGetECSServiceRecommendationProjectedMetricsValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetECSServiceRecommendationProjectedMetrics(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -15,8 +14,9 @@ import (
 // Creates a SageMaker HyperPod cluster. SageMaker HyperPod is a capability of
 // SageMaker for creating and managing persistent clusters for developing large
 // machine learning models, such as large language models (LLMs) and diffusion
-// models. To learn more, see Amazon SageMaker HyperPod (https://docs.aws.amazon.com/sagemaker/latest/dg/sagemaker-hyperpod.html)
-// in the Amazon SageMaker Developer Guide.
+// models. To learn more, see [Amazon SageMaker HyperPod]in the Amazon SageMaker Developer Guide.
+//
+// [Amazon SageMaker HyperPod]: https://docs.aws.amazon.com/sagemaker/latest/dg/sagemaker-hyperpod.html
 func (c *Client) CreateCluster(ctx context.Context, params *CreateClusterInput, optFns ...func(*Options)) (*CreateClusterOutput, error) {
 	if params == nil {
 		params = &CreateClusterInput{}
@@ -47,16 +47,16 @@ type CreateClusterInput struct {
 	// Custom tags for managing the SageMaker HyperPod cluster as an Amazon Web
 	// Services resource. You can add tags to your cluster in the same way you add them
 	// in other Amazon Web Services services that support tagging. To learn more about
-	// tagging Amazon Web Services resources in general, see Tagging Amazon Web
-	// Services Resources User Guide (https://docs.aws.amazon.com/tag-editor/latest/userguide/tagging.html)
-	// .
+	// tagging Amazon Web Services resources in general, see [Tagging Amazon Web Services Resources User Guide].
+	//
+	// [Tagging Amazon Web Services Resources User Guide]: https://docs.aws.amazon.com/tag-editor/latest/userguide/tagging.html
 	Tags []types.Tag
 
 	// Specifies an Amazon Virtual Private Cloud (VPC) that your SageMaker jobs,
 	// hosted models, and compute resources have access to. You can control access to
-	// and from your resources by configuring a VPC. For more information, see Give
-	// SageMaker Access to Resources in your Amazon VPC (https://docs.aws.amazon.com/sagemaker/latest/dg/infrastructure-give-access.html)
-	// .
+	// and from your resources by configuring a VPC. For more information, see [Give SageMaker Access to Resources in your Amazon VPC].
+	//
+	// [Give SageMaker Access to Resources in your Amazon VPC]: https://docs.aws.amazon.com/sagemaker/latest/dg/infrastructure-give-access.html
 	VpcConfig *types.VpcConfig
 
 	noSmithyDocumentSerde
@@ -97,25 +97,25 @@ func (c *Client) addOperationCreateClusterMiddlewares(stack *middleware.Stack, o
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -130,13 +130,16 @@ func (c *Client) addOperationCreateClusterMiddlewares(stack *middleware.Stack, o
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpCreateClusterValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateCluster(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

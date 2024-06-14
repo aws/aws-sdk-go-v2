@@ -6,22 +6,24 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/lookoutequipment/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
-// Creates a machine learning model for data inference. A machine-learning (ML)
-// model is a mathematical model that finds patterns in your data. In Amazon
-// Lookout for Equipment, the model learns the patterns of normal behavior and
-// detects abnormal behavior that could be potential equipment failure (or
-// maintenance events). The models are made by analyzing normal data and
-// abnormalities in machine behavior that have already occurred. Your model is
-// trained using a portion of the data from your dataset and uses that data to
-// learn patterns of normal behavior and abnormal patterns that lead to equipment
-// failure. Another portion of the data is used to evaluate the model's accuracy.
+// Creates a machine learning model for data inference.
+//
+// A machine-learning (ML) model is a mathematical model that finds patterns in
+// your data. In Amazon Lookout for Equipment, the model learns the patterns of
+// normal behavior and detects abnormal behavior that could be potential equipment
+// failure (or maintenance events). The models are made by analyzing normal data
+// and abnormalities in machine behavior that have already occurred.
+//
+// Your model is trained using a portion of the data from your dataset and uses
+// that data to learn patterns of normal behavior and abnormal patterns that lead
+// to equipment failure. Another portion of the data is used to evaluate the
+// model's accuracy.
 func (c *Client) CreateModel(ctx context.Context, params *CreateModelInput, optFns ...func(*Options)) (*CreateModelOutput, error) {
 	if params == nil {
 		params = &CreateModelInput{}
@@ -59,16 +61,17 @@ type CreateModelInput struct {
 	// data after post processing by Amazon Lookout for Equipment. For example, if you
 	// provide data that has been collected at a 1 second level and you want the system
 	// to resample the data at a 1 minute rate before training, the TargetSamplingRate
-	// is 1 minute. When providing a value for the TargetSamplingRate , you must attach
-	// the prefix "PT" to the rate you want. The value for a 1 second rate is therefore
-	// PT1S, the value for a 15 minute rate is PT15M, and the value for a 1 hour rate
-	// is PT1H
+	// is 1 minute.
+	//
+	// When providing a value for the TargetSamplingRate , you must attach the prefix
+	// "PT" to the rate you want. The value for a 1 second rate is therefore PT1S, the
+	// value for a 15 minute rate is PT15M, and the value for a 1 hour rate is PT1H
 	DataPreProcessingConfiguration *types.DataPreProcessingConfiguration
 
 	// The data schema for the machine learning model being created.
 	DatasetSchema *types.DatasetSchema
 
-	// Indicates the time reference in the dataset that should be used to end the
+	//  Indicates the time reference in the dataset that should be used to end the
 	// subset of evaluation data for the machine learning model.
 	EvaluationDataEndTime *time.Time
 
@@ -80,12 +83,18 @@ type CreateModelInput struct {
 	// model that's being created.
 	LabelsInputConfiguration *types.LabelsInputConfiguration
 
+	// The Amazon S3 location where you want Amazon Lookout for Equipment to save the
+	// pointwise model diagnostics.
+	//
+	// You must also specify the RoleArn request parameter.
+	ModelDiagnosticsOutputConfiguration *types.ModelDiagnosticsOutputConfiguration
+
 	// Indicates that the asset associated with this sensor has been shut off. As long
 	// as this condition is met, Lookout for Equipment will not use data from this
 	// asset for training, evaluation, or inference.
 	OffCondition *string
 
-	// The Amazon Resource Name (ARN) of a role with permission to access the data
+	//  The Amazon Resource Name (ARN) of a role with permission to access the data
 	// source being used to create the machine learning model.
 	RoleArn *string
 
@@ -93,7 +102,7 @@ type CreateModelInput struct {
 	// Lookout for Equipment.
 	ServerSideKmsKeyId *string
 
-	// Any tags associated with the machine learning model being created.
+	//  Any tags associated with the machine learning model being created.
 	Tags []types.Tag
 
 	// Indicates the time reference in the dataset that should be used to end the
@@ -143,25 +152,25 @@ func (c *Client) addOperationCreateModelMiddlewares(stack *middleware.Stack, opt
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -176,6 +185,9 @@ func (c *Client) addOperationCreateModelMiddlewares(stack *middleware.Stack, opt
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opCreateModelMiddleware(stack, options); err != nil {
 		return err
 	}
@@ -185,7 +197,7 @@ func (c *Client) addOperationCreateModelMiddlewares(stack *middleware.Stack, opt
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateModel(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

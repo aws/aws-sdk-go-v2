@@ -6,19 +6,21 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/pinpointsmsvoicev2/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Describes the specified origination phone number, or all the phone numbers in
-// your account. If you specify phone number IDs, the output includes information
-// for only the specified phone numbers. If you specify filters, the output
-// includes information for only those phone numbers that meet the filter criteria.
-// If you don't specify phone number IDs or filters, the output includes
-// information for all phone numbers. If you specify a phone number ID that isn't
-// valid, an error is returned.
+// your account.
+//
+// If you specify phone number IDs, the output includes information for only the
+// specified phone numbers. If you specify filters, the output includes information
+// for only those phone numbers that meet the filter criteria. If you don't specify
+// phone number IDs or filters, the output includes information for all phone
+// numbers.
+//
+// If you specify a phone number ID that isn't valid, an error is returned.
 func (c *Client) DescribePhoneNumbers(ctx context.Context, params *DescribePhoneNumbersInput, optFns ...func(*Options)) (*DescribePhoneNumbersOutput, error) {
 	if params == nil {
 		params = &DescribePhoneNumbersInput{}
@@ -91,25 +93,25 @@ func (c *Client) addOperationDescribePhoneNumbersMiddlewares(stack *middleware.S
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -124,13 +126,16 @@ func (c *Client) addOperationDescribePhoneNumbersMiddlewares(stack *middleware.S
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDescribePhoneNumbersValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribePhoneNumbers(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

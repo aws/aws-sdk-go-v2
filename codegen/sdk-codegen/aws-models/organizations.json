@@ -599,6 +599,57 @@
                                         {
                                             "conditions": [
                                                 {
+                                                    "fn": "stringEquals",
+                                                    "argv": [
+                                                        {
+                                                            "fn": "getAttr",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "PartitionResult"
+                                                                },
+                                                                "name"
+                                                            ]
+                                                        },
+                                                        "aws-iso"
+                                                    ]
+                                                },
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "UseFIPS"
+                                                        },
+                                                        false
+                                                    ]
+                                                },
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "UseDualStack"
+                                                        },
+                                                        false
+                                                    ]
+                                                }
+                                            ],
+                                            "endpoint": {
+                                                "url": "https://organizations.us-iso-east-1.c2s.ic.gov",
+                                                "properties": {
+                                                    "authSchemes": [
+                                                        {
+                                                            "name": "sigv4",
+                                                            "signingName": "organizations",
+                                                            "signingRegion": "us-iso-east-1"
+                                                        }
+                                                    ]
+                                                },
+                                                "headers": {}
+                                            },
+                                            "type": "endpoint"
+                                        },
+                                        {
+                                            "conditions": [
+                                                {
                                                     "fn": "booleanEquals",
                                                     "argv": [
                                                         {
@@ -1112,6 +1163,28 @@
                             }
                         },
                         {
+                            "documentation": "For region aws-iso-global with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "properties": {
+                                        "authSchemes": [
+                                            {
+                                                "name": "sigv4",
+                                                "signingName": "organizations",
+                                                "signingRegion": "us-iso-east-1"
+                                            }
+                                        ]
+                                    },
+                                    "url": "https://organizations.us-iso-east-1.c2s.ic.gov"
+                                }
+                            },
+                            "params": {
+                                "Region": "aws-iso-global",
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
                             "documentation": "For region us-iso-east-1 with FIPS enabled and DualStack enabled",
                             "expect": {
                                 "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
@@ -1150,6 +1223,15 @@
                             "documentation": "For region us-iso-east-1 with FIPS disabled and DualStack disabled",
                             "expect": {
                                 "endpoint": {
+                                    "properties": {
+                                        "authSchemes": [
+                                            {
+                                                "name": "sigv4",
+                                                "signingName": "organizations",
+                                                "signingRegion": "us-iso-east-1"
+                                            }
+                                        ]
+                                    },
                                     "url": "https://organizations.us-iso-east-1.c2s.ic.gov"
                                 }
                             },
@@ -7479,7 +7561,7 @@
                 "Id": {
                     "target": "com.amazonaws.organizations#OrganizationalUnitId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The unique identifier (ID) associated with this OU.</p>\n         <p>The <a href=\"http://wikipedia.org/wiki/regex\">regex pattern</a> for an organizational unit ID string requires \n    \"ou-\" followed by from 4 to 32 lowercase letters or digits (the ID of the root that contains the \n    OU). This string is followed by a second \"-\" dash and from 8 to 32 additional lowercase letters \n    or digits.</p>"
+                        "smithy.api#documentation": "<p>The unique identifier (ID) associated with this OU. The ID is unique to the organization only.</p>\n         <p>The <a href=\"http://wikipedia.org/wiki/regex\">regex pattern</a> for an organizational unit ID string requires \n    \"ou-\" followed by from 4 to 32 lowercase letters or digits (the ID of the root that contains the \n    OU). This string is followed by a second \"-\" dash and from 8 to 32 additional lowercase letters \n    or digits.</p>"
                     }
                 },
                 "Arn": {
@@ -7671,8 +7753,7 @@
             "type": "string",
             "traits": {
                 "smithy.api#length": {
-                    "min": 1,
-                    "max": 1000000
+                    "min": 1
                 },
                 "smithy.api#pattern": "^[\\s\\S]*$"
             }
@@ -8255,7 +8336,7 @@
                 "Id": {
                     "target": "com.amazonaws.organizations#RootId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The unique identifier (ID) for the root.</p>\n         <p>The <a href=\"http://wikipedia.org/wiki/regex\">regex pattern</a> for a root ID string requires \"r-\" followed by \n    from 4 to 32 lowercase letters or digits.</p>"
+                        "smithy.api#documentation": "<p>The unique identifier (ID) for the root. The ID is unique to the organization only.</p>\n         <p>The <a href=\"http://wikipedia.org/wiki/regex\">regex pattern</a> for a root ID string requires \"r-\" followed by \n    from 4 to 32 lowercase letters or digits.</p>"
                     }
                 },
                 "Arn": {

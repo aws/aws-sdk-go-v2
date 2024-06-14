@@ -6,19 +6,24 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/rekognition/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// This operation applies only to Amazon Rekognition Custom Labels. Starts the
-// running of the version of a model. Starting a model takes a while to complete.
-// To check the current state of the model, use DescribeProjectVersions . Once the
-// model is running, you can detect custom labels in new images by calling
-// DetectCustomLabels . You are charged for the amount of time that the model is
-// running. To stop a running model, call StopProjectVersion . This operation
-// requires permissions to perform the rekognition:StartProjectVersion action.
+// This operation applies only to Amazon Rekognition Custom Labels.
+//
+// Starts the running of the version of a model. Starting a model takes a while to
+// complete. To check the current state of the model, use DescribeProjectVersions.
+//
+// Once the model is running, you can detect custom labels in new images by
+// calling DetectCustomLabels.
+//
+// You are charged for the amount of time that the model is running. To stop a
+// running model, call StopProjectVersion.
+//
+// This operation requires permissions to perform the
+// rekognition:StartProjectVersion action.
 func (c *Client) StartProjectVersion(ctx context.Context, params *StartProjectVersionInput, optFns ...func(*Options)) (*StartProjectVersionOutput, error) {
 	if params == nil {
 		params = &StartProjectVersionInput{}
@@ -37,9 +42,10 @@ func (c *Client) StartProjectVersion(ctx context.Context, params *StartProjectVe
 type StartProjectVersionInput struct {
 
 	// The minimum number of inference units to use. A single inference unit
-	// represents 1 hour of processing. Use a higher number to increase the TPS
-	// throughput of your model. You are charged for the number of inference units that
-	// you use.
+	// represents 1 hour of processing.
+	//
+	// Use a higher number to increase the TPS throughput of your model. You are
+	// charged for the number of inference units that you use.
 	//
 	// This member is required.
 	MinInferenceUnits *int32
@@ -90,25 +96,25 @@ func (c *Client) addOperationStartProjectVersionMiddlewares(stack *middleware.St
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -123,13 +129,16 @@ func (c *Client) addOperationStartProjectVersionMiddlewares(stack *middleware.St
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpStartProjectVersionValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opStartProjectVersion(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

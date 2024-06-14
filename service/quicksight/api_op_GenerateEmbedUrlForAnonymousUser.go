@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/quicksight/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -15,21 +14,29 @@ import (
 // Generates an embed URL that you can use to embed an Amazon QuickSight dashboard
 // or visual in your website, without having to register any reader users. Before
 // you use this action, make sure that you have configured the dashboards and
-// permissions. The following rules apply to the generated URL:
+// permissions.
+//
+// The following rules apply to the generated URL:
+//
 //   - It contains a temporary bearer token. It is valid for 5 minutes after it is
 //     generated. Once redeemed within this period, it cannot be re-used again.
+//
 //   - The URL validity period should not be confused with the actual session
-//     lifetime that can be customized using the SessionLifetimeInMinutes (https://docs.aws.amazon.com/quicksight/latest/APIReference/API_GenerateEmbedUrlForAnonymousUser.html#QS-GenerateEmbedUrlForAnonymousUser-request-SessionLifetimeInMinutes)
-//     parameter. The resulting user session is valid for 15 minutes (minimum) to 10
-//     hours (maximum). The default session duration is 10 hours.
+//     lifetime that can be customized using the [SessionLifetimeInMinutes]parameter. The resulting user
+//     session is valid for 15 minutes (minimum) to 10 hours (maximum). The default
+//     session duration is 10 hours.
+//
 //   - You are charged only when the URL is used or there is interaction with
 //     Amazon QuickSight.
 //
-// For more information, see Embedded Analytics (https://docs.aws.amazon.com/quicksight/latest/user/embedded-analytics.html)
-// in the Amazon QuickSight User Guide. For more information about the high-level
-// steps for embedding and for an interactive demo of the ways you can customize
-// embedding, visit the Amazon QuickSight Developer Portal (https://docs.aws.amazon.com/quicksight/latest/user/quicksight-dev-portal.html)
-// .
+// For more information, see [Embedded Analytics] in the Amazon QuickSight User Guide.
+//
+// For more information about the high-level steps for embedding and for an
+// interactive demo of the ways you can customize embedding, visit the [Amazon QuickSight Developer Portal].
+//
+// [Embedded Analytics]: https://docs.aws.amazon.com/quicksight/latest/user/embedded-analytics.html
+// [Amazon QuickSight Developer Portal]: https://docs.aws.amazon.com/quicksight/latest/user/quicksight-dev-portal.html
+// [SessionLifetimeInMinutes]: https://docs.aws.amazon.com/quicksight/latest/APIReference/API_GenerateEmbedUrlForAnonymousUser.html#QS-GenerateEmbedUrlForAnonymousUser-request-SessionLifetimeInMinutes
 func (c *Client) GenerateEmbedUrlForAnonymousUser(ctx context.Context, params *GenerateEmbedUrlForAnonymousUserInput, optFns ...func(*Options)) (*GenerateEmbedUrlForAnonymousUserOutput, error) {
 	if params == nil {
 		params = &GenerateEmbedUrlForAnonymousUserInput{}
@@ -48,10 +55,15 @@ func (c *Client) GenerateEmbedUrlForAnonymousUser(ctx context.Context, params *G
 type GenerateEmbedUrlForAnonymousUserInput struct {
 
 	// The Amazon Resource Names (ARNs) for the Amazon QuickSight resources that the
-	// user is authorized to access during the lifetime of the session. If you choose
-	// Dashboard embedding experience, pass the list of dashboard ARNs in the account
-	// that you want the user to be able to view. Currently, you can pass up to 25
-	// dashboard ARNs in each API call.
+	// user is authorized to access during the lifetime of the session.
+	//
+	// If you choose Dashboard embedding experience, pass the list of dashboard ARNs
+	// in the account that you want the user to be able to view.
+	//
+	// If you want to make changes to the theme of your embedded content, pass a list
+	// of theme ARNs that the anonymous users need access to.
+	//
+	// Currently, you can pass up to 25 theme ARNs in each API call.
 	//
 	// This member is required.
 	AuthorizedResourceArns []string
@@ -77,9 +89,11 @@ type GenerateEmbedUrlForAnonymousUserInput struct {
 	// URL that is then embedded. This optional parameter overrides the static domains
 	// that are configured in the Manage QuickSight menu in the Amazon QuickSight
 	// console. Instead, it allows only the domains that you include in this parameter.
-	// You can list up to three domains or subdomains in each API call. To include all
-	// subdomains under a specific domain to the allow list, use * . For example,
-	// https://*.sapp.amazon.com includes all subdomains under https://sapp.amazon.com .
+	// You can list up to three domains or subdomains in each API call.
+	//
+	// To include all subdomains under a specific domain to the allow list, use * . For
+	// example, https://*.sapp.amazon.com includes all subdomains under
+	// https://sapp.amazon.com .
 	AllowedDomains []string
 
 	// How many minutes the session is valid. The session lifetime must be in [15-600]
@@ -89,10 +103,12 @@ type GenerateEmbedUrlForAnonymousUserInput struct {
 	// The session tags used for row-level security. Before you use this parameter,
 	// make sure that you have configured the relevant datasets using the
 	// DataSet$RowLevelPermissionTagConfiguration parameter so that session tags can be
-	// used to provide row-level security. These are not the tags used for the Amazon
-	// Web Services resource tagging feature. For more information, see Using
-	// Row-Level Security (RLS) with Tags (https://docs.aws.amazon.com/quicksight/latest/user/quicksight-dev-rls-tags.html)
-	// in the Amazon QuickSight User Guide.
+	// used to provide row-level security.
+	//
+	// These are not the tags used for the Amazon Web Services resource tagging
+	// feature. For more information, see [Using Row-Level Security (RLS) with Tags]in the Amazon QuickSight User Guide.
+	//
+	// [Using Row-Level Security (RLS) with Tags]: https://docs.aws.amazon.com/quicksight/latest/user/quicksight-dev-rls-tags.html
 	SessionTags []types.SessionTag
 
 	noSmithyDocumentSerde
@@ -148,25 +164,25 @@ func (c *Client) addOperationGenerateEmbedUrlForAnonymousUserMiddlewares(stack *
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -181,13 +197,16 @@ func (c *Client) addOperationGenerateEmbedUrlForAnonymousUserMiddlewares(stack *
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpGenerateEmbedUrlForAnonymousUserValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGenerateEmbedUrlForAnonymousUser(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

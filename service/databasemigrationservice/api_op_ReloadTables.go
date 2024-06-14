@@ -6,15 +6,15 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/databasemigrationservice/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Reloads the target database table with the source data. You can only use this
-// operation with a task in the RUNNING state, otherwise the service will throw an
-// InvalidResourceStateFault exception.
+// Reloads the target database table with the source data.
+//
+// You can only use this operation with a task in the RUNNING state, otherwise the
+// service will throw an InvalidResourceStateFault exception.
 func (c *Client) ReloadTables(ctx context.Context, params *ReloadTablesInput, optFns ...func(*Options)) (*ReloadTablesOutput, error) {
 	if params == nil {
 		params = &ReloadTablesInput{}
@@ -44,8 +44,11 @@ type ReloadTablesInput struct {
 
 	// Options for reload. Specify data-reload to reload the data and re-validate it
 	// if validation is enabled. Specify validate-only to re-validate the table. This
-	// option applies only when validation is enabled for the task. Valid values:
-	// data-reload, validate-only Default value is data-reload.
+	// option applies only when validation is enabled for the task.
+	//
+	// Valid values: data-reload, validate-only
+	//
+	// Default value is data-reload.
 	ReloadOption types.ReloadOptionValue
 
 	noSmithyDocumentSerde
@@ -84,25 +87,25 @@ func (c *Client) addOperationReloadTablesMiddlewares(stack *middleware.Stack, op
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -117,13 +120,16 @@ func (c *Client) addOperationReloadTablesMiddlewares(stack *middleware.Stack, op
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpReloadTablesValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opReloadTables(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

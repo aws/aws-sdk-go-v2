@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/sesv2/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -55,14 +54,15 @@ type PutAccountDetailsInput struct {
 	ContactLanguage types.ContactLanguage
 
 	// Indicates whether or not your account should have production access in the
-	// current Amazon Web Services Region. If the value is false , then your account is
-	// in the sandbox. When your account is in the sandbox, you can only send email to
-	// verified identities. Additionally, the maximum number of emails you can send in
-	// a 24-hour period (your sending quota) is 200, and the maximum number of emails
-	// you can send per second (your maximum sending rate) is 1. If the value is true ,
-	// then your account has production access. When your account has production
-	// access, you can send email to any address. The sending quota and maximum sending
-	// rate for your account vary based on your specific use case.
+	// current Amazon Web Services Region.
+	//
+	// If the value is false , then your account is in the sandbox. When your account
+	// is in the sandbox, you can only send email to verified identities.
+	//
+	// If the value is true , then your account has production access. When your
+	// account has production access, you can send email to any address. The sending
+	// quota and maximum sending rate for your account vary based on your specific use
+	// case.
 	ProductionAccessEnabled *bool
 
 	noSmithyDocumentSerde
@@ -99,25 +99,25 @@ func (c *Client) addOperationPutAccountDetailsMiddlewares(stack *middleware.Stac
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -132,13 +132,16 @@ func (c *Client) addOperationPutAccountDetailsMiddlewares(stack *middleware.Stac
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpPutAccountDetailsValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opPutAccountDetails(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

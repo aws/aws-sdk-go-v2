@@ -6,13 +6,12 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockagent/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Gets an Action Group for existing Amazon Bedrock Agent Version
+// Gets information about an action group for an agent.
 func (c *Client) GetAgentActionGroup(ctx context.Context, params *GetAgentActionGroupInput, optFns ...func(*Options)) (*GetAgentActionGroupOutput, error) {
 	if params == nil {
 		params = &GetAgentActionGroupInput{}
@@ -28,20 +27,19 @@ func (c *Client) GetAgentActionGroup(ctx context.Context, params *GetAgentAction
 	return out, nil
 }
 
-// Get Action Group Request
 type GetAgentActionGroupInput struct {
 
-	// Id generated at the server side when an Agent Action Group is created
+	// The unique identifier of the action group for which to get information.
 	//
 	// This member is required.
 	ActionGroupId *string
 
-	// Id generated at the server side when an Agent is created
+	// The unique identifier of the agent that the action group belongs to.
 	//
 	// This member is required.
 	AgentId *string
 
-	// Version number generated when a version is created
+	// The version of the agent that the action group belongs to.
 	//
 	// This member is required.
 	AgentVersion *string
@@ -49,10 +47,9 @@ type GetAgentActionGroupInput struct {
 	noSmithyDocumentSerde
 }
 
-// Get Action Group Response
 type GetAgentActionGroupOutput struct {
 
-	// Contains the information of an Agent Action Group
+	// Contains details about the action group.
 	//
 	// This member is required.
 	AgentActionGroup *types.AgentActionGroup
@@ -85,25 +82,25 @@ func (c *Client) addOperationGetAgentActionGroupMiddlewares(stack *middleware.St
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -118,13 +115,16 @@ func (c *Client) addOperationGetAgentActionGroupMiddlewares(stack *middleware.St
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpGetAgentActionGroupValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetAgentActionGroup(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

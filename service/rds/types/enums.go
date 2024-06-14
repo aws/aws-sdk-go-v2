@@ -11,8 +11,9 @@ const (
 )
 
 // Values returns all known values for ActivityStreamMode. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ActivityStreamMode) Values() []ActivityStreamMode {
 	return []ActivityStreamMode{
 		"sync",
@@ -32,6 +33,7 @@ const (
 
 // Values returns all known values for ActivityStreamPolicyStatus. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (ActivityStreamPolicyStatus) Values() []ActivityStreamPolicyStatus {
 	return []ActivityStreamPolicyStatus{
@@ -53,8 +55,9 @@ const (
 )
 
 // Values returns all known values for ActivityStreamStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ActivityStreamStatus) Values() []ActivityStreamStatus {
 	return []ActivityStreamStatus{
 		"stopped",
@@ -73,8 +76,9 @@ const (
 )
 
 // Values returns all known values for ApplyMethod. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ApplyMethod) Values() []ApplyMethod {
 	return []ApplyMethod{
 		"immediate",
@@ -91,8 +95,9 @@ const (
 )
 
 // Values returns all known values for AuditPolicyState. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (AuditPolicyState) Values() []AuditPolicyState {
 	return []AuditPolicyState{
 		"locked",
@@ -108,8 +113,9 @@ const (
 )
 
 // Values returns all known values for AuthScheme. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (AuthScheme) Values() []AuthScheme {
 	return []AuthScheme{
 		"SECRETS",
@@ -125,8 +131,9 @@ const (
 )
 
 // Values returns all known values for AutomationMode. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (AutomationMode) Values() []AutomationMode {
 	return []AutomationMode{
 		"full",
@@ -145,8 +152,9 @@ const (
 )
 
 // Values returns all known values for ClientPasswordAuthType. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ClientPasswordAuthType) Values() []ClientPasswordAuthType {
 	return []ClientPasswordAuthType{
 		"MYSQL_NATIVE_PASSWORD",
@@ -167,6 +175,7 @@ const (
 
 // Values returns all known values for CustomEngineVersionStatus. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (CustomEngineVersionStatus) Values() []CustomEngineVersionStatus {
 	return []CustomEngineVersionStatus{
@@ -189,8 +198,9 @@ const (
 )
 
 // Values returns all known values for DBProxyEndpointStatus. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (DBProxyEndpointStatus) Values() []DBProxyEndpointStatus {
 	return []DBProxyEndpointStatus{
 		"available",
@@ -212,6 +222,7 @@ const (
 
 // Values returns all known values for DBProxyEndpointTargetRole. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (DBProxyEndpointTargetRole) Values() []DBProxyEndpointTargetRole {
 	return []DBProxyEndpointTargetRole{
@@ -236,8 +247,9 @@ const (
 )
 
 // Values returns all known values for DBProxyStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (DBProxyStatus) Values() []DBProxyStatus {
 	return []DBProxyStatus{
 		"available",
@@ -262,8 +274,9 @@ const (
 )
 
 // Values returns all known values for EngineFamily. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (EngineFamily) Values() []EngineFamily {
 	return []EngineFamily{
 		"MYSQL",
@@ -281,8 +294,9 @@ const (
 )
 
 // Values returns all known values for ExportSourceType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ExportSourceType) Values() []ExportSourceType {
 	return []ExportSourceType{
 		"SNAPSHOT",
@@ -300,8 +314,9 @@ const (
 )
 
 // Values returns all known values for FailoverStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (FailoverStatus) Values() []FailoverStatus {
 	return []FailoverStatus{
 		"pending",
@@ -320,8 +335,9 @@ const (
 
 // Values returns all known values for GlobalClusterMemberSynchronizationStatus.
 // Note that this can be expanded in the future, and so it is only as up to date as
-// the client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (GlobalClusterMemberSynchronizationStatus) Values() []GlobalClusterMemberSynchronizationStatus {
 	return []GlobalClusterMemberSynchronizationStatus{
 		"connected",
@@ -339,8 +355,9 @@ const (
 )
 
 // Values returns all known values for IAMAuthMode. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (IAMAuthMode) Values() []IAMAuthMode {
 	return []IAMAuthMode{
 		"DISABLED",
@@ -363,8 +380,9 @@ const (
 )
 
 // Values returns all known values for IntegrationStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (IntegrationStatus) Values() []IntegrationStatus {
 	return []IntegrationStatus{
 		"creating",
@@ -392,8 +410,9 @@ const (
 )
 
 // Values returns all known values for LimitlessDatabaseStatus. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (LimitlessDatabaseStatus) Values() []LimitlessDatabaseStatus {
 	return []LimitlessDatabaseStatus{
 		"active",
@@ -420,6 +439,7 @@ const (
 
 // Values returns all known values for LocalWriteForwardingStatus. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (LocalWriteForwardingStatus) Values() []LocalWriteForwardingStatus {
 	return []LocalWriteForwardingStatus{
@@ -440,8 +460,9 @@ const (
 )
 
 // Values returns all known values for ReplicaMode. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ReplicaMode) Values() []ReplicaMode {
 	return []ReplicaMode{
 		"open-read-only",
@@ -465,8 +486,9 @@ const (
 )
 
 // Values returns all known values for SourceType. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (SourceType) Values() []SourceType {
 	return []SourceType{
 		"db-instance",
@@ -493,8 +515,9 @@ const (
 )
 
 // Values returns all known values for TargetHealthReason. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (TargetHealthReason) Values() []TargetHealthReason {
 	return []TargetHealthReason{
 		"UNREACHABLE",
@@ -515,8 +538,9 @@ const (
 )
 
 // Values returns all known values for TargetRole. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (TargetRole) Values() []TargetRole {
 	return []TargetRole{
 		"READ_WRITE",
@@ -535,8 +559,9 @@ const (
 )
 
 // Values returns all known values for TargetState. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (TargetState) Values() []TargetState {
 	return []TargetState{
 		"REGISTERING",
@@ -555,8 +580,9 @@ const (
 )
 
 // Values returns all known values for TargetType. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (TargetType) Values() []TargetType {
 	return []TargetType{
 		"RDS_INSTANCE",
@@ -577,8 +603,9 @@ const (
 )
 
 // Values returns all known values for WriteForwardingStatus. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (WriteForwardingStatus) Values() []WriteForwardingStatus {
 	return []WriteForwardingStatus{
 		"enabled",

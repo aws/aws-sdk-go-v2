@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/budgets/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -35,12 +34,12 @@ type UpdateBudgetActionInput struct {
 	// This member is required.
 	AccountId *string
 
-	// A system-generated universally unique identifier (UUID) for the action.
+	//  A system-generated universally unique identifier (UUID) for the action.
 	//
 	// This member is required.
 	ActionId *string
 
-	// A string that represents the budget name. The ":" and "\" characters, and the
+	//  A string that represents the budget name. The ":" and "\" characters, and the
 	// "/action/" substring, aren't allowed.
 	//
 	// This member is required.
@@ -49,20 +48,20 @@ type UpdateBudgetActionInput struct {
 	// The trigger threshold of the action.
 	ActionThreshold *types.ActionThreshold
 
-	// This specifies if the action needs manual or automatic approval.
+	//  This specifies if the action needs manual or automatic approval.
 	ApprovalModel types.ApprovalModel
 
 	// Specifies all of the type-specific parameters.
 	Definition *types.Definition
 
-	// The role passed for action execution and reversion. Roles and actions must be
+	//  The role passed for action execution and reversion. Roles and actions must be
 	// in the same account.
 	ExecutionRoleArn *string
 
-	// The type of a notification. It must be ACTUAL or FORECASTED.
+	//  The type of a notification. It must be ACTUAL or FORECASTED.
 	NotificationType types.NotificationType
 
-	// A list of subscribers.
+	//  A list of subscribers.
 	Subscribers []types.Subscriber
 
 	noSmithyDocumentSerde
@@ -75,18 +74,18 @@ type UpdateBudgetActionOutput struct {
 	// This member is required.
 	AccountId *string
 
-	// A string that represents the budget name. The ":" and "\" characters, and the
+	//  A string that represents the budget name. The ":" and "\" characters, and the
 	// "/action/" substring, aren't allowed.
 	//
 	// This member is required.
 	BudgetName *string
 
-	// The updated action resource information.
+	//  The updated action resource information.
 	//
 	// This member is required.
 	NewAction *types.Action
 
-	// The previous action resource information.
+	//  The previous action resource information.
 	//
 	// This member is required.
 	OldAction *types.Action
@@ -119,25 +118,25 @@ func (c *Client) addOperationUpdateBudgetActionMiddlewares(stack *middleware.Sta
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -152,13 +151,16 @@ func (c *Client) addOperationUpdateBudgetActionMiddlewares(stack *middleware.Sta
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpUpdateBudgetActionValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateBudgetAction(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

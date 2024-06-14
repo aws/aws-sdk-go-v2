@@ -6,19 +6,22 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Deletes an association between a configuration set and a custom domain for open
-// and click event tracking. By default, images and links used for tracking open
-// and click events are hosted on domains operated by Amazon SES. You can configure
-// a subdomain of your own to handle these events. For information about using
-// custom domains, see the Amazon SES Developer Guide (https://docs.aws.amazon.com/ses/latest/dg/configure-custom-open-click-domains.html)
-// . Deleting this kind of association results in emails sent using the specified
+// and click event tracking.
+//
+// By default, images and links used for tracking open and click events are hosted
+// on domains operated by Amazon SES. You can configure a subdomain of your own to
+// handle these events. For information about using custom domains, see the [Amazon SES Developer Guide].
+//
+// Deleting this kind of association results in emails sent using the specified
 // configuration set to capture open and click events using the standard, Amazon
 // SES-operated domains.
+//
+// [Amazon SES Developer Guide]: https://docs.aws.amazon.com/ses/latest/dg/configure-custom-open-click-domains.html
 func (c *Client) DeleteConfigurationSetTrackingOptions(ctx context.Context, params *DeleteConfigurationSetTrackingOptionsInput, optFns ...func(*Options)) (*DeleteConfigurationSetTrackingOptionsOutput, error) {
 	if params == nil {
 		params = &DeleteConfigurationSetTrackingOptionsInput{}
@@ -76,25 +79,25 @@ func (c *Client) addOperationDeleteConfigurationSetTrackingOptionsMiddlewares(st
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -109,13 +112,16 @@ func (c *Client) addOperationDeleteConfigurationSetTrackingOptionsMiddlewares(st
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDeleteConfigurationSetTrackingOptionsValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteConfigurationSetTrackingOptions(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

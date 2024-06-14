@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/appflow/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -14,8 +13,10 @@ import (
 
 // Updates a custom connector that you've previously registered. This operation
 // updates the connector with one of the following:
+//
 //   - The latest version of the AWS Lambda function that's assigned to the
 //     connector
+//
 //   - A new AWS Lambda function that you specify
 func (c *Client) UpdateConnectorRegistration(ctx context.Context, params *UpdateConnectorRegistrationInput, optFns ...func(*Options)) (*UpdateConnectorRegistrationOutput, error) {
 	if params == nil {
@@ -43,13 +44,16 @@ type UpdateConnectorRegistrationInput struct {
 	// The clientToken parameter is an idempotency token. It ensures that your
 	// UpdateConnectorRegistration request completes only once. You choose the value to
 	// pass. For example, if you don't receive a response from your request, you can
-	// safely retry the request with the same clientToken parameter value. If you omit
-	// a clientToken value, the Amazon Web Services SDK that you are using inserts a
-	// value for you. This way, the SDK can safely retry requests multiple times after
-	// a network error. You must provide your own value for other use cases. If you
-	// specify input parameters that differ from your first request, an error occurs.
-	// If you use a different value for clientToken , Amazon AppFlow considers it a new
-	// call to UpdateConnectorRegistration . The token is active for 8 hours.
+	// safely retry the request with the same clientToken parameter value.
+	//
+	// If you omit a clientToken value, the Amazon Web Services SDK that you are using
+	// inserts a value for you. This way, the SDK can safely retry requests multiple
+	// times after a network error. You must provide your own value for other use
+	// cases.
+	//
+	// If you specify input parameters that differ from your first request, an error
+	// occurs. If you use a different value for clientToken , Amazon AppFlow considers
+	// it a new call to UpdateConnectorRegistration . The token is active for 8 hours.
 	ClientToken *string
 
 	// Contains information about the configuration of the connector being registered.
@@ -94,25 +98,25 @@ func (c *Client) addOperationUpdateConnectorRegistrationMiddlewares(stack *middl
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -127,6 +131,9 @@ func (c *Client) addOperationUpdateConnectorRegistrationMiddlewares(stack *middl
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opUpdateConnectorRegistrationMiddleware(stack, options); err != nil {
 		return err
 	}
@@ -136,7 +143,7 @@ func (c *Client) addOperationUpdateConnectorRegistrationMiddlewares(stack *middl
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateConnectorRegistration(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

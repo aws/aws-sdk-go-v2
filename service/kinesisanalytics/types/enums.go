@@ -15,8 +15,9 @@ const (
 )
 
 // Values returns all known values for ApplicationStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ApplicationStatus) Values() []ApplicationStatus {
 	return []ApplicationStatus{
 		"DELETING",
@@ -38,8 +39,9 @@ const (
 )
 
 // Values returns all known values for InputStartingPosition. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (InputStartingPosition) Values() []InputStartingPosition {
 	return []InputStartingPosition{
 		"NOW",
@@ -57,8 +59,9 @@ const (
 )
 
 // Values returns all known values for RecordFormatType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (RecordFormatType) Values() []RecordFormatType {
 	return []RecordFormatType{
 		"JSON",

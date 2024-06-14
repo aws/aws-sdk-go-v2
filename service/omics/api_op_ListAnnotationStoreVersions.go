@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/omics/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -30,19 +29,19 @@ func (c *Client) ListAnnotationStoreVersions(ctx context.Context, params *ListAn
 
 type ListAnnotationStoreVersionsInput struct {
 
-	// The name of an annotation store.
+	//  The name of an annotation store.
 	//
 	// This member is required.
 	Name *string
 
-	// A filter to apply to the list of annotation store versions.
+	//  A filter to apply to the list of annotation store versions.
 	Filter *types.ListAnnotationStoreVersionsFilter
 
-	// The maximum number of annotation store versions to return in one page of
+	//  The maximum number of annotation store versions to return in one page of
 	// results.
 	MaxResults *int32
 
-	// Specifies the pagination token from a previous request to retrieve the next
+	//  Specifies the pagination token from a previous request to retrieve the next
 	// page of results.
 	NextToken *string
 
@@ -51,10 +50,10 @@ type ListAnnotationStoreVersionsInput struct {
 
 type ListAnnotationStoreVersionsOutput struct {
 
-	// Lists all versions of an annotation store.
+	//  Lists all versions of an annotation store.
 	AnnotationStoreVersions []types.AnnotationStoreVersionItem
 
-	// Specifies the pagination token from a previous request to retrieve the next
+	//  Specifies the pagination token from a previous request to retrieve the next
 	// page of results.
 	NextToken *string
 
@@ -86,25 +85,25 @@ func (c *Client) addOperationListAnnotationStoreVersionsMiddlewares(stack *middl
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -119,6 +118,9 @@ func (c *Client) addOperationListAnnotationStoreVersionsMiddlewares(stack *middl
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addEndpointPrefix_opListAnnotationStoreVersionsMiddleware(stack); err != nil {
 		return err
 	}
@@ -128,7 +130,7 @@ func (c *Client) addOperationListAnnotationStoreVersionsMiddlewares(stack *middl
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListAnnotationStoreVersions(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -184,7 +186,7 @@ var _ ListAnnotationStoreVersionsAPIClient = (*Client)(nil)
 // ListAnnotationStoreVersionsPaginatorOptions is the paginator options for
 // ListAnnotationStoreVersions
 type ListAnnotationStoreVersionsPaginatorOptions struct {
-	// The maximum number of annotation store versions to return in one page of
+	//  The maximum number of annotation store versions to return in one page of
 	// results.
 	Limit int32
 

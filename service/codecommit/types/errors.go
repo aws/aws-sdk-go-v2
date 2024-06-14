@@ -452,7 +452,9 @@ func (e *BranchDoesNotExistException) ErrorCode() string {
 func (e *BranchDoesNotExistException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // Cannot create the branch with the specified name because the commit conflicts
-// with an existing branch with the same name. Branch names must be unique.
+// with an existing branch with the same name.
+//
+// Branch names must be unique.
 type BranchNameExistsException struct {
 	Message *string
 
@@ -479,8 +481,7 @@ func (e *BranchNameExistsException) ErrorCode() string {
 func (e *BranchNameExistsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The specified branch name is not valid because it is a tag name. Enter the name
-// of a branch in the repository. For a list of valid branch names, use
-// ListBranches .
+// of a branch in the repository. For a list of valid branch names, use ListBranches.
 type BranchNameIsTagNameException struct {
 	Message *string
 
@@ -1510,8 +1511,9 @@ func (e *FilePathConflictsWithSubmodulePathException) ErrorFault() smithy.ErrorF
 }
 
 // The specified file exceeds the file size limit for CodeCommit. For more
-// information about limits in CodeCommit, see Quotas (https://docs.aws.amazon.com/codecommit/latest/userguide/limits.html)
-// in the CodeCommit User Guide.
+// information about limits in CodeCommit, see [Quotas]in the CodeCommit User Guide.
+//
+// [Quotas]: https://docs.aws.amazon.com/codecommit/latest/userguide/limits.html
 type FileTooLargeException struct {
 	Message *string
 
@@ -1736,8 +1738,9 @@ func (e *InvalidApprovalRuleTemplateContentException) ErrorFault() smithy.ErrorF
 
 // The description for the approval rule template is not valid because it exceeds
 // the maximum characters allowed for a description. For more information about
-// limits in CodeCommit, see Quotas (https://docs.aws.amazon.com/codecommit/latest/userguide/limits.html)
-// in the CodeCommit User Guide.
+// limits in CodeCommit, see [Quotas]in the CodeCommit User Guide.
+//
+// [Quotas]: https://docs.aws.amazon.com/codecommit/latest/userguide/limits.html
 type InvalidApprovalRuleTemplateDescriptionException struct {
 	Message *string
 
@@ -1767,8 +1770,9 @@ func (e *InvalidApprovalRuleTemplateDescriptionException) ErrorFault() smithy.Er
 
 // The name of the approval rule template is not valid. Template names must be
 // between 1 and 100 valid characters in length. For more information about limits
-// in CodeCommit, see Quotas (https://docs.aws.amazon.com/codecommit/latest/userguide/limits.html)
-// in the CodeCommit User Guide.
+// in CodeCommit, see [Quotas]in the CodeCommit User Guide.
+//
+// [Quotas]: https://docs.aws.amazon.com/codecommit/latest/userguide/limits.html
 type InvalidApprovalRuleTemplateNameException struct {
 	Message *string
 
@@ -2257,7 +2261,7 @@ func (e *InvalidFileLocationException) ErrorCode() string {
 func (e *InvalidFileLocationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The specified file mode permission is not valid. For a list of valid file mode
-// permissions, see PutFile .
+// permissions, see PutFile.
 type InvalidFileModeException struct {
 	Message *string
 
@@ -2657,9 +2661,9 @@ func (e *InvalidReactionUserArnException) ErrorCode() string {
 }
 func (e *InvalidReactionUserArnException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The value of the reaction is not valid. For more information, see the
-// CodeCommit User Guide (https://docs.aws.amazon.com/codecommit/latest/userguide/welcome.html)
-// .
+// The value of the reaction is not valid. For more information, see the [CodeCommit User Guide].
+//
+// [CodeCommit User Guide]: https://docs.aws.amazon.com/codecommit/latest/userguide/welcome.html
 type InvalidReactionValueException struct {
 	Message *string
 
@@ -2687,8 +2691,9 @@ func (e *InvalidReactionValueException) ErrorFault() smithy.ErrorFault { return 
 
 // The specified reference name format is not valid. Reference names must conform
 // to the Git references format (for example, refs/heads/main). For more
-// information, see Git Internals - Git References (https://git-scm.com/book/en/v2/Git-Internals-Git-References)
-// or consult your Git documentation.
+// information, see [Git Internals - Git References]or consult your Git documentation.
+//
+// [Git Internals - Git References]: https://git-scm.com/book/en/v2/Git-Internals-Git-References
 type InvalidReferenceNameException struct {
 	Message *string
 
@@ -2827,9 +2832,11 @@ func (e *InvalidRepositoryDescriptionException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
 
-// A specified repository name is not valid. This exception occurs only when a
-// specified repository name is not valid. Other exceptions occur when a required
-// repository parameter is missing, or when a specified repository does not exist.
+// A specified repository name is not valid.
+//
+// This exception occurs only when a specified repository name is not valid. Other
+// exceptions occur when a required repository parameter is missing, or when a
+// specified repository does not exist.
 type InvalidRepositoryNameException struct {
 	Message *string
 
@@ -3029,8 +3036,9 @@ func (e *InvalidRepositoryTriggerRegionException) ErrorFault() smithy.ErrorFault
 }
 
 // The value for the resource ARN is not valid. For more information about
-// resources in CodeCommit, see CodeCommit Resources and Operations (https://docs.aws.amazon.com/codecommit/latest/userguide/auth-and-access-control-iam-access-control-identity-based.html#arn-formats)
-// in the CodeCommit User Guide.
+// resources in CodeCommit, see [CodeCommit Resources and Operations]in the CodeCommit User Guide.
+//
+// [CodeCommit Resources and Operations]: https://docs.aws.amazon.com/codecommit/latest/userguide/auth-and-access-control-iam-access-control-identity-based.html#arn-formats
 type InvalidResourceArnException struct {
 	Message *string
 
@@ -3941,7 +3949,7 @@ func (e *ParentCommitDoesNotExistException) ErrorFault() smithy.ErrorFault { ret
 
 // The file could not be added because the provided parent commit ID is not the
 // current tip of the specified branch. To view the full commit ID of the current
-// head of the branch, use GetBranch .
+// head of the branch, use GetBranch.
 type ParentCommitIdOutdatedException struct {
 	Message *string
 
@@ -3968,7 +3976,7 @@ func (e *ParentCommitIdOutdatedException) ErrorCode() string {
 func (e *ParentCommitIdOutdatedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // A parent commit ID is required. To view the full commit ID of a branch in a
-// repository, use GetBranch or a Git command (for example, git pull or git log).
+// repository, use GetBranchor a Git command (for example, git pull or git log).
 type ParentCommitIdRequiredException struct {
 	Message *string
 
@@ -4729,8 +4737,9 @@ func (e *RepositoryTriggersListRequiredException) ErrorFault() smithy.ErrorFault
 }
 
 // A valid Amazon Resource Name (ARN) for an CodeCommit resource is required. For
-// a list of valid resources in CodeCommit, see CodeCommit Resources and Operations (https://docs.aws.amazon.com/codecommit/latest/userguide/auth-and-access-control-iam-access-control-identity-based.html#arn-formats)
-// in the CodeCommit User Guide.
+// a list of valid resources in CodeCommit, see [CodeCommit Resources and Operations]in the CodeCommit User Guide.
+//
+// [CodeCommit Resources and Operations]: https://docs.aws.amazon.com/codecommit/latest/userguide/auth-and-access-control-iam-access-control-identity-based.html#arn-formats
 type ResourceArnRequiredException struct {
 	Message *string
 

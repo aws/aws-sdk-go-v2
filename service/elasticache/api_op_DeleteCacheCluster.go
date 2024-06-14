@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/elasticache/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -15,14 +14,22 @@ import (
 // Deletes a previously provisioned cluster. DeleteCacheCluster deletes all
 // associated cache nodes, node endpoints and the cluster itself. When you receive
 // a successful response from this operation, Amazon ElastiCache immediately begins
-// deleting the cluster; you cannot cancel or revert this operation. This operation
-// is not valid for:
+// deleting the cluster; you cannot cancel or revert this operation.
+//
+// This operation is not valid for:
+//
 //   - Redis (cluster mode enabled) clusters
+//
 //   - Redis (cluster mode disabled) clusters
+//
 //   - A cluster that is the last read replica of a replication group
+//
 //   - A cluster that is the primary node of a replication group
+//
 //   - A node group (shard) that has Multi-AZ mode enabled
+//
 //   - A cluster from a Redis (cluster mode enabled) replication group
+//
 //   - A cluster that is not in the available state
 func (c *Client) DeleteCacheCluster(ctx context.Context, params *DeleteCacheClusterInput, optFns ...func(*Options)) (*DeleteCacheClusterOutput, error) {
 	if params == nil {
@@ -89,25 +96,25 @@ func (c *Client) addOperationDeleteCacheClusterMiddlewares(stack *middleware.Sta
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -122,13 +129,16 @@ func (c *Client) addOperationDeleteCacheClusterMiddlewares(stack *middleware.Sta
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDeleteCacheClusterValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteCacheCluster(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

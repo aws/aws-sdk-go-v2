@@ -102,9 +102,10 @@ type Cluster struct {
 	ClusterArn *string
 
 	// Endpoints for a cluster. Specify one of these endpoints when you want to set or
-	// retrieve a routing control state in the cluster. To get or update the routing
-	// control state, see the Amazon Route 53 Application Recovery Controller Routing
-	// Control Actions.
+	// retrieve a routing control state in the cluster.
+	//
+	// To get or update the routing control state, see the Amazon Route 53 Application
+	// Recovery Controller Routing Control Actions.
 	ClusterEndpoints []ClusterEndpoint
 
 	// The name of the cluster.
@@ -125,9 +126,10 @@ type Cluster struct {
 type ClusterEndpoint struct {
 
 	// A cluster endpoint. Specify an endpoint and Amazon Web Services Region when you
-	// want to set or retrieve a routing control state in the cluster. To get or update
-	// the routing control state, see the Amazon Route 53 Application Recovery
-	// Controller Routing Control Actions.
+	// want to set or retrieve a routing control state in the cluster.
+	//
+	// To get or update the routing control state, see the Amazon Route 53 Application
+	// Recovery Controller Routing Control Actions.
 	Endpoint *string
 
 	// The Amazon Web Services Region for a cluster endpoint.
@@ -172,12 +174,14 @@ type ControlPanel struct {
 
 // A gating rule verifies that a gating routing control or set of gating routing
 // controls, evaluates as true, based on a rule configuration that you specify,
-// which allows a set of routing control state changes to complete. For example, if
-// you specify one gating routing control and you set the Type in the rule
-// configuration to OR, that indicates that you must set the gating routing control
-// to On for the rule to evaluate as true; that is, for the gating control "switch"
-// to be "On". When you do that, then you can update the routing control states for
-// the target routing controls that you specify in the gating rule.
+// which allows a set of routing control state changes to complete.
+//
+// For example, if you specify one gating routing control and you set the Type in
+// the rule configuration to OR, that indicates that you must set the gating
+// routing control to On for the rule to evaluate as true; that is, for the gating
+// control "switch" to be "On". When you do that, then you can update the routing
+// control states for the target routing controls that you specify in the gating
+// rule.
 type GatingRule struct {
 
 	// The Amazon Resource Name (ARN) of the control panel.
@@ -338,9 +342,11 @@ type NewGatingRule struct {
 	// three gating controls, one for each of three Amazon Web Services Regions. Now
 	// you specify ATLEAST 2 as your RuleConfig. With these settings, you can only
 	// change (set or unset) the routing controls that you have specified as
-	// TargetControls if that rule evaluates to true. In other words, your ability to
-	// change the routing controls that you have specified as TargetControls is gated
-	// by the rule that you set for the routing controls in GatingControls.
+	// TargetControls if that rule evaluates to true.
+	//
+	// In other words, your ability to change the routing controls that you have
+	// specified as TargetControls is gated by the rule that you set for the routing
+	// controls in GatingControls.
 	//
 	// This member is required.
 	TargetControls []string
@@ -393,12 +399,14 @@ type Rule struct {
 
 	// A gating rule verifies that a gating routing control or set of gating routing
 	// controls, evaluates as true, based on a rule configuration that you specify,
-	// which allows a set of routing control state changes to complete. For example, if
-	// you specify one gating routing control and you set the Type in the rule
-	// configuration to OR, that indicates that you must set the gating routing control
-	// to On for the rule to evaluate as true; that is, for the gating control "switch"
-	// to be "On". When you do that, then you can update the routing control states for
-	// the target routing controls that you specify in the gating rule.
+	// which allows a set of routing control state changes to complete.
+	//
+	// For example, if you specify one gating routing control and you set the Type in
+	// the rule configuration to OR, that indicates that you must set the gating
+	// routing control to On for the rule to evaluate as true; that is, for the gating
+	// control "switch" to be "On". When you do that, then you can update the routing
+	// control states for the target routing controls that you specify in the gating
+	// rule.
 	GATING *GatingRule
 
 	noSmithyDocumentSerde

@@ -6,20 +6,21 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/connect/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates the identity information for the specified user. We strongly recommend
-// limiting who has the ability to invoke UpdateUserIdentityInfo . Someone with
-// that ability can change the login credentials of other users by changing their
-// email address. This poses a security risk to your organization. They can change
-// the email address of a user to the attacker's email address, and then reset the
-// password through email. For more information, see Best Practices for Security
-// Profiles (https://docs.aws.amazon.com/connect/latest/adminguide/security-profile-best-practices.html)
-// in the Amazon Connect Administrator Guide.
+// Updates the identity information for the specified user.
+//
+// We strongly recommend limiting who has the ability to invoke
+// UpdateUserIdentityInfo . Someone with that ability can change the login
+// credentials of other users by changing their email address. This poses a
+// security risk to your organization. They can change the email address of a user
+// to the attacker's email address, and then reset the password through email. For
+// more information, see [Best Practices for Security Profiles]in the Amazon Connect Administrator Guide.
+//
+// [Best Practices for Security Profiles]: https://docs.aws.amazon.com/connect/latest/adminguide/security-profile-best-practices.html
 func (c *Client) UpdateUserIdentityInfo(ctx context.Context, params *UpdateUserIdentityInfoInput, optFns ...func(*Options)) (*UpdateUserIdentityInfoOutput, error) {
 	if params == nil {
 		params = &UpdateUserIdentityInfoInput{}
@@ -42,8 +43,10 @@ type UpdateUserIdentityInfoInput struct {
 	// This member is required.
 	IdentityInfo *types.UserIdentityInfo
 
-	// The identifier of the Amazon Connect instance. You can find the instance ID (https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html)
-	// in the Amazon Resource Name (ARN) of the instance.
+	// The identifier of the Amazon Connect instance. You can [find the instance ID] in the Amazon Resource
+	// Name (ARN) of the instance.
+	//
+	// [find the instance ID]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
 	//
 	// This member is required.
 	InstanceId *string
@@ -85,25 +88,25 @@ func (c *Client) addOperationUpdateUserIdentityInfoMiddlewares(stack *middleware
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -118,13 +121,16 @@ func (c *Client) addOperationUpdateUserIdentityInfoMiddlewares(stack *middleware
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpUpdateUserIdentityInfoValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateUserIdentityInfo(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

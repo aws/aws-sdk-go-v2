@@ -6,17 +6,19 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/connectparticipant/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Provides a pre-signed Amazon S3 URL in response for uploading the file directly
-// to S3. ConnectionToken is used for invoking this API instead of ParticipantToken
-// . The Amazon Connect Participant Service APIs do not use Signature Version 4
-// authentication (https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html)
-// .
+// to S3.
+//
+// ConnectionToken is used for invoking this API instead of ParticipantToken .
+//
+// The Amazon Connect Participant Service APIs do not use [Signature Version 4 authentication].
+//
+// [Signature Version 4 authentication]: https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html
 func (c *Client) StartAttachmentUpload(ctx context.Context, params *StartAttachmentUploadInput, optFns ...func(*Options)) (*StartAttachmentUploadOutput, error) {
 	if params == nil {
 		params = &StartAttachmentUploadInput{}
@@ -46,9 +48,9 @@ type StartAttachmentUploadInput struct {
 
 	// A unique, case-sensitive identifier that you provide to ensure the idempotency
 	// of the request. If not provided, the Amazon Web Services SDK populates this
-	// field. For more information about idempotency, see Making retries safe with
-	// idempotent APIs (https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/)
-	// .
+	// field. For more information about idempotency, see [Making retries safe with idempotent APIs].
+	//
+	// [Making retries safe with idempotent APIs]: https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/
 	//
 	// This member is required.
 	ClientToken *string
@@ -59,8 +61,9 @@ type StartAttachmentUploadInput struct {
 	ConnectionToken *string
 
 	// Describes the MIME file type of the attachment. For a list of supported file
-	// types, see Feature specifications (https://docs.aws.amazon.com/connect/latest/adminguide/feature-limits.html)
-	// in the Amazon Connect Administrator Guide.
+	// types, see [Feature specifications]in the Amazon Connect Administrator Guide.
+	//
+	// [Feature specifications]: https://docs.aws.amazon.com/connect/latest/adminguide/feature-limits.html
 	//
 	// This member is required.
 	ContentType *string
@@ -104,25 +107,25 @@ func (c *Client) addOperationStartAttachmentUploadMiddlewares(stack *middleware.
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -137,6 +140,9 @@ func (c *Client) addOperationStartAttachmentUploadMiddlewares(stack *middleware.
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opStartAttachmentUploadMiddleware(stack, options); err != nil {
 		return err
 	}
@@ -146,7 +152,7 @@ func (c *Client) addOperationStartAttachmentUploadMiddlewares(stack *middleware.
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opStartAttachmentUpload(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

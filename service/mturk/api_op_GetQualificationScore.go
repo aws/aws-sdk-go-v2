@@ -6,17 +6,21 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/mturk/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// The GetQualificationScore operation returns the value of a Worker's
-// Qualification for a given Qualification type. To get a Worker's Qualification,
-// you must know the Worker's ID. The Worker's ID is included in the assignment
-// data returned by the ListAssignmentsForHIT operation. Only the owner of a
-// Qualification type can query the value of a Worker's Qualification of that type.
+//	The GetQualificationScore operation returns the value of a Worker's
+//
+// Qualification for a given Qualification type.
+//
+// To get a Worker's Qualification, you must know the Worker's ID. The Worker's ID
+// is included in the assignment data returned by the ListAssignmentsForHIT
+// operation.
+//
+// Only the owner of a Qualification type can query the value of a Worker's
+// Qualification of that type.
 func (c *Client) GetQualificationScore(ctx context.Context, params *GetQualificationScoreInput, optFns ...func(*Options)) (*GetQualificationScoreOutput, error) {
 	if params == nil {
 		params = &GetQualificationScoreInput{}
@@ -49,7 +53,7 @@ type GetQualificationScoreInput struct {
 
 type GetQualificationScoreOutput struct {
 
-	// The Qualification data structure of the Qualification assigned to a user,
+	//  The Qualification data structure of the Qualification assigned to a user,
 	// including the Qualification type and the value (score).
 	Qualification *types.Qualification
 
@@ -81,25 +85,25 @@ func (c *Client) addOperationGetQualificationScoreMiddlewares(stack *middleware.
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -114,13 +118,16 @@ func (c *Client) addOperationGetQualificationScoreMiddlewares(stack *middleware.
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpGetQualificationScoreValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetQualificationScore(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

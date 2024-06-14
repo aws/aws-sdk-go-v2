@@ -6,14 +6,15 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/qconnect/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates Amazon Q content. Before to calling this API, use StartContentUpload (https://docs.aws.amazon.com/amazon-q-connect/latest/APIReference/API_StartContentUpload.html)
-// to upload an asset.
+// Creates Amazon Q in Connect content. Before to calling this API, use [StartContentUpload] to upload
+// an asset.
+//
+// [StartContentUpload]: https://docs.aws.amazon.com/amazon-q-connect/latest/APIReference/API_StartContentUpload.html
 func (c *Client) CreateContent(ctx context.Context, params *CreateContentInput, optFns ...func(*Options)) (*CreateContentOutput, error) {
 	if params == nil {
 		params = &CreateContentInput{}
@@ -32,37 +33,38 @@ func (c *Client) CreateContent(ctx context.Context, params *CreateContentInput, 
 type CreateContentInput struct {
 
 	// The identifier of the knowledge base. This should not be a QUICK_RESPONSES type
-	// knowledge base if you're storing Amazon Q Content resource to it. Can be either
-	// the ID or the ARN. URLs cannot contain the ARN.
+	// knowledge base. Can be either the ID or the ARN. URLs cannot contain the ARN.
 	//
 	// This member is required.
 	KnowledgeBaseId *string
 
 	// The name of the content. Each piece of content in a knowledge base must have a
 	// unique name. You can retrieve a piece of content using only its knowledge base
-	// and its name with the SearchContent (https://docs.aws.amazon.com/amazon-q-connect/latest/APIReference/API_SearchContent.html)
-	// API.
+	// and its name with the [SearchContent]API.
+	//
+	// [SearchContent]: https://docs.aws.amazon.com/amazon-q-connect/latest/APIReference/API_SearchContent.html
 	//
 	// This member is required.
 	Name *string
 
-	// A pointer to the uploaded asset. This value is returned by StartContentUpload (https://docs.aws.amazon.com/amazon-q-connect/latest/APIReference/API_StartContentUpload.html)
-	// .
+	// A pointer to the uploaded asset. This value is returned by [StartContentUpload].
+	//
+	// [StartContentUpload]: https://docs.aws.amazon.com/amazon-q-connect/latest/APIReference/API_StartContentUpload.html
 	//
 	// This member is required.
 	UploadId *string
 
 	// A unique, case-sensitive identifier that you provide to ensure the idempotency
 	// of the request. If not provided, the Amazon Web Services SDK populates this
-	// field. For more information about idempotency, see Making retries safe with
-	// idempotent APIs (https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/)
-	// .
+	// field. For more information about idempotency, see [Making retries safe with idempotent APIs].
+	//
+	// [Making retries safe with idempotent APIs]: https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/
 	ClientToken *string
 
 	// A key/value map to store attributes without affecting tagging or
 	// recommendations. For example, when synchronizing data between an external system
-	// and Amazon Q, you can store an external version identifier as metadata to
-	// utilize for determining drift.
+	// and Amazon Q in Connect, you can store an external version identifier as
+	// metadata to utilize for determining drift.
 	Metadata map[string]string
 
 	// The URI you want to use for the article. If the knowledge base has a
@@ -111,25 +113,25 @@ func (c *Client) addOperationCreateContentMiddlewares(stack *middleware.Stack, o
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -144,6 +146,9 @@ func (c *Client) addOperationCreateContentMiddlewares(stack *middleware.Stack, o
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opCreateContentMiddleware(stack, options); err != nil {
 		return err
 	}
@@ -153,7 +158,7 @@ func (c *Client) addOperationCreateContentMiddlewares(stack *middleware.Stack, o
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateContent(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

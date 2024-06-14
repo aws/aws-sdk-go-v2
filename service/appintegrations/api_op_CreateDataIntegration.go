@@ -6,16 +6,16 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/appintegrations/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates and persists a DataIntegration resource. You cannot create a
-// DataIntegration association for a DataIntegration that has been previously
-// associated. Use a different DataIntegration, or recreate the DataIntegration
-// using the CreateDataIntegration API.
+// Creates and persists a DataIntegration resource.
+//
+// You cannot create a DataIntegration association for a DataIntegration that has
+// been previously associated. Use a different DataIntegration, or recreate the
+// DataIntegration using the CreateDataIntegration API.
 func (c *Client) CreateDataIntegration(ctx context.Context, params *CreateDataIntegrationInput, optFns ...func(*Options)) (*CreateDataIntegrationOutput, error) {
 	if params == nil {
 		params = &CreateDataIntegrationInput{}
@@ -50,9 +50,9 @@ type CreateDataIntegrationInput struct {
 
 	// A unique, case-sensitive identifier that you provide to ensure the idempotency
 	// of the request. If not provided, the Amazon Web Services SDK populates this
-	// field. For more information about idempotency, see Making retries safe with
-	// idempotent APIs (https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/)
-	// .
+	// field. For more information about idempotency, see [Making retries safe with idempotent APIs].
+	//
+	// [Making retries safe with idempotent APIs]: https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/
 	ClientToken *string
 
 	// A description of the DataIntegration.
@@ -81,9 +81,9 @@ type CreateDataIntegrationOutput struct {
 
 	// A unique, case-sensitive identifier that you provide to ensure the idempotency
 	// of the request. If not provided, the Amazon Web Services SDK populates this
-	// field. For more information about idempotency, see Making retries safe with
-	// idempotent APIs (https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/)
-	// .
+	// field. For more information about idempotency, see [Making retries safe with idempotent APIs].
+	//
+	// [Making retries safe with idempotent APIs]: https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/
 	ClientToken *string
 
 	// A description of the DataIntegration.
@@ -142,25 +142,25 @@ func (c *Client) addOperationCreateDataIntegrationMiddlewares(stack *middleware.
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -175,6 +175,9 @@ func (c *Client) addOperationCreateDataIntegrationMiddlewares(stack *middleware.
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opCreateDataIntegrationMiddleware(stack, options); err != nil {
 		return err
 	}
@@ -184,7 +187,7 @@ func (c *Client) addOperationCreateDataIntegrationMiddlewares(stack *middleware.
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateDataIntegration(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

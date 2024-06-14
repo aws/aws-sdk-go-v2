@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/health/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -14,12 +13,17 @@ import (
 
 // Returns a list of accounts in the organization from Organizations that are
 // affected by the provided event. For more information about the different types
-// of Health events, see Event (https://docs.aws.amazon.com/health/latest/APIReference/API_Event.html)
-// . Before you can call this operation, you must first enable Health to work with
-// Organizations. To do this, call the EnableHealthServiceAccessForOrganization (https://docs.aws.amazon.com/health/latest/APIReference/API_EnableHealthServiceAccessForOrganization.html)
-// operation from your organization's management account. This API operation uses
-// pagination. Specify the nextToken parameter in the next request to return more
-// results.
+// of Health events, see [Event].
+//
+// Before you can call this operation, you must first enable Health to work with
+// Organizations. To do this, call the [EnableHealthServiceAccessForOrganization]operation from your organization's
+// management account.
+//
+// This API operation uses pagination. Specify the nextToken parameter in the next
+// request to return more results.
+//
+// [Event]: https://docs.aws.amazon.com/health/latest/APIReference/API_Event.html
+// [EnableHealthServiceAccessForOrganization]: https://docs.aws.amazon.com/health/latest/APIReference/API_EnableHealthServiceAccessForOrganization.html
 func (c *Client) DescribeAffectedAccountsForOrganization(ctx context.Context, params *DescribeAffectedAccountsForOrganizationInput, optFns ...func(*Options)) (*DescribeAffectedAccountsForOrganizationOutput, error) {
 	if params == nil {
 		params = &DescribeAffectedAccountsForOrganizationInput{}
@@ -39,8 +43,11 @@ type DescribeAffectedAccountsForOrganizationInput struct {
 
 	// The unique identifier for the event. The event ARN has the
 	// arn:aws:health:event-region::event/SERVICE/EVENT_TYPE_CODE/EVENT_TYPE_PLUS_ID
-	// format. For example, an event ARN might look like the following:
-	// arn:aws:health:us-east-1::event/EC2/EC2_INSTANCE_RETIREMENT_SCHEDULED/EC2_INSTANCE_RETIREMENT_SCHEDULED_ABC123-DEF456
+	// format.
+	//
+	// For example, an event ARN might look like the following:
+	//
+	//     arn:aws:health:us-east-1::event/EC2/EC2_INSTANCE_RETIREMENT_SCHEDULED/EC2_INSTANCE_RETIREMENT_SCHEDULED_ABC123-DEF456
 	//
 	// This member is required.
 	EventArn *string
@@ -66,13 +73,16 @@ type DescribeAffectedAccountsForOrganizationOutput struct {
 
 	// This parameter specifies if the Health event is a public Amazon Web Service
 	// event or an account-specific event.
+	//
 	//   - If the eventScopeCode value is PUBLIC , then the affectedAccounts value is
 	//   always empty.
+	//
 	//   - If the eventScopeCode value is ACCOUNT_SPECIFIC , then the affectedAccounts
 	//   value lists the affected Amazon Web Services accounts in your organization. For
 	//   example, if an event affects a service such as Amazon Elastic Compute Cloud and
 	//   you have Amazon Web Services accounts that use that service, those account IDs
 	//   appear in the response.
+	//
 	//   - If the eventScopeCode value is NONE , then the eventArn that you specified
 	//   in the request is invalid or doesn't exist.
 	EventScopeCode types.EventScopeCode
@@ -112,25 +122,25 @@ func (c *Client) addOperationDescribeAffectedAccountsForOrganizationMiddlewares(
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -145,13 +155,16 @@ func (c *Client) addOperationDescribeAffectedAccountsForOrganizationMiddlewares(
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDescribeAffectedAccountsForOrganizationValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeAffectedAccountsForOrganization(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

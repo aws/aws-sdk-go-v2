@@ -168,9 +168,10 @@ func (e *InvalidArgsException) ErrorCode() string {
 func (e *InvalidArgsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // Your account is not authorized to use the EC2 Serial Console. To authorize your
-// account, run the EnableSerialConsoleAccess API. For more information, see
-// EnableSerialConsoleAccess (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_EnableSerialConsoleAccess.html)
-// in the Amazon EC2 API Reference.
+// account, run the EnableSerialConsoleAccess API. For more information, see [EnableSerialConsoleAccess]in
+// the Amazon EC2 API Reference.
+//
+// [EnableSerialConsoleAccess]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_EnableSerialConsoleAccess.html
 type SerialConsoleAccessDisabledException struct {
 	Message *string
 
@@ -253,6 +254,35 @@ func (e *SerialConsoleSessionUnavailableException) ErrorCode() string {
 }
 func (e *SerialConsoleSessionUnavailableException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultServer
+}
+
+// Your instance's BIOS version is unsupported for serial console connection.
+// Reboot your instance to update its BIOS, and then try again to connect.
+type SerialConsoleSessionUnsupportedException struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *SerialConsoleSessionUnsupportedException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *SerialConsoleSessionUnsupportedException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *SerialConsoleSessionUnsupportedException) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "SerialConsoleSessionUnsupportedException"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *SerialConsoleSessionUnsupportedException) ErrorFault() smithy.ErrorFault {
+	return smithy.FaultClient
 }
 
 // The service encountered an error. Follow the instructions in the error message

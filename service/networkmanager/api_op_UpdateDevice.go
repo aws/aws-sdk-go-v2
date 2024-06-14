@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/networkmanager/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -45,16 +44,22 @@ type UpdateDeviceInput struct {
 	// on-premises device, you can omit this parameter.
 	AWSLocation *types.AWSLocation
 
-	// A description of the device. Constraints: Maximum length of 256 characters.
+	// A description of the device.
+	//
+	// Constraints: Maximum length of 256 characters.
 	Description *string
 
 	// Describes a location.
 	Location *types.Location
 
-	// The model of the device. Constraints: Maximum length of 128 characters.
+	// The model of the device.
+	//
+	// Constraints: Maximum length of 128 characters.
 	Model *string
 
-	// The serial number of the device. Constraints: Maximum length of 128 characters.
+	// The serial number of the device.
+	//
+	// Constraints: Maximum length of 128 characters.
 	SerialNumber *string
 
 	// The ID of the site.
@@ -63,7 +68,9 @@ type UpdateDeviceInput struct {
 	// The type of the device.
 	Type *string
 
-	// The vendor of the device. Constraints: Maximum length of 128 characters.
+	// The vendor of the device.
+	//
+	// Constraints: Maximum length of 128 characters.
 	Vendor *string
 
 	noSmithyDocumentSerde
@@ -102,25 +109,25 @@ func (c *Client) addOperationUpdateDeviceMiddlewares(stack *middleware.Stack, op
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -135,13 +142,16 @@ func (c *Client) addOperationUpdateDeviceMiddlewares(stack *middleware.Stack, op
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpUpdateDeviceValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateDevice(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

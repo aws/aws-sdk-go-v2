@@ -6,13 +6,12 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/codegurusecurity/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Use to create a scan using code uploaded to an S3 bucket.
+// Use to create a scan using code uploaded to an Amazon S3 bucket.
 func (c *Client) CreateScan(ctx context.Context, params *CreateScanInput, optFns ...func(*Options)) (*CreateScanOutput, error) {
 	if params == nil {
 		params = &CreateScanInput{}
@@ -30,14 +29,13 @@ func (c *Client) CreateScan(ctx context.Context, params *CreateScanInput, optFns
 
 type CreateScanInput struct {
 
-	// The identifier for an input resource used to create a scan.
+	// The identifier for the resource object to be scanned.
 	//
 	// This member is required.
 	ResourceId types.ResourceId
 
 	// The unique name that CodeGuru Security uses to track revisions across multiple
-	// scans of the same resource. Only allowed for a STANDARD scan type. If not
-	// specified, it will be auto generated.
+	// scans of the same resource. Only allowed for a STANDARD scan type.
 	//
 	// This member is required.
 	ScanName *string
@@ -54,15 +52,19 @@ type CreateScanInput struct {
 	ClientToken *string
 
 	// The type of scan, either Standard or Express . Defaults to Standard type if
-	// missing. Express scans run on limited resources and use a limited set of
-	// detectors to analyze your code in near-real time. Standard scans have standard
-	// resource limits and use the full set of detectors to analyze your code.
+	// missing.
+	//
+	// Express scans run on limited resources and use a limited set of detectors to
+	// analyze your code in near-real time. Standard scans have standard resource
+	// limits and use the full set of detectors to analyze your code.
 	ScanType types.ScanType
 
 	// An array of key-value pairs used to tag a scan. A tag is a custom attribute
 	// label with two parts:
+	//
 	//   - A tag key. For example, CostCenter , Environment , or Secret . Tag keys are
 	//   case sensitive.
+	//
 	//   - An optional tag value field. For example, 111122223333 , Production , or a
 	//   team name. Omitting the tag value is the same as using an empty string. Tag
 	//   values are case sensitive.
@@ -126,25 +128,25 @@ func (c *Client) addOperationCreateScanMiddlewares(stack *middleware.Stack, opti
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -159,6 +161,9 @@ func (c *Client) addOperationCreateScanMiddlewares(stack *middleware.Stack, opti
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opCreateScanMiddleware(stack, options); err != nil {
 		return err
 	}
@@ -168,7 +173,7 @@ func (c *Client) addOperationCreateScanMiddlewares(stack *middleware.Stack, opti
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateScan(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

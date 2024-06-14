@@ -6,13 +6,16 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/codepipeline/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Gets a summary of the most recent executions for a pipeline.
+//
+// When applying the filter for pipeline executions that have succeeded in the
+// stage, the operation returns all executions in the current pipeline version
+// beginning on February 1, 2024.
 func (c *Client) ListPipelineExecutions(ctx context.Context, params *ListPipelineExecutionsInput, optFns ...func(*Options)) (*ListPipelineExecutionsOutput, error) {
 	if params == nil {
 		params = &ListPipelineExecutionsInput{}
@@ -36,6 +39,9 @@ type ListPipelineExecutionsInput struct {
 	//
 	// This member is required.
 	PipelineName *string
+
+	// The pipeline execution to filter on.
+	Filter *types.PipelineExecutionFilter
 
 	// The maximum number of results to return in a single call. To retrieve the
 	// remaining results, make another call with the returned nextToken value. Pipeline
@@ -89,25 +95,25 @@ func (c *Client) addOperationListPipelineExecutionsMiddlewares(stack *middleware
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -122,13 +128,16 @@ func (c *Client) addOperationListPipelineExecutionsMiddlewares(stack *middleware
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpListPipelineExecutionsValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListPipelineExecutions(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

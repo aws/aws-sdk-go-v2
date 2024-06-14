@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/devopsguru/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -30,7 +29,7 @@ func (c *Client) ListAnomalousLogGroups(ctx context.Context, params *ListAnomalo
 
 type ListAnomalousLogGroupsInput struct {
 
-	// The ID of the insight containing the log groups.
+	//  The ID of the insight containing the log groups.
 	//
 	// This member is required.
 	InsightId *string
@@ -48,12 +47,12 @@ type ListAnomalousLogGroupsInput struct {
 
 type ListAnomalousLogGroupsOutput struct {
 
-	// The list of Amazon CloudWatch log groups that are related to an insight.
+	//  The list of Amazon CloudWatch log groups that are related to an insight.
 	//
 	// This member is required.
 	AnomalousLogGroups []types.AnomalousLogGroup
 
-	// The ID of the insight containing the log groups.
+	//  The ID of the insight containing the log groups.
 	//
 	// This member is required.
 	InsightId *string
@@ -90,25 +89,25 @@ func (c *Client) addOperationListAnomalousLogGroupsMiddlewares(stack *middleware
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -123,13 +122,16 @@ func (c *Client) addOperationListAnomalousLogGroupsMiddlewares(stack *middleware
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpListAnomalousLogGroupsValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListAnomalousLogGroups(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

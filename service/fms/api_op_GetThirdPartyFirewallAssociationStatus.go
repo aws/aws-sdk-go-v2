@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/fms/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -43,11 +42,14 @@ type GetThirdPartyFirewallAssociationStatusOutput struct {
 
 	// The status for subscribing to the third-party firewall vendor in the Amazon Web
 	// Services Marketplace.
+	//
 	//   - NO_SUBSCRIPTION - The Firewall Manager policy administrator isn't subscribed
 	//   to the third-party firewall service in the Amazon Web Services Marketplace.
+	//
 	//   - NOT_COMPLETE - The Firewall Manager policy administrator is in the process
 	//   of subscribing to the third-party firewall service in the Amazon Web Services
 	//   Marketplace, but doesn't yet have an active subscription.
+	//
 	//   - COMPLETE - The Firewall Manager policy administrator has an active
 	//   subscription to the third-party firewall service in the Amazon Web Services
 	//   Marketplace.
@@ -55,14 +57,19 @@ type GetThirdPartyFirewallAssociationStatusOutput struct {
 
 	// The current status for setting a Firewall Manager policy administrators account
 	// as an administrator of the third-party firewall tenant.
+	//
 	//   - ONBOARDING - The Firewall Manager policy administrator is being designated
 	//   as a tenant administrator.
+	//
 	//   - ONBOARD_COMPLETE - The Firewall Manager policy administrator is designated
 	//   as a tenant administrator.
+	//
 	//   - OFFBOARDING - The Firewall Manager policy administrator is being removed as
 	//   a tenant administrator.
+	//
 	//   - OFFBOARD_COMPLETE - The Firewall Manager policy administrator has been
 	//   removed as a tenant administrator.
+	//
 	//   - NOT_EXIST - The Firewall Manager policy administrator doesn't exist as a
 	//   tenant administrator.
 	ThirdPartyFirewallStatus types.ThirdPartyFirewallAssociationStatus
@@ -95,25 +102,25 @@ func (c *Client) addOperationGetThirdPartyFirewallAssociationStatusMiddlewares(s
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -128,13 +135,16 @@ func (c *Client) addOperationGetThirdPartyFirewallAssociationStatusMiddlewares(s
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpGetThirdPartyFirewallAssociationStatusValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetThirdPartyFirewallAssociationStatus(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

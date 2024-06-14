@@ -6,23 +6,29 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/forecast/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Exports a forecast created by the CreateWhatIfForecast operation to your Amazon
-// Simple Storage Service (Amazon S3) bucket. The forecast file name will match the
-// following conventions: ≈__ The component is in Java SimpleDateFormat
-// (yyyy-MM-ddTHH-mm-ssZ). You must specify a DataDestination object that includes
-// an Identity and Access Management (IAM) role that Amazon Forecast can assume to
-// access the Amazon S3 bucket. For more information, see aws-forecast-iam-roles .
-// For more information, see howitworks-forecast . To get a list of all your
-// what-if forecast export jobs, use the ListWhatIfForecastExports operation. The
-// Status of the forecast export job must be ACTIVE before you can access the
-// forecast in your Amazon S3 bucket. To get the status, use the
-// DescribeWhatIfForecastExport operation.
+// Exports a forecast created by the CreateWhatIfForecast operation to your Amazon Simple Storage
+// Service (Amazon S3) bucket. The forecast file name will match the following
+// conventions:
+//
+//	≈__
+//
+// The component is in Java SimpleDateFormat (yyyy-MM-ddTHH-mm-ssZ).
+//
+// You must specify a DataDestination object that includes an Identity and Access Management
+// (IAM) role that Amazon Forecast can assume to access the Amazon S3 bucket. For
+// more information, see aws-forecast-iam-roles.
+//
+// For more information, see howitworks-forecast.
+//
+// To get a list of all your what-if forecast export jobs, use the ListWhatIfForecastExports operation.
+//
+// The Status of the forecast export job must be ACTIVE before you can access the
+// forecast in your Amazon S3 bucket. To get the status, use the DescribeWhatIfForecastExportoperation.
 func (c *Client) CreateWhatIfForecastExport(ctx context.Context, params *CreateWhatIfForecastExportInput, optFns ...func(*Options)) (*CreateWhatIfForecastExportOutput, error) {
 	if params == nil {
 		params = &CreateWhatIfForecastExportInput{}
@@ -42,9 +48,10 @@ type CreateWhatIfForecastExportInput struct {
 
 	// The location where you want to save the forecast and an Identity and Access
 	// Management (IAM) role that Amazon Forecast can assume to access the location.
-	// The forecast must be exported to an Amazon S3 bucket. If encryption is used,
-	// Destination must include an Key Management Service (KMS) key. The IAM role must
-	// allow Amazon Forecast permission to access the key.
+	// The forecast must be exported to an Amazon S3 bucket.
+	//
+	// If encryption is used, Destination must include an Key Management Service (KMS)
+	// key. The IAM role must allow Amazon Forecast permission to access the key.
 	//
 	// This member is required.
 	Destination *types.DataDestination
@@ -62,8 +69,9 @@ type CreateWhatIfForecastExportInput struct {
 	// The format of the exported data, CSV or PARQUET.
 	Format *string
 
-	// A list of tags (https://docs.aws.amazon.com/forecast/latest/dg/tagging-forecast-resources.html)
-	// to apply to the what if forecast.
+	// A list of [tags] to apply to the what if forecast.
+	//
+	// [tags]: https://docs.aws.amazon.com/forecast/latest/dg/tagging-forecast-resources.html
 	Tags []types.Tag
 
 	noSmithyDocumentSerde
@@ -102,25 +110,25 @@ func (c *Client) addOperationCreateWhatIfForecastExportMiddlewares(stack *middle
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -135,13 +143,16 @@ func (c *Client) addOperationCreateWhatIfForecastExportMiddlewares(stack *middle
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpCreateWhatIfForecastExportValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateWhatIfForecastExport(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/fsx/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -18,11 +17,13 @@ import (
 // the response to include just tasks for specific file systems or caches, or tasks
 // in a specific lifecycle state. Otherwise, it returns all data repository tasks
 // owned by your Amazon Web Services account in the Amazon Web Services Region of
-// the endpoint that you're calling. When retrieving all tasks, you can paginate
-// the response by using the optional MaxResults parameter to limit the number of
-// tasks returned in a response. If more tasks remain, a NextToken value is
-// returned in the response. In this case, send a later request with the NextToken
-// request parameter set to the value of NextToken from the last response.
+// the endpoint that you're calling.
+//
+// When retrieving all tasks, you can paginate the response by using the optional
+// MaxResults parameter to limit the number of tasks returned in a response. If
+// more tasks remain, a NextToken value is returned in the response. In this case,
+// send a later request with the NextToken request parameter set to the value of
+// NextToken from the last response.
 func (c *Client) DescribeDataRepositoryTasks(ctx context.Context, params *DescribeDataRepositoryTasksInput, optFns ...func(*Options)) (*DescribeDataRepositoryTasksOutput, error) {
 	if params == nil {
 		params = &DescribeDataRepositoryTasksInput{}
@@ -98,25 +99,25 @@ func (c *Client) addOperationDescribeDataRepositoryTasksMiddlewares(stack *middl
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -131,10 +132,13 @@ func (c *Client) addOperationDescribeDataRepositoryTasksMiddlewares(stack *middl
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeDataRepositoryTasks(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

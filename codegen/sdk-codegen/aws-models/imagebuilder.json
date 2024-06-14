@@ -547,7 +547,7 @@
         "com.amazonaws.imagebuilder#ComponentBuildVersionArn": {
             "type": "string",
             "traits": {
-                "smithy.api#pattern": "^arn:aws[^:]*:imagebuilder:[^:]+:(?:[0-9]{12}|aws):component/[a-z0-9-_]+/[0-9]+\\.[0-9]+\\.[0-9]+/[0-9]+$"
+                "smithy.api#pattern": "^arn:aws[^:]*:imagebuilder:[^:]+:(?:[0-9]{12}|aws(?:-[a-z-]+)?):component/[a-z0-9-_]+/[0-9]+\\.[0-9]+\\.[0-9]+/[0-9]+$"
             }
         },
         "com.amazonaws.imagebuilder#ComponentConfiguration": {
@@ -926,13 +926,13 @@
         "com.amazonaws.imagebuilder#ComponentVersionArn": {
             "type": "string",
             "traits": {
-                "smithy.api#pattern": "^arn:aws[^:]*:imagebuilder:[^:]+:(?:[0-9]{12}|aws):component/[a-z0-9-_]+/[0-9]+\\.[0-9]+\\.[0-9]+$"
+                "smithy.api#pattern": "^arn:aws[^:]*:imagebuilder:[^:]+:(?:[0-9]{12}|aws(?:-[a-z-]+)?):component/[a-z0-9-_]+/[0-9]+\\.[0-9]+\\.[0-9]+$"
             }
         },
         "com.amazonaws.imagebuilder#ComponentVersionArnOrBuildVersionArn": {
             "type": "string",
             "traits": {
-                "smithy.api#pattern": "^arn:aws[^:]*:imagebuilder:[^:]+:(?:[0-9]{12}|aws):component/[a-z0-9-_]+/(?:(?:([0-9]+|x)\\.([0-9]+|x)\\.([0-9]+|x))|(?:[0-9]+\\.[0-9]+\\.[0-9]+/[0-9]+))$"
+                "smithy.api#pattern": "^arn:aws[^:]*:imagebuilder:[^:]+:(?:[0-9]{12}|aws(?:-[a-z-]+)?):component/[a-z0-9-_]+/(?:(?:([0-9]+|x)\\.([0-9]+|x)\\.([0-9]+|x))|(?:[0-9]+\\.[0-9]+\\.[0-9]+/[0-9]+))$"
             }
         },
         "com.amazonaws.imagebuilder#ComponentVersionList": {
@@ -5455,13 +5455,13 @@
         "com.amazonaws.imagebuilder#ImageBuildVersionArn": {
             "type": "string",
             "traits": {
-                "smithy.api#pattern": "^arn:aws[^:]*:imagebuilder:[^:]+:(?:[0-9]{12}|aws):image/[a-z0-9-_]+/[0-9]+\\.[0-9]+\\.[0-9]+/[0-9]+$"
+                "smithy.api#pattern": "^arn:aws[^:]*:imagebuilder:[^:]+:(?:[0-9]{12}|aws(?:-[a-z-]+)?):image/[a-z0-9-_]+/[0-9]+\\.[0-9]+\\.[0-9]+/[0-9]+$"
             }
         },
         "com.amazonaws.imagebuilder#ImageBuilderArn": {
             "type": "string",
             "traits": {
-                "smithy.api#pattern": "^arn:aws[^:]*:imagebuilder:[^:]+:(?:[0-9]{12}|aws):(?:image-recipe|container-recipe|infrastructure-configuration|distribution-configuration|component|image|image-pipeline|lifecycle-policy|workflow\\/(?:build|test|distribution))/[a-z0-9-_]+(?:/(?:(?:x|[0-9]+)\\.(?:x|[0-9]+)\\.(?:x|[0-9]+))(?:/[0-9]+)?)?$"
+                "smithy.api#pattern": "^arn:aws[^:]*:imagebuilder:[^:]+:(?:[0-9]{12}|aws(?:-[a-z-]+)?):(?:image-recipe|container-recipe|infrastructure-configuration|distribution-configuration|component|image|image-pipeline|lifecycle-policy|workflow\\/(?:build|test|distribution))/[a-z0-9-_]+(?:/(?:(?:x|[0-9]+)\\.(?:x|[0-9]+)\\.(?:x|[0-9]+))(?:/[0-9]+)?)?$"
             }
         },
         "com.amazonaws.imagebuilder#ImagePackage": {
@@ -6424,13 +6424,13 @@
         "com.amazonaws.imagebuilder#ImageVersionArn": {
             "type": "string",
             "traits": {
-                "smithy.api#pattern": "^arn:aws[^:]*:imagebuilder:[^:]+:(?:[0-9]{12}|aws):image/[a-z0-9-_]+/[0-9]+\\.[0-9]+\\.[0-9]+$"
+                "smithy.api#pattern": "^arn:aws[^:]*:imagebuilder:[^:]+:(?:[0-9]{12}|aws(?:-[a-z-]+)?):image/[a-z0-9-_]+/[0-9]+\\.[0-9]+\\.[0-9]+$"
             }
         },
         "com.amazonaws.imagebuilder#ImageVersionArnOrBuildVersionArn": {
             "type": "string",
             "traits": {
-                "smithy.api#pattern": "^arn:aws[^:]*:imagebuilder:[^:]+:(?:[0-9]{12}|aws):image/[a-z0-9-_]+/(?:(?:([0-9]+|x)\\.([0-9]+|x)\\.([0-9]+|x))|(?:[0-9]+\\.[0-9]+\\.[0-9]+/[0-9]+))$"
+                "smithy.api#pattern": "^arn:aws[^:]*:imagebuilder:[^:]+:(?:[0-9]{12}|aws(?:-[a-z-]+)?):image/[a-z0-9-_]+/(?:(?:([0-9]+|x)\\.([0-9]+|x)\\.([0-9]+|x))|(?:[0-9]+\\.[0-9]+\\.[0-9]+/[0-9]+))$"
             }
         },
         "com.amazonaws.imagebuilder#ImageVersionList": {
@@ -7304,6 +7304,18 @@
                     "traits": {
                         "smithy.api#documentation": "<p>For an impacted container image, this identifies a list of URIs for associated \n\t\t\tcontainer images distributed to ECR repositories.</p>"
                     }
+                },
+                "startTime": {
+                    "target": "com.amazonaws.imagebuilder#DateTimeTimestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The starting timestamp from the lifecycle action that was applied to the resource.</p>"
+                    }
+                },
+                "endTime": {
+                    "target": "com.amazonaws.imagebuilder#DateTimeTimestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ending timestamp from the lifecycle action that was applied to the resource.</p>"
+                    }
                 }
             },
             "traits": {
@@ -7506,6 +7518,12 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "SUCCESS"
+                    }
+                },
+                "PENDING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PENDING"
                     }
                 }
             }
@@ -7713,7 +7731,7 @@
                 "tagMap": {
                     "target": "com.amazonaws.imagebuilder#TagMap",
                     "traits": {
-                        "smithy.api#documentation": "<p>Contains a list of tags that Image Builder uses to skip lifecycle actions for resources that have them.</p>"
+                        "smithy.api#documentation": "<p>Contains a list of tags that Image Builder uses to skip lifecycle actions for Image Builder image \n\t\t\tresources that have them.</p>"
                     }
                 },
                 "amis": {
@@ -7890,7 +7908,7 @@
                 "tagMap": {
                     "target": "com.amazonaws.imagebuilder#TagMap",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of tags that are used as selection criteria for the resources \n\t\t\tthat the lifecycle policy applies to.</p>"
+                        "smithy.api#documentation": "<p>A list of tags that are used as selection criteria for the Image Builder image \n\t\t\tresources that the lifecycle policy applies to.</p>"
                     }
                 }
             },
@@ -12658,7 +12676,7 @@
                     "min": 0,
                     "max": 1024
                 },
-                "smithy.api#pattern": "^arn:aws(?:-[a-z]+)*:imagebuilder:[a-z]{2,}(?:-[a-z]+)+-[0-9]+:(?:[0-9]{12}|aws):workflow/(build|test|distribution)/[a-z0-9-_]+/[0-9]+\\.[0-9]+\\.[0-9]+/[0-9]+$"
+                "smithy.api#pattern": "^arn:aws(?:-[a-z]+)*:imagebuilder:[a-z]{2,}(?:-[a-z]+)+-[0-9]+:(?:[0-9]{12}|aws(?:-[a-z-]+)?):workflow/(build|test|distribution)/[a-z0-9-_]+/[0-9]+\\.[0-9]+\\.[0-9]+/[0-9]+$"
             }
         },
         "com.amazonaws.imagebuilder#WorkflowConfiguration": {
@@ -12864,7 +12882,7 @@
         "com.amazonaws.imagebuilder#WorkflowNameArn": {
             "type": "string",
             "traits": {
-                "smithy.api#pattern": "^arn:aws(?:-[a-z]+)*:imagebuilder:[a-z]{2,}(?:-[a-z]+)+-[0-9]+:(?:[0-9]{12}|aws):workflow/(build|test|distribution)/[a-z0-9-_]+/x\\.x\\.x$"
+                "smithy.api#pattern": "^arn:aws(?:-[a-z]+)*:imagebuilder:[a-z]{2,}(?:-[a-z]+)+-[0-9]+:(?:[0-9]{12}|aws(?:-[a-z-]+)?):workflow/(build|test|distribution)/[a-z0-9-_]+/x\\.x\\.x$"
             }
         },
         "com.amazonaws.imagebuilder#WorkflowParameter": {
@@ -13446,13 +13464,13 @@
         "com.amazonaws.imagebuilder#WorkflowVersionArn": {
             "type": "string",
             "traits": {
-                "smithy.api#pattern": "^arn:aws(?:-[a-z]+)*:imagebuilder:[a-z]{2,}(?:-[a-z]+)+-[0-9]+:(?:[0-9]{12}|aws):workflow/(build|test|distribution)/[a-z0-9-_]+/[0-9]+\\.[0-9]+\\.[0-9]+$"
+                "smithy.api#pattern": "^arn:aws(?:-[a-z]+)*:imagebuilder:[a-z]{2,}(?:-[a-z]+)+-[0-9]+:(?:[0-9]{12}|aws(?:-[a-z-]+)?):workflow/(build|test|distribution)/[a-z0-9-_]+/[0-9]+\\.[0-9]+\\.[0-9]+$"
             }
         },
         "com.amazonaws.imagebuilder#WorkflowVersionArnOrBuildVersionArn": {
             "type": "string",
             "traits": {
-                "smithy.api#pattern": "^arn:aws(?:-[a-z]+)*:imagebuilder:[a-z]{2,}(?:-[a-z]+)+-[0-9]+:(?:[0-9]{12}|aws):workflow/(build|test|distribution)/[a-z0-9-_]+/(?:(?:([0-9]+|x)\\.([0-9]+|x)\\.([0-9]+|x))|(?:[0-9]+\\.[0-9]+\\.[0-9]+/[0-9]+))$"
+                "smithy.api#pattern": "^arn:aws(?:-[a-z]+)*:imagebuilder:[a-z]{2,}(?:-[a-z]+)+-[0-9]+:(?:[0-9]{12}|aws(?:-[a-z-]+)?):workflow/(build|test|distribution)/[a-z0-9-_]+/(?:(?:([0-9]+|x)\\.([0-9]+|x)\\.([0-9]+|x))|(?:[0-9]+\\.[0-9]+\\.[0-9]+/[0-9]+))$"
             }
         },
         "com.amazonaws.imagebuilder#WorkflowVersionList": {
@@ -13464,7 +13482,7 @@
         "com.amazonaws.imagebuilder#WorkflowWildcardVersionArn": {
             "type": "string",
             "traits": {
-                "smithy.api#pattern": "^arn:aws(?:-[a-z]+)*:imagebuilder:[a-z]{2,}(?:-[a-z]+)+-[0-9]+:(?:[0-9]{12}|aws):workflow/(build|test|distribution)/[a-z0-9-_]+/(?:[0-9]+|x)\\.(?:[0-9]+|x)\\.(?:[0-9]+|x)$"
+                "smithy.api#pattern": "^arn:aws(?:-[a-z]+)*:imagebuilder:[a-z]{2,}(?:-[a-z]+)+-[0-9]+:(?:[0-9]{12}|aws(?:-[a-z-]+)?):workflow/(build|test|distribution)/[a-z0-9-_]+/(?:[0-9]+|x)\\.(?:[0-9]+|x)\\.(?:[0-9]+|x)$"
             }
         },
         "com.amazonaws.imagebuilder#imagebuilder": {

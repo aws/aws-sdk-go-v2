@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/lightsail/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -15,16 +14,22 @@ import (
 // Exports an Amazon Lightsail instance or block storage disk snapshot to Amazon
 // Elastic Compute Cloud (Amazon EC2). This operation results in an export snapshot
 // record that can be used with the create cloud formation stack operation to
-// create new Amazon EC2 instances. Exported instance snapshots appear in Amazon
-// EC2 as Amazon Machine Images (AMIs), and the instance system disk appears as an
-// Amazon Elastic Block Store (Amazon EBS) volume. Exported disk snapshots appear
-// in Amazon EC2 as Amazon EBS volumes. Snapshots are exported to the same Amazon
-// Web Services Region in Amazon EC2 as the source Lightsail snapshot. The export
-// snapshot operation supports tag-based access control via resource tags applied
-// to the resource identified by source snapshot name . For more information, see
-// the Amazon Lightsail Developer Guide (https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-controlling-access-using-tags)
-// . Use the get instance snapshots or get disk snapshots operations to get a list
+// create new Amazon EC2 instances.
+//
+// Exported instance snapshots appear in Amazon EC2 as Amazon Machine Images
+// (AMIs), and the instance system disk appears as an Amazon Elastic Block Store
+// (Amazon EBS) volume. Exported disk snapshots appear in Amazon EC2 as Amazon EBS
+// volumes. Snapshots are exported to the same Amazon Web Services Region in Amazon
+// EC2 as the source Lightsail snapshot.
+//
+// The export snapshot operation supports tag-based access control via resource
+// tags applied to the resource identified by source snapshot name . For more
+// information, see the [Amazon Lightsail Developer Guide].
+//
+// Use the get instance snapshots or get disk snapshots operations to get a list
 // of snapshots that you can export to Amazon EC2.
+//
+// [Amazon Lightsail Developer Guide]: https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-controlling-access-using-tags
 func (c *Client) ExportSnapshot(ctx context.Context, params *ExportSnapshotInput, optFns ...func(*Options)) (*ExportSnapshotOutput, error) {
 	if params == nil {
 		params = &ExportSnapshotInput{}
@@ -85,25 +90,25 @@ func (c *Client) addOperationExportSnapshotMiddlewares(stack *middleware.Stack, 
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -118,13 +123,16 @@ func (c *Client) addOperationExportSnapshotMiddlewares(stack *middleware.Stack, 
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpExportSnapshotValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opExportSnapshot(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

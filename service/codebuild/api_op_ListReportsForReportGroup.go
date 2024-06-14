@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/codebuild/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -30,28 +29,28 @@ func (c *Client) ListReportsForReportGroup(ctx context.Context, params *ListRepo
 
 type ListReportsForReportGroupInput struct {
 
-	// The ARN of the report group for which you want to return report ARNs.
+	//  The ARN of the report group for which you want to return report ARNs.
 	//
 	// This member is required.
 	ReportGroupArn *string
 
-	// A ReportFilter object used to filter the returned reports.
+	//  A ReportFilter object used to filter the returned reports.
 	Filter *types.ReportFilter
 
-	// The maximum number of paginated reports in this report group returned per
+	//  The maximum number of paginated reports in this report group returned per
 	// response. Use nextToken to iterate pages in the list of returned Report
 	// objects. The default value is 100.
 	MaxResults *int32
 
-	// During a previous call, the maximum number of items that can be returned is the
-	// value specified in maxResults . If there more items in the list, then a unique
-	// string called a nextToken is returned. To get the next batch of items in the
-	// list, call this operation again, adding the next token to the call. To get all
-	// of the items in the list, keep calling this operation with each subsequent next
-	// token that is returned, until no more next tokens are returned.
+	//  During a previous call, the maximum number of items that can be returned is
+	// the value specified in maxResults . If there more items in the list, then a
+	// unique string called a nextToken is returned. To get the next batch of items in
+	// the list, call this operation again, adding the next token to the call. To get
+	// all of the items in the list, keep calling this operation with each subsequent
+	// next token that is returned, until no more next tokens are returned.
 	NextToken *string
 
-	// Use to specify whether the results are returned in ascending or descending
+	//  Use to specify whether the results are returned in ascending or descending
 	// order.
 	SortOrder types.SortOrderType
 
@@ -60,15 +59,15 @@ type ListReportsForReportGroupInput struct {
 
 type ListReportsForReportGroupOutput struct {
 
-	// During a previous call, the maximum number of items that can be returned is the
-	// value specified in maxResults . If there more items in the list, then a unique
-	// string called a nextToken is returned. To get the next batch of items in the
-	// list, call this operation again, adding the next token to the call. To get all
-	// of the items in the list, keep calling this operation with each subsequent next
-	// token that is returned, until no more next tokens are returned.
+	//  During a previous call, the maximum number of items that can be returned is
+	// the value specified in maxResults . If there more items in the list, then a
+	// unique string called a nextToken is returned. To get the next batch of items in
+	// the list, call this operation again, adding the next token to the call. To get
+	// all of the items in the list, keep calling this operation with each subsequent
+	// next token that is returned, until no more next tokens are returned.
 	NextToken *string
 
-	// The list of report ARNs.
+	//  The list of report ARNs.
 	Reports []string
 
 	// Metadata pertaining to the operation's result.
@@ -99,25 +98,25 @@ func (c *Client) addOperationListReportsForReportGroupMiddlewares(stack *middlew
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -132,13 +131,16 @@ func (c *Client) addOperationListReportsForReportGroupMiddlewares(stack *middlew
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpListReportsForReportGroupValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListReportsForReportGroup(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -167,7 +169,7 @@ var _ ListReportsForReportGroupAPIClient = (*Client)(nil)
 // ListReportsForReportGroupPaginatorOptions is the paginator options for
 // ListReportsForReportGroup
 type ListReportsForReportGroupPaginatorOptions struct {
-	// The maximum number of paginated reports in this report group returned per
+	//  The maximum number of paginated reports in this report group returned per
 	// response. Use nextToken to iterate pages in the list of returned Report
 	// objects. The default value is 100.
 	Limit int32

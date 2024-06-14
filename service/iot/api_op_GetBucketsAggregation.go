@@ -6,15 +6,16 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/iot/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Aggregates on indexed data with search queries pertaining to particular fields.
-// Requires permission to access the GetBucketsAggregation (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
-// action.
+//
+// Requires permission to access the [GetBucketsAggregation] action.
+//
+// [GetBucketsAggregation]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions
 func (c *Client) GetBucketsAggregation(ctx context.Context, params *GetBucketsAggregationInput, optFns ...func(*Options)) (*GetBucketsAggregationOutput, error) {
 	if params == nil {
 		params = &GetBucketsAggregationInput{}
@@ -60,8 +61,11 @@ type GetBucketsAggregationInput struct {
 type GetBucketsAggregationOutput struct {
 
 	// The main part of the response with a list of buckets. Each bucket contains a
-	// keyValue and a count . keyValue : The aggregation field value counted for the
-	// particular bucket. count : The number of documents that have that value.
+	// keyValue and a count .
+	//
+	// keyValue : The aggregation field value counted for the particular bucket.
+	//
+	// count : The number of documents that have that value.
 	Buckets []types.Bucket
 
 	// The total number of things that fit the query string criteria.
@@ -95,25 +99,25 @@ func (c *Client) addOperationGetBucketsAggregationMiddlewares(stack *middleware.
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -128,13 +132,16 @@ func (c *Client) addOperationGetBucketsAggregationMiddlewares(stack *middleware.
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpGetBucketsAggregationValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetBucketsAggregation(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

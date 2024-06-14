@@ -6,17 +6,19 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/detective/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Retrieves the list of member accounts for a behavior graph. For invited
-// accounts, the results do not include member accounts that were removed from the
-// behavior graph. For the organization behavior graph, the results do not include
-// organization accounts that the Detective administrator account has not enabled
-// as member accounts.
+// Retrieves the list of member accounts for a behavior graph.
+//
+// For invited accounts, the results do not include member accounts that were
+// removed from the behavior graph.
+//
+// For the organization behavior graph, the results do not include organization
+// accounts that the Detective administrator account has not enabled as member
+// accounts.
 func (c *Client) ListMembers(ctx context.Context, params *ListMembersInput, optFns ...func(*Options)) (*ListMembersOutput, error) {
 	if params == nil {
 		params = &ListMembersInput{}
@@ -54,13 +56,16 @@ type ListMembersInput struct {
 
 type ListMembersOutput struct {
 
-	// The list of member accounts in the behavior graph. For invited accounts, the
-	// results include member accounts that did not pass verification and member
-	// accounts that have not yet accepted the invitation to the behavior graph. The
-	// results do not include member accounts that were removed from the behavior
-	// graph. For the organization behavior graph, the results do not include
-	// organization accounts that the Detective administrator account has not enabled
-	// as member accounts.
+	// The list of member accounts in the behavior graph.
+	//
+	// For invited accounts, the results include member accounts that did not pass
+	// verification and member accounts that have not yet accepted the invitation to
+	// the behavior graph. The results do not include member accounts that were removed
+	// from the behavior graph.
+	//
+	// For the organization behavior graph, the results do not include organization
+	// accounts that the Detective administrator account has not enabled as member
+	// accounts.
 	MemberDetails []types.MemberDetail
 
 	// If there are more member accounts remaining in the results, then use this
@@ -95,25 +100,25 @@ func (c *Client) addOperationListMembersMiddlewares(stack *middleware.Stack, opt
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -128,13 +133,16 @@ func (c *Client) addOperationListMembersMiddlewares(stack *middleware.Stack, opt
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpListMembersValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListMembers(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

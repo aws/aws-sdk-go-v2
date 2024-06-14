@@ -6,13 +6,13 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/comprehendmedical/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Starts an asynchronous job to detect medical concepts and link them to the
+//	Starts an asynchronous job to detect medical concepts and link them to the
+//
 // SNOMED-CT ontology. Use the DescribeSNOMEDCTInferenceJob operation to track the
 // status of a job.
 func (c *Client) StartSNOMEDCTInferenceJob(ctx context.Context, params *StartSNOMEDCTInferenceJobInput, optFns ...func(*Options)) (*StartSNOMEDCTInferenceJobOutput, error) {
@@ -32,7 +32,7 @@ func (c *Client) StartSNOMEDCTInferenceJob(ctx context.Context, params *StartSNO
 
 type StartSNOMEDCTInferenceJobInput struct {
 
-	// The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM)
+	//  The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM)
 	// role that grants Amazon Comprehend Medical read access to your input data.
 	//
 	// This member is required.
@@ -44,7 +44,8 @@ type StartSNOMEDCTInferenceJobInput struct {
 	// This member is required.
 	InputDataConfig *types.InputDataConfig
 
-	// The language of the input documents. All documents must be in the same language.
+	//  The language of the input documents. All documents must be in the same
+	// language.
 	//
 	// This member is required.
 	LanguageCode types.LanguageCode
@@ -54,14 +55,14 @@ type StartSNOMEDCTInferenceJobInput struct {
 	// This member is required.
 	OutputDataConfig *types.OutputDataConfig
 
-	// A unique identifier for the request. If you don't set the client request token,
-	// Amazon Comprehend Medical generates one.
+	//  A unique identifier for the request. If you don't set the client request
+	// token, Amazon Comprehend Medical generates one.
 	ClientRequestToken *string
 
-	// The user generated name the asynchronous InferSNOMEDCT job.
+	//  The user generated name the asynchronous InferSNOMEDCT job.
 	JobName *string
 
-	// An AWS Key Management Service key used to encrypt your output files. If you do
+	//  An AWS Key Management Service key used to encrypt your output files. If you do
 	// not specify a key, the files are written in plain text.
 	KMSKey *string
 
@@ -70,7 +71,7 @@ type StartSNOMEDCTInferenceJobInput struct {
 
 type StartSNOMEDCTInferenceJobOutput struct {
 
-	// The identifier generated for the job. To get the status of a job, use this
+	//  The identifier generated for the job. To get the status of a job, use this
 	// identifier with the StartSNOMEDCTInferenceJob operation.
 	JobId *string
 
@@ -102,25 +103,25 @@ func (c *Client) addOperationStartSNOMEDCTInferenceJobMiddlewares(stack *middlew
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -135,6 +136,9 @@ func (c *Client) addOperationStartSNOMEDCTInferenceJobMiddlewares(stack *middlew
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opStartSNOMEDCTInferenceJobMiddleware(stack, options); err != nil {
 		return err
 	}
@@ -144,7 +148,7 @@ func (c *Client) addOperationStartSNOMEDCTInferenceJobMiddlewares(stack *middlew
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opStartSNOMEDCTInferenceJob(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

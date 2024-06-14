@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/ivs/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -14,9 +13,10 @@ import (
 
 // Imports the public portion of a new key pair and returns its arn and fingerprint
 // . The privateKey can then be used to generate viewer authorization tokens, to
-// grant viewers access to private channels. For more information, see Setting Up
-// Private Channels (https://docs.aws.amazon.com/ivs/latest/userguide/private-channels.html)
-// in the Amazon IVS User Guide.
+// grant viewers access to private channels. For more information, see [Setting Up Private Channels]in the
+// Amazon IVS User Guide.
+//
+// [Setting Up Private Channels]: https://docs.aws.amazon.com/ivs/latest/userguide/private-channels.html
 func (c *Client) ImportPlaybackKeyPair(ctx context.Context, params *ImportPlaybackKeyPairInput, optFns ...func(*Options)) (*ImportPlaybackKeyPairOutput, error) {
 	if params == nil {
 		params = &ImportPlaybackKeyPairInput{}
@@ -42,11 +42,12 @@ type ImportPlaybackKeyPairInput struct {
 	// Playback-key-pair name. The value does not need to be unique.
 	Name *string
 
-	// Any tags provided with the request are added to the playback key pair tags. See
-	// Tagging Amazon Web Services Resources (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html)
+	// Any tags provided with the request are added to the playback key pair tags. See [Tagging Amazon Web Services Resources]
 	// for more information, including restrictions that apply to tags and "Tag naming
 	// limits and requirements"; Amazon IVS has no service-specific constraints beyond
 	// what is documented there.
+	//
+	// [Tagging Amazon Web Services Resources]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
 	Tags map[string]string
 
 	noSmithyDocumentSerde
@@ -85,25 +86,25 @@ func (c *Client) addOperationImportPlaybackKeyPairMiddlewares(stack *middleware.
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -118,13 +119,16 @@ func (c *Client) addOperationImportPlaybackKeyPairMiddlewares(stack *middleware.
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpImportPlaybackKeyPairValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opImportPlaybackKeyPair(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

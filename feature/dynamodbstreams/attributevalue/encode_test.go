@@ -7,12 +7,8 @@ import (
 	"testing"
 	"time"
 
-	smithydocument "github.com/aws/smithy-go/document"
-	"github.com/google/go-cmp/cmp/cmpopts"
-
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/service/dynamodbstreams/types"
-	"github.com/google/go-cmp/cmp"
 )
 
 func TestMarshalShared(t *testing.T) {
@@ -87,6 +83,186 @@ func TestMarshalMashaler(t *testing.T) {
 	}
 }
 
+type customBoolStringMarshaler string
+
+func (m customBoolStringMarshaler) MarshalDynamoDBStreamsAttributeValue() (types.AttributeValue, error) {
+
+	if b, err := strconv.ParseBool(string(m)); err == nil {
+		return &types.AttributeValueMemberBOOL{Value: b}, nil
+	}
+
+	return &types.AttributeValueMemberS{Value: string(m)}, nil
+}
+
+type customTextMarshaler struct {
+	I, J int
+}
+
+func (v customTextMarshaler) MarshalText() ([]byte, error) {
+	text := fmt.Sprintf("{I: %d, J: %d}", v.I, v.J)
+	return []byte(text), nil
+}
+
+type customBinaryMarshaler struct {
+	I, J byte
+}
+
+func (v customBinaryMarshaler) MarshalBinary() ([]byte, error) {
+	return []byte{v.I, v.J}, nil
+}
+
+type customAVAndTextMarshaler struct {
+	I, J int
+}
+
+func (v customAVAndTextMarshaler) MarshalDynamoDBStreamsAttributeValue() (types.AttributeValue, error) {
+	return &types.AttributeValueMemberNS{Value: []string{
+		fmt.Sprintf("%d", v.I),
+		fmt.Sprintf("%d", v.J),
+	}}, nil
+}
+
+func (v customAVAndTextMarshaler) MarshalText() ([]byte, error) {
+	return []byte("should never happen"), nil
+}
+
+func TestEncodingMarshalers(t *testing.T) {
+	cases := []struct {
+		input         any
+		expected      types.AttributeValue
+		useMarshalers bool
+	}{
+		{
+			input: customTextMarshaler{1, 2},
+			expected: &types.AttributeValueMemberM{Value: map[string]types.AttributeValue{
+				"I": &types.AttributeValueMemberN{Value: "1"},
+				"J": &types.AttributeValueMemberN{Value: "2"},
+			}},
+			useMarshalers: false,
+		},
+		{
+			input:         customTextMarshaler{1, 2},
+			expected:      &types.AttributeValueMemberS{Value: "{I: 1, J: 2}"},
+			useMarshalers: true,
+		},
+		{
+			input: customBinaryMarshaler{1, 2},
+			expected: &types.AttributeValueMemberM{Value: map[string]types.AttributeValue{
+				"I": &types.AttributeValueMemberN{Value: "1"},
+				"J": &types.AttributeValueMemberN{Value: "2"},
+			}},
+			useMarshalers: false,
+		},
+		{
+			input:         customBinaryMarshaler{1, 2},
+			expected:      &types.AttributeValueMemberB{Value: []byte{1, 2}},
+			useMarshalers: true,
+		},
+		{
+			input:         customAVAndTextMarshaler{1, 2},
+			expected:      &types.AttributeValueMemberNS{Value: []string{"1", "2"}},
+			useMarshalers: false,
+		},
+		{
+			input:         customAVAndTextMarshaler{1, 2},
+			expected:      &types.AttributeValueMemberNS{Value: []string{"1", "2"}},
+			useMarshalers: true,
+		},
+	}
+
+	for _, testCase := range cases {
+		actual, err := MarshalWithOptions(testCase.input, func(o *EncoderOptions) {
+			o.UseEncodingMarshalers = testCase.useMarshalers
+		})
+		if err != nil {
+			t.Errorf("got unexpected error %v for input %v", err, testCase.input)
+		}
+		if diff := cmpDiff(testCase.expected, actual); len(diff) != 0 {
+			t.Errorf("expected match but got: %s", diff)
+		}
+	}
+}
+
+func TestCustomStringMarshaler(t *testing.T) {
+	cases := []struct {
+		expected types.AttributeValue
+		input    string
+	}{
+		{
+			expected: &types.AttributeValueMemberBOOL{Value: false},
+			input:    "false",
+		},
+		{
+			expected: &types.AttributeValueMemberBOOL{Value: true},
+			input:    "true",
+		},
+		{
+			expected: &types.AttributeValueMemberS{Value: "ABC"},
+			input:    "ABC",
+		},
+	}
+
+	for _, testCase := range cases {
+		input := customBoolStringMarshaler(testCase.input)
+		actual, err := Marshal(input)
+		if err != nil {
+			t.Errorf("got unexpected error %v for input %v", err, testCase.input)
+		}
+		if diff := cmpDiff(testCase.expected, actual); len(diff) != 0 {
+			t.Errorf("expected match but got:%s", diff)
+		}
+	}
+}
+
+type customGradeMarshaler uint
+
+func (m customGradeMarshaler) MarshalDynamoDBStreamsAttributeValue() (types.AttributeValue, error) {
+	if int(m) > 100 {
+		return nil, fmt.Errorf("grade cant be larger then 100")
+	}
+	return &types.AttributeValueMemberN{Value: strconv.FormatUint(uint64(m), 10)}, nil
+}
+
+func TestCustomNumberMarshaler(t *testing.T) {
+	cases := []struct {
+		expectedErr bool
+		input       uint
+		expected    types.AttributeValue
+	}{
+		{
+			expectedErr: false,
+			input:       50,
+			expected:    &types.AttributeValueMemberN{Value: "50"},
+		},
+		{
+			expectedErr: false,
+			input:       90,
+			expected:    &types.AttributeValueMemberN{Value: "90"},
+		},
+		{
+			expectedErr: true,
+			input:       150,
+			expected:    nil,
+		},
+	}
+
+	for _, testCase := range cases {
+		input := customGradeMarshaler(testCase.input)
+		actual, err := Marshal(customGradeMarshaler(input))
+		if testCase.expectedErr && err == nil {
+			t.Errorf("expected error but got nil for input %v", testCase.input)
+			continue
+		}
+		if !testCase.expectedErr && err != nil {
+			t.Errorf("got unexpected error %v for input %v", err, testCase.input)
+			continue
+		}
+		if diff := cmpDiff(testCase.expected, actual); len(diff) != 0 {
+			t.Errorf("expected match but got:%s", diff)
+		}
+	}
+}
+
 type testOmitEmptyElemListStruct struct {
 	Values []string `dynamodbav:",omitemptyelem"`
 }
@@ -111,7 +287,7 @@ func TestMarshalListOmitEmptyElem(t *testing.T) {
 	if err != nil {
 		t.Errorf("expect nil, got %v", err)
 	}
-	if diff := cmp.Diff(expect, actual, cmpopts.IgnoreTypes(smithydocument.NoSerde{})); len(diff) != 0 {
+	if diff := cmpDiff(expect, actual); len(diff) != 0 {
 		t.Errorf("expect match\n%s", diff)
 	}
 }
@@ -147,7 +323,7 @@ func TestMarshalMapOmitEmptyElem(t *testing.T) {
 	if err != nil {
 		t.Errorf("expect nil, got %v", err)
 	}
-	if diff := cmp.Diff(expect, actual, cmpopts.IgnoreTypes(smithydocument.NoSerde{})); len(diff) != 0 {
+	if diff := cmpDiff(expect, actual); len(diff) != 0 {
 		t.Errorf("expect match\n%s", diff)
 	}
 }
@@ -177,7 +353,7 @@ func TestMarshalListNullEmptyElem(t *testing.T) {
 	if err != nil {
 		t.Errorf("expect nil, got %v", err)
 	}
-	if diff := cmp.Diff(expect, actual, cmpopts.IgnoreTypes(smithydocument.NoSerde{})); len(diff) != 0 {
+	if diff := cmpDiff(expect, actual); len(diff) != 0 {
 		t.Errorf("expect match\n%s", diff)
 	}
 }
@@ -215,7 +391,7 @@ func TestMarshalMapNullEmptyElem(t *testing.T) {
 	if err != nil {
 		t.Errorf("expect nil, got %v", err)
 	}
-	if diff := cmp.Diff(expect, actual, cmpopts.IgnoreTypes(smithydocument.NoSerde{})); len(diff) != 0 {
+	if diff := cmpDiff(expect, actual); len(diff) != 0 {
 		t.Errorf("expect match\n%s", diff)
 	}
 }
@@ -411,7 +587,7 @@ func TestMarshalTime_S(t *testing.T) {
 					}},
 				},
 			}
-			if diff := cmp.Diff(expectedValue, actual, getIgnoreAVUnexportedOptions()...); diff != "" {
+			if diff := cmpDiff(expectedValue, actual); diff != "" {
 				t.Errorf("expect attribute value match\n%s", diff)
 			}
 		})
@@ -469,7 +645,7 @@ func TestMarshalTime_N(t *testing.T) {
 					}},
 				},
 			}
-			if diff := cmp.Diff(expectedValue, actual, getIgnoreAVUnexportedOptions()...); diff != "" {
+			if diff := cmpDiff(expectedValue, actual); diff != "" {
 				t.Errorf("expect attribute value match\n%s", diff)
 			}
 		})
@@ -613,7 +789,7 @@ func TestMarshalMap_keyTypes(t *testing.T) {
 			if err != nil {
 				t.Fatalf("expect no error, got %v", err)
 			}
-			if diff := cmp.Diff(c.expectAV, av, getIgnoreAVUnexportedOptions()...); diff != "" {
+			if diff := cmpDiff(c.expectAV, av); diff != "" {
 				t.Errorf("expect attribute value match\n%s", diff)
 			}
 		})

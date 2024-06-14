@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/mobile/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -31,12 +30,12 @@ func (c *Client) DescribeProject(ctx context.Context, params *DescribeProjectInp
 // Request structure used to request details about a project.
 type DescribeProjectInput struct {
 
-	// Unique project identifier.
+	//  Unique project identifier.
 	//
 	// This member is required.
 	ProjectId *string
 
-	// If set to true, causes AWS Mobile Hub to synchronize information from other
+	//  If set to true, causes AWS Mobile Hub to synchronize information from other
 	// services, e.g., update state of AWS CloudFormation stacks in the AWS Mobile Hub
 	// project.
 	SyncFromResources bool
@@ -47,7 +46,7 @@ type DescribeProjectInput struct {
 // Result structure used for requests of project details.
 type DescribeProjectOutput struct {
 
-	// Detailed information about an AWS Mobile Hub project.
+	//  Detailed information about an AWS Mobile Hub project.
 	Details *types.ProjectDetails
 
 	// Metadata pertaining to the operation's result.
@@ -78,25 +77,25 @@ func (c *Client) addOperationDescribeProjectMiddlewares(stack *middleware.Stack,
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -111,13 +110,16 @@ func (c *Client) addOperationDescribeProjectMiddlewares(stack *middleware.Stack,
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDescribeProjectValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeProject(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

@@ -6,13 +6,13 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/auditmanager/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns a list of the frameworks that are available in the Audit Manager
+//	Returns a list of the frameworks that are available in the Audit Manager
+//
 // framework library.
 func (c *Client) ListAssessmentFrameworks(ctx context.Context, params *ListAssessmentFrameworksInput, optFns ...func(*Options)) (*ListAssessmentFrameworksOutput, error) {
 	if params == nil {
@@ -31,15 +31,15 @@ func (c *Client) ListAssessmentFrameworks(ctx context.Context, params *ListAsses
 
 type ListAssessmentFrameworksInput struct {
 
-	// The type of framework, such as a standard framework or a custom framework.
+	//  The type of framework, such as a standard framework or a custom framework.
 	//
 	// This member is required.
 	FrameworkType types.FrameworkType
 
-	// Represents the maximum number of results on a page or for an API request call.
+	//  Represents the maximum number of results on a page or for an API request call.
 	MaxResults *int32
 
-	// The pagination token that's used to fetch the next set of results.
+	//  The pagination token that's used to fetch the next set of results.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -47,11 +47,11 @@ type ListAssessmentFrameworksInput struct {
 
 type ListAssessmentFrameworksOutput struct {
 
-	// A list of metadata that the ListAssessmentFrameworks API returns for each
+	//  A list of metadata that the ListAssessmentFrameworks API returns for each
 	// framework.
 	FrameworkMetadataList []types.AssessmentFrameworkMetadata
 
-	// The pagination token that's used to fetch the next set of results.
+	//  The pagination token that's used to fetch the next set of results.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -82,25 +82,25 @@ func (c *Client) addOperationListAssessmentFrameworksMiddlewares(stack *middlewa
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -115,13 +115,16 @@ func (c *Client) addOperationListAssessmentFrameworksMiddlewares(stack *middlewa
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpListAssessmentFrameworksValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListAssessmentFrameworks(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -150,7 +153,7 @@ var _ ListAssessmentFrameworksAPIClient = (*Client)(nil)
 // ListAssessmentFrameworksPaginatorOptions is the paginator options for
 // ListAssessmentFrameworks
 type ListAssessmentFrameworksPaginatorOptions struct {
-	// Represents the maximum number of results on a page or for an API request call.
+	//  Represents the maximum number of results on a page or for an API request call.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

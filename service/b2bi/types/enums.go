@@ -10,8 +10,9 @@ const (
 )
 
 // Values returns all known values for CapabilityType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (CapabilityType) Values() []CapabilityType {
 	return []CapabilityType{
 		"edi",
@@ -27,8 +28,9 @@ const (
 )
 
 // Values returns all known values for FileFormat. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (FileFormat) Values() []FileFormat {
 	return []FileFormat{
 		"XML",
@@ -45,8 +47,9 @@ const (
 )
 
 // Values returns all known values for Logging. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (Logging) Values() []Logging {
 	return []Logging{
 		"ENABLED",
@@ -64,8 +67,9 @@ const (
 )
 
 // Values returns all known values for TransformerJobStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (TransformerJobStatus) Values() []TransformerJobStatus {
 	return []TransformerJobStatus{
 		"running",
@@ -83,8 +87,9 @@ const (
 )
 
 // Values returns all known values for TransformerStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (TransformerStatus) Values() []TransformerStatus {
 	return []TransformerStatus{
 		"active",
@@ -96,53 +101,126 @@ type X12TransactionSet string
 
 // Enum values for X12TransactionSet
 const (
-	X12TransactionSetX12110 X12TransactionSet = "X12_110"
-	X12TransactionSetX12180 X12TransactionSet = "X12_180"
-	X12TransactionSetX12204 X12TransactionSet = "X12_204"
-	X12TransactionSetX12210 X12TransactionSet = "X12_210"
-	X12TransactionSetX12214 X12TransactionSet = "X12_214"
-	X12TransactionSetX12215 X12TransactionSet = "X12_215"
-	X12TransactionSetX12310 X12TransactionSet = "X12_310"
-	X12TransactionSetX12315 X12TransactionSet = "X12_315"
-	X12TransactionSetX12322 X12TransactionSet = "X12_322"
-	X12TransactionSetX12404 X12TransactionSet = "X12_404"
-	X12TransactionSetX12410 X12TransactionSet = "X12_410"
-	X12TransactionSetX12820 X12TransactionSet = "X12_820"
-	X12TransactionSetX12824 X12TransactionSet = "X12_824"
-	X12TransactionSetX12830 X12TransactionSet = "X12_830"
-	X12TransactionSetX12846 X12TransactionSet = "X12_846"
-	X12TransactionSetX12850 X12TransactionSet = "X12_850"
-	X12TransactionSetX12852 X12TransactionSet = "X12_852"
-	X12TransactionSetX12855 X12TransactionSet = "X12_855"
-	X12TransactionSetX12856 X12TransactionSet = "X12_856"
-	X12TransactionSetX12860 X12TransactionSet = "X12_860"
-	X12TransactionSetX12861 X12TransactionSet = "X12_861"
-	X12TransactionSetX12864 X12TransactionSet = "X12_864"
-	X12TransactionSetX12940 X12TransactionSet = "X12_940"
-	X12TransactionSetX12990 X12TransactionSet = "X12_990"
-	X12TransactionSetX12997 X12TransactionSet = "X12_997"
+	X12TransactionSetX12110     X12TransactionSet = "X12_110"
+	X12TransactionSetX12180     X12TransactionSet = "X12_180"
+	X12TransactionSetX12204     X12TransactionSet = "X12_204"
+	X12TransactionSetX12210     X12TransactionSet = "X12_210"
+	X12TransactionSetX12211     X12TransactionSet = "X12_211"
+	X12TransactionSetX12214     X12TransactionSet = "X12_214"
+	X12TransactionSetX12215     X12TransactionSet = "X12_215"
+	X12TransactionSetX12259     X12TransactionSet = "X12_259"
+	X12TransactionSetX12260     X12TransactionSet = "X12_260"
+	X12TransactionSetX12266     X12TransactionSet = "X12_266"
+	X12TransactionSetX12269     X12TransactionSet = "X12_269"
+	X12TransactionSetX12270     X12TransactionSet = "X12_270"
+	X12TransactionSetX12271     X12TransactionSet = "X12_271"
+	X12TransactionSetX12274     X12TransactionSet = "X12_274"
+	X12TransactionSetX12275     X12TransactionSet = "X12_275"
+	X12TransactionSetX12276     X12TransactionSet = "X12_276"
+	X12TransactionSetX12277     X12TransactionSet = "X12_277"
+	X12TransactionSetX12278     X12TransactionSet = "X12_278"
+	X12TransactionSetX12310     X12TransactionSet = "X12_310"
+	X12TransactionSetX12315     X12TransactionSet = "X12_315"
+	X12TransactionSetX12322     X12TransactionSet = "X12_322"
+	X12TransactionSetX12404     X12TransactionSet = "X12_404"
+	X12TransactionSetX12410     X12TransactionSet = "X12_410"
+	X12TransactionSetX12417     X12TransactionSet = "X12_417"
+	X12TransactionSetX12421     X12TransactionSet = "X12_421"
+	X12TransactionSetX12426     X12TransactionSet = "X12_426"
+	X12TransactionSetX12810     X12TransactionSet = "X12_810"
+	X12TransactionSetX12820     X12TransactionSet = "X12_820"
+	X12TransactionSetX12824     X12TransactionSet = "X12_824"
+	X12TransactionSetX12830     X12TransactionSet = "X12_830"
+	X12TransactionSetX12832     X12TransactionSet = "X12_832"
+	X12TransactionSetX12834     X12TransactionSet = "X12_834"
+	X12TransactionSetX12835     X12TransactionSet = "X12_835"
+	X12TransactionSetX12837     X12TransactionSet = "X12_837"
+	X12TransactionSetX12844     X12TransactionSet = "X12_844"
+	X12TransactionSetX12846     X12TransactionSet = "X12_846"
+	X12TransactionSetX12849     X12TransactionSet = "X12_849"
+	X12TransactionSetX12850     X12TransactionSet = "X12_850"
+	X12TransactionSetX12852     X12TransactionSet = "X12_852"
+	X12TransactionSetX12855     X12TransactionSet = "X12_855"
+	X12TransactionSetX12856     X12TransactionSet = "X12_856"
+	X12TransactionSetX12860     X12TransactionSet = "X12_860"
+	X12TransactionSetX12861     X12TransactionSet = "X12_861"
+	X12TransactionSetX12864     X12TransactionSet = "X12_864"
+	X12TransactionSetX12865     X12TransactionSet = "X12_865"
+	X12TransactionSetX12869     X12TransactionSet = "X12_869"
+	X12TransactionSetX12870     X12TransactionSet = "X12_870"
+	X12TransactionSetX12940     X12TransactionSet = "X12_940"
+	X12TransactionSetX12945     X12TransactionSet = "X12_945"
+	X12TransactionSetX12990     X12TransactionSet = "X12_990"
+	X12TransactionSetX12997     X12TransactionSet = "X12_997"
+	X12TransactionSetX12999     X12TransactionSet = "X12_999"
+	X12TransactionSetX12270X279 X12TransactionSet = "X12_270_X279"
+	X12TransactionSetX12271X279 X12TransactionSet = "X12_271_X279"
+	X12TransactionSetX12275X210 X12TransactionSet = "X12_275_X210"
+	X12TransactionSetX12275X211 X12TransactionSet = "X12_275_X211"
+	X12TransactionSetX12276X212 X12TransactionSet = "X12_276_X212"
+	X12TransactionSetX12277X212 X12TransactionSet = "X12_277_X212"
+	X12TransactionSetX12277X214 X12TransactionSet = "X12_277_X214"
+	X12TransactionSetX12277X364 X12TransactionSet = "X12_277_X364"
+	X12TransactionSetX12278X217 X12TransactionSet = "X12_278_X217"
+	X12TransactionSetX12820X218 X12TransactionSet = "X12_820_X218"
+	X12TransactionSetX12820X306 X12TransactionSet = "X12_820_X306"
+	X12TransactionSetX12824X186 X12TransactionSet = "X12_824_X186"
+	X12TransactionSetX12834X220 X12TransactionSet = "X12_834_X220"
+	X12TransactionSetX12834X307 X12TransactionSet = "X12_834_X307"
+	X12TransactionSetX12834X318 X12TransactionSet = "X12_834_X318"
+	X12TransactionSetX12835X221 X12TransactionSet = "X12_835_X221"
+	X12TransactionSetX12837X222 X12TransactionSet = "X12_837_X222"
+	X12TransactionSetX12837X223 X12TransactionSet = "X12_837_X223"
+	X12TransactionSetX12837X224 X12TransactionSet = "X12_837_X224"
+	X12TransactionSetX12837X291 X12TransactionSet = "X12_837_X291"
+	X12TransactionSetX12837X292 X12TransactionSet = "X12_837_X292"
+	X12TransactionSetX12837X298 X12TransactionSet = "X12_837_X298"
+	X12TransactionSetX12999X231 X12TransactionSet = "X12_999_X231"
 )
 
 // Values returns all known values for X12TransactionSet. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (X12TransactionSet) Values() []X12TransactionSet {
 	return []X12TransactionSet{
 		"X12_110",
 		"X12_180",
 		"X12_204",
 		"X12_210",
+		"X12_211",
 		"X12_214",
 		"X12_215",
+		"X12_259",
+		"X12_260",
+		"X12_266",
+		"X12_269",
+		"X12_270",
+		"X12_271",
+		"X12_274",
+		"X12_275",
+		"X12_276",
+		"X12_277",
+		"X12_278",
 		"X12_310",
 		"X12_315",
 		"X12_322",
 		"X12_404",
 		"X12_410",
+		"X12_417",
+		"X12_421",
+		"X12_426",
+		"X12_810",
 		"X12_820",
 		"X12_824",
 		"X12_830",
+		"X12_832",
+		"X12_834",
+		"X12_835",
+		"X12_837",
+		"X12_844",
 		"X12_846",
+		"X12_849",
 		"X12_850",
 		"X12_852",
 		"X12_855",
@@ -150,9 +228,37 @@ func (X12TransactionSet) Values() []X12TransactionSet {
 		"X12_860",
 		"X12_861",
 		"X12_864",
+		"X12_865",
+		"X12_869",
+		"X12_870",
 		"X12_940",
+		"X12_945",
 		"X12_990",
 		"X12_997",
+		"X12_999",
+		"X12_270_X279",
+		"X12_271_X279",
+		"X12_275_X210",
+		"X12_275_X211",
+		"X12_276_X212",
+		"X12_277_X212",
+		"X12_277_X214",
+		"X12_277_X364",
+		"X12_278_X217",
+		"X12_820_X218",
+		"X12_820_X306",
+		"X12_824_X186",
+		"X12_834_X220",
+		"X12_834_X307",
+		"X12_834_X318",
+		"X12_835_X221",
+		"X12_837_X222",
+		"X12_837_X223",
+		"X12_837_X224",
+		"X12_837_X291",
+		"X12_837_X292",
+		"X12_837_X298",
+		"X12_999_X231",
 	}
 }
 
@@ -160,18 +266,21 @@ type X12Version string
 
 // Enum values for X12Version
 const (
-	X12VersionVersion4010 X12Version = "VERSION_4010"
-	X12VersionVersion4030 X12Version = "VERSION_4030"
-	X12VersionVersion5010 X12Version = "VERSION_5010"
+	X12VersionVersion4010      X12Version = "VERSION_4010"
+	X12VersionVersion4030      X12Version = "VERSION_4030"
+	X12VersionVersion5010      X12Version = "VERSION_5010"
+	X12VersionVersion5010Hipaa X12Version = "VERSION_5010_HIPAA"
 )
 
 // Values returns all known values for X12Version. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (X12Version) Values() []X12Version {
 	return []X12Version{
 		"VERSION_4010",
 		"VERSION_4030",
 		"VERSION_5010",
+		"VERSION_5010_HIPAA",
 	}
 }

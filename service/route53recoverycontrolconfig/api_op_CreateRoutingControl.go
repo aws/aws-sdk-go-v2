@@ -6,17 +6,19 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/route53recoverycontrolconfig/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a new routing control. A routing control has one of two states: ON and
-// OFF. You can map the routing control state to the state of an Amazon Route 53
-// health check, which can be used to control traffic routing. To get or update the
-// routing control state, see the Recovery Cluster (data plane) API actions for
-// Amazon Route 53 Application Recovery Controller.
+// Creates a new routing control.
+//
+// A routing control has one of two states: ON and OFF. You can map the routing
+// control state to the state of an Amazon Route 53 health check, which can be used
+// to control traffic routing.
+//
+// To get or update the routing control state, see the Recovery Cluster (data
+// plane) API actions for Amazon Route 53 Application Recovery Controller.
 func (c *Client) CreateRoutingControl(ctx context.Context, params *CreateRoutingControlInput, optFns ...func(*Options)) (*CreateRoutingControlOutput, error) {
 	if params == nil {
 		params = &CreateRoutingControlInput{}
@@ -89,25 +91,25 @@ func (c *Client) addOperationCreateRoutingControlMiddlewares(stack *middleware.S
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -122,6 +124,9 @@ func (c *Client) addOperationCreateRoutingControlMiddlewares(stack *middleware.S
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opCreateRoutingControlMiddleware(stack, options); err != nil {
 		return err
 	}
@@ -131,7 +136,7 @@ func (c *Client) addOperationCreateRoutingControlMiddlewares(stack *middleware.S
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateRoutingControl(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

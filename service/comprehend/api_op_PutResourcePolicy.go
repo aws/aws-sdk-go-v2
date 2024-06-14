@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -40,10 +39,14 @@ type PutResourcePolicyInput struct {
 	// JSON as a UTF-8 encoded string without line breaks. To provide valid JSON for
 	// your policy, enclose the attribute names and values in double quotes. If the
 	// JSON body is also enclosed in double quotes, then you must escape the double
-	// quotes that are inside the policy: "{\"attribute\": \"value\", \"attribute\":
-	// [\"value\"]}" To avoid escaping quotes, you can use single quotes to enclose the
-	// policy and double quotes to enclose the JSON names and values: '{"attribute":
-	// "value", "attribute": ["value"]}'
+	// quotes that are inside the policy:
+	//
+	//     "{\"attribute\": \"value\", \"attribute\": [\"value\"]}"
+	//
+	// To avoid escaping quotes, you can use single quotes to enclose the policy and
+	// double quotes to enclose the JSON names and values:
+	//
+	//     '{"attribute": "value", "attribute": ["value"]}'
 	//
 	// This member is required.
 	ResourcePolicy *string
@@ -90,25 +93,25 @@ func (c *Client) addOperationPutResourcePolicyMiddlewares(stack *middleware.Stac
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -123,13 +126,16 @@ func (c *Client) addOperationPutResourcePolicyMiddlewares(stack *middleware.Stac
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpPutResourcePolicyValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opPutResourcePolicy(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

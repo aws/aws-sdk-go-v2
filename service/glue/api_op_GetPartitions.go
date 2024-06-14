@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/glue/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -51,38 +50,77 @@ type GetPartitionsInput struct {
 	// duplicate data.
 	ExcludeColumnSchema *bool
 
-	// An expression that filters the partitions to be returned. The expression uses
-	// SQL syntax similar to the SQL WHERE filter clause. The SQL statement parser
-	// JSQLParser (http://jsqlparser.sourceforge.net/home.php) parses the expression.
+	// An expression that filters the partitions to be returned.
+	//
+	// The expression uses SQL syntax similar to the SQL WHERE filter clause. The SQL
+	// statement parser [JSQLParser]parses the expression.
+	//
 	// Operators: The following are the operators that you can use in the Expression
-	// API call: = Checks whether the values of the two operands are equal; if yes,
-	// then the condition becomes true. Example: Assume 'variable a' holds 10 and
-	// 'variable b' holds 20. (a = b) is not true. < > Checks whether the values of two
-	// operands are equal; if the values are not equal, then the condition becomes
-	// true. Example: (a < > b) is true. > Checks whether the value of the left operand
-	// is greater than the value of the right operand; if yes, then the condition
-	// becomes true. Example: (a > b) is not true. < Checks whether the value of the
-	// left operand is less than the value of the right operand; if yes, then the
-	// condition becomes true. Example: (a < b) is true. >= Checks whether the value of
-	// the left operand is greater than or equal to the value of the right operand; if
-	// yes, then the condition becomes true. Example: (a >= b) is not true. <= Checks
-	// whether the value of the left operand is less than or equal to the value of the
-	// right operand; if yes, then the condition becomes true. Example: (a <= b) is
-	// true. AND, OR, IN, BETWEEN, LIKE, NOT, IS NULL Logical operators. Supported
-	// Partition Key Types: The following are the supported partition keys.
+	// API call:
+	//
+	// = Checks whether the values of the two operands are equal; if yes, then the
+	// condition becomes true.
+	//
+	// Example: Assume 'variable a' holds 10 and 'variable b' holds 20.
+	//
+	// (a = b) is not true.
+	//
+	// < > Checks whether the values of two operands are equal; if the values are not
+	// equal, then the condition becomes true.
+	//
+	// Example: (a < > b) is true.
+	//
+	// > Checks whether the value of the left operand is greater than the value of the
+	// right operand; if yes, then the condition becomes true.
+	//
+	// Example: (a > b) is not true.
+	//
+	// < Checks whether the value of the left operand is less than the value of the
+	// right operand; if yes, then the condition becomes true.
+	//
+	// Example: (a < b) is true.
+	//
+	// >= Checks whether the value of the left operand is greater than or equal to the
+	// value of the right operand; if yes, then the condition becomes true.
+	//
+	// Example: (a >= b) is not true.
+	//
+	// <= Checks whether the value of the left operand is less than or equal to the
+	// value of the right operand; if yes, then the condition becomes true.
+	//
+	// Example: (a <= b) is true.
+	//
+	// AND, OR, IN, BETWEEN, LIKE, NOT, IS NULL Logical operators.
+	//
+	// Supported Partition Key Types: The following are the supported partition keys.
+	//
 	//   - string
+	//
 	//   - date
+	//
 	//   - timestamp
+	//
 	//   - int
+	//
 	//   - bigint
+	//
 	//   - long
+	//
 	//   - tinyint
+	//
 	//   - smallint
+	//
 	//   - decimal
-	// If an type is encountered that is not valid, an exception is thrown. The
-	// following list shows the valid operators on each type. When you define a
+	//
+	// If an type is encountered that is not valid, an exception is thrown.
+	//
+	// The following list shows the valid operators on each type. When you define a
 	// crawler, the partitionKey type is created as a STRING , to be compatible with
-	// the catalog partitions. Sample API Call:
+	// the catalog partitions.
+	//
+	// Sample API Call:
+	//
+	// [JSQLParser]: http://jsqlparser.sourceforge.net/home.php
 	Expression *string
 
 	// The maximum number of partitions to return in a single response.
@@ -143,25 +181,25 @@ func (c *Client) addOperationGetPartitionsMiddlewares(stack *middleware.Stack, o
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -176,13 +214,16 @@ func (c *Client) addOperationGetPartitionsMiddlewares(stack *middleware.Stack, o
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpGetPartitionsValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetPartitions(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

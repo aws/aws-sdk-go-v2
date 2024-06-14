@@ -6,16 +6,16 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/cloudfront/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // This API is deprecated. Amazon CloudFront is deprecating real-time messaging
-// protocol (RTMP) distributions on December 31, 2020. For more information, read
-// the announcement (http://forums.aws.amazon.com/ann.jspa?annID=7356) on the
-// Amazon CloudFront discussion forum.
+// protocol (RTMP) distributions on December 31, 2020. For more information, [read the announcement]on
+// the Amazon CloudFront discussion forum.
+//
+// [read the announcement]: http://forums.aws.amazon.com/ann.jspa?annID=7356
 func (c *Client) CreateStreamingDistributionWithTags(ctx context.Context, params *CreateStreamingDistributionWithTagsInput, optFns ...func(*Options)) (*CreateStreamingDistributionWithTagsOutput, error) {
 	if params == nil {
 		params = &CreateStreamingDistributionWithTagsInput{}
@@ -82,25 +82,25 @@ func (c *Client) addOperationCreateStreamingDistributionWithTagsMiddlewares(stac
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -115,13 +115,16 @@ func (c *Client) addOperationCreateStreamingDistributionWithTagsMiddlewares(stac
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpCreateStreamingDistributionWithTagsValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateStreamingDistributionWithTags(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

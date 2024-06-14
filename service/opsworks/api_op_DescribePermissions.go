@@ -6,17 +6,18 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/opsworks/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Describes the permissions for a specified stack. Required Permissions: To use
-// this action, an IAM user must have a Manage permissions level for the stack, or
-// an attached policy that explicitly grants permissions. For more information on
-// user permissions, see Managing User Permissions (https://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html)
-// .
+// Describes the permissions for a specified stack.
+//
+// Required Permissions: To use this action, an IAM user must have a Manage
+// permissions level for the stack, or an attached policy that explicitly grants
+// permissions. For more information on user permissions, see [Managing User Permissions].
+//
+// [Managing User Permissions]: https://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html
 func (c *Client) DescribePermissions(ctx context.Context, params *DescribePermissionsInput, optFns ...func(*Options)) (*DescribePermissionsOutput, error) {
 	if params == nil {
 		params = &DescribePermissionsInput{}
@@ -35,8 +36,9 @@ func (c *Client) DescribePermissions(ctx context.Context, params *DescribePermis
 type DescribePermissionsInput struct {
 
 	// The user's IAM ARN. This can also be a federated user's ARN. For more
-	// information about IAM ARNs, see Using Identifiers (https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html)
-	// .
+	// information about IAM ARNs, see [Using Identifiers].
+	//
+	// [Using Identifiers]: https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
 	IamUserArn *string
 
 	// The stack ID.
@@ -49,10 +51,13 @@ type DescribePermissionsInput struct {
 type DescribePermissionsOutput struct {
 
 	// An array of Permission objects that describe the stack permissions.
+	//
 	//   - If the request object contains only a stack ID, the array contains a
 	//   Permission object with permissions for each of the stack IAM ARNs.
+	//
 	//   - If the request object contains only an IAM ARN, the array contains a
 	//   Permission object with permissions for each of the user's stack IDs.
+	//
 	//   - If the request contains a stack ID and an IAM ARN, the array contains a
 	//   single Permission object with permissions for the specified stack and IAM ARN.
 	Permissions []types.Permission
@@ -85,25 +90,25 @@ func (c *Client) addOperationDescribePermissionsMiddlewares(stack *middleware.St
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -118,10 +123,13 @@ func (c *Client) addOperationDescribePermissionsMiddlewares(stack *middleware.St
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribePermissions(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

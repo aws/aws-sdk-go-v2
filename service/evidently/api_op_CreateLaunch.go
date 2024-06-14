@@ -6,21 +6,23 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/evidently/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates a launch of a given feature. Before you create a launch, you must
-// create the feature to use for the launch. You can use a launch to safely
-// validate new features by serving them to a specified percentage of your users
-// while you roll out the feature. You can monitor the performance of the new
-// feature to help you decide when to ramp up traffic to more users. This helps you
-// reduce risk and identify unintended consequences before you fully launch the
-// feature. Don't use this operation to update an existing launch. Instead, use
-// UpdateLaunch (https://docs.aws.amazon.com/cloudwatchevidently/latest/APIReference/API_UpdateLaunch.html)
-// .
+// create the feature to use for the launch.
+//
+// You can use a launch to safely validate new features by serving them to a
+// specified percentage of your users while you roll out the feature. You can
+// monitor the performance of the new feature to help you decide when to ramp up
+// traffic to more users. This helps you reduce risk and identify unintended
+// consequences before you fully launch the feature.
+//
+// Don't use this operation to update an existing launch. Instead, use [UpdateLaunch].
+//
+// [UpdateLaunch]: https://docs.aws.amazon.com/cloudwatchevidently/latest/APIReference/API_UpdateLaunch.html
 func (c *Client) CreateLaunch(ctx context.Context, params *CreateLaunchInput, optFns ...func(*Options)) (*CreateLaunchOutput, error) {
 	if params == nil {
 		params = &CreateLaunchInput{}
@@ -72,14 +74,20 @@ type CreateLaunchInput struct {
 	// feature variations during each step of the launch.
 	ScheduledSplitsConfig *types.ScheduledSplitsLaunchConfig
 
-	// Assigns one or more tags (key-value pairs) to the launch. Tags can help you
-	// organize and categorize your resources. You can also use them to scope user
-	// permissions by granting a user permission to access or change only resources
-	// with certain tag values. Tags don't have any semantic meaning to Amazon Web
-	// Services and are interpreted strictly as strings of characters. You can
-	// associate as many as 50 tags with a launch. For more information, see Tagging
-	// Amazon Web Services resources (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html)
-	// .
+	// Assigns one or more tags (key-value pairs) to the launch.
+	//
+	// Tags can help you organize and categorize your resources. You can also use them
+	// to scope user permissions by granting a user permission to access or change only
+	// resources with certain tag values.
+	//
+	// Tags don't have any semantic meaning to Amazon Web Services and are interpreted
+	// strictly as strings of characters.
+	//
+	// You can associate as many as 50 tags with a launch.
+	//
+	// For more information, see [Tagging Amazon Web Services resources].
+	//
+	// [Tagging Amazon Web Services resources]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
 	Tags map[string]string
 
 	noSmithyDocumentSerde
@@ -120,25 +128,25 @@ func (c *Client) addOperationCreateLaunchMiddlewares(stack *middleware.Stack, op
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -153,13 +161,16 @@ func (c *Client) addOperationCreateLaunchMiddlewares(stack *middleware.Stack, op
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpCreateLaunchValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateLaunch(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

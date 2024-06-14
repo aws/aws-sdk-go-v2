@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/translate/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -16,10 +15,11 @@ import (
 // exists for the given terminology name. Importing a terminology with the same
 // name as an existing one will merge the terminologies based on the chosen merge
 // strategy. The only supported merge strategy is OVERWRITE, where the imported
-// terminology overwrites the existing terminology of the same name. If you import
-// a terminology that overwrites an existing one, the new terminology takes up to
-// 10 minutes to fully propagate. After that, translations have access to the new
-// terminology.
+// terminology overwrites the existing terminology of the same name.
+//
+// If you import a terminology that overwrites an existing one, the new
+// terminology takes up to 10 minutes to fully propagate. After that, translations
+// have access to the new terminology.
 func (c *Client) ImportTerminology(ctx context.Context, params *ImportTerminologyInput, optFns ...func(*Options)) (*ImportTerminologyOutput, error) {
 	if params == nil {
 		params = &ImportTerminologyInput{}
@@ -62,8 +62,9 @@ type ImportTerminologyInput struct {
 
 	// Tags to be associated with this resource. A tag is a key-value pair that adds
 	// metadata to a resource. Each tag key for the resource must be unique. For more
-	// information, see Tagging your resources (https://docs.aws.amazon.com/translate/latest/dg/tagging.html)
-	// .
+	// information, see [Tagging your resources].
+	//
+	// [Tagging your resources]: https://docs.aws.amazon.com/translate/latest/dg/tagging.html
 	Tags []types.Tag
 
 	noSmithyDocumentSerde
@@ -108,25 +109,25 @@ func (c *Client) addOperationImportTerminologyMiddlewares(stack *middleware.Stac
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -141,13 +142,16 @@ func (c *Client) addOperationImportTerminologyMiddlewares(stack *middleware.Stac
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpImportTerminologyValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opImportTerminology(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

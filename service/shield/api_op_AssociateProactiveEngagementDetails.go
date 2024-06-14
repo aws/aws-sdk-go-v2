@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/shield/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -14,14 +13,20 @@ import (
 
 // Initializes proactive engagement and sets the list of contacts for the Shield
 // Response Team (SRT) to use. You must provide at least one phone number in the
-// emergency contact list. After you have initialized proactive engagement using
-// this call, to disable or enable proactive engagement, use the calls
-// DisableProactiveEngagement and EnableProactiveEngagement . This call defines the
-// list of email addresses and phone numbers that the SRT can use to contact you
-// for escalations to the SRT and to initiate proactive customer support. The
-// contacts that you provide in the request replace any contacts that were already
-// defined. If you already have contacts defined and want to use them, retrieve the
-// list using DescribeEmergencyContactSettings and then provide it to this call.
+// emergency contact list.
+//
+// After you have initialized proactive engagement using this call, to disable or
+// enable proactive engagement, use the calls DisableProactiveEngagement and
+// EnableProactiveEngagement .
+//
+// This call defines the list of email addresses and phone numbers that the SRT
+// can use to contact you for escalations to the SRT and to initiate proactive
+// customer support.
+//
+// The contacts that you provide in the request replace any contacts that were
+// already defined. If you already have contacts defined and want to use them,
+// retrieve the list using DescribeEmergencyContactSettings and then provide it to
+// this call.
 func (c *Client) AssociateProactiveEngagementDetails(ctx context.Context, params *AssociateProactiveEngagementDetailsInput, optFns ...func(*Options)) (*AssociateProactiveEngagementDetailsOutput, error) {
 	if params == nil {
 		params = &AssociateProactiveEngagementDetailsInput{}
@@ -41,11 +46,14 @@ type AssociateProactiveEngagementDetailsInput struct {
 
 	// A list of email addresses and phone numbers that the Shield Response Team (SRT)
 	// can use to contact you for escalations to the SRT and to initiate proactive
-	// customer support. To enable proactive engagement, the contact list must include
-	// at least one phone number. The contacts that you provide here replace any
-	// contacts that were already defined. If you already have contacts defined and
-	// want to use them, retrieve the list using DescribeEmergencyContactSettings and
-	// then provide it here.
+	// customer support.
+	//
+	// To enable proactive engagement, the contact list must include at least one
+	// phone number.
+	//
+	// The contacts that you provide here replace any contacts that were already
+	// defined. If you already have contacts defined and want to use them, retrieve the
+	// list using DescribeEmergencyContactSettings and then provide it here.
 	//
 	// This member is required.
 	EmergencyContactList []types.EmergencyContact
@@ -82,25 +90,25 @@ func (c *Client) addOperationAssociateProactiveEngagementDetailsMiddlewares(stac
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -115,13 +123,16 @@ func (c *Client) addOperationAssociateProactiveEngagementDetailsMiddlewares(stac
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpAssociateProactiveEngagementDetailsValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opAssociateProactiveEngagementDetails(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

@@ -6,16 +6,16 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/rdsdata/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Runs one or more SQL statements. This operation isn't supported for Aurora
-// PostgreSQL Serverless v2 and provisioned DB clusters, and for Aurora Serverless
-// v1 DB clusters, the operation is deprecated. Use the BatchExecuteStatement or
-// ExecuteStatement operation.
+// Runs one or more SQL statements.
+//
+// This operation isn't supported for Aurora PostgreSQL Serverless v2 and
+// provisioned DB clusters, and for Aurora Serverless v1 DB clusters, the operation
+// is deprecated. Use the BatchExecuteStatement or ExecuteStatement operation.
 //
 // Deprecated: The ExecuteSql API is deprecated, please use the ExecuteStatement
 // API.
@@ -40,8 +40,11 @@ type ExecuteSqlInput struct {
 
 	// The Amazon Resource Name (ARN) of the secret that enables access to the DB
 	// cluster. Enter the database user name and password for the credentials in the
-	// secret. For information about creating the secret, see Create a database secret (https://docs.aws.amazon.com/secretsmanager/latest/userguide/create_database_secret.html)
-	// .
+	// secret.
+	//
+	// For information about creating the secret, see [Create a database secret].
+	//
+	// [Create a database secret]: https://docs.aws.amazon.com/secretsmanager/latest/userguide/create_database_secret.html
 	//
 	// This member is required.
 	AwsSecretStoreArn *string
@@ -51,9 +54,11 @@ type ExecuteSqlInput struct {
 	// This member is required.
 	DbClusterOrInstanceArn *string
 
-	// One or more SQL statements to run on the DB cluster. You can separate SQL
-	// statements from each other with a semicolon (;). Any valid SQL statement is
-	// permitted, including data definition, data manipulation, and commit statements.
+	// One or more SQL statements to run on the DB cluster.
+	//
+	// You can separate SQL statements from each other with a semicolon (;). Any valid
+	// SQL statement is permitted, including data definition, data manipulation, and
+	// commit statements.
 	//
 	// This member is required.
 	SqlStatements *string
@@ -102,25 +107,25 @@ func (c *Client) addOperationExecuteSqlMiddlewares(stack *middleware.Stack, opti
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -135,13 +140,16 @@ func (c *Client) addOperationExecuteSqlMiddlewares(stack *middleware.Stack, opti
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpExecuteSqlValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opExecuteSql(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

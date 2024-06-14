@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/pipes/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -73,10 +72,12 @@ type CreatePipeInput struct {
 	// The list of key-value pairs to associate with the pipe.
 	Tags map[string]string
 
-	// The parameters required to set up a target for your pipe. For more information
-	// about pipe target parameters, including how to use dynamic path parameters, see
-	// Target parameters (https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-pipes-event-target.html)
-	// in the Amazon EventBridge User Guide.
+	// The parameters required to set up a target for your pipe.
+	//
+	// For more information about pipe target parameters, including how to use dynamic
+	// path parameters, see [Target parameters]in the Amazon EventBridge User Guide.
+	//
+	// [Target parameters]: https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-pipes-event-target.html
 	TargetParameters *types.PipeTargetParameters
 
 	noSmithyDocumentSerde
@@ -96,8 +97,9 @@ type CreatePipeOutput struct {
 	// The state the pipe should be in.
 	DesiredState types.RequestedPipeState
 
-	// When the pipe was last updated, in ISO-8601 format (https://www.w3.org/TR/NOTE-datetime)
-	// (YYYY-MM-DDThh:mm:ss.sTZD).
+	// When the pipe was last updated, in [ISO-8601 format] (YYYY-MM-DDThh:mm:ss.sTZD).
+	//
+	// [ISO-8601 format]: https://www.w3.org/TR/NOTE-datetime
 	LastModifiedTime *time.Time
 
 	// The name of the pipe.
@@ -131,25 +133,25 @@ func (c *Client) addOperationCreatePipeMiddlewares(stack *middleware.Stack, opti
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -164,13 +166,16 @@ func (c *Client) addOperationCreatePipeMiddlewares(stack *middleware.Stack, opti
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpCreatePipeValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreatePipe(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

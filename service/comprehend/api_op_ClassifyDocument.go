@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/comprehend/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -14,23 +13,28 @@ import (
 
 // Creates a classification request to analyze a single document in real-time.
 // ClassifyDocument supports the following model types:
+//
 //   - Custom classifier - a custom model that you have created and trained. For
 //     input, you can provide plain text, a single-page document (PDF, Word, or image),
-//     or Amazon Textract API output. For more information, see Custom classification (https://docs.aws.amazon.com/comprehend/latest/dg/how-document-classification.html)
-//     in the Amazon Comprehend Developer Guide.
+//     or Amazon Textract API output. For more information, see [Custom classification]in the Amazon
+//     Comprehend Developer Guide.
+//
 //   - Prompt safety classifier - Amazon Comprehend provides a pre-trained model
 //     for classifying input prompts for generative AI applications. For input, you
 //     provide English plain text input. For prompt safety classification, the response
 //     includes only the Classes field. For more information about prompt safety
-//     classifiers, see Prompt safety classification (https://docs.aws.amazon.com/comprehend/latest/dg/trust-safety.html#prompt-classification)
-//     in the Amazon Comprehend Developer Guide.
+//     classifiers, see [Prompt safety classification]in the Amazon Comprehend Developer Guide.
 //
 // If the system detects errors while processing a page in the input document, the
-// API response includes an Errors field that describes the errors. If the system
-// detects a document-level error in your input document, the API returns an
-// InvalidRequestException error response. For details about this exception, see
-// Errors in semi-structured documents (https://docs.aws.amazon.com/comprehend/latest/dg/idp-inputs-sync-err.html)
-// in the Comprehend Developer Guide.
+// API response includes an Errors field that describes the errors.
+//
+// If the system detects a document-level error in your input document, the API
+// returns an InvalidRequestException error response. For details about this
+// exception, see [Errors in semi-structured documents]in the Comprehend Developer Guide.
+//
+// [Custom classification]: https://docs.aws.amazon.com/comprehend/latest/dg/how-document-classification.html
+// [Prompt safety classification]: https://docs.aws.amazon.com/comprehend/latest/dg/trust-safety.html#prompt-classification
+// [Errors in semi-structured documents]: https://docs.aws.amazon.com/comprehend/latest/dg/idp-inputs-sync-err.html
 func (c *Client) ClassifyDocument(ctx context.Context, params *ClassifyDocumentInput, optFns ...func(*Options)) (*ClassifyDocumentOutput, error) {
 	if params == nil {
 		params = &ClassifyDocumentInput{}
@@ -48,28 +52,40 @@ func (c *Client) ClassifyDocument(ctx context.Context, params *ClassifyDocumentI
 
 type ClassifyDocumentInput struct {
 
-	// The Amazon Resource Number (ARN) of the endpoint. For prompt safety
-	// classification, Amazon Comprehend provides the endpoint ARN. For more
-	// information about prompt safety classifiers, see Prompt safety classification (https://docs.aws.amazon.com/comprehend/latest/dg/trust-safety.html#prompt-classification)
-	// in the Amazon Comprehend Developer Guide For custom classification, you create
-	// an endpoint for your custom model. For more information, see Using Amazon
-	// Comprehend endpoints (https://docs.aws.amazon.com/comprehend/latest/dg/using-endpoints.html)
-	// .
+	// The Amazon Resource Number (ARN) of the endpoint.
+	//
+	// For prompt safety classification, Amazon Comprehend provides the endpoint ARN.
+	// For more information about prompt safety classifiers, see [Prompt safety classification]in the Amazon
+	// Comprehend Developer Guide
+	//
+	// For custom classification, you create an endpoint for your custom model. For
+	// more information, see [Using Amazon Comprehend endpoints].
+	//
+	// [Prompt safety classification]: https://docs.aws.amazon.com/comprehend/latest/dg/trust-safety.html#prompt-classification
+	// [Using Amazon Comprehend endpoints]: https://docs.aws.amazon.com/comprehend/latest/dg/using-endpoints.html
 	//
 	// This member is required.
 	EndpointArn *string
 
-	// Use the Bytes parameter to input a text, PDF, Word or image file. When you
-	// classify a document using a custom model, you can also use the Bytes parameter
-	// to input an Amazon Textract DetectDocumentText or AnalyzeDocument output file.
+	// Use the Bytes parameter to input a text, PDF, Word or image file.
+	//
+	// When you classify a document using a custom model, you can also use the Bytes
+	// parameter to input an Amazon Textract DetectDocumentText or AnalyzeDocument
+	// output file.
+	//
 	// To classify a document using the prompt safety classifier, use the Text
-	// parameter for input. Provide the input document as a sequence of base64-encoded
-	// bytes. If your code uses an Amazon Web Services SDK to classify documents, the
-	// SDK may encode the document file bytes for you. The maximum length of this field
-	// depends on the input document type. For details, see Inputs for real-time
-	// custom analysis (https://docs.aws.amazon.com/comprehend/latest/dg/idp-inputs-sync.html)
-	// in the Comprehend Developer Guide. If you use the Bytes parameter, do not use
-	// the Text parameter.
+	// parameter for input.
+	//
+	// Provide the input document as a sequence of base64-encoded bytes. If your code
+	// uses an Amazon Web Services SDK to classify documents, the SDK may encode the
+	// document file bytes for you.
+	//
+	// The maximum length of this field depends on the input document type. For
+	// details, see [Inputs for real-time custom analysis]in the Comprehend Developer Guide.
+	//
+	// If you use the Bytes parameter, do not use the Text parameter.
+	//
+	// [Inputs for real-time custom analysis]: https://docs.aws.amazon.com/comprehend/latest/dg/idp-inputs-sync.html
 	Bytes []byte
 
 	// Provides configuration parameters to override the default actions for
@@ -88,10 +104,12 @@ type ClassifyDocumentOutput struct {
 	// The classes used by the document being analyzed. These are used for models
 	// trained in multi-class mode. Individual classes are mutually exclusive and each
 	// document is expected to have only a single class assigned to it. For example, an
-	// animal can be a dog or a cat, but not both at the same time. For prompt safety
-	// classification, the response includes only two classes (SAFE_PROMPT and
-	// UNSAFE_PROMPT), along with a confidence score for each class. The value range of
-	// the score is zero to one, where one is the highest confidence.
+	// animal can be a dog or a cat, but not both at the same time.
+	//
+	// For prompt safety classification, the response includes only two classes
+	// (SAFE_PROMPT and UNSAFE_PROMPT), along with a confidence score for each class.
+	// The value range of the score is zero to one, where one is the highest
+	// confidence.
 	Classes []types.DocumentClass
 
 	// Extraction information about the document. This field is present in the
@@ -116,8 +134,9 @@ type ClassifyDocumentOutput struct {
 	// Warnings detected while processing the input document. The response includes a
 	// warning if there is a mismatch between the input document type and the model
 	// type associated with the endpoint that you specified. The response can also
-	// include warnings for individual pages that have a mismatch. The field is empty
-	// if the system generated no warnings.
+	// include warnings for individual pages that have a mismatch.
+	//
+	// The field is empty if the system generated no warnings.
 	Warnings []types.WarningsListItem
 
 	// Metadata pertaining to the operation's result.
@@ -148,25 +167,25 @@ func (c *Client) addOperationClassifyDocumentMiddlewares(stack *middleware.Stack
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -181,13 +200,16 @@ func (c *Client) addOperationClassifyDocumentMiddlewares(stack *middleware.Stack
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpClassifyDocumentValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opClassifyDocument(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

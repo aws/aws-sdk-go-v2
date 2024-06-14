@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/codebuild/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -60,17 +59,17 @@ type CreateProjectInput struct {
 	// badge.
 	BadgeEnabled *bool
 
-	// A ProjectBuildBatchConfig object that defines the batch build options for the
-	// project.
+	// A ProjectBuildBatchConfig object that defines the batch build options for the project.
 	BuildBatchConfig *types.ProjectBuildBatchConfig
 
 	// Stores recently used information so that it can be quickly accessed at a later
 	// time.
 	Cache *types.ProjectCache
 
-	// The maximum number of concurrent builds that are allowed for this project. New
-	// builds are only started if the current number of builds is less than or equal to
-	// this limit. If the current build count meets this limit, new builds are
+	// The maximum number of concurrent builds that are allowed for this project.
+	//
+	// New builds are only started if the current number of builds is less than or
+	// equal to this limit. If the current build count meets this limit, new builds are
 	// throttled and are not run.
 	ConcurrentBuildLimit *int32
 
@@ -78,13 +77,16 @@ type CreateProjectInput struct {
 	Description *string
 
 	// The Key Management Service customer master key (CMK) to be used for encrypting
-	// the build output artifacts. You can use a cross-account KMS key to encrypt the
-	// build output artifacts if your service role has permission to that key. You can
-	// specify either the Amazon Resource Name (ARN) of the CMK or, if available, the
-	// CMK's alias (using the format alias/ ).
+	// the build output artifacts.
+	//
+	// You can use a cross-account KMS key to encrypt the build output artifacts if
+	// your service role has permission to that key.
+	//
+	// You can specify either the Amazon Resource Name (ARN) of the CMK or, if
+	// available, the CMK's alias (using the format alias/ ).
 	EncryptionKey *string
 
-	// An array of ProjectFileSystemLocation objects for a CodeBuild build project. A
+	//  An array of ProjectFileSystemLocation objects for a CodeBuild build project. A
 	// ProjectFileSystemLocation object specifies the identifier , location ,
 	// mountOptions , mountPoint , and type of a file system created using Amazon
 	// Elastic File System.
@@ -110,35 +112,48 @@ type CreateProjectInput struct {
 
 	// A version of the build input to be built for this project. If not specified,
 	// the latest version is used. If specified, it must be one of:
+	//
 	//   - For CodeCommit: the commit ID, branch, or Git tag to use.
+	//
 	//   - For GitHub: the commit ID, pull request ID, branch name, or tag name that
 	//   corresponds to the version of the source code you want to build. If a pull
 	//   request ID is specified, it must use the format pr/pull-request-ID (for
 	//   example pr/25 ). If a branch name is specified, the branch's HEAD commit ID is
 	//   used. If not specified, the default branch's HEAD commit ID is used.
+	//
+	//   - For GitLab: the commit ID, branch, or Git tag to use.
+	//
 	//   - For Bitbucket: the commit ID, branch name, or tag name that corresponds to
 	//   the version of the source code you want to build. If a branch name is specified,
 	//   the branch's HEAD commit ID is used. If not specified, the default branch's HEAD
 	//   commit ID is used.
+	//
 	//   - For Amazon S3: the version ID of the object that represents the build input
 	//   ZIP file to use.
+	//
 	// If sourceVersion is specified at the build level, then that version takes
-	// precedence over this sourceVersion (at the project level). For more
-	// information, see Source Version Sample with CodeBuild (https://docs.aws.amazon.com/codebuild/latest/userguide/sample-source-version.html)
-	// in the CodeBuild User Guide.
+	// precedence over this sourceVersion (at the project level).
+	//
+	// For more information, see [Source Version Sample with CodeBuild] in the CodeBuild User Guide.
+	//
+	// [Source Version Sample with CodeBuild]: https://docs.aws.amazon.com/codebuild/latest/userguide/sample-source-version.html
 	SourceVersion *string
 
-	// A list of tag key and value pairs associated with this build project. These
-	// tags are available for use by Amazon Web Services services that support
+	// A list of tag key and value pairs associated with this build project.
+	//
+	// These tags are available for use by Amazon Web Services services that support
 	// CodeBuild build project tags.
 	Tags []types.Tag
 
-	// How long, in minutes, from 5 to 480 (8 hours), for CodeBuild to wait before it
-	// times out any build that has not been marked as completed. The default is 60
+	// How long, in minutes, from 5 to 2160 (36 hours), for CodeBuild to wait before
+	// it times out any build that has not been marked as completed. The default is 60
 	// minutes.
 	TimeoutInMinutes *int32
 
 	// VpcConfig enables CodeBuild to access resources in an Amazon VPC.
+	//
+	// If you're using compute fleets during project creation, do not provide
+	// vpcConfig.
 	VpcConfig *types.VpcConfig
 
 	noSmithyDocumentSerde
@@ -177,25 +192,25 @@ func (c *Client) addOperationCreateProjectMiddlewares(stack *middleware.Stack, o
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -210,13 +225,16 @@ func (c *Client) addOperationCreateProjectMiddlewares(stack *middleware.Stack, o
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpCreateProjectValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateProject(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

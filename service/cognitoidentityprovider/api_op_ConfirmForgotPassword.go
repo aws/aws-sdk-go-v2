@@ -12,12 +12,14 @@ import (
 )
 
 // Allows a user to enter a confirmation code to reset a forgotten password.
-// Amazon Cognito doesn't evaluate Identity and Access Management (IAM) policies in
-// requests for this API operation. For this operation, you can't use IAM
+//
+// Amazon Cognito doesn't evaluate Identity and Access Management (IAM) policies
+// in requests for this API operation. For this operation, you can't use IAM
 // credentials to authorize requests, and you can't grant IAM permissions in
 // policies. For more information about authorization models in Amazon Cognito, see
-// Using the Amazon Cognito user pools API and user pool endpoints (https://docs.aws.amazon.com/cognito/latest/developerguide/user-pools-API-operations.html)
-// .
+// [Using the Amazon Cognito user pools API and user pool endpoints].
+//
+// [Using the Amazon Cognito user pools API and user pool endpoints]: https://docs.aws.amazon.com/cognito/latest/developerguide/user-pools-API-operations.html
 func (c *Client) ConfirmForgotPassword(ctx context.Context, params *ConfirmForgotPasswordInput, optFns ...func(*Options)) (*ConfirmForgotPasswordOutput, error) {
 	if params == nil {
 		params = &ConfirmForgotPasswordInput{}
@@ -42,8 +44,9 @@ type ConfirmForgotPasswordInput struct {
 	ClientId *string
 
 	// The confirmation code from your user's request to reset their password. For
-	// more information, see ForgotPassword (https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_ForgotPassword.html)
-	// .
+	// more information, see [ForgotPassword].
+	//
+	// [ForgotPassword]: https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_ForgotPassword.html
 	//
 	// This member is required.
 	ConfirmationCode *string
@@ -55,8 +58,9 @@ type ConfirmForgotPasswordInput struct {
 
 	// The username of the user that you want to query or modify. The value of this
 	// parameter is typically your user's username, but it can be any of their alias
-	// attributes. If username isn't an alias attribute in your user pool, you can
-	// also use their sub in this request.
+	// attributes. If username isn't an alias attribute in your user pool, this value
+	// must be the sub of a local user or the username of a user from a third-party
+	// IdP.
 	//
 	// This member is required.
 	Username *string
@@ -66,31 +70,41 @@ type ConfirmForgotPasswordInput struct {
 	AnalyticsMetadata *types.AnalyticsMetadataType
 
 	// A map of custom key-value pairs that you can provide as input for any custom
-	// workflows that this action triggers. You create custom workflows by assigning
-	// Lambda functions to user pool triggers. When you use the ConfirmForgotPassword
-	// API action, Amazon Cognito invokes the function that is assigned to the post
-	// confirmation trigger. When Amazon Cognito invokes this function, it passes a
-	// JSON payload, which the function receives as input. This payload contains a
-	// clientMetadata attribute, which provides the data that you assigned to the
-	// ClientMetadata parameter in your ConfirmForgotPassword request. In your function
-	// code in Lambda, you can process the clientMetadata value to enhance your
-	// workflow for your specific needs. For more information, see Customizing user
-	// pool Workflows with Lambda Triggers (https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-identity-pools-working-with-aws-lambda-triggers.html)
-	// in the Amazon Cognito Developer Guide. When you use the ClientMetadata
-	// parameter, remember that Amazon Cognito won't do the following:
+	// workflows that this action triggers.
+	//
+	// You create custom workflows by assigning Lambda functions to user pool
+	// triggers. When you use the ConfirmForgotPassword API action, Amazon Cognito
+	// invokes the function that is assigned to the post confirmation trigger. When
+	// Amazon Cognito invokes this function, it passes a JSON payload, which the
+	// function receives as input. This payload contains a clientMetadata attribute,
+	// which provides the data that you assigned to the ClientMetadata parameter in
+	// your ConfirmForgotPassword request. In your function code in Lambda, you can
+	// process the clientMetadata value to enhance your workflow for your specific
+	// needs.
+	//
+	// For more information, see [Customizing user pool Workflows with Lambda Triggers] in the Amazon Cognito Developer Guide.
+	//
+	// When you use the ClientMetadata parameter, remember that Amazon Cognito won't
+	// do the following:
+	//
 	//   - Store the ClientMetadata value. This data is available only to Lambda
 	//   triggers that are assigned to a user pool to support custom workflows. If your
 	//   user pool configuration doesn't include triggers, the ClientMetadata parameter
 	//   serves no purpose.
+	//
 	//   - Validate the ClientMetadata value.
+	//
 	//   - Encrypt the ClientMetadata value. Don't use Amazon Cognito to provide
 	//   sensitive information.
+	//
+	// [Customizing user pool Workflows with Lambda Triggers]: https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-identity-pools-working-with-aws-lambda-triggers.html
 	ClientMetadata map[string]string
 
 	// A keyed-hash message authentication code (HMAC) calculated using the secret key
 	// of a user pool client and username plus the client ID in the message. For more
-	// information about SecretHash , see Computing secret hash values (https://docs.aws.amazon.com/cognito/latest/developerguide/signing-up-users-in-your-app.html#cognito-user-pools-computing-secret-hash)
-	// .
+	// information about SecretHash , see [Computing secret hash values].
+	//
+	// [Computing secret hash values]: https://docs.aws.amazon.com/cognito/latest/developerguide/signing-up-users-in-your-app.html#cognito-user-pools-computing-secret-hash
 	SecretHash *string
 
 	// Contextual data about your user session, such as the device fingerprint, IP
@@ -133,22 +147,22 @@ func (c *Client) addOperationConfirmForgotPasswordMiddlewares(stack *middleware.
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -163,13 +177,16 @@ func (c *Client) addOperationConfirmForgotPasswordMiddlewares(stack *middleware.
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpConfirmForgotPasswordValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opConfirmForgotPassword(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

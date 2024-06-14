@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/globalaccelerator/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -62,8 +61,11 @@ type UpdateEndpointGroupInput struct {
 	// part of this endpoint group. For example, you can create a port override in
 	// which the listener receives user traffic on ports 80 and 443, but your
 	// accelerator routes that traffic to ports 1080 and 1443, respectively, on the
-	// endpoints. For more information, see Overriding listener ports (https://docs.aws.amazon.com/global-accelerator/latest/dg/about-endpoint-groups-port-override.html)
-	// in the Global Accelerator Developer Guide.
+	// endpoints.
+	//
+	// For more information, see [Overriding listener ports] in the Global Accelerator Developer Guide.
+	//
+	// [Overriding listener ports]: https://docs.aws.amazon.com/global-accelerator/latest/dg/about-endpoint-groups-port-override.html
 	PortOverrides []types.PortOverride
 
 	// The number of consecutive health checks required to set the state of a healthy
@@ -72,10 +74,13 @@ type UpdateEndpointGroupInput struct {
 	ThresholdCount *int32
 
 	// The percentage of traffic to send to an Amazon Web Services Region. Additional
-	// traffic is distributed to other endpoint groups for this listener. Use this
-	// action to increase (dial up) or decrease (dial down) traffic to a specific
-	// Region. The percentage is applied to the traffic that would otherwise have been
-	// routed to the Region based on optimal routing. The default value is 100.
+	// traffic is distributed to other endpoint groups for this listener.
+	//
+	// Use this action to increase (dial up) or decrease (dial down) traffic to a
+	// specific Region. The percentage is applied to the traffic that would otherwise
+	// have been routed to the Region based on optimal routing.
+	//
+	// The default value is 100.
 	TrafficDialPercentage *float32
 
 	noSmithyDocumentSerde
@@ -114,25 +119,25 @@ func (c *Client) addOperationUpdateEndpointGroupMiddlewares(stack *middleware.St
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -147,13 +152,16 @@ func (c *Client) addOperationUpdateEndpointGroupMiddlewares(stack *middleware.St
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpUpdateEndpointGroupValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateEndpointGroup(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

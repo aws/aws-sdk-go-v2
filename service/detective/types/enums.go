@@ -12,8 +12,9 @@ const (
 )
 
 // Values returns all known values for DatasourcePackage. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (DatasourcePackage) Values() []DatasourcePackage {
 	return []DatasourcePackage{
 		"DETECTIVE_CORE",
@@ -33,8 +34,9 @@ const (
 
 // Values returns all known values for DatasourcePackageIngestState. Note that
 // this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (DatasourcePackageIngestState) Values() []DatasourcePackageIngestState {
 	return []DatasourcePackageIngestState{
 		"STARTED",
@@ -52,8 +54,9 @@ const (
 )
 
 // Values returns all known values for EntityType. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (EntityType) Values() []EntityType {
 	return []EntityType{
 		"IAM_ROLE",
@@ -71,8 +74,9 @@ const (
 )
 
 // Values returns all known values for ErrorCode. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ErrorCode) Values() []ErrorCode {
 	return []ErrorCode{
 		"INVALID_GRAPH_ARN",
@@ -91,8 +95,9 @@ const (
 )
 
 // Values returns all known values for Field. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (Field) Values() []Field {
 	return []Field{
 		"SEVERITY",
@@ -116,8 +121,9 @@ const (
 )
 
 // Values returns all known values for IndicatorType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (IndicatorType) Values() []IndicatorType {
 	return []IndicatorType{
 		"TTP_OBSERVED",
@@ -140,8 +146,9 @@ const (
 )
 
 // Values returns all known values for InvitationType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (InvitationType) Values() []InvitationType {
 	return []InvitationType{
 		"INVITATION",
@@ -158,8 +165,9 @@ const (
 )
 
 // Values returns all known values for MemberDisabledReason. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (MemberDisabledReason) Values() []MemberDisabledReason {
 	return []MemberDisabledReason{
 		"VOLUME_TOO_HIGH",
@@ -179,8 +187,9 @@ const (
 )
 
 // Values returns all known values for MemberStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (MemberStatus) Values() []MemberStatus {
 	return []MemberStatus{
 		"INVITED",
@@ -199,8 +208,9 @@ const (
 )
 
 // Values returns all known values for Reason. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (Reason) Values() []Reason {
 	return []Reason{
 		"AWS_THREAT_INTELLIGENCE",
@@ -219,8 +229,9 @@ const (
 )
 
 // Values returns all known values for Severity. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (Severity) Values() []Severity {
 	return []Severity{
 		"INFORMATIONAL",
@@ -240,8 +251,9 @@ const (
 )
 
 // Values returns all known values for SortOrder. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (SortOrder) Values() []SortOrder {
 	return []SortOrder{
 		"ASC",
@@ -258,8 +270,9 @@ const (
 )
 
 // Values returns all known values for State. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (State) Values() []State {
 	return []State{
 		"ACTIVE",
@@ -277,8 +290,9 @@ const (
 )
 
 // Values returns all known values for Status. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (Status) Values() []Status {
 	return []Status{
 		"RUNNING",

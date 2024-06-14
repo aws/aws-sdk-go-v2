@@ -10,8 +10,9 @@ import (
 // Indicates that an Amazon S3 canned ACL should be set to control ownership of
 // stored query results. When Athena stores query results in Amazon S3, the canned
 // ACL is set with the x-amz-acl request header. For more information about S3
-// Object Ownership, see Object Ownership settings (https://docs.aws.amazon.com/AmazonS3/latest/userguide/about-object-ownership.html#object-ownership-overview)
-// in the Amazon S3 User Guide.
+// Object Ownership, see [Object Ownership settings]in the Amazon S3 User Guide.
+//
+// [Object Ownership settings]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/about-object-ownership.html#object-ownership-overview
 type AclConfiguration struct {
 
 	// The Amazon S3 canned ACL that Athena should specify when storing query results.
@@ -19,8 +20,9 @@ type AclConfiguration struct {
 	// query runs in a workgroup and the workgroup overrides client-side settings, then
 	// the Amazon S3 canned ACL specified in the workgroup's settings is used for all
 	// queries that run in the workgroup. For more information about Amazon S3 canned
-	// ACLs, see Canned ACL (https://docs.aws.amazon.com/AmazonS3/latest/userguide/acl-overview.html#canned-acl)
-	// in the Amazon S3 User Guide.
+	// ACLs, see [Canned ACL]in the Amazon S3 User Guide.
+	//
+	// [Canned ACL]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/acl-overview.html#canned-acl
 	//
 	// This member is required.
 	S3AclOption S3AclOption
@@ -49,16 +51,23 @@ type ApplicationDPUSizes struct {
 type AthenaError struct {
 
 	// An integer value that specifies the category of a query failure error. The
-	// following list shows the category for each integer value. 1 - System 2 - User 3
-	// - Other
+	// following list shows the category for each integer value.
+	//
+	// 1 - System
+	//
+	// 2 - User
+	//
+	// 3 - Other
 	ErrorCategory *int32
 
 	// Contains a short description of the error that occurred.
 	ErrorMessage *string
 
 	// An integer value that provides specific information about an Athena query
-	// error. For the meaning of specific values, see the Error Type Reference (https://docs.aws.amazon.com/athena/latest/ug/error-reference.html#error-reference-error-type-reference)
-	// in the Amazon Athena User Guide.
+	// error. For the meaning of specific values, see the [Error Type Reference]in the Amazon Athena User
+	// Guide.
+	//
+	// [Error Type Reference]: https://docs.aws.amazon.com/athena/latest/ug/error-reference.html#error-reference-error-type-reference
 	ErrorType *int32
 
 	// True if the query might succeed if resubmitted.
@@ -113,13 +122,24 @@ type CalculationStatus struct {
 	CompletionDateTime *time.Time
 
 	// The state of the calculation execution. A description of each state follows.
-	// CREATING - The calculation is in the process of being created. CREATED - The
-	// calculation has been created and is ready to run. QUEUED - The calculation has
-	// been queued for processing. RUNNING - The calculation is running. CANCELING - A
-	// request to cancel the calculation has been received and the system is working to
-	// stop it. CANCELED - The calculation is no longer running as the result of a
-	// cancel request. COMPLETED - The calculation has completed without error. FAILED
-	// - The calculation failed and is no longer running.
+	//
+	// CREATING - The calculation is in the process of being created.
+	//
+	// CREATED - The calculation has been created and is ready to run.
+	//
+	// QUEUED - The calculation has been queued for processing.
+	//
+	// RUNNING - The calculation is running.
+	//
+	// CANCELING - A request to cancel the calculation has been received and the
+	// system is working to stop it.
+	//
+	// CANCELED - The calculation is no longer running as the result of a cancel
+	// request.
+	//
+	// COMPLETED - The calculation has completed without error.
+	//
+	// FAILED - The calculation failed and is no longer running.
 	State CalculationExecutionState
 
 	// The reason for the calculation state change (for example, the calculation was
@@ -325,8 +345,9 @@ type Database struct {
 	noSmithyDocumentSerde
 }
 
-// Contains information about a data catalog in an Amazon Web Services account. In
-// the Athena console, data catalogs are listed as "data sources" on the Data
+// Contains information about a data catalog in an Amazon Web Services account.
+//
+// In the Athena console, data catalogs are listed as "data sources" on the Data
 // sources page under the Data source name column.
 type DataCatalog struct {
 
@@ -349,21 +370,32 @@ type DataCatalog struct {
 
 	// Specifies the Lambda function or functions to use for the data catalog. This is
 	// a mapping whose values depend on the catalog type.
+	//
 	//   - For the HIVE data catalog type, use the following syntax. The
 	//   metadata-function parameter is required. The sdk-version parameter is optional
 	//   and defaults to the currently supported version.
-	//   metadata-function=lambda_arn, sdk-version=version_number
+	//
+	// metadata-function=lambda_arn, sdk-version=version_number
+	//
 	//   - For the LAMBDA data catalog type, use one of the following sets of required
 	//   parameters, but not both.
+	//
 	//   - If you have one Lambda function that processes metadata and another for
 	//   reading the actual data, use the following syntax. Both parameters are required.
-	//   metadata-function=lambda_arn, record-function=lambda_arn
+	//
+	// metadata-function=lambda_arn, record-function=lambda_arn
+	//
 	//   - If you have a composite Lambda function that processes both metadata and
 	//   data, use the following syntax to specify your Lambda function.
-	//   function=lambda_arn
+	//
+	// function=lambda_arn
+	//
 	//   - The GLUE type takes a catalog ID parameter and is required. The catalog_id
 	//   is the account ID of the Amazon Web Services account to which the Glue catalog
-	//   belongs. catalog-id=catalog_id
+	//   belongs.
+	//
+	// catalog-id=catalog_id
+	//
 	//   - The GLUE data catalog type also applies to the default AwsDataCatalog that
 	//   already exists in your account, of which you can have only one and cannot
 	//   modify.
@@ -402,10 +434,12 @@ type EncryptionConfiguration struct {
 
 	// Indicates whether Amazon S3 server-side encryption with Amazon S3-managed keys (
 	// SSE_S3 ), server-side encryption with KMS-managed keys ( SSE_KMS ), or
-	// client-side encryption with KMS-managed keys ( CSE_KMS ) is used. If a query
-	// runs in a workgroup and the workgroup overrides client-side settings, then the
-	// workgroup's setting for encryption is used. It specifies whether query results
-	// must be encrypted, for all queries that run in this workgroup.
+	// client-side encryption with KMS-managed keys ( CSE_KMS ) is used.
+	//
+	// If a query runs in a workgroup and the workgroup overrides client-side
+	// settings, then the workgroup's setting for encryption is used. It specifies
+	// whether query results must be encrypted, for all queries that run in this
+	// workgroup.
 	//
 	// This member is required.
 	EncryptionOption EncryptionOption
@@ -427,9 +461,8 @@ type EngineConfiguration struct {
 
 	// Contains additional notebook engine MAP parameter mappings in the form of
 	// key-value pairs. To specify an Athena notebook that the Jupyter server will
-	// download and serve, specify a value for the StartSessionRequest$NotebookVersion
-	// field, and then add a key named NotebookId to AdditionalConfigs that has the
-	// value of the Athena notebook ID.
+	// download and serve, specify a value for the StartSessionRequest$NotebookVersionfield, and then add a key named
+	// NotebookId to AdditionalConfigs that has the value of the Athena notebook ID.
 	AdditionalConfigs map[string]string
 
 	// The number of DPUs to use for the coordinator. A coordinator is a special
@@ -482,11 +515,18 @@ type ExecutorsSummary struct {
 	ExecutorSize *int64
 
 	// The processing state of the executor. A description of each state follows.
-	// CREATING - The executor is being started, including acquiring resources. CREATED
-	// - The executor has been started. REGISTERED - The executor has been registered.
-	// TERMINATING - The executor is in the process of shutting down. TERMINATED - The
-	// executor is no longer running. FAILED - Due to a failure, the executor is no
-	// longer running.
+	//
+	// CREATING - The executor is being started, including acquiring resources.
+	//
+	// CREATED - The executor has been started.
+	//
+	// REGISTERED - The executor has been registered.
+	//
+	// TERMINATING - The executor is in the process of shutting down.
+	//
+	// TERMINATED - The executor is no longer running.
+	//
+	// FAILED - Due to a failure, the executor is no longer running.
 	ExecutorState ExecutorState
 
 	// The type of executor used for the application ( COORDINATOR , GATEWAY , or
@@ -701,8 +741,9 @@ type QueryExecutionStatistics struct {
 	// files that the query wrote to Amazon S3. If the query fails, the manifest file
 	// also tracks files that the query intended to write. The manifest is useful for
 	// identifying orphaned files resulting from a failed query. For more information,
-	// see Working with Query Results, Output Files, and Query History (https://docs.aws.amazon.com/athena/latest/ug/querying.html)
-	// in the Amazon Athena User Guide.
+	// see [Working with Query Results, Output Files, and Query History]in the Amazon Athena User Guide.
+	//
+	// [Working with Query Results, Output Files, and Query History]: https://docs.aws.amazon.com/athena/latest/ug/querying.html
 	DataManifestLocation *string
 
 	// The number of bytes in the data that was queried.
@@ -755,9 +796,11 @@ type QueryExecutionStatus struct {
 	// are available. RUNNING indicates that the query is in execution phase. SUCCEEDED
 	// indicates that the query completed without errors. FAILED indicates that the
 	// query experienced an error and did not complete processing. CANCELLED indicates
-	// that a user input interrupted query execution. Athena automatically retries your
-	// queries in cases of certain transient errors. As a result, you may see the query
-	// state transition from RUNNING or FAILED to QUEUED .
+	// that a user input interrupted query execution.
+	//
+	// Athena automatically retries your queries in cases of certain transient errors.
+	// As a result, you may see the query state transition from RUNNING or FAILED to
+	// QUEUED .
 	State QueryExecutionState
 
 	// Further detail about the status of the query.
@@ -846,7 +889,7 @@ type QueryRuntimeStatisticsTimeline struct {
 	// the query back to the queue.
 	QueryQueueTimeInMillis *int64
 
-	// The number of milliseconds that Athena spends on preprocessing before it
+	//  The number of milliseconds that Athena spends on preprocessing before it
 	// submits the query to the engine.
 	ServicePreProcessingTimeInMillis *int64
 
@@ -925,10 +968,9 @@ type ResultConfiguration struct {
 	// BUCKET_OWNER_FULL_CONTROL . This is a client-side setting. If workgroup settings
 	// override client-side settings, then the query uses the ACL configuration that is
 	// specified for the workgroup, and also uses the location for storing query
-	// results specified in the workgroup. For more information, see
-	// WorkGroupConfiguration$EnforceWorkGroupConfiguration and Workgroup Settings
-	// Override Client-Side Settings (https://docs.aws.amazon.com/athena/latest/ug/workgroups-settings-override.html)
-	// .
+	// results specified in the workgroup. For more information, see WorkGroupConfiguration$EnforceWorkGroupConfigurationand [Workgroup Settings Override Client-Side Settings].
+	//
+	// [Workgroup Settings Override Client-Side Settings]: https://docs.aws.amazon.com/athena/latest/ug/workgroups-settings-override.html
 	AclConfiguration *AclConfiguration
 
 	// If query and calculation results are encrypted in Amazon S3, indicates the
@@ -936,35 +978,33 @@ type ResultConfiguration struct {
 	// This is a client-side setting. If workgroup settings override client-side
 	// settings, then the query uses the encryption configuration that is specified for
 	// the workgroup, and also uses the location for storing query results specified in
-	// the workgroup. See WorkGroupConfiguration$EnforceWorkGroupConfiguration and
-	// Workgroup Settings Override Client-Side Settings (https://docs.aws.amazon.com/athena/latest/ug/workgroups-settings-override.html)
-	// .
+	// the workgroup. See WorkGroupConfiguration$EnforceWorkGroupConfigurationand [Workgroup Settings Override Client-Side Settings].
+	//
+	// [Workgroup Settings Override Client-Side Settings]: https://docs.aws.amazon.com/athena/latest/ug/workgroups-settings-override.html
 	EncryptionConfiguration *EncryptionConfiguration
 
 	// The Amazon Web Services account ID that you expect to be the owner of the
-	// Amazon S3 bucket specified by ResultConfiguration$OutputLocation . If set,
-	// Athena uses the value for ExpectedBucketOwner when it makes Amazon S3 calls to
-	// your specified output location. If the ExpectedBucketOwner Amazon Web Services
-	// account ID does not match the actual owner of the Amazon S3 bucket, the call
-	// fails with a permissions error. This is a client-side setting. If workgroup
-	// settings override client-side settings, then the query uses the
-	// ExpectedBucketOwner setting that is specified for the workgroup, and also uses
-	// the location for storing query results specified in the workgroup. See
-	// WorkGroupConfiguration$EnforceWorkGroupConfiguration and Workgroup Settings
-	// Override Client-Side Settings (https://docs.aws.amazon.com/athena/latest/ug/workgroups-settings-override.html)
-	// .
+	// Amazon S3 bucket specified by ResultConfiguration$OutputLocation. If set, Athena uses the value for
+	// ExpectedBucketOwner when it makes Amazon S3 calls to your specified output
+	// location. If the ExpectedBucketOwner Amazon Web Services account ID does not
+	// match the actual owner of the Amazon S3 bucket, the call fails with a
+	// permissions error.
+	//
+	// This is a client-side setting. If workgroup settings override client-side
+	// settings, then the query uses the ExpectedBucketOwner setting that is specified
+	// for the workgroup, and also uses the location for storing query results
+	// specified in the workgroup. See WorkGroupConfiguration$EnforceWorkGroupConfigurationand [Workgroup Settings Override Client-Side Settings].
+	//
+	// [Workgroup Settings Override Client-Side Settings]: https://docs.aws.amazon.com/athena/latest/ug/workgroups-settings-override.html
 	ExpectedBucketOwner *string
 
 	// The location in Amazon S3 where your query and calculation results are stored,
 	// such as s3://path/to/query/bucket/ . To run the query, you must specify the
 	// query results location using one of the ways: either for individual queries
-	// using either this setting (client-side), or in the workgroup, using
-	// WorkGroupConfiguration . If none of them is set, Athena issues an error that no
-	// output location is provided. For more information, see Working with query
-	// results, recent queries, and output files (https://docs.aws.amazon.com/athena/latest/ug/querying.html)
-	// . If workgroup settings override client-side settings, then the query uses the
-	// settings specified for the workgroup. See
-	// WorkGroupConfiguration$EnforceWorkGroupConfiguration .
+	// using either this setting (client-side), or in the workgroup, using WorkGroupConfiguration. If none
+	// of them is set, Athena issues an error that no output location is provided. If
+	// workgroup settings override client-side settings, then the query uses the
+	// settings specified for the workgroup. See WorkGroupConfiguration$EnforceWorkGroupConfiguration.
 	OutputLocation *string
 
 	noSmithyDocumentSerde
@@ -981,36 +1021,34 @@ type ResultConfigurationUpdates struct {
 	EncryptionConfiguration *EncryptionConfiguration
 
 	// The Amazon Web Services account ID that you expect to be the owner of the
-	// Amazon S3 bucket specified by ResultConfiguration$OutputLocation . If set,
-	// Athena uses the value for ExpectedBucketOwner when it makes Amazon S3 calls to
-	// your specified output location. If the ExpectedBucketOwner Amazon Web Services
-	// account ID does not match the actual owner of the Amazon S3 bucket, the call
-	// fails with a permissions error. If workgroup settings override client-side
-	// settings, then the query uses the ExpectedBucketOwner setting that is specified
-	// for the workgroup, and also uses the location for storing query results
-	// specified in the workgroup. See
-	// WorkGroupConfiguration$EnforceWorkGroupConfiguration and Workgroup Settings
-	// Override Client-Side Settings (https://docs.aws.amazon.com/athena/latest/ug/workgroups-settings-override.html)
-	// .
+	// Amazon S3 bucket specified by ResultConfiguration$OutputLocation. If set, Athena uses the value for
+	// ExpectedBucketOwner when it makes Amazon S3 calls to your specified output
+	// location. If the ExpectedBucketOwner Amazon Web Services account ID does not
+	// match the actual owner of the Amazon S3 bucket, the call fails with a
+	// permissions error.
+	//
+	// If workgroup settings override client-side settings, then the query uses the
+	// ExpectedBucketOwner setting that is specified for the workgroup, and also uses
+	// the location for storing query results specified in the workgroup. See WorkGroupConfiguration$EnforceWorkGroupConfigurationand [Workgroup Settings Override Client-Side Settings].
+	//
+	// [Workgroup Settings Override Client-Side Settings]: https://docs.aws.amazon.com/athena/latest/ug/workgroups-settings-override.html
 	ExpectedBucketOwner *string
 
 	// The location in Amazon S3 where your query and calculation results are stored,
-	// such as s3://path/to/query/bucket/ . For more information, see Working with
-	// query results, recent queries, and output files (https://docs.aws.amazon.com/athena/latest/ug/querying.html)
-	// . If workgroup settings override client-side settings, then the query uses the
-	// location for the query results and the encryption configuration that are
-	// specified for the workgroup. The "workgroup settings override" is specified in
-	// EnforceWorkGroupConfiguration (true/false) in the WorkGroupConfiguration . See
-	// WorkGroupConfiguration$EnforceWorkGroupConfiguration .
+	// such as s3://path/to/query/bucket/ . If workgroup settings override client-side
+	// settings, then the query uses the location for the query results and the
+	// encryption configuration that are specified for the workgroup. The "workgroup
+	// settings override" is specified in EnforceWorkGroupConfiguration (true/false)
+	// in the WorkGroupConfiguration . See WorkGroupConfiguration$EnforceWorkGroupConfiguration.
 	OutputLocation *string
 
 	// If set to true , indicates that the previously-specified ACL configuration for
 	// queries in this workgroup should be ignored and set to null. If set to false or
 	// not set, and a value is present in the AclConfiguration of
 	// ResultConfigurationUpdates , the AclConfiguration in the workgroup's
-	// ResultConfiguration is updated with the new value. For more information, see
-	// Workgroup Settings Override Client-Side Settings (https://docs.aws.amazon.com/athena/latest/ug/workgroups-settings-override.html)
-	// .
+	// ResultConfiguration is updated with the new value. For more information, see [Workgroup Settings Override Client-Side Settings].
+	//
+	// [Workgroup Settings Override Client-Side Settings]: https://docs.aws.amazon.com/athena/latest/ug/workgroups-settings-override.html
 	RemoveAclConfiguration *bool
 
 	// If set to "true", indicates that the previously-specified encryption
@@ -1019,17 +1057,18 @@ type ResultConfigurationUpdates struct {
 	// value is present in the EncryptionConfiguration in ResultConfigurationUpdates
 	// (the client-side setting), the EncryptionConfiguration in the workgroup's
 	// ResultConfiguration will be updated with the new value. For more information,
-	// see Workgroup Settings Override Client-Side Settings (https://docs.aws.amazon.com/athena/latest/ug/workgroups-settings-override.html)
-	// .
+	// see [Workgroup Settings Override Client-Side Settings].
+	//
+	// [Workgroup Settings Override Client-Side Settings]: https://docs.aws.amazon.com/athena/latest/ug/workgroups-settings-override.html
 	RemoveEncryptionConfiguration *bool
 
 	// If set to "true", removes the Amazon Web Services account ID previously
-	// specified for ResultConfiguration$ExpectedBucketOwner . If set to "false" or not
-	// set, and a value is present in the ExpectedBucketOwner in
-	// ResultConfigurationUpdates (the client-side setting), the ExpectedBucketOwner
-	// in the workgroup's ResultConfiguration is updated with the new value. For more
-	// information, see Workgroup Settings Override Client-Side Settings (https://docs.aws.amazon.com/athena/latest/ug/workgroups-settings-override.html)
-	// .
+	// specified for ResultConfiguration$ExpectedBucketOwner. If set to "false" or not set, and a value is present in the
+	// ExpectedBucketOwner in ResultConfigurationUpdates (the client-side setting),
+	// the ExpectedBucketOwner in the workgroup's ResultConfiguration is updated with
+	// the new value. For more information, see [Workgroup Settings Override Client-Side Settings].
+	//
+	// [Workgroup Settings Override Client-Side Settings]: https://docs.aws.amazon.com/athena/latest/ug/workgroups-settings-override.html
 	RemoveExpectedBucketOwner *bool
 
 	// If set to "true", indicates that the previously-specified query results
@@ -1037,9 +1076,9 @@ type ResultConfigurationUpdates struct {
 	// should be ignored and set to null. If set to "false" or not set, and a value is
 	// present in the OutputLocation in ResultConfigurationUpdates (the client-side
 	// setting), the OutputLocation in the workgroup's ResultConfiguration will be
-	// updated with the new value. For more information, see Workgroup Settings
-	// Override Client-Side Settings (https://docs.aws.amazon.com/athena/latest/ug/workgroups-settings-override.html)
-	// .
+	// updated with the new value. For more information, see [Workgroup Settings Override Client-Side Settings].
+	//
+	// [Workgroup Settings Override Client-Side Settings]: https://docs.aws.amazon.com/athena/latest/ug/workgroups-settings-override.html
 	RemoveOutputLocation *bool
 
 	noSmithyDocumentSerde
@@ -1085,8 +1124,7 @@ type ResultReuseInformation struct {
 }
 
 // The metadata and rows that make up a query result set. The metadata describes
-// the column structure and data types. To return a ResultSet object, use
-// GetQueryResults .
+// the column structure and data types. To return a ResultSet object, use GetQueryResults.
 type ResultSet struct {
 
 	// The metadata that describes the column structure and data types of a table of
@@ -1100,7 +1138,7 @@ type ResultSet struct {
 }
 
 // The metadata that describes the column structure and data types of a table of
-// query results. To return a ResultSetMetadata object, use GetQueryResults .
+// query results. To return a ResultSetMetadata object, use GetQueryResults.
 type ResultSetMetadata struct {
 
 	// Information about the columns returned in a query result metadata.
@@ -1164,14 +1202,24 @@ type SessionStatus struct {
 	// The date and time that the session started.
 	StartDateTime *time.Time
 
-	// The state of the session. A description of each state follows. CREATING - The
-	// session is being started, including acquiring resources. CREATED - The session
-	// has been started. IDLE - The session is able to accept a calculation. BUSY -
-	// The session is processing another task and is unable to accept a calculation.
-	// TERMINATING - The session is in the process of shutting down. TERMINATED - The
-	// session and its resources are no longer running. DEGRADED - The session has no
-	// healthy coordinators. FAILED - Due to a failure, the session and its resources
-	// are no longer running.
+	// The state of the session. A description of each state follows.
+	//
+	// CREATING - The session is being started, including acquiring resources.
+	//
+	// CREATED - The session has been started.
+	//
+	// IDLE - The session is able to accept a calculation.
+	//
+	// BUSY - The session is processing another task and is unable to accept a
+	// calculation.
+	//
+	// TERMINATING - The session is in the process of shutting down.
+	//
+	// TERMINATED - The session and its resources are no longer running.
+	//
+	// DEGRADED - The session has no healthy coordinators.
+	//
+	// FAILED - Due to a failure, the session and its resources are no longer running.
 	State SessionState
 
 	// The reason for the session state change (for example, canceled because the
@@ -1236,12 +1284,14 @@ type TableMetadata struct {
 // optional value, both of which you define. For example, you can use tags to
 // categorize Athena resources by purpose, owner, or environment. Use a consistent
 // set of tag keys to make it easier to search and filter the resources in your
-// account. For best practices, see Tagging Best Practices (https://docs.aws.amazon.com/whitepapers/latest/tagging-best-practices/tagging-best-practices.html)
-// . Tag keys can be from 1 to 128 UTF-8 Unicode characters, and tag values can be
-// from 0 to 256 UTF-8 Unicode characters. Tags can use letters and numbers
-// representable in UTF-8, and the following characters: + - = . _ : / @. Tag keys
-// and values are case-sensitive. Tag keys must be unique per resource. If you
-// specify more than one tag, separate them by commas.
+// account. For best practices, see [Tagging Best Practices]. Tag keys can be from 1 to 128 UTF-8 Unicode
+// characters, and tag values can be from 0 to 256 UTF-8 Unicode characters. Tags
+// can use letters and numbers representable in UTF-8, and the following
+// characters: + - = . _ : / @. Tag keys and values are case-sensitive. Tag keys
+// must be unique per resource. If you specify more than one tag, separate them by
+// commas.
+//
+// [Tagging Best Practices]: https://docs.aws.amazon.com/whitepapers/latest/tagging-best-practices/tagging-best-practices.html
 type Tag struct {
 
 	// A tag key. The tag key length is from 1 to 128 Unicode characters in UTF-8. You
@@ -1283,10 +1333,13 @@ type UnprocessedPreparedStatementName struct {
 
 	// The error message containing the reason why the prepared statement could not be
 	// returned. The following error messages are possible:
+	//
 	//   - INVALID_INPUT - The name of the prepared statement that was provided is not
 	//   valid (for example, the name is too long).
+	//
 	//   - STATEMENT_NOT_FOUND - A prepared statement with the name provided could not
 	//   be found.
+	//
 	//   - UNAUTHORIZED - The requester does not have permission to access the
 	//   workgroup that contains the prepared statement.
 	ErrorMessage *string
@@ -1315,14 +1368,13 @@ type UnprocessedQueryExecutionId struct {
 }
 
 // A workgroup, which contains a name, description, creation time, state, and
-// other configuration, listed under WorkGroup$Configuration . Each workgroup
-// enables you to isolate queries for you or your group of users from other queries
-// in the same account, to configure the query results location and the encryption
-// configuration (known as workgroup settings), to enable sending query metrics to
-// Amazon CloudWatch, and to establish per-query data usage control limits for all
-// queries in a workgroup. The workgroup settings override is specified in
-// EnforceWorkGroupConfiguration (true/false) in the WorkGroupConfiguration . See
-// WorkGroupConfiguration$EnforceWorkGroupConfiguration .
+// other configuration, listed under WorkGroup$Configuration. Each workgroup enables you to isolate
+// queries for you or your group of users from other queries in the same account,
+// to configure the query results location and the encryption configuration (known
+// as workgroup settings), to enable sending query metrics to Amazon CloudWatch,
+// and to establish per-query data usage control limits for all queries in a
+// workgroup. The workgroup settings override is specified in
+// EnforceWorkGroupConfiguration (true/false) in the WorkGroupConfiguration . See WorkGroupConfiguration$EnforceWorkGroupConfiguration.
 type WorkGroup struct {
 
 	// The workgroup name.
@@ -1336,8 +1388,7 @@ type WorkGroup struct {
 	// Metrics are enabled for the workgroup; whether workgroup settings override
 	// client-side settings; and the data usage limits for the amount of data scanned
 	// per query or per workgroup. The workgroup settings override is specified in
-	// EnforceWorkGroupConfiguration (true/false) in the WorkGroupConfiguration . See
-	// WorkGroupConfiguration$EnforceWorkGroupConfiguration .
+	// EnforceWorkGroupConfiguration (true/false) in the WorkGroupConfiguration . See WorkGroupConfiguration$EnforceWorkGroupConfiguration.
 	Configuration *WorkGroupConfiguration
 
 	// The date and time the workgroup was created.
@@ -1362,8 +1413,8 @@ type WorkGroup struct {
 // are enabled for the workgroup and whether workgroup settings override query
 // settings, and the data usage limits for the amount of data scanned per query or
 // per workgroup. The workgroup settings override is specified in
-// EnforceWorkGroupConfiguration (true/false) in the WorkGroupConfiguration . See
-// WorkGroupConfiguration$EnforceWorkGroupConfiguration .
+// EnforceWorkGroupConfiguration (true/false) in the WorkGroupConfiguration . See WorkGroupConfiguration$EnforceWorkGroupConfiguration
+// .
 type WorkGroupConfiguration struct {
 
 	// Specifies a user defined JSON string that is passed to the notebook engine.
@@ -1380,17 +1431,18 @@ type WorkGroupConfiguration struct {
 	// Enforces a minimal level of encryption for the workgroup for query and
 	// calculation results that are written to Amazon S3. When enabled, workgroup users
 	// can set encryption only to the minimum level set by the administrator or higher
-	// when they submit queries. The EnforceWorkGroupConfiguration setting takes
-	// precedence over the EnableMinimumEncryptionConfiguration flag. This means that
-	// if EnforceWorkGroupConfiguration is true, the
-	// EnableMinimumEncryptionConfiguration flag is ignored, and the workgroup
-	// configuration for encryption is used.
+	// when they submit queries.
+	//
+	// The EnforceWorkGroupConfiguration setting takes precedence over the
+	// EnableMinimumEncryptionConfiguration flag. This means that if
+	// EnforceWorkGroupConfiguration is true, the EnableMinimumEncryptionConfiguration
+	// flag is ignored, and the workgroup configuration for encryption is used.
 	EnableMinimumEncryptionConfiguration *bool
 
 	// If set to "true", the settings for the workgroup override client-side settings.
-	// If set to "false", client-side settings are used. For more information, see
-	// Workgroup Settings Override Client-Side Settings (https://docs.aws.amazon.com/athena/latest/ug/workgroups-settings-override.html)
-	// .
+	// If set to "false", client-side settings are used. For more information, see [Workgroup Settings Override Client-Side Settings].
+	//
+	// [Workgroup Settings Override Client-Side Settings]: https://docs.aws.amazon.com/athena/latest/ug/workgroups-settings-override.html
 	EnforceWorkGroupConfiguration *bool
 
 	// The engine version that all queries running on the workgroup use. Queries on
@@ -1417,19 +1469,18 @@ type WorkGroupConfiguration struct {
 	// Requester Pays buckets in queries. If set to false , workgroup members cannot
 	// query data from Requester Pays buckets, and queries that retrieve data from
 	// Requester Pays buckets cause an error. The default is false . For more
-	// information about Requester Pays buckets, see Requester Pays Buckets (https://docs.aws.amazon.com/AmazonS3/latest/dev/RequesterPaysBuckets.html)
-	// in the Amazon Simple Storage Service Developer Guide.
+	// information about Requester Pays buckets, see [Requester Pays Buckets]in the Amazon Simple Storage
+	// Service Developer Guide.
+	//
+	// [Requester Pays Buckets]: https://docs.aws.amazon.com/AmazonS3/latest/dev/RequesterPaysBuckets.html
 	RequesterPaysEnabled *bool
 
 	// The configuration for the workgroup, which includes the location in Amazon S3
 	// where query and calculation results are stored and the encryption option, if
 	// any, used for query and calculation results. To run the query, you must specify
 	// the query results location using one of the ways: either in the workgroup using
-	// this setting, or for individual queries (client-side), using
-	// ResultConfiguration$OutputLocation . If none of them is set, Athena issues an
-	// error that no output location is provided. For more information, see Working
-	// with query results, recent queries, and output files (https://docs.aws.amazon.com/athena/latest/ug/querying.html)
-	// .
+	// this setting, or for individual queries (client-side), using ResultConfiguration$OutputLocation. If none of them
+	// is set, Athena issues an error that no output location is provided.
 	ResultConfiguration *ResultConfiguration
 
 	noSmithyDocumentSerde
@@ -1459,16 +1510,18 @@ type WorkGroupConfigurationUpdates struct {
 	// calculation results that are written to Amazon S3. When enabled, workgroup users
 	// can set encryption only to the minimum level set by the administrator or higher
 	// when they submit queries. This setting does not apply to Spark-enabled
-	// workgroups. The EnforceWorkGroupConfiguration setting takes precedence over the
+	// workgroups.
+	//
+	// The EnforceWorkGroupConfiguration setting takes precedence over the
 	// EnableMinimumEncryptionConfiguration flag. This means that if
 	// EnforceWorkGroupConfiguration is true, the EnableMinimumEncryptionConfiguration
 	// flag is ignored, and the workgroup configuration for encryption is used.
 	EnableMinimumEncryptionConfiguration *bool
 
 	// If set to "true", the settings for the workgroup override client-side settings.
-	// If set to "false" client-side settings are used. For more information, see
-	// Workgroup Settings Override Client-Side Settings (https://docs.aws.amazon.com/athena/latest/ug/workgroups-settings-override.html)
-	// .
+	// If set to "false" client-side settings are used. For more information, see [Workgroup Settings Override Client-Side Settings].
+	//
+	// [Workgroup Settings Override Client-Side Settings]: https://docs.aws.amazon.com/athena/latest/ug/workgroups-settings-override.html
 	EnforceWorkGroupConfiguration *bool
 
 	// The engine version requested when a workgroup is updated. After the update, all
@@ -1490,8 +1543,7 @@ type WorkGroupConfigurationUpdates struct {
 	// Specifies whether Amazon S3 access grants are enabled for query results.
 	QueryResultsS3AccessGrantsConfiguration *QueryResultsS3AccessGrantsConfiguration
 
-	// Indicates that the data usage control limit per query is removed.
-	// WorkGroupConfiguration$BytesScannedCutoffPerQuery
+	// Indicates that the data usage control limit per query is removed. WorkGroupConfiguration$BytesScannedCutoffPerQuery
 	RemoveBytesScannedCutoffPerQuery *bool
 
 	// Removes content encryption configuration from an Apache Spark-enabled Athena
@@ -1502,8 +1554,10 @@ type WorkGroupConfigurationUpdates struct {
 	// Requester Pays buckets in queries. If set to false , workgroup members cannot
 	// query data from Requester Pays buckets, and queries that retrieve data from
 	// Requester Pays buckets cause an error. The default is false . For more
-	// information about Requester Pays buckets, see Requester Pays Buckets (https://docs.aws.amazon.com/AmazonS3/latest/dev/RequesterPaysBuckets.html)
-	// in the Amazon Simple Storage Service Developer Guide.
+	// information about Requester Pays buckets, see [Requester Pays Buckets]in the Amazon Simple Storage
+	// Service Developer Guide.
+	//
+	// [Requester Pays Buckets]: https://docs.aws.amazon.com/AmazonS3/latest/dev/RequesterPaysBuckets.html
 	RequesterPaysEnabled *bool
 
 	// The result configuration information about the queries in this workgroup that

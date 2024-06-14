@@ -6,13 +6,13 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/mturk/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// The ListReviewableHITs operation retrieves the HITs with Status equal to
+//	The ListReviewableHITs operation retrieves the HITs with Status equal to
+//
 // Reviewable or Status equal to Reviewing that belong to the Requester calling the
 // operation.
 func (c *Client) ListReviewableHITs(ctx context.Context, params *ListReviewableHITsInput, optFns ...func(*Options)) (*ListReviewableHITsOutput, error) {
@@ -32,17 +32,17 @@ func (c *Client) ListReviewableHITs(ctx context.Context, params *ListReviewableH
 
 type ListReviewableHITsInput struct {
 
-	// The ID of the HIT type of the HITs to consider for the query. If not specified,
-	// all HITs for the Reviewer are considered
+	//  The ID of the HIT type of the HITs to consider for the query. If not
+	// specified, all HITs for the Reviewer are considered
 	HITTypeId *string
 
-	// Limit the number of results returned.
+	//  Limit the number of results returned.
 	MaxResults *int32
 
 	// Pagination Token
 	NextToken *string
 
-	// Can be either Reviewable or Reviewing . Reviewable is the default value.
+	//  Can be either Reviewable or Reviewing . Reviewable is the default value.
 	Status types.ReviewableHITStatus
 
 	noSmithyDocumentSerde
@@ -50,7 +50,7 @@ type ListReviewableHITsInput struct {
 
 type ListReviewableHITsOutput struct {
 
-	// The list of HIT elements returned by the query.
+	//  The list of HIT elements returned by the query.
 	HITs []types.HIT
 
 	// If the previous response was incomplete (because there is more data to
@@ -58,8 +58,8 @@ type ListReviewableHITsOutput struct {
 	// You can use this pagination token to retrieve the next set of results.
 	NextToken *string
 
-	// The number of HITs on this page in the filtered results list, equivalent to the
-	// number of HITs being returned by this call.
+	//  The number of HITs on this page in the filtered results list, equivalent to
+	// the number of HITs being returned by this call.
 	NumResults *int32
 
 	// Metadata pertaining to the operation's result.
@@ -90,25 +90,25 @@ func (c *Client) addOperationListReviewableHITsMiddlewares(stack *middleware.Sta
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -123,10 +123,13 @@ func (c *Client) addOperationListReviewableHITsMiddlewares(stack *middleware.Sta
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListReviewableHITs(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -155,7 +158,7 @@ var _ ListReviewableHITsAPIClient = (*Client)(nil)
 // ListReviewableHITsPaginatorOptions is the paginator options for
 // ListReviewableHITs
 type ListReviewableHITsPaginatorOptions struct {
-	// Limit the number of results returned.
+	//  Limit the number of results returned.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

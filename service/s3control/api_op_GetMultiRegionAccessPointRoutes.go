@@ -16,18 +16,24 @@ import (
 	"strings"
 )
 
-// This operation is not supported by directory buckets. Returns the routing
-// configuration for a Multi-Region Access Point, indicating which Regions are
-// active or passive. To obtain routing control changes and failover requests, use
-// the Amazon S3 failover control infrastructure endpoints in these five Amazon Web
-// Services Regions:
-//   - us-east-1
-//   - us-west-2
-//   - ap-southeast-2
-//   - ap-northeast-1
-//   - eu-west-1
+// This operation is not supported by directory buckets.
 //
-// Your Amazon S3 bucket does not need to be in these five Regions.
+// Returns the routing configuration for a Multi-Region Access Point, indicating
+// which Regions are active or passive.
+//
+// To obtain routing control changes and failover requests, use the Amazon S3
+// failover control infrastructure endpoints in these five Amazon Web Services
+// Regions:
+//
+//   - us-east-1
+//
+//   - us-west-2
+//
+//   - ap-southeast-2
+//
+//   - ap-northeast-1
+//
+//   - eu-west-1
 func (c *Client) GetMultiRegionAccessPointRoutes(ctx context.Context, params *GetMultiRegionAccessPointRoutesInput, optFns ...func(*Options)) (*GetMultiRegionAccessPointRoutesOutput, error) {
 	if params == nil {
 		params = &GetMultiRegionAccessPointRoutesInput{}
@@ -101,25 +107,25 @@ func (c *Client) addOperationGetMultiRegionAccessPointRoutesMiddlewares(stack *m
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -137,6 +143,9 @@ func (c *Client) addOperationGetMultiRegionAccessPointRoutesMiddlewares(stack *m
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = smithyhttp.AddContentChecksumMiddleware(stack); err != nil {
 		return err
 	}
@@ -152,7 +161,7 @@ func (c *Client) addOperationGetMultiRegionAccessPointRoutesMiddlewares(stack *m
 	if err = addMetadataRetrieverMiddleware(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addGetMultiRegionAccessPointRoutesUpdateEndpoint(stack, options); err != nil {

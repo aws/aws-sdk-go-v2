@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -15,21 +14,36 @@ import (
 // notification services, such as APNS and GCM (Firebase Cloud Messaging), to which
 // devices and mobile apps may register. You must specify PlatformPrincipal and
 // PlatformCredential attributes when using the CreatePlatformApplication action.
+//
 // PlatformPrincipal and PlatformCredential are received from the notification
 // service.
-//   - For ADM , PlatformPrincipal is client id and PlatformCredential is client
+//
+//   - For ADM, PlatformPrincipal is client id and PlatformCredential is client
 //     secret .
-//   - For Baidu , PlatformPrincipal is API key and PlatformCredential is secret
-//     key .
+//
 //   - For APNS and APNS_SANDBOX using certificate credentials, PlatformPrincipal
 //     is SSL certificate and PlatformCredential is private key .
+//
 //   - For APNS and APNS_SANDBOX using token credentials, PlatformPrincipal is
 //     signing key ID and PlatformCredential is signing key .
-//   - For GCM (Firebase Cloud Messaging), there is no PlatformPrincipal and the
-//     PlatformCredential is API key .
-//   - For MPNS , PlatformPrincipal is TLS certificate and PlatformCredential is
+//
+//   - For Baidu, PlatformPrincipal is API key and PlatformCredential is secret key
+//     .
+//
+//   - For GCM (Firebase Cloud Messaging) using key credentials, there is no
+//     PlatformPrincipal . The PlatformCredential is API key .
+//
+//   - For GCM (Firebase Cloud Messaging) using token credentials, there is no
+//     PlatformPrincipal . The PlatformCredential is a JSON formatted private key
+//     file. When using the Amazon Web Services CLI, the file must be in string format
+//     and special characters must be ignored. To format the file correctly, Amazon SNS
+//     recommends using the following command: SERVICE_JSON=`jq @json <<< cat
+//     service.json` .
+//
+//   - For MPNS, PlatformPrincipal is TLS certificate and PlatformCredential is
 //     private key .
-//   - For WNS , PlatformPrincipal is Package Security Identifier and
+//
+//   - For WNS, PlatformPrincipal is Package Security Identifier and
 //     PlatformCredential is secret key .
 //
 // You can use the returned PlatformApplicationArn as an attribute for the
@@ -52,8 +66,9 @@ func (c *Client) CreatePlatformApplication(ctx context.Context, params *CreatePl
 // Input for CreatePlatformApplication action.
 type CreatePlatformApplicationInput struct {
 
-	// For a list of attributes, see SetPlatformApplicationAttributes (https://docs.aws.amazon.com/sns/latest/api/API_SetPlatformApplicationAttributes.html)
-	// .
+	// For a list of attributes, see [SetPlatformApplicationAttributes]SetPlatformApplicationAttributes .
+	//
+	// [SetPlatformApplicationAttributes]: https://docs.aws.amazon.com/sns/latest/api/API_SetPlatformApplicationAttributes.html
 	//
 	// This member is required.
 	Attributes map[string]string
@@ -109,25 +124,25 @@ func (c *Client) addOperationCreatePlatformApplicationMiddlewares(stack *middlew
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -142,13 +157,16 @@ func (c *Client) addOperationCreatePlatformApplicationMiddlewares(stack *middlew
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpCreatePlatformApplicationValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreatePlatformApplication(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

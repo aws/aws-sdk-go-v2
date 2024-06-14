@@ -3799,9 +3799,19 @@ func awsAwsjson11_serializeOpDocumentCreateFleetInput(v *CreateFleetInput, value
 		ok.String(string(v.EnvironmentType))
 	}
 
+	if v.FleetServiceRole != nil {
+		ok := object.Key("fleetServiceRole")
+		ok.String(*v.FleetServiceRole)
+	}
+
 	if v.Name != nil {
 		ok := object.Key("name")
 		ok.String(*v.Name)
+	}
+
+	if len(v.OverflowBehavior) > 0 {
+		ok := object.Key("overflowBehavior")
+		ok.String(string(v.OverflowBehavior))
 	}
 
 	if v.ScalingConfiguration != nil {
@@ -3814,6 +3824,13 @@ func awsAwsjson11_serializeOpDocumentCreateFleetInput(v *CreateFleetInput, value
 	if v.Tags != nil {
 		ok := object.Key("tags")
 		if err := awsAwsjson11_serializeDocumentTagList(v.Tags, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.VpcConfig != nil {
+		ok := object.Key("vpcConfig")
+		if err := awsAwsjson11_serializeDocumentVpcConfig(v.VpcConfig, ok); err != nil {
 			return err
 		}
 	}
@@ -4007,6 +4024,11 @@ func awsAwsjson11_serializeOpDocumentCreateWebhookInput(v *CreateWebhookInput, v
 		if err := awsAwsjson11_serializeDocumentFilterGroups(v.FilterGroups, ok); err != nil {
 			return err
 		}
+	}
+
+	if v.ManualCreation != nil {
+		ok := object.Key("manualCreation")
+		ok.Boolean(*v.ManualCreation)
 	}
 
 	if v.ProjectName != nil {
@@ -5081,6 +5103,16 @@ func awsAwsjson11_serializeOpDocumentUpdateFleetInput(v *UpdateFleetInput, value
 		ok.String(string(v.EnvironmentType))
 	}
 
+	if v.FleetServiceRole != nil {
+		ok := object.Key("fleetServiceRole")
+		ok.String(*v.FleetServiceRole)
+	}
+
+	if len(v.OverflowBehavior) > 0 {
+		ok := object.Key("overflowBehavior")
+		ok.String(string(v.OverflowBehavior))
+	}
+
 	if v.ScalingConfiguration != nil {
 		ok := object.Key("scalingConfiguration")
 		if err := awsAwsjson11_serializeDocumentScalingConfigurationInput(v.ScalingConfiguration, ok); err != nil {
@@ -5091,6 +5123,13 @@ func awsAwsjson11_serializeOpDocumentUpdateFleetInput(v *UpdateFleetInput, value
 	if v.Tags != nil {
 		ok := object.Key("tags")
 		if err := awsAwsjson11_serializeDocumentTagList(v.Tags, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.VpcConfig != nil {
+		ok := object.Key("vpcConfig")
+		if err := awsAwsjson11_serializeDocumentVpcConfig(v.VpcConfig, ok); err != nil {
 			return err
 		}
 	}

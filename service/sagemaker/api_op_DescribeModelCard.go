@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -74,9 +73,13 @@ type DescribeModelCardOutput struct {
 
 	// The approval status of the model card within your organization. Different
 	// organizations might have different criteria for model card review and approval.
+	//
 	//   - Draft : The model card is a work in progress.
+	//
 	//   - PendingReview : The model card is pending review.
+	//
 	//   - Approved : The model card is approved.
+	//
 	//   - Archived : The model card is archived. No more updates should be made to the
 	//   model card, but it can still be exported.
 	//
@@ -97,11 +100,17 @@ type DescribeModelCardOutput struct {
 
 	// The processing status of model card deletion. The ModelCardProcessingStatus
 	// updates throughout the different deletion steps.
+	//
 	//   - DeletePending : Model card deletion request received.
+	//
 	//   - DeleteInProgress : Model card deletion is in progress.
+	//
 	//   - ContentDeleted : Deleted model card content.
+	//
 	//   - ExportJobsDeleted : Deleted all export jobs associated with the model card.
+	//
 	//   - DeleteCompleted : Successfully deleted the model card.
+	//
 	//   - DeleteFailed : The model card failed to delete.
 	ModelCardProcessingStatus types.ModelCardProcessingStatus
 
@@ -136,25 +145,25 @@ func (c *Client) addOperationDescribeModelCardMiddlewares(stack *middleware.Stac
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -169,13 +178,16 @@ func (c *Client) addOperationDescribeModelCardMiddlewares(stack *middleware.Stac
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDescribeModelCardValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeModelCard(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

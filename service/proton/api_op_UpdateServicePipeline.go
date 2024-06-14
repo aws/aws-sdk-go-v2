@@ -6,25 +6,40 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/proton/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Update the service pipeline. There are four modes for updating a service
-// pipeline. The deploymentType field defines the mode. NONE In this mode, a
-// deployment doesn't occur. Only the requested metadata parameters are updated.
-// CURRENT_VERSION In this mode, the service pipeline is deployed and updated with
-// the new spec that you provide. Only requested parameters are updated. Don’t
-// include major or minor version parameters when you use this deployment-type .
-// MINOR_VERSION In this mode, the service pipeline is deployed and updated with
-// the published, recommended (latest) minor version of the current major version
-// in use, by default. You can specify a different minor version of the current
-// major version in use. MAJOR_VERSION In this mode, the service pipeline is
-// deployed and updated with the published, recommended (latest) major and minor
-// version of the current template by default. You can specify a different major
-// version that's higher than the major version in use and a minor version.
+// Update the service pipeline.
+//
+// There are four modes for updating a service pipeline. The deploymentType field
+// defines the mode.
+//
+//	NONE
+//
+// In this mode, a deployment doesn't occur. Only the requested metadata
+// parameters are updated.
+//
+//	CURRENT_VERSION
+//
+// In this mode, the service pipeline is deployed and updated with the new spec
+// that you provide. Only requested parameters are updated. Don’t include major or
+// minor version parameters when you use this deployment-type .
+//
+//	MINOR_VERSION
+//
+// In this mode, the service pipeline is deployed and updated with the published,
+// recommended (latest) minor version of the current major version in use, by
+// default. You can specify a different minor version of the current major version
+// in use.
+//
+//	MAJOR_VERSION
+//
+// In this mode, the service pipeline is deployed and updated with the published,
+// recommended (latest) major and minor version of the current template by default.
+// You can specify a different major version that's higher than the major version
+// in use and a minor version.
 func (c *Client) UpdateServicePipeline(ctx context.Context, params *UpdateServicePipelineInput, optFns ...func(*Options)) (*UpdateServicePipelineOutput, error) {
 	if params == nil {
 		params = &UpdateServicePipelineInput{}
@@ -42,19 +57,35 @@ func (c *Client) UpdateServicePipeline(ctx context.Context, params *UpdateServic
 
 type UpdateServicePipelineInput struct {
 
-	// The deployment type. There are four modes for updating a service pipeline. The
-	// deploymentType field defines the mode. NONE In this mode, a deployment doesn't
-	// occur. Only the requested metadata parameters are updated. CURRENT_VERSION In
-	// this mode, the service pipeline is deployed and updated with the new spec that
-	// you provide. Only requested parameters are updated. Don’t include major or minor
-	// version parameters when you use this deployment-type . MINOR_VERSION In this
-	// mode, the service pipeline is deployed and updated with the published,
+	// The deployment type.
+	//
+	// There are four modes for updating a service pipeline. The deploymentType field
+	// defines the mode.
+	//
+	//     NONE
+	//
+	// In this mode, a deployment doesn't occur. Only the requested metadata
+	// parameters are updated.
+	//
+	//     CURRENT_VERSION
+	//
+	// In this mode, the service pipeline is deployed and updated with the new spec
+	// that you provide. Only requested parameters are updated. Don’t include major or
+	// minor version parameters when you use this deployment-type .
+	//
+	//     MINOR_VERSION
+	//
+	// In this mode, the service pipeline is deployed and updated with the published,
 	// recommended (latest) minor version of the current major version in use, by
 	// default. You can specify a different minor version of the current major version
-	// in use. MAJOR_VERSION In this mode, the service pipeline is deployed and
-	// updated with the published, recommended (latest) major and minor version of the
-	// current template, by default. You can specify a different major version that's
-	// higher than the major version in use and a minor version.
+	// in use.
+	//
+	//     MAJOR_VERSION
+	//
+	// In this mode, the service pipeline is deployed and updated with the published,
+	// recommended (latest) major and minor version of the current template, by
+	// default. You can specify a different major version that's higher than the major
+	// version in use and a minor version.
 	//
 	// This member is required.
 	DeploymentType types.DeploymentUpdateType
@@ -117,25 +148,25 @@ func (c *Client) addOperationUpdateServicePipelineMiddlewares(stack *middleware.
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -150,13 +181,16 @@ func (c *Client) addOperationUpdateServicePipelineMiddlewares(stack *middleware.
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpUpdateServicePipelineValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateServicePipeline(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

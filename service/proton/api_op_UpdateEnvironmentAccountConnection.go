@@ -6,15 +6,17 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/proton/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // In an environment account, update an environment account connection to use a
-// new IAM role. For more information, see Environment account connections (https://docs.aws.amazon.com/proton/latest/userguide/ag-env-account-connections.html)
-// in the Proton User guide.
+// new IAM role.
+//
+// For more information, see [Environment account connections] in the Proton User guide.
+//
+// [Environment account connections]: https://docs.aws.amazon.com/proton/latest/userguide/ag-env-account-connections.html
 func (c *Client) UpdateEnvironmentAccountConnection(ctx context.Context, params *UpdateEnvironmentAccountConnectionInput, optFns ...func(*Options)) (*UpdateEnvironmentAccountConnectionOutput, error) {
 	if params == nil {
 		params = &UpdateEnvironmentAccountConnectionInput{}
@@ -45,10 +47,15 @@ type UpdateEnvironmentAccountConnectionInput struct {
 	// The Amazon Resource Name (ARN) of the IAM service role that Proton uses when
 	// provisioning directly defined components in the associated environment account.
 	// It determines the scope of infrastructure that a component can provision in the
-	// account. The environment account connection must have a componentRoleArn to
-	// allow directly defined components to be associated with any environments running
-	// in the account. For more information about components, see Proton components (https://docs.aws.amazon.com/proton/latest/userguide/ag-components.html)
-	// in the Proton User Guide.
+	// account.
+	//
+	// The environment account connection must have a componentRoleArn to allow
+	// directly defined components to be associated with any environments running in
+	// the account.
+	//
+	// For more information about components, see [Proton components] in the Proton User Guide.
+	//
+	// [Proton components]: https://docs.aws.amazon.com/proton/latest/userguide/ag-components.html
 	ComponentRoleArn *string
 
 	// The Amazon Resource Name (ARN) of the IAM service role that's associated with
@@ -93,25 +100,25 @@ func (c *Client) addOperationUpdateEnvironmentAccountConnectionMiddlewares(stack
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -126,13 +133,16 @@ func (c *Client) addOperationUpdateEnvironmentAccountConnectionMiddlewares(stack
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpUpdateEnvironmentAccountConnectionValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateEnvironmentAccountConnection(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

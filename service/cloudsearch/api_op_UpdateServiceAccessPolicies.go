@@ -6,16 +6,15 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/cloudsearch/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Configures the access rules that control access to the domain's document and
-// search endpoints. For more information, see Configuring Access for an Amazon
-// CloudSearch Domain (http://docs.aws.amazon.com/cloudsearch/latest/developerguide/configuring-access.html)
-// .
+// search endpoints. For more information, see [Configuring Access for an Amazon CloudSearch Domain].
+//
+// [Configuring Access for an Amazon CloudSearch Domain]: http://docs.aws.amazon.com/cloudsearch/latest/developerguide/configuring-access.html
 func (c *Client) UpdateServiceAccessPolicies(ctx context.Context, params *UpdateServiceAccessPoliciesInput, optFns ...func(*Options)) (*UpdateServiceAccessPoliciesOutput, error) {
 	if params == nil {
 		params = &UpdateServiceAccessPoliciesInput{}
@@ -31,9 +30,8 @@ func (c *Client) UpdateServiceAccessPolicies(ctx context.Context, params *Update
 	return out, nil
 }
 
-// Container for the parameters to the UpdateServiceAccessPolicies operation.
-// Specifies the name of the domain you want to update and the access rules you
-// want to configure.
+// Container for the parameters to the UpdateServiceAccessPolicies operation. Specifies the name of the
+// domain you want to update and the access rules you want to configure.
 type UpdateServiceAccessPoliciesInput struct {
 
 	// The access rules you want to configure. These rules replace any existing rules.
@@ -89,25 +87,25 @@ func (c *Client) addOperationUpdateServiceAccessPoliciesMiddlewares(stack *middl
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -122,13 +120,16 @@ func (c *Client) addOperationUpdateServiceAccessPoliciesMiddlewares(stack *middl
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpUpdateServiceAccessPoliciesValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateServiceAccessPolicies(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

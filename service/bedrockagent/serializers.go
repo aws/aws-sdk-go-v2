@@ -219,6 +219,13 @@ func awsRestjson1_serializeOpDocumentCreateAgentInput(v *CreateAgentInput, value
 		ok.String(*v.FoundationModel)
 	}
 
+	if v.GuardrailConfiguration != nil {
+		ok := object.Key("guardrailConfiguration")
+		if err := awsRestjson1_serializeDocumentGuardrailConfiguration(v.GuardrailConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.IdleSessionTTLInSeconds != nil {
 		ok := object.Key("idleSessionTTLInSeconds")
 		ok.Integer(*v.IdleSessionTTLInSeconds)
@@ -367,6 +374,13 @@ func awsRestjson1_serializeOpDocumentCreateAgentActionGroupInput(v *CreateAgentA
 	if v.Description != nil {
 		ok := object.Key("description")
 		ok.String(*v.Description)
+	}
+
+	if v.FunctionSchema != nil {
+		ok := object.Key("functionSchema")
+		if err := awsRestjson1_serializeDocumentFunctionSchema(v.FunctionSchema, ok); err != nil {
+			return err
+		}
 	}
 
 	if len(v.ParentActionGroupSignature) > 0 {
@@ -572,6 +586,11 @@ func awsRestjson1_serializeOpDocumentCreateDataSourceInput(v *CreateDataSourceIn
 	if v.ClientToken != nil {
 		ok := object.Key("clientToken")
 		ok.String(*v.ClientToken)
+	}
+
+	if len(v.DataDeletionPolicy) > 0 {
+		ok := object.Key("dataDeletionPolicy")
+		ok.String(string(v.DataDeletionPolicy))
 	}
 
 	if v.DataSourceConfiguration != nil {
@@ -3107,6 +3126,13 @@ func awsRestjson1_serializeOpDocumentUpdateAgentInput(v *UpdateAgentInput, value
 		ok.String(*v.FoundationModel)
 	}
 
+	if v.GuardrailConfiguration != nil {
+		ok := object.Key("guardrailConfiguration")
+		if err := awsRestjson1_serializeDocumentGuardrailConfiguration(v.GuardrailConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.IdleSessionTTLInSeconds != nil {
 		ok := object.Key("idleSessionTTLInSeconds")
 		ok.Integer(*v.IdleSessionTTLInSeconds)
@@ -3252,6 +3278,13 @@ func awsRestjson1_serializeOpDocumentUpdateAgentActionGroupInput(v *UpdateAgentA
 	if v.Description != nil {
 		ok := object.Key("description")
 		ok.String(*v.Description)
+	}
+
+	if v.FunctionSchema != nil {
+		ok := object.Key("functionSchema")
+		if err := awsRestjson1_serializeDocumentFunctionSchema(v.FunctionSchema, ok); err != nil {
+			return err
+		}
 	}
 
 	if len(v.ParentActionGroupSignature) > 0 {
@@ -3571,6 +3604,11 @@ func awsRestjson1_serializeOpDocumentUpdateDataSourceInput(v *UpdateDataSourceIn
 	object := value.Object()
 	defer object.Close()
 
+	if len(v.DataDeletionPolicy) > 0 {
+		ok := object.Key("dataDeletionPolicy")
+		ok.String(string(v.DataDeletionPolicy))
+	}
+
 	if v.DataSourceConfiguration != nil {
 		ok := object.Key("dataSourceConfiguration")
 		if err := awsRestjson1_serializeDocumentDataSourceConfiguration(v.DataSourceConfiguration, ok); err != nil {
@@ -3722,6 +3760,10 @@ func awsRestjson1_serializeDocumentActionGroupExecutor(v types.ActionGroupExecut
 	defer object.Close()
 
 	switch uv := v.(type) {
+	case *types.ActionGroupExecutorMemberCustomControl:
+		av := object.Key("customControl")
+		av.String(string(uv.Value))
+
 	case *types.ActionGroupExecutorMemberLambda:
 		av := object.Key("lambda")
 		av.String(uv.Value)
@@ -3755,6 +3797,11 @@ func awsRestjson1_serializeDocumentAgentAliasRoutingConfigurationListItem(v *typ
 		ok.String(*v.AgentVersion)
 	}
 
+	if v.ProvisionedThroughput != nil {
+		ok := object.Key("provisionedThroughput")
+		ok.String(*v.ProvisionedThroughput)
+	}
+
 	return nil
 }
 
@@ -3777,6 +3824,18 @@ func awsRestjson1_serializeDocumentAPISchema(v types.APISchema, value smithyjson
 		return fmt.Errorf("attempted to serialize unknown member type %T for union %T", uv, v)
 
 	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentBedrockEmbeddingModelConfiguration(v *types.BedrockEmbeddingModelConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Dimensions != nil {
+		ok := object.Key("dimensions")
+		ok.Integer(*v.Dimensions)
+	}
+
 	return nil
 }
 
@@ -3818,6 +3877,20 @@ func awsRestjson1_serializeDocumentDataSourceConfiguration(v *types.DataSourceCo
 	return nil
 }
 
+func awsRestjson1_serializeDocumentEmbeddingModelConfiguration(v *types.EmbeddingModelConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.BedrockEmbeddingModelConfiguration != nil {
+		ok := object.Key("bedrockEmbeddingModelConfiguration")
+		if err := awsRestjson1_serializeDocumentBedrockEmbeddingModelConfiguration(v.BedrockEmbeddingModelConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentFixedSizeChunkingConfiguration(v *types.FixedSizeChunkingConfiguration, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -3830,6 +3903,78 @@ func awsRestjson1_serializeDocumentFixedSizeChunkingConfiguration(v *types.Fixed
 	if v.OverlapPercentage != nil {
 		ok := object.Key("overlapPercentage")
 		ok.Integer(*v.OverlapPercentage)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentFunction(v *types.Function, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Description != nil {
+		ok := object.Key("description")
+		ok.String(*v.Description)
+	}
+
+	if v.Name != nil {
+		ok := object.Key("name")
+		ok.String(*v.Name)
+	}
+
+	if v.Parameters != nil {
+		ok := object.Key("parameters")
+		if err := awsRestjson1_serializeDocumentParameterMap(v.Parameters, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentFunctions(v []types.Function, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentFunction(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentFunctionSchema(v types.FunctionSchema, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	switch uv := v.(type) {
+	case *types.FunctionSchemaMemberFunctions:
+		av := object.Key("functions")
+		if err := awsRestjson1_serializeDocumentFunctions(uv.Value, av); err != nil {
+			return err
+		}
+
+	default:
+		return fmt.Errorf("attempted to serialize unknown member type %T for union %T", uv, v)
+
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentGuardrailConfiguration(v *types.GuardrailConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.GuardrailIdentifier != nil {
+		ok := object.Key("guardrailIdentifier")
+		ok.String(*v.GuardrailIdentifier)
+	}
+
+	if v.GuardrailVersion != nil {
+		ok := object.Key("guardrailVersion")
+		ok.String(*v.GuardrailVersion)
 	}
 
 	return nil
@@ -3979,6 +4124,72 @@ func awsRestjson1_serializeDocumentKnowledgeBaseConfiguration(v *types.Knowledge
 	return nil
 }
 
+func awsRestjson1_serializeDocumentMongoDbAtlasConfiguration(v *types.MongoDbAtlasConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.CollectionName != nil {
+		ok := object.Key("collectionName")
+		ok.String(*v.CollectionName)
+	}
+
+	if v.CredentialsSecretArn != nil {
+		ok := object.Key("credentialsSecretArn")
+		ok.String(*v.CredentialsSecretArn)
+	}
+
+	if v.DatabaseName != nil {
+		ok := object.Key("databaseName")
+		ok.String(*v.DatabaseName)
+	}
+
+	if v.Endpoint != nil {
+		ok := object.Key("endpoint")
+		ok.String(*v.Endpoint)
+	}
+
+	if v.EndpointServiceName != nil {
+		ok := object.Key("endpointServiceName")
+		ok.String(*v.EndpointServiceName)
+	}
+
+	if v.FieldMapping != nil {
+		ok := object.Key("fieldMapping")
+		if err := awsRestjson1_serializeDocumentMongoDbAtlasFieldMapping(v.FieldMapping, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.VectorIndexName != nil {
+		ok := object.Key("vectorIndexName")
+		ok.String(*v.VectorIndexName)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentMongoDbAtlasFieldMapping(v *types.MongoDbAtlasFieldMapping, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.MetadataField != nil {
+		ok := object.Key("metadataField")
+		ok.String(*v.MetadataField)
+	}
+
+	if v.TextField != nil {
+		ok := object.Key("textField")
+		ok.String(*v.TextField)
+	}
+
+	if v.VectorField != nil {
+		ok := object.Key("vectorField")
+		ok.String(*v.VectorField)
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentOpenSearchServerlessConfiguration(v *types.OpenSearchServerlessConfiguration, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -4022,6 +4233,42 @@ func awsRestjson1_serializeDocumentOpenSearchServerlessFieldMapping(v *types.Ope
 		ok.String(*v.VectorField)
 	}
 
+	return nil
+}
+
+func awsRestjson1_serializeDocumentParameterDetail(v *types.ParameterDetail, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Description != nil {
+		ok := object.Key("description")
+		ok.String(*v.Description)
+	}
+
+	if v.Required != nil {
+		ok := object.Key("required")
+		ok.Boolean(*v.Required)
+	}
+
+	if len(v.Type) > 0 {
+		ok := object.Key("type")
+		ok.String(string(v.Type))
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentParameterMap(v map[string]types.ParameterDetail, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	for key := range v {
+		om := object.Key(key)
+		mapVar := v[key]
+		if err := awsRestjson1_serializeDocumentParameterDetail(&mapVar, om); err != nil {
+			return err
+		}
+	}
 	return nil
 }
 
@@ -4263,6 +4510,11 @@ func awsRestjson1_serializeDocumentS3DataSourceConfiguration(v *types.S3DataSour
 		ok.String(*v.BucketArn)
 	}
 
+	if v.BucketOwnerAccountId != nil {
+		ok := object.Key("bucketOwnerAccountId")
+		ok.String(*v.BucketOwnerAccountId)
+	}
+
 	if v.InclusionPrefixes != nil {
 		ok := object.Key("inclusionPrefixes")
 		if err := awsRestjson1_serializeDocumentS3Prefixes(v.InclusionPrefixes, ok); err != nil {
@@ -4327,6 +4579,13 @@ func awsRestjson1_serializeDocumentStopSequences(v []string, value smithyjson.Va
 func awsRestjson1_serializeDocumentStorageConfiguration(v *types.StorageConfiguration, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.MongoDbAtlasConfiguration != nil {
+		ok := object.Key("mongoDbAtlasConfiguration")
+		if err := awsRestjson1_serializeDocumentMongoDbAtlasConfiguration(v.MongoDbAtlasConfiguration, ok); err != nil {
+			return err
+		}
+	}
 
 	if v.OpensearchServerlessConfiguration != nil {
 		ok := object.Key("opensearchServerlessConfiguration")
@@ -4396,6 +4655,13 @@ func awsRestjson1_serializeDocumentVectorKnowledgeBaseConfiguration(v *types.Vec
 	if v.EmbeddingModelArn != nil {
 		ok := object.Key("embeddingModelArn")
 		ok.String(*v.EmbeddingModelArn)
+	}
+
+	if v.EmbeddingModelConfiguration != nil {
+		ok := object.Key("embeddingModelConfiguration")
+		if err := awsRestjson1_serializeDocumentEmbeddingModelConfiguration(v.EmbeddingModelConfiguration, ok); err != nil {
+			return err
+		}
 	}
 
 	return nil

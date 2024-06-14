@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/batch/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -14,11 +13,13 @@ import (
 
 // Creates an Batch job queue. When you create a job queue, you associate one or
 // more compute environments to the queue and assign an order of preference for the
-// compute environments. You also set a priority to the job queue that determines
-// the order that the Batch scheduler places jobs onto its associated compute
-// environments. For example, if a compute environment is associated with more than
-// one job queue, the job queue with a higher priority is given preference for
-// scheduling jobs to that compute environment.
+// compute environments.
+//
+// You also set a priority to the job queue that determines the order that the
+// Batch scheduler places jobs onto its associated compute environments. For
+// example, if a compute environment is associated with more than one job queue,
+// the job queue with a higher priority is given preference for scheduling jobs to
+// that compute environment.
 func (c *Client) CreateJobQueue(ctx context.Context, params *CreateJobQueueInput, optFns ...func(*Options)) (*CreateJobQueueOutput, error) {
 	if params == nil {
 		params = &CreateJobQueueInput{}
@@ -43,9 +44,11 @@ type CreateJobQueueInput struct {
 	// state before you can associate them with a job queue. You can associate up to
 	// three compute environments with a job queue. All of the compute environments
 	// must be either EC2 ( EC2 or SPOT ) or Fargate ( FARGATE or FARGATE_SPOT ); EC2
-	// and Fargate compute environments can't be mixed. All compute environments that
-	// are associated with a job queue must share the same architecture. Batch doesn't
-	// support mixing compute environment architecture types in a single job queue.
+	// and Fargate compute environments can't be mixed.
+	//
+	// All compute environments that are associated with a job queue must share the
+	// same architecture. Batch doesn't support mixing compute environment architecture
+	// types in a single job queue.
 	//
 	// This member is required.
 	ComputeEnvironmentOrder []types.ComputeEnvironmentOrder
@@ -67,6 +70,11 @@ type CreateJobQueueInput struct {
 	// This member is required.
 	Priority *int32
 
+	// The set of actions that Batch performs on jobs that remain at the head of the
+	// job queue in the specified state longer than specified times. Batch will perform
+	// each action after maxTimeSeconds has passed.
+	JobStateTimeLimitActions []types.JobStateTimeLimitAction
+
 	// The Amazon Resource Name (ARN) of the fair share scheduling policy. If this
 	// parameter is specified, the job queue uses a fair share scheduling policy. If
 	// this parameter isn't specified, the job queue uses a first in, first out (FIFO)
@@ -83,8 +91,9 @@ type CreateJobQueueInput struct {
 
 	// The tags that you apply to the job queue to help you categorize and organize
 	// your resources. Each tag consists of a key and an optional value. For more
-	// information, see Tagging your Batch resources (https://docs.aws.amazon.com/batch/latest/userguide/using-tags.html)
-	// in Batch User Guide.
+	// information, see [Tagging your Batch resources]in Batch User Guide.
+	//
+	// [Tagging your Batch resources]: https://docs.aws.amazon.com/batch/latest/userguide/using-tags.html
 	Tags map[string]string
 
 	noSmithyDocumentSerde
@@ -130,25 +139,25 @@ func (c *Client) addOperationCreateJobQueueMiddlewares(stack *middleware.Stack, 
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -163,13 +172,16 @@ func (c *Client) addOperationCreateJobQueueMiddlewares(stack *middleware.Stack, 
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpCreateJobQueueValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateJobQueue(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

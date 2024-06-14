@@ -6,15 +6,16 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates the supported fields for a specific software package. Requires
-// permission to access the UpdatePackage (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
-// and GetIndexingConfiguration (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
-// actions.
+// Updates the supported fields for a specific software package.
+//
+// Requires permission to access the [UpdatePackage] and [GetIndexingConfiguration] actions.
+//
+// [UpdatePackage]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions
+// [GetIndexingConfiguration]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions
 func (c *Client) UpdatePackage(ctx context.Context, params *UpdatePackageInput, optFns ...func(*Options)) (*UpdatePackageOutput, error) {
 	if params == nil {
 		params = &UpdatePackageInput{}
@@ -42,17 +43,20 @@ type UpdatePackageInput struct {
 	// request is required.
 	ClientToken *string
 
-	// The name of the default package version. Note: You cannot name a defaultVersion
-	// and set unsetDefaultVersion equal to true at the same time.
+	// The name of the default package version.
+	//
+	// Note: You cannot name a defaultVersion and set unsetDefaultVersion equal to true
+	// at the same time.
 	DefaultVersionName *string
 
 	// The package description.
 	Description *string
 
 	// Indicates whether you want to remove the named default package version from the
-	// software package. Set as true to remove the default package version. Note: You
-	// cannot name a defaultVersion and set unsetDefaultVersion equal to true at the
-	// same time.
+	// software package. Set as true to remove the default package version.
+	//
+	// Note: You cannot name a defaultVersion and set unsetDefaultVersion equal to true
+	// at the same time.
 	UnsetDefaultVersion *bool
 
 	noSmithyDocumentSerde
@@ -87,25 +91,25 @@ func (c *Client) addOperationUpdatePackageMiddlewares(stack *middleware.Stack, o
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -120,6 +124,9 @@ func (c *Client) addOperationUpdatePackageMiddlewares(stack *middleware.Stack, o
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opUpdatePackageMiddleware(stack, options); err != nil {
 		return err
 	}
@@ -129,7 +136,7 @@ func (c *Client) addOperationUpdatePackageMiddlewares(stack *middleware.Stack, o
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdatePackage(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

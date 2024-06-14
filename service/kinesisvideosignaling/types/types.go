@@ -16,10 +16,10 @@ type IceServer struct {
 	// valid.
 	Ttl *int32
 
-	// An array of URIs, in the form specified in the
-	// I-D.petithuguenin-behave-turn-uris (https://tools.ietf.org/html/draft-petithuguenin-behave-turn-uris-03)
-	// spec. These URIs provide the different addresses and/or protocols that can be
-	// used to reach the TURN server.
+	// An array of URIs, in the form specified in the [I-D.petithuguenin-behave-turn-uris] spec. These URIs provide the
+	// different addresses and/or protocols that can be used to reach the TURN server.
+	//
+	// [I-D.petithuguenin-behave-turn-uris]: https://tools.ietf.org/html/draft-petithuguenin-behave-turn-uris-03
 	Uris []string
 
 	// A username to login to the ICE server.

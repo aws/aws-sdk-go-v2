@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/forecast/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -14,8 +13,9 @@ import (
 
 // Creates a predictor monitor resource for an existing auto predictor. Predictor
 // monitoring allows you to see how your predictor's performance changes over time.
-// For more information, see Predictor Monitoring (https://docs.aws.amazon.com/forecast/latest/dg/predictor-monitoring.html)
-// .
+// For more information, see [Predictor Monitoring].
+//
+// [Predictor Monitoring]: https://docs.aws.amazon.com/forecast/latest/dg/predictor-monitoring.html
 func (c *Client) CreateMonitor(ctx context.Context, params *CreateMonitorInput, optFns ...func(*Options)) (*CreateMonitorOutput, error) {
 	if params == nil {
 		params = &CreateMonitorInput{}
@@ -43,8 +43,9 @@ type CreateMonitorInput struct {
 	// This member is required.
 	ResourceArn *string
 
-	// A list of tags (https://docs.aws.amazon.com/forecast/latest/dg/tagging-forecast-resources.html)
-	// to apply to the monitor resource.
+	// A list of [tags] to apply to the monitor resource.
+	//
+	// [tags]: https://docs.aws.amazon.com/forecast/latest/dg/tagging-forecast-resources.html
 	Tags []types.Tag
 
 	noSmithyDocumentSerde
@@ -83,25 +84,25 @@ func (c *Client) addOperationCreateMonitorMiddlewares(stack *middleware.Stack, o
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -116,13 +117,16 @@ func (c *Client) addOperationCreateMonitorMiddlewares(stack *middleware.Stack, o
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpCreateMonitorValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateMonitor(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

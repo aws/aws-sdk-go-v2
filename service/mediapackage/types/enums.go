@@ -17,8 +17,9 @@ const (
 )
 
 // Values returns all known values for AdTriggersElement. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (AdTriggersElement) Values() []AdTriggersElement {
 	return []AdTriggersElement{
 		"SPLICE_INSERT",
@@ -40,8 +41,9 @@ const (
 )
 
 // Values returns all known values for PeriodTriggersElement. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (PeriodTriggersElement) Values() []PeriodTriggersElement {
 	return []PeriodTriggersElement{
 		"ADS",
@@ -59,8 +61,9 @@ const (
 )
 
 // Values returns all known values for AdMarkers. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (AdMarkers) Values() []AdMarkers {
 	return []AdMarkers{
 		"NONE",
@@ -82,6 +85,7 @@ const (
 
 // Values returns all known values for AdsOnDeliveryRestrictions. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (AdsOnDeliveryRestrictions) Values() []AdsOnDeliveryRestrictions {
 	return []AdsOnDeliveryRestrictions{
@@ -101,8 +105,9 @@ const (
 )
 
 // Values returns all known values for CmafEncryptionMethod. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (CmafEncryptionMethod) Values() []CmafEncryptionMethod {
 	return []CmafEncryptionMethod{
 		"SAMPLE_AES",
@@ -119,8 +124,9 @@ const (
 )
 
 // Values returns all known values for EncryptionMethod. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (EncryptionMethod) Values() []EncryptionMethod {
 	return []EncryptionMethod{
 		"AES_128",
@@ -138,8 +144,9 @@ const (
 )
 
 // Values returns all known values for ManifestLayout. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ManifestLayout) Values() []ManifestLayout {
 	return []ManifestLayout{
 		"FULL",
@@ -157,8 +164,9 @@ const (
 )
 
 // Values returns all known values for Origination. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (Origination) Values() []Origination {
 	return []Origination{
 		"ALLOW",
@@ -176,8 +184,9 @@ const (
 )
 
 // Values returns all known values for PlaylistType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (PlaylistType) Values() []PlaylistType {
 	return []PlaylistType{
 		"NONE",
@@ -198,8 +207,9 @@ const (
 )
 
 // Values returns all known values for PresetSpeke20Audio. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (PresetSpeke20Audio) Values() []PresetSpeke20Audio {
 	return []PresetSpeke20Audio{
 		"PRESET-AUDIO-1",
@@ -227,8 +237,9 @@ const (
 )
 
 // Values returns all known values for PresetSpeke20Video. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (PresetSpeke20Video) Values() []PresetSpeke20Video {
 	return []PresetSpeke20Video{
 		"PRESET-VIDEO-1",
@@ -255,8 +266,9 @@ const (
 )
 
 // Values returns all known values for Profile. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (Profile) Values() []Profile {
 	return []Profile{
 		"NONE",
@@ -276,8 +288,9 @@ const (
 )
 
 // Values returns all known values for SegmentTemplateFormat. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (SegmentTemplateFormat) Values() []SegmentTemplateFormat {
 	return []SegmentTemplateFormat{
 		"NUMBER_WITH_TIMELINE",
@@ -296,8 +309,9 @@ const (
 )
 
 // Values returns all known values for Status. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (Status) Values() []Status {
 	return []Status{
 		"IN_PROGRESS",
@@ -316,8 +330,9 @@ const (
 )
 
 // Values returns all known values for StreamOrder. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (StreamOrder) Values() []StreamOrder {
 	return []StreamOrder{
 		"ORIGINAL",
@@ -337,8 +352,9 @@ const (
 )
 
 // Values returns all known values for UtcTiming. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (UtcTiming) Values() []UtcTiming {
 	return []UtcTiming{
 		"NONE",

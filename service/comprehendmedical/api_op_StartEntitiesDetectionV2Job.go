@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/comprehendmedical/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -34,9 +33,9 @@ type StartEntitiesDetectionV2JobInput struct {
 
 	// The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM)
 	// role that grants Amazon Comprehend Medical read access to your input data. For
-	// more information, see Role-Based Permissions Required for Asynchronous
-	// Operations (https://docs.aws.amazon.com/comprehend/latest/dg/access-control-managing-permissions-med.html#auth-role-permissions-med)
-	// .
+	// more information, see [Role-Based Permissions Required for Asynchronous Operations].
+	//
+	// [Role-Based Permissions Required for Asynchronous Operations]: https://docs.aws.amazon.com/comprehend/latest/dg/access-control-managing-permissions-med.html#auth-role-permissions-med
 	//
 	// This member is required.
 	DataAccessRoleArn *string
@@ -106,25 +105,25 @@ func (c *Client) addOperationStartEntitiesDetectionV2JobMiddlewares(stack *middl
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -139,6 +138,9 @@ func (c *Client) addOperationStartEntitiesDetectionV2JobMiddlewares(stack *middl
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opStartEntitiesDetectionV2JobMiddleware(stack, options); err != nil {
 		return err
 	}
@@ -148,7 +150,7 @@ func (c *Client) addOperationStartEntitiesDetectionV2JobMiddlewares(stack *middl
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opStartEntitiesDetectionV2Job(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

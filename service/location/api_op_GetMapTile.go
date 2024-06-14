@@ -6,17 +6,18 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Retrieves a vector data tile from the map resource. Map tiles are used by
 // clients to render a map. they're addressed using a grid arrangement with an X
-// coordinate, Y coordinate, and Z (zoom) level. The origin (0, 0) is the top left
-// of the map. Increasing the zoom level by 1 doubles both the X and Y dimensions,
-// so a tile containing data for the entire world at (0/0/0) will be split into 4
-// tiles at zoom 1 (1/0/0, 1/0/1, 1/1/0, 1/1/1).
+// coordinate, Y coordinate, and Z (zoom) level.
+//
+// The origin (0, 0) is the top left of the map. Increasing the zoom level by 1
+// doubles both the X and Y dimensions, so a tile containing data for the entire
+// world at (0/0/0) will be split into 4 tiles at zoom 1 (1/0/0, 1/0/1, 1/1/0,
+// 1/1/1).
 func (c *Client) GetMapTile(ctx context.Context, params *GetMapTileInput, optFns ...func(*Options)) (*GetMapTileOutput, error) {
 	if params == nil {
 		params = &GetMapTileInput{}
@@ -54,8 +55,9 @@ type GetMapTileInput struct {
 	// This member is required.
 	Z *string
 
-	// The optional API key (https://docs.aws.amazon.com/location/latest/developerguide/using-apikeys.html)
-	// to authorize the request.
+	// The optional [API key] to authorize the request.
+	//
+	// [API key]: https://docs.aws.amazon.com/location/latest/developerguide/using-apikeys.html
 	Key *string
 
 	noSmithyDocumentSerde
@@ -100,25 +102,25 @@ func (c *Client) addOperationGetMapTileMiddlewares(stack *middleware.Stack, opti
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -133,6 +135,9 @@ func (c *Client) addOperationGetMapTileMiddlewares(stack *middleware.Stack, opti
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addEndpointPrefix_opGetMapTileMiddleware(stack); err != nil {
 		return err
 	}
@@ -142,7 +147,7 @@ func (c *Client) addOperationGetMapTileMiddlewares(stack *middleware.Stack, opti
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetMapTile(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

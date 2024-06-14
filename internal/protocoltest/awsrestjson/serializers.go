@@ -452,6 +452,83 @@ func awsRestjson1_serializeOpDocumentDocumentTypeInput(v *DocumentTypeInput, val
 	return nil
 }
 
+type awsRestjson1_serializeOpDocumentTypeAsMapValue struct {
+}
+
+func (*awsRestjson1_serializeOpDocumentTypeAsMapValue) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpDocumentTypeAsMapValue) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*DocumentTypeAsMapValueInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/DocumentTypeAsMapValue")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "PUT"
+	var restEncoder *httpbinding.Encoder
+	if request.URL.RawPath == "" {
+		restEncoder, err = httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	} else {
+		request.URL.RawPath = smithyhttp.JoinPath(request.URL.RawPath, opPath)
+		restEncoder, err = httpbinding.NewEncoderWithRawPath(request.URL.Path, request.URL.RawPath, request.URL.RawQuery, request.Header)
+	}
+
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentDocumentTypeAsMapValueInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsDocumentTypeAsMapValueInput(v *DocumentTypeAsMapValueInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentDocumentTypeAsMapValueInput(v *DocumentTypeAsMapValueInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.DocValuedMap != nil {
+		ok := object.Key("docValuedMap")
+		if err := awsRestjson1_serializeDocumentDocumentValuedMap(v.DocValuedMap, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 type awsRestjson1_serializeOpDocumentTypeAsPayload struct {
 }
 
@@ -2612,13 +2689,6 @@ func awsRestjson1_serializeOpDocumentJsonListsInput(v *JsonListsInput, value smi
 		}
 	}
 
-	if v.SparseStringList != nil {
-		ok := object.Key("sparseStringList")
-		if err := awsRestjson1_serializeDocumentSparseStringList(v.SparseStringList, ok); err != nil {
-			return err
-		}
-	}
-
 	if v.StringList != nil {
 		ok := object.Key("stringList")
 		if err := awsRestjson1_serializeDocumentStringList(v.StringList, ok); err != nil {
@@ -2748,41 +2818,6 @@ func awsRestjson1_serializeOpDocumentJsonMapsInput(v *JsonMapsInput, value smith
 	if v.DenseStructMap != nil {
 		ok := object.Key("denseStructMap")
 		if err := awsRestjson1_serializeDocumentDenseStructMap(v.DenseStructMap, ok); err != nil {
-			return err
-		}
-	}
-
-	if v.SparseBooleanMap != nil {
-		ok := object.Key("sparseBooleanMap")
-		if err := awsRestjson1_serializeDocumentSparseBooleanMap(v.SparseBooleanMap, ok); err != nil {
-			return err
-		}
-	}
-
-	if v.SparseNumberMap != nil {
-		ok := object.Key("sparseNumberMap")
-		if err := awsRestjson1_serializeDocumentSparseNumberMap(v.SparseNumberMap, ok); err != nil {
-			return err
-		}
-	}
-
-	if v.SparseSetMap != nil {
-		ok := object.Key("sparseSetMap")
-		if err := awsRestjson1_serializeDocumentSparseSetMap(v.SparseSetMap, ok); err != nil {
-			return err
-		}
-	}
-
-	if v.SparseStringMap != nil {
-		ok := object.Key("sparseStringMap")
-		if err := awsRestjson1_serializeDocumentSparseStringMap(v.SparseStringMap, ok); err != nil {
-			return err
-		}
-	}
-
-	if v.SparseStructMap != nil {
-		ok := object.Key("sparseStructMap")
-		if err := awsRestjson1_serializeDocumentSparseStructMap(v.SparseStructMap, ok); err != nil {
 			return err
 		}
 	}
@@ -6487,6 +6522,188 @@ func awsRestjson1_serializeOpDocumentSimpleScalarPropertiesInput(v *SimpleScalar
 	return nil
 }
 
+type awsRestjson1_serializeOpSparseJsonLists struct {
+}
+
+func (*awsRestjson1_serializeOpSparseJsonLists) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpSparseJsonLists) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*SparseJsonListsInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/SparseJsonLists")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "PUT"
+	var restEncoder *httpbinding.Encoder
+	if request.URL.RawPath == "" {
+		restEncoder, err = httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	} else {
+		request.URL.RawPath = smithyhttp.JoinPath(request.URL.RawPath, opPath)
+		restEncoder, err = httpbinding.NewEncoderWithRawPath(request.URL.Path, request.URL.RawPath, request.URL.RawQuery, request.Header)
+	}
+
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentSparseJsonListsInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsSparseJsonListsInput(v *SparseJsonListsInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentSparseJsonListsInput(v *SparseJsonListsInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.SparseStringList != nil {
+		ok := object.Key("sparseStringList")
+		if err := awsRestjson1_serializeDocumentSparseStringList(v.SparseStringList, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+type awsRestjson1_serializeOpSparseJsonMaps struct {
+}
+
+func (*awsRestjson1_serializeOpSparseJsonMaps) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpSparseJsonMaps) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*SparseJsonMapsInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/SparseJsonMaps")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "POST"
+	var restEncoder *httpbinding.Encoder
+	if request.URL.RawPath == "" {
+		restEncoder, err = httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	} else {
+		request.URL.RawPath = smithyhttp.JoinPath(request.URL.RawPath, opPath)
+		restEncoder, err = httpbinding.NewEncoderWithRawPath(request.URL.Path, request.URL.RawPath, request.URL.RawQuery, request.Header)
+	}
+
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentSparseJsonMapsInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsSparseJsonMapsInput(v *SparseJsonMapsInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentSparseJsonMapsInput(v *SparseJsonMapsInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.SparseBooleanMap != nil {
+		ok := object.Key("sparseBooleanMap")
+		if err := awsRestjson1_serializeDocumentSparseBooleanMap(v.SparseBooleanMap, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.SparseNumberMap != nil {
+		ok := object.Key("sparseNumberMap")
+		if err := awsRestjson1_serializeDocumentSparseNumberMap(v.SparseNumberMap, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.SparseSetMap != nil {
+		ok := object.Key("sparseSetMap")
+		if err := awsRestjson1_serializeDocumentSparseSetMap(v.SparseSetMap, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.SparseStringMap != nil {
+		ok := object.Key("sparseStringMap")
+		if err := awsRestjson1_serializeDocumentSparseStringMap(v.SparseStringMap, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.SparseStructMap != nil {
+		ok := object.Key("sparseStructMap")
+		if err := awsRestjson1_serializeDocumentSparseStructMap(v.SparseStructMap, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 type awsRestjson1_serializeOpStreamingTraits struct {
 }
 
@@ -7229,6 +7446,22 @@ func awsRestjson1_serializeDocumentDocument(v document.Interface, value smithyjs
 		return err
 	}
 	value.Write(db)
+	return nil
+}
+
+func awsRestjson1_serializeDocumentDocumentValuedMap(v map[string]document.Interface, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	for key := range v {
+		om := object.Key(key)
+		if vv := v[key]; vv == nil {
+			continue
+		}
+		if err := awsRestjson1_serializeDocumentDocument(v[key], om); err != nil {
+			return err
+		}
+	}
 	return nil
 }
 

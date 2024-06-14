@@ -8,13 +8,16 @@ import (
 )
 
 // The StartWorkflowExecution API action was called without the required
-// parameters set. Some workflow execution parameters, such as the decision
-// taskList , must be set to start the execution. However, these parameters might
-// have been set as defaults when the workflow type was registered. In this case,
-// you can omit these parameters from the StartWorkflowExecution call and Amazon
-// SWF uses the values defined in the workflow type. If these parameters aren't set
-// and no default parameters were defined in the workflow type, this error is
-// displayed.
+// parameters set.
+//
+// Some workflow execution parameters, such as the decision taskList , must be set
+// to start the execution. However, these parameters might have been set as
+// defaults when the workflow type was registered. In this case, you can omit these
+// parameters from the StartWorkflowExecution call and Amazon SWF uses the values
+// defined in the workflow type.
+//
+// If these parameters aren't set and no default parameters were defined in the
+// workflow type, this error is displayed.
 type DefaultUndefinedFault struct {
 	Message *string
 
@@ -229,6 +232,32 @@ func (e *TypeDeprecatedFault) ErrorCode() string {
 }
 func (e *TypeDeprecatedFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// Returned when the resource type has not been deprecated.
+type TypeNotDeprecatedFault struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *TypeNotDeprecatedFault) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *TypeNotDeprecatedFault) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *TypeNotDeprecatedFault) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "TypeNotDeprecatedFault"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *TypeNotDeprecatedFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
 // Returned when the named resource cannot be found with in the scope of this
 // operation (region or domain). This could happen if the named resource was never
 // created or is no longer available for this operation.
@@ -257,8 +286,8 @@ func (e *UnknownResourceFault) ErrorCode() string {
 }
 func (e *UnknownResourceFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// Returned by StartWorkflowExecution when an open execution with the same
-// workflowId is already running in the specified domain.
+// Returned by StartWorkflowExecution when an open execution with the same workflowId is already running
+// in the specified domain.
 type WorkflowExecutionAlreadyStartedFault struct {
 	Message *string
 

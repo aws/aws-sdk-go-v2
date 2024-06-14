@@ -6,17 +6,17 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/codepipeline/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns information about a job. Used for custom actions only. When this API is
-// called, CodePipeline returns temporary credentials for the S3 bucket used to
-// store artifacts for the pipeline, if the action requires access to that S3
-// bucket for input or output artifacts. This API also returns any secret values
-// defined for the action.
+// Returns information about a job. Used for custom actions only.
+//
+// When this API is called, CodePipeline returns temporary credentials for the S3
+// bucket used to store artifacts for the pipeline, if the action requires access
+// to that S3 bucket for input or output artifacts. This API also returns any
+// secret values defined for the action.
 func (c *Client) GetJobDetails(ctx context.Context, params *GetJobDetailsInput, optFns ...func(*Options)) (*GetJobDetailsOutput, error) {
 	if params == nil {
 		params = &GetJobDetailsInput{}
@@ -46,8 +46,10 @@ type GetJobDetailsInput struct {
 // Represents the output of a GetJobDetails action.
 type GetJobDetailsOutput struct {
 
-	// The details of the job. If AWSSessionCredentials is used, a long-running job
-	// can call GetJobDetails again to obtain new credentials.
+	// The details of the job.
+	//
+	// If AWSSessionCredentials is used, a long-running job can call GetJobDetails
+	// again to obtain new credentials.
 	JobDetails *types.JobDetails
 
 	// Metadata pertaining to the operation's result.
@@ -78,25 +80,25 @@ func (c *Client) addOperationGetJobDetailsMiddlewares(stack *middleware.Stack, o
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -111,13 +113,16 @@ func (c *Client) addOperationGetJobDetailsMiddlewares(stack *middleware.Stack, o
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpGetJobDetailsValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetJobDetails(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

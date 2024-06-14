@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/vpclattice/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -14,12 +13,13 @@ import (
 
 // Lists the associations between the service network and the service. You can
 // filter the list either by service or service network. You must provide either
-// the service network identifier or the service identifier. Every association in
-// Amazon VPC Lattice is given a unique Amazon Resource Name (ARN), such as when a
-// service network is associated with a VPC or when a service is associated with a
-// service network. If the association is for a resource that is shared with
-// another account, the association will include the local account ID as the prefix
-// in the ARN for each account the resource is shared with.
+// the service network identifier or the service identifier.
+//
+// Every association in Amazon VPC Lattice is given a unique Amazon Resource Name
+// (ARN), such as when a service network is associated with a VPC or when a service
+// is associated with a service network. If the association is for a resource that
+// is shared with another account, the association includes the local account ID as
+// the prefix in the ARN for each account the resource is shared with.
 func (c *Client) ListServiceNetworkServiceAssociations(ctx context.Context, params *ListServiceNetworkServiceAssociationsInput, optFns ...func(*Options)) (*ListServiceNetworkServiceAssociationsOutput, error) {
 	if params == nil {
 		params = &ListServiceNetworkServiceAssociationsInput{}
@@ -91,25 +91,25 @@ func (c *Client) addOperationListServiceNetworkServiceAssociationsMiddlewares(st
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -124,10 +124,13 @@ func (c *Client) addOperationListServiceNetworkServiceAssociationsMiddlewares(st
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListServiceNetworkServiceAssociations(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

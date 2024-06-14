@@ -6,19 +6,25 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/sfn/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
-// Returns details about a state machine alias (https://docs.aws.amazon.com/step-functions/latest/dg/concepts-state-machine-alias.html)
-// . Related operations:
-//   - CreateStateMachineAlias
-//   - ListStateMachineAliases
-//   - UpdateStateMachineAlias
-//   - DeleteStateMachineAlias
+// Returns details about a state machine [alias].
+//
+// Related operations:
+//
+// # CreateStateMachineAlias
+//
+// # ListStateMachineAliases
+//
+// # UpdateStateMachineAlias
+//
+// # DeleteStateMachineAlias
+//
+// [alias]: https://docs.aws.amazon.com/step-functions/latest/dg/concepts-state-machine-alias.html
 func (c *Client) DescribeStateMachineAlias(ctx context.Context, params *DescribeStateMachineAliasInput, optFns ...func(*Options)) (*DescribeStateMachineAliasOutput, error) {
 	if params == nil {
 		params = &DescribeStateMachineAliasInput{}
@@ -61,8 +67,9 @@ type DescribeStateMachineAliasOutput struct {
 	// The Amazon Resource Name (ARN) of the state machine alias.
 	StateMachineAliasArn *string
 
-	// The date the state machine alias was last updated. For a newly created state
-	// machine, this is the same as the creation date.
+	// The date the state machine alias was last updated.
+	//
+	// For a newly created state machine, this is the same as the creation date.
 	UpdateDate *time.Time
 
 	// Metadata pertaining to the operation's result.
@@ -93,25 +100,25 @@ func (c *Client) addOperationDescribeStateMachineAliasMiddlewares(stack *middlew
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -126,13 +133,16 @@ func (c *Client) addOperationDescribeStateMachineAliasMiddlewares(stack *middlew
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDescribeStateMachineAliasValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeStateMachineAlias(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

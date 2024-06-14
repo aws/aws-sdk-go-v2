@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/chimesdkmessaging/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -14,15 +13,22 @@ import (
 
 // Adds a member to a channel. The InvitedBy field in ChannelMembership is derived
 // from the request header. A channel member can:
+//
 //   - List messages
+//
 //   - Send messages
+//
 //   - Receive messages
+//
 //   - Edit their own messages
+//
 //   - Leave the channel
 //
 // Privacy settings impact this action as follows:
+//
 //   - Public Channels: You do not need to be a member to list messages, but you
 //     must be a member to send messages.
+//
 //   - Private Channels: You must be a member to list or send messages.
 //
 // The x-amz-chime-bearer request header is mandatory. Use the ARN of the
@@ -68,8 +74,10 @@ type CreateChannelMembershipInput struct {
 	// This member is required.
 	Type types.ChannelMembershipType
 
-	// The ID of the SubChannel in the request. Only required when creating membership
-	// in a SubChannel for a moderator in an elastic channel.
+	// The ID of the SubChannel in the request.
+	//
+	// Only required when creating membership in a SubChannel for a moderator in an
+	// elastic channel.
 	SubChannelId *string
 
 	noSmithyDocumentSerde
@@ -114,25 +122,25 @@ func (c *Client) addOperationCreateChannelMembershipMiddlewares(stack *middlewar
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -147,13 +155,16 @@ func (c *Client) addOperationCreateChannelMembershipMiddlewares(stack *middlewar
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpCreateChannelMembershipValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateChannelMembership(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

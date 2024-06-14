@@ -6,22 +6,28 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Permanently deletes the specified canary. If you specify DeleteLambda to true ,
-// CloudWatch Synthetics also deletes the Lambda functions and layers that are used
-// by the canary. Other resources used and created by the canary are not
-// automatically deleted. After you delete a canary that you do not intend to use
-// again, you should also delete the following:
+// Permanently deletes the specified canary.
+//
+// If you specify DeleteLambda to true , CloudWatch Synthetics also deletes the
+// Lambda functions and layers that are used by the canary.
+//
+// Other resources used and created by the canary are not automatically deleted.
+// After you delete a canary that you do not intend to use again, you should also
+// delete the following:
+//
 //   - The CloudWatch alarms created for this canary. These alarms have a name of
 //     Synthetics-SharpDrop-Alarm-MyCanaryName .
+//
 //   - Amazon S3 objects and buckets, such as the canary's artifact location.
+//
 //   - IAM roles created for the canary. If they were created in the console,
 //     these roles have the name
 //     role/service-role/CloudWatchSyntheticsRole-MyCanaryName .
+//
 //   - CloudWatch Logs log groups created for the canary. These logs groups have
 //     the name /aws/lambda/cwsyn-MyCanaryName .
 //
@@ -46,14 +52,17 @@ func (c *Client) DeleteCanary(ctx context.Context, params *DeleteCanaryInput, op
 type DeleteCanaryInput struct {
 
 	// The name of the canary that you want to delete. To find the names of your
-	// canaries, use DescribeCanaries (https://docs.aws.amazon.com/AmazonSynthetics/latest/APIReference/API_DescribeCanaries.html)
-	// .
+	// canaries, use [DescribeCanaries].
+	//
+	// [DescribeCanaries]: https://docs.aws.amazon.com/AmazonSynthetics/latest/APIReference/API_DescribeCanaries.html
 	//
 	// This member is required.
 	Name *string
 
 	// Specifies whether to also delete the Lambda functions and layers used by this
-	// canary. The default is false. Type: Boolean
+	// canary. The default is false.
+	//
+	// Type: Boolean
 	DeleteLambda bool
 
 	noSmithyDocumentSerde
@@ -88,25 +97,25 @@ func (c *Client) addOperationDeleteCanaryMiddlewares(stack *middleware.Stack, op
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -121,13 +130,16 @@ func (c *Client) addOperationDeleteCanaryMiddlewares(stack *middleware.Stack, op
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDeleteCanaryValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteCanary(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

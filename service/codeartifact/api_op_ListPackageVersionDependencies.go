@@ -6,18 +6,20 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/codeartifact/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns the direct dependencies for a package version. The dependencies are
-// returned as PackageDependency (https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_PackageDependency.html)
-// objects. CodeArtifact extracts the dependencies for a package version from the
-// metadata file for the package format (for example, the package.json file for
-// npm packages and the pom.xml file for Maven). Any package version dependencies
-// that are not listed in the configuration file are not returned.
+//	Returns the direct dependencies for a package version. The dependencies are
+//
+// returned as [PackageDependency]objects. CodeArtifact extracts the dependencies for a package
+// version from the metadata file for the package format (for example, the
+// package.json file for npm packages and the pom.xml file for Maven). Any package
+// version dependencies that are not listed in the configuration file are not
+// returned.
+//
+// [PackageDependency]: https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_PackageDependency.html
 func (c *Client) ListPackageVersionDependencies(ctx context.Context, params *ListPackageVersionDependenciesInput, optFns ...func(*Options)) (*ListPackageVersionDependenciesOutput, error) {
 	if params == nil {
 		params = &ListPackageVersionDependenciesInput{}
@@ -35,47 +37,59 @@ func (c *Client) ListPackageVersionDependencies(ctx context.Context, params *Lis
 
 type ListPackageVersionDependenciesInput struct {
 
-	// The name of the domain that contains the repository that contains the requested
-	// package version dependencies.
+	//  The name of the domain that contains the repository that contains the
+	// requested package version dependencies.
 	//
 	// This member is required.
 	Domain *string
 
-	// The format of the package with the requested dependencies.
+	//  The format of the package with the requested dependencies.
 	//
 	// This member is required.
 	Format types.PackageFormat
 
-	// The name of the package versions' package.
+	//  The name of the package versions' package.
 	//
 	// This member is required.
 	Package *string
 
-	// A string that contains the package version (for example, 3.5.2 ).
+	//  A string that contains the package version (for example, 3.5.2 ).
 	//
 	// This member is required.
 	PackageVersion *string
 
-	// The name of the repository that contains the requested package version.
+	//  The name of the repository that contains the requested package version.
 	//
 	// This member is required.
 	Repository *string
 
-	// The 12-digit account number of the Amazon Web Services account that owns the
+	//  The 12-digit account number of the Amazon Web Services account that owns the
 	// domain. It does not include dashes or spaces.
 	DomainOwner *string
 
 	// The namespace of the package version with the requested dependencies. The
-	// package version component that specifies its namespace depends on its type. For
-	// example:
+	// package component that specifies its namespace depends on its type. For example:
+	//
+	// The namespace is required when listing dependencies from package versions of
+	// the following formats:
+	//
+	//   - Maven
+	//
+	//   - Swift
+	//
+	//   - generic
+	//
 	//   - The namespace of a Maven package version is its groupId .
-	//   - The namespace of an npm package version is its scope .
-	//   - Python and NuGet package versions do not contain a corresponding component,
-	//   package versions of those formats do not have a namespace.
+	//
+	//   - The namespace of an npm or Swift package version is its scope .
+	//
 	//   - The namespace of a generic package is its namespace .
+	//
+	//   - Python, NuGet, and Ruby package versions do not contain a corresponding
+	//   component, package versions of those formats do not have a namespace.
 	Namespace *string
 
-	// The token for the next set of results. Use the value returned in the previous
+	//  The token for the next set of results. Use the value returned in the previous
 	// response in the next request to retrieve the next set of results.
 	NextToken *string
 
@@ -84,35 +98,41 @@ type ListPackageVersionDependenciesInput struct {
 
 type ListPackageVersionDependenciesOutput struct {
 
-	// The returned list of PackageDependency (https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_PackageDependency.html)
-	// objects.
+	//  The returned list of [PackageDependency] objects.
+	//
+	// [PackageDependency]: https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_PackageDependency.html
 	Dependencies []types.PackageDependency
 
-	// A format that specifies the type of the package that contains the returned
+	//  A format that specifies the type of the package that contains the returned
 	// dependencies.
 	Format types.PackageFormat
 
 	// The namespace of the package version that contains the returned dependencies.
-	// The package version component that specifies its namespace depends on its type.
-	// For example:
+	// The package component that specifies its namespace depends on its type. For
+	// example:
+	//
 	//   - The namespace of a Maven package version is its groupId .
-	//   - The namespace of an npm package version is its scope .
-	//   - Python and NuGet package versions do not contain a corresponding component,
-	//   package versions of those formats do not have a namespace.
+	//
+	//   - The namespace of an npm or Swift package version is its scope .
+	//
+	//   - The namespace of a generic package is its namespace .
+	//
+	//   - Python, NuGet, and Ruby package versions do not contain a corresponding
+	//   component, package versions of those formats do not have a namespace.
 	Namespace *string
 
-	// The token for the next set of results. Use the value returned in the previous
+	//  The token for the next set of results. Use the value returned in the previous
 	// response in the next request to retrieve the next set of results.
 	NextToken *string
 
-	// The name of the package that contains the returned package versions
+	//  The name of the package that contains the returned package versions
 	// dependencies.
 	Package *string
 
-	// The version of the package that is specified in the request.
+	//  The version of the package that is specified in the request.
 	Version *string
 
-	// The current revision associated with the package version.
+	//  The current revision associated with the package version.
 	VersionRevision *string
 
 	// Metadata pertaining to the operation's result.
@@ -143,25 +163,25 @@ func (c *Client) addOperationListPackageVersionDependenciesMiddlewares(stack *mi
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -176,13 +196,16 @@ func (c *Client) addOperationListPackageVersionDependenciesMiddlewares(stack *mi
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpListPackageVersionDependenciesValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListPackageVersionDependencies(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

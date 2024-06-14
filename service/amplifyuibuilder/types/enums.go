@@ -27,8 +27,9 @@ const (
 
 // Values returns all known values for CodegenGenericDataFieldDataType. Note that
 // this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (CodegenGenericDataFieldDataType) Values() []CodegenGenericDataFieldDataType {
 	return []CodegenGenericDataFieldDataType{
 		"ID",
@@ -60,8 +61,9 @@ const (
 
 // Values returns all known values for CodegenJobGenericDataSourceType. Note that
 // this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (CodegenJobGenericDataSourceType) Values() []CodegenJobGenericDataSourceType {
 	return []CodegenJobGenericDataSourceType{
 		"DataStore",
@@ -78,8 +80,9 @@ const (
 )
 
 // Values returns all known values for CodegenJobStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (CodegenJobStatus) Values() []CodegenJobStatus {
 	return []CodegenJobStatus{
 		"in_progress",
@@ -96,8 +99,9 @@ const (
 )
 
 // Values returns all known values for FixedPosition. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (FixedPosition) Values() []FixedPosition {
 	return []FixedPosition{
 		"first",
@@ -113,8 +117,9 @@ const (
 )
 
 // Values returns all known values for FormActionType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (FormActionType) Values() []FormActionType {
 	return []FormActionType{
 		"create",
@@ -132,8 +137,9 @@ const (
 )
 
 // Values returns all known values for FormButtonsPosition. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (FormButtonsPosition) Values() []FormButtonsPosition {
 	return []FormButtonsPosition{
 		"top",
@@ -153,8 +159,9 @@ const (
 )
 
 // Values returns all known values for FormDataSourceType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (FormDataSourceType) Values() []FormDataSourceType {
 	return []FormDataSourceType{
 		"DataStore",
@@ -173,6 +180,7 @@ const (
 
 // Values returns all known values for GenericDataRelationshipType. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (GenericDataRelationshipType) Values() []GenericDataRelationshipType {
 	return []GenericDataRelationshipType{
@@ -191,8 +199,9 @@ const (
 )
 
 // Values returns all known values for JSModule. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (JSModule) Values() []JSModule {
 	return []JSModule{
 		"es2020",
@@ -210,8 +219,9 @@ const (
 )
 
 // Values returns all known values for JSScript. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (JSScript) Values() []JSScript {
 	return []JSScript{
 		"jsx",
@@ -229,8 +239,9 @@ const (
 )
 
 // Values returns all known values for JSTarget. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (JSTarget) Values() []JSTarget {
 	return []JSTarget{
 		"es2015",
@@ -248,8 +259,9 @@ const (
 )
 
 // Values returns all known values for LabelDecorator. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (LabelDecorator) Values() []LabelDecorator {
 	return []LabelDecorator{
 		"required",
@@ -260,9 +272,16 @@ func (LabelDecorator) Values() []LabelDecorator {
 
 type SortDirection string
 
+// Enum values for SortDirection
+const (
+	SortDirectionAsc  SortDirection = "ASC"
+	SortDirectionDesc SortDirection = "DESC"
+)
+
 // Values returns all known values for SortDirection. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (SortDirection) Values() []SortDirection {
 	return []SortDirection{
 		"ASC",
@@ -280,8 +299,9 @@ const (
 )
 
 // Values returns all known values for StorageAccessLevel. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (StorageAccessLevel) Values() []StorageAccessLevel {
 	return []StorageAccessLevel{
 		"public",
@@ -299,8 +319,9 @@ const (
 )
 
 // Values returns all known values for TokenProviders. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (TokenProviders) Values() []TokenProviders {
 	return []TokenProviders{
 		"figma",

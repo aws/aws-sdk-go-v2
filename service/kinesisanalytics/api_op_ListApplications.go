@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/kinesisanalytics/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -14,18 +13,24 @@ import (
 
 // This documentation is for version 1 of the Amazon Kinesis Data Analytics API,
 // which only supports SQL applications. Version 2 of the API supports SQL and Java
-// applications. For more information about version 2, see Amazon Kinesis Data
-// Analytics API V2 Documentation . Returns a list of Amazon Kinesis Analytics
-// applications in your account. For each application, the response includes the
-// application name, Amazon Resource Name (ARN), and status. If the response
-// returns the HasMoreApplications value as true,
+// applications. For more information about version 2, see Amazon Kinesis Data Analytics API V2 Documentation.
+//
+// Returns a list of Amazon Kinesis Analytics applications in your account. For
+// each application, the response includes the application name, Amazon Resource
+// Name (ARN), and status.
+//
+// If the response returns the HasMoreApplications value as true,
 //
 // you can send another request by adding the ExclusiveStartApplicationName in the
 // request body, and set the value of this to the last application name from the
-// previous response. If you want detailed information about a specific
-// application, use DescribeApplication (https://docs.aws.amazon.com/kinesisanalytics/latest/dev/API_DescribeApplication.html)
-// . This operation requires permissions to perform the
+// previous response.
+//
+// If you want detailed information about a specific application, use [DescribeApplication].
+//
+// This operation requires permissions to perform the
 // kinesisanalytics:ListApplications action.
+//
+// [DescribeApplication]: https://docs.aws.amazon.com/kinesisanalytics/latest/dev/API_DescribeApplication.html
 func (c *Client) ListApplications(ctx context.Context, params *ListApplicationsInput, optFns ...func(*Options)) (*ListApplicationsOutput, error) {
 	if params == nil {
 		params = &ListApplicationsInput{}
@@ -95,25 +100,25 @@ func (c *Client) addOperationListApplicationsMiddlewares(stack *middleware.Stack
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -128,10 +133,13 @@ func (c *Client) addOperationListApplicationsMiddlewares(stack *middleware.Stack
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListApplications(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

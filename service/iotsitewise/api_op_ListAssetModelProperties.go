@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/iotsitewise/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -34,18 +33,22 @@ type ListAssetModelPropertiesInput struct {
 
 	// The ID of the asset model. This can be either the actual ID in UUID format, or
 	// else externalId: followed by the external ID, if it has one. For more
-	// information, see Referencing objects with external IDs (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/object-ids.html#external-id-references)
-	// in the IoT SiteWise User Guide.
+	// information, see [Referencing objects with external IDs]in the IoT SiteWise User Guide.
+	//
+	// [Referencing objects with external IDs]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/object-ids.html#external-id-references
 	//
 	// This member is required.
 	AssetModelId *string
 
-	// Filters the requested list of asset model properties. You can choose one of the
-	// following options:
+	//  Filters the requested list of asset model properties. You can choose one of
+	// the following options:
+	//
 	//   - ALL – The list includes all asset model properties for a given asset model
 	//   ID.
+	//
 	//   - BASE – The list includes only base asset model properties for a given asset
 	//   model ID.
+	//
 	// Default: BASE
 	Filter types.ListAssetModelPropertiesFilter
 
@@ -98,25 +101,25 @@ func (c *Client) addOperationListAssetModelPropertiesMiddlewares(stack *middlewa
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -131,6 +134,9 @@ func (c *Client) addOperationListAssetModelPropertiesMiddlewares(stack *middlewa
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addEndpointPrefix_opListAssetModelPropertiesMiddleware(stack); err != nil {
 		return err
 	}
@@ -140,7 +146,7 @@ func (c *Client) addOperationListAssetModelPropertiesMiddlewares(stack *middlewa
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListAssetModelProperties(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

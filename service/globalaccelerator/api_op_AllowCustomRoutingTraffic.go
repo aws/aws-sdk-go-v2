@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -16,9 +15,11 @@ import (
 // can allow traffic to all destinations in the subnet endpoint, or allow traffic
 // to a specified list of destination IP addresses and ports in the subnet. Note
 // that you cannot specify IP addresses or ports outside of the range that you
-// configured for the endpoint group. After you make changes, you can verify that
-// the updates are complete by checking the status of your accelerator: the status
-// changes from IN_PROGRESS to DEPLOYED.
+// configured for the endpoint group.
+//
+// After you make changes, you can verify that the updates are complete by
+// checking the status of your accelerator: the status changes from IN_PROGRESS to
+// DEPLOYED.
 func (c *Client) AllowCustomRoutingTraffic(ctx context.Context, params *AllowCustomRoutingTrafficInput, optFns ...func(*Options)) (*AllowCustomRoutingTrafficOutput, error) {
 	if params == nil {
 		params = &AllowCustomRoutingTrafficInput{}
@@ -49,18 +50,24 @@ type AllowCustomRoutingTrafficInput struct {
 
 	// Indicates whether all destination IP addresses and ports for a specified VPC
 	// subnet endpoint can receive traffic from a custom routing accelerator. The value
-	// is TRUE or FALSE. When set to TRUE, all destinations in the custom routing VPC
-	// subnet can receive traffic. Note that you cannot specify destination IP
-	// addresses and ports when the value is set to TRUE. When set to FALSE (or not
-	// specified), you must specify a list of destination IP addresses that are allowed
-	// to receive traffic. A list of ports is optional. If you don't specify a list of
-	// ports, the ports that can accept traffic is the same as the ports configured for
-	// the endpoint group. The default value is FALSE.
+	// is TRUE or FALSE.
+	//
+	// When set to TRUE, all destinations in the custom routing VPC subnet can receive
+	// traffic. Note that you cannot specify destination IP addresses and ports when
+	// the value is set to TRUE.
+	//
+	// When set to FALSE (or not specified), you must specify a list of destination IP
+	// addresses that are allowed to receive traffic. A list of ports is optional. If
+	// you don't specify a list of ports, the ports that can accept traffic is the same
+	// as the ports configured for the endpoint group.
+	//
+	// The default value is FALSE.
 	AllowAllTrafficToEndpoint *bool
 
 	// A list of specific Amazon EC2 instance IP addresses (destination addresses) in
 	// a subnet that you want to allow to receive traffic. The IP addresses must be a
 	// subset of the IP addresses that you specified for the endpoint group.
+	//
 	// DestinationAddresses is required if AllowAllTrafficToEndpoint is FALSE or is
 	// not specified.
 	DestinationAddresses []string
@@ -101,25 +108,25 @@ func (c *Client) addOperationAllowCustomRoutingTrafficMiddlewares(stack *middlew
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -134,13 +141,16 @@ func (c *Client) addOperationAllowCustomRoutingTrafficMiddlewares(stack *middlew
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpAllowCustomRoutingTrafficValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opAllowCustomRoutingTraffic(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

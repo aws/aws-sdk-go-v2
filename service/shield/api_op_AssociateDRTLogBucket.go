@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -14,11 +13,13 @@ import (
 // Authorizes the Shield Response Team (SRT) to access the specified Amazon S3
 // bucket containing log data such as Application Load Balancer access logs,
 // CloudFront logs, or logs from third party sources. You can associate up to 10
-// Amazon S3 buckets with your subscription. To use the services of the SRT and
-// make an AssociateDRTLogBucket request, you must be subscribed to the Business
-// Support plan (http://aws.amazon.com/premiumsupport/business-support/) or the
-// Enterprise Support plan (http://aws.amazon.com/premiumsupport/enterprise-support/)
-// .
+// Amazon S3 buckets with your subscription.
+//
+// To use the services of the SRT and make an AssociateDRTLogBucket request, you
+// must be subscribed to the [Business Support plan]or the [Enterprise Support plan].
+//
+// [Enterprise Support plan]: http://aws.amazon.com/premiumsupport/enterprise-support/
+// [Business Support plan]: http://aws.amazon.com/premiumsupport/business-support/
 func (c *Client) AssociateDRTLogBucket(ctx context.Context, params *AssociateDRTLogBucketInput, optFns ...func(*Options)) (*AssociateDRTLogBucketOutput, error) {
 	if params == nil {
 		params = &AssociateDRTLogBucketInput{}
@@ -73,25 +74,25 @@ func (c *Client) addOperationAssociateDRTLogBucketMiddlewares(stack *middleware.
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -106,13 +107,16 @@ func (c *Client) addOperationAssociateDRTLogBucketMiddlewares(stack *middleware.
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpAssociateDRTLogBucketValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opAssociateDRTLogBucket(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

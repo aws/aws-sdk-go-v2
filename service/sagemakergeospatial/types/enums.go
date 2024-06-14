@@ -12,6 +12,7 @@ const (
 
 // Values returns all known values for AlgorithmNameCloudRemoval. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (AlgorithmNameCloudRemoval) Values() []AlgorithmNameCloudRemoval {
 	return []AlgorithmNameCloudRemoval{
@@ -54,8 +55,9 @@ const (
 )
 
 // Values returns all known values for AlgorithmNameGeoMosaic. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (AlgorithmNameGeoMosaic) Values() []AlgorithmNameGeoMosaic {
 	return []AlgorithmNameGeoMosaic{
 		"NEAR",
@@ -110,8 +112,9 @@ const (
 )
 
 // Values returns all known values for AlgorithmNameResampling. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (AlgorithmNameResampling) Values() []AlgorithmNameResampling {
 	return []AlgorithmNameResampling{
 		"NEAR",
@@ -144,8 +147,9 @@ const (
 )
 
 // Values returns all known values for ComparisonOperator. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ComparisonOperator) Values() []ComparisonOperator {
 	return []ComparisonOperator{
 		"EQUALS",
@@ -167,8 +171,9 @@ const (
 )
 
 // Values returns all known values for DataCollectionType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (DataCollectionType) Values() []DataCollectionType {
 	return []DataCollectionType{
 		"PUBLIC",
@@ -189,8 +194,9 @@ const (
 
 // Values returns all known values for EarthObservationJobErrorType. Note that
 // this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (EarthObservationJobErrorType) Values() []EarthObservationJobErrorType {
 	return []EarthObservationJobErrorType{
 		"CLIENT_ERROR",
@@ -212,8 +218,9 @@ const (
 
 // Values returns all known values for EarthObservationJobExportStatus. Note that
 // this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (EarthObservationJobExportStatus) Values() []EarthObservationJobExportStatus {
 	return []EarthObservationJobExportStatus{
 		"IN_PROGRESS",
@@ -246,6 +253,7 @@ const (
 
 // Values returns all known values for EarthObservationJobStatus. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (EarthObservationJobStatus) Values() []EarthObservationJobStatus {
 	return []EarthObservationJobStatus{
@@ -271,8 +279,9 @@ const (
 )
 
 // Values returns all known values for ExportErrorType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ExportErrorType) Values() []ExportErrorType {
 	return []ExportErrorType{
 		"CLIENT_ERROR",
@@ -291,8 +300,9 @@ const (
 )
 
 // Values returns all known values for GroupBy. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (GroupBy) Values() []GroupBy {
 	return []GroupBy{
 		"ALL",
@@ -309,8 +319,9 @@ const (
 )
 
 // Values returns all known values for LogicalOperator. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (LogicalOperator) Values() []LogicalOperator {
 	return []LogicalOperator{
 		"AND",
@@ -334,8 +345,9 @@ const (
 )
 
 // Values returns all known values for OutputType. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (OutputType) Values() []OutputType {
 	return []OutputType{
 		"INT32",
@@ -359,8 +371,9 @@ const (
 )
 
 // Values returns all known values for PredefinedResolution. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (PredefinedResolution) Values() []PredefinedResolution {
 	return []PredefinedResolution{
 		"HIGHEST",
@@ -380,8 +393,9 @@ const (
 )
 
 // Values returns all known values for SortOrder. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (SortOrder) Values() []SortOrder {
 	return []SortOrder{
 		"ASCENDING",
@@ -400,8 +414,9 @@ const (
 )
 
 // Values returns all known values for TargetOptions. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (TargetOptions) Values() []TargetOptions {
 	return []TargetOptions{
 		"INPUT",
@@ -422,8 +437,9 @@ const (
 )
 
 // Values returns all known values for TemporalStatistics. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (TemporalStatistics) Values() []TemporalStatistics {
 	return []TemporalStatistics{
 		"MEAN",
@@ -441,8 +457,9 @@ const (
 )
 
 // Values returns all known values for Unit. Note that this can be expanded in the
-// future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (Unit) Values() []Unit {
 	return []Unit{
 		"METERS",
@@ -458,8 +475,9 @@ const (
 
 // Values returns all known values for VectorEnrichmentJobDocumentType. Note that
 // this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (VectorEnrichmentJobDocumentType) Values() []VectorEnrichmentJobDocumentType {
 	return []VectorEnrichmentJobDocumentType{
 		"CSV",
@@ -478,8 +496,9 @@ const (
 
 // Values returns all known values for VectorEnrichmentJobErrorType. Note that
 // this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (VectorEnrichmentJobErrorType) Values() []VectorEnrichmentJobErrorType {
 	return []VectorEnrichmentJobErrorType{
 		"CLIENT_ERROR",
@@ -497,8 +516,9 @@ const (
 
 // Values returns all known values for VectorEnrichmentJobExportErrorType. Note
 // that this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (VectorEnrichmentJobExportErrorType) Values() []VectorEnrichmentJobExportErrorType {
 	return []VectorEnrichmentJobExportErrorType{
 		"CLIENT_ERROR",
@@ -517,8 +537,9 @@ const (
 
 // Values returns all known values for VectorEnrichmentJobExportStatus. Note that
 // this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (VectorEnrichmentJobExportStatus) Values() []VectorEnrichmentJobExportStatus {
 	return []VectorEnrichmentJobExportStatus{
 		"IN_PROGRESS",
@@ -543,6 +564,7 @@ const (
 
 // Values returns all known values for VectorEnrichmentJobStatus. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (VectorEnrichmentJobStatus) Values() []VectorEnrichmentJobStatus {
 	return []VectorEnrichmentJobStatus{
@@ -566,8 +588,9 @@ const (
 )
 
 // Values returns all known values for VectorEnrichmentJobType. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (VectorEnrichmentJobType) Values() []VectorEnrichmentJobType {
 	return []VectorEnrichmentJobType{
 		"REVERSE_GEOCODING",
@@ -594,8 +617,9 @@ const (
 )
 
 // Values returns all known values for ZonalStatistics. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ZonalStatistics) Values() []ZonalStatistics {
 	return []ZonalStatistics{
 		"MEAN",

@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/iotsitewise/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -46,18 +45,20 @@ type DescribeGatewayOutput struct {
 	// This member is required.
 	CreationDate *time.Time
 
-	// The ARN (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
-	// of the gateway, which has the following format.
-	// arn:${Partition}:iotsitewise:${Region}:${Account}:gateway/${GatewayId}
+	// The [ARN] of the gateway, which has the following format.
+	//
+	//     arn:${Partition}:iotsitewise:${Region}:${Account}:gateway/${GatewayId}
+	//
+	// [ARN]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
 	//
 	// This member is required.
 	GatewayArn *string
 
 	// A list of gateway capability summaries that each contain a namespace and
 	// status. Each gateway capability defines data sources for the gateway. To
-	// retrieve a capability configuration's definition, use
-	// DescribeGatewayCapabilityConfiguration (https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_DescribeGatewayCapabilityConfiguration.html)
-	// .
+	// retrieve a capability configuration's definition, use [DescribeGatewayCapabilityConfiguration].
+	//
+	// [DescribeGatewayCapabilityConfiguration]: https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_DescribeGatewayCapabilityConfiguration.html
 	//
 	// This member is required.
 	GatewayCapabilitySummaries []types.GatewayCapabilitySummary
@@ -108,25 +109,25 @@ func (c *Client) addOperationDescribeGatewayMiddlewares(stack *middleware.Stack,
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -141,6 +142,9 @@ func (c *Client) addOperationDescribeGatewayMiddlewares(stack *middleware.Stack,
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addEndpointPrefix_opDescribeGatewayMiddleware(stack); err != nil {
 		return err
 	}
@@ -150,7 +154,7 @@ func (c *Client) addOperationDescribeGatewayMiddlewares(stack *middleware.Stack,
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeGateway(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

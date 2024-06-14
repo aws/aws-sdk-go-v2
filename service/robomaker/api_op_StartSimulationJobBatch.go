@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/robomaker/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -84,22 +83,36 @@ type StartSimulationJobBatchOutput struct {
 	// created into simulation jobs.
 	PendingRequests []types.SimulationJobRequest
 
-	// The status of the simulation job batch. Pending The simulation job batch
-	// request is pending. InProgress The simulation job batch is in progress. Failed
-	// The simulation job batch failed. One or more simulation job requests could not
-	// be completed due to an internal failure (like InternalServiceError ). See
-	// failureCode and failureReason for more information. Completed The simulation
-	// batch job completed. A batch is complete when (1) there are no pending
-	// simulation job requests in the batch and none of the failed simulation job
-	// requests are due to InternalServiceError and (2) when all created simulation
-	// jobs have reached a terminal state (for example, Completed or Failed ). Canceled
-	// The simulation batch job was cancelled. Canceling The simulation batch job is
-	// being cancelled. Completing The simulation batch job is completing. TimingOut
-	// The simulation job batch is timing out. If a batch timing out, and there are
-	// pending requests that were failing due to an internal failure (like
-	// InternalServiceError ), the batch status will be Failed . If there are no such
-	// failing request, the batch status will be TimedOut . TimedOut The simulation
-	// batch job timed out.
+	// The status of the simulation job batch.
+	//
+	// Pending The simulation job batch request is pending.
+	//
+	// InProgress The simulation job batch is in progress.
+	//
+	// Failed The simulation job batch failed. One or more simulation job requests
+	// could not be completed due to an internal failure (like InternalServiceError ).
+	// See failureCode and failureReason for more information.
+	//
+	// Completed The simulation batch job completed. A batch is complete when (1)
+	// there are no pending simulation job requests in the batch and none of the failed
+	// simulation job requests are due to InternalServiceError and (2) when all
+	// created simulation jobs have reached a terminal state (for example, Completed
+	// or Failed ).
+	//
+	// Canceled The simulation batch job was cancelled.
+	//
+	// Canceling The simulation batch job is being cancelled.
+	//
+	// Completing The simulation batch job is completing.
+	//
+	// TimingOut The simulation job batch is timing out.
+	//
+	// If a batch timing out, and there are pending requests that were failing due to
+	// an internal failure (like InternalServiceError ), the batch status will be
+	// Failed . If there are no such failing request, the batch status will be TimedOut
+	// .
+	//
+	// TimedOut The simulation batch job timed out.
 	Status types.SimulationJobBatchStatus
 
 	// A map that contains tag keys and tag values that are attached to the deployment
@@ -134,25 +147,25 @@ func (c *Client) addOperationStartSimulationJobBatchMiddlewares(stack *middlewar
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -167,6 +180,9 @@ func (c *Client) addOperationStartSimulationJobBatchMiddlewares(stack *middlewar
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opStartSimulationJobBatchMiddleware(stack, options); err != nil {
 		return err
 	}
@@ -176,7 +192,7 @@ func (c *Client) addOperationStartSimulationJobBatchMiddlewares(stack *middlewar
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opStartSimulationJobBatch(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

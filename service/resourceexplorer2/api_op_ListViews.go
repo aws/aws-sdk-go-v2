@@ -6,17 +6,19 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists the Amazon resource names (ARNs) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
-// of the views available in the Amazon Web Services Region in which you call this
-// operation. Always check the NextToken response parameter for a null value when
-// calling a paginated operation. These operations can occasionally return an empty
-// set of results even when there are more results available. The NextToken
-// response parameter value is null only when there are no more results to display.
+// Lists the [Amazon resource names (ARNs)] of the views available in the Amazon Web Services Region in which
+// you call this operation.
+//
+// Always check the NextToken response parameter for a null value when calling a
+// paginated operation. These operations can occasionally return an empty set of
+// results even when there are more results available. The NextToken response
+// parameter value is null only when there are no more results to display.
+//
+// [Amazon resource names (ARNs)]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
 func (c *Client) ListViews(ctx context.Context, params *ListViewsInput, optFns ...func(*Options)) (*ListViewsOutput, error) {
 	if params == nil {
 		params = &ListViewsInput{}
@@ -39,10 +41,11 @@ type ListViewsInput struct {
 	// appropriate to the operation. If additional items exist beyond those included in
 	// the current response, the NextToken response element is present and has a value
 	// (is not null). Include that value as the NextToken request parameter in the
-	// next call to the operation to get the next part of the results. An API operation
-	// can return fewer results than the maximum even when there are more results
-	// available. You should check NextToken after every operation to ensure that you
-	// receive all of the results.
+	// next call to the operation to get the next part of the results.
+	//
+	// An API operation can return fewer results than the maximum even when there are
+	// more results available. You should check NextToken after every operation to
+	// ensure that you receive all of the results.
 	MaxResults *int32
 
 	// The parameter for receiving additional results if you receive a NextToken
@@ -96,25 +99,25 @@ func (c *Client) addOperationListViewsMiddlewares(stack *middleware.Stack, optio
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -129,10 +132,13 @@ func (c *Client) addOperationListViewsMiddlewares(stack *middleware.Stack, optio
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListViews(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -164,10 +170,11 @@ type ListViewsPaginatorOptions struct {
 	// appropriate to the operation. If additional items exist beyond those included in
 	// the current response, the NextToken response element is present and has a value
 	// (is not null). Include that value as the NextToken request parameter in the
-	// next call to the operation to get the next part of the results. An API operation
-	// can return fewer results than the maximum even when there are more results
-	// available. You should check NextToken after every operation to ensure that you
-	// receive all of the results.
+	// next call to the operation to get the next part of the results.
+	//
+	// An API operation can return fewer results than the maximum even when there are
+	// more results available. You should check NextToken after every operation to
+	// ensure that you receive all of the results.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

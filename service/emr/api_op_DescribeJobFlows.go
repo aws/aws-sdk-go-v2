@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/emr/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -14,14 +13,20 @@ import (
 )
 
 // This API is no longer supported and will eventually be removed. We recommend
-// you use ListClusters , DescribeCluster , ListSteps , ListInstanceGroups and
-// ListBootstrapActions instead. DescribeJobFlows returns a list of job flows that
-// match all of the supplied parameters. The parameters can include a list of job
-// flow IDs, job flow states, and restrictions on job flow creation date and time.
+// you use ListClusters, DescribeCluster, ListSteps, ListInstanceGroups and ListBootstrapActions instead.
+//
+// DescribeJobFlows returns a list of job flows that match all of the supplied
+// parameters. The parameters can include a list of job flow IDs, job flow states,
+// and restrictions on job flow creation date and time.
+//
 // Regardless of supplied parameters, only job flows created within the last two
-// months are returned. If no parameters are supplied, then job flows matching
-// either of the following criteria are returned:
+// months are returned.
+//
+// If no parameters are supplied, then job flows matching either of the following
+// criteria are returned:
+//
 //   - Job flows created and completed in the last two weeks
+//
 //   - Job flows created within the last two months that are in one of the
 //     following states: RUNNING , WAITING , SHUTTING_DOWN , STARTING
 //
@@ -95,25 +100,25 @@ func (c *Client) addOperationDescribeJobFlowsMiddlewares(stack *middleware.Stack
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -128,10 +133,13 @@ func (c *Client) addOperationDescribeJobFlowsMiddlewares(stack *middleware.Stack
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeJobFlows(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/migrationhubstrategy/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -30,16 +29,16 @@ func (c *Client) GetServerDetails(ctx context.Context, params *GetServerDetailsI
 
 type GetServerDetailsInput struct {
 
-	// The ID of the server.
+	//  The ID of the server.
 	//
 	// This member is required.
 	ServerId *string
 
-	// The maximum number of items to include in the response. The maximum value is
+	//  The maximum number of items to include in the response. The maximum value is
 	// 100.
 	MaxResults *int32
 
-	// The token from a previous call that you use to retrieve the next set of
+	//  The token from a previous call that you use to retrieve the next set of
 	// results. For example, if a previous call to this action returned 100 items, but
 	// you set maxResults to 10. You'll receive a set of 10 results along with a
 	// token. You then use the returned token to retrieve the next set of 10.
@@ -50,15 +49,15 @@ type GetServerDetailsInput struct {
 
 type GetServerDetailsOutput struct {
 
-	// The associated application group the server belongs to, as defined in AWS
+	//  The associated application group the server belongs to, as defined in AWS
 	// Application Discovery Service.
 	AssociatedApplications []types.AssociatedApplication
 
-	// The token you use to retrieve the next set of results, or null if there are no
+	//  The token you use to retrieve the next set of results, or null if there are no
 	// more results.
 	NextToken *string
 
-	// Detailed information about the server.
+	//  Detailed information about the server.
 	ServerDetail *types.ServerDetail
 
 	// Metadata pertaining to the operation's result.
@@ -89,25 +88,25 @@ func (c *Client) addOperationGetServerDetailsMiddlewares(stack *middleware.Stack
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -122,13 +121,16 @@ func (c *Client) addOperationGetServerDetailsMiddlewares(stack *middleware.Stack
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpGetServerDetailsValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetServerDetails(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -156,7 +158,7 @@ var _ GetServerDetailsAPIClient = (*Client)(nil)
 
 // GetServerDetailsPaginatorOptions is the paginator options for GetServerDetails
 type GetServerDetailsPaginatorOptions struct {
-	// The maximum number of items to include in the response. The maximum value is
+	//  The maximum number of items to include in the response. The maximum value is
 	// 100.
 	Limit int32
 

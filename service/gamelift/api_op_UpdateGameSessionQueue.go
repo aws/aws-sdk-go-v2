@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/gamelift/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -15,7 +14,13 @@ import (
 // Updates the configuration of a game session queue, which determines how the
 // queue processes new game session requests. To update settings, specify the queue
 // name to be updated and provide the new settings. When updating destinations,
-// provide a complete list of destinations. Learn more Using Multi-Region Queues (https://docs.aws.amazon.com/gamelift/latest/developerguide/queues-intro.html)
+// provide a complete list of destinations.
+//
+// # Learn more
+//
+// [Using Multi-Region Queues]
+//
+// [Using Multi-Region Queues]: https://docs.aws.amazon.com/gamelift/latest/developerguide/queues-intro.html
 func (c *Client) UpdateGameSessionQueue(ctx context.Context, params *UpdateGameSessionQueueInput, optFns ...func(*Options)) (*UpdateGameSessionQueueOutput, error) {
 	if params == nil {
 		params = &UpdateGameSessionQueueInput{}
@@ -57,8 +62,9 @@ type UpdateGameSessionQueueInput struct {
 	FilterConfiguration *types.FilterConfiguration
 
 	// An SNS topic ARN that is set up to receive game session placement
-	// notifications. See Setting up notifications for game session placement (https://docs.aws.amazon.com/gamelift/latest/developerguide/queue-notification.html)
-	// .
+	// notifications. See [Setting up notifications for game session placement].
+	//
+	// [Setting up notifications for game session placement]: https://docs.aws.amazon.com/gamelift/latest/developerguide/queue-notification.html
 	NotificationTarget *string
 
 	// A set of policies that act as a sliding cap on player latency. FleetIQ works to
@@ -118,25 +124,25 @@ func (c *Client) addOperationUpdateGameSessionQueueMiddlewares(stack *middleware
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -151,13 +157,16 @@ func (c *Client) addOperationUpdateGameSessionQueueMiddlewares(stack *middleware
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpUpdateGameSessionQueueValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateGameSessionQueue(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

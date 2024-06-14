@@ -6,12 +6,11 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Specifies the Key Value Store to delete.
+// Specifies the key value store to delete.
 func (c *Client) DeleteKeyValueStore(ctx context.Context, params *DeleteKeyValueStoreInput, optFns ...func(*Options)) (*DeleteKeyValueStoreOutput, error) {
 	if params == nil {
 		params = &DeleteKeyValueStoreInput{}
@@ -29,12 +28,12 @@ func (c *Client) DeleteKeyValueStore(ctx context.Context, params *DeleteKeyValue
 
 type DeleteKeyValueStoreInput struct {
 
-	// The Key Value Store to delete, if a match occurs.
+	// The key value store to delete, if a match occurs.
 	//
 	// This member is required.
 	IfMatch *string
 
-	// The name of the Key Value Store.
+	// The name of the key value store.
 	//
 	// This member is required.
 	Name *string
@@ -71,25 +70,25 @@ func (c *Client) addOperationDeleteKeyValueStoreMiddlewares(stack *middleware.St
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -104,13 +103,16 @@ func (c *Client) addOperationDeleteKeyValueStoreMiddlewares(stack *middleware.St
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDeleteKeyValueStoreValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteKeyValueStore(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

@@ -6,18 +6,18 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Deletes a certificate and its associated private key. If this action succeeds,
 // the certificate no longer appears in the list that can be displayed by calling
-// the ListCertificates action or be retrieved by calling the GetCertificate
-// action. The certificate will not be available for use by Amazon Web Services
-// services integrated with ACM. You cannot delete an ACM certificate that is being
-// used by another Amazon Web Services service. To delete a certificate that is in
-// use, the certificate association must first be removed.
+// the ListCertificatesaction or be retrieved by calling the GetCertificate action. The certificate will not be
+// available for use by Amazon Web Services services integrated with ACM.
+//
+// You cannot delete an ACM certificate that is being used by another Amazon Web
+// Services service. To delete a certificate that is in use, the certificate
+// association must first be removed.
 func (c *Client) DeleteCertificate(ctx context.Context, params *DeleteCertificateInput, optFns ...func(*Options)) (*DeleteCertificateOutput, error) {
 	if params == nil {
 		params = &DeleteCertificateInput{}
@@ -37,9 +37,12 @@ type DeleteCertificateInput struct {
 
 	// String that contains the ARN of the ACM certificate to be deleted. This must be
 	// of the form:
-	// arn:aws:acm:region:123456789012:certificate/12345678-1234-1234-1234-123456789012
-	// For more information about ARNs, see Amazon Resource Names (ARNs) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
-	// .
+	//
+	//     arn:aws:acm:region:123456789012:certificate/12345678-1234-1234-1234-123456789012
+	//
+	// For more information about ARNs, see [Amazon Resource Names (ARNs)].
+	//
+	// [Amazon Resource Names (ARNs)]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
 	//
 	// This member is required.
 	CertificateArn *string
@@ -76,25 +79,25 @@ func (c *Client) addOperationDeleteCertificateMiddlewares(stack *middleware.Stac
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -109,13 +112,16 @@ func (c *Client) addOperationDeleteCertificateMiddlewares(stack *middleware.Stac
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDeleteCertificateValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteCertificate(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

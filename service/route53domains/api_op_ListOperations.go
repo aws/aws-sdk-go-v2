@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/route53domains/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -15,7 +14,9 @@ import (
 
 // Returns information about all of the operations that return an operation ID and
 // that have ever been performed on domains that were registered by the current
-// account. This command runs only in the us-east-1 Region.
+// account.
+//
+// This command runs only in the us-east-1 Region.
 func (c *Client) ListOperations(ctx context.Context, params *ListOperationsInput, optFns ...func(*Options)) (*ListOperationsOutput, error) {
 	if params == nil {
 		params = &ListOperationsInput{}
@@ -42,16 +43,18 @@ type ListOperationsInput struct {
 	// element.
 	Marker *string
 
-	// Number of domains to be returned. Default: 20
+	// Number of domains to be returned.
+	//
+	// Default: 20
 	MaxItems *int32
 
-	// The sort type for returned values.
+	//  The sort type for returned values.
 	SortBy types.ListOperationsSortAttributeName
 
-	// The sort order for returned values, either ascending or descending.
+	//  The sort order for returned values, either ascending or descending.
 	SortOrder types.SortOrder
 
-	// The status of the operations.
+	//  The status of the operations.
 	Status []types.OperationStatus
 
 	// An optional parameter that lets you get information about all the operations
@@ -59,7 +62,7 @@ type ListOperationsInput struct {
 	// Unix time format and Coordinated Universal time (UTC).
 	SubmittedSince *time.Time
 
-	// An arrays of the domains operation types.
+	//  An arrays of the domains operation types.
 	Type []types.OperationType
 
 	noSmithyDocumentSerde
@@ -104,25 +107,25 @@ func (c *Client) addOperationListOperationsMiddlewares(stack *middleware.Stack, 
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -137,10 +140,13 @@ func (c *Client) addOperationListOperationsMiddlewares(stack *middleware.Stack, 
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListOperations(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -168,7 +174,9 @@ var _ ListOperationsAPIClient = (*Client)(nil)
 
 // ListOperationsPaginatorOptions is the paginator options for ListOperations
 type ListOperationsPaginatorOptions struct {
-	// Number of domains to be returned. Default: 20
+	// Number of domains to be returned.
+	//
+	// Default: 20
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

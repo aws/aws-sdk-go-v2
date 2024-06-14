@@ -18,7 +18,16 @@ import (
 	"io"
 	"math"
 	"strings"
+	"time"
 )
+
+func deserializeS3Expires(v string) (*time.Time, error) {
+	t, err := smithytime.ParseHTTPDate(v)
+	if err != nil {
+		return nil, nil
+	}
+	return &t, nil
+}
 
 type awsRestjson1_deserializeOpCreateEncoderConfiguration struct {
 }
@@ -3836,6 +3845,9 @@ func awsRestjson1_deserializeOpErrorUpdateStage(response *smithyhttp.Response, m
 	case strings.EqualFold("AccessDeniedException", errorCode):
 		return awsRestjson1_deserializeErrorAccessDeniedException(response, errorBody)
 
+	case strings.EqualFold("ConflictException", errorCode):
+		return awsRestjson1_deserializeErrorConflictException(response, errorBody)
+
 	case strings.EqualFold("PendingVerification", errorCode):
 		return awsRestjson1_deserializeErrorPendingVerification(response, errorBody)
 
@@ -5144,6 +5156,46 @@ func awsRestjson1_deserializeDocumentGridConfiguration(v **types.GridConfigurati
 				sv.FeaturedParticipantAttribute = ptr.String(jtv)
 			}
 
+		case "gridGap":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected GridGap to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.GridGap = int32(i64)
+			}
+
+		case "omitStoppedVideo":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected OmitStoppedVideo to be of type *bool, got %T instead", value)
+				}
+				sv.OmitStoppedVideo = jtv
+			}
+
+		case "videoAspectRatio":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected VideoAspectRatio to be of type string, got %T instead", value)
+				}
+				sv.VideoAspectRatio = types.VideoAspectRatio(jtv)
+			}
+
+		case "videoFillMode":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected VideoFillMode to be of type string, got %T instead", value)
+				}
+				sv.VideoFillMode = types.VideoFillMode(jtv)
+			}
+
 		default:
 			_, _ = key, value
 
@@ -5217,6 +5269,11 @@ func awsRestjson1_deserializeDocumentLayoutConfiguration(v **types.LayoutConfigu
 		switch key {
 		case "grid":
 			if err := awsRestjson1_deserializeDocumentGridConfiguration(&sv.Grid, value); err != nil {
+				return err
+			}
+
+		case "pip":
+			if err := awsRestjson1_deserializeDocumentPipConfiguration(&sv.Pip, value); err != nil {
 				return err
 			}
 
@@ -5747,6 +5804,143 @@ func awsRestjson1_deserializeDocumentPendingVerification(v **types.PendingVerifi
 					return fmt.Errorf("expected errorMessage to be of type string, got %T instead", value)
 				}
 				sv.ExceptionMessage = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentPipConfiguration(v **types.PipConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.PipConfiguration
+	if *v == nil {
+		sv = &types.PipConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "featuredParticipantAttribute":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AttributeKey to be of type string, got %T instead", value)
+				}
+				sv.FeaturedParticipantAttribute = ptr.String(jtv)
+			}
+
+		case "gridGap":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected GridGap to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.GridGap = int32(i64)
+			}
+
+		case "omitStoppedVideo":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected OmitStoppedVideo to be of type *bool, got %T instead", value)
+				}
+				sv.OmitStoppedVideo = jtv
+			}
+
+		case "pipBehavior":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected PipBehavior to be of type string, got %T instead", value)
+				}
+				sv.PipBehavior = types.PipBehavior(jtv)
+			}
+
+		case "pipHeight":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected PipHeight to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.PipHeight = ptr.Int32(int32(i64))
+			}
+
+		case "pipOffset":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected PipOffset to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.PipOffset = int32(i64)
+			}
+
+		case "pipParticipantAttribute":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AttributeKey to be of type string, got %T instead", value)
+				}
+				sv.PipParticipantAttribute = ptr.String(jtv)
+			}
+
+		case "pipPosition":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected PipPosition to be of type string, got %T instead", value)
+				}
+				sv.PipPosition = types.PipPosition(jtv)
+			}
+
+		case "pipWidth":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected PipWidth to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.PipWidth = ptr.Int32(int32(i64))
+			}
+
+		case "videoFillMode":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected VideoFillMode to be of type string, got %T instead", value)
+				}
+				sv.VideoFillMode = types.VideoFillMode(jtv)
 			}
 
 		default:

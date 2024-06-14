@@ -15,17 +15,29 @@ import (
 	"strings"
 )
 
-// This operation is not supported by directory buckets. Deletes the specified
-// access point. All Amazon S3 on Outposts REST API requests for this action
-// require an additional parameter of x-amz-outpost-id to be passed with the
-// request. In addition, you must use an S3 on Outposts endpoint hostname prefix
-// instead of s3-control . For an example of the request syntax for Amazon S3 on
-// Outposts that uses the S3 on Outposts endpoint hostname prefix and the
-// x-amz-outpost-id derived by using the access point ARN, see the Examples (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteAccessPoint.html#API_control_DeleteAccessPoint_Examples)
-// section. The following actions are related to DeleteAccessPoint :
-//   - CreateAccessPoint (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_CreateAccessPoint.html)
-//   - GetAccessPoint (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetAccessPoint.html)
-//   - ListAccessPoints (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_ListAccessPoints.html)
+// This operation is not supported by directory buckets.
+//
+// Deletes the specified access point.
+//
+// All Amazon S3 on Outposts REST API requests for this action require an
+// additional parameter of x-amz-outpost-id to be passed with the request. In
+// addition, you must use an S3 on Outposts endpoint hostname prefix instead of
+// s3-control . For an example of the request syntax for Amazon S3 on Outposts that
+// uses the S3 on Outposts endpoint hostname prefix and the x-amz-outpost-id
+// derived by using the access point ARN, see the [Examples]section.
+//
+// The following actions are related to DeleteAccessPoint :
+//
+// [CreateAccessPoint]
+//
+// [GetAccessPoint]
+//
+// [ListAccessPoints]
+//
+// [ListAccessPoints]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_ListAccessPoints.html
+// [CreateAccessPoint]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_CreateAccessPoint.html
+// [GetAccessPoint]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetAccessPoint.html
+// [Examples]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteAccessPoint.html#API_control_DeleteAccessPoint_Examples
 func (c *Client) DeleteAccessPoint(ctx context.Context, params *DeleteAccessPointInput, optFns ...func(*Options)) (*DeleteAccessPointOutput, error) {
 	if params == nil {
 		params = &DeleteAccessPointInput{}
@@ -49,13 +61,16 @@ type DeleteAccessPointInput struct {
 	// This member is required.
 	AccountId *string
 
-	// The name of the access point you want to delete. For using this parameter with
-	// Amazon S3 on Outposts with the REST API, you must specify the name and the
-	// x-amz-outpost-id as well. For using this parameter with S3 on Outposts with the
-	// Amazon Web Services SDK and CLI, you must specify the ARN of the access point
-	// accessed in the format arn:aws:s3-outposts:::outpost//accesspoint/ . For
-	// example, to access the access point reports-ap through Outpost my-outpost owned
-	// by account 123456789012 in Region us-west-2 , use the URL encoding of
+	// The name of the access point you want to delete.
+	//
+	// For using this parameter with Amazon S3 on Outposts with the REST API, you must
+	// specify the name and the x-amz-outpost-id as well.
+	//
+	// For using this parameter with S3 on Outposts with the Amazon Web Services SDK
+	// and CLI, you must specify the ARN of the access point accessed in the format
+	// arn:aws:s3-outposts:::outpost//accesspoint/ . For example, to access the access
+	// point reports-ap through Outpost my-outpost owned by account 123456789012 in
+	// Region us-west-2 , use the URL encoding of
 	// arn:aws:s3-outposts:us-west-2:123456789012:outpost/my-outpost/accesspoint/reports-ap
 	// . The value must be URL encoded.
 	//
@@ -100,25 +115,25 @@ func (c *Client) addOperationDeleteAccessPointMiddlewares(stack *middleware.Stac
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -136,6 +151,9 @@ func (c *Client) addOperationDeleteAccessPointMiddlewares(stack *middleware.Stac
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addEndpointPrefix_opDeleteAccessPointMiddleware(stack); err != nil {
 		return err
 	}
@@ -148,7 +166,7 @@ func (c *Client) addOperationDeleteAccessPointMiddlewares(stack *middleware.Stac
 	if err = addMetadataRetrieverMiddleware(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addDeleteAccessPointUpdateEndpoint(stack, options); err != nil {

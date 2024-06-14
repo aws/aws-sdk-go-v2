@@ -6,20 +6,24 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // This documentation is for version 1 of the Amazon Kinesis Data Analytics API,
 // which only supports SQL applications. Version 2 of the API supports SQL and Java
-// applications. For more information about version 2, see Amazon Kinesis Data
-// Analytics API V2 Documentation . Deletes a reference data source configuration
-// from the specified application configuration. If the application is running,
-// Amazon Kinesis Analytics immediately removes the in-application table that you
-// created using the AddApplicationReferenceDataSource (https://docs.aws.amazon.com/kinesisanalytics/latest/dev/API_AddApplicationReferenceDataSource.html)
-// operation. This operation requires permissions to perform the
+// applications. For more information about version 2, see Amazon Kinesis Data Analytics API V2 Documentation.
+//
+// Deletes a reference data source configuration from the specified application
+// configuration.
+//
+// If the application is running, Amazon Kinesis Analytics immediately removes the
+// in-application table that you created using the [AddApplicationReferenceDataSource]operation.
+//
+// This operation requires permissions to perform the
 // kinesisanalytics.DeleteApplicationReferenceDataSource action.
+//
+// [AddApplicationReferenceDataSource]: https://docs.aws.amazon.com/kinesisanalytics/latest/dev/API_AddApplicationReferenceDataSource.html
 func (c *Client) DeleteApplicationReferenceDataSource(ctx context.Context, params *DeleteApplicationReferenceDataSourceInput, optFns ...func(*Options)) (*DeleteApplicationReferenceDataSourceOutput, error) {
 	if params == nil {
 		params = &DeleteApplicationReferenceDataSourceInput{}
@@ -42,17 +46,21 @@ type DeleteApplicationReferenceDataSourceInput struct {
 	// This member is required.
 	ApplicationName *string
 
-	// Version of the application. You can use the DescribeApplication (https://docs.aws.amazon.com/kinesisanalytics/latest/dev/API_DescribeApplication.html)
-	// operation to get the current application version. If the version specified is
-	// not the current version, the ConcurrentModificationException is returned.
+	// Version of the application. You can use the [DescribeApplication] operation to get the current
+	// application version. If the version specified is not the current version, the
+	// ConcurrentModificationException is returned.
+	//
+	// [DescribeApplication]: https://docs.aws.amazon.com/kinesisanalytics/latest/dev/API_DescribeApplication.html
 	//
 	// This member is required.
 	CurrentApplicationVersionId *int64
 
 	// ID of the reference data source. When you add a reference data source to your
-	// application using the AddApplicationReferenceDataSource (https://docs.aws.amazon.com/kinesisanalytics/latest/dev/API_AddApplicationReferenceDataSource.html)
-	// , Amazon Kinesis Analytics assigns an ID. You can use the DescribeApplication (https://docs.aws.amazon.com/kinesisanalytics/latest/dev/API_DescribeApplication.html)
+	// application using the [AddApplicationReferenceDataSource], Amazon Kinesis Analytics assigns an ID. You can use the [DescribeApplication]
 	// operation to get the reference ID.
+	//
+	// [DescribeApplication]: https://docs.aws.amazon.com/kinesisanalytics/latest/dev/API_DescribeApplication.html
+	// [AddApplicationReferenceDataSource]: https://docs.aws.amazon.com/kinesisanalytics/latest/dev/API_AddApplicationReferenceDataSource.html
 	//
 	// This member is required.
 	ReferenceId *string
@@ -89,25 +97,25 @@ func (c *Client) addOperationDeleteApplicationReferenceDataSourceMiddlewares(sta
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -122,13 +130,16 @@ func (c *Client) addOperationDeleteApplicationReferenceDataSourceMiddlewares(sta
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDeleteApplicationReferenceDataSourceValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteApplicationReferenceDataSource(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

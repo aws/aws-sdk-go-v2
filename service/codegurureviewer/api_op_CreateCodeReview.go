@@ -6,16 +6,16 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/codegurureviewer/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Use to create a code review with a CodeReviewType (https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_CodeReviewType.html)
-// of RepositoryAnalysis . This type of code review analyzes all code under a
-// specified branch in an associated repository. PullRequest code reviews are
-// automatically triggered by a pull request.
+// Use to create a code review with a [CodeReviewType] of RepositoryAnalysis . This type of code
+// review analyzes all code under a specified branch in an associated repository.
+// PullRequest code reviews are automatically triggered by a pull request.
+//
+// [CodeReviewType]: https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_CodeReviewType.html
 func (c *Client) CreateCodeReview(ctx context.Context, params *CreateCodeReviewInput, optFns ...func(*Options)) (*CreateCodeReviewOutput, error) {
 	if params == nil {
 		params = &CreateCodeReviewInput{}
@@ -39,16 +39,22 @@ type CreateCodeReviewInput struct {
 	// This member is required.
 	Name *string
 
-	// The Amazon Resource Name (ARN) of the RepositoryAssociation (https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_RepositoryAssociation.html)
-	// object. You can retrieve this ARN by calling ListRepositoryAssociations (https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_ListRepositoryAssociations.html)
-	// . A code review can only be created on an associated repository. This is the ARN
+	// The Amazon Resource Name (ARN) of the [RepositoryAssociation] object. You can retrieve this ARN by
+	// calling [ListRepositoryAssociations].
+	//
+	// A code review can only be created on an associated repository. This is the ARN
 	// of the associated repository.
+	//
+	// [ListRepositoryAssociations]: https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_ListRepositoryAssociations.html
+	// [RepositoryAssociation]: https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_RepositoryAssociation.html
 	//
 	// This member is required.
 	RepositoryAssociationArn *string
 
-	// The type of code review to create. This is specified using a CodeReviewType (https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_CodeReviewType.html)
-	// object. You can create a code review only of type RepositoryAnalysis .
+	// The type of code review to create. This is specified using a [CodeReviewType] object. You can
+	// create a code review only of type RepositoryAnalysis .
+	//
+	// [CodeReviewType]: https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_CodeReviewType.html
 	//
 	// This member is required.
 	Type *types.CodeReviewType
@@ -94,25 +100,25 @@ func (c *Client) addOperationCreateCodeReviewMiddlewares(stack *middleware.Stack
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -127,6 +133,9 @@ func (c *Client) addOperationCreateCodeReviewMiddlewares(stack *middleware.Stack
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opCreateCodeReviewMiddleware(stack, options); err != nil {
 		return err
 	}
@@ -136,7 +145,7 @@ func (c *Client) addOperationCreateCodeReviewMiddlewares(stack *middleware.Stack
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateCodeReview(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

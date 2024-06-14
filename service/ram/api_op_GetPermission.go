@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/ram/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -30,19 +29,21 @@ func (c *Client) GetPermission(ctx context.Context, params *GetPermissionInput, 
 
 type GetPermissionInput struct {
 
-	// Specifies the Amazon Resource Name (ARN) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
-	// of the permission whose contents you want to retrieve. To find the ARN for a
-	// permission, use either the ListPermissions operation or go to the Permissions
-	// library (https://console.aws.amazon.com/ram/home#Permissions:) page in the RAM
-	// console and then choose the name of the permission. The ARN is displayed on the
-	// detail page.
+	// Specifies the [Amazon Resource Name (ARN)] of the permission whose contents you want to retrieve. To find
+	// the ARN for a permission, use either the ListPermissionsoperation or go to the [Permissions library] page in the
+	// RAM console and then choose the name of the permission. The ARN is displayed on
+	// the detail page.
+	//
+	// [Permissions library]: https://console.aws.amazon.com/ram/home#Permissions:
+	// [Amazon Resource Name (ARN)]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
 	//
 	// This member is required.
 	PermissionArn *string
 
 	// Specifies the version number of the RAM permission to retrieve. If you don't
-	// specify this parameter, the operation retrieves the default version. To see the
-	// list of available versions, use ListPermissionVersions .
+	// specify this parameter, the operation retrieves the default version.
+	//
+	// To see the list of available versions, use ListPermissionVersions.
 	PermissionVersion *int32
 
 	noSmithyDocumentSerde
@@ -81,25 +82,25 @@ func (c *Client) addOperationGetPermissionMiddlewares(stack *middleware.Stack, o
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -114,13 +115,16 @@ func (c *Client) addOperationGetPermissionMiddlewares(stack *middleware.Stack, o
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpGetPermissionValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetPermission(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

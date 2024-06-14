@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -41,8 +40,10 @@ type AttachVolumeInput struct {
 	GatewayARN *string
 
 	// The network interface of the gateway on which to expose the iSCSI target. Only
-	// IPv4 addresses are accepted. Use DescribeGatewayInformation to get a list of
-	// the network interfaces available on a gateway. Valid Values: A valid IP address.
+	// IPv4 addresses are accepted. Use DescribeGatewayInformationto get a list of the network interfaces
+	// available on a gateway.
+	//
+	// Valid Values: A valid IP address.
 	//
 	// This member is required.
 	NetworkInterfaceId *string
@@ -61,9 +62,10 @@ type AttachVolumeInput struct {
 	// used as a suffix for the target ARN. For example, specifying TargetName as
 	// myvolume results in the target ARN of
 	// arn:aws:storagegateway:us-east-2:111122223333:gateway/sgw-12A3456B/target/iqn.1997-05.com.amazon:myvolume
-	// . The target name must be unique across all volumes on a gateway. If you don't
-	// specify a value, Storage Gateway uses the value that was previously used for
-	// this volume as the new target name.
+	// . The target name must be unique across all volumes on a gateway.
+	//
+	// If you don't specify a value, Storage Gateway uses the value that was
+	// previously used for this volume as the new target name.
 	TargetName *string
 
 	noSmithyDocumentSerde
@@ -107,25 +109,25 @@ func (c *Client) addOperationAttachVolumeMiddlewares(stack *middleware.Stack, op
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -140,13 +142,16 @@ func (c *Client) addOperationAttachVolumeMiddlewares(stack *middleware.Stack, op
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpAttachVolumeValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opAttachVolume(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

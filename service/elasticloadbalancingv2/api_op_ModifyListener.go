@@ -6,20 +6,22 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/elasticloadbalancingv2/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Replaces the specified properties of the specified listener. Any properties
-// that you do not specify remain unchanged. Changing the protocol from HTTPS to
-// HTTP, or from TLS to TCP, removes the security policy and default certificate
-// properties. If you change the protocol from HTTP to HTTPS, or from TCP to TLS,
-// you must add the security policy and default certificate properties. To add an
-// item to a list, remove an item from a list, or update an item in a list, you
-// must provide the entire list. For example, to add an action, specify a list with
-// the current actions plus the new action.
+// that you do not specify remain unchanged.
+//
+// Changing the protocol from HTTPS to HTTP, or from TLS to TCP, removes the
+// security policy and default certificate properties. If you change the protocol
+// from HTTP to HTTPS, or from TCP to TLS, you must add the security policy and
+// default certificate properties.
+//
+// To add an item to a list, remove an item from a list, or update an item in a
+// list, you must provide the entire list. For example, to add an action, specify a
+// list with the current actions plus the new action.
 func (c *Client) ModifyListener(ctx context.Context, params *ModifyListenerInput, optFns ...func(*Options)) (*ModifyListenerOutput, error) {
 	if params == nil {
 		params = &ModifyListenerInput{}
@@ -44,13 +46,20 @@ type ModifyListenerInput struct {
 
 	// [TLS listeners] The name of the Application-Layer Protocol Negotiation (ALPN)
 	// policy. You can specify one policy name. The following are the possible values:
+	//
 	//   - HTTP1Only
+	//
 	//   - HTTP2Only
+	//
 	//   - HTTP2Optional
+	//
 	//   - HTTP2Preferred
+	//
 	//   - None
-	// For more information, see ALPN policies (https://docs.aws.amazon.com/elasticloadbalancing/latest/network/create-tls-listener.html#alpn-policies)
-	// in the Network Load Balancers Guide.
+	//
+	// For more information, see [ALPN policies] in the Network Load Balancers Guide.
+	//
+	// [ALPN policies]: https://docs.aws.amazon.com/elasticloadbalancing/latest/network/create-tls-listener.html#alpn-policies
 	AlpnPolicy []string
 
 	// [HTTPS and TLS listeners] The default certificate for the listener. You must
@@ -76,9 +85,12 @@ type ModifyListenerInput struct {
 	Protocol types.ProtocolEnum
 
 	// [HTTPS and TLS listeners] The security policy that defines which protocols and
-	// ciphers are supported. For more information, see Security policies (https://docs.aws.amazon.com/elasticloadbalancing/latest/application/create-https-listener.html#describe-ssl-policies)
-	// in the Application Load Balancers Guide or Security policies (https://docs.aws.amazon.com/elasticloadbalancing/latest/network/create-tls-listener.html#describe-ssl-policies)
-	// in the Network Load Balancers Guide.
+	// ciphers are supported.
+	//
+	// For more information, see [Security policies] in the Application Load Balancers Guide or [Security policies] in the
+	// Network Load Balancers Guide.
+	//
+	// [Security policies]: https://docs.aws.amazon.com/elasticloadbalancing/latest/network/create-tls-listener.html#describe-ssl-policies
 	SslPolicy *string
 
 	noSmithyDocumentSerde
@@ -117,25 +129,25 @@ func (c *Client) addOperationModifyListenerMiddlewares(stack *middleware.Stack, 
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -150,13 +162,16 @@ func (c *Client) addOperationModifyListenerMiddlewares(stack *middleware.Stack, 
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpModifyListenerValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opModifyListener(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

@@ -6,22 +6,32 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/elasticloadbalancing/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Modifies the attributes of the specified load balancer. You can modify the load
-// balancer attributes, such as AccessLogs , ConnectionDraining , and
-// CrossZoneLoadBalancing by either enabling or disabling them. Or, you can modify
-// the load balancer attribute ConnectionSettings by specifying an idle connection
-// timeout value for your load balancer. For more information, see the following in
-// the Classic Load Balancers Guide:
-//   - Cross-Zone Load Balancing (https://docs.aws.amazon.com/elasticloadbalancing/latest/classic/enable-disable-crosszone-lb.html)
-//   - Connection Draining (https://docs.aws.amazon.com/elasticloadbalancing/latest/classic/config-conn-drain.html)
-//   - Access Logs (https://docs.aws.amazon.com/elasticloadbalancing/latest/classic/access-log-collection.html)
-//   - Idle Connection Timeout (https://docs.aws.amazon.com/elasticloadbalancing/latest/classic/config-idle-timeout.html)
+// Modifies the attributes of the specified load balancer.
+//
+// You can modify the load balancer attributes, such as AccessLogs ,
+// ConnectionDraining , and CrossZoneLoadBalancing by either enabling or disabling
+// them. Or, you can modify the load balancer attribute ConnectionSettings by
+// specifying an idle connection timeout value for your load balancer.
+//
+// For more information, see the following in the Classic Load Balancers Guide:
+//
+// [Cross-Zone Load Balancing]
+//
+// [Connection Draining]
+//
+// [Access Logs]
+//
+// [Idle Connection Timeout]
+//
+// [Cross-Zone Load Balancing]: https://docs.aws.amazon.com/elasticloadbalancing/latest/classic/enable-disable-crosszone-lb.html
+// [Idle Connection Timeout]: https://docs.aws.amazon.com/elasticloadbalancing/latest/classic/config-idle-timeout.html
+// [Access Logs]: https://docs.aws.amazon.com/elasticloadbalancing/latest/classic/access-log-collection.html
+// [Connection Draining]: https://docs.aws.amazon.com/elasticloadbalancing/latest/classic/config-conn-drain.html
 func (c *Client) ModifyLoadBalancerAttributes(ctx context.Context, params *ModifyLoadBalancerAttributesInput, optFns ...func(*Options)) (*ModifyLoadBalancerAttributesOutput, error) {
 	if params == nil {
 		params = &ModifyLoadBalancerAttributesInput{}
@@ -90,25 +100,25 @@ func (c *Client) addOperationModifyLoadBalancerAttributesMiddlewares(stack *midd
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -123,13 +133,16 @@ func (c *Client) addOperationModifyLoadBalancerAttributesMiddlewares(stack *midd
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpModifyLoadBalancerAttributesValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opModifyLoadBalancerAttributes(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

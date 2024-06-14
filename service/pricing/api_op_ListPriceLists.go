@@ -6,24 +6,27 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/pricing/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
-// This feature is in preview release and is subject to change. Your use of Amazon
-// Web Services Price List API is subject to the Beta Service Participation terms
-// of the Amazon Web Services Service Terms (https://aws.amazon.com/service-terms/)
-// (Section 1.10). This returns a list of Price List references that the requester
-// if authorized to view, given a ServiceCode , CurrencyCode , and an EffectiveDate
-// . Use without a RegionCode filter to list Price List references from all
-// available Amazon Web Services Regions. Use with a RegionCode filter to get the
-// Price List reference that's specific to a specific Amazon Web Services Region.
-// You can use the PriceListArn from the response to get your preferred Price List
-// files through the GetPriceListFileUrl (https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_pricing_GetPriceListFileUrl.html)
-// API.
+//	This feature is in preview release and is subject to change. Your use of
+//
+// Amazon Web Services Price List API is subject to the Beta Service Participation
+// terms of the [Amazon Web Services Service Terms](Section 1.10).
+//
+// This returns a list of Price List references that the requester if authorized
+// to view, given a ServiceCode , CurrencyCode , and an EffectiveDate . Use without
+// a RegionCode filter to list Price List references from all available Amazon Web
+// Services Regions. Use with a RegionCode filter to get the Price List reference
+// that's specific to a specific Amazon Web Services Region. You can use the
+// PriceListArn from the response to get your preferred Price List files through
+// the [GetPriceListFileUrl]API.
+//
+// [Amazon Web Services Service Terms]: https://aws.amazon.com/service-terms/
+// [GetPriceListFileUrl]: https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_pricing_GetPriceListFileUrl.html
 func (c *Client) ListPriceLists(ctx context.Context, params *ListPriceListsInput, optFns ...func(*Options)) (*ListPriceListsOutput, error) {
 	if params == nil {
 		params = &ListPriceListsInput{}
@@ -55,10 +58,15 @@ type ListPriceListsInput struct {
 	// The service code or the Savings Plan service code for the attributes that you
 	// want to retrieve. For example, to get the list of applicable Amazon EC2 price
 	// lists, use AmazonEC2 . For a full list of service codes containing On-Demand and
-	// Reserved Instance (RI) pricing, use the DescribeServices (https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_pricing_DescribeServices.html#awscostmanagement-pricing_DescribeServices-request-FormatVersion)
-	// API. To retrieve the Reserved Instance and Compute Savings Plan price lists, use
-	// ComputeSavingsPlans . To retrieve Machine Learning Savings Plans price lists,
-	// use MachineLearningSavingsPlans .
+	// Reserved Instance (RI) pricing, use the [DescribeServices]API.
+	//
+	// To retrieve the Reserved Instance and Compute Savings Plan price lists, use
+	// ComputeSavingsPlans .
+	//
+	// To retrieve Machine Learning Savings Plans price lists, use
+	// MachineLearningSavingsPlans .
+	//
+	// [DescribeServices]: https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_pricing_DescribeServices.html#awscostmanagement-pricing_DescribeServices-request-FormatVersion
 	//
 	// This member is required.
 	ServiceCode *string
@@ -73,8 +81,9 @@ type ListPriceListsInput struct {
 	// This is used to filter the Price List by Amazon Web Services Region. For
 	// example, to get the price list only for the US East (N. Virginia) Region, use
 	// us-east-1 . If nothing is specified, you retrieve price lists for all applicable
-	// Regions. The available RegionCode list can be retrieved from GetAttributeValues (https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_pricing_GetAttributeValues.html)
-	// API.
+	// Regions. The available RegionCode list can be retrieved from [GetAttributeValues] API.
+	//
+	// [GetAttributeValues]: https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_pricing_GetAttributeValues.html
 	RegionCode *string
 
 	noSmithyDocumentSerde
@@ -116,25 +125,25 @@ func (c *Client) addOperationListPriceListsMiddlewares(stack *middleware.Stack, 
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -149,13 +158,16 @@ func (c *Client) addOperationListPriceListsMiddlewares(stack *middleware.Stack, 
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpListPriceListsValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListPriceLists(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

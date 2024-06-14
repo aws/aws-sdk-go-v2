@@ -6,13 +6,15 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/iotfleetwise/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Retrieves information for each created fleet in an Amazon Web Services account.
+//	Retrieves information for each created fleet in an Amazon Web Services
+//
+// account.
+//
 // This API operation uses pagination. Specify the nextToken parameter in the
 // request to return more results.
 func (c *Client) ListFleets(ctx context.Context, params *ListFleetsInput, optFns ...func(*Options)) (*ListFleetsOutput, error) {
@@ -32,14 +34,16 @@ func (c *Client) ListFleets(ctx context.Context, params *ListFleetsInput, optFns
 
 type ListFleetsInput struct {
 
-	// The maximum number of items to return, between 1 and 100, inclusive.
+	//  The maximum number of items to return, between 1 and 100, inclusive.
 	MaxResults *int32
 
-	// A pagination token for the next set of results. If the results of a search are
-	// large, only a portion of the results are returned, and a nextToken pagination
-	// token is returned in the response. To retrieve the next set of results, reissue
-	// the search request and include the returned token. When all results have been
-	// returned, the response does not contain a pagination token value.
+	// A pagination token for the next set of results.
+	//
+	// If the results of a search are large, only a portion of the results are
+	// returned, and a nextToken pagination token is returned in the response. To
+	// retrieve the next set of results, reissue the search request and include the
+	// returned token. When all results have been returned, the response does not
+	// contain a pagination token value.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -47,10 +51,10 @@ type ListFleetsInput struct {
 
 type ListFleetsOutput struct {
 
-	// A list of information for each fleet.
+	//  A list of information for each fleet.
 	FleetSummaries []types.FleetSummary
 
-	// The token to retrieve the next set of results, or null if there are no more
+	//  The token to retrieve the next set of results, or null if there are no more
 	// results.
 	NextToken *string
 
@@ -82,25 +86,25 @@ func (c *Client) addOperationListFleetsMiddlewares(stack *middleware.Stack, opti
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -115,10 +119,13 @@ func (c *Client) addOperationListFleetsMiddlewares(stack *middleware.Stack, opti
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListFleets(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -145,7 +152,7 @@ var _ ListFleetsAPIClient = (*Client)(nil)
 
 // ListFleetsPaginatorOptions is the paginator options for ListFleets
 type ListFleetsPaginatorOptions struct {
-	// The maximum number of items to return, between 1 and 100, inclusive.
+	//  The maximum number of items to return, between 1 and 100, inclusive.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

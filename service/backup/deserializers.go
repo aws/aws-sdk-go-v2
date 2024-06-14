@@ -18,7 +18,16 @@ import (
 	"io"
 	"io/ioutil"
 	"strings"
+	"time"
 )
+
+func deserializeS3Expires(v string) (*time.Time, error) {
+	t, err := smithytime.ParseHTTPDate(v)
+	if err != nil {
+		return nil, nil
+	}
+	return &t, nil
+}
 
 type awsRestjson1_deserializeOpCancelLegalHold struct {
 }
@@ -19847,6 +19856,15 @@ func awsRestjson1_deserializeDocumentRecoveryPointByResource(v **types.RecoveryP
 					return fmt.Errorf("expected string to be of type string, got %T instead", value)
 				}
 				sv.StatusMessage = ptr.String(jtv)
+			}
+
+		case "VaultType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected VaultType to be of type string, got %T instead", value)
+				}
+				sv.VaultType = types.VaultType(jtv)
 			}
 
 		default:

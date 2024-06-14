@@ -6,16 +6,16 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/securityhub/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns a list of findings that match the specified criteria. If finding
-// aggregation is enabled, then when you call GetFindings from the aggregation
-// Region, the results include all of the matching findings from both the
-// aggregation Region and the linked Regions.
+// Returns a list of findings that match the specified criteria.
+//
+// If finding aggregation is enabled, then when you call GetFindings from the
+// aggregation Region, the results include all of the matching findings from both
+// the aggregation Region and the linked Regions.
 func (c *Client) GetFindings(ctx context.Context, params *GetFindingsInput, optFns ...func(*Options)) (*GetFindingsOutput, error) {
 	if params == nil {
 		params = &GetFindingsInput{}
@@ -34,19 +34,23 @@ func (c *Client) GetFindings(ctx context.Context, params *GetFindingsInput, optF
 type GetFindingsInput struct {
 
 	// The finding attributes used to define a condition to filter the returned
-	// findings. You can filter by up to 10 finding attributes. For each attribute, you
-	// can provide up to 20 filter values. Note that in the available filter fields,
-	// WorkflowState is deprecated. To search for a finding based on its workflow
-	// status, use WorkflowStatus .
+	// findings.
+	//
+	// You can filter by up to 10 finding attributes. For each attribute, you can
+	// provide up to 20 filter values.
+	//
+	// Note that in the available filter fields, WorkflowState is deprecated. To
+	// search for a finding based on its workflow status, use WorkflowStatus .
 	Filters *types.AwsSecurityFindingFilters
 
 	// The maximum number of findings to return.
 	MaxResults *int32
 
 	// The token that is required for pagination. On your first call to the GetFindings
-	// operation, set the value of this parameter to NULL . For subsequent calls to the
-	// operation, to continue listing data, set the value of this parameter to the
-	// value returned from the previous response.
+	// operation, set the value of this parameter to NULL .
+	//
+	// For subsequent calls to the operation, to continue listing data, set the value
+	// of this parameter to the value returned from the previous response.
 	NextToken *string
 
 	// The finding attributes used to sort the list of returned findings.
@@ -93,25 +97,25 @@ func (c *Client) addOperationGetFindingsMiddlewares(stack *middleware.Stack, opt
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -126,10 +130,13 @@ func (c *Client) addOperationGetFindingsMiddlewares(stack *middleware.Stack, opt
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetFindings(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

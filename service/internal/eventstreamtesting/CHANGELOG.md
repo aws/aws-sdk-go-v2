@@ -1,3 +1,85 @@
+# v1.4.5 (2024-06-07)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.4.4 (2024-06-03)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.4.3 (2024-05-23)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.4.2 (2024-05-16)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.4.1 (2024-05-15)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.4.0 (2024-05-10)
+
+* **Feature**: Drop test dependency on x/net, h2 support is now available in the stdlib.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.3.13 (2024-05-08)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.3.12 (2024-05-07)
+
+* No change notes available for this release.
+
+# v1.3.11 (2024-04-05)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.3.10 (2024-03-29)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.3.9 (2024-03-21)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.3.8 (2024-03-18)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.3.7 (2024-03-07)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.3.6 (2024-03-05)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.3.5 (2024-03-04)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.3.4 (2024-02-23)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.3.3 (2024-02-22)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.3.2 (2024-02-21)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.3.1 (2024-02-20)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.3.0 (2024-02-13)
+
+* **Feature**: Bump minimum Go version to 1.20 per our language support policy.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.2.19 (2024-01-18)
 
 * **Dependency Update**: Updated to the latest SDK module versions

@@ -6,17 +6,17 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/autoscalingplans/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
-// Retrieves the forecast data for a scalable resource. Capacity forecasts are
-// represented as predicted values, or data points, that are calculated using
-// historical data points from a specified CloudWatch load metric. Data points are
-// available for up to 56 days.
+// Retrieves the forecast data for a scalable resource.
+//
+// Capacity forecasts are represented as predicted values, or data points, that
+// are calculated using historical data points from a specified CloudWatch load
+// metric. Data points are available for up to 56 days.
 func (c *Client) GetScalingPlanResourceForecastData(ctx context.Context, params *GetScalingPlanResourceForecastDataInput, optFns ...func(*Options)) (*GetScalingPlanResourceForecastDataOutput, error) {
 	if params == nil {
 		params = &GetScalingPlanResourceForecastDataInput{}
@@ -35,20 +35,25 @@ func (c *Client) GetScalingPlanResourceForecastData(ctx context.Context, params 
 type GetScalingPlanResourceForecastDataInput struct {
 
 	// The exclusive end time of the time range for the forecast data to get. The
-	// maximum time duration between the start and end time is seven days. Although
-	// this parameter can accept a date and time that is more than two days in the
-	// future, the availability of forecast data has limits. AWS Auto Scaling only
-	// issues forecasts for periods of two days in advance.
+	// maximum time duration between the start and end time is seven days.
+	//
+	// Although this parameter can accept a date and time that is more than two days
+	// in the future, the availability of forecast data has limits. AWS Auto Scaling
+	// only issues forecasts for periods of two days in advance.
 	//
 	// This member is required.
 	EndTime *time.Time
 
 	// The type of forecast data to get.
+	//
 	//   - LoadForecast : The load metric forecast.
+	//
 	//   - CapacityForecast : The capacity forecast.
+	//
 	//   - ScheduledActionMinCapacity : The minimum capacity for each scheduled scaling
 	//   action. This data is calculated as the larger of two values: the capacity
 	//   forecast or the minimum capacity in the scaling instruction.
+	//
 	//   - ScheduledActionMaxCapacity : The maximum capacity for each scheduled scaling
 	//   action. The calculation used is determined by the predictive scaling maximum
 	//   capacity behavior setting in the scaling instruction.
@@ -128,25 +133,25 @@ func (c *Client) addOperationGetScalingPlanResourceForecastDataMiddlewares(stack
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -161,13 +166,16 @@ func (c *Client) addOperationGetScalingPlanResourceForecastDataMiddlewares(stack
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpGetScalingPlanResourceForecastDataValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetScalingPlanResourceForecastData(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

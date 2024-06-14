@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/ses/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -14,15 +13,17 @@ import (
 
 // Returns a list containing all of the identities (email addresses and domains)
 // for your Amazon Web Services account in the current Amazon Web Services Region,
-// regardless of verification status. You can execute this operation no more than
-// once per second. It's recommended that for successive pagination calls of this
-// API, you continue to the use the same parameter/value pairs as used in the
-// original call, e.g., if you used IdentityType=Domain in the the original call
-// and received a NextToken in the response, you should continue providing the
-// IdentityType=Domain parameter for further NextToken calls; however, if you
-// didn't provide the IdentityType parameter in the original call, then continue
-// to not provide it for successive pagination calls. Using this protocol will
-// ensure consistent results.
+// regardless of verification status.
+//
+// You can execute this operation no more than once per second.
+//
+// It's recommended that for successive pagination calls of this API, you continue
+// to the use the same parameter/value pairs as used in the original call, e.g., if
+// you used IdentityType=Domain in the the original call and received a NextToken
+// in the response, you should continue providing the IdentityType=Domain
+// parameter for further NextToken calls; however, if you didn't provide the
+// IdentityType parameter in the original call, then continue to not provide it for
+// successive pagination calls. Using this protocol will ensure consistent results.
 func (c *Client) ListIdentities(ctx context.Context, params *ListIdentitiesInput, optFns ...func(*Options)) (*ListIdentitiesOutput, error) {
 	if params == nil {
 		params = &ListIdentitiesInput{}
@@ -96,25 +97,25 @@ func (c *Client) addOperationListIdentitiesMiddlewares(stack *middleware.Stack, 
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -129,10 +130,13 @@ func (c *Client) addOperationListIdentitiesMiddlewares(stack *middleware.Stack, 
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListIdentities(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

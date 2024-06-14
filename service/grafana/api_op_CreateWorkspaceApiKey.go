@@ -6,15 +6,18 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates a Grafana API key for the workspace. This key can be used to
-// authenticate requests sent to the workspace's HTTP API. See
-// https://docs.aws.amazon.com/grafana/latest/userguide/Using-Grafana-APIs.html (https://docs.aws.amazon.com/grafana/latest/userguide/Using-Grafana-APIs.html)
-// for available APIs and example requests.
+// authenticate requests sent to the workspace's HTTP API. See [https://docs.aws.amazon.com/grafana/latest/userguide/Using-Grafana-APIs.html]for available APIs
+// and example requests.
+//
+// In workspaces compatible with Grafana version 9 or above, use workspace service
+// accounts instead of API keys. API keys will be removed in a future release.
+//
+// [https://docs.aws.amazon.com/grafana/latest/userguide/Using-Grafana-APIs.html]: https://docs.aws.amazon.com/grafana/latest/userguide/Using-Grafana-APIs.html
 func (c *Client) CreateWorkspaceApiKey(ctx context.Context, params *CreateWorkspaceApiKeyInput, optFns ...func(*Options)) (*CreateWorkspaceApiKeyOutput, error) {
 	if params == nil {
 		params = &CreateWorkspaceApiKeyInput{}
@@ -37,7 +40,9 @@ type CreateWorkspaceApiKeyInput struct {
 	// This member is required.
 	KeyName *string
 
-	// Specifies the permission level of the key. Valid values: VIEWER | EDITOR | ADMIN
+	// Specifies the permission level of the key.
+	//
+	// Valid values: ADMIN | EDITOR | VIEWER
 	//
 	// This member is required.
 	KeyRole *string
@@ -102,25 +107,25 @@ func (c *Client) addOperationCreateWorkspaceApiKeyMiddlewares(stack *middleware.
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -135,13 +140,16 @@ func (c *Client) addOperationCreateWorkspaceApiKeyMiddlewares(stack *middleware.
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpCreateWorkspaceApiKeyValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateWorkspaceApiKey(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

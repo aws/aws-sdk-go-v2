@@ -6,18 +6,20 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // This operation configures Amazon Route 53 to automatically renew the specified
 // domain before the domain registration expires. The cost of renewing your domain
-// registration is billed to your Amazon Web Services account. The period during
-// which you can renew a domain name varies by TLD. For a list of TLDs and their
-// renewal policies, see Domains That You Can Register with Amazon Route 53 (https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/registrar-tld-list.html)
-// in the Amazon Route 53 Developer Guide. Route 53 requires that you renew before
-// the end of the renewal period so we can complete processing before the deadline.
+// registration is billed to your Amazon Web Services account.
+//
+// The period during which you can renew a domain name varies by TLD. For a list
+// of TLDs and their renewal policies, see [Domains That You Can Register with Amazon Route 53]in the Amazon Route 53 Developer Guide.
+// Route 53 requires that you renew before the end of the renewal period so we can
+// complete processing before the deadline.
+//
+// [Domains That You Can Register with Amazon Route 53]: https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/registrar-tld-list.html
 func (c *Client) EnableDomainAutoRenew(ctx context.Context, params *EnableDomainAutoRenewInput, optFns ...func(*Options)) (*EnableDomainAutoRenewOutput, error) {
 	if params == nil {
 		params = &EnableDomainAutoRenewInput{}
@@ -72,25 +74,25 @@ func (c *Client) addOperationEnableDomainAutoRenewMiddlewares(stack *middleware.
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -105,13 +107,16 @@ func (c *Client) addOperationEnableDomainAutoRenewMiddlewares(stack *middleware.
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpEnableDomainAutoRenewValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opEnableDomainAutoRenew(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

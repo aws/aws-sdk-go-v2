@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -14,22 +13,28 @@ import (
 // This operation updates the specified domain contact's privacy setting. When
 // privacy protection is enabled, your contact information is replaced with contact
 // information for the registrar or with the phrase "REDACTED FOR PRIVACY", or "On
-// behalf of owner." While some domains may allow different privacy settings per
-// contact, we recommend specifying the same privacy setting for all contacts. This
-// operation affects only the contact information for the specified contact type
-// (administrative, registrant, or technical). If the request succeeds, Amazon
-// Route 53 returns an operation ID that you can use with GetOperationDetail (https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_GetOperationDetail.html)
-// to track the progress and completion of the action. If the request doesn't
-// complete successfully, the domain registrant will be notified by email. By
-// disabling the privacy service via API, you consent to the publication of the
+// behalf of owner."
+//
+// While some domains may allow different privacy settings per contact, we
+// recommend specifying the same privacy setting for all contacts.
+//
+// This operation affects only the contact information for the specified contact
+// type (administrative, registrant, or technical). If the request succeeds, Amazon
+// Route 53 returns an operation ID that you can use with [GetOperationDetail]to track the progress
+// and completion of the action. If the request doesn't complete successfully, the
+// domain registrant will be notified by email.
+//
+// By disabling the privacy service via API, you consent to the publication of the
 // contact information provided for this domain via the public WHOIS database. You
 // certify that you are the registrant of this domain name and have the authority
 // to make this decision. You may withdraw your consent at any time by enabling
 // privacy protection using either UpdateDomainContactPrivacy or the Route 53
 // console. Enabling privacy protection removes the contact information provided
 // for this domain from the WHOIS database. For more information on our privacy
-// practices, see https://aws.amazon.com/privacy/ (https://aws.amazon.com/privacy/)
-// .
+// practices, see [https://aws.amazon.com/privacy/].
+//
+// [https://aws.amazon.com/privacy/]: https://aws.amazon.com/privacy/
+// [GetOperationDetail]: https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_GetOperationDetail.html
 func (c *Client) UpdateDomainContactPrivacy(ctx context.Context, params *UpdateDomainContactPrivacyInput, optFns ...func(*Options)) (*UpdateDomainContactPrivacyOutput, error) {
 	if params == nil {
 		params = &UpdateDomainContactPrivacyInput{}
@@ -56,15 +61,17 @@ type UpdateDomainContactPrivacyInput struct {
 	// Whether you want to conceal contact information from WHOIS queries. If you
 	// specify true , WHOIS ("who is") queries return contact information either for
 	// Amazon Registrar or for our registrar associate, Gandi. If you specify false ,
-	// WHOIS queries return the information that you entered for the admin contact. You
-	// must specify the same privacy setting for the administrative, billing,
+	// WHOIS queries return the information that you entered for the admin contact.
+	//
+	// You must specify the same privacy setting for the administrative, billing,
 	// registrant, and technical contacts.
 	AdminPrivacy *bool
 
-	// Whether you want to conceal contact information from WHOIS queries. If you
+	//  Whether you want to conceal contact information from WHOIS queries. If you
 	// specify true , WHOIS ("who is") queries return contact information either for
 	// Amazon Registrar or for our registrar associate, Gandi. If you specify false ,
 	// WHOIS queries return the information that you entered for the billing contact.
+	//
 	// You must specify the same privacy setting for the administrative, billing,
 	// registrant, and technical contacts.
 	BillingPrivacy *bool
@@ -73,14 +80,17 @@ type UpdateDomainContactPrivacyInput struct {
 	// specify true , WHOIS ("who is") queries return contact information either for
 	// Amazon Registrar or for our registrar associate, Gandi. If you specify false ,
 	// WHOIS queries return the information that you entered for the registrant contact
-	// (domain owner). You must specify the same privacy setting for the
-	// administrative, billing, registrant, and technical contacts.
+	// (domain owner).
+	//
+	// You must specify the same privacy setting for the administrative, billing,
+	// registrant, and technical contacts.
 	RegistrantPrivacy *bool
 
 	// Whether you want to conceal contact information from WHOIS queries. If you
 	// specify true , WHOIS ("who is") queries return contact information either for
 	// Amazon Registrar or for our registrar associate, Gandi. If you specify false ,
 	// WHOIS queries return the information that you entered for the technical contact.
+	//
 	// You must specify the same privacy setting for the administrative, billing,
 	// registrant, and technical contacts.
 	TechPrivacy *bool
@@ -123,25 +133,25 @@ func (c *Client) addOperationUpdateDomainContactPrivacyMiddlewares(stack *middle
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -156,13 +166,16 @@ func (c *Client) addOperationUpdateDomainContactPrivacyMiddlewares(stack *middle
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpUpdateDomainContactPrivacyValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateDomainContactPrivacy(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

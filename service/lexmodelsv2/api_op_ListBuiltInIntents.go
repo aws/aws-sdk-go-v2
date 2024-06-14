@@ -6,17 +6,19 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/lexmodelsv2/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Gets a list of built-in intents provided by Amazon Lex that you can use in your
-// bot. To use a built-in intent as a the base for your own intent, include the
+// bot.
+//
+// To use a built-in intent as a the base for your own intent, include the
 // built-in intent signature in the parentIntentSignature parameter when you call
-// the CreateIntent operation. For more information, see CreateIntent (https://docs.aws.amazon.com/lexv2/latest/APIReference/API_CreateIntent.html)
-// .
+// the CreateIntent operation. For more information, see [CreateIntent].
+//
+// [CreateIntent]: https://docs.aws.amazon.com/lexv2/latest/APIReference/API_CreateIntent.html
 func (c *Client) ListBuiltInIntents(ctx context.Context, params *ListBuiltInIntentsInput, optFns ...func(*Options)) (*ListBuiltInIntentsOutput, error) {
 	if params == nil {
 		params = &ListBuiltInIntentsInput{}
@@ -35,8 +37,9 @@ func (c *Client) ListBuiltInIntents(ctx context.Context, params *ListBuiltInInte
 type ListBuiltInIntentsInput struct {
 
 	// The identifier of the language and locale of the intents to list. The string
-	// must match one of the supported locales. For more information, see Supported
-	// languages (https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html) .
+	// must match one of the supported locales. For more information, see [Supported languages].
+	//
+	// [Supported languages]: https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html
 	//
 	// This member is required.
 	LocaleId *string
@@ -105,25 +108,25 @@ func (c *Client) addOperationListBuiltInIntentsMiddlewares(stack *middleware.Sta
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -138,13 +141,16 @@ func (c *Client) addOperationListBuiltInIntentsMiddlewares(stack *middleware.Sta
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpListBuiltInIntentsValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListBuiltInIntents(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/elasticsearchservice/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -48,13 +47,15 @@ type DescribeDomainAutoTunesInput struct {
 	noSmithyDocumentSerde
 }
 
-// The result of DescribeDomainAutoTunes request. See the Developer Guide (https://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/auto-tune.html)
-// for more information.
+// The result of DescribeDomainAutoTunes request. See the [Developer Guide] for more information.
+//
+// [Developer Guide]: https://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/auto-tune.html
 type DescribeDomainAutoTunesOutput struct {
 
 	// Specifies the list of setting adjustments that Auto-Tune has made to the
-	// domain. See the Developer Guide (https://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/auto-tune.html)
-	// for more information.
+	// domain. See the [Developer Guide]for more information.
+	//
+	// [Developer Guide]: https://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/auto-tune.html
 	AutoTunes []types.AutoTune
 
 	// Specifies an identifier to allow retrieval of paginated results.
@@ -88,25 +89,25 @@ func (c *Client) addOperationDescribeDomainAutoTunesMiddlewares(stack *middlewar
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -121,13 +122,16 @@ func (c *Client) addOperationDescribeDomainAutoTunesMiddlewares(stack *middlewar
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDescribeDomainAutoTunesValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeDomainAutoTunes(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

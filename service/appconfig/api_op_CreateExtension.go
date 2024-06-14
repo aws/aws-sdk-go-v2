@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/appconfig/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -14,22 +13,27 @@ import (
 
 // Creates an AppConfig extension. An extension augments your ability to inject
 // logic or behavior at different points during the AppConfig workflow of creating
-// or deploying a configuration. You can create your own extensions or use the
-// Amazon Web Services authored extensions provided by AppConfig. For an AppConfig
-// extension that uses Lambda, you must create a Lambda function to perform any
-// computation and processing defined in the extension. If you plan to create
-// custom versions of the Amazon Web Services authored notification extensions, you
-// only need to specify an Amazon Resource Name (ARN) in the Uri field for the new
-// extension version.
+// or deploying a configuration.
+//
+// You can create your own extensions or use the Amazon Web Services authored
+// extensions provided by AppConfig. For an AppConfig extension that uses Lambda,
+// you must create a Lambda function to perform any computation and processing
+// defined in the extension. If you plan to create custom versions of the Amazon
+// Web Services authored notification extensions, you only need to specify an
+// Amazon Resource Name (ARN) in the Uri field for the new extension version.
+//
 //   - For a custom EventBridge notification extension, enter the ARN of the
 //     EventBridge default events in the Uri field.
+//
 //   - For a custom Amazon SNS notification extension, enter the ARN of an Amazon
 //     SNS topic in the Uri field.
+//
 //   - For a custom Amazon SQS notification extension, enter the ARN of an Amazon
 //     SQS message queue in the Uri field.
 //
-// For more information about extensions, see Working with AppConfig extensions (https://docs.aws.amazon.com/appconfig/latest/userguide/working-with-appconfig-extensions.html)
-// in the AppConfig User Guide.
+// For more information about extensions, see [Extending workflows] in the AppConfig User Guide.
+//
+// [Extending workflows]: https://docs.aws.amazon.com/appconfig/latest/userguide/working-with-appconfig-extensions.html
 func (c *Client) CreateExtension(ctx context.Context, params *CreateExtensionInput, optFns ...func(*Options)) (*CreateExtensionOutput, error) {
 	if params == nil {
 		params = &CreateExtensionInput{}
@@ -135,25 +139,25 @@ func (c *Client) addOperationCreateExtensionMiddlewares(stack *middleware.Stack,
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -168,13 +172,16 @@ func (c *Client) addOperationCreateExtensionMiddlewares(stack *middleware.Stack,
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpCreateExtensionValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateExtension(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

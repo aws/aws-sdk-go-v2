@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/codeartifact/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -30,7 +29,7 @@ func (c *Client) CreateRepository(ctx context.Context, params *CreateRepositoryI
 
 type CreateRepositoryInput struct {
 
-	// The name of the domain that contains the created repository.
+	//  The name of the domain that contains the created repository.
 	//
 	// This member is required.
 	Domain *string
@@ -40,21 +39,21 @@ type CreateRepositoryInput struct {
 	// This member is required.
 	Repository *string
 
-	// A description of the created repository.
+	//  A description of the created repository.
 	Description *string
 
-	// The 12-digit account number of the Amazon Web Services account that owns the
+	//  The 12-digit account number of the Amazon Web Services account that owns the
 	// domain. It does not include dashes or spaces.
 	DomainOwner *string
 
 	// One or more tag key-value pairs for the repository.
 	Tags []types.Tag
 
-	// A list of upstream repositories to associate with the repository. The order of
+	//  A list of upstream repositories to associate with the repository. The order of
 	// the upstream repositories in the list determines their priority order when
-	// CodeArtifact looks for a requested package version. For more information, see
-	// Working with upstream repositories (https://docs.aws.amazon.com/codeartifact/latest/ug/repos-upstream.html)
-	// .
+	// CodeArtifact looks for a requested package version. For more information, see [Working with upstream repositories].
+	//
+	// [Working with upstream repositories]: https://docs.aws.amazon.com/codeartifact/latest/ug/repos-upstream.html
 	Upstreams []types.UpstreamRepository
 
 	noSmithyDocumentSerde
@@ -62,7 +61,7 @@ type CreateRepositoryInput struct {
 
 type CreateRepositoryOutput struct {
 
-	// Information about the created repository after processing the request.
+	//  Information about the created repository after processing the request.
 	Repository *types.RepositoryDescription
 
 	// Metadata pertaining to the operation's result.
@@ -93,25 +92,25 @@ func (c *Client) addOperationCreateRepositoryMiddlewares(stack *middleware.Stack
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -126,13 +125,16 @@ func (c *Client) addOperationCreateRepositoryMiddlewares(stack *middleware.Stack
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpCreateRepositoryValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateRepository(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

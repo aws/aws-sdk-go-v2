@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/cloudfront/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -15,9 +14,10 @@ import (
 // Creates a new origin access identity. If you're using Amazon S3 for your
 // origin, you can use an origin access identity to require users to access your
 // content using a CloudFront URL instead of the Amazon S3 URL. For more
-// information about how to use origin access identities, see Serving Private
-// Content through CloudFront (https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/PrivateContent.html)
-// in the Amazon CloudFront Developer Guide.
+// information about how to use origin access identities, see [Serving Private Content through CloudFront]in the Amazon
+// CloudFront Developer Guide.
+//
+// [Serving Private Content through CloudFront]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/PrivateContent.html
 func (c *Client) CreateCloudFrontOriginAccessIdentity(ctx context.Context, params *CreateCloudFrontOriginAccessIdentityInput, optFns ...func(*Options)) (*CreateCloudFrontOriginAccessIdentityOutput, error) {
 	if params == nil {
 		params = &CreateCloudFrontOriginAccessIdentityInput{}
@@ -36,9 +36,9 @@ func (c *Client) CreateCloudFrontOriginAccessIdentity(ctx context.Context, param
 // The request to create a new origin access identity (OAI). An origin access
 // identity is a special CloudFront user that you can associate with Amazon S3
 // origins, so that you can secure all or just some of your Amazon S3 content. For
-// more information, see Restricting Access to Amazon S3 Content by Using an
-// Origin Access Identity (https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/private-content-restricting-access-to-s3.html)
-// in the Amazon CloudFront Developer Guide.
+// more information, see [Restricting Access to Amazon S3 Content by Using an Origin Access Identity]in the Amazon CloudFront Developer Guide.
+//
+// [Restricting Access to Amazon S3 Content by Using an Origin Access Identity]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/private-content-restricting-access-to-s3.html
 type CreateCloudFrontOriginAccessIdentityInput struct {
 
 	// The current configuration information for the identity.
@@ -89,25 +89,25 @@ func (c *Client) addOperationCreateCloudFrontOriginAccessIdentityMiddlewares(sta
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -122,13 +122,16 @@ func (c *Client) addOperationCreateCloudFrontOriginAccessIdentityMiddlewares(sta
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpCreateCloudFrontOriginAccessIdentityValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateCloudFrontOriginAccessIdentity(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

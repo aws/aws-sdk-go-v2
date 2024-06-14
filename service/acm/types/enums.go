@@ -16,8 +16,9 @@ const (
 )
 
 // Values returns all known values for CertificateStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (CertificateStatus) Values() []CertificateStatus {
 	return []CertificateStatus{
 		"PENDING_VALIDATION",
@@ -40,8 +41,9 @@ const (
 
 // Values returns all known values for CertificateTransparencyLoggingPreference.
 // Note that this can be expanded in the future, and so it is only as up to date as
-// the client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (CertificateTransparencyLoggingPreference) Values() []CertificateTransparencyLoggingPreference {
 	return []CertificateTransparencyLoggingPreference{
 		"ENABLED",
@@ -59,8 +61,9 @@ const (
 )
 
 // Values returns all known values for CertificateType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (CertificateType) Values() []CertificateType {
 	return []CertificateType{
 		"IMPORTED",
@@ -79,8 +82,9 @@ const (
 )
 
 // Values returns all known values for DomainStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (DomainStatus) Values() []DomainStatus {
 	return []DomainStatus{
 		"PENDING_VALIDATION",
@@ -108,8 +112,9 @@ const (
 )
 
 // Values returns all known values for ExtendedKeyUsageName. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ExtendedKeyUsageName) Values() []ExtendedKeyUsageName {
 	return []ExtendedKeyUsageName{
 		"TLS_WEB_SERVER_AUTHENTICATION",
@@ -151,8 +156,9 @@ const (
 )
 
 // Values returns all known values for FailureReason. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (FailureReason) Values() []FailureReason {
 	return []FailureReason{
 		"NO_AVAILABLE_CONTACTS",
@@ -189,8 +195,9 @@ const (
 )
 
 // Values returns all known values for KeyAlgorithm. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (KeyAlgorithm) Values() []KeyAlgorithm {
 	return []KeyAlgorithm{
 		"RSA_1024",
@@ -221,8 +228,9 @@ const (
 )
 
 // Values returns all known values for KeyUsageName. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (KeyUsageName) Values() []KeyUsageName {
 	return []KeyUsageName{
 		"DIGITAL_SIGNATURE",
@@ -247,8 +255,9 @@ const (
 )
 
 // Values returns all known values for RecordType. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (RecordType) Values() []RecordType {
 	return []RecordType{
 		"CNAME",
@@ -264,8 +273,9 @@ const (
 )
 
 // Values returns all known values for RenewalEligibility. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (RenewalEligibility) Values() []RenewalEligibility {
 	return []RenewalEligibility{
 		"ELIGIBLE",
@@ -284,8 +294,9 @@ const (
 )
 
 // Values returns all known values for RenewalStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (RenewalStatus) Values() []RenewalStatus {
 	return []RenewalStatus{
 		"PENDING_AUTO_RENEWAL",
@@ -312,8 +323,9 @@ const (
 )
 
 // Values returns all known values for RevocationReason. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (RevocationReason) Values() []RevocationReason {
 	return []RevocationReason{
 		"UNSPECIFIED",
@@ -337,8 +349,9 @@ const (
 )
 
 // Values returns all known values for SortBy. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (SortBy) Values() []SortBy {
 	return []SortBy{
 		"CREATED_AT",
@@ -354,8 +367,9 @@ const (
 )
 
 // Values returns all known values for SortOrder. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (SortOrder) Values() []SortOrder {
 	return []SortOrder{
 		"ASCENDING",
@@ -372,8 +386,9 @@ const (
 )
 
 // Values returns all known values for ValidationMethod. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ValidationMethod) Values() []ValidationMethod {
 	return []ValidationMethod{
 		"EMAIL",

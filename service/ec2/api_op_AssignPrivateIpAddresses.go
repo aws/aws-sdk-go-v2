@@ -6,31 +6,36 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Assigns one or more secondary private IP addresses to the specified network
-// interface. You can specify one or more specific secondary IP addresses, or you
-// can specify the number of secondary IP addresses to be automatically assigned
-// within the subnet's CIDR block range. The number of secondary IP addresses that
-// you can assign to an instance varies by instance type. For information about
-// instance types, see Instance Types (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html)
-// in the Amazon Elastic Compute Cloud User Guide. For more information about
-// Elastic IP addresses, see Elastic IP Addresses (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/elastic-ip-addresses-eip.html)
-// in the Amazon Elastic Compute Cloud User Guide. When you move a secondary
-// private IP address to another network interface, any Elastic IP address that is
-// associated with the IP address is also moved. Remapping an IP address is an
-// asynchronous operation. When you move an IP address from one network interface
-// to another, check network/interfaces/macs/mac/local-ipv4s in the instance
-// metadata to confirm that the remapping is complete. You must specify either the
-// IP addresses or the IP address count in the request. You can optionally use
-// Prefix Delegation on the network interface. You must specify either the IPv4
-// Prefix Delegation prefixes, or the IPv4 Prefix Delegation count. For
-// information, see Assigning prefixes to Amazon EC2 network interfaces (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-prefix-eni.html)
-// in the Amazon Elastic Compute Cloud User Guide.
+// interface.
+//
+// You can specify one or more specific secondary IP addresses, or you can specify
+// the number of secondary IP addresses to be automatically assigned within the
+// subnet's CIDR block range. The number of secondary IP addresses that you can
+// assign to an instance varies by instance type. For more information about
+// Elastic IP addresses, see [Elastic IP Addresses]in the Amazon EC2 User Guide.
+//
+// When you move a secondary private IP address to another network interface, any
+// Elastic IP address that is associated with the IP address is also moved.
+//
+// Remapping an IP address is an asynchronous operation. When you move an IP
+// address from one network interface to another, check
+// network/interfaces/macs/mac/local-ipv4s in the instance metadata to confirm that
+// the remapping is complete.
+//
+// You must specify either the IP addresses or the IP address count in the request.
+//
+// You can optionally use Prefix Delegation on the network interface. You must
+// specify either the IPv4 Prefix Delegation prefixes, or the IPv4 Prefix
+// Delegation count. For information, see [Assigning prefixes to network interfaces]in the Amazon EC2 User Guide.
+//
+// [Elastic IP Addresses]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/elastic-ip-addresses-eip.html
+// [Assigning prefixes to network interfaces]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-prefix-eni.html
 func (c *Client) AssignPrivateIpAddresses(ctx context.Context, params *AssignPrivateIpAddressesInput, optFns ...func(*Options)) (*AssignPrivateIpAddressesOutput, error) {
 	if params == nil {
 		params = &AssignPrivateIpAddressesInput{}
@@ -70,8 +75,10 @@ type AssignPrivateIpAddressesInput struct {
 
 	// The IP addresses to be assigned as a secondary private IP address to the
 	// network interface. You can't specify this parameter when also specifying a
-	// number of secondary IP addresses. If you don't specify an IP address, Amazon EC2
-	// automatically selects an IP address within the subnet range.
+	// number of secondary IP addresses.
+	//
+	// If you don't specify an IP address, Amazon EC2 automatically selects an IP
+	// address within the subnet range.
 	PrivateIpAddresses []string
 
 	// The number of secondary IP addresses to assign to the network interface. You
@@ -120,25 +127,25 @@ func (c *Client) addOperationAssignPrivateIpAddressesMiddlewares(stack *middlewa
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -153,13 +160,16 @@ func (c *Client) addOperationAssignPrivateIpAddressesMiddlewares(stack *middlewa
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpAssignPrivateIpAddressesValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opAssignPrivateIpAddresses(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

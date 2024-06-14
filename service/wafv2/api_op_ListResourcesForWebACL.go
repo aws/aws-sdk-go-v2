@@ -6,21 +6,25 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/wafv2/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Retrieves an array of the Amazon Resource Names (ARNs) for the regional
-// resources that are associated with the specified web ACL. For Amazon CloudFront,
-// don't use this call. Instead, use the CloudFront call
-// ListDistributionsByWebACLId . For information, see ListDistributionsByWebACLId (https://docs.aws.amazon.com/cloudfront/latest/APIReference/API_ListDistributionsByWebACLId.html)
-// in the Amazon CloudFront API Reference. Required permissions for
-// customer-managed IAM policies This call requires permissions that are specific
-// to the protected resource type. For details, see Permissions for
-// ListResourcesForWebACL (https://docs.aws.amazon.com/waf/latest/developerguide/security_iam_service-with-iam.html#security_iam_action-ListResourcesForWebACL)
-// in the WAF Developer Guide.
+// resources that are associated with the specified web ACL.
+//
+// For Amazon CloudFront, don't use this call. Instead, use the CloudFront call
+// ListDistributionsByWebACLId . For information, see [ListDistributionsByWebACLId] in the Amazon CloudFront
+// API Reference.
+//
+// # Required permissions for customer-managed IAM policies
+//
+// This call requires permissions that are specific to the protected resource
+// type. For details, see [Permissions for ListResourcesForWebACL]in the WAF Developer Guide.
+//
+// [Permissions for ListResourcesForWebACL]: https://docs.aws.amazon.com/waf/latest/developerguide/security_iam_service-with-iam.html#security_iam_action-ListResourcesForWebACL
+// [ListDistributionsByWebACLId]: https://docs.aws.amazon.com/cloudfront/latest/APIReference/API_ListDistributionsByWebACLId.html
 func (c *Client) ListResourcesForWebACL(ctx context.Context, params *ListResourcesForWebACLInput, optFns ...func(*Options)) (*ListResourcesForWebACLOutput, error) {
 	if params == nil {
 		params = &ListResourcesForWebACLInput{}
@@ -46,9 +50,12 @@ type ListResourcesForWebACLInput struct {
 	// Used for web ACLs that are scoped for regional applications. A regional
 	// application can be an Application Load Balancer (ALB), an Amazon API Gateway
 	// REST API, an AppSync GraphQL API, an Amazon Cognito user pool, an App Runner
-	// service, or an Amazon Web Services Verified Access instance. If you don't
-	// provide a resource type, the call uses the resource type
-	// APPLICATION_LOAD_BALANCER . Default: APPLICATION_LOAD_BALANCER
+	// service, or an Amazon Web Services Verified Access instance.
+	//
+	// If you don't provide a resource type, the call uses the resource type
+	// APPLICATION_LOAD_BALANCER .
+	//
+	// Default: APPLICATION_LOAD_BALANCER
 	ResourceType types.ResourceType
 
 	noSmithyDocumentSerde
@@ -87,25 +94,25 @@ func (c *Client) addOperationListResourcesForWebACLMiddlewares(stack *middleware
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -120,13 +127,16 @@ func (c *Client) addOperationListResourcesForWebACLMiddlewares(stack *middleware
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpListResourcesForWebACLValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListResourcesForWebACL(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/elasticsearchservice/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -40,10 +39,10 @@ type GetUpgradeHistoryInput struct {
 	// This member is required.
 	DomainName *string
 
-	// Set this value to limit the number of results returned.
+	//  Set this value to limit the number of results returned.
 	MaxResults int32
 
-	// Paginated APIs accepts NextToken input to returns next page results and
+	//  Paginated APIs accepts NextToken input to returns next page results and
 	// provides a NextToken output in the response which can be used by the client to
 	// retrieve more results.
 	NextToken *string
@@ -58,9 +57,8 @@ type GetUpgradeHistoryOutput struct {
 	// page of results
 	NextToken *string
 
-	// A list of UpgradeHistory objects corresponding to each Upgrade or Upgrade
-	// Eligibility Check performed on a domain returned as part of
-	// GetUpgradeHistoryResponse object.
+	//  A list of UpgradeHistory objects corresponding to each Upgrade or Upgrade Eligibility Check
+	// performed on a domain returned as part of GetUpgradeHistoryResponseobject.
 	UpgradeHistories []types.UpgradeHistory
 
 	// Metadata pertaining to the operation's result.
@@ -91,25 +89,25 @@ func (c *Client) addOperationGetUpgradeHistoryMiddlewares(stack *middleware.Stac
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -124,13 +122,16 @@ func (c *Client) addOperationGetUpgradeHistoryMiddlewares(stack *middleware.Stac
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpGetUpgradeHistoryValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetUpgradeHistory(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -158,7 +159,7 @@ var _ GetUpgradeHistoryAPIClient = (*Client)(nil)
 
 // GetUpgradeHistoryPaginatorOptions is the paginator options for GetUpgradeHistory
 type GetUpgradeHistoryPaginatorOptions struct {
-	// Set this value to limit the number of results returned.
+	//  Set this value to limit the number of results returned.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

@@ -190,6 +190,66 @@ func (m *validateOpDeleteDomain) HandleInitialize(ctx context.Context, in middle
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDeleteField struct {
+}
+
+func (*validateOpDeleteField) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteField) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteFieldInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteFieldInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteLayout struct {
+}
+
+func (*validateOpDeleteLayout) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteLayout) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteLayoutInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteLayoutInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteTemplate struct {
+}
+
+func (*validateOpDeleteTemplate) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteTemplate) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteTemplateInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteTemplateInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetCaseAuditEvents struct {
 }
 
@@ -644,6 +704,18 @@ func addOpCreateTemplateValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpDeleteDomainValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteDomain{}, middleware.After)
+}
+
+func addOpDeleteFieldValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteField{}, middleware.After)
+}
+
+func addOpDeleteLayoutValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteLayout{}, middleware.After)
+}
+
+func addOpDeleteTemplateValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteTemplate{}, middleware.After)
 }
 
 func addOpGetCaseAuditEventsValidationMiddleware(stack *middleware.Stack) error {
@@ -1114,6 +1186,21 @@ func validateFieldValueList(v []types.FieldValue) error {
 	}
 }
 
+func validateFileContent(v *types.FileContent) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "FileContent"}
+	if v.FileArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FileArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateLayoutContent(v types.LayoutContent) error {
 	if v == nil {
 		return nil
@@ -1179,6 +1266,11 @@ func validateRelatedItemInputContent(v types.RelatedItemInputContent) error {
 	case *types.RelatedItemInputContentMemberContact:
 		if err := validateContact(&uv.Value); err != nil {
 			invalidParams.AddNested("[contact]", err.(smithy.InvalidParamsError))
+		}
+
+	case *types.RelatedItemInputContentMemberFile:
+		if err := validateFileContent(&uv.Value); err != nil {
+			invalidParams.AddNested("[file]", err.(smithy.InvalidParamsError))
 		}
 
 	}
@@ -1483,6 +1575,60 @@ func validateOpDeleteDomainInput(v *DeleteDomainInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteDomainInput"}
 	if v.DomainId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DomainId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteFieldInput(v *DeleteFieldInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteFieldInput"}
+	if v.DomainId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DomainId"))
+	}
+	if v.FieldId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FieldId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteLayoutInput(v *DeleteLayoutInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteLayoutInput"}
+	if v.DomainId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DomainId"))
+	}
+	if v.LayoutId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("LayoutId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteTemplateInput(v *DeleteTemplateInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteTemplateInput"}
+	if v.DomainId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DomainId"))
+	}
+	if v.TemplateId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TemplateId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

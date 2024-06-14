@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/docdb/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -14,8 +13,9 @@ import (
 
 // Lists all the subscription descriptions for a customer account. The description
 // for a subscription includes SubscriptionName , SNSTopicARN , CustomerID ,
-// SourceType , SourceID , CreationTime , and Status . If you specify a
-// SubscriptionName , lists the description for that subscription.
+// SourceType , SourceID , CreationTime , and Status .
+//
+// If you specify a SubscriptionName , lists the description for that subscription.
 func (c *Client) DescribeEventSubscriptions(ctx context.Context, params *DescribeEventSubscriptionsInput, optFns ...func(*Options)) (*DescribeEventSubscriptionsOutput, error) {
 	if params == nil {
 		params = &DescribeEventSubscriptionsInput{}
@@ -31,7 +31,7 @@ func (c *Client) DescribeEventSubscriptions(ctx context.Context, params *Describ
 	return out, nil
 }
 
-// Represents the input to DescribeEventSubscriptions .
+// Represents the input to DescribeEventSubscriptions.
 type DescribeEventSubscriptionsInput struct {
 
 	// This parameter is not currently supported.
@@ -42,9 +42,12 @@ type DescribeEventSubscriptionsInput struct {
 	// value specified by MaxRecords .
 	Marker *string
 
-	// The maximum number of records to include in the response. If more records exist
-	// than the specified MaxRecords value, a pagination token (marker) is included in
-	// the response so that the remaining results can be retrieved. Default: 100
+	//  The maximum number of records to include in the response. If more records
+	// exist than the specified MaxRecords value, a pagination token (marker) is
+	// included in the response so that the remaining results can be retrieved.
+	//
+	// Default: 100
+	//
 	// Constraints: Minimum 20, maximum 100.
 	MaxRecords *int32
 
@@ -55,7 +58,7 @@ type DescribeEventSubscriptionsInput struct {
 	noSmithyDocumentSerde
 }
 
-// Represents the output of DescribeEventSubscriptions .
+// Represents the output of DescribeEventSubscriptions.
 type DescribeEventSubscriptionsOutput struct {
 
 	// A list of event subscriptions.
@@ -94,25 +97,25 @@ func (c *Client) addOperationDescribeEventSubscriptionsMiddlewares(stack *middle
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -127,13 +130,16 @@ func (c *Client) addOperationDescribeEventSubscriptionsMiddlewares(stack *middle
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDescribeEventSubscriptionsValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeEventSubscriptions(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -162,9 +168,12 @@ var _ DescribeEventSubscriptionsAPIClient = (*Client)(nil)
 // DescribeEventSubscriptionsPaginatorOptions is the paginator options for
 // DescribeEventSubscriptions
 type DescribeEventSubscriptionsPaginatorOptions struct {
-	// The maximum number of records to include in the response. If more records exist
-	// than the specified MaxRecords value, a pagination token (marker) is included in
-	// the response so that the remaining results can be retrieved. Default: 100
+	//  The maximum number of records to include in the response. If more records
+	// exist than the specified MaxRecords value, a pagination token (marker) is
+	// included in the response so that the remaining results can be retrieved.
+	//
+	// Default: 100
+	//
 	// Constraints: Minimum 20, maximum 100.
 	Limit int32
 

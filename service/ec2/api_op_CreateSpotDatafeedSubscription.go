@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -14,8 +13,9 @@ import (
 
 // Creates a data feed for Spot Instances, enabling you to view Spot Instance
 // usage logs. You can create one data feed per Amazon Web Services account. For
-// more information, see Spot Instance data feed (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/spot-data-feeds.html)
-// in the Amazon EC2 User Guide for Linux Instances.
+// more information, see [Spot Instance data feed]in the Amazon EC2 User Guide.
+//
+// [Spot Instance data feed]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/spot-data-feeds.html
 func (c *Client) CreateSpotDatafeedSubscription(ctx context.Context, params *CreateSpotDatafeedSubscriptionInput, optFns ...func(*Options)) (*CreateSpotDatafeedSubscriptionOutput, error) {
 	if params == nil {
 		params = &CreateSpotDatafeedSubscriptionInput{}
@@ -35,8 +35,9 @@ func (c *Client) CreateSpotDatafeedSubscription(ctx context.Context, params *Cre
 type CreateSpotDatafeedSubscriptionInput struct {
 
 	// The name of the Amazon S3 bucket in which to store the Spot Instance data feed.
-	// For more information about bucket names, see Rules for bucket naming (https://docs.aws.amazon.com/AmazonS3/latest/dev/BucketRestrictions.html#bucketnamingrules)
-	// in the Amazon S3 Developer Guide.
+	// For more information about bucket names, see [Rules for bucket naming]in the Amazon S3 Developer Guide.
+	//
+	// [Rules for bucket naming]: https://docs.aws.amazon.com/AmazonS3/latest/dev/BucketRestrictions.html#bucketnamingrules
 	//
 	// This member is required.
 	Bucket *string
@@ -87,25 +88,25 @@ func (c *Client) addOperationCreateSpotDatafeedSubscriptionMiddlewares(stack *mi
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -120,13 +121,16 @@ func (c *Client) addOperationCreateSpotDatafeedSubscriptionMiddlewares(stack *mi
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpCreateSpotDatafeedSubscriptionValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateSpotDatafeedSubscription(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

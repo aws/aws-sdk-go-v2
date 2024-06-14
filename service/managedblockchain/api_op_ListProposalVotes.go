@@ -6,15 +6,15 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/managedblockchain/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Returns the list of votes for a specified proposal, including the value of each
-// vote and the unique identifier of the member that cast the vote. Applies only to
-// Hyperledger Fabric.
+// vote and the unique identifier of the member that cast the vote.
+//
+// Applies only to Hyperledger Fabric.
 func (c *Client) ListProposalVotes(ctx context.Context, params *ListProposalVotesInput, optFns ...func(*Options)) (*ListProposalVotesOutput, error) {
 	if params == nil {
 		params = &ListProposalVotesInput{}
@@ -32,20 +32,20 @@ func (c *Client) ListProposalVotes(ctx context.Context, params *ListProposalVote
 
 type ListProposalVotesInput struct {
 
-	// The unique identifier of the network.
+	//  The unique identifier of the network.
 	//
 	// This member is required.
 	NetworkId *string
 
-	// The unique identifier of the proposal.
+	//  The unique identifier of the proposal.
 	//
 	// This member is required.
 	ProposalId *string
 
-	// The maximum number of votes to return.
+	//  The maximum number of votes to return.
 	MaxResults *int32
 
-	// The pagination token that indicates the next set of results to retrieve.
+	//  The pagination token that indicates the next set of results to retrieve.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -53,10 +53,10 @@ type ListProposalVotesInput struct {
 
 type ListProposalVotesOutput struct {
 
-	// The pagination token that indicates the next set of results to retrieve.
+	//  The pagination token that indicates the next set of results to retrieve.
 	NextToken *string
 
-	// The list of votes.
+	//  The list of votes.
 	ProposalVotes []types.VoteSummary
 
 	// Metadata pertaining to the operation's result.
@@ -87,25 +87,25 @@ func (c *Client) addOperationListProposalVotesMiddlewares(stack *middleware.Stac
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -120,13 +120,16 @@ func (c *Client) addOperationListProposalVotesMiddlewares(stack *middleware.Stac
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpListProposalVotesValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListProposalVotes(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -154,7 +157,7 @@ var _ ListProposalVotesAPIClient = (*Client)(nil)
 
 // ListProposalVotesPaginatorOptions is the paginator options for ListProposalVotes
 type ListProposalVotesPaginatorOptions struct {
-	// The maximum number of votes to return.
+	//  The maximum number of votes to return.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

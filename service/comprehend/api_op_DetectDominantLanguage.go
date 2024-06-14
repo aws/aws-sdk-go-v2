@@ -6,15 +6,15 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/comprehend/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Determines the dominant language of the input text. For a list of languages
-// that Amazon Comprehend can detect, see Amazon Comprehend Supported Languages (https://docs.aws.amazon.com/comprehend/latest/dg/how-languages.html)
-// .
+// that Amazon Comprehend can detect, see [Amazon Comprehend Supported Languages].
+//
+// [Amazon Comprehend Supported Languages]: https://docs.aws.amazon.com/comprehend/latest/dg/how-languages.html
 func (c *Client) DetectDominantLanguage(ctx context.Context, params *DetectDominantLanguageInput, optFns ...func(*Options)) (*DetectDominantLanguageOutput, error) {
 	if params == nil {
 		params = &DetectDominantLanguageInput{}
@@ -45,11 +45,13 @@ type DetectDominantLanguageOutput struct {
 
 	// Array of languages that Amazon Comprehend detected in the input text. The array
 	// is sorted in descending order of the score (the dominant language is always the
-	// first element in the array). For each language, the response returns the RFC
-	// 5646 language code and the level of confidence that Amazon Comprehend has in the
-	// accuracy of its inference. For more information about RFC 5646, see Tags for
-	// Identifying Languages (https://tools.ietf.org/html/rfc5646) on the IETF Tools
-	// web site.
+	// first element in the array).
+	//
+	// For each language, the response returns the RFC 5646 language code and the
+	// level of confidence that Amazon Comprehend has in the accuracy of its inference.
+	// For more information about RFC 5646, see [Tags for Identifying Languages]on the IETF Tools web site.
+	//
+	// [Tags for Identifying Languages]: https://tools.ietf.org/html/rfc5646
 	Languages []types.DominantLanguage
 
 	// Metadata pertaining to the operation's result.
@@ -80,25 +82,25 @@ func (c *Client) addOperationDetectDominantLanguageMiddlewares(stack *middleware
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -113,13 +115,16 @@ func (c *Client) addOperationDetectDominantLanguageMiddlewares(stack *middleware
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDetectDominantLanguageValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDetectDominantLanguage(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/ivs/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -36,14 +35,16 @@ type UpdatePlaybackRestrictionPolicyInput struct {
 	Arn *string
 
 	// A list of country codes that control geoblocking restriction. Allowed values
-	// are the officially assigned ISO 3166-1 alpha-2 (https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)
-	// codes. Default: All countries (an empty array).
+	// are the officially assigned [ISO 3166-1 alpha-2]codes. Default: All countries (an empty array).
+	//
+	// [ISO 3166-1 alpha-2]: https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2
 	AllowedCountries []string
 
 	// A list of origin sites that control CORS restriction. Allowed values are the
-	// same as valid values of the Origin header defined at
-	// https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Origin (https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Origin)
-	// . Default: All origins (an empty array).
+	// same as valid values of the Origin header defined at [https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Origin]. Default: All origins (an
+	// empty array).
+	//
+	// [https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Origin]: https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Origin
 	AllowedOrigins []string
 
 	// Whether channel playback is constrained by origin site. Default: false .
@@ -88,25 +89,25 @@ func (c *Client) addOperationUpdatePlaybackRestrictionPolicyMiddlewares(stack *m
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -121,13 +122,16 @@ func (c *Client) addOperationUpdatePlaybackRestrictionPolicyMiddlewares(stack *m
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpUpdatePlaybackRestrictionPolicyValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdatePlaybackRestrictionPolicy(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

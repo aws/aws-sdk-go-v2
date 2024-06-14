@@ -6,15 +6,16 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/fsx/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Updates an existing volume by using a snapshot from another Amazon FSx for
-// OpenZFS file system. For more information, see on-demand data replication (https://docs.aws.amazon.com/fsx/latest/OpenZFSGuide/on-demand-replication.html)
-// in the Amazon FSx for OpenZFS User Guide.
+// OpenZFS file system. For more information, see [on-demand data replication]in the Amazon FSx for OpenZFS
+// User Guide.
+//
+// [on-demand data replication]: https://docs.aws.amazon.com/fsx/latest/OpenZFSGuide/on-demand-replication.html
 func (c *Client) CopySnapshotAndUpdateVolume(ctx context.Context, params *CopySnapshotAndUpdateVolumeInput, optFns ...func(*Options)) (*CopySnapshotAndUpdateVolumeOutput, error) {
 	if params == nil {
 		params = &CopySnapshotAndUpdateVolumeInput{}
@@ -35,8 +36,9 @@ type CopySnapshotAndUpdateVolumeInput struct {
 	// The Amazon Resource Name (ARN) for a given resource. ARNs uniquely identify
 	// Amazon Web Services resources. We require an ARN when you need to specify a
 	// resource unambiguously across all of Amazon Web Services. For more information,
-	// see Amazon Resource Names (ARNs) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
-	// in the Amazon Web Services General Reference.
+	// see [Amazon Resource Names (ARNs)]in the Amazon Web Services General Reference.
+	//
+	// [Amazon Resource Names (ARNs)]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
 	//
 	// This member is required.
 	SourceSnapshotARN *string
@@ -52,23 +54,30 @@ type CopySnapshotAndUpdateVolumeInput struct {
 	ClientRequestToken *string
 
 	// Specifies the strategy to use when copying data from a snapshot to the volume.
+	//
 	//   - FULL_COPY - Copies all data from the snapshot to the volume.
+	//
 	//   - INCREMENTAL_COPY - Copies only the snapshot data that's changed since the
 	//   previous replication.
+	//
 	// CLONE isn't a valid copy strategy option for the CopySnapshotAndUpdateVolume
 	// operation.
 	CopyStrategy types.OpenZFSCopyStrategy
 
 	// Confirms that you want to delete data on the destination volume that wasn’t
-	// there during the previous snapshot replication. Your replication will fail if
-	// you don’t include an option for a specific type of data and that data is on your
-	// destination. For example, if you don’t include DELETE_INTERMEDIATE_SNAPSHOTS
-	// and there are intermediate snapshots on the destination, you can’t copy the
-	// snapshot.
+	// there during the previous snapshot replication.
+	//
+	// Your replication will fail if you don’t include an option for a specific type
+	// of data and that data is on your destination. For example, if you don’t include
+	// DELETE_INTERMEDIATE_SNAPSHOTS and there are intermediate snapshots on the
+	// destination, you can’t copy the snapshot.
+	//
 	//   - DELETE_INTERMEDIATE_SNAPSHOTS - Deletes snapshots on the destination volume
 	//   that aren’t on the source volume.
+	//
 	//   - DELETE_CLONED_VOLUMES - Deletes snapshot clones on the destination volume
 	//   that aren't on the source volume.
+	//
 	//   - DELETE_INTERMEDIATE_DATA - Overwrites snapshots on the destination volume
 	//   that don’t match the source snapshot that you’re copying.
 	Options []types.UpdateOpenZFSVolumeOption
@@ -117,25 +126,25 @@ func (c *Client) addOperationCopySnapshotAndUpdateVolumeMiddlewares(stack *middl
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -150,6 +159,9 @@ func (c *Client) addOperationCopySnapshotAndUpdateVolumeMiddlewares(stack *middl
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opCopySnapshotAndUpdateVolumeMiddleware(stack, options); err != nil {
 		return err
 	}
@@ -159,7 +171,7 @@ func (c *Client) addOperationCopySnapshotAndUpdateVolumeMiddlewares(stack *middl
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCopySnapshotAndUpdateVolume(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

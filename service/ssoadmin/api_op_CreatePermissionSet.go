@@ -6,15 +6,14 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/ssoadmin/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a permission set within a specified IAM Identity Center instance. To
-// grant users and groups access to Amazon Web Services account resources, use
-// CreateAccountAssignment .
+// Creates a permission set within a specified IAM Identity Center instance.
+//
+// To grant users and groups access to Amazon Web Services account resources, use CreateAccountAssignment.
 func (c *Client) CreatePermissionSet(ctx context.Context, params *CreatePermissionSetInput, optFns ...func(*Options)) (*CreatePermissionSetOutput, error) {
 	if params == nil {
 		params = &CreatePermissionSetInput{}
@@ -33,19 +32,18 @@ func (c *Client) CreatePermissionSet(ctx context.Context, params *CreatePermissi
 type CreatePermissionSetInput struct {
 
 	// The ARN of the IAM Identity Center instance under which the operation will be
-	// executed. For more information about ARNs, see Amazon Resource Names (ARNs) and
-	// Amazon Web Services Service Namespaces in the Amazon Web Services General
-	// Reference.
+	// executed. For more information about ARNs, see Amazon Resource Names (ARNs) and Amazon Web Services Service Namespacesin the Amazon Web Services
+	// General Reference.
 	//
 	// This member is required.
 	InstanceArn *string
 
-	// The name of the PermissionSet .
+	// The name of the PermissionSet.
 	//
 	// This member is required.
 	Name *string
 
-	// The description of the PermissionSet .
+	// The description of the PermissionSet.
 	Description *string
 
 	// Used to redirect users within the application during the federation
@@ -56,7 +54,7 @@ type CreatePermissionSetInput struct {
 	// standard.
 	SessionDuration *string
 
-	// The tags to attach to the new PermissionSet .
+	// The tags to attach to the new PermissionSet.
 	Tags []types.Tag
 
 	noSmithyDocumentSerde
@@ -95,25 +93,25 @@ func (c *Client) addOperationCreatePermissionSetMiddlewares(stack *middleware.St
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -128,13 +126,16 @@ func (c *Client) addOperationCreatePermissionSetMiddlewares(stack *middleware.St
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpCreatePermissionSetValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreatePermissionSet(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

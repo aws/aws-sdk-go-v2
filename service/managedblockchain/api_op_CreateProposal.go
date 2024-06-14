@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/managedblockchain/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -14,7 +13,9 @@ import (
 
 // Creates a proposal for a change to the network that other members of the
 // network can vote on, for example, a proposal to add a new member to the network.
-// Any member can create a proposal. Applies only to Hyperledger Fabric.
+// Any member can create a proposal.
+//
+// Applies only to Hyperledger Fabric.
 func (c *Client) CreateProposal(ctx context.Context, params *CreateProposalInput, optFns ...func(*Options)) (*CreateProposalOutput, error) {
 	if params == nil {
 		params = &CreateProposalInput{}
@@ -55,7 +56,7 @@ type CreateProposalInput struct {
 	// This member is required.
 	MemberId *string
 
-	// The unique identifier of the network for which the proposal is made.
+	//  The unique identifier of the network for which the proposal is made.
 	//
 	// This member is required.
 	NetworkId *string
@@ -64,12 +65,17 @@ type CreateProposalInput struct {
 	// "Proposal to add Example Corp. as member."
 	Description *string
 
-	// Tags to assign to the proposal. Each tag consists of a key and an optional
-	// value. You can specify multiple key-value pairs in a single request with an
-	// overall maximum of 50 tags allowed per resource. For more information about
-	// tags, see Tagging Resources (https://docs.aws.amazon.com/managed-blockchain/latest/ethereum-dev/tagging-resources.html)
-	// in the Amazon Managed Blockchain Ethereum Developer Guide, or Tagging Resources (https://docs.aws.amazon.com/managed-blockchain/latest/hyperledger-fabric-dev/tagging-resources.html)
-	// in the Amazon Managed Blockchain Hyperledger Fabric Developer Guide.
+	// Tags to assign to the proposal.
+	//
+	// Each tag consists of a key and an optional value. You can specify multiple
+	// key-value pairs in a single request with an overall maximum of 50 tags allowed
+	// per resource.
+	//
+	// For more information about tags, see [Tagging Resources] in the Amazon Managed Blockchain Ethereum
+	// Developer Guide, or [Tagging Resources]in the Amazon Managed Blockchain Hyperledger Fabric
+	// Developer Guide.
+	//
+	// [Tagging Resources]: https://docs.aws.amazon.com/managed-blockchain/latest/hyperledger-fabric-dev/tagging-resources.html
 	Tags map[string]string
 
 	noSmithyDocumentSerde
@@ -108,25 +114,25 @@ func (c *Client) addOperationCreateProposalMiddlewares(stack *middleware.Stack, 
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -141,6 +147,9 @@ func (c *Client) addOperationCreateProposalMiddlewares(stack *middleware.Stack, 
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opCreateProposalMiddleware(stack, options); err != nil {
 		return err
 	}
@@ -150,7 +159,7 @@ func (c *Client) addOperationCreateProposalMiddlewares(stack *middleware.Stack, 
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateProposal(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

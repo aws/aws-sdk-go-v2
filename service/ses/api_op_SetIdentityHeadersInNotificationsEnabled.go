@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/ses/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -14,10 +13,13 @@ import (
 
 // Given an identity (an email address or a domain), sets whether Amazon SES
 // includes the original email headers in the Amazon Simple Notification Service
-// (Amazon SNS) notifications of a specified type. You can execute this operation
-// no more than once per second. For more information about using notifications
-// with Amazon SES, see the Amazon SES Developer Guide (https://docs.aws.amazon.com/ses/latest/dg/monitor-sending-activity-using-notifications.html)
-// .
+// (Amazon SNS) notifications of a specified type.
+//
+// You can execute this operation no more than once per second.
+//
+// For more information about using notifications with Amazon SES, see the [Amazon SES Developer Guide].
+//
+// [Amazon SES Developer Guide]: https://docs.aws.amazon.com/ses/latest/dg/monitor-sending-activity-using-notifications.html
 func (c *Client) SetIdentityHeadersInNotificationsEnabled(ctx context.Context, params *SetIdentityHeadersInNotificationsEnabledInput, optFns ...func(*Options)) (*SetIdentityHeadersInNotificationsEnabledOutput, error) {
 	if params == nil {
 		params = &SetIdentityHeadersInNotificationsEnabledInput{}
@@ -35,16 +37,18 @@ func (c *Client) SetIdentityHeadersInNotificationsEnabled(ctx context.Context, p
 
 // Represents a request to set whether Amazon SES includes the original email
 // headers in the Amazon SNS notifications of a specified type. For information
-// about notifications, see the Amazon SES Developer Guide (https://docs.aws.amazon.com/ses/latest/dg/monitor-sending-activity-using-notifications-sns.html)
-// .
+// about notifications, see the [Amazon SES Developer Guide].
+//
+// [Amazon SES Developer Guide]: https://docs.aws.amazon.com/ses/latest/dg/monitor-sending-activity-using-notifications-sns.html
 type SetIdentityHeadersInNotificationsEnabledInput struct {
 
 	// Sets whether Amazon SES includes the original email headers in Amazon SNS
 	// notifications of the specified notification type. A value of true specifies
 	// that Amazon SES includes headers in notifications, and a value of false
-	// specifies that Amazon SES does not include headers in notifications. This value
-	// can only be set when NotificationType is already set to use a particular Amazon
-	// SNS topic.
+	// specifies that Amazon SES does not include headers in notifications.
+	//
+	// This value can only be set when NotificationType is already set to use a
+	// particular Amazon SNS topic.
 	//
 	// This member is required.
 	Enabled bool
@@ -93,25 +97,25 @@ func (c *Client) addOperationSetIdentityHeadersInNotificationsEnabledMiddlewares
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -126,13 +130,16 @@ func (c *Client) addOperationSetIdentityHeadersInNotificationsEnabledMiddlewares
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpSetIdentityHeadersInNotificationsEnabledValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opSetIdentityHeadersInNotificationsEnabled(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

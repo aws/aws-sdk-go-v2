@@ -6,21 +6,25 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/autoscaling/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Moves the specified instances into the standby state. If you choose to
-// decrement the desired capacity of the Auto Scaling group, the instances can
-// enter standby as long as the desired capacity of the Auto Scaling group after
-// the instances are placed into standby is equal to or greater than the minimum
-// capacity of the group. If you choose not to decrement the desired capacity of
-// the Auto Scaling group, the Auto Scaling group launches new instances to replace
-// the instances on standby. For more information, see Temporarily removing
-// instances from your Auto Scaling group (https://docs.aws.amazon.com/autoscaling/ec2/userguide/as-enter-exit-standby.html)
-// in the Amazon EC2 Auto Scaling User Guide.
+// Moves the specified instances into the standby state.
+//
+// If you choose to decrement the desired capacity of the Auto Scaling group, the
+// instances can enter standby as long as the desired capacity of the Auto Scaling
+// group after the instances are placed into standby is equal to or greater than
+// the minimum capacity of the group.
+//
+// If you choose not to decrement the desired capacity of the Auto Scaling group,
+// the Auto Scaling group launches new instances to replace the instances on
+// standby.
+//
+// For more information, see [Temporarily removing instances from your Auto Scaling group] in the Amazon EC2 Auto Scaling User Guide.
+//
+// [Temporarily removing instances from your Auto Scaling group]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/as-enter-exit-standby.html
 func (c *Client) EnterStandby(ctx context.Context, params *EnterStandbyInput, optFns ...func(*Options)) (*EnterStandbyOutput, error) {
 	if params == nil {
 		params = &EnterStandbyInput{}
@@ -88,25 +92,25 @@ func (c *Client) addOperationEnterStandbyMiddlewares(stack *middleware.Stack, op
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -121,13 +125,16 @@ func (c *Client) addOperationEnterStandbyMiddlewares(stack *middleware.Stack, op
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpEnterStandbyValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opEnterStandby(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

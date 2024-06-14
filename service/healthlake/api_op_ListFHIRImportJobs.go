@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/healthlake/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -31,33 +30,33 @@ func (c *Client) ListFHIRImportJobs(ctx context.Context, params *ListFHIRImportJ
 
 type ListFHIRImportJobsInput struct {
 
-	// This parameter limits the response to the import job with the specified data
+	//  This parameter limits the response to the import job with the specified data
 	// store ID.
 	//
 	// This member is required.
 	DatastoreId *string
 
-	// This parameter limits the response to the import job with the specified job
+	//  This parameter limits the response to the import job with the specified job
 	// name.
 	JobName *string
 
-	// This parameter limits the response to the import job with the specified job
+	//  This parameter limits the response to the import job with the specified job
 	// status.
 	JobStatus types.JobStatus
 
-	// This parameter limits the number of results returned for a ListFHIRImportJobs
+	//  This parameter limits the number of results returned for a ListFHIRImportJobs
 	// to a maximum quantity specified by the user.
 	MaxResults *int32
 
-	// A pagination token used to identify the next page of results to return for a
+	//  A pagination token used to identify the next page of results to return for a
 	// ListFHIRImportJobs query.
 	NextToken *string
 
-	// This parameter limits the response to FHIR import jobs submitted after a user
+	//  This parameter limits the response to FHIR import jobs submitted after a user
 	// specified date.
 	SubmittedAfter *time.Time
 
-	// This parameter limits the response to FHIR import jobs submitted before a user
+	//  This parameter limits the response to FHIR import jobs submitted before a user
 	// specified date.
 	SubmittedBefore *time.Time
 
@@ -66,13 +65,13 @@ type ListFHIRImportJobsInput struct {
 
 type ListFHIRImportJobsOutput struct {
 
-	// The properties of a listed FHIR import jobs, including the ID, ARN, name, and
-	// the status of the job.
+	//  The properties of a listed FHIR import jobs, including the ID, ARN, name, the
+	// status of the job, and the progress report of the job.
 	//
 	// This member is required.
 	ImportJobPropertiesList []types.ImportJobProperties
 
-	// A pagination token used to identify the next page of results to return for a
+	//  A pagination token used to identify the next page of results to return for a
 	// ListFHIRImportJobs query.
 	NextToken *string
 
@@ -104,25 +103,25 @@ func (c *Client) addOperationListFHIRImportJobsMiddlewares(stack *middleware.Sta
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -137,13 +136,16 @@ func (c *Client) addOperationListFHIRImportJobsMiddlewares(stack *middleware.Sta
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpListFHIRImportJobsValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListFHIRImportJobs(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -172,7 +174,7 @@ var _ ListFHIRImportJobsAPIClient = (*Client)(nil)
 // ListFHIRImportJobsPaginatorOptions is the paginator options for
 // ListFHIRImportJobs
 type ListFHIRImportJobsPaginatorOptions struct {
-	// This parameter limits the number of results returned for a ListFHIRImportJobs
+	//  This parameter limits the number of results returned for a ListFHIRImportJobs
 	// to a maximum quantity specified by the user.
 	Limit int32
 

@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/globalaccelerator/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -14,12 +13,16 @@ import (
 
 // Releases the specified address range that you provisioned to use with your
 // Amazon Web Services resources through bring your own IP addresses (BYOIP) and
-// deletes the corresponding address pool. Before you can release an address range,
-// you must stop advertising it by using WithdrawByoipCidr (https://docs.aws.amazon.com/global-accelerator/latest/api/WithdrawByoipCidr.html)
+// deletes the corresponding address pool.
+//
+// Before you can release an address range, you must stop advertising it by using [WithdrawByoipCidr]
 // and you must not have any accelerators that are using static IP addresses
-// allocated from its address range. For more information, see Bring your own IP
-// addresses (BYOIP) (https://docs.aws.amazon.com/global-accelerator/latest/dg/using-byoip.html)
-// in the Global Accelerator Developer Guide.
+// allocated from its address range.
+//
+// For more information, see [Bring your own IP addresses (BYOIP)] in the Global Accelerator Developer Guide.
+//
+// [Bring your own IP addresses (BYOIP)]: https://docs.aws.amazon.com/global-accelerator/latest/dg/using-byoip.html
+// [WithdrawByoipCidr]: https://docs.aws.amazon.com/global-accelerator/latest/api/WithdrawByoipCidr.html
 func (c *Client) DeprovisionByoipCidr(ctx context.Context, params *DeprovisionByoipCidrInput, optFns ...func(*Options)) (*DeprovisionByoipCidrOutput, error) {
 	if params == nil {
 		params = &DeprovisionByoipCidrInput{}
@@ -39,6 +42,10 @@ type DeprovisionByoipCidrInput struct {
 
 	// The address range, in CIDR notation. The prefix must be the same prefix that
 	// you specified when you provisioned the address range.
+	//
+	// For more information, see [Bring your own IP addresses (BYOIP)] in the Global Accelerator Developer Guide.
+	//
+	// [Bring your own IP addresses (BYOIP)]: https://docs.aws.amazon.com/global-accelerator/latest/dg/using-byoip.html
 	//
 	// This member is required.
 	Cidr *string
@@ -79,25 +86,25 @@ func (c *Client) addOperationDeprovisionByoipCidrMiddlewares(stack *middleware.S
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -112,13 +119,16 @@ func (c *Client) addOperationDeprovisionByoipCidrMiddlewares(stack *middleware.S
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDeprovisionByoipCidrValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDeprovisionByoipCidr(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

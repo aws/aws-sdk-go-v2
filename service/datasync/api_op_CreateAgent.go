@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/datasync/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -14,13 +13,19 @@ import (
 
 // Activates an DataSync agent that you've deployed in your storage environment.
 // The activation process associates the agent with your Amazon Web Services
-// account. If you haven't deployed an agent yet, see the following topics to learn
-// more:
-//   - Agent requirements (https://docs.aws.amazon.com/datasync/latest/userguide/agent-requirements.html)
-//   - Create an agent (https://docs.aws.amazon.com/datasync/latest/userguide/configure-agent.html)
+// account.
+//
+// If you haven't deployed an agent yet, see the following topics to learn more:
+//
+// [Agent requirements]
+//
+// [Create an agent]
 //
 // If you're transferring between Amazon Web Services storage services, you don't
 // need a DataSync agent.
+//
+// [Agent requirements]: https://docs.aws.amazon.com/datasync/latest/userguide/agent-requirements.html
+// [Create an agent]: https://docs.aws.amazon.com/datasync/latest/userguide/configure-agent.html
 func (c *Client) CreateAgent(ctx context.Context, params *CreateAgentInput, optFns ...func(*Options)) (*CreateAgentOutput, error) {
 	if params == nil {
 		params = &CreateAgentInput{}
@@ -40,8 +45,9 @@ func (c *Client) CreateAgent(ctx context.Context, params *CreateAgentInput, optF
 type CreateAgentInput struct {
 
 	// Specifies your DataSync agent's activation key. If you don't have an activation
-	// key, see Activate your agent (https://docs.aws.amazon.com/datasync/latest/userguide/activate-agent.html)
-	// .
+	// key, see [Activate your agent].
+	//
+	// [Activate your agent]: https://docs.aws.amazon.com/datasync/latest/userguide/activate-agent.html
 	//
 	// This member is required.
 	ActivationKey *string
@@ -50,15 +56,17 @@ type CreateAgentInput struct {
 	AgentName *string
 
 	// Specifies the Amazon Resource Name (ARN) of the security group that protects
-	// your task's network interfaces (https://docs.aws.amazon.com/datasync/latest/userguide/datasync-network.html#required-network-interfaces)
-	// when using a virtual private cloud (VPC) endpoint (https://docs.aws.amazon.com/datasync/latest/userguide/choose-service-endpoint.html#choose-service-endpoint-vpc)
-	// . You can only specify one ARN.
+	// your task's [network interfaces]when [using a virtual private cloud (VPC) endpoint]. You can only specify one ARN.
+	//
+	// [network interfaces]: https://docs.aws.amazon.com/datasync/latest/userguide/datasync-network.html#required-network-interfaces
+	// [using a virtual private cloud (VPC) endpoint]: https://docs.aws.amazon.com/datasync/latest/userguide/choose-service-endpoint.html#choose-service-endpoint-vpc
 	SecurityGroupArns []string
 
 	// Specifies the ARN of the subnet where you want to run your DataSync task when
-	// using a VPC endpoint. This is the subnet where DataSync creates and manages the
-	// network interfaces (https://docs.aws.amazon.com/datasync/latest/userguide/datasync-network.html#required-network-interfaces)
+	// using a VPC endpoint. This is the subnet where DataSync creates and manages the [network interfaces]
 	// for your transfer. You can only specify one ARN.
+	//
+	// [network interfaces]: https://docs.aws.amazon.com/datasync/latest/userguide/datasync-network.html#required-network-interfaces
 	SubnetArns []string
 
 	// Specifies labels that help you categorize, filter, and search for your Amazon
@@ -66,8 +74,9 @@ type CreateAgentInput struct {
 	Tags []types.TagListEntry
 
 	// Specifies the ID of the VPC endpoint that you want your agent to connect to.
-	// For example, a VPC endpoint ID looks like vpce-01234d5aff67890e1 . The VPC
-	// endpoint you use must include the DataSync service name (for example,
+	// For example, a VPC endpoint ID looks like vpce-01234d5aff67890e1 .
+	//
+	// The VPC endpoint you use must include the DataSync service name (for example,
 	// com.amazonaws.us-east-2.datasync ).
 	VpcEndpointId *string
 
@@ -77,9 +86,11 @@ type CreateAgentInput struct {
 // CreateAgentResponse
 type CreateAgentOutput struct {
 
-	// The ARN of the agent that you just activated. Use the ListAgents (https://docs.aws.amazon.com/datasync/latest/userguide/API_ListAgents.html)
-	// operation to return a list of agents in your Amazon Web Services account and
-	// Amazon Web Services Region.
+	// The ARN of the agent that you just activated. Use the [ListAgents] operation to return a
+	// list of agents in your Amazon Web Services account and Amazon Web Services
+	// Region.
+	//
+	// [ListAgents]: https://docs.aws.amazon.com/datasync/latest/userguide/API_ListAgents.html
 	AgentArn *string
 
 	// Metadata pertaining to the operation's result.
@@ -110,25 +121,25 @@ func (c *Client) addOperationCreateAgentMiddlewares(stack *middleware.Stack, opt
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -143,13 +154,16 @@ func (c *Client) addOperationCreateAgentMiddlewares(stack *middleware.Stack, opt
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpCreateAgentValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateAgent(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

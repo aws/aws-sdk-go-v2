@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/cognitosync/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -15,11 +14,14 @@ import (
 // Gets paginated records, optionally changed after a particular sync count for a
 // dataset and identity. With Amazon Cognito Sync, each identity has access only to
 // its own data. Thus, the credentials used to make this API call need to have
-// access to the identity data. ListRecords can be called with temporary user
-// credentials provided by Cognito Identity or with developer credentials. You
-// should use Cognito Identity credentials to make this API call. ListRecords The
-// following examples have been edited for readability. POST / HTTP/1.1
-// CONTENT-TYPE: application/json X-AMZN-REQUESTID:
+// access to the identity data.
+//
+// ListRecords can be called with temporary user credentials provided by Cognito
+// Identity or with developer credentials. You should use Cognito Identity
+// credentials to make this API call.
+//
+// ListRecords The following examples have been edited for readability. POST /
+// HTTP/1.1 CONTENT-TYPE: application/json X-AMZN-REQUESTID:
 // b3d2e31e-d6b7-4612-8e84-c9ba288dab5d X-AMZ-TARGET:
 // com.amazonaws.cognito.sync.model.AWSCognitoSyncService.ListRecords HOST:
 // cognito-sync.us-east-1.amazonaws.com:443 X-AMZ-DATE: 20141111T183230Z
@@ -30,12 +32,13 @@ import (
 // "IdentityPoolId": "IDENTITY_POOL_ID", "IdentityId": "IDENTITY_ID",
 // "DatasetName": "newDataSet" } } 1.1 200 OK x-amzn-requestid:
 // b3d2e31e-d6b7-4612-8e84-c9ba288dab5d content-type: application/json
-// content-length: 623 date: Tue, 11 Nov 2014 18:32:30 GMT { "Output": { "__type":
-// "com.amazonaws.cognito.sync.model#ListRecordsResponse", "Count": 0,
-// "DatasetDeletedAfterRequestedSyncCount": false, "DatasetExists": false,
-// "DatasetSyncCount": 0, "LastModifiedBy": null, "MergedDatasetNames": null,
-// "NextToken": null, "Records": [], "SyncSessionToken": "SYNC_SESSION_TOKEN" },
-// "Version": "1.0" }
+// content-length: 623 date: Tue, 11 Nov 2014 18:32:30 GMT
+//
+// { "Output": { "__type": "com.amazonaws.cognito.sync.model#ListRecordsResponse",
+// "Count": 0, "DatasetDeletedAfterRequestedSyncCount": false, "DatasetExists":
+// false, "DatasetSyncCount": 0, "LastModifiedBy": null, "MergedDatasetNames":
+// null, "NextToken": null, "Records": [], "SyncSessionToken": "SYNC_SESSION_TOKEN"
+// }, "Version": "1.0" }
 func (c *Client) ListRecords(ctx context.Context, params *ListRecordsInput, optFns ...func(*Options)) (*ListRecordsOutput, error) {
 	if params == nil {
 		params = &ListRecordsInput{}
@@ -147,25 +150,25 @@ func (c *Client) addOperationListRecordsMiddlewares(stack *middleware.Stack, opt
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -180,13 +183,16 @@ func (c *Client) addOperationListRecordsMiddlewares(stack *middleware.Stack, opt
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpListRecordsValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListRecords(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

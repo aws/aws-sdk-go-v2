@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/directconnect/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -64,8 +63,9 @@ type DeleteLagOutput struct {
 	// possible values are 1Gbps and 10Gbps.
 	ConnectionsBandwidth *string
 
-	// The LAG MAC Security (MACsec) encryption mode. The valid values are no_encrypt ,
-	// should_encrypt , and must_encrypt .
+	// The LAG MAC Security (MACsec) encryption mode.
+	//
+	// The valid values are no_encrypt , should_encrypt , and must_encrypt .
 	EncryptionMode *string
 
 	// Indicates whether the LAG supports a secondary BGP peer in the same address
@@ -82,13 +82,20 @@ type DeleteLagOutput struct {
 	LagName *string
 
 	// The state of the LAG. The following are the possible values:
+	//
 	//   - requested : The initial state of a LAG. The LAG stays in the requested state
 	//   until the Letter of Authorization (LOA) is available.
+	//
 	//   - pending : The LAG has been approved and is being initialized.
+	//
 	//   - available : The network link is established and the LAG is ready for use.
+	//
 	//   - down : The network link is down.
+	//
 	//   - deleting : The LAG is being deleted.
+	//
 	//   - deleted : The LAG is deleted.
+	//
 	//   - unknown : The state of the LAG is not available.
 	LagState types.LagState
 
@@ -149,25 +156,25 @@ func (c *Client) addOperationDeleteLagMiddlewares(stack *middleware.Stack, optio
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -182,13 +189,16 @@ func (c *Client) addOperationDeleteLagMiddlewares(stack *middleware.Stack, optio
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDeleteLagValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteLag(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

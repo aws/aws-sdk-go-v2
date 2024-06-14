@@ -19,7 +19,16 @@ import (
 	"io/ioutil"
 	"math"
 	"strings"
+	"time"
 )
+
+func deserializeS3Expires(v string) (*time.Time, error) {
+	t, err := smithytime.ParseHTTPDate(v)
+	if err != nil {
+		return nil, nil
+	}
+	return &t, nil
+}
 
 type awsRestjson1_deserializeOpAcceptInboundConnection struct {
 }
@@ -5737,6 +5746,15 @@ func awsRestjson1_deserializeOpDocumentGetDataSourceOutput(v **GetDataSourceOutp
 					return fmt.Errorf("expected DataSourceName to be of type string, got %T instead", value)
 				}
 				sv.Name = ptr.String(jtv)
+			}
+
+		case "Status":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected DataSourceStatus to be of type string, got %T instead", value)
+				}
+				sv.Status = types.DataSourceStatus(jtv)
 			}
 
 		default:
@@ -12969,6 +12987,15 @@ func awsRestjson1_deserializeDocumentDataSourceDetails(v **types.DataSourceDetai
 				sv.Name = ptr.String(jtv)
 			}
 
+		case "Status":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected DataSourceStatus to be of type string, got %T instead", value)
+				}
+				sv.Status = types.DataSourceStatus(jtv)
+			}
+
 		default:
 			_, _ = key, value
 
@@ -14022,6 +14049,15 @@ func awsRestjson1_deserializeDocumentDomainStatus(v **types.DomainStatus, value 
 		case "DomainEndpointOptions":
 			if err := awsRestjson1_deserializeDocumentDomainEndpointOptions(&sv.DomainEndpointOptions, value); err != nil {
 				return err
+			}
+
+		case "DomainEndpointV2HostedZoneId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected HostedZoneId to be of type string, got %T instead", value)
+				}
+				sv.DomainEndpointV2HostedZoneId = ptr.String(jtv)
 			}
 
 		case "DomainId":

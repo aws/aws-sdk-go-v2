@@ -6,25 +6,31 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/proton/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Get counts of Proton resources. For infrastructure-provisioning resources
-// (environments, services, service instances, pipelines), the action returns
-// staleness counts. A resource is stale when it's behind the recommended version
-// of the Proton template that it uses and it needs an update to become current.
+// Get counts of Proton resources.
+//
+// For infrastructure-provisioning resources (environments, services, service
+// instances, pipelines), the action returns staleness counts. A resource is stale
+// when it's behind the recommended version of the Proton template that it uses and
+// it needs an update to become current.
+//
 // The action returns staleness counts (counts of resources that are up-to-date,
 // behind a template major version, or behind a template minor version), the total
 // number of resources, and the number of resources that are in a failed state,
 // grouped by resource type. Components, environments, and service templates return
 // less information - see the components , environments , and serviceTemplates
-// field descriptions. For context, the action also returns the total number of
-// each type of Proton template in the Amazon Web Services account. For more
-// information, see Proton dashboard (https://docs.aws.amazon.com/proton/latest/userguide/monitoring-dashboard.html)
-// in the Proton User Guide.
+// field descriptions.
+//
+// For context, the action also returns the total number of each type of Proton
+// template in the Amazon Web Services account.
+//
+// For more information, see [Proton dashboard] in the Proton User Guide.
+//
+// [Proton dashboard]: https://docs.aws.amazon.com/proton/latest/userguide/monitoring-dashboard.html
 func (c *Client) GetResourcesSummary(ctx context.Context, params *GetResourcesSummaryInput, optFns ...func(*Options)) (*GetResourcesSummaryOutput, error) {
 	if params == nil {
 		params = &GetResourcesSummaryInput{}
@@ -79,25 +85,25 @@ func (c *Client) addOperationGetResourcesSummaryMiddlewares(stack *middleware.St
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -112,10 +118,13 @@ func (c *Client) addOperationGetResourcesSummaryMiddlewares(stack *middleware.St
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetResourcesSummary(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

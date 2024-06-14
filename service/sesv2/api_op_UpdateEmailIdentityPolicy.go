@@ -6,19 +6,24 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Updates the specified sending authorization policy for the given identity (an
 // email address or a domain). This API returns successfully even if a policy with
-// the specified name does not exist. This API is for the identity owner only. If
-// you have not verified the identity, this API will return an error. Sending
-// authorization is a feature that enables an identity owner to authorize other
-// senders to use its identities. For information about using sending
-// authorization, see the Amazon SES Developer Guide (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization.html)
-// . You can execute this operation no more than once per second.
+// the specified name does not exist.
+//
+// This API is for the identity owner only. If you have not verified the identity,
+// this API will return an error.
+//
+// Sending authorization is a feature that enables an identity owner to authorize
+// other senders to use its identities. For information about using sending
+// authorization, see the [Amazon SES Developer Guide].
+//
+// You can execute this operation no more than once per second.
+//
+// [Amazon SES Developer Guide]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization.html
 func (c *Client) UpdateEmailIdentityPolicy(ctx context.Context, params *UpdateEmailIdentityPolicyInput, optFns ...func(*Options)) (*UpdateEmailIdentityPolicyOutput, error) {
 	if params == nil {
 		params = &UpdateEmailIdentityPolicyInput{}
@@ -36,9 +41,9 @@ func (c *Client) UpdateEmailIdentityPolicy(ctx context.Context, params *UpdateEm
 
 // Represents a request to update a sending authorization policy for an identity.
 // Sending authorization is an Amazon SES feature that enables you to authorize
-// other senders to use your identities. For information, see the Amazon SES
-// Developer Guide (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization-identity-owner-tasks-management.html)
-// .
+// other senders to use your identities. For information, see the [Amazon SES Developer Guide].
+//
+// [Amazon SES Developer Guide]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization-identity-owner-tasks-management.html
 type UpdateEmailIdentityPolicyInput struct {
 
 	// The email identity.
@@ -46,16 +51,19 @@ type UpdateEmailIdentityPolicyInput struct {
 	// This member is required.
 	EmailIdentity *string
 
-	// The text of the policy in JSON format. The policy cannot exceed 4 KB. For
-	// information about the syntax of sending authorization policies, see the Amazon
-	// SES Developer Guide (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization-policies.html)
-	// .
+	// The text of the policy in JSON format. The policy cannot exceed 4 KB.
+	//
+	// For information about the syntax of sending authorization policies, see the [Amazon SES Developer Guide].
+	//
+	// [Amazon SES Developer Guide]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization-policies.html
 	//
 	// This member is required.
 	Policy *string
 
-	// The name of the policy. The policy name cannot exceed 64 characters and can
-	// only include alphanumeric characters, dashes, and underscores.
+	// The name of the policy.
+	//
+	// The policy name cannot exceed 64 characters and can only include alphanumeric
+	// characters, dashes, and underscores.
 	//
 	// This member is required.
 	PolicyName *string
@@ -94,25 +102,25 @@ func (c *Client) addOperationUpdateEmailIdentityPolicyMiddlewares(stack *middlew
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -127,13 +135,16 @@ func (c *Client) addOperationUpdateEmailIdentityPolicyMiddlewares(stack *middlew
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpUpdateEmailIdentityPolicyValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateEmailIdentityPolicy(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

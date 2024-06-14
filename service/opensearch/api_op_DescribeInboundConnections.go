@@ -6,16 +6,15 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/opensearch/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Lists all the inbound cross-cluster search connections for a destination
-// (remote) Amazon OpenSearch Service domain. For more information, see
-// Cross-cluster search for Amazon OpenSearch Service (https://docs.aws.amazon.com/opensearch-service/latest/developerguide/cross-cluster-search.html)
-// .
+// (remote) Amazon OpenSearch Service domain. For more information, see [Cross-cluster search for Amazon OpenSearch Service].
+//
+// [Cross-cluster search for Amazon OpenSearch Service]: https://docs.aws.amazon.com/opensearch-service/latest/developerguide/cross-cluster-search.html
 func (c *Client) DescribeInboundConnections(ctx context.Context, params *DescribeInboundConnectionsInput, optFns ...func(*Options)) (*DescribeInboundConnectionsOutput, error) {
 	if params == nil {
 		params = &DescribeInboundConnectionsInput{}
@@ -34,7 +33,7 @@ func (c *Client) DescribeInboundConnections(ctx context.Context, params *Describ
 // Container for the parameters to the DescribeInboundConnections operation.
 type DescribeInboundConnectionsInput struct {
 
-	// A list of filters used to match properties for inbound cross-cluster
+	//  A list of filters used to match properties for inbound cross-cluster
 	// connections.
 	Filters []types.Filter
 
@@ -57,8 +56,8 @@ type DescribeInboundConnectionsOutput struct {
 	Connections []types.InboundConnection
 
 	// When nextToken is returned, there are more results available. The value of
-	// nextToken is a unique pagination token for each page. Make the call again using
-	// the returned token to retrieve the next page.
+	// nextToken is a unique pagination token for each page. Send the request again
+	// using the returned token to retrieve the next page.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -89,25 +88,25 @@ func (c *Client) addOperationDescribeInboundConnectionsMiddlewares(stack *middle
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -122,10 +121,13 @@ func (c *Client) addOperationDescribeInboundConnectionsMiddlewares(stack *middle
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeInboundConnections(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

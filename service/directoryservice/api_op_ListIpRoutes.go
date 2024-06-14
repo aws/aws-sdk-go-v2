@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/directoryservice/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -40,8 +39,8 @@ type ListIpRoutesInput struct {
 	// items is specified by the limitations of the operation.
 	Limit *int32
 
-	// The ListIpRoutes.NextToken value from a previous call to ListIpRoutes . Pass
-	// null if this is the first call.
+	// The ListIpRoutes.NextToken value from a previous call to ListIpRoutes. Pass null if this is
+	// the first call.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -49,12 +48,11 @@ type ListIpRoutesInput struct {
 
 type ListIpRoutesOutput struct {
 
-	// A list of IpRoute s.
+	// A list of IpRoutes.
 	IpRoutesInfo []types.IpRouteInfo
 
 	// If not null, more results are available. Pass this value for the NextToken
-	// parameter in a subsequent call to ListIpRoutes to retrieve the next set of
-	// items.
+	// parameter in a subsequent call to ListIpRoutesto retrieve the next set of items.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -85,25 +83,25 @@ func (c *Client) addOperationListIpRoutesMiddlewares(stack *middleware.Stack, op
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -118,13 +116,16 @@ func (c *Client) addOperationListIpRoutesMiddlewares(stack *middleware.Stack, op
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpListIpRoutesValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListIpRoutes(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

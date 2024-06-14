@@ -6,15 +6,15 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/workspaces/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates the specified connection alias for use with cross-Region redirection.
-// For more information, see Cross-Region Redirection for Amazon WorkSpaces (https://docs.aws.amazon.com/workspaces/latest/adminguide/cross-region-redirection.html)
-// .
+// For more information, see [Cross-Region Redirection for Amazon WorkSpaces].
+//
+// [Cross-Region Redirection for Amazon WorkSpaces]: https://docs.aws.amazon.com/workspaces/latest/adminguide/cross-region-redirection.html
 func (c *Client) CreateConnectionAlias(ctx context.Context, params *CreateConnectionAliasInput, optFns ...func(*Options)) (*CreateConnectionAliasOutput, error) {
 	if params == nil {
 		params = &CreateConnectionAliasInput{}
@@ -33,11 +33,12 @@ func (c *Client) CreateConnectionAlias(ctx context.Context, params *CreateConnec
 type CreateConnectionAliasInput struct {
 
 	// A connection string in the form of a fully qualified domain name (FQDN), such
-	// as www.example.com . After you create a connection string, it is always
-	// associated to your Amazon Web Services account. You cannot recreate the same
-	// connection string with a different account, even if you delete all instances of
-	// it from the original account. The connection string is globally reserved for
-	// your account.
+	// as www.example.com .
+	//
+	// After you create a connection string, it is always associated to your Amazon
+	// Web Services account. You cannot recreate the same connection string with a
+	// different account, even if you delete all instances of it from the original
+	// account. The connection string is globally reserved for your account.
 	//
 	// This member is required.
 	ConnectionString *string
@@ -81,25 +82,25 @@ func (c *Client) addOperationCreateConnectionAliasMiddlewares(stack *middleware.
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -114,13 +115,16 @@ func (c *Client) addOperationCreateConnectionAliasMiddlewares(stack *middleware.
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpCreateConnectionAliasValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateConnectionAlias(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

@@ -1,3 +1,77 @@
+# v1.0.0-preview.28 (2024-06-07)
+
+* **Feature**: Added exceptions to B2Bi List operations and ConflictException to B2Bi StartTransformerJob operation. Also made capabilities field explicitly required when creating a Partnership.
+* **Bug Fix**: Add clock skew correction on all service clients
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.0.0-preview.27 (2024-06-03)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.0.0-preview.26 (2024-05-23)
+
+* No change notes available for this release.
+
+# v1.0.0-preview.25 (2024-05-16)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.0.0-preview.24 (2024-05-15)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.0.0-preview.23 (2024-05-08)
+
+* **Bug Fix**: GoDoc improvement
+
+# v1.0.0-preview.22 (2024-05-07)
+
+* **Documentation**: Documentation update to clarify the MappingTemplate definition.
+
+# v1.0.0-preview.21 (2024-04-04)
+
+* **Feature**: Adding support for X12 5010 HIPAA EDI version and associated transaction sets.
+
+# v1.0.0-preview.20 (2024-03-29)
+
+* **Feature**: Supporting new EDI X12 transaction sets for X12 versions 4010, 4030, and 5010.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.0.0-preview.19 (2024-03-18)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.0.0-preview.18 (2024-03-07)
+
+* **Bug Fix**: Remove dependency on go-cmp.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.0.0-preview.17 (2024-02-23)
+
+* **Bug Fix**: Move all common, SDK-side middleware stack ops into the service client module to prevent cross-module compatibility issues in the future.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.0.0-preview.16 (2024-02-22)
+
+* **Feature**: Add middleware stack snapshot tests.
+
+# v1.0.0-preview.15 (2024-02-21)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.0.0-preview.14 (2024-02-20)
+
+* **Bug Fix**: When sourcing values for a service's `EndpointParameters`, the lack of a configured region (i.e. `options.Region == ""`) will now translate to a `nil` value for `EndpointParameters.Region` instead of a pointer to the empty string `""`. This will result in a much more explicit error when calling an operation instead of an obscure hostname lookup failure.
+
+# v1.0.0-preview.13 (2024-02-15)
+
+* **Bug Fix**: Correct failure to determine the error type in awsJson services that could occur when errors were modeled with a non-string `code` field.
+
+# v1.0.0-preview.12 (2024-02-13)
+
+* **Feature**: Bump minimum Go version to 1.20 per our language support policy.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.0.0-preview.11 (2024-01-18)
 
 * **Feature**: Increasing TestMapping inputFileContent file size limit to 5MB and adding file size limit 250KB for TestParsing input file. This release also includes exposing InternalServerException for Tag APIs.

@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/route53domains/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -118,15 +117,19 @@ type GetDomainDetailOutput struct {
 	Reseller *string
 
 	// An array of domain name status codes, also known as Extensible Provisioning
-	// Protocol (EPP) status codes. ICANN, the organization that maintains a central
-	// database of domain names, has developed a set of domain name status codes that
-	// tell you the status of a variety of operations on a domain name, for example,
-	// registering a domain name, transferring a domain name to another registrar,
-	// renewing the registration for a domain name, and so on. All registrars use this
-	// same set of status codes. For a current list of domain name status codes and an
-	// explanation of what each code means, go to the ICANN website (https://www.icann.org/)
-	// and search for epp status codes . (Search on the ICANN website; web searches
-	// sometimes return an old version of the document.)
+	// Protocol (EPP) status codes.
+	//
+	// ICANN, the organization that maintains a central database of domain names, has
+	// developed a set of domain name status codes that tell you the status of a
+	// variety of operations on a domain name, for example, registering a domain name,
+	// transferring a domain name to another registrar, renewing the registration for a
+	// domain name, and so on. All registrars use this same set of status codes.
+	//
+	// For a current list of domain name status codes and an explanation of what each
+	// code means, go to the [ICANN website]and search for epp status codes . (Search on the ICANN
+	// website; web searches sometimes return an old version of the document.)
+	//
+	// [ICANN website]: https://www.icann.org/
 	StatusList []string
 
 	// Provides details about the domain technical contact.
@@ -174,25 +177,25 @@ func (c *Client) addOperationGetDomainDetailMiddlewares(stack *middleware.Stack,
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -207,13 +210,16 @@ func (c *Client) addOperationGetDomainDetailMiddlewares(stack *middleware.Stack,
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpGetDomainDetailValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetDomainDetail(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

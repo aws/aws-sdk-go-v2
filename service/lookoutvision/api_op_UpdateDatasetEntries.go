@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/lookoutvision/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -14,16 +13,24 @@ import (
 
 // Adds or updates one or more JSON Line entries in a dataset. A JSON Line
 // includes information about an image used for training or testing an Amazon
-// Lookout for Vision model. To update an existing JSON Line, use the source-ref
-// field to identify the JSON Line. The JSON line that you supply replaces the
-// existing JSON line. Any existing annotations that are not in the new JSON line
-// are removed from the dataset. For more information, see Defining JSON lines for
-// anomaly classification in the Amazon Lookout for Vision Developer Guide. The
-// images you reference in the source-ref field of a JSON line, must be in the
-// same S3 bucket as the existing images in the dataset. Updating a dataset might
-// take a while to complete. To check the current status, call DescribeDataset and
-// check the Status field in the response. This operation requires permissions to
-// perform the lookoutvision:UpdateDatasetEntries operation.
+// Lookout for Vision model.
+//
+// To update an existing JSON Line, use the source-ref field to identify the JSON
+// Line. The JSON line that you supply replaces the existing JSON line. Any
+// existing annotations that are not in the new JSON line are removed from the
+// dataset.
+//
+// For more information, see Defining JSON lines for anomaly classification in the
+// Amazon Lookout for Vision Developer Guide.
+//
+// The images you reference in the source-ref field of a JSON line, must be in the
+// same S3 bucket as the existing images in the dataset.
+//
+// Updating a dataset might take a while to complete. To check the current status,
+// call DescribeDatasetand check the Status field in the response.
+//
+// This operation requires permissions to perform the
+// lookoutvision:UpdateDatasetEntries operation.
 func (c *Client) UpdateDatasetEntries(ctx context.Context, params *UpdateDatasetEntriesInput, optFns ...func(*Options)) (*UpdateDatasetEntriesOutput, error) {
 	if params == nil {
 		params = &UpdateDatasetEntriesInput{}
@@ -62,13 +69,16 @@ type UpdateDatasetEntriesInput struct {
 	// completes only once. You choose the value to pass. For example, An issue might
 	// prevent you from getting a response from UpdateDatasetEntries . In this case,
 	// safely retry your call to UpdateDatasetEntries by using the same ClientToken
-	// parameter value. If you don't supply a value for ClientToken , the AWS SDK you
-	// are using inserts a value for you. This prevents retries after a network error
-	// from making multiple updates with the same dataset entries. You'll need to
-	// provide your own value for other use cases. An error occurs if the other input
-	// parameters are not the same as in the first request. Using a different value for
-	// ClientToken is considered a new call to UpdateDatasetEntries . An idempotency
-	// token is active for 8 hours.
+	// parameter value.
+	//
+	// If you don't supply a value for ClientToken , the AWS SDK you are using inserts
+	// a value for you. This prevents retries after a network error from making
+	// multiple updates with the same dataset entries. You'll need to provide your own
+	// value for other use cases.
+	//
+	// An error occurs if the other input parameters are not the same as in the first
+	// request. Using a different value for ClientToken is considered a new call to
+	// UpdateDatasetEntries . An idempotency token is active for 8 hours.
 	ClientToken *string
 
 	noSmithyDocumentSerde
@@ -107,25 +117,25 @@ func (c *Client) addOperationUpdateDatasetEntriesMiddlewares(stack *middleware.S
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -140,6 +150,9 @@ func (c *Client) addOperationUpdateDatasetEntriesMiddlewares(stack *middleware.S
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opUpdateDatasetEntriesMiddleware(stack, options); err != nil {
 		return err
 	}
@@ -149,7 +162,7 @@ func (c *Client) addOperationUpdateDatasetEntriesMiddlewares(stack *middleware.S
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateDatasetEntries(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

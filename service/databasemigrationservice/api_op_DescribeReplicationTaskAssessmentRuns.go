@@ -6,18 +6,20 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/databasemigrationservice/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Returns a paginated list of premigration assessment runs based on filter
-// settings. These filter settings can specify a combination of premigration
-// assessment runs, migration tasks, replication instances, and assessment run
-// status values. This operation doesn't return information about individual
-// assessments. For this information, see the
-// DescribeReplicationTaskIndividualAssessments operation.
+// settings.
+//
+// These filter settings can specify a combination of premigration assessment
+// runs, migration tasks, replication instances, and assessment run status values.
+//
+// This operation doesn't return information about individual assessments. For
+// this information, see the DescribeReplicationTaskIndividualAssessments
+// operation.
 func (c *Client) DescribeReplicationTaskAssessmentRuns(ctx context.Context, params *DescribeReplicationTaskAssessmentRunsInput, optFns ...func(*Options)) (*DescribeReplicationTaskAssessmentRunsOutput, error) {
 	if params == nil {
 		params = &DescribeReplicationTaskAssessmentRunsInput{}
@@ -36,8 +38,10 @@ func (c *Client) DescribeReplicationTaskAssessmentRuns(ctx context.Context, para
 type DescribeReplicationTaskAssessmentRunsInput struct {
 
 	// Filters applied to the premigration assessment runs described in the form of
-	// key-value pairs. Valid filter names: replication-task-assessment-run-arn ,
-	// replication-task-arn , replication-instance-arn , status
+	// key-value pairs.
+	//
+	// Valid filter names: replication-task-assessment-run-arn , replication-task-arn ,
+	// replication-instance-arn , status
 	Filters []types.Filter
 
 	// An optional pagination token provided by a previous request. If this parameter
@@ -92,25 +96,25 @@ func (c *Client) addOperationDescribeReplicationTaskAssessmentRunsMiddlewares(st
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -125,13 +129,16 @@ func (c *Client) addOperationDescribeReplicationTaskAssessmentRunsMiddlewares(st
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDescribeReplicationTaskAssessmentRunsValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeReplicationTaskAssessmentRuns(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

@@ -6,27 +6,31 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/storagegateway/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Initiates a snapshot of a gateway from a volume recovery point. This operation
-// is only supported in the cached volume gateway type. A volume recovery point is
-// a point in time at which all data of the volume is consistent and from which you
-// can create a snapshot. To get a list of volume recovery point for cached volume
-// gateway, use ListVolumeRecoveryPoints . In the
-// CreateSnapshotFromVolumeRecoveryPoint request, you identify the volume by
-// providing its Amazon Resource Name (ARN). You must also provide a description
+// is only supported in the cached volume gateway type.
+//
+// A volume recovery point is a point in time at which all data of the volume is
+// consistent and from which you can create a snapshot. To get a list of volume
+// recovery point for cached volume gateway, use ListVolumeRecoveryPoints.
+//
+// In the CreateSnapshotFromVolumeRecoveryPoint request, you identify the volume
+// by providing its Amazon Resource Name (ARN). You must also provide a description
 // for the snapshot. When the gateway takes a snapshot of the specified volume, the
 // snapshot and its description appear in the Storage Gateway console. In response,
 // the gateway returns you a snapshot ID. You can use this snapshot ID to check the
 // snapshot progress or later use it when you want to create a volume from a
-// snapshot. To list or delete a snapshot, you must use the Amazon EC2 API. For
-// more information, see DescribeSnapshots (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeSnapshots.html)
-// or DeleteSnapshot (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DeleteSnapshot.html)
-// in the Amazon Elastic Compute Cloud API Reference.
+// snapshot.
+//
+// To list or delete a snapshot, you must use the Amazon EC2 API. For more
+// information, see [DescribeSnapshots]or [DeleteSnapshot] in the Amazon Elastic Compute Cloud API Reference.
+//
+// [DescribeSnapshots]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeSnapshots.html
+// [DeleteSnapshot]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DeleteSnapshot.html
 func (c *Client) CreateSnapshotFromVolumeRecoveryPoint(ctx context.Context, params *CreateSnapshotFromVolumeRecoveryPointInput, optFns ...func(*Options)) (*CreateSnapshotFromVolumeRecoveryPointOutput, error) {
 	if params == nil {
 		params = &CreateSnapshotFromVolumeRecoveryPointInput{}
@@ -51,18 +55,19 @@ type CreateSnapshotFromVolumeRecoveryPointInput struct {
 	// This member is required.
 	SnapshotDescription *string
 
-	// The Amazon Resource Name (ARN) of the iSCSI volume target. Use the
-	// DescribeStorediSCSIVolumes operation to return to retrieve the TargetARN for
-	// specified VolumeARN.
+	// The Amazon Resource Name (ARN) of the iSCSI volume target. Use the DescribeStorediSCSIVolumes operation
+	// to return to retrieve the TargetARN for specified VolumeARN.
 	//
 	// This member is required.
 	VolumeARN *string
 
 	// A list of up to 50 tags that can be assigned to a snapshot. Each tag is a
-	// key-value pair. Valid characters for key and value are letters, spaces, and
-	// numbers representable in UTF-8 format, and the following special characters: + -
-	// = . _ : / @. The maximum length of a tag's key is 128 characters, and the
-	// maximum length for a tag's value is 256.
+	// key-value pair.
+	//
+	// Valid characters for key and value are letters, spaces, and numbers
+	// representable in UTF-8 format, and the following special characters: + - = . _ :
+	// / @. The maximum length of a tag's key is 128 characters, and the maximum length
+	// for a tag's value is 256.
 	Tags []types.Tag
 
 	noSmithyDocumentSerde
@@ -73,9 +78,8 @@ type CreateSnapshotFromVolumeRecoveryPointOutput struct {
 	// The ID of the snapshot.
 	SnapshotId *string
 
-	// The Amazon Resource Name (ARN) of the iSCSI volume target. Use the
-	// DescribeStorediSCSIVolumes operation to return to retrieve the TargetARN for
-	// specified VolumeARN.
+	// The Amazon Resource Name (ARN) of the iSCSI volume target. Use the DescribeStorediSCSIVolumes operation
+	// to return to retrieve the TargetARN for specified VolumeARN.
 	VolumeARN *string
 
 	// The time the volume was created from the recovery point.
@@ -109,25 +113,25 @@ func (c *Client) addOperationCreateSnapshotFromVolumeRecoveryPointMiddlewares(st
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -142,13 +146,16 @@ func (c *Client) addOperationCreateSnapshotFromVolumeRecoveryPointMiddlewares(st
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpCreateSnapshotFromVolumeRecoveryPointValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateSnapshotFromVolumeRecoveryPoint(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

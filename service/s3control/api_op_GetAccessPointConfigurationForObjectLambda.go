@@ -16,10 +16,15 @@ import (
 	"strings"
 )
 
-// This operation is not supported by directory buckets. Returns configuration for
-// an Object Lambda Access Point. The following actions are related to
-// GetAccessPointConfigurationForObjectLambda :
-//   - PutAccessPointConfigurationForObjectLambda (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_PutAccessPointConfigurationForObjectLambda.html)
+// This operation is not supported by directory buckets.
+//
+// Returns configuration for an Object Lambda Access Point.
+//
+// The following actions are related to GetAccessPointConfigurationForObjectLambda :
+//
+// [PutAccessPointConfigurationForObjectLambda]
+//
+// [PutAccessPointConfigurationForObjectLambda]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_PutAccessPointConfigurationForObjectLambda.html
 func (c *Client) GetAccessPointConfigurationForObjectLambda(ctx context.Context, params *GetAccessPointConfigurationForObjectLambdaInput, optFns ...func(*Options)) (*GetAccessPointConfigurationForObjectLambdaOutput, error) {
 	if params == nil {
 		params = &GetAccessPointConfigurationForObjectLambdaInput{}
@@ -90,25 +95,25 @@ func (c *Client) addOperationGetAccessPointConfigurationForObjectLambdaMiddlewar
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -126,6 +131,9 @@ func (c *Client) addOperationGetAccessPointConfigurationForObjectLambdaMiddlewar
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addEndpointPrefix_opGetAccessPointConfigurationForObjectLambdaMiddleware(stack); err != nil {
 		return err
 	}
@@ -138,7 +146,7 @@ func (c *Client) addOperationGetAccessPointConfigurationForObjectLambdaMiddlewar
 	if err = addMetadataRetrieverMiddleware(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addGetAccessPointConfigurationForObjectLambdaUpdateEndpoint(stack, options); err != nil {

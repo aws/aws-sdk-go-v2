@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/chime/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -15,10 +14,13 @@ import (
 // Removes the suspension from up to 50 previously suspended users for the
 // specified Amazon Chime EnterpriseLWA account. Only users on EnterpriseLWA
 // accounts can be unsuspended using this action. For more information about
-// different account types, see Managing Your Amazon Chime Accounts  (https://docs.aws.amazon.com/chime/latest/ag/manage-chime-account.html)
-// in the account types, in the Amazon Chime Administration Guide. Previously
-// suspended users who are unsuspended using this action are returned to Registered
-// status. Users who are not previously suspended are ignored.
+// different account types, see [Managing Your Amazon Chime Accounts]in the account types, in the Amazon Chime
+// Administration Guide.
+//
+// Previously suspended users who are unsuspended using this action are returned
+// to Registered status. Users who are not previously suspended are ignored.
+//
+// [Managing Your Amazon Chime Accounts]: https://docs.aws.amazon.com/chime/latest/ag/manage-chime-account.html
 func (c *Client) BatchUnsuspendUser(ctx context.Context, params *BatchUnsuspendUserInput, optFns ...func(*Options)) (*BatchUnsuspendUserOutput, error) {
 	if params == nil {
 		params = &BatchUnsuspendUserInput{}
@@ -51,9 +53,8 @@ type BatchUnsuspendUserInput struct {
 
 type BatchUnsuspendUserOutput struct {
 
-	// If the BatchUnsuspendUser action fails for one or more of the user IDs in the
-	// request, a list of the user IDs is returned, along with error codes and error
-	// messages.
+	// If the BatchUnsuspendUser action fails for one or more of the user IDs in the request, a list of
+	// the user IDs is returned, along with error codes and error messages.
 	UserErrors []types.UserError
 
 	// Metadata pertaining to the operation's result.
@@ -84,25 +85,25 @@ func (c *Client) addOperationBatchUnsuspendUserMiddlewares(stack *middleware.Sta
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -117,13 +118,16 @@ func (c *Client) addOperationBatchUnsuspendUserMiddlewares(stack *middleware.Sta
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpBatchUnsuspendUserValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opBatchUnsuspendUser(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

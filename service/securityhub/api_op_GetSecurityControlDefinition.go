@@ -6,13 +6,13 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/securityhub/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Retrieves the definition of a security control. The definition includes the
+//	Retrieves the definition of a security control. The definition includes the
+//
 // control title, description, Region availability, parameter definitions, and
 // other details.
 func (c *Client) GetSecurityControlDefinition(ctx context.Context, params *GetSecurityControlDefinitionInput, optFns ...func(*Options)) (*GetSecurityControlDefinitionOutput, error) {
@@ -32,7 +32,7 @@ func (c *Client) GetSecurityControlDefinition(ctx context.Context, params *GetSe
 
 type GetSecurityControlDefinitionInput struct {
 
-	// The ID of the security control to retrieve the definition for. This field
+	//  The ID of the security control to retrieve the definition for. This field
 	// doesn’t accept an Amazon Resource Name (ARN).
 	//
 	// This member is required.
@@ -43,7 +43,7 @@ type GetSecurityControlDefinitionInput struct {
 
 type GetSecurityControlDefinitionOutput struct {
 
-	// Provides metadata for a security control, including its unique
+	//  Provides metadata for a security control, including its unique
 	// standard-agnostic identifier, title, description, severity, availability in
 	// Amazon Web Services Regions, and a link to remediation steps.
 	//
@@ -78,25 +78,25 @@ func (c *Client) addOperationGetSecurityControlDefinitionMiddlewares(stack *midd
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -111,13 +111,16 @@ func (c *Client) addOperationGetSecurityControlDefinitionMiddlewares(stack *midd
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpGetSecurityControlDefinitionValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetSecurityControlDefinition(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

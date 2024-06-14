@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/cloudsearch/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -14,8 +13,9 @@ import (
 
 // Gets the scaling parameters configured for a domain. A domain's scaling
 // parameters specify the desired search instance type and replication count. For
-// more information, see Configuring Scaling Options (http://docs.aws.amazon.com/cloudsearch/latest/developerguide/configuring-scaling-options.html)
-// in the Amazon CloudSearch Developer Guide.
+// more information, see [Configuring Scaling Options]in the Amazon CloudSearch Developer Guide.
+//
+// [Configuring Scaling Options]: http://docs.aws.amazon.com/cloudsearch/latest/developerguide/configuring-scaling-options.html
 func (c *Client) DescribeScalingParameters(ctx context.Context, params *DescribeScalingParametersInput, optFns ...func(*Options)) (*DescribeScalingParametersOutput, error) {
 	if params == nil {
 		params = &DescribeScalingParametersInput{}
@@ -31,8 +31,8 @@ func (c *Client) DescribeScalingParameters(ctx context.Context, params *Describe
 	return out, nil
 }
 
-// Container for the parameters to the DescribeScalingParameters operation.
-// Specifies the name of the domain you want to describe.
+// Container for the parameters to the DescribeScalingParameters operation. Specifies the name of the
+// domain you want to describe.
 type DescribeScalingParametersInput struct {
 
 	// A string that represents the name of a domain. Domain names are unique across
@@ -83,25 +83,25 @@ func (c *Client) addOperationDescribeScalingParametersMiddlewares(stack *middlew
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -116,13 +116,16 @@ func (c *Client) addOperationDescribeScalingParametersMiddlewares(stack *middlew
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDescribeScalingParametersValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeScalingParameters(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

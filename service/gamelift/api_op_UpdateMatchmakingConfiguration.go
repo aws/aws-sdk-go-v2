@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/gamelift/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -15,7 +14,13 @@ import (
 // Updates settings for a FlexMatch matchmaking configuration. These changes
 // affect all matches and game sessions that are created after the update. To
 // update settings, specify the configuration name to be updated and provide the
-// new settings. Learn more Design a FlexMatch matchmaker (https://docs.aws.amazon.com/gamelift/latest/flexmatchguide/match-configuration.html)
+// new settings.
+//
+// # Learn more
+//
+// [Design a FlexMatch matchmaker]
+//
+// [Design a FlexMatch matchmaker]: https://docs.aws.amazon.com/gamelift/latest/flexmatchguide/match-configuration.html
 func (c *Client) UpdateMatchmakingConfiguration(ctx context.Context, params *UpdateMatchmakingConfigurationInput, optFns ...func(*Options)) (*UpdateMatchmakingConfigurationOutput, error) {
 	if params == nil {
 		params = &UpdateMatchmakingConfigurationInput{}
@@ -60,9 +65,10 @@ type UpdateMatchmakingConfigurationInput struct {
 	// configuration. Specify MANUAL when your game manages backfill requests manually
 	// or does not use the match backfill feature. Specify AUTOMATIC to have GameLift
 	// create a match backfill request whenever a game session has one or more open
-	// slots. Learn more about manual and automatic backfill in Backfill Existing
-	// Games with FlexMatch (https://docs.aws.amazon.com/gamelift/latest/flexmatchguide/match-backfill.html)
-	// . Automatic backfill is not available when FlexMatchMode is set to STANDALONE .
+	// slots. Learn more about manual and automatic backfill in [Backfill Existing Games with FlexMatch]. Automatic backfill
+	// is not available when FlexMatchMode is set to STANDALONE .
+	//
+	// [Backfill Existing Games with FlexMatch]: https://docs.aws.amazon.com/gamelift/latest/flexmatchguide/match-backfill.html
 	BackfillMode types.BackfillMode
 
 	// Information to add to all events related to the matchmaking configuration.
@@ -73,11 +79,14 @@ type UpdateMatchmakingConfigurationInput struct {
 
 	// Indicates whether this matchmaking configuration is being used with Amazon
 	// GameLift hosting or as a standalone matchmaking solution.
+	//
 	//   - STANDALONE - FlexMatch forms matches and returns match information,
-	//   including players and team assignments, in a MatchmakingSucceeded (https://docs.aws.amazon.com/gamelift/latest/flexmatchguide/match-events.html#match-events-matchmakingsucceeded)
-	//   event.
+	//   including players and team assignments, in a [MatchmakingSucceeded]event.
+	//
 	//   - WITH_QUEUE - FlexMatch forms matches and uses the specified Amazon GameLift
 	//   queue to start a game session for the match.
+	//
+	// [MatchmakingSucceeded]: https://docs.aws.amazon.com/gamelift/latest/flexmatchguide/match-events.html#match-events-matchmakingsucceeded
 	FlexMatchMode types.FlexMatchMode
 
 	// A set of key-value pairs that can store custom data in a game session. For
@@ -88,24 +97,27 @@ type UpdateMatchmakingConfigurationInput struct {
 
 	// A set of custom game session properties, formatted as a single string value.
 	// This data is passed to a game server process with a request to start a new game
-	// session (see Start a Game Session (https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-api.html#gamelift-sdk-server-startsession)
-	// ). This information is added to the game session that is created for a
-	// successful match. This parameter is not used if FlexMatchMode is set to
+	// session (see [Start a Game Session]). This information is added to the game session that is created
+	// for a successful match. This parameter is not used if FlexMatchMode is set to
 	// STANDALONE .
+	//
+	// [Start a Game Session]: https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-server-api.html#gamelift-sdk-server-startsession
 	GameSessionData *string
 
-	// The Amazon Resource Name ( ARN (https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-arn-format.html)
-	// ) that is assigned to a Amazon GameLift game session queue resource and uniquely
-	// identifies it. ARNs are unique across all Regions. Format is
-	// arn:aws:gamelift:::gamesessionqueue/ . Queues can be located in any Region.
-	// Queues are used to start new Amazon GameLift-hosted game sessions for matches
-	// that are created with this matchmaking configuration. If FlexMatchMode is set
-	// to STANDALONE , do not set this parameter.
+	// The Amazon Resource Name ([ARN] ) that is assigned to a Amazon GameLift game session
+	// queue resource and uniquely identifies it. ARNs are unique across all Regions.
+	// Format is arn:aws:gamelift:::gamesessionqueue/ . Queues can be located in any
+	// Region. Queues are used to start new Amazon GameLift-hosted game sessions for
+	// matches that are created with this matchmaking configuration. If FlexMatchMode
+	// is set to STANDALONE , do not set this parameter.
+	//
+	// [ARN]: https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-arn-format.html
 	GameSessionQueueArns []string
 
-	// An SNS topic ARN that is set up to receive matchmaking notifications. See
-	// Setting up notifications for matchmaking (https://docs.aws.amazon.com/gamelift/latest/flexmatchguide/match-notification.html)
-	// for more information.
+	// An SNS topic ARN that is set up to receive matchmaking notifications. See [Setting up notifications for matchmaking] for
+	// more information.
+	//
+	// [Setting up notifications for matchmaking]: https://docs.aws.amazon.com/gamelift/latest/flexmatchguide/match-notification.html
 	NotificationTarget *string
 
 	// The maximum duration, in seconds, that a matchmaking ticket can remain in
@@ -154,25 +166,25 @@ func (c *Client) addOperationUpdateMatchmakingConfigurationMiddlewares(stack *mi
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -187,13 +199,16 @@ func (c *Client) addOperationUpdateMatchmakingConfigurationMiddlewares(stack *mi
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpUpdateMatchmakingConfigurationValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateMatchmakingConfiguration(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

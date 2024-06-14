@@ -6,19 +6,18 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Deletes a connector for Active Directory. You must provide the Amazon Resource
 // Name (ARN) of the connector that you want to delete. You can find the ARN by
-// calling the
-// https://docs.aws.amazon.com/pca-connector-ad/latest/APIReference/API_ListConnectors (https://docs.aws.amazon.com/pca-connector-ad/latest/APIReference/API_ListConnectors)
-// action. Deleting a connector does not deregister your directory with Amazon Web
-// Services Private CA. You can deregister your directory by calling the
-// https://docs.aws.amazon.com/pca-connector-ad/latest/APIReference/API_DeleteDirectoryRegistration (https://docs.aws.amazon.com/pca-connector-ad/latest/APIReference/API_DeleteDirectoryRegistration)
-// action.
+// calling the [https://docs.aws.amazon.com/pca-connector-ad/latest/APIReference/API_ListConnectors]action. Deleting a connector does not deregister your directory
+// with Amazon Web Services Private CA. You can deregister your directory by
+// calling the [https://docs.aws.amazon.com/pca-connector-ad/latest/APIReference/API_DeleteDirectoryRegistration]action.
+//
+// [https://docs.aws.amazon.com/pca-connector-ad/latest/APIReference/API_ListConnectors]: https://docs.aws.amazon.com/pca-connector-ad/latest/APIReference/API_ListConnectors
+// [https://docs.aws.amazon.com/pca-connector-ad/latest/APIReference/API_DeleteDirectoryRegistration]: https://docs.aws.amazon.com/pca-connector-ad/latest/APIReference/API_DeleteDirectoryRegistration
 func (c *Client) DeleteConnector(ctx context.Context, params *DeleteConnectorInput, optFns ...func(*Options)) (*DeleteConnectorOutput, error) {
 	if params == nil {
 		params = &DeleteConnectorInput{}
@@ -36,8 +35,9 @@ func (c *Client) DeleteConnector(ctx context.Context, params *DeleteConnectorInp
 
 type DeleteConnectorInput struct {
 
-	// The Amazon Resource Name (ARN) that was returned when you called CreateConnector (https://docs.aws.amazon.com/pca-connector-ad/latest/APIReference/API_CreateConnector.html)
-	// .
+	//  The Amazon Resource Name (ARN) that was returned when you called [CreateConnector].
+	//
+	// [CreateConnector]: https://docs.aws.amazon.com/pca-connector-ad/latest/APIReference/API_CreateConnector.html
 	//
 	// This member is required.
 	ConnectorArn *string
@@ -74,25 +74,25 @@ func (c *Client) addOperationDeleteConnectorMiddlewares(stack *middleware.Stack,
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -107,13 +107,16 @@ func (c *Client) addOperationDeleteConnectorMiddlewares(stack *middleware.Stack,
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDeleteConnectorValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteConnector(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

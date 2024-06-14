@@ -370,6 +370,26 @@ func (m *validateOpListForms) HandleInitialize(ctx context.Context, in middlewar
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpListTagsForResource struct {
+}
+
+func (*validateOpListTagsForResource) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListTagsForResource) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListTagsForResourceInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListTagsForResourceInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpListThemes struct {
 }
 
@@ -445,6 +465,46 @@ func (m *validateOpStartCodegenJob) HandleInitialize(ctx context.Context, in mid
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpStartCodegenJobInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpTagResource struct {
+}
+
+func (*validateOpTagResource) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpTagResource) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*TagResourceInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpTagResourceInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpUntagResource struct {
+}
+
+func (*validateOpUntagResource) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUntagResource) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UntagResourceInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUntagResourceInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -582,6 +642,10 @@ func addOpListFormsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListForms{}, middleware.After)
 }
 
+func addOpListTagsForResourceValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListTagsForResource{}, middleware.After)
+}
+
 func addOpListThemesValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListThemes{}, middleware.After)
 }
@@ -596,6 +660,14 @@ func addOpRefreshTokenValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpStartCodegenJobValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpStartCodegenJob{}, middleware.After)
+}
+
+func addOpTagResourceValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpTagResource{}, middleware.After)
+}
+
+func addOpUntagResourceValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUntagResource{}, middleware.After)
 }
 
 func addOpUpdateComponentValidationMiddleware(stack *middleware.Stack) error {
@@ -2214,6 +2286,21 @@ func validateOpListFormsInput(v *ListFormsInput) error {
 	}
 }
 
+func validateOpListTagsForResourceInput(v *ListTagsForResourceInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListTagsForResourceInput"}
+	if v.ResourceArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpListThemesInput(v *ListThemesInput) error {
 	if v == nil {
 		return nil
@@ -2299,6 +2386,42 @@ func validateOpStartCodegenJobInput(v *StartCodegenJobInput) error {
 		if err := validateStartCodegenJobData(v.CodegenJobToCreate); err != nil {
 			invalidParams.AddNested("CodegenJobToCreate", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpTagResourceInput(v *TagResourceInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "TagResourceInput"}
+	if v.ResourceArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceArn"))
+	}
+	if v.Tags == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Tags"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUntagResourceInput(v *UntagResourceInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UntagResourceInput"}
+	if v.ResourceArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceArn"))
+	}
+	if v.TagKeys == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TagKeys"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

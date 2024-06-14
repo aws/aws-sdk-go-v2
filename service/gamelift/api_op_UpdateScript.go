@@ -6,22 +6,36 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/gamelift/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates Realtime script metadata and content. To update script metadata,
-// specify the script ID and provide updated name and/or version values. To update
-// script content, provide an updated zip file by pointing to either a local file
-// or an Amazon S3 bucket location. You can use either method regardless of how the
-// original script was uploaded. Use the Version parameter to track updates to the
-// script. If the call is successful, the updated metadata is stored in the script
-// record and a revised script is uploaded to the Amazon GameLift service. Once the
-// script is updated and acquired by a fleet instance, the new version is used for
-// all new game sessions. Learn more Amazon GameLift Realtime Servers (https://docs.aws.amazon.com/gamelift/latest/developerguide/realtime-intro.html)
-// Related actions All APIs by task (https://docs.aws.amazon.com/gamelift/latest/developerguide/reference-awssdk.html#reference-awssdk-resources-fleets)
+// Updates Realtime script metadata and content.
+//
+// To update script metadata, specify the script ID and provide updated name
+// and/or version values.
+//
+// To update script content, provide an updated zip file by pointing to either a
+// local file or an Amazon S3 bucket location. You can use either method regardless
+// of how the original script was uploaded. Use the Version parameter to track
+// updates to the script.
+//
+// If the call is successful, the updated metadata is stored in the script record
+// and a revised script is uploaded to the Amazon GameLift service. Once the script
+// is updated and acquired by a fleet instance, the new version is used for all new
+// game sessions.
+//
+// # Learn more
+//
+// [Amazon GameLift Realtime Servers]
+//
+// # Related actions
+//
+// [All APIs by task]
+//
+// [Amazon GameLift Realtime Servers]: https://docs.aws.amazon.com/gamelift/latest/developerguide/realtime-intro.html
+// [All APIs by task]: https://docs.aws.amazon.com/gamelift/latest/developerguide/reference-awssdk.html#reference-awssdk-resources-fleets
 func (c *Client) UpdateScript(ctx context.Context, params *UpdateScriptInput, optFns ...func(*Options)) (*UpdateScriptOutput, error) {
 	if params == nil {
 		params = &UpdateScriptInput{}
@@ -65,6 +79,7 @@ type UpdateScriptInput struct {
 
 	// A data object containing your Realtime scripts and dependencies as a zip file.
 	// The zip file can have one or multiple files. Maximum size of a zip file is 5 MB.
+	//
 	// When using the Amazon Web Services CLI tool to create a script, this parameter
 	// is set to the zip file name. It must be prepended with the string "fileb://" to
 	// indicate that the file data is a binary object. For example: --zip-file
@@ -112,25 +127,25 @@ func (c *Client) addOperationUpdateScriptMiddlewares(stack *middleware.Stack, op
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -145,13 +160,16 @@ func (c *Client) addOperationUpdateScriptMiddlewares(stack *middleware.Stack, op
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpUpdateScriptValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateScript(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

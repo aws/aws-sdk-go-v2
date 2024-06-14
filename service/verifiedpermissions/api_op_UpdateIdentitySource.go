@@ -6,19 +6,21 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/verifiedpermissions/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
-// Updates the specified identity source to use a new identity provider (IdP)
-// source, or to change the mapping of identities from the IdP to a different
-// principal entity type. Verified Permissions is eventually consistent (https://wikipedia.org/wiki/Eventual_consistency)
-// . It can take a few seconds for a new or changed element to be propagate through
-// the service and be visible in the results of other Verified Permissions
-// operations.
+// Updates the specified identity source to use a new identity provider (IdP), or
+// to change the mapping of identities from the IdP to a different principal entity
+// type.
+//
+// Verified Permissions is [eventually consistent] . It can take a few seconds for a new or changed
+// element to propagate through the service and be visible in the results of other
+// Verified Permissions operations.
+//
+// [eventually consistent]: https://wikipedia.org/wiki/Eventual_consistency
 func (c *Client) UpdateIdentitySource(ctx context.Context, params *UpdateIdentitySourceInput, optFns ...func(*Options)) (*UpdateIdentitySourceOutput, error) {
 	if params == nil {
 		params = &UpdateIdentitySourceInput{}
@@ -48,9 +50,12 @@ type UpdateIdentitySourceInput struct {
 	PolicyStoreId *string
 
 	// Specifies the details required to communicate with the identity provider (IdP)
-	// associated with this identity source. At this time, the only valid member of
-	// this structure is a Amazon Cognito user pool configuration. You must specify a
-	// userPoolArn , and optionally, a ClientId .
+	// associated with this identity source.
+	//
+	// At this time, the only valid member of this structure is a Amazon Cognito user
+	// pool configuration.
+	//
+	// You must specify a userPoolArn , and optionally, a ClientId .
 	//
 	// This member is required.
 	UpdateConfiguration types.UpdateConfiguration
@@ -112,25 +117,25 @@ func (c *Client) addOperationUpdateIdentitySourceMiddlewares(stack *middleware.S
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -145,13 +150,16 @@ func (c *Client) addOperationUpdateIdentitySourceMiddlewares(stack *middleware.S
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpUpdateIdentitySourceValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateIdentitySource(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

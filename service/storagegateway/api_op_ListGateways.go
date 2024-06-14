@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/storagegateway/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -14,12 +13,16 @@ import (
 
 // Lists gateways owned by an Amazon Web Services account in an Amazon Web
 // Services Region specified in the request. The returned list is ordered by
-// gateway Amazon Resource Name (ARN). By default, the operation returns a maximum
-// of 100 gateways. This operation supports pagination that allows you to
-// optionally reduce the number of gateways returned in a response. If you have
-// more gateways than are returned in a response (that is, the response returns
-// only a truncated list of your gateways), the response contains a marker that you
-// can specify in your next request to fetch the next page of gateways.
+// gateway Amazon Resource Name (ARN).
+//
+// By default, the operation returns a maximum of 100 gateways. This operation
+// supports pagination that allows you to optionally reduce the number of gateways
+// returned in a response.
+//
+// If you have more gateways than are returned in a response (that is, the
+// response returns only a truncated list of your gateways), the response contains
+// a marker that you can specify in your next request to fetch the next page of
+// gateways.
 func (c *Client) ListGateways(ctx context.Context, params *ListGatewaysInput, optFns ...func(*Options)) (*ListGatewaysOutput, error) {
 	if params == nil {
 		params = &ListGatewaysInput{}
@@ -36,8 +39,10 @@ func (c *Client) ListGateways(ctx context.Context, params *ListGatewaysInput, op
 }
 
 // A JSON object containing zero or more of the following fields:
-//   - ListGatewaysInput$Limit
-//   - ListGatewaysInput$Marker
+//
+// # ListGatewaysInput$Limit
+//
+// ListGatewaysInput$Marker
 type ListGatewaysInput struct {
 
 	// Specifies that the list of gateways returned be limited to the specified number
@@ -89,25 +94,25 @@ func (c *Client) addOperationListGatewaysMiddlewares(stack *middleware.Stack, op
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -122,10 +127,13 @@ func (c *Client) addOperationListGatewaysMiddlewares(stack *middleware.Stack, op
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListGateways(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

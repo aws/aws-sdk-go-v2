@@ -6,21 +6,24 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Deletes all versions of the intent, including the $LATEST version. To delete a
-// specific version of the intent, use the DeleteIntentVersion operation. You can
-// delete a version of an intent only if it is not referenced. To delete an intent
-// that is referred to in one or more bots (see how-it-works ), you must remove
-// those references first. If you get the ResourceInUseException exception, it
-// provides an example reference that shows where the intent is referenced. To
-// remove the reference to the intent, either update the bot or delete it. If you
-// get the same exception when you attempt to delete the intent again, repeat until
-// the intent has no references and the call to DeleteIntent is successful. This
-// operation requires permission for the lex:DeleteIntent action.
+// specific version of the intent, use the DeleteIntentVersionoperation.
+//
+// You can delete a version of an intent only if it is not referenced. To delete
+// an intent that is referred to in one or more bots (see how-it-works), you must remove those
+// references first.
+//
+// If you get the ResourceInUseException exception, it provides an example
+// reference that shows where the intent is referenced. To remove the reference to
+// the intent, either update the bot or delete it. If you get the same exception
+// when you attempt to delete the intent again, repeat until the intent has no
+// references and the call to DeleteIntent is successful.
+//
+// This operation requires permission for the lex:DeleteIntent action.
 func (c *Client) DeleteIntent(ctx context.Context, params *DeleteIntentInput, optFns ...func(*Options)) (*DeleteIntentOutput, error) {
 	if params == nil {
 		params = &DeleteIntentInput{}
@@ -75,25 +78,25 @@ func (c *Client) addOperationDeleteIntentMiddlewares(stack *middleware.Stack, op
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -108,13 +111,16 @@ func (c *Client) addOperationDeleteIntentMiddlewares(stack *middleware.Stack, op
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDeleteIntentValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteIntent(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

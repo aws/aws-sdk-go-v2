@@ -6,14 +6,12 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/route53resolver/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Disassociates a FirewallRuleGroup from a VPC, to remove DNS filtering from the
-// VPC.
+// Disassociates a FirewallRuleGroup from a VPC, to remove DNS filtering from the VPC.
 func (c *Client) DisassociateFirewallRuleGroup(ctx context.Context, params *DisassociateFirewallRuleGroupInput, optFns ...func(*Options)) (*DisassociateFirewallRuleGroupOutput, error) {
 	if params == nil {
 		params = &DisassociateFirewallRuleGroupInput{}
@@ -31,7 +29,7 @@ func (c *Client) DisassociateFirewallRuleGroup(ctx context.Context, params *Disa
 
 type DisassociateFirewallRuleGroupInput struct {
 
-	// The identifier of the FirewallRuleGroupAssociation .
+	// The identifier of the FirewallRuleGroupAssociation.
 	//
 	// This member is required.
 	FirewallRuleGroupAssociationId *string
@@ -72,25 +70,25 @@ func (c *Client) addOperationDisassociateFirewallRuleGroupMiddlewares(stack *mid
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -105,13 +103,16 @@ func (c *Client) addOperationDisassociateFirewallRuleGroupMiddlewares(stack *mid
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDisassociateFirewallRuleGroupValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDisassociateFirewallRuleGroup(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/cloudformation/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -44,7 +43,9 @@ type GetGeneratedTemplateInput struct {
 
 	// The language to use to retrieve for the generated template. Supported values
 	// are:
+	//
 	//   - JSON
+	//
 	//   - YAML
 	Format types.TemplateFormat
 
@@ -54,13 +55,21 @@ type GetGeneratedTemplateInput struct {
 type GetGeneratedTemplateOutput struct {
 
 	// The status of the template generation. Supported values are:
+	//
 	//   - CreatePending - the creation of the template is pending.
+	//
 	//   - CreateInProgress - the creation of the template is in progress.
+	//
 	//   - DeletePending - the deletion of the template is pending.
+	//
 	//   - DeleteInProgress - the deletion of the template is in progress.
+	//
 	//   - UpdatePending - the update of the template is pending.
+	//
 	//   - UpdateInProgress - the update of the template is in progress.
+	//
 	//   - Failed - the template operation failed.
+	//
 	//   - Complete - the template operation is complete.
 	Status types.GeneratedTemplateStatus
 
@@ -96,25 +105,25 @@ func (c *Client) addOperationGetGeneratedTemplateMiddlewares(stack *middleware.S
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -129,13 +138,16 @@ func (c *Client) addOperationGetGeneratedTemplateMiddlewares(stack *middleware.S
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpGetGeneratedTemplateValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetGeneratedTemplate(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

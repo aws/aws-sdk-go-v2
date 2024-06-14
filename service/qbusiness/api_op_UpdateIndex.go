@@ -6,13 +6,12 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/qbusiness/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates an Amazon Q index.
+// Updates an Amazon Q Business index.
 func (c *Client) UpdateIndex(ctx context.Context, params *UpdateIndexInput, optFns ...func(*Options)) (*UpdateIndexOutput, error) {
 	if params == nil {
 		params = &UpdateIndexInput{}
@@ -30,31 +29,32 @@ func (c *Client) UpdateIndex(ctx context.Context, params *UpdateIndexInput, optF
 
 type UpdateIndexInput struct {
 
-	// The identifier of the Amazon Q application connected to the index.
+	// The identifier of the Amazon Q Business application connected to the index.
 	//
 	// This member is required.
 	ApplicationId *string
 
-	// The identifier of the Amazon Q index.
+	// The identifier of the Amazon Q Business index.
 	//
 	// This member is required.
 	IndexId *string
 
-	// The storage capacity units you want to provision for your Amazon Q index. You
-	// can add and remove capacity to fit your usage needs.
+	// The storage capacity units you want to provision for your Amazon Q Business
+	// index. You can add and remove capacity to fit your usage needs.
 	CapacityConfiguration *types.IndexCapacityConfiguration
 
-	// The description of the Amazon Q index.
+	// The description of the Amazon Q Business index.
 	Description *string
 
-	// The name of the Amazon Q index.
+	// The name of the Amazon Q Business index.
 	DisplayName *string
 
 	// Configuration information for document metadata or fields. Document metadata
 	// are fields or attributes associated with your documents. For example, the
 	// company department name associated with each document. For more information, see
-	// Understanding document attributes (https://docs.aws.amazon.com/amazonq/latest/business-use-dg/doc-attributes-types.html#doc-attributes)
-	// .
+	// [Understanding document attributes].
+	//
+	// [Understanding document attributes]: https://docs.aws.amazon.com/amazonq/latest/business-use-dg/doc-attributes-types.html#doc-attributes
 	DocumentAttributeConfigurations []types.DocumentAttributeConfiguration
 
 	noSmithyDocumentSerde
@@ -89,25 +89,25 @@ func (c *Client) addOperationUpdateIndexMiddlewares(stack *middleware.Stack, opt
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -122,13 +122,16 @@ func (c *Client) addOperationUpdateIndexMiddlewares(stack *middleware.Stack, opt
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpUpdateIndexValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateIndex(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

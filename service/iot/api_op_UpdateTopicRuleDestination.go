@@ -6,16 +6,17 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/iot/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Updates a topic rule destination. You use this to change the status, endpoint
-// URL, or confirmation URL of the destination. Requires permission to access the
-// UpdateTopicRuleDestination (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
-// action.
+// URL, or confirmation URL of the destination.
+//
+// Requires permission to access the [UpdateTopicRuleDestination] action.
+//
+// [UpdateTopicRuleDestination]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions
 func (c *Client) UpdateTopicRuleDestination(ctx context.Context, params *UpdateTopicRuleDestinationInput, optFns ...func(*Options)) (*UpdateTopicRuleDestinationOutput, error) {
 	if params == nil {
 		params = &UpdateTopicRuleDestinationInput{}
@@ -38,19 +39,24 @@ type UpdateTopicRuleDestinationInput struct {
 	// This member is required.
 	Arn *string
 
-	// The status of the topic rule destination. Valid values are: IN_PROGRESS A topic
-	// rule destination was created but has not been confirmed. You can set status to
-	// IN_PROGRESS by calling UpdateTopicRuleDestination . Calling
-	// UpdateTopicRuleDestination causes a new confirmation challenge to be sent to
-	// your confirmation endpoint. ENABLED Confirmation was completed, and traffic to
-	// this destination is allowed. You can set status to DISABLED by calling
-	// UpdateTopicRuleDestination . DISABLED Confirmation was completed, and traffic to
-	// this destination is not allowed. You can set status to ENABLED by calling
-	// UpdateTopicRuleDestination . ERROR Confirmation could not be completed, for
-	// example if the confirmation timed out. You can call GetTopicRuleDestination for
-	// details about the error. You can set status to IN_PROGRESS by calling
-	// UpdateTopicRuleDestination . Calling UpdateTopicRuleDestination causes a new
-	// confirmation challenge to be sent to your confirmation endpoint.
+	// The status of the topic rule destination. Valid values are:
+	//
+	// IN_PROGRESS A topic rule destination was created but has not been confirmed.
+	// You can set status to IN_PROGRESS by calling UpdateTopicRuleDestination .
+	// Calling UpdateTopicRuleDestination causes a new confirmation challenge to be
+	// sent to your confirmation endpoint.
+	//
+	// ENABLED Confirmation was completed, and traffic to this destination is allowed.
+	// You can set status to DISABLED by calling UpdateTopicRuleDestination .
+	//
+	// DISABLED Confirmation was completed, and traffic to this destination is not
+	// allowed. You can set status to ENABLED by calling UpdateTopicRuleDestination .
+	//
+	// ERROR Confirmation could not be completed, for example if the confirmation
+	// timed out. You can call GetTopicRuleDestination for details about the error.
+	// You can set status to IN_PROGRESS by calling UpdateTopicRuleDestination .
+	// Calling UpdateTopicRuleDestination causes a new confirmation challenge to be
+	// sent to your confirmation endpoint.
 	//
 	// This member is required.
 	Status types.TopicRuleDestinationStatus
@@ -87,25 +93,25 @@ func (c *Client) addOperationUpdateTopicRuleDestinationMiddlewares(stack *middle
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -120,13 +126,16 @@ func (c *Client) addOperationUpdateTopicRuleDestinationMiddlewares(stack *middle
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpUpdateTopicRuleDestinationValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateTopicRuleDestination(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

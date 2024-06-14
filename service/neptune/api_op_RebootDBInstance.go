@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/neptune/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -15,9 +14,11 @@ import (
 // You might need to reboot your DB instance, usually for maintenance reasons. For
 // example, if you make certain modifications, or if you change the DB parameter
 // group associated with the DB instance, you must reboot the instance for the
-// changes to take effect. Rebooting a DB instance restarts the database engine
-// service. Rebooting a DB instance results in a momentary outage, during which the
-// DB instance status is set to rebooting.
+// changes to take effect.
+//
+// Rebooting a DB instance restarts the database engine service. Rebooting a DB
+// instance results in a momentary outage, during which the DB instance status is
+// set to rebooting.
 func (c *Client) RebootDBInstance(ctx context.Context, params *RebootDBInstanceInput, optFns ...func(*Options)) (*RebootDBInstanceOutput, error) {
 	if params == nil {
 		params = &RebootDBInstanceInput{}
@@ -36,14 +37,18 @@ func (c *Client) RebootDBInstance(ctx context.Context, params *RebootDBInstanceI
 type RebootDBInstanceInput struct {
 
 	// The DB instance identifier. This parameter is stored as a lowercase string.
+	//
 	// Constraints:
+	//
 	//   - Must match the identifier of an existing DBInstance.
 	//
 	// This member is required.
 	DBInstanceIdentifier *string
 
-	// When true , the reboot is conducted through a MultiAZ failover. Constraint: You
-	// can't specify true if the instance is not configured for MultiAZ.
+	//  When true , the reboot is conducted through a MultiAZ failover.
+	//
+	// Constraint: You can't specify true if the instance is not configured for
+	// MultiAZ.
 	ForceFailover *bool
 
 	noSmithyDocumentSerde
@@ -51,8 +56,9 @@ type RebootDBInstanceInput struct {
 
 type RebootDBInstanceOutput struct {
 
-	// Contains the details of an Amazon Neptune DB instance. This data type is used
-	// as a response element in the DescribeDBInstances action.
+	// Contains the details of an Amazon Neptune DB instance.
+	//
+	// This data type is used as a response element in the DescribeDBInstances action.
 	DBInstance *types.DBInstance
 
 	// Metadata pertaining to the operation's result.
@@ -83,25 +89,25 @@ func (c *Client) addOperationRebootDBInstanceMiddlewares(stack *middleware.Stack
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -116,13 +122,16 @@ func (c *Client) addOperationRebootDBInstanceMiddlewares(stack *middleware.Stack
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpRebootDBInstanceValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opRebootDBInstance(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

@@ -6,15 +6,16 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/qbusiness/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Asynchronously deletes one or more documents added using the BatchPutDocument
-// API from an Amazon Q index. You can see the progress of the deletion, and any
-// error messages related to the process, by using CloudWatch.
+// API from an Amazon Q Business index.
+//
+// You can see the progress of the deletion, and any error messages related to the
+// process, by using CloudWatch.
 func (c *Client) BatchDeleteDocument(ctx context.Context, params *BatchDeleteDocumentInput, optFns ...func(*Options)) (*BatchDeleteDocumentOutput, error) {
 	if params == nil {
 		params = &BatchDeleteDocumentInput{}
@@ -32,17 +33,18 @@ func (c *Client) BatchDeleteDocument(ctx context.Context, params *BatchDeleteDoc
 
 type BatchDeleteDocumentInput struct {
 
-	// The identifier of the Amazon Q application.
+	// The identifier of the Amazon Q Business application.
 	//
 	// This member is required.
 	ApplicationId *string
 
-	// Documents deleted from the Amazon Q index.
+	// Documents deleted from the Amazon Q Business index.
 	//
 	// This member is required.
 	Documents []types.DeleteDocument
 
-	// The identifier of the Amazon Q index that contains the documents to delete.
+	// The identifier of the Amazon Q Business index that contains the documents to
+	// delete.
 	//
 	// This member is required.
 	IndexId *string
@@ -55,8 +57,8 @@ type BatchDeleteDocumentInput struct {
 
 type BatchDeleteDocumentOutput struct {
 
-	// A list of documents that couldn't be removed from the Amazon Q index. Each
-	// entry contains an error message that indicates why the document couldn't be
+	// A list of documents that couldn't be removed from the Amazon Q Business index.
+	// Each entry contains an error message that indicates why the document couldn't be
 	// removed from the index.
 	FailedDocuments []types.FailedDocument
 
@@ -88,25 +90,25 @@ func (c *Client) addOperationBatchDeleteDocumentMiddlewares(stack *middleware.St
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -121,13 +123,16 @@ func (c *Client) addOperationBatchDeleteDocumentMiddlewares(stack *middleware.St
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpBatchDeleteDocumentValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opBatchDeleteDocument(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

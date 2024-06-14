@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/neptune/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -30,7 +29,7 @@ func (c *Client) RemoveSourceIdentifierFromSubscription(ctx context.Context, par
 
 type RemoveSourceIdentifierFromSubscriptionInput struct {
 
-	// The source identifier to be removed from the subscription, such as the DB
+	//  The source identifier to be removed from the subscription, such as the DB
 	// instance identifier for a DB instance or the name of a security group.
 	//
 	// This member is required.
@@ -47,8 +46,7 @@ type RemoveSourceIdentifierFromSubscriptionInput struct {
 
 type RemoveSourceIdentifierFromSubscriptionOutput struct {
 
-	// Contains the results of a successful invocation of the
-	// DescribeEventSubscriptions action.
+	// Contains the results of a successful invocation of the DescribeEventSubscriptions action.
 	EventSubscription *types.EventSubscription
 
 	// Metadata pertaining to the operation's result.
@@ -79,25 +77,25 @@ func (c *Client) addOperationRemoveSourceIdentifierFromSubscriptionMiddlewares(s
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -112,13 +110,16 @@ func (c *Client) addOperationRemoveSourceIdentifierFromSubscriptionMiddlewares(s
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpRemoveSourceIdentifierFromSubscriptionValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opRemoveSourceIdentifierFromSubscription(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/evidently/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -14,20 +13,27 @@ import (
 
 // This operation assigns feature variation to user sessions. For each user
 // session, you pass in an entityID that represents the user. Evidently then
-// checks the evaluation rules and assigns the variation. The first rules that are
-// evaluated are the override rules. If the user's entityID matches an override
-// rule, the user is served the variation specified by that rule. Next, if there is
-// a launch of the feature, the user might be assigned to a variation in the
-// launch. The chance of this depends on the percentage of users that are allocated
-// to that launch. If the user is enrolled in the launch, the variation they are
-// served depends on the allocation of the various feature variations used for the
-// launch. If the user is not assigned to a launch, and there is an ongoing
-// experiment for this feature, the user might be assigned to a variation in the
-// experiment. The chance of this depends on the percentage of users that are
-// allocated to that experiment. If the user is enrolled in the experiment, the
+// checks the evaluation rules and assigns the variation.
+//
+// The first rules that are evaluated are the override rules. If the user's
+// entityID matches an override rule, the user is served the variation specified by
+// that rule.
+//
+// Next, if there is a launch of the feature, the user might be assigned to a
+// variation in the launch. The chance of this depends on the percentage of users
+// that are allocated to that launch. If the user is enrolled in the launch, the
 // variation they are served depends on the allocation of the various feature
-// variations used for the experiment. If the user is not assigned to a launch or
-// experiment, they are served the default variation.
+// variations used for the launch.
+//
+// If the user is not assigned to a launch, and there is an ongoing experiment for
+// this feature, the user might be assigned to a variation in the experiment. The
+// chance of this depends on the percentage of users that are allocated to that
+// experiment. If the user is enrolled in the experiment, the variation they are
+// served depends on the allocation of the various feature variations used for the
+// experiment.
+//
+// If the user is not assigned to a launch or experiment, they are served the
+// default variation.
 func (c *Client) BatchEvaluateFeature(ctx context.Context, params *BatchEvaluateFeatureInput, optFns ...func(*Options)) (*BatchEvaluateFeatureOutput, error) {
 	if params == nil {
 		params = &BatchEvaluateFeatureInput{}
@@ -93,25 +99,25 @@ func (c *Client) addOperationBatchEvaluateFeatureMiddlewares(stack *middleware.S
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -126,6 +132,9 @@ func (c *Client) addOperationBatchEvaluateFeatureMiddlewares(stack *middleware.S
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addEndpointPrefix_opBatchEvaluateFeatureMiddleware(stack); err != nil {
 		return err
 	}
@@ -135,7 +144,7 @@ func (c *Client) addOperationBatchEvaluateFeatureMiddlewares(stack *middleware.S
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opBatchEvaluateFeature(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

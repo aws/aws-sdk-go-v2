@@ -6,23 +6,28 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Releases the specified Elastic IP address. [Default VPC] Releasing an Elastic
-// IP address automatically disassociates it from any instance that it's associated
-// with. To disassociate an Elastic IP address without releasing it, use
-// DisassociateAddress . [Nondefault VPC] You must use DisassociateAddress to
-// disassociate the Elastic IP address before you can release it. Otherwise, Amazon
-// EC2 returns an error ( InvalidIPAddress.InUse ). After releasing an Elastic IP
-// address, it is released to the IP address pool. Be sure to update your DNS
-// records and any servers or devices that communicate with the address. If you
-// attempt to release an Elastic IP address that you already released, you'll get
-// an AuthFailure error if the address is already allocated to another Amazon Web
-// Services account. After you release an Elastic IP address, you might be able to
-// recover it. For more information, see AllocateAddress .
+// Releases the specified Elastic IP address.
+//
+// [Default VPC] Releasing an Elastic IP address automatically disassociates it
+// from any instance that it's associated with. To disassociate an Elastic IP
+// address without releasing it, use DisassociateAddress.
+//
+// [Nondefault VPC] You must use DisassociateAddress to disassociate the Elastic IP address before
+// you can release it. Otherwise, Amazon EC2 returns an error (
+// InvalidIPAddress.InUse ).
+//
+// After releasing an Elastic IP address, it is released to the IP address pool.
+// Be sure to update your DNS records and any servers or devices that communicate
+// with the address. If you attempt to release an Elastic IP address that you
+// already released, you'll get an AuthFailure error if the address is already
+// allocated to another Amazon Web Services account.
+//
+// After you release an Elastic IP address, you might be able to recover it. For
+// more information, see AllocateAddress.
 func (c *Client) ReleaseAddress(ctx context.Context, params *ReleaseAddressInput, optFns ...func(*Options)) (*ReleaseAddressOutput, error) {
 	if params == nil {
 		params = &ReleaseAddressInput{}
@@ -50,8 +55,10 @@ type ReleaseAddressInput struct {
 	DryRun *bool
 
 	// The set of Availability Zones, Local Zones, or Wavelength Zones from which
-	// Amazon Web Services advertises IP addresses. If you provide an incorrect network
-	// border group, you receive an InvalidAddress.NotFound error.
+	// Amazon Web Services advertises IP addresses.
+	//
+	// If you provide an incorrect network border group, you receive an
+	// InvalidAddress.NotFound error.
 	NetworkBorderGroup *string
 
 	// Deprecated.
@@ -89,25 +96,25 @@ func (c *Client) addOperationReleaseAddressMiddlewares(stack *middleware.Stack, 
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -122,10 +129,13 @@ func (c *Client) addOperationReleaseAddressMiddlewares(stack *middleware.Stack, 
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opReleaseAddress(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -52,8 +51,36 @@ type UpdateModelPackageInput struct {
 	// The metadata properties associated with the model package versions to remove.
 	CustomerMetadataPropertiesToRemove []string
 
+	// Specifies details about inference jobs that you can run with models based on
+	// this model package, including the following information:
+	//
+	//   - The Amazon ECR paths of containers that contain the inference code and
+	//   model artifacts.
+	//
+	//   - The instance types that the model package supports for transform jobs and
+	//   real-time endpoints used for inference.
+	//
+	//   - The input and output content formats that the model package supports for
+	//   inference.
+	InferenceSpecification *types.InferenceSpecification
+
 	// The approval status of the model.
 	ModelApprovalStatus types.ModelApprovalStatus
+
+	// The model card associated with the model package. Since ModelPackageModelCard
+	// is tied to a model package, it is a specific usage of a model card and its
+	// schema is simplified compared to the schema of ModelCard . The
+	// ModelPackageModelCard schema does not include model_package_details , and
+	// model_overview is composed of the model_creator and model_artifact properties.
+	// For more information about the model package model card schema, see [Model package model card schema]. For more
+	// information about the model card associated with the model package, see [View the Details of a Model Version].
+	//
+	// [Model package model card schema]: https://docs.aws.amazon.com/sagemaker/latest/dg/model-registry-details.html#model-card-schema
+	// [View the Details of a Model Version]: https://docs.aws.amazon.com/sagemaker/latest/dg/model-registry-details.html
+	ModelCard *types.ModelPackageModelCard
+
+	// The URI of the source for the model package.
+	SourceUri *string
 
 	noSmithyDocumentSerde
 }
@@ -93,25 +120,25 @@ func (c *Client) addOperationUpdateModelPackageMiddlewares(stack *middleware.Sta
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -126,13 +153,16 @@ func (c *Client) addOperationUpdateModelPackageMiddlewares(stack *middleware.Sta
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpUpdateModelPackageValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateModelPackage(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

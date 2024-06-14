@@ -6,22 +6,25 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/organizations/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Lists the root or organizational units (OUs) that serve as the immediate parent
-// of the specified child OU or account. This operation, along with ListChildren
-// enables you to traverse the tree structure that makes up this root. Always check
-// the NextToken response parameter for a null value when calling a List*
-// operation. These operations can occasionally return an empty set of results even
-// when there are more results available. The NextToken response parameter value
-// is null only when there are no more results to display. This operation can be
-// called only from the organization's management account or by a member account
-// that is a delegated administrator for an Amazon Web Services service. In the
-// current release, a child can have only a single parent.
+// of the specified child OU or account. This operation, along with ListChildrenenables you to
+// traverse the tree structure that makes up this root.
+//
+// Always check the NextToken response parameter for a null value when calling a
+// List* operation. These operations can occasionally return an empty set of
+// results even when there are more results available. The NextToken response
+// parameter value is null only when there are no more results to display.
+//
+// This operation can be called only from the organization's management account or
+// by a member account that is a delegated administrator for an Amazon Web Services
+// service.
+//
+// In the current release, a child can have only a single parent.
 func (c *Client) ListParents(ctx context.Context, params *ListParentsInput, optFns ...func(*Options)) (*ListParentsOutput, error) {
 	if params == nil {
 		params = &ListParentsInput{}
@@ -40,13 +43,18 @@ func (c *Client) ListParents(ctx context.Context, params *ListParentsInput, optF
 type ListParentsInput struct {
 
 	// The unique identifier (ID) of the OU or account whose parent containers you
-	// want to list. Don't specify a root. The regex pattern (http://wikipedia.org/wiki/regex)
-	// for a child ID string requires one of the following:
+	// want to list. Don't specify a root.
+	//
+	// The [regex pattern] for a child ID string requires one of the following:
+	//
 	//   - Account - A string that consists of exactly 12 digits.
+	//
 	//   - Organizational unit (OU) - A string that begins with "ou-" followed by from
 	//   4 to 32 lowercase letters or digits (the ID of the root that contains the OU).
 	//   This string is followed by a second "-" dash and from 8 to 32 additional
 	//   lowercase letters or digits.
+	//
+	// [regex pattern]: http://wikipedia.org/wiki/regex
 	//
 	// This member is required.
 	ChildId *string
@@ -110,25 +118,25 @@ func (c *Client) addOperationListParentsMiddlewares(stack *middleware.Stack, opt
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -143,13 +151,16 @@ func (c *Client) addOperationListParentsMiddlewares(stack *middleware.Stack, opt
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpListParentsValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListParents(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

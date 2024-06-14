@@ -6,13 +6,13 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/billingconductor/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// A paginated call to get a list of all custom line items (FFLIs) for the given
+//	A paginated call to get a list of all custom line items (FFLIs) for the given
+//
 // billing period. If you don't provide a billing period, the current billing
 // period is used.
 func (c *Client) ListCustomLineItems(ctx context.Context, params *ListCustomLineItemsInput, optFns ...func(*Options)) (*ListCustomLineItemsOutput, error) {
@@ -32,17 +32,17 @@ func (c *Client) ListCustomLineItems(ctx context.Context, params *ListCustomLine
 
 type ListCustomLineItemsInput struct {
 
-	// The preferred billing period to get custom line items (FFLIs).
+	//  The preferred billing period to get custom line items (FFLIs).
 	BillingPeriod *string
 
 	// A ListCustomLineItemsFilter that specifies the custom line item names and/or
 	// billing group Amazon Resource Names (ARNs) to retrieve FFLI information.
 	Filters *types.ListCustomLineItemsFilter
 
-	// The maximum number of billing groups to retrieve.
+	//  The maximum number of billing groups to retrieve.
 	MaxResults *int32
 
-	// The pagination token that's used on subsequent calls to get custom line items
+	//  The pagination token that's used on subsequent calls to get custom line items
 	// (FFLIs).
 	NextToken *string
 
@@ -51,10 +51,10 @@ type ListCustomLineItemsInput struct {
 
 type ListCustomLineItemsOutput struct {
 
-	// A list of FreeFormLineItemListElements received.
+	//  A list of FreeFormLineItemListElements received.
 	CustomLineItems []types.CustomLineItemListElement
 
-	// The pagination token that's used on subsequent calls to get custom line items
+	//  The pagination token that's used on subsequent calls to get custom line items
 	// (FFLIs).
 	NextToken *string
 
@@ -86,25 +86,25 @@ func (c *Client) addOperationListCustomLineItemsMiddlewares(stack *middleware.St
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -119,10 +119,13 @@ func (c *Client) addOperationListCustomLineItemsMiddlewares(stack *middleware.St
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListCustomLineItems(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -151,7 +154,7 @@ var _ ListCustomLineItemsAPIClient = (*Client)(nil)
 // ListCustomLineItemsPaginatorOptions is the paginator options for
 // ListCustomLineItems
 type ListCustomLineItemsPaginatorOptions struct {
-	// The maximum number of billing groups to retrieve.
+	//  The maximum number of billing groups to retrieve.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

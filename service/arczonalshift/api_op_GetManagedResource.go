@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/arczonalshift/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -16,9 +15,11 @@ import (
 // Amazon Route 53 Application Recovery Controller in this Amazon Web Services
 // Region. Resources that are registered for zonal shifts are managed resources in
 // Route 53 ARC. You can start zonal shifts and configure zonal autoshift for
-// managed resources. At this time, you can only start a zonal shift or configure
-// zonal autoshift for Network Load Balancers and Application Load Balancers with
-// cross-zone load balancing turned off.
+// managed resources.
+//
+// At this time, you can only start a zonal shift or configure zonal autoshift for
+// Network Load Balancers and Application Load Balancers with cross-zone load
+// balancing turned off.
 func (c *Client) GetManagedResource(ctx context.Context, params *GetManagedResourceInput, optFns ...func(*Options)) (*GetManagedResourceOutput, error) {
 	if params == nil {
 		params = &GetManagedResourceInput{}
@@ -37,9 +38,10 @@ func (c *Client) GetManagedResource(ctx context.Context, params *GetManagedResou
 type GetManagedResourceInput struct {
 
 	// The identifier for the resource to shift away traffic for. The identifier is
-	// the Amazon Resource Name (ARN) for the resource. At this time, supported
-	// resources are Network Load Balancers and Application Load Balancers with
-	// cross-zone load balancing turned off.
+	// the Amazon Resource Name (ARN) for the resource.
+	//
+	// At this time, supported resources are Network Load Balancers and Application
+	// Load Balancers with cross-zone load balancing turned off.
 	//
 	// This member is required.
 	ResourceIdentifier *string
@@ -109,25 +111,25 @@ func (c *Client) addOperationGetManagedResourceMiddlewares(stack *middleware.Sta
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -142,13 +144,16 @@ func (c *Client) addOperationGetManagedResourceMiddlewares(stack *middleware.Sta
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpGetManagedResourceValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetManagedResource(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

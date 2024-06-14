@@ -6,21 +6,25 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes one or more versions of a launch template. You can't delete the default
-// version of a launch template; you must first assign a different version as the
-// default. If the default version is the only version for the launch template, you
-// must delete the entire launch template using DeleteLaunchTemplate . You can
-// delete up to 200 launch template versions in a single request. To delete more
-// than 200 versions in a single request, use DeleteLaunchTemplate , which deletes
-// the launch template and all of its versions. For more information, see Delete a
-// launch template version (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/manage-launch-template-versions.html#delete-launch-template-version)
-// in the EC2 User Guide.
+// Deletes one or more versions of a launch template.
+//
+// You can't delete the default version of a launch template; you must first
+// assign a different version as the default. If the default version is the only
+// version for the launch template, you must delete the entire launch template
+// using DeleteLaunchTemplate.
+//
+// You can delete up to 200 launch template versions in a single request. To
+// delete more than 200 versions in a single request, use DeleteLaunchTemplate, which deletes the
+// launch template and all of its versions.
+//
+// For more information, see [Delete a launch template version] in the Amazon EC2 User Guide.
+//
+// [Delete a launch template version]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/manage-launch-template-versions.html#delete-launch-template-version
 func (c *Client) DeleteLaunchTemplateVersions(ctx context.Context, params *DeleteLaunchTemplateVersionsInput, optFns ...func(*Options)) (*DeleteLaunchTemplateVersionsOutput, error) {
 	if params == nil {
 		params = &DeleteLaunchTemplateVersionsInput{}
@@ -50,12 +54,16 @@ type DeleteLaunchTemplateVersionsInput struct {
 	// UnauthorizedOperation .
 	DryRun *bool
 
-	// The ID of the launch template. You must specify either the LaunchTemplateId or
-	// the LaunchTemplateName , but not both.
+	// The ID of the launch template.
+	//
+	// You must specify either the launch template ID or the launch template name, but
+	// not both.
 	LaunchTemplateId *string
 
-	// The name of the launch template. You must specify either the LaunchTemplateName
-	// or the LaunchTemplateId , but not both.
+	// The name of the launch template.
+	//
+	// You must specify either the launch template ID or the launch template name, but
+	// not both.
 	LaunchTemplateName *string
 
 	noSmithyDocumentSerde
@@ -97,25 +105,25 @@ func (c *Client) addOperationDeleteLaunchTemplateVersionsMiddlewares(stack *midd
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -130,13 +138,16 @@ func (c *Client) addOperationDeleteLaunchTemplateVersionsMiddlewares(stack *midd
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDeleteLaunchTemplateVersionsValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteLaunchTemplateVersions(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

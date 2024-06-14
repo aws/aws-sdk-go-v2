@@ -6,16 +6,17 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/workdocs/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Describes the specified users. You can describe all users or filter the results
-// (for example, by status or organization). By default, Amazon WorkDocs returns
-// the first 24 active or pending users. If there are more results, the response
-// includes a marker that you can use to request the next set of results.
+// (for example, by status or organization).
+//
+// By default, Amazon WorkDocs returns the first 24 active or pending users. If
+// there are more results, the response includes a marker that you can use to
+// request the next set of results.
 func (c *Client) DescribeUsers(ctx context.Context, params *DescribeUsersInput, optFns ...func(*Options)) (*DescribeUsersOutput, error) {
 	if params == nil {
 		params = &DescribeUsersInput{}
@@ -59,17 +60,22 @@ type DescribeUsersInput struct {
 
 	// A query to filter users by user name. Remember the following about the Userids
 	// and Query parameters:
+	//
 	//   - If you don't use either parameter, the API returns a paginated list of all
 	//   users on the site.
+	//
 	//   - If you use both parameters, the API ignores the Query parameter.
+	//
 	//   - The Userid parameter only returns user names that match a corresponding user
 	//   ID.
+	//
 	//   - The Query parameter runs a "prefix" search for users by the GivenName ,
-	//   SurName , or UserName fields included in a CreateUser (https://docs.aws.amazon.com/workdocs/latest/APIReference/API_CreateUser.html)
-	//   API call. For example, querying on Ma returns Márcia Oliveira, María García,
-	//   and Mateo Jackson. If you use multiple characters, the API only returns data
-	//   that matches all characters. For example, querying on Ma J only returns Mateo
-	//   Jackson.
+	//   SurName , or UserName fields included in a [CreateUser]API call. For example, querying on
+	//   Ma returns Márcia Oliveira, María García, and Mateo Jackson. If you use
+	//   multiple characters, the API only returns data that matches all characters. For
+	//   example, querying on Ma J only returns Mateo Jackson.
+	//
+	// [CreateUser]: https://docs.aws.amazon.com/workdocs/latest/APIReference/API_CreateUser.html
 	Query *string
 
 	// The sorting criteria.
@@ -123,25 +129,25 @@ func (c *Client) addOperationDescribeUsersMiddlewares(stack *middleware.Stack, o
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -156,10 +162,13 @@ func (c *Client) addOperationDescribeUsersMiddlewares(stack *middleware.Stack, o
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeUsers(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

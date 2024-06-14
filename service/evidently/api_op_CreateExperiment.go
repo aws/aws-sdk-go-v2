@@ -6,23 +6,26 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/evidently/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates an Evidently experiment. Before you create an experiment, you must
-// create the feature to use for the experiment. An experiment helps you make
-// feature design decisions based on evidence and data. An experiment can test as
-// many as five variations at once. Evidently collects experiment data and analyzes
-// it by statistical methods, and provides clear recommendations about which
-// variations perform better. You can optionally specify a segment to have the
-// experiment consider only certain audience types in the experiment, such as using
-// only user sessions from a certain location or who use a certain internet
-// browser. Don't use this operation to update an existing experiment. Instead, use
-// UpdateExperiment (https://docs.aws.amazon.com/cloudwatchevidently/latest/APIReference/API_UpdateExperiment.html)
-// .
+// create the feature to use for the experiment.
+//
+// An experiment helps you make feature design decisions based on evidence and
+// data. An experiment can test as many as five variations at once. Evidently
+// collects experiment data and analyzes it by statistical methods, and provides
+// clear recommendations about which variations perform better.
+//
+// You can optionally specify a segment to have the experiment consider only
+// certain audience types in the experiment, such as using only user sessions from
+// a certain location or who use a certain internet browser.
+//
+// Don't use this operation to update an existing experiment. Instead, use [UpdateExperiment].
+//
+// [UpdateExperiment]: https://docs.aws.amazon.com/cloudwatchevidently/latest/APIReference/API_UpdateExperiment.html
 func (c *Client) CreateExperiment(ctx context.Context, params *CreateExperimentInput, optFns ...func(*Options)) (*CreateExperimentOutput, error) {
 	if params == nil {
 		params = &CreateExperimentInput{}
@@ -81,8 +84,10 @@ type CreateExperimentInput struct {
 	// The portion of the available audience that you want to allocate to this
 	// experiment, in thousandths of a percent. The available audience is the total
 	// audience minus the audience that you have allocated to overrides or current
-	// launches of this feature. This is represented in thousandths of a percent. For
-	// example, specify 10,000 to allocate 10% of the available audience.
+	// launches of this feature.
+	//
+	// This is represented in thousandths of a percent. For example, specify 10,000 to
+	// allocate 10% of the available audience.
 	SamplingRate *int64
 
 	// Specifies an audience segment to use in the experiment. When a segment is used
@@ -90,14 +95,20 @@ type CreateExperimentInput struct {
 	// the experiment.
 	Segment *string
 
-	// Assigns one or more tags (key-value pairs) to the experiment. Tags can help you
-	// organize and categorize your resources. You can also use them to scope user
-	// permissions by granting a user permission to access or change only resources
-	// with certain tag values. Tags don't have any semantic meaning to Amazon Web
-	// Services and are interpreted strictly as strings of characters. You can
-	// associate as many as 50 tags with an experiment. For more information, see
-	// Tagging Amazon Web Services resources (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html)
-	// .
+	// Assigns one or more tags (key-value pairs) to the experiment.
+	//
+	// Tags can help you organize and categorize your resources. You can also use them
+	// to scope user permissions by granting a user permission to access or change only
+	// resources with certain tag values.
+	//
+	// Tags don't have any semantic meaning to Amazon Web Services and are interpreted
+	// strictly as strings of characters.
+	//
+	// You can associate as many as 50 tags with an experiment.
+	//
+	// For more information, see [Tagging Amazon Web Services resources].
+	//
+	// [Tagging Amazon Web Services resources]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
 	Tags map[string]string
 
 	noSmithyDocumentSerde
@@ -139,25 +150,25 @@ func (c *Client) addOperationCreateExperimentMiddlewares(stack *middleware.Stack
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -172,13 +183,16 @@ func (c *Client) addOperationCreateExperimentMiddlewares(stack *middleware.Stack
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpCreateExperimentValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateExperiment(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

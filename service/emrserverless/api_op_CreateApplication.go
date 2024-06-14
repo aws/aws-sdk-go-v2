@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/emrserverless/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -63,6 +62,10 @@ type CreateApplicationInput struct {
 	// The capacity to initialize when the application is created.
 	InitialCapacity map[string]types.InitialCapacityConfig
 
+	// The interactive configuration object that enables the interactive use cases to
+	// use when running an application.
+	InteractiveConfiguration *types.InteractiveConfiguration
+
 	// The maximum capacity to allocate when the application is created. This is
 	// cumulative across all workers at any given point in time, not just when an
 	// application is created. No new resources will be created once any one of the
@@ -78,10 +81,11 @@ type CreateApplicationInput struct {
 	// The network configuration for customer VPC connectivity.
 	NetworkConfiguration *types.NetworkConfiguration
 
-	// The Configuration (https://docs.aws.amazon.com/emr-serverless/latest/APIReference/API_Configuration.html)
-	// specifications to use when creating an application. Each configuration consists
-	// of a classification and properties. This configuration is applied to all the job
-	// runs submitted under the application.
+	// The [Configuration] specifications to use when creating an application. Each configuration
+	// consists of a classification and properties. This configuration is applied to
+	// all the job runs submitted under the application.
+	//
+	// [Configuration]: https://docs.aws.amazon.com/emr-serverless/latest/APIReference/API_Configuration.html
 	RuntimeConfiguration []types.Configuration
 
 	// The tags assigned to the application.
@@ -141,25 +145,25 @@ func (c *Client) addOperationCreateApplicationMiddlewares(stack *middleware.Stac
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -174,6 +178,9 @@ func (c *Client) addOperationCreateApplicationMiddlewares(stack *middleware.Stac
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opCreateApplicationMiddleware(stack, options); err != nil {
 		return err
 	}
@@ -183,7 +190,7 @@ func (c *Client) addOperationCreateApplicationMiddlewares(stack *middleware.Stac
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateApplication(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

@@ -15802,6 +15802,61 @@ func (m *awsAwsjson11_serializeOpUpdateCluster) HandleSerialize(ctx context.Cont
 	return next.HandleSerialize(ctx, in)
 }
 
+type awsAwsjson11_serializeOpUpdateClusterSoftware struct {
+}
+
+func (*awsAwsjson11_serializeOpUpdateClusterSoftware) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson11_serializeOpUpdateClusterSoftware) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*UpdateClusterSoftwareInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("SageMaker.UpdateClusterSoftware")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeOpDocumentUpdateClusterSoftwareInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
 type awsAwsjson11_serializeOpUpdateCodeRepository struct {
 }
 
@@ -18083,6 +18138,17 @@ func awsAwsjson11_serializeDocumentAttributeNames(v []string, value smithyjson.V
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentAuthenticationRequestExtraParams(v map[string]string, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	for key := range v {
+		om := object.Key(key)
+		om.String(v[key])
+	}
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentAutoMLAlgorithmConfig(v *types.AutoMLAlgorithmConfig, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -19294,9 +19360,37 @@ func awsAwsjson11_serializeDocumentClusterLifeCycleConfig(v *types.ClusterLifeCy
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentCodeEditorAppImageConfig(v *types.CodeEditorAppImageConfig, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ContainerConfig != nil {
+		ok := object.Key("ContainerConfig")
+		if err := awsAwsjson11_serializeDocumentContainerConfig(v.ContainerConfig, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.FileSystemConfig != nil {
+		ok := object.Key("FileSystemConfig")
+		if err := awsAwsjson11_serializeDocumentFileSystemConfig(v.FileSystemConfig, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentCodeEditorAppSettings(v *types.CodeEditorAppSettings, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.CustomImages != nil {
+		ok := object.Key("CustomImages")
+		if err := awsAwsjson11_serializeDocumentCustomImages(v.CustomImages, ok); err != nil {
+			return err
+		}
+	}
 
 	if v.DefaultResourceSpec != nil {
 		ok := object.Key("DefaultResourceSpec")
@@ -20219,9 +20313,30 @@ func awsAwsjson11_serializeDocumentDefaultSpaceSettings(v *types.DefaultSpaceSet
 	object := value.Object()
 	defer object.Close()
 
+	if v.CustomFileSystemConfigs != nil {
+		ok := object.Key("CustomFileSystemConfigs")
+		if err := awsAwsjson11_serializeDocumentCustomFileSystemConfigs(v.CustomFileSystemConfigs, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.CustomPosixUserConfig != nil {
+		ok := object.Key("CustomPosixUserConfig")
+		if err := awsAwsjson11_serializeDocumentCustomPosixUserConfig(v.CustomPosixUserConfig, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.ExecutionRole != nil {
 		ok := object.Key("ExecutionRole")
 		ok.String(*v.ExecutionRole)
+	}
+
+	if v.JupyterLabAppSettings != nil {
+		ok := object.Key("JupyterLabAppSettings")
+		if err := awsAwsjson11_serializeDocumentJupyterLabAppSettings(v.JupyterLabAppSettings, ok); err != nil {
+			return err
+		}
 	}
 
 	if v.JupyterServerAppSettings != nil {
@@ -20241,6 +20356,13 @@ func awsAwsjson11_serializeDocumentDefaultSpaceSettings(v *types.DefaultSpaceSet
 	if v.SecurityGroups != nil {
 		ok := object.Key("SecurityGroups")
 		if err := awsAwsjson11_serializeDocumentSecurityGroupIds(v.SecurityGroups, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.SpaceStorageSettings != nil {
+		ok := object.Key("SpaceStorageSettings")
+		if err := awsAwsjson11_serializeDocumentDefaultSpaceStorageSettings(v.SpaceStorageSettings, ok); err != nil {
 			return err
 		}
 	}
@@ -22057,6 +22179,23 @@ func awsAwsjson11_serializeDocumentHyperParameterTuningResourceConfig(v *types.H
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentIamPolicyConstraints(v *types.IamPolicyConstraints, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.SourceIp) > 0 {
+		ok := object.Key("SourceIp")
+		ok.String(string(v.SourceIp))
+	}
+
+	if len(v.VpcSourceIp) > 0 {
+		ok := object.Key("VpcSourceIp")
+		ok.String(string(v.VpcSourceIp))
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentIdentityProviderOAuthSetting(v *types.IdentityProviderOAuthSetting, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -23487,6 +23626,13 @@ func awsAwsjson11_serializeDocumentModelPackageContainerDefinition(v *types.Mode
 		ok.String(*v.ImageDigest)
 	}
 
+	if v.ModelDataSource != nil {
+		ok := object.Key("ModelDataSource")
+		if err := awsAwsjson11_serializeDocumentModelDataSource(v.ModelDataSource, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.ModelDataUrl != nil {
 		ok := object.Key("ModelDataUrl")
 		ok.String(*v.ModelDataUrl)
@@ -23522,6 +23668,35 @@ func awsAwsjson11_serializeDocumentModelPackageContainerDefinitionList(v []types
 			return err
 		}
 	}
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentModelPackageModelCard(v *types.ModelPackageModelCard, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ModelCardContent != nil {
+		ok := object.Key("ModelCardContent")
+		ok.String(*v.ModelCardContent)
+	}
+
+	if len(v.ModelCardStatus) > 0 {
+		ok := object.Key("ModelCardStatus")
+		ok.String(string(v.ModelCardStatus))
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentModelPackageSecurityConfig(v *types.ModelPackageSecurityConfig, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.KmsKeyId != nil {
+		ok := object.Key("KmsKeyId")
+		ok.String(*v.KmsKeyId)
+	}
+
 	return nil
 }
 
@@ -24408,6 +24583,13 @@ func awsAwsjson11_serializeDocumentOidcConfig(v *types.OidcConfig, value smithyj
 	object := value.Object()
 	defer object.Close()
 
+	if v.AuthenticationRequestExtraParams != nil {
+		ok := object.Key("AuthenticationRequestExtraParams")
+		if err := awsAwsjson11_serializeDocumentAuthenticationRequestExtraParams(v.AuthenticationRequestExtraParams, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.AuthorizationEndpoint != nil {
 		ok := object.Key("AuthorizationEndpoint")
 		ok.String(*v.AuthorizationEndpoint)
@@ -24436,6 +24618,11 @@ func awsAwsjson11_serializeDocumentOidcConfig(v *types.OidcConfig, value smithyj
 	if v.LogoutEndpoint != nil {
 		ok := object.Key("LogoutEndpoint")
 		ok.String(*v.LogoutEndpoint)
+	}
+
+	if v.Scope != nil {
+		ok := object.Key("Scope")
+		ok.String(*v.Scope)
 	}
 
 	if v.TokenEndpoint != nil {
@@ -25084,6 +25271,11 @@ func awsAwsjson11_serializeDocumentProductionVariant(v *types.ProductionVariant,
 	if v.EnableSSMAccess != nil {
 		ok := object.Key("EnableSSMAccess")
 		ok.Boolean(*v.EnableSSMAccess)
+	}
+
+	if len(v.InferenceAmiVersion) > 0 {
+		ok := object.Key("InferenceAmiVersion")
+		ok.String(string(v.InferenceAmiVersion))
 	}
 
 	if v.InitialInstanceCount != nil {
@@ -26305,6 +26497,20 @@ func awsAwsjson11_serializeDocumentS3ModelDataSource(v *types.S3ModelDataSource,
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentS3Presign(v *types.S3Presign, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.IamPolicyConstraints != nil {
+		ok := object.Key("IamPolicyConstraints")
+		if err := awsAwsjson11_serializeDocumentIamPolicyConstraints(v.IamPolicyConstraints, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentS3StorageConfig(v *types.S3StorageConfig, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -26526,6 +26732,18 @@ func awsAwsjson11_serializeDocumentServiceCatalogProvisioningUpdateDetails(v *ty
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentSessionChainingConfig(v *types.SessionChainingConfig, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.EnableSessionTagChaining != nil {
+		ok := object.Key("EnableSessionTagChaining")
+		ok.Boolean(*v.EnableSessionTagChaining)
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentShadowModeConfig(v *types.ShadowModeConfig, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -26616,6 +26834,13 @@ func awsAwsjson11_serializeDocumentSourceAlgorithm(v *types.SourceAlgorithm, val
 	if v.AlgorithmName != nil {
 		ok := object.Key("AlgorithmName")
 		ok.String(*v.AlgorithmName)
+	}
+
+	if v.ModelDataSource != nil {
+		ok := object.Key("ModelDataSource")
+		if err := awsAwsjson11_serializeDocumentModelDataSource(v.ModelDataSource, ok); err != nil {
+			return err
+		}
 	}
 
 	if v.ModelDataUrl != nil {
@@ -27151,6 +27376,13 @@ func awsAwsjson11_serializeDocumentTimeSeriesConfig(v *types.TimeSeriesConfig, v
 func awsAwsjson11_serializeDocumentTimeSeriesForecastingJobConfig(v *types.TimeSeriesForecastingJobConfig, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.CandidateGenerationConfig != nil {
+		ok := object.Key("CandidateGenerationConfig")
+		if err := awsAwsjson11_serializeDocumentCandidateGenerationConfig(v.CandidateGenerationConfig, ok); err != nil {
+			return err
+		}
+	}
 
 	if v.CompletionCriteria != nil {
 		ok := object.Key("CompletionCriteria")
@@ -28094,6 +28326,20 @@ func awsAwsjson11_serializeDocumentVpcSecurityGroupIds(v []string, value smithyj
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentWorkerAccessConfiguration(v *types.WorkerAccessConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.S3Presign != nil {
+		ok := object.Key("S3Presign")
+		if err := awsAwsjson11_serializeDocumentS3Presign(v.S3Presign, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentWorkforceSecurityGroupIds(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
@@ -28343,6 +28589,13 @@ func awsAwsjson11_serializeOpDocumentCreateAppImageConfigInput(v *CreateAppImage
 	if v.AppImageConfigName != nil {
 		ok := object.Key("AppImageConfigName")
 		ok.String(*v.AppImageConfigName)
+	}
+
+	if v.CodeEditorAppImageConfig != nil {
+		ok := object.Key("CodeEditorAppImageConfig")
+		if err := awsAwsjson11_serializeDocumentCodeEditorAppImageConfig(v.CodeEditorAppImageConfig, ok); err != nil {
+			return err
+		}
 	}
 
 	if v.JupyterLabAppImageConfig != nil {
@@ -30126,6 +30379,13 @@ func awsAwsjson11_serializeOpDocumentCreateModelPackageInput(v *CreateModelPacka
 		ok.String(string(v.ModelApprovalStatus))
 	}
 
+	if v.ModelCard != nil {
+		ok := object.Key("ModelCard")
+		if err := awsAwsjson11_serializeDocumentModelPackageModelCard(v.ModelCard, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.ModelMetrics != nil {
 		ok := object.Key("ModelMetrics")
 		if err := awsAwsjson11_serializeDocumentModelMetrics(v.ModelMetrics, ok); err != nil {
@@ -30153,6 +30413,13 @@ func awsAwsjson11_serializeOpDocumentCreateModelPackageInput(v *CreateModelPacka
 		ok.String(*v.SamplePayloadUrl)
 	}
 
+	if v.SecurityConfig != nil {
+		ok := object.Key("SecurityConfig")
+		if err := awsAwsjson11_serializeDocumentModelPackageSecurityConfig(v.SecurityConfig, ok); err != nil {
+			return err
+		}
+	}
+
 	if len(v.SkipModelValidation) > 0 {
 		ok := object.Key("SkipModelValidation")
 		ok.String(string(v.SkipModelValidation))
@@ -30163,6 +30430,11 @@ func awsAwsjson11_serializeOpDocumentCreateModelPackageInput(v *CreateModelPacka
 		if err := awsAwsjson11_serializeDocumentSourceAlgorithmSpecification(v.SourceAlgorithmSpecification, ok); err != nil {
 			return err
 		}
+	}
+
+	if v.SourceUri != nil {
+		ok := object.Key("SourceUri")
+		ok.String(*v.SourceUri)
 	}
 
 	if v.Tags != nil {
@@ -30840,6 +31112,13 @@ func awsAwsjson11_serializeOpDocumentCreateTrainingJobInput(v *CreateTrainingJob
 		ok.String(*v.RoleArn)
 	}
 
+	if v.SessionChainingConfig != nil {
+		ok := object.Key("SessionChainingConfig")
+		if err := awsAwsjson11_serializeDocumentSessionChainingConfig(v.SessionChainingConfig, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.StoppingCondition != nil {
 		ok := object.Key("StoppingCondition")
 		if err := awsAwsjson11_serializeDocumentStoppingCondition(v.StoppingCondition, ok); err != nil {
@@ -31190,6 +31469,13 @@ func awsAwsjson11_serializeOpDocumentCreateWorkteamInput(v *CreateWorkteamInput,
 	if v.Tags != nil {
 		ok := object.Key("Tags")
 		if err := awsAwsjson11_serializeDocumentTagList(v.Tags, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.WorkerAccessConfiguration != nil {
+		ok := object.Key("WorkerAccessConfiguration")
+		if err := awsAwsjson11_serializeDocumentWorkerAccessConfiguration(v.WorkerAccessConfiguration, ok); err != nil {
 			return err
 		}
 	}
@@ -35096,6 +35382,11 @@ func awsAwsjson11_serializeOpDocumentListModelPackageGroupsInput(v *ListModelPac
 		ok.Double(smithytime.FormatEpochSeconds(*v.CreationTimeBefore))
 	}
 
+	if len(v.CrossAccountFilterOption) > 0 {
+		ok := object.Key("CrossAccountFilterOption")
+		ok.String(string(v.CrossAccountFilterOption))
+	}
+
 	if v.MaxResults != nil {
 		ok := object.Key("MaxResults")
 		ok.Integer(*v.MaxResults)
@@ -37011,6 +37302,13 @@ func awsAwsjson11_serializeOpDocumentUpdateAppImageConfigInput(v *UpdateAppImage
 		ok.String(*v.AppImageConfigName)
 	}
 
+	if v.CodeEditorAppImageConfig != nil {
+		ok := object.Key("CodeEditorAppImageConfig")
+		if err := awsAwsjson11_serializeDocumentCodeEditorAppImageConfig(v.CodeEditorAppImageConfig, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.JupyterLabAppImageConfig != nil {
 		ok := object.Key("JupyterLabAppImageConfig")
 		if err := awsAwsjson11_serializeDocumentJupyterLabAppImageConfig(v.JupyterLabAppImageConfig, ok); err != nil {
@@ -37073,6 +37371,18 @@ func awsAwsjson11_serializeOpDocumentUpdateClusterInput(v *UpdateClusterInput, v
 		if err := awsAwsjson11_serializeDocumentClusterInstanceGroupSpecifications(v.InstanceGroups, ok); err != nil {
 			return err
 		}
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeOpDocumentUpdateClusterSoftwareInput(v *UpdateClusterSoftwareInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ClusterName != nil {
+		ok := object.Key("ClusterName")
+		ok.String(*v.ClusterName)
 	}
 
 	return nil
@@ -37658,14 +37968,33 @@ func awsAwsjson11_serializeOpDocumentUpdateModelPackageInput(v *UpdateModelPacka
 		}
 	}
 
+	if v.InferenceSpecification != nil {
+		ok := object.Key("InferenceSpecification")
+		if err := awsAwsjson11_serializeDocumentInferenceSpecification(v.InferenceSpecification, ok); err != nil {
+			return err
+		}
+	}
+
 	if len(v.ModelApprovalStatus) > 0 {
 		ok := object.Key("ModelApprovalStatus")
 		ok.String(string(v.ModelApprovalStatus))
 	}
 
+	if v.ModelCard != nil {
+		ok := object.Key("ModelCard")
+		if err := awsAwsjson11_serializeDocumentModelPackageModelCard(v.ModelCard, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.ModelPackageArn != nil {
 		ok := object.Key("ModelPackageArn")
 		ok.String(*v.ModelPackageArn)
+	}
+
+	if v.SourceUri != nil {
+		ok := object.Key("SourceUri")
+		ok.String(*v.SourceUri)
 	}
 
 	return nil
@@ -38170,6 +38499,13 @@ func awsAwsjson11_serializeOpDocumentUpdateWorkteamInput(v *UpdateWorkteamInput,
 	if v.NotificationConfiguration != nil {
 		ok := object.Key("NotificationConfiguration")
 		if err := awsAwsjson11_serializeDocumentNotificationConfiguration(v.NotificationConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.WorkerAccessConfiguration != nil {
+		ok := object.Key("WorkerAccessConfiguration")
+		if err := awsAwsjson11_serializeDocumentWorkerAccessConfiguration(v.WorkerAccessConfiguration, ok); err != nil {
 			return err
 		}
 	}

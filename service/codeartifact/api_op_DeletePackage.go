@@ -6,16 +6,15 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/codeartifact/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Deletes a package and all associated package versions. A deleted package cannot
-// be restored. To delete one or more package versions, use the
-// DeletePackageVersions (https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_DeletePackageVersions.html)
-// API.
+// be restored. To delete one or more package versions, use the [DeletePackageVersions]API.
+//
+// [DeletePackageVersions]: https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_DeletePackageVersions.html
 func (c *Client) DeletePackage(ctx context.Context, params *DeletePackageInput, optFns ...func(*Options)) (*DeletePackageOutput, error) {
 	if params == nil {
 		params = &DeletePackageInput{}
@@ -53,18 +52,29 @@ type DeletePackageInput struct {
 	// This member is required.
 	Repository *string
 
-	// The 12-digit account number of the Amazon Web Services account that owns the
+	//  The 12-digit account number of the Amazon Web Services account that owns the
 	// domain. It does not include dashes or spaces.
 	DomainOwner *string
 
 	// The namespace of the package to delete. The package component that specifies
 	// its namespace depends on its type. For example:
-	//   - The namespace of a Maven package is its groupId . The namespace is required
-	//   when deleting Maven package versions.
-	//   - The namespace of an npm package is its scope .
-	//   - Python and NuGet packages do not contain corresponding components, packages
-	//   of those formats do not have a namespace.
+	//
+	// The namespace is required when deleting packages of the following formats:
+	//
+	//   - Maven
+	//
+	//   - Swift
+	//
+	//   - generic
+	//
+	//   - The namespace of a Maven package version is its groupId .
+	//
+	//   - The namespace of an npm or Swift package version is its scope .
+	//
 	//   - The namespace of a generic package is its namespace .
+	//
+	//   - Python, NuGet, and Ruby package versions do not contain a corresponding
+	//   component, package versions of those formats do not have a namespace.
 	Namespace *string
 
 	noSmithyDocumentSerde
@@ -72,7 +82,7 @@ type DeletePackageInput struct {
 
 type DeletePackageOutput struct {
 
-	// Details about a package, including its format, namespace, and name.
+	//  Details about a package, including its format, namespace, and name.
 	DeletedPackage *types.PackageSummary
 
 	// Metadata pertaining to the operation's result.
@@ -103,25 +113,25 @@ func (c *Client) addOperationDeletePackageMiddlewares(stack *middleware.Stack, o
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -136,13 +146,16 @@ func (c *Client) addOperationDeletePackageMiddlewares(stack *middleware.Stack, o
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDeletePackageValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDeletePackage(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/amp/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -34,21 +33,27 @@ func (c *Client) ListScrapers(ctx context.Context, params *ListScrapersInput, op
 type ListScrapersInput struct {
 
 	// (Optional) A list of key-value pairs to filter the list of scrapers returned.
-	// Keys include status , sourceArn , destinationArn , and alias . Filters on the
-	// same key are OR 'd together, and filters on different keys are AND 'd together.
-	// For example, status=ACTIVE&status=CREATING&alias=Test , will return all scrapers
-	// that have the alias Test, and are either in status ACTIVE or CREATING. To find
-	// all active scrapers that are sending metrics to a specific Amazon Managed
-	// Service for Prometheus workspace, you would use the ARN of the workspace in a
-	// query:
-	// status=ACTIVE&destinationArn=arn:aws:aps:us-east-1:123456789012:workspace/ws-example1-1234-abcd-56ef-123456789012
+	// Keys include status , sourceArn , destinationArn , and alias .
+	//
+	// Filters on the same key are OR 'd together, and filters on different keys are
+	// AND 'd together. For example, status=ACTIVE&status=CREATING&alias=Test , will
+	// return all scrapers that have the alias Test, and are either in status ACTIVE or
+	// CREATING.
+	//
+	// To find all active scrapers that are sending metrics to a specific Amazon
+	// Managed Service for Prometheus workspace, you would use the ARN of the workspace
+	// in a query:
+	//
+	//     status=ACTIVE&destinationArn=arn:aws:aps:us-east-1:123456789012:workspace/ws-example1-1234-abcd-56ef-123456789012
+	//
 	// If this is included, it filters the results to only the scrapers that match the
 	// filter.
 	Filters map[string][]string
 
 	// Optional) The maximum number of scrapers to return in one ListScrapers
-	// operation. The range is 1-1000. If you omit this parameter, the default of 100
-	// is used.
+	// operation. The range is 1-1000.
+	//
+	// If you omit this parameter, the default of 100 is used.
 	MaxResults *int32
 
 	// (Optional) The token for the next set of items to return. (You received this
@@ -99,25 +104,25 @@ func (c *Client) addOperationListScrapersMiddlewares(stack *middleware.Stack, op
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -132,10 +137,13 @@ func (c *Client) addOperationListScrapersMiddlewares(stack *middleware.Stack, op
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListScrapers(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -163,8 +171,9 @@ var _ ListScrapersAPIClient = (*Client)(nil)
 // ListScrapersPaginatorOptions is the paginator options for ListScrapers
 type ListScrapersPaginatorOptions struct {
 	// Optional) The maximum number of scrapers to return in one ListScrapers
-	// operation. The range is 1-1000. If you omit this parameter, the default of 100
-	// is used.
+	// operation. The range is 1-1000.
+	//
+	// If you omit this parameter, the default of 100 is used.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

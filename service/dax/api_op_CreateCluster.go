@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/dax/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -32,9 +31,13 @@ func (c *Client) CreateCluster(ctx context.Context, params *CreateClusterInput, 
 type CreateClusterInput struct {
 
 	// The cluster identifier. This parameter is stored as a lowercase string.
+	//
 	// Constraints:
+	//
 	//   - A name must contain from 1 to 20 alphanumeric characters or hyphens.
+	//
 	//   - The first character must be a letter.
+	//
 	//   - A name cannot end with a hyphen or contain two consecutive hyphens.
 	//
 	// This member is required.
@@ -57,8 +60,9 @@ type CreateClusterInput struct {
 	// you can create a multiple node cluster with one or more read replicas. To do
 	// this, set ReplicationFactor to a number between 3 (one primary and two read
 	// replicas) and 10 (one primary and nine read replicas). If the AvailabilityZones
-	// parameter is provided, its length must equal the ReplicationFactor . AWS
-	// recommends that you have at least two read replicas per cluster.
+	// parameter is provided, its length must equal the ReplicationFactor .
+	//
+	// AWS recommends that you have at least two read replicas per cluster.
 	//
 	// This member is required.
 	ReplicationFactor int32
@@ -70,7 +74,9 @@ type CreateClusterInput struct {
 	AvailabilityZones []string
 
 	// The type of encryption the cluster's endpoint should support. Values are:
+	//
 	//   - NONE for no encryption
+	//
 	//   - TLS for Transport Layer Security
 	ClusterEndpointEncryptionType types.ClusterEndpointEncryptionType
 
@@ -78,7 +84,9 @@ type CreateClusterInput struct {
 	Description *string
 
 	// The Amazon Resource Name (ARN) of the Amazon SNS topic to which notifications
-	// will be sent. The Amazon SNS topic owner must be same as the DAX cluster owner.
+	// will be sent.
+	//
+	// The Amazon SNS topic owner must be same as the DAX cluster owner.
 	NotificationTopicArn *string
 
 	// The parameter group to be associated with the DAX cluster.
@@ -88,29 +96,42 @@ type CreateClusterInput struct {
 	// performed. It is specified as a range in the format ddd:hh24:mi-ddd:hh24:mi (24H
 	// Clock UTC). The minimum maintenance window is a 60 minute period. Valid values
 	// for ddd are:
+	//
 	//   - sun
+	//
 	//   - mon
+	//
 	//   - tue
+	//
 	//   - wed
+	//
 	//   - thu
+	//
 	//   - fri
+	//
 	//   - sat
-	// Example: sun:05:00-sun:09:00 If you don't specify a preferred maintenance
-	// window when you create or modify a cache cluster, DAX assigns a 60-minute
-	// maintenance window on a randomly selected day of the week.
+	//
+	// Example: sun:05:00-sun:09:00
+	//
+	// If you don't specify a preferred maintenance window when you create or modify a
+	// cache cluster, DAX assigns a 60-minute maintenance window on a randomly selected
+	// day of the week.
 	PreferredMaintenanceWindow *string
 
 	// Represents the settings used to enable server-side encryption on the cluster.
 	SSESpecification *types.SSESpecification
 
 	// A list of security group IDs to be assigned to each node in the DAX cluster.
-	// (Each of the security group ID is system-generated.) If this parameter is not
-	// specified, DAX assigns the default VPC security group to each node.
+	// (Each of the security group ID is system-generated.)
+	//
+	// If this parameter is not specified, DAX assigns the default VPC security group
+	// to each node.
 	SecurityGroupIds []string
 
-	// The name of the subnet group to be used for the replication group. DAX clusters
-	// can only run in an Amazon VPC environment. All of the subnets that you specify
-	// in a subnet group must exist in the same VPC.
+	// The name of the subnet group to be used for the replication group.
+	//
+	// DAX clusters can only run in an Amazon VPC environment. All of the subnets that
+	// you specify in a subnet group must exist in the same VPC.
 	SubnetGroupName *string
 
 	// A set of tags to associate with the DAX cluster.
@@ -152,25 +173,25 @@ func (c *Client) addOperationCreateClusterMiddlewares(stack *middleware.Stack, o
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -185,13 +206,16 @@ func (c *Client) addOperationCreateClusterMiddlewares(stack *middleware.Stack, o
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpCreateClusterValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateCluster(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

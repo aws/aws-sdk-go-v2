@@ -6,18 +6,20 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/transcribe/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Provides information about the specified medical transcription job. To view the
-// status of the specified medical transcription job, check the
+// Provides information about the specified medical transcription job.
+//
+// To view the status of the specified medical transcription job, check the
 // TranscriptionJobStatus field. If the status is COMPLETED , the job is finished.
 // You can find the results at the location specified in TranscriptFileUri . If the
 // status is FAILED , FailureReason provides details on why your transcription job
-// failed. To get a list of your medical transcription jobs, use the operation.
+// failed.
+//
+// To get a list of your medical transcription jobs, use the operation.
 func (c *Client) GetMedicalTranscriptionJob(ctx context.Context, params *GetMedicalTranscriptionJobInput, optFns ...func(*Options)) (*GetMedicalTranscriptionJobOutput, error) {
 	if params == nil {
 		params = &GetMedicalTranscriptionJobInput{}
@@ -78,25 +80,25 @@ func (c *Client) addOperationGetMedicalTranscriptionJobMiddlewares(stack *middle
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -111,13 +113,16 @@ func (c *Client) addOperationGetMedicalTranscriptionJobMiddlewares(stack *middle
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpGetMedicalTranscriptionJobValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetMedicalTranscriptionJob(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

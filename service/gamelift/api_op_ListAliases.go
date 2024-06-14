@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/gamelift/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -14,8 +13,15 @@ import (
 
 // Retrieves all aliases for this Amazon Web Services account. You can filter the
 // result set by alias name and/or routing strategy type. Use the pagination
-// parameters to retrieve results in sequential pages. Returned aliases are not
-// listed in any particular order. Related actions All APIs by task (https://docs.aws.amazon.com/gamelift/latest/developerguide/reference-awssdk.html#reference-awssdk-resources-fleets)
+// parameters to retrieve results in sequential pages.
+//
+// Returned aliases are not listed in any particular order.
+//
+// # Related actions
+//
+// [All APIs by task]
+//
+// [All APIs by task]: https://docs.aws.amazon.com/gamelift/latest/developerguide/reference-awssdk.html#reference-awssdk-resources-fleets
 func (c *Client) ListAliases(ctx context.Context, params *ListAliasesInput, optFns ...func(*Options)) (*ListAliasesOutput, error) {
 	if params == nil {
 		params = &ListAliasesInput{}
@@ -48,13 +54,18 @@ type ListAliasesInput struct {
 
 	// The routing type to filter results on. Use this parameter to retrieve only
 	// aliases with a certain routing type. To retrieve all aliases, leave this
-	// parameter empty. Possible routing types include the following:
+	// parameter empty.
+	//
+	// Possible routing types include the following:
+	//
 	//   - SIMPLE -- The alias resolves to one specific fleet. Use this type when
 	//   routing to active fleets.
+	//
 	//   - TERMINAL -- The alias does not resolve to a fleet but instead can be used
 	//   to display a message to the user. A terminal alias throws a
-	//   TerminalRoutingStrategyException with the RoutingStrategy (https://docs.aws.amazon.com/gamelift/latest/apireference/API_RoutingStrategy.html)
-	//   message embedded.
+	//   TerminalRoutingStrategyException with the [RoutingStrategy]message embedded.
+	//
+	// [RoutingStrategy]: https://docs.aws.amazon.com/gamelift/latest/apireference/API_RoutingStrategy.html
 	RoutingStrategyType types.RoutingStrategyType
 
 	noSmithyDocumentSerde
@@ -98,25 +109,25 @@ func (c *Client) addOperationListAliasesMiddlewares(stack *middleware.Stack, opt
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -131,10 +142,13 @@ func (c *Client) addOperationListAliasesMiddlewares(stack *middleware.Stack, opt
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListAliases(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

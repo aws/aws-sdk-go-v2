@@ -6,15 +6,18 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/servicecatalog/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates a provisioning artifact (also known as a version) for the specified
-// product. You cannot create a provisioning artifact for a product that was shared
-// with you. The user or role that performs this operation must have the
+// product.
+//
+// You cannot create a provisioning artifact for a product that was shared with
+// you.
+//
+// The user or role that performs this operation must have the
 // cloudformation:GetTemplate IAM policy permission. This policy permission is
 // required when using the ImportFromPhysicalId template source in the information
 // data section.
@@ -53,7 +56,9 @@ type CreateProvisioningArtifactInput struct {
 	ProductId *string
 
 	// The language code.
+	//
 	//   - jp - Japanese
+	//
 	//   - zh - Chinese
 	AcceptLanguage *string
 
@@ -63,11 +68,20 @@ type CreateProvisioningArtifactInput struct {
 type CreateProvisioningArtifactOutput struct {
 
 	// Specify the template source with one of the following options, but not both.
-	// Keys accepted: [ LoadTemplateFromURL , ImportFromPhysicalId ]. Use the URL of
-	// the CloudFormation template in Amazon S3 or GitHub in JSON format.
-	// LoadTemplateFromURL Use the URL of the CloudFormation template in Amazon S3 or
-	// GitHub in JSON format. ImportFromPhysicalId Use the physical id of the resource
-	// that contains the template; currently supports CloudFormation stack ARN.
+	// Keys accepted: [ LoadTemplateFromURL , ImportFromPhysicalId ].
+	//
+	// Use the URL of the CloudFormation template in Amazon S3 or GitHub in JSON
+	// format.
+	//
+	//     LoadTemplateFromURL
+	//
+	// Use the URL of the CloudFormation template in Amazon S3 or GitHub in JSON
+	// format.
+	//
+	//     ImportFromPhysicalId
+	//
+	// Use the physical id of the resource that contains the template; currently
+	// supports CloudFormation stack ARN.
 	Info map[string]string
 
 	// Information about the provisioning artifact.
@@ -104,25 +118,25 @@ func (c *Client) addOperationCreateProvisioningArtifactMiddlewares(stack *middle
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -137,6 +151,9 @@ func (c *Client) addOperationCreateProvisioningArtifactMiddlewares(stack *middle
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opCreateProvisioningArtifactMiddleware(stack, options); err != nil {
 		return err
 	}
@@ -146,7 +163,7 @@ func (c *Client) addOperationCreateProvisioningArtifactMiddlewares(stack *middle
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateProvisioningArtifact(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

@@ -6,16 +6,18 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/redshift/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Authorizes the specified Amazon Web Services account to restore the specified
-// snapshot. For more information about working with snapshots, go to Amazon
-// Redshift Snapshots (https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-snapshots.html)
-// in the Amazon Redshift Cluster Management Guide.
+// snapshot.
+//
+// For more information about working with snapshots, go to [Amazon Redshift Snapshots] in the Amazon
+// Redshift Cluster Management Guide.
+//
+// [Amazon Redshift Snapshots]: https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-snapshots.html
 func (c *Client) AuthorizeSnapshotAccess(ctx context.Context, params *AuthorizeSnapshotAccessInput, optFns ...func(*Options)) (*AuthorizeSnapshotAccessOutput, error) {
 	if params == nil {
 		params = &AuthorizeSnapshotAccessInput{}
@@ -34,8 +36,10 @@ func (c *Client) AuthorizeSnapshotAccess(ctx context.Context, params *AuthorizeS
 type AuthorizeSnapshotAccessInput struct {
 
 	// The identifier of the Amazon Web Services account authorized to restore the
-	// specified snapshot. To share a snapshot with Amazon Web Services Support,
-	// specify amazon-redshift-support.
+	// specified snapshot.
+	//
+	// To share a snapshot with Amazon Web Services Support, specify
+	// amazon-redshift-support.
 	//
 	// This member is required.
 	AccountWithRestoreAccess *string
@@ -43,9 +47,15 @@ type AuthorizeSnapshotAccessInput struct {
 	// The Amazon Resource Name (ARN) of the snapshot to authorize access to.
 	SnapshotArn *string
 
-	// The identifier of the cluster the snapshot was created from. This parameter is
-	// required if your IAM user has a policy containing a snapshot resource element
-	// that specifies anything other than * for the cluster name.
+	// The identifier of the cluster the snapshot was created from.
+	//
+	//   - If the snapshot to access doesn't exist and the associated IAM policy
+	//   doesn't allow access to all (*) snapshots - This parameter is required.
+	//   Otherwise, permissions aren't available to check if the snapshot exists.
+	//
+	//   - If the snapshot to access exists - This parameter isn't required. Redshift
+	//   can retrieve the cluster identifier and use it to validate snapshot
+	//   authorization.
 	SnapshotClusterIdentifier *string
 
 	// The identifier of the snapshot the account is authorized to restore.
@@ -87,25 +97,25 @@ func (c *Client) addOperationAuthorizeSnapshotAccessMiddlewares(stack *middlewar
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -120,13 +130,16 @@ func (c *Client) addOperationAuthorizeSnapshotAccessMiddlewares(stack *middlewar
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpAuthorizeSnapshotAccessValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opAuthorizeSnapshotAccess(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/grafana/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -14,9 +13,11 @@ import (
 
 // Creates a workspace. In a workspace, you can create Grafana dashboards and
 // visualizations to analyze your metrics, logs, and traces. You don't have to
-// build, package, or deploy any hardware to run the Grafana server. Don't use
-// CreateWorkspace to modify an existing workspace. Instead, use UpdateWorkspace (https://docs.aws.amazon.com/grafana/latest/APIReference/API_UpdateWorkspace.html)
-// .
+// build, package, or deploy any hardware to run the Grafana server.
+//
+// Don't use CreateWorkspace to modify an existing workspace. Instead, use [UpdateWorkspace].
+//
+// [UpdateWorkspace]: https://docs.aws.amazon.com/grafana/latest/APIReference/API_UpdateWorkspace.html
 func (c *Client) CreateWorkspace(ctx context.Context, params *CreateWorkspaceInput, optFns ...func(*Options)) (*CreateWorkspaceOutput, error) {
 	if params == nil {
 		params = &CreateWorkspaceInput{}
@@ -43,11 +44,11 @@ type CreateWorkspaceInput struct {
 	// This member is required.
 	AccountAccessType types.AccountAccessType
 
-	// Specifies whether this workspace uses SAML 2.0, IAM Identity Center (successor
-	// to Single Sign-On), or both to authenticate users for using the Grafana console
-	// within a workspace. For more information, see User authentication in Amazon
-	// Managed Grafana (https://docs.aws.amazon.com/grafana/latest/userguide/authentication-in-AMG.html)
-	// .
+	// Specifies whether this workspace uses SAML 2.0, IAM Identity Center, or both to
+	// authenticate users for using the Grafana console within a workspace. For more
+	// information, see [User authentication in Amazon Managed Grafana].
+	//
+	// [User authentication in Amazon Managed Grafana]: https://docs.aws.amazon.com/grafana/latest/userguide/authentication-in-AMG.html
 	//
 	// This member is required.
 	AuthenticationProviders []types.AuthenticationProviderTypes
@@ -55,16 +56,21 @@ type CreateWorkspaceInput struct {
 	// When creating a workspace through the Amazon Web Services API, CLI or Amazon
 	// Web Services CloudFormation, you must manage IAM roles and provision the
 	// permissions that the workspace needs to use Amazon Web Services data sources and
-	// notification channels. You must also specify a workspaceRoleArn for a role that
-	// you will manage for the workspace to use when accessing those datasources and
-	// notification channels. The ability for Amazon Managed Grafana to create and
-	// update IAM roles on behalf of the user is supported only in the Amazon Managed
-	// Grafana console, where this value may be set to SERVICE_MANAGED . Use only the
-	// CUSTOMER_MANAGED permission type when creating a workspace with the API, CLI or
-	// Amazon Web Services CloudFormation. For more information, see Amazon Managed
-	// Grafana permissions and policies for Amazon Web Services data sources and
-	// notification channels (https://docs.aws.amazon.com/grafana/latest/userguide/AMG-manage-permissions.html)
-	// .
+	// notification channels.
+	//
+	// You must also specify a workspaceRoleArn for a role that you will manage for
+	// the workspace to use when accessing those datasources and notification channels.
+	//
+	// The ability for Amazon Managed Grafana to create and update IAM roles on behalf
+	// of the user is supported only in the Amazon Managed Grafana console, where this
+	// value may be set to SERVICE_MANAGED .
+	//
+	// Use only the CUSTOMER_MANAGED permission type when creating a workspace with
+	// the API, CLI or Amazon Web Services CloudFormation.
+	//
+	// For more information, see [Amazon Managed Grafana permissions and policies for Amazon Web Services data sources and notification channels].
+	//
+	// [Amazon Managed Grafana permissions and policies for Amazon Web Services data sources and notification channels]: https://docs.aws.amazon.com/grafana/latest/userguide/AMG-manage-permissions.html
 	//
 	// This member is required.
 	PermissionType types.PermissionType
@@ -74,22 +80,27 @@ type CreateWorkspaceInput struct {
 	ClientToken *string
 
 	// The configuration string for the workspace that you create. For more
-	// information about the format and configuration options available, see Working
-	// in your Grafana workspace (https://docs.aws.amazon.com/grafana/latest/userguide/AMG-configure-workspace.html)
-	// .
+	// information about the format and configuration options available, see [Working in your Grafana workspace].
+	//
+	// [Working in your Grafana workspace]: https://docs.aws.amazon.com/grafana/latest/userguide/AMG-configure-workspace.html
 	//
 	// This value conforms to the media type: application/json
 	Configuration *string
 
-	// Specifies the version of Grafana to support in the new workspace. To get a list
-	// of supported version, use the ListVersions operation.
+	// Specifies the version of Grafana to support in the new workspace. If not
+	// specified, defaults to the latest version (for example, 10.4).
+	//
+	// To get a list of supported versions, use the ListVersions operation.
 	GrafanaVersion *string
 
-	// Configuration for network access to your workspace. When this is configured,
-	// only listed IP addresses and VPC endpoints will be able to access your
-	// workspace. Standard Grafana authentication and authorization will still be
-	// required. If this is not configured, or is removed, then all IP addresses and
-	// VPC endpoints will be allowed. Standard Grafana authentication and authorization
+	// Configuration for network access to your workspace.
+	//
+	// When this is configured, only listed IP addresses and VPC endpoints will be
+	// able to access your workspace. Standard Grafana authentication and authorization
+	// will still be required.
+	//
+	// If this is not configured, or is removed, then all IP addresses and VPC
+	// endpoints will be allowed. Standard Grafana authentication and authorization
 	// will still be required.
 	NetworkAccessControl *types.NetworkAccessConfiguration
 
@@ -106,15 +117,19 @@ type CreateWorkspaceInput struct {
 	Tags map[string]string
 
 	// The configuration settings for an Amazon VPC that contains data sources for
-	// your Grafana workspace to connect to. Connecting to a private VPC is not yet
-	// available in the Asia Pacific (Seoul) Region (ap-northeast-2).
+	// your Grafana workspace to connect to.
+	//
+	// Connecting to a private VPC is not yet available in the Asia Pacific (Seoul)
+	// Region (ap-northeast-2).
 	VpcConfiguration *types.VpcConfiguration
 
 	// This parameter is for internal use only, and should not be used.
 	WorkspaceDataSources []types.DataSourceType
 
 	// A description for the workspace. This is used only to help you identify this
-	// workspace. Pattern: ^[\\p{L}\\p{Z}\\p{N}\\p{P}]{0,2048}$
+	// workspace.
+	//
+	// Pattern: ^[\\p{L}\\p{Z}\\p{N}\\p{P}]{0,2048}$
 	WorkspaceDescription *string
 
 	// The name for the workspace. It does not have to be unique.
@@ -175,25 +190,25 @@ func (c *Client) addOperationCreateWorkspaceMiddlewares(stack *middleware.Stack,
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -208,6 +223,9 @@ func (c *Client) addOperationCreateWorkspaceMiddlewares(stack *middleware.Stack,
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opCreateWorkspaceMiddleware(stack, options); err != nil {
 		return err
 	}
@@ -217,7 +235,7 @@ func (c *Client) addOperationCreateWorkspaceMiddlewares(stack *middleware.Stack,
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateWorkspace(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

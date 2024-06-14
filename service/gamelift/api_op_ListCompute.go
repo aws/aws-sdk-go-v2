@@ -6,19 +6,36 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/gamelift/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Retrieves the compute resources in an Amazon GameLift fleet. You can request
-// information for either managed EC2 fleets or Anywhere fleets. To request a list
-// of computes, specify the fleet ID. You can filter the result set by location.
-// Use the pagination parameters to retrieve results in a set of sequential pages.
-// If successful, this operation returns the compute resource for the requested
-// fleet. For managed EC2 fleets, it returns a list of EC2 instances. For Anywhere
-// fleets, it returns a list of registered compute names.
+//	This operation has been expanded to use with the Amazon GameLift containers
+//
+// feature, which is currently in public preview.
+//
+// Retrieves information on the compute resources in an Amazon GameLift fleet.
+//
+// To request a list of computes, specify the fleet ID. Use the pagination
+// parameters to retrieve results in a set of sequential pages.
+//
+// You can filter the result set by location.
+//
+// If successful, this operation returns information on all computes in the
+// requested fleet. Depending on the fleet's compute type, the result includes the
+// following information:
+//
+//   - For EC2 fleets, this operation returns information about the EC2 instance.
+//     Compute names are instance IDs.
+//
+//   - For ANYWHERE fleets, this operation returns the compute names and details
+//     provided when the compute was registered with RegisterCompute . The
+//     GameLiftServiceSdkEndpoint or GameLiftAgentEndpoint is included.
+//
+//   - For CONTAINER fleets, this operation returns information about containers
+//     that are registered as computes, and the instances they're running on. Compute
+//     names are container names.
 func (c *Client) ListCompute(ctx context.Context, params *ListComputeInput, optFns ...func(*Options)) (*ListComputeOutput, error) {
 	if params == nil {
 		params = &ListComputeInput{}
@@ -45,7 +62,10 @@ type ListComputeInput struct {
 	// get results as a set of sequential pages.
 	Limit *int32
 
-	// The name of a location to retrieve compute resources for.
+	// The name of a location to retrieve compute resources for. For an Amazon
+	// GameLift Anywhere fleet, use a custom location. For a multi-location EC2 or
+	// container fleet, provide a Amazon Web Services Region or Local Zone code (for
+	// example: us-west-2 or us-west-2-lax-1 ).
 	Location *string
 
 	// A token that indicates the start of the next sequential page of results. Use
@@ -94,25 +114,25 @@ func (c *Client) addOperationListComputeMiddlewares(stack *middleware.Stack, opt
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -127,13 +147,16 @@ func (c *Client) addOperationListComputeMiddlewares(stack *middleware.Stack, opt
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpListComputeValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListCompute(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

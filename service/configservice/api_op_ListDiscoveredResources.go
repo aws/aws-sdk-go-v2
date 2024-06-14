@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/configservice/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -17,12 +16,15 @@ import (
 // and (if available) the custom resource name. The results consist of resources
 // that Config has discovered, including those that Config is not currently
 // recording. You can narrow the results to include only resources that have
-// specific resource IDs or a resource name. You can specify either resource IDs or
-// a resource name, but not both, in the same request. The response is paginated.
-// By default, Config lists 100 resource identifiers on each page. You can
-// customize this number with the limit parameter. The response includes a
-// nextToken string. To get the next page of results, run the request again and
-// specify the string for the nextToken parameter.
+// specific resource IDs or a resource name.
+//
+// You can specify either resource IDs or a resource name, but not both, in the
+// same request.
+//
+// The response is paginated. By default, Config lists 100 resource identifiers on
+// each page. You can customize this number with the limit parameter. The response
+// includes a nextToken string. To get the next page of results, run the request
+// again and specify the string for the nextToken parameter.
 func (c *Client) ListDiscoveredResources(ctx context.Context, params *ListDiscoveredResourcesInput, optFns ...func(*Options)) (*ListDiscoveredResourcesOutput, error) {
 	if params == nil {
 		params = &ListDiscoveredResourcesInput{}
@@ -110,25 +112,25 @@ func (c *Client) addOperationListDiscoveredResourcesMiddlewares(stack *middlewar
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -143,13 +145,16 @@ func (c *Client) addOperationListDiscoveredResourcesMiddlewares(stack *middlewar
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpListDiscoveredResourcesValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListDiscoveredResources(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

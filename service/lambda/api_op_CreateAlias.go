@@ -6,18 +6,19 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/lambda/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates an alias (https://docs.aws.amazon.com/lambda/latest/dg/configuration-aliases.html)
-// for a Lambda function version. Use aliases to provide clients with a function
-// identifier that you can update to invoke a different version. You can also map
-// an alias to split invocation requests between two versions. Use the
-// RoutingConfig parameter to specify a second version and the percentage of
-// invocation requests that it receives.
+// Creates an [alias] for a Lambda function version. Use aliases to provide clients with
+// a function identifier that you can update to invoke a different version.
+//
+// You can also map an alias to split invocation requests between two versions.
+// Use the RoutingConfig parameter to specify a second version and the percentage
+// of invocation requests that it receives.
+//
+// [alias]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-aliases.html
 func (c *Client) CreateAlias(ctx context.Context, params *CreateAliasInput, optFns ...func(*Options)) (*CreateAliasOutput, error) {
 	if params == nil {
 		params = &CreateAliasInput{}
@@ -35,10 +36,16 @@ func (c *Client) CreateAlias(ctx context.Context, params *CreateAliasInput, optF
 
 type CreateAliasInput struct {
 
-	// The name of the Lambda function. Name formats
+	// The name or ARN of the Lambda function.
+	//
+	// Name formats
+	//
 	//   - Function name - MyFunction .
+	//
 	//   - Function ARN - arn:aws:lambda:us-west-2:123456789012:function:MyFunction .
+	//
 	//   - Partial ARN - 123456789012:function:MyFunction .
+	//
 	// The length constraint applies only to the full ARN. If you specify only the
 	// function name, it is limited to 64 characters in length.
 	//
@@ -58,15 +65,17 @@ type CreateAliasInput struct {
 	// A description of the alias.
 	Description *string
 
-	// The routing configuration (https://docs.aws.amazon.com/lambda/latest/dg/configuration-aliases.html#configuring-alias-routing)
-	// of the alias.
+	// The [routing configuration] of the alias.
+	//
+	// [routing configuration]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-aliases.html#configuring-alias-routing
 	RoutingConfig *types.AliasRoutingConfiguration
 
 	noSmithyDocumentSerde
 }
 
-// Provides configuration information about a Lambda function alias (https://docs.aws.amazon.com/lambda/latest/dg/configuration-aliases.html)
-// .
+// Provides configuration information about a Lambda function [alias].
+//
+// [alias]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-aliases.html
 type CreateAliasOutput struct {
 
 	// The Amazon Resource Name (ARN) of the alias.
@@ -84,8 +93,9 @@ type CreateAliasOutput struct {
 	// A unique identifier that changes when you update the alias.
 	RevisionId *string
 
-	// The routing configuration (https://docs.aws.amazon.com/lambda/latest/dg/lambda-traffic-shifting-using-aliases.html)
-	// of the alias.
+	// The [routing configuration] of the alias.
+	//
+	// [routing configuration]: https://docs.aws.amazon.com/lambda/latest/dg/lambda-traffic-shifting-using-aliases.html
 	RoutingConfig *types.AliasRoutingConfiguration
 
 	// Metadata pertaining to the operation's result.
@@ -116,25 +126,25 @@ func (c *Client) addOperationCreateAliasMiddlewares(stack *middleware.Stack, opt
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -149,13 +159,16 @@ func (c *Client) addOperationCreateAliasMiddlewares(stack *middleware.Stack, opt
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpCreateAliasValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateAlias(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

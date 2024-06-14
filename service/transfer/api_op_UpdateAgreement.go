@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/transfer/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -46,24 +45,33 @@ type UpdateAgreementInput struct {
 
 	// Connectors are used to send files using either the AS2 or SFTP protocol. For
 	// the access role, provide the Amazon Resource Name (ARN) of the Identity and
-	// Access Management role to use. For AS2 connectors With AS2, you can send files
-	// by calling StartFileTransfer and specifying the file paths in the request
-	// parameter, SendFilePaths . We use the file’s parent directory (for example, for
-	// --send-file-paths /bucket/dir/file.txt , parent directory is /bucket/dir/ ) to
-	// temporarily store a processed AS2 message file, store the MDN when we receive
-	// them from the partner, and write a final JSON file containing relevant metadata
-	// of the transmission. So, the AccessRole needs to provide read and write access
-	// to the parent directory of the file location used in the StartFileTransfer
-	// request. Additionally, you need to provide read and write access to the parent
-	// directory of the files that you intend to send with StartFileTransfer . If you
-	// are using Basic authentication for your AS2 connector, the access role requires
-	// the secretsmanager:GetSecretValue permission for the secret. If the secret is
-	// encrypted using a customer-managed key instead of the Amazon Web Services
-	// managed key in Secrets Manager, then the role also needs the kms:Decrypt
-	// permission for that key. For SFTP connectors Make sure that the access role
-	// provides read and write access to the parent directory of the file location
-	// that's used in the StartFileTransfer request. Additionally, make sure that the
-	// role provides secretsmanager:GetSecretValue permission to Secrets Manager.
+	// Access Management role to use.
+	//
+	// For AS2 connectors
+	//
+	// With AS2, you can send files by calling StartFileTransfer and specifying the
+	// file paths in the request parameter, SendFilePaths . We use the file’s parent
+	// directory (for example, for --send-file-paths /bucket/dir/file.txt , parent
+	// directory is /bucket/dir/ ) to temporarily store a processed AS2 message file,
+	// store the MDN when we receive them from the partner, and write a final JSON file
+	// containing relevant metadata of the transmission. So, the AccessRole needs to
+	// provide read and write access to the parent directory of the file location used
+	// in the StartFileTransfer request. Additionally, you need to provide read and
+	// write access to the parent directory of the files that you intend to send with
+	// StartFileTransfer .
+	//
+	// If you are using Basic authentication for your AS2 connector, the access role
+	// requires the secretsmanager:GetSecretValue permission for the secret. If the
+	// secret is encrypted using a customer-managed key instead of the Amazon Web
+	// Services managed key in Secrets Manager, then the role also needs the
+	// kms:Decrypt permission for that key.
+	//
+	// For SFTP connectors
+	//
+	// Make sure that the access role provides read and write access to the parent
+	// directory of the file location that's used in the StartFileTransfer request.
+	// Additionally, make sure that the role provides secretsmanager:GetSecretValue
+	// permission to Secrets Manager.
 	AccessRole *string
 
 	// To change the landing directory (folder) for files that are transferred,
@@ -75,8 +83,9 @@ type UpdateAgreementInput struct {
 	// agreement.
 	Description *string
 
-	// A unique identifier for the AS2 local profile. To change the local profile
-	// identifier, provide a new value here.
+	// A unique identifier for the AS2 local profile.
+	//
+	// To change the local profile identifier, provide a new value here.
 	LocalProfileId *string
 
 	// A unique identifier for the partner profile. To change the partner profile
@@ -126,25 +135,25 @@ func (c *Client) addOperationUpdateAgreementMiddlewares(stack *middleware.Stack,
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -159,13 +168,16 @@ func (c *Client) addOperationUpdateAgreementMiddlewares(stack *middleware.Stack,
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpUpdateAgreementValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateAgreement(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

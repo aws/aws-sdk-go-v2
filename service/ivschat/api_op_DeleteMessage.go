@@ -6,16 +6,16 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Sends an event to a specific room which directs clients to delete a specific
 // message; that is, unrender it from view and delete it from the client’s chat
-// history. This event’s EventName is aws:DELETE_MESSAGE . This replicates the
-// DeleteMessage (https://docs.aws.amazon.com/ivs/latest/chatmsgapireference/actions-deletemessage-publish.html)
+// history. This event’s EventName is aws:DELETE_MESSAGE . This replicates the [DeleteMessage]
 // WebSocket operation in the Amazon IVS Chat Messaging API.
+//
+// [DeleteMessage]: https://docs.aws.amazon.com/ivs/latest/chatmsgapireference/actions-deletemessage-publish.html
 func (c *Client) DeleteMessage(ctx context.Context, params *DeleteMessageInput, optFns ...func(*Options)) (*DeleteMessageOutput, error) {
 	if params == nil {
 		params = &DeleteMessageInput{}
@@ -34,8 +34,9 @@ func (c *Client) DeleteMessage(ctx context.Context, params *DeleteMessageInput, 
 type DeleteMessageInput struct {
 
 	// ID of the message to be deleted. This is the Id field in the received message
-	// (see Message (Subscribe) (https://docs.aws.amazon.com/ivs/latest/chatmsgapireference/actions-message-subscribe.html)
-	// in the Chat Messaging API).
+	// (see [Message (Subscribe)]in the Chat Messaging API).
+	//
+	// [Message (Subscribe)]: https://docs.aws.amazon.com/ivs/latest/chatmsgapireference/actions-message-subscribe.html
 	//
 	// This member is required.
 	Id *string
@@ -85,25 +86,25 @@ func (c *Client) addOperationDeleteMessageMiddlewares(stack *middleware.Stack, o
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -118,13 +119,16 @@ func (c *Client) addOperationDeleteMessageMiddlewares(stack *middleware.Stack, o
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDeleteMessageValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteMessage(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

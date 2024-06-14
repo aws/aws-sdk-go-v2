@@ -6,16 +6,18 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/quicksight/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a theme. A theme is set of configuration options for color and layout.
-// Themes apply to analyses and dashboards. For more information, see Using Themes
-// in Amazon QuickSight (https://docs.aws.amazon.com/quicksight/latest/user/themes-in-quicksight.html)
-// in the Amazon QuickSight User Guide.
+// Creates a theme.
+//
+// A theme is set of configuration options for color and layout. Themes apply to
+// analyses and dashboards. For more information, see [Using Themes in Amazon QuickSight]in the Amazon QuickSight
+// User Guide.
+//
+// [Using Themes in Amazon QuickSight]: https://docs.aws.amazon.com/quicksight/latest/user/themes-in-quicksight.html
 func (c *Client) CreateTheme(ctx context.Context, params *CreateThemeInput, optFns ...func(*Options)) (*CreateThemeOutput, error) {
 	if params == nil {
 		params = &CreateThemeInput{}
@@ -33,7 +35,8 @@ func (c *Client) CreateTheme(ctx context.Context, params *CreateThemeInput, optF
 
 type CreateThemeInput struct {
 
-	// The ID of the Amazon Web Services account where you want to store the new theme.
+	// The ID of the Amazon Web Services account where you want to store the new
+	// theme.
 	//
 	// This member is required.
 	AwsAccountId *string
@@ -124,25 +127,25 @@ func (c *Client) addOperationCreateThemeMiddlewares(stack *middleware.Stack, opt
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -157,13 +160,16 @@ func (c *Client) addOperationCreateThemeMiddlewares(stack *middleware.Stack, opt
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpCreateThemeValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateTheme(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

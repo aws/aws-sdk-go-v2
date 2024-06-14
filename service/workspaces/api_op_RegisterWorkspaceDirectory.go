@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/workspaces/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -15,9 +14,9 @@ import (
 // Registers the specified directory. This operation is asynchronous and returns
 // before the WorkSpace directory is registered. If this is the first time you are
 // registering a directory, you will need to create the workspaces_DefaultRole role
-// before you can register a directory. For more information, see Creating the
-// workspaces_DefaultRole Role (https://docs.aws.amazon.com/workspaces/latest/adminguide/workspaces-access-control.html#create-default-role)
-// .
+// before you can register a directory. For more information, see [Creating the workspaces_DefaultRole Role].
+//
+// [Creating the workspaces_DefaultRole Role]: https://docs.aws.amazon.com/workspaces/latest/adminguide/workspaces-access-control.html#create-default-role
 func (c *Client) RegisterWorkspaceDirectory(ctx context.Context, params *RegisterWorkspaceDirectoryInput, optFns ...func(*Options)) (*RegisterWorkspaceDirectoryOutput, error) {
 	if params == nil {
 		params = &RegisterWorkspaceDirectoryInput{}
@@ -69,9 +68,9 @@ type RegisterWorkspaceDirectoryInput struct {
 	// Your Own License (BYOL) images, this value must be set to DEDICATED and your
 	// Amazon Web Services account must be enabled for BYOL. If your account has not
 	// been enabled for BYOL, you will receive an InvalidParameterValuesException
-	// error. For more information about BYOL images, see Bring Your Own Windows
-	// Desktop Images (https://docs.aws.amazon.com/workspaces/latest/adminguide/byol-windows-images.html)
-	// .
+	// error. For more information about BYOL images, see [Bring Your Own Windows Desktop Images].
+	//
+	// [Bring Your Own Windows Desktop Images]: https://docs.aws.amazon.com/workspaces/latest/adminguide/byol-windows-images.html
 	Tenancy types.Tenancy
 
 	noSmithyDocumentSerde
@@ -106,25 +105,25 @@ func (c *Client) addOperationRegisterWorkspaceDirectoryMiddlewares(stack *middle
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -139,13 +138,16 @@ func (c *Client) addOperationRegisterWorkspaceDirectoryMiddlewares(stack *middle
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpRegisterWorkspaceDirectoryValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opRegisterWorkspaceDirectory(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

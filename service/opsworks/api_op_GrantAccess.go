@@ -6,14 +6,14 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/opsworks/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// This action can be used only with Windows stacks. Grants RDP access to a
-// Windows instance for a specified time period.
+// This action can be used only with Windows stacks.
+//
+// Grants RDP access to a Windows instance for a specified time period.
 func (c *Client) GrantAccess(ctx context.Context, params *GrantAccessInput, optFns ...func(*Options)) (*GrantAccessOutput, error) {
 	if params == nil {
 		params = &GrantAccessInput{}
@@ -31,15 +31,15 @@ func (c *Client) GrantAccess(ctx context.Context, params *GrantAccessInput, optF
 
 type GrantAccessInput struct {
 
-	// The instance's AWS OpsWorks Stacks ID.
+	// The instance's OpsWorks Stacks ID.
 	//
 	// This member is required.
 	InstanceId *string
 
 	// The length of time (in minutes) that the grant is valid. When the grant expires
 	// at the end of this period, the user will no longer be able to use the
-	// credentials to log in. If the user is logged in at the time, he or she
-	// automatically will be logged out.
+	// credentials to log in. If the user is logged in at the time, they are logged
+	// out.
 	ValidForInMinutes *int32
 
 	noSmithyDocumentSerde
@@ -80,25 +80,25 @@ func (c *Client) addOperationGrantAccessMiddlewares(stack *middleware.Stack, opt
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -113,13 +113,16 @@ func (c *Client) addOperationGrantAccessMiddlewares(stack *middleware.Stack, opt
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpGrantAccessValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGrantAccess(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

@@ -6,13 +6,12 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/cloudfront/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Specifies the Key Value Store and its configuration.
+// Specifies the key value store and its configuration.
 func (c *Client) DescribeKeyValueStore(ctx context.Context, params *DescribeKeyValueStoreInput, optFns ...func(*Options)) (*DescribeKeyValueStoreOutput, error) {
 	if params == nil {
 		params = &DescribeKeyValueStoreInput{}
@@ -30,7 +29,7 @@ func (c *Client) DescribeKeyValueStore(ctx context.Context, params *DescribeKeyV
 
 type DescribeKeyValueStoreInput struct {
 
-	// The name of the Key Value Store.
+	// The name of the key value store.
 	//
 	// This member is required.
 	Name *string
@@ -40,10 +39,10 @@ type DescribeKeyValueStoreInput struct {
 
 type DescribeKeyValueStoreOutput struct {
 
-	// The ETag of the resulting Key Value Store.
+	// The ETag of the resulting key value store.
 	ETag *string
 
-	// The resulting Key Value Store.
+	// The resulting key value store.
 	KeyValueStore *types.KeyValueStore
 
 	// Metadata pertaining to the operation's result.
@@ -74,25 +73,25 @@ func (c *Client) addOperationDescribeKeyValueStoreMiddlewares(stack *middleware.
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -107,13 +106,16 @@ func (c *Client) addOperationDescribeKeyValueStoreMiddlewares(stack *middleware.
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDescribeKeyValueStoreValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeKeyValueStore(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

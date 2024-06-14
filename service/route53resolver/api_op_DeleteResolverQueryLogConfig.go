@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/route53resolver/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -16,15 +15,19 @@ import (
 // Resolver stops logging DNS queries for all of the Amazon VPCs that are
 // associated with the configuration. This also applies if the query logging
 // configuration is shared with other Amazon Web Services accounts, and the other
-// accounts have associated VPCs with the shared configuration. Before you can
-// delete a query logging configuration, you must first disassociate all VPCs from
-// the configuration. See DisassociateResolverQueryLogConfig (https://docs.aws.amazon.com/Route53/latest/APIReference/API_route53resolver_DisassociateResolverQueryLogConfig.html)
-// . If you used Resource Access Manager (RAM) to share a query logging
+// accounts have associated VPCs with the shared configuration.
+//
+// Before you can delete a query logging configuration, you must first
+// disassociate all VPCs from the configuration. See [DisassociateResolverQueryLogConfig].
+//
+// If you used Resource Access Manager (RAM) to share a query logging
 // configuration with other accounts, you must stop sharing the configuration
 // before you can delete a configuration. The accounts that you shared the
 // configuration with can first disassociate VPCs that they associated with the
 // configuration, but that's not necessary. If you stop sharing the configuration,
 // those VPCs are automatically disassociated from the configuration.
+//
+// [DisassociateResolverQueryLogConfig]: https://docs.aws.amazon.com/Route53/latest/APIReference/API_route53resolver_DisassociateResolverQueryLogConfig.html
 func (c *Client) DeleteResolverQueryLogConfig(ctx context.Context, params *DeleteResolverQueryLogConfigInput, optFns ...func(*Options)) (*DeleteResolverQueryLogConfigOutput, error) {
 	if params == nil {
 		params = &DeleteResolverQueryLogConfigInput{}
@@ -84,25 +87,25 @@ func (c *Client) addOperationDeleteResolverQueryLogConfigMiddlewares(stack *midd
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -117,13 +120,16 @@ func (c *Client) addOperationDeleteResolverQueryLogConfigMiddlewares(stack *midd
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDeleteResolverQueryLogConfigValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteResolverQueryLogConfig(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

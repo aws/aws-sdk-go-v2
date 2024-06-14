@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/acmpca/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -14,10 +13,11 @@ import (
 
 // Lists the tags, if any, that are associated with your private CA or one that
 // has been shared with you. Tags are labels that you can use to identify and
-// organize your CAs. Each tag consists of a key and an optional value. Call the
-// TagCertificateAuthority (https://docs.aws.amazon.com/privateca/latest/APIReference/API_TagCertificateAuthority.html)
-// action to add one or more tags to your CA. Call the UntagCertificateAuthority (https://docs.aws.amazon.com/privateca/latest/APIReference/API_UntagCertificateAuthority.html)
-// action to remove tags.
+// organize your CAs. Each tag consists of a key and an optional value. Call the [TagCertificateAuthority]
+// action to add one or more tags to your CA. Call the [UntagCertificateAuthority]action to remove tags.
+//
+// [TagCertificateAuthority]: https://docs.aws.amazon.com/privateca/latest/APIReference/API_TagCertificateAuthority.html
+// [UntagCertificateAuthority]: https://docs.aws.amazon.com/privateca/latest/APIReference/API_UntagCertificateAuthority.html
 func (c *Client) ListTags(ctx context.Context, params *ListTagsInput, optFns ...func(*Options)) (*ListTagsOutput, error) {
 	if params == nil {
 		params = &ListTagsInput{}
@@ -35,10 +35,12 @@ func (c *Client) ListTags(ctx context.Context, params *ListTagsInput, optFns ...
 
 type ListTagsInput struct {
 
-	// The Amazon Resource Name (ARN) that was returned when you called the
-	// CreateCertificateAuthority (https://docs.aws.amazon.com/privateca/latest/APIReference/API_CreateCertificateAuthority.html)
-	// action. This must be of the form:
-	// arn:aws:acm-pca:region:account:certificate-authority/12345678-1234-1234-1234-123456789012
+	// The Amazon Resource Name (ARN) that was returned when you called the [CreateCertificateAuthority] action.
+	// This must be of the form:
+	//
+	//     arn:aws:acm-pca:region:account:certificate-authority/12345678-1234-1234-1234-123456789012
+	//
+	// [CreateCertificateAuthority]: https://docs.aws.amazon.com/privateca/latest/APIReference/API_CreateCertificateAuthority.html
 	//
 	// This member is required.
 	CertificateAuthorityArn *string
@@ -94,25 +96,25 @@ func (c *Client) addOperationListTagsMiddlewares(stack *middleware.Stack, option
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -127,13 +129,16 @@ func (c *Client) addOperationListTagsMiddlewares(stack *middleware.Stack, option
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpListTagsValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListTags(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/evidently/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -19,9 +18,11 @@ import (
 // statistical power, Evidently performs an additional offline p-value analysis at
 // the end of the experiment. Offline p-value analysis can detect statistical
 // significance in some cases where the anytime p-values used during the experiment
-// do not find statistical significance. Experiment results are available up to 63
-// days after the start of the experiment. They are not available after that
-// because of CloudWatch data retention policies.
+// do not find statistical significance.
+//
+// Experiment results are available up to 63 days after the start of the
+// experiment. They are not available after that because of CloudWatch data
+// retention policies.
 func (c *Client) GetExperimentResults(ctx context.Context, params *GetExperimentResultsInput, optFns ...func(*Options)) (*GetExperimentResultsOutput, error) {
 	if params == nil {
 		params = &GetExperimentResultsInput{}
@@ -76,17 +77,21 @@ type GetExperimentResultsInput struct {
 	ReportNames []types.ExperimentReportName
 
 	// The statistics that you want to see in the returned results.
+	//
 	//   - PValue specifies to use p-values for the results. A p-value is used in
 	//   hypothesis testing to measure how often you are willing to make a mistake in
 	//   rejecting the null hypothesis. A general practice is to reject the null
 	//   hypothesis and declare that the results are statistically significant when the
 	//   p-value is less than 0.05.
+	//
 	//   - ConfidenceInterval specifies a confidence interval for the results. The
 	//   confidence interval represents the range of values for the chosen metric that is
 	//   likely to contain the true difference between the baseStat of a variation and
 	//   the baseline. Evidently returns the 95% confidence interval.
+	//
 	//   - TreatmentEffect is the difference in the statistic specified by the baseStat
 	//   parameter between each variation and the default variation.
+	//
 	//   - BaseStat returns the statistical values collected for the metric for each
 	//   variation. The statistic uses the same statistic specified in the baseStat
 	//   parameter. Therefore, if baseStat is mean , this returns the mean of the
@@ -144,25 +149,25 @@ func (c *Client) addOperationGetExperimentResultsMiddlewares(stack *middleware.S
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -177,13 +182,16 @@ func (c *Client) addOperationGetExperimentResultsMiddlewares(stack *middleware.S
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpGetExperimentResultsValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetExperimentResults(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

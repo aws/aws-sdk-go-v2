@@ -434,18 +434,13 @@ type DukptEncryptionAttributes struct {
 	// encryption, or both.
 	DukptKeyVariant DukptKeyVariant
 
-	// An input to cryptographic primitive used to provide the intial state. Typically
-	// the InitializationVector must have a random or psuedo-random value, but
-	// sometimes it only needs to be unpredictable or unique. If you don't provide a
-	// value, Amazon Web Services Payment Cryptography generates a random value.
+	// An input used to provide the intial state. If no value is provided, Amazon Web
+	// Services Payment Cryptography defaults it to zero.
 	InitializationVector *string
 
-	// The block cipher mode of operation. Block ciphers are designed to encrypt a
-	// block of data of fixed size, for example, 128 bits. The size of the input block
-	// is usually same as the size of the encrypted output block, while the key length
-	// can be different. A mode of operation describes how to repeatedly apply a
-	// cipher's single-block operation to securely transform amounts of data larger
-	// than a block. The default is CBC.
+	// The block cipher method to use for encryption.
+	//
+	// The default is CBC.
 	Mode DukptEncryptionMode
 
 	noSmithyDocumentSerde
@@ -510,12 +505,51 @@ type DynamicCardVerificationValue struct {
 	noSmithyDocumentSerde
 }
 
+// Parameters for plaintext encryption using EMV keys.
+type EmvEncryptionAttributes struct {
+
+	// The EMV derivation mode to use for ICC master key derivation as per EMV version
+	// 4.3 book 2.
+	//
+	// This member is required.
+	MajorKeyDerivationMode EmvMajorKeyDerivationMode
+
+	// A number that identifies and differentiates payment cards with the same Primary
+	// Account Number (PAN).
+	//
+	// This member is required.
+	PanSequenceNumber *string
+
+	// The Primary Account Number (PAN), a unique identifier for a payment credit or
+	// debit card and associates the card to a specific account holder.
+	//
+	// This member is required.
+	PrimaryAccountNumber *string
+
+	// The derivation value used to derive the ICC session key. It is typically the
+	// application transaction counter value padded with zeros or previous ARQC value
+	// padded with zeros as per EMV version 4.3 book 2.
+	//
+	// This member is required.
+	SessionDerivationData *string
+
+	// An input used to provide the intial state. If no value is provided, Amazon Web
+	// Services Payment Cryptography defaults it to zero.
+	InitializationVector *string
+
+	// The block cipher method to use for encryption.
+	Mode EmvEncryptionMode
+
+	noSmithyDocumentSerde
+}
+
 // Parameters that are required to perform encryption and decryption operations.
 //
 // The following types satisfy this interface:
 //
 //	EncryptionDecryptionAttributesMemberAsymmetric
 //	EncryptionDecryptionAttributesMemberDukpt
+//	EncryptionDecryptionAttributesMemberEmv
 //	EncryptionDecryptionAttributesMemberSymmetric
 type EncryptionDecryptionAttributes interface {
 	isEncryptionDecryptionAttributes()
@@ -538,6 +572,15 @@ type EncryptionDecryptionAttributesMemberDukpt struct {
 }
 
 func (*EncryptionDecryptionAttributesMemberDukpt) isEncryptionDecryptionAttributes() {}
+
+// Parameters for plaintext encryption using EMV keys.
+type EncryptionDecryptionAttributesMemberEmv struct {
+	Value EmvEncryptionAttributes
+
+	noSmithyDocumentSerde
+}
+
+func (*EncryptionDecryptionAttributesMemberEmv) isEncryptionDecryptionAttributes() {}
 
 // Parameters that are required to perform encryption and decryption using
 // symmetric keys.
@@ -785,7 +828,7 @@ type MacAttributesMemberDukptIso9797Algorithm1 struct {
 func (*MacAttributesMemberDukptIso9797Algorithm1) isMacAttributes() {}
 
 // Parameters that are required for MAC generation or verification using DUKPT ISO
-// 9797 algorithm2.
+// 9797 algorithm3.
 type MacAttributesMemberDukptIso9797Algorithm3 struct {
 	Value MacAlgorithmDukpt
 
@@ -1174,20 +1217,13 @@ type SessionKeyVisa struct {
 // Parameters requried to encrypt plaintext data using symmetric keys.
 type SymmetricEncryptionAttributes struct {
 
-	// The block cipher mode of operation. Block ciphers are designed to encrypt a
-	// block of data of fixed size (for example, 128 bits). The size of the input block
-	// is usually same as the size of the encrypted output block, while the key length
-	// can be different. A mode of operation describes how to repeatedly apply a
-	// cipher's single-block operation to securely transform amounts of data larger
-	// than a block.
+	// The block cipher method to use for encryption.
 	//
 	// This member is required.
 	Mode EncryptionMode
 
-	// An input to cryptographic primitive used to provide the intial state. The
-	// InitializationVector is typically required have a random or psuedo-random value,
-	// but sometimes it only needs to be unpredictable or unique. If a value is not
-	// provided, Amazon Web Services Payment Cryptography generates a random value.
+	// An input used to provide the intial state. If no value is provided, Amazon Web
+	// Services Payment Cryptography defaults it to zero.
 	InitializationVector *string
 
 	// The padding to be included with the data.

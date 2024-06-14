@@ -9,6 +9,7 @@ import (
 
 // A signal that represents a vehicle device such as the engine, heater, and door
 // locks. Data from an actuator reports the state of a certain vehicle device.
+//
 // Updating actuator data can change the state of a device. For example, you can
 // turn on or off the heater by updating its actuator data.
 type Actuator struct {
@@ -126,8 +127,10 @@ type Branch struct {
 	noSmithyDocumentSerde
 }
 
-// Information about a campaign. You can use the API operation to return this
-// information about multiple created campaigns.
+// Information about a campaign.
+//
+// You can use the API operation to return this information about multiple created
+// campaigns.
 type CampaignSummary struct {
 
 	// The time the campaign was created.
@@ -153,13 +156,17 @@ type CampaignSummary struct {
 	SignalCatalogArn *string
 
 	// The state of a campaign. The status can be one of the following:
+	//
 	//   - CREATING - Amazon Web Services IoT FleetWise is processing your request to
 	//   create the campaign.
+	//
 	//   - WAITING_FOR_APPROVAL - After a campaign is created, it enters the
 	//   WAITING_FOR_APPROVAL state. To allow Amazon Web Services IoT FleetWise to
 	//   deploy the campaign to the target vehicle or fleet, use the API operation to
 	//   approve the campaign.
+	//
 	//   - RUNNING - The campaign is active.
+	//
 	//   - SUSPENDED - The campaign is suspended. To resume the campaign, use the API
 	//   operation.
 	Status CampaignStatus
@@ -244,10 +251,12 @@ type CanSignal struct {
 	Offset *float64
 
 	// Indicates the beginning of the CAN signal. This should always be the least
-	// significant bit (LSB). This value might be different from the value in a DBC
-	// file. For little endian signals, startBit is the same value as in the DBC file.
-	// For big endian signals in a DBC file, the start bit is the most significant bit
-	// (MSB). You will have to calculate the LSB instead and pass it as the startBit .
+	// significant bit (LSB).
+	//
+	// This value might be different from the value in a DBC file. For little endian
+	// signals, startBit is the same value as in the DBC file. For big endian signals
+	// in a DBC file, the start bit is the most significant bit (MSB). You will have to
+	// calculate the LSB instead and pass it as the startBit .
 	//
 	// This member is required.
 	StartBit int32
@@ -316,8 +325,9 @@ type ConditionBasedCollectionScheme struct {
 	ConditionLanguageVersion *int32
 
 	// The minimum duration of time between two triggering events to collect data, in
-	// milliseconds. If a signal changes often, you might want to collect data at a
-	// slower rate.
+	// milliseconds.
+	//
+	// If a signal changes often, you might want to collect data at a slower rate.
 	MinimumTriggerIntervalMs *int64
 
 	// Whether to collect data for all triggering events ( ALWAYS ). Specify (
@@ -522,8 +532,9 @@ type DecoderManifestSummary struct {
 	noSmithyDocumentSerde
 }
 
-// Information about a fleet. You can use the API operation to return this
-// information about multiple fleets.
+// Information about a fleet.
+//
+// You can use the API operation to return this information about multiple fleets.
 type FleetSummary struct {
 
 	// The Amazon Resource Name (ARN) of the fleet.
@@ -557,13 +568,14 @@ type FleetSummary struct {
 	noSmithyDocumentSerde
 }
 
-// Vehicle Signal Specification (VSS) (https://www.w3.org/auto/wg/wiki/Vehicle_Signal_Specification_(VSS)/Vehicle_Data_Spec)
-// is a precise language used to describe and model signals in vehicle networks.
+// [Vehicle Signal Specification (VSS)] is a precise language used to describe and model signals in vehicle networks.
 // The JSON file collects signal specificiations in a VSS format.
 //
 // The following types satisfy this interface:
 //
 //	FormattedVssMemberVssJson
+//
+// [Vehicle Signal Specification (VSS)]: https://www.w3.org/auto/wg/wiki/Vehicle_Signal_Specification_(VSS)/Vehicle_Data_Spec
 type FormattedVss interface {
 	isFormattedVss()
 }
@@ -600,8 +612,11 @@ type IamRegistrationResponse struct {
 }
 
 // The IAM resource that enables Amazon Web Services IoT FleetWise edge agent
-// software to send data to Amazon Timestream. For more information, see IAM roles (https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles.html)
-// in the Identity and Access Management User Guide.
+// software to send data to Amazon Timestream.
+//
+// For more information, see [IAM roles] in the Identity and Access Management User Guide.
+//
+// [IAM roles]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles.html
 type IamResources struct {
 
 	// The Amazon Resource Name (ARN) of the IAM resource that allows Amazon Web
@@ -727,9 +742,10 @@ type NetworkFileDefinitionMemberCanDbc struct {
 func (*NetworkFileDefinitionMemberCanDbc) isNetworkFileDefinition() {}
 
 // Represents a node and its specifications in an in-vehicle communication
-// network. All signal decoders must be associated with a network node. To return
-// this information about all the network interfaces specified in a decoder
-// manifest, use the API operation.
+// network. All signal decoders must be associated with a network node.
+//
+// To return this information about all the network interfaces specified in a
+// decoder manifest, use the API operation.
 type NetworkInterface struct {
 
 	// The ID of the network interface.
@@ -775,8 +791,9 @@ type Node interface {
 	isNode()
 }
 
-// Information about a node specified as an actuator. An actuator is a digital
-// representation of a vehicle device.
+// Information about a node specified as an actuator.
+//
+// An actuator is a digital representation of a vehicle device.
 type NodeMemberActuator struct {
 	Value Actuator
 
@@ -785,8 +802,9 @@ type NodeMemberActuator struct {
 
 func (*NodeMemberActuator) isNode() {}
 
-// Information about a node specified as an attribute. An attribute represents
-// static information about a vehicle.
+// Information about a node specified as an attribute.
+//
+// An attribute represents static information about a vehicle.
 type NodeMemberAttribute struct {
 	Value Attribute
 
@@ -795,8 +813,9 @@ type NodeMemberAttribute struct {
 
 func (*NodeMemberAttribute) isNode() {}
 
-// Information about a node specified as a branch. A group of signals that are
-// defined in a hierarchical structure.
+// Information about a node specified as a branch.
+//
+// A group of signals that are defined in a hierarchical structure.
 type NodeMemberBranch struct {
 	Value Branch
 
@@ -815,8 +834,9 @@ type NodeMemberProperty struct {
 
 func (*NodeMemberProperty) isNode() {}
 
-// An input component that reports the environmental condition of a vehicle. You
-// can collect data about fluid levels, temperatures, vibrations, or battery
+// An input component that reports the environmental condition of a vehicle.
+//
+// You can collect data about fluid levels, temperatures, vibrations, or battery
 // voltage from sensors.
 type NodeMemberSensor struct {
 	Value Sensor
@@ -988,9 +1008,10 @@ type ROS2PrimitiveMessageDefinition struct {
 
 // The Amazon S3 bucket where the Amazon Web Services IoT FleetWise campaign sends
 // data. Amazon S3 is an object storage service that stores data as objects within
-// buckets. For more information, see Creating, configuring, and working with
-// Amazon S3 buckets (https://docs.aws.amazon.com/AmazonS3/latest/userguide/creating-buckets-s3.html)
-// in the Amazon Simple Storage Service User Guide.
+// buckets. For more information, see [Creating, configuring, and working with Amazon S3 buckets]in the Amazon Simple Storage Service User
+// Guide.
+//
+// [Creating, configuring, and working with Amazon S3 buckets]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/creating-buckets-s3.html
 type S3Config struct {
 
 	// The Amazon Resource Name (ARN) of the Amazon S3 bucket.
@@ -1000,21 +1021,26 @@ type S3Config struct {
 
 	// Specify the format that files are saved in the Amazon S3 bucket. You can save
 	// files in an Apache Parquet or JSON format.
+	//
 	//   - Parquet - Store data in a columnar storage file format. Parquet is optimal
 	//   for fast data retrieval and can reduce costs. This option is selected by
 	//   default.
+	//
 	//   - JSON - Store data in a standard text-based JSON file format.
 	DataFormat DataFormat
 
 	// (Optional) Enter an S3 bucket prefix. The prefix is the string of characters
 	// after the bucket name and before the object name. You can use the prefix to
-	// organize data stored in Amazon S3 buckets. For more information, see Organizing
-	// objects using prefixes (https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-prefixes.html)
-	// in the Amazon Simple Storage Service User Guide. By default, Amazon Web Services
-	// IoT FleetWise sets the prefix processed-data/year=YY/month=MM/date=DD/hour=HH/
-	// (in UTC) to data it delivers to Amazon S3. You can enter a prefix to append it
-	// to this default prefix. For example, if you enter the prefix vehicles , the
-	// prefix will be vehicles/processed-data/year=YY/month=MM/date=DD/hour=HH/ .
+	// organize data stored in Amazon S3 buckets. For more information, see [Organizing objects using prefixes]in the
+	// Amazon Simple Storage Service User Guide.
+	//
+	// By default, Amazon Web Services IoT FleetWise sets the prefix
+	// processed-data/year=YY/month=MM/date=DD/hour=HH/ (in UTC) to data it delivers to
+	// Amazon S3. You can enter a prefix to append it to this default prefix. For
+	// example, if you enter the prefix vehicles , the prefix will be
+	// vehicles/processed-data/year=YY/month=MM/date=DD/hour=HH/ .
+	//
+	// [Organizing objects using prefixes]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-prefixes.html
 	Prefix *string
 
 	// By default, stored data is compressed as a .gzip file. Compressed files have a
@@ -1024,8 +1050,9 @@ type S3Config struct {
 	noSmithyDocumentSerde
 }
 
-// An input component that reports the environmental condition of a vehicle. You
-// can collect data about fluid levels, temperatures, vibrations, or battery
+// An input component that reports the environmental condition of a vehicle.
+//
+// You can collect data about fluid levels, temperatures, vibrations, or battery
 // voltage from sensors.
 type Sensor struct {
 
@@ -1139,8 +1166,9 @@ type SignalInformation struct {
 	MaxSampleCount *int64
 
 	// The minimum duration of time (in milliseconds) between two triggering events to
-	// collect data. If a signal changes often, you might want to collect data at a
-	// slower rate.
+	// collect data.
+	//
+	// If a signal changes often, you might want to collect data at a slower rate.
 	MinimumSamplingIntervalMs *int64
 
 	noSmithyDocumentSerde
@@ -1260,9 +1288,10 @@ type TimeBasedCollectionScheme struct {
 
 // The Amazon Timestream table where the Amazon Web Services IoT FleetWise
 // campaign sends data. Timestream stores and organizes data to optimize query
-// processing time and to reduce storage costs. For more information, see Data
-// modeling (https://docs.aws.amazon.com/timestream/latest/developerguide/data-modeling.html)
-// in the Amazon Timestream Developer Guide.
+// processing time and to reduce storage costs. For more information, see [Data modeling]in the
+// Amazon Timestream Developer Guide.
+//
+// [Data modeling]: https://docs.aws.amazon.com/timestream/latest/developerguide/data-modeling.html
 type TimestreamConfig struct {
 
 	// The Amazon Resource Name (ARN) of the task execution role that grants Amazon
@@ -1353,11 +1382,13 @@ type UpdateVehicleRequestItem struct {
 
 	// The method the specified attributes will update the existing attributes on the
 	// vehicle. Use Overwite to replace the vehicle attributes with the specified
-	// attributes. Or use Merge to combine all attributes. This is required if
-	// attributes are present in the input.
+	// attributes. Or use Merge to combine all attributes.
+	//
+	// This is required if attributes are present in the input.
 	AttributeUpdateMode UpdateMode
 
 	// Static information about a vehicle in a key-value pair. For example:
+	//
 	// "engineType" : "1.3 L R2"
 	Attributes map[string]string
 
@@ -1425,11 +1456,16 @@ type VehicleStatus struct {
 	CampaignName *string
 
 	// The state of a vehicle, which can be one of the following:
+	//
 	//   - CREATED - Amazon Web Services IoT FleetWise sucessfully created the vehicle.
+	//
 	//   - READY - The vehicle is ready to receive a campaign deployment.
+	//
 	//   - HEALTHY - A campaign deployment was delivered to the vehicle.
+	//
 	//   - SUSPENDED - A campaign associated with the vehicle was suspended and data
 	//   collection was paused.
+	//
 	//   - DELETING - Amazon Web Services IoT FleetWise is removing a campaign from the
 	//   vehicle.
 	Status VehicleState
@@ -1440,8 +1476,10 @@ type VehicleStatus struct {
 	noSmithyDocumentSerde
 }
 
-// Information about a vehicle. To return this information about vehicles in your
-// account, you can use the API operation.
+// Information about a vehicle.
+//
+// To return this information about vehicles in your account, you can use the API
+// operation.
 type VehicleSummary struct {
 
 	// The Amazon Resource Name (ARN) of the vehicle.
@@ -1477,6 +1515,7 @@ type VehicleSummary struct {
 	VehicleName *string
 
 	// Static information about a vehicle in a key-value pair. For example:
+	//
 	// "engineType" : "1.3 L R2"
 	Attributes map[string]string
 

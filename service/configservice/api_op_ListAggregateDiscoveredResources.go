@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/configservice/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -17,10 +16,11 @@ import (
 // identifier includes the resource type, ID, (if available) the custom resource
 // name, source account, and source region. You can narrow the results to include
 // only resources that have specific resource IDs, or a resource name, or source
-// account ID, or source region. For example, if the input consists of accountID
-// 12345678910 and the region is us-east-1 for resource type AWS::EC2::Instance
-// then the API returns all the EC2 instance identifiers of accountID 12345678910
-// and region us-east-1.
+// account ID, or source region.
+//
+// For example, if the input consists of accountID 12345678910 and the region is
+// us-east-1 for resource type AWS::EC2::Instance then the API returns all the EC2
+// instance identifiers of accountID 12345678910 and region us-east-1.
 func (c *Client) ListAggregateDiscoveredResources(ctx context.Context, params *ListAggregateDiscoveredResourcesInput, optFns ...func(*Options)) (*ListAggregateDiscoveredResourcesOutput, error) {
 	if params == nil {
 		params = &ListAggregateDiscoveredResourcesInput{}
@@ -99,25 +99,25 @@ func (c *Client) addOperationListAggregateDiscoveredResourcesMiddlewares(stack *
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -132,13 +132,16 @@ func (c *Client) addOperationListAggregateDiscoveredResourcesMiddlewares(stack *
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpListAggregateDiscoveredResourcesValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListAggregateDiscoveredResources(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

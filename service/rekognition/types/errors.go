@@ -36,7 +36,8 @@ func (e *AccessDeniedException) ErrorCode() string {
 }
 func (e *AccessDeniedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// A User with the same Id already exists within the collection, or the update or
+//	A User with the same Id already exists within the collection, or the update or
+//
 // deletion of the User caused an inconsistent state. **
 type ConflictException struct {
 	Message *string

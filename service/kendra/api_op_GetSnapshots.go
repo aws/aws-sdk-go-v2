@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/kendra/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -39,26 +38,33 @@ type GetSnapshotsInput struct {
 	// The time interval or time window to get search metrics data. The time interval
 	// uses the time zone of your index. You can view data in the following time
 	// windows:
+	//
 	//   - THIS_WEEK : The current week, starting on the Sunday and ending on the day
 	//   before the current date.
+	//
 	//   - ONE_WEEK_AGO : The previous week, starting on the Sunday and ending on the
 	//   following Saturday.
+	//
 	//   - TWO_WEEKS_AGO : The week before the previous week, starting on the Sunday
 	//   and ending on the following Saturday.
+	//
 	//   - THIS_MONTH : The current month, starting on the first day of the month and
 	//   ending on the day before the current date.
+	//
 	//   - ONE_MONTH_AGO : The previous month, starting on the first day of the month
 	//   and ending on the last day of the month.
+	//
 	//   - TWO_MONTHS_AGO : The month before the previous month, starting on the first
 	//   day of the month and ending on last day of the month.
 	//
 	// This member is required.
 	Interval types.Interval
 
-	// The metric you want to retrieve. You can specify only one metric per call. For
-	// more information about the metrics you can view, see Gaining insights with
-	// search analytics (https://docs.aws.amazon.com/kendra/latest/dg/search-analytics.html)
-	// .
+	// The metric you want to retrieve. You can specify only one metric per call.
+	//
+	// For more information about the metrics you can view, see [Gaining insights with search analytics].
+	//
+	// [Gaining insights with search analytics]: https://docs.aws.amazon.com/kendra/latest/dg/search-analytics.html
 	//
 	// This member is required.
 	MetricType types.MetricType
@@ -119,25 +125,25 @@ func (c *Client) addOperationGetSnapshotsMiddlewares(stack *middleware.Stack, op
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -152,13 +158,16 @@ func (c *Client) addOperationGetSnapshotsMiddlewares(stack *middleware.Stack, op
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpGetSnapshotsValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetSnapshots(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

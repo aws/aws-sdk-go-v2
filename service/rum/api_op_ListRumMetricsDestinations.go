@@ -6,16 +6,17 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/rum/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Returns a list of destinations that you have created to receive RUM extended
-// metrics, for the specified app monitor. For more information about extended
-// metrics, see AddRumMetrics (https://docs.aws.amazon.com/cloudwatchrum/latest/APIReference/API_AddRumMetrcs.html)
-// .
+// metrics, for the specified app monitor.
+//
+// For more information about extended metrics, see [AddRumMetrics].
+//
+// [AddRumMetrics]: https://docs.aws.amazon.com/cloudwatchrum/latest/APIReference/API_AddRumMetrcs.html
 func (c *Client) ListRumMetricsDestinations(ctx context.Context, params *ListRumMetricsDestinationsInput, optFns ...func(*Options)) (*ListRumMetricsDestinationsOutput, error) {
 	if params == nil {
 		params = &ListRumMetricsDestinationsInput{}
@@ -40,8 +41,10 @@ type ListRumMetricsDestinationsInput struct {
 	AppMonitorName *string
 
 	// The maximum number of results to return in one operation. The default is 50.
-	// The maximum that you can specify is 100. To retrieve the remaining results, make
-	// another call with the returned NextToken value.
+	// The maximum that you can specify is 100.
+	//
+	// To retrieve the remaining results, make another call with the returned NextToken
+	// value.
 	MaxResults *int32
 
 	// Use the token returned by the previous operation to request the next page of
@@ -89,25 +92,25 @@ func (c *Client) addOperationListRumMetricsDestinationsMiddlewares(stack *middle
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -122,13 +125,16 @@ func (c *Client) addOperationListRumMetricsDestinationsMiddlewares(stack *middle
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpListRumMetricsDestinationsValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListRumMetricsDestinations(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -158,8 +164,10 @@ var _ ListRumMetricsDestinationsAPIClient = (*Client)(nil)
 // ListRumMetricsDestinations
 type ListRumMetricsDestinationsPaginatorOptions struct {
 	// The maximum number of results to return in one operation. The default is 50.
-	// The maximum that you can specify is 100. To retrieve the remaining results, make
-	// another call with the returned NextToken value.
+	// The maximum that you can specify is 100.
+	//
+	// To retrieve the remaining results, make another call with the returned NextToken
+	// value.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

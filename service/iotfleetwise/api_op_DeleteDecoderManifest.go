@@ -6,15 +6,16 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes a decoder manifest. You can't delete a decoder manifest if it has
-// vehicles associated with it. If the decoder manifest is successfully deleted,
-// Amazon Web Services IoT FleetWise sends back an HTTP 200 response with an empty
-// body.
+//	Deletes a decoder manifest. You can't delete a decoder manifest if it has
+//
+// vehicles associated with it.
+//
+// If the decoder manifest is successfully deleted, Amazon Web Services IoT
+// FleetWise sends back an HTTP 200 response with an empty body.
 func (c *Client) DeleteDecoderManifest(ctx context.Context, params *DeleteDecoderManifestInput, optFns ...func(*Options)) (*DeleteDecoderManifestOutput, error) {
 	if params == nil {
 		params = &DeleteDecoderManifestInput{}
@@ -32,7 +33,7 @@ func (c *Client) DeleteDecoderManifest(ctx context.Context, params *DeleteDecode
 
 type DeleteDecoderManifestInput struct {
 
-	// The name of the decoder manifest to delete.
+	//  The name of the decoder manifest to delete.
 	//
 	// This member is required.
 	Name *string
@@ -80,25 +81,25 @@ func (c *Client) addOperationDeleteDecoderManifestMiddlewares(stack *middleware.
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -113,13 +114,16 @@ func (c *Client) addOperationDeleteDecoderManifestMiddlewares(stack *middleware.
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDeleteDecoderManifestValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteDecoderManifest(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

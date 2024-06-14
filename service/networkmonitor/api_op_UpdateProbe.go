@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/networkmonitor/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -16,6 +15,23 @@ import (
 // Updates a monitor probe. This action requires both the monitorName and probeId
 // parameters. Run ListMonitors to get a list of monitor names. Run GetMonitor to
 // get a list of probes and probe IDs.
+//
+// You can update the following para create a monitor with probes using this
+// command. For each probe, you define the following:
+//
+//   - state —The state of the probe.
+//
+//   - destination — The target destination IP address for the probe.
+//
+//   - destinationPort —Required only if the protocol is TCP .
+//
+//   - protocol —The communication protocol between the source and destination.
+//     This will be either TCP or ICMP .
+//
+//   - packetSize —The size of the packets. This must be a number between 56 and
+//     8500 .
+//
+//   - (Optional) tags —Key-value pairs created and assigned to the probe.
 func (c *Client) UpdateProbe(ctx context.Context, params *UpdateProbeInput, optFns ...func(*Options)) (*UpdateProbeOutput, error) {
 	if params == nil {
 		params = &UpdateProbeInput{}
@@ -38,7 +54,7 @@ type UpdateProbeInput struct {
 	// This member is required.
 	MonitorName *string
 
-	// Run GetMonitor to get a list of probes and probe IDs.
+	// The ID of the probe to update.
 	//
 	// This member is required.
 	ProbeId *string
@@ -82,13 +98,13 @@ type UpdateProbeOutput struct {
 	// This member is required.
 	SourceArn *string
 
-	// The updated IP address family. This will be either IPV4 or IPV6 .
+	// The updated IP address family. This must be either IPV4 or IPV6 .
 	AddressFamily types.AddressFamily
 
 	// The time and date that the probe was created.
 	CreatedAt *time.Time
 
-	// The updated destination port. This will be a number between 1 and 65536 .
+	// The updated destination port. This must be a number between 1 and 65536 .
 	DestinationPort *int32
 
 	// The time and date that the probe was last updated.
@@ -140,25 +156,25 @@ func (c *Client) addOperationUpdateProbeMiddlewares(stack *middleware.Stack, opt
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -173,13 +189,16 @@ func (c *Client) addOperationUpdateProbeMiddlewares(stack *middleware.Stack, opt
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpUpdateProbeValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateProbe(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

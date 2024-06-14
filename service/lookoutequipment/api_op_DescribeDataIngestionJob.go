@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/lookoutequipment/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -45,17 +44,17 @@ type DescribeDataIngestionJobOutput struct {
 	// The time at which the data ingestion job was created.
 	CreatedAt *time.Time
 
-	// Indicates the latest timestamp corresponding to data that was successfully
+	//  Indicates the latest timestamp corresponding to data that was successfully
 	// ingested during this specific ingestion job.
 	DataEndTime *time.Time
 
-	// Gives statistics about a completed ingestion job. These statistics primarily
+	//  Gives statistics about a completed ingestion job. These statistics primarily
 	// relate to quantifying incorrect data such as MissingCompleteSensorData,
 	// MissingSensorData, UnsupportedDateFormats, InsufficientSensorData, and
 	// DuplicateTimeStamps.
 	DataQualitySummary *types.DataQualitySummary
 
-	// Indicates the earliest timestamp corresponding to data that was successfully
+	//  Indicates the earliest timestamp corresponding to data that was successfully
 	// ingested during this specific ingestion job.
 	DataStartTime *time.Time
 
@@ -66,7 +65,7 @@ type DescribeDataIngestionJobOutput struct {
 	// Specifies the reason for failure when a data ingestion job has failed.
 	FailedReason *string
 
-	// Indicates the size of the ingested dataset.
+	//  Indicates the size of the ingested dataset.
 	IngestedDataSize *int64
 
 	// Gives statistics about how many files have been ingested, and which files have
@@ -91,7 +90,7 @@ type DescribeDataIngestionJobOutput struct {
 	// Indicates the status of the DataIngestionJob operation.
 	Status types.IngestionJobStatus
 
-	// Provides details about status of the ingestion job that is currently in
+	//  Provides details about status of the ingestion job that is currently in
 	// progress.
 	StatusDetail *string
 
@@ -123,25 +122,25 @@ func (c *Client) addOperationDescribeDataIngestionJobMiddlewares(stack *middlewa
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -156,13 +155,16 @@ func (c *Client) addOperationDescribeDataIngestionJobMiddlewares(stack *middlewa
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDescribeDataIngestionJobValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeDataIngestionJob(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

@@ -6,22 +6,31 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/personalize/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates an Amazon Personalize schema from the specified schema string. The
-// schema you create must be in Avro JSON format. Amazon Personalize recognizes
-// three schema variants. Each schema is associated with a dataset type and has a
-// set of required field and keywords. If you are creating a schema for a dataset
-// in a Domain dataset group, you provide the domain of the Domain dataset group.
-// You specify a schema when you call CreateDataset (https://docs.aws.amazon.com/personalize/latest/dg/API_CreateDataset.html)
-// . Related APIs
-//   - ListSchemas (https://docs.aws.amazon.com/personalize/latest/dg/API_ListSchemas.html)
-//   - DescribeSchema (https://docs.aws.amazon.com/personalize/latest/dg/API_DescribeSchema.html)
-//   - DeleteSchema (https://docs.aws.amazon.com/personalize/latest/dg/API_DeleteSchema.html)
+// schema you create must be in Avro JSON format.
+//
+// Amazon Personalize recognizes three schema variants. Each schema is associated
+// with a dataset type and has a set of required field and keywords. If you are
+// creating a schema for a dataset in a Domain dataset group, you provide the
+// domain of the Domain dataset group. You specify a schema when you call [CreateDataset].
+//
+// # Related APIs
+//
+// [ListSchemas]
+//
+// [DescribeSchema]
+//
+// [DeleteSchema]
+//
+// [CreateDataset]: https://docs.aws.amazon.com/personalize/latest/dg/API_CreateDataset.html
+// [DescribeSchema]: https://docs.aws.amazon.com/personalize/latest/dg/API_DescribeSchema.html
+// [DeleteSchema]: https://docs.aws.amazon.com/personalize/latest/dg/API_DeleteSchema.html
+// [ListSchemas]: https://docs.aws.amazon.com/personalize/latest/dg/API_ListSchemas.html
 func (c *Client) CreateSchema(ctx context.Context, params *CreateSchemaInput, optFns ...func(*Options)) (*CreateSchemaOutput, error) {
 	if params == nil {
 		params = &CreateSchemaInput{}
@@ -90,25 +99,25 @@ func (c *Client) addOperationCreateSchemaMiddlewares(stack *middleware.Stack, op
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -123,13 +132,16 @@ func (c *Client) addOperationCreateSchemaMiddlewares(stack *middleware.Stack, op
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpCreateSchemaValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateSchema(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

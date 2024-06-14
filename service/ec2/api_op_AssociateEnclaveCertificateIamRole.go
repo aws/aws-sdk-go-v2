@@ -6,27 +6,29 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Associates an Identity and Access Management (IAM) role with an Certificate
 // Manager (ACM) certificate. This enables the certificate to be used by the ACM
-// for Nitro Enclaves application inside an enclave. For more information, see
-// Certificate Manager for Nitro Enclaves (https://docs.aws.amazon.com/enclaves/latest/user/nitro-enclave-refapp.html)
-// in the Amazon Web Services Nitro Enclaves User Guide. When the IAM role is
-// associated with the ACM certificate, the certificate, certificate chain, and
-// encrypted private key are placed in an Amazon S3 location that only the
-// associated IAM role can access. The private key of the certificate is encrypted
-// with an Amazon Web Services managed key that has an attached attestation-based
-// key policy. To enable the IAM role to access the Amazon S3 object, you must
-// grant it permission to call s3:GetObject on the Amazon S3 bucket returned by
-// the command. To enable the IAM role to access the KMS key, you must grant it
+// for Nitro Enclaves application inside an enclave. For more information, see [Certificate Manager for Nitro Enclaves]in
+// the Amazon Web Services Nitro Enclaves User Guide.
+//
+// When the IAM role is associated with the ACM certificate, the certificate,
+// certificate chain, and encrypted private key are placed in an Amazon S3 location
+// that only the associated IAM role can access. The private key of the certificate
+// is encrypted with an Amazon Web Services managed key that has an attached
+// attestation-based key policy.
+//
+// To enable the IAM role to access the Amazon S3 object, you must grant it
+// permission to call s3:GetObject on the Amazon S3 bucket returned by the
+// command. To enable the IAM role to access the KMS key, you must grant it
 // permission to call kms:Decrypt on the KMS key returned by the command. For more
-// information, see Grant the role permission to access the certificate and
-// encryption key (https://docs.aws.amazon.com/enclaves/latest/user/nitro-enclave-refapp.html#add-policy)
-// in the Amazon Web Services Nitro Enclaves User Guide.
+// information, see [Grant the role permission to access the certificate and encryption key]in the Amazon Web Services Nitro Enclaves User Guide.
+//
+// [Certificate Manager for Nitro Enclaves]: https://docs.aws.amazon.com/enclaves/latest/user/nitro-enclave-refapp.html
+// [Grant the role permission to access the certificate and encryption key]: https://docs.aws.amazon.com/enclaves/latest/user/nitro-enclave-refapp.html#add-policy
 func (c *Client) AssociateEnclaveCertificateIamRole(ctx context.Context, params *AssociateEnclaveCertificateIamRoleInput, optFns ...func(*Options)) (*AssociateEnclaveCertificateIamRoleOutput, error) {
 	if params == nil {
 		params = &AssociateEnclaveCertificateIamRoleInput{}
@@ -105,25 +107,25 @@ func (c *Client) addOperationAssociateEnclaveCertificateIamRoleMiddlewares(stack
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -138,13 +140,16 @@ func (c *Client) addOperationAssociateEnclaveCertificateIamRoleMiddlewares(stack
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpAssociateEnclaveCertificateIamRoleValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opAssociateEnclaveCertificateIamRole(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

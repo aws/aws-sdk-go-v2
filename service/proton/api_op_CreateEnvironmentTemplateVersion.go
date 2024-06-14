@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/proton/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -52,14 +51,18 @@ type CreateEnvironmentTemplateVersionInput struct {
 	Description *string
 
 	// To create a new minor version of the environment template, include major Version
-	// . To create a new major and minor version of the environment template, exclude
+	// .
+	//
+	// To create a new major and minor version of the environment template, exclude
 	// major Version .
 	MajorVersion *string
 
 	// An optional list of metadata items that you can associate with the Proton
-	// environment template version. A tag is a key-value pair. For more information,
-	// see Proton resources and tagging (https://docs.aws.amazon.com/proton/latest/userguide/resources.html)
-	// in the Proton User Guide.
+	// environment template version. A tag is a key-value pair.
+	//
+	// For more information, see [Proton resources and tagging] in the Proton User Guide.
+	//
+	// [Proton resources and tagging]: https://docs.aws.amazon.com/proton/latest/userguide/resources.html
 	Tags []types.Tag
 
 	noSmithyDocumentSerde
@@ -100,25 +103,25 @@ func (c *Client) addOperationCreateEnvironmentTemplateVersionMiddlewares(stack *
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -133,6 +136,9 @@ func (c *Client) addOperationCreateEnvironmentTemplateVersionMiddlewares(stack *
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opCreateEnvironmentTemplateVersionMiddleware(stack, options); err != nil {
 		return err
 	}
@@ -142,7 +148,7 @@ func (c *Client) addOperationCreateEnvironmentTemplateVersionMiddlewares(stack *
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateEnvironmentTemplateVersion(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

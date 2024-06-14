@@ -6,31 +6,35 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/connect/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Initiates a flow to start a new chat for the customer. Response of this API
-// provides a token required to obtain credentials from the
-// CreateParticipantConnection (https://docs.aws.amazon.com/connect-participant/latest/APIReference/API_CreateParticipantConnection.html)
-// API in the Amazon Connect Participant Service. When a new chat contact is
-// successfully created, clients must subscribe to the participant’s connection for
-// the created chat within 5 minutes. This is achieved by invoking
-// CreateParticipantConnection (https://docs.aws.amazon.com/connect-participant/latest/APIReference/API_CreateParticipantConnection.html)
-// with WEBSOCKET and CONNECTION_CREDENTIALS. A 429 error occurs in the following
-// situations:
+// provides a token required to obtain credentials from the [CreateParticipantConnection]API in the Amazon
+// Connect Participant Service.
+//
+// When a new chat contact is successfully created, clients must subscribe to the
+// participant’s connection for the created chat within 5 minutes. This is achieved
+// by invoking [CreateParticipantConnection]with WEBSOCKET and CONNECTION_CREDENTIALS.
+//
+// A 429 error occurs in the following situations:
+//
 //   - API rate limit is exceeded. API TPS throttling returns a TooManyRequests
 //     exception.
-//   - The quota for concurrent active chats (https://docs.aws.amazon.com/connect/latest/adminguide/amazon-connect-service-limits.html)
-//     is exceeded. Active chat throttling returns a LimitExceededException .
+//
+//   - The [quota for concurrent active chats]is exceeded. Active chat throttling returns a LimitExceededException .
 //
 // If you use the ChatDurationInMinutes parameter and receive a 400 error, your
 // account may not support the ability to configure custom chat durations. For more
-// information, contact Amazon Web Services Support. For more information about
-// chat, see Chat (https://docs.aws.amazon.com/connect/latest/adminguide/chat.html)
-// in the Amazon Connect Administrator Guide.
+// information, contact Amazon Web Services Support.
+//
+// For more information about chat, see [Chat] in the Amazon Connect Administrator Guide.
+//
+// [CreateParticipantConnection]: https://docs.aws.amazon.com/connect-participant/latest/APIReference/API_CreateParticipantConnection.html
+// [Chat]: https://docs.aws.amazon.com/connect/latest/adminguide/chat.html
+// [quota for concurrent active chats]: https://docs.aws.amazon.com/connect/latest/adminguide/amazon-connect-service-limits.html
 func (c *Client) StartChatContact(ctx context.Context, params *StartChatContactInput, optFns ...func(*Options)) (*StartChatContactOutput, error) {
 	if params == nil {
 		params = &StartChatContactInput{}
@@ -53,13 +57,16 @@ type StartChatContactInput struct {
 	// Flows. Choose the flow. On the flow page, under the name of the flow, choose
 	// Show additional flow information. The ContactFlowId is the last part of the ARN,
 	// shown here in bold:
+	//
 	// arn:aws:connect:us-west-2:xxxxxxxxxxxx:instance/xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx/contact-flow/846ec553-a005-41c0-8341-xxxxxxxxxxxx
 	//
 	// This member is required.
 	ContactFlowId *string
 
-	// The identifier of the Amazon Connect instance. You can find the instance ID (https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html)
-	// in the Amazon Resource Name (ARN) of the instance.
+	// The identifier of the Amazon Connect instance. You can [find the instance ID] in the Amazon Resource
+	// Name (ARN) of the instance.
+	//
+	// [find the instance ID]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
 	//
 	// This member is required.
 	InstanceId *string
@@ -71,9 +78,10 @@ type StartChatContactInput struct {
 
 	// A custom key-value pair using an attribute map. The attributes are standard
 	// Amazon Connect attributes. They can be accessed in flows just like any other
-	// contact attributes. There can be up to 32,768 UTF-8 bytes across all key-value
-	// pairs per contact. Attribute keys can include only alphanumeric, dash, and
-	// underscore characters.
+	// contact attributes.
+	//
+	// There can be up to 32,768 UTF-8 bytes across all key-value pairs per contact.
+	// Attribute keys can include only alphanumeric, dash, and underscore characters.
 	Attributes map[string]string
 
 	// The total duration of the newly started chat session. If not specified, the
@@ -83,29 +91,35 @@ type StartChatContactInput struct {
 
 	// A unique, case-sensitive identifier that you provide to ensure the idempotency
 	// of the request. If not provided, the Amazon Web Services SDK populates this
-	// field. For more information about idempotency, see Making retries safe with
-	// idempotent APIs (https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/)
-	// .
+	// field. For more information about idempotency, see [Making retries safe with idempotent APIs].
+	//
+	// [Making retries safe with idempotent APIs]: https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/
 	ClientToken *string
 
-	// The initial message to be sent to the newly created chat.
+	// The initial message to be sent to the newly created chat. If you have a Lex bot
+	// in your flow, the initial message is not delivered to the Lex bot.
 	InitialMessage *types.ChatMessage
 
 	// Enable persistent chats. For more information about enabling persistent chat,
-	// and for example use cases and how to configure for them, see Enable persistent
-	// chat (https://docs.aws.amazon.com/connect/latest/adminguide/chat-persistence.html)
-	// .
+	// and for example use cases and how to configure for them, see [Enable persistent chat].
+	//
+	// [Enable persistent chat]: https://docs.aws.amazon.com/connect/latest/adminguide/chat-persistence.html
 	PersistentChat *types.PersistentChat
 
 	// The unique identifier for an Amazon Connect contact. This identifier is related
-	// to the chat starting. You cannot provide data for both RelatedContactId and
-	// PersistentChat.
+	// to the chat starting.
+	//
+	// You cannot provide data for both RelatedContactId and PersistentChat.
 	RelatedContactId *string
 
 	// A set of system defined key-value pairs stored on individual contact segments
 	// using an attribute map. The attributes are standard Amazon Connect attributes.
-	// They can be accessed in flows. Attribute keys can include only alphanumeric, -,
-	// and _. This field can be used to show channel subtype, such as connect:Guide .
+	// They can be accessed in flows.
+	//
+	// Attribute keys can include only alphanumeric, -, and _.
+	//
+	// This field can be used to show channel subtype, such as connect:Guide .
+	//
 	// The types application/vnd.amazonaws.connect.message.interactive and
 	// application/vnd.amazonaws.connect.message.interactive.response must be present
 	// in the SupportedMessagingContentTypes field of this API in order to set
@@ -115,15 +129,18 @@ type StartChatContactInput struct {
 	// The supported chat message content types. Supported types are text/plain ,
 	// text/markdown , application/json ,
 	// application/vnd.amazonaws.connect.message.interactive , and
-	// application/vnd.amazonaws.connect.message.interactive.response . Content types
-	// must always contain text/plain . You can then put any other supported type in
-	// the list. For example, all the following lists are valid because they contain
-	// text/plain : [text/plain, text/markdown, application/json] , [text/markdown,
-	// text/plain] , [text/plain, application/json,
-	// application/vnd.amazonaws.connect.message.interactive.response] . The type
-	// application/vnd.amazonaws.connect.message.interactive is required to use the
-	// Show view (https://docs.aws.amazon.com/connect/latest/adminguide/show-view-block.html)
-	// flow block.
+	// application/vnd.amazonaws.connect.message.interactive.response .
+	//
+	// Content types must always contain text/plain . You can then put any other
+	// supported type in the list. For example, all the following lists are valid
+	// because they contain text/plain : [text/plain, text/markdown, application/json]
+	// , [text/markdown, text/plain] , [text/plain, application/json,
+	// application/vnd.amazonaws.connect.message.interactive.response] .
+	//
+	// The type application/vnd.amazonaws.connect.message.interactive is required to
+	// use the [Show view]flow block.
+	//
+	// [Show view]: https://docs.aws.amazon.com/connect/latest/adminguide/show-view-block.html
 	SupportedMessagingContentTypes []string
 
 	noSmithyDocumentSerde
@@ -142,8 +159,10 @@ type StartChatContactOutput struct {
 	// is the same throughout the chat lifecycle.
 	ParticipantId *string
 
-	// The token used by the chat participant to call CreateParticipantConnection (https://docs.aws.amazon.com/connect-participant/latest/APIReference/API_CreateParticipantConnection.html)
-	// . The participant token is valid for the lifetime of a chat participant.
+	// The token used by the chat participant to call [CreateParticipantConnection]. The participant token is valid
+	// for the lifetime of a chat participant.
+	//
+	// [CreateParticipantConnection]: https://docs.aws.amazon.com/connect-participant/latest/APIReference/API_CreateParticipantConnection.html
 	ParticipantToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -174,25 +193,25 @@ func (c *Client) addOperationStartChatContactMiddlewares(stack *middleware.Stack
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -207,6 +226,9 @@ func (c *Client) addOperationStartChatContactMiddlewares(stack *middleware.Stack
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opStartChatContactMiddleware(stack, options); err != nil {
 		return err
 	}
@@ -216,7 +238,7 @@ func (c *Client) addOperationStartChatContactMiddlewares(stack *middleware.Stack
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opStartChatContact(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

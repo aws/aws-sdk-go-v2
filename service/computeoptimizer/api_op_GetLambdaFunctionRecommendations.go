@@ -6,16 +6,18 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/computeoptimizer/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns Lambda function recommendations. Compute Optimizer generates
-// recommendations for functions that meet a specific set of requirements. For more
-// information, see the Supported resources and requirements (https://docs.aws.amazon.com/compute-optimizer/latest/ug/requirements.html)
-// in the Compute Optimizer User Guide.
+// Returns Lambda function recommendations.
+//
+// Compute Optimizer generates recommendations for functions that meet a specific
+// set of requirements. For more information, see the [Supported resources and requirements]in the Compute Optimizer
+// User Guide.
+//
+// [Supported resources and requirements]: https://docs.aws.amazon.com/compute-optimizer/latest/ug/requirements.html
 func (c *Client) GetLambdaFunctionRecommendations(ctx context.Context, params *GetLambdaFunctionRecommendationsInput, optFns ...func(*Options)) (*GetLambdaFunctionRecommendationsOutput, error) {
 	if params == nil {
 		params = &GetLambdaFunctionRecommendationsInput{}
@@ -34,9 +36,13 @@ func (c *Client) GetLambdaFunctionRecommendations(ctx context.Context, params *G
 type GetLambdaFunctionRecommendationsInput struct {
 
 	// The ID of the Amazon Web Services account for which to return function
-	// recommendations. If your account is the management account of an organization,
-	// use this parameter to specify the member account for which you want to return
-	// function recommendations. Only one account ID can be specified per request.
+	// recommendations.
+	//
+	// If your account is the management account of an organization, use this
+	// parameter to specify the member account for which you want to return function
+	// recommendations.
+	//
+	// Only one account ID can be specified per request.
 	AccountIds []string
 
 	// An array of objects to specify a filter that returns a more specific list of
@@ -44,16 +50,20 @@ type GetLambdaFunctionRecommendationsInput struct {
 	Filters []types.LambdaFunctionRecommendationFilter
 
 	// The Amazon Resource Name (ARN) of the functions for which to return
-	// recommendations. You can specify a qualified or unqualified ARN. If you specify
-	// an unqualified ARN without a function version suffix, Compute Optimizer will
-	// return recommendations for the latest ( $LATEST ) version of the function. If
-	// you specify a qualified ARN with a version suffix, Compute Optimizer will return
+	// recommendations.
+	//
+	// You can specify a qualified or unqualified ARN. If you specify an unqualified
+	// ARN without a function version suffix, Compute Optimizer will return
+	// recommendations for the latest ( $LATEST ) version of the function. If you
+	// specify a qualified ARN with a version suffix, Compute Optimizer will return
 	// recommendations for the specified function version. For more information about
-	// using function versions, see Using versions (https://docs.aws.amazon.com/lambda/latest/dg/configuration-versions.html#versioning-versions-using)
-	// in the Lambda Developer Guide.
+	// using function versions, see [Using versions]in the Lambda Developer Guide.
+	//
+	// [Using versions]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-versions.html#versioning-versions-using
 	FunctionArns []string
 
 	// The maximum number of function recommendations to return with a single request.
+	//
 	// To retrieve the remaining results, make another request with the returned
 	// nextToken value.
 	MaxResults *int32
@@ -69,8 +79,9 @@ type GetLambdaFunctionRecommendationsOutput struct {
 	// An array of objects that describe function recommendations.
 	LambdaFunctionRecommendations []types.LambdaFunctionRecommendation
 
-	// The token to use to advance to the next page of function recommendations. This
-	// value is null when there are no more pages of function recommendations to
+	// The token to use to advance to the next page of function recommendations.
+	//
+	// This value is null when there are no more pages of function recommendations to
 	// return.
 	NextToken *string
 
@@ -102,25 +113,25 @@ func (c *Client) addOperationGetLambdaFunctionRecommendationsMiddlewares(stack *
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -135,10 +146,13 @@ func (c *Client) addOperationGetLambdaFunctionRecommendationsMiddlewares(stack *
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetLambdaFunctionRecommendations(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -168,6 +182,7 @@ var _ GetLambdaFunctionRecommendationsAPIClient = (*Client)(nil)
 // GetLambdaFunctionRecommendations
 type GetLambdaFunctionRecommendationsPaginatorOptions struct {
 	// The maximum number of function recommendations to return with a single request.
+	//
 	// To retrieve the remaining results, make another request with the returned
 	// nextToken value.
 	Limit int32

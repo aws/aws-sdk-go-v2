@@ -6,22 +6,26 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/connectcases/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// If you provide a value for PerformedBy.UserArn you must also have
-// connect:DescribeUser (https://docs.aws.amazon.com/connect/latest/APIReference/API_DescribeUser.html)
-// permission on the User ARN resource that you provide Creates a case in the
-// specified Cases domain. Case system and custom fields are taken as an array
-// id/value pairs with a declared data types. The following fields are required
-// when creating a case:
+// If you provide a value for PerformedBy.UserArn you must also have [connect:DescribeUser] permission
+// on the User ARN resource that you provide
+//
+// Creates a case in the specified Cases domain. Case system and custom fields are
+// taken as an array id/value pairs with a declared data types.
+//
+// The following fields are required when creating a case:
+//
 //   - customer_id - You must provide the full customer profile ARN in this format:
 //     arn:aws:profile:your_AWS_Region:your_AWS_account
 //     ID:domains/your_profiles_domain_name/profiles/profile_ID
+//
 //   - title
+//
+// [connect:DescribeUser]: https://docs.aws.amazon.com/connect/latest/APIReference/API_DescribeUser.html
 func (c *Client) CreateCase(ctx context.Context, params *CreateCaseInput, optFns ...func(*Options)) (*CreateCaseOutput, error) {
 	if params == nil {
 		params = &CreateCaseInput{}
@@ -57,9 +61,9 @@ type CreateCaseInput struct {
 
 	// A unique, case-sensitive identifier that you provide to ensure the idempotency
 	// of the request. If not provided, the Amazon Web Services SDK populates this
-	// field. For more information about idempotency, see Making retries safe with
-	// idempotent APIs (https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/)
-	// .
+	// field. For more information about idempotency, see [Making retries safe with idempotent APIs].
+	//
+	// [Making retries safe with idempotent APIs]: https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/
 	ClientToken *string
 
 	// Represents the identity of the person who performed the action.
@@ -108,25 +112,25 @@ func (c *Client) addOperationCreateCaseMiddlewares(stack *middleware.Stack, opti
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -141,6 +145,9 @@ func (c *Client) addOperationCreateCaseMiddlewares(stack *middleware.Stack, opti
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opCreateCaseMiddleware(stack, options); err != nil {
 		return err
 	}
@@ -150,7 +157,7 @@ func (c *Client) addOperationCreateCaseMiddlewares(stack *middleware.Stack, opti
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateCase(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

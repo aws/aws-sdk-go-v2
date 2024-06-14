@@ -6,13 +6,12 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/qbusiness/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Adds a retriever to your Amazon Q application.
+// Adds a retriever to your Amazon Q Business application.
 func (c *Client) CreateRetriever(ctx context.Context, params *CreateRetrieverInput, optFns ...func(*Options)) (*CreateRetrieverOutput, error) {
 	if params == nil {
 		params = &CreateRetrieverInput{}
@@ -30,13 +29,13 @@ func (c *Client) CreateRetriever(ctx context.Context, params *CreateRetrieverInp
 
 type CreateRetrieverInput struct {
 
-	// The identifier of your Amazon Q application.
+	// The identifier of your Amazon Q Business application.
 	//
 	// This member is required.
 	ApplicationId *string
 
-	// Provides information on how the retriever used for your Amazon Q application is
-	// configured.
+	// Provides information on how the retriever used for your Amazon Q Business
+	// application is configured.
 	//
 	// This member is required.
 	Configuration types.RetrieverConfiguration
@@ -52,11 +51,11 @@ type CreateRetrieverInput struct {
 	Type types.RetrieverType
 
 	// A token that you provide to identify the request to create your Amazon Q
-	// application retriever.
+	// Business application retriever.
 	ClientToken *string
 
-	// The ARN of an IAM role used by Amazon Q to access the basic authentication
-	// credentials stored in a Secrets Manager secret.
+	// The ARN of an IAM role used by Amazon Q Business to access the basic
+	// authentication credentials stored in a Secrets Manager secret.
 	RoleArn *string
 
 	// A list of key-value pairs that identify or categorize the retriever. You can
@@ -104,25 +103,25 @@ func (c *Client) addOperationCreateRetrieverMiddlewares(stack *middleware.Stack,
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -137,6 +136,9 @@ func (c *Client) addOperationCreateRetrieverMiddlewares(stack *middleware.Stack,
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opCreateRetrieverMiddleware(stack, options); err != nil {
 		return err
 	}
@@ -146,7 +148,7 @@ func (c *Client) addOperationCreateRetrieverMiddlewares(stack *middleware.Stack,
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateRetriever(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

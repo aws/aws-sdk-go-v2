@@ -6,30 +6,45 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/personalize/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates an event tracker that you use when adding event data to a specified
-// dataset group using the PutEvents (https://docs.aws.amazon.com/personalize/latest/dg/API_UBS_PutEvents.html)
-// API. Only one event tracker can be associated with a dataset group. You will get
-// an error if you call CreateEventTracker using the same dataset group as an
-// existing event tracker. When you create an event tracker, the response includes
-// a tracking ID, which you pass as a parameter when you use the PutEvents (https://docs.aws.amazon.com/personalize/latest/dg/API_UBS_PutEvents.html)
-// operation. Amazon Personalize then appends the event data to the Item
-// interactions dataset of the dataset group you specify in your event tracker. The
-// event tracker can be in one of the following states:
+// dataset group using the [PutEvents]API.
+//
+// Only one event tracker can be associated with a dataset group. You will get an
+// error if you call CreateEventTracker using the same dataset group as an
+// existing event tracker.
+//
+// When you create an event tracker, the response includes a tracking ID, which
+// you pass as a parameter when you use the [PutEvents]operation. Amazon Personalize then
+// appends the event data to the Item interactions dataset of the dataset group you
+// specify in your event tracker.
+//
+// The event tracker can be in one of the following states:
+//
 //   - CREATE PENDING > CREATE IN_PROGRESS > ACTIVE -or- CREATE FAILED
+//
 //   - DELETE PENDING > DELETE IN_PROGRESS
 //
-// To get the status of the event tracker, call DescribeEventTracker (https://docs.aws.amazon.com/personalize/latest/dg/API_DescribeEventTracker.html)
-// . The event tracker must be in the ACTIVE state before using the tracking ID.
-// Related APIs
-//   - ListEventTrackers (https://docs.aws.amazon.com/personalize/latest/dg/API_ListEventTrackers.html)
-//   - DescribeEventTracker (https://docs.aws.amazon.com/personalize/latest/dg/API_DescribeEventTracker.html)
-//   - DeleteEventTracker (https://docs.aws.amazon.com/personalize/latest/dg/API_DeleteEventTracker.html)
+// To get the status of the event tracker, call [DescribeEventTracker].
+//
+// The event tracker must be in the ACTIVE state before using the tracking ID.
+//
+// # Related APIs
+//
+// [ListEventTrackers]
+//
+// [DescribeEventTracker]
+//
+// [DeleteEventTracker]
+//
+// [PutEvents]: https://docs.aws.amazon.com/personalize/latest/dg/API_UBS_PutEvents.html
+// [DescribeEventTracker]: https://docs.aws.amazon.com/personalize/latest/dg/API_DescribeEventTracker.html
+// [ListEventTrackers]: https://docs.aws.amazon.com/personalize/latest/dg/API_ListEventTrackers.html
+// [DeleteEventTracker]: https://docs.aws.amazon.com/personalize/latest/dg/API_DeleteEventTracker.html
 func (c *Client) CreateEventTracker(ctx context.Context, params *CreateEventTrackerInput, optFns ...func(*Options)) (*CreateEventTrackerOutput, error) {
 	if params == nil {
 		params = &CreateEventTrackerInput{}
@@ -58,8 +73,9 @@ type CreateEventTrackerInput struct {
 	// This member is required.
 	Name *string
 
-	// A list of tags (https://docs.aws.amazon.com/personalize/latest/dg/tagging-resources.html)
-	// to apply to the event tracker.
+	// A list of [tags] to apply to the event tracker.
+	//
+	// [tags]: https://docs.aws.amazon.com/personalize/latest/dg/tagging-resources.html
 	Tags []types.Tag
 
 	noSmithyDocumentSerde
@@ -70,8 +86,9 @@ type CreateEventTrackerOutput struct {
 	// The ARN of the event tracker.
 	EventTrackerArn *string
 
-	// The ID of the event tracker. Include this ID in requests to the PutEvents (https://docs.aws.amazon.com/personalize/latest/dg/API_UBS_PutEvents.html)
-	// API.
+	// The ID of the event tracker. Include this ID in requests to the [PutEvents] API.
+	//
+	// [PutEvents]: https://docs.aws.amazon.com/personalize/latest/dg/API_UBS_PutEvents.html
 	TrackingId *string
 
 	// Metadata pertaining to the operation's result.
@@ -102,25 +119,25 @@ func (c *Client) addOperationCreateEventTrackerMiddlewares(stack *middleware.Sta
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -135,13 +152,16 @@ func (c *Client) addOperationCreateEventTrackerMiddlewares(stack *middleware.Sta
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpCreateEventTrackerValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateEventTracker(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

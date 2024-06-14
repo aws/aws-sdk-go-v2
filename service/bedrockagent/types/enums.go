@@ -10,8 +10,9 @@ const (
 )
 
 // Values returns all known values for ActionGroupSignature. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ActionGroupSignature) Values() []ActionGroupSignature {
 	return []ActionGroupSignature{
 		"AMAZON.UserInput",
@@ -27,8 +28,9 @@ const (
 )
 
 // Values returns all known values for ActionGroupState. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ActionGroupState) Values() []ActionGroupState {
 	return []ActionGroupState{
 		"ENABLED",
@@ -48,8 +50,9 @@ const (
 )
 
 // Values returns all known values for AgentAliasStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (AgentAliasStatus) Values() []AgentAliasStatus {
 	return []AgentAliasStatus{
 		"CREATING",
@@ -75,8 +78,9 @@ const (
 )
 
 // Values returns all known values for AgentStatus. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (AgentStatus) Values() []AgentStatus {
 	return []AgentStatus{
 		"CREATING",
@@ -99,8 +103,9 @@ const (
 )
 
 // Values returns all known values for ChunkingStrategy. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ChunkingStrategy) Values() []ChunkingStrategy {
 	return []ChunkingStrategy{
 		"FIXED_SIZE",
@@ -117,8 +122,9 @@ const (
 )
 
 // Values returns all known values for CreationMode. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (CreationMode) Values() []CreationMode {
 	return []CreationMode{
 		"DEFAULT",
@@ -126,21 +132,60 @@ func (CreationMode) Values() []CreationMode {
 	}
 }
 
+type CustomControlMethod string
+
+// Enum values for CustomControlMethod
+const (
+	CustomControlMethodReturnControl CustomControlMethod = "RETURN_CONTROL"
+)
+
+// Values returns all known values for CustomControlMethod. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (CustomControlMethod) Values() []CustomControlMethod {
+	return []CustomControlMethod{
+		"RETURN_CONTROL",
+	}
+}
+
+type DataDeletionPolicy string
+
+// Enum values for DataDeletionPolicy
+const (
+	DataDeletionPolicyRetain DataDeletionPolicy = "RETAIN"
+	DataDeletionPolicyDelete DataDeletionPolicy = "DELETE"
+)
+
+// Values returns all known values for DataDeletionPolicy. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (DataDeletionPolicy) Values() []DataDeletionPolicy {
+	return []DataDeletionPolicy{
+		"RETAIN",
+		"DELETE",
+	}
+}
+
 type DataSourceStatus string
 
 // Enum values for DataSourceStatus
 const (
-	DataSourceStatusAvailable DataSourceStatus = "AVAILABLE"
-	DataSourceStatusDeleting  DataSourceStatus = "DELETING"
+	DataSourceStatusAvailable          DataSourceStatus = "AVAILABLE"
+	DataSourceStatusDeleting           DataSourceStatus = "DELETING"
+	DataSourceStatusDeleteUnsuccessful DataSourceStatus = "DELETE_UNSUCCESSFUL"
 )
 
 // Values returns all known values for DataSourceStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (DataSourceStatus) Values() []DataSourceStatus {
 	return []DataSourceStatus{
 		"AVAILABLE",
 		"DELETING",
+		"DELETE_UNSUCCESSFUL",
 	}
 }
 
@@ -152,8 +197,9 @@ const (
 )
 
 // Values returns all known values for DataSourceType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (DataSourceType) Values() []DataSourceType {
 	return []DataSourceType{
 		"S3",
@@ -169,6 +215,7 @@ const (
 
 // Values returns all known values for IngestionJobFilterAttribute. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (IngestionJobFilterAttribute) Values() []IngestionJobFilterAttribute {
 	return []IngestionJobFilterAttribute{
@@ -185,6 +232,7 @@ const (
 
 // Values returns all known values for IngestionJobFilterOperator. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (IngestionJobFilterOperator) Values() []IngestionJobFilterOperator {
 	return []IngestionJobFilterOperator{
@@ -202,6 +250,7 @@ const (
 
 // Values returns all known values for IngestionJobSortByAttribute. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (IngestionJobSortByAttribute) Values() []IngestionJobSortByAttribute {
 	return []IngestionJobSortByAttribute{
@@ -221,8 +270,9 @@ const (
 )
 
 // Values returns all known values for IngestionJobStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (IngestionJobStatus) Values() []IngestionJobStatus {
 	return []IngestionJobStatus{
 		"STARTING",
@@ -241,8 +291,9 @@ const (
 )
 
 // Values returns all known values for KnowledgeBaseState. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (KnowledgeBaseState) Values() []KnowledgeBaseState {
 	return []KnowledgeBaseState{
 		"ENABLED",
@@ -254,16 +305,18 @@ type KnowledgeBaseStatus string
 
 // Enum values for KnowledgeBaseStatus
 const (
-	KnowledgeBaseStatusCreating KnowledgeBaseStatus = "CREATING"
-	KnowledgeBaseStatusActive   KnowledgeBaseStatus = "ACTIVE"
-	KnowledgeBaseStatusDeleting KnowledgeBaseStatus = "DELETING"
-	KnowledgeBaseStatusUpdating KnowledgeBaseStatus = "UPDATING"
-	KnowledgeBaseStatusFailed   KnowledgeBaseStatus = "FAILED"
+	KnowledgeBaseStatusCreating           KnowledgeBaseStatus = "CREATING"
+	KnowledgeBaseStatusActive             KnowledgeBaseStatus = "ACTIVE"
+	KnowledgeBaseStatusDeleting           KnowledgeBaseStatus = "DELETING"
+	KnowledgeBaseStatusUpdating           KnowledgeBaseStatus = "UPDATING"
+	KnowledgeBaseStatusFailed             KnowledgeBaseStatus = "FAILED"
+	KnowledgeBaseStatusDeleteUnsuccessful KnowledgeBaseStatus = "DELETE_UNSUCCESSFUL"
 )
 
 // Values returns all known values for KnowledgeBaseStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (KnowledgeBaseStatus) Values() []KnowledgeBaseStatus {
 	return []KnowledgeBaseStatus{
 		"CREATING",
@@ -271,6 +324,7 @@ func (KnowledgeBaseStatus) Values() []KnowledgeBaseStatus {
 		"DELETING",
 		"UPDATING",
 		"FAILED",
+		"DELETE_UNSUCCESSFUL",
 	}
 }
 
@@ -282,10 +336,12 @@ const (
 	KnowledgeBaseStorageTypePinecone             KnowledgeBaseStorageType = "PINECONE"
 	KnowledgeBaseStorageTypeRedisEnterpriseCloud KnowledgeBaseStorageType = "REDIS_ENTERPRISE_CLOUD"
 	KnowledgeBaseStorageTypeRds                  KnowledgeBaseStorageType = "RDS"
+	KnowledgeBaseStorageTypeMongoDbAtlas         KnowledgeBaseStorageType = "MONGO_DB_ATLAS"
 )
 
 // Values returns all known values for KnowledgeBaseStorageType. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (KnowledgeBaseStorageType) Values() []KnowledgeBaseStorageType {
 	return []KnowledgeBaseStorageType{
@@ -293,6 +349,7 @@ func (KnowledgeBaseStorageType) Values() []KnowledgeBaseStorageType {
 		"PINECONE",
 		"REDIS_ENTERPRISE_CLOUD",
 		"RDS",
+		"MONGO_DB_ATLAS",
 	}
 }
 
@@ -304,8 +361,9 @@ const (
 )
 
 // Values returns all known values for KnowledgeBaseType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (KnowledgeBaseType) Values() []KnowledgeBaseType {
 	return []KnowledgeBaseType{
 		"VECTOR",
@@ -321,8 +379,9 @@ const (
 )
 
 // Values returns all known values for PromptState. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (PromptState) Values() []PromptState {
 	return []PromptState{
 		"ENABLED",
@@ -341,8 +400,9 @@ const (
 )
 
 // Values returns all known values for PromptType. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (PromptType) Values() []PromptType {
 	return []PromptType{
 		"PRE_PROCESSING",
@@ -361,11 +421,37 @@ const (
 )
 
 // Values returns all known values for SortOrder. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (SortOrder) Values() []SortOrder {
 	return []SortOrder{
 		"ASCENDING",
 		"DESCENDING",
+	}
+}
+
+type Type string
+
+// Enum values for Type
+const (
+	TypeString  Type = "string"
+	TypeNumber  Type = "number"
+	TypeInteger Type = "integer"
+	TypeBoolean Type = "boolean"
+	TypeArray   Type = "array"
+)
+
+// Values returns all known values for Type. Note that this can be expanded in the
+// future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (Type) Values() []Type {
+	return []Type{
+		"string",
+		"number",
+		"integer",
+		"boolean",
+		"array",
 	}
 }

@@ -16,22 +16,36 @@ import (
 	"strings"
 )
 
-// This operation is not supported by directory buckets. Creates an access point
-// and associates it with the specified bucket. For more information, see Managing
-// Data Access with Amazon S3 Access Points (https://docs.aws.amazon.com/AmazonS3/latest/userguide/access-points.html)
-// in the Amazon S3 User Guide. S3 on Outposts only supports VPC-style access
-// points. For more information, see Accessing Amazon S3 on Outposts using virtual
-// private cloud (VPC) only access points (https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3onOutposts.html)
-// in the Amazon S3 User Guide. All Amazon S3 on Outposts REST API requests for
-// this action require an additional parameter of x-amz-outpost-id to be passed
-// with the request. In addition, you must use an S3 on Outposts endpoint hostname
-// prefix instead of s3-control . For an example of the request syntax for Amazon
-// S3 on Outposts that uses the S3 on Outposts endpoint hostname prefix and the
-// x-amz-outpost-id derived by using the access point ARN, see the Examples (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_CreateAccessPoint.html#API_control_CreateAccessPoint_Examples)
-// section. The following actions are related to CreateAccessPoint :
-//   - GetAccessPoint (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetAccessPoint.html)
-//   - DeleteAccessPoint (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteAccessPoint.html)
-//   - ListAccessPoints (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_ListAccessPoints.html)
+// This operation is not supported by directory buckets.
+//
+// Creates an access point and associates it with the specified bucket. For more
+// information, see [Managing Data Access with Amazon S3 Access Points]in the Amazon S3 User Guide.
+//
+// S3 on Outposts only supports VPC-style access points.
+//
+// For more information, see [Accessing Amazon S3 on Outposts using virtual private cloud (VPC) only access points] in the Amazon S3 User Guide.
+//
+// All Amazon S3 on Outposts REST API requests for this action require an
+// additional parameter of x-amz-outpost-id to be passed with the request. In
+// addition, you must use an S3 on Outposts endpoint hostname prefix instead of
+// s3-control . For an example of the request syntax for Amazon S3 on Outposts that
+// uses the S3 on Outposts endpoint hostname prefix and the x-amz-outpost-id
+// derived by using the access point ARN, see the [Examples]section.
+//
+// The following actions are related to CreateAccessPoint :
+//
+// [GetAccessPoint]
+//
+// [DeleteAccessPoint]
+//
+// [ListAccessPoints]
+//
+// [ListAccessPoints]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_ListAccessPoints.html
+// [Managing Data Access with Amazon S3 Access Points]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/access-points.html
+// [GetAccessPoint]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetAccessPoint.html
+// [Accessing Amazon S3 on Outposts using virtual private cloud (VPC) only access points]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3onOutposts.html
+// [DeleteAccessPoint]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteAccessPoint.html
+// [Examples]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_CreateAccessPoint.html#API_control_CreateAccessPoint_Examples
 func (c *Client) CreateAccessPoint(ctx context.Context, params *CreateAccessPointInput, optFns ...func(*Options)) (*CreateAccessPointOutput, error) {
 	if params == nil {
 		params = &CreateAccessPointInput{}
@@ -55,13 +69,16 @@ type CreateAccessPointInput struct {
 	// This member is required.
 	AccountId *string
 
-	// The name of the bucket that you want to associate this access point with. For
-	// using this parameter with Amazon S3 on Outposts with the REST API, you must
-	// specify the name and the x-amz-outpost-id as well. For using this parameter with
-	// S3 on Outposts with the Amazon Web Services SDK and CLI, you must specify the
-	// ARN of the bucket accessed in the format arn:aws:s3-outposts:::outpost//bucket/
-	// . For example, to access the bucket reports through Outpost my-outpost owned by
-	// account 123456789012 in Region us-west-2 , use the URL encoding of
+	// The name of the bucket that you want to associate this access point with.
+	//
+	// For using this parameter with Amazon S3 on Outposts with the REST API, you must
+	// specify the name and the x-amz-outpost-id as well.
+	//
+	// For using this parameter with S3 on Outposts with the Amazon Web Services SDK
+	// and CLI, you must specify the ARN of the bucket accessed in the format
+	// arn:aws:s3-outposts:::outpost//bucket/ . For example, to access the bucket
+	// reports through Outpost my-outpost owned by account 123456789012 in Region
+	// us-west-2 , use the URL encoding of
 	// arn:aws:s3-outposts:us-west-2:123456789012:outpost/my-outpost/bucket/reports .
 	// The value must be URL encoded.
 	//
@@ -75,14 +92,21 @@ type CreateAccessPointInput struct {
 
 	// The Amazon Web Services account ID associated with the S3 bucket associated
 	// with this access point.
+	//
+	// For same account access point when your bucket and access point belong to the
+	// same account owner, the BucketAccountId is not required. For cross-account
+	// access point when your bucket and access point are not in the same account, the
+	// BucketAccountId is required.
 	BucketAccountId *string
 
-	// The PublicAccessBlock configuration that you want to apply to the access point.
+	//  The PublicAccessBlock configuration that you want to apply to the access
+	// point.
 	PublicAccessBlockConfiguration *types.PublicAccessBlockConfiguration
 
 	// If you include this field, Amazon S3 restricts access to this access point to
-	// requests from the specified virtual private cloud (VPC). This is required for
-	// creating an access point for Amazon S3 on Outposts buckets.
+	// requests from the specified virtual private cloud (VPC).
+	//
+	// This is required for creating an access point for Amazon S3 on Outposts buckets.
 	VpcConfiguration *types.VpcConfiguration
 
 	noSmithyDocumentSerde
@@ -96,7 +120,9 @@ func (in *CreateAccessPointInput) bindEndpointParams(p *EndpointParameters) {
 
 type CreateAccessPointOutput struct {
 
-	// The ARN of the access point. This is only supported by Amazon S3 on Outposts.
+	// The ARN of the access point.
+	//
+	// This is only supported by Amazon S3 on Outposts.
 	AccessPointArn *string
 
 	// The name or alias of the access point.
@@ -130,25 +156,25 @@ func (c *Client) addOperationCreateAccessPointMiddlewares(stack *middleware.Stac
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -166,6 +192,9 @@ func (c *Client) addOperationCreateAccessPointMiddlewares(stack *middleware.Stac
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addEndpointPrefix_opCreateAccessPointMiddleware(stack); err != nil {
 		return err
 	}
@@ -178,7 +207,7 @@ func (c *Client) addOperationCreateAccessPointMiddlewares(stack *middleware.Stac
 	if err = addMetadataRetrieverMiddleware(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addCreateAccessPointUpdateEndpoint(stack, options); err != nil {

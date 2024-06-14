@@ -6,21 +6,27 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Deletes an entire resource tree. This operation will delete the parent resource
-// and its child resources. Child resources are resources that were created from
-// another resource. For example, when a forecast is generated from a predictor,
-// the forecast is the child resource and the predictor is the parent resource.
+// and its child resources.
+//
+// Child resources are resources that were created from another resource. For
+// example, when a forecast is generated from a predictor, the forecast is the
+// child resource and the predictor is the parent resource.
+//
 // Amazon Forecast resources possess the following parent-child resource
 // hierarchies:
+//
 //   - Dataset: dataset import jobs
+//
 //   - Dataset Group: predictors, predictor backtest export jobs, forecasts,
 //     forecast export jobs
+//
 //   - Predictor: predictor backtest export jobs, forecasts, forecast export jobs
+//
 //   - Forecast: forecast export jobs
 //
 // DeleteResourceTree will only delete Amazon Forecast resources, and will not
@@ -80,25 +86,25 @@ func (c *Client) addOperationDeleteResourceTreeMiddlewares(stack *middleware.Sta
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -113,13 +119,16 @@ func (c *Client) addOperationDeleteResourceTreeMiddlewares(stack *middleware.Sta
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDeleteResourceTreeValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteResourceTree(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

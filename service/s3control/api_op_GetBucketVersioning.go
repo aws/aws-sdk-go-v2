@@ -17,24 +17,40 @@ import (
 )
 
 // This operation returns the versioning state for S3 on Outposts buckets only. To
-// return the versioning state for an S3 bucket, see GetBucketVersioning (https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetBucketVersioning.html)
-// in the Amazon S3 API Reference. Returns the versioning state for an S3 on
-// Outposts bucket. With S3 Versioning, you can save multiple distinct copies of
-// your objects and recover from unintended user actions and application failures.
+// return the versioning state for an S3 bucket, see [GetBucketVersioning]in the Amazon S3 API
+// Reference.
+//
+// Returns the versioning state for an S3 on Outposts bucket. With S3 Versioning,
+// you can save multiple distinct copies of your objects and recover from
+// unintended user actions and application failures.
+//
 // If you've never set versioning on your bucket, it has no versioning state. In
 // that case, the GetBucketVersioning request does not return a versioning state
-// value. For more information about versioning, see Versioning (https://docs.aws.amazon.com/AmazonS3/latest/userguide/Versioning.html)
-// in the Amazon S3 User Guide. All Amazon S3 on Outposts REST API requests for
-// this action require an additional parameter of x-amz-outpost-id to be passed
-// with the request. In addition, you must use an S3 on Outposts endpoint hostname
-// prefix instead of s3-control . For an example of the request syntax for Amazon
-// S3 on Outposts that uses the S3 on Outposts endpoint hostname prefix and the
-// x-amz-outpost-id derived by using the access point ARN, see the Examples (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetBucketVersioning.html#API_control_GetBucketVersioning_Examples)
-// section. The following operations are related to GetBucketVersioning for S3 on
-// Outposts.
-//   - PutBucketVersioning (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_PutBucketVersioning.html)
-//   - PutBucketLifecycleConfiguration (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_PutBucketLifecycleConfiguration.html)
-//   - GetBucketLifecycleConfiguration (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetBucketLifecycleConfiguration.html)
+// value.
+//
+// For more information about versioning, see [Versioning] in the Amazon S3 User Guide.
+//
+// All Amazon S3 on Outposts REST API requests for this action require an
+// additional parameter of x-amz-outpost-id to be passed with the request. In
+// addition, you must use an S3 on Outposts endpoint hostname prefix instead of
+// s3-control . For an example of the request syntax for Amazon S3 on Outposts that
+// uses the S3 on Outposts endpoint hostname prefix and the x-amz-outpost-id
+// derived by using the access point ARN, see the [Examples]section.
+//
+// The following operations are related to GetBucketVersioning for S3 on Outposts.
+//
+// [PutBucketVersioning]
+//
+// [PutBucketLifecycleConfiguration]
+//
+// [GetBucketLifecycleConfiguration]
+//
+// [Versioning]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/Versioning.html
+// [PutBucketLifecycleConfiguration]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_PutBucketLifecycleConfiguration.html
+// [PutBucketVersioning]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_PutBucketVersioning.html
+// [GetBucketLifecycleConfiguration]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetBucketLifecycleConfiguration.html
+// [Examples]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetBucketVersioning.html#API_control_GetBucketVersioning_Examples
+// [GetBucketVersioning]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetBucketVersioning.html
 func (c *Client) GetBucketVersioning(ctx context.Context, params *GetBucketVersioningInput, optFns ...func(*Options)) (*GetBucketVersioningOutput, error) {
 	if params == nil {
 		params = &GetBucketVersioningInput{}
@@ -110,25 +126,25 @@ func (c *Client) addOperationGetBucketVersioningMiddlewares(stack *middleware.St
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -146,6 +162,9 @@ func (c *Client) addOperationGetBucketVersioningMiddlewares(stack *middleware.St
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addEndpointPrefix_opGetBucketVersioningMiddleware(stack); err != nil {
 		return err
 	}
@@ -158,7 +177,7 @@ func (c *Client) addOperationGetBucketVersioningMiddlewares(stack *middleware.St
 	if err = addMetadataRetrieverMiddleware(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addGetBucketVersioningUpdateEndpoint(stack, options); err != nil {

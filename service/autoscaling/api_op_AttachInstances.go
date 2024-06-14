@@ -6,21 +6,25 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Attaches one or more EC2 instances to the specified Auto Scaling group. When
-// you attach instances, Amazon EC2 Auto Scaling increases the desired capacity of
-// the group by the number of instances being attached. If the number of instances
-// being attached plus the desired capacity of the group exceeds the maximum size
-// of the group, the operation fails. If there is a Classic Load Balancer attached
-// to your Auto Scaling group, the instances are also registered with the load
-// balancer. If there are target groups attached to your Auto Scaling group, the
-// instances are also registered with the target groups. For more information, see
-// Attach EC2 instances to your Auto Scaling group (https://docs.aws.amazon.com/autoscaling/ec2/userguide/attach-instance-asg.html)
-// in the Amazon EC2 Auto Scaling User Guide.
+// Attaches one or more EC2 instances to the specified Auto Scaling group.
+//
+// When you attach instances, Amazon EC2 Auto Scaling increases the desired
+// capacity of the group by the number of instances being attached. If the number
+// of instances being attached plus the desired capacity of the group exceeds the
+// maximum size of the group, the operation fails.
+//
+// If there is a Classic Load Balancer attached to your Auto Scaling group, the
+// instances are also registered with the load balancer. If there are target groups
+// attached to your Auto Scaling group, the instances are also registered with the
+// target groups.
+//
+// For more information, see [Attach EC2 instances to your Auto Scaling group] in the Amazon EC2 Auto Scaling User Guide.
+//
+// [Attach EC2 instances to your Auto Scaling group]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/attach-instance-asg.html
 func (c *Client) AttachInstances(ctx context.Context, params *AttachInstancesInput, optFns ...func(*Options)) (*AttachInstancesOutput, error) {
 	if params == nil {
 		params = &AttachInstancesInput{}
@@ -78,25 +82,25 @@ func (c *Client) addOperationAttachInstancesMiddlewares(stack *middleware.Stack,
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -111,13 +115,16 @@ func (c *Client) addOperationAttachInstancesMiddlewares(stack *middleware.Stack,
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpAttachInstancesValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opAttachInstances(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

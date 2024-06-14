@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/proton/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -14,12 +13,14 @@ import (
 
 // Set up a template to create new template versions automatically by tracking a
 // linked repository. A linked repository is a repository that has been registered
-// with Proton. For more information, see CreateRepository . When a commit is
-// pushed to your linked repository, Proton checks for changes to your repository
-// template bundles. If it detects a template bundle change, a new major or minor
-// version of its template is created, if the version doesn’t already exist. For
-// more information, see Template sync configurations (https://docs.aws.amazon.com/proton/latest/userguide/ag-template-sync-configs.html)
-// in the Proton User Guide.
+// with Proton. For more information, see CreateRepository.
+//
+// When a commit is pushed to your linked repository, Proton checks for changes to
+// your repository template bundles. If it detects a template bundle change, a new
+// major or minor version of its template is created, if the version doesn’t
+// already exist. For more information, see [Template sync configurations]in the Proton User Guide.
+//
+// [Template sync configurations]: https://docs.aws.amazon.com/proton/latest/userguide/ag-template-sync-configs.html
 func (c *Client) CreateTemplateSyncConfig(ctx context.Context, params *CreateTemplateSyncConfigInput, optFns ...func(*Options)) (*CreateTemplateSyncConfigOutput, error) {
 	if params == nil {
 		params = &CreateTemplateSyncConfigInput{}
@@ -102,25 +103,25 @@ func (c *Client) addOperationCreateTemplateSyncConfigMiddlewares(stack *middlewa
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -135,13 +136,16 @@ func (c *Client) addOperationCreateTemplateSyncConfigMiddlewares(stack *middlewa
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpCreateTemplateSyncConfigValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateTemplateSyncConfig(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

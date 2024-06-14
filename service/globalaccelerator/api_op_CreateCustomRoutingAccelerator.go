@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/globalaccelerator/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -14,15 +13,19 @@ import (
 
 // Create a custom routing accelerator. A custom routing accelerator directs
 // traffic to one of possibly thousands of Amazon EC2 instance destinations running
-// in a single or multiple virtual private clouds (VPC) subnet endpoints. Be aware
-// that, by default, all destination EC2 instances in a VPC subnet endpoint cannot
-// receive traffic. To enable all destinations to receive traffic, or to specify
-// individual port mappings that can receive traffic, see the
-// AllowCustomRoutingTraffic (https://docs.aws.amazon.com/global-accelerator/latest/api/API_AllowCustomRoutingTraffic.html)
-// operation. Global Accelerator is a global service that supports endpoints in
-// multiple Amazon Web Services Regions but you must specify the US West (Oregon)
-// Region to create, update, or otherwise work with accelerators. That is, for
-// example, specify --region us-west-2 on Amazon Web Services CLI commands.
+// in a single or multiple virtual private clouds (VPC) subnet endpoints.
+//
+// Be aware that, by default, all destination EC2 instances in a VPC subnet
+// endpoint cannot receive traffic. To enable all destinations to receive traffic,
+// or to specify individual port mappings that can receive traffic, see the [AllowCustomRoutingTraffic]
+// operation.
+//
+// Global Accelerator is a global service that supports endpoints in multiple
+// Amazon Web Services Regions but you must specify the US West (Oregon) Region to
+// create, update, or otherwise work with accelerators. That is, for example,
+// specify --region us-west-2 on Amazon Web Services CLI commands.
+//
+// [AllowCustomRoutingTraffic]: https://docs.aws.amazon.com/global-accelerator/latest/api/API_AllowCustomRoutingTraffic.html
 func (c *Client) CreateCustomRoutingAccelerator(ctx context.Context, params *CreateCustomRoutingAcceleratorInput, optFns ...func(*Options)) (*CreateCustomRoutingAcceleratorOutput, error) {
 	if params == nil {
 		params = &CreateCustomRoutingAcceleratorInput{}
@@ -54,8 +57,10 @@ type CreateCustomRoutingAcceleratorInput struct {
 	Name *string
 
 	// Indicates whether an accelerator is enabled. The value is true or false. The
-	// default value is true. If the value is set to true, an accelerator cannot be
-	// deleted. If set to false, the accelerator can be deleted.
+	// default value is true.
+	//
+	// If the value is set to true, an accelerator cannot be deleted. If set to false,
+	// the accelerator can be deleted.
 	Enabled *bool
 
 	// The IP address type that an accelerator supports. For a custom routing
@@ -64,24 +69,32 @@ type CreateCustomRoutingAcceleratorInput struct {
 
 	// Optionally, if you've added your own IP address pool to Global Accelerator
 	// (BYOIP), you can choose an IPv4 address from your own pool to use for the
-	// accelerator's static IPv4 address when you create an accelerator. After you
-	// bring an address range to Amazon Web Services, it appears in your account as an
-	// address pool. When you create an accelerator, you can assign one IPv4 address
-	// from your range to it. Global Accelerator assigns you a second static IPv4
-	// address from an Amazon IP address range. If you bring two IPv4 address ranges to
-	// Amazon Web Services, you can assign one IPv4 address from each range to your
-	// accelerator. This restriction is because Global Accelerator assigns each address
-	// range to a different network zone, for high availability. You can specify one or
-	// two addresses, separated by a space. Do not include the /32 suffix. Note that
-	// you can't update IP addresses for an existing accelerator. To change them, you
-	// must create a new accelerator with the new addresses. For more information, see
-	// Bring your own IP addresses (BYOIP) (https://docs.aws.amazon.com/global-accelerator/latest/dg/using-byoip.html)
-	// in the Global Accelerator Developer Guide.
+	// accelerator's static IPv4 address when you create an accelerator.
+	//
+	// After you bring an address range to Amazon Web Services, it appears in your
+	// account as an address pool. When you create an accelerator, you can assign one
+	// IPv4 address from your range to it. Global Accelerator assigns you a second
+	// static IPv4 address from an Amazon IP address range. If you bring two IPv4
+	// address ranges to Amazon Web Services, you can assign one IPv4 address from each
+	// range to your accelerator. This restriction is because Global Accelerator
+	// assigns each address range to a different network zone, for high availability.
+	//
+	// You can specify one or two addresses, separated by a space. Do not include the
+	// /32 suffix.
+	//
+	// Note that you can't update IP addresses for an existing accelerator. To change
+	// them, you must create a new accelerator with the new addresses.
+	//
+	// For more information, see [Bring your own IP addresses (BYOIP)] in the Global Accelerator Developer Guide.
+	//
+	// [Bring your own IP addresses (BYOIP)]: https://docs.aws.amazon.com/global-accelerator/latest/dg/using-byoip.html
 	IpAddresses []string
 
-	// Create tags for an accelerator. For more information, see Tagging in Global
-	// Accelerator (https://docs.aws.amazon.com/global-accelerator/latest/dg/tagging-in-global-accelerator.html)
-	// in the Global Accelerator Developer Guide.
+	// Create tags for an accelerator.
+	//
+	// For more information, see [Tagging in Global Accelerator] in the Global Accelerator Developer Guide.
+	//
+	// [Tagging in Global Accelerator]: https://docs.aws.amazon.com/global-accelerator/latest/dg/tagging-in-global-accelerator.html
 	Tags []types.Tag
 
 	noSmithyDocumentSerde
@@ -120,25 +133,25 @@ func (c *Client) addOperationCreateCustomRoutingAcceleratorMiddlewares(stack *mi
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -153,6 +166,9 @@ func (c *Client) addOperationCreateCustomRoutingAcceleratorMiddlewares(stack *mi
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opCreateCustomRoutingAcceleratorMiddleware(stack, options); err != nil {
 		return err
 	}
@@ -162,7 +178,7 @@ func (c *Client) addOperationCreateCustomRoutingAcceleratorMiddlewares(stack *mi
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateCustomRoutingAccelerator(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

@@ -6,18 +6,18 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates a registered Elastic IP address's name. For more information, see
-// Resource Management (https://docs.aws.amazon.com/opsworks/latest/userguide/resources.html)
-// . Required Permissions: To use this action, an IAM user must have a Manage
+// Updates a registered Elastic IP address's name. For more information, see [Resource Management].
+//
+// Required Permissions: To use this action, an IAM user must have a Manage
 // permissions level for the stack, or an attached policy that explicitly grants
-// permissions. For more information on user permissions, see Managing User
-// Permissions (https://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html)
-// .
+// permissions. For more information on user permissions, see [Managing User Permissions].
+//
+// [Resource Management]: https://docs.aws.amazon.com/opsworks/latest/userguide/resources.html
+// [Managing User Permissions]: https://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html
 func (c *Client) UpdateElasticIp(ctx context.Context, params *UpdateElasticIpInput, optFns ...func(*Options)) (*UpdateElasticIpOutput, error) {
 	if params == nil {
 		params = &UpdateElasticIpInput{}
@@ -40,7 +40,7 @@ type UpdateElasticIpInput struct {
 	// This member is required.
 	ElasticIp *string
 
-	// The new name.
+	// The new name, which can be a maximum of 32 characters.
 	Name *string
 
 	noSmithyDocumentSerde
@@ -75,25 +75,25 @@ func (c *Client) addOperationUpdateElasticIpMiddlewares(stack *middleware.Stack,
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -108,13 +108,16 @@ func (c *Client) addOperationUpdateElasticIpMiddlewares(stack *middleware.Stack,
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpUpdateElasticIpValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateElasticIp(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

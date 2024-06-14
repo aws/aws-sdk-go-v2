@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/mediapackagev2/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -15,8 +14,10 @@ import (
 
 // Update the specified origin endpoint. Edit the packaging preferences on an
 // endpoint to optimize the viewing experience. You can't edit the name of the
-// endpoint. Any edits you make that impact the video output may not be reflected
-// for a few minutes.
+// endpoint.
+//
+// Any edits you make that impact the video output may not be reflected for a few
+// minutes.
 func (c *Client) UpdateOriginEndpoint(ctx context.Context, params *UpdateOriginEndpointInput, optFns ...func(*Options)) (*UpdateOriginEndpointOutput, error) {
 	if params == nil {
 		params = &UpdateOriginEndpointInput{}
@@ -61,9 +62,20 @@ type UpdateOriginEndpointInput struct {
 	// This member is required.
 	OriginEndpointName *string
 
+	// A DASH manifest configuration.
+	DashManifests []types.CreateDashManifestConfiguration
+
 	// Any descriptive information that you want to add to the origin endpoint for
 	// future identification purposes.
 	Description *string
+
+	// The expected current Entity Tag (ETag) for the resource. If the specified ETag
+	// does not match the resource's current entity tag, the update request will be
+	// rejected.
+	ETag *string
+
+	// The failover settings for the endpoint.
+	ForceEndpointErrorConfiguration *types.ForceEndpointErrorConfiguration
 
 	// An HTTP live streaming (HLS) manifest configuration.
 	HlsManifests []types.CreateHlsManifestConfiguration
@@ -132,8 +144,18 @@ type UpdateOriginEndpointOutput struct {
 	// This member is required.
 	Segment *types.Segment
 
+	// A DASH manifest configuration.
+	DashManifests []types.GetDashManifestConfiguration
+
 	// The description of the origin endpoint.
 	Description *string
+
+	// The current Entity Tag (ETag) associated with this resource. The entity tag can
+	// be used to safely make concurrent updates to the resource.
+	ETag *string
+
+	// The failover settings for the endpoint.
+	ForceEndpointErrorConfiguration *types.ForceEndpointErrorConfiguration
 
 	// An HTTP live streaming (HLS) manifest configuration.
 	HlsManifests []types.GetHlsManifestConfiguration
@@ -177,25 +199,25 @@ func (c *Client) addOperationUpdateOriginEndpointMiddlewares(stack *middleware.S
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -210,13 +232,16 @@ func (c *Client) addOperationUpdateOriginEndpointMiddlewares(stack *middleware.S
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpUpdateOriginEndpointValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateOriginEndpoint(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

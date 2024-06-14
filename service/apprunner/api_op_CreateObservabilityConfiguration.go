@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/apprunner/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -15,17 +14,20 @@ import (
 // Create an App Runner observability configuration resource. App Runner requires
 // this resource when you create or update App Runner services and you want to
 // enable non-default observability features. You can share an observability
-// configuration across multiple services. Create multiple revisions of a
-// configuration by calling this action multiple times using the same
-// ObservabilityConfigurationName . The call returns incremental
-// ObservabilityConfigurationRevision values. When you create a service and
-// configure an observability configuration resource, the service uses the latest
-// active revision of the observability configuration by default. You can
-// optionally configure the service to use a specific revision. The observability
-// configuration resource is designed to configure multiple features (currently one
-// feature, tracing). This action takes optional parameters that describe the
-// configuration of these features (currently one parameter, TraceConfiguration ).
-// If you don't specify a feature parameter, App Runner doesn't enable the feature.
+// configuration across multiple services.
+//
+// Create multiple revisions of a configuration by calling this action multiple
+// times using the same ObservabilityConfigurationName . The call returns
+// incremental ObservabilityConfigurationRevision values. When you create a
+// service and configure an observability configuration resource, the service uses
+// the latest active revision of the observability configuration by default. You
+// can optionally configure the service to use a specific revision.
+//
+// The observability configuration resource is designed to configure multiple
+// features (currently one feature, tracing). This action takes optional parameters
+// that describe the configuration of these features (currently one parameter,
+// TraceConfiguration ). If you don't specify a feature parameter, App Runner
+// doesn't enable the feature.
 func (c *Client) CreateObservabilityConfiguration(ctx context.Context, params *CreateObservabilityConfigurationInput, optFns ...func(*Options)) (*CreateObservabilityConfigurationOutput, error) {
 	if params == nil {
 		params = &CreateObservabilityConfigurationInput{}
@@ -46,11 +48,14 @@ type CreateObservabilityConfigurationInput struct {
 	// A name for the observability configuration. When you use it for the first time
 	// in an Amazon Web Services Region, App Runner creates revision number 1 of this
 	// name. When you use the same name in subsequent calls, App Runner creates
-	// incremental revisions of the configuration. The name DefaultConfiguration is
-	// reserved. You can't use it to create a new observability configuration, and you
-	// can't create a revision of it. When you want to use your own observability
-	// configuration for your App Runner service, create a configuration with a
-	// different name, and then provide it when you create or update your service.
+	// incremental revisions of the configuration.
+	//
+	// The name DefaultConfiguration is reserved. You can't use it to create a new
+	// observability configuration, and you can't create a revision of it.
+	//
+	// When you want to use your own observability configuration for your App Runner
+	// service, create a configuration with a different name, and then provide it when
+	// you create or update your service.
 	//
 	// This member is required.
 	ObservabilityConfigurationName *string
@@ -102,25 +107,25 @@ func (c *Client) addOperationCreateObservabilityConfigurationMiddlewares(stack *
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -135,13 +140,16 @@ func (c *Client) addOperationCreateObservabilityConfigurationMiddlewares(stack *
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpCreateObservabilityConfigurationValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateObservabilityConfiguration(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

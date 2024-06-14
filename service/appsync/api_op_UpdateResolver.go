@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/appsync/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -56,6 +55,7 @@ type UpdateResolverInput struct {
 	DataSourceName *string
 
 	// The resolver type.
+	//
 	//   - UNIT: A UNIT resolver type. A UNIT resolver is the default resolver type.
 	//   You can use a UNIT resolver to run a GraphQL query against a single data source.
 	//
@@ -71,17 +71,23 @@ type UpdateResolverInput struct {
 	// that metricsConfig won't be used unless the resolverLevelMetricsBehavior value
 	// is set to PER_RESOLVER_METRICS . If the resolverLevelMetricsBehavior is set to
 	// FULL_REQUEST_RESOLVER_METRICS instead, metricsConfig will be ignored. However,
-	// you can still set its value. metricsConfig can be ENABLED or DISABLED .
+	// you can still set its value.
+	//
+	// metricsConfig can be ENABLED or DISABLED .
 	MetricsConfig types.ResolverLevelMetricsConfig
 
 	// The PipelineConfig .
 	PipelineConfig *types.PipelineConfig
 
-	// The new request mapping template. A resolver uses a request mapping template to
-	// convert a GraphQL expression into a format that a data source can understand.
-	// Mapping templates are written in Apache Velocity Template Language (VTL). VTL
-	// request mapping templates are optional when using an Lambda data source. For all
-	// other data sources, VTL request and response mapping templates are required.
+	// The new request mapping template.
+	//
+	// A resolver uses a request mapping template to convert a GraphQL expression into
+	// a format that a data source can understand. Mapping templates are written in
+	// Apache Velocity Template Language (VTL).
+	//
+	// VTL request mapping templates are optional when using an Lambda data source.
+	// For all other data sources, VTL request and response mapping templates are
+	// required.
 	RequestMappingTemplate *string
 
 	// The new response mapping template.
@@ -132,25 +138,25 @@ func (c *Client) addOperationUpdateResolverMiddlewares(stack *middleware.Stack, 
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -165,13 +171,16 @@ func (c *Client) addOperationUpdateResolverMiddlewares(stack *middleware.Stack, 
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpUpdateResolverValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateResolver(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

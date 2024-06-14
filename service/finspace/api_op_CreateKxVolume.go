@@ -6,14 +6,15 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/finspace/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
-// Creates a new volume with a specific amount of throughput and storage capacity.
+//	Creates a new volume with a specific amount of throughput and storage
+//
+// capacity.
 func (c *Client) CreateKxVolume(ctx context.Context, params *CreateKxVolumeInput, optFns ...func(*Options)) (*CreateKxVolumeOutput, error) {
 	if params == nil {
 		params = &CreateKxVolumeInput{}
@@ -36,8 +37,8 @@ type CreateKxVolumeInput struct {
 	// This member is required.
 	AvailabilityZoneIds []string
 
-	// The number of availability zones you want to assign per cluster. Currently,
-	// FinSpace only support SINGLE for volumes.
+	// The number of availability zones you want to assign per volume. Currently,
+	// FinSpace only supports SINGLE for volumes. This places dataview in a single AZ.
 	//
 	// This member is required.
 	AzMode types.KxAzMode
@@ -53,7 +54,7 @@ type CreateKxVolumeInput struct {
 	// This member is required.
 	VolumeName *string
 
-	// The type of file system volume. Currently, FinSpace only supports NAS_1 volume
+	//  The type of file system volume. Currently, FinSpace only supports NAS_1 volume
 	// type. When you select NAS_1 volume type, you must also provide nas1Configuration
 	// .
 	//
@@ -63,14 +64,14 @@ type CreateKxVolumeInput struct {
 	// A token that ensures idempotency. This token expires in 10 minutes.
 	ClientToken *string
 
-	// A description of the volume.
+	//  A description of the volume.
 	Description *string
 
-	// Specifies the configuration for the Network attached storage (NAS_1) file
+	//  Specifies the configuration for the Network attached storage (NAS_1) file
 	// system volume. This parameter is required when you choose volumeType as NAS_1.
 	Nas1Configuration *types.KxNAS1Configuration
 
-	// A list of key-value pairs to label the volume. You can add up to 50 tags to a
+	//  A list of key-value pairs to label the volume. You can add up to 50 tags to a
 	// volume.
 	Tags map[string]string
 
@@ -82,8 +83,8 @@ type CreateKxVolumeOutput struct {
 	// The identifier of the availability zones.
 	AvailabilityZoneIds []string
 
-	// The number of availability zones you want to assign per cluster. Currently,
-	// FinSpace only support SINGLE for volumes.
+	// The number of availability zones you want to assign per volume. Currently,
+	// FinSpace only supports SINGLE for volumes. This places dataview in a single AZ.
 	AzMode types.KxAzMode
 
 	// The timestamp at which the volume was created in FinSpace. The value is
@@ -91,39 +92,48 @@ type CreateKxVolumeOutput struct {
 	// November 1, 2021 12:00:00 PM UTC is specified as 1635768000000.
 	CreatedTimestamp *time.Time
 
-	// A description of the volume.
+	//  A description of the volume.
 	Description *string
 
 	// A unique identifier for the kdb environment, whose clusters can attach to the
 	// volume.
 	EnvironmentId *string
 
-	// Specifies the configuration for the Network attached storage (NAS_1) file
+	//  Specifies the configuration for the Network attached storage (NAS_1) file
 	// system volume.
 	Nas1Configuration *types.KxNAS1Configuration
 
 	// The status of volume creation.
+	//
 	//   - CREATING – The volume creation is in progress.
+	//
 	//   - CREATE_FAILED – The volume creation has failed.
+	//
 	//   - ACTIVE – The volume is active.
+	//
 	//   - UPDATING – The volume is in the process of being updated.
+	//
 	//   - UPDATE_FAILED – The update action failed.
+	//
 	//   - UPDATED – The volume is successfully updated.
+	//
 	//   - DELETING – The volume is in the process of being deleted.
+	//
 	//   - DELETE_FAILED – The system failed to delete the volume.
+	//
 	//   - DELETED – The volume is successfully deleted.
 	Status types.KxVolumeStatus
 
 	// The error message when a failed state occurs.
 	StatusReason *string
 
-	// The ARN identifier of the volume.
+	//  The ARN identifier of the volume.
 	VolumeArn *string
 
 	// A unique identifier for the volume.
 	VolumeName *string
 
-	// The type of file system volume. Currently, FinSpace only supports NAS_1 volume
+	//  The type of file system volume. Currently, FinSpace only supports NAS_1 volume
 	// type.
 	VolumeType types.KxVolumeType
 
@@ -155,25 +165,25 @@ func (c *Client) addOperationCreateKxVolumeMiddlewares(stack *middleware.Stack, 
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -191,6 +201,9 @@ func (c *Client) addOperationCreateKxVolumeMiddlewares(stack *middleware.Stack, 
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opCreateKxVolumeMiddleware(stack, options); err != nil {
 		return err
 	}
@@ -200,7 +213,7 @@ func (c *Client) addOperationCreateKxVolumeMiddlewares(stack *middleware.Stack, 
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateKxVolume(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

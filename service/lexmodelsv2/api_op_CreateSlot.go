@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/lexmodelsv2/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -51,9 +50,9 @@ type CreateSlotInput struct {
 
 	// The identifier of the language and locale that the slot will be used in. The
 	// string must match one of the supported locales. All of the bots, intents, slot
-	// types used by the slot must have the same locale. For more information, see
-	// Supported languages (https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html)
-	// .
+	// types used by the slot must have the same locale. For more information, see [Supported languages].
+	//
+	// [Supported languages]: https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html
 	//
 	// This member is required.
 	LocaleId *string
@@ -75,14 +74,17 @@ type CreateSlotInput struct {
 
 	// Indicates whether the slot returns multiple values in one response. Multi-value
 	// slots are only available in the en-US locale. If you set this value to true in
-	// any other locale, Amazon Lex throws a ValidationException . If the
-	// multipleValuesSetting is not set, the default value is false .
+	// any other locale, Amazon Lex throws a ValidationException .
+	//
+	// If the multipleValuesSetting is not set, the default value is false .
 	MultipleValuesSetting *types.MultipleValuesSetting
 
 	// Determines how slot values are used in Amazon CloudWatch logs. If the value of
 	// the obfuscationSetting parameter is DefaultObfuscation , slot values are
 	// obfuscated in the log output. If the value is None , the actual value is present
-	// in the log output. The default is to obfuscate values in the CloudWatch logs.
+	// in the log output.
+	//
+	// The default is to obfuscate values in the CloudWatch logs.
 	ObfuscationSetting *types.ObfuscationSetting
 
 	// The unique identifier for the slot type associated with this slot. The slot
@@ -168,25 +170,25 @@ func (c *Client) addOperationCreateSlotMiddlewares(stack *middleware.Stack, opti
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -201,13 +203,16 @@ func (c *Client) addOperationCreateSlotMiddlewares(stack *middleware.Stack, opti
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpCreateSlotValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateSlot(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

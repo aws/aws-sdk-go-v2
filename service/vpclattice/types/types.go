@@ -62,7 +62,7 @@ type DnsEntry struct {
 	noSmithyDocumentSerde
 }
 
-// Information about an action that returns a custom HTTP response.
+// Describes an action that returns a custom HTTP response.
 type FixedResponseAction struct {
 
 	// The HTTP response code.
@@ -82,9 +82,11 @@ type ForwardAction struct {
 	// prioritization and selection of each target group. This means that requests are
 	// distributed to individual target groups based on their weights. For example, if
 	// two target groups have the same weight, each target group receives half of the
-	// traffic. The default value is 1. This means that if only one target group is
-	// provided, there is no need to set the weight; 100% of traffic will go to that
-	// target group.
+	// traffic.
+	//
+	// The default value is 1. This means that if only one target group is provided,
+	// there is no need to set the weight; 100% of the traffic goes to that target
+	// group.
 	//
 	// This member is required.
 	TargetGroups []WeightedTargetGroup
@@ -106,13 +108,13 @@ type HeaderMatch struct {
 	// This member is required.
 	Name *string
 
-	// Indicates whether the match is case sensitive. Defaults to false.
+	// Indicates whether the match is case sensitive.
 	CaseSensitive *bool
 
 	noSmithyDocumentSerde
 }
 
-// Describes a header match type. Only one can be provided.
+// Describes a header match type.
 //
 // The following types satisfy this interface:
 //
@@ -123,7 +125,7 @@ type HeaderMatchType interface {
 	isHeaderMatchType()
 }
 
-// Specifies a contains type match.
+// A contains type match.
 type HeaderMatchTypeMemberContains struct {
 	Value string
 
@@ -132,7 +134,7 @@ type HeaderMatchTypeMemberContains struct {
 
 func (*HeaderMatchTypeMemberContains) isHeaderMatchType() {}
 
-// Specifies an exact type match.
+// An exact type match.
 type HeaderMatchTypeMemberExact struct {
 	Value string
 
@@ -141,7 +143,7 @@ type HeaderMatchTypeMemberExact struct {
 
 func (*HeaderMatchTypeMemberExact) isHeaderMatchType() {}
 
-// Specifies a prefix type match. Matches the value with the prefix.
+// A prefix type match. Matches the value with the prefix.
 type HeaderMatchTypeMemberPrefix struct {
 	Value string
 
@@ -150,8 +152,8 @@ type HeaderMatchTypeMemberPrefix struct {
 
 func (*HeaderMatchTypeMemberPrefix) isHeaderMatchType() {}
 
-// The health check configuration of a target group. Health check configurations
-// aren't used for LAMBDA and ALB target groups.
+// Describes the health check configuration of a target group. Health check
+// configurations aren't used for target groups of type LAMBDA or ALB .
 type HealthCheckConfig struct {
 
 	// Indicates whether health checking is enabled.
@@ -169,8 +171,7 @@ type HealthCheckConfig struct {
 	// an unhealthy target healthy. The range is 2–10. The default is 5.
 	HealthyThresholdCount *int32
 
-	// The codes to use when checking for a successful response from a target. These
-	// are called Success codes in the console.
+	// The codes to use when checking for a successful response from a target.
 	Matcher Matcher
 
 	// The destination for health checks on the targets. If the protocol version is
@@ -242,8 +243,8 @@ type ListenerSummary struct {
 	noSmithyDocumentSerde
 }
 
-// The codes to use when checking for a successful response from a target for
-// health checks.
+// Describes the codes to use when checking for a successful response from a
+// target for health checks.
 //
 // The following types satisfy this interface:
 //
@@ -270,7 +271,7 @@ type PathMatch struct {
 	// This member is required.
 	Match PathMatchType
 
-	// Indicates whether the match is case sensitive. Defaults to false.
+	// Indicates whether the match is case sensitive.
 	CaseSensitive *bool
 
 	noSmithyDocumentSerde
@@ -305,9 +306,7 @@ type PathMatchTypeMemberPrefix struct {
 
 func (*PathMatchTypeMemberPrefix) isPathMatchType() {}
 
-// Describes the action for a rule. Each rule must include exactly one of the
-// following types of actions: forward or fixed-response , and it must be the last
-// action to be performed.
+// Describes the action for a rule.
 //
 // The following types satisfy this interface:
 //
@@ -317,7 +316,7 @@ type RuleAction interface {
 	isRuleAction()
 }
 
-// Describes the rule action that returns a custom HTTP response.
+// The fixed response action. The rule returns a custom HTTP response.
 type RuleActionMemberFixedResponse struct {
 	Value FixedResponseAction
 
@@ -367,9 +366,7 @@ type RuleSummary struct {
 	// The ID of the rule.
 	Id *string
 
-	// Indicates whether this is the default rule. Listener rules are created when you
-	// create a listener. Each listener has a default rule for checking connection
-	// requests.
+	// Indicates whether this is the default listener rule.
 	IsDefault *bool
 
 	// The date and time that the listener rule was last updated, specified in
@@ -385,7 +382,7 @@ type RuleSummary struct {
 	noSmithyDocumentSerde
 }
 
-// Represents an object when updating a rule.
+// Describes a rule update.
 type RuleUpdate struct {
 
 	// The ID or Amazon Resource Name (ARN) of the rule.
@@ -423,7 +420,7 @@ type RuleUpdateFailure struct {
 // Describes a successful rule update.
 type RuleUpdateSuccess struct {
 
-	// The action for the default rule.
+	// The action for the rule.
 	Action RuleAction
 
 	// The Amazon Resource Name (ARN) of the listener.
@@ -464,7 +461,7 @@ type ServiceNetworkServiceAssociationSummary struct {
 	// The custom domain name of the service.
 	CustomDomainName *string
 
-	// DNS information about the service.
+	// The DNS information.
 	DnsEntry *DnsEntry
 
 	// The ID of the association.
@@ -573,7 +570,7 @@ type ServiceSummary struct {
 	// The custom domain name of the service.
 	CustomDomainName *string
 
-	// DNS information about the service.
+	// The DNS information.
 	DnsEntry *DnsEntry
 
 	// The ID of the service.
@@ -594,16 +591,16 @@ type ServiceSummary struct {
 // Describes a target.
 type Target struct {
 
-	// The ID of the target. If the target type of the target group is INSTANCE , this
-	// is an instance ID. If the target type is IP , this is an IP address. If the
-	// target type is LAMBDA , this is the ARN of the Lambda function. If the target
-	// type is ALB , this is the ARN of the Application Load Balancer.
+	// The ID of the target. If the target group type is INSTANCE , this is an instance
+	// ID. If the target group type is IP , this is an IP address. If the target group
+	// type is LAMBDA , this is the ARN of a Lambda function. If the target group type
+	// is ALB , this is the ARN of an Application Load Balancer.
 	//
 	// This member is required.
 	Id *string
 
-	// The port on which the target is listening. For HTTP, the default is 80 . For
-	// HTTPS, the default is 443 .
+	// The port on which the target is listening. For HTTP, the default is 80. For
+	// HTTPS, the default is 443.
 	Port *int32
 
 	noSmithyDocumentSerde
@@ -618,10 +615,10 @@ type TargetFailure struct {
 	// The failure message.
 	FailureMessage *string
 
-	// The ID of the target. If the target type of the target group is INSTANCE , this
-	// is an instance ID. If the target type is IP , this is an IP address. If the
-	// target type is LAMBDA , this is the ARN of the Lambda function. If the target
-	// type is ALB , this is the ARN of the Application Load Balancer.
+	// The ID of the target. If the target group type is INSTANCE , this is an instance
+	// ID. If the target group type is IP , this is an IP address. If the target group
+	// type is LAMBDA , this is the ARN of a Lambda function. If the target group type
+	// is ALB , this is the ARN of an Application Load Balancer.
 	Id *string
 
 	// The port on which the target is listening. This parameter doesn't apply if the
@@ -631,39 +628,48 @@ type TargetFailure struct {
 	noSmithyDocumentSerde
 }
 
-// Describes the configuration of a target group. Lambda functions don't support
-// target group configuration.
+// Describes the configuration of a target group.
+//
+// For more information, see [Target groups] in the Amazon VPC Lattice User Guide.
+//
+// [Target groups]: https://docs.aws.amazon.com/vpc-lattice/latest/ug/target-groups.html
 type TargetGroupConfig struct {
 
-	// The health check configuration.
+	// The health check configuration. Not supported if the target group type is LAMBDA
+	// or ALB .
 	HealthCheck *HealthCheckConfig
 
-	// The type of IP address used for the target group. The possible values are ipv4
-	// and ipv6 . This is an optional parameter. If not specified, the IP address type
-	// defaults to ipv4 .
+	// The type of IP address used for the target group. Supported only if the target
+	// group type is IP . The default is IPV4 .
 	IpAddressType IpAddressType
 
-	// Lambda event structure version
+	// The version of the event structure that your Lambda function receives.
+	// Supported only if the target group type is LAMBDA . The default is V1 .
 	LambdaEventStructureVersion LambdaEventStructureVersion
 
-	// The port on which the targets are listening. For HTTP, the default is 80 . For
-	// HTTPS, the default is 443
+	// The port on which the targets are listening. For HTTP, the default is 80. For
+	// HTTPS, the default is 443. Not supported if the target group type is LAMBDA .
 	Port *int32
 
-	// The protocol to use for routing traffic to the targets. Default is the protocol
-	// of a target group.
+	// The protocol to use for routing traffic to the targets. The default is the
+	// protocol of the target group. Not supported if the target group type is LAMBDA .
 	Protocol TargetGroupProtocol
 
-	// The protocol version. Default value is HTTP1 .
+	// The protocol version. The default is HTTP1 . Not supported if the target group
+	// type is LAMBDA .
 	ProtocolVersion TargetGroupProtocolVersion
 
-	// The ID of the VPC.
+	// The ID of the VPC. Not supported if the target group type is LAMBDA .
 	VpcIdentifier *string
 
 	noSmithyDocumentSerde
 }
 
 // Summary information about a target group.
+//
+// For more information, see [Target groups] in the Amazon VPC Lattice User Guide.
+//
+// [Target groups]: https://docs.aws.amazon.com/vpc-lattice/latest/ug/target-groups.html
 type TargetGroupSummary struct {
 
 	// The ARN (Amazon Resource Name) of the target group.
@@ -676,12 +682,12 @@ type TargetGroupSummary struct {
 	// The ID of the target group.
 	Id *string
 
-	// The type of IP address used for the target group. The possible values are ipv4
-	// and ipv6 . This is an optional parameter. If not specified, the IP address type
-	// defaults to ipv4 .
+	// The type of IP address used for the target group. The possible values are IPV4
+	// and IPV6 . This is an optional parameter. If not specified, the default is IPV4 .
 	IpAddressType IpAddressType
 
-	// Lambda event structure version
+	// The version of the event structure that your Lambda function receives.
+	// Supported only if the target group type is LAMBDA .
 	LambdaEventStructureVersion LambdaEventStructureVersion
 
 	// The date and time that the target group was last updated, specified in ISO-8601
@@ -697,7 +703,7 @@ type TargetGroupSummary struct {
 	// The protocol of the target group.
 	Protocol TargetGroupProtocol
 
-	// The list of Amazon Resource Names (ARNs) of the service.
+	// The Amazon Resource Names (ARNs) of the service.
 	ServiceArns []string
 
 	// The status.
@@ -715,10 +721,10 @@ type TargetGroupSummary struct {
 // Summary information about a target.
 type TargetSummary struct {
 
-	// The ID of the target. If the target type of the target group is INSTANCE , this
-	// is an instance ID. If the target type is IP , this is an IP address. If the
-	// target type is LAMBDA , this is the ARN of the Lambda function. If the target
-	// type is ALB , this is the ARN of the Application Load Balancer.
+	// The ID of the target. If the target group type is INSTANCE , this is an instance
+	// ID. If the target group type is IP , this is an IP address. If the target group
+	// type is LAMBDA , this is the ARN of a Lambda function. If the target type is ALB
+	// , this is the ARN of an Application Load Balancer.
 	Id *string
 
 	// The port on which the target is listening.
@@ -728,14 +734,20 @@ type TargetSummary struct {
 	ReasonCode *string
 
 	// The status of the target.
-	//   - Draining : The target is being deregistered. No new connections will be sent
-	//   to this target while current connections are being drained. Default draining
+	//
+	//   - DRAINING : The target is being deregistered. No new connections are sent to
+	//   this target while current connections are being drained. The default draining
 	//   time is 5 minutes.
-	//   - Unavailable : Health checks are unavailable for the target group.
-	//   - Healthy : The target is healthy.
-	//   - Unhealthy : The target is unhealthy.
-	//   - Initial : Initial health checks on the target are being performed.
-	//   - Unused : Target group is not used in a service.
+	//
+	//   - UNAVAILABLE : Health checks are unavailable for the target group.
+	//
+	//   - HEALTHY : The target is healthy.
+	//
+	//   - UNHEALTHY : The target is unhealthy.
+	//
+	//   - INITIAL : Initial health checks on the target are being performed.
+	//
+	//   - UNUSED : Target group is not used in a service.
 	Status TargetStatus
 
 	noSmithyDocumentSerde
@@ -744,7 +756,7 @@ type TargetSummary struct {
 // Describes a validation failure.
 type ValidationExceptionField struct {
 
-	// Additional details about why the validation failed.
+	// Additional information about why the validation failed.
 	//
 	// This member is required.
 	Message *string
@@ -766,12 +778,12 @@ type WeightedTargetGroup struct {
 	TargetGroupIdentifier *string
 
 	// Only required if you specify multiple target groups for a forward action. The
-	// "weight" determines how requests are distributed to the target group. For
-	// example, if you specify two target groups, each with a weight of 10, each target
-	// group receives half the requests. If you specify two target groups, one with a
-	// weight of 10 and the other with a weight of 20, the target group with a weight
-	// of 20 receives twice as many requests as the other target group. If there's only
-	// one target group specified, then the default value is 100.
+	// weight determines how requests are distributed to the target group. For example,
+	// if you specify two target groups, each with a weight of 10, each target group
+	// receives half the requests. If you specify two target groups, one with a weight
+	// of 10 and the other with a weight of 20, the target group with a weight of 20
+	// receives twice as many requests as the other target group. If there's only one
+	// target group specified, then the default value is 100.
 	Weight *int32
 
 	noSmithyDocumentSerde

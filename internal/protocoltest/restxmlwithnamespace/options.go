@@ -3,7 +3,10 @@
 package restxmlwithnamespace
 
 import (
+	"context"
 	"github.com/aws/aws-sdk-go-v2/aws"
+	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
+	internalauthsmithy "github.com/aws/aws-sdk-go-v2/internal/auth/smithy"
 	smithyauth "github.com/aws/smithy-go/auth"
 	"github.com/aws/smithy-go/logging"
 	"github.com/aws/smithy-go/middleware"
@@ -35,6 +38,9 @@ type Options struct {
 	// Configures the events that will be sent to the configured logger.
 	ClientLogMode aws.ClientLogMode
 
+	// The credentials object to use when signing requests.
+	Credentials aws.CredentialsProvider
+
 	// The configuration DefaultsMode that the SDK should use when constructing the
 	// clients initial default settings.
 	DefaultsMode aws.DefaultsMode
@@ -47,13 +53,18 @@ type Options struct {
 	// Deprecated: Deprecated: EndpointResolver and WithEndpointResolver. Providing a
 	// value for this field will likely prevent you from using any endpoint-related
 	// service features released after the introduction of EndpointResolverV2 and
-	// BaseEndpoint. To migrate an EndpointResolver implementation that uses a custom
-	// endpoint, set the client option BaseEndpoint instead.
+	// BaseEndpoint.
+	//
+	// To migrate an EndpointResolver implementation that uses a custom endpoint, set
+	// the client option BaseEndpoint instead.
 	EndpointResolver EndpointResolver
 
 	// Resolves the endpoint used for a particular service operation. This should be
 	// used over the deprecated EndpointResolver.
 	EndpointResolverV2 EndpointResolverV2
+
+	// Signature Version 4 (SigV4) Signer
+	HTTPSignerV4 HTTPSignerV4
 
 	// The logger writer interface to write logging messages to.
 	Logger logging.Logger
@@ -64,17 +75,20 @@ type Options struct {
 	// RetryMaxAttempts specifies the maximum number attempts an API client will call
 	// an operation that fails with a retryable error. A value of 0 is ignored, and
 	// will not be used to configure the API client created default retryer, or modify
-	// per operation call's retry max attempts. If specified in an operation call's
-	// functional options with a value that is different than the constructed client's
-	// Options, the Client's Retryer will be wrapped to use the operation's specific
-	// RetryMaxAttempts value.
+	// per operation call's retry max attempts.
+	//
+	// If specified in an operation call's functional options with a value that is
+	// different than the constructed client's Options, the Client's Retryer will be
+	// wrapped to use the operation's specific RetryMaxAttempts value.
 	RetryMaxAttempts int
 
 	// RetryMode specifies the retry mode the API client will be created with, if
-	// Retryer option is not also specified. When creating a new API Clients this
-	// member will only be used if the Retryer Options member is nil. This value will
-	// be ignored if Retryer is not nil. Currently does not support per operation call
-	// overrides, may in the future.
+	// Retryer option is not also specified.
+	//
+	// When creating a new API Clients this member will only be used if the Retryer
+	// Options member is nil. This value will be ignored if Retryer is not nil.
+	//
+	// Currently does not support per operation call overrides, may in the future.
 	RetryMode aws.RetryMode
 
 	// Retryer guides how HTTP requests should be retried in case of recoverable
@@ -91,8 +105,9 @@ type Options struct {
 
 	// The initial DefaultsMode used when the client options were constructed. If the
 	// DefaultsMode was set to aws.DefaultsModeAuto this will store what the resolved
-	// value was at that point in time. Currently does not support per operation call
-	// overrides, may in the future.
+	// value was at that point in time.
+	//
+	// Currently does not support per operation call overrides, may in the future.
 	resolvedDefaultsMode aws.DefaultsMode
 
 	// The HTTP client to invoke API calls with. Defaults to client's default HTTP
@@ -117,7 +132,9 @@ func (o Options) Copy() Options {
 }
 
 func (o Options) GetIdentityResolver(schemeID string) smithyauth.IdentityResolver {
-
+	if schemeID == "aws.auth#sigv4" {
+		return getSigV4IdentityResolver(o)
+	}
 	if schemeID == "smithy.api#noAuth" {
 		return &smithyauth.AnonymousIdentityResolver{}
 	}
@@ -135,6 +152,7 @@ func WithAPIOptions(optFns ...func(*middleware.Stack) error) func(*Options) {
 // Deprecated: EndpointResolver and WithEndpointResolver. Providing a value for
 // this field will likely prevent you from using any endpoint-related service
 // features released after the introduction of EndpointResolverV2 and BaseEndpoint.
+//
 // To migrate an EndpointResolver implementation that uses a custom endpoint, set
 // the client option BaseEndpoint instead.
 func WithEndpointResolver(v EndpointResolver) func(*Options) {
@@ -148,5 +166,62 @@ func WithEndpointResolver(v EndpointResolver) func(*Options) {
 func WithEndpointResolverV2(v EndpointResolverV2) func(*Options) {
 	return func(o *Options) {
 		o.EndpointResolverV2 = v
+	}
+}
+
+func getSigV4IdentityResolver(o Options) smithyauth.IdentityResolver {
+	if o.Credentials != nil {
+		return &internalauthsmithy.CredentialsProviderAdapter{Provider: o.Credentials}
+	}
+	return nil
+}
+
+// WithSigV4SigningName applies an override to the authentication workflow to
+// use the given signing name for SigV4-authenticated operations.
+//
+// This is an advanced setting. The value here is FINAL, taking precedence over
+// the resolved signing name from both auth scheme resolution and endpoint
+// resolution.
+func WithSigV4SigningName(name string) func(*Options) {
+	fn := func(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+		out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+	) {
+		return next.HandleInitialize(awsmiddleware.SetSigningName(ctx, name), in)
+	}
+	return func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(s *middleware.Stack) error {
+			return s.Initialize.Add(
+				middleware.InitializeMiddlewareFunc("withSigV4SigningName", fn),
+				middleware.Before,
+			)
+		})
+	}
+}
+
+// WithSigV4SigningRegion applies an override to the authentication workflow to
+// use the given signing region for SigV4-authenticated operations.
+//
+// This is an advanced setting. The value here is FINAL, taking precedence over
+// the resolved signing region from both auth scheme resolution and endpoint
+// resolution.
+func WithSigV4SigningRegion(region string) func(*Options) {
+	fn := func(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+		out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+	) {
+		return next.HandleInitialize(awsmiddleware.SetSigningRegion(ctx, region), in)
+	}
+	return func(o *Options) {
+		o.APIOptions = append(o.APIOptions, func(s *middleware.Stack) error {
+			return s.Initialize.Add(
+				middleware.InitializeMiddlewareFunc("withSigV4SigningRegion", fn),
+				middleware.Before,
+			)
+		})
+	}
+}
+
+func ignoreAnonymousAuth(options *Options) {
+	if aws.IsCredentialsProvider(options.Credentials, (*aws.AnonymousCredentials)(nil)) {
+		options.Credentials = nil
 	}
 }

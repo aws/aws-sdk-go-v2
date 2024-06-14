@@ -6,17 +6,16 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/forecast/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns a list of forecast export jobs created using the CreateForecastExportJob
-// operation. For each forecast export job, this operation returns a summary of its
-// properties, including its Amazon Resource Name (ARN). To retrieve the complete
-// set of properties, use the ARN with the DescribeForecastExportJob operation.
-// You can filter the list using an array of Filter objects.
+// Returns a list of forecast export jobs created using the CreateForecastExportJob operation. For each
+// forecast export job, this operation returns a summary of its properties,
+// including its Amazon Resource Name (ARN). To retrieve the complete set of
+// properties, use the ARN with the DescribeForecastExportJoboperation. You can filter the list using an
+// array of Filterobjects.
 func (c *Client) ListForecastExportJobs(ctx context.Context, params *ListForecastExportJobsInput, optFns ...func(*Options)) (*ListForecastExportJobsOutput, error) {
 	if params == nil {
 		params = &ListForecastExportJobsInput{}
@@ -37,18 +36,24 @@ type ListForecastExportJobsInput struct {
 	// An array of filters. For each filter, you provide a condition and a match
 	// statement. The condition is either IS or IS_NOT , which specifies whether to
 	// include or exclude the forecast export jobs that match the statement from the
-	// list, respectively. The match statement consists of a key and a value. Filter
-	// properties
+	// list, respectively. The match statement consists of a key and a value.
+	//
+	// Filter properties
+	//
 	//   - Condition - The condition to apply. Valid values are IS and IS_NOT . To
 	//   include the forecast export jobs that match the statement, specify IS . To
 	//   exclude matching forecast export jobs, specify IS_NOT .
+	//
 	//   - Key - The name of the parameter to filter on. Valid values are ForecastArn
 	//   and Status .
+	//
 	//   - Value - The value to match.
+	//
 	// For example, to list all jobs that export a forecast named electricityforecast,
-	// specify the following filter: "Filters": [ { "Condition": "IS", "Key":
-	// "ForecastArn", "Value":
-	// "arn:aws:forecast:us-west-2::forecast/electricityforecast" } ]
+	// specify the following filter:
+	//
+	//     "Filters": [ { "Condition": "IS", "Key": "ForecastArn", "Value":
+	//     "arn:aws:forecast:us-west-2::forecast/electricityforecast" } ]
 	Filters []types.Filter
 
 	// The number of items to return in the response.
@@ -99,25 +104,25 @@ func (c *Client) addOperationListForecastExportJobsMiddlewares(stack *middleware
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -132,13 +137,16 @@ func (c *Client) addOperationListForecastExportJobsMiddlewares(stack *middleware
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpListForecastExportJobsValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListForecastExportJobs(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

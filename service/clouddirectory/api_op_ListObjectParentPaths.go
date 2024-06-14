@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/clouddirectory/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -14,13 +13,16 @@ import (
 
 // Retrieves all available parent paths for any object type such as node, leaf
 // node, policy node, and index node objects. For more information about objects,
-// see Directory Structure (https://docs.aws.amazon.com/clouddirectory/latest/developerguide/key_concepts_directorystructure.html)
-// . Use this API to evaluate all parents for an object. The call returns all
+// see [Directory Structure].
+//
+// Use this API to evaluate all parents for an object. The call returns all
 // objects from the root of the directory up to the requested object. The API
 // returns the number of paths based on user-defined MaxResults , in case there are
 // multiple paths to the parent. The order of the paths and nodes returned is
 // consistent among multiple API calls unless the objects are deleted or moved.
 // Paths not leading to the directory root are ignored from the target object.
+//
+// [Directory Structure]: https://docs.aws.amazon.com/clouddirectory/latest/developerguide/key_concepts_directorystructure.html
 func (c *Client) ListObjectParentPaths(ctx context.Context, params *ListObjectParentPathsInput, optFns ...func(*Options)) (*ListObjectParentPathsOutput, error) {
 	if params == nil {
 		params = &ListObjectParentPathsInput{}
@@ -95,25 +97,25 @@ func (c *Client) addOperationListObjectParentPathsMiddlewares(stack *middleware.
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -128,13 +130,16 @@ func (c *Client) addOperationListObjectParentPathsMiddlewares(stack *middleware.
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpListObjectParentPathsValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListObjectParentPaths(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

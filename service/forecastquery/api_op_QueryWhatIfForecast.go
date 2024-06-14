@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/forecastquery/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -32,9 +31,13 @@ type QueryWhatIfForecastInput struct {
 
 	// The filtering criteria to apply when retrieving the forecast. For example, to
 	// get the forecast for client_21 in the electricity usage dataset, specify the
-	// following: {"item_id" : "client_21"} To get the full what-if forecast, use the
-	// CreateForecastExportJob (https://docs.aws.amazon.com/en_us/forecast/latest/dg/API_CreateWhatIfForecastExport.html)
-	// operation.
+	// following:
+	//
+	//     {"item_id" : "client_21"}
+	//
+	// To get the full what-if forecast, use the [CreateForecastExportJob] operation.
+	//
+	// [CreateForecastExportJob]: https://docs.aws.amazon.com/en_us/forecast/latest/dg/API_CreateWhatIfForecastExport.html
 	//
 	// This member is required.
 	Filters map[string]string
@@ -62,8 +65,7 @@ type QueryWhatIfForecastInput struct {
 
 type QueryWhatIfForecastOutput struct {
 
-	// Provides information about a forecast. Returned as part of the QueryForecast
-	// response.
+	// Provides information about a forecast. Returned as part of the QueryForecast response.
 	Forecast *types.Forecast
 
 	// Metadata pertaining to the operation's result.
@@ -94,25 +96,25 @@ func (c *Client) addOperationQueryWhatIfForecastMiddlewares(stack *middleware.St
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -127,13 +129,16 @@ func (c *Client) addOperationQueryWhatIfForecastMiddlewares(stack *middleware.St
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpQueryWhatIfForecastValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opQueryWhatIfForecast(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

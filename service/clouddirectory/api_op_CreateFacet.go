@@ -6,14 +6,13 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/clouddirectory/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a new Facet in a schema. Facet creation is allowed only in development
-// or applied schemas.
+// Creates a new Facet in a schema. Facet creation is allowed only in development or
+// applied schemas.
 func (c *Client) CreateFacet(ctx context.Context, params *CreateFacetInput, optFns ...func(*Options)) (*CreateFacetOutput, error) {
 	if params == nil {
 		params = &CreateFacetInput{}
@@ -31,18 +30,17 @@ func (c *Client) CreateFacet(ctx context.Context, params *CreateFacetInput, optF
 
 type CreateFacetInput struct {
 
-	// The name of the Facet , which is unique for a given schema.
+	// The name of the Facet, which is unique for a given schema.
 	//
 	// This member is required.
 	Name *string
 
-	// The schema ARN in which the new Facet will be created. For more information,
-	// see arns .
+	// The schema ARN in which the new Facet will be created. For more information, see arns.
 	//
 	// This member is required.
 	SchemaArn *string
 
-	// The attributes that are associated with the Facet .
+	// The attributes that are associated with the Facet.
 	Attributes []types.FacetAttribute
 
 	// There are two different styles that you can define on any given facet, Static
@@ -52,15 +50,17 @@ type CreateFacetInput struct {
 
 	// Specifies whether a given object created from this facet is of type node, leaf
 	// node, policy or index.
+	//
 	//   - Node: Can have multiple children but one parent.
 	//
 	//   - Leaf node: Cannot have children but can have multiple parents.
 	//
 	//   - Policy: Allows you to store a policy document and policy type. For more
-	//   information, see Policies (https://docs.aws.amazon.com/clouddirectory/latest/developerguide/key_concepts_directory.html#key_concepts_policies)
-	//   .
+	//   information, see [Policies].
 	//
 	//   - Index: Can be created with the Index API.
+	//
+	// [Policies]: https://docs.aws.amazon.com/clouddirectory/latest/developerguide/key_concepts_directory.html#key_concepts_policies
 	ObjectType types.ObjectType
 
 	noSmithyDocumentSerde
@@ -95,25 +95,25 @@ func (c *Client) addOperationCreateFacetMiddlewares(stack *middleware.Stack, opt
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -128,13 +128,16 @@ func (c *Client) addOperationCreateFacetMiddlewares(stack *middleware.Stack, opt
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpCreateFacetValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateFacet(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

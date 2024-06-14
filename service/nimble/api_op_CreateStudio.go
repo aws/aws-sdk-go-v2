@@ -6,28 +6,39 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/nimble/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Create a new studio. When creating a studio, two IAM roles must be provided:
-// the admin role and the user role. These roles are assumed by your users when
-// they log in to the Nimble Studio portal. The user role must have the
-// AmazonNimbleStudio-StudioUser managed policy attached for the portal to function
-// properly. The admin role must have the AmazonNimbleStudio-StudioAdmin managed
-// policy attached for the portal to function properly. You may optionally specify
-// a KMS key in the StudioEncryptionConfiguration . In Nimble Studio, resource
-// names, descriptions, initialization scripts, and other data you provide are
-// always encrypted at rest using an KMS key. By default, this key is owned by
-// Amazon Web Services and managed on your behalf. You may provide your own KMS key
-// when calling CreateStudio to encrypt this data using a key you own and manage.
+// Create a new studio.
+//
+// When creating a studio, two IAM roles must be provided: the admin role and the
+// user role. These roles are assumed by your users when they log in to the Nimble
+// Studio portal.
+//
+// The user role must have the AmazonNimbleStudio-StudioUser managed policy
+// attached for the portal to function properly.
+//
+// The admin role must have the AmazonNimbleStudio-StudioAdmin managed policy
+// attached for the portal to function properly.
+//
+// You may optionally specify a KMS key in the StudioEncryptionConfiguration .
+//
+// In Nimble Studio, resource names, descriptions, initialization scripts, and
+// other data you provide are always encrypted at rest using an KMS key. By
+// default, this key is owned by Amazon Web Services and managed on your behalf.
+// You may provide your own KMS key when calling CreateStudio to encrypt this data
+// using a key you own and manage.
+//
 // When providing an KMS key during studio creation, Nimble Studio creates KMS
 // grants in your account to provide your studio user and admin roles access to
-// these KMS keys. If you delete this grant, the studio will no longer be
-// accessible to your portal users. If you delete the studio KMS key, your studio
-// will no longer be accessible.
+// these KMS keys.
+//
+// If you delete this grant, the studio will no longer be accessible to your
+// portal users.
+//
+// If you delete the studio KMS key, your studio will no longer be accessible.
 func (c *Client) CreateStudio(ctx context.Context, params *CreateStudioInput, optFns ...func(*Options)) (*CreateStudioOutput, error) {
 	if params == nil {
 		params = &CreateStudioInput{}
@@ -117,25 +128,25 @@ func (c *Client) addOperationCreateStudioMiddlewares(stack *middleware.Stack, op
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -150,6 +161,9 @@ func (c *Client) addOperationCreateStudioMiddlewares(stack *middleware.Stack, op
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opCreateStudioMiddleware(stack, options); err != nil {
 		return err
 	}
@@ -159,7 +173,7 @@ func (c *Client) addOperationCreateStudioMiddlewares(stack *middleware.Stack, op
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateStudio(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

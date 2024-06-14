@@ -15,8 +15,9 @@ const (
 )
 
 // Values returns all known values for AssistantStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (AssistantStatus) Values() []AssistantStatus {
 	return []AssistantStatus{
 		"CREATE_IN_PROGRESS",
@@ -36,8 +37,9 @@ const (
 )
 
 // Values returns all known values for AssistantType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (AssistantType) Values() []AssistantType {
 	return []AssistantType{
 		"AGENT",
@@ -52,8 +54,9 @@ const (
 )
 
 // Values returns all known values for AssociationType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (AssociationType) Values() []AssociationType {
 	return []AssociationType{
 		"KNOWLEDGE_BASE",
@@ -74,8 +77,9 @@ const (
 )
 
 // Values returns all known values for ContentStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ContentStatus) Values() []ContentStatus {
 	return []ContentStatus{
 		"CREATE_IN_PROGRESS",
@@ -96,8 +100,9 @@ const (
 )
 
 // Values returns all known values for ExternalSource. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ExternalSource) Values() []ExternalSource {
 	return []ExternalSource{
 		"AMAZON_CONNECT",
@@ -112,8 +117,9 @@ const (
 )
 
 // Values returns all known values for FilterField. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (FilterField) Values() []FilterField {
 	return []FilterField{
 		"NAME",
@@ -128,8 +134,9 @@ const (
 )
 
 // Values returns all known values for FilterOperator. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (FilterOperator) Values() []FilterOperator {
 	return []FilterOperator{
 		"EQUALS",
@@ -149,8 +156,9 @@ const (
 )
 
 // Values returns all known values for ImportJobStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ImportJobStatus) Values() []ImportJobStatus {
 	return []ImportJobStatus{
 		"START_IN_PROGRESS",
@@ -170,8 +178,9 @@ const (
 )
 
 // Values returns all known values for ImportJobType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ImportJobType) Values() []ImportJobType {
 	return []ImportJobType{
 		"QUICK_RESPONSES",
@@ -191,8 +200,9 @@ const (
 )
 
 // Values returns all known values for KnowledgeBaseStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (KnowledgeBaseStatus) Values() []KnowledgeBaseStatus {
 	return []KnowledgeBaseStatus{
 		"CREATE_IN_PROGRESS",
@@ -214,8 +224,9 @@ const (
 )
 
 // Values returns all known values for KnowledgeBaseType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (KnowledgeBaseType) Values() []KnowledgeBaseType {
 	return []KnowledgeBaseType{
 		"EXTERNAL",
@@ -233,8 +244,9 @@ const (
 )
 
 // Values returns all known values for Order. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (Order) Values() []Order {
 	return []Order{
 		"ASC",
@@ -252,8 +264,9 @@ const (
 )
 
 // Values returns all known values for Priority. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (Priority) Values() []Priority {
 	return []Priority{
 		"HIGH",
@@ -272,6 +285,7 @@ const (
 
 // Values returns all known values for QuickResponseFilterOperator. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (QuickResponseFilterOperator) Values() []QuickResponseFilterOperator {
 	return []QuickResponseFilterOperator{
@@ -290,6 +304,7 @@ const (
 
 // Values returns all known values for QuickResponseQueryOperator. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (QuickResponseQueryOperator) Values() []QuickResponseQueryOperator {
 	return []QuickResponseQueryOperator{
@@ -313,8 +328,9 @@ const (
 )
 
 // Values returns all known values for QuickResponseStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (QuickResponseStatus) Values() []QuickResponseStatus {
 	return []QuickResponseStatus{
 		"CREATE_IN_PROGRESS",
@@ -339,6 +355,7 @@ const (
 
 // Values returns all known values for RecommendationSourceType. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (RecommendationSourceType) Values() []RecommendationSourceType {
 	return []RecommendationSourceType{
@@ -357,6 +374,7 @@ const (
 
 // Values returns all known values for RecommendationTriggerType. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (RecommendationTriggerType) Values() []RecommendationTriggerType {
 	return []RecommendationTriggerType{
@@ -372,8 +390,9 @@ const (
 )
 
 // Values returns all known values for RecommendationType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (RecommendationType) Values() []RecommendationType {
 	return []RecommendationType{
 		"KNOWLEDGE_CONTENT",
@@ -390,8 +409,9 @@ const (
 )
 
 // Values returns all known values for RelevanceLevel. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (RelevanceLevel) Values() []RelevanceLevel {
 	return []RelevanceLevel{
 		"HIGH",

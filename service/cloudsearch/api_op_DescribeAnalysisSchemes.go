@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/cloudsearch/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -17,8 +16,9 @@ import (
 // specific analysis schemes by name. By default, shows all analysis schemes and
 // includes any pending changes to the configuration. Set the Deployed option to
 // true to show the active configuration and exclude pending changes. For more
-// information, see Configuring Analysis Schemes (http://docs.aws.amazon.com/cloudsearch/latest/developerguide/configuring-analysis-schemes.html)
-// in the Amazon CloudSearch Developer Guide.
+// information, see [Configuring Analysis Schemes]in the Amazon CloudSearch Developer Guide.
+//
+// [Configuring Analysis Schemes]: http://docs.aws.amazon.com/cloudsearch/latest/developerguide/configuring-analysis-schemes.html
 func (c *Client) DescribeAnalysisSchemes(ctx context.Context, params *DescribeAnalysisSchemesInput, optFns ...func(*Options)) (*DescribeAnalysisSchemesOutput, error) {
 	if params == nil {
 		params = &DescribeAnalysisSchemesInput{}
@@ -34,11 +34,11 @@ func (c *Client) DescribeAnalysisSchemes(ctx context.Context, params *DescribeAn
 	return out, nil
 }
 
-// Container for the parameters to the DescribeAnalysisSchemes operation.
-// Specifies the name of the domain you want to describe. To limit the response to
-// particular analysis schemes, specify the names of the analysis schemes you want
-// to describe. To show the active configuration and exclude any pending changes,
-// set the Deployed option to true .
+// Container for the parameters to the DescribeAnalysisSchemes operation. Specifies the name of the
+// domain you want to describe. To limit the response to particular analysis
+// schemes, specify the names of the analysis schemes you want to describe. To show
+// the active configuration and exclude any pending changes, set the Deployed
+// option to true .
 type DescribeAnalysisSchemesInput struct {
 
 	// The name of the domain you want to describe.
@@ -93,25 +93,25 @@ func (c *Client) addOperationDescribeAnalysisSchemesMiddlewares(stack *middlewar
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -126,13 +126,16 @@ func (c *Client) addOperationDescribeAnalysisSchemesMiddlewares(stack *middlewar
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDescribeAnalysisSchemesValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeAnalysisSchemes(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

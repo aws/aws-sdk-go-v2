@@ -8,8 +8,8 @@ import (
 )
 
 // Indicates that email sending is disabled for your entire Amazon SES account.
-// You can enable or disable email sending for your Amazon SES account using
-// UpdateAccountSendingEnabled .
+//
+// You can enable or disable email sending for your Amazon SES account using UpdateAccountSendingEnabled.
 type AccountSendingPausedException struct {
 	Message *string
 
@@ -152,9 +152,9 @@ func (e *ConfigurationSetDoesNotExistException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
 
-// Indicates that email sending is disabled for the configuration set. You can
-// enable or disable email sending for a configuration set using
-// UpdateConfigurationSetSendingEnabled .
+// Indicates that email sending is disabled for the configuration set.
+//
+// You can enable or disable email sending for a configuration set using UpdateConfigurationSetSendingEnabled.
 type ConfigurationSetSendingPausedException struct {
 	Message *string
 
@@ -488,9 +488,9 @@ func (e *InvalidFirehoseDestinationException) ErrorFault() smithy.ErrorFault {
 
 // Indicates that the provided Amazon Web Services Lambda function is invalid, or
 // that Amazon SES could not execute the provided function, possibly due to
-// permissions issues. For information about giving permissions, see the Amazon
-// SES Developer Guide (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-permissions.html)
-// .
+// permissions issues. For information about giving permissions, see the [Amazon SES Developer Guide].
+//
+// [Amazon SES Developer Guide]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-permissions.html
 type InvalidLambdaFunctionException struct {
 	Message *string
 
@@ -579,8 +579,9 @@ func (e *InvalidRenderingParameterException) ErrorFault() smithy.ErrorFault {
 // Indicates that the provided Amazon S3 bucket or Amazon Web Services KMS
 // encryption key is invalid, or that Amazon SES could not publish to the bucket,
 // possibly due to permissions issues. For information about giving permissions,
-// see the Amazon SES Developer Guide (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-permissions.html)
-// .
+// see the [Amazon SES Developer Guide].
+//
+// [Amazon SES Developer Guide]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-permissions.html
 type InvalidS3ConfigurationException struct {
 	Message *string
 
@@ -640,8 +641,9 @@ func (e *InvalidSNSDestinationException) ErrorFault() smithy.ErrorFault { return
 
 // Indicates that the provided Amazon SNS topic is invalid, or that Amazon SES
 // could not publish to the topic, possibly due to permissions issues. For
-// information about giving permissions, see the Amazon SES Developer Guide (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-permissions.html)
-// .
+// information about giving permissions, see the [Amazon SES Developer Guide].
+//
+// [Amazon SES Developer Guide]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-permissions.html
 type InvalidSnsTopicException struct {
 	Message *string
 
@@ -702,6 +704,7 @@ func (e *InvalidTemplateException) ErrorFault() smithy.ErrorFault { return smith
 // redirects is invalid. This error appears most often in the following situations:
 //
 //   - When the tracking domain you specified is not verified in Amazon SES.
+//
 //   - When the tracking domain you specified is not a valid domain or subdomain.
 type InvalidTrackingOptionsException struct {
 	Message *string
@@ -729,8 +732,9 @@ func (e *InvalidTrackingOptionsException) ErrorCode() string {
 func (e *InvalidTrackingOptionsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // Indicates that a resource could not be created because of service limits. For a
-// list of Amazon SES limits, see the Amazon SES Developer Guide (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/limits.html)
-// .
+// list of Amazon SES limits, see the [Amazon SES Developer Guide].
+//
+// [Amazon SES Developer Guide]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/limits.html
 type LimitExceededException struct {
 	Message *string
 
@@ -756,11 +760,12 @@ func (e *LimitExceededException) ErrorCode() string {
 }
 func (e *LimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// Indicates that the message could not be sent because Amazon SES could not read
+//	Indicates that the message could not be sent because Amazon SES could not read
+//
 // the MX record required to use the specified MAIL FROM domain. For information
-// about editing the custom MAIL FROM domain settings for an identity, see the
-// Amazon SES Developer Guide (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/mail-from-edit.html)
-// .
+// about editing the custom MAIL FROM domain settings for an identity, see the [Amazon SES Developer Guide].
+//
+// [Amazon SES Developer Guide]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/mail-from-edit.html
 type MailFromDomainNotVerifiedException struct {
 	Message *string
 

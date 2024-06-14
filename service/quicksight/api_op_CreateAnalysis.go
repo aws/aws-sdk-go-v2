@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/quicksight/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -48,9 +47,13 @@ type CreateAnalysisInput struct {
 	// This member is required.
 	Name *string
 
-	// The definition of an analysis. A definition is the data model of all features
-	// in a Dashboard, Template, or Analysis. Either a SourceEntity or a Definition
-	// must be provided in order for the request to be valid.
+	// The definition of an analysis.
+	//
+	// A definition is the data model of all features in a Dashboard, Template, or
+	// Analysis.
+	//
+	// Either a SourceEntity or a Definition must be provided in order for the request
+	// to be valid.
 	Definition *types.AnalysisDefinition
 
 	// When you create the analysis, Amazon QuickSight adds the analysis to these
@@ -64,14 +67,17 @@ type CreateAnalysisInput struct {
 	// A structure that describes the principals and the resource-level permissions on
 	// an analysis. You can use the Permissions structure to grant permissions by
 	// providing a list of Identity and Access Management (IAM) action information for
-	// each principal listed by Amazon Resource Name (ARN). To specify no permissions,
-	// omit Permissions .
+	// each principal listed by Amazon Resource Name (ARN).
+	//
+	// To specify no permissions, omit Permissions .
 	Permissions []types.ResourcePermission
 
 	// A source entity to use for the analysis that you're creating. This metadata
 	// structure contains details that describe a source template and one or more
-	// datasets. Either a SourceEntity or a Definition must be provided in order for
-	// the request to be valid.
+	// datasets.
+	//
+	// Either a SourceEntity or a Definition must be provided in order for the request
+	// to be valid.
 	SourceEntity *types.AnalysisSourceEntity
 
 	// Contains a map of the key-value pairs for the resource tag or tags assigned to
@@ -134,25 +140,25 @@ func (c *Client) addOperationCreateAnalysisMiddlewares(stack *middleware.Stack, 
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -167,13 +173,16 @@ func (c *Client) addOperationCreateAnalysisMiddlewares(stack *middleware.Stack, 
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpCreateAnalysisValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateAnalysis(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

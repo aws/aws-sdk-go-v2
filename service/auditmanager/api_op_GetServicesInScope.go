@@ -6,17 +6,23 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/auditmanager/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Gets a list of all of the Amazon Web Services that you can choose to include in
-// your assessment. When you create an assessment (https://docs.aws.amazon.com/audit-manager/latest/APIReference/API_CreateAssessment.html)
-// , specify which of these services you want to include to narrow the assessment's
-// scope (https://docs.aws.amazon.com/audit-manager/latest/APIReference/API_Scope.html)
-// .
+// Gets a list of the Amazon Web Services from which Audit Manager can collect
+// evidence.
+//
+// Audit Manager defines which Amazon Web Services are in scope for an assessment.
+// Audit Manager infers this scope by examining the assessment’s controls and their
+// data sources, and then mapping this information to one or more of the
+// corresponding Amazon Web Services that are in this list.
+//
+// For information about why it's no longer possible to specify services in scope
+// manually, see [I can't edit the services in scope for my assessment]in the Troubleshooting section of the Audit Manager user guide.
+//
+// [I can't edit the services in scope for my assessment]: https://docs.aws.amazon.com/audit-manager/latest/userguide/evidence-collection-issues.html#unable-to-edit-services
 func (c *Client) GetServicesInScope(ctx context.Context, params *GetServicesInScopeInput, optFns ...func(*Options)) (*GetServicesInScopeOutput, error) {
 	if params == nil {
 		params = &GetServicesInScopeInput{}
@@ -38,7 +44,7 @@ type GetServicesInScopeInput struct {
 
 type GetServicesInScopeOutput struct {
 
-	// The metadata that's associated with the Amazon Web Service.
+	//  The metadata that's associated with the Amazon Web Service.
 	ServiceMetadata []types.ServiceMetadata
 
 	// Metadata pertaining to the operation's result.
@@ -69,25 +75,25 @@ func (c *Client) addOperationGetServicesInScopeMiddlewares(stack *middleware.Sta
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -102,10 +108,13 @@ func (c *Client) addOperationGetServicesInScopeMiddlewares(stack *middleware.Sta
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetServicesInScope(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

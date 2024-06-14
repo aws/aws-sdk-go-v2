@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/macie2/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -55,9 +54,11 @@ type CreateAllowListInput struct {
 	Description *string
 
 	// A map of key-value pairs that specifies the tags to associate with the allow
-	// list. An allow list can have a maximum of 50 tags. Each tag consists of a tag
-	// key and an associated tag value. The maximum length of a tag key is 128
-	// characters. The maximum length of a tag value is 256 characters.
+	// list.
+	//
+	// An allow list can have a maximum of 50 tags. Each tag consists of a tag key and
+	// an associated tag value. The maximum length of a tag key is 128 characters. The
+	// maximum length of a tag value is 256 characters.
 	Tags map[string]string
 
 	noSmithyDocumentSerde
@@ -99,25 +100,25 @@ func (c *Client) addOperationCreateAllowListMiddlewares(stack *middleware.Stack,
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -132,6 +133,9 @@ func (c *Client) addOperationCreateAllowListMiddlewares(stack *middleware.Stack,
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opCreateAllowListMiddleware(stack, options); err != nil {
 		return err
 	}
@@ -141,7 +145,7 @@ func (c *Client) addOperationCreateAllowListMiddlewares(stack *middleware.Stack,
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateAllowList(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

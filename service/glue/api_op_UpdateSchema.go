@@ -6,21 +6,24 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/glue/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Updates the description, compatibility setting, or version checkpoint for a
-// schema set. For updating the compatibility setting, the call will not validate
+// schema set.
+//
+// For updating the compatibility setting, the call will not validate
 // compatibility for the entire set of schema versions with the new compatibility
 // setting. If the value for Compatibility is provided, the VersionNumber (a
 // checkpoint) is also required. The API will validate the checkpoint version
-// number for consistency. If the value for the VersionNumber (checkpoint) is
-// provided, Compatibility is optional and this can be used to set/reset a
-// checkpoint for the schema. This update will happen only if the schema is in the
-// AVAILABLE state.
+// number for consistency.
+//
+// If the value for the VersionNumber (checkpoint) is provided, Compatibility is
+// optional and this can be used to set/reset a checkpoint for the schema.
+//
+// This update will happen only if the schema is in the AVAILABLE state.
 func (c *Client) UpdateSchema(ctx context.Context, params *UpdateSchemaInput, optFns ...func(*Options)) (*UpdateSchemaOutput, error) {
 	if params == nil {
 		params = &UpdateSchemaInput{}
@@ -40,8 +43,10 @@ type UpdateSchemaInput struct {
 
 	// This is a wrapper structure to contain schema identity fields. The structure
 	// contains:
+	//
 	//   - SchemaId$SchemaArn: The Amazon Resource Name (ARN) of the schema. One of
 	//   SchemaArn or SchemaName has to be provided.
+	//
 	//   - SchemaId$SchemaName: The name of the schema. One of SchemaArn or SchemaName
 	//   has to be provided.
 	//
@@ -100,25 +105,25 @@ func (c *Client) addOperationUpdateSchemaMiddlewares(stack *middleware.Stack, op
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -133,13 +138,16 @@ func (c *Client) addOperationUpdateSchemaMiddlewares(stack *middleware.Stack, op
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpUpdateSchemaValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateSchema(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

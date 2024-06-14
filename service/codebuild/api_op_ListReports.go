@@ -6,13 +6,13 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/codebuild/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns a list of ARNs for the reports in the current Amazon Web Services
+//	Returns a list of ARNs for the reports in the current Amazon Web Services
+//
 // account.
 func (c *Client) ListReports(ctx context.Context, params *ListReportsInput, optFns ...func(*Options)) (*ListReportsOutput, error) {
 	if params == nil {
@@ -31,24 +31,27 @@ func (c *Client) ListReports(ctx context.Context, params *ListReportsInput, optF
 
 type ListReportsInput struct {
 
-	// A ReportFilter object used to filter the returned reports.
+	//  A ReportFilter object used to filter the returned reports.
 	Filter *types.ReportFilter
 
-	// The maximum number of paginated reports returned per response. Use nextToken to
-	// iterate pages in the list of returned Report objects. The default value is 100.
+	//  The maximum number of paginated reports returned per response. Use nextToken
+	// to iterate pages in the list of returned Report objects. The default value is
+	// 100.
 	MaxResults *int32
 
-	// During a previous call, the maximum number of items that can be returned is the
-	// value specified in maxResults . If there more items in the list, then a unique
-	// string called a nextToken is returned. To get the next batch of items in the
-	// list, call this operation again, adding the next token to the call. To get all
-	// of the items in the list, keep calling this operation with each subsequent next
-	// token that is returned, until no more next tokens are returned.
+	//  During a previous call, the maximum number of items that can be returned is
+	// the value specified in maxResults . If there more items in the list, then a
+	// unique string called a nextToken is returned. To get the next batch of items in
+	// the list, call this operation again, adding the next token to the call. To get
+	// all of the items in the list, keep calling this operation with each subsequent
+	// next token that is returned, until no more next tokens are returned.
 	NextToken *string
 
-	// Specifies the sort order for the list of returned reports. Valid values are:
+	//  Specifies the sort order for the list of returned reports. Valid values are:
+	//
 	//   - ASCENDING : return reports in chronological order based on their creation
 	//   date.
+	//
 	//   - DESCENDING : return reports in the reverse chronological order based on
 	//   their creation date.
 	SortOrder types.SortOrderType
@@ -58,15 +61,15 @@ type ListReportsInput struct {
 
 type ListReportsOutput struct {
 
-	// During a previous call, the maximum number of items that can be returned is the
-	// value specified in maxResults . If there more items in the list, then a unique
-	// string called a nextToken is returned. To get the next batch of items in the
-	// list, call this operation again, adding the next token to the call. To get all
-	// of the items in the list, keep calling this operation with each subsequent next
-	// token that is returned, until no more next tokens are returned.
+	//  During a previous call, the maximum number of items that can be returned is
+	// the value specified in maxResults . If there more items in the list, then a
+	// unique string called a nextToken is returned. To get the next batch of items in
+	// the list, call this operation again, adding the next token to the call. To get
+	// all of the items in the list, keep calling this operation with each subsequent
+	// next token that is returned, until no more next tokens are returned.
 	NextToken *string
 
-	// The list of returned ARNs for the reports in the current Amazon Web Services
+	//  The list of returned ARNs for the reports in the current Amazon Web Services
 	// account.
 	Reports []string
 
@@ -98,25 +101,25 @@ func (c *Client) addOperationListReportsMiddlewares(stack *middleware.Stack, opt
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -131,10 +134,13 @@ func (c *Client) addOperationListReportsMiddlewares(stack *middleware.Stack, opt
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListReports(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -161,8 +167,9 @@ var _ ListReportsAPIClient = (*Client)(nil)
 
 // ListReportsPaginatorOptions is the paginator options for ListReports
 type ListReportsPaginatorOptions struct {
-	// The maximum number of paginated reports returned per response. Use nextToken to
-	// iterate pages in the list of returned Report objects. The default value is 100.
+	//  The maximum number of paginated reports returned per response. Use nextToken
+	// to iterate pages in the list of returned Report objects. The default value is
+	// 100.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

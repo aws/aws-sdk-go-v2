@@ -6,22 +6,24 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // This documentation is for version 1 of the Amazon Kinesis Data Analytics API,
 // which only supports SQL applications. Version 2 of the API supports SQL and Java
-// applications. For more information about version 2, see Amazon Kinesis Data
-// Analytics API V2 Documentation . Stops the application from processing input
-// data. You can stop an application only if it is in the running state. You can
-// use the DescribeApplication (https://docs.aws.amazon.com/kinesisanalytics/latest/dev/API_DescribeApplication.html)
-// operation to find the application state. After the application is stopped,
-// Amazon Kinesis Analytics stops reading data from the input, the application
-// stops processing data, and there is no output written to the destination. This
-// operation requires permissions to perform the kinesisanalytics:StopApplication
-// action.
+// applications. For more information about version 2, see Amazon Kinesis Data Analytics API V2 Documentation.
+//
+// Stops the application from processing input data. You can stop an application
+// only if it is in the running state. You can use the [DescribeApplication]operation to find the
+// application state. After the application is stopped, Amazon Kinesis Analytics
+// stops reading data from the input, the application stops processing data, and
+// there is no output written to the destination.
+//
+// This operation requires permissions to perform the
+// kinesisanalytics:StopApplication action.
+//
+// [DescribeApplication]: https://docs.aws.amazon.com/kinesisanalytics/latest/dev/API_DescribeApplication.html
 func (c *Client) StopApplication(ctx context.Context, params *StopApplicationInput, optFns ...func(*Options)) (*StopApplicationOutput, error) {
 	if params == nil {
 		params = &StopApplicationInput{}
@@ -76,25 +78,25 @@ func (c *Client) addOperationStopApplicationMiddlewares(stack *middleware.Stack,
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -109,13 +111,16 @@ func (c *Client) addOperationStopApplicationMiddlewares(stack *middleware.Stack,
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpStopApplicationValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opStopApplication(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

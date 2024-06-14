@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/emr/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -88,10 +87,10 @@ type CreateStudioInput struct {
 	// notebook files when backed up to Amazon S3.
 	EncryptionKeyArn *string
 
-	// The ARN of the IAM Identity Center instance to create the Studio application.
+	//  The ARN of the IAM Identity Center instance to create the Studio application.
 	IdcInstanceArn *string
 
-	// Specifies whether IAM Identity Center user assignment is REQUIRED or OPTIONAL .
+	//  Specifies whether IAM Identity Center user assignment is REQUIRED or OPTIONAL .
 	// If the value is set to REQUIRED , users must be explicitly assigned to the
 	// Studio application to access the Studio.
 	IdcUserAssignment types.IdcUserAssignment
@@ -113,7 +112,7 @@ type CreateStudioInput struct {
 	// characters, and an optional value string with a maximum of 256 characters.
 	Tags []types.Tag
 
-	// A Boolean indicating whether to enable Trusted identity propagation for the
+	//  A Boolean indicating whether to enable Trusted identity propagation for the
 	// Studio. The default value is false .
 	TrustedIdentityPropagationEnabled *bool
 
@@ -162,25 +161,25 @@ func (c *Client) addOperationCreateStudioMiddlewares(stack *middleware.Stack, op
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -195,13 +194,16 @@ func (c *Client) addOperationCreateStudioMiddlewares(stack *middleware.Stack, op
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpCreateStudioValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateStudio(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

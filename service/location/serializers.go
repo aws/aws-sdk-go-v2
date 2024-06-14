@@ -2417,6 +2417,134 @@ func awsRestjson1_serializeOpHttpBindingsDisassociateTrackerConsumerInput(v *Dis
 	return nil
 }
 
+type awsRestjson1_serializeOpForecastGeofenceEvents struct {
+}
+
+func (*awsRestjson1_serializeOpForecastGeofenceEvents) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpForecastGeofenceEvents) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*ForecastGeofenceEventsInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/geofencing/v0/collections/{CollectionName}/forecast-geofence-events")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "POST"
+	var restEncoder *httpbinding.Encoder
+	if request.URL.RawPath == "" {
+		restEncoder, err = httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	} else {
+		request.URL.RawPath = smithyhttp.JoinPath(request.URL.RawPath, opPath)
+		restEncoder, err = httpbinding.NewEncoderWithRawPath(request.URL.Path, request.URL.RawPath, request.URL.RawQuery, request.Header)
+	}
+
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsForecastGeofenceEventsInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentForecastGeofenceEventsInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsForecastGeofenceEventsInput(v *ForecastGeofenceEventsInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.CollectionName == nil || len(*v.CollectionName) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member CollectionName must not be empty")}
+	}
+	if v.CollectionName != nil {
+		if err := encoder.SetURI("CollectionName").String(*v.CollectionName); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentForecastGeofenceEventsInput(v *ForecastGeofenceEventsInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.DeviceState != nil {
+		ok := object.Key("DeviceState")
+		if err := awsRestjson1_serializeDocumentForecastGeofenceEventsDeviceState(v.DeviceState, ok); err != nil {
+			return err
+		}
+	}
+
+	if len(v.DistanceUnit) > 0 {
+		ok := object.Key("DistanceUnit")
+		ok.String(string(v.DistanceUnit))
+	}
+
+	if v.MaxResults != nil {
+		ok := object.Key("MaxResults")
+		ok.Integer(*v.MaxResults)
+	}
+
+	if v.NextToken != nil {
+		ok := object.Key("NextToken")
+		ok.String(*v.NextToken)
+	}
+
+	if len(v.SpeedUnit) > 0 {
+		ok := object.Key("SpeedUnit")
+		ok.String(string(v.SpeedUnit))
+	}
+
+	if v.TimeHorizonMinutes != nil {
+		ok := object.Key("TimeHorizonMinutes")
+		switch {
+		case math.IsNaN(*v.TimeHorizonMinutes):
+			ok.String("NaN")
+
+		case math.IsInf(*v.TimeHorizonMinutes, 1):
+			ok.String("Infinity")
+
+		case math.IsInf(*v.TimeHorizonMinutes, -1):
+			ok.String("-Infinity")
+
+		default:
+			ok.Double(*v.TimeHorizonMinutes)
+
+		}
+	}
+
+	return nil
+}
+
 type awsRestjson1_serializeOpGetDevicePosition struct {
 }
 
@@ -5172,6 +5300,101 @@ func awsRestjson1_serializeOpDocumentUpdateTrackerInput(v *UpdateTrackerInput, v
 	return nil
 }
 
+type awsRestjson1_serializeOpVerifyDevicePosition struct {
+}
+
+func (*awsRestjson1_serializeOpVerifyDevicePosition) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpVerifyDevicePosition) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*VerifyDevicePositionInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/tracking/v0/trackers/{TrackerName}/positions/verify")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "POST"
+	var restEncoder *httpbinding.Encoder
+	if request.URL.RawPath == "" {
+		restEncoder, err = httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	} else {
+		request.URL.RawPath = smithyhttp.JoinPath(request.URL.RawPath, opPath)
+		restEncoder, err = httpbinding.NewEncoderWithRawPath(request.URL.Path, request.URL.RawPath, request.URL.RawQuery, request.Header)
+	}
+
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsVerifyDevicePositionInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentVerifyDevicePositionInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsVerifyDevicePositionInput(v *VerifyDevicePositionInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.TrackerName == nil || len(*v.TrackerName) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member TrackerName must not be empty")}
+	}
+	if v.TrackerName != nil {
+		if err := encoder.SetURI("TrackerName").String(*v.TrackerName); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentVerifyDevicePositionInput(v *VerifyDevicePositionInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.DeviceState != nil {
+		ok := object.Key("DeviceState")
+		if err := awsRestjson1_serializeDocumentDeviceState(v.DeviceState, ok); err != nil {
+			return err
+		}
+	}
+
+	if len(v.DistanceUnit) > 0 {
+		ok := object.Key("DistanceUnit")
+		ok.String(string(v.DistanceUnit))
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentApiKeyActionList(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
@@ -5334,6 +5557,20 @@ func awsRestjson1_serializeDocumentCalculateRouteTruckModeOptions(v *types.Calcu
 	return nil
 }
 
+func awsRestjson1_serializeDocumentCellSignals(v *types.CellSignals, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.LteCellDetails != nil {
+		ok := object.Key("LteCellDetails")
+		if err := awsRestjson1_serializeDocumentLteCellDetailsList(v.LteCellDetails, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentCircle(v *types.Circle, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -5462,6 +5699,56 @@ func awsRestjson1_serializeDocumentDevicePositionUpdateList(v []types.DevicePosi
 	return nil
 }
 
+func awsRestjson1_serializeDocumentDeviceState(v *types.DeviceState, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Accuracy != nil {
+		ok := object.Key("Accuracy")
+		if err := awsRestjson1_serializeDocumentPositionalAccuracy(v.Accuracy, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.CellSignals != nil {
+		ok := object.Key("CellSignals")
+		if err := awsRestjson1_serializeDocumentCellSignals(v.CellSignals, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.DeviceId != nil {
+		ok := object.Key("DeviceId")
+		ok.String(*v.DeviceId)
+	}
+
+	if v.Ipv4Address != nil {
+		ok := object.Key("Ipv4Address")
+		ok.String(*v.Ipv4Address)
+	}
+
+	if v.Position != nil {
+		ok := object.Key("Position")
+		if err := awsRestjson1_serializeDocumentPosition(v.Position, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.SampleTime != nil {
+		ok := object.Key("SampleTime")
+		ok.String(smithytime.FormatDateTime(*v.SampleTime))
+	}
+
+	if v.WiFiAccessPoints != nil {
+		ok := object.Key("WiFiAccessPoints")
+		if err := awsRestjson1_serializeDocumentWiFiAccessPointList(v.WiFiAccessPoints, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentFilterPlaceCategoryList(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
@@ -5470,6 +5757,38 @@ func awsRestjson1_serializeDocumentFilterPlaceCategoryList(v []string, value smi
 		av := array.Value()
 		av.String(v[i])
 	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentForecastGeofenceEventsDeviceState(v *types.ForecastGeofenceEventsDeviceState, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Position != nil {
+		ok := object.Key("Position")
+		if err := awsRestjson1_serializeDocumentPosition(v.Position, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Speed != nil {
+		ok := object.Key("Speed")
+		switch {
+		case math.IsNaN(*v.Speed):
+			ok.String("NaN")
+
+		case math.IsInf(*v.Speed, 1):
+			ok.String("Infinity")
+
+		case math.IsInf(*v.Speed, -1):
+			ok.String("-Infinity")
+
+		default:
+			ok.Double(*v.Speed)
+
+		}
+	}
+
 	return nil
 }
 
@@ -5493,6 +5812,11 @@ func awsRestjson1_serializeDocumentGeofenceGeometry(v *types.GeofenceGeometry, v
 		if err := awsRestjson1_serializeDocumentCircle(v.Circle, ok); err != nil {
 			return err
 		}
+	}
+
+	if v.Geobuf != nil {
+		ok := object.Key("Geobuf")
+		ok.Base64EncodeBytes(v.Geobuf)
 	}
 
 	if v.Polygon != nil {
@@ -5542,6 +5866,168 @@ func awsRestjson1_serializeDocumentLinearRings(v [][][]float64, value smithyjson
 			continue
 		}
 		if err := awsRestjson1_serializeDocumentLinearRing(v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentLteCellDetails(v *types.LteCellDetails, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	{
+		ok := object.Key("CellId")
+		ok.Integer(v.CellId)
+	}
+
+	if v.LocalId != nil {
+		ok := object.Key("LocalId")
+		if err := awsRestjson1_serializeDocumentLteLocalId(v.LocalId, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Mcc != nil {
+		ok := object.Key("Mcc")
+		ok.Integer(*v.Mcc)
+	}
+
+	if v.Mnc != nil {
+		ok := object.Key("Mnc")
+		ok.Integer(*v.Mnc)
+	}
+
+	if v.NetworkMeasurements != nil {
+		ok := object.Key("NetworkMeasurements")
+		if err := awsRestjson1_serializeDocumentLteNetworkMeasurementsList(v.NetworkMeasurements, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.NrCapable != nil {
+		ok := object.Key("NrCapable")
+		ok.Boolean(*v.NrCapable)
+	}
+
+	if v.Rsrp != nil {
+		ok := object.Key("Rsrp")
+		ok.Integer(*v.Rsrp)
+	}
+
+	if v.Rsrq != nil {
+		ok := object.Key("Rsrq")
+		switch {
+		case math.IsNaN(float64(*v.Rsrq)):
+			ok.String("NaN")
+
+		case math.IsInf(float64(*v.Rsrq), 1):
+			ok.String("Infinity")
+
+		case math.IsInf(float64(*v.Rsrq), -1):
+			ok.String("-Infinity")
+
+		default:
+			ok.Float(*v.Rsrq)
+
+		}
+	}
+
+	if v.Tac != nil {
+		ok := object.Key("Tac")
+		ok.Integer(*v.Tac)
+	}
+
+	if v.TimingAdvance != nil {
+		ok := object.Key("TimingAdvance")
+		ok.Integer(*v.TimingAdvance)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentLteCellDetailsList(v []types.LteCellDetails, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentLteCellDetails(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentLteLocalId(v *types.LteLocalId, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	{
+		ok := object.Key("Earfcn")
+		ok.Integer(v.Earfcn)
+	}
+
+	{
+		ok := object.Key("Pci")
+		ok.Integer(v.Pci)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentLteNetworkMeasurements(v *types.LteNetworkMeasurements, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	{
+		ok := object.Key("CellId")
+		ok.Integer(v.CellId)
+	}
+
+	{
+		ok := object.Key("Earfcn")
+		ok.Integer(v.Earfcn)
+	}
+
+	{
+		ok := object.Key("Pci")
+		ok.Integer(v.Pci)
+	}
+
+	if v.Rsrp != nil {
+		ok := object.Key("Rsrp")
+		ok.Integer(*v.Rsrp)
+	}
+
+	if v.Rsrq != nil {
+		ok := object.Key("Rsrq")
+		switch {
+		case math.IsNaN(float64(*v.Rsrq)):
+			ok.String("NaN")
+
+		case math.IsInf(float64(*v.Rsrq), 1):
+			ok.String("Infinity")
+
+		case math.IsInf(float64(*v.Rsrq), -1):
+			ok.String("-Infinity")
+
+		default:
+			ok.Float(*v.Rsrq)
+
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentLteNetworkMeasurementsList(v []types.LteNetworkMeasurements, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentLteNetworkMeasurements(&v[i], av); err != nil {
 			return err
 		}
 	}
@@ -5809,6 +6295,36 @@ func awsRestjson1_serializeDocumentWaypointPositionList(v [][]float64, value smi
 			continue
 		}
 		if err := awsRestjson1_serializeDocumentPosition(v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentWiFiAccessPoint(v *types.WiFiAccessPoint, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.MacAddress != nil {
+		ok := object.Key("MacAddress")
+		ok.String(*v.MacAddress)
+	}
+
+	if v.Rss != nil {
+		ok := object.Key("Rss")
+		ok.Integer(*v.Rss)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentWiFiAccessPointList(v []types.WiFiAccessPoint, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentWiFiAccessPoint(&v[i], av); err != nil {
 			return err
 		}
 	}

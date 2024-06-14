@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/elasticbeanstalk/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -15,12 +14,14 @@ import (
 
 // Updates the environment description, deploys a new application version, updates
 // the configuration settings to an entirely new configuration template, or updates
-// select configuration option values in the running environment. Attempting to
-// update both the release and configuration is not allowed and AWS Elastic
-// Beanstalk returns an InvalidParameterCombination error. When updating the
-// configuration settings to a new template or individual settings, a draft
-// configuration is created and DescribeConfigurationSettings for this environment
-// returns two setting descriptions with different DeploymentStatus values.
+// select configuration option values in the running environment.
+//
+// Attempting to update both the release and configuration is not allowed and AWS
+// Elastic Beanstalk returns an InvalidParameterCombination error.
+//
+// When updating the configuration settings to a new template or individual
+// settings, a draft configuration is created and DescribeConfigurationSettingsfor this environment returns two
+// setting descriptions with different DeploymentStatus values.
 func (c *Client) UpdateEnvironment(ctx context.Context, params *UpdateEnvironmentInput, optFns ...func(*Options)) (*UpdateEnvironmentOutput, error) {
 	if params == nil {
 		params = &UpdateEnvironmentInput{}
@@ -46,23 +47,29 @@ type UpdateEnvironmentInput struct {
 	// of this environment.
 	Description *string
 
-	// The ID of the environment to update. If no environment with this ID exists, AWS
-	// Elastic Beanstalk returns an InvalidParameterValue error. Condition: You must
-	// specify either this or an EnvironmentName, or both. If you do not specify
-	// either, AWS Elastic Beanstalk returns MissingRequiredParameter error.
+	// The ID of the environment to update.
+	//
+	// If no environment with this ID exists, AWS Elastic Beanstalk returns an
+	// InvalidParameterValue error.
+	//
+	// Condition: You must specify either this or an EnvironmentName, or both. If you
+	// do not specify either, AWS Elastic Beanstalk returns MissingRequiredParameter
+	// error.
 	EnvironmentId *string
 
 	// The name of the environment to update. If no environment with this name exists,
-	// AWS Elastic Beanstalk returns an InvalidParameterValue error. Condition: You
-	// must specify either this or an EnvironmentId, or both. If you do not specify
-	// either, AWS Elastic Beanstalk returns MissingRequiredParameter error.
+	// AWS Elastic Beanstalk returns an InvalidParameterValue error.
+	//
+	// Condition: You must specify either this or an EnvironmentId, or both. If you do
+	// not specify either, AWS Elastic Beanstalk returns MissingRequiredParameter
+	// error.
 	EnvironmentName *string
 
 	// The name of the group to which the target environment belongs. Specify a group
 	// name only if the environment's name is specified in an environment manifest and
-	// not with the environment name or environment ID parameters. See Environment
-	// Manifest (env.yaml) (https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/environment-cfg-manifest.html)
-	// for details.
+	// not with the environment name or environment ID parameters. See [Environment Manifest (env.yaml)]for details.
+	//
+	// [Environment Manifest (env.yaml)]: https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/environment-cfg-manifest.html
 	GroupName *string
 
 	// If specified, AWS Elastic Beanstalk updates the configuration set associated
@@ -86,9 +93,10 @@ type UpdateEnvironmentInput struct {
 	// found, AWS Elastic Beanstalk returns an InvalidParameterValue error.
 	TemplateName *string
 
-	// This specifies the tier to use to update the environment. Condition: At this
-	// time, if you change the tier version, name, or type, AWS Elastic Beanstalk
-	// returns InvalidParameterValue error.
+	// This specifies the tier to use to update the environment.
+	//
+	// Condition: At this time, if you change the tier version, name, or type, AWS
+	// Elastic Beanstalk returns InvalidParameterValue error.
 	Tier *types.EnvironmentTier
 
 	// If this parameter is specified, AWS Elastic Beanstalk deploys the named
@@ -103,8 +111,11 @@ type UpdateEnvironmentInput struct {
 type UpdateEnvironmentOutput struct {
 
 	// Indicates if there is an in-progress environment configuration update or
-	// application version deployment that you can cancel. true: There is an update in
-	// progress. false: There are no updates currently in progress.
+	// application version deployment that you can cancel.
+	//
+	// true: There is an update in progress.
+	//
+	// false: There are no updates currently in progress.
 	AbortableOperationInProgress *bool
 
 	// The name of the application associated with this environment.
@@ -141,25 +152,32 @@ type UpdateEnvironmentOutput struct {
 
 	// Describes the health status of the environment. AWS Elastic Beanstalk indicates
 	// the failure levels for a running environment:
+	//
 	//   - Red : Indicates the environment is not responsive. Occurs when three or more
 	//   consecutive failures occur for an environment.
+	//
 	//   - Yellow : Indicates that something is wrong. Occurs when two consecutive
 	//   failures occur for an environment.
+	//
 	//   - Green : Indicates the environment is healthy and fully functional.
+	//
 	//   - Grey : Default health for a new environment. The environment is not fully
 	//   launched and health checks have not started or health checks are suspended
 	//   during an UpdateEnvironment or RestartEnvironment request.
+	//
 	// Default: Grey
 	Health types.EnvironmentHealth
 
 	// Returns the health status of the application running in your environment. For
-	// more information, see Health Colors and Statuses (https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/health-enhanced-status.html)
-	// .
+	// more information, see [Health Colors and Statuses].
+	//
+	// [Health Colors and Statuses]: https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/health-enhanced-status.html
 	HealthStatus types.EnvironmentHealthStatus
 
 	// The Amazon Resource Name (ARN) of the environment's operations role. For more
-	// information, see Operations roles (https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/iam-operationsrole.html)
-	// in the AWS Elastic Beanstalk Developer Guide.
+	// information, see [Operations roles]in the AWS Elastic Beanstalk Developer Guide.
+	//
+	// [Operations roles]: https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/iam-operationsrole.html
 	OperationsRole *string
 
 	// The ARN of the platform version.
@@ -168,16 +186,21 @@ type UpdateEnvironmentOutput struct {
 	// The description of the AWS resources used by this environment.
 	Resources *types.EnvironmentResourcesDescription
 
-	// The name of the SolutionStack deployed with this environment.
+	//  The name of the SolutionStack deployed with this environment.
 	SolutionStackName *string
 
 	// The current operational status of the environment:
+	//
 	//   - Launching : Environment is in the process of initial deployment.
+	//
 	//   - Updating : Environment is in the process of updating its configuration
 	//   settings or application version.
+	//
 	//   - Ready : Environment is available to have an action performed on it, such as
 	//   update or terminate.
+	//
 	//   - Terminating : Environment is in the shut-down process.
+	//
 	//   - Terminated : Environment is not running.
 	Status types.EnvironmentStatus
 
@@ -219,25 +242,25 @@ func (c *Client) addOperationUpdateEnvironmentMiddlewares(stack *middleware.Stac
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -252,10 +275,13 @@ func (c *Client) addOperationUpdateEnvironmentMiddlewares(stack *middleware.Stac
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateEnvironment(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

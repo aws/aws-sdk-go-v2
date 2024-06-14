@@ -6,14 +6,15 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Generates a pre-signed URL and request headers used to upload a code resource.
-// You can upload your code resource to the URL and add the request headers using
-// any HTTP client.
+// Generates a pre-signed URL, request headers used to upload a code resource, and
+// code artifact identifier for the uploaded resource.
+//
+// You can upload your code resource to the URL with the request headers using any
+// HTTP client.
 func (c *Client) CreateUploadUrl(ctx context.Context, params *CreateUploadUrlInput, optFns ...func(*Options)) (*CreateUploadUrlOutput, error) {
 	if params == nil {
 		params = &CreateUploadUrlInput{}
@@ -44,7 +45,8 @@ type CreateUploadUrlInput struct {
 
 type CreateUploadUrlOutput struct {
 
-	// The identifier for the uploaded code resource.
+	// The identifier for the uploaded code resource. Pass this to CreateScan to use
+	// the uploaded resources.
 	//
 	// This member is required.
 	CodeArtifactId *string
@@ -55,7 +57,7 @@ type CreateUploadUrlOutput struct {
 	// This member is required.
 	RequestHeaders map[string]string
 
-	// A pre-signed S3 URL. You can upload the code file you want to scan and add the
+	// A pre-signed S3 URL. You can upload the code file you want to scan with the
 	// required requestHeaders using any HTTP client.
 	//
 	// This member is required.
@@ -89,25 +91,25 @@ func (c *Client) addOperationCreateUploadUrlMiddlewares(stack *middleware.Stack,
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -122,13 +124,16 @@ func (c *Client) addOperationCreateUploadUrlMiddlewares(stack *middleware.Stack,
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpCreateUploadUrlValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateUploadUrl(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

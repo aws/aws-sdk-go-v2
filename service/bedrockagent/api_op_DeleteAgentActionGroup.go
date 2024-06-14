@@ -6,12 +6,11 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes an Action Group for existing Amazon Bedrock Agent.
+// Deletes an action group in an agent.
 func (c *Client) DeleteAgentActionGroup(ctx context.Context, params *DeleteAgentActionGroupInput, optFns ...func(*Options)) (*DeleteAgentActionGroupOutput, error) {
 	if params == nil {
 		params = &DeleteAgentActionGroupInput{}
@@ -27,31 +26,31 @@ func (c *Client) DeleteAgentActionGroup(ctx context.Context, params *DeleteAgent
 	return out, nil
 }
 
-// Delete Action Group Request
 type DeleteAgentActionGroupInput struct {
 
-	// Id generated at the server side when an Agent ActionGroup is created
+	// The unique identifier of the action group to delete.
 	//
 	// This member is required.
 	ActionGroupId *string
 
-	// Id generated at the server side when an Agent is created
+	// The unique identifier of the agent that the action group belongs to.
 	//
 	// This member is required.
 	AgentId *string
 
-	// Draft Version of the Agent.
+	// The version of the agent that the action group belongs to.
 	//
 	// This member is required.
 	AgentVersion *string
 
-	// Skips checking if resource is in use when set to true. Defaults to false
+	// By default, this value is false and deletion is stopped if the resource is in
+	// use. If you set it to true , the resource will be deleted even if the resource
+	// is in use.
 	SkipResourceInUseCheck bool
 
 	noSmithyDocumentSerde
 }
 
-// Delete Action Group Response
 type DeleteAgentActionGroupOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -81,25 +80,25 @@ func (c *Client) addOperationDeleteAgentActionGroupMiddlewares(stack *middleware
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -114,13 +113,16 @@ func (c *Client) addOperationDeleteAgentActionGroupMiddlewares(stack *middleware
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDeleteAgentActionGroupValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteAgentActionGroup(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

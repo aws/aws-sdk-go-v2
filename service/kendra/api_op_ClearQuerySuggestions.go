@@ -6,18 +6,20 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Clears existing query suggestions from an index. This deletes existing
-// suggestions only, not the queries in the query log. After you clear suggestions,
-// Amazon Kendra learns new suggestions based on new queries added to the query log
-// from the time you cleared suggestions. If you do not see any new suggestions,
-// then please allow Amazon Kendra to collect enough queries to learn new
-// suggestions. ClearQuerySuggestions is currently not supported in the Amazon Web
-// Services GovCloud (US-West) region.
+// Clears existing query suggestions from an index.
+//
+// This deletes existing suggestions only, not the queries in the query log. After
+// you clear suggestions, Amazon Kendra learns new suggestions based on new queries
+// added to the query log from the time you cleared suggestions. If you do not see
+// any new suggestions, then please allow Amazon Kendra to collect enough queries
+// to learn new suggestions.
+//
+// ClearQuerySuggestions is currently not supported in the Amazon Web Services
+// GovCloud (US-West) region.
 func (c *Client) ClearQuerySuggestions(ctx context.Context, params *ClearQuerySuggestionsInput, optFns ...func(*Options)) (*ClearQuerySuggestionsOutput, error) {
 	if params == nil {
 		params = &ClearQuerySuggestionsInput{}
@@ -72,25 +74,25 @@ func (c *Client) addOperationClearQuerySuggestionsMiddlewares(stack *middleware.
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -105,13 +107,16 @@ func (c *Client) addOperationClearQuerySuggestionsMiddlewares(stack *middleware.
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpClearQuerySuggestionsValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opClearQuerySuggestions(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

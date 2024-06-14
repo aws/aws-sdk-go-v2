@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/configservice/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -17,11 +16,14 @@ import (
 // ID from the proactive rules that were run. The results indicate which evaluation
 // context was used to evaluate the rules, which resource details were evaluated,
 // the evaluation mode that was run, and whether the resource details comply with
-// the configuration of the proactive rules. To see additional information about
-// the evaluation result, such as which rule flagged a resource as NON_COMPLIANT,
-// use the GetComplianceDetailsByResource (https://docs.aws.amazon.com/config/latest/APIReference/API_GetComplianceDetailsByResource.html)
-// API. For more information, see the Examples (https://docs.aws.amazon.com/config/latest/APIReference/API_GetResourceEvaluationSummary.html#API_GetResourceEvaluationSummary_Examples)
+// the configuration of the proactive rules.
+//
+// To see additional information about the evaluation result, such as which rule
+// flagged a resource as NON_COMPLIANT, use the [GetComplianceDetailsByResource]API. For more information, see the [Examples]
 // section.
+//
+// [GetComplianceDetailsByResource]: https://docs.aws.amazon.com/config/latest/APIReference/API_GetComplianceDetailsByResource.html
+// [Examples]: https://docs.aws.amazon.com/config/latest/APIReference/API_GetResourceEvaluationSummary.html#API_GetResourceEvaluationSummary_Examples
 func (c *Client) GetResourceEvaluationSummary(ctx context.Context, params *GetResourceEvaluationSummaryInput, optFns ...func(*Options)) (*GetResourceEvaluationSummaryOutput, error) {
 	if params == nil {
 		params = &GetResourceEvaluationSummaryInput{}
@@ -102,25 +104,25 @@ func (c *Client) addOperationGetResourceEvaluationSummaryMiddlewares(stack *midd
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -135,13 +137,16 @@ func (c *Client) addOperationGetResourceEvaluationSummaryMiddlewares(stack *midd
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpGetResourceEvaluationSummaryValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetResourceEvaluationSummary(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

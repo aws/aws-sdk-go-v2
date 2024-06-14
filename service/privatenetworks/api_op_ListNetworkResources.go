@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/privatenetworks/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -14,9 +13,10 @@ import (
 
 // Lists network resources. Add filters to your request to return a more specific
 // list of results. Use filters to match the Amazon Resource Name (ARN) of an order
-// or the status of network resources. If you specify multiple filters, filters are
-// joined with an OR, and the request returns results that match all of the
-// specified filters.
+// or the status of network resources.
+//
+// If you specify multiple filters, filters are joined with an OR, and the request
+// returns results that match all of the specified filters.
 func (c *Client) ListNetworkResources(ctx context.Context, params *ListNetworkResourcesInput, optFns ...func(*Options)) (*ListNetworkResourcesOutput, error) {
 	if params == nil {
 		params = &ListNetworkResourcesInput{}
@@ -40,9 +40,12 @@ type ListNetworkResourcesInput struct {
 	NetworkArn *string
 
 	// The filters.
+	//
 	//   - ORDER - The Amazon Resource Name (ARN) of the order.
+	//
 	//   - STATUS - The status ( AVAILABLE | DELETED | DELETING | PENDING |
 	//   PENDING_RETURN | PROVISIONING | SHIPPED ).
+	//
 	// Filter values are case sensitive. If you specify multiple values for a filter,
 	// the values are joined with an OR , and the request returns all results that
 	// match any of the specified values.
@@ -93,25 +96,25 @@ func (c *Client) addOperationListNetworkResourcesMiddlewares(stack *middleware.S
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -126,13 +129,16 @@ func (c *Client) addOperationListNetworkResourcesMiddlewares(stack *middleware.S
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpListNetworkResourcesValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListNetworkResources(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

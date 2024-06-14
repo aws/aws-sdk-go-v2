@@ -13,8 +13,9 @@ const (
 )
 
 // Values returns all known values for ActiveSpeakerPosition. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ActiveSpeakerPosition) Values() []ActiveSpeakerPosition {
 	return []ActiveSpeakerPosition{
 		"TopLeft",
@@ -34,6 +35,7 @@ const (
 
 // Values returns all known values for ArtifactsConcatenationState. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (ArtifactsConcatenationState) Values() []ArtifactsConcatenationState {
 	return []ArtifactsConcatenationState{
@@ -51,8 +53,9 @@ const (
 )
 
 // Values returns all known values for ArtifactsState. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ArtifactsState) Values() []ArtifactsState {
 	return []ArtifactsState{
 		"Enabled",
@@ -69,8 +72,9 @@ const (
 
 // Values returns all known values for AudioArtifactsConcatenationState. Note that
 // this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (AudioArtifactsConcatenationState) Values() []AudioArtifactsConcatenationState {
 	return []AudioArtifactsConcatenationState{
 		"Enabled",
@@ -86,8 +90,9 @@ const (
 )
 
 // Values returns all known values for AudioChannelsOption. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (AudioChannelsOption) Values() []AudioChannelsOption {
 	return []AudioChannelsOption{
 		"Stereo",
@@ -105,8 +110,9 @@ const (
 )
 
 // Values returns all known values for AudioMuxType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (AudioMuxType) Values() []AudioMuxType {
 	return []AudioMuxType{
 		"AudioOnly",
@@ -128,8 +134,9 @@ const (
 )
 
 // Values returns all known values for BorderColor. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (BorderColor) Values() []BorderColor {
 	return []BorderColor{
 		"Black",
@@ -158,6 +165,7 @@ const (
 
 // Values returns all known values for CallAnalyticsLanguageCode. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (CallAnalyticsLanguageCode) Values() []CallAnalyticsLanguageCode {
 	return []CallAnalyticsLanguageCode{
@@ -182,8 +190,9 @@ const (
 )
 
 // Values returns all known values for CanvasOrientation. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (CanvasOrientation) Values() []CanvasOrientation {
 	return []CanvasOrientation{
 		"Landscape",
@@ -199,8 +208,9 @@ const (
 )
 
 // Values returns all known values for ConcatenationSinkType. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ConcatenationSinkType) Values() []ConcatenationSinkType {
 	return []ConcatenationSinkType{
 		"S3Bucket",
@@ -215,8 +225,9 @@ const (
 )
 
 // Values returns all known values for ConcatenationSourceType. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ConcatenationSourceType) Values() []ConcatenationSourceType {
 	return []ConcatenationSourceType{
 		"MediaCapturePipeline",
@@ -231,8 +242,9 @@ const (
 )
 
 // Values returns all known values for ContentMuxType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ContentMuxType) Values() []ContentMuxType {
 	return []ContentMuxType{
 		"ContentOnly",
@@ -248,8 +260,9 @@ const (
 )
 
 // Values returns all known values for ContentRedactionOutput. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ContentRedactionOutput) Values() []ContentRedactionOutput {
 	return []ContentRedactionOutput{
 		"redacted",
@@ -269,6 +282,7 @@ const (
 
 // Values returns all known values for ContentShareLayoutOption. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (ContentShareLayoutOption) Values() []ContentShareLayoutOption {
 	return []ContentShareLayoutOption{
@@ -287,8 +301,9 @@ const (
 )
 
 // Values returns all known values for ContentType. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ContentType) Values() []ContentType {
 	return []ContentType{
 		"PII",
@@ -309,8 +324,9 @@ const (
 )
 
 // Values returns all known values for ErrorCode. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ErrorCode) Values() []ErrorCode {
 	return []ErrorCode{
 		"BadRequest",
@@ -332,8 +348,9 @@ const (
 )
 
 // Values returns all known values for FragmentSelectorType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (FragmentSelectorType) Values() []FragmentSelectorType {
 	return []FragmentSelectorType{
 		"ProducerTimestamp",
@@ -354,8 +371,9 @@ const (
 )
 
 // Values returns all known values for HighlightColor. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (HighlightColor) Values() []HighlightColor {
 	return []HighlightColor{
 		"Black",
@@ -376,8 +394,9 @@ const (
 )
 
 // Values returns all known values for HorizontalTilePosition. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (HorizontalTilePosition) Values() []HorizontalTilePosition {
 	return []HorizontalTilePosition{
 		"Top",
@@ -398,8 +417,9 @@ const (
 
 // Values returns all known values for KinesisVideoStreamPoolStatus. Note that
 // this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (KinesisVideoStreamPoolStatus) Values() []KinesisVideoStreamPoolStatus {
 	return []KinesisVideoStreamPoolStatus{
 		"CREATING",
@@ -418,8 +438,9 @@ const (
 )
 
 // Values returns all known values for LayoutOption. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (LayoutOption) Values() []LayoutOption {
 	return []LayoutOption{
 		"GridView",
@@ -435,8 +456,9 @@ const (
 )
 
 // Values returns all known values for LiveConnectorMuxType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (LiveConnectorMuxType) Values() []LiveConnectorMuxType {
 	return []LiveConnectorMuxType{
 		"AudioWithCompositedVideo",
@@ -452,8 +474,9 @@ const (
 )
 
 // Values returns all known values for LiveConnectorSinkType. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (LiveConnectorSinkType) Values() []LiveConnectorSinkType {
 	return []LiveConnectorSinkType{
 		"RTMP",
@@ -468,8 +491,9 @@ const (
 )
 
 // Values returns all known values for LiveConnectorSourceType. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (LiveConnectorSourceType) Values() []LiveConnectorSourceType {
 	return []LiveConnectorSourceType{
 		"ChimeSdkMeeting",
@@ -484,8 +508,9 @@ const (
 )
 
 // Values returns all known values for MediaEncoding. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (MediaEncoding) Values() []MediaEncoding {
 	return []MediaEncoding{
 		"pcm",
@@ -509,8 +534,9 @@ const (
 
 // Values returns all known values for
 // MediaInsightsPipelineConfigurationElementType. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (MediaInsightsPipelineConfigurationElementType) Values() []MediaInsightsPipelineConfigurationElementType {
 	return []MediaInsightsPipelineConfigurationElementType{
 		"AmazonTranscribeCallAnalyticsProcessor",
@@ -541,6 +567,7 @@ const (
 
 // Values returns all known values for MediaPipelineElementStatus. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (MediaPipelineElementStatus) Values() []MediaPipelineElementStatus {
 	return []MediaPipelineElementStatus{
@@ -563,8 +590,9 @@ const (
 )
 
 // Values returns all known values for MediaPipelineSinkType. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (MediaPipelineSinkType) Values() []MediaPipelineSinkType {
 	return []MediaPipelineSinkType{
 		"S3Bucket",
@@ -579,8 +607,9 @@ const (
 )
 
 // Values returns all known values for MediaPipelineSourceType. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (MediaPipelineSourceType) Values() []MediaPipelineSourceType {
 	return []MediaPipelineSourceType{
 		"ChimeSdkMeeting",
@@ -601,8 +630,9 @@ const (
 )
 
 // Values returns all known values for MediaPipelineStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (MediaPipelineStatus) Values() []MediaPipelineStatus {
 	return []MediaPipelineStatus{
 		"Initializing",
@@ -625,6 +655,7 @@ const (
 
 // Values returns all known values for MediaPipelineStatusUpdate. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (MediaPipelineStatusUpdate) Values() []MediaPipelineStatusUpdate {
 	return []MediaPipelineStatusUpdate{
@@ -646,8 +677,9 @@ const (
 )
 
 // Values returns all known values for MediaPipelineTaskStatus. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (MediaPipelineTaskStatus) Values() []MediaPipelineTaskStatus {
 	return []MediaPipelineTaskStatus{
 		"NotStarted",
@@ -668,6 +700,7 @@ const (
 
 // Values returns all known values for MediaStreamPipelineSinkType. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (MediaStreamPipelineSinkType) Values() []MediaStreamPipelineSinkType {
 	return []MediaStreamPipelineSinkType{
@@ -684,8 +717,9 @@ const (
 )
 
 // Values returns all known values for MediaStreamType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (MediaStreamType) Values() []MediaStreamType {
 	return []MediaStreamType{
 		"MixedAudio",
@@ -703,8 +737,9 @@ const (
 )
 
 // Values returns all known values for PartialResultsStability. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (PartialResultsStability) Values() []PartialResultsStability {
 	return []PartialResultsStability{
 		"high",
@@ -722,8 +757,9 @@ const (
 )
 
 // Values returns all known values for ParticipantRole. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ParticipantRole) Values() []ParticipantRole {
 	return []ParticipantRole{
 		"AGENT",
@@ -742,8 +778,9 @@ const (
 )
 
 // Values returns all known values for PresenterPosition. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (PresenterPosition) Values() []PresenterPosition {
 	return []PresenterPosition{
 		"TopLeft",
@@ -763,8 +800,9 @@ const (
 )
 
 // Values returns all known values for RealTimeAlertRuleType. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (RealTimeAlertRuleType) Values() []RealTimeAlertRuleType {
 	return []RealTimeAlertRuleType{
 		"KeywordMatch",
@@ -782,8 +820,9 @@ const (
 )
 
 // Values returns all known values for RecordingFileFormat. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (RecordingFileFormat) Values() []RecordingFileFormat {
 	return []RecordingFileFormat{
 		"Wav",
@@ -800,8 +839,9 @@ const (
 )
 
 // Values returns all known values for ResolutionOption. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ResolutionOption) Values() []ResolutionOption {
 	return []ResolutionOption{
 		"HD",
@@ -817,8 +857,9 @@ const (
 )
 
 // Values returns all known values for SentimentType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (SentimentType) Values() []SentimentType {
 	return []SentimentType{
 		"NEGATIVE",
@@ -834,8 +875,9 @@ const (
 )
 
 // Values returns all known values for TileOrder. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (TileOrder) Values() []TileOrder {
 	return []TileOrder{
 		"JoinSequence",
@@ -852,8 +894,9 @@ const (
 )
 
 // Values returns all known values for VerticalTilePosition. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (VerticalTilePosition) Values() []VerticalTilePosition {
 	return []VerticalTilePosition{
 		"Left",
@@ -869,8 +912,9 @@ const (
 )
 
 // Values returns all known values for VideoMuxType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (VideoMuxType) Values() []VideoMuxType {
 	return []VideoMuxType{
 		"VideoOnly",
@@ -887,8 +931,9 @@ const (
 )
 
 // Values returns all known values for VocabularyFilterMethod. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (VocabularyFilterMethod) Values() []VocabularyFilterMethod {
 	return []VocabularyFilterMethod{
 		"remove",
@@ -907,8 +952,9 @@ const (
 
 // Values returns all known values for VoiceAnalyticsConfigurationStatus. Note
 // that this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (VoiceAnalyticsConfigurationStatus) Values() []VoiceAnalyticsConfigurationStatus {
 	return []VoiceAnalyticsConfigurationStatus{
 		"Enabled",
@@ -925,6 +971,7 @@ const (
 
 // Values returns all known values for VoiceAnalyticsLanguageCode. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (VoiceAnalyticsLanguageCode) Values() []VoiceAnalyticsLanguageCode {
 	return []VoiceAnalyticsLanguageCode{

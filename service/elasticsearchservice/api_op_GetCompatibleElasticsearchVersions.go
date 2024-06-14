@@ -6,15 +6,15 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/elasticsearchservice/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns a list of upgrade compatible Elastisearch versions. You can optionally
-// pass a DomainName to get all upgrade compatible Elasticsearch versions for that
-// specific domain.
+//	Returns a list of upgrade compatible Elastisearch versions. You can optionally
+//
+// pass a DomainNameto get all upgrade compatible Elasticsearch versions for that specific
+// domain.
 func (c *Client) GetCompatibleElasticsearchVersions(ctx context.Context, params *GetCompatibleElasticsearchVersionsInput, optFns ...func(*Options)) (*GetCompatibleElasticsearchVersionsOutput, error) {
 	if params == nil {
 		params = &GetCompatibleElasticsearchVersionsInput{}
@@ -30,8 +30,7 @@ func (c *Client) GetCompatibleElasticsearchVersions(ctx context.Context, params 
 	return out, nil
 }
 
-// Container for request parameters to GetCompatibleElasticsearchVersions
-// operation.
+// Container for request parameters to GetCompatibleElasticsearchVersions operation.
 type GetCompatibleElasticsearchVersionsInput struct {
 
 	// The name of an Elasticsearch domain. Domain names are unique across the domains
@@ -46,8 +45,7 @@ type GetCompatibleElasticsearchVersionsInput struct {
 // Container for response returned by GetCompatibleElasticsearchVersions operation.
 type GetCompatibleElasticsearchVersionsOutput struct {
 
-	// A map of compatible Elasticsearch versions returned as part of the
-	// GetCompatibleElasticsearchVersions operation.
+	//  A map of compatible Elasticsearch versions returned as part of the GetCompatibleElasticsearchVersions operation.
 	CompatibleElasticsearchVersions []types.CompatibleVersionsMap
 
 	// Metadata pertaining to the operation's result.
@@ -78,25 +76,25 @@ func (c *Client) addOperationGetCompatibleElasticsearchVersionsMiddlewares(stack
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -111,10 +109,13 @@ func (c *Client) addOperationGetCompatibleElasticsearchVersionsMiddlewares(stack
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetCompatibleElasticsearchVersions(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

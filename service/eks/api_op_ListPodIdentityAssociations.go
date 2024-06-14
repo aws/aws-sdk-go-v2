@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/eks/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -54,9 +53,10 @@ type ListPodIdentityAssociationsInput struct {
 	// The nextToken value returned from a previous paginated ListUpdates request
 	// where maxResults was used and the results exceeded the value of that parameter.
 	// Pagination continues from the end of the previous results that returned the
-	// nextToken value. This token should be treated as an opaque identifier that is
-	// used only to retrieve the next items in a list and not for other programmatic
-	// purposes.
+	// nextToken value.
+	//
+	// This token should be treated as an opaque identifier that is used only to
+	// retrieve the next items in a list and not for other programmatic purposes.
 	NextToken *string
 
 	// The name of the Kubernetes service account that the associations use.
@@ -68,20 +68,26 @@ type ListPodIdentityAssociationsInput struct {
 type ListPodIdentityAssociationsOutput struct {
 
 	// The list of summarized descriptions of the associations that are in the cluster
-	// and match any filters that you provided. Each summary is simplified by removing
-	// these fields compared to the full PodIdentityAssociation :
+	// and match any filters that you provided.
+	//
+	// Each summary is simplified by removing these fields compared to the full PodIdentityAssociation:
+	//
 	//   - The IAM role: roleArn
+	//
 	//   - The timestamp that the association was created at: createdAt
+	//
 	//   - The most recent timestamp that the association was modified at:. modifiedAt
+	//
 	//   - The tags on the association: tags
 	Associations []types.PodIdentityAssociationSummary
 
 	// The nextToken value to include in a future ListPodIdentityAssociations request.
 	// When the results of a ListPodIdentityAssociations request exceed maxResults ,
 	// you can use this value to retrieve the next page of results. This value is null
-	// when there are no more results to return. This token should be treated as an
-	// opaque identifier that is used only to retrieve the next items in a list and not
-	// for other programmatic purposes.
+	// when there are no more results to return.
+	//
+	// This token should be treated as an opaque identifier that is used only to
+	// retrieve the next items in a list and not for other programmatic purposes.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -112,25 +118,25 @@ func (c *Client) addOperationListPodIdentityAssociationsMiddlewares(stack *middl
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -145,13 +151,16 @@ func (c *Client) addOperationListPodIdentityAssociationsMiddlewares(stack *middl
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpListPodIdentityAssociationsValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListPodIdentityAssociations(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/connectcases/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -14,13 +13,16 @@ import (
 
 // Creates a related item (comments, tasks, and contacts) and associates it with a
 // case.
+//
 //   - A Related Item is a resource that is associated with a case. It may or may
 //     not have an external identifier linking it to an external resource (for example,
 //     a contactArn ). All Related Items have their own internal identifier, the
 //     relatedItemArn . Examples of related items include comments and contacts .
-//   - If you provide a value for performedBy.userArn you must also have
-//     DescribeUser (https://docs.aws.amazon.com/connect/latest/APIReference/API_DescribeUser.html)
+//
+//   - If you provide a value for performedBy.userArn you must also have [DescribeUser]
 //     permission on the ARN of the user that you provide.
+//
+// [DescribeUser]: https://docs.aws.amazon.com/connect/latest/APIReference/API_DescribeUser.html
 func (c *Client) CreateRelatedItem(ctx context.Context, params *CreateRelatedItemInput, optFns ...func(*Options)) (*CreateRelatedItemOutput, error) {
 	if params == nil {
 		params = &CreateRelatedItemInput{}
@@ -104,25 +106,25 @@ func (c *Client) addOperationCreateRelatedItemMiddlewares(stack *middleware.Stac
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -137,13 +139,16 @@ func (c *Client) addOperationCreateRelatedItemMiddlewares(stack *middleware.Stac
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpCreateRelatedItemValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateRelatedItem(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

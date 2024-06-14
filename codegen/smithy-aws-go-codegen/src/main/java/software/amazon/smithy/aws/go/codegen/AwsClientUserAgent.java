@@ -15,21 +15,24 @@
 
 package software.amazon.smithy.aws.go.codegen;
 
+import static software.amazon.smithy.go.codegen.GoWriter.goTemplate;
+
+import java.util.List;
 import software.amazon.smithy.aws.traits.ServiceTrait;
 import software.amazon.smithy.codegen.core.SymbolProvider;
-import software.amazon.smithy.go.codegen.CodegenUtils;
 import software.amazon.smithy.go.codegen.GoDelegator;
 import software.amazon.smithy.go.codegen.GoSettings;
+import software.amazon.smithy.go.codegen.GoUniverseTypes;
+import software.amazon.smithy.go.codegen.GoWriter;
 import software.amazon.smithy.go.codegen.SmithyGoDependency;
+import software.amazon.smithy.go.codegen.SmithyGoTypes;
 import software.amazon.smithy.go.codegen.SymbolUtils;
 import software.amazon.smithy.go.codegen.integration.ConfigField;
 import software.amazon.smithy.go.codegen.integration.GoIntegration;
-import software.amazon.smithy.go.codegen.integration.MiddlewareRegistrar;
 import software.amazon.smithy.go.codegen.integration.RuntimeClientPlugin;
 import software.amazon.smithy.model.Model;
 import software.amazon.smithy.utils.ListUtils;
-
-import java.util.List;
+import software.amazon.smithy.utils.MapUtils;
 
 public class AwsClientUserAgent implements GoIntegration {
     public static final String MIDDLEWARE_RESOLVER = "addClientUserAgent";
@@ -49,32 +52,11 @@ public class AwsClientUserAgent implements GoIntegration {
             GoDelegator goDelegator
     ) {
         ServiceTrait serviceTrait = settings.getService(model).expectTrait(ServiceTrait.class);
-        String serviceId = serviceTrait.getSdkId().replace("-", "").replace(" ", "").toLowerCase();
-
-        goDelegator.useShapeWriter(settings.getService(model), writer -> {
-            writer.openBlock("func $L(stack $P, options Options) error {", "}", MIDDLEWARE_RESOLVER, SymbolUtils.createPointableSymbolBuilder("Stack",
-                    SmithyGoDependency.SMITHY_MIDDLEWARE).build(), () -> {
-                writer.write("if err := $T($T, $S, $T)(stack); err != nil { return err }",
-                        SymbolUtils.createValueSymbolBuilder("AddSDKAgentKeyValue", AwsGoDependency.AWS_MIDDLEWARE)
-                                .build(),
-                        SymbolUtils.createValueSymbolBuilder("APIMetadata",
-                                AwsGoDependency.AWS_MIDDLEWARE).build(),
-                        serviceId,
-                        SymbolUtils.createValueSymbolBuilder("goModuleVersion").build()
-                );
-                writer.write("");
-                writer.openBlock("if len(options.AppID) > 0 {", "}", () -> {
-                    writer.write("return $T($T, options.AppID)(stack)",
-                            SymbolUtils.createValueSymbolBuilder("AddSDKAgentKey", AwsGoDependency.AWS_MIDDLEWARE)
-                                    .build(),
-                            SymbolUtils.createValueSymbolBuilder("ApplicationIdentifier",
-                                    AwsGoDependency.AWS_MIDDLEWARE).build()
-                    );
-                });
-                writer.write("");
-                writer.write("return nil");
-            });
-        });
+        String serviceId = serviceTrait.getSdkId()
+                .replace("-", "")
+                .replace(" ", "")
+                .toLowerCase();
+        goDelegator.useFileWriter("api_client.go", settings.getModuleName(), addMiddleware(serviceId));
     }
 
     @Override
@@ -84,13 +66,51 @@ public class AwsClientUserAgent implements GoIntegration {
                         .configFields(ListUtils.of(
                                 ConfigField.builder()
                                         .name(SDK_UA_APP_ID)
-                                        .type(SymbolUtils.createValueSymbolBuilder("string")
-                                                .putProperty(SymbolUtils.GO_UNIVERSE_TYPE, true)
-                                                .build())
+                                        .type(GoUniverseTypes.String)
                                         .documentation("The optional application specific identifier appended to the User-Agent header.")
                                         .build()
                         ))
                         .build()
         );
+    }
+
+    private GoWriter.Writable addMiddleware(String serviceId) {
+        return goTemplate("""
+                func addClientUserAgent(stack $middlewareStack:P, options Options) error {
+                    ua, err := getOrAddRequestUserAgent(stack)
+                    if err != nil {
+                        return err
+                    }
+
+                    ua.AddSDKAgentKeyValue(awsmiddleware.APIMetadata, $service:S, goModuleVersion)
+                    if len(options.AppID) > 0 {
+                        ua.AddSDKAgentKey(awsmiddleware.ApplicationIdentifier, options.AppID)
+                    }
+
+                    return nil
+                }
+
+                func getOrAddRequestUserAgent(stack *middleware.Stack) (*awsmiddleware.RequestUserAgent, error) {
+                    id := (*awsmiddleware.RequestUserAgent)(nil).ID()
+                    mw, ok := stack.Build.Get(id)
+                    if !ok {
+                        mw = awsmiddleware.NewRequestUserAgent()
+                        if err := stack.Build.Add(mw, middleware.After); err != nil {
+                            return nil, err
+                        }
+                    }
+
+                    ua, ok := mw.(*awsmiddleware.RequestUserAgent)
+                    if !ok {
+                        return nil, fmt.Errorf("%T for %s middleware did not match expected type", mw, id)
+                    }
+
+                    return ua, nil
+                }
+                """,
+                MapUtils.of(
+                        "service", serviceId,
+                        "middlewareStack", SmithyGoTypes.Middleware.Stack
+                ));
     }
 }

@@ -6,24 +6,26 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/proton/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Attempts to cancel a service instance deployment on an UpdateServiceInstance
-// action, if the deployment is IN_PROGRESS . For more information, see Update a
-// service instance (https://docs.aws.amazon.com/proton/latest/userguide/ag-svc-instance-update.html)
-// in the Proton User guide. The following list includes potential cancellation
-// scenarios.
+// Attempts to cancel a service instance deployment on an UpdateServiceInstance action, if the
+// deployment is IN_PROGRESS . For more information, see [Update a service instance] in the Proton User guide.
+//
+// The following list includes potential cancellation scenarios.
+//
 //   - If the cancellation attempt succeeds, the resulting deployment state is
 //     CANCELLED .
-//   - If the cancellation attempt fails, the resulting deployment state is FAILED
-//     .
-//   - If the current UpdateServiceInstance action succeeds before the cancellation
-//     attempt starts, the resulting deployment state is SUCCEEDED and the
-//     cancellation attempt has no effect.
+//
+//   - If the cancellation attempt fails, the resulting deployment state is FAILED .
+//
+//   - If the current UpdateServiceInstanceaction succeeds before the cancellation attempt starts, the
+//     resulting deployment state is SUCCEEDED and the cancellation attempt has no
+//     effect.
+//
+// [Update a service instance]: https://docs.aws.amazon.com/proton/latest/userguide/ag-svc-instance-update.html
 func (c *Client) CancelServiceInstanceDeployment(ctx context.Context, params *CancelServiceInstanceDeploymentInput, optFns ...func(*Options)) (*CancelServiceInstanceDeploymentOutput, error) {
 	if params == nil {
 		params = &CancelServiceInstanceDeploymentInput{}
@@ -89,25 +91,25 @@ func (c *Client) addOperationCancelServiceInstanceDeploymentMiddlewares(stack *m
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -122,13 +124,16 @@ func (c *Client) addOperationCancelServiceInstanceDeploymentMiddlewares(stack *m
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpCancelServiceInstanceDeploymentValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCancelServiceInstanceDeployment(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

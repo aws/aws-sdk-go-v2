@@ -6,19 +6,20 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Amazon Web Services uses this action to install Outpost servers. Starts the
-// connection required for Outpost server installation. Use CloudTrail to monitor
-// this action or Amazon Web Services managed policy for Amazon Web Services
-// Outposts to secure it. For more information, see Amazon Web Services managed
-// policies for Amazon Web Services Outposts (https://docs.aws.amazon.com/outposts/latest/userguide/security-iam-awsmanpol.html)
-// and Logging Amazon Web Services Outposts API calls with Amazon Web Services
-// CloudTrail (https://docs.aws.amazon.com/outposts/latest/userguide/logging-using-cloudtrail.html)
-// in the Amazon Web Services Outposts User Guide.
+//	Amazon Web Services uses this action to install Outpost servers.
+//
+// Starts the connection required for Outpost server installation.
+//
+// Use CloudTrail to monitor this action or Amazon Web Services managed policy for
+// Amazon Web Services Outposts to secure it. For more information, see [Amazon Web Services managed policies for Amazon Web Services Outposts]and [Logging Amazon Web Services Outposts API calls with Amazon Web Services CloudTrail] in
+// the Amazon Web Services Outposts User Guide.
+//
+// [Logging Amazon Web Services Outposts API calls with Amazon Web Services CloudTrail]: https://docs.aws.amazon.com/outposts/latest/userguide/logging-using-cloudtrail.html
+// [Amazon Web Services managed policies for Amazon Web Services Outposts]: https://docs.aws.amazon.com/outposts/latest/userguide/security-iam-awsmanpol.html
 func (c *Client) StartConnection(ctx context.Context, params *StartConnectionInput, optFns ...func(*Options)) (*StartConnectionOutput, error) {
 	if params == nil {
 		params = &StartConnectionInput{}
@@ -36,22 +37,22 @@ func (c *Client) StartConnection(ctx context.Context, params *StartConnectionInp
 
 type StartConnectionInput struct {
 
-	// The ID of the Outpost server.
+	//  The ID of the Outpost server.
 	//
 	// This member is required.
 	AssetId *string
 
-	// The public key of the client.
+	//  The public key of the client.
 	//
 	// This member is required.
 	ClientPublicKey *string
 
-	// The device index of the network interface on the Outpost server.
+	//  The device index of the network interface on the Outpost server.
 	//
 	// This member is required.
 	NetworkInterfaceDeviceIndex int32
 
-	// The serial number of the dongle.
+	//  The serial number of the dongle.
 	DeviceSerialNumber *string
 
 	noSmithyDocumentSerde
@@ -59,10 +60,10 @@ type StartConnectionInput struct {
 
 type StartConnectionOutput struct {
 
-	// The ID of the connection.
+	//  The ID of the connection.
 	ConnectionId *string
 
-	// The underlay IP address.
+	//  The underlay IP address.
 	UnderlayIpAddress *string
 
 	// Metadata pertaining to the operation's result.
@@ -93,25 +94,25 @@ func (c *Client) addOperationStartConnectionMiddlewares(stack *middleware.Stack,
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -126,13 +127,16 @@ func (c *Client) addOperationStartConnectionMiddlewares(stack *middleware.Stack,
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpStartConnectionValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opStartConnection(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

@@ -12,8 +12,9 @@ const (
 )
 
 // Values returns all known values for AuthenticationType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (AuthenticationType) Values() []AuthenticationType {
 	return []AuthenticationType{
 		"password",
@@ -31,8 +32,9 @@ const (
 )
 
 // Values returns all known values for AZStatus. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (AZStatus) Values() []AZStatus {
 	return []AZStatus{
 		"singleaz",
@@ -49,8 +51,9 @@ const (
 )
 
 // Values returns all known values for DataTieringStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (DataTieringStatus) Values() []DataTieringStatus {
 	return []DataTieringStatus{
 		"true",
@@ -67,8 +70,9 @@ const (
 )
 
 // Values returns all known values for InputAuthenticationType. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (InputAuthenticationType) Values() []InputAuthenticationType {
 	return []InputAuthenticationType{
 		"password",
@@ -87,8 +91,9 @@ const (
 )
 
 // Values returns all known values for ServiceUpdateStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ServiceUpdateStatus) Values() []ServiceUpdateStatus {
 	return []ServiceUpdateStatus{
 		"available",
@@ -106,8 +111,9 @@ const (
 )
 
 // Values returns all known values for ServiceUpdateType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ServiceUpdateType) Values() []ServiceUpdateType {
 	return []ServiceUpdateType{
 		"security-update",
@@ -127,8 +133,9 @@ const (
 )
 
 // Values returns all known values for SourceType. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (SourceType) Values() []SourceType {
 	return []SourceType{
 		"node",

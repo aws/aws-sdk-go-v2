@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/rds/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -30,21 +29,26 @@ func (c *Client) PurchaseReservedDBInstancesOffering(ctx context.Context, params
 
 type PurchaseReservedDBInstancesOfferingInput struct {
 
-	// The ID of the Reserved DB instance offering to purchase. Example:
-	// 438012d3-4052-4cc7-b2e3-8d3372e0e706
+	// The ID of the Reserved DB instance offering to purchase.
+	//
+	// Example: 438012d3-4052-4cc7-b2e3-8d3372e0e706
 	//
 	// This member is required.
 	ReservedDBInstancesOfferingId *string
 
-	// The number of instances to reserve. Default: 1
+	// The number of instances to reserve.
+	//
+	// Default: 1
 	DBInstanceCount *int32
 
-	// Customer-specified identifier to track this reservation. Example:
-	// myreservationID
+	// Customer-specified identifier to track this reservation.
+	//
+	// Example: myreservationID
 	ReservedDBInstanceId *string
 
-	// A list of tags. For more information, see Tagging Amazon RDS Resources (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html)
-	// in the Amazon RDS User Guide.
+	// A list of tags. For more information, see [Tagging Amazon RDS Resources] in the Amazon RDS User Guide.
+	//
+	// [Tagging Amazon RDS Resources]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html
 	Tags []types.Tag
 
 	noSmithyDocumentSerde
@@ -84,25 +88,25 @@ func (c *Client) addOperationPurchaseReservedDBInstancesOfferingMiddlewares(stac
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -117,13 +121,16 @@ func (c *Client) addOperationPurchaseReservedDBInstancesOfferingMiddlewares(stac
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpPurchaseReservedDBInstancesOfferingValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opPurchaseReservedDBInstancesOffering(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

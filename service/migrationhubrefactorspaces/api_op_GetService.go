@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/migrationhubrefactorspaces/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -75,8 +74,10 @@ type GetServiceOutput struct {
 	// Any error associated with the service resource.
 	Error *types.ErrorResponse
 
-	// The configuration for the Lambda endpoint type. The Arn is the Amazon Resource
-	// Name (ARN) of the Lambda function associated with this service.
+	// The configuration for the Lambda endpoint type.
+	//
+	// The Arn is the Amazon Resource Name (ARN) of the Lambda function associated
+	// with this service.
 	LambdaEndpoint *types.LambdaEndpointConfig
 
 	// A timestamp that indicates when the service was last updated.
@@ -98,8 +99,11 @@ type GetServiceOutput struct {
 	// Web Services resource. Each tag consists of a key-value pair.
 	Tags map[string]string
 
-	// The configuration for the URL endpoint type. The Url isthe URL of the endpoint
-	// type. The HealthUrl is the health check URL of the endpoint type.
+	// The configuration for the URL endpoint type.
+	//
+	// The Url isthe URL of the endpoint type.
+	//
+	// The HealthUrl is the health check URL of the endpoint type.
 	UrlEndpoint *types.UrlEndpointConfig
 
 	// The ID of the virtual private cloud (VPC).
@@ -133,25 +137,25 @@ func (c *Client) addOperationGetServiceMiddlewares(stack *middleware.Stack, opti
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -166,13 +170,16 @@ func (c *Client) addOperationGetServiceMiddlewares(stack *middleware.Stack, opti
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpGetServiceValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetService(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

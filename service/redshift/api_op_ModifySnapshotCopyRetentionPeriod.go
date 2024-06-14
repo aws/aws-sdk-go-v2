@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/redshift/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -39,24 +38,36 @@ type ModifySnapshotCopyRetentionPeriodInput struct {
 
 	// The unique identifier of the cluster for which you want to change the retention
 	// period for either automated or manual snapshots that are copied to a destination
-	// Amazon Web Services Region. Constraints: Must be the valid name of an existing
-	// cluster that has cross-region snapshot copy enabled.
+	// Amazon Web Services Region.
+	//
+	// Constraints: Must be the valid name of an existing cluster that has
+	// cross-region snapshot copy enabled.
 	//
 	// This member is required.
 	ClusterIdentifier *string
 
 	// The number of days to retain automated snapshots in the destination Amazon Web
 	// Services Region after they are copied from the source Amazon Web Services
-	// Region. By default, this only changes the retention period of copied automated
-	// snapshots. If you decrease the retention period for automated snapshots that are
-	// copied to a destination Amazon Web Services Region, Amazon Redshift deletes any
-	// existing automated snapshots that were copied to the destination Amazon Web
-	// Services Region and that fall outside of the new retention period. Constraints:
-	// Must be at least 1 and no more than 35 for automated snapshots. If you specify
-	// the manual option, only newly copied manual snapshots will have the new
-	// retention period. If you specify the value of -1 newly copied manual snapshots
-	// are retained indefinitely. Constraints: The number of days must be either -1 or
-	// an integer between 1 and 3,653 for manual snapshots.
+	// Region.
+	//
+	// By default, this only changes the retention period of copied automated
+	// snapshots.
+	//
+	// If you decrease the retention period for automated snapshots that are copied to
+	// a destination Amazon Web Services Region, Amazon Redshift deletes any existing
+	// automated snapshots that were copied to the destination Amazon Web Services
+	// Region and that fall outside of the new retention period.
+	//
+	// Constraints: Must be at least 1 and no more than 35 for automated snapshots.
+	//
+	// If you specify the manual option, only newly copied manual snapshots will have
+	// the new retention period.
+	//
+	// If you specify the value of -1 newly copied manual snapshots are retained
+	// indefinitely.
+	//
+	// Constraints: The number of days must be either -1 or an integer between 1 and
+	// 3,653 for manual snapshots.
 	//
 	// This member is required.
 	RetentionPeriod *int32
@@ -101,25 +112,25 @@ func (c *Client) addOperationModifySnapshotCopyRetentionPeriodMiddlewares(stack 
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -134,13 +145,16 @@ func (c *Client) addOperationModifySnapshotCopyRetentionPeriodMiddlewares(stack 
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpModifySnapshotCopyRetentionPeriodValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opModifySnapshotCopyRetentionPeriod(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

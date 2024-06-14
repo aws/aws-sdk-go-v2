@@ -57,7 +57,8 @@
                     "target": "com.amazonaws.mediatailor#__long",
                     "traits": {
                         "smithy.api#default": 0,
-                        "smithy.api#documentation": "<p>How long (in milliseconds) after the beginning of the program that an ad starts. This value must fall within 100ms of a segment boundary, otherwise the ad break will be skipped.</p>"
+                        "smithy.api#documentation": "<p>How long (in milliseconds) after the beginning of the program that an ad starts. This value must fall within 100ms of a segment boundary, otherwise the ad break will be skipped.</p>",
+                        "smithy.api#required": {}
                     }
                 },
                 "Slate": {
@@ -222,6 +223,79 @@
                         "smithy.api#enumValue": "INFO"
                     }
                 }
+            }
+        },
+        "com.amazonaws.mediatailor#AlternateMedia": {
+            "type": "structure",
+            "members": {
+                "SourceLocationName": {
+                    "target": "com.amazonaws.mediatailor#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the source location for alternateMedia.</p>"
+                    }
+                },
+                "LiveSourceName": {
+                    "target": "com.amazonaws.mediatailor#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the live source for alternateMedia.</p>"
+                    }
+                },
+                "VodSourceName": {
+                    "target": "com.amazonaws.mediatailor#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the VOD source for alternateMedia.</p>"
+                    }
+                },
+                "ClipRange": {
+                    "target": "com.amazonaws.mediatailor#ClipRange"
+                },
+                "ScheduledStartTimeMillis": {
+                    "target": "com.amazonaws.mediatailor#__long",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time that the alternateMedia is scheduled to start, in epoch milliseconds.</p>"
+                    }
+                },
+                "AdBreaks": {
+                    "target": "com.amazonaws.mediatailor#__listOfAdBreak",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Ad break configuration parameters defined in AlternateMedia.</p>"
+                    }
+                },
+                "DurationMillis": {
+                    "target": "com.amazonaws.mediatailor#__long",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The duration of the alternateMedia in milliseconds.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A playlist of media (VOD and/or live) to be played instead of the default media on a particular program.</p>"
+            }
+        },
+        "com.amazonaws.mediatailor#AudienceMedia": {
+            "type": "structure",
+            "members": {
+                "Audience": {
+                    "target": "com.amazonaws.mediatailor#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Audience defined in AudienceMedia.</p>"
+                    }
+                },
+                "AlternateMedia": {
+                    "target": "com.amazonaws.mediatailor#__listOfAlternateMedia",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of AlternateMedia defined in AudienceMedia.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An AudienceMedia object contains an Audience and a list of AlternateMedia.</p>"
+            }
+        },
+        "com.amazonaws.mediatailor#Audiences": {
+            "type": "list",
+            "member": {
+                "target": "smithy.api#String"
             }
         },
         "com.amazonaws.mediatailor#AvailMatchingCriteria": {
@@ -401,6 +475,12 @@
                         "smithy.api#documentation": "<p>The log configuration.</p>",
                         "smithy.api#required": {}
                     }
+                },
+                "Audiences": {
+                    "target": "com.amazonaws.mediatailor#Audiences",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of audiences defined in channel.</p>"
+                    }
                 }
             },
             "traits": {
@@ -519,8 +599,15 @@
                 "EndOffsetMillis": {
                     "target": "com.amazonaws.mediatailor#__long",
                     "traits": {
-                        "smithy.api#documentation": "<p>The end offset of the clip range, in milliseconds, starting from the beginning of the VOD source associated with the program.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#addedDefault": {},
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The end offset of the clip range, in milliseconds, starting from the beginning of the VOD source associated with the program.</p>"
+                    }
+                },
+                "StartOffsetMillis": {
+                    "target": "com.amazonaws.mediatailor#__long",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The start offset of the clip range, in milliseconds. This offset truncates the start at the number of milliseconds into the duration of the VOD source.</p>"
                     }
                 }
             },
@@ -744,6 +831,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>\n            The time-shifted viewing configuration you want to associate to the channel.\n        </p>"
                     }
+                },
+                "Audiences": {
+                    "target": "com.amazonaws.mediatailor#Audiences",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of audiences defined in channel.</p>"
+                    }
                 }
             }
         },
@@ -821,6 +914,12 @@
                     "target": "com.amazonaws.mediatailor#TimeShiftConfiguration",
                     "traits": {
                         "smithy.api#documentation": "<p>\n            The time-shifted viewing configuration assigned to the channel.\n        </p>"
+                    }
+                },
+                "Audiences": {
+                    "target": "com.amazonaws.mediatailor#Audiences",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of audiences defined in channel.</p>"
                     }
                 }
             }
@@ -1094,6 +1193,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The name that's used to refer to a VOD source.</p>"
                     }
+                },
+                "AudienceMedia": {
+                    "target": "com.amazonaws.mediatailor#__listOfAudienceMedia",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of AudienceMedia defined in program.</p>"
+                    }
                 }
             }
         },
@@ -1164,6 +1269,12 @@
                     "target": "com.amazonaws.mediatailor#__long",
                     "traits": {
                         "smithy.api#documentation": "<p>The duration of the live program in milliseconds.</p>"
+                    }
+                },
+                "AudienceMedia": {
+                    "target": "com.amazonaws.mediatailor#__listOfAudienceMedia",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of AudienceMedia defined in program.</p>"
                     }
                 }
             }
@@ -1909,6 +2020,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>\n            The time-shifted viewing configuration for the channel.\n        </p>"
                     }
+                },
+                "Audiences": {
+                    "target": "com.amazonaws.mediatailor#Audiences",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of audiences defined in channel.</p>"
+                    }
                 }
             }
         },
@@ -2105,6 +2222,12 @@
                     "target": "smithy.api#Long",
                     "traits": {
                         "smithy.api#documentation": "<p>The duration of the live program in milliseconds.</p>"
+                    }
+                },
+                "AudienceMedia": {
+                    "target": "com.amazonaws.mediatailor#__listOfAudienceMedia",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of AudienceMedia defined in program.</p>"
                     }
                 }
             }
@@ -2407,6 +2530,13 @@
                         "smithy.api#documentation": "<p>(Optional) If the playback configuration has more than <code>MaxResults</code> channel schedules, use <code>NextToken</code> to get the second and subsequent pages of results.</p>\n         <p>For the first <code>GetChannelScheduleRequest</code> request, omit this value.</p>\n         <p>For the second and subsequent requests, get the value of <code>NextToken</code> from the previous response and specify that value for <code>NextToken</code> in the request.</p>\n         <p>If the previous response didn't include a <code>NextToken</code> element, there are no more channel schedules to get.</p>",
                         "smithy.api#httpQuery": "nextToken"
                     }
+                },
+                "Audience": {
+                    "target": "com.amazonaws.mediatailor#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The single audience for GetChannelScheduleRequest.</p>",
+                        "smithy.api#httpQuery": "audience"
+                    }
                 }
             }
         },
@@ -2501,6 +2631,13 @@
                     "target": "com.amazonaws.mediatailor#HlsConfiguration",
                     "traits": {
                         "smithy.api#documentation": "<p>The configuration for HLS content.</p>"
+                    }
+                },
+                "InsertionMode": {
+                    "target": "com.amazonaws.mediatailor#InsertionMode",
+                    "traits": {
+                        "smithy.api#default": "STITCHED_ONLY",
+                        "smithy.api#documentation": "<p>The setting that controls whether players can use stitched or guided ad insertion. The default, <code>STITCHED_ONLY</code>, forces all player sessions to use stitched (server-side) ad insertion. Choosing <code>PLAYER_SELECT</code> allows players to select either stitched or guided ad insertion at session-initialization time. The default for players that do not specify an insertion mode is stitched.</p>"
                     }
                 },
                 "LivePreRollConfiguration": {
@@ -2743,6 +2880,26 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>The VOD source's HTTP package configuration settings.</p>"
+            }
+        },
+        "com.amazonaws.mediatailor#InsertionMode": {
+            "type": "enum",
+            "members": {
+                "STITCHED_ONLY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "STITCHED_ONLY"
+                    }
+                },
+                "PLAYER_SELECT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PLAYER_SELECT"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Insertion Mode controls whether players can use stitched or guided ad insertion.</p>"
             }
         },
         "com.amazonaws.mediatailor#KeyValuePair": {
@@ -4358,6 +4515,13 @@
                         "smithy.api#documentation": "<p>The configuration for HLS content.</p>"
                     }
                 },
+                "InsertionMode": {
+                    "target": "com.amazonaws.mediatailor#InsertionMode",
+                    "traits": {
+                        "smithy.api#default": "STITCHED_ONLY",
+                        "smithy.api#documentation": "<p>The setting that controls whether players can use stitched or guided ad insertion. The default, <code>STITCHED_ONLY</code>, forces all player sessions to use stitched (server-side) ad insertion. Choosing <code>PLAYER_SELECT</code> allows players to select either stitched or guided ad insertion at session-initialization time. The default for players that do not specify an insertion mode is stitched.</p>"
+                    }
+                },
                 "LivePreRollConfiguration": {
                     "target": "com.amazonaws.mediatailor#LivePreRollConfiguration",
                     "traits": {
@@ -4748,6 +4912,13 @@
                         "smithy.api#documentation": "<p>The configuration for DASH content.</p>"
                     }
                 },
+                "InsertionMode": {
+                    "target": "com.amazonaws.mediatailor#InsertionMode",
+                    "traits": {
+                        "smithy.api#default": "STITCHED_ONLY",
+                        "smithy.api#documentation": "<p>The setting that controls whether players can use stitched or guided ad insertion. The default, <code>STITCHED_ONLY</code>, forces all player sessions to use stitched (server-side) ad insertion. Choosing <code>PLAYER_SELECT</code> allows players to select either stitched or guided ad insertion at session-initialization time. The default for players that do not specify an insertion mode is stitched.</p>"
+                    }
+                },
                 "LivePreRollConfiguration": {
                     "target": "com.amazonaws.mediatailor#LivePreRollConfiguration",
                     "traits": {
@@ -4843,6 +5014,13 @@
                     "target": "com.amazonaws.mediatailor#HlsConfiguration",
                     "traits": {
                         "smithy.api#documentation": "<p>The configuration for HLS content.</p>"
+                    }
+                },
+                "InsertionMode": {
+                    "target": "com.amazonaws.mediatailor#InsertionMode",
+                    "traits": {
+                        "smithy.api#default": "STITCHED_ONLY",
+                        "smithy.api#documentation": "<p>The setting that controls whether players can use stitched or guided ad insertion. The default, <code>STITCHED_ONLY</code>, forces all player sessions to use stitched (server-side) ad insertion. Choosing <code>PLAYER_SELECT</code> allows players to select either stitched or guided ad insertion at session-initialization time. The default for players that do not specify an insertion mode is stitched.</p>"
                     }
                 },
                 "LivePreRollConfiguration": {
@@ -5146,6 +5324,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The name of the VOD source.</p>"
                     }
+                },
+                "Audiences": {
+                    "target": "com.amazonaws.mediatailor#Audiences",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of audiences defined in ScheduleEntry.</p>"
+                    }
                 }
             },
             "traits": {
@@ -5165,6 +5349,12 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "FILLER_SLATE"
+                    }
+                },
+                "ALTERNATE_MEDIA": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ALTERNATE_MEDIA"
                     }
                 }
             }
@@ -5740,6 +5930,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>\n            The time-shifted viewing configuration you want to associate to the channel.\n        </p>"
                     }
+                },
+                "Audiences": {
+                    "target": "com.amazonaws.mediatailor#Audiences",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of audiences defined in channel.</p>"
+                    }
                 }
             }
         },
@@ -5817,6 +6013,12 @@
                     "target": "com.amazonaws.mediatailor#TimeShiftConfiguration",
                     "traits": {
                         "smithy.api#documentation": "<p>\n            The time-shifted viewing configuration for the channel.\n        </p>"
+                    }
+                },
+                "Audiences": {
+                    "target": "com.amazonaws.mediatailor#Audiences",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of audiences defined in channel.</p>"
                     }
                 }
             }
@@ -5964,6 +6166,12 @@
                         "smithy.api#documentation": "<p>The schedule configuration settings.</p>",
                         "smithy.api#required": {}
                     }
+                },
+                "AudienceMedia": {
+                    "target": "com.amazonaws.mediatailor#__listOfAudienceMedia",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of AudienceMedia defined in program.</p>"
+                    }
                 }
             }
         },
@@ -6034,6 +6242,12 @@
                     "target": "com.amazonaws.mediatailor#__timestampUnix",
                     "traits": {
                         "smithy.api#documentation": "<p>The scheduled start time for this Program.</p>"
+                    }
+                },
+                "AudienceMedia": {
+                    "target": "com.amazonaws.mediatailor#__listOfAudienceMedia",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of AudienceMedia defined in program.</p>"
                     }
                 }
             }
@@ -6417,6 +6631,18 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.mediatailor#Alert"
+            }
+        },
+        "com.amazonaws.mediatailor#__listOfAlternateMedia": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.mediatailor#AlternateMedia"
+            }
+        },
+        "com.amazonaws.mediatailor#__listOfAudienceMedia": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.mediatailor#AudienceMedia"
             }
         },
         "com.amazonaws.mediatailor#__listOfAvailMatchingCriteria": {

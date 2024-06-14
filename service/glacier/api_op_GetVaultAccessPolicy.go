@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	glaciercust "github.com/aws/aws-sdk-go-v2/service/glacier/internal/customizations"
 	"github.com/aws/aws-sdk-go-v2/service/glacier/types"
 	"github.com/aws/smithy-go/middleware"
@@ -14,12 +13,12 @@ import (
 )
 
 // This operation retrieves the access-policy subresource set on the vault; for
-// more information on setting this subresource, see Set Vault Access Policy (PUT
-// access-policy) (https://docs.aws.amazon.com/amazonglacier/latest/dev/api-SetVaultAccessPolicy.html)
-// . If there is no access policy set on the vault, the operation returns a 404
-// Not found error. For more information about vault access policies, see Amazon
-// Glacier Access Control with Vault Access Policies (https://docs.aws.amazon.com/amazonglacier/latest/dev/vault-access-policy.html)
-// .
+// more information on setting this subresource, see [Set Vault Access Policy (PUT access-policy)]. If there is no access
+// policy set on the vault, the operation returns a 404 Not found error. For more
+// information about vault access policies, see [Amazon Glacier Access Control with Vault Access Policies].
+//
+// [Set Vault Access Policy (PUT access-policy)]: https://docs.aws.amazon.com/amazonglacier/latest/dev/api-SetVaultAccessPolicy.html
+// [Amazon Glacier Access Control with Vault Access Policies]: https://docs.aws.amazon.com/amazonglacier/latest/dev/vault-access-policy.html
 func (c *Client) GetVaultAccessPolicy(ctx context.Context, params *GetVaultAccessPolicyInput, optFns ...func(*Options)) (*GetVaultAccessPolicyOutput, error) {
 	if params == nil {
 		params = &GetVaultAccessPolicyInput{}
@@ -89,25 +88,25 @@ func (c *Client) addOperationGetVaultAccessPolicyMiddlewares(stack *middleware.S
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -122,13 +121,16 @@ func (c *Client) addOperationGetVaultAccessPolicyMiddlewares(stack *middleware.S
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpGetVaultAccessPolicyValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetVaultAccessPolicy(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

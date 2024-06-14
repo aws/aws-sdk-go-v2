@@ -6,17 +6,19 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/verifiedpermissions/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
-// Modifies the validation setting for a policy store. Verified Permissions is
-// eventually consistent (https://wikipedia.org/wiki/Eventual_consistency) . It can
-// take a few seconds for a new or changed element to be propagate through the
-// service and be visible in the results of other Verified Permissions operations.
+// Modifies the validation setting for a policy store.
+//
+// Verified Permissions is [eventually consistent] . It can take a few seconds for a new or changed
+// element to propagate through the service and be visible in the results of other
+// Verified Permissions operations.
+//
+// [eventually consistent]: https://wikipedia.org/wiki/Eventual_consistency
 func (c *Client) UpdatePolicyStore(ctx context.Context, params *UpdatePolicyStoreInput, optFns ...func(*Options)) (*UpdatePolicyStoreOutput, error) {
 	if params == nil {
 		params = &UpdatePolicyStoreInput{}
@@ -54,8 +56,9 @@ type UpdatePolicyStoreInput struct {
 
 type UpdatePolicyStoreOutput struct {
 
-	// The Amazon Resource Name (ARN) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
-	// of the updated policy store.
+	// The [Amazon Resource Name (ARN)] of the updated policy store.
+	//
+	// [Amazon Resource Name (ARN)]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
 	//
 	// This member is required.
 	Arn *string
@@ -103,25 +106,25 @@ func (c *Client) addOperationUpdatePolicyStoreMiddlewares(stack *middleware.Stac
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -136,13 +139,16 @@ func (c *Client) addOperationUpdatePolicyStoreMiddlewares(stack *middleware.Stac
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpUpdatePolicyStoreValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdatePolicyStore(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

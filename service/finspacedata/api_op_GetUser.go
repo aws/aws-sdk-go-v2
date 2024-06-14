@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/finspacedata/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -45,7 +44,9 @@ type GetUserOutput struct {
 	// Indicates whether the user can use the GetProgrammaticAccessCredentials API to
 	// obtain credentials that can then be used to access other FinSpace Data API
 	// operations.
+	//
 	//   - ENABLED – The user has permissions to use the APIs.
+	//
 	//   - DISABLED – The user does not have permissions to use any APIs.
 	ApiAccess types.ApiAccess
 
@@ -84,12 +85,16 @@ type GetUserOutput struct {
 	LastName *string
 
 	// The current status of the user.
+	//
 	//   - CREATING – The creation is in progress.
+	//
 	//   - ENABLED – The user is created and is currently active.
+	//
 	//   - DISABLED – The user is currently inactive.
 	Status types.UserStatus
 
 	// Indicates the type of user.
+	//
 	//   - SUPER_USER – A user with permission to all the functionality and data in
 	//   FinSpace.
 	//
@@ -128,25 +133,25 @@ func (c *Client) addOperationGetUserMiddlewares(stack *middleware.Stack, options
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -164,13 +169,16 @@ func (c *Client) addOperationGetUserMiddlewares(stack *middleware.Stack, options
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpGetUserValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetUser(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

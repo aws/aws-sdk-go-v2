@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/comprehend/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -32,8 +31,9 @@ func (c *Client) StartKeyPhrasesDetectionJob(ctx context.Context, params *StartK
 type StartKeyPhrasesDetectionJobInput struct {
 
 	// The Amazon Resource Name (ARN) of the IAM role that grants Amazon Comprehend
-	// read access to your input data. For more information, see Role-based permissions (https://docs.aws.amazon.com/comprehend/latest/dg/security_iam_id-based-policy-examples.html#auth-role-permissions)
-	// .
+	// read access to your input data. For more information, see [Role-based permissions].
+	//
+	// [Role-based permissions]: https://docs.aws.amazon.com/comprehend/latest/dg/security_iam_id-based-policy-examples.html#auth-role-permissions
 	//
 	// This member is required.
 	DataAccessRoleArn *string
@@ -72,15 +72,18 @@ type StartKeyPhrasesDetectionJobInput struct {
 	// Comprehend uses to encrypt data on the storage volume attached to the ML compute
 	// instance(s) that process the analysis job. The VolumeKmsKeyId can be either of
 	// the following formats:
+	//
 	//   - KMS Key ID: "1234abcd-12ab-34cd-56ef-1234567890ab"
+	//
 	//   - Amazon Resource Name (ARN) of a KMS Key:
 	//   "arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"
 	VolumeKmsKeyId *string
 
-	// Configuration parameters for an optional private Virtual Private Cloud (VPC)
+	//  Configuration parameters for an optional private Virtual Private Cloud (VPC)
 	// containing the resources you are using for your key phrases detection job. For
-	// more information, see Amazon VPC (https://docs.aws.amazon.com/vpc/latest/userguide/what-is-amazon-vpc.html)
-	// .
+	// more information, see [Amazon VPC].
+	//
+	// [Amazon VPC]: https://docs.aws.amazon.com/vpc/latest/userguide/what-is-amazon-vpc.html
 	VpcConfig *types.VpcConfig
 
 	noSmithyDocumentSerde
@@ -91,9 +94,13 @@ type StartKeyPhrasesDetectionJobOutput struct {
 	// The Amazon Resource Name (ARN) of the key phrase detection job. It is a unique,
 	// fully qualified identifier for the job. It includes the Amazon Web Services
 	// account, Amazon Web Services Region, and the job ID. The format of the ARN is as
-	// follows: arn::comprehend:::key-phrases-detection-job/ The following is an
-	// example job ARN:
-	// arn:aws:comprehend:us-west-2:111122223333:key-phrases-detection-job/1234abcd12ab34cd56ef1234567890ab
+	// follows:
+	//
+	//     arn::comprehend:::key-phrases-detection-job/
+	//
+	// The following is an example job ARN:
+	//
+	//     arn:aws:comprehend:us-west-2:111122223333:key-phrases-detection-job/1234abcd12ab34cd56ef1234567890ab
 	JobArn *string
 
 	// The identifier generated for the job. To get the status of a job, use this
@@ -101,9 +108,13 @@ type StartKeyPhrasesDetectionJobOutput struct {
 	JobId *string
 
 	// The status of the job.
+	//
 	//   - SUBMITTED - The job has been received and is queued for processing.
+	//
 	//   - IN_PROGRESS - Amazon Comprehend is processing the job.
+	//
 	//   - COMPLETED - The job was successfully completed and the output is available.
+	//
 	//   - FAILED - The job did not complete. To get details, use the operation.
 	JobStatus types.JobStatus
 
@@ -135,25 +146,25 @@ func (c *Client) addOperationStartKeyPhrasesDetectionJobMiddlewares(stack *middl
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -168,6 +179,9 @@ func (c *Client) addOperationStartKeyPhrasesDetectionJobMiddlewares(stack *middl
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opStartKeyPhrasesDetectionJobMiddleware(stack, options); err != nil {
 		return err
 	}
@@ -177,7 +191,7 @@ func (c *Client) addOperationStartKeyPhrasesDetectionJobMiddlewares(stack *middl
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opStartKeyPhrasesDetectionJob(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

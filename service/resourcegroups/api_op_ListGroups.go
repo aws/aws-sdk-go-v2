@@ -6,14 +6,17 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/resourcegroups/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns a list of existing Resource Groups in your account. Minimum permissions
+// Returns a list of existing Resource Groups in your account.
+//
+// # Minimum permissions
+//
 // To run this command, you must have the following permissions:
+//
 //   - resource-groups:ListGroups
 func (c *Client) ListGroups(ctx context.Context, params *ListGroupsInput, optFns ...func(*Options)) (*ListGroupsOutput, error) {
 	if params == nil {
@@ -32,17 +35,29 @@ func (c *Client) ListGroups(ctx context.Context, params *ListGroupsInput, optFns
 
 type ListGroupsInput struct {
 
-	// Filters, formatted as GroupFilter objects, that you want to apply to a
-	// ListGroups operation.
-	//   - resource-type - Filter the results to include only those of the specified
-	//   resource types. Specify up to five resource types in the format
-	//   AWS::ServiceCode::ResourceType . For example, AWS::EC2::Instance , or
-	//   AWS::S3::Bucket .
+	// Filters, formatted as GroupFilter objects, that you want to apply to a ListGroups
+	// operation.
+	//
+	//   - resource-type - Filter the results to include only those resource groups
+	//   that have the specified resource type in their ResourceTypeFilter . For
+	//   example, AWS::EC2::Instance would return any resource group with a
+	//   ResourceTypeFilter that includes AWS::EC2::Instance .
+	//
 	//   - configuration-type - Filter the results to include only those groups that
 	//   have the specified configuration types attached. The current supported values
 	//   are:
+	//
+	//   - AWS::AppRegistry::Application
+	//
+	//   - AWS::AppRegistry::ApplicationResourceGroups
+	//
+	//   - AWS::CloudFormation::Stack
+	//
 	//   - AWS::EC2::CapacityReservationPool
+	//
 	//   - AWS::EC2::HostManagement
+	//
+	//   - AWS::NetworkFirewall::RuleGroup
 	Filters []types.GroupFilter
 
 	// The total number of results that you want included on each page of the
@@ -67,11 +82,11 @@ type ListGroupsInput struct {
 
 type ListGroupsOutput struct {
 
-	// A list of GroupIdentifier objects. Each identifier is an object that contains
-	// both the Name and the GroupArn .
+	// A list of GroupIdentifier objects. Each identifier is an object that contains both the Name
+	// and the GroupArn .
 	GroupIdentifiers []types.GroupIdentifier
 
-	// Deprecated - don't use this field. Use the GroupIdentifiers response field
+	//  Deprecated - don't use this field. Use the GroupIdentifiers response field
 	// instead.
 	//
 	// Deprecated: This field is deprecated, use GroupIdentifiers instead.
@@ -111,25 +126,25 @@ func (c *Client) addOperationListGroupsMiddlewares(stack *middleware.Stack, opti
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -144,13 +159,16 @@ func (c *Client) addOperationListGroupsMiddlewares(stack *middleware.Stack, opti
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpListGroupsValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListGroups(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

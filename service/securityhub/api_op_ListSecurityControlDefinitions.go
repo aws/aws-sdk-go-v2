@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/securityhub/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -30,7 +29,7 @@ func (c *Client) ListSecurityControlDefinitions(ctx context.Context, params *Lis
 
 type ListSecurityControlDefinitionsInput struct {
 
-	// An optional parameter that limits the total results of the API response to the
+	//  An optional parameter that limits the total results of the API response to the
 	// specified number. If this parameter isn't provided in the request, the results
 	// include the first 25 security controls that apply to the specified standard. The
 	// results also include a NextToken parameter that you can use in a subsequent API
@@ -38,10 +37,10 @@ type ListSecurityControlDefinitionsInput struct {
 	// standard are returned.
 	MaxResults *int32
 
-	// Optional pagination parameter.
+	//  Optional pagination parameter.
 	NextToken *string
 
-	// The Amazon Resource Name (ARN) of the standard that you want to view controls
+	//  The Amazon Resource Name (ARN) of the standard that you want to view controls
 	// for.
 	StandardsArn *string
 
@@ -50,12 +49,12 @@ type ListSecurityControlDefinitionsInput struct {
 
 type ListSecurityControlDefinitionsOutput struct {
 
-	// An array of controls that apply to the specified standard.
+	//  An array of controls that apply to the specified standard.
 	//
 	// This member is required.
 	SecurityControlDefinitions []types.SecurityControlDefinition
 
-	// A pagination parameter that's included in the response only if it was included
+	//  A pagination parameter that's included in the response only if it was included
 	// in the request.
 	NextToken *string
 
@@ -87,25 +86,25 @@ func (c *Client) addOperationListSecurityControlDefinitionsMiddlewares(stack *mi
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -120,10 +119,13 @@ func (c *Client) addOperationListSecurityControlDefinitionsMiddlewares(stack *mi
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListSecurityControlDefinitions(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -152,7 +154,7 @@ var _ ListSecurityControlDefinitionsAPIClient = (*Client)(nil)
 // ListSecurityControlDefinitionsPaginatorOptions is the paginator options for
 // ListSecurityControlDefinitions
 type ListSecurityControlDefinitionsPaginatorOptions struct {
-	// An optional parameter that limits the total results of the API response to the
+	//  An optional parameter that limits the total results of the API response to the
 	// specified number. If this parameter isn't provided in the request, the results
 	// include the first 25 security controls that apply to the specified standard. The
 	// results also include a NextToken parameter that you can use in a subsequent API

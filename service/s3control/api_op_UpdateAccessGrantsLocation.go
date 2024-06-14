@@ -16,10 +16,12 @@ import (
 	"time"
 )
 
-// Updates the IAM role of a registered location in your S3 Access Grants
-// instance. Permissions You must have the s3:UpdateAccessGrantsLocation
-// permission to use this operation. Additional Permissions You must also have the
-// following permission: iam:PassRole
+// Updates the IAM role of a registered location in your S3 Access Grants instance.
+//
+// Permissions You must have the s3:UpdateAccessGrantsLocation permission to use
+// this operation.
+//
+// Additional Permissions You must also have the following permission: iam:PassRole
 func (c *Client) UpdateAccessGrantsLocation(ctx context.Context, params *UpdateAccessGrantsLocationInput, optFns ...func(*Options)) (*UpdateAccessGrantsLocationOutput, error) {
 	if params == nil {
 		params = &UpdateAccessGrantsLocationInput{}
@@ -40,13 +42,16 @@ type UpdateAccessGrantsLocationInput struct {
 	// The ID of the registered location that you are updating. S3 Access Grants
 	// assigns this ID when you register the location. S3 Access Grants assigns the ID
 	// default to the default location s3:// and assigns an auto-generated ID to other
-	// locations that you register. The ID of the registered location to which you are
-	// granting access. S3 Access Grants assigned this ID when you registered the
-	// location. S3 Access Grants assigns the ID default to the default location s3://
-	// and assigns an auto-generated ID to other locations that you register. If you
-	// are passing the default location, you cannot create an access grant for the
-	// entire default location. You must also specify a bucket or a bucket and prefix
-	// in the Subprefix field.
+	// locations that you register.
+	//
+	// The ID of the registered location to which you are granting access. S3 Access
+	// Grants assigned this ID when you registered the location. S3 Access Grants
+	// assigns the ID default to the default location s3:// and assigns an
+	// auto-generated ID to other locations that you register.
+	//
+	// If you are passing the default location, you cannot create an access grant for
+	// the entire default location. You must also specify a bucket or a bucket and
+	// prefix in the Subprefix field.
 	//
 	// This member is required.
 	AccessGrantsLocationId *string
@@ -72,7 +77,8 @@ func (in *UpdateAccessGrantsLocationInput) bindEndpointParams(p *EndpointParamet
 
 type UpdateAccessGrantsLocationOutput struct {
 
-	// The Amazon Resource Name (ARN) of the registered location that you are updating.
+	// The Amazon Resource Name (ARN) of the registered location that you are
+	// updating.
 	AccessGrantsLocationArn *string
 
 	// The ID of the registered location to which you are granting access. S3 Access
@@ -122,25 +128,25 @@ func (c *Client) addOperationUpdateAccessGrantsLocationMiddlewares(stack *middle
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -158,6 +164,9 @@ func (c *Client) addOperationUpdateAccessGrantsLocationMiddlewares(stack *middle
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = smithyhttp.AddContentChecksumMiddleware(stack); err != nil {
 		return err
 	}
@@ -173,7 +182,7 @@ func (c *Client) addOperationUpdateAccessGrantsLocationMiddlewares(stack *middle
 	if err = addMetadataRetrieverMiddleware(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addUpdateAccessGrantsLocationUpdateEndpoint(stack, options); err != nil {

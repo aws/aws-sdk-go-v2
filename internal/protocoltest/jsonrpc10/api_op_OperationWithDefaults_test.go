@@ -9,18 +9,14 @@ import (
 	protocoltesthttp "github.com/aws/aws-sdk-go-v2/internal/protocoltest"
 	"github.com/aws/aws-sdk-go-v2/internal/protocoltest/jsonrpc10/document"
 	"github.com/aws/aws-sdk-go-v2/internal/protocoltest/jsonrpc10/types"
-	smithydocument "github.com/aws/smithy-go/document"
 	"github.com/aws/smithy-go/middleware"
 	smithyprivateprotocol "github.com/aws/smithy-go/private/protocol"
 	"github.com/aws/smithy-go/ptr"
 	smithytesting "github.com/aws/smithy-go/testing"
 	smithytime "github.com/aws/smithy-go/time"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
-	"github.com/google/go-cmp/cmp"
-	"github.com/google/go-cmp/cmp/cmpopts"
 	"io"
 	"io/ioutil"
-	"math"
 	"net/http"
 	"net/url"
 	"testing"
@@ -73,7 +69,16 @@ func TestClient_OperationWithDefaults_awsAwsjson10Serialize(t *testing.T) {
 			        "defaultDouble": 1.0,
 			        "defaultMap": {},
 			        "defaultEnum": "FOO",
-			        "defaultIntEnum": 1
+			        "defaultIntEnum": 1,
+			        "emptyString": "",
+			        "falseBoolean": false,
+			        "emptyBlob": "",
+			        "zeroByte": 0,
+			        "zeroShort": 0,
+			        "zeroInteger": 0,
+			        "zeroLong": 0,
+			        "zeroFloat": 0.0,
+			        "zeroDouble": 0.0
 			    }
 			}`))
 			},
@@ -124,6 +129,15 @@ func TestClient_OperationWithDefaults_awsAwsjson10Serialize(t *testing.T) {
 					},
 					DefaultEnum:    types.TestEnum("BAR"),
 					DefaultIntEnum: 2,
+					EmptyString:    ptr.String("foo"),
+					FalseBoolean:   true,
+					EmptyBlob:      []byte("hi"),
+					ZeroByte:       1,
+					ZeroShort:      1,
+					ZeroInteger:    1,
+					ZeroLong:       1,
+					ZeroFloat:      1.0,
+					ZeroDouble:     1.0,
 				},
 			},
 			ExpectMethod:  "POST",
@@ -154,8 +168,57 @@ func TestClient_OperationWithDefaults_awsAwsjson10Serialize(t *testing.T) {
 			        "defaultDouble": 2.0,
 			        "defaultMap": {"name": "Jack"},
 			        "defaultEnum": "BAR",
-			        "defaultIntEnum": 2
+			        "defaultIntEnum": 2,
+			        "emptyString": "foo",
+			        "falseBoolean": true,
+			        "emptyBlob": "aGk=",
+			        "zeroByte": 1,
+			        "zeroShort": 1,
+			        "zeroInteger": 1,
+			        "zeroLong": 1,
+			        "zeroFloat": 1.0,
+			        "zeroDouble": 1.0
 			    }
+			}`))
+			},
+		},
+		// Any time a value is provided for a member in the top level of input, it is
+		// used, regardless of if its the default.
+		"AwsJson10ClientUsesExplicitlyProvidedValuesInTopLevel": {
+			Params: &OperationWithDefaultsInput{
+				TopLevelDefault:      ptr.String("hi"),
+				OtherTopLevelDefault: 0,
+			},
+			ExpectMethod:  "POST",
+			ExpectURIPath: "/",
+			ExpectQuery:   []smithytesting.QueryItem{},
+			ExpectHeader: http.Header{
+				"Content-Type": []string{"application/x-amz-json-1.0"},
+			},
+			BodyMediaType: "application/json",
+			BodyAssert: func(actual io.Reader) error {
+				return smithytesting.CompareJSONReaderBytes(actual, []byte(`{
+			    "topLevelDefault": "hi",
+			    "otherTopLevelDefault": 0
+			}`))
+			},
+		},
+		// Typically, non top-level members would have defaults filled in, but if they
+		// have the clientOptional trait, the defaults should be ignored.
+		"AwsJson10ClientIgnoresNonTopLevelDefaultsOnMembersWithClientOptional": {
+			Params: &OperationWithDefaultsInput{
+				ClientOptionalDefaults: &types.ClientOptionalDefaults{},
+			},
+			ExpectMethod:  "POST",
+			ExpectURIPath: "/",
+			ExpectQuery:   []smithytesting.QueryItem{},
+			ExpectHeader: http.Header{
+				"Content-Type": []string{"application/x-amz-json-1.0"},
+			},
+			BodyMediaType: "application/json",
+			BodyAssert: func(actual io.Reader) error {
+				return smithytesting.CompareJSONReaderBytes(actual, []byte(`{
+			    "clientOptionalDefaults": {}
 			}`))
 			},
 		},
@@ -171,6 +234,10 @@ func TestClient_OperationWithDefaults_awsAwsjson10Serialize(t *testing.T) {
 			}
 
 			if name == "AwsJson10ClientUsesExplicitlyProvidedMemberValuesOverDefaults" {
+				t.Skip("disabled test aws.protocoltests.json10#JsonRpc10 aws.protocoltests.json10#OperationWithDefaults")
+			}
+
+			if name == "AwsJson10ClientUsesExplicitlyProvidedValuesInTopLevel" {
 				t.Skip("disabled test aws.protocoltests.json10#JsonRpc10 aws.protocoltests.json10#OperationWithDefaults")
 			}
 
@@ -270,6 +337,15 @@ func TestClient_OperationWithDefaults_awsAwsjson10Deserialize(t *testing.T) {
 				DefaultMap:             map[string]string{},
 				DefaultEnum:            types.TestEnum("FOO"),
 				DefaultIntEnum:         1,
+				EmptyString:            ptr.String(""),
+				FalseBoolean:           false,
+				EmptyBlob:              []byte(""),
+				ZeroByte:               0,
+				ZeroShort:              0,
+				ZeroInteger:            0,
+				ZeroLong:               0,
+				ZeroFloat:              0.0,
+				ZeroDouble:             0.0,
 			},
 		},
 		// Client ignores default values if member values are present in the response.
@@ -298,7 +374,16 @@ func TestClient_OperationWithDefaults_awsAwsjson10Deserialize(t *testing.T) {
 			    "defaultDouble": 2.0,
 			    "defaultMap": {"name": "Jack"},
 			    "defaultEnum": "BAR",
-			    "defaultIntEnum": 2
+			    "defaultIntEnum": 2,
+			    "emptyString": "foo",
+			    "falseBoolean": true,
+			    "emptyBlob": "aGk=",
+			    "zeroByte": 1,
+			    "zeroShort": 1,
+			    "zeroInteger": 1,
+			    "zeroLong": 1,
+			    "zeroFloat": 1.0,
+			    "zeroDouble": 1.0
 			}`),
 			ExpectResult: &OperationWithDefaultsOutput{
 				DefaultString:  ptr.String("bye"),
@@ -328,6 +413,15 @@ func TestClient_OperationWithDefaults_awsAwsjson10Deserialize(t *testing.T) {
 				},
 				DefaultEnum:    types.TestEnum("BAR"),
 				DefaultIntEnum: 2,
+				EmptyString:    ptr.String("foo"),
+				FalseBoolean:   true,
+				EmptyBlob:      []byte("hi"),
+				ZeroByte:       1,
+				ZeroShort:      1,
+				ZeroInteger:    1,
+				ZeroLong:       1,
+				ZeroFloat:      1.0,
+				ZeroDouble:     1.0,
 			},
 		},
 	}
@@ -389,19 +483,7 @@ func TestClient_OperationWithDefaults_awsAwsjson10Deserialize(t *testing.T) {
 			if result == nil {
 				t.Fatalf("expect not nil result")
 			}
-			opts := cmp.Options{
-				cmpopts.IgnoreUnexported(
-					middleware.Metadata{},
-				),
-				cmp.FilterValues(func(x, y float64) bool {
-					return math.IsNaN(x) && math.IsNaN(y)
-				}, cmp.Comparer(func(_, _ interface{}) bool { return true })),
-				cmp.FilterValues(func(x, y float32) bool {
-					return math.IsNaN(float64(x)) && math.IsNaN(float64(y))
-				}, cmp.Comparer(func(_, _ interface{}) bool { return true })),
-				cmpopts.IgnoreTypes(smithydocument.NoSerde{}),
-			}
-			if err := smithytesting.CompareValues(c.ExpectResult, result, opts...); err != nil {
+			if err := smithytesting.CompareValues(c.ExpectResult, result); err != nil {
 				t.Errorf("expect c.ExpectResult value match:\n%v", err)
 			}
 		})

@@ -10,9 +10,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes a space. Deleting a space cannot be undone. Additionally, since space
-// names must be unique across Amazon CodeCatalyst, you cannot reuse names of
-// deleted spaces.
+// Deletes a space.
+//
+// Deleting a space cannot be undone. Additionally, since space names must be
+// unique across Amazon CodeCatalyst, you cannot reuse names of deleted spaces.
 func (c *Client) DeleteSpace(ctx context.Context, params *DeleteSpaceInput, optFns ...func(*Options)) (*DeleteSpaceOutput, error) {
 	if params == nil {
 		params = &DeleteSpaceInput{}
@@ -30,7 +31,7 @@ func (c *Client) DeleteSpace(ctx context.Context, params *DeleteSpaceInput, optF
 
 type DeleteSpaceInput struct {
 
-	// The name of the space. To retrieve a list of space names, use ListSpaces .
+	// The name of the space. To retrieve a list of space names, use ListSpaces.
 	//
 	// This member is required.
 	Name *string
@@ -77,22 +78,22 @@ func (c *Client) addOperationDeleteSpaceMiddlewares(stack *middleware.Stack, opt
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -107,13 +108,16 @@ func (c *Client) addOperationDeleteSpaceMiddlewares(stack *middleware.Stack, opt
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDeleteSpaceValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteSpace(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

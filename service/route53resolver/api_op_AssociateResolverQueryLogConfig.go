@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/route53resolver/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -16,10 +15,14 @@ import (
 // Resolver logs DNS queries that originate in all of the Amazon VPCs that are
 // associated with a specified query logging configuration. To associate more than
 // one VPC with a configuration, submit one AssociateResolverQueryLogConfig
-// request for each VPC. The VPCs that you associate with a query logging
-// configuration must be in the same Region as the configuration. To remove a VPC
-// from a query logging configuration, see DisassociateResolverQueryLogConfig (https://docs.aws.amazon.com/Route53/latest/APIReference/API_route53resolver_DisassociateResolverQueryLogConfig.html)
-// .
+// request for each VPC.
+//
+// The VPCs that you associate with a query logging configuration must be in the
+// same Region as the configuration.
+//
+// To remove a VPC from a query logging configuration, see [DisassociateResolverQueryLogConfig].
+//
+// [DisassociateResolverQueryLogConfig]: https://docs.aws.amazon.com/Route53/latest/APIReference/API_route53resolver_DisassociateResolverQueryLogConfig.html
 func (c *Client) AssociateResolverQueryLogConfig(ctx context.Context, params *AssociateResolverQueryLogConfigInput, optFns ...func(*Options)) (*AssociateResolverQueryLogConfigOutput, error) {
 	if params == nil {
 		params = &AssociateResolverQueryLogConfigInput{}
@@ -43,8 +46,9 @@ type AssociateResolverQueryLogConfigInput struct {
 	ResolverQueryLogConfigId *string
 
 	// The ID of an Amazon VPC that you want this query logging configuration to log
-	// queries for. The VPCs and the query logging configuration must be in the same
-	// Region.
+	// queries for.
+	//
+	// The VPCs and the query logging configuration must be in the same Region.
 	//
 	// This member is required.
 	ResourceId *string
@@ -86,25 +90,25 @@ func (c *Client) addOperationAssociateResolverQueryLogConfigMiddlewares(stack *m
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -119,13 +123,16 @@ func (c *Client) addOperationAssociateResolverQueryLogConfigMiddlewares(stack *m
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpAssociateResolverQueryLogConfigValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opAssociateResolverQueryLogConfig(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

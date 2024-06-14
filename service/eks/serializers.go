@@ -532,6 +532,13 @@ func awsRestjson1_serializeOpDocumentCreateAddonInput(v *CreateAddonInput, value
 		ok.String(*v.ConfigurationValues)
 	}
 
+	if v.PodIdentityAssociations != nil {
+		ok := object.Key("podIdentityAssociations")
+		if err := awsRestjson1_serializeDocumentAddonPodIdentityAssociationsList(v.PodIdentityAssociations, ok); err != nil {
+			return err
+		}
+	}
+
 	if len(v.ResolveConflicts) > 0 {
 		ok := object.Key("resolveConflicts")
 		ok.String(string(v.ResolveConflicts))
@@ -4312,6 +4319,13 @@ func awsRestjson1_serializeOpDocumentUpdateAddonInput(v *UpdateAddonInput, value
 		ok.String(*v.ConfigurationValues)
 	}
 
+	if v.PodIdentityAssociations != nil {
+		ok := object.Key("podIdentityAssociations")
+		if err := awsRestjson1_serializeDocumentAddonPodIdentityAssociationsList(v.PodIdentityAssociations, ok); err != nil {
+			return err
+		}
+	}
+
 	if len(v.ResolveConflicts) > 0 {
 		ok := object.Key("resolveConflicts")
 		ok.String(string(v.ResolveConflicts))
@@ -4982,6 +4996,36 @@ func awsRestjson1_serializeDocumentAccessScope(v *types.AccessScope, value smith
 		ok.String(string(v.Type))
 	}
 
+	return nil
+}
+
+func awsRestjson1_serializeDocumentAddonPodIdentityAssociations(v *types.AddonPodIdentityAssociations, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.RoleArn != nil {
+		ok := object.Key("roleArn")
+		ok.String(*v.RoleArn)
+	}
+
+	if v.ServiceAccount != nil {
+		ok := object.Key("serviceAccount")
+		ok.String(*v.ServiceAccount)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentAddonPodIdentityAssociationsList(v []types.AddonPodIdentityAssociations, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentAddonPodIdentityAssociations(&v[i], av); err != nil {
+			return err
+		}
+	}
 	return nil
 }
 

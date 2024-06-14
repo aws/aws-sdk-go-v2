@@ -6,18 +6,19 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/lightsail/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Updates the specified attribute for a load balancer. You can only update one
-// attribute at a time. The update load balancer attribute operation supports
-// tag-based access control via resource tags applied to the resource identified by
-// load balancer name . For more information, see the Amazon Lightsail Developer
-// Guide (https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-controlling-access-using-tags)
-// .
+// attribute at a time.
+//
+// The update load balancer attribute operation supports tag-based access control
+// via resource tags applied to the resource identified by load balancer name . For
+// more information, see the [Amazon Lightsail Developer Guide].
+//
+// [Amazon Lightsail Developer Guide]: https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-controlling-access-using-tags
 func (c *Client) UpdateLoadBalancerAttribute(ctx context.Context, params *UpdateLoadBalancerAttributeInput, optFns ...func(*Options)) (*UpdateLoadBalancerAttributeOutput, error) {
 	if params == nil {
 		params = &UpdateLoadBalancerAttributeInput{}
@@ -40,25 +41,33 @@ type UpdateLoadBalancerAttributeInput struct {
 	// This member is required.
 	AttributeName types.LoadBalancerAttributeName
 
-	// The value that you want to specify for the attribute name. The following values
-	// are supported depending on what you specify for the attributeName request
-	// parameter:
+	// The value that you want to specify for the attribute name.
+	//
+	// The following values are supported depending on what you specify for the
+	// attributeName request parameter:
+	//
 	//   - If you specify HealthCheckPath for the attributeName request parameter, then
 	//   the attributeValue request parameter must be the path to ping on the target
 	//   (for example, /weather/us/wa/seattle ).
+	//
 	//   - If you specify SessionStickinessEnabled for the attributeName request
 	//   parameter, then the attributeValue request parameter must be true to activate
 	//   session stickiness or false to deactivate session stickiness.
+	//
 	//   - If you specify SessionStickiness_LB_CookieDurationSeconds for the
 	//   attributeName request parameter, then the attributeValue request parameter
 	//   must be an interger that represents the cookie duration in seconds.
+	//
 	//   - If you specify HttpsRedirectionEnabled for the attributeName request
 	//   parameter, then the attributeValue request parameter must be true to activate
 	//   HTTP to HTTPS redirection or false to deactivate HTTP to HTTPS redirection.
+	//
 	//   - If you specify TlsPolicyName for the attributeName request parameter, then
-	//   the attributeValue request parameter must be the name of the TLS policy. Use
-	//   the GetLoadBalancerTlsPolicies (https://docs.aws.amazon.com/lightsail/2016-11-28/api-reference/API_GetLoadBalancerTlsPolicies.html)
-	//   action to get a list of TLS policy names that you can specify.
+	//   the attributeValue request parameter must be the name of the TLS policy.
+	//
+	// Use the [GetLoadBalancerTlsPolicies]action to get a list of TLS policy names that you can specify.
+	//
+	// [GetLoadBalancerTlsPolicies]: https://docs.aws.amazon.com/lightsail/2016-11-28/api-reference/API_GetLoadBalancerTlsPolicies.html
 	//
 	// This member is required.
 	AttributeValue *string
@@ -106,25 +115,25 @@ func (c *Client) addOperationUpdateLoadBalancerAttributeMiddlewares(stack *middl
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -139,13 +148,16 @@ func (c *Client) addOperationUpdateLoadBalancerAttributeMiddlewares(stack *middl
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpUpdateLoadBalancerAttributeValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateLoadBalancerAttribute(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

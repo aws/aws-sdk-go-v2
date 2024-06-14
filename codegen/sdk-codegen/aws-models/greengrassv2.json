@@ -657,7 +657,8 @@
                 "componentVersion": {
                     "target": "com.amazonaws.greengrassv2#ComponentVersionString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The version of the component.</p>"
+                        "smithy.api#documentation": "<p>The version of the component.</p>",
+                        "smithy.api#required": {}
                     }
                 },
                 "configurationUpdate": {
@@ -1045,7 +1046,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a component. Components are software that run on Greengrass core devices. After you\n      develop and test a component on your core device, you can use this operation to upload your\n      component to IoT Greengrass. Then, you can deploy the component to other core devices.</p>\n         <p>You can use this operation to do the following:</p>\n         <ul>\n            <li>\n               <p>\n                  <b>Create components from recipes</b>\n               </p>\n               <p>Create a component from a recipe, which is a file that defines the component's\n          metadata, parameters, dependencies, lifecycle, artifacts, and platform capability. For\n          more information, see <a href=\"https://docs.aws.amazon.com/greengrass/v2/developerguide/component-recipe-reference.html\">IoT Greengrass component recipe\n            reference</a> in the <i>IoT Greengrass V2 Developer Guide</i>.</p>\n               <p>To create a component from a recipe, specify <code>inlineRecipe</code> when you call\n          this operation.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Create components from Lambda functions</b>\n               </p>\n               <p>Create a component from an Lambda function that runs on IoT Greengrass. This creates a recipe\n          and artifacts from the Lambda function's deployment package. You can use this operation to\n          migrate Lambda functions from IoT Greengrass V1 to IoT Greengrass V2.</p>\n               <p>This function only accepts Lambda functions that use the following runtimes:</p>\n               <ul>\n                  <li>\n                     <p>Python 2.7 – <code>python2.7</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>Python 3.7 – <code>python3.7</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>Python 3.8 – <code>python3.8</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>Python 3.9 – <code>python3.9</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>Java 8 – <code>java8</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>Java 11 – <code>java11</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>Node.js 10 – <code>nodejs10.x</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>Node.js 12 – <code>nodejs12.x</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>Node.js 14 – <code>nodejs14.x</code>\n                     </p>\n                  </li>\n               </ul>\n               <p>To create a component from a Lambda function, specify <code>lambdaFunction</code> when\n          you call this operation.</p>\n               <note>\n                  <p>IoT Greengrass currently supports Lambda functions on only Linux core devices.</p>\n               </note>\n            </li>\n         </ul>",
+                "smithy.api#documentation": "<p>Creates a component. Components are software that run on Greengrass core devices. After you\n      develop and test a component on your core device, you can use this operation to upload your\n      component to IoT Greengrass. Then, you can deploy the component to other core devices.</p>\n         <p>You can use this operation to do the following:</p>\n         <ul>\n            <li>\n               <p>\n                  <b>Create components from recipes</b>\n               </p>\n               <p>Create a component from a recipe, which is a file that defines the component's\n          metadata, parameters, dependencies, lifecycle, artifacts, and platform capability. For\n          more information, see <a href=\"https://docs.aws.amazon.com/greengrass/v2/developerguide/component-recipe-reference.html\">IoT Greengrass component recipe\n            reference</a> in the <i>IoT Greengrass V2 Developer Guide</i>.</p>\n               <p>To create a component from a recipe, specify <code>inlineRecipe</code> when you call\n          this operation.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Create components from Lambda functions</b>\n               </p>\n               <p>Create a component from an Lambda function that runs on IoT Greengrass. This creates a recipe\n          and artifacts from the Lambda function's deployment package. You can use this operation to\n          migrate Lambda functions from IoT Greengrass V1 to IoT Greengrass V2.</p>\n               <p>This function accepts Lambda functions in all supported versions of Python, Node.js,\n          and Java runtimes. IoT Greengrass doesn't apply any additional restrictions on deprecated Lambda\n          runtime versions.</p>\n               <p>To create a component from a Lambda function, specify <code>lambdaFunction</code> when\n          you call this operation.</p>\n               <note>\n                  <p>IoT Greengrass currently supports Lambda functions on only Linux core devices.</p>\n               </note>\n            </li>\n         </ul>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/greengrass/v2/createComponentVersion",
@@ -2249,6 +2250,20 @@
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
+                },
+                "s3EndpointType": {
+                    "target": "com.amazonaws.greengrassv2#S3EndpointType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the endpoint to use when getting Amazon S3 pre-signed URLs.</p>\n         <p>All Amazon Web Services Regions except US East (N. Virginia) use <code>REGIONAL</code> in all cases.\n      In the US East (N. Virginia) Region the default is <code>GLOBAL</code>, but you can change it\n      to <code>REGIONAL</code> with this parameter.</p>",
+                        "smithy.api#httpQuery": "s3EndpointType"
+                    }
+                },
+                "iotEndpointType": {
+                    "target": "com.amazonaws.greengrassv2#IotEndpointType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Determines if the Amazon S3 URL returned is a FIPS pre-signed URL endpoint. \n      Specify <code>fips</code> if you want the returned Amazon S3 pre-signed URL to point to \n      an Amazon S3 FIPS endpoint. If you don't specify a value, the default is <code>standard</code>.</p>",
+                        "smithy.api#httpHeader": "x-amz-iot-endpoint-type"
+                    }
                 }
             },
             "traits": {
@@ -2724,7 +2739,7 @@
                     "sdkId": "GreengrassV2",
                     "arnNamespace": "greengrass",
                     "cloudFormationName": "GreengrassV2",
-                    "cloudTrailEventSource": "greengrassv2.amazonaws.com",
+                    "cloudTrailEventSource": "greengrass.amazonaws.com",
                     "endpointPrefix": "greengrass"
                 },
                 "aws.auth#sigv4": {
@@ -3717,7 +3732,7 @@
                 "lastInstallationSource": {
                     "target": "com.amazonaws.greengrassv2#NonEmptyString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The most recent deployment source that brought the component to the Greengrass core device. For\n      a thing group deployment or thing deployment, the source will be the The ID of the deployment. and for\n      local deployments it will be <code>LOCAL</code>.</p>\n         <note>\n            <p>Any deployment will attempt to reinstall currently broken components on the device,\n        which will update the last installation source.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>The most recent deployment source that brought the component to the Greengrass core device. For\n      a thing group deployment or thing deployment, the source will be the ID of the last deployment\n      that contained the component. For local deployments it will be <code>LOCAL</code>.</p>\n         <note>\n            <p>Any deployment will attempt to reinstall currently broken components on the device,\n        which will update the last installation source.</p>\n         </note>"
                     }
                 },
                 "lifecycleStatusCodes": {
@@ -4112,6 +4127,23 @@
                 "smithy.api#length": {
                     "min": 1,
                     "max": 128
+                }
+            }
+        },
+        "com.amazonaws.greengrassv2#IotEndpointType": {
+            "type": "enum",
+            "members": {
+                "fips": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "fips"
+                    }
+                },
+                "standard": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "standard"
+                    }
                 }
             }
         },
@@ -4930,7 +4962,7 @@
                 "maxResults": {
                     "target": "com.amazonaws.greengrassv2#DefaultMaxResults",
                     "traits": {
-                        "smithy.api#documentation": "<p>The maximum number of results to be returned per paginated request.</p>",
+                        "smithy.api#documentation": "<p>The maximum number of results to be returned per paginated request.</p>\n         <p>Default: <code>50</code>\n         </p>",
                         "smithy.api#httpQuery": "maxResults"
                     }
                 },
@@ -5463,6 +5495,23 @@
             "type": "integer",
             "traits": {
                 "smithy.api#default": 0
+            }
+        },
+        "com.amazonaws.greengrassv2#S3EndpointType": {
+            "type": "enum",
+            "members": {
+                "REGIONAL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "REGIONAL"
+                    }
+                },
+                "GLOBAL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "GLOBAL"
+                    }
+                }
             }
         },
         "com.amazonaws.greengrassv2#ServiceQuotaExceededException": {

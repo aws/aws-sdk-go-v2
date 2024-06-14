@@ -6,13 +6,12 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/docdbelastic/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns information about Elastic DocumentDB snapshots for a specified cluster.
+// Returns information about snapshots for a specified elastic cluster.
 func (c *Client) ListClusterSnapshots(ctx context.Context, params *ListClusterSnapshotsInput, optFns ...func(*Options)) (*ListClusterSnapshotsOutput, error) {
 	if params == nil {
 		params = &ListClusterSnapshotsInput{}
@@ -30,26 +29,43 @@ func (c *Client) ListClusterSnapshots(ctx context.Context, params *ListClusterSn
 
 type ListClusterSnapshotsInput struct {
 
-	// The arn of the Elastic DocumentDB cluster.
+	// The ARN identifier of the elastic cluster.
 	ClusterArn *string
 
-	// The maximum number of entries to recieve in the response.
+	// The maximum number of elastic cluster snapshot results to receive in the
+	// response.
 	MaxResults *int32
 
-	// The nextToken which is used the get the next page of data.
+	// A pagination token provided by a previous request. If this parameter is
+	// specified, the response includes only records beyond this token, up to the value
+	// specified by max-results .
+	//
+	// If there is no more data in the responce, the nextToken will not be returned.
 	NextToken *string
+
+	// The type of cluster snapshots to be returned. You can specify one of the
+	// following values:
+	//
+	//   - automated - Return all cluster snapshots that Amazon DocumentDB has
+	//   automatically created for your Amazon Web Services account.
+	//
+	//   - manual - Return all cluster snapshots that you have manually created for
+	//   your Amazon Web Services account.
+	SnapshotType *string
 
 	noSmithyDocumentSerde
 }
 
 type ListClusterSnapshotsOutput struct {
 
-	// The response will provide a nextToken if there is more data beyond the
-	// maxResults. If there is no more data in the responce, the nextToken will not be
-	// returned.
+	// A pagination token provided by a previous request. If this parameter is
+	// specified, the response includes only records beyond this token, up to the value
+	// specified by max-results .
+	//
+	// If there is no more data in the responce, the nextToken will not be returned.
 	NextToken *string
 
-	// A list of Elastic DocumentDB snapshots for a specified cluster.
+	// A list of snapshots for a specified elastic cluster.
 	Snapshots []types.ClusterSnapshotInList
 
 	// Metadata pertaining to the operation's result.
@@ -80,25 +96,25 @@ func (c *Client) addOperationListClusterSnapshotsMiddlewares(stack *middleware.S
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -113,10 +129,13 @@ func (c *Client) addOperationListClusterSnapshotsMiddlewares(stack *middleware.S
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListClusterSnapshots(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -145,7 +164,8 @@ var _ ListClusterSnapshotsAPIClient = (*Client)(nil)
 // ListClusterSnapshotsPaginatorOptions is the paginator options for
 // ListClusterSnapshots
 type ListClusterSnapshotsPaginatorOptions struct {
-	// The maximum number of entries to recieve in the response.
+	// The maximum number of elastic cluster snapshot results to receive in the
+	// response.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

@@ -15,13 +15,20 @@ import (
 	"strings"
 )
 
-// This operation is not supported by directory buckets. Creates or replaces
-// resource policy for an Object Lambda Access Point. For an example policy, see
-// Creating Object Lambda Access Points (https://docs.aws.amazon.com/AmazonS3/latest/userguide/olap-create.html#olap-create-cli)
-// in the Amazon S3 User Guide. The following actions are related to
-// PutAccessPointPolicyForObjectLambda :
-//   - DeleteAccessPointPolicyForObjectLambda (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteAccessPointPolicyForObjectLambda.html)
-//   - GetAccessPointPolicyForObjectLambda (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetAccessPointPolicyForObjectLambda.html)
+// This operation is not supported by directory buckets.
+//
+// Creates or replaces resource policy for an Object Lambda Access Point. For an
+// example policy, see [Creating Object Lambda Access Points]in the Amazon S3 User Guide.
+//
+// The following actions are related to PutAccessPointPolicyForObjectLambda :
+//
+// [DeleteAccessPointPolicyForObjectLambda]
+//
+// [GetAccessPointPolicyForObjectLambda]
+//
+// [Creating Object Lambda Access Points]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/olap-create.html#olap-create-cli
+// [GetAccessPointPolicyForObjectLambda]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetAccessPointPolicyForObjectLambda.html
+// [DeleteAccessPointPolicyForObjectLambda]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteAccessPointPolicyForObjectLambda.html
 func (c *Client) PutAccessPointPolicyForObjectLambda(ctx context.Context, params *PutAccessPointPolicyForObjectLambdaInput, optFns ...func(*Options)) (*PutAccessPointPolicyForObjectLambdaOutput, error) {
 	if params == nil {
 		params = &PutAccessPointPolicyForObjectLambdaInput{}
@@ -92,25 +99,25 @@ func (c *Client) addOperationPutAccessPointPolicyForObjectLambdaMiddlewares(stac
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -128,6 +135,9 @@ func (c *Client) addOperationPutAccessPointPolicyForObjectLambdaMiddlewares(stac
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addEndpointPrefix_opPutAccessPointPolicyForObjectLambdaMiddleware(stack); err != nil {
 		return err
 	}
@@ -140,7 +150,7 @@ func (c *Client) addOperationPutAccessPointPolicyForObjectLambdaMiddlewares(stac
 	if err = addMetadataRetrieverMiddleware(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addPutAccessPointPolicyForObjectLambdaUpdateEndpoint(stack, options); err != nil {

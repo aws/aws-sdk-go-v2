@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/sfn/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -40,9 +39,10 @@ type ListMapRunsInput struct {
 
 	// The maximum number of results that are returned per call. You can use nextToken
 	// to obtain further pages of results. The default is 100 and the maximum allowed
-	// page size is 1000. A value of 0 uses the default. This is only an upper limit.
-	// The actual number of results returned per call might be fewer than the specified
-	// maximum.
+	// page size is 1000. A value of 0 uses the default.
+	//
+	// This is only an upper limit. The actual number of results returned per call
+	// might be fewer than the specified maximum.
 	MaxResults int32
 
 	// If nextToken is returned, there are more results available. The value of
@@ -99,25 +99,25 @@ func (c *Client) addOperationListMapRunsMiddlewares(stack *middleware.Stack, opt
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -132,13 +132,16 @@ func (c *Client) addOperationListMapRunsMiddlewares(stack *middleware.Stack, opt
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpListMapRunsValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListMapRuns(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -167,9 +170,10 @@ var _ ListMapRunsAPIClient = (*Client)(nil)
 type ListMapRunsPaginatorOptions struct {
 	// The maximum number of results that are returned per call. You can use nextToken
 	// to obtain further pages of results. The default is 100 and the maximum allowed
-	// page size is 1000. A value of 0 uses the default. This is only an upper limit.
-	// The actual number of results returned per call might be fewer than the specified
-	// maximum.
+	// page size is 1000. A value of 0 uses the default.
+	//
+	// This is only an upper limit. The actual number of results returned per call
+	// might be fewer than the specified maximum.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

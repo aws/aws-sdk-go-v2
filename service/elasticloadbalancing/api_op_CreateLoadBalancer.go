@@ -6,22 +6,24 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/elasticloadbalancing/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a Classic Load Balancer. You can add listeners, security groups,
-// subnets, and tags when you create your load balancer, or you can add them later
-// using CreateLoadBalancerListeners , ApplySecurityGroupsToLoadBalancer ,
-// AttachLoadBalancerToSubnets , and AddTags . To describe your current load
-// balancers, see DescribeLoadBalancers . When you are finished with a load
-// balancer, you can delete it using DeleteLoadBalancer . You can create up to 20
-// load balancers per region per account. You can request an increase for the
-// number of load balancers for your account. For more information, see Limits for
-// Your Classic Load Balancer (https://docs.aws.amazon.com/elasticloadbalancing/latest/classic/elb-limits.html)
-// in the Classic Load Balancers Guide.
+// Creates a Classic Load Balancer.
+//
+// You can add listeners, security groups, subnets, and tags when you create your
+// load balancer, or you can add them later using CreateLoadBalancerListeners, ApplySecurityGroupsToLoadBalancer, AttachLoadBalancerToSubnets, and AddTags.
+//
+// To describe your current load balancers, see DescribeLoadBalancers. When you are finished with a
+// load balancer, you can delete it using DeleteLoadBalancer.
+//
+// You can create up to 20 load balancers per region per account. You can request
+// an increase for the number of load balancers for your account. For more
+// information, see [Limits for Your Classic Load Balancer]in the Classic Load Balancers Guide.
+//
+// [Limits for Your Classic Load Balancer]: https://docs.aws.amazon.com/elasticloadbalancing/latest/classic/elb-limits.html
 func (c *Client) CreateLoadBalancer(ctx context.Context, params *CreateLoadBalancerInput, optFns ...func(*Options)) (*CreateLoadBalancerOutput, error) {
 	if params == nil {
 		params = &CreateLoadBalancerInput{}
@@ -40,31 +42,42 @@ func (c *Client) CreateLoadBalancer(ctx context.Context, params *CreateLoadBalan
 // Contains the parameters for CreateLoadBalancer.
 type CreateLoadBalancerInput struct {
 
-	// The listeners. For more information, see Listeners for Your Classic Load
-	// Balancer (https://docs.aws.amazon.com/elasticloadbalancing/latest/classic/elb-listener-config.html)
-	// in the Classic Load Balancers Guide.
+	// The listeners.
+	//
+	// For more information, see [Listeners for Your Classic Load Balancer] in the Classic Load Balancers Guide.
+	//
+	// [Listeners for Your Classic Load Balancer]: https://docs.aws.amazon.com/elasticloadbalancing/latest/classic/elb-listener-config.html
 	//
 	// This member is required.
 	Listeners []types.Listener
 
-	// The name of the load balancer. This name must be unique within your set of load
-	// balancers for the region, must have a maximum of 32 characters, must contain
-	// only alphanumeric characters or hyphens, and cannot begin or end with a hyphen.
+	// The name of the load balancer.
+	//
+	// This name must be unique within your set of load balancers for the region, must
+	// have a maximum of 32 characters, must contain only alphanumeric characters or
+	// hyphens, and cannot begin or end with a hyphen.
 	//
 	// This member is required.
 	LoadBalancerName *string
 
-	// One or more Availability Zones from the same region as the load balancer. You
-	// must specify at least one Availability Zone. You can add more Availability Zones
-	// after you create the load balancer using EnableAvailabilityZonesForLoadBalancer .
+	// One or more Availability Zones from the same region as the load balancer.
+	//
+	// You must specify at least one Availability Zone.
+	//
+	// You can add more Availability Zones after you create the load balancer using EnableAvailabilityZonesForLoadBalancer.
 	AvailabilityZones []string
 
-	// The type of a load balancer. Valid only for load balancers in a VPC. By
-	// default, Elastic Load Balancing creates an Internet-facing load balancer with a
-	// DNS name that resolves to public IP addresses. For more information about
-	// Internet-facing and Internal load balancers, see Load Balancer Scheme (https://docs.aws.amazon.com/elasticloadbalancing/latest/userguide/how-elastic-load-balancing-works.html#load-balancer-scheme)
-	// in the Elastic Load Balancing User Guide. Specify internal to create a load
-	// balancer with a DNS name that resolves to private IP addresses.
+	// The type of a load balancer. Valid only for load balancers in a VPC.
+	//
+	// By default, Elastic Load Balancing creates an Internet-facing load balancer
+	// with a DNS name that resolves to public IP addresses. For more information about
+	// Internet-facing and Internal load balancers, see [Load Balancer Scheme]in the Elastic Load Balancing
+	// User Guide.
+	//
+	// Specify internal to create a load balancer with a DNS name that resolves to
+	// private IP addresses.
+	//
+	// [Load Balancer Scheme]: https://docs.aws.amazon.com/elasticloadbalancing/latest/userguide/how-elastic-load-balancing-works.html#load-balancer-scheme
 	Scheme *string
 
 	// The IDs of the security groups to assign to the load balancer.
@@ -74,9 +87,12 @@ type CreateLoadBalancerInput struct {
 	// subnet per Availability Zone specified in AvailabilityZones .
 	Subnets []string
 
-	// A list of tags to assign to the load balancer. For more information about
-	// tagging your load balancer, see Tag Your Classic Load Balancer (https://docs.aws.amazon.com/elasticloadbalancing/latest/classic/add-remove-tags.html)
-	// in the Classic Load Balancers Guide.
+	// A list of tags to assign to the load balancer.
+	//
+	// For more information about tagging your load balancer, see [Tag Your Classic Load Balancer] in the Classic Load
+	// Balancers Guide.
+	//
+	// [Tag Your Classic Load Balancer]: https://docs.aws.amazon.com/elasticloadbalancing/latest/classic/add-remove-tags.html
 	Tags []types.Tag
 
 	noSmithyDocumentSerde
@@ -116,25 +132,25 @@ func (c *Client) addOperationCreateLoadBalancerMiddlewares(stack *middleware.Sta
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -149,13 +165,16 @@ func (c *Client) addOperationCreateLoadBalancerMiddlewares(stack *middleware.Sta
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpCreateLoadBalancerValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateLoadBalancer(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

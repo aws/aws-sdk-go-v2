@@ -27,9 +27,10 @@ type AddObjectInput struct {
 	Uri *string
 
 	// A list of partition values for the object. A value must be specified for each
-	// partition key associated with the table. The supported data types are integer,
-	// long, date(yyyy-MM-dd), timestamp(yyyy-MM-dd HH:mm:ssXXX or yyyy-MM-dd
-	// HH:mm:ss"), string and decimal.
+	// partition key associated with the table.
+	//
+	// The supported data types are integer, long, date(yyyy-MM-dd),
+	// timestamp(yyyy-MM-dd HH:mm:ssXXX or yyyy-MM-dd HH:mm:ss"), string and decimal.
 	PartitionValues []string
 
 	noSmithyDocumentSerde
@@ -157,8 +158,9 @@ type DataCellsFilter struct {
 	// Nested attributes within this list may not exceed a depth of 5.
 	ColumnNames []string
 
-	// A wildcard with exclusions. You must specify either a ColumnNames list or the
-	// ColumnWildCard .
+	// A wildcard with exclusions.
+	//
+	// You must specify either a ColumnNames list or the ColumnWildCard .
 	ColumnWildcard *ColumnWildcard
 
 	// A PartiQL predicate.
@@ -203,12 +205,16 @@ type DataLakePrincipal struct {
 type DataLakeSettings struct {
 
 	// Whether to allow Amazon EMR clusters to access data managed by Lake Formation.
+	//
 	// If true, you allow Amazon EMR clusters to access data in Amazon S3 locations
-	// that are registered with Lake Formation. If false or null, no Amazon EMR
-	// clusters will be able to access data in Amazon S3 locations that are registered
-	// with Lake Formation. For more information, see (Optional) Allow external data
-	// filtering (https://docs.aws.amazon.com/lake-formation/latest/dg/initial-LF-setup.html#external-data-filter)
-	// .
+	// that are registered with Lake Formation.
+	//
+	// If false or null, no Amazon EMR clusters will be able to access data in Amazon
+	// S3 locations that are registered with Lake Formation.
+	//
+	// For more information, see [(Optional) Allow external data filtering].
+	//
+	// [(Optional) Allow external data filtering]: https://docs.aws.amazon.com/lake-formation/latest/dg/initial-LF-setup.html#external-data-filter
 	AllowExternalDataFiltering *bool
 
 	// Whether to allow a third-party query engine to get data access credentials
@@ -224,27 +230,37 @@ type DataLakeSettings struct {
 	AuthorizedSessionTagValueList []string
 
 	// Specifies whether access control on newly created database is managed by Lake
-	// Formation permissions or exclusively by IAM permissions. A null value indicates
-	// access control by Lake Formation permissions. A value that assigns ALL to
-	// IAM_ALLOWED_PRINCIPALS indicates access control by IAM permissions. This is
-	// referred to as the setting "Use only IAM access control," and is for backward
-	// compatibility with the Glue permission model implemented by IAM permissions. The
-	// only permitted values are an empty array or an array that contains a single JSON
-	// object that grants ALL to IAM_ALLOWED_PRINCIPALS. For more information, see
-	// Changing the Default Security Settings for Your Data Lake (https://docs.aws.amazon.com/lake-formation/latest/dg/change-settings.html)
-	// .
+	// Formation permissions or exclusively by IAM permissions.
+	//
+	// A null value indicates access control by Lake Formation permissions. A value
+	// that assigns ALL to IAM_ALLOWED_PRINCIPALS indicates access control by IAM
+	// permissions. This is referred to as the setting "Use only IAM access control,"
+	// and is for backward compatibility with the Glue permission model implemented by
+	// IAM permissions.
+	//
+	// The only permitted values are an empty array or an array that contains a single
+	// JSON object that grants ALL to IAM_ALLOWED_PRINCIPALS.
+	//
+	// For more information, see [Changing the Default Security Settings for Your Data Lake].
+	//
+	// [Changing the Default Security Settings for Your Data Lake]: https://docs.aws.amazon.com/lake-formation/latest/dg/change-settings.html
 	CreateDatabaseDefaultPermissions []PrincipalPermissions
 
 	// Specifies whether access control on newly created table is managed by Lake
-	// Formation permissions or exclusively by IAM permissions. A null value indicates
-	// access control by Lake Formation permissions. A value that assigns ALL to
-	// IAM_ALLOWED_PRINCIPALS indicates access control by IAM permissions. This is
-	// referred to as the setting "Use only IAM access control," and is for backward
-	// compatibility with the Glue permission model implemented by IAM permissions. The
-	// only permitted values are an empty array or an array that contains a single JSON
-	// object that grants ALL to IAM_ALLOWED_PRINCIPALS. For more information, see
-	// Changing the Default Security Settings for Your Data Lake (https://docs.aws.amazon.com/lake-formation/latest/dg/change-settings.html)
-	// .
+	// Formation permissions or exclusively by IAM permissions.
+	//
+	// A null value indicates access control by Lake Formation permissions. A value
+	// that assigns ALL to IAM_ALLOWED_PRINCIPALS indicates access control by IAM
+	// permissions. This is referred to as the setting "Use only IAM access control,"
+	// and is for backward compatibility with the Glue permission model implemented by
+	// IAM permissions.
+	//
+	// The only permitted values are an empty array or an array that contains a single
+	// JSON object that grants ALL to IAM_ALLOWED_PRINCIPALS.
+	//
+	// For more information, see [Changing the Default Security Settings for Your Data Lake].
+	//
+	// [Changing the Default Security Settings for Your Data Lake]: https://docs.aws.amazon.com/lake-formation/latest/dg/change-settings.html
 	CreateTableDefaultPermissions []PrincipalPermissions
 
 	// A list of Lake Formation principals. Supported principals are IAM users or IAM
@@ -267,14 +283,17 @@ type DataLakeSettings struct {
 
 	// A list of the resource-owning account IDs that the caller's account can use to
 	// share their user access details (user ARNs). The user ARNs can be logged in the
-	// resource owner's CloudTrail log. You may want to specify this property when you
-	// are in a high-trust boundary, such as the same team or company.
+	// resource owner's CloudTrail log.
+	//
+	// You may want to specify this property when you are in a high-trust boundary,
+	// such as the same team or company.
 	TrustedResourceOwners []string
 
 	noSmithyDocumentSerde
 }
 
-// A structure for a data location object where permissions are granted or revoked.
+// A structure for a data location object where permissions are granted or
+// revoked.
 type DataLocationResource struct {
 
 	// The Amazon Resource Name (ARN) that uniquely identifies the data location
@@ -310,9 +329,10 @@ type DeleteObjectInput struct {
 }
 
 // A structure containing the additional details to be returned in the
-// AdditionalDetails attribute of PrincipalResourcePermissions . If a catalog
-// resource is shared through Resource Access Manager (RAM), then there will exist
-// a corresponding RAM resource share ARN.
+// AdditionalDetails attribute of PrincipalResourcePermissions .
+//
+// If a catalog resource is shared through Resource Access Manager (RAM), then
+// there will exist a corresponding RAM resource share ARN.
 type DetailsMap struct {
 
 	// A resource share ARN for a catalog resource shared through RAM.
@@ -410,9 +430,10 @@ type LFTag struct {
 	// This member is required.
 	TagKey *string
 
-	// A list of possible values an attribute can take. The maximum number of values
-	// that can be defined for a LF-Tag is 1000. A single API call supports 50 values.
-	// You can use multiple API calls to add more values.
+	// A list of possible values an attribute can take.
+	//
+	// The maximum number of values that can be defined for a LF-Tag is 1000. A single
+	// API call supports 50 values. You can use multiple API calls to add more values.
 	//
 	// This member is required.
 	TagValues []string
@@ -678,7 +699,7 @@ type Resource struct {
 // A structure containing information about an Lake Formation resource.
 type ResourceInfo struct {
 
-	// Indicates whether the data access of tables pointing to the location can be
+	//  Indicates whether the data access of tables pointing to the location can be
 	// managed by both Lake Formation permissions as well as Amazon S3 bucket policies.
 	HybridAccessEnabled *bool
 
@@ -716,10 +737,12 @@ type StorageOptimizer struct {
 	// key-value pair: is_enabled indicates true or false for acceleration.
 	Config map[string]string
 
-	// A message that contains information about any error (if present). When an
-	// acceleration result has an enabled status, the error message is empty. When an
-	// acceleration result has a disabled status, the message describes an error or
-	// simply indicates "disabled by the user".
+	// A message that contains information about any error (if present).
+	//
+	// When an acceleration result has an enabled status, the error message is empty.
+	//
+	// When an acceleration result has a disabled status, the message describes an
+	// error or simply indicates "disabled by the user".
 	ErrorMessage *string
 
 	// When an acceleration result has an enabled status, contains the details of the
@@ -769,8 +792,9 @@ type TableResource struct {
 	// The name of the table.
 	Name *string
 
-	// A wildcard object representing every table under a database. At least one of
-	// TableResource$Name or TableResource$TableWildcard is required.
+	// A wildcard object representing every table under a database.
+	//
+	// At least one of TableResource$Name or TableResource$TableWildcard is required.
 	TableWildcard *TableWildcard
 
 	noSmithyDocumentSerde
@@ -782,8 +806,10 @@ type TableWildcard struct {
 }
 
 // A structure for a table with columns object. This object is only used when
-// granting a SELECT permission. This object must take a value for at least one of
-// ColumnsNames , ColumnsIndexes , or ColumnsWildcard .
+// granting a SELECT permission.
+//
+// This object must take a value for at least one of ColumnsNames , ColumnsIndexes
+// , or ColumnsWildcard .
 type TableWithColumnsResource struct {
 
 	// The name of the database for the table with columns resource. Unique to the

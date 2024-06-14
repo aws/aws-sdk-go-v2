@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/securitylake/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -20,14 +19,16 @@ import (
 // command, the command will update the Region if you provide new configuration
 // parameters. If you have not already enabled Security Lake in the Region when you
 // call this API, it will set up the data lake in the Region with the specified
-// configurations. When you enable Security Lake, it starts ingesting security data
-// after the CreateAwsLogSource call. This includes ingesting security data from
-// sources, storing data, and making data accessible to subscribers. Security Lake
-// also enables all the existing settings and resources that it stores or maintains
-// for your Amazon Web Services account in the current Region, including security
-// log and event data. For more information, see the Amazon Security Lake User
-// Guide (https://docs.aws.amazon.com/security-lake/latest/userguide/what-is-security-lake.html)
-// .
+// configurations.
+//
+// When you enable Security Lake, it starts ingesting security data after the
+// CreateAwsLogSource call. This includes ingesting security data from sources,
+// storing data, and making data accessible to subscribers. Security Lake also
+// enables all the existing settings and resources that it stores or maintains for
+// your Amazon Web Services account in the current Region, including security log
+// and event data. For more information, see the [Amazon Security Lake User Guide].
+//
+// [Amazon Security Lake User Guide]: https://docs.aws.amazon.com/security-lake/latest/userguide/what-is-security-lake.html
 func (c *Client) CreateDataLake(ctx context.Context, params *CreateDataLakeInput, optFns ...func(*Options)) (*CreateDataLakeOutput, error) {
 	if params == nil {
 		params = &CreateDataLakeInput{}
@@ -98,25 +99,25 @@ func (c *Client) addOperationCreateDataLakeMiddlewares(stack *middleware.Stack, 
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -131,13 +132,16 @@ func (c *Client) addOperationCreateDataLakeMiddlewares(stack *middleware.Stack, 
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpCreateDataLakeValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateDataLake(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

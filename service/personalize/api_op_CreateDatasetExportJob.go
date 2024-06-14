@@ -6,25 +6,31 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/personalize/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a job that exports data from your dataset to an Amazon S3 bucket. To
+//	Creates a job that exports data from your dataset to an Amazon S3 bucket. To
+//
 // allow Amazon Personalize to export the training data, you must specify an
 // service-linked IAM role that gives Amazon Personalize PutObject permissions for
-// your Amazon S3 bucket. For information, see Exporting a dataset (https://docs.aws.amazon.com/personalize/latest/dg/export-data.html)
-// in the Amazon Personalize developer guide. Status A dataset export job can be in
-// one of the following states:
+// your Amazon S3 bucket. For information, see [Exporting a dataset]in the Amazon Personalize developer
+// guide.
+//
+// # Status
+//
+// A dataset export job can be in one of the following states:
+//
 //   - CREATE PENDING > CREATE IN_PROGRESS > ACTIVE -or- CREATE FAILED
 //
-// To get the status of the export job, call DescribeDatasetExportJob (https://docs.aws.amazon.com/personalize/latest/dg/API_DescribeDatasetExportJob.html)
-// , and specify the Amazon Resource Name (ARN) of the dataset export job. The
-// dataset export is complete when the status shows as ACTIVE. If the status shows
-// as CREATE FAILED, the response includes a failureReason key, which describes
-// why the job failed.
+// To get the status of the export job, call [DescribeDatasetExportJob], and specify the Amazon Resource
+// Name (ARN) of the dataset export job. The dataset export is complete when the
+// status shows as ACTIVE. If the status shows as CREATE FAILED, the response
+// includes a failureReason key, which describes why the job failed.
+//
+// [Exporting a dataset]: https://docs.aws.amazon.com/personalize/latest/dg/export-data.html
+// [DescribeDatasetExportJob]: https://docs.aws.amazon.com/personalize/latest/dg/API_DescribeDatasetExportJob.html
 func (c *Client) CreateDatasetExportJob(ctx context.Context, params *CreateDatasetExportJobInput, optFns ...func(*Options)) (*CreateDatasetExportJobOutput, error) {
 	if params == nil {
 		params = &CreateDatasetExportJobInput{}
@@ -69,8 +75,9 @@ type CreateDatasetExportJobInput struct {
 	// PutItems operations), or ALL for both types. The default value is PUT .
 	IngestionMode types.IngestionMode
 
-	// A list of tags (https://docs.aws.amazon.com/personalize/latest/dg/tagging-resources.html)
-	// to apply to the dataset export job.
+	// A list of [tags] to apply to the dataset export job.
+	//
+	// [tags]: https://docs.aws.amazon.com/personalize/latest/dg/tagging-resources.html
 	Tags []types.Tag
 
 	noSmithyDocumentSerde
@@ -109,25 +116,25 @@ func (c *Client) addOperationCreateDatasetExportJobMiddlewares(stack *middleware
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -142,13 +149,16 @@ func (c *Client) addOperationCreateDatasetExportJobMiddlewares(stack *middleware
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpCreateDatasetExportJobValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateDatasetExportJob(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

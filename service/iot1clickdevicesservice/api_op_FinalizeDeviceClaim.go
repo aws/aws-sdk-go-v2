@@ -6,12 +6,12 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Given a device ID, finalizes the claim request for the associated device.
+//
 // Claiming a device consists of initiating a claim, then publishing a device
 // event, and finalizing the claim. For a device of type button, a device event can
 // be published by simply clicking the device.
@@ -38,9 +38,9 @@ type FinalizeDeviceClaimInput struct {
 	DeviceId *string
 
 	// A collection of key/value pairs defining the resource tags. For example, {
-	// "tags": {"key1": "value1", "key2": "value2"} }. For more information, see AWS
-	// Tagging Strategies (https://aws.amazon.com/answers/account-management/aws-tagging-strategies/)
-	// .
+	// "tags": {"key1": "value1", "key2": "value2"} }. For more information, see [AWS Tagging Strategies].
+	//
+	// [AWS Tagging Strategies]: https://aws.amazon.com/answers/account-management/aws-tagging-strategies/
 	Tags map[string]string
 
 	noSmithyDocumentSerde
@@ -79,25 +79,25 @@ func (c *Client) addOperationFinalizeDeviceClaimMiddlewares(stack *middleware.St
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -112,13 +112,16 @@ func (c *Client) addOperationFinalizeDeviceClaimMiddlewares(stack *middleware.St
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpFinalizeDeviceClaimValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opFinalizeDeviceClaim(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

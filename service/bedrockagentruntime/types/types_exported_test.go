@@ -7,6 +7,50 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/bedrockagentruntime/types"
 )
 
+func ExampleInvocationInputMember_outputUsage() {
+	var union types.InvocationInputMember
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.InvocationInputMemberMemberApiInvocationInput:
+		_ = v.Value // Value is types.ApiInvocationInput
+
+	case *types.InvocationInputMemberMemberFunctionInvocationInput:
+		_ = v.Value // Value is types.FunctionInvocationInput
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.ApiInvocationInput
+var _ *types.FunctionInvocationInput
+
+func ExampleInvocationResultMember_outputUsage() {
+	var union types.InvocationResultMember
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.InvocationResultMemberMemberApiResult:
+		_ = v.Value // Value is types.ApiResult
+
+	case *types.InvocationResultMemberMemberFunctionResult:
+		_ = v.Value // Value is types.FunctionResult
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.ApiResult
+var _ *types.FunctionResult
+
 func ExampleOrchestrationTrace_outputUsage() {
 	var union types.OrchestrationTrace
 	// type switches can be used to check the union value
@@ -88,6 +132,9 @@ func ExampleResponseStream_outputUsage() {
 	case *types.ResponseStreamMemberChunk:
 		_ = v.Value // Value is types.PayloadPart
 
+	case *types.ResponseStreamMemberReturnControl:
+		_ = v.Value // Value is types.ReturnControlPayload
+
 	case *types.ResponseStreamMemberTrace:
 		_ = v.Value // Value is types.TracePart
 
@@ -100,8 +147,64 @@ func ExampleResponseStream_outputUsage() {
 	}
 }
 
+var _ *types.ReturnControlPayload
 var _ *types.PayloadPart
 var _ *types.TracePart
+
+func ExampleRetrievalFilter_outputUsage() {
+	var union types.RetrievalFilter
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.RetrievalFilterMemberAndAll:
+		_ = v.Value // Value is []types.RetrievalFilter
+
+	case *types.RetrievalFilterMemberEquals:
+		_ = v.Value // Value is types.FilterAttribute
+
+	case *types.RetrievalFilterMemberGreaterThan:
+		_ = v.Value // Value is types.FilterAttribute
+
+	case *types.RetrievalFilterMemberGreaterThanOrEquals:
+		_ = v.Value // Value is types.FilterAttribute
+
+	case *types.RetrievalFilterMemberIn:
+		_ = v.Value // Value is types.FilterAttribute
+
+	case *types.RetrievalFilterMemberLessThan:
+		_ = v.Value // Value is types.FilterAttribute
+
+	case *types.RetrievalFilterMemberLessThanOrEquals:
+		_ = v.Value // Value is types.FilterAttribute
+
+	case *types.RetrievalFilterMemberListContains:
+		_ = v.Value // Value is types.FilterAttribute
+
+	case *types.RetrievalFilterMemberNotEquals:
+		_ = v.Value // Value is types.FilterAttribute
+
+	case *types.RetrievalFilterMemberNotIn:
+		_ = v.Value // Value is types.FilterAttribute
+
+	case *types.RetrievalFilterMemberOrAll:
+		_ = v.Value // Value is []types.RetrievalFilter
+
+	case *types.RetrievalFilterMemberStartsWith:
+		_ = v.Value // Value is types.FilterAttribute
+
+	case *types.RetrievalFilterMemberStringContains:
+		_ = v.Value // Value is types.FilterAttribute
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ []types.RetrievalFilter
+var _ *types.FilterAttribute
 
 func ExampleTrace_outputUsage() {
 	var union types.Trace
@@ -109,6 +212,9 @@ func ExampleTrace_outputUsage() {
 	switch v := union.(type) {
 	case *types.TraceMemberFailureTrace:
 		_ = v.Value // Value is types.FailureTrace
+
+	case *types.TraceMemberGuardrailTrace:
+		_ = v.Value // Value is types.GuardrailTrace
 
 	case *types.TraceMemberOrchestrationTrace:
 		_ = v.Value // Value is types.OrchestrationTrace
@@ -129,6 +235,7 @@ func ExampleTrace_outputUsage() {
 }
 
 var _ *types.FailureTrace
+var _ *types.GuardrailTrace
 var _ types.PreProcessingTrace
 var _ types.PostProcessingTrace
 var _ types.OrchestrationTrace

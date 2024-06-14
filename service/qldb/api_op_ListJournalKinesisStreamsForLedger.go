@@ -6,18 +6,21 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/qldb/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns all Amazon QLDB journal streams for a given ledger. This action does
-// not return any expired journal streams. For more information, see Expiration
-// for terminal streams (https://docs.aws.amazon.com/qldb/latest/developerguide/streams.create.html#streams.create.states.expiration)
-// in the Amazon QLDB Developer Guide. This action returns a maximum of MaxResults
-// items. It is paginated so that you can retrieve all the items by calling
-// ListJournalKinesisStreamsForLedger multiple times.
+// Returns all Amazon QLDB journal streams for a given ledger.
+//
+// This action does not return any expired journal streams. For more information,
+// see [Expiration for terminal streams]in the Amazon QLDB Developer Guide.
+//
+// This action returns a maximum of MaxResults items. It is paginated so that you
+// can retrieve all the items by calling ListJournalKinesisStreamsForLedger
+// multiple times.
+//
+// [Expiration for terminal streams]: https://docs.aws.amazon.com/qldb/latest/developerguide/streams.create.html#streams.create.states.expiration
 func (c *Client) ListJournalKinesisStreamsForLedger(ctx context.Context, params *ListJournalKinesisStreamsForLedgerInput, optFns ...func(*Options)) (*ListJournalKinesisStreamsForLedgerOutput, error) {
 	if params == nil {
 		params = &ListJournalKinesisStreamsForLedgerInput{}
@@ -57,6 +60,7 @@ type ListJournalKinesisStreamsForLedgerOutput struct {
 
 	//   - If NextToken is empty, the last page of results has been processed and there
 	//   are no more results to be retrieved.
+	//
 	//   - If NextToken is not empty, more results are available. To retrieve the next
 	//   page of results, use the value of NextToken in a subsequent
 	//   ListJournalKinesisStreamsForLedger call.
@@ -93,25 +97,25 @@ func (c *Client) addOperationListJournalKinesisStreamsForLedgerMiddlewares(stack
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -126,13 +130,16 @@ func (c *Client) addOperationListJournalKinesisStreamsForLedgerMiddlewares(stack
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpListJournalKinesisStreamsForLedgerValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListJournalKinesisStreamsForLedger(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

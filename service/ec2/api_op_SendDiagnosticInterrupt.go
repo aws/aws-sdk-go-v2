@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -14,17 +13,21 @@ import (
 // Sends a diagnostic interrupt to the specified Amazon EC2 instance to trigger a
 // kernel panic (on Linux instances), or a blue screen/stop error (on Windows
 // instances). For instances based on Intel and AMD processors, the interrupt is
-// received as a non-maskable interrupt (NMI). In general, the operating system
-// crashes and reboots when a kernel panic or stop error is triggered. The
-// operating system can also be configured to perform diagnostic tasks, such as
-// generating a memory dump file, loading a secondary kernel, or obtaining a call
-// trace. Before sending a diagnostic interrupt to your instance, ensure that its
-// operating system is configured to perform the required diagnostic tasks. For
-// more information about configuring your operating system to generate a crash
-// dump when a kernel panic or stop error occurs, see Send a diagnostic interrupt
-// (for advanced users) (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/diagnostic-interrupt.html)
-// (Linux instances) or Send a diagnostic interrupt (for advanced users) (https://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/diagnostic-interrupt.html)
-// (Windows instances).
+// received as a non-maskable interrupt (NMI).
+//
+// In general, the operating system crashes and reboots when a kernel panic or
+// stop error is triggered. The operating system can also be configured to perform
+// diagnostic tasks, such as generating a memory dump file, loading a secondary
+// kernel, or obtaining a call trace.
+//
+// Before sending a diagnostic interrupt to your instance, ensure that its
+// operating system is configured to perform the required diagnostic tasks.
+//
+// For more information about configuring your operating system to generate a
+// crash dump when a kernel panic or stop error occurs, see [Send a diagnostic interrupt (for advanced users)]in the Amazon EC2 User
+// Guide.
+//
+// [Send a diagnostic interrupt (for advanced users)]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/diagnostic-interrupt.html
 func (c *Client) SendDiagnosticInterrupt(ctx context.Context, params *SendDiagnosticInterruptInput, optFns ...func(*Options)) (*SendDiagnosticInterruptOutput, error) {
 	if params == nil {
 		params = &SendDiagnosticInterruptInput{}
@@ -85,25 +88,25 @@ func (c *Client) addOperationSendDiagnosticInterruptMiddlewares(stack *middlewar
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -118,13 +121,16 @@ func (c *Client) addOperationSendDiagnosticInterruptMiddlewares(stack *middlewar
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpSendDiagnosticInterruptValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opSendDiagnosticInterrupt(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

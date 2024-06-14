@@ -2,8 +2,10 @@ package middleware
 
 import (
 	"context"
+	"fmt"
 	"net/http"
 	"os"
+	"reflect"
 	"runtime"
 	"strings"
 	"testing"
@@ -11,8 +13,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
-	"github.com/google/go-cmp/cmp"
-	"github.com/google/go-cmp/cmp/cmpopts"
 )
 
 var expectedAgent = aws.SDKName + "/" + aws.SDKVersion + " os/" + getNormalizedOSName() + " lang/go#" + languageVersion + " md/GOOS#" + runtime.GOOS + " md/GOARCH#" + runtime.GOARCH
@@ -37,7 +37,7 @@ func TestRequestUserAgent_HandleBuild(t *testing.T) {
 			}},
 			Next: func(t *testing.T, expect middleware.BuildInput) middleware.BuildHandler {
 				return middleware.BuildHandlerFunc(func(ctx context.Context, input middleware.BuildInput) (o middleware.BuildOutput, m middleware.Metadata, err error) {
-					if diff := cmp.Diff(input, expect, cmpopts.IgnoreUnexported(http.Request{}, smithyhttp.Request{})); len(diff) > 0 {
+					if diff := cmpDiff(input, expect); len(diff) > 0 {
 						t.Error(diff)
 					}
 					return o, m, err
@@ -59,7 +59,7 @@ func TestRequestUserAgent_HandleBuild(t *testing.T) {
 			}},
 			Next: func(t *testing.T, expect middleware.BuildInput) middleware.BuildHandler {
 				return middleware.BuildHandlerFunc(func(ctx context.Context, input middleware.BuildInput) (o middleware.BuildOutput, m middleware.Metadata, err error) {
-					if diff := cmp.Diff(input, expect, cmpopts.IgnoreUnexported(http.Request{}, smithyhttp.Request{})); len(diff) > 0 {
+					if diff := cmpDiff(input, expect); len(diff) > 0 {
 						t.Error(diff)
 					}
 					return o, m, err
@@ -81,7 +81,7 @@ func TestRequestUserAgent_HandleBuild(t *testing.T) {
 			}},
 			Next: func(t *testing.T, expect middleware.BuildInput) middleware.BuildHandler {
 				return middleware.BuildHandlerFunc(func(ctx context.Context, input middleware.BuildInput) (o middleware.BuildOutput, m middleware.Metadata, err error) {
-					if diff := cmp.Diff(input, expect, cmpopts.IgnoreUnexported(http.Request{}, smithyhttp.Request{})); len(diff) > 0 {
+					if diff := cmpDiff(input, expect); len(diff) > 0 {
 						t.Error(diff)
 					}
 					return o, m, err
@@ -105,7 +105,7 @@ func TestRequestUserAgent_HandleBuild(t *testing.T) {
 				os.Setenv(k, v)
 			}
 
-			b := newRequestUserAgent()
+			b := NewRequestUserAgent()
 			_, _, err := b.HandleBuild(context.Background(), tt.In, tt.Next(t, tt.Expect))
 			if (err != nil) != tt.Err {
 				t.Errorf("error %v, want error %v", err, tt.Err)
@@ -148,7 +148,7 @@ func TestAddUserAgentKey(t *testing.T) {
 
 	for name, c := range cases {
 		t.Run(name, func(t *testing.T) {
-			b := newRequestUserAgent()
+			b := NewRequestUserAgent()
 			stack := middleware.NewStack("testStack", smithyhttp.NewStackRequest)
 			err := stack.Build.Add(b, middleware.After)
 			if err != nil {
@@ -201,7 +201,7 @@ func TestAddUserAgentKeyValue(t *testing.T) {
 
 	for name, c := range cases {
 		t.Run(name, func(t *testing.T) {
-			b := newRequestUserAgent()
+			b := NewRequestUserAgent()
 			stack := middleware.NewStack("testStack", smithyhttp.NewStackRequest)
 			err := stack.Build.Add(b, middleware.After)
 			if err != nil {
@@ -254,7 +254,7 @@ func TestAddSDKAgentKey(t *testing.T) {
 
 	for name, c := range cases {
 		t.Run(name, func(t *testing.T) {
-			b := newRequestUserAgent()
+			b := NewRequestUserAgent()
 			stack := middleware.NewStack("testStack", smithyhttp.NewStackRequest)
 			err := stack.Build.Add(b, middleware.After)
 			if err != nil {
@@ -310,7 +310,7 @@ func TestAddSDKAgentKeyValue(t *testing.T) {
 
 	for name, c := range cases {
 		t.Run(name, func(t *testing.T) {
-			b := newRequestUserAgent()
+			b := NewRequestUserAgent()
 			stack := middleware.NewStack("testStack", smithyhttp.NewStackRequest)
 			err := stack.Build.Add(b, middleware.After)
 			if err != nil {
@@ -435,4 +435,11 @@ func TestAddUserAgentKeyValue_AddToStack(t *testing.T) {
 			}
 		})
 	}
+}
+
+func cmpDiff(e, a interface{}) string {
+	if !reflect.DeepEqual(e, a) {
+		return fmt.Sprintf("%v != %v", e, a)
+	}
+	return ""
 }

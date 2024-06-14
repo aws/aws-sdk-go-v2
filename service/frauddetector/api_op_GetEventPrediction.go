@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/frauddetector/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -61,18 +60,26 @@ type GetEventPredictionInput struct {
 
 	// Names of the event type's variables you defined in Amazon Fraud Detector to
 	// represent data elements and their corresponding values for the event you are
-	// sending for evaluation. You must provide at least one eventVariable To ensure
-	// most accurate fraud prediction and to simplify your data preparation, Amazon
-	// Fraud Detector will replace all missing variables or values as follows: For
-	// Amazon Fraud Detector trained models: If a null value is provided explicitly for
-	// a variable or if a variable is missing, model will replace the null value or the
-	// missing variable (no variable name in the eventVariables map) with calculated
-	// default mean/medians for numeric variables and with special values for
-	// categorical variables. For imported SageMaker models: If a null value is
-	// provided explicitly for a variable, the model and rules will use “null” as the
-	// value. If a variable is not provided (no variable name in the eventVariables
-	// map), model and rules will use the default value that is provided for the
-	// variable.
+	// sending for evaluation.
+	//
+	// You must provide at least one eventVariable
+	//
+	// To ensure most accurate fraud prediction and to simplify your data preparation,
+	// Amazon Fraud Detector will replace all missing variables or values as follows:
+	//
+	// For Amazon Fraud Detector trained models:
+	//
+	// If a null value is provided explicitly for a variable or if a variable is
+	// missing, model will replace the null value or the missing variable (no variable
+	// name in the eventVariables map) with calculated default mean/medians for numeric
+	// variables and with special values for categorical variables.
+	//
+	// For imported SageMaker models:
+	//
+	// If a null value is provided explicitly for a variable, the model and rules will
+	// use “null” as the value. If a variable is not provided (no variable name in the
+	// eventVariables map), model and rules will use the default value that is provided
+	// for the variable.
 	//
 	// This member is required.
 	EventVariables map[string]string
@@ -129,25 +136,25 @@ func (c *Client) addOperationGetEventPredictionMiddlewares(stack *middleware.Sta
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -162,13 +169,16 @@ func (c *Client) addOperationGetEventPredictionMiddlewares(stack *middleware.Sta
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpGetEventPredictionValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetEventPrediction(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

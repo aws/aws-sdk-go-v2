@@ -6,18 +6,18 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Disassociates an Firewall Manager administrator account. To set a different
-// account as an Firewall Manager administrator, submit a PutAdminAccount request.
-// To set an account as a default administrator account, you must submit an
-// AssociateAdminAccount request. Disassociation of the default administrator
-// account follows the first in, last out principle. If you are the default
-// administrator, all Firewall Manager administrators within the organization must
-// first disassociate their accounts before you can disassociate your account.
+// account as an Firewall Manager administrator, submit a PutAdminAccountrequest. To set an
+// account as a default administrator account, you must submit an AssociateAdminAccountrequest.
+//
+// Disassociation of the default administrator account follows the first in, last
+// out principle. If you are the default administrator, all Firewall Manager
+// administrators within the organization must first disassociate their accounts
+// before you can disassociate your account.
 func (c *Client) DisassociateAdminAccount(ctx context.Context, params *DisassociateAdminAccountInput, optFns ...func(*Options)) (*DisassociateAdminAccountOutput, error) {
 	if params == nil {
 		params = &DisassociateAdminAccountInput{}
@@ -66,25 +66,25 @@ func (c *Client) addOperationDisassociateAdminAccountMiddlewares(stack *middlewa
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -99,10 +99,13 @@ func (c *Client) addOperationDisassociateAdminAccountMiddlewares(stack *middlewa
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDisassociateAdminAccount(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

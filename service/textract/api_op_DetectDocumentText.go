@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/textract/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -15,14 +14,19 @@ import (
 // Detects text in the input document. Amazon Textract can detect lines of text
 // and the words that make up a line of text. The input document must be in one of
 // the following image formats: JPEG, PNG, PDF, or TIFF. DetectDocumentText
-// returns the detected text in an array of Block objects. Each document page has
-// as an associated Block of type PAGE. Each PAGE Block object is the parent of
-// LINE Block objects that represent the lines of detected text on a page. A LINE
-// Block object is a parent for each word that makes up the line. Words are
-// represented by Block objects of type WORD. DetectDocumentText is a synchronous
-// operation. To analyze documents asynchronously, use StartDocumentTextDetection .
-// For more information, see Document Text Detection (https://docs.aws.amazon.com/textract/latest/dg/how-it-works-detecting.html)
-// .
+// returns the detected text in an array of Blockobjects.
+//
+// Each document page has as an associated Block of type PAGE. Each PAGE Block
+// object is the parent of LINE Block objects that represent the lines of detected
+// text on a page. A LINE Block object is a parent for each word that makes up the
+// line. Words are represented by Block objects of type WORD.
+//
+// DetectDocumentText is a synchronous operation. To analyze documents
+// asynchronously, use StartDocumentTextDetection.
+//
+// For more information, see [Document Text Detection].
+//
+// [Document Text Detection]: https://docs.aws.amazon.com/textract/latest/dg/how-it-works-detecting.html
 func (c *Client) DetectDocumentText(ctx context.Context, params *DetectDocumentTextInput, optFns ...func(*Options)) (*DetectDocumentTextOutput, error) {
 	if params == nil {
 		params = &DetectDocumentTextInput{}
@@ -42,9 +46,10 @@ type DetectDocumentTextInput struct {
 
 	// The input document as base64-encoded bytes or an Amazon S3 object. If you use
 	// the AWS CLI to call Amazon Textract operations, you can't pass image bytes. The
-	// document must be an image in JPEG or PNG format. If you're using an AWS SDK to
-	// call Amazon Textract, you might not need to base64-encode image bytes that are
-	// passed using the Bytes field.
+	// document must be an image in JPEG or PNG format.
+	//
+	// If you're using an AWS SDK to call Amazon Textract, you might not need to
+	// base64-encode image bytes that are passed using the Bytes field.
 	//
 	// This member is required.
 	Document *types.Document
@@ -92,25 +97,25 @@ func (c *Client) addOperationDetectDocumentTextMiddlewares(stack *middleware.Sta
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -125,13 +130,16 @@ func (c *Client) addOperationDetectDocumentTextMiddlewares(stack *middleware.Sta
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDetectDocumentTextValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDetectDocumentText(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

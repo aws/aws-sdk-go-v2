@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/mobile/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -31,18 +30,18 @@ func (c *Client) CreateProject(ctx context.Context, params *CreateProjectInput, 
 // Request structure used to request a project be created.
 type CreateProjectInput struct {
 
-	// ZIP or YAML file which contains configuration settings to be used when creating
-	// the project. This may be the contents of the file downloaded from the URL
-	// provided in an export project operation.
+	//  ZIP or YAML file which contains configuration settings to be used when
+	// creating the project. This may be the contents of the file downloaded from the
+	// URL provided in an export project operation.
 	Contents []byte
 
-	// Name of the project.
+	//  Name of the project.
 	Name *string
 
-	// Default region where project resources should be created.
+	//  Default region where project resources should be created.
 	Region *string
 
-	// Unique identifier for an exported snapshot of project configuration. This
+	//  Unique identifier for an exported snapshot of project configuration. This
 	// snapshot identifier is included in the share URL when a project is exported.
 	SnapshotId *string
 
@@ -52,7 +51,7 @@ type CreateProjectInput struct {
 // Result structure used in response to a request to create a project.
 type CreateProjectOutput struct {
 
-	// Detailed information about the created AWS Mobile Hub project.
+	//  Detailed information about the created AWS Mobile Hub project.
 	Details *types.ProjectDetails
 
 	// Metadata pertaining to the operation's result.
@@ -83,25 +82,25 @@ func (c *Client) addOperationCreateProjectMiddlewares(stack *middleware.Stack, o
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -116,10 +115,13 @@ func (c *Client) addOperationCreateProjectMiddlewares(stack *middleware.Stack, o
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateProject(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

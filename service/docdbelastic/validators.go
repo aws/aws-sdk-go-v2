@@ -9,6 +9,26 @@ import (
 	"github.com/aws/smithy-go/middleware"
 )
 
+type validateOpCopyClusterSnapshot struct {
+}
+
+func (*validateOpCopyClusterSnapshot) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCopyClusterSnapshot) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CopyClusterSnapshotInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCopyClusterSnapshotInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateCluster struct {
 }
 
@@ -169,6 +189,46 @@ func (m *validateOpRestoreClusterFromSnapshot) HandleInitialize(ctx context.Cont
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpStartCluster struct {
+}
+
+func (*validateOpStartCluster) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpStartCluster) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*StartClusterInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpStartClusterInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpStopCluster struct {
+}
+
+func (*validateOpStopCluster) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpStopCluster) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*StopClusterInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpStopClusterInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpTagResource struct {
 }
 
@@ -229,6 +289,10 @@ func (m *validateOpUpdateCluster) HandleInitialize(ctx context.Context, in middl
 	return next.HandleInitialize(ctx, in)
 }
 
+func addOpCopyClusterSnapshotValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCopyClusterSnapshot{}, middleware.After)
+}
+
 func addOpCreateClusterValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateCluster{}, middleware.After)
 }
@@ -261,6 +325,14 @@ func addOpRestoreClusterFromSnapshotValidationMiddleware(stack *middleware.Stack
 	return stack.Initialize.Add(&validateOpRestoreClusterFromSnapshot{}, middleware.After)
 }
 
+func addOpStartClusterValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpStartCluster{}, middleware.After)
+}
+
+func addOpStopClusterValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpStopCluster{}, middleware.After)
+}
+
 func addOpTagResourceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpTagResource{}, middleware.After)
 }
@@ -271,6 +343,24 @@ func addOpUntagResourceValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpUpdateClusterValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateCluster{}, middleware.After)
+}
+
+func validateOpCopyClusterSnapshotInput(v *CopyClusterSnapshotInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CopyClusterSnapshotInput"}
+	if v.SnapshotArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SnapshotArn"))
+	}
+	if v.TargetSnapshotName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TargetSnapshotName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
 }
 
 func validateOpCreateClusterInput(v *CreateClusterInput) error {
@@ -406,6 +496,36 @@ func validateOpRestoreClusterFromSnapshotInput(v *RestoreClusterFromSnapshotInpu
 	}
 	if v.SnapshotArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("SnapshotArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpStartClusterInput(v *StartClusterInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StartClusterInput"}
+	if v.ClusterArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ClusterArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpStopClusterInput(v *StopClusterInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StopClusterInput"}
+	if v.ClusterArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ClusterArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

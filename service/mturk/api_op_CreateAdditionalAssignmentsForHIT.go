@@ -6,19 +6,23 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// The CreateAdditionalAssignmentsForHIT operation increases the maximum number of
-// assignments of an existing HIT. To extend the maximum number of assignments,
-// specify the number of additional assignments.
+//	The CreateAdditionalAssignmentsForHIT operation increases the maximum number
+//
+// of assignments of an existing HIT.
+//
+// To extend the maximum number of assignments, specify the number of additional
+// assignments.
+//
 //   - HITs created with fewer than 10 assignments cannot be extended to have 10
 //     or more assignments. Attempting to add assignments in a way that brings the
 //     total number of assignments for a HIT from fewer than 10 assignments to 10 or
 //     more assignments will result in an
 //     AWS.MechanicalTurk.InvalidMaximumAssignmentsIncrease exception.
+//
 //   - HITs that were created before July 22, 2015 cannot be extended. Attempting
 //     to extend HITs that were created before July 22, 2015 will result in an
 //     AWS.MechanicalTurk.HITTooOldForExtension exception.
@@ -49,7 +53,7 @@ type CreateAdditionalAssignmentsForHITInput struct {
 	// This member is required.
 	NumberOfAdditionalAssignments *int32
 
-	// A unique identifier for this request, which allows you to retry the call on
+	//  A unique identifier for this request, which allows you to retry the call on
 	// error without extending the HIT multiple times. This is useful in cases such as
 	// network timeouts where it is unclear whether or not the call succeeded on the
 	// server. If the extend HIT already exists in the system from a previous call
@@ -89,25 +93,25 @@ func (c *Client) addOperationCreateAdditionalAssignmentsForHITMiddlewares(stack 
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -122,13 +126,16 @@ func (c *Client) addOperationCreateAdditionalAssignmentsForHITMiddlewares(stack 
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpCreateAdditionalAssignmentsForHITValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateAdditionalAssignmentsForHIT(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

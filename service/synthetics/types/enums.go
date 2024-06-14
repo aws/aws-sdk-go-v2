@@ -12,8 +12,9 @@ const (
 )
 
 // Values returns all known values for CanaryRunState. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (CanaryRunState) Values() []CanaryRunState {
 	return []CanaryRunState{
 		"RUNNING",
@@ -32,6 +33,7 @@ const (
 
 // Values returns all known values for CanaryRunStateReasonCode. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (CanaryRunStateReasonCode) Values() []CanaryRunStateReasonCode {
 	return []CanaryRunStateReasonCode{
@@ -56,8 +58,9 @@ const (
 )
 
 // Values returns all known values for CanaryState. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (CanaryState) Values() []CanaryState {
 	return []CanaryState{
 		"CREATING",
@@ -91,8 +94,9 @@ const (
 )
 
 // Values returns all known values for CanaryStateReasonCode. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (CanaryStateReasonCode) Values() []CanaryStateReasonCode {
 	return []CanaryStateReasonCode{
 		"INVALID_PERMISSIONS",
@@ -119,8 +123,9 @@ const (
 )
 
 // Values returns all known values for EncryptionMode. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (EncryptionMode) Values() []EncryptionMode {
 	return []EncryptionMode{
 		"SSE_S3",

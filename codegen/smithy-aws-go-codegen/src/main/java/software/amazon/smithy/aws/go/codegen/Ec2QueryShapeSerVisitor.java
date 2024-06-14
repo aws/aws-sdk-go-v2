@@ -3,8 +3,12 @@ package software.amazon.smithy.aws.go.codegen;
 import java.util.Optional;
 import java.util.function.Predicate;
 import software.amazon.smithy.aws.traits.protocols.Ec2QueryNameTrait;
+import software.amazon.smithy.go.codegen.GoWriter;
 import software.amazon.smithy.go.codegen.integration.ProtocolGenerator.GenerationContext;
+import software.amazon.smithy.go.codegen.knowledge.GoPointableIndex;
+import software.amazon.smithy.model.shapes.CollectionShape;
 import software.amazon.smithy.model.shapes.MemberShape;
+import software.amazon.smithy.model.shapes.Shape;
 import software.amazon.smithy.model.shapes.ShapeType;
 import software.amazon.smithy.model.traits.TimestampFormatTrait.Format;
 import software.amazon.smithy.model.traits.XmlNameTrait;
@@ -49,6 +53,14 @@ final class Ec2QueryShapeSerVisitor extends QueryShapeSerVisitor {
         return StringUtils.capitalize(memberShape.getTrait(XmlNameTrait.class)
                 .map(XmlNameTrait::getValue)
                 .orElse(defaultValue));
+    }
+
+    // EC2Query specifically does not serialize non-nil, empty lists
+    protected void serializeCollection(GenerationContext context, CollectionShape shape) {
+        context.getWriter().get()
+                .write("if len(v) == 0 { return nil }");
+
+        super.serializeCollection(context, shape);
     }
 
     @Override

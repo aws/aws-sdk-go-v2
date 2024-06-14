@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/finspace/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -16,9 +15,11 @@ import (
 // Updates environment network to connect to your internal network by using a
 // transit gateway. This API supports request to create a transit gateway
 // attachment from FinSpace VPC to your transit gateway ID and create a custom
-// Route-53 outbound resolvers. Once you send a request to update a network, you
-// cannot change it again. Network update might require termination of any clusters
-// that are running in the existing network.
+// Route-53 outbound resolvers.
+//
+// Once you send a request to update a network, you cannot change it again.
+// Network update might require termination of any clusters that are running in the
+// existing network.
 func (c *Client) UpdateKxEnvironmentNetwork(ctx context.Context, params *UpdateKxEnvironmentNetworkInput, optFns ...func(*Options)) (*UpdateKxEnvironmentNetworkOutput, error) {
 	if params == nil {
 		params = &UpdateKxEnvironmentNetworkInput{}
@@ -137,25 +138,25 @@ func (c *Client) addOperationUpdateKxEnvironmentNetworkMiddlewares(stack *middle
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -173,6 +174,9 @@ func (c *Client) addOperationUpdateKxEnvironmentNetworkMiddlewares(stack *middle
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opUpdateKxEnvironmentNetworkMiddleware(stack, options); err != nil {
 		return err
 	}
@@ -182,7 +186,7 @@ func (c *Client) addOperationUpdateKxEnvironmentNetworkMiddlewares(stack *middle
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateKxEnvironmentNetwork(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

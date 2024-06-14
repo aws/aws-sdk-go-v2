@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/redshift/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -15,18 +14,22 @@ import (
 // Changes the size of the cluster. You can change the cluster's type, or change
 // the number or type of nodes. The default behavior is to use the elastic resize
 // method. With an elastic resize, your cluster is available for read and write
-// operations more quickly than with the classic resize method. Elastic resize
-// operations have the following restrictions:
+// operations more quickly than with the classic resize method.
+//
+// Elastic resize operations have the following restrictions:
+//
 //   - You can only resize clusters of the following types:
-//   - dc1.large (if your cluster is in a VPC)
-//   - dc1.8xlarge (if your cluster is in a VPC)
+//
 //   - dc2.large
+//
 //   - dc2.8xlarge
-//   - ds2.xlarge
-//   - ds2.8xlarge
+//
 //   - ra3.xlplus
+//
 //   - ra3.4xlarge
+//
 //   - ra3.16xlarge
+//
 //   - The type of nodes that you add must match the node type for the cluster.
 func (c *Client) ResizeCluster(ctx context.Context, params *ResizeClusterInput, optFns ...func(*Options)) (*ResizeClusterOutput, error) {
 	if params == nil {
@@ -110,25 +113,25 @@ func (c *Client) addOperationResizeClusterMiddlewares(stack *middleware.Stack, o
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -143,13 +146,16 @@ func (c *Client) addOperationResizeClusterMiddlewares(stack *middleware.Stack, o
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpResizeClusterValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opResizeCluster(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/auditmanager/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -30,12 +29,34 @@ func (c *Client) ListControls(ctx context.Context, params *ListControlsInput, op
 
 type ListControlsInput struct {
 
-	// The type of control, such as a standard control or a custom control.
+	// A filter that narrows the list of controls to a specific type.
 	//
 	// This member is required.
 	ControlType types.ControlType
 
-	// Represents the maximum number of results on a page or for an API request call.
+	// A filter that narrows the list of controls to a specific resource from the
+	// Amazon Web Services Control Catalog.
+	//
+	// To use this parameter, specify the ARN of the Control Catalog resource. You can
+	// specify either a control domain, a control objective, or a common control. For
+	// information about how to find the ARNs for these resources, see [ListDomains]ListDomains , [ListObjectives]
+	// ListObjectives , and [ListCommonControls]ListCommonControls .
+	//
+	// You can only filter by one Control Catalog resource at a time. Specifying
+	// multiple resource ARNs isn’t currently supported. If you want to filter by more
+	// than one ARN, we recommend that you run the ListControls operation separately
+	// for each ARN.
+	//
+	// Alternatively, specify UNCATEGORIZED to list controls that aren't mapped to a
+	// Control Catalog resource. For example, this operation might return a list of
+	// custom controls that don't belong to any control domain or control objective.
+	//
+	// [ListCommonControls]: https://docs.aws.amazon.com/controlcatalog/latest/APIReference/API_ListCommonControls.html
+	// [ListDomains]: https://docs.aws.amazon.com/controlcatalog/latest/APIReference/API_ListDomains.html
+	// [ListObjectives]: https://docs.aws.amazon.com/controlcatalog/latest/APIReference/API_ListObjectives.html
+	ControlCatalogId *string
+
+	// The maximum number of results on a page or for an API request call.
 	MaxResults *int32
 
 	// The pagination token that's used to fetch the next set of results.
@@ -46,7 +67,7 @@ type ListControlsInput struct {
 
 type ListControlsOutput struct {
 
-	// A list of metadata that the ListControls API returns for each control.
+	//  A list of metadata that the ListControls API returns for each control.
 	ControlMetadataList []types.ControlMetadata
 
 	// The pagination token that's used to fetch the next set of results.
@@ -80,25 +101,25 @@ func (c *Client) addOperationListControlsMiddlewares(stack *middleware.Stack, op
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -113,13 +134,16 @@ func (c *Client) addOperationListControlsMiddlewares(stack *middleware.Stack, op
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpListControlsValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListControls(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -146,7 +170,7 @@ var _ ListControlsAPIClient = (*Client)(nil)
 
 // ListControlsPaginatorOptions is the paginator options for ListControls
 type ListControlsPaginatorOptions struct {
-	// Represents the maximum number of results on a page or for an API request call.
+	// The maximum number of results on a page or for an API request call.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

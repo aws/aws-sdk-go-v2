@@ -6,13 +6,13 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Provides the sending limits for the Amazon SES account. You can execute this
-// operation no more than once per second.
+// Provides the sending limits for the Amazon SES account.
+//
+// You can execute this operation no more than once per second.
 func (c *Client) GetSendQuota(ctx context.Context, params *GetSendQuotaInput, optFns ...func(*Options)) (*GetSendQuotaOutput, error) {
 	if params == nil {
 		params = &GetSendQuotaInput{}
@@ -41,8 +41,10 @@ type GetSendQuotaOutput struct {
 	Max24HourSend float64
 
 	// The maximum number of emails that Amazon SES can accept from the user's account
-	// per second. The rate at which Amazon SES accepts the user's messages might be
-	// less than the maximum send rate.
+	// per second.
+	//
+	// The rate at which Amazon SES accepts the user's messages might be less than the
+	// maximum send rate.
 	MaxSendRate float64
 
 	// The number of emails sent during the previous 24 hours.
@@ -76,25 +78,25 @@ func (c *Client) addOperationGetSendQuotaMiddlewares(stack *middleware.Stack, op
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -109,10 +111,13 @@ func (c *Client) addOperationGetSendQuotaMiddlewares(stack *middleware.Stack, op
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetSendQuota(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

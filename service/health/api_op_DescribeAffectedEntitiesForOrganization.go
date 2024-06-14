@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/health/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -16,16 +15,22 @@ import (
 // one or more accounts in your organization in Organizations, based on the filter
 // criteria. Entities can refer to individual customer resources, groups of
 // customer resources, or any other construct, depending on the Amazon Web Service.
+//
 // At least one event Amazon Resource Name (ARN) and account ID are required.
+//
 // Before you can call this operation, you must first enable Health to work with
-// Organizations. To do this, call the EnableHealthServiceAccessForOrganization (https://docs.aws.amazon.com/health/latest/APIReference/API_EnableHealthServiceAccessForOrganization.html)
-// operation from your organization's management account.
+// Organizations. To do this, call the [EnableHealthServiceAccessForOrganization]operation from your organization's
+// management account.
+//
 //   - This API operation uses pagination. Specify the nextToken parameter in the
 //     next request to return more results.
+//
 //   - This operation doesn't support resource-level permissions. You can't use
 //     this operation to allow or deny access to specific Health events. For more
-//     information, see Resource- and action-based conditions (https://docs.aws.amazon.com/health/latest/ug/security_iam_id-based-policy-examples.html#resource-action-based-conditions)
-//     in the Health User Guide.
+//     information, see [Resource- and action-based conditions]in the Health User Guide.
+//
+// [Resource- and action-based conditions]: https://docs.aws.amazon.com/health/latest/ug/security_iam_id-based-policy-examples.html#resource-action-based-conditions
+// [EnableHealthServiceAccessForOrganization]: https://docs.aws.amazon.com/health/latest/APIReference/API_EnableHealthServiceAccessForOrganization.html
 func (c *Client) DescribeAffectedEntitiesForOrganization(ctx context.Context, params *DescribeAffectedEntitiesForOrganizationInput, optFns ...func(*Options)) (*DescribeAffectedEntitiesForOrganizationOutput, error) {
 	if params == nil {
 		params = &DescribeAffectedEntitiesForOrganizationInput{}
@@ -116,25 +121,25 @@ func (c *Client) addOperationDescribeAffectedEntitiesForOrganizationMiddlewares(
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -149,13 +154,16 @@ func (c *Client) addOperationDescribeAffectedEntitiesForOrganizationMiddlewares(
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDescribeAffectedEntitiesForOrganizationValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeAffectedEntitiesForOrganization(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

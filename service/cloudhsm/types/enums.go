@@ -11,8 +11,9 @@ const (
 )
 
 // Values returns all known values for ClientVersion. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ClientVersion) Values() []ClientVersion {
 	return []ClientVersion{
 		"5.1",
@@ -30,8 +31,9 @@ const (
 )
 
 // Values returns all known values for CloudHsmObjectState. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (CloudHsmObjectState) Values() []CloudHsmObjectState {
 	return []CloudHsmObjectState{
 		"READY",
@@ -54,8 +56,9 @@ const (
 )
 
 // Values returns all known values for HsmStatus. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (HsmStatus) Values() []HsmStatus {
 	return []HsmStatus{
 		"PENDING",
@@ -76,8 +79,9 @@ const (
 )
 
 // Values returns all known values for SubscriptionType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (SubscriptionType) Values() []SubscriptionType {
 	return []SubscriptionType{
 		"PRODUCTION",

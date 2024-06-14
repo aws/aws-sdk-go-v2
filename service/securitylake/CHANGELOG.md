@@ -1,3 +1,76 @@
+# v1.14.0 (2024-06-12)
+
+* **Feature**: This release updates request validation regex to account for non-commercial aws partitions.
+
+# v1.13.10 (2024-06-11)
+
+* No change notes available for this release.
+
+# v1.13.9 (2024-06-07)
+
+* **Bug Fix**: Add clock skew correction on all service clients
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.13.8 (2024-06-03)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.13.7 (2024-05-23)
+
+* No change notes available for this release.
+
+# v1.13.6 (2024-05-16)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.13.5 (2024-05-15)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.13.4 (2024-05-08)
+
+* **Bug Fix**: GoDoc improvement
+
+# v1.13.3 (2024-03-29)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.13.2 (2024-03-18)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.13.1 (2024-03-07)
+
+* **Bug Fix**: Remove dependency on go-cmp.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.13.0 (2024-02-29)
+
+* **Feature**: Add capability to update the Data Lake's MetaStoreManager Role in order to perform required data lake updates to use Iceberg table format in their data lake or update the role for any other reason.
+
+# v1.12.1 (2024-02-23)
+
+* **Bug Fix**: Move all common, SDK-side middleware stack ops into the service client module to prevent cross-module compatibility issues in the future.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.12.0 (2024-02-22)
+
+* **Feature**: Add middleware stack snapshot tests.
+
+# v1.11.2 (2024-02-21)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.11.1 (2024-02-20)
+
+* **Bug Fix**: When sourcing values for a service's `EndpointParameters`, the lack of a configured region (i.e. `options.Region == ""`) will now translate to a `nil` value for `EndpointParameters.Region` instead of a pointer to the empty string `""`. This will result in a much more explicit error when calling an operation instead of an obscure hostname lookup failure.
+
+# v1.11.0 (2024-02-13)
+
+* **Feature**: Bump minimum Go version to 1.20 per our language support policy.
+* **Documentation**: Documentation updates for Security Lake
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.10.7 (2024-01-10)
 
 * No change notes available for this release.

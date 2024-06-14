@@ -6,16 +6,16 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/elastictranscoder/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // With the UpdatePipelineNotifications operation, you can update Amazon Simple
-// Notification Service (Amazon SNS) notifications for a pipeline. When you update
-// notifications for a pipeline, Elastic Transcoder returns the values that you
-// specified in the request.
+// Notification Service (Amazon SNS) notifications for a pipeline.
+//
+// When you update notifications for a pipeline, Elastic Transcoder returns the
+// values that you specified in the request.
 func (c *Client) UpdatePipelineNotifications(ctx context.Context, params *UpdatePipelineNotificationsInput, optFns ...func(*Options)) (*UpdatePipelineNotificationsOutput, error) {
 	if params == nil {
 		params = &UpdatePipelineNotificationsInput{}
@@ -41,18 +41,24 @@ type UpdatePipelineNotificationsInput struct {
 	Id *string
 
 	// The topic ARN for the Amazon Simple Notification Service (Amazon SNS) topic
-	// that you want to notify to report job status. To receive notifications, you must
-	// also subscribe to the new topic in the Amazon SNS console.
+	// that you want to notify to report job status.
+	//
+	// To receive notifications, you must also subscribe to the new topic in the
+	// Amazon SNS console.
+	//
 	//   - Progressing: The topic ARN for the Amazon Simple Notification Service
 	//   (Amazon SNS) topic that you want to notify when Elastic Transcoder has started
 	//   to process jobs that are added to this pipeline. This is the ARN that Amazon SNS
 	//   returned when you created the topic.
+	//
 	//   - Complete: The topic ARN for the Amazon SNS topic that you want to notify
 	//   when Elastic Transcoder has finished processing a job. This is the ARN that
 	//   Amazon SNS returned when you created the topic.
+	//
 	//   - Warning: The topic ARN for the Amazon SNS topic that you want to notify
 	//   when Elastic Transcoder encounters a warning condition. This is the ARN that
 	//   Amazon SNS returned when you created the topic.
+	//
 	//   - Error: The topic ARN for the Amazon SNS topic that you want to notify when
 	//   Elastic Transcoder encounters an error condition. This is the ARN that Amazon
 	//   SNS returned when you created the topic.
@@ -98,25 +104,25 @@ func (c *Client) addOperationUpdatePipelineNotificationsMiddlewares(stack *middl
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -131,13 +137,16 @@ func (c *Client) addOperationUpdatePipelineNotificationsMiddlewares(stack *middl
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpUpdatePipelineNotificationsValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdatePipelineNotifications(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

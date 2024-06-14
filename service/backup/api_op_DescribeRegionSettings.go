@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -37,13 +36,19 @@ type DescribeRegionSettingsInput struct {
 
 type DescribeRegionSettingsOutput struct {
 
-	// Returns whether Backup fully manages the backups for a resource type. For the
-	// benefits of full Backup management, see Full Backup management (https://docs.aws.amazon.com/aws-backup/latest/devguide/whatisbackup.html#full-management)
-	// . For a list of resource types and whether each supports full Backup management,
-	// see the Feature availability by resource (https://docs.aws.amazon.com/aws-backup/latest/devguide/whatisbackup.html#features-by-resource)
-	// table. If "DynamoDB":false , you can enable full Backup management for DynamoDB
-	// backup by enabling Backup's advanced DynamoDB backup features (https://docs.aws.amazon.com/aws-backup/latest/devguide/advanced-ddb-backup.html#advanced-ddb-backup-enable-cli)
-	// .
+	// Returns whether Backup fully manages the backups for a resource type.
+	//
+	// For the benefits of full Backup management, see [Full Backup management].
+	//
+	// For a list of resource types and whether each supports full Backup management,
+	// see the [Feature availability by resource]table.
+	//
+	// If "DynamoDB":false , you can enable full Backup management for DynamoDB backup
+	// by enabling [Backup's advanced DynamoDB backup features].
+	//
+	// [Full Backup management]: https://docs.aws.amazon.com/aws-backup/latest/devguide/whatisbackup.html#full-management
+	// [Feature availability by resource]: https://docs.aws.amazon.com/aws-backup/latest/devguide/whatisbackup.html#features-by-resource
+	// [Backup's advanced DynamoDB backup features]: https://docs.aws.amazon.com/aws-backup/latest/devguide/advanced-ddb-backup.html#advanced-ddb-backup-enable-cli
 	ResourceTypeManagementPreference map[string]bool
 
 	// Returns a list of all services along with the opt-in preferences in the Region.
@@ -77,25 +82,25 @@ func (c *Client) addOperationDescribeRegionSettingsMiddlewares(stack *middleware
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -110,10 +115,13 @@ func (c *Client) addOperationDescribeRegionSettingsMiddlewares(stack *middleware
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeRegionSettings(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

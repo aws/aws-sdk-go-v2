@@ -18,7 +18,16 @@ import (
 	"io"
 	"math"
 	"strings"
+	"time"
 )
+
+func deserializeS3Expires(v string) (*time.Time, error) {
+	t, err := smithytime.ParseHTTPDate(v)
+	if err != nil {
+		return nil, nil
+	}
+	return &t, nil
+}
 
 type awsRestjson1_deserializeOpAcceptAdministratorInvitation struct {
 }
@@ -67884,6 +67893,15 @@ func awsRestjson1_deserializeDocumentVulnerability(v **types.Vulnerability, valu
 					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
 				}
 				sv.Id = ptr.String(jtv)
+			}
+
+		case "LastKnownExploitAt":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
+				}
+				sv.LastKnownExploitAt = ptr.String(jtv)
 			}
 
 		case "ReferenceUrls":

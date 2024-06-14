@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/redshift/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -14,9 +13,12 @@ import (
 
 // Returns descriptions of the available Amazon Redshift cluster versions. You can
 // call this operation even before creating any clusters to learn more about the
-// Amazon Redshift versions. For more information about managing clusters, go to
-// Amazon Redshift Clusters (https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-clusters.html)
-// in the Amazon Redshift Cluster Management Guide.
+// Amazon Redshift versions.
+//
+// For more information about managing clusters, go to [Amazon Redshift Clusters] in the Amazon Redshift
+// Cluster Management Guide.
+//
+// [Amazon Redshift Clusters]: https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-clusters.html
 func (c *Client) DescribeClusterVersions(ctx context.Context, params *DescribeClusterVersionsInput, optFns ...func(*Options)) (*DescribeClusterVersionsOutput, error) {
 	if params == nil {
 		params = &DescribeClusterVersionsInput{}
@@ -35,27 +37,35 @@ func (c *Client) DescribeClusterVersions(ctx context.Context, params *DescribeCl
 type DescribeClusterVersionsInput struct {
 
 	// The name of a specific cluster parameter group family to return details for.
+	//
 	// Constraints:
+	//
 	//   - Must be 1 to 255 alphanumeric characters
+	//
 	//   - First character must be a letter
+	//
 	//   - Cannot end with a hyphen or contain two consecutive hyphens
 	ClusterParameterGroupFamily *string
 
-	// The specific cluster version to return. Example: 1.0
+	// The specific cluster version to return.
+	//
+	// Example: 1.0
 	ClusterVersion *string
 
 	// An optional parameter that specifies the starting point to return a set of
-	// response records. When the results of a DescribeClusterVersions request exceed
-	// the value specified in MaxRecords , Amazon Web Services returns a value in the
-	// Marker field of the response. You can retrieve the next set of response records
-	// by providing the returned marker value in the Marker parameter and retrying the
-	// request.
+	// response records. When the results of a DescribeClusterVersionsrequest exceed the value specified in
+	// MaxRecords , Amazon Web Services returns a value in the Marker field of the
+	// response. You can retrieve the next set of response records by providing the
+	// returned marker value in the Marker parameter and retrying the request.
 	Marker *string
 
 	// The maximum number of response records to return in each call. If the number of
 	// remaining response records exceeds the specified MaxRecords value, a value is
 	// returned in a marker field of the response. You can retrieve the next set of
-	// records by retrying the command with the returned marker value. Default: 100
+	// records by retrying the command with the returned marker value.
+	//
+	// Default: 100
+	//
 	// Constraints: minimum 20, maximum 100.
 	MaxRecords *int32
 
@@ -103,25 +113,25 @@ func (c *Client) addOperationDescribeClusterVersionsMiddlewares(stack *middlewar
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -136,10 +146,13 @@ func (c *Client) addOperationDescribeClusterVersionsMiddlewares(stack *middlewar
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeClusterVersions(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -171,7 +184,10 @@ type DescribeClusterVersionsPaginatorOptions struct {
 	// The maximum number of response records to return in each call. If the number of
 	// remaining response records exceeds the specified MaxRecords value, a value is
 	// returned in a marker field of the response. You can retrieve the next set of
-	// records by retrying the command with the returned marker value. Default: 100
+	// records by retrying the command with the returned marker value.
+	//
+	// Default: 100
+	//
 	// Constraints: minimum 20, maximum 100.
 	Limit int32
 

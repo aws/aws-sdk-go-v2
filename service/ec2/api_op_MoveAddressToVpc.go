@@ -6,20 +6,20 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// This action is deprecated. Moves an Elastic IP address from the EC2-Classic
-// platform to the EC2-VPC platform. The Elastic IP address must be allocated to
-// your account for more than 24 hours, and it must not be associated with an
-// instance. After the Elastic IP address is moved, it is no longer available for
-// use in the EC2-Classic platform, unless you move it back using the
-// RestoreAddressToClassic request. You cannot move an Elastic IP address that was
-// originally allocated for use in the EC2-VPC platform to the EC2-Classic
-// platform.
+// This action is deprecated.
+//
+// Moves an Elastic IP address from the EC2-Classic platform to the EC2-VPC
+// platform. The Elastic IP address must be allocated to your account for more than
+// 24 hours, and it must not be associated with an instance. After the Elastic IP
+// address is moved, it is no longer available for use in the EC2-Classic platform,
+// unless you move it back using the RestoreAddressToClassicrequest. You cannot move an Elastic IP
+// address that was originally allocated for use in the EC2-VPC platform to the
+// EC2-Classic platform.
 func (c *Client) MoveAddressToVpc(ctx context.Context, params *MoveAddressToVpcInput, optFns ...func(*Options)) (*MoveAddressToVpcOutput, error) {
 	if params == nil {
 		params = &MoveAddressToVpcInput{}
@@ -87,25 +87,25 @@ func (c *Client) addOperationMoveAddressToVpcMiddlewares(stack *middleware.Stack
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -120,13 +120,16 @@ func (c *Client) addOperationMoveAddressToVpcMiddlewares(stack *middleware.Stack
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpMoveAddressToVpcValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opMoveAddressToVpc(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

@@ -6,13 +6,12 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockagent/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates an existing Amazon Bedrock Agent
+// Updates the configuration of an agent.
 func (c *Client) UpdateAgent(ctx context.Context, params *UpdateAgentInput, optFns ...func(*Options)) (*UpdateAgentOutput, error) {
 	if params == nil {
 		params = &UpdateAgentInput{}
@@ -28,49 +27,62 @@ func (c *Client) UpdateAgent(ctx context.Context, params *UpdateAgentInput, optF
 	return out, nil
 }
 
-// Update Agent Request
 type UpdateAgentInput struct {
 
-	// Id generated at the server side when an Agent is created
+	// The unique identifier of the agent.
 	//
 	// This member is required.
 	AgentId *string
 
-	// Name for a resource.
+	// Specifies a new name for the agent.
 	//
 	// This member is required.
 	AgentName *string
 
-	// ARN of a IAM role.
+	// The Amazon Resource Name (ARN) of the IAM role with permissions to invoke API
+	// operations on the agent.
 	//
 	// This member is required.
 	AgentResourceRoleArn *string
 
-	// A KMS key ARN
-	CustomerEncryptionKeyArn *string
-
-	// Description of the Resource.
-	Description *string
-
-	// ARN or name of a Bedrock model.
+	// Specifies a new foundation model to be used for orchestration by the agent.
+	//
+	// This member is required.
 	FoundationModel *string
 
-	// Max Session Time.
+	// The Amazon Resource Name (ARN) of the KMS key with which to encrypt the agent.
+	CustomerEncryptionKeyArn *string
+
+	// Specifies a new description of the agent.
+	Description *string
+
+	// The unique Guardrail configuration assigned to the agent when it is updated.
+	GuardrailConfiguration *types.GuardrailConfiguration
+
+	// The number of seconds for which Amazon Bedrock keeps information about a user's
+	// conversation with the agent.
+	//
+	// A user interaction remains active for the amount of time specified. If no
+	// conversation occurs during this time, the session expires and Amazon Bedrock
+	// deletes any data provided before the timeout.
 	IdleSessionTTLInSeconds *int32
 
-	// Instruction for the agent.
+	// Specifies new instructions that tell the agent what it should do and how it
+	// should interact with users.
 	Instruction *string
 
-	// Configuration for prompt override.
+	// Contains configurations to override prompts in different parts of an agent
+	// sequence. For more information, see [Advanced prompts].
+	//
+	// [Advanced prompts]: https://docs.aws.amazon.com/bedrock/latest/userguide/advanced-prompts.html
 	PromptOverrideConfiguration *types.PromptOverrideConfiguration
 
 	noSmithyDocumentSerde
 }
 
-// Update Agent Response
 type UpdateAgentOutput struct {
 
-	// Contains the information of an agent
+	// Contains details about the agent that was updated.
 	//
 	// This member is required.
 	Agent *types.Agent
@@ -103,25 +115,25 @@ func (c *Client) addOperationUpdateAgentMiddlewares(stack *middleware.Stack, opt
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -136,13 +148,16 @@ func (c *Client) addOperationUpdateAgentMiddlewares(stack *middleware.Stack, opt
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpUpdateAgentValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateAgent(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

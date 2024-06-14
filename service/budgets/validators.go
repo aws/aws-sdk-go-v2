@@ -390,6 +390,66 @@ func (m *validateOpExecuteBudgetAction) HandleInitialize(ctx context.Context, in
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpListTagsForResource struct {
+}
+
+func (*validateOpListTagsForResource) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListTagsForResource) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListTagsForResourceInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListTagsForResourceInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpTagResource struct {
+}
+
+func (*validateOpTagResource) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpTagResource) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*TagResourceInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpTagResourceInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpUntagResource struct {
+}
+
+func (*validateOpUntagResource) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUntagResource) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UntagResourceInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUntagResourceInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateBudgetAction struct {
 }
 
@@ -544,6 +604,18 @@ func addOpDescribeSubscribersForNotificationValidationMiddleware(stack *middlewa
 
 func addOpExecuteBudgetActionValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpExecuteBudgetAction{}, middleware.After)
+}
+
+func addOpListTagsForResourceValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListTagsForResource{}, middleware.After)
+}
+
+func addOpTagResourceValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpTagResource{}, middleware.After)
+}
+
+func addOpUntagResourceValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUntagResource{}, middleware.After)
 }
 
 func addOpUpdateBudgetActionValidationMiddleware(stack *middleware.Stack) error {
@@ -798,6 +870,41 @@ func validatePlannedBudgetLimits(v map[string]types.Spend) error {
 	}
 }
 
+func validateResourceTag(v *types.ResourceTag) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ResourceTag"}
+	if v.Key == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Key"))
+	}
+	if v.Value == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Value"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateResourceTagList(v []types.ResourceTag) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ResourceTagList"}
+	for i := range v {
+		if err := validateResourceTag(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateScpActionDefinition(v *types.ScpActionDefinition) error {
 	if v == nil {
 		return nil
@@ -934,6 +1041,11 @@ func validateOpCreateBudgetActionInput(v *CreateBudgetActionInput) error {
 			invalidParams.AddNested("Subscribers", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.ResourceTags != nil {
+		if err := validateResourceTagList(v.ResourceTags); err != nil {
+			invalidParams.AddNested("ResourceTags", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -959,6 +1071,11 @@ func validateOpCreateBudgetInput(v *CreateBudgetInput) error {
 	if v.NotificationsWithSubscribers != nil {
 		if err := validateNotificationWithSubscribersList(v.NotificationsWithSubscribers); err != nil {
 			invalidParams.AddNested("NotificationsWithSubscribers", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ResourceTags != nil {
+		if err := validateResourceTagList(v.ResourceTags); err != nil {
+			invalidParams.AddNested("ResourceTags", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -1328,6 +1445,61 @@ func validateOpExecuteBudgetActionInput(v *ExecuteBudgetActionInput) error {
 	}
 	if len(v.ExecutionType) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("ExecutionType"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListTagsForResourceInput(v *ListTagsForResourceInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListTagsForResourceInput"}
+	if v.ResourceARN == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceARN"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpTagResourceInput(v *TagResourceInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "TagResourceInput"}
+	if v.ResourceARN == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceARN"))
+	}
+	if v.ResourceTags == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceTags"))
+	} else if v.ResourceTags != nil {
+		if err := validateResourceTagList(v.ResourceTags); err != nil {
+			invalidParams.AddNested("ResourceTags", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUntagResourceInput(v *UntagResourceInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UntagResourceInput"}
+	if v.ResourceARN == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceARN"))
+	}
+	if v.ResourceTagKeys == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceTagKeys"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

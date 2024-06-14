@@ -6,12 +6,13 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/datazone/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
+// Publishes a listing (a record of an asset at a given time) or removes a listing
+// from the catalog.
 func (c *Client) CreateListingChangeSet(ctx context.Context, params *CreateListingChangeSetInput, optFns ...func(*Options)) (*CreateListingChangeSetOutput, error) {
 	if params == nil {
 		params = &CreateListingChangeSetInput{}
@@ -29,30 +30,31 @@ func (c *Client) CreateListingChangeSet(ctx context.Context, params *CreateListi
 
 type CreateListingChangeSetInput struct {
 
-	//
+	// Specifies whether to publish or unpublish a listing.
 	//
 	// This member is required.
 	Action types.ChangeAction
 
-	//
+	// The ID of the Amazon DataZone domain.
 	//
 	// This member is required.
 	DomainIdentifier *string
 
-	//
+	// The ID of the asset.
 	//
 	// This member is required.
 	EntityIdentifier *string
 
-	//
+	// The type of an entity.
 	//
 	// This member is required.
 	EntityType types.EntityType
 
-	//
+	// A unique, case-sensitive identifier that is provided to ensure the idempotency
+	// of the request.
 	ClientToken *string
 
-	//
+	// The revision of an asset.
 	EntityRevision *string
 
 	noSmithyDocumentSerde
@@ -60,17 +62,17 @@ type CreateListingChangeSetInput struct {
 
 type CreateListingChangeSetOutput struct {
 
-	//
+	// The ID of the listing (a record of an asset at a given time).
 	//
 	// This member is required.
 	ListingId *string
 
-	//
+	// The revision of a listing.
 	//
 	// This member is required.
 	ListingRevision *string
 
-	//
+	// Specifies the status of the listing.
 	//
 	// This member is required.
 	Status types.ListingStatus
@@ -103,25 +105,25 @@ func (c *Client) addOperationCreateListingChangeSetMiddlewares(stack *middleware
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -136,6 +138,9 @@ func (c *Client) addOperationCreateListingChangeSetMiddlewares(stack *middleware
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opCreateListingChangeSetMiddleware(stack, options); err != nil {
 		return err
 	}
@@ -145,7 +150,7 @@ func (c *Client) addOperationCreateListingChangeSetMiddlewares(stack *middleware
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateListingChangeSet(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

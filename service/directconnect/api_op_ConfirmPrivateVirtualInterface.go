@@ -6,16 +6,17 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/directconnect/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Accepts ownership of a private virtual interface created by another Amazon Web
-// Services account. After the virtual interface owner makes this call, the virtual
-// interface is created and attached to the specified virtual private gateway or
-// Direct Connect gateway, and is made available to handle traffic.
+// Services account.
+//
+// After the virtual interface owner makes this call, the virtual interface is
+// created and attached to the specified virtual private gateway or Direct Connect
+// gateway, and is made available to handle traffic.
 func (c *Client) ConfirmPrivateVirtualInterface(ctx context.Context, params *ConfirmPrivateVirtualInterfaceInput, optFns ...func(*Options)) (*ConfirmPrivateVirtualInterfaceOutput, error) {
 	if params == nil {
 		params = &ConfirmPrivateVirtualInterfaceInput{}
@@ -50,24 +51,33 @@ type ConfirmPrivateVirtualInterfaceInput struct {
 type ConfirmPrivateVirtualInterfaceOutput struct {
 
 	// The state of the virtual interface. The following are the possible values:
+	//
 	//   - confirming : The creation of the virtual interface is pending confirmation
 	//   from the virtual interface owner. If the owner of the virtual interface is
 	//   different from the owner of the connection on which it is provisioned, then the
 	//   virtual interface will remain in this state until it is confirmed by the virtual
 	//   interface owner.
+	//
 	//   - verifying : This state only applies to public virtual interfaces. Each
 	//   public virtual interface needs validation before the virtual interface can be
 	//   created.
+	//
 	//   - pending : A virtual interface is in this state from the time that it is
 	//   created until the virtual interface is ready to forward traffic.
+	//
 	//   - available : A virtual interface that is able to forward traffic.
+	//
 	//   - down : A virtual interface that is BGP down.
-	//   - deleting : A virtual interface is in this state immediately after calling
-	//   DeleteVirtualInterface until it can no longer forward traffic.
+	//
+	//   - deleting : A virtual interface is in this state immediately after calling DeleteVirtualInterface
+	//   until it can no longer forward traffic.
+	//
 	//   - deleted : A virtual interface that cannot forward traffic.
+	//
 	//   - rejected : The virtual interface owner has declined creation of the virtual
 	//   interface. If a virtual interface in the Confirming state is deleted by the
 	//   virtual interface owner, the virtual interface enters the Rejected state.
+	//
 	//   - unknown : The state of the virtual interface is not available.
 	VirtualInterfaceState types.VirtualInterfaceState
 
@@ -99,25 +109,25 @@ func (c *Client) addOperationConfirmPrivateVirtualInterfaceMiddlewares(stack *mi
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -132,13 +142,16 @@ func (c *Client) addOperationConfirmPrivateVirtualInterfaceMiddlewares(stack *mi
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpConfirmPrivateVirtualInterfaceValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opConfirmPrivateVirtualInterface(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

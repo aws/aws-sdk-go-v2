@@ -6,7 +6,6 @@
         "github.com/aws/aws-sdk-go-v2/service/internal/accept-encoding": "v1.0.5",
         "github.com/aws/aws-sdk-go-v2/service/internal/presigned-url": "v1.0.7",
         "github.com/aws/smithy-go": "v1.4.0",
-        "github.com/google/go-cmp": "v0.5.4",
         "github.com/jmespath/go-jmespath": "v0.4.0"
     },
     "files": [
@@ -142,6 +141,7 @@
         "api_op_ModifyDBSubnetGroup.go",
         "api_op_ModifyEventSubscription.go",
         "api_op_ModifyGlobalCluster.go",
+        "api_op_ModifyIntegration.go",
         "api_op_ModifyOptionGroup.go",
         "api_op_ModifyTenantDatabase.go",
         "api_op_PromoteReadReplica.go",
@@ -189,6 +189,7 @@
         "options.go",
         "protocol_test.go",
         "serializers.go",
+        "snapshot_test.go",
         "types/enums.go",
         "types/errors.go",
         "types/types.go",

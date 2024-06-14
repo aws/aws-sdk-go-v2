@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/ses/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -15,19 +14,26 @@ import (
 // Returns the current status of Easy DKIM signing for an entity. For domain name
 // identities, this operation also returns the DKIM tokens that are required for
 // Easy DKIM signing, and whether Amazon SES has successfully verified that these
-// tokens have been published. This operation takes a list of identities as input
-// and returns the following information for each:
+// tokens have been published.
+//
+// This operation takes a list of identities as input and returns the following
+// information for each:
+//
 //   - Whether Easy DKIM signing is enabled or disabled.
+//
 //   - A set of DKIM tokens that represent the identity. If the identity is an
 //     email address, the tokens represent the domain of that address.
+//
 //   - Whether Amazon SES has successfully verified the DKIM tokens published in
 //     the domain's DNS. This information is only returned for domain name identities,
 //     not for email addresses.
 //
 // This operation is throttled at one request per second and can only get DKIM
-// attributes for up to 100 identities at a time. For more information about
-// creating DNS records using DKIM tokens, go to the Amazon SES Developer Guide (https://docs.aws.amazon.com/ses/latest/dg/send-email-authentication-dkim-easy-managing.html)
-// .
+// attributes for up to 100 identities at a time.
+//
+// For more information about creating DNS records using DKIM tokens, go to the [Amazon SES Developer Guide].
+//
+// [Amazon SES Developer Guide]: https://docs.aws.amazon.com/ses/latest/dg/send-email-authentication-dkim-easy-managing.html
 func (c *Client) GetIdentityDkimAttributes(ctx context.Context, params *GetIdentityDkimAttributesInput, optFns ...func(*Options)) (*GetIdentityDkimAttributesOutput, error) {
 	if params == nil {
 		params = &GetIdentityDkimAttributesInput{}
@@ -46,9 +52,10 @@ func (c *Client) GetIdentityDkimAttributes(ctx context.Context, params *GetIdent
 // Represents a request for the status of Amazon SES Easy DKIM signing for an
 // identity. For domain identities, this request also returns the DKIM tokens that
 // are required for Easy DKIM signing, and whether Amazon SES successfully verified
-// that these tokens were published. For more information about Easy DKIM, see the
-// Amazon SES Developer Guide (https://docs.aws.amazon.com/ses/latest/dg/send-email-authentication-dkim-easy.html)
+// that these tokens were published. For more information about Easy DKIM, see the [Amazon SES Developer Guide]
 // .
+//
+// [Amazon SES Developer Guide]: https://docs.aws.amazon.com/ses/latest/dg/send-email-authentication-dkim-easy.html
 type GetIdentityDkimAttributesInput struct {
 
 	// A list of one or more verified identities - email addresses, domains, or both.
@@ -98,25 +105,25 @@ func (c *Client) addOperationGetIdentityDkimAttributesMiddlewares(stack *middlew
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -131,13 +138,16 @@ func (c *Client) addOperationGetIdentityDkimAttributesMiddlewares(stack *middlew
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpGetIdentityDkimAttributesValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetIdentityDkimAttributes(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

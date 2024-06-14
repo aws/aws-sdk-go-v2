@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/accessanalyzer/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -39,15 +38,17 @@ type GetGeneratedPolicyInput struct {
 
 	// The level of detail that you want to generate. You can specify whether to
 	// generate policies with placeholders for resource ARNs for actions that support
-	// resource level granularity in policies. For example, in the resource section of
-	// a policy, you can receive a placeholder such as
-	// "Resource":"arn:aws:s3:::${BucketName}" instead of "*" .
+	// resource level granularity in policies.
+	//
+	// For example, in the resource section of a policy, you can receive a placeholder
+	// such as "Resource":"arn:aws:s3:::${BucketName}" instead of "*" .
 	IncludeResourcePlaceholders *bool
 
 	// The level of detail that you want to generate. You can specify whether to
-	// generate service-level policies. IAM Access Analyzer uses
-	// iam:servicelastaccessed to identify services that have been used recently to
-	// create this service-level template.
+	// generate service-level policies.
+	//
+	// IAM Access Analyzer uses iam:servicelastaccessed to identify services that have
+	// been used recently to create this service-level template.
 	IncludeServiceLevelTemplate *bool
 
 	noSmithyDocumentSerde
@@ -95,25 +96,25 @@ func (c *Client) addOperationGetGeneratedPolicyMiddlewares(stack *middleware.Sta
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -128,13 +129,16 @@ func (c *Client) addOperationGetGeneratedPolicyMiddlewares(stack *middleware.Sta
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpGetGeneratedPolicyValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetGeneratedPolicy(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

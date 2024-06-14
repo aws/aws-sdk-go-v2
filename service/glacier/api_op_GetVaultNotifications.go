@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	glaciercust "github.com/aws/aws-sdk-go-v2/service/glacier/internal/customizations"
 	"github.com/aws/aws-sdk-go-v2/service/glacier/types"
 	"github.com/aws/smithy-go/middleware"
@@ -14,20 +13,23 @@ import (
 )
 
 // This operation retrieves the notification-configuration subresource of the
-// specified vault. For information about setting a notification configuration on a
-// vault, see SetVaultNotifications . If a notification configuration for a vault
-// is not set, the operation returns a 404 Not Found error. For more information
-// about vault notifications, see Configuring Vault Notifications in Amazon S3
-// Glacier (https://docs.aws.amazon.com/amazonglacier/latest/dev/configuring-notifications.html)
-// . An AWS account has full permission to perform all operations (actions).
+// specified vault.
+//
+// For information about setting a notification configuration on a vault, see SetVaultNotifications. If
+// a notification configuration for a vault is not set, the operation returns a
+// 404 Not Found error. For more information about vault notifications, see [Configuring Vault Notifications in Amazon S3 Glacier].
+//
+// An AWS account has full permission to perform all operations (actions).
 // However, AWS Identity and Access Management (IAM) users don't have any
 // permissions by default. You must grant them explicit permission to perform
-// specific actions. For more information, see Access Control Using AWS Identity
-// and Access Management (IAM) (https://docs.aws.amazon.com/amazonglacier/latest/dev/using-iam-with-amazon-glacier.html)
-// . For conceptual information and underlying REST API, see Configuring Vault
-// Notifications in Amazon S3 Glacier (https://docs.aws.amazon.com/amazonglacier/latest/dev/configuring-notifications.html)
-// and Get Vault Notification Configuration  (https://docs.aws.amazon.com/amazonglacier/latest/dev/api-vault-notifications-get.html)
-// in the Amazon Glacier Developer Guide.
+// specific actions. For more information, see [Access Control Using AWS Identity and Access Management (IAM)].
+//
+// For conceptual information and underlying REST API, see [Configuring Vault Notifications in Amazon S3 Glacier] and [Get Vault Notification Configuration] in the Amazon
+// Glacier Developer Guide.
+//
+// [Configuring Vault Notifications in Amazon S3 Glacier]: https://docs.aws.amazon.com/amazonglacier/latest/dev/configuring-notifications.html
+// [Access Control Using AWS Identity and Access Management (IAM)]: https://docs.aws.amazon.com/amazonglacier/latest/dev/using-iam-with-amazon-glacier.html
+// [Get Vault Notification Configuration]: https://docs.aws.amazon.com/amazonglacier/latest/dev/api-vault-notifications-get.html
 func (c *Client) GetVaultNotifications(ctx context.Context, params *GetVaultNotificationsInput, optFns ...func(*Options)) (*GetVaultNotificationsOutput, error) {
 	if params == nil {
 		params = &GetVaultNotificationsInput{}
@@ -98,25 +100,25 @@ func (c *Client) addOperationGetVaultNotificationsMiddlewares(stack *middleware.
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -131,13 +133,16 @@ func (c *Client) addOperationGetVaultNotificationsMiddlewares(stack *middleware.
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpGetVaultNotificationsValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetVaultNotifications(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

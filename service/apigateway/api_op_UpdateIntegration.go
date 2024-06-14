@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/apigateway/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -46,8 +45,9 @@ type UpdateIntegrationInput struct {
 	// This member is required.
 	RestApiId *string
 
-	// For more information about supported patch operations, see Patch Operations (https://docs.aws.amazon.com/apigateway/latest/api/patch-operations.html)
-	// .
+	// For more information about supported patch operations, see [Patch Operations].
+	//
+	// [Patch Operations]: https://docs.aws.amazon.com/apigateway/latest/api/patch-operations.html
 	PatchOperations []types.PatchOperation
 
 	noSmithyDocumentSerde
@@ -79,9 +79,10 @@ type UpdateIntegrationOutput struct {
 
 	// Specifies how to handle request payload content type conversions. Supported
 	// values are CONVERT_TO_BINARY and CONVERT_TO_TEXT , with the following behaviors:
-	// If this property is not defined, the request payload will be passed through from
-	// the method request to integration request without modification, provided that
-	// the passthroughBehavior is configured to support payload pass-through.
+	//
+	// If this property is not defined, the request payload will be passed through
+	// from the method request to integration request without modification, provided
+	// that the passthroughBehavior is configured to support payload pass-through.
 	ContentHandling types.ContentHandlingStrategy
 
 	// Specifies the credentials required for the integration, if any. For AWS
@@ -142,15 +143,18 @@ type UpdateIntegrationOutput struct {
 	TlsConfig *types.TlsConfig
 
 	// Specifies an API method integration type. The valid value is one of the
-	// following: For the HTTP and HTTP proxy integrations, each integration can
-	// specify a protocol ( http/https ), port and path. Standard 80 and 443 ports are
-	// supported as well as custom ports above 1024. An HTTP or HTTP proxy integration
-	// with a connectionType of VPC_LINK is referred to as a private integration and
-	// uses a VpcLink to connect API Gateway to a network load balancer of a VPC.
+	// following:
+	//
+	// For the HTTP and HTTP proxy integrations, each integration can specify a
+	// protocol ( http/https ), port and path. Standard 80 and 443 ports are supported
+	// as well as custom ports above 1024. An HTTP or HTTP proxy integration with a
+	// connectionType of VPC_LINK is referred to as a private integration and uses a
+	// VpcLink to connect API Gateway to a network load balancer of a VPC.
 	Type types.IntegrationType
 
-	// Specifies Uniform Resource Identifier (URI) of the integration endpoint. For
-	// HTTP or HTTP_PROXY integrations, the URI must be a fully formed, encoded
+	// Specifies Uniform Resource Identifier (URI) of the integration endpoint.
+	//
+	// For HTTP or HTTP_PROXY integrations, the URI must be a fully formed, encoded
 	// HTTP(S) URL according to the RFC-3986 specification for standard integrations.
 	// If connectionType is VPC_LINK specify the Network Load Balancer DNS name. For
 	// AWS or AWS_PROXY integrations, the URI is of the form
@@ -198,25 +202,25 @@ func (c *Client) addOperationUpdateIntegrationMiddlewares(stack *middleware.Stac
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -231,13 +235,16 @@ func (c *Client) addOperationUpdateIntegrationMiddlewares(stack *middleware.Stac
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpUpdateIntegrationValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateIntegration(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

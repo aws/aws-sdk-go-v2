@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/guardduty/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -49,8 +48,9 @@ type ListMembersInput struct {
 	// Specifies whether to only return associated members or to return all members
 	// (including members who haven't been invited yet or have been disassociated).
 	// Member accounts must have been previously associated with the GuardDuty
-	// administrator account using Create Members (https://docs.aws.amazon.com/guardduty/latest/APIReference/API_CreateMembers.html)
-	// .
+	// administrator account using [Create Members]Create Members .
+	//
+	// [Create Members]: https://docs.aws.amazon.com/guardduty/latest/APIReference/API_CreateMembers.html
 	OnlyAssociated *string
 
 	noSmithyDocumentSerde
@@ -58,8 +58,10 @@ type ListMembersInput struct {
 
 type ListMembersOutput struct {
 
-	// A list of members. The values for email and invitedAt are available only if the
-	// member accounts are added by invitation.
+	// A list of members.
+	//
+	// The values for email and invitedAt are available only if the member accounts
+	// are added by invitation.
 	Members []types.Member
 
 	// The pagination parameter to be used on the next list operation to retrieve more
@@ -94,25 +96,25 @@ func (c *Client) addOperationListMembersMiddlewares(stack *middleware.Stack, opt
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -127,13 +129,16 @@ func (c *Client) addOperationListMembersMiddlewares(stack *middleware.Stack, opt
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpListMembersValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListMembers(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

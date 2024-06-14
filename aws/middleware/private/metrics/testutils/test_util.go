@@ -52,6 +52,10 @@ type StreamingBodyBuildHandler struct {
 	Result interface{}
 }
 
+func NoopRequestCloner(i interface{}) interface{} {
+	return i
+}
+
 func (NoopInitializeHandler) HandleInitialize(ctx context.Context, in middleware.InitializeInput) (
 	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
 ) {

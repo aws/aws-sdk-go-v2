@@ -1258,6 +1258,41 @@ func addOpUpdatePodIdentityAssociationValidationMiddleware(stack *middleware.Sta
 	return stack.Initialize.Add(&validateOpUpdatePodIdentityAssociation{}, middleware.After)
 }
 
+func validateAddonPodIdentityAssociations(v *types.AddonPodIdentityAssociations) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AddonPodIdentityAssociations"}
+	if v.ServiceAccount == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ServiceAccount"))
+	}
+	if v.RoleArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RoleArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAddonPodIdentityAssociationsList(v []types.AddonPodIdentityAssociations) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AddonPodIdentityAssociationsList"}
+	for i := range v {
+		if err := validateAddonPodIdentityAssociations(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateConnectorConfigRequest(v *types.ConnectorConfigRequest) error {
 	if v == nil {
 		return nil
@@ -1425,6 +1460,11 @@ func validateOpCreateAddonInput(v *CreateAddonInput) error {
 	}
 	if v.AddonName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AddonName"))
+	}
+	if v.PodIdentityAssociations != nil {
+		if err := validateAddonPodIdentityAssociationsList(v.PodIdentityAssociations); err != nil {
+			invalidParams.AddNested("PodIdentityAssociations", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2159,6 +2199,11 @@ func validateOpUpdateAddonInput(v *UpdateAddonInput) error {
 	}
 	if v.AddonName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AddonName"))
+	}
+	if v.PodIdentityAssociations != nil {
+		if err := validateAddonPodIdentityAssociationsList(v.PodIdentityAssociations); err != nil {
+			invalidParams.AddNested("PodIdentityAssociations", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

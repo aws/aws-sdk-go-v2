@@ -233,6 +233,9 @@ var defaultPartitions = endpoints.Partitions{
 				Deprecated: aws.TrueTernary,
 			},
 			endpoints.EndpointKey{
+				Region: "me-central-1",
+			}: endpoints.Endpoint{},
+			endpoints.EndpointKey{
 				Region: "sa-east-1",
 			}: endpoints.Endpoint{},
 			endpoints.EndpointKey{
@@ -311,7 +314,7 @@ var defaultPartitions = endpoints.Partitions{
 			endpoints.EndpointKey{
 				Region: "cn-northwest-1",
 			}: endpoints.Endpoint{
-				Hostname: "subscribe.mediaconvert.cn-northwest-1.amazonaws.com.cn",
+				Hostname: "mediaconvert.cn-northwest-1.amazonaws.com.cn",
 				CredentialScope: endpoints.CredentialScope{
 					Region: "cn-northwest-1",
 				},

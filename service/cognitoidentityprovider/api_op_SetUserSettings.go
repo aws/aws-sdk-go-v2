@@ -11,17 +11,22 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// This action is no longer supported. You can use it to configure only SMS MFA.
+//	This action is no longer supported. You can use it to configure only SMS MFA.
+//
 // You can't use it to configure time-based one-time password (TOTP) software token
-// MFA. To configure either type of MFA, use SetUserMFAPreference (https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_SetUserMFAPreference.html)
-// instead. Authorize this action with a signed-in user's access token. It must
-// include the scope aws.cognito.signin.user.admin . Amazon Cognito doesn't
-// evaluate Identity and Access Management (IAM) policies in requests for this API
-// operation. For this operation, you can't use IAM credentials to authorize
-// requests, and you can't grant IAM permissions in policies. For more information
-// about authorization models in Amazon Cognito, see Using the Amazon Cognito user
-// pools API and user pool endpoints (https://docs.aws.amazon.com/cognito/latest/developerguide/user-pools-API-operations.html)
-// .
+// MFA. To configure either type of MFA, use [SetUserMFAPreference]instead.
+//
+// Authorize this action with a signed-in user's access token. It must include the
+// scope aws.cognito.signin.user.admin .
+//
+// Amazon Cognito doesn't evaluate Identity and Access Management (IAM) policies
+// in requests for this API operation. For this operation, you can't use IAM
+// credentials to authorize requests, and you can't grant IAM permissions in
+// policies. For more information about authorization models in Amazon Cognito, see
+// [Using the Amazon Cognito user pools API and user pool endpoints].
+//
+// [Using the Amazon Cognito user pools API and user pool endpoints]: https://docs.aws.amazon.com/cognito/latest/developerguide/user-pools-API-operations.html
+// [SetUserMFAPreference]: https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_SetUserMFAPreference.html
 func (c *Client) SetUserSettings(ctx context.Context, params *SetUserSettingsInput, optFns ...func(*Options)) (*SetUserSettingsOutput, error) {
 	if params == nil {
 		params = &SetUserSettingsInput{}
@@ -85,22 +90,22 @@ func (c *Client) addOperationSetUserSettingsMiddlewares(stack *middleware.Stack,
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -115,13 +120,16 @@ func (c *Client) addOperationSetUserSettingsMiddlewares(stack *middleware.Stack,
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpSetUserSettingsValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opSetUserSettings(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

@@ -7,8 +7,51 @@ import (
 	"time"
 )
 
-// The choice level additional resources for a custom lens. This field does not
-// apply to Amazon Web Services official lenses.
+// Account-level: Input for the Jira configuration.
+type AccountJiraConfigurationInput struct {
+
+	// Account-level: Configuration status of the Jira integration.
+	IntegrationStatus IntegrationStatusInput
+
+	// Account-level: Jira issue management status.
+	IssueManagementStatus AccountJiraIssueManagementStatus
+
+	// Account-level: Jira issue management type.
+	IssueManagementType IssueManagementType
+
+	// Account-level: Jira project key to sync workloads to.
+	JiraProjectKey *string
+
+	noSmithyDocumentSerde
+}
+
+// Account-level: Output configuration of the Jira integration.
+type AccountJiraConfigurationOutput struct {
+
+	// Account-level: Configuration status of the Jira integration.
+	IntegrationStatus IntegrationStatus
+
+	// Account-level: Jira issue management status.
+	IssueManagementStatus AccountJiraIssueManagementStatus
+
+	// Account-level: Jira issue management type.
+	IssueManagementType IssueManagementType
+
+	// Account-level: Jira project key to sync workloads to.
+	JiraProjectKey *string
+
+	// Account-level: Status message on configuration of the Jira integration.
+	StatusMessage *string
+
+	// Account-level: Jira subdomain URL.
+	Subdomain *string
+
+	noSmithyDocumentSerde
+}
+
+// The choice level additional resources for a custom lens.
+//
+// This field does not apply to Amazon Web Services official lenses.
 type AdditionalResources struct {
 
 	// The URLs for additional resources, either helpful resources or improvement
@@ -30,30 +73,43 @@ type Answer struct {
 	// List of choices available for a question.
 	Choices []Choice
 
-	// The helpful resource text to be displayed for a custom lens. This field does
-	// not apply to Amazon Web Services official lenses.
+	// The helpful resource text to be displayed for a custom lens.
+	//
+	// This field does not apply to Amazon Web Services official lenses.
 	HelpfulResourceDisplayText *string
 
-	// The helpful resource URL. For Amazon Web Services official lenses, this is the
-	// helpful resource URL for a question or choice. For custom lenses, this is the
-	// helpful resource URL for a question and is only provided if
-	// HelpfulResourceDisplayText was specified for the question.
+	// The helpful resource URL.
+	//
+	// For Amazon Web Services official lenses, this is the helpful resource URL for a
+	// question or choice.
+	//
+	// For custom lenses, this is the helpful resource URL for a question and is only
+	// provided if HelpfulResourceDisplayText was specified for the question.
 	HelpfulResourceUrl *string
 
 	// The improvement plan URL for a question in an Amazon Web Services official
-	// lenses. This value is only available if the question has been answered. This
-	// value does not apply to custom lenses.
+	// lenses.
+	//
+	// This value is only available if the question has been answered.
+	//
+	// This value does not apply to custom lenses.
 	ImprovementPlanUrl *string
 
 	// Defines whether this question is applicable to a lens review.
 	IsApplicable *bool
 
-	// The notes associated with the workload. For a review template, these are the
-	// notes that will be associated with the workload when the template is applied.
+	// Configuration of the Jira integration.
+	JiraConfiguration *JiraConfiguration
+
+	// The notes associated with the workload.
+	//
+	// For a review template, these are the notes that will be associated with the
+	// workload when the template is applied.
 	Notes *string
 
-	// The ID used to identify a pillar, for example, security . A pillar is identified
-	// by its PillarReviewSummary$PillarId .
+	// The ID used to identify a pillar, for example, security .
+	//
+	// A pillar is identified by its PillarReviewSummary$PillarId.
 	PillarId *string
 
 	// The description of the question.
@@ -71,8 +127,9 @@ type Answer struct {
 	// The risk for a given workload, lens review, pillar, or question.
 	Risk Risk
 
-	// List of selected choice IDs in a question answer. The values entered replace
-	// the previously selected choices.
+	// List of selected choice IDs in a question answer.
+	//
+	// The values entered replace the previously selected choices.
 	SelectedChoices []string
 
 	noSmithyDocumentSerde
@@ -90,8 +147,12 @@ type AnswerSummary struct {
 	// Defines whether this question is applicable to a lens review.
 	IsApplicable *bool
 
-	// The ID used to identify a pillar, for example, security . A pillar is identified
-	// by its PillarReviewSummary$PillarId .
+	// Configuration of the Jira integration.
+	JiraConfiguration *JiraConfiguration
+
+	// The ID used to identify a pillar, for example, security .
+	//
+	// A pillar is identified by its PillarReviewSummary$PillarId.
 	PillarId *string
 
 	// The ID of the question.
@@ -109,8 +170,9 @@ type AnswerSummary struct {
 	// The risk for a given workload, lens review, pillar, or question.
 	Risk Risk
 
-	// List of selected choice IDs in a question answer. The values entered replace
-	// the previously selected choices.
+	// List of selected choice IDs in a question answer.
+	//
+	// The values entered replace the previously selected choices.
 	SelectedChoices []string
 
 	noSmithyDocumentSerde
@@ -154,8 +216,9 @@ type CheckDetail struct {
 	// Trusted Advisor check name.
 	Name *string
 
-	// The ID used to identify a pillar, for example, security . A pillar is identified
-	// by its PillarReviewSummary$PillarId .
+	// The ID used to identify a pillar, for example, security .
+	//
+	// A pillar is identified by its PillarReviewSummary$PillarId.
 	PillarId *string
 
 	// Provider of the check related to the best practice.
@@ -197,8 +260,9 @@ type CheckSummary struct {
 	// Trusted Advisor check name.
 	Name *string
 
-	// The ID used to identify a pillar, for example, security . A pillar is identified
-	// by its PillarReviewSummary$PillarId .
+	// The ID used to identify a pillar, for example, security .
+	//
+	// A pillar is identified by its PillarReviewSummary$PillarId.
 	PillarId *string
 
 	// Provider of the check related to the best practice.
@@ -219,9 +283,10 @@ type CheckSummary struct {
 // A choice available to answer question.
 type Choice struct {
 
-	// The additional resources for a choice in a custom lens. A choice can have up to
-	// two additional resources: one of type HELPFUL_RESOURCE , one of type
-	// IMPROVEMENT_PLAN , or both.
+	// The additional resources for a choice in a custom lens.
+	//
+	// A choice can have up to two additional resources: one of type HELPFUL_RESOURCE ,
+	// one of type IMPROVEMENT_PLAN , or both.
 	AdditionalResources []AdditionalResources
 
 	// The ID of a choice.
@@ -230,12 +295,16 @@ type Choice struct {
 	// The description of a choice.
 	Description *string
 
-	// The helpful resource (both text and URL) for a particular choice. This field
-	// only applies to custom lenses. Each choice can have only one helpful resource.
+	// The helpful resource (both text and URL) for a particular choice.
+	//
+	// This field only applies to custom lenses. Each choice can have only one helpful
+	// resource.
 	HelpfulResource *ChoiceContent
 
-	// The improvement plan (both text and URL) for a particular choice. This field
-	// only applies to custom lenses. Each choice can have only one improvement plan.
+	// The improvement plan (both text and URL) for a particular choice.
+	//
+	// This field only applies to custom lenses. Each choice can have only one
+	// improvement plan.
 	ImprovementPlan *ChoiceContent
 
 	// The title of a choice.
@@ -299,8 +368,11 @@ type ChoiceImprovementPlan struct {
 	DisplayText *string
 
 	// The improvement plan URL for a question in an Amazon Web Services official
-	// lenses. This value is only available if the question has been answered. This
-	// value does not apply to custom lenses.
+	// lenses.
+	//
+	// This value is only available if the question has been answered.
+	//
+	// This value does not apply to custom lenses.
 	ImprovementPlanUrl *string
 
 	noSmithyDocumentSerde
@@ -349,9 +421,10 @@ type ConsolidatedReportMetric struct {
 	// Services Region.
 	WorkloadId *string
 
-	// The name of the workload. The name must be unique within an account within an
-	// Amazon Web Services Region. Spaces and capitalization are ignored when checking
-	// for uniqueness.
+	// The name of the workload.
+	//
+	// The name must be unique within an account within an Amazon Web Services Region.
+	// Spaces and capitalization are ignored when checking for uniqueness.
 	WorkloadName *string
 
 	noSmithyDocumentSerde
@@ -361,15 +434,22 @@ type ConsolidatedReportMetric struct {
 type ImprovementSummary struct {
 
 	// The improvement plan URL for a question in an Amazon Web Services official
-	// lenses. This value is only available if the question has been answered. This
-	// value does not apply to custom lenses.
+	// lenses.
+	//
+	// This value is only available if the question has been answered.
+	//
+	// This value does not apply to custom lenses.
 	ImprovementPlanUrl *string
 
 	// The improvement plan details.
 	ImprovementPlans []ChoiceImprovementPlan
 
-	// The ID used to identify a pillar, for example, security . A pillar is identified
-	// by its PillarReviewSummary$PillarId .
+	// Configuration of the Jira integration.
+	JiraConfiguration *JiraConfiguration
+
+	// The ID used to identify a pillar, for example, security .
+	//
+	// A pillar is identified by its PillarReviewSummary$PillarId.
 	PillarId *string
 
 	// The ID of the question.
@@ -380,6 +460,27 @@ type ImprovementSummary struct {
 
 	// The risk for a given workload, lens review, pillar, or question.
 	Risk Risk
+
+	noSmithyDocumentSerde
+}
+
+// Configuration of the Jira integration.
+type JiraConfiguration struct {
+
+	// The URL of the associated Jira issue.
+	JiraIssueUrl *string
+
+	// The date and time recorded.
+	LastSyncedTime *time.Time
+
+	noSmithyDocumentSerde
+}
+
+// Selected questions in the workload.
+type JiraSelectedQuestionConfiguration struct {
+
+	// Selected pillars in the workload.
+	SelectedPillars []SelectedPillar
 
 	noSmithyDocumentSerde
 }
@@ -429,13 +530,22 @@ type LensMetric struct {
 // A lens review of a question.
 type LensReview struct {
 
-	// The alias of the lens. For Amazon Web Services official lenses, this is either
-	// the lens alias, such as serverless , or the lens ARN, such as
+	// Jira configuration status of the Lens review.
+	JiraConfiguration *JiraSelectedQuestionConfiguration
+
+	// The alias of the lens.
+	//
+	// For Amazon Web Services official lenses, this is either the lens alias, such as
+	// serverless , or the lens ARN, such as
 	// arn:aws:wellarchitected:us-east-1::lens/serverless . Note that some operations
 	// (such as ExportLens and CreateLensShare) are not permitted on Amazon Web
-	// Services official lenses. For custom lenses, this is the lens ARN, such as
+	// Services official lenses.
+	//
+	// For custom lenses, this is the lens ARN, such as
 	// arn:aws:wellarchitected:us-west-2:123456789012:lens/0123456789abcdef01234567890abcdef
-	// . Each lens is identified by its LensSummary$LensAlias .
+	// .
+	//
+	// Each lens is identified by its LensSummary$LensAlias.
 	LensAlias *string
 
 	// The ARN for the lens.
@@ -453,8 +563,10 @@ type LensReview struct {
 	// The token to use to retrieve the next set of results.
 	NextToken *string
 
-	// The notes associated with the workload. For a review template, these are the
-	// notes that will be associated with the workload when the template is applied.
+	// The notes associated with the workload.
+	//
+	// For a review template, these are the notes that will be associated with the
+	// workload when the template is applied.
 	Notes *string
 
 	// List of pillar review summaries of lens review in a workload.
@@ -478,18 +590,26 @@ type LensReview struct {
 // A report of a lens review.
 type LensReviewReport struct {
 
-	// The Base64-encoded string representation of a lens review report. This data can
-	// be used to create a PDF file. Only returned by GetConsolidatedReport when PDF
-	// format is requested.
+	// The Base64-encoded string representation of a lens review report.
+	//
+	// This data can be used to create a PDF file.
+	//
+	// Only returned by GetConsolidatedReport when PDF format is requested.
 	Base64String *string
 
-	// The alias of the lens. For Amazon Web Services official lenses, this is either
-	// the lens alias, such as serverless , or the lens ARN, such as
+	// The alias of the lens.
+	//
+	// For Amazon Web Services official lenses, this is either the lens alias, such as
+	// serverless , or the lens ARN, such as
 	// arn:aws:wellarchitected:us-east-1::lens/serverless . Note that some operations
 	// (such as ExportLens and CreateLensShare) are not permitted on Amazon Web
-	// Services official lenses. For custom lenses, this is the lens ARN, such as
+	// Services official lenses.
+	//
+	// For custom lenses, this is the lens ARN, such as
 	// arn:aws:wellarchitected:us-west-2:123456789012:lens/0123456789abcdef01234567890abcdef
-	// . Each lens is identified by its LensSummary$LensAlias .
+	// .
+	//
+	// Each lens is identified by its LensSummary$LensAlias.
 	LensAlias *string
 
 	// The ARN for the lens.
@@ -501,13 +621,19 @@ type LensReviewReport struct {
 // A lens review summary of a workload.
 type LensReviewSummary struct {
 
-	// The alias of the lens. For Amazon Web Services official lenses, this is either
-	// the lens alias, such as serverless , or the lens ARN, such as
+	// The alias of the lens.
+	//
+	// For Amazon Web Services official lenses, this is either the lens alias, such as
+	// serverless , or the lens ARN, such as
 	// arn:aws:wellarchitected:us-east-1::lens/serverless . Note that some operations
 	// (such as ExportLens and CreateLensShare) are not permitted on Amazon Web
-	// Services official lenses. For custom lenses, this is the lens ARN, such as
+	// Services official lenses.
+	//
+	// For custom lenses, this is the lens ARN, such as
 	// arn:aws:wellarchitected:us-west-2:123456789012:lens/0123456789abcdef01234567890abcdef
-	// . Each lens is identified by its LensSummary$LensAlias .
+	// .
+	//
+	// Each lens is identified by its LensSummary$LensAlias.
 	LensAlias *string
 
 	// The ARN for the lens.
@@ -565,13 +691,19 @@ type LensSummary struct {
 	// The description of the lens.
 	Description *string
 
-	// The alias of the lens. For Amazon Web Services official lenses, this is either
-	// the lens alias, such as serverless , or the lens ARN, such as
+	// The alias of the lens.
+	//
+	// For Amazon Web Services official lenses, this is either the lens alias, such as
+	// serverless , or the lens ARN, such as
 	// arn:aws:wellarchitected:us-east-1::lens/serverless . Note that some operations
 	// (such as ExportLens and CreateLensShare) are not permitted on Amazon Web
-	// Services official lenses. For custom lenses, this is the lens ARN, such as
+	// Services official lenses.
+	//
+	// For custom lenses, this is the lens ARN, such as
 	// arn:aws:wellarchitected:us-west-2:123456789012:lens/0123456789abcdef01234567890abcdef
-	// . Each lens is identified by its LensSummary$LensAlias .
+	// .
+	//
+	// Each lens is identified by its LensSummary$LensAlias.
 	LensAlias *string
 
 	// The ARN of the lens.
@@ -607,13 +739,19 @@ type LensUpgradeSummary struct {
 	// The latest version of the lens.
 	LatestLensVersion *string
 
-	// The alias of the lens. For Amazon Web Services official lenses, this is either
-	// the lens alias, such as serverless , or the lens ARN, such as
+	// The alias of the lens.
+	//
+	// For Amazon Web Services official lenses, this is either the lens alias, such as
+	// serverless , or the lens ARN, such as
 	// arn:aws:wellarchitected:us-east-1::lens/serverless . Note that some operations
 	// (such as ExportLens and CreateLensShare) are not permitted on Amazon Web
-	// Services official lenses. For custom lenses, this is the lens ARN, such as
+	// Services official lenses.
+	//
+	// For custom lenses, this is the lens ARN, such as
 	// arn:aws:wellarchitected:us-west-2:123456789012:lens/0123456789abcdef01234567890abcdef
-	// . Each lens is identified by its LensSummary$LensAlias .
+	// .
+	//
+	// Each lens is identified by its LensSummary$LensAlias.
 	LensAlias *string
 
 	// The ARN for the lens.
@@ -622,18 +760,20 @@ type LensUpgradeSummary struct {
 	// ResourceArn of the lens being upgraded
 	ResourceArn *string
 
-	// The name of the workload. The name must be unique within an account within an
-	// Amazon Web Services Region. Spaces and capitalization are ignored when checking
-	// for uniqueness.
+	// The name of the workload.
+	//
+	// The name must be unique within an account within an Amazon Web Services Region.
+	// Spaces and capitalization are ignored when checking for uniqueness.
 	ResourceName *string
 
 	// The ID assigned to the workload. This ID is unique within an Amazon Web
 	// Services Region.
 	WorkloadId *string
 
-	// The name of the workload. The name must be unique within an account within an
-	// Amazon Web Services Region. Spaces and capitalization are ignored when checking
-	// for uniqueness.
+	// The name of the workload.
+	//
+	// The name must be unique within an account within an Amazon Web Services Region.
+	// Spaces and capitalization are ignored when checking for uniqueness.
 	WorkloadName *string
 
 	noSmithyDocumentSerde
@@ -642,11 +782,14 @@ type LensUpgradeSummary struct {
 // A milestone return object.
 type Milestone struct {
 
-	// The name of the milestone in a workload. Milestone names must be unique within
-	// a workload.
+	// The name of the milestone in a workload.
+	//
+	// Milestone names must be unique within a workload.
 	MilestoneName *string
 
-	// The milestone number. A workload can have a maximum of 100 milestones.
+	// The milestone number.
+	//
+	// A workload can have a maximum of 100 milestones.
 	MilestoneNumber *int32
 
 	// The date and time recorded.
@@ -661,11 +804,14 @@ type Milestone struct {
 // A milestone summary return object.
 type MilestoneSummary struct {
 
-	// The name of the milestone in a workload. Milestone names must be unique within
-	// a workload.
+	// The name of the milestone in a workload.
+	//
+	// Milestone names must be unique within a workload.
 	MilestoneName *string
 
-	// The milestone number. A workload can have a maximum of 100 milestones.
+	// The milestone number.
+	//
+	// A workload can have a maximum of 100 milestones.
 	MilestoneNumber *int32
 
 	// The date and time recorded.
@@ -695,8 +841,9 @@ type PillarDifference struct {
 	// Indicates the type of change to the pillar.
 	DifferenceStatus DifferenceStatus
 
-	// The ID used to identify a pillar, for example, security . A pillar is identified
-	// by its PillarReviewSummary$PillarId .
+	// The ID used to identify a pillar, for example, security .
+	//
+	// A pillar is identified by its PillarReviewSummary$PillarId.
 	PillarId *string
 
 	// The name of the pillar.
@@ -711,8 +858,9 @@ type PillarDifference struct {
 // A metric for a particular pillar in a lens.
 type PillarMetric struct {
 
-	// The ID used to identify a pillar, for example, security . A pillar is identified
-	// by its PillarReviewSummary$PillarId .
+	// The ID used to identify a pillar, for example, security .
+	//
+	// A pillar is identified by its PillarReviewSummary$PillarId.
 	PillarId *string
 
 	// The questions that have been identified as risks in the pillar.
@@ -727,12 +875,15 @@ type PillarMetric struct {
 // A pillar review summary of a lens review.
 type PillarReviewSummary struct {
 
-	// The notes associated with the workload. For a review template, these are the
-	// notes that will be associated with the workload when the template is applied.
+	// The notes associated with the workload.
+	//
+	// For a review template, these are the notes that will be associated with the
+	// workload when the template is applied.
 	Notes *string
 
-	// The ID used to identify a pillar, for example, security . A pillar is identified
-	// by its PillarReviewSummary$PillarId .
+	// The ID used to identify a pillar, for example, security .
+	//
+	// A pillar is identified by its PillarReviewSummary$PillarId.
 	PillarId *string
 
 	// The name of the pillar.
@@ -820,9 +971,10 @@ type ProfileNotificationSummary struct {
 	// Services Region.
 	WorkloadId *string
 
-	// The name of the workload. The name must be unique within an account within an
-	// Amazon Web Services Region. Spaces and capitalization are ignored when checking
-	// for uniqueness.
+	// The name of the workload.
+	//
+	// The name must be unique within an account within an Amazon Web Services Region.
+	// Spaces and capitalization are ignored when checking for uniqueness.
 	WorkloadName *string
 
 	noSmithyDocumentSerde
@@ -1010,8 +1162,10 @@ type ReviewTemplate struct {
 	// The lenses applied to the review template.
 	Lenses []string
 
-	// The notes associated with the workload. For a review template, these are the
-	// notes that will be associated with the workload when the template is applied.
+	// The notes associated with the workload.
+	//
+	// For a review template, these are the notes that will be associated with the
+	// workload when the template is applied.
 	Notes *string
 
 	// An Amazon Web Services account ID.
@@ -1054,30 +1208,40 @@ type ReviewTemplateAnswer struct {
 	// List of choices available for a question.
 	Choices []Choice
 
-	// The helpful resource text to be displayed for a custom lens. This field does
-	// not apply to Amazon Web Services official lenses.
+	// The helpful resource text to be displayed for a custom lens.
+	//
+	// This field does not apply to Amazon Web Services official lenses.
 	HelpfulResourceDisplayText *string
 
-	// The helpful resource URL. For Amazon Web Services official lenses, this is the
-	// helpful resource URL for a question or choice. For custom lenses, this is the
-	// helpful resource URL for a question and is only provided if
-	// HelpfulResourceDisplayText was specified for the question.
+	// The helpful resource URL.
+	//
+	// For Amazon Web Services official lenses, this is the helpful resource URL for a
+	// question or choice.
+	//
+	// For custom lenses, this is the helpful resource URL for a question and is only
+	// provided if HelpfulResourceDisplayText was specified for the question.
 	HelpfulResourceUrl *string
 
 	// The improvement plan URL for a question in an Amazon Web Services official
-	// lenses. This value is only available if the question has been answered. This
-	// value does not apply to custom lenses.
+	// lenses.
+	//
+	// This value is only available if the question has been answered.
+	//
+	// This value does not apply to custom lenses.
 	ImprovementPlanUrl *string
 
 	// Defines whether this question is applicable to a lens review.
 	IsApplicable *bool
 
-	// The notes associated with the workload. For a review template, these are the
-	// notes that will be associated with the workload when the template is applied.
+	// The notes associated with the workload.
+	//
+	// For a review template, these are the notes that will be associated with the
+	// workload when the template is applied.
 	Notes *string
 
-	// The ID used to identify a pillar, for example, security . A pillar is identified
-	// by its PillarReviewSummary$PillarId .
+	// The ID used to identify a pillar, for example, security .
+	//
+	// A pillar is identified by its PillarReviewSummary$PillarId.
 	PillarId *string
 
 	// The description of the question.
@@ -1092,8 +1256,9 @@ type ReviewTemplateAnswer struct {
 	// The reason why the question is not applicable to your review template.
 	Reason AnswerReason
 
-	// List of selected choice IDs in a question answer. The values entered replace
-	// the previously selected choices.
+	// List of selected choice IDs in a question answer.
+	//
+	// The values entered replace the previously selected choices.
 	SelectedChoices []string
 
 	noSmithyDocumentSerde
@@ -1114,8 +1279,9 @@ type ReviewTemplateAnswerSummary struct {
 	// Defines whether this question is applicable to a lens review.
 	IsApplicable *bool
 
-	// The ID used to identify a pillar, for example, security . A pillar is identified
-	// by its PillarReviewSummary$PillarId .
+	// The ID used to identify a pillar, for example, security .
+	//
+	// A pillar is identified by its PillarReviewSummary$PillarId.
 	PillarId *string
 
 	// The ID of the question.
@@ -1130,8 +1296,9 @@ type ReviewTemplateAnswerSummary struct {
 	// The reason why a choice is not-applicable to a question in the review template.
 	Reason AnswerReason
 
-	// List of selected choice IDs in a question answer. The values entered replace
-	// the previously selected choices.
+	// List of selected choice IDs in a question answer.
+	//
+	// The values entered replace the previously selected choices.
 	SelectedChoices []string
 
 	noSmithyDocumentSerde
@@ -1140,13 +1307,19 @@ type ReviewTemplateAnswerSummary struct {
 // The lens review of a review template.
 type ReviewTemplateLensReview struct {
 
-	// The alias of the lens. For Amazon Web Services official lenses, this is either
-	// the lens alias, such as serverless , or the lens ARN, such as
+	// The alias of the lens.
+	//
+	// For Amazon Web Services official lenses, this is either the lens alias, such as
+	// serverless , or the lens ARN, such as
 	// arn:aws:wellarchitected:us-east-1::lens/serverless . Note that some operations
 	// (such as ExportLens and CreateLensShare) are not permitted on Amazon Web
-	// Services official lenses. For custom lenses, this is the lens ARN, such as
+	// Services official lenses.
+	//
+	// For custom lenses, this is the lens ARN, such as
 	// arn:aws:wellarchitected:us-west-2:123456789012:lens/0123456789abcdef01234567890abcdef
-	// . Each lens is identified by its LensSummary$LensAlias .
+	// .
+	//
+	// Each lens is identified by its LensSummary$LensAlias.
 	LensAlias *string
 
 	// The lens ARN.
@@ -1164,8 +1337,10 @@ type ReviewTemplateLensReview struct {
 	// The token to use to retrieve the next set of results.
 	NextToken *string
 
-	// The notes associated with the workload. For a review template, these are the
-	// notes that will be associated with the workload when the template is applied.
+	// The notes associated with the workload.
+	//
+	// For a review template, these are the notes that will be associated with the
+	// workload when the template is applied.
 	Notes *string
 
 	// Pillar review summaries of a lens review.
@@ -1183,12 +1358,15 @@ type ReviewTemplateLensReview struct {
 // Summary of a review template.
 type ReviewTemplatePillarReviewSummary struct {
 
-	// The notes associated with the workload. For a review template, these are the
-	// notes that will be associated with the workload when the template is applied.
+	// The notes associated with the workload.
+	//
+	// For a review template, these are the notes that will be associated with the
+	// workload when the template is applied.
 	Notes *string
 
-	// The ID used to identify a pillar, for example, security . A pillar is identified
-	// by its PillarReviewSummary$PillarId .
+	// The ID used to identify a pillar, for example, security .
+	//
+	// A pillar is identified by its PillarReviewSummary$PillarId.
 	PillarId *string
 
 	// The name of the pillar.
@@ -1228,16 +1406,36 @@ type ReviewTemplateSummary struct {
 	noSmithyDocumentSerde
 }
 
+// The selected pillar.
+type SelectedPillar struct {
+
+	// The ID used to identify a pillar, for example, security .
+	//
+	// A pillar is identified by its PillarReviewSummary$PillarId.
+	PillarId *string
+
+	// Selected question IDs in the selected pillar.
+	SelectedQuestionIds []string
+
+	noSmithyDocumentSerde
+}
+
 // The share invitation.
 type ShareInvitation struct {
 
-	// The alias of the lens. For Amazon Web Services official lenses, this is either
-	// the lens alias, such as serverless , or the lens ARN, such as
+	// The alias of the lens.
+	//
+	// For Amazon Web Services official lenses, this is either the lens alias, such as
+	// serverless , or the lens ARN, such as
 	// arn:aws:wellarchitected:us-east-1::lens/serverless . Note that some operations
 	// (such as ExportLens and CreateLensShare) are not permitted on Amazon Web
-	// Services official lenses. For custom lenses, this is the lens ARN, such as
+	// Services official lenses.
+	//
+	// For custom lenses, this is the lens ARN, such as
 	// arn:aws:wellarchitected:us-west-2:123456789012:lens/0123456789abcdef01234567890abcdef
-	// . Each lens is identified by its LensSummary$LensAlias .
+	// .
+	//
+	// Each lens is identified by its LensSummary$LensAlias.
 	LensAlias *string
 
 	// The ARN for the lens.
@@ -1303,9 +1501,10 @@ type ShareInvitationSummary struct {
 	// Services Region.
 	WorkloadId *string
 
-	// The name of the workload. The name must be unique within an account within an
-	// Amazon Web Services Region. Spaces and capitalization are ignored when checking
-	// for uniqueness.
+	// The name of the workload.
+	//
+	// The name must be unique within an account within an Amazon Web Services Region.
+	// Spaces and capitalization are ignored when checking for uniqueness.
 	WorkloadName *string
 
 	noSmithyDocumentSerde
@@ -1387,60 +1586,96 @@ type Workload struct {
 	// The industry for the workload.
 	Industry *string
 
-	// The industry type for the workload. If specified, must be one of the following:
+	// The industry type for the workload.
+	//
+	// If specified, must be one of the following:
+	//
 	//   - Agriculture
+	//
 	//   - Automobile
+	//
 	//   - Defense
+	//
 	//   - Design and Engineering
+	//
 	//   - Digital Advertising
+	//
 	//   - Education
+	//
 	//   - Environmental Protection
+	//
 	//   - Financial Services
+	//
 	//   - Gaming
+	//
 	//   - General Public Services
+	//
 	//   - Healthcare
+	//
 	//   - Hospitality
+	//
 	//   - InfoTech
+	//
 	//   - Justice and Public Safety
+	//
 	//   - Life Sciences
+	//
 	//   - Manufacturing
+	//
 	//   - Media & Entertainment
+	//
 	//   - Mining & Resources
+	//
 	//   - Oil & Gas
+	//
 	//   - Power & Utilities
+	//
 	//   - Professional Services
+	//
 	//   - Real Estate & Construction
+	//
 	//   - Retail & Wholesale
+	//
 	//   - Social Protection
+	//
 	//   - Telecommunications
+	//
 	//   - Travel, Transportation & Logistics
+	//
 	//   - Other
 	IndustryType *string
 
 	// Flag indicating whether the workload owner has acknowledged that the Review
-	// owner field is required. If a Review owner is not added to the workload within
-	// 60 days of acknowledgement, access to the workload is restricted until an owner
-	// is added.
+	// owner field is required.
+	//
+	// If a Review owner is not added to the workload within 60 days of
+	// acknowledgement, access to the workload is restricted until an owner is added.
 	IsReviewOwnerUpdateAcknowledged *bool
 
-	// The list of lenses associated with the workload. Each lens is identified by its
-	// LensSummary$LensAlias . If a review template that specifies lenses is applied to
-	// the workload, those lenses are applied to the workload in addition to these
-	// lenses.
+	// Jira configuration for a specific workload.
+	JiraConfiguration *WorkloadJiraConfigurationOutput
+
+	// The list of lenses associated with the workload. Each lens is identified by its LensSummary$LensAlias
+	// .
+	//
+	// If a review template that specifies lenses is applied to the workload, those
+	// lenses are applied to the workload in addition to these lenses.
 	Lenses []string
 
-	// The list of non-Amazon Web Services Regions associated with the workload.
+	//  The list of non-Amazon Web Services Regions associated with the workload.
 	NonAwsRegions []string
 
-	// The notes associated with the workload. For a review template, these are the
-	// notes that will be associated with the workload when the template is applied.
+	// The notes associated with the workload.
+	//
+	// For a review template, these are the notes that will be associated with the
+	// workload when the template is applied.
 	Notes *string
 
 	// An Amazon Web Services account ID.
 	Owner *string
 
 	// The priorities of the pillars, which are used to order items in the improvement
-	// plan. Each pillar is represented by its PillarReviewSummary$PillarId .
+	// plan. Each pillar is represented by its PillarReviewSummary$PillarId.
 	PillarPriorities []string
 
 	// A map from risk names to the count of how many questions have that rating.
@@ -1475,9 +1710,10 @@ type Workload struct {
 	// Services Region.
 	WorkloadId *string
 
-	// The name of the workload. The name must be unique within an account within an
-	// Amazon Web Services Region. Spaces and capitalization are ignored when checking
-	// for uniqueness.
+	// The name of the workload.
+	//
+	// The name must be unique within an account within an Amazon Web Services Region.
+	// Spaces and capitalization are ignored when checking for uniqueness.
 	WorkloadName *string
 
 	noSmithyDocumentSerde
@@ -1489,9 +1725,43 @@ type WorkloadDiscoveryConfig struct {
 	// Discovery integration status in respect to Trusted Advisor for the workload.
 	TrustedAdvisorIntegrationStatus TrustedAdvisorIntegrationStatus
 
-	// The mode to use for identifying resources associated with the workload. You can
-	// specify WORKLOAD_METADATA , APP_REGISTRY , or both.
+	// The mode to use for identifying resources associated with the workload.
+	//
+	// You can specify WORKLOAD_METADATA , APP_REGISTRY , or both.
 	WorkloadResourceDefinition []DefinitionType
+
+	noSmithyDocumentSerde
+}
+
+// Workload-level: Input for the Jira configuration.
+type WorkloadJiraConfigurationInput struct {
+
+	// Workload-level: Jira issue management status.
+	IssueManagementStatus WorkloadIssueManagementStatus
+
+	// Workload-level: Jira issue management type.
+	IssueManagementType IssueManagementType
+
+	// Workload-level: Jira project key to sync workloads to.
+	JiraProjectKey *string
+
+	noSmithyDocumentSerde
+}
+
+// Workload-level: Output configuration of the Jira integration.
+type WorkloadJiraConfigurationOutput struct {
+
+	// Workload-level: Jira issue management status.
+	IssueManagementStatus WorkloadIssueManagementStatus
+
+	// Workload-level: Jira issue management type.
+	IssueManagementType IssueManagementType
+
+	// Workload-level: Jira project key to sync workloads to.
+	JiraProjectKey *string
+
+	// Workload-level: Status message on configuration of the Jira integration.
+	StatusMessage *string
 
 	noSmithyDocumentSerde
 }
@@ -1531,9 +1801,10 @@ type WorkloadShare struct {
 	// Services Region.
 	WorkloadId *string
 
-	// The name of the workload. The name must be unique within an account within an
-	// Amazon Web Services Region. Spaces and capitalization are ignored when checking
-	// for uniqueness.
+	// The name of the workload.
+	//
+	// The name must be unique within an account within an Amazon Web Services Region.
+	// Spaces and capitalization are ignored when checking for uniqueness.
 	WorkloadName *string
 
 	noSmithyDocumentSerde
@@ -1567,10 +1838,11 @@ type WorkloadSummary struct {
 	// The improvement status for a workload.
 	ImprovementStatus WorkloadImprovementStatus
 
-	// The list of lenses associated with the workload. Each lens is identified by its
-	// LensSummary$LensAlias . If a review template that specifies lenses is applied to
-	// the workload, those lenses are applied to the workload in addition to these
-	// lenses.
+	// The list of lenses associated with the workload. Each lens is identified by its LensSummary$LensAlias
+	// .
+	//
+	// If a review template that specifies lenses is applied to the workload, those
+	// lenses are applied to the workload in addition to these lenses.
 	Lenses []string
 
 	// An Amazon Web Services account ID.
@@ -1595,9 +1867,10 @@ type WorkloadSummary struct {
 	// Services Region.
 	WorkloadId *string
 
-	// The name of the workload. The name must be unique within an account within an
-	// Amazon Web Services Region. Spaces and capitalization are ignored when checking
-	// for uniqueness.
+	// The name of the workload.
+	//
+	// The name must be unique within an account within an Amazon Web Services Region.
+	// Spaces and capitalization are ignored when checking for uniqueness.
 	WorkloadName *string
 
 	noSmithyDocumentSerde

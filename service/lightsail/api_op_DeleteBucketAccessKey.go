@@ -6,17 +6,20 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/lightsail/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes an access key for the specified Amazon Lightsail bucket. We recommend
-// that you delete an access key if the secret access key is compromised. For more
-// information about access keys, see Creating access keys for a bucket in Amazon
-// Lightsail (https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-creating-bucket-access-keys)
-// in the Amazon Lightsail Developer Guide.
+// Deletes an access key for the specified Amazon Lightsail bucket.
+//
+// We recommend that you delete an access key if the secret access key is
+// compromised.
+//
+// For more information about access keys, see [Creating access keys for a bucket in Amazon Lightsail] in the Amazon Lightsail Developer
+// Guide.
+//
+// [Creating access keys for a bucket in Amazon Lightsail]: https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-creating-bucket-access-keys
 func (c *Client) DeleteBucketAccessKey(ctx context.Context, params *DeleteBucketAccessKeyInput, optFns ...func(*Options)) (*DeleteBucketAccessKeyOutput, error) {
 	if params == nil {
 		params = &DeleteBucketAccessKeyInput{}
@@ -34,8 +37,11 @@ func (c *Client) DeleteBucketAccessKey(ctx context.Context, params *DeleteBucket
 
 type DeleteBucketAccessKeyInput struct {
 
-	// The ID of the access key to delete. Use the GetBucketAccessKeys (https://docs.aws.amazon.com/lightsail/2016-11-28/api-reference/API_GetBucketAccessKeys.html)
-	// action to get a list of access key IDs that you can specify.
+	// The ID of the access key to delete.
+	//
+	// Use the [GetBucketAccessKeys] action to get a list of access key IDs that you can specify.
+	//
+	// [GetBucketAccessKeys]: https://docs.aws.amazon.com/lightsail/2016-11-28/api-reference/API_GetBucketAccessKeys.html
 	//
 	// This member is required.
 	AccessKeyId *string
@@ -83,25 +89,25 @@ func (c *Client) addOperationDeleteBucketAccessKeyMiddlewares(stack *middleware.
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -116,13 +122,16 @@ func (c *Client) addOperationDeleteBucketAccessKeyMiddlewares(stack *middleware.
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDeleteBucketAccessKeyValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteBucketAccessKey(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

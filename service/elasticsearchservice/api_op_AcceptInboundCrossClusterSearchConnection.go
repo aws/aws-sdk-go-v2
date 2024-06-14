@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/elasticsearchservice/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -29,8 +28,7 @@ func (c *Client) AcceptInboundCrossClusterSearchConnection(ctx context.Context, 
 	return out, nil
 }
 
-// Container for the parameters to the AcceptInboundCrossClusterSearchConnection
-// operation.
+// Container for the parameters to the AcceptInboundCrossClusterSearchConnection operation.
 type AcceptInboundCrossClusterSearchConnectionInput struct {
 
 	// The id of the inbound connection that you want to accept.
@@ -41,12 +39,10 @@ type AcceptInboundCrossClusterSearchConnectionInput struct {
 	noSmithyDocumentSerde
 }
 
-// The result of a AcceptInboundCrossClusterSearchConnection operation. Contains
-// details of accepted inbound connection.
+// The result of a AcceptInboundCrossClusterSearchConnection operation. Contains details of accepted inbound connection.
 type AcceptInboundCrossClusterSearchConnectionOutput struct {
 
-	// Specifies the InboundCrossClusterSearchConnection of accepted inbound
-	// connection.
+	// Specifies the InboundCrossClusterSearchConnection of accepted inbound connection.
 	CrossClusterSearchConnection *types.InboundCrossClusterSearchConnection
 
 	// Metadata pertaining to the operation's result.
@@ -77,25 +73,25 @@ func (c *Client) addOperationAcceptInboundCrossClusterSearchConnectionMiddleware
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -110,13 +106,16 @@ func (c *Client) addOperationAcceptInboundCrossClusterSearchConnectionMiddleware
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpAcceptInboundCrossClusterSearchConnectionValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opAcceptInboundCrossClusterSearchConnection(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

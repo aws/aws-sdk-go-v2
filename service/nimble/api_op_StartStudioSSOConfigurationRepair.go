@@ -6,20 +6,22 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/nimble/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Repairs the IAM Identity Center configuration for a given studio. If the studio
-// has a valid IAM Identity Center configuration currently associated with it, this
-// operation will fail with a validation error. If the studio does not have a valid
-// IAM Identity Center configuration currently associated with it, then a new IAM
-// Identity Center application is created for the studio and the studio is changed
-// to the READY state. After the IAM Identity Center application is repaired, you
-// must use the Amazon Nimble Studio console to add administrators and users to
-// your studio.
+// Repairs the IAM Identity Center configuration for a given studio.
+//
+// If the studio has a valid IAM Identity Center configuration currently
+// associated with it, this operation will fail with a validation error.
+//
+// If the studio does not have a valid IAM Identity Center configuration currently
+// associated with it, then a new IAM Identity Center application is created for
+// the studio and the studio is changed to the READY state.
+//
+// After the IAM Identity Center application is repaired, you must use the Amazon
+// Nimble Studio console to add administrators and users to your studio.
 func (c *Client) StartStudioSSOConfigurationRepair(ctx context.Context, params *StartStudioSSOConfigurationRepairInput, optFns ...func(*Options)) (*StartStudioSSOConfigurationRepairOutput, error) {
 	if params == nil {
 		params = &StartStudioSSOConfigurationRepairInput{}
@@ -86,25 +88,25 @@ func (c *Client) addOperationStartStudioSSOConfigurationRepairMiddlewares(stack 
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -119,6 +121,9 @@ func (c *Client) addOperationStartStudioSSOConfigurationRepairMiddlewares(stack 
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opStartStudioSSOConfigurationRepairMiddleware(stack, options); err != nil {
 		return err
 	}
@@ -128,7 +133,7 @@ func (c *Client) addOperationStartStudioSSOConfigurationRepairMiddlewares(stack 
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opStartStudioSSOConfigurationRepair(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

@@ -6,35 +6,41 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Modifies the specified EC2 Fleet. You can only modify an EC2 Fleet request of
-// type maintain . While the EC2 Fleet is being modified, it is in the modifying
-// state. To scale up your EC2 Fleet, increase its target capacity. The EC2 Fleet
+// Modifies the specified EC2 Fleet.
+//
+// You can only modify an EC2 Fleet request of type maintain .
+//
+// While the EC2 Fleet is being modified, it is in the modifying state.
+//
+// To scale up your EC2 Fleet, increase its target capacity. The EC2 Fleet
 // launches the additional Spot Instances according to the allocation strategy for
 // the EC2 Fleet request. If the allocation strategy is lowest-price , the EC2
 // Fleet launches instances using the Spot Instance pool with the lowest price. If
 // the allocation strategy is diversified , the EC2 Fleet distributes the instances
 // across the Spot Instance pools. If the allocation strategy is capacity-optimized
 // , EC2 Fleet launches instances from Spot Instance pools with optimal capacity
-// for the number of instances that are launching. To scale down your EC2 Fleet,
-// decrease its target capacity. First, the EC2 Fleet cancels any open requests
-// that exceed the new target capacity. You can request that the EC2 Fleet
-// terminate Spot Instances until the size of the fleet no longer exceeds the new
-// target capacity. If the allocation strategy is lowest-price , the EC2 Fleet
-// terminates the instances with the highest price per unit. If the allocation
-// strategy is capacity-optimized , the EC2 Fleet terminates the instances in the
-// Spot Instance pools that have the least available Spot Instance capacity. If the
-// allocation strategy is diversified , the EC2 Fleet terminates instances across
-// the Spot Instance pools. Alternatively, you can request that the EC2 Fleet keep
-// the fleet at its current size, but not replace any Spot Instances that are
-// interrupted or that you terminate manually. If you are finished with your EC2
-// Fleet for now, but will use it again later, you can set the target capacity to
-// 0.
+// for the number of instances that are launching.
+//
+// To scale down your EC2 Fleet, decrease its target capacity. First, the EC2
+// Fleet cancels any open requests that exceed the new target capacity. You can
+// request that the EC2 Fleet terminate Spot Instances until the size of the fleet
+// no longer exceeds the new target capacity. If the allocation strategy is
+// lowest-price , the EC2 Fleet terminates the instances with the highest price per
+// unit. If the allocation strategy is capacity-optimized , the EC2 Fleet
+// terminates the instances in the Spot Instance pools that have the least
+// available Spot Instance capacity. If the allocation strategy is diversified ,
+// the EC2 Fleet terminates instances across the Spot Instance pools.
+// Alternatively, you can request that the EC2 Fleet keep the fleet at its current
+// size, but not replace any Spot Instances that are interrupted or that you
+// terminate manually.
+//
+// If you are finished with your EC2 Fleet for now, but will use it again later,
+// you can set the target capacity to 0.
 func (c *Client) ModifyFleet(ctx context.Context, params *ModifyFleetInput, optFns ...func(*Options)) (*ModifyFleetOutput, error) {
 	if params == nil {
 		params = &ModifyFleetInput{}
@@ -68,6 +74,7 @@ type ModifyFleetInput struct {
 
 	// Indicates whether running instances should be terminated if the total target
 	// capacity of the EC2 Fleet is decreased below the current size of the EC2 Fleet.
+	//
 	// Supported only for fleets of type maintain .
 	ExcessCapacityTerminationPolicy types.FleetExcessCapacityTerminationPolicy
 
@@ -114,25 +121,25 @@ func (c *Client) addOperationModifyFleetMiddlewares(stack *middleware.Stack, opt
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -147,13 +154,16 @@ func (c *Client) addOperationModifyFleetMiddlewares(stack *middleware.Stack, opt
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpModifyFleetValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opModifyFleet(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

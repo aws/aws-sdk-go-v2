@@ -33,7 +33,8 @@ func (e *AccessDeniedException) ErrorCode() string {
 }
 func (e *AccessDeniedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// Kinesis Video Streams has throttled the request because you have exceeded the
+//	Kinesis Video Streams has throttled the request because you have exceeded the
+//
 // limit of allowed client calls. Try making the call later.
 type ClientLimitExceededException struct {
 	Message *string

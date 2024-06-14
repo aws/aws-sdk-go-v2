@@ -6,20 +6,27 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Create a review template share. The owner of a review template can share it
-// with other Amazon Web Services accounts, users, an organization, and
-// organizational units (OUs) in the same Amazon Web Services Region. Shared access
-// to a review template is not removed until the review template share invitation
-// is deleted. If you share a review template with an organization or OU, all
-// accounts in the organization or OU are granted access to the review template.
-// Disclaimer By sharing your review template with other Amazon Web Services
-// accounts, you acknowledge that Amazon Web Services will make your review
-// template available to those other accounts.
+// Create a review template share.
+//
+// The owner of a review template can share it with other Amazon Web Services
+// accounts, users, an organization, and organizational units (OUs) in the same
+// Amazon Web Services Region.
+//
+// Shared access to a review template is not removed until the review template
+// share invitation is deleted.
+//
+// If you share a review template with an organization or OU, all accounts in the
+// organization or OU are granted access to the review template.
+//
+// # Disclaimer
+//
+// By sharing your review template with other Amazon Web Services accounts, you
+// acknowledge that Amazon Web Services will make your review template available to
+// those other accounts.
 func (c *Client) CreateTemplateShare(ctx context.Context, params *CreateTemplateShareInput, optFns ...func(*Options)) (*CreateTemplateShareOutput, error) {
 	if params == nil {
 		params = &CreateTemplateShareInput{}
@@ -38,13 +45,17 @@ func (c *Client) CreateTemplateShare(ctx context.Context, params *CreateTemplate
 type CreateTemplateShareInput struct {
 
 	// A unique case-sensitive string used to ensure that this request is idempotent
-	// (executes only once). You should not reuse the same token for other requests. If
-	// you retry a request with the same client request token and the same parameters
-	// after the original request has completed successfully, the result of the
-	// original request is returned. This token is listed as required, however, if you
-	// do not specify it, the Amazon Web Services SDKs automatically generate one for
-	// you. If you are not using the Amazon Web Services SDK or the CLI, you must
-	// provide this token or the request will fail.
+	// (executes only once).
+	//
+	// You should not reuse the same token for other requests. If you retry a request
+	// with the same client request token and the same parameters after the original
+	// request has completed successfully, the result of the original request is
+	// returned.
+	//
+	// This token is listed as required, however, if you do not specify it, the Amazon
+	// Web Services SDKs automatically generate one for you. If you are not using the
+	// Amazon Web Services SDK or the CLI, you must provide this token or the request
+	// will fail.
 	//
 	// This member is required.
 	ClientRequestToken *string
@@ -99,25 +110,25 @@ func (c *Client) addOperationCreateTemplateShareMiddlewares(stack *middleware.St
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -132,6 +143,9 @@ func (c *Client) addOperationCreateTemplateShareMiddlewares(stack *middleware.St
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opCreateTemplateShareMiddleware(stack, options); err != nil {
 		return err
 	}
@@ -141,7 +155,7 @@ func (c *Client) addOperationCreateTemplateShareMiddlewares(stack *middleware.St
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateTemplateShare(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

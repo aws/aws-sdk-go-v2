@@ -6,12 +6,12 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Removes the association between a tracker resource and a geofence collection.
+//
 // Once you unlink a tracker resource from a geofence collection, the tracker
 // positions will no longer be automatically evaluated against geofences.
 func (c *Client) DisassociateTrackerConsumer(ctx context.Context, params *DisassociateTrackerConsumerInput, optFns ...func(*Options)) (*DisassociateTrackerConsumerOutput, error) {
@@ -34,6 +34,7 @@ type DisassociateTrackerConsumerInput struct {
 	// The Amazon Resource Name (ARN) for the geofence collection to be disassociated
 	// from the tracker resource. Used when you need to specify a resource across all
 	// Amazon Web Services.
+	//
 	//   - Format example:
 	//   arn:aws:geo:region:account-id:geofence-collection/ExampleGeofenceCollectionConsumer
 	//
@@ -77,25 +78,25 @@ func (c *Client) addOperationDisassociateTrackerConsumerMiddlewares(stack *middl
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -110,6 +111,9 @@ func (c *Client) addOperationDisassociateTrackerConsumerMiddlewares(stack *middl
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addEndpointPrefix_opDisassociateTrackerConsumerMiddleware(stack); err != nil {
 		return err
 	}
@@ -119,7 +123,7 @@ func (c *Client) addOperationDisassociateTrackerConsumerMiddlewares(stack *middl
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDisassociateTrackerConsumer(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

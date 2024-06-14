@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/glue/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -59,8 +58,8 @@ type CreateSessionInput struct {
 	// supports. The GlueVersion must be greater than 2.0.
 	GlueVersion *string
 
-	// The number of minutes when idle before session times out. Default for Spark ETL
-	// jobs is value of Timeout. Consult the documentation for other job types.
+	//  The number of minutes when idle before session times out. Default for Spark
+	// ETL jobs is value of Timeout. Consult the documentation for other job types.
 	IdleTimeout *int32
 
 	// The number of Glue data processing units (DPUs) that can be allocated when the
@@ -80,7 +79,7 @@ type CreateSessionInput struct {
 	// The map of key value pairs (tags) belonging to the session.
 	Tags map[string]string
 
-	// The number of minutes before session times out. Default for Spark ETL jobs is
+	//  The number of minutes before session times out. Default for Spark ETL jobs is
 	// 48 hours (2880 minutes), the maximum session lifetime for this job type. Consult
 	// the documentation for other job types.
 	Timeout *int32
@@ -88,16 +87,19 @@ type CreateSessionInput struct {
 	// The type of predefined worker that is allocated when a job runs. Accepts a
 	// value of G.1X, G.2X, G.4X, or G.8X for Spark jobs. Accepts the value Z.2X for
 	// Ray notebooks.
+	//
 	//   - For the G.1X worker type, each worker maps to 1 DPU (4 vCPUs, 16 GB of
 	//   memory) with 84GB disk (approximately 34GB free), and provides 1 executor per
 	//   worker. We recommend this worker type for workloads such as data transforms,
 	//   joins, and queries, to offers a scalable and cost effective way to run most
 	//   jobs.
+	//
 	//   - For the G.2X worker type, each worker maps to 2 DPU (8 vCPUs, 32 GB of
 	//   memory) with 128GB disk (approximately 77GB free), and provides 1 executor per
 	//   worker. We recommend this worker type for workloads such as data transforms,
 	//   joins, and queries, to offers a scalable and cost effective way to run most
 	//   jobs.
+	//
 	//   - For the G.4X worker type, each worker maps to 4 DPU (16 vCPUs, 64 GB of
 	//   memory) with 256GB disk (approximately 235GB free), and provides 1 executor per
 	//   worker. We recommend this worker type for jobs whose workloads contain your most
@@ -106,12 +108,14 @@ type CreateSessionInput struct {
 	//   Amazon Web Services Regions: US East (Ohio), US East (N. Virginia), US West
 	//   (Oregon), Asia Pacific (Singapore), Asia Pacific (Sydney), Asia Pacific (Tokyo),
 	//   Canada (Central), Europe (Frankfurt), Europe (Ireland), and Europe (Stockholm).
+	//
 	//   - For the G.8X worker type, each worker maps to 8 DPU (32 vCPUs, 128 GB of
 	//   memory) with 512GB disk (approximately 487GB free), and provides 1 executor per
 	//   worker. We recommend this worker type for jobs whose workloads contain your most
 	//   demanding transforms, aggregations, joins, and queries. This worker type is
 	//   available only for Glue version 3.0 or later Spark ETL jobs, in the same Amazon
 	//   Web Services Regions as supported for the G.4X worker type.
+	//
 	//   - For the Z.2X worker type, each worker maps to 2 M-DPU (8vCPUs, 64 GB of
 	//   memory) with 128 GB disk (approximately 120GB free), and provides up to 8 Ray
 	//   workers based on the autoscaler.
@@ -153,25 +157,25 @@ func (c *Client) addOperationCreateSessionMiddlewares(stack *middleware.Stack, o
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -186,13 +190,16 @@ func (c *Client) addOperationCreateSessionMiddlewares(stack *middleware.Stack, o
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpCreateSessionValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateSession(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

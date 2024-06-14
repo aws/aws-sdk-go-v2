@@ -6,24 +6,29 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/lookoutvision/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"io"
 )
 
-// Detects anomalies in an image that you supply. The response from DetectAnomalies
-// includes a boolean prediction that the image contains one or more anomalies and
-// a confidence value for the prediction. If the model is an image segmentation
-// model, the response also includes segmentation information for each type of
-// anomaly found in the image. Before calling DetectAnomalies , you must first
-// start your model with the StartModel operation. You are charged for the amount
-// of time, in minutes, that a model runs and for the number of anomaly detection
-// units that your model uses. If you are not using a model, use the StopModel
-// operation to stop your model. For more information, see Detecting anomalies in
-// an image in the Amazon Lookout for Vision developer guide. This operation
-// requires permissions to perform the lookoutvision:DetectAnomalies operation.
+// Detects anomalies in an image that you supply.
+//
+// The response from DetectAnomalies includes a boolean prediction that the image
+// contains one or more anomalies and a confidence value for the prediction. If the
+// model is an image segmentation model, the response also includes segmentation
+// information for each type of anomaly found in the image.
+//
+// Before calling DetectAnomalies , you must first start your model with the StartModel
+// operation. You are charged for the amount of time, in minutes, that a model runs
+// and for the number of anomaly detection units that your model uses. If you are
+// not using a model, use the StopModeloperation to stop your model.
+//
+// For more information, see Detecting anomalies in an image in the Amazon Lookout
+// for Vision developer guide.
+//
+// This operation requires permissions to perform the lookoutvision:DetectAnomalies
+// operation.
 func (c *Client) DetectAnomalies(ctx context.Context, params *DetectAnomaliesInput, optFns ...func(*Options)) (*DetectAnomaliesOutput, error) {
 	if params == nil {
 		params = &DetectAnomaliesInput{}
@@ -98,25 +103,25 @@ func (c *Client) addOperationDetectAnomaliesMiddlewares(stack *middleware.Stack,
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -131,13 +136,16 @@ func (c *Client) addOperationDetectAnomaliesMiddlewares(stack *middleware.Stack,
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDetectAnomaliesValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDetectAnomalies(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -14,10 +13,12 @@ import (
 
 // Creates a connection notification for a specified VPC endpoint or VPC endpoint
 // service. A connection notification notifies you of specific endpoint events. You
-// must create an SNS topic to receive notifications. For more information, see
-// Create a Topic (https://docs.aws.amazon.com/sns/latest/dg/CreateTopic.html) in
-// the Amazon Simple Notification Service Developer Guide. You can create a
-// connection notification for interface endpoints only.
+// must create an SNS topic to receive notifications. For more information, see [Creating an Amazon SNS topic]in
+// the Amazon SNS Developer Guide.
+//
+// You can create a connection notification for interface endpoints only.
+//
+// [Creating an Amazon SNS topic]: https://docs.aws.amazon.com/sns/latest/dg/CreateTopic.html
 func (c *Client) CreateVpcEndpointConnectionNotification(ctx context.Context, params *CreateVpcEndpointConnectionNotificationInput, optFns ...func(*Options)) (*CreateVpcEndpointConnectionNotificationOutput, error) {
 	if params == nil {
 		params = &CreateVpcEndpointConnectionNotificationInput{}
@@ -47,8 +48,9 @@ type CreateVpcEndpointConnectionNotificationInput struct {
 	ConnectionNotificationArn *string
 
 	// Unique, case-sensitive identifier that you provide to ensure the idempotency of
-	// the request. For more information, see How to ensure idempotency (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html)
-	// .
+	// the request. For more information, see [How to ensure idempotency].
+	//
+	// [How to ensure idempotency]: https://docs.aws.amazon.com/ec2/latest/devguide/ec2-api-idempotency.html
 	ClientToken *string
 
 	// Checks whether you have the required permissions for the action, without
@@ -103,25 +105,25 @@ func (c *Client) addOperationCreateVpcEndpointConnectionNotificationMiddlewares(
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -136,13 +138,16 @@ func (c *Client) addOperationCreateVpcEndpointConnectionNotificationMiddlewares(
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpCreateVpcEndpointConnectionNotificationValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateVpcEndpointConnectionNotification(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

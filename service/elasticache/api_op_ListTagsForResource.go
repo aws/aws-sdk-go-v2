@@ -6,20 +6,23 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/elasticache/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists all tags currently on a named resource. A tag is a key-value pair where
-// the key and value are case-sensitive. You can use tags to categorize and track
-// all your ElastiCache resources, with the exception of global replication group.
-// When you add or remove tags on replication groups, those actions will be
-// replicated to all nodes in the replication group. For more information, see
-// Resource-level permissions (http://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/IAM.ResourceLevelPermissions.html)
-// . If the cluster is not in the available state, ListTagsForResource returns an
+// Lists all tags currently on a named resource.
+//
+// A tag is a key-value pair where the key and value are case-sensitive. You can
+// use tags to categorize and track all your ElastiCache resources, with the
+// exception of global replication group. When you add or remove tags on
+// replication groups, those actions will be replicated to all nodes in the
+// replication group. For more information, see [Resource-level permissions].
+//
+// If the cluster is not in the available state, ListTagsForResource returns an
 // error.
+//
+// [Resource-level permissions]: http://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/IAM.ResourceLevelPermissions.html
 func (c *Client) ListTagsForResource(ctx context.Context, params *ListTagsForResourceInput, optFns ...func(*Options)) (*ListTagsForResourceOutput, error) {
 	if params == nil {
 		params = &ListTagsForResourceInput{}
@@ -40,10 +43,11 @@ type ListTagsForResourceInput struct {
 
 	// The Amazon Resource Name (ARN) of the resource for which you want the list of
 	// tags, for example arn:aws:elasticache:us-west-2:0123456789:cluster:myCluster or
-	// arn:aws:elasticache:us-west-2:0123456789:snapshot:mySnapshot . For more
-	// information about ARNs, see Amazon Resource Names (ARNs) and Amazon Web
-	// Services Service Namespaces (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
-	// .
+	// arn:aws:elasticache:us-west-2:0123456789:snapshot:mySnapshot .
+	//
+	// For more information about ARNs, see [Amazon Resource Names (ARNs) and Amazon Web Services Service Namespaces].
+	//
+	// [Amazon Resource Names (ARNs) and Amazon Web Services Service Namespaces]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
 	//
 	// This member is required.
 	ResourceName *string
@@ -86,25 +90,25 @@ func (c *Client) addOperationListTagsForResourceMiddlewares(stack *middleware.St
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -119,13 +123,16 @@ func (c *Client) addOperationListTagsForResourceMiddlewares(stack *middleware.St
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpListTagsForResourceValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListTagsForResource(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

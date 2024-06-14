@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/cloudtrail/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -15,11 +14,12 @@ import (
 
 // Returns all public keys whose private keys were used to sign the digest files
 // within the specified time range. The public key is needed to validate digest
-// files that were signed with its corresponding private key. CloudTrail uses
-// different private and public key pairs per Region. Each digest file is signed
-// with a private key unique to its Region. When you validate a digest file from a
-// specific Region, you must look in the same Region for its corresponding public
-// key.
+// files that were signed with its corresponding private key.
+//
+// CloudTrail uses different private and public key pairs per Region. Each digest
+// file is signed with a private key unique to its Region. When you validate a
+// digest file from a specific Region, you must look in the same Region for its
+// corresponding public key.
 func (c *Client) ListPublicKeys(ctx context.Context, params *ListPublicKeysInput, optFns ...func(*Options)) (*ListPublicKeysOutput, error) {
 	if params == nil {
 		params = &ListPublicKeysInput{}
@@ -60,8 +60,9 @@ type ListPublicKeysOutput struct {
 	// Reserved for future use.
 	NextToken *string
 
-	// Contains an array of PublicKey objects. The returned public keys may have
-	// validity time ranges that overlap.
+	// Contains an array of PublicKey objects.
+	//
+	// The returned public keys may have validity time ranges that overlap.
 	PublicKeyList []types.PublicKey
 
 	// Metadata pertaining to the operation's result.
@@ -92,25 +93,25 @@ func (c *Client) addOperationListPublicKeysMiddlewares(stack *middleware.Stack, 
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -125,10 +126,13 @@ func (c *Client) addOperationListPublicKeysMiddlewares(stack *middleware.Stack, 
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListPublicKeys(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

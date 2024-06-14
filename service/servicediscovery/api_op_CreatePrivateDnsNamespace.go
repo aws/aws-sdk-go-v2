@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/servicediscovery/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -19,8 +18,9 @@ import (
 // instances that are registered using a private DNS namespace can be discovered
 // using either a DiscoverInstances request or using DNS. For the current quota on
 // the number of namespaces that you can create using the same Amazon Web Services
-// account, see Cloud Map quotas (https://docs.aws.amazon.com/cloud-map/latest/dg/cloud-map-limits.html)
-// in the Cloud Map Developer Guide.
+// account, see [Cloud Map quotas]in the Cloud Map Developer Guide.
+//
+// [Cloud Map quotas]: https://docs.aws.amazon.com/cloud-map/latest/dg/cloud-map-limits.html
 func (c *Client) CreatePrivateDnsNamespace(ctx context.Context, params *CreatePrivateDnsNamespaceInput, optFns ...func(*Options)) (*CreatePrivateDnsNamespaceOutput, error) {
 	if params == nil {
 		params = &CreatePrivateDnsNamespaceInput{}
@@ -73,8 +73,9 @@ type CreatePrivateDnsNamespaceInput struct {
 type CreatePrivateDnsNamespaceOutput struct {
 
 	// A value that you can use to determine whether the request completed
-	// successfully. To get the status of the operation, see GetOperation (https://docs.aws.amazon.com/cloud-map/latest/api/API_GetOperation.html)
-	// .
+	// successfully. To get the status of the operation, see [GetOperation].
+	//
+	// [GetOperation]: https://docs.aws.amazon.com/cloud-map/latest/api/API_GetOperation.html
 	OperationId *string
 
 	// Metadata pertaining to the operation's result.
@@ -105,25 +106,25 @@ func (c *Client) addOperationCreatePrivateDnsNamespaceMiddlewares(stack *middlew
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -138,6 +139,9 @@ func (c *Client) addOperationCreatePrivateDnsNamespaceMiddlewares(stack *middlew
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opCreatePrivateDnsNamespaceMiddleware(stack, options); err != nil {
 		return err
 	}
@@ -147,7 +151,7 @@ func (c *Client) addOperationCreatePrivateDnsNamespaceMiddlewares(stack *middlew
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreatePrivateDnsNamespace(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

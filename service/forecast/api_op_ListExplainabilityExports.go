@@ -6,17 +6,17 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/forecast/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns a list of Explainability exports created using the
-// CreateExplainabilityExport operation. This operation returns a summary for each
-// Explainability export. You can filter the list using an array of Filter
-// objects. To retrieve the complete set of properties for a particular
-// Explainability export, use the ARN with the DescribeExplainability operation.
+// Returns a list of Explainability exports created using the CreateExplainabilityExport operation. This
+// operation returns a summary for each Explainability export. You can filter the
+// list using an array of Filterobjects.
+//
+// To retrieve the complete set of properties for a particular Explainability
+// export, use the ARN with the DescribeExplainabilityoperation.
 func (c *Client) ListExplainabilityExports(ctx context.Context, params *ListExplainabilityExportsInput, optFns ...func(*Options)) (*ListExplainabilityExportsOutput, error) {
 	if params == nil {
 		params = &ListExplainabilityExportsInput{}
@@ -37,10 +37,15 @@ type ListExplainabilityExportsInput struct {
 	// An array of filters. For each filter, provide a condition and a match
 	// statement. The condition is either IS or IS_NOT , which specifies whether to
 	// include or exclude resources that match the statement from the list. The match
-	// statement consists of a key and a value. Filter properties
+	// statement consists of a key and a value.
+	//
+	// Filter properties
+	//
 	//   - Condition - The condition to apply. Valid values are IS and IS_NOT .
+	//
 	//   - Key - The name of the parameter to filter on. Valid values are ResourceArn
 	//   and Status .
+	//
 	//   - Value - The value to match.
 	Filters []types.Filter
 
@@ -92,25 +97,25 @@ func (c *Client) addOperationListExplainabilityExportsMiddlewares(stack *middlew
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -125,13 +130,16 @@ func (c *Client) addOperationListExplainabilityExportsMiddlewares(stack *middlew
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpListExplainabilityExportsValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListExplainabilityExports(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

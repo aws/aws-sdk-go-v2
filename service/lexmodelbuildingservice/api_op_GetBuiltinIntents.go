@@ -6,14 +6,14 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/lexmodelbuildingservice/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Gets a list of built-in intents that meet the specified criteria. This
-// operation requires permission for the lex:GetBuiltinIntents action.
+// Gets a list of built-in intents that meet the specified criteria.
+//
+// This operation requires permission for the lex:GetBuiltinIntents action.
 func (c *Client) GetBuiltinIntents(ctx context.Context, params *GetBuiltinIntentsInput, optFns ...func(*Options)) (*GetBuiltinIntentsOutput, error) {
 	if params == nil {
 		params = &GetBuiltinIntentsInput{}
@@ -44,9 +44,10 @@ type GetBuiltinIntentsInput struct {
 
 	// Substring to match in built-in intent signatures. An intent will be returned if
 	// any part of its signature matches the substring. For example, "xyz" matches both
-	// "xyzabc" and "abcxyz." To find the signature for an intent, see Standard
-	// Built-in Intents (https://developer.amazon.com/public/solutions/alexa/alexa-skills-kit/docs/built-in-intent-ref/standard-intents)
-	// in the Alexa Skills Kit.
+	// "xyzabc" and "abcxyz." To find the signature for an intent, see [Standard Built-in Intents]in the Alexa
+	// Skills Kit.
+	//
+	// [Standard Built-in Intents]: https://developer.amazon.com/public/solutions/alexa/alexa-skills-kit/docs/built-in-intent-ref/standard-intents
 	SignatureContains *string
 
 	noSmithyDocumentSerde
@@ -91,25 +92,25 @@ func (c *Client) addOperationGetBuiltinIntentsMiddlewares(stack *middleware.Stac
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -124,10 +125,13 @@ func (c *Client) addOperationGetBuiltinIntentsMiddlewares(stack *middleware.Stac
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetBuiltinIntents(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

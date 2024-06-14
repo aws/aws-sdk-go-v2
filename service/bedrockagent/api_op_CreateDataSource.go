@@ -6,13 +6,14 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockagent/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Create a new data source
+// Sets up a data source to be added to a knowledge base.
+//
+// You can't change the chunkingConfiguration after you create the data source.
 func (c *Client) CreateDataSource(ctx context.Context, params *CreateDataSourceInput, optFns ...func(*Options)) (*CreateDataSourceOutput, error) {
 	if params == nil {
 		params = &CreateDataSourceInput{}
@@ -30,31 +31,38 @@ func (c *Client) CreateDataSource(ctx context.Context, params *CreateDataSourceI
 
 type CreateDataSourceInput struct {
 
-	// Specifies a raw data source location to ingest.
+	// Contains metadata about where the data source is stored.
 	//
 	// This member is required.
 	DataSourceConfiguration *types.DataSourceConfiguration
 
-	// Identifier for a resource.
+	// The unique identifier of the knowledge base to which to add the data source.
 	//
 	// This member is required.
 	KnowledgeBaseId *string
 
-	// Name for a resource.
+	// The name of the data source.
 	//
 	// This member is required.
 	Name *string
 
-	// Client specified token used for idempotency checks
+	// A unique, case-sensitive identifier to ensure that the API request completes no
+	// more than one time. If this token matches a previous request, Amazon Bedrock
+	// ignores the request, but does not return an error. For more information, see [Ensuring idempotency].
+	//
+	// [Ensuring idempotency]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
 	ClientToken *string
 
-	// Description of the Resource.
+	// The data deletion policy assigned to the data source.
+	DataDeletionPolicy types.DataDeletionPolicy
+
+	// A description of the data source.
 	Description *string
 
-	// Server-side encryption configuration.
+	// Contains details about the server-side encryption for the data source.
 	ServerSideEncryptionConfiguration *types.ServerSideEncryptionConfiguration
 
-	// Configures ingestion for a vector knowledge base
+	// Contains details about how to ingest the documents in the data source.
 	VectorIngestionConfiguration *types.VectorIngestionConfiguration
 
 	noSmithyDocumentSerde
@@ -62,7 +70,7 @@ type CreateDataSourceInput struct {
 
 type CreateDataSourceOutput struct {
 
-	// Contains the information of a data source.
+	// Contains details about the data source.
 	//
 	// This member is required.
 	DataSource *types.DataSource
@@ -95,25 +103,25 @@ func (c *Client) addOperationCreateDataSourceMiddlewares(stack *middleware.Stack
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -128,6 +136,9 @@ func (c *Client) addOperationCreateDataSourceMiddlewares(stack *middleware.Stack
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opCreateDataSourceMiddleware(stack, options); err != nil {
 		return err
 	}
@@ -137,7 +148,7 @@ func (c *Client) addOperationCreateDataSourceMiddlewares(stack *middleware.Stack
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateDataSource(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -31,23 +30,27 @@ func (c *Client) ListServicesForAutoScalingConfiguration(ctx context.Context, pa
 type ListServicesForAutoScalingConfigurationInput struct {
 
 	// The Amazon Resource Name (ARN) of the App Runner auto scaling configuration
-	// that you want to list the services for. The ARN can be a full auto scaling
-	// configuration ARN, or a partial ARN ending with either .../name  or
-	// .../name/revision . If a revision isn't specified, the latest active revision
-	// is used.
+	// that you want to list the services for.
+	//
+	// The ARN can be a full auto scaling configuration ARN, or a partial ARN ending
+	// with either .../name  or .../name/revision . If a revision isn't specified, the
+	// latest active revision is used.
 	//
 	// This member is required.
 	AutoScalingConfigurationArn *string
 
 	// The maximum number of results to include in each response (result page). It's
-	// used for a paginated request. If you don't specify MaxResults , the request
-	// retrieves all available results in a single response.
+	// used for a paginated request.
+	//
+	// If you don't specify MaxResults , the request retrieves all available results in
+	// a single response.
 	MaxResults *int32
 
 	// A token from a previous result page. It's used for a paginated request. The
 	// request retrieves the next result page. All other parameter values must be
-	// identical to the ones specified in the initial request. If you don't specify
-	// NextToken , the request retrieves the first result page.
+	// identical to the ones specified in the initial request.
+	//
+	// If you don't specify NextToken , the request retrieves the first result page.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -93,25 +96,25 @@ func (c *Client) addOperationListServicesForAutoScalingConfigurationMiddlewares(
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -126,13 +129,16 @@ func (c *Client) addOperationListServicesForAutoScalingConfigurationMiddlewares(
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpListServicesForAutoScalingConfigurationValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListServicesForAutoScalingConfiguration(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -162,8 +168,10 @@ var _ ListServicesForAutoScalingConfigurationAPIClient = (*Client)(nil)
 // options for ListServicesForAutoScalingConfiguration
 type ListServicesForAutoScalingConfigurationPaginatorOptions struct {
 	// The maximum number of results to include in each response (result page). It's
-	// used for a paginated request. If you don't specify MaxResults , the request
-	// retrieves all available results in a single response.
+	// used for a paginated request.
+	//
+	// If you don't specify MaxResults , the request retrieves all available results in
+	// a single response.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

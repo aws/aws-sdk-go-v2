@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/route53resolver/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -40,13 +39,19 @@ type CreateResolverRuleInput struct {
 	CreatorRequestId *string
 
 	// When you want to forward DNS queries for specified domain name to resolvers on
-	// your network, specify FORWARD . When you have a forwarding rule to forward DNS
-	// queries for a domain to your network and you want Resolver to process queries
-	// for a subdomain of that domain, specify SYSTEM . For example, to forward DNS
-	// queries for example.com to resolvers on your network, you create a rule and
-	// specify FORWARD for RuleType . To then have Resolver process queries for
-	// apex.example.com, you create a rule and specify SYSTEM for RuleType . Currently,
-	// only Resolver can create rules that have a value of RECURSIVE for RuleType .
+	// your network, specify FORWARD .
+	//
+	// When you have a forwarding rule to forward DNS queries for a domain to your
+	// network and you want Resolver to process queries for a subdomain of that domain,
+	// specify SYSTEM .
+	//
+	// For example, to forward DNS queries for example.com to resolvers on your
+	// network, you create a rule and specify FORWARD for RuleType . To then have
+	// Resolver process queries for apex.example.com, you create a rule and specify
+	// SYSTEM for RuleType .
+	//
+	// Currently, only Resolver can create rules that have a value of RECURSIVE for
+	// RuleType .
 	//
 	// This member is required.
 	RuleType types.RuleTypeOption
@@ -70,8 +75,9 @@ type CreateResolverRuleInput struct {
 
 	// The IPs that you want Resolver to forward DNS queries to. You can specify
 	// either Ipv4 or Ipv6 addresses but not both in the same rule. Separate IP
-	// addresses with a space. TargetIps is available only when the value of Rule type
-	// is FORWARD .
+	// addresses with a space.
+	//
+	// TargetIps is available only when the value of Rule type is FORWARD .
 	TargetIps []types.TargetAddress
 
 	noSmithyDocumentSerde
@@ -111,25 +117,25 @@ func (c *Client) addOperationCreateResolverRuleMiddlewares(stack *middleware.Sta
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -144,13 +150,16 @@ func (c *Client) addOperationCreateResolverRuleMiddlewares(stack *middleware.Sta
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpCreateResolverRuleValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateResolverRule(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

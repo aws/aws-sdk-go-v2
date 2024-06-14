@@ -6,20 +6,23 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes stored utterances. Amazon Lex stores the utterances that users send to
-// your bot. Utterances are stored for 15 days for use with the GetUtterancesView
-// operation, and then stored indefinitely for use in improving the ability of your
-// bot to respond to user input. Use the DeleteUtterances operation to manually
-// delete stored utterances for a specific user. When you use the DeleteUtterances
-// operation, utterances stored for improving your bot's ability to respond to user
-// input are deleted immediately. Utterances stored for use with the
-// GetUtterancesView operation are deleted after 15 days. This operation requires
-// permissions for the lex:DeleteUtterances action.
+// Deletes stored utterances.
+//
+// Amazon Lex stores the utterances that users send to your bot. Utterances are
+// stored for 15 days for use with the GetUtterancesViewoperation, and then stored indefinitely for
+// use in improving the ability of your bot to respond to user input.
+//
+// Use the DeleteUtterances operation to manually delete stored utterances for a
+// specific user. When you use the DeleteUtterances operation, utterances stored
+// for improving your bot's ability to respond to user input are deleted
+// immediately. Utterances stored for use with the GetUtterancesView operation are
+// deleted after 15 days.
+//
+// This operation requires permissions for the lex:DeleteUtterances action.
 func (c *Client) DeleteUtterances(ctx context.Context, params *DeleteUtterancesInput, optFns ...func(*Options)) (*DeleteUtterancesOutput, error) {
 	if params == nil {
 		params = &DeleteUtterancesInput{}
@@ -42,10 +45,11 @@ type DeleteUtterancesInput struct {
 	// This member is required.
 	BotName *string
 
-	// The unique identifier for the user that made the utterances. This is the user
-	// ID that was sent in the PostContent (http://docs.aws.amazon.com/lex/latest/dg/API_runtime_PostContent.html)
-	// or PostText (http://docs.aws.amazon.com/lex/latest/dg/API_runtime_PostText.html)
-	// operation request that contained the utterance.
+	//  The unique identifier for the user that made the utterances. This is the user
+	// ID that was sent in the [PostContent]or [PostText] operation request that contained the utterance.
+	//
+	// [PostText]: http://docs.aws.amazon.com/lex/latest/dg/API_runtime_PostText.html
+	// [PostContent]: http://docs.aws.amazon.com/lex/latest/dg/API_runtime_PostContent.html
 	//
 	// This member is required.
 	UserId *string
@@ -82,25 +86,25 @@ func (c *Client) addOperationDeleteUtterancesMiddlewares(stack *middleware.Stack
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -115,13 +119,16 @@ func (c *Client) addOperationDeleteUtterancesMiddlewares(stack *middleware.Stack
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDeleteUtterancesValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteUtterances(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

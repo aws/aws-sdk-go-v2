@@ -6,17 +6,18 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/customerprofiles/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
-// Defines a ProfileObjectType. To add or remove tags on an existing ObjectType,
-// see TagResource (https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_TagResource.html)
-// / UntagResource (https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_UntagResource.html)
-// .
+// Defines a ProfileObjectType.
+//
+// To add or remove tags on an existing ObjectType, see [TagResource]/[UntagResource] .
+//
+// [TagResource]: https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_TagResource.html
+// [UntagResource]: https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_UntagResource.html
 func (c *Client) PutProfileObjectType(ctx context.Context, params *PutProfileObjectTypeInput, optFns ...func(*Options)) (*PutProfileObjectTypeOutput, error) {
 	if params == nil {
 		params = &PutProfileObjectTypeInput{}
@@ -126,9 +127,10 @@ type PutProfileObjectTypeOutput struct {
 	LastUpdatedAt *time.Time
 
 	// The format of your sourceLastUpdatedTimestamp that was previously set up in
-	// fields that were parsed using SimpleDateFormat (https://docs.oracle.com/javase/10/docs/api/java/text/SimpleDateFormat.html)
-	// . If you have sourceLastUpdatedTimestamp in your field, you must set up
-	// sourceLastUpdatedTimestampFormat .
+	// fields that were parsed using [SimpleDateFormat]. If you have sourceLastUpdatedTimestamp in your
+	// field, you must set up sourceLastUpdatedTimestampFormat .
+	//
+	// [SimpleDateFormat]: https://docs.oracle.com/javase/10/docs/api/java/text/SimpleDateFormat.html
 	SourceLastUpdatedTimestampFormat *string
 
 	// The tags used to organize, track, or control access for this resource.
@@ -165,25 +167,25 @@ func (c *Client) addOperationPutProfileObjectTypeMiddlewares(stack *middleware.S
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -198,13 +200,16 @@ func (c *Client) addOperationPutProfileObjectTypeMiddlewares(stack *middleware.S
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpPutProfileObjectTypeValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opPutProfileObjectType(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

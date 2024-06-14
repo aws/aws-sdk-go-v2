@@ -6,22 +6,25 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/elasticloadbalancingv2/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Registers the specified targets with the specified target group. If the target
-// is an EC2 instance, it must be in the running state when you register it. By
-// default, the load balancer routes requests to registered targets using the
+// Registers the specified targets with the specified target group.
+//
+// If the target is an EC2 instance, it must be in the running state when you
+// register it.
+//
+// By default, the load balancer routes requests to registered targets using the
 // protocol and port for the target group. Alternatively, you can override the port
 // for a target when you register it. You can register each EC2 instance or IP
-// address with the same target group multiple times using different ports. With a
-// Network Load Balancer, you cannot register instances by instance ID if they have
-// the following instance types: C1, CC1, CC2, CG1, CG2, CR1, CS1, G1, G2, HI1,
-// HS1, M1, M2, M3, and T1. You can register instances of these types by IP
-// address.
+// address with the same target group multiple times using different ports.
+//
+// With a Network Load Balancer, you cannot register instances by instance ID if
+// they have the following instance types: C1, CC1, CC2, CG1, CG2, CR1, CS1, G1,
+// G2, HI1, HS1, M1, M2, M3, and T1. You can register instances of these types by
+// IP address.
 func (c *Client) RegisterTargets(ctx context.Context, params *RegisterTargetsInput, optFns ...func(*Options)) (*RegisterTargetsOutput, error) {
 	if params == nil {
 		params = &RegisterTargetsInput{}
@@ -81,25 +84,25 @@ func (c *Client) addOperationRegisterTargetsMiddlewares(stack *middleware.Stack,
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -114,13 +117,16 @@ func (c *Client) addOperationRegisterTargetsMiddlewares(stack *middleware.Stack,
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpRegisterTargetsValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opRegisterTargets(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

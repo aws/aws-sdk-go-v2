@@ -6,17 +6,19 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/servicecatalog/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Returns a summary of each of the portfolio shares that were created for the
-// specified portfolio. You can use this API to determine which accounts or
-// organizational nodes this portfolio have been shared, whether the recipient
-// entity has imported the share, and whether TagOptions are included with the
-// share. The PortfolioId and Type parameters are both required.
+// specified portfolio.
+//
+// You can use this API to determine which accounts or organizational nodes this
+// portfolio have been shared, whether the recipient entity has imported the share,
+// and whether TagOptions are included with the share.
+//
+// The PortfolioId and Type parameters are both required.
 func (c *Client) DescribePortfolioShares(ctx context.Context, params *DescribePortfolioSharesInput, optFns ...func(*Options)) (*DescribePortfolioSharesOutput, error) {
 	if params == nil {
 		params = &DescribePortfolioSharesInput{}
@@ -40,11 +42,16 @@ type DescribePortfolioSharesInput struct {
 	PortfolioId *string
 
 	// The type of portfolio share to summarize. This field acts as a filter on the
-	// type of portfolio share, which can be one of the following: 1. ACCOUNT -
-	// Represents an external account to account share. 2. ORGANIZATION - Represents a
-	// share to an organization. This share is available to every account in the
-	// organization. 3. ORGANIZATIONAL_UNIT - Represents a share to an organizational
-	// unit. 4. ORGANIZATION_MEMBER_ACCOUNT - Represents a share to an account in the
+	// type of portfolio share, which can be one of the following:
+	//
+	// 1. ACCOUNT - Represents an external account to account share.
+	//
+	// 2. ORGANIZATION - Represents a share to an organization. This share is
+	// available to every account in the organization.
+	//
+	// 3. ORGANIZATIONAL_UNIT - Represents a share to an organizational unit.
+	//
+	// 4. ORGANIZATION_MEMBER_ACCOUNT - Represents a share to an account in the
 	// organization.
 	//
 	// This member is required.
@@ -97,25 +104,25 @@ func (c *Client) addOperationDescribePortfolioSharesMiddlewares(stack *middlewar
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -130,13 +137,16 @@ func (c *Client) addOperationDescribePortfolioSharesMiddlewares(stack *middlewar
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDescribePortfolioSharesValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribePortfolioShares(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

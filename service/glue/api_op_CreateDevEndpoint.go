@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/glue/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -50,28 +49,40 @@ type CreateDevEndpointInput struct {
 
 	// The paths to one or more Python libraries in an Amazon S3 bucket that should be
 	// loaded in your DevEndpoint . Multiple values must be complete paths separated by
-	// a comma. You can only use pure Python libraries with a DevEndpoint . Libraries
-	// that rely on C extensions, such as the pandas (http://pandas.pydata.org/)
-	// Python data analysis library, are not yet supported.
+	// a comma.
+	//
+	// You can only use pure Python libraries with a DevEndpoint . Libraries that rely
+	// on C extensions, such as the [pandas]Python data analysis library, are not yet
+	// supported.
+	//
+	// [pandas]: http://pandas.pydata.org/
 	ExtraPythonLibsS3Path *string
 
 	// Glue version determines the versions of Apache Spark and Python that Glue
 	// supports. The Python version indicates the version supported for running your
-	// ETL scripts on development endpoints. For more information about the available
-	// Glue versions and corresponding Spark and Python versions, see Glue version (https://docs.aws.amazon.com/glue/latest/dg/add-job.html)
-	// in the developer guide. Development endpoints that are created without
-	// specifying a Glue version default to Glue 0.9. You can specify a version of
-	// Python support for development endpoints by using the Arguments parameter in
-	// the CreateDevEndpoint or UpdateDevEndpoint APIs. If no arguments are provided,
-	// the version defaults to Python 2.
+	// ETL scripts on development endpoints.
+	//
+	// For more information about the available Glue versions and corresponding Spark
+	// and Python versions, see [Glue version]in the developer guide.
+	//
+	// Development endpoints that are created without specifying a Glue version
+	// default to Glue 0.9.
+	//
+	// You can specify a version of Python support for development endpoints by using
+	// the Arguments parameter in the CreateDevEndpoint or UpdateDevEndpoint APIs. If
+	// no arguments are provided, the version defaults to Python 2.
+	//
+	// [Glue version]: https://docs.aws.amazon.com/glue/latest/dg/add-job.html
 	GlueVersion *string
 
 	// The number of Glue Data Processing Units (DPUs) to allocate to this DevEndpoint .
 	NumberOfNodes int32
 
 	// The number of workers of a defined workerType that are allocated to the
-	// development endpoint. The maximum number of workers you can define are 299 for
-	// G.1X , and 149 for G.2X .
+	// development endpoint.
+	//
+	// The maximum number of workers you can define are 299 for G.1X , and 149 for G.2X
+	// .
 	NumberOfWorkers *int32
 
 	// The public key to be used by this DevEndpoint for authentication. This
@@ -81,11 +92,12 @@ type CreateDevEndpointInput struct {
 
 	// A list of public keys to be used by the development endpoints for
 	// authentication. The use of this attribute is preferred over a single public key
-	// because the public keys allow you to have a different private key per client. If
-	// you previously created an endpoint with a public key, you must remove that key
-	// to be able to set a list of public keys. Call the UpdateDevEndpoint API with
-	// the public key content in the deletePublicKeys attribute, and the list of new
-	// keys in the addPublicKeys attribute.
+	// because the public keys allow you to have a different private key per client.
+	//
+	// If you previously created an endpoint with a public key, you must remove that
+	// key to be able to set a list of public keys. Call the UpdateDevEndpoint API
+	// with the public key content in the deletePublicKeys attribute, and the list of
+	// new keys in the addPublicKeys attribute.
 	PublicKeys []string
 
 	// The name of the SecurityConfiguration structure to be used with this DevEndpoint
@@ -99,21 +111,26 @@ type CreateDevEndpointInput struct {
 	SubnetId *string
 
 	// The tags to use with this DevEndpoint. You may use tags to limit access to the
-	// DevEndpoint. For more information about tags in Glue, see Amazon Web Services
-	// Tags in Glue (https://docs.aws.amazon.com/glue/latest/dg/monitor-tags.html) in
-	// the developer guide.
+	// DevEndpoint. For more information about tags in Glue, see [Amazon Web Services Tags in Glue]in the developer
+	// guide.
+	//
+	// [Amazon Web Services Tags in Glue]: https://docs.aws.amazon.com/glue/latest/dg/monitor-tags.html
 	Tags map[string]string
 
 	// The type of predefined worker that is allocated to the development endpoint.
 	// Accepts a value of Standard, G.1X, or G.2X.
+	//
 	//   - For the Standard worker type, each worker provides 4 vCPU, 16 GB of memory
 	//   and a 50GB disk, and 2 executors per worker.
+	//
 	//   - For the G.1X worker type, each worker maps to 1 DPU (4 vCPU, 16 GB of
 	//   memory, 64 GB disk), and provides 1 executor per worker. We recommend this
 	//   worker type for memory-intensive jobs.
+	//
 	//   - For the G.2X worker type, each worker maps to 2 DPU (8 vCPU, 32 GB of
 	//   memory, 128 GB disk), and provides 1 executor per worker. We recommend this
 	//   worker type for memory-intensive jobs.
+	//
 	// Known issue: when a development endpoint is created with the G.2X WorkerType
 	// configuration, the Spark drivers for the development endpoint will run on 4
 	// vCPU, 16 GB of memory, and a 64 GB disk.
@@ -124,8 +141,12 @@ type CreateDevEndpointInput struct {
 
 type CreateDevEndpointOutput struct {
 
-	// The map of arguments used to configure this DevEndpoint . Valid arguments are:
+	// The map of arguments used to configure this DevEndpoint .
+	//
+	// Valid arguments are:
+	//
 	//   - "--enable-glue-datacatalog": ""
+	//
 	// You can specify a version of Python support for development endpoints by using
 	// the Arguments parameter in the CreateDevEndpoint or UpdateDevEndpoint APIs. If
 	// no arguments are provided, the version defaults to Python 2.
@@ -153,9 +174,12 @@ type CreateDevEndpointOutput struct {
 
 	// Glue version determines the versions of Apache Spark and Python that Glue
 	// supports. The Python version indicates the version supported for running your
-	// ETL scripts on development endpoints. For more information about the available
-	// Glue versions and corresponding Spark and Python versions, see Glue version (https://docs.aws.amazon.com/glue/latest/dg/add-job.html)
-	// in the developer guide.
+	// ETL scripts on development endpoints.
+	//
+	// For more information about the available Glue versions and corresponding Spark
+	// and Python versions, see [Glue version]in the developer guide.
+	//
+	// [Glue version]: https://docs.aws.amazon.com/glue/latest/dg/add-job.html
 	GlueVersion *string
 
 	// The number of Glue Data Processing Units (DPUs) allocated to this DevEndpoint.
@@ -222,25 +246,25 @@ func (c *Client) addOperationCreateDevEndpointMiddlewares(stack *middleware.Stac
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -255,13 +279,16 @@ func (c *Client) addOperationCreateDevEndpointMiddlewares(stack *middleware.Stac
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpCreateDevEndpointValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateDevEndpoint(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

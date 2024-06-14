@@ -1150,6 +1150,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p> The time duration of a segment in milliseconds, I.e. time elapsed from\n      StartTimestampMillis to EndTimestampMillis. </p>"
                     }
+                },
+                "ContentTypes": {
+                    "target": "com.amazonaws.rekognition#ContentTypes",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of predicted results for the type of content an image contains. For example, \n      the image content might be from animation, sports, or a video game.</p>"
+                    }
                 }
             },
             "traits": {
@@ -1646,7 +1652,7 @@
                 "SessionId": {
                     "target": "com.amazonaws.rekognition#LivenessSessionId",
                     "traits": {
-                        "smithy.api#documentation": "<p>A unique 128-bit UUID identifying a Face Liveness session.</p>",
+                        "smithy.api#documentation": "<p>A unique 128-bit UUID identifying a Face Liveness session. \n      A new sessionID must be used for every Face Liveness check. If a given sessionID is used for subsequent \n      Face Liveness checks, the checks will fail. Additionally, a SessionId expires 3 minutes after it's sent, \n      making all Liveness data associated with the session (e.g., sessionID, reference image, audit images, etc.) unavailable.\n    </p>",
                         "smithy.api#required": {}
                     }
                 }

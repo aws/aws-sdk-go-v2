@@ -6,15 +6,16 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/eks/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Describes an update to an Amazon EKS resource. When the status of the update is
-// Succeeded , the update is complete. If an update fails, the status is Failed ,
-// and an error detail explains the reason for the failure.
+// Describes an update to an Amazon EKS resource.
+//
+// When the status of the update is Succeeded , the update is complete. If an
+// update fails, the status is Failed , and an error detail explains the reason for
+// the failure.
 func (c *Client) DescribeUpdate(ctx context.Context, params *DescribeUpdateInput, optFns ...func(*Options)) (*DescribeUpdateOutput, error) {
 	if params == nil {
 		params = &DescribeUpdateInput{}
@@ -43,9 +44,10 @@ type DescribeUpdateInput struct {
 	// This member is required.
 	UpdateId *string
 
-	// The name of the add-on. The name must match one of the names returned by
-	// ListAddons (https://docs.aws.amazon.com/eks/latest/APIReference/API_ListAddons.html)
-	// . This parameter is required if the update is an add-on update.
+	// The name of the add-on. The name must match one of the names returned by [ListAddons]
+	// ListAddons . This parameter is required if the update is an add-on update.
+	//
+	// [ListAddons]: https://docs.aws.amazon.com/eks/latest/APIReference/API_ListAddons.html
 	AddonName *string
 
 	// The name of the Amazon EKS node group associated with the update. This
@@ -88,25 +90,25 @@ func (c *Client) addOperationDescribeUpdateMiddlewares(stack *middleware.Stack, 
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -121,13 +123,16 @@ func (c *Client) addOperationDescribeUpdateMiddlewares(stack *middleware.Stack, 
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDescribeUpdateValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeUpdate(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

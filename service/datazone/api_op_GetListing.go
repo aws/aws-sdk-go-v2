@@ -6,13 +6,13 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/datazone/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
+// Gets a listing (a record of an asset at a given time).
 func (c *Client) GetListing(ctx context.Context, params *GetListingInput, optFns ...func(*Options)) (*GetListingOutput, error) {
 	if params == nil {
 		params = &GetListingInput{}
@@ -30,17 +30,17 @@ func (c *Client) GetListing(ctx context.Context, params *GetListingInput, optFns
 
 type GetListingInput struct {
 
-	//
+	// The ID of the Amazon DataZone domain.
 	//
 	// This member is required.
 	DomainIdentifier *string
 
-	//
+	// The ID of the listing.
 	//
 	// This member is required.
 	Identifier *string
 
-	//
+	// The revision of the listing.
 	ListingRevision *string
 
 	noSmithyDocumentSerde
@@ -48,37 +48,37 @@ type GetListingInput struct {
 
 type GetListingOutput struct {
 
-	//
+	// The ID of the Amazon DataZone domain.
 	//
 	// This member is required.
 	DomainId *string
 
-	//
+	// The ID of the listing.
 	//
 	// This member is required.
 	Id *string
 
-	//
+	// The revision of a listing.
 	//
 	// This member is required.
 	ListingRevision *string
 
-	//
+	// The timestamp of when the listing was created.
 	CreatedAt *time.Time
 
 	// The Amazon DataZone user who created the listing.
 	CreatedBy *string
 
-	//
+	// The description of the listing.
 	Description *string
 
-	//
+	// The details of a listing.
 	Item types.ListingItem
 
-	//
+	// The name of the listing.
 	Name *string
 
-	//
+	// The status of the listing.
 	Status types.ListingStatus
 
 	// The timestamp of when the listing was updated.
@@ -115,25 +115,25 @@ func (c *Client) addOperationGetListingMiddlewares(stack *middleware.Stack, opti
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -148,13 +148,16 @@ func (c *Client) addOperationGetListingMiddlewares(stack *middleware.Stack, opti
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpGetListingValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetListing(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

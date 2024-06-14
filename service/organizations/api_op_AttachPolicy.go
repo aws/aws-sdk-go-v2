@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -14,14 +13,23 @@ import (
 // Attaches a policy to a root, an organizational unit (OU), or an individual
 // account. How the policy affects accounts depends on the type of policy. Refer to
 // the Organizations User Guide for information about each policy type:
-//   - AISERVICES_OPT_OUT_POLICY (https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_ai-opt-out.html)
-//   - BACKUP_POLICY (https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_backup.html)
-//   - SERVICE_CONTROL_POLICY (https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_scp.html)
-//   - TAG_POLICY (https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_tag-policies.html)
+//
+// [AISERVICES_OPT_OUT_POLICY]
+//
+// [BACKUP_POLICY]
+//
+// [SERVICE_CONTROL_POLICY]
+//
+// [TAG_POLICY]
 //
 // This operation can be called only from the organization's management account or
 // by a member account that is a delegated administrator for an Amazon Web Services
 // service.
+//
+// [AISERVICES_OPT_OUT_POLICY]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_ai-opt-out.html
+// [BACKUP_POLICY]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_backup.html
+// [SERVICE_CONTROL_POLICY]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_scp.html
+// [TAG_POLICY]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_tag-policies.html
 func (c *Client) AttachPolicy(ctx context.Context, params *AttachPolicyInput, optFns ...func(*Options)) (*AttachPolicyOutput, error) {
 	if params == nil {
 		params = &AttachPolicyInput{}
@@ -40,25 +48,32 @@ func (c *Client) AttachPolicy(ctx context.Context, params *AttachPolicyInput, op
 type AttachPolicyInput struct {
 
 	// The unique identifier (ID) of the policy that you want to attach to the target.
-	// You can get the ID for the policy by calling the ListPolicies operation. The
-	// regex pattern (http://wikipedia.org/wiki/regex) for a policy ID string requires
-	// "p-" followed by from 8 to 128 lowercase or uppercase letters, digits, or the
-	// underscore character (_).
+	// You can get the ID for the policy by calling the ListPoliciesoperation.
+	//
+	// The [regex pattern] for a policy ID string requires "p-" followed by from 8 to 128 lowercase
+	// or uppercase letters, digits, or the underscore character (_).
+	//
+	// [regex pattern]: http://wikipedia.org/wiki/regex
 	//
 	// This member is required.
 	PolicyId *string
 
 	// The unique identifier (ID) of the root, OU, or account that you want to attach
-	// the policy to. You can get the ID by calling the ListRoots ,
-	// ListOrganizationalUnitsForParent , or ListAccounts operations. The regex pattern (http://wikipedia.org/wiki/regex)
-	// for a target ID string requires one of the following:
+	// the policy to. You can get the ID by calling the ListRoots, ListOrganizationalUnitsForParent, or ListAccounts operations.
+	//
+	// The [regex pattern] for a target ID string requires one of the following:
+	//
 	//   - Root - A string that begins with "r-" followed by from 4 to 32 lowercase
 	//   letters or digits.
+	//
 	//   - Account - A string that consists of exactly 12 digits.
+	//
 	//   - Organizational unit (OU) - A string that begins with "ou-" followed by from
 	//   4 to 32 lowercase letters or digits (the ID of the root that the OU is in). This
 	//   string is followed by a second "-" dash and from 8 to 32 additional lowercase
 	//   letters or digits.
+	//
+	// [regex pattern]: http://wikipedia.org/wiki/regex
 	//
 	// This member is required.
 	TargetId *string
@@ -95,25 +110,25 @@ func (c *Client) addOperationAttachPolicyMiddlewares(stack *middleware.Stack, op
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -128,13 +143,16 @@ func (c *Client) addOperationAttachPolicyMiddlewares(stack *middleware.Stack, op
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpAttachPolicyValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opAttachPolicy(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

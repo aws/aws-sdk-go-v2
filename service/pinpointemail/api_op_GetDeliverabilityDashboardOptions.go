@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/pinpointemail/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -17,11 +16,14 @@ import (
 // Amazon Pinpoint account. When the Deliverability dashboard is enabled, you gain
 // access to reputation, deliverability, and other metrics for the domains that you
 // use to send email using Amazon Pinpoint. You also gain the ability to perform
-// predictive inbox placement tests. When you use the Deliverability dashboard, you
-// pay a monthly subscription charge, in addition to any other fees that you accrue
-// by using Amazon Pinpoint. For more information about the features and cost of a
-// Deliverability dashboard subscription, see Amazon Pinpoint Pricing (http://aws.amazon.com/pinpoint/pricing/)
-// .
+// predictive inbox placement tests.
+//
+// When you use the Deliverability dashboard, you pay a monthly subscription
+// charge, in addition to any other fees that you accrue by using Amazon Pinpoint.
+// For more information about the features and cost of a Deliverability dashboard
+// subscription, see [Amazon Pinpoint Pricing].
+//
+// [Amazon Pinpoint Pricing]: http://aws.amazon.com/pinpoint/pricing/
 func (c *Client) GetDeliverabilityDashboardOptions(ctx context.Context, params *GetDeliverabilityDashboardOptionsInput, optFns ...func(*Options)) (*GetDeliverabilityDashboardOptionsOutput, error) {
 	if params == nil {
 		params = &GetDeliverabilityDashboardOptionsInput{}
@@ -41,11 +43,14 @@ func (c *Client) GetDeliverabilityDashboardOptions(ctx context.Context, params *
 // Amazon Pinpoint account. When the Deliverability dashboard is enabled, you gain
 // access to reputation, deliverability, and other metrics for the domains that you
 // use to send email using Amazon Pinpoint. You also gain the ability to perform
-// predictive inbox placement tests. When you use the Deliverability dashboard, you
-// pay a monthly subscription charge, in addition to any other fees that you accrue
-// by using Amazon Pinpoint. For more information about the features and cost of a
-// Deliverability dashboard subscription, see Amazon Pinpoint Pricing (http://aws.amazon.com/pinpoint/pricing/)
-// .
+// predictive inbox placement tests.
+//
+// When you use the Deliverability dashboard, you pay a monthly subscription
+// charge, in addition to any other fees that you accrue by using Amazon Pinpoint.
+// For more information about the features and cost of a Deliverability dashboard
+// subscription, see [Amazon Pinpoint Pricing].
+//
+// [Amazon Pinpoint Pricing]: http://aws.amazon.com/pinpoint/pricing/
 type GetDeliverabilityDashboardOptionsInput struct {
 	noSmithyDocumentSerde
 }
@@ -110,25 +115,25 @@ func (c *Client) addOperationGetDeliverabilityDashboardOptionsMiddlewares(stack 
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -143,10 +148,13 @@ func (c *Client) addOperationGetDeliverabilityDashboardOptionsMiddlewares(stack 
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetDeliverabilityDashboardOptions(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

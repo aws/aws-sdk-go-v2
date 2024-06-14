@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/servicequotas/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -32,7 +31,7 @@ func (c *Client) ListAWSDefaultServiceQuotas(ctx context.Context, params *ListAW
 type ListAWSDefaultServiceQuotasInput struct {
 
 	// Specifies the service identifier. To find the service code value for an Amazon
-	// Web Services service, use the ListServices operation.
+	// Web Services service, use the ListServicesoperation.
 	//
 	// This member is required.
 	ServiceCode *string
@@ -42,10 +41,11 @@ type ListAWSDefaultServiceQuotasInput struct {
 	// appropriate to the operation. If additional items exist beyond those included in
 	// the current response, the NextToken response element is present and has a value
 	// (is not null). Include that value as the NextToken request parameter in the
-	// next call to the operation to get the next part of the results. An API operation
-	// can return fewer results than the maximum even when there are more results
-	// available. You should check NextToken after every operation to ensure that you
-	// receive all of the results.
+	// next call to the operation to get the next part of the results.
+	//
+	// An API operation can return fewer results than the maximum even when there are
+	// more results available. You should check NextToken after every operation to
+	// ensure that you receive all of the results.
 	MaxResults *int32
 
 	// Specifies a value for receiving additional results after you receive a NextToken
@@ -96,25 +96,25 @@ func (c *Client) addOperationListAWSDefaultServiceQuotasMiddlewares(stack *middl
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -129,13 +129,16 @@ func (c *Client) addOperationListAWSDefaultServiceQuotasMiddlewares(stack *middl
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpListAWSDefaultServiceQuotasValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListAWSDefaultServiceQuotas(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -169,10 +172,11 @@ type ListAWSDefaultServiceQuotasPaginatorOptions struct {
 	// appropriate to the operation. If additional items exist beyond those included in
 	// the current response, the NextToken response element is present and has a value
 	// (is not null). Include that value as the NextToken request parameter in the
-	// next call to the operation to get the next part of the results. An API operation
-	// can return fewer results than the maximum even when there are more results
-	// available. You should check NextToken after every operation to ensure that you
-	// receive all of the results.
+	// next call to the operation to get the next part of the results.
+	//
+	// An API operation can return fewer results than the maximum even when there are
+	// more results available. You should check NextToken after every operation to
+	// ensure that you receive all of the results.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

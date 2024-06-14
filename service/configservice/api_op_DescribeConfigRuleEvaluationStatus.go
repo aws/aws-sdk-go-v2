@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/configservice/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -38,10 +37,15 @@ type DescribeConfigRuleEvaluationStatusInput struct {
 	// managed rules that you use.
 	ConfigRuleNames []string
 
-	// The number of rule evaluation results that you want returned. This parameter is
-	// required if the rule limit for your account is more than the default of 150
-	// rules. For information about requesting a rule limit increase, see Config Limits (http://docs.aws.amazon.com/general/latest/gr/aws_service_limits.html#limits_config)
-	// in the Amazon Web Services General Reference Guide.
+	// The number of rule evaluation results that you want returned.
+	//
+	// This parameter is required if the rule limit for your account is more than the
+	// default of 1000 rules.
+	//
+	// For information about requesting a rule limit increase, see [Config Limits] in the Amazon Web
+	// Services General Reference Guide.
+	//
+	// [Config Limits]: http://docs.aws.amazon.com/general/latest/gr/aws_service_limits.html#limits_config
 	Limit int32
 
 	// The nextToken string returned on a previous page that you use to get the next
@@ -88,25 +92,25 @@ func (c *Client) addOperationDescribeConfigRuleEvaluationStatusMiddlewares(stack
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -121,10 +125,13 @@ func (c *Client) addOperationDescribeConfigRuleEvaluationStatusMiddlewares(stack
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeConfigRuleEvaluationStatus(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -153,10 +160,15 @@ var _ DescribeConfigRuleEvaluationStatusAPIClient = (*Client)(nil)
 // DescribeConfigRuleEvaluationStatusPaginatorOptions is the paginator options for
 // DescribeConfigRuleEvaluationStatus
 type DescribeConfigRuleEvaluationStatusPaginatorOptions struct {
-	// The number of rule evaluation results that you want returned. This parameter is
-	// required if the rule limit for your account is more than the default of 150
-	// rules. For information about requesting a rule limit increase, see Config Limits (http://docs.aws.amazon.com/general/latest/gr/aws_service_limits.html#limits_config)
-	// in the Amazon Web Services General Reference Guide.
+	// The number of rule evaluation results that you want returned.
+	//
+	// This parameter is required if the rule limit for your account is more than the
+	// default of 1000 rules.
+	//
+	// For information about requesting a rule limit increase, see [Config Limits] in the Amazon Web
+	// Services General Reference Guide.
+	//
+	// [Config Limits]: http://docs.aws.amazon.com/general/latest/gr/aws_service_limits.html#limits_config
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

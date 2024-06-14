@@ -127,6 +127,28 @@ func ExampleDataReference_outputUsage() {
 var _ *types.GenerativeReference
 var _ *types.ContentReference
 
+func ExampleOrCondition_outputUsage() {
+	var union types.OrCondition
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.OrConditionMemberAndConditions:
+		_ = v.Value // Value is []types.TagCondition
+
+	case *types.OrConditionMemberTagCondition:
+		_ = v.Value // Value is types.TagCondition
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ []types.TagCondition
+var _ *types.TagCondition
+
 func ExampleQueryCondition_outputUsage() {
 	var union types.QueryCondition
 	// type switches can be used to check the union value
@@ -216,3 +238,29 @@ func ExampleSourceConfiguration_outputUsage() {
 }
 
 var _ *types.AppIntegrationsConfiguration
+
+func ExampleTagFilter_outputUsage() {
+	var union types.TagFilter
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.TagFilterMemberAndConditions:
+		_ = v.Value // Value is []types.TagCondition
+
+	case *types.TagFilterMemberOrConditions:
+		_ = v.Value // Value is []types.OrCondition
+
+	case *types.TagFilterMemberTagCondition:
+		_ = v.Value // Value is types.TagCondition
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ []types.TagCondition
+var _ []types.OrCondition
+var _ *types.TagCondition

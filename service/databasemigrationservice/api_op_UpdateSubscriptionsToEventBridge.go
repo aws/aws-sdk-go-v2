@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -19,10 +18,13 @@ import (
 // version 3.4.5 or higher. To enable migration regardless of version, set the
 // Force option to true. However, if you don't upgrade instances earlier than
 // version 3.4.5, some types of events might not be available when you use Amazon
-// EventBridge. To call this operation, make sure that you have certain permissions
-// added to your user account. For more information, see Migrating event
-// subscriptions to Amazon EventBridge (https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Events.html#CHAP_Events-migrate-to-eventbridge)
-// in the Amazon Web Services Database Migration Service User Guide.
+// EventBridge.
+//
+// To call this operation, make sure that you have certain permissions added to
+// your user account. For more information, see [Migrating event subscriptions to Amazon EventBridge]in the Amazon Web Services
+// Database Migration Service User Guide.
+//
+// [Migrating event subscriptions to Amazon EventBridge]: https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Events.html#CHAP_Events-migrate-to-eventbridge
 func (c *Client) UpdateSubscriptionsToEventBridge(ctx context.Context, params *UpdateSubscriptionsToEventBridgeInput, optFns ...func(*Options)) (*UpdateSubscriptionsToEventBridgeOutput, error) {
 	if params == nil {
 		params = &UpdateSubscriptionsToEventBridgeInput{}
@@ -83,25 +85,25 @@ func (c *Client) addOperationUpdateSubscriptionsToEventBridgeMiddlewares(stack *
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -116,10 +118,13 @@ func (c *Client) addOperationUpdateSubscriptionsToEventBridgeMiddlewares(stack *
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateSubscriptionsToEventBridge(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

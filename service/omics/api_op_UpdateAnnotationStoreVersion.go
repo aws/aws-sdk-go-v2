@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/omics/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -31,17 +30,17 @@ func (c *Client) UpdateAnnotationStoreVersion(ctx context.Context, params *Updat
 
 type UpdateAnnotationStoreVersionInput struct {
 
-	// The name of an annotation store.
+	//  The name of an annotation store.
 	//
 	// This member is required.
 	Name *string
 
-	// The name of an annotation store version.
+	//  The name of an annotation store version.
 	//
 	// This member is required.
 	VersionName *string
 
-	// The description of an annotation store.
+	//  The description of an annotation store.
 	Description *string
 
 	noSmithyDocumentSerde
@@ -49,42 +48,42 @@ type UpdateAnnotationStoreVersionInput struct {
 
 type UpdateAnnotationStoreVersionOutput struct {
 
-	// The time stamp for when an annotation store version was created.
+	//  The time stamp for when an annotation store version was created.
 	//
 	// This member is required.
 	CreationTime *time.Time
 
-	// The description of an annotation store version.
+	//  The description of an annotation store version.
 	//
 	// This member is required.
 	Description *string
 
-	// The annotation store version ID.
+	//  The annotation store version ID.
 	//
 	// This member is required.
 	Id *string
 
-	// The name of an annotation store.
+	//  The name of an annotation store.
 	//
 	// This member is required.
 	Name *string
 
-	// The status of an annotation store version.
+	//  The status of an annotation store version.
 	//
 	// This member is required.
 	Status types.VersionStatus
 
-	// The annotation store ID.
+	//  The annotation store ID.
 	//
 	// This member is required.
 	StoreId *string
 
-	// The time stamp for when an annotation store version was updated.
+	//  The time stamp for when an annotation store version was updated.
 	//
 	// This member is required.
 	UpdateTime *time.Time
 
-	// The name of an annotation store version.
+	//  The name of an annotation store version.
 	//
 	// This member is required.
 	VersionName *string
@@ -117,25 +116,25 @@ func (c *Client) addOperationUpdateAnnotationStoreVersionMiddlewares(stack *midd
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -150,6 +149,9 @@ func (c *Client) addOperationUpdateAnnotationStoreVersionMiddlewares(stack *midd
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addEndpointPrefix_opUpdateAnnotationStoreVersionMiddleware(stack); err != nil {
 		return err
 	}
@@ -159,7 +161,7 @@ func (c *Client) addOperationUpdateAnnotationStoreVersionMiddlewares(stack *midd
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateAnnotationStoreVersion(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

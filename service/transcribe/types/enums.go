@@ -11,12 +11,30 @@ const (
 )
 
 // Values returns all known values for BaseModelName. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (BaseModelName) Values() []BaseModelName {
 	return []BaseModelName{
 		"NarrowBand",
 		"WideBand",
+	}
+}
+
+type CallAnalyticsFeature string
+
+// Enum values for CallAnalyticsFeature
+const (
+	CallAnalyticsFeatureGenerativeSummarization CallAnalyticsFeature = "GENERATIVE_SUMMARIZATION"
+)
+
+// Values returns all known values for CallAnalyticsFeature. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (CallAnalyticsFeature) Values() []CallAnalyticsFeature {
+	return []CallAnalyticsFeature{
+		"GENERATIVE_SUMMARIZATION",
 	}
 }
 
@@ -31,14 +49,35 @@ const (
 )
 
 // Values returns all known values for CallAnalyticsJobStatus. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (CallAnalyticsJobStatus) Values() []CallAnalyticsJobStatus {
 	return []CallAnalyticsJobStatus{
 		"QUEUED",
 		"IN_PROGRESS",
 		"FAILED",
 		"COMPLETED",
+	}
+}
+
+type CallAnalyticsSkippedReasonCode string
+
+// Enum values for CallAnalyticsSkippedReasonCode
+const (
+	CallAnalyticsSkippedReasonCodeInsufficientConversationContent CallAnalyticsSkippedReasonCode = "INSUFFICIENT_CONVERSATION_CONTENT"
+	CallAnalyticsSkippedReasonCodeFailedSafetyGuidelines          CallAnalyticsSkippedReasonCode = "FAILED_SAFETY_GUIDELINES"
+)
+
+// Values returns all known values for CallAnalyticsSkippedReasonCode. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (CallAnalyticsSkippedReasonCode) Values() []CallAnalyticsSkippedReasonCode {
+	return []CallAnalyticsSkippedReasonCode{
+		"INSUFFICIENT_CONVERSATION_CONTENT",
+		"FAILED_SAFETY_GUIDELINES",
 	}
 }
 
@@ -56,8 +95,9 @@ const (
 )
 
 // Values returns all known values for CLMLanguageCode. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (CLMLanguageCode) Values() []CLMLanguageCode {
 	return []CLMLanguageCode{
 		"en-US",
@@ -79,8 +119,9 @@ const (
 )
 
 // Values returns all known values for InputType. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (InputType) Values() []InputType {
 	return []InputType{
 		"REAL_TIME",
@@ -198,8 +239,9 @@ const (
 )
 
 // Values returns all known values for LanguageCode. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (LanguageCode) Values() []LanguageCode {
 	return []LanguageCode{
 		"af-ZA",
@@ -323,8 +365,9 @@ const (
 )
 
 // Values returns all known values for MediaFormat. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (MediaFormat) Values() []MediaFormat {
 	return []MediaFormat{
 		"mp3",
@@ -347,8 +390,9 @@ const (
 
 // Values returns all known values for MedicalContentIdentificationType. Note that
 // this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (MedicalContentIdentificationType) Values() []MedicalContentIdentificationType {
 	return []MedicalContentIdentificationType{
 		"PHI",
@@ -366,8 +410,9 @@ const (
 )
 
 // Values returns all known values for MedicalScribeJobStatus. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (MedicalScribeJobStatus) Values() []MedicalScribeJobStatus {
 	return []MedicalScribeJobStatus{
 		"QUEUED",
@@ -386,6 +431,7 @@ const (
 
 // Values returns all known values for MedicalScribeLanguageCode. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (MedicalScribeLanguageCode) Values() []MedicalScribeLanguageCode {
 	return []MedicalScribeLanguageCode{
@@ -403,8 +449,9 @@ const (
 
 // Values returns all known values for MedicalScribeParticipantRole. Note that
 // this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (MedicalScribeParticipantRole) Values() []MedicalScribeParticipantRole {
 	return []MedicalScribeParticipantRole{
 		"PATIENT",
@@ -422,8 +469,9 @@ const (
 )
 
 // Values returns all known values for ModelStatus. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ModelStatus) Values() []ModelStatus {
 	return []ModelStatus{
 		"IN_PROGRESS",
@@ -441,8 +489,9 @@ const (
 )
 
 // Values returns all known values for OutputLocationType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (OutputLocationType) Values() []OutputLocationType {
 	return []OutputLocationType{
 		"CUSTOMER_BUCKET",
@@ -459,8 +508,9 @@ const (
 )
 
 // Values returns all known values for ParticipantRole. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ParticipantRole) Values() []ParticipantRole {
 	return []ParticipantRole{
 		"AGENT",
@@ -487,8 +537,9 @@ const (
 )
 
 // Values returns all known values for PiiEntityType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (PiiEntityType) Values() []PiiEntityType {
 	return []PiiEntityType{
 		"BANK_ACCOUNT_NUMBER",
@@ -515,8 +566,9 @@ const (
 )
 
 // Values returns all known values for RedactionOutput. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (RedactionOutput) Values() []RedactionOutput {
 	return []RedactionOutput{
 		"redacted",
@@ -532,8 +584,9 @@ const (
 )
 
 // Values returns all known values for RedactionType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (RedactionType) Values() []RedactionType {
 	return []RedactionType{
 		"PII",
@@ -551,8 +604,9 @@ const (
 )
 
 // Values returns all known values for SentimentValue. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (SentimentValue) Values() []SentimentValue {
 	return []SentimentValue{
 		"POSITIVE",
@@ -570,8 +624,9 @@ const (
 )
 
 // Values returns all known values for Specialty. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (Specialty) Values() []Specialty {
 	return []Specialty{
 		"PRIMARYCARE",
@@ -587,8 +642,9 @@ const (
 )
 
 // Values returns all known values for SubtitleFormat. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (SubtitleFormat) Values() []SubtitleFormat {
 	return []SubtitleFormat{
 		"vtt",
@@ -604,8 +660,9 @@ const (
 )
 
 // Values returns all known values for ToxicityCategory. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ToxicityCategory) Values() []ToxicityCategory {
 	return []ToxicityCategory{
 		"ALL",
@@ -620,8 +677,9 @@ const (
 )
 
 // Values returns all known values for TranscriptFilterType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (TranscriptFilterType) Values() []TranscriptFilterType {
 	return []TranscriptFilterType{
 		"EXACT",
@@ -639,8 +697,9 @@ const (
 )
 
 // Values returns all known values for TranscriptionJobStatus. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (TranscriptionJobStatus) Values() []TranscriptionJobStatus {
 	return []TranscriptionJobStatus{
 		"QUEUED",
@@ -659,8 +718,9 @@ const (
 )
 
 // Values returns all known values for Type. Note that this can be expanded in the
-// future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (Type) Values() []Type {
 	return []Type{
 		"CONVERSATION",
@@ -678,8 +738,9 @@ const (
 )
 
 // Values returns all known values for VocabularyFilterMethod. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (VocabularyFilterMethod) Values() []VocabularyFilterMethod {
 	return []VocabularyFilterMethod{
 		"remove",
@@ -698,8 +759,9 @@ const (
 )
 
 // Values returns all known values for VocabularyState. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (VocabularyState) Values() []VocabularyState {
 	return []VocabularyState{
 		"PENDING",

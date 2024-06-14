@@ -6,18 +6,19 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/cloudhsmv2/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Gets information about AWS CloudHSM clusters. This is a paginated operation,
-// which means that each response might contain only a subset of all the clusters.
-// When the response contains only a subset of clusters, it includes a NextToken
-// value. Use this value in a subsequent DescribeClusters request to get more
-// clusters. When you receive a response with no NextToken (or an empty or null
-// value), that means there are no more clusters to get.
+// Gets information about AWS CloudHSM clusters.
+//
+// This is a paginated operation, which means that each response might contain
+// only a subset of all the clusters. When the response contains only a subset of
+// clusters, it includes a NextToken value. Use this value in a subsequent
+// DescribeClusters request to get more clusters. When you receive a response with
+// no NextToken (or an empty or null value), that means there are no more clusters
+// to get.
 func (c *Client) DescribeClusters(ctx context.Context, params *DescribeClustersInput, optFns ...func(*Options)) (*DescribeClustersOutput, error) {
 	if params == nil {
 		params = &DescribeClustersInput{}
@@ -35,12 +36,15 @@ func (c *Client) DescribeClusters(ctx context.Context, params *DescribeClustersI
 
 type DescribeClustersInput struct {
 
-	// One or more filters to limit the items returned in the response. Use the
-	// clusterIds filter to return only the specified clusters. Specify clusters by
-	// their cluster identifier (ID). Use the vpcIds filter to return only the
-	// clusters in the specified virtual private clouds (VPCs). Specify VPCs by their
-	// VPC identifier (ID). Use the states filter to return only clusters that match
-	// the specified state.
+	// One or more filters to limit the items returned in the response.
+	//
+	// Use the clusterIds filter to return only the specified clusters. Specify
+	// clusters by their cluster identifier (ID).
+	//
+	// Use the vpcIds filter to return only the clusters in the specified virtual
+	// private clouds (VPCs). Specify VPCs by their VPC identifier (ID).
+	//
+	// Use the states filter to return only clusters that match the specified state.
 	Filters map[string][]string
 
 	// The maximum number of clusters to return in the response. When there are more
@@ -92,25 +96,25 @@ func (c *Client) addOperationDescribeClustersMiddlewares(stack *middleware.Stack
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -125,10 +129,13 @@ func (c *Client) addOperationDescribeClustersMiddlewares(stack *middleware.Stack
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeClusters(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

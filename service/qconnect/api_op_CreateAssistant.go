@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/qconnect/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -42,23 +41,26 @@ type CreateAssistantInput struct {
 
 	// A unique, case-sensitive identifier that you provide to ensure the idempotency
 	// of the request. If not provided, the Amazon Web Services SDK populates this
-	// field. For more information about idempotency, see Making retries safe with
-	// idempotent APIs (https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/)
-	// .
+	// field. For more information about idempotency, see [Making retries safe with idempotent APIs].
+	//
+	// [Making retries safe with idempotent APIs]: https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/
 	ClientToken *string
 
 	// The description of the assistant.
 	Description *string
 
 	// The configuration information for the customer managed key used for encryption.
+	//
 	// The customer managed key must have a policy that allows kms:CreateGrant ,
 	// kms:DescribeKey , kms:Decrypt , and kms:GenerateDataKey* permissions to the IAM
-	// identity using the key to invoke Amazon Q. To use Amazon Q with chat, the key
-	// policy must also allow kms:Decrypt , kms:GenerateDataKey* , and kms:DescribeKey
-	// permissions to the connect.amazonaws.com service principal. For more
-	// information about setting up a customer managed key for Amazon Q, see Enable
-	// Amazon Q in Connect for your instance (https://docs.aws.amazon.com/connect/latest/adminguide/enable-q.html)
-	// .
+	// identity using the key to invoke Amazon Q in Connect. To use Amazon Q in Connect
+	// with chat, the key policy must also allow kms:Decrypt , kms:GenerateDataKey* ,
+	// and kms:DescribeKey permissions to the connect.amazonaws.com service principal.
+	//
+	// For more information about setting up a customer managed key for Amazon Q in
+	// Connect, see [Enable Amazon Q in Connect for your instance].
+	//
+	// [Enable Amazon Q in Connect for your instance]: https://docs.aws.amazon.com/connect/latest/adminguide/enable-q.html
 	ServerSideEncryptionConfiguration *types.ServerSideEncryptionConfiguration
 
 	// The tags used to organize, track, or control access for this resource.
@@ -100,25 +102,25 @@ func (c *Client) addOperationCreateAssistantMiddlewares(stack *middleware.Stack,
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -133,6 +135,9 @@ func (c *Client) addOperationCreateAssistantMiddlewares(stack *middleware.Stack,
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opCreateAssistantMiddleware(stack, options); err != nil {
 		return err
 	}
@@ -142,7 +147,7 @@ func (c *Client) addOperationCreateAssistantMiddlewares(stack *middleware.Stack,
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateAssistant(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

@@ -192,6 +192,24 @@ type TemplateInput struct {
 	noSmithyDocumentSerde
 }
 
+// The migration workflow template used as the source for the new template.
+//
+// The following types satisfy this interface:
+//
+//	TemplateSourceMemberWorkflowId
+type TemplateSource interface {
+	isTemplateSource()
+}
+
+// The ID of the workflow from the source migration workflow template.
+type TemplateSourceMemberWorkflowId struct {
+	Value string
+
+	noSmithyDocumentSerde
+}
+
+func (*TemplateSourceMemberWorkflowId) isTemplateSource() {}
+
 // The summary of the step group in the template.
 type TemplateStepGroupSummary struct {
 
@@ -433,4 +451,5 @@ type UnknownUnionMember struct {
 }
 
 func (*UnknownUnionMember) isStepInput()               {}
+func (*UnknownUnionMember) isTemplateSource()          {}
 func (*UnknownUnionMember) isWorkflowStepOutputUnion() {}

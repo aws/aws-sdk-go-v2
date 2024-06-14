@@ -6,19 +6,27 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes a state machine alias (https://docs.aws.amazon.com/step-functions/latest/dg/concepts-state-machine-alias.html)
-// . After you delete a state machine alias, you can't use it to start executions.
+// Deletes a state machine [alias].
+//
+// After you delete a state machine alias, you can't use it to start executions.
 // When you delete a state machine alias, Step Functions doesn't delete the state
-// machine versions that alias references. Related operations:
-//   - CreateStateMachineAlias
-//   - DescribeStateMachineAlias
-//   - ListStateMachineAliases
-//   - UpdateStateMachineAlias
+// machine versions that alias references.
+//
+// Related operations:
+//
+// # CreateStateMachineAlias
+//
+// # DescribeStateMachineAlias
+//
+// # ListStateMachineAliases
+//
+// # UpdateStateMachineAlias
+//
+// [alias]: https://docs.aws.amazon.com/step-functions/latest/dg/concepts-state-machine-alias.html
 func (c *Client) DeleteStateMachineAlias(ctx context.Context, params *DeleteStateMachineAliasInput, optFns ...func(*Options)) (*DeleteStateMachineAliasOutput, error) {
 	if params == nil {
 		params = &DeleteStateMachineAliasInput{}
@@ -73,25 +81,25 @@ func (c *Client) addOperationDeleteStateMachineAliasMiddlewares(stack *middlewar
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -106,13 +114,16 @@ func (c *Client) addOperationDeleteStateMachineAliasMiddlewares(stack *middlewar
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDeleteStateMachineAliasValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteStateMachineAlias(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

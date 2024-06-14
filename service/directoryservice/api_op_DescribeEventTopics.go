@@ -6,16 +6,16 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/directoryservice/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Obtains information about which Amazon SNS topics receive status messages from
-// the specified directory. If no input parameters are provided, such as
-// DirectoryId or TopicName, this request describes all of the associations in the
-// account.
+// the specified directory.
+//
+// If no input parameters are provided, such as DirectoryId or TopicName, this
+// request describes all of the associations in the account.
 func (c *Client) DescribeEventTopics(ctx context.Context, params *DescribeEventTopicsInput, optFns ...func(*Options)) (*DescribeEventTopicsOutput, error) {
 	if params == nil {
 		params = &DescribeEventTopicsInput{}
@@ -39,8 +39,9 @@ type DescribeEventTopicsInput struct {
 	DirectoryId *string
 
 	// A list of Amazon SNS topic names for which to obtain the information. If this
-	// member is null, all associations for the specified Directory ID are returned. An
-	// empty list results in an InvalidParameterException being thrown.
+	// member is null, all associations for the specified Directory ID are returned.
+	//
+	// An empty list results in an InvalidParameterException being thrown.
 	TopicNames []string
 
 	noSmithyDocumentSerde
@@ -81,25 +82,25 @@ func (c *Client) addOperationDescribeEventTopicsMiddlewares(stack *middleware.St
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -114,10 +115,13 @@ func (c *Client) addOperationDescribeEventTopicsMiddlewares(stack *middleware.St
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeEventTopics(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

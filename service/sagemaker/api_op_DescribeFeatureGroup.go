@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -52,9 +51,10 @@ type DescribeFeatureGroupOutput struct {
 	// This member is required.
 	CreationTime *time.Time
 
-	// The name of the feature that stores the EventTime of a Record in a FeatureGroup
-	// . An EventTime is a point in time when a new event occurs that corresponds to
-	// the creation or update of a Record in a FeatureGroup . All Records in the
+	// The name of the feature that stores the EventTime of a Record in a FeatureGroup .
+	//
+	// An EventTime is a point in time when a new event occurs that corresponds to the
+	// creation or update of a Record in a FeatureGroup . All Records in the
 	// FeatureGroup have a corresponding EventTime .
 	//
 	// This member is required.
@@ -92,7 +92,9 @@ type DescribeFeatureGroupOutput struct {
 
 	// The reason that the FeatureGroup failed to be replicated in the OfflineStore .
 	// This is failure can occur because:
+	//
 	//   - The FeatureGroup could not be created in the OfflineStore .
+	//
 	//   - The FeatureGroup could not be deleted from the OfflineStore .
 	FailureReason *string
 
@@ -107,11 +109,16 @@ type DescribeFeatureGroupOutput struct {
 
 	// The configuration of the offline store. It includes the following
 	// configurations:
+	//
 	//   - Amazon S3 location of the offline store.
+	//
 	//   - Configuration of the Glue data catalog.
+	//
 	//   - Table format of the offline store.
+	//
 	//   - Option to disable the automatic creation of a Glue table for the offline
 	//   store.
+	//
 	//   - Encryption configuration.
 	OfflineStoreConfig *types.OfflineStoreConfig
 
@@ -137,9 +144,12 @@ type DescribeFeatureGroupOutput struct {
 	// only once in a 24 hour period. With provisioned throughput mode, you specify the
 	// read and write capacity per second that you expect your application to require,
 	// and you are billed based on those limits. Exceeding provisioned throughput will
-	// result in your requests being throttled. Note: PROVISIONED throughput mode is
-	// supported only for feature groups that are offline-only, or use the Standard (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_OnlineStoreConfig.html#sagemaker-Type-OnlineStoreConfig-StorageType)
-	// tier online store.
+	// result in your requests being throttled.
+	//
+	// Note: PROVISIONED throughput mode is supported only for feature groups that are
+	// offline-only, or use the [Standard]Standard tier online store.
+	//
+	// [Standard]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_OnlineStoreConfig.html#sagemaker-Type-OnlineStoreConfig-StorageType
 	ThroughputConfig *types.ThroughputConfigDescription
 
 	// Metadata pertaining to the operation's result.
@@ -170,25 +180,25 @@ func (c *Client) addOperationDescribeFeatureGroupMiddlewares(stack *middleware.S
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -203,13 +213,16 @@ func (c *Client) addOperationDescribeFeatureGroupMiddlewares(stack *middleware.S
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDescribeFeatureGroupValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeFeatureGroup(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

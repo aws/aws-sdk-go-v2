@@ -6,20 +6,25 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/autoscaling/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Describes the specified tags. You can use filters to limit the results. For
-// example, you can query for the tags for a specific Auto Scaling group. You can
-// specify multiple values for a filter. A tag must match at least one of the
-// specified values for it to be included in the results. You can also specify
-// multiple filters. The result includes information for a particular tag only if
-// it matches all the filters. If there's no match, no special message is returned.
-// For more information, see Tag Auto Scaling groups and instances (https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-tagging.html)
-// in the Amazon EC2 Auto Scaling User Guide.
+// Describes the specified tags.
+//
+// You can use filters to limit the results. For example, you can query for the
+// tags for a specific Auto Scaling group. You can specify multiple values for a
+// filter. A tag must match at least one of the specified values for it to be
+// included in the results.
+//
+// You can also specify multiple filters. The result includes information for a
+// particular tag only if it matches all the filters. If there's no match, no
+// special message is returned.
+//
+// For more information, see [Tag Auto Scaling groups and instances] in the Amazon EC2 Auto Scaling User Guide.
+//
+// [Tag Auto Scaling groups and instances]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-tagging.html
 func (c *Client) DescribeTags(ctx context.Context, params *DescribeTagsInput, optFns ...func(*Options)) (*DescribeTagsOutput, error) {
 	if params == nil {
 		params = &DescribeTagsInput{}
@@ -91,25 +96,25 @@ func (c *Client) addOperationDescribeTagsMiddlewares(stack *middleware.Stack, op
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -124,10 +129,13 @@ func (c *Client) addOperationDescribeTagsMiddlewares(stack *middleware.Stack, op
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeTags(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

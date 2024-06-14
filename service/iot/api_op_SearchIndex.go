@@ -6,14 +6,16 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/iot/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// The query search index. Requires permission to access the SearchIndex (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
-// action.
+// The query search index.
+//
+// Requires permission to access the [SearchIndex] action.
+//
+// [SearchIndex]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions
 func (c *Client) SearchIndex(ctx context.Context, params *SearchIndexInput, optFns ...func(*Options)) (*SearchIndexOutput, error) {
 	if params == nil {
 		params = &SearchIndexInput{}
@@ -32,8 +34,9 @@ func (c *Client) SearchIndex(ctx context.Context, params *SearchIndexInput, optF
 type SearchIndexInput struct {
 
 	// The search query string. For more information about the search query syntax,
-	// see Query syntax (https://docs.aws.amazon.com/iot/latest/developerguide/query-syntax.html)
-	// .
+	// see [Query syntax].
+	//
+	// [Query syntax]: https://docs.aws.amazon.com/iot/latest/developerguide/query-syntax.html
 	//
 	// This member is required.
 	QueryString *string
@@ -41,8 +44,12 @@ type SearchIndexInput struct {
 	// The search index name.
 	IndexName *string
 
-	// The maximum number of results to return per page at one time. The response
-	// might contain fewer results but will never contain more.
+	// The maximum number of results to return per page at one time. This maximum
+	// number cannot exceed 100. The response might contain fewer results but will
+	// never contain more. You can use [nextToken]nextToken to retrieve the next set of results
+	// until nextToken returns NULL .
+	//
+	// [nextToken]: https://docs.aws.amazon.com/iot/latest/apireference/API_SearchIndex.html#iot-SearchIndex-request-nextToken
 	MaxResults *int32
 
 	// The token used to get the next set of results, or null if there are no
@@ -95,25 +102,25 @@ func (c *Client) addOperationSearchIndexMiddlewares(stack *middleware.Stack, opt
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -128,13 +135,16 @@ func (c *Client) addOperationSearchIndexMiddlewares(stack *middleware.Stack, opt
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpSearchIndexValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opSearchIndex(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

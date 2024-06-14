@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/backup/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -47,8 +46,10 @@ type DescribeFrameworkOutput struct {
 	// hours behind UTC.
 	CreationTime *time.Time
 
-	// The deployment status of a framework. The statuses are: CREATE_IN_PROGRESS |
-	// UPDATE_IN_PROGRESS | DELETE_IN_PROGRESS | COMPLETED | FAILED
+	// The deployment status of a framework. The statuses are:
+	//
+	//     CREATE_IN_PROGRESS | UPDATE_IN_PROGRESS | DELETE_IN_PROGRESS | COMPLETED |
+	//     FAILED
 	DeploymentStatus *string
 
 	// An Amazon Resource Name (ARN) that uniquely identifies a resource. The format
@@ -68,12 +69,16 @@ type DescribeFrameworkOutput struct {
 	// A framework consists of one or more controls. Each control governs a resource,
 	// such as backup plans, backup selections, backup vaults, or recovery points. You
 	// can also turn Config recording on or off for each resource. The statuses are:
+	//
 	//   - ACTIVE when recording is turned on for all resources governed by the
 	//   framework.
+	//
 	//   - PARTIALLY_ACTIVE when recording is turned off for at least one resource
 	//   governed by the framework.
+	//
 	//   - INACTIVE when recording is turned off for all resources governed by the
 	//   framework.
+	//
 	//   - UNAVAILABLE when Backup is unable to validate recording status at this time.
 	FrameworkStatus *string
 
@@ -110,25 +115,25 @@ func (c *Client) addOperationDescribeFrameworkMiddlewares(stack *middleware.Stac
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -143,13 +148,16 @@ func (c *Client) addOperationDescribeFrameworkMiddlewares(stack *middleware.Stac
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDescribeFrameworkValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeFramework(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

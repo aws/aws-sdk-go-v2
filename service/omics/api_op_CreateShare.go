@@ -6,14 +6,22 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/omics/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a share offer that can be accepted outside the account by a subscriber.
-// The share is created by the owner and accepted by the principal subscriber.
+// Creates a cross-account shared resource. The resource owner makes an offer to
+// share the resource with the principal subscriber (an AWS user with a different
+// account than the resource owner).
+//
+// The following resources support cross-account sharing:
+//
+//   - Healthomics variant stores
+//
+//   - Healthomics annotation stores
+//
+//   - Private workflows
 func (c *Client) CreateShare(ctx context.Context, params *CreateShareInput, optFns ...func(*Options)) (*CreateShareOutput, error) {
 	if params == nil {
 		params = &CreateShareInput{}
@@ -31,18 +39,18 @@ func (c *Client) CreateShare(ctx context.Context, params *CreateShareInput, optF
 
 type CreateShareInput struct {
 
-	// The principal subscriber is the account being given access to the analytics
-	// store data through the share offer.
+	// The principal subscriber is the account being offered shared access to the
+	// resource.
 	//
 	// This member is required.
 	PrincipalSubscriber *string
 
-	// The resource ARN for the analytics store to be shared.
+	// The ARN of the resource to be shared.
 	//
 	// This member is required.
 	ResourceArn *string
 
-	// A name given to the share.
+	// A name that the owner defines for the share.
 	ShareName *string
 
 	noSmithyDocumentSerde
@@ -50,13 +58,13 @@ type CreateShareInput struct {
 
 type CreateShareOutput struct {
 
-	// An ID generated for the share.
+	// The ID that HealthOmics generates for the share.
 	ShareId *string
 
-	// A name given to the share.
+	// The name of the share.
 	ShareName *string
 
-	// The status of a share.
+	// The status of the share.
 	Status types.ShareStatus
 
 	// Metadata pertaining to the operation's result.
@@ -87,25 +95,25 @@ func (c *Client) addOperationCreateShareMiddlewares(stack *middleware.Stack, opt
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -120,6 +128,9 @@ func (c *Client) addOperationCreateShareMiddlewares(stack *middleware.Stack, opt
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addEndpointPrefix_opCreateShareMiddleware(stack); err != nil {
 		return err
 	}
@@ -129,7 +140,7 @@ func (c *Client) addOperationCreateShareMiddlewares(stack *middleware.Stack, opt
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateShare(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

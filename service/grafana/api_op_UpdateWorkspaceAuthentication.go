@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/grafana/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -15,8 +14,10 @@ import (
 // Use this operation to define the identity provider (IdP) that this workspace
 // authenticates users from, using SAML. You can also map SAML assertion attributes
 // to workspace user information and define which groups in the assertion attribute
-// are to have the Admin and Editor roles in the workspace. Changes to the
-// authentication method for a workspace may take a few minutes to take effect.
+// are to have the Admin and Editor roles in the workspace.
+//
+// Changes to the authentication method for a workspace may take a few minutes to
+// take effect.
 func (c *Client) UpdateWorkspaceAuthentication(ctx context.Context, params *UpdateWorkspaceAuthenticationInput, optFns ...func(*Options)) (*UpdateWorkspaceAuthenticationOutput, error) {
 	if params == nil {
 		params = &UpdateWorkspaceAuthenticationInput{}
@@ -34,11 +35,11 @@ func (c *Client) UpdateWorkspaceAuthentication(ctx context.Context, params *Upda
 
 type UpdateWorkspaceAuthenticationInput struct {
 
-	// Specifies whether this workspace uses SAML 2.0, IAM Identity Center (successor
-	// to Single Sign-On), or both to authenticate users for using the Grafana console
-	// within a workspace. For more information, see User authentication in Amazon
-	// Managed Grafana (https://docs.aws.amazon.com/grafana/latest/userguide/authentication-in-AMG.html)
-	// .
+	// Specifies whether this workspace uses SAML 2.0, IAM Identity Center, or both to
+	// authenticate users for using the Grafana console within a workspace. For more
+	// information, see [User authentication in Amazon Managed Grafana].
+	//
+	// [User authentication in Amazon Managed Grafana]: https://docs.aws.amazon.com/grafana/latest/userguide/authentication-in-AMG.html
 	//
 	// This member is required.
 	AuthenticationProviders []types.AuthenticationProviderTypes
@@ -92,25 +93,25 @@ func (c *Client) addOperationUpdateWorkspaceAuthenticationMiddlewares(stack *mid
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -125,13 +126,16 @@ func (c *Client) addOperationUpdateWorkspaceAuthenticationMiddlewares(stack *mid
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpUpdateWorkspaceAuthenticationValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateWorkspaceAuthentication(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

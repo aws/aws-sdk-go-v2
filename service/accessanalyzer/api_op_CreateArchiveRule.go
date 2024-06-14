@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/accessanalyzer/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -14,9 +13,11 @@ import (
 
 // Creates an archive rule for the specified analyzer. Archive rules automatically
 // archive new findings that meet the criteria you define when you create the rule.
-// To learn about filter keys that you can use to create an archive rule, see IAM
-// Access Analyzer filter keys (https://docs.aws.amazon.com/IAM/latest/UserGuide/access-analyzer-reference-filter-keys.html)
-// in the IAM User Guide.
+//
+// To learn about filter keys that you can use to create an archive rule, see [IAM Access Analyzer filter keys] in
+// the IAM User Guide.
+//
+// [IAM Access Analyzer filter keys]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access-analyzer-reference-filter-keys.html
 func (c *Client) CreateArchiveRule(ctx context.Context, params *CreateArchiveRuleInput, optFns ...func(*Options)) (*CreateArchiveRuleOutput, error) {
 	if params == nil {
 		params = &CreateArchiveRuleInput{}
@@ -85,25 +86,25 @@ func (c *Client) addOperationCreateArchiveRuleMiddlewares(stack *middleware.Stac
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -118,6 +119,9 @@ func (c *Client) addOperationCreateArchiveRuleMiddlewares(stack *middleware.Stac
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opCreateArchiveRuleMiddleware(stack, options); err != nil {
 		return err
 	}
@@ -127,7 +131,7 @@ func (c *Client) addOperationCreateArchiveRuleMiddlewares(stack *middleware.Stac
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateArchiveRule(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

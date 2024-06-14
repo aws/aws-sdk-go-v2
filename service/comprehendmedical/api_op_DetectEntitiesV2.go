@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/comprehendmedical/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -15,12 +14,15 @@ import (
 // Inspects the clinical text for a variety of medical entities and returns
 // specific information about them such as entity category, location, and
 // confidence score on that information. Amazon Comprehend Medical only detects
-// medical entities in English language texts. The DetectEntitiesV2 operation
-// replaces the DetectEntities operation. This new action uses a different model
-// for determining the entities in your medical text and changes the way that some
-// entities are returned in the output. You should use the DetectEntitiesV2
-// operation in all new applications. The DetectEntitiesV2 operation returns the
-// Acuity and Direction entities as attributes instead of types.
+// medical entities in English language texts.
+//
+// The DetectEntitiesV2 operation replaces the DetectEntities operation. This new action uses a
+// different model for determining the entities in your medical text and changes
+// the way that some entities are returned in the output. You should use the
+// DetectEntitiesV2 operation in all new applications.
+//
+// The DetectEntitiesV2 operation returns the Acuity and Direction entities as
+// attributes instead of types.
 func (c *Client) DetectEntitiesV2(ctx context.Context, params *DetectEntitiesV2Input, optFns ...func(*Options)) (*DetectEntitiesV2Output, error) {
 	if params == nil {
 		params = &DetectEntitiesV2Input{}
@@ -99,25 +101,25 @@ func (c *Client) addOperationDetectEntitiesV2Middlewares(stack *middleware.Stack
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -132,13 +134,16 @@ func (c *Client) addOperationDetectEntitiesV2Middlewares(stack *middleware.Stack
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDetectEntitiesV2ValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDetectEntitiesV2(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

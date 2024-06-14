@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -45,8 +44,9 @@ type CreateHostedConfigurationVersionInput struct {
 	Content []byte
 
 	// A standard MIME type describing the format of the configuration content. For
-	// more information, see Content-Type (https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.17)
-	// .
+	// more information, see [Content-Type].
+	//
+	// [Content-Type]: https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.17
 	//
 	// This member is required.
 	ContentType *string
@@ -81,8 +81,9 @@ type CreateHostedConfigurationVersionOutput struct {
 	Content []byte
 
 	// A standard MIME type describing the format of the configuration content. For
-	// more information, see Content-Type (https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.17)
-	// .
+	// more information, see [Content-Type].
+	//
+	// [Content-Type]: https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.17
 	ContentType *string
 
 	// A description of the configuration.
@@ -127,25 +128,25 @@ func (c *Client) addOperationCreateHostedConfigurationVersionMiddlewares(stack *
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -160,13 +161,16 @@ func (c *Client) addOperationCreateHostedConfigurationVersionMiddlewares(stack *
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpCreateHostedConfigurationVersionValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateHostedConfigurationVersion(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

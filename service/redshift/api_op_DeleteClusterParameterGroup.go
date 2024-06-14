@@ -6,13 +6,13 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes a specified Amazon Redshift parameter group. You cannot delete a
-// parameter group if it is associated with a cluster.
+// Deletes a specified Amazon Redshift parameter group.
+//
+// You cannot delete a parameter group if it is associated with a cluster.
 func (c *Client) DeleteClusterParameterGroup(ctx context.Context, params *DeleteClusterParameterGroupInput, optFns ...func(*Options)) (*DeleteClusterParameterGroupOutput, error) {
 	if params == nil {
 		params = &DeleteClusterParameterGroupInput{}
@@ -30,8 +30,12 @@ func (c *Client) DeleteClusterParameterGroup(ctx context.Context, params *Delete
 
 type DeleteClusterParameterGroupInput struct {
 
-	// The name of the parameter group to be deleted. Constraints:
+	// The name of the parameter group to be deleted.
+	//
+	// Constraints:
+	//
 	//   - Must be the name of an existing cluster parameter group.
+	//
 	//   - Cannot delete a default cluster parameter group.
 	//
 	// This member is required.
@@ -69,25 +73,25 @@ func (c *Client) addOperationDeleteClusterParameterGroupMiddlewares(stack *middl
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -102,13 +106,16 @@ func (c *Client) addOperationDeleteClusterParameterGroupMiddlewares(stack *middl
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDeleteClusterParameterGroupValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteClusterParameterGroup(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

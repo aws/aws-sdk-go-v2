@@ -6,19 +6,24 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
+	"github.com/aws/aws-sdk-go-v2/service/eventbridge/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
+	"time"
 )
 
 // Displays details about an event bus in your account. This can include the
 // external Amazon Web Services accounts that are permitted to write events to your
 // default event bus, and the associated policy. For custom event buses and partner
-// event buses, it displays the name, ARN, policy, state, and creation time. To
-// enable your account to receive events from other accounts on its default event
-// bus, use PutPermission (https://docs.aws.amazon.com/eventbridge/latest/APIReference/API_PutPermission.html)
-// . For more information about partner event buses, see CreateEventBus (https://docs.aws.amazon.com/eventbridge/latest/APIReference/API_CreateEventBus.html)
-// .
+// event buses, it displays the name, ARN, policy, state, and creation time.
+//
+// To enable your account to receive events from other accounts on its default
+// event bus, use [PutPermission].
+//
+// For more information about partner event buses, see [CreateEventBus].
+//
+// [PutPermission]: https://docs.aws.amazon.com/eventbridge/latest/APIReference/API_PutPermission.html
+// [CreateEventBus]: https://docs.aws.amazon.com/eventbridge/latest/APIReference/API_CreateEventBus.html
 func (c *Client) DescribeEventBus(ctx context.Context, params *DescribeEventBusInput, optFns ...func(*Options)) (*DescribeEventBusOutput, error) {
 	if params == nil {
 		params = &DescribeEventBusInput{}
@@ -48,6 +53,29 @@ type DescribeEventBusOutput struct {
 	// The Amazon Resource Name (ARN) of the account permitted to write events to the
 	// current account.
 	Arn *string
+
+	// The time the event bus was created.
+	CreationTime *time.Time
+
+	// Configuration details of the Amazon SQS queue for EventBridge to use as a
+	// dead-letter queue (DLQ).
+	//
+	// For more information, see Event retry policy and using dead-letter queues in the EventBridge User Guide.
+	DeadLetterConfig *types.DeadLetterConfig
+
+	// The event bus description.
+	Description *string
+
+	// The identifier of the KMS customer managed key for EventBridge to use to
+	// encrypt events on this event bus, if one has been specified.
+	//
+	// For more information, see [Data encryption in EventBridge] in the Amazon EventBridge User Guide.
+	//
+	// [Data encryption in EventBridge]: https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-encryption.html
+	KmsKeyIdentifier *string
+
+	// The time the event bus was last modified.
+	LastModifiedTime *time.Time
 
 	// The name of the event bus. Currently, this is always default .
 	Name *string
@@ -83,25 +111,25 @@ func (c *Client) addOperationDescribeEventBusMiddlewares(stack *middleware.Stack
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -116,10 +144,13 @@ func (c *Client) addOperationDescribeEventBusMiddlewares(stack *middleware.Stack
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeEventBus(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

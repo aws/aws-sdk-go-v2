@@ -3,8 +3,10 @@
 // Package backup provides the API client, operations, and parameter types for AWS
 // Backup.
 //
-// Backup Backup is a unified backup service designed to protect Amazon Web
-// Services services and their associated data. Backup simplifies the creation,
-// migration, restoration, and deletion of backups, while also providing reporting
-// and auditing.
+// # Backup
+//
+// Backup is a unified backup service designed to protect Amazon Web Services
+// services and their associated data. Backup simplifies the creation, migration,
+// restoration, and deletion of backups, while also providing reporting and
+// auditing.
 package backup

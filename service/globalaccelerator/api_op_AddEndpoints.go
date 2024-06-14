@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/globalaccelerator/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -14,19 +13,25 @@ import (
 
 // Add endpoints to an endpoint group. The AddEndpoints API operation is the
 // recommended option for adding endpoints. The alternative options are to add
-// endpoints when you create an endpoint group (with the CreateEndpointGroup (https://docs.aws.amazon.com/global-accelerator/latest/api/API_CreateEndpointGroup.html)
-// API) or when you update an endpoint group (with the UpdateEndpointGroup (https://docs.aws.amazon.com/global-accelerator/latest/api/API_UpdateEndpointGroup.html)
-// API). There are two advantages to using AddEndpoints to add endpoints in Global
+// endpoints when you create an endpoint group (with the [CreateEndpointGroup]API) or when you update
+// an endpoint group (with the [UpdateEndpointGroup]API).
+//
+// There are two advantages to using AddEndpoints to add endpoints in Global
 // Accelerator:
+//
 //   - It's faster, because Global Accelerator only has to resolve the new
 //     endpoints that you're adding, rather than resolving new and existing endpoints.
+//
 //   - It's more convenient, because you don't need to specify the current
 //     endpoints that are already in the endpoint group, in addition to the new
 //     endpoints that you want to add.
 //
 // For information about endpoint types and requirements for endpoints that you
-// can add to Global Accelerator, see Endpoints for standard accelerators (https://docs.aws.amazon.com/global-accelerator/latest/dg/about-endpoints.html)
-// in the Global Accelerator Developer Guide.
+// can add to Global Accelerator, see [Endpoints for standard accelerators]in the Global Accelerator Developer Guide.
+//
+// [Endpoints for standard accelerators]: https://docs.aws.amazon.com/global-accelerator/latest/dg/about-endpoints.html
+// [UpdateEndpointGroup]: https://docs.aws.amazon.com/global-accelerator/latest/api/API_UpdateEndpointGroup.html
+// [CreateEndpointGroup]: https://docs.aws.amazon.com/global-accelerator/latest/api/API_CreateEndpointGroup.html
 func (c *Client) AddEndpoints(ctx context.Context, params *AddEndpointsInput, optFns ...func(*Options)) (*AddEndpointsOutput, error) {
 	if params == nil {
 		params = &AddEndpointsInput{}
@@ -93,25 +98,25 @@ func (c *Client) addOperationAddEndpointsMiddlewares(stack *middleware.Stack, op
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -126,13 +131,16 @@ func (c *Client) addOperationAddEndpointsMiddlewares(stack *middleware.Stack, op
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpAddEndpointsValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opAddEndpoints(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

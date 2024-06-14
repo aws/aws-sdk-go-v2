@@ -16,14 +16,26 @@ import (
 )
 
 // Updates an existing S3 Batch Operations job's priority. For more information,
-// see S3 Batch Operations (https://docs.aws.amazon.com/AmazonS3/latest/userguide/batch-ops.html)
-// in the Amazon S3 User Guide. Permissions To use the UpdateJobPriority
-// operation, you must have permission to perform the s3:UpdateJobPriority action.
+// see [S3 Batch Operations]in the Amazon S3 User Guide.
+//
+// Permissions To use the UpdateJobPriority operation, you must have permission to
+// perform the s3:UpdateJobPriority action.
+//
 // Related actions include:
-//   - CreateJob (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_CreateJob.html)
-//   - ListJobs (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_ListJobs.html)
-//   - DescribeJob (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DescribeJob.html)
-//   - UpdateJobStatus (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_UpdateJobStatus.html)
+//
+// [CreateJob]
+//
+// [ListJobs]
+//
+// [DescribeJob]
+//
+// [UpdateJobStatus]
+//
+// [DescribeJob]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DescribeJob.html
+// [S3 Batch Operations]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/batch-ops.html
+// [CreateJob]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_CreateJob.html
+// [UpdateJobStatus]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_UpdateJobStatus.html
+// [ListJobs]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_ListJobs.html
 func (c *Client) UpdateJobPriority(ctx context.Context, params *UpdateJobPriorityInput, optFns ...func(*Options)) (*UpdateJobPriorityOutput, error) {
 	if params == nil {
 		params = &UpdateJobPriorityInput{}
@@ -104,25 +116,25 @@ func (c *Client) addOperationUpdateJobPriorityMiddlewares(stack *middleware.Stac
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -140,6 +152,9 @@ func (c *Client) addOperationUpdateJobPriorityMiddlewares(stack *middleware.Stac
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addEndpointPrefix_opUpdateJobPriorityMiddleware(stack); err != nil {
 		return err
 	}
@@ -152,7 +167,7 @@ func (c *Client) addOperationUpdateJobPriorityMiddlewares(stack *middleware.Stac
 	if err = addMetadataRetrieverMiddleware(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addUpdateJobPriorityUpdateEndpoint(stack, options); err != nil {

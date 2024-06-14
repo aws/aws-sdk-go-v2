@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/vpclattice/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -14,8 +13,11 @@ import (
 
 // Creates a service network. A service network is a logical boundary for a
 // collection of services. You can associate services and VPCs with a service
-// network. For more information, see Service networks (https://docs.aws.amazon.com/vpc-lattice/latest/ug/service-networks.html)
-// in the Amazon VPC Lattice User Guide.
+// network.
+//
+// For more information, see [Service networks] in the Amazon VPC Lattice User Guide.
+//
+// [Service networks]: https://docs.aws.amazon.com/vpc-lattice/latest/ug/service-networks.html
 func (c *Client) CreateServiceNetwork(ctx context.Context, params *CreateServiceNetworkInput, optFns ...func(*Options)) (*CreateServiceNetworkOutput, error) {
 	if params == nil {
 		params = &CreateServiceNetworkInput{}
@@ -41,7 +43,9 @@ type CreateServiceNetworkInput struct {
 	Name *string
 
 	// The type of IAM policy.
+	//
 	//   - NONE : The resource does not use an IAM policy. This is the default.
+	//
 	//   - AWS_IAM : The resource uses an IAM policy. When this type is used, auth is
 	//   enabled and an auth policy is required.
 	AuthType types.AuthType
@@ -100,25 +104,25 @@ func (c *Client) addOperationCreateServiceNetworkMiddlewares(stack *middleware.S
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -133,6 +137,9 @@ func (c *Client) addOperationCreateServiceNetworkMiddlewares(stack *middleware.S
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opCreateServiceNetworkMiddleware(stack, options); err != nil {
 		return err
 	}
@@ -142,7 +149,7 @@ func (c *Client) addOperationCreateServiceNetworkMiddlewares(stack *middleware.S
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateServiceNetwork(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

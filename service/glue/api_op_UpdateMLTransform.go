@@ -6,17 +6,18 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/glue/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Updates an existing machine learning transform. Call this operation to tune the
-// algorithm parameters to achieve better results. After calling this operation,
-// you can call the StartMLEvaluationTaskRun operation to assess how well your new
-// parameters achieved your goals (such as improving the quality of your machine
-// learning transform, or making it more cost-effective).
+// algorithm parameters to achieve better results.
+//
+// After calling this operation, you can call the StartMLEvaluationTaskRun
+// operation to assess how well your new parameters achieved your goals (such as
+// improving the quality of your machine learning transform, or making it more
+// cost-effective).
 func (c *Client) UpdateMLTransform(ctx context.Context, params *UpdateMLTransformInput, optFns ...func(*Options)) (*UpdateMLTransformOutput, error) {
 	if params == nil {
 		params = &UpdateMLTransformInput{}
@@ -44,18 +45,21 @@ type UpdateMLTransformInput struct {
 
 	// This value determines which version of Glue this machine learning transform is
 	// compatible with. Glue 1.0 is recommended for most customers. If the value is not
-	// set, the Glue compatibility defaults to Glue 0.9. For more information, see
-	// Glue Versions (https://docs.aws.amazon.com/glue/latest/dg/release-notes.html#release-notes-versions)
-	// in the developer guide.
+	// set, the Glue compatibility defaults to Glue 0.9. For more information, see [Glue Versions]in
+	// the developer guide.
+	//
+	// [Glue Versions]: https://docs.aws.amazon.com/glue/latest/dg/release-notes.html#release-notes-versions
 	GlueVersion *string
 
 	// The number of Glue data processing units (DPUs) that are allocated to task runs
 	// for this transform. You can allocate from 2 to 100 DPUs; the default is 10. A
 	// DPU is a relative measure of processing power that consists of 4 vCPUs of
-	// compute capacity and 16 GB of memory. For more information, see the Glue
-	// pricing page (https://aws.amazon.com/glue/pricing/) . When the WorkerType field
-	// is set to a value other than Standard , the MaxCapacity field is set
-	// automatically and becomes read-only.
+	// compute capacity and 16 GB of memory. For more information, see the [Glue pricing page].
+	//
+	// When the WorkerType field is set to a value other than Standard , the
+	// MaxCapacity field is set automatically and becomes read-only.
+	//
+	// [Glue pricing page]: https://aws.amazon.com/glue/pricing/
 	MaxCapacity *float64
 
 	// The maximum number of times to retry a task for this transform after a task run
@@ -84,10 +88,13 @@ type UpdateMLTransformInput struct {
 
 	// The type of predefined worker that is allocated when this task runs. Accepts a
 	// value of Standard, G.1X, or G.2X.
+	//
 	//   - For the Standard worker type, each worker provides 4 vCPU, 16 GB of memory
 	//   and a 50GB disk, and 2 executors per worker.
+	//
 	//   - For the G.1X worker type, each worker provides 4 vCPU, 16 GB of memory and a
 	//   64GB disk, and 1 executor per worker.
+	//
 	//   - For the G.2X worker type, each worker provides 8 vCPU, 32 GB of memory and a
 	//   128GB disk, and 1 executor per worker.
 	WorkerType types.WorkerType
@@ -128,25 +135,25 @@ func (c *Client) addOperationUpdateMLTransformMiddlewares(stack *middleware.Stac
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -161,13 +168,16 @@ func (c *Client) addOperationUpdateMLTransformMiddlewares(stack *middleware.Stac
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpUpdateMLTransformValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateMLTransform(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

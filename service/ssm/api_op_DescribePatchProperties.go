@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/ssm/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -15,17 +14,31 @@ import (
 // Lists the properties of available patches organized by product, product family,
 // classification, severity, and other properties of available patches. You can use
 // the reported properties in the filters you specify in requests for operations
-// such as CreatePatchBaseline , UpdatePatchBaseline , DescribeAvailablePatches ,
-// and DescribePatchBaselines . The following section lists the properties that can
-// be used in filters for each major operating system type: AMAZON_LINUX Valid
-// properties: PRODUCT | CLASSIFICATION | SEVERITY AMAZON_LINUX_2 Valid
-// properties: PRODUCT | CLASSIFICATION | SEVERITY CENTOS Valid properties: PRODUCT
-// | CLASSIFICATION | SEVERITY DEBIAN Valid properties: PRODUCT | PRIORITY MACOS
-// Valid properties: PRODUCT | CLASSIFICATION ORACLE_LINUX Valid properties:
-// PRODUCT | CLASSIFICATION | SEVERITY REDHAT_ENTERPRISE_LINUX Valid properties:
-// PRODUCT | CLASSIFICATION | SEVERITY SUSE Valid properties: PRODUCT |
-// CLASSIFICATION | SEVERITY UBUNTU Valid properties: PRODUCT | PRIORITY WINDOWS
-// Valid properties: PRODUCT | PRODUCT_FAMILY | CLASSIFICATION | MSRC_SEVERITY
+// such as CreatePatchBaseline, UpdatePatchBaseline, DescribeAvailablePatches, and DescribePatchBaselines.
+//
+// The following section lists the properties that can be used in filters for each
+// major operating system type:
+//
+// AMAZON_LINUX Valid properties: PRODUCT | CLASSIFICATION | SEVERITY
+//
+// AMAZON_LINUX_2 Valid properties: PRODUCT | CLASSIFICATION | SEVERITY
+//
+// CENTOS Valid properties: PRODUCT | CLASSIFICATION | SEVERITY
+//
+// DEBIAN Valid properties: PRODUCT | PRIORITY
+//
+// MACOS Valid properties: PRODUCT | CLASSIFICATION
+//
+// ORACLE_LINUX Valid properties: PRODUCT | CLASSIFICATION | SEVERITY
+//
+// REDHAT_ENTERPRISE_LINUX Valid properties: PRODUCT | CLASSIFICATION | SEVERITY
+//
+// SUSE Valid properties: PRODUCT | CLASSIFICATION | SEVERITY
+//
+// UBUNTU Valid properties: PRODUCT | PRIORITY
+//
+// WINDOWS Valid properties: PRODUCT | PRODUCT_FAMILY | CLASSIFICATION |
+// MSRC_SEVERITY
 func (c *Client) DescribePatchProperties(ctx context.Context, params *DescribePatchPropertiesInput, optFns ...func(*Options)) (*DescribePatchPropertiesOutput, error) {
 	if params == nil {
 		params = &DescribePatchPropertiesInput{}
@@ -106,25 +119,25 @@ func (c *Client) addOperationDescribePatchPropertiesMiddlewares(stack *middlewar
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -139,13 +152,16 @@ func (c *Client) addOperationDescribePatchPropertiesMiddlewares(stack *middlewar
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDescribePatchPropertiesValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribePatchProperties(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

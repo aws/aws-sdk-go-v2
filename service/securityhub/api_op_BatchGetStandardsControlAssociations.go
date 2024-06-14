@@ -6,14 +6,14 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/securityhub/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// For a batch of security controls and standards, identifies whether each control
-// is currently enabled or disabled in a standard.
+//	For a batch of security controls and standards, identifies whether each
+//
+// control is currently enabled or disabled in a standard.
 func (c *Client) BatchGetStandardsControlAssociations(ctx context.Context, params *BatchGetStandardsControlAssociationsInput, optFns ...func(*Options)) (*BatchGetStandardsControlAssociationsOutput, error) {
 	if params == nil {
 		params = &BatchGetStandardsControlAssociationsInput{}
@@ -31,7 +31,7 @@ func (c *Client) BatchGetStandardsControlAssociations(ctx context.Context, param
 
 type BatchGetStandardsControlAssociationsInput struct {
 
-	// An array with one or more objects that includes a security control (identified
+	//  An array with one or more objects that includes a security control (identified
 	// with SecurityControlId , SecurityControlArn , or a mix of both parameters) and
 	// the Amazon Resource Name (ARN) of a standard. This field is used to query the
 	// enablement status of a control in a specified standard. The security control ID
@@ -51,7 +51,7 @@ type BatchGetStandardsControlAssociationsOutput struct {
 	// This member is required.
 	StandardsControlAssociationDetails []types.StandardsControlAssociationDetail
 
-	// A security control (identified with SecurityControlId , SecurityControlArn , or
+	//  A security control (identified with SecurityControlId , SecurityControlArn , or
 	// a mix of both parameters) whose enablement status in a specified standard cannot
 	// be returned.
 	UnprocessedAssociations []types.UnprocessedStandardsControlAssociation
@@ -84,25 +84,25 @@ func (c *Client) addOperationBatchGetStandardsControlAssociationsMiddlewares(sta
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -117,13 +117,16 @@ func (c *Client) addOperationBatchGetStandardsControlAssociationsMiddlewares(sta
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpBatchGetStandardsControlAssociationsValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opBatchGetStandardsControlAssociations(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

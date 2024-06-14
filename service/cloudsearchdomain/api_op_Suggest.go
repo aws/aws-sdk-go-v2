@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/cloudsearchdomain/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -18,13 +17,18 @@ import (
 // field. When you request suggestions, Amazon CloudSearch finds all of the
 // documents whose values in the suggester field start with the specified query
 // string. The beginning of the field must match the query string to be considered
-// a match. For more information about configuring suggesters and retrieving
-// suggestions, see Getting Suggestions (http://docs.aws.amazon.com/cloudsearch/latest/developerguide/getting-suggestions.html)
-// in the Amazon CloudSearch Developer Guide. The endpoint for submitting Suggest
-// requests is domain-specific. You submit suggest requests to a domain's search
-// endpoint. To get the search endpoint for your domain, use the Amazon CloudSearch
-// configuration service DescribeDomains action. A domain's endpoints are also
-// displayed on the domain dashboard in the Amazon CloudSearch console.
+// a match.
+//
+// For more information about configuring suggesters and retrieving suggestions,
+// see [Getting Suggestions]in the Amazon CloudSearch Developer Guide.
+//
+// The endpoint for submitting Suggest requests is domain-specific. You submit
+// suggest requests to a domain's search endpoint. To get the search endpoint for
+// your domain, use the Amazon CloudSearch configuration service DescribeDomains
+// action. A domain's endpoints are also displayed on the domain dashboard in the
+// Amazon CloudSearch console.
+//
+// [Getting Suggestions]: http://docs.aws.amazon.com/cloudsearch/latest/developerguide/getting-suggestions.html
 func (c *Client) Suggest(ctx context.Context, params *SuggestInput, optFns ...func(*Options)) (*SuggestOutput, error) {
 	if params == nil {
 		params = &SuggestInput{}
@@ -97,25 +101,25 @@ func (c *Client) addOperationSuggestMiddlewares(stack *middleware.Stack, options
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -130,13 +134,16 @@ func (c *Client) addOperationSuggestMiddlewares(stack *middleware.Stack, options
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpSuggestValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opSuggest(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

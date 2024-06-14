@@ -6,18 +6,18 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/elasticbeanstalk/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Lists the platform versions available for your account in an AWS Region.
-// Provides summary information about each platform version. Compare to
-// DescribePlatformVersion , which provides full details about a single platform
-// version. For definitions of platform version and other platform-related terms,
-// see AWS Elastic Beanstalk Platforms Glossary (https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/platforms-glossary.html)
-// .
+// Provides summary information about each platform version. Compare to DescribePlatformVersion, which
+// provides full details about a single platform version.
+//
+// For definitions of platform version and other platform-related terms, see [AWS Elastic Beanstalk Platforms Glossary].
+//
+// [AWS Elastic Beanstalk Platforms Glossary]: https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/platforms-glossary.html
 func (c *Client) ListPlatformVersions(ctx context.Context, params *ListPlatformVersionsInput, optFns ...func(*Options)) (*ListPlatformVersionsOutput, error) {
 	if params == nil {
 		params = &ListPlatformVersionsInput{}
@@ -44,8 +44,9 @@ type ListPlatformVersionsInput struct {
 
 	// For a paginated request. Specify a token from a previous response page to
 	// retrieve the next response page. All other parameter values must be identical to
-	// the ones specified in the initial request. If no NextToken is specified, the
-	// first page is retrieved.
+	// the ones specified in the initial request.
+	//
+	// If no NextToken is specified, the first page is retrieved.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -88,25 +89,25 @@ func (c *Client) addOperationListPlatformVersionsMiddlewares(stack *middleware.S
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -121,10 +122,13 @@ func (c *Client) addOperationListPlatformVersionsMiddlewares(stack *middleware.S
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListPlatformVersions(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

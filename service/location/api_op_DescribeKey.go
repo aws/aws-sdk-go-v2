@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/location/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -41,14 +40,18 @@ type DescribeKeyInput struct {
 
 type DescribeKeyOutput struct {
 
-	// The timestamp for when the API key resource was created in  ISO 8601 (https://www.iso.org/iso-8601-date-and-time-format.html)
-	// format: YYYY-MM-DDThh:mm:ss.sssZ .
+	// The timestamp for when the API key resource was created in [ISO 8601] format:
+	// YYYY-MM-DDThh:mm:ss.sssZ .
+	//
+	// [ISO 8601]: https://www.iso.org/iso-8601-date-and-time-format.html
 	//
 	// This member is required.
 	CreateTime *time.Time
 
-	// The timestamp for when the API key resource will expire in  ISO 8601 (https://www.iso.org/iso-8601-date-and-time-format.html)
-	// format: YYYY-MM-DDThh:mm:ss.sssZ .
+	// The timestamp for when the API key resource will expire in [ISO 8601] format:
+	// YYYY-MM-DDThh:mm:ss.sssZ .
+	//
+	// [ISO 8601]: https://www.iso.org/iso-8601-date-and-time-format.html
 	//
 	// This member is required.
 	ExpireTime *time.Time
@@ -60,6 +63,7 @@ type DescribeKeyOutput struct {
 
 	// The Amazon Resource Name (ARN) for the API key resource. Used when you need to
 	// specify a resource across all Amazon Web Services.
+	//
 	//   - Format example: arn:aws:geo:region:account-id:key/ExampleKey
 	//
 	// This member is required.
@@ -76,8 +80,10 @@ type DescribeKeyOutput struct {
 	// This member is required.
 	Restrictions *types.ApiKeyRestrictions
 
-	// The timestamp for when the API key resource was last updated in  ISO 8601 (https://www.iso.org/iso-8601-date-and-time-format.html)
-	// format: YYYY-MM-DDThh:mm:ss.sssZ .
+	// The timestamp for when the API key resource was last updated in [ISO 8601] format:
+	// YYYY-MM-DDThh:mm:ss.sssZ .
+	//
+	// [ISO 8601]: https://www.iso.org/iso-8601-date-and-time-format.html
 	//
 	// This member is required.
 	UpdateTime *time.Time
@@ -116,25 +122,25 @@ func (c *Client) addOperationDescribeKeyMiddlewares(stack *middleware.Stack, opt
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -149,6 +155,9 @@ func (c *Client) addOperationDescribeKeyMiddlewares(stack *middleware.Stack, opt
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addEndpointPrefix_opDescribeKeyMiddleware(stack); err != nil {
 		return err
 	}
@@ -158,7 +167,7 @@ func (c *Client) addOperationDescribeKeyMiddlewares(stack *middleware.Stack, opt
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeKey(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

@@ -6,18 +6,21 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes an Amazon Forecast dataset that was created using the CreateDataset (https://docs.aws.amazon.com/forecast/latest/dg/API_CreateDataset.html)
-// operation. You can only delete datasets that have a status of ACTIVE or
-// CREATE_FAILED . To get the status use the DescribeDataset (https://docs.aws.amazon.com/forecast/latest/dg/API_DescribeDataset.html)
-// operation. Forecast does not automatically update any dataset groups that
-// contain the deleted dataset. In order to update the dataset group, use the
-// UpdateDatasetGroup (https://docs.aws.amazon.com/forecast/latest/dg/API_UpdateDatasetGroup.html)
-// operation, omitting the deleted dataset's ARN.
+// Deletes an Amazon Forecast dataset that was created using the [CreateDataset] operation. You
+// can only delete datasets that have a status of ACTIVE or CREATE_FAILED . To get
+// the status use the [DescribeDataset]operation.
+//
+// Forecast does not automatically update any dataset groups that contain the
+// deleted dataset. In order to update the dataset group, use the [UpdateDatasetGroup]operation,
+// omitting the deleted dataset's ARN.
+//
+// [CreateDataset]: https://docs.aws.amazon.com/forecast/latest/dg/API_CreateDataset.html
+// [UpdateDatasetGroup]: https://docs.aws.amazon.com/forecast/latest/dg/API_UpdateDatasetGroup.html
+// [DescribeDataset]: https://docs.aws.amazon.com/forecast/latest/dg/API_DescribeDataset.html
 func (c *Client) DeleteDataset(ctx context.Context, params *DeleteDatasetInput, optFns ...func(*Options)) (*DeleteDatasetOutput, error) {
 	if params == nil {
 		params = &DeleteDatasetInput{}
@@ -72,25 +75,25 @@ func (c *Client) addOperationDeleteDatasetMiddlewares(stack *middleware.Stack, o
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -105,13 +108,16 @@ func (c *Client) addOperationDeleteDatasetMiddlewares(stack *middleware.Stack, o
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDeleteDatasetValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteDataset(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

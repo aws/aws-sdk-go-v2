@@ -6,18 +6,24 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/computeoptimizer/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns the optimization findings for an account. It returns the number of:
+// Returns the optimization findings for an account.
+//
+// It returns the number of:
+//
 //   - Amazon EC2 instances in an account that are Underprovisioned ,
 //     Overprovisioned , or Optimized .
+//
 //   - Auto Scaling groups in an account that are NotOptimized , or Optimized .
+//
 //   - Amazon EBS volumes in an account that are NotOptimized , or Optimized .
+//
 //   - Lambda functions in an account that are NotOptimized , or Optimized .
+//
 //   - Amazon ECS services in an account that are Underprovisioned ,
 //     Overprovisioned , or Optimized .
 func (c *Client) GetRecommendationSummaries(ctx context.Context, params *GetRecommendationSummariesInput, optFns ...func(*Options)) (*GetRecommendationSummariesOutput, error) {
@@ -38,12 +44,17 @@ func (c *Client) GetRecommendationSummaries(ctx context.Context, params *GetReco
 type GetRecommendationSummariesInput struct {
 
 	// The ID of the Amazon Web Services account for which to return recommendation
-	// summaries. If your account is the management account of an organization, use
-	// this parameter to specify the member account for which you want to return
-	// recommendation summaries. Only one account ID can be specified per request.
+	// summaries.
+	//
+	// If your account is the management account of an organization, use this
+	// parameter to specify the member account for which you want to return
+	// recommendation summaries.
+	//
+	// Only one account ID can be specified per request.
 	AccountIds []string
 
 	// The maximum number of recommendation summaries to return with a single request.
+	//
 	// To retrieve the remaining results, make another request with the returned
 	// nextToken value.
 	MaxResults *int32
@@ -56,8 +67,9 @@ type GetRecommendationSummariesInput struct {
 
 type GetRecommendationSummariesOutput struct {
 
-	// The token to use to advance to the next page of recommendation summaries. This
-	// value is null when there are no more pages of recommendation summaries to
+	// The token to use to advance to the next page of recommendation summaries.
+	//
+	// This value is null when there are no more pages of recommendation summaries to
 	// return.
 	NextToken *string
 
@@ -92,25 +104,25 @@ func (c *Client) addOperationGetRecommendationSummariesMiddlewares(stack *middle
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -125,10 +137,13 @@ func (c *Client) addOperationGetRecommendationSummariesMiddlewares(stack *middle
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetRecommendationSummaries(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -158,6 +173,7 @@ var _ GetRecommendationSummariesAPIClient = (*Client)(nil)
 // GetRecommendationSummaries
 type GetRecommendationSummariesPaginatorOptions struct {
 	// The maximum number of recommendation summaries to return with a single request.
+	//
 	// To retrieve the remaining results, make another request with the returned
 	// nextToken value.
 	Limit int32

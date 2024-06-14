@@ -6,19 +6,20 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Initiate a manual deployment of the latest commit in a source code repository
-// or the latest image in a source image repository to an App Runner service. For a
-// source code repository, App Runner retrieves the commit and builds a Docker
-// image. For a source image repository, App Runner retrieves the latest Docker
-// image. In both cases, App Runner then deploys the new image to your service and
-// starts a new container instance. This is an asynchronous operation. On a
-// successful call, you can use the returned OperationId and the ListOperations
-// call to track the operation's progress.
+// or the latest image in a source image repository to an App Runner service.
+//
+// For a source code repository, App Runner retrieves the commit and builds a
+// Docker image. For a source image repository, App Runner retrieves the latest
+// Docker image. In both cases, App Runner then deploys the new image to your
+// service and starts a new container instance.
+//
+// This is an asynchronous operation. On a successful call, you can use the
+// returned OperationId and the ListOperations call to track the operation's progress.
 func (c *Client) StartDeployment(ctx context.Context, params *StartDeploymentInput, optFns ...func(*Options)) (*StartDeploymentOutput, error) {
 	if params == nil {
 		params = &StartDeploymentInput{}
@@ -48,7 +49,7 @@ type StartDeploymentInput struct {
 type StartDeploymentOutput struct {
 
 	// The unique ID of the asynchronous operation that this request started. You can
-	// use it combined with the ListOperations call to track the operation's progress.
+	// use it combined with the ListOperationscall to track the operation's progress.
 	//
 	// This member is required.
 	OperationId *string
@@ -81,25 +82,25 @@ func (c *Client) addOperationStartDeploymentMiddlewares(stack *middleware.Stack,
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -114,13 +115,16 @@ func (c *Client) addOperationStartDeploymentMiddlewares(stack *middleware.Stack,
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpStartDeploymentValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opStartDeployment(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/directoryservice/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -38,8 +37,8 @@ type DescribeSharedDirectoriesInput struct {
 	// The number of shared directories to return in the response object.
 	Limit *int32
 
-	// The DescribeSharedDirectoriesResult.NextToken value from a previous call to
-	// DescribeSharedDirectories . Pass null if this is the first call.
+	// The DescribeSharedDirectoriesResult.NextToken value from a previous call to DescribeSharedDirectories.
+	// Pass null if this is the first call.
 	NextToken *string
 
 	// A list of identifiers of all shared directories in your account.
@@ -51,8 +50,8 @@ type DescribeSharedDirectoriesInput struct {
 type DescribeSharedDirectoriesOutput struct {
 
 	// If not null, token that indicates that more results are available. Pass this
-	// value for the NextToken parameter in a subsequent call to
-	// DescribeSharedDirectories to retrieve the next set of items.
+	// value for the NextToken parameter in a subsequent call to DescribeSharedDirectories to retrieve the next
+	// set of items.
 	NextToken *string
 
 	// A list of all shared directories in your account.
@@ -86,25 +85,25 @@ func (c *Client) addOperationDescribeSharedDirectoriesMiddlewares(stack *middlew
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -119,13 +118,16 @@ func (c *Client) addOperationDescribeSharedDirectoriesMiddlewares(stack *middlew
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDescribeSharedDirectoriesValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeSharedDirectories(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/route53resolver/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -31,8 +30,9 @@ func (c *Client) ListResolverQueryLogConfigAssociations(ctx context.Context, par
 
 type ListResolverQueryLogConfigAssociationsInput struct {
 
-	// An optional specification to return a subset of query logging associations. If
-	// you submit a second or subsequent ListResolverQueryLogConfigAssociations
+	// An optional specification to return a subset of query logging associations.
+	//
+	// If you submit a second or subsequent ListResolverQueryLogConfigAssociations
 	// request and specify the NextToken parameter, you must use the same values for
 	// Filters , if any, as in the previous request.
 	Filters []types.Filter
@@ -44,6 +44,7 @@ type ListResolverQueryLogConfigAssociationsInput struct {
 	MaxResults *int32
 
 	// For the first ListResolverQueryLogConfigAssociations request, omit this value.
+	//
 	// If there are more than MaxResults query logging associations that match the
 	// values that you specify for Filters , you can submit another
 	// ListResolverQueryLogConfigAssociations request to get the next group of
@@ -51,41 +52,59 @@ type ListResolverQueryLogConfigAssociationsInput struct {
 	// previous response.
 	NextToken *string
 
-	// The element that you want Resolver to sort query logging associations by. If
-	// you submit a second or subsequent ListResolverQueryLogConfigAssociations
+	// The element that you want Resolver to sort query logging associations by.
+	//
+	// If you submit a second or subsequent ListResolverQueryLogConfigAssociations
 	// request and specify the NextToken parameter, you must use the same value for
-	// SortBy , if any, as in the previous request. Valid values include the following
-	// elements:
+	// SortBy , if any, as in the previous request.
+	//
+	// Valid values include the following elements:
+	//
 	//   - CreationTime : The ID of the query logging association.
+	//
 	//   - Error : If the value of Status is FAILED , the value of Error indicates the
 	//   cause:
+	//
 	//   - DESTINATION_NOT_FOUND : The specified destination (for example, an Amazon S3
 	//   bucket) was deleted.
-	//   - ACCESS_DENIED : Permissions don't allow sending logs to the destination. If
-	//   Status is a value other than FAILED , ERROR is null.
+	//
+	//   - ACCESS_DENIED : Permissions don't allow sending logs to the destination.
+	//
+	// If Status is a value other than FAILED , ERROR is null.
+	//
 	//   - Id : The ID of the query logging association
+	//
 	//   - ResolverQueryLogConfigId : The ID of the query logging configuration
+	//
 	//   - ResourceId : The ID of the VPC that is associated with the query logging
 	//   configuration
+	//
 	//   - Status : The current status of the configuration. Valid values include the
 	//   following:
+	//
 	//   - CREATING : Resolver is creating an association between an Amazon VPC and a
 	//   query logging configuration.
+	//
 	//   - CREATED : The association between an Amazon VPC and a query logging
 	//   configuration was successfully created. Resolver is logging queries that
 	//   originate in the specified VPC.
+	//
 	//   - DELETING : Resolver is deleting this query logging association.
+	//
 	//   - FAILED : Resolver either couldn't create or couldn't delete the query
 	//   logging association. Here are two common causes:
+	//
 	//   - The specified destination (for example, an Amazon S3 bucket) was deleted.
+	//
 	//   - Permissions don't allow sending logs to the destination.
 	SortBy *string
 
 	// If you specified a value for SortBy , the order that you want query logging
-	// associations to be listed in, ASCENDING or DESCENDING . If you submit a second
-	// or subsequent ListResolverQueryLogConfigAssociations request and specify the
-	// NextToken parameter, you must use the same value for SortOrder , if any, as in
-	// the previous request.
+	// associations to be listed in, ASCENDING or DESCENDING .
+	//
+	// If you submit a second or subsequent ListResolverQueryLogConfigAssociations
+	// request and specify the NextToken parameter, you must use the same value for
+	// SortOrder , if any, as in the previous request.
 	SortOrder types.SortOrder
 
 	noSmithyDocumentSerde
@@ -144,25 +163,25 @@ func (c *Client) addOperationListResolverQueryLogConfigAssociationsMiddlewares(s
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -177,10 +196,13 @@ func (c *Client) addOperationListResolverQueryLogConfigAssociationsMiddlewares(s
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListResolverQueryLogConfigAssociations(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

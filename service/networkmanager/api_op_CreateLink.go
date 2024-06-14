@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/networkmanager/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -30,7 +29,7 @@ func (c *Client) CreateLink(ctx context.Context, params *CreateLinkInput, optFns
 
 type CreateLinkInput struct {
 
-	// The upload speed and download speed in Mbps.
+	//  The upload speed and download speed in Mbps.
 	//
 	// This member is required.
 	Bandwidth *types.Bandwidth
@@ -45,18 +44,24 @@ type CreateLinkInput struct {
 	// This member is required.
 	SiteId *string
 
-	// A description of the link. Constraints: Maximum length of 256 characters.
+	// A description of the link.
+	//
+	// Constraints: Maximum length of 256 characters.
 	Description *string
 
-	// The provider of the link. Constraints: Maximum length of 128 characters. Cannot
-	// include the following characters: | \ ^
+	// The provider of the link.
+	//
+	// Constraints: Maximum length of 128 characters. Cannot include the following
+	// characters: | \ ^
 	Provider *string
 
 	// The tags to apply to the resource during creation.
 	Tags []types.Tag
 
-	// The type of the link. Constraints: Maximum length of 128 characters. Cannot
-	// include the following characters: | \ ^
+	// The type of the link.
+	//
+	// Constraints: Maximum length of 128 characters. Cannot include the following
+	// characters: | \ ^
 	Type *string
 
 	noSmithyDocumentSerde
@@ -95,25 +100,25 @@ func (c *Client) addOperationCreateLinkMiddlewares(stack *middleware.Stack, opti
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -128,13 +133,16 @@ func (c *Client) addOperationCreateLinkMiddlewares(stack *middleware.Stack, opti
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpCreateLinkValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateLink(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

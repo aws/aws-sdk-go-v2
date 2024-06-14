@@ -9,6 +9,26 @@ import (
 	"github.com/aws/smithy-go/middleware"
 )
 
+type validateOpCreateTemplate struct {
+}
+
+func (*validateOpCreateTemplate) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateTemplate) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateTemplateInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateTemplateInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateWorkflow struct {
 }
 
@@ -64,6 +84,26 @@ func (m *validateOpCreateWorkflowStep) HandleInitialize(ctx context.Context, in 
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpCreateWorkflowStepInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteTemplate struct {
+}
+
+func (*validateOpDeleteTemplate) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteTemplate) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteTemplateInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteTemplateInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -449,6 +489,26 @@ func (m *validateOpUntagResource) HandleInitialize(ctx context.Context, in middl
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateTemplate struct {
+}
+
+func (*validateOpUpdateTemplate) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateTemplate) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateTemplateInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateTemplateInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateWorkflow struct {
 }
 
@@ -509,6 +569,10 @@ func (m *validateOpUpdateWorkflowStep) HandleInitialize(ctx context.Context, in 
 	return next.HandleInitialize(ctx, in)
 }
 
+func addOpCreateTemplateValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateTemplate{}, middleware.After)
+}
+
 func addOpCreateWorkflowValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateWorkflow{}, middleware.After)
 }
@@ -519,6 +583,10 @@ func addOpCreateWorkflowStepGroupValidationMiddleware(stack *middleware.Stack) e
 
 func addOpCreateWorkflowStepValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateWorkflowStep{}, middleware.After)
+}
+
+func addOpDeleteTemplateValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteTemplate{}, middleware.After)
 }
 
 func addOpDeleteWorkflowValidationMiddleware(stack *middleware.Stack) error {
@@ -597,6 +665,10 @@ func addOpUntagResourceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUntagResource{}, middleware.After)
 }
 
+func addOpUpdateTemplateValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateTemplate{}, middleware.After)
+}
+
 func addOpUpdateWorkflowValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateWorkflow{}, middleware.After)
 }
@@ -609,6 +681,24 @@ func addOpUpdateWorkflowStepValidationMiddleware(stack *middleware.Stack) error 
 	return stack.Initialize.Add(&validateOpUpdateWorkflowStep{}, middleware.After)
 }
 
+func validateOpCreateTemplateInput(v *CreateTemplateInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateTemplateInput"}
+	if v.TemplateName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TemplateName"))
+	}
+	if v.TemplateSource == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TemplateSource"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCreateWorkflowInput(v *CreateWorkflowInput) error {
 	if v == nil {
 		return nil
@@ -619,9 +709,6 @@ func validateOpCreateWorkflowInput(v *CreateWorkflowInput) error {
 	}
 	if v.TemplateId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TemplateId"))
-	}
-	if v.ApplicationConfigurationId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ApplicationConfigurationId"))
 	}
 	if v.InputParameters == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("InputParameters"))
@@ -667,6 +754,21 @@ func validateOpCreateWorkflowStepInput(v *CreateWorkflowStepInput) error {
 	}
 	if len(v.StepActionType) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("StepActionType"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteTemplateInput(v *DeleteTemplateInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteTemplateInput"}
+	if v.Id == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Id"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -997,6 +1099,21 @@ func validateOpUntagResourceInput(v *UntagResourceInput) error {
 	}
 	if v.TagKeys == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TagKeys"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateTemplateInput(v *UpdateTemplateInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateTemplateInput"}
+	if v.Id == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Id"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

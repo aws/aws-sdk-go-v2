@@ -6,20 +6,24 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Enables the HTTP endpoint for the DB cluster. By default, the HTTP endpoint
-// isn't enabled. When enabled, this endpoint provides a connectionless web service
-// API (RDS Data API) for running SQL queries on the Aurora DB cluster. You can
-// also query your database from inside the RDS console with the RDS query editor.
-// For more information, see Using RDS Data API (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/data-api.html)
-// in the Amazon Aurora User Guide. This operation applies only to Aurora
-// PostgreSQL Serverless v2 and provisioned DB clusters. To enable the HTTP
-// endpoint for Aurora Serverless v1 DB clusters, use the EnableHttpEndpoint
-// parameter of the ModifyDBCluster operation.
+// isn't enabled.
+//
+// When enabled, this endpoint provides a connectionless web service API (RDS Data
+// API) for running SQL queries on the Aurora DB cluster. You can also query your
+// database from inside the RDS console with the RDS query editor.
+//
+// For more information, see [Using RDS Data API] in the Amazon Aurora User Guide.
+//
+// This operation applies only to Aurora PostgreSQL Serverless v2 and provisioned
+// DB clusters. To enable the HTTP endpoint for Aurora Serverless v1 DB clusters,
+// use the EnableHttpEndpoint parameter of the ModifyDBCluster operation.
+//
+// [Using RDS Data API]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/data-api.html
 func (c *Client) EnableHttpEndpoint(ctx context.Context, params *EnableHttpEndpointInput, optFns ...func(*Options)) (*EnableHttpEndpointOutput, error) {
 	if params == nil {
 		params = &EnableHttpEndpointInput{}
@@ -81,25 +85,25 @@ func (c *Client) addOperationEnableHttpEndpointMiddlewares(stack *middleware.Sta
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -114,13 +118,16 @@ func (c *Client) addOperationEnableHttpEndpointMiddlewares(stack *middleware.Sta
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpEnableHttpEndpointValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opEnableHttpEndpoint(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

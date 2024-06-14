@@ -170,6 +170,26 @@ func (m *validateOpGetAnomalies) HandleInitialize(ctx context.Context, in middle
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetApproximateUsageRecords struct {
+}
+
+func (*validateOpGetApproximateUsageRecords) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetApproximateUsageRecords) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetApproximateUsageRecordsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetApproximateUsageRecordsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetCostAndUsage struct {
 }
 
@@ -530,6 +550,26 @@ func (m *validateOpProvideAnomalyFeedback) HandleInitialize(ctx context.Context,
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpStartCostAllocationTagBackfill struct {
+}
+
+func (*validateOpStartCostAllocationTagBackfill) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpStartCostAllocationTagBackfill) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*StartCostAllocationTagBackfillInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpStartCostAllocationTagBackfillInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpTagResource struct {
 }
 
@@ -682,6 +722,10 @@ func addOpGetAnomaliesValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetAnomalies{}, middleware.After)
 }
 
+func addOpGetApproximateUsageRecordsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetApproximateUsageRecords{}, middleware.After)
+}
+
 func addOpGetCostAndUsageValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetCostAndUsage{}, middleware.After)
 }
@@ -752,6 +796,10 @@ func addOpListTagsForResourceValidationMiddleware(stack *middleware.Stack) error
 
 func addOpProvideAnomalyFeedbackValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpProvideAnomalyFeedback{}, middleware.After)
+}
+
+func addOpStartCostAllocationTagBackfillValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpStartCostAllocationTagBackfill{}, middleware.After)
 }
 
 func addOpTagResourceValidationMiddleware(stack *middleware.Stack) error {
@@ -1226,6 +1274,24 @@ func validateOpGetAnomaliesInput(v *GetAnomaliesInput) error {
 	}
 }
 
+func validateOpGetApproximateUsageRecordsInput(v *GetApproximateUsageRecordsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetApproximateUsageRecordsInput"}
+	if len(v.Granularity) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Granularity"))
+	}
+	if len(v.ApproximationDimension) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("ApproximationDimension"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpGetCostAndUsageInput(v *GetCostAndUsageInput) error {
 	if v == nil {
 		return nil
@@ -1620,6 +1686,21 @@ func validateOpProvideAnomalyFeedbackInput(v *ProvideAnomalyFeedbackInput) error
 	}
 	if len(v.Feedback) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("Feedback"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpStartCostAllocationTagBackfillInput(v *StartCostAllocationTagBackfillInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StartCostAllocationTagBackfillInput"}
+	if v.BackfillFrom == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("BackfillFrom"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

@@ -6,18 +6,21 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/chimesdkmessaging/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists all channel memberships in a channel. The x-amz-chime-bearer request
-// header is mandatory. Use the ARN of the AppInstanceUser or AppInstanceBot that
-// makes the API call as the value in the header. If you want to list the channels
-// to which a specific app instance user belongs, see the
-// ListChannelMembershipsForAppInstanceUser (https://docs.aws.amazon.com/chime/latest/APIReference/API_messaging-chime_ListChannelMembershipsForAppInstanceUser.html)
-// API.
+// Lists all channel memberships in a channel.
+//
+// The x-amz-chime-bearer request header is mandatory. Use the ARN of the
+// AppInstanceUser or AppInstanceBot that makes the API call as the value in the
+// header.
+//
+// If you want to list the channels to which a specific app instance user belongs,
+// see the [ListChannelMembershipsForAppInstanceUser]API.
+//
+// [ListChannelMembershipsForAppInstanceUser]: https://docs.aws.amazon.com/chime/latest/APIReference/API_messaging-chime_ListChannelMembershipsForAppInstanceUser.html
 func (c *Client) ListChannelMemberships(ctx context.Context, params *ListChannelMembershipsInput, optFns ...func(*Options)) (*ListChannelMembershipsOutput, error) {
 	if params == nil {
 		params = &ListChannelMembershipsInput{}
@@ -52,8 +55,10 @@ type ListChannelMembershipsInput struct {
 	// are returned.
 	NextToken *string
 
-	// The ID of the SubChannel in the request. Only required when listing a user's
-	// memberships in a particular sub-channel of an elastic channel.
+	// The ID of the SubChannel in the request.
+	//
+	// Only required when listing a user's memberships in a particular sub-channel of
+	// an elastic channel.
 	SubChannelId *string
 
 	// The membership type of a user, DEFAULT or HIDDEN . Default members are returned
@@ -104,25 +109,25 @@ func (c *Client) addOperationListChannelMembershipsMiddlewares(stack *middleware
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -137,13 +142,16 @@ func (c *Client) addOperationListChannelMembershipsMiddlewares(stack *middleware
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpListChannelMembershipsValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListChannelMemberships(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

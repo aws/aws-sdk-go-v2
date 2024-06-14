@@ -6,14 +6,14 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Apply cost-allocation tags to a specified stack or layer in AWS OpsWorks
-// Stacks. For more information about how tagging works, see Tags (https://docs.aws.amazon.com/opsworks/latest/userguide/tagging.html)
-// in the AWS OpsWorks User Guide.
+// Apply cost-allocation tags to a specified stack or layer in OpsWorks Stacks.
+// For more information about how tagging works, see [Tags]in the OpsWorks User Guide.
+//
+// [Tags]: https://docs.aws.amazon.com/opsworks/latest/userguide/tagging.html
 func (c *Client) TagResource(ctx context.Context, params *TagResourceInput, optFns ...func(*Options)) (*TagResourceOutput, error) {
 	if params == nil {
 		params = &TagResourceInput{}
@@ -38,14 +38,19 @@ type TagResourceInput struct {
 
 	// A map that contains tag keys and tag values that are attached to a stack or
 	// layer.
+	//
 	//   - The key cannot be empty.
+	//
 	//   - The key can be a maximum of 127 characters, and can contain only Unicode
 	//   letters, numbers, or separators, or the following special characters: + - = .
 	//   _ : /
+	//
 	//   - The value can be a maximum 255 characters, and contain only Unicode
 	//   letters, numbers, or separators, or the following special characters: + - = .
 	//   _ : /
+	//
 	//   - Leading and trailing white spaces are trimmed from both the key and value.
+	//
 	//   - A maximum of 40 tags is allowed for any resource.
 	//
 	// This member is required.
@@ -83,25 +88,25 @@ func (c *Client) addOperationTagResourceMiddlewares(stack *middleware.Stack, opt
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -116,13 +121,16 @@ func (c *Client) addOperationTagResourceMiddlewares(stack *middleware.Stack, opt
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpTagResourceValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opTagResource(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

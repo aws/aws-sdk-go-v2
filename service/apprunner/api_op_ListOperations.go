@@ -6,15 +6,15 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/apprunner/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Return a list of operations that occurred on an App Runner service. The
-// resulting list of OperationSummary objects is sorted in reverse chronological
-// order. The first object on the list represents the last started operation.
+// Return a list of operations that occurred on an App Runner service.
+//
+// The resulting list of OperationSummary objects is sorted in reverse chronological order. The
+// first object on the list represents the last started operation.
 func (c *Client) ListOperations(ctx context.Context, params *ListOperationsInput, optFns ...func(*Options)) (*ListOperationsOutput, error) {
 	if params == nil {
 		params = &ListOperationsInput{}
@@ -39,14 +39,17 @@ type ListOperationsInput struct {
 	ServiceArn *string
 
 	// The maximum number of results to include in each response (result page). It's
-	// used for a paginated request. If you don't specify MaxResults , the request
-	// retrieves all available results in a single response.
+	// used for a paginated request.
+	//
+	// If you don't specify MaxResults , the request retrieves all available results in
+	// a single response.
 	MaxResults *int32
 
 	// A token from a previous result page. It's used for a paginated request. The
 	// request retrieves the next result page. All other parameter values must be
-	// identical to the ones specified in the initial request. If you don't specify
-	// NextToken , the request retrieves the first result page.
+	// identical to the ones specified in the initial request.
+	//
+	// If you don't specify NextToken , the request retrieves the first result page.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -90,25 +93,25 @@ func (c *Client) addOperationListOperationsMiddlewares(stack *middleware.Stack, 
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -123,13 +126,16 @@ func (c *Client) addOperationListOperationsMiddlewares(stack *middleware.Stack, 
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpListOperationsValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListOperations(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -158,8 +164,10 @@ var _ ListOperationsAPIClient = (*Client)(nil)
 // ListOperationsPaginatorOptions is the paginator options for ListOperations
 type ListOperationsPaginatorOptions struct {
 	// The maximum number of results to include in each response (result page). It's
-	// used for a paginated request. If you don't specify MaxResults , the request
-	// retrieves all available results in a single response.
+	// used for a paginated request.
+	//
+	// If you don't specify MaxResults , the request retrieves all available results in
+	// a single response.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

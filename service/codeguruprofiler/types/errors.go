@@ -88,8 +88,9 @@ func (e *ResourceNotFoundException) ErrorCode() string {
 func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // You have exceeded your service quota. To perform the requested action, remove
-// some of the relevant resources, or use Service Quotas (https://docs.aws.amazon.com/servicequotas/latest/userguide/intro.html)
-// to request a service quota increase.
+// some of the relevant resources, or use [Service Quotas]to request a service quota increase.
+//
+// [Service Quotas]: https://docs.aws.amazon.com/servicequotas/latest/userguide/intro.html
 type ServiceQuotaExceededException struct {
 	Message *string
 

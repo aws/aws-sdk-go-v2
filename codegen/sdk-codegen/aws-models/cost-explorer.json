@@ -64,6 +64,9 @@
                     "target": "com.amazonaws.costexplorer#GetAnomalySubscriptions"
                 },
                 {
+                    "target": "com.amazonaws.costexplorer#GetApproximateUsageRecords"
+                },
+                {
                     "target": "com.amazonaws.costexplorer#GetCostAndUsage"
                 },
                 {
@@ -112,6 +115,9 @@
                     "target": "com.amazonaws.costexplorer#GetUsageForecast"
                 },
                 {
+                    "target": "com.amazonaws.costexplorer#ListCostAllocationTagBackfillHistory"
+                },
+                {
                     "target": "com.amazonaws.costexplorer#ListCostAllocationTags"
                 },
                 {
@@ -125,6 +131,9 @@
                 },
                 {
                     "target": "com.amazonaws.costexplorer#ProvideAnomalyFeedback"
+                },
+                {
+                    "target": "com.amazonaws.costexplorer#StartCostAllocationTagBackfill"
                 },
                 {
                     "target": "com.amazonaws.costexplorer#StartSavingsPlansPurchaseRecommendationGeneration"
@@ -1280,6 +1289,32 @@
                 "target": "com.amazonaws.costexplorer#AnomalySubscription"
             }
         },
+        "com.amazonaws.costexplorer#ApproximateUsageRecordsPerService": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.costexplorer#GenericString"
+            },
+            "value": {
+                "target": "com.amazonaws.costexplorer#NonNegativeLong"
+            }
+        },
+        "com.amazonaws.costexplorer#ApproximationDimension": {
+            "type": "enum",
+            "members": {
+                "SERVICE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SERVICE"
+                    }
+                },
+                "RESOURCE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "RESOURCE"
+                    }
+                }
+            }
+        },
         "com.amazonaws.costexplorer#Arn": {
             "type": "string",
             "traits": {
@@ -1303,6 +1338,19 @@
             },
             "value": {
                 "target": "com.amazonaws.costexplorer#AttributeValue"
+            }
+        },
+        "com.amazonaws.costexplorer#BackfillLimitExceededException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.costexplorer#ErrorMessage"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n            A request to backfill is already in progress. Once the previous request is complete, you can create another request.\n        </p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400
             }
         },
         "com.amazonaws.costexplorer#BillExpirationException": {
@@ -1379,6 +1427,79 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>The cost allocation tag structure. This includes detailed metadata for the\n                <code>CostAllocationTag</code> object. </p>"
+            }
+        },
+        "com.amazonaws.costexplorer#CostAllocationTagBackfillRequest": {
+            "type": "structure",
+            "members": {
+                "BackfillFrom": {
+                    "target": "com.amazonaws.costexplorer#ZonedDateTime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The date the backfill starts from.\n        </p>"
+                    }
+                },
+                "RequestedAt": {
+                    "target": "com.amazonaws.costexplorer#ZonedDateTime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The time when the backfill was requested.\n        </p>"
+                    }
+                },
+                "CompletedAt": {
+                    "target": "com.amazonaws.costexplorer#ZonedDateTime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The backfill completion time.\n        </p>"
+                    }
+                },
+                "BackfillStatus": {
+                    "target": "com.amazonaws.costexplorer#CostAllocationTagBackfillStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The status of the cost allocation tag backfill request.\n        </p>"
+                    }
+                },
+                "LastUpdatedAt": {
+                    "target": "com.amazonaws.costexplorer#ZonedDateTime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            The time when the backfill status was last updated.\n        </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n            The cost allocation tag backfill request structure that contains metadata and details of a certain backfill.</p>"
+            }
+        },
+        "com.amazonaws.costexplorer#CostAllocationTagBackfillRequestList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.costexplorer#CostAllocationTagBackfillRequest"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 1000
+                }
+            }
+        },
+        "com.amazonaws.costexplorer#CostAllocationTagBackfillStatus": {
+            "type": "enum",
+            "members": {
+                "SUCCEEDED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SUCCEEDED"
+                    }
+                },
+                "PROCESSING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PROCESSING"
+                    }
+                },
+                "FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FAILED"
+                    }
+                }
             }
         },
         "com.amazonaws.costexplorer#CostAllocationTagKeyList": {
@@ -3737,6 +3858,81 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.costexplorer#GetApproximateUsageRecords": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.costexplorer#GetApproximateUsageRecordsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.costexplorer#GetApproximateUsageRecordsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.costexplorer#DataUnavailableException"
+                },
+                {
+                    "target": "com.amazonaws.costexplorer#LimitExceededException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Retrieves estimated usage records for hourly granularity or resource-level data at daily\n      granularity.</p>"
+            }
+        },
+        "com.amazonaws.costexplorer#GetApproximateUsageRecordsRequest": {
+            "type": "structure",
+            "members": {
+                "Granularity": {
+                    "target": "com.amazonaws.costexplorer#Granularity",
+                    "traits": {
+                        "smithy.api#documentation": "<p>How granular you want the data to be. You can enable data at hourly or daily\n      granularity.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Services": {
+                    "target": "com.amazonaws.costexplorer#UsageServices",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The service metadata for the service or services you want to query. If not specified, all\n      elements are returned.</p>"
+                    }
+                },
+                "ApproximationDimension": {
+                    "target": "com.amazonaws.costexplorer#ApproximationDimension",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The service to evaluate for the usage records. You can choose resource-level data at daily\n      granularity, or hourly granularity with or without resource-level data.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.costexplorer#GetApproximateUsageRecordsResponse": {
+            "type": "structure",
+            "members": {
+                "Services": {
+                    "target": "com.amazonaws.costexplorer#ApproximateUsageRecordsPerService",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The service metadata for the service or services in the response.</p>"
+                    }
+                },
+                "TotalRecords": {
+                    "target": "com.amazonaws.costexplorer#NonNegativeLong",
+                    "traits": {
+                        "smithy.api#default": 0,
+                        "smithy.api#documentation": "<p>The total number of usage records for all services in the services list.</p>"
+                    }
+                },
+                "LookbackPeriod": {
+                    "target": "com.amazonaws.costexplorer#DateInterval",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The lookback period that's used for the estimation.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.costexplorer#GetCostAndUsage": {
             "type": "operation",
             "input": {
@@ -3871,7 +4067,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Retrieves cost and usage metrics with resources for your account. You can specify which\n      cost and usage-related metric, such as <code>BlendedCosts</code> or\n      <code>UsageQuantity</code>, that you want the request to return. You can also filter and group\n      your data by various dimensions, such as <code>SERVICE</code> or <code>AZ</code>, in a\n      specific time range. For a complete list of valid dimensions, see the <a href=\"https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_GetDimensionValues.html\">GetDimensionValues</a> operation. Management account in an organization in Organizations have access to all member accounts. This API is currently available for the\n      Amazon Elastic Compute Cloud – Compute service only.</p>\n         <note>\n            <p>This is an opt-in only feature. You can enable this feature from the Cost Explorer\n        Settings page. For information about how to access the Settings page, see <a href=\"https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/ce-access.html\">Controlling\n          Access for Cost Explorer</a> in the <i>Billing and Cost Management User\n          Guide</i>.</p>\n         </note>"
+                "smithy.api#documentation": "<p>Retrieves cost and usage metrics with resources for your account. You can specify which\n      cost and usage-related metric, such as <code>BlendedCosts</code> or\n      <code>UsageQuantity</code>, that you want the request to return. You can also filter and group\n      your data by various dimensions, such as <code>SERVICE</code> or <code>AZ</code>, in a\n      specific time range. For a complete list of valid dimensions, see the <a href=\"https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_GetDimensionValues.html\">GetDimensionValues</a> operation. Management account in an organization in Organizations have access to all member accounts.</p>\n         <p>Hourly granularity is only available for EC2-Instances (Elastic Compute Cloud)\n      resource-level data. All other resource-level data is available at daily\n      granularity.</p>\n         <note>\n            <p>This is an opt-in only feature. You can enable this feature from the Cost Explorer\n        Settings page. For information about how to access the Settings page, see <a href=\"https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/ce-access.html\">Controlling\n          Access for Cost Explorer</a> in the <i>Billing and Cost Management User\n          Guide</i>.</p>\n         </note>"
             }
         },
         "com.amazonaws.costexplorer#GetCostAndUsageWithResourcesRequest": {
@@ -5556,6 +5752,71 @@
                 "smithy.api#error": "client"
             }
         },
+        "com.amazonaws.costexplorer#ListCostAllocationTagBackfillHistory": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.costexplorer#ListCostAllocationTagBackfillHistoryRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.costexplorer#ListCostAllocationTagBackfillHistoryResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.costexplorer#InvalidNextTokenException"
+                },
+                {
+                    "target": "com.amazonaws.costexplorer#LimitExceededException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>\n      Retrieves a list of your historical cost allocation tag backfill requests.\n    </p>",
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "pageSize": "MaxResults"
+                }
+            }
+        },
+        "com.amazonaws.costexplorer#ListCostAllocationTagBackfillHistoryRequest": {
+            "type": "structure",
+            "members": {
+                "NextToken": {
+                    "target": "com.amazonaws.costexplorer#NextPageToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The token to retrieve the next set of results. Amazon Web Services provides the token when the response from a previous call has more results than the maximum page size.\n    </p>"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.costexplorer#CostAllocationTagsMaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The maximum number of objects that are returned for this request.\n    </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.costexplorer#ListCostAllocationTagBackfillHistoryResponse": {
+            "type": "structure",
+            "members": {
+                "BackfillRequests": {
+                    "target": "com.amazonaws.costexplorer#CostAllocationTagBackfillRequestList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The list of historical cost allocation tag backfill requests.\n    </p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.costexplorer#NextPageToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The token to retrieve the next set of results. Amazon Web Services provides the token when the response from a previous call has more results than the maximum page size.\n    </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.costexplorer#ListCostAllocationTags": {
             "type": "operation",
             "input": {
@@ -6161,6 +6422,15 @@
         },
         "com.amazonaws.costexplorer#NonNegativeInteger": {
             "type": "integer",
+            "traits": {
+                "smithy.api#default": 0,
+                "smithy.api#range": {
+                    "min": 0
+                }
+            }
+        },
+        "com.amazonaws.costexplorer#NonNegativeLong": {
+            "type": "long",
             "traits": {
                 "smithy.api#default": 0,
                 "smithy.api#range": {
@@ -7102,18 +7372,24 @@
                 "RecommendationId": {
                     "target": "com.amazonaws.costexplorer#GenericString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ID for this specific recommendation.</p>"
+                        "smithy.api#documentation": "<p>The ID for the recommendation.</p>"
                     }
                 },
                 "GenerationTimestamp": {
                     "target": "com.amazonaws.costexplorer#GenericString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The timestamp for when Amazon Web Services made this recommendation.</p>"
+                        "smithy.api#documentation": "<p>The timestamp for when Amazon Web Services made the recommendation.</p>"
+                    }
+                },
+                "AdditionalMetadata": {
+                    "target": "com.amazonaws.costexplorer#GenericString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Additional metadata that might be applicable to the recommendation.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Information about this specific recommendation, such as the timestamp for when Amazon Web Services made a specific recommendation.</p>"
+                "smithy.api#documentation": "<p>Information about a recommendation, such as the timestamp for when Amazon Web Services\n            made a specific recommendation.</p>"
             }
         },
         "com.amazonaws.costexplorer#ReservationPurchaseRecommendationSummary": {
@@ -7420,19 +7696,19 @@
                 "RecommendationId": {
                     "target": "com.amazonaws.costexplorer#GenericString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ID for this specific recommendation.</p>"
+                        "smithy.api#documentation": "<p>The ID for the recommendation.</p>"
                     }
                 },
                 "GenerationTimestamp": {
                     "target": "com.amazonaws.costexplorer#GenericString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The timestamp for when Amazon Web Services made this recommendation.</p>"
+                        "smithy.api#documentation": "<p>The timestamp for when Amazon Web Services made the recommendation.</p>"
                     }
                 },
                 "LookbackPeriodInDays": {
                     "target": "com.amazonaws.costexplorer#LookbackPeriodInDays",
                     "traits": {
-                        "smithy.api#documentation": "<p>The number of days of previous usage that Amazon Web Services considers when making\n            this recommendation.</p>"
+                        "smithy.api#documentation": "<p>The number of days of previous usage that Amazon Web Services considers when making the\n            recommendation.</p>"
                     }
                 },
                 "AdditionalMetadata": {
@@ -7443,7 +7719,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Metadata for this recommendation set.</p>"
+                "smithy.api#documentation": "<p>Metadata for a recommendation set.</p>"
             }
         },
         "com.amazonaws.costexplorer#RightsizingRecommendationSummary": {
@@ -8207,6 +8483,55 @@
                         "smithy.api#enumValue": "DESCENDING"
                     }
                 }
+            }
+        },
+        "com.amazonaws.costexplorer#StartCostAllocationTagBackfill": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.costexplorer#StartCostAllocationTagBackfillRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.costexplorer#StartCostAllocationTagBackfillResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.costexplorer#BackfillLimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.costexplorer#LimitExceededException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>\n      Request a cost allocation tag backfill. This will backfill the activation status (either <code>active</code> or <code>inactive</code>) for all tag keys from <code>para:BackfillFrom</code> up to the when this request is made.</p>\n         <p>You can request a backfill once every 24 hours.\n    </p>"
+            }
+        },
+        "com.amazonaws.costexplorer#StartCostAllocationTagBackfillRequest": {
+            "type": "structure",
+            "members": {
+                "BackfillFrom": {
+                    "target": "com.amazonaws.costexplorer#ZonedDateTime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The date you want the backfill to start from. The date can only be a first day of the month (a billing start date). Dates can't precede the previous twelve months, or in the future.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.costexplorer#StartCostAllocationTagBackfillResponse": {
+            "type": "structure",
+            "members": {
+                "BackfillRequest": {
+                    "target": "com.amazonaws.costexplorer#CostAllocationTagBackfillRequest",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      An object containing detailed metadata of your new backfill request.\n    </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.costexplorer#StartSavingsPlansPurchaseRecommendationGeneration": {
@@ -9037,6 +9362,12 @@
             },
             "traits": {
                 "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.costexplorer#UsageServices": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.costexplorer#GenericString"
             }
         },
         "com.amazonaws.costexplorer#UtilizationByTime": {

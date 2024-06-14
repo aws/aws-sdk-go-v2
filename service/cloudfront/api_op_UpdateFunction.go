@@ -6,16 +6,18 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/cloudfront/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates a CloudFront function. You can update a function's code or the comment
-// that describes the function. You cannot update a function's name. To update a
-// function, you provide the function's name and version ( ETag value) along with
-// the updated function code. To get the name and version, you can use
+// Updates a CloudFront function.
+//
+// You can update a function's code or the comment that describes the function.
+// You cannot update a function's name.
+//
+// To update a function, you provide the function's name and version ( ETag value)
+// along with the updated function code. To get the name and version, you can use
 // ListFunctions and DescribeFunction .
 func (c *Client) UpdateFunction(ctx context.Context, params *UpdateFunctionInput, optFns ...func(*Options)) (*UpdateFunctionOutput, error) {
 	if params == nil {
@@ -35,8 +37,9 @@ func (c *Client) UpdateFunction(ctx context.Context, params *UpdateFunctionInput
 type UpdateFunctionInput struct {
 
 	// The function code. For more information about writing a CloudFront function,
-	// see Writing function code for CloudFront Functions (https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/writing-function-code.html)
-	// in the Amazon CloudFront Developer Guide.
+	// see [Writing function code for CloudFront Functions]in the Amazon CloudFront Developer Guide.
+	//
+	// [Writing function code for CloudFront Functions]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/writing-function-code.html
 	//
 	// This member is required.
 	FunctionCode []byte
@@ -96,25 +99,25 @@ func (c *Client) addOperationUpdateFunctionMiddlewares(stack *middleware.Stack, 
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -129,13 +132,16 @@ func (c *Client) addOperationUpdateFunctionMiddlewares(stack *middleware.Stack, 
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpUpdateFunctionValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateFunction(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

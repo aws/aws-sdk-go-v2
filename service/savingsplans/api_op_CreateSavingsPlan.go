@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -30,8 +29,9 @@ func (c *Client) CreateSavingsPlan(ctx context.Context, params *CreateSavingsPla
 
 type CreateSavingsPlanInput struct {
 
-	// The hourly commitment, in USD. This is a value between 0.001 and 1 million. You
-	// cannot specify more than five digits after the decimal point.
+	// The hourly commitment, in the same currency of the savingsPlanOfferingId . This
+	// is a value between 0.001 and 1 million. You cannot specify more than five digits
+	// after the decimal point.
 	//
 	// This member is required.
 	Commitment *string
@@ -41,19 +41,18 @@ type CreateSavingsPlanInput struct {
 	// This member is required.
 	SavingsPlanOfferingId *string
 
-	// Unique, case-sensitive identifier that you provide to ensure the idempotency of
-	// the request.
+	// A unique, case-sensitive identifier that you provide to ensure the idempotency
+	// of the request.
 	ClientToken *string
 
-	// The time at which to purchase the Savings Plan, in UTC format
-	// (YYYY-MM-DDTHH:MM:SSZ).
+	// The purchase time of the Savings Plan in UTC format (YYYY-MM-DDTHH:MM:SSZ).
 	PurchaseTime *time.Time
 
 	// One or more tags.
 	Tags map[string]string
 
 	// The up-front payment amount. This is a whole number between 50 and 99 percent
-	// of the total value of the Savings Plan. This parameter is supported only if the
+	// of the total value of the Savings Plan. This parameter is only supported if the
 	// payment option is Partial Upfront .
 	UpfrontPaymentAmount *string
 
@@ -93,25 +92,25 @@ func (c *Client) addOperationCreateSavingsPlanMiddlewares(stack *middleware.Stac
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -126,6 +125,9 @@ func (c *Client) addOperationCreateSavingsPlanMiddlewares(stack *middleware.Stac
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opCreateSavingsPlanMiddleware(stack, options); err != nil {
 		return err
 	}
@@ -135,7 +137,7 @@ func (c *Client) addOperationCreateSavingsPlanMiddlewares(stack *middleware.Stac
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateSavingsPlan(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

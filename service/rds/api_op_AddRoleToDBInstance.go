@@ -6,14 +6,16 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Associates an Amazon Web Services Identity and Access Management (IAM) role
-// with a DB instance. To add a role to a DB instance, the status of the DB
-// instance must be available . This command doesn't apply to RDS Custom.
+// with a DB instance.
+//
+// To add a role to a DB instance, the status of the DB instance must be available .
+//
+// This command doesn't apply to RDS Custom.
 func (c *Client) AddRoleToDBInstance(ctx context.Context, params *AddRoleToDBInstanceInput, optFns ...func(*Options)) (*AddRoleToDBInstanceOutput, error) {
 	if params == nil {
 		params = &AddRoleToDBInstanceInput{}
@@ -37,8 +39,7 @@ type AddRoleToDBInstanceInput struct {
 	DBInstanceIdentifier *string
 
 	// The name of the feature for the DB instance that the IAM role is to be
-	// associated with. For information about supported feature names, see
-	// DBEngineVersion .
+	// associated with. For information about supported feature names, see DBEngineVersion.
 	//
 	// This member is required.
 	FeatureName *string
@@ -81,25 +82,25 @@ func (c *Client) addOperationAddRoleToDBInstanceMiddlewares(stack *middleware.St
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -114,13 +115,16 @@ func (c *Client) addOperationAddRoleToDBInstanceMiddlewares(stack *middleware.St
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpAddRoleToDBInstanceValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opAddRoleToDBInstance(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

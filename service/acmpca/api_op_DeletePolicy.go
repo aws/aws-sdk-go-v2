@@ -6,37 +6,46 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Deletes the resource-based policy attached to a private CA. Deletion will
 // remove any access that the policy has granted. If there is no policy attached to
-// the private CA, this action will return successful. If you delete a policy that
-// was applied through Amazon Web Services Resource Access Manager (RAM), the CA
-// will be removed from all shares in which it was included. The Certificate
-// Manager Service Linked Role that the policy supports is not affected when you
-// delete the policy. The current policy can be shown with GetPolicy (https://docs.aws.amazon.com/privateca/latest/APIReference/API_GetPolicy.html)
-// and updated with PutPolicy (https://docs.aws.amazon.com/privateca/latest/APIReference/API_PutPolicy.html)
-// . About Policies
+// the private CA, this action will return successful.
+//
+// If you delete a policy that was applied through Amazon Web Services Resource
+// Access Manager (RAM), the CA will be removed from all shares in which it was
+// included.
+//
+// The Certificate Manager Service Linked Role that the policy supports is not
+// affected when you delete the policy.
+//
+// The current policy can be shown with [GetPolicy] and updated with [PutPolicy].
+//
+// About Policies
+//
 //   - A policy grants access on a private CA to an Amazon Web Services customer
 //     account, to Amazon Web Services Organizations, or to an Amazon Web Services
 //     Organizations unit. Policies are under the control of a CA administrator. For
-//     more information, see Using a Resource Based Policy with Amazon Web Services
-//     Private CA (https://docs.aws.amazon.com/privateca/latest/userguide/pca-rbp.html)
-//     .
+//     more information, see [Using a Resource Based Policy with Amazon Web Services Private CA].
+//
 //   - A policy permits a user of Certificate Manager (ACM) to issue ACM
 //     certificates signed by a CA in another account.
+//
 //   - For ACM to manage automatic renewal of these certificates, the ACM user
 //     must configure a Service Linked Role (SLR). The SLR allows the ACM service to
 //     assume the identity of the user, subject to confirmation against the Amazon Web
-//     Services Private CA policy. For more information, see Using a Service Linked
-//     Role with ACM (https://docs.aws.amazon.com/acm/latest/userguide/acm-slr.html)
-//     .
+//     Services Private CA policy. For more information, see [Using a Service Linked Role with ACM].
+//
 //   - Updates made in Amazon Web Services Resource Manager (RAM) are reflected in
-//     policies. For more information, see Attach a Policy for Cross-Account Access (https://docs.aws.amazon.com/privateca/latest/userguide/pca-ram.html)
-//     .
+//     policies. For more information, see [Attach a Policy for Cross-Account Access].
+//
+// [PutPolicy]: https://docs.aws.amazon.com/privateca/latest/APIReference/API_PutPolicy.html
+// [Using a Resource Based Policy with Amazon Web Services Private CA]: https://docs.aws.amazon.com/privateca/latest/userguide/pca-rbp.html
+// [Using a Service Linked Role with ACM]: https://docs.aws.amazon.com/acm/latest/userguide/acm-slr.html
+// [Attach a Policy for Cross-Account Access]: https://docs.aws.amazon.com/privateca/latest/userguide/pca-ram.html
+// [GetPolicy]: https://docs.aws.amazon.com/privateca/latest/APIReference/API_GetPolicy.html
 func (c *Client) DeletePolicy(ctx context.Context, params *DeletePolicyInput, optFns ...func(*Options)) (*DeletePolicyOutput, error) {
 	if params == nil {
 		params = &DeletePolicyInput{}
@@ -55,10 +64,12 @@ func (c *Client) DeletePolicy(ctx context.Context, params *DeletePolicyInput, op
 type DeletePolicyInput struct {
 
 	// The Amazon Resource Number (ARN) of the private CA that will have its policy
-	// deleted. You can find the CA's ARN by calling the ListCertificateAuthorities (https://docs.aws.amazon.com/privateca/latest/APIReference/API_ListCertificateAuthorities.html)
-	// action. The ARN value must have the form
+	// deleted. You can find the CA's ARN by calling the [ListCertificateAuthorities]action. The ARN value must
+	// have the form
 	// arn:aws:acm-pca:region:account:certificate-authority/01234567-89ab-cdef-0123-0123456789ab
 	// .
+	//
+	// [ListCertificateAuthorities]: https://docs.aws.amazon.com/privateca/latest/APIReference/API_ListCertificateAuthorities.html
 	//
 	// This member is required.
 	ResourceArn *string
@@ -95,25 +106,25 @@ func (c *Client) addOperationDeletePolicyMiddlewares(stack *middleware.Stack, op
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -128,13 +139,16 @@ func (c *Client) addOperationDeletePolicyMiddlewares(stack *middleware.Stack, op
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDeletePolicyValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDeletePolicy(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

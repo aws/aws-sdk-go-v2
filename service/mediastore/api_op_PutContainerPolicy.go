@@ -6,17 +6,19 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates an access policy for the specified container to restrict the users and
 // clients that can access it. For information about the data that is included in
-// an access policy, see the AWS Identity and Access Management User Guide (https://aws.amazon.com/documentation/iam/)
-// . For this release of the REST API, you can create only one policy for a
+// an access policy, see the [AWS Identity and Access Management User Guide].
+//
+// For this release of the REST API, you can create only one policy for a
 // container. If you enter PutContainerPolicy twice, the second command modifies
 // the existing policy.
+//
+// [AWS Identity and Access Management User Guide]: https://aws.amazon.com/documentation/iam/
 func (c *Client) PutContainerPolicy(ctx context.Context, params *PutContainerPolicyInput, optFns ...func(*Options)) (*PutContainerPolicyOutput, error) {
 	if params == nil {
 		params = &PutContainerPolicyInput{}
@@ -40,7 +42,9 @@ type PutContainerPolicyInput struct {
 	ContainerName *string
 
 	// The contents of the policy, which includes the following:
+	//
 	//   - One Version tag
+	//
 	//   - One Statement tag that contains the standard tags for the policy.
 	//
 	// This member is required.
@@ -78,25 +82,25 @@ func (c *Client) addOperationPutContainerPolicyMiddlewares(stack *middleware.Sta
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -111,13 +115,16 @@ func (c *Client) addOperationPutContainerPolicyMiddlewares(stack *middleware.Sta
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpPutContainerPolicyValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opPutContainerPolicy(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

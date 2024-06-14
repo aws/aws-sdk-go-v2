@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/sfn/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -14,13 +13,15 @@ import (
 
 // Returns the history of the specified execution as a list of events. By default,
 // the results are returned in ascending order of the timeStamp of the events. Use
-// the reverseOrder parameter to get the latest events first. If nextToken is
-// returned, there are more results available. The value of nextToken is a unique
-// pagination token for each page. Make the call again using the returned token to
-// retrieve the next page. Keep all other arguments unchanged. Each pagination
-// token expires after 24 hours. Using an expired pagination token will return an
-// HTTP 400 InvalidToken error. This API action is not supported by EXPRESS state
-// machines.
+// the reverseOrder parameter to get the latest events first.
+//
+// If nextToken is returned, there are more results available. The value of
+// nextToken is a unique pagination token for each page. Make the call again using
+// the returned token to retrieve the next page. Keep all other arguments
+// unchanged. Each pagination token expires after 24 hours. Using an expired
+// pagination token will return an HTTP 400 InvalidToken error.
+//
+// This API action is not supported by EXPRESS state machines.
 func (c *Client) GetExecutionHistory(ctx context.Context, params *GetExecutionHistoryInput, optFns ...func(*Options)) (*GetExecutionHistoryOutput, error) {
 	if params == nil {
 		params = &GetExecutionHistoryInput{}
@@ -49,9 +50,10 @@ type GetExecutionHistoryInput struct {
 
 	// The maximum number of results that are returned per call. You can use nextToken
 	// to obtain further pages of results. The default is 100 and the maximum allowed
-	// page size is 1000. A value of 0 uses the default. This is only an upper limit.
-	// The actual number of results returned per call might be fewer than the specified
-	// maximum.
+	// page size is 1000. A value of 0 uses the default.
+	//
+	// This is only an upper limit. The actual number of results returned per call
+	// might be fewer than the specified maximum.
 	MaxResults int32
 
 	// If nextToken is returned, there are more results available. The value of
@@ -109,25 +111,25 @@ func (c *Client) addOperationGetExecutionHistoryMiddlewares(stack *middleware.St
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -142,13 +144,16 @@ func (c *Client) addOperationGetExecutionHistoryMiddlewares(stack *middleware.St
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpGetExecutionHistoryValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetExecutionHistory(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -179,9 +184,10 @@ var _ GetExecutionHistoryAPIClient = (*Client)(nil)
 type GetExecutionHistoryPaginatorOptions struct {
 	// The maximum number of results that are returned per call. You can use nextToken
 	// to obtain further pages of results. The default is 100 and the maximum allowed
-	// page size is 1000. A value of 0 uses the default. This is only an upper limit.
-	// The actual number of results returned per call might be fewer than the specified
-	// maximum.
+	// page size is 1000. A value of 0 uses the default.
+	//
+	// This is only an upper limit. The actual number of results returned per call
+	// might be fewer than the specified maximum.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -49,7 +48,7 @@ type ListInferenceExperimentsInput struct {
 	// Selects inference experiments whose names contain this name.
 	NameContains *string
 
-	// The response from the last list when returning a list large enough to need
+	//  The response from the last list when returning a list large enough to need
 	// tokening.
 	NextToken *string
 
@@ -59,14 +58,16 @@ type ListInferenceExperimentsInput struct {
 	// The direction of sorting (ascending or descending).
 	SortOrder types.SortOrder
 
-	// Selects inference experiments which are in this status. For the possible
-	// statuses, see DescribeInferenceExperiment (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_DescribeInferenceExperiment.html)
-	// .
+	//  Selects inference experiments which are in this status. For the possible
+	// statuses, see [DescribeInferenceExperiment].
+	//
+	// [DescribeInferenceExperiment]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_DescribeInferenceExperiment.html
 	StatusEquals types.InferenceExperimentStatus
 
-	// Selects inference experiments of this type. For the possible types of inference
-	// experiments, see CreateInferenceExperiment (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateInferenceExperiment.html)
-	// .
+	//  Selects inference experiments of this type. For the possible types of
+	// inference experiments, see [CreateInferenceExperiment].
+	//
+	// [CreateInferenceExperiment]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateInferenceExperiment.html
 	Type types.InferenceExperimentType
 
 	noSmithyDocumentSerde
@@ -108,25 +109,25 @@ func (c *Client) addOperationListInferenceExperimentsMiddlewares(stack *middlewa
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -141,10 +142,13 @@ func (c *Client) addOperationListInferenceExperimentsMiddlewares(stack *middlewa
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListInferenceExperiments(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

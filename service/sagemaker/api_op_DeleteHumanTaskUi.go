@@ -6,16 +6,17 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Use this operation to delete a human task user interface (worker task
-// template). To see a list of human task user interfaces (work task templates) in
-// your account, use ListHumanTaskUis (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_ListHumanTaskUis.html)
-// . When you delete a worker task template, it no longer appears when you call
-// ListHumanTaskUis .
+// Use this operation to delete a human task user interface (worker task template).
+//
+// To see a list of human task user interfaces (work task templates) in your
+// account, use [ListHumanTaskUis]. When you delete a worker task template, it no longer appears
+// when you call ListHumanTaskUis .
+//
+// [ListHumanTaskUis]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_ListHumanTaskUis.html
 func (c *Client) DeleteHumanTaskUi(ctx context.Context, params *DeleteHumanTaskUiInput, optFns ...func(*Options)) (*DeleteHumanTaskUiOutput, error) {
 	if params == nil {
 		params = &DeleteHumanTaskUiInput{}
@@ -71,25 +72,25 @@ func (c *Client) addOperationDeleteHumanTaskUiMiddlewares(stack *middleware.Stac
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -104,13 +105,16 @@ func (c *Client) addOperationDeleteHumanTaskUiMiddlewares(stack *middleware.Stac
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDeleteHumanTaskUiValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteHumanTaskUi(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

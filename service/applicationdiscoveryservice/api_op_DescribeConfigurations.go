@@ -6,24 +6,31 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Retrieves attributes for a list of configuration item IDs. All of the supplied
-// IDs must be for the same asset type from one of the following:
+// Retrieves attributes for a list of configuration item IDs.
+//
+// All of the supplied IDs must be for the same asset type from one of the
+// following:
+//
 //   - server
+//
 //   - application
+//
 //   - process
+//
 //   - connection
 //
 // Output fields are specific to the asset type specified. For example, the output
 // for a server configuration item includes a list of attributes about the server,
-// such as host name, operating system, number of network cards, etc. For a
-// complete list of outputs for each asset type, see Using the
-// DescribeConfigurations Action (https://docs.aws.amazon.com/application-discovery/latest/userguide/discovery-api-queries.html#DescribeConfigurations)
-// in the Amazon Web Services Application Discovery Service User Guide.
+// such as host name, operating system, number of network cards, etc.
+//
+// For a complete list of outputs for each asset type, see [Using the DescribeConfigurations Action] in the Amazon Web
+// Services Application Discovery Service User Guide.
+//
+// [Using the DescribeConfigurations Action]: https://docs.aws.amazon.com/application-discovery/latest/userguide/discovery-api-queries.html#DescribeConfigurations
 func (c *Client) DescribeConfigurations(ctx context.Context, params *DescribeConfigurationsInput, optFns ...func(*Options)) (*DescribeConfigurationsOutput, error) {
 	if params == nil {
 		params = &DescribeConfigurationsInput{}
@@ -82,25 +89,25 @@ func (c *Client) addOperationDescribeConfigurationsMiddlewares(stack *middleware
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -115,13 +122,16 @@ func (c *Client) addOperationDescribeConfigurationsMiddlewares(stack *middleware
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDescribeConfigurationsValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeConfigurations(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

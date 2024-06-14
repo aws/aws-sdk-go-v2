@@ -6,14 +6,14 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/codeartifact/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns a RepositoryDescription object that contains detailed information about
-// the requested repository.
+//	Returns a RepositoryDescription object that contains detailed information
+//
+// about the requested repository.
 func (c *Client) DescribeRepository(ctx context.Context, params *DescribeRepositoryInput, optFns ...func(*Options)) (*DescribeRepositoryOutput, error) {
 	if params == nil {
 		params = &DescribeRepositoryInput{}
@@ -31,17 +31,17 @@ func (c *Client) DescribeRepository(ctx context.Context, params *DescribeReposit
 
 type DescribeRepositoryInput struct {
 
-	// The name of the domain that contains the repository to describe.
+	//  The name of the domain that contains the repository to describe.
 	//
 	// This member is required.
 	Domain *string
 
-	// A string that specifies the name of the requested repository.
+	//  A string that specifies the name of the requested repository.
 	//
 	// This member is required.
 	Repository *string
 
-	// The 12-digit account number of the Amazon Web Services account that owns the
+	//  The 12-digit account number of the Amazon Web Services account that owns the
 	// domain. It does not include dashes or spaces.
 	DomainOwner *string
 
@@ -50,7 +50,7 @@ type DescribeRepositoryInput struct {
 
 type DescribeRepositoryOutput struct {
 
-	// A RepositoryDescription object that contains the requested repository
+	//  A RepositoryDescription object that contains the requested repository
 	// information.
 	Repository *types.RepositoryDescription
 
@@ -82,25 +82,25 @@ func (c *Client) addOperationDescribeRepositoryMiddlewares(stack *middleware.Sta
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -115,13 +115,16 @@ func (c *Client) addOperationDescribeRepositoryMiddlewares(stack *middleware.Sta
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDescribeRepositoryValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeRepository(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

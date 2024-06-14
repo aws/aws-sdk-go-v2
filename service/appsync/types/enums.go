@@ -14,8 +14,9 @@ const (
 )
 
 // Values returns all known values for ApiCacheStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ApiCacheStatus) Values() []ApiCacheStatus {
 	return []ApiCacheStatus{
 		"AVAILABLE",
@@ -48,8 +49,9 @@ const (
 )
 
 // Values returns all known values for ApiCacheType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ApiCacheType) Values() []ApiCacheType {
 	return []ApiCacheType{
 		"T2_SMALL",
@@ -79,8 +81,9 @@ const (
 )
 
 // Values returns all known values for ApiCachingBehavior. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ApiCachingBehavior) Values() []ApiCachingBehavior {
 	return []ApiCachingBehavior{
 		"FULL_REQUEST_CACHING",
@@ -98,8 +101,9 @@ const (
 )
 
 // Values returns all known values for AssociationStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (AssociationStatus) Values() []AssociationStatus {
 	return []AssociationStatus{
 		"PROCESSING",
@@ -120,8 +124,9 @@ const (
 )
 
 // Values returns all known values for AuthenticationType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (AuthenticationType) Values() []AuthenticationType {
 	return []AuthenticationType{
 		"API_KEY",
@@ -140,8 +145,9 @@ const (
 )
 
 // Values returns all known values for AuthorizationType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (AuthorizationType) Values() []AuthorizationType {
 	return []AuthorizationType{
 		"AWS_IAM",
@@ -156,8 +162,9 @@ const (
 )
 
 // Values returns all known values for BadRequestReason. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (BadRequestReason) Values() []BadRequestReason {
 	return []BadRequestReason{
 		"CODE_ERROR",
@@ -174,6 +181,7 @@ const (
 
 // Values returns all known values for CacheHealthMetricsConfig. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (CacheHealthMetricsConfig) Values() []CacheHealthMetricsConfig {
 	return []CacheHealthMetricsConfig{
@@ -191,8 +199,9 @@ const (
 )
 
 // Values returns all known values for ConflictDetectionType. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ConflictDetectionType) Values() []ConflictDetectionType {
 	return []ConflictDetectionType{
 		"VERSION",
@@ -211,8 +220,9 @@ const (
 )
 
 // Values returns all known values for ConflictHandlerType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ConflictHandlerType) Values() []ConflictHandlerType {
 	return []ConflictHandlerType{
 		"OPTIMISTIC_CONCURRENCY",
@@ -233,8 +243,9 @@ const (
 
 // Values returns all known values for DataSourceIntrospectionStatus. Note that
 // this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (DataSourceIntrospectionStatus) Values() []DataSourceIntrospectionStatus {
 	return []DataSourceIntrospectionStatus{
 		"PROCESSING",
@@ -253,8 +264,9 @@ const (
 
 // Values returns all known values for DataSourceLevelMetricsBehavior. Note that
 // this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (DataSourceLevelMetricsBehavior) Values() []DataSourceLevelMetricsBehavior {
 	return []DataSourceLevelMetricsBehavior{
 		"FULL_REQUEST_DATA_SOURCE_METRICS",
@@ -272,8 +284,9 @@ const (
 
 // Values returns all known values for DataSourceLevelMetricsConfig. Note that
 // this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (DataSourceLevelMetricsConfig) Values() []DataSourceLevelMetricsConfig {
 	return []DataSourceLevelMetricsConfig{
 		"ENABLED",
@@ -296,8 +309,9 @@ const (
 )
 
 // Values returns all known values for DataSourceType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (DataSourceType) Values() []DataSourceType {
 	return []DataSourceType{
 		"AWS_LAMBDA",
@@ -320,8 +334,9 @@ const (
 )
 
 // Values returns all known values for DefaultAction. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (DefaultAction) Values() []DefaultAction {
 	return []DefaultAction{
 		"ALLOW",
@@ -339,8 +354,9 @@ const (
 )
 
 // Values returns all known values for FieldLogLevel. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (FieldLogLevel) Values() []FieldLogLevel {
 	return []FieldLogLevel{
 		"NONE",
@@ -359,8 +375,9 @@ const (
 
 // Values returns all known values for GraphQLApiIntrospectionConfig. Note that
 // this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (GraphQLApiIntrospectionConfig) Values() []GraphQLApiIntrospectionConfig {
 	return []GraphQLApiIntrospectionConfig{
 		"ENABLED",
@@ -377,8 +394,9 @@ const (
 )
 
 // Values returns all known values for GraphQLApiType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (GraphQLApiType) Values() []GraphQLApiType {
 	return []GraphQLApiType{
 		"GRAPHQL",
@@ -395,8 +413,9 @@ const (
 )
 
 // Values returns all known values for GraphQLApiVisibility. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (GraphQLApiVisibility) Values() []GraphQLApiVisibility {
 	return []GraphQLApiVisibility{
 		"GLOBAL",
@@ -413,8 +432,9 @@ const (
 )
 
 // Values returns all known values for MergeType. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (MergeType) Values() []MergeType {
 	return []MergeType{
 		"MANUAL_MERGE",
@@ -432,6 +452,7 @@ const (
 
 // Values returns all known values for OperationLevelMetricsConfig. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (OperationLevelMetricsConfig) Values() []OperationLevelMetricsConfig {
 	return []OperationLevelMetricsConfig{
@@ -449,8 +470,9 @@ const (
 )
 
 // Values returns all known values for OutputType. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (OutputType) Values() []OutputType {
 	return []OutputType{
 		"SDL",
@@ -467,8 +489,9 @@ const (
 )
 
 // Values returns all known values for Ownership. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (Ownership) Values() []Ownership {
 	return []Ownership{
 		"CURRENT_ACCOUNT",
@@ -485,8 +508,9 @@ const (
 
 // Values returns all known values for RelationalDatabaseSourceType. Note that
 // this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (RelationalDatabaseSourceType) Values() []RelationalDatabaseSourceType {
 	return []RelationalDatabaseSourceType{
 		"RDS_HTTP_ENDPOINT",
@@ -502,8 +526,9 @@ const (
 )
 
 // Values returns all known values for ResolverKind. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ResolverKind) Values() []ResolverKind {
 	return []ResolverKind{
 		"UNIT",
@@ -521,8 +546,9 @@ const (
 
 // Values returns all known values for ResolverLevelMetricsBehavior. Note that
 // this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ResolverLevelMetricsBehavior) Values() []ResolverLevelMetricsBehavior {
 	return []ResolverLevelMetricsBehavior{
 		"FULL_REQUEST_RESOLVER_METRICS",
@@ -540,6 +566,7 @@ const (
 
 // Values returns all known values for ResolverLevelMetricsConfig. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (ResolverLevelMetricsConfig) Values() []ResolverLevelMetricsConfig {
 	return []ResolverLevelMetricsConfig{
@@ -556,8 +583,9 @@ const (
 )
 
 // Values returns all known values for RuntimeName. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (RuntimeName) Values() []RuntimeName {
 	return []RuntimeName{
 		"APPSYNC_JS",
@@ -577,8 +605,9 @@ const (
 )
 
 // Values returns all known values for SchemaStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (SchemaStatus) Values() []SchemaStatus {
 	return []SchemaStatus{
 		"PROCESSING",
@@ -606,6 +635,7 @@ const (
 
 // Values returns all known values for SourceApiAssociationStatus. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (SourceApiAssociationStatus) Values() []SourceApiAssociationStatus {
 	return []SourceApiAssociationStatus{
@@ -629,8 +659,9 @@ const (
 )
 
 // Values returns all known values for TypeDefinitionFormat. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (TypeDefinitionFormat) Values() []TypeDefinitionFormat {
 	return []TypeDefinitionFormat{
 		"SDL",

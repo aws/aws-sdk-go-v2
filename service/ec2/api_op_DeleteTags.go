@@ -6,16 +6,17 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes the specified set of tags from the specified set of resources. To list
-// the current tags, use DescribeTags . For more information about tags, see Tag
-// your Amazon EC2 resources (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_Tags.html)
-// in the Amazon Elastic Compute Cloud User Guide.
+// Deletes the specified set of tags from the specified set of resources.
+//
+// To list the current tags, use DescribeTags. For more information about tags, see [Tag your Amazon EC2 resources] in the
+// Amazon Elastic Compute Cloud User Guide.
+//
+// [Tag your Amazon EC2 resources]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_Tags.html
 func (c *Client) DeleteTags(ctx context.Context, params *DeleteTagsInput, optFns ...func(*Options)) (*DeleteTagsOutput, error) {
 	if params == nil {
 		params = &DeleteTagsInput{}
@@ -33,8 +34,10 @@ func (c *Client) DeleteTags(ctx context.Context, params *DeleteTagsInput, optFns
 
 type DeleteTagsInput struct {
 
-	// The IDs of the resources, separated by spaces. Constraints: Up to 1000 resource
-	// IDs. We recommend breaking up this request into smaller batches.
+	// The IDs of the resources, separated by spaces.
+	//
+	// Constraints: Up to 1000 resource IDs. We recommend breaking up this request
+	// into smaller batches.
 	//
 	// This member is required.
 	Resources []string
@@ -49,9 +52,12 @@ type DeleteTagsInput struct {
 	// specific tags. If you specify a tag key without a tag value, we delete any tag
 	// with this key regardless of its value. If you specify a tag key with an empty
 	// string as the tag value, we delete the tag only if its value is an empty string.
+	//
 	// If you omit this parameter, we delete all user-defined tags for the specified
 	// resources. We do not delete Amazon Web Services-generated tags (tags that have
-	// the aws: prefix). Constraints: Up to 1000 tags.
+	// the aws: prefix).
+	//
+	// Constraints: Up to 1000 tags.
 	Tags []types.Tag
 
 	noSmithyDocumentSerde
@@ -86,25 +92,25 @@ func (c *Client) addOperationDeleteTagsMiddlewares(stack *middleware.Stack, opti
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -119,13 +125,16 @@ func (c *Client) addOperationDeleteTagsMiddlewares(stack *middleware.Stack, opti
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDeleteTagsValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteTags(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

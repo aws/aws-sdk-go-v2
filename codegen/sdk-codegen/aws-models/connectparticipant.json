@@ -1020,7 +1020,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Allows you to confirm that the attachment has been uploaded using the pre-signed URL\n            provided in StartAttachmentUpload API. </p>\n         <note>\n            <p>\n               <code>ConnectionToken</code> is used for invoking this API instead of\n                    <code>ParticipantToken</code>.</p>\n         </note>\n         <p>The Amazon Connect Participant Service APIs do not use <a href=\"https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html\">Signature Version 4\n                    authentication</a>.</p>",
+                "smithy.api#documentation": "<p>Allows you to confirm that the attachment has been uploaded using the pre-signed URL\n            provided in StartAttachmentUpload API. A conflict exception is thrown when an attachment\n            with that identifier is already being uploaded.</p>\n         <note>\n            <p>\n               <code>ConnectionToken</code> is used for invoking this API instead of\n                    <code>ParticipantToken</code>.</p>\n         </note>\n         <p>The Amazon Connect Participant Service APIs do not use <a href=\"https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html\">Signature Version 4\n                    authentication</a>.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/participant/complete-attachment-upload",
@@ -1077,7 +1077,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>An attachment with that identifier is already being uploaded.</p>",
+                "smithy.api#documentation": "<p>The requested operation conflicts with the current state of a service\n            resource associated with the request. </p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 409
             }
@@ -1185,7 +1185,7 @@
                 "Type": {
                     "target": "com.amazonaws.connectparticipant#ConnectionTypeList",
                     "traits": {
-                        "smithy.api#documentation": "<p>Type of connection information required. If you need <code>CONNECTION_CREDENTIALS</code> along with marking \n            participant as connected, pass <code>CONNECTION_CREDENTIALS</code> in \n            <code>Type</code>.</p>"
+                        "smithy.api#documentation": "<p>Type of connection information required. If you need\n                <code>CONNECTION_CREDENTIALS</code> along with marking participant as connected,\n            pass <code>CONNECTION_CREDENTIALS</code> in <code>Type</code>.</p>"
                     }
                 },
                 "ParticipantToken": {
@@ -1267,7 +1267,7 @@
                 "ViewToken": {
                     "target": "com.amazonaws.connectparticipant#ViewToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>An encrypted token originating from the interactive message of a ShowView block operation. \n            Represents the desired view.</p>",
+                        "smithy.api#documentation": "<p>An encrypted token originating from the interactive message of a ShowView block\n            operation. Represents the desired view.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -1291,7 +1291,7 @@
                 "View": {
                     "target": "com.amazonaws.connectparticipant#View",
                     "traits": {
-                        "smithy.api#documentation": "<p>A view resource object. Contains metadata and content necessary to render the view.</p>"
+                        "smithy.api#documentation": "<p>A view resource object. Contains metadata and content necessary to render the\n            view.</p>"
                     }
                 }
             },
@@ -1466,7 +1466,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Retrieves a transcript of the session, including details about any attachments. For\n            information about accessing past chat contact transcripts for a persistent chat, see\n                <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/chat-persistence.html\">Enable persistent chat</a>. </p>\n         <note>\n            <p>\n               <code>ConnectionToken</code> is used for invoking this API instead of\n                    <code>ParticipantToken</code>.</p>\n         </note>\n         <p>The Amazon Connect Participant Service APIs do not use <a href=\"https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html\">Signature Version 4\n                    authentication</a>.</p>",
+                "smithy.api#documentation": "<p>Retrieves a transcript of the session, including details about any attachments. For\n            information about accessing past chat contact transcripts for a persistent chat, see\n            <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/chat-persistence.html\">Enable persistent chat</a>. </p>\n         <p>If you have a process that consumes events in the transcript of an chat that has ended, note that chat\n            transcripts contain the following event content types if the event has occurred\n            during the chat session:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>application/vnd.amazonaws.connect.event.participant.left</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>application/vnd.amazonaws.connect.event.participant.joined</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>application/vnd.amazonaws.connect.event.chat.ended</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>application/vnd.amazonaws.connect.event.transfer.succeeded</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>application/vnd.amazonaws.connect.event.transfer.failed</code>\n               </p>\n            </li>\n         </ul>\n         <note>\n            <p>\n               <code>ConnectionToken</code> is used for invoking this API instead of\n                <code>ParticipantToken</code>.</p>\n         </note>\n         <p>The Amazon Connect Participant Service APIs do not use <a href=\"https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html\">Signature Version 4\n                    authentication</a>.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/participant/transcript",
@@ -1963,7 +1963,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Sends an event. </p>\n         <note>\n            <p>\n               <code>ConnectionToken</code> is used for invoking this API instead of\n                    <code>ParticipantToken</code>.</p>\n         </note>\n         <p>The Amazon Connect Participant Service APIs do not use <a href=\"https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html\">Signature Version 4\n                    authentication</a>.</p>",
+                "smithy.api#documentation": "<note>\n            <p>The <code>application/vnd.amazonaws.connect.event.connection.acknowledged</code>\n                ContentType will no longer be supported starting December 31, 2024. This event has\n                been migrated to the <a href=\"https://docs.aws.amazon.com/connect-participant/latest/APIReference/API_CreateParticipantConnection.html\">CreateParticipantConnection</a> API using the\n                    <code>ConnectParticipant</code> field.</p>\n         </note>\n         <p>Sends an event. Message receipts are not supported when there are more than two active\n            participants in the chat. Using the SendEvent API for message receipts when a supervisor\n            is barged-in will result in a conflict exception.</p>\n         <note>\n            <p>\n               <code>ConnectionToken</code> is used for invoking this API instead of\n                    <code>ParticipantToken</code>.</p>\n         </note>\n         <p>The Amazon Connect Participant Service APIs do not use <a href=\"https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html\">Signature Version 4\n                    authentication</a>.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/participant/event",
@@ -1977,7 +1977,7 @@
                 "ContentType": {
                     "target": "com.amazonaws.connectparticipant#ChatContentType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The content type of the request. Supported types are:</p>\n         <ul>\n            <li>\n               <p>application/vnd.amazonaws.connect.event.typing</p>\n            </li>\n            <li>\n               <p>application/vnd.amazonaws.connect.event.connection.acknowledged</p>\n            </li>\n            <li>\n               <p>application/vnd.amazonaws.connect.event.message.delivered</p>\n            </li>\n            <li>\n               <p>application/vnd.amazonaws.connect.event.message.read</p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>The content type of the request. Supported types are:</p>\n         <ul>\n            <li>\n               <p>application/vnd.amazonaws.connect.event.typing</p>\n            </li>\n            <li>\n               <p>application/vnd.amazonaws.connect.event.connection.acknowledged (will be\n                    deprecated on December 31, 2024) </p>\n            </li>\n            <li>\n               <p>application/vnd.amazonaws.connect.event.message.delivered</p>\n            </li>\n            <li>\n               <p>application/vnd.amazonaws.connect.event.message.read</p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 },
@@ -2064,14 +2064,14 @@
                 "ContentType": {
                     "target": "com.amazonaws.connectparticipant#ChatContentType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of the content. Supported types are <code>text/plain</code>,\n            <code>text/markdown</code>, <code>application/json</code>, and \n            <code>application/vnd.amazonaws.connect.message.interactive.response</code>.</p>",
+                        "smithy.api#documentation": "<p>The type of the content. Supported types are <code>text/plain</code>,\n                <code>text/markdown</code>, <code>application/json</code>, and\n                <code>application/vnd.amazonaws.connect.message.interactive.response</code>.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "Content": {
                     "target": "com.amazonaws.connectparticipant#ChatContent",
                     "traits": {
-                        "smithy.api#documentation": "<p>The content of the message. </p>\n         <ul>\n            <li>\n               <p>For <code>text/plain</code> and <code>text/markdown</code>, the Length\n                    Constraints are Minimum of 1, Maximum of 1024. </p>\n            </li>\n            <li>\n               <p>For <code>application/json</code>, the Length Constraints are Minimum of 1,\n                    Maximum of 12000. </p>\n            </li>\n            <li>\n               <p>For <code>application/vnd.amazonaws.connect.message.interactive.response</code>, the Length\n                    Constraints are Minimum of 1, Maximum of 12288.</p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>The content of the message. </p>\n         <ul>\n            <li>\n               <p>For <code>text/plain</code> and <code>text/markdown</code>, the Length\n                    Constraints are Minimum of 1, Maximum of 1024. </p>\n            </li>\n            <li>\n               <p>For <code>application/json</code>, the Length Constraints are Minimum of 1,\n                    Maximum of 12000. </p>\n            </li>\n            <li>\n               <p>For\n                        <code>application/vnd.amazonaws.connect.message.interactive.response</code>,\n                    the Length Constraints are Minimum of 1, Maximum of 12288.</p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 },
@@ -2405,12 +2405,12 @@
                 "Content": {
                     "target": "com.amazonaws.connectparticipant#ViewContent",
                     "traits": {
-                        "smithy.api#documentation": "<p>View content containing all content necessary to render a view except for runtime input data.</p>"
+                        "smithy.api#documentation": "<p>View content containing all content necessary to render a view except for runtime\n            input data.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A view resource object. Contains metadata and content necessary to render the view.</p>"
+                "smithy.api#documentation": "<p>A view resource object. Contains metadata and content necessary to render the\n            view.</p>"
             }
         },
         "com.amazonaws.connectparticipant#ViewAction": {
@@ -2436,7 +2436,7 @@
                 "InputSchema": {
                     "target": "com.amazonaws.connectparticipant#ViewInputSchema",
                     "traits": {
-                        "smithy.api#documentation": "<p>The schema representing the input data that the view template must be supplied to render.</p>"
+                        "smithy.api#documentation": "<p>The schema representing the input data that the view template must be supplied to\n            render.</p>"
                     }
                 },
                 "Template": {
@@ -2453,7 +2453,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>View content containing all content necessary to render a view except for runtime input data.</p>"
+                "smithy.api#documentation": "<p>View content containing all content necessary to render a view except for runtime\n            input data.</p>"
             }
         },
         "com.amazonaws.connectparticipant#ViewId": {

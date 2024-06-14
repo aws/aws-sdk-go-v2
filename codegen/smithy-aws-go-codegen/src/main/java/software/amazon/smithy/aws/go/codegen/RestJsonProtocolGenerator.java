@@ -18,7 +18,6 @@ package software.amazon.smithy.aws.go.codegen;
 import static software.amazon.smithy.go.codegen.integration.HttpProtocolGeneratorUtils.isShapeWithResponseBindings;
 import static software.amazon.smithy.aws.go.codegen.AwsProtocolUtils.handleDecodeError;
 import static software.amazon.smithy.aws.go.codegen.AwsProtocolUtils.initializeJsonDecoder;
-import static software.amazon.smithy.aws.go.codegen.AwsProtocolUtils.writeJsonErrorMessageCodeDeserializer;
 
 import java.util.HashSet;
 import java.util.Optional;
@@ -363,7 +362,27 @@ abstract class RestJsonProtocolGenerator extends HttpBindingProtocolGenerator {
 
     @Override
     protected void writeErrorMessageCodeDeserializer(GenerationContext context) {
-        writeJsonErrorMessageCodeDeserializer(context);
+        GoWriter writer = context.getWriter().get();
+        // The error code could be in the headers, even though for this protocol it should be in the body.
+        writer.write("headerCode := response.Header.Get(\"X-Amzn-ErrorType\")");
+        writer.write("if len(headerCode) != 0 { errorCode = restjson.SanitizeErrorCode(headerCode) }");
+        writer.write("");
+
+        initializeJsonDecoder(writer, "errorBody");
+        writer.addUseImports(AwsGoDependency.AWS_REST_JSON_PROTOCOL);
+        // This will check various body locations for the error code and error message
+        writer.write("jsonCode, message, err := restjson.GetErrorInfo(decoder)");
+        handleDecodeError(writer);
+
+        writer.addUseImports(SmithyGoDependency.IO);
+        // Reset the body in case it needs to be used for anything else.
+        writer.write("errorBody.Seek(0, io.SeekStart)");
+
+        // Only set the values if something was found so that we keep the default values.
+        // The header version of the error wins out over either of the body fields.
+        writer.write("if len(headerCode) == 0 && len(jsonCode) != 0 { errorCode = restjson.SanitizeErrorCode(jsonCode) }");
+        writer.write("if len(message) != 0 { errorMessage = message }");
+        writer.write("");
     }
 
     @Override

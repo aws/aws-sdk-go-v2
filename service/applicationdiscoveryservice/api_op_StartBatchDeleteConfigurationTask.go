@@ -6,13 +6,13 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/applicationdiscoveryservice/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Takes a list of configurationId as input and starts an asynchronous deletion
+//	Takes a list of configurationId as input and starts an asynchronous deletion
+//
 // task to remove the configurationItems. Returns a unique deletion task
 // identifier.
 func (c *Client) StartBatchDeleteConfigurationTask(ctx context.Context, params *StartBatchDeleteConfigurationTaskInput, optFns ...func(*Options)) (*StartBatchDeleteConfigurationTaskOutput, error) {
@@ -32,12 +32,12 @@ func (c *Client) StartBatchDeleteConfigurationTask(ctx context.Context, params *
 
 type StartBatchDeleteConfigurationTaskInput struct {
 
-	// The list of configuration IDs that will be deleted by the task.
+	//  The list of configuration IDs that will be deleted by the task.
 	//
 	// This member is required.
 	ConfigurationIds []string
 
-	// The type of configuration item to delete. Supported types are: SERVER.
+	//  The type of configuration item to delete. Supported types are: SERVER.
 	//
 	// This member is required.
 	ConfigurationType types.DeletionConfigurationItemType
@@ -47,7 +47,7 @@ type StartBatchDeleteConfigurationTaskInput struct {
 
 type StartBatchDeleteConfigurationTaskOutput struct {
 
-	// The unique identifier associated with the newly started deletion task.
+	//  The unique identifier associated with the newly started deletion task.
 	TaskId *string
 
 	// Metadata pertaining to the operation's result.
@@ -78,25 +78,25 @@ func (c *Client) addOperationStartBatchDeleteConfigurationTaskMiddlewares(stack 
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -111,13 +111,16 @@ func (c *Client) addOperationStartBatchDeleteConfigurationTaskMiddlewares(stack 
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpStartBatchDeleteConfigurationTaskValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opStartBatchDeleteConfigurationTask(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

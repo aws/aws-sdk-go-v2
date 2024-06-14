@@ -1164,6 +1164,9 @@
             },
             "value": {
                 "target": "com.amazonaws.personalizeruntime#ColumnValue"
+            },
+            "traits": {
+                "smithy.api#sensitive": {}
             }
         },
         "com.amazonaws.personalizeruntime#MetadataColumns": {
@@ -1255,6 +1258,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Metadata about the item from your Items dataset.</p>"
                     }
+                },
+                "reason": {
+                    "target": "com.amazonaws.personalizeruntime#ReasonList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If you use User-Personalization-v2, a list of reasons for why the item was included in recommendations. Possible reasons include the following:</p>\n         <ul>\n            <li>\n               <p>Promoted item - Indicates the item was included as part of a promotion that you applied in your recommendation request.</p>\n            </li>\n            <li>\n               <p>Exploration - Indicates the item was included with exploration.\n          With exploration, recommendations include items with less interactions data or relevance for the user.\n          For more information about exploration, see \n          <a href=\"https://docs.aws.amazon.com/personalize/latest/dg/use-case-recipe-features.html#about-exploration\">Exploration</a>.</p>\n            </li>\n            <li>\n               <p> \n          Popular item - Indicates the item was included as a placeholder popular item.\n          If you use a filter, depending on how many recommendations the filter removes, \n           Amazon Personalize might add placeholder items to meet the <code>numResults</code> for your \n          recommendation request. These items are popular items, based on interactions data, that satisfy your filter criteria.\n          They don't have a relevance score for the user.\n        </p>\n            </li>\n         </ul>"
+                    }
                 }
             },
             "traits": {
@@ -1303,6 +1312,21 @@
                     "min": 0,
                     "max": 1
                 }
+            }
+        },
+        "com.amazonaws.personalizeruntime#Reason": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 256
+                }
+            }
+        },
+        "com.amazonaws.personalizeruntime#ReasonList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.personalizeruntime#Reason"
             }
         },
         "com.amazonaws.personalizeruntime#RecommendationID": {

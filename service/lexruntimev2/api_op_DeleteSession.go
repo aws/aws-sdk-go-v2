@@ -6,20 +6,25 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Removes session information for a specified bot, alias, and user ID. You can
-// use this operation to restart a conversation with a bot. When you remove a
-// session, the entire history of the session is removed so that you can start
-// again. You don't need to delete a session. Sessions have a time limit and will
-// expire. Set the session time limit when you create the bot. The default is 5
-// minutes, but you can specify anything between 1 minute and 24 hours. If you
-// specify a bot or alias ID that doesn't exist, you receive a BadRequestException.
-// If the locale doesn't exist in the bot, or if the locale hasn't been enables for
-// the alias, you receive a BadRequestException .
+// Removes session information for a specified bot, alias, and user ID.
+//
+// You can use this operation to restart a conversation with a bot. When you
+// remove a session, the entire history of the session is removed so that you can
+// start again.
+//
+// You don't need to delete a session. Sessions have a time limit and will expire.
+// Set the session time limit when you create the bot. The default is 5 minutes,
+// but you can specify anything between 1 minute and 24 hours.
+//
+// If you specify a bot or alias ID that doesn't exist, you receive a
+// BadRequestException.
+//
+// If the locale doesn't exist in the bot, or if the locale hasn't been enables
+// for the alias, you receive a BadRequestException .
 func (c *Client) DeleteSession(ctx context.Context, params *DeleteSessionInput, optFns ...func(*Options)) (*DeleteSessionOutput, error) {
 	if params == nil {
 		params = &DeleteSessionInput{}
@@ -102,25 +107,25 @@ func (c *Client) addOperationDeleteSessionMiddlewares(stack *middleware.Stack, o
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -135,13 +140,16 @@ func (c *Client) addOperationDeleteSessionMiddlewares(stack *middleware.Stack, o
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDeleteSessionValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteSession(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

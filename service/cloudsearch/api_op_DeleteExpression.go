@@ -6,15 +6,15 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/cloudsearch/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Removes an Expression from the search domain. For more information, see
-// Configuring Expressions (http://docs.aws.amazon.com/cloudsearch/latest/developerguide/configuring-expressions.html)
-// in the Amazon CloudSearch Developer Guide.
+// Removes an Expression from the search domain. For more information, see [Configuring Expressions] in the Amazon
+// CloudSearch Developer Guide.
+//
+// [Configuring Expressions]: http://docs.aws.amazon.com/cloudsearch/latest/developerguide/configuring-expressions.html
 func (c *Client) DeleteExpression(ctx context.Context, params *DeleteExpressionInput, optFns ...func(*Options)) (*DeleteExpressionOutput, error) {
 	if params == nil {
 		params = &DeleteExpressionInput{}
@@ -30,9 +30,8 @@ func (c *Client) DeleteExpression(ctx context.Context, params *DeleteExpressionI
 	return out, nil
 }
 
-// Container for the parameters to the DeleteExpression operation. Specifies the
-// name of the domain you want to update and the name of the expression you want to
-// delete.
+// Container for the parameters to the DeleteExpression operation. Specifies the name of the
+// domain you want to update and the name of the expression you want to delete.
 type DeleteExpressionInput struct {
 
 	// A string that represents the name of a domain. Domain names are unique across
@@ -51,8 +50,7 @@ type DeleteExpressionInput struct {
 	noSmithyDocumentSerde
 }
 
-// The result of a DeleteExpression request. Specifies the expression being
-// deleted.
+// The result of a DeleteExpression request. Specifies the expression being deleted.
 type DeleteExpressionOutput struct {
 
 	// The status of the expression being deleted.
@@ -88,25 +86,25 @@ func (c *Client) addOperationDeleteExpressionMiddlewares(stack *middleware.Stack
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -121,13 +119,16 @@ func (c *Client) addOperationDeleteExpressionMiddlewares(stack *middleware.Stack
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDeleteExpressionValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteExpression(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

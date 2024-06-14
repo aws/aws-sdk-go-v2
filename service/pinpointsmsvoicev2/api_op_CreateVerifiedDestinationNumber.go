@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/pinpointsmsvoicev2/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -50,8 +49,9 @@ type CreateVerifiedDestinationNumberInput struct {
 
 type CreateVerifiedDestinationNumberOutput struct {
 
-	// The time when the verified phone number was created, in UNIX epoch time (https://www.epochconverter.com/)
-	// format.
+	// The time when the verified phone number was created, in [UNIX epoch time] format.
+	//
+	// [UNIX epoch time]: https://www.epochconverter.com/
 	//
 	// This member is required.
 	CreatedTimestamp *time.Time
@@ -62,7 +62,9 @@ type CreateVerifiedDestinationNumberOutput struct {
 	DestinationPhoneNumber *string
 
 	// The status of the verified destination phone number.
+	//
 	//   - PENDING : The phone number hasn't been verified yet.
+	//
 	//   - VERIFIED : The phone number is verified and can receive messages.
 	//
 	// This member is required.
@@ -109,25 +111,25 @@ func (c *Client) addOperationCreateVerifiedDestinationNumberMiddlewares(stack *m
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -142,6 +144,9 @@ func (c *Client) addOperationCreateVerifiedDestinationNumberMiddlewares(stack *m
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opCreateVerifiedDestinationNumberMiddleware(stack, options); err != nil {
 		return err
 	}
@@ -151,7 +156,7 @@ func (c *Client) addOperationCreateVerifiedDestinationNumberMiddlewares(stack *m
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateVerifiedDestinationNumber(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

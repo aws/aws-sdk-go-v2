@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -14,12 +13,13 @@ import (
 // Associates a Greengrass service role with IoT Greengrass for your Amazon Web
 // Services account in this Amazon Web Services Region. IoT Greengrass uses this
 // role to verify the identity of client devices and manage core device
-// connectivity information. The role must include the
-// AWSGreengrassResourceAccessRolePolicy (https://console.aws.amazon.com/iam/home#/policies/arn:awsiam::aws:policy/service-role/AWSGreengrassResourceAccessRolePolicy)
-// managed policy or a custom policy that defines equivalent permissions for the
-// IoT Greengrass features that you use. For more information, see Greengrass
-// service role (https://docs.aws.amazon.com/greengrass/v2/developerguide/greengrass-service-role.html)
-// in the IoT Greengrass Version 2 Developer Guide.
+// connectivity information. The role must include the [AWSGreengrassResourceAccessRolePolicy]managed policy or a custom
+// policy that defines equivalent permissions for the IoT Greengrass features that
+// you use. For more information, see [Greengrass service role]in the IoT Greengrass Version 2 Developer
+// Guide.
+//
+// [AWSGreengrassResourceAccessRolePolicy]: https://console.aws.amazon.com/iam/home#/policies/arn:awsiam::aws:policy/service-role/AWSGreengrassResourceAccessRolePolicy
+// [Greengrass service role]: https://docs.aws.amazon.com/greengrass/v2/developerguide/greengrass-service-role.html
 func (c *Client) AssociateServiceRoleToAccount(ctx context.Context, params *AssociateServiceRoleToAccountInput, optFns ...func(*Options)) (*AssociateServiceRoleToAccountOutput, error) {
 	if params == nil {
 		params = &AssociateServiceRoleToAccountInput{}
@@ -81,25 +81,25 @@ func (c *Client) addOperationAssociateServiceRoleToAccountMiddlewares(stack *mid
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -114,13 +114,16 @@ func (c *Client) addOperationAssociateServiceRoleToAccountMiddlewares(stack *mid
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpAssociateServiceRoleToAccountValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opAssociateServiceRoleToAccount(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

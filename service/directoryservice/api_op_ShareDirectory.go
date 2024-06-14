@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/directoryservice/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -15,18 +14,22 @@ import (
 // Shares a specified directory ( DirectoryId ) in your Amazon Web Services account
 // (directory owner) with another Amazon Web Services account (directory consumer).
 // With this operation you can use your directory from any Amazon Web Services
-// account and from any Amazon VPC within an Amazon Web Services Region. When you
-// share your Managed Microsoft AD directory, Directory Service creates a shared
-// directory in the directory consumer account. This shared directory contains the
-// metadata to provide access to the directory within the directory owner account.
-// The shared directory is visible in all VPCs in the directory consumer account.
+// account and from any Amazon VPC within an Amazon Web Services Region.
+//
+// When you share your Managed Microsoft AD directory, Directory Service creates a
+// shared directory in the directory consumer account. This shared directory
+// contains the metadata to provide access to the directory within the directory
+// owner account. The shared directory is visible in all VPCs in the directory
+// consumer account.
+//
 // The ShareMethod parameter determines whether the specified directory can be
 // shared between Amazon Web Services accounts inside the same Amazon Web Services
 // organization ( ORGANIZATIONS ). It also determines whether you can share the
 // directory with any other Amazon Web Services account either inside or outside of
-// the organization ( HANDSHAKE ). The ShareNotes parameter is only used when
-// HANDSHAKE is called, which sends a directory sharing request to the directory
-// consumer.
+// the organization ( HANDSHAKE ).
+//
+// The ShareNotes parameter is only used when HANDSHAKE is called, which sends a
+// directory sharing request to the directory consumer.
 func (c *Client) ShareDirectory(ctx context.Context, params *ShareDirectoryInput, optFns ...func(*Options)) (*ShareDirectoryOutput, error) {
 	if params == nil {
 		params = &ShareDirectoryInput{}
@@ -106,25 +109,25 @@ func (c *Client) addOperationShareDirectoryMiddlewares(stack *middleware.Stack, 
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -139,13 +142,16 @@ func (c *Client) addOperationShareDirectoryMiddlewares(stack *middleware.Stack, 
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpShareDirectoryValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opShareDirectory(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

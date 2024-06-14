@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/globalaccelerator/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -57,18 +56,22 @@ type CreateListenerInput struct {
 	// Client affinity lets you direct all requests from a user to the same endpoint,
 	// if you have stateful applications, regardless of the port and protocol of the
 	// client request. Client affinity gives you control over whether to always route
-	// each client to the same specific endpoint. Global Accelerator uses a
-	// consistent-flow hashing algorithm to choose the optimal endpoint for a
-	// connection. If client affinity is NONE , Global Accelerator uses the
-	// "five-tuple" (5-tuple) properties—source IP address, source port, destination IP
-	// address, destination port, and protocol—to select the hash value, and then
-	// chooses the best endpoint. However, with this setting, if someone uses different
-	// ports to connect to Global Accelerator, their connections might not be always
-	// routed to the same endpoint because the hash value changes. If you want a given
-	// client to always be routed to the same endpoint, set client affinity to
-	// SOURCE_IP instead. When you use the SOURCE_IP setting, Global Accelerator uses
-	// the "two-tuple" (2-tuple) properties— source (client) IP address and destination
-	// IP address—to select the hash value. The default value is NONE .
+	// each client to the same specific endpoint.
+	//
+	// Global Accelerator uses a consistent-flow hashing algorithm to choose the
+	// optimal endpoint for a connection. If client affinity is NONE , Global
+	// Accelerator uses the "five-tuple" (5-tuple) properties—source IP address, source
+	// port, destination IP address, destination port, and protocol—to select the hash
+	// value, and then chooses the best endpoint. However, with this setting, if
+	// someone uses different ports to connect to Global Accelerator, their connections
+	// might not be always routed to the same endpoint because the hash value changes.
+	//
+	// If you want a given client to always be routed to the same endpoint, set client
+	// affinity to SOURCE_IP instead. When you use the SOURCE_IP setting, Global
+	// Accelerator uses the "two-tuple" (2-tuple) properties— source (client) IP
+	// address and destination IP address—to select the hash value.
+	//
+	// The default value is NONE .
 	ClientAffinity types.ClientAffinity
 
 	noSmithyDocumentSerde
@@ -107,25 +110,25 @@ func (c *Client) addOperationCreateListenerMiddlewares(stack *middleware.Stack, 
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -140,6 +143,9 @@ func (c *Client) addOperationCreateListenerMiddlewares(stack *middleware.Stack, 
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opCreateListenerMiddleware(stack, options); err != nil {
 		return err
 	}
@@ -149,7 +155,7 @@ func (c *Client) addOperationCreateListenerMiddlewares(stack *middleware.Stack, 
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateListener(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

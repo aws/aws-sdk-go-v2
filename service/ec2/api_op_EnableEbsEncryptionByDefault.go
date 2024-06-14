@@ -6,22 +6,27 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Enables EBS encryption by default for your account in the current Region. After
-// you enable encryption by default, the EBS volumes that you create are always
-// encrypted, either using the default KMS key or the KMS key that you specified
-// when you created each volume. For more information, see Amazon EBS encryption (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html)
-// in the Amazon Elastic Compute Cloud User Guide. You can specify the default KMS
-// key for encryption by default using ModifyEbsDefaultKmsKeyId or
-// ResetEbsDefaultKmsKeyId . Enabling encryption by default has no effect on the
-// encryption status of your existing volumes. After you enable encryption by
-// default, you can no longer launch instances using instance types that do not
-// support encryption. For more information, see Supported instance types (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html#EBSEncryption_supported_instances)
-// .
+// Enables EBS encryption by default for your account in the current Region.
+//
+// After you enable encryption by default, the EBS volumes that you create are
+// always encrypted, either using the default KMS key or the KMS key that you
+// specified when you created each volume. For more information, see [Amazon EBS encryption]in the Amazon
+// EBS User Guide.
+//
+// You can specify the default KMS key for encryption by default using ModifyEbsDefaultKmsKeyId or ResetEbsDefaultKmsKeyId.
+//
+// Enabling encryption by default has no effect on the encryption status of your
+// existing volumes.
+//
+// After you enable encryption by default, you can no longer launch instances
+// using instance types that do not support encryption. For more information, see [Supported instance types].
+//
+// [Amazon EBS encryption]: https://docs.aws.amazon.com/ebs/latest/userguide/ebs-encryption.html
+// [Supported instance types]: https://docs.aws.amazon.com/ebs/latest/userguide/ebs-encryption-requirements.html#ebs-encryption_supported_instances
 func (c *Client) EnableEbsEncryptionByDefault(ctx context.Context, params *EnableEbsEncryptionByDefaultInput, optFns ...func(*Options)) (*EnableEbsEncryptionByDefaultOutput, error) {
 	if params == nil {
 		params = &EnableEbsEncryptionByDefaultInput{}
@@ -81,25 +86,25 @@ func (c *Client) addOperationEnableEbsEncryptionByDefaultMiddlewares(stack *midd
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -114,10 +119,13 @@ func (c *Client) addOperationEnableEbsEncryptionByDefaultMiddlewares(stack *midd
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opEnableEbsEncryptionByDefault(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/iam/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -14,12 +13,15 @@ import (
 
 // Lists the tags that are attached to the specified IAM server certificate. The
 // returned list of tags is sorted by tag key. For more information about tagging,
-// see Tagging IAM resources (https://docs.aws.amazon.com/IAM/latest/UserGuide/id_tags.html)
-// in the IAM User Guide. For certificates in a Region supported by Certificate
-// Manager (ACM), we recommend that you don't use IAM server certificates. Instead,
-// use ACM to provision, manage, and deploy your server certificates. For more
-// information about IAM server certificates, Working with server certificates (https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_server-certs.html)
-// in the IAM User Guide.
+// see [Tagging IAM resources]in the IAM User Guide.
+//
+// For certificates in a Region supported by Certificate Manager (ACM), we
+// recommend that you don't use IAM server certificates. Instead, use ACM to
+// provision, manage, and deploy your server certificates. For more information
+// about IAM server certificates, [Working with server certificates]in the IAM User Guide.
+//
+// [Working with server certificates]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_server-certs.html
+// [Tagging IAM resources]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_tags.html
 func (c *Client) ListServerCertificateTags(ctx context.Context, params *ListServerCertificateTagsInput, optFns ...func(*Options)) (*ListServerCertificateTagsOutput, error) {
 	if params == nil {
 		params = &ListServerCertificateTagsInput{}
@@ -37,10 +39,13 @@ func (c *Client) ListServerCertificateTags(ctx context.Context, params *ListServ
 
 type ListServerCertificateTagsInput struct {
 
-	// The name of the IAM server certificate whose tags you want to see. This
-	// parameter allows (through its regex pattern (http://wikipedia.org/wiki/regex) )
-	// a string of characters consisting of upper and lowercase alphanumeric characters
-	// with no spaces. You can also include any of the following characters: _+=,.@-
+	// The name of the IAM server certificate whose tags you want to see.
+	//
+	// This parameter allows (through its [regex pattern]) a string of characters consisting of upper
+	// and lowercase alphanumeric characters with no spaces. You can also include any
+	// of the following characters: _+=,.@-
+	//
+	// [regex pattern]: http://wikipedia.org/wiki/regex
 	//
 	// This member is required.
 	ServerCertificateName *string
@@ -53,11 +58,13 @@ type ListServerCertificateTagsInput struct {
 
 	// Use this only when paginating results to indicate the maximum number of items
 	// you want in the response. If additional items exist beyond the maximum you
-	// specify, the IsTruncated response element is true . If you do not include this
-	// parameter, the number of items defaults to 100. Note that IAM might return fewer
-	// results, even when there are more results available. In that case, the
-	// IsTruncated response element returns true , and Marker contains a value to
-	// include in the subsequent call that tells the service where to continue from.
+	// specify, the IsTruncated response element is true .
+	//
+	// If you do not include this parameter, the number of items defaults to 100. Note
+	// that IAM might return fewer results, even when there are more results available.
+	// In that case, the IsTruncated response element returns true , and Marker
+	// contains a value to include in the subsequent call that tells the service where
+	// to continue from.
 	MaxItems *int32
 
 	noSmithyDocumentSerde
@@ -112,25 +119,25 @@ func (c *Client) addOperationListServerCertificateTagsMiddlewares(stack *middlew
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -145,13 +152,16 @@ func (c *Client) addOperationListServerCertificateTagsMiddlewares(stack *middlew
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpListServerCertificateTagsValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListServerCertificateTags(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -182,11 +192,13 @@ var _ ListServerCertificateTagsAPIClient = (*Client)(nil)
 type ListServerCertificateTagsPaginatorOptions struct {
 	// Use this only when paginating results to indicate the maximum number of items
 	// you want in the response. If additional items exist beyond the maximum you
-	// specify, the IsTruncated response element is true . If you do not include this
-	// parameter, the number of items defaults to 100. Note that IAM might return fewer
-	// results, even when there are more results available. In that case, the
-	// IsTruncated response element returns true , and Marker contains a value to
-	// include in the subsequent call that tells the service where to continue from.
+	// specify, the IsTruncated response element is true .
+	//
+	// If you do not include this parameter, the number of items defaults to 100. Note
+	// that IAM might return fewer results, even when there are more results available.
+	// In that case, the IsTruncated response element returns true , and Marker
+	// contains a value to include in the subsequent call that tells the service where
+	// to continue from.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

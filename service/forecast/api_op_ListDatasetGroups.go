@@ -6,18 +6,18 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/forecast/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns a list of dataset groups created using the CreateDatasetGroup (https://docs.aws.amazon.com/forecast/latest/dg/API_CreateDatasetGroup.html)
-// operation. For each dataset group, this operation returns a summary of its
-// properties, including its Amazon Resource Name (ARN). You can retrieve the
-// complete set of properties by using the dataset group ARN with the
-// DescribeDatasetGroup (https://docs.aws.amazon.com/forecast/latest/dg/API_DescribeDatasetGroup.html)
-// operation.
+// Returns a list of dataset groups created using the [CreateDatasetGroup] operation. For each dataset
+// group, this operation returns a summary of its properties, including its Amazon
+// Resource Name (ARN). You can retrieve the complete set of properties by using
+// the dataset group ARN with the [DescribeDatasetGroup]operation.
+//
+// [DescribeDatasetGroup]: https://docs.aws.amazon.com/forecast/latest/dg/API_DescribeDatasetGroup.html
+// [CreateDatasetGroup]: https://docs.aws.amazon.com/forecast/latest/dg/API_CreateDatasetGroup.html
 func (c *Client) ListDatasetGroups(ctx context.Context, params *ListDatasetGroupsInput, optFns ...func(*Options)) (*ListDatasetGroupsOutput, error) {
 	if params == nil {
 		params = &ListDatasetGroupsInput{}
@@ -83,25 +83,25 @@ func (c *Client) addOperationListDatasetGroupsMiddlewares(stack *middleware.Stac
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -116,10 +116,13 @@ func (c *Client) addOperationListDatasetGroupsMiddlewares(stack *middleware.Stac
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListDatasetGroups(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

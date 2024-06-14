@@ -6,19 +6,19 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/redshift/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Deletes the specified manual snapshot. The snapshot must be in the available
-// state, with no other users authorized to access the snapshot. Unlike automated
-// snapshots, manual snapshots are retained even after you delete your cluster.
-// Amazon Redshift does not delete your manual snapshots. You must delete manual
-// snapshot explicitly to avoid getting charged. If other accounts are authorized
-// to access the snapshot, you must revoke all of the authorizations before you can
-// delete the snapshot.
+// state, with no other users authorized to access the snapshot.
+//
+// Unlike automated snapshots, manual snapshots are retained even after you delete
+// your cluster. Amazon Redshift does not delete your manual snapshots. You must
+// delete manual snapshot explicitly to avoid getting charged. If other accounts
+// are authorized to access the snapshot, you must revoke all of the authorizations
+// before you can delete the snapshot.
 func (c *Client) DeleteClusterSnapshot(ctx context.Context, params *DeleteClusterSnapshotInput, optFns ...func(*Options)) (*DeleteClusterSnapshotOutput, error) {
 	if params == nil {
 		params = &DeleteClusterSnapshotInput{}
@@ -36,9 +36,10 @@ func (c *Client) DeleteClusterSnapshot(ctx context.Context, params *DeleteCluste
 
 type DeleteClusterSnapshotInput struct {
 
-	// The unique identifier of the manual snapshot to be deleted. Constraints: Must
-	// be the name of an existing snapshot that is in the available , failed , or
-	// cancelled state.
+	// The unique identifier of the manual snapshot to be deleted.
+	//
+	// Constraints: Must be the name of an existing snapshot that is in the available ,
+	// failed , or cancelled state.
 	//
 	// This member is required.
 	SnapshotIdentifier *string
@@ -46,6 +47,7 @@ type DeleteClusterSnapshotInput struct {
 	// The unique identifier of the cluster the snapshot was created from. This
 	// parameter is required if your IAM user has a policy containing a snapshot
 	// resource element that specifies anything other than * for the cluster name.
+	//
 	// Constraints: Must be the name of valid cluster.
 	SnapshotClusterIdentifier *string
 
@@ -85,25 +87,25 @@ func (c *Client) addOperationDeleteClusterSnapshotMiddlewares(stack *middleware.
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -118,13 +120,16 @@ func (c *Client) addOperationDeleteClusterSnapshotMiddlewares(stack *middleware.
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDeleteClusterSnapshotValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteClusterSnapshot(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

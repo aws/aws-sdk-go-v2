@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -32,18 +31,21 @@ func (c *Client) AssociateResourceSharePermission(ctx context.Context, params *A
 
 type AssociateResourceSharePermissionInput struct {
 
-	// Specifies the Amazon Resource Name (ARN) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
-	// of the RAM permission to associate with the resource share. To find the ARN for
-	// a permission, use either the ListPermissions operation or go to the Permissions
-	// library (https://console.aws.amazon.com/ram/home#Permissions:) page in the RAM
-	// console and then choose the name of the permission. The ARN is displayed on the
-	// detail page.
+	// Specifies the [Amazon Resource Name (ARN)] of the RAM permission to associate with the resource share. To
+	// find the ARN for a permission, use either the ListPermissionsoperation or go to the [Permissions library] page in
+	// the RAM console and then choose the name of the permission. The ARN is displayed
+	// on the detail page.
+	//
+	// [Permissions library]: https://console.aws.amazon.com/ram/home#Permissions:
+	// [Amazon Resource Name (ARN)]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
 	//
 	// This member is required.
 	PermissionArn *string
 
-	// Specifies the Amazon Resource Name (ARN) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
-	// of the resource share to which you want to add or replace permissions.
+	// Specifies the [Amazon Resource Name (ARN)] of the resource share to which you want to add or replace
+	// permissions.
+	//
+	// [Amazon Resource Name (ARN)]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
 	//
 	// This member is required.
 	ResourceShareArn *string
@@ -52,29 +54,37 @@ type AssociateResourceSharePermissionInput struct {
 	// idempotency of the request. This lets you safely retry the request without
 	// accidentally performing the same operation a second time. Passing the same value
 	// to a later call to an operation requires that you also pass the same value for
-	// all other parameters. We recommend that you use a UUID type of value. (https://wikipedia.org/wiki/Universally_unique_identifier)
-	// . If you don't provide this value, then Amazon Web Services generates a random
-	// one for you. If you retry the operation with the same ClientToken , but with
-	// different parameters, the retry fails with an IdempotentParameterMismatch error.
+	// all other parameters. We recommend that you use a [UUID type of value.].
+	//
+	// If you don't provide this value, then Amazon Web Services generates a random
+	// one for you.
+	//
+	// If you retry the operation with the same ClientToken , but with different
+	// parameters, the retry fails with an IdempotentParameterMismatch error.
+	//
+	// [UUID type of value.]: https://wikipedia.org/wiki/Universally_unique_identifier
 	ClientToken *string
 
 	// Specifies the version of the RAM permission to associate with the resource
 	// share. You can specify only the version that is currently set as the default
 	// version for the permission. If you also set the replace pararameter to true ,
 	// then this operation updates an outdated version of the permission to the current
-	// default version. You don't need to specify this parameter because the default
-	// behavior is to use the version that is currently set as the default version for
-	// the permission. This parameter is supported for backwards compatibility.
+	// default version.
+	//
+	// You don't need to specify this parameter because the default behavior is to use
+	// the version that is currently set as the default version for the permission.
+	// This parameter is supported for backwards compatibility.
 	PermissionVersion *int32
 
 	// Specifies whether the specified permission should replace the existing
 	// permission associated with the resource share. Use true to replace the current
 	// permissions. Use false to add the permission to a resource share that currently
-	// doesn't have a permission. The default value is false . A resource share can
-	// have only one permission per resource type. If a resource share already has a
-	// permission for the specified resource type and you don't set replace to true
-	// then the operation returns an error. This helps prevent accidental overwriting
-	// of a permission.
+	// doesn't have a permission. The default value is false .
+	//
+	// A resource share can have only one permission per resource type. If a resource
+	// share already has a permission for the specified resource type and you don't set
+	// replace to true then the operation returns an error. This helps prevent
+	// accidental overwriting of a permission.
 	Replace *bool
 
 	noSmithyDocumentSerde
@@ -120,25 +130,25 @@ func (c *Client) addOperationAssociateResourceSharePermissionMiddlewares(stack *
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -153,13 +163,16 @@ func (c *Client) addOperationAssociateResourceSharePermissionMiddlewares(stack *
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpAssociateResourceSharePermissionValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opAssociateResourceSharePermission(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

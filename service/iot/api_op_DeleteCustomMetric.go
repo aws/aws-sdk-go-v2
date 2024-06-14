@@ -6,17 +6,21 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes a Device Defender detect custom metric. Requires permission to access
-// the DeleteCustomMetric (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
-// action. Before you can delete a custom metric, you must first remove the custom
-// metric from all security profiles it's a part of. The security profile
-// associated with the custom metric can be found using the ListSecurityProfiles (https://docs.aws.amazon.com/iot/latest/apireference/API_ListSecurityProfiles.html)
-// API with metricName set to your custom metric name.
+//	Deletes a Device Defender detect custom metric.
+//
+// Requires permission to access the [DeleteCustomMetric] action.
+//
+// Before you can delete a custom metric, you must first remove the custom metric
+// from all security profiles it's a part of. The security profile associated with
+// the custom metric can be found using the [ListSecurityProfiles]API with metricName set to your custom
+// metric name.
+//
+// [DeleteCustomMetric]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions
+// [ListSecurityProfiles]: https://docs.aws.amazon.com/iot/latest/apireference/API_ListSecurityProfiles.html
 func (c *Client) DeleteCustomMetric(ctx context.Context, params *DeleteCustomMetricInput, optFns ...func(*Options)) (*DeleteCustomMetricOutput, error) {
 	if params == nil {
 		params = &DeleteCustomMetricInput{}
@@ -34,7 +38,7 @@ func (c *Client) DeleteCustomMetric(ctx context.Context, params *DeleteCustomMet
 
 type DeleteCustomMetricInput struct {
 
-	// The name of the custom metric.
+	//  The name of the custom metric.
 	//
 	// This member is required.
 	MetricName *string
@@ -71,25 +75,25 @@ func (c *Client) addOperationDeleteCustomMetricMiddlewares(stack *middleware.Sta
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -104,13 +108,16 @@ func (c *Client) addOperationDeleteCustomMetricMiddlewares(stack *middleware.Sta
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDeleteCustomMetricValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteCustomMetric(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

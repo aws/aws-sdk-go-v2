@@ -6,21 +6,25 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/lightsail/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Attaches an SSL/TLS certificate to your Amazon Lightsail content delivery
-// network (CDN) distribution. After the certificate is attached, your distribution
-// accepts HTTPS traffic for all of the domains that are associated with the
-// certificate. Use the CreateCertificate action to create a certificate that you
-// can attach to your distribution. Only certificates created in the us-east-1
-// Amazon Web Services Region can be attached to Lightsail distributions. Lightsail
-// distributions are global resources that can reference an origin in any Amazon
-// Web Services Region, and distribute its content globally. However, all
-// distributions are located in the us-east-1 Region.
+// network (CDN) distribution.
+//
+// After the certificate is attached, your distribution accepts HTTPS traffic for
+// all of the domains that are associated with the certificate.
+//
+// Use the CreateCertificate action to create a certificate that you can attach to
+// your distribution.
+//
+// Only certificates created in the us-east-1 Amazon Web Services Region can be
+// attached to Lightsail distributions. Lightsail distributions are global
+// resources that can reference an origin in any Amazon Web Services Region, and
+// distribute its content globally. However, all distributions are located in the
+// us-east-1 Region.
 func (c *Client) AttachCertificateToDistribution(ctx context.Context, params *AttachCertificateToDistributionInput, optFns ...func(*Options)) (*AttachCertificateToDistributionOutput, error) {
 	if params == nil {
 		params = &AttachCertificateToDistributionInput{}
@@ -38,20 +42,26 @@ func (c *Client) AttachCertificateToDistribution(ctx context.Context, params *At
 
 type AttachCertificateToDistributionInput struct {
 
-	// The name of the certificate to attach to a distribution. Only certificates with
-	// a status of ISSUED can be attached to a distribution. Use the GetCertificates
-	// action to get a list of certificate names that you can specify. This is the name
-	// of the certificate resource type and is used only to reference the certificate
-	// in other API actions. It can be different than the domain name of the
-	// certificate. For example, your certificate name might be
+	// The name of the certificate to attach to a distribution.
+	//
+	// Only certificates with a status of ISSUED can be attached to a distribution.
+	//
+	// Use the GetCertificates action to get a list of certificate names that you can
+	// specify.
+	//
+	// This is the name of the certificate resource type and is used only to reference
+	// the certificate in other API actions. It can be different than the domain name
+	// of the certificate. For example, your certificate name might be
 	// WordPress-Blog-Certificate and the domain name of the certificate might be
 	// example.com .
 	//
 	// This member is required.
 	CertificateName *string
 
-	// The name of the distribution that the certificate will be attached to. Use the
-	// GetDistributions action to get a list of distribution names that you can specify.
+	// The name of the distribution that the certificate will be attached to.
+	//
+	// Use the GetDistributions action to get a list of distribution names that you
+	// can specify.
 	//
 	// This member is required.
 	DistributionName *string
@@ -94,25 +104,25 @@ func (c *Client) addOperationAttachCertificateToDistributionMiddlewares(stack *m
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -127,13 +137,16 @@ func (c *Client) addOperationAttachCertificateToDistributionMiddlewares(stack *m
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpAttachCertificateToDistributionValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opAttachCertificateToDistribution(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

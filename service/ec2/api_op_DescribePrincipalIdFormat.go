@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -14,14 +13,17 @@ import (
 
 // Describes the ID format settings for the root user and all IAM roles and IAM
 // users that have explicitly specified a longer ID (17-character ID) preference.
+//
 // By default, all IAM roles and IAM users default to the same ID settings as the
 // root user, unless they explicitly override the settings. This request is useful
 // for identifying those IAM users and IAM roles that have overridden the default
-// ID settings. The following resource types support longer IDs: bundle |
-// conversion-task | customer-gateway | dhcp-options | elastic-ip-allocation |
-// elastic-ip-association | export-task | flow-log | image | import-task | instance
-// | internet-gateway | network-acl | network-acl-association | network-interface
-// | network-interface-attachment | prefix-list | reservation | route-table |
+// ID settings.
+//
+// The following resource types support longer IDs: bundle | conversion-task |
+// customer-gateway | dhcp-options | elastic-ip-allocation | elastic-ip-association
+// | export-task | flow-log | image | import-task | instance | internet-gateway |
+// network-acl | network-acl-association | network-interface |
+// network-interface-attachment | prefix-list | reservation | route-table |
 // route-table-association | security-group | snapshot | subnet |
 // subnet-cidr-block-association | volume | vpc | vpc-cidr-block-association |
 // vpc-endpoint | vpc-peering-connection | vpn-connection | vpn-gateway .
@@ -105,25 +107,25 @@ func (c *Client) addOperationDescribePrincipalIdFormatMiddlewares(stack *middlew
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -138,10 +140,13 @@ func (c *Client) addOperationDescribePrincipalIdFormatMiddlewares(stack *middlew
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribePrincipalIdFormat(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

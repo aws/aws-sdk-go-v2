@@ -6,14 +6,16 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/iot/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists jobs. Requires permission to access the ListJobs (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
-// action.
+// Lists jobs.
+//
+// Requires permission to access the [ListJobs] action.
+//
+// [ListJobs]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions
 func (c *Client) ListJobs(ctx context.Context, params *ListJobsInput, optFns ...func(*Options)) (*ListJobsOutput, error) {
 	if params == nil {
 		params = &ListJobsInput{}
@@ -34,11 +36,18 @@ type ListJobsInput struct {
 	// The maximum number of results to return per request.
 	MaxResults *int32
 
-	// The namespace used to indicate that a job is a customer-managed job. When you
-	// specify a value for this parameter, Amazon Web Services IoT Core sends jobs
-	// notifications to MQTT topics that contain the value in the following format.
-	// $aws/things/THING_NAME/jobs/JOB_ID/notify-namespace-NAMESPACE_ID/ The
-	// namespaceId feature is in public preview.
+	// The namespace used to indicate that a job is a customer-managed job.
+	//
+	// When you specify a value for this parameter, Amazon Web Services IoT Core sends
+	// jobs notifications to MQTT topics that contain the value in the following
+	// format.
+	//
+	//     $aws/things/THING_NAME/jobs/JOB_ID/notify-namespace-NAMESPACE_ID/
+	//
+	// The namespaceId feature is only supported by IoT Greengrass at this time. For
+	// more information, see [Setting up IoT Greengrass core devices.]
+	//
+	// [Setting up IoT Greengrass core devices.]: https://docs.aws.amazon.com/greengrass/v2/developerguide/setting-up.html
 	NamespaceId *string
 
 	// The token to retrieve the next set of results.
@@ -52,10 +61,11 @@ type ListJobsInput struct {
 	// (SNAPSHOT). If continuous, the job may also be run on a thing when a change is
 	// detected in a target. For example, a job will run on a thing when the thing is
 	// added to a target group, even after the job was completed by all things
-	// originally in the group. We recommend that you use continuous jobs instead of
-	// snapshot jobs for dynamic thing group targets. By using continuous jobs, devices
-	// that join the group receive the job execution even after the job has been
-	// created.
+	// originally in the group.
+	//
+	// We recommend that you use continuous jobs instead of snapshot jobs for dynamic
+	// thing group targets. By using continuous jobs, devices that join the group
+	// receive the job execution even after the job has been created.
 	TargetSelection types.TargetSelection
 
 	// A filter that limits the returned jobs to those for the specified group.
@@ -104,25 +114,25 @@ func (c *Client) addOperationListJobsMiddlewares(stack *middleware.Stack, option
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -137,10 +147,13 @@ func (c *Client) addOperationListJobsMiddlewares(stack *middleware.Stack, option
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListJobs(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

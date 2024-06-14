@@ -6,17 +6,18 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Resets the default KMS key for EBS encryption for your account in this Region
-// to the Amazon Web Services managed KMS key for EBS. After resetting the default
-// KMS key to the Amazon Web Services managed KMS key, you can continue to encrypt
-// by a customer managed KMS key by specifying it when you create the volume. For
-// more information, see Amazon EBS encryption (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html)
-// in the Amazon Elastic Compute Cloud User Guide.
+// to the Amazon Web Services managed KMS key for EBS.
+//
+// After resetting the default KMS key to the Amazon Web Services managed KMS key,
+// you can continue to encrypt by a customer managed KMS key by specifying it when
+// you create the volume. For more information, see [Amazon EBS encryption]in the Amazon EBS User Guide.
+//
+// [Amazon EBS encryption]: https://docs.aws.amazon.com/ebs/latest/userguide/ebs-encryption.html
 func (c *Client) ResetEbsDefaultKmsKeyId(ctx context.Context, params *ResetEbsDefaultKmsKeyIdInput, optFns ...func(*Options)) (*ResetEbsDefaultKmsKeyIdOutput, error) {
 	if params == nil {
 		params = &ResetEbsDefaultKmsKeyIdInput{}
@@ -77,25 +78,25 @@ func (c *Client) addOperationResetEbsDefaultKmsKeyIdMiddlewares(stack *middlewar
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -110,10 +111,13 @@ func (c *Client) addOperationResetEbsDefaultKmsKeyIdMiddlewares(stack *middlewar
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opResetEbsDefaultKmsKeyId(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

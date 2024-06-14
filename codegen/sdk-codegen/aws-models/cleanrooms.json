@@ -1119,7 +1119,7 @@
                 "allowedAnalyses": {
                     "target": "com.amazonaws.cleanrooms#AllowedAnalysesList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The analysis templates that are allowed by the custom analysis rule.</p>",
+                        "smithy.api#documentation": "<p>The ARN of the analysis templates that are allowed by the custom analysis rule.</p>",
                         "smithy.api#length": {
                             "min": 0
                         },
@@ -1129,7 +1129,7 @@
                 "allowedAnalysisProviders": {
                     "target": "com.amazonaws.cleanrooms#AllowedAnalysisProviderList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Web Services accounts that are allowed to query by the custom analysis rule. Required when\n            <code>allowedAnalyses</code> is <code>ANY_QUERY</code>.</p>",
+                        "smithy.api#documentation": "<p>The IDs of the Amazon Web Services accounts that are allowed to query by the custom analysis rule. Required when\n            <code>allowedAnalyses</code> is <code>ANY_QUERY</code>.</p>",
                         "smithy.api#length": {
                             "min": 0
                         }
@@ -1374,6 +1374,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The parameters of the analysis template.</p>"
                     }
+                },
+                "validations": {
+                    "target": "com.amazonaws.cleanrooms#AnalysisTemplateValidationStatusDetailList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about the validations performed on the analysis template.</p>"
+                    }
                 }
             },
             "traits": {
@@ -1548,6 +1554,95 @@
                 }
             }
         },
+        "com.amazonaws.cleanrooms#AnalysisTemplateValidationStatus": {
+            "type": "enum",
+            "members": {
+                "VALID": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "VALID"
+                    }
+                },
+                "INVALID": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "INVALID"
+                    }
+                },
+                "UNABLE_TO_VALIDATE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UNABLE_TO_VALIDATE"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.cleanrooms#AnalysisTemplateValidationStatusDetail": {
+            "type": "structure",
+            "members": {
+                "type": {
+                    "target": "com.amazonaws.cleanrooms#AnalysisTemplateValidationType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of validation that was performed.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.cleanrooms#AnalysisTemplateValidationStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the validation.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "reasons": {
+                    "target": "com.amazonaws.cleanrooms#AnalysisTemplateValidationStatusReasonList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The reasons for the validation results.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The status details of the analysis template validation. Clean Rooms Differential Privacy uses a general-purpose query structure to support complex SQL queries and validates whether an analysis template fits that general-purpose query structure. Validation is performed when analysis templates are created and fetched. Because analysis templates are immutable by design, we recommend that you create analysis templates after you associate the configured tables with their analysis rule to your collaboration.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/clean-rooms/latest/userguide/analysis-rules-custom.html#custom-diff-privacy\">https://docs.aws.amazon.com/clean-rooms/latest/userguide/analysis-rules-custom.html#custom-diff-privacy</a>.</p>"
+            }
+        },
+        "com.amazonaws.cleanrooms#AnalysisTemplateValidationStatusDetailList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.cleanrooms#AnalysisTemplateValidationStatusDetail"
+            }
+        },
+        "com.amazonaws.cleanrooms#AnalysisTemplateValidationStatusReason": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The validation message.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The reasons for the validation results.</p>"
+            }
+        },
+        "com.amazonaws.cleanrooms#AnalysisTemplateValidationStatusReasonList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.cleanrooms#AnalysisTemplateValidationStatusReason"
+            }
+        },
+        "com.amazonaws.cleanrooms#AnalysisTemplateValidationType": {
+            "type": "enum",
+            "members": {
+                "DIFFERENTIAL_PRIVACY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DIFFERENTIAL_PRIVACY"
+                    }
+                }
+            }
+        },
         "com.amazonaws.cleanrooms#BatchGetCollaborationAnalysisTemplate": {
             "type": "operation",
             "input": {
@@ -1700,6 +1795,135 @@
                 "smithy.api#readonly": {}
             }
         },
+        "com.amazonaws.cleanrooms#BatchGetSchemaAnalysisRule": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.cleanrooms#BatchGetSchemaAnalysisRuleInput"
+            },
+            "output": {
+                "target": "com.amazonaws.cleanrooms#BatchGetSchemaAnalysisRuleOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.cleanrooms#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.cleanrooms#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.cleanrooms#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.cleanrooms#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.cleanrooms#ValidationException"
+                }
+            ],
+            "traits": {
+                "aws.iam#actionPermissionDescription": "Grants permission to view analysis rules associated with schemas",
+                "smithy.api#documentation": "<p>Retrieves multiple analysis rule schemas.</p>",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "POST",
+                    "uri": "/collaborations/{collaborationIdentifier}/batch-schema-analysis-rule"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.cleanrooms#BatchGetSchemaAnalysisRuleError": {
+            "type": "structure",
+            "members": {
+                "name": {
+                    "target": "com.amazonaws.cleanrooms#TableAlias",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An error name for the error.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "type": {
+                    "target": "com.amazonaws.cleanrooms#AnalysisRuleType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The analysis rule type.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "code": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An error code for the error.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "message": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A description of why the call failed.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An error that describes why a schema could not be fetched.</p>"
+            }
+        },
+        "com.amazonaws.cleanrooms#BatchGetSchemaAnalysisRuleErrorList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.cleanrooms#BatchGetSchemaAnalysisRuleError"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "max": 25
+                }
+            }
+        },
+        "com.amazonaws.cleanrooms#BatchGetSchemaAnalysisRuleInput": {
+            "type": "structure",
+            "members": {
+                "collaborationIdentifier": {
+                    "target": "com.amazonaws.cleanrooms#CollaborationIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the collaboration that contains the schema analysis rule.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {},
+                        "smithy.api#resourceIdentifier": "CollaborationId"
+                    }
+                },
+                "schemaAnalysisRuleRequests": {
+                    "target": "com.amazonaws.cleanrooms#SchemaAnalysisRuleRequestList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The information that's necessary to retrieve a schema analysis rule.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.cleanrooms#BatchGetSchemaAnalysisRuleOutput": {
+            "type": "structure",
+            "members": {
+                "analysisRules": {
+                    "target": "com.amazonaws.cleanrooms#SchemaAnalysisRuleList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The retrieved list of analysis rules.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "errors": {
+                    "target": "com.amazonaws.cleanrooms#BatchGetSchemaAnalysisRuleErrorList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Error reasons for schemas that could not be retrieved. One error is returned for every schema that could not be retrieved.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.cleanrooms#BatchGetSchemaError": {
             "type": "structure",
             "members": {
@@ -1755,7 +1979,7 @@
                 "names": {
                     "target": "com.amazonaws.cleanrooms#TableAliasList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The names for the schema objects to retrieve.&gt;</p>",
+                        "smithy.api#documentation": "<p>The names for the schema objects to\n         retrieve.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -1976,6 +2200,12 @@
                     "target": "com.amazonaws.cleanrooms#AnalysisParameterList",
                     "traits": {
                         "smithy.api#documentation": "<p>The analysis parameters that have been specified in the analysis template.</p>"
+                    }
+                },
+                "validations": {
+                    "target": "com.amazonaws.cleanrooms#AnalysisTemplateValidationStatusDetailList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The validations that were performed.</p>"
                     }
                 }
             },
@@ -2538,6 +2768,9 @@
                 },
                 {
                     "target": "com.amazonaws.cleanrooms#BatchGetSchema"
+                },
+                {
+                    "target": "com.amazonaws.cleanrooms#BatchGetSchemaAnalysisRule"
                 },
                 {
                     "target": "com.amazonaws.cleanrooms#DeleteMember"
@@ -9525,20 +9758,44 @@
             "traits": {
                 "smithy.api#enum": [
                     {
-                        "name": "TRUNC",
-                        "value": "TRUNC"
-                    },
-                    {
                         "name": "ABS",
                         "value": "ABS"
+                    },
+                    {
+                        "name": "CAST",
+                        "value": "CAST"
                     },
                     {
                         "name": "CEILING",
                         "value": "CEILING"
                     },
                     {
+                        "name": "COALESCE",
+                        "value": "COALESCE"
+                    },
+                    {
+                        "name": "CONVERT",
+                        "value": "CONVERT"
+                    },
+                    {
+                        "name": "CURRENT_DATE",
+                        "value": "CURRENT_DATE"
+                    },
+                    {
+                        "name": "DATEADD",
+                        "value": "DATEADD"
+                    },
+                    {
+                        "name": "EXTRACT",
+                        "value": "EXTRACT"
+                    },
+                    {
                         "name": "FLOOR",
                         "value": "FLOOR"
+                    },
+                    {
+                        "name": "GETDATE",
+                        "value": "GETDATE"
                     },
                     {
                         "name": "LN",
@@ -9549,32 +9806,52 @@
                         "value": "LOG"
                     },
                     {
-                        "name": "ROUND",
-                        "value": "ROUND"
-                    },
-                    {
-                        "name": "SQRT",
-                        "value": "SQRT"
-                    },
-                    {
-                        "name": "CAST",
-                        "value": "CAST"
-                    },
-                    {
                         "name": "LOWER",
                         "value": "LOWER"
+                    },
+                    {
+                        "name": "ROUND",
+                        "value": "ROUND"
                     },
                     {
                         "name": "RTRIM",
                         "value": "RTRIM"
                     },
                     {
-                        "name": "UPPER",
-                        "value": "UPPER"
+                        "name": "SQRT",
+                        "value": "SQRT"
                     },
                     {
-                        "name": "COALESCE",
-                        "value": "COALESCE"
+                        "name": "SUBSTRING",
+                        "value": "SUBSTRING"
+                    },
+                    {
+                        "name": "TO_CHAR",
+                        "value": "TO_CHAR"
+                    },
+                    {
+                        "name": "TO_DATE",
+                        "value": "TO_DATE"
+                    },
+                    {
+                        "name": "TO_NUMBER",
+                        "value": "TO_NUMBER"
+                    },
+                    {
+                        "name": "TO_TIMESTAMP",
+                        "value": "TO_TIMESTAMP"
+                    },
+                    {
+                        "name": "TRIM",
+                        "value": "TRIM"
+                    },
+                    {
+                        "name": "TRUNC",
+                        "value": "TRUNC"
+                    },
+                    {
+                        "name": "UPPER",
+                        "value": "UPPER"
                     }
                 ]
             }
@@ -9670,10 +9947,80 @@
                         "smithy.api#documentation": "<p>The type of schema. The only valid value is currently `TABLE`.</p>",
                         "smithy.api#required": {}
                     }
+                },
+                "schemaStatusDetails": {
+                    "target": "com.amazonaws.cleanrooms#SchemaStatusDetailList",
+                    "traits": {
+                        "smithy.api#default": [],
+                        "smithy.api#documentation": "<p>Details about the status of the schema. Currently, only one entry is present.</p>",
+                        "smithy.api#required": {}
+                    }
                 }
             },
             "traits": {
                 "smithy.api#documentation": "<p>A schema is a relation within a collaboration.</p>"
+            }
+        },
+        "com.amazonaws.cleanrooms#SchemaAnalysisRuleList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.cleanrooms#AnalysisRule"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "max": 25
+                }
+            }
+        },
+        "com.amazonaws.cleanrooms#SchemaAnalysisRuleRequest": {
+            "type": "structure",
+            "members": {
+                "name": {
+                    "target": "com.amazonaws.cleanrooms#TableAlias",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the analysis rule schema that you are requesting.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "type": {
+                    "target": "com.amazonaws.cleanrooms#AnalysisRuleType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of analysis rule schema that you are requesting.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Defines the information that's necessary to retrieve an analysis rule schema. Schema analysis rules are uniquely identiﬁed by a combination of the schema name and the analysis rule type for a given collaboration.</p>"
+            }
+        },
+        "com.amazonaws.cleanrooms#SchemaAnalysisRuleRequestList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.cleanrooms#SchemaAnalysisRuleRequest"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 25
+                }
+            }
+        },
+        "com.amazonaws.cleanrooms#SchemaConfiguration": {
+            "type": "enum",
+            "members": {
+                "DIFFERENTIAL_PRIVACY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DIFFERENTIAL_PRIVACY"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.cleanrooms#SchemaConfigurationList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.cleanrooms#SchemaConfiguration"
             }
         },
         "com.amazonaws.cleanrooms#SchemaList": {
@@ -9685,6 +10032,119 @@
                 "smithy.api#length": {
                     "max": 25
                 }
+            }
+        },
+        "com.amazonaws.cleanrooms#SchemaStatus": {
+            "type": "enum",
+            "members": {
+                "READY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "READY"
+                    }
+                },
+                "NOT_READY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "NOT_READY"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.cleanrooms#SchemaStatusDetail": {
+            "type": "structure",
+            "members": {
+                "status": {
+                    "target": "com.amazonaws.cleanrooms#SchemaStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the schema.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "reasons": {
+                    "target": "com.amazonaws.cleanrooms#SchemaStatusReasonList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The reasons why the schema status is set to its current state.</p>"
+                    }
+                },
+                "analysisRuleType": {
+                    "target": "com.amazonaws.cleanrooms#AnalysisRuleType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The analysis rule type for which the schema status has been evaluated.</p>"
+                    }
+                },
+                "configurations": {
+                    "target": "com.amazonaws.cleanrooms#SchemaConfigurationList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration details of the schema analysis rule for the given type.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about the schema status.</p>\n         <p>A status of <code>READY</code> means that based on the schema analysis rule, queries of the given analysis rule type are properly configured to run queries on this schema.</p>"
+            }
+        },
+        "com.amazonaws.cleanrooms#SchemaStatusDetailList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.cleanrooms#SchemaStatusDetail"
+            }
+        },
+        "com.amazonaws.cleanrooms#SchemaStatusReason": {
+            "type": "structure",
+            "members": {
+                "code": {
+                    "target": "com.amazonaws.cleanrooms#SchemaStatusReasonCode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The schema status reason code.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "message": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An explanation of the schema status reason code.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A reason why the schema status is set to its current value.</p>"
+            }
+        },
+        "com.amazonaws.cleanrooms#SchemaStatusReasonCode": {
+            "type": "enum",
+            "members": {
+                "ANALYSIS_RULE_MISSING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ANALYSIS_RULE_MISSING"
+                    }
+                },
+                "ANALYSIS_TEMPLATES_NOT_CONFIGURED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ANALYSIS_TEMPLATES_NOT_CONFIGURED"
+                    }
+                },
+                "ANALYSIS_PROVIDERS_NOT_CONFIGURED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ANALYSIS_PROVIDERS_NOT_CONFIGURED"
+                    }
+                },
+                "DIFFERENTIAL_PRIVACY_POLICY_NOT_CONFIGURED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DIFFERENTIAL_PRIVACY_POLICY_NOT_CONFIGURED"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.cleanrooms#SchemaStatusReasonList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.cleanrooms#SchemaStatusReason"
             }
         },
         "com.amazonaws.cleanrooms#SchemaSummary": {

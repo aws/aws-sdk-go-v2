@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/proton/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -14,11 +13,13 @@ import (
 
 // Create an environment account connection in an environment account so that
 // environment infrastructure resources can be provisioned in the environment
-// account from a management account. An environment account connection is a secure
-// bi-directional connection between a management account and an environment
-// account that maintains authorization and permissions. For more information, see
-// Environment account connections (https://docs.aws.amazon.com/proton/latest/userguide/ag-env-account-connections.html)
-// in the Proton User guide.
+// account from a management account.
+//
+// An environment account connection is a secure bi-directional connection between
+// a management account and an environment account that maintains authorization and
+// permissions. For more information, see [Environment account connections]in the Proton User guide.
+//
+// [Environment account connections]: https://docs.aws.amazon.com/proton/latest/userguide/ag-env-account-connections.html
 func (c *Client) CreateEnvironmentAccountConnection(ctx context.Context, params *CreateEnvironmentAccountConnectionInput, optFns ...func(*Options)) (*CreateEnvironmentAccountConnectionOutput, error) {
 	if params == nil {
 		params = &CreateEnvironmentAccountConnectionInput{}
@@ -64,10 +65,14 @@ type CreateEnvironmentAccountConnectionInput struct {
 	// The Amazon Resource Name (ARN) of the IAM service role that Proton uses when
 	// provisioning directly defined components in the associated environment account.
 	// It determines the scope of infrastructure that a component can provision in the
-	// account. You must specify componentRoleArn to allow directly defined components
-	// to be associated with any environments running in this account. For more
-	// information about components, see Proton components (https://docs.aws.amazon.com/proton/latest/userguide/ag-components.html)
-	// in the Proton User Guide.
+	// account.
+	//
+	// You must specify componentRoleArn to allow directly defined components to be
+	// associated with any environments running in this account.
+	//
+	// For more information about components, see [Proton components] in the Proton User Guide.
+	//
+	// [Proton components]: https://docs.aws.amazon.com/proton/latest/userguide/ag-components.html
 	ComponentRoleArn *string
 
 	// The Amazon Resource Name (ARN) of the IAM service role that's created in the
@@ -76,9 +81,11 @@ type CreateEnvironmentAccountConnectionInput struct {
 	RoleArn *string
 
 	// An optional list of metadata items that you can associate with the Proton
-	// environment account connection. A tag is a key-value pair. For more information,
-	// see Proton resources and tagging (https://docs.aws.amazon.com/proton/latest/userguide/resources.html)
-	// in the Proton User Guide.
+	// environment account connection. A tag is a key-value pair.
+	//
+	// For more information, see [Proton resources and tagging] in the Proton User Guide.
+	//
+	// [Proton resources and tagging]: https://docs.aws.amazon.com/proton/latest/userguide/resources.html
 	Tags []types.Tag
 
 	noSmithyDocumentSerde
@@ -119,25 +126,25 @@ func (c *Client) addOperationCreateEnvironmentAccountConnectionMiddlewares(stack
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -152,6 +159,9 @@ func (c *Client) addOperationCreateEnvironmentAccountConnectionMiddlewares(stack
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opCreateEnvironmentAccountConnectionMiddleware(stack, options); err != nil {
 		return err
 	}
@@ -161,7 +171,7 @@ func (c *Client) addOperationCreateEnvironmentAccountConnectionMiddlewares(stack
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateEnvironmentAccountConnection(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

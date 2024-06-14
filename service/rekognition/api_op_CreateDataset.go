@@ -6,29 +6,38 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/rekognition/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// This operation applies only to Amazon Rekognition Custom Labels. Creates a new
-// Amazon Rekognition Custom Labels dataset. You can create a dataset by using an
-// Amazon Sagemaker format manifest file or by copying an existing Amazon
-// Rekognition Custom Labels dataset. To create a training dataset for a project,
-// specify TRAIN for the value of DatasetType . To create the test dataset for a
-// project, specify TEST for the value of DatasetType . The response from
-// CreateDataset is the Amazon Resource Name (ARN) for the dataset. Creating a
-// dataset takes a while to complete. Use DescribeDataset to check the current
+// This operation applies only to Amazon Rekognition Custom Labels.
+//
+// Creates a new Amazon Rekognition Custom Labels dataset. You can create a
+// dataset by using an Amazon Sagemaker format manifest file or by copying an
+// existing Amazon Rekognition Custom Labels dataset.
+//
+// To create a training dataset for a project, specify TRAIN for the value of
+// DatasetType . To create the test dataset for a project, specify TEST for the
+// value of DatasetType .
+//
+// The response from CreateDataset is the Amazon Resource Name (ARN) for the
+// dataset. Creating a dataset takes a while to complete. Use DescribeDatasetto check the current
 // status. The dataset created successfully if the value of Status is
-// CREATE_COMPLETE . To check if any non-terminal errors occurred, call
-// ListDatasetEntries and check for the presence of errors lists in the JSON
-// Lines. Dataset creation fails if a terminal error occurs ( Status =
-// CREATE_FAILED ). Currently, you can't access the terminal error information. For
-// more information, see Creating dataset in the Amazon Rekognition Custom Labels
-// Developer Guide. This operation requires permissions to perform the
-// rekognition:CreateDataset action. If you want to copy an existing dataset, you
-// also require permission to perform the rekognition:ListDatasetEntries action.
+// CREATE_COMPLETE .
+//
+// To check if any non-terminal errors occurred, call ListDatasetEntries and check for the presence
+// of errors lists in the JSON Lines.
+//
+// Dataset creation fails if a terminal error occurs ( Status = CREATE_FAILED ).
+// Currently, you can't access the terminal error information.
+//
+// For more information, see Creating dataset in the Amazon Rekognition Custom
+// Labels Developer Guide.
+//
+// This operation requires permissions to perform the rekognition:CreateDataset
+// action. If you want to copy an existing dataset, you also require permission to
+// perform the rekognition:ListDatasetEntries action.
 func (c *Client) CreateDataset(ctx context.Context, params *CreateDatasetInput, optFns ...func(*Options)) (*CreateDatasetOutput, error) {
 	if params == nil {
 		params = &CreateDatasetInput{}
@@ -46,23 +55,22 @@ func (c *Client) CreateDataset(ctx context.Context, params *CreateDatasetInput, 
 
 type CreateDatasetInput struct {
 
-	// The type of the dataset. Specify TRAIN to create a training dataset. Specify
+	//  The type of the dataset. Specify TRAIN to create a training dataset. Specify
 	// TEST to create a test dataset.
 	//
 	// This member is required.
 	DatasetType types.DatasetType
 
-	// The ARN of the Amazon Rekognition Custom Labels project to which you want to
+	//  The ARN of the Amazon Rekognition Custom Labels project to which you want to
 	// asssign the dataset.
 	//
 	// This member is required.
 	ProjectArn *string
 
-	// The source files for the dataset. You can specify the ARN of an existing
+	//  The source files for the dataset. You can specify the ARN of an existing
 	// dataset or specify the Amazon S3 bucket location of an Amazon Sagemaker format
 	// manifest file. If you don't specify datasetSource , an empty dataset is created.
-	// To add labeled images to the dataset, You can use the console or call
-	// UpdateDatasetEntries .
+	// To add labeled images to the dataset, You can use the console or call UpdateDatasetEntries.
 	DatasetSource *types.DatasetSource
 
 	noSmithyDocumentSerde
@@ -70,7 +78,7 @@ type CreateDatasetInput struct {
 
 type CreateDatasetOutput struct {
 
-	// The ARN of the created Amazon Rekognition Custom Labels dataset.
+	//  The ARN of the created Amazon Rekognition Custom Labels dataset.
 	DatasetArn *string
 
 	// Metadata pertaining to the operation's result.
@@ -101,25 +109,25 @@ func (c *Client) addOperationCreateDatasetMiddlewares(stack *middleware.Stack, o
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -134,13 +142,16 @@ func (c *Client) addOperationCreateDatasetMiddlewares(stack *middleware.Stack, o
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpCreateDatasetValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateDataset(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

@@ -6,23 +6,26 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Generates a stickiness policy with sticky session lifetimes that follow that of
 // an application-generated cookie. This policy can be associated only with
-// HTTP/HTTPS listeners. This policy is similar to the policy created by
-// CreateLBCookieStickinessPolicy , except that the lifetime of the special Elastic
-// Load Balancing cookie, AWSELB , follows the lifetime of the
+// HTTP/HTTPS listeners.
+//
+// This policy is similar to the policy created by CreateLBCookieStickinessPolicy, except that the lifetime of
+// the special Elastic Load Balancing cookie, AWSELB , follows the lifetime of the
 // application-generated cookie specified in the policy configuration. The load
 // balancer only inserts a new stickiness cookie when the application response
-// includes a new application cookie. If the application cookie is explicitly
-// removed or expires, the session stops being sticky until a new application
-// cookie is issued. For more information, see Application-Controlled Session
-// Stickiness (https://docs.aws.amazon.com/elasticloadbalancing/latest/classic/elb-sticky-sessions.html#enable-sticky-sessions-application)
-// in the Classic Load Balancers Guide.
+// includes a new application cookie.
+//
+// If the application cookie is explicitly removed or expires, the session stops
+// being sticky until a new application cookie is issued.
+//
+// For more information, see [Application-Controlled Session Stickiness] in the Classic Load Balancers Guide.
+//
+// [Application-Controlled Session Stickiness]: https://docs.aws.amazon.com/elasticloadbalancing/latest/classic/elb-sticky-sessions.html#enable-sticky-sessions-application
 func (c *Client) CreateAppCookieStickinessPolicy(ctx context.Context, params *CreateAppCookieStickinessPolicyInput, optFns ...func(*Options)) (*CreateAppCookieStickinessPolicyOutput, error) {
 	if params == nil {
 		params = &CreateAppCookieStickinessPolicyInput{}
@@ -91,25 +94,25 @@ func (c *Client) addOperationCreateAppCookieStickinessPolicyMiddlewares(stack *m
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -124,13 +127,16 @@ func (c *Client) addOperationCreateAppCookieStickinessPolicyMiddlewares(stack *m
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpCreateAppCookieStickinessPolicyValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateAppCookieStickinessPolicy(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

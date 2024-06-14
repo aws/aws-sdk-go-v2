@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/neptunegraph/types"
 	"github.com/aws/smithy-go/middleware"
 	"github.com/aws/smithy-go/ptr"
@@ -31,17 +30,19 @@ func (c *Client) ListImportTasks(ctx context.Context, params *ListImportTasksInp
 
 type ListImportTasksInput struct {
 
-	// The total number of records to return in the command's output. If the total
-	// number of records available is more than the value specified, nextToken is
-	// provided in the command's output. To resume pagination, provide the nextToken
-	// output value in the nextToken argument of a subsequent command. Do not use the
-	// nextToken response element directly outside of the Amazon CLI.
+	// The total number of records to return in the command's output.
+	//
+	// If the total number of records available is more than the value specified,
+	// nextToken is provided in the command's output. To resume pagination, provide the
+	// nextToken output value in the nextToken argument of a subsequent command. Do
+	// not use the nextToken response element directly outside of the Amazon CLI.
 	MaxResults *int32
 
-	// Pagination token used to paginate output. When this value is provided as input,
-	// the service returns results from where the previous response left off. When this
-	// value is present in output, it indicates that there are more results to
-	// retrieve.
+	// Pagination token used to paginate output.
+	//
+	// When this value is provided as input, the service returns results from where
+	// the previous response left off. When this value is present in output, it
+	// indicates that there are more results to retrieve.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -59,10 +60,11 @@ type ListImportTasksOutput struct {
 	// This member is required.
 	Tasks []types.ImportTaskSummary
 
-	// Pagination token used to paginate output. When this value is provided as input,
-	// the service returns results from where the previous response left off. When this
-	// value is present in output, it indicates that there are more results to
-	// retrieve.
+	// Pagination token used to paginate output.
+	//
+	// When this value is provided as input, the service returns results from where
+	// the previous response left off. When this value is present in output, it
+	// indicates that there are more results to retrieve.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -93,25 +95,25 @@ func (c *Client) addOperationListImportTasksMiddlewares(stack *middleware.Stack,
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -126,10 +128,13 @@ func (c *Client) addOperationListImportTasksMiddlewares(stack *middleware.Stack,
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListImportTasks(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -157,11 +162,12 @@ var _ ListImportTasksAPIClient = (*Client)(nil)
 
 // ListImportTasksPaginatorOptions is the paginator options for ListImportTasks
 type ListImportTasksPaginatorOptions struct {
-	// The total number of records to return in the command's output. If the total
-	// number of records available is more than the value specified, nextToken is
-	// provided in the command's output. To resume pagination, provide the nextToken
-	// output value in the nextToken argument of a subsequent command. Do not use the
-	// nextToken response element directly outside of the Amazon CLI.
+	// The total number of records to return in the command's output.
+	//
+	// If the total number of records available is more than the value specified,
+	// nextToken is provided in the command's output. To resume pagination, provide the
+	// nextToken output value in the nextToken argument of a subsequent command. Do
+	// not use the nextToken response element directly outside of the Amazon CLI.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

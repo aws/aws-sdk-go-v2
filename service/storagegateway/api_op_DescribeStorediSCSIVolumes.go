@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/storagegateway/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -31,12 +30,12 @@ func (c *Client) DescribeStorediSCSIVolumes(ctx context.Context, params *Describ
 	return out, nil
 }
 
-// A JSON object containing a list of DescribeStorediSCSIVolumesInput$VolumeARNs .
+// A JSON object containing a list of DescribeStorediSCSIVolumesInput$VolumeARNs.
 type DescribeStorediSCSIVolumesInput struct {
 
 	// An array of strings where each string represents the Amazon Resource Name (ARN)
 	// of a stored volume. All of the specified stored volumes must be from the same
-	// gateway. Use ListVolumes to get volume ARNs for a gateway.
+	// gateway. Use ListVolumesto get volume ARNs for a gateway.
 	//
 	// This member is required.
 	VolumeARNs []string
@@ -46,34 +45,49 @@ type DescribeStorediSCSIVolumesInput struct {
 
 type DescribeStorediSCSIVolumesOutput struct {
 
-	// Describes a single unit of output from DescribeStorediSCSIVolumes . The
-	// following fields are returned:
+	// Describes a single unit of output from DescribeStorediSCSIVolumes. The following fields are returned:
+	//
 	//   - ChapEnabled : Indicates whether mutual CHAP is enabled for the iSCSI target.
+	//
 	//   - LunNumber : The logical disk number.
+	//
 	//   - NetworkInterfaceId : The network interface ID of the stored volume that
 	//   initiator use to map the stored volume as an iSCSI target.
+	//
 	//   - NetworkInterfacePort : The port used to communicate with iSCSI targets.
+	//
 	//   - PreservedExistingData : Indicates when the stored volume was created,
 	//   existing data on the underlying local disk was preserved.
+	//
 	//   - SourceSnapshotId : If the stored volume was created from a snapshot, this
 	//   field contains the snapshot ID used, e.g. snap-1122aabb . Otherwise, this
 	//   field is not included.
+	//
 	//   - StorediSCSIVolumes : An array of StorediSCSIVolume objects where each object
 	//   contains metadata about one stored volume.
+	//
 	//   - TargetARN : The Amazon Resource Name (ARN) of the volume target.
+	//
 	//   - VolumeARN : The Amazon Resource Name (ARN) of the stored volume.
-	//   - VolumeDiskId : The disk ID of the local disk that was specified in the
-	//   CreateStorediSCSIVolume operation.
+	//
+	//   - VolumeDiskId : The disk ID of the local disk that was specified in the CreateStorediSCSIVolume
+	//   operation.
+	//
 	//   - VolumeId : The unique identifier of the storage volume, e.g. vol-1122AABB .
-	//   - VolumeiSCSIAttributes : An VolumeiSCSIAttributes object that represents a
-	//   collection of iSCSI attributes for one stored volume.
+	//
+	//   - VolumeiSCSIAttributes : An VolumeiSCSIAttributesobject that represents a collection of iSCSI
+	//   attributes for one stored volume.
+	//
 	//   - VolumeProgress : Represents the percentage complete if the volume is
 	//   restoring or bootstrapping that represents the percent of data transferred. This
 	//   field does not appear in the response if the stored volume is not restoring or
 	//   bootstrapping.
+	//
 	//   - VolumeSizeInBytes : The size of the volume in bytes.
+	//
 	//   - VolumeStatus : One of the VolumeStatus values that indicates the state of
 	//   the volume.
+	//
 	//   - VolumeType : One of the enumeration values describing the type of the
 	//   volume. Currently, only STORED volumes are supported.
 	StorediSCSIVolumes []types.StorediSCSIVolume
@@ -106,25 +120,25 @@ func (c *Client) addOperationDescribeStorediSCSIVolumesMiddlewares(stack *middle
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -139,13 +153,16 @@ func (c *Client) addOperationDescribeStorediSCSIVolumesMiddlewares(stack *middle
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDescribeStorediSCSIVolumesValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeStorediSCSIVolumes(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

@@ -143,65 +143,221 @@ var defaultPartitions = endpoints.Partitions{
 				Region: "af-south-1",
 			}: endpoints.Endpoint{},
 			endpoints.EndpointKey{
+				Region:  "af-south-1",
+				Variant: endpoints.DualStackVariant,
+			}: {
+				Hostname: "logs.af-south-1.api.aws",
+			},
+			endpoints.EndpointKey{
 				Region: "ap-east-1",
 			}: endpoints.Endpoint{},
+			endpoints.EndpointKey{
+				Region:  "ap-east-1",
+				Variant: endpoints.DualStackVariant,
+			}: {
+				Hostname: "logs.ap-east-1.api.aws",
+			},
 			endpoints.EndpointKey{
 				Region: "ap-northeast-1",
 			}: endpoints.Endpoint{},
 			endpoints.EndpointKey{
+				Region:  "ap-northeast-1",
+				Variant: endpoints.DualStackVariant,
+			}: {
+				Hostname: "logs.ap-northeast-1.api.aws",
+			},
+			endpoints.EndpointKey{
 				Region: "ap-northeast-2",
 			}: endpoints.Endpoint{},
+			endpoints.EndpointKey{
+				Region:  "ap-northeast-2",
+				Variant: endpoints.DualStackVariant,
+			}: {
+				Hostname: "logs.ap-northeast-2.api.aws",
+			},
 			endpoints.EndpointKey{
 				Region: "ap-northeast-3",
 			}: endpoints.Endpoint{},
 			endpoints.EndpointKey{
+				Region:  "ap-northeast-3",
+				Variant: endpoints.DualStackVariant,
+			}: {
+				Hostname: "logs.ap-northeast-3.api.aws",
+			},
+			endpoints.EndpointKey{
 				Region: "ap-south-1",
 			}: endpoints.Endpoint{},
+			endpoints.EndpointKey{
+				Region:  "ap-south-1",
+				Variant: endpoints.DualStackVariant,
+			}: {
+				Hostname: "logs.ap-south-1.api.aws",
+			},
 			endpoints.EndpointKey{
 				Region: "ap-south-2",
 			}: endpoints.Endpoint{},
 			endpoints.EndpointKey{
+				Region:  "ap-south-2",
+				Variant: endpoints.DualStackVariant,
+			}: {
+				Hostname: "logs.ap-south-2.api.aws",
+			},
+			endpoints.EndpointKey{
 				Region: "ap-southeast-1",
 			}: endpoints.Endpoint{},
+			endpoints.EndpointKey{
+				Region:  "ap-southeast-1",
+				Variant: endpoints.DualStackVariant,
+			}: {
+				Hostname: "logs.ap-southeast-1.api.aws",
+			},
 			endpoints.EndpointKey{
 				Region: "ap-southeast-2",
 			}: endpoints.Endpoint{},
 			endpoints.EndpointKey{
+				Region:  "ap-southeast-2",
+				Variant: endpoints.DualStackVariant,
+			}: {
+				Hostname: "logs.ap-southeast-2.api.aws",
+			},
+			endpoints.EndpointKey{
 				Region: "ap-southeast-3",
 			}: endpoints.Endpoint{},
+			endpoints.EndpointKey{
+				Region:  "ap-southeast-3",
+				Variant: endpoints.DualStackVariant,
+			}: {
+				Hostname: "logs.ap-southeast-3.api.aws",
+			},
 			endpoints.EndpointKey{
 				Region: "ap-southeast-4",
 			}: endpoints.Endpoint{},
 			endpoints.EndpointKey{
+				Region:  "ap-southeast-4",
+				Variant: endpoints.DualStackVariant,
+			}: {
+				Hostname: "logs.ap-southeast-4.api.aws",
+			},
+			endpoints.EndpointKey{
 				Region: "ca-central-1",
 			}: endpoints.Endpoint{},
+			endpoints.EndpointKey{
+				Region:  "ca-central-1",
+				Variant: endpoints.FIPSVariant,
+			}: {
+				Hostname: "logs-fips.ca-central-1.amazonaws.com",
+			},
+			endpoints.EndpointKey{
+				Region:  "ca-central-1",
+				Variant: endpoints.DualStackVariant,
+			}: {
+				Hostname: "logs.ca-central-1.api.aws",
+			},
 			endpoints.EndpointKey{
 				Region: "ca-west-1",
 			}: endpoints.Endpoint{},
 			endpoints.EndpointKey{
+				Region:  "ca-west-1",
+				Variant: endpoints.FIPSVariant,
+			}: {
+				Hostname: "logs-fips.ca-west-1.amazonaws.com",
+			},
+			endpoints.EndpointKey{
+				Region:  "ca-west-1",
+				Variant: endpoints.DualStackVariant,
+			}: {
+				Hostname: "logs.ca-west-1.api.aws",
+			},
+			endpoints.EndpointKey{
 				Region: "eu-central-1",
 			}: endpoints.Endpoint{},
+			endpoints.EndpointKey{
+				Region:  "eu-central-1",
+				Variant: endpoints.DualStackVariant,
+			}: {
+				Hostname: "logs.eu-central-1.api.aws",
+			},
 			endpoints.EndpointKey{
 				Region: "eu-central-2",
 			}: endpoints.Endpoint{},
 			endpoints.EndpointKey{
+				Region:  "eu-central-2",
+				Variant: endpoints.DualStackVariant,
+			}: {
+				Hostname: "logs.eu-central-2.api.aws",
+			},
+			endpoints.EndpointKey{
 				Region: "eu-north-1",
 			}: endpoints.Endpoint{},
+			endpoints.EndpointKey{
+				Region:  "eu-north-1",
+				Variant: endpoints.DualStackVariant,
+			}: {
+				Hostname: "logs.eu-north-1.api.aws",
+			},
 			endpoints.EndpointKey{
 				Region: "eu-south-1",
 			}: endpoints.Endpoint{},
 			endpoints.EndpointKey{
+				Region:  "eu-south-1",
+				Variant: endpoints.DualStackVariant,
+			}: {
+				Hostname: "logs.eu-south-1.api.aws",
+			},
+			endpoints.EndpointKey{
 				Region: "eu-south-2",
 			}: endpoints.Endpoint{},
+			endpoints.EndpointKey{
+				Region:  "eu-south-2",
+				Variant: endpoints.DualStackVariant,
+			}: {
+				Hostname: "logs.eu-south-2.api.aws",
+			},
 			endpoints.EndpointKey{
 				Region: "eu-west-1",
 			}: endpoints.Endpoint{},
 			endpoints.EndpointKey{
+				Region:  "eu-west-1",
+				Variant: endpoints.DualStackVariant,
+			}: {
+				Hostname: "logs.eu-west-1.api.aws",
+			},
+			endpoints.EndpointKey{
 				Region: "eu-west-2",
 			}: endpoints.Endpoint{},
 			endpoints.EndpointKey{
+				Region:  "eu-west-2",
+				Variant: endpoints.DualStackVariant,
+			}: {
+				Hostname: "logs.eu-west-2.api.aws",
+			},
+			endpoints.EndpointKey{
 				Region: "eu-west-3",
 			}: endpoints.Endpoint{},
+			endpoints.EndpointKey{
+				Region:  "eu-west-3",
+				Variant: endpoints.DualStackVariant,
+			}: {
+				Hostname: "logs.eu-west-3.api.aws",
+			},
+			endpoints.EndpointKey{
+				Region: "fips-ca-central-1",
+			}: endpoints.Endpoint{
+				Hostname: "logs-fips.ca-central-1.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "ca-central-1",
+				},
+				Deprecated: aws.TrueTernary,
+			},
+			endpoints.EndpointKey{
+				Region: "fips-ca-west-1",
+			}: endpoints.Endpoint{
+				Hostname: "logs-fips.ca-west-1.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "ca-west-1",
+				},
+				Deprecated: aws.TrueTernary,
+			},
 			endpoints.EndpointKey{
 				Region: "fips-us-east-1",
 			}: endpoints.Endpoint{
@@ -242,14 +398,38 @@ var defaultPartitions = endpoints.Partitions{
 				Region: "il-central-1",
 			}: endpoints.Endpoint{},
 			endpoints.EndpointKey{
+				Region:  "il-central-1",
+				Variant: endpoints.DualStackVariant,
+			}: {
+				Hostname: "logs.il-central-1.api.aws",
+			},
+			endpoints.EndpointKey{
 				Region: "me-central-1",
 			}: endpoints.Endpoint{},
+			endpoints.EndpointKey{
+				Region:  "me-central-1",
+				Variant: endpoints.DualStackVariant,
+			}: {
+				Hostname: "logs.me-central-1.api.aws",
+			},
 			endpoints.EndpointKey{
 				Region: "me-south-1",
 			}: endpoints.Endpoint{},
 			endpoints.EndpointKey{
+				Region:  "me-south-1",
+				Variant: endpoints.DualStackVariant,
+			}: {
+				Hostname: "logs.me-south-1.api.aws",
+			},
+			endpoints.EndpointKey{
 				Region: "sa-east-1",
 			}: endpoints.Endpoint{},
+			endpoints.EndpointKey{
+				Region:  "sa-east-1",
+				Variant: endpoints.DualStackVariant,
+			}: {
+				Hostname: "logs.sa-east-1.api.aws",
+			},
 			endpoints.EndpointKey{
 				Region: "us-east-1",
 			}: endpoints.Endpoint{},
@@ -258,6 +438,12 @@ var defaultPartitions = endpoints.Partitions{
 				Variant: endpoints.FIPSVariant,
 			}: {
 				Hostname: "logs-fips.us-east-1.amazonaws.com",
+			},
+			endpoints.EndpointKey{
+				Region:  "us-east-1",
+				Variant: endpoints.DualStackVariant,
+			}: {
+				Hostname: "logs.us-east-1.api.aws",
 			},
 			endpoints.EndpointKey{
 				Region: "us-east-2",
@@ -269,6 +455,12 @@ var defaultPartitions = endpoints.Partitions{
 				Hostname: "logs-fips.us-east-2.amazonaws.com",
 			},
 			endpoints.EndpointKey{
+				Region:  "us-east-2",
+				Variant: endpoints.DualStackVariant,
+			}: {
+				Hostname: "logs.us-east-2.api.aws",
+			},
+			endpoints.EndpointKey{
 				Region: "us-west-1",
 			}: endpoints.Endpoint{},
 			endpoints.EndpointKey{
@@ -278,6 +470,12 @@ var defaultPartitions = endpoints.Partitions{
 				Hostname: "logs-fips.us-west-1.amazonaws.com",
 			},
 			endpoints.EndpointKey{
+				Region:  "us-west-1",
+				Variant: endpoints.DualStackVariant,
+			}: {
+				Hostname: "logs.us-west-1.api.aws",
+			},
+			endpoints.EndpointKey{
 				Region: "us-west-2",
 			}: endpoints.Endpoint{},
 			endpoints.EndpointKey{
@@ -285,6 +483,12 @@ var defaultPartitions = endpoints.Partitions{
 				Variant: endpoints.FIPSVariant,
 			}: {
 				Hostname: "logs-fips.us-west-2.amazonaws.com",
+			},
+			endpoints.EndpointKey{
+				Region:  "us-west-2",
+				Variant: endpoints.DualStackVariant,
+			}: {
+				Hostname: "logs.us-west-2.api.aws",
 			},
 		},
 	},

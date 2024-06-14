@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/efs/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -16,19 +15,25 @@ import (
 // system CreationToken or the FileSystemId is provided. Otherwise, it returns
 // descriptions of all file systems owned by the caller's Amazon Web Services
 // account in the Amazon Web Services Region of the endpoint that you're calling.
+//
 // When retrieving all file system descriptions, you can optionally specify the
 // MaxItems parameter to limit the number of descriptions in a response. This
 // number is automatically set to 100. If more file system descriptions remain,
 // Amazon EFS returns a NextMarker , an opaque token, in the response. In this
 // case, you should send a subsequent request with the Marker request parameter
-// set to the value of NextMarker . To retrieve a list of your file system
-// descriptions, this operation is used in an iterative process, where
-// DescribeFileSystems is called first without the Marker and then the operation
-// continues to call it with the Marker parameter set to the value of the
-// NextMarker from the previous response until the response has no NextMarker . The
-// order of file systems returned in the response of one DescribeFileSystems call
-// and the order of file systems returned across the responses of a multi-call
-// iteration is unspecified. This operation requires permissions for the
+// set to the value of NextMarker .
+//
+// To retrieve a list of your file system descriptions, this operation is used in
+// an iterative process, where DescribeFileSystems is called first without the
+// Marker and then the operation continues to call it with the Marker parameter
+// set to the value of the NextMarker from the previous response until the
+// response has no NextMarker .
+//
+// The order of file systems returned in the response of one DescribeFileSystems
+// call and the order of file systems returned across the responses of a multi-call
+// iteration is unspecified.
+//
+// This operation requires permissions for the
 // elasticfilesystem:DescribeFileSystems action.
 func (c *Client) DescribeFileSystems(ctx context.Context, params *DescribeFileSystemsInput, optFns ...func(*Options)) (*DescribeFileSystemsOutput, error) {
 	if params == nil {
@@ -109,25 +114,25 @@ func (c *Client) addOperationDescribeFileSystemsMiddlewares(stack *middleware.St
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -142,10 +147,13 @@ func (c *Client) addOperationDescribeFileSystemsMiddlewares(stack *middleware.St
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeFileSystems(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

@@ -6,20 +6,24 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/configservice/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates a new configuration recorder to record configuration changes for
-// specified resource types. You can also use this action to change the roleARN or
-// the recordingGroup of an existing recorder. For more information, see  Managing
-// the Configuration Recorder  (https://docs.aws.amazon.com/config/latest/developerguide/stop-start-recorder.html)
-// in the Config Developer Guide. You can specify only one configuration recorder
-// for each Amazon Web Services Region for each account. If the configuration
-// recorder does not have the recordingGroup field specified, the default is to
-// record all supported resource types.
+// specified resource types.
+//
+// You can also use this action to change the roleARN or the recordingGroup of an
+// existing recorder. For more information, see [Managing the Configuration Recorder]in the Config Developer Guide.
+//
+// You can specify only one configuration recorder for each Amazon Web Services
+// Region for each account.
+//
+// If the configuration recorder does not have the recordingGroup field specified,
+// the default is to record all supported resource types.
+//
+// [Managing the Configuration Recorder]: https://docs.aws.amazon.com/config/latest/developerguide/stop-start-recorder.html
 func (c *Client) PutConfigurationRecorder(ctx context.Context, params *PutConfigurationRecorderInput, optFns ...func(*Options)) (*PutConfigurationRecorderOutput, error) {
 	if params == nil {
 		params = &PutConfigurationRecorderInput{}
@@ -76,25 +80,25 @@ func (c *Client) addOperationPutConfigurationRecorderMiddlewares(stack *middlewa
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -109,13 +113,16 @@ func (c *Client) addOperationPutConfigurationRecorderMiddlewares(stack *middlewa
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpPutConfigurationRecorderValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opPutConfigurationRecorder(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

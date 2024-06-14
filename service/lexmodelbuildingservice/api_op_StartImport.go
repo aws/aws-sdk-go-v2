@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/lexmodelbuildingservice/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -33,12 +32,15 @@ type StartImportInput struct {
 
 	// Specifies the action that the StartImport operation should take when there is
 	// an existing resource with the same name.
+	//
 	//   - FAIL_ON_CONFLICT - The import operation is stopped on the first conflict
 	//   between a resource in the import file and an existing resource. The name of the
 	//   resource causing the conflict is in the failureReason field of the response to
-	//   the GetImport operation. OVERWRITE_LATEST - The import operation proceeds even
-	//   if there is a conflict with an existing resource. The $LASTEST version of the
-	//   existing resource is overwritten with the data from the import file.
+	//   the GetImport operation.
+	//
+	// OVERWRITE_LATEST - The import operation proceeds even if there is a conflict
+	//   with an existing resource. The $LASTEST version of the existing resource is
+	//   overwritten with the data from the import file.
 	//
 	// This member is required.
 	MergeStrategy types.MergeStrategy
@@ -52,7 +54,9 @@ type StartImportInput struct {
 
 	// Specifies the type of resource to export. Each resource also exports any
 	// resources that it depends on.
+	//
 	//   - A bot exports dependent intents.
+	//
 	//   - An intent exports dependent slot types.
 	//
 	// This member is required.
@@ -117,25 +121,25 @@ func (c *Client) addOperationStartImportMiddlewares(stack *middleware.Stack, opt
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -150,13 +154,16 @@ func (c *Client) addOperationStartImportMiddlewares(stack *middleware.Stack, opt
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpStartImportValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opStartImport(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

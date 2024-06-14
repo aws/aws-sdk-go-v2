@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/comprehend/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -15,15 +14,23 @@ import (
 // A flywheel is an Amazon Web Services resource that orchestrates the ongoing
 // training of a model for custom classification or custom entity recognition. You
 // can create a flywheel to start with an existing trained model, or Comprehend can
-// create and train a new model. When you create the flywheel, Comprehend creates a
-// data lake in your account. The data lake holds the training data and test data
-// for all versions of the model. To use a flywheel with an existing trained model,
-// you specify the active model version. Comprehend copies the model's training
-// data and test data into the flywheel's data lake. To use the flywheel with a new
-// model, you need to provide a dataset for training data (and optional test data)
-// when you create the flywheel. For more information about flywheels, see
-// Flywheel overview (https://docs.aws.amazon.com/comprehend/latest/dg/flywheels-about.html)
-// in the Amazon Comprehend Developer Guide.
+// create and train a new model.
+//
+// When you create the flywheel, Comprehend creates a data lake in your account.
+// The data lake holds the training data and test data for all versions of the
+// model.
+//
+// To use a flywheel with an existing trained model, you specify the active model
+// version. Comprehend copies the model's training data and test data into the
+// flywheel's data lake.
+//
+// To use the flywheel with a new model, you need to provide a dataset for
+// training data (and optional test data) when you create the flywheel.
+//
+// For more information about flywheels, see [Flywheel overview] in the Amazon Comprehend Developer
+// Guide.
+//
+// [Flywheel overview]: https://docs.aws.amazon.com/comprehend/latest/dg/flywheels-about.html
 func (c *Client) CreateFlywheel(ctx context.Context, params *CreateFlywheelInput, optFns ...func(*Options)) (*CreateFlywheelOutput, error) {
 	if params == nil {
 		params = &CreateFlywheelInput{}
@@ -121,25 +128,25 @@ func (c *Client) addOperationCreateFlywheelMiddlewares(stack *middleware.Stack, 
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -154,6 +161,9 @@ func (c *Client) addOperationCreateFlywheelMiddlewares(stack *middleware.Stack, 
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opCreateFlywheelMiddleware(stack, options); err != nil {
 		return err
 	}
@@ -163,7 +173,7 @@ func (c *Client) addOperationCreateFlywheelMiddlewares(stack *middleware.Stack, 
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateFlywheel(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

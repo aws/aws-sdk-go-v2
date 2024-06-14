@@ -6,13 +6,12 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/networkfirewall/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes the specified RuleGroup .
+// Deletes the specified RuleGroup.
 func (c *Client) DeleteRuleGroup(ctx context.Context, params *DeleteRuleGroupInput, optFns ...func(*Options)) (*DeleteRuleGroupOutput, error) {
 	if params == nil {
 		params = &DeleteRuleGroupInput{}
@@ -30,19 +29,22 @@ func (c *Client) DeleteRuleGroup(ctx context.Context, params *DeleteRuleGroupInp
 
 type DeleteRuleGroupInput struct {
 
-	// The Amazon Resource Name (ARN) of the rule group. You must specify the ARN or
-	// the name, and you can specify both.
+	// The Amazon Resource Name (ARN) of the rule group.
+	//
+	// You must specify the ARN or the name, and you can specify both.
 	RuleGroupArn *string
 
 	// The descriptive name of the rule group. You can't change the name of a rule
-	// group after you create it. You must specify the ARN or the name, and you can
-	// specify both.
+	// group after you create it.
+	//
+	// You must specify the ARN or the name, and you can specify both.
 	RuleGroupName *string
 
 	// Indicates whether the rule group is stateless or stateful. If the rule group is
 	// stateless, it contains stateless rules. If it is stateful, it contains stateful
-	// rules. This setting is required for requests that do not include the
-	// RuleGroupARN .
+	// rules.
+	//
+	// This setting is required for requests that do not include the RuleGroupARN .
 	Type types.RuleGroupType
 
 	noSmithyDocumentSerde
@@ -50,9 +52,8 @@ type DeleteRuleGroupInput struct {
 
 type DeleteRuleGroupOutput struct {
 
-	// The high-level properties of a rule group. This, along with the RuleGroup ,
-	// define the rule group. You can retrieve all objects for a rule group by calling
-	// DescribeRuleGroup .
+	// The high-level properties of a rule group. This, along with the RuleGroup, define the
+	// rule group. You can retrieve all objects for a rule group by calling DescribeRuleGroup.
 	//
 	// This member is required.
 	RuleGroupResponse *types.RuleGroupResponse
@@ -85,25 +86,25 @@ func (c *Client) addOperationDeleteRuleGroupMiddlewares(stack *middleware.Stack,
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -118,10 +119,13 @@ func (c *Client) addOperationDeleteRuleGroupMiddlewares(stack *middleware.Stack,
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteRuleGroup(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

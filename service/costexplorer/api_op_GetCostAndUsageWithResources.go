@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/costexplorer/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -16,13 +15,20 @@ import (
 // specify which cost and usage-related metric, such as BlendedCosts or
 // UsageQuantity , that you want the request to return. You can also filter and
 // group your data by various dimensions, such as SERVICE or AZ , in a specific
-// time range. For a complete list of valid dimensions, see the GetDimensionValues (https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_GetDimensionValues.html)
-// operation. Management account in an organization in Organizations have access to
-// all member accounts. This API is currently available for the Amazon Elastic
-// Compute Cloud – Compute service only. This is an opt-in only feature. You can
-// enable this feature from the Cost Explorer Settings page. For information about
-// how to access the Settings page, see Controlling Access for Cost Explorer (https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/ce-access.html)
-// in the Billing and Cost Management User Guide.
+// time range. For a complete list of valid dimensions, see the [GetDimensionValues]operation.
+// Management account in an organization in Organizations have access to all member
+// accounts.
+//
+// Hourly granularity is only available for EC2-Instances (Elastic Compute Cloud)
+// resource-level data. All other resource-level data is available at daily
+// granularity.
+//
+// This is an opt-in only feature. You can enable this feature from the Cost
+// Explorer Settings page. For information about how to access the Settings page,
+// see [Controlling Access for Cost Explorer]in the Billing and Cost Management User Guide.
+//
+// [GetDimensionValues]: https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_GetDimensionValues.html
+// [Controlling Access for Cost Explorer]: https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/ce-access.html
 func (c *Client) GetCostAndUsageWithResources(ctx context.Context, params *GetCostAndUsageWithResourcesInput, optFns ...func(*Options)) (*GetCostAndUsageWithResourcesOutput, error) {
 	if params == nil {
 		params = &GetCostAndUsageWithResourcesInput{}
@@ -43,13 +49,18 @@ type GetCostAndUsageWithResourcesInput struct {
 	// Filters Amazon Web Services costs by different dimensions. For example, you can
 	// specify SERVICE and LINKED_ACCOUNT and get the costs that are associated with
 	// that account's usage of that service. You can nest Expression objects to define
-	// any combination of dimension filters. For more information, see Expression (https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_Expression.html)
-	// . The GetCostAndUsageWithResources operation requires that you either group by
-	// or filter by a ResourceId . It requires the Expression (https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_Expression.html)
-	// "SERVICE = Amazon Elastic Compute Cloud - Compute" in the filter. Valid values
-	// for MatchOptions for Dimensions are EQUALS and CASE_SENSITIVE . Valid values for
-	// MatchOptions for CostCategories and Tags are EQUALS , ABSENT , and
-	// CASE_SENSITIVE . Default values are EQUALS and CASE_SENSITIVE .
+	// any combination of dimension filters. For more information, see [Expression].
+	//
+	// The GetCostAndUsageWithResources operation requires that you either group by or
+	// filter by a ResourceId . It requires the [Expression]"SERVICE = Amazon Elastic Compute
+	// Cloud - Compute" in the filter.
+	//
+	// Valid values for MatchOptions for Dimensions are EQUALS and CASE_SENSITIVE .
+	//
+	// Valid values for MatchOptions for CostCategories and Tags are EQUALS , ABSENT ,
+	// and CASE_SENSITIVE . Default values are EQUALS and CASE_SENSITIVE .
+	//
+	// [Expression]: https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_Expression.html
 	//
 	// This member is required.
 	Filter *types.Expression
@@ -76,17 +87,21 @@ type GetCostAndUsageWithResourcesInput struct {
 	GroupBy []types.GroupDefinition
 
 	// Which metrics are returned in the query. For more information about blended and
-	// unblended rates, see Why does the "blended" annotation appear on some line
-	// items in my bill? (http://aws.amazon.com/premiumsupport/knowledge-center/blended-rates-intro/)
-	// . Valid values are AmortizedCost , BlendedCost , NetAmortizedCost ,
+	// unblended rates, see [Why does the "blended" annotation appear on some line items in my bill?].
+	//
+	// Valid values are AmortizedCost , BlendedCost , NetAmortizedCost ,
 	// NetUnblendedCost , NormalizedUsageAmount , UnblendedCost , and UsageQuantity .
+	//
 	// If you return the UsageQuantity metric, the service aggregates all usage
 	// numbers without taking the units into account. For example, if you aggregate
 	// usageQuantity across all of Amazon EC2, the results aren't meaningful because
 	// Amazon EC2 compute hours and data transfer are measured in different units (for
 	// example, hour or GB). To get more meaningful UsageQuantity metrics, filter by
-	// UsageType or UsageTypeGroups . Metrics is required for
-	// GetCostAndUsageWithResources requests.
+	// UsageType or UsageTypeGroups .
+	//
+	// Metrics is required for GetCostAndUsageWithResources requests.
+	//
+	// [Why does the "blended" annotation appear on some line items in my bill?]: http://aws.amazon.com/premiumsupport/knowledge-center/blended-rates-intro/
 	Metrics []string
 
 	// The token to retrieve the next set of results. Amazon Web Services provides the
@@ -143,25 +158,25 @@ func (c *Client) addOperationGetCostAndUsageWithResourcesMiddlewares(stack *midd
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -176,13 +191,16 @@ func (c *Client) addOperationGetCostAndUsageWithResourcesMiddlewares(stack *midd
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpGetCostAndUsageWithResourcesValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetCostAndUsageWithResources(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

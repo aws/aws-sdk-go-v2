@@ -8,15 +8,11 @@ import (
 	"errors"
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/internal/protocoltest/jsonrpc/types"
-	smithydocument "github.com/aws/smithy-go/document"
 	"github.com/aws/smithy-go/middleware"
 	"github.com/aws/smithy-go/ptr"
 	smithytesting "github.com/aws/smithy-go/testing"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
-	"github.com/google/go-cmp/cmp"
-	"github.com/google/go-cmp/cmp/cmpopts"
 	"io/ioutil"
-	"math"
 	"net/http"
 	"testing"
 )
@@ -112,19 +108,7 @@ func TestClient_GreetingWithErrors_InvalidGreeting_awsAwsjson11Deserialize(t *te
 			if !errors.As(err, &actualErr) {
 				t.Fatalf("expect *types.InvalidGreeting result error, got %T", err)
 			}
-			opts := cmp.Options{
-				cmpopts.IgnoreUnexported(
-					middleware.Metadata{},
-				),
-				cmp.FilterValues(func(x, y float64) bool {
-					return math.IsNaN(x) && math.IsNaN(y)
-				}, cmp.Comparer(func(_, _ interface{}) bool { return true })),
-				cmp.FilterValues(func(x, y float32) bool {
-					return math.IsNaN(float64(x)) && math.IsNaN(float64(y))
-				}, cmp.Comparer(func(_, _ interface{}) bool { return true })),
-				cmpopts.IgnoreTypes(smithydocument.NoSerde{}),
-			}
-			if err := smithytesting.CompareValues(c.ExpectError, actualErr, opts...); err != nil {
+			if err := smithytesting.CompareValues(c.ExpectError, actualErr); err != nil {
 				t.Errorf("expect c.ExpectError value match:\n%v", err)
 			}
 		})
@@ -239,19 +223,7 @@ func TestClient_GreetingWithErrors_ComplexError_awsAwsjson11Deserialize(t *testi
 			if !errors.As(err, &actualErr) {
 				t.Fatalf("expect *types.ComplexError result error, got %T", err)
 			}
-			opts := cmp.Options{
-				cmpopts.IgnoreUnexported(
-					middleware.Metadata{},
-				),
-				cmp.FilterValues(func(x, y float64) bool {
-					return math.IsNaN(x) && math.IsNaN(y)
-				}, cmp.Comparer(func(_, _ interface{}) bool { return true })),
-				cmp.FilterValues(func(x, y float32) bool {
-					return math.IsNaN(float64(x)) && math.IsNaN(float64(y))
-				}, cmp.Comparer(func(_, _ interface{}) bool { return true })),
-				cmpopts.IgnoreTypes(smithydocument.NoSerde{}),
-			}
-			if err := smithytesting.CompareValues(c.ExpectError, actualErr, opts...); err != nil {
+			if err := smithytesting.CompareValues(c.ExpectError, actualErr); err != nil {
 				t.Errorf("expect c.ExpectError value match:\n%v", err)
 			}
 		})
@@ -277,8 +249,9 @@ func TestClient_GreetingWithErrors_FooError_awsAwsjson11Deserialize(t *testing.T
 		// Some X-Amzn-Errortype headers contain URLs. Clients need to split the URL on
 		// ':' and take only the first half of the string. For example,
 		// 'ValidationException:http://internal.amazon.com/coral/com.amazon.coral.validate/'
-		// is to be interpreted as 'ValidationException'. For an example service see Amazon
-		// Polly.
+		// is to be interpreted as 'ValidationException'.
+		//
+		// For an example service see Amazon Polly.
 		"AwsJson11FooErrorUsingXAmznErrorTypeWithUri": {
 			StatusCode: 500,
 			Header: http.Header{
@@ -299,8 +272,9 @@ func TestClient_GreetingWithErrors_FooError_awsAwsjson11Deserialize(t *testing.T
 		// This example uses the 'code' property in the output rather than
 		// X-Amzn-Errortype. Some services do this though it's preferable to send the
 		// X-Amzn-Errortype. Client implementations must first check for the
-		// X-Amzn-Errortype and then check for a top-level 'code' property. For example
-		// service see Amazon S3 Glacier.
+		// X-Amzn-Errortype and then check for a top-level 'code' property.
+		//
+		// For example service see Amazon S3 Glacier.
 		"AwsJson11FooErrorUsingCode": {
 			StatusCode: 500,
 			Header: http.Header{
@@ -448,19 +422,7 @@ func TestClient_GreetingWithErrors_FooError_awsAwsjson11Deserialize(t *testing.T
 			if !errors.As(err, &actualErr) {
 				t.Fatalf("expect *types.FooError result error, got %T", err)
 			}
-			opts := cmp.Options{
-				cmpopts.IgnoreUnexported(
-					middleware.Metadata{},
-				),
-				cmp.FilterValues(func(x, y float64) bool {
-					return math.IsNaN(x) && math.IsNaN(y)
-				}, cmp.Comparer(func(_, _ interface{}) bool { return true })),
-				cmp.FilterValues(func(x, y float32) bool {
-					return math.IsNaN(float64(x)) && math.IsNaN(float64(y))
-				}, cmp.Comparer(func(_, _ interface{}) bool { return true })),
-				cmpopts.IgnoreTypes(smithydocument.NoSerde{}),
-			}
-			if err := smithytesting.CompareValues(c.ExpectError, actualErr, opts...); err != nil {
+			if err := smithytesting.CompareValues(c.ExpectError, actualErr); err != nil {
 				t.Errorf("expect c.ExpectError value match:\n%v", err)
 			}
 		})

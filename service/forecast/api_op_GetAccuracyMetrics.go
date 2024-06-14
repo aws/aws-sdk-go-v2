@@ -6,27 +6,29 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/forecast/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Provides metrics on the accuracy of the models that were trained by the
-// CreatePredictor operation. Use metrics to see how well the model performed and
-// to decide whether to use the predictor to generate a forecast. For more
-// information, see Predictor Metrics (https://docs.aws.amazon.com/forecast/latest/dg/metrics.html)
-// . This operation generates metrics for each backtest window that was evaluated.
+// Provides metrics on the accuracy of the models that were trained by the CreatePredictor
+// operation. Use metrics to see how well the model performed and to decide whether
+// to use the predictor to generate a forecast. For more information, see [Predictor Metrics].
+//
+// This operation generates metrics for each backtest window that was evaluated.
 // The number of backtest windows ( NumberOfBacktestWindows ) is specified using
-// the EvaluationParameters object, which is optionally included in the
-// CreatePredictor request. If NumberOfBacktestWindows isn't specified, the number
-// defaults to one. The parameters of the filling method determine which items
-// contribute to the metrics. If you want all items to contribute, specify zero .
-// If you want only those items that have complete data in the range being
-// evaluated to contribute, specify nan . For more information, see
-// FeaturizationMethod . Before you can get accuracy metrics, the Status of the
-// predictor must be ACTIVE , signifying that training has completed. To get the
-// status, use the DescribePredictor operation.
+// the EvaluationParametersobject, which is optionally included in the CreatePredictor request. If
+// NumberOfBacktestWindows isn't specified, the number defaults to one.
+//
+// The parameters of the filling method determine which items contribute to the
+// metrics. If you want all items to contribute, specify zero . If you want only
+// those items that have complete data in the range being evaluated to contribute,
+// specify nan . For more information, see FeaturizationMethod.
+//
+// Before you can get accuracy metrics, the Status of the predictor must be ACTIVE
+// , signifying that training has completed. To get the status, use the DescribePredictoroperation.
+//
+// [Predictor Metrics]: https://docs.aws.amazon.com/forecast/latest/dg/metrics.html
 func (c *Client) GetAccuracyMetrics(ctx context.Context, params *GetAccuracyMetricsInput, optFns ...func(*Options)) (*GetAccuracyMetricsOutput, error) {
 	if params == nil {
 		params = &GetAccuracyMetricsInput{}
@@ -54,14 +56,17 @@ type GetAccuracyMetricsInput struct {
 
 type GetAccuracyMetricsOutput struct {
 
-	// The LatencyOptimized AutoML override strategy is only available in private
+	//  The LatencyOptimized AutoML override strategy is only available in private
 	// beta. Contact Amazon Web Services Support or your account manager to learn more
-	// about access privileges. The AutoML strategy used to train the predictor. Unless
-	// LatencyOptimized is specified, the AutoML strategy optimizes predictor
-	// accuracy. This parameter is only valid for predictors trained using AutoML.
+	// about access privileges.
+	//
+	// The AutoML strategy used to train the predictor. Unless LatencyOptimized is
+	// specified, the AutoML strategy optimizes predictor accuracy.
+	//
+	// This parameter is only valid for predictors trained using AutoML.
 	AutoMLOverrideStrategy types.AutoMLOverrideStrategy
 
-	// Whether the predictor was created with CreateAutoPredictor .
+	// Whether the predictor was created with CreateAutoPredictor.
 	IsAutoPredictor *bool
 
 	// The accuracy metric used to optimize the predictor.
@@ -98,25 +103,25 @@ func (c *Client) addOperationGetAccuracyMetricsMiddlewares(stack *middleware.Sta
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -131,13 +136,16 @@ func (c *Client) addOperationGetAccuracyMetricsMiddlewares(stack *middleware.Sta
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpGetAccuracyMetricsValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetAccuracyMetrics(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

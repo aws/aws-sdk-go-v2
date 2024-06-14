@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/iotfleetwise/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -31,7 +30,7 @@ func (c *Client) GetSignalCatalog(ctx context.Context, params *GetSignalCatalogI
 
 type GetSignalCatalogInput struct {
 
-	// The name of the signal catalog to retrieve information about.
+	//  The name of the signal catalog to retrieve information about.
 	//
 	// This member is required.
 	Name *string
@@ -41,13 +40,13 @@ type GetSignalCatalogInput struct {
 
 type GetSignalCatalogOutput struct {
 
-	// The Amazon Resource Name (ARN) of the signal catalog.
+	//  The Amazon Resource Name (ARN) of the signal catalog.
 	//
 	// This member is required.
 	Arn *string
 
-	// The time the signal catalog was created in seconds since epoch (January 1, 1970
-	// at midnight UTC time).
+	//  The time the signal catalog was created in seconds since epoch (January 1,
+	// 1970 at midnight UTC time).
 	//
 	// This member is required.
 	CreationTime *time.Time
@@ -57,15 +56,15 @@ type GetSignalCatalogOutput struct {
 	// This member is required.
 	LastModificationTime *time.Time
 
-	// The name of the signal catalog.
+	//  The name of the signal catalog.
 	//
 	// This member is required.
 	Name *string
 
-	// A brief description of the signal catalog.
+	//  A brief description of the signal catalog.
 	Description *string
 
-	// The total number of network nodes specified in a signal catalog.
+	//  The total number of network nodes specified in a signal catalog.
 	NodeCounts *types.NodeCounts
 
 	// Metadata pertaining to the operation's result.
@@ -96,25 +95,25 @@ func (c *Client) addOperationGetSignalCatalogMiddlewares(stack *middleware.Stack
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -129,13 +128,16 @@ func (c *Client) addOperationGetSignalCatalogMiddlewares(stack *middleware.Stack
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpGetSignalCatalogValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetSignalCatalog(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

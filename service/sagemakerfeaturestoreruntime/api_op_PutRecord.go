@@ -6,24 +6,27 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/sagemakerfeaturestoreruntime/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // The PutRecord API is used to ingest a list of Records into your feature group.
+//
 // If a new record’s EventTime is greater, the new record is written to both the
 // OnlineStore and OfflineStore . Otherwise, the record is a historic record and it
-// is written only to the OfflineStore . You can specify the ingestion to be
-// applied to the OnlineStore , OfflineStore , or both by using the TargetStores
-// request parameter. You can set the ingested record to expire at a given time to
-// live (TTL) duration after the record’s event time, ExpiresAt = EventTime +
-// TtlDuration , by specifying the TtlDuration parameter. A record level
-// TtlDuration is set when specifying the TtlDuration parameter using the PutRecord
-// API call. If the input TtlDuration is null or unspecified, TtlDuration is set
-// to the default feature group level TtlDuration . A record level TtlDuration
-// supersedes the group level TtlDuration .
+// is written only to the OfflineStore .
+//
+// You can specify the ingestion to be applied to the OnlineStore , OfflineStore ,
+// or both by using the TargetStores request parameter.
+//
+// You can set the ingested record to expire at a given time to live (TTL)
+// duration after the record’s event time, ExpiresAt = EventTime + TtlDuration , by
+// specifying the TtlDuration parameter. A record level TtlDuration is set when
+// specifying the TtlDuration parameter using the PutRecord API call. If the input
+// TtlDuration is null or unspecified, TtlDuration is set to the default feature
+// group level TtlDuration . A record level TtlDuration supersedes the group level
+// TtlDuration .
 func (c *Client) PutRecord(ctx context.Context, params *PutRecordInput, optFns ...func(*Options)) (*PutRecordOutput, error) {
 	if params == nil {
 		params = &PutRecordInput{}
@@ -49,8 +52,11 @@ type PutRecordInput struct {
 
 	// List of FeatureValues to be inserted. This will be a full over-write. If you
 	// only want to update few of the feature values, do the following:
+	//
 	//   - Use GetRecord to retrieve the latest record.
+	//
 	//   - Update the record returned from GetRecord .
+	//
 	//   - Use PutRecord to update feature values.
 	//
 	// This member is required.
@@ -62,8 +68,9 @@ type PutRecordInput struct {
 
 	// Time to live duration, where the record is hard deleted after the expiration
 	// time is reached; ExpiresAt = EventTime + TtlDuration . For information on
-	// HardDelete, see the DeleteRecord (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_feature_store_DeleteRecord.html)
-	// API in the Amazon SageMaker API Reference guide.
+	// HardDelete, see the [DeleteRecord]API in the Amazon SageMaker API Reference guide.
+	//
+	// [DeleteRecord]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_feature_store_DeleteRecord.html
 	TtlDuration *types.TtlDuration
 
 	noSmithyDocumentSerde
@@ -98,25 +105,25 @@ func (c *Client) addOperationPutRecordMiddlewares(stack *middleware.Stack, optio
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -131,13 +138,16 @@ func (c *Client) addOperationPutRecordMiddlewares(stack *middleware.Stack, optio
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpPutRecordValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opPutRecord(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

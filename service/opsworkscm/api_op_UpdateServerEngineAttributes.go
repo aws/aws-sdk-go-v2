@@ -6,20 +6,24 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/opsworkscm/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates engine-specific attributes on a specified server. The server enters the
-// MODIFYING state when this operation is in progress. Only one update can occur at
-// a time. You can use this command to reset a Chef server's public key (
+//	Updates engine-specific attributes on a specified server. The server enters
+//
+// the MODIFYING state when this operation is in progress. Only one update can
+// occur at a time. You can use this command to reset a Chef server's public key (
 // CHEF_PIVOTAL_KEY ) or a Puppet server's admin password ( PUPPET_ADMIN_PASSWORD
-// ). This operation is asynchronous. This operation can only be called for servers
-// in HEALTHY or UNHEALTHY states. Otherwise, an InvalidStateException is raised.
-// A ResourceNotFoundException is thrown when the server does not exist. A
-// ValidationException is raised when parameters of the request are not valid.
+// ).
+//
+// This operation is asynchronous.
+//
+// This operation can only be called for servers in HEALTHY or UNHEALTHY states.
+// Otherwise, an InvalidStateException is raised. A ResourceNotFoundException is
+// thrown when the server does not exist. A ValidationException is raised when
+// parameters of the request are not valid.
 func (c *Client) UpdateServerEngineAttributes(ctx context.Context, params *UpdateServerEngineAttributesInput, optFns ...func(*Options)) (*UpdateServerEngineAttributesOutput, error) {
 	if params == nil {
 		params = &UpdateServerEngineAttributesInput{}
@@ -86,25 +90,25 @@ func (c *Client) addOperationUpdateServerEngineAttributesMiddlewares(stack *midd
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -119,13 +123,16 @@ func (c *Client) addOperationUpdateServerEngineAttributesMiddlewares(stack *midd
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpUpdateServerEngineAttributesValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateServerEngineAttributes(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

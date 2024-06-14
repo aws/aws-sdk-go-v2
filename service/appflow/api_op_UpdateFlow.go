@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/appflow/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -30,31 +29,31 @@ func (c *Client) UpdateFlow(ctx context.Context, params *UpdateFlowInput, optFns
 
 type UpdateFlowInput struct {
 
-	// The configuration that controls how Amazon AppFlow transfers data to the
+	//  The configuration that controls how Amazon AppFlow transfers data to the
 	// destination connector.
 	//
 	// This member is required.
 	DestinationFlowConfigList []types.DestinationFlowConfig
 
-	// The specified name of the flow. Spaces are not allowed. Use underscores (_) or
+	//  The specified name of the flow. Spaces are not allowed. Use underscores (_) or
 	// hyphens (-) only.
 	//
 	// This member is required.
 	FlowName *string
 
-	// Contains information about the configuration of the source connector used in
+	//  Contains information about the configuration of the source connector used in
 	// the flow.
 	//
 	// This member is required.
 	SourceFlowConfig *types.SourceFlowConfig
 
-	// A list of tasks that Amazon AppFlow performs while transferring the data in the
-	// flow run.
+	//  A list of tasks that Amazon AppFlow performs while transferring the data in
+	// the flow run.
 	//
 	// This member is required.
 	Tasks []types.Task
 
-	// The trigger settings that determine how and when the flow runs.
+	//  The trigger settings that determine how and when the flow runs.
 	//
 	// This member is required.
 	TriggerConfig *types.TriggerConfig
@@ -62,16 +61,19 @@ type UpdateFlowInput struct {
 	// The clientToken parameter is an idempotency token. It ensures that your
 	// UpdateFlow request completes only once. You choose the value to pass. For
 	// example, if you don't receive a response from your request, you can safely retry
-	// the request with the same clientToken parameter value. If you omit a clientToken
-	// value, the Amazon Web Services SDK that you are using inserts a value for you.
-	// This way, the SDK can safely retry requests multiple times after a network
-	// error. You must provide your own value for other use cases. If you specify input
-	// parameters that differ from your first request, an error occurs. If you use a
-	// different value for clientToken , Amazon AppFlow considers it a new call to
-	// UpdateFlow . The token is active for 8 hours.
+	// the request with the same clientToken parameter value.
+	//
+	// If you omit a clientToken value, the Amazon Web Services SDK that you are using
+	// inserts a value for you. This way, the SDK can safely retry requests multiple
+	// times after a network error. You must provide your own value for other use
+	// cases.
+	//
+	// If you specify input parameters that differ from your first request, an error
+	// occurs. If you use a different value for clientToken , Amazon AppFlow considers
+	// it a new call to UpdateFlow . The token is active for 8 hours.
 	ClientToken *string
 
-	// A description of the flow.
+	//  A description of the flow.
 	Description *string
 
 	// Specifies the configuration that Amazon AppFlow uses when it catalogs the data
@@ -115,25 +117,25 @@ func (c *Client) addOperationUpdateFlowMiddlewares(stack *middleware.Stack, opti
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -148,6 +150,9 @@ func (c *Client) addOperationUpdateFlowMiddlewares(stack *middleware.Stack, opti
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opUpdateFlowMiddleware(stack, options); err != nil {
 		return err
 	}
@@ -157,7 +162,7 @@ func (c *Client) addOperationUpdateFlowMiddlewares(stack *middleware.Stack, opti
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateFlow(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

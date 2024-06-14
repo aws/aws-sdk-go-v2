@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/cloudtrail/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -55,19 +54,21 @@ type GetEventDataStoreOutput struct {
 	// The event data store Amazon Resource Number (ARN).
 	EventDataStoreArn *string
 
-	// If Lake query federation is enabled, provides the ARN of the federation role
+	//  If Lake query federation is enabled, provides the ARN of the federation role
 	// used to access the resources for the federated event data store.
 	FederationRoleArn *string
 
-	// Indicates the Lake query federation (https://docs.aws.amazon.com/awscloudtrail/latest/userguide/query-federation.html)
-	// status. The status is ENABLED if Lake query federation is enabled, or DISABLED
-	// if Lake query federation is disabled. You cannot delete an event data store if
-	// the FederationStatus is ENABLED .
+	//  Indicates the [Lake query federation] status. The status is ENABLED if Lake query federation is
+	// enabled, or DISABLED if Lake query federation is disabled. You cannot delete an
+	// event data store if the FederationStatus is ENABLED .
+	//
+	// [Lake query federation]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/query-federation.html
 	FederationStatus types.FederationStatus
 
 	// Specifies the KMS key ID that encrypts the events delivered by CloudTrail. The
 	// value is a fully specified ARN to a KMS key in the following format.
-	// arn:aws:kms:us-east-2:123456789012:key/12345678-1234-1234-1234-123456789012
+	//
+	//     arn:aws:kms:us-east-2:123456789012:key/12345678-1234-1234-1234-123456789012
 	KmsKeyId *string
 
 	// Indicates whether the event data store includes events from all Regions, or
@@ -80,6 +81,11 @@ type GetEventDataStoreOutput struct {
 	// Indicates whether an event data store is collecting logged events for an
 	// organization in Organizations.
 	OrganizationEnabled *bool
+
+	// The partition keys for the event data store. To improve query performance and
+	// efficiency, CloudTrail Lake organizes event data into partitions based on values
+	// derived from partition keys.
+	PartitionKeys []types.PartitionKey
 
 	// The retention period of the event data store, in days.
 	RetentionPeriod *int32
@@ -123,25 +129,25 @@ func (c *Client) addOperationGetEventDataStoreMiddlewares(stack *middleware.Stac
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -156,13 +162,16 @@ func (c *Client) addOperationGetEventDataStoreMiddlewares(stack *middleware.Stac
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpGetEventDataStoreValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetEventDataStore(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

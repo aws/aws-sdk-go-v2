@@ -6,13 +6,12 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/mwaa/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Internal only. Publishes environment health metrics to Amazon CloudWatch.
+//	Internal only. Publishes environment health metrics to Amazon CloudWatch.
 //
 // Deprecated: This API is for internal use and not meant for public use, and is
 // no longer available.
@@ -33,15 +32,15 @@ func (c *Client) PublishMetrics(ctx context.Context, params *PublishMetricsInput
 
 type PublishMetricsInput struct {
 
-	// Internal only. The name of the environment.
+	//  Internal only. The name of the environment.
 	//
 	// This member is required.
 	EnvironmentName *string
 
-	// Internal only. Publishes metrics to Amazon CloudWatch. To learn more about the
-	// metrics published to Amazon CloudWatch, see Amazon MWAA performance metrics in
-	// Amazon CloudWatch (https://docs.aws.amazon.com/mwaa/latest/userguide/cw-metrics.html)
-	// .
+	//  Internal only. Publishes metrics to Amazon CloudWatch. To learn more about the
+	// metrics published to Amazon CloudWatch, see [Amazon MWAA performance metrics in Amazon CloudWatch].
+	//
+	// [Amazon MWAA performance metrics in Amazon CloudWatch]: https://docs.aws.amazon.com/mwaa/latest/userguide/cw-metrics.html
 	//
 	// This member is required.
 	//
@@ -81,25 +80,25 @@ func (c *Client) addOperationPublishMetricsMiddlewares(stack *middleware.Stack, 
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -114,6 +113,9 @@ func (c *Client) addOperationPublishMetricsMiddlewares(stack *middleware.Stack, 
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addEndpointPrefix_opPublishMetricsMiddleware(stack); err != nil {
 		return err
 	}
@@ -123,7 +125,7 @@ func (c *Client) addOperationPublishMetricsMiddlewares(stack *middleware.Stack, 
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opPublishMetrics(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

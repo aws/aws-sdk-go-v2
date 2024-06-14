@@ -6,18 +6,23 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/wafregional/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// This is AWS WAF Classic documentation. For more information, see AWS WAF Classic (https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html)
-// in the developer guide. For the latest version of AWS WAF, use the AWS WAFV2 API
-// and see the AWS WAF Developer Guide (https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html)
-// . With the latest version, AWS WAF has a single set of endpoints for regional
-// and global use. Returns the Rule that is specified by the RuleId that you
-// included in the GetRule request.
+// This is AWS WAF Classic documentation. For more information, see [AWS WAF Classic] in the
+// developer guide.
+//
+// For the latest version of AWS WAF, use the AWS WAFV2 API and see the [AWS WAF Developer Guide]. With the
+// latest version, AWS WAF has a single set of endpoints for regional and global
+// use.
+//
+// Returns the Rule that is specified by the RuleId that you included in the GetRule
+// request.
+//
+// [AWS WAF Classic]: https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html
+// [AWS WAF Developer Guide]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html
 func (c *Client) GetRule(ctx context.Context, params *GetRuleInput, optFns ...func(*Options)) (*GetRuleOutput, error) {
 	if params == nil {
 		params = &GetRuleInput{}
@@ -35,8 +40,7 @@ func (c *Client) GetRule(ctx context.Context, params *GetRuleInput, optFns ...fu
 
 type GetRuleInput struct {
 
-	// The RuleId of the Rule that you want to get. RuleId is returned by CreateRule
-	// and by ListRules .
+	// The RuleId of the Rule that you want to get. RuleId is returned by CreateRule and by ListRules.
 	//
 	// This member is required.
 	RuleId *string
@@ -48,9 +52,12 @@ type GetRuleOutput struct {
 
 	// Information about the Rule that you specified in the GetRule request. For more
 	// information, see the following topics:
-	//   - Rule : Contains MetricName , Name , an array of Predicate objects, and
-	//   RuleId
-	//   - Predicate : Each Predicate object contains DataId , Negated , and Type
+	//
+	// Rule
+	//   - : Contains MetricName , Name , an array of Predicate objects, and RuleId
+	//
+	// Predicate
+	//   - : Each Predicate object contains DataId , Negated , and Type
 	Rule *types.Rule
 
 	// Metadata pertaining to the operation's result.
@@ -81,25 +88,25 @@ func (c *Client) addOperationGetRuleMiddlewares(stack *middleware.Stack, options
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -114,13 +121,16 @@ func (c *Client) addOperationGetRuleMiddlewares(stack *middleware.Stack, options
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpGetRuleValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetRule(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

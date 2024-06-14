@@ -6,13 +6,13 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
-// For the time range passed in, returns the number of open reactive insight that
+//	For the time range passed in, returns the number of open reactive insight that
+//
 // were created, the number of open proactive insights that were created, and the
 // Mean Time to Recover (MTTR) for all closed reactive insights.
 func (c *Client) DescribeAccountOverview(ctx context.Context, params *DescribeAccountOverviewInput, optFns ...func(*Options)) (*DescribeAccountOverviewOutput, error) {
@@ -32,14 +32,14 @@ func (c *Client) DescribeAccountOverview(ctx context.Context, params *DescribeAc
 
 type DescribeAccountOverviewInput struct {
 
-	// The start of the time range passed in. The start time granularity is at the day
-	// level. The floor of the start time is used. Returned information occurred after
-	// this day.
+	//  The start of the time range passed in. The start time granularity is at the
+	// day level. The floor of the start time is used. Returned information occurred
+	// after this day.
 	//
 	// This member is required.
 	FromTime *time.Time
 
-	// The end of the time range passed in. The start time granularity is at the day
+	//  The end of the time range passed in. The start time granularity is at the day
 	// level. The floor of the start time is used. Returned information occurred before
 	// this day. If this is not specified, then the current day is used.
 	ToTime *time.Time
@@ -49,19 +49,19 @@ type DescribeAccountOverviewInput struct {
 
 type DescribeAccountOverviewOutput struct {
 
-	// The Mean Time to Recover (MTTR) for all closed insights that were created
+	//  The Mean Time to Recover (MTTR) for all closed insights that were created
 	// during the time range passed in.
 	//
 	// This member is required.
 	MeanTimeToRecoverInMilliseconds *int64
 
-	// An integer that specifies the number of open proactive insights in your Amazon
+	//  An integer that specifies the number of open proactive insights in your Amazon
 	// Web Services account that were created during the time range passed in.
 	//
 	// This member is required.
 	ProactiveInsights int32
 
-	// An integer that specifies the number of open reactive insights in your Amazon
+	//  An integer that specifies the number of open reactive insights in your Amazon
 	// Web Services account that were created during the time range passed in.
 	//
 	// This member is required.
@@ -95,25 +95,25 @@ func (c *Client) addOperationDescribeAccountOverviewMiddlewares(stack *middlewar
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -128,13 +128,16 @@ func (c *Client) addOperationDescribeAccountOverviewMiddlewares(stack *middlewar
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDescribeAccountOverviewValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeAccountOverview(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

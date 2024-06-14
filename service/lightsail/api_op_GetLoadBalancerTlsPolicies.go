@@ -6,16 +6,18 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/lightsail/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Returns a list of TLS security policies that you can apply to Lightsail load
-// balancers. For more information about load balancer TLS security policies, see
-// Configuring TLS security policies on your Amazon Lightsail load balancers (https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-configure-load-balancer-tls-security-policy)
-// in the Amazon Lightsail Developer Guide.
+// balancers.
+//
+// For more information about load balancer TLS security policies, see [Configuring TLS security policies on your Amazon Lightsail load balancers] in the
+// Amazon Lightsail Developer Guide.
+//
+// [Configuring TLS security policies on your Amazon Lightsail load balancers]: https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-configure-load-balancer-tls-security-policy
 func (c *Client) GetLoadBalancerTlsPolicies(ctx context.Context, params *GetLoadBalancerTlsPoliciesInput, optFns ...func(*Options)) (*GetLoadBalancerTlsPoliciesOutput, error) {
 	if params == nil {
 		params = &GetLoadBalancerTlsPoliciesInput{}
@@ -33,10 +35,11 @@ func (c *Client) GetLoadBalancerTlsPolicies(ctx context.Context, params *GetLoad
 
 type GetLoadBalancerTlsPoliciesInput struct {
 
-	// The token to advance to the next page of results from your request. To get a
-	// page token, perform an initial GetLoadBalancerTlsPolicies request. If your
-	// results are paginated, the response will return a next page token that you can
-	// specify as the page token in a subsequent request.
+	// The token to advance to the next page of results from your request.
+	//
+	// To get a page token, perform an initial GetLoadBalancerTlsPolicies request. If
+	// your results are paginated, the response will return a next page token that you
+	// can specify as the page token in a subsequent request.
 	PageToken *string
 
 	noSmithyDocumentSerde
@@ -44,10 +47,12 @@ type GetLoadBalancerTlsPoliciesInput struct {
 
 type GetLoadBalancerTlsPoliciesOutput struct {
 
-	// The token to advance to the next page of results from your request. A next page
-	// token is not returned if there are no more results to display. To get the next
-	// page of results, perform another GetLoadBalancerTlsPolicies request and specify
-	// the next page token using the pageToken parameter.
+	// The token to advance to the next page of results from your request.
+	//
+	// A next page token is not returned if there are no more results to display.
+	//
+	// To get the next page of results, perform another GetLoadBalancerTlsPolicies
+	// request and specify the next page token using the pageToken parameter.
 	NextPageToken *string
 
 	// An array of objects that describe the TLS security policies that are available.
@@ -81,25 +86,25 @@ func (c *Client) addOperationGetLoadBalancerTlsPoliciesMiddlewares(stack *middle
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -114,10 +119,13 @@ func (c *Client) addOperationGetLoadBalancerTlsPoliciesMiddlewares(stack *middle
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetLoadBalancerTlsPolicies(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

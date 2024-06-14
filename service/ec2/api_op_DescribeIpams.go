@@ -6,14 +6,16 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Get information about your IPAM pools. For more information, see What is IPAM? (https://docs.aws.amazon.com/vpc/latest/ipam/what-is-it-ipam.html)
-// in the Amazon VPC IPAM User Guide.
+// Get information about your IPAM pools.
+//
+// For more information, see [What is IPAM?] in the Amazon VPC IPAM User Guide.
+//
+// [What is IPAM?]: https://docs.aws.amazon.com/vpc/latest/ipam/what-is-it-ipam.html
 func (c *Client) DescribeIpams(ctx context.Context, params *DescribeIpamsInput, optFns ...func(*Options)) (*DescribeIpamsOutput, error) {
 	if params == nil {
 		params = &DescribeIpamsInput{}
@@ -37,9 +39,9 @@ type DescribeIpamsInput struct {
 	// UnauthorizedOperation .
 	DryRun *bool
 
-	// One or more filters for the request. For more information about filtering, see
-	// Filtering CLI output (https://docs.aws.amazon.com/cli/latest/userguide/cli-usage-filter.html)
-	// .
+	// One or more filters for the request. For more information about filtering, see [Filtering CLI output].
+	//
+	// [Filtering CLI output]: https://docs.aws.amazon.com/cli/latest/userguide/cli-usage-filter.html
 	Filters []types.Filter
 
 	// The IDs of the IPAMs you want information on.
@@ -91,25 +93,25 @@ func (c *Client) addOperationDescribeIpamsMiddlewares(stack *middleware.Stack, o
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -124,10 +126,13 @@ func (c *Client) addOperationDescribeIpamsMiddlewares(stack *middleware.Stack, o
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeIpams(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

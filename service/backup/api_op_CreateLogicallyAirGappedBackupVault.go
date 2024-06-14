@@ -6,18 +6,20 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/backup/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
-// This request creates a logical container to where backups may be copied. This
-// request includes a name, the Region, the maximum number of retention days, the
-// minimum number of retention days, and optionally can include tags and a creator
-// request ID. Do not include sensitive data, such as passport numbers, in the name
-// of a backup vault.
+// This request creates a logical container to where backups may be copied.
+//
+// This request includes a name, the Region, the maximum number of retention days,
+// the minimum number of retention days, and optionally can include tags and a
+// creator request ID.
+//
+// Do not include sensitive data, such as passport numbers, in the name of a
+// backup vault.
 func (c *Client) CreateLogicallyAirGappedBackupVault(ctx context.Context, params *CreateLogicallyAirGappedBackupVaultInput, optFns ...func(*Options)) (*CreateLogicallyAirGappedBackupVaultOutput, error) {
 	if params == nil {
 		params = &CreateLogicallyAirGappedBackupVaultInput{}
@@ -43,22 +45,26 @@ type CreateLogicallyAirGappedBackupVaultInput struct {
 	// This is the setting that specifies the maximum retention period that the vault
 	// retains its recovery points. If this parameter is not specified, Backup does not
 	// enforce a maximum retention period on the recovery points in the vault (allowing
-	// indefinite storage). If specified, any backup or copy job to the vault must have
-	// a lifecycle policy with a retention period equal to or shorter than the maximum
-	// retention period. If the job retention period is longer than that maximum
-	// retention period, then the vault fails the backup or copy job, and you should
-	// either modify your lifecycle settings or use a different vault.
+	// indefinite storage).
+	//
+	// If specified, any backup or copy job to the vault must have a lifecycle policy
+	// with a retention period equal to or shorter than the maximum retention period.
+	// If the job retention period is longer than that maximum retention period, then
+	// the vault fails the backup or copy job, and you should either modify your
+	// lifecycle settings or use a different vault.
 	//
 	// This member is required.
 	MaxRetentionDays *int64
 
 	// This setting specifies the minimum retention period that the vault retains its
 	// recovery points. If this parameter is not specified, no minimum retention period
-	// is enforced. If specified, any backup or copy job to the vault must have a
-	// lifecycle policy with a retention period equal to or longer than the minimum
-	// retention period. If a job retention period is shorter than that minimum
-	// retention period, then the vault fails the backup or copy job, and you should
-	// either modify your lifecycle settings or use a different vault.
+	// is enforced.
+	//
+	// If specified, any backup or copy job to the vault must have a lifecycle policy
+	// with a retention period equal to or longer than the minimum retention period. If
+	// a job retention period is shorter than that minimum retention period, then the
+	// vault fails the backup or copy job, and you should either modify your lifecycle
+	// settings or use a different vault.
 	//
 	// This member is required.
 	MinRetentionDays *int64
@@ -66,8 +72,10 @@ type CreateLogicallyAirGappedBackupVaultInput struct {
 	// These are the tags that will be included in the newly-created vault.
 	BackupVaultTags map[string]string
 
-	// This is the ID of the creation request. This parameter is optional. If used,
-	// this parameter must contain 1 to 50 alphanumeric or '-_.' characters.
+	// This is the ID of the creation request.
+	//
+	// This parameter is optional. If used, this parameter must contain 1 to 50
+	// alphanumeric or '-_.' characters.
 	CreatorRequestId *string
 
 	noSmithyDocumentSerde
@@ -84,9 +92,11 @@ type CreateLogicallyAirGappedBackupVaultOutput struct {
 	// letters, numbers, and hyphens.
 	BackupVaultName *string
 
-	// The date and time when the vault was created. This value is in Unix format,
-	// Coordinated Universal Time (UTC), and accurate to milliseconds. For example, the
-	// value 1516925490.087 represents Friday, January 26, 2018 12:11:30.087 AM.
+	// The date and time when the vault was created.
+	//
+	// This value is in Unix format, Coordinated Universal Time (UTC), and accurate to
+	// milliseconds. For example, the value 1516925490.087 represents Friday, January
+	// 26, 2018 12:11:30.087 AM.
 	CreationDate *time.Time
 
 	// This is the current state of the vault.
@@ -120,25 +130,25 @@ func (c *Client) addOperationCreateLogicallyAirGappedBackupVaultMiddlewares(stac
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -153,13 +163,16 @@ func (c *Client) addOperationCreateLogicallyAirGappedBackupVaultMiddlewares(stac
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpCreateLogicallyAirGappedBackupVaultValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateLogicallyAirGappedBackupVault(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/codebuild/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -30,17 +29,20 @@ func (c *Client) UpdateReportGroup(ctx context.Context, params *UpdateReportGrou
 
 type UpdateReportGroupInput struct {
 
-	// The ARN of the report group to update.
+	//  The ARN of the report group to update.
 	//
 	// This member is required.
 	Arn *string
 
-	// Used to specify an updated export type. Valid values are:
+	//  Used to specify an updated export type. Valid values are:
+	//
 	//   - S3 : The report results are exported to an S3 bucket.
+	//
 	//   - NO_EXPORT : The report results are not exported.
 	ExportConfig *types.ReportExportConfig
 
-	// An updated list of tag key and value pairs associated with this report group.
+	//  An updated list of tag key and value pairs associated with this report group.
+	//
 	// These tags are available for use by Amazon Web Services services that support
 	// CodeBuild report group tags.
 	Tags []types.Tag
@@ -50,7 +52,7 @@ type UpdateReportGroupInput struct {
 
 type UpdateReportGroupOutput struct {
 
-	// Information about the updated report group.
+	//  Information about the updated report group.
 	ReportGroup *types.ReportGroup
 
 	// Metadata pertaining to the operation's result.
@@ -81,25 +83,25 @@ func (c *Client) addOperationUpdateReportGroupMiddlewares(stack *middleware.Stac
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -114,13 +116,16 @@ func (c *Client) addOperationUpdateReportGroupMiddlewares(stack *middleware.Stac
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpUpdateReportGroupValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateReportGroup(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

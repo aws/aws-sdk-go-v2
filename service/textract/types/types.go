@@ -24,13 +24,17 @@ type Adapter struct {
 
 	// Pages is a parameter that the user inputs to specify which pages to apply an
 	// adapter to. The following is a list of rules for using this parameter.
+	//
 	//   - If a page is not specified, it is set to ["1"] by default.
+	//
 	//   - The following characters are allowed in the parameter's string: 0 1 2 3 4 5
 	//   6 7 8 9 - * . No whitespace is allowed.
-	//   - When using * to indicate all pages, it must be the only element in the
-	//   list.
+	//
+	//   - When using * to indicate all pages, it must be the only element in the list.
+	//
 	//   - You can use page intervals, such as ["1-3", "1-1", "4-*"] . Where *
 	//   indicates last page of document.
+	//
 	//   - Specified pages must be greater than 0 and less than or equal to the number
 	//   of pages in the document.
 	Pages []string
@@ -73,10 +77,13 @@ type AdaptersConfig struct {
 // include an Amazon S3 bucket if specified.
 type AdapterVersionDatasetConfig struct {
 
-	// The S3 bucket name and file name that identifies the document. The AWS Region
-	// for the S3 bucket that contains the document must match the Region that you use
-	// for Amazon Textract operations. For Amazon Textract to process a file in an S3
-	// bucket, the user must have permission to access the S3 bucket and file.
+	// The S3 bucket name and file name that identifies the document.
+	//
+	// The AWS Region for the S3 bucket that contains the document must match the
+	// Region that you use for Amazon Textract operations.
+	//
+	// For Amazon Textract to process a file in an S3 bucket, the user must have
+	// permission to access the S3 bucket and file.
 	ManifestS3Object *S3Object
 
 	noSmithyDocumentSerde
@@ -144,68 +151,99 @@ type AnalyzeIDDetections struct {
 
 // A Block represents items that are recognized in a document within a group of
 // pixels close to each other. The information returned in a Block object depends
-// on the type of operation. In text detection for documents (for example
-// DetectDocumentText ), you get information about the detected words and lines of
-// text. In text analysis (for example AnalyzeDocument ), you can also get
-// information about the fields, tables, and selection elements that are detected
-// in the document. An array of Block objects is returned by both synchronous and
-// asynchronous operations. In synchronous operations, such as DetectDocumentText ,
-// the array of Block objects is the entire set of results. In asynchronous
-// operations, such as GetDocumentAnalysis , the array is returned over one or more
-// responses. For more information, see How Amazon Textract Works (https://docs.aws.amazon.com/textract/latest/dg/how-it-works.html)
-// .
+// on the type of operation. In text detection for documents (for example DetectDocumentText), you
+// get information about the detected words and lines of text. In text analysis
+// (for example AnalyzeDocument), you can also get information about the fields, tables, and
+// selection elements that are detected in the document.
+//
+// An array of Block objects is returned by both synchronous and asynchronous
+// operations. In synchronous operations, such as DetectDocumentText, the array of Block objects is
+// the entire set of results. In asynchronous operations, such as GetDocumentAnalysis, the array is
+// returned over one or more responses.
+//
+// For more information, see [How Amazon Textract Works].
+//
+// [How Amazon Textract Works]: https://docs.aws.amazon.com/textract/latest/dg/how-it-works.html
 type Block struct {
 
 	// The type of text item that's recognized. In operations for text detection, the
 	// following types are returned:
+	//
 	//   - PAGE - Contains a list of the LINE Block objects that are detected on a
 	//   document page.
+	//
 	//   - WORD - A word detected on a document page. A word is one or more ISO basic
 	//   Latin script characters that aren't separated by spaces.
+	//
 	//   - LINE - A string of tab-delimited, contiguous words that are detected on a
 	//   document page.
+	//
 	// In text analysis operations, the following types are returned:
+	//
 	//   - PAGE - Contains a list of child Block objects that are detected on a
 	//   document page.
+	//
 	//   - KEY_VALUE_SET - Stores the KEY and VALUE Block objects for linked text
 	//   that's detected on a document page. Use the EntityType field to determine if a
 	//   KEY_VALUE_SET object is a KEY Block object or a VALUE Block object.
+	//
 	//   - WORD - A word that's detected on a document page. A word is one or more ISO
 	//   basic Latin script characters that aren't separated by spaces.
+	//
 	//   - LINE - A string of tab-delimited, contiguous words that are detected on a
 	//   document page.
+	//
 	//   - TABLE - A table that's detected on a document page. A table is grid-based
 	//   information with two or more rows or columns, with a cell span of one row and
 	//   one column each.
+	//
 	//   - TABLE_TITLE - The title of a table. A title is typically a line of text
 	//   above or below a table, or embedded as the first row of a table.
+	//
 	//   - TABLE_FOOTER - The footer associated with a table. A footer is typically a
 	//   line or lines of text below a table or embedded as the last row of a table.
+	//
 	//   - CELL - A cell within a detected table. The cell is the parent of the block
 	//   that contains the text in the cell.
+	//
 	//   - MERGED_CELL - A cell in a table whose content spans more than one row or
 	//   column. The Relationships array for this cell contain data from individual
 	//   cells.
+	//
 	//   - SELECTION_ELEMENT - A selection element such as an option button (radio
 	//   button) or a check box that's detected on a document page. Use the value of
 	//   SelectionStatus to determine the status of the selection element.
+	//
 	//   - SIGNATURE - The location and confidence score of a signature detected on a
 	//   document page. Can be returned as part of a Key-Value pair or a detected cell.
+	//
 	//   - QUERY - A question asked during the call of AnalyzeDocument. Contains an
 	//   alias and an ID that attaches it to its answer.
+	//
 	//   - QUERY_RESULT - A response to a question asked during the call of analyze
 	//   document. Comes with an alias and ID for ease of locating in a response. Also
 	//   contains location and confidence score.
+	//
 	// The following BlockTypes are only returned for Amazon Textract Layout.
+	//
 	//   - LAYOUT_TITLE - The main title of the document.
+	//
 	//   - LAYOUT_HEADER - Text located in the top margin of the document.
+	//
 	//   - LAYOUT_FOOTER - Text located in the bottom margin of the document.
+	//
 	//   - LAYOUT_SECTION_HEADER - The titles of sections within a document.
+	//
 	//   - LAYOUT_PAGE_NUMBER - The page number of the documents.
+	//
 	//   - LAYOUT_LIST - Any information grouped together in list form.
+	//
 	//   - LAYOUT_FIGURE - Indicates the location of an image in a document.
+	//
 	//   - LAYOUT_TABLE - Indicates the location of a table in the document.
+	//
 	//   - LAYOUT_KEY_VALUE - Indicates the location of form key-values in a document.
+	//
 	//   - LAYOUT_TEXT - Text that is present typically as a part of paragraphs in
 	//   documents.
 	BlockType BlockType
@@ -222,23 +260,35 @@ type Block struct {
 	// text and the accuracy of the geometry points around the recognized text.
 	Confidence *float32
 
-	// The type of entity. The following entity types can be returned by FORMS
-	// analysis:
+	// The type of entity.
+	//
+	// The following entity types can be returned by FORMS analysis:
+	//
 	//   - KEY - An identifier for a field on the document.
+	//
 	//   - VALUE - The field text.
+	//
 	// The following entity types can be returned by TABLES analysis:
+	//
 	//   - COLUMN_HEADER - Identifies a cell that is a header of a column.
+	//
 	//   - TABLE_TITLE - Identifies a cell that is a title within the table.
+	//
 	//   - TABLE_SECTION_TITLE - Identifies a cell that is a title of a section within
 	//   a table. A section title is a cell that typically spans an entire row above a
 	//   section.
+	//
 	//   - TABLE_FOOTER - Identifies a cell that is a footer of a table.
+	//
 	//   - TABLE_SUMMARY - Identifies a summary cell of a table. A summary cell can be
 	//   a row of a table or an additional, smaller table that contains summary
 	//   information for another table.
+	//
 	//   - STRUCTURED_TABLE - Identifies a table with column headers where the content
 	//   of each row corresponds to the headers.
+	//
 	//   - SEMI_STRUCTURED_TABLE - Identifies a non-structured table.
+	//
 	// EntityTypes isn't returned by DetectDocumentText and GetDocumentTextDetection .
 	EntityTypes []EntityType
 
@@ -295,13 +345,16 @@ type Block struct {
 // cell, or selection element on a document page. The left (x-coordinate) and top
 // (y-coordinate) are coordinates that represent the top and left sides of the
 // bounding box. Note that the upper-left corner of the image is the origin (0,0).
+//
 // The top and left values returned are ratios of the overall document page size.
 // For example, if the input image is 700 x 200 pixels, and the top-left coordinate
 // of the bounding box is 350 x 50 pixels, the API returns a left value of 0.5
-// (350/700) and a top value of 0.25 (50/200). The width and height values
-// represent the dimensions of the bounding box as a ratio of the overall document
-// page dimension. For example, if the document page size is 700 x 200 pixels, and
-// the bounding box width is 70 pixels, the width returned is 0.1.
+// (350/700) and a top value of 0.25 (50/200).
+//
+// The width and height values represent the dimensions of the bounding box as a
+// ratio of the overall document page dimension. For example, if the document page
+// size is 700 x 200 pixels, and the bounding box width is 70 pixels, the width
+// returned is 0.1.
 type BoundingBox struct {
 
 	// The height of the bounding box as a ratio of the overall document page height.
@@ -330,26 +383,35 @@ type DetectedSignature struct {
 	noSmithyDocumentSerde
 }
 
-// The input document, either as bytes or as an S3 object. You pass image bytes to
-// an Amazon Textract API operation by using the Bytes property. For example, you
-// would use the Bytes property to pass a document loaded from a local file
-// system. Image bytes passed by using the Bytes property must be base64 encoded.
-// Your code might not need to encode document file bytes if you're using an AWS
-// SDK to call Amazon Textract API operations. You pass images stored in an S3
-// bucket to an Amazon Textract API operation by using the S3Object property.
-// Documents stored in an S3 bucket don't need to be base64 encoded. The AWS Region
-// for the S3 bucket that contains the S3 object must match the AWS Region that you
-// use for Amazon Textract operations. If you use the AWS CLI to call Amazon
-// Textract operations, passing image bytes using the Bytes property isn't
-// supported. You must first upload the document to an Amazon S3 bucket, and then
-// call the operation using the S3Object property. For Amazon Textract to process
-// an S3 object, the user must have permission to access the S3 object.
+// The input document, either as bytes or as an S3 object.
+//
+// You pass image bytes to an Amazon Textract API operation by using the Bytes
+// property. For example, you would use the Bytes property to pass a document
+// loaded from a local file system. Image bytes passed by using the Bytes property
+// must be base64 encoded. Your code might not need to encode document file bytes
+// if you're using an AWS SDK to call Amazon Textract API operations.
+//
+// You pass images stored in an S3 bucket to an Amazon Textract API operation by
+// using the S3Object property. Documents stored in an S3 bucket don't need to be
+// base64 encoded.
+//
+// The AWS Region for the S3 bucket that contains the S3 object must match the AWS
+// Region that you use for Amazon Textract operations.
+//
+// If you use the AWS CLI to call Amazon Textract operations, passing image bytes
+// using the Bytes property isn't supported. You must first upload the document to
+// an Amazon S3 bucket, and then call the operation using the S3Object property.
+//
+// For Amazon Textract to process an S3 object, the user must have permission to
+// access the S3 object.
 type Document struct {
 
 	// A blob of base64-encoded document bytes. The maximum size of a document that's
 	// provided in a blob of bytes is 5 MB. The document bytes must be in PNG or JPEG
-	// format. If you're using an AWS SDK to call Amazon Textract, you might not need
-	// to base64-encode image bytes passed using the Bytes field.
+	// format.
+	//
+	// If you're using an AWS SDK to call Amazon Textract, you might not need to
+	// base64-encode image bytes passed using the Bytes field.
 	Bytes []byte
 
 	// Identifies an S3 object as the document source. The maximum size of a document
@@ -369,9 +431,10 @@ type DocumentGroup struct {
 	// logical boundary.
 	SplitDocuments []SplitDocument
 
-	// The type of document that Amazon Textract has detected. See Analyze Lending
-	// Response Objects (https://docs.aws.amazon.com/textract/latest/dg/lending-response-objects.html)
-	// for a list of all types returned by Textract.
+	// The type of document that Amazon Textract has detected. See [Analyze Lending Response Objects] for a list of all
+	// types returned by Textract.
+	//
+	// [Analyze Lending Response Objects]: https://docs.aws.amazon.com/textract/latest/dg/lending-response-objects.html
 	Type *string
 
 	// A list of any expected signatures not found in a document group.
@@ -381,8 +444,10 @@ type DocumentGroup struct {
 }
 
 // The Amazon S3 bucket that contains the document to be processed. It's used by
-// asynchronous operations. The input document can be an image file in JPEG or PNG
-// format. It can also be a file in PDF format.
+// asynchronous operations.
+//
+// The input document can be an image file in JPEG or PNG format. It can also be a
+// file in PDF format.
 type DocumentLocation struct {
 
 	// The Amazon S3 bucket that contains the input document.
@@ -419,17 +484,29 @@ type EvaluationMetric struct {
 type ExpenseCurrency struct {
 
 	// Currency code for detected currency. the current supported codes are:
+	//
 	//   - USD
+	//
 	//   - EUR
+	//
 	//   - GBP
+	//
 	//   - CAD
+	//
 	//   - INR
+	//
 	//   - JPY
+	//
 	//   - CHF
+	//
 	//   - AUD
+	//
 	//   - CNY
+	//
 	//   - BZR
+	//
 	//   - SEK
+	//
 	//   - HKD
 	Code *string
 
@@ -777,22 +854,28 @@ type NotificationChannel struct {
 }
 
 // Sets whether or not your output will go to a user created bucket. Used to set
-// the name of the bucket, and the prefix on the output file. OutputConfig is an
-// optional parameter which lets you adjust where your output will be placed. By
-// default, Amazon Textract will store the results internally and can only be
-// accessed by the Get API operations. With OutputConfig enabled, you can set the
-// name of the bucket the output will be sent to the file prefix of the results
-// where you can download your results. Additionally, you can set the KMSKeyID
-// parameter to a customer master key (CMK) to encrypt your output. Without this
-// parameter set Amazon Textract will encrypt server-side using the AWS managed CMK
-// for Amazon S3. Decryption of Customer Content is necessary for processing of the
-// documents by Amazon Textract. If your account is opted out under an AI services
-// opt out policy then all unencrypted Customer Content is immediately and
-// permanently deleted after the Customer Content has been processed by the
-// service. No copy of of the output is retained by Amazon Textract. For
-// information about how to opt out, see Managing AI services opt-out policy.  (https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_ai-opt-out.html)
-// For more information on data privacy, see the Data Privacy FAQ (https://aws.amazon.com/compliance/data-privacy-faq/)
-// .
+// the name of the bucket, and the prefix on the output file.
+//
+// OutputConfig is an optional parameter which lets you adjust where your output
+// will be placed. By default, Amazon Textract will store the results internally
+// and can only be accessed by the Get API operations. With OutputConfig enabled,
+// you can set the name of the bucket the output will be sent to the file prefix of
+// the results where you can download your results. Additionally, you can set the
+// KMSKeyID parameter to a customer master key (CMK) to encrypt your output.
+// Without this parameter set Amazon Textract will encrypt server-side using the
+// AWS managed CMK for Amazon S3.
+//
+// Decryption of Customer Content is necessary for processing of the documents by
+// Amazon Textract. If your account is opted out under an AI services opt out
+// policy then all unencrypted Customer Content is immediately and permanently
+// deleted after the Customer Content has been processed by the service. No copy of
+// of the output is retained by Amazon Textract. For information about how to opt
+// out, see [Managing AI services opt-out policy.]
+//
+// For more information on data privacy, see the [Data Privacy FAQ].
+//
+// [Managing AI services opt-out policy.]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_ai-opt-out.html
+// [Data Privacy FAQ]: https://aws.amazon.com/compliance/data-privacy-faq/
 type OutputConfig struct {
 
 	// The name of the bucket your output will go to.
@@ -812,7 +895,7 @@ type OutputConfig struct {
 // number that the Page object was detected on.
 type PageClassification struct {
 
-	// The page number the value was detected on, relative to Amazon Textract's
+	//  The page number the value was detected on, relative to Amazon Textract's
 	// starting position.
 	//
 	// This member is required.
@@ -830,10 +913,11 @@ type PageClassification struct {
 // The X and Y coordinates of a point on a document page. The X and Y values that
 // are returned are ratios of the overall document page size. For example, if the
 // input document is 700 x 200 and the operation returns X=0.5 and Y=0.25, then the
-// point is at the (350,50) pixel coordinate on the document page. An array of
-// Point objects, Polygon , is returned by DetectDocumentText . Polygon represents
-// a fine-grained polygon around detected text. For more information, see Geometry
-// in the Amazon Textract Developer Guide.
+// point is at the (350,50) pixel coordinate on the document page.
+//
+// An array of Point objects, Polygon , is returned by DetectDocumentText. Polygon represents a
+// fine-grained polygon around detected text. For more information, see Geometry in
+// the Amazon Textract Developer Guide.
 type Point struct {
 
 	// The value of the X coordinate for a point on a Polygon .
@@ -884,13 +968,17 @@ type Query struct {
 
 	// Pages is a parameter that the user inputs to specify which pages to apply a
 	// query to. The following is a list of rules for using this parameter.
+	//
 	//   - If a page is not specified, it is set to ["1"] by default.
+	//
 	//   - The following characters are allowed in the parameter's string: 0 1 2 3 4 5
 	//   6 7 8 9 - * . No whitespace is allowed.
-	//   - When using * to indicate all pages, it must be the only element in the
-	//   list.
+	//
+	//   - When using * to indicate all pages, it must be the only element in the list.
+	//
 	//   - You can use page intervals, such as [“1-3”, “1-1”, “4-*”] . Where *
 	//   indicates last page of document.
+	//
 	//   - Specified pages must be greater than 0 and less than or equal to the number
 	//   of pages in the document.
 	Pages []string
@@ -899,9 +987,11 @@ type Query struct {
 }
 
 // Information about how blocks are related to each other. A Block object contains
-// 0 or more Relation objects in a list, Relationships . For more information, see
-// Block . The Type element provides the type of the relationship for all blocks
-// in the IDs array.
+// 0 or more Relation objects in a list, Relationships . For more information, see Block
+// .
+//
+// The Type element provides the type of the relationship for all blocks in the IDs
+// array.
 type Relationship struct {
 
 	// An array of IDs for related blocks. You can get the type of the relationship
@@ -913,16 +1003,22 @@ type Relationship struct {
 	//
 	//   - VALUE - A list that contains the ID of the VALUE block that's associated
 	//   with the KEY of a key-value pair.
+	//
 	//   - CHILD - A list of IDs that identify blocks found within the current block
 	//   object. For example, WORD blocks have a CHILD relationship to the LINE block
 	//   type.
+	//
 	//   - MERGED_CELL - A list of IDs that identify each of the MERGED_CELL block
 	//   types in a table.
+	//
 	//   - ANSWER - A list that contains the ID of the QUERY_RESULT block that’s
 	//   associated with the corresponding QUERY block.
+	//
 	//   - TABLE - A list of IDs that identify associated TABLE block types.
+	//
 	//   - TABLE_TITLE - A list that contains the ID for the TABLE_TITLE block type in
 	//   a table.
+	//
 	//   - TABLE_FOOTER - A list of IDs that identify the TABLE_FOOTER block types in
 	//   a table.
 	Type RelationshipType
@@ -930,10 +1026,13 @@ type Relationship struct {
 	noSmithyDocumentSerde
 }
 
-// The S3 bucket name and file name that identifies the document. The AWS Region
-// for the S3 bucket that contains the document must match the Region that you use
-// for Amazon Textract operations. For Amazon Textract to process a file in an S3
-// bucket, the user must have permission to access the S3 bucket and file.
+// The S3 bucket name and file name that identifies the document.
+//
+// The AWS Region for the S3 bucket that contains the document must match the
+// Region that you use for Amazon Textract operations.
+//
+// For Amazon Textract to process a file in an S3 bucket, the user must have
+// permission to access the S3 bucket and file.
 type S3Object struct {
 
 	// The name of the S3 bucket. Note that the # character is not valid in the file
@@ -988,9 +1087,8 @@ type UndetectedSignature struct {
 	noSmithyDocumentSerde
 }
 
-// A warning about an issue that occurred during asynchronous text analysis (
-// StartDocumentAnalysis ) or asynchronous document text detection (
-// StartDocumentTextDetection ).
+// A warning about an issue that occurred during asynchronous text analysis (StartDocumentAnalysis ) or
+// asynchronous document text detection (StartDocumentTextDetection ).
 type Warning struct {
 
 	// The error code for the warning.

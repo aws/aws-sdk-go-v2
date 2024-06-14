@@ -7,7 +7,6 @@ import (
 	"errors"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/kinesis/types"
 	"github.com/aws/smithy-go/middleware"
 	"github.com/aws/smithy-go/ptr"
@@ -18,26 +17,35 @@ import (
 	"time"
 )
 
-// Describes the specified Kinesis data stream. This API has been revised. It's
-// highly recommended that you use the DescribeStreamSummary API to get a
-// summarized description of the specified Kinesis data stream and the ListShards
-// API to list the shards in a specified data stream and obtain information about
-// each shard. When invoking this API, you must use either the StreamARN or the
-// StreamName parameter, or both. It is recommended that you use the StreamARN
-// input parameter when you invoke this API. The information returned includes the
-// stream name, Amazon Resource Name (ARN), creation time, enhanced metric
-// configuration, and shard map. The shard map is an array of shard objects. For
-// each shard object, there is the hash key and sequence number ranges that the
-// shard spans, and the IDs of any earlier shards that played in a role in creating
-// the shard. Every record ingested in the stream is identified by a sequence
-// number, which is assigned when the record is put into the stream. You can limit
-// the number of shards returned by each call. For more information, see
-// Retrieving Shards from a Stream (https://docs.aws.amazon.com/kinesis/latest/dev/kinesis-using-sdk-java-retrieve-shards.html)
-// in the Amazon Kinesis Data Streams Developer Guide. There are no guarantees
-// about the chronological order shards returned. To process shards in
-// chronological order, use the ID of the parent shard to track the lineage to the
-// oldest shard. This operation has a limit of 10 transactions per second per
-// account.
+// Describes the specified Kinesis data stream.
+//
+// This API has been revised. It's highly recommended that you use the DescribeStreamSummary API to get
+// a summarized description of the specified Kinesis data stream and the ListShardsAPI to
+// list the shards in a specified data stream and obtain information about each
+// shard.
+//
+// When invoking this API, you must use either the StreamARN or the StreamName
+// parameter, or both. It is recommended that you use the StreamARN input
+// parameter when you invoke this API.
+//
+// The information returned includes the stream name, Amazon Resource Name (ARN),
+// creation time, enhanced metric configuration, and shard map. The shard map is an
+// array of shard objects. For each shard object, there is the hash key and
+// sequence number ranges that the shard spans, and the IDs of any earlier shards
+// that played in a role in creating the shard. Every record ingested in the stream
+// is identified by a sequence number, which is assigned when the record is put
+// into the stream.
+//
+// You can limit the number of shards returned by each call. For more information,
+// see [Retrieving Shards from a Stream]in the Amazon Kinesis Data Streams Developer Guide.
+//
+// There are no guarantees about the chronological order shards returned. To
+// process shards in chronological order, use the ID of the parent shard to track
+// the lineage to the oldest shard.
+//
+// This operation has a limit of 10 transactions per second per account.
+//
+// [Retrieving Shards from a Stream]: https://docs.aws.amazon.com/kinesis/latest/dev/kinesis-using-sdk-java-retrieve-shards.html
 func (c *Client) DescribeStream(ctx context.Context, params *DescribeStreamInput, optFns ...func(*Options)) (*DescribeStreamOutput, error) {
 	if params == nil {
 		params = &DescribeStreamInput{}
@@ -56,11 +64,13 @@ func (c *Client) DescribeStream(ctx context.Context, params *DescribeStreamInput
 // Represents the input for DescribeStream .
 type DescribeStreamInput struct {
 
-	// The shard ID of the shard to start with. Specify this parameter to indicate
-	// that you want to describe the stream starting with the shard whose ID
-	// immediately follows ExclusiveStartShardId . If you don't specify this parameter,
-	// the default behavior for DescribeStream is to describe the stream starting with
-	// the first shard in the stream.
+	// The shard ID of the shard to start with.
+	//
+	// Specify this parameter to indicate that you want to describe the stream
+	// starting with the shard whose ID immediately follows ExclusiveStartShardId .
+	//
+	// If you don't specify this parameter, the default behavior for DescribeStream is
+	// to describe the stream starting with the first shard in the stream.
 	ExclusiveStartShardId *string
 
 	// The maximum number of shards to return in a single call. The default value is
@@ -119,25 +129,25 @@ func (c *Client) addOperationDescribeStreamMiddlewares(stack *middleware.Stack, 
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -152,10 +162,13 @@ func (c *Client) addOperationDescribeStreamMiddlewares(stack *middleware.Stack, 
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeStream(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -187,7 +200,16 @@ type StreamExistsWaiterOptions struct {
 	// Set of options to modify how an operation is invoked. These apply to all
 	// operations invoked for this client. Use functional options on operation call to
 	// modify this list for per operation behavior.
+	//
+	// Passing options here is functionally equivalent to passing values to this
+	// config's ClientOptions field that extend the inner client's APIOptions directly.
 	APIOptions []func(*middleware.Stack) error
+
+	// Functional options to be passed to all operations invoked by this client.
+	//
+	// Function values that modify the inner APIOptions are applied after the waiter
+	// config's own APIOptions modifiers.
+	ClientOptions []func(*Options)
 
 	// MinDelay is the minimum amount of time to delay between retries. If unset,
 	// StreamExistsWaiter will use default minimum delay of 10 seconds. Note that
@@ -204,12 +226,13 @@ type StreamExistsWaiterOptions struct {
 
 	// Retryable is function that can be used to override the service defined
 	// waiter-behavior based on operation output, or returned error. This function is
-	// used by the waiter to decide if a state is retryable or a terminal state. By
-	// default service-modeled logic will populate this option. This option can thus be
-	// used to define a custom waiter state with fall-back to service-modeled waiter
-	// state mutators.The function returns an error in case of a failure state. In case
-	// of retry state, this function returns a bool value of true and nil error, while
-	// in case of success it returns a bool value of false and nil error.
+	// used by the waiter to decide if a state is retryable or a terminal state.
+	//
+	// By default service-modeled logic will populate this option. This option can
+	// thus be used to define a custom waiter state with fall-back to service-modeled
+	// waiter state mutators.The function returns an error in case of a failure state.
+	// In case of retry state, this function returns a bool value of true and nil
+	// error, while in case of success it returns a bool value of false and nil error.
 	Retryable func(context.Context, *DescribeStreamInput, *DescribeStreamOutput, error) (bool, error)
 }
 
@@ -286,6 +309,9 @@ func (w *StreamExistsWaiter) WaitForOutput(ctx context.Context, params *Describe
 
 		out, err := w.client.DescribeStream(ctx, params, func(o *Options) {
 			o.APIOptions = append(o.APIOptions, apiOptions...)
+			for _, opt := range options.ClientOptions {
+				opt(o)
+			}
 		})
 
 		retryable, err := options.Retryable(ctx, params, out, err)
@@ -346,7 +372,16 @@ type StreamNotExistsWaiterOptions struct {
 	// Set of options to modify how an operation is invoked. These apply to all
 	// operations invoked for this client. Use functional options on operation call to
 	// modify this list for per operation behavior.
+	//
+	// Passing options here is functionally equivalent to passing values to this
+	// config's ClientOptions field that extend the inner client's APIOptions directly.
 	APIOptions []func(*middleware.Stack) error
+
+	// Functional options to be passed to all operations invoked by this client.
+	//
+	// Function values that modify the inner APIOptions are applied after the waiter
+	// config's own APIOptions modifiers.
+	ClientOptions []func(*Options)
 
 	// MinDelay is the minimum amount of time to delay between retries. If unset,
 	// StreamNotExistsWaiter will use default minimum delay of 10 seconds. Note that
@@ -363,12 +398,13 @@ type StreamNotExistsWaiterOptions struct {
 
 	// Retryable is function that can be used to override the service defined
 	// waiter-behavior based on operation output, or returned error. This function is
-	// used by the waiter to decide if a state is retryable or a terminal state. By
-	// default service-modeled logic will populate this option. This option can thus be
-	// used to define a custom waiter state with fall-back to service-modeled waiter
-	// state mutators.The function returns an error in case of a failure state. In case
-	// of retry state, this function returns a bool value of true and nil error, while
-	// in case of success it returns a bool value of false and nil error.
+	// used by the waiter to decide if a state is retryable or a terminal state.
+	//
+	// By default service-modeled logic will populate this option. This option can
+	// thus be used to define a custom waiter state with fall-back to service-modeled
+	// waiter state mutators.The function returns an error in case of a failure state.
+	// In case of retry state, this function returns a bool value of true and nil
+	// error, while in case of success it returns a bool value of false and nil error.
 	Retryable func(context.Context, *DescribeStreamInput, *DescribeStreamOutput, error) (bool, error)
 }
 
@@ -446,6 +482,9 @@ func (w *StreamNotExistsWaiter) WaitForOutput(ctx context.Context, params *Descr
 
 		out, err := w.client.DescribeStream(ctx, params, func(o *Options) {
 			o.APIOptions = append(o.APIOptions, apiOptions...)
+			for _, opt := range options.ClientOptions {
+				opt(o)
+			}
 		})
 
 		retryable, err := options.Retryable(ctx, params, out, err)

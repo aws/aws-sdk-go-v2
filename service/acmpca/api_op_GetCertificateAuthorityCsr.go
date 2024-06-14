@@ -7,8 +7,8 @@ import (
 	"errors"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/acmpca/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithytime "github.com/aws/smithy-go/time"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -17,12 +17,13 @@ import (
 )
 
 // Retrieves the certificate signing request (CSR) for your private certificate
-// authority (CA). The CSR is created when you call the CreateCertificateAuthority (https://docs.aws.amazon.com/privateca/latest/APIReference/API_CreateCertificateAuthority.html)
-// action. Sign the CSR with your Amazon Web Services Private CA-hosted or
-// on-premises root or subordinate CA. Then import the signed certificate back into
-// Amazon Web Services Private CA by calling the
-// ImportCertificateAuthorityCertificate (https://docs.aws.amazon.com/privateca/latest/APIReference/API_ImportCertificateAuthorityCertificate.html)
-// action. The CSR is returned as a base64 PEM-encoded string.
+// authority (CA). The CSR is created when you call the [CreateCertificateAuthority]action. Sign the CSR with
+// your Amazon Web Services Private CA-hosted or on-premises root or subordinate
+// CA. Then import the signed certificate back into Amazon Web Services Private CA
+// by calling the [ImportCertificateAuthorityCertificate]action. The CSR is returned as a base64 PEM-encoded string.
+//
+// [ImportCertificateAuthorityCertificate]: https://docs.aws.amazon.com/privateca/latest/APIReference/API_ImportCertificateAuthorityCertificate.html
+// [CreateCertificateAuthority]: https://docs.aws.amazon.com/privateca/latest/APIReference/API_CreateCertificateAuthority.html
 func (c *Client) GetCertificateAuthorityCsr(ctx context.Context, params *GetCertificateAuthorityCsrInput, optFns ...func(*Options)) (*GetCertificateAuthorityCsrOutput, error) {
 	if params == nil {
 		params = &GetCertificateAuthorityCsrInput{}
@@ -40,10 +41,12 @@ func (c *Client) GetCertificateAuthorityCsr(ctx context.Context, params *GetCert
 
 type GetCertificateAuthorityCsrInput struct {
 
-	// The Amazon Resource Name (ARN) that was returned when you called the
-	// CreateCertificateAuthority (https://docs.aws.amazon.com/privateca/latest/APIReference/API_CreateCertificateAuthority.html)
-	// action. This must be of the form:
-	// arn:aws:acm-pca:region:account:certificate-authority/12345678-1234-1234-1234-123456789012
+	// The Amazon Resource Name (ARN) that was returned when you called the [CreateCertificateAuthority] action.
+	// This must be of the form:
+	//
+	//     arn:aws:acm-pca:region:account:certificate-authority/12345678-1234-1234-1234-123456789012
+	//
+	// [CreateCertificateAuthority]: https://docs.aws.amazon.com/privateca/latest/APIReference/API_CreateCertificateAuthority.html
 	//
 	// This member is required.
 	CertificateAuthorityArn *string
@@ -85,25 +88,25 @@ func (c *Client) addOperationGetCertificateAuthorityCsrMiddlewares(stack *middle
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -118,13 +121,16 @@ func (c *Client) addOperationGetCertificateAuthorityCsrMiddlewares(stack *middle
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpGetCertificateAuthorityCsrValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetCertificateAuthorityCsr(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -157,7 +163,16 @@ type CertificateAuthorityCSRCreatedWaiterOptions struct {
 	// Set of options to modify how an operation is invoked. These apply to all
 	// operations invoked for this client. Use functional options on operation call to
 	// modify this list for per operation behavior.
+	//
+	// Passing options here is functionally equivalent to passing values to this
+	// config's ClientOptions field that extend the inner client's APIOptions directly.
 	APIOptions []func(*middleware.Stack) error
+
+	// Functional options to be passed to all operations invoked by this client.
+	//
+	// Function values that modify the inner APIOptions are applied after the waiter
+	// config's own APIOptions modifiers.
+	ClientOptions []func(*Options)
 
 	// MinDelay is the minimum amount of time to delay between retries. If unset,
 	// CertificateAuthorityCSRCreatedWaiter will use default minimum delay of 3
@@ -176,12 +191,13 @@ type CertificateAuthorityCSRCreatedWaiterOptions struct {
 
 	// Retryable is function that can be used to override the service defined
 	// waiter-behavior based on operation output, or returned error. This function is
-	// used by the waiter to decide if a state is retryable or a terminal state. By
-	// default service-modeled logic will populate this option. This option can thus be
-	// used to define a custom waiter state with fall-back to service-modeled waiter
-	// state mutators.The function returns an error in case of a failure state. In case
-	// of retry state, this function returns a bool value of true and nil error, while
-	// in case of success it returns a bool value of false and nil error.
+	// used by the waiter to decide if a state is retryable or a terminal state.
+	//
+	// By default service-modeled logic will populate this option. This option can
+	// thus be used to define a custom waiter state with fall-back to service-modeled
+	// waiter state mutators.The function returns an error in case of a failure state.
+	// In case of retry state, this function returns a bool value of true and nil
+	// error, while in case of success it returns a bool value of false and nil error.
 	Retryable func(context.Context, *GetCertificateAuthorityCsrInput, *GetCertificateAuthorityCsrOutput, error) (bool, error)
 }
 
@@ -261,6 +277,9 @@ func (w *CertificateAuthorityCSRCreatedWaiter) WaitForOutput(ctx context.Context
 
 		out, err := w.client.GetCertificateAuthorityCsr(ctx, params, func(o *Options) {
 			o.APIOptions = append(o.APIOptions, apiOptions...)
+			for _, opt := range options.ClientOptions {
+				opt(o)
+			}
 		})
 
 		retryable, err := options.Retryable(ctx, params, out, err)
@@ -303,6 +322,18 @@ func certificateAuthorityCSRCreatedStateRetryable(ctx context.Context, input *Ge
 		var errorType *types.RequestInProgressException
 		if errors.As(err, &errorType) {
 			return true, nil
+		}
+	}
+
+	if err != nil {
+		var apiErr smithy.APIError
+		ok := errors.As(err, &apiErr)
+		if !ok {
+			return false, fmt.Errorf("expected err to be of type smithy.APIError, got %w", err)
+		}
+
+		if "AccessDeniedException" == apiErr.ErrorCode() {
+			return false, fmt.Errorf("waiter state transitioned to Failure")
 		}
 	}
 

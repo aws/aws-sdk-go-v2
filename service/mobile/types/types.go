@@ -10,22 +10,22 @@ import (
 // The details of the bundle.
 type BundleDetails struct {
 
-	// Developer desktop or mobile app or website platforms.
+	//  Developer desktop or mobile app or website platforms.
 	AvailablePlatforms []Platform
 
-	// Unique bundle identifier.
+	//  Unique bundle identifier.
 	BundleId *string
 
-	// Description of the download bundle.
+	//  Description of the download bundle.
 	Description *string
 
-	// Icon for the download bundle.
+	//  Icon for the download bundle.
 	IconUrl *string
 
-	// Title of the download bundle.
+	//  Title of the download bundle.
 	Title *string
 
-	// Version of the download bundle.
+	//  Version of the download bundle.
 	Version *string
 
 	noSmithyDocumentSerde
@@ -34,28 +34,28 @@ type BundleDetails struct {
 // Detailed information about an AWS Mobile Hub project.
 type ProjectDetails struct {
 
-	// Website URL for this project in the AWS Mobile Hub console.
+	//  Website URL for this project in the AWS Mobile Hub console.
 	ConsoleUrl *string
 
-	// Date the project was created.
+	//  Date the project was created.
 	CreatedDate *time.Time
 
-	// Date of the last modification of the project.
+	//  Date of the last modification of the project.
 	LastUpdatedDate *time.Time
 
-	// Name of the project.
+	//  Name of the project.
 	Name *string
 
-	// Unique project identifier.
+	//  Unique project identifier.
 	ProjectId *string
 
-	// Default region to use for AWS resource creation in the AWS Mobile Hub project.
+	//  Default region to use for AWS resource creation in the AWS Mobile Hub project.
 	Region *string
 
-	// List of AWS resources associated with a project.
+	//  List of AWS resources associated with a project.
 	Resources []Resource
 
-	// Synchronization state for a project.
+	//  Synchronization state for a project.
 	State ProjectState
 
 	noSmithyDocumentSerde
@@ -64,10 +64,10 @@ type ProjectDetails struct {
 // Summary information about an AWS Mobile Hub project.
 type ProjectSummary struct {
 
-	// Name of the project.
+	//  Name of the project.
 	Name *string
 
-	// Unique project identifier.
+	//  Unique project identifier.
 	ProjectId *string
 
 	noSmithyDocumentSerde
@@ -76,20 +76,22 @@ type ProjectSummary struct {
 // Information about an instance of an AWS resource associated with a project.
 type Resource struct {
 
-	// AWS resource name which uniquely identifies the resource in AWS systems.
+	//  AWS resource name which uniquely identifies the resource in AWS systems.
 	Arn *string
 
-	// Key-value attribute pairs.
+	//  Key-value attribute pairs.
 	Attributes map[string]string
 
-	// Identifies which feature in AWS Mobile Hub is associated with this AWS resource.
+	//  Identifies which feature in AWS Mobile Hub is associated with this AWS
+	// resource.
 	Feature *string
 
-	// Name of the AWS resource (e.g., for an Amazon S3 bucket this is the name of the
-	// bucket).
+	//  Name of the AWS resource (e.g., for an Amazon S3 bucket this is the name of
+	// the bucket).
 	Name *string
 
-	// Simplified name for type of AWS resource (e.g., bucket is an Amazon S3 bucket).
+	//  Simplified name for type of AWS resource (e.g., bucket is an Amazon S3
+	// bucket).
 	Type *string
 
 	noSmithyDocumentSerde

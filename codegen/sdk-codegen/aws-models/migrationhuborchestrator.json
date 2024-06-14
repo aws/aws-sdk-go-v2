@@ -76,7 +76,7 @@
                         "date"
                     ]
                 },
-                "smithy.api#documentation": "<p>This API reference provides descriptions, syntax, and other details about each of the\n            actions and data types for AWS Migration Hub Orchestrator. he topic for each action shows the API\n            request parameters and the response. Alternatively, you can use one of the AWS SDKs to\n            access an API that is tailored to the programming language or platform that you're\n            using.</p>",
+                "smithy.api#documentation": "<p>This API reference provides descriptions, syntax, and other details about each of the\n            actions and data types for AWS Migration Hub Orchestrator. The topic for each action shows the API\n            request parameters and responses. Alternatively, you can use one of the AWS SDKs to\n            access an API that is tailored to the programming language or platform that you're\n            using.</p>",
                 "smithy.api#paginated": {
                     "inputToken": "nextToken",
                     "outputToken": "nextToken",
@@ -125,7 +125,6 @@
                                     ]
                                 }
                             ],
-                            "type": "tree",
                             "rules": [
                                 {
                                     "conditions": [
@@ -144,7 +143,6 @@
                                 },
                                 {
                                     "conditions": [],
-                                    "type": "tree",
                                     "rules": [
                                         {
                                             "conditions": [
@@ -172,13 +170,14 @@
                                             },
                                             "type": "endpoint"
                                         }
-                                    ]
+                                    ],
+                                    "type": "tree"
                                 }
-                            ]
+                            ],
+                            "type": "tree"
                         },
                         {
                             "conditions": [],
-                            "type": "tree",
                             "rules": [
                                 {
                                     "conditions": [
@@ -191,7 +190,6 @@
                                             ]
                                         }
                                     ],
-                                    "type": "tree",
                                     "rules": [
                                         {
                                             "conditions": [
@@ -205,7 +203,6 @@
                                                     "assign": "PartitionResult"
                                                 }
                                             ],
-                                            "type": "tree",
                                             "rules": [
                                                 {
                                                     "conditions": [
@@ -228,7 +225,6 @@
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [
@@ -263,11 +259,9 @@
                                                                     ]
                                                                 }
                                                             ],
-                                                            "type": "tree",
                                                             "rules": [
                                                                 {
                                                                     "conditions": [],
-                                                                    "type": "tree",
                                                                     "rules": [
                                                                         {
                                                                             "conditions": [],
@@ -278,16 +272,19 @@
                                                                             },
                                                                             "type": "endpoint"
                                                                         }
-                                                                    ]
+                                                                    ],
+                                                                    "type": "tree"
                                                                 }
-                                                            ]
+                                                            ],
+                                                            "type": "tree"
                                                         },
                                                         {
                                                             "conditions": [],
                                                             "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
                                                             "type": "error"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [
@@ -301,14 +298,12 @@
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [
                                                                 {
                                                                     "fn": "booleanEquals",
                                                                     "argv": [
-                                                                        true,
                                                                         {
                                                                             "fn": "getAttr",
                                                                             "argv": [
@@ -317,15 +312,14 @@
                                                                                 },
                                                                                 "supportsFIPS"
                                                                             ]
-                                                                        }
+                                                                        },
+                                                                        true
                                                                     ]
                                                                 }
                                                             ],
-                                                            "type": "tree",
                                                             "rules": [
                                                                 {
                                                                     "conditions": [],
-                                                                    "type": "tree",
                                                                     "rules": [
                                                                         {
                                                                             "conditions": [],
@@ -336,16 +330,19 @@
                                                                             },
                                                                             "type": "endpoint"
                                                                         }
-                                                                    ]
+                                                                    ],
+                                                                    "type": "tree"
                                                                 }
-                                                            ]
+                                                            ],
+                                                            "type": "tree"
                                                         },
                                                         {
                                                             "conditions": [],
                                                             "error": "FIPS is enabled but this partition does not support FIPS",
                                                             "type": "error"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [
@@ -359,7 +356,6 @@
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [
@@ -379,11 +375,9 @@
                                                                     ]
                                                                 }
                                                             ],
-                                                            "type": "tree",
                                                             "rules": [
                                                                 {
                                                                     "conditions": [],
-                                                                    "type": "tree",
                                                                     "rules": [
                                                                         {
                                                                             "conditions": [],
@@ -394,20 +388,22 @@
                                                                             },
                                                                             "type": "endpoint"
                                                                         }
-                                                                    ]
+                                                                    ],
+                                                                    "type": "tree"
                                                                 }
-                                                            ]
+                                                            ],
+                                                            "type": "tree"
                                                         },
                                                         {
                                                             "conditions": [],
                                                             "error": "DualStack is enabled but this partition does not support DualStack",
                                                             "type": "error"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [],
@@ -418,18 +414,22 @@
                                                             },
                                                             "type": "endpoint"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 }
-                                            ]
+                                            ],
+                                            "type": "tree"
                                         }
-                                    ]
+                                    ],
+                                    "type": "tree"
                                 },
                                 {
                                     "conditions": [],
                                     "error": "Invalid Configuration: Missing Region",
                                     "type": "error"
                                 }
-                            ]
+                            ],
+                            "type": "tree"
                         }
                     ]
                 },
@@ -776,6 +776,33 @@
                 "smithy.api#pattern": "^[-a-zA-Z0-9_.+]+[-a-zA-Z0-9_.+ ]*$"
             }
         },
+        "com.amazonaws.migrationhuborchestrator#ClientToken": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 256
+                },
+                "smithy.api#pattern": "^[-a-zA-Z0-9]*$"
+            }
+        },
+        "com.amazonaws.migrationhuborchestrator#ConflictException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>This exception is thrown when an attempt to update or delete\n            a resource would cause an inconsistent state.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 409,
+                "smithy.api#retryable": {}
+            }
+        },
         "com.amazonaws.migrationhuborchestrator#CreateMigrationWorkflowRequest": {
             "type": "structure",
             "members": {
@@ -819,11 +846,10 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The configuration ID of the application configured in Application Discovery Service.</p>",
                         "smithy.api#length": {
-                            "min": 1,
+                            "min": 0,
                             "max": 100
                         },
-                        "smithy.api#pattern": "^[-a-zA-Z0-9_.+]+[-a-zA-Z0-9_.+ ]*$",
-                        "smithy.api#required": {}
+                        "smithy.api#pattern": "^[-a-zA-Z0-9_.+]*$"
                     }
                 },
                 "inputParameters": {
@@ -916,6 +942,117 @@
                         "smithy.api#documentation": "<p>The tags to add on a migration workflow.</p>"
                     }
                 }
+            }
+        },
+        "com.amazonaws.migrationhuborchestrator#CreateTemplate": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.migrationhuborchestrator#CreateTemplateRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.migrationhuborchestrator#CreateTemplateResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.migrationhuborchestrator#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.migrationhuborchestrator#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.migrationhuborchestrator#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.migrationhuborchestrator#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.migrationhuborchestrator#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates a migration workflow template.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/template",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.migrationhuborchestrator#CreateTemplateRequest": {
+            "type": "structure",
+            "members": {
+                "templateName": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the migration workflow template.</p>",
+                        "smithy.api#length": {
+                            "min": 1,
+                            "max": 128
+                        },
+                        "smithy.api#pattern": "^[ a-zA-Z0-9]*$",
+                        "smithy.api#required": {}
+                    }
+                },
+                "templateDescription": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A description of the migration workflow template.</p>",
+                        "smithy.api#length": {
+                            "min": 0,
+                            "max": 250
+                        },
+                        "smithy.api#pattern": "^.*$"
+                    }
+                },
+                "templateSource": {
+                    "target": "com.amazonaws.migrationhuborchestrator#TemplateSource",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The source of the migration workflow template.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "clientToken": {
+                    "target": "com.amazonaws.migrationhuborchestrator#ClientToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the\n            request. For more information, see <a href=\"https://smithy.io/2.0/spec/behavior-traits.html#idempotencytoken-trait\">Idempotency</a> in the Smithy documentation.</p>",
+                        "smithy.api#idempotencyToken": {}
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.migrationhuborchestrator#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tags to add to the migration workflow template.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.migrationhuborchestrator#CreateTemplateResponse": {
+            "type": "structure",
+            "members": {
+                "templateId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the migration workflow template.</p>"
+                    }
+                },
+                "templateArn": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the migration workflow template. The format for an\n            Migration Hub Orchestrator template ARN is\n            <code>arn:aws:migrationhub-orchestrator:region:account:template/template-abcd1234</code>.\n            For more information about ARNs, see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/reference-arns.html\">Amazon Resource Names (ARNs)</a>\n            in the <i>AWS General Reference</i>.</p>"
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.migrationhuborchestrator#StringMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tags added to the migration workflow template.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.migrationhuborchestrator#CreateWorkflow": {
@@ -1258,6 +1395,64 @@
                 }
             }
         },
+        "com.amazonaws.migrationhuborchestrator#DeleteTemplate": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.migrationhuborchestrator#DeleteTemplateRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.migrationhuborchestrator#DeleteTemplateResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.migrationhuborchestrator#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.migrationhuborchestrator#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.migrationhuborchestrator#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.migrationhuborchestrator#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.migrationhuborchestrator#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes a migration workflow template.</p>",
+                "smithy.api#http": {
+                    "method": "DELETE",
+                    "uri": "/template/{id}",
+                    "code": 200
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.migrationhuborchestrator#DeleteTemplateRequest": {
+            "type": "structure",
+            "members": {
+                "id": {
+                    "target": "com.amazonaws.migrationhuborchestrator#TemplateId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the request to delete a migration workflow template.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.migrationhuborchestrator#DeleteTemplateResponse": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.migrationhuborchestrator#DeleteWorkflow": {
             "type": "operation",
             "input": {
@@ -1581,6 +1776,12 @@
                         "smithy.api#documentation": "<p>The ID of the template.</p>"
                     }
                 },
+                "templateArn": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>&gt;The Amazon Resource Name (ARN) of the migration workflow template. The format for an\n            Migration Hub Orchestrator template ARN is\n            <code>arn:aws:migrationhub-orchestrator:region:account:template/template-abcd1234</code>.\n            For more information about ARNs, see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/reference-arns.html\">Amazon Resource Names (ARNs)</a>\n            in the <i>AWS General Reference</i>.</p>"
+                    }
+                },
                 "name": {
                     "target": "smithy.api#String",
                     "traits": {
@@ -1605,16 +1806,40 @@
                         "smithy.api#documentation": "<p>List of AWS services utilized in a migration workflow.</p>"
                     }
                 },
+                "creationTime": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time at which the template was last created.</p>"
+                    }
+                },
+                "owner": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The owner of the migration workflow template.</p>"
+                    }
+                },
                 "status": {
                     "target": "com.amazonaws.migrationhuborchestrator#TemplateStatus",
                     "traits": {
                         "smithy.api#documentation": "<p>The status of the template.</p>"
                     }
                 },
-                "creationTime": {
-                    "target": "smithy.api#Timestamp",
+                "statusMessage": {
+                    "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The time at which the template was last created.</p>"
+                        "smithy.api#documentation": "<p>The status message of retrieving migration workflow templates.</p>"
+                    }
+                },
+                "templateClass": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The class of the migration workflow template. The available template classes\n            are:</p>\n         <ul>\n            <li>\n               <p>A2C</p>\n            </li>\n            <li>\n               <p>MGN</p>\n            </li>\n            <li>\n               <p>SAP_MULTI</p>\n            </li>\n            <li>\n               <p>SQL_EC2</p>\n            </li>\n            <li>\n               <p>SQL_RDS</p>\n            </li>\n            <li>\n               <p>VMIE</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.migrationhuborchestrator#StringMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tags added to the migration workflow template.</p>"
                     }
                 }
             }
@@ -2121,7 +2346,7 @@
                 "stepGroupId": {
                     "target": "com.amazonaws.migrationhuborchestrator#StepGroupId",
                     "traits": {
-                        "smithy.api#documentation": "<p>desThe ID of the step group.</p>",
+                        "smithy.api#documentation": "<p>The ID of the step group.</p>",
                         "smithy.api#httpQuery": "stepGroupId",
                         "smithy.api#required": {}
                     }
@@ -2972,6 +3197,21 @@
                 }
             }
         },
+        "com.amazonaws.migrationhuborchestrator#MaxStringList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.migrationhuborchestrator#MaxStringValue"
+            }
+        },
+        "com.amazonaws.migrationhuborchestrator#MaxStringValue": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 2048
+                }
+            }
+        },
         "com.amazonaws.migrationhuborchestrator#MigrationWorkflow": {
             "type": "resource",
             "identifiers": {
@@ -3177,8 +3417,17 @@
                     "target": "com.amazonaws.migrationhuborchestrator#TemplateId"
                 }
             },
+            "create": {
+                "target": "com.amazonaws.migrationhuborchestrator#CreateTemplate"
+            },
             "read": {
                 "target": "com.amazonaws.migrationhuborchestrator#GetTemplate"
+            },
+            "update": {
+                "target": "com.amazonaws.migrationhuborchestrator#UpdateTemplate"
+            },
+            "delete": {
+                "target": "com.amazonaws.migrationhuborchestrator#DeleteTemplate"
             },
             "list": {
                 "target": "com.amazonaws.migrationhuborchestrator#ListTemplates"
@@ -3348,7 +3597,7 @@
         "com.amazonaws.migrationhuborchestrator#ResourceArn": {
             "type": "string",
             "traits": {
-                "smithy.api#pattern": "^arn:aws:migrationhub-orchestrator:[a-z0-9-]+:[0-9]+:workflow/[.]*$"
+                "smithy.api#pattern": "^arn:aws:migrationhub-orchestrator:[a-z0-9-]+:[0-9]+:(template|workflow)/[.]*$"
             }
         },
         "com.amazonaws.migrationhuborchestrator#ResourceNotFoundException": {
@@ -3819,6 +4068,10 @@
                         "name": "AWAITING_DEPENDENCIES"
                     },
                     {
+                        "value": "SKIPPED",
+                        "name": "SKIPPED"
+                    },
+                    {
                         "value": "READY",
                         "name": "READY"
                     },
@@ -3938,7 +4191,7 @@
             "traits": {
                 "smithy.api#length": {
                     "min": 0,
-                    "max": 100
+                    "max": 500
                 }
             }
         },
@@ -4149,6 +4402,20 @@
                 "smithy.api#pattern": "^[-a-zA-Z0-9_.+]+[-a-zA-Z0-9_.+ ]*$"
             }
         },
+        "com.amazonaws.migrationhuborchestrator#TemplateSource": {
+            "type": "union",
+            "members": {
+                "workflowId": {
+                    "target": "com.amazonaws.migrationhuborchestrator#MigrationWorkflowId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the workflow from the source migration workflow template.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The migration workflow template used as the source for the new template.</p>"
+            }
+        },
         "com.amazonaws.migrationhuborchestrator#TemplateStatus": {
             "type": "string",
             "traits": {
@@ -4156,6 +4423,22 @@
                     {
                         "value": "CREATED",
                         "name": "CREATED"
+                    },
+                    {
+                        "value": "READY",
+                        "name": "READY"
+                    },
+                    {
+                        "value": "PENDING_CREATION",
+                        "name": "PENDING_CREATION"
+                    },
+                    {
+                        "value": "CREATING",
+                        "name": "CREATING"
+                    },
+                    {
+                        "value": "CREATION_FAILED",
+                        "name": "CREATION_FAILED"
                     }
                 ]
             }
@@ -4557,6 +4840,111 @@
                         "smithy.api#documentation": "<p>The tags added to the migration workflow.</p>"
                     }
                 }
+            }
+        },
+        "com.amazonaws.migrationhuborchestrator#UpdateTemplate": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.migrationhuborchestrator#UpdateTemplateRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.migrationhuborchestrator#UpdateTemplateResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.migrationhuborchestrator#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.migrationhuborchestrator#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.migrationhuborchestrator#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.migrationhuborchestrator#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.migrationhuborchestrator#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Updates a migration workflow template.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/template/{id}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.migrationhuborchestrator#UpdateTemplateRequest": {
+            "type": "structure",
+            "members": {
+                "id": {
+                    "target": "com.amazonaws.migrationhuborchestrator#TemplateId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the request to update a migration workflow template.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "templateName": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the migration workflow template to update.</p>",
+                        "smithy.api#length": {
+                            "min": 1,
+                            "max": 128
+                        },
+                        "smithy.api#pattern": "^[ a-zA-Z0-9]*$"
+                    }
+                },
+                "templateDescription": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description of the migration workflow template to update.</p>",
+                        "smithy.api#length": {
+                            "min": 0,
+                            "max": 250
+                        },
+                        "smithy.api#pattern": "^.*$"
+                    }
+                },
+                "clientToken": {
+                    "target": "com.amazonaws.migrationhuborchestrator#ClientToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier that you provide to ensure the\n            idempotency of the request.</p>",
+                        "smithy.api#idempotencyToken": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.migrationhuborchestrator#UpdateTemplateResponse": {
+            "type": "structure",
+            "members": {
+                "templateId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the migration workflow template being updated.</p>"
+                    }
+                },
+                "templateArn": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the migration workflow template being updated. The format for an Migration Hub Orchestrator\n            template ARN is\n            <code>arn:aws:migrationhub-orchestrator:region:account:template/template-abcd1234</code>.\n            For more information about ARNs, see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/reference-arns.html\">Amazon Resource Names (ARNs)</a>\n            in the <i>AWS General Reference</i>.</p>"
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.migrationhuborchestrator#StringMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tags added to the migration workflow template.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.migrationhuborchestrator#UpdateWorkflow": {
@@ -5081,13 +5469,13 @@
                     }
                 },
                 "stringValue": {
-                    "target": "com.amazonaws.migrationhuborchestrator#StringValue",
+                    "target": "com.amazonaws.migrationhuborchestrator#MaxStringValue",
                     "traits": {
                         "smithy.api#documentation": "<p>The string value.</p>"
                     }
                 },
                 "listOfStringValue": {
-                    "target": "com.amazonaws.migrationhuborchestrator#StringList",
+                    "target": "com.amazonaws.migrationhuborchestrator#MaxStringList",
                     "traits": {
                         "smithy.api#documentation": "<p>The list of string value.</p>"
                     }

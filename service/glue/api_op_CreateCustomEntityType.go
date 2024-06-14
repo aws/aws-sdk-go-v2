@@ -6,15 +6,16 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates a custom pattern that is used to detect sensitive data across the
-// columns and rows of your structured data. Each custom pattern you create
-// specifies a regular expression and an optional list of context words. If no
-// context words are passed only a regular expression is checked.
+// columns and rows of your structured data.
+//
+// Each custom pattern you create specifies a regular expression and an optional
+// list of context words. If no context words are passed only a regular expression
+// is checked.
 func (c *Client) CreateCustomEntityType(ctx context.Context, params *CreateCustomEntityTypeInput, optFns ...func(*Options)) (*CreateCustomEntityTypeOutput, error) {
 	if params == nil {
 		params = &CreateCustomEntityTypeInput{}
@@ -46,7 +47,9 @@ type CreateCustomEntityTypeInput struct {
 
 	// A list of context words. If none of these context words are found within the
 	// vicinity of the regular expression the data will not be detected as sensitive
-	// data. If no context words are passed only a regular expression is checked.
+	// data.
+	//
+	// If no context words are passed only a regular expression is checked.
 	ContextWords []string
 
 	// A list of tags applied to the custom entity type.
@@ -88,25 +91,25 @@ func (c *Client) addOperationCreateCustomEntityTypeMiddlewares(stack *middleware
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -121,13 +124,16 @@ func (c *Client) addOperationCreateCustomEntityTypeMiddlewares(stack *middleware
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpCreateCustomEntityTypeValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateCustomEntityType(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

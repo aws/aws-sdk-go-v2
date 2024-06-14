@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/lexmodelbuildingservice/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -16,12 +15,15 @@ import (
 // Creates a new version of a slot type based on the $LATEST version of the
 // specified slot type. If the $LATEST version of this resource has not changed
 // since the last version that you created, Amazon Lex doesn't create a new
-// version. It returns the last version that you created. You can update only the
-// $LATEST version of a slot type. You can't update the numbered versions that you
-// create with the CreateSlotTypeVersion operation. When you create a version of a
-// slot type, Amazon Lex sets the version to 1. Subsequent versions increment by 1.
-// For more information, see versioning-intro . This operation requires permissions
-// for the lex:CreateSlotTypeVersion action.
+// version. It returns the last version that you created.
+//
+// You can update only the $LATEST version of a slot type. You can't update the
+// numbered versions that you create with the CreateSlotTypeVersion operation.
+//
+// When you create a version of a slot type, Amazon Lex sets the version to 1.
+// Subsequent versions increment by 1. For more information, see versioning-intro.
+//
+// This operation requires permissions for the lex:CreateSlotTypeVersion action.
 func (c *Client) CreateSlotTypeVersion(ctx context.Context, params *CreateSlotTypeVersionInput, optFns ...func(*Options)) (*CreateSlotTypeVersionOutput, error) {
 	if params == nil {
 		params = &CreateSlotTypeVersionInput{}
@@ -84,7 +86,7 @@ type CreateSlotTypeVersionOutput struct {
 	SlotTypeConfigurations []types.SlotTypeConfiguration
 
 	// The strategy that Amazon Lex uses to determine the value of the slot. For more
-	// information, see PutSlotType .
+	// information, see PutSlotType.
 	ValueSelectionStrategy types.SlotValueSelectionStrategy
 
 	// The version assigned to the new slot type version.
@@ -118,25 +120,25 @@ func (c *Client) addOperationCreateSlotTypeVersionMiddlewares(stack *middleware.
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -151,13 +153,16 @@ func (c *Client) addOperationCreateSlotTypeVersionMiddlewares(stack *middleware.
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpCreateSlotTypeVersionValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateSlotTypeVersion(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

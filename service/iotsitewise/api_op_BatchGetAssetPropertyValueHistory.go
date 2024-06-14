@@ -6,15 +6,15 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/iotsitewise/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Gets the historical values for one or more asset properties. For more
-// information, see Querying historical values (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/query-industrial-data.html#historical-values)
-// in the IoT SiteWise User Guide.
+// information, see [Querying historical values]in the IoT SiteWise User Guide.
+//
+// [Querying historical values]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/query-industrial-data.html#historical-values
 func (c *Client) BatchGetAssetPropertyValueHistory(ctx context.Context, params *BatchGetAssetPropertyValueHistoryInput, optFns ...func(*Options)) (*BatchGetAssetPropertyValueHistoryOutput, error) {
 	if params == nil {
 		params = &BatchGetAssetPropertyValueHistoryInput{}
@@ -40,7 +40,9 @@ type BatchGetAssetPropertyValueHistoryInput struct {
 
 	// The maximum number of results to return for each paginated request. A result
 	// set is returned in the two cases, whichever occurs first.
+	//
 	//   - The size of the result set is equal to 4 MB.
+	//
 	//   - The number of data points in the result set is equal to the value of
 	//   maxResults . The maximum value of maxResults is 20000.
 	MaxResults *int32
@@ -105,25 +107,25 @@ func (c *Client) addOperationBatchGetAssetPropertyValueHistoryMiddlewares(stack 
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -138,6 +140,9 @@ func (c *Client) addOperationBatchGetAssetPropertyValueHistoryMiddlewares(stack 
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addEndpointPrefix_opBatchGetAssetPropertyValueHistoryMiddleware(stack); err != nil {
 		return err
 	}
@@ -147,7 +152,7 @@ func (c *Client) addOperationBatchGetAssetPropertyValueHistoryMiddlewares(stack 
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opBatchGetAssetPropertyValueHistory(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -205,7 +210,9 @@ var _ BatchGetAssetPropertyValueHistoryAPIClient = (*Client)(nil)
 type BatchGetAssetPropertyValueHistoryPaginatorOptions struct {
 	// The maximum number of results to return for each paginated request. A result
 	// set is returned in the two cases, whichever occurs first.
+	//
 	//   - The size of the result set is equal to 4 MB.
+	//
 	//   - The number of data points in the result set is equal to the value of
 	//   maxResults . The maximum value of maxResults is 20000.
 	Limit int32

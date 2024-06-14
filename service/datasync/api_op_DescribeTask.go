@@ -6,14 +6,14 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/datasync/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
-// Provides information about an DataSync transfer task.
+// Provides information about a task, which defines where and how DataSync
+// transfers your data.
 func (c *Client) DescribeTask(ctx context.Context, params *DescribeTaskInput, optFns ...func(*Options)) (*DescribeTaskOutput, error) {
 	if params == nil {
 		params = &DescribeTaskInput{}
@@ -32,7 +32,8 @@ func (c *Client) DescribeTask(ctx context.Context, params *DescribeTaskInput, op
 // DescribeTaskRequest
 type DescribeTaskInput struct {
 
-	// Specifies the Amazon Resource Name (ARN) of the transfer task.
+	// Specifies the Amazon Resource Name (ARN) of the transfer task that you want
+	// information about.
 	//
 	// This member is required.
 	TaskArn *string
@@ -43,82 +44,98 @@ type DescribeTaskInput struct {
 // DescribeTaskResponse
 type DescribeTaskOutput struct {
 
-	// The Amazon Resource Name (ARN) of the Amazon CloudWatch log group that was used
-	// to monitor and log events in the task. For more information on these groups, see
-	// Working with Log Groups and Log Streams in the Amazon CloudWatch User Guide.
+	// The Amazon Resource Name (ARN) of an Amazon CloudWatch log group for monitoring
+	// your task.
+	//
+	// For more information, see [Monitoring DataSync with Amazon CloudWatch].
+	//
+	// [Monitoring DataSync with Amazon CloudWatch]: https://docs.aws.amazon.com/datasync/latest/userguide/monitor-datasync.html
 	CloudWatchLogGroupArn *string
 
 	// The time that the task was created.
 	CreationTime *time.Time
 
-	// The Amazon Resource Name (ARN) of the task execution that is transferring files.
+	// The ARN of the most recent task execution.
 	CurrentTaskExecutionArn *string
 
-	// The Amazon Resource Name (ARN) of the Amazon Web Services storage resource's
-	// location.
+	// The ARN of your transfer's destination location.
 	DestinationLocationArn *string
 
-	// The Amazon Resource Names (ARNs) of the network interfaces created for your
-	// destination location. For more information, see Network interface requirements (https://docs.aws.amazon.com/datasync/latest/userguide/datasync-network.html#required-network-interfaces)
-	// .
+	// The ARNs of the [network interfaces] that DataSync created for your destination location.
+	//
+	// [network interfaces]: https://docs.aws.amazon.com/datasync/latest/userguide/datasync-network.html#required-network-interfaces
 	DestinationNetworkInterfaceArns []string
 
-	// Errors that DataSync encountered during execution of the task. You can use this
-	// error code to help troubleshoot issues.
+	// If there's an issue with your task, you can use the error code to help you
+	// troubleshoot the problem. For more information, see [Troubleshooting issues with DataSync transfers].
+	//
+	// [Troubleshooting issues with DataSync transfers]: https://docs.aws.amazon.com/datasync/latest/userguide/troubleshooting-datasync-locations-tasks.html
 	ErrorCode *string
 
-	// Detailed description of an error that was encountered during the task
-	// execution. You can use this information to help troubleshoot issues.
+	// If there's an issue with your task, you can use the error details to help you
+	// troubleshoot the problem. For more information, see [Troubleshooting issues with DataSync transfers].
+	//
+	// [Troubleshooting issues with DataSync transfers]: https://docs.aws.amazon.com/datasync/latest/userguide/troubleshooting-datasync-locations-tasks.html
 	ErrorDetail *string
 
-	// A list of filter rules that exclude specific data during your transfer. For
-	// more information and examples, see Filtering data transferred by DataSync (https://docs.aws.amazon.com/datasync/latest/userguide/filtering.html)
-	// .
+	// The exclude filters that define the files, objects, and folders in your source
+	// location that you don't want DataSync to transfer. For more information and
+	// examples, see [Specifying what DataSync transfers by using filters].
+	//
+	// [Specifying what DataSync transfers by using filters]: https://docs.aws.amazon.com/datasync/latest/userguide/filtering.html
 	Excludes []types.FilterRule
 
-	// A list of filter rules that include specific data during your transfer. For
-	// more information and examples, see Filtering data transferred by DataSync (https://docs.aws.amazon.com/datasync/latest/userguide/filtering.html)
-	// .
+	// The include filters that define the files, objects, and folders in your source
+	// location that you want DataSync to transfer. For more information and examples,
+	// see [Specifying what DataSync transfers by using filters].
+	//
+	// [Specifying what DataSync transfers by using filters]: https://docs.aws.amazon.com/datasync/latest/userguide/filtering.html
 	Includes []types.FilterRule
 
-	// The configuration of the manifest that lists the files or objects to transfer.
-	// For more information, see Specifying what DataSync transfers by using a manifest (https://docs.aws.amazon.com/datasync/latest/userguide/transferring-with-manifest.html)
-	// .
+	// The configuration of the manifest that lists the files or objects that you want
+	// DataSync to transfer. For more information, see [Specifying what DataSync transfers by using a manifest].
+	//
+	// [Specifying what DataSync transfers by using a manifest]: https://docs.aws.amazon.com/datasync/latest/userguide/transferring-with-manifest.html
 	ManifestConfig *types.ManifestConfig
 
-	// The name of the task that was described.
+	// The name of your task.
 	Name *string
 
-	// The configuration options that control the behavior of the StartTaskExecution
-	// operation. Some options include preserving file or object metadata and verifying
-	// data integrity. You can override these options for each task execution. For more
-	// information, see StartTaskExecution (https://docs.aws.amazon.com/datasync/latest/userguide/API_StartTaskExecution.html)
-	// .
+	// The task's settings. For example, what file metadata gets preserved, how data
+	// integrity gets verified at the end of your transfer, bandwidth limits, among
+	// other options.
 	Options *types.Options
 
-	// The schedule used to periodically transfer files from a source to a destination
-	// location.
+	// The schedule for when you want your task to run. For more information, see [Scheduling your task].
+	//
+	// [Scheduling your task]: https://docs.aws.amazon.com/datasync/latest/userguide/task-scheduling.html
 	Schedule *types.TaskSchedule
 
-	// The Amazon Resource Name (ARN) of the source file system's location.
+	// The details about your [task schedule].
+	//
+	// [task schedule]: https://docs.aws.amazon.com/datasync/latest/userguide/task-scheduling.html
+	ScheduleDetails *types.TaskScheduleDetails
+
+	// The ARN of your transfer's source location.
 	SourceLocationArn *string
 
-	// The Amazon Resource Names (ARNs) of the network interfaces created for your
-	// source location. For more information, see Network interface requirements (https://docs.aws.amazon.com/datasync/latest/userguide/datasync-network.html#required-network-interfaces)
-	// .
+	// The ARNs of the [network interfaces] that DataSync created for your source location.
+	//
+	// [network interfaces]: https://docs.aws.amazon.com/datasync/latest/userguide/datasync-network.html#required-network-interfaces
 	SourceNetworkInterfaceArns []string
 
-	// The status of the task that was described. For detailed information about task
-	// execution statuses, see Understanding Task Statuses in the DataSync User Guide.
+	// The status of your task. For information about what each status means, see [Task statuses].
+	//
+	// [Task statuses]: https://docs.aws.amazon.com/datasync/latest/userguide/understand-task-statuses.html#understand-task-creation-statuses
 	Status types.TaskStatus
 
-	// The Amazon Resource Name (ARN) of the task that was described.
+	// The ARN of your task.
 	TaskArn *string
 
 	// The configuration of your task report, which provides detailed information
-	// about for your DataSync transfer. For more information, see Creating a task
-	// report (https://docs.aws.amazon.com/datasync/latest/userguide/task-reports.html)
-	// .
+	// about your DataSync transfer. For more information, see [Monitoring your DataSync transfers with task reports].
+	//
+	// [Monitoring your DataSync transfers with task reports]: https://docs.aws.amazon.com/datasync/latest/userguide/task-reports.html
 	TaskReportConfig *types.TaskReportConfig
 
 	// Metadata pertaining to the operation's result.
@@ -149,25 +166,25 @@ func (c *Client) addOperationDescribeTaskMiddlewares(stack *middleware.Stack, op
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -182,13 +199,16 @@ func (c *Client) addOperationDescribeTaskMiddlewares(stack *middleware.Stack, op
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDescribeTaskValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeTask(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

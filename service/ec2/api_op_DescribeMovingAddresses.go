@@ -6,15 +6,16 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// This action is deprecated. Describes your Elastic IP addresses that are being
-// moved from or being restored to the EC2-Classic platform. This request does not
-// return information about any other Elastic IP addresses in your account.
+// This action is deprecated.
+//
+// Describes your Elastic IP addresses that are being moved from or being restored
+// to the EC2-Classic platform. This request does not return information about any
+// other Elastic IP addresses in your account.
 func (c *Client) DescribeMovingAddresses(ctx context.Context, params *DescribeMovingAddressesInput, optFns ...func(*Options)) (*DescribeMovingAddressesOutput, error) {
 	if params == nil {
 		params = &DescribeMovingAddressesInput{}
@@ -39,6 +40,7 @@ type DescribeMovingAddressesInput struct {
 	DryRun *bool
 
 	// One or more filters.
+	//
 	//   - moving-status - The status of the Elastic IP address ( MovingToVpc |
 	//   RestoringToClassic ).
 	Filters []types.Filter
@@ -47,6 +49,7 @@ type DescribeMovingAddressesInput struct {
 	// remaining results of the initial request can be seen by sending another request
 	// with the returned NextToken value. This value can be between 5 and 1000; if
 	// MaxResults is given a value outside of this range, an error is returned.
+	//
 	// Default: If no value is provided, the default is 1000.
 	MaxResults *int32
 
@@ -96,25 +99,25 @@ func (c *Client) addOperationDescribeMovingAddressesMiddlewares(stack *middlewar
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -129,10 +132,13 @@ func (c *Client) addOperationDescribeMovingAddressesMiddlewares(stack *middlewar
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeMovingAddresses(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -165,6 +171,7 @@ type DescribeMovingAddressesPaginatorOptions struct {
 	// remaining results of the initial request can be seen by sending another request
 	// with the returned NextToken value. This value can be between 5 and 1000; if
 	// MaxResults is given a value outside of this range, an error is returned.
+	//
 	// Default: If no value is provided, the default is 1000.
 	Limit int32
 

@@ -46,10 +46,12 @@ type App struct {
 	// This member is required.
 	EnableBranchAutoBuild *bool
 
-	// The environment variables for the Amplify app. For a list of the environment
-	// variables that are accessible to Amplify by default, see Amplify Environment
-	// variables (https://docs.aws.amazon.com/amplify/latest/userguide/amplify-console-environment-variables.html)
-	// in the Amplify Hosting User Guide.
+	// The environment variables for the Amplify app.
+	//
+	// For a list of the environment variables that are accessible to Amplify by
+	// default, see [Amplify Environment variables]in the Amplify Hosting User Guide.
+	//
+	// [Amplify Environment variables]: https://docs.aws.amazon.com/amplify/latest/userguide/amplify-console-environment-variables.html
 	//
 	// This member is required.
 	EnvironmentVariables map[string]string
@@ -112,10 +114,12 @@ type App struct {
 	// Describes the information about a production branch of the Amplify app.
 	ProductionBranch *ProductionBranch
 
-	// This is for internal use. The Amplify service uses this parameter to specify
-	// the authentication protocol to use to access the Git repository for an Amplify
-	// app. Amplify specifies TOKEN for a GitHub repository, SIGV4 for an Amazon Web
-	// Services CodeCommit repository, and SSH for GitLab and Bitbucket repositories.
+	// This is for internal use.
+	//
+	// The Amplify service uses this parameter to specify the authentication protocol
+	// to use to access the Git repository for an Amplify app. Amplify specifies TOKEN
+	// for a GitHub repository, SIGV4 for an Amazon Web Services CodeCommit
+	// repository, and SSH for GitLab and Bitbucket repositories.
 	RepositoryCloneMethod RepositoryCloneMethod
 
 	// The tag for the Amplify app.
@@ -157,10 +161,11 @@ type AutoBranchCreationConfig struct {
 	// Enables basic authorization for the autocreated branch.
 	EnableBasicAuth *bool
 
-	// Enables performance mode for the branch. Performance mode optimizes for faster
-	// hosting performance by keeping content cached at the edge for a longer interval.
-	// When performance mode is enabled, hosting configuration or code changes can take
-	// up to 10 minutes to roll out.
+	// Enables performance mode for the branch.
+	//
+	// Performance mode optimizes for faster hosting performance by keeping content
+	// cached at the edge for a longer interval. When performance mode is enabled,
+	// hosting configuration or code changes can take up to 10 minutes to roll out.
 	EnablePerformanceMode *bool
 
 	// Enables pull request previews for the autocreated branch.
@@ -181,7 +186,11 @@ type AutoBranchCreationConfig struct {
 	noSmithyDocumentSerde
 }
 
-// Describes the backend properties associated with an Amplify Branch .
+// Describes the backend associated with an Amplify Branch .
+//
+// This property is available to Amplify Gen 2 apps only. When you deploy an
+// application with Amplify Gen 2, you provision the app's backend infrastructure
+// using Typescript code.
 type Backend struct {
 
 	// The Amazon Resource Name (ARN) for the CloudFormation stack.
@@ -190,7 +199,9 @@ type Backend struct {
 	noSmithyDocumentSerde
 }
 
-// Describes the backend environment for an Amplify app.
+// Describes the backend environment associated with a Branch of a Gen 1 Amplify
+// app. Amplify Gen 1 applications are created using Amplify Studio or the Amplify
+// command line interface (CLI).
 type BackendEnvironment struct {
 
 	// The Amazon Resource Name (ARN) for a backend environment that is part of an
@@ -228,129 +239,198 @@ type BackendEnvironment struct {
 // The branch for an Amplify app, which maps to a third-party repository branch.
 type Branch struct {
 
-	// The ID of the active job for a branch of an Amplify app.
+	//  The ID of the active job for a branch of an Amplify app.
 	//
 	// This member is required.
 	ActiveJobId *string
 
-	// The Amazon Resource Name (ARN) for a branch that is part of an Amplify app.
+	//  The Amazon Resource Name (ARN) for a branch that is part of an Amplify app.
 	//
 	// This member is required.
 	BranchArn *string
 
-	// The name for the branch that is part of an Amplify app.
+	//  The name for the branch that is part of an Amplify app.
 	//
 	// This member is required.
 	BranchName *string
 
-	// The creation date and time for a branch that is part of an Amplify app.
+	//  The creation date and time for a branch that is part of an Amplify app.
 	//
 	// This member is required.
 	CreateTime *time.Time
 
-	// The custom domains for a branch of an Amplify app.
+	//  The custom domains for a branch of an Amplify app.
 	//
 	// This member is required.
 	CustomDomains []string
 
-	// The description for the branch that is part of an Amplify app.
+	//  The description for the branch that is part of an Amplify app.
 	//
 	// This member is required.
 	Description *string
 
-	// The display name for the branch. This is used as the default domain prefix.
+	//  The display name for the branch. This is used as the default domain prefix.
 	//
 	// This member is required.
 	DisplayName *string
 
-	// Enables auto-building on push for a branch of an Amplify app.
+	//  Enables auto-building on push for a branch of an Amplify app.
 	//
 	// This member is required.
 	EnableAutoBuild *bool
 
-	// Enables basic authorization for a branch of an Amplify app.
+	//  Enables basic authorization for a branch of an Amplify app.
 	//
 	// This member is required.
 	EnableBasicAuth *bool
 
-	// Enables notifications for a branch that is part of an Amplify app.
+	//  Enables notifications for a branch that is part of an Amplify app.
 	//
 	// This member is required.
 	EnableNotification *bool
 
-	// Enables pull request previews for the branch.
+	//  Enables pull request previews for the branch.
 	//
 	// This member is required.
 	EnablePullRequestPreview *bool
 
-	// The environment variables specific to a branch of an Amplify app.
+	//  The environment variables specific to a branch of an Amplify app.
 	//
 	// This member is required.
 	EnvironmentVariables map[string]string
 
-	// The framework for a branch of an Amplify app.
+	//  The framework for a branch of an Amplify app.
 	//
 	// This member is required.
 	Framework *string
 
-	// The current stage for the branch that is part of an Amplify app.
+	//  The current stage for the branch that is part of an Amplify app.
 	//
 	// This member is required.
 	Stage Stage
 
-	// The total number of jobs that are part of an Amplify app.
+	//  The total number of jobs that are part of an Amplify app.
 	//
 	// This member is required.
 	TotalNumberOfJobs *string
 
-	// The content Time to Live (TTL) for the website in seconds.
+	//  The content Time to Live (TTL) for the website in seconds.
 	//
 	// This member is required.
 	Ttl *string
 
-	// The last updated date and time for a branch that is part of an Amplify app.
+	//  The last updated date and time for a branch that is part of an Amplify app.
 	//
 	// This member is required.
 	UpdateTime *time.Time
 
-	// A list of custom resources that are linked to this branch.
+	//  A list of custom resources that are linked to this branch.
 	AssociatedResources []string
 
-	// Describes the backend properties associated with an Amplify Branch .
+	// Describes the backend associated with an Amplify Branch .
+	//
+	// This property is available to Amplify Gen 2 apps only. When you deploy an
+	// application with Amplify Gen 2, you provision the app's backend infrastructure
+	// using Typescript code.
 	Backend *Backend
 
-	// The Amazon Resource Name (ARN) for a backend environment that is part of an
+	//  The Amazon Resource Name (ARN) for a backend environment that is part of an
 	// Amplify app.
+	//
+	// This property is available to Amplify Gen 1 apps only. When you deploy an
+	// application with Amplify Gen 2, you provision the app's backend infrastructure
+	// using Typescript code.
 	BackendEnvironmentArn *string
 
-	// The basic authorization credentials for a branch of an Amplify app. You must
+	//  The basic authorization credentials for a branch of an Amplify app. You must
 	// base64-encode the authorization credentials and provide them in the format
 	// user:password .
 	BasicAuthCredentials *string
 
-	// The build specification (build spec) content for the branch of an Amplify app.
+	//  The build specification (build spec) content for the branch of an Amplify app.
 	BuildSpec *string
 
-	// The destination branch if the branch is a pull request branch.
+	//  The destination branch if the branch is a pull request branch.
 	DestinationBranch *string
 
-	// Enables performance mode for the branch. Performance mode optimizes for faster
-	// hosting performance by keeping content cached at the edge for a longer interval.
-	// When performance mode is enabled, hosting configuration or code changes can take
-	// up to 10 minutes to roll out.
+	// Enables performance mode for the branch.
+	//
+	// Performance mode optimizes for faster hosting performance by keeping content
+	// cached at the edge for a longer interval. When performance mode is enabled,
+	// hosting configuration or code changes can take up to 10 minutes to roll out.
 	EnablePerformanceMode *bool
 
-	// The Amplify environment name for the pull request.
+	//  The Amplify environment name for the pull request.
 	PullRequestEnvironmentName *string
 
-	// The source branch if the branch is a pull request branch.
+	//  The source branch if the branch is a pull request branch.
 	SourceBranch *string
 
-	// The tag for the branch of an Amplify app.
+	//  The tag for the branch of an Amplify app.
 	Tags map[string]string
 
-	// The thumbnail URL for the branch of an Amplify app.
+	//  The thumbnail URL for the branch of an Amplify app.
 	ThumbnailUrl *string
+
+	noSmithyDocumentSerde
+}
+
+// Describes the current SSL/TLS certificate that is in use for the domain. If you
+// are using CreateDomainAssociation to create a new domain association,
+// Certificate describes the new certificate that you are creating.
+type Certificate struct {
+
+	// The type of SSL/TLS certificate that you want to use.
+	//
+	// Specify AMPLIFY_MANAGED to use the default certificate that Amplify provisions
+	// for you.
+	//
+	// Specify CUSTOM to use your own certificate that you have already added to
+	// Certificate Manager in your Amazon Web Services account. Make sure you request
+	// (or import) the certificate in the US East (N. Virginia) Region (us-east-1). For
+	// more information about using ACM, see [Importing certificates into Certificate Manager]in the ACM User guide .
+	//
+	// [Importing certificates into Certificate Manager]: https://docs.aws.amazon.com/acm/latest/userguide/import-certificate.html
+	//
+	// This member is required.
+	Type CertificateType
+
+	// The DNS record for certificate verification.
+	CertificateVerificationDNSRecord *string
+
+	// The Amazon resource name (ARN) for a custom certificate that you have already
+	// added to Certificate Manager in your Amazon Web Services account.
+	//
+	// This field is required only when the certificate type is CUSTOM .
+	CustomCertificateArn *string
+
+	noSmithyDocumentSerde
+}
+
+// The type of SSL/TLS certificate to use for your custom domain. If a certificate
+// type isn't specified, Amplify uses the default AMPLIFY_MANAGED certificate.
+type CertificateSettings struct {
+
+	// The certificate type.
+	//
+	// Specify AMPLIFY_MANAGED to use the default certificate that Amplify provisions
+	// for you.
+	//
+	// Specify CUSTOM to use your own certificate that you have already added to
+	// Certificate Manager in your Amazon Web Services account. Make sure you request
+	// (or import) the certificate in the US East (N. Virginia) Region (us-east-1). For
+	// more information about using ACM, see [Importing certificates into Certificate Manager]in the ACM User guide.
+	//
+	// [Importing certificates into Certificate Manager]: https://docs.aws.amazon.com/acm/latest/userguide/import-certificate.html
+	//
+	// This member is required.
+	Type CertificateType
+
+	// The Amazon resource name (ARN) for the custom certificate that you have already
+	// added to Certificate Manager in your Amazon Web Services account.
+	//
+	// This field is required only when the certificate type is CUSTOM .
+	CustomCertificateArn *string
 
 	noSmithyDocumentSerde
 }
@@ -371,59 +451,105 @@ type CustomRule struct {
 	// The condition for a URL rewrite or redirect rule, such as a country code.
 	Condition *string
 
-	// The status code for a URL rewrite or redirect rule. 200 Represents a 200
-	// rewrite rule. 301 Represents a 301 (moved pemanently) redirect rule. This and
-	// all future requests should be directed to the target URL. 302 Represents a 302
-	// temporary redirect rule. 404 Represents a 404 redirect rule. 404-200 Represents
-	// a 404 rewrite rule.
+	// The status code for a URL rewrite or redirect rule.
+	//
+	// 200 Represents a 200 rewrite rule.
+	//
+	// 301 Represents a 301 (moved permanently) redirect rule. This and all future
+	// requests should be directed to the target URL.
+	//
+	// 302 Represents a 302 temporary redirect rule.
+	//
+	// 404 Represents a 404 redirect rule.
+	//
+	// 404-200 Represents a 404 rewrite rule.
 	Status *string
 
 	noSmithyDocumentSerde
 }
 
-// Describes a domain association that associates a custom domain with an Amplify
-// app.
+// Describes the association between a custom domain and an Amplify app.
 type DomainAssociation struct {
 
-	// The Amazon Resource Name (ARN) for the domain association.
+	//  The Amazon Resource Name (ARN) for the domain association.
 	//
 	// This member is required.
 	DomainAssociationArn *string
 
-	// The name of the domain.
+	//  The name of the domain.
 	//
 	// This member is required.
 	DomainName *string
 
-	// The current status of the domain association.
+	//  The current status of the domain association.
 	//
 	// This member is required.
 	DomainStatus DomainStatus
 
-	// Enables the automated creation of subdomains for branches.
+	//  Enables the automated creation of subdomains for branches.
 	//
 	// This member is required.
 	EnableAutoSubDomain *bool
 
-	// The reason for the current status of the domain association.
+	//  Additional information that describes why the domain association is in the
+	// current state.
 	//
 	// This member is required.
 	StatusReason *string
 
-	// The subdomains for the domain association.
+	//  The subdomains for the domain association.
 	//
 	// This member is required.
 	SubDomains []SubDomain
 
-	// Sets branch patterns for automatic subdomain creation.
+	//  Sets branch patterns for automatic subdomain creation.
 	AutoSubDomainCreationPatterns []string
 
-	// The required AWS Identity and Access Management (IAM) service role for the
+	//  The required AWS Identity and Access Management (IAM) service role for the
 	// Amazon Resource Name (ARN) for automatically creating subdomains.
 	AutoSubDomainIAMRole *string
 
-	// The DNS record for certificate verification.
+	// Describes the SSL/TLS certificate for the domain association. This can be your
+	// own custom certificate or the default certificate that Amplify provisions for
+	// you.
+	//
+	// If you are updating your domain to use a different certificate, certificate
+	// points to the new certificate that is being created instead of the current
+	// active certificate. Otherwise, certificate points to the current active
+	// certificate.
+	Certificate *Certificate
+
+	//  The DNS record for certificate verification.
 	CertificateVerificationDNSRecord *string
+
+	// The status of the domain update operation that is currently in progress. The
+	// following list describes the valid update states.
+	//
+	// REQUESTING_CERTIFICATE The certificate is in the process of being updated.
+	//
+	// PENDING_VERIFICATION Indicates that an Amplify managed certificate is in the
+	// process of being verified. This occurs during the creation of a custom domain or
+	// when a custom domain is updated to use a managed certificate.
+	//
+	// IMPORTING_CUSTOM_CERTIFICATE Indicates that an Amplify custom certificate is in
+	// the process of being imported. This occurs during the creation of a custom
+	// domain or when a custom domain is updated to use a custom certificate.
+	//
+	// PENDING_DEPLOYMENT Indicates that the subdomain or certificate changes are
+	// being propagated.
+	//
+	// AWAITING_APP_CNAME Amplify is waiting for CNAME records corresponding to
+	// subdomains to be propagated. If your custom domain is on Route 53, Amplify
+	// handles this for you automatically. For more information about custom domains,
+	// see [Setting up custom domains]in the Amplify Hosting User Guide.
+	//
+	// UPDATE_COMPLETE The certificate has been associated with a domain.
+	//
+	// UPDATE_FAILED The certificate has failed to be provisioned or associated, and
+	// there is no existing active certificate to roll back to.
+	//
+	// [Setting up custom domains]: https://docs.aws.amazon.com/amplify/latest/userguide/custom-domains.html
+	UpdateStatus UpdateStatus
 
 	noSmithyDocumentSerde
 }
@@ -431,12 +557,12 @@ type DomainAssociation struct {
 // Describes an execution job for an Amplify app.
 type Job struct {
 
-	// The execution steps for an execution job, for an Amplify app.
+	//  The execution steps for an execution job, for an Amplify app.
 	//
 	// This member is required.
 	Steps []Step
 
-	// Describes the summary for an execution job for an Amplify app.
+	//  Describes the summary for an execution job for an Amplify app.
 	//
 	// This member is required.
 	Summary *JobSummary
@@ -447,32 +573,32 @@ type Job struct {
 // Describes the summary for an execution job for an Amplify app.
 type JobSummary struct {
 
-	// The commit ID from a third-party repository provider for the job.
+	//  The commit ID from a third-party repository provider for the job.
 	//
 	// This member is required.
 	CommitId *string
 
-	// The commit message from a third-party repository provider for the job.
+	//  The commit message from a third-party repository provider for the job.
 	//
 	// This member is required.
 	CommitMessage *string
 
-	// The commit date and time for the job.
+	//  The commit date and time for the job.
 	//
 	// This member is required.
 	CommitTime *time.Time
 
-	// The Amazon Resource Name (ARN) for the job.
+	//  The Amazon Resource Name (ARN) for the job.
 	//
 	// This member is required.
 	JobArn *string
 
-	// The unique ID for the job.
+	//  The unique ID for the job.
 	//
 	// This member is required.
 	JobId *string
 
-	// The type for the job. If the value is RELEASE , the job was manually released
+	//  The type for the job. If the value is RELEASE , the job was manually released
 	// from its source by using the StartJob API. If the value is RETRY , the job was
 	// manually retried using the StartJob API. If the value is WEB_HOOK , the job was
 	// automatically triggered by webhooks.
@@ -480,17 +606,17 @@ type JobSummary struct {
 	// This member is required.
 	JobType JobType
 
-	// The start date and time for the job.
+	//  The start date and time for the job.
 	//
 	// This member is required.
 	StartTime *time.Time
 
-	// The current status for the job.
+	//  The current status for the job.
 	//
 	// This member is required.
 	Status JobStatus
 
-	// The end date and time for the job.
+	//  The end date and time for the job.
 	EndTime *time.Time
 
 	noSmithyDocumentSerde
@@ -517,45 +643,45 @@ type ProductionBranch struct {
 // Describes an execution step, for an execution job, for an Amplify app.
 type Step struct {
 
-	// The end date and time of the execution step.
+	//  The end date and time of the execution step.
 	//
 	// This member is required.
 	EndTime *time.Time
 
-	// The start date and time of the execution step.
+	//  The start date and time of the execution step.
 	//
 	// This member is required.
 	StartTime *time.Time
 
-	// The status of the execution step.
+	//  The status of the execution step.
 	//
 	// This member is required.
 	Status JobStatus
 
-	// The name of the execution step.
+	//  The name of the execution step.
 	//
 	// This member is required.
 	StepName *string
 
-	// The URL to the artifact for the execution step.
+	//  The URL to the artifact for the execution step.
 	ArtifactsUrl *string
 
-	// The context for the current step. Includes a build image if the step is build.
+	//  The context for the current step. Includes a build image if the step is build.
 	Context *string
 
-	// The URL to the logs for the execution step.
+	//  The URL to the logs for the execution step.
 	LogUrl *string
 
-	// The list of screenshot URLs for the execution step, if relevant.
+	//  The list of screenshot URLs for the execution step, if relevant.
 	Screenshots map[string]string
 
-	// The reason for the current step status.
+	//  The reason for the current step status.
 	StatusReason *string
 
-	// The URL to the test artifact for the execution step.
+	//  The URL to the test artifact for the execution step.
 	TestArtifactsUrl *string
 
-	// The URL to the test configuration for the execution step.
+	//  The URL to the test configuration for the execution step.
 	TestConfigUrl *string
 
 	noSmithyDocumentSerde
@@ -564,17 +690,17 @@ type Step struct {
 // The subdomain for the domain association.
 type SubDomain struct {
 
-	// The DNS record for the subdomain.
+	//  The DNS record for the subdomain.
 	//
 	// This member is required.
 	DnsRecord *string
 
-	// Describes the settings for the subdomain.
+	//  Describes the settings for the subdomain.
 	//
 	// This member is required.
 	SubDomainSetting *SubDomainSetting
 
-	// The verified status of the subdomain
+	//  The verified status of the subdomain
 	//
 	// This member is required.
 	Verified *bool
@@ -585,12 +711,12 @@ type SubDomain struct {
 // Describes the settings for the subdomain.
 type SubDomainSetting struct {
 
-	// The branch name setting for the subdomain.
+	//  The branch name setting for the subdomain.
 	//
 	// This member is required.
 	BranchName *string
 
-	// The prefix setting for the subdomain.
+	//  The prefix setting for the subdomain.
 	//
 	// This member is required.
 	Prefix *string

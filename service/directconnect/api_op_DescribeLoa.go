@@ -6,18 +6,20 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/directconnect/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Gets the LOA-CFA for a connection, interconnect, or link aggregation group
-// (LAG). The Letter of Authorization - Connecting Facility Assignment (LOA-CFA) is
-// a document that is used when establishing your cross connect to Amazon Web
-// Services at the colocation facility. For more information, see Requesting Cross
-// Connects at Direct Connect Locations (https://docs.aws.amazon.com/directconnect/latest/UserGuide/Colocation.html)
-// in the Direct Connect User Guide.
+// (LAG).
+//
+// The Letter of Authorization - Connecting Facility Assignment (LOA-CFA) is a
+// document that is used when establishing your cross connect to Amazon Web
+// Services at the colocation facility. For more information, see [Requesting Cross Connects at Direct Connect Locations]in the Direct
+// Connect User Guide.
+//
+// [Requesting Cross Connects at Direct Connect Locations]: https://docs.aws.amazon.com/directconnect/latest/UserGuide/Colocation.html
 func (c *Client) DescribeLoa(ctx context.Context, params *DescribeLoaInput, optFns ...func(*Options)) (*DescribeLoaOutput, error) {
 	if params == nil {
 		params = &DescribeLoaInput{}
@@ -91,25 +93,25 @@ func (c *Client) addOperationDescribeLoaMiddlewares(stack *middleware.Stack, opt
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -124,13 +126,16 @@ func (c *Client) addOperationDescribeLoaMiddlewares(stack *middleware.Stack, opt
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDescribeLoaValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeLoa(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

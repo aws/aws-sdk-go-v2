@@ -25,6 +25,14 @@ import (
 	"time"
 )
 
+func deserializeS3Expires(v string) (*time.Time, error) {
+	t, err := smithytime.ParseHTTPDate(v)
+	if err != nil {
+		return nil, nil
+	}
+	return &t, nil
+}
+
 type awsRestxml_deserializeOpAllQueryStringTypes struct {
 }
 
@@ -5078,7 +5086,7 @@ func (m *awsRestxml_deserializeOpXmlAttributesOnPayload) HandleDeserialize(ctx c
 	}
 
 	decoder := smithyxml.WrapNodeDecoder(rootDecoder, t)
-	err = awsRestxml_deserializeDocumentXmlAttributesInputOutput(&output.Payload, decoder)
+	err = awsRestxml_deserializeDocumentXmlAttributesPayloadResponse(&output.Payload, decoder)
 	if err != nil {
 		var snapshot bytes.Buffer
 		io.Copy(&snapshot, ringBuffer)
@@ -5150,7 +5158,7 @@ func awsRestxml_deserializeOpDocumentXmlAttributesOnPayloadOutput(v **XmlAttribu
 		switch {
 		case strings.EqualFold("payload", t.Name.Local):
 			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
-			if err := awsRestxml_deserializeDocumentXmlAttributesInputOutput(&sv.Payload, nodeDecoder); err != nil {
+			if err := awsRestxml_deserializeDocumentXmlAttributesPayloadResponse(&sv.Payload, nodeDecoder); err != nil {
 				return err
 			}
 
@@ -8766,13 +8774,13 @@ func awsRestxml_deserializeDocumentUnionPayload(v *types.UnionPayload, decoder s
 	return nil
 }
 
-func awsRestxml_deserializeDocumentXmlAttributesInputOutput(v **types.XmlAttributesInputOutput, decoder smithyxml.NodeDecoder) error {
+func awsRestxml_deserializeDocumentXmlAttributesPayloadResponse(v **types.XmlAttributesPayloadResponse, decoder smithyxml.NodeDecoder) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
-	var sv *types.XmlAttributesInputOutput
+	var sv *types.XmlAttributesPayloadResponse
 	if *v == nil {
-		sv = &types.XmlAttributesInputOutput{}
+		sv = &types.XmlAttributesPayloadResponse{}
 	} else {
 		sv = *v
 	}

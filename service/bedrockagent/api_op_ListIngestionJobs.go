@@ -6,13 +6,12 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockagent/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// List ingestion jobs
+// Lists the ingestion jobs for a data source and information about each of them.
 func (c *Client) ListIngestionJobs(ctx context.Context, params *ListIngestionJobsInput, optFns ...func(*Options)) (*ListIngestionJobsOutput, error) {
 	if params == nil {
 		params = &ListIngestionJobsInput{}
@@ -30,26 +29,31 @@ func (c *Client) ListIngestionJobs(ctx context.Context, params *ListIngestionJob
 
 type ListIngestionJobsInput struct {
 
-	// Identifier for a resource.
+	// The unique identifier of the data source for which to return ingestion jobs.
 	//
 	// This member is required.
 	DataSourceId *string
 
-	// Identifier for a resource.
+	// The unique identifier of the knowledge base for which to return ingestion jobs.
 	//
 	// This member is required.
 	KnowledgeBaseId *string
 
-	// List of IngestionJobFilters
+	// Contains a definition of a filter for which to filter the results.
 	Filters []types.IngestionJobFilter
 
-	// Max Results.
+	// The maximum number of results to return in the response. If the total number of
+	// results is greater than this value, use the token returned in the response in
+	// the nextToken field when making another request to return the next batch of
+	// results.
 	MaxResults *int32
 
-	// Opaque continuation token of previous paginated response.
+	// If the total number of results is greater than the maxResults value provided in
+	// the request, enter the token returned in the nextToken field in the response in
+	// this field to return the next batch of results.
 	NextToken *string
 
-	// Sorts the response returned by ListIngestionJobs operation.
+	// Contains details about how to sort the results.
 	SortBy *types.IngestionJobSortBy
 
 	noSmithyDocumentSerde
@@ -57,12 +61,14 @@ type ListIngestionJobsInput struct {
 
 type ListIngestionJobsOutput struct {
 
-	// List of IngestionJobSummaries
+	// A list of objects, each of which contains information about an ingestion job.
 	//
 	// This member is required.
 	IngestionJobSummaries []types.IngestionJobSummary
 
-	// Opaque continuation token of previous paginated response.
+	// If the total number of results is greater than the maxResults value provided in
+	// the request, use this token when making another request in the nextToken field
+	// to return the next batch of results.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -93,25 +99,25 @@ func (c *Client) addOperationListIngestionJobsMiddlewares(stack *middleware.Stac
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -126,13 +132,16 @@ func (c *Client) addOperationListIngestionJobsMiddlewares(stack *middleware.Stac
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpListIngestionJobsValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListIngestionJobs(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -160,7 +169,10 @@ var _ ListIngestionJobsAPIClient = (*Client)(nil)
 
 // ListIngestionJobsPaginatorOptions is the paginator options for ListIngestionJobs
 type ListIngestionJobsPaginatorOptions struct {
-	// Max Results.
+	// The maximum number of results to return in the response. If the total number of
+	// results is greater than this value, use the token returned in the response in
+	// the nextToken field when making another request to return the next batch of
+	// results.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

@@ -49,12 +49,36 @@ func (m *validateOpGetBillOfMaterialsImportJob) HandleInitialize(ctx context.Con
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpSendDataIntegrationEvent struct {
+}
+
+func (*validateOpSendDataIntegrationEvent) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpSendDataIntegrationEvent) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*SendDataIntegrationEventInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpSendDataIntegrationEventInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 func addOpCreateBillOfMaterialsImportJobValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateBillOfMaterialsImportJob{}, middleware.After)
 }
 
 func addOpGetBillOfMaterialsImportJobValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetBillOfMaterialsImportJob{}, middleware.After)
+}
+
+func addOpSendDataIntegrationEventValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpSendDataIntegrationEvent{}, middleware.After)
 }
 
 func validateOpCreateBillOfMaterialsImportJobInput(v *CreateBillOfMaterialsImportJobInput) error {
@@ -85,6 +109,30 @@ func validateOpGetBillOfMaterialsImportJobInput(v *GetBillOfMaterialsImportJobIn
 	}
 	if v.JobId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("JobId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpSendDataIntegrationEventInput(v *SendDataIntegrationEventInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SendDataIntegrationEventInput"}
+	if v.InstanceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
+	}
+	if len(v.EventType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("EventType"))
+	}
+	if v.Data == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Data"))
+	}
+	if v.EventGroupId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EventGroupId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

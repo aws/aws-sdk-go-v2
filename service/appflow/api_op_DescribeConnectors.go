@@ -6,13 +6,13 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/appflow/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Describes the connectors vended by Amazon AppFlow for specified connector
+//	Describes the connectors vended by Amazon AppFlow for specified connector
+//
 // types. If you don't specify a connector type, this operation describes all
 // connectors vended by Amazon AppFlow. If there are more connectors than can be
 // returned in one page, the response contains a nextToken object, which can be be
@@ -35,14 +35,14 @@ func (c *Client) DescribeConnectors(ctx context.Context, params *DescribeConnect
 
 type DescribeConnectorsInput struct {
 
-	// The type of connector, such as Salesforce, Amplitude, and so on.
+	//  The type of connector, such as Salesforce, Amplitude, and so on.
 	ConnectorTypes []types.ConnectorType
 
 	// The maximum number of items that should be returned in the result set. The
 	// default is 20.
 	MaxResults *int32
 
-	// The pagination token for the next page of data.
+	//  The pagination token for the next page of data.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -50,13 +50,13 @@ type DescribeConnectorsInput struct {
 
 type DescribeConnectorsOutput struct {
 
-	// The configuration that is applied to the connectors used in the flow.
+	//  The configuration that is applied to the connectors used in the flow.
 	ConnectorConfigurations map[string]types.ConnectorConfiguration
 
 	// Information about the connectors supported in Amazon AppFlow.
 	Connectors []types.ConnectorDetail
 
-	// The pagination token for the next page of data.
+	//  The pagination token for the next page of data.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -87,25 +87,25 @@ func (c *Client) addOperationDescribeConnectorsMiddlewares(stack *middleware.Sta
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -120,10 +120,13 @@ func (c *Client) addOperationDescribeConnectorsMiddlewares(stack *middleware.Sta
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeConnectors(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

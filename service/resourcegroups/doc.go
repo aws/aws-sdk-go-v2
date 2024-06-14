@@ -15,17 +15,28 @@
 // resources in Amazon Web Services Systems Manager. Groups of tagged resources
 // also let you quickly view a custom console in Amazon Web Services Systems
 // Manager that shows Config compliance and other monitoring data about member
-// resources. To create a resource group, build a resource query, and specify tags
-// that identify the criteria that members of the group have in common. Tags are
-// key-value pairs. For more information about Resource Groups, see the Resource
-// Groups User Guide (https://docs.aws.amazon.com/ARG/latest/userguide/welcome.html)
-// . Resource Groups uses a REST-compliant API that you can use to perform the
+// resources.
+//
+// To create a resource group, build a resource query, and specify tags that
+// identify the criteria that members of the group have in common. Tags are
+// key-value pairs.
+//
+// For more information about Resource Groups, see the [Resource Groups User Guide].
+//
+// Resource Groups uses a REST-compliant API that you can use to perform the
 // following types of operations.
+//
 //   - Create, Read, Update, and Delete (CRUD) operations on resource groups and
 //     resource query entities
+//
 //   - Applying, editing, and removing tags from resource groups
+//
 //   - Resolving resource group member ARNs so they can be returned as search
 //     results
+//
 //   - Getting data about resources that are members of a group
+//
 //   - Searching Amazon Web Services resources based on a resource query
+//
+// [Resource Groups User Guide]: https://docs.aws.amazon.com/ARG/latest/userguide/welcome.html
 package resourcegroups

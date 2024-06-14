@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -14,11 +13,8 @@ import (
 
 // Describes the stale security group rules for security groups in a specified
 // VPC. Rules are stale when they reference a deleted security group in the same
-// VPC, peered VPC, or in separate VPCs attached to a transit gateway (with
-// security group referencing support (https://docs.aws.amazon.com/vpc/latest/tgw/tgw-transit-gateways.html#create-tgw)
-// enabled). Rules can also be stale if they reference a security group in a peer
-// VPC for which the VPC peering connection has been deleted or if they reference a
-// security group in a VPC that has been detached from a transit gateway.
+// VPC or peered VPC. Rules can also be stale if they reference a security group in
+// a peer VPC for which the VPC peering connection has been deleted.
 func (c *Client) DescribeStaleSecurityGroups(ctx context.Context, params *DescribeStaleSecurityGroupsInput, optFns ...func(*Options)) (*DescribeStaleSecurityGroupsOutput, error) {
 	if params == nil {
 		params = &DescribeStaleSecurityGroupsInput{}
@@ -49,8 +45,9 @@ type DescribeStaleSecurityGroupsInput struct {
 
 	// The maximum number of items to return for this request. To get the next page of
 	// items, make another request with the token returned in the output. For more
-	// information, see Pagination (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination)
-	// .
+	// information, see [Pagination].
+	//
+	// [Pagination]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination
 	MaxResults *int32
 
 	// The token returned from a previous paginated request. Pagination continues from
@@ -97,25 +94,25 @@ func (c *Client) addOperationDescribeStaleSecurityGroupsMiddlewares(stack *middl
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -130,13 +127,16 @@ func (c *Client) addOperationDescribeStaleSecurityGroupsMiddlewares(stack *middl
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDescribeStaleSecurityGroupsValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeStaleSecurityGroups(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -167,8 +167,9 @@ var _ DescribeStaleSecurityGroupsAPIClient = (*Client)(nil)
 type DescribeStaleSecurityGroupsPaginatorOptions struct {
 	// The maximum number of items to return for this request. To get the next page of
 	// items, make another request with the token returned in the output. For more
-	// information, see Pagination (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination)
-	// .
+	// information, see [Pagination].
+	//
+	// [Pagination]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

@@ -11,8 +11,9 @@ const (
 )
 
 // Values returns all known values for AssessmentReportType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (AssessmentReportType) Values() []AssessmentReportType {
 	return []AssessmentReportType{
 		"pdf",
@@ -30,8 +31,9 @@ const (
 )
 
 // Values returns all known values for AuthMechanismValue. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (AuthMechanismValue) Values() []AuthMechanismValue {
 	return []AuthMechanismValue{
 		"default",
@@ -49,8 +51,9 @@ const (
 )
 
 // Values returns all known values for AuthTypeValue. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (AuthTypeValue) Values() []AuthTypeValue {
 	return []AuthTypeValue{
 		"no",
@@ -74,6 +77,7 @@ const (
 
 // Values returns all known values for CannedAclForObjectsValue. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (CannedAclForObjectsValue) Values() []CannedAclForObjectsValue {
 	return []CannedAclForObjectsValue{
@@ -98,8 +102,9 @@ const (
 )
 
 // Values returns all known values for CharLengthSemantics. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (CharLengthSemantics) Values() []CharLengthSemantics {
 	return []CharLengthSemantics{
 		"default",
@@ -117,8 +122,9 @@ const (
 )
 
 // Values returns all known values for CollectorStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (CollectorStatus) Values() []CollectorStatus {
 	return []CollectorStatus{
 		"UNREGISTERED",
@@ -135,8 +141,9 @@ const (
 )
 
 // Values returns all known values for CompressionTypeValue. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (CompressionTypeValue) Values() []CompressionTypeValue {
 	return []CompressionTypeValue{
 		"none",
@@ -153,8 +160,9 @@ const (
 )
 
 // Values returns all known values for DatabaseMode. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (DatabaseMode) Values() []DatabaseMode {
 	return []DatabaseMode{
 		"default",
@@ -171,8 +179,9 @@ const (
 )
 
 // Values returns all known values for DataFormatValue. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (DataFormatValue) Values() []DataFormatValue {
 	return []DataFormatValue{
 		"csv",
@@ -192,6 +201,7 @@ const (
 
 // Values returns all known values for DatePartitionDelimiterValue. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (DatePartitionDelimiterValue) Values() []DatePartitionDelimiterValue {
 	return []DatePartitionDelimiterValue{
@@ -215,6 +225,7 @@ const (
 
 // Values returns all known values for DatePartitionSequenceValue. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (DatePartitionSequenceValue) Values() []DatePartitionSequenceValue {
 	return []DatePartitionSequenceValue{
@@ -237,8 +248,9 @@ const (
 )
 
 // Values returns all known values for DmsSslModeValue. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (DmsSslModeValue) Values() []DmsSslModeValue {
 	return []DmsSslModeValue{
 		"none",
@@ -258,8 +270,9 @@ const (
 )
 
 // Values returns all known values for EncodingTypeValue. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (EncodingTypeValue) Values() []EncodingTypeValue {
 	return []EncodingTypeValue{
 		"plain",
@@ -277,8 +290,9 @@ const (
 )
 
 // Values returns all known values for EncryptionModeValue. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (EncryptionModeValue) Values() []EncryptionModeValue {
 	return []EncryptionModeValue{
 		"sse-s3",
@@ -298,6 +312,7 @@ const (
 
 // Values returns all known values for EndpointSettingTypeValue. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (EndpointSettingTypeValue) Values() []EndpointSettingTypeValue {
 	return []EndpointSettingTypeValue{
@@ -317,8 +332,9 @@ const (
 )
 
 // Values returns all known values for KafkaSaslMechanism. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (KafkaSaslMechanism) Values() []KafkaSaslMechanism {
 	return []KafkaSaslMechanism{
 		"scram-sha-512",
@@ -337,8 +353,9 @@ const (
 )
 
 // Values returns all known values for KafkaSecurityProtocol. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (KafkaSecurityProtocol) Values() []KafkaSecurityProtocol {
 	return []KafkaSecurityProtocol{
 		"plaintext",
@@ -358,8 +375,9 @@ const (
 
 // Values returns all known values for KafkaSslEndpointIdentificationAlgorithm.
 // Note that this can be expanded in the future, and so it is only as up to date as
-// the client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (KafkaSslEndpointIdentificationAlgorithm) Values() []KafkaSslEndpointIdentificationAlgorithm {
 	return []KafkaSslEndpointIdentificationAlgorithm{
 		"none",
@@ -377,8 +395,9 @@ const (
 )
 
 // Values returns all known values for LongVarcharMappingType. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (LongVarcharMappingType) Values() []LongVarcharMappingType {
 	return []LongVarcharMappingType{
 		"wstring",
@@ -396,8 +415,9 @@ const (
 )
 
 // Values returns all known values for MessageFormatValue. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (MessageFormatValue) Values() []MessageFormatValue {
 	return []MessageFormatValue{
 		"json",
@@ -415,8 +435,9 @@ const (
 )
 
 // Values returns all known values for MigrationTypeValue. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (MigrationTypeValue) Values() []MigrationTypeValue {
 	return []MigrationTypeValue{
 		"full-load",
@@ -434,8 +455,9 @@ const (
 )
 
 // Values returns all known values for NestingLevelValue. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (NestingLevelValue) Values() []NestingLevelValue {
 	return []NestingLevelValue{
 		"none",
@@ -452,8 +474,9 @@ const (
 )
 
 // Values returns all known values for OriginTypeValue. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (OriginTypeValue) Values() []OriginTypeValue {
 	return []OriginTypeValue{
 		"SOURCE",
@@ -470,8 +493,9 @@ const (
 )
 
 // Values returns all known values for ParquetVersionValue. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ParquetVersionValue) Values() []ParquetVersionValue {
 	return []ParquetVersionValue{
 		"parquet-1-0",
@@ -489,8 +513,9 @@ const (
 )
 
 // Values returns all known values for PluginNameValue. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (PluginNameValue) Values() []PluginNameValue {
 	return []PluginNameValue{
 		"no-preference",
@@ -509,8 +534,9 @@ const (
 )
 
 // Values returns all known values for RedisAuthTypeValue. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (RedisAuthTypeValue) Values() []RedisAuthTypeValue {
 	return []RedisAuthTypeValue{
 		"none",
@@ -530,8 +556,9 @@ const (
 
 // Values returns all known values for RefreshSchemasStatusTypeValue. Note that
 // this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (RefreshSchemasStatusTypeValue) Values() []RefreshSchemasStatusTypeValue {
 	return []RefreshSchemasStatusTypeValue{
 		"successful",
@@ -549,8 +576,9 @@ const (
 )
 
 // Values returns all known values for ReleaseStatusValues. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ReleaseStatusValues) Values() []ReleaseStatusValues {
 	return []ReleaseStatusValues{
 		"beta",
@@ -567,8 +595,9 @@ const (
 )
 
 // Values returns all known values for ReloadOptionValue. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ReloadOptionValue) Values() []ReloadOptionValue {
 	return []ReloadOptionValue{
 		"data-reload",
@@ -586,8 +615,9 @@ const (
 
 // Values returns all known values for ReplicationEndpointTypeValue. Note that
 // this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ReplicationEndpointTypeValue) Values() []ReplicationEndpointTypeValue {
 	return []ReplicationEndpointTypeValue{
 		"source",
@@ -605,8 +635,9 @@ const (
 )
 
 // Values returns all known values for SafeguardPolicy. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (SafeguardPolicy) Values() []SafeguardPolicy {
 	return []SafeguardPolicy{
 		"rely-on-sql-server-replication-agent",
@@ -623,8 +654,9 @@ const (
 )
 
 // Values returns all known values for SourceType. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (SourceType) Values() []SourceType {
 	return []SourceType{
 		"replication-instance",
@@ -641,6 +673,7 @@ const (
 
 // Values returns all known values for SslSecurityProtocolValue. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (SslSecurityProtocolValue) Values() []SslSecurityProtocolValue {
 	return []SslSecurityProtocolValue{
@@ -660,8 +693,9 @@ const (
 
 // Values returns all known values for StartReplicationTaskTypeValue. Note that
 // this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (StartReplicationTaskTypeValue) Values() []StartReplicationTaskTypeValue {
 	return []StartReplicationTaskTypeValue{
 		"start-replication",
@@ -679,8 +713,9 @@ const (
 )
 
 // Values returns all known values for TargetDbType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (TargetDbType) Values() []TargetDbType {
 	return []TargetDbType{
 		"specific-database",
@@ -699,8 +734,9 @@ const (
 )
 
 // Values returns all known values for TlogAccessMode. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (TlogAccessMode) Values() []TlogAccessMode {
 	return []TlogAccessMode{
 		"BackupOnly",
@@ -720,8 +756,9 @@ const (
 )
 
 // Values returns all known values for VersionStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (VersionStatus) Values() []VersionStatus {
 	return []VersionStatus{
 		"UP_TO_DATE",

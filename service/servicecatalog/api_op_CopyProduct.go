@@ -6,18 +6,20 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/servicecatalog/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Copies the specified source product to the specified target product or a new
-// product. You can copy a product to the same account or another account. You can
-// copy a product to the same Region or another Region. If you copy a product to
-// another account, you must first share the product in a portfolio using
-// CreatePortfolioShare . This operation is performed asynchronously. To track the
-// progress of the operation, use DescribeCopyProductStatus .
+// product.
+//
+// You can copy a product to the same account or another account. You can copy a
+// product to the same Region or another Region. If you copy a product to another
+// account, you must first share the product in a portfolio using CreatePortfolioShare.
+//
+// This operation is performed asynchronously. To track the progress of the
+// operation, use DescribeCopyProductStatus.
 func (c *Client) CopyProduct(ctx context.Context, params *CopyProductInput, optFns ...func(*Options)) (*CopyProductOutput, error) {
 	if params == nil {
 		params = &CopyProductInput{}
@@ -35,7 +37,7 @@ func (c *Client) CopyProduct(ctx context.Context, params *CopyProductInput, optF
 
 type CopyProductInput struct {
 
-	// A unique identifier that you provide to ensure idempotency. If multiple
+	//  A unique identifier that you provide to ensure idempotency. If multiple
 	// requests differ only by the idempotency token, the same response is returned for
 	// each repeated request.
 	//
@@ -48,7 +50,9 @@ type CopyProductInput struct {
 	SourceProductArn *string
 
 	// The language code.
+	//
 	//   - jp - Japanese
+	//
 	//   - zh - Chinese
 	AcceptLanguage *string
 
@@ -102,25 +106,25 @@ func (c *Client) addOperationCopyProductMiddlewares(stack *middleware.Stack, opt
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -135,6 +139,9 @@ func (c *Client) addOperationCopyProductMiddlewares(stack *middleware.Stack, opt
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opCopyProductMiddleware(stack, options); err != nil {
 		return err
 	}
@@ -144,7 +151,7 @@ func (c *Client) addOperationCopyProductMiddlewares(stack *middleware.Stack, opt
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCopyProduct(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

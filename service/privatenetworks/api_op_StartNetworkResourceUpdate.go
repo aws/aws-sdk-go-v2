@@ -6,24 +6,27 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/privatenetworks/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Use this action to do the following tasks:
+//
 //   - Update the duration and renewal status of the commitment period for a radio
 //     unit. The update goes into effect immediately.
+//
 //   - Request a replacement for a network resource.
+//
 //   - Request that you return a network resource.
 //
 // After you submit a request to replace or return a network resource, the status
 // of the network resource changes to CREATING_SHIPPING_LABEL . The shipping label
 // is available when the status of the network resource is PENDING_RETURN . After
 // the network resource is successfully returned, its status changes to DELETED .
-// For more information, see Return a radio unit (https://docs.aws.amazon.com/private-networks/latest/userguide/radio-units.html#return-radio-unit)
-// .
+// For more information, see [Return a radio unit].
+//
+// [Return a radio unit]: https://docs.aws.amazon.com/private-networks/latest/userguide/radio-units.html#return-radio-unit
 func (c *Client) StartNetworkResourceUpdate(ctx context.Context, params *StartNetworkResourceUpdateInput, optFns ...func(*Options)) (*StartNetworkResourceUpdateOutput, error) {
 	if params == nil {
 		params = &StartNetworkResourceUpdateInput{}
@@ -47,36 +50,46 @@ type StartNetworkResourceUpdateInput struct {
 	NetworkResourceArn *string
 
 	// The update type.
+	//
 	//   - REPLACE - Submits a request to replace a defective radio unit. We provide a
 	//   shipping label that you can use for the return process and we ship a replacement
 	//   radio unit to you.
+	//
 	//   - RETURN - Submits a request to return a radio unit that you no longer need.
 	//   We provide a shipping label that you can use for the return process.
+	//
 	//   - COMMITMENT - Submits a request to change or renew the commitment period. If
-	//   you choose this value, then you must set commitmentConfiguration (https://docs.aws.amazon.com/private-networks/latest/APIReference/API_StartNetworkResourceUpdate.html#privatenetworks-StartNetworkResourceUpdate-request-commitmentConfiguration)
-	//   .
+	//   you choose this value, then you must set [commitmentConfiguration]commitmentConfiguration .
+	//
+	// [commitmentConfiguration]: https://docs.aws.amazon.com/private-networks/latest/APIReference/API_StartNetworkResourceUpdate.html#privatenetworks-StartNetworkResourceUpdate-request-commitmentConfiguration
 	//
 	// This member is required.
 	UpdateType types.UpdateType
 
 	// Use this action to extend and automatically renew the commitment period for the
 	// radio unit. You can do the following:
+	//
 	//   - Change a 60-day commitment to a 1-year or 3-year commitment. The change is
 	//   immediate and the hourly rate decreases to the rate for the new commitment
 	//   period.
+	//
 	//   - Change a 1-year commitment to a 3-year commitment. The change is immediate
 	//   and the hourly rate decreases to the rate for the 3-year commitment period.
+	//
 	//   - Set a 1-year commitment to automatically renew for an additional 1 year.
 	//   The hourly rate for the additional year will continue to be the same as your
 	//   existing 1-year rate.
+	//
 	//   - Set a 3-year commitment to automatically renew for an additional 1 year.
 	//   The hourly rate for the additional year will continue to be the same as your
 	//   existing 3-year rate.
+	//
 	//   - Turn off a previously-enabled automatic renewal on a 1-year or 3-year
 	//   commitment. You cannot use the automatic-renewal option for a 60-day commitment.
 	//
-	// For pricing, see Amazon Web Services Private 5G Pricing (http://aws.amazon.com/private5g/pricing)
-	// .
+	// For pricing, see [Amazon Web Services Private 5G Pricing].
+	//
+	// [Amazon Web Services Private 5G Pricing]: http://aws.amazon.com/private5g/pricing
 	CommitmentConfiguration *types.CommitmentConfiguration
 
 	// The reason for the return. Providing a reason for a return is optional.
@@ -123,25 +136,25 @@ func (c *Client) addOperationStartNetworkResourceUpdateMiddlewares(stack *middle
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -156,13 +169,16 @@ func (c *Client) addOperationStartNetworkResourceUpdateMiddlewares(stack *middle
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpStartNetworkResourceUpdateValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opStartNetworkResourceUpdate(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

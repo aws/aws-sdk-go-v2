@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/ecs/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -14,9 +13,10 @@ import (
 
 // Returns a list of container instances in a specified cluster. You can filter
 // the results of a ListContainerInstances operation with cluster query language
-// statements inside the filter parameter. For more information, see Cluster Query
-// Language (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/cluster-query-language.html)
-// in the Amazon Elastic Container Service Developer Guide.
+// statements inside the filter parameter. For more information, see [Cluster Query Language] in the
+// Amazon Elastic Container Service Developer Guide.
+//
+// [Cluster Query Language]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/cluster-query-language.html
 func (c *Client) ListContainerInstances(ctx context.Context, params *ListContainerInstancesInput, optFns ...func(*Options)) (*ListContainerInstancesOutput, error) {
 	if params == nil {
 		params = &ListContainerInstancesInput{}
@@ -40,8 +40,10 @@ type ListContainerInstancesInput struct {
 	Cluster *string
 
 	// You can filter the results of a ListContainerInstances operation with cluster
-	// query language statements. For more information, see Cluster Query Language (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/cluster-query-language.html)
-	// in the Amazon Elastic Container Service Developer Guide.
+	// query language statements. For more information, see [Cluster Query Language]in the Amazon Elastic
+	// Container Service Developer Guide.
+	//
+	// [Cluster Query Language]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/cluster-query-language.html
 	Filter *string
 
 	// The maximum number of container instance results that ListContainerInstances
@@ -57,16 +59,16 @@ type ListContainerInstancesInput struct {
 	// The nextToken value returned from a ListContainerInstances request indicating
 	// that more results are available to fulfill the request and further calls are
 	// needed. If maxResults was provided, it's possible the number of results to be
-	// fewer than maxResults . This token should be treated as an opaque identifier
-	// that is only used to retrieve the next items in a list and not for other
-	// programmatic purposes.
+	// fewer than maxResults .
+	//
+	// This token should be treated as an opaque identifier that is only used to
+	// retrieve the next items in a list and not for other programmatic purposes.
 	NextToken *string
 
 	// Filters the container instances by status. For example, if you specify the
 	// DRAINING status, the results include only container instances that have been set
-	// to DRAINING using UpdateContainerInstancesState . If you don't specify this
-	// parameter, the default is to include container instances set to all states other
-	// than INACTIVE .
+	// to DRAINING using UpdateContainerInstancesState. If you don't specify this parameter, the default is to
+	// include container instances set to all states other than INACTIVE .
 	Status types.ContainerInstanceStatus
 
 	noSmithyDocumentSerde
@@ -112,25 +114,25 @@ func (c *Client) addOperationListContainerInstancesMiddlewares(stack *middleware
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -145,10 +147,13 @@ func (c *Client) addOperationListContainerInstancesMiddlewares(stack *middleware
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListContainerInstances(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

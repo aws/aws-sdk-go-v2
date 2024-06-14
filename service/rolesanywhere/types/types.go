@@ -7,6 +7,18 @@ import (
 	"time"
 )
 
+// A mapping applied to the authenticating end-entity certificate.
+type AttributeMapping struct {
+
+	// Fields (x509Subject, x509Issuer and x509SAN) within X.509 certificates.
+	CertificateField CertificateField
+
+	// A list of mapping entries for every supported specifier or sub-field.
+	MappingRules []MappingRule
+
+	noSmithyDocumentSerde
+}
+
 // A record of a presented X509 credential from a temporary credential request.
 type CredentialSummary struct {
 
@@ -84,9 +96,22 @@ type InstanceProperty struct {
 	noSmithyDocumentSerde
 }
 
-// Customizable notification settings that will be applied to notification events.
-// IAM Roles Anywhere consumes these settings while notifying across multiple
-// channels - CloudWatch metrics, EventBridge, and Health Dashboard.
+// A single mapping entry for each supported specifier or sub-field.
+type MappingRule struct {
+
+	// Specifier within a certificate field, such as CN, OU, or UID from the Subject
+	// field.
+	//
+	// This member is required.
+	Specifier *string
+
+	noSmithyDocumentSerde
+}
+
+//	Customizable notification settings that will be applied to notification
+//
+// events. IAM Roles Anywhere consumes these settings while notifying across
+// multiple channels - CloudWatch metrics, EventBridge, and Health Dashboard.
 type NotificationSetting struct {
 
 	// Indicates whether the notification setting is enabled.
@@ -100,9 +125,10 @@ type NotificationSetting struct {
 	Event NotificationEvent
 
 	// The specified channel of notification. IAM Roles Anywhere uses CloudWatch
-	// metrics, EventBridge, and Health Dashboard to notify for an event. In the
-	// absence of a specific channel, IAM Roles Anywhere applies this setting to 'ALL'
-	// channels.
+	// metrics, EventBridge, and Health Dashboard to notify for an event.
+	//
+	// In the absence of a specific channel, IAM Roles Anywhere applies this setting
+	// to 'ALL' channels.
 	Channel NotificationChannel
 
 	// The number of days before a notification event. This value is required for a
@@ -112,9 +138,10 @@ type NotificationSetting struct {
 	noSmithyDocumentSerde
 }
 
-// The state of a notification setting. A notification setting includes
-// information such as event name, threshold, status of the notification setting,
-// and the channel to notify.
+// The state of a notification setting.
+//
+// A notification setting includes information such as event name, threshold,
+// status of the notification setting, and the channel to notify.
 type NotificationSettingDetail struct {
 
 	// Indicates whether the notification setting is enabled.
@@ -128,9 +155,10 @@ type NotificationSettingDetail struct {
 	Event NotificationEvent
 
 	// The specified channel of notification. IAM Roles Anywhere uses CloudWatch
-	// metrics, EventBridge, and Health Dashboard to notify for an event. In the
-	// absence of a specific channel, IAM Roles Anywhere applies this setting to 'ALL'
-	// channels.
+	// metrics, EventBridge, and Health Dashboard to notify for an event.
+	//
+	// In the absence of a specific channel, IAM Roles Anywhere applies this setting
+	// to 'ALL' channels.
 	Channel NotificationChannel
 
 	// The principal that configured the notification setting. For default settings
@@ -162,13 +190,20 @@ type NotificationSettingKey struct {
 // The state of the profile after a read or write operation.
 type ProfileDetail struct {
 
+	// A mapping applied to the authenticating end-entity certificate.
+	AttributeMappings []AttributeMapping
+
 	// The ISO-8601 timestamp when the profile was created.
 	CreatedAt *time.Time
 
 	// The Amazon Web Services account that created the profile.
 	CreatedBy *string
 
-	// The number of seconds the vended session credentials are valid for.
+	//  Used to determine how long sessions vended using this profile are valid for.
+	// See the Expiration section of the [CreateSession API documentation] page for more details. In requests, if this
+	// value is not provided, the default value will be 3600.
+	//
+	// [CreateSession API documentation]: https://docs.aws.amazon.com/rolesanywhere/latest/userguide/authentication-create-session.html#credentials-object
 	DurationSeconds *int32
 
 	// Indicates whether the profile is enabled.
@@ -226,8 +261,9 @@ type SourceData interface {
 	isSourceData()
 }
 
-// The root certificate of the Private Certificate Authority specified by this ARN
-// is used in trust validation for temporary credential requests. Included for
+//	The root certificate of the Private Certificate Authority specified by this
+//
+// ARN is used in trust validation for temporary credential requests. Included for
 // trust anchors of type AWS_ACM_PCA .
 type SourceDataMemberAcmPcaArn struct {
 	Value string

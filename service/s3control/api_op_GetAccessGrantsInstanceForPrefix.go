@@ -16,10 +16,13 @@ import (
 )
 
 // Retrieve the S3 Access Grants instance that contains a particular prefix.
+//
 // Permissions You must have the s3:GetAccessGrantsInstanceForPrefix permission
-// for the caller account to use this operation. Additional Permissions The prefix
-// owner account must grant you the following permissions to their S3 Access Grants
-// instance: s3:GetAccessGrantsInstanceForPrefix .
+// for the caller account to use this operation.
+//
+// Additional Permissions The prefix owner account must grant you the following
+// permissions to their S3 Access Grants instance:
+// s3:GetAccessGrantsInstanceForPrefix .
 func (c *Client) GetAccessGrantsInstanceForPrefix(ctx context.Context, params *GetAccessGrantsInstanceForPrefixInput, optFns ...func(*Options)) (*GetAccessGrantsInstanceForPrefixOutput, error) {
 	if params == nil {
 		params = &GetAccessGrantsInstanceForPrefixInput{}
@@ -92,25 +95,25 @@ func (c *Client) addOperationGetAccessGrantsInstanceForPrefixMiddlewares(stack *
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -128,6 +131,9 @@ func (c *Client) addOperationGetAccessGrantsInstanceForPrefixMiddlewares(stack *
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = smithyhttp.AddContentChecksumMiddleware(stack); err != nil {
 		return err
 	}
@@ -143,7 +149,7 @@ func (c *Client) addOperationGetAccessGrantsInstanceForPrefixMiddlewares(stack *
 	if err = addMetadataRetrieverMiddleware(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addGetAccessGrantsInstanceForPrefixUpdateEndpoint(stack, options); err != nil {

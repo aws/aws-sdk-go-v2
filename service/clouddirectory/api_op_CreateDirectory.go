@@ -6,16 +6,18 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a Directory by copying the published schema into the directory. A
-// directory cannot be created without a schema. You can also quickly create a
-// directory using a managed schema, called the QuickStartSchema . For more
-// information, see Managed Schema (https://docs.aws.amazon.com/clouddirectory/latest/developerguide/schemas_managed.html)
-// in the Amazon Cloud Directory Developer Guide.
+// Creates a Directory by copying the published schema into the directory. A directory
+// cannot be created without a schema.
+//
+// You can also quickly create a directory using a managed schema, called the
+// QuickStartSchema . For more information, see [Managed Schema] in the Amazon Cloud Directory
+// Developer Guide.
+//
+// [Managed Schema]: https://docs.aws.amazon.com/clouddirectory/latest/developerguide/schemas_managed.html
 func (c *Client) CreateDirectory(ctx context.Context, params *CreateDirectoryInput, optFns ...func(*Options)) (*CreateDirectoryOutput, error) {
 	if params == nil {
 		params = &CreateDirectoryInput{}
@@ -33,13 +35,13 @@ func (c *Client) CreateDirectory(ctx context.Context, params *CreateDirectoryInp
 
 type CreateDirectoryInput struct {
 
-	// The name of the Directory . Should be unique per account, per region.
+	// The name of the Directory. Should be unique per account, per region.
 	//
 	// This member is required.
 	Name *string
 
 	// The Amazon Resource Name (ARN) of the published schema that will be copied into
-	// the data Directory . For more information, see arns .
+	// the data Directory. For more information, see arns.
 	//
 	// This member is required.
 	SchemaArn *string
@@ -49,19 +51,19 @@ type CreateDirectoryInput struct {
 
 type CreateDirectoryOutput struct {
 
-	// The ARN of the published schema in the Directory . Once a published schema is
-	// copied into the directory, it has its own ARN, which is referred to applied
-	// schema ARN. For more information, see arns .
+	// The ARN of the published schema in the Directory. Once a published schema is copied into
+	// the directory, it has its own ARN, which is referred to applied schema ARN. For
+	// more information, see arns.
 	//
 	// This member is required.
 	AppliedSchemaArn *string
 
-	// The ARN that is associated with the Directory . For more information, see arns .
+	// The ARN that is associated with the Directory. For more information, see arns.
 	//
 	// This member is required.
 	DirectoryArn *string
 
-	// The name of the Directory .
+	// The name of the Directory.
 	//
 	// This member is required.
 	Name *string
@@ -99,25 +101,25 @@ func (c *Client) addOperationCreateDirectoryMiddlewares(stack *middleware.Stack,
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -132,13 +134,16 @@ func (c *Client) addOperationCreateDirectoryMiddlewares(stack *middleware.Stack,
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpCreateDirectoryValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateDirectory(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

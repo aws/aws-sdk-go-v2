@@ -6,18 +6,17 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Deletes the draft configuration associated with the running environment.
+//
 // Updating a running environment with any configuration changes creates a draft
-// configuration set. You can get the draft configuration using
-// DescribeConfigurationSettings while the update is in progress or if the update
-// fails. The DeploymentStatus for the draft configuration indicates whether the
-// deployment is in process or has failed. The draft configuration remains in
-// existence until it is deleted with this action.
+// configuration set. You can get the draft configuration using DescribeConfigurationSettingswhile the update
+// is in progress or if the update fails. The DeploymentStatus for the draft
+// configuration indicates whether the deployment is in process or has failed. The
+// draft configuration remains in existence until it is deleted with this action.
 func (c *Client) DeleteEnvironmentConfiguration(ctx context.Context, params *DeleteEnvironmentConfigurationInput, optFns ...func(*Options)) (*DeleteEnvironmentConfigurationOutput, error) {
 	if params == nil {
 		params = &DeleteEnvironmentConfigurationInput{}
@@ -78,25 +77,25 @@ func (c *Client) addOperationDeleteEnvironmentConfigurationMiddlewares(stack *mi
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -111,13 +110,16 @@ func (c *Client) addOperationDeleteEnvironmentConfigurationMiddlewares(stack *mi
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDeleteEnvironmentConfigurationValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteEnvironmentConfiguration(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

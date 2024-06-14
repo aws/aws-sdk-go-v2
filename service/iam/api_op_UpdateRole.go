@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -40,16 +39,22 @@ type UpdateRoleInput struct {
 	// The maximum session duration (in seconds) that you want to set for the
 	// specified role. If you do not specify a value for this setting, the default
 	// value of one hour is applied. This setting can have a value from 1 hour to 12
-	// hours. Anyone who assumes the role from the CLI or API can use the
-	// DurationSeconds API parameter or the duration-seconds CLI parameter to request
-	// a longer session. The MaxSessionDuration setting determines the maximum
-	// duration that can be requested using the DurationSeconds parameter. If users
-	// don't specify a value for the DurationSeconds parameter, their security
-	// credentials are valid for one hour by default. This applies when you use the
-	// AssumeRole* API operations or the assume-role* CLI operations but does not
-	// apply when you use those operations to create a console URL. For more
-	// information, see Using IAM roles (https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use.html)
-	// in the IAM User Guide.
+	// hours.
+	//
+	// Anyone who assumes the role from the CLI or API can use the DurationSeconds API
+	// parameter or the duration-seconds CLI parameter to request a longer session.
+	// The MaxSessionDuration setting determines the maximum duration that can be
+	// requested using the DurationSeconds parameter. If users don't specify a value
+	// for the DurationSeconds parameter, their security credentials are valid for one
+	// hour by default. This applies when you use the AssumeRole* API operations or
+	// the assume-role* CLI operations but does not apply when you use those
+	// operations to create a console URL. For more information, see [Using IAM roles]in the IAM User
+	// Guide.
+	//
+	// IAM role credentials provided by Amazon EC2 instances assigned to the role are
+	// not subject to the specified maximum session duration.
+	//
+	// [Using IAM roles]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use.html
 	MaxSessionDuration *int32
 
 	noSmithyDocumentSerde
@@ -84,25 +89,25 @@ func (c *Client) addOperationUpdateRoleMiddlewares(stack *middleware.Stack, opti
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -117,13 +122,16 @@ func (c *Client) addOperationUpdateRoleMiddlewares(stack *middleware.Stack, opti
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpUpdateRoleValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateRole(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

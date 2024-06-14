@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/ram/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -40,30 +39,37 @@ type CreatePermissionInput struct {
 
 	// A string in JSON format string that contains the following elements of a
 	// resource-based policy:
+	//
 	//   - Effect: must be set to ALLOW .
+	//
 	//   - Action: specifies the actions that are allowed by this customer managed
 	//   permission. The list must contain only actions that are supported by the
 	//   specified resource type. For a list of all actions supported by each resource
-	//   type, see Actions, resources, and condition keys for Amazon Web Services
-	//   services (https://docs.aws.amazon.com/service-authorization/latest/reference/reference_policies_actions-resources-contextkeys.html)
-	//   in the Identity and Access Management User Guide.
+	//   type, see [Actions, resources, and condition keys for Amazon Web Services services]in the Identity and Access Management User Guide.
+	//
 	//   - Condition: (optional) specifies conditional parameters that must evaluate
 	//   to true when a user attempts an action for that action to be allowed. For more
-	//   information about the Condition element, see IAM policies: Condition element (https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements_condition.html)
-	//   in the Identity and Access Management User Guide.
+	//   information about the Condition element, see [IAM policies: Condition element]in the Identity and Access
+	//   Management User Guide.
+	//
 	// This template can't include either the Resource or Principal elements. Those
 	// are both filled in by RAM when it instantiates the resource-based policy on each
 	// resource shared using this managed permission. The Resource comes from the ARN
 	// of the specific resource that you are sharing. The Principal comes from the
 	// list of identities added to the resource share.
 	//
+	// [IAM policies: Condition element]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements_condition.html
+	// [Actions, resources, and condition keys for Amazon Web Services services]: https://docs.aws.amazon.com/service-authorization/latest/reference/reference_policies_actions-resources-contextkeys.html
+	//
 	// This member is required.
 	PolicyTemplate *string
 
 	// Specifies the name of the resource type that this customer managed permission
-	// applies to. The format is :  and is not case sensitive. For example, to specify
-	// an Amazon EC2 Subnet, you can use the string ec2:subnet . To see the list of
-	// valid values for this parameter, query the ListResourceTypes operation.
+	// applies to.
+	//
+	// The format is  :  and is not case sensitive. For example, to specify an Amazon
+	// EC2 Subnet, you can use the string ec2:subnet . To see the list of valid values
+	// for this parameter, query the ListResourceTypesoperation.
 	//
 	// This member is required.
 	ResourceType *string
@@ -72,10 +78,15 @@ type CreatePermissionInput struct {
 	// idempotency of the request. This lets you safely retry the request without
 	// accidentally performing the same operation a second time. Passing the same value
 	// to a later call to an operation requires that you also pass the same value for
-	// all other parameters. We recommend that you use a UUID type of value. (https://wikipedia.org/wiki/Universally_unique_identifier)
-	// . If you don't provide this value, then Amazon Web Services generates a random
-	// one for you. If you retry the operation with the same ClientToken , but with
-	// different parameters, the retry fails with an IdempotentParameterMismatch error.
+	// all other parameters. We recommend that you use a [UUID type of value.].
+	//
+	// If you don't provide this value, then Amazon Web Services generates a random
+	// one for you.
+	//
+	// If you retry the operation with the same ClientToken , but with different
+	// parameters, the retry fails with an IdempotentParameterMismatch error.
+	//
+	// [UUID type of value.]: https://wikipedia.org/wiki/Universally_unique_identifier
 	ClientToken *string
 
 	// Specifies a list of one or more tag key and value pairs to attach to the
@@ -124,25 +135,25 @@ func (c *Client) addOperationCreatePermissionMiddlewares(stack *middleware.Stack
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -157,13 +168,16 @@ func (c *Client) addOperationCreatePermissionMiddlewares(stack *middleware.Stack
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpCreatePermissionValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreatePermission(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

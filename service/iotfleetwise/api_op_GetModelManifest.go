@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/iotfleetwise/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -31,7 +30,7 @@ func (c *Client) GetModelManifest(ctx context.Context, params *GetModelManifestI
 
 type GetModelManifestInput struct {
 
-	// The name of the vehicle model to retrieve information about.
+	//  The name of the vehicle model to retrieve information about.
 	//
 	// This member is required.
 	Name *string
@@ -41,7 +40,7 @@ type GetModelManifestInput struct {
 
 type GetModelManifestOutput struct {
 
-	// The Amazon Resource Name (ARN) of the vehicle model.
+	//  The Amazon Resource Name (ARN) of the vehicle model.
 	//
 	// This member is required.
 	Arn *string
@@ -57,18 +56,18 @@ type GetModelManifestOutput struct {
 	// This member is required.
 	LastModificationTime *time.Time
 
-	// The name of the vehicle model.
+	//  The name of the vehicle model.
 	//
 	// This member is required.
 	Name *string
 
-	// A brief description of the vehicle model.
+	//  A brief description of the vehicle model.
 	Description *string
 
-	// The ARN of the signal catalog associated with the vehicle model.
+	//  The ARN of the signal catalog associated with the vehicle model.
 	SignalCatalogArn *string
 
-	// The state of the vehicle model. If the status is ACTIVE , the vehicle model
+	//  The state of the vehicle model. If the status is ACTIVE , the vehicle model
 	// can't be edited. You can edit the vehicle model if the status is marked DRAFT .
 	Status types.ManifestStatus
 
@@ -100,25 +99,25 @@ func (c *Client) addOperationGetModelManifestMiddlewares(stack *middleware.Stack
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -133,13 +132,16 @@ func (c *Client) addOperationGetModelManifestMiddlewares(stack *middleware.Stack
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpGetModelManifestValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetModelManifest(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

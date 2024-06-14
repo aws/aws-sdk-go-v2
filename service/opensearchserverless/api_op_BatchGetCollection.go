@@ -6,16 +6,15 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/opensearchserverless/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Returns attributes for one or more collections, including the collection
-// endpoint and the OpenSearch Dashboards endpoint. For more information, see
-// Creating and managing Amazon OpenSearch Serverless collections (https://docs.aws.amazon.com/opensearch-service/latest/developerguide/serverless-manage.html)
-// .
+// endpoint and the OpenSearch Dashboards endpoint. For more information, see [Creating and managing Amazon OpenSearch Serverless collections].
+//
+// [Creating and managing Amazon OpenSearch Serverless collections]: https://docs.aws.amazon.com/opensearch-service/latest/developerguide/serverless-manage.html
 func (c *Client) BatchGetCollection(ctx context.Context, params *BatchGetCollectionInput, optFns ...func(*Options)) (*BatchGetCollectionOutput, error) {
 	if params == nil {
 		params = &BatchGetCollectionInput{}
@@ -34,9 +33,10 @@ func (c *Client) BatchGetCollection(ctx context.Context, params *BatchGetCollect
 type BatchGetCollectionInput struct {
 
 	// A list of collection IDs. You can't provide names and IDs in the same request.
-	// The ID is part of the collection endpoint. You can also retrieve it using the
-	// ListCollections (https://docs.aws.amazon.com/opensearch-service/latest/ServerlessAPIReference/API_ListCollections.html)
+	// The ID is part of the collection endpoint. You can also retrieve it using the [ListCollections]
 	// API.
+	//
+	// [ListCollections]: https://docs.aws.amazon.com/opensearch-service/latest/ServerlessAPIReference/API_ListCollections.html
 	Ids []string
 
 	// A list of collection names. You can't provide names and IDs in the same request.
@@ -81,25 +81,25 @@ func (c *Client) addOperationBatchGetCollectionMiddlewares(stack *middleware.Sta
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -114,10 +114,13 @@ func (c *Client) addOperationBatchGetCollectionMiddlewares(stack *middleware.Sta
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opBatchGetCollection(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

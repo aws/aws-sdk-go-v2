@@ -7,10 +7,13 @@
 // encryption keys are used for payment-related transaction processing and
 // associated cryptographic operations. You can encrypt, decrypt, generate, verify,
 // and translate payment-related cryptographic operations in Amazon Web Services
-// Payment Cryptography. For more information, see Data operations (https://docs.aws.amazon.com/payment-cryptography/latest/userguide/data-operations.html)
-// in the Amazon Web Services Payment Cryptography User Guide. To manage your
-// encryption keys, you use the Amazon Web Services Payment Cryptography Control
-// Plane (https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/Welcome.html)
-// . You can create, import, export, share, manage, and delete keys. You can also
-// manage Identity and Access Management (IAM) policies for keys.
+// Payment Cryptography. For more information, see [Data operations]in the Amazon Web Services
+// Payment Cryptography User Guide.
+//
+// To manage your encryption keys, you use the [Amazon Web Services Payment Cryptography Control Plane]. You can create, import, export,
+// share, manage, and delete keys. You can also manage Identity and Access
+// Management (IAM) policies for keys.
+//
+// [Amazon Web Services Payment Cryptography Control Plane]: https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/Welcome.html
+// [Data operations]: https://docs.aws.amazon.com/payment-cryptography/latest/userguide/data-operations.html
 package paymentcryptographydata

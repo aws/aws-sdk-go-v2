@@ -6,24 +6,27 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates a presigned Amazon S3 URL that can be used to upload a file as manual
-// evidence. For instructions on how to use this operation, see Upload a file from
-// your browser  (https://docs.aws.amazon.com/audit-manager/latest/userguide/upload-evidence.html#how-to-upload-manual-evidence-files)
-// in the Audit Manager User Guide. The following restrictions apply to this
-// operation:
-//   - Maximum size of an individual evidence file: 100 MB
-//   - Number of daily manual evidence uploads per control: 100
-//   - Supported file formats: See Supported file types for manual evidence (https://docs.aws.amazon.com/audit-manager/latest/userguide/upload-evidence.html#supported-manual-evidence-files)
-//     in the Audit Manager User Guide
+// evidence. For instructions on how to use this operation, see [Upload a file from your browser]in the Audit
+// Manager User Guide.
 //
-// For more information about Audit Manager service restrictions, see Quotas and
-// restrictions for Audit Manager (https://docs.aws.amazon.com/audit-manager/latest/userguide/service-quotas.html)
-// .
+// The following restrictions apply to this operation:
+//
+//   - Maximum size of an individual evidence file: 100 MB
+//
+//   - Number of daily manual evidence uploads per control: 100
+//
+//   - Supported file formats: See [Supported file types for manual evidence]in the Audit Manager User Guide
+//
+// For more information about Audit Manager service restrictions, see [Quotas and restrictions for Audit Manager].
+//
+// [Supported file types for manual evidence]: https://docs.aws.amazon.com/audit-manager/latest/userguide/upload-evidence.html#supported-manual-evidence-files
+// [Upload a file from your browser]: https://docs.aws.amazon.com/audit-manager/latest/userguide/upload-evidence.html#how-to-upload-manual-evidence-files
+// [Quotas and restrictions for Audit Manager]: https://docs.aws.amazon.com/audit-manager/latest/userguide/service-quotas.html
 func (c *Client) GetEvidenceFileUploadUrl(ctx context.Context, params *GetEvidenceFileUploadUrlInput, optFns ...func(*Options)) (*GetEvidenceFileUploadUrlOutput, error) {
 	if params == nil {
 		params = &GetEvidenceFileUploadUrlInput{}
@@ -41,9 +44,10 @@ func (c *Client) GetEvidenceFileUploadUrl(ctx context.Context, params *GetEviden
 
 type GetEvidenceFileUploadUrlInput struct {
 
-	// The file that you want to upload. For a list of supported file formats, see
-	// Supported file types for manual evidence (https://docs.aws.amazon.com/audit-manager/latest/userguide/upload-evidence.html#supported-manual-evidence-files)
-	// in the Audit Manager User Guide.
+	// The file that you want to upload. For a list of supported file formats, see [Supported file types for manual evidence] in
+	// the Audit Manager User Guide.
+	//
+	// [Supported file types for manual evidence]: https://docs.aws.amazon.com/audit-manager/latest/userguide/upload-evidence.html#supported-manual-evidence-files
 	//
 	// This member is required.
 	FileName *string
@@ -88,25 +92,25 @@ func (c *Client) addOperationGetEvidenceFileUploadUrlMiddlewares(stack *middlewa
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -121,13 +125,16 @@ func (c *Client) addOperationGetEvidenceFileUploadUrlMiddlewares(stack *middlewa
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpGetEvidenceFileUploadUrlValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetEvidenceFileUploadUrl(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

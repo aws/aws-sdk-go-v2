@@ -18,7 +18,16 @@ import (
 	"io"
 	"math"
 	"strings"
+	"time"
 )
+
+func deserializeS3Expires(v string) (*time.Time, error) {
+	t, err := smithytime.ParseHTTPDate(v)
+	if err != nil {
+		return nil, nil
+	}
+	return &t, nil
+}
 
 type awsRestjson1_deserializeOpCancelJobRun struct {
 }
@@ -1054,6 +1063,168 @@ func awsRestjson1_deserializeOpDocumentListApplicationsOutput(v **ListApplicatio
 		switch key {
 		case "applications":
 			if err := awsRestjson1_deserializeDocumentApplicationList(&sv.Applications, value); err != nil {
+				return err
+			}
+
+		case "nextToken":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NextToken to be of type string, got %T instead", value)
+				}
+				sv.NextToken = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+type awsRestjson1_deserializeOpListJobRunAttempts struct {
+}
+
+func (*awsRestjson1_deserializeOpListJobRunAttempts) ID() string {
+	return "OperationDeserializer"
+}
+
+func (m *awsRestjson1_deserializeOpListJobRunAttempts) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
+) {
+	out, metadata, err = next.HandleDeserialize(ctx, in)
+	if err != nil {
+		return out, metadata, err
+	}
+
+	response, ok := out.RawResponse.(*smithyhttp.Response)
+	if !ok {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
+	}
+
+	if response.StatusCode < 200 || response.StatusCode >= 300 {
+		return out, metadata, awsRestjson1_deserializeOpErrorListJobRunAttempts(response, &metadata)
+	}
+	output := &ListJobRunAttemptsOutput{}
+	out.Result = output
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(response.Body, ringBuffer)
+
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
+	}
+
+	err = awsRestjson1_deserializeOpDocumentListJobRunAttemptsOutput(&output, shape)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return out, metadata, &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body with invalid JSON, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	return out, metadata, err
+}
+
+func awsRestjson1_deserializeOpErrorListJobRunAttempts(response *smithyhttp.Response, metadata *middleware.Metadata) error {
+	var errorBuffer bytes.Buffer
+	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
+		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
+	}
+	errorBody := bytes.NewReader(errorBuffer.Bytes())
+
+	errorCode := "UnknownError"
+	errorMessage := errorCode
+
+	headerCode := response.Header.Get("X-Amzn-ErrorType")
+	if len(headerCode) != 0 {
+		errorCode = restjson.SanitizeErrorCode(headerCode)
+	}
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(errorBody, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	jsonCode, message, err := restjson.GetErrorInfo(decoder)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	errorBody.Seek(0, io.SeekStart)
+	if len(headerCode) == 0 && len(jsonCode) != 0 {
+		errorCode = restjson.SanitizeErrorCode(jsonCode)
+	}
+	if len(message) != 0 {
+		errorMessage = message
+	}
+
+	switch {
+	case strings.EqualFold("InternalServerException", errorCode):
+		return awsRestjson1_deserializeErrorInternalServerException(response, errorBody)
+
+	case strings.EqualFold("ResourceNotFoundException", errorCode):
+		return awsRestjson1_deserializeErrorResourceNotFoundException(response, errorBody)
+
+	case strings.EqualFold("ValidationException", errorCode):
+		return awsRestjson1_deserializeErrorValidationException(response, errorBody)
+
+	default:
+		genericError := &smithy.GenericAPIError{
+			Code:    errorCode,
+			Message: errorMessage,
+		}
+		return genericError
+
+	}
+}
+
+func awsRestjson1_deserializeOpDocumentListJobRunAttemptsOutput(v **ListJobRunAttemptsOutput, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *ListJobRunAttemptsOutput
+	if *v == nil {
+		sv = &ListJobRunAttemptsOutput{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "jobRunAttempts":
+			if err := awsRestjson1_deserializeDocumentJobRunAttempts(&sv.JobRunAttempts, value); err != nil {
 				return err
 			}
 
@@ -2342,6 +2513,11 @@ func awsRestjson1_deserializeDocumentApplication(v **types.Application, value in
 				return err
 			}
 
+		case "interactiveConfiguration":
+			if err := awsRestjson1_deserializeDocumentInteractiveConfiguration(&sv.InteractiveConfiguration, value); err != nil {
+				return err
+			}
+
 		case "maximumCapacity":
 			if err := awsRestjson1_deserializeDocumentMaximumAllowedResources(&sv.MaximumCapacity, value); err != nil {
 				return err
@@ -3168,6 +3344,55 @@ func awsRestjson1_deserializeDocumentInitialCapacityConfigMap(v *map[string]type
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentInteractiveConfiguration(v **types.InteractiveConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.InteractiveConfiguration
+	if *v == nil {
+		sv = &types.InteractiveConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "livyEndpointEnabled":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.LivyEndpointEnabled = ptr.Bool(jtv)
+			}
+
+		case "studioEnabled":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.StudioEnabled = ptr.Bool(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentInternalServerException(v **types.InternalServerException, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -3298,6 +3523,51 @@ func awsRestjson1_deserializeDocumentJobRun(v **types.JobRun, value interface{})
 				sv.Arn = ptr.String(jtv)
 			}
 
+		case "attempt":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected AttemptNumber to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.Attempt = ptr.Int32(int32(i64))
+			}
+
+		case "attemptCreatedAt":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.AttemptCreatedAt = ptr.Time(smithytime.ParseEpochSeconds(f64))
+
+				default:
+					return fmt.Errorf("expected Date to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
+		case "attemptUpdatedAt":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.AttemptUpdatedAt = ptr.Time(smithytime.ParseEpochSeconds(f64))
+
+				default:
+					return fmt.Errorf("expected Date to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
 		case "billedResourceUtilization":
 			if err := awsRestjson1_deserializeDocumentResourceUtilization(&sv.BilledResourceUtilization, value); err != nil {
 				return err
@@ -3369,6 +3639,15 @@ func awsRestjson1_deserializeDocumentJobRun(v **types.JobRun, value interface{})
 				sv.JobRunId = ptr.String(jtv)
 			}
 
+		case "mode":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected JobRunMode to be of type string, got %T instead", value)
+				}
+				sv.Mode = types.JobRunMode(jtv)
+			}
+
 		case "name":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3390,6 +3669,11 @@ func awsRestjson1_deserializeDocumentJobRun(v **types.JobRun, value interface{})
 					return fmt.Errorf("expected ReleaseLabel to be of type string, got %T instead", value)
 				}
 				sv.ReleaseLabel = ptr.String(jtv)
+			}
+
+		case "retryPolicy":
+			if err := awsRestjson1_deserializeDocumentRetryPolicy(&sv.RetryPolicy, value); err != nil {
+				return err
 			}
 
 		case "state":
@@ -3431,6 +3715,231 @@ func awsRestjson1_deserializeDocumentJobRun(v **types.JobRun, value interface{})
 		case "totalResourceUtilization":
 			if err := awsRestjson1_deserializeDocumentTotalResourceUtilization(&sv.TotalResourceUtilization, value); err != nil {
 				return err
+			}
+
+		case "updatedAt":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.UpdatedAt = ptr.Time(smithytime.ParseEpochSeconds(f64))
+
+				default:
+					return fmt.Errorf("expected Date to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentJobRunAttempts(v *[]types.JobRunAttemptSummary, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.JobRunAttemptSummary
+	if *v == nil {
+		cv = []types.JobRunAttemptSummary{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.JobRunAttemptSummary
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentJobRunAttemptSummary(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentJobRunAttemptSummary(v **types.JobRunAttemptSummary, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.JobRunAttemptSummary
+	if *v == nil {
+		sv = &types.JobRunAttemptSummary{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "applicationId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ApplicationId to be of type string, got %T instead", value)
+				}
+				sv.ApplicationId = ptr.String(jtv)
+			}
+
+		case "arn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected JobArn to be of type string, got %T instead", value)
+				}
+				sv.Arn = ptr.String(jtv)
+			}
+
+		case "attempt":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected AttemptNumber to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.Attempt = ptr.Int32(int32(i64))
+			}
+
+		case "createdAt":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.CreatedAt = ptr.Time(smithytime.ParseEpochSeconds(f64))
+
+				default:
+					return fmt.Errorf("expected Date to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
+		case "createdBy":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected RequestIdentityUserArn to be of type string, got %T instead", value)
+				}
+				sv.CreatedBy = ptr.String(jtv)
+			}
+
+		case "executionRole":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected IAMRoleArn to be of type string, got %T instead", value)
+				}
+				sv.ExecutionRole = ptr.String(jtv)
+			}
+
+		case "id":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected JobRunId to be of type string, got %T instead", value)
+				}
+				sv.Id = ptr.String(jtv)
+			}
+
+		case "jobCreatedAt":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.JobCreatedAt = ptr.Time(smithytime.ParseEpochSeconds(f64))
+
+				default:
+					return fmt.Errorf("expected Date to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
+		case "mode":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected JobRunMode to be of type string, got %T instead", value)
+				}
+				sv.Mode = types.JobRunMode(jtv)
+			}
+
+		case "name":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String256 to be of type string, got %T instead", value)
+				}
+				sv.Name = ptr.String(jtv)
+			}
+
+		case "releaseLabel":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ReleaseLabel to be of type string, got %T instead", value)
+				}
+				sv.ReleaseLabel = ptr.String(jtv)
+			}
+
+		case "state":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected JobRunState to be of type string, got %T instead", value)
+				}
+				sv.State = types.JobRunState(jtv)
+			}
+
+		case "stateDetails":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String256 to be of type string, got %T instead", value)
+				}
+				sv.StateDetails = ptr.String(jtv)
+			}
+
+		case "type":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected JobRunType to be of type string, got %T instead", value)
+				}
+				sv.Type = ptr.String(jtv)
 			}
 
 		case "updatedAt":
@@ -3532,6 +4041,51 @@ func awsRestjson1_deserializeDocumentJobRunSummary(v **types.JobRunSummary, valu
 				sv.Arn = ptr.String(jtv)
 			}
 
+		case "attempt":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected AttemptNumber to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.Attempt = ptr.Int32(int32(i64))
+			}
+
+		case "attemptCreatedAt":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.AttemptCreatedAt = ptr.Time(smithytime.ParseEpochSeconds(f64))
+
+				default:
+					return fmt.Errorf("expected Date to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
+		case "attemptUpdatedAt":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.AttemptUpdatedAt = ptr.Time(smithytime.ParseEpochSeconds(f64))
+
+				default:
+					return fmt.Errorf("expected Date to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
 		case "createdAt":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -3573,6 +4127,15 @@ func awsRestjson1_deserializeDocumentJobRunSummary(v **types.JobRunSummary, valu
 					return fmt.Errorf("expected JobRunId to be of type string, got %T instead", value)
 				}
 				sv.Id = ptr.String(jtv)
+			}
+
+		case "mode":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected JobRunMode to be of type string, got %T instead", value)
+				}
+				sv.Mode = types.JobRunMode(jtv)
 			}
 
 		case "name":
@@ -3854,6 +4417,11 @@ func awsRestjson1_deserializeDocumentMonitoringConfiguration(v **types.Monitorin
 				return err
 			}
 
+		case "prometheusMonitoringConfiguration":
+			if err := awsRestjson1_deserializeDocumentPrometheusMonitoringConfiguration(&sv.PrometheusMonitoringConfiguration, value); err != nil {
+				return err
+			}
+
 		case "s3MonitoringConfiguration":
 			if err := awsRestjson1_deserializeDocumentS3MonitoringConfiguration(&sv.S3MonitoringConfiguration, value); err != nil {
 				return err
@@ -3898,6 +4466,46 @@ func awsRestjson1_deserializeDocumentNetworkConfiguration(v **types.NetworkConfi
 		case "subnetIds":
 			if err := awsRestjson1_deserializeDocumentSubnetIds(&sv.SubnetIds, value); err != nil {
 				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentPrometheusMonitoringConfiguration(v **types.PrometheusMonitoringConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.PrometheusMonitoringConfiguration
+	if *v == nil {
+		sv = &types.PrometheusMonitoringConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "remoteWriteUrl":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected PrometheusUrlString to be of type string, got %T instead", value)
+				}
+				sv.RemoteWriteUrl = ptr.String(jtv)
 			}
 
 		default:
@@ -4082,6 +4690,63 @@ func awsRestjson1_deserializeDocumentResourceUtilization(v **types.ResourceUtili
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentRetryPolicy(v **types.RetryPolicy, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.RetryPolicy
+	if *v == nil {
+		sv = &types.RetryPolicy{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "maxAttempts":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected AttemptNumber to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.MaxAttempts = ptr.Int32(int32(i64))
+			}
+
+		case "maxFailedAttemptsPerHour":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Integer to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.MaxFailedAttemptsPerHour = ptr.Int32(int32(i64))
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentS3MonitoringConfiguration(v **types.S3MonitoringConfiguration, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -4192,7 +4857,7 @@ func awsRestjson1_deserializeDocumentSensitivePropertiesMap(v *map[string]string
 		if value != nil {
 			jtv, ok := value.(string)
 			if !ok {
-				return fmt.Errorf("expected String1024 to be of type string, got %T instead", value)
+				return fmt.Errorf("expected ConfigurationPropertyValue to be of type string, got %T instead", value)
 			}
 			parsedVal = jtv
 		}
@@ -4580,6 +5245,15 @@ func awsRestjson1_deserializeDocumentWorkerResourceConfig(v **types.WorkerResour
 					return fmt.Errorf("expected DiskSize to be of type string, got %T instead", value)
 				}
 				sv.Disk = ptr.String(jtv)
+			}
+
+		case "diskType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected DiskType to be of type string, got %T instead", value)
+				}
+				sv.DiskType = ptr.String(jtv)
 			}
 
 		case "memory":

@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -14,10 +13,12 @@ import (
 // Deletes a replication configuration. Deleting a replication configuration ends
 // the replication process. After a replication configuration is deleted, the
 // destination file system becomes Writeable and its replication overwrite
-// protection is re-enabled. For more information, see Delete a replication
-// configuration (https://docs.aws.amazon.com/efs/latest/ug/delete-replications.html)
-// . This operation requires permissions for the
+// protection is re-enabled. For more information, see [Delete a replication configuration].
+//
+// This operation requires permissions for the
 // elasticfilesystem:DeleteReplicationConfiguration action.
+//
+// [Delete a replication configuration]: https://docs.aws.amazon.com/efs/latest/ug/delete-replications.html
 func (c *Client) DeleteReplicationConfiguration(ctx context.Context, params *DeleteReplicationConfigurationInput, optFns ...func(*Options)) (*DeleteReplicationConfigurationOutput, error) {
 	if params == nil {
 		params = &DeleteReplicationConfigurationInput{}
@@ -72,25 +73,25 @@ func (c *Client) addOperationDeleteReplicationConfigurationMiddlewares(stack *mi
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -105,13 +106,16 @@ func (c *Client) addOperationDeleteReplicationConfigurationMiddlewares(stack *mi
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDeleteReplicationConfigurationValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteReplicationConfiguration(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

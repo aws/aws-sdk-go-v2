@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/datasync/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -14,12 +13,14 @@ import (
 
 // Creates a transfer location for a Network File System (NFS) file server.
 // DataSync can use this location as a source or destination for transferring data.
-// Before you begin, make sure that you understand how DataSync accesses NFS file
-// servers (https://docs.aws.amazon.com/datasync/latest/userguide/create-nfs-location.html#accessing-nfs)
-// . If you're copying data to or from an Snowcone device, you can also use
-// CreateLocationNfs to create your transfer location. For more information, see
-// Configuring transfers with Snowcone (https://docs.aws.amazon.com/datasync/latest/userguide/nfs-on-snowcone.html)
-// .
+//
+// Before you begin, make sure that you understand how DataSync [accesses NFS file servers].
+//
+// If you're copying data to or from an Snowcone device, you can also use
+// CreateLocationNfs to create your transfer location. For more information, see [Configuring transfers with Snowcone].
+//
+// [Configuring transfers with Snowcone]: https://docs.aws.amazon.com/datasync/latest/userguide/nfs-on-snowcone.html
+// [accesses NFS file servers]: https://docs.aws.amazon.com/datasync/latest/userguide/create-nfs-location.html#accessing-nfs
 func (c *Client) CreateLocationNfs(ctx context.Context, params *CreateLocationNfsInput, optFns ...func(*Options)) (*CreateLocationNfsOutput, error) {
 	if params == nil {
 		params = &CreateLocationNfsInput{}
@@ -39,9 +40,11 @@ func (c *Client) CreateLocationNfs(ctx context.Context, params *CreateLocationNf
 type CreateLocationNfsInput struct {
 
 	// Specifies the Amazon Resource Name (ARN) of the DataSync agent that want to
-	// connect to your NFS file server. You can specify more than one agent. For more
-	// information, see Using multiple agents for transfers (https://docs.aws.amazon.com/datasync/latest/userguide/multiple-agents.html)
-	// .
+	// connect to your NFS file server.
+	//
+	// You can specify more than one agent. For more information, see [Using multiple agents for transfers].
+	//
+	// [Using multiple agents for transfers]: https://docs.aws.amazon.com/datasync/latest/userguide/multiple-agents.html
 	//
 	// This member is required.
 	OnPremConfig *types.OnPremConfig
@@ -53,10 +56,12 @@ type CreateLocationNfsInput struct {
 	ServerHostname *string
 
 	// Specifies the export path in your NFS file server that you want DataSync to
-	// mount. This path (or a subdirectory of the path) is where DataSync transfers
-	// data to or from. For information on configuring an export for DataSync, see
-	// Accessing NFS file servers (https://docs.aws.amazon.com/datasync/latest/userguide/create-nfs-location.html#accessing-nfs)
-	// .
+	// mount.
+	//
+	// This path (or a subdirectory of the path) is where DataSync transfers data to
+	// or from. For information on configuring an export for DataSync, see [Accessing NFS file servers].
+	//
+	// [Accessing NFS file servers]: https://docs.aws.amazon.com/datasync/latest/userguide/create-nfs-location.html#accessing-nfs
 	//
 	// This member is required.
 	Subdirectory *string
@@ -106,25 +111,25 @@ func (c *Client) addOperationCreateLocationNfsMiddlewares(stack *middleware.Stac
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -139,13 +144,16 @@ func (c *Client) addOperationCreateLocationNfsMiddlewares(stack *middleware.Stac
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpCreateLocationNfsValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateLocationNfs(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

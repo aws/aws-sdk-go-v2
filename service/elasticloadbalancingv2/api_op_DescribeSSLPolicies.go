@@ -6,16 +6,17 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/elasticloadbalancingv2/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Describes the specified policies or all policies used for SSL negotiation. For
-// more information, see Security policies (https://docs.aws.amazon.com/elasticloadbalancing/latest/application/create-https-listener.html#describe-ssl-policies)
-// in the Application Load Balancers Guide or Security policies (https://docs.aws.amazon.com/elasticloadbalancing/latest/network/create-tls-listener.html#describe-ssl-policies)
-// in the Network Load Balancers Guide.
+// Describes the specified policies or all policies used for SSL negotiation.
+//
+// For more information, see [Security policies] in the Application Load Balancers Guide or [Security policies] in the
+// Network Load Balancers Guide.
+//
+// [Security policies]: https://docs.aws.amazon.com/elasticloadbalancing/latest/network/create-tls-listener.html#describe-ssl-policies
 func (c *Client) DescribeSSLPolicies(ctx context.Context, params *DescribeSSLPoliciesInput, optFns ...func(*Options)) (*DescribeSSLPoliciesOutput, error) {
 	if params == nil {
 		params = &DescribeSSLPoliciesInput{}
@@ -33,7 +34,7 @@ func (c *Client) DescribeSSLPolicies(ctx context.Context, params *DescribeSSLPol
 
 type DescribeSSLPoliciesInput struct {
 
-	// The type of load balancer. The default lists the SSL policies for all load
+	//  The type of load balancer. The default lists the SSL policies for all load
 	// balancers.
 	LoadBalancerType types.LoadBalancerTypeEnum
 
@@ -87,25 +88,25 @@ func (c *Client) addOperationDescribeSSLPoliciesMiddlewares(stack *middleware.St
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -120,10 +121,13 @@ func (c *Client) addOperationDescribeSSLPoliciesMiddlewares(stack *middleware.St
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeSSLPolicies(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

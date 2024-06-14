@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/textract/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -14,18 +13,22 @@ import (
 
 // Starts the asynchronous analysis of an input document for relationships between
 // detected items such as key-value pairs, tables, and selection elements.
-// StartDocumentAnalysis can analyze text in documents that are in JPEG, PNG, TIFF,
-// and PDF format. The documents are stored in an Amazon S3 bucket. Use
-// DocumentLocation to specify the bucket name and file name of the document.
+//
+// StartDocumentAnalysis can analyze text in documents that are in JPEG, PNG,
+// TIFF, and PDF format. The documents are stored in an Amazon S3 bucket. Use DocumentLocationto
+// specify the bucket name and file name of the document.
+//
 // StartDocumentAnalysis returns a job identifier ( JobId ) that you use to get the
 // results of the operation. When text analysis is finished, Amazon Textract
 // publishes a completion status to the Amazon Simple Notification Service (Amazon
 // SNS) topic that you specify in NotificationChannel . To get the results of the
 // text analysis operation, first check that the status value published to the
-// Amazon SNS topic is SUCCEEDED . If so, call GetDocumentAnalysis , and pass the
-// job identifier ( JobId ) from the initial call to StartDocumentAnalysis . For
-// more information, see Document Text Analysis (https://docs.aws.amazon.com/textract/latest/dg/how-it-works-analyzing.html)
-// .
+// Amazon SNS topic is SUCCEEDED . If so, call GetDocumentAnalysis, and pass the job identifier ( JobId
+// ) from the initial call to StartDocumentAnalysis .
+//
+// For more information, see [Document Text Analysis].
+//
+// [Document Text Analysis]: https://docs.aws.amazon.com/textract/latest/dg/how-it-works-analyzing.html
 func (c *Client) StartDocumentAnalysis(ctx context.Context, params *StartDocumentAnalysisInput, optFns ...func(*Options)) (*StartDocumentAnalysisOutput, error) {
 	if params == nil {
 		params = &StartDocumentAnalysisInput{}
@@ -64,9 +67,9 @@ type StartDocumentAnalysisInput struct {
 	// The idempotent token that you use to identify the start request. If you use the
 	// same token with multiple StartDocumentAnalysis requests, the same JobId is
 	// returned. Use ClientRequestToken to prevent the same job from being
-	// accidentally started more than once. For more information, see Calling Amazon
-	// Textract Asynchronous Operations (https://docs.aws.amazon.com/textract/latest/dg/api-async.html)
-	// .
+	// accidentally started more than once. For more information, see [Calling Amazon Textract Asynchronous Operations].
+	//
+	// [Calling Amazon Textract Asynchronous Operations]: https://docs.aws.amazon.com/textract/latest/dg/api-async.html
 	ClientRequestToken *string
 
 	// An identifier that you specify that's included in the completion notification
@@ -131,25 +134,25 @@ func (c *Client) addOperationStartDocumentAnalysisMiddlewares(stack *middleware.
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -164,13 +167,16 @@ func (c *Client) addOperationStartDocumentAnalysisMiddlewares(stack *middleware.
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpStartDocumentAnalysisValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opStartDocumentAnalysis(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

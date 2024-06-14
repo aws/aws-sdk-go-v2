@@ -216,6 +216,13 @@ func resolveBaseEndpoint(cfg aws.Config, o *Options) {
 	}
 }
 
+func bindRegion(region string) *string {
+	if region == "" {
+		return nil
+	}
+	return aws.String(endpoints.MapFIPSRegion(region))
+}
+
 // EndpointParameters provides the parameters that influence how endpoints are
 // resolved.
 type EndpointParameters struct {
@@ -366,7 +373,7 @@ func (r *resolver) ResolveEndpoint(
 				}
 			}
 			if _UseFIPS == true {
-				if true == _PartitionResult.SupportsFIPS {
+				if _PartitionResult.SupportsFIPS == true {
 					uriString := func() string {
 						var out strings.Builder
 						out.WriteString("https://grafana-fips.")
@@ -442,7 +449,7 @@ type endpointParamsBinder interface {
 func bindEndpointParams(ctx context.Context, input interface{}, options Options) *EndpointParameters {
 	params := &EndpointParameters{}
 
-	params.Region = aws.String(endpoints.MapFIPSRegion(options.Region))
+	params.Region = bindRegion(options.Region)
 	params.UseDualStack = aws.Bool(options.EndpointOptions.UseDualStackEndpoint == aws.DualStackEndpointStateEnabled)
 	params.UseFIPS = aws.Bool(options.EndpointOptions.UseFIPSEndpoint == aws.FIPSEndpointStateEnabled)
 	params.Endpoint = options.BaseEndpoint

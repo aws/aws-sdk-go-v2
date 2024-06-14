@@ -6,15 +6,16 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/computeoptimizer/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Deletes a recommendation preference, such as enhanced infrastructure metrics.
-// For more information, see Activating enhanced infrastructure metrics (https://docs.aws.amazon.com/compute-optimizer/latest/ug/enhanced-infrastructure-metrics.html)
-// in the Compute Optimizer User Guide.
+//
+// For more information, see [Activating enhanced infrastructure metrics] in the Compute Optimizer User Guide.
+//
+// [Activating enhanced infrastructure metrics]: https://docs.aws.amazon.com/compute-optimizer/latest/ug/enhanced-infrastructure-metrics.html
 func (c *Client) DeleteRecommendationPreferences(ctx context.Context, params *DeleteRecommendationPreferencesInput, optFns ...func(*Options)) (*DeleteRecommendationPreferencesOutput, error) {
 	if params == nil {
 		params = &DeleteRecommendationPreferencesInput{}
@@ -37,21 +38,24 @@ type DeleteRecommendationPreferencesInput struct {
 	// This member is required.
 	RecommendationPreferenceNames []types.RecommendationPreferenceName
 
-	// The target resource type of the recommendation preference to delete. The
-	// Ec2Instance option encompasses standalone instances and instances that are part
-	// of Auto Scaling groups. The AutoScalingGroup option encompasses only instances
-	// that are part of an Auto Scaling group. The valid values for this parameter are
-	// Ec2Instance and AutoScalingGroup .
+	// The target resource type of the recommendation preference to delete.
+	//
+	// The Ec2Instance option encompasses standalone instances and instances that are
+	// part of Auto Scaling groups. The AutoScalingGroup option encompasses only
+	// instances that are part of an Auto Scaling group.
+	//
+	// The valid values for this parameter are Ec2Instance and AutoScalingGroup .
 	//
 	// This member is required.
 	ResourceType types.ResourceType
 
 	// An object that describes the scope of the recommendation preference to delete.
+	//
 	// You can delete recommendation preferences that are created at the organization
 	// level (for management accounts of an organization only), account level, and
-	// resource level. For more information, see Activating enhanced infrastructure
-	// metrics (https://docs.aws.amazon.com/compute-optimizer/latest/ug/enhanced-infrastructure-metrics.html)
-	// in the Compute Optimizer User Guide.
+	// resource level. For more information, see [Activating enhanced infrastructure metrics]in the Compute Optimizer User Guide.
+	//
+	// [Activating enhanced infrastructure metrics]: https://docs.aws.amazon.com/compute-optimizer/latest/ug/enhanced-infrastructure-metrics.html
 	Scope *types.Scope
 
 	noSmithyDocumentSerde
@@ -86,25 +90,25 @@ func (c *Client) addOperationDeleteRecommendationPreferencesMiddlewares(stack *m
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -119,13 +123,16 @@ func (c *Client) addOperationDeleteRecommendationPreferencesMiddlewares(stack *m
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDeleteRecommendationPreferencesValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteRecommendationPreferences(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

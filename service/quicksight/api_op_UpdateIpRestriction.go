@@ -6,14 +6,15 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates the content and status of IP rules. To use this operation, you must
-// provide the entire map of rules. You can use the DescribeIpRestriction
-// operation to get the current rule map.
+// Updates the content and status of IP rules. Traffic from a source is allowed
+// when the source satisfies either the IpRestrictionRule , VpcIdRestrictionRule ,
+// or VpcEndpointIdRestrictionRule . To use this operation, you must provide the
+// entire map of rules. You can use the DescribeIpRestriction operation to get the
+// current rule map.
 func (c *Client) UpdateIpRestriction(ctx context.Context, params *UpdateIpRestrictionInput, optFns ...func(*Options)) (*UpdateIpRestrictionOutput, error) {
 	if params == nil {
 		params = &UpdateIpRestrictionInput{}
@@ -41,6 +42,14 @@ type UpdateIpRestrictionInput struct {
 
 	// A map that describes the updated IP rules with CIDR ranges and descriptions.
 	IpRestrictionRuleMap map[string]string
+
+	// A map of allowed VPC endpoint IDs and their corresponding rule descriptions.
+	VpcEndpointIdRestrictionRuleMap map[string]string
+
+	// A map of VPC IDs and their corresponding rules. When you configure this
+	// parameter, traffic from all VPC endpoints that are present in the specified VPC
+	// is allowed.
+	VpcIdRestrictionRuleMap map[string]string
 
 	noSmithyDocumentSerde
 }
@@ -84,25 +93,25 @@ func (c *Client) addOperationUpdateIpRestrictionMiddlewares(stack *middleware.St
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -117,13 +126,16 @@ func (c *Client) addOperationUpdateIpRestrictionMiddlewares(stack *middleware.St
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpUpdateIpRestrictionValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateIpRestriction(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

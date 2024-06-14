@@ -6,20 +6,27 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes a state machine version (https://docs.aws.amazon.com/step-functions/latest/dg/concepts-state-machine-version.html)
-// . After you delete a version, you can't call StartExecution using that
-// version's ARN or use the version with a state machine alias (https://docs.aws.amazon.com/step-functions/latest/dg/concepts-state-machine-alias.html)
-// . Deleting a state machine version won't terminate its in-progress executions.
+// Deletes a state machine [version]. After you delete a version, you can't call StartExecution using
+// that version's ARN or use the version with a state machine [alias].
+//
+// Deleting a state machine version won't terminate its in-progress executions.
+//
 // You can't delete a state machine version currently referenced by one or more
 // aliases. Before you delete a version, you must either delete the aliases or
-// update them to point to another state machine version. Related operations:
-//   - PublishStateMachineVersion
-//   - ListStateMachineVersions
+// update them to point to another state machine version.
+//
+// Related operations:
+//
+// # PublishStateMachineVersion
+//
+// # ListStateMachineVersions
+//
+// [alias]: https://docs.aws.amazon.com/step-functions/latest/dg/concepts-state-machine-alias.html
+// [version]: https://docs.aws.amazon.com/step-functions/latest/dg/concepts-state-machine-version.html
 func (c *Client) DeleteStateMachineVersion(ctx context.Context, params *DeleteStateMachineVersionInput, optFns ...func(*Options)) (*DeleteStateMachineVersionOutput, error) {
 	if params == nil {
 		params = &DeleteStateMachineVersionInput{}
@@ -74,25 +81,25 @@ func (c *Client) addOperationDeleteStateMachineVersionMiddlewares(stack *middlew
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -107,13 +114,16 @@ func (c *Client) addOperationDeleteStateMachineVersionMiddlewares(stack *middlew
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDeleteStateMachineVersionValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteStateMachineVersion(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

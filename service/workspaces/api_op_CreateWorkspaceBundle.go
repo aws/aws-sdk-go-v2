@@ -6,15 +6,15 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/workspaces/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates the specified WorkSpace bundle. For more information about creating
-// WorkSpace bundles, see Create a Custom WorkSpaces Image and Bundle (https://docs.aws.amazon.com/workspaces/latest/adminguide/create-custom-bundle.html)
-// .
+// WorkSpace bundles, see [Create a Custom WorkSpaces Image and Bundle].
+//
+// [Create a Custom WorkSpaces Image and Bundle]: https://docs.aws.amazon.com/workspaces/latest/adminguide/create-custom-bundle.html
 func (c *Client) CreateWorkspaceBundle(ctx context.Context, params *CreateWorkspaceBundleInput, optFns ...func(*Options)) (*CreateWorkspaceBundleOutput, error) {
 	if params == nil {
 		params = &CreateWorkspaceBundleInput{}
@@ -60,9 +60,11 @@ type CreateWorkspaceBundleInput struct {
 	// Describes the root volume for a WorkSpace bundle.
 	RootStorage *types.RootStorage
 
-	// The tags associated with the bundle. To add tags at the same time when you're
-	// creating the bundle, you must create an IAM policy that grants your IAM user
-	// permissions to use workspaces:CreateTags .
+	// The tags associated with the bundle.
+	//
+	// To add tags at the same time when you're creating the bundle, you must create
+	// an IAM policy that grants your IAM user permissions to use workspaces:CreateTags
+	// .
 	Tags []types.Tag
 
 	noSmithyDocumentSerde
@@ -101,25 +103,25 @@ func (c *Client) addOperationCreateWorkspaceBundleMiddlewares(stack *middleware.
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -134,13 +136,16 @@ func (c *Client) addOperationCreateWorkspaceBundleMiddlewares(stack *middleware.
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpCreateWorkspaceBundleValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateWorkspaceBundle(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

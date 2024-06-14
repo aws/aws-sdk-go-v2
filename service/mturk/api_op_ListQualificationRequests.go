@@ -6,13 +6,13 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/mturk/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// The ListQualificationRequests operation retrieves requests for Qualifications
+//	The ListQualificationRequests operation retrieves requests for Qualifications
+//
 // of a particular Qualification type. The owner of the Qualification type calls
 // this operation to poll for pending requests, and accepts them using the
 // AcceptQualification operation.
@@ -33,7 +33,7 @@ func (c *Client) ListQualificationRequests(ctx context.Context, params *ListQual
 
 type ListQualificationRequestsInput struct {
 
-	// The maximum number of results to return in a single call.
+	//  The maximum number of results to return in a single call.
 	MaxResults *int32
 
 	// If the previous response was incomplete (because there is more data to
@@ -90,25 +90,25 @@ func (c *Client) addOperationListQualificationRequestsMiddlewares(stack *middlew
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -123,10 +123,13 @@ func (c *Client) addOperationListQualificationRequestsMiddlewares(stack *middlew
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListQualificationRequests(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -155,7 +158,7 @@ var _ ListQualificationRequestsAPIClient = (*Client)(nil)
 // ListQualificationRequestsPaginatorOptions is the paginator options for
 // ListQualificationRequests
 type ListQualificationRequestsPaginatorOptions struct {
-	// The maximum number of results to return in a single call.
+	//  The maximum number of results to return in a single call.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

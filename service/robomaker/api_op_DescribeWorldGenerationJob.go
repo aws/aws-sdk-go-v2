@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/robomaker/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -52,12 +51,18 @@ type DescribeWorldGenerationJobOutput struct {
 	// created.
 	CreatedAt *time.Time
 
-	// The failure code of the world generation job if it failed: InternalServiceError
-	// Internal service error. LimitExceeded The requested resource exceeds the maximum
-	// number allowed, or the number of concurrent stream requests exceeds the maximum
-	// number allowed. ResourceNotFound The specified resource could not be found.
-	// RequestThrottled The request was throttled. InvalidInput An input parameter in
-	// the request is not valid.
+	// The failure code of the world generation job if it failed:
+	//
+	// InternalServiceError Internal service error.
+	//
+	// LimitExceeded The requested resource exceeds the maximum number allowed, or the
+	// number of concurrent stream requests exceeds the maximum number allowed.
+	//
+	// ResourceNotFound The specified resource could not be found.
+	//
+	// RequestThrottled The request was throttled.
+	//
+	// InvalidInput An input parameter in the request is not valid.
 	FailureCode types.WorldGenerationJobErrorCode
 
 	// The reason why the world generation job failed.
@@ -66,12 +71,21 @@ type DescribeWorldGenerationJobOutput struct {
 	// Summary information about finished worlds.
 	FinishedWorldsSummary *types.FinishedWorldsSummary
 
-	// The status of the world generation job: Pending The world generation job
-	// request is pending. Running The world generation job is running. Completed The
-	// world generation job completed. Failed The world generation job failed. See
-	// failureCode for more information. PartialFailed Some worlds did not generate.
-	// Canceled The world generation job was cancelled. Canceling The world generation
-	// job is being cancelled.
+	// The status of the world generation job:
+	//
+	// Pending The world generation job request is pending.
+	//
+	// Running The world generation job is running.
+	//
+	// Completed The world generation job completed.
+	//
+	// Failed The world generation job failed. See failureCode for more information.
+	//
+	// PartialFailed Some worlds did not generate.
+	//
+	// Canceled The world generation job was cancelled.
+	//
+	// Canceling The world generation job is being cancelled.
 	Status types.WorldGenerationJobStatus
 
 	// A map that contains tag keys and tag values that are attached to the world
@@ -116,25 +130,25 @@ func (c *Client) addOperationDescribeWorldGenerationJobMiddlewares(stack *middle
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -149,13 +163,16 @@ func (c *Client) addOperationDescribeWorldGenerationJobMiddlewares(stack *middle
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDescribeWorldGenerationJobValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeWorldGenerationJob(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

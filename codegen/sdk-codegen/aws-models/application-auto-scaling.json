@@ -1487,7 +1487,22 @@
                     "outputToken": "NextToken",
                     "items": "ScalableTargets",
                     "pageSize": "MaxResults"
-                }
+                },
+                "smithy.test#smokeTests": [
+                    {
+                        "id": "DescribeScalableTargetsSuccess",
+                        "params": {
+                            "ServiceNamespace": "ec2"
+                        },
+                        "vendorParams": {
+                            "region": "us-west-2"
+                        },
+                        "vendorParamsShape": "aws.test#AwsVendorParams",
+                        "expect": {
+                            "success": {}
+                        }
+                    }
+                ]
             }
         },
         "com.amazonaws.applicationautoscaling#DescribeScalableTargetsRequest": {

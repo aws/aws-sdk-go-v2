@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	internalEndpointDiscovery "github.com/aws/aws-sdk-go-v2/service/internal/endpoint-discovery"
 	"github.com/aws/aws-sdk-go-v2/service/timestreamwrite/types"
 	"github.com/aws/smithy-go/middleware"
@@ -15,10 +14,11 @@ import (
 
 // Creates a new Timestream database. If the KMS key is not specified, the
 // database will be encrypted with a Timestream managed KMS key located in your
-// account. For more information, see Amazon Web Services managed keys (https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#aws-managed-cmk)
-// . Service quotas apply (https://docs.aws.amazon.com/timestream/latest/developerguide/ts-limits.html)
-// . For details, see code sample (https://docs.aws.amazon.com/timestream/latest/developerguide/code-samples.create-db.html)
-// .
+// account. For more information, see [Amazon Web Services managed keys]. [Service quotas apply]. For details, see [code sample].
+//
+// [Service quotas apply]: https://docs.aws.amazon.com/timestream/latest/developerguide/ts-limits.html
+// [code sample]: https://docs.aws.amazon.com/timestream/latest/developerguide/code-samples.create-db.html
+// [Amazon Web Services managed keys]: https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#aws-managed-cmk
 func (c *Client) CreateDatabase(ctx context.Context, params *CreateDatabaseInput, optFns ...func(*Options)) (*CreateDatabaseOutput, error) {
 	if params == nil {
 		params = &CreateDatabaseInput{}
@@ -43,11 +43,12 @@ type CreateDatabaseInput struct {
 
 	// The KMS key for the database. If the KMS key is not specified, the database
 	// will be encrypted with a Timestream managed KMS key located in your account. For
-	// more information, see Amazon Web Services managed keys (https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#aws-managed-cmk)
-	// .
+	// more information, see [Amazon Web Services managed keys].
+	//
+	// [Amazon Web Services managed keys]: https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#aws-managed-cmk
 	KmsKeyId *string
 
-	// A list of key-value pairs to label the table.
+	//  A list of key-value pairs to label the table.
 	Tags []types.Tag
 
 	noSmithyDocumentSerde
@@ -86,25 +87,25 @@ func (c *Client) addOperationCreateDatabaseMiddlewares(stack *middleware.Stack, 
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -122,13 +123,16 @@ func (c *Client) addOperationCreateDatabaseMiddlewares(stack *middleware.Stack, 
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpCreateDatabaseValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateDatabase(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

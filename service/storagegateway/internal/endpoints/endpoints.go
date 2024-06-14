@@ -191,6 +191,24 @@ var defaultPartitions = endpoints.Partitions{
 				Deprecated: aws.TrueTernary,
 			},
 			endpoints.EndpointKey{
+				Region: "ca-west-1",
+			}: endpoints.Endpoint{},
+			endpoints.EndpointKey{
+				Region:  "ca-west-1",
+				Variant: endpoints.FIPSVariant,
+			}: {
+				Hostname: "storagegateway-fips.ca-west-1.amazonaws.com",
+			},
+			endpoints.EndpointKey{
+				Region: "ca-west-1-fips",
+			}: endpoints.Endpoint{
+				Hostname: "storagegateway-fips.ca-west-1.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "ca-west-1",
+				},
+				Deprecated: aws.TrueTernary,
+			},
+			endpoints.EndpointKey{
 				Region: "eu-central-1",
 			}: endpoints.Endpoint{},
 			endpoints.EndpointKey{
@@ -384,6 +402,35 @@ var defaultPartitions = endpoints.Partitions{
 		},
 		RegionRegex:    partitionRegexp.AwsIsoB,
 		IsRegionalized: true,
+		Endpoints: endpoints.Endpoints{
+			endpoints.EndpointKey{
+				Region: "fips",
+			}: endpoints.Endpoint{
+				Hostname: "storagegateway-fips.us-isob-east-1.sc2s.sgov.gov",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "us-isob-east-1",
+				},
+				Deprecated: aws.TrueTernary,
+			},
+			endpoints.EndpointKey{
+				Region: "us-isob-east-1",
+			}: endpoints.Endpoint{},
+			endpoints.EndpointKey{
+				Region:  "us-isob-east-1",
+				Variant: endpoints.FIPSVariant,
+			}: {
+				Hostname: "storagegateway-fips.us-isob-east-1.sc2s.sgov.gov",
+			},
+			endpoints.EndpointKey{
+				Region: "us-isob-east-1-fips",
+			}: endpoints.Endpoint{
+				Hostname: "storagegateway-fips.us-isob-east-1.sc2s.sgov.gov",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "us-isob-east-1",
+				},
+				Deprecated: aws.TrueTernary,
+			},
+		},
 	},
 	{
 		ID: "aws-iso-e",

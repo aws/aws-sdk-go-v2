@@ -7,7 +7,6 @@ import (
 	"context"
 	"github.com/aws/aws-sdk-go-v2/aws"
 	protocoltesthttp "github.com/aws/aws-sdk-go-v2/internal/protocoltest"
-	smithydocument "github.com/aws/smithy-go/document"
 	"github.com/aws/smithy-go/middleware"
 	smithyprivateprotocol "github.com/aws/smithy-go/private/protocol"
 	"github.com/aws/smithy-go/ptr"
@@ -15,11 +14,8 @@ import (
 	smithytesting "github.com/aws/smithy-go/testing"
 	smithytime "github.com/aws/smithy-go/time"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
-	"github.com/google/go-cmp/cmp"
-	"github.com/google/go-cmp/cmp/cmpopts"
 	"io"
 	"io/ioutil"
-	"math"
 	"net/http"
 	"net/url"
 	"testing"
@@ -53,9 +49,9 @@ func TestClient_XmlTimestamps_awsRestxmlSerialize(t *testing.T) {
 			},
 			BodyMediaType: "application/xml",
 			BodyAssert: func(actual io.Reader) error {
-				return smithytesting.CompareXMLReaderBytes(actual, []byte(`<XmlTimestampsInputOutput>
+				return smithytesting.CompareXMLReaderBytes(actual, []byte(`<XmlTimestampsRequest>
 			    <normal>2014-04-29T18:30:38Z</normal>
-			</XmlTimestampsInputOutput>
+			</XmlTimestampsRequest>
 			`))
 			},
 		},
@@ -72,9 +68,9 @@ func TestClient_XmlTimestamps_awsRestxmlSerialize(t *testing.T) {
 			},
 			BodyMediaType: "application/xml",
 			BodyAssert: func(actual io.Reader) error {
-				return smithytesting.CompareXMLReaderBytes(actual, []byte(`<XmlTimestampsInputOutput>
+				return smithytesting.CompareXMLReaderBytes(actual, []byte(`<XmlTimestampsRequest>
 			    <dateTime>2014-04-29T18:30:38Z</dateTime>
-			</XmlTimestampsInputOutput>
+			</XmlTimestampsRequest>
 			`))
 			},
 		},
@@ -92,9 +88,9 @@ func TestClient_XmlTimestamps_awsRestxmlSerialize(t *testing.T) {
 			},
 			BodyMediaType: "application/xml",
 			BodyAssert: func(actual io.Reader) error {
-				return smithytesting.CompareXMLReaderBytes(actual, []byte(`<XmlTimestampsInputOutput>
+				return smithytesting.CompareXMLReaderBytes(actual, []byte(`<XmlTimestampsRequest>
 			    <dateTimeOnTarget>2014-04-29T18:30:38Z</dateTimeOnTarget>
-			</XmlTimestampsInputOutput>
+			</XmlTimestampsRequest>
 			`))
 			},
 		},
@@ -111,9 +107,9 @@ func TestClient_XmlTimestamps_awsRestxmlSerialize(t *testing.T) {
 			},
 			BodyMediaType: "application/xml",
 			BodyAssert: func(actual io.Reader) error {
-				return smithytesting.CompareXMLReaderBytes(actual, []byte(`<XmlTimestampsInputOutput>
+				return smithytesting.CompareXMLReaderBytes(actual, []byte(`<XmlTimestampsRequest>
 			    <epochSeconds>1398796238</epochSeconds>
-			</XmlTimestampsInputOutput>
+			</XmlTimestampsRequest>
 			`))
 			},
 		},
@@ -130,9 +126,9 @@ func TestClient_XmlTimestamps_awsRestxmlSerialize(t *testing.T) {
 			},
 			BodyMediaType: "application/xml",
 			BodyAssert: func(actual io.Reader) error {
-				return smithytesting.CompareXMLReaderBytes(actual, []byte(`<XmlTimestampsInputOutput>
+				return smithytesting.CompareXMLReaderBytes(actual, []byte(`<XmlTimestampsRequest>
 			    <epochSecondsOnTarget>1398796238</epochSecondsOnTarget>
-			</XmlTimestampsInputOutput>
+			</XmlTimestampsRequest>
 			`))
 			},
 		},
@@ -149,9 +145,9 @@ func TestClient_XmlTimestamps_awsRestxmlSerialize(t *testing.T) {
 			},
 			BodyMediaType: "application/xml",
 			BodyAssert: func(actual io.Reader) error {
-				return smithytesting.CompareXMLReaderBytes(actual, []byte(`<XmlTimestampsInputOutput>
+				return smithytesting.CompareXMLReaderBytes(actual, []byte(`<XmlTimestampsRequest>
 			    <httpDate>Tue, 29 Apr 2014 18:30:38 GMT</httpDate>
-			</XmlTimestampsInputOutput>
+			</XmlTimestampsRequest>
 			`))
 			},
 		},
@@ -168,9 +164,9 @@ func TestClient_XmlTimestamps_awsRestxmlSerialize(t *testing.T) {
 			},
 			BodyMediaType: "application/xml",
 			BodyAssert: func(actual io.Reader) error {
-				return smithytesting.CompareXMLReaderBytes(actual, []byte(`<XmlTimestampsInputOutput>
+				return smithytesting.CompareXMLReaderBytes(actual, []byte(`<XmlTimestampsRequest>
 			    <httpDateOnTarget>Tue, 29 Apr 2014 18:30:38 GMT</httpDateOnTarget>
-			</XmlTimestampsInputOutput>
+			</XmlTimestampsRequest>
 			`))
 			},
 		},
@@ -254,9 +250,9 @@ func TestClient_XmlTimestamps_awsRestxmlDeserialize(t *testing.T) {
 				"Content-Type": []string{"application/xml"},
 			},
 			BodyMediaType: "application/xml",
-			Body: []byte(`<XmlTimestampsInputOutput>
+			Body: []byte(`<XmlTimestampsResponse>
 			    <normal>2014-04-29T18:30:38Z</normal>
-			</XmlTimestampsInputOutput>
+			</XmlTimestampsResponse>
 			`),
 			ExpectResult: &XmlTimestampsOutput{
 				Normal: ptr.Time(smithytime.ParseEpochSeconds(1398796238)),
@@ -269,9 +265,9 @@ func TestClient_XmlTimestamps_awsRestxmlDeserialize(t *testing.T) {
 				"Content-Type": []string{"application/xml"},
 			},
 			BodyMediaType: "application/xml",
-			Body: []byte(`<XmlTimestampsInputOutput>
+			Body: []byte(`<XmlTimestampsResponse>
 			    <dateTime>2014-04-29T18:30:38Z</dateTime>
-			</XmlTimestampsInputOutput>
+			</XmlTimestampsResponse>
 			`),
 			ExpectResult: &XmlTimestampsOutput{
 				DateTime: ptr.Time(smithytime.ParseEpochSeconds(1398796238)),
@@ -285,9 +281,9 @@ func TestClient_XmlTimestamps_awsRestxmlDeserialize(t *testing.T) {
 				"Content-Type": []string{"application/xml"},
 			},
 			BodyMediaType: "application/xml",
-			Body: []byte(`<XmlTimestampsInputOutput>
+			Body: []byte(`<XmlTimestampsResponse>
 			    <dateTimeOnTarget>2014-04-29T18:30:38Z</dateTimeOnTarget>
-			</XmlTimestampsInputOutput>
+			</XmlTimestampsResponse>
 			`),
 			ExpectResult: &XmlTimestampsOutput{
 				DateTimeOnTarget: ptr.Time(smithytime.ParseEpochSeconds(1398796238)),
@@ -300,9 +296,9 @@ func TestClient_XmlTimestamps_awsRestxmlDeserialize(t *testing.T) {
 				"Content-Type": []string{"application/xml"},
 			},
 			BodyMediaType: "application/xml",
-			Body: []byte(`<XmlTimestampsInputOutput>
+			Body: []byte(`<XmlTimestampsResponse>
 			    <epochSeconds>1398796238</epochSeconds>
-			</XmlTimestampsInputOutput>
+			</XmlTimestampsResponse>
 			`),
 			ExpectResult: &XmlTimestampsOutput{
 				EpochSeconds: ptr.Time(smithytime.ParseEpochSeconds(1398796238)),
@@ -315,9 +311,9 @@ func TestClient_XmlTimestamps_awsRestxmlDeserialize(t *testing.T) {
 				"Content-Type": []string{"application/xml"},
 			},
 			BodyMediaType: "application/xml",
-			Body: []byte(`<XmlTimestampsInputOutput>
+			Body: []byte(`<XmlTimestampsResponse>
 			    <epochSecondsOnTarget>1398796238</epochSecondsOnTarget>
-			</XmlTimestampsInputOutput>
+			</XmlTimestampsResponse>
 			`),
 			ExpectResult: &XmlTimestampsOutput{
 				EpochSecondsOnTarget: ptr.Time(smithytime.ParseEpochSeconds(1398796238)),
@@ -330,9 +326,9 @@ func TestClient_XmlTimestamps_awsRestxmlDeserialize(t *testing.T) {
 				"Content-Type": []string{"application/xml"},
 			},
 			BodyMediaType: "application/xml",
-			Body: []byte(`<XmlTimestampsInputOutput>
+			Body: []byte(`<XmlTimestampsResponse>
 			    <httpDate>Tue, 29 Apr 2014 18:30:38 GMT</httpDate>
-			</XmlTimestampsInputOutput>
+			</XmlTimestampsResponse>
 			`),
 			ExpectResult: &XmlTimestampsOutput{
 				HttpDate: ptr.Time(smithytime.ParseEpochSeconds(1398796238)),
@@ -345,9 +341,9 @@ func TestClient_XmlTimestamps_awsRestxmlDeserialize(t *testing.T) {
 				"Content-Type": []string{"application/xml"},
 			},
 			BodyMediaType: "application/xml",
-			Body: []byte(`<XmlTimestampsInputOutput>
+			Body: []byte(`<XmlTimestampsResponse>
 			    <httpDateOnTarget>Tue, 29 Apr 2014 18:30:38 GMT</httpDateOnTarget>
-			</XmlTimestampsInputOutput>
+			</XmlTimestampsResponse>
 			`),
 			ExpectResult: &XmlTimestampsOutput{
 				HttpDateOnTarget: ptr.Time(smithytime.ParseEpochSeconds(1398796238)),
@@ -405,19 +401,7 @@ func TestClient_XmlTimestamps_awsRestxmlDeserialize(t *testing.T) {
 			if result == nil {
 				t.Fatalf("expect not nil result")
 			}
-			opts := cmp.Options{
-				cmpopts.IgnoreUnexported(
-					middleware.Metadata{},
-				),
-				cmp.FilterValues(func(x, y float64) bool {
-					return math.IsNaN(x) && math.IsNaN(y)
-				}, cmp.Comparer(func(_, _ interface{}) bool { return true })),
-				cmp.FilterValues(func(x, y float32) bool {
-					return math.IsNaN(float64(x)) && math.IsNaN(float64(y))
-				}, cmp.Comparer(func(_, _ interface{}) bool { return true })),
-				cmpopts.IgnoreTypes(smithydocument.NoSerde{}),
-			}
-			if err := smithytesting.CompareValues(c.ExpectResult, result, opts...); err != nil {
+			if err := smithytesting.CompareValues(c.ExpectResult, result); err != nil {
 				t.Errorf("expect c.ExpectResult value match:\n%v", err)
 			}
 		})

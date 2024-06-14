@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -30,7 +29,7 @@ func (c *Client) CreateModelExplainabilityJobDefinition(ctx context.Context, par
 
 type CreateModelExplainabilityJobDefinitionInput struct {
 
-	// The name of the model explainability job definition. The name must be unique
+	//  The name of the model explainability job definition. The name must be unique
 	// within an Amazon Web Services Region in the Amazon Web Services account.
 	//
 	// This member is required.
@@ -72,9 +71,10 @@ type CreateModelExplainabilityJobDefinitionInput struct {
 	// A time limit for how long the monitoring job is allowed to run before stopping.
 	StoppingCondition *types.MonitoringStoppingCondition
 
-	// (Optional) An array of key-value pairs. For more information, see  Using Cost
-	// Allocation Tags (https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html#allocation-whatURL)
-	// in the Amazon Web Services Billing and Cost Management User Guide.
+	// (Optional) An array of key-value pairs. For more information, see [Using Cost Allocation Tags] in the
+	// Amazon Web Services Billing and Cost Management User Guide.
+	//
+	// [Using Cost Allocation Tags]: https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html#allocation-whatURL
 	Tags []types.Tag
 
 	noSmithyDocumentSerde
@@ -115,25 +115,25 @@ func (c *Client) addOperationCreateModelExplainabilityJobDefinitionMiddlewares(s
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -148,13 +148,16 @@ func (c *Client) addOperationCreateModelExplainabilityJobDefinitionMiddlewares(s
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpCreateModelExplainabilityJobDefinitionValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateModelExplainabilityJobDefinition(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

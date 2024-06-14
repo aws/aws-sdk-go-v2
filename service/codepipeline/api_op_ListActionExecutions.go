@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/codepipeline/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -30,7 +29,7 @@ func (c *Client) ListActionExecutions(ctx context.Context, params *ListActionExe
 
 type ListActionExecutionsInput struct {
 
-	// The name of the pipeline for which you want to list action execution history.
+	//  The name of the pipeline for which you want to list action execution history.
 	//
 	// This member is required.
 	PipelineName *string
@@ -41,8 +40,7 @@ type ListActionExecutionsInput struct {
 	// The maximum number of results to return in a single call. To retrieve the
 	// remaining results, make another call with the returned nextToken value. Action
 	// execution history is retained for up to 12 months, based on action execution
-	// start times. Default value is 100. Detailed execution history is available for
-	// executions run on or after February 21, 2019.
+	// start times. Default value is 100.
 	MaxResults *int32
 
 	// The token that was returned from the previous ListActionExecutions call, which
@@ -90,25 +88,25 @@ func (c *Client) addOperationListActionExecutionsMiddlewares(stack *middleware.S
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -123,13 +121,16 @@ func (c *Client) addOperationListActionExecutionsMiddlewares(stack *middleware.S
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpListActionExecutionsValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListActionExecutions(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -161,8 +162,7 @@ type ListActionExecutionsPaginatorOptions struct {
 	// The maximum number of results to return in a single call. To retrieve the
 	// remaining results, make another call with the returned nextToken value. Action
 	// execution history is retained for up to 12 months, based on action execution
-	// start times. Default value is 100. Detailed execution history is available for
-	// executions run on or after February 21, 2019.
+	// start times. Default value is 100.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

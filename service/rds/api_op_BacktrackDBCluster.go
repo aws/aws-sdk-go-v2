@@ -6,16 +6,18 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
 // Backtracks a DB cluster to a specific time, without creating a new DB cluster.
-// For more information on backtracking, see Backtracking an Aurora DB Cluster (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/AuroraMySQL.Managing.Backtrack.html)
-// in the Amazon Aurora User Guide. This action applies only to Aurora MySQL DB
-// clusters.
+//
+// For more information on backtracking, see [Backtracking an Aurora DB Cluster] in the Amazon Aurora User Guide.
+//
+// This action applies only to Aurora MySQL DB clusters.
+//
+// [Backtracking an Aurora DB Cluster]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/AuroraMySQL.Managing.Backtrack.html
 func (c *Client) BacktrackDBCluster(ctx context.Context, params *BacktrackDBClusterInput, optFns ...func(*Options)) (*BacktrackDBClusterOutput, error) {
 	if params == nil {
 		params = &BacktrackDBClusterInput{}
@@ -34,22 +36,35 @@ func (c *Client) BacktrackDBCluster(ctx context.Context, params *BacktrackDBClus
 type BacktrackDBClusterInput struct {
 
 	// The timestamp of the time to backtrack the DB cluster to, specified in ISO 8601
-	// format. For more information about ISO 8601, see the ISO8601 Wikipedia page. (http://en.wikipedia.org/wiki/ISO_8601)
+	// format. For more information about ISO 8601, see the [ISO8601 Wikipedia page.]
+	//
 	// If the specified time isn't a consistent time for the DB cluster, Aurora
 	// automatically chooses the nearest possible consistent time for the DB cluster.
+	//
 	// Constraints:
+	//
 	//   - Must contain a valid ISO 8601 timestamp.
+	//
 	//   - Can't contain a timestamp set in the future.
+	//
 	// Example: 2017-07-08T18:00Z
+	//
+	// [ISO8601 Wikipedia page.]: http://en.wikipedia.org/wiki/ISO_8601
 	//
 	// This member is required.
 	BacktrackTo *time.Time
 
 	// The DB cluster identifier of the DB cluster to be backtracked. This parameter
-	// is stored as a lowercase string. Constraints:
+	// is stored as a lowercase string.
+	//
+	// Constraints:
+	//
 	//   - Must contain from 1 to 63 alphanumeric characters or hyphens.
+	//
 	//   - First character must be a letter.
+	//
 	//   - Can't end with a hyphen or contain two consecutive hyphens.
+	//
 	// Example: my-cluster1
 	//
 	// This member is required.
@@ -89,12 +104,16 @@ type BacktrackDBClusterOutput struct {
 	DBClusterIdentifier *string
 
 	// The status of the backtrack. This property returns one of the following values:
+	//
 	//   - applying - The backtrack is currently being applied to or rolled back from
 	//   the DB cluster.
+	//
 	//   - completed - The backtrack has successfully been applied to or rolled back
 	//   from the DB cluster.
+	//
 	//   - failed - An error occurred while the backtrack was applied to or rolled back
 	//   from the DB cluster.
+	//
 	//   - pending - The backtrack is currently pending application to or rollback from
 	//   the DB cluster.
 	Status *string
@@ -127,25 +146,25 @@ func (c *Client) addOperationBacktrackDBClusterMiddlewares(stack *middleware.Sta
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -160,13 +179,16 @@ func (c *Client) addOperationBacktrackDBClusterMiddlewares(stack *middleware.Sta
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpBacktrackDBClusterValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opBacktrackDBCluster(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

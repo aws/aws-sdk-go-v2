@@ -6,14 +6,17 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/swf/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Registers a new domain. Access Control You can use IAM policies to control this
-// action's access to Amazon SWF resources as follows:
+// Registers a new domain.
+//
+// # Access Control
+//
+// You can use IAM policies to control this action's access to Amazon SWF
+// resources as follows:
 //
 //   - You cannot use an IAM policy to control domain access for this action. The
 //     name of the domain being registered is available as the resource of this action.
@@ -25,9 +28,9 @@ import (
 // If the caller doesn't have sufficient permissions to invoke the action, or the
 // parameter values fall outside the specified constraints, the action fails. The
 // associated event attribute's cause parameter is set to OPERATION_NOT_PERMITTED .
-// For details and example IAM policies, see Using IAM to Manage Access to Amazon
-// SWF Workflows (https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html)
-// in the Amazon SWF Developer Guide.
+// For details and example IAM policies, see [Using IAM to Manage Access to Amazon SWF Workflows]in the Amazon SWF Developer Guide.
+//
+// [Using IAM to Manage Access to Amazon SWF Workflows]: https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html
 func (c *Client) RegisterDomain(ctx context.Context, params *RegisterDomainInput, optFns ...func(*Options)) (*RegisterDomainOutput, error) {
 	if params == nil {
 		params = &RegisterDomainInput{}
@@ -46,22 +49,28 @@ func (c *Client) RegisterDomain(ctx context.Context, params *RegisterDomainInput
 type RegisterDomainInput struct {
 
 	// Name of the domain to register. The name must be unique in the region that the
-	// domain is registered in. The specified string must not start or end with
-	// whitespace. It must not contain a : (colon), / (slash), | (vertical bar), or
-	// any control characters ( \u0000-\u001f | \u007f-\u009f ). Also, it must not be
-	// the literal string arn .
+	// domain is registered in.
+	//
+	// The specified string must not start or end with whitespace. It must not contain
+	// a : (colon), / (slash), | (vertical bar), or any control characters (
+	// \u0000-\u001f | \u007f-\u009f ). Also, it must not be the literal string arn .
 	//
 	// This member is required.
 	Name *string
 
 	// The duration (in days) that records and histories of workflow executions on the
 	// domain should be kept by the service. After the retention period, the workflow
-	// execution isn't available in the results of visibility calls. If you pass the
-	// value NONE or 0 (zero), then the workflow execution history isn't retained. As
-	// soon as the workflow execution completes, the execution record and its history
-	// are deleted. The maximum workflow execution retention period is 90 days. For
-	// more information about Amazon SWF service limits, see: Amazon SWF Service Limits (https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dg-limits.html)
-	// in the Amazon SWF Developer Guide.
+	// execution isn't available in the results of visibility calls.
+	//
+	// If you pass the value NONE or 0 (zero), then the workflow execution history
+	// isn't retained. As soon as the workflow execution completes, the execution
+	// record and its history are deleted.
+	//
+	// The maximum workflow execution retention period is 90 days. For more
+	// information about Amazon SWF service limits, see: [Amazon SWF Service Limits]in the Amazon SWF Developer
+	// Guide.
+	//
+	// [Amazon SWF Service Limits]: https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dg-limits.html
 	//
 	// This member is required.
 	WorkflowExecutionRetentionPeriodInDays *string
@@ -69,8 +78,10 @@ type RegisterDomainInput struct {
 	// A text description of the domain.
 	Description *string
 
-	// Tags to be added when registering a domain. Tags may only contain unicode
-	// letters, digits, whitespace, or these symbols: _ . : / = + - @ .
+	// Tags to be added when registering a domain.
+	//
+	// Tags may only contain unicode letters, digits, whitespace, or these symbols: _
+	// . : / = + - @ .
 	Tags []types.ResourceTag
 
 	noSmithyDocumentSerde
@@ -105,25 +116,25 @@ func (c *Client) addOperationRegisterDomainMiddlewares(stack *middleware.Stack, 
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -138,13 +149,16 @@ func (c *Client) addOperationRegisterDomainMiddlewares(stack *middleware.Stack, 
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpRegisterDomainValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opRegisterDomain(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

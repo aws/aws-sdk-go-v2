@@ -63,19 +63,24 @@ type AdminAccountSummary struct {
 	// default administrator can manage third-party firewalls and has full
 	// administrative scope. There is only one default administrator account per
 	// organization. For information about Firewall Manager default administrator
-	// accounts, see Managing Firewall Manager administrators (https://docs.aws.amazon.com/waf/latest/developerguide/fms-administrators.html)
-	// in the Firewall Manager Developer Guide.
+	// accounts, see [Managing Firewall Manager administrators]in the Firewall Manager Developer Guide.
+	//
+	// [Managing Firewall Manager administrators]: https://docs.aws.amazon.com/waf/latest/developerguide/fms-administrators.html
 	DefaultAdmin bool
 
 	// The current status of the request to onboard a member account as an Firewall
-	// Manager administator.
+	// Manager administrator.
+	//
 	//   - ONBOARDING - The account is onboarding to Firewall Manager as an
 	//   administrator.
+	//
 	//   - ONBOARDING_COMPLETE - Firewall Manager The account is onboarded to Firewall
 	//   Manager as an administrator, and can perform actions on the resources defined in
-	//   their AdminScope .
+	//   their AdminScope.
+	//
 	//   - OFFBOARDING - The account is being removed as an Firewall Manager
 	//   administrator.
+	//
 	//   - OFFBOARDING_COMPLETE - The account has been removed as an Firewall Manager
 	//   administrator.
 	Status OrganizationStatus
@@ -84,9 +89,10 @@ type AdminAccountSummary struct {
 }
 
 // Defines the resources that the Firewall Manager administrator can manage. For
-// more information about administrative scope, see Managing Firewall Manager
-// administrators (https://docs.aws.amazon.com/waf/latest/developerguide/fms-administrators.html)
-// in the Firewall Manager Developer Guide.
+// more information about administrative scope, see [Managing Firewall Manager administrators]in the Firewall Manager
+// Developer Guide.
+//
+// [Managing Firewall Manager administrators]: https://docs.aws.amazon.com/waf/latest/developerguide/fms-administrators.html
 type AdminScope struct {
 
 	// Defines the accounts that the specified Firewall Manager administrator can
@@ -95,8 +101,9 @@ type AdminScope struct {
 
 	// Defines the Organizations organizational units that the specified Firewall
 	// Manager administrator can apply policies to. For more information about OUs in
-	// Organizations, see Managing organizational units (OUs)  (https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_ous.html)
-	// in the Organizations User Guide.
+	// Organizations, see [Managing organizational units (OUs)]in the Organizations User Guide.
+	//
+	// [Managing organizational units (OUs)]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_ous.html
 	OrganizationalUnitScope *OrganizationalUnitScope
 
 	// Defines the Firewall Manager policy types that the specified Firewall Manager
@@ -124,8 +131,9 @@ type App struct {
 	Port *int64
 
 	// The IP protocol name or number. The name can be one of tcp , udp , or icmp . For
-	// information on possible numbers, see Protocol Numbers (https://www.iana.org/assignments/protocol-numbers/protocol-numbers.xhtml)
-	// .
+	// information on possible numbers, see [Protocol Numbers].
+	//
+	// [Protocol Numbers]: https://www.iana.org/assignments/protocol-numbers/protocol-numbers.xhtml
 	//
 	// This member is required.
 	Protocol *string
@@ -238,14 +246,75 @@ type ComplianceViolator struct {
 	// The resource ID.
 	ResourceId *string
 
-	// The resource type. This is in the format shown in the Amazon Web Services
-	// Resource Types Reference (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-template-resource-type-ref.html)
-	// . For example: AWS::ElasticLoadBalancingV2::LoadBalancer ,
-	// AWS::CloudFront::Distribution , or AWS::NetworkFirewall::FirewallPolicy .
+	// The resource type. This is in the format shown in the [Amazon Web Services Resource Types Reference]. For example:
+	// AWS::ElasticLoadBalancingV2::LoadBalancer , AWS::CloudFront::Distribution , or
+	// AWS::NetworkFirewall::FirewallPolicy .
+	//
+	// [Amazon Web Services Resource Types Reference]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-template-resource-type-ref.html
 	ResourceType *string
 
 	// The reason that the resource is not protected by the policy.
 	ViolationReason ViolationReason
+
+	noSmithyDocumentSerde
+}
+
+// Information about the CreateNetworkAcl action in Amazon EC2. This is a
+// remediation option in RemediationAction .
+type CreateNetworkAclAction struct {
+
+	// Brief description of this remediation action.
+	Description *string
+
+	// Indicates whether it is possible for Firewall Manager to perform this
+	// remediation action. A false value indicates that auto remediation is disabled or
+	// Firewall Manager is unable to perform the action due to a conflict of some kind.
+	FMSCanRemediate bool
+
+	// The VPC that's associated with the remediation action.
+	Vpc *ActionTarget
+
+	noSmithyDocumentSerde
+}
+
+// Information about the CreateNetworkAclEntries action in Amazon EC2. This is a
+// remediation option in RemediationAction .
+type CreateNetworkAclEntriesAction struct {
+
+	// Brief description of this remediation action.
+	Description *string
+
+	// Indicates whether it is possible for Firewall Manager to perform this
+	// remediation action. A false value indicates that auto remediation is disabled or
+	// Firewall Manager is unable to perform the action due to a conflict of some kind.
+	FMSCanRemediate bool
+
+	// Lists the entries that the remediation action would create.
+	NetworkAclEntriesToBeCreated []EntryDescription
+
+	// The network ACL that's associated with the remediation action.
+	NetworkAclId *ActionTarget
+
+	noSmithyDocumentSerde
+}
+
+// Information about the DeleteNetworkAclEntries action in Amazon EC2. This is a
+// remediation option in RemediationAction .
+type DeleteNetworkAclEntriesAction struct {
+
+	// Brief description of this remediation action.
+	Description *string
+
+	// Indicates whether it is possible for Firewall Manager to perform this
+	// remediation action. A false value indicates that auto remediation is disabled or
+	// Firewall Manager is unable to perform the action due to a conflict of some kind.
+	FMSCanRemediate bool
+
+	// Lists the entries that the remediation action would delete.
+	NetworkAclEntriesToBeDeleted []EntryDescription
+
+	// The network ACL that's associated with the remediation action.
+	NetworkAclId *ActionTarget
 
 	noSmithyDocumentSerde
 }
@@ -491,6 +560,68 @@ type EC2ReplaceRouteTableAssociationAction struct {
 	noSmithyDocumentSerde
 }
 
+// Describes a single rule in a network ACL.
+type EntryDescription struct {
+
+	// Describes a rule in a network ACL.
+	//
+	// Each network ACL has a set of numbered ingress rules and a separate set of
+	// numbered egress rules. When determining whether a packet should be allowed in or
+	// out of a subnet associated with the network ACL, Amazon Web Services processes
+	// the entries in the network ACL according to the rule numbers, in ascending
+	// order.
+	//
+	// When you manage an individual network ACL, you explicitly specify the rule
+	// numbers. When you specify the network ACL rules in a Firewall Manager policy,
+	// you provide the rules to run first, in the order that you want them to run, and
+	// the rules to run last, in the order that you want them to run. Firewall Manager
+	// assigns the rule numbers for you when you save the network ACL policy
+	// specification.
+	EntryDetail *NetworkAclEntry
+
+	// The rule number for the entry. ACL entries are processed in ascending order by
+	// rule number. In a Firewall Manager network ACL policy, Firewall Manager assigns
+	// rule numbers.
+	EntryRuleNumber int32
+
+	// Specifies whether the entry is managed by Firewall Manager or by a user, and,
+	// for Firewall Manager-managed entries, specifies whether the entry is among those
+	// that run first in the network ACL or those that run last.
+	EntryType EntryType
+
+	noSmithyDocumentSerde
+}
+
+// Detailed information about an entry violation in a network ACL. The violation
+// is against the network ACL specification inside the Firewall Manager network ACL
+// policy. This data object is part of InvalidNetworkAclEntriesViolation .
+type EntryViolation struct {
+
+	// The evaluation location within the ordered list of entries where the
+	// ExpectedEntry is currently located.
+	ActualEvaluationOrder *string
+
+	// The list of entries that are in conflict with ExpectedEntry .
+	EntriesWithConflicts []EntryDescription
+
+	// The entry that's currently in the ExpectedEvaluationOrder location, in place of
+	// the expected entry.
+	EntryAtExpectedEvaluationOrder *EntryDescription
+
+	// Descriptions of the violations that Firewall Manager found for these entries.
+	EntryViolationReasons []EntryViolationReason
+
+	// The Firewall Manager-managed network ACL entry that is involved in the entry
+	// violation.
+	ExpectedEntry *EntryDescription
+
+	// The evaluation location within the ordered list of entries where the
+	// ExpectedEntry should be, according to the network ACL policy specifications.
+	ExpectedEvaluationOrder *string
+
+	noSmithyDocumentSerde
+}
+
 // Describes the compliance status for the account. An account is considered
 // noncompliant if it includes resources that are not protected by the specified
 // policy or that don't comply with the policy.
@@ -600,10 +731,175 @@ type FMSPolicyUpdateFirewallCreationConfigAction struct {
 	// Describes the remedial action.
 	Description *string
 
-	// A FirewallCreationConfig that you can copy into your current policy's
-	// SecurityServiceData (https://docs.aws.amazon.com/fms/2018-01-01/APIReference/API_SecurityServicePolicyData.html)
-	// in order to remedy scope violations.
+	// A FirewallCreationConfig that you can copy into your current policy's [SecurityServiceData] in order
+	// to remedy scope violations.
+	//
+	// [SecurityServiceData]: https://docs.aws.amazon.com/fms/2018-01-01/APIReference/API_SecurityServicePolicyData.html
 	FirewallCreationConfig *string
+
+	noSmithyDocumentSerde
+}
+
+// Violation detail for the entries in a network ACL resource.
+type InvalidNetworkAclEntriesViolation struct {
+
+	// The network ACL containing the entry violations.
+	CurrentAssociatedNetworkAcl *string
+
+	// Detailed information about the entry violations in the network ACL.
+	EntryViolations []EntryViolation
+
+	// The subnet that's associated with the network ACL.
+	Subnet *string
+
+	// The Availability Zone where the network ACL is in use.
+	SubnetAvailabilityZone *string
+
+	// The VPC where the violation was found.
+	Vpc *string
+
+	noSmithyDocumentSerde
+}
+
+// Defines a Firewall Manager network ACL policy. This is used in the PolicyOption
+// of a SecurityServicePolicyData for a Policy , when the SecurityServicePolicyData
+// type is set to NETWORK_ACL_COMMON .
+//
+// For information about network ACLs, see [Control traffic to subnets using network ACLs] in the Amazon Virtual Private Cloud
+// User Guide.
+//
+// [Control traffic to subnets using network ACLs]: https://docs.aws.amazon.com/vpc/latest/userguide/vpc-network-acls.html
+type NetworkAclCommonPolicy struct {
+
+	// The definition of the first and last rules for the network ACL policy.
+	//
+	// This member is required.
+	NetworkAclEntrySet *NetworkAclEntrySet
+
+	noSmithyDocumentSerde
+}
+
+// Describes a rule in a network ACL.
+//
+// Each network ACL has a set of numbered ingress rules and a separate set of
+// numbered egress rules. When determining whether a packet should be allowed in or
+// out of a subnet associated with the network ACL, Amazon Web Services processes
+// the entries in the network ACL according to the rule numbers, in ascending
+// order.
+//
+// When you manage an individual network ACL, you explicitly specify the rule
+// numbers. When you specify the network ACL rules in a Firewall Manager policy,
+// you provide the rules to run first, in the order that you want them to run, and
+// the rules to run last, in the order that you want them to run. Firewall Manager
+// assigns the rule numbers for you when you save the network ACL policy
+// specification.
+type NetworkAclEntry struct {
+
+	// Indicates whether the rule is an egress, or outbound, rule (applied to traffic
+	// leaving the subnet). If it's not an egress rule, then it's an ingress, or
+	// inbound, rule.
+	//
+	// This member is required.
+	Egress *bool
+
+	// The protocol number. A value of "-1" means all protocols.
+	//
+	// This member is required.
+	Protocol *string
+
+	// Indicates whether to allow or deny the traffic that matches the rule.
+	//
+	// This member is required.
+	RuleAction NetworkAclRuleAction
+
+	// The IPv4 network range to allow or deny, in CIDR notation.
+	CidrBlock *string
+
+	// ICMP protocol: The ICMP type and code.
+	IcmpTypeCode *NetworkAclIcmpTypeCode
+
+	// The IPv6 network range to allow or deny, in CIDR notation.
+	Ipv6CidrBlock *string
+
+	// TCP or UDP protocols: The range of ports the rule applies to.
+	PortRange *NetworkAclPortRange
+
+	noSmithyDocumentSerde
+}
+
+// The configuration of the first and last rules for the network ACL policy, and
+// the remediation settings for each.
+type NetworkAclEntrySet struct {
+
+	// Applies only when remediation is enabled for the policy as a whole. Firewall
+	// Manager uses this setting when it finds policy violations that involve conflicts
+	// between the custom entries and the policy entries.
+	//
+	// If forced remediation is disabled, Firewall Manager marks the network ACL as
+	// noncompliant and does not try to remediate. For more information about the
+	// remediation behavior, see [Remediation for managed network ACLs]in the Firewall Manager Developer Guide.
+	//
+	// [Remediation for managed network ACLs]: https://docs.aws.amazon.com/waf/latest/developerguide/network-acl-policies.html#network-acls-remediation
+	//
+	// This member is required.
+	ForceRemediateForFirstEntries *bool
+
+	// Applies only when remediation is enabled for the policy as a whole. Firewall
+	// Manager uses this setting when it finds policy violations that involve conflicts
+	// between the custom entries and the policy entries.
+	//
+	// If forced remediation is disabled, Firewall Manager marks the network ACL as
+	// noncompliant and does not try to remediate. For more information about the
+	// remediation behavior, see [Remediation for managed network ACLs]in the Firewall Manager Developer Guide.
+	//
+	// [Remediation for managed network ACLs]: https://docs.aws.amazon.com/waf/latest/developerguide/network-acl-policies.html#network-acls-remediation
+	//
+	// This member is required.
+	ForceRemediateForLastEntries *bool
+
+	// The rules that you want to run first in the Firewall Manager managed network
+	// ACLs.
+	//
+	// Provide these in the order in which you want them to run. Firewall Manager will
+	// assign the specific rule numbers for you, in the network ACLs that it creates.
+	//
+	// You must specify at least one first entry or one last entry in any network ACL
+	// policy.
+	FirstEntries []NetworkAclEntry
+
+	// The rules that you want to run last in the Firewall Manager managed network
+	// ACLs.
+	//
+	// Provide these in the order in which you want them to run. Firewall Manager will
+	// assign the specific rule numbers for you, in the network ACLs that it creates.
+	//
+	// You must specify at least one first entry or one last entry in any network ACL
+	// policy.
+	LastEntries []NetworkAclEntry
+
+	noSmithyDocumentSerde
+}
+
+// ICMP protocol: The ICMP type and code.
+type NetworkAclIcmpTypeCode struct {
+
+	// ICMP code.
+	Code *int32
+
+	// ICMP type.
+	Type *int32
+
+	noSmithyDocumentSerde
+}
+
+// TCP or UDP protocols: The range of ports the rule applies to.
+type NetworkAclPortRange struct {
+
+	// The beginning port number of the range.
+	From *int32
+
+	// The ending port number of the range.
+	To *int32
 
 	noSmithyDocumentSerde
 }
@@ -812,14 +1108,16 @@ type NetworkFirewallMissingSubnetViolation struct {
 }
 
 // Configures the firewall policy deployment model of Network Firewall. For
-// information about Network Firewall deployment models, see Network Firewall
-// example architectures with routing (https://docs.aws.amazon.com/network-firewall/latest/developerguide/architectures.html)
-// in the Network Firewall Developer Guide.
+// information about Network Firewall deployment models, see [Network Firewall example architectures with routing]in the Network
+// Firewall Developer Guide.
+//
+// [Network Firewall example architectures with routing]: https://docs.aws.amazon.com/network-firewall/latest/developerguide/architectures.html
 type NetworkFirewallPolicy struct {
 
 	// Defines the deployment model to use for the firewall policy. To use a
-	// distributed model, set PolicyOption (https://docs.aws.amazon.com/fms/2018-01-01/APIReference/API_PolicyOption.html)
-	// to NULL .
+	// distributed model, set [PolicyOption]to NULL .
+	//
+	// [PolicyOption]: https://docs.aws.amazon.com/fms/2018-01-01/APIReference/API_PolicyOption.html
 	FirewallDeploymentModel FirewallDeploymentModel
 
 	noSmithyDocumentSerde
@@ -830,10 +1128,16 @@ type NetworkFirewallPolicyDescription struct {
 
 	// The default actions to take on a packet that doesn't match any stateful rules.
 	// The stateful default action is optional, and is only valid when using the strict
-	// rule order. Valid values of the stateful default action:
+	// rule order.
+	//
+	// Valid values of the stateful default action:
+	//
 	//   - aws:drop_strict
+	//
 	//   - aws:drop_established
+	//
 	//   - aws:alert_strict
+	//
 	//   - aws:alert_established
 	StatefulDefaultActions []string
 
@@ -857,15 +1161,15 @@ type NetworkFirewallPolicyDescription struct {
 	// rule groups.
 	StatelessFragmentDefaultActions []string
 
-	// The stateless rule groups that are used in the Network Firewall firewall policy.
+	// The stateless rule groups that are used in the Network Firewall firewall
+	// policy.
 	StatelessRuleGroups []StatelessRuleGroup
 
 	noSmithyDocumentSerde
 }
 
 // Violation detail for Network Firewall for a firewall policy that has a
-// different NetworkFirewallPolicyDescription than is required by the Firewall
-// Manager policy.
+// different NetworkFirewallPolicyDescriptionthan is required by the Firewall Manager policy.
 type NetworkFirewallPolicyModifiedViolation struct {
 
 	// The policy that's currently in use in the individual account.
@@ -934,8 +1238,9 @@ type NetworkFirewallUnexpectedGatewayRoutesViolation struct {
 
 // Defines the Organizations organizational units (OUs) that the specified
 // Firewall Manager administrator can apply policies to. For more information about
-// OUs in Organizations, see Managing organizational units (OUs)  (https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_ous.html)
-// in the Organizations User Guide.
+// OUs in Organizations, see [Managing organizational units (OUs)]in the Organizations User Guide.
+//
+// [Managing organizational units (OUs)]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_ous.html
 type OrganizationalUnitScope struct {
 
 	// A boolean value that indicates if the administrator can apply policies to all
@@ -1005,22 +1310,32 @@ type Policy struct {
 	RemediationEnabled bool
 
 	// The type of resource protected by or in scope of the policy. This is in the
-	// format shown in the Amazon Web Services Resource Types Reference (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-template-resource-type-ref.html)
-	// . To apply this policy to multiple resource types, specify a resource type of
-	// ResourceTypeList and then specify the resource types in a ResourceTypeList . The
-	// following are valid resource types for each Firewall Manager policy type:
+	// format shown in the [Amazon Web Services Resource Types Reference]. To apply this policy to multiple resource types, specify
+	// a resource type of ResourceTypeList and then specify the resource types in a
+	// ResourceTypeList .
+	//
+	// The following are valid resource types for each Firewall Manager policy type:
+	//
 	//   - Amazon Web Services WAF Classic - AWS::ApiGateway::Stage ,
-	//   AWS::CloudFront::Distribution , and AWS::ElasticLoadBalancingV2::LoadBalancer
-	//   .
+	//   AWS::CloudFront::Distribution , and AWS::ElasticLoadBalancingV2::LoadBalancer .
+	//
 	//   - WAF - AWS::ApiGateway::Stage , AWS::ElasticLoadBalancingV2::LoadBalancer ,
 	//   and AWS::CloudFront::Distribution .
-	//   - DNS Firewall, Network Firewall, and third-party firewall - AWS::EC2::VPC .
+	//
 	//   - Shield Advanced - AWS::ElasticLoadBalancingV2::LoadBalancer ,
 	//   AWS::ElasticLoadBalancing::LoadBalancer , AWS::EC2::EIP , and
 	//   AWS::CloudFront::Distribution .
+	//
+	//   - Network ACL - AWS::EC2::Subnet .
+	//
+	//   - Security group usage audit - AWS::EC2::SecurityGroup .
+	//
 	//   - Security group content audit - AWS::EC2::SecurityGroup ,
 	//   AWS::EC2::NetworkInterface , and AWS::EC2::Instance .
-	//   - Security group usage audit - AWS::EC2::SecurityGroup .
+	//
+	//   - DNS Firewall, Network Firewall, and third-party firewall - AWS::EC2::VPC .
+	//
+	// [Amazon Web Services Resource Types Reference]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-template-resource-type-ref.html
 	//
 	// This member is required.
 	ResourceType *string
@@ -1035,25 +1350,33 @@ type Policy struct {
 	// Manager is managing for accounts when those accounts leave policy scope. For
 	// example, Firewall Manager will disassociate a Firewall Manager managed web ACL
 	// from a protected customer resource when the customer resource leaves policy
-	// scope. By default, Firewall Manager doesn't remove protections or delete
-	// Firewall Manager managed resources. This option is not available for Shield
-	// Advanced or WAF Classic policies.
+	// scope.
+	//
+	// By default, Firewall Manager doesn't remove protections or delete Firewall
+	// Manager managed resources.
+	//
+	// This option is not available for Shield Advanced or WAF Classic policies.
 	DeleteUnusedFMManagedResources bool
 
 	// Specifies the Amazon Web Services account IDs and Organizations organizational
 	// units (OUs) to exclude from the policy. Specifying an OU is the equivalent of
 	// specifying all accounts in the OU and in any of its child OUs, including any
-	// child OUs and accounts that are added at a later time. You can specify
-	// inclusions or exclusions, but not both. If you specify an IncludeMap , Firewall
-	// Manager applies the policy to all accounts specified by the IncludeMap , and
-	// does not evaluate any ExcludeMap specifications. If you do not specify an
-	// IncludeMap , then Firewall Manager applies the policy to all accounts except for
-	// those specified by the ExcludeMap . You can specify account IDs, OUs, or a
-	// combination:
+	// child OUs and accounts that are added at a later time.
+	//
+	// You can specify inclusions or exclusions, but not both. If you specify an
+	// IncludeMap , Firewall Manager applies the policy to all accounts specified by
+	// the IncludeMap , and does not evaluate any ExcludeMap specifications. If you do
+	// not specify an IncludeMap , then Firewall Manager applies the policy to all
+	// accounts except for those specified by the ExcludeMap .
+	//
+	// You can specify account IDs, OUs, or a combination:
+	//
 	//   - Specify account IDs by setting the key to ACCOUNT . For example, the
 	//   following is a valid map: {“ACCOUNT” : [“accountID1”, “accountID2”]} .
+	//
 	//   - Specify OUs by setting the key to ORG_UNIT . For example, the following is a
 	//   valid map: {“ORG_UNIT” : [“ouid111”, “ouid112”]} .
+	//
 	//   - Specify accounts and OUs together in a single map, separated with a comma.
 	//   For example, the following is a valid map: {“ACCOUNT” : [“accountID1”,
 	//   “accountID2”], “ORG_UNIT” : [“ouid111”, “ouid112”]} .
@@ -1062,30 +1385,37 @@ type Policy struct {
 	// Specifies the Amazon Web Services account IDs and Organizations organizational
 	// units (OUs) to include in the policy. Specifying an OU is the equivalent of
 	// specifying all accounts in the OU and in any of its child OUs, including any
-	// child OUs and accounts that are added at a later time. You can specify
-	// inclusions or exclusions, but not both. If you specify an IncludeMap , Firewall
-	// Manager applies the policy to all accounts specified by the IncludeMap , and
-	// does not evaluate any ExcludeMap specifications. If you do not specify an
-	// IncludeMap , then Firewall Manager applies the policy to all accounts except for
-	// those specified by the ExcludeMap . You can specify account IDs, OUs, or a
-	// combination:
+	// child OUs and accounts that are added at a later time.
+	//
+	// You can specify inclusions or exclusions, but not both. If you specify an
+	// IncludeMap , Firewall Manager applies the policy to all accounts specified by
+	// the IncludeMap , and does not evaluate any ExcludeMap specifications. If you do
+	// not specify an IncludeMap , then Firewall Manager applies the policy to all
+	// accounts except for those specified by the ExcludeMap .
+	//
+	// You can specify account IDs, OUs, or a combination:
+	//
 	//   - Specify account IDs by setting the key to ACCOUNT . For example, the
 	//   following is a valid map: {“ACCOUNT” : [“accountID1”, “accountID2”]} .
+	//
 	//   - Specify OUs by setting the key to ORG_UNIT . For example, the following is a
 	//   valid map: {“ORG_UNIT” : [“ouid111”, “ouid112”]} .
+	//
 	//   - Specify accounts and OUs together in a single map, separated with a comma.
 	//   For example, the following is a valid map: {“ACCOUNT” : [“accountID1”,
 	//   “accountID2”], “ORG_UNIT” : [“ouid111”, “ouid112”]} .
 	IncludeMap map[string][]string
 
-	// The definition of the Network Firewall firewall policy.
+	// Your description of the Firewall Manager policy.
 	PolicyDescription *string
 
 	// The ID of the Firewall Manager policy.
 	PolicyId *string
 
 	// Indicates whether the policy is in or out of an admin's policy or Region scope.
+	//
 	//   - ACTIVE - The administrator can manage and delete the policy.
+	//
 	//   - OUT_OF_ADMIN_SCOPE - The administrator can view the policy, but they can't
 	//   edit or delete the policy. Existing policy protections stay in place. Any new
 	//   resources that come into scope of the policy won't be protected.
@@ -1174,9 +1504,12 @@ type PolicyComplianceStatus struct {
 	noSmithyDocumentSerde
 }
 
-// Contains the Network Firewall firewall policy options to configure the policy's
-// deployment model and third-party firewall policy settings.
+// Contains the settings to configure a network ACL policy, a Network Firewall
+// firewall policy deployment model, or a third-party firewall policy.
 type PolicyOption struct {
+
+	// Defines a Firewall Manager network ACL policy.
+	NetworkAclCommonPolicy *NetworkAclCommonPolicy
 
 	// Defines the deployment model to use for the firewall policy.
 	NetworkFirewallPolicy *NetworkFirewallPolicy
@@ -1195,9 +1528,12 @@ type PolicySummary struct {
 	// Manager is managing for accounts when those accounts leave policy scope. For
 	// example, Firewall Manager will disassociate a Firewall Manager managed web ACL
 	// from a protected customer resource when the customer resource leaves policy
-	// scope. By default, Firewall Manager doesn't remove protections or delete
-	// Firewall Manager managed resources. This option is not available for Shield
-	// Advanced or WAF Classic policies.
+	// scope.
+	//
+	// By default, Firewall Manager doesn't remove protections or delete Firewall
+	// Manager managed resources.
+	//
+	// This option is not available for Shield Advanced or WAF Classic policies.
 	DeleteUnusedFMManagedResources bool
 
 	// The Amazon Resource Name (ARN) of the specified policy.
@@ -1210,7 +1546,9 @@ type PolicySummary struct {
 	PolicyName *string
 
 	// Indicates whether the policy is in or out of an admin's policy or Region scope.
+	//
 	//   - ACTIVE - The administrator can manage and delete the policy.
+	//
 	//   - OUT_OF_ADMIN_SCOPE - The administrator can view the policy, but they can't
 	//   edit or delete the policy. Existing policy protections stay in place. Any new
 	//   resources that come into scope of the policy won't be protected.
@@ -1220,15 +1558,9 @@ type PolicySummary struct {
 	RemediationEnabled bool
 
 	// The type of resource protected by or in scope of the policy. This is in the
-	// format shown in the Amazon Web Services Resource Types Reference (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-template-resource-type-ref.html)
-	// . For WAF and Shield Advanced, examples include
-	// AWS::ElasticLoadBalancingV2::LoadBalancer and AWS::CloudFront::Distribution .
-	// For a security group common policy, valid values are AWS::EC2::NetworkInterface
-	// and AWS::EC2::Instance . For a security group content audit policy, valid values
-	// are AWS::EC2::SecurityGroup , AWS::EC2::NetworkInterface , and
-	// AWS::EC2::Instance . For a security group usage audit policy, the value is
-	// AWS::EC2::SecurityGroup . For an Network Firewall policy or DNS Firewall policy,
-	// the value is AWS::EC2::VPC .
+	// format shown in the [Amazon Web Services Resource Types Reference].
+	//
+	// [Amazon Web Services Resource Types Reference]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-template-resource-type-ref.html
 	ResourceType *string
 
 	// The service that the policy is using to protect the resources. This specifies
@@ -1354,6 +1686,15 @@ type RegionScope struct {
 // Information about an individual action you can take to remediate a violation.
 type RemediationAction struct {
 
+	// Information about the CreateNetworkAcl action in Amazon EC2.
+	CreateNetworkAclAction *CreateNetworkAclAction
+
+	// Information about the CreateNetworkAclEntries action in Amazon EC2.
+	CreateNetworkAclEntriesAction *CreateNetworkAclEntriesAction
+
+	// Information about the DeleteNetworkAclEntries action in Amazon EC2.
+	DeleteNetworkAclEntriesAction *DeleteNetworkAclEntriesAction
+
 	// A description of a remediation action.
 	Description *string
 
@@ -1381,6 +1722,9 @@ type RemediationAction struct {
 	// The remedial action to take when updating a firewall configuration.
 	FMSPolicyUpdateFirewallCreationConfigAction *FMSPolicyUpdateFirewallCreationConfigAction
 
+	// Information about the ReplaceNetworkAclAssociation action in Amazon EC2.
+	ReplaceNetworkAclAssociationAction *ReplaceNetworkAclAssociationAction
+
 	noSmithyDocumentSerde
 }
 
@@ -1392,6 +1736,27 @@ type RemediationActionWithOrder struct {
 
 	// Information about an action you can take to remediate a violation.
 	RemediationAction *RemediationAction
+
+	noSmithyDocumentSerde
+}
+
+// Information about the ReplaceNetworkAclAssociation action in Amazon EC2. This
+// is a remediation option in RemediationAction .
+type ReplaceNetworkAclAssociationAction struct {
+
+	// Describes a remediation action target.
+	AssociationId *ActionTarget
+
+	// Brief description of this remediation action.
+	Description *string
+
+	// Indicates whether it is possible for Firewall Manager to perform this
+	// remediation action. A false value indicates that auto remediation is disabled or
+	// Firewall Manager is unable to perform the action due to a conflict of some kind.
+	FMSCanRemediate bool
+
+	// The network ACL that's associated with the remediation action.
+	NetworkAclId *ActionTarget
 
 	noSmithyDocumentSerde
 }
@@ -1438,7 +1803,9 @@ type ResourceSet struct {
 	LastUpdateTime *time.Time
 
 	// Indicates whether the resource set is in or out of an admin's Region scope.
+	//
 	//   - ACTIVE - The administrator can manage and delete the resource set.
+	//
 	//   - OUT_OF_ADMIN_SCOPE - The administrator can view the resource set, but they
 	//   can't edit or delete the resource set. Existing protections stay in place. Any
 	//   new resource that come into scope of the resource set won't be protected.
@@ -1448,16 +1815,18 @@ type ResourceSet struct {
 	// returns a token to your requests that access the resource set. The token marks
 	// the state of the resource set resource at the time of the request. Update tokens
 	// are not allowed when creating a resource set. After creation, each subsequent
-	// update call to the resource set requires the update token. To make an
-	// unconditional change to the resource set, omit the token in your update request.
-	// Without the token, Firewall Manager performs your updates regardless of whether
-	// the resource set has changed since you last retrieved it. To make a conditional
-	// change to the resource set, provide the token in your update request. Firewall
-	// Manager uses the token to ensure that the resource set hasn't changed since you
-	// last retrieved it. If it has changed, the operation fails with an
-	// InvalidTokenException . If this happens, retrieve the resource set again to get
-	// a current copy of it with a new token. Reapply your changes as needed, then try
-	// the operation again using the new token.
+	// update call to the resource set requires the update token.
+	//
+	// To make an unconditional change to the resource set, omit the token in your
+	// update request. Without the token, Firewall Manager performs your updates
+	// regardless of whether the resource set has changed since you last retrieved it.
+	//
+	// To make a conditional change to the resource set, provide the token in your
+	// update request. Firewall Manager uses the token to ensure that the resource set
+	// hasn't changed since you last retrieved it. If it has changed, the operation
+	// fails with an InvalidTokenException . If this happens, retrieve the resource set
+	// again to get a current copy of it with a new token. Reapply your changes as
+	// needed, then try the operation again using the new token.
 	UpdateToken *string
 
 	noSmithyDocumentSerde
@@ -1482,7 +1851,9 @@ type ResourceSetSummary struct {
 	Name *string
 
 	// Indicates whether the resource set is in or out of an admin's Region scope.
+	//
 	//   - ACTIVE - The administrator can manage and delete the resource set.
+	//
 	//   - OUT_OF_ADMIN_SCOPE - The administrator can view the resource set, but they
 	//   can't edit or delete the resource set. Existing protections stay in place. Any
 	//   new resource that come into scope of the resource set won't be protected.
@@ -1497,9 +1868,16 @@ type ResourceSetSummary struct {
 // for example, by purpose, owner, or environment. Each tag consists of a key and
 // an optional value. Firewall Manager combines the tags with "AND" so that, if you
 // add more than one tag to a policy scope, a resource must have all the specified
-// tags to be included or excluded. For more information, see Working with Tag
-// Editor (https://docs.aws.amazon.com/awsconsolehelpdocs/latest/gsg/tag-editor.html)
-// .
+// tags to be included or excluded. For more information, see [Working with Tag Editor].
+//
+// Every resource tag must have a string value, either a non-empty string or an
+// empty string. If you don't provide a value for a resource tag, Firewall Manager
+// saves the value as an empty string: "". When Firewall Manager compares tags, it
+// only matches two tags if they have the same key and the same value. A tag with
+// an empty string value only matches with tags that also have an empty string
+// value.
+//
+// [Working with Tag Editor]: https://docs.aws.amazon.com/awsconsolehelpdocs/latest/gsg/tag-editor.html
 type ResourceTag struct {
 
 	// The resource tag key.
@@ -1507,7 +1885,8 @@ type ResourceTag struct {
 	// This member is required.
 	Key *string
 
-	// The resource tag value.
+	// The resource tag value. To specify an empty string value, either don't provide
+	// this or specify it as "".
 	Value *string
 
 	noSmithyDocumentSerde
@@ -1546,6 +1925,9 @@ type ResourceViolation struct {
 	// The violation details for a third-party firewall's VPC endpoint subnet that was
 	// deleted.
 	FirewallSubnetMissingVPCEndpointViolation *FirewallSubnetMissingVPCEndpointViolation
+
+	// Violation detail for the entries in a network ACL resource.
+	InvalidNetworkAclEntriesViolation *InvalidNetworkAclEntriesViolation
 
 	// Violation detail for an internet gateway route with an inactive state in the
 	// customer subnet route table or Network Firewall subnet route table.
@@ -1727,112 +2109,158 @@ type SecurityServicePolicyData struct {
 
 	// Details about the service that are specific to the service type, in JSON
 	// format.
+	//
 	//   - Example: DNS_FIREWALL
+	//
 	//   "{\"type\":\"DNS_FIREWALL\",\"preProcessRuleGroups\":[{\"ruleGroupId\":\"rslvr-frg-1\",\"priority\":10}],\"postProcessRuleGroups\":[{\"ruleGroupId\":\"rslvr-frg-2\",\"priority\":9911}]}"
-	//   Valid values for preProcessRuleGroups are between 1 and 99. Valid values for
+	//
+	// Valid values for preProcessRuleGroups are between 1 and 99. Valid values for
 	//   postProcessRuleGroups are between 9901 and 10000.
+	//
 	//   - Example: IMPORT_NETWORK_FIREWALL
+	//
 	//   "{\"type\":\"IMPORT_NETWORK_FIREWALL\",\"awsNetworkFirewallConfig\":{\"networkFirewallStatelessRuleGroupReferences\":[{\"resourceARN\":\"arn:aws:network-firewall:us-west-2:000000000000:stateless-rulegroup\/rg1\",\"priority\":1}],\"networkFirewallStatelessDefaultActions\":[\"aws:drop\"],\"networkFirewallStatelessFragmentDefaultActions\":[\"aws:pass\"],\"networkFirewallStatelessCustomActions\":[],\"networkFirewallStatefulRuleGroupReferences\":[{\"resourceARN\":\"arn:aws:network-firewall:us-west-2:aws-managed:stateful-rulegroup\/ThreatSignaturesEmergingEventsStrictOrder\",\"priority\":8}],\"networkFirewallStatefulEngineOptions\":{\"ruleOrder\":\"STRICT_ORDER\"},\"networkFirewallStatefulDefaultActions\":[\"aws:drop_strict\"]}}"
+	//
 	//   "{\"type\":\"DNS_FIREWALL\",\"preProcessRuleGroups\":[{\"ruleGroupId\":\"rslvr-frg-1\",\"priority\":10}],\"postProcessRuleGroups\":[{\"ruleGroupId\":\"rslvr-frg-2\",\"priority\":9911}]}"
-	//   Valid values for preProcessRuleGroups are between 1 and 99. Valid values for
+	//
+	// Valid values for preProcessRuleGroups are between 1 and 99. Valid values for
 	//   postProcessRuleGroups are between 9901 and 10000.
+	//
 	//   - Example: NETWORK_FIREWALL - Centralized deployment model
+	//
 	//   "{\"type\":\"NETWORK_FIREWALL\",\"awsNetworkFirewallConfig\":{\"networkFirewallStatelessRuleGroupReferences\":[{\"resourceARN\":\"arn:aws:network-firewall:us-east-1:123456789011:stateless-rulegroup/test\",\"priority\":1}],\"networkFirewallStatelessDefaultActions\":[\"aws:forward_to_sfe\",\"customActionName\"],\"networkFirewallStatelessFragmentDefaultActions\":[\"aws:forward_to_sfe\",\"customActionName\"],\"networkFirewallStatelessCustomActions\":[{\"actionName\":\"customActionName\",\"actionDefinition\":{\"publishMetricAction\":{\"dimensions\":[{\"value\":\"metricdimensionvalue\"}]}}}],\"networkFirewallStatefulRuleGroupReferences\":[{\"resourceARN\":\"arn:aws:network-firewall:us-east-1:123456789011:stateful-rulegroup/test\"}],\"networkFirewallLoggingConfiguration\":{\"logDestinationConfigs\":[{\"logDestinationType\":\"S3\",\"logType\":\"ALERT\",\"logDestination\":{\"bucketName\":\"s3-bucket-name\"}},{\"logDestinationType\":\"S3\",\"logType\":\"FLOW\",\"logDestination\":{\"bucketName\":\"s3-bucket-name\"}}],\"overrideExistingConfig\":true}},\"firewallDeploymentModel\":{\"centralizedFirewallDeploymentModel\":{\"centralizedFirewallOrchestrationConfig\":{\"inspectionVpcIds\":[{\"resourceId\":\"vpc-1234\",\"accountId\":\"123456789011\"}],\"firewallCreationConfig\":{\"endpointLocation\":{\"availabilityZoneConfigList\":[{\"availabilityZoneId\":null,\"availabilityZoneName\":\"us-east-1a\",\"allowedIPV4CidrList\":[\"10.0.0.0/28\"]}]}},\"allowedIPV4CidrList\":[]}}}}"
-	//   To use the centralized deployment model, you must set PolicyOption (https://docs.aws.amazon.com/fms/2018-01-01/APIReference/API_PolicyOption.html)
-	//   to CENTRALIZED .
+	//
+	// To use the centralized deployment model, you must set [PolicyOption]to CENTRALIZED .
+	//
 	//   - Example: NETWORK_FIREWALL - Distributed deployment model with automatic
 	//   Availability Zone configuration
+	//
 	//   "{\"type\":\"NETWORK_FIREWALL\",\"networkFirewallStatelessRuleGroupReferences\":[{\"resourceARN\":\"arn:aws:network-firewall:us-east-1:123456789011:stateless-rulegroup/test\",\"priority\":1}],\"networkFirewallStatelessDefaultActions\":[\"aws:forward_to_sfe\",\"customActionName\"],\"networkFirewallStatelessFragmentDefaultActions\":[\"aws:forward_to_sfe\",\"customActionName\"],\"networkFirewallStatelessCustomActions\":[{\"actionName\":\"customActionName\",\"actionDefinition\":{\"publishMetricAction\":{\"dimensions\":[{\"value\":\"metricdimensionvalue\"}]}}}],\"networkFirewallStatefulRuleGroupReferences\":[{\"resourceARN\":\"arn:aws:network-firewall:us-east-1:123456789011:stateful-rulegroup/test\"}],\"networkFirewallOrchestrationConfig\":{\"singleFirewallEndpointPerVPC\":false,\"allowedIPV4CidrList\":[\"10.0.0.0/28\",\"192.168.0.0/28\"],\"routeManagementAction\":\"OFF\"},\"networkFirewallLoggingConfiguration\":{\"logDestinationConfigs\":[{\"logDestinationType\":\"S3\",\"logType\":\"ALERT\",\"logDestination\":{\"bucketName\":\"s3-bucket-name\"}},{\"logDestinationType\":\"S3\",\"logType\":\"FLOW\",\"logDestination\":{\"bucketName\":\"s3-bucket-name\"}}],\"overrideExistingConfig\":true}}"
-	//   With automatic Availbility Zone configuration, Firewall Manager chooses which
+	//
+	// With automatic Availbility Zone configuration, Firewall Manager chooses which
 	//   Availability Zones to create the endpoints in. To use the distributed deployment
-	//   model, you must set PolicyOption (https://docs.aws.amazon.com/fms/2018-01-01/APIReference/API_PolicyOption.html)
-	//   to NULL .
+	//   model, you must set [PolicyOption]to NULL .
+	//
 	//   - Example: NETWORK_FIREWALL - Distributed deployment model with automatic
 	//   Availability Zone configuration and route management
+	//
 	//   "{\"type\":\"NETWORK_FIREWALL\",\"networkFirewallStatelessRuleGroupReferences\":[{\"resourceARN\":\"arn:aws:network-firewall:us-east-1:123456789011:stateless-rulegroup/test\",\"priority\":1}],\"networkFirewallStatelessDefaultActions\":[\"aws:forward_to_sfe\",\"customActionName\"],\"networkFirewallStatelessFragmentDefaultActions\":[\"aws:forward_to_sfe\",\"customActionName\"],\"networkFirewallStatelessCustomActions\":[{\"actionName\":\"customActionName\",\"actionDefinition\":{\"publishMetricAction\":{\"dimensions\":[{\"value\":\"metricdimensionvalue\"}]}}}],\"networkFirewallStatefulRuleGroupReferences\":[{\"resourceARN\":\"arn:aws:network-firewall:us-east-1:123456789011:stateful-rulegroup/test\"}],\"networkFirewallOrchestrationConfig\":{\"singleFirewallEndpointPerVPC\":false,\"allowedIPV4CidrList\":[\"10.0.0.0/28\",\"192.168.0.0/28\"],\"routeManagementAction\":\"MONITOR\",\"routeManagementTargetTypes\":[\"InternetGateway\"]},\"networkFirewallLoggingConfiguration\":{\"logDestinationConfigs\":[{\"logDestinationType\":\"S3\",\"logType\":\"ALERT\",\"logDestination\":{\"bucketName\":\"s3-bucket-name\"}},{\"logDestinationType\":\"S3\",\"logType\":
 	//   \"FLOW\",\"logDestination\":{\"bucketName\":\"s3-bucket-name\"}}],\"overrideExistingConfig\":true}}"
-	//   To use the distributed deployment model, you must set PolicyOption (https://docs.aws.amazon.com/fms/2018-01-01/APIReference/API_PolicyOption.html)
-	//   to NULL .
+	//
+	// To use the distributed deployment model, you must set [PolicyOption]to NULL .
+	//
 	//   - Example: NETWORK_FIREWALL - Distributed deployment model with custom
 	//   Availability Zone configuration
+	//
 	//   "{\"type\":\"NETWORK_FIREWALL\",\"networkFirewallStatelessRuleGroupReferences\":[{\"resourceARN\":\"arn:aws:network-firewall:us-east-1:123456789011:stateless-rulegroup/test\",\"priority\":1}],\"networkFirewallStatelessDefaultActions\":[\"aws:forward_to_sfe\",\"customActionName\"],\"networkFirewallStatelessFragmentDefaultActions\":[\"aws:forward_to_sfe\",\"fragmentcustomactionname\"],\"networkFirewallStatelessCustomActions\":[{\"actionName\":\"customActionName\",
 	//   \"actionDefinition\":{\"publishMetricAction\":{\"dimensions\":[{\"value\":\"metricdimensionvalue\"}]}}},{\"actionName\":\"fragmentcustomactionname\",\"actionDefinition\":{\"publishMetricAction\":{\"dimensions\":[{\"value\":\"fragmentmetricdimensionvalue\"}]}}}],\"networkFirewallStatefulRuleGroupReferences\":[{\"resourceARN\":\"arn:aws:network-firewall:us-east-1:123456789011:stateful-rulegroup/test\"}],\"networkFirewallOrchestrationConfig\":{\"firewallCreationConfig\":{
 	//   \"endpointLocation\":{\"availabilityZoneConfigList\":[{\"availabilityZoneName\":\"us-east-1a\",\"allowedIPV4CidrList\":[\"10.0.0.0/28\"]},{\"availabilityZoneName\":\"us-east-1b\",\"allowedIPV4CidrList\":[
 	//   \"10.0.0.0/28\"]}]}
 	//   },\"singleFirewallEndpointPerVPC\":false,\"allowedIPV4CidrList\":null,\"routeManagementAction\":\"OFF\",\"networkFirewallLoggingConfiguration\":{\"logDestinationConfigs\":[{\"logDestinationType\":\"S3\",\"logType\":\"ALERT\",\"logDestination\":{\"bucketName\":\"s3-bucket-name\"}},{\"logDestinationType\":\"S3\",\"logType\":\"FLOW\",\"logDestination\":{\"bucketName\":\"s3-bucket-name\"}}],\"overrideExistingConfig\":boolean}}"
-	//   With custom Availability Zone configuration, you define which specific
+	//
+	// With custom Availability Zone configuration, you define which specific
 	//   Availability Zones to create endpoints in by configuring
 	//   firewallCreationConfig . To configure the Availability Zones in
 	//   firewallCreationConfig , specify either the availabilityZoneName or
-	//   availabilityZoneId parameter, not both parameters. To use the distributed
-	//   deployment model, you must set PolicyOption (https://docs.aws.amazon.com/fms/2018-01-01/APIReference/API_PolicyOption.html)
-	//   to NULL .
+	//   availabilityZoneId parameter, not both parameters.
+	//
+	// To use the distributed deployment model, you must set [PolicyOption]to NULL .
+	//
 	//   - Example: NETWORK_FIREWALL - Distributed deployment model with custom
 	//   Availability Zone configuration and route management
+	//
 	//   "{\"type\":\"NETWORK_FIREWALL\",\"networkFirewallStatelessRuleGroupReferences\":[{\"resourceARN\":\"arn:aws:network-firewall:us-east-1:123456789011:stateless-rulegroup/test\",\"priority\":1}],\"networkFirewallStatelessDefaultActions\":[\"aws:forward_to_sfe\",\"customActionName\"],\"networkFirewallStatelessFragmentDefaultActions\":[\"aws:forward_to_sfe\",\"fragmentcustomactionname\"],\"networkFirewallStatelessCustomActions\":[{\"actionName\":\"customActionName\",\"actionDefinition\":{\"publishMetricAction\":{\"dimensions\":[{\"value\":\"metricdimensionvalue\"}]}}},{\"actionName\":\"fragmentcustomactionname\",\"actionDefinition\":{\"publishMetricAction\":{\"dimensions\":[{\"value\":\"fragmentmetricdimensionvalue\"}]}}}],\"networkFirewallStatefulRuleGroupReferences\":[{\"resourceARN\":\"arn:aws:network-firewall:us-east-1:123456789011:stateful-rulegroup/test\"}],\"networkFirewallOrchestrationConfig\":{\"firewallCreationConfig\":{\"endpointLocation\":{\"availabilityZoneConfigList\":[{\"availabilityZoneName\":\"us-east-1a\",\"allowedIPV4CidrList\":[\"10.0.0.0/28\"]},{\"availabilityZoneName\":\"us-east-1b\",\"allowedIPV4CidrList\":[\"10.0.0.0/28\"]}]}},\"singleFirewallEndpointPerVPC\":false,\"allowedIPV4CidrList\":null,\"routeManagementAction\":\"MONITOR\",\"routeManagementTargetTypes\":[\"InternetGateway\"],\"routeManagementConfig\":{\"allowCrossAZTrafficIfNoEndpoint\":true}},\"networkFirewallLoggingConfiguration\":{\"logDestinationConfigs\":[{\"logDestinationType\":\"S3\",\"logType\":\"ALERT\",\"logDestination\":{\"bucketName\":\"s3-bucket-name\"}},{\"logDestinationType\":\"S3\",\"logType\":\"FLOW\",\"logDestination\":{\"bucketName\":\"s3-bucket-name\"}}],\"overrideExistingConfig\":boolean}}"
-	//   To use the distributed deployment model, you must set PolicyOption (https://docs.aws.amazon.com/fms/2018-01-01/APIReference/API_PolicyOption.html)
-	//   to NULL .
+	//
+	// To use the distributed deployment model, you must set [PolicyOption]to NULL .
+	//
 	//   - Example: SECURITY_GROUPS_COMMON
+	//
 	//   "{\"type\":\"SECURITY_GROUPS_COMMON\",\"revertManualSecurityGroupChanges\":false,\"exclusiveResourceSecurityGroupManagement\":false,
 	//   \"applyToAllEC2InstanceENIs\":false,\"securityGroups\":[{\"id\":\"
 	//   sg-000e55995d61a06bd\"}]}"
+	//
 	//   - Example: SECURITY_GROUPS_COMMON - Security group tag distribution
+	//
 	//   ""{\"type\":\"SECURITY_GROUPS_COMMON\",\"securityGroups\":[{\"id\":\"sg-000e55995d61a06bd\"}],\"revertManualSecurityGroupChanges\":true,\"exclusiveResourceSecurityGroupManagement\":false,\"applyToAllEC2InstanceENIs\":false,\"includeSharedVPC\":false,\"enableTagDistribution\":true}""
-	//   Firewall Manager automatically distributes tags from the primary group to the
+	//
+	// Firewall Manager automatically distributes tags from the primary group to the
 	//   security groups created by this policy. To use security group tag distribution,
 	//   you must also set revertManualSecurityGroupChanges to true , otherwise
 	//   Firewall Manager won't be able to create the policy. When you enable
 	//   revertManualSecurityGroupChanges , Firewall Manager identifies and reports
-	//   when the security groups created by this policy become non-compliant. Firewall
-	//   Manager won't distrubute system tags added by Amazon Web Services services into
-	//   the replica security groups. System tags begin with the aws: prefix.
+	//   when the security groups created by this policy become non-compliant.
+	//
+	// Firewall Manager won't distribute system tags added by Amazon Web Services
+	//   services into the replica security groups. System tags begin with the aws:
+	//   prefix.
+	//
 	//   - Example: Shared VPCs. Apply the preceding policy to resources in shared
 	//   VPCs as well as to those in VPCs that the account owns
+	//
 	//   "{\"type\":\"SECURITY_GROUPS_COMMON\",\"revertManualSecurityGroupChanges\":false,\"exclusiveResourceSecurityGroupManagement\":false,
 	//   \"applyToAllEC2InstanceENIs\":false,\"includeSharedVPC\":true,\"securityGroups\":[{\"id\":\"
 	//   sg-000e55995d61a06bd\"}]}"
+	//
 	//   - Example: SECURITY_GROUPS_CONTENT_AUDIT
+	//
 	//   "{\"type\":\"SECURITY_GROUPS_CONTENT_AUDIT\",\"securityGroups\":[{\"id\":\"sg-000e55995d61a06bd\"}],\"securityGroupAction\":{\"type\":\"ALLOW\"}}"
-	//   The security group action for content audit can be ALLOW or DENY . For ALLOW ,
+	//
+	// The security group action for content audit can be ALLOW or DENY . For ALLOW ,
 	//   all in-scope security group rules must be within the allowed range of the
 	//   policy's security group rules. For DENY , all in-scope security group rules
 	//   must not contain a value or a range that matches a rule value or range in the
 	//   policy security group.
+	//
 	//   - Example: SECURITY_GROUPS_USAGE_AUDIT
+	//
 	//   "{\"type\":\"SECURITY_GROUPS_USAGE_AUDIT\",\"deleteUnusedSecurityGroups\":true,\"coalesceRedundantSecurityGroups\":true}"
+	//
 	//   - Example: SHIELD_ADVANCED with web ACL management
-	//   "{\"type\":\"SHIELD_ADVANCED\",\"optimizeUnassociatedWebACL\":true}" If you
-	//   set optimizeUnassociatedWebACL to true , Firewall Manager creates web ACLs in
-	//   accounts within the policy scope if the web ACLs will be used by at least one
-	//   resource. Firewall Manager creates web ACLs in the accounts within policy scope
-	//   only if the web ACLs will be used by at least one resource. If at any time an
-	//   account comes into policy scope, Firewall Manager automatically creates a web
-	//   ACL in the account if at least one resource will use the web ACL. Upon
-	//   enablement, Firewall Manager performs a one-time cleanup of unused web ACLs in
-	//   your account. The cleanup process can take several hours. If a resource leaves
-	//   policy scope after Firewall Manager creates a web ACL, Firewall Manager doesn't
-	//   disassociate the resource from the web ACL. If you want Firewall Manager to
-	//   clean up the web ACL, you must first manually disassociate the resources from
+	//
+	// "{\"type\":\"SHIELD_ADVANCED\",\"optimizeUnassociatedWebACL\":true}"
+	//
+	// If you set optimizeUnassociatedWebACL to true , Firewall Manager creates web
+	//   ACLs in accounts within the policy scope if the web ACLs will be used by at
+	//   least one resource. Firewall Manager creates web ACLs in the accounts within
+	//   policy scope only if the web ACLs will be used by at least one resource. If at
+	//   any time an account comes into policy scope, Firewall Manager automatically
+	//   creates a web ACL in the account if at least one resource will use the web ACL.
+	//
+	// Upon enablement, Firewall Manager performs a one-time cleanup of unused web
+	//   ACLs in your account. The cleanup process can take several hours. If a resource
+	//   leaves policy scope after Firewall Manager creates a web ACL, Firewall Manager
+	//   doesn't disassociate the resource from the web ACL. If you want Firewall Manager
+	//   to clean up the web ACL, you must first manually disassociate the resources from
 	//   the web ACL, and then enable the manage unused web ACLs option in your policy.
-	//   If you set optimizeUnassociatedWebACL to false , and Firewall Manager
+	//
+	// If you set optimizeUnassociatedWebACL to false , and Firewall Manager
 	//   automatically creates an empty web ACL in each account that's within policy
 	//   scope.
+	//
 	//   - Specification for SHIELD_ADVANCED for Amazon CloudFront distributions
-	//   "{\"type\":\"SHIELD_ADVANCED\",\"automaticResponseConfiguration\":
+	//
+	// "{\"type\":\"SHIELD_ADVANCED\",\"automaticResponseConfiguration\":
 	//   {\"automaticResponseStatus\":\"ENABLED|IGNORED|DISABLED\",
 	//   \"automaticResponseAction\":\"BLOCK|COUNT\"},
 	//   \"overrideCustomerWebaclClassic\":true|false,
-	//   \"optimizeUnassociatedWebACL\":true|false}" For example:
-	//   "{\"type\":\"SHIELD_ADVANCED\",\"automaticResponseConfiguration\":
+	//   \"optimizeUnassociatedWebACL\":true|false}"
+	//
+	// For example: "{\"type\":\"SHIELD_ADVANCED\",\"automaticResponseConfiguration\":
 	//   {\"automaticResponseStatus\":\"ENABLED\",
-	//   \"automaticResponseAction\":\"COUNT\"}}" The default value for
-	//   automaticResponseStatus is IGNORED . The value for automaticResponseAction is
-	//   only required when automaticResponseStatus is set to ENABLED . The default
-	//   value for overrideCustomerWebaclClassic is false . For other resource types
-	//   that you can protect with a Shield Advanced policy, this ManagedServiceData
-	//   configuration is an empty string.
-	//   - Example: THIRD_PARTY_FIREWALL Replace THIRD_PARTY_FIREWALL_NAME with the
-	//   name of the third-party firewall. "{ "type":"THIRD_PARTY_FIREWALL",
+	//   \"automaticResponseAction\":\"COUNT\"}}"
+	//
+	// The default value for automaticResponseStatus is IGNORED . The value for
+	//   automaticResponseAction is only required when automaticResponseStatus is set
+	//   to ENABLED . The default value for overrideCustomerWebaclClassic is false .
+	//
+	// For other resource types that you can protect with a Shield Advanced policy,
+	//   this ManagedServiceData configuration is an empty string.
+	//
+	//   - Example: THIRD_PARTY_FIREWALL
+	//
+	// Replace THIRD_PARTY_FIREWALL_NAME with the name of the third-party firewall.
+	//
+	// "{ "type":"THIRD_PARTY_FIREWALL",
 	//   "thirdPartyFirewall":"THIRD_PARTY_FIREWALL_NAME", "thirdPartyFirewallConfig":{
 	//   "thirdPartyFirewallPolicyList":["global-1"] }, "firewallDeploymentModel":{
 	//   "distributedFirewallDeploymentModel":{
@@ -1840,63 +2268,75 @@ type SecurityServicePolicyData struct {
 	//   "endpointLocation":{ "availabilityZoneConfigList":[ {
 	//   "availabilityZoneName":"${AvailabilityZone}" } ] } }, "allowedIPV4CidrList":[ ]
 	//   } } } }"
+	//
 	//   - Example: WAFV2 - Account takeover prevention, Bot Control managed rule
 	//   groups, optimize unassociated web ACL, and rule action override
+	//
 	//   "{\"type\":\"WAFV2\",\"preProcessRuleGroups\":[{\"ruleGroupArn\":null,\"overrideAction\":{\"type\":\"NONE\"},\"managedRuleGroupIdentifier\":{\"versionEnabled\":null,\"version\":null,\"vendorName\":\"AWS\",\"managedRuleGroupName\":\"AWSManagedRulesATPRuleSet\",\"managedRuleGroupConfigs\":[{\"awsmanagedRulesATPRuleSet\":{\"loginPath\":\"/loginpath\",\"requestInspection\":{\"payloadType\":\"FORM_ENCODED|JSON\",\"usernameField\":{\"identifier\":\"/form/username\"},\"passwordField\":{\"identifier\":\"/form/password\"}}}}]},\"ruleGroupType\":\"ManagedRuleGroup\",\"excludeRules\":[],\"sampledRequestsEnabled\":true},{\"ruleGroupArn\":null,\"overrideAction\":{\"type\":\"NONE\"},\"managedRuleGroupIdentifier\":{\"versionEnabled\":null,\"version\":null,\"vendorName\":\"AWS\",\"managedRuleGroupName\":\"AWSManagedRulesBotControlRuleSet\",\"managedRuleGroupConfigs\":[{\"awsmanagedRulesBotControlRuleSet\":{\"inspectionLevel\":\"TARGETED|COMMON\"}}]},\"ruleGroupType\":\"ManagedRuleGroup\",\"excludeRules\":[],\"sampledRequestsEnabled\":true,\"ruleActionOverrides\":[{\"name\":\"Rule1\",\"actionToUse\":{\"allow|block|count|captcha|challenge\":{}}},{\"name\":\"Rule2\",\"actionToUse\":{\"allow|block|count|captcha|challenge\":{}}}]}],\"postProcessRuleGroups\":[],\"defaultAction\":{\"type\":\"ALLOW\"},\"customRequestHandling\":null,\"customResponse\":null,\"overrideCustomerWebACLAssociation\":false,\"loggingConfiguration\":null,\"sampledRequestsEnabledForDefaultActions\":true,\"optimizeUnassociatedWebACL\":true}"
+	//
 	//   - Bot Control - For information about AWSManagedRulesBotControlRuleSet managed
-	//   rule groups, see AWSManagedRulesBotControlRuleSet (https://docs.aws.amazon.com/waf/latest/APIReference/API_AWSManagedRulesBotControlRuleSet.html)
-	//   in the WAF API Reference.
+	//   rule groups, see [AWSManagedRulesBotControlRuleSet]in the WAF API Reference.
+	//
 	//   - Fraud Control account takeover prevention (ATP) - For information about the
-	//   properties available for AWSManagedRulesATPRuleSet managed rule groups, see
-	//   AWSManagedRulesATPRuleSet (https://docs.aws.amazon.com/waf/latest/APIReference/API_AWSManagedRulesATPRuleSet.html)
+	//   properties available for AWSManagedRulesATPRuleSet managed rule groups, see [AWSManagedRulesATPRuleSet]
 	//   in the WAF API Reference.
+	//
 	//   - Optimize unassociated web ACL - If you set optimizeUnassociatedWebACL to
 	//   true , Firewall Manager creates web ACLs in accounts within the policy scope
 	//   if the web ACLs will be used by at least one resource. Firewall Manager creates
 	//   web ACLs in the accounts within policy scope only if the web ACLs will be used
 	//   by at least one resource. If at any time an account comes into policy scope,
 	//   Firewall Manager automatically creates a web ACL in the account if at least one
-	//   resource will use the web ACL. Upon enablement, Firewall Manager performs a
-	//   one-time cleanup of unused web ACLs in your account. The cleanup process can
-	//   take several hours. If a resource leaves policy scope after Firewall Manager
-	//   creates a web ACL, Firewall Manager disassociates the resource from the web ACL,
-	//   but won't clean up the unused web ACL. Firewall Manager only cleans up unused
-	//   web ACLs when you first enable management of unused web ACLs in a policy. If you
-	//   set optimizeUnassociatedWebACL to false Firewall Manager doesn't manage unused
-	//   web ACLs, and Firewall Manager automatically creates an empty web ACL in each
-	//   account that's within policy scope.
+	//   resource will use the web ACL.
+	//
+	// Upon enablement, Firewall Manager performs a one-time cleanup of unused web
+	//   ACLs in your account. The cleanup process can take several hours. If a resource
+	//   leaves policy scope after Firewall Manager creates a web ACL, Firewall Manager
+	//   disassociates the resource from the web ACL, but won't clean up the unused web
+	//   ACL. Firewall Manager only cleans up unused web ACLs when you first enable
+	//   management of unused web ACLs in a policy.
+	//
+	// If you set optimizeUnassociatedWebACL to false Firewall Manager doesn't manage
+	//   unused web ACLs, and Firewall Manager automatically creates an empty web ACL in
+	//   each account that's within policy scope.
+	//
 	//   - Rule action overrides - Firewall Manager supports rule action overrides
 	//   only for managed rule groups. To configure a RuleActionOverrides add the Name
 	//   of the rule to override, and ActionToUse , which is the new action to use for
-	//   the rule. For information about using rule action override, see
-	//   RuleActionOverride (https://docs.aws.amazon.com/waf/latest/APIReference/API_RuleActionOverride.html)
-	//   in the WAF API Reference.
+	//   the rule. For information about using rule action override, see [RuleActionOverride]in the WAF
+	//   API Reference.
+	//
 	//   - Example: WAFV2 - CAPTCHA and Challenge configs
+	//
 	//   "{\"type\":\"WAFV2\",\"preProcessRuleGroups\":[{\"ruleGroupArn\":null,\"overrideAction\":{\"type\":\"NONE\"},\"managedRuleGroupIdentifier\":{\"versionEnabled\":null,\"version\":null,\"vendorName\":\"AWS\",\"managedRuleGroupName\":\"AWSManagedRulesAdminProtectionRuleSet\"},\"ruleGroupType\":\"ManagedRuleGroup\",\"excludeRules\":[],\"sampledRequestsEnabled\":true}],\"postProcessRuleGroups\":[],\"defaultAction\":{\"type\":\"ALLOW\"},\"customRequestHandling\":null,\"customResponse\":null,\"overrideCustomerWebACLAssociation\":false,\"loggingConfiguration\":null,\"sampledRequestsEnabledForDefaultActions\":true,\"captchaConfig\":{\"immunityTimeProperty\":{\"immunityTime\":500}},\"challengeConfig\":{\"immunityTimeProperty\":{\"immunityTime\":800}},\"tokenDomains\":[\"google.com\",\"amazon.com\"],\"associationConfig\":{\"requestBody\":{\"CLOUDFRONT\":{\"defaultSizeInspectionLimit\":\"KB_16\"}}}}"
+	//
 	//   - CAPTCHA and Challenge configs - If you update the policy's values for
 	//   associationConfig , captchaConfig , challengeConfig , or tokenDomains ,
 	//   Firewall Manager will overwrite your local web ACLs to contain the new value(s).
 	//   However, if you don't update the policy's associationConfig , captchaConfig ,
 	//   challengeConfig , or tokenDomains values, the values in your local web ACLs
-	//   will remain unchanged. For information about association configs, see
-	//   AssociationConfig (https://docs.aws.amazon.com/waf/latest/APIReference/API_AssociationConfig.html)
-	//   . For information about CAPTCHA and Challenge configs, see CaptchaConfig (https://docs.aws.amazon.com/waf/latest/APIReference/API_CaptchaConfig.html)
-	//   and ChallengeConfig (https://docs.aws.amazon.com/waf/latest/APIReference/API_ChallengeConfig.html)
-	//   in the WAF API Reference.
+	//   will remain unchanged. For information about association configs, see [AssociationConfig]. For
+	//   information about CAPTCHA and Challenge configs, see [CaptchaConfig]and [ChallengeConfig]in the WAF API
+	//   Reference.
+	//
 	//   - defaultSizeInspectionLimit - Specifies the maximum size of the web request
 	//   body component that an associated Amazon CloudFront distribution should send to
-	//   WAF for inspection. For more information, see DefaultSizeInspectionLimit (https://docs.aws.amazon.com/waf/latest/APIReference/API_RequestBodyAssociatedResourceTypeConfig.html#WAF-Type-RequestBodyAssociatedResourceTypeConfig-DefaultSizeInspectionLimit)
-	//   in the WAF API Reference.
+	//   WAF for inspection. For more information, see [DefaultSizeInspectionLimit]in the WAF API Reference.
+	//
 	//   - Example: WAFV2 - Firewall Manager support for WAF managed rule group
 	//   versioning
+	//
 	//   "{\"type\":\"WAFV2\",\"preProcessRuleGroups\":[{\"ruleGroupArn\":null,\"overrideAction\":{\"type\":\"NONE\"},\"managedRuleGroupIdentifier\":{\"versionEnabled\":true,\"version\":\"Version_2.0\",\"vendorName\":\"AWS\",\"managedRuleGroupName\":\"AWSManagedRulesCommonRuleSet\"},\"ruleGroupType\":\"ManagedRuleGroup\",\"excludeRules\":[{\"name\":\"NoUserAgent_HEADER\"}]}],\"postProcessRuleGroups\":[],\"defaultAction\":{\"type\":\"ALLOW\"},\"overrideCustomerWebACLAssociation\":false,\"loggingConfiguration\":{\"logDestinationConfigs\":[\"arn:aws:firehose:us-west-2:12345678912:deliverystream/aws-waf-logs-fms-admin-destination\"],\"redactedFields\":[{\"redactedFieldType\":\"SingleHeader\",\"redactedFieldValue\":\"Cookies\"},{\"redactedFieldType\":\"Method\"}]}}"
-	//   To use a specific version of a WAF managed rule group in your Firewall Manager
+	//
+	// To use a specific version of a WAF managed rule group in your Firewall Manager
 	//   policy, you must set versionEnabled to true , and set version to the version
 	//   you'd like to use. If you don't set versionEnabled to true , or if you omit
 	//   versionEnabled , then Firewall Manager uses the default version of the WAF
 	//   managed rule group.
+	//
 	//   - Example: WAFV2 - Logging configurations
-	//   "{\"type\":\"WAFV2\",\"preProcessRuleGroups\":[{\"ruleGroupArn\":null,
+	//
+	// "{\"type\":\"WAFV2\",\"preProcessRuleGroups\":[{\"ruleGroupArn\":null,
 	//   \"overrideAction\":{\"type\":\"NONE\"},\"managedRuleGroupIdentifier\":
 	//   {\"versionEnabled\":null,\"version\":null,\"vendorName\":\"AWS\",
 	//   \"managedRuleGroupName\":\"AWSManagedRulesAdminProtectionRuleSet\"}
@@ -1911,19 +2351,34 @@ type SecurityServicePolicyData struct {
 	//   \"conditions\":[{\"actionCondition\":\"CAPTCHA\"},{\"actionCondition\":
 	//   \"CHALLENGE\"},
 	//   {\"actionCondition\":\"EXCLUDED_AS_COUNT\"}]}]}},\"sampledRequestsEnabledForDefaultActions\":true}"
-	//   Firewall Manager supports Amazon Kinesis Data Firehose and Amazon S3 as the
+	//
+	// Firewall Manager supports Amazon Kinesis Data Firehose and Amazon S3 as the
 	//   logDestinationConfigs in your loggingConfiguration . For information about WAF
-	//   logging configurations, see LoggingConfiguration (https://docs.aws.amazon.com/waf/latest/APIReference/API_LoggingConfiguration.html)
-	//   in the WAF API Reference In the loggingConfiguration , you can specify one
-	//   logDestinationConfigs . Optionally provide as many as 20 redactedFields . The
-	//   RedactedFieldType must be one of URI , QUERY_STRING , HEADER , or METHOD .
-	//   - Example: WAF Classic "{\"type\": \"WAF\", \"ruleGroups\":
+	//   logging configurations, see [LoggingConfiguration]in the WAF API Reference
+	//
+	// In the loggingConfiguration , you can specify one logDestinationConfigs .
+	//   Optionally provide as many as 20 redactedFields . The RedactedFieldType must
+	//   be one of URI , QUERY_STRING , HEADER , or METHOD .
+	//
+	//   - Example: WAF Classic
+	//
+	// "{\"type\": \"WAF\", \"ruleGroups\":
 	//   [{\"id\":\"12345678-1bcd-9012-efga-0987654321ab\", \"overrideAction\" :
 	//   {\"type\": \"COUNT\"}}], \"defaultAction\": {\"type\": \"BLOCK\"}}"
+	//
+	// [AssociationConfig]: https://docs.aws.amazon.com/waf/latest/APIReference/API_AssociationConfig.html
+	// [PolicyOption]: https://docs.aws.amazon.com/fms/2018-01-01/APIReference/API_PolicyOption.html
+	// [LoggingConfiguration]: https://docs.aws.amazon.com/waf/latest/APIReference/API_LoggingConfiguration.html
+	// [AWSManagedRulesATPRuleSet]: https://docs.aws.amazon.com/waf/latest/APIReference/API_AWSManagedRulesATPRuleSet.html
+	// [ChallengeConfig]: https://docs.aws.amazon.com/waf/latest/APIReference/API_ChallengeConfig.html
+	// [AWSManagedRulesBotControlRuleSet]: https://docs.aws.amazon.com/waf/latest/APIReference/API_AWSManagedRulesBotControlRuleSet.html
+	// [CaptchaConfig]: https://docs.aws.amazon.com/waf/latest/APIReference/API_CaptchaConfig.html
+	// [RuleActionOverride]: https://docs.aws.amazon.com/waf/latest/APIReference/API_RuleActionOverride.html
+	// [DefaultSizeInspectionLimit]: https://docs.aws.amazon.com/waf/latest/APIReference/API_RequestBodyAssociatedResourceTypeConfig.html#WAF-Type-RequestBodyAssociatedResourceTypeConfig-DefaultSizeInspectionLimit
 	ManagedServiceData *string
 
-	// Contains the Network Firewall firewall policy options to configure a
-	// centralized deployment model.
+	// Contains the settings to configure a network ACL policy, a Network Firewall
+	// firewall policy deployment model, or a third-party firewall policy.
 	PolicyOption *PolicyOption
 
 	noSmithyDocumentSerde
@@ -1934,17 +2389,50 @@ type SecurityServicePolicyData struct {
 type StatefulEngineOptions struct {
 
 	// Indicates how to manage the order of stateful rule evaluation for the policy.
-	// DEFAULT_ACTION_ORDER is the default behavior. Stateful rules are provided to the
-	// rule engine as Suricata compatible strings, and Suricata evaluates them based on
-	// certain settings. For more information, see Evaluation order for stateful rules (https://docs.aws.amazon.com/network-firewall/latest/developerguide/suricata-rule-evaluation-order.html)
-	// in the Network Firewall Developer Guide.
+	// Stateful rules are provided to the rule engine as Suricata compatible strings,
+	// and Suricata evaluates them based on certain settings. For more information, see
+	// [Evaluation order for stateful rules]in the Network Firewall Developer Guide.
+	//
+	// Default: DEFAULT_ACTION_ORDER
+	//
+	// [Evaluation order for stateful rules]: https://docs.aws.amazon.com/network-firewall/latest/developerguide/suricata-rule-evaluation-order.html
 	RuleOrder RuleOrder
+
+	// Indicates how Network Firewall should handle traffic when a network connection
+	// breaks midstream.
+	//
+	//   - DROP - Fail closed and drop all subsequent traffic going to the firewall.
+	//
+	//   - CONTINUE - Continue to apply rules to subsequent traffic without context
+	//   from traffic before the break. This impacts the behavior of rules that depend on
+	//   context. For example, with a stateful rule that drops HTTP traffic, Network
+	//   Firewall won't match subsequent traffic because the it won't have the context
+	//   from session initialization, which defines the application layer protocol as
+	//   HTTP. However, a TCP-layer rule using a flow:stateless rule would still match,
+	//   and so would the aws:drop_strict default action.
+	//
+	//   - REJECT - Fail closed and drop all subsequent traffic going to the firewall.
+	//   With this option, Network Firewall also sends a TCP reject packet back to the
+	//   client so the client can immediately establish a new session. With the new
+	//   session, Network Firewall will have context and will apply rules appropriately.
+	//
+	// For applications that are reliant on long-lived TCP connections that trigger
+	//   Gateway Load Balancer idle timeouts, this is the recommended setting.
+	//
+	//   - FMS_IGNORE - Firewall Manager doesn't monitor or modify the Network Firewall
+	//   stream exception policy settings.
+	//
+	// For more information, see [Stream exception policy in your firewall policy] in the Network Firewall Developer Guide.
+	//
+	// Default: FMS_IGNORE
+	//
+	// [Stream exception policy in your firewall policy]: https://docs.aws.amazon.com/network-firewall/latest/developerguide/stream-exception-policy.html
+	StreamExceptionPolicy StreamExceptionPolicy
 
 	noSmithyDocumentSerde
 }
 
-// Network Firewall stateful rule group, used in a NetworkFirewallPolicyDescription
-// .
+// Network Firewall stateful rule group, used in a NetworkFirewallPolicyDescription.
 type StatefulRuleGroup struct {
 
 	// The action that allows the policy owner to override the behavior of the rule
@@ -1954,12 +2442,15 @@ type StatefulRuleGroup struct {
 	// An integer setting that indicates the order in which to run the stateful rule
 	// groups in a single Network Firewall firewall policy. This setting only applies
 	// to firewall policies that specify the STRICT_ORDER rule order in the stateful
-	// engine options settings. Network Firewall evalutes each stateful rule group
-	// against a packet starting with the group that has the lowest priority setting.
-	// You must ensure that the priority settings are unique within each policy. For
-	// information about You can change the priority settings of your rule groups at
-	// any time. To make it easier to insert rule groups later, number them so there's
-	// a wide range in between, for example use 100, 200, and so on.
+	// engine options settings.
+	//
+	// Network Firewall evalutes each stateful rule group against a packet starting
+	// with the group that has the lowest priority setting. You must ensure that the
+	// priority settings are unique within each policy. For information about
+	//
+	// You can change the priority settings of your rule groups at any time. To make
+	// it easier to insert rule groups later, number them so there's a wide range in
+	// between, for example use 100, 200, and so on.
 	Priority *int32
 
 	// The resource ID of the rule group.
@@ -1971,8 +2462,7 @@ type StatefulRuleGroup struct {
 	noSmithyDocumentSerde
 }
 
-// Network Firewall stateless rule group, used in a
-// NetworkFirewallPolicyDescription .
+// Network Firewall stateless rule group, used in a NetworkFirewallPolicyDescription.
 type StatelessRuleGroup struct {
 
 	// The priority of the rule group. Network Firewall evaluates the stateless rule

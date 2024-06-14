@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/servicecatalog/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -41,33 +40,41 @@ type UpdateProvisionedProductPropertiesInput struct {
 	// This member is required.
 	ProvisionedProductId *string
 
-	// A map that contains the provisioned product properties to be updated. The
-	// LAUNCH_ROLE key accepts role ARNs. This key allows an administrator to call
+	// A map that contains the provisioned product properties to be updated.
+	//
+	// The LAUNCH_ROLE key accepts role ARNs. This key allows an administrator to call
 	// UpdateProvisionedProductProperties to update the launch role that is associated
 	// with a provisioned product. This role is used when an end user calls a
 	// provisioning operation such as UpdateProvisionedProduct ,
 	// TerminateProvisionedProduct , or ExecuteProvisionedProductServiceAction . Only a
-	// role ARN is valid. A user ARN is invalid. The OWNER key accepts user ARNs, IAM
-	// role ARNs, and STS assumed-role ARNs. The owner is the user that has permission
-	// to see, update, terminate, and execute service actions in the provisioned
-	// product. The administrator can change the owner of a provisioned product to
-	// another IAM or STS entity within the same account. Both end user owners and
-	// administrators can see ownership history of the provisioned product using the
-	// ListRecordHistory API. The new owner can describe all past records for the
-	// provisioned product using the DescribeRecord API. The previous owner can no
-	// longer use DescribeRecord , but can still see the product's history from when he
-	// was an owner using ListRecordHistory . If a provisioned product ownership is
-	// assigned to an end user, they can see and perform any action through the API or
-	// Service Catalog console such as update, terminate, and execute service actions.
-	// If an end user provisions a product and the owner is updated to someone else,
-	// they will no longer be able to see or perform any actions through API or the
-	// Service Catalog console on that provisioned product.
+	// role ARN is valid. A user ARN is invalid.
+	//
+	// The OWNER key accepts user ARNs, IAM role ARNs, and STS assumed-role ARNs. The
+	// owner is the user that has permission to see, update, terminate, and execute
+	// service actions in the provisioned product.
+	//
+	// The administrator can change the owner of a provisioned product to another IAM
+	// or STS entity within the same account. Both end user owners and administrators
+	// can see ownership history of the provisioned product using the ListRecordHistory
+	// API. The new owner can describe all past records for the provisioned product
+	// using the DescribeRecord API. The previous owner can no longer use
+	// DescribeRecord , but can still see the product's history from when he was an
+	// owner using ListRecordHistory .
+	//
+	// If a provisioned product ownership is assigned to an end user, they can see and
+	// perform any action through the API or Service Catalog console such as update,
+	// terminate, and execute service actions. If an end user provisions a product and
+	// the owner is updated to someone else, they will no longer be able to see or
+	// perform any actions through API or the Service Catalog console on that
+	// provisioned product.
 	//
 	// This member is required.
 	ProvisionedProductProperties map[string]string
 
 	// The language code.
+	//
 	//   - jp - Japanese
+	//
 	//   - zh - Chinese
 	AcceptLanguage *string
 
@@ -116,25 +123,25 @@ func (c *Client) addOperationUpdateProvisionedProductPropertiesMiddlewares(stack
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -149,6 +156,9 @@ func (c *Client) addOperationUpdateProvisionedProductPropertiesMiddlewares(stack
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opUpdateProvisionedProductPropertiesMiddleware(stack, options); err != nil {
 		return err
 	}
@@ -158,7 +168,7 @@ func (c *Client) addOperationUpdateProvisionedProductPropertiesMiddlewares(stack
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateProvisionedProductProperties(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

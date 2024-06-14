@@ -3387,6 +3387,10 @@ func awsRestjson1_serializeOpHttpBindingsListControlsInput(v *ListControlsInput,
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.ControlCatalogId != nil {
+		encoder.SetQuery("controlCatalogId").String(*v.ControlCatalogId)
+	}
+
 	if len(v.ControlType) > 0 {
 		encoder.SetQuery("controlType").String(string(v.ControlType))
 	}

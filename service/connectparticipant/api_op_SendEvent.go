@@ -6,15 +6,24 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Sends an event. ConnectionToken is used for invoking this API instead of
-// ParticipantToken . The Amazon Connect Participant Service APIs do not use
-// Signature Version 4 authentication (https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html)
-// .
+// The application/vnd.amazonaws.connect.event.connection.acknowledged ContentType
+// will no longer be supported starting December 31, 2024. This event has been
+// migrated to the [CreateParticipantConnection]API using the ConnectParticipant field.
+//
+// Sends an event. Message receipts are not supported when there are more than two
+// active participants in the chat. Using the SendEvent API for message receipts
+// when a supervisor is barged-in will result in a conflict exception.
+//
+// ConnectionToken is used for invoking this API instead of ParticipantToken .
+//
+// The Amazon Connect Participant Service APIs do not use [Signature Version 4 authentication].
+//
+// [CreateParticipantConnection]: https://docs.aws.amazon.com/connect-participant/latest/APIReference/API_CreateParticipantConnection.html
+// [Signature Version 4 authentication]: https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html
 func (c *Client) SendEvent(ctx context.Context, params *SendEventInput, optFns ...func(*Options)) (*SendEventOutput, error) {
 	if params == nil {
 		params = &SendEventInput{}
@@ -38,9 +47,14 @@ type SendEventInput struct {
 	ConnectionToken *string
 
 	// The content type of the request. Supported types are:
+	//
 	//   - application/vnd.amazonaws.connect.event.typing
-	//   - application/vnd.amazonaws.connect.event.connection.acknowledged
+	//
+	//   - application/vnd.amazonaws.connect.event.connection.acknowledged (will be
+	//   deprecated on December 31, 2024)
+	//
 	//   - application/vnd.amazonaws.connect.event.message.delivered
+	//
 	//   - application/vnd.amazonaws.connect.event.message.read
 	//
 	// This member is required.
@@ -48,13 +62,14 @@ type SendEventInput struct {
 
 	// A unique, case-sensitive identifier that you provide to ensure the idempotency
 	// of the request. If not provided, the Amazon Web Services SDK populates this
-	// field. For more information about idempotency, see Making retries safe with
-	// idempotent APIs (https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/)
-	// .
+	// field. For more information about idempotency, see [Making retries safe with idempotent APIs].
+	//
+	// [Making retries safe with idempotent APIs]: https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/
 	ClientToken *string
 
 	// The content of the event to be sent (for example, message text). For content
 	// related to message receipts, this is supported in the form of a JSON string.
+	//
 	// Sample Content: "{\"messageId\":\"11111111-aaaa-bbbb-cccc-EXAMPLE01234\"}"
 	Content *string
 
@@ -63,8 +78,10 @@ type SendEventInput struct {
 
 type SendEventOutput struct {
 
-	// The time when the event was sent. It's specified in ISO 8601 format:
-	// yyyy-MM-ddThh:mm:ss.SSSZ. For example, 2019-11-08T02:41:28.172Z.
+	// The time when the event was sent.
+	//
+	// It's specified in ISO 8601 format: yyyy-MM-ddThh:mm:ss.SSSZ. For example,
+	// 2019-11-08T02:41:28.172Z.
 	AbsoluteTime *string
 
 	// The ID of the response.
@@ -98,25 +115,25 @@ func (c *Client) addOperationSendEventMiddlewares(stack *middleware.Stack, optio
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -131,6 +148,9 @@ func (c *Client) addOperationSendEventMiddlewares(stack *middleware.Stack, optio
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opSendEventMiddleware(stack, options); err != nil {
 		return err
 	}
@@ -140,7 +160,7 @@ func (c *Client) addOperationSendEventMiddlewares(stack *middleware.Stack, optio
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opSendEvent(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

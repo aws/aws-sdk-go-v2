@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/neptune/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -39,16 +38,19 @@ type DescribeEngineDefaultParametersInput struct {
 	// Not currently supported.
 	Filters []types.Filter
 
-	// An optional pagination token provided by a previous
+	//  An optional pagination token provided by a previous
 	// DescribeEngineDefaultParameters request. If this parameter is specified, the
 	// response includes only records beyond the marker, up to the value specified by
 	// MaxRecords .
 	Marker *string
 
-	// The maximum number of records to include in the response. If more records exist
-	// than the specified MaxRecords value, a pagination token called a marker is
-	// included in the response so that the remaining results can be retrieved.
-	// Default: 100 Constraints: Minimum 20, maximum 100.
+	//  The maximum number of records to include in the response. If more records
+	// exist than the specified MaxRecords value, a pagination token called a marker
+	// is included in the response so that the remaining results can be retrieved.
+	//
+	// Default: 100
+	//
+	// Constraints: Minimum 20, maximum 100.
 	MaxRecords *int32
 
 	noSmithyDocumentSerde
@@ -56,8 +58,7 @@ type DescribeEngineDefaultParametersInput struct {
 
 type DescribeEngineDefaultParametersOutput struct {
 
-	// Contains the result of a successful invocation of the
-	// DescribeEngineDefaultParameters action.
+	//  Contains the result of a successful invocation of the DescribeEngineDefaultParameters action.
 	EngineDefaults *types.EngineDefaults
 
 	// Metadata pertaining to the operation's result.
@@ -88,25 +89,25 @@ func (c *Client) addOperationDescribeEngineDefaultParametersMiddlewares(stack *m
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -121,13 +122,16 @@ func (c *Client) addOperationDescribeEngineDefaultParametersMiddlewares(stack *m
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDescribeEngineDefaultParametersValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeEngineDefaultParameters(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -156,10 +160,13 @@ var _ DescribeEngineDefaultParametersAPIClient = (*Client)(nil)
 // DescribeEngineDefaultParametersPaginatorOptions is the paginator options for
 // DescribeEngineDefaultParameters
 type DescribeEngineDefaultParametersPaginatorOptions struct {
-	// The maximum number of records to include in the response. If more records exist
-	// than the specified MaxRecords value, a pagination token called a marker is
-	// included in the response so that the remaining results can be retrieved.
-	// Default: 100 Constraints: Minimum 20, maximum 100.
+	//  The maximum number of records to include in the response. If more records
+	// exist than the specified MaxRecords value, a pagination token called a marker
+	// is included in the response so that the remaining results can be retrieved.
+	//
+	// Default: 100
+	//
+	// Constraints: Minimum 20, maximum 100.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

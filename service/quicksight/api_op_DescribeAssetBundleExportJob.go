@@ -6,19 +6,20 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/quicksight/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
-// Describes an existing export job. Poll job descriptions after a job starts to
-// know the status of the job. When a job succeeds, a URL is provided to download
-// the exported assets' data from. Download URLs are valid for five minutes after
-// they are generated. You can call the DescribeAssetBundleExportJob API for a new
-// download URL as needed. Job descriptions are available for 14 days after the job
-// starts.
+// Describes an existing export job.
+//
+// Poll job descriptions after a job starts to know the status of the job. When a
+// job succeeds, a URL is provided to download the exported assets' data from.
+// Download URLs are valid for five minutes after they are generated. You can call
+// the DescribeAssetBundleExportJob API for a new download URL as needed.
+//
+// Job descriptions are available for 14 days after the job starts.
 func (c *Client) DescribeAssetBundleExportJob(ctx context.Context, params *DescribeAssetBundleExportJobInput, optFns ...func(*Options)) (*DescribeAssetBundleExportJobOutput, error) {
 	if params == nil {
 		params = &DescribeAssetBundleExportJobInput{}
@@ -68,17 +69,24 @@ type DescribeAssetBundleExportJobOutput struct {
 	// The time that the export job was created.
 	CreatedTime *time.Time
 
-	// The URL to download the exported asset bundle data from. This URL is available
-	// only after the job has succeeded. This URL is valid for 5 minutes after
-	// issuance. Call DescribeAssetBundleExportJob again for a fresh URL if needed.
+	// The URL to download the exported asset bundle data from.
+	//
+	// This URL is available only after the job has succeeded. This URL is valid for 5
+	// minutes after issuance. Call DescribeAssetBundleExportJob again for a fresh URL
+	// if needed.
+	//
 	// The downloaded asset bundle is a zip file named assetbundle-{jobId}.qs . The
-	// file has a .qs extension. This URL can't be used in a StartAssetBundleImportJob
-	// API call and should only be used for download purposes.
+	// file has a .qs extension.
+	//
+	// This URL can't be used in a StartAssetBundleImportJob API call and should only
+	// be used for download purposes.
 	DownloadUrl *string
 
 	// An array of error records that describes any failures that occurred during the
-	// export job processing. Error records accumulate while the job runs. The complete
-	// set of error records is available after the job has completed and failed.
+	// export job processing.
+	//
+	// Error records accumulate while the job runs. The complete set of error records
+	// is available after the job has completed and failed.
 	Errors []types.AssetBundleExportJobError
 
 	// The format of the exported asset bundle. A QUICKSIGHT_JSON formatted file can
@@ -96,8 +104,10 @@ type DescribeAssetBundleExportJobOutput struct {
 	// The include tags flag.
 	IncludeTags bool
 
-	// Indicates the status of a job through its queuing and execution. Poll this
-	// DescribeAssetBundleExportApi until JobStatus is either SUCCESSFUL or FAILED .
+	// Indicates the status of a job through its queuing and execution.
+	//
+	// Poll this DescribeAssetBundleExportApi until JobStatus is either SUCCESSFUL or
+	// FAILED .
 	JobStatus types.AssetBundleExportJobStatus
 
 	// The Amazon Web Services request ID for this operation.
@@ -114,8 +124,10 @@ type DescribeAssetBundleExportJobOutput struct {
 
 	// An array of warning records that describe the analysis or dashboard that is
 	// exported. This array includes UI errors that can be skipped during the
-	// validation process. This property only appears if StrictModeForAllResources in
-	// ValidationStrategy is set to FALSE .
+	// validation process.
+	//
+	// This property only appears if StrictModeForAllResources in ValidationStrategy
+	// is set to FALSE .
 	Warnings []types.AssetBundleExportJobWarning
 
 	// Metadata pertaining to the operation's result.
@@ -146,25 +158,25 @@ func (c *Client) addOperationDescribeAssetBundleExportJobMiddlewares(stack *midd
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -179,13 +191,16 @@ func (c *Client) addOperationDescribeAssetBundleExportJobMiddlewares(stack *midd
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDescribeAssetBundleExportJobValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeAssetBundleExportJob(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/lookoutequipment/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -56,12 +55,15 @@ type DescribeRetrainingSchedulerOutput struct {
 
 	// Indicates how the service uses new models. In MANAGED mode, new models are used
 	// for inference if they have better performance than the current model. In MANUAL
-	// mode, the new models are not used until they are manually activated (https://docs.aws.amazon.com/lookout-for-equipment/latest/ug/versioning-model.html#model-activation)
-	// .
+	// mode, the new models are not used until they are [manually activated].
+	//
+	// [manually activated]: https://docs.aws.amazon.com/lookout-for-equipment/latest/ug/versioning-model.html#model-activation
 	PromoteMode types.ModelPromoteMode
 
-	// The frequency at which the model retraining is set. This follows the ISO 8601 (https://en.wikipedia.org/wiki/ISO_8601#Durations)
+	// The frequency at which the model retraining is set. This follows the [ISO 8601]
 	// guidelines.
+	//
+	// [ISO 8601]: https://en.wikipedia.org/wiki/ISO_8601#Durations
 	RetrainingFrequency *string
 
 	// The start date for the retraining scheduler. Lookout for Equipment truncates
@@ -102,25 +104,25 @@ func (c *Client) addOperationDescribeRetrainingSchedulerMiddlewares(stack *middl
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -135,13 +137,16 @@ func (c *Client) addOperationDescribeRetrainingSchedulerMiddlewares(stack *middl
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDescribeRetrainingSchedulerValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeRetrainingScheduler(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

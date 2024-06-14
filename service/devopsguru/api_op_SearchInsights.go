@@ -6,18 +6,19 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/devopsguru/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns a list of insights in your Amazon Web Services account. You can specify
-// which insights are returned by their start time, one or more statuses ( ONGOING
-// or CLOSED ), one or more severities ( LOW , MEDIUM , and HIGH ), and type (
-// REACTIVE or PROACTIVE ). Use the Filters parameter to specify status and
-// severity search parameters. Use the Type parameter to specify REACTIVE or
-// PROACTIVE in your search.
+//	Returns a list of insights in your Amazon Web Services account. You can
+//
+// specify which insights are returned by their start time, one or more statuses (
+// ONGOING or CLOSED ), one or more severities ( LOW , MEDIUM , and HIGH ), and
+// type ( REACTIVE or PROACTIVE ).
+//
+// Use the Filters parameter to specify status and severity search parameters. Use
+// the Type parameter to specify REACTIVE or PROACTIVE in your search.
 func (c *Client) SearchInsights(ctx context.Context, params *SearchInsightsInput, optFns ...func(*Options)) (*SearchInsightsOutput, error) {
 	if params == nil {
 		params = &SearchInsightsInput{}
@@ -35,18 +36,18 @@ func (c *Client) SearchInsights(ctx context.Context, params *SearchInsightsInput
 
 type SearchInsightsInput struct {
 
-	// The start of the time range passed in. Returned insights occurred after this
+	//  The start of the time range passed in. Returned insights occurred after this
 	// time.
 	//
 	// This member is required.
 	StartTimeRange *types.StartTimeRange
 
-	// The type of insights you are searching for ( REACTIVE or PROACTIVE ).
+	//  The type of insights you are searching for ( REACTIVE or PROACTIVE ).
 	//
 	// This member is required.
 	Type types.InsightType
 
-	// A SearchInsightsFilters object that is used to set the severity and status
+	//  A SearchInsightsFilters object that is used to set the severity and status
 	// filters on your insight search.
 	Filters *types.SearchInsightsFilters
 
@@ -67,10 +68,10 @@ type SearchInsightsOutput struct {
 	// operation. If there are no more pages, this value is null.
 	NextToken *string
 
-	// The returned proactive insights.
+	//  The returned proactive insights.
 	ProactiveInsights []types.ProactiveInsightSummary
 
-	// The returned reactive insights.
+	//  The returned reactive insights.
 	ReactiveInsights []types.ReactiveInsightSummary
 
 	// Metadata pertaining to the operation's result.
@@ -101,25 +102,25 @@ func (c *Client) addOperationSearchInsightsMiddlewares(stack *middleware.Stack, 
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -134,13 +135,16 @@ func (c *Client) addOperationSearchInsightsMiddlewares(stack *middleware.Stack, 
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpSearchInsightsValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opSearchInsights(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

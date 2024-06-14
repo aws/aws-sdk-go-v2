@@ -6,21 +6,24 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/iotsitewise/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Gets an asset property's current value. For more information, see Querying
-// current values (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/query-industrial-data.html#current-values)
-// in the IoT SiteWise User Guide. To identify an asset property, you must specify
-// one of the following:
+// Gets an asset property's current value. For more information, see [Querying current values] in the IoT
+// SiteWise User Guide.
+//
+// To identify an asset property, you must specify one of the following:
+//
 //   - The assetId and propertyId of an asset property.
+//
 //   - A propertyAlias , which is a data stream alias (for example,
 //     /company/windfarm/3/turbine/7/temperature ). To define an asset property's
-//     alias, see UpdateAssetProperty (https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_UpdateAssetProperty.html)
-//     .
+//     alias, see [UpdateAssetProperty].
+//
+// [UpdateAssetProperty]: https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_UpdateAssetProperty.html
+// [Querying current values]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/query-industrial-data.html#current-values
 func (c *Client) GetAssetPropertyValue(ctx context.Context, params *GetAssetPropertyValueInput, optFns ...func(*Options)) (*GetAssetPropertyValueOutput, error) {
 	if params == nil {
 		params = &GetAssetPropertyValueInput{}
@@ -43,8 +46,9 @@ type GetAssetPropertyValueInput struct {
 
 	// The alias that identifies the property, such as an OPC-UA server data stream
 	// path (for example, /company/windfarm/3/turbine/7/temperature ). For more
-	// information, see Mapping industrial data streams to asset properties (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/connect-data-streams.html)
-	// in the IoT SiteWise User Guide.
+	// information, see [Mapping industrial data streams to asset properties]in the IoT SiteWise User Guide.
+	//
+	// [Mapping industrial data streams to asset properties]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/connect-data-streams.html
 	PropertyAlias *string
 
 	// The ID of the asset property, in UUID format.
@@ -86,25 +90,25 @@ func (c *Client) addOperationGetAssetPropertyValueMiddlewares(stack *middleware.
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -119,13 +123,16 @@ func (c *Client) addOperationGetAssetPropertyValueMiddlewares(stack *middleware.
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addEndpointPrefix_opGetAssetPropertyValueMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetAssetPropertyValue(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

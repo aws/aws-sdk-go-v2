@@ -6,15 +6,24 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Describes the specified tags for your EC2 resources. For more information about
-// tags, see Tag your Amazon EC2 resources (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_Tags.html)
-// in the Amazon Elastic Compute Cloud User Guide.
+// Describes the specified tags for your EC2 resources.
+//
+// For more information about tags, see [Tag your Amazon EC2 resources] in the Amazon Elastic Compute Cloud User
+// Guide.
+//
+// We strongly recommend using only paginated requests. Unpaginated requests are
+// susceptible to throttling and timeouts.
+//
+// The order of the elements in the response, including those within nested
+// structures, might vary. Applications should not assume the elements appear in a
+// particular order.
+//
+// [Tag your Amazon EC2 resources]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_Tags.html
 func (c *Client) DescribeTags(ctx context.Context, params *DescribeTagsInput, optFns ...func(*Options)) (*DescribeTagsOutput, error) {
 	if params == nil {
 		params = &DescribeTagsInput{}
@@ -39,25 +48,27 @@ type DescribeTagsInput struct {
 	DryRun *bool
 
 	// The filters.
+	//
 	//   - key - The tag key.
+	//
 	//   - resource-id - The ID of the resource.
-	//   - resource-type - The resource type ( customer-gateway | dedicated-host |
-	//   dhcp-options | elastic-ip | fleet | fpga-image | host-reservation | image |
-	//   instance | internet-gateway | key-pair | launch-template | natgateway |
-	//   network-acl | network-interface | placement-group | reserved-instances |
-	//   route-table | security-group | snapshot | spot-instances-request | subnet |
-	//   volume | vpc | vpc-endpoint | vpc-endpoint-service | vpc-peering-connection |
-	//   vpn-connection | vpn-gateway ).
+	//
+	//   - resource-type - The resource type. For a list of possible values, see [TagSpecification].
+	//
 	//   - tag : - The key/value combination of the tag. For example, specify
 	//   "tag:Owner" for the filter name and "TeamA" for the filter value to find
 	//   resources with the tag "Owner=TeamA".
+	//
 	//   - value - The tag value.
+	//
+	// [TagSpecification]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_TagSpecification.html
 	Filters []types.Filter
 
 	// The maximum number of items to return for this request. This value can be
 	// between 5 and 1000. To get the next page of items, make another request with the
-	// token returned in the output. For more information, see Pagination (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination)
-	// .
+	// token returned in the output. For more information, see [Pagination].
+	//
+	// [Pagination]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination
 	MaxResults *int32
 
 	// The token returned from a previous paginated request. Pagination continues from
@@ -104,25 +115,25 @@ func (c *Client) addOperationDescribeTagsMiddlewares(stack *middleware.Stack, op
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -137,10 +148,13 @@ func (c *Client) addOperationDescribeTagsMiddlewares(stack *middleware.Stack, op
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeTags(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -169,8 +183,9 @@ var _ DescribeTagsAPIClient = (*Client)(nil)
 type DescribeTagsPaginatorOptions struct {
 	// The maximum number of items to return for this request. This value can be
 	// between 5 and 1000. To get the next page of items, make another request with the
-	// token returned in the output. For more information, see Pagination (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination)
-	// .
+	// token returned in the output. For more information, see [Pagination].
+	//
+	// [Pagination]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

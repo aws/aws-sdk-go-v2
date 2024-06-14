@@ -11,8 +11,9 @@ const (
 )
 
 // Values returns all known values for BehaviorOnMxFailure. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (BehaviorOnMxFailure) Values() []BehaviorOnMxFailure {
 	return []BehaviorOnMxFailure{
 		"USE_DEFAULT_VALUE",
@@ -31,8 +32,9 @@ const (
 
 // Values returns all known values for DeliverabilityDashboardAccountStatus. Note
 // that this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (DeliverabilityDashboardAccountStatus) Values() []DeliverabilityDashboardAccountStatus {
 	return []DeliverabilityDashboardAccountStatus{
 		"ACTIVE",
@@ -51,6 +53,7 @@ const (
 
 // Values returns all known values for DeliverabilityTestStatus. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (DeliverabilityTestStatus) Values() []DeliverabilityTestStatus {
 	return []DeliverabilityTestStatus{
@@ -69,8 +72,9 @@ const (
 )
 
 // Values returns all known values for DimensionValueSource. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (DimensionValueSource) Values() []DimensionValueSource {
 	return []DimensionValueSource{
 		"MESSAGE_TAG",
@@ -91,8 +95,9 @@ const (
 )
 
 // Values returns all known values for DkimStatus. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (DkimStatus) Values() []DkimStatus {
 	return []DkimStatus{
 		"PENDING",
@@ -118,8 +123,9 @@ const (
 )
 
 // Values returns all known values for EventType. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (EventType) Values() []EventType {
 	return []EventType{
 		"SEND",
@@ -143,8 +149,9 @@ const (
 )
 
 // Values returns all known values for IdentityType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (IdentityType) Values() []IdentityType {
 	return []IdentityType{
 		"EMAIL_ADDRESS",
@@ -164,8 +171,9 @@ const (
 )
 
 // Values returns all known values for MailFromDomainStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (MailFromDomainStatus) Values() []MailFromDomainStatus {
 	return []MailFromDomainStatus{
 		"PENDING",
@@ -184,8 +192,9 @@ const (
 )
 
 // Values returns all known values for TlsPolicy. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (TlsPolicy) Values() []TlsPolicy {
 	return []TlsPolicy{
 		"REQUIRE",
@@ -202,8 +211,9 @@ const (
 )
 
 // Values returns all known values for WarmupStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (WarmupStatus) Values() []WarmupStatus {
 	return []WarmupStatus{
 		"IN_PROGRESS",

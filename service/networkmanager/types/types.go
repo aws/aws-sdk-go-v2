@@ -44,8 +44,15 @@ type Attachment struct {
 	// The Region where the edge is located.
 	EdgeLocation *string
 
+	// The name of the network function group.
+	NetworkFunctionGroupName *string
+
 	// The ID of the attachment account owner.
 	OwnerAccountId *string
+
+	// Describes a proposed change to a network function group associated with the
+	// attachment.
+	ProposedNetworkFunctionGroupChange *ProposedNetworkFunctionGroupChange
 
 	// The attachment to move from one segment to another.
 	ProposedSegmentChange *ProposedSegmentChange
@@ -204,7 +211,8 @@ type ConnectPeer struct {
 	// The state of the Connect peer.
 	State ConnectPeerState
 
-	// The subnet ARN for the Connect peer.
+	// The subnet ARN for the Connect peer. This only applies only when the protocol
+	// is NO_ENCAP.
 	SubnetArn *string
 
 	// The list of key-value tags associated with the Connect peer.
@@ -324,6 +332,9 @@ type CoreNetwork struct {
 	// The ID of the global network that your core network is a part of.
 	GlobalNetworkId *string
 
+	// The network function groups associated with a core network.
+	NetworkFunctionGroups []CoreNetworkNetworkFunctionGroup
+
 	// The segments within a core network.
 	Segments []CoreNetworkSegment
 
@@ -401,6 +412,9 @@ type CoreNetworkChangeEventValues struct {
 	// The edge location for the core network change event.
 	EdgeLocation *string
 
+	// The changed network function group name.
+	NetworkFunctionGroupName *string
+
 	// The segment name if the change event is associated with a segment.
 	SegmentName *string
 
@@ -425,8 +439,15 @@ type CoreNetworkChangeValues struct {
 	// The inside IP addresses used for core network change values.
 	InsideCidrBlocks []string
 
+	// The network function group name if the change event is associated with a
+	// network function group.
+	NetworkFunctionGroupName *string
+
 	// The names of the segments in a core network.
 	SegmentName *string
+
+	// Describes the service insertion action.
+	ServiceInsertionActions []ServiceInsertionAction
 
 	// The shared segments for a core network change value.
 	SharedSegments []string
@@ -445,6 +466,36 @@ type CoreNetworkEdge struct {
 
 	// The inside IP addresses used for core network edges.
 	InsideCidrBlocks []string
+
+	noSmithyDocumentSerde
+}
+
+// Describes a network function group.
+type CoreNetworkNetworkFunctionGroup struct {
+
+	// The core network edge locations.
+	EdgeLocations []string
+
+	// The name of the network function group.
+	Name *string
+
+	// The segments associated with the network function group.
+	Segments *ServiceInsertionSegments
+
+	noSmithyDocumentSerde
+}
+
+// Describes a core network
+type CoreNetworkNetworkFunctionGroupIdentifier struct {
+
+	// The ID of the core network.
+	CoreNetworkId *string
+
+	// The location for the core network edge.
+	EdgeLocation *string
+
+	// The network function group name.
+	NetworkFunctionGroupName *string
 
 	noSmithyDocumentSerde
 }
@@ -653,6 +704,18 @@ type Device struct {
 	noSmithyDocumentSerde
 }
 
+// Describes the edge that's used for the override.
+type EdgeOverride struct {
+
+	// The list of edge locations.
+	EdgeSets [][]string
+
+	// The edge that should be used when overriding the current edge order.
+	UseEdge *string
+
+	noSmithyDocumentSerde
+}
+
 // Describes a global network. This is a single private network acting as a
 // high-level container for your network objects, including an Amazon Web
 // Services-managed Core Network.
@@ -751,6 +814,15 @@ type Location struct {
 	noSmithyDocumentSerde
 }
 
+// Describes a network function group for service insertion.
+type NetworkFunctionGroup struct {
+
+	// The name of the network function group.
+	Name *string
+
+	noSmithyDocumentSerde
+}
+
 // Describes a network resource.
 type NetworkResource struct {
 
@@ -782,22 +854,46 @@ type NetworkResource struct {
 	// The ID of the resource.
 	ResourceId *string
 
-	// The resource type. The following are the supported resource types for Direct
-	// Connect:
+	// The resource type.
+	//
+	// The following are the supported resource types for Direct Connect:
+	//
 	//   - dxcon
+	//
 	//   - dx-gateway
+	//
 	//   - dx-vif
+	//
 	// The following are the supported resource types for Network Manager:
+	//
+	//   - attachment
+	//
+	//   - connect-peer
+	//
 	//   - connection
+	//
+	//   - core-network
+	//
 	//   - device
+	//
 	//   - link
+	//
+	//   - peering
+	//
 	//   - site
+	//
 	// The following are the supported resource types for Amazon VPC:
+	//
 	//   - customer-gateway
+	//
 	//   - transit-gateway
+	//
 	//   - transit-gateway-attachment
+	//
 	//   - transit-gateway-connect-peer
+	//
 	//   - transit-gateway-route-table
+	//
 	//   - vpn-connection
 	ResourceType *string
 
@@ -873,6 +969,9 @@ type NetworkRouteDestination struct {
 
 	// The edge location for the network destination.
 	EdgeLocation *string
+
+	// The network function group name associated with the destination.
+	NetworkFunctionGroupName *string
 
 	// The ID of the resource.
 	ResourceId *string
@@ -995,6 +1094,22 @@ type Peering struct {
 	noSmithyDocumentSerde
 }
 
+// Describes proposed changes to a network function group.
+type ProposedNetworkFunctionGroupChange struct {
+
+	// The proposed new attachment policy rule number for the network function group.
+	AttachmentPolicyRuleNumber *int32
+
+	// The proposed name change for the network function group name.
+	NetworkFunctionGroupName *string
+
+	// The list of proposed changes to the key-value tags associated with the network
+	// function group.
+	Tags []Tag
+
+	noSmithyDocumentSerde
+}
+
 // Describes a proposed segment change. In some cases, the segment change must
 // first be evaluated and accepted.
 type ProposedSegmentChange struct {
@@ -1068,20 +1183,29 @@ type RouteAnalysis struct {
 type RouteAnalysisCompletion struct {
 
 	// The reason code. Available only if a connection is not found.
+	//
 	//   - BLACKHOLE_ROUTE_FOR_DESTINATION_FOUND - Found a black hole route with the
 	//   destination CIDR block.
+	//
 	//   - CYCLIC_PATH_DETECTED - Found the same resource multiple times while
 	//   traversing the path.
+	//
 	//   - INACTIVE_ROUTE_FOR_DESTINATION_FOUND - Found an inactive route with the
 	//   destination CIDR block.
+	//
 	//   - MAX_HOPS_EXCEEDED - Analysis exceeded 64 hops without finding the
 	//   destination.
+	//
 	//   - ROUTE_NOT_FOUND - Cannot find a route table with the destination CIDR block.
+	//
 	//   - TGW_ATTACH_ARN_NO_MATCH - Found an attachment, but not with the correct
 	//   destination ARN.
+	//
 	//   - TGW_ATTACH_NOT_FOUND - Cannot find an attachment.
+	//
 	//   - TGW_ATTACH_NOT_IN_TGW - Found an attachment, but not to the correct transit
 	//   gateway.
+	//
 	//   - TGW_ATTACH_STABLE_ROUTE_TABLE_NOT_FOUND - The state of the route table
 	//   association is not associated.
 	ReasonCode RouteAnalysisCompletionReasonCode
@@ -1139,6 +1263,9 @@ type RouteAnalysisPath struct {
 // Describes a route table.
 type RouteTableIdentifier struct {
 
+	// The route table identifier associated with the network function group.
+	CoreNetworkNetworkFunctionGroup *CoreNetworkNetworkFunctionGroupIdentifier
+
 	// The segment edge in a core network.
 	CoreNetworkSegmentEdge *CoreNetworkSegmentEdgeIdentifier
 
@@ -1147,6 +1274,47 @@ type RouteTableIdentifier struct {
 	// "arn:aws:ec2:us-west-2:123456789012:transit-gateway-route-table/tgw-rtb-9876543210123456"
 	// .
 	TransitGatewayRouteTableArn *string
+
+	noSmithyDocumentSerde
+}
+
+// Describes the action that the service insertion will take for any segments
+// associated with it.
+type ServiceInsertionAction struct {
+
+	// The action the service insertion takes for traffic. send-via sends east-west
+	// traffic between attachments. send-to sends north-south traffic to the security
+	// appliance, and then from that to either the Internet or to an on-premesis
+	// location.
+	Action SegmentActionServiceInsertion
+
+	// Describes the mode packets take for the send-via action. This is not used when
+	// the action is send-to . dual-hop packets traverse attachments in both the
+	// source to the destination core network edges. This mode requires that an
+	// inspection attachment must be present in all Regions of the service
+	// insertion-enabled segments. For single-hop , packets traverse a single
+	// intermediate inserted attachment. You can use EdgeOverride to specify a
+	// specific edge to use.
+	Mode SendViaMode
+
+	// The list of network function groups and any edge overrides for the chosen
+	// service insertion action. Used for both send-to or send-via .
+	Via *Via
+
+	// The list of destination segments if the service insertion action is send-via .
+	WhenSentTo *WhenSentTo
+
+	noSmithyDocumentSerde
+}
+
+// Describes the segments associated with the service insertion action.
+type ServiceInsertionSegments struct {
+
+	// The list of segments associated with the send-to action.
+	SendTo []string
+
+	// The list of segments associated with the send-via action.
+	SendVia []string
 
 	noSmithyDocumentSerde
 }
@@ -1196,10 +1364,14 @@ type SiteToSiteVpnAttachment struct {
 // Describes a tag.
 type Tag struct {
 
-	// The tag key. Constraints: Maximum length of 128 characters.
+	// The tag key.
+	//
+	// Constraints: Maximum length of 128 characters.
 	Key *string
 
-	// The tag value. Constraints: Maximum length of 256 characters.
+	// The tag value.
+	//
+	// Constraints: Maximum length of 256 characters.
 	Value *string
 
 	noSmithyDocumentSerde
@@ -1302,6 +1474,21 @@ type ValidationExceptionField struct {
 	noSmithyDocumentSerde
 }
 
+// The list of network function groups and edge overrides for the service
+// insertion action. Used for both the send-to and send-via actions.
+type Via struct {
+
+	// The list of network function groups associated with the service insertion
+	// action.
+	NetworkFunctionGroups []NetworkFunctionGroup
+
+	// Describes any edge overrides. An edge override is a specific edge to be used
+	// for traffic.
+	WithEdgeOverrides []EdgeOverride
+
+	noSmithyDocumentSerde
+}
+
 // Describes a VPC attachment.
 type VpcAttachment struct {
 
@@ -1327,6 +1514,16 @@ type VpcOptions struct {
 
 	// Indicates whether IPv6 is supported.
 	Ipv6Support bool
+
+	noSmithyDocumentSerde
+}
+
+// Displays a list of the destination segments. Used only when the service
+// insertion action is send-to .
+type WhenSentTo struct {
+
+	// The list of destination segments when the service insertion action is send-to .
+	WhenSentToSegmentsList []string
 
 	noSmithyDocumentSerde
 }

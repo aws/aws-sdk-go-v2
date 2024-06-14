@@ -6,16 +6,18 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Modifies the specified managed prefix list. Adding or removing entries in a
-// prefix list creates a new version of the prefix list. Changing the name of the
-// prefix list does not affect the version. If you specify a current version number
-// that does not match the true current version number, the request fails.
+// Modifies the specified managed prefix list.
+//
+// Adding or removing entries in a prefix list creates a new version of the prefix
+// list. Changing the name of the prefix list does not affect the version.
+//
+// If you specify a current version number that does not match the true current
+// version number, the request fails.
 func (c *Client) ModifyManagedPrefixList(ctx context.Context, params *ModifyManagedPrefixListInput, optFns ...func(*Options)) (*ModifyManagedPrefixListOutput, error) {
 	if params == nil {
 		params = &ModifyManagedPrefixListInput{}
@@ -52,6 +54,7 @@ type ModifyManagedPrefixListInput struct {
 
 	// The maximum number of entries for the prefix list. You cannot modify the
 	// entries of a prefix list and modify the size of a prefix list at the same time.
+	//
 	// If any of the resources that reference the prefix list cannot support the new
 	// maximum size, the modify operation fails. Check the state message for the IDs of
 	// the first ten resources that do not support the new maximum size.
@@ -99,25 +102,25 @@ func (c *Client) addOperationModifyManagedPrefixListMiddlewares(stack *middlewar
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -132,13 +135,16 @@ func (c *Client) addOperationModifyManagedPrefixListMiddlewares(stack *middlewar
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpModifyManagedPrefixListValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opModifyManagedPrefixList(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

@@ -6,30 +6,33 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/opsworks/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Registers instances that were created outside of AWS OpsWorks Stacks with a
-// specified stack. We do not recommend using this action to register instances.
-// The complete registration operation includes two tasks: installing the AWS
-// OpsWorks Stacks agent on the instance, and registering the instance with the
-// stack. RegisterInstance handles only the second step. You should instead use
-// the AWS CLI register command, which performs the entire registration operation.
-// For more information, see Registering an Instance with an AWS OpsWorks Stacks
-// Stack (https://docs.aws.amazon.com/opsworks/latest/userguide/registered-instances-register.html)
-// . Registered instances have the same requirements as instances that are created
-// by using the CreateInstance API. For example, registered instances must be
-// running a supported Linux-based operating system, and they must have a supported
-// instance type. For more information about requirements for instances that you
-// want to register, see Preparing the Instance (https://docs.aws.amazon.com/opsworks/latest/userguide/registered-instances-register-registering-preparer.html)
-// . Required Permissions: To use this action, an IAM user must have a Manage
+// Registers instances that were created outside of OpsWorks Stacks with a
+// specified stack.
+//
+// We do not recommend using this action to register instances. The complete
+// registration operation includes two tasks: installing the OpsWorks Stacks agent
+// on the instance, and registering the instance with the stack. RegisterInstance
+// handles only the second step. You should instead use the CLI register command,
+// which performs the entire registration operation. For more information, see [Registering an Instance with an OpsWorks Stacks Stack].
+//
+// Registered instances have the same requirements as instances that are created
+// by using the CreateInstanceAPI. For example, registered instances must be running a supported
+// Linux-based operating system, and they must have a supported instance type. For
+// more information about requirements for instances that you want to register, see
+// [Preparing the Instance].
+//
+// Required Permissions: To use this action, an IAM user must have a Manage
 // permissions level for the stack or an attached policy that explicitly grants
-// permissions. For more information on user permissions, see Managing User
-// Permissions (https://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html)
-// .
+// permissions. For more information on user permissions, see [Managing User Permissions].
+//
+// [Preparing the Instance]: https://docs.aws.amazon.com/opsworks/latest/userguide/registered-instances-register-registering-preparer.html
+// [Registering an Instance with an OpsWorks Stacks Stack]: https://docs.aws.amazon.com/opsworks/latest/userguide/registered-instances-register.html
+// [Managing User Permissions]: https://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html
 func (c *Client) RegisterInstance(ctx context.Context, params *RegisterInstanceInput, optFns ...func(*Options)) (*RegisterInstanceOutput, error) {
 	if params == nil {
 		params = &RegisterInstanceInput{}
@@ -52,7 +55,12 @@ type RegisterInstanceInput struct {
 	// This member is required.
 	StackId *string
 
-	// The instance's hostname.
+	// The instance's host name. The following are character limits for instance host
+	// names.
+	//
+	//   - Linux-based instances: 63 characters
+	//
+	//   - Windows-based instances: 15 characters
 	Hostname *string
 
 	// An InstanceIdentity object that contains the instance's identity.
@@ -77,7 +85,7 @@ type RegisterInstanceInput struct {
 // Contains the response to a RegisterInstanceResult request.
 type RegisterInstanceOutput struct {
 
-	// The registered instance's AWS OpsWorks Stacks ID.
+	// The registered instance's OpsWorks Stacks ID.
 	InstanceId *string
 
 	// Metadata pertaining to the operation's result.
@@ -108,25 +116,25 @@ func (c *Client) addOperationRegisterInstanceMiddlewares(stack *middleware.Stack
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -141,13 +149,16 @@ func (c *Client) addOperationRegisterInstanceMiddlewares(stack *middleware.Stack
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpRegisterInstanceValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opRegisterInstance(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

@@ -6,24 +6,26 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/datasync/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Returns a list of DataSync agents that belong to an Amazon Web Services account
-// in the Amazon Web Services Region specified in the request. With pagination, you
-// can reduce the number of agents returned in a response. If you get a truncated
-// list of agents in a response, the response contains a marker that you can
-// specify in your next request to fetch the next page of agents. ListAgents is
-// eventually consistent. This means the result of running the operation might not
-// reflect that you just created or deleted an agent. For example, if you create an
-// agent with CreateAgent (https://docs.aws.amazon.com/datasync/latest/userguide/API_CreateAgent.html)
-// and then immediately run ListAgents , that agent might not show up in the list
-// right away. In situations like this, you can always confirm whether an agent has
-// been created (or deleted) by using DescribeAgent (https://docs.aws.amazon.com/datasync/latest/userguide/API_DescribeAgent.html)
-// .
+// in the Amazon Web Services Region specified in the request.
+//
+// With pagination, you can reduce the number of agents returned in a response. If
+// you get a truncated list of agents in a response, the response contains a marker
+// that you can specify in your next request to fetch the next page of agents.
+//
+// ListAgents is eventually consistent. This means the result of running the
+// operation might not reflect that you just created or deleted an agent. For
+// example, if you create an agent with [CreateAgent]and then immediately run ListAgents , that
+// agent might not show up in the list right away. In situations like this, you can
+// always confirm whether an agent has been created (or deleted) by using [DescribeAgent].
+//
+// [DescribeAgent]: https://docs.aws.amazon.com/datasync/latest/userguide/API_DescribeAgent.html
+// [CreateAgent]: https://docs.aws.amazon.com/datasync/latest/userguide/API_CreateAgent.html
 func (c *Client) ListAgents(ctx context.Context, params *ListAgentsInput, optFns ...func(*Options)) (*ListAgentsOutput, error) {
 	if params == nil {
 		params = &ListAgentsInput{}
@@ -93,25 +95,25 @@ func (c *Client) addOperationListAgentsMiddlewares(stack *middleware.Stack, opti
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -126,10 +128,13 @@ func (c *Client) addOperationListAgentsMiddlewares(stack *middleware.Stack, opti
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListAgents(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

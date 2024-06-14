@@ -6,18 +6,19 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Provisions a thing in the device registry. RegisterThing calls other IoT
-// control plane APIs. These calls might exceed your account level IoT Throttling
-// Limits (https://docs.aws.amazon.com/general/latest/gr/aws_service_limits.html#limits_iot)
-// and cause throttle errors. Please contact Amazon Web Services Customer Support (https://console.aws.amazon.com/support/home)
-// to raise your throttling limits if necessary. Requires permission to access the
-// RegisterThing (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
-// action.
+// control plane APIs. These calls might exceed your account level [IoT Throttling Limits]and cause
+// throttle errors. Please contact [Amazon Web Services Customer Support]to raise your throttling limits if necessary.
+//
+// Requires permission to access the [RegisterThing] action.
+//
+// [IoT Throttling Limits]: https://docs.aws.amazon.com/general/latest/gr/aws_service_limits.html#limits_iot
+// [RegisterThing]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions
+// [Amazon Web Services Customer Support]: https://console.aws.amazon.com/support/home
 func (c *Client) RegisterThing(ctx context.Context, params *RegisterThingInput, optFns ...func(*Options)) (*RegisterThingOutput, error) {
 	if params == nil {
 		params = &RegisterThingInput{}
@@ -35,15 +36,16 @@ func (c *Client) RegisterThing(ctx context.Context, params *RegisterThingInput, 
 
 type RegisterThingInput struct {
 
-	// The provisioning template. See Provisioning Devices That Have Device
-	// Certificates (https://docs.aws.amazon.com/iot/latest/developerguide/provision-w-cert.html)
-	// for more information.
+	// The provisioning template. See [Provisioning Devices That Have Device Certificates] for more information.
+	//
+	// [Provisioning Devices That Have Device Certificates]: https://docs.aws.amazon.com/iot/latest/developerguide/provision-w-cert.html
 	//
 	// This member is required.
 	TemplateBody *string
 
-	// The parameters for provisioning a thing. See Provisioning Templates (https://docs.aws.amazon.com/iot/latest/developerguide/provision-template.html)
-	// for more information.
+	// The parameters for provisioning a thing. See [Provisioning Templates] for more information.
+	//
+	// [Provisioning Templates]: https://docs.aws.amazon.com/iot/latest/developerguide/provision-template.html
 	Parameters map[string]string
 
 	noSmithyDocumentSerde
@@ -85,25 +87,25 @@ func (c *Client) addOperationRegisterThingMiddlewares(stack *middleware.Stack, o
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -118,13 +120,16 @@ func (c *Client) addOperationRegisterThingMiddlewares(stack *middleware.Stack, o
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpRegisterThingValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opRegisterThing(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

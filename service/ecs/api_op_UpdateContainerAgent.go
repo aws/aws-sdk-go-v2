@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/ecs/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -16,19 +15,24 @@ import (
 // Updating the Amazon ECS container agent doesn't interrupt running tasks or
 // services on the container instance. The process for updating the agent differs
 // depending on whether your container instance was launched with the Amazon
-// ECS-optimized AMI or another operating system. The UpdateContainerAgent API
-// isn't supported for container instances using the Amazon ECS-optimized Amazon
-// Linux 2 (arm64) AMI. To update the container agent, you can update the ecs-init
-// package. This updates the agent. For more information, see Updating the Amazon
-// ECS container agent (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/agent-update-ecs-ami.html)
-// in the Amazon Elastic Container Service Developer Guide. Agent updates with the
-// UpdateContainerAgent API operation do not apply to Windows container instances.
-// We recommend that you launch new container instances to update the agent version
-// in your Windows clusters. The UpdateContainerAgent API requires an Amazon
-// ECS-optimized AMI or Amazon Linux AMI with the ecs-init service installed and
-// running. For help updating the Amazon ECS container agent on other operating
-// systems, see Manually updating the Amazon ECS container agent (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-agent-update.html#manually_update_agent)
-// in the Amazon Elastic Container Service Developer Guide.
+// ECS-optimized AMI or another operating system.
+//
+// The UpdateContainerAgent API isn't supported for container instances using the
+// Amazon ECS-optimized Amazon Linux 2 (arm64) AMI. To update the container agent,
+// you can update the ecs-init package. This updates the agent. For more
+// information, see [Updating the Amazon ECS container agent]in the Amazon Elastic Container Service Developer Guide.
+//
+// Agent updates with the UpdateContainerAgent API operation do not apply to
+// Windows container instances. We recommend that you launch new container
+// instances to update the agent version in your Windows clusters.
+//
+// The UpdateContainerAgent API requires an Amazon ECS-optimized AMI or Amazon
+// Linux AMI with the ecs-init service installed and running. For help updating
+// the Amazon ECS container agent on other operating systems, see [Manually updating the Amazon ECS container agent]in the Amazon
+// Elastic Container Service Developer Guide.
+//
+// [Updating the Amazon ECS container agent]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/agent-update-ecs-ami.html
+// [Manually updating the Amazon ECS container agent]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-agent-update.html#manually_update_agent
 func (c *Client) UpdateContainerAgent(ctx context.Context, params *UpdateContainerAgentInput, optFns ...func(*Options)) (*UpdateContainerAgentOutput, error) {
 	if params == nil {
 		params = &UpdateContainerAgentInput{}
@@ -93,25 +97,25 @@ func (c *Client) addOperationUpdateContainerAgentMiddlewares(stack *middleware.S
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -126,13 +130,16 @@ func (c *Client) addOperationUpdateContainerAgentMiddlewares(stack *middleware.S
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpUpdateContainerAgentValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateContainerAgent(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

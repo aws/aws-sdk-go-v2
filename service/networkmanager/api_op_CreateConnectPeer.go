@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/networkmanager/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -42,19 +41,21 @@ type CreateConnectPeerInput struct {
 	// This member is required.
 	PeerAddress *string
 
-	// The Connect peer BGP options.
+	// The Connect peer BGP options. This only applies only when the protocol is GRE .
 	BgpOptions *types.BgpOptions
 
 	// The client token associated with the request.
 	ClientToken *string
 
-	// A Connect peer core network address.
+	// A Connect peer core network address. This only applies only when the protocol
+	// is GRE .
 	CoreNetworkAddress *string
 
 	// The inside IP addresses used for BGP peering.
 	InsideCidrBlocks []string
 
-	// The subnet ARN for the Connect peer.
+	// The subnet ARN for the Connect peer. This only applies only when the protocol
+	// is NO_ENCAP.
 	SubnetArn *string
 
 	// The tags associated with the peer request.
@@ -96,25 +97,25 @@ func (c *Client) addOperationCreateConnectPeerMiddlewares(stack *middleware.Stac
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -129,6 +130,9 @@ func (c *Client) addOperationCreateConnectPeerMiddlewares(stack *middleware.Stac
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opCreateConnectPeerMiddleware(stack, options); err != nil {
 		return err
 	}
@@ -138,7 +142,7 @@ func (c *Client) addOperationCreateConnectPeerMiddlewares(stack *middleware.Stac
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateConnectPeer(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/ram/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -49,17 +48,22 @@ type ListPermissionsInput struct {
 	NextToken *string
 
 	// Specifies that you want to list only permissions of this type:
+	//
 	//   - AWS – returns only Amazon Web Services managed permissions.
+	//
 	//   - LOCAL – returns only customer managed permissions
+	//
 	//   - ALL – returns both Amazon Web Services managed permissions and customer
 	//   managed permissions.
+	//
 	// If you don't specify this parameter, the default is All .
 	PermissionType types.PermissionTypeFilter
 
 	// Specifies that you want to list only those permissions that apply to the
-	// specified resource type. This parameter is not case sensitive. For example, to
-	// list only permissions that apply to Amazon EC2 subnets, specify ec2:subnet . You
-	// can use the ListResourceTypes operation to get the specific string required.
+	// specified resource type. This parameter is not case sensitive.
+	//
+	// For example, to list only permissions that apply to Amazon EC2 subnets, specify
+	// ec2:subnet . You can use the ListResourceTypes operation to get the specific string required.
 	ResourceType *string
 
 	noSmithyDocumentSerde
@@ -105,25 +109,25 @@ func (c *Client) addOperationListPermissionsMiddlewares(stack *middleware.Stack,
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -138,10 +142,13 @@ func (c *Client) addOperationListPermissionsMiddlewares(stack *middleware.Stack,
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListPermissions(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

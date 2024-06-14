@@ -6,15 +6,13 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/docdbelastic/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Modifies a Elastic DocumentDB cluster. This includes updating
-// admin-username/password, upgrading API version setting up a backup window and
-// maintenance window
+// Modifies an elastic cluster. This includes updating admin-username/password,
+// upgrading the API version, and setting up a backup window and maintenance window
 func (c *Client) UpdateCluster(ctx context.Context, params *UpdateClusterInput, optFns ...func(*Options)) (*UpdateClusterOutput, error) {
 	if params == nil {
 		params = &UpdateClusterInput{}
@@ -32,40 +30,62 @@ func (c *Client) UpdateCluster(ctx context.Context, params *UpdateClusterInput, 
 
 type UpdateClusterInput struct {
 
-	// The arn of the Elastic DocumentDB cluster.
+	// The ARN identifier of the elastic cluster.
 	//
 	// This member is required.
 	ClusterArn *string
 
-	// The password for the Elastic DocumentDB cluster administrator. This password
+	// The password associated with the elastic cluster administrator. This password
 	// can contain any printable ASCII character except forward slash (/), double quote
-	// ("), or the "at" symbol (@). Constraints: Must contain from 8 to 100 characters.
+	// ("), or the "at" symbol (@).
+	//
+	// Constraints: Must contain from 8 to 100 characters.
 	AdminUserPassword *string
 
-	// The authentication type for the Elastic DocumentDB cluster.
+	// The authentication type used to determine where to fetch the password used for
+	// accessing the elastic cluster. Valid types are PLAIN_TEXT or SECRET_ARN .
 	AuthType types.Auth
 
-	// The client token for the Elastic DocumentDB cluster.
+	// The number of days for which automatic snapshots are retained.
+	BackupRetentionPeriod *int32
+
+	// The client token for the elastic cluster.
 	ClientToken *string
 
+	// The daily time range during which automated backups are created if automated
+	// backups are enabled, as determined by the backupRetentionPeriod .
+	PreferredBackupWindow *string
+
 	// The weekly time range during which system maintenance can occur, in Universal
-	// Coordinated Time (UTC). Format: ddd:hh24:mi-ddd:hh24:mi Default: a 30-minute
-	// window selected at random from an 8-hour block of time for each Amazon Web
-	// Services Region, occurring on a random day of the week. Valid days: Mon, Tue,
-	// Wed, Thu, Fri, Sat, Sun Constraints: Minimum 30-minute window.
+	// Coordinated Time (UTC).
+	//
+	// Format: ddd:hh24:mi-ddd:hh24:mi
+	//
+	// Default: a 30-minute window selected at random from an 8-hour block of time for
+	// each Amazon Web Services Region, occurring on a random day of the week.
+	//
+	// Valid days: Mon, Tue, Wed, Thu, Fri, Sat, Sun
+	//
+	// Constraints: Minimum 30-minute window.
 	PreferredMaintenanceWindow *string
 
-	// The capacity of each shard in the Elastic DocumentDB cluster.
+	// The number of vCPUs assigned to each elastic cluster shard. Maximum is 64.
+	// Allowed values are 2, 4, 8, 16, 32, 64.
 	ShardCapacity *int32
 
-	// The number of shards to create in the Elastic DocumentDB cluster.
+	// The number of shards assigned to the elastic cluster. Maximum is 32.
 	ShardCount *int32
 
-	// The number of shards to create in the Elastic DocumentDB cluster.
+	// The number of replica instances applying to all shards in the elastic cluster.
+	// A shardInstanceCount value of 1 means there is one writer instance, and any
+	// additional instances are replicas that can be used for reads and to improve
+	// availability.
+	ShardInstanceCount *int32
+
+	// The Amazon EC2 subnet IDs for the elastic cluster.
 	SubnetIds []string
 
-	// A list of EC2 VPC security groups to associate with the new Elastic DocumentDB
-	// cluster.
+	// A list of EC2 VPC security groups to associate with the elastic cluster.
 	VpcSecurityGroupIds []string
 
 	noSmithyDocumentSerde
@@ -73,7 +93,7 @@ type UpdateClusterInput struct {
 
 type UpdateClusterOutput struct {
 
-	// Returns information about the updated Elastic DocumentDB cluster.
+	// Returns information about the updated elastic cluster.
 	//
 	// This member is required.
 	Cluster *types.Cluster
@@ -106,25 +126,25 @@ func (c *Client) addOperationUpdateClusterMiddlewares(stack *middleware.Stack, o
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -139,6 +159,9 @@ func (c *Client) addOperationUpdateClusterMiddlewares(stack *middleware.Stack, o
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opUpdateClusterMiddleware(stack, options); err != nil {
 		return err
 	}
@@ -148,7 +171,7 @@ func (c *Client) addOperationUpdateClusterMiddlewares(stack *middleware.Stack, o
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateCluster(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

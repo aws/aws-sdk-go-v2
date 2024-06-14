@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/oam/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -14,9 +13,15 @@ import (
 
 // Use this operation to change what types of data are shared from a source
 // account to its linked monitoring account sink. You can't change the sink or
-// change the monitoring account with this operation. To update the list of tags
-// associated with the sink, use TagResource (https://docs.aws.amazon.com/OAM/latest/APIReference/API_TagResource.html)
-// .
+// change the monitoring account with this operation.
+//
+// When you update a link, you can optionally specify filters that specify which
+// metric namespaces and which log groups are shared from the source account to the
+// monitoring account.
+//
+// To update the list of tags associated with the sink, use [TagResource].
+//
+// [TagResource]: https://docs.aws.amazon.com/OAM/latest/APIReference/API_TagResource.html
 func (c *Client) UpdateLink(ctx context.Context, params *UpdateLinkInput, optFns ...func(*Options)) (*UpdateLinkOutput, error) {
 	if params == nil {
 		params = &UpdateLinkInput{}
@@ -40,11 +45,16 @@ type UpdateLinkInput struct {
 	Identifier *string
 
 	// An array of strings that define which types of data that the source account
-	// will send to the monitoring account. Your input here replaces the current set of
-	// data types that are shared.
+	// will send to the monitoring account.
+	//
+	// Your input here replaces the current set of data types that are shared.
 	//
 	// This member is required.
 	ResourceTypes []types.ResourceType
+
+	// Use this structure to filter which metric namespaces and which log groups are
+	// to be shared from the source account to the monitoring account.
+	LinkConfiguration *types.LinkConfiguration
 
 	noSmithyDocumentSerde
 }
@@ -64,6 +74,10 @@ type UpdateLinkOutput struct {
 	// The exact label template that was specified when the link was created, with the
 	// template variables not resolved.
 	LabelTemplate *string
+
+	// This structure includes filters that specify which metric namespaces and which
+	// log groups are shared from the source account to the monitoring account.
+	LinkConfiguration *types.LinkConfiguration
 
 	// The resource types now supported by this link.
 	ResourceTypes []string
@@ -102,25 +116,25 @@ func (c *Client) addOperationUpdateLinkMiddlewares(stack *middleware.Stack, opti
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -135,13 +149,16 @@ func (c *Client) addOperationUpdateLinkMiddlewares(stack *middleware.Stack, opti
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpUpdateLinkValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateLink(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

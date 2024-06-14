@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/ebs/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -14,10 +13,12 @@ import (
 )
 
 // Returns information about the blocks in an Amazon Elastic Block Store snapshot.
+//
 // You should always retry requests that receive server ( 5xx ) error responses,
 // and ThrottlingException and RequestThrottledException client error responses.
-// For more information see Error retries (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/error-retries.html)
-// in the Amazon Elastic Compute Cloud User Guide.
+// For more information see [Error retries]in the Amazon Elastic Compute Cloud User Guide.
+//
+// [Error retries]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/error-retries.html
 func (c *Client) ListSnapshotBlocks(ctx context.Context, params *ListSnapshotBlocksInput, optFns ...func(*Options)) (*ListSnapshotBlocksOutput, error) {
 	if params == nil {
 		params = &ListSnapshotBlocksInput{}
@@ -40,20 +41,25 @@ type ListSnapshotBlocksInput struct {
 	// This member is required.
 	SnapshotId *string
 
-	// The maximum number of blocks to be returned by the request. Even if additional
-	// blocks can be retrieved from the snapshot, the request can return less blocks
-	// than MaxResults or an empty array of blocks. To retrieve the next set of blocks
-	// from the snapshot, make another request with the returned NextToken value. The
-	// value of NextToken is null when there are no more blocks to return.
+	// The maximum number of blocks to be returned by the request.
+	//
+	// Even if additional blocks can be retrieved from the snapshot, the request can
+	// return less blocks than MaxResults or an empty array of blocks.
+	//
+	// To retrieve the next set of blocks from the snapshot, make another request with
+	// the returned NextToken value. The value of NextToken is null when there are no
+	// more blocks to return.
 	MaxResults *int32
 
-	// The token to request the next page of results. If you specify NextToken, then
-	// StartingBlockIndex is ignored.
+	// The token to request the next page of results.
+	//
+	// If you specify NextToken, then StartingBlockIndex is ignored.
 	NextToken *string
 
 	// The block index from which the list should start. The list in the response will
-	// start from this block index or the next valid block index in the snapshot. If
-	// you specify NextToken, then StartingBlockIndex is ignored.
+	// start from this block index or the next valid block index in the snapshot.
+	//
+	// If you specify NextToken, then StartingBlockIndex is ignored.
 	StartingBlockIndex *int32
 
 	noSmithyDocumentSerde
@@ -105,25 +111,25 @@ func (c *Client) addOperationListSnapshotBlocksMiddlewares(stack *middleware.Sta
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -138,13 +144,16 @@ func (c *Client) addOperationListSnapshotBlocksMiddlewares(stack *middleware.Sta
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpListSnapshotBlocksValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListSnapshotBlocks(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -173,11 +182,14 @@ var _ ListSnapshotBlocksAPIClient = (*Client)(nil)
 // ListSnapshotBlocksPaginatorOptions is the paginator options for
 // ListSnapshotBlocks
 type ListSnapshotBlocksPaginatorOptions struct {
-	// The maximum number of blocks to be returned by the request. Even if additional
-	// blocks can be retrieved from the snapshot, the request can return less blocks
-	// than MaxResults or an empty array of blocks. To retrieve the next set of blocks
-	// from the snapshot, make another request with the returned NextToken value. The
-	// value of NextToken is null when there are no more blocks to return.
+	// The maximum number of blocks to be returned by the request.
+	//
+	// Even if additional blocks can be retrieved from the snapshot, the request can
+	// return less blocks than MaxResults or an empty array of blocks.
+	//
+	// To retrieve the next set of blocks from the snapshot, make another request with
+	// the returned NextToken value. The value of NextToken is null when there are no
+	// more blocks to return.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

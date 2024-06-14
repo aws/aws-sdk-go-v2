@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -15,18 +14,23 @@ import (
 // browser, the user will be automatically signed in to the domain, and granted
 // access to all of the Apps and files associated with the Domain's Amazon Elastic
 // File System volume. This operation can only be called when the authentication
-// mode equals IAM. The IAM role or user passed to this API defines the permissions
-// to access the app. Once the presigned URL is created, no additional permission
-// is required to access this URL. IAM authorization policies for this API are also
-// enforced for every HTTP request and WebSocket frame that attempts to connect to
-// the app. You can restrict access to this API and to the URL that it returns to a
-// list of IP addresses, Amazon VPCs or Amazon VPC Endpoints that you specify. For
-// more information, see Connect to Amazon SageMaker Studio Through an Interface
-// VPC Endpoint (https://docs.aws.amazon.com/sagemaker/latest/dg/studio-interface-endpoint.html)
-// . The URL that you get from a call to CreatePresignedDomainUrl has a default
+// mode equals IAM.
+//
+// The IAM role or user passed to this API defines the permissions to access the
+// app. Once the presigned URL is created, no additional permission is required to
+// access this URL. IAM authorization policies for this API are also enforced for
+// every HTTP request and WebSocket frame that attempts to connect to the app.
+//
+// You can restrict access to this API and to the URL that it returns to a list of
+// IP addresses, Amazon VPCs or Amazon VPC Endpoints that you specify. For more
+// information, see [Connect to Amazon SageMaker Studio Through an Interface VPC Endpoint].
+//
+// The URL that you get from a call to CreatePresignedDomainUrl has a default
 // timeout of 5 minutes. You can configure this value using ExpiresInSeconds . If
 // you try to use the URL after the timeout limit expires, you are directed to the
 // Amazon Web Services console sign-in page.
+//
+// [Connect to Amazon SageMaker Studio Through an Interface VPC Endpoint]: https://docs.aws.amazon.com/sagemaker/latest/dg/studio-interface-endpoint.html
 func (c *Client) CreatePresignedDomainUrl(ctx context.Context, params *CreatePresignedDomainUrlInput, optFns ...func(*Options)) (*CreatePresignedDomainUrlOutput, error) {
 	if params == nil {
 		params = &CreatePresignedDomainUrlInput{}
@@ -61,15 +65,21 @@ type CreatePresignedDomainUrlInput struct {
 	// The landing page that the user is directed to when accessing the presigned URL.
 	// Using this value, users can access Studio or Studio Classic, even if it is not
 	// the default experience for the domain. The supported values are:
+	//
 	//   - studio::relative/path : Directs users to the relative path in Studio.
+	//
 	//   - app:JupyterServer:relative/path : Directs users to the relative path in the
 	//   Studio Classic application.
+	//
 	//   - app:JupyterLab:relative/path : Directs users to the relative path in the
 	//   JupyterLab application.
+	//
 	//   - app:RStudioServerPro:relative/path : Directs users to the relative path in
 	//   the RStudio application.
+	//
 	//   - app:CodeEditor:relative/path : Directs users to the relative path in the
 	//   Code Editor, based on Code-OSS, Visual Studio Code - Open Source application.
+	//
 	//   - app:Canvas:relative/path : Directs users to the relative path in the Canvas
 	//   application.
 	LandingUri *string
@@ -116,25 +126,25 @@ func (c *Client) addOperationCreatePresignedDomainUrlMiddlewares(stack *middlewa
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -149,13 +159,16 @@ func (c *Client) addOperationCreatePresignedDomainUrlMiddlewares(stack *middlewa
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpCreatePresignedDomainUrlValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreatePresignedDomainUrl(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

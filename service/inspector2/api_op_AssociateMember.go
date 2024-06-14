@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -14,9 +13,10 @@ import (
 // Associates an Amazon Web Services account with an Amazon Inspector delegated
 // administrator. An HTTP 200 response indicates the association was successfully
 // started, but doesn’t indicate whether it was completed. You can check if the
-// association completed by using ListMembers (https://docs.aws.amazon.com/inspector/v2/APIReference/API_ListMembers.html)
-// for multiple accounts or GetMembers (https://docs.aws.amazon.com/inspector/v2/APIReference/API_GetMember.html)
-// for a single account.
+// association completed by using [ListMembers]for multiple accounts or [GetMembers] for a single account.
+//
+// [ListMembers]: https://docs.aws.amazon.com/inspector/v2/APIReference/API_ListMembers.html
+// [GetMembers]: https://docs.aws.amazon.com/inspector/v2/APIReference/API_GetMember.html
 func (c *Client) AssociateMember(ctx context.Context, params *AssociateMemberInput, optFns ...func(*Options)) (*AssociateMemberOutput, error) {
 	if params == nil {
 		params = &AssociateMemberInput{}
@@ -78,25 +78,25 @@ func (c *Client) addOperationAssociateMemberMiddlewares(stack *middleware.Stack,
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -111,13 +111,16 @@ func (c *Client) addOperationAssociateMemberMiddlewares(stack *middleware.Stack,
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpAssociateMemberValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opAssociateMember(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

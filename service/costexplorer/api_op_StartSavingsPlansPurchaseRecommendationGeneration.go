@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -15,8 +14,10 @@ import (
 // calculate a fresh set of Savings Plans recommendations that takes your latest
 // usage data and current Savings Plans inventory into account. You can refresh
 // Savings Plans recommendations up to three times daily for a consolidated billing
-// family. StartSavingsPlansPurchaseRecommendationGeneration has no request syntax
-// because no input parameters are needed to support this operation.
+// family.
+//
+// StartSavingsPlansPurchaseRecommendationGeneration has no request syntax because
+// no input parameters are needed to support this operation.
 func (c *Client) StartSavingsPlansPurchaseRecommendationGeneration(ctx context.Context, params *StartSavingsPlansPurchaseRecommendationGenerationInput, optFns ...func(*Options)) (*StartSavingsPlansPurchaseRecommendationGenerationOutput, error) {
 	if params == nil {
 		params = &StartSavingsPlansPurchaseRecommendationGenerationInput{}
@@ -75,25 +76,25 @@ func (c *Client) addOperationStartSavingsPlansPurchaseRecommendationGenerationMi
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -108,10 +109,13 @@ func (c *Client) addOperationStartSavingsPlansPurchaseRecommendationGenerationMi
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opStartSavingsPlansPurchaseRecommendationGeneration(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

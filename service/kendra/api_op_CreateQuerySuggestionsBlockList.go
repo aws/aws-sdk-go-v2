@@ -6,22 +6,29 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/kendra/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a block list to exlcude certain queries from suggestions. Any query
-// that contains words or phrases specified in the block list is blocked or
-// filtered out from being shown as a suggestion. You need to provide the file
-// location of your block list text file in your S3 bucket. In your text file,
-// enter each block word or phrase on a separate line. For information on the
-// current quota limits for block lists, see Quotas for Amazon Kendra (https://docs.aws.amazon.com/kendra/latest/dg/quotas.html)
-// . CreateQuerySuggestionsBlockList is currently not supported in the Amazon Web
-// Services GovCloud (US-West) region. For an example of creating a block list for
-// query suggestions using the Python SDK, see Query suggestions block list (https://docs.aws.amazon.com/kendra/latest/dg/query-suggestions.html#query-suggestions-blocklist)
-// .
+// Creates a block list to exlcude certain queries from suggestions.
+//
+// Any query that contains words or phrases specified in the block list is blocked
+// or filtered out from being shown as a suggestion.
+//
+// You need to provide the file location of your block list text file in your S3
+// bucket. In your text file, enter each block word or phrase on a separate line.
+//
+// For information on the current quota limits for block lists, see [Quotas for Amazon Kendra].
+//
+// CreateQuerySuggestionsBlockList is currently not supported in the Amazon Web
+// Services GovCloud (US-West) region.
+//
+// For an example of creating a block list for query suggestions using the Python
+// SDK, see [Query suggestions block list].
+//
+// [Quotas for Amazon Kendra]: https://docs.aws.amazon.com/kendra/latest/dg/quotas.html
+// [Query suggestions block list]: https://docs.aws.amazon.com/kendra/latest/dg/query-suggestions.html#query-suggestions-blocklist
 func (c *Client) CreateQuerySuggestionsBlockList(ctx context.Context, params *CreateQuerySuggestionsBlockListInput, optFns ...func(*Options)) (*CreateQuerySuggestionsBlockListOutput, error) {
 	if params == nil {
 		params = &CreateQuerySuggestionsBlockListInput{}
@@ -45,25 +52,29 @@ type CreateQuerySuggestionsBlockListInput struct {
 	// This member is required.
 	IndexId *string
 
-	// A name for the block list. For example, the name 'offensive-words', which
-	// includes all offensive words that could appear in user queries and need to be
-	// blocked from suggestions.
+	// A name for the block list.
+	//
+	// For example, the name 'offensive-words', which includes all offensive words
+	// that could appear in user queries and need to be blocked from suggestions.
 	//
 	// This member is required.
 	Name *string
 
 	// The Amazon Resource Name (ARN) of an IAM role with permission to access your S3
-	// bucket that contains the block list text file. For more information, see IAM
-	// access roles for Amazon Kendra (https://docs.aws.amazon.com/kendra/latest/dg/iam-roles.html)
-	// .
+	// bucket that contains the block list text file. For more information, see [IAM access roles for Amazon Kendra].
+	//
+	// [IAM access roles for Amazon Kendra]: https://docs.aws.amazon.com/kendra/latest/dg/iam-roles.html
 	//
 	// This member is required.
 	RoleArn *string
 
-	// The S3 path to your block list text file in your S3 bucket. Each block word or
-	// phrase should be on a separate line in a text file. For information on the
-	// current quota limits for block lists, see Quotas for Amazon Kendra (https://docs.aws.amazon.com/kendra/latest/dg/quotas.html)
-	// .
+	// The S3 path to your block list text file in your S3 bucket.
+	//
+	// Each block word or phrase should be on a separate line in a text file.
+	//
+	// For information on the current quota limits for block lists, see [Quotas for Amazon Kendra].
+	//
+	// [Quotas for Amazon Kendra]: https://docs.aws.amazon.com/kendra/latest/dg/quotas.html
 	//
 	// This member is required.
 	SourceS3Path *types.S3Path
@@ -72,9 +83,10 @@ type CreateQuerySuggestionsBlockListInput struct {
 	// block list.
 	ClientToken *string
 
-	// A description for the block list. For example, the description "List of all
-	// offensive words that can appear in user queries and need to be blocked from
-	// suggestions."
+	// A description for the block list.
+	//
+	// For example, the description "List of all offensive words that can appear in
+	// user queries and need to be blocked from suggestions."
 	Description *string
 
 	// A list of key-value pairs that identify or categorize the block list. Tag keys
@@ -118,25 +130,25 @@ func (c *Client) addOperationCreateQuerySuggestionsBlockListMiddlewares(stack *m
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -151,6 +163,9 @@ func (c *Client) addOperationCreateQuerySuggestionsBlockListMiddlewares(stack *m
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opCreateQuerySuggestionsBlockListMiddleware(stack, options); err != nil {
 		return err
 	}
@@ -160,7 +175,7 @@ func (c *Client) addOperationCreateQuerySuggestionsBlockListMiddlewares(stack *m
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateQuerySuggestionsBlockList(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

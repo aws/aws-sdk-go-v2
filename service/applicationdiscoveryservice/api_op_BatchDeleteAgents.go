@@ -6,13 +6,13 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/applicationdiscoveryservice/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes one or more agents or collectors as specified by ID. Deleting an agent
+//	Deletes one or more agents or collectors as specified by ID. Deleting an agent
+//
 // or collector does not delete the previously discovered data. To delete the data
 // collected, use StartBatchDeleteConfigurationTask .
 func (c *Client) BatchDeleteAgents(ctx context.Context, params *BatchDeleteAgentsInput, optFns ...func(*Options)) (*BatchDeleteAgentsOutput, error) {
@@ -32,7 +32,7 @@ func (c *Client) BatchDeleteAgents(ctx context.Context, params *BatchDeleteAgent
 
 type BatchDeleteAgentsInput struct {
 
-	// The list of agents to delete.
+	//  The list of agents to delete.
 	//
 	// This member is required.
 	DeleteAgents []types.DeleteAgent
@@ -42,8 +42,8 @@ type BatchDeleteAgentsInput struct {
 
 type BatchDeleteAgentsOutput struct {
 
-	// A list of agent IDs that failed to delete during the deletion task, each paired
-	// with an error message.
+	//  A list of agent IDs that failed to delete during the deletion task, each
+	// paired with an error message.
 	Errors []types.BatchDeleteAgentError
 
 	// Metadata pertaining to the operation's result.
@@ -74,25 +74,25 @@ func (c *Client) addOperationBatchDeleteAgentsMiddlewares(stack *middleware.Stac
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -107,13 +107,16 @@ func (c *Client) addOperationBatchDeleteAgentsMiddlewares(stack *middleware.Stac
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpBatchDeleteAgentsValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opBatchDeleteAgents(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

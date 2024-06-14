@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/lightsail/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -34,10 +33,11 @@ type GetKeyPairsInput struct {
 	// response of your request.
 	IncludeDefaultKeyPair *bool
 
-	// The token to advance to the next page of results from your request. To get a
-	// page token, perform an initial GetKeyPairs request. If your results are
-	// paginated, the response will return a next page token that you can specify as
-	// the page token in a subsequent request.
+	// The token to advance to the next page of results from your request.
+	//
+	// To get a page token, perform an initial GetKeyPairs request. If your results
+	// are paginated, the response will return a next page token that you can specify
+	// as the page token in a subsequent request.
 	PageToken *string
 
 	noSmithyDocumentSerde
@@ -48,10 +48,12 @@ type GetKeyPairsOutput struct {
 	// An array of key-value pairs containing information about the key pairs.
 	KeyPairs []types.KeyPair
 
-	// The token to advance to the next page of results from your request. A next page
-	// token is not returned if there are no more results to display. To get the next
-	// page of results, perform another GetKeyPairs request and specify the next page
-	// token using the pageToken parameter.
+	// The token to advance to the next page of results from your request.
+	//
+	// A next page token is not returned if there are no more results to display.
+	//
+	// To get the next page of results, perform another GetKeyPairs request and
+	// specify the next page token using the pageToken parameter.
 	NextPageToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -82,25 +84,25 @@ func (c *Client) addOperationGetKeyPairsMiddlewares(stack *middleware.Stack, opt
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -115,10 +117,13 @@ func (c *Client) addOperationGetKeyPairsMiddlewares(stack *middleware.Stack, opt
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetKeyPairs(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

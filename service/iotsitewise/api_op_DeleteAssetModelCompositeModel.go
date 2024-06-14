@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/iotsitewise/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -16,8 +15,9 @@ import (
 // assets created from a composite model before you can delete the model. Also, you
 // can't delete a composite model if a parent asset model exists that contains a
 // property formula expression that depends on the asset model that you want to
-// delete. For more information, see Deleting assets and models (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/delete-assets-and-models.html)
-// in the IoT SiteWise User Guide.
+// delete. For more information, see [Deleting assets and models]in the IoT SiteWise User Guide.
+//
+// [Deleting assets and models]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/delete-assets-and-models.html
 func (c *Client) DeleteAssetModelCompositeModel(ctx context.Context, params *DeleteAssetModelCompositeModelInput, optFns ...func(*Options)) (*DeleteAssetModelCompositeModelOutput, error) {
 	if params == nil {
 		params = &DeleteAssetModelCompositeModelInput{}
@@ -56,8 +56,9 @@ type DeleteAssetModelCompositeModelInput struct {
 type DeleteAssetModelCompositeModelOutput struct {
 
 	// Contains current status information for an asset model. For more information,
-	// see Asset and model states (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/asset-and-model-states.html)
-	// in the IoT SiteWise User Guide.
+	// see [Asset and model states]in the IoT SiteWise User Guide.
+	//
+	// [Asset and model states]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/asset-and-model-states.html
 	//
 	// This member is required.
 	AssetModelStatus *types.AssetModelStatus
@@ -90,25 +91,25 @@ func (c *Client) addOperationDeleteAssetModelCompositeModelMiddlewares(stack *mi
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -123,6 +124,9 @@ func (c *Client) addOperationDeleteAssetModelCompositeModelMiddlewares(stack *mi
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addEndpointPrefix_opDeleteAssetModelCompositeModelMiddleware(stack); err != nil {
 		return err
 	}
@@ -135,7 +139,7 @@ func (c *Client) addOperationDeleteAssetModelCompositeModelMiddlewares(stack *mi
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteAssetModelCompositeModel(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

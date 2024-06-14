@@ -6,20 +6,28 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/elasticloadbalancingv2/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a target group. For more information, see the following:
-//   - Target groups for your Application Load Balancers (https://docs.aws.amazon.com/elasticloadbalancing/latest/application/load-balancer-target-groups.html)
-//   - Target groups for your Network Load Balancers (https://docs.aws.amazon.com/elasticloadbalancing/latest/network/load-balancer-target-groups.html)
-//   - Target groups for your Gateway Load Balancers (https://docs.aws.amazon.com/elasticloadbalancing/latest/gateway/target-groups.html)
+// Creates a target group.
+//
+// For more information, see the following:
+//
+// [Target groups for your Application Load Balancers]
+//
+// [Target groups for your Network Load Balancers]
+//
+// [Target groups for your Gateway Load Balancers]
 //
 // This operation is idempotent, which means that it completes at most one time.
 // If you attempt to create multiple target groups with the same settings, each
 // call succeeds.
+//
+// [Target groups for your Gateway Load Balancers]: https://docs.aws.amazon.com/elasticloadbalancing/latest/gateway/target-groups.html
+// [Target groups for your Application Load Balancers]: https://docs.aws.amazon.com/elasticloadbalancing/latest/application/load-balancer-target-groups.html
+// [Target groups for your Network Load Balancers]: https://docs.aws.amazon.com/elasticloadbalancing/latest/network/load-balancer-target-groups.html
 func (c *Client) CreateTargetGroup(ctx context.Context, params *CreateTargetGroupInput, optFns ...func(*Options)) (*CreateTargetGroupOutput, error) {
 	if params == nil {
 		params = &CreateTargetGroupInput{}
@@ -37,9 +45,11 @@ func (c *Client) CreateTargetGroup(ctx context.Context, params *CreateTargetGrou
 
 type CreateTargetGroupInput struct {
 
-	// The name of the target group. This name must be unique per region per account,
-	// can have a maximum of 32 characters, must contain only alphanumeric characters
-	// or hyphens, and must not begin or end with a hyphen.
+	// The name of the target group.
+	//
+	// This name must be unique per region per account, can have a maximum of 32
+	// characters, must contain only alphanumeric characters or hyphens, and must not
+	// begin or end with a hyphen.
 	//
 	// This member is required.
 	Name *string
@@ -57,9 +67,12 @@ type CreateTargetGroupInput struct {
 	HealthCheckIntervalSeconds *int32
 
 	// [HTTP/HTTPS health checks] The destination for health checks on the targets.
-	// [HTTP1 or HTTP2 protocol version] The ping path. The default is /. [GRPC
-	// protocol version] The path of a custom health check method with the format
-	// /package.service/method. The default is /Amazon Web Services.ALB/healthcheck.
+	//
+	// [HTTP1 or HTTP2 protocol version] The ping path. The default is /.
+	//
+	// [GRPC protocol version] The path of a custom health check method with the
+	// format /package.service/method. The default is /Amazon Web
+	// Services.ALB/healthcheck.
 	HealthCheckPath *string
 
 	// The port the load balancer uses when performing health checks on targets. If
@@ -127,12 +140,16 @@ type CreateTargetGroupInput struct {
 	// The type of target that you must specify when registering targets with this
 	// target group. You can't specify targets for a target group using more than one
 	// target type.
+	//
 	//   - instance - Register targets by instance ID. This is the default value.
+	//
 	//   - ip - Register targets by IP address. You can specify IP addresses from the
 	//   subnets of the virtual private cloud (VPC) for the target group, the RFC 1918
 	//   range (10.0.0.0/8, 172.16.0.0/12, and 192.168.0.0/16), and the RFC 6598 range
 	//   (100.64.0.0/10). You can't specify publicly routable IP addresses.
+	//
 	//   - lambda - Register a single Lambda function as a target.
+	//
 	//   - alb - Register a single Application Load Balancer as a target.
 	TargetType types.TargetTypeEnum
 
@@ -183,25 +200,25 @@ func (c *Client) addOperationCreateTargetGroupMiddlewares(stack *middleware.Stac
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -216,13 +233,16 @@ func (c *Client) addOperationCreateTargetGroupMiddlewares(stack *middleware.Stac
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpCreateTargetGroupValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateTargetGroup(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

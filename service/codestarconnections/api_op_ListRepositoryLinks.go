@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/codestarconnections/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -30,10 +29,10 @@ func (c *Client) ListRepositoryLinks(ctx context.Context, params *ListRepository
 
 type ListRepositoryLinksInput struct {
 
-	// A non-zero, non-negative integer used to limit the number of returned results.
+	//  A non-zero, non-negative integer used to limit the number of returned results.
 	MaxResults int32
 
-	// An enumeration token that, when provided in a request, returns the next batch
+	//  An enumeration token that, when provided in a request, returns the next batch
 	// of the results.
 	NextToken *string
 
@@ -79,25 +78,25 @@ func (c *Client) addOperationListRepositoryLinksMiddlewares(stack *middleware.St
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -112,10 +111,13 @@ func (c *Client) addOperationListRepositoryLinksMiddlewares(stack *middleware.St
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListRepositoryLinks(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -144,7 +146,7 @@ var _ ListRepositoryLinksAPIClient = (*Client)(nil)
 // ListRepositoryLinksPaginatorOptions is the paginator options for
 // ListRepositoryLinks
 type ListRepositoryLinksPaginatorOptions struct {
-	// A non-zero, non-negative integer used to limit the number of returned results.
+	//  A non-zero, non-negative integer used to limit the number of returned results.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

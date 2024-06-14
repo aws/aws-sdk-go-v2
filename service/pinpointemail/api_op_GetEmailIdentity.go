@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/pinpointemail/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -49,16 +48,18 @@ type GetEmailIdentityOutput struct {
 	// are required to complete the DKIM verification process.
 	DkimAttributes *types.DkimAttributes
 
-	// The feedback forwarding configuration for the identity. If the value is true ,
-	// Amazon Pinpoint sends you email notifications when bounce or complaint events
-	// occur. Amazon Pinpoint sends this notification to the address that you specified
-	// in the Return-Path header of the original email. When you set this value to
-	// false , Amazon Pinpoint sends notifications through other mechanisms, such as by
-	// notifying an Amazon SNS topic or another event destination. You're required to
-	// have a method of tracking bounces and complaints. If you haven't set up another
-	// mechanism for receiving bounce or complaint notifications, Amazon Pinpoint sends
-	// an email notification when these events occur (even if this setting is
-	// disabled).
+	// The feedback forwarding configuration for the identity.
+	//
+	// If the value is true , Amazon Pinpoint sends you email notifications when bounce
+	// or complaint events occur. Amazon Pinpoint sends this notification to the
+	// address that you specified in the Return-Path header of the original email.
+	//
+	// When you set this value to false , Amazon Pinpoint sends notifications through
+	// other mechanisms, such as by notifying an Amazon SNS topic or another event
+	// destination. You're required to have a method of tracking bounces and
+	// complaints. If you haven't set up another mechanism for receiving bounce or
+	// complaint notifications, Amazon Pinpoint sends an email notification when these
+	// events occur (even if this setting is disabled).
 	FeedbackForwardingStatus bool
 
 	// The email identity type.
@@ -74,8 +75,9 @@ type GetEmailIdentityOutput struct {
 
 	// Specifies whether or not the identity is verified. In Amazon Pinpoint, you can
 	// only send email from verified email addresses or domains. For more information
-	// about verifying identities, see the Amazon Pinpoint User Guide (https://docs.aws.amazon.com/pinpoint/latest/userguide/channels-email-manage-verify.html)
-	// .
+	// about verifying identities, see the [Amazon Pinpoint User Guide].
+	//
+	// [Amazon Pinpoint User Guide]: https://docs.aws.amazon.com/pinpoint/latest/userguide/channels-email-manage-verify.html
 	VerifiedForSendingStatus bool
 
 	// Metadata pertaining to the operation's result.
@@ -106,25 +108,25 @@ func (c *Client) addOperationGetEmailIdentityMiddlewares(stack *middleware.Stack
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -139,13 +141,16 @@ func (c *Client) addOperationGetEmailIdentityMiddlewares(stack *middleware.Stack
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpGetEmailIdentityValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetEmailIdentity(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

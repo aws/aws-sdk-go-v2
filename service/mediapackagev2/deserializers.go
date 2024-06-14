@@ -18,7 +18,16 @@ import (
 	"io"
 	"io/ioutil"
 	"strings"
+	"time"
 )
+
+func deserializeS3Expires(v string) (*time.Time, error) {
+	t, err := smithytime.ParseHTTPDate(v)
+	if err != nil {
+		return nil, nil
+	}
+	return &t, nil
+}
 
 type awsRestjson1_deserializeOpCreateChannel struct {
 }
@@ -223,9 +232,27 @@ func awsRestjson1_deserializeOpDocumentCreateChannelOutput(v **CreateChannelOutp
 				sv.Description = ptr.String(jtv)
 			}
 
+		case "ETag":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected EntityTag to be of type string, got %T instead", value)
+				}
+				sv.ETag = ptr.String(jtv)
+			}
+
 		case "IngestEndpoints":
 			if err := awsRestjson1_deserializeDocumentIngestEndpointList(&sv.IngestEndpoints, value); err != nil {
 				return err
+			}
+
+		case "InputType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected InputType to be of type string, got %T instead", value)
+				}
+				sv.InputType = types.InputType(jtv)
 			}
 
 		case "ModifiedAt":
@@ -461,6 +488,15 @@ func awsRestjson1_deserializeOpDocumentCreateChannelGroupOutput(v **CreateChanne
 				sv.EgressDomain = ptr.String(jtv)
 			}
 
+		case "ETag":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected EntityTag to be of type string, got %T instead", value)
+				}
+				sv.ETag = ptr.String(jtv)
+			}
+
 		case "ModifiedAt":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -694,6 +730,11 @@ func awsRestjson1_deserializeOpDocumentCreateOriginEndpointOutput(v **CreateOrig
 				}
 			}
 
+		case "DashManifests":
+			if err := awsRestjson1_deserializeDocumentGetDashManifests(&sv.DashManifests, value); err != nil {
+				return err
+			}
+
 		case "Description":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -701,6 +742,20 @@ func awsRestjson1_deserializeOpDocumentCreateOriginEndpointOutput(v **CreateOrig
 					return fmt.Errorf("expected ResourceDescription to be of type string, got %T instead", value)
 				}
 				sv.Description = ptr.String(jtv)
+			}
+
+		case "ETag":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected EntityTag to be of type string, got %T instead", value)
+				}
+				sv.ETag = ptr.String(jtv)
+			}
+
+		case "ForceEndpointErrorConfiguration":
+			if err := awsRestjson1_deserializeDocumentForceEndpointErrorConfiguration(&sv.ForceEndpointErrorConfiguration, value); err != nil {
+				return err
 			}
 
 		case "HlsManifests":
@@ -1439,9 +1494,27 @@ func awsRestjson1_deserializeOpDocumentGetChannelOutput(v **GetChannelOutput, va
 				sv.Description = ptr.String(jtv)
 			}
 
+		case "ETag":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected EntityTag to be of type string, got %T instead", value)
+				}
+				sv.ETag = ptr.String(jtv)
+			}
+
 		case "IngestEndpoints":
 			if err := awsRestjson1_deserializeDocumentIngestEndpointList(&sv.IngestEndpoints, value); err != nil {
 				return err
+			}
+
+		case "InputType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected InputType to be of type string, got %T instead", value)
+				}
+				sv.InputType = types.InputType(jtv)
 			}
 
 		case "ModifiedAt":
@@ -1669,6 +1742,15 @@ func awsRestjson1_deserializeOpDocumentGetChannelGroupOutput(v **GetChannelGroup
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
 				sv.EgressDomain = ptr.String(jtv)
+			}
+
+		case "ETag":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected EntityTag to be of type string, got %T instead", value)
+				}
+				sv.ETag = ptr.String(jtv)
 			}
 
 		case "ModifiedAt":
@@ -2079,6 +2161,11 @@ func awsRestjson1_deserializeOpDocumentGetOriginEndpointOutput(v **GetOriginEndp
 				}
 			}
 
+		case "DashManifests":
+			if err := awsRestjson1_deserializeDocumentGetDashManifests(&sv.DashManifests, value); err != nil {
+				return err
+			}
+
 		case "Description":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2086,6 +2173,20 @@ func awsRestjson1_deserializeOpDocumentGetOriginEndpointOutput(v **GetOriginEndp
 					return fmt.Errorf("expected ResourceDescription to be of type string, got %T instead", value)
 				}
 				sv.Description = ptr.String(jtv)
+			}
+
+		case "ETag":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected EntityTag to be of type string, got %T instead", value)
+				}
+				sv.ETag = ptr.String(jtv)
+			}
+
+		case "ForceEndpointErrorConfiguration":
+			if err := awsRestjson1_deserializeDocumentForceEndpointErrorConfiguration(&sv.ForceEndpointErrorConfiguration, value); err != nil {
+				return err
 			}
 
 		case "HlsManifests":
@@ -3567,9 +3668,27 @@ func awsRestjson1_deserializeOpDocumentUpdateChannelOutput(v **UpdateChannelOutp
 				sv.Description = ptr.String(jtv)
 			}
 
+		case "ETag":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected EntityTag to be of type string, got %T instead", value)
+				}
+				sv.ETag = ptr.String(jtv)
+			}
+
 		case "IngestEndpoints":
 			if err := awsRestjson1_deserializeDocumentIngestEndpointList(&sv.IngestEndpoints, value); err != nil {
 				return err
+			}
+
+		case "InputType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected InputType to be of type string, got %T instead", value)
+				}
+				sv.InputType = types.InputType(jtv)
 			}
 
 		case "ModifiedAt":
@@ -3800,6 +3919,15 @@ func awsRestjson1_deserializeOpDocumentUpdateChannelGroupOutput(v **UpdateChanne
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
 				sv.EgressDomain = ptr.String(jtv)
+			}
+
+		case "ETag":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected EntityTag to be of type string, got %T instead", value)
+				}
+				sv.ETag = ptr.String(jtv)
 			}
 
 		case "ModifiedAt":
@@ -4035,6 +4163,11 @@ func awsRestjson1_deserializeOpDocumentUpdateOriginEndpointOutput(v **UpdateOrig
 				}
 			}
 
+		case "DashManifests":
+			if err := awsRestjson1_deserializeDocumentGetDashManifests(&sv.DashManifests, value); err != nil {
+				return err
+			}
+
 		case "Description":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4042,6 +4175,20 @@ func awsRestjson1_deserializeOpDocumentUpdateOriginEndpointOutput(v **UpdateOrig
 					return fmt.Errorf("expected ResourceDescription to be of type string, got %T instead", value)
 				}
 				sv.Description = ptr.String(jtv)
+			}
+
+		case "ETag":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected EntityTag to be of type string, got %T instead", value)
+				}
+				sv.ETag = ptr.String(jtv)
+			}
+
+		case "ForceEndpointErrorConfiguration":
+			if err := awsRestjson1_deserializeDocumentForceEndpointErrorConfiguration(&sv.ForceEndpointErrorConfiguration, value); err != nil {
+				return err
 			}
 
 		case "HlsManifests":
@@ -4635,6 +4782,15 @@ func awsRestjson1_deserializeDocumentChannelListConfiguration(v **types.ChannelL
 				sv.Description = ptr.String(jtv)
 			}
 
+		case "InputType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected InputType to be of type string, got %T instead", value)
+				}
+				sv.InputType = types.InputType(jtv)
+			}
+
 		case "ModifiedAt":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -4698,6 +4854,91 @@ func awsRestjson1_deserializeDocumentConflictException(v **types.ConflictExcepti
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
 				sv.Message = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentDashPeriodTriggers(v *[]types.DashPeriodTrigger, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.DashPeriodTrigger
+	if *v == nil {
+		cv = []types.DashPeriodTrigger{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.DashPeriodTrigger
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected DashPeriodTrigger to be of type string, got %T instead", value)
+			}
+			col = types.DashPeriodTrigger(jtv)
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentDashUtcTiming(v **types.DashUtcTiming, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.DashUtcTiming
+	if *v == nil {
+		sv = &types.DashUtcTiming{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "TimingMode":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected DashUtcTimingMode to be of type string, got %T instead", value)
+				}
+				sv.TimingMode = types.DashUtcTimingMode(jtv)
+			}
+
+		case "TimingSource":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.TimingSource = ptr.String(jtv)
 			}
 
 		default:
@@ -4906,6 +5147,42 @@ func awsRestjson1_deserializeDocumentEncryptionMethod(v **types.EncryptionMethod
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentEndpointErrorConditions(v *[]types.EndpointErrorCondition, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.EndpointErrorCondition
+	if *v == nil {
+		cv = []types.EndpointErrorCondition{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.EndpointErrorCondition
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected EndpointErrorCondition to be of type string, got %T instead", value)
+			}
+			col = types.EndpointErrorCondition(jtv)
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentFilterConfiguration(v **types.FilterConfiguration, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -4988,6 +5265,215 @@ func awsRestjson1_deserializeDocumentFilterConfiguration(v **types.FilterConfigu
 		}
 	}
 	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentForceEndpointErrorConfiguration(v **types.ForceEndpointErrorConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ForceEndpointErrorConfiguration
+	if *v == nil {
+		sv = &types.ForceEndpointErrorConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "EndpointErrorConditions":
+			if err := awsRestjson1_deserializeDocumentEndpointErrorConditions(&sv.EndpointErrorConditions, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentGetDashManifestConfiguration(v **types.GetDashManifestConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.GetDashManifestConfiguration
+	if *v == nil {
+		sv = &types.GetDashManifestConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "DrmSignaling":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected DashDrmSignaling to be of type string, got %T instead", value)
+				}
+				sv.DrmSignaling = types.DashDrmSignaling(jtv)
+			}
+
+		case "FilterConfiguration":
+			if err := awsRestjson1_deserializeDocumentFilterConfiguration(&sv.FilterConfiguration, value); err != nil {
+				return err
+			}
+
+		case "ManifestName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ResourceName to be of type string, got %T instead", value)
+				}
+				sv.ManifestName = ptr.String(jtv)
+			}
+
+		case "ManifestWindowSeconds":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Integer to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.ManifestWindowSeconds = ptr.Int32(int32(i64))
+			}
+
+		case "MinBufferTimeSeconds":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Integer to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.MinBufferTimeSeconds = ptr.Int32(int32(i64))
+			}
+
+		case "MinUpdatePeriodSeconds":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Integer to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.MinUpdatePeriodSeconds = ptr.Int32(int32(i64))
+			}
+
+		case "PeriodTriggers":
+			if err := awsRestjson1_deserializeDocumentDashPeriodTriggers(&sv.PeriodTriggers, value); err != nil {
+				return err
+			}
+
+		case "ScteDash":
+			if err := awsRestjson1_deserializeDocumentScteDash(&sv.ScteDash, value); err != nil {
+				return err
+			}
+
+		case "SegmentTemplateFormat":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected DashSegmentTemplateFormat to be of type string, got %T instead", value)
+				}
+				sv.SegmentTemplateFormat = types.DashSegmentTemplateFormat(jtv)
+			}
+
+		case "SuggestedPresentationDelaySeconds":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Integer to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.SuggestedPresentationDelaySeconds = ptr.Int32(int32(i64))
+			}
+
+		case "Url":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.Url = ptr.String(jtv)
+			}
+
+		case "UtcTiming":
+			if err := awsRestjson1_deserializeDocumentDashUtcTiming(&sv.UtcTiming, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentGetDashManifests(v *[]types.GetDashManifestConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.GetDashManifestConfiguration
+	if *v == nil {
+		cv = []types.GetDashManifestConfiguration{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.GetDashManifestConfiguration
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentGetDashManifestConfiguration(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
 	return nil
 }
 
@@ -5370,6 +5856,89 @@ func awsRestjson1_deserializeDocumentInternalServerException(v **types.InternalS
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentListDashManifestConfiguration(v **types.ListDashManifestConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ListDashManifestConfiguration
+	if *v == nil {
+		sv = &types.ListDashManifestConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "ManifestName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ResourceName to be of type string, got %T instead", value)
+				}
+				sv.ManifestName = ptr.String(jtv)
+			}
+
+		case "Url":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.Url = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentListDashManifests(v *[]types.ListDashManifestConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.ListDashManifestConfiguration
+	if *v == nil {
+		cv = []types.ListDashManifestConfiguration{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.ListDashManifestConfiguration
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentListDashManifestConfiguration(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentListHlsManifestConfiguration(v **types.ListHlsManifestConfiguration, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -5628,6 +6197,11 @@ func awsRestjson1_deserializeDocumentOriginEndpointListConfiguration(v **types.O
 				}
 			}
 
+		case "DashManifests":
+			if err := awsRestjson1_deserializeDocumentListDashManifests(&sv.DashManifests, value); err != nil {
+				return err
+			}
+
 		case "Description":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5635,6 +6209,11 @@ func awsRestjson1_deserializeDocumentOriginEndpointListConfiguration(v **types.O
 					return fmt.Errorf("expected ResourceDescription to be of type string, got %T instead", value)
 				}
 				sv.Description = ptr.String(jtv)
+			}
+
+		case "ForceEndpointErrorConfiguration":
+			if err := awsRestjson1_deserializeDocumentForceEndpointErrorConfiguration(&sv.ForceEndpointErrorConfiguration, value); err != nil {
+				return err
 			}
 
 		case "HlsManifests":
@@ -5789,6 +6368,46 @@ func awsRestjson1_deserializeDocumentScte(v **types.Scte, value interface{}) err
 		case "ScteFilter":
 			if err := awsRestjson1_deserializeDocumentScteFilterList(&sv.ScteFilter, value); err != nil {
 				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentScteDash(v **types.ScteDash, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ScteDash
+	if *v == nil {
+		sv = &types.ScteDash{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "AdMarkerDash":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AdMarkerDash to be of type string, got %T instead", value)
+				}
+				sv.AdMarkerDash = types.AdMarkerDash(jtv)
 			}
 
 		default:

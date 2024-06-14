@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/elasticache/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -15,14 +14,21 @@ import (
 // Reboots some, or all, of the cache nodes within a provisioned cluster. This
 // operation applies any modified cache parameter groups to the cluster. The reboot
 // operation takes place as soon as possible, and results in a momentary outage to
-// the cluster. During the reboot, the cluster status is set to REBOOTING. The
-// reboot causes the contents of the cache (for each cache node being rebooted) to
-// be lost. When the reboot is complete, a cluster event is created. Rebooting a
-// cluster is currently supported on Memcached and Redis (cluster mode disabled)
-// clusters. Rebooting is not supported on Redis (cluster mode enabled) clusters.
+// the cluster. During the reboot, the cluster status is set to REBOOTING.
+//
+// The reboot causes the contents of the cache (for each cache node being
+// rebooted) to be lost.
+//
+// When the reboot is complete, a cluster event is created.
+//
+// Rebooting a cluster is currently supported on Memcached and Redis (cluster mode
+// disabled) clusters. Rebooting is not supported on Redis (cluster mode enabled)
+// clusters.
+//
 // If you make changes to parameters that require a Redis (cluster mode enabled)
-// cluster reboot for the changes to be applied, see Rebooting a Cluster (http://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/nodes.rebooting.html)
-// for an alternate process.
+// cluster reboot for the changes to be applied, see [Rebooting a Cluster]for an alternate process.
+//
+// [Rebooting a Cluster]: http://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/nodes.rebooting.html
 func (c *Client) RebootCacheCluster(ctx context.Context, params *RebootCacheClusterInput, optFns ...func(*Options)) (*RebootCacheClusterOutput, error) {
 	if params == nil {
 		params = &RebootCacheClusterInput{}
@@ -88,25 +94,25 @@ func (c *Client) addOperationRebootCacheClusterMiddlewares(stack *middleware.Sta
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -121,13 +127,16 @@ func (c *Client) addOperationRebootCacheClusterMiddlewares(stack *middleware.Sta
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpRebootCacheClusterValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opRebootCacheCluster(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

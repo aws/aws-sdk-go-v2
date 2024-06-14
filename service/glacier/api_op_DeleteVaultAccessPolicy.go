@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	glaciercust "github.com/aws/aws-sdk-go-v2/service/glacier/internal/customizations"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -16,10 +15,12 @@ import (
 // The operation is eventually consistent; that is, it might take some time for
 // Amazon S3 Glacier to completely remove the access policy, and you might still
 // see the effect of the policy for a short time after you send the delete request.
+//
 // This operation is idempotent. You can invoke delete multiple times, even if
 // there is no policy associated with the vault. For more information about vault
-// access policies, see Amazon Glacier Access Control with Vault Access Policies (https://docs.aws.amazon.com/amazonglacier/latest/dev/vault-access-policy.html)
-// .
+// access policies, see [Amazon Glacier Access Control with Vault Access Policies].
+//
+// [Amazon Glacier Access Control with Vault Access Policies]: https://docs.aws.amazon.com/amazonglacier/latest/dev/vault-access-policy.html
 func (c *Client) DeleteVaultAccessPolicy(ctx context.Context, params *DeleteVaultAccessPolicyInput, optFns ...func(*Options)) (*DeleteVaultAccessPolicyOutput, error) {
 	if params == nil {
 		params = &DeleteVaultAccessPolicyInput{}
@@ -84,25 +85,25 @@ func (c *Client) addOperationDeleteVaultAccessPolicyMiddlewares(stack *middlewar
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -117,13 +118,16 @@ func (c *Client) addOperationDeleteVaultAccessPolicyMiddlewares(stack *middlewar
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDeleteVaultAccessPolicyValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteVaultAccessPolicy(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

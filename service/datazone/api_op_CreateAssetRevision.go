@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/datazone/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -121,7 +120,7 @@ type CreateAssetRevisionOutput struct {
 	// The revised asset description.
 	Description *string
 
-	//
+	// The external identifier of the asset.
 	ExternalIdentifier *string
 
 	// The timestamp of when the first asset revision occured.
@@ -133,7 +132,11 @@ type CreateAssetRevisionOutput struct {
 	// The glossary terms that were attached to the asset as part of asset revision.
 	GlossaryTerms []string
 
-	//
+	// The latest data point that was imported into the time series form for the
+	// asset.
+	LatestTimeSeriesDataPointFormsOutput []types.TimeSeriesDataPointSummaryFormOutput
+
+	// The details of an asset published in an Amazon DataZone catalog.
 	Listing *types.AssetListingDetails
 
 	// The configuration of the automatically generated business-friendly metadata for
@@ -172,25 +175,25 @@ func (c *Client) addOperationCreateAssetRevisionMiddlewares(stack *middleware.St
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -205,6 +208,9 @@ func (c *Client) addOperationCreateAssetRevisionMiddlewares(stack *middleware.St
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opCreateAssetRevisionMiddleware(stack, options); err != nil {
 		return err
 	}
@@ -214,7 +220,7 @@ func (c *Client) addOperationCreateAssetRevisionMiddlewares(stack *middleware.St
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateAssetRevision(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

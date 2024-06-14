@@ -6,15 +6,14 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/cleanroomsml/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Defines the information necessary to create a training dataset, or seed
-// audience. In Clean Rooms ML, the TrainingDataset is metadata that points to a
-// Glue table, which is read only during AudienceModel creation.
+// Defines the information necessary to create a training dataset. In Clean Rooms
+// ML, the TrainingDataset is metadata that points to a Glue table, which is read
+// only during AudienceModel creation.
 func (c *Client) CreateTrainingDataset(ctx context.Context, params *CreateTrainingDatasetInput, optFns ...func(*Options)) (*CreateTrainingDatasetOutput, error) {
 	if params == nil {
 		params = &CreateTrainingDatasetInput{}
@@ -39,9 +38,10 @@ type CreateTrainingDatasetInput struct {
 	Name *string
 
 	// The ARN of the IAM role that Clean Rooms ML can assume to read the data
-	// referred to in the dataSource field of each dataset. Passing a role across AWS
-	// accounts is not allowed. If you pass a role that isn't in your account, you get
-	// an AccessDeniedException error.
+	// referred to in the dataSource field of each dataset.
+	//
+	// Passing a role across AWS accounts is not allowed. If you pass a role that
+	// isn't in your account, you get an AccessDeniedException error.
 	//
 	// This member is required.
 	RoleArn *string
@@ -58,17 +58,26 @@ type CreateTrainingDatasetInput struct {
 
 	// The optional metadata that you apply to the resource to help you categorize and
 	// organize them. Each tag consists of a key and an optional value, both of which
-	// you define. The following basic restrictions apply to tags:
+	// you define.
+	//
+	// The following basic restrictions apply to tags:
+	//
 	//   - Maximum number of tags per resource - 50.
+	//
 	//   - For each resource, each tag key must be unique, and each tag key can have
 	//   only one value.
+	//
 	//   - Maximum key length - 128 Unicode characters in UTF-8.
+	//
 	//   - Maximum value length - 256 Unicode characters in UTF-8.
+	//
 	//   - If your tagging schema is used across multiple services and resources,
 	//   remember that other services may have restrictions on allowed characters.
 	//   Generally allowed characters are: letters, numbers, and spaces representable in
 	//   UTF-8, and the following characters: + - = . _ : / @.
+	//
 	//   - Tag keys and values are case sensitive.
+	//
 	//   - Do not use aws:, AWS:, or any upper or lowercase combination of such as a
 	//   prefix for keys as it is reserved for AWS use. You cannot edit or delete tag
 	//   keys with this prefix. Values can have this prefix. If a tag value has aws as
@@ -115,25 +124,25 @@ func (c *Client) addOperationCreateTrainingDatasetMiddlewares(stack *middleware.
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -148,13 +157,16 @@ func (c *Client) addOperationCreateTrainingDatasetMiddlewares(stack *middleware.
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpCreateTrainingDatasetValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateTrainingDataset(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

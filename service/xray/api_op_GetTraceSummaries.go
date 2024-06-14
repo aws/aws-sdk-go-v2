@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/xray/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -15,14 +14,23 @@ import (
 
 // Retrieves IDs and annotations for traces available for a specified time frame
 // using an optional filter. To get the full traces, pass the trace IDs to
-// BatchGetTraces . A filter expression can target traced requests that hit
-// specific service nodes or edges, have errors, or come from a known user. For
-// example, the following filter expression targets traces that pass through
-// api.example.com : service("api.example.com") This filter expression finds
-// traces that have an annotation named account with the value 12345 :
-// annotation.account = "12345" For a full list of indexed fields and keywords that
-// you can use in filter expressions, see Using Filter Expressions (https://docs.aws.amazon.com/xray/latest/devguide/xray-console-filters.html)
-// in the Amazon Web Services X-Ray Developer Guide.
+// BatchGetTraces .
+//
+// A filter expression can target traced requests that hit specific service nodes
+// or edges, have errors, or come from a known user. For example, the following
+// filter expression targets traces that pass through api.example.com :
+//
+//	service("api.example.com")
+//
+// This filter expression finds traces that have an annotation named account with
+// the value 12345 :
+//
+//	annotation.account = "12345"
+//
+// For a full list of indexed fields and keywords that you can use in filter
+// expressions, see [Using Filter Expressions]in the Amazon Web Services X-Ray Developer Guide.
+//
+// [Using Filter Expressions]: https://docs.aws.amazon.com/xray/latest/devguide/xray-console-filters.html
 func (c *Client) GetTraceSummaries(ctx context.Context, params *GetTraceSummariesInput, optFns ...func(*Options)) (*GetTraceSummariesOutput, error) {
 	if params == nil {
 		params = &GetTraceSummariesInput{}
@@ -118,25 +126,25 @@ func (c *Client) addOperationGetTraceSummariesMiddlewares(stack *middleware.Stac
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -151,13 +159,16 @@ func (c *Client) addOperationGetTraceSummariesMiddlewares(stack *middleware.Stac
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpGetTraceSummariesValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetTraceSummaries(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/globalaccelerator/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -17,14 +16,16 @@ import (
 // (VPC) subnet endpoint for a custom routing accelerator. For each subnet endpoint
 // that you add, Global Accelerator creates a new static port mapping for the
 // accelerator. The port mappings don't change after Global Accelerator generates
-// them, so you can retrieve and cache the full mapping on your servers. If you
-// remove a subnet from your accelerator, Global Accelerator removes (reclaims) the
-// port mappings. If you add a subnet to your accelerator, Global Accelerator
-// creates new port mappings (the existing ones don't change). If you add or remove
-// EC2 instances in your subnet, the port mappings don't change, because the
-// mappings are created when you add the subnet to Global Accelerator. The mappings
-// also include a flag for each destination denoting which destination IP addresses
-// and ports are allowed or denied traffic.
+// them, so you can retrieve and cache the full mapping on your servers.
+//
+// If you remove a subnet from your accelerator, Global Accelerator removes
+// (reclaims) the port mappings. If you add a subnet to your accelerator, Global
+// Accelerator creates new port mappings (the existing ones don't change). If you
+// add or remove EC2 instances in your subnet, the port mappings don't change,
+// because the mappings are created when you add the subnet to Global Accelerator.
+//
+// The mappings also include a flag for each destination denoting which
+// destination IP addresses and ports are allowed or denied traffic.
 func (c *Client) ListCustomRoutingPortMappings(ctx context.Context, params *ListCustomRoutingPortMappingsInput, optFns ...func(*Options)) (*ListCustomRoutingPortMappingsOutput, error) {
 	if params == nil {
 		params = &ListCustomRoutingPortMappingsInput{}
@@ -100,25 +101,25 @@ func (c *Client) addOperationListCustomRoutingPortMappingsMiddlewares(stack *mid
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -133,13 +134,16 @@ func (c *Client) addOperationListCustomRoutingPortMappingsMiddlewares(stack *mid
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpListCustomRoutingPortMappingsValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListCustomRoutingPortMappings(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

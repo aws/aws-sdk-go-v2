@@ -6,16 +6,17 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/synthetics/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates the configuration of a canary that has already been created. You can't
-// use this operation to update the tags of an existing canary. To change the tags
-// of an existing canary, use TagResource (https://docs.aws.amazon.com/AmazonSynthetics/latest/APIReference/API_TagResource.html)
-// .
+// Updates the configuration of a canary that has already been created.
+//
+// You can't use this operation to update the tags of an existing canary. To
+// change the tags of an existing canary, use [TagResource].
+//
+// [TagResource]: https://docs.aws.amazon.com/AmazonSynthetics/latest/APIReference/API_TagResource.html
 func (c *Client) UpdateCanary(ctx context.Context, params *UpdateCanaryInput, optFns ...func(*Options)) (*UpdateCanaryOutput, error) {
 	if params == nil {
 		params = &UpdateCanaryInput{}
@@ -34,8 +35,11 @@ func (c *Client) UpdateCanary(ctx context.Context, params *UpdateCanaryInput, op
 type UpdateCanaryInput struct {
 
 	// The name of the canary that you want to update. To find the names of your
-	// canaries, use DescribeCanaries (https://docs.aws.amazon.com/AmazonSynthetics/latest/APIReference/API_DescribeCanaries.html)
-	// . You cannot change the name of a canary that has already been created.
+	// canaries, use [DescribeCanaries].
+	//
+	// You cannot change the name of a canary that has already been created.
+	//
+	// [DescribeCanaries]: https://docs.aws.amazon.com/AmazonSynthetics/latest/APIReference/API_DescribeCanaries.html
 	//
 	// This member is required.
 	Name *string
@@ -57,12 +61,19 @@ type UpdateCanaryInput struct {
 	// The ARN of the IAM role to be used to run the canary. This role must already
 	// exist, and must include lambda.amazonaws.com as a principal in the trust
 	// policy. The role must also have the following permissions:
+	//
 	//   - s3:PutObject
+	//
 	//   - s3:GetBucketLocation
+	//
 	//   - s3:ListAllMyBuckets
+	//
 	//   - cloudwatch:PutMetricData
+	//
 	//   - logs:CreateLogGroup
+	//
 	//   - logs:CreateLogStream
+	//
 	//   - logs:CreateLogStream
 	ExecutionRoleArn *string
 
@@ -70,14 +81,16 @@ type UpdateCanaryInput struct {
 	FailureRetentionPeriodInDays *int32
 
 	// A structure that contains the timeout value that is used for each individual
-	// run of the canary. The environment variables keys and values are not encrypted.
-	// Do not store sensitive information in this field.
+	// run of the canary.
+	//
+	// The environment variables keys and values are not encrypted. Do not store
+	// sensitive information in this field.
 	RunConfig *types.CanaryRunConfigInput
 
 	// Specifies the runtime version to use for the canary. For a list of valid
-	// runtime versions and for more information about runtime versions, see Canary
-	// Runtime Versions (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Synthetics_Canaries_Library.html)
-	// .
+	// runtime versions and for more information about runtime versions, see [Canary Runtime Versions].
+	//
+	// [Canary Runtime Versions]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Synthetics_Canaries_Library.html
 	RuntimeVersion *string
 
 	// A structure that contains information about how often the canary is to run, and
@@ -90,16 +103,20 @@ type UpdateCanaryInput struct {
 	// Defines the screenshots to use as the baseline for comparisons during visual
 	// monitoring comparisons during future runs of this canary. If you omit this
 	// parameter, no changes are made to any baseline screenshots that the canary might
-	// be using already. Visual monitoring is supported only on canaries running the
-	// syn-puppeteer-node-3.2 runtime or later. For more information, see Visual
-	// monitoring (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Synthetics_Library_SyntheticsLogger_VisualTesting.html)
-	// and Visual monitoring blueprint (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Synthetics_Canaries_Blueprints_VisualTesting.html)
+	// be using already.
+	//
+	// Visual monitoring is supported only on canaries running the
+	// syn-puppeteer-node-3.2 runtime or later. For more information, see [Visual monitoring]and [Visual monitoring blueprint]
+	//
+	// [Visual monitoring]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Synthetics_Library_SyntheticsLogger_VisualTesting.html
+	// [Visual monitoring blueprint]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Synthetics_Canaries_Blueprints_VisualTesting.html
 	VisualReference *types.VisualReferenceInput
 
 	// If this canary is to test an endpoint in a VPC, this structure contains
 	// information about the subnet and security groups of the VPC endpoint. For more
-	// information, see Running a Canary in a VPC (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Synthetics_Canaries_VPC.html)
-	// .
+	// information, see [Running a Canary in a VPC].
+	//
+	// [Running a Canary in a VPC]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Synthetics_Canaries_VPC.html
 	VpcConfig *types.VpcConfigInput
 
 	noSmithyDocumentSerde
@@ -134,25 +151,25 @@ func (c *Client) addOperationUpdateCanaryMiddlewares(stack *middleware.Stack, op
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -167,13 +184,16 @@ func (c *Client) addOperationUpdateCanaryMiddlewares(stack *middleware.Stack, op
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpUpdateCanaryValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateCanary(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

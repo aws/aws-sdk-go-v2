@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/vpclattice/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -15,14 +14,20 @@ import (
 // Associates a VPC with a service network. When you associate a VPC with the
 // service network, it enables all the resources within that VPC to be clients and
 // communicate with other services in the service network. For more information,
-// see Manage VPC associations (https://docs.aws.amazon.com/vpc-lattice/latest/ug/service-network-associations.html#service-network-vpc-associations)
-// in the Amazon VPC Lattice User Guide. You can't use this operation if there is a
-// disassociation in progress. If the association fails, retry by deleting the
-// association and recreating it. As a result of this operation, the association
-// gets created in the service network account and the VPC owner account. Once a
-// security group is added to the VPC association it cannot be removed. You can add
-// or update the security groups being used for the VPC association once a security
-// group is attached. To remove all security groups you must reassociate the VPC.
+// see [Manage VPC associations]in the Amazon VPC Lattice User Guide.
+//
+// You can't use this operation if there is a disassociation in progress. If the
+// association fails, retry by deleting the association and recreating it.
+//
+// As a result of this operation, the association gets created in the service
+// network account and the VPC owner account.
+//
+// If you add a security group to the service network and VPC association, the
+// association must continue to always have at least one security group. You can
+// add or edit security groups at any time. However, to remove all security groups,
+// you must first delete the association and recreate it without security groups.
+//
+// [Manage VPC associations]: https://docs.aws.amazon.com/vpc-lattice/latest/ug/service-network-associations.html#service-network-vpc-associations
 func (c *Client) CreateServiceNetworkVpcAssociation(ctx context.Context, params *CreateServiceNetworkVpcAssociationInput, optFns ...func(*Options)) (*CreateServiceNetworkVpcAssociationOutput, error) {
 	if params == nil {
 		params = &CreateServiceNetworkVpcAssociationInput{}
@@ -60,8 +65,9 @@ type CreateServiceNetworkVpcAssociationInput struct {
 	// The IDs of the security groups. Security groups aren't added by default. You
 	// can add a security group to apply network level controls to control which
 	// resources in a VPC are allowed to access the service network and its services.
-	// For more information, see Control traffic to resources using security groups (https://docs.aws.amazon.com/vpc/latest/userguide/VPC_SecurityGroups.html)
-	// in the Amazon VPC User Guide.
+	// For more information, see [Control traffic to resources using security groups]in the Amazon VPC User Guide.
+	//
+	// [Control traffic to resources using security groups]: https://docs.aws.amazon.com/vpc/latest/userguide/VPC_SecurityGroups.html
 	SecurityGroupIds []string
 
 	// The tags for the association.
@@ -84,7 +90,7 @@ type CreateServiceNetworkVpcAssociationOutput struct {
 	// The IDs of the security groups.
 	SecurityGroupIds []string
 
-	// The operation's status.
+	// The association status.
 	Status types.ServiceNetworkVpcAssociationStatus
 
 	// Metadata pertaining to the operation's result.
@@ -115,25 +121,25 @@ func (c *Client) addOperationCreateServiceNetworkVpcAssociationMiddlewares(stack
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -148,6 +154,9 @@ func (c *Client) addOperationCreateServiceNetworkVpcAssociationMiddlewares(stack
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opCreateServiceNetworkVpcAssociationMiddleware(stack, options); err != nil {
 		return err
 	}
@@ -157,7 +166,7 @@ func (c *Client) addOperationCreateServiceNetworkVpcAssociationMiddlewares(stack
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateServiceNetworkVpcAssociation(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

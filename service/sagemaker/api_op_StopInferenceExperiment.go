@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -30,10 +29,13 @@ func (c *Client) StopInferenceExperiment(ctx context.Context, params *StopInfere
 
 type StopInferenceExperimentInput struct {
 
-	// Array of key-value pairs, with names of variants mapped to actions. The
+	//  Array of key-value pairs, with names of variants mapped to actions. The
 	// possible actions are the following:
+	//
 	//   - Promote - Promote the shadow variant to a production variant
+	//
 	//   - Remove - Delete the variant
+	//
 	//   - Retain - Keep the variant as it is
 	//
 	// This member is required.
@@ -44,15 +46,17 @@ type StopInferenceExperimentInput struct {
 	// This member is required.
 	Name *string
 
-	// An array of ModelVariantConfig objects. There is one for each variant that you
+	//  An array of ModelVariantConfig objects. There is one for each variant that you
 	// want to deploy after the inference experiment stops. Each ModelVariantConfig
 	// describes the infrastructure configuration for deploying the corresponding
 	// variant.
 	DesiredModelVariants []types.ModelVariantConfig
 
-	// The desired state of the experiment after stopping. The possible states are the
-	// following:
+	//  The desired state of the experiment after stopping. The possible states are
+	// the following:
+	//
 	//   - Completed : The experiment completed successfully
+	//
 	//   - Cancelled : The experiment was canceled
 	DesiredState types.InferenceExperimentStopDesiredState
 
@@ -97,25 +101,25 @@ func (c *Client) addOperationStopInferenceExperimentMiddlewares(stack *middlewar
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -130,13 +134,16 @@ func (c *Client) addOperationStopInferenceExperimentMiddlewares(stack *middlewar
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpStopInferenceExperimentValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opStopInferenceExperiment(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

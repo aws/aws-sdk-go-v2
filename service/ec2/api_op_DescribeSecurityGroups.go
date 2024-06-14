@@ -7,7 +7,6 @@ import (
 	"errors"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
 	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
@@ -46,69 +45,98 @@ type DescribeSecurityGroupsInput struct {
 	// The filters. If using multiple filters for rules, the results include security
 	// groups for which any combination of rules - not necessarily a single rule -
 	// match all filters.
+	//
 	//   - description - The description of the security group.
+	//
 	//   - egress.ip-permission.cidr - An IPv4 CIDR block for an outbound security
 	//   group rule.
+	//
 	//   - egress.ip-permission.from-port - For an outbound rule, the start of port
 	//   range for the TCP and UDP protocols, or an ICMP type number.
+	//
 	//   - egress.ip-permission.group-id - The ID of a security group that has been
 	//   referenced in an outbound security group rule.
+	//
 	//   - egress.ip-permission.group-name - The name of a security group that is
 	//   referenced in an outbound security group rule.
+	//
 	//   - egress.ip-permission.ipv6-cidr - An IPv6 CIDR block for an outbound security
 	//   group rule.
+	//
 	//   - egress.ip-permission.prefix-list-id - The ID of a prefix list to which a
 	//   security group rule allows outbound access.
+	//
 	//   - egress.ip-permission.protocol - The IP protocol for an outbound security
 	//   group rule ( tcp | udp | icmp , a protocol number, or -1 for all protocols).
+	//
 	//   - egress.ip-permission.to-port - For an outbound rule, the end of port range
 	//   for the TCP and UDP protocols, or an ICMP code.
+	//
 	//   - egress.ip-permission.user-id - The ID of an Amazon Web Services account that
 	//   has been referenced in an outbound security group rule.
+	//
 	//   - group-id - The ID of the security group.
+	//
 	//   - group-name - The name of the security group.
+	//
 	//   - ip-permission.cidr - An IPv4 CIDR block for an inbound security group rule.
+	//
 	//   - ip-permission.from-port - For an inbound rule, the start of port range for
 	//   the TCP and UDP protocols, or an ICMP type number.
+	//
 	//   - ip-permission.group-id - The ID of a security group that has been referenced
 	//   in an inbound security group rule.
+	//
 	//   - ip-permission.group-name - The name of a security group that is referenced
 	//   in an inbound security group rule.
+	//
 	//   - ip-permission.ipv6-cidr - An IPv6 CIDR block for an inbound security group
 	//   rule.
+	//
 	//   - ip-permission.prefix-list-id - The ID of a prefix list from which a security
 	//   group rule allows inbound access.
+	//
 	//   - ip-permission.protocol - The IP protocol for an inbound security group rule (
 	//   tcp | udp | icmp , a protocol number, or -1 for all protocols).
+	//
 	//   - ip-permission.to-port - For an inbound rule, the end of port range for the
 	//   TCP and UDP protocols, or an ICMP code.
+	//
 	//   - ip-permission.user-id - The ID of an Amazon Web Services account that has
 	//   been referenced in an inbound security group rule.
+	//
 	//   - owner-id - The Amazon Web Services account ID of the owner of the security
 	//   group.
+	//
 	//   - tag : - The key/value combination of a tag assigned to the resource. Use the
 	//   tag key in the filter name and the tag value as the filter value. For example,
 	//   to find all resources that have a tag with the key Owner and the value TeamA ,
 	//   specify tag:Owner for the filter name and TeamA for the filter value.
+	//
 	//   - tag-key - The key of a tag assigned to the resource. Use this filter to find
 	//   all resources assigned a tag with a specific key, regardless of the tag value.
+	//
 	//   - vpc-id - The ID of the VPC specified when the security group was created.
 	Filters []types.Filter
 
 	// The IDs of the security groups. Required for security groups in a nondefault
-	// VPC. Default: Describes all of your security groups.
+	// VPC.
+	//
+	// Default: Describes all of your security groups.
 	GroupIds []string
 
 	// [Default VPC] The names of the security groups. You can specify either the
-	// security group name or the security group ID. Default: Describes all of your
-	// security groups.
+	// security group name or the security group ID.
+	//
+	// Default: Describes all of your security groups.
 	GroupNames []string
 
 	// The maximum number of items to return for this request. To get the next page of
 	// items, make another request with the token returned in the output. This value
 	// can be between 5 and 1000. If this parameter is not specified, then all items
-	// are returned. For more information, see Pagination (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination)
-	// .
+	// are returned. For more information, see [Pagination].
+	//
+	// [Pagination]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination
 	MaxResults *int32
 
 	// The token returned from a previous paginated request. Pagination continues from
@@ -155,25 +183,25 @@ func (c *Client) addOperationDescribeSecurityGroupsMiddlewares(stack *middleware
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -188,10 +216,13 @@ func (c *Client) addOperationDescribeSecurityGroupsMiddlewares(stack *middleware
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeSecurityGroups(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -223,8 +254,9 @@ type DescribeSecurityGroupsPaginatorOptions struct {
 	// The maximum number of items to return for this request. To get the next page of
 	// items, make another request with the token returned in the output. This value
 	// can be between 5 and 1000. If this parameter is not specified, then all items
-	// are returned. For more information, see Pagination (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination)
-	// .
+	// are returned. For more information, see [Pagination].
+	//
+	// [Pagination]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token
@@ -311,7 +343,16 @@ type SecurityGroupExistsWaiterOptions struct {
 	// Set of options to modify how an operation is invoked. These apply to all
 	// operations invoked for this client. Use functional options on operation call to
 	// modify this list for per operation behavior.
+	//
+	// Passing options here is functionally equivalent to passing values to this
+	// config's ClientOptions field that extend the inner client's APIOptions directly.
 	APIOptions []func(*middleware.Stack) error
+
+	// Functional options to be passed to all operations invoked by this client.
+	//
+	// Function values that modify the inner APIOptions are applied after the waiter
+	// config's own APIOptions modifiers.
+	ClientOptions []func(*Options)
 
 	// MinDelay is the minimum amount of time to delay between retries. If unset,
 	// SecurityGroupExistsWaiter will use default minimum delay of 5 seconds. Note that
@@ -329,12 +370,13 @@ type SecurityGroupExistsWaiterOptions struct {
 
 	// Retryable is function that can be used to override the service defined
 	// waiter-behavior based on operation output, or returned error. This function is
-	// used by the waiter to decide if a state is retryable or a terminal state. By
-	// default service-modeled logic will populate this option. This option can thus be
-	// used to define a custom waiter state with fall-back to service-modeled waiter
-	// state mutators.The function returns an error in case of a failure state. In case
-	// of retry state, this function returns a bool value of true and nil error, while
-	// in case of success it returns a bool value of false and nil error.
+	// used by the waiter to decide if a state is retryable or a terminal state.
+	//
+	// By default service-modeled logic will populate this option. This option can
+	// thus be used to define a custom waiter state with fall-back to service-modeled
+	// waiter state mutators.The function returns an error in case of a failure state.
+	// In case of retry state, this function returns a bool value of true and nil
+	// error, while in case of success it returns a bool value of false and nil error.
 	Retryable func(context.Context, *DescribeSecurityGroupsInput, *DescribeSecurityGroupsOutput, error) (bool, error)
 }
 
@@ -412,6 +454,9 @@ func (w *SecurityGroupExistsWaiter) WaitForOutput(ctx context.Context, params *D
 
 		out, err := w.client.DescribeSecurityGroups(ctx, params, func(o *Options) {
 			o.APIOptions = append(o.APIOptions, apiOptions...)
+			for _, opt := range options.ClientOptions {
+				opt(o)
+			}
 		})
 
 		retryable, err := options.Retryable(ctx, params, out, err)

@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/databasemigrationservice/types"
 	"github.com/aws/smithy-go/middleware"
 	smithytime "github.com/aws/smithy-go/time"
@@ -36,19 +35,23 @@ func (c *Client) DescribeConnections(ctx context.Context, params *DescribeConnec
 
 type DescribeConnectionsInput struct {
 
-	// The filters applied to the connection. Valid filter names: endpoint-arn |
-	// replication-instance-arn
+	// The filters applied to the connection.
+	//
+	// Valid filter names: endpoint-arn | replication-instance-arn
 	Filters []types.Filter
 
-	// An optional pagination token provided by a previous request. If this parameter
+	//  An optional pagination token provided by a previous request. If this parameter
 	// is specified, the response includes only records beyond the marker, up to the
 	// value specified by MaxRecords .
 	Marker *string
 
-	// The maximum number of records to include in the response. If more records exist
-	// than the specified MaxRecords value, a pagination token called a marker is
-	// included in the response so that the remaining results can be retrieved.
-	// Default: 100 Constraints: Minimum 20, maximum 100.
+	//  The maximum number of records to include in the response. If more records
+	// exist than the specified MaxRecords value, a pagination token called a marker
+	// is included in the response so that the remaining results can be retrieved.
+	//
+	// Default: 100
+	//
+	// Constraints: Minimum 20, maximum 100.
 	MaxRecords *int32
 
 	noSmithyDocumentSerde
@@ -59,7 +62,7 @@ type DescribeConnectionsOutput struct {
 	// A description of the connections.
 	Connections []types.Connection
 
-	// An optional pagination token provided by a previous request. If this parameter
+	//  An optional pagination token provided by a previous request. If this parameter
 	// is specified, the response includes only records beyond the marker, up to the
 	// value specified by MaxRecords .
 	Marker *string
@@ -92,25 +95,25 @@ func (c *Client) addOperationDescribeConnectionsMiddlewares(stack *middleware.St
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -125,13 +128,16 @@ func (c *Client) addOperationDescribeConnectionsMiddlewares(stack *middleware.St
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDescribeConnectionsValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeConnections(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -160,10 +166,13 @@ var _ DescribeConnectionsAPIClient = (*Client)(nil)
 // DescribeConnectionsPaginatorOptions is the paginator options for
 // DescribeConnections
 type DescribeConnectionsPaginatorOptions struct {
-	// The maximum number of records to include in the response. If more records exist
-	// than the specified MaxRecords value, a pagination token called a marker is
-	// included in the response so that the remaining results can be retrieved.
-	// Default: 100 Constraints: Minimum 20, maximum 100.
+	//  The maximum number of records to include in the response. If more records
+	// exist than the specified MaxRecords value, a pagination token called a marker
+	// is included in the response so that the remaining results can be retrieved.
+	//
+	// Default: 100
+	//
+	// Constraints: Minimum 20, maximum 100.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token
@@ -250,7 +259,16 @@ type TestConnectionSucceedsWaiterOptions struct {
 	// Set of options to modify how an operation is invoked. These apply to all
 	// operations invoked for this client. Use functional options on operation call to
 	// modify this list for per operation behavior.
+	//
+	// Passing options here is functionally equivalent to passing values to this
+	// config's ClientOptions field that extend the inner client's APIOptions directly.
 	APIOptions []func(*middleware.Stack) error
+
+	// Functional options to be passed to all operations invoked by this client.
+	//
+	// Function values that modify the inner APIOptions are applied after the waiter
+	// config's own APIOptions modifiers.
+	ClientOptions []func(*Options)
 
 	// MinDelay is the minimum amount of time to delay between retries. If unset,
 	// TestConnectionSucceedsWaiter will use default minimum delay of 5 seconds. Note
@@ -268,12 +286,13 @@ type TestConnectionSucceedsWaiterOptions struct {
 
 	// Retryable is function that can be used to override the service defined
 	// waiter-behavior based on operation output, or returned error. This function is
-	// used by the waiter to decide if a state is retryable or a terminal state. By
-	// default service-modeled logic will populate this option. This option can thus be
-	// used to define a custom waiter state with fall-back to service-modeled waiter
-	// state mutators.The function returns an error in case of a failure state. In case
-	// of retry state, this function returns a bool value of true and nil error, while
-	// in case of success it returns a bool value of false and nil error.
+	// used by the waiter to decide if a state is retryable or a terminal state.
+	//
+	// By default service-modeled logic will populate this option. This option can
+	// thus be used to define a custom waiter state with fall-back to service-modeled
+	// waiter state mutators.The function returns an error in case of a failure state.
+	// In case of retry state, this function returns a bool value of true and nil
+	// error, while in case of success it returns a bool value of false and nil error.
 	Retryable func(context.Context, *DescribeConnectionsInput, *DescribeConnectionsOutput, error) (bool, error)
 }
 
@@ -351,6 +370,9 @@ func (w *TestConnectionSucceedsWaiter) WaitForOutput(ctx context.Context, params
 
 		out, err := w.client.DescribeConnections(ctx, params, func(o *Options) {
 			o.APIOptions = append(o.APIOptions, apiOptions...)
+			for _, opt := range options.ClientOptions {
+				opt(o)
+			}
 		})
 
 		retryable, err := options.Retryable(ctx, params, out, err)

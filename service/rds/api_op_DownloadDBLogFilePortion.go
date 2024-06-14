@@ -6,13 +6,13 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Downloads all or a portion of the specified log file, up to 1 MB in size. This
-// command doesn't apply to RDS Custom.
+// Downloads all or a portion of the specified log file, up to 1 MB in size.
+//
+// This command doesn't apply to RDS Custom.
 func (c *Client) DownloadDBLogFilePortion(ctx context.Context, params *DownloadDBLogFilePortionInput, optFns ...func(*Options)) (*DownloadDBLogFilePortionOutput, error) {
 	if params == nil {
 		params = &DownloadDBLogFilePortionInput{}
@@ -31,7 +31,10 @@ func (c *Client) DownloadDBLogFilePortion(ctx context.Context, params *DownloadD
 type DownloadDBLogFilePortionInput struct {
 
 	// The customer-assigned name of the DB instance that contains the log files you
-	// want to list. Constraints:
+	// want to list.
+	//
+	// Constraints:
+	//
 	//   - Must match the identifier of an existing DBInstance.
 	//
 	// This member is required.
@@ -48,17 +51,22 @@ type DownloadDBLogFilePortionInput struct {
 	Marker *string
 
 	// The number of lines to download. If the number of lines specified results in a
-	// file over 1 MB in size, the file is truncated at 1 MB in size. If the
-	// NumberOfLines parameter is specified, then the block of lines returned can be
-	// from the beginning or the end of the log file, depending on the value of the
-	// Marker parameter.
+	// file over 1 MB in size, the file is truncated at 1 MB in size.
+	//
+	// If the NumberOfLines parameter is specified, then the block of lines returned
+	// can be from the beginning or the end of the log file, depending on the value of
+	// the Marker parameter.
+	//
 	//   - If neither Marker or NumberOfLines are specified, the entire log file is
 	//   returned up to a maximum of 10000 lines, starting with the most recent log
 	//   entries first.
+	//
 	//   - If NumberOfLines is specified and Marker isn't specified, then the most
 	//   recent lines from the end of the log file are returned.
+	//
 	//   - If Marker is specified as "0", then the specified number of lines from the
 	//   beginning of the log file are returned.
+	//
 	//   - You can download the log file in blocks of lines by specifying the size of
 	//   the block using the NumberOfLines parameter, and by specifying a value of "0"
 	//   for the Marker parameter in your first request. Include the Marker value
@@ -109,25 +117,25 @@ func (c *Client) addOperationDownloadDBLogFilePortionMiddlewares(stack *middlewa
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -142,13 +150,16 @@ func (c *Client) addOperationDownloadDBLogFilePortionMiddlewares(stack *middlewa
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDownloadDBLogFilePortionValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDownloadDBLogFilePortion(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -178,17 +189,22 @@ var _ DownloadDBLogFilePortionAPIClient = (*Client)(nil)
 // DownloadDBLogFilePortion
 type DownloadDBLogFilePortionPaginatorOptions struct {
 	// The number of lines to download. If the number of lines specified results in a
-	// file over 1 MB in size, the file is truncated at 1 MB in size. If the
-	// NumberOfLines parameter is specified, then the block of lines returned can be
-	// from the beginning or the end of the log file, depending on the value of the
-	// Marker parameter.
+	// file over 1 MB in size, the file is truncated at 1 MB in size.
+	//
+	// If the NumberOfLines parameter is specified, then the block of lines returned
+	// can be from the beginning or the end of the log file, depending on the value of
+	// the Marker parameter.
+	//
 	//   - If neither Marker or NumberOfLines are specified, the entire log file is
 	//   returned up to a maximum of 10000 lines, starting with the most recent log
 	//   entries first.
+	//
 	//   - If NumberOfLines is specified and Marker isn't specified, then the most
 	//   recent lines from the end of the log file are returned.
+	//
 	//   - If Marker is specified as "0", then the specified number of lines from the
 	//   beginning of the log file are returned.
+	//
 	//   - You can download the log file in blocks of lines by specifying the size of
 	//   the block using the NumberOfLines parameter, and by specifying a value of "0"
 	//   for the Marker parameter in your first request. Include the Marker value

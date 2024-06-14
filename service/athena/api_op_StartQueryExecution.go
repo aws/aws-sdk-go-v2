@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/athena/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -14,10 +13,10 @@ import (
 
 // Runs the SQL query statements contained in the Query . Requires you to have
 // access to the workgroup in which the query ran. Running queries against an
-// external catalog requires GetDataCatalog permission to the catalog. For code
-// samples using the Amazon Web Services SDK for Java, see Examples and Code
-// Samples (http://docs.aws.amazon.com/athena/latest/ug/code-samples.html) in the
-// Amazon Athena User Guide.
+// external catalog requires GetDataCatalogpermission to the catalog. For code samples using the
+// Amazon Web Services SDK for Java, see [Examples and Code Samples]in the Amazon Athena User Guide.
+//
+// [Examples and Code Samples]: http://docs.aws.amazon.com/athena/latest/ug/code-samples.html
 func (c *Client) StartQueryExecution(ctx context.Context, params *StartQueryExecutionInput, optFns ...func(*Options)) (*StartQueryExecutionOutput, error) {
 	if params == nil {
 		params = &StartQueryExecutionInput{}
@@ -46,11 +45,12 @@ type StartQueryExecutionInput struct {
 	// error is returned if a parameter, such as QueryString , has changed. A call to
 	// StartQueryExecution that uses a previous client request token returns the same
 	// QueryExecutionId even if the requester doesn't have permission on the tables
-	// specified in QueryString . This token is listed as not required because Amazon
-	// Web Services SDKs (for example the Amazon Web Services SDK for Java)
-	// auto-generate the token for users. If you are not using the Amazon Web Services
-	// SDK or the Amazon Web Services CLI, you must provide this token or the action
-	// will fail.
+	// specified in QueryString .
+	//
+	// This token is listed as not required because Amazon Web Services SDKs (for
+	// example the Amazon Web Services SDK for Java) auto-generate the token for users.
+	// If you are not using the Amazon Web Services SDK or the Amazon Web Services CLI,
+	// you must provide this token or the action will fail.
 	ClientRequestToken *string
 
 	// A list of values for the parameters in a query. The values are applied
@@ -65,8 +65,7 @@ type StartQueryExecutionInput struct {
 	// execution. If the query runs in a workgroup, then workgroup's settings may
 	// override query settings. This affects the query results location. The workgroup
 	// settings override is specified in EnforceWorkGroupConfiguration (true/false) in
-	// the WorkGroupConfiguration. See
-	// WorkGroupConfiguration$EnforceWorkGroupConfiguration .
+	// the WorkGroupConfiguration. See WorkGroupConfiguration$EnforceWorkGroupConfiguration.
 	ResultConfiguration *types.ResultConfiguration
 
 	// Specifies the query result reuse behavior for the query.
@@ -111,25 +110,25 @@ func (c *Client) addOperationStartQueryExecutionMiddlewares(stack *middleware.St
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -144,6 +143,9 @@ func (c *Client) addOperationStartQueryExecutionMiddlewares(stack *middleware.St
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opStartQueryExecutionMiddleware(stack, options); err != nil {
 		return err
 	}
@@ -153,7 +155,7 @@ func (c *Client) addOperationStartQueryExecutionMiddlewares(stack *middleware.St
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opStartQueryExecution(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

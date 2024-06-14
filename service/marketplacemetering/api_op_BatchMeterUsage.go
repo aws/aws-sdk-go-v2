@@ -6,28 +6,40 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/marketplacemetering/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // BatchMeterUsage is called from a SaaS application listed on AWS Marketplace to
-// post metering records for a set of customers. For identical requests, the API is
-// idempotent; requests can be retried with the same records or a subset of the
-// input records. Every request to BatchMeterUsage is for one product. If you need
-// to meter usage for multiple products, you must make multiple calls to
-// BatchMeterUsage . Usage records are expected to be submitted as quickly as
-// possible after the event that is being recorded, and are not accepted more than
-// 6 hours after the event. BatchMeterUsage can process up to 25 UsageRecords at a
-// time. A UsageRecord can optionally include multiple usage allocations, to
-// provide customers with usage data split into buckets by tags that you define (or
-// allow the customer to define). BatchMeterUsage returns a list of
-// UsageRecordResult objects, showing the result for each UsageRecord , as well as
-// a list of UnprocessedRecords , indicating errors in the service side that you
-// should retry. BatchMeterUsage requests must be less than 1MB in size. For an
-// example of using BatchMeterUsage , see  BatchMeterUsage code example (https://docs.aws.amazon.com/marketplace/latest/userguide/saas-code-examples.html#saas-batchmeterusage-example)
-// in the AWS Marketplace Seller Guide.
+// post metering records for a set of customers.
+//
+// For identical requests, the API is idempotent; requests can be retried with the
+// same records or a subset of the input records.
+//
+// Every request to BatchMeterUsage is for one product. If you need to meter usage
+// for multiple products, you must make multiple calls to BatchMeterUsage .
+//
+// Usage records are expected to be submitted as quickly as possible after the
+// event that is being recorded, and are not accepted more than 6 hours after the
+// event.
+//
+// BatchMeterUsage can process up to 25 UsageRecords at a time.
+//
+// A UsageRecord can optionally include multiple usage allocations, to provide
+// customers with usage data split into buckets by tags that you define (or allow
+// the customer to define).
+//
+// BatchMeterUsage returns a list of UsageRecordResult objects, showing the result
+// for each UsageRecord , as well as a list of UnprocessedRecords , indicating
+// errors in the service side that you should retry.
+//
+// BatchMeterUsage requests must be less than 1MB in size.
+//
+// For an example of using BatchMeterUsage , see [BatchMeterUsage code example] in the AWS Marketplace Seller
+// Guide.
+//
+// [BatchMeterUsage code example]: https://docs.aws.amazon.com/marketplace/latest/userguide/saas-code-examples.html#saas-batchmeterusage-example
 func (c *Client) BatchMeterUsage(ctx context.Context, params *BatchMeterUsageInput, optFns ...func(*Options)) (*BatchMeterUsageOutput, error) {
 	if params == nil {
 		params = &BatchMeterUsageInput{}
@@ -105,25 +117,25 @@ func (c *Client) addOperationBatchMeterUsageMiddlewares(stack *middleware.Stack,
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -138,13 +150,16 @@ func (c *Client) addOperationBatchMeterUsageMiddlewares(stack *middleware.Stack,
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpBatchMeterUsageValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opBatchMeterUsage(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

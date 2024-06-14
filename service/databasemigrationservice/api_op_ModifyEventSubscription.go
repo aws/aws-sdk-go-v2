@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/databasemigrationservice/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -35,19 +34,20 @@ type ModifyEventSubscriptionInput struct {
 	// This member is required.
 	SubscriptionName *string
 
-	// A Boolean value; set to true to activate the subscription.
+	//  A Boolean value; set to true to activate the subscription.
 	Enabled *bool
 
-	// A list of event categories for a source type that you want to subscribe to. Use
-	// the DescribeEventCategories action to see a list of event categories.
+	//  A list of event categories for a source type that you want to subscribe to.
+	// Use the DescribeEventCategories action to see a list of event categories.
 	EventCategories []string
 
-	// The Amazon Resource Name (ARN) of the Amazon SNS topic created for event
+	//  The Amazon Resource Name (ARN) of the Amazon SNS topic created for event
 	// notification. The ARN is created by Amazon SNS when you create a topic and
 	// subscribe to it.
 	SnsTopicArn *string
 
-	// The type of DMS resource that generates the events you want to subscribe to.
+	//  The type of DMS resource that generates the events you want to subscribe to.
+	//
 	// Valid values: replication-instance | replication-task
 	SourceType *string
 
@@ -87,25 +87,25 @@ func (c *Client) addOperationModifyEventSubscriptionMiddlewares(stack *middlewar
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -120,13 +120,16 @@ func (c *Client) addOperationModifyEventSubscriptionMiddlewares(stack *middlewar
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpModifyEventSubscriptionValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opModifyEventSubscription(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

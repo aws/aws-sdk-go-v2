@@ -6,17 +6,18 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns a list of model transform job IDs. See Use a trained model to generate
-// new model artifacts (https://docs.aws.amazon.com/neptune/latest/userguide/machine-learning-model-transform.html)
-// . When invoking this operation in a Neptune cluster that has IAM authentication
+// Returns a list of model transform job IDs. See [Use a trained model to generate new model artifacts].
+//
+// When invoking this operation in a Neptune cluster that has IAM authentication
 // enabled, the IAM user or role making the request must have a policy attached
-// that allows the neptune-db:ListMLModelTransformJobs (https://docs.aws.amazon.com/neptune/latest/userguide/iam-dp-actions.html#listmlmodeltransformjobs)
-// IAM action in that cluster.
+// that allows the [neptune-db:ListMLModelTransformJobs]IAM action in that cluster.
+//
+// [Use a trained model to generate new model artifacts]: https://docs.aws.amazon.com/neptune/latest/userguide/machine-learning-model-transform.html
+// [neptune-db:ListMLModelTransformJobs]: https://docs.aws.amazon.com/neptune/latest/userguide/iam-dp-actions.html#listmlmodeltransformjobs
 func (c *Client) ListMLModelTransformJobs(ctx context.Context, params *ListMLModelTransformJobsInput, optFns ...func(*Options)) (*ListMLModelTransformJobsOutput, error) {
 	if params == nil {
 		params = &ListMLModelTransformJobsInput{}
@@ -78,25 +79,25 @@ func (c *Client) addOperationListMLModelTransformJobsMiddlewares(stack *middlewa
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -111,10 +112,13 @@ func (c *Client) addOperationListMLModelTransformJobsMiddlewares(stack *middlewa
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListMLModelTransformJobs(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/redshift/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -16,10 +15,13 @@ import (
 // Amazon Redshift cluster to store and use database encryption keys in a Hardware
 // Security Module (HSM). After creating the HSM configuration, you can specify it
 // as a parameter when creating a cluster. The cluster will then store its
-// encryption keys in the HSM. In addition to creating an HSM configuration, you
-// must also create an HSM client certificate. For more information, go to
-// Hardware Security Modules (https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-HSM.html)
-// in the Amazon Redshift Cluster Management Guide.
+// encryption keys in the HSM.
+//
+// In addition to creating an HSM configuration, you must also create an HSM
+// client certificate. For more information, go to [Hardware Security Modules]in the Amazon Redshift Cluster
+// Management Guide.
+//
+// [Hardware Security Modules]: https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-HSM.html
 func (c *Client) CreateHsmConfiguration(ctx context.Context, params *CreateHsmConfigurationInput, optFns ...func(*Options)) (*CreateHsmConfigurationOutput, error) {
 	if params == nil {
 		params = &CreateHsmConfigurationInput{}
@@ -110,25 +112,25 @@ func (c *Client) addOperationCreateHsmConfigurationMiddlewares(stack *middleware
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -143,13 +145,16 @@ func (c *Client) addOperationCreateHsmConfigurationMiddlewares(stack *middleware
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpCreateHsmConfigurationValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateHsmConfiguration(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

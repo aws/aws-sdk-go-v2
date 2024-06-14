@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/configservice/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -14,20 +13,25 @@ import (
 )
 
 // For accurate reporting on the compliance status, you must record the
-// AWS::Config::ResourceCompliance resource type. For more information, see
-// Selecting Which Resources Config Records (https://docs.aws.amazon.com/config/latest/developerguide/select-resources.html)
-// . Returns a list of ConfigurationItems for the specified resource. The list
+// AWS::Config::ResourceCompliance resource type. For more information, see [Selecting Which Resources Config Records].
+//
+// Returns a list of ConfigurationItems for the specified resource. The list
 // contains details about each state of the resource during the specified time
 // interval. If you specified a retention period to retain your ConfigurationItems
 // between a minimum of 30 days and a maximum of 7 years (2557 days), Config
-// returns the ConfigurationItems for the specified retention period. The response
-// is paginated. By default, Config returns a limit of 10 configuration items per
-// page. You can customize this number with the limit parameter. The response
-// includes a nextToken string. To get the next page of results, run the request
-// again and specify the string for the nextToken parameter. Each call to the API
-// is limited to span a duration of seven days. It is likely that the number of
-// records returned is smaller than the specified limit . In such cases, you can
-// make another call, using the nextToken .
+// returns the ConfigurationItems for the specified retention period.
+//
+// The response is paginated. By default, Config returns a limit of 10
+// configuration items per page. You can customize this number with the limit
+// parameter. The response includes a nextToken string. To get the next page of
+// results, run the request again and specify the string for the nextToken
+// parameter.
+//
+// Each call to the API is limited to span a duration of seven days. It is likely
+// that the number of records returned is smaller than the specified limit . In
+// such cases, you can make another call, using the nextToken .
+//
+// [Selecting Which Resources Config Records]: https://docs.aws.amazon.com/config/latest/developerguide/select-resources.html
 func (c *Client) GetResourceConfigHistory(ctx context.Context, params *GetResourceConfigHistoryInput, optFns ...func(*Options)) (*GetResourceConfigHistoryOutput, error) {
 	if params == nil {
 		params = &GetResourceConfigHistoryInput{}
@@ -119,25 +123,25 @@ func (c *Client) addOperationGetResourceConfigHistoryMiddlewares(stack *middlewa
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -152,13 +156,16 @@ func (c *Client) addOperationGetResourceConfigHistoryMiddlewares(stack *middlewa
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpGetResourceConfigHistoryValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetResourceConfigHistory(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

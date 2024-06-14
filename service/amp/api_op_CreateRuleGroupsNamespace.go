@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/amp/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -14,9 +13,10 @@ import (
 
 // The CreateRuleGroupsNamespace operation creates a rule groups namespace within
 // a workspace. A rule groups namespace is associated with exactly one rules file.
-// A workspace can have multiple rule groups namespaces. Use this operation only to
-// create new rule groups namespaces. To update an existing rule groups namespace,
-// use PutRuleGroupsNamespace .
+// A workspace can have multiple rule groups namespaces.
+//
+// Use this operation only to create new rule groups namespaces. To update an
+// existing rule groups namespace, use PutRuleGroupsNamespace .
 func (c *Client) CreateRuleGroupsNamespace(ctx context.Context, params *CreateRuleGroupsNamespaceInput, optFns ...func(*Options)) (*CreateRuleGroupsNamespaceOutput, error) {
 	if params == nil {
 		params = &CreateRuleGroupsNamespaceInput{}
@@ -35,10 +35,13 @@ func (c *Client) CreateRuleGroupsNamespace(ctx context.Context, params *CreateRu
 // Represents the input of a CreateRuleGroupsNamespace operation.
 type CreateRuleGroupsNamespaceInput struct {
 
-	// The rules file to use in the new namespace. Contains the base64-encoded version
-	// of the YAML rules file. For details about the rule groups namespace structure,
-	// see RuleGroupsNamespaceData (https://docs.aws.amazon.com/prometheus/latest/APIReference/yaml-RuleGroupsNamespaceData.html)
-	// .
+	// The rules file to use in the new namespace.
+	//
+	// Contains the base64-encoded version of the YAML rules file.
+	//
+	// For details about the rule groups namespace structure, see [RuleGroupsNamespaceData].
+	//
+	// [RuleGroupsNamespaceData]: https://docs.aws.amazon.com/prometheus/latest/APIReference/yaml-RuleGroupsNamespaceData.html
 	//
 	// This member is required.
 	Data []byte
@@ -112,25 +115,25 @@ func (c *Client) addOperationCreateRuleGroupsNamespaceMiddlewares(stack *middlew
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -145,6 +148,9 @@ func (c *Client) addOperationCreateRuleGroupsNamespaceMiddlewares(stack *middlew
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opCreateRuleGroupsNamespaceMiddleware(stack, options); err != nil {
 		return err
 	}
@@ -154,7 +160,7 @@ func (c *Client) addOperationCreateRuleGroupsNamespaceMiddlewares(stack *middlew
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateRuleGroupsNamespace(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

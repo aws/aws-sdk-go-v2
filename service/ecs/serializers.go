@@ -3302,6 +3302,13 @@ func awsAwsjson11_serializeDocumentClusterConfiguration(v *types.ClusterConfigur
 		}
 	}
 
+	if v.ManagedStorageConfiguration != nil {
+		ok := object.Key("managedStorageConfiguration")
+		if err := awsAwsjson11_serializeDocumentManagedStorageConfiguration(v.ManagedStorageConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -4618,6 +4625,23 @@ func awsAwsjson11_serializeDocumentManagedScaling(v *types.ManagedScaling, value
 	if v.TargetCapacity != nil {
 		ok := object.Key("targetCapacity")
 		ok.Integer(*v.TargetCapacity)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentManagedStorageConfiguration(v *types.ManagedStorageConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.FargateEphemeralStorageKmsKeyId != nil {
+		ok := object.Key("fargateEphemeralStorageKmsKeyId")
+		ok.String(*v.FargateEphemeralStorageKmsKeyId)
+	}
+
+	if v.KmsKeyId != nil {
+		ok := object.Key("kmsKeyId")
+		ok.String(*v.KmsKeyId)
 	}
 
 	return nil

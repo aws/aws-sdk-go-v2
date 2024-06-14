@@ -6,25 +6,28 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Assigns a set of tags to the specified Amazon Cognito identity pool. A tag is a
 // label that you can use to categorize and manage identity pools in different
-// ways, such as by purpose, owner, environment, or other criteria. Each tag
-// consists of a key and value, both of which you define. A key is a general
-// category for more specific values. For example, if you have two versions of an
-// identity pool, one for testing and another for production, you might assign an
-// Environment tag key to both identity pools. The value of this key might be Test
-// for one identity pool and Production for the other. Tags are useful for cost
-// tracking and access control. You can activate your tags so that they appear on
-// the Billing and Cost Management console, where you can track the costs
-// associated with your identity pools. In an IAM policy, you can constrain
-// permissions for identity pools based on specific tags or tag values. You can use
-// this action up to 5 times per second, per account. An identity pool can have as
-// many as 50 tags.
+// ways, such as by purpose, owner, environment, or other criteria.
+//
+// Each tag consists of a key and value, both of which you define. A key is a
+// general category for more specific values. For example, if you have two versions
+// of an identity pool, one for testing and another for production, you might
+// assign an Environment tag key to both identity pools. The value of this key
+// might be Test for one identity pool and Production for the other.
+//
+// Tags are useful for cost tracking and access control. You can activate your
+// tags so that they appear on the Billing and Cost Management console, where you
+// can track the costs associated with your identity pools. In an IAM policy, you
+// can constrain permissions for identity pools based on specific tags or tag
+// values.
+//
+// You can use this action up to 5 times per second, per account. An identity pool
+// can have as many as 50 tags.
 func (c *Client) TagResource(ctx context.Context, params *TagResourceInput, optFns ...func(*Options)) (*TagResourceOutput, error) {
 	if params == nil {
 		params = &TagResourceInput{}
@@ -84,25 +87,25 @@ func (c *Client) addOperationTagResourceMiddlewares(stack *middleware.Stack, opt
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -117,13 +120,16 @@ func (c *Client) addOperationTagResourceMiddlewares(stack *middleware.Stack, opt
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpTagResourceValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opTagResource(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

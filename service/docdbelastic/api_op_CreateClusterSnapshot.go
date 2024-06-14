@@ -6,13 +6,12 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/docdbelastic/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a snapshot of a cluster.
+// Creates a snapshot of an elastic cluster.
 func (c *Client) CreateClusterSnapshot(ctx context.Context, params *CreateClusterSnapshotInput, optFns ...func(*Options)) (*CreateClusterSnapshotOutput, error) {
 	if params == nil {
 		params = &CreateClusterSnapshotInput{}
@@ -30,17 +29,18 @@ func (c *Client) CreateClusterSnapshot(ctx context.Context, params *CreateCluste
 
 type CreateClusterSnapshotInput struct {
 
-	// The arn of the Elastic DocumentDB cluster that the snapshot will be taken from.
+	// The ARN identifier of the elastic cluster of which you want to create a
+	// snapshot.
 	//
 	// This member is required.
 	ClusterArn *string
 
-	// The name of the Elastic DocumentDB snapshot.
+	// The name of the new elastic cluster snapshot.
 	//
 	// This member is required.
 	SnapshotName *string
 
-	// The tags to be assigned to the new Elastic DocumentDB snapshot.
+	// The tags to be assigned to the new elastic cluster snapshot.
 	Tags map[string]string
 
 	noSmithyDocumentSerde
@@ -48,7 +48,7 @@ type CreateClusterSnapshotInput struct {
 
 type CreateClusterSnapshotOutput struct {
 
-	// Returns information about the new Elastic DocumentDB snapshot.
+	// Returns information about the new elastic cluster snapshot.
 	//
 	// This member is required.
 	Snapshot *types.ClusterSnapshot
@@ -81,25 +81,25 @@ func (c *Client) addOperationCreateClusterSnapshotMiddlewares(stack *middleware.
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -114,13 +114,16 @@ func (c *Client) addOperationCreateClusterSnapshotMiddlewares(stack *middleware.
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpCreateClusterSnapshotValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateClusterSnapshot(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

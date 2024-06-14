@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/lexmodelsv2/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -55,8 +54,9 @@ type UpdateBotRecommendationInput struct {
 	EncryptionSetting *types.EncryptionSetting
 
 	// The identifier of the language and locale of the bot recommendation to update.
-	// The string must match one of the supported locales. For more information, see
-	// Supported languages (https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html)
+	// The string must match one of the supported locales. For more information, see [Supported languages]
+	//
+	// [Supported languages]: https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html
 	//
 	// This member is required.
 	LocaleId *string
@@ -73,8 +73,10 @@ type UpdateBotRecommendationOutput struct {
 	// The unique identifier of the bot recommendation to be updated.
 	BotRecommendationId *string
 
-	// The status of the bot recommendation. If the status is Failed, then the reasons
-	// for the failure are listed in the failureReasons field.
+	// The status of the bot recommendation.
+	//
+	// If the status is Failed, then the reasons for the failure are listed in the
+	// failureReasons field.
 	BotRecommendationStatus types.BotRecommendationStatus
 
 	// The version of the bot containing the bot recommendation that has been updated.
@@ -92,8 +94,9 @@ type UpdateBotRecommendationOutput struct {
 	LastUpdatedDateTime *time.Time
 
 	// The identifier of the language and locale of the bot recommendation to update.
-	// The string must match one of the supported locales. For more information, see
-	// Supported languages (https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html)
+	// The string must match one of the supported locales. For more information, see [Supported languages]
+	//
+	// [Supported languages]: https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html
 	LocaleId *string
 
 	// The object representing the Amazon S3 bucket containing the transcript, as well
@@ -128,25 +131,25 @@ func (c *Client) addOperationUpdateBotRecommendationMiddlewares(stack *middlewar
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -161,13 +164,16 @@ func (c *Client) addOperationUpdateBotRecommendationMiddlewares(stack *middlewar
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpUpdateBotRecommendationValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateBotRecommendation(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

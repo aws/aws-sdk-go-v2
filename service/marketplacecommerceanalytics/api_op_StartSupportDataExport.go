@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/marketplacecommerceanalytics/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -47,13 +46,14 @@ func (c *Client) StartSupportDataExport(ctx context.Context, params *StartSuppor
 // StartSupportDataExport operation.
 type StartSupportDataExportInput struct {
 
-	// This target has been deprecated. Specifies the data set type to be written to
+	//  This target has been deprecated. Specifies the data set type to be written to
 	// the output csv file. The data set types customer_support_contacts_data and
 	// test_customer_support_contacts_data both result in a csv file containing the
 	// following fields: Product Id, Product Code, Customer Guid, Subscription Guid,
 	// Subscription Start Date, Organization, AWS Account Id, Given Name, Surname,
 	// Telephone Number, Email, Title, Country Code, ZIP Code, Operation Type, and
 	// Operation Time.
+	//
 	//   - customer_support_contacts_data Customer support contact data. The data set
 	//   will contain all changes (Creates, Updates, and Deletes) to customer support
 	//   contact data from the date specified in the from_date parameter.
@@ -143,25 +143,25 @@ func (c *Client) addOperationStartSupportDataExportMiddlewares(stack *middleware
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -176,13 +176,16 @@ func (c *Client) addOperationStartSupportDataExportMiddlewares(stack *middleware
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpStartSupportDataExportValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opStartSupportDataExport(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

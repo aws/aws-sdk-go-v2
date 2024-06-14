@@ -6,15 +6,16 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/appstream/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates an image builder. An image builder is a virtual machine that is used to
-// create an image. The initial state of the builder is PENDING . When it is ready,
-// the state is RUNNING .
+// create an image.
+//
+// The initial state of the builder is PENDING . When it is ready, the state is
+// RUNNING .
 func (c *Client) CreateImageBuilder(ctx context.Context, params *CreateImageBuilderInput, optFns ...func(*Options)) (*CreateImageBuilderOutput, error) {
 	if params == nil {
 		params = &CreateImageBuilderInput{}
@@ -34,38 +35,71 @@ type CreateImageBuilderInput struct {
 
 	// The instance type to use when launching the image builder. The following
 	// instance types are available:
+	//
 	//   - stream.standard.small
+	//
 	//   - stream.standard.medium
+	//
 	//   - stream.standard.large
+	//
 	//   - stream.compute.large
+	//
 	//   - stream.compute.xlarge
+	//
 	//   - stream.compute.2xlarge
+	//
 	//   - stream.compute.4xlarge
+	//
 	//   - stream.compute.8xlarge
+	//
 	//   - stream.memory.large
+	//
 	//   - stream.memory.xlarge
+	//
 	//   - stream.memory.2xlarge
+	//
 	//   - stream.memory.4xlarge
+	//
 	//   - stream.memory.8xlarge
+	//
 	//   - stream.memory.z1d.large
+	//
 	//   - stream.memory.z1d.xlarge
+	//
 	//   - stream.memory.z1d.2xlarge
+	//
 	//   - stream.memory.z1d.3xlarge
+	//
 	//   - stream.memory.z1d.6xlarge
+	//
 	//   - stream.memory.z1d.12xlarge
+	//
 	//   - stream.graphics-design.large
+	//
 	//   - stream.graphics-design.xlarge
+	//
 	//   - stream.graphics-design.2xlarge
+	//
 	//   - stream.graphics-design.4xlarge
+	//
 	//   - stream.graphics-desktop.2xlarge
+	//
 	//   - stream.graphics.g4dn.xlarge
+	//
 	//   - stream.graphics.g4dn.2xlarge
+	//
 	//   - stream.graphics.g4dn.4xlarge
+	//
 	//   - stream.graphics.g4dn.8xlarge
+	//
 	//   - stream.graphics.g4dn.12xlarge
+	//
 	//   - stream.graphics.g4dn.16xlarge
+	//
 	//   - stream.graphics-pro.4xlarge
+	//
 	//   - stream.graphics-pro.8xlarge
+	//
 	//   - stream.graphics-pro.16xlarge
 	//
 	// This member is required.
@@ -102,10 +136,11 @@ type CreateImageBuilderInput struct {
 	// AssumeRole API operation and passes the ARN of the role to use. The operation
 	// creates a new session with temporary credentials. AppStream 2.0 retrieves the
 	// temporary credentials and creates the appstream_machine_role credential profile
-	// on the instance. For more information, see Using an IAM Role to Grant
-	// Permissions to Applications and Scripts Running on AppStream 2.0 Streaming
-	// Instances (https://docs.aws.amazon.com/appstream2/latest/developerguide/using-iam-roles-to-grant-permissions-to-applications-scripts-streaming-instances.html)
-	// in the Amazon AppStream 2.0 Administration Guide.
+	// on the instance.
+	//
+	// For more information, see [Using an IAM Role to Grant Permissions to Applications and Scripts Running on AppStream 2.0 Streaming Instances] in the Amazon AppStream 2.0 Administration Guide.
+	//
+	// [Using an IAM Role to Grant Permissions to Applications and Scripts Running on AppStream 2.0 Streaming Instances]: https://docs.aws.amazon.com/appstream2/latest/developerguide/using-iam-roles-to-grant-permissions-to-applications-scripts-streaming-instances.html
 	IamRoleArn *string
 
 	// The ARN of the public, private, or shared image to use.
@@ -116,11 +151,19 @@ type CreateImageBuilderInput struct {
 
 	// The tags to associate with the image builder. A tag is a key-value pair, and
 	// the value is optional. For example, Environment=Test. If you do not specify a
-	// value, Environment=. Generally allowed characters are: letters, numbers, and
-	// spaces representable in UTF-8, and the following special characters: _ . : / = +
-	// \ - @ If you do not specify a value, the value is set to an empty string. For
-	// more information about tags, see Tagging Your Resources (https://docs.aws.amazon.com/appstream2/latest/developerguide/tagging-basic.html)
-	// in the Amazon AppStream 2.0 Administration Guide.
+	// value, Environment=.
+	//
+	// Generally allowed characters are: letters, numbers, and spaces representable in
+	// UTF-8, and the following special characters:
+	//
+	// _ . : / = + \ - @
+	//
+	// If you do not specify a value, the value is set to an empty string.
+	//
+	// For more information about tags, see [Tagging Your Resources] in the Amazon AppStream 2.0
+	// Administration Guide.
+	//
+	// [Tagging Your Resources]: https://docs.aws.amazon.com/appstream2/latest/developerguide/tagging-basic.html
 	Tags map[string]string
 
 	// The VPC configuration for the image builder. You can specify only one subnet.
@@ -162,25 +205,25 @@ func (c *Client) addOperationCreateImageBuilderMiddlewares(stack *middleware.Sta
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -195,13 +238,16 @@ func (c *Client) addOperationCreateImageBuilderMiddlewares(stack *middleware.Sta
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpCreateImageBuilderValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateImageBuilder(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

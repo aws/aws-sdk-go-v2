@@ -6,15 +6,15 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns a list of the subtasks for an Inference Recommender job. The supported
-// subtasks are benchmarks, which evaluate the performance of your model on
-// different instance types.
+// Returns a list of the subtasks for an Inference Recommender job.
+//
+// The supported subtasks are benchmarks, which evaluate the performance of your
+// model on different instance types.
 func (c *Client) ListInferenceRecommendationsJobSteps(ctx context.Context, params *ListInferenceRecommendationsJobStepsInput, optFns ...func(*Options)) (*ListInferenceRecommendationsJobStepsOutput, error) {
 	if params == nil {
 		params = &ListInferenceRecommendationsJobStepsInput{}
@@ -48,8 +48,9 @@ type ListInferenceRecommendationsJobStepsInput struct {
 	// empty, then all benchmarks are returned.
 	Status types.RecommendationJobStatus
 
-	// A filter to return details about the specified type of subtask. BENCHMARK :
-	// Evaluate the performance of your model on different instance types.
+	// A filter to return details about the specified type of subtask.
+	//
+	// BENCHMARK : Evaluate the performance of your model on different instance types.
 	StepType types.RecommendationStepType
 
 	noSmithyDocumentSerde
@@ -92,25 +93,25 @@ func (c *Client) addOperationListInferenceRecommendationsJobStepsMiddlewares(sta
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -125,13 +126,16 @@ func (c *Client) addOperationListInferenceRecommendationsJobStepsMiddlewares(sta
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpListInferenceRecommendationsJobStepsValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListInferenceRecommendationsJobSteps(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

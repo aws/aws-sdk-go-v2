@@ -6,32 +6,41 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/servicecatalogappregistry/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Disassociates a resource from application. Both the resource and the
-// application can be specified either by ID or name. Minimum permissions You must
-// have the following permissions to remove a resource that's been associated with
-// an application using the APPLY_APPLICATION_TAG option for AssociateResource (https://docs.aws.amazon.com/servicecatalog/latest/dg/API_app-registry_AssociateResource.html)
-// .
+//	Disassociates a resource from application. Both the resource and the
+//
+// application can be specified either by ID or name.
+//
+// # Minimum permissions
+//
+// You must have the following permissions to remove a resource that's been
+// associated with an application using the APPLY_APPLICATION_TAG option for [AssociateResource].
+//
 //   - tag:GetResources
+//
 //   - tag:UntagResources
 //
 // You must also have the following permissions if you don't use the
-// AWSServiceCatalogAppRegistryFullAccess policy. For more information, see
-// AWSServiceCatalogAppRegistryFullAccess (https://docs.aws.amazon.com/servicecatalog/latest/arguide/full.html)
-// in the AppRegistry Administrator Guide.
+// AWSServiceCatalogAppRegistryFullAccess policy. For more information, see [AWSServiceCatalogAppRegistryFullAccess] in
+// the AppRegistry Administrator Guide.
+//
 //   - resource-groups:DisassociateResource
+//
 //   - cloudformation:UpdateStack
+//
 //   - cloudformation:DescribeStacks
 //
 // In addition, you must have the tagging permission defined by the Amazon Web
-// Services service that creates the resource. For more information, see
-// UntagResources (https://docs.aws.amazon.com/resourcegroupstagging/latest/APIReference/API_UntTagResources.html)
-// in the Resource Groups Tagging API Reference.
+// Services service that creates the resource. For more information, see [UntagResources]in the
+// Resource Groups Tagging API Reference.
+//
+// [UntagResources]: https://docs.aws.amazon.com/resourcegroupstagging/latest/APIReference/API_UntTagResources.html
+// [AWSServiceCatalogAppRegistryFullAccess]: https://docs.aws.amazon.com/servicecatalog/latest/arguide/full.html
+// [AssociateResource]: https://docs.aws.amazon.com/servicecatalog/latest/dg/API_app-registry_AssociateResource.html
 func (c *Client) DisassociateResource(ctx context.Context, params *DisassociateResourceInput, optFns ...func(*Options)) (*DisassociateResourceOutput, error) {
 	if params == nil {
 		params = &DisassociateResourceInput{}
@@ -103,25 +112,25 @@ func (c *Client) addOperationDisassociateResourceMiddlewares(stack *middleware.S
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -136,13 +145,16 @@ func (c *Client) addOperationDisassociateResourceMiddlewares(stack *middleware.S
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDisassociateResourceValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDisassociateResource(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

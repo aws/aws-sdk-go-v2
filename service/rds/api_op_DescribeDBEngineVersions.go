@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/rds/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -31,7 +30,9 @@ func (c *Client) DescribeDBEngineVersions(ctx context.Context, params *DescribeD
 type DescribeDBEngineVersionsInput struct {
 
 	// The name of a specific DB parameter group family to return details for.
+	//
 	// Constraints:
+	//
 	//   - If supplied, must match an existing DB parameter group family.
 	DBParameterGroupFamily *string
 
@@ -39,49 +40,88 @@ type DescribeDBEngineVersionsInput struct {
 	// the engine and major version combination.
 	DefaultOnly *bool
 
-	// The database engine to return version details for. Valid Values:
+	// The database engine to return version details for.
+	//
+	// Valid Values:
+	//
 	//   - aurora-mysql
+	//
 	//   - aurora-postgresql
+	//
 	//   - custom-oracle-ee
+	//
+	//   - custom-oracle-ee-cdb
+	//
+	//   - custom-oracle-se2
+	//
+	//   - custom-oracle-se2-cdb
+	//
 	//   - db2-ae
+	//
 	//   - db2-se
+	//
 	//   - mariadb
+	//
 	//   - mysql
+	//
 	//   - oracle-ee
+	//
 	//   - oracle-ee-cdb
+	//
 	//   - oracle-se2
+	//
 	//   - oracle-se2-cdb
+	//
 	//   - postgres
+	//
 	//   - sqlserver-ee
+	//
 	//   - sqlserver-se
+	//
 	//   - sqlserver-ex
+	//
 	//   - sqlserver-web
 	Engine *string
 
-	// A specific database engine version to return details for. Example: 5.1.49
+	// A specific database engine version to return details for.
+	//
+	// Example: 5.1.49
 	EngineVersion *string
 
-	// A filter that specifies one or more DB engine versions to describe. Supported
-	// filters:
+	// A filter that specifies one or more DB engine versions to describe.
+	//
+	// Supported filters:
+	//
 	//   - db-parameter-group-family - Accepts parameter groups family names. The
 	//   results list only includes information about the DB engine versions for these
 	//   parameter group families.
+	//
 	//   - engine - Accepts engine names. The results list only includes information
 	//   about the DB engine versions for these engines.
+	//
 	//   - engine-mode - Accepts DB engine modes. The results list only includes
 	//   information about the DB engine versions for these engine modes. Valid DB engine
 	//   modes are the following:
+	//
 	//   - global
+	//
 	//   - multimaster
+	//
 	//   - parallelquery
+	//
 	//   - provisioned
+	//
 	//   - serverless
+	//
 	//   - engine-version - Accepts engine versions. The results list only includes
 	//   information about the DB engine versions for these engine versions.
+	//
 	//   - status - Accepts engine version statuses. The results list only includes
 	//   information about the DB engine versions for these statuses. Valid statuses are
 	//   the following:
+	//
 	//   - available
+	//
 	//   - deprecated
 	Filters []types.Filter
 
@@ -90,19 +130,23 @@ type DescribeDBEngineVersionsInput struct {
 	IncludeAll *bool
 
 	// Specifies whether to list the supported character sets for each engine version.
+	//
 	// If this parameter is enabled and the requested engine supports the
 	// CharacterSetName parameter for CreateDBInstance , the response includes a list
-	// of supported character sets for each engine version. For RDS Custom, the default
-	// is not to list supported character sets. If you enable this parameter, RDS
-	// Custom returns no results.
+	// of supported character sets for each engine version.
+	//
+	// For RDS Custom, the default is not to list supported character sets. If you
+	// enable this parameter, RDS Custom returns no results.
 	ListSupportedCharacterSets *bool
 
-	// Specifies whether to list the supported time zones for each engine version. If
-	// this parameter is enabled and the requested engine supports the TimeZone
+	// Specifies whether to list the supported time zones for each engine version.
+	//
+	// If this parameter is enabled and the requested engine supports the TimeZone
 	// parameter for CreateDBInstance , the response includes a list of supported time
-	// zones for each engine version. For RDS Custom, the default is not to list
-	// supported time zones. If you enable this parameter, RDS Custom returns no
-	// results.
+	// zones for each engine version.
+	//
+	// For RDS Custom, the default is not to list supported time zones. If you enable
+	// this parameter, RDS Custom returns no results.
 	ListSupportedTimezones *bool
 
 	// An optional pagination token provided by a previous request. If this parameter
@@ -112,7 +156,10 @@ type DescribeDBEngineVersionsInput struct {
 
 	// The maximum number of records to include in the response. If more than the
 	// MaxRecords value is available, a pagination token called a marker is included in
-	// the response so you can retrieve the remaining results. Default: 100
+	// the response so you can retrieve the remaining results.
+	//
+	// Default: 100
+	//
 	// Constraints: Minimum 20, maximum 100.
 	MaxRecords *int32
 
@@ -159,25 +206,25 @@ func (c *Client) addOperationDescribeDBEngineVersionsMiddlewares(stack *middlewa
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -192,13 +239,16 @@ func (c *Client) addOperationDescribeDBEngineVersionsMiddlewares(stack *middlewa
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDescribeDBEngineVersionsValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeDBEngineVersions(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -229,7 +279,10 @@ var _ DescribeDBEngineVersionsAPIClient = (*Client)(nil)
 type DescribeDBEngineVersionsPaginatorOptions struct {
 	// The maximum number of records to include in the response. If more than the
 	// MaxRecords value is available, a pagination token called a marker is included in
-	// the response so you can retrieve the remaining results. Default: 100
+	// the response so you can retrieve the remaining results.
+	//
+	// Default: 100
+	//
 	// Constraints: Minimum 20, maximum 100.
 	Limit int32
 

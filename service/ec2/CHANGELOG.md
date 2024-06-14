@@ -1,3 +1,150 @@
+# v1.164.1 (2024-06-14)
+
+* **Documentation**: Documentation updates for Amazon EC2.
+
+# v1.164.0 (2024-06-12)
+
+* **Feature**: Tagging support for Traffic Mirroring FilterRule resource
+
+# v1.163.1 (2024-06-07)
+
+* **Bug Fix**: Add clock skew correction on all service clients
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.163.0 (2024-06-04)
+
+* **Feature**: U7i instances with up to 32 TiB of DDR5 memory and 896 vCPUs are now available. C7i-flex instances are launched and are lower-priced variants of the Amazon EC2 C7i instances that offer a baseline level of CPU performance with the ability to scale up to the full compute performance 95% of the time.
+
+# v1.162.1 (2024-06-03)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.162.0 (2024-05-28)
+
+* **Feature**: Providing support to accept BgpAsnExtended attribute
+
+# v1.161.4 (2024-05-23)
+
+* No change notes available for this release.
+
+# v1.161.3 (2024-05-16)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.161.2 (2024-05-15)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.161.1 (2024-05-10)
+
+* **Bug Fix**: Fix serialization behavior of empty lists.
+
+# v1.161.0 (2024-05-08)
+
+* **Feature**: Adding Precision Hardware Clock (PHC) to public API DescribeInstanceTypes
+* **Bug Fix**: GoDoc improvement
+
+# v1.160.0 (2024-05-02)
+
+* **Feature**: This release includes a new API for retrieving the public endorsement key of the EC2 instance's Nitro Trusted Platform Module (NitroTPM).
+
+# v1.159.1 (2024-05-01)
+
+* **Documentation**: Documentation updates for Amazon EC2.
+
+# v1.159.0 (2024-04-24)
+
+* **Feature**: Launching capability for customers to enable or disable automatic assignment of public IPv4 addresses to their network interface
+
+# v1.158.0 (2024-04-23)
+
+* **Feature**: This release introduces EC2 AMI Deregistration Protection, a new AMI property that can be enabled by customers to protect an AMI against an unintended deregistration. This release also enables the AMI owners to view the AMI 'LastLaunchedTime' in DescribeImages API.
+
+# v1.157.0 (2024-04-17)
+
+* **Feature**: Documentation updates for Elastic Compute Cloud (EC2).
+
+# v1.156.0 (2024-04-04)
+
+* **Feature**: Amazon EC2 G6 instances powered by NVIDIA L4 Tensor Core GPUs can be used for a wide range of graphics-intensive and machine learning use cases. Gr6 instances also feature NVIDIA L4 GPUs and can be used for graphics workloads with higher memory requirements.
+
+# v1.155.1 (2024-03-29)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.155.0 (2024-03-28)
+
+* **Feature**: Amazon EC2 C7gd, M7gd and R7gd metal instances with up to 3.8 TB of local NVMe-based SSD block-level storage have up to 45% improved real-time NVMe storage performance than comparable Graviton2-based instances.
+
+# v1.154.0 (2024-03-26)
+
+* **Feature**: Documentation updates for Elastic Compute Cloud (EC2).
+
+# v1.153.0 (2024-03-25)
+
+* **Feature**: Added support for ModifyInstanceMetadataDefaults and GetInstanceMetadataDefaults to set Instance Metadata Service account defaults
+
+# v1.152.0 (2024-03-19)
+
+* **Feature**: This release adds the new DescribeMacHosts API operation for getting information about EC2 Mac Dedicated Hosts. Users can now see the latest macOS versions that their underlying Apple Mac can support without needing to be updated.
+
+# v1.151.1 (2024-03-18)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.151.0 (2024-03-15)
+
+* **Feature**: Add media accelerator and neuron device information on the describe instance types API.
+
+# v1.150.1 (2024-03-12)
+
+* **Documentation**: Documentation updates for Amazon EC2.
+
+# v1.150.0 (2024-03-07)
+
+* **Feature**: This release adds an optional parameter to RegisterImage and CopyImage APIs to support tagging AMIs at the time of creation.
+* **Bug Fix**: Remove dependency on go-cmp.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.149.4 (2024-03-05)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.149.3 (2024-03-04)
+
+* **Bug Fix**: Update internal/presigned-url dependency for corrected API name.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.149.2 (2024-03-01)
+
+* **Documentation**: With this release, Amazon EC2 Auto Scaling groups, EC2 Fleet, and Spot Fleet improve the default price protection behavior of attribute-based instance type selection of Spot Instances, to consistently select from a wide range of instance types.
+
+# v1.149.1 (2024-02-23)
+
+* **Bug Fix**: Move all common, SDK-side middleware stack ops into the service client module to prevent cross-module compatibility issues in the future.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.149.0 (2024-02-22)
+
+* **Feature**: Add middleware stack snapshot tests.
+
+# v1.148.2 (2024-02-21)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.148.1 (2024-02-20)
+
+* **Bug Fix**: When sourcing values for a service's `EndpointParameters`, the lack of a configured region (i.e. `options.Region == ""`) will now translate to a `nil` value for `EndpointParameters.Region` instead of a pointer to the empty string `""`. This will result in a much more explicit error when calling an operation instead of an obscure hostname lookup failure.
+
+# v1.148.0 (2024-02-16)
+
+* **Feature**: Add new ClientOptions field to waiter config which allows you to extend the config for operation calls made by waiters.
+
+# v1.147.0 (2024-02-13)
+
+* **Feature**: Bump minimum Go version to 1.20 per our language support policy.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.146.0 (2024-01-29)
 
 * **Feature**: EC2 Fleet customers who use attribute based instance-type selection can now intuitively define their Spot instances price protection limit as a percentage of the lowest priced On-Demand instance type.

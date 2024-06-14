@@ -1,3 +1,96 @@
+# v1.11.3 (2024-06-07)
+
+* **Bug Fix**: Add clock skew correction on all service clients
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.11.2 (2024-06-03)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.11.1 (2024-05-23)
+
+* No change notes available for this release.
+
+# v1.11.0 (2024-05-20)
+
+* **Feature**: This release adds support for using Guardrails with Bedrock Agents.
+
+# v1.10.1 (2024-05-16)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.10.0 (2024-05-15)
+
+* **Feature**: Updating Bedrock Knowledge Base Metadata & Filters feature with two new filters listContains and stringContains
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.9.0 (2024-05-09)
+
+* **Feature**: This release adds support to provide guardrail configuration and modify inference parameters that are then used in RetrieveAndGenerate API in Agents for Amazon Bedrock.
+
+# v1.8.1 (2024-05-08)
+
+* **Bug Fix**: GoDoc improvement
+
+# v1.8.0 (2024-04-23)
+
+* **Feature**: This release introduces zero-setup file upload support for the RetrieveAndGenerate API. This allows you to chat with your data without setting up a Knowledge Base.
+
+# v1.7.0 (2024-04-22)
+
+* **Feature**: Releasing the support for simplified configuration and return of control
+
+# v1.6.1 (2024-03-29)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.6.0 (2024-03-27)
+
+* **Feature**: This release introduces filtering support on Retrieve and RetrieveAndGenerate APIs.
+
+# v1.5.0 (2024-03-26)
+
+* **Feature**: This release adds support to customize prompts sent through the RetrieveAndGenerate API in Agents for Amazon Bedrock.
+
+# v1.4.3 (2024-03-18)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.4.2 (2024-03-08)
+
+* **Documentation**: Documentation update for Bedrock Runtime Agent
+
+# v1.4.1 (2024-03-07)
+
+* **Bug Fix**: Remove dependency on go-cmp.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.4.0 (2024-02-28)
+
+* **Feature**: This release adds support to override search strategy performed by the Retrieve and RetrieveAndGenerate APIs for Amazon Bedrock Agents
+
+# v1.3.1 (2024-02-23)
+
+* **Bug Fix**: Move all common, SDK-side middleware stack ops into the service client module to prevent cross-module compatibility issues in the future.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.3.0 (2024-02-22)
+
+* **Feature**: Add middleware stack snapshot tests.
+
+# v1.2.2 (2024-02-21)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.2.1 (2024-02-20)
+
+* **Bug Fix**: When sourcing values for a service's `EndpointParameters`, the lack of a configured region (i.e. `options.Region == ""`) will now translate to a `nil` value for `EndpointParameters.Region` instead of a pointer to the empty string `""`. This will result in a much more explicit error when calling an operation instead of an obscure hostname lookup failure.
+
+# v1.2.0 (2024-02-13)
+
+* **Feature**: Bump minimum Go version to 1.20 per our language support policy.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.1.6 (2024-01-04)
 
 * **Dependency Update**: Updated to the latest SDK module versions

@@ -3056,6 +3056,17 @@ func awsAwsjson10_serializeDocumentAttribute(v *types.Attribute, value smithyjso
 	return nil
 }
 
+func awsAwsjson10_serializeDocumentAttributeNamesList(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
+	return nil
+}
+
 func awsAwsjson10_serializeDocumentAttributesMap(v map[string]string, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -3063,6 +3074,17 @@ func awsAwsjson10_serializeDocumentAttributesMap(v map[string]string, value smit
 	for key := range v {
 		om := object.Key(key)
 		om.String(v[key])
+	}
+	return nil
+}
+
+func awsAwsjson10_serializeDocumentAttributeValuesList(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
 	}
 	return nil
 }
@@ -5186,6 +5208,20 @@ func awsAwsjson10_serializeOpDocumentListVehiclesInFleetInput(v *ListVehiclesInF
 func awsAwsjson10_serializeOpDocumentListVehiclesInput(v *ListVehiclesInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.AttributeNames != nil {
+		ok := object.Key("attributeNames")
+		if err := awsAwsjson10_serializeDocumentAttributeNamesList(v.AttributeNames, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.AttributeValues != nil {
+		ok := object.Key("attributeValues")
+		if err := awsAwsjson10_serializeDocumentAttributeValuesList(v.AttributeValues, ok); err != nil {
+			return err
+		}
+	}
 
 	if v.MaxResults != nil {
 		ok := object.Key("maxResults")

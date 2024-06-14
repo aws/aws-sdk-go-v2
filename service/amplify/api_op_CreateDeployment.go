@@ -6,16 +6,16 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates a deployment for a manually deployed Amplify app. Manually deployed
-// apps are not connected to a repository. The maximum duration between the
-// CreateDeployment call and the StartDeployment call cannot exceed 8 hours. If
-// the duration exceeds 8 hours, the StartDeployment call and the associated Job
-// will fail.
+// apps are not connected to a repository.
+//
+// The maximum duration between the CreateDeployment call and the StartDeployment
+// call cannot exceed 8 hours. If the duration exceeds 8 hours, the StartDeployment
+// call and the associated Job will fail.
 func (c *Client) CreateDeployment(ctx context.Context, params *CreateDeploymentInput, optFns ...func(*Options)) (*CreateDeploymentOutput, error) {
 	if params == nil {
 		params = &CreateDeploymentInput{}
@@ -34,17 +34,17 @@ func (c *Client) CreateDeployment(ctx context.Context, params *CreateDeploymentI
 // The request structure for the create a new deployment request.
 type CreateDeploymentInput struct {
 
-	// The unique ID for an Amplify app.
+	//  The unique ID for an Amplify app.
 	//
 	// This member is required.
 	AppId *string
 
-	// The name of the branch to use for the job.
+	//  The name of the branch to use for the job.
 	//
 	// This member is required.
 	BranchName *string
 
-	// An optional file map that contains the file name as the key and the file
+	//  An optional file map that contains the file name as the key and the file
 	// content md5 hash as the value. If this argument is provided, the service will
 	// generate a unique upload URL per file. Otherwise, the service will only generate
 	// a single upload URL for the zipped files.
@@ -56,19 +56,19 @@ type CreateDeploymentInput struct {
 // The result structure for the create a new deployment request.
 type CreateDeploymentOutput struct {
 
-	// When the fileMap argument is provided in the request, fileUploadUrls will
+	//  When the fileMap argument is provided in the request, fileUploadUrls will
 	// contain a map of file names to upload URLs.
 	//
 	// This member is required.
 	FileUploadUrls map[string]string
 
-	// When the fileMap argument is not provided in the request, this zipUploadUrl is
+	//  When the fileMap argument is not provided in the request, this zipUploadUrl is
 	// returned.
 	//
 	// This member is required.
 	ZipUploadUrl *string
 
-	// The job ID for this deployment. will supply to start deployment api.
+	//  The job ID for this deployment. will supply to start deployment api.
 	JobId *string
 
 	// Metadata pertaining to the operation's result.
@@ -99,25 +99,25 @@ func (c *Client) addOperationCreateDeploymentMiddlewares(stack *middleware.Stack
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -132,13 +132,16 @@ func (c *Client) addOperationCreateDeploymentMiddlewares(stack *middleware.Stack
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpCreateDeploymentValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateDeployment(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

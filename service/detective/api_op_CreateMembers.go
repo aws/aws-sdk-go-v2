@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/detective/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -14,23 +13,32 @@ import (
 
 // CreateMembers is used to send invitations to accounts. For the organization
 // behavior graph, the Detective administrator account uses CreateMembers to
-// enable organization accounts as member accounts. For invited accounts,
-// CreateMembers sends a request to invite the specified Amazon Web Services
-// accounts to be member accounts in the behavior graph. This operation can only be
-// called by the administrator account for a behavior graph. CreateMembers
-// verifies the accounts and then invites the verified accounts. The administrator
-// can optionally specify to not send invitation emails to the member accounts.
-// This would be used when the administrator manages their member accounts
-// centrally. For organization accounts in the organization behavior graph,
-// CreateMembers attempts to enable the accounts. The organization accounts do not
-// receive invitations. The request provides the behavior graph ARN and the list of
-// accounts to invite or to enable. The response separates the requested accounts
-// into two lists:
+// enable organization accounts as member accounts.
+//
+// For invited accounts, CreateMembers sends a request to invite the specified
+// Amazon Web Services accounts to be member accounts in the behavior graph. This
+// operation can only be called by the administrator account for a behavior graph.
+//
+// CreateMembers verifies the accounts and then invites the verified accounts. The
+// administrator can optionally specify to not send invitation emails to the member
+// accounts. This would be used when the administrator manages their member
+// accounts centrally.
+//
+// For organization accounts in the organization behavior graph, CreateMembers
+// attempts to enable the accounts. The organization accounts do not receive
+// invitations.
+//
+// The request provides the behavior graph ARN and the list of accounts to invite
+// or to enable.
+//
+// The response separates the requested accounts into two lists:
+//
 //   - The accounts that CreateMembers was able to process. For invited accounts,
 //     includes member accounts that are being verified, that have passed verification
 //     and are to be invited, and that have failed verification. For organization
 //     accounts in the organization behavior graph, includes accounts that can be
 //     enabled and that cannot be enabled.
+//
 //   - The accounts that CreateMembers was unable to process. This list includes
 //     accounts that were already invited to be member accounts in the behavior graph.
 func (c *Client) CreateMembers(ctx context.Context, params *CreateMembersInput, optFns ...func(*Options)) (*CreateMembersOutput, error) {
@@ -66,8 +74,10 @@ type CreateMembersInput struct {
 
 	// if set to true , then the invited accounts do not receive email notifications.
 	// By default, this is set to false , and the invited accounts receive email
-	// notifications. Organization accounts in the organization behavior graph do not
-	// receive email notifications.
+	// notifications.
+	//
+	// Organization accounts in the organization behavior graph do not receive email
+	// notifications.
 	DisableEmailNotification bool
 
 	// Customized message text to include in the invitation email message to the
@@ -119,25 +129,25 @@ func (c *Client) addOperationCreateMembersMiddlewares(stack *middleware.Stack, o
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -152,13 +162,16 @@ func (c *Client) addOperationCreateMembersMiddlewares(stack *middleware.Stack, o
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpCreateMembersValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateMembers(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

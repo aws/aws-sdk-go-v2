@@ -6,13 +6,12 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockagent/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Describes an Alias for a Amazon Bedrock Agent
+// Gets information about an alias of an agent.
 func (c *Client) GetAgentAlias(ctx context.Context, params *GetAgentAliasInput, optFns ...func(*Options)) (*GetAgentAliasOutput, error) {
 	if params == nil {
 		params = &GetAgentAliasInput{}
@@ -28,15 +27,15 @@ func (c *Client) GetAgentAlias(ctx context.Context, params *GetAgentAliasInput, 
 	return out, nil
 }
 
-// Get Agent Alias Request
 type GetAgentAliasInput struct {
 
-	// Id generated at the server side when an Agent Alias is created
+	// The unique identifier of the alias for which to get information.
 	//
 	// This member is required.
 	AgentAliasId *string
 
-	// Id generated at the server side when an Agent is created
+	// The unique identifier of the agent to which the alias to get information
+	// belongs.
 	//
 	// This member is required.
 	AgentId *string
@@ -44,10 +43,9 @@ type GetAgentAliasInput struct {
 	noSmithyDocumentSerde
 }
 
-// Get Agent Alias Response
 type GetAgentAliasOutput struct {
 
-	// Contains the information of an agent alias
+	// Contains information about the alias.
 	//
 	// This member is required.
 	AgentAlias *types.AgentAlias
@@ -80,25 +78,25 @@ func (c *Client) addOperationGetAgentAliasMiddlewares(stack *middleware.Stack, o
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -113,13 +111,16 @@ func (c *Client) addOperationGetAgentAliasMiddlewares(stack *middleware.Stack, o
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpGetAgentAliasValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetAgentAlias(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

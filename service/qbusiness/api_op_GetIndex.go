@@ -6,14 +6,13 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/qbusiness/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
-// Gets information about an existing Amazon Q index.
+// Gets information about an existing Amazon Q Business index.
 func (c *Client) GetIndex(ctx context.Context, params *GetIndexInput, optFns ...func(*Options)) (*GetIndexOutput, error) {
 	if params == nil {
 		params = &GetIndexInput{}
@@ -31,12 +30,12 @@ func (c *Client) GetIndex(ctx context.Context, params *GetIndexInput, optFns ...
 
 type GetIndexInput struct {
 
-	// The identifier of the Amazon Q application connected to the index.
+	// The identifier of the Amazon Q Business application connected to the index.
 	//
 	// This member is required.
 	ApplicationId *string
 
-	// The identifier of the Amazon Q index you want information on.
+	// The identifier of the Amazon Q Business index you want information on.
 	//
 	// This member is required.
 	IndexId *string
@@ -46,36 +45,36 @@ type GetIndexInput struct {
 
 type GetIndexOutput struct {
 
-	// The identifier of the Amazon Q application associated with the index.
+	// The identifier of the Amazon Q Business application associated with the index.
 	ApplicationId *string
 
-	// The storage capacity units chosen for your Amazon Q index.
+	// The storage capacity units chosen for your Amazon Q Business index.
 	CapacityConfiguration *types.IndexCapacityConfiguration
 
-	// The Unix timestamp when the Amazon Q index was created.
+	// The Unix timestamp when the Amazon Q Business index was created.
 	CreatedAt *time.Time
 
-	// The description for the Amazon Q index.
+	// The description for the Amazon Q Business index.
 	Description *string
 
-	// The name of the Amazon Q index.
+	// The name of the Amazon Q Business index.
 	DisplayName *string
 
 	// Configuration information for document attributes or metadata. Document
 	// metadata are fields associated with your documents. For example, the company
-	// department name associated with each document. For more information, see
-	// Understanding document attributes (https://docs.aws.amazon.com/amazonq/latest/business-use-dg/doc-attributes-types.html#doc-attributes)
-	// .
+	// department name associated with each document. For more information, see [Understanding document attributes].
+	//
+	// [Understanding document attributes]: https://docs.aws.amazon.com/amazonq/latest/business-use-dg/doc-attributes-types.html#doc-attributes
 	DocumentAttributeConfigurations []types.DocumentAttributeConfiguration
 
 	// When the Status field value is FAILED , the ErrorMessage field contains a
 	// message that explains why.
 	Error *types.ErrorDetail
 
-	// The Amazon Resource Name (ARN) of the Amazon Q index.
+	//  The Amazon Resource Name (ARN) of the Amazon Q Business index.
 	IndexArn *string
 
-	// The identifier of the Amazon Q index.
+	// The identifier of the Amazon Q Business index.
 	IndexId *string
 
 	// Provides information about the number of documents indexed.
@@ -86,7 +85,10 @@ type GetIndexOutput struct {
 	// a message that explains why.
 	Status types.IndexStatus
 
-	// The Unix timestamp when the Amazon Q index was last updated.
+	// The type of index attached to your Amazon Q Business application.
+	Type types.IndexType
+
+	// The Unix timestamp when the Amazon Q Business index was last updated.
 	UpdatedAt *time.Time
 
 	// Metadata pertaining to the operation's result.
@@ -117,25 +119,25 @@ func (c *Client) addOperationGetIndexMiddlewares(stack *middleware.Stack, option
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -150,13 +152,16 @@ func (c *Client) addOperationGetIndexMiddlewares(stack *middleware.Stack, option
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpGetIndexValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetIndex(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

@@ -217,6 +217,13 @@ func resolveBaseEndpoint(cfg aws.Config, o *Options) {
 	}
 }
 
+func bindRegion(region string) *string {
+	if region == "" {
+		return nil
+	}
+	return aws.String(endpoints.MapFIPSRegion(region))
+}
+
 // EndpointParameters provides the parameters that influence how endpoints are
 // resolved.
 type EndpointParameters struct {
@@ -509,6 +516,40 @@ func (r *resolver) ResolveEndpoint(
 					}
 				}
 			}
+			if _PartitionResult.Name == "aws-iso" {
+				if _UseFIPS == false {
+					if _UseDualStack == false {
+						uriString := "https://organizations.us-iso-east-1.c2s.ic.gov"
+
+						uri, err := url.Parse(uriString)
+						if err != nil {
+							return endpoint, fmt.Errorf("Failed to parse uri: %s", uriString)
+						}
+
+						return smithyendpoints.Endpoint{
+							URI:     *uri,
+							Headers: http.Header{},
+							Properties: func() smithy.Properties {
+								var out smithy.Properties
+								smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
+									{
+										SchemeID: "aws.auth#sigv4",
+										SignerProperties: func() smithy.Properties {
+											var sp smithy.Properties
+											smithyhttp.SetSigV4SigningName(&sp, "organizations")
+											smithyhttp.SetSigV4ASigningName(&sp, "organizations")
+
+											smithyhttp.SetSigV4SigningRegion(&sp, "us-iso-east-1")
+											return sp
+										}(),
+									},
+								})
+								return out
+							}(),
+						}, nil
+					}
+				}
+			}
 			if _UseFIPS == true {
 				if _UseDualStack == true {
 					if true == _PartitionResult.SupportsFIPS {
@@ -613,7 +654,7 @@ type endpointParamsBinder interface {
 func bindEndpointParams(ctx context.Context, input interface{}, options Options) *EndpointParameters {
 	params := &EndpointParameters{}
 
-	params.Region = aws.String(endpoints.MapFIPSRegion(options.Region))
+	params.Region = bindRegion(options.Region)
 	params.UseDualStack = aws.Bool(options.EndpointOptions.UseDualStackEndpoint == aws.DualStackEndpointStateEnabled)
 	params.UseFIPS = aws.Bool(options.EndpointOptions.UseFIPSEndpoint == aws.FIPSEndpointStateEnabled)
 	params.Endpoint = options.BaseEndpoint

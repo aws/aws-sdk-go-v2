@@ -6,19 +6,19 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/codepipeline/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Marks a custom action as deleted. PollForJobs for the custom action fails after
-// the action is marked for deletion. Used for custom actions only. To re-create a
-// custom action after it has been deleted you must use a string in the version
-// field that has never been used before. This string can be an incremented version
-// number, for example. To restore a deleted custom action, use a JSON file that is
-// identical to the deleted action, including the original string in the version
-// field.
+// the action is marked for deletion. Used for custom actions only.
+//
+// To re-create a custom action after it has been deleted you must use a string in
+// the version field that has never been used before. This string can be an
+// incremented version number, for example. To restore a deleted custom action, use
+// a JSON file that is identical to the deleted action, including the original
+// string in the version field.
 func (c *Client) DeleteCustomActionType(ctx context.Context, params *DeleteCustomActionTypeInput, optFns ...func(*Options)) (*DeleteCustomActionTypeOutput, error) {
 	if params == nil {
 		params = &DeleteCustomActionTypeInput{}
@@ -86,25 +86,25 @@ func (c *Client) addOperationDeleteCustomActionTypeMiddlewares(stack *middleware
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -119,13 +119,16 @@ func (c *Client) addOperationDeleteCustomActionTypeMiddlewares(stack *middleware
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDeleteCustomActionTypeValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteCustomActionType(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

@@ -6,17 +6,18 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Configure how users gain access to an application. If AssignmentsRequired is
 // true (default value), users don’t have access to the application unless an
-// assignment is created using the CreateApplicationAssignment API (https://docs.aws.amazon.com/singlesignon/latest/APIReference/API_CreateApplicationAssignment.html)
-// . If false , all users have access to the application. If an assignment is
-// created using CreateApplicationAssignment (https://docs.aws.amazon.com/singlesignon/latest/APIReference/API_CreateApplicationAssignment.html)
-// ., the user retains access if AssignmentsRequired is set to true .
+// assignment is created using the [CreateApplicationAssignment API]. If false , all users have access to the
+// application. If an assignment is created using [CreateApplicationAssignment]., the user retains access if
+// AssignmentsRequired is set to true .
+//
+// [CreateApplicationAssignment API]: https://docs.aws.amazon.com/singlesignon/latest/APIReference/API_CreateApplicationAssignment.html
+// [CreateApplicationAssignment]: https://docs.aws.amazon.com/singlesignon/latest/APIReference/API_CreateApplicationAssignment.html
 func (c *Client) PutApplicationAssignmentConfiguration(ctx context.Context, params *PutApplicationAssignmentConfigurationInput, optFns ...func(*Options)) (*PutApplicationAssignmentConfigurationOutput, error) {
 	if params == nil {
 		params = &PutApplicationAssignmentConfigurationInput{}
@@ -34,17 +35,17 @@ func (c *Client) PutApplicationAssignmentConfiguration(ctx context.Context, para
 
 type PutApplicationAssignmentConfigurationInput struct {
 
-	// Specifies the ARN of the application. For more information about ARNs, see
-	// Amazon Resource Names (ARNs) and Amazon Web Services Service Namespaces in the
-	// Amazon Web Services General Reference.
+	// Specifies the ARN of the application. For more information about ARNs, see Amazon Resource Names (ARNs) and Amazon Web Services Service Namespaces in
+	// the Amazon Web Services General Reference.
 	//
 	// This member is required.
 	ApplicationArn *string
 
 	// If AssignmentsRequired is true (default value), users don’t have access to the
-	// application unless an assignment is created using the
-	// CreateApplicationAssignment API (https://docs.aws.amazon.com/singlesignon/latest/APIReference/API_CreateApplicationAssignment.html)
-	// . If false , all users have access to the application.
+	// application unless an assignment is created using the [CreateApplicationAssignment API]. If false , all users
+	// have access to the application.
+	//
+	// [CreateApplicationAssignment API]: https://docs.aws.amazon.com/singlesignon/latest/APIReference/API_CreateApplicationAssignment.html
 	//
 	// This member is required.
 	AssignmentRequired *bool
@@ -81,25 +82,25 @@ func (c *Client) addOperationPutApplicationAssignmentConfigurationMiddlewares(st
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -114,13 +115,16 @@ func (c *Client) addOperationPutApplicationAssignmentConfigurationMiddlewares(st
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpPutApplicationAssignmentConfigurationValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opPutApplicationAssignmentConfiguration(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

@@ -6,19 +6,24 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes a job and its related job executions. Deleting a job may take time,
-// depending on the number of job executions created for the job and various other
-// factors. While the job is being deleted, the status of the job will be shown as
-// "DELETION_IN_PROGRESS". Attempting to delete or cancel a job whose status is
-// already "DELETION_IN_PROGRESS" will result in an error. Only 10 jobs may have
-// status "DELETION_IN_PROGRESS" at the same time, or a LimitExceededException will
-// occur. Requires permission to access the DeleteJob (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
-// action.
+// Deletes a job and its related job executions.
+//
+// Deleting a job may take time, depending on the number of job executions created
+// for the job and various other factors. While the job is being deleted, the
+// status of the job will be shown as "DELETION_IN_PROGRESS". Attempting to delete
+// or cancel a job whose status is already "DELETION_IN_PROGRESS" will result in an
+// error.
+//
+// Only 10 jobs may have status "DELETION_IN_PROGRESS" at the same time, or a
+// LimitExceededException will occur.
+//
+// Requires permission to access the [DeleteJob] action.
+//
+// [DeleteJob]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions
 func (c *Client) DeleteJob(ctx context.Context, params *DeleteJobInput, optFns ...func(*Options)) (*DeleteJobOutput, error) {
 	if params == nil {
 		params = &DeleteJobInput{}
@@ -36,28 +41,37 @@ func (c *Client) DeleteJob(ctx context.Context, params *DeleteJobInput, optFns .
 
 type DeleteJobInput struct {
 
-	// The ID of the job to be deleted. After a job deletion is completed, you may
-	// reuse this jobId when you create a new job. However, this is not recommended,
-	// and you must ensure that your devices are not using the jobId to refer to the
-	// deleted job.
+	// The ID of the job to be deleted.
+	//
+	// After a job deletion is completed, you may reuse this jobId when you create a
+	// new job. However, this is not recommended, and you must ensure that your devices
+	// are not using the jobId to refer to the deleted job.
 	//
 	// This member is required.
 	JobId *string
 
 	// (Optional) When true, you can delete a job which is "IN_PROGRESS". Otherwise,
 	// you can only delete a job which is in a terminal state ("COMPLETED" or
-	// "CANCELED") or an exception will occur. The default is false. Deleting a job
-	// which is "IN_PROGRESS", will cause a device which is executing the job to be
-	// unable to access job information or update the job execution status. Use caution
-	// and ensure that each device executing a job which is deleted is able to recover
-	// to a valid state.
+	// "CANCELED") or an exception will occur. The default is false.
+	//
+	// Deleting a job which is "IN_PROGRESS", will cause a device which is executing
+	// the job to be unable to access job information or update the job execution
+	// status. Use caution and ensure that each device executing a job which is deleted
+	// is able to recover to a valid state.
 	Force bool
 
-	// The namespace used to indicate that a job is a customer-managed job. When you
-	// specify a value for this parameter, Amazon Web Services IoT Core sends jobs
-	// notifications to MQTT topics that contain the value in the following format.
-	// $aws/things/THING_NAME/jobs/JOB_ID/notify-namespace-NAMESPACE_ID/ The
-	// namespaceId feature is in public preview.
+	// The namespace used to indicate that a job is a customer-managed job.
+	//
+	// When you specify a value for this parameter, Amazon Web Services IoT Core sends
+	// jobs notifications to MQTT topics that contain the value in the following
+	// format.
+	//
+	//     $aws/things/THING_NAME/jobs/JOB_ID/notify-namespace-NAMESPACE_ID/
+	//
+	// The namespaceId feature is only supported by IoT Greengrass at this time. For
+	// more information, see [Setting up IoT Greengrass core devices.]
+	//
+	// [Setting up IoT Greengrass core devices.]: https://docs.aws.amazon.com/greengrass/v2/developerguide/setting-up.html
 	NamespaceId *string
 
 	noSmithyDocumentSerde
@@ -92,25 +106,25 @@ func (c *Client) addOperationDeleteJobMiddlewares(stack *middleware.Stack, optio
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -125,13 +139,16 @@ func (c *Client) addOperationDeleteJobMiddlewares(stack *middleware.Stack, optio
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDeleteJobValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteJob(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

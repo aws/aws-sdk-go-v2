@@ -6,22 +6,25 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/databasemigrationservice/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a replication subnet group given a list of the subnet IDs in a VPC. The
-// VPC needs to have at least one subnet in at least two availability zones in the
-// Amazon Web Services Region, otherwise the service will throw a
-// ReplicationSubnetGroupDoesNotCoverEnoughAZs exception. If a replication subnet
-// group exists in your Amazon Web Services account, the
+// Creates a replication subnet group given a list of the subnet IDs in a VPC.
+//
+// The VPC needs to have at least one subnet in at least two availability zones in
+// the Amazon Web Services Region, otherwise the service will throw a
+// ReplicationSubnetGroupDoesNotCoverEnoughAZs exception.
+//
+// If a replication subnet group exists in your Amazon Web Services account, the
 // CreateReplicationSubnetGroup action returns the following error message: The
 // Replication Subnet Group already exists. In this case, delete the existing
-// replication subnet group. To do so, use the DeleteReplicationSubnetGroup (https://docs.aws.amazon.com/en_us/dms/latest/APIReference/API_DeleteReplicationSubnetGroup.html)
-// action. Optionally, choose Subnet groups in the DMS console, then choose your
-// subnet group. Next, choose Delete from Actions.
+// replication subnet group. To do so, use the [DeleteReplicationSubnetGroup]action. Optionally, choose Subnet
+// groups in the DMS console, then choose your subnet group. Next, choose Delete
+// from Actions.
+//
+// [DeleteReplicationSubnetGroup]: https://docs.aws.amazon.com/en_us/dms/latest/APIReference/API_DeleteReplicationSubnetGroup.html
 func (c *Client) CreateReplicationSubnetGroup(ctx context.Context, params *CreateReplicationSubnetGroupInput, optFns ...func(*Options)) (*CreateReplicationSubnetGroupOutput, error) {
 	if params == nil {
 		params = &CreateReplicationSubnetGroupInput{}
@@ -45,9 +48,12 @@ type CreateReplicationSubnetGroupInput struct {
 	ReplicationSubnetGroupDescription *string
 
 	// The name for the replication subnet group. This value is stored as a lowercase
-	// string. Constraints: Must contain no more than 255 alphanumeric characters,
-	// periods, spaces, underscores, or hyphens. Must not be "default". Example:
-	// mySubnetgroup
+	// string.
+	//
+	// Constraints: Must contain no more than 255 alphanumeric characters, periods,
+	// spaces, underscores, or hyphens. Must not be "default".
+	//
+	// Example: mySubnetgroup
 	//
 	// This member is required.
 	ReplicationSubnetGroupIdentifier *string
@@ -96,25 +102,25 @@ func (c *Client) addOperationCreateReplicationSubnetGroupMiddlewares(stack *midd
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -129,13 +135,16 @@ func (c *Client) addOperationCreateReplicationSubnetGroupMiddlewares(stack *midd
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpCreateReplicationSubnetGroupValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateReplicationSubnetGroup(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

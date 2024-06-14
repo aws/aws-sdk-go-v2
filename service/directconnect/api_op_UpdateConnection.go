@@ -6,16 +6,18 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/directconnect/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
-// Updates the Direct Connect dedicated connection configuration. You can update
-// the following parameters for a connection:
+// Updates the Direct Connect dedicated connection configuration.
+//
+// You can update the following parameters for a connection:
+//
 //   - The connection name
+//
 //   - The connection's MAC Security (MACsec) encryption mode.
 func (c *Client) UpdateConnection(ctx context.Context, params *UpdateConnectionInput, optFns ...func(*Options)) (*UpdateConnectionOutput, error) {
 	if params == nil {
@@ -34,8 +36,9 @@ func (c *Client) UpdateConnection(ctx context.Context, params *UpdateConnectionI
 
 type UpdateConnectionInput struct {
 
-	// The ID of the dedicated connection. You can use DescribeConnections to retrieve
-	// the connection ID.
+	// The ID of the dedicated connection.
+	//
+	// You can use DescribeConnections to retrieve the connection ID.
 	//
 	// This member is required.
 	ConnectionId *string
@@ -43,8 +46,9 @@ type UpdateConnectionInput struct {
 	// The name of the connection.
 	ConnectionName *string
 
-	// The connection MAC Security (MACsec) encryption mode. The valid values are
-	// no_encrypt , should_encrypt , and must_encrypt .
+	// The connection MAC Security (MACsec) encryption mode.
+	//
+	// The valid values are no_encrypt , should_encrypt , and must_encrypt .
 	EncryptionMode *string
 
 	noSmithyDocumentSerde
@@ -75,24 +79,34 @@ type UpdateConnectionOutput struct {
 	ConnectionName *string
 
 	// The state of the connection. The following are the possible values:
+	//
 	//   - ordering : The initial state of a hosted connection provisioned on an
 	//   interconnect. The connection stays in the ordering state until the owner of the
 	//   hosted connection confirms or declines the connection order.
+	//
 	//   - requested : The initial state of a standard connection. The connection stays
 	//   in the requested state until the Letter of Authorization (LOA) is sent to the
 	//   customer.
+	//
 	//   - pending : The connection has been approved and is being initialized.
+	//
 	//   - available : The network link is up and the connection is ready for use.
+	//
 	//   - down : The network link is down.
+	//
 	//   - deleting : The connection is being deleted.
+	//
 	//   - deleted : The connection has been deleted.
+	//
 	//   - rejected : A hosted connection in the ordering state enters the rejected
 	//   state if it is deleted by the customer.
+	//
 	//   - unknown : The state of the connection is not available.
 	ConnectionState types.ConnectionState
 
-	// The MAC Security (MACsec) connection encryption mode. The valid values are
-	// no_encrypt , should_encrypt , and must_encrypt .
+	// The MAC Security (MACsec) connection encryption mode.
+	//
+	// The valid values are no_encrypt , should_encrypt , and must_encrypt .
 	EncryptionMode *string
 
 	// Indicates whether the connection supports a secondary BGP peer in the same
@@ -123,9 +137,10 @@ type UpdateConnectionOutput struct {
 	// The name of the Direct Connect service provider associated with the connection.
 	PartnerName *string
 
-	// The MAC Security (MACsec) port link status of the connection. The valid values
-	// are Encryption Up , which means that there is an active Connection Key Name, or
-	// Encryption Down .
+	// The MAC Security (MACsec) port link status of the connection.
+	//
+	// The valid values are Encryption Up , which means that there is an active
+	// Connection Key Name, or Encryption Down .
 	PortEncryptionStatus *string
 
 	// The name of the service provider associated with the connection.
@@ -168,25 +183,25 @@ func (c *Client) addOperationUpdateConnectionMiddlewares(stack *middleware.Stack
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -201,13 +216,16 @@ func (c *Client) addOperationUpdateConnectionMiddlewares(stack *middleware.Stack
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpUpdateConnectionValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateConnection(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

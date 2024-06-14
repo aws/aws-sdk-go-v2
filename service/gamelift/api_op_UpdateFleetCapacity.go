@@ -6,41 +6,57 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates capacity settings for a fleet. For fleets with multiple locations, use
-// this operation to manage capacity settings in each location individually. Fleet
-// capacity determines the number of game sessions and players that can be hosted
-// based on the fleet configuration. Use this operation to set the following fleet
-// capacity properties:
-//   - Minimum/maximum size: Set hard limits on fleet capacity. Amazon GameLift
-//     cannot set the fleet's capacity to a value outside of this range, whether the
-//     capacity is changed manually or through automatic scaling.
-//   - Desired capacity: Manually set the number of Amazon EC2 instances to be
-//     maintained in a fleet location. Before changing a fleet's desired capacity, you
-//     may want to call DescribeEC2InstanceLimits (https://docs.aws.amazon.com/gamelift/latest/apireference/API_DescribeEC2InstanceLimits.html)
-//     to get the maximum capacity of the fleet's Amazon EC2 instance type.
-//     Alternatively, consider using automatic scaling to adjust capacity based on
-//     player demand.
+//	This operation has been expanded to use with the Amazon GameLift containers
 //
-// This operation can be used in the following ways:
-//   - To update capacity for a fleet's home Region, or if the fleet has no remote
-//     locations, omit the Location parameter. The fleet must be in ACTIVE status.
-//   - To update capacity for a fleet's remote location, include the Location
-//     parameter set to the location to be updated. The location must be in ACTIVE
-//     status.
+// feature, which is currently in public preview.
 //
-// If successful, capacity settings are updated immediately. In response a change
-// in desired capacity, Amazon GameLift initiates steps to start new instances or
-// terminate existing instances in the requested fleet location. This continues
-// until the location's active instance count matches the new desired instance
-// count. You can track a fleet's current capacity by calling DescribeFleetCapacity (https://docs.aws.amazon.com/gamelift/latest/apireference/API_DescribeFleetCapacity.html)
-// or DescribeFleetLocationCapacity (https://docs.aws.amazon.com/gamelift/latest/apireference/API_DescribeFleetLocationCapacity.html)
-// . If the requested desired instance count is higher than the instance type's
-// limit, the LimitExceeded exception occurs. Learn more Scaling fleet capacity (https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-manage-capacity.html)
+// Updates capacity settings for a managed EC2 fleet or container fleet. For these
+// fleets, you adjust capacity by changing the number of instances in the fleet.
+// Fleet capacity determines the number of game sessions and players that the fleet
+// can host based on its configuration. For fleets with multiple locations, use
+// this operation to manage capacity settings in each location individually.
+//
+// Use this operation to set these fleet capacity properties:
+//
+//   - Minimum/maximum size: Set hard limits on the number of Amazon EC2 instances
+//     allowed. If Amazon GameLift receives a request--either through manual update or
+//     automatic scaling--it won't change the capacity to a value outside of this
+//     range.
+//
+//   - Desired capacity: As an alternative to automatic scaling, manually set the
+//     number of Amazon EC2 instances to be maintained. Before changing a fleet's
+//     desired capacity, check the maximum capacity of the fleet's Amazon EC2 instance
+//     type by calling [DescribeEC2InstanceLimits].
+//
+// To update capacity for a fleet's home Region, or if the fleet has no remote
+// locations, omit the Location parameter. The fleet must be in ACTIVE status.
+//
+// To update capacity for a fleet's remote location, set the Location parameter to
+// the location to update. The location must be in ACTIVE status.
+//
+// If successful, Amazon GameLift updates the capacity settings and returns the
+// identifiers for the updated fleet and/or location. If a requested change to
+// desired capacity exceeds the instance type's limit, the LimitExceeded exception
+// occurs.
+//
+// Updates often prompt an immediate change in fleet capacity, such as when
+// current capacity is different than the new desired capacity or outside the new
+// limits. In this scenario, Amazon GameLift automatically initiates steps to add
+// or remove instances in the fleet location. You can track a fleet's current
+// capacity by calling [DescribeFleetCapacity]or [DescribeFleetLocationCapacity].
+//
+// # Learn more
+//
+// [Scaling fleet capacity]
+//
+// [Scaling fleet capacity]: https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-manage-capacity.html
+// [DescribeEC2InstanceLimits]: https://docs.aws.amazon.com/gamelift/latest/apireference/API_DescribeEC2InstanceLimits.html
+// [DescribeFleetLocationCapacity]: https://docs.aws.amazon.com/gamelift/latest/apireference/API_DescribeFleetLocationCapacity.html
+// [DescribeFleetCapacity]: https://docs.aws.amazon.com/gamelift/latest/apireference/API_DescribeFleetCapacity.html
 func (c *Client) UpdateFleetCapacity(ctx context.Context, params *UpdateFleetCapacityInput, optFns ...func(*Options)) (*UpdateFleetCapacityOutput, error) {
 	if params == nil {
 		params = &UpdateFleetCapacityInput{}
@@ -87,10 +103,11 @@ type UpdateFleetCapacityInput struct {
 
 type UpdateFleetCapacityOutput struct {
 
-	// The Amazon Resource Name ( ARN (https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-arn-format.html)
-	// ) that is assigned to a Amazon GameLift fleet resource and uniquely identifies
-	// it. ARNs are unique across all Regions. Format is
-	// arn:aws:gamelift:::fleet/fleet-a1234567-b8c9-0d1e-2fa3-b45c6d7e8912 .
+	// The Amazon Resource Name ([ARN] ) that is assigned to a Amazon GameLift fleet
+	// resource and uniquely identifies it. ARNs are unique across all Regions. Format
+	// is arn:aws:gamelift:::fleet/fleet-a1234567-b8c9-0d1e-2fa3-b45c6d7e8912 .
+	//
+	// [ARN]: https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-arn-format.html
 	FleetArn *string
 
 	// A unique identifier for the fleet that was updated.
@@ -128,25 +145,25 @@ func (c *Client) addOperationUpdateFleetCapacityMiddlewares(stack *middleware.St
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -161,13 +178,16 @@ func (c *Client) addOperationUpdateFleetCapacityMiddlewares(stack *middleware.St
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpUpdateFleetCapacityValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateFleetCapacity(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

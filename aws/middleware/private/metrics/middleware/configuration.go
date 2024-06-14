@@ -1,9 +1,10 @@
 package middleware
 
 import (
+	"net/http"
+
 	"github.com/aws/aws-sdk-go-v2/aws/middleware/private/metrics"
 	"github.com/aws/smithy-go/middleware"
-	"net/http"
 )
 
 func WithMetricMiddlewares(
@@ -20,10 +21,10 @@ func WithMetricMiddlewares(
 		if err := stack.Serialize.Add(GetRecordStackSerializeEndMiddleware(), middleware.After); err != nil {
 			return err
 		}
-		if err := stack.Serialize.Insert(GetRecordEndpointResolutionStartMiddleware(), "ResolveEndpoint", middleware.Before); err != nil {
+		if err := stack.Finalize.Insert(GetRecordEndpointResolutionStartMiddleware(), "ResolveEndpointV2", middleware.Before); err != nil {
 			return err
 		}
-		if err := stack.Serialize.Insert(GetRecordEndpointResolutionEndMiddleware(), "ResolveEndpoint", middleware.After); err != nil {
+		if err := stack.Finalize.Insert(GetRecordEndpointResolutionEndMiddleware(), "ResolveEndpointV2", middleware.After); err != nil {
 			return err
 		}
 		if err := stack.Build.Add(GetWrapDataStreamMiddleware(), middleware.After); err != nil {
@@ -45,6 +46,15 @@ func WithMetricMiddlewares(
 			return err
 		}
 		if err := stack.Deserialize.Insert(GetTransportMetricsMiddleware(), "StackDeserializeStart", middleware.After); err != nil {
+			return err
+		}
+		if err := timeGetIdentity(stack); err != nil {
+			return err
+		}
+		if err := timeSigning(stack); err != nil {
+			return err
+		}
+		if err := stack.Build.Add(&captureUserAgent{}, middleware.After); err != nil {
 			return err
 		}
 		return nil

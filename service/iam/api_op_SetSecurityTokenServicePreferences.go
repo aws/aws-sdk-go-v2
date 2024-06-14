@@ -6,31 +6,33 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/iam/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Sets the specified version of the global endpoint token as the token version
-// used for the Amazon Web Services account. By default, Security Token Service
-// (STS) is available as a global service, and all STS requests go to a single
-// endpoint at https://sts.amazonaws.com . Amazon Web Services recommends using
-// Regional STS endpoints to reduce latency, build in redundancy, and increase
-// session token availability. For information about Regional endpoints for STS,
-// see Security Token Service endpoints and quotas (https://docs.aws.amazon.com/general/latest/gr/sts.html)
-// in the Amazon Web Services General Reference. If you make an STS call to the
-// global endpoint, the resulting session tokens might be valid in some Regions but
-// not others. It depends on the version that is set in this operation. Version 1
-// tokens are valid only in Amazon Web Services Regions that are available by
-// default. These tokens do not work in manually enabled Regions, such as Asia
-// Pacific (Hong Kong). Version 2 tokens are valid in all Regions. However, version
-// 2 tokens are longer and might affect systems where you temporarily store tokens.
-// For information, see Activating and deactivating STS in an Amazon Web Services
-// Region (https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_enable-regions.html)
-// in the IAM User Guide. To view the current session token version, see the
-// GlobalEndpointTokenVersion entry in the response of the GetAccountSummary
-// operation.
+// used for the Amazon Web Services account.
+//
+// By default, Security Token Service (STS) is available as a global service, and
+// all STS requests go to a single endpoint at https://sts.amazonaws.com . Amazon
+// Web Services recommends using Regional STS endpoints to reduce latency, build in
+// redundancy, and increase session token availability. For information about
+// Regional endpoints for STS, see [Security Token Service endpoints and quotas]in the Amazon Web Services General Reference.
+//
+// If you make an STS call to the global endpoint, the resulting session tokens
+// might be valid in some Regions but not others. It depends on the version that is
+// set in this operation. Version 1 tokens are valid only in Amazon Web Services
+// Regions that are available by default. These tokens do not work in manually
+// enabled Regions, such as Asia Pacific (Hong Kong). Version 2 tokens are valid in
+// all Regions. However, version 2 tokens are longer and might affect systems where
+// you temporarily store tokens. For information, see [Activating and deactivating STS in an Amazon Web Services Region]in the IAM User Guide.
+//
+// To view the current session token version, see the GlobalEndpointTokenVersion
+// entry in the response of the GetAccountSummaryoperation.
+//
+// [Activating and deactivating STS in an Amazon Web Services Region]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_enable-regions.html
+// [Security Token Service endpoints and quotas]: https://docs.aws.amazon.com/general/latest/gr/sts.html
 func (c *Client) SetSecurityTokenServicePreferences(ctx context.Context, params *SetSecurityTokenServicePreferencesInput, optFns ...func(*Options)) (*SetSecurityTokenServicePreferencesOutput, error) {
 	if params == nil {
 		params = &SetSecurityTokenServicePreferencesInput{}
@@ -52,9 +54,11 @@ type SetSecurityTokenServicePreferencesInput struct {
 	// Amazon Web Services Regions that are available by default. These tokens do not
 	// work in manually enabled Regions, such as Asia Pacific (Hong Kong). Version 2
 	// tokens are valid in all Regions. However, version 2 tokens are longer and might
-	// affect systems where you temporarily store tokens. For information, see
-	// Activating and deactivating STS in an Amazon Web Services Region (https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_enable-regions.html)
-	// in the IAM User Guide.
+	// affect systems where you temporarily store tokens.
+	//
+	// For information, see [Activating and deactivating STS in an Amazon Web Services Region] in the IAM User Guide.
+	//
+	// [Activating and deactivating STS in an Amazon Web Services Region]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_enable-regions.html
 	//
 	// This member is required.
 	GlobalEndpointTokenVersion types.GlobalEndpointTokenVersion
@@ -91,25 +95,25 @@ func (c *Client) addOperationSetSecurityTokenServicePreferencesMiddlewares(stack
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -124,13 +128,16 @@ func (c *Client) addOperationSetSecurityTokenServicePreferencesMiddlewares(stack
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpSetSecurityTokenServicePreferencesValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opSetSecurityTokenServicePreferences(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

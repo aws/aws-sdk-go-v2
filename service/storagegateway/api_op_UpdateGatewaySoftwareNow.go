@@ -6,22 +6,24 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Updates the gateway virtual machine (VM) software. The request immediately
-// triggers the software update. When you make this request, you get a 200 OK
-// success response immediately. However, it might take some time for the update to
-// complete. You can call DescribeGatewayInformation to verify the gateway is in
-// the STATE_RUNNING state. A software update forces a system restart of your
-// gateway. You can minimize the chance of any disruption to your applications by
-// increasing your iSCSI Initiators' timeouts. For more information about
-// increasing iSCSI Initiator timeouts for Windows and Linux, see Customizing your
-// Windows iSCSI settings (https://docs.aws.amazon.com/storagegateway/latest/userguide/ConfiguringiSCSIClientInitiatorWindowsClient.html#CustomizeWindowsiSCSISettings)
-// and Customizing your Linux iSCSI settings (https://docs.aws.amazon.com/storagegateway/latest/userguide/ConfiguringiSCSIClientInitiatorRedHatClient.html#CustomizeLinuxiSCSISettings)
-// , respectively.
+// triggers the software update.
+//
+// When you make this request, you get a 200 OK success response immediately.
+// However, it might take some time for the update to complete. You can call DescribeGatewayInformationto
+// verify the gateway is in the STATE_RUNNING state.
+//
+// A software update forces a system restart of your gateway. You can minimize the
+// chance of any disruption to your applications by increasing your iSCSI
+// Initiators' timeouts. For more information about increasing iSCSI Initiator
+// timeouts for Windows and Linux, see [Customizing your Windows iSCSI settings]and [Customizing your Linux iSCSI settings], respectively.
+//
+// [Customizing your Linux iSCSI settings]: https://docs.aws.amazon.com/storagegateway/latest/userguide/ConfiguringiSCSIClientInitiatorRedHatClient.html#CustomizeLinuxiSCSISettings
+// [Customizing your Windows iSCSI settings]: https://docs.aws.amazon.com/storagegateway/latest/userguide/ConfiguringiSCSIClientInitiatorWindowsClient.html#CustomizeWindowsiSCSISettings
 func (c *Client) UpdateGatewaySoftwareNow(ctx context.Context, params *UpdateGatewaySoftwareNowInput, optFns ...func(*Options)) (*UpdateGatewaySoftwareNowOutput, error) {
 	if params == nil {
 		params = &UpdateGatewaySoftwareNowInput{}
@@ -41,8 +43,8 @@ func (c *Client) UpdateGatewaySoftwareNow(ctx context.Context, params *UpdateGat
 // update.
 type UpdateGatewaySoftwareNowInput struct {
 
-	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation
-	// to return a list of gateways for your account and Amazon Web Services Region.
+	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation to return a
+	// list of gateways for your account and Amazon Web Services Region.
 	//
 	// This member is required.
 	GatewayARN *string
@@ -54,8 +56,8 @@ type UpdateGatewaySoftwareNowInput struct {
 // updated.
 type UpdateGatewaySoftwareNowOutput struct {
 
-	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation
-	// to return a list of gateways for your account and Amazon Web Services Region.
+	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation to return a
+	// list of gateways for your account and Amazon Web Services Region.
 	GatewayARN *string
 
 	// Metadata pertaining to the operation's result.
@@ -86,25 +88,25 @@ func (c *Client) addOperationUpdateGatewaySoftwareNowMiddlewares(stack *middlewa
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -119,13 +121,16 @@ func (c *Client) addOperationUpdateGatewaySoftwareNowMiddlewares(stack *middlewa
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpUpdateGatewaySoftwareNowValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateGatewaySoftwareNow(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

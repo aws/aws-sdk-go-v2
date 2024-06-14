@@ -140,6 +140,12 @@ var defaultPartitions = endpoints.Partitions{
 		IsRegionalized: true,
 		Endpoints: endpoints.Endpoints{
 			endpoints.EndpointKey{
+				Region: "af-south-1",
+			}: endpoints.Endpoint{},
+			endpoints.EndpointKey{
+				Region: "ap-east-1",
+			}: endpoints.Endpoint{},
+			endpoints.EndpointKey{
 				Region: "ap-northeast-1",
 			}: endpoints.Endpoint{},
 			endpoints.EndpointKey{
@@ -164,6 +170,9 @@ var defaultPartitions = endpoints.Partitions{
 				Region: "eu-north-1",
 			}: endpoints.Endpoint{},
 			endpoints.EndpointKey{
+				Region: "eu-south-1",
+			}: endpoints.Endpoint{},
+			endpoints.EndpointKey{
 				Region: "eu-west-1",
 			}: endpoints.Endpoint{},
 			endpoints.EndpointKey{
@@ -173,6 +182,9 @@ var defaultPartitions = endpoints.Partitions{
 				Region: "eu-west-3",
 			}: endpoints.Endpoint{},
 			endpoints.EndpointKey{
+				Region: "me-south-1",
+			}: endpoints.Endpoint{},
+			endpoints.EndpointKey{
 				Region: "sa-east-1",
 			}: endpoints.Endpoint{},
 			endpoints.EndpointKey{
@@ -180,6 +192,9 @@ var defaultPartitions = endpoints.Partitions{
 			}: endpoints.Endpoint{},
 			endpoints.EndpointKey{
 				Region: "us-east-2",
+			}: endpoints.Endpoint{},
+			endpoints.EndpointKey{
+				Region: "us-west-1",
 			}: endpoints.Endpoint{},
 			endpoints.EndpointKey{
 				Region: "us-west-2",

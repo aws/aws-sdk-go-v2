@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/ivs/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -32,14 +31,16 @@ func (c *Client) CreatePlaybackRestrictionPolicy(ctx context.Context, params *Cr
 type CreatePlaybackRestrictionPolicyInput struct {
 
 	// A list of country codes that control geoblocking restriction. Allowed values
-	// are the officially assigned ISO 3166-1 alpha-2 (https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)
-	// codes. Default: All countries (an empty array).
+	// are the officially assigned [ISO 3166-1 alpha-2]codes. Default: All countries (an empty array).
+	//
+	// [ISO 3166-1 alpha-2]: https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2
 	AllowedCountries []string
 
 	// A list of origin sites that control CORS restriction. Allowed values are the
-	// same as valid values of the Origin header defined at
-	// https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Origin (https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Origin)
-	// . Default: All origins (an empty array).
+	// same as valid values of the Origin header defined at [https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Origin]. Default: All origins (an
+	// empty array).
+	//
+	// [https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Origin]: https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Origin
 	AllowedOrigins []string
 
 	// Whether channel playback is constrained by origin site. Default: false .
@@ -48,11 +49,12 @@ type CreatePlaybackRestrictionPolicyInput struct {
 	// Playback-restriction-policy name. The value does not need to be unique.
 	Name *string
 
-	// Array of 1-50 maps, each of the form string:string (key:value) . See Tagging
-	// Amazon Web Services Resources (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html)
-	// for more information, including restrictions that apply to tags and "Tag naming
-	// limits and requirements"; Amazon IVS has no service-specific constraints beyond
-	// what is documented there.
+	// Array of 1-50 maps, each of the form string:string (key:value) . See [Tagging Amazon Web Services Resources] for more
+	// information, including restrictions that apply to tags and "Tag naming limits
+	// and requirements"; Amazon IVS has no service-specific constraints beyond what is
+	// documented there.
+	//
+	// [Tagging Amazon Web Services Resources]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
 	Tags map[string]string
 
 	noSmithyDocumentSerde
@@ -91,25 +93,25 @@ func (c *Client) addOperationCreatePlaybackRestrictionPolicyMiddlewares(stack *m
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -124,10 +126,13 @@ func (c *Client) addOperationCreatePlaybackRestrictionPolicyMiddlewares(stack *m
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreatePlaybackRestrictionPolicy(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

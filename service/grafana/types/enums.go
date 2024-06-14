@@ -15,8 +15,9 @@ const (
 )
 
 // Values returns all known values for AccountAccessType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (AccountAccessType) Values() []AccountAccessType {
 	return []AccountAccessType{
 		"CURRENT_ACCOUNT",
@@ -37,6 +38,7 @@ const (
 
 // Values returns all known values for AuthenticationProviderTypes. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (AuthenticationProviderTypes) Values() []AuthenticationProviderTypes {
 	return []AuthenticationProviderTypes{
@@ -70,8 +72,9 @@ const (
 )
 
 // Values returns all known values for DataSourceType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (DataSourceType) Values() []DataSourceType {
 	return []DataSourceType{
 		"AMAZON_OPENSEARCH_SERVICE",
@@ -97,8 +100,9 @@ const (
 )
 
 // Values returns all known values for LicenseType. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (LicenseType) Values() []LicenseType {
 	return []LicenseType{
 		"ENTERPRISE",
@@ -116,6 +120,7 @@ const (
 
 // Values returns all known values for NotificationDestinationType. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (NotificationDestinationType) Values() []NotificationDestinationType {
 	return []NotificationDestinationType{
@@ -134,8 +139,9 @@ const (
 )
 
 // Values returns all known values for PermissionType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (PermissionType) Values() []PermissionType {
 	return []PermissionType{
 		"CUSTOMER_MANAGED",
@@ -156,8 +162,9 @@ const (
 )
 
 // Values returns all known values for Role. Note that this can be expanded in the
-// future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (Role) Values() []Role {
 	return []Role{
 		"ADMIN",
@@ -177,8 +184,9 @@ const (
 )
 
 // Values returns all known values for SamlConfigurationStatus. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (SamlConfigurationStatus) Values() []SamlConfigurationStatus {
 	return []SamlConfigurationStatus{
 		"CONFIGURED",
@@ -197,8 +205,9 @@ const (
 )
 
 // Values returns all known values for UpdateAction. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (UpdateAction) Values() []UpdateAction {
 	return []UpdateAction{
 		"ADD",
@@ -217,8 +226,9 @@ const (
 )
 
 // Values returns all known values for UserType. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (UserType) Values() []UserType {
 	return []UserType{
 		"SSO_USER",
@@ -238,6 +248,7 @@ const (
 
 // Values returns all known values for ValidationExceptionReason. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (ValidationExceptionReason) Values() []ValidationExceptionReason {
 	return []ValidationExceptionReason{
@@ -281,8 +292,9 @@ const (
 )
 
 // Values returns all known values for WorkspaceStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (WorkspaceStatus) Values() []WorkspaceStatus {
 	return []WorkspaceStatus{
 		"ACTIVE",

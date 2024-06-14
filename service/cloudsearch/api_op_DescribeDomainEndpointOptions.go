@@ -6,16 +6,16 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/cloudsearch/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Returns the domain's endpoint options, specifically whether all requests to the
-// domain must arrive over HTTPS. For more information, see Configuring Domain
-// Endpoint Options (http://docs.aws.amazon.com/cloudsearch/latest/developerguide/configuring-domain-endpoint-options.html)
-// in the Amazon CloudSearch Developer Guide.
+// domain must arrive over HTTPS. For more information, see [Configuring Domain Endpoint Options]in the Amazon
+// CloudSearch Developer Guide.
+//
+// [Configuring Domain Endpoint Options]: http://docs.aws.amazon.com/cloudsearch/latest/developerguide/configuring-domain-endpoint-options.html
 func (c *Client) DescribeDomainEndpointOptions(ctx context.Context, params *DescribeDomainEndpointOptionsInput, optFns ...func(*Options)) (*DescribeDomainEndpointOptionsOutput, error) {
 	if params == nil {
 		params = &DescribeDomainEndpointOptionsInput{}
@@ -31,9 +31,9 @@ func (c *Client) DescribeDomainEndpointOptions(ctx context.Context, params *Desc
 	return out, nil
 }
 
-// Container for the parameters to the DescribeDomainEndpointOptions operation.
-// Specify the name of the domain you want to describe. To show the active
-// configuration and exclude any pending changes, set the Deployed option to true .
+// Container for the parameters to the DescribeDomainEndpointOptions operation. Specify the name of the domain
+// you want to describe. To show the active configuration and exclude any pending
+// changes, set the Deployed option to true .
 type DescribeDomainEndpointOptionsInput struct {
 
 	// A string that represents the name of a domain.
@@ -83,25 +83,25 @@ func (c *Client) addOperationDescribeDomainEndpointOptionsMiddlewares(stack *mid
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -116,13 +116,16 @@ func (c *Client) addOperationDescribeDomainEndpointOptionsMiddlewares(stack *mid
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDescribeDomainEndpointOptionsValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeDomainEndpointOptions(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/workspaces/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -16,16 +15,19 @@ import (
 // that account has permission to associate the connection alias with a directory.
 // If the association permission is granted, the connection alias is shared with
 // that account. If the association permission is revoked, the connection alias is
-// unshared with the account. For more information, see Cross-Region Redirection
-// for Amazon WorkSpaces (https://docs.aws.amazon.com/workspaces/latest/adminguide/cross-region-redirection.html)
-// .
-//   - Before performing this operation, call DescribeConnectionAliases (https://docs.aws.amazon.com/workspaces/latest/api/API_DescribeConnectionAliases.html)
-//     to make sure that the current state of the connection alias is CREATED .
+// unshared with the account. For more information, see [Cross-Region Redirection for Amazon WorkSpaces].
+//
+//   - Before performing this operation, call [DescribeConnectionAliases]to make sure that the current state
+//     of the connection alias is CREATED .
+//
 //   - To delete a connection alias that has been shared, the shared account must
 //     first disassociate the connection alias from any directories it has been
 //     associated with. Then you must unshare the connection alias from the account it
 //     has been shared with. You can delete a connection alias only after it is no
 //     longer shared with any accounts or associated with any directories.
+//
+// [DescribeConnectionAliases]: https://docs.aws.amazon.com/workspaces/latest/api/API_DescribeConnectionAliases.html
+// [Cross-Region Redirection for Amazon WorkSpaces]: https://docs.aws.amazon.com/workspaces/latest/adminguide/cross-region-redirection.html
 func (c *Client) UpdateConnectionAliasPermission(ctx context.Context, params *UpdateConnectionAliasPermissionInput, optFns ...func(*Options)) (*UpdateConnectionAliasPermissionOutput, error) {
 	if params == nil {
 		params = &UpdateConnectionAliasPermissionInput{}
@@ -86,25 +88,25 @@ func (c *Client) addOperationUpdateConnectionAliasPermissionMiddlewares(stack *m
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -119,13 +121,16 @@ func (c *Client) addOperationUpdateConnectionAliasPermissionMiddlewares(stack *m
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpUpdateConnectionAliasPermissionValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateConnectionAliasPermission(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

@@ -6,13 +6,13 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/rekognition/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Allows you to update a stream processor. You can change some settings and
+//	Allows you to update a stream processor. You can change some settings and
+//
 // regions of interest and delete certain parameters.
 func (c *Client) UpdateStreamProcessor(ctx context.Context, params *UpdateStreamProcessorInput, optFns ...func(*Options)) (*UpdateStreamProcessorOutput, error) {
 	if params == nil {
@@ -31,26 +31,27 @@ func (c *Client) UpdateStreamProcessor(ctx context.Context, params *UpdateStream
 
 type UpdateStreamProcessorInput struct {
 
-	// Name of the stream processor that you want to update.
+	//  Name of the stream processor that you want to update.
 	//
 	// This member is required.
 	Name *string
 
-	// Shows whether you are sharing data with Rekognition to improve model
+	//  Shows whether you are sharing data with Rekognition to improve model
 	// performance. You can choose this option at the account level or on a per-stream
 	// basis. Note that if you opt out at the account level this setting is ignored on
 	// individual streams.
 	DataSharingPreferenceForUpdate *types.StreamProcessorDataSharingPreference
 
-	// A list of parameters you want to delete from the stream processor.
+	//  A list of parameters you want to delete from the stream processor.
 	ParametersToDelete []types.StreamProcessorParameterToDelete
 
-	// Specifies locations in the frames where Amazon Rekognition checks for objects
+	//  Specifies locations in the frames where Amazon Rekognition checks for objects
 	// or people. This is an optional parameter for label detection stream processors.
 	RegionsOfInterestForUpdate []types.RegionOfInterest
 
-	// The stream processor settings that you want to update. Label detection settings
-	// can be updated to detect different labels with a different minimum confidence.
+	//  The stream processor settings that you want to update. Label detection
+	// settings can be updated to detect different labels with a different minimum
+	// confidence.
 	SettingsForUpdate *types.StreamProcessorSettingsForUpdate
 
 	noSmithyDocumentSerde
@@ -85,25 +86,25 @@ func (c *Client) addOperationUpdateStreamProcessorMiddlewares(stack *middleware.
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -118,13 +119,16 @@ func (c *Client) addOperationUpdateStreamProcessorMiddlewares(stack *middleware.
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpUpdateStreamProcessorValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateStreamProcessor(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

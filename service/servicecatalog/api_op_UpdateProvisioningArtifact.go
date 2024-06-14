@@ -6,15 +6,16 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/servicecatalog/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Updates the specified provisioning artifact (also known as a version) for the
-// specified product. You cannot update a provisioning artifact for a product that
-// was shared with you.
+// specified product.
+//
+// You cannot update a provisioning artifact for a product that was shared with
+// you.
 func (c *Client) UpdateProvisioningArtifact(ctx context.Context, params *UpdateProvisioningArtifactInput, optFns ...func(*Options)) (*UpdateProvisioningArtifactOutput, error) {
 	if params == nil {
 		params = &UpdateProvisioningArtifactInput{}
@@ -43,24 +44,30 @@ type UpdateProvisioningArtifactInput struct {
 	ProvisioningArtifactId *string
 
 	// The language code.
+	//
 	//   - jp - Japanese
+	//
 	//   - zh - Chinese
 	AcceptLanguage *string
 
-	// Indicates whether the product version is active. Inactive provisioning
-	// artifacts are invisible to end users. End users cannot launch or update a
-	// provisioned product from an inactive provisioning artifact.
+	// Indicates whether the product version is active.
+	//
+	// Inactive provisioning artifacts are invisible to end users. End users cannot
+	// launch or update a provisioned product from an inactive provisioning artifact.
 	Active *bool
 
 	// The updated description of the provisioning artifact.
 	Description *string
 
 	// Information set by the administrator to provide guidance to end users about
-	// which provisioning artifacts to use. The DEFAULT value indicates that the
-	// product version is active. The administrator can set the guidance to DEPRECATED
-	// to inform users that the product version is deprecated. Users are able to make
-	// updates to a provisioned product of a deprecated version but cannot launch new
-	// provisioned products using a deprecated version.
+	// which provisioning artifacts to use.
+	//
+	// The DEFAULT value indicates that the product version is active.
+	//
+	// The administrator can set the guidance to DEPRECATED to inform users that the
+	// product version is deprecated. Users are able to make updates to a provisioned
+	// product of a deprecated version but cannot launch new provisioned products using
+	// a deprecated version.
 	Guidance types.ProvisioningArtifactGuidance
 
 	// The updated name of the provisioning artifact.
@@ -108,25 +115,25 @@ func (c *Client) addOperationUpdateProvisioningArtifactMiddlewares(stack *middle
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -141,13 +148,16 @@ func (c *Client) addOperationUpdateProvisioningArtifactMiddlewares(stack *middle
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpUpdateProvisioningArtifactValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateProvisioningArtifact(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

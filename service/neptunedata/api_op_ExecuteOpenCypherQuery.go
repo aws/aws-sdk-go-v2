@@ -6,33 +6,43 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/neptunedata/document"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Executes an openCypher query. See Accessing the Neptune Graph with openCypher (https://docs.aws.amazon.com/neptune/latest/userguide/access-graph-opencypher.html)
-// for more information. Neptune supports building graph applications using
-// openCypher, which is currently one of the most popular query languages among
-// developers working with graph databases. Developers, business analysts, and data
-// scientists like openCypher's declarative, SQL-inspired syntax because it
-// provides a familiar structure in which to querying property graphs. The
-// openCypher language was originally developed by Neo4j, then open-sourced in 2015
-// and contributed to the openCypher project (https://opencypher.org/) under an
-// Apache 2 open-source license. Note that when invoking this operation in a
-// Neptune cluster that has IAM authentication enabled, the IAM user or role making
-// the request must have a policy attached that allows one of the following IAM
-// actions in that cluster, depending on the query:
-//   - neptune-db:ReadDataViaQuery (https://docs.aws.amazon.com/neptune/latest/userguide/iam-dp-actions.html#readdataviaquery)
-//   - neptune-db:WriteDataViaQuery (https://docs.aws.amazon.com/neptune/latest/userguide/iam-dp-actions.html#writedataviaquery)
-//   - neptune-db:DeleteDataViaQuery (https://docs.aws.amazon.com/neptune/latest/userguide/iam-dp-actions.html#deletedataviaquery)
+// Executes an openCypher query. See [Accessing the Neptune Graph with openCypher] for more information.
 //
-// Note also that the neptune-db:QueryLanguage:OpenCypher (https://docs.aws.amazon.com/neptune/latest/userguide/iam-data-condition-keys.html#iam-neptune-condition-keys)
-// IAM condition key can be used in the policy document to restrict the use of
-// openCypher queries (see Condition keys available in Neptune IAM data-access
-// policy statements (https://docs.aws.amazon.com/neptune/latest/userguide/iam-data-condition-keys.html)
-// ).
+// Neptune supports building graph applications using openCypher, which is
+// currently one of the most popular query languages among developers working with
+// graph databases. Developers, business analysts, and data scientists like
+// openCypher's declarative, SQL-inspired syntax because it provides a familiar
+// structure in which to querying property graphs.
+//
+// The openCypher language was originally developed by Neo4j, then open-sourced in
+// 2015 and contributed to the [openCypher project]under an Apache 2 open-source license.
+//
+// Note that when invoking this operation in a Neptune cluster that has IAM
+// authentication enabled, the IAM user or role making the request must have a
+// policy attached that allows one of the following IAM actions in that cluster,
+// depending on the query:
+//
+// [neptune-db:ReadDataViaQuery]
+//
+// [neptune-db:WriteDataViaQuery]
+//
+// [neptune-db:DeleteDataViaQuery]
+//
+// Note also that the [neptune-db:QueryLanguage:OpenCypher] IAM condition key can be used in the policy document to
+// restrict the use of openCypher queries (see [Condition keys available in Neptune IAM data-access policy statements]).
+//
+// [neptune-db:DeleteDataViaQuery]: https://docs.aws.amazon.com/neptune/latest/userguide/iam-dp-actions.html#deletedataviaquery
+// [Accessing the Neptune Graph with openCypher]: https://docs.aws.amazon.com/neptune/latest/userguide/access-graph-opencypher.html
+// [Condition keys available in Neptune IAM data-access policy statements]: https://docs.aws.amazon.com/neptune/latest/userguide/iam-data-condition-keys.html
+// [openCypher project]: https://opencypher.org/
+// [neptune-db:ReadDataViaQuery]: https://docs.aws.amazon.com/neptune/latest/userguide/iam-dp-actions.html#readdataviaquery
+// [neptune-db:WriteDataViaQuery]: https://docs.aws.amazon.com/neptune/latest/userguide/iam-dp-actions.html#writedataviaquery
+// [neptune-db:QueryLanguage:OpenCypher]: https://docs.aws.amazon.com/neptune/latest/userguide/iam-data-condition-keys.html#iam-neptune-condition-keys
 func (c *Client) ExecuteOpenCypherQuery(ctx context.Context, params *ExecuteOpenCypherQueryInput, optFns ...func(*Options)) (*ExecuteOpenCypherQueryOutput, error) {
 	if params == nil {
 		params = &ExecuteOpenCypherQueryInput{}
@@ -55,9 +65,9 @@ type ExecuteOpenCypherQueryInput struct {
 	// This member is required.
 	OpenCypherQuery *string
 
-	// The openCypher query parameters for query execution. See Examples of openCypher
-	// parameterized queries (https://docs.aws.amazon.com/neptune/latest/userguide/opencypher-parameterized-queries.html)
-	// for more information.
+	// The openCypher query parameters for query execution. See [Examples of openCypher parameterized queries] for more information.
+	//
+	// [Examples of openCypher parameterized queries]: https://docs.aws.amazon.com/neptune/latest/userguide/opencypher-parameterized-queries.html
 	Parameters *string
 
 	noSmithyDocumentSerde
@@ -98,25 +108,25 @@ func (c *Client) addOperationExecuteOpenCypherQueryMiddlewares(stack *middleware
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -131,13 +141,16 @@ func (c *Client) addOperationExecuteOpenCypherQueryMiddlewares(stack *middleware
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpExecuteOpenCypherQueryValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opExecuteOpenCypherQuery(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

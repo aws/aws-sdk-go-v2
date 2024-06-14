@@ -140,6 +140,9 @@
                 },
                 {
                     "target": "com.amazonaws.sfn#UpdateStateMachineAlias"
+                },
+                {
+                    "target": "com.amazonaws.sfn#ValidateStateMachineDefinition"
                 }
             ],
             "traits": {
@@ -5304,6 +5307,9 @@
                 },
                 {
                     "target": "com.amazonaws.sfn#InvalidArn"
+                },
+                {
+                    "target": "com.amazonaws.sfn#ValidationException"
                 }
             ],
             "traits": {
@@ -7191,6 +7197,144 @@
             },
             "traits": {
                 "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.sfn#ValidateStateMachineDefinition": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.sfn#ValidateStateMachineDefinitionInput"
+            },
+            "output": {
+                "target": "com.amazonaws.sfn#ValidateStateMachineDefinitionOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.sfn#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Validates the syntax of a state machine definition.</p>\n         <p>You can validate that a state machine definition is correct without \n            creating a state machine resource. Step Functions will implicitly perform the same\n            syntax check when you invoke <code>CreateStateMachine</code> and\n                <code>UpdateStateMachine</code>. State machine definitions are specified using a\n            JSON-based, structured language. For more information on Amazon States Language see <a href=\"https://docs.aws.amazon.com/step-functions/latest/dg/concepts-amazon-states-language.html\">Amazon States Language</a> (ASL). </p>\n         <p>Suggested uses for <code>ValidateStateMachineDefinition</code>:</p>\n         <ul>\n            <li>\n               <p>Integrate automated checks into your code review or Continuous Integration\n                    (CI) process to validate state machine definitions before starting\n                    deployments.</p>\n            </li>\n            <li>\n               <p>Run the validation from a Git pre-commit hook to check your state machine\n                    definitions before committing them to your source repository.</p>\n            </li>\n         </ul>\n         <note>\n            <p>Errors found in the state machine definition will be returned in the response as a list of <b>diagnostic elements</b>, rather than raise an exception.</p>\n         </note>"
+            }
+        },
+        "com.amazonaws.sfn#ValidateStateMachineDefinitionCode": {
+            "type": "string"
+        },
+        "com.amazonaws.sfn#ValidateStateMachineDefinitionDiagnostic": {
+            "type": "structure",
+            "members": {
+                "severity": {
+                    "target": "com.amazonaws.sfn#ValidateStateMachineDefinitionSeverity",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A value of <code>ERROR</code> means that you cannot create or update a state machine with this definition.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "code": {
+                    "target": "com.amazonaws.sfn#ValidateStateMachineDefinitionCode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Identifying code for the diagnostic.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "message": {
+                    "target": "com.amazonaws.sfn#ValidateStateMachineDefinitionMessage",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Message describing the diagnostic condition.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "location": {
+                    "target": "com.amazonaws.sfn#ValidateStateMachineDefinitionLocation",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Location of the issue in the state machine, if available.</p>\n         <p>For errors specific to a field, the location could be in the format: <code>/States/<StateName>/<FieldName></code>, for example: <code>/States/FailState/ErrorPath</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes an error found during validation. Validation errors found in the definition\n            return in the response as <b>diagnostic elements</b>, rather\n            than raise an exception.</p>"
+            }
+        },
+        "com.amazonaws.sfn#ValidateStateMachineDefinitionDiagnosticList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.sfn#ValidateStateMachineDefinitionDiagnostic"
+            }
+        },
+        "com.amazonaws.sfn#ValidateStateMachineDefinitionInput": {
+            "type": "structure",
+            "members": {
+                "definition": {
+                    "target": "com.amazonaws.sfn#Definition",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon States Language definition of the state machine. For more information, see\n            <a href=\"https://docs.aws.amazon.com/step-functions/latest/dg/concepts-amazon-states-language.html\">Amazon States Language</a> (ASL).</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "type": {
+                    "target": "com.amazonaws.sfn#StateMachineType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The target type of state machine for this definition. The default is <code>STANDARD</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.sfn#ValidateStateMachineDefinitionLocation": {
+            "type": "string"
+        },
+        "com.amazonaws.sfn#ValidateStateMachineDefinitionMessage": {
+            "type": "string"
+        },
+        "com.amazonaws.sfn#ValidateStateMachineDefinitionOutput": {
+            "type": "structure",
+            "members": {
+                "result": {
+                    "target": "com.amazonaws.sfn#ValidateStateMachineDefinitionResultCode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The result value will be <code>OK</code> when no syntax errors are found, or\n                <code>FAIL</code> if the workflow definition does not pass verification.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "diagnostics": {
+                    "target": "com.amazonaws.sfn#ValidateStateMachineDefinitionDiagnosticList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If the result is <code>OK</code>, this field will be empty. When there are errors,\n            this field will contain an array of <b>Diagnostic</b> objects\n            to help you troubleshoot.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.sfn#ValidateStateMachineDefinitionResultCode": {
+            "type": "enum",
+            "members": {
+                "OK": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "OK"
+                    }
+                },
+                "FAIL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FAIL"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.sfn#ValidateStateMachineDefinitionSeverity": {
+            "type": "enum",
+            "members": {
+                "ERROR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ERROR"
+                    }
+                }
             }
         },
         "com.amazonaws.sfn#ValidationException": {

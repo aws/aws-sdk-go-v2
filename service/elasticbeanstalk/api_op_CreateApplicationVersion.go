@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/elasticbeanstalk/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -14,15 +13,22 @@ import (
 
 // Creates an application version for the specified application. You can create an
 // application version from a source bundle in Amazon S3, a commit in AWS
-// CodeCommit, or the output of an AWS CodeBuild build as follows: Specify a commit
-// in an AWS CodeCommit repository with SourceBuildInformation . Specify a build in
-// an AWS CodeBuild with SourceBuildInformation and BuildConfiguration . Specify a
-// source bundle in S3 with SourceBundle Omit both SourceBuildInformation and
-// SourceBundle to use the default sample application. After you create an
-// application version with a specified Amazon S3 bucket and key location, you
-// can't change that Amazon S3 location. If you change the Amazon S3 location, you
-// receive an exception when you attempt to launch an environment from the
-// application version.
+// CodeCommit, or the output of an AWS CodeBuild build as follows:
+//
+// Specify a commit in an AWS CodeCommit repository with SourceBuildInformation .
+//
+// Specify a build in an AWS CodeBuild with SourceBuildInformation and
+// BuildConfiguration .
+//
+// # Specify a source bundle in S3 with SourceBundle
+//
+// Omit both SourceBuildInformation and SourceBundle to use the default sample
+// application.
+//
+// After you create an application version with a specified Amazon S3 bucket and
+// key location, you can't change that Amazon S3 location. If you change the Amazon
+// S3 location, you receive an exception when you attempt to launch an environment
+// from the application version.
 func (c *Client) CreateApplicationVersion(ctx context.Context, params *CreateApplicationVersionInput, optFns ...func(*Options)) (*CreateApplicationVersionOutput, error) {
 	if params == nil {
 		params = &CreateApplicationVersionInput{}
@@ -40,15 +46,17 @@ func (c *Client) CreateApplicationVersion(ctx context.Context, params *CreateApp
 
 type CreateApplicationVersionInput struct {
 
-	// The name of the application. If no application is found with this name, and
+	//  The name of the application. If no application is found with this name, and
 	// AutoCreateApplication is false , returns an InvalidParameterValue error.
 	//
 	// This member is required.
 	ApplicationName *string
 
-	// A label identifying this version. Constraint: Must be unique per application.
-	// If an application version already exists with this label for the specified
-	// application, AWS Elastic Beanstalk returns an InvalidParameterValue error.
+	// A label identifying this version.
+	//
+	// Constraint: Must be unique per application. If an application version already
+	// exists with this label for the specified application, AWS Elastic Beanstalk
+	// returns an InvalidParameterValue error.
 	//
 	// This member is required.
 	VersionLabel *string
@@ -66,12 +74,15 @@ type CreateApplicationVersionInput struct {
 	// Pre-processes and validates the environment manifest ( env.yaml ) and
 	// configuration files ( *.config files in the .ebextensions folder) in the source
 	// bundle. Validating configuration files can identify issues prior to deploying
-	// the application version to an environment. You must turn processing on for
-	// application versions that you create using AWS CodeBuild or AWS CodeCommit. For
-	// application versions built from a source bundle in Amazon S3, processing is
-	// optional. The Process option validates Elastic Beanstalk configuration files.
-	// It doesn't validate your application's configuration files, like proxy server or
-	// Docker configuration.
+	// the application version to an environment.
+	//
+	// You must turn processing on for application versions that you create using AWS
+	// CodeBuild or AWS CodeCommit. For application versions built from a source bundle
+	// in Amazon S3, processing is optional.
+	//
+	// The Process option validates Elastic Beanstalk configuration files. It doesn't
+	// validate your application's configuration files, like proxy server or Docker
+	// configuration.
 	Process *bool
 
 	// Specify a commit in an AWS CodeCommit Git repository to use as the source code
@@ -79,16 +90,19 @@ type CreateApplicationVersionInput struct {
 	SourceBuildInformation *types.SourceBuildInformation
 
 	// The Amazon S3 bucket and key that identify the location of the source bundle
-	// for this version. The Amazon S3 bucket must be in the same region as the
-	// environment. Specify a source bundle in S3 or a commit in an AWS CodeCommit
-	// repository (with SourceBuildInformation ), but not both. If neither SourceBundle
-	// nor SourceBuildInformation are provided, Elastic Beanstalk uses a sample
-	// application.
+	// for this version.
+	//
+	// The Amazon S3 bucket must be in the same region as the environment.
+	//
+	// Specify a source bundle in S3 or a commit in an AWS CodeCommit repository (with
+	// SourceBuildInformation ), but not both. If neither SourceBundle nor
+	// SourceBuildInformation are provided, Elastic Beanstalk uses a sample application.
 	SourceBundle *types.S3Location
 
-	// Specifies the tags applied to the application version. Elastic Beanstalk
-	// applies these tags only to the application version. Environments that use the
-	// application version don't inherit the tags.
+	// Specifies the tags applied to the application version.
+	//
+	// Elastic Beanstalk applies these tags only to the application version.
+	// Environments that use the application version don't inherit the tags.
 	Tags []types.Tag
 
 	noSmithyDocumentSerde
@@ -97,7 +111,7 @@ type CreateApplicationVersionInput struct {
 // Result message wrapping a single description of an application version.
 type CreateApplicationVersionOutput struct {
 
-	// The ApplicationVersionDescription of the application version.
+	//  The ApplicationVersionDescription of the application version.
 	ApplicationVersion *types.ApplicationVersionDescription
 
 	// Metadata pertaining to the operation's result.
@@ -128,25 +142,25 @@ func (c *Client) addOperationCreateApplicationVersionMiddlewares(stack *middlewa
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -161,13 +175,16 @@ func (c *Client) addOperationCreateApplicationVersionMiddlewares(stack *middlewa
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpCreateApplicationVersionValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateApplicationVersion(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

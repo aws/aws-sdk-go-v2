@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/ses/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -16,12 +15,15 @@ import (
 // associated with configuration sets, which enable you to publish email sending
 // events to Amazon CloudWatch, Amazon Kinesis Firehose, or Amazon Simple
 // Notification Service (Amazon SNS). For information about using configuration
-// sets, see Monitoring Your Amazon SES Sending Activity (https://docs.aws.amazon.com/ses/latest/dg/monitor-sending-activity.html)
-// in the Amazon SES Developer Guide. When you create or update an event
-// destination, you must provide one, and only one, destination. The destination
-// can be Amazon CloudWatch, Amazon Kinesis Firehose, or Amazon Simple Notification
-// Service (Amazon SNS). You can execute this operation no more than once per
-// second.
+// sets, see [Monitoring Your Amazon SES Sending Activity]in the Amazon SES Developer Guide.
+//
+// When you create or update an event destination, you must provide one, and only
+// one, destination. The destination can be Amazon CloudWatch, Amazon Kinesis
+// Firehose, or Amazon Simple Notification Service (Amazon SNS).
+//
+// You can execute this operation no more than once per second.
+//
+// [Monitoring Your Amazon SES Sending Activity]: https://docs.aws.amazon.com/ses/latest/dg/monitor-sending-activity.html
 func (c *Client) UpdateConfigurationSetEventDestination(ctx context.Context, params *UpdateConfigurationSetEventDestinationInput, optFns ...func(*Options)) (*UpdateConfigurationSetEventDestinationOutput, error) {
 	if params == nil {
 		params = &UpdateConfigurationSetEventDestinationInput{}
@@ -39,8 +41,9 @@ func (c *Client) UpdateConfigurationSetEventDestination(ctx context.Context, par
 
 // Represents a request to update the event destination of a configuration set.
 // Configuration sets enable you to publish email sending events. For information
-// about using configuration sets, see the Amazon SES Developer Guide (https://docs.aws.amazon.com/ses/latest/dg/monitor-sending-activity.html)
-// .
+// about using configuration sets, see the [Amazon SES Developer Guide].
+//
+// [Amazon SES Developer Guide]: https://docs.aws.amazon.com/ses/latest/dg/monitor-sending-activity.html
 type UpdateConfigurationSetEventDestinationInput struct {
 
 	// The name of the configuration set that contains the event destination.
@@ -86,25 +89,25 @@ func (c *Client) addOperationUpdateConfigurationSetEventDestinationMiddlewares(s
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -119,13 +122,16 @@ func (c *Client) addOperationUpdateConfigurationSetEventDestinationMiddlewares(s
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpUpdateConfigurationSetEventDestinationValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateConfigurationSetEventDestination(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

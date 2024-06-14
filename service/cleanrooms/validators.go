@@ -30,6 +30,26 @@ func (m *validateOpBatchGetCollaborationAnalysisTemplate) HandleInitialize(ctx c
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpBatchGetSchemaAnalysisRule struct {
+}
+
+func (*validateOpBatchGetSchemaAnalysisRule) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpBatchGetSchemaAnalysisRule) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*BatchGetSchemaAnalysisRuleInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpBatchGetSchemaAnalysisRuleInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpBatchGetSchema struct {
 }
 
@@ -1194,6 +1214,10 @@ func addOpBatchGetCollaborationAnalysisTemplateValidationMiddleware(stack *middl
 	return stack.Initialize.Add(&validateOpBatchGetCollaborationAnalysisTemplate{}, middleware.After)
 }
 
+func addOpBatchGetSchemaAnalysisRuleValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpBatchGetSchemaAnalysisRule{}, middleware.After)
+}
+
 func addOpBatchGetSchemaValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpBatchGetSchema{}, middleware.After)
 }
@@ -2027,6 +2051,41 @@ func validateQueryComputePaymentConfig(v *types.QueryComputePaymentConfig) error
 	}
 }
 
+func validateSchemaAnalysisRuleRequest(v *types.SchemaAnalysisRuleRequest) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SchemaAnalysisRuleRequest"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if len(v.Type) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Type"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateSchemaAnalysisRuleRequestList(v []types.SchemaAnalysisRuleRequest) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SchemaAnalysisRuleRequestList"}
+	for i := range v {
+		if err := validateSchemaAnalysisRuleRequest(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateTableReference(v types.TableReference) error {
 	if v == nil {
 		return nil
@@ -2056,6 +2115,28 @@ func validateOpBatchGetCollaborationAnalysisTemplateInput(v *BatchGetCollaborati
 	}
 	if v.AnalysisTemplateArns == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AnalysisTemplateArns"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpBatchGetSchemaAnalysisRuleInput(v *BatchGetSchemaAnalysisRuleInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "BatchGetSchemaAnalysisRuleInput"}
+	if v.CollaborationIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CollaborationIdentifier"))
+	}
+	if v.SchemaAnalysisRuleRequests == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SchemaAnalysisRuleRequests"))
+	} else if v.SchemaAnalysisRuleRequests != nil {
+		if err := validateSchemaAnalysisRuleRequestList(v.SchemaAnalysisRuleRequests); err != nil {
+			invalidParams.AddNested("SchemaAnalysisRuleRequests", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

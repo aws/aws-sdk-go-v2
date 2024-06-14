@@ -6,17 +6,18 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/quicksight/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Provides a detailed description of the definition of a template. If you do not
-// need to know details about the content of a template, for instance if you are
-// trying to check the status of a recently created or updated template, use the
-// DescribeTemplate (https://docs.aws.amazon.com/quicksight/latest/APIReference/API_DescribeTemplate.html)
-// instead.
+// Provides a detailed description of the definition of a template.
+//
+// If you do not need to know details about the content of a template, for
+// instance if you are trying to check the status of a recently created or updated
+// template, use the [DescribeTemplate]DescribeTemplate instead.
+//
+// [DescribeTemplate]: https://docs.aws.amazon.com/quicksight/latest/APIReference/API_DescribeTemplate.html
 func (c *Client) DescribeTemplateDefinition(ctx context.Context, params *DescribeTemplateDefinitionInput, optFns ...func(*Options)) (*DescribeTemplateDefinitionOutput, error) {
 	if params == nil {
 		params = &DescribeTemplateDefinitionInput{}
@@ -59,8 +60,10 @@ type DescribeTemplateDefinitionInput struct {
 
 type DescribeTemplateDefinitionOutput struct {
 
-	// The definition of the template. A definition is the data model of all features
-	// in a Dashboard, Template, or Analysis.
+	// The definition of the template.
+	//
+	// A definition is the data model of all features in a Dashboard, Template, or
+	// Analysis.
 	Definition *types.TemplateVersionDefinition
 
 	// Errors associated with the template version.
@@ -73,12 +76,19 @@ type DescribeTemplateDefinitionOutput struct {
 	RequestId *string
 
 	// Status associated with the template.
+	//
 	//   - CREATION_IN_PROGRESS
+	//
 	//   - CREATION_SUCCESSFUL
+	//
 	//   - CREATION_FAILED
+	//
 	//   - UPDATE_IN_PROGRESS
+	//
 	//   - UPDATE_SUCCESSFUL
+	//
 	//   - UPDATE_FAILED
+	//
 	//   - DELETED
 	ResourceStatus types.ResourceStatus
 
@@ -119,25 +129,25 @@ func (c *Client) addOperationDescribeTemplateDefinitionMiddlewares(stack *middle
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -152,13 +162,16 @@ func (c *Client) addOperationDescribeTemplateDefinitionMiddlewares(stack *middle
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDescribeTemplateDefinitionValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeTemplateDefinition(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

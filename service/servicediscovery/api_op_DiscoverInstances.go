@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/servicediscovery/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -35,7 +34,9 @@ func (c *Client) DiscoverInstances(ctx context.Context, params *DiscoverInstance
 type DiscoverInstancesInput struct {
 
 	// The HttpName name of the namespace. It's found in the HttpProperties member of
-	// the Properties member of the namespace.
+	// the Properties member of the namespace. In most cases, Name and HttpName match.
+	// However, if you reuse Name for namespace creation, a generated hash is added to
+	// HttpName to distinguish the two.
 	//
 	// This member is required.
 	NamespaceName *string
@@ -47,10 +48,17 @@ type DiscoverInstancesInput struct {
 
 	// The health status of the instances that you want to discover. This parameter is
 	// ignored for services that don't have a health check configured, and all
-	// instances are returned. HEALTHY Returns healthy instances. UNHEALTHY Returns
-	// unhealthy instances. ALL Returns all instances. HEALTHY_OR_ELSE_ALL Returns
-	// healthy instances, unless none are reporting a healthy state. In that case,
-	// return all instances. This is also called failing open.
+	// instances are returned.
+	//
+	// HEALTHY Returns healthy instances.
+	//
+	// UNHEALTHY Returns unhealthy instances.
+	//
+	// ALL Returns all instances.
+	//
+	// HEALTHY_OR_ELSE_ALL Returns healthy instances, unless none are reporting a
+	// healthy state. In that case, return all instances. This is also called failing
+	// open.
 	HealthStatus types.HealthStatusFilter
 
 	// The maximum number of instances that you want Cloud Map to return in the
@@ -112,25 +120,25 @@ func (c *Client) addOperationDiscoverInstancesMiddlewares(stack *middleware.Stac
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -145,6 +153,9 @@ func (c *Client) addOperationDiscoverInstancesMiddlewares(stack *middleware.Stac
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addEndpointPrefix_opDiscoverInstancesMiddleware(stack); err != nil {
 		return err
 	}
@@ -154,7 +165,7 @@ func (c *Client) addOperationDiscoverInstancesMiddlewares(stack *middleware.Stac
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDiscoverInstances(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

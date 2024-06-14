@@ -6,25 +6,30 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/iotthingsgraph/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a system instance. This action validates the system instance, prepares
-// the deployment-related resources. For Greengrass deployments, it updates the
-// Greengrass group that is specified by the greengrassGroupName parameter. It
-// also adds a file to the S3 bucket specified by the s3BucketName parameter. You
-// need to call DeploySystemInstance after running this action. For Greengrass
-// deployments, since this action modifies and adds resources to a Greengrass group
-// and an S3 bucket on the caller's behalf, the calling identity must have write
-// permissions to both the specified Greengrass group and S3 bucket. Otherwise, the
-// call will fail with an authorization error. For cloud deployments, this action
-// requires a flowActionsRoleArn value. This is an IAM role that has permissions
-// to access AWS services, such as AWS Lambda and AWS IoT, that the flow uses when
-// it executes. If the definition document doesn't specify a version of the user's
-// namespace, the latest version will be used by default.
+// Creates a system instance.
+//
+// This action validates the system instance, prepares the deployment-related
+// resources. For Greengrass deployments, it updates the Greengrass group that is
+// specified by the greengrassGroupName parameter. It also adds a file to the S3
+// bucket specified by the s3BucketName parameter. You need to call
+// DeploySystemInstance after running this action.
+//
+// For Greengrass deployments, since this action modifies and adds resources to a
+// Greengrass group and an S3 bucket on the caller's behalf, the calling identity
+// must have write permissions to both the specified Greengrass group and S3
+// bucket. Otherwise, the call will fail with an authorization error.
+//
+// For cloud deployments, this action requires a flowActionsRoleArn value. This is
+// an IAM role that has permissions to access AWS services, such as AWS Lambda and
+// AWS IoT, that the flow uses when it executes.
+//
+// If the definition document doesn't specify a version of the user's namespace,
+// the latest version will be used by default.
 //
 // Deprecated: since: 2022-08-30
 func (c *Client) CreateSystemInstance(ctx context.Context, params *CreateSystemInstanceInput, optFns ...func(*Options)) (*CreateSystemInstanceOutput, error) {
@@ -113,25 +118,25 @@ func (c *Client) addOperationCreateSystemInstanceMiddlewares(stack *middleware.S
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -146,13 +151,16 @@ func (c *Client) addOperationCreateSystemInstanceMiddlewares(stack *middleware.S
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpCreateSystemInstanceValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateSystemInstance(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

@@ -6,17 +6,18 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/appstream/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates a new image with the latest Windows operating system updates, driver
-// updates, and AppStream 2.0 agent software. For more information, see the "Update
-// an Image by Using Managed AppStream 2.0 Image Updates" section in Administer
-// Your AppStream 2.0 Images (https://docs.aws.amazon.com/appstream2/latest/developerguide/administer-images.html)
-// , in the Amazon AppStream 2.0 Administration Guide.
+// updates, and AppStream 2.0 agent software.
+//
+// For more information, see the "Update an Image by Using Managed AppStream 2.0
+// Image Updates" section in [Administer Your AppStream 2.0 Images], in the Amazon AppStream 2.0 Administration Guide.
+//
+// [Administer Your AppStream 2.0 Images]: https://docs.aws.amazon.com/appstream2/latest/developerguide/administer-images.html
 func (c *Client) CreateUpdatedImage(ctx context.Context, params *CreateUpdatedImageInput, optFns ...func(*Options)) (*CreateUpdatedImageOutput, error) {
 	if params == nil {
 		params = &CreateUpdatedImageInput{}
@@ -61,11 +62,19 @@ type CreateUpdatedImageInput struct {
 
 	// The tags to associate with the new image. A tag is a key-value pair, and the
 	// value is optional. For example, Environment=Test. If you do not specify a value,
-	// Environment=. Generally allowed characters are: letters, numbers, and spaces
-	// representable in UTF-8, and the following special characters: _ . : / = + \ - @
-	// If you do not specify a value, the value is set to an empty string. For more
-	// information about tags, see Tagging Your Resources (https://docs.aws.amazon.com/appstream2/latest/developerguide/tagging-basic.html)
-	// in the Amazon AppStream 2.0 Administration Guide.
+	// Environment=.
+	//
+	// Generally allowed characters are: letters, numbers, and spaces representable in
+	// UTF-8, and the following special characters:
+	//
+	// _ . : / = + \ - @
+	//
+	// If you do not specify a value, the value is set to an empty string.
+	//
+	// For more information about tags, see [Tagging Your Resources] in the Amazon AppStream 2.0
+	// Administration Guide.
+	//
+	// [Tagging Your Resources]: https://docs.aws.amazon.com/appstream2/latest/developerguide/tagging-basic.html
 	NewImageTags map[string]string
 
 	noSmithyDocumentSerde
@@ -107,25 +116,25 @@ func (c *Client) addOperationCreateUpdatedImageMiddlewares(stack *middleware.Sta
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -140,13 +149,16 @@ func (c *Client) addOperationCreateUpdatedImageMiddlewares(stack *middleware.Sta
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpCreateUpdatedImageValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateUpdatedImage(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

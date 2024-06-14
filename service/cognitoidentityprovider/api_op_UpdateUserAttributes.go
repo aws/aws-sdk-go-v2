@@ -15,27 +15,36 @@ import (
 // their own credentials. You authorize this API request with the user's access
 // token. To delete an attribute from your user, submit the attribute in your API
 // request with a blank value. Custom attribute values in this request must include
-// the custom: prefix. Authorize this action with a signed-in user's access token.
-// It must include the scope aws.cognito.signin.user.admin . Amazon Cognito doesn't
-// evaluate Identity and Access Management (IAM) policies in requests for this API
-// operation. For this operation, you can't use IAM credentials to authorize
-// requests, and you can't grant IAM permissions in policies. For more information
-// about authorization models in Amazon Cognito, see Using the Amazon Cognito user
-// pools API and user pool endpoints (https://docs.aws.amazon.com/cognito/latest/developerguide/user-pools-API-operations.html)
-// . This action might generate an SMS text message. Starting June 1, 2021, US
+// the custom: prefix.
+//
+// Authorize this action with a signed-in user's access token. It must include the
+// scope aws.cognito.signin.user.admin .
+//
+// Amazon Cognito doesn't evaluate Identity and Access Management (IAM) policies
+// in requests for this API operation. For this operation, you can't use IAM
+// credentials to authorize requests, and you can't grant IAM permissions in
+// policies. For more information about authorization models in Amazon Cognito, see
+// [Using the Amazon Cognito user pools API and user pool endpoints].
+//
+// This action might generate an SMS text message. Starting June 1, 2021, US
 // telecom carriers require you to register an origination phone number before you
 // can send SMS messages to US phone numbers. If you use SMS text messages in
-// Amazon Cognito, you must register a phone number with Amazon Pinpoint (https://console.aws.amazon.com/pinpoint/home/)
-// . Amazon Cognito uses the registered number automatically. Otherwise, Amazon
-// Cognito users who must receive SMS messages might not be able to sign up,
-// activate their accounts, or sign in. If you have never used SMS text messages
-// with Amazon Cognito or any other Amazon Web Service, Amazon Simple Notification
-// Service might place your account in the SMS sandbox. In sandbox mode (https://docs.aws.amazon.com/sns/latest/dg/sns-sms-sandbox.html)
-// , you can send messages only to verified phone numbers. After you test your app
-// while in the sandbox environment, you can move out of the sandbox and into
-// production. For more information, see SMS message settings for Amazon Cognito
-// user pools (https://docs.aws.amazon.com/cognito/latest/developerguide/user-pool-sms-settings.html)
-// in the Amazon Cognito Developer Guide.
+// Amazon Cognito, you must register a phone number with [Amazon Pinpoint]. Amazon Cognito uses the
+// registered number automatically. Otherwise, Amazon Cognito users who must
+// receive SMS messages might not be able to sign up, activate their accounts, or
+// sign in.
+//
+// If you have never used SMS text messages with Amazon Cognito or any other
+// Amazon Web Service, Amazon Simple Notification Service might place your account
+// in the SMS sandbox. In [sandbox mode], you can send messages only to verified phone numbers.
+// After you test your app while in the sandbox environment, you can move out of
+// the sandbox and into production. For more information, see [SMS message settings for Amazon Cognito user pools]in the Amazon
+// Cognito Developer Guide.
+//
+// [SMS message settings for Amazon Cognito user pools]: https://docs.aws.amazon.com/cognito/latest/developerguide/user-pool-sms-settings.html
+// [Using the Amazon Cognito user pools API and user pool endpoints]: https://docs.aws.amazon.com/cognito/latest/developerguide/user-pools-API-operations.html
+// [sandbox mode]: https://docs.aws.amazon.com/sns/latest/dg/sns-sms-sandbox.html
+// [Amazon Pinpoint]: https://console.aws.amazon.com/pinpoint/home/
 func (c *Client) UpdateUserAttributes(ctx context.Context, params *UpdateUserAttributesInput, optFns ...func(*Options)) (*UpdateUserAttributesOutput, error) {
 	if params == nil {
 		params = &UpdateUserAttributesInput{}
@@ -60,38 +69,49 @@ type UpdateUserAttributesInput struct {
 	// This member is required.
 	AccessToken *string
 
-	// An array of name-value pairs representing user attributes. For custom
-	// attributes, you must prepend the custom: prefix to the attribute name. If you
-	// have set an attribute to require verification before Amazon Cognito updates its
-	// value, this request doesn’t immediately update the value of that attribute.
-	// After your user receives and responds to a verification message to verify the
-	// new value, Amazon Cognito updates the attribute value. Your user can sign in and
-	// receive messages with the original attribute value until they verify the new
-	// value.
+	// An array of name-value pairs representing user attributes.
+	//
+	// For custom attributes, you must prepend the custom: prefix to the attribute
+	// name.
+	//
+	// If you have set an attribute to require verification before Amazon Cognito
+	// updates its value, this request doesn’t immediately update the value of that
+	// attribute. After your user receives and responds to a verification message to
+	// verify the new value, Amazon Cognito updates the attribute value. Your user can
+	// sign in and receive messages with the original attribute value until they verify
+	// the new value.
 	//
 	// This member is required.
 	UserAttributes []types.AttributeType
 
 	// A map of custom key-value pairs that you can provide as input for any custom
-	// workflows that this action initiates. You create custom workflows by assigning
-	// Lambda functions to user pool triggers. When you use the UpdateUserAttributes
-	// API action, Amazon Cognito invokes the function that is assigned to the custom
-	// message trigger. When Amazon Cognito invokes this function, it passes a JSON
-	// payload, which the function receives as input. This payload contains a
-	// clientMetadata attribute, which provides the data that you assigned to the
-	// ClientMetadata parameter in your UpdateUserAttributes request. In your function
-	// code in Lambda, you can process the clientMetadata value to enhance your
-	// workflow for your specific needs. For more information, see Customizing user
-	// pool Workflows with Lambda Triggers (https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-identity-pools-working-with-aws-lambda-triggers.html)
-	// in the Amazon Cognito Developer Guide. When you use the ClientMetadata
-	// parameter, remember that Amazon Cognito won't do the following:
+	// workflows that this action initiates.
+	//
+	// You create custom workflows by assigning Lambda functions to user pool
+	// triggers. When you use the UpdateUserAttributes API action, Amazon Cognito
+	// invokes the function that is assigned to the custom message trigger. When Amazon
+	// Cognito invokes this function, it passes a JSON payload, which the function
+	// receives as input. This payload contains a clientMetadata attribute, which
+	// provides the data that you assigned to the ClientMetadata parameter in your
+	// UpdateUserAttributes request. In your function code in Lambda, you can process
+	// the clientMetadata value to enhance your workflow for your specific needs.
+	//
+	// For more information, see [Customizing user pool Workflows with Lambda Triggers] in the Amazon Cognito Developer Guide.
+	//
+	// When you use the ClientMetadata parameter, remember that Amazon Cognito won't
+	// do the following:
+	//
 	//   - Store the ClientMetadata value. This data is available only to Lambda
 	//   triggers that are assigned to a user pool to support custom workflows. If your
 	//   user pool configuration doesn't include triggers, the ClientMetadata parameter
 	//   serves no purpose.
+	//
 	//   - Validate the ClientMetadata value.
+	//
 	//   - Encrypt the ClientMetadata value. Don't use Amazon Cognito to provide
 	//   sensitive information.
+	//
+	// [Customizing user pool Workflows with Lambda Triggers]: https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-identity-pools-working-with-aws-lambda-triggers.html
 	ClientMetadata map[string]string
 
 	noSmithyDocumentSerde
@@ -133,22 +153,22 @@ func (c *Client) addOperationUpdateUserAttributesMiddlewares(stack *middleware.S
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -163,13 +183,16 @@ func (c *Client) addOperationUpdateUserAttributesMiddlewares(stack *middleware.S
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpUpdateUserAttributesValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateUserAttributes(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

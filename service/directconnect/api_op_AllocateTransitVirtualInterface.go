@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/directconnect/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -14,12 +13,14 @@ import (
 
 // Provisions a transit virtual interface to be owned by the specified Amazon Web
 // Services account. Use this type of interface to connect a transit gateway to
-// your Direct Connect gateway. The owner of a connection provisions a transit
-// virtual interface to be owned by the specified Amazon Web Services account.
+// your Direct Connect gateway.
+//
+// The owner of a connection provisions a transit virtual interface to be owned by
+// the specified Amazon Web Services account.
+//
 // After you create a transit virtual interface, it must be confirmed by the owner
-// using ConfirmTransitVirtualInterface . Until this step has been completed, the
-// transit virtual interface is in the requested state and is not available to
-// handle traffic.
+// using ConfirmTransitVirtualInterface. Until this step has been completed, the transit virtual interface is in
+// the requested state and is not available to handle traffic.
 func (c *Client) AllocateTransitVirtualInterface(ctx context.Context, params *AllocateTransitVirtualInterfaceInput, optFns ...func(*Options)) (*AllocateTransitVirtualInterfaceOutput, error) {
 	if params == nil {
 		params = &AllocateTransitVirtualInterfaceInput{}
@@ -89,25 +90,25 @@ func (c *Client) addOperationAllocateTransitVirtualInterfaceMiddlewares(stack *m
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -122,13 +123,16 @@ func (c *Client) addOperationAllocateTransitVirtualInterfaceMiddlewares(stack *m
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpAllocateTransitVirtualInterfaceValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opAllocateTransitVirtualInterface(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

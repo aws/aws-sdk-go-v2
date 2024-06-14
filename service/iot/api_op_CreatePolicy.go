@@ -6,17 +6,20 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/iot/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates an IoT policy. The created policy is the default version for the
-// policy. This operation creates a policy version with a version identifier of 1
-// and sets 1 as the policy's default version. Requires permission to access the
-// CreatePolicy (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
-// action.
+// Creates an IoT policy.
+//
+// The created policy is the default version for the policy. This operation
+// creates a policy version with a version identifier of 1 and sets 1 as the
+// policy's default version.
+//
+// Requires permission to access the [CreatePolicy] action.
+//
+// [CreatePolicy]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions
 func (c *Client) CreatePolicy(ctx context.Context, params *CreatePolicyInput, optFns ...func(*Options)) (*CreatePolicyOutput, error) {
 	if params == nil {
 		params = &CreatePolicyInput{}
@@ -46,10 +49,14 @@ type CreatePolicyInput struct {
 	// This member is required.
 	PolicyName *string
 
-	// Metadata which can be used to manage the policy. For URI Request parameters use
-	// format: ...key1=value1&key2=value2... For the CLI command-line parameter use
-	// format: &&tags "key1=value1&key2=value2..." For the cli-input-json file use
-	// format: "tags": "key1=value1&key2=value2..."
+	// Metadata which can be used to manage the policy.
+	//
+	// For URI Request parameters use format: ...key1=value1&key2=value2...
+	//
+	// For the CLI command-line parameter use format: &&tags
+	// "key1=value1&key2=value2..."
+	//
+	// For the cli-input-json file use format: "tags": "key1=value1&key2=value2..."
 	Tags []types.Tag
 
 	noSmithyDocumentSerde
@@ -98,25 +105,25 @@ func (c *Client) addOperationCreatePolicyMiddlewares(stack *middleware.Stack, op
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -131,13 +138,16 @@ func (c *Client) addOperationCreatePolicyMiddlewares(stack *middleware.Stack, op
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpCreatePolicyValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreatePolicy(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

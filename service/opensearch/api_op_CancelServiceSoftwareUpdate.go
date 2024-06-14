@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/opensearch/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -14,9 +13,9 @@ import (
 
 // Cancels a scheduled service software update for an Amazon OpenSearch Service
 // domain. You can only perform this operation before the AutomatedUpdateDate and
-// when the domain's UpdateStatus is PENDING_UPDATE . For more information, see
-// Service software updates in Amazon OpenSearch Service (https://docs.aws.amazon.com/opensearch-service/latest/developerguide/service-software.html)
-// .
+// when the domain's UpdateStatus is PENDING_UPDATE . For more information, see [Service software updates in Amazon OpenSearch Service].
+//
+// [Service software updates in Amazon OpenSearch Service]: https://docs.aws.amazon.com/opensearch-service/latest/developerguide/service-software.html
 func (c *Client) CancelServiceSoftwareUpdate(ctx context.Context, params *CancelServiceSoftwareUpdateInput, optFns ...func(*Options)) (*CancelServiceSoftwareUpdateOutput, error) {
 	if params == nil {
 		params = &CancelServiceSoftwareUpdateInput{}
@@ -79,25 +78,25 @@ func (c *Client) addOperationCancelServiceSoftwareUpdateMiddlewares(stack *middl
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -112,13 +111,16 @@ func (c *Client) addOperationCancelServiceSoftwareUpdateMiddlewares(stack *middl
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpCancelServiceSoftwareUpdateValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCancelServiceSoftwareUpdate(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

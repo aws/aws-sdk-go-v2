@@ -6,13 +6,13 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Modifies the properties of an endpoint in an Amazon Aurora DB cluster. This
-// operation only applies to Aurora DB clusters.
+// Modifies the properties of an endpoint in an Amazon Aurora DB cluster.
+//
+// This operation only applies to Aurora DB clusters.
 func (c *Client) ModifyDBClusterEndpoint(ctx context.Context, params *ModifyDBClusterEndpointInput, optFns ...func(*Options)) (*ModifyDBClusterEndpointOutput, error) {
 	if params == nil {
 		params = &ModifyDBClusterEndpointInput{}
@@ -53,9 +53,13 @@ type ModifyDBClusterEndpointInput struct {
 // This data type represents the information you need to connect to an Amazon
 // Aurora DB cluster. This data type is used as a response element in the following
 // actions:
+//
 //   - CreateDBClusterEndpoint
+//
 //   - DescribeDBClusterEndpoints
+//
 //   - ModifyDBClusterEndpoint
+//
 //   - DeleteDBClusterEndpoint
 //
 // For the data structure that represents Amazon RDS DB instance endpoints, see
@@ -128,25 +132,25 @@ func (c *Client) addOperationModifyDBClusterEndpointMiddlewares(stack *middlewar
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -161,13 +165,16 @@ func (c *Client) addOperationModifyDBClusterEndpointMiddlewares(stack *middlewar
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpModifyDBClusterEndpointValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opModifyDBClusterEndpoint(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

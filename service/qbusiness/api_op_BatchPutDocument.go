@@ -6,17 +6,22 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/qbusiness/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Adds one or more documents to an Amazon Q index. You use this API to:
+// Adds one or more documents to an Amazon Q Business index.
+//
+// You use this API to:
+//
 //   - ingest your structured and unstructured documents and documents stored in
-//     an Amazon S3 bucket into an Amazon Q index.
-//   - add custom attributes to documents in an Amazon Q index.
-//   - attach an access control list to the documents added to an Amazon Q index.
+//     an Amazon S3 bucket into an Amazon Q Business index.
+//
+//   - add custom attributes to documents in an Amazon Q Business index.
+//
+//   - attach an access control list to the documents added to an Amazon Q
+//     Business index.
 //
 // You can see the progress of the deletion, and any error messages related to the
 // process, by using CloudWatch.
@@ -37,7 +42,7 @@ func (c *Client) BatchPutDocument(ctx context.Context, params *BatchPutDocumentI
 
 type BatchPutDocumentInput struct {
 
-	// The identifier of the Amazon Q application.
+	// The identifier of the Amazon Q Business application.
 	//
 	// This member is required.
 	ApplicationId *string
@@ -47,7 +52,7 @@ type BatchPutDocumentInput struct {
 	// This member is required.
 	Documents []types.Document
 
-	// The identifier of the Amazon Q index to add the documents to.
+	// The identifier of the Amazon Q Business index to add the documents to.
 	//
 	// This member is required.
 	IndexId *string
@@ -64,9 +69,9 @@ type BatchPutDocumentInput struct {
 
 type BatchPutDocumentOutput struct {
 
-	// A list of documents that were not added to the Amazon Q index because the
-	// document failed a validation check. Each document contains an error message that
-	// indicates why the document couldn't be added to the index.
+	//  A list of documents that were not added to the Amazon Q Business index because
+	// the document failed a validation check. Each document contains an error message
+	// that indicates why the document couldn't be added to the index.
 	FailedDocuments []types.FailedDocument
 
 	// Metadata pertaining to the operation's result.
@@ -97,25 +102,25 @@ func (c *Client) addOperationBatchPutDocumentMiddlewares(stack *middleware.Stack
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -130,13 +135,16 @@ func (c *Client) addOperationBatchPutDocumentMiddlewares(stack *middleware.Stack
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpBatchPutDocumentValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opBatchPutDocument(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

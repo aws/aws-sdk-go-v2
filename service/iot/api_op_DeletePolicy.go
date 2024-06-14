@@ -6,21 +6,28 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes the specified policy. A policy cannot be deleted if it has non-default
-// versions or it is attached to any certificate. To delete a policy, use the
-// DeletePolicyVersion action to delete all non-default versions of the policy; use
-// the DetachPolicy action to detach the policy from any certificate; and then use
-// the DeletePolicy action to delete the policy. When a policy is deleted using
-// DeletePolicy, its default version is deleted with it. Because of the distributed
-// nature of Amazon Web Services, it can take up to five minutes after a policy is
-// detached before it's ready to be deleted. Requires permission to access the
-// DeletePolicy (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
-// action.
+// Deletes the specified policy.
+//
+// A policy cannot be deleted if it has non-default versions or it is attached to
+// any certificate.
+//
+// To delete a policy, use the DeletePolicyVersion action to delete all non-default versions of the
+// policy; use the DetachPolicyaction to detach the policy from any certificate; and then use
+// the DeletePolicy action to delete the policy.
+//
+// When a policy is deleted using DeletePolicy, its default version is deleted
+// with it.
+//
+// Because of the distributed nature of Amazon Web Services, it can take up to
+// five minutes after a policy is detached before it's ready to be deleted.
+//
+// Requires permission to access the [DeletePolicy] action.
+//
+// [DeletePolicy]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions
 func (c *Client) DeletePolicy(ctx context.Context, params *DeletePolicyInput, optFns ...func(*Options)) (*DeletePolicyOutput, error) {
 	if params == nil {
 		params = &DeletePolicyInput{}
@@ -76,25 +83,25 @@ func (c *Client) addOperationDeletePolicyMiddlewares(stack *middleware.Stack, op
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -109,13 +116,16 @@ func (c *Client) addOperationDeletePolicyMiddlewares(stack *middleware.Stack, op
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDeletePolicyValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDeletePolicy(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

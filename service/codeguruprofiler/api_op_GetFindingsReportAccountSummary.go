@@ -6,15 +6,16 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/codeguruprofiler/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns a list of FindingsReportSummary (https://docs.aws.amazon.com/codeguru/latest/profiler-api/API_FindingsReportSummary.html)
-// objects that contain analysis results for all profiling groups in your AWS
-// account.
+//	Returns a list of [FindingsReportSummary]FindingsReportSummary objects that contain analysis results
+//
+// for all profiling groups in your AWS account.
+//
+// [FindingsReportSummary]: https://docs.aws.amazon.com/codeguru/latest/profiler-api/API_FindingsReportSummary.html
 func (c *Client) GetFindingsReportAccountSummary(ctx context.Context, params *GetFindingsReportAccountSummaryInput, optFns ...func(*Options)) (*GetFindingsReportAccountSummaryOutput, error) {
 	if params == nil {
 		params = &GetFindingsReportAccountSummaryInput{}
@@ -50,9 +51,10 @@ type GetFindingsReportAccountSummaryInput struct {
 	// The nextToken value returned from a previous paginated
 	// GetFindingsReportAccountSummary request where maxResults was used and the
 	// results exceeded the value of that parameter. Pagination continues from the end
-	// of the previous results that returned the nextToken value. This token should be
-	// treated as an opaque identifier that is only used to retrieve the next items in
-	// a list and not for other programmatic purposes.
+	// of the previous results that returned the nextToken value.
+	//
+	// This token should be treated as an opaque identifier that is only used to
+	// retrieve the next items in a list and not for other programmatic purposes.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -61,9 +63,10 @@ type GetFindingsReportAccountSummaryInput struct {
 // The structure representing the GetFindingsReportAccountSummaryResponse.
 type GetFindingsReportAccountSummaryOutput struct {
 
-	// The return list of FindingsReportSummary (https://docs.aws.amazon.com/codeguru/latest/profiler-api/API_FindingsReportSummary.html)
-	// objects taht contain summaries of analysis results for all profiling groups in
-	// your AWS account.
+	// The return list of [FindingsReportSummary]FindingsReportSummary objects taht contain summaries of
+	// analysis results for all profiling groups in your AWS account.
+	//
+	// [FindingsReportSummary]: https://docs.aws.amazon.com/codeguru/latest/profiler-api/API_FindingsReportSummary.html
 	//
 	// This member is required.
 	ReportSummaries []types.FindingsReportSummary
@@ -102,25 +105,25 @@ func (c *Client) addOperationGetFindingsReportAccountSummaryMiddlewares(stack *m
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -135,10 +138,13 @@ func (c *Client) addOperationGetFindingsReportAccountSummaryMiddlewares(stack *m
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetFindingsReportAccountSummary(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

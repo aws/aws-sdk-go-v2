@@ -551,6 +551,11 @@ func validateSearchCriteria(v *types.SearchCriteria) error {
 			invalidParams.AddNested("Filters", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.Sort != nil {
+		if err := validateSort(v.Sort); err != nil {
+			invalidParams.AddNested("Sort", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -589,6 +594,24 @@ func validateSearchFilters(v []types.SearchFilter) error {
 		if err := validateSearchFilter(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateSort(v *types.Sort) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "Sort"}
+	if len(v.SortOrder) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("SortOrder"))
+	}
+	if len(v.SortField) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("SortField"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

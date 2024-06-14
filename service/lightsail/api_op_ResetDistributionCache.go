@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/lightsail/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -14,8 +13,10 @@ import (
 )
 
 // Deletes currently cached content from your Amazon Lightsail content delivery
-// network (CDN) distribution. After resetting the cache, the next time a content
-// request is made, your distribution pulls, serves, and caches it from the origin.
+// network (CDN) distribution.
+//
+// After resetting the cache, the next time a content request is made, your
+// distribution pulls, serves, and caches it from the origin.
 func (c *Client) ResetDistributionCache(ctx context.Context, params *ResetDistributionCacheInput, optFns ...func(*Options)) (*ResetDistributionCacheOutput, error) {
 	if params == nil {
 		params = &ResetDistributionCacheInput{}
@@ -33,8 +34,10 @@ func (c *Client) ResetDistributionCache(ctx context.Context, params *ResetDistri
 
 type ResetDistributionCacheInput struct {
 
-	// The name of the distribution for which to reset cache. Use the GetDistributions
-	// action to get a list of distribution names that you can specify.
+	// The name of the distribution for which to reset cache.
+	//
+	// Use the GetDistributions action to get a list of distribution names that you
+	// can specify.
 	DistributionName *string
 
 	noSmithyDocumentSerde
@@ -81,25 +84,25 @@ func (c *Client) addOperationResetDistributionCacheMiddlewares(stack *middleware
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -114,10 +117,13 @@ func (c *Client) addOperationResetDistributionCacheMiddlewares(stack *middleware
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opResetDistributionCache(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

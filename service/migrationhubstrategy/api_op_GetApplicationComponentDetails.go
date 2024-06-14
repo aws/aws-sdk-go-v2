@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/migrationhubstrategy/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -30,7 +29,7 @@ func (c *Client) GetApplicationComponentDetails(ctx context.Context, params *Get
 
 type GetApplicationComponentDetailsInput struct {
 
-	// The ID of the application component. The ID is unique within an AWS account.
+	//  The ID of the application component. The ID is unique within an AWS account.
 	//
 	// This member is required.
 	ApplicationComponentId *string
@@ -40,17 +39,18 @@ type GetApplicationComponentDetailsInput struct {
 
 type GetApplicationComponentDetailsOutput struct {
 
-	// Detailed information about an application component.
+	//  Detailed information about an application component.
 	ApplicationComponentDetail *types.ApplicationComponentDetail
 
-	// The associated application group as defined in AWS Application Discovery
+	//  The associated application group as defined in AWS Application Discovery
 	// Service.
 	AssociatedApplications []types.AssociatedApplication
 
-	// A list of the IDs of the servers on which the application component is running.
+	//  A list of the IDs of the servers on which the application component is
+	// running.
 	AssociatedServerIds []string
 
-	// Set to true if the application component belongs to more than one application
+	//  Set to true if the application component belongs to more than one application
 	// group.
 	MoreApplicationResource *bool
 
@@ -82,25 +82,25 @@ func (c *Client) addOperationGetApplicationComponentDetailsMiddlewares(stack *mi
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -115,13 +115,16 @@ func (c *Client) addOperationGetApplicationComponentDetailsMiddlewares(stack *mi
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpGetApplicationComponentDetailsValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetApplicationComponentDetails(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

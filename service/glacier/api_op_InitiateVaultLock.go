@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	glaciercust "github.com/aws/aws-sdk-go-v2/service/glacier/internal/customizations"
 	"github.com/aws/aws-sdk-go-v2/service/glacier/types"
 	"github.com/aws/smithy-go/middleware"
@@ -14,26 +13,36 @@ import (
 )
 
 // This operation initiates the vault locking process by doing the following:
+//
 //   - Installing a vault lock policy on the specified vault.
+//
 //   - Setting the lock state of vault lock to InProgress .
+//
 //   - Returning a lock ID, which is used to complete the vault locking process.
 //
 // You can set one vault lock policy for each vault and this policy can be up to
-// 20 KB in size. For more information about vault lock policies, see Amazon
-// Glacier Access Control with Vault Lock Policies (https://docs.aws.amazon.com/amazonglacier/latest/dev/vault-lock-policy.html)
-// . You must complete the vault locking process within 24 hours after the vault
+// 20 KB in size. For more information about vault lock policies, see [Amazon Glacier Access Control with Vault Lock Policies].
+//
+// You must complete the vault locking process within 24 hours after the vault
 // lock enters the InProgress state. After the 24 hour window ends, the lock ID
 // expires, the vault automatically exits the InProgress state, and the vault lock
-// policy is removed from the vault. You call CompleteVaultLock to complete the
-// vault locking process by setting the state of the vault lock to Locked . After a
-// vault lock is in the Locked state, you cannot initiate a new vault lock for the
-// vault. You can abort the vault locking process by calling AbortVaultLock . You
-// can get the state of the vault lock by calling GetVaultLock . For more
-// information about the vault locking process, Amazon Glacier Vault Lock (https://docs.aws.amazon.com/amazonglacier/latest/dev/vault-lock.html)
-// . If this operation is called when the vault lock is in the InProgress state,
-// the operation returns an AccessDeniedException error. When the vault lock is in
-// the InProgress state you must call AbortVaultLock before you can initiate a new
-// vault lock policy.
+// policy is removed from the vault. You call CompleteVaultLockto complete the vault locking
+// process by setting the state of the vault lock to Locked .
+//
+// After a vault lock is in the Locked state, you cannot initiate a new vault lock
+// for the vault.
+//
+// You can abort the vault locking process by calling AbortVaultLock. You can get the state of
+// the vault lock by calling GetVaultLock. For more information about the vault locking
+// process, [Amazon Glacier Vault Lock].
+//
+// If this operation is called when the vault lock is in the InProgress state, the
+// operation returns an AccessDeniedException error. When the vault lock is in the
+// InProgress state you must call AbortVaultLock before you can initiate a new vault lock
+// policy.
+//
+// [Amazon Glacier Vault Lock]: https://docs.aws.amazon.com/amazonglacier/latest/dev/vault-lock.html
+// [Amazon Glacier Access Control with Vault Lock Policies]: https://docs.aws.amazon.com/amazonglacier/latest/dev/vault-lock-policy.html
 func (c *Client) InitiateVaultLock(ctx context.Context, params *InitiateVaultLockInput, optFns ...func(*Options)) (*InitiateVaultLockOutput, error) {
 	if params == nil {
 		params = &InitiateVaultLockInput{}
@@ -107,25 +116,25 @@ func (c *Client) addOperationInitiateVaultLockMiddlewares(stack *middleware.Stac
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -140,13 +149,16 @@ func (c *Client) addOperationInitiateVaultLockMiddlewares(stack *middleware.Stac
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpInitiateVaultLockValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opInitiateVaultLock(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

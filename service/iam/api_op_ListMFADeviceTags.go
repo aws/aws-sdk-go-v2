@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/iam/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -14,8 +13,9 @@ import (
 
 // Lists the tags that are attached to the specified IAM virtual multi-factor
 // authentication (MFA) device. The returned list of tags is sorted by tag key. For
-// more information about tagging, see Tagging IAM resources (https://docs.aws.amazon.com/IAM/latest/UserGuide/id_tags.html)
-// in the IAM User Guide.
+// more information about tagging, see [Tagging IAM resources]in the IAM User Guide.
+//
+// [Tagging IAM resources]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_tags.html
 func (c *Client) ListMFADeviceTags(ctx context.Context, params *ListMFADeviceTagsInput, optFns ...func(*Options)) (*ListMFADeviceTagsOutput, error) {
 	if params == nil {
 		params = &ListMFADeviceTagsInput{}
@@ -34,10 +34,13 @@ func (c *Client) ListMFADeviceTags(ctx context.Context, params *ListMFADeviceTag
 type ListMFADeviceTagsInput struct {
 
 	// The unique identifier for the IAM virtual MFA device whose tags you want to
-	// see. For virtual MFA devices, the serial number is the same as the ARN. This
-	// parameter allows (through its regex pattern (http://wikipedia.org/wiki/regex) )
-	// a string of characters consisting of upper and lowercase alphanumeric characters
-	// with no spaces. You can also include any of the following characters: _+=,.@-
+	// see. For virtual MFA devices, the serial number is the same as the ARN.
+	//
+	// This parameter allows (through its [regex pattern]) a string of characters consisting of upper
+	// and lowercase alphanumeric characters with no spaces. You can also include any
+	// of the following characters: _+=,.@-
+	//
+	// [regex pattern]: http://wikipedia.org/wiki/regex
 	//
 	// This member is required.
 	SerialNumber *string
@@ -50,11 +53,13 @@ type ListMFADeviceTagsInput struct {
 
 	// Use this only when paginating results to indicate the maximum number of items
 	// you want in the response. If additional items exist beyond the maximum you
-	// specify, the IsTruncated response element is true . If you do not include this
-	// parameter, the number of items defaults to 100. Note that IAM might return fewer
-	// results, even when there are more results available. In that case, the
-	// IsTruncated response element returns true , and Marker contains a value to
-	// include in the subsequent call that tells the service where to continue from.
+	// specify, the IsTruncated response element is true .
+	//
+	// If you do not include this parameter, the number of items defaults to 100. Note
+	// that IAM might return fewer results, even when there are more results available.
+	// In that case, the IsTruncated response element returns true , and Marker
+	// contains a value to include in the subsequent call that tells the service where
+	// to continue from.
 	MaxItems *int32
 
 	noSmithyDocumentSerde
@@ -109,25 +114,25 @@ func (c *Client) addOperationListMFADeviceTagsMiddlewares(stack *middleware.Stac
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -142,13 +147,16 @@ func (c *Client) addOperationListMFADeviceTagsMiddlewares(stack *middleware.Stac
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpListMFADeviceTagsValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListMFADeviceTags(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -178,11 +186,13 @@ var _ ListMFADeviceTagsAPIClient = (*Client)(nil)
 type ListMFADeviceTagsPaginatorOptions struct {
 	// Use this only when paginating results to indicate the maximum number of items
 	// you want in the response. If additional items exist beyond the maximum you
-	// specify, the IsTruncated response element is true . If you do not include this
-	// parameter, the number of items defaults to 100. Note that IAM might return fewer
-	// results, even when there are more results available. In that case, the
-	// IsTruncated response element returns true , and Marker contains a value to
-	// include in the subsequent call that tells the service where to continue from.
+	// specify, the IsTruncated response element is true .
+	//
+	// If you do not include this parameter, the number of items defaults to 100. Note
+	// that IAM might return fewer results, even when there are more results available.
+	// In that case, the IsTruncated response element returns true , and Marker
+	// contains a value to include in the subsequent call that tells the service where
+	// to continue from.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

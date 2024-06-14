@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -15,12 +14,15 @@ import (
 // Enables block public access for AMIs at the account level in the specified
 // Amazon Web Services Region. This prevents the public sharing of your AMIs.
 // However, if you already have public AMIs, they will remain publicly available.
+//
 // The API can take up to 10 minutes to configure this setting. During this time,
-// if you run GetImageBlockPublicAccessState (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_GetImageBlockPublicAccessState.html)
-// , the response will be unblocked . When the API has completed the configuration,
-// the response will be block-new-sharing . For more information, see Block public
-// access to your AMIs (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/sharingamis-intro.html#block-public-access-to-amis)
-// in the Amazon EC2 User Guide.
+// if you run [GetImageBlockPublicAccessState], the response will be unblocked . When the API has completed the
+// configuration, the response will be block-new-sharing .
+//
+// For more information, see [Block public access to your AMIs] in the Amazon EC2 User Guide.
+//
+// [Block public access to your AMIs]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/sharingamis-intro.html#block-public-access-to-amis
+// [GetImageBlockPublicAccessState]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_GetImageBlockPublicAccessState.html
 func (c *Client) EnableImageBlockPublicAccess(ctx context.Context, params *EnableImageBlockPublicAccessInput, optFns ...func(*Options)) (*EnableImageBlockPublicAccessOutput, error) {
 	if params == nil {
 		params = &EnableImageBlockPublicAccessInput{}
@@ -88,25 +90,25 @@ func (c *Client) addOperationEnableImageBlockPublicAccessMiddlewares(stack *midd
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -121,13 +123,16 @@ func (c *Client) addOperationEnableImageBlockPublicAccessMiddlewares(stack *midd
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpEnableImageBlockPublicAccessValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opEnableImageBlockPublicAccess(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

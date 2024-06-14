@@ -17,8 +17,10 @@ import (
 )
 
 // Retrieves the details of a particular location registered in your S3 Access
-// Grants instance. Permissions You must have the s3:GetAccessGrantsLocation
-// permission to use this operation.
+// Grants instance.
+//
+// Permissions You must have the s3:GetAccessGrantsLocation permission to use this
+// operation.
 func (c *Client) GetAccessGrantsLocation(ctx context.Context, params *GetAccessGrantsLocationInput, optFns ...func(*Options)) (*GetAccessGrantsLocationOutput, error) {
 	if params == nil {
 		params = &GetAccessGrantsLocationInput{}
@@ -111,25 +113,25 @@ func (c *Client) addOperationGetAccessGrantsLocationMiddlewares(stack *middlewar
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -147,6 +149,9 @@ func (c *Client) addOperationGetAccessGrantsLocationMiddlewares(stack *middlewar
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = smithyhttp.AddContentChecksumMiddleware(stack); err != nil {
 		return err
 	}
@@ -162,7 +167,7 @@ func (c *Client) addOperationGetAccessGrantsLocationMiddlewares(stack *middlewar
 	if err = addMetadataRetrieverMiddleware(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addGetAccessGrantsLocationUpdateEndpoint(stack, options); err != nil {

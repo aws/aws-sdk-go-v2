@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -14,15 +13,19 @@ import (
 // Retrieves the latest deployed configuration. This API may return empty
 // configuration data if the client already has the latest version. For more
 // information about this API action and to view example CLI commands that show how
-// to use it with the StartConfigurationSession API action, see Retrieving the
-// configuration (http://docs.aws.amazon.com/appconfig/latest/userguide/appconfig-retrieving-the-configuration)
-// in the AppConfig User Guide. Note the following important information.
+// to use it with the StartConfigurationSessionAPI action, see [Retrieving the configuration] in the AppConfig User Guide.
+//
+// Note the following important information.
+//
 //   - Each configuration token is only valid for one call to
 //     GetLatestConfiguration . The GetLatestConfiguration response includes a
 //     NextPollConfigurationToken that should always replace the token used for the
 //     just-completed call in preparation for the next one.
-//   - GetLatestConfiguration is a priced call. For more information, see Pricing (https://aws.amazon.com/systems-manager/pricing/)
-//     .
+//
+//   - GetLatestConfiguration is a priced call. For more information, see [Pricing].
+//
+// [Pricing]: https://aws.amazon.com/systems-manager/pricing/
+// [Retrieving the configuration]: http://docs.aws.amazon.com/appconfig/latest/userguide/appconfig-retrieving-the-configuration
 func (c *Client) GetLatestConfiguration(ctx context.Context, params *GetLatestConfigurationInput, optFns ...func(*Options)) (*GetLatestConfigurationOutput, error) {
 	if params == nil {
 		params = &GetLatestConfigurationInput{}
@@ -41,13 +44,13 @@ func (c *Client) GetLatestConfiguration(ctx context.Context, params *GetLatestCo
 type GetLatestConfigurationInput struct {
 
 	// Token describing the current state of the configuration session. To obtain a
-	// token, first call the StartConfigurationSession API. Note that every call to
-	// GetLatestConfiguration will return a new ConfigurationToken (
-	// NextPollConfigurationToken in the response) and must be provided to subsequent
-	// GetLatestConfiguration API calls. This token should only be used once. To
-	// support long poll use cases, the token is valid for up to 24 hours. If a
-	// GetLatestConfiguration call uses an expired token, the system returns
-	// BadRequestException .
+	// token, first call the StartConfigurationSessionAPI. Note that every call to GetLatestConfiguration will
+	// return a new ConfigurationToken ( NextPollConfigurationToken in the response)
+	// and must be provided to subsequent GetLatestConfiguration API calls.
+	//
+	// This token should only be used once. To support long poll use cases, the token
+	// is valid for up to 24 hours. If a GetLatestConfiguration call uses an expired
+	// token, the system returns BadRequestException .
 	//
 	// This member is required.
 	ConfigurationToken *string
@@ -65,10 +68,11 @@ type GetLatestConfigurationOutput struct {
 	ContentType *string
 
 	// The latest token describing the current state of the configuration session.
-	// This must be provided to the next call to GetLatestConfiguration. This token
-	// should only be used once. To support long poll use cases, the token is valid for
-	// up to 24 hours. If a GetLatestConfiguration call uses an expired token, the
-	// system returns BadRequestException .
+	// This must be provided to the next call to GetLatestConfiguration.
+	//
+	// This token should only be used once. To support long poll use cases, the token
+	// is valid for up to 24 hours. If a GetLatestConfiguration call uses an expired
+	// token, the system returns BadRequestException .
 	NextPollConfigurationToken *string
 
 	// The amount of time the client should wait before polling for configuration
@@ -110,25 +114,25 @@ func (c *Client) addOperationGetLatestConfigurationMiddlewares(stack *middleware
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -143,13 +147,16 @@ func (c *Client) addOperationGetLatestConfigurationMiddlewares(stack *middleware
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpGetLatestConfigurationValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetLatestConfiguration(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

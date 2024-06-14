@@ -6,15 +6,16 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/tnb/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Gets the details of the network instance. A network instance is a single
-// network created in Amazon Web Services TNB that can be deployed and on which
-// life-cycle operations (like terminate, update, and delete) can be performed.
+// Gets the details of the network instance.
+//
+// A network instance is a single network created in Amazon Web Services TNB that
+// can be deployed and on which life-cycle operations (like terminate, update, and
+// delete) can be performed.
 func (c *Client) GetSolNetworkInstance(ctx context.Context, params *GetSolNetworkInstanceInput, optFns ...func(*Options)) (*GetSolNetworkInstanceOutput, error) {
 	if params == nil {
 		params = &GetSolNetworkInstanceInput{}
@@ -52,9 +53,11 @@ type GetSolNetworkInstanceOutput struct {
 	// This member is required.
 	Id *string
 
-	// The metadata of a network instance. A network instance is a single network
-	// created in Amazon Web Services TNB that can be deployed and on which life-cycle
-	// operations (like terminate, update, and delete) can be performed.
+	// The metadata of a network instance.
+	//
+	// A network instance is a single network created in Amazon Web Services TNB that
+	// can be deployed and on which life-cycle operations (like terminate, update, and
+	// delete) can be performed.
 	//
 	// This member is required.
 	Metadata *types.GetSolNetworkInstanceMetadata
@@ -79,8 +82,9 @@ type GetSolNetworkInstanceOutput struct {
 	// This member is required.
 	NsdInfoId *string
 
-	// Lifecycle management operation details on the network instance. Lifecycle
-	// management operations are deploy, update, or delete operations.
+	// Lifecycle management operation details on the network instance.
+	//
+	// Lifecycle management operations are deploy, update, or delete operations.
 	LcmOpInfo *types.LcmOperationInfo
 
 	// Network instance state.
@@ -119,25 +123,25 @@ func (c *Client) addOperationGetSolNetworkInstanceMiddlewares(stack *middleware.
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -152,13 +156,16 @@ func (c *Client) addOperationGetSolNetworkInstanceMiddlewares(stack *middleware.
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpGetSolNetworkInstanceValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetSolNetworkInstance(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

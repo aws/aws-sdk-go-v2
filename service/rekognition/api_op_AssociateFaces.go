@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/rekognition/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -14,24 +13,30 @@ import (
 
 // Associates one or more faces with an existing UserID. Takes an array of FaceIds
 // . Each FaceId that are present in the FaceIds list is associated with the
-// provided UserID. The maximum number of total FaceIds per UserID is 100. The
-// UserMatchThreshold parameter specifies the minimum user match confidence
+// provided UserID. The maximum number of total FaceIds per UserID is 100.
+//
+// The UserMatchThreshold parameter specifies the minimum user match confidence
 // required for the face to be associated with a UserID that has at least one
 // FaceID already associated. This ensures that the FaceIds are associated with
-// the right UserID. The value ranges from 0-100 and default value is 75. If
-// successful, an array of AssociatedFace objects containing the associated FaceIds
-// is returned. If a given face is already associated with the given UserID , it
-// will be ignored and will not be returned in the response. If a given face is
-// already associated to a different UserID , isn't found in the collection,
+// the right UserID. The value ranges from 0-100 and default value is 75.
+//
+// If successful, an array of AssociatedFace objects containing the associated
+// FaceIds is returned. If a given face is already associated with the given UserID
+// , it will be ignored and will not be returned in the response. If a given face
+// is already associated to a different UserID , isn't found in the collection,
 // doesn’t meet the UserMatchThreshold , or there are already 100 faces associated
 // with the UserID , it will be returned as part of an array of
-// UnsuccessfulFaceAssociations. The UserStatus reflects the status of an
-// operation which updates a UserID representation with a list of given faces. The
-// UserStatus can be:
+// UnsuccessfulFaceAssociations.
+//
+// The UserStatus reflects the status of an operation which updates a UserID
+// representation with a list of given faces. The UserStatus can be:
+//
 //   - ACTIVE - All associations or disassociations of FaceID(s) for a UserID are
 //     complete.
+//
 //   - CREATED - A UserID has been created, but has no FaceID(s) associated with
 //     it.
+//
 //   - UPDATING - A UserID is being updated and there are current associations or
 //     disassociations of FaceID(s) taking place.
 func (c *Client) AssociateFaces(ctx context.Context, params *AssociateFacesInput, optFns ...func(*Options)) (*AssociateFacesOutput, error) {
@@ -123,25 +128,25 @@ func (c *Client) addOperationAssociateFacesMiddlewares(stack *middleware.Stack, 
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -156,6 +161,9 @@ func (c *Client) addOperationAssociateFacesMiddlewares(stack *middleware.Stack, 
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opAssociateFacesMiddleware(stack, options); err != nil {
 		return err
 	}
@@ -165,7 +173,7 @@ func (c *Client) addOperationAssociateFacesMiddlewares(stack *middleware.Stack, 
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opAssociateFaces(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

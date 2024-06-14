@@ -6,30 +6,34 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Enables Health to work with Organizations. You can use the organizational view
 // feature to aggregate events from all Amazon Web Services accounts in your
-// organization in a centralized location. This operation also creates a
-// service-linked role for the management account in the organization. To call this
-// operation, you must meet the following requirements:
+// organization in a centralized location.
+//
+// This operation also creates a service-linked role for the management account in
+// the organization.
+//
+// To call this operation, you must meet the following requirements:
+//
 //   - You must have a Business, Enterprise On-Ramp, or Enterprise Support plan
-//     from Amazon Web Services Support (http://aws.amazon.com/premiumsupport/) to
-//     use the Health API. If you call the Health API from an Amazon Web Services
-//     account that doesn't have a Business, Enterprise On-Ramp, or Enterprise Support
-//     plan, you receive a SubscriptionRequiredException error.
+//     from [Amazon Web Services Support]to use the Health API. If you call the Health API from an Amazon Web
+//     Services account that doesn't have a Business, Enterprise On-Ramp, or Enterprise
+//     Support plan, you receive a SubscriptionRequiredException error.
+//
 //   - You must have permission to call this operation from the organization's
-//     management account. For example IAM policies, see Health identity-based
-//     policy examples (https://docs.aws.amazon.com/health/latest/ug/security_iam_id-based-policy-examples.html)
-//     .
+//     management account. For example IAM policies, see [Health identity-based policy examples].
 //
 // If you don't have the required support plan, you can instead use the Health
-// console to enable the organizational view feature. For more information, see
-// Aggregating Health events (https://docs.aws.amazon.com/health/latest/ug/aggregate-events.html)
-// in the Health User Guide.
+// console to enable the organizational view feature. For more information, see [Aggregating Health events]in
+// the Health User Guide.
+//
+// [Amazon Web Services Support]: http://aws.amazon.com/premiumsupport/
+// [Aggregating Health events]: https://docs.aws.amazon.com/health/latest/ug/aggregate-events.html
+// [Health identity-based policy examples]: https://docs.aws.amazon.com/health/latest/ug/security_iam_id-based-policy-examples.html
 func (c *Client) EnableHealthServiceAccessForOrganization(ctx context.Context, params *EnableHealthServiceAccessForOrganizationInput, optFns ...func(*Options)) (*EnableHealthServiceAccessForOrganizationOutput, error) {
 	if params == nil {
 		params = &EnableHealthServiceAccessForOrganizationInput{}
@@ -78,25 +82,25 @@ func (c *Client) addOperationEnableHealthServiceAccessForOrganizationMiddlewares
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -111,10 +115,13 @@ func (c *Client) addOperationEnableHealthServiceAccessForOrganizationMiddlewares
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opEnableHealthServiceAccessForOrganization(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

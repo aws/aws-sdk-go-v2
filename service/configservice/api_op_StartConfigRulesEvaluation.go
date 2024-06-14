@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -16,19 +15,31 @@ import (
 // you want to test that a rule you updated is working as expected.
 // StartConfigRulesEvaluation does not re-record the latest configuration state for
 // your resources. It re-runs an evaluation against the last known state of your
-// resources. You can specify up to 25 Config rules per request. An existing
-// StartConfigRulesEvaluation call for the specified rules must complete before you
-// can call the API again. If you chose to have Config stream to an Amazon SNS
-// topic, you will receive a ConfigRuleEvaluationStarted notification when the
-// evaluation starts. You don't need to call the StartConfigRulesEvaluation API to
-// run an evaluation for a new rule. When you create a rule, Config evaluates your
-// resources against the rule automatically. The StartConfigRulesEvaluation API is
-// useful if you want to run on-demand evaluations, such as the following example:
+// resources.
+//
+// You can specify up to 25 Config rules per request.
+//
+// An existing StartConfigRulesEvaluation call for the specified rules must
+// complete before you can call the API again. If you chose to have Config stream
+// to an Amazon SNS topic, you will receive a ConfigRuleEvaluationStarted
+// notification when the evaluation starts.
+//
+// You don't need to call the StartConfigRulesEvaluation API to run an evaluation
+// for a new rule. When you create a rule, Config evaluates your resources against
+// the rule automatically.
+//
+// The StartConfigRulesEvaluation API is useful if you want to run on-demand
+// evaluations, such as the following example:
+//
 //   - You have a custom rule that evaluates your IAM resources every 24 hours.
+//
 //   - You update your Lambda function to add additional conditions to your rule.
+//
 //   - Instead of waiting for the next periodic evaluation, you call the
 //     StartConfigRulesEvaluation API.
+//
 //   - Config invokes your Lambda function and evaluates your IAM resources.
+//
 //   - Your custom rule will still run periodic evaluations every 24 hours.
 func (c *Client) StartConfigRulesEvaluation(ctx context.Context, params *StartConfigRulesEvaluationInput, optFns ...func(*Options)) (*StartConfigRulesEvaluationOutput, error) {
 	if params == nil {
@@ -83,25 +94,25 @@ func (c *Client) addOperationStartConfigRulesEvaluationMiddlewares(stack *middle
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -116,10 +127,13 @@ func (c *Client) addOperationStartConfigRulesEvaluationMiddlewares(stack *middle
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opStartConfigRulesEvaluation(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

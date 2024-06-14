@@ -6,19 +6,22 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes the server and the underlying AWS CloudFormation stacks (including the
+//	Deletes the server and the underlying AWS CloudFormation stacks (including the
+//
 // server's EC2 instance). When you run this command, the server state is updated
 // to DELETING . After the server is deleted, it is no longer returned by
 // DescribeServer requests. If the AWS CloudFormation stack cannot be deleted, the
-// server cannot be deleted. This operation is asynchronous. An
-// InvalidStateException is thrown when a server deletion is already in progress. A
-// ResourceNotFoundException is thrown when the server does not exist. A
-// ValidationException is raised when parameters of the request are not valid.
+// server cannot be deleted.
+//
+// This operation is asynchronous.
+//
+// An InvalidStateException is thrown when a server deletion is already in
+// progress. A ResourceNotFoundException is thrown when the server does not exist.
+// A ValidationException is raised when parameters of the request are not valid.
 func (c *Client) DeleteServer(ctx context.Context, params *DeleteServerInput, optFns ...func(*Options)) (*DeleteServerOutput, error) {
 	if params == nil {
 		params = &DeleteServerInput{}
@@ -73,25 +76,25 @@ func (c *Client) addOperationDeleteServerMiddlewares(stack *middleware.Stack, op
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -106,13 +109,16 @@ func (c *Client) addOperationDeleteServerMiddlewares(stack *middleware.Stack, op
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDeleteServerValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteServer(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

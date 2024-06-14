@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/workspacesweb/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -36,13 +35,15 @@ type UpdatePortalInput struct {
 	PortalArn *string
 
 	// The type of authentication integration points used when signing into the web
-	// portal. Defaults to Standard . Standard web portals are authenticated directly
-	// through your identity provider. You need to call CreateIdentityProvider to
-	// integrate your identity provider with your web portal. User and group access to
-	// your web portal is controlled through your identity provider.
-	// IAM_Identity_Center web portals are authenticated through AWS IAM Identity
-	// Center (successor to AWS Single Sign-On). They provide additional features, such
-	// as IdP-initiated authentication. Identity sources (including external identity
+	// portal. Defaults to Standard .
+	//
+	// Standard web portals are authenticated directly through your identity provider.
+	// You need to call CreateIdentityProvider to integrate your identity provider
+	// with your web portal. User and group access to your web portal is controlled
+	// through your identity provider.
+	//
+	// IAM Identity Center web portals are authenticated through IAM Identity Center
+	// (successor to Single Sign-On). Identity sources (including external identity
 	// provider integration), plus user and group access to your web portal, can be
 	// configured in the IAM Identity Center.
 	AuthenticationType types.AuthenticationType
@@ -50,6 +51,12 @@ type UpdatePortalInput struct {
 	// The name of the web portal. This is not visible to users who log into the web
 	// portal.
 	DisplayName *string
+
+	// The type and resources of the underlying instance.
+	InstanceType types.InstanceType
+
+	// The maximum number of concurrent sessions for the portal.
+	MaxConcurrentSessions *int32
 
 	noSmithyDocumentSerde
 }
@@ -87,25 +94,25 @@ func (c *Client) addOperationUpdatePortalMiddlewares(stack *middleware.Stack, op
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -120,13 +127,16 @@ func (c *Client) addOperationUpdatePortalMiddlewares(stack *middleware.Stack, op
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpUpdatePortalValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdatePortal(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

@@ -6,14 +6,14 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Moves an account from its current source parent root or organizational unit
-// (OU) to the specified destination parent root or OU. This operation can be
-// called only from the organization's management account.
+// (OU) to the specified destination parent root or OU.
+//
+// This operation can be called only from the organization's management account.
 func (c *Client) MoveAccount(ctx context.Context, params *MoveAccountInput, optFns ...func(*Options)) (*MoveAccountOutput, error) {
 	if params == nil {
 		params = &MoveAccountInput{}
@@ -31,35 +31,47 @@ func (c *Client) MoveAccount(ctx context.Context, params *MoveAccountInput, optF
 
 type MoveAccountInput struct {
 
-	// The unique identifier (ID) of the account that you want to move. The regex
-	// pattern (http://wikipedia.org/wiki/regex) for an account ID string requires
-	// exactly 12 digits.
+	// The unique identifier (ID) of the account that you want to move.
+	//
+	// The [regex pattern] for an account ID string requires exactly 12 digits.
+	//
+	// [regex pattern]: http://wikipedia.org/wiki/regex
 	//
 	// This member is required.
 	AccountId *string
 
 	// The unique identifier (ID) of the root or organizational unit that you want to
-	// move the account to. The regex pattern (http://wikipedia.org/wiki/regex) for a
-	// parent ID string requires one of the following:
+	// move the account to.
+	//
+	// The [regex pattern] for a parent ID string requires one of the following:
+	//
 	//   - Root - A string that begins with "r-" followed by from 4 to 32 lowercase
 	//   letters or digits.
+	//
 	//   - Organizational unit (OU) - A string that begins with "ou-" followed by from
 	//   4 to 32 lowercase letters or digits (the ID of the root that the OU is in). This
 	//   string is followed by a second "-" dash and from 8 to 32 additional lowercase
 	//   letters or digits.
 	//
+	// [regex pattern]: http://wikipedia.org/wiki/regex
+	//
 	// This member is required.
 	DestinationParentId *string
 
 	// The unique identifier (ID) of the root or organizational unit that you want to
-	// move the account from. The regex pattern (http://wikipedia.org/wiki/regex) for
-	// a parent ID string requires one of the following:
+	// move the account from.
+	//
+	// The [regex pattern] for a parent ID string requires one of the following:
+	//
 	//   - Root - A string that begins with "r-" followed by from 4 to 32 lowercase
 	//   letters or digits.
+	//
 	//   - Organizational unit (OU) - A string that begins with "ou-" followed by from
 	//   4 to 32 lowercase letters or digits (the ID of the root that the OU is in). This
 	//   string is followed by a second "-" dash and from 8 to 32 additional lowercase
 	//   letters or digits.
+	//
+	// [regex pattern]: http://wikipedia.org/wiki/regex
 	//
 	// This member is required.
 	SourceParentId *string
@@ -96,25 +108,25 @@ func (c *Client) addOperationMoveAccountMiddlewares(stack *middleware.Stack, opt
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -129,13 +141,16 @@ func (c *Client) addOperationMoveAccountMiddlewares(stack *middleware.Stack, opt
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpMoveAccountValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opMoveAccount(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

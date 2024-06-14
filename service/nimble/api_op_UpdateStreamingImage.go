@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/nimble/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -57,12 +56,17 @@ type UpdateStreamingImageInput struct {
 
 type UpdateStreamingImageOutput struct {
 
-	// Represents a streaming image resource. Streaming images are used by studio
-	// users to select which operating system and software they want to use in a Nimble
-	// Studio streaming session. Amazon provides a number of streaming images that
-	// include popular 3rd-party software. You can create your own streaming images
-	// using an Amazon EC2 machine image that you create for this purpose. You can also
-	// include software that your users require.
+	// Represents a streaming image resource.
+	//
+	// Streaming images are used by studio users to select which operating system and
+	// software they want to use in a Nimble Studio streaming session.
+	//
+	// Amazon provides a number of streaming images that include popular 3rd-party
+	// software.
+	//
+	// You can create your own streaming images using an Amazon EC2 machine image that
+	// you create for this purpose. You can also include software that your users
+	// require.
 	StreamingImage *types.StreamingImage
 
 	// Metadata pertaining to the operation's result.
@@ -93,25 +97,25 @@ func (c *Client) addOperationUpdateStreamingImageMiddlewares(stack *middleware.S
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -126,6 +130,9 @@ func (c *Client) addOperationUpdateStreamingImageMiddlewares(stack *middleware.S
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opUpdateStreamingImageMiddleware(stack, options); err != nil {
 		return err
 	}
@@ -135,7 +142,7 @@ func (c *Client) addOperationUpdateStreamingImageMiddlewares(stack *middleware.S
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateStreamingImage(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

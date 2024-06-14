@@ -6,14 +6,16 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/iot/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a job. Requires permission to access the CreateJob (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
-// action.
+// Creates a job.
+//
+// Requires permission to access the [CreateJob] action.
+//
+// [CreateJob]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions
 func (c *Client) CreateJob(ctx context.Context, params *CreateJobInput, optFns ...func(*Options)) (*CreateJobOutput, error) {
 	if params == nil {
 		params = &CreateJobInput{}
@@ -52,26 +54,34 @@ type CreateJobInput struct {
 	// The package version Amazon Resource Names (ARNs) that are installed on the
 	// device when the job successfully completes. The package version must be in
 	// either the Published or Deprecated state when the job deploys. For more
-	// information, see Package version lifecycle (https://docs.aws.amazon.com/iot/latest/developerguide/preparing-to-use-software-package-catalog.html#package-version-lifecycle)
-	// . Note:The following Length Constraints relates to a single ARN. Up to 25
-	// package version ARNs are allowed.
+	// information, see [Package version lifecycle].
+	//
+	// Note:The following Length Constraints relates to a single ARN. Up to 25 package
+	// version ARNs are allowed.
+	//
+	// [Package version lifecycle]: https://docs.aws.amazon.com/iot/latest/developerguide/preparing-to-use-software-package-catalog.html#package-version-lifecycle
 	DestinationPackageVersions []string
 
 	// The job document. Required if you don't specify a value for documentSource .
 	Document *string
 
 	// Parameters of an Amazon Web Services managed template that you can specify to
-	// create the job document. documentParameters can only be used when creating jobs
-	// from Amazon Web Services managed templates. This parameter can't be used with
-	// custom job templates or to create jobs from them.
+	// create the job document.
+	//
+	// documentParameters can only be used when creating jobs from Amazon Web Services
+	// managed templates. This parameter can't be used with custom job templates or to
+	// create jobs from them.
 	DocumentParameters map[string]string
 
 	// An S3 link, or S3 object URL, to the job document. The link is an Amazon S3
-	// object URL and is required if you don't specify a value for document . For
-	// example, --document-source
-	// https://s3.region-code.amazonaws.com/example-firmware/device-firmware.1.0 For
-	// more information, see Methods for accessing a bucket (https://docs.aws.amazon.com/AmazonS3/latest/userguide/access-bucket-intro.html)
-	// .
+	// object URL and is required if you don't specify a value for document .
+	//
+	// For example, --document-source
+	// https://s3.region-code.amazonaws.com/example-firmware/device-firmware.1.0
+	//
+	// For more information, see [Methods for accessing a bucket].
+	//
+	// [Methods for accessing a bucket]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/access-bucket-intro.html
 	DocumentSource *string
 
 	// Allows you to create the criteria to retry a job.
@@ -83,11 +93,18 @@ type CreateJobInput struct {
 	// The ARN of the job template used to create the job.
 	JobTemplateArn *string
 
-	// The namespace used to indicate that a job is a customer-managed job. When you
-	// specify a value for this parameter, Amazon Web Services IoT Core sends jobs
-	// notifications to MQTT topics that contain the value in the following format.
-	// $aws/things/THING_NAME/jobs/JOB_ID/notify-namespace-NAMESPACE_ID/ The
-	// namespaceId feature is in public preview.
+	// The namespace used to indicate that a job is a customer-managed job.
+	//
+	// When you specify a value for this parameter, Amazon Web Services IoT Core sends
+	// jobs notifications to MQTT topics that contain the value in the following
+	// format.
+	//
+	//     $aws/things/THING_NAME/jobs/JOB_ID/notify-namespace-NAMESPACE_ID/
+	//
+	// The namespaceId feature is only supported by IoT Greengrass at this time. For
+	// more information, see [Setting up IoT Greengrass core devices.]
+	//
+	// [Setting up IoT Greengrass core devices.]: https://docs.aws.amazon.com/greengrass/v2/developerguide/setting-up.html
 	NamespaceId *string
 
 	// Configuration information for pre-signed S3 URLs.
@@ -105,10 +122,11 @@ type CreateJobInput struct {
 	// (SNAPSHOT). If continuous, the job may also be run on a thing when a change is
 	// detected in a target. For example, a job will run on a thing when the thing is
 	// added to a target group, even after the job was completed by all things
-	// originally in the group. We recommend that you use continuous jobs instead of
-	// snapshot jobs for dynamic thing group targets. By using continuous jobs, devices
-	// that join the group receive the job execution even after the job has been
-	// created.
+	// originally in the group.
+	//
+	// We recommend that you use continuous jobs instead of snapshot jobs for dynamic
+	// thing group targets. By using continuous jobs, devices that join the group
+	// receive the job execution even after the job has been created.
 	TargetSelection types.TargetSelection
 
 	// Specifies the amount of time each device has to finish its execution of the
@@ -159,25 +177,25 @@ func (c *Client) addOperationCreateJobMiddlewares(stack *middleware.Stack, optio
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -192,13 +210,16 @@ func (c *Client) addOperationCreateJobMiddlewares(stack *middleware.Stack, optio
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpCreateJobValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateJob(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

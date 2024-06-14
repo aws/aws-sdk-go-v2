@@ -6,16 +6,17 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Deletes a channel message. Only admins can perform this action. Deletion makes
 // messages inaccessible immediately. A background process deletes any revisions
-// created by UpdateChannelMessage . The x-amz-chime-bearer request header is
-// mandatory. Use the ARN of the AppInstanceUser or AppInstanceBot that makes the
-// API call as the value in the header.
+// created by UpdateChannelMessage .
+//
+// The x-amz-chime-bearer request header is mandatory. Use the ARN of the
+// AppInstanceUser or AppInstanceBot that makes the API call as the value in the
+// header.
 func (c *Client) DeleteChannelMessage(ctx context.Context, params *DeleteChannelMessageInput, optFns ...func(*Options)) (*DeleteChannelMessageOutput, error) {
 	if params == nil {
 		params = &DeleteChannelMessageInput{}
@@ -48,8 +49,9 @@ type DeleteChannelMessageInput struct {
 	// This member is required.
 	MessageId *string
 
-	// The ID of the SubChannel in the request. Only required when deleting messages
-	// in a SubChannel that the user belongs to.
+	// The ID of the SubChannel in the request.
+	//
+	// Only required when deleting messages in a SubChannel that the user belongs to.
 	SubChannelId *string
 
 	noSmithyDocumentSerde
@@ -84,25 +86,25 @@ func (c *Client) addOperationDeleteChannelMessageMiddlewares(stack *middleware.S
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -117,13 +119,16 @@ func (c *Client) addOperationDeleteChannelMessageMiddlewares(stack *middleware.S
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDeleteChannelMessageValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteChannelMessage(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

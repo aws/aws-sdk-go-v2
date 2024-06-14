@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -36,9 +35,12 @@ type UpdateDomainInput struct {
 	DomainId *string
 
 	// Specifies the VPC used for non-EFS traffic.
+	//
 	//   - PublicInternetOnly - Non-EFS traffic is through a VPC managed by Amazon
 	//   SageMaker, which allows direct internet access.
+	//
 	//   - VpcOnly - All Studio traffic is through the specified VPC and subnets.
+	//
 	// This configuration can only be modified if there are no apps in the InService ,
 	// Pending , or Deleting state. The configuration cannot be updated if
 	// DomainSettings.RStudioServerProDomainSettings.DomainExecutionRoleArn is already
@@ -63,8 +65,10 @@ type UpdateDomainInput struct {
 	// A collection of DomainSettings configuration values to update.
 	DomainSettingsForUpdate *types.DomainSettingsForUpdate
 
-	// The VPC subnets that Studio uses for communication. If removing subnets, ensure
-	// there are no apps in the InService , Pending , or Deleting state.
+	// The VPC subnets that Studio uses for communication.
+	//
+	// If removing subnets, ensure there are no apps in the InService , Pending , or
+	// Deleting state.
 	SubnetIds []string
 
 	noSmithyDocumentSerde
@@ -103,25 +107,25 @@ func (c *Client) addOperationUpdateDomainMiddlewares(stack *middleware.Stack, op
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -136,13 +140,16 @@ func (c *Client) addOperationUpdateDomainMiddlewares(stack *middleware.Stack, op
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpUpdateDomainValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateDomain(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

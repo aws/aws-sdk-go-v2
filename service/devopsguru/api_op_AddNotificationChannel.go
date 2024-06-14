@@ -6,24 +6,28 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/devopsguru/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Adds a notification channel to DevOps Guru. A notification channel is used to
+//	Adds a notification channel to DevOps Guru. A notification channel is used to
+//
 // notify you about important DevOps Guru events, such as when an insight is
-// generated. If you use an Amazon SNS topic in another account, you must attach a
-// policy to it that grants DevOps Guru permission to send it notifications. DevOps
-// Guru adds the required policy on your behalf to send notifications using Amazon
-// SNS in your account. DevOps Guru only supports standard SNS topics. For more
-// information, see Permissions for Amazon SNS topics (https://docs.aws.amazon.com/devops-guru/latest/userguide/sns-required-permissions.html)
-// . If you use an Amazon SNS topic that is encrypted by an Amazon Web Services Key
+// generated.
+//
+// If you use an Amazon SNS topic in another account, you must attach a policy to
+// it that grants DevOps Guru permission to send it notifications. DevOps Guru adds
+// the required policy on your behalf to send notifications using Amazon SNS in
+// your account. DevOps Guru only supports standard SNS topics. For more
+// information, see [Permissions for Amazon SNS topics].
+//
+// If you use an Amazon SNS topic that is encrypted by an Amazon Web Services Key
 // Management Service customer-managed key (CMK), then you must add permissions to
-// the CMK. For more information, see Permissions for Amazon Web Services
-// KMS–encrypted Amazon SNS topics (https://docs.aws.amazon.com/devops-guru/latest/userguide/sns-kms-permissions.html)
-// .
+// the CMK. For more information, see [Permissions for Amazon Web Services KMS–encrypted Amazon SNS topics].
+//
+// [Permissions for Amazon SNS topics]: https://docs.aws.amazon.com/devops-guru/latest/userguide/sns-required-permissions.html
+// [Permissions for Amazon Web Services KMS–encrypted Amazon SNS topics]: https://docs.aws.amazon.com/devops-guru/latest/userguide/sns-kms-permissions.html
 func (c *Client) AddNotificationChannel(ctx context.Context, params *AddNotificationChannelInput, optFns ...func(*Options)) (*AddNotificationChannelOutput, error) {
 	if params == nil {
 		params = &AddNotificationChannelInput{}
@@ -41,7 +45,7 @@ func (c *Client) AddNotificationChannel(ctx context.Context, params *AddNotifica
 
 type AddNotificationChannelInput struct {
 
-	// A NotificationChannelConfig object that specifies what type of notification
+	//  A NotificationChannelConfig object that specifies what type of notification
 	// channel to add. The one supported notification channel is Amazon Simple
 	// Notification Service (Amazon SNS).
 	//
@@ -53,7 +57,7 @@ type AddNotificationChannelInput struct {
 
 type AddNotificationChannelOutput struct {
 
-	// The ID of the added notification channel.
+	//  The ID of the added notification channel.
 	//
 	// This member is required.
 	Id *string
@@ -86,25 +90,25 @@ func (c *Client) addOperationAddNotificationChannelMiddlewares(stack *middleware
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -119,13 +123,16 @@ func (c *Client) addOperationAddNotificationChannelMiddlewares(stack *middleware
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpAddNotificationChannelValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opAddNotificationChannel(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

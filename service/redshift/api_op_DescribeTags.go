@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/redshift/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -14,12 +13,16 @@ import (
 
 // Returns a list of tags. You can return tags from a specific resource by
 // specifying an ARN, or you can return all tags for a given type of resource, such
-// as clusters, snapshots, and so on. The following are limitations for
-// DescribeTags :
+// as clusters, snapshots, and so on.
+//
+// The following are limitations for DescribeTags :
+//
 //   - You cannot specify an ARN and a resource-type value together in the same
 //     request.
+//
 //   - You cannot use the MaxRecords and Marker parameters together with the ARN
 //     parameter.
+//
 //   - The MaxRecords parameter can be a range from 10 to 50 results to return in a
 //     request.
 //
@@ -27,9 +30,11 @@ import (
 // Redshift returns all resources that match any combination of the specified keys
 // and values. For example, if you have owner and environment for tag keys, and
 // admin and test for tag values, all resources that have any combination of those
-// values are returned. If both tag keys and values are omitted from the request,
-// resources are returned regardless of whether they have tag keys or values
-// associated with them.
+// values are returned.
+//
+// If both tag keys and values are omitted from the request, resources are
+// returned regardless of whether they have tag keys or values associated with
+// them.
 func (c *Client) DescribeTags(ctx context.Context, params *DescribeTagsInput, optFns ...func(*Options)) (*DescribeTagsOutput, error) {
 	if params == nil {
 		params = &DescribeTagsInput{}
@@ -66,20 +71,31 @@ type DescribeTagsInput struct {
 
 	// The type of resource with which you want to view tags. Valid resource types
 	// are:
+	//
 	//   - Cluster
+	//
 	//   - CIDR/IP
+	//
 	//   - EC2 security group
+	//
 	//   - Snapshot
+	//
 	//   - Cluster security group
+	//
 	//   - Subnet group
+	//
 	//   - HSM connection
+	//
 	//   - HSM certificate
+	//
 	//   - Parameter group
+	//
 	//   - Snapshot copy grant
+	//
 	// For more information about Amazon Redshift resource types and constructing
-	// ARNs, go to Specifying Policy Elements: Actions, Effects, Resources, and
-	// Principals (https://docs.aws.amazon.com/redshift/latest/mgmt/redshift-iam-access-control-overview.html#redshift-iam-access-control-specify-actions)
-	// in the Amazon Redshift Cluster Management Guide.
+	// ARNs, go to [Specifying Policy Elements: Actions, Effects, Resources, and Principals]in the Amazon Redshift Cluster Management Guide.
+	//
+	// [Specifying Policy Elements: Actions, Effects, Resources, and Principals]: https://docs.aws.amazon.com/redshift/latest/mgmt/redshift-iam-access-control-overview.html#redshift-iam-access-control-specify-actions
 	ResourceType *string
 
 	// A tag key or keys for which you want to return all matching resources that are
@@ -139,25 +155,25 @@ func (c *Client) addOperationDescribeTagsMiddlewares(stack *middleware.Stack, op
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -172,10 +188,13 @@ func (c *Client) addOperationDescribeTagsMiddlewares(stack *middleware.Stack, op
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeTags(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

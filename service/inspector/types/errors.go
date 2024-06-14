@@ -307,11 +307,11 @@ func (e *ServiceTemporarilyUnavailableException) ErrorFault() smithy.ErrorFault 
 	return smithy.FaultServer
 }
 
-// Used by the GetAssessmentReport API. The request was rejected because you tried
-// to generate a report for an assessment run that existed before reporting was
-// supported in Amazon Inspector. You can only generate reports for assessment runs
-// that took place or will take place after generating reports in Amazon Inspector
-// became available.
+// Used by the GetAssessmentReport API. The request was rejected because you tried to generate a
+// report for an assessment run that existed before reporting was supported in
+// Amazon Inspector. You can only generate reports for assessment runs that took
+// place or will take place after generating reports in Amazon Inspector became
+// available.
 type UnsupportedFeatureException struct {
 	Message *string
 

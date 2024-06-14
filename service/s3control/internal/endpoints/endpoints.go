@@ -140,6 +140,44 @@ var defaultPartitions = endpoints.Partitions{
 		IsRegionalized: true,
 		Endpoints: endpoints.Endpoints{
 			endpoints.EndpointKey{
+				Region: "af-south-1",
+			}: endpoints.Endpoint{
+				Hostname:          "s3-control.af-south-1.amazonaws.com",
+				SignatureVersions: []string{"s3v4"},
+				CredentialScope: endpoints.CredentialScope{
+					Region: "af-south-1",
+				},
+			},
+			endpoints.EndpointKey{
+				Region:  "af-south-1",
+				Variant: endpoints.DualStackVariant,
+			}: {
+				Hostname:          "s3-control.dualstack.af-south-1.amazonaws.com",
+				SignatureVersions: []string{"s3v4"},
+				CredentialScope: endpoints.CredentialScope{
+					Region: "af-south-1",
+				},
+			},
+			endpoints.EndpointKey{
+				Region: "ap-east-1",
+			}: endpoints.Endpoint{
+				Hostname:          "s3-control.ap-east-1.amazonaws.com",
+				SignatureVersions: []string{"s3v4"},
+				CredentialScope: endpoints.CredentialScope{
+					Region: "ap-east-1",
+				},
+			},
+			endpoints.EndpointKey{
+				Region:  "ap-east-1",
+				Variant: endpoints.DualStackVariant,
+			}: {
+				Hostname:          "s3-control.dualstack.ap-east-1.amazonaws.com",
+				SignatureVersions: []string{"s3v4"},
+				CredentialScope: endpoints.CredentialScope{
+					Region: "ap-east-1",
+				},
+			},
+			endpoints.EndpointKey{
 				Region: "ap-northeast-1",
 			}: endpoints.Endpoint{
 				Hostname:          "s3-control.ap-northeast-1.amazonaws.com",
@@ -216,6 +254,25 @@ var defaultPartitions = endpoints.Partitions{
 				},
 			},
 			endpoints.EndpointKey{
+				Region: "ap-south-2",
+			}: endpoints.Endpoint{
+				Hostname:          "s3-control.ap-south-2.amazonaws.com",
+				SignatureVersions: []string{"s3v4"},
+				CredentialScope: endpoints.CredentialScope{
+					Region: "ap-south-2",
+				},
+			},
+			endpoints.EndpointKey{
+				Region:  "ap-south-2",
+				Variant: endpoints.DualStackVariant,
+			}: {
+				Hostname:          "s3-control.dualstack.ap-south-2.amazonaws.com",
+				SignatureVersions: []string{"s3v4"},
+				CredentialScope: endpoints.CredentialScope{
+					Region: "ap-south-2",
+				},
+			},
+			endpoints.EndpointKey{
 				Region: "ap-southeast-1",
 			}: endpoints.Endpoint{
 				Hostname:          "s3-control.ap-southeast-1.amazonaws.com",
@@ -251,6 +308,44 @@ var defaultPartitions = endpoints.Partitions{
 				SignatureVersions: []string{"s3v4"},
 				CredentialScope: endpoints.CredentialScope{
 					Region: "ap-southeast-2",
+				},
+			},
+			endpoints.EndpointKey{
+				Region: "ap-southeast-3",
+			}: endpoints.Endpoint{
+				Hostname:          "s3-control.ap-southeast-3.amazonaws.com",
+				SignatureVersions: []string{"s3v4"},
+				CredentialScope: endpoints.CredentialScope{
+					Region: "ap-southeast-3",
+				},
+			},
+			endpoints.EndpointKey{
+				Region:  "ap-southeast-3",
+				Variant: endpoints.DualStackVariant,
+			}: {
+				Hostname:          "s3-control.dualstack.ap-southeast-3.amazonaws.com",
+				SignatureVersions: []string{"s3v4"},
+				CredentialScope: endpoints.CredentialScope{
+					Region: "ap-southeast-3",
+				},
+			},
+			endpoints.EndpointKey{
+				Region: "ap-southeast-4",
+			}: endpoints.Endpoint{
+				Hostname:          "s3-control.ap-southeast-4.amazonaws.com",
+				SignatureVersions: []string{"s3v4"},
+				CredentialScope: endpoints.CredentialScope{
+					Region: "ap-southeast-4",
+				},
+			},
+			endpoints.EndpointKey{
+				Region:  "ap-southeast-4",
+				Variant: endpoints.DualStackVariant,
+			}: {
+				Hostname:          "s3-control.dualstack.ap-southeast-4.amazonaws.com",
+				SignatureVersions: []string{"s3v4"},
+				CredentialScope: endpoints.CredentialScope{
+					Region: "ap-southeast-4",
 				},
 			},
 			endpoints.EndpointKey{
@@ -303,6 +398,55 @@ var defaultPartitions = endpoints.Partitions{
 				Deprecated: aws.TrueTernary,
 			},
 			endpoints.EndpointKey{
+				Region: "ca-west-1",
+			}: endpoints.Endpoint{
+				Hostname:          "s3-control.ca-west-1.amazonaws.com",
+				SignatureVersions: []string{"s3v4"},
+				CredentialScope: endpoints.CredentialScope{
+					Region: "ca-west-1",
+				},
+			},
+			endpoints.EndpointKey{
+				Region:  "ca-west-1",
+				Variant: endpoints.FIPSVariant,
+			}: {
+				Hostname:          "s3-control-fips.ca-west-1.amazonaws.com",
+				SignatureVersions: []string{"s3v4"},
+				CredentialScope: endpoints.CredentialScope{
+					Region: "ca-west-1",
+				},
+			},
+			endpoints.EndpointKey{
+				Region:  "ca-west-1",
+				Variant: endpoints.FIPSVariant | endpoints.DualStackVariant,
+			}: {
+				Hostname:          "s3-control-fips.dualstack.ca-west-1.amazonaws.com",
+				SignatureVersions: []string{"s3v4"},
+				CredentialScope: endpoints.CredentialScope{
+					Region: "ca-west-1",
+				},
+			},
+			endpoints.EndpointKey{
+				Region:  "ca-west-1",
+				Variant: endpoints.DualStackVariant,
+			}: {
+				Hostname:          "s3-control.dualstack.ca-west-1.amazonaws.com",
+				SignatureVersions: []string{"s3v4"},
+				CredentialScope: endpoints.CredentialScope{
+					Region: "ca-west-1",
+				},
+			},
+			endpoints.EndpointKey{
+				Region: "ca-west-1-fips",
+			}: endpoints.Endpoint{
+				Hostname:          "s3-control-fips.ca-west-1.amazonaws.com",
+				SignatureVersions: []string{"s3v4"},
+				CredentialScope: endpoints.CredentialScope{
+					Region: "ca-west-1",
+				},
+				Deprecated: aws.TrueTernary,
+			},
+			endpoints.EndpointKey{
 				Region: "eu-central-1",
 			}: endpoints.Endpoint{
 				Hostname:          "s3-control.eu-central-1.amazonaws.com",
@@ -322,6 +466,25 @@ var defaultPartitions = endpoints.Partitions{
 				},
 			},
 			endpoints.EndpointKey{
+				Region: "eu-central-2",
+			}: endpoints.Endpoint{
+				Hostname:          "s3-control.eu-central-2.amazonaws.com",
+				SignatureVersions: []string{"s3v4"},
+				CredentialScope: endpoints.CredentialScope{
+					Region: "eu-central-2",
+				},
+			},
+			endpoints.EndpointKey{
+				Region:  "eu-central-2",
+				Variant: endpoints.DualStackVariant,
+			}: {
+				Hostname:          "s3-control.dualstack.eu-central-2.amazonaws.com",
+				SignatureVersions: []string{"s3v4"},
+				CredentialScope: endpoints.CredentialScope{
+					Region: "eu-central-2",
+				},
+			},
+			endpoints.EndpointKey{
 				Region: "eu-north-1",
 			}: endpoints.Endpoint{
 				Hostname:          "s3-control.eu-north-1.amazonaws.com",
@@ -338,6 +501,44 @@ var defaultPartitions = endpoints.Partitions{
 				SignatureVersions: []string{"s3v4"},
 				CredentialScope: endpoints.CredentialScope{
 					Region: "eu-north-1",
+				},
+			},
+			endpoints.EndpointKey{
+				Region: "eu-south-1",
+			}: endpoints.Endpoint{
+				Hostname:          "s3-control.eu-south-1.amazonaws.com",
+				SignatureVersions: []string{"s3v4"},
+				CredentialScope: endpoints.CredentialScope{
+					Region: "eu-south-1",
+				},
+			},
+			endpoints.EndpointKey{
+				Region:  "eu-south-1",
+				Variant: endpoints.DualStackVariant,
+			}: {
+				Hostname:          "s3-control.dualstack.eu-south-1.amazonaws.com",
+				SignatureVersions: []string{"s3v4"},
+				CredentialScope: endpoints.CredentialScope{
+					Region: "eu-south-1",
+				},
+			},
+			endpoints.EndpointKey{
+				Region: "eu-south-2",
+			}: endpoints.Endpoint{
+				Hostname:          "s3-control.eu-south-2.amazonaws.com",
+				SignatureVersions: []string{"s3v4"},
+				CredentialScope: endpoints.CredentialScope{
+					Region: "eu-south-2",
+				},
+			},
+			endpoints.EndpointKey{
+				Region:  "eu-south-2",
+				Variant: endpoints.DualStackVariant,
+			}: {
+				Hostname:          "s3-control.dualstack.eu-south-2.amazonaws.com",
+				SignatureVersions: []string{"s3v4"},
+				CredentialScope: endpoints.CredentialScope{
+					Region: "eu-south-2",
 				},
 			},
 			endpoints.EndpointKey{
@@ -395,6 +596,63 @@ var defaultPartitions = endpoints.Partitions{
 				SignatureVersions: []string{"s3v4"},
 				CredentialScope: endpoints.CredentialScope{
 					Region: "eu-west-3",
+				},
+			},
+			endpoints.EndpointKey{
+				Region: "il-central-1",
+			}: endpoints.Endpoint{
+				Hostname:          "s3-control.il-central-1.amazonaws.com",
+				SignatureVersions: []string{"s3v4"},
+				CredentialScope: endpoints.CredentialScope{
+					Region: "il-central-1",
+				},
+			},
+			endpoints.EndpointKey{
+				Region:  "il-central-1",
+				Variant: endpoints.DualStackVariant,
+			}: {
+				Hostname:          "s3-control.dualstack.il-central-1.amazonaws.com",
+				SignatureVersions: []string{"s3v4"},
+				CredentialScope: endpoints.CredentialScope{
+					Region: "il-central-1",
+				},
+			},
+			endpoints.EndpointKey{
+				Region: "me-central-1",
+			}: endpoints.Endpoint{
+				Hostname:          "s3-control.me-central-1.amazonaws.com",
+				SignatureVersions: []string{"s3v4"},
+				CredentialScope: endpoints.CredentialScope{
+					Region: "me-central-1",
+				},
+			},
+			endpoints.EndpointKey{
+				Region:  "me-central-1",
+				Variant: endpoints.DualStackVariant,
+			}: {
+				Hostname:          "s3-control.dualstack.me-central-1.amazonaws.com",
+				SignatureVersions: []string{"s3v4"},
+				CredentialScope: endpoints.CredentialScope{
+					Region: "me-central-1",
+				},
+			},
+			endpoints.EndpointKey{
+				Region: "me-south-1",
+			}: endpoints.Endpoint{
+				Hostname:          "s3-control.me-south-1.amazonaws.com",
+				SignatureVersions: []string{"s3v4"},
+				CredentialScope: endpoints.CredentialScope{
+					Region: "me-south-1",
+				},
+			},
+			endpoints.EndpointKey{
+				Region:  "me-south-1",
+				Variant: endpoints.DualStackVariant,
+			}: {
+				Hostname:          "s3-control.dualstack.me-south-1.amazonaws.com",
+				SignatureVersions: []string{"s3v4"},
+				CredentialScope: endpoints.CredentialScope{
+					Region: "me-south-1",
 				},
 			},
 			endpoints.EndpointKey{
@@ -697,18 +955,118 @@ var defaultPartitions = endpoints.Partitions{
 			}: {
 				Hostname:          "s3-control-fips.{region}.c2s.ic.gov",
 				Protocols:         []string{"https"},
-				SignatureVersions: []string{"v4"},
+				SignatureVersions: []string{"s3v4"},
 			},
 			{
 				Variant: 0,
 			}: {
 				Hostname:          "s3-control.{region}.c2s.ic.gov",
 				Protocols:         []string{"https"},
-				SignatureVersions: []string{"v4"},
+				SignatureVersions: []string{"s3v4"},
 			},
 		},
 		RegionRegex:    partitionRegexp.AwsIso,
 		IsRegionalized: true,
+		Endpoints: endpoints.Endpoints{
+			endpoints.EndpointKey{
+				Region: "us-iso-east-1",
+			}: endpoints.Endpoint{
+				Hostname:          "s3-control.us-iso-east-1.c2s.ic.gov",
+				SignatureVersions: []string{"s3v4"},
+				CredentialScope: endpoints.CredentialScope{
+					Region: "us-iso-east-1",
+				},
+			},
+			endpoints.EndpointKey{
+				Region:  "us-iso-east-1",
+				Variant: endpoints.FIPSVariant | endpoints.DualStackVariant,
+			}: {
+				Hostname:          "s3-control-fips.dualstack.us-iso-east-1.c2s.ic.gov",
+				SignatureVersions: []string{"s3v4"},
+				CredentialScope: endpoints.CredentialScope{
+					Region: "us-iso-east-1",
+				},
+			},
+			endpoints.EndpointKey{
+				Region:  "us-iso-east-1",
+				Variant: endpoints.FIPSVariant,
+			}: {
+				Hostname:          "s3-control-fips.us-iso-east-1.c2s.ic.gov",
+				SignatureVersions: []string{"s3v4"},
+				CredentialScope: endpoints.CredentialScope{
+					Region: "us-iso-east-1",
+				},
+			},
+			endpoints.EndpointKey{
+				Region:  "us-iso-east-1",
+				Variant: endpoints.DualStackVariant,
+			}: {
+				Hostname:          "s3-control.dualstack.us-iso-east-1.c2s.ic.gov",
+				SignatureVersions: []string{"s3v4"},
+				CredentialScope: endpoints.CredentialScope{
+					Region: "us-iso-east-1",
+				},
+			},
+			endpoints.EndpointKey{
+				Region: "us-iso-east-1-fips",
+			}: endpoints.Endpoint{
+				Hostname:          "s3-control-fips.us-iso-east-1.c2s.ic.gov",
+				SignatureVersions: []string{"s3v4"},
+				CredentialScope: endpoints.CredentialScope{
+					Region: "us-iso-east-1",
+				},
+				Deprecated: aws.TrueTernary,
+			},
+			endpoints.EndpointKey{
+				Region: "us-iso-west-1",
+			}: endpoints.Endpoint{
+				Hostname:          "s3-control.us-iso-west-1.c2s.ic.gov",
+				SignatureVersions: []string{"s3v4"},
+				CredentialScope: endpoints.CredentialScope{
+					Region: "us-iso-west-1",
+				},
+			},
+			endpoints.EndpointKey{
+				Region:  "us-iso-west-1",
+				Variant: endpoints.FIPSVariant | endpoints.DualStackVariant,
+			}: {
+				Hostname:          "s3-control-fips.dualstack.us-iso-west-1.c2s.ic.gov",
+				SignatureVersions: []string{"s3v4"},
+				CredentialScope: endpoints.CredentialScope{
+					Region: "us-iso-west-1",
+				},
+			},
+			endpoints.EndpointKey{
+				Region:  "us-iso-west-1",
+				Variant: endpoints.FIPSVariant,
+			}: {
+				Hostname:          "s3-control-fips.us-iso-west-1.c2s.ic.gov",
+				SignatureVersions: []string{"s3v4"},
+				CredentialScope: endpoints.CredentialScope{
+					Region: "us-iso-west-1",
+				},
+			},
+			endpoints.EndpointKey{
+				Region:  "us-iso-west-1",
+				Variant: endpoints.DualStackVariant,
+			}: {
+				Hostname:          "s3-control.dualstack.us-iso-west-1.c2s.ic.gov",
+				SignatureVersions: []string{"s3v4"},
+				CredentialScope: endpoints.CredentialScope{
+					Region: "us-iso-west-1",
+				},
+			},
+			endpoints.EndpointKey{
+				Region: "us-iso-west-1-fips",
+			}: endpoints.Endpoint{
+				Hostname:          "s3-control-fips.us-iso-west-1.c2s.ic.gov",
+				SignatureVersions: []string{"s3v4"},
+				CredentialScope: endpoints.CredentialScope{
+					Region: "us-iso-west-1",
+				},
+				Deprecated: aws.TrueTernary,
+			},
+		},
 	},
 	{
 		ID: "aws-iso-b",
@@ -718,18 +1076,69 @@ var defaultPartitions = endpoints.Partitions{
 			}: {
 				Hostname:          "s3-control-fips.{region}.sc2s.sgov.gov",
 				Protocols:         []string{"https"},
-				SignatureVersions: []string{"v4"},
+				SignatureVersions: []string{"s3v4"},
 			},
 			{
 				Variant: 0,
 			}: {
 				Hostname:          "s3-control.{region}.sc2s.sgov.gov",
 				Protocols:         []string{"https"},
-				SignatureVersions: []string{"v4"},
+				SignatureVersions: []string{"s3v4"},
 			},
 		},
 		RegionRegex:    partitionRegexp.AwsIsoB,
 		IsRegionalized: true,
+		Endpoints: endpoints.Endpoints{
+			endpoints.EndpointKey{
+				Region: "us-isob-east-1",
+			}: endpoints.Endpoint{
+				Hostname:          "s3-control.us-isob-east-1.sc2s.sgov.gov",
+				SignatureVersions: []string{"s3v4"},
+				CredentialScope: endpoints.CredentialScope{
+					Region: "us-isob-east-1",
+				},
+			},
+			endpoints.EndpointKey{
+				Region:  "us-isob-east-1",
+				Variant: endpoints.FIPSVariant | endpoints.DualStackVariant,
+			}: {
+				Hostname:          "s3-control-fips.dualstack.us-isob-east-1.sc2s.sgov.gov",
+				SignatureVersions: []string{"s3v4"},
+				CredentialScope: endpoints.CredentialScope{
+					Region: "us-isob-east-1",
+				},
+			},
+			endpoints.EndpointKey{
+				Region:  "us-isob-east-1",
+				Variant: endpoints.FIPSVariant,
+			}: {
+				Hostname:          "s3-control-fips.us-isob-east-1.sc2s.sgov.gov",
+				SignatureVersions: []string{"s3v4"},
+				CredentialScope: endpoints.CredentialScope{
+					Region: "us-isob-east-1",
+				},
+			},
+			endpoints.EndpointKey{
+				Region:  "us-isob-east-1",
+				Variant: endpoints.DualStackVariant,
+			}: {
+				Hostname:          "s3-control.dualstack.us-isob-east-1.sc2s.sgov.gov",
+				SignatureVersions: []string{"s3v4"},
+				CredentialScope: endpoints.CredentialScope{
+					Region: "us-isob-east-1",
+				},
+			},
+			endpoints.EndpointKey{
+				Region: "us-isob-east-1-fips",
+			}: endpoints.Endpoint{
+				Hostname:          "s3-control-fips.us-isob-east-1.sc2s.sgov.gov",
+				SignatureVersions: []string{"s3v4"},
+				CredentialScope: endpoints.CredentialScope{
+					Region: "us-isob-east-1",
+				},
+				Deprecated: aws.TrueTernary,
+			},
+		},
 	},
 	{
 		ID: "aws-iso-e",

@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"io"
@@ -34,27 +33,37 @@ func (c *Client) GetObject(ctx context.Context, params *GetObjectInput, optFns .
 type GetObjectInput struct {
 
 	// The path (including the file name) where the object is stored in the container.
-	// Format: // For example, to upload the file mlaw.avi to the folder path
-	// premium\canada in the container movies , enter the path premium/canada/mlaw.avi
-	// . Do not include the container name in this path. If the path includes any
-	// folders that don't exist yet, the service creates them. For example, suppose you
-	// have an existing premium/usa subfolder. If you specify premium/canada , the
-	// service creates a canada subfolder in the premium folder. You then have two
-	// subfolders, usa and canada , in the premium folder. There is no correlation
-	// between the path to the source and the path (folders) in the container in AWS
-	// Elemental MediaStore. For more information about folders and how they exist in a
-	// container, see the AWS Elemental MediaStore User Guide (http://docs.aws.amazon.com/mediastore/latest/ug/)
-	// . The file name is the name that is assigned to the file that you upload. The
+	// Format: //
+	//
+	// For example, to upload the file mlaw.avi to the folder path premium\canada in
+	// the container movies , enter the path premium/canada/mlaw.avi .
+	//
+	// Do not include the container name in this path.
+	//
+	// If the path includes any folders that don't exist yet, the service creates
+	// them. For example, suppose you have an existing premium/usa subfolder. If you
+	// specify premium/canada , the service creates a canada subfolder in the premium
+	// folder. You then have two subfolders, usa and canada , in the premium folder.
+	//
+	// There is no correlation between the path to the source and the path (folders)
+	// in the container in AWS Elemental MediaStore.
+	//
+	// For more information about folders and how they exist in a container, see the [AWS Elemental MediaStore User Guide].
+	//
+	// The file name is the name that is assigned to the file that you upload. The
 	// file can have the same name inside and outside of AWS Elemental MediaStore, or
 	// it can have the same name. The file name can include or omit an extension.
+	//
+	// [AWS Elemental MediaStore User Guide]: http://docs.aws.amazon.com/mediastore/latest/ug/
 	//
 	// This member is required.
 	Path *string
 
 	// The range bytes of an object to retrieve. For more information about the Range
-	// header, see http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.35 (http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.35)
-	// . AWS Elemental MediaStore ignores this header for partially uploaded objects
-	// that have streaming upload availability.
+	// header, see [http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.35]. AWS Elemental MediaStore ignores this header for partially
+	// uploaded objects that have streaming upload availability.
+	//
+	// [http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.35]: http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.35
 	Range *string
 
 	noSmithyDocumentSerde
@@ -73,9 +82,11 @@ type GetObjectOutput struct {
 	Body io.ReadCloser
 
 	// An optional CacheControl header that allows the caller to control the object's
-	// cache behavior. Headers can be passed in as specified in the HTTP spec at
-	// https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.9 (https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.9)
-	// . Headers with a custom user-defined value are also accepted.
+	// cache behavior. Headers can be passed in as specified in the HTTP spec at [https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.9].
+	//
+	// Headers with a custom user-defined value are also accepted.
+	//
+	// [https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.9]: https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.9
 	CacheControl *string
 
 	// The length of the object in bytes.
@@ -121,25 +132,25 @@ func (c *Client) addOperationGetObjectMiddlewares(stack *middleware.Stack, optio
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -151,13 +162,16 @@ func (c *Client) addOperationGetObjectMiddlewares(stack *middleware.Stack, optio
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpGetObjectValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetObject(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

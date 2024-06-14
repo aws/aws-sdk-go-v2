@@ -6,20 +6,24 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// This action is deprecated. Links an EC2-Classic instance to a
-// ClassicLink-enabled VPC through one or more of the VPC security groups. You
-// cannot link an EC2-Classic instance to more than one VPC at a time. You can only
-// link an instance that's in the running state. An instance is automatically
-// unlinked from a VPC when it's stopped - you can link it to the VPC again when
-// you restart it. After you've linked an instance, you cannot change the VPC
-// security groups that are associated with it. To change the security groups, you
-// must first unlink the instance, and then link it again. Linking your instance to
-// a VPC is sometimes referred to as attaching your instance.
+// This action is deprecated.
+//
+// Links an EC2-Classic instance to a ClassicLink-enabled VPC through one or more
+// of the VPC security groups. You cannot link an EC2-Classic instance to more than
+// one VPC at a time. You can only link an instance that's in the running state.
+// An instance is automatically unlinked from a VPC when it's stopped - you can
+// link it to the VPC again when you restart it.
+//
+// After you've linked an instance, you cannot change the VPC security groups that
+// are associated with it. To change the security groups, you must first unlink the
+// instance, and then link it again.
+//
+// Linking your instance to a VPC is sometimes referred to as attaching your
+// instance.
 func (c *Client) AttachClassicLinkVpc(ctx context.Context, params *AttachClassicLinkVpcInput, optFns ...func(*Options)) (*AttachClassicLinkVpcOutput, error) {
 	if params == nil {
 		params = &AttachClassicLinkVpcInput{}
@@ -95,25 +99,25 @@ func (c *Client) addOperationAttachClassicLinkVpcMiddlewares(stack *middleware.S
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -128,13 +132,16 @@ func (c *Client) addOperationAttachClassicLinkVpcMiddlewares(stack *middleware.S
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpAttachClassicLinkVpcValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opAttachClassicLinkVpc(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

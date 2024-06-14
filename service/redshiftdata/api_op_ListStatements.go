@@ -6,17 +6,18 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/redshiftdata/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // List of SQL statements. By default, only finished statements are shown. A token
-// is returned to page through the statement list. For more information about the
-// Amazon Redshift Data API and CLI usage examples, see Using the Amazon Redshift
-// Data API (https://docs.aws.amazon.com/redshift/latest/mgmt/data-api.html) in the
-// Amazon Redshift Management Guide.
+// is returned to page through the statement list.
+//
+// For more information about the Amazon Redshift Data API and CLI usage examples,
+// see [Using the Amazon Redshift Data API]in the Amazon Redshift Management Guide.
+//
+// [Using the Amazon Redshift Data API]: https://docs.aws.amazon.com/redshift/latest/mgmt/data-api.html
 func (c *Client) ListStatements(ctx context.Context, params *ListStatementsInput, optFns ...func(*Options)) (*ListStatementsOutput, error) {
 	if params == nil {
 		params = &ListStatementsInput{}
@@ -61,13 +62,20 @@ type ListStatementsInput struct {
 	StatementName *string
 
 	// The status of the SQL statement to list. Status values are defined as follows:
+	//
 	//   - ABORTED - The query run was stopped by the user.
+	//
 	//   - ALL - A status value that includes all query statuses. This value can be
 	//   used to filter results.
+	//
 	//   - FAILED - The query run failed.
+	//
 	//   - FINISHED - The query has finished running.
+	//
 	//   - PICKED - The query has been chosen to be run.
+	//
 	//   - STARTED - The query run has started.
+	//
 	//   - SUBMITTED - The query was submitted, but not yet processed.
 	Status types.StatusString
 
@@ -116,25 +124,25 @@ func (c *Client) addOperationListStatementsMiddlewares(stack *middleware.Stack, 
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -149,10 +157,13 @@ func (c *Client) addOperationListStatementsMiddlewares(stack *middleware.Stack, 
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListStatements(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

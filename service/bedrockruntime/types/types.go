@@ -3,8 +3,415 @@
 package types
 
 import (
+	"github.com/aws/aws-sdk-go-v2/service/bedrockruntime/document"
 	smithydocument "github.com/aws/smithy-go/document"
 )
+
+// The model must request at least one tool (no text is generated).
+type AnyToolChoice struct {
+	noSmithyDocumentSerde
+}
+
+// The Model automatically decides if a tool should be called or to whether to
+// generate text instead.
+type AutoToolChoice struct {
+	noSmithyDocumentSerde
+}
+
+// A block of content for a message.
+//
+// The following types satisfy this interface:
+//
+//	ContentBlockMemberImage
+//	ContentBlockMemberText
+//	ContentBlockMemberToolResult
+//	ContentBlockMemberToolUse
+type ContentBlock interface {
+	isContentBlock()
+}
+
+// Image to include in the message.
+//
+// This field is only supported by Anthropic Claude 3 models.
+type ContentBlockMemberImage struct {
+	Value ImageBlock
+
+	noSmithyDocumentSerde
+}
+
+func (*ContentBlockMemberImage) isContentBlock() {}
+
+// Text to include in the message.
+type ContentBlockMemberText struct {
+	Value string
+
+	noSmithyDocumentSerde
+}
+
+func (*ContentBlockMemberText) isContentBlock() {}
+
+// The result for a tool request that a model makes.
+type ContentBlockMemberToolResult struct {
+	Value ToolResultBlock
+
+	noSmithyDocumentSerde
+}
+
+func (*ContentBlockMemberToolResult) isContentBlock() {}
+
+// Information about a tool use request from a model.
+type ContentBlockMemberToolUse struct {
+	Value ToolUseBlock
+
+	noSmithyDocumentSerde
+}
+
+func (*ContentBlockMemberToolUse) isContentBlock() {}
+
+// A bock of content in a streaming response.
+//
+// The following types satisfy this interface:
+//
+//	ContentBlockDeltaMemberText
+//	ContentBlockDeltaMemberToolUse
+type ContentBlockDelta interface {
+	isContentBlockDelta()
+}
+
+// The content text.
+type ContentBlockDeltaMemberText struct {
+	Value string
+
+	noSmithyDocumentSerde
+}
+
+func (*ContentBlockDeltaMemberText) isContentBlockDelta() {}
+
+// Information about a tool that the model is requesting to use.
+type ContentBlockDeltaMemberToolUse struct {
+	Value ToolUseBlockDelta
+
+	noSmithyDocumentSerde
+}
+
+func (*ContentBlockDeltaMemberToolUse) isContentBlockDelta() {}
+
+// The content block delta event.
+type ContentBlockDeltaEvent struct {
+
+	// The block index for a content block delta event.
+	//
+	// This member is required.
+	ContentBlockIndex *int32
+
+	// The delta for a content block delta event.
+	//
+	// This member is required.
+	Delta ContentBlockDelta
+
+	noSmithyDocumentSerde
+}
+
+// Content block start information.
+//
+// The following types satisfy this interface:
+//
+//	ContentBlockStartMemberToolUse
+type ContentBlockStart interface {
+	isContentBlockStart()
+}
+
+// Information about a tool that the model is requesting to use.
+type ContentBlockStartMemberToolUse struct {
+	Value ToolUseBlockStart
+
+	noSmithyDocumentSerde
+}
+
+func (*ContentBlockStartMemberToolUse) isContentBlockStart() {}
+
+// Content block start event.
+type ContentBlockStartEvent struct {
+
+	// The index for a content block start event.
+	//
+	// This member is required.
+	ContentBlockIndex *int32
+
+	// Start information about a content block start event.
+	//
+	// This member is required.
+	Start ContentBlockStart
+
+	noSmithyDocumentSerde
+}
+
+// A content block stop event.
+type ContentBlockStopEvent struct {
+
+	// The index for a content block.
+	//
+	// This member is required.
+	ContentBlockIndex *int32
+
+	noSmithyDocumentSerde
+}
+
+// Metrics for a call to [Converse].
+//
+// [Converse]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_runtime_Converse.html
+type ConverseMetrics struct {
+
+	// The latency of the call to Converse , in milliseconds.
+	//
+	// This member is required.
+	LatencyMs *int64
+
+	noSmithyDocumentSerde
+}
+
+// The output from a call to [Converse].
+//
+// The following types satisfy this interface:
+//
+//	ConverseOutputMemberMessage
+//
+// [Converse]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_runtime_Converse.html
+type ConverseOutput interface {
+	isConverseOutput()
+}
+
+// The message that the model generates.
+type ConverseOutputMemberMessage struct {
+	Value Message
+
+	noSmithyDocumentSerde
+}
+
+func (*ConverseOutputMemberMessage) isConverseOutput() {}
+
+// A conversation stream metadata event.
+type ConverseStreamMetadataEvent struct {
+
+	// The metrics for the conversation stream metadata event.
+	//
+	// This member is required.
+	Metrics *ConverseStreamMetrics
+
+	// Usage information for the conversation stream event.
+	//
+	// This member is required.
+	Usage *TokenUsage
+
+	noSmithyDocumentSerde
+}
+
+// Metrics for the stream.
+type ConverseStreamMetrics struct {
+
+	// The latency for the streaming request, in milliseconds.
+	//
+	// This member is required.
+	LatencyMs *int64
+
+	noSmithyDocumentSerde
+}
+
+// The messages output stream
+//
+// The following types satisfy this interface:
+//
+//	ConverseStreamOutputMemberContentBlockDelta
+//	ConverseStreamOutputMemberContentBlockStart
+//	ConverseStreamOutputMemberContentBlockStop
+//	ConverseStreamOutputMemberMessageStart
+//	ConverseStreamOutputMemberMessageStop
+//	ConverseStreamOutputMemberMetadata
+type ConverseStreamOutput interface {
+	isConverseStreamOutput()
+}
+
+// The messages output content block delta.
+type ConverseStreamOutputMemberContentBlockDelta struct {
+	Value ContentBlockDeltaEvent
+
+	noSmithyDocumentSerde
+}
+
+func (*ConverseStreamOutputMemberContentBlockDelta) isConverseStreamOutput() {}
+
+// Start information for a content block.
+type ConverseStreamOutputMemberContentBlockStart struct {
+	Value ContentBlockStartEvent
+
+	noSmithyDocumentSerde
+}
+
+func (*ConverseStreamOutputMemberContentBlockStart) isConverseStreamOutput() {}
+
+// Stop information for a content block.
+type ConverseStreamOutputMemberContentBlockStop struct {
+	Value ContentBlockStopEvent
+
+	noSmithyDocumentSerde
+}
+
+func (*ConverseStreamOutputMemberContentBlockStop) isConverseStreamOutput() {}
+
+// Message start information.
+type ConverseStreamOutputMemberMessageStart struct {
+	Value MessageStartEvent
+
+	noSmithyDocumentSerde
+}
+
+func (*ConverseStreamOutputMemberMessageStart) isConverseStreamOutput() {}
+
+// Message stop information.
+type ConverseStreamOutputMemberMessageStop struct {
+	Value MessageStopEvent
+
+	noSmithyDocumentSerde
+}
+
+func (*ConverseStreamOutputMemberMessageStop) isConverseStreamOutput() {}
+
+// Metadata for the converse output stream.
+type ConverseStreamOutputMemberMetadata struct {
+	Value ConverseStreamMetadataEvent
+
+	noSmithyDocumentSerde
+}
+
+func (*ConverseStreamOutputMemberMetadata) isConverseStreamOutput() {}
+
+// Image content for a message.
+type ImageBlock struct {
+
+	// The format of the image.
+	//
+	// This member is required.
+	Format ImageFormat
+
+	// The source for the image.
+	//
+	// This member is required.
+	Source ImageSource
+
+	noSmithyDocumentSerde
+}
+
+// The source for an image.
+//
+// The following types satisfy this interface:
+//
+//	ImageSourceMemberBytes
+type ImageSource interface {
+	isImageSource()
+}
+
+// The raw image bytes for the image. If you use an AWS SDK, you don't need to
+// base64 encode the image bytes.
+type ImageSourceMemberBytes struct {
+	Value []byte
+
+	noSmithyDocumentSerde
+}
+
+func (*ImageSourceMemberBytes) isImageSource() {}
+
+// Base inference parameters to pass to a model in a call to [Converse] or [ConverseStream]. For more
+// information, see [Inference parameters for foundation models].
+//
+// If you need to pass additional parameters that the model supports, use the
+// additionalModelRequestFields request field in the call to Converse or
+// ConverseStream . For more information, see [Model parameters].
+//
+// [Inference parameters for foundation models]: https://docs.aws.amazon.com/bedrock/latest/userguide/model-parameters.html
+// [Converse]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_runtime_Converse.html
+// [ConverseStream]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_runtime_ConverseStream.html
+// [Model parameters]: https://docs.aws.amazon.com/bedrock/latest/userguide/model-parameters.html
+type InferenceConfiguration struct {
+
+	// The maximum number of tokens to allow in the generated response. The default
+	// value is the maximum allowed value for the model that you are using. For more
+	// information, see [Inference parameters for foundatio{ "messages": [ { "role": "user", "content": [ { "text": "what's the weather in Queens, NY and Austin, TX?" } ] }, { "role": "assistant", "content": [ { "toolUse": { "toolUseId": "1", "name": "get_weather", "input": { "city": "Queens", "state": "NY" } } }, { "toolUse": { "toolUseId": "2", "name": "get_weather", "input": { "city": "Austin", "state": "TX" } } } ] }, { "role": "user", "content": [ { "toolResult": { "toolUseId": "2", "content": [ { "json": { "weather": "40" } } ] } }, { "text": "..." }, { "toolResult": { "toolUseId": "1", "content": [ { "text": "result text" } ] } } ] } ], "toolConfig": { "tools": [ { "name": "get_weather", "description": "Get weather", "inputSchema": { "type": "object", "properties": { "city": { "type": "string", "description": "City of location" }, "state": { "type": "string", "description": "State of location" } }, "required": ["city", "state"] } } ] } } n models].
+	//
+	// [Inference parameters for foundatio{ "messages": [ { "role": "user", "content": [ { "text": "what's the weather in Queens, NY and Austin, TX?" } ] }, { "role": "assistant", "content": [ { "toolUse": { "toolUseId": "1", "name": "get_weather", "input": { "city": "Queens", "state": "NY" } } }, { "toolUse": { "toolUseId": "2", "name": "get_weather", "input": { "city": "Austin", "state": "TX" } } } ] }, { "role": "user", "content": [ { "toolResult": { "toolUseId": "2", "content": [ { "json": { "weather": "40" } } ] } }, { "text": "..." }, { "toolResult": { "toolUseId": "1", "content": [ { "text": "result text" } ] } } ] } ], "toolConfig": { "tools": [ { "name": "get_weather", "description": "Get weather", "inputSchema": { "type": "object", "properties": { "city": { "type": "string", "description": "City of location" }, "state": { "type": "string", "description": "State of location" } }, "required": ["city", "state"] } } ] } } n models]: https://docs.aws.amazon.com/bedrock/latest/userguide/model-parameters.html
+	MaxTokens *int32
+
+	// A list of stop sequences. A stop sequence is a sequence of characters that
+	// causes the model to stop generating the response.
+	StopSequences []string
+
+	// The likelihood of the model selecting higher-probability options while
+	// generating a response. A lower value makes the model more likely to choose
+	// higher-probability options, while a higher value makes the model more likely to
+	// choose lower-probability options.
+	//
+	// The default value is the default value for the model that you are using. For
+	// more information, see [Inference parameters for foundation models].
+	//
+	// [Inference parameters for foundation models]: https://docs.aws.amazon.com/bedrock/latest/userguide/model-parameters.html
+	Temperature *float32
+
+	// The percentage of most-likely candidates that the model considers for the next
+	// token. For example, if you choose a value of 0.8 for topP , the model selects
+	// from the top 80% of the probability distribution of tokens that could be next in
+	// the sequence.
+	//
+	// The default value is the default value for the model that you are using. For
+	// more information, see [Inference parameters for foundation models].
+	//
+	// [Inference parameters for foundation models]: https://docs.aws.amazon.com/bedrock/latest/userguide/model-parameters.html
+	TopP *float32
+
+	noSmithyDocumentSerde
+}
+
+// A message in the [Message] field. Use to send a message in a call to [Converse].
+//
+// [Message]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_runtime_Message.html
+// [Converse]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_runtime_Converse.html
+type Message struct {
+
+	// The message content.
+	//
+	// This member is required.
+	Content []ContentBlock
+
+	// The role that the message plays in the message.
+	//
+	// This member is required.
+	Role ConversationRole
+
+	noSmithyDocumentSerde
+}
+
+// The start of a message.
+type MessageStartEvent struct {
+
+	// The role for the message.
+	//
+	// This member is required.
+	Role ConversationRole
+
+	noSmithyDocumentSerde
+}
+
+// The stop event for a message.
+type MessageStopEvent struct {
+
+	// The reason why the model stopped generating output.
+	//
+	// This member is required.
+	StopReason StopReason
+
+	// The additional model response fields.
+	AdditionalModelResponseFields document.Interface
+
+	noSmithyDocumentSerde
+}
 
 // Payload content included in the response.
 type PayloadPart struct {
@@ -33,6 +440,283 @@ type ResponseStreamMemberChunk struct {
 
 func (*ResponseStreamMemberChunk) isResponseStream() {}
 
+// The model must request a specific tool.
+//
+// This field is only supported by Anthropic Claude 3 models.
+type SpecificToolChoice struct {
+
+	// The name of the tool that the model must request.
+	//
+	// This member is required.
+	Name *string
+
+	noSmithyDocumentSerde
+}
+
+// A system content block
+//
+// The following types satisfy this interface:
+//
+//	SystemContentBlockMemberText
+type SystemContentBlock interface {
+	isSystemContentBlock()
+}
+
+// A system prompt for the model.
+type SystemContentBlockMemberText struct {
+	Value string
+
+	noSmithyDocumentSerde
+}
+
+func (*SystemContentBlockMemberText) isSystemContentBlock() {}
+
+// The tokens used in a message API inference call.
+type TokenUsage struct {
+
+	// The number of tokens sent in the request to the model.
+	//
+	// This member is required.
+	InputTokens *int32
+
+	// The number of tokens that the model generated for the request.
+	//
+	// This member is required.
+	OutputTokens *int32
+
+	// The total of input tokens and tokens generated by the model.
+	//
+	// This member is required.
+	TotalTokens *int32
+
+	noSmithyDocumentSerde
+}
+
+// Information about a tool that you can use with the Converse API.
+//
+// The following types satisfy this interface:
+//
+//	ToolMemberToolSpec
+type Tool interface {
+	isTool()
+}
+
+// The specfication for the tool.
+type ToolMemberToolSpec struct {
+	Value ToolSpecification
+
+	noSmithyDocumentSerde
+}
+
+func (*ToolMemberToolSpec) isTool() {}
+
+// Forces a model to use a tool.
+//
+// The following types satisfy this interface:
+//
+//	ToolChoiceMemberAny
+//	ToolChoiceMemberAuto
+//	ToolChoiceMemberTool
+type ToolChoice interface {
+	isToolChoice()
+}
+
+// The model must request at least one tool (no text is generated).
+type ToolChoiceMemberAny struct {
+	Value AnyToolChoice
+
+	noSmithyDocumentSerde
+}
+
+func (*ToolChoiceMemberAny) isToolChoice() {}
+
+// The Model automatically decides if a tool should be called or to whether to
+// generate text instead.
+type ToolChoiceMemberAuto struct {
+	Value AutoToolChoice
+
+	noSmithyDocumentSerde
+}
+
+func (*ToolChoiceMemberAuto) isToolChoice() {}
+
+// The Model must request the specified tool.
+type ToolChoiceMemberTool struct {
+	Value SpecificToolChoice
+
+	noSmithyDocumentSerde
+}
+
+func (*ToolChoiceMemberTool) isToolChoice() {}
+
+// Configuration information for the tools that you pass to a model.
+//
+// This field is only supported by Anthropic Claude 3, Cohere Command R, Cohere
+// Command R+, and Mistral Large models.
+type ToolConfiguration struct {
+
+	// An array of tools that you want to pass to a model.
+	//
+	// This member is required.
+	Tools []Tool
+
+	// If supported by model, forces the model to request a tool.
+	ToolChoice ToolChoice
+
+	noSmithyDocumentSerde
+}
+
+// The schema for the tool. The top level schema type must be object .
+//
+// The following types satisfy this interface:
+//
+//	ToolInputSchemaMemberJson
+type ToolInputSchema interface {
+	isToolInputSchema()
+}
+
+// The JSON schema for the tool. For more information, see [JSON Schema Reference].
+//
+// [JSON Schema Reference]: https://json-schema.org/understanding-json-schema/reference
+type ToolInputSchemaMemberJson struct {
+	Value document.Interface
+
+	noSmithyDocumentSerde
+}
+
+func (*ToolInputSchemaMemberJson) isToolInputSchema() {}
+
+// A tool result block that contains the results for a tool request that the model
+// previously made.
+type ToolResultBlock struct {
+
+	// The content for tool result content block.
+	//
+	// This member is required.
+	Content []ToolResultContentBlock
+
+	// The ID of the tool request that this is the result for.
+	//
+	// This member is required.
+	ToolUseId *string
+
+	// The status for the tool result content block.
+	//
+	// This field is only supported Anthropic Claude 3 models.
+	Status ToolResultStatus
+
+	noSmithyDocumentSerde
+}
+
+// The tool result content block.
+//
+// The following types satisfy this interface:
+//
+//	ToolResultContentBlockMemberImage
+//	ToolResultContentBlockMemberJson
+//	ToolResultContentBlockMemberText
+type ToolResultContentBlock interface {
+	isToolResultContentBlock()
+}
+
+// A tool result that is an image.
+//
+// This field is only supported by Anthropic Claude 3 models.
+type ToolResultContentBlockMemberImage struct {
+	Value ImageBlock
+
+	noSmithyDocumentSerde
+}
+
+func (*ToolResultContentBlockMemberImage) isToolResultContentBlock() {}
+
+// A tool result that is JSON format data.
+type ToolResultContentBlockMemberJson struct {
+	Value document.Interface
+
+	noSmithyDocumentSerde
+}
+
+func (*ToolResultContentBlockMemberJson) isToolResultContentBlock() {}
+
+// A tool result that is text.
+type ToolResultContentBlockMemberText struct {
+	Value string
+
+	noSmithyDocumentSerde
+}
+
+func (*ToolResultContentBlockMemberText) isToolResultContentBlock() {}
+
+// The specification for the tool.
+type ToolSpecification struct {
+
+	// The input schema for the tool in JSON format.
+	//
+	// This member is required.
+	InputSchema ToolInputSchema
+
+	// The name for the tool.
+	//
+	// This member is required.
+	Name *string
+
+	// The description for the tool.
+	Description *string
+
+	noSmithyDocumentSerde
+}
+
+// A tool use content block. Contains information about a tool that the model is
+// requesting be run., The model uses the result from the tool to generate a
+// response.
+type ToolUseBlock struct {
+
+	// The input to pass to the tool.
+	//
+	// This member is required.
+	Input document.Interface
+
+	// The name of the tool that the model wants to use.
+	//
+	// This member is required.
+	Name *string
+
+	// The ID for the tool request.
+	//
+	// This member is required.
+	ToolUseId *string
+
+	noSmithyDocumentSerde
+}
+
+// The delta for a tool use block.
+type ToolUseBlockDelta struct {
+
+	// The input for a requested tool.
+	//
+	// This member is required.
+	Input *string
+
+	noSmithyDocumentSerde
+}
+
+// The start of a tool use block.
+type ToolUseBlockStart struct {
+
+	// The name of the tool that the model is requesting to use.
+	//
+	// This member is required.
+	Name *string
+
+	// The ID for the tool request.
+	//
+	// This member is required.
+	ToolUseId *string
+
+	noSmithyDocumentSerde
+}
+
 type noSmithyDocumentSerde = smithydocument.NoSerde
 
 // UnknownUnionMember is returned when a union member is returned over the wire,
@@ -44,4 +728,15 @@ type UnknownUnionMember struct {
 	noSmithyDocumentSerde
 }
 
-func (*UnknownUnionMember) isResponseStream() {}
+func (*UnknownUnionMember) isContentBlock()           {}
+func (*UnknownUnionMember) isContentBlockDelta()      {}
+func (*UnknownUnionMember) isContentBlockStart()      {}
+func (*UnknownUnionMember) isConverseOutput()         {}
+func (*UnknownUnionMember) isConverseStreamOutput()   {}
+func (*UnknownUnionMember) isImageSource()            {}
+func (*UnknownUnionMember) isResponseStream()         {}
+func (*UnknownUnionMember) isSystemContentBlock()     {}
+func (*UnknownUnionMember) isTool()                   {}
+func (*UnknownUnionMember) isToolChoice()             {}
+func (*UnknownUnionMember) isToolInputSchema()        {}
+func (*UnknownUnionMember) isToolResultContentBlock() {}

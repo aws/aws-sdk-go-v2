@@ -6,19 +6,21 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/xray/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates a rule to control sampling behavior for instrumented applications.
-// Services retrieve rules with GetSamplingRules (https://docs.aws.amazon.com/xray/latest/api/API_GetSamplingRules.html)
-// , and evaluate each rule in ascending order of priority for each request. If a
-// rule matches, the service records a trace, borrowing it from the reservoir size.
-// After 10 seconds, the service reports back to X-Ray with GetSamplingTargets (https://docs.aws.amazon.com/xray/latest/api/API_GetSamplingTargets.html)
-// to get updated versions of each in-use rule. The updated rule contains a trace
-// quota that the service can use instead of borrowing from the reservoir.
+// Services retrieve rules with [GetSamplingRules], and evaluate each rule in ascending order of
+// priority for each request. If a rule matches, the service records a trace,
+// borrowing it from the reservoir size. After 10 seconds, the service reports back
+// to X-Ray with [GetSamplingTargets]to get updated versions of each in-use rule. The updated rule
+// contains a trace quota that the service can use instead of borrowing from the
+// reservoir.
+//
+// [GetSamplingTargets]: https://docs.aws.amazon.com/xray/latest/api/API_GetSamplingTargets.html
+// [GetSamplingRules]: https://docs.aws.amazon.com/xray/latest/api/API_GetSamplingRules.html
 func (c *Client) CreateSamplingRule(ctx context.Context, params *CreateSamplingRuleInput, optFns ...func(*Options)) (*CreateSamplingRuleOutput, error) {
 	if params == nil {
 		params = &CreateSamplingRuleInput{}
@@ -42,18 +44,26 @@ type CreateSamplingRuleInput struct {
 	SamplingRule *types.SamplingRule
 
 	// A map that contains one or more tag keys and tag values to attach to an X-Ray
-	// sampling rule. For more information about ways to use tags, see Tagging Amazon
-	// Web Services resources (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html)
-	// in the Amazon Web Services General Reference. The following restrictions apply
-	// to tags:
+	// sampling rule. For more information about ways to use tags, see [Tagging Amazon Web Services resources]in the Amazon
+	// Web Services General Reference.
+	//
+	// The following restrictions apply to tags:
+	//
 	//   - Maximum number of user-applied tags per resource: 50
+	//
 	//   - Maximum tag key length: 128 Unicode characters
+	//
 	//   - Maximum tag value length: 256 Unicode characters
+	//
 	//   - Valid values for key and value: a-z, A-Z, 0-9, space, and the following
 	//   characters: _ . : / = + - and @
+	//
 	//   - Tag keys and values are case sensitive.
+	//
 	//   - Don't use aws: as a prefix for keys; it's reserved for Amazon Web Services
 	//   use.
+	//
+	// [Tagging Amazon Web Services resources]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
 	Tags []types.Tag
 
 	noSmithyDocumentSerde
@@ -92,25 +102,25 @@ func (c *Client) addOperationCreateSamplingRuleMiddlewares(stack *middleware.Sta
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -125,13 +135,16 @@ func (c *Client) addOperationCreateSamplingRuleMiddlewares(stack *middleware.Sta
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpCreateSamplingRuleValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateSamplingRule(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

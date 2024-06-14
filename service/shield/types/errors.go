@@ -37,9 +37,9 @@ func (e *AccessDeniedException) ErrorFault() smithy.ErrorFault { return smithy.F
 // In order to grant the necessary access to the Shield Response Team (SRT) the
 // user submitting the request must have the iam:PassRole permission. This error
 // indicates the user did not have the appropriate permissions. For more
-// information, see Granting a User Permissions to Pass a Role to an Amazon Web
-// Services Service (https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use_passrole.html)
-// .
+// information, see [Granting a User Permissions to Pass a Role to an Amazon Web Services Service].
+//
+// [Granting a User Permissions to Pass a Role to an Amazon Web Services Service]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use_passrole.html
 type AccessDeniedForDependencyException struct {
 	Message *string
 

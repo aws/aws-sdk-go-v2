@@ -6,14 +6,14 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/directconnect/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes the specified interconnect. Intended for use by Direct Connect Partners
-// only.
+// Deletes the specified interconnect.
+//
+// Intended for use by Direct Connect Partners only.
 func (c *Client) DeleteInterconnect(ctx context.Context, params *DeleteInterconnectInput, optFns ...func(*Options)) (*DeleteInterconnectOutput, error) {
 	if params == nil {
 		params = &DeleteInterconnectInput{}
@@ -42,14 +42,21 @@ type DeleteInterconnectInput struct {
 type DeleteInterconnectOutput struct {
 
 	// The state of the interconnect. The following are the possible values:
+	//
 	//   - requested : The initial state of an interconnect. The interconnect stays in
 	//   the requested state until the Letter of Authorization (LOA) is sent to the
 	//   customer.
+	//
 	//   - pending : The interconnect is approved, and is being initialized.
+	//
 	//   - available : The network link is up, and the interconnect is ready for use.
+	//
 	//   - down : The network link is down.
+	//
 	//   - deleting : The interconnect is being deleted.
+	//
 	//   - deleted : The interconnect is deleted.
+	//
 	//   - unknown : The state of the interconnect is not available.
 	InterconnectState types.InterconnectState
 
@@ -81,25 +88,25 @@ func (c *Client) addOperationDeleteInterconnectMiddlewares(stack *middleware.Sta
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -114,13 +121,16 @@ func (c *Client) addOperationDeleteInterconnectMiddlewares(stack *middleware.Sta
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDeleteInterconnectValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteInterconnect(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

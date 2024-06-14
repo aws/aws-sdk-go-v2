@@ -39,6 +39,9 @@ func ExampleSearchByAttributeValue_outputUsage() {
 	case *types.SearchByAttributeValueMemberDICOMPatientId:
 		_ = v.Value // Value is string
 
+	case *types.SearchByAttributeValueMemberDICOMSeriesInstanceUID:
+		_ = v.Value // Value is string
+
 	case *types.SearchByAttributeValueMemberDICOMStudyDateAndTime:
 		_ = v.Value // Value is types.DICOMStudyDateAndTime
 
@@ -47,6 +50,9 @@ func ExampleSearchByAttributeValue_outputUsage() {
 
 	case *types.SearchByAttributeValueMemberDICOMStudyInstanceUID:
 		_ = v.Value // Value is string
+
+	case *types.SearchByAttributeValueMemberUpdatedAt:
+		_ = v.Value // Value is time.Time
 
 	case *types.UnknownUnionMember:
 		fmt.Println("unknown tag:", v.Tag)
@@ -58,6 +64,7 @@ func ExampleSearchByAttributeValue_outputUsage() {
 }
 
 var _ *types.DICOMStudyDateAndTime
+var _ *string
 var _ *string
 var _ *string
 var _ *string

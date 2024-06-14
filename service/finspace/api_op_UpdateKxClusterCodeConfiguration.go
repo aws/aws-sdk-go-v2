@@ -6,16 +6,16 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/finspace/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Allows you to update code configuration on a running cluster. By using this API
-// you can update the code, the initialization script path, and the command line
-// arguments for a specific cluster. The configuration that you want to update will
-// override any existing configurations on the cluster.
+//	Allows you to update code configuration on a running cluster. By using this
+//
+// API you can update the code, the initialization script path, and the command
+// line arguments for a specific cluster. The configuration that you want to update
+// will override any existing configurations on the cluster.
 func (c *Client) UpdateKxClusterCodeConfiguration(ctx context.Context, params *UpdateKxClusterCodeConfigurationInput, optFns ...func(*Options)) (*UpdateKxClusterCodeConfigurationOutput, error) {
 	if params == nil {
 		params = &UpdateKxClusterCodeConfigurationInput{}
@@ -43,7 +43,7 @@ type UpdateKxClusterCodeConfigurationInput struct {
 	// This member is required.
 	Code *types.CodeConfiguration
 
-	// A unique identifier of the kdb environment.
+	//  A unique identifier of the kdb environment.
 	//
 	// This member is required.
 	EnvironmentId *string
@@ -51,18 +51,20 @@ type UpdateKxClusterCodeConfigurationInput struct {
 	// A token that ensures idempotency. This token expires in 10 minutes.
 	ClientToken *string
 
-	// Specifies the key-value pairs to make them available inside the cluster. You
-	// cannot update this parameter for a NO_RESTART deployment.
+	// Specifies the key-value pairs to make them available inside the cluster.
+	//
+	// You cannot update this parameter for a NO_RESTART deployment.
 	CommandLineArguments []types.KxCommandLineArgument
 
-	// The configuration that allows you to choose how you want to update the code on
+	//  The configuration that allows you to choose how you want to update the code on
 	// a cluster.
 	DeploymentConfiguration *types.KxClusterCodeDeploymentConfiguration
 
 	// Specifies a Q program that will be run at launch of a cluster. It is a relative
 	// path within .zip file that contains the custom code, which will be loaded on the
-	// cluster. It must include the file name itself. For example, somedir/init.q . You
-	// cannot update this parameter for a NO_RESTART deployment.
+	// cluster. It must include the file name itself. For example, somedir/init.q .
+	//
+	// You cannot update this parameter for a NO_RESTART deployment.
 	InitializationScript *string
 
 	noSmithyDocumentSerde
@@ -97,25 +99,25 @@ func (c *Client) addOperationUpdateKxClusterCodeConfigurationMiddlewares(stack *
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -133,6 +135,9 @@ func (c *Client) addOperationUpdateKxClusterCodeConfigurationMiddlewares(stack *
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opUpdateKxClusterCodeConfigurationMiddleware(stack, options); err != nil {
 		return err
 	}
@@ -142,7 +147,7 @@ func (c *Client) addOperationUpdateKxClusterCodeConfigurationMiddlewares(stack *
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateKxClusterCodeConfiguration(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

@@ -6,13 +6,13 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/mturk/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// The CreateHITType operation creates a new HIT type. This operation allows you
+//	The CreateHITType operation creates a new HIT type. This operation allows you
+//
 // to define a standard set of HIT properties to use when creating HITs. If you
 // register a HIT type with values that match an existing HIT type, the HIT type ID
 // of the existing type will be returned.
@@ -33,7 +33,7 @@ func (c *Client) CreateHITType(ctx context.Context, params *CreateHITTypeInput, 
 
 type CreateHITTypeInput struct {
 
-	// The amount of time, in seconds, that a Worker has to complete the HIT after
+	//  The amount of time, in seconds, that a Worker has to complete the HIT after
 	// accepting it. If a Worker does not complete the assignment within the specified
 	// duration, the assignment is considered abandoned. If the HIT is still active
 	// (that is, its lifetime has not elapsed), the assignment becomes available for
@@ -42,7 +42,7 @@ type CreateHITTypeInput struct {
 	// This member is required.
 	AssignmentDurationInSeconds *int64
 
-	// A general description of the HIT. A description includes detailed information
+	//  A general description of the HIT. A description includes detailed information
 	// about the kind of task the HIT contains. On the Amazon Mechanical Turk web site,
 	// the HIT description appears in the expanded view of search results, and in the
 	// HIT and assignment screens. A good description gives the user enough information
@@ -51,32 +51,32 @@ type CreateHITTypeInput struct {
 	// This member is required.
 	Description *string
 
-	// The amount of money the Requester will pay a Worker for successfully completing
-	// the HIT.
+	//  The amount of money the Requester will pay a Worker for successfully
+	// completing the HIT.
 	//
 	// This member is required.
 	Reward *string
 
-	// The title of the HIT. A title should be short and descriptive about the kind of
-	// task the HIT contains. On the Amazon Mechanical Turk web site, the HIT title
+	//  The title of the HIT. A title should be short and descriptive about the kind
+	// of task the HIT contains. On the Amazon Mechanical Turk web site, the HIT title
 	// appears in search results, and everywhere the HIT is mentioned.
 	//
 	// This member is required.
 	Title *string
 
-	// The number of seconds after an assignment for the HIT has been submitted, after
-	// which the assignment is considered Approved automatically unless the Requester
-	// explicitly rejects it.
+	//  The number of seconds after an assignment for the HIT has been submitted,
+	// after which the assignment is considered Approved automatically unless the
+	// Requester explicitly rejects it.
 	AutoApprovalDelayInSeconds *int64
 
-	// One or more words or phrases that describe the HIT, separated by commas. These
+	//  One or more words or phrases that describe the HIT, separated by commas. These
 	// words are used in searches to find HITs.
 	Keywords *string
 
-	// Conditions that a Worker's Qualifications must meet in order to accept the HIT.
-	// A HIT can have between zero and ten Qualification requirements. All requirements
-	// must be met in order for a Worker to accept the HIT. Additionally, other actions
-	// can be restricted using the ActionsGuarded field on each
+	//  Conditions that a Worker's Qualifications must meet in order to accept the
+	// HIT. A HIT can have between zero and ten Qualification requirements. All
+	// requirements must be met in order for a Worker to accept the HIT. Additionally,
+	// other actions can be restricted using the ActionsGuarded field on each
 	// QualificationRequirement structure.
 	QualificationRequirements []types.QualificationRequirement
 
@@ -85,7 +85,7 @@ type CreateHITTypeInput struct {
 
 type CreateHITTypeOutput struct {
 
-	// The ID of the newly registered HIT type.
+	//  The ID of the newly registered HIT type.
 	HITTypeId *string
 
 	// Metadata pertaining to the operation's result.
@@ -116,25 +116,25 @@ func (c *Client) addOperationCreateHITTypeMiddlewares(stack *middleware.Stack, o
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -149,13 +149,16 @@ func (c *Client) addOperationCreateHITTypeMiddlewares(stack *middleware.Stack, o
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpCreateHITTypeValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateHITType(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

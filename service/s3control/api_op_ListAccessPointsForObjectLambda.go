@@ -16,15 +16,24 @@ import (
 	"strings"
 )
 
-// This operation is not supported by directory buckets. Returns some or all (up
-// to 1,000) access points associated with the Object Lambda Access Point per call.
-// If there are more access points than what can be returned in one call, the
-// response will include a continuation token that you can use to list the
-// additional access points. The following actions are related to
-// ListAccessPointsForObjectLambda :
-//   - CreateAccessPointForObjectLambda (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_CreateAccessPointForObjectLambda.html)
-//   - DeleteAccessPointForObjectLambda (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteAccessPointForObjectLambda.html)
-//   - GetAccessPointForObjectLambda (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetAccessPointForObjectLambda.html)
+// This operation is not supported by directory buckets.
+//
+// Returns some or all (up to 1,000) access points associated with the Object
+// Lambda Access Point per call. If there are more access points than what can be
+// returned in one call, the response will include a continuation token that you
+// can use to list the additional access points.
+//
+// The following actions are related to ListAccessPointsForObjectLambda :
+//
+// [CreateAccessPointForObjectLambda]
+//
+// [DeleteAccessPointForObjectLambda]
+//
+// [GetAccessPointForObjectLambda]
+//
+// [CreateAccessPointForObjectLambda]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_CreateAccessPointForObjectLambda.html
+// [DeleteAccessPointForObjectLambda]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteAccessPointForObjectLambda.html
+// [GetAccessPointForObjectLambda]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetAccessPointForObjectLambda.html
 func (c *Client) ListAccessPointsForObjectLambda(ctx context.Context, params *ListAccessPointsForObjectLambdaInput, optFns ...func(*Options)) (*ListAccessPointsForObjectLambdaOutput, error) {
 	if params == nil {
 		params = &ListAccessPointsForObjectLambdaInput{}
@@ -106,25 +115,25 @@ func (c *Client) addOperationListAccessPointsForObjectLambdaMiddlewares(stack *m
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -142,6 +151,9 @@ func (c *Client) addOperationListAccessPointsForObjectLambdaMiddlewares(stack *m
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addEndpointPrefix_opListAccessPointsForObjectLambdaMiddleware(stack); err != nil {
 		return err
 	}
@@ -154,7 +166,7 @@ func (c *Client) addOperationListAccessPointsForObjectLambdaMiddlewares(stack *m
 	if err = addMetadataRetrieverMiddleware(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addListAccessPointsForObjectLambdaUpdateEndpoint(stack, options); err != nil {

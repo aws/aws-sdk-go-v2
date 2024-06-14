@@ -6,15 +6,17 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// This action is deprecated. Disables ClassicLink DNS support for a VPC. If
-// disabled, DNS hostnames resolve to public IP addresses when addressed between a
-// linked EC2-Classic instance and instances in the VPC to which it's linked. You
-// must specify a VPC ID in the request.
+// This action is deprecated.
+//
+// Disables ClassicLink DNS support for a VPC. If disabled, DNS hostnames resolve
+// to public IP addresses when addressed between a linked EC2-Classic instance and
+// instances in the VPC to which it's linked.
+//
+// You must specify a VPC ID in the request.
 func (c *Client) DisableVpcClassicLinkDnsSupport(ctx context.Context, params *DisableVpcClassicLinkDnsSupportInput, optFns ...func(*Options)) (*DisableVpcClassicLinkDnsSupportOutput, error) {
 	if params == nil {
 		params = &DisableVpcClassicLinkDnsSupportInput{}
@@ -71,25 +73,25 @@ func (c *Client) addOperationDisableVpcClassicLinkDnsSupportMiddlewares(stack *m
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -104,10 +106,13 @@ func (c *Client) addOperationDisableVpcClassicLinkDnsSupportMiddlewares(stack *m
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDisableVpcClassicLinkDnsSupport(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

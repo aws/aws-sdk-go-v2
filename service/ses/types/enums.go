@@ -11,8 +11,9 @@ const (
 )
 
 // Values returns all known values for BehaviorOnMXFailure. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (BehaviorOnMXFailure) Values() []BehaviorOnMXFailure {
 	return []BehaviorOnMXFailure{
 		"UseDefaultValue",
@@ -33,8 +34,9 @@ const (
 )
 
 // Values returns all known values for BounceType. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (BounceType) Values() []BounceType {
 	return []BounceType{
 		"DoesNotExist",
@@ -67,8 +69,9 @@ const (
 )
 
 // Values returns all known values for BulkEmailStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (BulkEmailStatus) Values() []BulkEmailStatus {
 	return []BulkEmailStatus{
 		"Success",
@@ -100,6 +103,7 @@ const (
 
 // Values returns all known values for ConfigurationSetAttribute. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (ConfigurationSetAttribute) Values() []ConfigurationSetAttribute {
 	return []ConfigurationSetAttribute{
@@ -121,8 +125,9 @@ const (
 )
 
 // Values returns all known values for CustomMailFromStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (CustomMailFromStatus) Values() []CustomMailFromStatus {
 	return []CustomMailFromStatus{
 		"Pending",
@@ -142,8 +147,9 @@ const (
 )
 
 // Values returns all known values for DimensionValueSource. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (DimensionValueSource) Values() []DimensionValueSource {
 	return []DimensionValueSource{
 		"messageTag",
@@ -164,8 +170,9 @@ const (
 )
 
 // Values returns all known values for DsnAction. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (DsnAction) Values() []DsnAction {
 	return []DsnAction{
 		"failed",
@@ -191,8 +198,9 @@ const (
 )
 
 // Values returns all known values for EventType. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (EventType) Values() []EventType {
 	return []EventType{
 		"send",
@@ -215,8 +223,9 @@ const (
 )
 
 // Values returns all known values for IdentityType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (IdentityType) Values() []IdentityType {
 	return []IdentityType{
 		"EmailAddress",
@@ -233,8 +242,9 @@ const (
 )
 
 // Values returns all known values for InvocationType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (InvocationType) Values() []InvocationType {
 	return []InvocationType{
 		"Event",
@@ -252,8 +262,9 @@ const (
 )
 
 // Values returns all known values for NotificationType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (NotificationType) Values() []NotificationType {
 	return []NotificationType{
 		"Bounce",
@@ -271,8 +282,9 @@ const (
 )
 
 // Values returns all known values for ReceiptFilterPolicy. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ReceiptFilterPolicy) Values() []ReceiptFilterPolicy {
 	return []ReceiptFilterPolicy{
 		"Block",
@@ -289,8 +301,9 @@ const (
 )
 
 // Values returns all known values for SNSActionEncoding. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (SNSActionEncoding) Values() []SNSActionEncoding {
 	return []SNSActionEncoding{
 		"UTF-8",
@@ -306,8 +319,9 @@ const (
 )
 
 // Values returns all known values for StopScope. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (StopScope) Values() []StopScope {
 	return []StopScope{
 		"RuleSet",
@@ -323,8 +337,9 @@ const (
 )
 
 // Values returns all known values for TlsPolicy. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (TlsPolicy) Values() []TlsPolicy {
 	return []TlsPolicy{
 		"Require",
@@ -344,8 +359,9 @@ const (
 )
 
 // Values returns all known values for VerificationStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (VerificationStatus) Values() []VerificationStatus {
 	return []VerificationStatus{
 		"Pending",

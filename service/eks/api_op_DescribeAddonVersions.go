@@ -6,15 +6,15 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/eks/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Describes the versions for an add-on. Information such as the Kubernetes
-// versions that you can use the add-on with, the owner , publisher , and the type
-// of the add-on are returned.
+// Describes the versions for an add-on.
+//
+// Information such as the Kubernetes versions that you can use the add-on with,
+// the owner , publisher , and the type of the add-on are returned.
 func (c *Client) DescribeAddonVersions(ctx context.Context, params *DescribeAddonVersionsInput, optFns ...func(*Options)) (*DescribeAddonVersionsOutput, error) {
 	if params == nil {
 		params = &DescribeAddonVersionsInput{}
@@ -32,9 +32,10 @@ func (c *Client) DescribeAddonVersions(ctx context.Context, params *DescribeAddo
 
 type DescribeAddonVersionsInput struct {
 
-	// The name of the add-on. The name must match one of the names returned by
-	// ListAddons (https://docs.aws.amazon.com/eks/latest/APIReference/API_ListAddons.html)
-	// .
+	// The name of the add-on. The name must match one of the names returned by [ListAddons]
+	// ListAddons .
+	//
+	// [ListAddons]: https://docs.aws.amazon.com/eks/latest/APIReference/API_ListAddons.html
 	AddonName *string
 
 	// The Kubernetes versions that you can use the add-on with.
@@ -51,9 +52,10 @@ type DescribeAddonVersionsInput struct {
 	// The nextToken value returned from a previous paginated request, where maxResults
 	// was used and the results exceeded the value of that parameter. Pagination
 	// continues from the end of the previous results that returned the nextToken
-	// value. This value is null when there are no more results to return. This token
-	// should be treated as an opaque identifier that is used only to retrieve the next
-	// items in a list and not for other programmatic purposes.
+	// value. This value is null when there are no more results to return.
+	//
+	// This token should be treated as an opaque identifier that is used only to
+	// retrieve the next items in a list and not for other programmatic purposes.
 	NextToken *string
 
 	// The owner of the add-on. For valid owners , don't specify a value for this
@@ -80,9 +82,10 @@ type DescribeAddonVersionsOutput struct {
 	// The nextToken value to include in a future DescribeAddonVersions request. When
 	// the results of a DescribeAddonVersions request exceed maxResults , you can use
 	// this value to retrieve the next page of results. This value is null when there
-	// are no more results to return. This token should be treated as an opaque
-	// identifier that is used only to retrieve the next items in a list and not for
-	// other programmatic purposes.
+	// are no more results to return.
+	//
+	// This token should be treated as an opaque identifier that is used only to
+	// retrieve the next items in a list and not for other programmatic purposes.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -113,25 +116,25 @@ func (c *Client) addOperationDescribeAddonVersionsMiddlewares(stack *middleware.
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -146,10 +149,13 @@ func (c *Client) addOperationDescribeAddonVersionsMiddlewares(stack *middleware.
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeAddonVersions(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

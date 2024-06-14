@@ -6,23 +6,22 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/fms/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates or updates an Firewall Manager administrator account. The account must
-// be a member of the organization that was onboarded to Firewall Manager by
-// AssociateAdminAccount . Only the organization's management account can create an
-// Firewall Manager administrator account. When you create an Firewall Manager
-// administrator account, the service checks to see if the account is already a
-// delegated administrator within Organizations. If the account isn't a delegated
+// be a member of the organization that was onboarded to Firewall Manager by AssociateAdminAccount.
+// Only the organization's management account can create an Firewall Manager
+// administrator account. When you create an Firewall Manager administrator
+// account, the service checks to see if the account is already a delegated
+// administrator within Organizations. If the account isn't a delegated
 // administrator, Firewall Manager calls Organizations to delegate the account
 // within Organizations. For more information about administrator accounts within
-// Organizations, see Managing the Amazon Web Services Accounts in Your
-// Organization (https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_accounts.html)
-// .
+// Organizations, see [Managing the Amazon Web Services Accounts in Your Organization].
+//
+// [Managing the Amazon Web Services Accounts in Your Organization]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_accounts.html
 func (c *Client) PutAdminAccount(ctx context.Context, params *PutAdminAccountInput, optFns ...func(*Options)) (*PutAdminAccountOutput, error) {
 	if params == nil {
 		params = &PutAdminAccountInput{}
@@ -42,10 +41,9 @@ type PutAdminAccountInput struct {
 
 	// The Amazon Web Services account ID to add as an Firewall Manager administrator
 	// account. The account must be a member of the organization that was onboarded to
-	// Firewall Manager by AssociateAdminAccount . For more information about
-	// Organizations, see Managing the Amazon Web Services Accounts in Your
-	// Organization (https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_accounts.html)
-	// .
+	// Firewall Manager by AssociateAdminAccount. For more information about Organizations, see [Managing the Amazon Web Services Accounts in Your Organization].
+	//
+	// [Managing the Amazon Web Services Accounts in Your Organization]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_accounts.html
 	//
 	// This member is required.
 	AdminAccount *string
@@ -88,25 +86,25 @@ func (c *Client) addOperationPutAdminAccountMiddlewares(stack *middleware.Stack,
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -121,13 +119,16 @@ func (c *Client) addOperationPutAdminAccountMiddlewares(stack *middleware.Stack,
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpPutAdminAccountValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opPutAdminAccount(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

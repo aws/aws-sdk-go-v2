@@ -6,8 +6,6 @@ import (
 	"strings"
 	"testing"
 	"time"
-
-	"github.com/google/go-cmp/cmp"
 )
 
 const instanceIdentityDocument = `{
@@ -103,11 +101,11 @@ func TestGetInstanceIdentityDocument(t *testing.T) {
 				t.Fatalf("expect resp, got none")
 			}
 
-			if diff := cmp.Diff(c.ExpectResult, resp.InstanceIdentityDocument); len(diff) != 0 {
+			if diff := cmpDiff(c.ExpectResult, resp.InstanceIdentityDocument); len(diff) != 0 {
 				t.Errorf("expect result to match\n%s", diff)
 			}
 
-			if diff := cmp.Diff(c.ExpectTrace, trace.requests); len(diff) != 0 {
+			if diff := cmpDiff(c.ExpectTrace, trace.requests); len(diff) != 0 {
 				t.Errorf("expect trace to match\n%s", diff)
 			}
 		})

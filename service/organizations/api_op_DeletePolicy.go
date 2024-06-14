@@ -6,16 +6,17 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Deletes the specified policy from your organization. Before you perform this
 // operation, you must first detach the policy from all organizational units (OUs),
-// roots, and accounts. This operation can be called only from the organization's
-// management account or by a member account that is a delegated administrator for
-// an Amazon Web Services service.
+// roots, and accounts.
+//
+// This operation can be called only from the organization's management account or
+// by a member account that is a delegated administrator for an Amazon Web Services
+// service.
 func (c *Client) DeletePolicy(ctx context.Context, params *DeletePolicyInput, optFns ...func(*Options)) (*DeletePolicyOutput, error) {
 	if params == nil {
 		params = &DeletePolicyInput{}
@@ -34,10 +35,12 @@ func (c *Client) DeletePolicy(ctx context.Context, params *DeletePolicyInput, op
 type DeletePolicyInput struct {
 
 	// The unique identifier (ID) of the policy that you want to delete. You can get
-	// the ID from the ListPolicies or ListPoliciesForTarget operations. The regex
-	// pattern (http://wikipedia.org/wiki/regex) for a policy ID string requires "p-"
-	// followed by from 8 to 128 lowercase or uppercase letters, digits, or the
-	// underscore character (_).
+	// the ID from the ListPoliciesor ListPoliciesForTarget operations.
+	//
+	// The [regex pattern] for a policy ID string requires "p-" followed by from 8 to 128 lowercase
+	// or uppercase letters, digits, or the underscore character (_).
+	//
+	// [regex pattern]: http://wikipedia.org/wiki/regex
 	//
 	// This member is required.
 	PolicyId *string
@@ -74,25 +77,25 @@ func (c *Client) addOperationDeletePolicyMiddlewares(stack *middleware.Stack, op
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -107,13 +110,16 @@ func (c *Client) addOperationDeletePolicyMiddlewares(stack *middleware.Stack, op
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDeletePolicyValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDeletePolicy(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

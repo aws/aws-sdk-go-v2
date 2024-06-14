@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -30,19 +29,25 @@ func (c *Client) DeleteServiceSpecificCredential(ctx context.Context, params *De
 type DeleteServiceSpecificCredentialInput struct {
 
 	// The unique identifier of the service-specific credential. You can get this
-	// value by calling ListServiceSpecificCredentials . This parameter allows (through
-	// its regex pattern (http://wikipedia.org/wiki/regex) ) a string of characters
-	// that can consist of any upper or lowercased letter or digit.
+	// value by calling ListServiceSpecificCredentials.
+	//
+	// This parameter allows (through its [regex pattern]) a string of characters that can consist of
+	// any upper or lowercased letter or digit.
+	//
+	// [regex pattern]: http://wikipedia.org/wiki/regex
 	//
 	// This member is required.
 	ServiceSpecificCredentialId *string
 
 	// The name of the IAM user associated with the service-specific credential. If
 	// this value is not specified, then the operation assumes the user whose
-	// credentials are used to call the operation. This parameter allows (through its
-	// regex pattern (http://wikipedia.org/wiki/regex) ) a string of characters
-	// consisting of upper and lowercase alphanumeric characters with no spaces. You
-	// can also include any of the following characters: _+=,.@-
+	// credentials are used to call the operation.
+	//
+	// This parameter allows (through its [regex pattern]) a string of characters consisting of upper
+	// and lowercase alphanumeric characters with no spaces. You can also include any
+	// of the following characters: _+=,.@-
+	//
+	// [regex pattern]: http://wikipedia.org/wiki/regex
 	UserName *string
 
 	noSmithyDocumentSerde
@@ -77,25 +82,25 @@ func (c *Client) addOperationDeleteServiceSpecificCredentialMiddlewares(stack *m
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -110,13 +115,16 @@ func (c *Client) addOperationDeleteServiceSpecificCredentialMiddlewares(stack *m
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDeleteServiceSpecificCredentialValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteServiceSpecificCredential(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

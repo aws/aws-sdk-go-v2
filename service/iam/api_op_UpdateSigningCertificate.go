@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/iam/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -14,12 +13,14 @@ import (
 
 // Changes the status of the specified user signing certificate from active to
 // disabled, or vice versa. This operation can be used to disable an IAM user's
-// signing certificate as part of a certificate rotation work flow. If the UserName
-// field is not specified, the user name is determined implicitly based on the
-// Amazon Web Services access key ID used to sign the request. This operation works
-// for access keys under the Amazon Web Services account. Consequently, you can use
-// this operation to manage Amazon Web Services account root user credentials even
-// if the Amazon Web Services account has no associated users.
+// signing certificate as part of a certificate rotation work flow.
+//
+// If the UserName field is not specified, the user name is determined implicitly
+// based on the Amazon Web Services access key ID used to sign the request. This
+// operation works for access keys under the Amazon Web Services account.
+// Consequently, you can use this operation to manage Amazon Web Services account
+// root user credentials even if the Amazon Web Services account has no associated
+// users.
 func (c *Client) UpdateSigningCertificate(ctx context.Context, params *UpdateSigningCertificateInput, optFns ...func(*Options)) (*UpdateSigningCertificateOutput, error) {
 	if params == nil {
 		params = &UpdateSigningCertificateInput{}
@@ -37,24 +38,30 @@ func (c *Client) UpdateSigningCertificate(ctx context.Context, params *UpdateSig
 
 type UpdateSigningCertificateInput struct {
 
-	// The ID of the signing certificate you want to update. This parameter allows
-	// (through its regex pattern (http://wikipedia.org/wiki/regex) ) a string of
-	// characters that can consist of any upper or lowercased letter or digit.
+	// The ID of the signing certificate you want to update.
+	//
+	// This parameter allows (through its [regex pattern]) a string of characters that can consist of
+	// any upper or lowercased letter or digit.
+	//
+	// [regex pattern]: http://wikipedia.org/wiki/regex
 	//
 	// This member is required.
 	CertificateId *string
 
-	// The status you want to assign to the certificate. Active means that the
+	//  The status you want to assign to the certificate. Active means that the
 	// certificate can be used for programmatic calls to Amazon Web Services Inactive
 	// means that the certificate cannot be used.
 	//
 	// This member is required.
 	Status types.StatusType
 
-	// The name of the IAM user the signing certificate belongs to. This parameter
-	// allows (through its regex pattern (http://wikipedia.org/wiki/regex) ) a string
-	// of characters consisting of upper and lowercase alphanumeric characters with no
-	// spaces. You can also include any of the following characters: _+=,.@-
+	// The name of the IAM user the signing certificate belongs to.
+	//
+	// This parameter allows (through its [regex pattern]) a string of characters consisting of upper
+	// and lowercase alphanumeric characters with no spaces. You can also include any
+	// of the following characters: _+=,.@-
+	//
+	// [regex pattern]: http://wikipedia.org/wiki/regex
 	UserName *string
 
 	noSmithyDocumentSerde
@@ -89,25 +96,25 @@ func (c *Client) addOperationUpdateSigningCertificateMiddlewares(stack *middlewa
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -122,13 +129,16 @@ func (c *Client) addOperationUpdateSigningCertificateMiddlewares(stack *middlewa
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpUpdateSigningCertificateValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateSigningCertificate(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/wafv2/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -16,12 +15,13 @@ import (
 // WAF randomly selects from among the first 5,000 requests that your Amazon Web
 // Services resource received during a time range that you choose. You can specify
 // a sample size of up to 500 requests, and you can specify any time range in the
-// previous three hours. GetSampledRequests returns a time range, which is usually
-// the time range that you specified. However, if your resource (such as a
-// CloudFront distribution) received 5,000 requests before the specified time range
-// elapsed, GetSampledRequests returns an updated time range. This new time range
-// indicates the actual period during which WAF selected the requests in the
-// sample.
+// previous three hours.
+//
+// GetSampledRequests returns a time range, which is usually the time range that
+// you specified. However, if your resource (such as a CloudFront distribution)
+// received 5,000 requests before the specified time range elapsed,
+// GetSampledRequests returns an updated time range. This new time range indicates
+// the actual period during which WAF selected the requests in the sample.
 func (c *Client) GetSampledRequests(ctx context.Context, params *GetSampledRequestsInput, optFns ...func(*Options)) (*GetSampledRequestsOutput, error) {
 	if params == nil {
 		params = &GetSampledRequestsInput{}
@@ -57,10 +57,14 @@ type GetSampledRequestsInput struct {
 	// regional application. A regional application can be an Application Load Balancer
 	// (ALB), an Amazon API Gateway REST API, an AppSync GraphQL API, an Amazon Cognito
 	// user pool, an App Runner service, or an Amazon Web Services Verified Access
-	// instance. To work with CloudFront, you must also specify the Region US East (N.
-	// Virginia) as follows:
+	// instance.
+	//
+	// To work with CloudFront, you must also specify the Region US East (N. Virginia)
+	// as follows:
+	//
 	//   - CLI - Specify the Region when you use the CloudFront scope:
 	//   --scope=CLOUDFRONT --region=us-east-1 .
+	//
 	//   - API and SDKs - For all calls, use the Region endpoint us-east-1.
 	//
 	// This member is required.
@@ -132,25 +136,25 @@ func (c *Client) addOperationGetSampledRequestsMiddlewares(stack *middleware.Sta
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -165,13 +169,16 @@ func (c *Client) addOperationGetSampledRequestsMiddlewares(stack *middleware.Sta
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpGetSampledRequestsValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetSampledRequests(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

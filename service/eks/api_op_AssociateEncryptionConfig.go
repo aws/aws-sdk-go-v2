@@ -6,16 +6,16 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/eks/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Associates an encryption configuration to an existing cluster. Use this API to
-// enable encryption on existing clusters that don't already have encryption
-// enabled. This allows you to implement a defense-in-depth security strategy
-// without migrating applications to new Amazon EKS clusters.
+// Associates an encryption configuration to an existing cluster.
+//
+// Use this API to enable encryption on existing clusters that don't already have
+// encryption enabled. This allows you to implement a defense-in-depth security
+// strategy without migrating applications to new Amazon EKS clusters.
 func (c *Client) AssociateEncryptionConfig(ctx context.Context, params *AssociateEncryptionConfigInput, optFns ...func(*Options)) (*AssociateEncryptionConfigOutput, error) {
 	if params == nil {
 		params = &AssociateEncryptionConfigInput{}
@@ -83,25 +83,25 @@ func (c *Client) addOperationAssociateEncryptionConfigMiddlewares(stack *middlew
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -116,6 +116,9 @@ func (c *Client) addOperationAssociateEncryptionConfigMiddlewares(stack *middlew
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opAssociateEncryptionConfigMiddleware(stack, options); err != nil {
 		return err
 	}
@@ -125,7 +128,7 @@ func (c *Client) addOperationAssociateEncryptionConfigMiddlewares(stack *middlew
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opAssociateEncryptionConfig(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

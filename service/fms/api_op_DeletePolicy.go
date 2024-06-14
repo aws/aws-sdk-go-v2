@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -35,26 +34,35 @@ type DeletePolicyInput struct {
 	// This member is required.
 	PolicyId *string
 
-	// If True , the request performs cleanup according to the policy type. For WAF and
-	// Shield Advanced policies, the cleanup does the following:
+	// If True , the request performs cleanup according to the policy type.
+	//
+	// For WAF and Shield Advanced policies, the cleanup does the following:
+	//
 	//   - Deletes rule groups created by Firewall Manager
+	//
 	//   - Removes web ACLs from in-scope resources
+	//
 	//   - Deletes web ACLs that contain no rules or rule groups
+	//
 	// For security group policies, the cleanup does the following for each security
 	// group in the policy:
+	//
 	//   - Disassociates the security group from in-scope resources
+	//
 	//   - Deletes the security group if it was created through Firewall Manager and
 	//   if it's no longer associated with any resources through another policy
+	//
 	// For security group common policies, even if set to False , Firewall Manager
 	// deletes all security groups created by Firewall Manager that aren't associated
-	// with any other resources through another policy. After the cleanup, in-scope
-	// resources are no longer protected by web ACLs in this policy. Protection of
-	// out-of-scope resources remains unchanged. Scope is determined by tags that you
-	// create and accounts that you associate with the policy. When creating the
-	// policy, if you specify that only resources in specific accounts or with specific
-	// tags are in scope of the policy, those accounts and resources are handled by the
-	// policy. All others are out of scope. If you don't specify tags or accounts, all
-	// resources are in scope.
+	// with any other resources through another policy.
+	//
+	// After the cleanup, in-scope resources are no longer protected by web ACLs in
+	// this policy. Protection of out-of-scope resources remains unchanged. Scope is
+	// determined by tags that you create and accounts that you associate with the
+	// policy. When creating the policy, if you specify that only resources in specific
+	// accounts or with specific tags are in scope of the policy, those accounts and
+	// resources are handled by the policy. All others are out of scope. If you don't
+	// specify tags or accounts, all resources are in scope.
 	DeleteAllPolicyResources bool
 
 	noSmithyDocumentSerde
@@ -89,25 +97,25 @@ func (c *Client) addOperationDeletePolicyMiddlewares(stack *middleware.Stack, op
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -122,13 +130,16 @@ func (c *Client) addOperationDeletePolicyMiddlewares(stack *middleware.Stack, op
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDeletePolicyValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDeletePolicy(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

@@ -1977,7 +1977,6 @@
                                     ]
                                 }
                             ],
-                            "type": "tree",
                             "rules": [
                                 {
                                     "conditions": [
@@ -2020,7 +2019,8 @@
                                     },
                                     "type": "endpoint"
                                 }
-                            ]
+                            ],
+                            "type": "tree"
                         },
                         {
                             "conditions": [
@@ -2033,7 +2033,6 @@
                                     ]
                                 }
                             ],
-                            "type": "tree",
                             "rules": [
                                 {
                                     "conditions": [
@@ -2047,7 +2046,6 @@
                                             "assign": "PartitionResult"
                                         }
                                     ],
-                                    "type": "tree",
                                     "rules": [
                                         {
                                             "conditions": [
@@ -2070,7 +2068,6 @@
                                                     ]
                                                 }
                                             ],
-                                            "type": "tree",
                                             "rules": [
                                                 {
                                                     "conditions": [
@@ -2105,7 +2102,6 @@
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [],
@@ -2116,14 +2112,16 @@
                                                             },
                                                             "type": "endpoint"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [],
                                                     "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
                                                     "type": "error"
                                                 }
-                                            ]
+                                            ],
+                                            "type": "tree"
                                         },
                                         {
                                             "conditions": [
@@ -2137,14 +2135,12 @@
                                                     ]
                                                 }
                                             ],
-                                            "type": "tree",
                                             "rules": [
                                                 {
                                                     "conditions": [
                                                         {
                                                             "fn": "booleanEquals",
                                                             "argv": [
-                                                                true,
                                                                 {
                                                                     "fn": "getAttr",
                                                                     "argv": [
@@ -2153,11 +2149,11 @@
                                                                         },
                                                                         "supportsFIPS"
                                                                     ]
-                                                                }
+                                                                },
+                                                                true
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [],
@@ -2168,14 +2164,16 @@
                                                             },
                                                             "type": "endpoint"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [],
                                                     "error": "FIPS is enabled but this partition does not support FIPS",
                                                     "type": "error"
                                                 }
-                                            ]
+                                            ],
+                                            "type": "tree"
                                         },
                                         {
                                             "conditions": [
@@ -2189,7 +2187,6 @@
                                                     ]
                                                 }
                                             ],
-                                            "type": "tree",
                                             "rules": [
                                                 {
                                                     "conditions": [
@@ -2209,7 +2206,6 @@
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [],
@@ -2220,14 +2216,16 @@
                                                             },
                                                             "type": "endpoint"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [],
                                                     "error": "DualStack is enabled but this partition does not support DualStack",
                                                     "type": "error"
                                                 }
-                                            ]
+                                            ],
+                                            "type": "tree"
                                         },
                                         {
                                             "conditions": [],
@@ -2238,9 +2236,11 @@
                                             },
                                             "type": "endpoint"
                                         }
-                                    ]
+                                    ],
+                                    "type": "tree"
                                 }
-                            ]
+                            ],
+                            "type": "tree"
                         },
                         {
                             "conditions": [],
@@ -2868,10 +2868,26 @@
                     "traits": {
                         "smithy.api#documentation": "<p> The tags associated with the control. </p>"
                     }
+                },
+                "state": {
+                    "target": "com.amazonaws.auditmanager#ControlState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The state of the control. The <code>END_OF_SUPPORT</code> state is applicable to\n         standard controls only. This state indicates that the standard control can still be used to\n         collect evidence, but Audit Manager is no longer updating or maintaining that\n         control.</p>"
+                    }
                 }
             },
             "traits": {
                 "smithy.api#documentation": "<p> A control in Audit Manager. </p>"
+            }
+        },
+        "com.amazonaws.auditmanager#ControlCatalogId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 13,
+                    "max": 2048
+                },
+                "smithy.api#pattern": "^arn:.*:controlcatalog:.*|UNCATEGORIZED$"
             }
         },
         "com.amazonaws.auditmanager#ControlComment": {
@@ -2924,22 +2940,33 @@
                     "min": 0,
                     "max": 1000
                 },
-                "smithy.api#pattern": "^[\\w\\W\\s\\S]*$"
+                "smithy.api#pattern": "^[\\w\\W\\s\\S]*$",
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.auditmanager#ControlDomainId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 13,
+                    "max": 2048
+                },
+                "smithy.api#pattern": "^arn:.*:controlcatalog:.*:.*:domain/.*|UNCATEGORIZED|^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$"
             }
         },
         "com.amazonaws.auditmanager#ControlDomainInsights": {
             "type": "structure",
             "members": {
                 "name": {
-                    "target": "com.amazonaws.auditmanager#NonEmptyString",
+                    "target": "com.amazonaws.auditmanager#String",
                     "traits": {
                         "smithy.api#documentation": "<p>The name of the control domain. </p>"
                     }
                 },
                 "id": {
-                    "target": "com.amazonaws.auditmanager#UUID",
+                    "target": "com.amazonaws.auditmanager#ControlDomainId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The unique identifier for the control domain. </p>"
+                        "smithy.api#documentation": "<p>The unique identifier for the control domain. Audit Manager supports the control\n         domains that are provided by Amazon Web Services Control Catalog. For information about how\n         to find a list of available control domains, see <a href=\"https://docs.aws.amazon.com/controlcatalog/latest/APIReference/API_ListDomains.html\">\n               <code>ListDomains</code>\n            </a> in the Amazon Web Services Control Catalog API\n         Reference.</p>"
                     }
                 },
                 "controlsCountByNoncompliantEvidence": {
@@ -2993,13 +3020,13 @@
             "type": "structure",
             "members": {
                 "name": {
-                    "target": "com.amazonaws.auditmanager#NonEmptyString",
+                    "target": "com.amazonaws.auditmanager#String",
                     "traits": {
                         "smithy.api#documentation": "<p>The name of the assessment control. </p>"
                     }
                 },
                 "id": {
-                    "target": "com.amazonaws.auditmanager#UUID",
+                    "target": "com.amazonaws.auditmanager#ControlDomainId",
                     "traits": {
                         "smithy.api#documentation": "<p>The unique identifier for the assessment control. </p>"
                     }
@@ -3031,13 +3058,13 @@
             "type": "structure",
             "members": {
                 "name": {
-                    "target": "com.amazonaws.auditmanager#NonEmptyString",
+                    "target": "com.amazonaws.auditmanager#String",
                     "traits": {
                         "smithy.api#documentation": "<p>The name of the control. </p>"
                     }
                 },
                 "id": {
-                    "target": "com.amazonaws.auditmanager#UUID",
+                    "target": "com.amazonaws.auditmanager#ControlDomainId",
                     "traits": {
                         "smithy.api#documentation": "<p>The unique identifier for the control. </p>"
                     }
@@ -3083,13 +3110,13 @@
                 "sourceSetUpOption": {
                     "target": "com.amazonaws.auditmanager#SourceSetUpOption",
                     "traits": {
-                        "smithy.api#documentation": "<p> The setup option for the data source. This option reflects if the evidence collection\n         is automated or manual. </p>"
+                        "smithy.api#documentation": "<p>The setup option for the data source. This option reflects if the evidence collection\n         method is automated or manual. If you don’t provide a value for\n            <code>sourceSetUpOption</code>, Audit Manager automatically infers and populates\n         the correct value based on the <code>sourceType</code> that you specify.</p>"
                     }
                 },
                 "sourceType": {
                     "target": "com.amazonaws.auditmanager#SourceType",
                     "traits": {
-                        "smithy.api#documentation": "<p> Specifies one of the five data source types for evidence collection. </p>"
+                        "smithy.api#documentation": "<p> Specifies which type of data source is used to collect evidence. </p>\n         <ul>\n            <li>\n               <p>The source can be an individual data source type, such as\n                  <code>AWS_Cloudtrail</code>, <code>AWS_Config</code>,\n                  <code>AWS_Security_Hub</code>, <code>AWS_API_Call</code>, or <code>MANUAL</code>.\n            </p>\n            </li>\n            <li>\n               <p>The source can also be a managed grouping of data sources, such as a\n                  <code>Core_Control</code> or a <code>Common_Control</code>.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "sourceKeyword": {
@@ -3309,6 +3336,23 @@
                 "smithy.api#pattern": "^[a-zA-Z_0-9-\\s.,]+$"
             }
         },
+        "com.amazonaws.auditmanager#ControlState": {
+            "type": "enum",
+            "members": {
+                "ACTIVE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ACTIVE"
+                    }
+                },
+                "END_OF_SUPPORT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "END_OF_SUPPORT"
+                    }
+                }
+            }
+        },
         "com.amazonaws.auditmanager#ControlStatus": {
             "type": "enum",
             "members": {
@@ -3345,6 +3389,12 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "Custom"
+                    }
+                },
+                "CORE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Core"
                     }
                 }
             }
@@ -3386,6 +3436,9 @@
                 },
                 {
                     "target": "com.amazonaws.auditmanager#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.auditmanager#ThrottlingException"
                 },
                 {
                     "target": "com.amazonaws.auditmanager#ValidationException"
@@ -3743,13 +3796,13 @@
                 "sourceSetUpOption": {
                     "target": "com.amazonaws.auditmanager#SourceSetUpOption",
                     "traits": {
-                        "smithy.api#documentation": "<p> The setup option for the data source, which reflects if the evidence collection is\n         automated or manual. </p>"
+                        "smithy.api#documentation": "<p>The setup option for the data source. This option reflects if the evidence collection\n         method is automated or manual. If you don’t provide a value for\n            <code>sourceSetUpOption</code>, Audit Manager automatically infers and populates\n         the correct value based on the <code>sourceType</code> that you specify.</p>"
                     }
                 },
                 "sourceType": {
                     "target": "com.amazonaws.auditmanager#SourceType",
                     "traits": {
-                        "smithy.api#documentation": "<p> Specifies one of the five types of data sources for evidence collection. </p>"
+                        "smithy.api#documentation": "<p> Specifies which type of data source is used to collect evidence. </p>\n         <ul>\n            <li>\n               <p>The source can be an individual data source type, such as\n                  <code>AWS_Cloudtrail</code>, <code>AWS_Config</code>,\n                  <code>AWS_Security_Hub</code>, <code>AWS_API_Call</code>, or <code>MANUAL</code>.\n            </p>\n            </li>\n            <li>\n               <p>The source can also be a managed grouping of data sources, such as a\n                  <code>Core_Control</code> or a <code>Common_Control</code>.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "sourceKeyword": {
@@ -3769,7 +3822,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p> The control mapping fields that represent the source for evidence collection, along\n         with related parameters and metadata. This doesn't contain <code>mappingID</code>. </p>"
+                "smithy.api#documentation": "<p>The mapping attributes that determine the evidence source for a given control, along\n         with related parameters and metadata. This doesn't contain <code>mappingID</code>. </p>"
             }
         },
         "com.amazonaws.auditmanager#CreateControlMappingSources": {
@@ -3903,6 +3956,41 @@
                 },
                 "smithy.api#pattern": "^[a-zA-Z0-9\\s-_()\\[\\]]+$",
                 "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.auditmanager#DataSourceType": {
+            "type": "enum",
+            "members": {
+                "AWS_CLOUDTRAIL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AWS_Cloudtrail"
+                    }
+                },
+                "AWS_CONFIG": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AWS_Config"
+                    }
+                },
+                "AWS_SECURITY_HUB": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AWS_Security_Hub"
+                    }
+                },
+                "AWS_API_CALL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AWS_API_Call"
+                    }
+                },
+                "MANUAL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MANUAL"
+                    }
+                }
             }
         },
         "com.amazonaws.auditmanager#DefaultExportDestination": {
@@ -6262,7 +6350,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Gets a list of all of the Amazon Web Services that you can choose to include in\n         your assessment. When you <a href=\"https://docs.aws.amazon.com/audit-manager/latest/APIReference/API_CreateAssessment.html\">create an assessment</a>, specify which of these services you want to include to\n         narrow the assessment's <a href=\"https://docs.aws.amazon.com/audit-manager/latest/APIReference/API_Scope.html\">scope</a>.</p>",
+                "smithy.api#documentation": "<p>Gets a list of the Amazon Web Services from which Audit Manager can collect\n         evidence. </p>\n         <p>Audit Manager defines which Amazon Web Services are in scope for an\n         assessment. Audit Manager infers this scope by examining the assessment’s controls and\n         their data sources, and then mapping this information to one or more of the corresponding\n            Amazon Web Services that are in this list.</p>\n         <note>\n            <p>For information about why it's no longer possible to specify services in scope manually, see\n               <a href=\"https://docs.aws.amazon.com/audit-manager/latest/userguide/evidence-collection-issues.html#unable-to-edit-services\">I can't edit the services in scope for my assessment</a> in\n            the <i>Troubleshooting</i> section of the Audit Manager user\n            guide.</p>\n         </note>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/services",
@@ -6512,7 +6600,7 @@
                     "min": 1,
                     "max": 100
                 },
-                "smithy.api#pattern": "^[a-zA-Z_0-9-\\s().]+$"
+                "smithy.api#pattern": "^[a-zA-Z_0-9-\\s().:\\/]+$"
             }
         },
         "com.amazonaws.auditmanager#Keywords": {
@@ -6582,9 +6670,9 @@
             "type": "structure",
             "members": {
                 "controlDomainId": {
-                    "target": "com.amazonaws.auditmanager#UUID",
+                    "target": "com.amazonaws.auditmanager#ControlDomainId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The unique identifier for the control domain. </p>",
+                        "smithy.api#documentation": "<p>The unique identifier for the control domain. </p>\n         <p>Audit Manager supports the control domains that are provided by Amazon Web Services\n         Control Catalog. For information about how to find a list of available control domains, see\n            <a href=\"https://docs.aws.amazon.com/controlcatalog/latest/APIReference/API_ListDomains.html\">\n               <code>ListDomains</code>\n            </a> in the Amazon Web Services Control\n         Catalog API Reference.</p>",
                         "smithy.api#httpQuery": "controlDomainId",
                         "smithy.api#required": {}
                     }
@@ -6988,7 +7076,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Lists the latest analytics data for control domains across all of your active\n         assessments. </p>\n         <note>\n            <p>A control domain is listed only if at least one of the controls within that domain\n            collected evidence on the <code>lastUpdated</code> date of\n               <code>controlDomainInsights</code>. If this condition isn’t met, no data is listed\n            for that control domain.</p>\n         </note>",
+                "smithy.api#documentation": "<p>Lists the latest analytics data for control domains across all of your active\n         assessments. </p>\n         <p>Audit Manager supports the control domains that are provided by Amazon Web Services\n         Control Catalog. For information about how to find a list of available control domains, see\n            <a href=\"https://docs.aws.amazon.com/controlcatalog/latest/APIReference/API_ListDomains.html\">\n               <code>ListDomains</code>\n            </a> in the Amazon Web Services Control\n         Catalog API Reference.</p>\n         <note>\n            <p>A control domain is listed only if at least one of the controls within that domain\n            collected evidence on the <code>lastUpdated</code> date of\n               <code>controlDomainInsights</code>. If this condition isn’t met, no data is listed\n            for that control domain.</p>\n         </note>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/insights/control-domains",
@@ -7024,7 +7112,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Lists analytics data for control domains within a specified active assessment.</p>\n         <note>\n            <p>A control domain is listed only if at least one of the controls within that domain\n            collected evidence on the <code>lastUpdated</code> date of\n               <code>controlDomainInsights</code>. If this condition isn’t met, no data is listed\n            for that domain.</p>\n         </note>",
+                "smithy.api#documentation": "<p>Lists analytics data for control domains within a specified active assessment.</p>\n         <p>Audit Manager supports the control domains that are provided by Amazon Web Services\n         Control Catalog. For information about how to find a list of available control domains, see\n            <a href=\"https://docs.aws.amazon.com/controlcatalog/latest/APIReference/API_ListDomains.html\">\n               <code>ListDomains</code>\n            </a> in the Amazon Web Services Control\n         Catalog API Reference.</p>\n         <note>\n            <p>A control domain is listed only if at least one of the controls within that domain\n            collected evidence on the <code>lastUpdated</code> date of\n               <code>controlDomainInsights</code>. If this condition isn’t met, no data is listed\n            for that domain.</p>\n         </note>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/insights/control-domains-by-assessment",
@@ -7169,9 +7257,9 @@
             "type": "structure",
             "members": {
                 "controlDomainId": {
-                    "target": "com.amazonaws.auditmanager#UUID",
+                    "target": "com.amazonaws.auditmanager#ControlDomainId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The unique identifier for the control domain. </p>",
+                        "smithy.api#documentation": "<p>The unique identifier for the control domain. </p>\n         <p>Audit Manager supports the control domains that are provided by Amazon Web Services\n         Control Catalog. For information about how to find a list of available control domains, see\n            <a href=\"https://docs.aws.amazon.com/controlcatalog/latest/APIReference/API_ListDomains.html\">\n               <code>ListDomains</code>\n            </a> in the Amazon Web Services Control\n         Catalog API Reference.</p>",
                         "smithy.api#httpQuery": "controlDomainId",
                         "smithy.api#required": {}
                     }
@@ -7254,7 +7342,7 @@
                 "controlType": {
                     "target": "com.amazonaws.auditmanager#ControlType",
                     "traits": {
-                        "smithy.api#documentation": "<p> The type of control, such as a standard control or a custom control. </p>",
+                        "smithy.api#documentation": "<p>A filter that narrows the list of controls to a specific type. </p>",
                         "smithy.api#httpQuery": "controlType",
                         "smithy.api#required": {}
                     }
@@ -7262,15 +7350,22 @@
                 "nextToken": {
                     "target": "com.amazonaws.auditmanager#Token",
                     "traits": {
-                        "smithy.api#documentation": "<p> The pagination token that's used to fetch the next set of results. </p>",
+                        "smithy.api#documentation": "<p>The pagination token that's used to fetch the next set of results. </p>",
                         "smithy.api#httpQuery": "nextToken"
                     }
                 },
                 "maxResults": {
                     "target": "com.amazonaws.auditmanager#MaxResults",
                     "traits": {
-                        "smithy.api#documentation": "<p> Represents the maximum number of results on a page or for an API request call. </p>",
+                        "smithy.api#documentation": "<p>The maximum number of results on a page or for an API request call. </p>",
                         "smithy.api#httpQuery": "maxResults"
+                    }
+                },
+                "controlCatalogId": {
+                    "target": "com.amazonaws.auditmanager#ControlCatalogId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A filter that narrows the list of controls to a specific resource from the Amazon Web Services \n         Control Catalog. </p>\n         <p>To use this parameter, specify the ARN of the Control Catalog resource. You can specify either \n         a control domain, a control objective, or a common control. For information about how to find the ARNs\n         for these resources, see <a href=\"https://docs.aws.amazon.com/controlcatalog/latest/APIReference/API_ListDomains.html\">\n               <code>ListDomains</code>\n            </a>, <a href=\"https://docs.aws.amazon.com/controlcatalog/latest/APIReference/API_ListObjectives.html\">\n               <code>ListObjectives</code>\n            </a>, and <a href=\"https://docs.aws.amazon.com/controlcatalog/latest/APIReference/API_ListCommonControls.html\">\n               <code>ListCommonControls</code>\n            </a>.</p>\n         <note>\n            <p>You can only filter by one Control Catalog resource at a time. \n            Specifying multiple resource ARNs isn’t currently supported. If you want to filter by more \n            than one ARN, we recommend that you run the <code>ListControls</code> operation separately \n            for each ARN. </p>\n         </note>\n         <p>Alternatively, specify <code>UNCATEGORIZED</code> to list controls that aren't\n         mapped to a Control Catalog resource. For example, this operation might return a list of \n         custom controls that don't belong to any control domain or control objective.</p>",
+                        "smithy.api#httpQuery": "controlCatalogId"
                     }
                 }
             },
@@ -7290,7 +7385,7 @@
                 "nextToken": {
                     "target": "com.amazonaws.auditmanager#Token",
                     "traits": {
-                        "smithy.api#documentation": "<p> The pagination token that's used to fetch the next set of results. </p>"
+                        "smithy.api#documentation": "<p>The pagination token that's used to fetch the next set of results. </p>"
                     }
                 }
             },
@@ -7318,7 +7413,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p> Returns a list of keywords that are pre-mapped to the specified control data source.\n      </p>",
+                "smithy.api#documentation": "<p>Returns a list of keywords that are pre-mapped to the specified control data\n         source.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/dataSourceKeywords",
@@ -7335,9 +7430,9 @@
             "type": "structure",
             "members": {
                 "source": {
-                    "target": "com.amazonaws.auditmanager#SourceType",
+                    "target": "com.amazonaws.auditmanager#DataSourceType",
                     "traits": {
-                        "smithy.api#documentation": "<p> The control mapping data source that the keywords apply to. </p>",
+                        "smithy.api#documentation": "<p>The control mapping data source that the keywords apply to. </p>",
                         "smithy.api#httpQuery": "source",
                         "smithy.api#required": {}
                     }
@@ -7367,7 +7462,7 @@
                 "keywords": {
                     "target": "com.amazonaws.auditmanager#Keywords",
                     "traits": {
-                        "smithy.api#documentation": "<p> The list of keywords for the event mapping source. </p>"
+                        "smithy.api#documentation": "<p>The list of keywords for the control mapping source.</p>"
                     }
                 },
                 "nextToken": {
@@ -7987,12 +8082,15 @@
                 "awsServices": {
                     "target": "com.amazonaws.auditmanager#AWSServices",
                     "traits": {
-                        "smithy.api#documentation": "<p> The Amazon Web Services services that are included in the scope of the assessment.\n      </p>"
+                        "smithy.api#deprecated": {
+                            "message": "You can't specify services in scope when creating/updating an assessment. If you use the parameter to specify one or more AWS services, Audit Manager ignores the input. Instead the value of the parameter will show as empty indicating that the services are defined and managed by Audit Manager."
+                        },
+                        "smithy.api#documentation": "<p> The Amazon Web Services services that are included in the scope of the assessment.\n      </p>\n         <important>\n            <p>This API parameter is no longer supported. If you use this parameter to specify one\n            or more Amazon Web Services, Audit Manager ignores this input. Instead, the\n            value for <code>awsServices</code> will show as empty.</p>\n         </important>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p> The wrapper that contains the Amazon Web Services accounts and services that are in\n         scope for the assessment. </p>",
+                "smithy.api#documentation": "<p> The wrapper that contains the Amazon Web Services accounts that are in\n         scope for the assessment. </p>\n         <note>\n            <p>You no longer need to specify which Amazon Web Services are in scope when you\n            create or update an assessment. Audit Manager infers the services in scope by\n            examining your assessment controls and their data sources, and then mapping this\n            information to the relevant Amazon Web Services. </p>\n            <p>If an underlying data source changes for your assessment, we automatically update the\n            services scope as needed to reflect the correct Amazon Web Services. This\n            ensures that your assessment collects accurate and comprehensive evidence about all of\n            the relevant services in your AWS environment.</p>\n         </note>",
                 "smithy.api#sensitive": {}
             }
         },
@@ -8330,7 +8428,7 @@
             "traits": {
                 "smithy.api#length": {
                     "min": 1,
-                    "max": 100
+                    "max": 300
                 }
             }
         },
@@ -8382,6 +8480,18 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "MANUAL"
+                    }
+                },
+                "COMMON_CONTROL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Common_Control"
+                    }
+                },
+                "CORE_CONTROL": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "Core_Control"
                     }
                 }
             }
@@ -8606,7 +8716,7 @@
             "traits": {
                 "smithy.api#documentation": "<p>The request was denied due to request throttling.</p>",
                 "smithy.api#error": "client",
-                "smithy.api#httpError": 400
+                "smithy.api#httpError": 429
             }
         },
         "com.amazonaws.auditmanager#Timestamp": {
@@ -8749,6 +8859,9 @@
                 },
                 {
                     "target": "com.amazonaws.auditmanager#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.auditmanager#ThrottlingException"
                 },
                 {
                     "target": "com.amazonaws.auditmanager#ValidationException"

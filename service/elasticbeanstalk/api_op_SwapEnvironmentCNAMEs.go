@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -30,28 +29,32 @@ func (c *Client) SwapEnvironmentCNAMEs(ctx context.Context, params *SwapEnvironm
 // Swaps the CNAMEs of two environments.
 type SwapEnvironmentCNAMEsInput struct {
 
-	// The ID of the destination environment. Condition: You must specify at least the
-	// DestinationEnvironmentID or the DestinationEnvironmentName . You may also
-	// specify both. You must specify the SourceEnvironmentId with the
-	// DestinationEnvironmentId .
+	// The ID of the destination environment.
+	//
+	// Condition: You must specify at least the DestinationEnvironmentID or the
+	// DestinationEnvironmentName . You may also specify both. You must specify the
+	// SourceEnvironmentId with the DestinationEnvironmentId .
 	DestinationEnvironmentId *string
 
-	// The name of the destination environment. Condition: You must specify at least
-	// the DestinationEnvironmentID or the DestinationEnvironmentName . You may also
-	// specify both. You must specify the SourceEnvironmentName with the
-	// DestinationEnvironmentName .
+	// The name of the destination environment.
+	//
+	// Condition: You must specify at least the DestinationEnvironmentID or the
+	// DestinationEnvironmentName . You may also specify both. You must specify the
+	// SourceEnvironmentName with the DestinationEnvironmentName .
 	DestinationEnvironmentName *string
 
-	// The ID of the source environment. Condition: You must specify at least the
-	// SourceEnvironmentID or the SourceEnvironmentName . You may also specify both. If
-	// you specify the SourceEnvironmentId , you must specify the
-	// DestinationEnvironmentId .
+	// The ID of the source environment.
+	//
+	// Condition: You must specify at least the SourceEnvironmentID or the
+	// SourceEnvironmentName . You may also specify both. If you specify the
+	// SourceEnvironmentId , you must specify the DestinationEnvironmentId .
 	SourceEnvironmentId *string
 
-	// The name of the source environment. Condition: You must specify at least the
-	// SourceEnvironmentID or the SourceEnvironmentName . You may also specify both. If
-	// you specify the SourceEnvironmentName , you must specify the
-	// DestinationEnvironmentName .
+	// The name of the source environment.
+	//
+	// Condition: You must specify at least the SourceEnvironmentID or the
+	// SourceEnvironmentName . You may also specify both. If you specify the
+	// SourceEnvironmentName , you must specify the DestinationEnvironmentName .
 	SourceEnvironmentName *string
 
 	noSmithyDocumentSerde
@@ -86,25 +89,25 @@ func (c *Client) addOperationSwapEnvironmentCNAMEsMiddlewares(stack *middleware.
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -119,10 +122,13 @@ func (c *Client) addOperationSwapEnvironmentCNAMEsMiddlewares(stack *middleware.
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opSwapEnvironmentCNAMEs(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

@@ -6,13 +6,12 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/qbusiness/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists the retriever used by an Amazon Q application.
+// Lists the retriever used by an Amazon Q Business application.
 func (c *Client) ListRetrievers(ctx context.Context, params *ListRetrieversInput, optFns ...func(*Options)) (*ListRetrieversOutput, error) {
 	if params == nil {
 		params = &ListRetrieversInput{}
@@ -30,7 +29,7 @@ func (c *Client) ListRetrievers(ctx context.Context, params *ListRetrieversInput
 
 type ListRetrieversInput struct {
 
-	// The identifier of the Amazon Q application using the retriever.
+	// The identifier of the Amazon Q Business application using the retriever.
 	//
 	// This member is required.
 	ApplicationId *string
@@ -38,8 +37,9 @@ type ListRetrieversInput struct {
 	// The maximum number of retrievers returned.
 	MaxResults *int32
 
-	// If the number of retrievers returned exceeds maxResults , Amazon Q returns a
-	// next token as a pagination token to retrieve the next set of retrievers.
+	// If the number of retrievers returned exceeds maxResults , Amazon Q Business
+	// returns a next token as a pagination token to retrieve the next set of
+	// retrievers.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -47,8 +47,8 @@ type ListRetrieversInput struct {
 
 type ListRetrieversOutput struct {
 
-	// If the response is truncated, Amazon Q returns this token, which you can use in
-	// a later request to list the next set of retrievers.
+	// If the response is truncated, Amazon Q Business returns this token, which you
+	// can use in a later request to list the next set of retrievers.
 	NextToken *string
 
 	// An array of summary information for one or more retrievers.
@@ -82,25 +82,25 @@ func (c *Client) addOperationListRetrieversMiddlewares(stack *middleware.Stack, 
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -115,13 +115,16 @@ func (c *Client) addOperationListRetrieversMiddlewares(stack *middleware.Stack, 
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpListRetrieversValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListRetrievers(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

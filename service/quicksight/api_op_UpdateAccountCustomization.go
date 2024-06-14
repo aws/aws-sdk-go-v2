@@ -6,18 +6,18 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/quicksight/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Updates Amazon QuickSight customizations for the current Amazon Web Services
-// Region. Currently, the only customization that you can use is a theme. You can
-// use customizations for your Amazon Web Services account or, if you specify a
-// namespace, for a Amazon QuickSight namespace instead. Customizations that apply
-// to a namespace override customizations that apply to an Amazon Web Services
-// account. To find out which customizations apply, use the
+// Region. Currently, the only customization that you can use is a theme.
+//
+// You can use customizations for your Amazon Web Services account or, if you
+// specify a namespace, for a Amazon QuickSight namespace instead. Customizations
+// that apply to a namespace override customizations that apply to an Amazon Web
+// Services account. To find out which customizations apply, use the
 // DescribeAccountCustomization API operation.
 func (c *Client) UpdateAccountCustomization(ctx context.Context, params *UpdateAccountCustomizationInput, optFns ...func(*Options)) (*UpdateAccountCustomizationOutput, error) {
 	if params == nil {
@@ -105,25 +105,25 @@ func (c *Client) addOperationUpdateAccountCustomizationMiddlewares(stack *middle
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -138,13 +138,16 @@ func (c *Client) addOperationUpdateAccountCustomizationMiddlewares(stack *middle
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpUpdateAccountCustomizationValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateAccountCustomization(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

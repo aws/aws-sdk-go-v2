@@ -6,16 +6,16 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/iotsitewise/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates a gateway, which is a virtual or edge device that delivers industrial
-// data streams from local servers to IoT SiteWise. For more information, see
-// Ingesting data using a gateway (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/gateway-connector.html)
-// in the IoT SiteWise User Guide.
+// data streams from local servers to IoT SiteWise. For more information, see [Ingesting data using a gateway]in
+// the IoT SiteWise User Guide.
+//
+// [Ingesting data using a gateway]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/gateway-connector.html
 func (c *Client) CreateGateway(ctx context.Context, params *CreateGatewayInput, optFns ...func(*Options)) (*CreateGatewayOutput, error) {
 	if params == nil {
 		params = &CreateGatewayInput{}
@@ -44,8 +44,9 @@ type CreateGatewayInput struct {
 	GatewayPlatform *types.GatewayPlatform
 
 	// A list of key-value pairs that contain metadata for the gateway. For more
-	// information, see Tagging your IoT SiteWise resources (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/tag-resources.html)
-	// in the IoT SiteWise User Guide.
+	// information, see [Tagging your IoT SiteWise resources]in the IoT SiteWise User Guide.
+	//
+	// [Tagging your IoT SiteWise resources]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/tag-resources.html
 	Tags map[string]string
 
 	noSmithyDocumentSerde
@@ -53,9 +54,11 @@ type CreateGatewayInput struct {
 
 type CreateGatewayOutput struct {
 
-	// The ARN (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
-	// of the gateway, which has the following format.
-	// arn:${Partition}:iotsitewise:${Region}:${Account}:gateway/${GatewayId}
+	// The [ARN] of the gateway, which has the following format.
+	//
+	//     arn:${Partition}:iotsitewise:${Region}:${Account}:gateway/${GatewayId}
+	//
+	// [ARN]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
 	//
 	// This member is required.
 	GatewayArn *string
@@ -94,25 +97,25 @@ func (c *Client) addOperationCreateGatewayMiddlewares(stack *middleware.Stack, o
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -127,6 +130,9 @@ func (c *Client) addOperationCreateGatewayMiddlewares(stack *middleware.Stack, o
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addEndpointPrefix_opCreateGatewayMiddleware(stack); err != nil {
 		return err
 	}
@@ -136,7 +142,7 @@ func (c *Client) addOperationCreateGatewayMiddlewares(stack *middleware.Stack, o
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateGateway(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

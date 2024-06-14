@@ -194,6 +194,96 @@ func awsRestjson1_serializeOpDocumentBatchGetSchemaInput(v *BatchGetSchemaInput,
 	return nil
 }
 
+type awsRestjson1_serializeOpBatchGetSchemaAnalysisRule struct {
+}
+
+func (*awsRestjson1_serializeOpBatchGetSchemaAnalysisRule) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpBatchGetSchemaAnalysisRule) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*BatchGetSchemaAnalysisRuleInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/collaborations/{collaborationIdentifier}/batch-schema-analysis-rule")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "POST"
+	var restEncoder *httpbinding.Encoder
+	if request.URL.RawPath == "" {
+		restEncoder, err = httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	} else {
+		request.URL.RawPath = smithyhttp.JoinPath(request.URL.RawPath, opPath)
+		restEncoder, err = httpbinding.NewEncoderWithRawPath(request.URL.Path, request.URL.RawPath, request.URL.RawQuery, request.Header)
+	}
+
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsBatchGetSchemaAnalysisRuleInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentBatchGetSchemaAnalysisRuleInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsBatchGetSchemaAnalysisRuleInput(v *BatchGetSchemaAnalysisRuleInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.CollaborationIdentifier == nil || len(*v.CollaborationIdentifier) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member collaborationIdentifier must not be empty")}
+	}
+	if v.CollaborationIdentifier != nil {
+		if err := encoder.SetURI("collaborationIdentifier").String(*v.CollaborationIdentifier); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentBatchGetSchemaAnalysisRuleInput(v *BatchGetSchemaAnalysisRuleInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.SchemaAnalysisRuleRequests != nil {
+		ok := object.Key("schemaAnalysisRuleRequests")
+		if err := awsRestjson1_serializeDocumentSchemaAnalysisRuleRequestList(v.SchemaAnalysisRuleRequests, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 type awsRestjson1_serializeOpCreateAnalysisTemplate struct {
 }
 
@@ -5897,6 +5987,36 @@ func awsRestjson1_serializeDocumentScalarFunctionsList(v []types.ScalarFunctions
 	for i := range v {
 		av := array.Value()
 		av.String(string(v[i]))
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentSchemaAnalysisRuleRequest(v *types.SchemaAnalysisRuleRequest, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Name != nil {
+		ok := object.Key("name")
+		ok.String(*v.Name)
+	}
+
+	if len(v.Type) > 0 {
+		ok := object.Key("type")
+		ok.String(string(v.Type))
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentSchemaAnalysisRuleRequestList(v []types.SchemaAnalysisRuleRequest, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentSchemaAnalysisRuleRequest(&v[i], av); err != nil {
+			return err
+		}
 	}
 	return nil
 }

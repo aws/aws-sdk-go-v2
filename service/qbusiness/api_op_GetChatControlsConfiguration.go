@@ -6,14 +6,13 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/qbusiness/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Gets information about an chat controls configured for an existing Amazon Q
-// application.
+// Business application.
 func (c *Client) GetChatControlsConfiguration(ctx context.Context, params *GetChatControlsConfigurationInput, optFns ...func(*Options)) (*GetChatControlsConfigurationOutput, error) {
 	if params == nil {
 		params = &GetChatControlsConfigurationInput{}
@@ -40,8 +39,9 @@ type GetChatControlsConfigurationInput struct {
 	MaxResults *int32
 
 	// If the maxResults response was incomplete because there is more data to
-	// retrieve, Amazon Q returns a pagination token in the response. You can use this
-	// pagination token to retrieve the next set of Amazon Q chat controls configured.
+	// retrieve, Amazon Q Business returns a pagination token in the response. You can
+	// use this pagination token to retrieve the next set of Amazon Q Business chat
+	// controls configured.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -52,18 +52,23 @@ type GetChatControlsConfigurationOutput struct {
 	// The phrases blocked from chat by your chat control configuration.
 	BlockedPhrases *types.BlockedPhrasesConfiguration
 
+	// The configuration details for CREATOR_MODE .
+	CreatorModeConfiguration *types.AppliedCreatorModeConfiguration
+
 	// If the maxResults response was incomplete because there is more data to
-	// retrieve, Amazon Q returns a pagination token in the response. You can use this
-	// pagination token to retrieve the next set of Amazon Q chat controls configured.
+	// retrieve, Amazon Q Business returns a pagination token in the response. You can
+	// use this pagination token to retrieve the next set of Amazon Q Business chat
+	// controls configured.
 	NextToken *string
 
-	// The response scope configured for a Amazon Q application. This determines
-	// whether your application uses its retrieval augmented generation (RAG) system to
-	// generate answers only from your enterprise data, or also uses the large language
-	// models (LLM) knowledge to respons to end user questions in chat.
+	// The response scope configured for a Amazon Q Business application. This
+	// determines whether your application uses its retrieval augmented generation
+	// (RAG) system to generate answers only from your enterprise data, or also uses
+	// the large language models (LLM) knowledge to respons to end user questions in
+	// chat.
 	ResponseScope types.ResponseScope
 
-	// The topic specific controls configured for a Amazon Q application.
+	// The topic specific controls configured for a Amazon Q Business application.
 	TopicConfigurations []types.TopicConfiguration
 
 	// Metadata pertaining to the operation's result.
@@ -94,25 +99,25 @@ func (c *Client) addOperationGetChatControlsConfigurationMiddlewares(stack *midd
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -127,13 +132,16 @@ func (c *Client) addOperationGetChatControlsConfigurationMiddlewares(stack *midd
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpGetChatControlsConfigurationValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetChatControlsConfiguration(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

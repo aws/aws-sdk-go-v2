@@ -6,17 +6,18 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/redshift/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Modifies the list of Identity and Access Management (IAM) roles that can be
-// used by the cluster to access other Amazon Web Services services. The maximum
-// number of IAM roles that you can associate is subject to a quota. For more
-// information, go to Quotas and limits (https://docs.aws.amazon.com/redshift/latest/mgmt/amazon-redshift-limits.html)
-// in the Amazon Redshift Cluster Management Guide.
+// used by the cluster to access other Amazon Web Services services.
+//
+// The maximum number of IAM roles that you can associate is subject to a quota.
+// For more information, go to [Quotas and limits]in the Amazon Redshift Cluster Management Guide.
+//
+// [Quotas and limits]: https://docs.aws.amazon.com/redshift/latest/mgmt/amazon-redshift-limits.html
 func (c *Client) ModifyClusterIamRoles(ctx context.Context, params *ModifyClusterIamRolesInput, optFns ...func(*Options)) (*ModifyClusterIamRolesOutput, error) {
 	if params == nil {
 		params = &ModifyClusterIamRolesInput{}
@@ -87,25 +88,25 @@ func (c *Client) addOperationModifyClusterIamRolesMiddlewares(stack *middleware.
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -120,13 +121,16 @@ func (c *Client) addOperationModifyClusterIamRolesMiddlewares(stack *middleware.
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpModifyClusterIamRolesValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opModifyClusterIamRoles(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

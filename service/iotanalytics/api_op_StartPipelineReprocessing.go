@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/iotanalytics/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -36,18 +35,21 @@ type StartPipelineReprocessingInput struct {
 	// This member is required.
 	PipelineName *string
 
-	// Specifies one or more sets of channel messages that you want to reprocess. If
-	// you use the channelMessages object, you must not specify a value for startTime
-	// and endTime .
+	// Specifies one or more sets of channel messages that you want to reprocess.
+	//
+	// If you use the channelMessages object, you must not specify a value for
+	// startTime and endTime .
 	ChannelMessages *types.ChannelMessages
 
-	// The end time (exclusive) of raw message data that is reprocessed. If you
-	// specify a value for the endTime parameter, you must not use the channelMessages
-	// object.
+	// The end time (exclusive) of raw message data that is reprocessed.
+	//
+	// If you specify a value for the endTime parameter, you must not use the
+	// channelMessages object.
 	EndTime *time.Time
 
-	// The start time (inclusive) of raw message data that is reprocessed. If you
-	// specify a value for the startTime parameter, you must not use the
+	// The start time (inclusive) of raw message data that is reprocessed.
+	//
+	// If you specify a value for the startTime parameter, you must not use the
 	// channelMessages object.
 	StartTime *time.Time
 
@@ -87,25 +89,25 @@ func (c *Client) addOperationStartPipelineReprocessingMiddlewares(stack *middlew
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -120,13 +122,16 @@ func (c *Client) addOperationStartPipelineReprocessingMiddlewares(stack *middlew
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpStartPipelineReprocessingValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opStartPipelineReprocessing(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

@@ -6,19 +6,23 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes a snapshot of a volume. You can take snapshots of your gateway volumes
-// on a scheduled or ad hoc basis. This API action enables you to delete a snapshot
-// schedule for a volume. For more information, see Backing up your volumes (https://docs.aws.amazon.com/storagegateway/latest/userguide/backing-up-volumes.html)
-// . In the DeleteSnapshotSchedule request, you identify the volume by providing
-// its Amazon Resource Name (ARN). This operation is only supported for cached
-// volume gateway types. To list or delete a snapshot, you must use the Amazon EC2
-// API. For more information, go to DescribeSnapshots (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeSnapshots.html)
-// in the Amazon Elastic Compute Cloud API Reference.
+// Deletes a snapshot of a volume.
+//
+// You can take snapshots of your gateway volumes on a scheduled or ad hoc basis.
+// This API action enables you to delete a snapshot schedule for a volume. For more
+// information, see [Backing up your volumes]. In the DeleteSnapshotSchedule request, you identify the
+// volume by providing its Amazon Resource Name (ARN). This operation is only
+// supported for cached volume gateway types.
+//
+// To list or delete a snapshot, you must use the Amazon EC2 API. For more
+// information, go to [DescribeSnapshots]in the Amazon Elastic Compute Cloud API Reference.
+//
+// [Backing up your volumes]: https://docs.aws.amazon.com/storagegateway/latest/userguide/backing-up-volumes.html
+// [DescribeSnapshots]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeSnapshots.html
 func (c *Client) DeleteSnapshotSchedule(ctx context.Context, params *DeleteSnapshotScheduleInput, optFns ...func(*Options)) (*DeleteSnapshotScheduleOutput, error) {
 	if params == nil {
 		params = &DeleteSnapshotScheduleInput{}
@@ -77,25 +81,25 @@ func (c *Client) addOperationDeleteSnapshotScheduleMiddlewares(stack *middleware
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -110,13 +114,16 @@ func (c *Client) addOperationDeleteSnapshotScheduleMiddlewares(stack *middleware
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDeleteSnapshotScheduleValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteSnapshotSchedule(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

@@ -39,6 +39,26 @@
                 "smithy.api#pattern": "^arn:(aws[a-zA-Z0-9-]*):acm:.+:(\\d{12}):certificate/.+$"
             }
         },
+        "com.amazonaws.emrcontainers#AuthorizationConfiguration": {
+            "type": "structure",
+            "members": {
+                "lakeFormationConfiguration": {
+                    "target": "com.amazonaws.emrcontainers#LakeFormationConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Lake Formation related configuration inputs for the security\n         configuration.</p>"
+                    }
+                },
+                "encryptionConfiguration": {
+                    "target": "com.amazonaws.emrcontainers#EncryptionConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Encryption-related configuration input for the security configuration.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Authorization-related configuration inputs for the security configuration.</p>"
+            }
+        },
         "com.amazonaws.emrcontainers#AwsChicagoWebService": {
             "type": "service",
             "version": "2020-10-01",
@@ -51,6 +71,9 @@
                 },
                 {
                     "target": "com.amazonaws.emrcontainers#CreateManagedEndpoint"
+                },
+                {
+                    "target": "com.amazonaws.emrcontainers#CreateSecurityConfiguration"
                 },
                 {
                     "target": "com.amazonaws.emrcontainers#CreateVirtualCluster"
@@ -74,6 +97,9 @@
                     "target": "com.amazonaws.emrcontainers#DescribeManagedEndpoint"
                 },
                 {
+                    "target": "com.amazonaws.emrcontainers#DescribeSecurityConfiguration"
+                },
+                {
                     "target": "com.amazonaws.emrcontainers#DescribeVirtualCluster"
                 },
                 {
@@ -87,6 +113,9 @@
                 },
                 {
                     "target": "com.amazonaws.emrcontainers#ListManagedEndpoints"
+                },
+                {
+                    "target": "com.amazonaws.emrcontainers#ListSecurityConfigurations"
                 },
                 {
                     "target": "com.amazonaws.emrcontainers#ListTagsForResource"
@@ -116,7 +145,7 @@
                     "name": "emr-containers"
                 },
                 "aws.protocols#restJson1": {},
-                "smithy.api#documentation": "<p>Amazon EMR on EKS provides a deployment option for Amazon EMR that allows\n         you to run open-source big data frameworks on Amazon Elastic Kubernetes Service (Amazon EKS).\n         With this deployment option, you can focus on running analytics workloads while Amazon EMR on EKS builds, configures, and manages containers for open-source applications.\n         For more information about Amazon EMR on EKS concepts and tasks, see <a href=\"https://docs.aws.amazon.com/emr/latest/EMR-on-EKS-DevelopmentGuide/emr-eks.html\">What is\n            shared id=\"EMR-EKS\"/></a>.</p>\n         <p>\n            <i>Amazon EMR containers</i> is the API name for Amazon EMR on EKS. The <code>emr-containers</code> prefix is used in the following\n         scenarios: </p>\n         <ul>\n            <li>\n               <p>It is the prefix in the CLI commands for Amazon EMR on EKS. For example,\n                  <code>aws emr-containers start-job-run</code>.</p>\n            </li>\n            <li>\n               <p>It is the prefix before IAM policy actions for Amazon EMR on EKS. For\n               example, <code>\"Action\": [ \"emr-containers:StartJobRun\"]</code>. For more\n               information, see <a href=\"https://docs.aws.amazon.com/emr/latest/EMR-on-EKS-DevelopmentGuide/security_iam_service-with-iam.html#security_iam_service-with-iam-id-based-policies-actions\">Policy actions for Amazon EMR on EKS</a>.</p>\n            </li>\n            <li>\n               <p>It is the prefix used in Amazon EMR on EKS service endpoints. For example,\n                  <code>emr-containers.us-east-2.amazonaws.com</code>. For more information, see\n                  <a href=\"https://docs.aws.amazon.com/emr/latest/EMR-on-EKS-DevelopmentGuide/service-quotas.html#service-endpoints\">Amazon EMR on EKSService Endpoints</a>.</p>\n            </li>\n         </ul>",
+                "smithy.api#documentation": "<p>Amazon EMR on EKS provides a deployment option for Amazon EMR that allows\n         you to run open-source big data frameworks on Amazon Elastic Kubernetes Service (Amazon EKS).\n         With this deployment option, you can focus on running analytics workloads while Amazon EMR on EKS builds, configures, and manages containers for open-source applications.\n         For more information about Amazon EMR on EKS concepts and tasks, see <a href=\"https://docs.aws.amazon.com/emr/latest/EMR-on-EKS-DevelopmentGuide/emr-eks.html\">What is\n            Amazon EMR on EKS</a>.</p>\n         <p>\n            <i>Amazon EMR containers</i> is the API name for Amazon EMR on EKS. The <code>emr-containers</code> prefix is used in the following\n         scenarios: </p>\n         <ul>\n            <li>\n               <p>It is the prefix in the CLI commands for Amazon EMR on EKS. For example,\n                  <code>aws emr-containers start-job-run</code>.</p>\n            </li>\n            <li>\n               <p>It is the prefix before IAM policy actions for Amazon EMR on EKS. For\n               example, <code>\"Action\": [ \"emr-containers:StartJobRun\"]</code>. For more\n               information, see <a href=\"https://docs.aws.amazon.com/emr/latest/EMR-on-EKS-DevelopmentGuide/security_iam_service-with-iam.html#security_iam_service-with-iam-id-based-policies-actions\">Policy actions for Amazon EMR on EKS</a>.</p>\n            </li>\n            <li>\n               <p>It is the prefix used in Amazon EMR on EKS service endpoints. For example,\n                  <code>emr-containers.us-east-2.amazonaws.com</code>. For more information, see\n                  <a href=\"https://docs.aws.amazon.com/emr/latest/EMR-on-EKS-DevelopmentGuide/service-quotas.html#service-endpoints\">Amazon EMR on EKSService Endpoints</a>.</p>\n            </li>\n         </ul>",
                 "smithy.api#title": "Amazon EMR Containers",
                 "smithy.rules#endpointRuleSet": {
                     "version": "1.0",
@@ -160,7 +189,6 @@
                                     ]
                                 }
                             ],
-                            "type": "tree",
                             "rules": [
                                 {
                                     "conditions": [
@@ -203,7 +231,8 @@
                                     },
                                     "type": "endpoint"
                                 }
-                            ]
+                            ],
+                            "type": "tree"
                         },
                         {
                             "conditions": [
@@ -216,7 +245,6 @@
                                     ]
                                 }
                             ],
-                            "type": "tree",
                             "rules": [
                                 {
                                     "conditions": [
@@ -230,7 +258,6 @@
                                             "assign": "PartitionResult"
                                         }
                                     ],
-                                    "type": "tree",
                                     "rules": [
                                         {
                                             "conditions": [
@@ -253,7 +280,6 @@
                                                     ]
                                                 }
                                             ],
-                                            "type": "tree",
                                             "rules": [
                                                 {
                                                     "conditions": [
@@ -288,7 +314,6 @@
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [],
@@ -299,14 +324,16 @@
                                                             },
                                                             "type": "endpoint"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [],
                                                     "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
                                                     "type": "error"
                                                 }
-                                            ]
+                                            ],
+                                            "type": "tree"
                                         },
                                         {
                                             "conditions": [
@@ -320,14 +347,12 @@
                                                     ]
                                                 }
                                             ],
-                                            "type": "tree",
                                             "rules": [
                                                 {
                                                     "conditions": [
                                                         {
                                                             "fn": "booleanEquals",
                                                             "argv": [
-                                                                true,
                                                                 {
                                                                     "fn": "getAttr",
                                                                     "argv": [
@@ -336,11 +361,11 @@
                                                                         },
                                                                         "supportsFIPS"
                                                                     ]
-                                                                }
+                                                                },
+                                                                true
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [],
@@ -351,14 +376,16 @@
                                                             },
                                                             "type": "endpoint"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [],
                                                     "error": "FIPS is enabled but this partition does not support FIPS",
                                                     "type": "error"
                                                 }
-                                            ]
+                                            ],
+                                            "type": "tree"
                                         },
                                         {
                                             "conditions": [
@@ -372,7 +399,6 @@
                                                     ]
                                                 }
                                             ],
-                                            "type": "tree",
                                             "rules": [
                                                 {
                                                     "conditions": [
@@ -392,7 +418,6 @@
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [],
@@ -403,14 +428,16 @@
                                                             },
                                                             "type": "endpoint"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [],
                                                     "error": "DualStack is enabled but this partition does not support DualStack",
                                                     "type": "error"
                                                 }
-                                            ]
+                                            ],
+                                            "type": "tree"
                                         },
                                         {
                                             "conditions": [],
@@ -421,9 +448,11 @@
                                             },
                                             "type": "endpoint"
                                         }
-                                    ]
+                                    ],
+                                    "type": "tree"
                                 }
-                            ]
+                            ],
+                            "type": "tree"
                         },
                         {
                             "conditions": [],
@@ -1018,6 +1047,9 @@
                 "smithy.api#pattern": "^([A-Za-z0-9+/]{4})*([A-Za-z0-9+/]{4}|[A-Za-z0-9+/]{3}=|[A-Za-z0-9+/]{2}==)?$"
             }
         },
+        "com.amazonaws.emrcontainers#Boolean": {
+            "type": "boolean"
+        },
         "com.amazonaws.emrcontainers#CancelJobRun": {
             "type": "operation",
             "input": {
@@ -1105,6 +1137,17 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>The entity representing certificate data generated for managed endpoint.</p>"
+            }
+        },
+        "com.amazonaws.emrcontainers#CertificateProviderType": {
+            "type": "enum",
+            "members": {
+                "PEM": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PEM"
+                    }
+                }
             }
         },
         "com.amazonaws.emrcontainers#ClientToken": {
@@ -1517,6 +1560,93 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.emrcontainers#CreateSecurityConfiguration": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.emrcontainers#CreateSecurityConfigurationRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.emrcontainers#CreateSecurityConfigurationResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.emrcontainers#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.emrcontainers#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates a security configuration. Security configurations in Amazon EMR on EKS are\n         templates for different security setups. You can use security configurations to configure\n         the Lake Formation integration setup. You can also create a security configuration\n         to re-use a security setup each time you create a virtual cluster.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/securityconfigurations",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.emrcontainers#CreateSecurityConfigurationRequest": {
+            "type": "structure",
+            "members": {
+                "clientToken": {
+                    "target": "com.amazonaws.emrcontainers#ClientToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The client idempotency token to use when creating the security configuration.</p>",
+                        "smithy.api#idempotencyToken": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "name": {
+                    "target": "com.amazonaws.emrcontainers#ResourceNameString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the security configuration.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "securityConfigurationData": {
+                    "target": "com.amazonaws.emrcontainers#SecurityConfigurationData",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Security configuration input for the request.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.emrcontainers#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tags to add to the security configuration.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.emrcontainers#CreateSecurityConfigurationResponse": {
+            "type": "structure",
+            "members": {
+                "id": {
+                    "target": "com.amazonaws.emrcontainers#ResourceIdString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the security configuration.</p>"
+                    }
+                },
+                "name": {
+                    "target": "com.amazonaws.emrcontainers#ResourceNameString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the security configuration.</p>"
+                    }
+                },
+                "arn": {
+                    "target": "com.amazonaws.emrcontainers#SecurityConfigurationArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN (Amazon Resource Name) of the security configuration.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.emrcontainers#CreateVirtualCluster": {
             "type": "operation",
             "input": {
@@ -1526,6 +1656,9 @@
                 "target": "com.amazonaws.emrcontainers#CreateVirtualClusterResponse"
             },
             "errors": [
+                {
+                    "target": "com.amazonaws.emrcontainers#EKSRequestThrottledException"
+                },
                 {
                     "target": "com.amazonaws.emrcontainers#InternalServerException"
                 },
@@ -1574,6 +1707,12 @@
                     "target": "com.amazonaws.emrcontainers#TagMap",
                     "traits": {
                         "smithy.api#documentation": "<p>The tags assigned to the virtual cluster.</p>"
+                    }
+                },
+                "securityConfigurationId": {
+                    "target": "com.amazonaws.emrcontainers#ResourceIdString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the security configuration.</p>"
                     }
                 }
             },
@@ -2006,6 +2145,64 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.emrcontainers#DescribeSecurityConfiguration": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.emrcontainers#DescribeSecurityConfigurationRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.emrcontainers#DescribeSecurityConfigurationResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.emrcontainers#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.emrcontainers#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.emrcontainers#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Displays detailed information about a specified security configuration. Security\n         configurations in Amazon EMR on EKS are templates for different security setups. You\n         can use security configurations to configure the Lake Formation integration setup.\n         You can also create a security configuration to re-use a security setup each time you\n         create a virtual cluster.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/securityconfigurations/{id}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.emrcontainers#DescribeSecurityConfigurationRequest": {
+            "type": "structure",
+            "members": {
+                "id": {
+                    "target": "com.amazonaws.emrcontainers#ResourceIdString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the security configuration.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.emrcontainers#DescribeSecurityConfigurationResponse": {
+            "type": "structure",
+            "members": {
+                "securityConfiguration": {
+                    "target": "com.amazonaws.emrcontainers#SecurityConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Details of the security configuration.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.emrcontainers#DescribeVirtualCluster": {
             "type": "operation",
             "input": {
@@ -2064,6 +2261,19 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.emrcontainers#EKSRequestThrottledException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.emrcontainers#String1024"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The request exceeded the Amazon EKS API operation limits.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 429
+            }
+        },
         "com.amazonaws.emrcontainers#EksInfo": {
             "type": "structure",
             "members": {
@@ -2076,6 +2286,20 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>The information about the Amazon EKS cluster.</p>"
+            }
+        },
+        "com.amazonaws.emrcontainers#EncryptionConfiguration": {
+            "type": "structure",
+            "members": {
+                "inTransitEncryptionConfiguration": {
+                    "target": "com.amazonaws.emrcontainers#InTransitEncryptionConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>In-transit encryption-related input for the security configuration.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Configurations related to encryption for the security configuration.</p>"
             }
         },
         "com.amazonaws.emrcontainers#Endpoint": {
@@ -2463,6 +2687,20 @@
                 "smithy.api#pattern": "^arn:(aws[a-zA-Z0-9-]*):iam::(\\d{12})?:(role((\\u002F)|(\\u002F[\\u0021-\\u007F]+\\u002F))[\\w+=,.@-]+)$"
             }
         },
+        "com.amazonaws.emrcontainers#InTransitEncryptionConfiguration": {
+            "type": "structure",
+            "members": {
+                "tlsCertificateConfiguration": {
+                    "target": "com.amazonaws.emrcontainers#TLSCertificateConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>TLS certificate-related configuration input for the security configuration.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Configurations related to in-transit encryption for the security configuration.</p>"
+            }
+        },
         "com.amazonaws.emrcontainers#InternalServerException": {
             "type": "structure",
             "members": {
@@ -2835,6 +3073,32 @@
                 "smithy.api#pattern": "^[a-z0-9]([-a-z0-9]*[a-z0-9])?$"
             }
         },
+        "com.amazonaws.emrcontainers#LakeFormationConfiguration": {
+            "type": "structure",
+            "members": {
+                "authorizedSessionTagValue": {
+                    "target": "com.amazonaws.emrcontainers#SessionTagValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The session tag to authorize Amazon EMR on EKS for API calls to Lake Formation.</p>"
+                    }
+                },
+                "secureNamespaceInfo": {
+                    "target": "com.amazonaws.emrcontainers#SecureNamespaceInfo",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The namespace input of the system job.</p>"
+                    }
+                },
+                "queryEngineRoleArn": {
+                    "target": "com.amazonaws.emrcontainers#IAMRoleArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The query engine IAM role ARN that is tied to the secure Spark job. The\n         <code>QueryEngine</code> role assumes the <code>JobExecutionRole</code> to execute all\n         the Lake Formation calls.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Lake Formation related configuration inputs for the security\n         configuration.</p>"
+            }
+        },
         "com.amazonaws.emrcontainers#ListJobRuns": {
             "type": "operation",
             "input": {
@@ -3140,6 +3404,93 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.emrcontainers#ListSecurityConfigurations": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.emrcontainers#ListSecurityConfigurationsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.emrcontainers#ListSecurityConfigurationsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.emrcontainers#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.emrcontainers#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists security configurations based on a set of parameters. Security configurations in\n         Amazon EMR on EKS are templates for different security setups. You can use security\n         configurations to configure the Lake Formation integration setup. You can also\n         create a security configuration to re-use a security setup each time you create a virtual\n         cluster.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/securityconfigurations",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "items": "securityConfigurations",
+                    "pageSize": "maxResults"
+                }
+            }
+        },
+        "com.amazonaws.emrcontainers#ListSecurityConfigurationsRequest": {
+            "type": "structure",
+            "members": {
+                "createdAfter": {
+                    "target": "com.amazonaws.emrcontainers#Date",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time after which the security configuration was created.</p>",
+                        "smithy.api#httpQuery": "createdAfter"
+                    }
+                },
+                "createdBefore": {
+                    "target": "com.amazonaws.emrcontainers#Date",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time before which the security configuration was created.</p>",
+                        "smithy.api#httpQuery": "createdBefore"
+                    }
+                },
+                "maxResults": {
+                    "target": "com.amazonaws.emrcontainers#JavaInteger",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of security configurations the operation can list.</p>",
+                        "smithy.api#httpQuery": "maxResults"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.emrcontainers#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token for the next set of security configurations to return.</p>",
+                        "smithy.api#httpQuery": "nextToken"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.emrcontainers#ListSecurityConfigurationsResponse": {
+            "type": "structure",
+            "members": {
+                "securityConfigurations": {
+                    "target": "com.amazonaws.emrcontainers#SecurityConfigurations",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of returned security configurations.</p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.emrcontainers#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token for the next set of security configurations to return.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.emrcontainers#ListTagsForResource": {
             "type": "operation",
             "input": {
@@ -3279,6 +3630,13 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The token for the next set of virtual clusters to return. </p>",
                         "smithy.api#httpQuery": "nextToken"
+                    }
+                },
+                "eksAccessEntryIntegrated": {
+                    "target": "com.amazonaws.emrcontainers#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Optional Boolean that specifies whether the operation should return the \n         virtual clusters that have the access entry integration enabled or disabled. If not specified,\n      the operation returns all applicable virtual clusters.</p>",
+                        "smithy.api#httpQuery": "eksAccessEntryIntegrated"
                     }
                 }
             },
@@ -3625,6 +3983,116 @@
                 "smithy.api#documentation": "<p> Amazon S3 configuration for monitoring log publishing. You can configure your jobs to\n         send log information to Amazon S3.</p>"
             }
         },
+        "com.amazonaws.emrcontainers#SecretsManagerArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 3,
+                    "max": 2048
+                },
+                "smithy.api#pattern": "^arn:(aws[a-zA-Z0-9-]*):secretsmanager:.+:(\\d{12}):secret:[0-9a-zA-Z/_+=.@-]+$"
+            }
+        },
+        "com.amazonaws.emrcontainers#SecureNamespaceInfo": {
+            "type": "structure",
+            "members": {
+                "clusterId": {
+                    "target": "com.amazonaws.emrcontainers#ClusterId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the Amazon EKS cluster where Amazon EMR on EKS jobs run.</p>"
+                    }
+                },
+                "namespace": {
+                    "target": "com.amazonaws.emrcontainers#KubernetesNamespace",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The namespace of the Amazon EKS cluster where the system jobs run.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Namespace inputs for the system job.</p>"
+            }
+        },
+        "com.amazonaws.emrcontainers#SecurityConfiguration": {
+            "type": "structure",
+            "members": {
+                "id": {
+                    "target": "com.amazonaws.emrcontainers#ResourceIdString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the security configuration.</p>"
+                    }
+                },
+                "name": {
+                    "target": "com.amazonaws.emrcontainers#ResourceNameString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the security configuration.</p>"
+                    }
+                },
+                "arn": {
+                    "target": "com.amazonaws.emrcontainers#SecurityConfigurationArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN (Amazon Resource Name) of the security configuration.</p>"
+                    }
+                },
+                "createdAt": {
+                    "target": "com.amazonaws.emrcontainers#Date",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time that the job run was created.</p>"
+                    }
+                },
+                "createdBy": {
+                    "target": "com.amazonaws.emrcontainers#RequestIdentityUserArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The user who created the job run.</p>"
+                    }
+                },
+                "securityConfigurationData": {
+                    "target": "com.amazonaws.emrcontainers#SecurityConfigurationData",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Security configuration inputs for the request.</p>"
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.emrcontainers#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tags to assign to the security configuration.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Inputs related to the security configuration. Security configurations in Amazon EMR on EKS are templates for different security setups. You can use security\n         configurations to configure the Lake Formation integration setup. You can also\n         create a security configuration to re-use a security setup each time you create a virtual\n         cluster.</p>"
+            }
+        },
+        "com.amazonaws.emrcontainers#SecurityConfigurationArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 60,
+                    "max": 1024
+                },
+                "smithy.api#pattern": "^arn:(aws[a-zA-Z0-9-]*):emr-containers:.+:(\\d{12}):\\/securityconfigurations\\/[0-9a-zA-Z]+$"
+            }
+        },
+        "com.amazonaws.emrcontainers#SecurityConfigurationData": {
+            "type": "structure",
+            "members": {
+                "authorizationConfiguration": {
+                    "target": "com.amazonaws.emrcontainers#AuthorizationConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Authorization-related configuration input for the security configuration.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Configurations related to the security configuration for the request.</p>"
+            }
+        },
+        "com.amazonaws.emrcontainers#SecurityConfigurations": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.emrcontainers#SecurityConfiguration"
+            }
+        },
         "com.amazonaws.emrcontainers#SensitivePropertiesMap": {
             "type": "map",
             "key": {
@@ -3639,6 +4107,16 @@
                     "max": 100
                 },
                 "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.emrcontainers#SessionTagValue": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 512
+                },
+                "smithy.api#pattern": "^[\\.\\-_/#A-Za-z0-9 ]+$"
             }
         },
         "com.amazonaws.emrcontainers#SparkSqlJobDriver": {
@@ -3904,6 +4382,32 @@
                 "target": "com.amazonaws.emrcontainers#String256"
             }
         },
+        "com.amazonaws.emrcontainers#TLSCertificateConfiguration": {
+            "type": "structure",
+            "members": {
+                "certificateProviderType": {
+                    "target": "com.amazonaws.emrcontainers#CertificateProviderType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The TLS certificate type. Acceptable values: <code>PEM</code> or\n         <code>Custom</code>.</p>"
+                    }
+                },
+                "publicCertificateSecretArn": {
+                    "target": "com.amazonaws.emrcontainers#SecretsManagerArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Secrets Manager ARN that contains the public TLS certificate contents, used for\n         communication between the user job and the system job.</p>"
+                    }
+                },
+                "privateCertificateSecretArn": {
+                    "target": "com.amazonaws.emrcontainers#SecretsManagerArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Secrets Manager ARN that contains the private TLS certificate contents, used for\n         communication between the user job and the system job.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Configurations related to the TLS certificate for the security configuration.</p>"
+            }
+        },
         "com.amazonaws.emrcontainers#TagKeyList": {
             "type": "list",
             "member": {
@@ -4030,7 +4534,7 @@
             "traits": {
                 "smithy.api#length": {
                     "min": 0,
-                    "max": 20
+                    "max": 100
                 }
             }
         },
@@ -4062,7 +4566,7 @@
             "traits": {
                 "smithy.api#length": {
                     "min": 0,
-                    "max": 20
+                    "max": 100
                 }
             }
         },
@@ -4211,6 +4715,12 @@
                     "target": "com.amazonaws.emrcontainers#TagMap",
                     "traits": {
                         "smithy.api#documentation": "<p>The assigned tags of the virtual cluster.</p>"
+                    }
+                },
+                "securityConfigurationId": {
+                    "target": "com.amazonaws.emrcontainers#ResourceIdString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the security configuration.</p>"
                     }
                 }
             },

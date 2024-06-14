@@ -17,7 +17,16 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"io"
 	"strings"
+	"time"
 )
+
+func deserializeS3Expires(v string) (*time.Time, error) {
+	t, err := smithytime.ParseHTTPDate(v)
+	if err != nil {
+		return nil, nil
+	}
+	return &t, nil
+}
 
 type awsRestjson1_deserializeOpCreateAccessToken struct {
 }
@@ -3022,6 +3031,28 @@ func awsRestjson1_deserializeOpDocumentGetSubscriptionOutput(v **GetSubscription
 					return fmt.Errorf("expected NameString to be of type string, got %T instead", value)
 				}
 				sv.AwsAccountName = ptr.String(jtv)
+			}
+
+		case "pendingSubscriptionStartTime":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Timestamp to be of type string, got %T instead", value)
+				}
+				t, err := smithytime.ParseDateTime(jtv)
+				if err != nil {
+					return err
+				}
+				sv.PendingSubscriptionStartTime = ptr.Time(t)
+			}
+
+		case "pendingSubscriptionType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.PendingSubscriptionType = ptr.String(jtv)
 			}
 
 		case "subscriptionType":

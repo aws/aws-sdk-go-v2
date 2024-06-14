@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/rum/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -14,8 +13,9 @@ import (
 
 // Sends telemetry events about your application performance and user behavior to
 // CloudWatch RUM. The code snippet that RUM generates for you to add to your
-// application includes PutRumEvents operations to send this data to RUM. Each
-// PutRumEvents operation can send a batch of events from one user session.
+// application includes PutRumEvents operations to send this data to RUM.
+//
+// Each PutRumEvents operation can send a batch of events from one user session.
 func (c *Client) PutRumEvents(ctx context.Context, params *PutRumEventsInput, optFns ...func(*Options)) (*PutRumEventsOutput, error) {
 	if params == nil {
 		params = &PutRumEventsInput{}
@@ -92,25 +92,25 @@ func (c *Client) addOperationPutRumEventsMiddlewares(stack *middleware.Stack, op
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -125,6 +125,9 @@ func (c *Client) addOperationPutRumEventsMiddlewares(stack *middleware.Stack, op
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addEndpointPrefix_opPutRumEventsMiddleware(stack); err != nil {
 		return err
 	}
@@ -134,7 +137,7 @@ func (c *Client) addOperationPutRumEventsMiddlewares(stack *middleware.Stack, op
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opPutRumEvents(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

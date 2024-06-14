@@ -6,33 +6,43 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/organizations/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Sends a response to the originator of a handshake agreeing to the action
-// proposed by the handshake request. You can only call this operation by the
-// following principals when they also have the relevant IAM permissions:
+// proposed by the handshake request.
+//
+// You can only call this operation by the following principals when they also
+// have the relevant IAM permissions:
+//
 //   - Invitation to join or Approve all features request handshakes: only a
-//     principal from the member account. The user who calls the API for an invitation
-//     to join must have the organizations:AcceptHandshake permission. If you enabled
-//     all features in the organization, the user must also have the
-//     iam:CreateServiceLinkedRole permission so that Organizations can create the
-//     required service-linked role named AWSServiceRoleForOrganizations . For more
-//     information, see Organizations and service-linked roles (https://docs.aws.amazon.com/organizations/latest/userguide/orgs_integration_services.html#orgs_integrate_services-using_slrs)
-//     in the Organizations User Guide.
-//   - Enable all features final confirmation handshake: only a principal from the
-//     management account. For more information about invitations, see Inviting an
-//     Amazon Web Services account to join your organization (https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_accounts_invites.html)
-//     in the Organizations User Guide. For more information about requests to enable
-//     all features in the organization, see Enabling all features in your
-//     organization (https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_org_support-all-features.html)
-//     in the Organizations User Guide.
+//     principal from the member account.
+//
+// The user who calls the API for an invitation to join must have the
+//
+//	organizations:AcceptHandshake permission. If you enabled all features in the
+//	organization, the user must also have the iam:CreateServiceLinkedRole
+//	permission so that Organizations can create the required service-linked role
+//	named AWSServiceRoleForOrganizations . For more information, see [Organizations and service-linked roles]in the
+//	Organizations User Guide.
+//
+//	- Enable all features final confirmation handshake: only a principal from the
+//	management account.
+//
+// For more information about invitations, see [Inviting an Amazon Web Services account to join your organization]in the Organizations User Guide.
+//
+//	For more information about requests to enable all features in the organization,
+//	see [Enabling all features in your organization]in the Organizations User Guide.
 //
 // After you accept a handshake, it continues to appear in the results of relevant
 // APIs for only 30 days. After that, it's deleted.
+//
+// [Inviting an Amazon Web Services account to join your organization]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_accounts_invites.html
+//
+// [Enabling all features in your organization]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_org_support-all-features.html
+// [Organizations and service-linked roles]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_integration_services.html#orgs_integrate_services-using_slrs
 func (c *Client) AcceptHandshake(ctx context.Context, params *AcceptHandshakeInput, optFns ...func(*Options)) (*AcceptHandshakeOutput, error) {
 	if params == nil {
 		params = &AcceptHandshakeInput{}
@@ -50,9 +60,12 @@ func (c *Client) AcceptHandshake(ctx context.Context, params *AcceptHandshakeInp
 
 type AcceptHandshakeInput struct {
 
-	// The unique identifier (ID) of the handshake that you want to accept. The regex
-	// pattern (http://wikipedia.org/wiki/regex) for handshake ID string requires "h-"
-	// followed by from 8 to 32 lowercase letters or digits.
+	// The unique identifier (ID) of the handshake that you want to accept.
+	//
+	// The [regex pattern] for handshake ID string requires "h-" followed by from 8 to 32 lowercase
+	// letters or digits.
+	//
+	// [regex pattern]: http://wikipedia.org/wiki/regex
 	//
 	// This member is required.
 	HandshakeId *string
@@ -93,25 +106,25 @@ func (c *Client) addOperationAcceptHandshakeMiddlewares(stack *middleware.Stack,
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -126,13 +139,16 @@ func (c *Client) addOperationAcceptHandshakeMiddlewares(stack *middleware.Stack,
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpAcceptHandshakeValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opAcceptHandshake(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

@@ -8,6 +8,7 @@ import (
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
+	"time"
 )
 
 // Returns information about the Amazon Web Services account used for billing
@@ -43,6 +44,20 @@ type GetSubscriptionOutput struct {
 	// space.
 	AwsAccountName *string
 
+	// The day and time the pending change will be applied to the space, in
+	// coordinated universal time (UTC) timestamp format as specified in [RFC 3339].
+	//
+	// [RFC 3339]: https://www.rfc-editor.org/rfc/rfc3339#section-5.6
+	PendingSubscriptionStartTime *time.Time
+
+	// The type of the billing plan that the space will be changed to at the start of
+	// the next billing cycle. This applies only to changes that reduce the
+	// functionality available for the space. Billing plan changes that increase
+	// functionality are applied immediately. For more information, see [Pricing].
+	//
+	// [Pricing]: https://codecatalyst.aws/explore/pricing
+	PendingSubscriptionType *string
+
 	// The type of the billing plan for the space.
 	SubscriptionType *string
 
@@ -74,22 +89,22 @@ func (c *Client) addOperationGetSubscriptionMiddlewares(stack *middleware.Stack,
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -104,13 +119,16 @@ func (c *Client) addOperationGetSubscriptionMiddlewares(stack *middleware.Stack,
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpGetSubscriptionValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetSubscription(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

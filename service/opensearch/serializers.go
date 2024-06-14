@@ -4504,6 +4504,11 @@ func awsRestjson1_serializeOpDocumentUpdateDataSourceInput(v *UpdateDataSourceIn
 		ok.String(*v.Description)
 	}
 
+	if len(v.Status) > 0 {
+		ok := object.Key("Status")
+		ok.String(string(v.Status))
+	}
+
 	return nil
 }
 

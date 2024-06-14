@@ -6,25 +6,30 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/cloudcontrol/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates the specified property values in the resource. You specify your
-// resource property updates as a list of patch operations contained in a JSON
-// patch document that adheres to the RFC 6902 - JavaScript Object Notation (JSON)
-// Patch  (https://datatracker.ietf.org/doc/html/rfc6902) standard. For details on
-// how Cloud Control API performs resource update operations, see Updating a
-// resource (https://docs.aws.amazon.com/cloudcontrolapi/latest/userguide/resource-operations-update.html)
-// in the Amazon Web Services Cloud Control API User Guide. After you have
-// initiated a resource update request, you can monitor the progress of your
-// request by calling GetResourceRequestStatus (https://docs.aws.amazon.com/cloudcontrolapi/latest/APIReference/API_GetResourceRequestStatus.html)
-// using the RequestToken of the ProgressEvent returned by UpdateResource . For
-// more information about the properties of a specific resource, refer to the
-// related topic for the resource in the Resource and property types reference (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-template-resource-type-ref.html)
-// in the CloudFormation Users Guide.
+// Updates the specified property values in the resource.
+//
+// You specify your resource property updates as a list of patch operations
+// contained in a JSON patch document that adheres to the [RFC 6902 - JavaScript Object Notation (JSON) Patch]standard.
+//
+// For details on how Cloud Control API performs resource update operations, see [Updating a resource]
+// in the Amazon Web Services Cloud Control API User Guide.
+//
+// After you have initiated a resource update request, you can monitor the
+// progress of your request by calling [GetResourceRequestStatus]using the RequestToken of the ProgressEvent
+// returned by UpdateResource .
+//
+// For more information about the properties of a specific resource, refer to the
+// related topic for the resource in the [Resource and property types reference]in the CloudFormation Users Guide.
+//
+// [GetResourceRequestStatus]: https://docs.aws.amazon.com/cloudcontrolapi/latest/APIReference/API_GetResourceRequestStatus.html
+// [RFC 6902 - JavaScript Object Notation (JSON) Patch]: https://datatracker.ietf.org/doc/html/rfc6902
+// [Updating a resource]: https://docs.aws.amazon.com/cloudcontrolapi/latest/userguide/resource-operations-update.html
+// [Resource and property types reference]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-template-resource-type-ref.html
 func (c *Client) UpdateResource(ctx context.Context, params *UpdateResourceInput, optFns ...func(*Options)) (*UpdateResourceOutput, error) {
 	if params == nil {
 		params = &UpdateResourceInput{}
@@ -42,23 +47,31 @@ func (c *Client) UpdateResource(ctx context.Context, params *UpdateResourceInput
 
 type UpdateResourceInput struct {
 
-	// The identifier for the resource. You can specify the primary identifier, or any
-	// secondary identifier defined for the resource type in its resource schema. You
-	// can only specify one identifier. Primary identifiers can be specified as a
-	// string or JSON; secondary identifiers must be specified as JSON. For compound
-	// primary identifiers (that is, one that consists of multiple resource properties
-	// strung together), to specify the primary identifier as a string, list the
-	// property values in the order they are specified in the primary identifier
-	// definition, separated by | . For more information, see Identifying resources (https://docs.aws.amazon.com/cloudcontrolapi/latest/userguide/resource-identifier.html)
-	// in the Amazon Web Services Cloud Control API User Guide.
+	// The identifier for the resource.
+	//
+	// You can specify the primary identifier, or any secondary identifier defined for
+	// the resource type in its resource schema. You can only specify one identifier.
+	// Primary identifiers can be specified as a string or JSON; secondary identifiers
+	// must be specified as JSON.
+	//
+	// For compound primary identifiers (that is, one that consists of multiple
+	// resource properties strung together), to specify the primary identifier as a
+	// string, list the property values in the order they are specified in the primary
+	// identifier definition, separated by | .
+	//
+	// For more information, see [Identifying resources] in the Amazon Web Services Cloud Control API User
+	// Guide.
+	//
+	// [Identifying resources]: https://docs.aws.amazon.com/cloudcontrolapi/latest/userguide/resource-identifier.html
 	//
 	// This member is required.
 	Identifier *string
 
 	// A JavaScript Object Notation (JSON) document listing the patch operations that
 	// represent the updates to apply to the current resource properties. For details,
-	// see Composing the patch document (https://docs.aws.amazon.com/cloudcontrolapi/latest/userguide/resource-operations-update.html#resource-operations-update-patch)
-	// in the Amazon Web Services Cloud Control API User Guide.
+	// see [Composing the patch document]in the Amazon Web Services Cloud Control API User Guide.
+	//
+	// [Composing the patch document]: https://docs.aws.amazon.com/cloudcontrolapi/latest/userguide/resource-operations-update.html#resource-operations-update-patch
 	//
 	// This member is required.
 	PatchDocument *string
@@ -72,23 +85,34 @@ type UpdateResourceInput struct {
 	// best practice, specify this token to ensure idempotency, so that Amazon Web
 	// Services Cloud Control API can accurately distinguish between request retries
 	// and new resource requests. You might retry a resource request to ensure that it
-	// was successfully received. A client token is valid for 36 hours once used. After
-	// that, a resource request with the same client token is treated as a new request.
+	// was successfully received.
+	//
+	// A client token is valid for 36 hours once used. After that, a resource request
+	// with the same client token is treated as a new request.
+	//
 	// If you do not specify a client token, one is generated for inclusion in the
-	// request. For more information, see Ensuring resource operation requests are
-	// unique (https://docs.aws.amazon.com/cloudcontrolapi/latest/userguide/resource-operations.html#resource-operations-idempotency)
-	// in the Amazon Web Services Cloud Control API User Guide.
+	// request.
+	//
+	// For more information, see [Ensuring resource operation requests are unique] in the Amazon Web Services Cloud Control API User
+	// Guide.
+	//
+	// [Ensuring resource operation requests are unique]: https://docs.aws.amazon.com/cloudcontrolapi/latest/userguide/resource-operations.html#resource-operations-idempotency
 	ClientToken *string
 
 	// The Amazon Resource Name (ARN) of the Identity and Access Management (IAM) role
 	// for Cloud Control API to use when performing this resource operation. The role
 	// specified must have the permissions required for this operation. The necessary
-	// permissions for each event handler are defined in the handlers (https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/resource-type-schema.html#schema-properties-handlers)
-	// section of the resource type definition schema (https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/resource-type-schema.html)
-	// . If you do not specify a role, Cloud Control API uses a temporary session
-	// created using your Amazon Web Services user credentials. For more information,
-	// see Specifying credentials (https://docs.aws.amazon.com/cloudcontrolapi/latest/userguide/resource-operations.html#resource-operations-permissions)
-	// in the Amazon Web Services Cloud Control API User Guide.
+	// permissions for each event handler are defined in the [handlers]section of the [resource type definition schema].
+	//
+	// If you do not specify a role, Cloud Control API uses a temporary session
+	// created using your Amazon Web Services user credentials.
+	//
+	// For more information, see [Specifying credentials] in the Amazon Web Services Cloud Control API User
+	// Guide.
+	//
+	// [handlers]: https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/resource-type-schema.html#schema-properties-handlers
+	// [Specifying credentials]: https://docs.aws.amazon.com/cloudcontrolapi/latest/userguide/resource-operations.html#resource-operations-permissions
+	// [resource type definition schema]: https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/resource-type-schema.html
 	RoleArn *string
 
 	// For private resource types, the type version to use in this resource operation.
@@ -101,9 +125,12 @@ type UpdateResourceInput struct {
 
 type UpdateResourceOutput struct {
 
-	// Represents the current status of the resource update request. Use the
-	// RequestToken of the ProgressEvent with GetResourceRequestStatus (https://docs.aws.amazon.com/cloudcontrolapi/latest/APIReference/API_GetResourceRequestStatus.html)
-	// to return the current status of a resource operation request.
+	// Represents the current status of the resource update request.
+	//
+	// Use the RequestToken of the ProgressEvent with [GetResourceRequestStatus] to return the current status of
+	// a resource operation request.
+	//
+	// [GetResourceRequestStatus]: https://docs.aws.amazon.com/cloudcontrolapi/latest/APIReference/API_GetResourceRequestStatus.html
 	ProgressEvent *types.ProgressEvent
 
 	// Metadata pertaining to the operation's result.
@@ -134,25 +161,25 @@ func (c *Client) addOperationUpdateResourceMiddlewares(stack *middleware.Stack, 
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -167,6 +194,9 @@ func (c *Client) addOperationUpdateResourceMiddlewares(stack *middleware.Stack, 
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opUpdateResourceMiddleware(stack, options); err != nil {
 		return err
 	}
@@ -176,7 +206,7 @@ func (c *Client) addOperationUpdateResourceMiddlewares(stack *middleware.Stack, 
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateResource(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

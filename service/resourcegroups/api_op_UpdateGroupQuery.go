@@ -6,17 +6,21 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/resourcegroups/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Updates the resource query of a group. For more information about resource
-// queries, see Create a tag-based group in Resource Groups (https://docs.aws.amazon.com/ARG/latest/userguide/gettingstarted-query.html#gettingstarted-query-cli-tag)
-// . Minimum permissions To run this command, you must have the following
-// permissions:
+// queries, see [Create a tag-based group in Resource Groups].
+//
+// # Minimum permissions
+//
+// To run this command, you must have the following permissions:
+//
 //   - resource-groups:UpdateGroupQuery
+//
+// [Create a tag-based group in Resource Groups]: https://docs.aws.amazon.com/ARG/latest/userguide/gettingstarted-query.html#gettingstarted-query-cli-tag
 func (c *Client) UpdateGroupQuery(ctx context.Context, params *UpdateGroupQueryInput, optFns ...func(*Options)) (*UpdateGroupQueryOutput, error) {
 	if params == nil {
 		params = &UpdateGroupQueryInput{}
@@ -35,8 +39,10 @@ func (c *Client) UpdateGroupQuery(ctx context.Context, params *UpdateGroupQueryI
 type UpdateGroupQueryInput struct {
 
 	// The resource query to determine which Amazon Web Services resources are members
-	// of this resource group. A resource group can contain either a Configuration or
-	// a ResourceQuery , but not both.
+	// of this resource group.
+	//
+	// A resource group can contain either a Configuration or a ResourceQuery , but not
+	// both.
 	//
 	// This member is required.
 	ResourceQuery *types.ResourceQuery
@@ -85,25 +91,25 @@ func (c *Client) addOperationUpdateGroupQueryMiddlewares(stack *middleware.Stack
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -118,13 +124,16 @@ func (c *Client) addOperationUpdateGroupQueryMiddlewares(stack *middleware.Stack
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpUpdateGroupQueryValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateGroupQuery(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

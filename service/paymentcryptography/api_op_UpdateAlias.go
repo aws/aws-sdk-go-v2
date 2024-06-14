@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/paymentcryptography/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -16,13 +15,25 @@ import (
 // different key. Each alias is associated with only one Amazon Web Services
 // Payment Cryptography key at a time, although a key can have multiple aliases.
 // The alias and the Amazon Web Services Payment Cryptography key must be in the
-// same Amazon Web Services account and Amazon Web Services Region Cross-account
-// use: This operation can't be used across different Amazon Web Services accounts.
+// same Amazon Web Services account and Amazon Web Services Region
+//
+// Cross-account use: This operation can't be used across different Amazon Web
+// Services accounts.
+//
 // Related operations:
-//   - CreateAlias
-//   - DeleteAlias
-//   - GetAlias
-//   - ListAliases
+//
+// [CreateAlias]
+//
+// [DeleteAlias]
+//
+// [GetAlias]
+//
+// [ListAliases]
+//
+// [ListAliases]: https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_ListAliases.html
+// [DeleteAlias]: https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_DeleteAlias.html
+// [CreateAlias]: https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_CreateAlias.html
+// [GetAlias]: https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_GetAlias.html
 func (c *Client) UpdateAlias(ctx context.Context, params *UpdateAliasInput, optFns ...func(*Options)) (*UpdateAliasOutput, error) {
 	if params == nil {
 		params = &UpdateAliasInput{}
@@ -86,25 +97,25 @@ func (c *Client) addOperationUpdateAliasMiddlewares(stack *middleware.Stack, opt
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -119,13 +130,16 @@ func (c *Client) addOperationUpdateAliasMiddlewares(stack *middleware.Stack, opt
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpUpdateAliasValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateAlias(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

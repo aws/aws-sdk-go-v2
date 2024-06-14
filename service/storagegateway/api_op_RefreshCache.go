@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -17,30 +16,36 @@ import (
 // results. This operation does not import files into the S3 File Gateway cache
 // storage. It only updates the cached inventory to reflect changes in the
 // inventory of the objects in the S3 bucket. This operation is only supported in
-// the S3 File Gateway types. You can subscribe to be notified through an Amazon
-// CloudWatch event when your RefreshCache operation completes. For more
-// information, see Getting notified about file operations (https://docs.aws.amazon.com/filegateway/latest/files3/monitoring-file-gateway.html#get-notification)
-// in the Amazon S3 File Gateway User Guide. This operation is Only supported for
-// S3 File Gateways. When this API is called, it only initiates the refresh
-// operation. When the API call completes and returns a success code, it doesn't
-// necessarily mean that the file refresh has completed. You should use the
-// refresh-complete notification to determine that the operation has completed
-// before you check for new files on the gateway file share. You can subscribe to
-// be notified through a CloudWatch event when your RefreshCache operation
-// completes. Throttle limit: This API is asynchronous, so the gateway will accept
-// no more than two refreshes at any time. We recommend using the refresh-complete
+// the S3 File Gateway types.
+//
+// You can subscribe to be notified through an Amazon CloudWatch event when your
+// RefreshCache operation completes. For more information, see [Getting notified about file operations] in the Amazon S3
+// File Gateway User Guide. This operation is Only supported for S3 File Gateways.
+//
+// When this API is called, it only initiates the refresh operation. When the API
+// call completes and returns a success code, it doesn't necessarily mean that the
+// file refresh has completed. You should use the refresh-complete notification to
+// determine that the operation has completed before you check for new files on the
+// gateway file share. You can subscribe to be notified through a CloudWatch event
+// when your RefreshCache operation completes.
+//
+// Throttle limit: This API is asynchronous, so the gateway will accept no more
+// than two refreshes at any time. We recommend using the refresh-complete
 // CloudWatch event notification before issuing additional requests. For more
-// information, see Getting notified about file operations (https://docs.aws.amazon.com/filegateway/latest/files3/monitoring-file-gateway.html#get-notification)
-// in the Amazon S3 File Gateway User Guide.
+// information, see [Getting notified about file operations]in the Amazon S3 File Gateway User Guide.
+//
 //   - Wait at least 60 seconds between consecutive RefreshCache API requests.
+//
 //   - If you invoke the RefreshCache API when two requests are already being
 //     processed, any new request will cause an InvalidGatewayRequestException error
 //     because too many requests were sent to the server.
 //
 // The S3 bucket name does not need to be included when entering the list of
-// folders in the FolderList parameter. For more information, see Getting notified
-// about file operations (https://docs.aws.amazon.com/filegateway/latest/files3/monitoring-file-gateway.html#get-notification)
-// in the Amazon S3 File Gateway User Guide.
+// folders in the FolderList parameter.
+//
+// For more information, see [Getting notified about file operations] in the Amazon S3 File Gateway User Guide.
+//
+// [Getting notified about file operations]: https://docs.aws.amazon.com/filegateway/latest/files3/monitoring-file-gateway.html#get-notification
 func (c *Client) RefreshCache(ctx context.Context, params *RefreshCacheInput, optFns ...func(*Options)) (*RefreshCacheOutput, error) {
 	if params == nil {
 		params = &RefreshCacheInput{}
@@ -68,6 +73,9 @@ type RefreshCacheInput struct {
 	// default is [ "/" ]. The default refreshes objects and folders at the root of the
 	// Amazon S3 bucket. If Recursive is set to true , the entire S3 bucket that the
 	// file share has access to is refreshed.
+	//
+	// Do not include / when specifying folder names. For example, you would specify
+	// samplefolder rather than samplefolder/ .
 	FolderList []string
 
 	// A value that specifies whether to recursively refresh folders in the cache. The
@@ -75,8 +83,9 @@ type RefreshCacheInput struct {
 	// the folder's contents. If this value set to true , each folder that is listed in
 	// FolderList is recursively updated. Otherwise, subfolders listed in FolderList
 	// are not refreshed. Only objects that are in folders listed directly under
-	// FolderList are found and used for the update. The default is true . Valid
-	// Values: true | false
+	// FolderList are found and used for the update. The default is true .
+	//
+	// Valid Values: true | false
 	Recursive *bool
 
 	noSmithyDocumentSerde
@@ -120,25 +129,25 @@ func (c *Client) addOperationRefreshCacheMiddlewares(stack *middleware.Stack, op
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -153,13 +162,16 @@ func (c *Client) addOperationRefreshCacheMiddlewares(stack *middleware.Stack, op
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpRefreshCacheValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opRefreshCache(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

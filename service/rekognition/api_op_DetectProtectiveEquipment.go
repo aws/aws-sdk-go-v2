@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/rekognition/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -14,28 +13,41 @@ import (
 
 // Detects Personal Protective Equipment (PPE) worn by people detected in an
 // image. Amazon Rekognition can detect the following types of PPE.
+//
 //   - Face cover
+//
 //   - Hand cover
+//
 //   - Head cover
 //
 // You pass the input image as base64-encoded image bytes or as a reference to an
 // image in an Amazon S3 bucket. The image must be either a PNG or JPG formatted
-// file. DetectProtectiveEquipment detects PPE worn by up to 15 persons detected
-// in an image. For each person detected in the image the API returns an array of
-// body parts (face, head, left-hand, right-hand). For each body part, an array of
-// detected items of PPE is returned, including an indicator of whether or not the
-// PPE covers the body part. The API returns the confidence it has in each
-// detection (person, PPE, body part and body part coverage). It also returns a
-// bounding box ( BoundingBox ) for each detected person and each detected item of
-// PPE. You can optionally request a summary of detected PPE items with the
+// file.
+//
+// DetectProtectiveEquipment detects PPE worn by up to 15 persons detected in an
+// image.
+//
+// For each person detected in the image the API returns an array of body parts
+// (face, head, left-hand, right-hand). For each body part, an array of detected
+// items of PPE is returned, including an indicator of whether or not the PPE
+// covers the body part. The API returns the confidence it has in each detection
+// (person, PPE, body part and body part coverage). It also returns a bounding box
+// (BoundingBox ) for each detected person and each detected item of PPE.
+//
+// You can optionally request a summary of detected PPE items with the
 // SummarizationAttributes input parameter. The summary provides the following
 // information.
+//
 //   - The persons detected as wearing all of the types of PPE that you specify.
+//
 //   - The persons detected as not wearing all of the types PPE that you specify.
+//
 //   - The persons detected where PPE adornment could not be determined.
 //
 // This is a stateless API operation. That is, the operation does not persist any
-// data. This operation requires permissions to perform the
+// data.
+//
+// This operation requires permissions to perform the
 // rekognition:DetectProtectiveEquipment action.
 func (c *Client) DetectProtectiveEquipment(ctx context.Context, params *DetectProtectiveEquipmentInput, optFns ...func(*Options)) (*DetectProtectiveEquipmentOutput, error) {
 	if params == nil {
@@ -107,25 +119,25 @@ func (c *Client) addOperationDetectProtectiveEquipmentMiddlewares(stack *middlew
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -140,13 +152,16 @@ func (c *Client) addOperationDetectProtectiveEquipmentMiddlewares(stack *middlew
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDetectProtectiveEquipmentValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDetectProtectiveEquipment(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

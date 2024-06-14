@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/directconnect/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -14,15 +13,32 @@ import (
 
 // Lists the associations between your Direct Connect gateways and virtual private
 // gateways and transit gateways. You must specify one of the following:
-//   - A Direct Connect gateway The response contains all virtual private gateways
-//     and transit gateways associated with the Direct Connect gateway.
-//   - A virtual private gateway The response contains the Direct Connect gateway.
-//   - A transit gateway The response contains the Direct Connect gateway.
-//   - A Direct Connect gateway and a virtual private gateway The response
-//     contains the association between the Direct Connect gateway and virtual private
-//     gateway.
-//   - A Direct Connect gateway and a transit gateway The response contains the
-//     association between the Direct Connect gateway and transit gateway.
+//
+//   - A Direct Connect gateway
+//
+// The response contains all virtual private gateways and transit gateways
+//
+//	associated with the Direct Connect gateway.
+//
+//	- A virtual private gateway
+//
+// The response contains the Direct Connect gateway.
+//
+//   - A transit gateway
+//
+// The response contains the Direct Connect gateway.
+//
+//   - A Direct Connect gateway and a virtual private gateway
+//
+// The response contains the association between the Direct Connect gateway and
+//
+//	virtual private gateway.
+//
+//	- A Direct Connect gateway and a transit gateway
+//
+// The response contains the association between the Direct Connect gateway and
+//
+//	transit gateway.
 func (c *Client) DescribeDirectConnectGatewayAssociations(ctx context.Context, params *DescribeDirectConnectGatewayAssociationsInput, optFns ...func(*Options)) (*DescribeDirectConnectGatewayAssociationsOutput, error) {
 	if params == nil {
 		params = &DescribeDirectConnectGatewayAssociationsInput{}
@@ -50,8 +66,9 @@ type DescribeDirectConnectGatewayAssociationsInput struct {
 	DirectConnectGatewayId *string
 
 	// The maximum number of results to return with a single call. To retrieve the
-	// remaining results, make another call with the returned nextToken value. If
-	// MaxResults is given a value larger than 100, only 100 results are returned.
+	// remaining results, make another call with the returned nextToken value.
+	//
+	// If MaxResults is given a value larger than 100, only 100 results are returned.
 	MaxResults *int32
 
 	// The token provided in the previous call to retrieve the next page.
@@ -99,25 +116,25 @@ func (c *Client) addOperationDescribeDirectConnectGatewayAssociationsMiddlewares
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -132,10 +149,13 @@ func (c *Client) addOperationDescribeDirectConnectGatewayAssociationsMiddlewares
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeDirectConnectGatewayAssociations(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

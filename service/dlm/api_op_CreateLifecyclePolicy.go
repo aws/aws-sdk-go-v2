@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/dlm/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -14,15 +13,23 @@ import (
 
 // Creates an Amazon Data Lifecycle Manager lifecycle policy. Amazon Data
 // Lifecycle Manager supports the following policy types:
+//
 //   - Custom EBS snapshot policy
+//
 //   - Custom EBS-backed AMI policy
+//
 //   - Cross-account copy event policy
+//
 //   - Default policy for EBS snapshots
+//
 //   - Default policy for EBS-backed AMIs
 //
-// For more information, see  Default policies vs custom policies (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/policy-differences.html)
-// . If you create a default policy, you can specify the request parameters either
+// For more information, see [Default policies vs custom policies].
+//
+// If you create a default policy, you can specify the request parameters either
 // in the request body, or in the PolicyDetails request structure, but not both.
+//
+// [Default policies vs custom policies]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/policy-differences.html
 func (c *Client) CreateLifecyclePolicy(ctx context.Context, params *CreateLifecyclePolicyInput, optFns ...func(*Options)) (*CreateLifecyclePolicyOutput, error) {
 	if params == nil {
 		params = &CreateLifecyclePolicyInput{}
@@ -57,62 +64,79 @@ type CreateLifecyclePolicyInput struct {
 	// This member is required.
 	State types.SettablePolicyStateValues
 
-	// [Default policies only] Indicates whether the policy should copy tags from the
+	//  [Default policies only] Indicates whether the policy should copy tags from the
 	// source resource to the snapshot or AMI. If you do not specify a value, the
-	// default is false . Default: false
+	// default is false .
+	//
+	// Default: false
 	CopyTags *bool
 
-	// [Default policies only] Specifies how often the policy should run and create
+	//  [Default policies only] Specifies how often the policy should run and create
 	// snapshots or AMIs. The creation frequency can range from 1 to 7 days. If you do
-	// not specify a value, the default is 1. Default: 1
+	// not specify a value, the default is 1.
+	//
+	// Default: 1
 	CreateInterval *int32
 
-	// [Default policies only] Specifies destination Regions for snapshot or AMI
+	//  [Default policies only] Specifies destination Regions for snapshot or AMI
 	// copies. You can specify up to 3 destination Regions. If you do not want to
 	// create cross-Region copies, omit this parameter.
 	CrossRegionCopyTargets []types.CrossRegionCopyTarget
 
-	// [Default policies only] Specify the type of default policy to create.
+	//  [Default policies only] Specify the type of default policy to create.
+	//
 	//   - To create a default policy for EBS snapshots, that creates snapshots of all
 	//   volumes in the Region that do not have recent backups, specify VOLUME .
+	//
 	//   - To create a default policy for EBS-backed AMIs, that creates EBS-backed
 	//   AMIs from all instances in the Region that do not have recent backups, specify
 	//   INSTANCE .
 	DefaultPolicy types.DefaultPolicyTypeValues
 
-	// [Default policies only] Specifies exclusion parameters for volumes or instances
-	// for which you do not want to create snapshots or AMIs. The policy will not
-	// create snapshots or AMIs for target resources that match any of the specified
-	// exclusion parameters.
+	//  [Default policies only] Specifies exclusion parameters for volumes or
+	// instances for which you do not want to create snapshots or AMIs. The policy will
+	// not create snapshots or AMIs for target resources that match any of the
+	// specified exclusion parameters.
 	Exclusions *types.Exclusions
 
-	// [Default policies only] Defines the snapshot or AMI retention behavior for the
+	//  [Default policies only] Defines the snapshot or AMI retention behavior for the
 	// policy if the source volume or instance is deleted, or if the policy enters the
-	// error, disabled, or deleted state. By default (ExtendDeletion=false):
+	// error, disabled, or deleted state.
+	//
+	// By default (ExtendDeletion=false):
+	//
 	//   - If a source resource is deleted, Amazon Data Lifecycle Manager will
 	//   continue to delete previously created snapshots or AMIs, up to but not including
 	//   the last one, based on the specified retention period. If you want Amazon Data
 	//   Lifecycle Manager to delete all snapshots or AMIs, including the last one,
 	//   specify true .
+	//
 	//   - If a policy enters the error, disabled, or deleted state, Amazon Data
 	//   Lifecycle Manager stops deleting snapshots and AMIs. If you want Amazon Data
 	//   Lifecycle Manager to continue deleting snapshots or AMIs, including the last
 	//   one, if the policy enters one of these states, specify true .
+	//
 	// If you enable extended deletion (ExtendDeletion=true), you override both
-	// default behaviors simultaneously. If you do not specify a value, the default is
-	// false . Default: false
+	// default behaviors simultaneously.
+	//
+	// If you do not specify a value, the default is false .
+	//
+	// Default: false
 	ExtendDeletion *bool
 
-	// The configuration details of the lifecycle policy. If you create a default
-	// policy, you can specify the request parameters either in the request body, or in
-	// the PolicyDetails request structure, but not both.
+	// The configuration details of the lifecycle policy.
+	//
+	// If you create a default policy, you can specify the request parameters either
+	// in the request body, or in the PolicyDetails request structure, but not both.
 	PolicyDetails *types.PolicyDetails
 
-	// [Default policies only] Specifies how long the policy should retain snapshots
+	//  [Default policies only] Specifies how long the policy should retain snapshots
 	// or AMIs before deleting them. The retention period can range from 2 to 14 days,
 	// but it must be greater than the creation frequency to ensure that the policy
 	// retains at least 1 snapshot or AMI at any given time. If you do not specify a
-	// value, the default is 7. Default: 7
+	// value, the default is 7.
+	//
+	// Default: 7
 	RetainInterval *int32
 
 	// The tags to apply to the lifecycle policy during creation.
@@ -154,25 +178,25 @@ func (c *Client) addOperationCreateLifecyclePolicyMiddlewares(stack *middleware.
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -187,13 +211,16 @@ func (c *Client) addOperationCreateLifecyclePolicyMiddlewares(stack *middleware.
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpCreateLifecyclePolicyValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateLifecyclePolicy(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

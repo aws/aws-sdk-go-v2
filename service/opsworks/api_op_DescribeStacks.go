@@ -6,17 +6,18 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/opsworks/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Requests a description of one or more stacks. Required Permissions: To use this
-// action, an IAM user must have a Show, Deploy, or Manage permissions level for
-// the stack, or an attached policy that explicitly grants permissions. For more
-// information about user permissions, see Managing User Permissions (https://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html)
-// .
+// Requests a description of one or more stacks.
+//
+// Required Permissions: To use this action, an IAM user must have a Show, Deploy,
+// or Manage permissions level for the stack, or an attached policy that explicitly
+// grants permissions. For more information about user permissions, see [Managing User Permissions].
+//
+// [Managing User Permissions]: https://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html
 func (c *Client) DescribeStacks(ctx context.Context, params *DescribeStacksInput, optFns ...func(*Options)) (*DescribeStacksOutput, error) {
 	if params == nil {
 		params = &DescribeStacksInput{}
@@ -35,7 +36,11 @@ func (c *Client) DescribeStacks(ctx context.Context, params *DescribeStacksInput
 type DescribeStacksInput struct {
 
 	// An array of stack IDs that specify the stacks to be described. If you omit this
-	// parameter, DescribeStacks returns a description of every stack.
+	// parameter, and have permissions to get information about all stacks,
+	// DescribeStacks returns a description of every stack. If the IAM policy that is
+	// attached to an IAM user limits the DescribeStacks action to specific stack
+	// ARNs, this parameter is required, and the user must specify a stack ARN that is
+	// allowed by the policy. Otherwise, DescribeStacks returns an AccessDenied error.
 	StackIds []string
 
 	noSmithyDocumentSerde
@@ -75,25 +80,25 @@ func (c *Client) addOperationDescribeStacksMiddlewares(stack *middleware.Stack, 
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -108,10 +113,13 @@ func (c *Client) addOperationDescribeStacksMiddlewares(stack *middleware.Stack, 
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeStacks(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

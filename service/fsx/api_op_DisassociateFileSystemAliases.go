@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/fsx/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -16,11 +15,14 @@ import (
 // (DNS) aliases from an Amazon FSx for Windows File Server file system. If you
 // attempt to disassociate a DNS alias that is not associated with the file system,
 // Amazon FSx responds with an HTTP status code 400 (Bad Request). For more
-// information, see Working with DNS Aliases (https://docs.aws.amazon.com/fsx/latest/WindowsGuide/managing-dns-aliases.html)
-// . The system generated response showing the DNS aliases that Amazon FSx is
+// information, see [Working with DNS Aliases].
+//
+// The system generated response showing the DNS aliases that Amazon FSx is
 // attempting to disassociate from the file system. Use the API operation to
 // monitor the status of the aliases Amazon FSx is disassociating with the file
 // system.
+//
+// [Working with DNS Aliases]: https://docs.aws.amazon.com/fsx/latest/WindowsGuide/managing-dns-aliases.html
 func (c *Client) DisassociateFileSystemAliases(ctx context.Context, params *DisassociateFileSystemAliasesInput, optFns ...func(*Options)) (*DisassociateFileSystemAliasesOutput, error) {
 	if params == nil {
 		params = &DisassociateFileSystemAliasesInput{}
@@ -96,25 +98,25 @@ func (c *Client) addOperationDisassociateFileSystemAliasesMiddlewares(stack *mid
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -129,6 +131,9 @@ func (c *Client) addOperationDisassociateFileSystemAliasesMiddlewares(stack *mid
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opDisassociateFileSystemAliasesMiddleware(stack, options); err != nil {
 		return err
 	}
@@ -138,7 +143,7 @@ func (c *Client) addOperationDisassociateFileSystemAliasesMiddlewares(stack *mid
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDisassociateFileSystemAliases(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

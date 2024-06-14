@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/elasticsearchservice/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -28,12 +27,12 @@ func (c *Client) DescribeInboundCrossClusterSearchConnections(ctx context.Contex
 	return out, nil
 }
 
-// Container for the parameters to the DescribeInboundCrossClusterSearchConnections
-// operation.
+// Container for the parameters to the DescribeInboundCrossClusterSearchConnections operation.
 type DescribeInboundCrossClusterSearchConnectionsInput struct {
 
-	// A list of filters used to match properties for inbound cross-cluster search
-	// connection. Available Filter names for this operation are:
+	//  A list of filters used to match properties for inbound cross-cluster search
+	// connection. Available Filternames for this operation are:
+	//
 	//   - cross-cluster-search-connection-id
 	//   - source-domain-info.domain-name
 	//   - source-domain-info.owner-id
@@ -45,19 +44,18 @@ type DescribeInboundCrossClusterSearchConnectionsInput struct {
 	// defaults to 100.
 	MaxResults int32
 
-	// NextToken is sent in case the earlier API call results contain the NextToken.
+	//  NextToken is sent in case the earlier API call results contain the NextToken.
 	// It is used for pagination.
 	NextToken *string
 
 	noSmithyDocumentSerde
 }
 
-// The result of a DescribeInboundCrossClusterSearchConnections request. Contains
-// the list of connections matching the filter criteria.
+// The result of a DescribeInboundCrossClusterSearchConnections request. Contains the list of connections matching the filter
+// criteria.
 type DescribeInboundCrossClusterSearchConnectionsOutput struct {
 
-	// Consists of list of InboundCrossClusterSearchConnection matching the specified
-	// filter criteria.
+	// Consists of list of InboundCrossClusterSearchConnection matching the specified filter criteria.
 	CrossClusterSearchConnections []types.InboundCrossClusterSearchConnection
 
 	// If more results are available and NextToken is present, make the next request
@@ -92,25 +90,25 @@ func (c *Client) addOperationDescribeInboundCrossClusterSearchConnectionsMiddlew
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -125,10 +123,13 @@ func (c *Client) addOperationDescribeInboundCrossClusterSearchConnectionsMiddlew
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeInboundCrossClusterSearchConnections(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

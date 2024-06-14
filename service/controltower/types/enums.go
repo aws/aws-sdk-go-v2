@@ -2,6 +2,50 @@
 
 package types
 
+type BaselineOperationStatus string
+
+// Enum values for BaselineOperationStatus
+const (
+	BaselineOperationStatusSucceeded  BaselineOperationStatus = "SUCCEEDED"
+	BaselineOperationStatusFailed     BaselineOperationStatus = "FAILED"
+	BaselineOperationStatusInProgress BaselineOperationStatus = "IN_PROGRESS"
+)
+
+// Values returns all known values for BaselineOperationStatus. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (BaselineOperationStatus) Values() []BaselineOperationStatus {
+	return []BaselineOperationStatus{
+		"SUCCEEDED",
+		"FAILED",
+		"IN_PROGRESS",
+	}
+}
+
+type BaselineOperationType string
+
+// Enum values for BaselineOperationType
+const (
+	BaselineOperationTypeEnableBaseline        BaselineOperationType = "ENABLE_BASELINE"
+	BaselineOperationTypeDisableBaseline       BaselineOperationType = "DISABLE_BASELINE"
+	BaselineOperationTypeUpdateEnabledBaseline BaselineOperationType = "UPDATE_ENABLED_BASELINE"
+	BaselineOperationTypeResetEnabledBaseline  BaselineOperationType = "RESET_ENABLED_BASELINE"
+)
+
+// Values returns all known values for BaselineOperationType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (BaselineOperationType) Values() []BaselineOperationType {
+	return []BaselineOperationType{
+		"ENABLE_BASELINE",
+		"DISABLE_BASELINE",
+		"UPDATE_ENABLED_BASELINE",
+		"RESET_ENABLED_BASELINE",
+	}
+}
+
 type ControlOperationStatus string
 
 // Enum values for ControlOperationStatus
@@ -12,8 +56,9 @@ const (
 )
 
 // Values returns all known values for ControlOperationStatus. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ControlOperationStatus) Values() []ControlOperationStatus {
 	return []ControlOperationStatus{
 		"SUCCEEDED",
@@ -32,8 +77,9 @@ const (
 )
 
 // Values returns all known values for ControlOperationType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ControlOperationType) Values() []ControlOperationType {
 	return []ControlOperationType{
 		"ENABLE_CONTROL",
@@ -53,8 +99,9 @@ const (
 )
 
 // Values returns all known values for DriftStatus. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (DriftStatus) Values() []DriftStatus {
 	return []DriftStatus{
 		"DRIFTED",
@@ -74,8 +121,9 @@ const (
 )
 
 // Values returns all known values for EnablementStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (EnablementStatus) Values() []EnablementStatus {
 	return []EnablementStatus{
 		"SUCCEEDED",
@@ -93,8 +141,9 @@ const (
 )
 
 // Values returns all known values for LandingZoneDriftStatus. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (LandingZoneDriftStatus) Values() []LandingZoneDriftStatus {
 	return []LandingZoneDriftStatus{
 		"DRIFTED",
@@ -113,6 +162,7 @@ const (
 
 // Values returns all known values for LandingZoneOperationStatus. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (LandingZoneOperationStatus) Values() []LandingZoneOperationStatus {
 	return []LandingZoneOperationStatus{
@@ -134,6 +184,7 @@ const (
 
 // Values returns all known values for LandingZoneOperationType. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (LandingZoneOperationType) Values() []LandingZoneOperationType {
 	return []LandingZoneOperationType{
@@ -154,8 +205,9 @@ const (
 )
 
 // Values returns all known values for LandingZoneStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (LandingZoneStatus) Values() []LandingZoneStatus {
 	return []LandingZoneStatus{
 		"ACTIVE",

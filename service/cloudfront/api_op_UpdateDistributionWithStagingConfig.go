@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/cloudfront/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -16,16 +15,23 @@ import (
 // distribution. The primary distribution retains its Aliases (also known as
 // alternate domain names or CNAMEs) and ContinuousDeploymentPolicyId value, but
 // otherwise its configuration is overwritten to match the staging distribution.
+//
 // You can use this operation in a continuous deployment workflow after you have
 // tested configuration changes on the staging distribution. After using a
 // continuous deployment policy to move a portion of your domain name's traffic to
 // the staging distribution and verifying that it works as intended, you can use
 // this operation to copy the staging distribution's configuration to the primary
 // distribution. This action will disable the continuous deployment policy and move
-// your domain's traffic back to the primary distribution. This API operation
-// requires the following IAM permissions:
-//   - GetDistribution (https://docs.aws.amazon.com/cloudfront/latest/APIReference/API_GetDistribution.html)
-//   - UpdateDistribution (https://docs.aws.amazon.com/cloudfront/latest/APIReference/API_UpdateDistribution.html)
+// your domain's traffic back to the primary distribution.
+//
+// This API operation requires the following IAM permissions:
+//
+// [GetDistribution]
+//
+// [UpdateDistribution]
+//
+// [GetDistribution]: https://docs.aws.amazon.com/cloudfront/latest/APIReference/API_GetDistribution.html
+// [UpdateDistribution]: https://docs.aws.amazon.com/cloudfront/latest/APIReference/API_UpdateDistribution.html
 func (c *Client) UpdateDistributionWithStagingConfig(ctx context.Context, params *UpdateDistributionWithStagingConfigInput, optFns ...func(*Options)) (*UpdateDistributionWithStagingConfigOutput, error) {
 	if params == nil {
 		params = &UpdateDistributionWithStagingConfigInput{}
@@ -50,7 +56,9 @@ type UpdateDistributionWithStagingConfigInput struct {
 	Id *string
 
 	// The current versions ( ETag values) of both primary and staging distributions.
-	// Provide these in the following format: ,
+	// Provide these in the following format:
+	//
+	//     ,
 	IfMatch *string
 
 	// The identifier of the staging distribution whose configuration you are copying
@@ -97,25 +105,25 @@ func (c *Client) addOperationUpdateDistributionWithStagingConfigMiddlewares(stac
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -130,13 +138,16 @@ func (c *Client) addOperationUpdateDistributionWithStagingConfigMiddlewares(stac
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpUpdateDistributionWithStagingConfigValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateDistributionWithStagingConfig(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

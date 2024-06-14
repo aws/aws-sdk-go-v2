@@ -6,22 +6,26 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/kendra/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates a data source connector that you want to use with an Amazon Kendra
-// index. You specify a name, data source connector type and description for your
-// data source. You also specify configuration information for the data source
-// connector. CreateDataSource is a synchronous operation. The operation returns
-// 200 if the data source was successfully created. Otherwise, an exception is
-// raised. For an example of creating an index and data source using the Python
-// SDK, see Getting started with Python SDK (https://docs.aws.amazon.com/kendra/latest/dg/gs-python.html)
-// . For an example of creating an index and data source using the Java SDK, see
-// Getting started with Java SDK (https://docs.aws.amazon.com/kendra/latest/dg/gs-java.html)
-// .
+// index.
+//
+// You specify a name, data source connector type and description for your data
+// source. You also specify configuration information for the data source
+// connector.
+//
+// CreateDataSource is a synchronous operation. The operation returns 200 if the
+// data source was successfully created. Otherwise, an exception is raised.
+//
+// For an example of creating an index and data source using the Python SDK, see [Getting started with Python SDK].
+// For an example of creating an index and data source using the Java SDK, see [Getting started with Java SDK].
+//
+// [Getting started with Python SDK]: https://docs.aws.amazon.com/kendra/latest/dg/gs-python.html
+// [Getting started with Java SDK]: https://docs.aws.amazon.com/kendra/latest/dg/gs-java.html
 func (c *Client) CreateDataSource(ctx context.Context, params *CreateDataSourceInput, optFns ...func(*Options)) (*CreateDataSourceOutput, error) {
 	if params == nil {
 		params = &CreateDataSourceInput{}
@@ -59,18 +63,22 @@ type CreateDataSourceInput struct {
 	// token will create only one data source connector.
 	ClientToken *string
 
-	// Configuration information to connect to your data source repository. You can't
-	// specify the Configuration parameter when the Type parameter is set to CUSTOM .
-	// If you do, you receive a ValidationException exception. The Configuration
-	// parameter is required for all other data sources.
+	// Configuration information to connect to your data source repository.
+	//
+	// You can't specify the Configuration parameter when the Type parameter is set to
+	// CUSTOM . If you do, you receive a ValidationException exception.
+	//
+	// The Configuration parameter is required for all other data sources.
 	Configuration *types.DataSourceConfiguration
 
 	// Configuration information for altering document metadata and content during the
-	// document ingestion process. For more information on how to create, modify and
-	// delete document metadata, or make other content alterations when you ingest
-	// documents into Amazon Kendra, see Customizing document metadata during the
-	// ingestion process (https://docs.aws.amazon.com/kendra/latest/dg/custom-document-enrichment.html)
-	// .
+	// document ingestion process.
+	//
+	// For more information on how to create, modify and delete document metadata, or
+	// make other content alterations when you ingest documents into Amazon Kendra, see
+	// [Customizing document metadata during the ingestion process].
+	//
+	// [Customizing document metadata during the ingestion process]: https://docs.aws.amazon.com/kendra/latest/dg/custom-document-enrichment.html
 	CustomDocumentEnrichmentConfiguration *types.CustomDocumentEnrichmentConfiguration
 
 	// A description for the data source connector.
@@ -79,25 +87,32 @@ type CreateDataSourceInput struct {
 	// The code for a language. This allows you to support a language for all
 	// documents when creating the data source connector. English is supported by
 	// default. For more information on supported languages, including their codes, see
-	// Adding documents in languages other than English (https://docs.aws.amazon.com/kendra/latest/dg/in-adding-languages.html)
-	// .
+	// [Adding documents in languages other than English].
+	//
+	// [Adding documents in languages other than English]: https://docs.aws.amazon.com/kendra/latest/dg/in-adding-languages.html
 	LanguageCode *string
 
 	// The Amazon Resource Name (ARN) of an IAM role with permission to access the
-	// data source and required resources. For more information, see IAM access roles
-	// for Amazon Kendra. (https://docs.aws.amazon.com/kendra/latest/dg/iam-roles.html)
-	// . You can't specify the RoleArn parameter when the Type parameter is set to
-	// CUSTOM . If you do, you receive a ValidationException exception. The RoleArn
-	// parameter is required for all other data sources.
+	// data source and required resources. For more information, see [IAM access roles for Amazon Kendra.].
+	//
+	// You can't specify the RoleArn parameter when the Type parameter is set to CUSTOM
+	// . If you do, you receive a ValidationException exception.
+	//
+	// The RoleArn parameter is required for all other data sources.
+	//
+	// [IAM access roles for Amazon Kendra.]: https://docs.aws.amazon.com/kendra/latest/dg/iam-roles.html
 	RoleArn *string
 
 	// Sets the frequency for Amazon Kendra to check the documents in your data source
 	// repository and update the index. If you don't set a schedule Amazon Kendra will
 	// not periodically update the index. You can call the StartDataSourceSyncJob API
-	// to update the index. Specify a cron- format schedule string or an empty string
-	// to indicate that the index is updated on demand. You can't specify the Schedule
-	// parameter when the Type parameter is set to CUSTOM . If you do, you receive a
-	// ValidationException exception.
+	// to update the index.
+	//
+	// Specify a cron- format schedule string or an empty string to indicate that the
+	// index is updated on demand.
+	//
+	// You can't specify the Schedule parameter when the Type parameter is set to
+	// CUSTOM . If you do, you receive a ValidationException exception.
 	Schedule *string
 
 	// A list of key-value pairs that identify or categorize the data source
@@ -107,8 +122,9 @@ type CreateDataSourceInput struct {
 	Tags []types.Tag
 
 	// Configuration information for an Amazon Virtual Private Cloud to connect to
-	// your data source. For more information, see Configuring a VPC (https://docs.aws.amazon.com/kendra/latest/dg/vpc-configuration.html)
-	// .
+	// your data source. For more information, see [Configuring a VPC].
+	//
+	// [Configuring a VPC]: https://docs.aws.amazon.com/kendra/latest/dg/vpc-configuration.html
 	VpcConfiguration *types.DataSourceVpcConfiguration
 
 	noSmithyDocumentSerde
@@ -149,25 +165,25 @@ func (c *Client) addOperationCreateDataSourceMiddlewares(stack *middleware.Stack
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -182,6 +198,9 @@ func (c *Client) addOperationCreateDataSourceMiddlewares(stack *middleware.Stack
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opCreateDataSourceMiddleware(stack, options); err != nil {
 		return err
 	}
@@ -191,7 +210,7 @@ func (c *Client) addOperationCreateDataSourceMiddlewares(stack *middleware.Stack
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateDataSource(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

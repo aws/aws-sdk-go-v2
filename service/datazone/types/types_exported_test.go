@@ -7,6 +7,24 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/datazone/types"
 )
 
+func ExampleActionParameters_outputUsage() {
+	var union types.ActionParameters
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.ActionParametersMemberAwsConsoleLink:
+		_ = v.Value // Value is types.AwsConsoleLinkParameters
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.AwsConsoleLinkParameters
+
 func ExampleDataSourceConfigurationInput_outputUsage() {
 	var union types.DataSourceConfigurationInput
 	// type switches can be used to check the union value
@@ -300,6 +318,28 @@ func ExampleSearchTypesResultItem_outputUsage() {
 
 var _ *types.FormTypeData
 var _ *types.AssetTypeItem
+
+func ExampleSelfGrantStatusOutput_outputUsage() {
+	var union types.SelfGrantStatusOutput
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.SelfGrantStatusOutputMemberGlueSelfGrantStatus:
+		_ = v.Value // Value is types.GlueSelfGrantStatusOutput
+
+	case *types.SelfGrantStatusOutputMemberRedshiftSelfGrantStatus:
+		_ = v.Value // Value is types.RedshiftSelfGrantStatusOutput
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *types.RedshiftSelfGrantStatusOutput
+var _ *types.GlueSelfGrantStatusOutput
 
 func ExampleSubscribedListingItem_outputUsage() {
 	var union types.SubscribedListingItem

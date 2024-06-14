@@ -3,4 +3,4 @@
 package kendra
 
 // goModuleVersion is the tagged release for this module
-const goModuleVersion = "1.47.6"
+const goModuleVersion = "1.50.7"

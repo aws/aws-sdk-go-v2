@@ -6,25 +6,30 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Deletes a file system, permanently severing access to its contents. Upon
 // return, the file system no longer exists and you can't access any contents of
-// the deleted file system. You need to manually delete mount targets attached to a
-// file system before you can delete an EFS file system. This step is performed for
-// you when you use the Amazon Web Services console to delete a file system. You
-// cannot delete a file system that is part of an EFS Replication configuration.
-// You need to delete the replication configuration first. You can't delete a file
-// system that is in use. That is, if the file system has any mount targets, you
-// must first delete them. For more information, see DescribeMountTargets and
-// DeleteMountTarget . The DeleteFileSystem call returns while the file system
-// state is still deleting . You can check the file system deletion status by
-// calling the DescribeFileSystems operation, which returns a list of file systems
-// in your account. If you pass file system ID or creation token for the deleted
-// file system, the DescribeFileSystems returns a 404 FileSystemNotFound error.
+// the deleted file system.
+//
+// You need to manually delete mount targets attached to a file system before you
+// can delete an EFS file system. This step is performed for you when you use the
+// Amazon Web Services console to delete a file system.
+//
+// You cannot delete a file system that is part of an EFS Replication
+// configuration. You need to delete the replication configuration first.
+//
+// You can't delete a file system that is in use. That is, if the file system has
+// any mount targets, you must first delete them. For more information, see DescribeMountTargetsand DeleteMountTarget.
+//
+// The DeleteFileSystem call returns while the file system state is still deleting
+// . You can check the file system deletion status by calling the DescribeFileSystemsoperation, which
+// returns a list of file systems in your account. If you pass file system ID or
+// creation token for the deleted file system, the DescribeFileSystemsreturns a 404 FileSystemNotFound
+// error.
+//
 // This operation requires permissions for the elasticfilesystem:DeleteFileSystem
 // action.
 func (c *Client) DeleteFileSystem(ctx context.Context, params *DeleteFileSystemInput, optFns ...func(*Options)) (*DeleteFileSystemOutput, error) {
@@ -81,25 +86,25 @@ func (c *Client) addOperationDeleteFileSystemMiddlewares(stack *middleware.Stack
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -114,13 +119,16 @@ func (c *Client) addOperationDeleteFileSystemMiddlewares(stack *middleware.Stack
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDeleteFileSystemValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteFileSystem(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

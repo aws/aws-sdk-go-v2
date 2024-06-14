@@ -6,20 +6,25 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/kendra/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates a block list used for query suggestions for an index. Updates to a
-// block list might not take effect right away. Amazon Kendra needs to refresh the
-// entire suggestions list to apply any updates to the block list. Other changes
-// not related to the block list apply immediately. If a block list is updating,
-// then you need to wait for the first update to finish before submitting another
-// update. Amazon Kendra supports partial updates, so you only need to provide the
-// fields you want to update. UpdateQuerySuggestionsBlockList is currently not
-// supported in the Amazon Web Services GovCloud (US-West) region.
+// Updates a block list used for query suggestions for an index.
+//
+// Updates to a block list might not take effect right away. Amazon Kendra needs
+// to refresh the entire suggestions list to apply any updates to the block list.
+// Other changes not related to the block list apply immediately.
+//
+// If a block list is updating, then you need to wait for the first update to
+// finish before submitting another update.
+//
+// Amazon Kendra supports partial updates, so you only need to provide the fields
+// you want to update.
+//
+// UpdateQuerySuggestionsBlockList is currently not supported in the Amazon Web
+// Services GovCloud (US-West) region.
 func (c *Client) UpdateQuerySuggestionsBlockList(ctx context.Context, params *UpdateQuerySuggestionsBlockListInput, optFns ...func(*Options)) (*UpdateQuerySuggestionsBlockListOutput, error) {
 	if params == nil {
 		params = &UpdateQuerySuggestionsBlockListInput{}
@@ -57,14 +62,16 @@ type UpdateQuerySuggestionsBlockListInput struct {
 	// text file in S3.
 	RoleArn *string
 
-	// The S3 path where your block list text file sits in S3. If you update your
-	// block list and provide the same path to the block list text file in S3, then
-	// Amazon Kendra reloads the file to refresh the block list. Amazon Kendra does not
-	// automatically refresh your block list. You need to call the
-	// UpdateQuerySuggestionsBlockList API to refresh you block list. If you update
-	// your block list, then Amazon Kendra asynchronously refreshes all query
-	// suggestions with the latest content in the S3 file. This means changes might not
-	// take effect immediately.
+	// The S3 path where your block list text file sits in S3.
+	//
+	// If you update your block list and provide the same path to the block list text
+	// file in S3, then Amazon Kendra reloads the file to refresh the block list.
+	// Amazon Kendra does not automatically refresh your block list. You need to call
+	// the UpdateQuerySuggestionsBlockList API to refresh you block list.
+	//
+	// If you update your block list, then Amazon Kendra asynchronously refreshes all
+	// query suggestions with the latest content in the S3 file. This means changes
+	// might not take effect immediately.
 	SourceS3Path *types.S3Path
 
 	noSmithyDocumentSerde
@@ -99,25 +106,25 @@ func (c *Client) addOperationUpdateQuerySuggestionsBlockListMiddlewares(stack *m
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -132,13 +139,16 @@ func (c *Client) addOperationUpdateQuerySuggestionsBlockListMiddlewares(stack *m
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpUpdateQuerySuggestionsBlockListValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateQuerySuggestionsBlockList(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

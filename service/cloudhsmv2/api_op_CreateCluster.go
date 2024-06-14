@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/cloudhsmv2/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -30,8 +29,8 @@ func (c *Client) CreateCluster(ctx context.Context, params *CreateClusterInput, 
 
 type CreateClusterInput struct {
 
-	// The type of HSM to use in the cluster. Currently the only allowed value is
-	// hsm1.medium .
+	// The type of HSM to use in the cluster. The allowed values are hsm1.medium and
+	// hsm2m.medium .
 	//
 	// This member is required.
 	HsmType *string
@@ -39,7 +38,9 @@ type CreateClusterInput struct {
 	// The identifiers (IDs) of the subnets where you are creating the cluster. You
 	// must specify at least one subnet. If you specify multiple subnets, they must
 	// meet the following criteria:
+	//
 	//   - All subnets must be in the same virtual private cloud (VPC).
+	//
 	//   - You can specify only one subnet per Availability Zone.
 	//
 	// This member is required.
@@ -48,9 +49,12 @@ type CreateClusterInput struct {
 	// A policy that defines how the service retains backups.
 	BackupRetentionPolicy *types.BackupRetentionPolicy
 
+	// The mode to use in the cluster. The allowed values are FIPS and NON_FIPS .
+	Mode types.ClusterMode
+
 	// The identifier (ID) of the cluster backup to restore. Use this value to restore
 	// the cluster from a backup instead of creating a new cluster. To find the backup
-	// ID, use DescribeBackups .
+	// ID, use DescribeBackups.
 	SourceBackupId *string
 
 	// Tags to apply to the CloudHSM cluster during creation.
@@ -92,25 +96,25 @@ func (c *Client) addOperationCreateClusterMiddlewares(stack *middleware.Stack, o
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -125,13 +129,16 @@ func (c *Client) addOperationCreateClusterMiddlewares(stack *middleware.Stack, o
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpCreateClusterValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateCluster(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

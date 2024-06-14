@@ -6,15 +6,15 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/databasemigrationservice/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Returns a paginated list of individual assessments based on filter settings.
-// These filter settings can specify a combination of premigration assessment runs,
-// migration tasks, and assessment status values.
+//
+// These filter settings can specify a combination of premigration assessment
+// runs, migration tasks, and assessment status values.
 func (c *Client) DescribeReplicationTaskIndividualAssessments(ctx context.Context, params *DescribeReplicationTaskIndividualAssessmentsInput, optFns ...func(*Options)) (*DescribeReplicationTaskIndividualAssessmentsOutput, error) {
 	if params == nil {
 		params = &DescribeReplicationTaskIndividualAssessmentsInput{}
@@ -33,8 +33,10 @@ func (c *Client) DescribeReplicationTaskIndividualAssessments(ctx context.Contex
 type DescribeReplicationTaskIndividualAssessmentsInput struct {
 
 	// Filters applied to the individual assessments described in the form of
-	// key-value pairs. Valid filter names: replication-task-assessment-run-arn ,
-	// replication-task-arn , status
+	// key-value pairs.
+	//
+	// Valid filter names: replication-task-assessment-run-arn , replication-task-arn ,
+	// status
 	Filters []types.Filter
 
 	// An optional pagination token provided by a previous request. If this parameter
@@ -89,25 +91,25 @@ func (c *Client) addOperationDescribeReplicationTaskIndividualAssessmentsMiddlew
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -122,13 +124,16 @@ func (c *Client) addOperationDescribeReplicationTaskIndividualAssessmentsMiddlew
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDescribeReplicationTaskIndividualAssessmentsValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeReplicationTaskIndividualAssessments(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

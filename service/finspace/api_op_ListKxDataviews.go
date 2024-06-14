@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/finspace/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -30,7 +29,7 @@ func (c *Client) ListKxDataviews(ctx context.Context, params *ListKxDataviewsInp
 
 type ListKxDataviewsInput struct {
 
-	// The name of the database where the dataviews were created.
+	//  The name of the database where the dataviews were created.
 	//
 	// This member is required.
 	DatabaseName *string
@@ -44,7 +43,7 @@ type ListKxDataviewsInput struct {
 	// The maximum number of results to return in this request.
 	MaxResults int32
 
-	// A token that indicates where a results page should begin.
+	//  A token that indicates where a results page should begin.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -52,10 +51,10 @@ type ListKxDataviewsInput struct {
 
 type ListKxDataviewsOutput struct {
 
-	// The list of kdb dataviews that are currently active for the given database.
+	//  The list of kdb dataviews that are currently active for the given database.
 	KxDataviews []types.KxDataviewListEntry
 
-	// A token that indicates where a results page should begin.
+	//  A token that indicates where a results page should begin.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -86,25 +85,25 @@ func (c *Client) addOperationListKxDataviewsMiddlewares(stack *middleware.Stack,
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -122,13 +121,16 @@ func (c *Client) addOperationListKxDataviewsMiddlewares(stack *middleware.Stack,
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpListKxDataviewsValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListKxDataviews(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

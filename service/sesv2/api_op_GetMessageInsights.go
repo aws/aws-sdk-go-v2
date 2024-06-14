@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/sesv2/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -14,7 +13,9 @@ import (
 
 // Provides information about a specific message, including the from address, the
 // subject, the recipient address, email tags, as well as events associated with
-// the message. You can execute this operation no more than once per second.
+// the message.
+//
+// You can execute this operation no more than once per second.
 func (c *Client) GetMessageInsights(ctx context.Context, params *GetMessageInsightsInput, optFns ...func(*Options)) (*GetMessageInsightsOutput, error) {
 	if params == nil {
 		params = &GetMessageInsightsInput{}
@@ -33,7 +34,7 @@ func (c *Client) GetMessageInsights(ctx context.Context, params *GetMessageInsig
 // A request to return information about a message.
 type GetMessageInsightsInput struct {
 
-	// A MessageId is a unique identifier for a message, and is returned when sending
+	//  A MessageId is a unique identifier for a message, and is returned when sending
 	// emails through Amazon SES.
 	//
 	// This member is required.
@@ -45,9 +46,10 @@ type GetMessageInsightsInput struct {
 // Information about a message.
 type GetMessageInsightsOutput struct {
 
-	// A list of tags, in the form of name/value pairs, that were applied to the email
-	// you sent, along with Amazon SES Auto-Tags (https://docs.aws.amazon.com/ses/latest/dg/monitor-using-event-publishing.html)
-	// .
+	//  A list of tags, in the form of name/value pairs, that were applied to the
+	// email you sent, along with Amazon SES [Auto-Tags].
+	//
+	// [Auto-Tags]: https://docs.aws.amazon.com/ses/latest/dg/monitor-using-event-publishing.html
 	EmailTags []types.MessageTag
 
 	// The from address used to send the message.
@@ -90,25 +92,25 @@ func (c *Client) addOperationGetMessageInsightsMiddlewares(stack *middleware.Sta
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -123,13 +125,16 @@ func (c *Client) addOperationGetMessageInsightsMiddlewares(stack *middleware.Sta
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpGetMessageInsightsValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetMessageInsights(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

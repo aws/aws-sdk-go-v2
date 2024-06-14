@@ -4510,6 +4510,26 @@ func (m *validateOpUpdateCluster) HandleInitialize(ctx context.Context, in middl
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateClusterSoftware struct {
+}
+
+func (*validateOpUpdateClusterSoftware) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateClusterSoftware) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateClusterSoftwareInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateClusterSoftwareInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateCodeRepository struct {
 }
 
@@ -6050,6 +6070,10 @@ func addOpUpdateClusterValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateCluster{}, middleware.After)
 }
 
+func addOpUpdateClusterSoftwareValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateClusterSoftware{}, middleware.After)
+}
+
 func addOpUpdateCodeRepositoryValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateCodeRepository{}, middleware.After)
 }
@@ -7215,6 +7239,23 @@ func validateClusterLifeCycleConfig(v *types.ClusterLifeCycleConfig) error {
 	}
 }
 
+func validateCodeEditorAppSettings(v *types.CodeEditorAppSettings) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CodeEditorAppSettings"}
+	if v.CustomImages != nil {
+		if err := validateCustomImages(v.CustomImages); err != nil {
+			invalidParams.AddNested("CustomImages", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateCodeRepositories(v []types.CodeRepository) error {
 	if v == nil {
 		return nil
@@ -7748,6 +7789,26 @@ func validateDefaultSpaceSettings(v *types.DefaultSpaceSettings) error {
 	if v.KernelGatewayAppSettings != nil {
 		if err := validateKernelGatewayAppSettings(v.KernelGatewayAppSettings); err != nil {
 			invalidParams.AddNested("KernelGatewayAppSettings", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.JupyterLabAppSettings != nil {
+		if err := validateJupyterLabAppSettings(v.JupyterLabAppSettings); err != nil {
+			invalidParams.AddNested("JupyterLabAppSettings", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.SpaceStorageSettings != nil {
+		if err := validateDefaultSpaceStorageSettings(v.SpaceStorageSettings); err != nil {
+			invalidParams.AddNested("SpaceStorageSettings", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.CustomPosixUserConfig != nil {
+		if err := validateCustomPosixUserConfig(v.CustomPosixUserConfig); err != nil {
+			invalidParams.AddNested("CustomPosixUserConfig", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.CustomFileSystemConfigs != nil {
+		if err := validateCustomFileSystemConfigs(v.CustomFileSystemConfigs); err != nil {
+			invalidParams.AddNested("CustomFileSystemConfigs", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -9719,6 +9780,11 @@ func validateModelPackageContainerDefinition(v *types.ModelPackageContainerDefin
 	if v.Image == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Image"))
 	}
+	if v.ModelDataSource != nil {
+		if err := validateModelDataSource(v.ModelDataSource); err != nil {
+			invalidParams.AddNested("ModelDataSource", err.(smithy.InvalidParamsError))
+		}
+	}
 	if v.ModelInput != nil {
 		if err := validateModelInput(v.ModelInput); err != nil {
 			invalidParams.AddNested("ModelInput", err.(smithy.InvalidParamsError))
@@ -9745,6 +9811,21 @@ func validateModelPackageContainerDefinitionList(v []types.ModelPackageContainer
 		if err := validateModelPackageContainerDefinition(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateModelPackageSecurityConfig(v *types.ModelPackageSecurityConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ModelPackageSecurityConfig"}
+	if v.KmsKeyId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("KmsKeyId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -11416,6 +11497,11 @@ func validateSourceAlgorithm(v *types.SourceAlgorithm) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "SourceAlgorithm"}
+	if v.ModelDataSource != nil {
+		if err := validateModelDataSource(v.ModelDataSource); err != nil {
+			invalidParams.AddNested("ModelDataSource", err.(smithy.InvalidParamsError))
+		}
+	}
 	if v.AlgorithmName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AlgorithmName"))
 	}
@@ -11755,6 +11841,11 @@ func validateTimeSeriesForecastingJobConfig(v *types.TimeSeriesForecastingJobCon
 	} else if v.TimeSeriesConfig != nil {
 		if err := validateTimeSeriesConfig(v.TimeSeriesConfig); err != nil {
 			invalidParams.AddNested("TimeSeriesConfig", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.CandidateGenerationConfig != nil {
+		if err := validateCandidateGenerationConfig(v.CandidateGenerationConfig); err != nil {
+			invalidParams.AddNested("CandidateGenerationConfig", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -12099,6 +12190,11 @@ func validateUserSettings(v *types.UserSettings) error {
 	if v.RSessionAppSettings != nil {
 		if err := validateRSessionAppSettings(v.RSessionAppSettings); err != nil {
 			invalidParams.AddNested("RSessionAppSettings", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.CodeEditorAppSettings != nil {
+		if err := validateCodeEditorAppSettings(v.CodeEditorAppSettings); err != nil {
+			invalidParams.AddNested("CodeEditorAppSettings", err.(smithy.InvalidParamsError))
 		}
 	}
 	if v.JupyterLabAppSettings != nil {
@@ -13647,6 +13743,11 @@ func validateOpCreateModelPackageInput(v *CreateModelPackageInput) error {
 	if v.AdditionalInferenceSpecifications != nil {
 		if err := validateAdditionalInferenceSpecifications(v.AdditionalInferenceSpecifications); err != nil {
 			invalidParams.AddNested("AdditionalInferenceSpecifications", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.SecurityConfig != nil {
+		if err := validateModelPackageSecurityConfig(v.SecurityConfig); err != nil {
+			invalidParams.AddNested("SecurityConfig", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -16960,6 +17061,21 @@ func validateOpUpdateClusterInput(v *UpdateClusterInput) error {
 	}
 }
 
+func validateOpUpdateClusterSoftwareInput(v *UpdateClusterSoftwareInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateClusterSoftwareInput"}
+	if v.ClusterName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ClusterName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpUpdateCodeRepositoryInput(v *UpdateCodeRepositoryInput) error {
 	if v == nil {
 		return nil
@@ -17315,6 +17431,11 @@ func validateOpUpdateModelPackageInput(v *UpdateModelPackageInput) error {
 	if v.AdditionalInferenceSpecificationsToAdd != nil {
 		if err := validateAdditionalInferenceSpecifications(v.AdditionalInferenceSpecificationsToAdd); err != nil {
 			invalidParams.AddNested("AdditionalInferenceSpecificationsToAdd", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.InferenceSpecification != nil {
+		if err := validateInferenceSpecification(v.InferenceSpecification); err != nil {
+			invalidParams.AddNested("InferenceSpecification", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

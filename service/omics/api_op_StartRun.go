@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/omics/document"
 	"github.com/aws/aws-sdk-go-v2/service/omics/types"
 	"github.com/aws/smithy-go/middleware"
@@ -14,10 +13,22 @@ import (
 )
 
 // Starts a workflow run. To duplicate a run, specify the run's ID and a role ARN.
-// The remaining parameters are copied from the previous run. The total number of
-// runs in your account is subject to a quota per Region. To avoid needing to
-// delete runs manually, you can set the retention mode to REMOVE . Runs with this
-// setting are deleted automatically when the run quoata is exceeded.
+// The remaining parameters are copied from the previous run.
+//
+// StartRun will not support re-run for a workflow that is shared with you.
+//
+// The total number of runs in your account is subject to a quota per Region. To
+// avoid needing to delete runs manually, you can set the retention mode to REMOVE
+// . Runs with this setting are deleted automatically when the run quoata is
+// exceeded.
+//
+// By default, the run uses STATIC storage. For STATIC storage, set the
+// storageCapacity field. You can set the storage type to DYNAMIC. You do not set
+// storageCapacity , because HealthOmics dynamically scales the storage up or down
+// as required. For more information about static and dynamic storage, see [Running workflows]in the
+// AWS HealthOmics User Guide.
+//
+// [Running workflows]: https://docs.aws.amazon.com/omics/latest/dev/Using-workflows.html
 func (c *Client) StartRun(ctx context.Context, params *StartRunInput, optFns ...func(*Options)) (*StartRunOutput, error) {
 	if params == nil {
 		params = &StartRunInput{}
@@ -70,14 +81,24 @@ type StartRunInput struct {
 	// The ID of a run to duplicate.
 	RunId *string
 
-	// A storage capacity for the run in gigabytes.
+	// A storage capacity for the run in gibibytes. This field is not required if the
+	// storage type is dynamic (the system ignores any value that you enter).
 	StorageCapacity *int32
+
+	// The run's storage type. By default, the run uses STATIC storage type, which
+	// allocates a fixed amount of storage. If you set the storage type to DYNAMIC,
+	// HealthOmics dynamically scales the storage up or down, based on file system
+	// utilization.
+	StorageType types.StorageType
 
 	// Tags for the run.
 	Tags map[string]string
 
 	// The run's workflow ID.
 	WorkflowId *string
+
+	// The ID of the workflow owner.
+	WorkflowOwnerId *string
 
 	// The run's workflow type.
 	WorkflowType types.WorkflowType
@@ -133,25 +154,25 @@ func (c *Client) addOperationStartRunMiddlewares(stack *middleware.Stack, option
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -166,6 +187,9 @@ func (c *Client) addOperationStartRunMiddlewares(stack *middleware.Stack, option
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addEndpointPrefix_opStartRunMiddleware(stack); err != nil {
 		return err
 	}
@@ -178,7 +202,7 @@ func (c *Client) addOperationStartRunMiddlewares(stack *middleware.Stack, option
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opStartRun(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

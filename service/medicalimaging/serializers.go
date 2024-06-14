@@ -1216,6 +1216,11 @@ func awsRestjson1_serializeOpDocumentStartDICOMImportJobInput(v *StartDICOMImpor
 		ok.String(*v.DataAccessRoleArn)
 	}
 
+	if v.InputOwnerAccountId != nil {
+		ok := object.Key("inputOwnerAccountId")
+		ok.String(*v.InputOwnerAccountId)
+	}
+
 	if v.InputS3Uri != nil {
 		ok := object.Key("inputS3Uri")
 		ok.String(*v.InputS3Uri)
@@ -1620,6 +1625,10 @@ func awsRestjson1_serializeDocumentSearchByAttributeValue(v types.SearchByAttrib
 		av := object.Key("DICOMPatientId")
 		av.String(uv.Value)
 
+	case *types.SearchByAttributeValueMemberDICOMSeriesInstanceUID:
+		av := object.Key("DICOMSeriesInstanceUID")
+		av.String(uv.Value)
+
 	case *types.SearchByAttributeValueMemberDICOMStudyDateAndTime:
 		av := object.Key("DICOMStudyDateAndTime")
 		if err := awsRestjson1_serializeDocumentDICOMStudyDateAndTime(&uv.Value, av); err != nil {
@@ -1633,6 +1642,10 @@ func awsRestjson1_serializeDocumentSearchByAttributeValue(v types.SearchByAttrib
 	case *types.SearchByAttributeValueMemberDICOMStudyInstanceUID:
 		av := object.Key("DICOMStudyInstanceUID")
 		av.String(uv.Value)
+
+	case *types.SearchByAttributeValueMemberUpdatedAt:
+		av := object.Key("updatedAt")
+		av.Double(smithytime.FormatEpochSeconds(uv.Value))
 
 	default:
 		return fmt.Errorf("attempted to serialize unknown member type %T for union %T", uv, v)
@@ -1664,6 +1677,13 @@ func awsRestjson1_serializeDocumentSearchCriteria(v *types.SearchCriteria, value
 	if v.Filters != nil {
 		ok := object.Key("filters")
 		if err := awsRestjson1_serializeDocumentSearchFilters(v.Filters, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Sort != nil {
+		ok := object.Key("sort")
+		if err := awsRestjson1_serializeDocumentSort(v.Sort, ok); err != nil {
 			return err
 		}
 	}
@@ -1700,6 +1720,23 @@ func awsRestjson1_serializeDocumentSearchFilters(v []types.SearchFilter, value s
 			return err
 		}
 	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentSort(v *types.Sort, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.SortField) > 0 {
+		ok := object.Key("sortField")
+		ok.String(string(v.SortField))
+	}
+
+	if len(v.SortOrder) > 0 {
+		ok := object.Key("sortOrder")
+		ok.String(string(v.SortOrder))
+	}
+
 	return nil
 }
 

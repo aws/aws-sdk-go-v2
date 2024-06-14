@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/directconnect/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -32,15 +31,16 @@ func (c *Client) DisassociateMacSecKey(ctx context.Context, params *Disassociate
 type DisassociateMacSecKeyInput struct {
 
 	// The ID of the dedicated connection (dxcon-xxxx), or the ID of the LAG
-	// (dxlag-xxxx). You can use DescribeConnections or DescribeLags to retrieve
-	// connection ID.
+	// (dxlag-xxxx).
+	//
+	// You can use DescribeConnections or DescribeLags to retrieve connection ID.
 	//
 	// This member is required.
 	ConnectionId *string
 
-	// The Amazon Resource Name (ARN) of the MAC Security (MACsec) secret key. You can
-	// use DescribeConnections to retrieve the ARN of the MAC Security (MACsec) secret
-	// key.
+	// The Amazon Resource Name (ARN) of the MAC Security (MACsec) secret key.
+	//
+	// You can use DescribeConnections to retrieve the ARN of the MAC Security (MACsec) secret key.
 	//
 	// This member is required.
 	SecretARN *string
@@ -86,25 +86,25 @@ func (c *Client) addOperationDisassociateMacSecKeyMiddlewares(stack *middleware.
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -119,13 +119,16 @@ func (c *Client) addOperationDisassociateMacSecKeyMiddlewares(stack *middleware.
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDisassociateMacSecKeyValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDisassociateMacSecKey(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

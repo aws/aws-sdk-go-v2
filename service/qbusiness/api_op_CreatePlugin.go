@@ -6,13 +6,12 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/qbusiness/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates an Amazon Q plugin.
+// Creates an Amazon Q Business plugin.
 func (c *Client) CreatePlugin(ctx context.Context, params *CreatePluginInput, optFns ...func(*Options)) (*CreatePluginOutput, error) {
 	if params == nil {
 		params = &CreatePluginInput{}
@@ -35,7 +34,7 @@ type CreatePluginInput struct {
 	// This member is required.
 	ApplicationId *string
 
-	// Authentication configuration information for an Amazon Q plugin.
+	// Authentication configuration information for an Amazon Q Business plugin.
 	//
 	// This member is required.
 	AuthConfiguration types.PluginAuthConfiguration
@@ -45,18 +44,20 @@ type CreatePluginInput struct {
 	// This member is required.
 	DisplayName *string
 
-	// The source URL used for plugin configuration.
-	//
-	// This member is required.
-	ServerUrl *string
-
 	// The type of plugin you want to create.
 	//
 	// This member is required.
 	Type types.PluginType
 
-	// A token that you provide to identify the request to create your Amazon Q plugin.
+	// A token that you provide to identify the request to create your Amazon Q
+	// Business plugin.
 	ClientToken *string
+
+	// Contains configuration for a custom plugin.
+	CustomPluginConfiguration *types.CustomPluginConfiguration
+
+	// The source URL used for plugin configuration.
+	ServerUrl *string
 
 	// A list of key-value pairs that identify or categorize the data source
 	// connector. You can also use tags to help control access to the data source
@@ -68,6 +69,9 @@ type CreatePluginInput struct {
 }
 
 type CreatePluginOutput struct {
+
+	// The current status of a plugin. A plugin is modified asynchronously.
+	BuildStatus types.PluginBuildStatus
 
 	// The Amazon Resource Name (ARN) of a plugin.
 	PluginArn *string
@@ -103,25 +107,25 @@ func (c *Client) addOperationCreatePluginMiddlewares(stack *middleware.Stack, op
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -136,6 +140,9 @@ func (c *Client) addOperationCreatePluginMiddlewares(stack *middleware.Stack, op
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opCreatePluginMiddleware(stack, options); err != nil {
 		return err
 	}
@@ -145,7 +152,7 @@ func (c *Client) addOperationCreatePluginMiddlewares(stack *middleware.Stack, op
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreatePlugin(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

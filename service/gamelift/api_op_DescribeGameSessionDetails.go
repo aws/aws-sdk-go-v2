@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/gamelift/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -15,23 +14,37 @@ import (
 // Retrieves additional game session properties, including the game session
 // protection policy in force, a set of one or more game sessions in a specific
 // fleet location. You can optionally filter the results by current game session
-// status. This operation can be used in the following ways:
+// status.
+//
+// This operation can be used in the following ways:
+//
 //   - To retrieve details for all game sessions that are currently running on all
 //     locations in a fleet, provide a fleet or alias ID, with an optional status
 //     filter. This approach returns details from the fleet's home Region and all
 //     remote locations.
+//
 //   - To retrieve details for all game sessions that are currently running on a
 //     specific fleet location, provide a fleet or alias ID and a location name, with
 //     optional status filter. The location can be the fleet's home Region or any
 //     remote location.
+//
 //   - To retrieve details for a specific game session, provide the game session
 //     ID. This approach looks for the game session ID in all fleets that reside in the
 //     Amazon Web Services Region defined in the request.
 //
 // Use the pagination parameters to retrieve results as a set of sequential pages.
+//
 // If successful, a GameSessionDetail object is returned for each game session
-// that matches the request. Learn more Find a game session (https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-client-api.html#gamelift-sdk-client-api-find)
-// All APIs by task (https://docs.aws.amazon.com/gamelift/latest/developerguide/reference-awssdk.html#reference-awssdk-resources-fleets)
+// that matches the request.
+//
+// # Learn more
+//
+// [Find a game session]
+//
+// [All APIs by task]
+//
+// [Find a game session]: https://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-sdk-client-api.html#gamelift-sdk-client-api-find
+// [All APIs by task]: https://docs.aws.amazon.com/gamelift/latest/developerguide/reference-awssdk.html#reference-awssdk-resources-fleets
 func (c *Client) DescribeGameSessionDetails(ctx context.Context, params *DescribeGameSessionDetailsInput, optFns ...func(*Options)) (*DescribeGameSessionDetailsOutput, error) {
 	if params == nil {
 		params = &DescribeGameSessionDetailsInput{}
@@ -120,25 +133,25 @@ func (c *Client) addOperationDescribeGameSessionDetailsMiddlewares(stack *middle
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -153,10 +166,13 @@ func (c *Client) addOperationDescribeGameSessionDetailsMiddlewares(stack *middle
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeGameSessionDetails(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

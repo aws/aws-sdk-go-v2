@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/managedblockchain/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -14,8 +13,9 @@ import (
 
 // Casts a vote for a specified ProposalId on behalf of a member. The member to
 // vote as, specified by VoterMemberId , must be in the same Amazon Web Services
-// account as the principal that calls the action. Applies only to Hyperledger
-// Fabric.
+// account as the principal that calls the action.
+//
+// Applies only to Hyperledger Fabric.
 func (c *Client) VoteOnProposal(ctx context.Context, params *VoteOnProposalInput, optFns ...func(*Options)) (*VoteOnProposalOutput, error) {
 	if params == nil {
 		params = &VoteOnProposalInput{}
@@ -33,17 +33,17 @@ func (c *Client) VoteOnProposal(ctx context.Context, params *VoteOnProposalInput
 
 type VoteOnProposalInput struct {
 
-	// The unique identifier of the network.
+	//  The unique identifier of the network.
 	//
 	// This member is required.
 	NetworkId *string
 
-	// The unique identifier of the proposal.
+	//  The unique identifier of the proposal.
 	//
 	// This member is required.
 	ProposalId *string
 
-	// The value of the vote.
+	//  The value of the vote.
 	//
 	// This member is required.
 	Vote types.VoteValue
@@ -85,25 +85,25 @@ func (c *Client) addOperationVoteOnProposalMiddlewares(stack *middleware.Stack, 
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -118,13 +118,16 @@ func (c *Client) addOperationVoteOnProposalMiddlewares(stack *middleware.Stack, 
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpVoteOnProposalValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opVoteOnProposal(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

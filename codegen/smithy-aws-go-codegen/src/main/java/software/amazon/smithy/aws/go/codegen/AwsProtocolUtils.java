@@ -38,7 +38,7 @@ import software.amazon.smithy.utils.SetUtils;
 /**
  * Utility methods for generating AWS protocols.
  */
-final class AwsProtocolUtils {
+public final class AwsProtocolUtils {
     private AwsProtocolUtils() {
     }
 
@@ -47,7 +47,7 @@ final class AwsProtocolUtils {
      *
      * @param context The generation context.
      */
-    static void generateHttpProtocolTests(GenerationContext context) {
+    public static void generateHttpProtocolTests(GenerationContext context) {
         Set<HttpProtocolUnitTestGenerator.ConfigValue> configValues = new TreeSet<>(SetUtils.of(
                 HttpProtocolUnitTestGenerator.ConfigValue.builder()
                         .name(AddAwsConfigFields.REGION_CONFIG_NAME)
@@ -107,6 +107,17 @@ final class AwsProtocolUtils {
 
         // skip request compression tests, not yet implemented in the SDK
         Set<HttpProtocolUnitTestGenerator.SkipTest> inputSkipTests = new TreeSet<>(SetUtils.of(
+                // CBOR default value serialization (SHOULD)
+                HttpProtocolUnitTestGenerator.SkipTest.builder()
+                        .service(ShapeId.from("smithy.protocoltests.rpcv2Cbor#RpcV2Protocol"))
+                        .operation(ShapeId.from("smithy.protocoltests.rpcv2Cbor#OperationWithDefaults"))
+                        .addTestName("RpcV2CborClientPopulatesDefaultValuesInInput")
+                        .addTestName("RpcV2CborClientSkipsTopLevelDefaultValuesInInput")
+                        .addTestName("RpcV2CborClientUsesExplicitlyProvidedMemberValuesOverDefaults")
+                        .addTestName("RpcV2CborClientUsesExplicitlyProvidedValuesInTopLevel")
+                        .addTestName("RpcV2CborClientIgnoresNonTopLevelDefaultsOnMembersWithClientOptional")
+                        .build(),
+
                 HttpProtocolUnitTestGenerator.SkipTest.builder()
                         .service(ShapeId.from("aws.protocoltests.restxml#RestXml"))
                         .operation(ShapeId.from("aws.protocoltests.restxml#HttpPayloadWithUnion"))
@@ -121,6 +132,7 @@ final class AwsProtocolUtils {
                         .addTestName("AwsJson10ClientPopulatesDefaultValuesInInput")
                         .addTestName("AwsJson10ClientSkipsTopLevelDefaultValuesInInput")
                         .addTestName("AwsJson10ClientUsesExplicitlyProvidedMemberValuesOverDefaults")
+                        .addTestName("AwsJson10ClientUsesExplicitlyProvidedValuesInTopLevel")
                         .build(),
                 HttpProtocolUnitTestGenerator.SkipTest.builder()
                         .service(ShapeId.from("aws.protocoltests.json10#JsonRpc10"))
@@ -130,6 +142,14 @@ final class AwsProtocolUtils {
                 ));
 
         Set<HttpProtocolUnitTestGenerator.SkipTest> outputSkipTests = new TreeSet<>(SetUtils.of(
+                // CBOR default value deserialization (SHOULD)
+                HttpProtocolUnitTestGenerator.SkipTest.builder()
+                        .service(ShapeId.from("smithy.protocoltests.rpcv2Cbor#RpcV2Protocol"))
+                        .operation(ShapeId.from("smithy.protocoltests.rpcv2Cbor#OperationWithDefaults"))
+                        .addTestName("RpcV2CborClientPopulatesDefaultsValuesWhenMissingInResponse")
+                        .addTestName("RpcV2CborClientIgnoresDefaultValuesIfMemberValuesArePresentInResponse")
+                        .build(),
+
                 // REST-JSON optional (SHOULD) test cases
                 HttpProtocolUnitTestGenerator.SkipTest.builder()
                         .service(ShapeId.from("aws.protocoltests.restjson#RestJson"))
@@ -194,30 +214,6 @@ final class AwsProtocolUtils {
                         .settings(context.getSettings())
                         .addClientConfigValues(configValues)
         ).generateProtocolTests();
-    }
-
-    public static void writeJsonErrorMessageCodeDeserializer(GenerationContext context) {
-        GoWriter writer = context.getWriter().get();
-        // The error code could be in the headers, even though for this protocol it should be in the body.
-        writer.write("headerCode := response.Header.Get(\"X-Amzn-ErrorType\")");
-        writer.write("if len(headerCode) != 0 { errorCode = restjson.SanitizeErrorCode(headerCode) }");
-        writer.write("");
-
-        initializeJsonDecoder(writer, "errorBody");
-        writer.addUseImports(AwsGoDependency.AWS_REST_JSON_PROTOCOL);
-        // This will check various body locations for the error code and error message
-        writer.write("jsonCode, message, err := restjson.GetErrorInfo(decoder)");
-        handleDecodeError(writer);
-
-        writer.addUseImports(SmithyGoDependency.IO);
-        // Reset the body in case it needs to be used for anything else.
-        writer.write("errorBody.Seek(0, io.SeekStart)");
-
-        // Only set the values if something was found so that we keep the default values.
-        // The header version of the error wins out over either of the body fields.
-        writer.write("if len(headerCode) == 0 && len(jsonCode) != 0 { errorCode = restjson.SanitizeErrorCode(jsonCode) }");
-        writer.write("if len(message) != 0 { errorMessage = message }");
-        writer.write("");
     }
 
     public static void initializeJsonDecoder(GoWriter writer, String bodyLocation) {

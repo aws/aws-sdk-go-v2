@@ -6,13 +6,12 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/qbusiness/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists one or more Amazon Q conversations.
+// Lists one or more Amazon Q Business conversations.
 func (c *Client) ListConversations(ctx context.Context, params *ListConversationsInput, optFns ...func(*Options)) (*ListConversationsOutput, error) {
 	if params == nil {
 		params = &ListConversationsInput{}
@@ -30,23 +29,23 @@ func (c *Client) ListConversations(ctx context.Context, params *ListConversation
 
 type ListConversationsInput struct {
 
-	// The identifier of the Amazon Q application.
+	// The identifier of the Amazon Q Business application.
 	//
 	// This member is required.
 	ApplicationId *string
 
-	// The identifier of the user involved in the Amazon Q web experience conversation.
-	//
-	// This member is required.
-	UserId *string
-
-	// The maximum number of Amazon Q conversations to return.
+	// The maximum number of Amazon Q Business conversations to return.
 	MaxResults *int32
 
 	// If the maxResults response was incomplete because there is more data to
-	// retrieve, Amazon Q returns a pagination token in the response. You can use this
-	// pagination token to retrieve the next set of Amazon Q conversations.
+	// retrieve, Amazon Q Business returns a pagination token in the response. You can
+	// use this pagination token to retrieve the next set of Amazon Q Business
+	// conversations.
 	NextToken *string
+
+	// The identifier of the user involved in the Amazon Q Business web experience
+	// conversation.
+	UserId *string
 
 	noSmithyDocumentSerde
 }
@@ -54,11 +53,11 @@ type ListConversationsInput struct {
 type ListConversationsOutput struct {
 
 	// An array of summary information on the configuration of one or more Amazon Q
-	// web experiences.
+	// Business web experiences.
 	Conversations []types.Conversation
 
-	// If the response is truncated, Amazon Q returns this token, which you can use in
-	// a later request to list the next set of messages.
+	// If the response is truncated, Amazon Q Business returns this token, which you
+	// can use in a later request to list the next set of messages.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -89,25 +88,25 @@ func (c *Client) addOperationListConversationsMiddlewares(stack *middleware.Stac
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -122,13 +121,16 @@ func (c *Client) addOperationListConversationsMiddlewares(stack *middleware.Stac
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpListConversationsValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListConversations(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -156,7 +158,7 @@ var _ ListConversationsAPIClient = (*Client)(nil)
 
 // ListConversationsPaginatorOptions is the paginator options for ListConversations
 type ListConversationsPaginatorOptions struct {
-	// The maximum number of Amazon Q conversations to return.
+	// The maximum number of Amazon Q Business conversations to return.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

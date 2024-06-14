@@ -6,14 +6,15 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Update an Amazon SageMaker Model Card. You cannot update both model card
-// content and model card status in a single call.
+// Update an Amazon SageMaker Model Card.
+//
+// You cannot update both model card content and model card status in a single
+// call.
 func (c *Client) UpdateModelCard(ctx context.Context, params *UpdateModelCardInput, optFns ...func(*Options)) (*UpdateModelCardOutput, error) {
 	if params == nil {
 		params = &UpdateModelCardInput{}
@@ -36,16 +37,23 @@ type UpdateModelCardInput struct {
 	// This member is required.
 	ModelCardName *string
 
-	// The updated model card content. Content must be in model card JSON schema (https://docs.aws.amazon.com/sagemaker/latest/dg/model-cards.html#model-cards-json-schema)
-	// and provided as a string. When updating model card content, be sure to include
-	// the full content and not just updated content.
+	// The updated model card content. Content must be in [model card JSON schema] and provided as a string.
+	//
+	// When updating model card content, be sure to include the full content and not
+	// just updated content.
+	//
+	// [model card JSON schema]: https://docs.aws.amazon.com/sagemaker/latest/dg/model-cards.html#model-cards-json-schema
 	Content *string
 
 	// The approval status of the model card within your organization. Different
 	// organizations might have different criteria for model card review and approval.
+	//
 	//   - Draft : The model card is a work in progress.
+	//
 	//   - PendingReview : The model card is pending review.
+	//
 	//   - Approved : The model card is approved.
+	//
 	//   - Archived : The model card is archived. No more updates should be made to the
 	//   model card, but it can still be exported.
 	ModelCardStatus types.ModelCardStatus
@@ -88,25 +96,25 @@ func (c *Client) addOperationUpdateModelCardMiddlewares(stack *middleware.Stack,
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -121,13 +129,16 @@ func (c *Client) addOperationUpdateModelCardMiddlewares(stack *middleware.Stack,
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpUpdateModelCardValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateModelCard(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

@@ -6,14 +6,15 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/iotfleetwise/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists information about created campaigns. This API operation uses pagination.
-// Specify the nextToken parameter in the request to return more results.
+//	Lists information about created campaigns.
+//
+// This API operation uses pagination. Specify the nextToken parameter in the
+// request to return more results.
 func (c *Client) ListCampaigns(ctx context.Context, params *ListCampaignsInput, optFns ...func(*Options)) (*ListCampaignsOutput, error) {
 	if params == nil {
 		params = &ListCampaignsInput{}
@@ -31,14 +32,16 @@ func (c *Client) ListCampaigns(ctx context.Context, params *ListCampaignsInput, 
 
 type ListCampaignsInput struct {
 
-	// The maximum number of items to return, between 1 and 100, inclusive.
+	//  The maximum number of items to return, between 1 and 100, inclusive.
 	MaxResults *int32
 
-	// A pagination token for the next set of results. If the results of a search are
-	// large, only a portion of the results are returned, and a nextToken pagination
-	// token is returned in the response. To retrieve the next set of results, reissue
-	// the search request and include the returned token. When all results have been
-	// returned, the response does not contain a pagination token value.
+	// A pagination token for the next set of results.
+	//
+	// If the results of a search are large, only a portion of the results are
+	// returned, and a nextToken pagination token is returned in the response. To
+	// retrieve the next set of results, reissue the search request and include the
+	// returned token. When all results have been returned, the response does not
+	// contain a pagination token value.
 	NextToken *string
 
 	// Optional parameter to filter the results by the status of each created campaign
@@ -51,10 +54,10 @@ type ListCampaignsInput struct {
 
 type ListCampaignsOutput struct {
 
-	// A summary of information about each campaign.
+	//  A summary of information about each campaign.
 	CampaignSummaries []types.CampaignSummary
 
-	// The token to retrieve the next set of results, or null if there are no more
+	//  The token to retrieve the next set of results, or null if there are no more
 	// results.
 	NextToken *string
 
@@ -86,25 +89,25 @@ func (c *Client) addOperationListCampaignsMiddlewares(stack *middleware.Stack, o
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -119,10 +122,13 @@ func (c *Client) addOperationListCampaignsMiddlewares(stack *middleware.Stack, o
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListCampaigns(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -149,7 +155,7 @@ var _ ListCampaignsAPIClient = (*Client)(nil)
 
 // ListCampaignsPaginatorOptions is the paginator options for ListCampaigns
 type ListCampaignsPaginatorOptions struct {
-	// The maximum number of items to return, between 1 and 100, inclusive.
+	//  The maximum number of items to return, between 1 and 100, inclusive.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

@@ -2,6 +2,27 @@
 
 package types
 
+type CertificateField string
+
+// Enum values for CertificateField
+const (
+	CertificateFieldX509Subject CertificateField = "x509Subject"
+	CertificateFieldX509Issuer  CertificateField = "x509Issuer"
+	CertificateFieldX509SAN     CertificateField = "x509SAN"
+)
+
+// Values returns all known values for CertificateField. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (CertificateField) Values() []CertificateField {
+	return []CertificateField{
+		"x509Subject",
+		"x509Issuer",
+		"x509SAN",
+	}
+}
+
 type NotificationChannel string
 
 // Enum values for NotificationChannel
@@ -10,8 +31,9 @@ const (
 )
 
 // Values returns all known values for NotificationChannel. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (NotificationChannel) Values() []NotificationChannel {
 	return []NotificationChannel{
 		"ALL",
@@ -27,8 +49,9 @@ const (
 )
 
 // Values returns all known values for NotificationEvent. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (NotificationEvent) Values() []NotificationEvent {
 	return []NotificationEvent{
 		"CA_CERTIFICATE_EXPIRY",
@@ -46,8 +69,9 @@ const (
 )
 
 // Values returns all known values for TrustAnchorType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (TrustAnchorType) Values() []TrustAnchorType {
 	return []TrustAnchorType{
 		"AWS_ACM_PCA",

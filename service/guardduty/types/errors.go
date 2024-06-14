@@ -118,3 +118,31 @@ func (e *InternalServerErrorException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *InternalServerErrorException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
+
+// The requested resource can't be found.
+type ResourceNotFoundException struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	Type *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *ResourceNotFoundException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *ResourceNotFoundException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *ResourceNotFoundException) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "ResourceNotFoundException"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }

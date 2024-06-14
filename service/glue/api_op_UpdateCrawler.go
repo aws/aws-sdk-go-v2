@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/glue/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -42,9 +41,9 @@ type UpdateCrawlerInput struct {
 	Classifiers []string
 
 	// Crawler configuration information. This versioned JSON string allows users to
-	// specify aspects of a crawler's behavior. For more information, see Setting
-	// crawler configuration options (https://docs.aws.amazon.com/glue/latest/dg/crawler-configuration.html)
-	// .
+	// specify aspects of a crawler's behavior. For more information, see [Setting crawler configuration options].
+	//
+	// [Setting crawler configuration options]: https://docs.aws.amazon.com/glue/latest/dg/crawler-configuration.html
 	Configuration *string
 
 	// The name of the SecurityConfiguration structure to be used by this crawler.
@@ -71,10 +70,10 @@ type UpdateCrawlerInput struct {
 	// new crawler to access customer resources.
 	Role *string
 
-	// A cron expression used to specify the schedule (see Time-Based Schedules for
-	// Jobs and Crawlers (https://docs.aws.amazon.com/glue/latest/dg/monitor-data-warehouse-schedule.html)
-	// . For example, to run something every day at 12:15 UTC, you would specify:
-	// cron(15 12 * * ? *) .
+	// A cron expression used to specify the schedule (see [Time-Based Schedules for Jobs and Crawlers]. For example, to run
+	// something every day at 12:15 UTC, you would specify: cron(15 12 * * ? *) .
+	//
+	// [Time-Based Schedules for Jobs and Crawlers]: https://docs.aws.amazon.com/glue/latest/dg/monitor-data-warehouse-schedule.html
 	Schedule *string
 
 	// The policy for the crawler's update and deletion behavior.
@@ -118,25 +117,25 @@ func (c *Client) addOperationUpdateCrawlerMiddlewares(stack *middleware.Stack, o
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -151,13 +150,16 @@ func (c *Client) addOperationUpdateCrawlerMiddlewares(stack *middleware.Stack, o
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpUpdateCrawlerValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateCrawler(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

@@ -6,19 +6,23 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/iotsitewise/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Defines a job to ingest data to IoT SiteWise from Amazon S3. For more
-// information, see Create a bulk import job (CLI) (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/CreateBulkImportJob.html)
-// in the Amazon Simple Storage Service User Guide. Before you create a bulk import
-// job, you must enable IoT SiteWise warm tier or IoT SiteWise cold tier. For more
-// information about how to configure storage settings, see PutStorageConfiguration (https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_PutStorageConfiguration.html)
-// . Bulk import is designed to store historical data to IoT SiteWise. It does not
+// information, see [Create a bulk import job (CLI)]in the Amazon Simple Storage Service User Guide.
+//
+// Before you create a bulk import job, you must enable IoT SiteWise warm tier or
+// IoT SiteWise cold tier. For more information about how to configure storage
+// settings, see [PutStorageConfiguration].
+//
+// Bulk import is designed to store historical data to IoT SiteWise. It does not
 // trigger computations or notifications on IoT SiteWise warm or cold tier storage.
+//
+// [Create a bulk import job (CLI)]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/CreateBulkImportJob.html
+// [PutStorageConfiguration]: https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_PutStorageConfiguration.html
 func (c *Client) CreateBulkImportJob(ctx context.Context, params *CreateBulkImportJobInput, optFns ...func(*Options)) (*CreateBulkImportJobOutput, error) {
 	if params == nil {
 		params = &CreateBulkImportJobInput{}
@@ -58,8 +62,9 @@ type CreateBulkImportJobInput struct {
 	// This member is required.
 	JobName *string
 
-	// The ARN (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
-	// of the IAM role that allows IoT SiteWise to read Amazon S3 data.
+	// The [ARN] of the IAM role that allows IoT SiteWise to read Amazon S3 data.
+	//
+	// [ARN]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
 	//
 	// This member is required.
 	JobRoleArn *string
@@ -89,15 +94,21 @@ type CreateBulkImportJobOutput struct {
 	JobName *string
 
 	// The status of the bulk import job can be one of following values:
+	//
 	//   - PENDING – IoT SiteWise is waiting for the current bulk import job to finish.
+	//
 	//   - CANCELLED – The bulk import job has been canceled.
+	//
 	//   - RUNNING – IoT SiteWise is processing your request to import your data from
 	//   Amazon S3.
+	//
 	//   - COMPLETED – IoT SiteWise successfully completed your request to import data
 	//   from Amazon S3.
+	//
 	//   - FAILED – IoT SiteWise couldn't process your request to import data from
 	//   Amazon S3. You can use logs saved in the specified error report location in
 	//   Amazon S3 to troubleshoot issues.
+	//
 	//   - COMPLETED_WITH_FAILURES – IoT SiteWise completed your request to import data
 	//   from Amazon S3 with errors. You can use logs saved in the specified error report
 	//   location in Amazon S3 to troubleshoot issues.
@@ -133,25 +144,25 @@ func (c *Client) addOperationCreateBulkImportJobMiddlewares(stack *middleware.St
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -166,6 +177,9 @@ func (c *Client) addOperationCreateBulkImportJobMiddlewares(stack *middleware.St
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addEndpointPrefix_opCreateBulkImportJobMiddleware(stack); err != nil {
 		return err
 	}
@@ -175,7 +189,7 @@ func (c *Client) addOperationCreateBulkImportJobMiddlewares(stack *middleware.St
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateBulkImportJob(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

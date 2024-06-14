@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/clouddirectory/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -14,9 +13,9 @@ import (
 
 // Deletes an object and its associated attributes. Only objects with no children
 // and no parents can be deleted. The maximum number of attributes that can be
-// deleted during an object deletion is 30. For more information, see Amazon Cloud
-// Directory Limits (https://docs.aws.amazon.com/clouddirectory/latest/developerguide/limits.html)
-// .
+// deleted during an object deletion is 30. For more information, see [Amazon Cloud Directory Limits].
+//
+// [Amazon Cloud Directory Limits]: https://docs.aws.amazon.com/clouddirectory/latest/developerguide/limits.html
 func (c *Client) DeleteObject(ctx context.Context, params *DeleteObjectInput, optFns ...func(*Options)) (*DeleteObjectOutput, error) {
 	if params == nil {
 		params = &DeleteObjectInput{}
@@ -34,8 +33,8 @@ func (c *Client) DeleteObject(ctx context.Context, params *DeleteObjectInput, op
 
 type DeleteObjectInput struct {
 
-	// The Amazon Resource Name (ARN) that is associated with the Directory where the
-	// object resides. For more information, see arns .
+	// The Amazon Resource Name (ARN) that is associated with the Directory where the object
+	// resides. For more information, see arns.
 	//
 	// This member is required.
 	DirectoryArn *string
@@ -77,25 +76,25 @@ func (c *Client) addOperationDeleteObjectMiddlewares(stack *middleware.Stack, op
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -110,13 +109,16 @@ func (c *Client) addOperationDeleteObjectMiddlewares(stack *middleware.Stack, op
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDeleteObjectValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteObject(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

@@ -10,16 +10,19 @@ const (
 	ResourceTypeAwsLogsLoggroup                   ResourceType = "AWS::Logs::LogGroup"
 	ResourceTypeAwsXrayTrace                      ResourceType = "AWS::XRay::Trace"
 	ResourceTypeAwsApplicationinsightsApplication ResourceType = "AWS::ApplicationInsights::Application"
+	ResourceTypeAwsInternetmonitorMonitor         ResourceType = "AWS::InternetMonitor::Monitor"
 )
 
 // Values returns all known values for ResourceType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ResourceType) Values() []ResourceType {
 	return []ResourceType{
 		"AWS::CloudWatch::Metric",
 		"AWS::Logs::LogGroup",
 		"AWS::XRay::Trace",
 		"AWS::ApplicationInsights::Application",
+		"AWS::InternetMonitor::Monitor",
 	}
 }

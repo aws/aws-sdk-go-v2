@@ -6,15 +6,17 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/codeartifact/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns a list of DomainSummary (https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_PackageVersionDescription.html)
-// objects for all domains owned by the Amazon Web Services account that makes this
-// call. Each returned DomainSummary object contains information about a domain.
+//	Returns a list of [DomainSummary] objects for all domains owned by the Amazon Web Services
+//
+// account that makes this call. Each returned DomainSummary object contains
+// information about a domain.
+//
+// [DomainSummary]: https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_PackageVersionDescription.html
 func (c *Client) ListDomains(ctx context.Context, params *ListDomainsInput, optFns ...func(*Options)) (*ListDomainsOutput, error) {
 	if params == nil {
 		params = &ListDomainsInput{}
@@ -32,10 +34,10 @@ func (c *Client) ListDomains(ctx context.Context, params *ListDomainsInput, optF
 
 type ListDomainsInput struct {
 
-	// The maximum number of results to return per page.
+	//  The maximum number of results to return per page.
 	MaxResults *int32
 
-	// The token for the next set of results. Use the value returned in the previous
+	//  The token for the next set of results. Use the value returned in the previous
 	// response in the next request to retrieve the next set of results.
 	NextToken *string
 
@@ -44,11 +46,12 @@ type ListDomainsInput struct {
 
 type ListDomainsOutput struct {
 
-	// The returned list of DomainSummary (https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_DomainSummary.html)
-	// objects.
+	//  The returned list of [DomainSummary] objects.
+	//
+	// [DomainSummary]: https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_DomainSummary.html
 	Domains []types.DomainSummary
 
-	// The token for the next set of results. Use the value returned in the previous
+	//  The token for the next set of results. Use the value returned in the previous
 	// response in the next request to retrieve the next set of results.
 	NextToken *string
 
@@ -80,25 +83,25 @@ func (c *Client) addOperationListDomainsMiddlewares(stack *middleware.Stack, opt
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -113,10 +116,13 @@ func (c *Client) addOperationListDomainsMiddlewares(stack *middleware.Stack, opt
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListDomains(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -143,7 +149,7 @@ var _ ListDomainsAPIClient = (*Client)(nil)
 
 // ListDomainsPaginatorOptions is the paginator options for ListDomains
 type ListDomainsPaginatorOptions struct {
-	// The maximum number of results to return per page.
+	//  The maximum number of results to return per page.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

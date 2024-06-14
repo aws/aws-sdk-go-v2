@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/sagemakerfeaturestoreruntime/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -20,12 +19,16 @@ import (
 // the OfflineStore . The deleted record marker is a record with the same
 // RecordIdentifer as the original, but with is_deleted value set to True ,
 // EventTime set to the delete input EventTime , and other feature values set to
-// null . Note that the EventTime specified in DeleteRecord should be set later
-// than the EventTime of the existing record in the OnlineStore for that
-// RecordIdentifer . If it is not, the deletion does not occur:
+// null .
+//
+// Note that the EventTime specified in DeleteRecord should be set later than the
+// EventTime of the existing record in the OnlineStore for that RecordIdentifer .
+// If it is not, the deletion does not occur:
+//
 //   - For SoftDelete , the existing (not deleted) record remains in the
 //     OnlineStore , though the delete record marker is still written to the
 //     OfflineStore .
+//
 //   - HardDelete returns EventTime : 400 ValidationException to indicate that the
 //     delete operation failed. No delete record marker is written to the
 //     OfflineStore .
@@ -34,9 +37,9 @@ import (
 // appended to the OfflineStore . If you have the Iceberg table format enabled for
 // your OfflineStore , you can remove all history of a record from the OfflineStore
 // using Amazon Athena or Apache Spark. For information on how to hard delete a
-// record from the OfflineStore with the Iceberg table format enabled, see Delete
-// records from the offline store (https://docs.aws.amazon.com/sagemaker/latest/dg/feature-store-delete-records-offline-store.html#feature-store-delete-records-offline-store)
-// .
+// record from the OfflineStore with the Iceberg table format enabled, see [Delete records from the offline store].
+//
+// [Delete records from the offline store]: https://docs.aws.amazon.com/sagemaker/latest/dg/feature-store-delete-records-offline-store.html#feature-store-delete-records-offline-store
 func (c *Client) DeleteRecord(ctx context.Context, params *DeleteRecordInput, optFns ...func(*Options)) (*DeleteRecordOutput, error) {
 	if params == nil {
 		params = &DeleteRecordInput{}
@@ -113,25 +116,25 @@ func (c *Client) addOperationDeleteRecordMiddlewares(stack *middleware.Stack, op
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -146,13 +149,16 @@ func (c *Client) addOperationDeleteRecordMiddlewares(stack *middleware.Stack, op
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDeleteRecordValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteRecord(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

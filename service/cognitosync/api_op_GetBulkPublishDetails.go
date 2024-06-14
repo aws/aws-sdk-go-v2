@@ -6,16 +6,16 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/cognitosync/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
-// Get the status of the last BulkPublish operation for an identity pool.This API
-// can only be called with developer credentials. You cannot call this API with the
-// temporary user credentials provided by Cognito Identity.
+// Get the status of the last BulkPublish operation for an identity pool.
+//
+// This API can only be called with developer credentials. You cannot call this
+// API with the temporary user credentials provided by Cognito Identity.
 func (c *Client) GetBulkPublishDetails(ctx context.Context, params *GetBulkPublishDetailsInput, optFns ...func(*Options)) (*GetBulkPublishDetailsOutput, error) {
 	if params == nil {
 		params = &GetBulkPublishDetailsInput{}
@@ -54,11 +54,17 @@ type GetBulkPublishDetailsOutput struct {
 	// The date/time at which the last bulk publish was initiated.
 	BulkPublishStartTime *time.Time
 
-	// Status of the last bulk publish operation, valid values are: NOT_STARTED - No
-	// bulk publish has been requested for this identity pool IN_PROGRESS - Data is
-	// being published to the configured stream SUCCEEDED - All data for the identity
-	// pool has been published to the configured stream FAILED - Some portion of the
-	// data has failed to publish, check FailureMessage for the cause.
+	// Status of the last bulk publish operation, valid values are:
+	//
+	// NOT_STARTED - No bulk publish has been requested for this identity pool
+	//
+	// IN_PROGRESS - Data is being published to the configured stream
+	//
+	// SUCCEEDED - All data for the identity pool has been published to the configured
+	// stream
+	//
+	// FAILED - Some portion of the data has failed to publish, check FailureMessage
+	// for the cause.
 	BulkPublishStatus types.BulkPublishStatus
 
 	// If BulkPublishStatus is FAILED this field will contain the error message that
@@ -98,25 +104,25 @@ func (c *Client) addOperationGetBulkPublishDetailsMiddlewares(stack *middleware.
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -131,13 +137,16 @@ func (c *Client) addOperationGetBulkPublishDetailsMiddlewares(stack *middleware.
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpGetBulkPublishDetailsValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetBulkPublishDetails(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

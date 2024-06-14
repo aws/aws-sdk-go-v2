@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/lightsail/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -31,8 +30,10 @@ func (c *Client) GetRelationalDatabaseLogEvents(ctx context.Context, params *Get
 
 type GetRelationalDatabaseLogEventsInput struct {
 
-	// The name of the log stream. Use the get relational database log streams
-	// operation to get a list of available log streams.
+	// The name of the log stream.
+	//
+	// Use the get relational database log streams operation to get a list of
+	// available log streams.
 	//
 	// This member is required.
 	LogStreamName *string
@@ -42,14 +43,20 @@ type GetRelationalDatabaseLogEventsInput struct {
 	// This member is required.
 	RelationalDatabaseName *string
 
-	// The end of the time interval from which to get log events. Constraints:
+	// The end of the time interval from which to get log events.
+	//
+	// Constraints:
+	//
 	//   - Specified in Coordinated Universal Time (UTC).
-	//   - Specified in the Unix time format. For example, if you wish to use an end
-	//   time of October 1, 2018, at 8 PM UTC, then you input 1538424000 as the end
-	//   time.
+	//
+	//   - Specified in the Unix time format.
+	//
+	// For example, if you wish to use an end time of October 1, 2018, at 8 PM UTC,
+	//   then you input 1538424000 as the end time.
 	EndTime *time.Time
 
 	// The token to advance to the next or previous page of results from your request.
+	//
 	// To get a page token, perform an initial GetRelationalDatabaseLogEvents request.
 	// If your results are paginated, the response will return a next forward token
 	// and/or next backward token that you can specify as the page token in a
@@ -58,15 +65,21 @@ type GetRelationalDatabaseLogEventsInput struct {
 
 	// Parameter to specify if the log should start from head or tail. If true is
 	// specified, the log event starts from the head of the log. If false is
-	// specified, the log event starts from the tail of the log. For PostgreSQL, the
-	// default value of false is the only option available.
+	// specified, the log event starts from the tail of the log.
+	//
+	// For PostgreSQL, the default value of false is the only option available.
 	StartFromHead *bool
 
-	// The start of the time interval from which to get log events. Constraints:
+	// The start of the time interval from which to get log events.
+	//
+	// Constraints:
+	//
 	//   - Specified in Coordinated Universal Time (UTC).
-	//   - Specified in the Unix time format. For example, if you wish to use a start
-	//   time of October 1, 2018, at 8 PM UTC, then you input 1538424000 as the start
-	//   time.
+	//
+	//   - Specified in the Unix time format.
+	//
+	// For example, if you wish to use a start time of October 1, 2018, at 8 PM UTC,
+	//   then you input 1538424000 as the start time.
 	StartTime *time.Time
 
 	noSmithyDocumentSerde
@@ -114,25 +127,25 @@ func (c *Client) addOperationGetRelationalDatabaseLogEventsMiddlewares(stack *mi
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -147,13 +160,16 @@ func (c *Client) addOperationGetRelationalDatabaseLogEventsMiddlewares(stack *mi
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpGetRelationalDatabaseLogEventsValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetRelationalDatabaseLogEvents(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

@@ -6,16 +6,18 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a new custom verification email template. For more information about
-// custom verification email templates, see Using Custom Verification Email
-// Templates (https://docs.aws.amazon.com/ses/latest/dg/creating-identities.html#send-email-verify-address-custom)
-// in the Amazon SES Developer Guide. You can execute this operation no more than
-// once per second.
+// Creates a new custom verification email template.
+//
+// For more information about custom verification email templates, see [Using Custom Verification Email Templates] in the
+// Amazon SES Developer Guide.
+//
+// You can execute this operation no more than once per second.
+//
+// [Using Custom Verification Email Templates]: https://docs.aws.amazon.com/ses/latest/dg/creating-identities.html#send-email-verify-address-custom
 func (c *Client) CreateCustomVerificationEmailTemplate(ctx context.Context, params *CreateCustomVerificationEmailTemplateInput, optFns ...func(*Options)) (*CreateCustomVerificationEmailTemplateOutput, error) {
 	if params == nil {
 		params = &CreateCustomVerificationEmailTemplateInput{}
@@ -53,8 +55,9 @@ type CreateCustomVerificationEmailTemplateInput struct {
 
 	// The content of the custom verification email. The total size of the email must
 	// be less than 10 MB. The message body may contain HTML, with some limitations.
-	// For more information, see Custom Verification Email Frequently Asked Questions (https://docs.aws.amazon.com/ses/latest/dg/creating-identities.html#send-email-verify-address-custom)
-	// in the Amazon SES Developer Guide.
+	// For more information, see [Custom Verification Email Frequently Asked Questions]in the Amazon SES Developer Guide.
+	//
+	// [Custom Verification Email Frequently Asked Questions]: https://docs.aws.amazon.com/ses/latest/dg/creating-identities.html#send-email-verify-address-custom
 	//
 	// This member is required.
 	TemplateContent *string
@@ -101,25 +104,25 @@ func (c *Client) addOperationCreateCustomVerificationEmailTemplateMiddlewares(st
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -134,13 +137,16 @@ func (c *Client) addOperationCreateCustomVerificationEmailTemplateMiddlewares(st
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpCreateCustomVerificationEmailTemplateValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateCustomVerificationEmailTemplate(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

@@ -6,26 +6,33 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/qconnect/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a knowledge base. When using this API, you cannot reuse Amazon
-// AppIntegrations (https://docs.aws.amazon.com/appintegrations/latest/APIReference/Welcome.html)
-// DataIntegrations with external knowledge bases such as Salesforce and
-// ServiceNow. If you do, you'll get an InvalidRequestException error. For
-// example, you're programmatically managing your external knowledge base, and you
-// want to add or remove one of the fields that is being ingested from Salesforce.
-// Do the following:
-//   - Call DeleteKnowledgeBase (https://docs.aws.amazon.com/amazon-q-connect/latest/APIReference/API_DeleteKnowledgeBase.html)
-//     .
-//   - Call DeleteDataIntegration (https://docs.aws.amazon.com/appintegrations/latest/APIReference/API_DeleteDataIntegration.html)
-//     .
-//   - Call CreateDataIntegration (https://docs.aws.amazon.com/appintegrations/latest/APIReference/API_CreateDataIntegration.html)
-//     to recreate the DataIntegration or a create different one.
+// Creates a knowledge base.
+//
+// When using this API, you cannot reuse [Amazon AppIntegrations] DataIntegrations with external knowledge
+// bases such as Salesforce and ServiceNow. If you do, you'll get an
+// InvalidRequestException error.
+//
+// For example, you're programmatically managing your external knowledge base, and
+// you want to add or remove one of the fields that is being ingested from
+// Salesforce. Do the following:
+//
+//   - Call [DeleteKnowledgeBase].
+//
+//   - Call [DeleteDataIntegration].
+//
+//   - Call [CreateDataIntegration]to recreate the DataIntegration or a create different one.
+//
 //   - Call CreateKnowledgeBase.
+//
+// [Amazon AppIntegrations]: https://docs.aws.amazon.com/appintegrations/latest/APIReference/Welcome.html
+// [DeleteKnowledgeBase]: https://docs.aws.amazon.com/amazon-q-connect/latest/APIReference/API_DeleteKnowledgeBase.html
+// [DeleteDataIntegration]: https://docs.aws.amazon.com/appintegrations/latest/APIReference/API_DeleteDataIntegration.html
+// [CreateDataIntegration]: https://docs.aws.amazon.com/appintegrations/latest/APIReference/API_CreateDataIntegration.html
 func (c *Client) CreateKnowledgeBase(ctx context.Context, params *CreateKnowledgeBaseInput, optFns ...func(*Options)) (*CreateKnowledgeBaseOutput, error) {
 	if params == nil {
 		params = &CreateKnowledgeBaseInput{}
@@ -57,9 +64,9 @@ type CreateKnowledgeBaseInput struct {
 
 	// A unique, case-sensitive identifier that you provide to ensure the idempotency
 	// of the request. If not provided, the Amazon Web Services SDK populates this
-	// field. For more information about idempotency, see Making retries safe with
-	// idempotent APIs (https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/)
-	// .
+	// field. For more information about idempotency, see [Making retries safe with idempotent APIs].
+	//
+	// [Making retries safe with idempotent APIs]: https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/
 	ClientToken *string
 
 	// The description.
@@ -69,11 +76,15 @@ type CreateKnowledgeBaseInput struct {
 	RenderingConfiguration *types.RenderingConfiguration
 
 	// The configuration information for the customer managed key used for encryption.
+	//
 	// This KMS key must have a policy that allows kms:CreateGrant , kms:DescribeKey ,
 	// kms:Decrypt , and kms:GenerateDataKey* permissions to the IAM identity using
-	// the key to invoke Amazon Q. For more information about setting up a customer
-	// managed key for Amazon Q, see Enable Amazon Q in Connect for your instance (https://docs.aws.amazon.com/connect/latest/adminguide/enable-q.html)
-	// .
+	// the key to invoke Amazon Q in Connect.
+	//
+	// For more information about setting up a customer managed key for Amazon Q in
+	// Connect, see [Enable Amazon Q in Connect for your instance].
+	//
+	// [Enable Amazon Q in Connect for your instance]: https://docs.aws.amazon.com/connect/latest/adminguide/enable-q.html
 	ServerSideEncryptionConfiguration *types.ServerSideEncryptionConfiguration
 
 	// The source of the knowledge base content. Only set this argument for EXTERNAL
@@ -119,25 +130,25 @@ func (c *Client) addOperationCreateKnowledgeBaseMiddlewares(stack *middleware.St
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -152,6 +163,9 @@ func (c *Client) addOperationCreateKnowledgeBaseMiddlewares(stack *middleware.St
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opCreateKnowledgeBaseMiddleware(stack, options); err != nil {
 		return err
 	}
@@ -161,7 +175,7 @@ func (c *Client) addOperationCreateKnowledgeBaseMiddlewares(stack *middleware.St
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateKnowledgeBase(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

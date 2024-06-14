@@ -16,14 +16,23 @@ import (
 	"strings"
 )
 
-// This operation is not supported by directory buckets. Creates an Object Lambda
-// Access Point. For more information, see Transforming objects with Object Lambda
-// Access Points (https://docs.aws.amazon.com/AmazonS3/latest/userguide/transforming-objects.html)
-// in the Amazon S3 User Guide. The following actions are related to
-// CreateAccessPointForObjectLambda :
-//   - DeleteAccessPointForObjectLambda (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteAccessPointForObjectLambda.html)
-//   - GetAccessPointForObjectLambda (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetAccessPointForObjectLambda.html)
-//   - ListAccessPointsForObjectLambda (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_ListAccessPointsForObjectLambda.html)
+// This operation is not supported by directory buckets.
+//
+// Creates an Object Lambda Access Point. For more information, see [Transforming objects with Object Lambda Access Points] in the Amazon
+// S3 User Guide.
+//
+// The following actions are related to CreateAccessPointForObjectLambda :
+//
+// [DeleteAccessPointForObjectLambda]
+//
+// [GetAccessPointForObjectLambda]
+//
+// [ListAccessPointsForObjectLambda]
+//
+// [ListAccessPointsForObjectLambda]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_ListAccessPointsForObjectLambda.html
+// [Transforming objects with Object Lambda Access Points]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/transforming-objects.html
+// [DeleteAccessPointForObjectLambda]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteAccessPointForObjectLambda.html
+// [GetAccessPointForObjectLambda]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetAccessPointForObjectLambda.html
 func (c *Client) CreateAccessPointForObjectLambda(ctx context.Context, params *CreateAccessPointForObjectLambdaInput, optFns ...func(*Options)) (*CreateAccessPointForObjectLambdaOutput, error) {
 	if params == nil {
 		params = &CreateAccessPointForObjectLambdaInput{}
@@ -101,25 +110,25 @@ func (c *Client) addOperationCreateAccessPointForObjectLambdaMiddlewares(stack *
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -137,6 +146,9 @@ func (c *Client) addOperationCreateAccessPointForObjectLambdaMiddlewares(stack *
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addEndpointPrefix_opCreateAccessPointForObjectLambdaMiddleware(stack); err != nil {
 		return err
 	}
@@ -149,7 +161,7 @@ func (c *Client) addOperationCreateAccessPointForObjectLambdaMiddlewares(stack *
 	if err = addMetadataRetrieverMiddleware(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addCreateAccessPointForObjectLambdaUpdateEndpoint(stack, options); err != nil {

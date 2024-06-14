@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/cloudformation/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -43,20 +42,24 @@ type ListTypeRegistrationsInput struct {
 	// response object's NextToken parameter is set to null .
 	NextToken *string
 
-	// The current status of the extension registration request. The default is
-	// IN_PROGRESS .
+	// The current status of the extension registration request.
+	//
+	// The default is IN_PROGRESS .
 	RegistrationStatusFilter types.RegistrationStatus
 
-	// The kind of extension. Conditional: You must specify either TypeName and Type ,
-	// or Arn .
+	// The kind of extension.
+	//
+	// Conditional: You must specify either TypeName and Type , or Arn .
 	Type types.RegistryType
 
-	// The Amazon Resource Name (ARN) of the extension. Conditional: You must specify
-	// either TypeName and Type , or Arn .
+	// The Amazon Resource Name (ARN) of the extension.
+	//
+	// Conditional: You must specify either TypeName and Type , or Arn .
 	TypeArn *string
 
-	// The name of the extension. Conditional: You must specify either TypeName and
-	// Type , or Arn .
+	// The name of the extension.
+	//
+	// Conditional: You must specify either TypeName and Type , or Arn .
 	TypeName *string
 
 	noSmithyDocumentSerde
@@ -70,8 +73,9 @@ type ListTypeRegistrationsOutput struct {
 	// all results, NextToken is set to null .
 	NextToken *string
 
-	// A list of extension registration tokens. Use DescribeTypeRegistration to return
-	// detailed information about a type registration request.
+	// A list of extension registration tokens.
+	//
+	// Use DescribeTypeRegistration to return detailed information about a type registration request.
 	RegistrationTokenList []string
 
 	// Metadata pertaining to the operation's result.
@@ -102,25 +106,25 @@ func (c *Client) addOperationListTypeRegistrationsMiddlewares(stack *middleware.
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -135,10 +139,13 @@ func (c *Client) addOperationListTypeRegistrationsMiddlewares(stack *middleware.
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListTypeRegistrations(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/securityhub/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -40,19 +39,25 @@ type DescribeHubInput struct {
 type DescribeHubOutput struct {
 
 	// Whether to automatically enable new controls when they are added to standards
-	// that are enabled. If set to true , then new controls for enabled standards are
-	// enabled automatically. If set to false , then new controls are not enabled.
+	// that are enabled.
+	//
+	// If set to true , then new controls for enabled standards are enabled
+	// automatically. If set to false , then new controls are not enabled.
 	AutoEnableControls *bool
 
 	// Specifies whether the calling account has consolidated control findings turned
 	// on. If the value for this field is set to SECURITY_CONTROL , Security Hub
 	// generates a single finding for a control check even when the check applies to
-	// multiple enabled standards. If the value for this field is set to
-	// STANDARD_CONTROL , Security Hub generates separate findings for a control check
-	// when the check applies to multiple enabled standards. The value for this field
-	// in a member account matches the value in the administrator account. For accounts
-	// that aren't part of an organization, the default value of this field is
-	// SECURITY_CONTROL if you enabled Security Hub on or after February 23, 2023.
+	// multiple enabled standards.
+	//
+	// If the value for this field is set to STANDARD_CONTROL , Security Hub generates
+	// separate findings for a control check when the check applies to multiple enabled
+	// standards.
+	//
+	// The value for this field in a member account matches the value in the
+	// administrator account. For accounts that aren't part of an organization, the
+	// default value of this field is SECURITY_CONTROL if you enabled Security Hub on
+	// or after February 23, 2023.
 	ControlFindingGenerator types.ControlFindingGenerator
 
 	// The ARN of the Hub resource that was retrieved.
@@ -89,25 +94,25 @@ func (c *Client) addOperationDescribeHubMiddlewares(stack *middleware.Stack, opt
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -122,10 +127,13 @@ func (c *Client) addOperationDescribeHubMiddlewares(stack *middleware.Stack, opt
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeHub(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

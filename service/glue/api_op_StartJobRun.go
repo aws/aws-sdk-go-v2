@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/glue/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -35,36 +34,49 @@ type StartJobRunInput struct {
 	// This member is required.
 	JobName *string
 
-	// This field is deprecated. Use MaxCapacity instead. The number of Glue data
-	// processing units (DPUs) to allocate to this JobRun. You can allocate a minimum
-	// of 2 DPUs; the default is 10. A DPU is a relative measure of processing power
-	// that consists of 4 vCPUs of compute capacity and 16 GB of memory. For more
-	// information, see the Glue pricing page (https://aws.amazon.com/glue/pricing/) .
+	// This field is deprecated. Use MaxCapacity instead.
+	//
+	// The number of Glue data processing units (DPUs) to allocate to this JobRun. You
+	// can allocate a minimum of 2 DPUs; the default is 10. A DPU is a relative measure
+	// of processing power that consists of 4 vCPUs of compute capacity and 16 GB of
+	// memory. For more information, see the [Glue pricing page].
+	//
+	// [Glue pricing page]: https://aws.amazon.com/glue/pricing/
 	//
 	// Deprecated: This property is deprecated, use MaxCapacity instead.
 	AllocatedCapacity int32
 
 	// The job arguments associated with this run. For this job run, they replace the
-	// default arguments set in the job definition itself. You can specify arguments
-	// here that your own job-execution script consumes, as well as arguments that Glue
-	// itself consumes. Job arguments may be logged. Do not pass plaintext secrets as
-	// arguments. Retrieve secrets from a Glue Connection, Secrets Manager or other
-	// secret management mechanism if you intend to keep them within the Job. For
-	// information about how to specify and consume your own Job arguments, see the
-	// Calling Glue APIs in Python (https://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-python-calling.html)
-	// topic in the developer guide. For information about the arguments you can
-	// provide to this field when configuring Spark jobs, see the Special Parameters
-	// Used by Glue (https://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-etl-glue-arguments.html)
-	// topic in the developer guide. For information about the arguments you can
-	// provide to this field when configuring Ray jobs, see Using job parameters in
-	// Ray jobs (https://docs.aws.amazon.com/glue/latest/dg/author-job-ray-job-parameters.html)
-	// in the developer guide.
+	// default arguments set in the job definition itself.
+	//
+	// You can specify arguments here that your own job-execution script consumes, as
+	// well as arguments that Glue itself consumes.
+	//
+	// Job arguments may be logged. Do not pass plaintext secrets as arguments.
+	// Retrieve secrets from a Glue Connection, Secrets Manager or other secret
+	// management mechanism if you intend to keep them within the Job.
+	//
+	// For information about how to specify and consume your own Job arguments, see
+	// the [Calling Glue APIs in Python]topic in the developer guide.
+	//
+	// For information about the arguments you can provide to this field when
+	// configuring Spark jobs, see the [Special Parameters Used by Glue]topic in the developer guide.
+	//
+	// For information about the arguments you can provide to this field when
+	// configuring Ray jobs, see [Using job parameters in Ray jobs]in the developer guide.
+	//
+	// [Using job parameters in Ray jobs]: https://docs.aws.amazon.com/glue/latest/dg/author-job-ray-job-parameters.html
+	// [Calling Glue APIs in Python]: https://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-python-calling.html
+	// [Special Parameters Used by Glue]: https://docs.aws.amazon.com/glue/latest/dg/aws-glue-programming-etl-glue-arguments.html
 	Arguments map[string]string
 
 	// Indicates whether the job is run with a standard or flexible execution class.
 	// The standard execution-class is ideal for time-sensitive workloads that require
-	// fast job startup and dedicated resources. The flexible execution class is
-	// appropriate for time-insensitive jobs whose start and completion times may vary.
+	// fast job startup and dedicated resources.
+	//
+	// The flexible execution class is appropriate for time-insensitive jobs whose
+	// start and completion times may vary.
+	//
 	// Only jobs with Glue version 3.0 and above and command type glueetl will be
 	// allowed to set ExecutionClass to FLEX . The flexible execution class is
 	// available for Spark jobs.
@@ -76,19 +88,26 @@ type StartJobRunInput struct {
 	// For Glue version 1.0 or earlier jobs, using the standard worker type, the
 	// number of Glue data processing units (DPUs) that can be allocated when this job
 	// runs. A DPU is a relative measure of processing power that consists of 4 vCPUs
-	// of compute capacity and 16 GB of memory. For more information, see the Glue
-	// pricing page (https://aws.amazon.com/glue/pricing/) . For Glue version 2.0+
-	// jobs, you cannot specify a Maximum capacity . Instead, you should specify a
-	// Worker type and the Number of workers . Do not set MaxCapacity if using
-	// WorkerType and NumberOfWorkers . The value that can be allocated for MaxCapacity
-	// depends on whether you are running a Python shell job, an Apache Spark ETL job,
-	// or an Apache Spark streaming ETL job:
+	// of compute capacity and 16 GB of memory. For more information, see the [Glue pricing page].
+	//
+	// For Glue version 2.0+ jobs, you cannot specify a Maximum capacity . Instead, you
+	// should specify a Worker type and the Number of workers .
+	//
+	// Do not set MaxCapacity if using WorkerType and NumberOfWorkers .
+	//
+	// The value that can be allocated for MaxCapacity depends on whether you are
+	// running a Python shell job, an Apache Spark ETL job, or an Apache Spark
+	// streaming ETL job:
+	//
 	//   - When you specify a Python shell job ( JobCommand.Name ="pythonshell"), you
 	//   can allocate either 0.0625 or 1 DPU. The default is 0.0625 DPU.
+	//
 	//   - When you specify an Apache Spark ETL job ( JobCommand.Name ="glueetl") or
 	//   Apache Spark streaming ETL job ( JobCommand.Name ="gluestreaming"), you can
 	//   allocate from 2 to 100 DPUs. The default is 10 DPUs. This job type cannot have a
 	//   fractional DPU allocation.
+	//
+	// [Glue pricing page]: https://aws.amazon.com/glue/pricing/
 	MaxCapacity *float64
 
 	// Specifies configuration properties of a job run notification.
@@ -103,23 +122,30 @@ type StartJobRunInput struct {
 
 	// The JobRun timeout in minutes. This is the maximum time that a job run can
 	// consume resources before it is terminated and enters TIMEOUT status. This value
-	// overrides the timeout value set in the parent job. Streaming jobs do not have a
-	// timeout. The default for non-streaming jobs is 2,880 minutes (48 hours).
+	// overrides the timeout value set in the parent job.
+	//
+	// Streaming jobs must have timeout values less than 7 days or 10080 minutes. When
+	// the value is left blank, the job will be restarted after 7 days based if you
+	// have not setup a maintenance window. If you have setup maintenance window, it
+	// will be restarted during the maintenance window after 7 days.
 	Timeout *int32
 
 	// The type of predefined worker that is allocated when a job runs. Accepts a
 	// value of G.1X, G.2X, G.4X, G.8X or G.025X for Spark jobs. Accepts the value Z.2X
 	// for Ray jobs.
+	//
 	//   - For the G.1X worker type, each worker maps to 1 DPU (4 vCPUs, 16 GB of
 	//   memory) with 84GB disk (approximately 34GB free), and provides 1 executor per
 	//   worker. We recommend this worker type for workloads such as data transforms,
 	//   joins, and queries, to offers a scalable and cost effective way to run most
 	//   jobs.
+	//
 	//   - For the G.2X worker type, each worker maps to 2 DPU (8 vCPUs, 32 GB of
 	//   memory) with 128GB disk (approximately 77GB free), and provides 1 executor per
 	//   worker. We recommend this worker type for workloads such as data transforms,
 	//   joins, and queries, to offers a scalable and cost effective way to run most
 	//   jobs.
+	//
 	//   - For the G.4X worker type, each worker maps to 4 DPU (16 vCPUs, 64 GB of
 	//   memory) with 256GB disk (approximately 235GB free), and provides 1 executor per
 	//   worker. We recommend this worker type for jobs whose workloads contain your most
@@ -128,16 +154,19 @@ type StartJobRunInput struct {
 	//   Amazon Web Services Regions: US East (Ohio), US East (N. Virginia), US West
 	//   (Oregon), Asia Pacific (Singapore), Asia Pacific (Sydney), Asia Pacific (Tokyo),
 	//   Canada (Central), Europe (Frankfurt), Europe (Ireland), and Europe (Stockholm).
+	//
 	//   - For the G.8X worker type, each worker maps to 8 DPU (32 vCPUs, 128 GB of
 	//   memory) with 512GB disk (approximately 487GB free), and provides 1 executor per
 	//   worker. We recommend this worker type for jobs whose workloads contain your most
 	//   demanding transforms, aggregations, joins, and queries. This worker type is
 	//   available only for Glue version 3.0 or later Spark ETL jobs, in the same Amazon
 	//   Web Services Regions as supported for the G.4X worker type.
+	//
 	//   - For the G.025X worker type, each worker maps to 0.25 DPU (2 vCPUs, 4 GB of
 	//   memory) with 84GB disk (approximately 34GB free), and provides 1 executor per
 	//   worker. We recommend this worker type for low volume streaming jobs. This worker
 	//   type is only available for Glue version 3.0 streaming jobs.
+	//
 	//   - For the Z.2X worker type, each worker maps to 2 M-DPU (8vCPUs, 64 GB of
 	//   memory) with 128 GB disk (approximately 120GB free), and provides up to 8 Ray
 	//   workers based on the autoscaler.
@@ -179,25 +208,25 @@ func (c *Client) addOperationStartJobRunMiddlewares(stack *middleware.Stack, opt
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -212,13 +241,16 @@ func (c *Client) addOperationStartJobRunMiddlewares(stack *middleware.Stack, opt
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpStartJobRunValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opStartJobRun(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

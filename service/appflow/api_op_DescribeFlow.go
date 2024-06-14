@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/appflow/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -31,7 +30,7 @@ func (c *Client) DescribeFlow(ctx context.Context, params *DescribeFlowInput, op
 
 type DescribeFlowInput struct {
 
-	// The specified name of the flow. Spaces are not allowed. Use underscores (_) or
+	//  The specified name of the flow. Spaces are not allowed. Use underscores (_) or
 	// hyphens (-) only.
 	//
 	// This member is required.
@@ -42,50 +41,50 @@ type DescribeFlowInput struct {
 
 type DescribeFlowOutput struct {
 
-	// Specifies when the flow was created.
+	//  Specifies when the flow was created.
 	CreatedAt *time.Time
 
-	// The ARN of the user who created the flow.
+	//  The ARN of the user who created the flow.
 	CreatedBy *string
 
-	// A description of the flow.
+	//  A description of the flow.
 	Description *string
 
-	// The configuration that controls how Amazon AppFlow transfers data to the
+	//  The configuration that controls how Amazon AppFlow transfers data to the
 	// destination connector.
 	DestinationFlowConfigList []types.DestinationFlowConfig
 
-	// The flow's Amazon Resource Name (ARN).
+	//  The flow's Amazon Resource Name (ARN).
 	FlowArn *string
 
-	// The specified name of the flow. Spaces are not allowed. Use underscores (_) or
+	//  The specified name of the flow. Spaces are not allowed. Use underscores (_) or
 	// hyphens (-) only.
 	FlowName *string
 
-	// Indicates the current status of the flow.
+	//  Indicates the current status of the flow.
 	FlowStatus types.FlowStatus
 
-	// Contains an error message if the flow status is in a suspended or error state.
+	//  Contains an error message if the flow status is in a suspended or error state.
 	// This applies only to scheduled or event-triggered flows.
 	FlowStatusMessage *string
 
-	// The ARN (Amazon Resource Name) of the Key Management Service (KMS) key you
+	//  The ARN (Amazon Resource Name) of the Key Management Service (KMS) key you
 	// provide for encryption. This is required if you do not want to use the Amazon
 	// AppFlow-managed KMS key. If you don't provide anything here, Amazon AppFlow uses
 	// the Amazon AppFlow-managed KMS key.
 	KmsArn *string
 
-	// Describes the details of the most recent flow run.
+	//  Describes the details of the most recent flow run.
 	LastRunExecutionDetails *types.ExecutionDetails
 
 	// Describes the metadata catalog, metadata table, and data partitions that Amazon
 	// AppFlow used for the associated flow run.
 	LastRunMetadataCatalogDetails []types.MetadataCatalogDetail
 
-	// Specifies when the flow was last updated.
+	//  Specifies when the flow was last updated.
 	LastUpdatedAt *time.Time
 
-	// Specifies the user name of the account that performed the most recent update.
+	//  Specifies the user name of the account that performed the most recent update.
 	LastUpdatedBy *string
 
 	// Specifies the configuration that Amazon AppFlow uses when it catalogs the data
@@ -96,23 +95,26 @@ type DescribeFlowOutput struct {
 	// The version number of your data schema. Amazon AppFlow assigns this version
 	// number. The version number increases by one when you change any of the following
 	// settings in your flow configuration:
+	//
 	//   - Source-to-destination field mappings
+	//
 	//   - Field data types
+	//
 	//   - Partition keys
 	SchemaVersion *int64
 
-	// The configuration that controls how Amazon AppFlow retrieves data from the
+	//  The configuration that controls how Amazon AppFlow retrieves data from the
 	// source connector.
 	SourceFlowConfig *types.SourceFlowConfig
 
-	// The tags used to organize, track, or control access for your flow.
+	//  The tags used to organize, track, or control access for your flow.
 	Tags map[string]string
 
-	// A list of tasks that Amazon AppFlow performs while transferring the data in the
-	// flow run.
+	//  A list of tasks that Amazon AppFlow performs while transferring the data in
+	// the flow run.
 	Tasks []types.Task
 
-	// The trigger settings that determine how and when the flow runs.
+	//  The trigger settings that determine how and when the flow runs.
 	TriggerConfig *types.TriggerConfig
 
 	// Metadata pertaining to the operation's result.
@@ -143,25 +145,25 @@ func (c *Client) addOperationDescribeFlowMiddlewares(stack *middleware.Stack, op
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -176,13 +178,16 @@ func (c *Client) addOperationDescribeFlowMiddlewares(stack *middleware.Stack, op
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDescribeFlowValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeFlow(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

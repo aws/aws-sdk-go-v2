@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/datapipeline/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -14,21 +13,28 @@ import (
 
 // Gets the definition of the specified pipeline. You can call
 // GetPipelineDefinition to retrieve the pipeline definition that you provided
-// using PutPipelineDefinition . POST / HTTP/1.1 Content-Type:
-// application/x-amz-json-1.1 X-Amz-Target: DataPipeline.GetPipelineDefinition
-// Content-Length: 40 Host: datapipeline.us-east-1.amazonaws.com X-Amz-Date: Mon,
-// 12 Nov 2012 17:49:52 GMT Authorization: AuthParams {"pipelineId":
-// "df-06372391ZG65EXAMPLE"} x-amzn-RequestId: e28309e5-0776-11e2-8a14-21bb8a1f50ef
-// Content-Type: application/x-amz-json-1.1 Content-Length: 890 Date: Mon, 12 Nov
-// 2012 17:50:53 GMT {"pipelineObjects": [ {"fields": [ {"key": "workerGroup",
-// "stringValue": "workerGroup"} ], "id": "Default", "name": "Default"}, {"fields":
-// [ {"key": "startDateTime", "stringValue": "2012-09-25T17:00:00"}, {"key":
-// "type", "stringValue": "Schedule"}, {"key": "period", "stringValue": "1 hour"},
-// {"key": "endDateTime", "stringValue": "2012-09-25T18:00:00"} ], "id":
-// "Schedule", "name": "Schedule"}, {"fields": [ {"key": "schedule", "refValue":
-// "Schedule"}, {"key": "command", "stringValue": "echo hello"}, {"key": "parent",
-// "refValue": "Default"}, {"key": "type", "stringValue": "ShellCommandActivity"}
-// ], "id": "SayHello", "name": "SayHello"} ] }
+// using PutPipelineDefinition.
+//
+// POST / HTTP/1.1 Content-Type: application/x-amz-json-1.1 X-Amz-Target:
+// DataPipeline.GetPipelineDefinition Content-Length: 40 Host:
+// datapipeline.us-east-1.amazonaws.com X-Amz-Date: Mon, 12 Nov 2012 17:49:52 GMT
+// Authorization: AuthParams
+//
+// {"pipelineId": "df-06372391ZG65EXAMPLE"}
+//
+// x-amzn-RequestId: e28309e5-0776-11e2-8a14-21bb8a1f50ef Content-Type:
+// application/x-amz-json-1.1 Content-Length: 890 Date: Mon, 12 Nov 2012 17:50:53
+// GMT
+//
+// {"pipelineObjects": [ {"fields": [ {"key": "workerGroup", "stringValue":
+// "workerGroup"} ], "id": "Default", "name": "Default"}, {"fields": [ {"key":
+// "startDateTime", "stringValue": "2012-09-25T17:00:00"}, {"key": "type",
+// "stringValue": "Schedule"}, {"key": "period", "stringValue": "1 hour"}, {"key":
+// "endDateTime", "stringValue": "2012-09-25T18:00:00"} ], "id": "Schedule",
+// "name": "Schedule"}, {"fields": [ {"key": "schedule", "refValue": "Schedule"},
+// {"key": "command", "stringValue": "echo hello"}, {"key": "parent", "refValue":
+// "Default"}, {"key": "type", "stringValue": "ShellCommandActivity"} ], "id":
+// "SayHello", "name": "SayHello"} ] }
 func (c *Client) GetPipelineDefinition(ctx context.Context, params *GetPipelineDefinitionInput, optFns ...func(*Options)) (*GetPipelineDefinitionOutput, error) {
 	if params == nil {
 		params = &GetPipelineDefinitionInput{}
@@ -100,25 +106,25 @@ func (c *Client) addOperationGetPipelineDefinitionMiddlewares(stack *middleware.
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -133,13 +139,16 @@ func (c *Client) addOperationGetPipelineDefinitionMiddlewares(stack *middleware.
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpGetPipelineDefinitionValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetPipelineDefinition(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

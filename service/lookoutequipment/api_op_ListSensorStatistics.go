@@ -6,13 +6,13 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/lookoutequipment/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists statistics about the data collected for each of the sensors that have
+//	Lists statistics about the data collected for each of the sensors that have
+//
 // been successfully ingested in the particular dataset. Can also be used to
 // retreive Sensor Statistics for a previous ingestion job.
 func (c *Client) ListSensorStatistics(ctx context.Context, params *ListSensorStatisticsInput, optFns ...func(*Options)) (*ListSensorStatisticsOutput, error) {
@@ -32,12 +32,12 @@ func (c *Client) ListSensorStatistics(ctx context.Context, params *ListSensorSta
 
 type ListSensorStatisticsInput struct {
 
-	// The name of the dataset associated with the list of Sensor Statistics.
+	//  The name of the dataset associated with the list of Sensor Statistics.
 	//
 	// This member is required.
 	DatasetName *string
 
-	// The ingestion job id associated with the list of Sensor Statistics. To get
+	//  The ingestion job id associated with the list of Sensor Statistics. To get
 	// sensor statistics for a particular ingestion job id, both dataset name and
 	// ingestion job id must be submitted as inputs.
 	IngestionJobId *string
@@ -92,25 +92,25 @@ func (c *Client) addOperationListSensorStatisticsMiddlewares(stack *middleware.S
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -125,13 +125,16 @@ func (c *Client) addOperationListSensorStatisticsMiddlewares(stack *middleware.S
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpListSensorStatisticsValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListSensorStatistics(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

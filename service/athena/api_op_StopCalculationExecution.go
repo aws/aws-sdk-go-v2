@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/athena/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -14,11 +13,12 @@ import (
 
 // Requests the cancellation of a calculation. A StopCalculationExecution call on
 // a calculation that is already in a terminal state (for example, STOPPED , FAILED
-// , or COMPLETED ) succeeds but has no effect. Cancelling a calculation is done on
-// a best effort basis. If a calculation cannot be cancelled, you can be charged
-// for its completion. If you are concerned about being charged for a calculation
-// that cannot be cancelled, consider terminating the session in which the
-// calculation is running.
+// , or COMPLETED ) succeeds but has no effect.
+//
+// Cancelling a calculation is done on a best effort basis. If a calculation
+// cannot be cancelled, you can be charged for its completion. If you are concerned
+// about being charged for a calculation that cannot be cancelled, consider
+// terminating the session in which the calculation is running.
 func (c *Client) StopCalculationExecution(ctx context.Context, params *StopCalculationExecutionInput, optFns ...func(*Options)) (*StopCalculationExecutionOutput, error) {
 	if params == nil {
 		params = &StopCalculationExecutionInput{}
@@ -46,13 +46,23 @@ type StopCalculationExecutionInput struct {
 
 type StopCalculationExecutionOutput struct {
 
-	// CREATING - The calculation is in the process of being created. CREATED - The
-	// calculation has been created and is ready to run. QUEUED - The calculation has
-	// been queued for processing. RUNNING - The calculation is running. CANCELING - A
-	// request to cancel the calculation has been received and the system is working to
-	// stop it. CANCELED - The calculation is no longer running as the result of a
-	// cancel request. COMPLETED - The calculation has completed without error. FAILED
-	// - The calculation failed and is no longer running.
+	// CREATING - The calculation is in the process of being created.
+	//
+	// CREATED - The calculation has been created and is ready to run.
+	//
+	// QUEUED - The calculation has been queued for processing.
+	//
+	// RUNNING - The calculation is running.
+	//
+	// CANCELING - A request to cancel the calculation has been received and the
+	// system is working to stop it.
+	//
+	// CANCELED - The calculation is no longer running as the result of a cancel
+	// request.
+	//
+	// COMPLETED - The calculation has completed without error.
+	//
+	// FAILED - The calculation failed and is no longer running.
 	State types.CalculationExecutionState
 
 	// Metadata pertaining to the operation's result.
@@ -83,25 +93,25 @@ func (c *Client) addOperationStopCalculationExecutionMiddlewares(stack *middlewa
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -116,13 +126,16 @@ func (c *Client) addOperationStopCalculationExecutionMiddlewares(stack *middlewa
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpStopCalculationExecutionValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opStopCalculationExecution(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

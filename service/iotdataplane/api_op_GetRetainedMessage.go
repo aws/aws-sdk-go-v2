@@ -6,18 +6,23 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Gets the details of a single retained message for the specified topic. This
-// action returns the message payload of the retained message, which can incur
-// messaging costs. To list only the topic names of the retained messages, call
-// ListRetainedMessages (https://docs.aws.amazon.com/iot/latest/apireference/API_iotdata_ListRetainedMessages.html)
-// . Requires permission to access the GetRetainedMessage (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiotfleethubfordevicemanagement.html#awsiotfleethubfordevicemanagement-actions-as-permissions)
-// action. For more information about messaging costs, see Amazon Web Services IoT
-// Core pricing - Messaging (http://aws.amazon.com/iot-core/pricing/#Messaging) .
+// Gets the details of a single retained message for the specified topic.
+//
+// This action returns the message payload of the retained message, which can
+// incur messaging costs. To list only the topic names of the retained messages,
+// call [ListRetainedMessages].
+//
+// Requires permission to access the [GetRetainedMessage] action.
+//
+// For more information about messaging costs, see [Amazon Web Services IoT Core pricing - Messaging].
+//
+// [GetRetainedMessage]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiotfleethubfordevicemanagement.html#awsiotfleethubfordevicemanagement-actions-as-permissions
+// [Amazon Web Services IoT Core pricing - Messaging]: http://aws.amazon.com/iot-core/pricing/#Messaging
+// [ListRetainedMessages]: https://docs.aws.amazon.com/iot/latest/apireference/API_iotdata_ListRetainedMessages.html
 func (c *Client) GetRetainedMessage(ctx context.Context, params *GetRetainedMessageInput, optFns ...func(*Options)) (*GetRetainedMessageOutput, error) {
 	if params == nil {
 		params = &GetRetainedMessageInput{}
@@ -61,10 +66,12 @@ type GetRetainedMessageOutput struct {
 	Topic *string
 
 	// A base64-encoded JSON string that includes an array of JSON objects, or null if
-	// the retained message doesn't include any user properties. The following example
-	// userProperties parameter is a JSON string that represents two user properties.
-	// Note that it will be base64-encoded: [{"deviceName": "alpha"}, {"deviceCnt":
-	// "45"}]
+	// the retained message doesn't include any user properties.
+	//
+	// The following example userProperties parameter is a JSON string that represents
+	// two user properties. Note that it will be base64-encoded:
+	//
+	//     [{"deviceName": "alpha"}, {"deviceCnt": "45"}]
 	UserProperties []byte
 
 	// Metadata pertaining to the operation's result.
@@ -95,25 +102,25 @@ func (c *Client) addOperationGetRetainedMessageMiddlewares(stack *middleware.Sta
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -128,13 +135,16 @@ func (c *Client) addOperationGetRetainedMessageMiddlewares(stack *middleware.Sta
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpGetRetainedMessageValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetRetainedMessage(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

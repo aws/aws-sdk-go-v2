@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/verifiedpermissions/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -14,30 +13,41 @@ import (
 )
 
 // Modifies a Cedar static policy in the specified policy store. You can change
-// only certain elements of the UpdatePolicyDefinition (https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_UpdatePolicyInput.html#amazonverifiedpermissions-UpdatePolicy-request-UpdatePolicyDefinition)
-// parameter. You can directly update only static policies. To change a
-// template-linked policy, you must update the template instead, using
-// UpdatePolicyTemplate (https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_UpdatePolicyTemplate.html)
-// .
+// only certain elements of the [UpdatePolicyDefinition]parameter. You can directly update only static
+// policies. To change a template-linked policy, you must update the template
+// instead, using [UpdatePolicyTemplate].
+//
 //   - If policy validation is enabled in the policy store, then updating a static
 //     policy causes Verified Permissions to validate the policy against the schema in
 //     the policy store. If the updated static policy doesn't pass validation, the
 //     operation fails and the update isn't stored.
-//   - When you edit a static policy, You can change only certain elements of a
+//
+//   - When you edit a static policy, you can change only certain elements of a
 //     static policy:
+//
 //   - The action referenced by the policy.
-//   - A condition clause, such as when and unless. You can't change these
-//     elements of a static policy:
+//
+//   - A condition clause, such as when and unless.
+//
+// You can't change these elements of a static policy:
+//
 //   - Changing a policy from a static policy to a template-linked policy.
+//
 //   - Changing the effect of a static policy from permit or forbid.
+//
 //   - The principal referenced by a static policy.
+//
 //   - The resource referenced by a static policy.
+//
 //   - To update a template-linked policy, you must update the template instead.
 //
-// Verified Permissions is eventually consistent (https://wikipedia.org/wiki/Eventual_consistency)
-// . It can take a few seconds for a new or changed element to be propagate through
-// the service and be visible in the results of other Verified Permissions
-// operations.
+// Verified Permissions is [eventually consistent] . It can take a few seconds for a new or changed
+// element to propagate through the service and be visible in the results of other
+// Verified Permissions operations.
+//
+// [eventually consistent]: https://wikipedia.org/wiki/Eventual_consistency
+// [UpdatePolicyTemplate]: https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_UpdatePolicyTemplate.html
+// [UpdatePolicyDefinition]: https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_UpdatePolicyInput.html#amazonverifiedpermissions-UpdatePolicy-request-UpdatePolicyDefinition
 func (c *Client) UpdatePolicy(ctx context.Context, params *UpdatePolicyInput, optFns ...func(*Options)) (*UpdatePolicyOutput, error) {
 	if params == nil {
 		params = &UpdatePolicyInput{}
@@ -56,22 +66,31 @@ func (c *Client) UpdatePolicy(ctx context.Context, params *UpdatePolicyInput, op
 type UpdatePolicyInput struct {
 
 	// Specifies the updated policy content that you want to replace on the specified
-	// policy. The content must be valid Cedar policy language text. You can change
-	// only the following elements from the policy definition:
+	// policy. The content must be valid Cedar policy language text.
+	//
+	// You can change only the following elements from the policy definition:
+	//
 	//   - The action referenced by the policy.
+	//
 	//   - Any conditional clauses, such as when or unless clauses.
+	//
 	// You can't change the following elements:
+	//
 	//   - Changing from static to templateLinked .
+	//
 	//   - Changing the effect of the policy from permit or forbid .
+	//
 	//   - The principal referenced by the policy.
+	//
 	//   - The resource referenced by the policy.
 	//
 	// This member is required.
 	Definition types.UpdatePolicyDefinition
 
 	// Specifies the ID of the policy that you want to update. To find this value, you
-	// can use ListPolicies (https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_ListPolicies.html)
-	// .
+	// can use [ListPolicies].
+	//
+	// [ListPolicies]: https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_ListPolicies.html
 	//
 	// This member is required.
 	PolicyId *string
@@ -112,6 +131,15 @@ type UpdatePolicyOutput struct {
 	// This member is required.
 	PolicyType types.PolicyType
 
+	// The action that a policy permits or forbids. For example, {"actions":
+	// [{"actionId": "ViewPhoto", "actionType": "PhotoFlash::Action"}, {"entityID":
+	// "SharePhoto", "entityType": "PhotoFlash::Action"}]} .
+	Actions []types.ActionIdentifier
+
+	// The effect of the decision that a policy returns to an authorization request.
+	// For example, "effect": "Permit" .
+	Effect types.PolicyEffect
+
 	// The principal specified in the policy's scope. This element isn't included in
 	// the response when Principal isn't present in the policy content.
 	Principal *types.EntityIdentifier
@@ -148,25 +176,25 @@ func (c *Client) addOperationUpdatePolicyMiddlewares(stack *middleware.Stack, op
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -181,13 +209,16 @@ func (c *Client) addOperationUpdatePolicyMiddlewares(stack *middleware.Stack, op
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpUpdatePolicyValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdatePolicy(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

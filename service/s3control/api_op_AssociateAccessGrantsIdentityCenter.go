@@ -20,8 +20,11 @@ import (
 // for users or groups from your corporate identity directory. First, you must add
 // your corporate identity directory to Amazon Web Services IAM Identity Center.
 // Then, you can associate this IAM Identity Center instance with your S3 Access
-// Grants instance. Permissions You must have the
-// s3:AssociateAccessGrantsIdentityCenter permission to use this operation.
+// Grants instance.
+//
+// Permissions You must have the s3:AssociateAccessGrantsIdentityCenter permission
+// to use this operation.
+//
 // Additional Permissions You must also have the following permissions:
 // sso:CreateApplication , sso:PutApplicationGrant , and
 // sso:PutApplicationAuthenticationMethod .
@@ -50,9 +53,10 @@ type AssociateAccessGrantsIdentityCenterInput struct {
 	// The Amazon Resource Name (ARN) of the Amazon Web Services IAM Identity Center
 	// instance that you are associating with your S3 Access Grants instance. An IAM
 	// Identity Center instance is your corporate identity directory that you added to
-	// the IAM Identity Center. You can use the ListInstances (https://docs.aws.amazon.com/singlesignon/latest/APIReference/API_ListInstances.html)
-	// API operation to retrieve a list of your Identity Center instances and their
-	// ARNs.
+	// the IAM Identity Center. You can use the [ListInstances]API operation to retrieve a list of
+	// your Identity Center instances and their ARNs.
+	//
+	// [ListInstances]: https://docs.aws.amazon.com/singlesignon/latest/APIReference/API_ListInstances.html
 	//
 	// This member is required.
 	IdentityCenterArn *string
@@ -94,25 +98,25 @@ func (c *Client) addOperationAssociateAccessGrantsIdentityCenterMiddlewares(stac
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -130,6 +134,9 @@ func (c *Client) addOperationAssociateAccessGrantsIdentityCenterMiddlewares(stac
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = smithyhttp.AddContentChecksumMiddleware(stack); err != nil {
 		return err
 	}
@@ -145,7 +152,7 @@ func (c *Client) addOperationAssociateAccessGrantsIdentityCenterMiddlewares(stac
 	if err = addMetadataRetrieverMiddleware(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addAssociateAccessGrantsIdentityCenterUpdateEndpoint(stack, options); err != nil {

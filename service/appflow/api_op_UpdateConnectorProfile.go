@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/appflow/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -30,17 +29,17 @@ func (c *Client) UpdateConnectorProfile(ctx context.Context, params *UpdateConne
 
 type UpdateConnectorProfileInput struct {
 
-	// Indicates the connection mode and if it is public or private.
+	//  Indicates the connection mode and if it is public or private.
 	//
 	// This member is required.
 	ConnectionMode types.ConnectionMode
 
-	// Defines the connector-specific profile configuration and credentials.
+	//  Defines the connector-specific profile configuration and credentials.
 	//
 	// This member is required.
 	ConnectorProfileConfig *types.ConnectorProfileConfig
 
-	// The name of the connector profile and is unique for each ConnectorProfile in
+	//  The name of the connector profile and is unique for each ConnectorProfile in
 	// the Amazon Web Services account.
 	//
 	// This member is required.
@@ -49,13 +48,16 @@ type UpdateConnectorProfileInput struct {
 	// The clientToken parameter is an idempotency token. It ensures that your
 	// UpdateConnectorProfile request completes only once. You choose the value to
 	// pass. For example, if you don't receive a response from your request, you can
-	// safely retry the request with the same clientToken parameter value. If you omit
-	// a clientToken value, the Amazon Web Services SDK that you are using inserts a
-	// value for you. This way, the SDK can safely retry requests multiple times after
-	// a network error. You must provide your own value for other use cases. If you
-	// specify input parameters that differ from your first request, an error occurs.
-	// If you use a different value for clientToken , Amazon AppFlow considers it a new
-	// call to UpdateConnectorProfile . The token is active for 8 hours.
+	// safely retry the request with the same clientToken parameter value.
+	//
+	// If you omit a clientToken value, the Amazon Web Services SDK that you are using
+	// inserts a value for you. This way, the SDK can safely retry requests multiple
+	// times after a network error. You must provide your own value for other use
+	// cases.
+	//
+	// If you specify input parameters that differ from your first request, an error
+	// occurs. If you use a different value for clientToken , Amazon AppFlow considers
+	// it a new call to UpdateConnectorProfile . The token is active for 8 hours.
 	ClientToken *string
 
 	noSmithyDocumentSerde
@@ -63,7 +65,7 @@ type UpdateConnectorProfileInput struct {
 
 type UpdateConnectorProfileOutput struct {
 
-	// The Amazon Resource Name (ARN) of the connector profile.
+	//  The Amazon Resource Name (ARN) of the connector profile.
 	ConnectorProfileArn *string
 
 	// Metadata pertaining to the operation's result.
@@ -94,25 +96,25 @@ func (c *Client) addOperationUpdateConnectorProfileMiddlewares(stack *middleware
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -127,6 +129,9 @@ func (c *Client) addOperationUpdateConnectorProfileMiddlewares(stack *middleware
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opUpdateConnectorProfileMiddleware(stack, options); err != nil {
 		return err
 	}
@@ -136,7 +141,7 @@ func (c *Client) addOperationUpdateConnectorProfileMiddlewares(stack *middleware
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateConnectorProfile(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

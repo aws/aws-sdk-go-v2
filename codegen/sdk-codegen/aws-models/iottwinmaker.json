@@ -6782,6 +6782,10 @@
                     {
                         "name": "CREATE",
                         "value": "CREATE"
+                    },
+                    {
+                        "name": "RESET_VALUE",
+                        "value": "RESET_VALUE"
                     }
                 ]
             }

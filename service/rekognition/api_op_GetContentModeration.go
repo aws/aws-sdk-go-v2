@@ -6,40 +6,47 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/rekognition/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Gets the inappropriate, unwanted, or offensive content analysis results for a
-// Amazon Rekognition Video analysis started by StartContentModeration . For a list
-// of moderation labels in Amazon Rekognition, see Using the image and video
-// moderation APIs (https://docs.aws.amazon.com/rekognition/latest/dg/moderation.html#moderation-api)
-// . Amazon Rekognition Video inappropriate or offensive content detection in a
-// stored video is an asynchronous operation. You start analysis by calling
-// StartContentModeration which returns a job identifier ( JobId ). When analysis
-// finishes, Amazon Rekognition Video publishes a completion status to the Amazon
-// Simple Notification Service topic registered in the initial call to
-// StartContentModeration . To get the results of the content analysis, first check
-// that the status value published to the Amazon SNS topic is SUCCEEDED . If so,
-// call GetContentModeration and pass the job identifier ( JobId ) from the initial
-// call to StartContentModeration . For more information, see Working with Stored
-// Videos in the Amazon Rekognition Devlopers Guide. GetContentModeration returns
-// detected inappropriate, unwanted, or offensive content moderation labels, and
-// the time they are detected, in an array, ModerationLabels , of
-// ContentModerationDetection objects. By default, the moderated labels are
-// returned sorted by time, in milliseconds from the start of the video. You can
-// also sort them by moderated label by specifying NAME for the SortBy input
-// parameter. Since video analysis can return a large number of results, use the
-// MaxResults parameter to limit the number of labels returned in a single call to
+// Amazon Rekognition Video analysis started by StartContentModeration. For a list of moderation labels
+// in Amazon Rekognition, see [Using the image and video moderation APIs].
+//
+// Amazon Rekognition Video inappropriate or offensive content detection in a
+// stored video is an asynchronous operation. You start analysis by calling StartContentModerationwhich
+// returns a job identifier ( JobId ). When analysis finishes, Amazon Rekognition
+// Video publishes a completion status to the Amazon Simple Notification Service
+// topic registered in the initial call to StartContentModeration . To get the
+// results of the content analysis, first check that the status value published to
+// the Amazon SNS topic is SUCCEEDED . If so, call GetContentModeration and pass
+// the job identifier ( JobId ) from the initial call to StartContentModeration .
+//
+// For more information, see Working with Stored Videos in the Amazon Rekognition
+// Devlopers Guide.
+//
+// GetContentModeration returns detected inappropriate, unwanted, or offensive
+// content moderation labels, and the time they are detected, in an array,
+// ModerationLabels , of ContentModerationDetection objects.
+//
+// By default, the moderated labels are returned sorted by time, in milliseconds
+// from the start of the video. You can also sort them by moderated label by
+// specifying NAME for the SortBy input parameter.
+//
+// Since video analysis can return a large number of results, use the MaxResults
+// parameter to limit the number of labels returned in a single call to
 // GetContentModeration . If there are more results than specified in MaxResults ,
 // the value of NextToken in the operation response contains a pagination token
 // for getting the next set of results. To get the next page of results, call
 // GetContentModeration and populate the NextToken request parameter with the
-// value of NextToken returned from the previous call to GetContentModeration . For
-// more information, see moderating content in the Amazon Rekognition Developer
-// Guide.
+// value of NextToken returned from the previous call to GetContentModeration .
+//
+// For more information, see moderating content in the Amazon Rekognition
+// Developer Guide.
+//
+// [Using the image and video moderation APIs]: https://docs.aws.amazon.com/rekognition/latest/dg/moderation.html#moderation-api
 func (c *Client) GetContentModeration(ctx context.Context, params *GetContentModerationInput, optFns ...func(*Options)) (*GetContentModerationOutput, error) {
 	if params == nil {
 		params = &GetContentModerationInput{}
@@ -125,8 +132,8 @@ type GetContentModerationOutput struct {
 	StatusMessage *string
 
 	// Video file stored in an Amazon S3 bucket. Amazon Rekognition video start
-	// operations such as StartLabelDetection use Video to specify a video for
-	// analysis. The supported file formats are .mp4, .mov and .avi.
+	// operations such as StartLabelDetectionuse Video to specify a video for analysis. The supported
+	// file formats are .mp4, .mov and .avi.
 	Video *types.Video
 
 	// Information about a video that Amazon Rekognition analyzed. Videometadata is
@@ -161,25 +168,25 @@ func (c *Client) addOperationGetContentModerationMiddlewares(stack *middleware.S
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -194,13 +201,16 @@ func (c *Client) addOperationGetContentModerationMiddlewares(stack *middleware.S
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpGetContentModerationValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetContentModeration(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

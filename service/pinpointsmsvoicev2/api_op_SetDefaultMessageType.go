@@ -6,18 +6,18 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/pinpointsmsvoicev2/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Sets the default message type on a configuration set. Choose the category of
-// SMS messages that you plan to send from this account. If you send
-// account-related messages or time-sensitive messages such as one-time passcodes,
-// choose Transactional. If you plan to send messages that contain marketing
-// material or other promotional content, choose Promotional. This setting applies
-// to your entire Amazon Web Services account.
+// Sets the default message type on a configuration set.
+//
+// Choose the category of SMS messages that you plan to send from this account. If
+// you send account-related messages or time-sensitive messages such as one-time
+// passcodes, choose Transactional. If you plan to send messages that contain
+// marketing material or other promotional content, choose Promotional. This
+// setting applies to your entire Amazon Web Services account.
 func (c *Client) SetDefaultMessageType(ctx context.Context, params *SetDefaultMessageTypeInput, optFns ...func(*Options)) (*SetDefaultMessageTypeOutput, error) {
 	if params == nil {
 		params = &SetDefaultMessageTypeInput{}
@@ -90,25 +90,25 @@ func (c *Client) addOperationSetDefaultMessageTypeMiddlewares(stack *middleware.
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -123,13 +123,16 @@ func (c *Client) addOperationSetDefaultMessageTypeMiddlewares(stack *middleware.
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpSetDefaultMessageTypeValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opSetDefaultMessageType(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

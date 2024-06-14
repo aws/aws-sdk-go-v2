@@ -54,13 +54,15 @@ type BatchContainerOverrides struct {
 	// The environment variables to send to the container. You can add new environment
 	// variables, which are added to the container at launch, or you can override the
 	// existing environment variables from the Docker image or the task definition.
+	//
 	// Environment variables cannot start with " Batch ". This naming convention is
 	// reserved for variables that Batch sets.
 	Environment []BatchEnvironmentVariable
 
-	// The instance type to use for a multi-node parallel job. This parameter isn't
-	// applicable to single-node container jobs or jobs that run on Fargate resources,
-	// and shouldn't be provided.
+	// The instance type to use for a multi-node parallel job.
+	//
+	// This parameter isn't applicable to single-node container jobs or jobs that run
+	// on Fargate resources, and shouldn't be provided.
 	InstanceType *string
 
 	// The type and amount of resources to assign to a container. This overrides the
@@ -74,6 +76,7 @@ type BatchContainerOverrides struct {
 // The environment variables to send to the container. You can add new environment
 // variables, which are added to the container at launch, or you can override the
 // existing environment variables from the Docker image or the task definition.
+//
 // Environment variables cannot start with " Batch ". This naming convention is
 // reserved for variables that Batch sets.
 type BatchEnvironmentVariable struct {
@@ -112,59 +115,98 @@ type BatchResourceRequirement struct {
 	Type BatchResourceRequirementType
 
 	// The quantity of the specified resource to reserve for the container. The values
-	// vary based on the type specified. type="GPU" The number of physical GPUs to
-	// reserve for the container. Make sure that the number of GPUs reserved for all
-	// containers in a job doesn't exceed the number of available GPUs on the compute
-	// resource that the job is launched on. GPUs aren't available for jobs that are
-	// running on Fargate resources. type="MEMORY" The memory hard limit (in MiB)
-	// present to the container. This parameter is supported for jobs that are running
-	// on EC2 resources. If your container attempts to exceed the memory specified, the
-	// container is terminated. This parameter maps to Memory in the  Create a
-	// container (https://docs.docker.com/engine/api/v1.23/#create-a-container) section
-	// of the Docker Remote API (https://docs.docker.com/engine/api/v1.23/) and the
-	// --memory option to docker run (https://docs.docker.com/engine/reference/run/) .
-	// You must specify at least 4 MiB of memory for a job. This is required but can be
-	// specified in several places for multi-node parallel (MNP) jobs. It must be
-	// specified for each node at least once. This parameter maps to Memory in the
-	// Create a container (https://docs.docker.com/engine/api/v1.23/#create-a-container)
-	// section of the Docker Remote API (https://docs.docker.com/engine/api/v1.23/)
-	// and the --memory option to docker run (https://docs.docker.com/engine/reference/run/)
-	// . If you're trying to maximize your resource utilization by providing your jobs
-	// as much memory as possible for a particular instance type, see Memory management (https://docs.aws.amazon.com/batch/latest/userguide/memory-management.html)
-	// in the Batch User Guide. For jobs that are running on Fargate resources, then
-	// value is the hard limit (in MiB), and must match one of the supported values and
-	// the VCPU values must be one of the values supported for that memory value.
-	// value = 512 VCPU = 0.25 value = 1024 VCPU = 0.25 or 0.5 value = 2048 VCPU =
-	// 0.25, 0.5, or 1 value = 3072 VCPU = 0.5, or 1 value = 4096 VCPU = 0.5, 1, or 2
-	// value = 5120, 6144, or 7168 VCPU = 1 or 2 value = 8192 VCPU = 1, 2, 4, or 8
-	// value = 9216, 10240, 11264, 12288, 13312, 14336, or 15360 VCPU = 2 or 4 value =
-	// 16384 VCPU = 2, 4, or 8 value = 17408, 18432, 19456, 21504, 22528, 23552,
-	// 25600, 26624, 27648, 29696, or 30720 VCPU = 4 value = 20480, 24576, or 28672
-	// VCPU = 4 or 8 value = 36864, 45056, 53248, or 61440 VCPU = 8 value = 32768,
-	// 40960, 49152, or 57344 VCPU = 8 or 16 value = 65536, 73728, 81920, 90112,
-	// 98304, 106496, 114688, or 122880 VCPU = 16 type="VCPU" The number of vCPUs
-	// reserved for the container. This parameter maps to CpuShares in the  Create a
-	// container (https://docs.docker.com/engine/api/v1.23/#create-a-container) section
-	// of the Docker Remote API (https://docs.docker.com/engine/api/v1.23/) and the
-	// --cpu-shares option to docker run (https://docs.docker.com/engine/reference/run/)
-	// . Each vCPU is equivalent to 1,024 CPU shares. For EC2 resources, you must
-	// specify at least one vCPU. This is required but can be specified in several
-	// places; it must be specified for each node at least once. The default for the
-	// Fargate On-Demand vCPU resource count quota is 6 vCPUs. For more information
-	// about Fargate quotas, see Fargate quotas (https://docs.aws.amazon.com/general/latest/gr/ecs-service.html#service-quotas-fargate)
-	// in the Amazon Web Services General Reference. For jobs that are running on
-	// Fargate resources, then value must match one of the supported values and the
-	// MEMORY values must be one of the values supported for that VCPU value. The
-	// supported values are 0.25, 0.5, 1, 2, 4, 8, and 16 value = 0.25 MEMORY = 512,
-	// 1024, or 2048 value = 0.5 MEMORY = 1024, 2048, 3072, or 4096 value = 1 MEMORY =
-	// 2048, 3072, 4096, 5120, 6144, 7168, or 8192 value = 2 MEMORY = 4096, 5120,
-	// 6144, 7168, 8192, 9216, 10240, 11264, 12288, 13312, 14336, 15360, or 16384 value
-	// = 4 MEMORY = 8192, 9216, 10240, 11264, 12288, 13312, 14336, 15360, 16384,
+	// vary based on the type specified.
+	//
+	// type="GPU" The number of physical GPUs to reserve for the container. Make sure
+	// that the number of GPUs reserved for all containers in a job doesn't exceed the
+	// number of available GPUs on the compute resource that the job is launched on.
+	//
+	// GPUs aren't available for jobs that are running on Fargate resources.
+	//
+	// type="MEMORY" The memory hard limit (in MiB) present to the container. This
+	// parameter is supported for jobs that are running on EC2 resources. If your
+	// container attempts to exceed the memory specified, the container is terminated.
+	// This parameter maps to Memory in the [Create a container] section of the [Docker Remote API] and the --memory option
+	// to [docker run]. You must specify at least 4 MiB of memory for a job. This is required but
+	// can be specified in several places for multi-node parallel (MNP) jobs. It must
+	// be specified for each node at least once. This parameter maps to Memory in the [Create a container]
+	// section of the [Docker Remote API]and the --memory option to [docker run].
+	//
+	// If you're trying to maximize your resource utilization by providing your jobs
+	// as much memory as possible for a particular instance type, see [Memory management]in the Batch
+	// User Guide.
+	//
+	// For jobs that are running on Fargate resources, then value is the hard limit
+	// (in MiB), and must match one of the supported values and the VCPU values must
+	// be one of the values supported for that memory value.
+	//
+	// value = 512 VCPU = 0.25
+	//
+	// value = 1024 VCPU = 0.25 or 0.5
+	//
+	// value = 2048 VCPU = 0.25, 0.5, or 1
+	//
+	// value = 3072 VCPU = 0.5, or 1
+	//
+	// value = 4096 VCPU = 0.5, 1, or 2
+	//
+	// value = 5120, 6144, or 7168 VCPU = 1 or 2
+	//
+	// value = 8192 VCPU = 1, 2, 4, or 8
+	//
+	// value = 9216, 10240, 11264, 12288, 13312, 14336, or 15360 VCPU = 2 or 4
+	//
+	// value = 16384 VCPU = 2, 4, or 8
+	//
+	// value = 17408, 18432, 19456, 21504, 22528, 23552, 25600, 26624, 27648, 29696,
+	// or 30720 VCPU = 4
+	//
+	// value = 20480, 24576, or 28672 VCPU = 4 or 8
+	//
+	// value = 36864, 45056, 53248, or 61440 VCPU = 8
+	//
+	// value = 32768, 40960, 49152, or 57344 VCPU = 8 or 16
+	//
+	// value = 65536, 73728, 81920, 90112, 98304, 106496, 114688, or 122880 VCPU = 16
+	//
+	// type="VCPU" The number of vCPUs reserved for the container. This parameter maps
+	// to CpuShares in the [Create a container] section of the [Docker Remote API] and the --cpu-shares option to [docker run]. Each vCPU
+	// is equivalent to 1,024 CPU shares. For EC2 resources, you must specify at least
+	// one vCPU. This is required but can be specified in several places; it must be
+	// specified for each node at least once.
+	//
+	// The default for the Fargate On-Demand vCPU resource count quota is 6 vCPUs. For
+	// more information about Fargate quotas, see [Fargate quotas]in the Amazon Web Services General
+	// Reference.
+	//
+	// For jobs that are running on Fargate resources, then value must match one of
+	// the supported values and the MEMORY values must be one of the values supported
+	// for that VCPU value. The supported values are 0.25, 0.5, 1, 2, 4, 8, and 16
+	//
+	// value = 0.25 MEMORY = 512, 1024, or 2048
+	//
+	// value = 0.5 MEMORY = 1024, 2048, 3072, or 4096
+	//
+	// value = 1 MEMORY = 2048, 3072, 4096, 5120, 6144, 7168, or 8192
+	//
+	// value = 2 MEMORY = 4096, 5120, 6144, 7168, 8192, 9216, 10240, 11264, 12288,
+	// 13312, 14336, 15360, or 16384
+	//
+	// value = 4 MEMORY = 8192, 9216, 10240, 11264, 12288, 13312, 14336, 15360, 16384,
 	// 17408, 18432, 19456, 20480, 21504, 22528, 23552, 24576, 25600, 26624, 27648,
-	// 28672, 29696, or 30720 value = 8 MEMORY = 16384, 20480, 24576, 28672, 32768,
-	// 36864, 40960, 45056, 49152, 53248, 57344, or 61440 value = 16 MEMORY = 32768,
-	// 40960, 49152, 57344, 65536, 73728, 81920, 90112, 98304, 106496, 114688, or
-	// 122880
+	// 28672, 29696, or 30720
+	//
+	// value = 8 MEMORY = 16384, 20480, 24576, 28672, 32768, 36864, 40960, 45056,
+	// 49152, 53248, 57344, or 61440
+	//
+	// value = 16 MEMORY = 32768, 40960, 49152, 57344, 65536, 73728, 81920, 90112,
+	// 98304, 106496, 114688, or 122880
+	//
+	// [docker run]: https://docs.docker.com/engine/reference/run/
+	// [Create a container]: https://docs.docker.com/engine/api/v1.23/#create-a-container
+	// [Memory management]: https://docs.aws.amazon.com/batch/latest/userguide/memory-management.html
+	// [Docker Remote API]: https://docs.docker.com/engine/api/v1.23/
+	// [Fargate quotas]: https://docs.aws.amazon.com/general/latest/gr/ecs-service.html#service-quotas-fargate
 	//
 	// This member is required.
 	Value *string
@@ -172,9 +214,10 @@ type BatchResourceRequirement struct {
 	noSmithyDocumentSerde
 }
 
-// The retry strategy that's associated with a job. For more information, see
-// Automated job retries (https://docs.aws.amazon.com/batch/latest/userguide/job_retries.html)
-// in the Batch User Guide.
+// The retry strategy that's associated with a job. For more information, see [Automated job retries] in
+// the Batch User Guide.
+//
+// [Automated job retries]: https://docs.aws.amazon.com/batch/latest/userguide/job_retries.html
 type BatchRetryStrategy struct {
 
 	// The number of times to move a job to the RUNNABLE status. If the value of
@@ -185,9 +228,10 @@ type BatchRetryStrategy struct {
 	noSmithyDocumentSerde
 }
 
-// The details of a capacity provider strategy. To learn more, see
-// CapacityProviderStrategyItem (https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_CapacityProviderStrategyItem.html)
-// in the Amazon ECS API Reference.
+// The details of a capacity provider strategy. To learn more, see [CapacityProviderStrategyItem] in the Amazon
+// ECS API Reference.
+//
+// [CapacityProviderStrategyItem]: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_CapacityProviderStrategyItem.html
 type CapacityProviderStrategyItem struct {
 
 	// The short name of the capacity provider.
@@ -235,10 +279,39 @@ type CloudwatchLogsLogDestinationParameters struct {
 // configuration.
 type DeadLetterConfig struct {
 
-	// The ARN of the specified target for the dead-letter queue. For Amazon Kinesis
-	// stream and Amazon DynamoDB stream sources, specify either an Amazon SNS topic or
-	// Amazon SQS queue ARN.
+	// The ARN of the specified target for the dead-letter queue.
+	//
+	// For Amazon Kinesis stream and Amazon DynamoDB stream sources, specify either an
+	// Amazon SNS topic or Amazon SQS queue ARN.
 	Arn *string
+
+	noSmithyDocumentSerde
+}
+
+// Maps source data to a dimension in the target Timestream for LiveAnalytics
+// table.
+//
+// For more information, see [Amazon Timestream for LiveAnalytics concepts]
+//
+// [Amazon Timestream for LiveAnalytics concepts]: https://docs.aws.amazon.com/timestream/latest/developerguide/concepts.html
+type DimensionMapping struct {
+
+	// The metadata attributes of the time series. For example, the name and
+	// Availability Zone of an Amazon EC2 instance or the name of the manufacturer of a
+	// wind turbine are dimensions.
+	//
+	// This member is required.
+	DimensionName *string
+
+	// Dynamic path to the dimension value in the source event.
+	//
+	// This member is required.
+	DimensionValue *string
+
+	// The data type of the dimension for the time-series data.
+	//
+	// This member is required.
+	DimensionValueType DimensionValueType
 
 	noSmithyDocumentSerde
 }
@@ -293,17 +366,24 @@ type EcsContainerOverride struct {
 // extension. Each line in an environment file should contain an environment
 // variable in VARIABLE=VALUE format. Lines beginning with # are treated as
 // comments and are ignored. For more information about the environment variable
-// file syntax, see Declare default environment variables in file (https://docs.docker.com/compose/env-file/)
-// . If there are environment variables specified using the environment parameter
-// in a container definition, they take precedence over the variables contained
-// within an environment file. If multiple environment files are specified that
-// contain the same variable, they're processed from the top down. We recommend
-// that you use unique variable names. For more information, see Specifying
-// environment variables (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/taskdef-envfiles.html)
-// in the Amazon Elastic Container Service Developer Guide. This parameter is only
-// supported for tasks hosted on Fargate using the following platform versions:
+// file syntax, see [Declare default environment variables in file].
+//
+// If there are environment variables specified using the environment parameter in
+// a container definition, they take precedence over the variables contained within
+// an environment file. If multiple environment files are specified that contain
+// the same variable, they're processed from the top down. We recommend that you
+// use unique variable names. For more information, see [Specifying environment variables]in the Amazon Elastic
+// Container Service Developer Guide.
+//
+// This parameter is only supported for tasks hosted on Fargate using the
+// following platform versions:
+//
 //   - Linux platform version 1.4.0 or later.
+//
 //   - Windows platform version 1.0.0 or later.
+//
+// [Declare default environment variables in file]: https://docs.docker.com/compose/env-file/
+// [Specifying environment variables]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/taskdef-envfiles.html
 type EcsEnvironmentFile struct {
 
 	// The file type to use. The only supported value is s3 .
@@ -339,11 +419,14 @@ type EcsEnvironmentVariable struct {
 
 // The amount of ephemeral storage to allocate for the task. This parameter is
 // used to expand the total amount of ephemeral storage available, beyond the
-// default amount, for tasks hosted on Fargate. For more information, see Fargate
-// task storage (https://docs.aws.amazon.com/AmazonECS/latest/userguide/using_data_volumes.html)
-// in the Amazon ECS User Guide for Fargate. This parameter is only supported for
-// tasks hosted on Fargate using Linux platform version 1.4.0 or later. This
-// parameter is not supported for Windows containers on Fargate.
+// default amount, for tasks hosted on Fargate. For more information, see [Fargate task storage]in the
+// Amazon ECS User Guide for Fargate.
+//
+// This parameter is only supported for tasks hosted on Fargate using Linux
+// platform version 1.4.0 or later. This parameter is not supported for Windows
+// containers on Fargate.
+//
+// [Fargate task storage]: https://docs.aws.amazon.com/AmazonECS/latest/userguide/using_data_volumes.html
 type EcsEphemeralStorage struct {
 
 	// The total amount, in GiB, of ephemeral storage to set for the task. The minimum
@@ -357,9 +440,10 @@ type EcsEphemeralStorage struct {
 
 // Details on an Elastic Inference accelerator task override. This parameter is
 // used to override the Elastic Inference accelerator specified in the task
-// definition. For more information, see Working with Amazon Elastic Inference on
-// Amazon ECS (https://docs.aws.amazon.com/AmazonECS/latest/userguide/ecs-inference.html)
-// in the Amazon Elastic Container Service Developer Guide.
+// definition. For more information, see [Working with Amazon Elastic Inference on Amazon ECS]in the Amazon Elastic Container Service
+// Developer Guide.
+//
+// [Working with Amazon Elastic Inference on Amazon ECS]: https://docs.aws.amazon.com/AmazonECS/latest/userguide/ecs-inference.html
 type EcsInferenceAcceleratorOverride struct {
 
 	// The Elastic Inference accelerator device name to override for the task. This
@@ -374,9 +458,10 @@ type EcsInferenceAcceleratorOverride struct {
 
 // The type and amount of a resource to assign to a container. The supported
 // resource types are GPUs and Elastic Inference accelerators. For more
-// information, see Working with GPUs on Amazon ECS (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-gpu.html)
-// or Working with Amazon Elastic Inference on Amazon ECS (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-inference.html)
-// in the Amazon Elastic Container Service Developer Guide
+// information, see [Working with GPUs on Amazon ECS]or [Working with Amazon Elastic Inference on Amazon ECS] in the Amazon Elastic Container Service Developer Guide
+//
+// [Working with Amazon Elastic Inference on Amazon ECS]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-inference.html
+// [Working with GPUs on Amazon ECS]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-gpu.html
 type EcsResourceRequirement struct {
 
 	// The type of resource to assign to a container. The supported values are GPU or
@@ -385,12 +470,15 @@ type EcsResourceRequirement struct {
 	// This member is required.
 	Type EcsResourceRequirementType
 
-	// The value for the specified resource type. If the GPU type is used, the value
-	// is the number of physical GPUs the Amazon ECS container agent reserves for the
-	// container. The number of GPUs that's reserved for all containers in a task can't
-	// exceed the number of available GPUs on the container instance that the task is
-	// launched on. If the InferenceAccelerator type is used, the value matches the
-	// deviceName for an InferenceAccelerator specified in a task definition.
+	// The value for the specified resource type.
+	//
+	// If the GPU type is used, the value is the number of physical GPUs the Amazon
+	// ECS container agent reserves for the container. The number of GPUs that's
+	// reserved for all containers in a task can't exceed the number of available GPUs
+	// on the container instance that the task is launched on.
+	//
+	// If the InferenceAccelerator type is used, the value matches the deviceName for
+	// an InferenceAccelerator specified in a task definition.
 	//
 	// This member is required.
 	Value *string
@@ -407,15 +495,21 @@ type EcsTaskOverride struct {
 	// The cpu override for the task.
 	Cpu *string
 
-	// The ephemeral storage setting override for the task. This parameter is only
-	// supported for tasks hosted on Fargate that use the following platform versions:
+	// The ephemeral storage setting override for the task.
+	//
+	// This parameter is only supported for tasks hosted on Fargate that use the
+	// following platform versions:
+	//
 	//   - Linux platform version 1.4.0 or later.
+	//
 	//   - Windows platform version 1.0.0 or later.
 	EphemeralStorage *EcsEphemeralStorage
 
 	// The Amazon Resource Name (ARN) of the task execution IAM role override for the
-	// task. For more information, see Amazon ECS task execution IAM role (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_execution_IAM_role.html)
-	// in the Amazon Elastic Container Service Developer Guide.
+	// task. For more information, see [Amazon ECS task execution IAM role]in the Amazon Elastic Container Service
+	// Developer Guide.
+	//
+	// [Amazon ECS task execution IAM role]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task_execution_IAM_role.html
 	ExecutionRoleArn *string
 
 	// The Elastic Inference accelerator override for the task.
@@ -426,16 +520,19 @@ type EcsTaskOverride struct {
 
 	// The Amazon Resource Name (ARN) of the IAM role that containers in this task can
 	// assume. All containers in this task are granted the permissions that are
-	// specified in this role. For more information, see IAM Role for Tasks (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-iam-roles.html)
-	// in the Amazon Elastic Container Service Developer Guide.
+	// specified in this role. For more information, see [IAM Role for Tasks]in the Amazon Elastic
+	// Container Service Developer Guide.
+	//
+	// [IAM Role for Tasks]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-iam-roles.html
 	TaskRoleArn *string
 
 	noSmithyDocumentSerde
 }
 
-// Filter events using an event pattern. For more information, see Events and
-// Event Patterns (https://docs.aws.amazon.com/eventbridge/latest/userguide/eventbridge-and-event-patterns.html)
-// in the Amazon EventBridge User Guide.
+// Filter events using an event pattern. For more information, see [Events and Event Patterns] in the Amazon
+// EventBridge User Guide.
+//
+// [Events and Event Patterns]: https://docs.aws.amazon.com/eventbridge/latest/userguide/eventbridge-and-event-patterns.html
 type Filter struct {
 
 	// The event pattern.
@@ -444,10 +541,14 @@ type Filter struct {
 	noSmithyDocumentSerde
 }
 
-// The collection of event patterns used to filter events. To remove a filter,
-// specify a FilterCriteria object with an empty array of Filter objects. For more
-// information, see Events and Event Patterns (https://docs.aws.amazon.com/eventbridge/latest/userguide/eventbridge-and-event-patterns.html)
-// in the Amazon EventBridge User Guide.
+// The collection of event patterns used to filter events.
+//
+// To remove a filter, specify a FilterCriteria object with an empty array of
+// Filter objects.
+//
+// For more information, see [Events and Event Patterns] in the Amazon EventBridge User Guide.
+//
+// [Events and Event Patterns]: https://docs.aws.amazon.com/eventbridge/latest/userguide/eventbridge-and-event-patterns.html
 type FilterCriteria struct {
 
 	// The event patterns.
@@ -456,21 +557,21 @@ type FilterCriteria struct {
 	noSmithyDocumentSerde
 }
 
-// The Amazon Kinesis Data Firehose logging configuration settings for the pipe.
+// The Amazon Data Firehose logging configuration settings for the pipe.
 type FirehoseLogDestination struct {
 
-	// The Amazon Resource Name (ARN) of the Kinesis Data Firehose delivery stream to
-	// which EventBridge delivers the pipe log records.
+	// The Amazon Resource Name (ARN) of the Firehose delivery stream to which
+	// EventBridge delivers the pipe log records.
 	DeliveryStreamArn *string
 
 	noSmithyDocumentSerde
 }
 
-// The Amazon Kinesis Data Firehose logging configuration settings for the pipe.
+// The Amazon Data Firehose logging configuration settings for the pipe.
 type FirehoseLogDestinationParameters struct {
 
-	// Specifies the Amazon Resource Name (ARN) of the Kinesis Data Firehose delivery
-	// stream to which EventBridge delivers the pipe log records.
+	// Specifies the Amazon Resource Name (ARN) of the Firehose delivery stream to
+	// which EventBridge delivers the pipe log records.
 	//
 	// This member is required.
 	DeliveryStreamArn *string
@@ -524,6 +625,50 @@ type MSKAccessCredentialsMemberSaslScram512Auth struct {
 
 func (*MSKAccessCredentialsMemberSaslScram512Auth) isMSKAccessCredentials() {}
 
+// A mapping of a source event data field to a measure in a Timestream for
+// LiveAnalytics record.
+type MultiMeasureAttributeMapping struct {
+
+	// Dynamic path to the measurement attribute in the source event.
+	//
+	// This member is required.
+	MeasureValue *string
+
+	// Data type of the measurement attribute in the source event.
+	//
+	// This member is required.
+	MeasureValueType MeasureValueType
+
+	// Target measure name to be used.
+	//
+	// This member is required.
+	MultiMeasureAttributeName *string
+
+	noSmithyDocumentSerde
+}
+
+// Maps multiple measures from the source event to the same Timestream for
+// LiveAnalytics record.
+//
+// For more information, see [Amazon Timestream for LiveAnalytics concepts]
+//
+// [Amazon Timestream for LiveAnalytics concepts]: https://docs.aws.amazon.com/timestream/latest/developerguide/concepts.html
+type MultiMeasureMapping struct {
+
+	// Mappings that represent multiple source event fields mapped to measures in the
+	// same Timestream for LiveAnalytics record.
+	//
+	// This member is required.
+	MultiMeasureAttributeMappings []MultiMeasureAttributeMapping
+
+	// The name of the multiple measurements per record (multi-measure).
+	//
+	// This member is required.
+	MultiMeasureName *string
+
+	noSmithyDocumentSerde
+}
+
 // This structure specifies the network configuration for an Amazon ECS task.
 type NetworkConfiguration struct {
 
@@ -554,8 +699,9 @@ type Pipe struct {
 	// The ARN of the enrichment resource.
 	Enrichment *string
 
-	// When the pipe was last updated, in ISO-8601 format (https://www.w3.org/TR/NOTE-datetime)
-	// (YYYY-MM-DDThh:mm:ss.sTZD).
+	// When the pipe was last updated, in [ISO-8601 format] (YYYY-MM-DDThh:mm:ss.sTZD).
+	//
+	// [ISO-8601 format]: https://www.w3.org/TR/NOTE-datetime
 	LastModifiedTime *time.Time
 
 	// The name of the pipe.
@@ -598,18 +744,22 @@ type PipeEnrichmentHttpParameters struct {
 type PipeEnrichmentParameters struct {
 
 	// Contains the HTTP parameters to use when the target is a API Gateway REST
-	// endpoint or EventBridge ApiDestination. If you specify an API Gateway REST API
-	// or EventBridge ApiDestination as a target, you can use this parameter to specify
-	// headers, path parameters, and query string keys/values as part of your target
-	// invoking request. If you're using ApiDestinations, the corresponding Connection
-	// can also have these values configured. In case of any conflicting keys, values
-	// from the Connection take precedence.
+	// endpoint or EventBridge ApiDestination.
+	//
+	// If you specify an API Gateway REST API or EventBridge ApiDestination as a
+	// target, you can use this parameter to specify headers, path parameters, and
+	// query string keys/values as part of your target invoking request. If you're
+	// using ApiDestinations, the corresponding Connection can also have these values
+	// configured. In case of any conflicting keys, values from the Connection take
+	// precedence.
 	HttpParameters *PipeEnrichmentHttpParameters
 
 	// Valid JSON text passed to the enrichment. In this case, nothing from the event
-	// itself is passed to the enrichment. For more information, see The JavaScript
-	// Object Notation (JSON) Data Interchange Format (http://www.rfc-editor.org/rfc/rfc7159.txt)
-	// . To remove an input template, specify an empty string.
+	// itself is passed to the enrichment. For more information, see [The JavaScript Object Notation (JSON) Data Interchange Format].
+	//
+	// To remove an input template, specify an empty string.
+	//
+	// [The JavaScript Object Notation (JSON) Data Interchange Format]: http://www.rfc-editor.org/rfc/rfc7159.txt
 	InputTemplate *string
 
 	noSmithyDocumentSerde
@@ -621,14 +771,17 @@ type PipeLogConfiguration struct {
 	// The Amazon CloudWatch Logs logging configuration settings for the pipe.
 	CloudwatchLogsLogDestination *CloudwatchLogsLogDestination
 
-	// The Amazon Kinesis Data Firehose logging configuration settings for the pipe.
+	// The Amazon Data Firehose logging configuration settings for the pipe.
 	FirehoseLogDestination *FirehoseLogDestination
 
 	// Whether the execution data (specifically, the payload , awsRequest , and
-	// awsResponse fields) is included in the log messages for this pipe. This applies
-	// to all log destinations for the pipe. For more information, see Including
-	// execution data in logs (https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-pipes-logs.html#eb-pipes-logs-execution-data)
-	// in the Amazon EventBridge User Guide.
+	// awsResponse fields) is included in the log messages for this pipe.
+	//
+	// This applies to all log destinations for the pipe.
+	//
+	// For more information, see [Including execution data in logs] in the Amazon EventBridge User Guide.
+	//
+	// [Including execution data in logs]: https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-pipes-logs.html#eb-pipes-logs-execution-data
 	IncludeExecutionData []IncludeExecutionDataOption
 
 	// The level of logging detail to include. This applies to all log destinations
@@ -641,26 +794,33 @@ type PipeLogConfiguration struct {
 	noSmithyDocumentSerde
 }
 
-// Specifies the logging configuration settings for the pipe. When you call
-// UpdatePipe , EventBridge updates the fields in the
+// Specifies the logging configuration settings for the pipe.
+//
+// When you call UpdatePipe , EventBridge updates the fields in the
 // PipeLogConfigurationParameters object atomically as one and overrides existing
 // values. This is by design. If you don't specify an optional field in any of the
 // Amazon Web Services service parameters objects (
 // CloudwatchLogsLogDestinationParameters , FirehoseLogDestinationParameters , or
 // S3LogDestinationParameters ), EventBridge sets that field to its system-default
-// value during the update. For example, suppose when you created the pipe you
-// specified a Kinesis Data Firehose stream log destination. You then update the
-// pipe to add an Amazon S3 log destination. In addition to specifying the
-// S3LogDestinationParameters for the new log destination, you must also specify
-// the fields in the FirehoseLogDestinationParameters object in order to retain
-// the Kinesis Data Firehose stream log destination. For more information on
-// generating pipe log records, see Log EventBridge Pipes in the Amazon
+// value during the update.
+//
+// For example, suppose when you created the pipe you specified a Firehose stream
+// log destination. You then update the pipe to add an Amazon S3 log destination.
+// In addition to specifying the S3LogDestinationParameters for the new log
+// destination, you must also specify the fields in the
+// FirehoseLogDestinationParameters object in order to retain the Firehose stream
+// log destination.
+//
+// For more information on generating pipe log records, see Log EventBridge Pipes in the Amazon
 // EventBridge User Guide.
 type PipeLogConfigurationParameters struct {
 
 	// The level of logging detail to include. This applies to all log destinations
-	// for the pipe. For more information, see Specifying EventBridge Pipes log level (https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-pipes-logs.html#eb-pipes-logs-level)
-	// in the Amazon EventBridge User Guide.
+	// for the pipe.
+	//
+	// For more information, see [Specifying EventBridge Pipes log level] in the Amazon EventBridge User Guide.
+	//
+	// [Specifying EventBridge Pipes log level]: https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-pipes-logs.html#eb-pipes-logs-level
 	//
 	// This member is required.
 	Level LogLevel
@@ -668,14 +828,19 @@ type PipeLogConfigurationParameters struct {
 	// The Amazon CloudWatch Logs logging configuration settings for the pipe.
 	CloudwatchLogsLogDestination *CloudwatchLogsLogDestinationParameters
 
-	// The Amazon Kinesis Data Firehose logging configuration settings for the pipe.
+	// The Amazon Data Firehose logging configuration settings for the pipe.
 	FirehoseLogDestination *FirehoseLogDestinationParameters
 
-	// Specify ON to include the execution data (specifically, the payload and
-	// awsRequest fields) in the log messages for this pipe. This applies to all log
-	// destinations for the pipe. For more information, see Including execution data
-	// in logs (https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-pipes-logs.html#eb-pipes-logs-execution-data)
-	// in the Amazon EventBridge User Guide. The default is OFF .
+	// Specify ALL to include the execution data (specifically, the payload ,
+	// awsRequest , and awsResponse fields) in the log messages for this pipe.
+	//
+	// This applies to all log destinations for the pipe.
+	//
+	// For more information, see [Including execution data in logs] in the Amazon EventBridge User Guide.
+	//
+	// By default, execution data is not included.
+	//
+	// [Including execution data in logs]: https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-pipes-logs.html#eb-pipes-logs-execution-data
 	IncludeExecutionData []IncludeExecutionDataOption
 
 	// The Amazon S3 logging configuration settings for the pipe.
@@ -825,10 +990,14 @@ type PipeSourceParameters struct {
 	// The parameters for using a DynamoDB stream as a source.
 	DynamoDBStreamParameters *PipeSourceDynamoDBStreamParameters
 
-	// The collection of event patterns used to filter events. To remove a filter,
-	// specify a FilterCriteria object with an empty array of Filter objects. For more
-	// information, see Events and Event Patterns (https://docs.aws.amazon.com/eventbridge/latest/userguide/eventbridge-and-event-patterns.html)
-	// in the Amazon EventBridge User Guide.
+	// The collection of event patterns used to filter events.
+	//
+	// To remove a filter, specify a FilterCriteria object with an empty array of
+	// Filter objects.
+	//
+	// For more information, see [Events and Event Patterns] in the Amazon EventBridge User Guide.
+	//
+	// [Events and Event Patterns]: https://docs.aws.amazon.com/eventbridge/latest/userguide/eventbridge-and-event-patterns.html
 	FilterCriteria *FilterCriteria
 
 	// The parameters for using a Kinesis stream as a source.
@@ -841,6 +1010,16 @@ type PipeSourceParameters struct {
 	RabbitMQBrokerParameters *PipeSourceRabbitMQBrokerParameters
 
 	// The parameters for using a self-managed Apache Kafka stream as a source.
+	//
+	// A self managed cluster refers to any Apache Kafka cluster not hosted by Amazon
+	// Web Services. This includes both clusters you manage yourself, as well as those
+	// hosted by a third-party provider, such as [Confluent Cloud], [CloudKarafka], or [Redpanda]. For more information, see [Apache Kafka streams as a source]
+	// in the Amazon EventBridge User Guide.
+	//
+	// [CloudKarafka]: https://www.cloudkarafka.com/
+	// [Apache Kafka streams as a source]: https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-pipes-kafka.html
+	// [Confluent Cloud]: https://www.confluent.io/
+	// [Redpanda]: https://redpanda.com/
 	SelfManagedKafkaParameters *PipeSourceSelfManagedKafkaParameters
 
 	// The parameters for using a Amazon SQS stream as a source.
@@ -875,6 +1054,16 @@ type PipeSourceRabbitMQBrokerParameters struct {
 }
 
 // The parameters for using a self-managed Apache Kafka stream as a source.
+//
+// A self managed cluster refers to any Apache Kafka cluster not hosted by Amazon
+// Web Services. This includes both clusters you manage yourself, as well as those
+// hosted by a third-party provider, such as [Confluent Cloud], [CloudKarafka], or [Redpanda]. For more information, see [Apache Kafka streams as a source]
+// in the Amazon EventBridge User Guide.
+//
+// [CloudKarafka]: https://www.cloudkarafka.com/
+// [Apache Kafka streams as a source]: https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-pipes-kafka.html
+// [Confluent Cloud]: https://www.confluent.io/
+// [Redpanda]: https://redpanda.com/
 type PipeSourceSelfManagedKafkaParameters struct {
 
 	// The name of the topic that the pipe will read from.
@@ -985,20 +1174,23 @@ type PipeTargetCloudWatchLogsParameters struct {
 // The parameters for using an Amazon ECS task as a target.
 type PipeTargetEcsTaskParameters struct {
 
-	// The ARN of the task definition to use if the event target is an Amazon ECS task.
+	// The ARN of the task definition to use if the event target is an Amazon ECS
+	// task.
 	//
 	// This member is required.
 	TaskDefinitionArn *string
 
-	// The capacity provider strategy to use for the task. If a
-	// capacityProviderStrategy is specified, the launchType parameter must be
+	// The capacity provider strategy to use for the task.
+	//
+	// If a capacityProviderStrategy is specified, the launchType parameter must be
 	// omitted. If no capacityProviderStrategy or launchType is specified, the
 	// defaultCapacityProviderStrategy for the cluster is used.
 	CapacityProviderStrategy []CapacityProviderStrategyItem
 
 	// Specifies whether to enable Amazon ECS managed tags for the task. For more
-	// information, see Tagging Your Amazon ECS Resources (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-using-tags.html)
-	// in the Amazon Elastic Container Service Developer Guide.
+	// information, see [Tagging Your Amazon ECS Resources]in the Amazon Elastic Container Service Developer Guide.
+	//
+	// [Tagging Your Amazon ECS Resources]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-using-tags.html
 	EnableECSManagedTags bool
 
 	// Whether or not to enable the execute command functionality for the containers
@@ -1013,14 +1205,17 @@ type PipeTargetEcsTaskParameters struct {
 	// Specifies the launch type on which your task is running. The launch type that
 	// you specify here must match one of the launch type (compatibilities) of the
 	// target task. The FARGATE value is supported only in the Regions where Fargate
-	// with Amazon ECS is supported. For more information, see Fargate on Amazon ECS (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/AWS-Fargate.html)
-	// in the Amazon Elastic Container Service Developer Guide.
+	// with Amazon ECS is supported. For more information, see [Fargate on Amazon ECS]in the Amazon Elastic
+	// Container Service Developer Guide.
+	//
+	// [Fargate on Amazon ECS]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/AWS-Fargate.html
 	LaunchType LaunchType
 
 	// Use this structure if the Amazon ECS task uses the awsvpc network mode. This
 	// structure specifies the VPC subnets and security groups associated with the
 	// task, and whether a public IP address is to be used. This structure is required
 	// if LaunchType is FARGATE because the awsvpc mode is required for Fargate tasks.
+	//
 	// If you specify NetworkConfiguration when the target ECS task does not use the
 	// awsvpc network mode, the task fails.
 	NetworkConfiguration *NetworkConfiguration
@@ -1038,10 +1233,13 @@ type PipeTargetEcsTaskParameters struct {
 	PlacementStrategy []PlacementStrategy
 
 	// Specifies the platform version for the task. Specify only the numeric portion
-	// of the platform version, such as 1.1.0 . This structure is used only if
-	// LaunchType is FARGATE . For more information about valid platform versions, see
-	// Fargate Platform Versions (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/platform_versions.html)
-	// in the Amazon Elastic Container Service Developer Guide.
+	// of the platform version, such as 1.1.0 .
+	//
+	// This structure is used only if LaunchType is FARGATE . For more information
+	// about valid platform versions, see [Fargate Platform Versions]in the Amazon Elastic Container Service
+	// Developer Guide.
+	//
+	// [Fargate Platform Versions]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/platform_versions.html
 	PlatformVersion *string
 
 	// Specifies whether to propagate the tags from the task definition to the task.
@@ -1055,8 +1253,9 @@ type PipeTargetEcsTaskParameters struct {
 
 	// The metadata that you apply to the task to help you categorize and organize
 	// them. Each tag consists of a key and an optional value, both of which you
-	// define. To learn more, see RunTask (https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_RunTask.html#ECS-RunTask-request-tags)
-	// in the Amazon ECS API Reference.
+	// define. To learn more, see [RunTask]in the Amazon ECS API Reference.
+	//
+	// [RunTask]: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_RunTask.html#ECS-RunTask-request-tags
 	Tags []Tag
 
 	// The number of tasks to create based on TaskDefinition . The default is 1.
@@ -1084,9 +1283,11 @@ type PipeTargetEventBridgeEventBusParameters struct {
 	// The source of the event.
 	Source *string
 
-	// The time stamp of the event, per RFC3339 (https://www.rfc-editor.org/rfc/rfc3339.txt)
-	// . If no time stamp is provided, the time stamp of the PutEvents (https://docs.aws.amazon.com/eventbridge/latest/APIReference/API_PutEvents.html)
-	// call is used.
+	// The time stamp of the event, per [RFC3339]. If no time stamp is provided, the time stamp
+	// of the [PutEvents]call is used.
+	//
+	// [PutEvents]: https://docs.aws.amazon.com/eventbridge/latest/APIReference/API_PutEvents.html
+	// [RFC3339]: https://www.rfc-editor.org/rfc/rfc3339.txt
 	Time *string
 
 	noSmithyDocumentSerde
@@ -1133,23 +1334,28 @@ type PipeTargetKinesisStreamParameters struct {
 type PipeTargetLambdaFunctionParameters struct {
 
 	// Specify whether to invoke the function synchronously or asynchronously.
+	//
 	//   - REQUEST_RESPONSE (default) - Invoke synchronously. This corresponds to the
-	//   RequestResponse option in the InvocationType parameter for the Lambda Invoke (https://docs.aws.amazon.com/lambda/latest/dg/API_Invoke.html#API_Invoke_RequestSyntax)
-	//   API.
+	//   RequestResponse option in the InvocationType parameter for the Lambda [Invoke]API.
+	//
 	//   - FIRE_AND_FORGET - Invoke asynchronously. This corresponds to the Event
-	//   option in the InvocationType parameter for the Lambda Invoke (https://docs.aws.amazon.com/lambda/latest/dg/API_Invoke.html#API_Invoke_RequestSyntax)
-	//   API.
-	// For more information, see Invocation types (https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-pipes.html#pipes-invocation)
-	// in the Amazon EventBridge User Guide.
+	//   option in the InvocationType parameter for the Lambda [Invoke]API.
+	//
+	// For more information, see [Invocation types] in the Amazon EventBridge User Guide.
+	//
+	// [Invocation types]: https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-pipes.html#pipes-invocation
+	// [Invoke]: https://docs.aws.amazon.com/lambda/latest/dg/API_Invoke.html#API_Invoke_RequestSyntax
 	InvocationType PipeTargetInvocationType
 
 	noSmithyDocumentSerde
 }
 
-// The parameters required to set up a target for your pipe. For more information
-// about pipe target parameters, including how to use dynamic path parameters, see
-// Target parameters (https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-pipes-event-target.html)
-// in the Amazon EventBridge User Guide.
+// The parameters required to set up a target for your pipe.
+//
+// For more information about pipe target parameters, including how to use dynamic
+// path parameters, see [Target parameters]in the Amazon EventBridge User Guide.
+//
+// [Target parameters]: https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-pipes-event-target.html
 type PipeTargetParameters struct {
 
 	// The parameters for using an Batch job as a target.
@@ -1169,9 +1375,11 @@ type PipeTargetParameters struct {
 	HttpParameters *PipeTargetHttpParameters
 
 	// Valid JSON text passed to the target. In this case, nothing from the event
-	// itself is passed to the target. For more information, see The JavaScript Object
-	// Notation (JSON) Data Interchange Format (http://www.rfc-editor.org/rfc/rfc7159.txt)
-	// . To remove an input template, specify an empty string.
+	// itself is passed to the target. For more information, see [The JavaScript Object Notation (JSON) Data Interchange Format].
+	//
+	// To remove an input template, specify an empty string.
+	//
+	// [The JavaScript Object Notation (JSON) Data Interchange Format]: http://www.rfc-editor.org/rfc/rfc7159.txt
 	InputTemplate *string
 
 	// The parameters for using a Kinesis stream as a target.
@@ -1192,6 +1400,9 @@ type PipeTargetParameters struct {
 
 	// The parameters for using a Step Functions state machine as a target.
 	StepFunctionStateMachineParameters *PipeTargetStateMachineParameters
+
+	// The parameters for using a Timestream for LiveAnalytics table as a target.
+	TimestreamParameters *PipeTargetTimestreamParameters
 
 	noSmithyDocumentSerde
 }
@@ -1243,8 +1454,9 @@ type PipeTargetSageMakerPipelineParameters struct {
 // The parameters for using a Amazon SQS stream as a target.
 type PipeTargetSqsQueueParameters struct {
 
-	// This parameter applies only to FIFO (first-in-first-out) queues. The token used
-	// for deduplication of sent messages.
+	// This parameter applies only to FIFO (first-in-first-out) queues.
+	//
+	// The token used for deduplication of sent messages.
 	MessageDeduplicationId *string
 
 	// The FIFO message group ID to use as the target.
@@ -1258,29 +1470,101 @@ type PipeTargetStateMachineParameters struct {
 
 	// Specify whether to invoke the Step Functions state machine synchronously or
 	// asynchronously.
-	//   - REQUEST_RESPONSE (default) - Invoke synchronously. For more information, see
-	//   StartSyncExecution (https://docs.aws.amazon.com/step-functions/latest/apireference/API_StartSyncExecution.html)
-	//   in the Step Functions API Reference. REQUEST_RESPONSE is not supported for
-	//   STANDARD state machine workflows.
-	//   - FIRE_AND_FORGET - Invoke asynchronously. For more information, see
-	//   StartExecution (https://docs.aws.amazon.com/step-functions/latest/apireference/API_StartExecution.html)
+	//
+	//   - REQUEST_RESPONSE (default) - Invoke synchronously. For more information, see [StartSyncExecution]
 	//   in the Step Functions API Reference.
-	// For more information, see Invocation types (https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-pipes.html#pipes-invocation)
-	// in the Amazon EventBridge User Guide.
+	//
+	// REQUEST_RESPONSE is not supported for STANDARD state machine workflows.
+	//
+	//   - FIRE_AND_FORGET - Invoke asynchronously. For more information, see [StartExecution]in the
+	//   Step Functions API Reference.
+	//
+	// For more information, see [Invocation types] in the Amazon EventBridge User Guide.
+	//
+	// [StartExecution]: https://docs.aws.amazon.com/step-functions/latest/apireference/API_StartExecution.html
+	// [StartSyncExecution]: https://docs.aws.amazon.com/step-functions/latest/apireference/API_StartSyncExecution.html
+	// [Invocation types]: https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-pipes.html#pipes-invocation
 	InvocationType PipeTargetInvocationType
 
 	noSmithyDocumentSerde
 }
 
-// An object representing a constraint on task placement. To learn more, see Task
-// Placement Constraints (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-placement-constraints.html)
-// in the Amazon Elastic Container Service Developer Guide.
+// The parameters for using a Timestream for LiveAnalytics table as a target.
+type PipeTargetTimestreamParameters struct {
+
+	// Map source data to dimensions in the target Timestream for LiveAnalytics table.
+	//
+	// For more information, see [Amazon Timestream for LiveAnalytics concepts]
+	//
+	// [Amazon Timestream for LiveAnalytics concepts]: https://docs.aws.amazon.com/timestream/latest/developerguide/concepts.html
+	//
+	// This member is required.
+	DimensionMappings []DimensionMapping
+
+	// Dynamic path to the source data field that represents the time value for your
+	// data.
+	//
+	// This member is required.
+	TimeValue *string
+
+	// 64 bit version value or source data field that represents the version value for
+	// your data.
+	//
+	// Write requests with a higher version number will update the existing measure
+	// values of the record and version. In cases where the measure value is the same,
+	// the version will still be updated.
+	//
+	// Default value is 1.
+	//
+	// Timestream for LiveAnalytics does not support updating partial measure values
+	// in a record.
+	//
+	// Write requests for duplicate data with a higher version number will update the
+	// existing measure value and version. In cases where the measure value is the
+	// same, Version will still be updated. Default value is 1 .
+	//
+	// Version must be 1 or greater, or you will receive a ValidationException error.
+	//
+	// This member is required.
+	VersionValue *string
+
+	// The granularity of the time units used. Default is MILLISECONDS .
+	//
+	// Required if TimeFieldType is specified as EPOCH .
+	EpochTimeUnit EpochTimeUnit
+
+	// Maps multiple measures from the source event to the same record in the
+	// specified Timestream for LiveAnalytics table.
+	MultiMeasureMappings []MultiMeasureMapping
+
+	// Mappings of single source data fields to individual records in the specified
+	// Timestream for LiveAnalytics table.
+	SingleMeasureMappings []SingleMeasureMapping
+
+	// The type of time value used.
+	//
+	// The default is EPOCH .
+	TimeFieldType TimeFieldType
+
+	// How to format the timestamps. For example, YYYY-MM-DDThh:mm:ss.sssTZD .
+	//
+	// Required if TimeFieldType is specified as TIMESTAMP_FORMAT .
+	TimestampFormat *string
+
+	noSmithyDocumentSerde
+}
+
+// An object representing a constraint on task placement. To learn more, see [Task Placement Constraints] in
+// the Amazon Elastic Container Service Developer Guide.
+//
+// [Task Placement Constraints]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-placement-constraints.html
 type PlacementConstraint struct {
 
 	// A cluster query language expression to apply to the constraint. You cannot
 	// specify an expression if the constraint type is distinctInstance . To learn
-	// more, see Cluster Query Language (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/cluster-query-language.html)
-	// in the Amazon Elastic Container Service Developer Guide.
+	// more, see [Cluster Query Language]in the Amazon Elastic Container Service Developer Guide.
+	//
+	// [Cluster Query Language]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/cluster-query-language.html
 	Expression *string
 
 	// The type of constraint. Use distinctInstance to ensure that each task in a
@@ -1291,9 +1575,10 @@ type PlacementConstraint struct {
 	noSmithyDocumentSerde
 }
 
-// The task placement strategy for a task or service. To learn more, see Task
-// Placement Strategies (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-placement-strategies.html)
-// in the Amazon Elastic Container Service Service Developer Guide.
+// The task placement strategy for a task or service. To learn more, see [Task Placement Strategies] in the
+// Amazon Elastic Container Service Service Developer Guide.
+//
+// [Task Placement Strategies]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-placement-strategies.html
 type PlacementStrategy struct {
 
 	// The field to apply the placement strategy against. For the spread placement
@@ -1328,14 +1613,21 @@ type S3LogDestination struct {
 	BucketOwner *string
 
 	// The format EventBridge uses for the log records.
+	//
 	//   - json : JSON
+	//
 	//   - plain : Plain text
-	//   - w3c : W3C extended logging file format (https://www.w3.org/TR/WD-logfile)
+	//
+	//   - w3c : [W3C extended logging file format]
+	//
+	// [W3C extended logging file format]: https://www.w3.org/TR/WD-logfile
 	OutputFormat S3OutputFormat
 
-	// The prefix text with which to begin Amazon S3 log object names. For more
-	// information, see Organizing objects using prefixes (https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-prefixes.html)
-	// in the Amazon Simple Storage Service User Guide.
+	// The prefix text with which to begin Amazon S3 log object names.
+	//
+	// For more information, see [Organizing objects using prefixes] in the Amazon Simple Storage Service User Guide.
+	//
+	// [Organizing objects using prefixes]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-prefixes.html
 	Prefix *string
 
 	noSmithyDocumentSerde
@@ -1357,17 +1649,25 @@ type S3LogDestinationParameters struct {
 	BucketOwner *string
 
 	// How EventBridge should format the log records.
+	//
 	//   - json : JSON
+	//
 	//   - plain : Plain text
-	//   - w3c : W3C extended logging file format (https://www.w3.org/TR/WD-logfile)
+	//
+	//   - w3c : [W3C extended logging file format]
+	//
+	// [W3C extended logging file format]: https://www.w3.org/TR/WD-logfile
 	OutputFormat S3OutputFormat
 
-	// Specifies any prefix text with which to begin Amazon S3 log object names. You
-	// can use prefixes to organize the data that you store in Amazon S3 buckets. A
-	// prefix is a string of characters at the beginning of the object key name. A
+	// Specifies any prefix text with which to begin Amazon S3 log object names.
+	//
+	// You can use prefixes to organize the data that you store in Amazon S3 buckets.
+	// A prefix is a string of characters at the beginning of the object key name. A
 	// prefix can be any length, subject to the maximum length of the object key name
-	// (1,024 bytes). For more information, see Organizing objects using prefixes (https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-prefixes.html)
-	// in the Amazon Simple Storage Service User Guide.
+	// (1,024 bytes). For more information, see [Organizing objects using prefixes]in the Amazon Simple Storage Service
+	// User Guide.
+	//
+	// [Organizing objects using prefixes]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-prefixes.html
 	Prefix *string
 
 	noSmithyDocumentSerde
@@ -1455,6 +1755,32 @@ type SelfManagedKafkaAccessConfigurationVpc struct {
 	// Specifies the subnets associated with the stream. These subnets must all be in
 	// the same VPC. You can specify as many as 16 subnets.
 	Subnets []string
+
+	noSmithyDocumentSerde
+}
+
+// Maps a single source data field to a single record in the specified Timestream
+// for LiveAnalytics table.
+//
+// For more information, see [Amazon Timestream for LiveAnalytics concepts]
+//
+// [Amazon Timestream for LiveAnalytics concepts]: https://docs.aws.amazon.com/timestream/latest/developerguide/concepts.html
+type SingleMeasureMapping struct {
+
+	// Target measure name for the measurement attribute in the Timestream table.
+	//
+	// This member is required.
+	MeasureName *string
+
+	// Dynamic path of the source field to map to the measure in the record.
+	//
+	// This member is required.
+	MeasureValue *string
+
+	// Data type of the source field.
+	//
+	// This member is required.
+	MeasureValueType MeasureValueType
 
 	noSmithyDocumentSerde
 }
@@ -1588,10 +1914,14 @@ type UpdatePipeSourceParameters struct {
 	// The parameters for using a DynamoDB stream as a source.
 	DynamoDBStreamParameters *UpdatePipeSourceDynamoDBStreamParameters
 
-	// The collection of event patterns used to filter events. To remove a filter,
-	// specify a FilterCriteria object with an empty array of Filter objects. For more
-	// information, see Events and Event Patterns (https://docs.aws.amazon.com/eventbridge/latest/userguide/eventbridge-and-event-patterns.html)
-	// in the Amazon EventBridge User Guide.
+	// The collection of event patterns used to filter events.
+	//
+	// To remove a filter, specify a FilterCriteria object with an empty array of
+	// Filter objects.
+	//
+	// For more information, see [Events and Event Patterns] in the Amazon EventBridge User Guide.
+	//
+	// [Events and Event Patterns]: https://docs.aws.amazon.com/eventbridge/latest/userguide/eventbridge-and-event-patterns.html
 	FilterCriteria *FilterCriteria
 
 	// The parameters for using a Kinesis stream as a source.
@@ -1604,6 +1934,16 @@ type UpdatePipeSourceParameters struct {
 	RabbitMQBrokerParameters *UpdatePipeSourceRabbitMQBrokerParameters
 
 	// The parameters for using a self-managed Apache Kafka stream as a source.
+	//
+	// A self managed cluster refers to any Apache Kafka cluster not hosted by Amazon
+	// Web Services. This includes both clusters you manage yourself, as well as those
+	// hosted by a third-party provider, such as [Confluent Cloud], [CloudKarafka], or [Redpanda]. For more information, see [Apache Kafka streams as a source]
+	// in the Amazon EventBridge User Guide.
+	//
+	// [CloudKarafka]: https://www.cloudkarafka.com/
+	// [Apache Kafka streams as a source]: https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-pipes-kafka.html
+	// [Confluent Cloud]: https://www.confluent.io/
+	// [Redpanda]: https://redpanda.com/
 	SelfManagedKafkaParameters *UpdatePipeSourceSelfManagedKafkaParameters
 
 	// The parameters for using a Amazon SQS stream as a source.
@@ -1630,6 +1970,16 @@ type UpdatePipeSourceRabbitMQBrokerParameters struct {
 }
 
 // The parameters for using a self-managed Apache Kafka stream as a source.
+//
+// A self managed cluster refers to any Apache Kafka cluster not hosted by Amazon
+// Web Services. This includes both clusters you manage yourself, as well as those
+// hosted by a third-party provider, such as [Confluent Cloud], [CloudKarafka], or [Redpanda]. For more information, see [Apache Kafka streams as a source]
+// in the Amazon EventBridge User Guide.
+//
+// [CloudKarafka]: https://www.cloudkarafka.com/
+// [Apache Kafka streams as a source]: https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-pipes-kafka.html
+// [Confluent Cloud]: https://www.confluent.io/
+// [Redpanda]: https://redpanda.com/
 type UpdatePipeSourceSelfManagedKafkaParameters struct {
 
 	// The maximum number of records to include in each batch.

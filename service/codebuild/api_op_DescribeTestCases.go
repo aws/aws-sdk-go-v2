@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/codebuild/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -30,25 +29,25 @@ func (c *Client) DescribeTestCases(ctx context.Context, params *DescribeTestCase
 
 type DescribeTestCasesInput struct {
 
-	// The ARN of the report for which test cases are returned.
+	//  The ARN of the report for which test cases are returned.
 	//
 	// This member is required.
 	ReportArn *string
 
-	// A TestCaseFilter object used to filter the returned reports.
+	//  A TestCaseFilter object used to filter the returned reports.
 	Filter *types.TestCaseFilter
 
-	// The maximum number of paginated test cases returned per response. Use nextToken
+	//  The maximum number of paginated test cases returned per response. Use nextToken
 	// to iterate pages in the list of returned TestCase objects. The default value is
 	// 100.
 	MaxResults *int32
 
-	// During a previous call, the maximum number of items that can be returned is the
-	// value specified in maxResults . If there more items in the list, then a unique
-	// string called a nextToken is returned. To get the next batch of items in the
-	// list, call this operation again, adding the next token to the call. To get all
-	// of the items in the list, keep calling this operation with each subsequent next
-	// token that is returned, until no more next tokens are returned.
+	//  During a previous call, the maximum number of items that can be returned is
+	// the value specified in maxResults . If there more items in the list, then a
+	// unique string called a nextToken is returned. To get the next batch of items in
+	// the list, call this operation again, adding the next token to the call. To get
+	// all of the items in the list, keep calling this operation with each subsequent
+	// next token that is returned, until no more next tokens are returned.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -56,15 +55,15 @@ type DescribeTestCasesInput struct {
 
 type DescribeTestCasesOutput struct {
 
-	// During a previous call, the maximum number of items that can be returned is the
-	// value specified in maxResults . If there more items in the list, then a unique
-	// string called a nextToken is returned. To get the next batch of items in the
-	// list, call this operation again, adding the next token to the call. To get all
-	// of the items in the list, keep calling this operation with each subsequent next
-	// token that is returned, until no more next tokens are returned.
+	//  During a previous call, the maximum number of items that can be returned is
+	// the value specified in maxResults . If there more items in the list, then a
+	// unique string called a nextToken is returned. To get the next batch of items in
+	// the list, call this operation again, adding the next token to the call. To get
+	// all of the items in the list, keep calling this operation with each subsequent
+	// next token that is returned, until no more next tokens are returned.
 	NextToken *string
 
-	// The returned list of test cases.
+	//  The returned list of test cases.
 	TestCases []types.TestCase
 
 	// Metadata pertaining to the operation's result.
@@ -95,25 +94,25 @@ func (c *Client) addOperationDescribeTestCasesMiddlewares(stack *middleware.Stac
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -128,13 +127,16 @@ func (c *Client) addOperationDescribeTestCasesMiddlewares(stack *middleware.Stac
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDescribeTestCasesValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeTestCases(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -162,7 +164,7 @@ var _ DescribeTestCasesAPIClient = (*Client)(nil)
 
 // DescribeTestCasesPaginatorOptions is the paginator options for DescribeTestCases
 type DescribeTestCasesPaginatorOptions struct {
-	// The maximum number of paginated test cases returned per response. Use nextToken
+	//  The maximum number of paginated test cases returned per response. Use nextToken
 	// to iterate pages in the list of returned TestCase objects. The default value is
 	// 100.
 	Limit int32

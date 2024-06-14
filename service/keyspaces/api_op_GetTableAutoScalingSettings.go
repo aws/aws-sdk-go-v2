@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/keyspaces/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -14,12 +13,23 @@ import (
 
 // Returns auto scaling related settings of the specified table in JSON format. If
 // the table is a multi-Region table, the Amazon Web Services Region specific auto
-// scaling settings of the table are included. Amazon Keyspaces auto scaling helps
-// you provision throughput capacity for variable workloads efficiently by
-// increasing and decreasing your table's read and write capacity automatically in
-// response to application traffic. For more information, see Managing throughput
-// capacity automatically with Amazon Keyspaces auto scaling (https://docs.aws.amazon.com/keyspaces/latest/devguide/autoscaling.html)
-// in the Amazon Keyspaces Developer Guide.
+// scaling settings of the table are included.
+//
+// Amazon Keyspaces auto scaling helps you provision throughput capacity for
+// variable workloads efficiently by increasing and decreasing your table's read
+// and write capacity automatically in response to application traffic. For more
+// information, see [Managing throughput capacity automatically with Amazon Keyspaces auto scaling]in the Amazon Keyspaces Developer Guide.
+//
+// GetTableAutoScalingSettings can't be used as an action in an IAM policy.
+//
+// To define permissions for GetTableAutoScalingSettings , you must allow the
+// following two actions in the IAM policy statement's Action element:
+//
+//   - application-autoscaling:DescribeScalableTargets
+//
+//   - application-autoscaling:DescribeScalingPolicies
+//
+// [Managing throughput capacity automatically with Amazon Keyspaces auto scaling]: https://docs.aws.amazon.com/keyspaces/latest/devguide/autoscaling.html
 func (c *Client) GetTableAutoScalingSettings(ctx context.Context, params *GetTableAutoScalingSettingsInput, optFns ...func(*Options)) (*GetTableAutoScalingSettingsOutput, error) {
 	if params == nil {
 		params = &GetTableAutoScalingSettingsInput{}
@@ -102,25 +112,25 @@ func (c *Client) addOperationGetTableAutoScalingSettingsMiddlewares(stack *middl
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -135,13 +145,16 @@ func (c *Client) addOperationGetTableAutoScalingSettingsMiddlewares(stack *middl
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpGetTableAutoScalingSettingsValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetTableAutoScalingSettings(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

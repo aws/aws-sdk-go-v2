@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/ebs/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -14,11 +13,13 @@ import (
 
 // Seals and completes the snapshot after all of the required blocks of data have
 // been written to it. Completing the snapshot changes the status to completed .
-// You cannot write new blocks to a snapshot after it has been completed. You
-// should always retry requests that receive server ( 5xx ) error responses, and
-// ThrottlingException and RequestThrottledException client error responses. For
-// more information see Error retries (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/error-retries.html)
-// in the Amazon Elastic Compute Cloud User Guide.
+// You cannot write new blocks to a snapshot after it has been completed.
+//
+// You should always retry requests that receive server ( 5xx ) error responses,
+// and ThrottlingException and RequestThrottledException client error responses.
+// For more information see [Error retries]in the Amazon Elastic Compute Cloud User Guide.
+//
+// [Error retries]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/error-retries.html
 func (c *Client) CompleteSnapshot(ctx context.Context, params *CompleteSnapshotInput, optFns ...func(*Options)) (*CompleteSnapshotOutput, error) {
 	if params == nil {
 		params = &CompleteSnapshotInput{}
@@ -47,7 +48,9 @@ type CompleteSnapshotInput struct {
 	SnapshotId *string
 
 	// An aggregated Base-64 SHA256 checksum based on the checksums of each written
-	// block. To generate the aggregated checksum using the linear aggregation method,
+	// block.
+	//
+	// To generate the aggregated checksum using the linear aggregation method,
 	// arrange the checksums for each written block in ascending order of their block
 	// index, concatenate them to form a single string, and then generate the checksum
 	// on the entire string using the SHA256 algorithm.
@@ -97,25 +100,25 @@ func (c *Client) addOperationCompleteSnapshotMiddlewares(stack *middleware.Stack
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -130,13 +133,16 @@ func (c *Client) addOperationCompleteSnapshotMiddlewares(stack *middleware.Stack
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpCompleteSnapshotValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCompleteSnapshot(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

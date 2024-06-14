@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/pinpointemail/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -14,9 +13,11 @@ import (
 
 // Sends an email message. You can use the Amazon Pinpoint Email API to send two
 // types of messages:
+//
 //   - Simple – A standard email message. When you create this type of message,
 //     you specify the sender, the recipient, and the message body, and Amazon Pinpoint
 //     assembles the message for you.
+//
 //   - Raw – A raw, MIME-formatted email message. When you send this type of
 //     email, you have to specify all of the message headers, as well as the message
 //     body. You can use this message type to send messages that contain attachments.
@@ -78,10 +79,12 @@ type SendEmailInput struct {
 type SendEmailOutput struct {
 
 	// A unique identifier for the message that is generated when Amazon Pinpoint
-	// accepts the message. It is possible for Amazon Pinpoint to accept a message
-	// without sending it. This can happen when the message you're trying to send has
-	// an attachment doesn't pass a virus check, or when you send a templated email
-	// that contains invalid personalization content, for example.
+	// accepts the message.
+	//
+	// It is possible for Amazon Pinpoint to accept a message without sending it. This
+	// can happen when the message you're trying to send has an attachment doesn't pass
+	// a virus check, or when you send a templated email that contains invalid
+	// personalization content, for example.
 	MessageId *string
 
 	// Metadata pertaining to the operation's result.
@@ -112,25 +115,25 @@ func (c *Client) addOperationSendEmailMiddlewares(stack *middleware.Stack, optio
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -145,13 +148,16 @@ func (c *Client) addOperationSendEmailMiddlewares(stack *middleware.Stack, optio
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpSendEmailValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opSendEmail(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

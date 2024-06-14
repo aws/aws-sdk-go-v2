@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/backup/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -15,17 +14,24 @@ import (
 
 // This request can be sent after CreateRestoreTestingPlan request returns
 // successfully. This is the second part of creating a resource testing plan, and
-// it must be completed sequentially. This consists of RestoreTestingSelectionName
-// , ProtectedResourceType , and one of the following:
+// it must be completed sequentially.
+//
+// This consists of RestoreTestingSelectionName , ProtectedResourceType , and one
+// of the following:
+//
 //   - ProtectedResourceArns
+//
 //   - ProtectedResourceConditions
 //
-// Each protected resource type can have one single value. A restore testing
-// selection can include a wildcard value ("*") for ProtectedResourceArns along
-// with ProtectedResourceConditions . Alternatively, you can include up to 30
-// specific protected resource ARNs in ProtectedResourceArns . Cannot select by
-// both protected resource types AND specific ARNs. Request will fail if both are
-// included.
+// Each protected resource type can have one single value.
+//
+// A restore testing selection can include a wildcard value ("*") for
+// ProtectedResourceArns along with ProtectedResourceConditions . Alternatively,
+// you can include up to 30 specific protected resource ARNs in
+// ProtectedResourceArns .
+//
+// Cannot select by both protected resource types AND specific ARNs. Request will
+// fail if both are included.
 func (c *Client) CreateRestoreTestingSelection(ctx context.Context, params *CreateRestoreTestingSelectionInput, optFns ...func(*Options)) (*CreateRestoreTestingSelectionOutput, error) {
 	if params == nil {
 		params = &CreateRestoreTestingSelectionInput{}
@@ -51,12 +57,17 @@ type CreateRestoreTestingSelectionInput struct {
 
 	// This consists of RestoreTestingSelectionName , ProtectedResourceType , and one
 	// of the following:
+	//
 	//   - ProtectedResourceArns
+	//
 	//   - ProtectedResourceConditions
-	// Each protected resource type can have one single value. A restore testing
-	// selection can include a wildcard value ("*") for ProtectedResourceArns along
-	// with ProtectedResourceConditions . Alternatively, you can include up to 30
-	// specific protected resource ARNs in ProtectedResourceArns .
+	//
+	// Each protected resource type can have one single value.
+	//
+	// A restore testing selection can include a wildcard value ("*") for
+	// ProtectedResourceArns along with ProtectedResourceConditions . Alternatively,
+	// you can include up to 30 specific protected resource ARNs in
+	// ProtectedResourceArns .
 	//
 	// This member is required.
 	RestoreTestingSelection *types.RestoreTestingSelectionForCreate
@@ -82,9 +93,10 @@ type CreateRestoreTestingSelectionOutput struct {
 	// This member is required.
 	RestoreTestingPlanArn *string
 
-	// Unique string that is the name of the restore testing plan. The name cannot be
-	// changed after creation. The name consists of only alphanumeric characters and
-	// underscores. Maximum length is 50.
+	// Unique string that is the name of the restore testing plan.
+	//
+	// The name cannot be changed after creation. The name consists of only
+	// alphanumeric characters and underscores. Maximum length is 50.
 	//
 	// This member is required.
 	RestoreTestingPlanName *string
@@ -123,25 +135,25 @@ func (c *Client) addOperationCreateRestoreTestingSelectionMiddlewares(stack *mid
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -156,13 +168,16 @@ func (c *Client) addOperationCreateRestoreTestingSelectionMiddlewares(stack *mid
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpCreateRestoreTestingSelectionValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateRestoreTestingSelection(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

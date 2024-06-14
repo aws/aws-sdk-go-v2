@@ -6,16 +6,16 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/qbusiness/document"
 	"github.com/aws/aws-sdk-go-v2/service/qbusiness/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a data source connector for an Amazon Q application. CreateDataSource
-// is a synchronous operation. The operation returns 200 if the data source was
-// successfully created. Otherwise, an exception is raised.
+// Creates a data source connector for an Amazon Q Business application.
+//
+// CreateDataSource is a synchronous operation. The operation returns 200 if the
+// data source was successfully created. Otherwise, an exception is raised.
 func (c *Client) CreateDataSource(ctx context.Context, params *CreateDataSourceInput, optFns ...func(*Options)) (*CreateDataSourceOutput, error) {
 	if params == nil {
 		params = &CreateDataSourceInput{}
@@ -33,14 +33,16 @@ func (c *Client) CreateDataSource(ctx context.Context, params *CreateDataSourceI
 
 type CreateDataSourceInput struct {
 
-	// The identifier of the Amazon Q application the data source will be attached to.
+	//  The identifier of the Amazon Q Business application the data source will be
+	// attached to.
 	//
 	// This member is required.
 	ApplicationId *string
 
 	// Configuration information to connect to your data source repository. For
-	// configuration templates for your specific data source, see Supported connectors (https://docs.aws.amazon.com/amazonq/latest/business-use-dg/connectors-list.html.html)
-	// .
+	// configuration templates for your specific data source, see [Supported connectors].
+	//
+	// [Supported connectors]: https://docs.aws.amazon.com/amazonq/latest/business-use-dg/connectors-list.html
 	//
 	// This member is required.
 	Configuration document.Interface
@@ -64,21 +66,25 @@ type CreateDataSourceInput struct {
 	Description *string
 
 	// Provides the configuration information for altering document metadata and
-	// content during the document ingestion process. For more information, see Custom
-	// document enrichment (https://docs.aws.amazon.com/amazonq/latest/business-use-dg/custom-document-enrichment.html)
-	// .
+	// content during the document ingestion process.
+	//
+	// For more information, see [Custom document enrichment].
+	//
+	// [Custom document enrichment]: https://docs.aws.amazon.com/amazonq/latest/business-use-dg/custom-document-enrichment.html
 	DocumentEnrichmentConfiguration *types.DocumentEnrichmentConfiguration
 
 	// The Amazon Resource Name (ARN) of an IAM role with permission to access the
 	// data source and required resources.
 	RoleArn *string
 
-	// Sets the frequency for Amazon Q to check the documents in your data source
-	// repository and update your index. If you don't set a schedule, Amazon Q won't
-	// periodically update the index. Specify a cron- format schedule string or an
-	// empty string to indicate that the index is updated on demand. You can't specify
-	// the Schedule parameter when the Type parameter is set to CUSTOM . If you do, you
-	// receive a ValidationException exception.
+	// Sets the frequency for Amazon Q Business to check the documents in your data
+	// source repository and update your index. If you don't set a schedule, Amazon Q
+	// Business won't periodically update the index.
+	//
+	// Specify a cron- format schedule string or an empty string to indicate that the
+	// index is updated on demand. You can't specify the Schedule parameter when the
+	// Type parameter is set to CUSTOM . If you do, you receive a ValidationException
+	// exception.
 	SyncSchedule *string
 
 	// A list of key-value pairs that identify or categorize the data source
@@ -88,9 +94,9 @@ type CreateDataSourceInput struct {
 	Tags []types.Tag
 
 	// Configuration information for an Amazon VPC (Virtual Private Cloud) to connect
-	// to your data source. For more information, see Using Amazon VPC with Amazon Q
-	// connectors (https://docs.aws.amazon.com/amazonq/latest/business-use-dg/connector-vpc.html)
-	// .
+	// to your data source. For more information, see [Using Amazon VPC with Amazon Q Business connectors].
+	//
+	// [Using Amazon VPC with Amazon Q Business connectors]: https://docs.aws.amazon.com/amazonq/latest/business-use-dg/connector-vpc.html
 	VpcConfiguration *types.DataSourceVpcConfiguration
 
 	noSmithyDocumentSerde
@@ -98,7 +104,8 @@ type CreateDataSourceInput struct {
 
 type CreateDataSourceOutput struct {
 
-	// The Amazon Resource Name (ARN) of a data source in an Amazon Q application.
+	//  The Amazon Resource Name (ARN) of a data source in an Amazon Q Business
+	// application.
 	DataSourceArn *string
 
 	// The identifier of the data source connector.
@@ -132,25 +139,25 @@ func (c *Client) addOperationCreateDataSourceMiddlewares(stack *middleware.Stack
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -165,6 +172,9 @@ func (c *Client) addOperationCreateDataSourceMiddlewares(stack *middleware.Stack
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opCreateDataSourceMiddleware(stack, options); err != nil {
 		return err
 	}
@@ -174,7 +184,7 @@ func (c *Client) addOperationCreateDataSourceMiddlewares(stack *middleware.Stack
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateDataSource(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

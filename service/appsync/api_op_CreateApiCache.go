@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/appsync/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -32,7 +31,9 @@ func (c *Client) CreateApiCache(ctx context.Context, params *CreateApiCacheInput
 type CreateApiCacheInput struct {
 
 	// Caching behavior.
+	//
 	//   - FULL_REQUEST_CACHING: All requests are fully cached.
+	//
 	//   - PER_RESOLVER_CACHING: Individual resolvers that you specify are cached.
 	//
 	// This member is required.
@@ -43,29 +44,48 @@ type CreateApiCacheInput struct {
 	// This member is required.
 	ApiId *string
 
-	// TTL in seconds for cache entries. Valid values are 1–3,600 seconds.
+	// TTL in seconds for cache entries.
+	//
+	// Valid values are 1–3,600 seconds.
 	//
 	// This member is required.
 	Ttl int64
 
 	// The cache instance type. Valid values are
+	//
 	//   - SMALL
+	//
 	//   - MEDIUM
+	//
 	//   - LARGE
+	//
 	//   - XLARGE
+	//
 	//   - LARGE_2X
+	//
 	//   - LARGE_4X
+	//
 	//   - LARGE_8X (not available in all regions)
+	//
 	//   - LARGE_12X
+	//
 	// Historically, instance types were identified by an EC2-style value. As of July
-	// 2020, this is deprecated, and the generic identifiers above should be used. The
-	// following legacy instance types are available, but their use is discouraged:
+	// 2020, this is deprecated, and the generic identifiers above should be used.
+	//
+	// The following legacy instance types are available, but their use is discouraged:
+	//
 	//   - T2_SMALL: A t2.small instance type.
+	//
 	//   - T2_MEDIUM: A t2.medium instance type.
+	//
 	//   - R4_LARGE: A r4.large instance type.
+	//
 	//   - R4_XLARGE: A r4.xlarge instance type.
+	//
 	//   - R4_2XLARGE: A r4.2xlarge instance type.
+	//
 	//   - R4_4XLARGE: A r4.4xlarge instance type.
+	//
 	//   - R4_8XLARGE: A r4.8xlarge instance type.
 	//
 	// This member is required.
@@ -77,10 +97,15 @@ type CreateApiCacheInput struct {
 
 	// Controls how cache health metrics will be emitted to CloudWatch. Cache health
 	// metrics include:
-	//   - NetworkBandwidthOutAllowanceExceeded: The number of times a specified
-	//   GraphQL operation was called.
-	//   - EngineCPUUtilization: The number of GraphQL errors that occurred during a
-	//   specified GraphQL operation.
+	//
+	//   - NetworkBandwidthOutAllowanceExceeded: The network packets dropped because
+	//   the throughput exceeded the aggregated bandwidth limit. This is useful for
+	//   diagnosing bottlenecks in a cache configuration.
+	//
+	//   - EngineCPUUtilization: The CPU utilization (percentage) allocated to the
+	//   Redis process. This is useful for diagnosing bottlenecks in a cache
+	//   configuration.
+	//
 	// Metrics will be recorded by API ID. You can set the value to ENABLED or DISABLED
 	// .
 	HealthMetricsConfig types.CacheHealthMetricsConfig
@@ -126,25 +151,25 @@ func (c *Client) addOperationCreateApiCacheMiddlewares(stack *middleware.Stack, 
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -159,13 +184,16 @@ func (c *Client) addOperationCreateApiCacheMiddlewares(stack *middleware.Stack, 
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpCreateApiCacheValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateApiCache(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

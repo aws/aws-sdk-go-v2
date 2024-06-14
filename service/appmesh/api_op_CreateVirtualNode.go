@@ -6,33 +6,41 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/appmesh/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a virtual node within a service mesh. A virtual node acts as a logical
-// pointer to a particular task group, such as an Amazon ECS service or a
-// Kubernetes deployment. When you create a virtual node, you can specify the
-// service discovery information for your task group, and whether the proxy running
-// in a task group will communicate with other proxies using Transport Layer
-// Security (TLS). You define a listener for any inbound traffic that your virtual
-// node expects. Any virtual service that your virtual node expects to communicate
-// to is specified as a backend . The response metadata for your new virtual node
-// contains the arn that is associated with the virtual node. Set this value to
-// the full ARN; for example,
+// Creates a virtual node within a service mesh.
+//
+// A virtual node acts as a logical pointer to a particular task group, such as an
+// Amazon ECS service or a Kubernetes deployment. When you create a virtual node,
+// you can specify the service discovery information for your task group, and
+// whether the proxy running in a task group will communicate with other proxies
+// using Transport Layer Security (TLS).
+//
+// You define a listener for any inbound traffic that your virtual node expects.
+// Any virtual service that your virtual node expects to communicate to is
+// specified as a backend .
+//
+// The response metadata for your new virtual node contains the arn that is
+// associated with the virtual node. Set this value to the full ARN; for example,
 // arn:aws:appmesh:us-west-2:123456789012:myMesh/default/virtualNode/myApp ) as the
 // APPMESH_RESOURCE_ARN environment variable for your task group's Envoy proxy
 // container in your task definition or pod spec. This is then mapped to the
-// node.id and node.cluster Envoy parameters. By default, App Mesh uses the name
-// of the resource you specified in APPMESH_RESOURCE_ARN when Envoy is referring
-// to itself in metrics and traces. You can override this behavior by setting the
-// APPMESH_RESOURCE_CLUSTER environment variable with your own name. For more
-// information about virtual nodes, see Virtual nodes (https://docs.aws.amazon.com/app-mesh/latest/userguide/virtual_nodes.html)
-// . You must be using 1.15.0 or later of the Envoy image when setting these
-// variables. For more information aboutApp Mesh Envoy variables, see Envoy image (https://docs.aws.amazon.com/app-mesh/latest/userguide/envoy.html)
-// in the App Mesh User Guide.
+// node.id and node.cluster Envoy parameters.
+//
+// By default, App Mesh uses the name of the resource you specified in
+// APPMESH_RESOURCE_ARN when Envoy is referring to itself in metrics and traces.
+// You can override this behavior by setting the APPMESH_RESOURCE_CLUSTER
+// environment variable with your own name.
+//
+// For more information about virtual nodes, see [Virtual nodes]. You must be using 1.15.0 or
+// later of the Envoy image when setting these variables. For more information
+// aboutApp Mesh Envoy variables, see [Envoy image]in the App Mesh User Guide.
+//
+// [Virtual nodes]: https://docs.aws.amazon.com/app-mesh/latest/userguide/virtual_nodes.html
+// [Envoy image]: https://docs.aws.amazon.com/app-mesh/latest/userguide/envoy.html
 func (c *Client) CreateVirtualNode(ctx context.Context, params *CreateVirtualNodeInput, optFns ...func(*Options)) (*CreateVirtualNodeOutput, error) {
 	if params == nil {
 		params = &CreateVirtualNodeInput{}
@@ -72,8 +80,9 @@ type CreateVirtualNodeInput struct {
 	// The Amazon Web Services IAM account ID of the service mesh owner. If the
 	// account ID is not your own, then the account that you specify must share the
 	// mesh with your account before you can create the resource in the service mesh.
-	// For more information about mesh sharing, see Working with shared meshes (https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html)
-	// .
+	// For more information about mesh sharing, see [Working with shared meshes].
+	//
+	// [Working with shared meshes]: https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html
 	MeshOwner *string
 
 	// Optional metadata that you can apply to the virtual node to assist with
@@ -120,25 +129,25 @@ func (c *Client) addOperationCreateVirtualNodeMiddlewares(stack *middleware.Stac
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -153,6 +162,9 @@ func (c *Client) addOperationCreateVirtualNodeMiddlewares(stack *middleware.Stac
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opCreateVirtualNodeMiddleware(stack, options); err != nil {
 		return err
 	}
@@ -162,7 +174,7 @@ func (c *Client) addOperationCreateVirtualNodeMiddlewares(stack *middleware.Stac
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateVirtualNode(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

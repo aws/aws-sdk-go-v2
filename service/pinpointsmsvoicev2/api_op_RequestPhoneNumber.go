@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/pinpointsmsvoicev2/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -14,8 +13,9 @@ import (
 )
 
 // Request an origination phone number for use in your account. For more
-// information on phone number request see Requesting a number  (https://docs.aws.amazon.com/pinpoint/latest/userguide/settings-sms-request-number.html)
-// in the Amazon Pinpoint User Guide.
+// information on phone number request see [Requesting a number]in the Amazon Pinpoint User Guide.
+//
+// [Requesting a number]: https://docs.aws.amazon.com/pinpoint/latest/userguide/settings-sms-request-number.html
 func (c *Client) RequestPhoneNumber(ctx context.Context, params *RequestPhoneNumberInput, optFns ...func(*Options)) (*RequestPhoneNumberOutput, error) {
 	if params == nil {
 		params = &RequestPhoneNumberInput{}
@@ -33,7 +33,8 @@ func (c *Client) RequestPhoneNumber(ctx context.Context, params *RequestPhoneNum
 
 type RequestPhoneNumberInput struct {
 
-	// The two-character code, in ISO 3166-1 alpha-2 format, for the country or region.
+	// The two-character code, in ISO 3166-1 alpha-2 format, for the country or
+	// region.
 	//
 	// This member is required.
 	IsoCountryCode *string
@@ -69,7 +70,8 @@ type RequestPhoneNumberInput struct {
 	// OptOutListName or OptOutListArn.
 	OptOutListName *string
 
-	// The pool to associated with the phone number. You can use the PoolId or PoolArn.
+	// The pool to associated with the phone number. You can use the PoolId or
+	// PoolArn.
 	PoolId *string
 
 	// Use this field to attach your phone number for an external registration process.
@@ -84,15 +86,17 @@ type RequestPhoneNumberInput struct {
 
 type RequestPhoneNumberOutput struct {
 
-	// The time when the phone number was created, in UNIX epoch time (https://www.epochconverter.com/)
-	// format.
+	// The time when the phone number was created, in [UNIX epoch time] format.
+	//
+	// [UNIX epoch time]: https://www.epochconverter.com/
 	CreatedTimestamp *time.Time
 
 	// By default this is set to false. When set to true the phone number can't be
 	// deleted.
 	DeletionProtectionEnabled bool
 
-	// The two-character code, in ISO 3166-1 alpha-2 format, for the country or region.
+	// The two-character code, in ISO 3166-1 alpha-2 format, for the country or
+	// region.
 	IsoCountryCode *string
 
 	// The type of message. Valid values are TRANSACTIONAL for messages that are
@@ -181,25 +185,25 @@ func (c *Client) addOperationRequestPhoneNumberMiddlewares(stack *middleware.Sta
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -214,6 +218,9 @@ func (c *Client) addOperationRequestPhoneNumberMiddlewares(stack *middleware.Sta
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opRequestPhoneNumberMiddleware(stack, options); err != nil {
 		return err
 	}
@@ -223,7 +230,7 @@ func (c *Client) addOperationRequestPhoneNumberMiddlewares(stack *middleware.Sta
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opRequestPhoneNumber(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

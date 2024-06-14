@@ -298,6 +298,13 @@ func awsRestjson1_serializeOpDocumentCreateAccountSubscriptionInput(v *CreateAcc
 		}
 	}
 
+	if v.AdminProGroup != nil {
+		ok := object.Key("AdminProGroup")
+		if err := awsRestjson1_serializeDocumentGroupsList(v.AdminProGroup, ok); err != nil {
+			return err
+		}
+	}
+
 	if len(v.AuthenticationMethod) > 0 {
 		ok := object.Key("AuthenticationMethod")
 		ok.String(string(v.AuthenticationMethod))
@@ -306,6 +313,13 @@ func awsRestjson1_serializeOpDocumentCreateAccountSubscriptionInput(v *CreateAcc
 	if v.AuthorGroup != nil {
 		ok := object.Key("AuthorGroup")
 		if err := awsRestjson1_serializeDocumentGroupsList(v.AuthorGroup, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.AuthorProGroup != nil {
+		ok := object.Key("AuthorProGroup")
+		if err := awsRestjson1_serializeDocumentGroupsList(v.AuthorProGroup, ok); err != nil {
 			return err
 		}
 	}
@@ -335,6 +349,11 @@ func awsRestjson1_serializeOpDocumentCreateAccountSubscriptionInput(v *CreateAcc
 		ok.String(*v.FirstName)
 	}
 
+	if v.IAMIdentityCenterInstanceArn != nil {
+		ok := object.Key("IAMIdentityCenterInstanceArn")
+		ok.String(*v.IAMIdentityCenterInstanceArn)
+	}
+
 	if v.LastName != nil {
 		ok := object.Key("LastName")
 		ok.String(*v.LastName)
@@ -348,6 +367,13 @@ func awsRestjson1_serializeOpDocumentCreateAccountSubscriptionInput(v *CreateAcc
 	if v.ReaderGroup != nil {
 		ok := object.Key("ReaderGroup")
 		if err := awsRestjson1_serializeDocumentGroupsList(v.ReaderGroup, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.ReaderProGroup != nil {
+		ok := object.Key("ReaderProGroup")
+		if err := awsRestjson1_serializeDocumentGroupsList(v.ReaderProGroup, ok); err != nil {
 			return err
 		}
 	}
@@ -6813,6 +6839,75 @@ func awsRestjson1_serializeOpHttpBindingsDescribeIpRestrictionInput(v *DescribeI
 		if err := encoder.SetURI("AwsAccountId").String(*v.AwsAccountId); err != nil {
 			return err
 		}
+	}
+
+	return nil
+}
+
+type awsRestjson1_serializeOpDescribeKeyRegistration struct {
+}
+
+func (*awsRestjson1_serializeOpDescribeKeyRegistration) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpDescribeKeyRegistration) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*DescribeKeyRegistrationInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/accounts/{AwsAccountId}/key-registration")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "GET"
+	var restEncoder *httpbinding.Encoder
+	if request.URL.RawPath == "" {
+		restEncoder, err = httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	} else {
+		request.URL.RawPath = smithyhttp.JoinPath(request.URL.RawPath, opPath)
+		restEncoder, err = httpbinding.NewEncoderWithRawPath(request.URL.Path, request.URL.RawPath, request.URL.RawQuery, request.Header)
+	}
+
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsDescribeKeyRegistrationInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsDescribeKeyRegistrationInput(v *DescribeKeyRegistrationInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.AwsAccountId == nil || len(*v.AwsAccountId) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member AwsAccountId must not be empty")}
+	}
+	if v.AwsAccountId != nil {
+		if err := encoder.SetURI("AwsAccountId").String(*v.AwsAccountId); err != nil {
+			return err
+		}
+	}
+
+	if v.DefaultKeyOnly {
+		encoder.SetQuery("default-key-only").Boolean(v.DefaultKeyOnly)
 	}
 
 	return nil
@@ -14306,6 +14401,110 @@ func awsRestjson1_serializeOpDocumentUpdateIpRestrictionInput(v *UpdateIpRestric
 		}
 	}
 
+	if v.VpcEndpointIdRestrictionRuleMap != nil {
+		ok := object.Key("VpcEndpointIdRestrictionRuleMap")
+		if err := awsRestjson1_serializeDocumentVpcEndpointIdRestrictionRuleMap(v.VpcEndpointIdRestrictionRuleMap, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.VpcIdRestrictionRuleMap != nil {
+		ok := object.Key("VpcIdRestrictionRuleMap")
+		if err := awsRestjson1_serializeDocumentVpcIdRestrictionRuleMap(v.VpcIdRestrictionRuleMap, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+type awsRestjson1_serializeOpUpdateKeyRegistration struct {
+}
+
+func (*awsRestjson1_serializeOpUpdateKeyRegistration) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpUpdateKeyRegistration) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*UpdateKeyRegistrationInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/accounts/{AwsAccountId}/key-registration")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "POST"
+	var restEncoder *httpbinding.Encoder
+	if request.URL.RawPath == "" {
+		restEncoder, err = httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	} else {
+		request.URL.RawPath = smithyhttp.JoinPath(request.URL.RawPath, opPath)
+		restEncoder, err = httpbinding.NewEncoderWithRawPath(request.URL.Path, request.URL.RawPath, request.URL.RawQuery, request.Header)
+	}
+
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsUpdateKeyRegistrationInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentUpdateKeyRegistrationInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsUpdateKeyRegistrationInput(v *UpdateKeyRegistrationInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.AwsAccountId == nil || len(*v.AwsAccountId) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member AwsAccountId must not be empty")}
+	}
+	if v.AwsAccountId != nil {
+		if err := encoder.SetURI("AwsAccountId").String(*v.AwsAccountId); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentUpdateKeyRegistrationInput(v *UpdateKeyRegistrationInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.KeyRegistration != nil {
+		ok := object.Key("KeyRegistration")
+		if err := awsRestjson1_serializeDocumentKeyRegistration(v.KeyRegistration, ok); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -14597,6 +14796,94 @@ func awsRestjson1_serializeOpDocumentUpdateRoleCustomPermissionInput(v *UpdateRo
 	if v.CustomPermissionsName != nil {
 		ok := object.Key("CustomPermissionsName")
 		ok.String(*v.CustomPermissionsName)
+	}
+
+	return nil
+}
+
+type awsRestjson1_serializeOpUpdateSPICECapacityConfiguration struct {
+}
+
+func (*awsRestjson1_serializeOpUpdateSPICECapacityConfiguration) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpUpdateSPICECapacityConfiguration) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*UpdateSPICECapacityConfigurationInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/accounts/{AwsAccountId}/spice-capacity-configuration")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "POST"
+	var restEncoder *httpbinding.Encoder
+	if request.URL.RawPath == "" {
+		restEncoder, err = httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	} else {
+		request.URL.RawPath = smithyhttp.JoinPath(request.URL.RawPath, opPath)
+		restEncoder, err = httpbinding.NewEncoderWithRawPath(request.URL.Path, request.URL.RawPath, request.URL.RawQuery, request.Header)
+	}
+
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsUpdateSPICECapacityConfigurationInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentUpdateSPICECapacityConfigurationInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsUpdateSPICECapacityConfigurationInput(v *UpdateSPICECapacityConfigurationInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.AwsAccountId == nil || len(*v.AwsAccountId) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member AwsAccountId must not be empty")}
+	}
+	if v.AwsAccountId != nil {
+		if err := encoder.SetURI("AwsAccountId").String(*v.AwsAccountId); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentUpdateSPICECapacityConfigurationInput(v *UpdateSPICECapacityConfigurationInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.PurchaseMode) > 0 {
+		ok := object.Key("PurchaseMode")
+		ok.String(string(v.PurchaseMode))
 	}
 
 	return nil
@@ -16193,11 +16480,30 @@ func awsRestjson1_serializeDocumentAnonymousUserEmbeddingExperienceConfiguration
 		}
 	}
 
+	if v.GenerativeQnA != nil {
+		ok := object.Key("GenerativeQnA")
+		if err := awsRestjson1_serializeDocumentAnonymousUserGenerativeQnAEmbeddingConfiguration(v.GenerativeQnA, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.QSearchBar != nil {
 		ok := object.Key("QSearchBar")
 		if err := awsRestjson1_serializeDocumentAnonymousUserQSearchBarEmbeddingConfiguration(v.QSearchBar, ok); err != nil {
 			return err
 		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentAnonymousUserGenerativeQnAEmbeddingConfiguration(v *types.AnonymousUserGenerativeQnAEmbeddingConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.InitialTopicId != nil {
+		ok := object.Key("InitialTopicId")
+		ok.String(*v.InitialTopicId)
 	}
 
 	return nil
@@ -19024,6 +19330,13 @@ func awsRestjson1_serializeDocumentCategoryFilter(v *types.CategoryFilter, value
 		}
 	}
 
+	if v.DefaultFilterControlConfiguration != nil {
+		ok := object.Key("DefaultFilterControlConfiguration")
+		if err := awsRestjson1_serializeDocumentDefaultFilterControlConfiguration(v.DefaultFilterControlConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.FilterId != nil {
 		ok := object.Key("FilterId")
 		ok.String(*v.FilterId)
@@ -19614,6 +19927,11 @@ func awsRestjson1_serializeDocumentColumnTooltipItem(v *types.ColumnTooltipItem,
 	if v.Label != nil {
 		ok := object.Key("Label")
 		ok.String(*v.Label)
+	}
+
+	if len(v.TooltipTarget) > 0 {
+		ok := object.Key("TooltipTarget")
+		ok.String(string(v.TooltipTarget))
 	}
 
 	if len(v.Visibility) > 0 {
@@ -22475,6 +22793,152 @@ func awsRestjson1_serializeDocumentDecimalValueWhenUnsetConfiguration(v *types.D
 	return nil
 }
 
+func awsRestjson1_serializeDocumentDefaultDateTimePickerControlOptions(v *types.DefaultDateTimePickerControlOptions, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.DisplayOptions != nil {
+		ok := object.Key("DisplayOptions")
+		if err := awsRestjson1_serializeDocumentDateTimePickerControlDisplayOptions(v.DisplayOptions, ok); err != nil {
+			return err
+		}
+	}
+
+	if len(v.Type) > 0 {
+		ok := object.Key("Type")
+		ok.String(string(v.Type))
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentDefaultFilterControlConfiguration(v *types.DefaultFilterControlConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ControlOptions != nil {
+		ok := object.Key("ControlOptions")
+		if err := awsRestjson1_serializeDocumentDefaultFilterControlOptions(v.ControlOptions, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Title != nil {
+		ok := object.Key("Title")
+		ok.String(*v.Title)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentDefaultFilterControlOptions(v *types.DefaultFilterControlOptions, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.DefaultDateTimePickerOptions != nil {
+		ok := object.Key("DefaultDateTimePickerOptions")
+		if err := awsRestjson1_serializeDocumentDefaultDateTimePickerControlOptions(v.DefaultDateTimePickerOptions, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.DefaultDropdownOptions != nil {
+		ok := object.Key("DefaultDropdownOptions")
+		if err := awsRestjson1_serializeDocumentDefaultFilterDropDownControlOptions(v.DefaultDropdownOptions, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.DefaultListOptions != nil {
+		ok := object.Key("DefaultListOptions")
+		if err := awsRestjson1_serializeDocumentDefaultFilterListControlOptions(v.DefaultListOptions, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.DefaultRelativeDateTimeOptions != nil {
+		ok := object.Key("DefaultRelativeDateTimeOptions")
+		if err := awsRestjson1_serializeDocumentDefaultRelativeDateTimeControlOptions(v.DefaultRelativeDateTimeOptions, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.DefaultSliderOptions != nil {
+		ok := object.Key("DefaultSliderOptions")
+		if err := awsRestjson1_serializeDocumentDefaultSliderControlOptions(v.DefaultSliderOptions, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.DefaultTextAreaOptions != nil {
+		ok := object.Key("DefaultTextAreaOptions")
+		if err := awsRestjson1_serializeDocumentDefaultTextAreaControlOptions(v.DefaultTextAreaOptions, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.DefaultTextFieldOptions != nil {
+		ok := object.Key("DefaultTextFieldOptions")
+		if err := awsRestjson1_serializeDocumentDefaultTextFieldControlOptions(v.DefaultTextFieldOptions, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentDefaultFilterDropDownControlOptions(v *types.DefaultFilterDropDownControlOptions, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.DisplayOptions != nil {
+		ok := object.Key("DisplayOptions")
+		if err := awsRestjson1_serializeDocumentDropDownControlDisplayOptions(v.DisplayOptions, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.SelectableValues != nil {
+		ok := object.Key("SelectableValues")
+		if err := awsRestjson1_serializeDocumentFilterSelectableValues(v.SelectableValues, ok); err != nil {
+			return err
+		}
+	}
+
+	if len(v.Type) > 0 {
+		ok := object.Key("Type")
+		ok.String(string(v.Type))
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentDefaultFilterListControlOptions(v *types.DefaultFilterListControlOptions, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.DisplayOptions != nil {
+		ok := object.Key("DisplayOptions")
+		if err := awsRestjson1_serializeDocumentListControlDisplayOptions(v.DisplayOptions, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.SelectableValues != nil {
+		ok := object.Key("SelectableValues")
+		if err := awsRestjson1_serializeDocumentFilterSelectableValues(v.SelectableValues, ok); err != nil {
+			return err
+		}
+	}
+
+	if len(v.Type) > 0 {
+		ok := object.Key("Type")
+		ok.String(string(v.Type))
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentDefaultFormatting(v *types.DefaultFormatting, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -22583,6 +23047,20 @@ func awsRestjson1_serializeDocumentDefaultPaginatedLayoutConfiguration(v *types.
 	return nil
 }
 
+func awsRestjson1_serializeDocumentDefaultRelativeDateTimeControlOptions(v *types.DefaultRelativeDateTimeControlOptions, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.DisplayOptions != nil {
+		ok := object.Key("DisplayOptions")
+		if err := awsRestjson1_serializeDocumentRelativeDateTimeControlDisplayOptions(v.DisplayOptions, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentDefaultSectionBasedLayoutConfiguration(v *types.DefaultSectionBasedLayoutConfiguration, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -22590,6 +23068,112 @@ func awsRestjson1_serializeDocumentDefaultSectionBasedLayoutConfiguration(v *typ
 	if v.CanvasSizeOptions != nil {
 		ok := object.Key("CanvasSizeOptions")
 		if err := awsRestjson1_serializeDocumentSectionBasedLayoutCanvasSizeOptions(v.CanvasSizeOptions, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentDefaultSliderControlOptions(v *types.DefaultSliderControlOptions, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.DisplayOptions != nil {
+		ok := object.Key("DisplayOptions")
+		if err := awsRestjson1_serializeDocumentSliderControlDisplayOptions(v.DisplayOptions, ok); err != nil {
+			return err
+		}
+	}
+
+	{
+		ok := object.Key("MaximumValue")
+		switch {
+		case math.IsNaN(v.MaximumValue):
+			ok.String("NaN")
+
+		case math.IsInf(v.MaximumValue, 1):
+			ok.String("Infinity")
+
+		case math.IsInf(v.MaximumValue, -1):
+			ok.String("-Infinity")
+
+		default:
+			ok.Double(v.MaximumValue)
+
+		}
+	}
+
+	{
+		ok := object.Key("MinimumValue")
+		switch {
+		case math.IsNaN(v.MinimumValue):
+			ok.String("NaN")
+
+		case math.IsInf(v.MinimumValue, 1):
+			ok.String("Infinity")
+
+		case math.IsInf(v.MinimumValue, -1):
+			ok.String("-Infinity")
+
+		default:
+			ok.Double(v.MinimumValue)
+
+		}
+	}
+
+	{
+		ok := object.Key("StepSize")
+		switch {
+		case math.IsNaN(v.StepSize):
+			ok.String("NaN")
+
+		case math.IsInf(v.StepSize, 1):
+			ok.String("Infinity")
+
+		case math.IsInf(v.StepSize, -1):
+			ok.String("-Infinity")
+
+		default:
+			ok.Double(v.StepSize)
+
+		}
+	}
+
+	if len(v.Type) > 0 {
+		ok := object.Key("Type")
+		ok.String(string(v.Type))
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentDefaultTextAreaControlOptions(v *types.DefaultTextAreaControlOptions, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Delimiter != nil {
+		ok := object.Key("Delimiter")
+		ok.String(*v.Delimiter)
+	}
+
+	if v.DisplayOptions != nil {
+		ok := object.Key("DisplayOptions")
+		if err := awsRestjson1_serializeDocumentTextAreaControlDisplayOptions(v.DisplayOptions, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentDefaultTextFieldControlOptions(v *types.DefaultTextFieldControlOptions, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.DisplayOptions != nil {
+		ok := object.Key("DisplayOptions")
+		if err := awsRestjson1_serializeDocumentTextFieldControlDisplayOptions(v.DisplayOptions, ok); err != nil {
 			return err
 		}
 	}
@@ -23196,6 +23780,11 @@ func awsRestjson1_serializeDocumentFieldTooltipItem(v *types.FieldTooltipItem, v
 		ok.String(*v.Label)
 	}
 
+	if len(v.TooltipTarget) > 0 {
+		ok := object.Key("TooltipTarget")
+		ok.String(string(v.TooltipTarget))
+	}
+
 	if len(v.Visibility) > 0 {
 		ok := object.Key("Visibility")
 		ok.String(string(v.Visibility))
@@ -23509,6 +24098,13 @@ func awsRestjson1_serializeDocumentFilterControl(v *types.FilterControl, value s
 	object := value.Object()
 	defer object.Close()
 
+	if v.CrossSheet != nil {
+		ok := object.Key("CrossSheet")
+		if err := awsRestjson1_serializeDocumentFilterCrossSheetControl(v.CrossSheet, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.DateTimePicker != nil {
 		ok := object.Key("DateTimePicker")
 		if err := awsRestjson1_serializeDocumentFilterDateTimePickerControl(v.DateTimePicker, ok); err != nil {
@@ -23571,6 +24167,30 @@ func awsRestjson1_serializeDocumentFilterControlList(v []types.FilterControl, va
 			return err
 		}
 	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentFilterCrossSheetControl(v *types.FilterCrossSheetControl, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.CascadingControlConfiguration != nil {
+		ok := object.Key("CascadingControlConfiguration")
+		if err := awsRestjson1_serializeDocumentCascadingControlConfiguration(v.CascadingControlConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.FilterControlId != nil {
+		ok := object.Key("FilterControlId")
+		ok.String(*v.FilterControlId)
+	}
+
+	if v.SourceFilterId != nil {
+		ok := object.Key("SourceFilterId")
+		ok.String(*v.SourceFilterId)
+	}
+
 	return nil
 }
 
@@ -24825,6 +25445,23 @@ func awsRestjson1_serializeDocumentGaugeChartArcConditionalFormatting(v *types.G
 	return nil
 }
 
+func awsRestjson1_serializeDocumentGaugeChartColorConfiguration(v *types.GaugeChartColorConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.BackgroundColor != nil {
+		ok := object.Key("BackgroundColor")
+		ok.String(*v.BackgroundColor)
+	}
+
+	if v.ForegroundColor != nil {
+		ok := object.Key("ForegroundColor")
+		ok.String(*v.ForegroundColor)
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentGaugeChartConditionalFormatting(v *types.GaugeChartConditionalFormatting, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -24876,6 +25513,13 @@ func awsRestjson1_serializeDocumentGaugeChartConditionalFormattingOptionList(v [
 func awsRestjson1_serializeDocumentGaugeChartConfiguration(v *types.GaugeChartConfiguration, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.ColorConfiguration != nil {
+		ok := object.Key("ColorConfiguration")
+		if err := awsRestjson1_serializeDocumentGaugeChartColorConfiguration(v.ColorConfiguration, ok); err != nil {
+			return err
+		}
+	}
 
 	if v.DataLabels != nil {
 		ok := object.Key("DataLabels")
@@ -26586,6 +27230,19 @@ func awsRestjson1_serializeDocumentJoinKeyProperties(v *types.JoinKeyProperties,
 		ok.Boolean(*v.UniqueKey)
 	}
 
+	return nil
+}
+
+func awsRestjson1_serializeDocumentKeyRegistration(v []types.RegisteredCustomerManagedKey, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentRegisteredCustomerManagedKey(&v[i], av); err != nil {
+			return err
+		}
+	}
 	return nil
 }
 
@@ -28350,6 +29007,13 @@ func awsRestjson1_serializeDocumentNumericEqualityFilter(v *types.NumericEqualit
 		}
 	}
 
+	if v.DefaultFilterControlConfiguration != nil {
+		ok := object.Key("DefaultFilterControlConfiguration")
+		if err := awsRestjson1_serializeDocumentDefaultFilterControlConfiguration(v.DefaultFilterControlConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.FilterId != nil {
 		ok := object.Key("FilterId")
 		ok.String(*v.FilterId)
@@ -28438,6 +29102,13 @@ func awsRestjson1_serializeDocumentNumericRangeFilter(v *types.NumericRangeFilte
 	if v.Column != nil {
 		ok := object.Key("Column")
 		if err := awsRestjson1_serializeDocumentColumnIdentifier(v.Column, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.DefaultFilterControlConfiguration != nil {
+		ok := object.Key("DefaultFilterControlConfiguration")
+		if err := awsRestjson1_serializeDocumentDefaultFilterControlConfiguration(v.DefaultFilterControlConfiguration, ok); err != nil {
 			return err
 		}
 	}
@@ -31140,6 +31811,23 @@ func awsRestjson1_serializeDocumentRefreshSchedule(v *types.RefreshSchedule, val
 	return nil
 }
 
+func awsRestjson1_serializeDocumentRegisteredCustomerManagedKey(v *types.RegisteredCustomerManagedKey, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.DefaultKey {
+		ok := object.Key("DefaultKey")
+		ok.Boolean(v.DefaultKey)
+	}
+
+	if v.KeyArn != nil {
+		ok := object.Key("KeyArn")
+		ok.String(*v.KeyArn)
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentRegisteredUserConsoleFeatureConfigurations(v *types.RegisteredUserConsoleFeatureConfigurations, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -31226,6 +31914,13 @@ func awsRestjson1_serializeDocumentRegisteredUserEmbeddingExperienceConfiguratio
 		}
 	}
 
+	if v.GenerativeQnA != nil {
+		ok := object.Key("GenerativeQnA")
+		if err := awsRestjson1_serializeDocumentRegisteredUserGenerativeQnAEmbeddingConfiguration(v.GenerativeQnA, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.QSearchBar != nil {
 		ok := object.Key("QSearchBar")
 		if err := awsRestjson1_serializeDocumentRegisteredUserQSearchBarEmbeddingConfiguration(v.QSearchBar, ok); err != nil {
@@ -31238,6 +31933,18 @@ func awsRestjson1_serializeDocumentRegisteredUserEmbeddingExperienceConfiguratio
 		if err := awsRestjson1_serializeDocumentRegisteredUserQuickSightConsoleEmbeddingConfiguration(v.QuickSightConsole, ok); err != nil {
 			return err
 		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentRegisteredUserGenerativeQnAEmbeddingConfiguration(v *types.RegisteredUserGenerativeQnAEmbeddingConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.InitialTopicId != nil {
+		ok := object.Key("InitialTopicId")
+		ok.String(*v.InitialTopicId)
 	}
 
 	return nil
@@ -31322,6 +32029,13 @@ func awsRestjson1_serializeDocumentRelativeDatesFilter(v *types.RelativeDatesFil
 	if v.Column != nil {
 		ok := object.Key("Column")
 		if err := awsRestjson1_serializeDocumentColumnIdentifier(v.Column, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.DefaultFilterControlConfiguration != nil {
+		ok := object.Key("DefaultFilterControlConfiguration")
+		if err := awsRestjson1_serializeDocumentDefaultFilterControlConfiguration(v.DefaultFilterControlConfiguration, ok); err != nil {
 			return err
 		}
 	}
@@ -34828,6 +35542,13 @@ func awsRestjson1_serializeDocumentTimeEqualityFilter(v *types.TimeEqualityFilte
 		}
 	}
 
+	if v.DefaultFilterControlConfiguration != nil {
+		ok := object.Key("DefaultFilterControlConfiguration")
+		if err := awsRestjson1_serializeDocumentDefaultFilterControlConfiguration(v.DefaultFilterControlConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.FilterId != nil {
 		ok := object.Key("FilterId")
 		ok.String(*v.FilterId)
@@ -34894,6 +35615,13 @@ func awsRestjson1_serializeDocumentTimeRangeFilter(v *types.TimeRangeFilter, val
 	if v.Column != nil {
 		ok := object.Key("Column")
 		if err := awsRestjson1_serializeDocumentColumnIdentifier(v.Column, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.DefaultFilterControlConfiguration != nil {
+		ok := object.Key("DefaultFilterControlConfiguration")
+		if err := awsRestjson1_serializeDocumentDefaultFilterControlConfiguration(v.DefaultFilterControlConfiguration, ok); err != nil {
 			return err
 		}
 	}
@@ -35043,6 +35771,13 @@ func awsRestjson1_serializeDocumentTopBottomFilter(v *types.TopBottomFilter, val
 	if v.Column != nil {
 		ok := object.Key("Column")
 		if err := awsRestjson1_serializeDocumentColumnIdentifier(v.Column, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.DefaultFilterControlConfiguration != nil {
+		ok := object.Key("DefaultFilterControlConfiguration")
+		if err := awsRestjson1_serializeDocumentDefaultFilterControlConfiguration(v.DefaultFilterControlConfiguration, ok); err != nil {
 			return err
 		}
 	}
@@ -36895,6 +37630,28 @@ func awsRestjson1_serializeDocumentVpcConnectionProperties(v *types.VpcConnectio
 		ok.String(*v.VpcConnectionArn)
 	}
 
+	return nil
+}
+
+func awsRestjson1_serializeDocumentVpcEndpointIdRestrictionRuleMap(v map[string]string, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	for key := range v {
+		om := object.Key(key)
+		om.String(v[key])
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentVpcIdRestrictionRuleMap(v map[string]string, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	for key := range v {
+		om := object.Key(key)
+		om.String(v[key])
+	}
 	return nil
 }
 

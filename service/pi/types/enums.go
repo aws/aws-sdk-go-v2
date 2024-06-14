@@ -10,8 +10,9 @@ const (
 )
 
 // Values returns all known values for AcceptLanguage. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (AcceptLanguage) Values() []AcceptLanguage {
 	return []AcceptLanguage{
 		"EN_US",
@@ -28,8 +29,9 @@ const (
 )
 
 // Values returns all known values for AnalysisStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (AnalysisStatus) Values() []AnalysisStatus {
 	return []AnalysisStatus{
 		"RUNNING",
@@ -47,8 +49,9 @@ const (
 )
 
 // Values returns all known values for ContextType. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ContextType) Values() []ContextType {
 	return []ContextType{
 		"CAUSAL",
@@ -66,8 +69,9 @@ const (
 )
 
 // Values returns all known values for DetailStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (DetailStatus) Values() []DetailStatus {
 	return []DetailStatus{
 		"AVAILABLE",
@@ -89,8 +93,9 @@ const (
 )
 
 // Values returns all known values for FeatureStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (FeatureStatus) Values() []FeatureStatus {
 	return []FeatureStatus{
 		"ENABLED",
@@ -99,6 +104,27 @@ func (FeatureStatus) Values() []FeatureStatus {
 		"ENABLED_PENDING_REBOOT",
 		"DISABLED_PENDING_REBOOT",
 		"UNKNOWN",
+	}
+}
+
+type FineGrainedAction string
+
+// Enum values for FineGrainedAction
+const (
+	FineGrainedActionDescribeDimensionKeys  FineGrainedAction = "DescribeDimensionKeys"
+	FineGrainedActionGetDimensionKeyDetails FineGrainedAction = "GetDimensionKeyDetails"
+	FineGrainedActionGetResourceMetrics     FineGrainedAction = "GetResourceMetrics"
+)
+
+// Values returns all known values for FineGrainedAction. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (FineGrainedAction) Values() []FineGrainedAction {
+	return []FineGrainedAction{
+		"DescribeDimensionKeys",
+		"GetDimensionKeyDetails",
+		"GetResourceMetrics",
 	}
 }
 
@@ -111,8 +137,9 @@ const (
 )
 
 // Values returns all known values for PeriodAlignment. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (PeriodAlignment) Values() []PeriodAlignment {
 	return []PeriodAlignment{
 		"END_TIME",
@@ -129,8 +156,9 @@ const (
 )
 
 // Values returns all known values for ServiceType. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ServiceType) Values() []ServiceType {
 	return []ServiceType{
 		"RDS",
@@ -148,8 +176,9 @@ const (
 )
 
 // Values returns all known values for Severity. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (Severity) Values() []Severity {
 	return []Severity{
 		"LOW",
@@ -167,8 +196,9 @@ const (
 )
 
 // Values returns all known values for TextFormat. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (TextFormat) Values() []TextFormat {
 	return []TextFormat{
 		"PLAIN_TEXT",

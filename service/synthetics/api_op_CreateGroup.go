@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/synthetics/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -15,17 +14,22 @@ import (
 // Creates a group which you can use to associate canaries with each other,
 // including cross-Region canaries. Using groups can help you with managing and
 // automating your canaries, and you can also view aggregated run results and
-// statistics for all canaries in a group. Groups are global resources. When you
-// create a group, it is replicated across Amazon Web Services Regions, and you can
-// view it and add canaries to it from any Region. Although the group ARN format
-// reflects the Region name where it was created, a group is not constrained to any
-// Region. This means that you can put canaries from multiple Regions into the same
-// group, and then use that group to view and manage all of those canaries in a
-// single view. Groups are supported in all Regions except the Regions that are
-// disabled by default. For more information about these Regions, see Enabling a
-// Region (https://docs.aws.amazon.com/general/latest/gr/rande-manage.html#rande-manage-enable)
-// . Each group can contain as many as 10 canaries. You can have as many as 20
+// statistics for all canaries in a group.
+//
+// Groups are global resources. When you create a group, it is replicated across
+// Amazon Web Services Regions, and you can view it and add canaries to it from any
+// Region. Although the group ARN format reflects the Region name where it was
+// created, a group is not constrained to any Region. This means that you can put
+// canaries from multiple Regions into the same group, and then use that group to
+// view and manage all of those canaries in a single view.
+//
+// Groups are supported in all Regions except the Regions that are disabled by
+// default. For more information about these Regions, see [Enabling a Region].
+//
+// Each group can contain as many as 10 canaries. You can have as many as 20
 // groups in your account. Any single canary can be a member of up to 10 groups.
+//
+// [Enabling a Region]: https://docs.aws.amazon.com/general/latest/gr/rande-manage.html#rande-manage-enable
 func (c *Client) CreateGroup(ctx context.Context, params *CreateGroupInput, optFns ...func(*Options)) (*CreateGroupOutput, error) {
 	if params == nil {
 		params = &CreateGroupInput{}
@@ -43,16 +47,19 @@ func (c *Client) CreateGroup(ctx context.Context, params *CreateGroupInput, optF
 
 type CreateGroupInput struct {
 
-	// The name for the group. It can include any Unicode characters. The names for
-	// all groups in your account, across all Regions, must be unique.
+	// The name for the group. It can include any Unicode characters.
+	//
+	// The names for all groups in your account, across all Regions, must be unique.
 	//
 	// This member is required.
 	Name *string
 
 	// A list of key-value pairs to associate with the group. You can associate as
-	// many as 50 tags with a group. Tags can help you organize and categorize your
-	// resources. You can also use them to scope user permissions, by granting a user
-	// permission to access or change only the resources that have certain tag values.
+	// many as 50 tags with a group.
+	//
+	// Tags can help you organize and categorize your resources. You can also use them
+	// to scope user permissions, by granting a user permission to access or change
+	// only the resources that have certain tag values.
 	Tags map[string]string
 
 	noSmithyDocumentSerde
@@ -91,25 +98,25 @@ func (c *Client) addOperationCreateGroupMiddlewares(stack *middleware.Stack, opt
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -124,13 +131,16 @@ func (c *Client) addOperationCreateGroupMiddlewares(stack *middleware.Stack, opt
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpCreateGroupValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateGroup(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

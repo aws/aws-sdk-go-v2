@@ -6,16 +6,18 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/transcribe/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Provides information about the specified custom language model. This operation
-// also shows if the base language model that you used to create your custom
-// language model has been updated. If Amazon Transcribe has updated the base
-// model, you can create a new custom language model using the updated base model.
+// Provides information about the specified custom language model.
+//
+// This operation also shows if the base language model that you used to create
+// your custom language model has been updated. If Amazon Transcribe has updated
+// the base model, you can create a new custom language model using the updated
+// base model.
+//
 // If you tried to create a new custom language model and the request wasn't
 // successful, you can use DescribeLanguageModel to help identify the reason for
 // this failure.
@@ -47,12 +49,16 @@ type DescribeLanguageModelInput struct {
 
 type DescribeLanguageModelOutput struct {
 
-	// Provides information about the specified custom language model. This parameter
-	// also shows if the base language model you used to create your custom language
-	// model has been updated. If Amazon Transcribe has updated the base model, you can
-	// create a new custom language model using the updated base model. If you tried to
-	// create a new custom language model and the request wasn't successful, you can
-	// use this DescribeLanguageModel to help identify the reason for this failure.
+	// Provides information about the specified custom language model.
+	//
+	// This parameter also shows if the base language model you used to create your
+	// custom language model has been updated. If Amazon Transcribe has updated the
+	// base model, you can create a new custom language model using the updated base
+	// model.
+	//
+	// If you tried to create a new custom language model and the request wasn't
+	// successful, you can use this DescribeLanguageModel to help identify the reason
+	// for this failure.
 	LanguageModel *types.LanguageModel
 
 	// Metadata pertaining to the operation's result.
@@ -83,25 +89,25 @@ func (c *Client) addOperationDescribeLanguageModelMiddlewares(stack *middleware.
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -116,13 +122,16 @@ func (c *Client) addOperationDescribeLanguageModelMiddlewares(stack *middleware.
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDescribeLanguageModelValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeLanguageModel(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

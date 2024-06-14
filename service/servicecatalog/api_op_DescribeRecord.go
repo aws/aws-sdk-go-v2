@@ -6,20 +6,19 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/servicecatalog/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Gets information about the specified request operation. Use this operation
-// after calling a request operation (for example, ProvisionProduct ,
-// TerminateProvisionedProduct , or UpdateProvisionedProduct ). If a provisioned
-// product was transferred to a new owner using UpdateProvisionedProductProperties
-// , the new owner will be able to describe all past records for that product. The
-// previous owner will no longer be able to describe the records, but will be able
-// to use ListRecordHistory to see the product's history from when he was the
-// owner.
+// Gets information about the specified request operation.
+//
+// Use this operation after calling a request operation (for example, ProvisionProduct, TerminateProvisionedProduct, or UpdateProvisionedProduct).
+//
+// If a provisioned product was transferred to a new owner using UpdateProvisionedProductProperties, the new owner
+// will be able to describe all past records for that product. The previous owner
+// will no longer be able to describe the records, but will be able to use ListRecordHistoryto see
+// the product's history from when he was the owner.
 func (c *Client) DescribeRecord(ctx context.Context, params *DescribeRecordInput, optFns ...func(*Options)) (*DescribeRecordOutput, error) {
 	if params == nil {
 		params = &DescribeRecordInput{}
@@ -44,7 +43,9 @@ type DescribeRecordInput struct {
 	Id *string
 
 	// The language code.
+	//
 	//   - jp - Japanese
+	//
 	//   - zh - Chinese
 	AcceptLanguage *string
 
@@ -100,25 +101,25 @@ func (c *Client) addOperationDescribeRecordMiddlewares(stack *middleware.Stack, 
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -133,13 +134,16 @@ func (c *Client) addOperationDescribeRecordMiddlewares(stack *middleware.Stack, 
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDescribeRecordValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeRecord(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

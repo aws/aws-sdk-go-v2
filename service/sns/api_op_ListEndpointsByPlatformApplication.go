@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/sns/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -19,9 +18,11 @@ import (
 // the first page results, then a NextToken string will be returned. To receive the
 // next page, you call ListEndpointsByPlatformApplication again using the
 // NextToken string received from the previous call. When there are no more records
-// to return, NextToken will be null. For more information, see Using Amazon SNS
-// Mobile Push Notifications (https://docs.aws.amazon.com/sns/latest/dg/SNSMobilePush.html)
-// . This action is throttled at 30 transactions per second (TPS).
+// to return, NextToken will be null. For more information, see [Using Amazon SNS Mobile Push Notifications].
+//
+// This action is throttled at 30 transactions per second (TPS).
+//
+// [Using Amazon SNS Mobile Push Notifications]: https://docs.aws.amazon.com/sns/latest/dg/SNSMobilePush.html
 func (c *Client) ListEndpointsByPlatformApplication(ctx context.Context, params *ListEndpointsByPlatformApplicationInput, optFns ...func(*Options)) (*ListEndpointsByPlatformApplicationOutput, error) {
 	if params == nil {
 		params = &ListEndpointsByPlatformApplicationInput{}
@@ -90,25 +91,25 @@ func (c *Client) addOperationListEndpointsByPlatformApplicationMiddlewares(stack
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -123,13 +124,16 @@ func (c *Client) addOperationListEndpointsByPlatformApplicationMiddlewares(stack
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpListEndpointsByPlatformApplicationValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListEndpointsByPlatformApplication(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

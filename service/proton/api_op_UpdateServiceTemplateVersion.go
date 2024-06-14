@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/proton/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -57,11 +56,15 @@ type UpdateServiceTemplateVersionInput struct {
 	Status types.TemplateVersionStatus
 
 	// An array of supported component sources. Components with supported sources can
-	// be attached to service instances based on this service template version. A
-	// change to supportedComponentSources doesn't impact existing component
+	// be attached to service instances based on this service template version.
+	//
+	// A change to supportedComponentSources doesn't impact existing component
 	// attachments to instances based on this template version. A change only affects
-	// later associations. For more information about components, see Proton components (https://docs.aws.amazon.com/proton/latest/userguide/ag-components.html)
-	// in the Proton User Guide.
+	// later associations.
+	//
+	// For more information about components, see [Proton components] in the Proton User Guide.
+	//
+	// [Proton components]: https://docs.aws.amazon.com/proton/latest/userguide/ag-components.html
 	SupportedComponentSources []types.ServiceTemplateSupportedComponentSourceType
 
 	noSmithyDocumentSerde
@@ -102,25 +105,25 @@ func (c *Client) addOperationUpdateServiceTemplateVersionMiddlewares(stack *midd
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -135,13 +138,16 @@ func (c *Client) addOperationUpdateServiceTemplateVersionMiddlewares(stack *midd
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpUpdateServiceTemplateVersionValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateServiceTemplateVersion(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

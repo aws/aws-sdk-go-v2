@@ -6,15 +6,14 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/personalize/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a recommendation filter. For more information, see Filtering
-// recommendations and user segments (https://docs.aws.amazon.com/personalize/latest/dg/filter.html)
-// .
+// Creates a recommendation filter. For more information, see [Filtering recommendations and user segments].
+//
+// [Filtering recommendations and user segments]: https://docs.aws.amazon.com/personalize/latest/dg/filter.html
 func (c *Client) CreateFilter(ctx context.Context, params *CreateFilterInput, optFns ...func(*Options)) (*CreateFilterOutput, error) {
 	if params == nil {
 		params = &CreateFilterInput{}
@@ -39,8 +38,9 @@ type CreateFilterInput struct {
 
 	// The filter expression defines which items are included or excluded from
 	// recommendations. Filter expression must follow specific format rules. For
-	// information about filter expression structure and syntax, see Filter expressions (https://docs.aws.amazon.com/personalize/latest/dg/filter-expressions.html)
-	// .
+	// information about filter expression structure and syntax, see [Filter expressions].
+	//
+	// [Filter expressions]: https://docs.aws.amazon.com/personalize/latest/dg/filter-expressions.html
 	//
 	// This member is required.
 	FilterExpression *string
@@ -50,8 +50,9 @@ type CreateFilterInput struct {
 	// This member is required.
 	Name *string
 
-	// A list of tags (https://docs.aws.amazon.com/personalize/latest/dg/tagging-resources.html)
-	// to apply to the filter.
+	// A list of [tags] to apply to the filter.
+	//
+	// [tags]: https://docs.aws.amazon.com/personalize/latest/dg/tagging-resources.html
 	Tags []types.Tag
 
 	noSmithyDocumentSerde
@@ -90,25 +91,25 @@ func (c *Client) addOperationCreateFilterMiddlewares(stack *middleware.Stack, op
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -123,13 +124,16 @@ func (c *Client) addOperationCreateFilterMiddlewares(stack *middleware.Stack, op
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpCreateFilterValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateFilter(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

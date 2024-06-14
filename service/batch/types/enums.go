@@ -11,8 +11,9 @@ const (
 )
 
 // Values returns all known values for ArrayJobDependency. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ArrayJobDependency) Values() []ArrayJobDependency {
 	return []ArrayJobDependency{
 		"N_TO_N",
@@ -29,8 +30,9 @@ const (
 )
 
 // Values returns all known values for AssignPublicIp. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (AssignPublicIp) Values() []AssignPublicIp {
 	return []AssignPublicIp{
 		"ENABLED",
@@ -47,8 +49,9 @@ const (
 )
 
 // Values returns all known values for CEState. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (CEState) Values() []CEState {
 	return []CEState{
 		"ENABLED",
@@ -69,8 +72,9 @@ const (
 )
 
 // Values returns all known values for CEStatus. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (CEStatus) Values() []CEStatus {
 	return []CEStatus{
 		"CREATING",
@@ -91,8 +95,9 @@ const (
 )
 
 // Values returns all known values for CEType. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (CEType) Values() []CEType {
 	return []CEType{
 		"MANAGED",
@@ -111,8 +116,9 @@ const (
 )
 
 // Values returns all known values for CRAllocationStrategy. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (CRAllocationStrategy) Values() []CRAllocationStrategy {
 	return []CRAllocationStrategy{
 		"BEST_FIT",
@@ -133,8 +139,9 @@ const (
 )
 
 // Values returns all known values for CRType. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (CRType) Values() []CRType {
 	return []CRType{
 		"EC2",
@@ -155,6 +162,7 @@ const (
 
 // Values returns all known values for CRUpdateAllocationStrategy. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (CRUpdateAllocationStrategy) Values() []CRUpdateAllocationStrategy {
 	return []CRUpdateAllocationStrategy{
@@ -174,8 +182,9 @@ const (
 )
 
 // Values returns all known values for DeviceCgroupPermission. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (DeviceCgroupPermission) Values() []DeviceCgroupPermission {
 	return []DeviceCgroupPermission{
 		"READ",
@@ -194,6 +203,7 @@ const (
 
 // Values returns all known values for EFSAuthorizationConfigIAM. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (EFSAuthorizationConfigIAM) Values() []EFSAuthorizationConfigIAM {
 	return []EFSAuthorizationConfigIAM{
@@ -211,8 +221,9 @@ const (
 )
 
 // Values returns all known values for EFSTransitEncryption. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (EFSTransitEncryption) Values() []EFSTransitEncryption {
 	return []EFSTransitEncryption{
 		"ENABLED",
@@ -229,12 +240,49 @@ const (
 )
 
 // Values returns all known values for JobDefinitionType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (JobDefinitionType) Values() []JobDefinitionType {
 	return []JobDefinitionType{
 		"container",
 		"multinode",
+	}
+}
+
+type JobStateTimeLimitActionsAction string
+
+// Enum values for JobStateTimeLimitActionsAction
+const (
+	JobStateTimeLimitActionsActionCancel JobStateTimeLimitActionsAction = "CANCEL"
+)
+
+// Values returns all known values for JobStateTimeLimitActionsAction. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (JobStateTimeLimitActionsAction) Values() []JobStateTimeLimitActionsAction {
+	return []JobStateTimeLimitActionsAction{
+		"CANCEL",
+	}
+}
+
+type JobStateTimeLimitActionsState string
+
+// Enum values for JobStateTimeLimitActionsState
+const (
+	JobStateTimeLimitActionsStateRunnable JobStateTimeLimitActionsState = "RUNNABLE"
+)
+
+// Values returns all known values for JobStateTimeLimitActionsState. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (JobStateTimeLimitActionsState) Values() []JobStateTimeLimitActionsState {
+	return []JobStateTimeLimitActionsState{
+		"RUNNABLE",
 	}
 }
 
@@ -252,8 +300,9 @@ const (
 )
 
 // Values returns all known values for JobStatus. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (JobStatus) Values() []JobStatus {
 	return []JobStatus{
 		"SUBMITTED",
@@ -275,8 +324,9 @@ const (
 )
 
 // Values returns all known values for JQState. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (JQState) Values() []JQState {
 	return []JQState{
 		"ENABLED",
@@ -297,8 +347,9 @@ const (
 )
 
 // Values returns all known values for JQStatus. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (JQStatus) Values() []JQStatus {
 	return []JQStatus{
 		"CREATING",
@@ -324,8 +375,9 @@ const (
 )
 
 // Values returns all known values for LogDriver. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (LogDriver) Values() []LogDriver {
 	return []LogDriver{
 		"json-file",
@@ -347,8 +399,9 @@ const (
 )
 
 // Values returns all known values for OrchestrationType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (OrchestrationType) Values() []OrchestrationType {
 	return []OrchestrationType{
 		"ECS",
@@ -365,8 +418,9 @@ const (
 )
 
 // Values returns all known values for PlatformCapability. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (PlatformCapability) Values() []PlatformCapability {
 	return []PlatformCapability{
 		"EC2",
@@ -384,8 +438,9 @@ const (
 )
 
 // Values returns all known values for ResourceType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ResourceType) Values() []ResourceType {
 	return []ResourceType{
 		"GPU",
@@ -403,8 +458,9 @@ const (
 )
 
 // Values returns all known values for RetryAction. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (RetryAction) Values() []RetryAction {
 	return []RetryAction{
 		"RETRY",

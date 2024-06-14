@@ -191,6 +191,24 @@ var defaultPartitions = endpoints.Partitions{
 				Deprecated: aws.TrueTernary,
 			},
 			endpoints.EndpointKey{
+				Region: "ca-west-1",
+			}: endpoints.Endpoint{},
+			endpoints.EndpointKey{
+				Region:  "ca-west-1",
+				Variant: endpoints.FIPSVariant,
+			}: {
+				Hostname: "controltower-fips.ca-west-1.amazonaws.com",
+			},
+			endpoints.EndpointKey{
+				Region: "ca-west-1-fips",
+			}: endpoints.Endpoint{
+				Hostname: "controltower-fips.ca-west-1.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "ca-west-1",
+				},
+				Deprecated: aws.TrueTernary,
+			},
+			endpoints.EndpointKey{
 				Region: "eu-central-1",
 			}: endpoints.Endpoint{},
 			endpoints.EndpointKey{
@@ -458,8 +476,38 @@ var defaultPartitions = endpoints.Partitions{
 				Region: "us-gov-east-1",
 			}: endpoints.Endpoint{},
 			endpoints.EndpointKey{
+				Region:  "us-gov-east-1",
+				Variant: endpoints.FIPSVariant,
+			}: {
+				Hostname: "controltower-fips.us-gov-east-1.amazonaws.com",
+			},
+			endpoints.EndpointKey{
+				Region: "us-gov-east-1-fips",
+			}: endpoints.Endpoint{
+				Hostname: "controltower-fips.us-gov-east-1.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "us-gov-east-1",
+				},
+				Deprecated: aws.TrueTernary,
+			},
+			endpoints.EndpointKey{
 				Region: "us-gov-west-1",
 			}: endpoints.Endpoint{},
+			endpoints.EndpointKey{
+				Region:  "us-gov-west-1",
+				Variant: endpoints.FIPSVariant,
+			}: {
+				Hostname: "controltower-fips.us-gov-west-1.amazonaws.com",
+			},
+			endpoints.EndpointKey{
+				Region: "us-gov-west-1-fips",
+			}: endpoints.Endpoint{
+				Hostname: "controltower-fips.us-gov-west-1.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "us-gov-west-1",
+				},
+				Deprecated: aws.TrueTernary,
+			},
 		},
 	},
 }

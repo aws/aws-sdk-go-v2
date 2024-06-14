@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/lexmodelbuildingservice/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -16,12 +15,16 @@ import (
 // Creates a new version of an intent based on the $LATEST version of the intent.
 // If the $LATEST version of this intent hasn't changed since you last updated it,
 // Amazon Lex doesn't create a new version. It returns the last version you
-// created. You can update only the $LATEST version of the intent. You can't
-// update the numbered versions that you create with the CreateIntentVersion
-// operation. When you create a version of an intent, Amazon Lex sets the version
-// to 1. Subsequent versions increment by 1. For more information, see
-// versioning-intro . This operation requires permissions to perform the
-// lex:CreateIntentVersion action.
+// created.
+//
+// You can update only the $LATEST version of the intent. You can't update the
+// numbered versions that you create with the CreateIntentVersion operation.
+//
+// When you create a version of an intent, Amazon Lex sets the version to 1.
+// Subsequent versions increment by 1. For more information, see versioning-intro.
+//
+// This operation requires permissions to perform the lex:CreateIntentVersion
+// action.
 func (c *Client) CreateIntentVersion(ctx context.Context, params *CreateIntentVersionInput, optFns ...func(*Options)) (*CreateIntentVersionOutput, error) {
 	if params == nil {
 		params = &CreateIntentVersionInput{}
@@ -81,7 +84,7 @@ type CreateIntentVersionOutput struct {
 	// after the intent is fulfilled.
 	FollowUpPrompt *types.FollowUpPrompt
 
-	// Describes how the intent is fulfilled.
+	//  Describes how the intent is fulfilled.
 	FulfillmentActivity *types.FulfillmentActivity
 
 	// An array of InputContext objects that lists the contexts that must be active
@@ -147,25 +150,25 @@ func (c *Client) addOperationCreateIntentVersionMiddlewares(stack *middleware.St
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -180,13 +183,16 @@ func (c *Client) addOperationCreateIntentVersionMiddlewares(stack *middleware.St
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpCreateIntentVersionValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateIntentVersion(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

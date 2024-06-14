@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -37,22 +36,33 @@ type DescribeNetworkInsightsPathsInput struct {
 	DryRun *bool
 
 	// The filters. The following are the possible values:
+	//
 	//   - destination - The ID of the resource.
+	//
 	//   - filter-at-source.source-address - The source IPv4 address at the source.
+	//
 	//   - filter-at-source.source-port-range - The source port range at the source.
+	//
 	//   - filter-at-source.destination-address - The destination IPv4 address at the
 	//   source.
+	//
 	//   - filter-at-source.destination-port-range - The destination port range at the
 	//   source.
+	//
 	//   - filter-at-destination.source-address - The source IPv4 address at the
 	//   destination.
+	//
 	//   - filter-at-destination.source-port-range - The source port range at the
 	//   destination.
+	//
 	//   - filter-at-destination.destination-address - The destination IPv4 address at
 	//   the destination.
+	//
 	//   - filter-at-destination.destination-port-range - The destination port range
 	//   at the destination.
+	//
 	//   - protocol - The protocol.
+	//
 	//   - source - The ID of the resource.
 	Filters []types.Filter
 
@@ -106,25 +116,25 @@ func (c *Client) addOperationDescribeNetworkInsightsPathsMiddlewares(stack *midd
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -139,10 +149,13 @@ func (c *Client) addOperationDescribeNetworkInsightsPathsMiddlewares(stack *midd
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeNetworkInsightsPaths(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

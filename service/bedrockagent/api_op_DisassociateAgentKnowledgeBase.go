@@ -6,12 +6,11 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Disassociate an existing Knowledge Base from an Amazon Bedrock Agent
+// Disassociates a knowledge base from an agent.
 func (c *Client) DisassociateAgentKnowledgeBase(ctx context.Context, params *DisassociateAgentKnowledgeBaseInput, optFns ...func(*Options)) (*DisassociateAgentKnowledgeBaseOutput, error) {
 	if params == nil {
 		params = &DisassociateAgentKnowledgeBaseInput{}
@@ -27,20 +26,20 @@ func (c *Client) DisassociateAgentKnowledgeBase(ctx context.Context, params *Dis
 	return out, nil
 }
 
-// Disassociate Agent Knowledge Base Request
 type DisassociateAgentKnowledgeBaseInput struct {
 
-	// Id generated at the server side when an Agent is created
+	// The unique identifier of the agent from which to disassociate the knowledge
+	// base.
 	//
 	// This member is required.
 	AgentId *string
 
-	// Draft Version of the Agent.
+	// The version of the agent from which to disassociate the knowledge base.
 	//
 	// This member is required.
 	AgentVersion *string
 
-	// Id generated at the server side when a Knowledge Base is associated to an Agent
+	// The unique identifier of the knowledge base to disassociate.
 	//
 	// This member is required.
 	KnowledgeBaseId *string
@@ -48,7 +47,6 @@ type DisassociateAgentKnowledgeBaseInput struct {
 	noSmithyDocumentSerde
 }
 
-// Disassociate Agent Knowledge Base Response
 type DisassociateAgentKnowledgeBaseOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -78,25 +76,25 @@ func (c *Client) addOperationDisassociateAgentKnowledgeBaseMiddlewares(stack *mi
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -111,13 +109,16 @@ func (c *Client) addOperationDisassociateAgentKnowledgeBaseMiddlewares(stack *mi
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDisassociateAgentKnowledgeBaseValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDisassociateAgentKnowledgeBase(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

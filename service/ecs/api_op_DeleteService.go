@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/ecs/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -15,18 +14,19 @@ import (
 // Deletes a specified service within a cluster. You can delete a service if you
 // have no running tasks in it and the desired task count is zero. If the service
 // is actively maintaining tasks, you can't delete it, and you must update the
-// service to a desired task count of zero. For more information, see UpdateService
-// . When you delete a service, if there are still running tasks that require
+// service to a desired task count of zero. For more information, see UpdateService.
+//
+// When you delete a service, if there are still running tasks that require
 // cleanup, the service status moves from ACTIVE to DRAINING , and the service is
-// no longer visible in the console or in the ListServices API operation. After
-// all tasks have transitioned to either STOPPING or STOPPED status, the service
-// status moves from DRAINING to INACTIVE . Services in the DRAINING or INACTIVE
-// status can still be viewed with the DescribeServices API operation. However, in
-// the future, INACTIVE services may be cleaned up and purged from Amazon ECS
-// record keeping, and DescribeServices calls on those services return a
-// ServiceNotFoundException error. If you attempt to create a new service with the
-// same name as an existing service in either ACTIVE or DRAINING status, you
-// receive an error.
+// no longer visible in the console or in the ListServicesAPI operation. After all tasks have
+// transitioned to either STOPPING or STOPPED status, the service status moves
+// from DRAINING to INACTIVE . Services in the DRAINING or INACTIVE status can
+// still be viewed with the DescribeServicesAPI operation. However, in the future, INACTIVE
+// services may be cleaned up and purged from Amazon ECS record keeping, and DescribeServicescalls
+// on those services return a ServiceNotFoundException error.
+//
+// If you attempt to create a new service with the same name as an existing
+// service in either ACTIVE or DRAINING status, you receive an error.
 func (c *Client) DeleteService(ctx context.Context, params *DeleteServiceInput, optFns ...func(*Options)) (*DeleteServiceOutput, error) {
 	if params == nil {
 		params = &DeleteServiceInput{}
@@ -95,25 +95,25 @@ func (c *Client) addOperationDeleteServiceMiddlewares(stack *middleware.Stack, o
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -128,13 +128,16 @@ func (c *Client) addOperationDeleteServiceMiddlewares(stack *middleware.Stack, o
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDeleteServiceValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteService(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

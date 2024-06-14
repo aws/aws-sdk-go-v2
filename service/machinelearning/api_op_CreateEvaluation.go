@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -18,12 +17,15 @@ import (
 // outcome and provides a summary so that you know how effective the MLModel
 // functions on the test data. Evaluation generates a relevant performance metric,
 // such as BinaryAUC, RegressionRMSE or MulticlassAvgFScore based on the
-// corresponding MLModelType : BINARY , REGRESSION or MULTICLASS . CreateEvaluation
-// is an asynchronous operation. In response to CreateEvaluation , Amazon Machine
-// Learning (Amazon ML) immediately returns and sets the evaluation status to
-// PENDING . After the Evaluation is created and ready for use, Amazon ML sets the
-// status to COMPLETED . You can use the GetEvaluation operation to check progress
-// of the evaluation during the creation operation.
+// corresponding MLModelType : BINARY , REGRESSION or MULTICLASS .
+//
+// CreateEvaluation is an asynchronous operation. In response to CreateEvaluation ,
+// Amazon Machine Learning (Amazon ML) immediately returns and sets the evaluation
+// status to PENDING . After the Evaluation is created and ready for use, Amazon
+// ML sets the status to COMPLETED .
+//
+// You can use the GetEvaluation operation to check progress of the evaluation
+// during the creation operation.
 func (c *Client) CreateEvaluation(ctx context.Context, params *CreateEvaluationInput, optFns ...func(*Options)) (*CreateEvaluationOutput, error) {
 	if params == nil {
 		params = &CreateEvaluationInput{}
@@ -52,8 +54,10 @@ type CreateEvaluationInput struct {
 	// This member is required.
 	EvaluationId *string
 
-	// The ID of the MLModel to evaluate. The schema used in creating the MLModel must
-	// match the schema of the DataSource used in the Evaluation .
+	// The ID of the MLModel to evaluate.
+	//
+	// The schema used in creating the MLModel must match the schema of the DataSource
+	// used in the Evaluation .
 	//
 	// This member is required.
 	MLModelId *string
@@ -64,10 +68,12 @@ type CreateEvaluationInput struct {
 	noSmithyDocumentSerde
 }
 
-// Represents the output of a CreateEvaluation operation, and is an
-// acknowledgement that Amazon ML received the request. CreateEvaluation operation
-// is asynchronous. You can poll for status updates by using the GetEvcaluation
-// operation and checking the Status parameter.
+//	Represents the output of a CreateEvaluation operation, and is an
+//
+// acknowledgement that Amazon ML received the request.
+//
+// CreateEvaluation operation is asynchronous. You can poll for status updates by
+// using the GetEvcaluation operation and checking the Status parameter.
 type CreateEvaluationOutput struct {
 
 	// The user-supplied ID that uniquely identifies the Evaluation . This value should
@@ -102,25 +108,25 @@ func (c *Client) addOperationCreateEvaluationMiddlewares(stack *middleware.Stack
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -135,13 +141,16 @@ func (c *Client) addOperationCreateEvaluationMiddlewares(stack *middleware.Stack
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpCreateEvaluationValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateEvaluation(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

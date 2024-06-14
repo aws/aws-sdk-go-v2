@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -37,19 +36,18 @@ type DeleteApplicationOutputInput struct {
 	// This member is required.
 	ApplicationName *string
 
-	// The application version. You can use the DescribeApplication operation to get
-	// the current application version. If the version specified is not the current
-	// version, the ConcurrentModificationException is returned.
+	// The application version. You can use the DescribeApplication operation to get the current
+	// application version. If the version specified is not the current version, the
+	// ConcurrentModificationException is returned.
 	//
 	// This member is required.
 	CurrentApplicationVersionId *int64
 
 	// The ID of the configuration to delete. Each output configuration that is added
-	// to the application (either when the application is created or later) using the
-	// AddApplicationOutput operation has a unique ID. You need to provide the ID to
-	// uniquely identify the output configuration that you want to delete from the
-	// application configuration. You can use the DescribeApplication operation to get
-	// the specific OutputId .
+	// to the application (either when the application is created or later) using the AddApplicationOutput
+	// operation has a unique ID. You need to provide the ID to uniquely identify the
+	// output configuration that you want to delete from the application configuration.
+	// You can use the DescribeApplicationoperation to get the specific OutputId .
 	//
 	// This member is required.
 	OutputId *string
@@ -93,25 +91,25 @@ func (c *Client) addOperationDeleteApplicationOutputMiddlewares(stack *middlewar
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -126,13 +124,16 @@ func (c *Client) addOperationDeleteApplicationOutputMiddlewares(stack *middlewar
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDeleteApplicationOutputValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteApplicationOutput(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

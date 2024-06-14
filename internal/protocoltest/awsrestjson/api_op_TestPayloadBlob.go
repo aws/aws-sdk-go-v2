@@ -10,11 +10,12 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// This example operation serializes a payload targeting a blob. The Blob shape is
-// not structured content and we cannot make assumptions about what data will be
-// sent. This test ensures only a generic "Content-Type: application/octet-stream"
-// header is used, and that we are not treating an empty body as an empty JSON
-// document.
+// This example operation serializes a payload targeting a blob.
+//
+// The Blob shape is not structured content and we cannot make assumptions about
+// what data will be sent. This test ensures only a generic "Content-Type:
+// application/octet-stream" header is used, and that we are not treating an empty
+// body as an empty JSON document.
 func (c *Client) TestPayloadBlob(ctx context.Context, params *TestPayloadBlobInput, optFns ...func(*Options)) (*TestPayloadBlobOutput, error) {
 	if params == nil {
 		params = &TestPayloadBlobInput{}
@@ -71,22 +72,25 @@ func (c *Client) addOperationTestPayloadBlobMiddlewares(stack *middleware.Stack,
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
+		return err
+	}
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -101,10 +105,13 @@ func (c *Client) addOperationTestPayloadBlobMiddlewares(stack *middleware.Stack,
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opTestPayloadBlob(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

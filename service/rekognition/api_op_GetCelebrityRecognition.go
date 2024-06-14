@@ -6,47 +6,57 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/rekognition/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Gets the celebrity recognition results for a Amazon Rekognition Video analysis
-// started by StartCelebrityRecognition . Celebrity recognition in a video is an
-// asynchronous operation. Analysis is started by a call to
-// StartCelebrityRecognition which returns a job identifier ( JobId ). When the
-// celebrity recognition operation finishes, Amazon Rekognition Video publishes a
-// completion status to the Amazon Simple Notification Service topic registered in
-// the initial call to StartCelebrityRecognition . To get the results of the
-// celebrity recognition analysis, first check that the status value published to
-// the Amazon SNS topic is SUCCEEDED . If so, call GetCelebrityDetection and pass
-// the job identifier ( JobId ) from the initial call to StartCelebrityDetection .
+// started by StartCelebrityRecognition.
+//
+// Celebrity recognition in a video is an asynchronous operation. Analysis is
+// started by a call to StartCelebrityRecognitionwhich returns a job identifier ( JobId ).
+//
+// When the celebrity recognition operation finishes, Amazon Rekognition Video
+// publishes a completion status to the Amazon Simple Notification Service topic
+// registered in the initial call to StartCelebrityRecognition . To get the results
+// of the celebrity recognition analysis, first check that the status value
+// published to the Amazon SNS topic is SUCCEEDED . If so, call
+// GetCelebrityDetection and pass the job identifier ( JobId ) from the initial
+// call to StartCelebrityDetection .
+//
 // For more information, see Working With Stored Videos in the Amazon Rekognition
-// Developer Guide. GetCelebrityRecognition returns detected celebrities and the
-// time(s) they are detected in an array ( Celebrities ) of CelebrityRecognition
-// objects. Each CelebrityRecognition contains information about the celebrity in
-// a CelebrityDetail object and the time, Timestamp , the celebrity was detected.
-// This CelebrityDetail object stores information about the detected celebrity's
-// face attributes, a face bounding box, known gender, the celebrity's name, and a
-// confidence estimate. GetCelebrityRecognition only returns the default facial
-// attributes ( BoundingBox , Confidence , Landmarks , Pose , and Quality ). The
-// BoundingBox field only applies to the detected face instance. The other facial
-// attributes listed in the Face object of the following response syntax are not
-// returned. For more information, see FaceDetail in the Amazon Rekognition
-// Developer Guide. By default, the Celebrities array is sorted by time
-// (milliseconds from the start of the video). You can also sort the array by
-// celebrity by specifying the value ID in the SortBy input parameter. The
-// CelebrityDetail object includes the celebrity identifer and additional
+// Developer Guide.
+//
+// GetCelebrityRecognition returns detected celebrities and the time(s) they are
+// detected in an array ( Celebrities ) of CelebrityRecognition objects. Each CelebrityRecognition
+// contains information about the celebrity in a CelebrityDetailobject and the time, Timestamp ,
+// the celebrity was detected. This CelebrityDetailobject stores information about the detected
+// celebrity's face attributes, a face bounding box, known gender, the celebrity's
+// name, and a confidence estimate.
+//
+// GetCelebrityRecognition only returns the default facial attributes ( BoundingBox
+// , Confidence , Landmarks , Pose , and Quality ). The BoundingBox field only
+// applies to the detected face instance. The other facial attributes listed in the
+// Face object of the following response syntax are not returned. For more
+// information, see FaceDetail in the Amazon Rekognition Developer Guide.
+//
+// By default, the Celebrities array is sorted by time (milliseconds from the
+// start of the video). You can also sort the array by celebrity by specifying the
+// value ID in the SortBy input parameter.
+//
+// The CelebrityDetail object includes the celebrity identifer and additional
 // information urls. If you don't store the additional information urls, you can
-// get them later by calling GetCelebrityInfo with the celebrity identifer. No
-// information is returned for faces not recognized as celebrities. Use MaxResults
-// parameter to limit the number of labels returned. If there are more results than
-// specified in MaxResults , the value of NextToken in the operation response
-// contains a pagination token for getting the next set of results. To get the next
-// page of results, call GetCelebrityDetection and populate the NextToken request
-// parameter with the token value returned from the previous call to
-// GetCelebrityRecognition .
+// get them later by calling GetCelebrityInfowith the celebrity identifer.
+//
+// No information is returned for faces not recognized as celebrities.
+//
+// Use MaxResults parameter to limit the number of labels returned. If there are
+// more results than specified in MaxResults , the value of NextToken in the
+// operation response contains a pagination token for getting the next set of
+// results. To get the next page of results, call GetCelebrityDetection and
+// populate the NextToken request parameter with the token value returned from the
+// previous call to GetCelebrityRecognition .
 func (c *Client) GetCelebrityRecognition(ctx context.Context, params *GetCelebrityRecognitionInput, optFns ...func(*Options)) (*GetCelebrityRecognitionOutput, error) {
 	if params == nil {
 		params = &GetCelebrityRecognitionInput{}
@@ -115,8 +125,8 @@ type GetCelebrityRecognitionOutput struct {
 	StatusMessage *string
 
 	// Video file stored in an Amazon S3 bucket. Amazon Rekognition video start
-	// operations such as StartLabelDetection use Video to specify a video for
-	// analysis. The supported file formats are .mp4, .mov and .avi.
+	// operations such as StartLabelDetectionuse Video to specify a video for analysis. The supported
+	// file formats are .mp4, .mov and .avi.
 	Video *types.Video
 
 	// Information about a video that Amazon Rekognition Video analyzed. Videometadata
@@ -152,25 +162,25 @@ func (c *Client) addOperationGetCelebrityRecognitionMiddlewares(stack *middlewar
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -185,13 +195,16 @@ func (c *Client) addOperationGetCelebrityRecognitionMiddlewares(stack *middlewar
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpGetCelebrityRecognitionValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetCelebrityRecognition(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

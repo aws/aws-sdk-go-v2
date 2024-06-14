@@ -6,30 +6,34 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes an assessment report in Audit Manager. When you run the
-// DeleteAssessmentReport operation, Audit Manager attempts to delete the following
-// data:
+// Deletes an assessment report in Audit Manager.
+//
+// When you run the DeleteAssessmentReport operation, Audit Manager attempts to
+// delete the following data:
+//
 //   - The specified assessment report that’s stored in your S3 bucket
+//
 //   - The associated metadata that’s stored in Audit Manager
 //
 // If Audit Manager can’t access the assessment report in your S3 bucket, the
 // report isn’t deleted. In this event, the DeleteAssessmentReport operation
 // doesn’t fail. Instead, it proceeds to delete the associated metadata only. You
-// must then delete the assessment report from the S3 bucket yourself. This
-// scenario happens when Audit Manager receives a 403 (Forbidden) or 404 (Not
+// must then delete the assessment report from the S3 bucket yourself.
+//
+// This scenario happens when Audit Manager receives a 403 (Forbidden) or 404 (Not
 // Found) error from Amazon S3. To avoid this, make sure that your S3 bucket is
 // available, and that you configured the correct permissions for Audit Manager to
 // delete resources in your S3 bucket. For an example permissions policy that you
-// can use, see Assessment report destination permissions (https://docs.aws.amazon.com/audit-manager/latest/userguide/security_iam_id-based-policy-examples.html#full-administrator-access-assessment-report-destination)
-// in the Audit Manager User Guide. For information about the issues that could
-// cause a 403 (Forbidden) or 404 (Not Found ) error from Amazon S3, see List of
-// Error Codes (https://docs.aws.amazon.com/AmazonS3/latest/API/ErrorResponses.html#ErrorCodeList)
+// can use, see [Assessment report destination permissions]in the Audit Manager User Guide. For information about the issues
+// that could cause a 403 (Forbidden) or 404 (Not Found ) error from Amazon S3, see [List of Error Codes]
 // in the Amazon Simple Storage Service API Reference.
+//
+// [List of Error Codes]: https://docs.aws.amazon.com/AmazonS3/latest/API/ErrorResponses.html#ErrorCodeList
+// [Assessment report destination permissions]: https://docs.aws.amazon.com/audit-manager/latest/userguide/security_iam_id-based-policy-examples.html#full-administrator-access-assessment-report-destination
 func (c *Client) DeleteAssessmentReport(ctx context.Context, params *DeleteAssessmentReportInput, optFns ...func(*Options)) (*DeleteAssessmentReportOutput, error) {
 	if params == nil {
 		params = &DeleteAssessmentReportInput{}
@@ -47,12 +51,12 @@ func (c *Client) DeleteAssessmentReport(ctx context.Context, params *DeleteAsses
 
 type DeleteAssessmentReportInput struct {
 
-	// The unique identifier for the assessment.
+	//  The unique identifier for the assessment.
 	//
 	// This member is required.
 	AssessmentId *string
 
-	// The unique identifier for the assessment report.
+	//  The unique identifier for the assessment report.
 	//
 	// This member is required.
 	AssessmentReportId *string
@@ -89,25 +93,25 @@ func (c *Client) addOperationDeleteAssessmentReportMiddlewares(stack *middleware
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -122,13 +126,16 @@ func (c *Client) addOperationDeleteAssessmentReportMiddlewares(stack *middleware
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDeleteAssessmentReportValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteAssessmentReport(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

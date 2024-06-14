@@ -6,26 +6,30 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/rekognition/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Starts asynchronous detection of inappropriate, unwanted, or offensive content
-// in a stored video. For a list of moderation labels in Amazon Rekognition, see
-// Using the image and video moderation APIs (https://docs.aws.amazon.com/rekognition/latest/dg/moderation.html#moderation-api)
-// . Amazon Rekognition Video can moderate content in a video stored in an Amazon
-// S3 bucket. Use Video to specify the bucket name and the filename of the video.
+//	Starts asynchronous detection of inappropriate, unwanted, or offensive content
+//
+// in a stored video. For a list of moderation labels in Amazon Rekognition, see [Using the image and video moderation APIs].
+//
+// Amazon Rekognition Video can moderate content in a video stored in an Amazon S3
+// bucket. Use Videoto specify the bucket name and the filename of the video.
 // StartContentModeration returns a job identifier ( JobId ) which you use to get
 // the results of the analysis. When content analysis is finished, Amazon
 // Rekognition Video publishes a completion status to the Amazon Simple
-// Notification Service topic that you specify in NotificationChannel . To get the
-// results of the content analysis, first check that the status value published to
-// the Amazon SNS topic is SUCCEEDED . If so, call GetContentModeration and pass
-// the job identifier ( JobId ) from the initial call to StartContentModeration .
-// For more information, see Moderating content in the Amazon Rekognition Developer
-// Guide.
+// Notification Service topic that you specify in NotificationChannel .
+//
+// To get the results of the content analysis, first check that the status value
+// published to the Amazon SNS topic is SUCCEEDED . If so, call GetContentModeration and pass the job
+// identifier ( JobId ) from the initial call to StartContentModeration .
+//
+// For more information, see Moderating content in the Amazon Rekognition
+// Developer Guide.
+//
+// [Using the image and video moderation APIs]: https://docs.aws.amazon.com/rekognition/latest/dg/moderation.html#moderation-api
 func (c *Client) StartContentModeration(ctx context.Context, params *StartContentModerationInput, optFns ...func(*Options)) (*StartContentModerationOutput, error) {
 	if params == nil {
 		params = &StartContentModerationInput{}
@@ -113,25 +117,25 @@ func (c *Client) addOperationStartContentModerationMiddlewares(stack *middleware
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -146,13 +150,16 @@ func (c *Client) addOperationStartContentModerationMiddlewares(stack *middleware
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpStartContentModerationValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opStartContentModeration(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

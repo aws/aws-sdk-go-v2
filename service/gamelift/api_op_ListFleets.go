@@ -6,31 +6,40 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
+//	This operation has been expanded to use with the Amazon GameLift containers
+//
+// feature, which is currently in public preview.
+//
 // Retrieves a collection of fleet resources in an Amazon Web Services Region. You
-// can call this operation to get fleets in a previously selected default Region
-// (see
-// https://docs.aws.amazon.com/credref/latest/refdocs/setting-global-region.html (https://docs.aws.amazon.com/credref/latest/refdocs/setting-global-region.html)
-// or specify a Region in your request. You can filter the result set to find only
-// those fleets that are deployed with a specific build or script. For fleets that
-// have multiple locations, this operation retrieves fleets based on their home
-// Region only. This operation can be used in the following ways:
+// can filter the result set to find only those fleets that are deployed with a
+// specific build or script. For fleets that have multiple locations, this
+// operation retrieves fleets based on their home Region only.
+//
+// You can use operation in the following ways:
+//
 //   - To get a list of all fleets in a Region, don't provide a build or script
 //     identifier.
-//   - To get a list of all fleets where a specific custom game build is deployed,
+//
+//   - To get a list of all fleets where a specific game build is deployed,
 //     provide the build ID.
+//
 //   - To get a list of all Realtime Servers fleets with a specific configuration
 //     script, provide the script ID.
 //
+//   - To get a list of all fleets with a specific container group definition,
+//     provide the ContainerGroupDefinition ID.
+//
 // Use the pagination parameters to retrieve results as a set of sequential pages.
-// If successful, a list of fleet IDs that match the request parameters is
-// returned. A NextToken value is also returned if there are more result pages to
-// retrieve. Fleet resources are not listed in a particular order. Learn more
-// Setting up Amazon GameLift fleets (https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-intro.html)
+//
+// If successful, this operation returns a list of fleet IDs that match the
+// request parameters. A NextToken value is also returned if there are more result
+// pages to retrieve.
+//
+// Fleet IDs are returned in no particular order.
 func (c *Client) ListFleets(ctx context.Context, params *ListFleetsInput, optFns ...func(*Options)) (*ListFleetsOutput, error) {
 	if params == nil {
 		params = &ListFleetsInput{}
@@ -52,6 +61,11 @@ type ListFleetsInput struct {
 	// return only fleets using a specified build. Use either the build ID or ARN
 	// value.
 	BuildId *string
+
+	// The container group definition name to request fleets for. Use this parameter
+	// to return only fleets that are deployed with the specified container group
+	// definition.
+	ContainerGroupDefinitionName *string
 
 	// The maximum number of results to return. Use this parameter with NextToken to
 	// get results as a set of sequential pages.
@@ -108,25 +122,25 @@ func (c *Client) addOperationListFleetsMiddlewares(stack *middleware.Stack, opti
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -141,10 +155,13 @@ func (c *Client) addOperationListFleetsMiddlewares(stack *middleware.Stack, opti
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListFleets(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

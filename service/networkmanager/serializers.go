@@ -7234,6 +7234,28 @@ func awsRestjson1_serializeDocumentConstrainedStringList(v []string, value smith
 	return nil
 }
 
+func awsRestjson1_serializeDocumentCoreNetworkNetworkFunctionGroupIdentifier(v *types.CoreNetworkNetworkFunctionGroupIdentifier, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.CoreNetworkId != nil {
+		ok := object.Key("CoreNetworkId")
+		ok.String(*v.CoreNetworkId)
+	}
+
+	if v.EdgeLocation != nil {
+		ok := object.Key("EdgeLocation")
+		ok.String(*v.EdgeLocation)
+	}
+
+	if v.NetworkFunctionGroupName != nil {
+		ok := object.Key("NetworkFunctionGroupName")
+		ok.String(*v.NetworkFunctionGroupName)
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentCoreNetworkSegmentEdgeIdentifier(v *types.CoreNetworkSegmentEdgeIdentifier, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -7347,6 +7369,13 @@ func awsRestjson1_serializeDocumentRouteStateList(v []types.RouteState, value sm
 func awsRestjson1_serializeDocumentRouteTableIdentifier(v *types.RouteTableIdentifier, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.CoreNetworkNetworkFunctionGroup != nil {
+		ok := object.Key("CoreNetworkNetworkFunctionGroup")
+		if err := awsRestjson1_serializeDocumentCoreNetworkNetworkFunctionGroupIdentifier(v.CoreNetworkNetworkFunctionGroup, ok); err != nil {
+			return err
+		}
+	}
 
 	if v.CoreNetworkSegmentEdge != nil {
 		ok := object.Key("CoreNetworkSegmentEdge")

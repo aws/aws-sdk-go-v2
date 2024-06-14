@@ -6,27 +6,38 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/securityhub/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Enables Security Hub for your account in the current Region or the Region you
-// specify in the request. When you enable Security Hub, you grant to Security Hub
-// the permissions necessary to gather findings from other services that are
-// integrated with Security Hub. When you use the EnableSecurityHub operation to
-// enable Security Hub, you also automatically enable the following standards:
+// specify in the request.
+//
+// When you enable Security Hub, you grant to Security Hub the permissions
+// necessary to gather findings from other services that are integrated with
+// Security Hub.
+//
+// When you use the EnableSecurityHub operation to enable Security Hub, you also
+// automatically enable the following standards:
+//
 //   - Center for Internet Security (CIS) Amazon Web Services Foundations
 //     Benchmark v1.2.0
+//
 //   - Amazon Web Services Foundational Security Best Practices
 //
-// Other standards are not automatically enabled. To opt out of automatically
-// enabled standards, set EnableDefaultStandards to false . After you enable
-// Security Hub, to enable a standard, use the BatchEnableStandards operation. To
-// disable a standard, use the BatchDisableStandards operation. To learn more, see
-// the setup information (https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-settingup.html)
-// in the Security Hub User Guide.
+// Other standards are not automatically enabled.
+//
+// To opt out of automatically enabled standards, set EnableDefaultStandards to
+// false .
+//
+// After you enable Security Hub, to enable a standard, use the
+// BatchEnableStandards operation. To disable a standard, use the
+// BatchDisableStandards operation.
+//
+// To learn more, see the [setup information] in the Security Hub User Guide.
+//
+// [setup information]: https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-settingup.html
 func (c *Client) EnableSecurityHub(ctx context.Context, params *EnableSecurityHubInput, optFns ...func(*Options)) (*EnableSecurityHubOutput, error) {
 	if params == nil {
 		params = &EnableSecurityHubInput{}
@@ -47,10 +58,13 @@ type EnableSecurityHubInput struct {
 	// This field, used when enabling Security Hub, specifies whether the calling
 	// account has consolidated control findings turned on. If the value for this field
 	// is set to SECURITY_CONTROL , Security Hub generates a single finding for a
-	// control check even when the check applies to multiple enabled standards. If the
-	// value for this field is set to STANDARD_CONTROL , Security Hub generates
+	// control check even when the check applies to multiple enabled standards.
+	//
+	// If the value for this field is set to STANDARD_CONTROL , Security Hub generates
 	// separate findings for a control check when the check applies to multiple enabled
-	// standards. The value for this field in a member account matches the value in the
+	// standards.
+	//
+	// The value for this field in a member account matches the value in the
 	// administrator account. For accounts that aren't part of an organization, the
 	// default value of this field is SECURITY_CONTROL if you enabled Security Hub on
 	// or after February 23, 2023.
@@ -97,25 +111,25 @@ func (c *Client) addOperationEnableSecurityHubMiddlewares(stack *middleware.Stac
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -130,10 +144,13 @@ func (c *Client) addOperationEnableSecurityHubMiddlewares(stack *middleware.Stac
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opEnableSecurityHub(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

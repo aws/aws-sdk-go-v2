@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/translate/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -58,8 +57,9 @@ type CreateParallelDataInput struct {
 
 	// Tags to be associated with this resource. A tag is a key-value pair that adds
 	// metadata to a resource. Each tag key for the resource must be unique. For more
-	// information, see Tagging your resources (https://docs.aws.amazon.com/translate/latest/dg/tagging.html)
-	// .
+	// information, see [Tagging your resources].
+	//
+	// [Tagging your resources]: https://docs.aws.amazon.com/translate/latest/dg/tagging.html
 	Tags []types.Tag
 
 	noSmithyDocumentSerde
@@ -102,25 +102,25 @@ func (c *Client) addOperationCreateParallelDataMiddlewares(stack *middleware.Sta
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -135,6 +135,9 @@ func (c *Client) addOperationCreateParallelDataMiddlewares(stack *middleware.Sta
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opCreateParallelDataMiddleware(stack, options); err != nil {
 		return err
 	}
@@ -144,7 +147,7 @@ func (c *Client) addOperationCreateParallelDataMiddlewares(stack *middleware.Sta
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateParallelData(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

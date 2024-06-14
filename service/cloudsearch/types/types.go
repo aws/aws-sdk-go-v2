@@ -12,9 +12,10 @@ import (
 type AccessPoliciesStatus struct {
 
 	// Access rules for a domain's document or search service endpoints. For more
-	// information, see Configuring Access for a Search Domain (http://docs.aws.amazon.com/cloudsearch/latest/developerguide/configuring-access.html)
-	// in the Amazon CloudSearch Developer Guide. The maximum size of a policy document
-	// is 100 KB.
+	// information, see [Configuring Access for a Search Domain]in the Amazon CloudSearch Developer Guide. The maximum size of
+	// a policy document is 100 KB.
+	//
+	// [Configuring Access for a Search Domain]: http://docs.aws.amazon.com/cloudsearch/latest/developerguide/configuring-access.html
 	//
 	// This member is required.
 	Options *string
@@ -32,9 +33,10 @@ type AccessPoliciesStatus struct {
 type AnalysisOptions struct {
 
 	// The level of algorithmic stemming to perform: none , minimal , light , or full .
-	// The available levels vary depending on the language. For more information, see
-	// Language Specific Text Processing Settings (http://docs.aws.amazon.com/cloudsearch/latest/developerguide/text-processing.html#text-processing-settings)
+	// The available levels vary depending on the language. For more information, see [Language Specific Text Processing Settings]
 	// in the Amazon CloudSearch Developer Guide
+	//
+	// [Language Specific Text Processing Settings]: http://docs.aws.amazon.com/cloudsearch/latest/developerguide/text-processing.html#text-processing-settings
 	AlgorithmicStemming AlgorithmicStemming
 
 	// A JSON array that contains a collection of terms, tokens, readings and part of
@@ -63,8 +65,9 @@ type AnalysisOptions struct {
 	// string specifies a term and the array of values specifies each of the aliases
 	// for that term. An alias is considered a synonym of the specified term, but the
 	// term is not considered a synonym of the alias. For more information about
-	// specifying synonyms, see Synonyms (http://docs.aws.amazon.com/cloudsearch/latest/developerguide/configuring-analysis-schemes.html#synonyms)
-	// in the Amazon CloudSearch Developer Guide.
+	// specifying synonyms, see [Synonyms]in the Amazon CloudSearch Developer Guide.
+	//
+	// [Synonyms]: http://docs.aws.amazon.com/cloudsearch/latest/developerguide/configuring-analysis-schemes.html#synonyms
 	Synonyms *string
 
 	noSmithyDocumentSerde
@@ -76,8 +79,9 @@ type AnalysisOptions struct {
 // , StemmingDictionary , JapaneseTokenizationDictionary and AlgorithmicStemming .
 type AnalysisScheme struct {
 
-	// An IETF RFC 4646 (http://tools.ietf.org/html/rfc4646) language code or mul for
-	// multiple languages.
+	// An [IETF RFC 4646] language code or mul for multiple languages.
+	//
+	// [IETF RFC 4646]: http://tools.ietf.org/html/rfc4646
 	//
 	// This member is required.
 	AnalysisSchemeLanguage AnalysisSchemeLanguage
@@ -177,13 +181,16 @@ type DateOptions struct {
 	// regular index fields as well as dynamic fields. A dynamic field's name defines a
 	// pattern that begins or ends with a wildcard. Any document fields that don't map
 	// to a regular index field but do match a dynamic field's pattern are configured
-	// with the dynamic field's indexing options. Regular field names begin with a
-	// letter and can contain the following characters: a-z (lowercase), 0-9, and _
-	// (underscore). Dynamic field names must begin or end with a wildcard (*). The
-	// wildcard can also be the only character in a dynamic field name. Multiple
-	// wildcards, and wildcards embedded within a string are not supported. The name
-	// score is reserved and cannot be used as a field name. To reference a document's
-	// ID, you can use the name _id .
+	// with the dynamic field's indexing options.
+	//
+	// Regular field names begin with a letter and can contain the following
+	// characters: a-z (lowercase), 0-9, and _ (underscore). Dynamic field names must
+	// begin or end with a wildcard (*). The wildcard can also be the only character in
+	// a dynamic field name. Multiple wildcards, and wildcards embedded within a string
+	// are not supported.
+	//
+	// The name score is reserved and cannot be used as a field name. To reference a
+	// document's ID, you can use the name _id .
 	SourceField *string
 
 	noSmithyDocumentSerde
@@ -260,27 +267,26 @@ type DomainStatus struct {
 	// This member is required.
 	DomainName *string
 
-	// True if IndexDocuments needs to be called to activate the current domain
-	// configuration.
+	// True if IndexDocuments needs to be called to activate the current domain configuration.
 	//
 	// This member is required.
 	RequiresIndexDocuments *bool
 
-	// The Amazon Resource Name (ARN) of the search domain. See Identifiers for IAM
-	// Entities (http://docs.aws.amazon.com/IAM/latest/UserGuide/index.html?Using_Identifiers.html)
-	// in Using AWS Identity and Access Management for more information.
+	// The Amazon Resource Name (ARN) of the search domain. See [Identifiers for IAM Entities] in Using AWS Identity
+	// and Access Management for more information.
+	//
+	// [Identifiers for IAM Entities]: http://docs.aws.amazon.com/IAM/latest/UserGuide/index.html?Using_Identifiers.html
 	ARN *string
 
 	// True if the search domain is created. It can take several minutes to initialize
-	// a domain when CreateDomain is called. Newly created search domains are returned
-	// from DescribeDomains with a false value for Created until domain creation is
-	// complete.
+	// a domain when CreateDomainis called. Newly created search domains are returned from DescribeDomains with a
+	// false value for Created until domain creation is complete.
 	Created *bool
 
 	// True if the search domain has been deleted. The system must clean up resources
-	// dedicated to the search domain when DeleteDomain is called. Newly deleted
-	// search domains are returned from DescribeDomains with a true value for
-	// IsDeleted for several minutes until resource cleanup is complete.
+	// dedicated to the search domain when DeleteDomainis called. Newly deleted search domains are
+	// returned from DescribeDomainswith a true value for IsDeleted for several minutes until
+	// resource cleanup is complete.
 	Deleted *bool
 
 	// The service endpoint for updating documents in a search domain.
@@ -369,9 +375,10 @@ type Expression struct {
 	ExpressionName *string
 
 	// The expression to evaluate for sorting while processing a search request. The
-	// Expression syntax is based on JavaScript expressions. For more information, see
-	// Configuring Expressions (http://docs.aws.amazon.com/cloudsearch/latest/developerguide/configuring-expressions.html)
+	// Expression syntax is based on JavaScript expressions. For more information, see [Configuring Expressions]
 	// in the Amazon CloudSearch Developer Guide.
+	//
+	// [Configuring Expressions]: http://docs.aws.amazon.com/cloudsearch/latest/developerguide/configuring-expressions.html
 	//
 	// This member is required.
 	ExpressionValue *string
@@ -396,27 +403,32 @@ type ExpressionStatus struct {
 }
 
 // Configuration information for a field in the index, including its name, type,
-// and options. The supported options depend on the IndexFieldType .
+// and options. The supported options depend on the IndexFieldType.
 type IndexField struct {
 
 	// A string that represents the name of an index field. CloudSearch supports
 	// regular index fields as well as dynamic fields. A dynamic field's name defines a
 	// pattern that begins or ends with a wildcard. Any document fields that don't map
 	// to a regular index field but do match a dynamic field's pattern are configured
-	// with the dynamic field's indexing options. Regular field names begin with a
-	// letter and can contain the following characters: a-z (lowercase), 0-9, and _
-	// (underscore). Dynamic field names must begin or end with a wildcard (*). The
-	// wildcard can also be the only character in a dynamic field name. Multiple
-	// wildcards, and wildcards embedded within a string are not supported. The name
-	// score is reserved and cannot be used as a field name. To reference a document's
-	// ID, you can use the name _id .
+	// with the dynamic field's indexing options.
+	//
+	// Regular field names begin with a letter and can contain the following
+	// characters: a-z (lowercase), 0-9, and _ (underscore). Dynamic field names must
+	// begin or end with a wildcard (*). The wildcard can also be the only character in
+	// a dynamic field name. Multiple wildcards, and wildcards embedded within a string
+	// are not supported.
+	//
+	// The name score is reserved and cannot be used as a field name. To reference a
+	// document's ID, you can use the name _id .
 	//
 	// This member is required.
 	IndexFieldName *string
 
 	// The type of field. The valid options for a field depend on the field type. For
-	// more information about the supported field types, see Configuring Index Fields (http://docs.aws.amazon.com/cloudsearch/latest/developerguide/configuring-index-fields.html)
-	// in the Amazon CloudSearch Developer Guide.
+	// more information about the supported field types, see [Configuring Index Fields]in the Amazon CloudSearch
+	// Developer Guide.
+	//
+	// [Configuring Index Fields]: http://docs.aws.amazon.com/cloudsearch/latest/developerguide/configuring-index-fields.html
 	//
 	// This member is required.
 	IndexFieldType IndexFieldType
@@ -481,7 +493,7 @@ type IndexField struct {
 type IndexFieldStatus struct {
 
 	// Configuration information for a field in the index, including its name, type,
-	// and options. The supported options depend on the IndexFieldType .
+	// and options. The supported options depend on the IndexFieldType.
 	//
 	// This member is required.
 	Options *IndexField
@@ -568,13 +580,16 @@ type LatLonOptions struct {
 	// regular index fields as well as dynamic fields. A dynamic field's name defines a
 	// pattern that begins or ends with a wildcard. Any document fields that don't map
 	// to a regular index field but do match a dynamic field's pattern are configured
-	// with the dynamic field's indexing options. Regular field names begin with a
-	// letter and can contain the following characters: a-z (lowercase), 0-9, and _
-	// (underscore). Dynamic field names must begin or end with a wildcard (*). The
-	// wildcard can also be the only character in a dynamic field name. Multiple
-	// wildcards, and wildcards embedded within a string are not supported. The name
-	// score is reserved and cannot be used as a field name. To reference a document's
-	// ID, you can use the name _id .
+	// with the dynamic field's indexing options.
+	//
+	// Regular field names begin with a letter and can contain the following
+	// characters: a-z (lowercase), 0-9, and _ (underscore). Dynamic field names must
+	// begin or end with a wildcard (*). The wildcard can also be the only character in
+	// a dynamic field name. Multiple wildcards, and wildcards embedded within a string
+	// are not supported.
+	//
+	// The name score is reserved and cannot be used as a field name. To reference a
+	// document's ID, you can use the name _id .
 	SourceField *string
 
 	noSmithyDocumentSerde
@@ -637,13 +652,16 @@ type LiteralOptions struct {
 	// regular index fields as well as dynamic fields. A dynamic field's name defines a
 	// pattern that begins or ends with a wildcard. Any document fields that don't map
 	// to a regular index field but do match a dynamic field's pattern are configured
-	// with the dynamic field's indexing options. Regular field names begin with a
-	// letter and can contain the following characters: a-z (lowercase), 0-9, and _
-	// (underscore). Dynamic field names must begin or end with a wildcard (*). The
-	// wildcard can also be the only character in a dynamic field name. Multiple
-	// wildcards, and wildcards embedded within a string are not supported. The name
-	// score is reserved and cannot be used as a field name. To reference a document's
-	// ID, you can use the name _id .
+	// with the dynamic field's indexing options.
+	//
+	// Regular field names begin with a letter and can contain the following
+	// characters: a-z (lowercase), 0-9, and _ (underscore). Dynamic field names must
+	// begin or end with a wildcard (*). The wildcard can also be the only character in
+	// a dynamic field name. Multiple wildcards, and wildcards embedded within a string
+	// are not supported.
+	//
+	// The name score is reserved and cannot be used as a field name. To reference a
+	// document's ID, you can use the name _id .
 	SourceField *string
 
 	noSmithyDocumentSerde
@@ -658,8 +676,9 @@ type OptionStatus struct {
 	CreationDate *time.Time
 
 	// The state of processing a change to an option. Possible values:
+	//
 	//   - RequiresIndexDocuments : the option's latest value will not be deployed
-	//   until IndexDocuments has been called and indexing is complete.
+	//   until IndexDocumentshas been called and indexing is complete.
 	//   - Processing : the option's latest value is in the process of being activated.
 	//   - Active : the option's latest value is completely deployed.
 	//   - FailedToValidate : the option value is not compatible with the domain's data
@@ -814,13 +833,16 @@ type TextOptions struct {
 	// regular index fields as well as dynamic fields. A dynamic field's name defines a
 	// pattern that begins or ends with a wildcard. Any document fields that don't map
 	// to a regular index field but do match a dynamic field's pattern are configured
-	// with the dynamic field's indexing options. Regular field names begin with a
-	// letter and can contain the following characters: a-z (lowercase), 0-9, and _
-	// (underscore). Dynamic field names must begin or end with a wildcard (*). The
-	// wildcard can also be the only character in a dynamic field name. Multiple
-	// wildcards, and wildcards embedded within a string are not supported. The name
-	// score is reserved and cannot be used as a field name. To reference a document's
-	// ID, you can use the name _id .
+	// with the dynamic field's indexing options.
+	//
+	// Regular field names begin with a letter and can contain the following
+	// characters: a-z (lowercase), 0-9, and _ (underscore). Dynamic field names must
+	// begin or end with a wildcard (*). The wildcard can also be the only character in
+	// a dynamic field name. Multiple wildcards, and wildcards embedded within a string
+	// are not supported.
+	//
+	// The name score is reserved and cannot be used as a field name. To reference a
+	// document's ID, you can use the name _id .
 	SourceField *string
 
 	noSmithyDocumentSerde

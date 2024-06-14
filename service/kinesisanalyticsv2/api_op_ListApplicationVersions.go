@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/kinesisanalyticsv2/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -14,9 +13,12 @@ import (
 
 // Lists all the versions for the specified application, including versions that
 // were rolled back. The response also includes a summary of the configuration
-// associated with each version. To get the complete description of a specific
-// application version, invoke the DescribeApplicationVersion operation. This
-// operation is supported only for Amazon Kinesis Data Analytics for Apache Flink.
+// associated with each version.
+//
+// To get the complete description of a specific application version, invoke the DescribeApplicationVersion
+// operation.
+//
+// This operation is supported only for Managed Service for Apache Flink.
 func (c *Client) ListApplicationVersions(ctx context.Context, params *ListApplicationVersionsInput, optFns ...func(*Options)) (*ListApplicationVersionsOutput, error) {
 	if params == nil {
 		params = &ListApplicationVersionsInput{}
@@ -44,8 +46,9 @@ type ListApplicationVersionsInput struct {
 
 	// If a previous invocation of this operation returned a pagination token, pass it
 	// into this value to retrieve the next set of results. For more information about
-	// pagination, see Using the Amazon Command Line Interface's Pagination Options (https://docs.aws.amazon.com/cli/latest/userguide/pagination.html)
-	// .
+	// pagination, see [Using the Amazon Command Line Interface's Pagination Options].
+	//
+	// [Using the Amazon Command Line Interface's Pagination Options]: https://docs.aws.amazon.com/cli/latest/userguide/pagination.html
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -54,16 +57,18 @@ type ListApplicationVersionsInput struct {
 type ListApplicationVersionsOutput struct {
 
 	// A list of the application versions and the associated configuration summaries.
-	// The list includes application versions that were rolled back. To get the
-	// complete description of a specific application version, invoke the
-	// DescribeApplicationVersion operation.
+	// The list includes application versions that were rolled back.
+	//
+	// To get the complete description of a specific application version, invoke the DescribeApplicationVersion
+	// operation.
 	ApplicationVersionSummaries []types.ApplicationVersionSummary
 
 	// The pagination token for the next set of results, or null if there are no
 	// additional results. To retrieve the next set of items, pass this token into a
 	// subsequent invocation of this operation. For more information about pagination,
-	// see Using the Amazon Command Line Interface's Pagination Options (https://docs.aws.amazon.com/cli/latest/userguide/pagination.html)
-	// .
+	// see [Using the Amazon Command Line Interface's Pagination Options].
+	//
+	// [Using the Amazon Command Line Interface's Pagination Options]: https://docs.aws.amazon.com/cli/latest/userguide/pagination.html
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -94,25 +99,25 @@ func (c *Client) addOperationListApplicationVersionsMiddlewares(stack *middlewar
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -127,13 +132,16 @@ func (c *Client) addOperationListApplicationVersionsMiddlewares(stack *middlewar
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpListApplicationVersionsValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListApplicationVersions(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

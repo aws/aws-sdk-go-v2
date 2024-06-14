@@ -6,13 +6,12 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/omics/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Accepts a share for an analytics store.
+// Accept a resource share request.
 func (c *Client) AcceptShare(ctx context.Context, params *AcceptShareInput, optFns ...func(*Options)) (*AcceptShareOutput, error) {
 	if params == nil {
 		params = &AcceptShareInput{}
@@ -30,7 +29,7 @@ func (c *Client) AcceptShare(ctx context.Context, params *AcceptShareInput, optF
 
 type AcceptShareInput struct {
 
-	// The ID for a share offer for analytics store data.
+	// The ID of the resource share.
 	//
 	// This member is required.
 	ShareId *string
@@ -40,7 +39,7 @@ type AcceptShareInput struct {
 
 type AcceptShareOutput struct {
 
-	// The status of an analytics store share.
+	// The status of the resource share.
 	Status types.ShareStatus
 
 	// Metadata pertaining to the operation's result.
@@ -71,25 +70,25 @@ func (c *Client) addOperationAcceptShareMiddlewares(stack *middleware.Stack, opt
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -104,6 +103,9 @@ func (c *Client) addOperationAcceptShareMiddlewares(stack *middleware.Stack, opt
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addEndpointPrefix_opAcceptShareMiddleware(stack); err != nil {
 		return err
 	}
@@ -113,7 +115,7 @@ func (c *Client) addOperationAcceptShareMiddlewares(stack *middleware.Stack, opt
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opAcceptShare(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

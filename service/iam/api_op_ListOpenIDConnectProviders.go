@@ -6,18 +6,18 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/iam/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Lists information about the IAM OpenID Connect (OIDC) provider resource objects
-// defined in the Amazon Web Services account. IAM resource-listing operations
-// return a subset of the available attributes for the resource. For example, this
-// operation does not return tags, even though they are an attribute of the
-// returned object. To view all of the information for an OIDC provider, see
-// GetOpenIDConnectProvider .
+// defined in the Amazon Web Services account.
+//
+// IAM resource-listing operations return a subset of the available attributes for
+// the resource. For example, this operation does not return tags, even though they
+// are an attribute of the returned object. To view all of the information for an
+// OIDC provider, see GetOpenIDConnectProvider.
 func (c *Client) ListOpenIDConnectProviders(ctx context.Context, params *ListOpenIDConnectProvidersInput, optFns ...func(*Options)) (*ListOpenIDConnectProvidersOutput, error) {
 	if params == nil {
 		params = &ListOpenIDConnectProvidersInput{}
@@ -72,25 +72,25 @@ func (c *Client) addOperationListOpenIDConnectProvidersMiddlewares(stack *middle
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -105,10 +105,13 @@ func (c *Client) addOperationListOpenIDConnectProvidersMiddlewares(stack *middle
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListOpenIDConnectProviders(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

@@ -13,8 +13,9 @@ const (
 )
 
 // Values returns all known values for DataType. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (DataType) Values() []DataType {
 	return []DataType{
 		"STRING",
@@ -46,6 +47,7 @@ const (
 
 // Values returns all known values for MigrationWorkflowStatusEnum. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (MigrationWorkflowStatusEnum) Values() []MigrationWorkflowStatusEnum {
 	return []MigrationWorkflowStatusEnum{
@@ -75,8 +77,9 @@ const (
 )
 
 // Values returns all known values for Owner. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (Owner) Values() []Owner {
 	return []Owner{
 		"AWS_MANAGED",
@@ -93,8 +96,9 @@ const (
 )
 
 // Values returns all known values for PluginHealth. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (PluginHealth) Values() []PluginHealth {
 	return []PluginHealth{
 		"HEALTHY",
@@ -111,8 +115,9 @@ const (
 )
 
 // Values returns all known values for RunEnvironment. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (RunEnvironment) Values() []RunEnvironment {
 	return []RunEnvironment{
 		"AWS",
@@ -129,8 +134,9 @@ const (
 )
 
 // Values returns all known values for StepActionType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (StepActionType) Values() []StepActionType {
 	return []StepActionType{
 		"MANUAL",
@@ -153,8 +159,9 @@ const (
 )
 
 // Values returns all known values for StepGroupStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (StepGroupStatus) Values() []StepGroupStatus {
 	return []StepGroupStatus{
 		"AWAITING_DEPENDENCIES",
@@ -173,6 +180,7 @@ type StepStatus string
 // Enum values for StepStatus
 const (
 	StepStatusAwaitingDependencies  StepStatus = "AWAITING_DEPENDENCIES"
+	StepStatusSkipped               StepStatus = "SKIPPED"
 	StepStatusReady                 StepStatus = "READY"
 	StepStatusInProgress            StepStatus = "IN_PROGRESS"
 	StepStatusCompleted             StepStatus = "COMPLETED"
@@ -182,11 +190,13 @@ const (
 )
 
 // Values returns all known values for StepStatus. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (StepStatus) Values() []StepStatus {
 	return []StepStatus{
 		"AWAITING_DEPENDENCIES",
+		"SKIPPED",
 		"READY",
 		"IN_PROGRESS",
 		"COMPLETED",
@@ -206,8 +216,9 @@ const (
 )
 
 // Values returns all known values for TargetType. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (TargetType) Values() []TargetType {
 	return []TargetType{
 		"SINGLE",
@@ -220,14 +231,23 @@ type TemplateStatus string
 
 // Enum values for TemplateStatus
 const (
-	TemplateStatusCreated TemplateStatus = "CREATED"
+	TemplateStatusCreated         TemplateStatus = "CREATED"
+	TemplateStatusReady           TemplateStatus = "READY"
+	TemplateStatusPendingCreation TemplateStatus = "PENDING_CREATION"
+	TemplateStatusCreating        TemplateStatus = "CREATING"
+	TemplateStatusCreationFailed  TemplateStatus = "CREATION_FAILED"
 )
 
 // Values returns all known values for TemplateStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (TemplateStatus) Values() []TemplateStatus {
 	return []TemplateStatus{
 		"CREATED",
+		"READY",
+		"PENDING_CREATION",
+		"CREATING",
+		"CREATION_FAILED",
 	}
 }

@@ -6,14 +6,15 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/kendra/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Fetches the queries that are suggested to your users. GetQuerySuggestions is
-// currently not supported in the Amazon Web Services GovCloud (US-West) region.
+// Fetches the queries that are suggested to your users.
+//
+// GetQuerySuggestions is currently not supported in the Amazon Web Services
+// GovCloud (US-West) region.
 func (c *Client) GetQuerySuggestions(ctx context.Context, params *GetQuerySuggestionsInput, optFns ...func(*Options)) (*GetQuerySuggestionsOutput, error) {
 	if params == nil {
 		params = &GetQuerySuggestionsInput{}
@@ -36,11 +37,14 @@ type GetQuerySuggestionsInput struct {
 	// This member is required.
 	IndexId *string
 
-	// The text of a user's query to generate query suggestions. A query is suggested
-	// if the query prefix matches what a user starts to type as their query. Amazon
-	// Kendra does not show any suggestions if a user types fewer than two characters
-	// or more than 60 characters. A query must also have at least one search result
-	// and contain at least one word of more than four characters.
+	// The text of a user's query to generate query suggestions.
+	//
+	// A query is suggested if the query prefix matches what a user starts to type as
+	// their query.
+	//
+	// Amazon Kendra does not show any suggestions if a user types fewer than two
+	// characters or more than 60 characters. A query must also have at least one
+	// search result and contain at least one word of more than four characters.
 	//
 	// This member is required.
 	QueryText *string
@@ -54,9 +58,11 @@ type GetQuerySuggestionsInput struct {
 
 	// The suggestions type to base query suggestions on. The suggestion types are
 	// query history or document fields/attributes. You can set one type or the other.
+	//
 	// If you set query history as your suggestions type, Amazon Kendra suggests
-	// queries relevant to your users based on popular queries in the query history. If
-	// you set document fields/attributes as your suggestions type, Amazon Kendra
+	// queries relevant to your users based on popular queries in the query history.
+	//
+	// If you set document fields/attributes as your suggestions type, Amazon Kendra
 	// suggests queries relevant to your users based on the contents of document
 	// fields.
 	SuggestionTypes []types.SuggestionType
@@ -100,25 +106,25 @@ func (c *Client) addOperationGetQuerySuggestionsMiddlewares(stack *middleware.St
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -133,13 +139,16 @@ func (c *Client) addOperationGetQuerySuggestionsMiddlewares(stack *middleware.St
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpGetQuerySuggestionsValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetQuerySuggestions(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

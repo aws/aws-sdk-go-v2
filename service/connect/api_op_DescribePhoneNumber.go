@@ -6,21 +6,22 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/connect/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Gets details and status of a phone number that’s claimed to your Amazon Connect
-// instance or traffic distribution group. If the number is claimed to a traffic
-// distribution group, and you are calling in the Amazon Web Services Region where
-// the traffic distribution group was created, you can use either a phone number
-// ARN or UUID value for the PhoneNumberId URI request parameter. However, if the
-// number is claimed to a traffic distribution group and you are calling this API
-// in the alternate Amazon Web Services Region associated with the traffic
-// distribution group, you must provide a full phone number ARN. If a UUID is
-// provided in this scenario, you will receive a ResourceNotFoundException .
+// instance or traffic distribution group.
+//
+// If the number is claimed to a traffic distribution group, and you are calling
+// in the Amazon Web Services Region where the traffic distribution group was
+// created, you can use either a phone number ARN or UUID value for the
+// PhoneNumberId URI request parameter. However, if the number is claimed to a
+// traffic distribution group and you are calling this API in the alternate Amazon
+// Web Services Region associated with the traffic distribution group, you must
+// provide a full phone number ARN. If a UUID is provided in this scenario, you
+// will receive a ResourceNotFoundException .
 func (c *Client) DescribePhoneNumber(ctx context.Context, params *DescribePhoneNumberInput, optFns ...func(*Options)) (*DescribePhoneNumberOutput, error) {
 	if params == nil {
 		params = &DescribePhoneNumberInput{}
@@ -80,25 +81,25 @@ func (c *Client) addOperationDescribePhoneNumberMiddlewares(stack *middleware.St
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -113,13 +114,16 @@ func (c *Client) addOperationDescribePhoneNumberMiddlewares(stack *middleware.St
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDescribePhoneNumberValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribePhoneNumber(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

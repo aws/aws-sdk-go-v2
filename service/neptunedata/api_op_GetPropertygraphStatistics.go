@@ -6,17 +6,18 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/neptunedata/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Gets property graph statistics (Gremlin and openCypher). When invoking this
-// operation in a Neptune cluster that has IAM authentication enabled, the IAM user
-// or role making the request must have a policy attached that allows the
-// neptune-db:GetStatisticsStatus (https://docs.aws.amazon.com/neptune/latest/userguide/iam-dp-actions.html#getstatisticsstatus)
-// IAM action in that cluster.
+// Gets property graph statistics (Gremlin and openCypher).
+//
+// When invoking this operation in a Neptune cluster that has IAM authentication
+// enabled, the IAM user or role making the request must have a policy attached
+// that allows the [neptune-db:GetStatisticsStatus]IAM action in that cluster.
+//
+// [neptune-db:GetStatisticsStatus]: https://docs.aws.amazon.com/neptune/latest/userguide/iam-dp-actions.html#getstatisticsstatus
 func (c *Client) GetPropertygraphStatistics(ctx context.Context, params *GetPropertygraphStatisticsInput, optFns ...func(*Options)) (*GetPropertygraphStatisticsOutput, error) {
 	if params == nil {
 		params = &GetPropertygraphStatisticsInput{}
@@ -44,8 +45,9 @@ type GetPropertygraphStatisticsOutput struct {
 	Payload *types.Statistics
 
 	// The HTTP return code of the request. If the request succeeded, the code is 200.
-	// See Common error codes for DFE statistics request (https://docs.aws.amazon.com/neptune/latest/userguide/neptune-dfe-statistics.html#neptune-dfe-statistics-errors)
-	// for a list of common errors.
+	// See [Common error codes for DFE statistics request]for a list of common errors.
+	//
+	// [Common error codes for DFE statistics request]: https://docs.aws.amazon.com/neptune/latest/userguide/neptune-dfe-statistics.html#neptune-dfe-statistics-errors
 	//
 	// This member is required.
 	Status *string
@@ -78,25 +80,25 @@ func (c *Client) addOperationGetPropertygraphStatisticsMiddlewares(stack *middle
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -111,10 +113,13 @@ func (c *Client) addOperationGetPropertygraphStatisticsMiddlewares(stack *middle
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetPropertygraphStatistics(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

@@ -15,11 +15,18 @@ import (
 	"strings"
 )
 
-// This operation is not supported by directory buckets. Returns the access point
-// policy associated with the specified access point. The following actions are
-// related to GetAccessPointPolicy :
-//   - PutAccessPointPolicy (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_PutAccessPointPolicy.html)
-//   - DeleteAccessPointPolicy (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteAccessPointPolicy.html)
+// This operation is not supported by directory buckets.
+//
+// Returns the access point policy associated with the specified access point.
+//
+// The following actions are related to GetAccessPointPolicy :
+//
+// [PutAccessPointPolicy]
+//
+// [DeleteAccessPointPolicy]
+//
+// [DeleteAccessPointPolicy]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteAccessPointPolicy.html
+// [PutAccessPointPolicy]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_PutAccessPointPolicy.html
 func (c *Client) GetAccessPointPolicy(ctx context.Context, params *GetAccessPointPolicyInput, optFns ...func(*Options)) (*GetAccessPointPolicyOutput, error) {
 	if params == nil {
 		params = &GetAccessPointPolicyInput{}
@@ -42,11 +49,13 @@ type GetAccessPointPolicyInput struct {
 	// This member is required.
 	AccountId *string
 
-	// The name of the access point whose policy you want to retrieve. For using this
-	// parameter with Amazon S3 on Outposts with the REST API, you must specify the
-	// name and the x-amz-outpost-id as well. For using this parameter with S3 on
-	// Outposts with the Amazon Web Services SDK and CLI, you must specify the ARN of
-	// the access point accessed in the format
+	// The name of the access point whose policy you want to retrieve.
+	//
+	// For using this parameter with Amazon S3 on Outposts with the REST API, you must
+	// specify the name and the x-amz-outpost-id as well.
+	//
+	// For using this parameter with S3 on Outposts with the Amazon Web Services SDK
+	// and CLI, you must specify the ARN of the access point accessed in the format
 	// arn:aws:s3-outposts:::outpost//accesspoint/ . For example, to access the access
 	// point reports-ap through Outpost my-outpost owned by account 123456789012 in
 	// Region us-west-2 , use the URL encoding of
@@ -98,25 +107,25 @@ func (c *Client) addOperationGetAccessPointPolicyMiddlewares(stack *middleware.S
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -134,6 +143,9 @@ func (c *Client) addOperationGetAccessPointPolicyMiddlewares(stack *middleware.S
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addEndpointPrefix_opGetAccessPointPolicyMiddleware(stack); err != nil {
 		return err
 	}
@@ -146,7 +158,7 @@ func (c *Client) addOperationGetAccessPointPolicyMiddlewares(stack *middleware.S
 	if err = addMetadataRetrieverMiddleware(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addGetAccessPointPolicyUpdateEndpoint(stack, options); err != nil {

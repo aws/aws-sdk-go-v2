@@ -6,15 +6,14 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/ssm/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Get information about a single parameter by specifying the parameter name. To
-// get information about more than one parameter at a time, use the GetParameters
-// operation.
+// Get information about a single parameter by specifying the parameter name.
+//
+// To get information about more than one parameter at a time, use the GetParameters operation.
 func (c *Client) GetParameter(ctx context.Context, params *GetParameterInput, optFns ...func(*Options)) (*GetParameterOutput, error) {
 	if params == nil {
 		params = &GetParameterInput{}
@@ -32,9 +31,16 @@ func (c *Client) GetParameter(ctx context.Context, params *GetParameterInput, op
 
 type GetParameterInput struct {
 
-	// The name of the parameter you want to query. To query by parameter label, use
-	// "Name": "name:label" . To query by parameter version, use "Name": "name:version"
-	// .
+	// The name or Amazon Resource Name (ARN) of the parameter that you want to query.
+	// For parameters shared with you from another account, you must use the full ARN.
+	//
+	// To query by parameter label, use "Name": "name:label" . To query by parameter
+	// version, use "Name": "name:version" .
+	//
+	// For more information about shared parameters, see [Working with shared parameters] in the Amazon Web Services
+	// Systems Manager User Guide.
+	//
+	// [Working with shared parameters]: https://docs.aws.amazon.com/systems-manager/latest/userguide/sharing.html
 	//
 	// This member is required.
 	Name *string
@@ -79,25 +85,25 @@ func (c *Client) addOperationGetParameterMiddlewares(stack *middleware.Stack, op
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -112,13 +118,16 @@ func (c *Client) addOperationGetParameterMiddlewares(stack *middleware.Stack, op
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpGetParameterValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetParameter(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

@@ -6,23 +6,26 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/networkfirewall/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Sets the logging configuration for the specified firewall. To change the
-// logging configuration, retrieve the LoggingConfiguration by calling
-// DescribeLoggingConfiguration , then change it and provide the modified object to
-// this update call. You must change the logging configuration one
-// LogDestinationConfig at a time inside the retrieved LoggingConfiguration
-// object. You can perform only one of the following actions in any call to
+// Sets the logging configuration for the specified firewall.
+//
+// To change the logging configuration, retrieve the LoggingConfiguration by calling DescribeLoggingConfiguration, then change it
+// and provide the modified object to this update call. You must change the logging
+// configuration one LogDestinationConfigat a time inside the retrieved LoggingConfiguration object.
+//
+// You can perform only one of the following actions in any call to
 // UpdateLoggingConfiguration :
+//
 //   - Create a new log destination object by adding a single LogDestinationConfig
 //     array element to LogDestinationConfigs .
+//
 //   - Delete a log destination object by removing a single LogDestinationConfig
 //     array element from LogDestinationConfigs .
+//
 //   - Change the LogDestination setting in a single LogDestinationConfig array
 //     element.
 //
@@ -46,13 +49,15 @@ func (c *Client) UpdateLoggingConfiguration(ctx context.Context, params *UpdateL
 
 type UpdateLoggingConfigurationInput struct {
 
-	// The Amazon Resource Name (ARN) of the firewall. You must specify the ARN or the
-	// name, and you can specify both.
+	// The Amazon Resource Name (ARN) of the firewall.
+	//
+	// You must specify the ARN or the name, and you can specify both.
 	FirewallArn *string
 
 	// The descriptive name of the firewall. You can't change the name of a firewall
-	// after you create it. You must specify the ARN or the name, and you can specify
-	// both.
+	// after you create it.
+	//
+	// You must specify the ARN or the name, and you can specify both.
 	FirewallName *string
 
 	// Defines how Network Firewall performs logging for a firewall. If you omit this
@@ -71,7 +76,7 @@ type UpdateLoggingConfigurationOutput struct {
 	// after you create it.
 	FirewallName *string
 
-	// Defines how Network Firewall performs logging for a Firewall .
+	// Defines how Network Firewall performs logging for a Firewall.
 	LoggingConfiguration *types.LoggingConfiguration
 
 	// Metadata pertaining to the operation's result.
@@ -102,25 +107,25 @@ func (c *Client) addOperationUpdateLoggingConfigurationMiddlewares(stack *middle
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -135,13 +140,16 @@ func (c *Client) addOperationUpdateLoggingConfigurationMiddlewares(stack *middle
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpUpdateLoggingConfigurationValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateLoggingConfiguration(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

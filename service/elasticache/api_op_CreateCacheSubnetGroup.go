@@ -6,14 +6,15 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/elasticache/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a new cache subnet group. Use this parameter only when you are creating
-// a cluster in an Amazon Virtual Private Cloud (Amazon VPC).
+// Creates a new cache subnet group.
+//
+// Use this parameter only when you are creating a cluster in an Amazon Virtual
+// Private Cloud (Amazon VPC).
 func (c *Client) CreateCacheSubnetGroup(ctx context.Context, params *CreateCacheSubnetGroupInput, optFns ...func(*Options)) (*CreateCacheSubnetGroupOutput, error) {
 	if params == nil {
 		params = &CreateCacheSubnetGroupInput{}
@@ -38,7 +39,9 @@ type CreateCacheSubnetGroupInput struct {
 	CacheSubnetGroupDescription *string
 
 	// A name for the cache subnet group. This value is stored as a lowercase string.
+	//
 	// Constraints: Must contain no more than 255 alphanumeric characters or hyphens.
+	//
 	// Example: mysubnetgroup
 	//
 	// This member is required.
@@ -59,7 +62,9 @@ type CreateCacheSubnetGroupInput struct {
 type CreateCacheSubnetGroupOutput struct {
 
 	// Represents the output of one of the following operations:
+	//
 	//   - CreateCacheSubnetGroup
+	//
 	//   - ModifyCacheSubnetGroup
 	CacheSubnetGroup *types.CacheSubnetGroup
 
@@ -91,25 +96,25 @@ func (c *Client) addOperationCreateCacheSubnetGroupMiddlewares(stack *middleware
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -124,13 +129,16 @@ func (c *Client) addOperationCreateCacheSubnetGroupMiddlewares(stack *middleware
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpCreateCacheSubnetGroupValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateCacheSubnetGroup(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

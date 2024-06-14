@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/lakeformation/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -15,11 +14,13 @@ import (
 // For a specific governed table, provides a list of Amazon S3 objects that will
 // be written during the current transaction and that can be automatically deleted
 // if the transaction is canceled. Without this call, no Amazon S3 objects are
-// automatically deleted when a transaction cancels. The Glue ETL library function
-// write_dynamic_frame.from_catalog() includes an option to automatically call
-// DeleteObjectsOnCancel before writes. For more information, see Rolling Back
-// Amazon S3 Writes (https://docs.aws.amazon.com/lake-formation/latest/dg/transactions-data-operations.html#rolling-back-writes)
-// .
+// automatically deleted when a transaction cancels.
+//
+// The Glue ETL library function write_dynamic_frame.from_catalog() includes an
+// option to automatically call DeleteObjectsOnCancel before writes. For more
+// information, see [Rolling Back Amazon S3 Writes].
+//
+// [Rolling Back Amazon S3 Writes]: https://docs.aws.amazon.com/lake-formation/latest/dg/transactions-data-operations.html#rolling-back-writes
 func (c *Client) DeleteObjectsOnCancel(ctx context.Context, params *DeleteObjectsOnCancelInput, optFns ...func(*Options)) (*DeleteObjectsOnCancelOutput, error) {
 	if params == nil {
 		params = &DeleteObjectsOnCancelInput{}
@@ -94,25 +95,25 @@ func (c *Client) addOperationDeleteObjectsOnCancelMiddlewares(stack *middleware.
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -127,13 +128,16 @@ func (c *Client) addOperationDeleteObjectsOnCancelMiddlewares(stack *middleware.
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDeleteObjectsOnCancelValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteObjectsOnCancel(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

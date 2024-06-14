@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/appstream/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -35,10 +34,12 @@ type CreateUserInput struct {
 	// This member is required.
 	AuthenticationType types.AuthenticationType
 
-	// The email address of the user. Users' email addresses are case-sensitive.
-	// During login, if they specify an email address that doesn't use the same
-	// capitalization as the email address specified when their user pool account was
-	// created, a "user does not exist" error message displays.
+	// The email address of the user.
+	//
+	// Users' email addresses are case-sensitive. During login, if they specify an
+	// email address that doesn't use the same capitalization as the email address
+	// specified when their user pool account was created, a "user does not exist"
+	// error message displays.
 	//
 	// This member is required.
 	UserName *string
@@ -52,9 +53,10 @@ type CreateUserInput struct {
 	// The action to take for the welcome email that is sent to a user after the user
 	// is created in the user pool. If you specify SUPPRESS, no email is sent. If you
 	// specify RESEND, do not specify the first name or last name of the user. If the
-	// value is null, the email is sent. The temporary password in the welcome email is
-	// valid for only 7 days. If users don’t set their passwords within 7 days, you
-	// must send them a new welcome email.
+	// value is null, the email is sent.
+	//
+	// The temporary password in the welcome email is valid for only 7 days. If users
+	// don’t set their passwords within 7 days, you must send them a new welcome email.
 	MessageAction types.MessageAction
 
 	noSmithyDocumentSerde
@@ -89,25 +91,25 @@ func (c *Client) addOperationCreateUserMiddlewares(stack *middleware.Stack, opti
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -122,13 +124,16 @@ func (c *Client) addOperationCreateUserMiddlewares(stack *middleware.Stack, opti
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpCreateUserValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateUser(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

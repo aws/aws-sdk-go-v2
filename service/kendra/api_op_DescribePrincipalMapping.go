@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/kendra/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -17,6 +16,7 @@ import (
 // or yet to be processed, when actions were last updated, when actions were
 // received by Amazon Kendra, the latest action that should process and apply after
 // other actions, and useful error messages if an action could not be processed.
+//
 // DescribePrincipalMapping is currently not supported in the Amazon Web Services
 // GovCloud (US-West) region.
 func (c *Client) DescribePrincipalMapping(ctx context.Context, params *DescribePrincipalMappingInput, optFns ...func(*Options)) (*DescribePrincipalMappingOutput, error) {
@@ -67,12 +67,17 @@ type DescribePrincipalMappingOutput struct {
 
 	// Shows the following information on the processing of PUT and DELETE actions for
 	// mapping users to their groups:
+	//
 	//   - Status—the status can be either PROCESSING , SUCCEEDED , DELETING , DELETED
 	//   , or FAILED .
+	//
 	//   - Last updated—the last date-time an action was updated.
+	//
 	//   - Received—the last date-time an action was received or submitted.
+	//
 	//   - Ordering ID—the latest action that should process and apply after other
 	//   actions.
+	//
 	//   - Failure reason—the reason an action could not be processed.
 	GroupOrderingIdSummaries []types.GroupOrderingIdSummary
 
@@ -108,25 +113,25 @@ func (c *Client) addOperationDescribePrincipalMappingMiddlewares(stack *middlewa
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -141,13 +146,16 @@ func (c *Client) addOperationDescribePrincipalMappingMiddlewares(stack *middlewa
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDescribePrincipalMappingValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribePrincipalMapping(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

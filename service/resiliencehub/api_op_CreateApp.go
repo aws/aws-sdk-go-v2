@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/resiliencehub/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -20,12 +19,15 @@ import (
 // applications, and an appropriate resiliency policy. In addition, you can also
 // add resources that are located on Amazon Elastic Kubernetes Service (Amazon EKS)
 // clusters as optional resources. For more information about the number of
-// resources supported per application, see Service quotas (https://docs.aws.amazon.com/general/latest/gr/resiliencehub.html#limits_resiliencehub)
-// . After you create an Resilience Hub application, you publish it so that you can
+// resources supported per application, see [Service quotas].
+//
+// After you create an Resilience Hub application, you publish it so that you can
 // run a resiliency assessment on it. You can then use recommendations from the
 // assessment to improve resiliency by running another assessment, comparing
 // results, and then iterating the process until you achieve your goals for
 // recovery time objective (RTO) and recovery point objective (RPO).
+//
+// [Service quotas]: https://docs.aws.amazon.com/general/latest/gr/resiliencehub.html#limits_resiliencehub
 func (c *Client) CreateApp(ctx context.Context, params *CreateAppInput, optFns ...func(*Options)) (*CreateAppOutput, error) {
 	if params == nil {
 		params = &CreateAppInput{}
@@ -48,7 +50,7 @@ type CreateAppInput struct {
 	// This member is required.
 	Name *string
 
-	// Assessment execution schedule with 'Daily' or 'Disabled' values.
+	//  Assessment execution schedule with 'Daily' or 'Disabled' values.
 	AssessmentSchedule types.AppAssessmentScheduleType
 
 	// Used for an idempotency token. A client token is a unique, case-sensitive
@@ -70,8 +72,10 @@ type CreateAppInput struct {
 
 	// Amazon Resource Name (ARN) of the resiliency policy. The format for this ARN
 	// is: arn: partition :resiliencehub: region : account :resiliency-policy/ policy-id
-	// . For more information about ARNs, see Amazon Resource Names (ARNs) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
-	// in the Amazon Web Services General Reference guide.
+	// . For more information about ARNs, see [Amazon Resource Names (ARNs)]in the Amazon Web Services General
+	// Reference guide.
+	//
+	// [Amazon Resource Names (ARNs)]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
 	PolicyArn *string
 
 	// Tags assigned to the resource. A tag is a label that you assign to an Amazon
@@ -117,25 +121,25 @@ func (c *Client) addOperationCreateAppMiddlewares(stack *middleware.Stack, optio
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -150,6 +154,9 @@ func (c *Client) addOperationCreateAppMiddlewares(stack *middleware.Stack, optio
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opCreateAppMiddleware(stack, options); err != nil {
 		return err
 	}
@@ -159,7 +166,7 @@ func (c *Client) addOperationCreateAppMiddlewares(stack *middleware.Stack, optio
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateApp(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

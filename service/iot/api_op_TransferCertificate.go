@@ -6,19 +6,27 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Transfers the specified certificate to the specified Amazon Web Services
-// account. Requires permission to access the TransferCertificate (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
-// action. You can cancel the transfer until it is acknowledged by the recipient.
+// account.
+//
+// Requires permission to access the [TransferCertificate] action.
+//
+// You can cancel the transfer until it is acknowledged by the recipient.
+//
 // No notification is sent to the transfer destination's account. It is up to the
-// caller to notify the transfer target. The certificate being transferred must not
-// be in the ACTIVE state. You can use the UpdateCertificate action to deactivate
-// it. The certificate must not have any policies attached to it. You can use the
-// DetachPolicy action to detach them.
+// caller to notify the transfer target.
+//
+// The certificate being transferred must not be in the ACTIVE state. You can use
+// the UpdateCertificateaction to deactivate it.
+//
+// The certificate must not have any policies attached to it. You can use the DetachPolicy
+// action to detach them.
+//
+// [TransferCertificate]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions
 func (c *Client) TransferCertificate(ctx context.Context, params *TransferCertificateInput, optFns ...func(*Options)) (*TransferCertificateOutput, error) {
 	if params == nil {
 		params = &TransferCertificateInput{}
@@ -88,25 +96,25 @@ func (c *Client) addOperationTransferCertificateMiddlewares(stack *middleware.St
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -121,13 +129,16 @@ func (c *Client) addOperationTransferCertificateMiddlewares(stack *middleware.St
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpTransferCertificateValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opTransferCertificate(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

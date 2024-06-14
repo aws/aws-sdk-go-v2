@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/mediatailor/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -35,6 +34,9 @@ type GetChannelScheduleInput struct {
 	// This member is required.
 	ChannelName *string
 
+	// The single audience for GetChannelScheduleRequest.
+	Audience *string
+
 	// The duration in minutes of the channel schedule.
 	DurationMinutes *string
 
@@ -45,11 +47,15 @@ type GetChannelScheduleInput struct {
 	MaxResults *int32
 
 	// (Optional) If the playback configuration has more than MaxResults channel
-	// schedules, use NextToken to get the second and subsequent pages of results. For
-	// the first GetChannelScheduleRequest request, omit this value. For the second
-	// and subsequent requests, get the value of NextToken from the previous response
-	// and specify that value for NextToken in the request. If the previous response
-	// didn't include a NextToken element, there are no more channel schedules to get.
+	// schedules, use NextToken to get the second and subsequent pages of results.
+	//
+	// For the first GetChannelScheduleRequest request, omit this value.
+	//
+	// For the second and subsequent requests, get the value of NextToken from the
+	// previous response and specify that value for NextToken in the request.
+	//
+	// If the previous response didn't include a NextToken element, there are no more
+	// channel schedules to get.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -92,25 +98,25 @@ func (c *Client) addOperationGetChannelScheduleMiddlewares(stack *middleware.Sta
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -125,13 +131,16 @@ func (c *Client) addOperationGetChannelScheduleMiddlewares(stack *middleware.Sta
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpGetChannelScheduleValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetChannelSchedule(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

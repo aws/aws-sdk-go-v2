@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	internalEndpointDiscovery "github.com/aws/aws-sdk-go-v2/service/internal/endpoint-discovery"
 	"github.com/aws/aws-sdk-go-v2/service/timestreamwrite/types"
 	"github.com/aws/smithy-go/middleware"
@@ -19,8 +18,11 @@ import (
 // initially set to 2 hours and then changed to 24 hours, the memory store will be
 // capable of holding 24 hours of data, but will be populated with 24 hours of data
 // 22 hours after this change was made. Timestream does not retrieve data from the
-// magnetic store to populate the memory store. See code sample (https://docs.aws.amazon.com/timestream/latest/developerguide/code-samples.update-table.html)
-// for details.
+// magnetic store to populate the memory store.
+//
+// See [code sample] for details.
+//
+// [code sample]: https://docs.aws.amazon.com/timestream/latest/developerguide/code-samples.update-table.html
 func (c *Client) UpdateTable(ctx context.Context, params *UpdateTableInput, optFns ...func(*Options)) (*UpdateTableOutput, error) {
 	if params == nil {
 		params = &UpdateTableInput{}
@@ -54,7 +56,7 @@ type UpdateTableInput struct {
 	// The retention duration of the memory store and the magnetic store.
 	RetentionProperties *types.RetentionProperties
 
-	// The schema of the table.
+	//  The schema of the table.
 	Schema *types.Schema
 
 	noSmithyDocumentSerde
@@ -93,25 +95,25 @@ func (c *Client) addOperationUpdateTableMiddlewares(stack *middleware.Stack, opt
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -129,13 +131,16 @@ func (c *Client) addOperationUpdateTableMiddlewares(stack *middleware.Stack, opt
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpUpdateTableValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateTable(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

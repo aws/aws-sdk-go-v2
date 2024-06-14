@@ -6,22 +6,24 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/neptune/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Returns a list of DB cluster snapshot attribute names and values for a manual
-// DB cluster snapshot. When sharing snapshots with other Amazon accounts,
+// DB cluster snapshot.
+//
+// When sharing snapshots with other Amazon accounts,
 // DescribeDBClusterSnapshotAttributes returns the restore attribute and a list of
 // IDs for the Amazon accounts that are authorized to copy or restore the manual DB
 // cluster snapshot. If all is included in the list of values for the restore
 // attribute, then the manual DB cluster snapshot is public and can be copied or
-// restored by all Amazon accounts. To add or remove access for an Amazon account
-// to copy or restore a manual DB cluster snapshot, or to make the manual DB
-// cluster snapshot public or private, use the ModifyDBClusterSnapshotAttribute
-// API action.
+// restored by all Amazon accounts.
+//
+// To add or remove access for an Amazon account to copy or restore a manual DB
+// cluster snapshot, or to make the manual DB cluster snapshot public or private,
+// use the ModifyDBClusterSnapshotAttributeAPI action.
 func (c *Client) DescribeDBClusterSnapshotAttributes(ctx context.Context, params *DescribeDBClusterSnapshotAttributesInput, optFns ...func(*Options)) (*DescribeDBClusterSnapshotAttributesOutput, error) {
 	if params == nil {
 		params = &DescribeDBClusterSnapshotAttributesInput{}
@@ -49,11 +51,11 @@ type DescribeDBClusterSnapshotAttributesInput struct {
 
 type DescribeDBClusterSnapshotAttributesOutput struct {
 
-	// Contains the results of a successful call to the
-	// DescribeDBClusterSnapshotAttributes API action. Manual DB cluster snapshot
-	// attributes are used to authorize other Amazon accounts to copy or restore a
-	// manual DB cluster snapshot. For more information, see the
-	// ModifyDBClusterSnapshotAttribute API action.
+	// Contains the results of a successful call to the DescribeDBClusterSnapshotAttributes API action.
+	//
+	// Manual DB cluster snapshot attributes are used to authorize other Amazon
+	// accounts to copy or restore a manual DB cluster snapshot. For more information,
+	// see the ModifyDBClusterSnapshotAttributeAPI action.
 	DBClusterSnapshotAttributesResult *types.DBClusterSnapshotAttributesResult
 
 	// Metadata pertaining to the operation's result.
@@ -84,25 +86,25 @@ func (c *Client) addOperationDescribeDBClusterSnapshotAttributesMiddlewares(stac
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -117,13 +119,16 @@ func (c *Client) addOperationDescribeDBClusterSnapshotAttributesMiddlewares(stac
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDescribeDBClusterSnapshotAttributesValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeDBClusterSnapshotAttributes(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -27,18 +26,19 @@ func (c *Client) ListElasticsearchVersions(ctx context.Context, params *ListElas
 	return out, nil
 }
 
-// Container for the parameters to the ListElasticsearchVersions operation. Use
-// MaxResults to control the maximum number of results to retrieve in a single
-// call. Use NextToken in response to retrieve more results. If the received
-// response does not contain a NextToken, then there are no more results to
-// retrieve.
+//	Container for the parameters to the ListElasticsearchVersions operation.
+//
+// Use MaxResults to control the maximum number of results to retrieve in a single call.
+//
+// Use NextToken in response to retrieve more results. If the received response does not
+// contain a NextToken, then there are no more results to retrieve.
 type ListElasticsearchVersionsInput struct {
 
-	// Set this value to limit the number of results returned. Value provided must be
+	//  Set this value to limit the number of results returned. Value provided must be
 	// greater than 10 else it wont be honored.
 	MaxResults int32
 
-	// Paginated APIs accepts NextToken input to returns next page results and
+	//  Paginated APIs accepts NextToken input to returns next page results and
 	// provides a NextToken output in the response which can be used by the client to
 	// retrieve more results.
 	NextToken *string
@@ -46,14 +46,13 @@ type ListElasticsearchVersionsInput struct {
 	noSmithyDocumentSerde
 }
 
-// Container for the parameters for response received from
-// ListElasticsearchVersions operation.
+// Container for the parameters for response received from ListElasticsearchVersions operation.
 type ListElasticsearchVersionsOutput struct {
 
 	// List of supported elastic search versions.
 	ElasticsearchVersions []string
 
-	// Paginated APIs accepts NextToken input to returns next page results and
+	//  Paginated APIs accepts NextToken input to returns next page results and
 	// provides a NextToken output in the response which can be used by the client to
 	// retrieve more results.
 	NextToken *string
@@ -86,25 +85,25 @@ func (c *Client) addOperationListElasticsearchVersionsMiddlewares(stack *middlew
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -119,10 +118,13 @@ func (c *Client) addOperationListElasticsearchVersionsMiddlewares(stack *middlew
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListElasticsearchVersions(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -151,7 +153,7 @@ var _ ListElasticsearchVersionsAPIClient = (*Client)(nil)
 // ListElasticsearchVersionsPaginatorOptions is the paginator options for
 // ListElasticsearchVersions
 type ListElasticsearchVersionsPaginatorOptions struct {
-	// Set this value to limit the number of results returned. Value provided must be
+	//  Set this value to limit the number of results returned. Value provided must be
 	// greater than 10 else it wont be honored.
 	Limit int32
 

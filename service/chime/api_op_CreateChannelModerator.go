@@ -6,30 +6,37 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/chime/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates a new ChannelModerator . A channel moderator can:
+//
 //   - Add and remove other members of the channel.
+//
 //   - Add and remove other moderators of the channel.
+//
 //   - Add and remove user bans for the channel.
+//
 //   - Redact messages in the channel.
+//
 //   - List messages in the channel.
 //
 // The x-amz-chime-bearer request header is mandatory. Use the AppInstanceUserArn
-// of the user that makes the API call as the value in the header. This API is is
-// no longer supported and will not be updated. We recommend using the latest
-// version, CreateChannelModerator (https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_messaging-chime_CreateChannelModerator.html)
-// , in the Amazon Chime SDK. Using the latest version requires migrating to a
-// dedicated namespace. For more information, refer to Migrating from the Amazon
-// Chime namespace (https://docs.aws.amazon.com/chime-sdk/latest/dg/migrate-from-chm-namespace.html)
-// in the Amazon Chime SDK Developer Guide.
+// of the user that makes the API call as the value in the header.
+//
+// This API is is no longer supported and will not be updated. We recommend using
+// the latest version, [CreateChannelModerator], in the Amazon Chime SDK.
+//
+// Using the latest version requires migrating to a dedicated namespace. For more
+// information, refer to [Migrating from the Amazon Chime namespace]in the Amazon Chime SDK Developer Guide.
 //
 // Deprecated: Replaced by CreateChannelModerator in the Amazon Chime SDK
 // Messaging Namespace
+//
+// [Migrating from the Amazon Chime namespace]: https://docs.aws.amazon.com/chime-sdk/latest/dg/migrate-from-chm-namespace.html
+// [CreateChannelModerator]: https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_messaging-chime_CreateChannelModerator.html
 func (c *Client) CreateChannelModerator(ctx context.Context, params *CreateChannelModeratorInput, optFns ...func(*Options)) (*CreateChannelModeratorOutput, error) {
 	if params == nil {
 		params = &CreateChannelModeratorInput{}
@@ -99,25 +106,25 @@ func (c *Client) addOperationCreateChannelModeratorMiddlewares(stack *middleware
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -132,6 +139,9 @@ func (c *Client) addOperationCreateChannelModeratorMiddlewares(stack *middleware
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addEndpointPrefix_opCreateChannelModeratorMiddleware(stack); err != nil {
 		return err
 	}
@@ -141,7 +151,7 @@ func (c *Client) addOperationCreateChannelModeratorMiddlewares(stack *middleware
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateChannelModerator(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

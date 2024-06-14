@@ -6,26 +6,33 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/mturk/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// The ListAssignmentsForHIT operation retrieves completed assignments for a HIT.
-// You can use this operation to retrieve the results for a HIT. You can get
-// assignments for a HIT at any time, even if the HIT is not yet Reviewable. If a
-// HIT requested multiple assignments, and has received some results but has not
-// yet become Reviewable, you can still retrieve the partial results with this
-// operation. Use the AssignmentStatus parameter to control which set of
-// assignments for a HIT are returned. The ListAssignmentsForHIT operation can
-// return submitted assignments awaiting approval, or it can return assignments
-// that have already been approved or rejected. You can set
-// AssignmentStatus=Approved,Rejected to get assignments that have already been
-// approved and rejected together in one result set. Only the Requester who created
-// the HIT can retrieve the assignments for that HIT. Results are sorted and
-// divided into numbered pages and the operation returns a single page of results.
-// You can use the parameters of the operation to control sorting and pagination.
+//	The ListAssignmentsForHIT operation retrieves completed assignments for a HIT.
+//
+// You can use this operation to retrieve the results for a HIT.
+//
+// You can get assignments for a HIT at any time, even if the HIT is not yet
+// Reviewable. If a HIT requested multiple assignments, and has received some
+// results but has not yet become Reviewable, you can still retrieve the partial
+// results with this operation.
+//
+// Use the AssignmentStatus parameter to control which set of assignments for a
+// HIT are returned. The ListAssignmentsForHIT operation can return submitted
+// assignments awaiting approval, or it can return assignments that have already
+// been approved or rejected. You can set AssignmentStatus=Approved,Rejected to get
+// assignments that have already been approved and rejected together in one result
+// set.
+//
+// Only the Requester who created the HIT can retrieve the assignments for that
+// HIT.
+//
+// Results are sorted and divided into numbered pages and the operation returns a
+// single page of results. You can use the parameters of the operation to control
+// sorting and pagination.
 func (c *Client) ListAssignmentsForHIT(ctx context.Context, params *ListAssignmentsForHITInput, optFns ...func(*Options)) (*ListAssignmentsForHITOutput, error) {
 	if params == nil {
 		params = &ListAssignmentsForHITInput{}
@@ -61,7 +68,7 @@ type ListAssignmentsForHITInput struct {
 
 type ListAssignmentsForHITOutput struct {
 
-	// The collection of Assignment data structures returned by this call.
+	//  The collection of Assignment data structures returned by this call.
 	Assignments []types.Assignment
 
 	// If the previous response was incomplete (because there is more data to
@@ -69,7 +76,7 @@ type ListAssignmentsForHITOutput struct {
 	// You can use this pagination token to retrieve the next set of results.
 	NextToken *string
 
-	// The number of assignments on the page in the filtered results list, equivalent
+	//  The number of assignments on the page in the filtered results list, equivalent
 	// to the number of assignments returned by this call.
 	NumResults *int32
 
@@ -101,25 +108,25 @@ func (c *Client) addOperationListAssignmentsForHITMiddlewares(stack *middleware.
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -134,13 +141,16 @@ func (c *Client) addOperationListAssignmentsForHITMiddlewares(stack *middleware.
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpListAssignmentsForHITValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListAssignmentsForHIT(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

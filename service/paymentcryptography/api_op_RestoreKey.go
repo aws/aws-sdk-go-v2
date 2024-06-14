@@ -6,22 +6,33 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/paymentcryptography/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Cancels a scheduled key deletion during the waiting period. Use this operation
-// to restore a Key that is scheduled for deletion. During the waiting period, the
-// KeyState is DELETE_PENDING and deletePendingTimestamp contains the date and
-// time after which the Key will be deleted. After Key is restored, the KeyState
-// is CREATE_COMPLETE , and the value for deletePendingTimestamp is removed.
+// to restore a Key that is scheduled for deletion.
+//
+// During the waiting period, the KeyState is DELETE_PENDING and
+// deletePendingTimestamp contains the date and time after which the Key will be
+// deleted. After Key is restored, the KeyState is CREATE_COMPLETE , and the value
+// for deletePendingTimestamp is removed.
+//
 // Cross-account use: This operation can't be used across different Amazon Web
-// Services accounts. Related operations:
-//   - DeleteKey
-//   - StartKeyUsage
-//   - StopKeyUsage
+// Services accounts.
+//
+// Related operations:
+//
+// [DeleteKey]
+//
+// [StartKeyUsage]
+//
+// [StopKeyUsage]
+//
+// [DeleteKey]: https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_DeleteKey.html
+// [StartKeyUsage]: https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_StartKeyUsage.html
+// [StopKeyUsage]: https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_StopKeyUsage.html
 func (c *Client) RestoreKey(ctx context.Context, params *RestoreKeyInput, optFns ...func(*Options)) (*RestoreKeyOutput, error) {
 	if params == nil {
 		params = &RestoreKeyInput{}
@@ -84,25 +95,25 @@ func (c *Client) addOperationRestoreKeyMiddlewares(stack *middleware.Stack, opti
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -117,13 +128,16 @@ func (c *Client) addOperationRestoreKeyMiddlewares(stack *middleware.Stack, opti
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpRestoreKeyValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opRestoreKey(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

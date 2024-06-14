@@ -21,7 +21,16 @@ import (
 	"io/ioutil"
 	"strconv"
 	"strings"
+	"time"
 )
+
+func deserializeS3Expires(v string) (*time.Time, error) {
+	t, err := smithytime.ParseHTTPDate(v)
+	if err != nil {
+		return nil, nil
+	}
+	return &t, nil
+}
 
 type awsAwsquery_deserializeOpAddTagsToResource struct {
 }
@@ -15911,6 +15920,23 @@ func awsAwsquery_deserializeDocumentDataStorage(v **types.DataStorage, decoder s
 				sv.Maximum = ptr.Int32(int32(i64))
 			}
 
+		case strings.EqualFold("Minimum", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				i64, err := strconv.ParseInt(xtv, 10, 64)
+				if err != nil {
+					return err
+				}
+				sv.Minimum = ptr.Int32(int32(i64))
+			}
+
 		case strings.EqualFold("Unit", t.Name.Local):
 			val, err := decoder.Value()
 			if err != nil {
@@ -16313,6 +16339,23 @@ func awsAwsquery_deserializeDocumentECPUPerSecond(v **types.ECPUPerSecond, decod
 					return err
 				}
 				sv.Maximum = ptr.Int32(int32(i64))
+			}
+
+		case strings.EqualFold("Minimum", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				i64, err := strconv.ParseInt(xtv, 10, 64)
+				if err != nil {
+					return err
+				}
+				sv.Minimum = ptr.Int32(int32(i64))
 			}
 
 		default:

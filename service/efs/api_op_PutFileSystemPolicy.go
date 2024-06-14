@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -17,9 +16,14 @@ import (
 // be the default policy or an explicit policy set or updated using this API
 // operation. EFS file system policies have a 20,000 character limit. When an
 // explicit policy is set, it overrides the default policy. For more information
-// about the default file system policy, see Default EFS File System Policy (https://docs.aws.amazon.com/efs/latest/ug/iam-access-control-nfs-efs.html#default-filesystempolicy)
-// . EFS file system policies have a 20,000 character limit. This operation
-// requires permissions for the elasticfilesystem:PutFileSystemPolicy action.
+// about the default file system policy, see [Default EFS File System Policy].
+//
+// EFS file system policies have a 20,000 character limit.
+//
+// This operation requires permissions for the
+// elasticfilesystem:PutFileSystemPolicy action.
+//
+// [Default EFS File System Policy]: https://docs.aws.amazon.com/efs/latest/ug/iam-access-control-nfs-efs.html#default-filesystempolicy
 func (c *Client) PutFileSystemPolicy(ctx context.Context, params *PutFileSystemPolicyInput, optFns ...func(*Options)) (*PutFileSystemPolicyOutput, error) {
 	if params == nil {
 		params = &PutFileSystemPolicyInput{}
@@ -45,9 +49,9 @@ type PutFileSystemPolicyInput struct {
 
 	// The FileSystemPolicy that you're creating. Accepts a JSON formatted policy
 	// definition. EFS file system policies have a 20,000 character limit. To find out
-	// more about the elements that make up a file system policy, see EFS
-	// Resource-based Policies (https://docs.aws.amazon.com/efs/latest/ug/access-control-overview.html#access-control-manage-access-intro-resource-policies)
-	// .
+	// more about the elements that make up a file system policy, see [EFS Resource-based Policies].
+	//
+	// [EFS Resource-based Policies]: https://docs.aws.amazon.com/efs/latest/ug/access-control-overview.html#access-control-manage-access-intro-resource-policies
 	//
 	// This member is required.
 	Policy *string
@@ -101,25 +105,25 @@ func (c *Client) addOperationPutFileSystemPolicyMiddlewares(stack *middleware.St
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -134,13 +138,16 @@ func (c *Client) addOperationPutFileSystemPolicyMiddlewares(stack *middleware.St
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpPutFileSystemPolicyValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opPutFileSystemPolicy(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

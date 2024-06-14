@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/cloudsearch/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -16,8 +15,9 @@ import (
 // expands an Amazon CloudSearch domain to an additional Availability Zone in the
 // same Region to increase fault tolerance in the event of a service disruption.
 // Changes to the Multi-AZ option can take about half an hour to become active. For
-// more information, see Configuring Availability Options (http://docs.aws.amazon.com/cloudsearch/latest/developerguide/configuring-availability-options.html)
-// in the Amazon CloudSearch Developer Guide.
+// more information, see [Configuring Availability Options]in the Amazon CloudSearch Developer Guide.
+//
+// [Configuring Availability Options]: http://docs.aws.amazon.com/cloudsearch/latest/developerguide/configuring-availability-options.html
 func (c *Client) UpdateAvailabilityOptions(ctx context.Context, params *UpdateAvailabilityOptionsInput, optFns ...func(*Options)) (*UpdateAvailabilityOptionsOutput, error) {
 	if params == nil {
 		params = &UpdateAvailabilityOptionsInput{}
@@ -33,9 +33,8 @@ func (c *Client) UpdateAvailabilityOptions(ctx context.Context, params *UpdateAv
 	return out, nil
 }
 
-// Container for the parameters to the UpdateAvailabilityOptions operation.
-// Specifies the name of the domain you want to update and the Multi-AZ
-// availability option.
+// Container for the parameters to the UpdateAvailabilityOptions operation. Specifies the name of the
+// domain you want to update and the Multi-AZ availability option.
 type UpdateAvailabilityOptionsInput struct {
 
 	// A string that represents the name of a domain. Domain names are unique across
@@ -93,25 +92,25 @@ func (c *Client) addOperationUpdateAvailabilityOptionsMiddlewares(stack *middlew
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -126,13 +125,16 @@ func (c *Client) addOperationUpdateAvailabilityOptionsMiddlewares(stack *middlew
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpUpdateAvailabilityOptionsValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateAvailabilityOptions(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

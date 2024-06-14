@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/vpclattice/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -14,8 +13,11 @@ import (
 
 // Creates a target group. A target group is a collection of targets, or compute
 // resources, that run your application or service. A target group can only be used
-// by a single service. For more information, see Target groups (https://docs.aws.amazon.com/vpc-lattice/latest/ug/target-groups.html)
-// in the Amazon VPC Lattice User Guide.
+// by a single service.
+//
+// For more information, see [Target groups] in the Amazon VPC Lattice User Guide.
+//
+// [Target groups]: https://docs.aws.amazon.com/vpc-lattice/latest/ug/target-groups.html
 func (c *Client) CreateTargetGroup(ctx context.Context, params *CreateTargetGroupInput, optFns ...func(*Options)) (*CreateTargetGroupOutput, error) {
 	if params == nil {
 		params = &CreateTargetGroupInput{}
@@ -51,8 +53,7 @@ type CreateTargetGroupInput struct {
 	// actions. If the parameters aren't identical, the retry fails.
 	ClientToken *string
 
-	// The target group configuration. If type is set to LAMBDA , this parameter
-	// doesn't apply.
+	// The target group configuration.
 	Config *types.TargetGroupConfig
 
 	// The tags for the target group.
@@ -66,8 +67,7 @@ type CreateTargetGroupOutput struct {
 	// The Amazon Resource Name (ARN) of the target group.
 	Arn *string
 
-	// The target group configuration. If type is set to LAMBDA , this parameter
-	// doesn't apply.
+	// The target group configuration.
 	Config *types.TargetGroupConfig
 
 	// The ID of the target group.
@@ -76,9 +76,9 @@ type CreateTargetGroupOutput struct {
 	// The name of the target group.
 	Name *string
 
-	// The operation's status. You can retry the operation if the status is
-	// CREATE_FAILED . However, if you retry it while the status is CREATE_IN_PROGRESS
-	// , there is no change in the status.
+	// The status. You can retry the operation if the status is CREATE_FAILED .
+	// However, if you retry it while the status is CREATE_IN_PROGRESS , there is no
+	// change in the status.
 	Status types.TargetGroupStatus
 
 	// The type of target group.
@@ -112,25 +112,25 @@ func (c *Client) addOperationCreateTargetGroupMiddlewares(stack *middleware.Stac
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -145,6 +145,9 @@ func (c *Client) addOperationCreateTargetGroupMiddlewares(stack *middleware.Stac
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opCreateTargetGroupMiddleware(stack, options); err != nil {
 		return err
 	}
@@ -154,7 +157,7 @@ func (c *Client) addOperationCreateTargetGroupMiddlewares(stack *middleware.Stac
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateTargetGroup(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

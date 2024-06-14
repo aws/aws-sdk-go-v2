@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/directoryservice/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -16,10 +15,11 @@ import (
 // relationships. For example, you can establish a trust between your Managed
 // Microsoft AD directory, and your existing self-managed Microsoft Active
 // Directory. This would allow you to provide users and groups access to resources
-// in either domain, with a single set of credentials. This action initiates the
-// creation of the Amazon Web Services side of a trust relationship between an
-// Managed Microsoft AD directory and an external domain. You can create either a
-// forest trust or an external trust.
+// in either domain, with a single set of credentials.
+//
+// This action initiates the creation of the Amazon Web Services side of a trust
+// relationship between an Managed Microsoft AD directory and an external domain.
+// You can create either a forest trust or an external trust.
 func (c *Client) CreateTrust(ctx context.Context, params *CreateTrustInput, optFns ...func(*Options)) (*CreateTrustOutput, error) {
 	if params == nil {
 		params = &CreateTrustInput{}
@@ -39,9 +39,10 @@ func (c *Client) CreateTrust(ctx context.Context, params *CreateTrustInput, optF
 // relationships. For example, you can establish a trust between your Managed
 // Microsoft AD directory, and your existing self-managed Microsoft Active
 // Directory. This would allow you to provide users and groups access to resources
-// in either domain, with a single set of credentials. This action initiates the
-// creation of the Amazon Web Services side of a trust relationship between an
-// Managed Microsoft AD directory and an external domain.
+// in either domain, with a single set of credentials.
+//
+// This action initiates the creation of the Amazon Web Services side of a trust
+// relationship between an Managed Microsoft AD directory and an external domain.
 type CreateTrustInput struct {
 
 	// The Directory ID of the Managed Microsoft AD directory for which to establish
@@ -113,25 +114,25 @@ func (c *Client) addOperationCreateTrustMiddlewares(stack *middleware.Stack, opt
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -146,13 +147,16 @@ func (c *Client) addOperationCreateTrustMiddlewares(stack *middleware.Stack, opt
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpCreateTrustValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateTrust(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

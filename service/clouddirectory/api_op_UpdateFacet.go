@@ -6,15 +6,17 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/clouddirectory/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Does the following:
+//
 //   - Adds new Attributes , Rules , or ObjectTypes .
+//
 //   - Updates existing Attributes , Rules , or ObjectTypes .
+//
 //   - Deletes existing Attributes , Rules , or ObjectTypes .
 func (c *Client) UpdateFacet(ctx context.Context, params *UpdateFacetInput, optFns ...func(*Options)) (*UpdateFacetOutput, error) {
 	if params == nil {
@@ -38,19 +40,18 @@ type UpdateFacetInput struct {
 	// This member is required.
 	Name *string
 
-	// The Amazon Resource Name (ARN) that is associated with the Facet . For more
-	// information, see arns .
+	// The Amazon Resource Name (ARN) that is associated with the Facet. For more
+	// information, see arns.
 	//
 	// This member is required.
 	SchemaArn *string
 
-	// List of attributes that need to be updated in a given schema Facet . Each
-	// attribute is followed by AttributeAction , which specifies the type of update
-	// operation to perform.
+	// List of attributes that need to be updated in a given schema Facet. Each attribute
+	// is followed by AttributeAction , which specifies the type of update operation to
+	// perform.
 	AttributeUpdates []types.FacetAttributeUpdate
 
-	// The object type that is associated with the facet. See
-	// CreateFacetRequest$ObjectType for more details.
+	// The object type that is associated with the facet. See CreateFacetRequest$ObjectType for more details.
 	ObjectType types.ObjectType
 
 	noSmithyDocumentSerde
@@ -85,25 +86,25 @@ func (c *Client) addOperationUpdateFacetMiddlewares(stack *middleware.Stack, opt
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -118,13 +119,16 @@ func (c *Client) addOperationUpdateFacetMiddlewares(stack *middleware.Stack, opt
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpUpdateFacetValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateFacet(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

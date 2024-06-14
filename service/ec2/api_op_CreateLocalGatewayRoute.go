@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -14,7 +13,9 @@ import (
 
 // Creates a static route for the specified local gateway route table. You must
 // specify one of the following targets:
+//
 //   - LocalGatewayVirtualInterfaceGroupId
+//
 //   - NetworkInterfaceId
 func (c *Client) CreateLocalGatewayRoute(ctx context.Context, params *CreateLocalGatewayRouteInput, optFns ...func(*Options)) (*CreateLocalGatewayRouteOutput, error) {
 	if params == nil {
@@ -42,7 +43,7 @@ type CreateLocalGatewayRouteInput struct {
 	// most specific match.
 	DestinationCidrBlock *string
 
-	// The ID of the prefix list. Use a prefix list in place of DestinationCidrBlock .
+	//  The ID of the prefix list. Use a prefix list in place of DestinationCidrBlock .
 	// You cannot use DestinationPrefixListId and DestinationCidrBlock in the same
 	// request.
 	DestinationPrefixListId *string
@@ -95,25 +96,25 @@ func (c *Client) addOperationCreateLocalGatewayRouteMiddlewares(stack *middlewar
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -128,13 +129,16 @@ func (c *Client) addOperationCreateLocalGatewayRouteMiddlewares(stack *middlewar
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpCreateLocalGatewayRouteValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateLocalGatewayRoute(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

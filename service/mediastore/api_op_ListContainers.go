@@ -6,20 +6,21 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/mediastore/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists the properties of all containers in AWS Elemental MediaStore. You can
-// query to receive all the containers in one response. Or you can include the
-// MaxResults parameter to receive a limited number of containers in each response.
-// In this case, the response includes a token. To get the next set of containers,
-// send the command again, this time with the NextToken parameter (with the
-// returned token as its value). The next set of responses appears, with a token if
-// there are still more containers to receive. See also DescribeContainer , which
-// gets the properties of one container.
+// Lists the properties of all containers in AWS Elemental MediaStore.
+//
+// You can query to receive all the containers in one response. Or you can include
+// the MaxResults parameter to receive a limited number of containers in each
+// response. In this case, the response includes a token. To get the next set of
+// containers, send the command again, this time with the NextToken parameter
+// (with the returned token as its value). The next set of responses appears, with
+// a token if there are still more containers to receive.
+//
+// See also DescribeContainer, which gets the properties of one container.
 func (c *Client) ListContainers(ctx context.Context, params *ListContainersInput, optFns ...func(*Options)) (*ListContainersOutput, error) {
 	if params == nil {
 		params = &ListContainersInput{}
@@ -90,25 +91,25 @@ func (c *Client) addOperationListContainersMiddlewares(stack *middleware.Stack, 
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -123,10 +124,13 @@ func (c *Client) addOperationListContainersMiddlewares(stack *middleware.Stack, 
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListContainers(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

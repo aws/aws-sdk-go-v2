@@ -6,15 +6,16 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a Traffic Mirror filter rule. A Traffic Mirror rule defines the Traffic
-// Mirror source traffic to mirror. You need the Traffic Mirror filter ID when you
-// create the rule.
+// Creates a Traffic Mirror filter rule.
+//
+// A Traffic Mirror rule defines the Traffic Mirror source traffic to mirror.
+//
+// You need the Traffic Mirror filter ID when you create the rule.
 func (c *Client) CreateTrafficMirrorFilterRule(ctx context.Context, params *CreateTrafficMirrorFilterRuleInput, optFns ...func(*Options)) (*CreateTrafficMirrorFilterRuleOutput, error) {
 	if params == nil {
 		params = &CreateTrafficMirrorFilterRuleInput{}
@@ -65,8 +66,9 @@ type CreateTrafficMirrorFilterRuleInput struct {
 	TrafficMirrorFilterId *string
 
 	// Unique, case-sensitive identifier that you provide to ensure the idempotency of
-	// the request. For more information, see How to ensure idempotency (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html)
-	// .
+	// the request. For more information, see [How to ensure idempotency].
+	//
+	// [How to ensure idempotency]: https://docs.aws.amazon.com/ec2/latest/devguide/ec2-api-idempotency.html
 	ClientToken *string
 
 	// The description of the Traffic Mirror rule.
@@ -81,13 +83,19 @@ type CreateTrafficMirrorFilterRuleInput struct {
 	// UnauthorizedOperation .
 	DryRun *bool
 
-	// The protocol, for example UDP, to assign to the Traffic Mirror rule. For
-	// information about the protocol value, see Protocol Numbers (https://www.iana.org/assignments/protocol-numbers/protocol-numbers.xhtml)
-	// on the Internet Assigned Numbers Authority (IANA) website.
+	// The protocol, for example UDP, to assign to the Traffic Mirror rule.
+	//
+	// For information about the protocol value, see [Protocol Numbers] on the Internet Assigned Numbers
+	// Authority (IANA) website.
+	//
+	// [Protocol Numbers]: https://www.iana.org/assignments/protocol-numbers/protocol-numbers.xhtml
 	Protocol *int32
 
 	// The source port range.
 	SourcePortRange *types.TrafficMirrorPortRangeRequest
+
+	// Traffic Mirroring tags specifications.
+	TagSpecifications []types.TagSpecification
 
 	noSmithyDocumentSerde
 }
@@ -95,8 +103,9 @@ type CreateTrafficMirrorFilterRuleInput struct {
 type CreateTrafficMirrorFilterRuleOutput struct {
 
 	// Unique, case-sensitive identifier that you provide to ensure the idempotency of
-	// the request. For more information, see How to ensure idempotency (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html)
-	// .
+	// the request. For more information, see [How to ensure idempotency].
+	//
+	// [How to ensure idempotency]: https://docs.aws.amazon.com/ec2/latest/devguide/ec2-api-idempotency.html
 	ClientToken *string
 
 	// The Traffic Mirror rule.
@@ -130,25 +139,25 @@ func (c *Client) addOperationCreateTrafficMirrorFilterRuleMiddlewares(stack *mid
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -163,6 +172,9 @@ func (c *Client) addOperationCreateTrafficMirrorFilterRuleMiddlewares(stack *mid
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opCreateTrafficMirrorFilterRuleMiddleware(stack, options); err != nil {
 		return err
 	}
@@ -172,7 +184,7 @@ func (c *Client) addOperationCreateTrafficMirrorFilterRuleMiddlewares(stack *mid
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateTrafficMirrorFilterRule(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

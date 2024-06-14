@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/elasticsearchservice/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -14,7 +13,9 @@ import (
 
 // Attaches tags to an existing Elasticsearch domain. Tags are a set of
 // case-sensitive key value pairs. An Elasticsearch domain may have up to 10 tags.
-// See Tagging Amazon Elasticsearch Service Domains for more information. (http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-managedomains.html#es-managedomains-awsresorcetagging)
+// See [Tagging Amazon Elasticsearch Service Domains for more information.]
+//
+// [Tagging Amazon Elasticsearch Service Domains for more information.]: http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-managedomains.html#es-managedomains-awsresorcetagging
 func (c *Client) AddTags(ctx context.Context, params *AddTagsInput, optFns ...func(*Options)) (*AddTagsOutput, error) {
 	if params == nil {
 		params = &AddTagsInput{}
@@ -30,16 +31,16 @@ func (c *Client) AddTags(ctx context.Context, params *AddTagsInput, optFns ...fu
 	return out, nil
 }
 
-// Container for the parameters to the AddTags operation. Specify the tags that
-// you want to attach to the Elasticsearch domain.
+// Container for the parameters to the AddTags operation. Specify the tags that you want
+// to attach to the Elasticsearch domain.
 type AddTagsInput struct {
 
-	// Specify the ARN for which you want to add the tags.
+	//  Specify the ARN for which you want to add the tags.
 	//
 	// This member is required.
 	ARN *string
 
-	// List of Tag that need to be added for the Elasticsearch domain.
+	//  List of Tag that need to be added for the Elasticsearch domain.
 	//
 	// This member is required.
 	TagList []types.Tag
@@ -76,25 +77,25 @@ func (c *Client) addOperationAddTagsMiddlewares(stack *middleware.Stack, options
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -109,13 +110,16 @@ func (c *Client) addOperationAddTagsMiddlewares(stack *middleware.Stack, options
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpAddTagsValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opAddTags(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

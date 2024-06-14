@@ -6,18 +6,22 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Cancels an instance refresh or rollback that is in progress. If an instance
 // refresh or rollback is not in progress, an ActiveInstanceRefreshNotFound error
-// occurs. This operation is part of the instance refresh feature (https://docs.aws.amazon.com/autoscaling/ec2/userguide/asg-instance-refresh.html)
-// in Amazon EC2 Auto Scaling, which helps you update instances in your Auto
-// Scaling group after you make configuration changes. When you cancel an instance
-// refresh, this does not roll back any changes that it made. Use the
-// RollbackInstanceRefresh API to roll back instead.
+// occurs.
+//
+// This operation is part of the [instance refresh feature] in Amazon EC2 Auto Scaling, which helps you
+// update instances in your Auto Scaling group after you make configuration
+// changes.
+//
+// When you cancel an instance refresh, this does not roll back any changes that
+// it made. Use the RollbackInstanceRefreshAPI to roll back instead.
+//
+// [instance refresh feature]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/asg-instance-refresh.html
 func (c *Client) CancelInstanceRefresh(ctx context.Context, params *CancelInstanceRefreshInput, optFns ...func(*Options)) (*CancelInstanceRefreshOutput, error) {
 	if params == nil {
 		params = &CancelInstanceRefreshInput{}
@@ -77,25 +81,25 @@ func (c *Client) addOperationCancelInstanceRefreshMiddlewares(stack *middleware.
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -110,13 +114,16 @@ func (c *Client) addOperationCancelInstanceRefreshMiddlewares(stack *middleware.
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpCancelInstanceRefreshValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCancelInstanceRefresh(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

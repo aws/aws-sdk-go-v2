@@ -6,22 +6,22 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/ecr/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates or updates the replication configuration for a registry. The existing
-// replication configuration for a repository can be retrieved with the
-// DescribeRegistry API action. The first time the PutReplicationConfiguration API
-// is called, a service-linked IAM role is created in your account for the
-// replication process. For more information, see Using service-linked roles for
-// Amazon ECR (https://docs.aws.amazon.com/AmazonECR/latest/userguide/using-service-linked-roles.html)
-// in the Amazon Elastic Container Registry User Guide. When configuring
-// cross-account replication, the destination account must grant the source account
-// permission to replicate. This permission is controlled using a registry
-// permissions policy. For more information, see PutRegistryPolicy .
+// replication configuration for a repository can be retrieved with the DescribeRegistryAPI
+// action. The first time the PutReplicationConfiguration API is called, a
+// service-linked IAM role is created in your account for the replication process.
+// For more information, see [Using service-linked roles for Amazon ECR]in the Amazon Elastic Container Registry User Guide.
+//
+// When configuring cross-account replication, the destination account must grant
+// the source account permission to replicate. This permission is controlled using
+// a registry permissions policy. For more information, see PutRegistryPolicy.
+//
+// [Using service-linked roles for Amazon ECR]: https://docs.aws.amazon.com/AmazonECR/latest/userguide/using-service-linked-roles.html
 func (c *Client) PutReplicationConfiguration(ctx context.Context, params *PutReplicationConfigurationInput, optFns ...func(*Options)) (*PutReplicationConfigurationOutput, error) {
 	if params == nil {
 		params = &PutReplicationConfigurationInput{}
@@ -80,25 +80,25 @@ func (c *Client) addOperationPutReplicationConfigurationMiddlewares(stack *middl
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -113,13 +113,16 @@ func (c *Client) addOperationPutReplicationConfigurationMiddlewares(stack *middl
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpPutReplicationConfigurationValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opPutReplicationConfiguration(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

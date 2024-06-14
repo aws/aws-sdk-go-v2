@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -14,7 +13,9 @@ import (
 // Sets the AWS Lambda function for a given event type for an identity pool. This
 // request only updates the key/value pair specified. Other key/values pairs are
 // not updated. To remove a key value pair, pass a empty value for the particular
-// key.This API can only be called with developer credentials. You cannot call this
+// key.
+//
+// This API can only be called with developer credentials. You cannot call this
 // API with the temporary user credentials provided by Cognito Identity.
 func (c *Client) SetCognitoEvents(ctx context.Context, params *SetCognitoEventsInput, optFns ...func(*Options)) (*SetCognitoEventsOutput, error) {
 	if params == nil {
@@ -31,7 +32,9 @@ func (c *Client) SetCognitoEvents(ctx context.Context, params *SetCognitoEventsI
 	return out, nil
 }
 
-// A request to configure Cognito Events""
+// A request to configure Cognito Events"
+//
+// "
 type SetCognitoEventsInput struct {
 
 	// The events to configure
@@ -76,25 +79,25 @@ func (c *Client) addOperationSetCognitoEventsMiddlewares(stack *middleware.Stack
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -109,13 +112,16 @@ func (c *Client) addOperationSetCognitoEventsMiddlewares(stack *middleware.Stack
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpSetCognitoEventsValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opSetCognitoEvents(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

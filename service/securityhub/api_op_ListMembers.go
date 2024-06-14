@@ -6,15 +6,16 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/securityhub/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Lists details about all member accounts for the current Security Hub
-// administrator account. The results include both member accounts that belong to
-// an organization and member accounts that were invited manually.
+// administrator account.
+//
+// The results include both member accounts that belong to an organization and
+// member accounts that were invited manually.
 func (c *Client) ListMembers(ctx context.Context, params *ListMembersInput, optFns ...func(*Options)) (*ListMembersOutput, error) {
 	if params == nil {
 		params = &ListMembersInput{}
@@ -36,16 +37,19 @@ type ListMembersInput struct {
 	MaxResults *int32
 
 	// The token that is required for pagination. On your first call to the ListMembers
-	// operation, set the value of this parameter to NULL . For subsequent calls to the
-	// operation, to continue listing data, set the value of this parameter to the
-	// value returned from the previous response.
+	// operation, set the value of this parameter to NULL .
+	//
+	// For subsequent calls to the operation, to continue listing data, set the value
+	// of this parameter to the value returned from the previous response.
 	NextToken *string
 
 	// Specifies which member accounts to include in the response based on their
 	// relationship status with the administrator account. The default value is TRUE .
+	//
 	// If OnlyAssociated is set to TRUE , the response includes member accounts whose
-	// relationship status with the administrator account is set to ENABLED . If
-	// OnlyAssociated is set to FALSE , the response includes all existing member
+	// relationship status with the administrator account is set to ENABLED .
+	//
+	// If OnlyAssociated is set to FALSE , the response includes all existing member
 	// accounts.
 	OnlyAssociated *bool
 
@@ -88,25 +92,25 @@ func (c *Client) addOperationListMembersMiddlewares(stack *middleware.Stack, opt
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -121,10 +125,13 @@ func (c *Client) addOperationListMembersMiddlewares(stack *middleware.Stack, opt
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListMembers(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

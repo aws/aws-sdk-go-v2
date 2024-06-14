@@ -6,18 +6,27 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// This operation is used with the Amazon GameLift FleetIQ solution and game
-// server groups. Removes the game server from a game server group. As a result of
-// this operation, the deregistered game server can no longer be claimed and will
-// not be returned in a list of active game servers. To deregister a game server,
-// specify the game server group and game server ID. If successful, this operation
-// emits a CloudWatch event with termination timestamp and reason. Learn more
-// Amazon GameLift FleetIQ Guide (https://docs.aws.amazon.com/gamelift/latest/fleetiqguide/gsg-intro.html)
+//	This operation is used with the Amazon GameLift FleetIQ solution and game
+//
+// server groups.
+//
+// Removes the game server from a game server group. As a result of this
+// operation, the deregistered game server can no longer be claimed and will not be
+// returned in a list of active game servers.
+//
+// To deregister a game server, specify the game server group and game server ID.
+// If successful, this operation emits a CloudWatch event with termination
+// timestamp and reason.
+//
+// # Learn more
+//
+// [Amazon GameLift FleetIQ Guide]
+//
+// [Amazon GameLift FleetIQ Guide]: https://docs.aws.amazon.com/gamelift/latest/fleetiqguide/gsg-intro.html
 func (c *Client) DeregisterGameServer(ctx context.Context, params *DeregisterGameServerInput, optFns ...func(*Options)) (*DeregisterGameServerOutput, error) {
 	if params == nil {
 		params = &DeregisterGameServerInput{}
@@ -77,25 +86,25 @@ func (c *Client) addOperationDeregisterGameServerMiddlewares(stack *middleware.S
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -110,13 +119,16 @@ func (c *Client) addOperationDeregisterGameServerMiddlewares(stack *middleware.S
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDeregisterGameServerValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDeregisterGameServer(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

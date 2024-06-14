@@ -6,26 +6,30 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/connect/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Provides information about the phone numbers for the specified Amazon Connect
-// instance. For more information about phone numbers, see Set Up Phone Numbers
-// for Your Contact Center (https://docs.aws.amazon.com/connect/latest/adminguide/contact-center-phone-number.html)
-// in the Amazon Connect Administrator Guide.
-//   - We recommend using ListPhoneNumbersV2 (https://docs.aws.amazon.com/connect/latest/APIReference/API_ListPhoneNumbersV2.html)
-//     to return phone number types. ListPhoneNumbers doesn't support number types
-//     UIFN , SHARED , THIRD_PARTY_TF , and THIRD_PARTY_DID . While it returns
-//     numbers of those types, it incorrectly lists them as TOLL_FREE or DID .
-//   - The phone number Arn value that is returned from each of the items in the
-//     PhoneNumberSummaryList (https://docs.aws.amazon.com/connect/latest/APIReference/API_ListPhoneNumbers.html#connect-ListPhoneNumbers-response-PhoneNumberSummaryList)
+// instance.
+//
+// For more information about phone numbers, see [Set Up Phone Numbers for Your Contact Center] in the Amazon Connect
+// Administrator Guide.
+//
+//   - We recommend using [ListPhoneNumbersV2]to return phone number types. ListPhoneNumbers doesn't
+//     support number types UIFN , SHARED , THIRD_PARTY_TF , and THIRD_PARTY_DID .
+//     While it returns numbers of those types, it incorrectly lists them as
+//     TOLL_FREE or DID .
+//
+//   - The phone number Arn value that is returned from each of the items in the [PhoneNumberSummaryList]
 //     cannot be used to tag phone number resources. It will fail with a
-//     ResourceNotFoundException . Instead, use the ListPhoneNumbersV2 (https://docs.aws.amazon.com/connect/latest/APIReference/API_ListPhoneNumbersV2.html)
-//     API. It returns the new phone number ARN that can be used to tag phone number
-//     resources.
+//     ResourceNotFoundException . Instead, use the [ListPhoneNumbersV2]API. It returns the new phone
+//     number ARN that can be used to tag phone number resources.
+//
+// [ListPhoneNumbersV2]: https://docs.aws.amazon.com/connect/latest/APIReference/API_ListPhoneNumbersV2.html
+// [Set Up Phone Numbers for Your Contact Center]: https://docs.aws.amazon.com/connect/latest/adminguide/contact-center-phone-number.html
+// [PhoneNumberSummaryList]: https://docs.aws.amazon.com/connect/latest/APIReference/API_ListPhoneNumbers.html#connect-ListPhoneNumbers-response-PhoneNumberSummaryList
 func (c *Client) ListPhoneNumbers(ctx context.Context, params *ListPhoneNumbersInput, optFns ...func(*Options)) (*ListPhoneNumbersOutput, error) {
 	if params == nil {
 		params = &ListPhoneNumbersInput{}
@@ -43,8 +47,10 @@ func (c *Client) ListPhoneNumbers(ctx context.Context, params *ListPhoneNumbersI
 
 type ListPhoneNumbersInput struct {
 
-	// The identifier of the Amazon Connect instance. You can find the instance ID (https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html)
-	// in the Amazon Resource Name (ARN) of the instance.
+	// The identifier of the Amazon Connect instance. You can [find the instance ID] in the Amazon Resource
+	// Name (ARN) of the instance.
+	//
+	// [find the instance ID]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
 	//
 	// This member is required.
 	InstanceId *string
@@ -60,10 +66,13 @@ type ListPhoneNumbersInput struct {
 	// The ISO country code.
 	PhoneNumberCountryCodes []types.PhoneNumberCountryCode
 
-	// The type of phone number. We recommend using ListPhoneNumbersV2 (https://docs.aws.amazon.com/connect/latest/APIReference/API_ListPhoneNumbersV2.html)
-	// to return phone number types. While ListPhoneNumbers returns number types UIFN ,
-	// SHARED , THIRD_PARTY_TF , and THIRD_PARTY_DID , it incorrectly lists them as
-	// TOLL_FREE or DID .
+	// The type of phone number.
+	//
+	// We recommend using [ListPhoneNumbersV2] to return phone number types. While ListPhoneNumbers
+	// returns number types UIFN , SHARED , THIRD_PARTY_TF , and THIRD_PARTY_DID , it
+	// incorrectly lists them as TOLL_FREE or DID .
+	//
+	// [ListPhoneNumbersV2]: https://docs.aws.amazon.com/connect/latest/APIReference/API_ListPhoneNumbersV2.html
 	PhoneNumberTypes []types.PhoneNumberType
 
 	noSmithyDocumentSerde
@@ -105,25 +114,25 @@ func (c *Client) addOperationListPhoneNumbersMiddlewares(stack *middleware.Stack
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -138,13 +147,16 @@ func (c *Client) addOperationListPhoneNumbersMiddlewares(stack *middleware.Stack
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpListPhoneNumbersValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListPhoneNumbers(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

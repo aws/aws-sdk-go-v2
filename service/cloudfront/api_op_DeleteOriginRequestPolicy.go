@@ -6,17 +6,19 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes an origin request policy. You cannot delete an origin request policy if
-// it's attached to any cache behaviors. First update your distributions to remove
-// the origin request policy from all cache behaviors, then delete the origin
-// request policy. To delete an origin request policy, you must provide the
-// policy's identifier and version. To get the identifier, you can use
-// ListOriginRequestPolicies or GetOriginRequestPolicy .
+// Deletes an origin request policy.
+//
+// You cannot delete an origin request policy if it's attached to any cache
+// behaviors. First update your distributions to remove the origin request policy
+// from all cache behaviors, then delete the origin request policy.
+//
+// To delete an origin request policy, you must provide the policy's identifier
+// and version. To get the identifier, you can use ListOriginRequestPolicies or
+// GetOriginRequestPolicy .
 func (c *Client) DeleteOriginRequestPolicy(ctx context.Context, params *DeleteOriginRequestPolicyInput, optFns ...func(*Options)) (*DeleteOriginRequestPolicyOutput, error) {
 	if params == nil {
 		params = &DeleteOriginRequestPolicyInput{}
@@ -78,25 +80,25 @@ func (c *Client) addOperationDeleteOriginRequestPolicyMiddlewares(stack *middlew
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -111,13 +113,16 @@ func (c *Client) addOperationDeleteOriginRequestPolicyMiddlewares(stack *middlew
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDeleteOriginRequestPolicyValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteOriginRequestPolicy(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

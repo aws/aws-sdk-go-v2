@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/frauddetector/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -14,13 +13,16 @@ import (
 
 // Gets a list of past predictions. The list can be filtered by detector ID,
 // detector version ID, event ID, event type, or by specifying a time period. If
-// filter is not specified, the most recent prediction is returned. For example,
-// the following filter lists all past predictions for xyz event type - {
-// "eventType":{ "value": "xyz" }” } This is a paginated API. If you provide a
-// null maxResults , this action will retrieve a maximum of 10 records per page. If
-// you provide a maxResults , the value must be between 50 and 100. To get the next
-// page results, provide the nextToken from the response as part of your request.
-// A null nextToken fetches the records from the beginning.
+// filter is not specified, the most recent prediction is returned.
+//
+// For example, the following filter lists all past predictions for xyz event type
+// - { "eventType":{ "value": "xyz" }” }
+//
+// This is a paginated API. If you provide a null maxResults , this action will
+// retrieve a maximum of 10 records per page. If you provide a maxResults , the
+// value must be between 50 and 100. To get the next page results, provide the
+// nextToken from the response as part of your request. A null nextToken fetches
+// the records from the beginning.
 func (c *Client) ListEventPredictions(ctx context.Context, params *ListEventPredictionsInput, optFns ...func(*Options)) (*ListEventPredictionsOutput, error) {
 	if params == nil {
 		params = &ListEventPredictionsInput{}
@@ -38,27 +40,27 @@ func (c *Client) ListEventPredictions(ctx context.Context, params *ListEventPred
 
 type ListEventPredictionsInput struct {
 
-	// The detector ID.
+	//  The detector ID.
 	DetectorId *types.FilterCondition
 
-	// The detector version ID.
+	//  The detector version ID.
 	DetectorVersionId *types.FilterCondition
 
-	// The event ID.
+	//  The event ID.
 	EventId *types.FilterCondition
 
-	// The event type associated with the detector.
+	//  The event type associated with the detector.
 	EventType *types.FilterCondition
 
-	// The maximum number of predictions to return for the request.
+	//  The maximum number of predictions to return for the request.
 	MaxResults *int32
 
-	// Identifies the next page of results to return. Use the token to make the call
+	//  Identifies the next page of results to return. Use the token to make the call
 	// again to retrieve the next page. Keep all other arguments unchanged. Each
 	// pagination token expires after 24 hours.
 	NextToken *string
 
-	// The time period for when the predictions were generated.
+	//  The time period for when the predictions were generated.
 	PredictionTimeRange *types.PredictionTimeRange
 
 	noSmithyDocumentSerde
@@ -66,10 +68,10 @@ type ListEventPredictionsInput struct {
 
 type ListEventPredictionsOutput struct {
 
-	// The summary of the past predictions.
+	//  The summary of the past predictions.
 	EventPredictionSummaries []types.EventPredictionSummary
 
-	// Identifies the next page of results to return. Use the token to make the call
+	//  Identifies the next page of results to return. Use the token to make the call
 	// again to retrieve the next page. Keep all other arguments unchanged. Each
 	// pagination token expires after 24 hours.
 	NextToken *string
@@ -102,25 +104,25 @@ func (c *Client) addOperationListEventPredictionsMiddlewares(stack *middleware.S
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -135,13 +137,16 @@ func (c *Client) addOperationListEventPredictionsMiddlewares(stack *middleware.S
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpListEventPredictionsValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListEventPredictions(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -170,7 +175,7 @@ var _ ListEventPredictionsAPIClient = (*Client)(nil)
 // ListEventPredictionsPaginatorOptions is the paginator options for
 // ListEventPredictions
 type ListEventPredictionsPaginatorOptions struct {
-	// The maximum number of predictions to return for the request.
+	//  The maximum number of predictions to return for the request.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

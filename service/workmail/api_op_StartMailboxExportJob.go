@@ -6,15 +6,16 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Starts a mailbox export job to export MIME-format email messages and calendar
 // items from the specified mailbox to the specified Amazon Simple Storage Service
-// (Amazon S3) bucket. For more information, see Exporting mailbox content (https://docs.aws.amazon.com/workmail/latest/adminguide/mail-export.html)
-// in the WorkMail Administrator Guide.
+// (Amazon S3) bucket. For more information, see [Exporting mailbox content]in the WorkMail Administrator
+// Guide.
+//
+// [Exporting mailbox content]: https://docs.aws.amazon.com/workmail/latest/adminguide/mail-export.html
 func (c *Client) StartMailboxExportJob(ctx context.Context, params *StartMailboxExportJobInput, optFns ...func(*Options)) (*StartMailboxExportJobOutput, error) {
 	if params == nil {
 		params = &StartMailboxExportJobInput{}
@@ -37,13 +38,17 @@ type StartMailboxExportJobInput struct {
 	// This member is required.
 	ClientToken *string
 
-	// The identifier of the user or resource associated with the mailbox. The
-	// identifier can accept UserId or ResourceId, Username or Resourcename, or email.
-	// The following identity formats are available:
+	// The identifier of the user or resource associated with the mailbox.
+	//
+	// The identifier can accept UserId or ResourceId, Username or Resourcename, or
+	// email. The following identity formats are available:
+	//
 	//   - Entity ID: 12345678-1234-1234-1234-123456789012,
 	//   r-0123456789a0123456789b0123456789 , or
 	//   S-1-1-12-1234567890-123456789-123456789-1234
+	//
 	//   - Email address: entity@domain.tld
+	//
 	//   - Entity name: entity
 	//
 	// This member is required.
@@ -115,25 +120,25 @@ func (c *Client) addOperationStartMailboxExportJobMiddlewares(stack *middleware.
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -148,6 +153,9 @@ func (c *Client) addOperationStartMailboxExportJobMiddlewares(stack *middleware.
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opStartMailboxExportJobMiddleware(stack, options); err != nil {
 		return err
 	}
@@ -157,7 +165,7 @@ func (c *Client) addOperationStartMailboxExportJobMiddlewares(stack *middleware.
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opStartMailboxExportJob(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

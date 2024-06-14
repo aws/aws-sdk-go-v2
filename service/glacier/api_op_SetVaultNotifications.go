@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	glaciercust "github.com/aws/aws-sdk-go-v2/service/glacier/internal/customizations"
 	"github.com/aws/aws-sdk-go-v2/service/glacier/types"
 	"github.com/aws/smithy-go/middleware"
@@ -14,31 +13,38 @@ import (
 )
 
 // This operation configures notifications that will be sent when specific events
-// happen to a vault. By default, you don't get any notifications. To configure
-// vault notifications, send a PUT request to the notification-configuration
-// subresource of the vault. The request should include a JSON document that
-// provides an Amazon SNS topic and specific events for which you want Amazon S3
-// Glacier to send notifications to the topic. Amazon SNS topics must grant
-// permission to the vault to be allowed to publish notifications to the topic. You
-// can configure a vault to publish a notification for the following vault events:
+// happen to a vault. By default, you don't get any notifications.
+//
+// To configure vault notifications, send a PUT request to the
+// notification-configuration subresource of the vault. The request should include
+// a JSON document that provides an Amazon SNS topic and specific events for which
+// you want Amazon S3 Glacier to send notifications to the topic.
+//
+// Amazon SNS topics must grant permission to the vault to be allowed to publish
+// notifications to the topic. You can configure a vault to publish a notification
+// for the following vault events:
+//
 //   - ArchiveRetrievalCompleted This event occurs when a job that was initiated
-//     for an archive retrieval is completed ( InitiateJob ). The status of the
-//     completed job can be "Succeeded" or "Failed". The notification sent to the SNS
-//     topic is the same output as returned from DescribeJob .
+//     for an archive retrieval is completed (InitiateJob ). The status of the completed job can
+//     be "Succeeded" or "Failed". The notification sent to the SNS topic is the same
+//     output as returned from DescribeJob.
+//
 //   - InventoryRetrievalCompleted This event occurs when a job that was initiated
-//     for an inventory retrieval is completed ( InitiateJob ). The status of the
-//     completed job can be "Succeeded" or "Failed". The notification sent to the SNS
-//     topic is the same output as returned from DescribeJob .
+//     for an inventory retrieval is completed (InitiateJob ). The status of the completed job
+//     can be "Succeeded" or "Failed". The notification sent to the SNS topic is the
+//     same output as returned from DescribeJob.
 //
 // An AWS account has full permission to perform all operations (actions).
 // However, AWS Identity and Access Management (IAM) users don't have any
 // permissions by default. You must grant them explicit permission to perform
-// specific actions. For more information, see Access Control Using AWS Identity
-// and Access Management (IAM) (https://docs.aws.amazon.com/amazonglacier/latest/dev/using-iam-with-amazon-glacier.html)
-// . For conceptual information and underlying REST API, see Configuring Vault
-// Notifications in Amazon S3 Glacier (https://docs.aws.amazon.com/amazonglacier/latest/dev/configuring-notifications.html)
-// and Set Vault Notification Configuration  (https://docs.aws.amazon.com/amazonglacier/latest/dev/api-vault-notifications-put.html)
-// in the Amazon Glacier Developer Guide.
+// specific actions. For more information, see [Access Control Using AWS Identity and Access Management (IAM)].
+//
+// For conceptual information and underlying REST API, see [Configuring Vault Notifications in Amazon S3 Glacier] and [Set Vault Notification Configuration] in the Amazon
+// Glacier Developer Guide.
+//
+// [Set Vault Notification Configuration]: https://docs.aws.amazon.com/amazonglacier/latest/dev/api-vault-notifications-put.html
+// [Configuring Vault Notifications in Amazon S3 Glacier]: https://docs.aws.amazon.com/amazonglacier/latest/dev/configuring-notifications.html
+// [Access Control Using AWS Identity and Access Management (IAM)]: https://docs.aws.amazon.com/amazonglacier/latest/dev/using-iam-with-amazon-glacier.html
 func (c *Client) SetVaultNotifications(ctx context.Context, params *SetVaultNotificationsInput, optFns ...func(*Options)) (*SetVaultNotificationsOutput, error) {
 	if params == nil {
 		params = &SetVaultNotificationsInput{}
@@ -107,25 +113,25 @@ func (c *Client) addOperationSetVaultNotificationsMiddlewares(stack *middleware.
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -140,13 +146,16 @@ func (c *Client) addOperationSetVaultNotificationsMiddlewares(stack *middleware.
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpSetVaultNotificationsValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opSetVaultNotifications(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

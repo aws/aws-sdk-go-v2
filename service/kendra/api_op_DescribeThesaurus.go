@@ -6,14 +6,13 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/kendra/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
-// Gets information about an existing Amazon Kendra thesaurus.
+// Gets information about an Amazon Kendra thesaurus.
 func (c *Client) DescribeThesaurus(ctx context.Context, params *DescribeThesaurusInput, optFns ...func(*Options)) (*DescribeThesaurusOutput, error) {
 	if params == nil {
 		params = &DescribeThesaurusInput{}
@@ -77,9 +76,10 @@ type DescribeThesaurusOutput struct {
 
 	// The current status of the thesaurus. When the value is ACTIVE , queries are able
 	// to use the thesaurus. If the Status field value is FAILED , the ErrorMessage
-	// field provides more information. If the status is ACTIVE_BUT_UPDATE_FAILED , it
-	// means that Amazon Kendra could not ingest the new thesaurus file. The old
-	// thesaurus file is still active.
+	// field provides more information.
+	//
+	// If the status is ACTIVE_BUT_UPDATE_FAILED , it means that Amazon Kendra could
+	// not ingest the new thesaurus file. The old thesaurus file is still active.
 	Status types.ThesaurusStatus
 
 	// The number of synonym rules in the thesaurus file.
@@ -120,25 +120,25 @@ func (c *Client) addOperationDescribeThesaurusMiddlewares(stack *middleware.Stac
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -153,13 +153,16 @@ func (c *Client) addOperationDescribeThesaurusMiddlewares(stack *middleware.Stac
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDescribeThesaurusValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeThesaurus(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

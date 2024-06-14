@@ -951,7 +951,7 @@
                 "dataSource": {
                     "target": "com.amazonaws.cleanroomsml#S3ConfigMap",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon S3 bucket where the training data for the configured audience is stored.</p>",
+                        "smithy.api#documentation": "<p>Defines the Amazon S3 bucket where the seed audience for the generating audience is stored. A valid data source is a JSON line file in the following format:</p>\n         <p>\n            <code>{\"user_id\": \"111111\"}</code>\n         </p>\n         <p>\n            <code>{\"user_id\": \"222222\"}</code>\n         </p>\n         <p>\n            <code>...</code>\n         </p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -964,7 +964,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Defines the Amazon S3 bucket where the training data for the configured audience is stored.</p>"
+                "smithy.api#documentation": "<p>Defines the Amazon S3 bucket where the seed audience for the generating audience is stored.</p>"
             }
         },
         "com.amazonaws.cleanroomsml#AudienceGenerationJobList": {
@@ -1136,70 +1136,6 @@
                 "target": "com.amazonaws.cleanroomsml#AudienceModelSummary"
             }
         },
-        "com.amazonaws.cleanroomsml#AudienceModelMetric": {
-            "type": "structure",
-            "members": {
-                "type": {
-                    "target": "com.amazonaws.cleanroomsml#AudienceModelMetricType",
-                    "traits": {
-                        "smithy.api#documentation": "<p>The audience model metric.</p>",
-                        "smithy.api#required": {}
-                    }
-                },
-                "forTopKItemPredictions": {
-                    "target": "smithy.api#Integer",
-                    "traits": {
-                        "smithy.api#documentation": "<p>The number of users that were used to generate these model metrics.</p>",
-                        "smithy.api#required": {}
-                    }
-                },
-                "value": {
-                    "target": "smithy.api#Double",
-                    "traits": {
-                        "smithy.api#documentation": "<p>The value of the audience model metric</p>",
-                        "smithy.api#required": {}
-                    }
-                }
-            },
-            "traits": {
-                "smithy.api#documentation": "<p>The audience model metrics.</p>"
-            }
-        },
-        "com.amazonaws.cleanroomsml#AudienceModelMetricType": {
-            "type": "enum",
-            "members": {
-                "NORMALIZED_DISCOUNTED_CUMULATIVE_GAIN": {
-                    "target": "smithy.api#Unit",
-                    "traits": {
-                        "smithy.api#enumValue": "NORMALIZED_DISCOUNTED_CUMULATIVE_GAIN"
-                    }
-                },
-                "MEAN_RECIPROCAL_RANK": {
-                    "target": "smithy.api#Unit",
-                    "traits": {
-                        "smithy.api#enumValue": "MEAN_RECIPROCAL_RANK"
-                    }
-                },
-                "PRECISION": {
-                    "target": "smithy.api#Unit",
-                    "traits": {
-                        "smithy.api#enumValue": "PRECISION"
-                    }
-                },
-                "RECALL": {
-                    "target": "smithy.api#Unit",
-                    "traits": {
-                        "smithy.api#enumValue": "RECALL"
-                    }
-                }
-            }
-        },
-        "com.amazonaws.cleanroomsml#AudienceModelMetrics": {
-            "type": "list",
-            "member": {
-                "target": "com.amazonaws.cleanroomsml#AudienceModelMetric"
-            }
-        },
         "com.amazonaws.cleanroomsml#AudienceModelStatus": {
             "type": "enum",
             "members": {
@@ -1313,6 +1249,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The relevance scores of the generated audience.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "recallMetric": {
+                    "target": "smithy.api#Double",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The recall score of the generated audience. Recall is the percentage of the most similar users (by default, the most similar 20%) from a sample of the training data that are included in the seed audience by the audience generation job. Values range from 0-1, larger values indicate a better audience. A recall value approximately equal to the maximum bin size indicates that the audience model is equivalent to random selection.\n      </p>"
                     }
                 }
             },
@@ -1662,7 +1604,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A resource with that name already exists in this region.</p>",
+                "smithy.api#documentation": "<p>You can't complete this action because another resource depends on this resource.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 409
             }
@@ -1742,7 +1684,7 @@
                 "tags": {
                     "target": "com.amazonaws.cleanroomsml#TagMap",
                     "traits": {
-                        "smithy.api#documentation": "<p>The optional metadata that you apply to the resource to help you categorize and organize them. Each tag consists of a key and an optional value, both of which you define.</p>\n         <p>The following basic restrictions apply to tags:</p>\n         <ul>\n            <li>\n               <p>Maximum number of tags per resource - 50.</p>\n            </li>\n            <li>\n               <p>For each resource, each tag key must be unique, and each tag key can have only one value.</p>\n            </li>\n            <li>\n               <p>Maximum key length - 128 Unicode characters in UTF-8.</p>\n            </li>\n            <li>\n               <p>Maximum value length - 256 Unicode characters in UTF-8.</p>\n            </li>\n            <li>\n               <p>If your tagging schema is used across multiple services and resources, remember that other services may have restrictions on allowed characters. Generally allowed characters are: letters, numbers, and spaces representable in UTF-8, and the following characters: + - = . _ : / @.</p>\n            </li>\n            <li>\n               <p>Tag keys and values are case sensitive.</p>\n            </li>\n            <li>\n               <p>Do not use aws:, AWS:, or any upper or lowercase combination of such as a prefix for keys as it is reserved for AWS use. You cannot edit or delete tag keys with this prefix. Values can have this prefix. If a tag value has aws as its prefix but the key does not, then Forecast considers it to be a user tag and will count against the limit of 50 tags. Tags with only the key prefix of aws do not count against your tags per resource limit.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The optional metadata that you apply to the resource to help you categorize and organize them. Each tag consists of a key and an optional value, both of which you define.</p>\n         <p>The following basic restrictions apply to tags:</p>\n         <ul>\n            <li>\n               <p>Maximum number of tags per resource - 50.</p>\n            </li>\n            <li>\n               <p>For each resource, each tag key must be unique, and each tag key can have only one value.</p>\n            </li>\n            <li>\n               <p>Maximum key length - 128 Unicode characters in UTF-8.</p>\n            </li>\n            <li>\n               <p>Maximum value length - 256 Unicode characters in UTF-8.</p>\n            </li>\n            <li>\n               <p>If your tagging schema is used across multiple services and resources, remember that other services may have restrictions on allowed characters. Generally allowed characters are: letters, numbers, and spaces representable in UTF-8, and the following characters: + - = . _ : / @.</p>\n            </li>\n            <li>\n               <p>Tag keys and values are case sensitive.</p>\n            </li>\n            <li>\n               <p>Do not use aws:, AWS:, or any upper or lowercase combination of such as a prefix for keys as it is reserved for AWS use. You cannot edit or delete tag keys with this prefix. Values can have this prefix. If a tag value has aws as its prefix but the key does not, then Clean Rooms ML considers it to be a user tag and will count against the limit of 50 tags. Tags with only the key prefix of aws do not count against your tags per resource limit.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "description": {
@@ -1847,7 +1789,7 @@
                     "target": "com.amazonaws.cleanroomsml#MinMatchingSeedSize",
                     "traits": {
                         "smithy.api#default": 500,
-                        "smithy.api#documentation": "<p>The minimum number of users from the seed audience that must match with users in the training data of the audience model.</p>"
+                        "smithy.api#documentation": "<p>The minimum number of users from the seed audience that must match with users in the training data of the audience model. The default value is 500.</p>"
                     }
                 },
                 "audienceSizeConfig": {
@@ -1859,7 +1801,7 @@
                 "tags": {
                     "target": "com.amazonaws.cleanroomsml#TagMap",
                     "traits": {
-                        "smithy.api#documentation": "<p>The optional metadata that you apply to the resource to help you categorize and organize them. Each tag consists of a key and an optional value, both of which you define.</p>\n         <p>The following basic restrictions apply to tags:</p>\n         <ul>\n            <li>\n               <p>Maximum number of tags per resource - 50.</p>\n            </li>\n            <li>\n               <p>For each resource, each tag key must be unique, and each tag key can have only one value.</p>\n            </li>\n            <li>\n               <p>Maximum key length - 128 Unicode characters in UTF-8.</p>\n            </li>\n            <li>\n               <p>Maximum value length - 256 Unicode characters in UTF-8.</p>\n            </li>\n            <li>\n               <p>If your tagging schema is used across multiple services and resources, remember that other services may have restrictions on allowed characters. Generally allowed characters are: letters, numbers, and spaces representable in UTF-8, and the following characters: + - = . _ : / @.</p>\n            </li>\n            <li>\n               <p>Tag keys and values are case sensitive.</p>\n            </li>\n            <li>\n               <p>Do not use aws:, AWS:, or any upper or lowercase combination of such as a prefix for keys as it is reserved for AWS use. You cannot edit or delete tag keys with this prefix. Values can have this prefix. If a tag value has aws as its prefix but the key does not, then Forecast considers it to be a user tag and will count against the limit of 50 tags. Tags with only the key prefix of aws do not count against your tags per resource limit.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The optional metadata that you apply to the resource to help you categorize and organize them. Each tag consists of a key and an optional value, both of which you define.</p>\n         <p>The following basic restrictions apply to tags:</p>\n         <ul>\n            <li>\n               <p>Maximum number of tags per resource - 50.</p>\n            </li>\n            <li>\n               <p>For each resource, each tag key must be unique, and each tag key can have only one value.</p>\n            </li>\n            <li>\n               <p>Maximum key length - 128 Unicode characters in UTF-8.</p>\n            </li>\n            <li>\n               <p>Maximum value length - 256 Unicode characters in UTF-8.</p>\n            </li>\n            <li>\n               <p>If your tagging schema is used across multiple services and resources, remember that other services may have restrictions on allowed characters. Generally allowed characters are: letters, numbers, and spaces representable in UTF-8, and the following characters: + - = . _ : / @.</p>\n            </li>\n            <li>\n               <p>Tag keys and values are case sensitive.</p>\n            </li>\n            <li>\n               <p>Do not use aws:, AWS:, or any upper or lowercase combination of such as a prefix for keys as it is reserved for AWS use. You cannot edit or delete tag keys with this prefix. Values can have this prefix. If a tag value has aws as its prefix but the key does not, then Clean Rooms ML considers it to be a user tag and will count against the limit of 50 tags. Tags with only the key prefix of aws do not count against your tags per resource limit.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "childResourceTagOnCreatePolicy": {
@@ -1908,7 +1850,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Defines the information necessary to create a training dataset, or seed audience. In Clean Rooms ML, the <code>TrainingDataset</code> is metadata that points to a Glue table, which is read only during <code>AudienceModel</code> creation.</p>",
+                "smithy.api#documentation": "<p>Defines the information necessary to create a training dataset. In Clean Rooms ML, the <code>TrainingDataset</code> is metadata that points to a Glue table, which is read only during <code>AudienceModel</code> creation.</p>",
                 "smithy.api#http": {
                     "code": 200,
                     "method": "POST",
@@ -2424,7 +2366,7 @@
                 "metrics": {
                     "target": "com.amazonaws.cleanroomsml#AudienceQualityMetrics",
                     "traits": {
-                        "smithy.api#documentation": "<p>The relevance scores for different audience sizes. </p>"
+                        "smithy.api#documentation": "<p>The relevance scores for different audience sizes and the recall score of the generated audience. </p>"
                     }
                 },
                 "startedBy": {
@@ -2554,12 +2496,6 @@
                     "target": "com.amazonaws.cleanroomsml#StatusDetails",
                     "traits": {
                         "smithy.api#documentation": "<p>Details about the status of the audience model.</p>"
-                    }
-                },
-                "metrics": {
-                    "target": "com.amazonaws.cleanroomsml#AudienceModelMetrics",
-                    "traits": {
-                        "smithy.api#documentation": "<p>Accuracy metrics for the model.</p>"
                     }
                 },
                 "kmsKeyArn": {
@@ -3875,7 +3811,7 @@
                 "tags": {
                     "target": "com.amazonaws.cleanroomsml#TagMap",
                     "traits": {
-                        "smithy.api#documentation": "<p>The optional metadata that you apply to the resource to help you categorize and organize them. Each tag consists of a key and an optional value, both of which you define.</p>\n         <p>The following basic restrictions apply to tags:</p>\n         <ul>\n            <li>\n               <p>Maximum number of tags per resource - 50.</p>\n            </li>\n            <li>\n               <p>For each resource, each tag key must be unique, and each tag key can have only one value.</p>\n            </li>\n            <li>\n               <p>Maximum key length - 128 Unicode characters in UTF-8.</p>\n            </li>\n            <li>\n               <p>Maximum value length - 256 Unicode characters in UTF-8.</p>\n            </li>\n            <li>\n               <p>If your tagging schema is used across multiple services and resources, remember that other services may have restrictions on allowed characters. Generally allowed characters are: letters, numbers, and spaces representable in UTF-8, and the following characters: + - = . _ : / @.</p>\n            </li>\n            <li>\n               <p>Tag keys and values are case sensitive.</p>\n            </li>\n            <li>\n               <p>Do not use aws:, AWS:, or any upper or lowercase combination of such as a prefix for keys as it is reserved for AWS use. You cannot edit or delete tag keys with this prefix. Values can have this prefix. If a tag value has aws as its prefix but the key does not, then Forecast considers it to be a user tag and will count against the limit of 50 tags. Tags with only the key prefix of aws do not count against your tags per resource limit.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The optional metadata that you apply to the resource to help you categorize and organize them. Each tag consists of a key and an optional value, both of which you define.</p>\n         <p>The following basic restrictions apply to tags:</p>\n         <ul>\n            <li>\n               <p>Maximum number of tags per resource - 50.</p>\n            </li>\n            <li>\n               <p>For each resource, each tag key must be unique, and each tag key can have only one value.</p>\n            </li>\n            <li>\n               <p>Maximum key length - 128 Unicode characters in UTF-8.</p>\n            </li>\n            <li>\n               <p>Maximum value length - 256 Unicode characters in UTF-8.</p>\n            </li>\n            <li>\n               <p>If your tagging schema is used across multiple services and resources, remember that other services may have restrictions on allowed characters. Generally allowed characters are: letters, numbers, and spaces representable in UTF-8, and the following characters: + - = . _ : / @.</p>\n            </li>\n            <li>\n               <p>Tag keys and values are case sensitive.</p>\n            </li>\n            <li>\n               <p>Do not use aws:, AWS:, or any upper or lowercase combination of such as a prefix for keys as it is reserved for AWS use. You cannot edit or delete tag keys with this prefix. Values can have this prefix. If a tag value has aws as its prefix but the key does not, then Clean Rooms ML considers it to be a user tag and will count against the limit of 50 tags. Tags with only the key prefix of aws do not count against your tags per resource limit.</p>\n            </li>\n         </ul>"
                     }
                 }
             },
@@ -3924,8 +3860,7 @@
                 "smithy.api#length": {
                     "min": 1,
                     "max": 128
-                },
-                "smithy.api#pattern": "^(?!aws:).{1,128}$"
+                }
             }
         },
         "com.amazonaws.cleanroomsml#TagKeys": {
@@ -4013,7 +3948,7 @@
                 "tags": {
                     "target": "com.amazonaws.cleanroomsml#TagMap",
                     "traits": {
-                        "smithy.api#documentation": "<p>The optional metadata that you apply to the resource to help you categorize and organize them. Each tag consists of a key and an optional value, both of which you define.</p>\n         <p>The following basic restrictions apply to tags:</p>\n         <ul>\n            <li>\n               <p>Maximum number of tags per resource - 50.</p>\n            </li>\n            <li>\n               <p>For each resource, each tag key must be unique, and each tag key can have only one value.</p>\n            </li>\n            <li>\n               <p>Maximum key length - 128 Unicode characters in UTF-8.</p>\n            </li>\n            <li>\n               <p>Maximum value length - 256 Unicode characters in UTF-8.</p>\n            </li>\n            <li>\n               <p>If your tagging schema is used across multiple services and resources, remember that other services may have restrictions on allowed characters. Generally allowed characters are: letters, numbers, and spaces representable in UTF-8, and the following characters: + - = . _ : / @.</p>\n            </li>\n            <li>\n               <p>Tag keys and values are case sensitive.</p>\n            </li>\n            <li>\n               <p>Do not use aws:, AWS:, or any upper or lowercase combination of such as a prefix for keys as it is reserved for AWS use. You cannot edit or delete tag keys with this prefix. Values can have this prefix. If a tag value has aws as its prefix but the key does not, then Forecast considers it to be a user tag and will count against the limit of 50 tags. Tags with only the key prefix of aws do not count against your tags per resource limit.</p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>The optional metadata that you apply to the resource to help you categorize and organize them. Each tag consists of a key and an optional value, both of which you define.</p>\n         <p>The following basic restrictions apply to tags:</p>\n         <ul>\n            <li>\n               <p>Maximum number of tags per resource - 50.</p>\n            </li>\n            <li>\n               <p>For each resource, each tag key must be unique, and each tag key can have only one value.</p>\n            </li>\n            <li>\n               <p>Maximum key length - 128 Unicode characters in UTF-8.</p>\n            </li>\n            <li>\n               <p>Maximum value length - 256 Unicode characters in UTF-8.</p>\n            </li>\n            <li>\n               <p>If your tagging schema is used across multiple services and resources, remember that other services may have restrictions on allowed characters. Generally allowed characters are: letters, numbers, and spaces representable in UTF-8, and the following characters: + - = . _ : / @.</p>\n            </li>\n            <li>\n               <p>Tag keys and values are case sensitive.</p>\n            </li>\n            <li>\n               <p>Do not use aws:, AWS:, or any upper or lowercase combination of such as a prefix for keys as it is reserved for AWS use. You cannot edit or delete tag keys with this prefix. Values can have this prefix. If a tag value has aws as its prefix but the key does not, then Clean Rooms considers it to be a user tag and will count against the limit of 50 tags. Tags with only the key prefix of aws do not count against your tags per resource limit.</p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 }

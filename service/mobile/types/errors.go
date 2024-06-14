@@ -33,7 +33,8 @@ func (e *AccountActionRequiredException) ErrorCode() string {
 }
 func (e *AccountActionRequiredException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The request cannot be processed because some parameter is not valid or the
+//	The request cannot be processed because some parameter is not valid or the
+//
 // project state prevents the operation from being performed.
 type BadRequestException struct {
 	Message *string
@@ -60,7 +61,8 @@ func (e *BadRequestException) ErrorCode() string {
 }
 func (e *BadRequestException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The service has encountered an unexpected error condition which prevents it
+//	The service has encountered an unexpected error condition which prevents it
+//
 // from servicing the request.
 type InternalFailureException struct {
 	Message *string
@@ -87,7 +89,8 @@ func (e *InternalFailureException) ErrorCode() string {
 }
 func (e *InternalFailureException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
-// There are too many AWS Mobile Hub projects in the account or the account has
+//	There are too many AWS Mobile Hub projects in the account or the account has
+//
 // exceeded the maximum number of resources in some AWS service. You should create
 // another sub-account using AWS Organizations or remove some resources and retry
 // your request.
@@ -144,7 +147,8 @@ func (e *NotFoundException) ErrorCode() string {
 }
 func (e *NotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The service is temporarily unavailable. The request should be retried after
+//	The service is temporarily unavailable. The request should be retried after
+//
 // some time delay.
 type ServiceUnavailableException struct {
 	Message *string
@@ -173,7 +177,8 @@ func (e *ServiceUnavailableException) ErrorCode() string {
 }
 func (e *ServiceUnavailableException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
-// Too many requests have been received for this AWS account in too short a time.
+//	Too many requests have been received for this AWS account in too short a time.
+//
 // The request should be retried after some time delay.
 type TooManyRequestsException struct {
 	Message *string

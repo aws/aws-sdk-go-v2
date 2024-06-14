@@ -6,22 +6,26 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/transcribe/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Provides information about the specified Call Analytics job. To view the job's
-// status, refer to CallAnalyticsJobStatus . If the status is COMPLETED , the job
-// is finished. You can find your completed transcript at the URI specified in
-// TranscriptFileUri . If the status is FAILED , FailureReason provides details on
-// why your transcription job failed. If you enabled personally identifiable
-// information (PII) redaction, the redacted transcript appears at the location
-// specified in RedactedTranscriptFileUri . If you chose to redact the audio in
-// your media file, you can find your redacted media file at the location specified
-// in RedactedMediaFileUri . To get a list of your Call Analytics jobs, use the
-// operation.
+// Provides information about the specified Call Analytics job.
+//
+// To view the job's status, refer to CallAnalyticsJobStatus . If the status is
+// COMPLETED , the job is finished. You can find your completed transcript at the
+// URI specified in TranscriptFileUri . If the status is FAILED , FailureReason
+// provides details on why your transcription job failed.
+//
+// If you enabled personally identifiable information (PII) redaction, the
+// redacted transcript appears at the location specified in
+// RedactedTranscriptFileUri .
+//
+// If you chose to redact the audio in your media file, you can find your redacted
+// media file at the location specified in RedactedMediaFileUri .
+//
+// To get a list of your Call Analytics jobs, use the operation.
 func (c *Client) GetCallAnalyticsJob(ctx context.Context, params *GetCallAnalyticsJobInput, optFns ...func(*Options)) (*GetCallAnalyticsJobOutput, error) {
 	if params == nil {
 		params = &GetCallAnalyticsJobInput{}
@@ -82,25 +86,25 @@ func (c *Client) addOperationGetCallAnalyticsJobMiddlewares(stack *middleware.St
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -115,13 +119,16 @@ func (c *Client) addOperationGetCallAnalyticsJobMiddlewares(stack *middleware.St
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpGetCallAnalyticsJobValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetCallAnalyticsJob(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/wellarchitected/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -30,13 +29,19 @@ func (c *Client) GetLensVersionDifference(ctx context.Context, params *GetLensVe
 
 type GetLensVersionDifferenceInput struct {
 
-	// The alias of the lens. For Amazon Web Services official lenses, this is either
-	// the lens alias, such as serverless , or the lens ARN, such as
+	// The alias of the lens.
+	//
+	// For Amazon Web Services official lenses, this is either the lens alias, such as
+	// serverless , or the lens ARN, such as
 	// arn:aws:wellarchitected:us-east-1::lens/serverless . Note that some operations
 	// (such as ExportLens and CreateLensShare) are not permitted on Amazon Web
-	// Services official lenses. For custom lenses, this is the lens ARN, such as
+	// Services official lenses.
+	//
+	// For custom lenses, this is the lens ARN, such as
 	// arn:aws:wellarchitected:us-west-2:123456789012:lens/0123456789abcdef01234567890abcdef
-	// . Each lens is identified by its LensSummary$LensAlias .
+	// .
+	//
+	// Each lens is identified by its LensSummary$LensAlias.
 	//
 	// This member is required.
 	LensAlias *string
@@ -58,13 +63,19 @@ type GetLensVersionDifferenceOutput struct {
 	// The latest version of the lens.
 	LatestLensVersion *string
 
-	// The alias of the lens. For Amazon Web Services official lenses, this is either
-	// the lens alias, such as serverless , or the lens ARN, such as
+	// The alias of the lens.
+	//
+	// For Amazon Web Services official lenses, this is either the lens alias, such as
+	// serverless , or the lens ARN, such as
 	// arn:aws:wellarchitected:us-east-1::lens/serverless . Note that some operations
 	// (such as ExportLens and CreateLensShare) are not permitted on Amazon Web
-	// Services official lenses. For custom lenses, this is the lens ARN, such as
+	// Services official lenses.
+	//
+	// For custom lenses, this is the lens ARN, such as
 	// arn:aws:wellarchitected:us-west-2:123456789012:lens/0123456789abcdef01234567890abcdef
-	// . Each lens is identified by its LensSummary$LensAlias .
+	// .
+	//
+	// Each lens is identified by its LensSummary$LensAlias.
 	LensAlias *string
 
 	// The ARN for the lens.
@@ -104,25 +115,25 @@ func (c *Client) addOperationGetLensVersionDifferenceMiddlewares(stack *middlewa
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -137,13 +148,16 @@ func (c *Client) addOperationGetLensVersionDifferenceMiddlewares(stack *middlewa
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpGetLensVersionDifferenceValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetLensVersionDifference(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

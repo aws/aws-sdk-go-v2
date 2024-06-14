@@ -6,19 +6,19 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Stops an DataSync task execution that's in progress. The transfer of some files
 // are abruptly interrupted. File contents that're transferred to the destination
-// might be incomplete or inconsistent with the source files. However, if you start
-// a new task execution using the same task and allow it to finish, file content on
-// the destination will be complete and consistent. This applies to other
-// unexpected failures that interrupt a task execution. In all of these cases,
-// DataSync successfully completes the transfer when you start the next task
-// execution.
+// might be incomplete or inconsistent with the source files.
+//
+// However, if you start a new task execution using the same task and allow it to
+// finish, file content on the destination will be complete and consistent. This
+// applies to other unexpected failures that interrupt a task execution. In all of
+// these cases, DataSync successfully completes the transfer when you start the
+// next task execution.
 func (c *Client) CancelTaskExecution(ctx context.Context, params *CancelTaskExecutionInput, optFns ...func(*Options)) (*CancelTaskExecutionOutput, error) {
 	if params == nil {
 		params = &CancelTaskExecutionInput{}
@@ -74,25 +74,25 @@ func (c *Client) addOperationCancelTaskExecutionMiddlewares(stack *middleware.St
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -107,13 +107,16 @@ func (c *Client) addOperationCancelTaskExecutionMiddlewares(stack *middleware.St
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpCancelTaskExecutionValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCancelTaskExecution(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

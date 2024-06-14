@@ -13,10 +13,12 @@ import (
 
 // Creates a Dev Environment in Amazon CodeCatalyst, a cloud-based development
 // environment that you can use to quickly work on the code stored in the source
-// repositories of your project. When created in the Amazon CodeCatalyst console,
-// by default a Dev Environment is configured to have a 2 core processor, 4GB of
-// RAM, and 16GB of persistent storage. None of these defaults apply to a Dev
-// Environment created programmatically.
+// repositories of your project.
+//
+// When created in the Amazon CodeCatalyst console, by default a Dev Environment
+// is configured to have a 2 core processor, 4GB of RAM, and 16GB of persistent
+// storage. None of these defaults apply to a Dev Environment created
+// programmatically.
 func (c *Client) CreateDevEnvironment(ctx context.Context, params *CreateDevEnvironmentInput, optFns ...func(*Options)) (*CreateDevEnvironmentOutput, error) {
 	if params == nil {
 		params = &CreateDevEnvironmentInput{}
@@ -39,9 +41,10 @@ type CreateDevEnvironmentInput struct {
 	// This member is required.
 	InstanceType types.InstanceType
 
-	// Information about the amount of storage allocated to the Dev Environment. By
-	// default, a Dev Environment is configured to have 16GB of persistent storage when
-	// created from the Amazon CodeCatalyst console, but there is no default when
+	// Information about the amount of storage allocated to the Dev Environment.
+	//
+	// By default, a Dev Environment is configured to have 16GB of persistent storage
+	// when created from the Amazon CodeCatalyst console, but there is no default when
 	// programmatically creating a Dev Environment. Valid values for persistent storage
 	// are based on memory sizes in 16GB increments. Valid values are 16, 32, and 64.
 	//
@@ -68,9 +71,10 @@ type CreateDevEnvironmentInput struct {
 	ClientToken *string
 
 	// Information about the integrated development environment (IDE) configured for a
-	// Dev Environment. An IDE is required to create a Dev Environment. For Dev
-	// Environment creation, this field contains configuration information and must be
-	// provided.
+	// Dev Environment.
+	//
+	// An IDE is required to create a Dev Environment. For Dev Environment creation,
+	// this field contains configuration information and must be provided.
 	Ides []types.IdeConfiguration
 
 	// The amount of time the Dev Environment will run without any activity detected
@@ -82,7 +86,7 @@ type CreateDevEnvironmentInput struct {
 	// Environment.
 	Repositories []types.RepositoryInput
 
-	// The name of the connection to use connect to a Amazon VPC.
+	// The name of the connection that will be used to connect to Amazon VPC, if any.
 	VpcConnectionName *string
 
 	noSmithyDocumentSerde
@@ -137,22 +141,22 @@ func (c *Client) addOperationCreateDevEnvironmentMiddlewares(stack *middleware.S
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -167,13 +171,16 @@ func (c *Client) addOperationCreateDevEnvironmentMiddlewares(stack *middleware.S
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpCreateDevEnvironmentValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateDevEnvironment(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

@@ -6,15 +6,17 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/codeartifact/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns a list of RepositorySummary (https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_RepositorySummary.html)
-// objects. Each RepositorySummary contains information about a repository in the
-// specified Amazon Web Services account and that matches the input parameters.
+//	Returns a list of [RepositorySummary] objects. Each RepositorySummary contains information about
+//
+// a repository in the specified Amazon Web Services account and that matches the
+// input parameters.
+//
+// [RepositorySummary]: https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_RepositorySummary.html
 func (c *Client) ListRepositories(ctx context.Context, params *ListRepositoriesInput, optFns ...func(*Options)) (*ListRepositoriesOutput, error) {
 	if params == nil {
 		params = &ListRepositoriesInput{}
@@ -32,14 +34,14 @@ func (c *Client) ListRepositories(ctx context.Context, params *ListRepositoriesI
 
 type ListRepositoriesInput struct {
 
-	// The maximum number of results to return per page.
+	//  The maximum number of results to return per page.
 	MaxResults *int32
 
-	// The token for the next set of results. Use the value returned in the previous
+	//  The token for the next set of results. Use the value returned in the previous
 	// response in the next request to retrieve the next set of results.
 	NextToken *string
 
-	// A prefix used to filter returned repositories. Only repositories with names
+	//  A prefix used to filter returned repositories. Only repositories with names
 	// that start with repositoryPrefix are returned.
 	RepositoryPrefix *string
 
@@ -48,11 +50,13 @@ type ListRepositoriesInput struct {
 
 type ListRepositoriesOutput struct {
 
-	// If there are additional results, this is the token for the next set of results.
+	//  If there are additional results, this is the token for the next set of
+	// results.
 	NextToken *string
 
-	// The returned list of RepositorySummary (https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_RepositorySummary.html)
-	// objects.
+	//  The returned list of [RepositorySummary] objects.
+	//
+	// [RepositorySummary]: https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_RepositorySummary.html
 	Repositories []types.RepositorySummary
 
 	// Metadata pertaining to the operation's result.
@@ -83,25 +87,25 @@ func (c *Client) addOperationListRepositoriesMiddlewares(stack *middleware.Stack
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -116,10 +120,13 @@ func (c *Client) addOperationListRepositoriesMiddlewares(stack *middleware.Stack
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListRepositories(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -147,7 +154,7 @@ var _ ListRepositoriesAPIClient = (*Client)(nil)
 
 // ListRepositoriesPaginatorOptions is the paginator options for ListRepositories
 type ListRepositoriesPaginatorOptions struct {
-	// The maximum number of results to return per page.
+	//  The maximum number of results to return per page.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/storagegateway/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -35,9 +34,8 @@ func (c *Client) DescribeChapCredentials(ctx context.Context, params *DescribeCh
 // target.
 type DescribeChapCredentialsInput struct {
 
-	// The Amazon Resource Name (ARN) of the iSCSI volume target. Use the
-	// DescribeStorediSCSIVolumes operation to return to retrieve the TargetARN for
-	// specified VolumeARN.
+	// The Amazon Resource Name (ARN) of the iSCSI volume target. Use the DescribeStorediSCSIVolumes operation
+	// to return to retrieve the TargetARN for specified VolumeARN.
 	//
 	// This member is required.
 	TargetARN *string
@@ -48,16 +46,20 @@ type DescribeChapCredentialsInput struct {
 // A JSON object containing the following fields:
 type DescribeChapCredentialsOutput struct {
 
-	// An array of ChapInfo objects that represent CHAP credentials. Each object in
-	// the array contains CHAP credential information for one target-initiator pair. If
-	// no CHAP credentials are set, an empty array is returned. CHAP credential
-	// information is provided in a JSON object with the following fields:
+	// An array of ChapInfo objects that represent CHAP credentials. Each object in the array
+	// contains CHAP credential information for one target-initiator pair. If no CHAP
+	// credentials are set, an empty array is returned. CHAP credential information is
+	// provided in a JSON object with the following fields:
+	//
 	//   - InitiatorName: The iSCSI initiator that connects to the target.
+	//
 	//   - SecretToAuthenticateInitiator: The secret key that the initiator (for
 	//   example, the Windows client) must provide to participate in mutual CHAP with the
 	//   target.
+	//
 	//   - SecretToAuthenticateTarget: The secret key that the target must provide to
 	//   participate in mutual CHAP with the initiator (e.g. Windows client).
+	//
 	//   - TargetARN: The Amazon Resource Name (ARN) of the storage volume.
 	ChapCredentials []types.ChapInfo
 
@@ -89,25 +91,25 @@ func (c *Client) addOperationDescribeChapCredentialsMiddlewares(stack *middlewar
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -122,13 +124,16 @@ func (c *Client) addOperationDescribeChapCredentialsMiddlewares(stack *middlewar
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDescribeChapCredentialsValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeChapCredentials(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

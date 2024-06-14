@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -16,11 +15,13 @@ import (
 // On-Demand billing is stopped and the host goes into released state. The host ID
 // of Dedicated Hosts that have been released can no longer be specified in another
 // request, for example, to modify the host. You must stop or terminate all
-// instances on a host before it can be released. When Dedicated Hosts are
-// released, it may take some time for them to stop counting toward your limit and
-// you may receive capacity errors when trying to allocate new Dedicated Hosts.
-// Wait a few minutes and then try again. Released hosts still appear in a
-// DescribeHosts response.
+// instances on a host before it can be released.
+//
+// When Dedicated Hosts are released, it may take some time for them to stop
+// counting toward your limit and you may receive capacity errors when trying to
+// allocate new Dedicated Hosts. Wait a few minutes and then try again.
+//
+// Released hosts still appear in a DescribeHosts response.
 func (c *Client) ReleaseHosts(ctx context.Context, params *ReleaseHostsInput, optFns ...func(*Options)) (*ReleaseHostsOutput, error) {
 	if params == nil {
 		params = &ReleaseHostsInput{}
@@ -83,25 +84,25 @@ func (c *Client) addOperationReleaseHostsMiddlewares(stack *middleware.Stack, op
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -116,13 +117,16 @@ func (c *Client) addOperationReleaseHostsMiddlewares(stack *middleware.Stack, op
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpReleaseHostsValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opReleaseHosts(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

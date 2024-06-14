@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/cloudsearch/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -15,9 +14,10 @@ import (
 // Gets the expressions configured for the search domain. Can be limited to
 // specific expressions by name. By default, shows all expressions and includes any
 // pending changes to the configuration. Set the Deployed option to true to show
-// the active configuration and exclude pending changes. For more information, see
-// Configuring Expressions (http://docs.aws.amazon.com/cloudsearch/latest/developerguide/configuring-expressions.html)
+// the active configuration and exclude pending changes. For more information, see [Configuring Expressions]
 // in the Amazon CloudSearch Developer Guide.
+//
+// [Configuring Expressions]: http://docs.aws.amazon.com/cloudsearch/latest/developerguide/configuring-expressions.html
 func (c *Client) DescribeExpressions(ctx context.Context, params *DescribeExpressionsInput, optFns ...func(*Options)) (*DescribeExpressionsOutput, error) {
 	if params == nil {
 		params = &DescribeExpressionsInput{}
@@ -33,11 +33,10 @@ func (c *Client) DescribeExpressions(ctx context.Context, params *DescribeExpres
 	return out, nil
 }
 
-// Container for the parameters to the DescribeDomains operation. Specifies the
-// name of the domain you want to describe. To restrict the response to particular
-// expressions, specify the names of the expressions you want to describe. To show
-// the active configuration and exclude any pending changes, set the Deployed
-// option to true .
+// Container for the parameters to the DescribeDomains operation. Specifies the name of the
+// domain you want to describe. To restrict the response to particular expressions,
+// specify the names of the expressions you want to describe. To show the active
+// configuration and exclude any pending changes, set the Deployed option to true .
 type DescribeExpressionsInput struct {
 
 	// The name of the domain you want to describe.
@@ -49,8 +48,8 @@ type DescribeExpressionsInput struct {
 	// changes ( false ). Defaults to false .
 	Deployed *bool
 
-	// Limits the DescribeExpressions response to the specified expressions. If not
-	// specified, all expressions are shown.
+	// Limits the DescribeExpressions response to the specified expressions. If not specified, all
+	// expressions are shown.
 	ExpressionNames []string
 
 	noSmithyDocumentSerde
@@ -93,25 +92,25 @@ func (c *Client) addOperationDescribeExpressionsMiddlewares(stack *middleware.St
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -126,13 +125,16 @@ func (c *Client) addOperationDescribeExpressionsMiddlewares(stack *middleware.St
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDescribeExpressionsValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeExpressions(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

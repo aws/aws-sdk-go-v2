@@ -6,19 +6,21 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/support/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Returns the results of the Trusted Advisor check that has the specified check
-// ID. You can get the check IDs by calling the DescribeTrustedAdvisorChecks
-// operation. The response contains a TrustedAdvisorCheckResult object, which
-// contains these three objects:
-//   - TrustedAdvisorCategorySpecificSummary
-//   - TrustedAdvisorResourceDetail
-//   - TrustedAdvisorResourcesSummary
+// ID. You can get the check IDs by calling the DescribeTrustedAdvisorChecksoperation.
+//
+// The response contains a TrustedAdvisorCheckResult object, which contains these three objects:
+//
+// # TrustedAdvisorCategorySpecificSummary
+//
+// # TrustedAdvisorResourceDetail
+//
+// # TrustedAdvisorResourcesSummary
 //
 // In addition, the response contains these fields:
 //
@@ -35,14 +37,15 @@ import (
 //   - If you call the Amazon Web Services Support API from an account that
 //     doesn't have a Business, Enterprise On-Ramp, or Enterprise Support plan, the
 //     SubscriptionRequiredException error message appears. For information about
-//     changing your support plan, see Amazon Web Services Support (http://aws.amazon.com/premiumsupport/)
-//     .
+//     changing your support plan, see [Amazon Web Services Support].
 //
 // To call the Trusted Advisor operations in the Amazon Web Services Support API,
 // you must use the US East (N. Virginia) endpoint. Currently, the US West (Oregon)
 // and Europe (Ireland) endpoints don't support the Trusted Advisor operations. For
-// more information, see About the Amazon Web Services Support API (https://docs.aws.amazon.com/awssupport/latest/user/about-support-api.html#endpoint)
-// in the Amazon Web Services Support User Guide.
+// more information, see [About the Amazon Web Services Support API]in the Amazon Web Services Support User Guide.
+//
+// [Amazon Web Services Support]: http://aws.amazon.com/premiumsupport/
+// [About the Amazon Web Services Support API]: https://docs.aws.amazon.com/awssupport/latest/user/about-support-api.html#endpoint
 func (c *Client) DescribeTrustedAdvisorCheckResult(ctx context.Context, params *DescribeTrustedAdvisorCheckResultInput, optFns ...func(*Options)) (*DescribeTrustedAdvisorCheckResultOutput, error) {
 	if params == nil {
 		params = &DescribeTrustedAdvisorCheckResultInput{}
@@ -66,26 +69,38 @@ type DescribeTrustedAdvisorCheckResultInput struct {
 	CheckId *string
 
 	// The ISO 639-1 code for the language that you want your check results to appear
-	// in. The Amazon Web Services Support API currently supports the following
-	// languages for Trusted Advisor:
+	// in.
+	//
+	// The Amazon Web Services Support API currently supports the following languages
+	// for Trusted Advisor:
+	//
 	//   - Chinese, Simplified - zh
+	//
 	//   - Chinese, Traditional - zh_TW
+	//
 	//   - English - en
+	//
 	//   - French - fr
+	//
 	//   - German - de
+	//
 	//   - Indonesian - id
+	//
 	//   - Italian - it
+	//
 	//   - Japanese - ja
+	//
 	//   - Korean - ko
+	//
 	//   - Portuguese, Brazilian - pt_BR
+	//
 	//   - Spanish - es
 	Language *string
 
 	noSmithyDocumentSerde
 }
 
-// The result of the Trusted Advisor check returned by the
-// DescribeTrustedAdvisorCheckResult operation.
+// The result of the Trusted Advisor check returned by the DescribeTrustedAdvisorCheckResult operation.
 type DescribeTrustedAdvisorCheckResultOutput struct {
 
 	// The detailed results of the Trusted Advisor check.
@@ -119,25 +134,25 @@ func (c *Client) addOperationDescribeTrustedAdvisorCheckResultMiddlewares(stack 
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -152,13 +167,16 @@ func (c *Client) addOperationDescribeTrustedAdvisorCheckResultMiddlewares(stack 
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDescribeTrustedAdvisorCheckResultValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeTrustedAdvisorCheckResult(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

@@ -6,16 +6,15 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/opensearchserverless/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Update the OpenSearch Serverless settings for the current Amazon Web Services
-// account. For more information, see Managing capacity limits for Amazon
-// OpenSearch Serverless (https://docs.aws.amazon.com/opensearch-service/latest/developerguide/serverless-scaling.html)
-// .
+// account. For more information, see [Managing capacity limits for Amazon OpenSearch Serverless].
+//
+// [Managing capacity limits for Amazon OpenSearch Serverless]: https://docs.aws.amazon.com/opensearch-service/latest/developerguide/serverless-scaling.html
 func (c *Client) UpdateAccountSettings(ctx context.Context, params *UpdateAccountSettingsInput, optFns ...func(*Options)) (*UpdateAccountSettingsOutput, error) {
 	if params == nil {
 		params = &UpdateAccountSettingsInput{}
@@ -35,9 +34,9 @@ type UpdateAccountSettingsInput struct {
 
 	// The maximum capacity limits for all OpenSearch Serverless collections, in
 	// OpenSearch Compute Units (OCUs). These limits are used to scale your collections
-	// based on the current workload. For more information, see Managing capacity
-	// limits for Amazon OpenSearch Serverless (https://docs.aws.amazon.com/opensearch-service/latest/developerguide/serverless-scaling.html)
-	// .
+	// based on the current workload. For more information, see [Managing capacity limits for Amazon OpenSearch Serverless].
+	//
+	// [Managing capacity limits for Amazon OpenSearch Serverless]: https://docs.aws.amazon.com/opensearch-service/latest/developerguide/serverless-scaling.html
 	CapacityLimits *types.CapacityLimits
 
 	noSmithyDocumentSerde
@@ -77,25 +76,25 @@ func (c *Client) addOperationUpdateAccountSettingsMiddlewares(stack *middleware.
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -110,10 +109,13 @@ func (c *Client) addOperationUpdateAccountSettingsMiddlewares(stack *middleware.
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateAccountSettings(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

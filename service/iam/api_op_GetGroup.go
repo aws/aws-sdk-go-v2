@@ -6,13 +6,13 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/iam/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns a list of IAM users that are in the specified IAM group. You can
+//	Returns a list of IAM users that are in the specified IAM group. You can
+//
 // paginate the results using the MaxItems and Marker parameters.
 func (c *Client) GetGroup(ctx context.Context, params *GetGroupInput, optFns ...func(*Options)) (*GetGroupOutput, error) {
 	if params == nil {
@@ -31,10 +31,13 @@ func (c *Client) GetGroup(ctx context.Context, params *GetGroupInput, optFns ...
 
 type GetGroupInput struct {
 
-	// The name of the group. This parameter allows (through its regex pattern (http://wikipedia.org/wiki/regex)
-	// ) a string of characters consisting of upper and lowercase alphanumeric
-	// characters with no spaces. You can also include any of the following characters:
-	// _+=,.@-
+	// The name of the group.
+	//
+	// This parameter allows (through its [regex pattern]) a string of characters consisting of upper
+	// and lowercase alphanumeric characters with no spaces. You can also include any
+	// of the following characters: _+=,.@-
+	//
+	// [regex pattern]: http://wikipedia.org/wiki/regex
 	//
 	// This member is required.
 	GroupName *string
@@ -47,11 +50,13 @@ type GetGroupInput struct {
 
 	// Use this only when paginating results to indicate the maximum number of items
 	// you want in the response. If additional items exist beyond the maximum you
-	// specify, the IsTruncated response element is true . If you do not include this
-	// parameter, the number of items defaults to 100. Note that IAM might return fewer
-	// results, even when there are more results available. In that case, the
-	// IsTruncated response element returns true , and Marker contains a value to
-	// include in the subsequent call that tells the service where to continue from.
+	// specify, the IsTruncated response element is true .
+	//
+	// If you do not include this parameter, the number of items defaults to 100. Note
+	// that IAM might return fewer results, even when there are more results available.
+	// In that case, the IsTruncated response element returns true , and Marker
+	// contains a value to include in the subsequent call that tells the service where
+	// to continue from.
 	MaxItems *int32
 
 	noSmithyDocumentSerde
@@ -110,25 +115,25 @@ func (c *Client) addOperationGetGroupMiddlewares(stack *middleware.Stack, option
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -143,13 +148,16 @@ func (c *Client) addOperationGetGroupMiddlewares(stack *middleware.Stack, option
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpGetGroupValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetGroup(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -178,11 +186,13 @@ var _ GetGroupAPIClient = (*Client)(nil)
 type GetGroupPaginatorOptions struct {
 	// Use this only when paginating results to indicate the maximum number of items
 	// you want in the response. If additional items exist beyond the maximum you
-	// specify, the IsTruncated response element is true . If you do not include this
-	// parameter, the number of items defaults to 100. Note that IAM might return fewer
-	// results, even when there are more results available. In that case, the
-	// IsTruncated response element returns true , and Marker contains a value to
-	// include in the subsequent call that tells the service where to continue from.
+	// specify, the IsTruncated response element is true .
+	//
+	// If you do not include this parameter, the number of items defaults to 100. Note
+	// that IAM might return fewer results, even when there are more results available.
+	// In that case, the IsTruncated response element returns true , and Marker
+	// contains a value to include in the subsequent call that tells the service where
+	// to continue from.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

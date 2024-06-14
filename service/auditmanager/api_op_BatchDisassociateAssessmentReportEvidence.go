@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/auditmanager/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -30,17 +29,17 @@ func (c *Client) BatchDisassociateAssessmentReportEvidence(ctx context.Context, 
 
 type BatchDisassociateAssessmentReportEvidenceInput struct {
 
-	// The identifier for the assessment.
+	//  The identifier for the assessment.
 	//
 	// This member is required.
 	AssessmentId *string
 
-	// The identifier for the folder that the evidence is stored in.
+	//  The identifier for the folder that the evidence is stored in.
 	//
 	// This member is required.
 	EvidenceFolderId *string
 
-	// The list of evidence identifiers.
+	//  The list of evidence identifiers.
 	//
 	// This member is required.
 	EvidenceIds []string
@@ -50,11 +49,11 @@ type BatchDisassociateAssessmentReportEvidenceInput struct {
 
 type BatchDisassociateAssessmentReportEvidenceOutput struct {
 
-	// A list of errors that the BatchDisassociateAssessmentReportEvidence API
+	//  A list of errors that the BatchDisassociateAssessmentReportEvidence API
 	// returned.
 	Errors []types.AssessmentReportEvidenceError
 
-	// The identifier for the evidence.
+	//  The identifier for the evidence.
 	EvidenceIds []string
 
 	// Metadata pertaining to the operation's result.
@@ -85,25 +84,25 @@ func (c *Client) addOperationBatchDisassociateAssessmentReportEvidenceMiddleware
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -118,13 +117,16 @@ func (c *Client) addOperationBatchDisassociateAssessmentReportEvidenceMiddleware
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpBatchDisassociateAssessmentReportEvidenceValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opBatchDisassociateAssessmentReportEvidence(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

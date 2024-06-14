@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/quicksight/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -16,21 +15,31 @@ import (
 // experience in your website. This action can be used for any type of user
 // registered in an Amazon QuickSight account. Before you use this action, make
 // sure that you have configured the relevant Amazon QuickSight resource and
-// permissions. The following rules apply to the generated URL:
+// permissions.
+//
+// The following rules apply to the generated URL:
+//
 //   - It contains a temporary bearer token. It is valid for 5 minutes after it is
 //     generated. Once redeemed within this period, it cannot be re-used again.
-//   - The URL validity period should not be confused with the actual session
-//     lifetime that can be customized using the SessionLifetimeInMinutes (https://docs.aws.amazon.com/quicksight/latest/APIReference/API_GenerateEmbedUrlForRegisteredUser.html#QS-GenerateEmbedUrlForRegisteredUser-request-SessionLifetimeInMinutes)
-//     parameter. The resulting user session is valid for 15 minutes (minimum) to 10
-//     hours (maximum). The default session duration is 10 hours.
-//   - You are charged only when the URL is used or there is interaction with
-//     Amazon QuickSight.
 //
-// For more information, see Embedded Analytics (https://docs.aws.amazon.com/quicksight/latest/user/embedded-analytics.html)
-// in the Amazon QuickSight User Guide. For more information about the high-level
-// steps for embedding and for an interactive demo of the ways you can customize
-// embedding, visit the Amazon QuickSight Developer Portal (https://docs.aws.amazon.com/quicksight/latest/user/quicksight-dev-portal.html)
-// .
+//   - The URL validity period should not be confused with the actual session
+//     lifetime that can be customized using the [SessionLifetimeInMinutes]parameter.
+//
+// The resulting user session is valid for 15 minutes (minimum) to 10 hours
+//
+//	(maximum). The default session duration is 10 hours.
+//
+//	- You are charged only when the URL is used or there is interaction with
+//	Amazon QuickSight.
+//
+// For more information, see [Embedded Analytics] in the Amazon QuickSight User Guide.
+//
+// For more information about the high-level steps for embedding and for an
+// interactive demo of the ways you can customize embedding, visit the [Amazon QuickSight Developer Portal].
+//
+// [Embedded Analytics]: https://docs.aws.amazon.com/quicksight/latest/user/embedded-analytics.html
+// [Amazon QuickSight Developer Portal]: https://docs.aws.amazon.com/quicksight/latest/user/quicksight-dev-portal.html
+// [SessionLifetimeInMinutes]: https://docs.aws.amazon.com/quicksight/latest/APIReference/API_GenerateEmbedUrlForRegisteredUser.html#QS-GenerateEmbedUrlForRegisteredUser-request-SessionLifetimeInMinutes
 func (c *Client) GenerateEmbedUrlForRegisteredUser(ctx context.Context, params *GenerateEmbedUrlForRegisteredUserInput, optFns ...func(*Options)) (*GenerateEmbedUrlForRegisteredUserOutput, error) {
 	if params == nil {
 		params = &GenerateEmbedUrlForRegisteredUserInput{}
@@ -54,9 +63,10 @@ type GenerateEmbedUrlForRegisteredUserInput struct {
 	// This member is required.
 	AwsAccountId *string
 
-	// The experience you are embedding. For registered users, you can embed Amazon
-	// QuickSight dashboards, Amazon QuickSight visuals, the Amazon QuickSight Q search
-	// bar, or the entire Amazon QuickSight console.
+	// The experience that you want to embed. For registered users, you can embed
+	// Amazon QuickSight dashboards, Amazon QuickSight visuals, the Amazon QuickSight Q
+	// search bar, the Amazon QuickSight Generative Q&A experience, or the entire
+	// Amazon QuickSight console.
 	//
 	// This member is required.
 	ExperienceConfiguration *types.RegisteredUserEmbeddingExperienceConfiguration
@@ -70,9 +80,11 @@ type GenerateEmbedUrlForRegisteredUserInput struct {
 	// URL that is then embedded. This optional parameter overrides the static domains
 	// that are configured in the Manage QuickSight menu in the Amazon QuickSight
 	// console. Instead, it allows only the domains that you include in this parameter.
-	// You can list up to three domains or subdomains in each API call. To include all
-	// subdomains under a specific domain to the allow list, use * . For example,
-	// https://*.sapp.amazon.com includes all subdomains under https://sapp.amazon.com .
+	// You can list up to three domains or subdomains in each API call.
+	//
+	// To include all subdomains under a specific domain to the allow list, use * . For
+	// example, https://*.sapp.amazon.com includes all subdomains under
+	// https://sapp.amazon.com .
 	AllowedDomains []string
 
 	// How many minutes the session is valid. The session lifetime must be in [15-600]
@@ -84,8 +96,8 @@ type GenerateEmbedUrlForRegisteredUserInput struct {
 
 type GenerateEmbedUrlForRegisteredUserOutput struct {
 
-	// The embed URL for the Amazon QuickSight dashboard, visual, Q search bar, or
-	// console.
+	// The embed URL for the Amazon QuickSight dashboard, visual, Q search bar,
+	// Generative Q&A experience, or console.
 	//
 	// This member is required.
 	EmbedUrl *string
@@ -128,25 +140,25 @@ func (c *Client) addOperationGenerateEmbedUrlForRegisteredUserMiddlewares(stack 
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -161,13 +173,16 @@ func (c *Client) addOperationGenerateEmbedUrlForRegisteredUserMiddlewares(stack 
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpGenerateEmbedUrlForRegisteredUserValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGenerateEmbedUrlForRegisteredUser(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

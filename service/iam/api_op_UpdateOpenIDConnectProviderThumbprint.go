@@ -6,27 +6,31 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Replaces the existing list of server certificate thumbprints associated with an
 // OpenID Connect (OIDC) provider resource object with a new list of thumbprints.
-// The list that you pass with this operation completely replaces the existing list
-// of thumbprints. (The lists are not merged.) Typically, you need to update a
-// thumbprint only when the identity provider certificate changes, which occurs
-// rarely. However, if the provider's certificate does change, any attempt to
-// assume an IAM role that specifies the OIDC provider as a principal fails until
-// the certificate thumbprint is updated. Amazon Web Services secures communication
-// with some OIDC identity providers (IdPs) through our library of trusted root
-// certificate authorities (CAs) instead of using a certificate thumbprint to
-// verify your IdP server certificate. In these cases, your legacy thumbprint
-// remains in your configuration, but is no longer used for validation. These OIDC
-// IdPs include Auth0, GitHub, GitLab, Google, and those that use an Amazon S3
-// bucket to host a JSON Web Key Set (JWKS) endpoint. Trust for the OIDC provider
-// is derived from the provider certificate and is validated by the thumbprint.
-// Therefore, it is best to limit access to the
+//
+// The list that you pass with this operation completely replaces the existing
+// list of thumbprints. (The lists are not merged.)
+//
+// Typically, you need to update a thumbprint only when the identity provider
+// certificate changes, which occurs rarely. However, if the provider's certificate
+// does change, any attempt to assume an IAM role that specifies the OIDC provider
+// as a principal fails until the certificate thumbprint is updated.
+//
+// Amazon Web Services secures communication with some OIDC identity providers
+// (IdPs) through our library of trusted root certificate authorities (CAs) instead
+// of using a certificate thumbprint to verify your IdP server certificate. In
+// these cases, your legacy thumbprint remains in your configuration, but is no
+// longer used for validation. These OIDC IdPs include Auth0, GitHub, GitLab,
+// Google, and those that use an Amazon S3 bucket to host a JSON Web Key Set (JWKS)
+// endpoint.
+//
+// Trust for the OIDC provider is derived from the provider certificate and is
+// validated by the thumbprint. Therefore, it is best to limit access to the
 // UpdateOpenIDConnectProviderThumbprint operation to highly privileged users.
 func (c *Client) UpdateOpenIDConnectProviderThumbprint(ctx context.Context, params *UpdateOpenIDConnectProviderThumbprintInput, optFns ...func(*Options)) (*UpdateOpenIDConnectProviderThumbprintOutput, error) {
 	if params == nil {
@@ -47,15 +51,18 @@ type UpdateOpenIDConnectProviderThumbprintInput struct {
 
 	// The Amazon Resource Name (ARN) of the IAM OIDC provider resource object for
 	// which you want to update the thumbprint. You can get a list of OIDC provider
-	// ARNs by using the ListOpenIDConnectProviders operation. For more information
-	// about ARNs, see Amazon Resource Names (ARNs) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
-	// in the Amazon Web Services General Reference.
+	// ARNs by using the ListOpenIDConnectProvidersoperation.
+	//
+	// For more information about ARNs, see [Amazon Resource Names (ARNs)] in the Amazon Web Services General
+	// Reference.
+	//
+	// [Amazon Resource Names (ARNs)]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
 	//
 	// This member is required.
 	OpenIDConnectProviderArn *string
 
 	// A list of certificate thumbprints that are associated with the specified IAM
-	// OpenID Connect provider. For more information, see CreateOpenIDConnectProvider .
+	// OpenID Connect provider. For more information, see CreateOpenIDConnectProvider.
 	//
 	// This member is required.
 	ThumbprintList []string
@@ -92,25 +99,25 @@ func (c *Client) addOperationUpdateOpenIDConnectProviderThumbprintMiddlewares(st
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -125,13 +132,16 @@ func (c *Client) addOperationUpdateOpenIDConnectProviderThumbprintMiddlewares(st
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpUpdateOpenIDConnectProviderThumbprintValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateOpenIDConnectProviderThumbprint(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

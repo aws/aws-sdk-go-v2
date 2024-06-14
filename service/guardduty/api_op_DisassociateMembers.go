@@ -6,24 +6,40 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/guardduty/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Disassociates GuardDuty member accounts (from the current administrator
-// account) specified by the account IDs. When you disassociate an invited member
-// from a GuardDuty delegated administrator, the member account details obtained
-// from the CreateMembers (https://docs.aws.amazon.com/guardduty/latest/APIReference/API_CreateMembers.html)
-// API, including the associated email addresses, are retained. This is done so
-// that the delegated administrator can invoke the InviteMembers (https://docs.aws.amazon.com/guardduty/latest/APIReference/API_InviteMembers.html)
-// API without the need to invoke the CreateMembers API again. To remove the
-// details associated with a member account, the delegated administrator must
-// invoke the DeleteMembers (https://docs.aws.amazon.com/guardduty/latest/APIReference/API_DeleteMembers.html)
-// API. With autoEnableOrganizationMembers configuration for your organization set
-// to ALL , you'll receive an error if you attempt to disassociate a member account
+// account) specified by the account IDs.
+//
+// When you disassociate an invited member from a GuardDuty delegated
+// administrator, the member account details obtained from the [CreateMembers]API, including the
+// associated email addresses, are retained. This is done so that the delegated
+// administrator can invoke the [InviteMembers]API without the need to invoke the CreateMembers
+// API again. To remove the details associated with a member account, the delegated
+// administrator must invoke the [DeleteMembers]API.
+//
+// With autoEnableOrganizationMembers configuration for your organization set to
+// ALL , you'll receive an error if you attempt to disassociate a member account
 // before removing them from your organization.
+//
+// If you disassociate a member account that was added by invitation, the member
+// account details obtained from this API, including the associated email
+// addresses, will be retained. This is done so that the delegated administrator
+// can invoke the [InviteMembers]API without the need to invoke the CreateMembers API again. To
+// remove the details associated with a member account, the delegated administrator
+// must invoke the [DeleteMembers]API.
+//
+// When the member accounts added through Organizations are later disassociated,
+// you (administrator) can't invite them by calling the InviteMembers API. You can
+// create an association with these member accounts again only by calling the
+// CreateMembers API.
+//
+// [DeleteMembers]: https://docs.aws.amazon.com/guardduty/latest/APIReference/API_DeleteMembers.html
+// [CreateMembers]: https://docs.aws.amazon.com/guardduty/latest/APIReference/API_CreateMembers.html
+// [InviteMembers]: https://docs.aws.amazon.com/guardduty/latest/APIReference/API_InviteMembers.html
 func (c *Client) DisassociateMembers(ctx context.Context, params *DisassociateMembersInput, optFns ...func(*Options)) (*DisassociateMembersOutput, error) {
 	if params == nil {
 		params = &DisassociateMembersInput{}
@@ -92,25 +108,25 @@ func (c *Client) addOperationDisassociateMembersMiddlewares(stack *middleware.St
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -125,13 +141,16 @@ func (c *Client) addOperationDisassociateMembersMiddlewares(stack *middleware.St
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDisassociateMembersValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDisassociateMembers(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

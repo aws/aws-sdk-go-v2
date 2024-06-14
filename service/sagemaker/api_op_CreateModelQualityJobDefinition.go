@@ -6,15 +6,15 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates a definition for a job that monitors model quality and drift. For
-// information about model monitor, see Amazon SageMaker Model Monitor (https://docs.aws.amazon.com/sagemaker/latest/dg/model-monitor.html)
-// .
+// information about model monitor, see [Amazon SageMaker Model Monitor].
+//
+// [Amazon SageMaker Model Monitor]: https://docs.aws.amazon.com/sagemaker/latest/dg/model-monitor.html
 func (c *Client) CreateModelQualityJobDefinition(ctx context.Context, params *CreateModelQualityJobDefinitionInput, optFns ...func(*Options)) (*CreateModelQualityJobDefinitionOutput, error) {
 	if params == nil {
 		params = &CreateModelQualityJobDefinitionInput{}
@@ -72,9 +72,10 @@ type CreateModelQualityJobDefinitionInput struct {
 	// A time limit for how long the monitoring job is allowed to run before stopping.
 	StoppingCondition *types.MonitoringStoppingCondition
 
-	// (Optional) An array of key-value pairs. For more information, see  Using Cost
-	// Allocation Tags (https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html#allocation-whatURL)
-	// in the Amazon Web Services Billing and Cost Management User Guide.
+	// (Optional) An array of key-value pairs. For more information, see [Using Cost Allocation Tags] in the
+	// Amazon Web Services Billing and Cost Management User Guide.
+	//
+	// [Using Cost Allocation Tags]: https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html#allocation-whatURL
 	Tags []types.Tag
 
 	noSmithyDocumentSerde
@@ -115,25 +116,25 @@ func (c *Client) addOperationCreateModelQualityJobDefinitionMiddlewares(stack *m
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -148,13 +149,16 @@ func (c *Client) addOperationCreateModelQualityJobDefinitionMiddlewares(stack *m
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpCreateModelQualityJobDefinitionValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateModelQualityJobDefinition(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

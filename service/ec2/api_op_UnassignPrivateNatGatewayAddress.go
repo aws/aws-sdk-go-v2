@@ -6,23 +6,26 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Unassigns secondary private IPv4 addresses from a private NAT gateway. You
-// cannot unassign your primary private IP. For more information, see Edit
-// secondary IP address associations (https://docs.aws.amazon.com/vpc/latest/userguide/vpc-nat-gateway.html#nat-gateway-edit-secondary)
-// in the Amazon VPC User Guide. While unassigning is in progress, you cannot
-// assign/unassign additional IP addresses while the connections are being drained.
-// You are, however, allowed to delete the NAT gateway. A private IP address will
-// only be released at the end of MaxDrainDurationSeconds. The private IP addresses
-// stay associated and support the existing connections, but do not support any new
-// connections (new connections are distributed across the remaining assigned
-// private IP address). After the existing connections drain out, the private IP
-// addresses are released.
+// cannot unassign your primary private IP. For more information, see [Edit secondary IP address associations]in the
+// Amazon VPC User Guide.
+//
+// While unassigning is in progress, you cannot assign/unassign additional IP
+// addresses while the connections are being drained. You are, however, allowed to
+// delete the NAT gateway.
+//
+// A private IP address will only be released at the end of
+// MaxDrainDurationSeconds. The private IP addresses stay associated and support
+// the existing connections, but do not support any new connections (new
+// connections are distributed across the remaining assigned private IP address).
+// After the existing connections drain out, the private IP addresses are released.
+//
+// [Edit secondary IP address associations]: https://docs.aws.amazon.com/vpc/latest/userguide/vpc-nat-gateway.html#nat-gateway-edit-secondary
 func (c *Client) UnassignPrivateNatGatewayAddress(ctx context.Context, params *UnassignPrivateNatGatewayAddressInput, optFns ...func(*Options)) (*UnassignPrivateNatGatewayAddressOutput, error) {
 	if params == nil {
 		params = &UnassignPrivateNatGatewayAddressInput{}
@@ -99,25 +102,25 @@ func (c *Client) addOperationUnassignPrivateNatGatewayAddressMiddlewares(stack *
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -132,13 +135,16 @@ func (c *Client) addOperationUnassignPrivateNatGatewayAddressMiddlewares(stack *
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpUnassignPrivateNatGatewayAddressValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUnassignPrivateNatGatewayAddress(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

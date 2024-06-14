@@ -38,9 +38,9 @@ func (e *AccessPointAlreadyExists) ErrorCode() string {
 func (e *AccessPointAlreadyExists) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // Returned if the Amazon Web Services account has already created the maximum
-// number of access points allowed per file system. For more informaton, see
-// https://docs.aws.amazon.com/efs/latest/ug/limits.html#limits-efs-resources-per-account-per-region (https://docs.aws.amazon.com/efs/latest/ug/limits.html#limits-efs-resources-per-account-per-region)
-// .
+// number of access points allowed per file system. For more informaton, see [https://docs.aws.amazon.com/efs/latest/ug/limits.html#limits-efs-resources-per-account-per-region].
+//
+// [https://docs.aws.amazon.com/efs/latest/ug/limits.html#limits-efs-resources-per-account-per-region]: https://docs.aws.amazon.com/efs/latest/ug/limits.html#limits-efs-resources-per-account-per-region
 type AccessPointLimitExceeded struct {
 	Message *string
 
@@ -99,8 +99,9 @@ func (e *AccessPointNotFound) ErrorFault() smithy.ErrorFault { return smithy.Fau
 
 // Returned if the Availability Zone that was specified for a mount target is
 // different from the Availability Zone that was specified for One Zone storage.
-// For more information, see Regional and One Zone storage redundancy (https://docs.aws.amazon.com/efs/latest/ug/availability-durability.html)
-// .
+// For more information, see [Regional and One Zone storage redundancy].
+//
+// [Regional and One Zone storage redundancy]: https://docs.aws.amazon.com/efs/latest/ug/availability-durability.html
 type AvailabilityZonesMismatch struct {
 	Message *string
 
@@ -566,10 +567,11 @@ func (e *MountTargetNotFound) ErrorFault() smithy.ErrorFault { return smithy.Fau
 
 // The calling account has reached the limit for elastic network interfaces for
 // the specific Amazon Web Services Region. Either delete some network interfaces
-// or request that the account quota be raised. For more information, see Amazon
-// VPC Quotas (https://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_Appendix_Limits.html)
-// in the Amazon VPC User Guide (see the Network interfaces per Region entry in the
+// or request that the account quota be raised. For more information, see [Amazon VPC Quotas]in the
+// Amazon VPC User Guide (see the Network interfaces per Region entry in the
 // Network interfaces table).
+//
+// [Amazon VPC Quotas]: https://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_Appendix_Limits.html
 type NetworkInterfaceLimitExceeded struct {
 	Message *string
 
@@ -798,8 +800,9 @@ func (e *SubnetNotFound) ErrorCode() string {
 func (e *SubnetNotFound) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // Returned when the CreateAccessPoint API action is called too quickly and the
-// number of Access Points on the file system is nearing the limit of 120 (https://docs.aws.amazon.com/efs/latest/ug/limits.html#limits-efs-resources-per-account-per-region)
-// .
+// number of Access Points on the file system is nearing the [limit of 120].
+//
+// [limit of 120]: https://docs.aws.amazon.com/efs/latest/ug/limits.html#limits-efs-resources-per-account-per-region
 type ThrottlingException struct {
 	Message *string
 

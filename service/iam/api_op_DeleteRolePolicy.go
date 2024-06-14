@@ -6,16 +6,17 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Deletes the specified inline policy that is embedded in the specified IAM role.
-// A role can also have managed policies attached to it. To detach a managed policy
-// from a role, use DetachRolePolicy . For more information about policies, refer
-// to Managed policies and inline policies (https://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html)
-// in the IAM User Guide.
+//
+// A role can also have managed policies attached to it. To detach a managed
+// policy from a role, use DetachRolePolicy. For more information about policies, refer to [Managed policies and inline policies] in the
+// IAM User Guide.
+//
+// [Managed policies and inline policies]: https://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html
 func (c *Client) DeleteRolePolicy(ctx context.Context, params *DeleteRolePolicyInput, optFns ...func(*Options)) (*DeleteRolePolicyOutput, error) {
 	if params == nil {
 		params = &DeleteRolePolicyInput{}
@@ -33,19 +34,25 @@ func (c *Client) DeleteRolePolicy(ctx context.Context, params *DeleteRolePolicyI
 
 type DeleteRolePolicyInput struct {
 
-	// The name of the inline policy to delete from the specified IAM role. This
-	// parameter allows (through its regex pattern (http://wikipedia.org/wiki/regex) )
-	// a string of characters consisting of upper and lowercase alphanumeric characters
-	// with no spaces. You can also include any of the following characters: _+=,.@-
+	// The name of the inline policy to delete from the specified IAM role.
+	//
+	// This parameter allows (through its [regex pattern]) a string of characters consisting of upper
+	// and lowercase alphanumeric characters with no spaces. You can also include any
+	// of the following characters: _+=,.@-
+	//
+	// [regex pattern]: http://wikipedia.org/wiki/regex
 	//
 	// This member is required.
 	PolicyName *string
 
 	// The name (friendly name, not ARN) identifying the role that the policy is
-	// embedded in. This parameter allows (through its regex pattern (http://wikipedia.org/wiki/regex)
-	// ) a string of characters consisting of upper and lowercase alphanumeric
-	// characters with no spaces. You can also include any of the following characters:
-	// _+=,.@-
+	// embedded in.
+	//
+	// This parameter allows (through its [regex pattern]) a string of characters consisting of upper
+	// and lowercase alphanumeric characters with no spaces. You can also include any
+	// of the following characters: _+=,.@-
+	//
+	// [regex pattern]: http://wikipedia.org/wiki/regex
 	//
 	// This member is required.
 	RoleName *string
@@ -82,25 +89,25 @@ func (c *Client) addOperationDeleteRolePolicyMiddlewares(stack *middleware.Stack
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -115,13 +122,16 @@ func (c *Client) addOperationDeleteRolePolicyMiddlewares(stack *middleware.Stack
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDeleteRolePolicyValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteRolePolicy(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

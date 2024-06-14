@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/fsx/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -46,9 +45,10 @@ type UpdateDataRepositoryAssociationInput struct {
 	// For files imported from a data repository, this value determines the stripe
 	// count and maximum amount of data per file (in MiB) stored on a single physical
 	// disk. The maximum number of disks that a single file can be striped across is
-	// limited by the total number of disks that make up the file system. The default
-	// chunk size is 1,024 MiB (1 GiB) and can go as high as 512,000 MiB (500 GiB).
-	// Amazon S3 objects have a maximum size of 5 TB.
+	// limited by the total number of disks that make up the file system.
+	//
+	// The default chunk size is 1,024 MiB (1 GiB) and can go as high as 512,000 MiB
+	// (500 GiB). Amazon S3 objects have a maximum size of 5 TB.
 	ImportedFileChunkSize *int32
 
 	// The configuration for an Amazon S3 data repository linked to an Amazon FSx
@@ -94,25 +94,25 @@ func (c *Client) addOperationUpdateDataRepositoryAssociationMiddlewares(stack *m
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -127,6 +127,9 @@ func (c *Client) addOperationUpdateDataRepositoryAssociationMiddlewares(stack *m
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opUpdateDataRepositoryAssociationMiddleware(stack, options); err != nil {
 		return err
 	}
@@ -136,7 +139,7 @@ func (c *Client) addOperationUpdateDataRepositoryAssociationMiddlewares(stack *m
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateDataRepositoryAssociation(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

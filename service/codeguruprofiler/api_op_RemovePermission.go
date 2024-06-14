@@ -6,20 +6,21 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/codeguruprofiler/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Removes permissions from a profiling group's resource-based policy that are
+//	Removes permissions from a profiling group's resource-based policy that are
+//
 // provided using an action group. The one supported action group that can be
 // removed is agentPermission which grants ConfigureAgent and PostAgent
-// permissions. For more information, see Resource-based policies in CodeGuru
-// Profiler (https://docs.aws.amazon.com/codeguru/latest/profiler-ug/resource-based-policies.html)
-// in the Amazon CodeGuru Profiler User Guide, ConfigureAgent (https://docs.aws.amazon.com/codeguru/latest/profiler-api/API_ConfigureAgent.html)
-// , and PostAgentProfile (https://docs.aws.amazon.com/codeguru/latest/profiler-api/API_PostAgentProfile.html)
-// .
+// permissions. For more information, see [Resource-based policies in CodeGuru Profiler]in the Amazon CodeGuru Profiler User
+// Guide, [ConfigureAgent]ConfigureAgent , and [PostAgentProfile]PostAgentProfile .
+//
+// [ConfigureAgent]: https://docs.aws.amazon.com/codeguru/latest/profiler-api/API_ConfigureAgent.html
+// [Resource-based policies in CodeGuru Profiler]: https://docs.aws.amazon.com/codeguru/latest/profiler-ug/resource-based-policies.html
+// [PostAgentProfile]: https://docs.aws.amazon.com/codeguru/latest/profiler-api/API_PostAgentProfile.html
 func (c *Client) RemovePermission(ctx context.Context, params *RemovePermissionInput, optFns ...func(*Options)) (*RemovePermissionOutput, error) {
 	if params == nil {
 		params = &RemovePermissionInput{}
@@ -38,9 +39,10 @@ func (c *Client) RemovePermission(ctx context.Context, params *RemovePermissionI
 // The structure representing the removePermissionRequest .
 type RemovePermissionInput struct {
 
-	// Specifies an action group that contains the permissions to remove from a
+	//  Specifies an action group that contains the permissions to remove from a
 	// profiling group's resource-based policy. One action group is supported,
-	// agentPermissions , which grants ConfigureAgent and PostAgentProfile permissions.
+	// agentPermissions , which grants ConfigureAgent and PostAgentProfile
+	// permissions.
 	//
 	// This member is required.
 	ActionGroup types.ActionGroup
@@ -50,7 +52,7 @@ type RemovePermissionInput struct {
 	// This member is required.
 	ProfilingGroupName *string
 
-	// A universally unique identifier (UUID) for the revision of the resource-based
+	//  A universally unique identifier (UUID) for the revision of the resource-based
 	// policy from which you want to remove permissions.
 	//
 	// This member is required.
@@ -62,13 +64,13 @@ type RemovePermissionInput struct {
 // The structure representing the removePermissionResponse .
 type RemovePermissionOutput struct {
 
-	// The JSON-formatted resource-based policy on the profiling group after the
+	//  The JSON-formatted resource-based policy on the profiling group after the
 	// specified permissions were removed.
 	//
 	// This member is required.
 	Policy *string
 
-	// A universally unique identifier (UUID) for the revision of the resource-based
+	//  A universally unique identifier (UUID) for the revision of the resource-based
 	// policy after the specified permissions were removed. The updated JSON-formatted
 	// policy is in the policy element of the response.
 	//
@@ -103,25 +105,25 @@ func (c *Client) addOperationRemovePermissionMiddlewares(stack *middleware.Stack
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -136,13 +138,16 @@ func (c *Client) addOperationRemovePermissionMiddlewares(stack *middleware.Stack
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpRemovePermissionValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opRemovePermission(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

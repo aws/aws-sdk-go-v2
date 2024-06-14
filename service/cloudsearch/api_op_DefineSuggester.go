@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/cloudsearch/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -15,9 +14,10 @@ import (
 // Configures a suggester for a domain. A suggester enables you to display
 // possible matches before users finish typing their queries. When you configure a
 // suggester, you must specify the name of the text field you want to search for
-// possible matches and a unique name for the suggester. For more information, see
-// Getting Search Suggestions (http://docs.aws.amazon.com/cloudsearch/latest/developerguide/getting-suggestions.html)
+// possible matches and a unique name for the suggester. For more information, see [Getting Search Suggestions]
 // in the Amazon CloudSearch Developer Guide.
+//
+// [Getting Search Suggestions]: http://docs.aws.amazon.com/cloudsearch/latest/developerguide/getting-suggestions.html
 func (c *Client) DefineSuggester(ctx context.Context, params *DefineSuggesterInput, optFns ...func(*Options)) (*DefineSuggesterOutput, error) {
 	if params == nil {
 		params = &DefineSuggesterInput{}
@@ -33,8 +33,8 @@ func (c *Client) DefineSuggester(ctx context.Context, params *DefineSuggesterInp
 	return out, nil
 }
 
-// Container for the parameters to the DefineSuggester operation. Specifies the
-// name of the domain you want to update and the suggester configuration.
+// Container for the parameters to the DefineSuggester operation. Specifies the name of the
+// domain you want to update and the suggester configuration.
 type DefineSuggesterInput struct {
 
 	// A string that represents the name of a domain. Domain names are unique across
@@ -92,25 +92,25 @@ func (c *Client) addOperationDefineSuggesterMiddlewares(stack *middleware.Stack,
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -125,13 +125,16 @@ func (c *Client) addOperationDefineSuggesterMiddlewares(stack *middleware.Stack,
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDefineSuggesterValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDefineSuggester(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

@@ -7,7 +7,8 @@ import (
 	smithy "github.com/aws/smithy-go"
 )
 
-// This exception is thrown when a request is denied per access permissions
+// The request is denied because of missing access permissions. Check your
+// permissions and retry your request.
 type AccessDeniedException struct {
 	Message *string
 
@@ -33,8 +34,7 @@ func (e *AccessDeniedException) ErrorCode() string {
 }
 func (e *AccessDeniedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// This exception is thrown when a request fails due to dependency like Lambda,
-// Bedrock, STS resource
+// There was an issue with a dependency due to a server issue. Retry your request.
 type BadGatewayException struct {
 	Message *string
 
@@ -62,7 +62,8 @@ func (e *BadGatewayException) ErrorCode() string {
 }
 func (e *BadGatewayException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
-// This exception is thrown when there is a conflict performing an operation
+// There was a conflict performing an operation. Resolve the conflict and retry
+// your request.
 type ConflictException struct {
 	Message *string
 
@@ -88,8 +89,8 @@ func (e *ConflictException) ErrorCode() string {
 }
 func (e *ConflictException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// This exception is thrown when a request fails due to dependency like Lambda,
-// Bedrock, STS resource due to a customer fault (i.e. bad configuration)
+// There was an issue with a dependency. Check the resource configurations and
+// retry the request.
 type DependencyFailedException struct {
 	Message *string
 
@@ -117,8 +118,7 @@ func (e *DependencyFailedException) ErrorCode() string {
 }
 func (e *DependencyFailedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// This exception is thrown if there was an unexpected error during processing of
-// request
+// An internal server error occurred. Retry your request.
 type InternalServerException struct {
 	Message *string
 
@@ -144,8 +144,8 @@ func (e *InternalServerException) ErrorCode() string {
 }
 func (e *InternalServerException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
-// This exception is thrown when a resource referenced by the operation does not
-// exist
+// The specified resource Amazon Resource Name (ARN) was not found. Check the
+// Amazon Resource Name (ARN) and try your request again.
 type ResourceNotFoundException struct {
 	Message *string
 
@@ -171,7 +171,7 @@ func (e *ResourceNotFoundException) ErrorCode() string {
 }
 func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// This exception is thrown when a request is made beyond the service quota
+// The number of requests exceeds the service quota. Resubmit your request later.
 type ServiceQuotaExceededException struct {
 	Message *string
 
@@ -197,7 +197,7 @@ func (e *ServiceQuotaExceededException) ErrorCode() string {
 }
 func (e *ServiceQuotaExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// This exception is thrown when the number of requests exceeds the limit
+// The number of requests exceeds the limit. Resubmit your request later.
 type ThrottlingException struct {
 	Message *string
 
@@ -223,7 +223,7 @@ func (e *ThrottlingException) ErrorCode() string {
 }
 func (e *ThrottlingException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// This exception is thrown when the request's input validation fails
+// Input validation failed. Check your request parameters and retry the request.
 type ValidationException struct {
 	Message *string
 

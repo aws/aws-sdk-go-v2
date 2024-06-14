@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/configservice/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -15,11 +14,13 @@ import (
 // Saves a new query or updates an existing saved query. The QueryName must be
 // unique for a single Amazon Web Services account and a single Amazon Web Services
 // Region. You can create upto 300 queries in a single Amazon Web Services account
-// and a single Amazon Web Services Region. PutStoredQuery is an idempotent API.
-// Subsequent requests won’t create a duplicate resource if one was already
-// created. If a following request has different tags values, Config will ignore
-// these differences and treat it as an idempotent request of the previous. In this
-// case, tags will not be updated, even if they are different.
+// and a single Amazon Web Services Region.
+//
+// PutStoredQuery is an idempotent API. Subsequent requests won’t create a
+// duplicate resource if one was already created. If a following request has
+// different tags values, Config will ignore these differences and treat it as an
+// idempotent request of the previous. In this case, tags will not be updated,
+// even if they are different.
 func (c *Client) PutStoredQuery(ctx context.Context, params *PutStoredQueryInput, optFns ...func(*Options)) (*PutStoredQueryOutput, error) {
 	if params == nil {
 		params = &PutStoredQueryInput{}
@@ -38,9 +39,11 @@ func (c *Client) PutStoredQuery(ctx context.Context, params *PutStoredQueryInput
 type PutStoredQueryInput struct {
 
 	// A list of StoredQuery objects. The mandatory fields are QueryName and Expression
-	// . When you are creating a query, you must provide a query name and an
-	// expression. When you are updating a query, you must provide a query name but
-	// updating the description is optional.
+	// .
+	//
+	// When you are creating a query, you must provide a query name and an expression.
+	// When you are updating a query, you must provide a query name but updating the
+	// description is optional.
 	//
 	// This member is required.
 	StoredQuery *types.StoredQuery
@@ -85,25 +88,25 @@ func (c *Client) addOperationPutStoredQueryMiddlewares(stack *middleware.Stack, 
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -118,13 +121,16 @@ func (c *Client) addOperationPutStoredQueryMiddlewares(stack *middleware.Stack, 
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpPutStoredQueryValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opPutStoredQuery(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

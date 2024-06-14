@@ -13,8 +13,9 @@ const (
 )
 
 // Values returns all known values for AttachmentStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (AttachmentStatus) Values() []AttachmentStatus {
 	return []AttachmentStatus{
 		"ATTACHING",
@@ -38,8 +39,9 @@ const (
 )
 
 // Values returns all known values for ExecutionState. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ExecutionState) Values() []ExecutionState {
 	return []ExecutionState{
 		"QUEUED",
@@ -65,8 +67,9 @@ const (
 )
 
 // Values returns all known values for InstanceStateName. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (InstanceStateName) Values() []InstanceStateName {
 	return []InstanceStateName{
 		"PENDING",
@@ -87,8 +90,9 @@ const (
 )
 
 // Values returns all known values for IpAddressAssignment. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (IpAddressAssignment) Values() []IpAddressAssignment {
 	return []IpAddressAssignment{
 		"DHCP",
@@ -108,8 +112,9 @@ const (
 )
 
 // Values returns all known values for PhysicalConnectorType. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (PhysicalConnectorType) Values() []PhysicalConnectorType {
 	return []PhysicalConnectorType{
 		"RJ45",
@@ -130,8 +135,9 @@ const (
 )
 
 // Values returns all known values for TaskState. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (TaskState) Values() []TaskState {
 	return []TaskState{
 		"IN_PROGRESS",
@@ -150,8 +156,9 @@ const (
 )
 
 // Values returns all known values for UnlockState. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (UnlockState) Values() []UnlockState {
 	return []UnlockState{
 		"UNLOCKED",

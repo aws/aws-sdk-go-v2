@@ -6,19 +6,20 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/opsworks/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Runs deployment or stack commands. For more information, see Deploying Apps (https://docs.aws.amazon.com/opsworks/latest/userguide/workingapps-deploying.html)
-// and Run Stack Commands (https://docs.aws.amazon.com/opsworks/latest/userguide/workingstacks-commands.html)
-// . Required Permissions: To use this action, an IAM user must have a Deploy or
+// Runs deployment or stack commands. For more information, see [Deploying Apps] and [Run Stack Commands].
+//
+// Required Permissions: To use this action, an IAM user must have a Deploy or
 // Manage permissions level for the stack, or an attached policy that explicitly
-// grants permissions. For more information on user permissions, see Managing User
-// Permissions (https://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html)
-// .
+// grants permissions. For more information on user permissions, see [Managing User Permissions].
+//
+// [Run Stack Commands]: https://docs.aws.amazon.com/opsworks/latest/userguide/workingstacks-commands.html
+// [Deploying Apps]: https://docs.aws.amazon.com/opsworks/latest/userguide/workingapps-deploying.html
+// [Managing User Permissions]: https://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html
 func (c *Client) CreateDeployment(ctx context.Context, params *CreateDeploymentInput, optFns ...func(*Options)) (*CreateDeploymentOutput, error) {
 	if params == nil {
 		params = &CreateDeploymentInput{}
@@ -56,11 +57,14 @@ type CreateDeploymentInput struct {
 
 	// A string that contains user-defined, custom JSON. You can use this parameter to
 	// override some corresponding default stack configuration JSON values. The string
-	// should be in the following format: "{\"key1\": \"value1\", \"key2\":
-	// \"value2\",...}" For more information about custom JSON, see Use Custom JSON to
-	// Modify the Stack Configuration Attributes (https://docs.aws.amazon.com/opsworks/latest/userguide/workingstacks-json.html)
-	// and Overriding Attributes With Custom JSON (https://docs.aws.amazon.com/opsworks/latest/userguide/workingcookbook-json-override.html)
-	// .
+	// should be in the following format:
+	//
+	//     "{\"key1\": \"value1\", \"key2\": \"value2\",...}"
+	//
+	// For more information about custom JSON, see [Use Custom JSON to Modify the Stack Configuration Attributes] and [Overriding Attributes With Custom JSON].
+	//
+	// [Overriding Attributes With Custom JSON]: https://docs.aws.amazon.com/opsworks/latest/userguide/workingcookbook-json-override.html
+	// [Use Custom JSON to Modify the Stack Configuration Attributes]: https://docs.aws.amazon.com/opsworks/latest/userguide/workingstacks-json.html
 	CustomJson *string
 
 	// The instance IDs for the deployment targets.
@@ -107,25 +111,25 @@ func (c *Client) addOperationCreateDeploymentMiddlewares(stack *middleware.Stack
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -140,13 +144,16 @@ func (c *Client) addOperationCreateDeploymentMiddlewares(stack *middleware.Stack
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpCreateDeploymentValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateDeployment(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

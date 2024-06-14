@@ -6,17 +6,18 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// The GetFileUploadURL operation generates and returns a temporary URL. You use
+//	The GetFileUploadURL operation generates and returns a temporary URL. You use
+//
 // the temporary URL to retrieve a file uploaded by a Worker as an answer to a
 // FileUploadAnswer question for a HIT. The temporary URL is generated the instant
 // the GetFileUploadURL operation is called, and is valid for 60 seconds. You can
 // get a temporary file upload URL any time until the HIT is disposed. After the
 // HIT is disposed, any uploaded files are deleted, and cannot be retrieved.
+//
 // Pending Deprecation on December 12, 2017. The Answer Specification
 //
 // structure will no longer support the FileUploadAnswer element to be used for
@@ -55,7 +56,7 @@ type GetFileUploadURLInput struct {
 
 type GetFileUploadURLOutput struct {
 
-	// A temporary URL for the file that the Worker uploaded for the answer.
+	//  A temporary URL for the file that the Worker uploaded for the answer.
 	FileUploadURL *string
 
 	// Metadata pertaining to the operation's result.
@@ -86,25 +87,25 @@ func (c *Client) addOperationGetFileUploadURLMiddlewares(stack *middleware.Stack
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -119,13 +120,16 @@ func (c *Client) addOperationGetFileUploadURLMiddlewares(stack *middleware.Stack
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpGetFileUploadURLValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetFileUploadURL(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

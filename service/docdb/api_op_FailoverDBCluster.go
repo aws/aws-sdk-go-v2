@@ -6,18 +6,20 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/docdb/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Forces a failover for a cluster. A failover for a cluster promotes one of the
-// Amazon DocumentDB replicas (read-only instances) in the cluster to be the
-// primary instance (the cluster writer). If the primary instance fails, Amazon
-// DocumentDB automatically fails over to an Amazon DocumentDB replica, if one
-// exists. You can force a failover when you want to simulate a failure of a
-// primary instance for testing.
+// Forces a failover for a cluster.
+//
+// A failover for a cluster promotes one of the Amazon DocumentDB replicas
+// (read-only instances) in the cluster to be the primary instance (the cluster
+// writer).
+//
+// If the primary instance fails, Amazon DocumentDB automatically fails over to an
+// Amazon DocumentDB replica, if one exists. You can force a failover when you want
+// to simulate a failure of a primary instance for testing.
 func (c *Client) FailoverDBCluster(ctx context.Context, params *FailoverDBClusterInput, optFns ...func(*Options)) (*FailoverDBClusterOutput, error) {
 	if params == nil {
 		params = &FailoverDBClusterInput{}
@@ -33,17 +35,21 @@ func (c *Client) FailoverDBCluster(ctx context.Context, params *FailoverDBCluste
 	return out, nil
 }
 
-// Represents the input to FailoverDBCluster .
+// Represents the input to FailoverDBCluster.
 type FailoverDBClusterInput struct {
 
 	// A cluster identifier to force a failover for. This parameter is not case
-	// sensitive. Constraints:
+	// sensitive.
+	//
+	// Constraints:
+	//
 	//   - Must match the identifier of an existing DBCluster .
 	DBClusterIdentifier *string
 
-	// The name of the instance to promote to the primary instance. You must specify
-	// the instance identifier for an Amazon DocumentDB replica in the cluster. For
-	// example, mydbcluster-replica1 .
+	// The name of the instance to promote to the primary instance.
+	//
+	// You must specify the instance identifier for an Amazon DocumentDB replica in
+	// the cluster. For example, mydbcluster-replica1 .
 	TargetDBInstanceIdentifier *string
 
 	noSmithyDocumentSerde
@@ -82,25 +88,25 @@ func (c *Client) addOperationFailoverDBClusterMiddlewares(stack *middleware.Stac
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -115,10 +121,13 @@ func (c *Client) addOperationFailoverDBClusterMiddlewares(stack *middleware.Stac
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opFailoverDBCluster(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

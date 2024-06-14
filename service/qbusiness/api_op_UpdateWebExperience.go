@@ -6,13 +6,12 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/qbusiness/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates an Amazon Q web experience.
+// Updates an Amazon Q Business web experience.
 func (c *Client) UpdateWebExperience(ctx context.Context, params *UpdateWebExperienceInput, optFns ...func(*Options)) (*UpdateWebExperienceOutput, error) {
 	if params == nil {
 		params = &UpdateWebExperienceInput{}
@@ -30,30 +29,39 @@ func (c *Client) UpdateWebExperience(ctx context.Context, params *UpdateWebExper
 
 type UpdateWebExperienceInput struct {
 
-	// The identifier of the Amazon Q application attached to the web experience.
+	// The identifier of the Amazon Q Business application attached to the web
+	// experience.
 	//
 	// This member is required.
 	ApplicationId *string
 
-	// The identifier of the Amazon Q web experience.
+	// The identifier of the Amazon Q Business web experience.
 	//
 	// This member is required.
 	WebExperienceId *string
 
-	// The authentication configuration of the Amazon Q web experience.
+	// The authentication configuration of the Amazon Q Business web experience.
+	//
+	// Deprecated: Property associated with legacy SAML IdP flow. Deprecated in favor
+	// of using AWS IAM Identity Center for user management.
 	AuthenticationConfiguration types.WebExperienceAuthConfiguration
+
+	// The Amazon Resource Name (ARN) of the role with permission to access the Amazon
+	// Q Business web experience and required resources.
+	RoleArn *string
 
 	// Determines whether sample prompts are enabled in the web experience for an end
 	// user.
 	SamplePromptsControlMode types.WebExperienceSamplePromptsControlMode
 
-	// The subtitle of the Amazon Q web experience.
+	// The subtitle of the Amazon Q Business web experience.
 	Subtitle *string
 
-	// The title of the Amazon Q web experience.
+	// The title of the Amazon Q Business web experience.
 	Title *string
 
-	// A customized welcome message for an end user in an Amazon Q web experience.
+	// A customized welcome message for an end user in an Amazon Q Business web
+	// experience.
 	WelcomeMessage *string
 
 	noSmithyDocumentSerde
@@ -88,25 +96,25 @@ func (c *Client) addOperationUpdateWebExperienceMiddlewares(stack *middleware.St
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -121,13 +129,16 @@ func (c *Client) addOperationUpdateWebExperienceMiddlewares(stack *middleware.St
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpUpdateWebExperienceValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateWebExperience(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

@@ -6,28 +6,34 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/emr/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // AddJobFlowSteps adds new steps to a running cluster. A maximum of 256 steps are
-// allowed in each job flow. If your cluster is long-running (such as a Hive data
-// warehouse) or complex, you may require more than 256 steps to process your data.
-// You can bypass the 256-step limitation in various ways, including using SSH to
-// connect to the master node and submitting queries directly to the software
-// running on the master node, such as Hive and Hadoop. A step specifies the
-// location of a JAR file stored either on the master node of the cluster or in
-// Amazon S3. Each step is performed by the main function of the main class of the
-// JAR file. The main class can be specified either in the manifest of the JAR or
-// by using the MainFunction parameter of the step. Amazon EMR executes each step
-// in the order listed. For a step to be considered complete, the main function
-// must exit with a zero exit code and all Hadoop jobs started while the step was
-// running must have completed and run successfully. You can only add steps to a
-// cluster that is in one of the following states: STARTING, BOOTSTRAPPING,
-// RUNNING, or WAITING. The string values passed into HadoopJarStep object cannot
-// exceed a total of 10240 characters.
+// allowed in each job flow.
+//
+// If your cluster is long-running (such as a Hive data warehouse) or complex, you
+// may require more than 256 steps to process your data. You can bypass the
+// 256-step limitation in various ways, including using SSH to connect to the
+// master node and submitting queries directly to the software running on the
+// master node, such as Hive and Hadoop.
+//
+// A step specifies the location of a JAR file stored either on the master node of
+// the cluster or in Amazon S3. Each step is performed by the main function of the
+// main class of the JAR file. The main class can be specified either in the
+// manifest of the JAR or by using the MainFunction parameter of the step.
+//
+// Amazon EMR executes each step in the order listed. For a step to be considered
+// complete, the main function must exit with a zero exit code and all Hadoop jobs
+// started while the step was running must have completed and run successfully.
+//
+// You can only add steps to a cluster that is in one of the following states:
+// STARTING, BOOTSTRAPPING, RUNNING, or WAITING.
+//
+// The string values passed into HadoopJarStep object cannot exceed a total of
+// 10240 characters.
 func (c *Client) AddJobFlowSteps(ctx context.Context, params *AddJobFlowStepsInput, optFns ...func(*Options)) (*AddJobFlowStepsOutput, error) {
 	if params == nil {
 		params = &AddJobFlowStepsInput{}
@@ -46,13 +52,13 @@ func (c *Client) AddJobFlowSteps(ctx context.Context, params *AddJobFlowStepsInp
 // The input argument to the AddJobFlowSteps operation.
 type AddJobFlowStepsInput struct {
 
-	// A string that uniquely identifies the job flow. This identifier is returned by
-	// RunJobFlow and can also be obtained from ListClusters .
+	// A string that uniquely identifies the job flow. This identifier is returned by RunJobFlow
+	// and can also be obtained from ListClusters.
 	//
 	// This member is required.
 	JobFlowId *string
 
-	// A list of StepConfig to be executed by the job flow.
+	//  A list of StepConfig to be executed by the job flow.
 	//
 	// This member is required.
 	Steps []types.StepConfig
@@ -60,8 +66,10 @@ type AddJobFlowStepsInput struct {
 	// The Amazon Resource Name (ARN) of the runtime role for a step on the cluster.
 	// The runtime role can be a cross-account IAM role. The runtime role ARN is a
 	// combination of account ID, role name, and role type using the following format:
-	// arn:partition:service:region:account:resource . For example,
-	// arn:aws:IAM::1234567890:role/ReadOnly is a correctly formatted runtime role ARN.
+	// arn:partition:service:region:account:resource .
+	//
+	// For example, arn:aws:IAM::1234567890:role/ReadOnly is a correctly formatted
+	// runtime role ARN.
 	ExecutionRoleArn *string
 
 	noSmithyDocumentSerde
@@ -101,25 +109,25 @@ func (c *Client) addOperationAddJobFlowStepsMiddlewares(stack *middleware.Stack,
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -134,13 +142,16 @@ func (c *Client) addOperationAddJobFlowStepsMiddlewares(stack *middleware.Stack,
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpAddJobFlowStepsValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opAddJobFlowSteps(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

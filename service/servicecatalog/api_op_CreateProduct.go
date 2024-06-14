@@ -6,14 +6,16 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/servicecatalog/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a product. A delegated admin is authorized to invoke this command. The
-// user or role that performs this operation must have the
+// Creates a product.
+//
+// A delegated admin is authorized to invoke this command.
+//
+// The user or role that performs this operation must have the
 // cloudformation:GetTemplate IAM policy permission. This policy permission is
 // required when using the ImportFromPhysicalId template source in the information
 // data section.
@@ -57,7 +59,9 @@ type CreateProductInput struct {
 	ProductType types.ProductType
 
 	// The language code.
+	//
 	//   - jp - Japanese
+	//
 	//   - zh - Chinese
 	AcceptLanguage *string
 
@@ -74,7 +78,9 @@ type CreateProductInput struct {
 	// the connection source artifact. This automatically manages the product's
 	// artifacts based on changes to the source. The SourceConnection parameter
 	// consists of the following sub-fields.
+	//
 	//   - Type
+	//
 	//   - ConnectionParamters
 	SourceConnection *types.SourceConnection
 
@@ -84,8 +90,9 @@ type CreateProductInput struct {
 	// The contact email for product support.
 	SupportEmail *string
 
-	// The contact URL for product support. ^https?:\/\// / is the pattern used to
-	// validate SupportUrl.
+	// The contact URL for product support.
+	//
+	// ^https?:\/\// / is the pattern used to validate SupportUrl.
 	SupportUrl *string
 
 	// One or more tags.
@@ -133,25 +140,25 @@ func (c *Client) addOperationCreateProductMiddlewares(stack *middleware.Stack, o
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -166,6 +173,9 @@ func (c *Client) addOperationCreateProductMiddlewares(stack *middleware.Stack, o
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opCreateProductMiddleware(stack, options); err != nil {
 		return err
 	}
@@ -175,7 +185,7 @@ func (c *Client) addOperationCreateProductMiddlewares(stack *middleware.Stack, o
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateProduct(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

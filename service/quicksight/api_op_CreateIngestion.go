@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/quicksight/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -16,11 +15,14 @@ import (
 // refresh datasets in an Enterprise edition account 32 times in a 24-hour period.
 // You can manually refresh datasets in a Standard edition account 8 times in a
 // 24-hour period. Each 24-hour period is measured starting 24 hours before the
-// current date and time. Any ingestions operating on tagged datasets inherit the
-// same tags automatically for use in access control. For an example, see How do I
-// create an IAM policy to control access to Amazon EC2 resources using tags? (http://aws.amazon.com/premiumsupport/knowledge-center/iam-ec2-resource-tags/)
-// in the Amazon Web Services Knowledge Center. Tags are visible on the tagged
-// dataset, but not on the ingestion resource.
+// current date and time.
+//
+// Any ingestions operating on tagged datasets inherit the same tags automatically
+// for use in access control. For an example, see [How do I create an IAM policy to control access to Amazon EC2 resources using tags?]in the Amazon Web Services
+// Knowledge Center. Tags are visible on the tagged dataset, but not on the
+// ingestion resource.
+//
+// [How do I create an IAM policy to control access to Amazon EC2 resources using tags?]: http://aws.amazon.com/premiumsupport/knowledge-center/iam-ec2-resource-tags/
 func (c *Client) CreateIngestion(ctx context.Context, params *CreateIngestionInput, optFns ...func(*Options)) (*CreateIngestionOutput, error) {
 	if params == nil {
 		params = &CreateIngestionInput{}
@@ -104,25 +106,25 @@ func (c *Client) addOperationCreateIngestionMiddlewares(stack *middleware.Stack,
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -137,13 +139,16 @@ func (c *Client) addOperationCreateIngestionMiddlewares(stack *middleware.Stack,
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpCreateIngestionValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateIngestion(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

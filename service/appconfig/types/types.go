@@ -14,12 +14,19 @@ import (
 // (ARN) for an Identity and Access Management assume role. You specify the name,
 // URI, and ARN for each action point defined in the extension. You can specify the
 // following actions for an extension:
+//
 //   - PRE_CREATE_HOSTED_CONFIGURATION_VERSION
+//
 //   - PRE_START_DEPLOYMENT
+//
 //   - ON_DEPLOYMENT_START
+//
 //   - ON_DEPLOYMENT_STEP
+//
 //   - ON_DEPLOYMENT_BAKING
+//
 //   - ON_DEPLOYMENT_COMPLETE
+//
 //   - ON_DEPLOYMENT_ROLLED_BACK
 type Action struct {
 
@@ -142,7 +149,10 @@ type ConfigurationProfileSummary struct {
 	// flags and freeform configurations. We recommend you create feature flag
 	// configurations to enable or disable new features and freeform configurations to
 	// distribute configurations to an application. When calling this API, enter one of
-	// the following values for Type : AWS.AppConfig.FeatureFlags
+	// the following values for Type :
+	//
+	//     AWS.AppConfig.FeatureFlags
+	//
 	//     AWS.Freeform
 	Type *string
 
@@ -160,9 +170,12 @@ type DeploymentEvent struct {
 
 	// A description of the deployment event. Descriptions include, but are not
 	// limited to, the following:
+	//
 	//   - The Amazon Web Services account or the Amazon CloudWatch alarm ARN that
 	//   initiated a rollback.
+	//
 	//   - The percentage of hosts that received the deployment.
+	//
 	//   - A recommendation to attempt a new deployment (in the case of an internal
 	//   error).
 	Description *string
@@ -332,8 +345,9 @@ type HostedConfigurationVersionSummary struct {
 	ConfigurationProfileId *string
 
 	// A standard MIME type describing the format of the configuration content. For
-	// more information, see Content-Type (https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.17)
-	// .
+	// more information, see [Content-Type].
+	//
+	// [Content-Type]: https://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.17
 	ContentType *string
 
 	// A description of the configuration.
@@ -396,12 +410,18 @@ type Monitor struct {
 // A value such as an Amazon Resource Name (ARN) or an Amazon Simple Notification
 // Service topic entered in an extension when invoked. Parameter values are
 // specified in an extension association. For more information about extensions,
-// see Working with AppConfig extensions (https://docs.aws.amazon.com/appconfig/latest/userguide/working-with-appconfig-extensions.html)
-// in the AppConfig User Guide.
+// see [Extending workflows]in the AppConfig User Guide.
+//
+// [Extending workflows]: https://docs.aws.amazon.com/appconfig/latest/userguide/working-with-appconfig-extensions.html
 type Parameter struct {
 
 	// Information about the parameter.
 	Description *string
+
+	// Indicates whether this parameter's value can be supplied at the extension's
+	// action point instead of during extension association. Dynamic parameters can't
+	// be marked Required .
+	Dynamic bool
 
 	// A parameter value must be specified in the extension association.
 	Required bool

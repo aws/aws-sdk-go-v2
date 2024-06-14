@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/pinpointsmsvoicev2/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -14,10 +13,14 @@ import (
 )
 
 // Deletes an existing pool. Deleting a pool disassociates all origination
-// identities from that pool. If the pool status isn't active or if deletion
-// protection is enabled, an error is returned. A pool is a collection of phone
-// numbers and SenderIds. A pool can include one or more phone numbers and
-// SenderIds that are associated with your Amazon Web Services account.
+// identities from that pool.
+//
+// If the pool status isn't active or if deletion protection is enabled, an error
+// is returned.
+//
+// A pool is a collection of phone numbers and SenderIds. A pool can include one
+// or more phone numbers and SenderIds that are associated with your Amazon Web
+// Services account.
 func (c *Client) DeletePool(ctx context.Context, params *DeletePoolInput, optFns ...func(*Options)) (*DeletePoolOutput, error) {
 	if params == nil {
 		params = &DeletePoolInput{}
@@ -35,8 +38,8 @@ func (c *Client) DeletePool(ctx context.Context, params *DeletePoolInput, optFns
 
 type DeletePoolInput struct {
 
-	// The PoolId or PoolArn of the pool to delete. You can use DescribePools to find
-	// the values for PoolId and PoolArn .
+	// The PoolId or PoolArn of the pool to delete. You can use DescribePools to find the values
+	// for PoolId and PoolArn .
 	//
 	// This member is required.
 	PoolId *string
@@ -46,8 +49,9 @@ type DeletePoolInput struct {
 
 type DeletePoolOutput struct {
 
-	// The time when the pool was created, in UNIX epoch time (https://www.epochconverter.com/)
-	// format.
+	// The time when the pool was created, in [UNIX epoch time] format.
+	//
+	// [UNIX epoch time]: https://www.epochconverter.com/
 	CreatedTimestamp *time.Time
 
 	// The message type that was associated with the deleted pool.
@@ -74,9 +78,12 @@ type DeletePoolOutput struct {
 	SharedRoutesEnabled bool
 
 	// The current status of the pool.
+	//
 	//   - CREATING: The pool is currently being created and isn't yet available for
 	//   use.
+	//
 	//   - ACTIVE: The pool is active and available for use.
+	//
 	//   - DELETING: The pool is being deleted.
 	Status types.PoolStatus
 
@@ -119,25 +126,25 @@ func (c *Client) addOperationDeletePoolMiddlewares(stack *middleware.Stack, opti
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -152,13 +159,16 @@ func (c *Client) addOperationDeletePoolMiddlewares(stack *middleware.Stack, opti
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDeletePoolValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDeletePool(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

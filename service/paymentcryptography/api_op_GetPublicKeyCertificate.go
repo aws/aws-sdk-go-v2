@@ -6,19 +6,21 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Gets the public key certificate of the asymmetric key pair that exists within
-// Amazon Web Services Payment Cryptography. Unlike the private key of an
-// asymmetric key, which never leaves Amazon Web Services Payment Cryptography
-// unencrypted, callers with GetPublicKeyCertificate permission can download the
-// public key certificate of the asymmetric key. You can share the public key
-// certificate to allow others to encrypt messages and verify signatures outside of
-// Amazon Web Services Payment Cryptography Cross-account use: This operation can't
-// be used across different Amazon Web Services accounts.
+// Amazon Web Services Payment Cryptography.
+//
+// Unlike the private key of an asymmetric key, which never leaves Amazon Web
+// Services Payment Cryptography unencrypted, callers with GetPublicKeyCertificate
+// permission can download the public key certificate of the asymmetric key. You
+// can share the public key certificate to allow others to encrypt messages and
+// verify signatures outside of Amazon Web Services Payment Cryptography
+//
+// Cross-account use: This operation can't be used across different Amazon Web
+// Services accounts.
 func (c *Client) GetPublicKeyCertificate(ctx context.Context, params *GetPublicKeyCertificateInput, optFns ...func(*Options)) (*GetPublicKeyCertificateOutput, error) {
 	if params == nil {
 		params = &GetPublicKeyCertificateInput{}
@@ -87,25 +89,25 @@ func (c *Client) addOperationGetPublicKeyCertificateMiddlewares(stack *middlewar
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -120,13 +122,16 @@ func (c *Client) addOperationGetPublicKeyCertificateMiddlewares(stack *middlewar
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpGetPublicKeyCertificateValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetPublicKeyCertificate(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

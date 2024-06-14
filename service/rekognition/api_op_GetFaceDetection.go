@@ -6,30 +6,34 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/rekognition/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Gets face detection results for a Amazon Rekognition Video analysis started by
-// StartFaceDetection . Face detection with Amazon Rekognition Video is an
-// asynchronous operation. You start face detection by calling StartFaceDetection
-// which returns a job identifier ( JobId ). When the face detection operation
-// finishes, Amazon Rekognition Video publishes a completion status to the Amazon
-// Simple Notification Service topic registered in the initial call to
-// StartFaceDetection . To get the results of the face detection operation, first
-// check that the status value published to the Amazon SNS topic is SUCCEEDED . If
-// so, call GetFaceDetection and pass the job identifier ( JobId ) from the initial
-// call to StartFaceDetection . GetFaceDetection returns an array of detected
-// faces ( Faces ) sorted by the time the faces were detected. Use MaxResults
-// parameter to limit the number of labels returned. If there are more results than
-// specified in MaxResults , the value of NextToken in the operation response
-// contains a pagination token for getting the next set of results. To get the next
-// page of results, call GetFaceDetection and populate the NextToken request
-// parameter with the token value returned from the previous call to
-// GetFaceDetection . Note that for the GetFaceDetection operation, the returned
-// values for FaceOccluded and EyeDirection will always be "null".
+// Gets face detection results for a Amazon Rekognition Video analysis started by StartFaceDetection.
+//
+// Face detection with Amazon Rekognition Video is an asynchronous operation. You
+// start face detection by calling StartFaceDetectionwhich returns a job identifier ( JobId ). When
+// the face detection operation finishes, Amazon Rekognition Video publishes a
+// completion status to the Amazon Simple Notification Service topic registered in
+// the initial call to StartFaceDetection . To get the results of the face
+// detection operation, first check that the status value published to the Amazon
+// SNS topic is SUCCEEDED . If so, call GetFaceDetection and pass the job identifier ( JobId ) from
+// the initial call to StartFaceDetection .
+//
+// GetFaceDetection returns an array of detected faces ( Faces ) sorted by the time
+// the faces were detected.
+//
+// Use MaxResults parameter to limit the number of labels returned. If there are
+// more results than specified in MaxResults , the value of NextToken in the
+// operation response contains a pagination token for getting the next set of
+// results. To get the next page of results, call GetFaceDetection and populate
+// the NextToken request parameter with the token value returned from the previous
+// call to GetFaceDetection .
+//
+// Note that for the GetFaceDetection operation, the returned values for
+// FaceOccluded and EyeDirection will always be "null".
 func (c *Client) GetFaceDetection(ctx context.Context, params *GetFaceDetectionInput, optFns ...func(*Options)) (*GetFaceDetectionOutput, error) {
 	if params == nil {
 		params = &GetFaceDetectionInput{}
@@ -93,8 +97,8 @@ type GetFaceDetectionOutput struct {
 	StatusMessage *string
 
 	// Video file stored in an Amazon S3 bucket. Amazon Rekognition video start
-	// operations such as StartLabelDetection use Video to specify a video for
-	// analysis. The supported file formats are .mp4, .mov and .avi.
+	// operations such as StartLabelDetectionuse Video to specify a video for analysis. The supported
+	// file formats are .mp4, .mov and .avi.
 	Video *types.Video
 
 	// Information about a video that Amazon Rekognition Video analyzed. Videometadata
@@ -130,25 +134,25 @@ func (c *Client) addOperationGetFaceDetectionMiddlewares(stack *middleware.Stack
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -163,13 +167,16 @@ func (c *Client) addOperationGetFaceDetectionMiddlewares(stack *middleware.Stack
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpGetFaceDetectionValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetFaceDetection(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

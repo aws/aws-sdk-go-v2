@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -16,14 +15,19 @@ import (
 // event of a job-flow error. The cluster still terminates upon successful
 // completion of the job flow. Calling SetTerminationProtection on a cluster is
 // similar to calling the Amazon EC2 DisableAPITermination API on all Amazon EC2
-// instances in a cluster. SetTerminationProtection is used to prevent accidental
-// termination of a cluster and to ensure that in the event of an error, the
-// instances persist so that you can recover any data stored in their ephemeral
-// instance storage. To terminate a cluster that has been locked by setting
-// SetTerminationProtection to true , you must first unlock the job flow by a
-// subsequent call to SetTerminationProtection in which you set the value to false
-// . For more information, see Managing Cluster Termination (https://docs.aws.amazon.com/emr/latest/ManagementGuide/UsingEMR_TerminationProtection.html)
-// in the Amazon EMR Management Guide.
+// instances in a cluster.
+//
+// SetTerminationProtection is used to prevent accidental termination of a cluster
+// and to ensure that in the event of an error, the instances persist so that you
+// can recover any data stored in their ephemeral instance storage.
+//
+// To terminate a cluster that has been locked by setting SetTerminationProtection
+// to true , you must first unlock the job flow by a subsequent call to
+// SetTerminationProtection in which you set the value to false .
+//
+// For more information, see [Managing Cluster Termination] in the Amazon EMR Management Guide.
+//
+// [Managing Cluster Termination]: https://docs.aws.amazon.com/emr/latest/ManagementGuide/UsingEMR_TerminationProtection.html
 func (c *Client) SetTerminationProtection(ctx context.Context, params *SetTerminationProtectionInput, optFns ...func(*Options)) (*SetTerminationProtectionOutput, error) {
 	if params == nil {
 		params = &SetTerminationProtectionInput{}
@@ -42,9 +46,8 @@ func (c *Client) SetTerminationProtection(ctx context.Context, params *SetTermin
 // The input argument to the TerminationProtection operation.
 type SetTerminationProtectionInput struct {
 
-	// A list of strings that uniquely identify the clusters to protect. This
-	// identifier is returned by RunJobFlow and can also be obtained from
-	// DescribeJobFlows .
+	//  A list of strings that uniquely identify the clusters to protect. This
+	// identifier is returned by RunJobFlowand can also be obtained from DescribeJobFlows .
 	//
 	// This member is required.
 	JobFlowIds []string
@@ -88,25 +91,25 @@ func (c *Client) addOperationSetTerminationProtectionMiddlewares(stack *middlewa
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -121,13 +124,16 @@ func (c *Client) addOperationSetTerminationProtectionMiddlewares(stack *middlewa
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpSetTerminationProtectionValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opSetTerminationProtection(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

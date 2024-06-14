@@ -6,18 +6,23 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Adds tags to a resource group with the specified ARN. Existing tags on a
 // resource group are not changed if they are not specified in the request
-// parameters. Do not store personally identifiable information (PII) or other
-// confidential or sensitive information in tags. We use tags to provide you with
-// billing and administration services. Tags are not intended to be used for
-// private or sensitive data. Minimum permissions To run this command, you must
-// have the following permissions:
+// parameters.
+//
+// Do not store personally identifiable information (PII) or other confidential or
+// sensitive information in tags. We use tags to provide you with billing and
+// administration services. Tags are not intended to be used for private or
+// sensitive data.
+//
+// # Minimum permissions
+//
+// To run this command, you must have the following permissions:
+//
 //   - resource-groups:Tag
 func (c *Client) Tag(ctx context.Context, params *TagInput, optFns ...func(*Options)) (*TagOutput, error) {
 	if params == nil {
@@ -86,25 +91,25 @@ func (c *Client) addOperationTagMiddlewares(stack *middleware.Stack, options Opt
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -119,13 +124,16 @@ func (c *Client) addOperationTagMiddlewares(stack *middleware.Stack, options Opt
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpTagValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opTag(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

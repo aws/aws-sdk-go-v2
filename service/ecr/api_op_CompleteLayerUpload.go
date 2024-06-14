@@ -6,18 +6,20 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Informs Amazon ECR that the image layer upload has completed for a specified
 // registry, repository name, and upload ID. You can optionally provide a sha256
-// digest of the image layer for data validation purposes. When an image is pushed,
-// the CompleteLayerUpload API is called once per each new image layer to verify
-// that the upload has completed. This operation is used by the Amazon ECR proxy
-// and is not generally used by customers for pulling and pushing images. In most
-// cases, you should use the docker CLI to pull, tag, and push images.
+// digest of the image layer for data validation purposes.
+//
+// When an image is pushed, the CompleteLayerUpload API is called once per each
+// new image layer to verify that the upload has completed.
+//
+// This operation is used by the Amazon ECR proxy and is not generally used by
+// customers for pulling and pushing images. In most cases, you should use the
+// docker CLI to pull, tag, and push images.
 func (c *Client) CompleteLayerUpload(ctx context.Context, params *CompleteLayerUploadInput, optFns ...func(*Options)) (*CompleteLayerUploadOutput, error) {
 	if params == nil {
 		params = &CompleteLayerUploadInput{}
@@ -45,8 +47,7 @@ type CompleteLayerUploadInput struct {
 	// This member is required.
 	RepositoryName *string
 
-	// The upload ID from a previous InitiateLayerUpload operation to associate with
-	// the image layer.
+	// The upload ID from a previous InitiateLayerUpload operation to associate with the image layer.
 	//
 	// This member is required.
 	UploadId *string
@@ -101,25 +102,25 @@ func (c *Client) addOperationCompleteLayerUploadMiddlewares(stack *middleware.St
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -134,13 +135,16 @@ func (c *Client) addOperationCompleteLayerUploadMiddlewares(stack *middleware.St
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpCompleteLayerUploadValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCompleteLayerUpload(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

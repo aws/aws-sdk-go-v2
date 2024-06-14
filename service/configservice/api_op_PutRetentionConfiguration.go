@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/configservice/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -16,8 +15,10 @@ import (
 // period (number of days) that Config stores your historical information. The API
 // creates the RetentionConfiguration object and names the object as default. When
 // you have a RetentionConfiguration object named default, calling the API
-// modifies the default object. Currently, Config supports only one retention
-// configuration per region in your account.
+// modifies the default object.
+//
+// Currently, Config supports only one retention configuration per region in your
+// account.
 func (c *Client) PutRetentionConfiguration(ctx context.Context, params *PutRetentionConfigurationInput, optFns ...func(*Options)) (*PutRetentionConfigurationOutput, error) {
 	if params == nil {
 		params = &PutRetentionConfigurationInput{}
@@ -35,8 +36,9 @@ func (c *Client) PutRetentionConfiguration(ctx context.Context, params *PutReten
 
 type PutRetentionConfigurationInput struct {
 
-	// Number of days Config stores your historical information. Currently, only
-	// applicable to the configuration item history.
+	// Number of days Config stores your historical information.
+	//
+	// Currently, only applicable to the configuration item history.
 	//
 	// This member is required.
 	RetentionPeriodInDays *int32
@@ -77,25 +79,25 @@ func (c *Client) addOperationPutRetentionConfigurationMiddlewares(stack *middlew
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -110,13 +112,16 @@ func (c *Client) addOperationPutRetentionConfigurationMiddlewares(stack *middlew
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpPutRetentionConfigurationValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opPutRetentionConfiguration(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -14,8 +13,10 @@ import (
 
 // Update the specified channel group. You can edit the description on a channel
 // group for easier identification later from the AWS Elemental MediaPackage
-// console. You can't edit the name of the channel group. Any edits you make that
-// impact the video output may not be reflected for a few minutes.
+// console. You can't edit the name of the channel group.
+//
+// Any edits you make that impact the video output may not be reflected for a few
+// minutes.
 func (c *Client) UpdateChannelGroup(ctx context.Context, params *UpdateChannelGroupInput, optFns ...func(*Options)) (*UpdateChannelGroupOutput, error) {
 	if params == nil {
 		params = &UpdateChannelGroupInput{}
@@ -42,6 +43,11 @@ type UpdateChannelGroupInput struct {
 	// Any descriptive information that you want to add to the channel group for
 	// future identification purposes.
 	Description *string
+
+	// The expected current Entity Tag (ETag) for the resource. If the specified ETag
+	// does not match the resource's current entity tag, the update request will be
+	// rejected.
+	ETag *string
 
 	noSmithyDocumentSerde
 }
@@ -78,6 +84,10 @@ type UpdateChannelGroupOutput struct {
 	// The description for your channel group.
 	Description *string
 
+	// The current Entity Tag (ETag) associated with this resource. The entity tag can
+	// be used to safely make concurrent updates to the resource.
+	ETag *string
+
 	// The comma-separated list of tag key:value pairs assigned to the channel group.
 	Tags map[string]string
 
@@ -109,25 +119,25 @@ func (c *Client) addOperationUpdateChannelGroupMiddlewares(stack *middleware.Sta
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -142,13 +152,16 @@ func (c *Client) addOperationUpdateChannelGroupMiddlewares(stack *middleware.Sta
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpUpdateChannelGroupValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateChannelGroup(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

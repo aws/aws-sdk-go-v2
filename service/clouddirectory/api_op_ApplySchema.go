@@ -6,13 +6,12 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Copies the input published schema, at the specified version, into the Directory
-// with the same name and version as that of the published schema.
+// Copies the input published schema, at the specified version, into the Directory with the
+// same name and version as that of the published schema.
 func (c *Client) ApplySchema(ctx context.Context, params *ApplySchemaInput, optFns ...func(*Options)) (*ApplySchemaOutput, error) {
 	if params == nil {
 		params = &ApplySchemaInput{}
@@ -30,14 +29,14 @@ func (c *Client) ApplySchema(ctx context.Context, params *ApplySchemaInput, optF
 
 type ApplySchemaInput struct {
 
-	// The Amazon Resource Name (ARN) that is associated with the Directory into which
-	// the schema is copied. For more information, see arns .
+	// The Amazon Resource Name (ARN) that is associated with the Directory into which the
+	// schema is copied. For more information, see arns.
 	//
 	// This member is required.
 	DirectoryArn *string
 
 	// Published schema Amazon Resource Name (ARN) that needs to be copied. For more
-	// information, see arns .
+	// information, see arns.
 	//
 	// This member is required.
 	PublishedSchemaArn *string
@@ -47,12 +46,12 @@ type ApplySchemaInput struct {
 
 type ApplySchemaOutput struct {
 
-	// The applied schema ARN that is associated with the copied schema in the
-	// Directory . You can use this ARN to describe the schema information applied on
-	// this directory. For more information, see arns .
+	// The applied schema ARN that is associated with the copied schema in the Directory. You
+	// can use this ARN to describe the schema information applied on this directory.
+	// For more information, see arns.
 	AppliedSchemaArn *string
 
-	// The ARN that is associated with the Directory . For more information, see arns .
+	// The ARN that is associated with the Directory. For more information, see arns.
 	DirectoryArn *string
 
 	// Metadata pertaining to the operation's result.
@@ -83,25 +82,25 @@ func (c *Client) addOperationApplySchemaMiddlewares(stack *middleware.Stack, opt
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -116,13 +115,16 @@ func (c *Client) addOperationApplySchemaMiddlewares(stack *middleware.Stack, opt
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpApplySchemaValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opApplySchema(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/route53domains/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -29,8 +28,9 @@ func (c *Client) GetOperationDetail(ctx context.Context, params *GetOperationDet
 	return out, nil
 }
 
-// The GetOperationDetail (https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_GetOperationDetail.html)
-// request includes the following element.
+// The [GetOperationDetail] request includes the following element.
+//
+// [GetOperationDetail]: https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_GetOperationDetail.html
 type GetOperationDetailInput struct {
 
 	// The identifier for the operation for which you want to get the status. Route 53
@@ -48,7 +48,7 @@ type GetOperationDetailOutput struct {
 	// The name of a domain.
 	DomainName *string
 
-	// The date when the operation was last updated.
+	//  The date when the operation was last updated.
 	LastUpdatedDate *time.Time
 
 	// Detailed information on the status including possible errors.
@@ -60,19 +60,25 @@ type GetOperationDetailOutput struct {
 	// The current status of the requested operation in the system.
 	Status types.OperationStatus
 
-	// Lists any outstanding operations that require customer action. Valid values
+	//  Lists any outstanding operations that require customer action. Valid values
 	// are:
+	//
 	//   - PENDING_ACCEPTANCE : The operation is waiting for acceptance from the
 	//   account that is receiving the domain.
+	//
 	//   - PENDING_CUSTOMER_ACTION : The operation is waiting for customer action, for
 	//   example, returning an email.
+	//
 	//   - PENDING_AUTHORIZATION : The operation is waiting for the form of
-	//   authorization. For more information, see ResendOperationAuthorization (https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_ResendOperationAuthorization.html)
-	//   .
+	//   authorization. For more information, see [ResendOperationAuthorization].
+	//
 	//   - PENDING_PAYMENT_VERIFICATION : The operation is waiting for the payment
 	//   method to validate.
+	//
 	//   - PENDING_SUPPORT_CASE : The operation includes a support case and is waiting
 	//   for its resolution.
+	//
+	// [ResendOperationAuthorization]: https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_ResendOperationAuthorization.html
 	StatusFlag types.StatusFlag
 
 	// The date when the request was submitted.
@@ -109,25 +115,25 @@ func (c *Client) addOperationGetOperationDetailMiddlewares(stack *middleware.Sta
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -142,13 +148,16 @@ func (c *Client) addOperationGetOperationDetailMiddlewares(stack *middleware.Sta
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpGetOperationDetailValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetOperationDetail(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

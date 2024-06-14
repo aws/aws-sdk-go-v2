@@ -6,20 +6,22 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/pinpointsmsvoicev2/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a new event destination in a configuration set. An event destination is
-// a location where you send message events. The event options are Amazon
-// CloudWatch, Amazon Kinesis Data Firehose, or Amazon SNS. For example, when a
-// message is delivered successfully, you can send information about that event to
-// an event destination, or send notifications to endpoints that are subscribed to
-// an Amazon SNS topic. Each configuration set can contain between 0 and 5 event
-// destinations. Each event destination can contain a reference to a single
-// destination, such as a CloudWatch or Kinesis Data Firehose destination.
+// Creates a new event destination in a configuration set.
+//
+// An event destination is a location where you send message events. The event
+// options are Amazon CloudWatch, Amazon Kinesis Data Firehose, or Amazon SNS. For
+// example, when a message is delivered successfully, you can send information
+// about that event to an event destination, or send notifications to endpoints
+// that are subscribed to an Amazon SNS topic.
+//
+// Each configuration set can contain between 0 and 5 event destinations. Each
+// event destination can contain a reference to a single destination, such as a
+// CloudWatch or Kinesis Data Firehose destination.
 func (c *Client) CreateEventDestination(ctx context.Context, params *CreateEventDestinationInput, optFns ...func(*Options)) (*CreateEventDestinationOutput, error) {
 	if params == nil {
 		params = &CreateEventDestinationInput{}
@@ -39,7 +41,7 @@ type CreateEventDestinationInput struct {
 
 	// Either the name of the configuration set or the configuration set ARN to apply
 	// event logging to. The ConfigurateSetName and ConfigurationSetArn can be found
-	// using the DescribeConfigurationSets action.
+	// using the DescribeConfigurationSetsaction.
 	//
 	// This member is required.
 	ConfigurationSetName *string
@@ -50,8 +52,9 @@ type CreateEventDestinationInput struct {
 	EventDestinationName *string
 
 	// An array of event types that determine which events to log. If "ALL" is used,
-	// then Amazon Pinpoint logs every event type. The TEXT_SENT event type is not
-	// supported.
+	// then Amazon Pinpoint logs every event type.
+	//
+	// The TEXT_SENT event type is not supported.
 	//
 	// This member is required.
 	MatchingEventTypes []types.EventType
@@ -62,7 +65,7 @@ type CreateEventDestinationInput struct {
 	ClientToken *string
 
 	// An object that contains information about an event destination for logging to
-	// Amazon CloudWatch logs.
+	// Amazon CloudWatch Logs.
 	CloudWatchLogsDestination *types.CloudWatchLogsDestination
 
 	// An object that contains information about an event destination for logging to
@@ -115,25 +118,25 @@ func (c *Client) addOperationCreateEventDestinationMiddlewares(stack *middleware
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -148,6 +151,9 @@ func (c *Client) addOperationCreateEventDestinationMiddlewares(stack *middleware
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opCreateEventDestinationMiddleware(stack, options); err != nil {
 		return err
 	}
@@ -157,7 +163,7 @@ func (c *Client) addOperationCreateEventDestinationMiddlewares(stack *middleware
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateEventDestination(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

@@ -6,7 +6,7 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
+	"github.com/aws/aws-sdk-go-v2/service/greengrassv2/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -31,21 +31,37 @@ func (c *Client) GetComponentVersionArtifact(ctx context.Context, params *GetCom
 
 type GetComponentVersionArtifactInput struct {
 
-	// The ARN (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
-	// of the component version. Specify the ARN of a public or a Lambda component
-	// version.
+	// The [ARN] of the component version. Specify the ARN of a public or a Lambda
+	// component version.
+	//
+	// [ARN]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
 	//
 	// This member is required.
 	Arn *string
 
-	// The name of the artifact. You can use the GetComponent (https://docs.aws.amazon.com/greengrass/v2/APIReference/API_GetComponent.html)
-	// operation to download the component recipe, which includes the URI of the
-	// artifact. The artifact name is the section of the URI after the scheme. For
-	// example, in the artifact URI greengrass:SomeArtifact.zip , the artifact name is
-	// SomeArtifact.zip .
+	// The name of the artifact.
+	//
+	// You can use the [GetComponent] operation to download the component recipe, which includes the
+	// URI of the artifact. The artifact name is the section of the URI after the
+	// scheme. For example, in the artifact URI greengrass:SomeArtifact.zip , the
+	// artifact name is SomeArtifact.zip .
+	//
+	// [GetComponent]: https://docs.aws.amazon.com/greengrass/v2/APIReference/API_GetComponent.html
 	//
 	// This member is required.
 	ArtifactName *string
+
+	// Determines if the Amazon S3 URL returned is a FIPS pre-signed URL endpoint.
+	// Specify fips if you want the returned Amazon S3 pre-signed URL to point to an
+	// Amazon S3 FIPS endpoint. If you don't specify a value, the default is standard .
+	IotEndpointType types.IotEndpointType
+
+	// Specifies the endpoint to use when getting Amazon S3 pre-signed URLs.
+	//
+	// All Amazon Web Services Regions except US East (N. Virginia) use REGIONAL in
+	// all cases. In the US East (N. Virginia) Region the default is GLOBAL , but you
+	// can change it to REGIONAL with this parameter.
+	S3EndpointType types.S3EndpointType
 
 	noSmithyDocumentSerde
 }
@@ -85,25 +101,25 @@ func (c *Client) addOperationGetComponentVersionArtifactMiddlewares(stack *middl
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -118,13 +134,16 @@ func (c *Client) addOperationGetComponentVersionArtifactMiddlewares(stack *middl
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpGetComponentVersionArtifactValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetComponentVersionArtifact(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

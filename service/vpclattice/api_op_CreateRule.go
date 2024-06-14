@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/vpclattice/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -15,8 +14,9 @@ import (
 // Creates a listener rule. Each listener has a default rule for checking
 // connection requests, but you can define additional rules. Each rule consists of
 // a priority, one or more actions, and one or more conditions. For more
-// information, see Listener rules (https://docs.aws.amazon.com/vpc-lattice/latest/ug/listeners.html#listener-rules)
-// in the Amazon VPC Lattice User Guide.
+// information, see [Listener rules]in the Amazon VPC Lattice User Guide.
+//
+// [Listener rules]: https://docs.aws.amazon.com/vpc-lattice/latest/ug/listeners.html#listener-rules
 func (c *Client) CreateRule(ctx context.Context, params *CreateRuleInput, optFns ...func(*Options)) (*CreateRuleOutput, error) {
 	if params == nil {
 		params = &CreateRuleInput{}
@@ -81,9 +81,7 @@ type CreateRuleInput struct {
 
 type CreateRuleOutput struct {
 
-	// The rule action. Each rule must include exactly one of the following types of
-	// actions: forward or fixed-response , and it must be the last action to be
-	// performed.
+	// The rule action.
 	Action types.RuleAction
 
 	// The Amazon Resource Name (ARN) of the rule.
@@ -132,25 +130,25 @@ func (c *Client) addOperationCreateRuleMiddlewares(stack *middleware.Stack, opti
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -165,6 +163,9 @@ func (c *Client) addOperationCreateRuleMiddlewares(stack *middleware.Stack, opti
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opCreateRuleMiddleware(stack, options); err != nil {
 		return err
 	}
@@ -174,7 +175,7 @@ func (c *Client) addOperationCreateRuleMiddlewares(stack *middleware.Stack, opti
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateRule(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

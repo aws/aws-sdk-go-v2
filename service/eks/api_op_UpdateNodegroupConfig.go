@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/eks/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -14,9 +13,9 @@ import (
 
 // Updates an Amazon EKS managed node group configuration. Your node group
 // continues to function during the update. The response output includes an update
-// ID that you can use to track the status of your node group update with the
-// DescribeUpdate API operation. Currently you can update the Kubernetes labels for
-// a node group or the scaling configuration.
+// ID that you can use to track the status of your node group update with the DescribeUpdateAPI
+// operation. Currently you can update the Kubernetes labels for a node group or
+// the scaling configuration.
 func (c *Client) UpdateNodegroupConfig(ctx context.Context, params *UpdateNodegroupConfigInput, optFns ...func(*Options)) (*UpdateNodegroupConfigOutput, error) {
 	if params == nil {
 		params = &UpdateNodegroupConfigInput{}
@@ -55,8 +54,9 @@ type UpdateNodegroupConfigInput struct {
 	ScalingConfig *types.NodegroupScalingConfig
 
 	// The Kubernetes taints to be applied to the nodes in the node group after the
-	// update. For more information, see Node taints on managed node groups (https://docs.aws.amazon.com/eks/latest/userguide/node-taints-managed-node-groups.html)
-	// .
+	// update. For more information, see [Node taints on managed node groups].
+	//
+	// [Node taints on managed node groups]: https://docs.aws.amazon.com/eks/latest/userguide/node-taints-managed-node-groups.html
 	Taints *types.UpdateTaintsPayload
 
 	// The node group update configuration.
@@ -98,25 +98,25 @@ func (c *Client) addOperationUpdateNodegroupConfigMiddlewares(stack *middleware.
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -131,6 +131,9 @@ func (c *Client) addOperationUpdateNodegroupConfigMiddlewares(stack *middleware.
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opUpdateNodegroupConfigMiddleware(stack, options); err != nil {
 		return err
 	}
@@ -140,7 +143,7 @@ func (c *Client) addOperationUpdateNodegroupConfigMiddlewares(stack *middleware.
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateNodegroupConfig(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

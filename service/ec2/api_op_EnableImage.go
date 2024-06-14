@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -15,9 +14,13 @@ import (
 // used for instance launches, appears in describe operations, and can be shared.
 // Amazon Web Services accounts, organizations, and Organizational Units that lost
 // access to the AMI when it was disabled do not regain access automatically. Once
-// the AMI is available, it can be shared with them again. Only the AMI owner can
-// re-enable a disabled AMI. For more information, see Disable an AMI (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/disable-an-ami.html)
-// in the Amazon EC2 User Guide.
+// the AMI is available, it can be shared with them again.
+//
+// Only the AMI owner can re-enable a disabled AMI.
+//
+// For more information, see [Disable an AMI] in the Amazon EC2 User Guide.
+//
+// [Disable an AMI]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/disable-an-ami.html
 func (c *Client) EnableImage(ctx context.Context, params *EnableImageInput, optFns ...func(*Options)) (*EnableImageOutput, error) {
 	if params == nil {
 		params = &EnableImageInput{}
@@ -82,25 +85,25 @@ func (c *Client) addOperationEnableImageMiddlewares(stack *middleware.Stack, opt
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -115,13 +118,16 @@ func (c *Client) addOperationEnableImageMiddlewares(stack *middleware.Stack, opt
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpEnableImageValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opEnableImage(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

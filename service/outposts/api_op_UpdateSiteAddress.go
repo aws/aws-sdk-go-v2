@@ -6,16 +6,18 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/outposts/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates the address of the specified site. You can't update a site address if
-// there is an order in progress. You must wait for the order to complete or cancel
-// the order. You can update the operating address before you place an order at the
-// site, or after all Outposts that belong to the site have been deactivated.
+// Updates the address of the specified site.
+//
+// You can't update a site address if there is an order in progress. You must wait
+// for the order to complete or cancel the order.
+//
+// You can update the operating address before you place an order at the site, or
+// after all Outposts that belong to the site have been deactivated.
 func (c *Client) UpdateSiteAddress(ctx context.Context, params *UpdateSiteAddressInput, optFns ...func(*Options)) (*UpdateSiteAddressOutput, error) {
 	if params == nil {
 		params = &UpdateSiteAddressInput{}
@@ -33,17 +35,17 @@ func (c *Client) UpdateSiteAddress(ctx context.Context, params *UpdateSiteAddres
 
 type UpdateSiteAddressInput struct {
 
-	// The address for the site.
+	//  The address for the site.
 	//
 	// This member is required.
 	Address *types.Address
 
-	// The type of the address.
+	//  The type of the address.
 	//
 	// This member is required.
 	AddressType types.AddressType
 
-	// The ID or the Amazon Resource Name (ARN) of the site.
+	//  The ID or the Amazon Resource Name (ARN) of the site.
 	//
 	// This member is required.
 	SiteId *string
@@ -53,10 +55,10 @@ type UpdateSiteAddressInput struct {
 
 type UpdateSiteAddressOutput struct {
 
-	// Information about an address.
+	//  Information about an address.
 	Address *types.Address
 
-	// The type of the address.
+	//  The type of the address.
 	AddressType types.AddressType
 
 	// Metadata pertaining to the operation's result.
@@ -87,25 +89,25 @@ func (c *Client) addOperationUpdateSiteAddressMiddlewares(stack *middleware.Stac
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -120,13 +122,16 @@ func (c *Client) addOperationUpdateSiteAddressMiddlewares(stack *middleware.Stac
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpUpdateSiteAddressValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateSiteAddress(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

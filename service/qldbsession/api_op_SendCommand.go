@@ -6,25 +6,27 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/qldbsession/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Sends a command to an Amazon QLDB ledger. Instead of interacting directly with
-// this API, we recommend using the QLDB driver or the QLDB shell to execute data
-// transactions on a ledger.
+// Sends a command to an Amazon QLDB ledger.
+//
+// Instead of interacting directly with this API, we recommend using the QLDB
+// driver or the QLDB shell to execute data transactions on a ledger.
+//
 //   - If you are working with an AWS SDK, use the QLDB driver. The driver
 //     provides a high-level abstraction layer above this QLDB Session data plane and
 //     manages SendCommand API calls for you. For information and a list of supported
-//     programming languages, see Getting started with the driver (https://docs.aws.amazon.com/qldb/latest/developerguide/getting-started-driver.html)
-//     in the Amazon QLDB Developer Guide.
+//     programming languages, see [Getting started with the driver]in the Amazon QLDB Developer Guide.
+//
 //   - If you are working with the AWS Command Line Interface (AWS CLI), use the
 //     QLDB shell. The shell is a command line interface that uses the QLDB driver to
-//     interact with a ledger. For information, see Accessing Amazon QLDB using the
-//     QLDB shell (https://docs.aws.amazon.com/qldb/latest/developerguide/data-shell.html)
-//     .
+//     interact with a ledger. For information, see [Accessing Amazon QLDB using the QLDB shell].
+//
+// [Getting started with the driver]: https://docs.aws.amazon.com/qldb/latest/developerguide/getting-started-driver.html
+// [Accessing Amazon QLDB using the QLDB shell]: https://docs.aws.amazon.com/qldb/latest/developerguide/data-shell.html
 func (c *Client) SendCommand(ctx context.Context, params *SendCommandInput, optFns ...func(*Options)) (*SendCommandOutput, error) {
 	if params == nil {
 		params = &SendCommandInput{}
@@ -58,9 +60,10 @@ type SendCommandInput struct {
 	FetchPage *types.FetchPageRequest
 
 	// Specifies the session token for the current command. A session token is
-	// constant throughout the life of the session. To obtain a session token, run the
-	// StartSession command. This SessionToken is required for every subsequent
-	// command that is issued during the current session.
+	// constant throughout the life of the session.
+	//
+	// To obtain a session token, run the StartSession command. This SessionToken is
+	// required for every subsequent command that is issued during the current session.
 	SessionToken *string
 
 	// Command to start a new session. A session token is obtained as part of the
@@ -126,25 +129,25 @@ func (c *Client) addOperationSendCommandMiddlewares(stack *middleware.Stack, opt
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -159,13 +162,16 @@ func (c *Client) addOperationSendCommandMiddlewares(stack *middleware.Stack, opt
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpSendCommandValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opSendCommand(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

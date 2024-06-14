@@ -6,14 +6,14 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/codebuild/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates the webhook associated with an CodeBuild build project. If you use
-// Bitbucket for your repository, rotateSecret is ignored.
+//	Updates the webhook associated with an CodeBuild build project.
+//
+// If you use Bitbucket for your repository, rotateSecret is ignored.
 func (c *Client) UpdateWebhook(ctx context.Context, params *UpdateWebhookInput, optFns ...func(*Options)) (*UpdateWebhookOutput, error) {
 	if params == nil {
 		params = &UpdateWebhookInput{}
@@ -38,19 +38,20 @@ type UpdateWebhookInput struct {
 
 	// A regular expression used to determine which repository branches are built when
 	// a webhook is triggered. If the name of a branch matches the regular expression,
-	// then it is built. If branchFilter is empty, then all branches are built. It is
-	// recommended that you use filterGroups instead of branchFilter .
+	// then it is built. If branchFilter is empty, then all branches are built.
+	//
+	// It is recommended that you use filterGroups instead of branchFilter .
 	BranchFilter *string
 
 	// Specifies the type of build this webhook will trigger.
 	BuildType types.WebhookBuildType
 
-	// An array of arrays of WebhookFilter objects used to determine if a webhook
+	//  An array of arrays of WebhookFilter objects used to determine if a webhook
 	// event can trigger a build. A filter group must contain at least one EVENT
 	// WebhookFilter .
 	FilterGroups [][]types.WebhookFilter
 
-	// A boolean value that specifies whether the associated GitHub repository's
+	//  A boolean value that specifies whether the associated GitHub repository's
 	// secret token should be updated. If you use Bitbucket for your repository,
 	// rotateSecret is ignored.
 	RotateSecret bool
@@ -60,7 +61,7 @@ type UpdateWebhookInput struct {
 
 type UpdateWebhookOutput struct {
 
-	// Information about a repository's webhook that is associated with a project in
+	//  Information about a repository's webhook that is associated with a project in
 	// CodeBuild.
 	Webhook *types.Webhook
 
@@ -92,25 +93,25 @@ func (c *Client) addOperationUpdateWebhookMiddlewares(stack *middleware.Stack, o
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -125,13 +126,16 @@ func (c *Client) addOperationUpdateWebhookMiddlewares(stack *middleware.Stack, o
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpUpdateWebhookValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateWebhook(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

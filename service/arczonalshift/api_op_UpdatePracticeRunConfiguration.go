@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/arczonalshift/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -40,23 +39,28 @@ type UpdatePracticeRunConfigurationInput struct {
 	ResourceIdentifier *string
 
 	// Add, change, or remove blocked dates for a practice run in zonal autoshift.
+	//
 	// Optionally, you can block practice runs for specific calendar dates. The format
 	// for blocked dates is: YYYY-MM-DD. Keep in mind, when you specify dates, that
 	// dates and times for practice runs are in UTC. Separate multiple blocked dates
-	// with spaces. For example, if you have an application update scheduled to launch
-	// on May 1, 2024, and you don't want practice runs to shift traffic away at that
-	// time, you could set a blocked date for 2024-05-01 .
+	// with spaces.
+	//
+	// For example, if you have an application update scheduled to launch on May 1,
+	// 2024, and you don't want practice runs to shift traffic away at that time, you
+	// could set a blocked date for 2024-05-01 .
 	BlockedDates []string
 
 	// Add, change, or remove windows of days and times for when you can, optionally,
-	// block Route 53 ARC from starting a practice run for a resource. The format for
-	// blocked windows is: DAY:HH:SS-DAY:HH:SS. Keep in mind, when you specify dates,
-	// that dates and times for practice runs are in UTC. Also, be aware of potential
-	// time adjustments that might be required for daylight saving time differences.
-	// Separate multiple blocked windows with spaces. For example, say you run business
-	// report summaries three days a week. For this scenario, you might set the
-	// following recurring days and times as blocked windows, for example:
-	// MON-20:30-21:30 WED-20:30-21:30 FRI-20:30-21:30 .
+	// block Route 53 ARC from starting a practice run for a resource.
+	//
+	// The format for blocked windows is: DAY:HH:SS-DAY:HH:SS. Keep in mind, when you
+	// specify dates, that dates and times for practice runs are in UTC. Also, be aware
+	// of potential time adjustments that might be required for daylight saving time
+	// differences. Separate multiple blocked windows with spaces.
+	//
+	// For example, say you run business report summaries three days a week. For this
+	// scenario, you might set the following recurring days and times as blocked
+	// windows, for example: MON-20:30-21:30 WED-20:30-21:30 FRI-20:30-21:30 .
 	BlockedWindows []string
 
 	// Add, change, or remove the Amazon CloudWatch alarm that you optionally specify
@@ -122,25 +126,25 @@ func (c *Client) addOperationUpdatePracticeRunConfigurationMiddlewares(stack *mi
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -155,13 +159,16 @@ func (c *Client) addOperationUpdatePracticeRunConfigurationMiddlewares(stack *mi
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpUpdatePracticeRunConfigurationValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdatePracticeRunConfiguration(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

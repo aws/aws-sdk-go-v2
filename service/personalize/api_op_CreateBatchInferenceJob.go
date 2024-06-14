@@ -6,27 +6,35 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/personalize/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Generates batch recommendations based on a list of items or users stored in
-// Amazon S3 and exports the recommendations to an Amazon S3 bucket. To generate
-// batch recommendations, specify the ARN of a solution version and an Amazon S3
-// URI for the input and output data. For user personalization, popular items, and
-// personalized ranking solutions, the batch inference job generates a list of
-// recommended items for each user ID in the input file. For related items
+// Amazon S3 and exports the recommendations to an Amazon S3 bucket.
+//
+// To generate batch recommendations, specify the ARN of a solution version and an
+// Amazon S3 URI for the input and output data. For user personalization, popular
+// items, and personalized ranking solutions, the batch inference job generates a
+// list of recommended items for each user ID in the input file. For related items
 // solutions, the job generates a list of recommended items for each item ID in the
-// input file. For more information, see Creating a batch inference job  (https://docs.aws.amazon.com/personalize/latest/dg/getting-batch-recommendations.html)
-// . If you use the Similar-Items recipe, Amazon Personalize can add descriptive
+// input file.
+//
+// For more information, see [Creating a batch inference job].
+//
+// If you use the Similar-Items recipe, Amazon Personalize can add descriptive
 // themes to batch recommendations. To generate themes, set the job's mode to
 // THEME_GENERATION and specify the name of the field that contains item names in
-// the input data. For more information about generating themes, see Batch
-// recommendations with themes from Content Generator  (https://docs.aws.amazon.com/personalize/latest/dg/themed-batch-recommendations.html)
-// . You can't get batch recommendations with the Trending-Now or Next-Best-Action
+// the input data.
+//
+// For more information about generating themes, see [Batch recommendations with themes from Content Generator].
+//
+// You can't get batch recommendations with the Trending-Now or Next-Best-Action
 // recipes.
+//
+// [Creating a batch inference job]: https://docs.aws.amazon.com/personalize/latest/dg/getting-batch-recommendations.html
+// [Batch recommendations with themes from Content Generator]: https://docs.aws.amazon.com/personalize/latest/dg/themed-batch-recommendations.html
 func (c *Client) CreateBatchInferenceJob(ctx context.Context, params *CreateBatchInferenceJobInput, optFns ...func(*Options)) (*CreateBatchInferenceJobOutput, error) {
 	if params == nil {
 		params = &CreateBatchInferenceJobInput{}
@@ -77,22 +85,26 @@ type CreateBatchInferenceJobInput struct {
 
 	// The mode of the batch inference job. To generate descriptive themes for groups
 	// of similar items, set the job mode to THEME_GENERATION . If you don't want to
-	// generate themes, use the default BATCH_INFERENCE . When you get batch
-	// recommendations with themes, you will incur additional costs. For more
-	// information, see Amazon Personalize pricing (https://aws.amazon.com/personalize/pricing/)
-	// .
+	// generate themes, use the default BATCH_INFERENCE .
+	//
+	// When you get batch recommendations with themes, you will incur additional
+	// costs. For more information, see [Amazon Personalize pricing].
+	//
+	// [Amazon Personalize pricing]: https://aws.amazon.com/personalize/pricing/
 	BatchInferenceJobMode types.BatchInferenceJobMode
 
 	// The ARN of the filter to apply to the batch inference job. For more information
-	// on using filters, see Filtering batch recommendations (https://docs.aws.amazon.com/personalize/latest/dg/filter-batch.html)
-	// .
+	// on using filters, see [Filtering batch recommendations].
+	//
+	// [Filtering batch recommendations]: https://docs.aws.amazon.com/personalize/latest/dg/filter-batch.html
 	FilterArn *string
 
 	// The number of recommendations to retrieve.
 	NumResults *int32
 
-	// A list of tags (https://docs.aws.amazon.com/personalize/latest/dg/tagging-resources.html)
-	// to apply to the batch inference job.
+	// A list of [tags] to apply to the batch inference job.
+	//
+	// [tags]: https://docs.aws.amazon.com/personalize/latest/dg/tagging-resources.html
 	Tags []types.Tag
 
 	// For theme generation jobs, specify the name of the column in your Items dataset
@@ -135,25 +147,25 @@ func (c *Client) addOperationCreateBatchInferenceJobMiddlewares(stack *middlewar
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -168,13 +180,16 @@ func (c *Client) addOperationCreateBatchInferenceJobMiddlewares(stack *middlewar
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpCreateBatchInferenceJobValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateBatchInferenceJob(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

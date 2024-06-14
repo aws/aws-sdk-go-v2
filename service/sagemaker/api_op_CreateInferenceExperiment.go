@@ -6,22 +6,27 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates an inference experiment using the configurations specified in the
-// request. Use this API to setup and schedule an experiment to compare model
-// variants on a Amazon SageMaker inference endpoint. For more information about
-// inference experiments, see Shadow tests (https://docs.aws.amazon.com/sagemaker/latest/dg/shadow-tests.html)
-// . Amazon SageMaker begins your experiment at the scheduled time and routes
+//	Creates an inference experiment using the configurations specified in the
+//
+// request.
+//
+// Use this API to setup and schedule an experiment to compare model variants on a
+// Amazon SageMaker inference endpoint. For more information about inference
+// experiments, see [Shadow tests].
+//
+// Amazon SageMaker begins your experiment at the scheduled time and routes
 // traffic to your endpoint's model variants based on your specified configuration.
+//
 // While the experiment is in progress or after it has concluded, you can view
-// metrics that compare your model variants. For more information, see View,
-// monitor, and edit shadow tests (https://docs.aws.amazon.com/sagemaker/latest/dg/shadow-tests-view-monitor-edit.html)
-// .
+// metrics that compare your model variants. For more information, see [View, monitor, and edit shadow tests].
+//
+// [Shadow tests]: https://docs.aws.amazon.com/sagemaker/latest/dg/shadow-tests.html
+// [View, monitor, and edit shadow tests]: https://docs.aws.amazon.com/sagemaker/latest/dg/shadow-tests-view-monitor-edit.html
 func (c *Client) CreateInferenceExperiment(ctx context.Context, params *CreateInferenceExperimentInput, optFns ...func(*Options)) (*CreateInferenceExperimentOutput, error) {
 	if params == nil {
 		params = &CreateInferenceExperimentInput{}
@@ -39,13 +44,13 @@ func (c *Client) CreateInferenceExperiment(ctx context.Context, params *CreateIn
 
 type CreateInferenceExperimentInput struct {
 
-	// The name of the Amazon SageMaker endpoint on which you want to run the
+	//  The name of the Amazon SageMaker endpoint on which you want to run the
 	// inference experiment.
 	//
 	// This member is required.
 	EndpointName *string
 
-	// An array of ModelVariantConfig objects. There is one for each variant in the
+	//  An array of ModelVariantConfig objects. There is one for each variant in the
 	// inference experiment. Each ModelVariantConfig object in the array describes the
 	// infrastructure configuration for the corresponding variant.
 	//
@@ -57,14 +62,14 @@ type CreateInferenceExperimentInput struct {
 	// This member is required.
 	Name *string
 
-	// The ARN of the IAM role that Amazon SageMaker can assume to access model
+	//  The ARN of the IAM role that Amazon SageMaker can assume to access model
 	// artifacts and container images, and manage Amazon SageMaker Inference endpoints
 	// for model deployment.
 	//
 	// This member is required.
 	RoleArn *string
 
-	// The configuration of ShadowMode inference experiment type. Use this field to
+	//  The configuration of ShadowMode inference experiment type. Use this field to
 	// specify a production variant which takes all the inference requests, and a
 	// shadow variant to which Amazon SageMaker replicates a percentage of the
 	// inference requests. For the shadow variant also specify the percentage of
@@ -73,34 +78,50 @@ type CreateInferenceExperimentInput struct {
 	// This member is required.
 	ShadowModeConfig *types.ShadowModeConfig
 
-	// The type of the inference experiment that you want to run. The following types
+	//  The type of the inference experiment that you want to run. The following types
 	// of experiments are possible:
+	//
 	//   - ShadowMode : You can use this type to validate a shadow variant. For more
-	//   information, see Shadow tests (https://docs.aws.amazon.com/sagemaker/latest/dg/shadow-tests.html)
-	//   .
+	//   information, see [Shadow tests].
+	//
+	// [Shadow tests]: https://docs.aws.amazon.com/sagemaker/latest/dg/shadow-tests.html
 	//
 	// This member is required.
 	Type types.InferenceExperimentType
 
-	// The Amazon S3 location and configuration for storing inference request and
-	// response data. This is an optional parameter that you can use for data capture.
-	// For more information, see Capture data (https://docs.aws.amazon.com/sagemaker/latest/dg/model-monitor-data-capture.html)
-	// .
+	//  The Amazon S3 location and configuration for storing inference request and
+	// response data.
+	//
+	// This is an optional parameter that you can use for data capture. For more
+	// information, see [Capture data].
+	//
+	// [Capture data]: https://docs.aws.amazon.com/sagemaker/latest/dg/model-monitor-data-capture.html
 	DataStorageConfig *types.InferenceExperimentDataStorageConfig
 
 	// A description for the inference experiment.
 	Description *string
 
-	// The Amazon Web Services Key Management Service (Amazon Web Services KMS) key
+	//  The Amazon Web Services Key Management Service (Amazon Web Services KMS) key
 	// that Amazon SageMaker uses to encrypt data on the storage volume attached to the
 	// ML compute instance that hosts the endpoint. The KmsKey can be any of the
 	// following formats:
-	//   - KMS key ID "1234abcd-12ab-34cd-56ef-1234567890ab"
+	//
+	//   - KMS key ID
+	//
+	// "1234abcd-12ab-34cd-56ef-1234567890ab"
+	//
 	//   - Amazon Resource Name (ARN) of a KMS key
-	//   "arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"
-	//   - KMS key Alias "alias/ExampleAlias"
+	//
+	// "arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab"
+	//
+	//   - KMS key Alias
+	//
+	// "alias/ExampleAlias"
+	//
 	//   - Amazon Resource Name (ARN) of a KMS key Alias
-	//   "arn:aws:kms:us-west-2:111122223333:alias/ExampleAlias"
+	//
+	// "arn:aws:kms:us-west-2:111122223333:alias/ExampleAlias"
+	//
 	// If you use a KMS key ID or an alias of your KMS key, the Amazon SageMaker
 	// execution role must include permissions to call kms:Encrypt . If you don't
 	// provide a KMS key ID, Amazon SageMaker uses the default KMS key for Amazon S3
@@ -108,23 +129,26 @@ type CreateInferenceExperimentInput struct {
 	// managed keys for OutputDataConfig . If you use a bucket policy with an
 	// s3:PutObject permission that only allows objects with server-side encryption,
 	// set the condition key of s3:x-amz-server-side-encryption to "aws:kms" . For more
-	// information, see KMS managed Encryption Keys (https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingKMSEncryption.html)
-	// in the Amazon Simple Storage Service Developer Guide. The KMS key policy must
-	// grant permission to the IAM role that you specify in your CreateEndpoint and
-	// UpdateEndpoint requests. For more information, see Using Key Policies in Amazon
-	// Web Services KMS (https://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html)
-	// in the Amazon Web Services Key Management Service Developer Guide.
+	// information, see [KMS managed Encryption Keys]in the Amazon Simple Storage Service Developer Guide.
+	//
+	// The KMS key policy must grant permission to the IAM role that you specify in
+	// your CreateEndpoint and UpdateEndpoint requests. For more information, see [Using Key Policies in Amazon Web Services KMS] in
+	// the Amazon Web Services Key Management Service Developer Guide.
+	//
+	// [Using Key Policies in Amazon Web Services KMS]: https://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html
+	// [KMS managed Encryption Keys]: https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingKMSEncryption.html
 	KmsKey *string
 
-	// The duration for which you want the inference experiment to run. If you don't
+	//  The duration for which you want the inference experiment to run. If you don't
 	// specify this field, the experiment automatically starts immediately upon
 	// creation and concludes after 7 days.
 	Schedule *types.InferenceExperimentSchedule
 
-	// Array of key-value pairs. You can use tags to categorize your Amazon Web
+	//  Array of key-value pairs. You can use tags to categorize your Amazon Web
 	// Services resources in different ways, for example, by purpose, owner, or
-	// environment. For more information, see Tagging your Amazon Web Services
-	// Resources (https://docs.aws.amazon.com/ARG/latest/userguide/tagging.html) .
+	// environment. For more information, see [Tagging your Amazon Web Services Resources].
+	//
+	// [Tagging your Amazon Web Services Resources]: https://docs.aws.amazon.com/ARG/latest/userguide/tagging.html
 	Tags []types.Tag
 
 	noSmithyDocumentSerde
@@ -165,25 +189,25 @@ func (c *Client) addOperationCreateInferenceExperimentMiddlewares(stack *middlew
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -198,13 +222,16 @@ func (c *Client) addOperationCreateInferenceExperimentMiddlewares(stack *middlew
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpCreateInferenceExperimentValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateInferenceExperiment(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

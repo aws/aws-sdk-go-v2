@@ -24,6 +24,7 @@ const (
 
 // Values returns all known values for DataReplicationErrorString. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (DataReplicationErrorString) Values() []DataReplicationErrorString {
 	return []DataReplicationErrorString{
@@ -63,8 +64,9 @@ const (
 
 // Values returns all known values for DataReplicationInitiationStepName. Note
 // that this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (DataReplicationInitiationStepName) Values() []DataReplicationInitiationStepName {
 	return []DataReplicationInitiationStepName{
 		"WAIT",
@@ -94,8 +96,9 @@ const (
 
 // Values returns all known values for DataReplicationInitiationStepStatus. Note
 // that this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (DataReplicationInitiationStepStatus) Values() []DataReplicationInitiationStepStatus {
 	return []DataReplicationInitiationStepStatus{
 		"NOT_STARTED",
@@ -123,8 +126,9 @@ const (
 )
 
 // Values returns all known values for DataReplicationState. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (DataReplicationState) Values() []DataReplicationState {
 	return []DataReplicationState{
 		"STOPPED",
@@ -154,8 +158,9 @@ const (
 )
 
 // Values returns all known values for EC2InstanceState. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (EC2InstanceState) Values() []EC2InstanceState {
 	return []EC2InstanceState{
 		"PENDING",
@@ -178,8 +183,9 @@ const (
 )
 
 // Values returns all known values for ExtensionStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ExtensionStatus) Values() []ExtensionStatus {
 	return []ExtensionStatus{
 		"EXTENDED",
@@ -197,8 +203,9 @@ const (
 )
 
 // Values returns all known values for FailbackLaunchType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (FailbackLaunchType) Values() []FailbackLaunchType {
 	return []FailbackLaunchType{
 		"RECOVERY",
@@ -235,6 +242,7 @@ const (
 
 // Values returns all known values for FailbackReplicationError. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (FailbackReplicationError) Values() []FailbackReplicationError {
 	return []FailbackReplicationError{
@@ -276,8 +284,9 @@ const (
 )
 
 // Values returns all known values for FailbackState. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (FailbackState) Values() []FailbackState {
 	return []FailbackState{
 		"FAILBACK_NOT_STARTED",
@@ -306,8 +315,9 @@ const (
 )
 
 // Values returns all known values for InitiatedBy. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (InitiatedBy) Values() []InitiatedBy {
 	return []InitiatedBy{
 		"START_RECOVERY",
@@ -356,8 +366,9 @@ const (
 )
 
 // Values returns all known values for JobLogEvent. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (JobLogEvent) Values() []JobLogEvent {
 	return []JobLogEvent{
 		"JOB_START",
@@ -400,8 +411,9 @@ const (
 )
 
 // Values returns all known values for JobStatus. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (JobStatus) Values() []JobStatus {
 	return []JobStatus{
 		"PENDING",
@@ -420,8 +432,9 @@ const (
 )
 
 // Values returns all known values for JobType. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (JobType) Values() []JobType {
 	return []JobType{
 		"LAUNCH",
@@ -441,8 +454,9 @@ const (
 )
 
 // Values returns all known values for LastLaunchResult. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (LastLaunchResult) Values() []LastLaunchResult {
 	return []LastLaunchResult{
 		"NOT_STARTED",
@@ -461,8 +475,9 @@ const (
 )
 
 // Values returns all known values for LastLaunchType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (LastLaunchType) Values() []LastLaunchType {
 	return []LastLaunchType{
 		"RECOVERY",
@@ -482,8 +497,9 @@ const (
 )
 
 // Values returns all known values for LaunchActionCategory. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (LaunchActionCategory) Values() []LaunchActionCategory {
 	return []LaunchActionCategory{
 		"MONITORING",
@@ -504,6 +520,7 @@ const (
 
 // Values returns all known values for LaunchActionParameterType. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (LaunchActionParameterType) Values() []LaunchActionParameterType {
 	return []LaunchActionParameterType{
@@ -522,8 +539,9 @@ const (
 )
 
 // Values returns all known values for LaunchActionRunStatus. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (LaunchActionRunStatus) Values() []LaunchActionRunStatus {
 	return []LaunchActionRunStatus{
 		"IN_PROGRESS",
@@ -541,8 +559,9 @@ const (
 )
 
 // Values returns all known values for LaunchActionType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (LaunchActionType) Values() []LaunchActionType {
 	return []LaunchActionType{
 		"SSM_AUTOMATION",
@@ -559,8 +578,9 @@ const (
 )
 
 // Values returns all known values for LaunchDisposition. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (LaunchDisposition) Values() []LaunchDisposition {
 	return []LaunchDisposition{
 		"STOPPED",
@@ -580,8 +600,9 @@ const (
 )
 
 // Values returns all known values for LaunchStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (LaunchStatus) Values() []LaunchStatus {
 	return []LaunchStatus{
 		"PENDING",
@@ -601,8 +622,9 @@ const (
 )
 
 // Values returns all known values for OriginEnvironment. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (OriginEnvironment) Values() []OriginEnvironment {
 	return []OriginEnvironment{
 		"ON_PREMISES",
@@ -620,13 +642,33 @@ const (
 )
 
 // Values returns all known values for PITPolicyRuleUnits. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (PITPolicyRuleUnits) Values() []PITPolicyRuleUnits {
 	return []PITPolicyRuleUnits{
 		"MINUTE",
 		"HOUR",
 		"DAY",
+	}
+}
+
+type ProductCodeMode string
+
+// Enum values for ProductCodeMode
+const (
+	ProductCodeModeEnabled  ProductCodeMode = "ENABLED"
+	ProductCodeModeDisabled ProductCodeMode = "DISABLED"
+)
+
+// Values returns all known values for ProductCodeMode. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ProductCodeMode) Values() []ProductCodeMode {
+	return []ProductCodeMode{
+		"ENABLED",
+		"DISABLED",
 	}
 }
 
@@ -656,8 +698,9 @@ const (
 
 // Values returns all known values for
 // RecoveryInstanceDataReplicationInitiationStepName. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (RecoveryInstanceDataReplicationInitiationStepName) Values() []RecoveryInstanceDataReplicationInitiationStepName {
 	return []RecoveryInstanceDataReplicationInitiationStepName{
 		"LINK_FAILBACK_CLIENT_WITH_RECOVERY_INSTANCE",
@@ -694,8 +737,9 @@ const (
 
 // Values returns all known values for
 // RecoveryInstanceDataReplicationInitiationStepStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (RecoveryInstanceDataReplicationInitiationStepStatus) Values() []RecoveryInstanceDataReplicationInitiationStepStatus {
 	return []RecoveryInstanceDataReplicationInitiationStepStatus{
 		"NOT_STARTED",
@@ -726,8 +770,9 @@ const (
 
 // Values returns all known values for RecoveryInstanceDataReplicationState. Note
 // that this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (RecoveryInstanceDataReplicationState) Values() []RecoveryInstanceDataReplicationState {
 	return []RecoveryInstanceDataReplicationState{
 		"STOPPED",
@@ -759,8 +804,9 @@ const (
 )
 
 // Values returns all known values for RecoveryResult. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (RecoveryResult) Values() []RecoveryResult {
 	return []RecoveryResult{
 		"NOT_STARTED",
@@ -782,8 +828,9 @@ const (
 )
 
 // Values returns all known values for RecoverySnapshotsOrder. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (RecoverySnapshotsOrder) Values() []RecoverySnapshotsOrder {
 	return []RecoverySnapshotsOrder{
 		"ASC",
@@ -801,8 +848,9 @@ const (
 
 // Values returns all known values for ReplicationConfigurationDataPlaneRouting.
 // Note that this can be expanded in the future, and so it is only as up to date as
-// the client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ReplicationConfigurationDataPlaneRouting) Values() []ReplicationConfigurationDataPlaneRouting {
 	return []ReplicationConfigurationDataPlaneRouting{
 		"PRIVATE_IP",
@@ -822,8 +870,9 @@ const (
 
 // Values returns all known values for
 // ReplicationConfigurationDefaultLargeStagingDiskType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ReplicationConfigurationDefaultLargeStagingDiskType) Values() []ReplicationConfigurationDefaultLargeStagingDiskType {
 	return []ReplicationConfigurationDefaultLargeStagingDiskType{
 		"GP2",
@@ -844,8 +893,9 @@ const (
 
 // Values returns all known values for ReplicationConfigurationEbsEncryption. Note
 // that this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ReplicationConfigurationEbsEncryption) Values() []ReplicationConfigurationEbsEncryption {
 	return []ReplicationConfigurationEbsEncryption{
 		"DEFAULT",
@@ -869,8 +919,9 @@ const (
 
 // Values returns all known values for
 // ReplicationConfigurationReplicatedDiskStagingDiskType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ReplicationConfigurationReplicatedDiskStagingDiskType) Values() []ReplicationConfigurationReplicatedDiskStagingDiskType {
 	return []ReplicationConfigurationReplicatedDiskStagingDiskType{
 		"AUTO",
@@ -892,8 +943,9 @@ const (
 )
 
 // Values returns all known values for ReplicationDirection. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ReplicationDirection) Values() []ReplicationDirection {
 	return []ReplicationDirection{
 		"FAILOVER",
@@ -912,8 +964,9 @@ const (
 )
 
 // Values returns all known values for ReplicationStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ReplicationStatus) Values() []ReplicationStatus {
 	return []ReplicationStatus{
 		"STOPPED",
@@ -934,8 +987,9 @@ const (
 
 // Values returns all known values for TargetInstanceTypeRightSizingMethod. Note
 // that this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (TargetInstanceTypeRightSizingMethod) Values() []TargetInstanceTypeRightSizingMethod {
 	return []TargetInstanceTypeRightSizingMethod{
 		"NONE",
@@ -956,6 +1010,7 @@ const (
 
 // Values returns all known values for ValidationExceptionReason. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (ValidationExceptionReason) Values() []ValidationExceptionReason {
 	return []ValidationExceptionReason{
@@ -963,5 +1018,30 @@ func (ValidationExceptionReason) Values() []ValidationExceptionReason {
 		"cannotParse",
 		"fieldValidationFailed",
 		"other",
+	}
+}
+
+type VolumeStatus string
+
+// Enum values for VolumeStatus
+const (
+	VolumeStatusRegular                                       VolumeStatus = "REGULAR"
+	VolumeStatusContainsMarketplaceProductCodes               VolumeStatus = "CONTAINS_MARKETPLACE_PRODUCT_CODES"
+	VolumeStatusMissingVolumeAttributes                       VolumeStatus = "MISSING_VOLUME_ATTRIBUTES"
+	VolumeStatusMissingVolumeAttributesAndPrecheckUnavailable VolumeStatus = "MISSING_VOLUME_ATTRIBUTES_AND_PRECHECK_UNAVAILABLE"
+	VolumeStatusPending                                       VolumeStatus = "PENDING"
+)
+
+// Values returns all known values for VolumeStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (VolumeStatus) Values() []VolumeStatus {
+	return []VolumeStatus{
+		"REGULAR",
+		"CONTAINS_MARKETPLACE_PRODUCT_CODES",
+		"MISSING_VOLUME_ATTRIBUTES",
+		"MISSING_VOLUME_ATTRIBUTES_AND_PRECHECK_UNAVAILABLE",
+		"PENDING",
 	}
 }

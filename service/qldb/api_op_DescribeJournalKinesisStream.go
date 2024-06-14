@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/qldb/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -14,10 +13,12 @@ import (
 
 // Returns detailed information about a given Amazon QLDB journal stream. The
 // output includes the Amazon Resource Name (ARN), stream name, current status,
-// creation time, and the parameters of the original stream creation request. This
-// action does not return any expired journal streams. For more information, see
-// Expiration for terminal streams (https://docs.aws.amazon.com/qldb/latest/developerguide/streams.create.html#streams.create.states.expiration)
-// in the Amazon QLDB Developer Guide.
+// creation time, and the parameters of the original stream creation request.
+//
+// This action does not return any expired journal streams. For more information,
+// see [Expiration for terminal streams]in the Amazon QLDB Developer Guide.
+//
+// [Expiration for terminal streams]: https://docs.aws.amazon.com/qldb/latest/developerguide/streams.create.html#streams.create.states.expiration
 func (c *Client) DescribeJournalKinesisStream(ctx context.Context, params *DescribeJournalKinesisStreamInput, optFns ...func(*Options)) (*DescribeJournalKinesisStreamOutput, error) {
 	if params == nil {
 		params = &DescribeJournalKinesisStreamInput{}
@@ -83,25 +84,25 @@ func (c *Client) addOperationDescribeJournalKinesisStreamMiddlewares(stack *midd
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -116,13 +117,16 @@ func (c *Client) addOperationDescribeJournalKinesisStreamMiddlewares(stack *midd
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDescribeJournalKinesisStreamValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeJournalKinesisStream(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

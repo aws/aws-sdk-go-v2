@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/customerprofiles/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -15,10 +14,12 @@ import (
 
 // Creates a new calculated attribute definition. After creation, new object data
 // ingested into Customer Profiles will be included in the calculated attribute,
-// which can be retrieved for a profile using the GetCalculatedAttributeForProfile (https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_GetCalculatedAttributeForProfile.html)
-// API. Defining a calculated attribute makes it available for all profiles within
-// a domain. Each calculated attribute can only reference one ObjectType and at
-// most, two fields from that ObjectType .
+// which can be retrieved for a profile using the [GetCalculatedAttributeForProfile]API. Defining a calculated
+// attribute makes it available for all profiles within a domain. Each calculated
+// attribute can only reference one ObjectType and at most, two fields from that
+// ObjectType .
+//
+// [GetCalculatedAttributeForProfile]: https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_GetCalculatedAttributeForProfile.html
 func (c *Client) CreateCalculatedAttributeDefinition(ctx context.Context, params *CreateCalculatedAttributeDefinitionInput, optFns ...func(*Options)) (*CreateCalculatedAttributeDefinitionOutput, error) {
 	if params == nil {
 		params = &CreateCalculatedAttributeDefinitionInput{}
@@ -133,25 +134,25 @@ func (c *Client) addOperationCreateCalculatedAttributeDefinitionMiddlewares(stac
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -166,13 +167,16 @@ func (c *Client) addOperationCreateCalculatedAttributeDefinitionMiddlewares(stac
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpCreateCalculatedAttributeDefinitionValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateCalculatedAttributeDefinition(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

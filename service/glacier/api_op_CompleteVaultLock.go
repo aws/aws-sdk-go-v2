@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	glaciercust "github.com/aws/aws-sdk-go-v2/service/glacier/internal/customizations"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -15,16 +14,19 @@ import (
 // This operation completes the vault locking process by transitioning the vault
 // lock from the InProgress state to the Locked state, which causes the vault lock
 // policy to become unchangeable. A vault lock is put into the InProgress state by
-// calling InitiateVaultLock . You can obtain the state of the vault lock by
-// calling GetVaultLock . For more information about the vault locking process,
-// Amazon Glacier Vault Lock (https://docs.aws.amazon.com/amazonglacier/latest/dev/vault-lock.html)
-// . This operation is idempotent. This request is always successful if the vault
+// calling InitiateVaultLock. You can obtain the state of the vault lock by calling GetVaultLock. For more
+// information about the vault locking process, [Amazon Glacier Vault Lock].
+//
+// This operation is idempotent. This request is always successful if the vault
 // lock is in the Locked state and the provided lock ID matches the lock ID
-// originally used to lock the vault. If an invalid lock ID is passed in the
-// request when the vault lock is in the Locked state, the operation returns an
-// AccessDeniedException error. If an invalid lock ID is passed in the request when
-// the vault lock is in the InProgress state, the operation throws an
-// InvalidParameter error.
+// originally used to lock the vault.
+//
+// If an invalid lock ID is passed in the request when the vault lock is in the
+// Locked state, the operation returns an AccessDeniedException error. If an
+// invalid lock ID is passed in the request when the vault lock is in the
+// InProgress state, the operation throws an InvalidParameter error.
+//
+// [Amazon Glacier Vault Lock]: https://docs.aws.amazon.com/amazonglacier/latest/dev/vault-lock.html
 func (c *Client) CompleteVaultLock(ctx context.Context, params *CompleteVaultLockInput, optFns ...func(*Options)) (*CompleteVaultLockOutput, error) {
 	if params == nil {
 		params = &CompleteVaultLockInput{}
@@ -95,25 +97,25 @@ func (c *Client) addOperationCompleteVaultLockMiddlewares(stack *middleware.Stac
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -128,13 +130,16 @@ func (c *Client) addOperationCompleteVaultLockMiddlewares(stack *middleware.Stac
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpCompleteVaultLockValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCompleteVaultLock(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

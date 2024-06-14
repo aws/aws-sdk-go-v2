@@ -6,19 +6,23 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Use this operation to delete a workforce. If you want to create a new workforce
-// in an Amazon Web Services Region where a workforce already exists, use this
-// operation to delete the existing workforce and then use CreateWorkforce (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateWorkforce.html)
-// to create a new workforce. If a private workforce contains one or more work
-// teams, you must use the DeleteWorkteam (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_DeleteWorkteam.html)
+// Use this operation to delete a workforce.
+//
+// If you want to create a new workforce in an Amazon Web Services Region where a
+// workforce already exists, use this operation to delete the existing workforce
+// and then use [CreateWorkforce]to create a new workforce.
+//
+// If a private workforce contains one or more work teams, you must use the [DeleteWorkteam]
 // operation to delete all work teams before you delete the workforce. If you try
 // to delete a workforce that contains one or more work teams, you will recieve a
 // ResourceInUse error.
+//
+// [CreateWorkforce]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateWorkforce.html
+// [DeleteWorkteam]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_DeleteWorkteam.html
 func (c *Client) DeleteWorkforce(ctx context.Context, params *DeleteWorkforceInput, optFns ...func(*Options)) (*DeleteWorkforceOutput, error) {
 	if params == nil {
 		params = &DeleteWorkforceInput{}
@@ -73,25 +77,25 @@ func (c *Client) addOperationDeleteWorkforceMiddlewares(stack *middleware.Stack,
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -106,13 +110,16 @@ func (c *Client) addOperationDeleteWorkforceMiddlewares(stack *middleware.Stack,
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDeleteWorkforceValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteWorkforce(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

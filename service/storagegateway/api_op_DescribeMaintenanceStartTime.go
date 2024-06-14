@@ -6,13 +6,14 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
+	"github.com/aws/aws-sdk-go-v2/service/storagegateway/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns your gateway's weekly maintenance start time including the day and time
-// of the week. Note that values are in terms of the gateway's time zone.
+// Returns your gateway's maintenance window schedule information, with values for
+// monthly or weekly cadence, specific day and time to begin maintenance, and which
+// types of updates to apply. Time values returned are for the gateway's time zone.
 func (c *Client) DescribeMaintenanceStartTime(ctx context.Context, params *DescribeMaintenanceStartTimeInput, optFns ...func(*Options)) (*DescribeMaintenanceStartTimeOutput, error) {
 	if params == nil {
 		params = &DescribeMaintenanceStartTimeInput{}
@@ -31,8 +32,8 @@ func (c *Client) DescribeMaintenanceStartTime(ctx context.Context, params *Descr
 // A JSON object containing the Amazon Resource Name (ARN) of the gateway.
 type DescribeMaintenanceStartTimeInput struct {
 
-	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation
-	// to return a list of gateways for your account and Amazon Web Services Region.
+	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation to return a
+	// list of gateways for your account and Amazon Web Services Region.
 	//
 	// This member is required.
 	GatewayARN *string
@@ -41,16 +42,23 @@ type DescribeMaintenanceStartTimeInput struct {
 }
 
 // A JSON object containing the following fields:
-//   - DescribeMaintenanceStartTimeOutput$DayOfMonth
-//   - DescribeMaintenanceStartTimeOutput$DayOfWeek
-//   - DescribeMaintenanceStartTimeOutput$HourOfDay
-//   - DescribeMaintenanceStartTimeOutput$MinuteOfHour
-//   - DescribeMaintenanceStartTimeOutput$Timezone
+//
+// # DescribeMaintenanceStartTimeOutput$SoftwareUpdatePreferences
+//
+// # DescribeMaintenanceStartTimeOutput$DayOfMonth
+//
+// # DescribeMaintenanceStartTimeOutput$DayOfWeek
+//
+// # DescribeMaintenanceStartTimeOutput$HourOfDay
+//
+// # DescribeMaintenanceStartTimeOutput$MinuteOfHour
+//
+// DescribeMaintenanceStartTimeOutput$Timezone
 type DescribeMaintenanceStartTimeOutput struct {
 
 	// The day of the month component of the maintenance start time represented as an
-	// ordinal number from 1 to 28, where 1 represents the first day of the month and
-	// 28 represents the last day of the month.
+	// ordinal number from 1 to 28, where 1 represents the first day of the month. It
+	// is not possible to set the maintenance schedule to start on days 29 through 31.
 	DayOfMonth *int32
 
 	// An ordinal number between 0 and 6 that represents the day of the week, where 0
@@ -58,8 +66,8 @@ type DescribeMaintenanceStartTimeOutput struct {
 	// of the gateway.
 	DayOfWeek *int32
 
-	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation
-	// to return a list of gateways for your account and Amazon Web Services Region.
+	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation to return a
+	// list of gateways for your account and Amazon Web Services Region.
 	GatewayARN *string
 
 	// The hour component of the maintenance start time represented as hh, where hh is
@@ -70,6 +78,15 @@ type DescribeMaintenanceStartTimeOutput struct {
 	// is the minute (0 to 59). The minute of the hour is in the time zone of the
 	// gateway.
 	MinuteOfHour *int32
+
+	// A set of variables indicating the software update preferences for the gateway.
+	//
+	// Includes AutomaticUpdatePolicy field with the following inputs:
+	//
+	// ALL_VERSIONS - Enables regular gateway maintenance updates.
+	//
+	// EMERGENCY_VERSIONS_ONLY - Disables regular gateway maintenance updates.
+	SoftwareUpdatePreferences *types.SoftwareUpdatePreferences
 
 	// A value that indicates the time zone that is set for the gateway. The start
 	// time and day of week specified should be in the time zone of the gateway.
@@ -103,25 +120,25 @@ func (c *Client) addOperationDescribeMaintenanceStartTimeMiddlewares(stack *midd
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -136,13 +153,16 @@ func (c *Client) addOperationDescribeMaintenanceStartTimeMiddlewares(stack *midd
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDescribeMaintenanceStartTimeValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeMaintenanceStartTime(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

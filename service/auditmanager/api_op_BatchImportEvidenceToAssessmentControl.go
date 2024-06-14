@@ -6,27 +6,33 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/auditmanager/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Adds one or more pieces of evidence to a control in an Audit Manager
-// assessment. You can import manual evidence from any S3 bucket by specifying the
-// S3 URI of the object. You can also upload a file from your browser, or enter
-// plain text in response to a risk assessment question. The following restrictions
-// apply to this action:
+// assessment.
+//
+// You can import manual evidence from any S3 bucket by specifying the S3 URI of
+// the object. You can also upload a file from your browser, or enter plain text in
+// response to a risk assessment question.
+//
+// The following restrictions apply to this action:
+//
 //   - manualEvidence can be only one of the following: evidenceFileName ,
 //     s3ResourcePath , or textResponse
-//   - Maximum size of an individual evidence file: 100 MB
-//   - Number of daily manual evidence uploads per control: 100
-//   - Supported file formats: See Supported file types for manual evidence (https://docs.aws.amazon.com/audit-manager/latest/userguide/upload-evidence.html#supported-manual-evidence-files)
-//     in the Audit Manager User Guide
 //
-// For more information about Audit Manager service restrictions, see Quotas and
-// restrictions for Audit Manager (https://docs.aws.amazon.com/audit-manager/latest/userguide/service-quotas.html)
-// .
+//   - Maximum size of an individual evidence file: 100 MB
+//
+//   - Number of daily manual evidence uploads per control: 100
+//
+//   - Supported file formats: See [Supported file types for manual evidence]in the Audit Manager User Guide
+//
+// For more information about Audit Manager service restrictions, see [Quotas and restrictions for Audit Manager].
+//
+// [Supported file types for manual evidence]: https://docs.aws.amazon.com/audit-manager/latest/userguide/upload-evidence.html#supported-manual-evidence-files
+// [Quotas and restrictions for Audit Manager]: https://docs.aws.amazon.com/audit-manager/latest/userguide/service-quotas.html
 func (c *Client) BatchImportEvidenceToAssessmentControl(ctx context.Context, params *BatchImportEvidenceToAssessmentControlInput, optFns ...func(*Options)) (*BatchImportEvidenceToAssessmentControlOutput, error) {
 	if params == nil {
 		params = &BatchImportEvidenceToAssessmentControlInput{}
@@ -44,22 +50,22 @@ func (c *Client) BatchImportEvidenceToAssessmentControl(ctx context.Context, par
 
 type BatchImportEvidenceToAssessmentControlInput struct {
 
-	// The identifier for the assessment.
+	//  The identifier for the assessment.
 	//
 	// This member is required.
 	AssessmentId *string
 
-	// The identifier for the control.
+	//  The identifier for the control.
 	//
 	// This member is required.
 	ControlId *string
 
-	// The identifier for the control set.
+	//  The identifier for the control set.
 	//
 	// This member is required.
 	ControlSetId *string
 
-	// The list of manual evidence objects.
+	//  The list of manual evidence objects.
 	//
 	// This member is required.
 	ManualEvidence []types.ManualEvidence
@@ -69,7 +75,7 @@ type BatchImportEvidenceToAssessmentControlInput struct {
 
 type BatchImportEvidenceToAssessmentControlOutput struct {
 
-	// A list of errors that the BatchImportEvidenceToAssessmentControl API returned.
+	//  A list of errors that the BatchImportEvidenceToAssessmentControl API returned.
 	Errors []types.BatchImportEvidenceToAssessmentControlError
 
 	// Metadata pertaining to the operation's result.
@@ -100,25 +106,25 @@ func (c *Client) addOperationBatchImportEvidenceToAssessmentControlMiddlewares(s
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -133,13 +139,16 @@ func (c *Client) addOperationBatchImportEvidenceToAssessmentControlMiddlewares(s
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpBatchImportEvidenceToAssessmentControlValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opBatchImportEvidenceToAssessmentControl(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

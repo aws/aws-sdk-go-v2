@@ -6,21 +6,27 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/ivsrealtime/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Starts a Composition from a stage based on the configuration provided in the
-// request. A Composition is an ephemeral resource that exists after this endpoint
-// returns successfully. Composition stops and the resource is deleted:
-//   - When StopComposition is called.
+// request.
+//
+// A Composition is an ephemeral resource that exists after this endpoint returns
+// successfully. Composition stops and the resource is deleted:
+//
+//   - When StopCompositionis called.
+//
 //   - After a 1-minute timeout, when all participants are disconnected from the
 //     stage.
+//
 //   - After a 1-minute timeout, if there are no participants in the stage when
 //     StartComposition is called.
+//
 //   - When broadcasting to the IVS channel fails and all retries are exhausted.
+//
 //   - When broadcasting is disconnected and all attempts to reconnect are
 //     exhausted.
 func (c *Client) StartComposition(ctx context.Context, params *StartCompositionInput, optFns ...func(*Options)) (*StartCompositionOutput, error) {
@@ -57,10 +63,11 @@ type StartCompositionInput struct {
 	Layout *types.LayoutConfiguration
 
 	// Tags attached to the resource. Array of maps, each of the form string:string
-	// (key:value) . See Tagging AWS Resources (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html)
-	// for details, including restrictions that apply to tags and "Tag naming limits
-	// and requirements"; Amazon IVS has no constraints on tags beyond what is
-	// documented there.
+	// (key:value) . See [Tagging AWS Resources] for details, including restrictions that apply to tags and
+	// "Tag naming limits and requirements"; Amazon IVS has no constraints on tags
+	// beyond what is documented there.
+	//
+	// [Tagging AWS Resources]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
 	Tags map[string]string
 
 	noSmithyDocumentSerde
@@ -99,25 +106,25 @@ func (c *Client) addOperationStartCompositionMiddlewares(stack *middleware.Stack
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -132,6 +139,9 @@ func (c *Client) addOperationStartCompositionMiddlewares(stack *middleware.Stack
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opStartCompositionMiddleware(stack, options); err != nil {
 		return err
 	}
@@ -141,7 +151,7 @@ func (c *Client) addOperationStartCompositionMiddlewares(stack *middleware.Stack
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opStartComposition(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

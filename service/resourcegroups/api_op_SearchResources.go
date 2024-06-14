@@ -6,19 +6,25 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/resourcegroups/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Returns a list of Amazon Web Services resource identifiers that matches the
-// specified query. The query uses the same format as a resource query in a
-// CreateGroup or UpdateGroupQuery operation. Minimum permissions To run this
-// command, you must have the following permissions:
+// specified query. The query uses the same format as a resource query in a CreateGroupor UpdateGroupQuery
+// operation.
+//
+// # Minimum permissions
+//
+// To run this command, you must have the following permissions:
+//
 //   - resource-groups:SearchResources
+//
 //   - cloudformation:DescribeStacks
+//
 //   - cloudformation:ListStackResources
+//
 //   - tag:GetResources
 func (c *Client) SearchResources(ctx context.Context, params *SearchResourcesInput, optFns ...func(*Options)) (*SearchResourcesOutput, error) {
 	if params == nil {
@@ -38,7 +44,7 @@ func (c *Client) SearchResources(ctx context.Context, params *SearchResourcesInp
 type SearchResourcesInput struct {
 
 	// The search query, using the same formats that are supported for resource group
-	// definition. For more information, see CreateGroup .
+	// definition. For more information, see CreateGroup.
 	//
 	// This member is required.
 	ResourceQuery *types.ResourceQuery
@@ -71,10 +77,15 @@ type SearchResourcesOutput struct {
 	// repeat this until the NextToken response element comes back as null .
 	NextToken *string
 
-	// A list of QueryError objects. Each error is an object that contains ErrorCode
-	// and Message structures. Possible values for ErrorCode :
+	// A list of QueryError objects. Each error contains an ErrorCode and Message .
+	//
+	// Possible values for ErrorCode :
+	//
 	//   - CLOUDFORMATION_STACK_INACTIVE
+	//
 	//   - CLOUDFORMATION_STACK_NOT_EXISTING
+	//
+	//   - CLOUDFORMATION_STACK_UNASSUMABLE_ROLE
 	QueryErrors []types.QueryError
 
 	// The ARNs and resource types of resources that are members of the group that you
@@ -109,25 +120,25 @@ func (c *Client) addOperationSearchResourcesMiddlewares(stack *middleware.Stack,
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -142,13 +153,16 @@ func (c *Client) addOperationSearchResourcesMiddlewares(stack *middleware.Stack,
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpSearchResourcesValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opSearchResources(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

@@ -6,15 +6,15 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Associates a child asset with the given parent asset through a hierarchy
-// defined in the parent asset's model. For more information, see Associating
-// assets (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/add-associated-assets.html)
-// in the IoT SiteWise User Guide.
+// defined in the parent asset's model. For more information, see [Associating assets]in the IoT
+// SiteWise User Guide.
+//
+// [Associating assets]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/add-associated-assets.html
 func (c *Client) AssociateAssets(ctx context.Context, params *AssociateAssetsInput, optFns ...func(*Options)) (*AssociateAssetsOutput, error) {
 	if params == nil {
 		params = &AssociateAssetsInput{}
@@ -34,27 +34,30 @@ type AssociateAssetsInput struct {
 
 	// The ID of the parent asset. This can be either the actual ID in UUID format, or
 	// else externalId: followed by the external ID, if it has one. For more
-	// information, see Referencing objects with external IDs (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/object-ids.html#external-id-references)
-	// in the IoT SiteWise User Guide.
+	// information, see [Referencing objects with external IDs]in the IoT SiteWise User Guide.
+	//
+	// [Referencing objects with external IDs]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/object-ids.html#external-id-references
 	//
 	// This member is required.
 	AssetId *string
 
 	// The ID of the child asset to be associated. This can be either the actual ID in
 	// UUID format, or else externalId: followed by the external ID, if it has one.
-	// For more information, see Referencing objects with external IDs (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/object-ids.html#external-id-references)
-	// in the IoT SiteWise User Guide.
+	// For more information, see [Referencing objects with external IDs]in the IoT SiteWise User Guide.
+	//
+	// [Referencing objects with external IDs]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/object-ids.html#external-id-references
 	//
 	// This member is required.
 	ChildAssetId *string
 
 	// The ID of a hierarchy in the parent asset's model. (This can be either the
 	// actual ID in UUID format, or else externalId: followed by the external ID, if
-	// it has one. For more information, see Referencing objects with external IDs (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/object-ids.html#external-id-references)
-	// in the IoT SiteWise User Guide.) Hierarchies allow different groupings of assets
-	// to be formed that all come from the same asset model. For more information, see
-	// Asset hierarchies (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/asset-hierarchies.html)
-	// in the IoT SiteWise User Guide.
+	// it has one. For more information, see [Referencing objects with external IDs]in the IoT SiteWise User Guide.)
+	// Hierarchies allow different groupings of assets to be formed that all come from
+	// the same asset model. For more information, see [Asset hierarchies]in the IoT SiteWise User Guide.
+	//
+	// [Asset hierarchies]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/asset-hierarchies.html
+	// [Referencing objects with external IDs]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/object-ids.html#external-id-references
 	//
 	// This member is required.
 	HierarchyId *string
@@ -96,25 +99,25 @@ func (c *Client) addOperationAssociateAssetsMiddlewares(stack *middleware.Stack,
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -129,6 +132,9 @@ func (c *Client) addOperationAssociateAssetsMiddlewares(stack *middleware.Stack,
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addEndpointPrefix_opAssociateAssetsMiddleware(stack); err != nil {
 		return err
 	}
@@ -141,7 +147,7 @@ func (c *Client) addOperationAssociateAssetsMiddlewares(stack *middleware.Stack,
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opAssociateAssets(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

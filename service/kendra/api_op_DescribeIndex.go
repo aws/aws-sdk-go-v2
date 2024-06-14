@@ -6,14 +6,13 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/kendra/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
-// Gets information about an existing Amazon Kendra index.
+// Gets information about an Amazon Kendra index.
 func (c *Client) DescribeIndex(ctx context.Context, params *DescribeIndexInput, optFns ...func(*Options)) (*DescribeIndexOutput, error) {
 	if params == nil {
 		params = &DescribeIndexInput{}
@@ -45,8 +44,9 @@ type DescribeIndexOutput struct {
 	// meet the needs of your application. This contains the capacity units used for
 	// the index. A query or document storage capacity of zero indicates that the index
 	// is using the default capacity. For more information on the default capacity for
-	// an index and adjusting this, see Adjusting capacity (https://docs.aws.amazon.com/kendra/latest/dg/adjusting-capacity.html)
-	// .
+	// an index and adjusting this, see [Adjusting capacity].
+	//
+	// [Adjusting capacity]: https://docs.aws.amazon.com/kendra/latest/dg/adjusting-capacity.html
 	CapacityUnits *types.CapacityUnitsConfiguration
 
 	// The Unix timestamp when the index was created.
@@ -79,11 +79,11 @@ type DescribeIndexOutput struct {
 	Name *string
 
 	// The Amazon Resource Name (ARN) of the IAM role that gives Amazon Kendra
-	// permission to write to your Amazon Cloudwatch logs.
+	// permission to write to your Amazon CloudWatch logs.
 	RoleArn *string
 
-	// The identifier of the KMScustomer master key (CMK) that is used to encrypt your
-	// data. Amazon Kendra doesn't support asymmetric CMKs.
+	// The identifier of the KMS customer master key (CMK) that is used to encrypt
+	// your data. Amazon Kendra doesn't support asymmetric CMKs.
 	ServerSideEncryptionConfiguration *types.ServerSideEncryptionConfiguration
 
 	// The current status of the index. When the value is ACTIVE , the index is ready
@@ -91,14 +91,15 @@ type DescribeIndexOutput struct {
 	// a message that explains why.
 	Status types.IndexStatus
 
-	// The Unix when the index was last updated.
+	// The Unix timestamp when the index was last updated.
 	UpdatedAt *time.Time
 
 	// The user context policy for the Amazon Kendra index.
 	UserContextPolicy types.UserContextPolicy
 
-	// Whether you have enabled the configuration for fetching access levels of groups
-	// and users from an IAM Identity Center identity source.
+	// Whether you have enabled IAM Identity Center identity source for your users and
+	// groups. This is useful for user context filtering, where search results are
+	// filtered based on the user or their group access to documents.
 	UserGroupResolutionConfiguration *types.UserGroupResolutionConfiguration
 
 	// The user token configuration for the Amazon Kendra index.
@@ -132,25 +133,25 @@ func (c *Client) addOperationDescribeIndexMiddlewares(stack *middleware.Stack, o
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -165,13 +166,16 @@ func (c *Client) addOperationDescribeIndexMiddlewares(stack *middleware.Stack, o
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDescribeIndexValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeIndex(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

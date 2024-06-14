@@ -6,23 +6,28 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/bedrock/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a fine-tuning job to customize a base model. You specify the base
-// foundation model and the location of the training data. After the
-// model-customization job completes successfully, your custom model resource will
-// be ready to use. Training data contains input and output text for each record in
-// a JSONL format. Optionally, you can specify validation data in the same format
-// as the training data. Amazon Bedrock returns validation loss metrics and output
-// generations after the job completes. Model-customization jobs are asynchronous
-// and the completion time depends on the base model and the training/validation
-// data size. To monitor a job, use the GetModelCustomizationJob operation to
-// retrieve the job status. For more information, see Custom models (https://docs.aws.amazon.com/bedrock/latest/userguide/custom-models.html)
-// in the Bedrock User Guide.
+// Creates a fine-tuning job to customize a base model.
+//
+// You specify the base foundation model and the location of the training data.
+// After the model-customization job completes successfully, your custom model
+// resource will be ready to use. Amazon Bedrock returns validation loss metrics
+// and output generations after the job completes.
+//
+// For information on the format of training and validation data, see [Prepare the datasets].
+//
+// Model-customization jobs are asynchronous and the completion time depends on
+// the base model and the training/validation data size. To monitor a job, use the
+// GetModelCustomizationJob operation to retrieve the job status.
+//
+// For more information, see [Custom models] in the Amazon Bedrock User Guide.
+//
+// [Custom models]: https://docs.aws.amazon.com/bedrock/latest/userguide/custom-models.html
+// [Prepare the datasets]: https://docs.aws.amazon.com/bedrock/latest/userguide/model-customization-prepare.html
 func (c *Client) CreateModelCustomizationJob(ctx context.Context, params *CreateModelCustomizationJobInput, optFns ...func(*Options)) (*CreateModelCustomizationJobOutput, error) {
 	if params == nil {
 		params = &CreateModelCustomizationJobInput{}
@@ -45,17 +50,20 @@ type CreateModelCustomizationJobInput struct {
 	// This member is required.
 	BaseModelIdentifier *string
 
-	// Enter a name for the custom model.
+	// A name for the resulting custom model.
 	//
 	// This member is required.
 	CustomModelName *string
 
-	// Parameters related to tuning the model.
+	// Parameters related to tuning the model. For details on the format for different
+	// models, see [Custom model hyperparameters].
+	//
+	// [Custom model hyperparameters]: https://docs.aws.amazon.com/bedrock/latest/userguide/custom-models-hp.html
 	//
 	// This member is required.
 	HyperParameters map[string]string
 
-	// Enter a unique name for the fine-tuning job.
+	// A name for the fine-tuning job.
 	//
 	// This member is required.
 	JobName *string
@@ -65,11 +73,11 @@ type CreateModelCustomizationJobInput struct {
 	// This member is required.
 	OutputDataConfig *types.OutputDataConfig
 
-	// The Amazon Resource Name (ARN) of an IAM role that Amazon Bedrock can assume to
-	// perform tasks on your behalf. For example, during model training, Amazon Bedrock
-	// needs your permission to read input data from an S3 bucket, write model
-	// artifacts to an S3 bucket. To pass this role to Amazon Bedrock, the caller of
-	// this API must have the iam:PassRole permission.
+	// The Amazon Resource Name (ARN) of an IAM service role that Amazon Bedrock can
+	// assume to perform tasks on your behalf. For example, during model training,
+	// Amazon Bedrock needs your permission to read input data from an S3 bucket, write
+	// model artifacts to an S3 bucket. To pass this role to Amazon Bedrock, the caller
+	// of this API must have the iam:PassRole permission.
 	//
 	// This member is required.
 	RoleArn *string
@@ -79,20 +87,23 @@ type CreateModelCustomizationJobInput struct {
 	// This member is required.
 	TrainingDataConfig *types.TrainingDataConfig
 
-	// Unique token value that you can provide. The GetModelCustomizationJob response
-	// includes the same token value.
+	// A unique, case-sensitive identifier to ensure that the API request completes no
+	// more than one time. If this token matches a previous request, Amazon Bedrock
+	// ignores the request, but does not return an error. For more information, see [Ensuring idempotency].
+	//
+	// [Ensuring idempotency]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
 	ClientRequestToken *string
 
 	// The custom model is encrypted at rest using this key.
 	CustomModelKmsKeyId *string
 
-	// Assign tags to the custom model.
+	// Tags to attach to the resulting custom model.
 	CustomModelTags []types.Tag
 
 	// The customization type.
 	CustomizationType types.CustomizationType
 
-	// Assign tags to the job.
+	// Tags to attach to the job.
 	JobTags []types.Tag
 
 	// Information about the validation dataset.
@@ -107,7 +118,7 @@ type CreateModelCustomizationJobInput struct {
 
 type CreateModelCustomizationJobOutput struct {
 
-	// ARN of the fine tuning job
+	// Amazon Resource Name (ARN) of the fine tuning job
 	//
 	// This member is required.
 	JobArn *string
@@ -140,25 +151,25 @@ func (c *Client) addOperationCreateModelCustomizationJobMiddlewares(stack *middl
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -173,6 +184,9 @@ func (c *Client) addOperationCreateModelCustomizationJobMiddlewares(stack *middl
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opCreateModelCustomizationJobMiddleware(stack, options); err != nil {
 		return err
 	}
@@ -182,7 +196,7 @@ func (c *Client) addOperationCreateModelCustomizationJobMiddlewares(stack *middl
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateModelCustomizationJob(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

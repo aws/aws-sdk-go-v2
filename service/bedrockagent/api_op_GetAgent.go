@@ -6,13 +6,12 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockagent/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Gets an Agent for existing Amazon Bedrock Agent
+// Gets information about an agent.
 func (c *Client) GetAgent(ctx context.Context, params *GetAgentInput, optFns ...func(*Options)) (*GetAgentOutput, error) {
 	if params == nil {
 		params = &GetAgentInput{}
@@ -28,10 +27,9 @@ func (c *Client) GetAgent(ctx context.Context, params *GetAgentInput, optFns ...
 	return out, nil
 }
 
-// Get Agent Request
 type GetAgentInput struct {
 
-	// Id generated at the server side when an Agent is created
+	// The unique identifier of the agent.
 	//
 	// This member is required.
 	AgentId *string
@@ -39,10 +37,9 @@ type GetAgentInput struct {
 	noSmithyDocumentSerde
 }
 
-// Get Agent Response
 type GetAgentOutput struct {
 
-	// Contains the information of an agent
+	// Contains details about the agent.
 	//
 	// This member is required.
 	Agent *types.Agent
@@ -75,25 +72,25 @@ func (c *Client) addOperationGetAgentMiddlewares(stack *middleware.Stack, option
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -108,13 +105,16 @@ func (c *Client) addOperationGetAgentMiddlewares(stack *middleware.Stack, option
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpGetAgentValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetAgent(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

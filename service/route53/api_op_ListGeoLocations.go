@@ -6,20 +6,24 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/route53/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Retrieves a list of supported geographic locations. Countries are listed first,
-// and continents are listed last. If Amazon Route 53 supports subdivisions for a
-// country (for example, states or provinces), the subdivisions for that country
-// are listed in alphabetical order immediately after the corresponding country.
+// Retrieves a list of supported geographic locations.
+//
+// Countries are listed first, and continents are listed last. If Amazon Route 53
+// supports subdivisions for a country (for example, states or provinces), the
+// subdivisions for that country are listed in alphabetical order immediately after
+// the corresponding country.
+//
 // Route 53 does not perform authorization for this API because it retrieves
-// information that is already available to the public. For a list of supported
-// geolocation codes, see the GeoLocation (https://docs.aws.amazon.com/Route53/latest/APIReference/API_GeoLocation.html)
-// data type.
+// information that is already available to the public.
+//
+// For a list of supported geolocation codes, see the [GeoLocation] data type.
+//
+// [GeoLocation]: https://docs.aws.amazon.com/Route53/latest/APIReference/API_GeoLocation.html
 func (c *Client) ListGeoLocations(ctx context.Context, params *ListGeoLocationsInput, optFns ...func(*Options)) (*ListGeoLocationsOutput, error) {
 	if params == nil {
 		params = &ListGeoLocationsInput{}
@@ -48,9 +52,11 @@ type ListGeoLocationsInput struct {
 	// Amazon Route 53 supports for geolocation. If Route 53 has already returned a
 	// page or more of results, if IsTruncated is true, and if NextContinentCode from
 	// the previous response has a value, enter that value in startcontinentcode to
-	// return the next page of results. Include startcontinentcode only if you want to
-	// list continents. Don't include startcontinentcode when you're listing countries
-	// or countries with their subdivisions.
+	// return the next page of results.
+	//
+	// Include startcontinentcode only if you want to list continents. Don't include
+	// startcontinentcode when you're listing countries or countries with their
+	// subdivisions.
 	StartContinentCode *string
 
 	// The code for the country with which you want to start listing locations that
@@ -64,8 +70,10 @@ type ListGeoLocationsInput struct {
 	// listing locations that Amazon Route 53 supports for geolocation. If Route 53 has
 	// already returned a page or more of results, if IsTruncated is true , and if
 	// NextSubdivisionCode from the previous response has a value, enter that value in
-	// startsubdivisioncode to return the next page of results. To list subdivisions
-	// (U.S. states), you must include both startcountrycode and startsubdivisioncode .
+	// startsubdivisioncode to return the next page of results.
+	//
+	// To list subdivisions (U.S. states), you must include both startcountrycode and
+	// startsubdivisioncode .
 	StartSubdivisionCode *string
 
 	noSmithyDocumentSerde
@@ -137,25 +145,25 @@ func (c *Client) addOperationListGeoLocationsMiddlewares(stack *middleware.Stack
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -170,10 +178,13 @@ func (c *Client) addOperationListGeoLocationsMiddlewares(stack *middleware.Stack
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListGeoLocations(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

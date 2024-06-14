@@ -18,7 +18,16 @@ import (
 	"io"
 	"math"
 	"strings"
+	"time"
 )
+
+func deserializeS3Expires(v string) (*time.Time, error) {
+	t, err := smithytime.ParseHTTPDate(v)
+	if err != nil {
+		return nil, nil
+	}
+	return &t, nil
+}
 
 type awsRestjson1_deserializeOpAssociateAgentKnowledgeBase struct {
 }
@@ -6719,6 +6728,18 @@ loop:
 			continue
 		}
 		switch key {
+		case "customControl":
+			var mv types.CustomControlMethod
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CustomControlMethod to be of type string, got %T instead", value)
+				}
+				mv = types.CustomControlMethod(jtv)
+			}
+			uv = &types.ActionGroupExecutorMemberCustomControl{Value: mv}
+			break loop
+
 		case "lambda":
 			var mv string
 			if value != nil {
@@ -6985,6 +7006,11 @@ func awsRestjson1_deserializeDocumentAgent(v **types.Agent, value interface{}) e
 				sv.FoundationModel = ptr.String(jtv)
 			}
 
+		case "guardrailConfiguration":
+			if err := awsRestjson1_deserializeDocumentGuardrailConfiguration(&sv.GuardrailConfiguration, value); err != nil {
+				return err
+			}
+
 		case "idleSessionTTLInSeconds":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -7160,6 +7186,11 @@ func awsRestjson1_deserializeDocumentAgentActionGroup(v **types.AgentActionGroup
 				sv.Description = ptr.String(jtv)
 			}
 
+		case "functionSchema":
+			if err := awsRestjson1_deserializeDocumentFunctionSchema(&sv.FunctionSchema, value); err != nil {
+				return err
+			}
+
 		case "parentActionSignature":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7292,6 +7323,11 @@ func awsRestjson1_deserializeDocumentAgentAlias(v **types.AgentAlias, value inte
 					return fmt.Errorf("expected Description to be of type string, got %T instead", value)
 				}
 				sv.Description = ptr.String(jtv)
+			}
+
+		case "failureReasons":
+			if err := awsRestjson1_deserializeDocumentFailureReasons(&sv.FailureReasons, value); err != nil {
+				return err
 			}
 
 		case "routingConfiguration":
@@ -7480,6 +7516,15 @@ func awsRestjson1_deserializeDocumentAgentAliasRoutingConfigurationListItem(v **
 					return fmt.Errorf("expected Version to be of type string, got %T instead", value)
 				}
 				sv.AgentVersion = ptr.String(jtv)
+			}
+
+		case "provisionedThroughput":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ProvisionedModelIdentifier to be of type string, got %T instead", value)
+				}
+				sv.ProvisionedThroughput = ptr.String(jtv)
 			}
 
 		default:
@@ -7922,6 +7967,11 @@ func awsRestjson1_deserializeDocumentAgentSummary(v **types.AgentSummary, value 
 				sv.Description = ptr.String(jtv)
 			}
 
+		case "guardrailConfiguration":
+			if err := awsRestjson1_deserializeDocumentGuardrailConfiguration(&sv.GuardrailConfiguration, value); err != nil {
+				return err
+			}
+
 		case "latestAgentVersion":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8063,6 +8113,11 @@ func awsRestjson1_deserializeDocumentAgentVersion(v **types.AgentVersion, value 
 					return fmt.Errorf("expected ModelIdentifier to be of type string, got %T instead", value)
 				}
 				sv.FoundationModel = ptr.String(jtv)
+			}
+
+		case "guardrailConfiguration":
+			if err := awsRestjson1_deserializeDocumentGuardrailConfiguration(&sv.GuardrailConfiguration, value); err != nil {
+				return err
 			}
 
 		case "idleSessionTTLInSeconds":
@@ -8233,6 +8288,11 @@ func awsRestjson1_deserializeDocumentAgentVersionSummary(v **types.AgentVersionS
 				sv.Description = ptr.String(jtv)
 			}
 
+		case "guardrailConfiguration":
+			if err := awsRestjson1_deserializeDocumentGuardrailConfiguration(&sv.GuardrailConfiguration, value); err != nil {
+				return err
+			}
+
 		case "updatedAt":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8304,6 +8364,50 @@ loop:
 		}
 	}
 	*v = uv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentBedrockEmbeddingModelConfiguration(v **types.BedrockEmbeddingModelConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.BedrockEmbeddingModelConfiguration
+	if *v == nil {
+		sv = &types.BedrockEmbeddingModelConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "dimensions":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Dimensions to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.Dimensions = ptr.Int32(int32(i64))
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
 	return nil
 }
 
@@ -8427,6 +8531,15 @@ func awsRestjson1_deserializeDocumentDataSource(v **types.DataSource, value inte
 				sv.CreatedAt = ptr.Time(t)
 			}
 
+		case "dataDeletionPolicy":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected DataDeletionPolicy to be of type string, got %T instead", value)
+				}
+				sv.DataDeletionPolicy = types.DataDeletionPolicy(jtv)
+			}
+
 		case "dataSourceConfiguration":
 			if err := awsRestjson1_deserializeDocumentDataSourceConfiguration(&sv.DataSourceConfiguration, value); err != nil {
 				return err
@@ -8448,6 +8561,11 @@ func awsRestjson1_deserializeDocumentDataSource(v **types.DataSource, value inte
 					return fmt.Errorf("expected Description to be of type string, got %T instead", value)
 				}
 				sv.Description = ptr.String(jtv)
+			}
+
+		case "failureReasons":
+			if err := awsRestjson1_deserializeDocumentFailureReasons(&sv.FailureReasons, value); err != nil {
+				return err
 			}
 
 		case "knowledgeBaseId":
@@ -8677,6 +8795,42 @@ func awsRestjson1_deserializeDocumentDataSourceSummary(v **types.DataSourceSumma
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentEmbeddingModelConfiguration(v **types.EmbeddingModelConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.EmbeddingModelConfiguration
+	if *v == nil {
+		sv = &types.EmbeddingModelConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "bedrockEmbeddingModelConfiguration":
+			if err := awsRestjson1_deserializeDocumentBedrockEmbeddingModelConfiguration(&sv.BedrockEmbeddingModelConfiguration, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentFailureReasons(v *[]string, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -8759,6 +8913,181 @@ func awsRestjson1_deserializeDocumentFixedSizeChunkingConfiguration(v **types.Fi
 					return err
 				}
 				sv.OverlapPercentage = ptr.Int32(int32(i64))
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentFunction(v **types.Function, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.Function
+	if *v == nil {
+		sv = &types.Function{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "description":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected FunctionDescription to be of type string, got %T instead", value)
+				}
+				sv.Description = ptr.String(jtv)
+			}
+
+		case "name":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Name to be of type string, got %T instead", value)
+				}
+				sv.Name = ptr.String(jtv)
+			}
+
+		case "parameters":
+			if err := awsRestjson1_deserializeDocumentParameterMap(&sv.Parameters, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentFunctions(v *[]types.Function, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.Function
+	if *v == nil {
+		cv = []types.Function{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.Function
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentFunction(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentFunctionSchema(v *types.FunctionSchema, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var uv types.FunctionSchema
+loop:
+	for key, value := range shape {
+		if value == nil {
+			continue
+		}
+		switch key {
+		case "functions":
+			var mv []types.Function
+			if err := awsRestjson1_deserializeDocumentFunctions(&mv, value); err != nil {
+				return err
+			}
+			uv = &types.FunctionSchemaMemberFunctions{Value: mv}
+			break loop
+
+		default:
+			uv = &types.UnknownUnionMember{Tag: key}
+			break loop
+
+		}
+	}
+	*v = uv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentGuardrailConfiguration(v **types.GuardrailConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.GuardrailConfiguration
+	if *v == nil {
+		sv = &types.GuardrailConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "guardrailIdentifier":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected GuardrailIdentifier to be of type string, got %T instead", value)
+				}
+				sv.GuardrailIdentifier = ptr.String(jtv)
+			}
+
+		case "guardrailVersion":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected GuardrailVersion to be of type string, got %T instead", value)
+				}
+				sv.GuardrailVersion = ptr.String(jtv)
 			}
 
 		default:
@@ -9071,6 +9400,32 @@ func awsRestjson1_deserializeDocumentIngestionJobStatistics(v **types.IngestionJ
 					return err
 				}
 				sv.NumberOfDocumentsScanned = i64
+			}
+
+		case "numberOfMetadataDocumentsModified":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected PrimitiveLong to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.NumberOfMetadataDocumentsModified = i64
+			}
+
+		case "numberOfMetadataDocumentsScanned":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected PrimitiveLong to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.NumberOfMetadataDocumentsScanned = i64
 			}
 
 		case "numberOfModifiedDocumentsIndexed":
@@ -9574,6 +9929,154 @@ func awsRestjson1_deserializeDocumentKnowledgeBaseSummary(v **types.KnowledgeBas
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentMongoDbAtlasConfiguration(v **types.MongoDbAtlasConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.MongoDbAtlasConfiguration
+	if *v == nil {
+		sv = &types.MongoDbAtlasConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "collectionName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected MongoDbAtlasCollectionName to be of type string, got %T instead", value)
+				}
+				sv.CollectionName = ptr.String(jtv)
+			}
+
+		case "credentialsSecretArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SecretArn to be of type string, got %T instead", value)
+				}
+				sv.CredentialsSecretArn = ptr.String(jtv)
+			}
+
+		case "databaseName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected MongoDbAtlasDatabaseName to be of type string, got %T instead", value)
+				}
+				sv.DatabaseName = ptr.String(jtv)
+			}
+
+		case "endpoint":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected MongoDbAtlasEndpoint to be of type string, got %T instead", value)
+				}
+				sv.Endpoint = ptr.String(jtv)
+			}
+
+		case "endpointServiceName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected MongoDbAtlasEndpointServiceName to be of type string, got %T instead", value)
+				}
+				sv.EndpointServiceName = ptr.String(jtv)
+			}
+
+		case "fieldMapping":
+			if err := awsRestjson1_deserializeDocumentMongoDbAtlasFieldMapping(&sv.FieldMapping, value); err != nil {
+				return err
+			}
+
+		case "vectorIndexName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected MongoDbAtlasIndexName to be of type string, got %T instead", value)
+				}
+				sv.VectorIndexName = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentMongoDbAtlasFieldMapping(v **types.MongoDbAtlasFieldMapping, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.MongoDbAtlasFieldMapping
+	if *v == nil {
+		sv = &types.MongoDbAtlasFieldMapping{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "metadataField":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected FieldName to be of type string, got %T instead", value)
+				}
+				sv.MetadataField = ptr.String(jtv)
+			}
+
+		case "textField":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected FieldName to be of type string, got %T instead", value)
+				}
+				sv.TextField = ptr.String(jtv)
+			}
+
+		case "vectorField":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected FieldName to be of type string, got %T instead", value)
+				}
+				sv.VectorField = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentOpenSearchServerlessConfiguration(v **types.OpenSearchServerlessConfiguration, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -9683,6 +10186,99 @@ func awsRestjson1_deserializeDocumentOpenSearchServerlessFieldMapping(v **types.
 		}
 	}
 	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentParameterDetail(v **types.ParameterDetail, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ParameterDetail
+	if *v == nil {
+		sv = &types.ParameterDetail{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "description":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ParameterDescription to be of type string, got %T instead", value)
+				}
+				sv.Description = ptr.String(jtv)
+			}
+
+		case "required":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.Required = ptr.Bool(jtv)
+			}
+
+		case "type":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Type to be of type string, got %T instead", value)
+				}
+				sv.Type = types.Type(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentParameterMap(v *map[string]types.ParameterDetail, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var mv map[string]types.ParameterDetail
+	if *v == nil {
+		mv = map[string]types.ParameterDetail{}
+	} else {
+		mv = *v
+	}
+
+	for key, value := range shape {
+		var parsedVal types.ParameterDetail
+		mapVar := parsedVal
+		destAddr := &mapVar
+		if err := awsRestjson1_deserializeDocumentParameterDetail(&destAddr, value); err != nil {
+			return err
+		}
+		parsedVal = *destAddr
+		mv[key] = parsedVal
+
+	}
+	*v = mv
 	return nil
 }
 
@@ -10325,6 +10921,15 @@ func awsRestjson1_deserializeDocumentS3DataSourceConfiguration(v **types.S3DataS
 				sv.BucketArn = ptr.String(jtv)
 			}
 
+		case "bucketOwnerAccountId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected BucketOwnerAccountId to be of type string, got %T instead", value)
+				}
+				sv.BucketOwnerAccountId = ptr.String(jtv)
+			}
+
 		case "inclusionPrefixes":
 			if err := awsRestjson1_deserializeDocumentS3Prefixes(&sv.InclusionPrefixes, value); err != nil {
 				return err
@@ -10562,6 +11167,11 @@ func awsRestjson1_deserializeDocumentStorageConfiguration(v **types.StorageConfi
 
 	for key, value := range shape {
 		switch key {
+		case "mongoDbAtlasConfiguration":
+			if err := awsRestjson1_deserializeDocumentMongoDbAtlasConfiguration(&sv.MongoDbAtlasConfiguration, value); err != nil {
+				return err
+			}
+
 		case "opensearchServerlessConfiguration":
 			if err := awsRestjson1_deserializeDocumentOpenSearchServerlessConfiguration(&sv.OpensearchServerlessConfiguration, value); err != nil {
 				return err
@@ -10869,6 +11479,11 @@ func awsRestjson1_deserializeDocumentVectorKnowledgeBaseConfiguration(v **types.
 					return fmt.Errorf("expected BedrockEmbeddingModelArn to be of type string, got %T instead", value)
 				}
 				sv.EmbeddingModelArn = ptr.String(jtv)
+			}
+
+		case "embeddingModelConfiguration":
+			if err := awsRestjson1_deserializeDocumentEmbeddingModelConfiguration(&sv.EmbeddingModelConfiguration, value); err != nil {
+				return err
 			}
 
 		default:

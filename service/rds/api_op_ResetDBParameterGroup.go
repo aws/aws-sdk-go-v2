@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/rds/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -36,7 +35,10 @@ func (c *Client) ResetDBParameterGroup(ctx context.Context, params *ResetDBParam
 
 type ResetDBParameterGroupInput struct {
 
-	// The name of the DB parameter group. Constraints:
+	// The name of the DB parameter group.
+	//
+	// Constraints:
+	//
 	//   - Must match the name of an existing DBParameterGroup .
 	//
 	// This member is required.
@@ -45,13 +47,26 @@ type ResetDBParameterGroupInput struct {
 	// To reset the entire DB parameter group, specify the DBParameterGroup name and
 	// ResetAllParameters parameters. To reset specific parameters, provide a list of
 	// the following: ParameterName and ApplyMethod . A maximum of 20 parameters can be
-	// modified in a single request. MySQL Valid Values (for Apply method): immediate
-	// | pending-reboot You can use the immediate value with dynamic parameters only.
-	// You can use the pending-reboot value for both dynamic and static parameters,
-	// and changes are applied when DB instance reboots. MariaDB Valid Values (for
-	// Apply method): immediate | pending-reboot You can use the immediate value with
-	// dynamic parameters only. You can use the pending-reboot value for both dynamic
-	// and static parameters, and changes are applied when DB instance reboots. Oracle
+	// modified in a single request.
+	//
+	// MySQL
+	//
+	// Valid Values (for Apply method): immediate | pending-reboot
+	//
+	// You can use the immediate value with dynamic parameters only. You can use the
+	// pending-reboot value for both dynamic and static parameters, and changes are
+	// applied when DB instance reboots.
+	//
+	// MariaDB
+	//
+	// Valid Values (for Apply method): immediate | pending-reboot
+	//
+	// You can use the immediate value with dynamic parameters only. You can use the
+	// pending-reboot value for both dynamic and static parameters, and changes are
+	// applied when DB instance reboots.
+	//
+	// Oracle
+	//
 	// Valid Values (for Apply method): pending-reboot
 	Parameters []types.Parameter
 
@@ -98,25 +113,25 @@ func (c *Client) addOperationResetDBParameterGroupMiddlewares(stack *middleware.
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -131,13 +146,16 @@ func (c *Client) addOperationResetDBParameterGroupMiddlewares(stack *middleware.
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpResetDBParameterGroupValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opResetDBParameterGroup(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

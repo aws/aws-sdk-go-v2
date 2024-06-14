@@ -6,20 +6,22 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Associates a set of DHCP options (that you've previously created) with the
-// specified VPC, or associates no DHCP options with the VPC. After you associate
-// the options with the VPC, any existing instances and all new instances that you
-// launch in that VPC use the options. You don't need to restart or relaunch the
-// instances. They automatically pick up the changes within a few hours, depending
-// on how frequently the instance renews its DHCP lease. You can explicitly renew
-// the lease using the operating system on the instance. For more information, see
-// DHCP options sets (https://docs.aws.amazon.com/vpc/latest/userguide/VPC_DHCP_Options.html)
-// in the Amazon VPC User Guide.
+// specified VPC, or associates no DHCP options with the VPC.
+//
+// After you associate the options with the VPC, any existing instances and all
+// new instances that you launch in that VPC use the options. You don't need to
+// restart or relaunch the instances. They automatically pick up the changes within
+// a few hours, depending on how frequently the instance renews its DHCP lease. You
+// can explicitly renew the lease using the operating system on the instance.
+//
+// For more information, see [DHCP option sets] in the Amazon VPC User Guide.
+//
+// [DHCP option sets]: https://docs.aws.amazon.com/vpc/latest/userguide/VPC_DHCP_Options.html
 func (c *Client) AssociateDhcpOptions(ctx context.Context, params *AssociateDhcpOptionsInput, optFns ...func(*Options)) (*AssociateDhcpOptionsOutput, error) {
 	if params == nil {
 		params = &AssociateDhcpOptionsInput{}
@@ -86,25 +88,25 @@ func (c *Client) addOperationAssociateDhcpOptionsMiddlewares(stack *middleware.S
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -119,13 +121,16 @@ func (c *Client) addOperationAssociateDhcpOptionsMiddlewares(stack *middleware.S
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpAssociateDhcpOptionsValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opAssociateDhcpOptions(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

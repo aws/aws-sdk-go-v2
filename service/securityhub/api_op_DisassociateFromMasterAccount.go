@@ -6,22 +6,26 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // This method is deprecated. Instead, use DisassociateFromAdministratorAccount .
+//
 // The Security Hub console continues to use DisassociateFromMasterAccount . It
 // will eventually change to use DisassociateFromAdministratorAccount . Any IAM
 // policies that specifically control access to this function must continue to use
 // DisassociateFromMasterAccount . You should also add
 // DisassociateFromAdministratorAccount to your policies to ensure that the correct
 // permissions are in place after the console begins to use
-// DisassociateFromAdministratorAccount . Disassociates the current Security Hub
-// member account from the associated administrator account. This operation is only
-// used by accounts that are not part of an organization. For organization
-// accounts, only the administrator account can disassociate a member account.
+// DisassociateFromAdministratorAccount .
+//
+// Disassociates the current Security Hub member account from the associated
+// administrator account.
+//
+// This operation is only used by accounts that are not part of an organization.
+// For organization accounts, only the administrator account can disassociate a
+// member account.
 //
 // Deprecated: This API has been deprecated, use
 // DisassociateFromAdministratorAccount API instead.
@@ -73,25 +77,25 @@ func (c *Client) addOperationDisassociateFromMasterAccountMiddlewares(stack *mid
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -106,10 +110,13 @@ func (c *Client) addOperationDisassociateFromMasterAccountMiddlewares(stack *mid
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDisassociateFromMasterAccount(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

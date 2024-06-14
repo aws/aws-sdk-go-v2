@@ -1482,6 +1482,18 @@
                         "smithy.api#documentation": "<p>The type of sync configuration.</p>",
                         "smithy.api#required": {}
                     }
+                },
+                "PublishDeploymentStatus": {
+                    "target": "com.amazonaws.codestarconnections#PublishDeploymentStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Whether to enable or disable publishing of deployment status to source providers.</p>"
+                    }
+                },
+                "TriggerResourceUpdateOn": {
+                    "target": "com.amazonaws.codestarconnections#TriggerResourceUpdateOn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>When to trigger Git sync to begin the stack update.</p>"
+                    }
                 }
             },
             "traits": {
@@ -2847,6 +2859,23 @@
                 }
             }
         },
+        "com.amazonaws.codestarconnections#PublishDeploymentStatus": {
+            "type": "enum",
+            "members": {
+                "ENABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ENABLED"
+                    }
+                },
+                "DISABLED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DISABLED"
+                    }
+                }
+            }
+        },
         "com.amazonaws.codestarconnections#RepositoryLinkArn": {
             "type": "string",
             "traits": {
@@ -3581,6 +3610,18 @@
                         "smithy.api#documentation": "<p>The type of sync for a specific sync configuration.</p>",
                         "smithy.api#required": {}
                     }
+                },
+                "PublishDeploymentStatus": {
+                    "target": "com.amazonaws.codestarconnections#PublishDeploymentStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Whether to enable or disable publishing of deployment status to source providers.</p>"
+                    }
+                },
+                "TriggerResourceUpdateOn": {
+                    "target": "com.amazonaws.codestarconnections#TriggerResourceUpdateOn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>When to trigger Git sync to begin the stack update.</p>"
+                    }
                 }
             },
             "traits": {
@@ -3759,6 +3800,23 @@
                     "max": 16384
                 },
                 "smithy.api#pattern": "^[\\s\\S]*$"
+            }
+        },
+        "com.amazonaws.codestarconnections#TriggerResourceUpdateOn": {
+            "type": "enum",
+            "members": {
+                "ANY_CHANGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "ANY_CHANGE"
+                    }
+                },
+                "FILE_CHANGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FILE_CHANGE"
+                    }
+                }
             }
         },
         "com.amazonaws.codestarconnections#Type": {
@@ -4159,6 +4217,18 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The sync type for the sync configuration to be updated.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "PublishDeploymentStatus": {
+                    "target": "com.amazonaws.codestarconnections#PublishDeploymentStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Whether to enable or disable publishing of deployment status to source providers.</p>"
+                    }
+                },
+                "TriggerResourceUpdateOn": {
+                    "target": "com.amazonaws.codestarconnections#TriggerResourceUpdateOn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>When to trigger Git sync to begin the stack update.</p>"
                     }
                 }
             },

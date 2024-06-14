@@ -6,13 +6,13 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockagentruntime/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// RetrieveAndGenerate API
+// Queries a knowledge base and generates responses based on the retrieved
+// results. The response only cites sources that are relevant to the query.
 func (c *Client) RetrieveAndGenerate(ctx context.Context, params *RetrieveAndGenerateInput, optFns ...func(*Options)) (*RetrieveAndGenerateOutput, error) {
 	if params == nil {
 		params = &RetrieveAndGenerateInput{}
@@ -30,18 +30,22 @@ func (c *Client) RetrieveAndGenerate(ctx context.Context, params *RetrieveAndGen
 
 type RetrieveAndGenerateInput struct {
 
-	// Customer input of the turn
+	// Contains the query to be made to the knowledge base.
 	//
 	// This member is required.
 	Input *types.RetrieveAndGenerateInput
 
-	// Configures the retrieval and generation for the session.
+	// Contains configurations for the knowledge base query and retrieval process. For
+	// more information, see [Query configurations].
+	//
+	// [Query configurations]: https://docs.aws.amazon.com/bedrock/latest/userguide/kb-test-config.html
 	RetrieveAndGenerateConfiguration *types.RetrieveAndGenerateConfiguration
 
-	// Configures common parameters of the session.
+	// Contains details about the session with the knowledge base.
 	SessionConfiguration *types.RetrieveAndGenerateSessionConfiguration
 
-	// Identifier of the session.
+	// The unique identifier of the session. Reuse the same value to continue the same
+	// session with the knowledge base.
 	SessionId *string
 
 	noSmithyDocumentSerde
@@ -49,18 +53,23 @@ type RetrieveAndGenerateInput struct {
 
 type RetrieveAndGenerateOutput struct {
 
-	// Service response of the turn
+	// Contains the response generated from querying the knowledge base.
 	//
 	// This member is required.
 	Output *types.RetrieveAndGenerateOutput
 
-	// Identifier of the session.
+	// The unique identifier of the session. Reuse the same value to continue the same
+	// session with the knowledge base.
 	//
 	// This member is required.
 	SessionId *string
 
-	// List of citations
+	// A list of segments of the generated response that are based on sources in the
+	// knowledge base, alongside information about the sources.
 	Citations []types.Citation
+
+	// Specifies if there is a guardrail intervention in the response.
+	GuardrailAction types.GuadrailAction
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -90,25 +99,25 @@ func (c *Client) addOperationRetrieveAndGenerateMiddlewares(stack *middleware.St
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -123,13 +132,16 @@ func (c *Client) addOperationRetrieveAndGenerateMiddlewares(stack *middleware.St
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpRetrieveAndGenerateValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opRetrieveAndGenerate(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

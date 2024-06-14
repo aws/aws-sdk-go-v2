@@ -11,8 +11,9 @@ const (
 )
 
 // Values returns all known values for DetailType. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (DetailType) Values() []DetailType {
 	return []DetailType{
 		"BASIC",
@@ -30,6 +31,7 @@ const (
 
 // Values returns all known values for ListEventTypesFilterName. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (ListEventTypesFilterName) Values() []ListEventTypesFilterName {
 	return []ListEventTypesFilterName{
@@ -50,8 +52,9 @@ const (
 
 // Values returns all known values for ListNotificationRulesFilterName. Note that
 // this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ListNotificationRulesFilterName) Values() []ListNotificationRulesFilterName {
 	return []ListNotificationRulesFilterName{
 		"EVENT_TYPE_ID",
@@ -71,8 +74,9 @@ const (
 )
 
 // Values returns all known values for ListTargetsFilterName. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ListTargetsFilterName) Values() []ListTargetsFilterName {
 	return []ListTargetsFilterName{
 		"TARGET_TYPE",
@@ -90,8 +94,9 @@ const (
 )
 
 // Values returns all known values for NotificationRuleStatus. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (NotificationRuleStatus) Values() []NotificationRuleStatus {
 	return []NotificationRuleStatus{
 		"ENABLED",
@@ -111,8 +116,9 @@ const (
 )
 
 // Values returns all known values for TargetStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (TargetStatus) Values() []TargetStatus {
 	return []TargetStatus{
 		"PENDING",

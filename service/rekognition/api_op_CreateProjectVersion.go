@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/rekognition/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -15,23 +14,32 @@ import (
 // Creates a new version of Amazon Rekognition project (like a Custom Labels model
 // or a custom adapter) and begins training. Models and adapters are managed as
 // part of a Rekognition project. The response from CreateProjectVersion is an
-// Amazon Resource Name (ARN) for the project version. The FeatureConfig operation
-// argument allows you to configure specific model or adapter settings. You can
-// provide a description to the project version by using the VersionDescription
-// argment. Training can take a while to complete. You can get the current status
-// by calling DescribeProjectVersions . Training completed successfully if the
+// Amazon Resource Name (ARN) for the project version.
+//
+// The FeatureConfig operation argument allows you to configure specific model or
+// adapter settings. You can provide a description to the project version by using
+// the VersionDescription argment. Training can take a while to complete. You can
+// get the current status by calling DescribeProjectVersions. Training completed successfully if the
 // value of the Status field is TRAINING_COMPLETED . Once training has successfully
-// completed, call DescribeProjectVersions to get the training results and
-// evaluate the model. This operation requires permissions to perform the
-// rekognition:CreateProjectVersion action. The following applies only to projects
-// with Amazon Rekognition Custom Labels as the chosen feature: You can train a
-// model in a project that doesn't have associated datasets by specifying manifest
-// files in the TrainingData and TestingData fields. If you open the console after
-// training a model with manifest files, Amazon Rekognition Custom Labels creates
-// the datasets for you using the most recent manifest files. You can no longer
-// train a model version for the project by specifying manifest files. Instead of
-// training with a project without associated datasets, we recommend that you use
-// the manifest files to create training and test datasets for the project.
+// completed, call DescribeProjectVersionsto get the training results and evaluate the model.
+//
+// This operation requires permissions to perform the
+// rekognition:CreateProjectVersion action.
+//
+// The following applies only to projects with Amazon Rekognition Custom Labels as
+// the chosen feature:
+//
+// You can train a model in a project that doesn't have associated datasets by
+// specifying manifest files in the TrainingData and TestingData fields.
+//
+// If you open the console after training a model with manifest files, Amazon
+// Rekognition Custom Labels creates the datasets for you using the most recent
+// manifest files. You can no longer train a model version for the project by
+// specifying manifest files.
+//
+// Instead of training with a project without associated datasets, we recommend
+// that you use the manifest files to create training and test datasets for the
+// project.
 func (c *Client) CreateProjectVersion(ctx context.Context, params *CreateProjectVersionInput, optFns ...func(*Options)) (*CreateProjectVersionOutput, error) {
 	if params == nil {
 		params = &CreateProjectVersionInput{}
@@ -78,17 +86,25 @@ type CreateProjectVersionInput struct {
 	// images, test images, and manifest files copied into the service for the project
 	// version. Your source images are unaffected. The key is also used to encrypt
 	// training results and manifest files written to the output Amazon S3 bucket (
-	// OutputConfig ). If you choose to use your own KMS key, you need the following
-	// permissions on the KMS key.
+	// OutputConfig ).
+	//
+	// If you choose to use your own KMS key, you need the following permissions on
+	// the KMS key.
+	//
 	//   - kms:CreateGrant
+	//
 	//   - kms:DescribeKey
+	//
 	//   - kms:GenerateDataKey
+	//
 	//   - kms:Decrypt
+	//
 	// If you don't specify a value for KmsKeyId , images copied into the service are
 	// encrypted using a key that AWS owns and manages.
 	KmsKeyId *string
 
-	// A set of tags (key-value pairs) that you want to attach to the project version.
+	//  A set of tags (key-value pairs) that you want to attach to the project
+	// version.
 	Tags map[string]string
 
 	// Specifies an external manifest that the service uses to test the project
@@ -141,25 +157,25 @@ func (c *Client) addOperationCreateProjectVersionMiddlewares(stack *middleware.S
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -174,13 +190,16 @@ func (c *Client) addOperationCreateProjectVersionMiddlewares(stack *middleware.S
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpCreateProjectVersionValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateProjectVersion(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

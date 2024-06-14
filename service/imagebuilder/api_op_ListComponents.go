@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/imagebuilder/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -14,12 +13,15 @@ import (
 
 // Returns the list of components that can be filtered by name, or by using the
 // listed filters to streamline results. Newly created components can take up to
-// two minutes to appear in the ListComponents API Results. The semantic version
-// has four nodes: ../. You can assign values for the first three, and can filter
-// on all of them. Filtering: With semantic versioning, you have the flexibility to
-// use wildcards (x) to specify the most recent versions or nodes when selecting
-// the base image or components for your recipe. When you use a wildcard in any
-// node, all nodes to the right of the first wildcard must also be wildcards.
+// two minutes to appear in the ListComponents API Results.
+//
+// The semantic version has four nodes: ../. You can assign values for the first
+// three, and can filter on all of them.
+//
+// Filtering: With semantic versioning, you have the flexibility to use wildcards
+// (x) to specify the most recent versions or nodes when selecting the base image
+// or components for your recipe. When you use a wildcard in any node, all nodes to
+// the right of the first wildcard must also be wildcards.
 func (c *Client) ListComponents(ctx context.Context, params *ListComponentsInput, optFns ...func(*Options)) (*ListComponentsOutput, error) {
 	if params == nil {
 		params = &ListComponentsInput{}
@@ -41,11 +43,17 @@ type ListComponentsInput struct {
 	ByName bool
 
 	// Use the following filters to streamline results:
+	//
 	//   - description
+	//
 	//   - name
+	//
 	//   - platform
+	//
 	//   - supportedOsVersion
+	//
 	//   - type
+	//
 	//   - version
 	Filters []types.Filter
 
@@ -67,8 +75,10 @@ type ListComponentsInput struct {
 
 type ListComponentsOutput struct {
 
-	// The list of component semantic versions. The semantic version has four nodes:
-	// ../. You can assign values for the first three, and can filter on all of them.
+	// The list of component semantic versions.
+	//
+	// The semantic version has four nodes: ../. You can assign values for the first
+	// three, and can filter on all of them.
 	ComponentVersionList []types.ComponentVersion
 
 	// The next token used for paginated responses. When this field isn't empty, there
@@ -107,25 +117,25 @@ func (c *Client) addOperationListComponentsMiddlewares(stack *middleware.Stack, 
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -140,10 +150,13 @@ func (c *Client) addOperationListComponentsMiddlewares(stack *middleware.Stack, 
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListComponents(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

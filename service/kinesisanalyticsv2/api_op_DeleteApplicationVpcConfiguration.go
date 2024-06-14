@@ -6,12 +6,11 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Removes a VPC configuration from a Kinesis Data Analytics application.
+// Removes a VPC configuration from a Managed Service for Apache Flink application.
 func (c *Client) DeleteApplicationVpcConfiguration(ctx context.Context, params *DeleteApplicationVpcConfigurationInput, optFns ...func(*Options)) (*DeleteApplicationVpcConfigurationOutput, error) {
 	if params == nil {
 		params = &DeleteApplicationVpcConfigurationInput{}
@@ -41,16 +40,15 @@ type DeleteApplicationVpcConfigurationInput struct {
 
 	// A value you use to implement strong concurrency for application updates. You
 	// must provide the CurrentApplicationVersionId or the ConditionalToken . You get
-	// the application's current ConditionalToken using DescribeApplication . For
-	// better concurrency support, use the ConditionalToken parameter instead of
+	// the application's current ConditionalToken using DescribeApplication. For better concurrency
+	// support, use the ConditionalToken parameter instead of
 	// CurrentApplicationVersionId .
 	ConditionalToken *string
 
 	// The current application version ID. You must provide the
 	// CurrentApplicationVersionId or the ConditionalToken . You can retrieve the
-	// application version ID using DescribeApplication . For better concurrency
-	// support, use the ConditionalToken parameter instead of
-	// CurrentApplicationVersionId .
+	// application version ID using DescribeApplication. For better concurrency support, use the
+	// ConditionalToken parameter instead of CurrentApplicationVersionId .
 	CurrentApplicationVersionId *int64
 
 	noSmithyDocumentSerde
@@ -58,7 +56,7 @@ type DeleteApplicationVpcConfigurationInput struct {
 
 type DeleteApplicationVpcConfigurationOutput struct {
 
-	// The ARN of the Kinesis Data Analytics application.
+	// The ARN of the Managed Service for Apache Flink application.
 	ApplicationARN *string
 
 	// The updated version ID of the application.
@@ -92,25 +90,25 @@ func (c *Client) addOperationDeleteApplicationVpcConfigurationMiddlewares(stack 
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -125,13 +123,16 @@ func (c *Client) addOperationDeleteApplicationVpcConfigurationMiddlewares(stack 
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDeleteApplicationVpcConfigurationValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteApplicationVpcConfiguration(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

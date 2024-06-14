@@ -6,41 +6,49 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/cloudwatchlogs/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates a delivery. A delivery is a connection between a logical delivery
-// source and a logical delivery destination that you have already created. Only
-// some Amazon Web Services services support being configured as a delivery source
-// using this operation. These services are listed as Supported [V2 Permissions] in
-// the table at Enabling logging from Amazon Web Services services. (https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/AWS-logs-and-resource-policy.html)
+// source and a logical delivery destination that you have already created.
+//
+// Only some Amazon Web Services services support being configured as a delivery
+// source using this operation. These services are listed as Supported [V2
+// Permissions] in the table at [Enabling logging from Amazon Web Services services.]
+//
 // A delivery destination can represent a log group in CloudWatch Logs, an Amazon
-// S3 bucket, or a delivery stream in Kinesis Data Firehose. To configure logs
-// delivery between a supported Amazon Web Services service and a destination, you
-// must do the following:
+// S3 bucket, or a delivery stream in Firehose.
+//
+// To configure logs delivery between a supported Amazon Web Services service and
+// a destination, you must do the following:
+//
 //   - Create a delivery source, which is a logical object that represents the
-//     resource that is actually sending the logs. For more information, see
-//     PutDeliverySource (https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_PutDeliverySource.html)
-//     .
+//     resource that is actually sending the logs. For more information, see [PutDeliverySource].
+//
 //   - Create a delivery destination, which is a logical object that represents
-//     the actual delivery destination. For more information, see
-//     PutDeliveryDestination (https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_PutDeliveryDestination.html)
-//     .
-//   - If you are delivering logs cross-account, you must use
-//     PutDeliveryDestinationPolicy (https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_PutDeliveryDestinationPolicy.html)
-//     in the destination account to assign an IAM policy to the destination. This
-//     policy allows delivery to that destination.
+//     the actual delivery destination. For more information, see [PutDeliveryDestination].
+//
+//   - If you are delivering logs cross-account, you must use [PutDeliveryDestinationPolicy]in the destination
+//     account to assign an IAM policy to the destination. This policy allows delivery
+//     to that destination.
+//
 //   - Use CreateDelivery to create a delivery by pairing exactly one delivery
 //     source and one delivery destination.
 //
 // You can configure a single delivery source to send logs to multiple
 // destinations by creating multiple deliveries. You can also create multiple
 // deliveries to configure multiple delivery sources to send logs to the same
-// delivery destination. You can't update an existing delivery. You can only create
-// and delete deliveries.
+// delivery destination.
+//
+// You can't update an existing delivery. You can only create and delete
+// deliveries.
+//
+// [PutDeliveryDestination]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_PutDeliveryDestination.html
+// [PutDeliverySource]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_PutDeliverySource.html
+// [Enabling logging from Amazon Web Services services.]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/AWS-logs-and-resource-policy.html
+// [PutDeliveryDestinationPolicy]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_PutDeliveryDestinationPolicy.html
 func (c *Client) CreateDelivery(ctx context.Context, params *CreateDeliveryInput, optFns ...func(*Options)) (*CreateDeliveryOutput, error) {
 	if params == nil {
 		params = &CreateDeliveryInput{}
@@ -68,8 +76,11 @@ type CreateDeliveryInput struct {
 	// This member is required.
 	DeliverySourceName *string
 
-	// An optional list of key-value pairs to associate with the resource. For more
-	// information about tagging, see Tagging Amazon Web Services resources (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html)
+	// An optional list of key-value pairs to associate with the resource.
+	//
+	// For more information about tagging, see [Tagging Amazon Web Services resources]
+	//
+	// [Tagging Amazon Web Services resources]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
 	Tags map[string]string
 
 	noSmithyDocumentSerde
@@ -108,25 +119,25 @@ func (c *Client) addOperationCreateDeliveryMiddlewares(stack *middleware.Stack, 
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -141,13 +152,16 @@ func (c *Client) addOperationCreateDeliveryMiddlewares(stack *middleware.Stack, 
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpCreateDeliveryValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateDelivery(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

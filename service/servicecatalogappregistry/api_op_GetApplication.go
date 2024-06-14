@@ -6,14 +6,14 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/servicecatalogappregistry/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
-// Retrieves metadata information about one of your applications. The application
+//	Retrieves metadata information about one of your applications. The application
+//
 // can be specified by its ARN, ID, or name (which is unique within one account in
 // one region at a given point in time). Specify by ARN or ID in automated
 // workflows if you want to make sure that the exact same application is returned
@@ -35,7 +35,7 @@ func (c *Client) GetApplication(ctx context.Context, params *GetApplicationInput
 
 type GetApplicationInput struct {
 
-	// The name, ID, or ARN of the application.
+	//  The name, ID, or ARN of the application.
 	//
 	// This member is required.
 	Application *string
@@ -45,7 +45,7 @@ type GetApplicationInput struct {
 
 type GetApplicationOutput struct {
 
-	// A key-value pair that identifies an associated resource.
+	//  A key-value pair that identifies an associated resource.
 	ApplicationTag map[string]string
 
 	// The Amazon resource name (ARN) that specifies the application across services.
@@ -64,7 +64,7 @@ type GetApplicationOutput struct {
 	// The identifier of the application.
 	Id *string
 
-	// The information about the integration of the application with other services,
+	//  The information about the integration of the application with other services,
 	// such as Resource Groups.
 	Integrations *types.Integrations
 
@@ -107,25 +107,25 @@ func (c *Client) addOperationGetApplicationMiddlewares(stack *middleware.Stack, 
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -140,13 +140,16 @@ func (c *Client) addOperationGetApplicationMiddlewares(stack *middleware.Stack, 
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpGetApplicationValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetApplication(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

@@ -6,14 +6,14 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Update a provisioned throughput. For more information, see Provisioned
-// throughput (https://docs.aws.amazon.com/bedrock/latest/userguide/what-is-service.html)
-// in the Bedrock User Guide.
+// Updates the name or associated model for a Provisioned Throughput. For more
+// information, see [Provisioned Throughput]in the Amazon Bedrock User Guide.
+//
+// [Provisioned Throughput]: https://docs.aws.amazon.com/bedrock/latest/userguide/prov-throughput.html
 func (c *Client) UpdateProvisionedModelThroughput(ctx context.Context, params *UpdateProvisionedModelThroughputInput, optFns ...func(*Options)) (*UpdateProvisionedModelThroughputOutput, error) {
 	if params == nil {
 		params = &UpdateProvisionedModelThroughputInput{}
@@ -31,15 +31,25 @@ func (c *Client) UpdateProvisionedModelThroughput(ctx context.Context, params *U
 
 type UpdateProvisionedModelThroughputInput struct {
 
-	// The ARN or name of the provisioned throughput to update.
+	// The Amazon Resource Name (ARN) or name of the Provisioned Throughput to update.
 	//
 	// This member is required.
 	ProvisionedModelId *string
 
-	// The ARN of the new model to associate with this provisioned throughput.
+	// The Amazon Resource Name (ARN) of the new model to associate with this
+	// Provisioned Throughput. You can't specify this field if this Provisioned
+	// Throughput is associated with a base model.
+	//
+	// If this Provisioned Throughput is associated with a custom model, you can
+	// specify one of the following options:
+	//
+	//   - The base model from which the custom model was customized.
+	//
+	//   - Another custom model that was customized from the same base model as the
+	//   custom model.
 	DesiredModelId *string
 
-	// The new name for this provisioned throughput.
+	// The new name for this Provisioned Throughput.
 	DesiredProvisionedModelName *string
 
 	noSmithyDocumentSerde
@@ -74,25 +84,25 @@ func (c *Client) addOperationUpdateProvisionedModelThroughputMiddlewares(stack *
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -107,13 +117,16 @@ func (c *Client) addOperationUpdateProvisionedModelThroughputMiddlewares(stack *
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpUpdateProvisionedModelThroughputValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateProvisionedModelThroughput(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

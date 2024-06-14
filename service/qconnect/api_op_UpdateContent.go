@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/qconnect/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -37,16 +36,15 @@ type UpdateContentInput struct {
 	ContentId *string
 
 	// The identifier of the knowledge base. This should not be a QUICK_RESPONSES type
-	// knowledge base if you're storing Amazon Q Content resource to it. Can be either
-	// the ID or the ARN
+	// knowledge base. Can be either the ID or the ARN
 	//
 	// This member is required.
 	KnowledgeBaseId *string
 
 	// A key/value map to store attributes without affecting tagging or
 	// recommendations. For example, when synchronizing data between an external system
-	// and Amazon Q, you can store an external version identifier as metadata to
-	// utilize for determining drift.
+	// and Amazon Q in Connect, you can store an external version identifier as
+	// metadata to utilize for determining drift.
 	Metadata map[string]string
 
 	// The URI for the article. If the knowledge base has a templateUri, setting this
@@ -68,8 +66,9 @@ type UpdateContentInput struct {
 	// The title of the content.
 	Title *string
 
-	// A pointer to the uploaded asset. This value is returned by StartContentUpload (https://docs.aws.amazon.com/amazon-q-connect/latest/APIReference/API_StartContentUpload.html)
-	// .
+	// A pointer to the uploaded asset. This value is returned by [StartContentUpload].
+	//
+	// [StartContentUpload]: https://docs.aws.amazon.com/amazon-q-connect/latest/APIReference/API_StartContentUpload.html
 	UploadId *string
 
 	noSmithyDocumentSerde
@@ -108,25 +107,25 @@ func (c *Client) addOperationUpdateContentMiddlewares(stack *middleware.Stack, o
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -141,13 +140,16 @@ func (c *Client) addOperationUpdateContentMiddlewares(stack *middleware.Stack, o
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpUpdateContentValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateContent(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

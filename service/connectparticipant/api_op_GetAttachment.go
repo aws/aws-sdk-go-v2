@@ -6,16 +6,18 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Provides a pre-signed URL for download of a completed attachment. This is an
-// asynchronous API for use with active contacts. ConnectionToken is used for
-// invoking this API instead of ParticipantToken . The Amazon Connect Participant
-// Service APIs do not use Signature Version 4 authentication (https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html)
-// .
+// asynchronous API for use with active contacts.
+//
+// ConnectionToken is used for invoking this API instead of ParticipantToken .
+//
+// The Amazon Connect Participant Service APIs do not use [Signature Version 4 authentication].
+//
+// [Signature Version 4 authentication]: https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html
 func (c *Client) GetAttachment(ctx context.Context, params *GetAttachmentInput, optFns ...func(*Options)) (*GetAttachmentOutput, error) {
 	if params == nil {
 		params = &GetAttachmentInput{}
@@ -49,8 +51,9 @@ type GetAttachmentInput struct {
 type GetAttachmentOutput struct {
 
 	// This is the pre-signed URL that can be used for uploading the file to Amazon S3
-	// when used in response to StartAttachmentUpload (https://docs.aws.amazon.com/connect-participant/latest/APIReference/API_StartAttachmentUpload.html)
-	// .
+	// when used in response to [StartAttachmentUpload].
+	//
+	// [StartAttachmentUpload]: https://docs.aws.amazon.com/connect-participant/latest/APIReference/API_StartAttachmentUpload.html
 	Url *string
 
 	// The expiration time of the URL in ISO timestamp. It's specified in ISO 8601
@@ -85,25 +88,25 @@ func (c *Client) addOperationGetAttachmentMiddlewares(stack *middleware.Stack, o
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -118,13 +121,16 @@ func (c *Client) addOperationGetAttachmentMiddlewares(stack *middleware.Stack, o
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpGetAttachmentValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetAttachment(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

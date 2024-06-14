@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/neptunegraph/document"
 	"github.com/aws/aws-sdk-go-v2/service/neptunegraph/types"
 	smithy "github.com/aws/smithy-go"
@@ -17,19 +16,17 @@ import (
 	"strings"
 )
 
-// Execute an openCypher query. Currently, the SDK does not support parameterized
-// queries. If you want to make a parameterized query call, you can use an HTTP
-// request. When invoking this operation in a Neptune Analytics cluster, the IAM
-// user or role making the request must have a policy attached that allows one of
-// the following IAM actions in that cluster, depending on the query:
-//   - neptune-graph:ReadDataViaQuery
-//   - neptune-graph:WriteDataViaQuery
-//   - neptune-graph:DeleteDataViaQuery
+// Execute an openCypher query.
 //
-// Non-parametrized queries are not considered for plan caching. You can force
-// plan caching with planCache=enabled . The plan cache will be reused only for the
-// same exact query. Slight variations in the query will not be able to reuse the
-// query plan cache.
+// When invoking this operation in a Neptune Analytics cluster, the IAM user or
+// role making the request must have a policy attached that allows one of the
+// following IAM actions in that cluster, depending on the query:
+//
+//   - neptune-graph:ReadDataViaQuery
+//
+//   - neptune-graph:WriteDataViaQuery
+//
+//   - neptune-graph:DeleteDataViaQuery
 func (c *Client) ExecuteQuery(ctx context.Context, params *ExecuteQueryInput, optFns ...func(*Options)) (*ExecuteQueryOutput, error) {
 	if params == nil {
 		params = &ExecuteQueryInput{}
@@ -125,25 +122,25 @@ func (c *Client) addOperationExecuteQueryMiddlewares(stack *middleware.Stack, op
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -155,6 +152,9 @@ func (c *Client) addOperationExecuteQueryMiddlewares(stack *middleware.Stack, op
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addEndpointPrefix_opExecuteQueryMiddleware(stack); err != nil {
 		return err
 	}
@@ -164,7 +164,7 @@ func (c *Client) addOperationExecuteQueryMiddlewares(stack *middleware.Stack, op
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opExecuteQuery(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

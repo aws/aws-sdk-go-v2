@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/machinelearning/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -91,30 +90,38 @@ type GetEvaluationOutput struct {
 	// Measurements of how well the MLModel performed using observations referenced by
 	// the DataSource . One of the following metric is returned based on the type of
 	// the MLModel :
+	//
 	//   - BinaryAUC: A binary MLModel uses the Area Under the Curve (AUC) technique to
 	//   measure performance.
+	//
 	//   - RegressionRMSE: A regression MLModel uses the Root Mean Square Error (RMSE)
 	//   technique to measure performance. RMSE measures the difference between predicted
 	//   and actual values for a single variable.
+	//
 	//   - MulticlassAvgFScore: A multiclass MLModel uses the F1 score technique to
 	//   measure performance.
-	// For more information about performance metrics, please see the Amazon Machine
-	// Learning Developer Guide (https://docs.aws.amazon.com/machine-learning/latest/dg)
-	// .
+	//
+	// For more information about performance metrics, please see the [Amazon Machine Learning Developer Guide].
+	//
+	// [Amazon Machine Learning Developer Guide]: https://docs.aws.amazon.com/machine-learning/latest/dg
 	PerformanceMetrics *types.PerformanceMetrics
 
 	// The epoch time when Amazon Machine Learning marked the Evaluation as INPROGRESS
 	// . StartedAt isn't available if the Evaluation is in the PENDING state.
 	StartedAt *time.Time
 
-	// The status of the evaluation. This element can have one of the following
-	// values:
+	// The status of the evaluation. This element can have one of the following values:
+	//
 	//   - PENDING - Amazon Machine Language (Amazon ML) submitted a request to
 	//   evaluate an MLModel .
+	//
 	//   - INPROGRESS - The evaluation is underway.
+	//
 	//   - FAILED - The request to evaluate an MLModel did not run to completion. It is
 	//   not usable.
+	//
 	//   - COMPLETED - The evaluation process completed successfully.
+	//
 	//   - DELETED - The Evaluation is marked as deleted. It is not usable.
 	Status types.EntityStatus
 
@@ -146,25 +153,25 @@ func (c *Client) addOperationGetEvaluationMiddlewares(stack *middleware.Stack, o
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -179,13 +186,16 @@ func (c *Client) addOperationGetEvaluationMiddlewares(stack *middleware.Stack, o
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpGetEvaluationValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetEvaluation(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

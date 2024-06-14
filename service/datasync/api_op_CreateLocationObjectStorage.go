@@ -6,16 +6,18 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/datasync/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates a transfer location for an object storage system. DataSync can use this
-// location as a source or destination for transferring data. Before you begin,
-// make sure that you understand the prerequisites (https://docs.aws.amazon.com/datasync/latest/userguide/create-object-location.html#create-object-location-prerequisites)
-// for DataSync to work with object storage systems.
+// location as a source or destination for transferring data.
+//
+// Before you begin, make sure that you understand the [prerequisites] for DataSync to work with
+// object storage systems.
+//
+// [prerequisites]: https://docs.aws.amazon.com/datasync/latest/userguide/create-object-location.html#create-object-location-prerequisites
 func (c *Client) CreateLocationObjectStorage(ctx context.Context, params *CreateLocationObjectStorageInput, optFns ...func(*Options)) (*CreateLocationObjectStorageOutput, error) {
 	if params == nil {
 		params = &CreateLocationObjectStorageInput{}
@@ -60,16 +62,27 @@ type CreateLocationObjectStorageInput struct {
 	// to authenticate with the object storage server.
 	SecretKey *string
 
-	// Specifies a file with the certificates that are used to sign the object storage
-	// server's certificate (for example,
-	// file:///home/user/.ssh/storage_sys_certificate.pem ). The file you specify must
-	// include the following:
-	//   - The certificate of the signing certificate authority (CA)
-	//   - Any intermediate certificates
-	//   - base64 encoding
-	//   - A .pem extension
-	// The file can be up to 32768 bytes (before base64 encoding). To use this
-	// parameter, configure ServerProtocol to HTTPS .
+	// Specifies a certificate chain for DataSync to authenticate with your object
+	// storage system if the system uses a private or self-signed certificate authority
+	// (CA). You must specify a single .pem file with a full certificate chain (for
+	// example, file:///home/user/.ssh/object_storage_certificates.pem ).
+	//
+	// The certificate chain might include:
+	//
+	//   - The object storage system's certificate
+	//
+	//   - All intermediate certificates (if there are any)
+	//
+	//   - The root certificate of the signing CA
+	//
+	// You can concatenate your certificates into a .pem file (which can be up to
+	// 32768 bytes before base64 encoding). The following example cat command creates
+	// an object_storage_certificates.pem file that includes three certificates:
+	//
+	//     cat object_server_certificate.pem intermediate_certificate.pem
+	//     ca_root_certificate.pem > object_storage_certificates.pem
+	//
+	// To use this parameter, configure ServerProtocol to HTTPS .
 	ServerCertificate []byte
 
 	// Specifies the port that your object storage server accepts inbound network
@@ -126,25 +139,25 @@ func (c *Client) addOperationCreateLocationObjectStorageMiddlewares(stack *middl
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -159,13 +172,16 @@ func (c *Client) addOperationCreateLocationObjectStorageMiddlewares(stack *middl
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpCreateLocationObjectStorageValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateLocationObjectStorage(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

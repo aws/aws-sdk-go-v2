@@ -6,18 +6,19 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/wafv2/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Generates a presigned download URL for the specified release of the mobile SDK.
+//
 // The mobile SDK is not generally available. Customers who have access to the
 // mobile SDK can use it to establish and manage WAF tokens for use in HTTP(S)
-// requests from a mobile device to WAF. For more information, see WAF client
-// application integration (https://docs.aws.amazon.com/waf/latest/developerguide/waf-application-integration.html)
-// in the WAF Developer Guide.
+// requests from a mobile device to WAF. For more information, see [WAF client application integration]in the WAF
+// Developer Guide.
+//
+// [WAF client application integration]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-application-integration.html
 func (c *Client) GenerateMobileSdkReleaseUrl(ctx context.Context, params *GenerateMobileSdkReleaseUrlInput, optFns ...func(*Options)) (*GenerateMobileSdkReleaseUrlOutput, error) {
 	if params == nil {
 		params = &GenerateMobileSdkReleaseUrlInput{}
@@ -81,25 +82,25 @@ func (c *Client) addOperationGenerateMobileSdkReleaseUrlMiddlewares(stack *middl
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -114,13 +115,16 @@ func (c *Client) addOperationGenerateMobileSdkReleaseUrlMiddlewares(stack *middl
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpGenerateMobileSdkReleaseUrlValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGenerateMobileSdkReleaseUrl(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

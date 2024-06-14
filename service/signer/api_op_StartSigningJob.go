@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/signer/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -15,21 +14,30 @@ import (
 // Initiates a signing job to be performed on the code provided. Signing jobs are
 // viewable by the ListSigningJobs operation for two years after they are
 // performed. Note the following requirements:
-//   - You must create an Amazon S3 source bucket. For more information, see
-//     Creating a Bucket (http://docs.aws.amazon.com/AmazonS3/latest/gsg/CreatingABucket.html)
-//     in the Amazon S3 Getting Started Guide.
+//
+//   - You must create an Amazon S3 source bucket. For more information, see [Creating a Bucket]in
+//     the Amazon S3 Getting Started Guide.
+//
 //   - Your S3 source bucket must be version enabled.
+//
 //   - You must create an S3 destination bucket. AWS Signer uses your S3
 //     destination bucket to write your signed code.
+//
 //   - You specify the name of the source and destination buckets when calling the
 //     StartSigningJob operation.
+//
+//   - You must ensure the S3 buckets are from the same Region as the signing
+//     profile. Cross-Region signing isn't supported.
+//
 //   - You must also specify a request token that identifies your request to
 //     Signer.
 //
-// You can call the DescribeSigningJob and the ListSigningJobs actions after you
-// call StartSigningJob . For a Java example that shows how to use this action, see
-// StartSigningJob (https://docs.aws.amazon.com/signer/latest/developerguide/api-startsigningjob.html)
-// .
+// You can call the DescribeSigningJob and the ListSigningJobs actions after you call StartSigningJob .
+//
+// For a Java example that shows how to use this action, see [StartSigningJob].
+//
+// [Creating a Bucket]: http://docs.aws.amazon.com/AmazonS3/latest/gsg/CreatingABucket.html
+// [StartSigningJob]: https://docs.aws.amazon.com/signer/latest/developerguide/api-startsigningjob.html
 func (c *Client) StartSigningJob(ctx context.Context, params *StartSigningJobInput, optFns ...func(*Options)) (*StartSigningJobOutput, error) {
 	if params == nil {
 		params = &StartSigningJobInput{}
@@ -112,25 +120,25 @@ func (c *Client) addOperationStartSigningJobMiddlewares(stack *middleware.Stack,
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -145,6 +153,9 @@ func (c *Client) addOperationStartSigningJobMiddlewares(stack *middleware.Stack,
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opStartSigningJobMiddleware(stack, options); err != nil {
 		return err
 	}
@@ -154,7 +165,7 @@ func (c *Client) addOperationStartSigningJobMiddlewares(stack *middleware.Stack,
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opStartSigningJob(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

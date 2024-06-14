@@ -6,13 +6,12 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockagent/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes an Agent for existing Amazon Bedrock Agent
+// Deletes an agent.
 func (c *Client) DeleteAgent(ctx context.Context, params *DeleteAgentInput, optFns ...func(*Options)) (*DeleteAgentOutput, error) {
 	if params == nil {
 		params = &DeleteAgentInput{}
@@ -28,29 +27,29 @@ func (c *Client) DeleteAgent(ctx context.Context, params *DeleteAgentInput, optF
 	return out, nil
 }
 
-// Delete Agent Request
 type DeleteAgentInput struct {
 
-	// Id generated at the server side when an Agent is created
+	// The unique identifier of the agent to delete.
 	//
 	// This member is required.
 	AgentId *string
 
-	// Skips checking if resource is in use when set to true. Defaults to false
+	// By default, this value is false and deletion is stopped if the resource is in
+	// use. If you set it to true , the resource will be deleted even if the resource
+	// is in use.
 	SkipResourceInUseCheck bool
 
 	noSmithyDocumentSerde
 }
 
-// Delete Agent Response
 type DeleteAgentOutput struct {
 
-	// Identifier for a resource.
+	// The unique identifier of the agent that was deleted.
 	//
 	// This member is required.
 	AgentId *string
 
-	// Schema Type for Action APIs.
+	// The status of the agent.
 	//
 	// This member is required.
 	AgentStatus types.AgentStatus
@@ -83,25 +82,25 @@ func (c *Client) addOperationDeleteAgentMiddlewares(stack *middleware.Stack, opt
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -116,13 +115,16 @@ func (c *Client) addOperationDeleteAgentMiddlewares(stack *middleware.Stack, opt
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDeleteAgentValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteAgent(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

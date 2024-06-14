@@ -6,13 +6,13 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/securityhub/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Retrieves a list of details for automation rules based on rule Amazon Resource
+//	Retrieves a list of details for automation rules based on rule Amazon Resource
+//
 // Names (ARNs).
 func (c *Client) BatchGetAutomationRules(ctx context.Context, params *BatchGetAutomationRulesInput, optFns ...func(*Options)) (*BatchGetAutomationRulesOutput, error) {
 	if params == nil {
@@ -31,7 +31,7 @@ func (c *Client) BatchGetAutomationRules(ctx context.Context, params *BatchGetAu
 
 type BatchGetAutomationRulesInput struct {
 
-	// A list of rule ARNs to get details for.
+	//  A list of rule ARNs to get details for.
 	//
 	// This member is required.
 	AutomationRulesArns []string
@@ -41,10 +41,10 @@ type BatchGetAutomationRulesInput struct {
 
 type BatchGetAutomationRulesOutput struct {
 
-	// A list of rule details for the provided rule ARNs.
+	//  A list of rule details for the provided rule ARNs.
 	Rules []types.AutomationRulesConfig
 
-	// A list of objects containing RuleArn , ErrorCode , and ErrorMessage . This
+	//  A list of objects containing RuleArn , ErrorCode , and ErrorMessage . This
 	// parameter tells you which automation rules the request didn't retrieve and why.
 	UnprocessedAutomationRules []types.UnprocessedAutomationRule
 
@@ -76,25 +76,25 @@ func (c *Client) addOperationBatchGetAutomationRulesMiddlewares(stack *middlewar
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -109,13 +109,16 @@ func (c *Client) addOperationBatchGetAutomationRulesMiddlewares(stack *middlewar
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpBatchGetAutomationRulesValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opBatchGetAutomationRules(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

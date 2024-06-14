@@ -6,41 +6,50 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/route53domains/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Transfers a domain from another registrar to Amazon Route 53. For more
-// information about transferring domains, see the following topics:
+// Transfers a domain from another registrar to Amazon Route 53.
+//
+// For more information about transferring domains, see the following topics:
+//
 //   - For transfer requirements, a detailed procedure, and information about
-//     viewing the status of a domain that you're transferring to Route 53, see
-//     Transferring Registration for a Domain to Amazon Route 53 (https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/domain-transfer-to-route-53.html)
-//     in the Amazon Route 53 Developer Guide.
+//     viewing the status of a domain that you're transferring to Route 53, see [Transferring Registration for a Domain to Amazon Route 53]in
+//     the Amazon Route 53 Developer Guide.
+//
 //   - For information about how to transfer a domain from one Amazon Web Services
-//     account to another, see TransferDomainToAnotherAwsAccount (https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_TransferDomainToAnotherAwsAccount.html)
-//     .
+//     account to another, see [TransferDomainToAnotherAwsAccount].
+//
 //   - For information about how to transfer a domain to another domain registrar,
-//     see Transferring a Domain from Amazon Route 53 to Another Registrar (https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/domain-transfer-from-route-53.html)
-//     in the Amazon Route 53 Developer Guide.
+//     see [Transferring a Domain from Amazon Route 53 to Another Registrar]in the Amazon Route 53 Developer Guide.
 //
 // During the transfer of any country code top-level domains (ccTLDs) to Route 53,
 // except for .cc and .tv, updates to the owner contact are ignored and the owner
 // contact data from the registry is used. You can update the owner contact after
-// the transfer is complete. For more information, see UpdateDomainContact (https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_UpdateDomainContact.html)
-// . If the registrar for your domain is also the DNS service provider for the
+// the transfer is complete. For more information, see [UpdateDomainContact].
+//
+// If the registrar for your domain is also the DNS service provider for the
 // domain, we highly recommend that you transfer your DNS service to Route 53 or to
 // another DNS service provider before you transfer your registration. Some
 // registrars provide free DNS service when you purchase a domain registration.
 // When you transfer the registration, the previous registrar will not renew your
-// domain registration and could end your DNS service at any time. If the registrar
-// for your domain is also the DNS service provider for the domain and you don't
-// transfer DNS service to another provider, your website, email, and the web
-// applications associated with the domain might become unavailable. If the
-// transfer is successful, this method returns an operation ID that you can use to
-// track the progress and completion of the action. If the transfer doesn't
+// domain registration and could end your DNS service at any time.
+//
+// If the registrar for your domain is also the DNS service provider for the
+// domain and you don't transfer DNS service to another provider, your website,
+// email, and the web applications associated with the domain might become
+// unavailable.
+//
+// If the transfer is successful, this method returns an operation ID that you can
+// use to track the progress and completion of the action. If the transfer doesn't
 // complete successfully, the domain registrant will be notified by email.
+//
+// [Transferring a Domain from Amazon Route 53 to Another Registrar]: https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/domain-transfer-from-route-53.html
+// [TransferDomainToAnotherAwsAccount]: https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_TransferDomainToAnotherAwsAccount.html
+// [Transferring Registration for a Domain to Amazon Route 53]: https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/domain-transfer-to-route-53.html
+// [UpdateDomainContact]: https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_UpdateDomainContact.html
 func (c *Client) TransferDomain(ctx context.Context, params *TransferDomainInput, optFns ...func(*Options)) (*TransferDomainOutput, error) {
 	if params == nil {
 		params = &TransferDomainInput{}
@@ -66,21 +75,28 @@ type TransferDomainInput struct {
 
 	// The name of the domain that you want to transfer to Route 53. The top-level
 	// domain (TLD), such as .com, must be a TLD that Route 53 supports. For a list of
-	// supported TLDs, see Domains that You Can Register with Amazon Route 53 (https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/registrar-tld-list.html)
-	// in the Amazon Route 53 Developer Guide. The domain name can contain only the
-	// following characters:
+	// supported TLDs, see [Domains that You Can Register with Amazon Route 53]in the Amazon Route 53 Developer Guide.
+	//
+	// The domain name can contain only the following characters:
+	//
 	//   - Letters a through z. Domain names are not case sensitive.
+	//
 	//   - Numbers 0 through 9.
+	//
 	//   - Hyphen (-). You can't specify a hyphen at the beginning or end of a label.
-	//   - Period (.) to separate the labels in the name, such as the . in example.com
-	//   .
+	//
+	//   - Period (.) to separate the labels in the name, such as the . in example.com .
+	//
+	// [Domains that You Can Register with Amazon Route 53]: https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/registrar-tld-list.html
 	//
 	// This member is required.
 	DomainName *string
 
 	// The number of years that you want to register the domain for. Domains are
 	// registered for a minimum of one year. The maximum period depends on the
-	// top-level domain. Default: 1
+	// top-level domain.
+	//
+	// Default: 1
 	//
 	// This member is required.
 	DurationInYears *int32
@@ -100,8 +116,9 @@ type TransferDomainInput struct {
 	AuthCode *string
 
 	// Indicates whether the domain will be automatically renewed (true) or not
-	// (false). Auto renewal only takes effect after the account is charged. Default:
-	// true
+	// (false). Auto renewal only takes effect after the account is charged.
+	//
+	// Default: true
 	AutoRenew *bool
 
 	// Provides detailed contact information.
@@ -115,15 +132,19 @@ type TransferDomainInput struct {
 
 	// Whether you want to conceal contact information from WHOIS queries. If you
 	// specify true , WHOIS ("who is") queries return contact information for the
-	// registrar, the phrase "REDACTED FOR PRIVACY", or "On behalf of owner.". While
-	// some domains may allow different privacy settings per contact, we recommend
-	// specifying the same privacy setting for all contacts. Default: true
+	// registrar, the phrase "REDACTED FOR PRIVACY", or "On behalf of owner.".
+	//
+	// While some domains may allow different privacy settings per contact, we
+	// recommend specifying the same privacy setting for all contacts.
+	//
+	// Default: true
 	PrivacyProtectAdminContact *bool
 
-	// Whether you want to conceal contact information from WHOIS queries. If you
+	//  Whether you want to conceal contact information from WHOIS queries. If you
 	// specify true , WHOIS ("who is") queries return contact information either for
 	// Amazon Registrar or for our registrar associate, Gandi. If you specify false ,
 	// WHOIS queries return the information that you entered for the billing contact.
+	//
 	// You must specify the same privacy setting for the administrative, billing,
 	// registrant, and technical contacts.
 	PrivacyProtectBillingContact *bool
@@ -132,16 +153,23 @@ type TransferDomainInput struct {
 	// specify true , WHOIS ("who is") queries return contact information either for
 	// Amazon Registrar or for our registrar associate, Gandi. If you specify false ,
 	// WHOIS queries return the information that you entered for the registrant contact
-	// (domain owner). You must specify the same privacy setting for the
-	// administrative, billing, registrant, and technical contacts. Default: true
+	// (domain owner).
+	//
+	// You must specify the same privacy setting for the administrative, billing,
+	// registrant, and technical contacts.
+	//
+	// Default: true
 	PrivacyProtectRegistrantContact *bool
 
 	// Whether you want to conceal contact information from WHOIS queries. If you
 	// specify true , WHOIS ("who is") queries return contact information either for
 	// Amazon Registrar or for our registrar associate, Gandi. If you specify false ,
 	// WHOIS queries return the information that you entered for the technical contact.
+	//
 	// You must specify the same privacy setting for the administrative, billing,
-	// registrant, and technical contacts. Default: true
+	// registrant, and technical contacts.
+	//
+	// Default: true
 	PrivacyProtectTechContact *bool
 
 	noSmithyDocumentSerde
@@ -151,8 +179,9 @@ type TransferDomainInput struct {
 type TransferDomainOutput struct {
 
 	// Identifier for tracking the progress of the request. To query the operation
-	// status, use GetOperationDetail (https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_GetOperationDetail.html)
-	// .
+	// status, use [GetOperationDetail].
+	//
+	// [GetOperationDetail]: https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_GetOperationDetail.html
 	OperationId *string
 
 	// Metadata pertaining to the operation's result.
@@ -183,25 +212,25 @@ func (c *Client) addOperationTransferDomainMiddlewares(stack *middleware.Stack, 
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -216,13 +245,16 @@ func (c *Client) addOperationTransferDomainMiddlewares(stack *middleware.Stack, 
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpTransferDomainValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opTransferDomain(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

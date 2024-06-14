@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/codestarnotifications/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -42,7 +41,7 @@ type CreateNotificationRuleInput struct {
 	DetailType types.DetailType
 
 	// A list of event types associated with this notification rule. For a list of
-	// allowed events, see EventTypeSummary .
+	// allowed events, see EventTypeSummary.
 	//
 	// This member is required.
 	EventTypeIds []string
@@ -69,9 +68,10 @@ type CreateNotificationRuleInput struct {
 	// A unique, client-generated idempotency token that, when provided in a request,
 	// ensures the request cannot be repeated with a changed parameter. If a request
 	// with the same parameters is received and a token is included, the request
-	// returns information about the initial request that used that token. The Amazon
-	// Web Services SDKs prepopulate client request tokens. If you are using an Amazon
-	// Web Services SDK, an idempotency token is created for you.
+	// returns information about the initial request that used that token.
+	//
+	// The Amazon Web Services SDKs prepopulate client request tokens. If you are
+	// using an Amazon Web Services SDK, an idempotency token is created for you.
 	ClientRequestToken *string
 
 	// The status of the notification rule. The default value is ENABLED . If the
@@ -118,25 +118,25 @@ func (c *Client) addOperationCreateNotificationRuleMiddlewares(stack *middleware
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -151,6 +151,9 @@ func (c *Client) addOperationCreateNotificationRuleMiddlewares(stack *middleware
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opCreateNotificationRuleMiddleware(stack, options); err != nil {
 		return err
 	}
@@ -160,7 +163,7 @@ func (c *Client) addOperationCreateNotificationRuleMiddlewares(stack *middleware
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateNotificationRule(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

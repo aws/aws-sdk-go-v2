@@ -6,13 +6,12 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/qbusiness/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Gets a list of messages associated with an Amazon Q web experience.
+// Gets a list of messages associated with an Amazon Q Business web experience.
 func (c *Client) ListMessages(ctx context.Context, params *ListMessagesInput, optFns ...func(*Options)) (*ListMessagesOutput, error) {
 	if params == nil {
 		params = &ListMessagesInput{}
@@ -30,27 +29,26 @@ func (c *Client) ListMessages(ctx context.Context, params *ListMessagesInput, op
 
 type ListMessagesInput struct {
 
-	// The identifier for the Amazon Q application.
+	// The identifier for the Amazon Q Business application.
 	//
 	// This member is required.
 	ApplicationId *string
 
-	// The identifier of the Amazon Q web experience conversation.
+	// The identifier of the Amazon Q Business web experience conversation.
 	//
 	// This member is required.
 	ConversationId *string
 
-	// The identifier of the user involved in the Amazon Q web experience conversation.
-	//
-	// This member is required.
-	UserId *string
-
 	// The maximum number of messages to return.
 	MaxResults *int32
 
-	// If the number of retrievers returned exceeds maxResults , Amazon Q returns a
-	// next token as a pagination token to retrieve the next set of messages.
+	// If the number of retrievers returned exceeds maxResults , Amazon Q Business
+	// returns a next token as a pagination token to retrieve the next set of messages.
 	NextToken *string
+
+	// The identifier of the user involved in the Amazon Q Business web experience
+	// conversation.
+	UserId *string
 
 	noSmithyDocumentSerde
 }
@@ -60,8 +58,8 @@ type ListMessagesOutput struct {
 	// An array of information on one or more messages.
 	Messages []types.Message
 
-	// If the response is truncated, Amazon Q returns this token, which you can use in
-	// a later request to list the next set of messages.
+	// If the response is truncated, Amazon Q Business returns this token, which you
+	// can use in a later request to list the next set of messages.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -92,25 +90,25 @@ func (c *Client) addOperationListMessagesMiddlewares(stack *middleware.Stack, op
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -125,13 +123,16 @@ func (c *Client) addOperationListMessagesMiddlewares(stack *middleware.Stack, op
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpListMessagesValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListMessages(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

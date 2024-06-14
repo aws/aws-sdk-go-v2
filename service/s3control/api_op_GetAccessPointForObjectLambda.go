@@ -17,12 +17,21 @@ import (
 	"time"
 )
 
-// This operation is not supported by directory buckets. Returns configuration
-// information about the specified Object Lambda Access Point The following actions
-// are related to GetAccessPointForObjectLambda :
-//   - CreateAccessPointForObjectLambda (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_CreateAccessPointForObjectLambda.html)
-//   - DeleteAccessPointForObjectLambda (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteAccessPointForObjectLambda.html)
-//   - ListAccessPointsForObjectLambda (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_ListAccessPointsForObjectLambda.html)
+// This operation is not supported by directory buckets.
+//
+// # Returns configuration information about the specified Object Lambda Access Point
+//
+// The following actions are related to GetAccessPointForObjectLambda :
+//
+// [CreateAccessPointForObjectLambda]
+//
+// [DeleteAccessPointForObjectLambda]
+//
+// [ListAccessPointsForObjectLambda]
+//
+// [CreateAccessPointForObjectLambda]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_CreateAccessPointForObjectLambda.html
+// [ListAccessPointsForObjectLambda]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_ListAccessPointsForObjectLambda.html
+// [DeleteAccessPointForObjectLambda]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteAccessPointForObjectLambda.html
 func (c *Client) GetAccessPointForObjectLambda(ctx context.Context, params *GetAccessPointForObjectLambdaInput, optFns ...func(*Options)) (*GetAccessPointForObjectLambdaOutput, error) {
 	if params == nil {
 		params = &GetAccessPointForObjectLambdaInput{}
@@ -102,25 +111,25 @@ func (c *Client) addOperationGetAccessPointForObjectLambdaMiddlewares(stack *mid
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -138,6 +147,9 @@ func (c *Client) addOperationGetAccessPointForObjectLambdaMiddlewares(stack *mid
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addEndpointPrefix_opGetAccessPointForObjectLambdaMiddleware(stack); err != nil {
 		return err
 	}
@@ -150,7 +162,7 @@ func (c *Client) addOperationGetAccessPointForObjectLambdaMiddlewares(stack *mid
 	if err = addMetadataRetrieverMiddleware(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addGetAccessPointForObjectLambdaUpdateEndpoint(stack, options); err != nil {

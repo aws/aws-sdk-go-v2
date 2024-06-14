@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/servicecatalog/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -30,17 +29,27 @@ func (c *Client) CreateServiceAction(ctx context.Context, params *CreateServiceA
 
 type CreateServiceActionInput struct {
 
-	// The self-service action definition. Can be one of the following: Name The name
-	// of the Amazon Web Services Systems Manager document (SSM document). For example,
-	// AWS-RestartEC2Instance . If you are using a shared SSM document, you must
-	// provide the ARN instead of the name. Version The Amazon Web Services Systems
-	// Manager automation document version. For example, "Version": "1" AssumeRole The
-	// Amazon Resource Name (ARN) of the role that performs the self-service actions on
-	// your behalf. For example, "AssumeRole":
-	// "arn:aws:iam::12345678910:role/ActionRole" . To reuse the provisioned product
-	// launch role, set to "AssumeRole": "LAUNCH_ROLE" . Parameters The list of
-	// parameters in JSON format. For example:
-	// [{\"Name\":\"InstanceId\",\"Type\":\"TARGET\"}] or
+	// The self-service action definition. Can be one of the following:
+	//
+	// Name The name of the Amazon Web Services Systems Manager document (SSM
+	// document). For example, AWS-RestartEC2Instance .
+	//
+	// If you are using a shared SSM document, you must provide the ARN instead of the
+	// name.
+	//
+	// Version The Amazon Web Services Systems Manager automation document version.
+	// For example, "Version": "1"
+	//
+	// AssumeRole The Amazon Resource Name (ARN) of the role that performs the
+	// self-service actions on your behalf. For example, "AssumeRole":
+	// "arn:aws:iam::12345678910:role/ActionRole" .
+	//
+	// To reuse the provisioned product launch role, set to "AssumeRole": "LAUNCH_ROLE"
+	// .
+	//
+	// Parameters The list of parameters in JSON format.
+	//
+	// For example: [{\"Name\":\"InstanceId\",\"Type\":\"TARGET\"}] or
 	// [{\"Name\":\"InstanceId\",\"Type\":\"TEXT_VALUE\"}] .
 	//
 	// This member is required.
@@ -64,7 +73,9 @@ type CreateServiceActionInput struct {
 	Name *string
 
 	// The language code.
+	//
 	//   - jp - Japanese
+	//
 	//   - zh - Chinese
 	AcceptLanguage *string
 
@@ -107,25 +118,25 @@ func (c *Client) addOperationCreateServiceActionMiddlewares(stack *middleware.St
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -140,6 +151,9 @@ func (c *Client) addOperationCreateServiceActionMiddlewares(stack *middleware.St
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opCreateServiceActionMiddleware(stack, options); err != nil {
 		return err
 	}
@@ -149,7 +163,7 @@ func (c *Client) addOperationCreateServiceActionMiddlewares(stack *middleware.St
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateServiceAction(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

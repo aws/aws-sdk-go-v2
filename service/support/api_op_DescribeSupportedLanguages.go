@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/support/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -15,13 +14,16 @@ import (
 // Returns a list of supported languages for a specified categoryCode , issueType
 // and serviceCode . The returned supported languages will include a ISO 639-1 code
 // for the language , and the language display name.
+//
 //   - You must have a Business, Enterprise On-Ramp, or Enterprise Support plan to
 //     use the Amazon Web Services Support API.
+//
 //   - If you call the Amazon Web Services Support API from an account that
 //     doesn't have a Business, Enterprise On-Ramp, or Enterprise Support plan, the
 //     SubscriptionRequiredException error message appears. For information about
-//     changing your support plan, see Amazon Web Services Support (http://aws.amazon.com/premiumsupport/)
-//     .
+//     changing your support plan, see [Amazon Web Services Support].
+//
+// [Amazon Web Services Support]: http://aws.amazon.com/premiumsupport/
 func (c *Client) DescribeSupportedLanguages(ctx context.Context, params *DescribeSupportedLanguagesInput, optFns ...func(*Options)) (*DescribeSupportedLanguagesOutput, error) {
 	if params == nil {
 		params = &DescribeSupportedLanguagesInput{}
@@ -39,9 +41,9 @@ func (c *Client) DescribeSupportedLanguages(ctx context.Context, params *Describ
 
 type DescribeSupportedLanguagesInput struct {
 
-	// The category of problem for the support case. You also use the DescribeServices
-	// operation to get the category code for a service. Each Amazon Web Services
-	// service defines its own set of category codes.
+	// The category of problem for the support case. You also use the DescribeServices operation to
+	// get the category code for a service. Each Amazon Web Services service defines
+	// its own set of category codes.
 	//
 	// This member is required.
 	CategoryCode *string
@@ -51,8 +53,8 @@ type DescribeSupportedLanguagesInput struct {
 	// This member is required.
 	IssueType *string
 
-	// The code for the Amazon Web Services service. You can use the DescribeServices
-	// operation to get the possible serviceCode values.
+	// The code for the Amazon Web Services service. You can use the DescribeServices operation to get
+	// the possible serviceCode values.
 	//
 	// This member is required.
 	ServiceCode *string
@@ -62,7 +64,7 @@ type DescribeSupportedLanguagesInput struct {
 
 type DescribeSupportedLanguagesOutput struct {
 
-	// A JSON-formatted array that contains the available ISO 639-1 language codes.
+	//  A JSON-formatted array that contains the available ISO 639-1 language codes.
 	SupportedLanguages []types.SupportedLanguage
 
 	// Metadata pertaining to the operation's result.
@@ -93,25 +95,25 @@ func (c *Client) addOperationDescribeSupportedLanguagesMiddlewares(stack *middle
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -126,13 +128,16 @@ func (c *Client) addOperationDescribeSupportedLanguagesMiddlewares(stack *middle
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDescribeSupportedLanguagesValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeSupportedLanguages(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

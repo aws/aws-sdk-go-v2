@@ -1,12 +1,12 @@
 package attributevalue
 
 import (
+	"fmt"
 	"math"
 	"reflect"
 	"testing"
 
 	"github.com/aws/aws-sdk-go-v2/service/dynamodb/types"
-	"github.com/google/go-cmp/cmp"
 )
 
 type simpleMarshalStruct struct {
@@ -512,7 +512,7 @@ func compareObjects(t *testing.T, expected interface{}, actual interface{}) {
 	if !reflect.DeepEqual(expected, actual) {
 		ev := reflect.ValueOf(expected)
 		av := reflect.ValueOf(actual)
-		if diff := cmp.Diff(expected, actual); len(diff) != 0 {
+		if diff := cmpDiff(expected, actual); len(diff) != 0 {
 			t.Errorf("expect kind(%s, %T) match actual kind(%s, %T)\n%s",
 				ev.Kind(), ev.Interface(), av.Kind(), av.Interface(), diff)
 		}
@@ -541,6 +541,60 @@ func BenchmarkMarshalOneMember(b *testing.B) {
 				A: simple,
 			}); err != nil {
 				b.Error("unexpected error:", err)
+			}
+		}
+	})
+}
+
+func BenchmarkList20Ints(b *testing.B) {
+	input := []int{}
+	for i := 0; i < 20; i++ {
+		input = append(input, i)
+	}
+
+	b.RunParallel(func(pb *testing.PB) {
+		for pb.Next() {
+			_, err := Marshal(input)
+			if err != nil {
+				b.Fatal(err)
+			}
+		}
+	})
+}
+
+func BenchmarkStruct10Fields(b *testing.B) {
+
+	type struct10Fields struct {
+		Field1  int
+		Field2  string
+		Field3  int
+		Field4  string
+		Field5  string
+		Field6  string
+		Field7  int
+		Field8  string
+		Field9  int
+		Field10 int
+	}
+
+	input := struct10Fields{
+		Field1:  10,
+		Field2:  "ASD",
+		Field3:  70,
+		Field4:  "qqqqq",
+		Field5:  "AAA",
+		Field6:  "bbb",
+		Field7:  63,
+		Field8:  "aa",
+		Field9:  10,
+		Field10: 63,
+	}
+
+	b.RunParallel(func(pb *testing.PB) {
+		for pb.Next() {
+			_, err := Marshal(input)
+			if err != nil {
+				b.Fatal(err)
 			}
 		}
 	})
@@ -708,4 +762,11 @@ func Test_Encode_YAML_TagKey(t *testing.T) {
 	}
 
 	compareObjects(t, expected, actual)
+}
+
+func cmpDiff(e, a interface{}) string {
+	if !reflect.DeepEqual(e, a) {
+		return fmt.Sprintf("%v != %v", e, a)
+	}
+	return ""
 }

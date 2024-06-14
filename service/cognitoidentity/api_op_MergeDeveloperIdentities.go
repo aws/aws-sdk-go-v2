@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -18,11 +17,14 @@ import (
 // SourceUserIdentifier ) with the IdentityId of the DestinationUserIdentifier .
 // Only developer-authenticated users can be merged. If the users to be merged are
 // associated with the same public provider, but as two different users, an
-// exception will be thrown. The number of linked logins is limited to 20. So, the
-// number of linked logins for the source user, SourceUserIdentifier , and the
-// destination user, DestinationUserIdentifier , together should not be larger than
-// 20. Otherwise, an exception will be thrown. You must use AWS Developer
-// credentials to call this API.
+// exception will be thrown.
+//
+// The number of linked logins is limited to 20. So, the number of linked logins
+// for the source user, SourceUserIdentifier , and the destination user,
+// DestinationUserIdentifier , together should not be larger than 20. Otherwise, an
+// exception will be thrown.
+//
+// You must use AWS Developer credentials to call this API.
 func (c *Client) MergeDeveloperIdentities(ctx context.Context, params *MergeDeveloperIdentitiesInput, optFns ...func(*Options)) (*MergeDeveloperIdentitiesOutput, error) {
 	if params == nil {
 		params = &MergeDeveloperIdentitiesInput{}
@@ -104,25 +106,25 @@ func (c *Client) addOperationMergeDeveloperIdentitiesMiddlewares(stack *middlewa
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -137,13 +139,16 @@ func (c *Client) addOperationMergeDeveloperIdentitiesMiddlewares(stack *middlewa
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpMergeDeveloperIdentitiesValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opMergeDeveloperIdentities(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

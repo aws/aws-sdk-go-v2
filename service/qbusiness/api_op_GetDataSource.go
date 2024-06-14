@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/qbusiness/document"
 	"github.com/aws/aws-sdk-go-v2/service/qbusiness/types"
 	"github.com/aws/smithy-go/middleware"
@@ -14,7 +13,7 @@ import (
 	"time"
 )
 
-// Gets information about an existing Amazon Q data source connector.
+// Gets information about an existing Amazon Q Business data source connector.
 func (c *Client) GetDataSource(ctx context.Context, params *GetDataSourceInput, optFns ...func(*Options)) (*GetDataSourceOutput, error) {
 	if params == nil {
 		params = &GetDataSourceInput{}
@@ -32,7 +31,7 @@ func (c *Client) GetDataSource(ctx context.Context, params *GetDataSourceInput, 
 
 type GetDataSourceInput struct {
 
-	// The identifier of the Amazon Q application.
+	// The identifier of the Amazon Q Business application.
 	//
 	// This member is required.
 	ApplicationId *string
@@ -52,7 +51,7 @@ type GetDataSourceInput struct {
 
 type GetDataSourceOutput struct {
 
-	// The identifier of the Amazon Q application.
+	// The identifier of the Amazon Q Business application.
 	ApplicationId *string
 
 	// The details of how the data source connector is configured.
@@ -74,9 +73,11 @@ type GetDataSourceOutput struct {
 	DisplayName *string
 
 	// Provides the configuration information for altering document metadata and
-	// content during the document ingestion process. For more information, see Custom
-	// document enrichment (https://docs.aws.amazon.com/amazonq/latest/business-use-dg/custom-document-enrichment.html)
-	// .
+	// content during the document ingestion process.
+	//
+	// For more information, see [Custom document enrichment].
+	//
+	// [Custom document enrichment]: https://docs.aws.amazon.com/amazonq/latest/business-use-dg/custom-document-enrichment.html
 	DocumentEnrichmentConfiguration *types.DocumentEnrichmentConfiguration
 
 	// When the Status field value is FAILED , the ErrorMessage field contains a
@@ -95,7 +96,7 @@ type GetDataSourceOutput struct {
 	// the data source connector to fail.
 	Status types.DataSourceStatus
 
-	// The schedule for Amazon Q to update the index.
+	// The schedule for Amazon Q Business to update the index.
 	SyncSchedule *string
 
 	// The type of the data source connector. For example, S3 .
@@ -136,25 +137,25 @@ func (c *Client) addOperationGetDataSourceMiddlewares(stack *middleware.Stack, o
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -169,13 +170,16 @@ func (c *Client) addOperationGetDataSourceMiddlewares(stack *middleware.Stack, o
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpGetDataSourceValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetDataSource(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

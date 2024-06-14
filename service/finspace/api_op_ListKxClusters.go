@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/finspace/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -37,24 +36,29 @@ type ListKxClustersInput struct {
 
 	// Specifies the type of KDB database that is being created. The following types
 	// are available:
+	//
 	//   - HDB – A Historical Database. The data is only accessible with read-only
 	//   permissions from one of the FinSpace managed kdb databases mounted to the
 	//   cluster.
+	//
 	//   - RDB – A Realtime Database. This type of database captures all the data from
 	//   a ticker plant and stores it in memory until the end of day, after which it
 	//   writes all of its data to a disk and reloads the HDB. This cluster type requires
 	//   local storage for temporary storage of data during the savedown process. If you
 	//   specify this field in your request, you must provide the
 	//   savedownStorageConfiguration parameter.
+	//
 	//   - GATEWAY – A gateway cluster allows you to access data across processes in
 	//   kdb systems. It allows you to create your own routing logic using the
 	//   initialization scripts and custom code. This type of cluster does not require a
 	//   writable local storage.
+	//
 	//   - GP – A general purpose cluster allows you to quickly iterate on code during
 	//   development by granting greater access to system commands and enabling a fast
 	//   reload of custom code. This cluster type can optionally mount databases
 	//   including cache and savedown storage. For this cluster type, the node count is
 	//   fixed at 1. It does not support autoscaling and supports only SINGLE AZ mode.
+	//
 	//   - Tickerplant – A tickerplant cluster allows you to subscribe to feed
 	//   handlers based on IAM permissions. It can publish to RDBs, other Tickerplants,
 	//   and real-time subscribers (RTS). Tickerplants can persist messages to log, which
@@ -107,25 +111,25 @@ func (c *Client) addOperationListKxClustersMiddlewares(stack *middleware.Stack, 
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -143,13 +147,16 @@ func (c *Client) addOperationListKxClustersMiddlewares(stack *middleware.Stack, 
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpListKxClustersValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListKxClusters(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

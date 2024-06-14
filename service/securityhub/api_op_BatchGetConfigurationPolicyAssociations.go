@@ -6,13 +6,13 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/securityhub/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns associations between an Security Hub configuration and a batch of
+//	Returns associations between an Security Hub configuration and a batch of
+//
 // target accounts, organizational units, or the root. Only the Security Hub
 // delegated administrator can invoke this operation from the home Region. A
 // configuration can refer to a configuration policy or to a self-managed
@@ -34,7 +34,7 @@ func (c *Client) BatchGetConfigurationPolicyAssociations(ctx context.Context, pa
 
 type BatchGetConfigurationPolicyAssociationsInput struct {
 
-	// Specifies one or more target account IDs, organizational unit (OU) IDs, or the
+	//  Specifies one or more target account IDs, organizational unit (OU) IDs, or the
 	// root ID to retrieve associations for.
 	//
 	// This member is required.
@@ -45,10 +45,10 @@ type BatchGetConfigurationPolicyAssociationsInput struct {
 
 type BatchGetConfigurationPolicyAssociationsOutput struct {
 
-	// Describes associations for the target accounts, OUs, or the root.
+	//  Describes associations for the target accounts, OUs, or the root.
 	ConfigurationPolicyAssociations []types.ConfigurationPolicyAssociationSummary
 
-	// An array of configuration policy associations, one for each configuration
+	//  An array of configuration policy associations, one for each configuration
 	// policy association identifier, that was specified in the request but couldn’t be
 	// processed due to an error.
 	UnprocessedConfigurationPolicyAssociations []types.UnprocessedConfigurationPolicyAssociation
@@ -81,25 +81,25 @@ func (c *Client) addOperationBatchGetConfigurationPolicyAssociationsMiddlewares(
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -114,13 +114,16 @@ func (c *Client) addOperationBatchGetConfigurationPolicyAssociationsMiddlewares(
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpBatchGetConfigurationPolicyAssociationsValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opBatchGetConfigurationPolicyAssociations(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

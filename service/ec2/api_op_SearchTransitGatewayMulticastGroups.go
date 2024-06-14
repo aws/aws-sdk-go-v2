@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -43,17 +42,26 @@ type SearchTransitGatewayMulticastGroupsInput struct {
 	DryRun *bool
 
 	// One or more filters. The possible values are:
+	//
 	//   - group-ip-address - The IP address of the transit gateway multicast group.
+	//
 	//   - is-group-member - The resource is a group member. Valid values are true |
 	//   false .
+	//
 	//   - is-group-source - The resource is a group source. Valid values are true |
 	//   false .
+	//
 	//   - member-type - The member type. Valid values are igmp | static .
+	//
 	//   - resource-id - The ID of the resource.
+	//
 	//   - resource-type - The type of resource. Valid values are vpc | vpn |
 	//   direct-connect-gateway | tgw-peering .
+	//
 	//   - source-type - The source type. Valid values are igmp | static .
+	//
 	//   - subnet-id - The ID of the subnet.
+	//
 	//   - transit-gateway-attachment-id - The id of the transit gateway attachment.
 	Filters []types.Filter
 
@@ -104,25 +112,25 @@ func (c *Client) addOperationSearchTransitGatewayMulticastGroupsMiddlewares(stac
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -137,13 +145,16 @@ func (c *Client) addOperationSearchTransitGatewayMulticastGroupsMiddlewares(stac
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpSearchTransitGatewayMulticastGroupsValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opSearchTransitGatewayMulticastGroups(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

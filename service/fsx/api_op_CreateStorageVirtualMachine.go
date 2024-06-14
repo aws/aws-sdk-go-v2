@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/fsx/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -42,7 +41,7 @@ type CreateStorageVirtualMachineInput struct {
 
 	// Describes the self-managed Microsoft Active Directory to which you want to join
 	// the SVM. Joining an Active Directory provides user authentication and access
-	// control for SMB clients, including Microsoft Windows and macOS client accessing
+	// control for SMB clients, including Microsoft Windows and macOS clients accessing
 	// the file system.
 	ActiveDirectoryConfiguration *types.CreateSvmActiveDirectoryConfiguration
 
@@ -53,14 +52,19 @@ type CreateStorageVirtualMachineInput struct {
 
 	// The security style of the root volume of the SVM. Specify one of the following
 	// values:
+	//
 	//   - UNIX if the file system is managed by a UNIX administrator, the majority of
 	//   users are NFS clients, and an application accessing the data uses a UNIX user as
 	//   the service account.
-	//   - NTFS if the file system is managed by a Windows administrator, the majority
-	//   of users are SMB clients, and an application accessing the data uses a Windows
-	//   user as the service account.
-	//   - MIXED if the file system is managed by both UNIX and Windows administrators
-	//   and users consist of both NFS and SMB clients.
+	//
+	//   - NTFS if the file system is managed by a Microsoft Windows administrator, the
+	//   majority of users are SMB clients, and an application accessing the data uses a
+	//   Microsoft Windows user as the service account.
+	//
+	//   - MIXED This is an advanced setting. For more information, see [Volume security style]in the Amazon
+	//   FSx for NetApp ONTAP User Guide.
+	//
+	// [Volume security style]: https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/volume-security-style.html
 	RootVolumeSecurityStyle types.StorageVirtualMachineRootVolumeSecurityStyle
 
 	// The password to use when managing the SVM using the NetApp ONTAP CLI or REST
@@ -108,25 +112,25 @@ func (c *Client) addOperationCreateStorageVirtualMachineMiddlewares(stack *middl
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -141,6 +145,9 @@ func (c *Client) addOperationCreateStorageVirtualMachineMiddlewares(stack *middl
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opCreateStorageVirtualMachineMiddleware(stack, options); err != nil {
 		return err
 	}
@@ -150,7 +157,7 @@ func (c *Client) addOperationCreateStorageVirtualMachineMiddlewares(stack *middl
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateStorageVirtualMachine(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

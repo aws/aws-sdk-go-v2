@@ -6,13 +6,13 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/appflow/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deactivates the existing flow. For on-demand flows, this operation returns an
+//	Deactivates the existing flow. For on-demand flows, this operation returns an
+//
 // unsupportedOperationException error message. For schedule and event-triggered
 // flows, this operation deactivates the flow.
 func (c *Client) StopFlow(ctx context.Context, params *StopFlowInput, optFns ...func(*Options)) (*StopFlowOutput, error) {
@@ -32,7 +32,7 @@ func (c *Client) StopFlow(ctx context.Context, params *StopFlowInput, optFns ...
 
 type StopFlowInput struct {
 
-	// The specified name of the flow. Spaces are not allowed. Use underscores (_) or
+	//  The specified name of the flow. Spaces are not allowed. Use underscores (_) or
 	// hyphens (-) only.
 	//
 	// This member is required.
@@ -43,10 +43,10 @@ type StopFlowInput struct {
 
 type StopFlowOutput struct {
 
-	// The flow's Amazon Resource Name (ARN).
+	//  The flow's Amazon Resource Name (ARN).
 	FlowArn *string
 
-	// Indicates the current status of the flow.
+	//  Indicates the current status of the flow.
 	FlowStatus types.FlowStatus
 
 	// Metadata pertaining to the operation's result.
@@ -77,25 +77,25 @@ func (c *Client) addOperationStopFlowMiddlewares(stack *middleware.Stack, option
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -110,13 +110,16 @@ func (c *Client) addOperationStopFlowMiddlewares(stack *middleware.Stack, option
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpStopFlowValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opStopFlow(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

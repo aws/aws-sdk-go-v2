@@ -14,8 +14,8 @@ import (
 	internalauth "github.com/aws/aws-sdk-go-v2/internal/auth"
 	internalauthsmithy "github.com/aws/aws-sdk-go-v2/internal/auth/smithy"
 	internalConfig "github.com/aws/aws-sdk-go-v2/internal/configsources"
+	internalmiddleware "github.com/aws/aws-sdk-go-v2/internal/middleware"
 	smithy "github.com/aws/smithy-go"
-	smithyauth "github.com/aws/smithy-go/auth"
 	"github.com/aws/smithy-go/auth/bearer"
 	smithydocument "github.com/aws/smithy-go/document"
 	"github.com/aws/smithy-go/logging"
@@ -24,6 +24,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"net"
 	"net/http"
+	"sync/atomic"
 )
 
 const ServiceID = "CodeCatalyst"
@@ -32,6 +33,9 @@ const ServiceAPIVersion = "2022-09-28"
 // Client provides the API client to make operations call for Amazon CodeCatalyst.
 type Client struct {
 	options Options
+
+	// Difference between the time reported by the server and the client
+	timeOffset *atomic.Int64
 }
 
 // New returns an initialized Client based on the functional options. Provide
@@ -69,6 +73,8 @@ func New(options Options, optFns ...func(*Options)) *Client {
 	client := &Client{
 		options: options,
 	}
+
+	initializeTimeOffsetResolver(client)
 
 	return client
 }
@@ -236,7 +242,6 @@ func NewFromConfig(cfg aws.Config, optFns ...func(*Options)) *Client {
 		Logger:                  cfg.Logger,
 		ClientLogMode:           cfg.ClientLogMode,
 		AppID:                   cfg.AppID,
-		AccountIDEndpointMode:   cfg.AccountIDEndpointMode,
 	}
 	resolveAWSRetryerProvider(cfg, &opts)
 	resolveAWSRetryMaxAttempts(cfg, &opts)
@@ -360,15 +365,51 @@ func resolveAWSEndpointResolver(cfg aws.Config, o *Options) {
 }
 
 func addClientUserAgent(stack *middleware.Stack, options Options) error {
-	if err := awsmiddleware.AddSDKAgentKeyValue(awsmiddleware.APIMetadata, "codecatalyst", goModuleVersion)(stack); err != nil {
+	ua, err := getOrAddRequestUserAgent(stack)
+	if err != nil {
 		return err
 	}
 
+	ua.AddSDKAgentKeyValue(awsmiddleware.APIMetadata, "codecatalyst", goModuleVersion)
 	if len(options.AppID) > 0 {
-		return awsmiddleware.AddSDKAgentKey(awsmiddleware.ApplicationIdentifier, options.AppID)(stack)
+		ua.AddSDKAgentKey(awsmiddleware.ApplicationIdentifier, options.AppID)
 	}
 
 	return nil
+}
+
+func getOrAddRequestUserAgent(stack *middleware.Stack) (*awsmiddleware.RequestUserAgent, error) {
+	id := (*awsmiddleware.RequestUserAgent)(nil).ID()
+	mw, ok := stack.Build.Get(id)
+	if !ok {
+		mw = awsmiddleware.NewRequestUserAgent()
+		if err := stack.Build.Add(mw, middleware.After); err != nil {
+			return nil, err
+		}
+	}
+
+	ua, ok := mw.(*awsmiddleware.RequestUserAgent)
+	if !ok {
+		return nil, fmt.Errorf("%T for %s middleware did not match expected type", mw, id)
+	}
+
+	return ua, nil
+}
+
+func addClientRequestID(stack *middleware.Stack) error {
+	return stack.Build.Add(&awsmiddleware.ClientRequestID{}, middleware.After)
+}
+
+func addComputeContentLength(stack *middleware.Stack) error {
+	return stack.Build.Add(&smithyhttp.ComputeContentLength{}, middleware.After)
+}
+
+func addRawResponseToMetadata(stack *middleware.Stack) error {
+	return stack.Deserialize.Add(&awsmiddleware.AddRawResponse{}, middleware.Before)
+}
+
+func addRecordResponseTiming(stack *middleware.Stack) error {
+	return stack.Deserialize.Add(&awsmiddleware.RecordResponseTiming{}, middleware.After)
 }
 
 func resolveIdempotencyTokenProvider(o *Options) {
@@ -378,12 +419,17 @@ func resolveIdempotencyTokenProvider(o *Options) {
 	o.IdempotencyTokenProvider = smithyrand.NewUUIDIdempotencyToken(cryptorand.Reader)
 }
 
-func addRetryMiddlewares(stack *middleware.Stack, o Options) error {
-	mo := retry.AddRetryMiddlewaresOptions{
-		Retryer:          o.Retryer,
-		LogRetryAttempts: o.ClientLogMode.IsRetries(),
+func addRetry(stack *middleware.Stack, o Options) error {
+	attempt := retry.NewAttemptMiddleware(o.Retryer, smithyhttp.RequestCloner, func(m *retry.Attempt) {
+		m.LogAttempts = o.ClientLogMode.IsRetries()
+	})
+	if err := stack.Finalize.Insert(attempt, "Signing", middleware.Before); err != nil {
+		return err
 	}
-	return retry.AddRetryMiddlewares(stack, mo)
+	if err := stack.Finalize.Insert(&retry.MetricsHeader{}, attempt.ID(), middleware.After); err != nil {
+		return err
+	}
+	return nil
 }
 
 // resolves dual-stack endpoint configuration
@@ -416,18 +462,6 @@ func resolveUseFIPSEndpoint(cfg aws.Config, o *Options) error {
 	return nil
 }
 
-func resolveAccountID(identity smithyauth.Identity, mode aws.AccountIDEndpointMode) *string {
-	if mode == aws.AccountIDEndpointModeDisabled {
-		return nil
-	}
-
-	if ca, ok := identity.(*internalauthsmithy.CredentialsAdapter); ok && ca.Credentials.AccountID != "" {
-		return aws.String(ca.Credentials.AccountID)
-	}
-
-	return nil
-}
-
 func resolveBearerAuthSigner(o *Options) {
 	if o.BearerAuthSigner != nil {
 		return
@@ -438,23 +472,15 @@ func newDefaultBearerAuthSigner(o Options) bearer.Signer {
 	return bearer.NewSignHTTPSMessage()
 }
 
-func checkAccountID(identity smithyauth.Identity, mode aws.AccountIDEndpointMode) error {
-	switch mode {
-	case aws.AccountIDEndpointModeUnset:
-	case aws.AccountIDEndpointModePreferred:
-	case aws.AccountIDEndpointModeDisabled:
-	case aws.AccountIDEndpointModeRequired:
-		if ca, ok := identity.(*internalauthsmithy.CredentialsAdapter); !ok {
-			return fmt.Errorf("accountID is required but not set")
-		} else if ca.Credentials.AccountID == "" {
-			return fmt.Errorf("accountID is required but not set")
-		}
-	// default check in case invalid mode is configured through request config
-	default:
-		return fmt.Errorf("invalid accountID endpoint mode %s, must be preferred/required/disabled", mode)
+func addTimeOffsetBuild(stack *middleware.Stack, c *Client) error {
+	mw := internalmiddleware.AddTimeOffsetMiddleware{Offset: c.timeOffset}
+	if err := stack.Build.Add(&mw, middleware.After); err != nil {
+		return err
 	}
-
-	return nil
+	return stack.Deserialize.Insert(&mw, "RecordResponseTiming", middleware.Before)
+}
+func initializeTimeOffsetResolver(c *Client) {
+	c.timeOffset = new(atomic.Int64)
 }
 
 // IdempotencyTokenProvider interface for providing idempotency token
@@ -462,12 +488,18 @@ type IdempotencyTokenProvider interface {
 	GetIdempotencyToken() (string, error)
 }
 
+func addRecursionDetection(stack *middleware.Stack) error {
+	return stack.Build.Add(&awsmiddleware.RecursionDetection{}, middleware.After)
+}
+
 func addRequestIDRetrieverMiddleware(stack *middleware.Stack) error {
-	return awsmiddleware.AddRequestIDRetrieverMiddleware(stack)
+	return stack.Deserialize.Insert(&awsmiddleware.RequestIDRetriever{}, "OperationDeserializer", middleware.Before)
+
 }
 
 func addResponseErrorMiddleware(stack *middleware.Stack) error {
-	return awshttp.AddResponseErrorMiddleware(stack)
+	return stack.Deserialize.Insert(&awshttp.ResponseErrorWrapper{}, "RequestIDRetriever", middleware.Before)
+
 }
 
 func addRequestResponseLogging(stack *middleware.Stack, o Options) error {

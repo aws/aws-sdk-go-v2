@@ -243,6 +243,33 @@ func (e *ResourceLockedException) ErrorCode() string {
 }
 func (e *ResourceLockedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// You've reached the limit on the number of tags you can associate with a
+// resource.
+type ServiceQuotaExceededException struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *ServiceQuotaExceededException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *ServiceQuotaExceededException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *ServiceQuotaExceededException) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "ServiceQuotaExceededException"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *ServiceQuotaExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
 // The number of API requests has exceeded the maximum allowed API request
 // throttling limit for the account.
 type ThrottlingException struct {

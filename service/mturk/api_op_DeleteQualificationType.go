@@ -6,18 +6,21 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// The DeleteQualificationType deletes a Qualification type and deletes any HIT
-// types that are associated with the Qualification type. This operation does not
-// revoke Qualifications already assigned to Workers because the Qualifications
-// might be needed for active HITs. If there are any pending requests for the
-// Qualification type, Amazon Mechanical Turk rejects those requests. After you
-// delete a Qualification type, you can no longer use it to create HITs or HIT
-// types. DeleteQualificationType must wait for all the HITs that use the deleted
+//	The DeleteQualificationType deletes a Qualification type and deletes any HIT
+//
+// types that are associated with the Qualification type.
+//
+// This operation does not revoke Qualifications already assigned to Workers
+// because the Qualifications might be needed for active HITs. If there are any
+// pending requests for the Qualification type, Amazon Mechanical Turk rejects
+// those requests. After you delete a Qualification type, you can no longer use it
+// to create HITs or HIT types.
+//
+// DeleteQualificationType must wait for all the HITs that use the deleted
 // Qualification type to be deleted before completing. It may take up to 48 hours
 // before DeleteQualificationType completes and the unique name of the
 // Qualification type is available for reuse with CreateQualificationType.
@@ -75,25 +78,25 @@ func (c *Client) addOperationDeleteQualificationTypeMiddlewares(stack *middlewar
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -108,13 +111,16 @@ func (c *Client) addOperationDeleteQualificationTypeMiddlewares(stack *middlewar
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDeleteQualificationTypeValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteQualificationType(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

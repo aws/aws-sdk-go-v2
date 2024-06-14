@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/networkmonitor/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -15,6 +14,9 @@ import (
 
 // Create a probe within a monitor. Once you create a probe, and it begins
 // monitoring your network traffic, you'll incur billing charges for that probe.
+// This action requires the monitorName parameter. Run ListMonitors to get a list
+// of monitor names. Note the name of the monitorName you want to create the probe
+// for.
 func (c *Client) CreateProbe(ctx context.Context, params *CreateProbeInput, optFns ...func(*Options)) (*CreateProbeOutput, error) {
 	if params == nil {
 		params = &CreateProbeInput{}
@@ -32,8 +34,7 @@ func (c *Client) CreateProbe(ctx context.Context, params *CreateProbeInput, optF
 
 type CreateProbeInput struct {
 
-	// The name of the monitor to associated with the probe. To get a list of
-	// available monitors, use ListMonitors .
+	// The name of the monitor to associated with the probe.
 	//
 	// This member is required.
 	MonitorName *string
@@ -55,14 +56,14 @@ type CreateProbeInput struct {
 
 type CreateProbeOutput struct {
 
-	// The destination IP address for the monitor. This will be either an IPv4 or IPv6
+	// The destination IP address for the monitor. This must be either an IPv4 or IPv6
 	// address.
 	//
 	// This member is required.
 	Destination *string
 
 	// The protocol used for the network traffic between the source and destination .
-	// This will be either TCP or ICMP .
+	// This must be either TCP or ICMP .
 	//
 	// This member is required.
 	Protocol types.Protocol
@@ -85,7 +86,7 @@ type CreateProbeOutput struct {
 	// The time and date when the probe was last modified.
 	ModifiedAt *time.Time
 
-	// The size of the packets sent between the source and destination. This will be a
+	// The size of the packets sent between the source and destination. This must be a
 	// number between 56 and 8500 .
 	PacketSize *int32
 
@@ -132,25 +133,25 @@ func (c *Client) addOperationCreateProbeMiddlewares(stack *middleware.Stack, opt
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -165,6 +166,9 @@ func (c *Client) addOperationCreateProbeMiddlewares(stack *middleware.Stack, opt
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opCreateProbeMiddleware(stack, options); err != nil {
 		return err
 	}
@@ -174,7 +178,7 @@ func (c *Client) addOperationCreateProbeMiddlewares(stack *middleware.Stack, opt
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateProbe(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

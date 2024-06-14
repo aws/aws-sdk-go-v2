@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/glue/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -14,8 +13,9 @@ import (
 
 // Synchronizes a job to the source control repository. This operation takes the
 // job artifacts from the Glue internal stores and makes a commit to the remote
-// repository that is configured on the job. This API supports optional parameters
-// which take in the repository information.
+// repository that is configured on the job.
+//
+// This API supports optional parameters which take in the repository information.
 func (c *Client) UpdateSourceControlFromJob(ctx context.Context, params *UpdateSourceControlFromJobInput, optFns ...func(*Options)) (*UpdateSourceControlFromJobOutput, error) {
 	if params == nil {
 		params = &UpdateSourceControlFromJobInput{}
@@ -52,7 +52,7 @@ type UpdateSourceControlFromJobInput struct {
 	// The name of the Glue job to be synchronized to or from the remote repository.
 	JobName *string
 
-	// The provider for the remote repository. Possible values: GITHUB,
+	//  The provider for the remote repository. Possible values: GITHUB,
 	// AWS_CODE_COMMIT, GITLAB, BITBUCKET.
 	Provider types.SourceControlProvider
 
@@ -100,25 +100,25 @@ func (c *Client) addOperationUpdateSourceControlFromJobMiddlewares(stack *middle
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -133,10 +133,13 @@ func (c *Client) addOperationUpdateSourceControlFromJobMiddlewares(stack *middle
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateSourceControlFromJob(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

@@ -6,15 +6,15 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/personalizeruntime/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Re-ranks a list of recommended items for the given user. The first item in the
-// list is deemed the most likely item to be of interest to the user. The solution
-// backing the campaign must have been created using a recipe of type
+// list is deemed the most likely item to be of interest to the user.
+//
+// The solution backing the campaign must have been created using a recipe of type
 // PERSONALIZED_RANKING.
 func (c *Client) GetPersonalizedRanking(ctx context.Context, params *GetPersonalizedRankingInput, optFns ...func(*Options)) (*GetPersonalizedRankingOutput, error) {
 	if params == nil {
@@ -59,30 +59,36 @@ type GetPersonalizedRankingInput struct {
 	Context map[string]string
 
 	// The Amazon Resource Name (ARN) of a filter you created to include items or
-	// exclude items from recommendations for a given user. For more information, see
-	// Filtering Recommendations (https://docs.aws.amazon.com/personalize/latest/dg/filter.html)
-	// .
+	// exclude items from recommendations for a given user. For more information, see [Filtering Recommendations].
+	//
+	// [Filtering Recommendations]: https://docs.aws.amazon.com/personalize/latest/dg/filter.html
 	FilterArn *string
 
 	// The values to use when filtering recommendations. For each placeholder
 	// parameter in your filter expression, provide the parameter name (in matching
 	// case) as a key and the filter value(s) as the corresponding value. Separate
-	// multiple values for one parameter with a comma. For filter expressions that use
-	// an INCLUDE element to include items, you must provide values for all parameters
-	// that are defined in the expression. For filters with expressions that use an
-	// EXCLUDE element to exclude items, you can omit the filter-values .In this case,
-	// Amazon Personalize doesn't use that portion of the expression to filter
-	// recommendations. For more information, see Filtering Recommendations (https://docs.aws.amazon.com/personalize/latest/dg/filter.html)
-	// .
+	// multiple values for one parameter with a comma.
+	//
+	// For filter expressions that use an INCLUDE element to include items, you must
+	// provide values for all parameters that are defined in the expression. For
+	// filters with expressions that use an EXCLUDE element to exclude items, you can
+	// omit the filter-values .In this case, Amazon Personalize doesn't use that
+	// portion of the expression to filter recommendations.
+	//
+	// For more information, see [Filtering Recommendations].
+	//
+	// [Filtering Recommendations]: https://docs.aws.amazon.com/personalize/latest/dg/filter.html
 	FilterValues map[string]string
 
 	// If you enabled metadata in recommendations when you created or updated the
 	// campaign, specify metadata columns from your Items dataset to include in the
 	// personalized ranking. The map key is ITEMS and the value is a list of column
 	// names from your Items dataset. The maximum number of columns you can provide is
-	// 10. For information about enabling metadata for a campaign, see Enabling
-	// metadata in recommendations for a campaign (https://docs.aws.amazon.com/personalize/latest/dg/campaigns.html#create-campaign-return-metadata)
-	// .
+	// 10.
+	//
+	// For information about enabling metadata for a campaign, see [Enabling metadata in recommendations for a campaign].
+	//
+	// [Enabling metadata in recommendations for a campaign]: https://docs.aws.amazon.com/personalize/latest/dg/campaigns.html#create-campaign-return-metadata
 	MetadataColumns map[string][]string
 
 	noSmithyDocumentSerde
@@ -125,25 +131,25 @@ func (c *Client) addOperationGetPersonalizedRankingMiddlewares(stack *middleware
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -158,13 +164,16 @@ func (c *Client) addOperationGetPersonalizedRankingMiddlewares(stack *middleware
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpGetPersonalizedRankingValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetPersonalizedRanking(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

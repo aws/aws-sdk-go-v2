@@ -6,22 +6,26 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Accepts the transfer of a domain from another Amazon Web Services account to
 // the currentAmazon Web Services account. You initiate a transfer between Amazon
-// Web Services accounts using TransferDomainToAnotherAwsAccount (https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_TransferDomainToAnotherAwsAccount.html)
-// . If you use the CLI command at accept-domain-transfer-from-another-aws-account (https://docs.aws.amazon.com/cli/latest/reference/route53domains/accept-domain-transfer-from-another-aws-account.html)
-// , use JSON format as input instead of text because otherwise CLI will throw an
-// error from domain transfer input that includes single quotes. Use either
-// ListOperations (https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_ListOperations.html)
-// or GetOperationDetail (https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_GetOperationDetail.html)
-// to determine whether the operation succeeded. GetOperationDetail (https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_GetOperationDetail.html)
-// provides additional information, for example, Domain Transfer from Aws Account
+// Web Services accounts using [TransferDomainToAnotherAwsAccount].
+//
+// If you use the CLI command at [accept-domain-transfer-from-another-aws-account], use JSON format as input instead of text
+// because otherwise CLI will throw an error from domain transfer input that
+// includes single quotes.
+//
+// Use either [ListOperations] or [GetOperationDetail] to determine whether the operation succeeded. [GetOperationDetail] provides
+// additional information, for example, Domain Transfer from Aws Account
 // 111122223333 has been cancelled .
+//
+// [TransferDomainToAnotherAwsAccount]: https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_TransferDomainToAnotherAwsAccount.html
+// [accept-domain-transfer-from-another-aws-account]: https://docs.aws.amazon.com/cli/latest/reference/route53domains/accept-domain-transfer-from-another-aws-account.html
+// [ListOperations]: https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_ListOperations.html
+// [GetOperationDetail]: https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_GetOperationDetail.html
 func (c *Client) AcceptDomainTransferFromAnotherAwsAccount(ctx context.Context, params *AcceptDomainTransferFromAnotherAwsAccountInput, optFns ...func(*Options)) (*AcceptDomainTransferFromAnotherAwsAccountOutput, error) {
 	if params == nil {
 		params = &AcceptDomainTransferFromAnotherAwsAccountInput{}
@@ -42,14 +46,16 @@ func (c *Client) AcceptDomainTransferFromAnotherAwsAccount(ctx context.Context, 
 type AcceptDomainTransferFromAnotherAwsAccountInput struct {
 
 	// The name of the domain that was specified when another Amazon Web Services
-	// account submitted a TransferDomainToAnotherAwsAccount (https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_TransferDomainToAnotherAwsAccount.html)
-	// request.
+	// account submitted a [TransferDomainToAnotherAwsAccount]request.
+	//
+	// [TransferDomainToAnotherAwsAccount]: https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_TransferDomainToAnotherAwsAccount.html
 	//
 	// This member is required.
 	DomainName *string
 
-	// The password that was returned by the TransferDomainToAnotherAwsAccount (https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_TransferDomainToAnotherAwsAccount.html)
-	// request.
+	// The password that was returned by the [TransferDomainToAnotherAwsAccount] request.
+	//
+	// [TransferDomainToAnotherAwsAccount]: https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_TransferDomainToAnotherAwsAccount.html
 	//
 	// This member is required.
 	Password *string
@@ -62,8 +68,9 @@ type AcceptDomainTransferFromAnotherAwsAccountInput struct {
 type AcceptDomainTransferFromAnotherAwsAccountOutput struct {
 
 	// Identifier for tracking the progress of the request. To query the operation
-	// status, use GetOperationDetail (https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_GetOperationDetail.html)
-	// .
+	// status, use [GetOperationDetail].
+	//
+	// [GetOperationDetail]: https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_GetOperationDetail.html
 	OperationId *string
 
 	// Metadata pertaining to the operation's result.
@@ -94,25 +101,25 @@ func (c *Client) addOperationAcceptDomainTransferFromAnotherAwsAccountMiddleware
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -127,13 +134,16 @@ func (c *Client) addOperationAcceptDomainTransferFromAnotherAwsAccountMiddleware
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpAcceptDomainTransferFromAnotherAwsAccountValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opAcceptDomainTransferFromAnotherAwsAccount(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

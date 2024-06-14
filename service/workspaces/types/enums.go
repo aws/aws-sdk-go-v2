@@ -11,12 +11,38 @@ const (
 )
 
 // Values returns all known values for AccessPropertyValue. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (AccessPropertyValue) Values() []AccessPropertyValue {
 	return []AccessPropertyValue{
 		"ALLOW",
 		"DENY",
+	}
+}
+
+type AccountLinkStatusEnum string
+
+// Enum values for AccountLinkStatusEnum
+const (
+	AccountLinkStatusEnumLinked                           AccountLinkStatusEnum = "LINKED"
+	AccountLinkStatusEnumLinkingFailed                    AccountLinkStatusEnum = "LINKING_FAILED"
+	AccountLinkStatusEnumLinkNotFound                     AccountLinkStatusEnum = "LINK_NOT_FOUND"
+	AccountLinkStatusEnumPendingAcceptanceByTargetAccount AccountLinkStatusEnum = "PENDING_ACCEPTANCE_BY_TARGET_ACCOUNT"
+	AccountLinkStatusEnumRejected                         AccountLinkStatusEnum = "REJECTED"
+)
+
+// Values returns all known values for AccountLinkStatusEnum. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (AccountLinkStatusEnum) Values() []AccountLinkStatusEnum {
+	return []AccountLinkStatusEnum{
+		"LINKED",
+		"LINKING_FAILED",
+		"LINK_NOT_FOUND",
+		"PENDING_ACCEPTANCE_BY_TARGET_ACCOUNT",
+		"REJECTED",
 	}
 }
 
@@ -29,8 +55,9 @@ const (
 )
 
 // Values returns all known values for Application. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (Application) Values() []Application {
 	return []Application{
 		"Microsoft_Office_2016",
@@ -49,8 +76,9 @@ const (
 
 // Values returns all known values for ApplicationAssociatedResourceType. Note
 // that this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ApplicationAssociatedResourceType) Values() []ApplicationAssociatedResourceType {
 	return []ApplicationAssociatedResourceType{
 		"WORKSPACE",
@@ -71,8 +99,9 @@ const (
 )
 
 // Values returns all known values for AssociationErrorCode. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (AssociationErrorCode) Values() []AssociationErrorCode {
 	return []AssociationErrorCode{
 		"ValidationError.InsufficientDiskSpace",
@@ -99,8 +128,9 @@ const (
 )
 
 // Values returns all known values for AssociationState. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (AssociationState) Values() []AssociationState {
 	return []AssociationState{
 		"PENDING_INSTALL",
@@ -127,8 +157,9 @@ const (
 )
 
 // Values returns all known values for AssociationStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (AssociationStatus) Values() []AssociationStatus {
 	return []AssociationStatus{
 		"NOT_ASSOCIATED",
@@ -148,8 +179,9 @@ const (
 
 // Values returns all known values for BundleAssociatedResourceType. Note that
 // this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (BundleAssociatedResourceType) Values() []BundleAssociatedResourceType {
 	return []BundleAssociatedResourceType{
 		"APPLICATION",
@@ -165,8 +197,9 @@ const (
 )
 
 // Values returns all known values for BundleType. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (BundleType) Values() []BundleType {
 	return []BundleType{
 		"REGULAR",
@@ -184,8 +217,9 @@ const (
 
 // Values returns all known values for CertificateBasedAuthStatusEnum. Note that
 // this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (CertificateBasedAuthStatusEnum) Values() []CertificateBasedAuthStatusEnum {
 	return []CertificateBasedAuthStatusEnum{
 		"DISABLED",
@@ -206,8 +240,9 @@ const (
 )
 
 // Values returns all known values for ClientDeviceType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ClientDeviceType) Values() []ClientDeviceType {
 	return []ClientDeviceType{
 		"DeviceTypeWindows",
@@ -235,8 +270,9 @@ const (
 )
 
 // Values returns all known values for Compute. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (Compute) Values() []Compute {
 	return []Compute{
 		"VALUE",
@@ -261,8 +297,9 @@ const (
 )
 
 // Values returns all known values for ConnectionAliasState. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ConnectionAliasState) Values() []ConnectionAliasState {
 	return []ConnectionAliasState{
 		"CREATING",
@@ -281,8 +318,9 @@ const (
 )
 
 // Values returns all known values for ConnectionState. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ConnectionState) Values() []ConnectionState {
 	return []ConnectionState{
 		"CONNECTED",
@@ -300,12 +338,32 @@ const (
 )
 
 // Values returns all known values for DataReplication. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (DataReplication) Values() []DataReplication {
 	return []DataReplication{
 		"NO_REPLICATION",
 		"PRIMARY_AS_SOURCE",
+	}
+}
+
+type DedicatedTenancyAccountType string
+
+// Enum values for DedicatedTenancyAccountType
+const (
+	DedicatedTenancyAccountTypeSourceAccount DedicatedTenancyAccountType = "SOURCE_ACCOUNT"
+	DedicatedTenancyAccountTypeTargetAccount DedicatedTenancyAccountType = "TARGET_ACCOUNT"
+)
+
+// Values returns all known values for DedicatedTenancyAccountType. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (DedicatedTenancyAccountType) Values() []DedicatedTenancyAccountType {
+	return []DedicatedTenancyAccountType{
+		"SOURCE_ACCOUNT",
+		"TARGET_ACCOUNT",
 	}
 }
 
@@ -320,8 +378,9 @@ const (
 
 // Values returns all known values for DedicatedTenancyModificationStateEnum. Note
 // that this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (DedicatedTenancyModificationStateEnum) Values() []DedicatedTenancyModificationStateEnum {
 	return []DedicatedTenancyModificationStateEnum{
 		"PENDING",
@@ -339,6 +398,7 @@ const (
 
 // Values returns all known values for DedicatedTenancySupportEnum. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (DedicatedTenancySupportEnum) Values() []DedicatedTenancySupportEnum {
 	return []DedicatedTenancySupportEnum{
@@ -356,8 +416,9 @@ const (
 
 // Values returns all known values for DedicatedTenancySupportResultEnum. Note
 // that this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (DedicatedTenancySupportResultEnum) Values() []DedicatedTenancySupportResultEnum {
 	return []DedicatedTenancySupportResultEnum{
 		"ENABLED",
@@ -374,8 +435,9 @@ const (
 
 // Values returns all known values for DeletableCertificateBasedAuthProperty. Note
 // that this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (DeletableCertificateBasedAuthProperty) Values() []DeletableCertificateBasedAuthProperty {
 	return []DeletableCertificateBasedAuthProperty{
 		"CERTIFICATE_BASED_AUTH_PROPERTIES_CERTIFICATE_AUTHORITY_ARN",
@@ -391,8 +453,9 @@ const (
 )
 
 // Values returns all known values for DeletableSamlProperty. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (DeletableSamlProperty) Values() []DeletableSamlProperty {
 	return []DeletableSamlProperty{
 		"SAML_PROPERTIES_USER_ACCESS_URL",
@@ -409,6 +472,7 @@ const (
 
 // Values returns all known values for ImageAssociatedResourceType. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (ImageAssociatedResourceType) Values() []ImageAssociatedResourceType {
 	return []ImageAssociatedResourceType{
@@ -425,8 +489,9 @@ const (
 )
 
 // Values returns all known values for ImageType. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ImageType) Values() []ImageType {
 	return []ImageType{
 		"OWNED",
@@ -443,8 +508,9 @@ const (
 )
 
 // Values returns all known values for LogUploadEnum. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (LogUploadEnum) Values() []LogUploadEnum {
 	return []LogUploadEnum{
 		"ENABLED",
@@ -463,6 +529,7 @@ const (
 
 // Values returns all known values for ModificationResourceEnum. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (ModificationResourceEnum) Values() []ModificationResourceEnum {
 	return []ModificationResourceEnum{
@@ -481,8 +548,9 @@ const (
 )
 
 // Values returns all known values for ModificationStateEnum. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ModificationStateEnum) Values() []ModificationStateEnum {
 	return []ModificationStateEnum{
 		"UPDATE_INITIATED",
@@ -508,8 +576,9 @@ const (
 )
 
 // Values returns all known values for OperatingSystemName. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (OperatingSystemName) Values() []OperatingSystemName {
 	return []OperatingSystemName{
 		"AMAZON_LINUX_2",
@@ -535,8 +604,9 @@ const (
 )
 
 // Values returns all known values for OperatingSystemType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (OperatingSystemType) Values() []OperatingSystemType {
 	return []OperatingSystemType{
 		"WINDOWS",
@@ -553,8 +623,9 @@ const (
 )
 
 // Values returns all known values for Protocol. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (Protocol) Values() []Protocol {
 	return []Protocol{
 		"PCOIP",
@@ -571,8 +642,9 @@ const (
 )
 
 // Values returns all known values for ReconnectEnum. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ReconnectEnum) Values() []ReconnectEnum {
 	return []ReconnectEnum{
 		"ENABLED",
@@ -590,8 +662,9 @@ const (
 )
 
 // Values returns all known values for RunningMode. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (RunningMode) Values() []RunningMode {
 	return []RunningMode{
 		"AUTO_STOP",
@@ -610,8 +683,9 @@ const (
 )
 
 // Values returns all known values for SamlStatusEnum. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (SamlStatusEnum) Values() []SamlStatusEnum {
 	return []SamlStatusEnum{
 		"DISABLED",
@@ -630,8 +704,9 @@ const (
 
 // Values returns all known values for StandbyWorkspaceRelationshipType. Note that
 // this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (StandbyWorkspaceRelationshipType) Values() []StandbyWorkspaceRelationshipType {
 	return []StandbyWorkspaceRelationshipType{
 		"PRIMARY",
@@ -648,8 +723,9 @@ const (
 )
 
 // Values returns all known values for TargetWorkspaceState. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (TargetWorkspaceState) Values() []TargetWorkspaceState {
 	return []TargetWorkspaceState{
 		"AVAILABLE",
@@ -666,8 +742,9 @@ const (
 )
 
 // Values returns all known values for Tenancy. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (Tenancy) Values() []Tenancy {
 	return []Tenancy{
 		"DEDICATED",
@@ -685,8 +762,9 @@ const (
 
 // Values returns all known values for WorkSpaceApplicationLicenseType. Note that
 // this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (WorkSpaceApplicationLicenseType) Values() []WorkSpaceApplicationLicenseType {
 	return []WorkSpaceApplicationLicenseType{
 		"LICENSED",
@@ -706,6 +784,7 @@ const (
 
 // Values returns all known values for WorkSpaceApplicationState. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (WorkSpaceApplicationState) Values() []WorkSpaceApplicationState {
 	return []WorkSpaceApplicationState{
@@ -725,8 +804,9 @@ const (
 
 // Values returns all known values for WorkSpaceAssociatedResourceType. Note that
 // this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (WorkSpaceAssociatedResourceType) Values() []WorkSpaceAssociatedResourceType {
 	return []WorkSpaceAssociatedResourceType{
 		"APPLICATION",
@@ -743,8 +823,9 @@ const (
 )
 
 // Values returns all known values for WorkspaceBundleState. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (WorkspaceBundleState) Values() []WorkspaceBundleState {
 	return []WorkspaceBundleState{
 		"AVAILABLE",
@@ -765,8 +846,9 @@ const (
 )
 
 // Values returns all known values for WorkspaceDirectoryState. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (WorkspaceDirectoryState) Values() []WorkspaceDirectoryState {
 	return []WorkspaceDirectoryState{
 		"REGISTERING",
@@ -786,8 +868,9 @@ const (
 )
 
 // Values returns all known values for WorkspaceDirectoryType. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (WorkspaceDirectoryType) Values() []WorkspaceDirectoryType {
 	return []WorkspaceDirectoryType{
 		"SIMPLE_AD",
@@ -829,8 +912,9 @@ const (
 
 // Values returns all known values for WorkspaceImageErrorDetailCode. Note that
 // this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (WorkspaceImageErrorDetailCode) Values() []WorkspaceImageErrorDetailCode {
 	return []WorkspaceImageErrorDetailCode{
 		"OutdatedPowershellVersion",
@@ -877,8 +961,9 @@ const (
 
 // Values returns all known values for WorkspaceImageIngestionProcess. Note that
 // this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (WorkspaceImageIngestionProcess) Values() []WorkspaceImageIngestionProcess {
 	return []WorkspaceImageIngestionProcess{
 		"BYOL_REGULAR",
@@ -901,8 +986,9 @@ const (
 
 // Values returns all known values for WorkspaceImageRequiredTenancy. Note that
 // this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (WorkspaceImageRequiredTenancy) Values() []WorkspaceImageRequiredTenancy {
 	return []WorkspaceImageRequiredTenancy{
 		"DEFAULT",
@@ -920,8 +1006,9 @@ const (
 )
 
 // Values returns all known values for WorkspaceImageState. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (WorkspaceImageState) Values() []WorkspaceImageState {
 	return []WorkspaceImageState{
 		"AVAILABLE",
@@ -954,8 +1041,9 @@ const (
 )
 
 // Values returns all known values for WorkspaceState. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (WorkspaceState) Values() []WorkspaceState {
 	return []WorkspaceState{
 		"PENDING",

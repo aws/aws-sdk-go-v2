@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -16,11 +15,13 @@ import (
 // your sources. Also, this API automatically takes steps to remove the account
 // from Security Lake. However, Security Lake retains all of your existing settings
 // and the resources that it created in your Amazon Web Services account in the
-// current Amazon Web Services Region. The DeleteDataLake operation does not
-// delete the data that is stored in your Amazon S3 bucket, which is owned by your
-// Amazon Web Services account. For more information, see the Amazon Security Lake
-// User Guide (https://docs.aws.amazon.com/security-lake/latest/userguide/disable-security-lake.html)
-// .
+// current Amazon Web Services Region.
+//
+// The DeleteDataLake operation does not delete the data that is stored in your
+// Amazon S3 bucket, which is owned by your Amazon Web Services account. For more
+// information, see the [Amazon Security Lake User Guide].
+//
+// [Amazon Security Lake User Guide]: https://docs.aws.amazon.com/security-lake/latest/userguide/disable-security-lake.html
 func (c *Client) DeleteDataLake(ctx context.Context, params *DeleteDataLakeInput, optFns ...func(*Options)) (*DeleteDataLakeOutput, error) {
 	if params == nil {
 		params = &DeleteDataLakeInput{}
@@ -75,25 +76,25 @@ func (c *Client) addOperationDeleteDataLakeMiddlewares(stack *middleware.Stack, 
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -108,13 +109,16 @@ func (c *Client) addOperationDeleteDataLakeMiddlewares(stack *middleware.Stack, 
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDeleteDataLakeValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteDataLake(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

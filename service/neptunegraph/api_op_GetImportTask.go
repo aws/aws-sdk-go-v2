@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/neptunegraph/types"
 	"github.com/aws/smithy-go/middleware"
 	"github.com/aws/smithy-go/ptr"
@@ -64,22 +63,32 @@ type GetImportTaskOutput struct {
 	Source *string
 
 	// The status of the import task:
+	//
 	//   - INITIALIZING – The necessary resources needed to create the graph are being
 	//   prepared.
+	//
 	//   - ANALYZING_DATA – The data is being analyzed to determine the optimal
 	//   infrastructure configuration for the new graph.
+	//
 	//   - RE_PROVISIONING – The data did not fit into the provisioned graph, so it is
 	//   being re-provisioned with more capacity.
+	//
 	//   - IMPORTING – The data is being loaded.
+	//
 	//   - ERROR_ENCOUNTERED – An error has been encountered while trying to create
 	//   the graph and import the data.
+	//
 	//   - ERROR_ENCOUNTERED_ROLLING_BACK – Because of the error that was encountered,
 	//   the graph is being rolled back and all its resources released.
+	//
 	//   - SUCCEEDED – Graph creation and data loading succeeded.
+	//
 	//   - FAILED – Graph creation or data loading failed. When the status is FAILED ,
 	//   you can use get-graphs to get more information about the state of the graph.
+	//
 	//   - CANCELLING – Because you cancelled the import task, cancellation is in
 	//   progress.
+	//
 	//   - CANCELLED – You have successfully cancelled the import task.
 	//
 	// This member is required.
@@ -94,9 +103,10 @@ type GetImportTaskOutput struct {
 	AttemptNumber *int32
 
 	// Specifies the format of S3 data to be imported. Valid values are CSV , which
-	// identifies the Gremlin CSV format (https://docs.aws.amazon.com/neptune/latest/userguide/bulk-load-tutorial-format-gremlin.html)
-	// or OPENCYPHER , which identies the openCypher load format (https://docs.aws.amazon.com/neptune/latest/userguide/bulk-load-tutorial-format-opencypher.html)
-	// .
+	// identifies the [Gremlin CSV format]or OPENCYPHER , which identies the [openCypher load format].
+	//
+	// [Gremlin CSV format]: https://docs.aws.amazon.com/neptune/latest/userguide/bulk-load-tutorial-format-gremlin.html
+	// [openCypher load format]: https://docs.aws.amazon.com/neptune/latest/userguide/bulk-load-tutorial-format-opencypher.html
 	Format types.Format
 
 	// The unique identifier of the Neptune Analytics graph.
@@ -142,25 +152,25 @@ func (c *Client) addOperationGetImportTaskMiddlewares(stack *middleware.Stack, o
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -175,13 +185,16 @@ func (c *Client) addOperationGetImportTaskMiddlewares(stack *middleware.Stack, o
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpGetImportTaskValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetImportTask(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -213,7 +226,16 @@ type ImportTaskSuccessfulWaiterOptions struct {
 	// Set of options to modify how an operation is invoked. These apply to all
 	// operations invoked for this client. Use functional options on operation call to
 	// modify this list for per operation behavior.
+	//
+	// Passing options here is functionally equivalent to passing values to this
+	// config's ClientOptions field that extend the inner client's APIOptions directly.
 	APIOptions []func(*middleware.Stack) error
+
+	// Functional options to be passed to all operations invoked by this client.
+	//
+	// Function values that modify the inner APIOptions are applied after the waiter
+	// config's own APIOptions modifiers.
+	ClientOptions []func(*Options)
 
 	// MinDelay is the minimum amount of time to delay between retries. If unset,
 	// ImportTaskSuccessfulWaiter will use default minimum delay of 60 seconds. Note
@@ -231,12 +253,13 @@ type ImportTaskSuccessfulWaiterOptions struct {
 
 	// Retryable is function that can be used to override the service defined
 	// waiter-behavior based on operation output, or returned error. This function is
-	// used by the waiter to decide if a state is retryable or a terminal state. By
-	// default service-modeled logic will populate this option. This option can thus be
-	// used to define a custom waiter state with fall-back to service-modeled waiter
-	// state mutators.The function returns an error in case of a failure state. In case
-	// of retry state, this function returns a bool value of true and nil error, while
-	// in case of success it returns a bool value of false and nil error.
+	// used by the waiter to decide if a state is retryable or a terminal state.
+	//
+	// By default service-modeled logic will populate this option. This option can
+	// thus be used to define a custom waiter state with fall-back to service-modeled
+	// waiter state mutators.The function returns an error in case of a failure state.
+	// In case of retry state, this function returns a bool value of true and nil
+	// error, while in case of success it returns a bool value of false and nil error.
 	Retryable func(context.Context, *GetImportTaskInput, *GetImportTaskOutput, error) (bool, error)
 }
 
@@ -314,6 +337,9 @@ func (w *ImportTaskSuccessfulWaiter) WaitForOutput(ctx context.Context, params *
 
 		out, err := w.client.GetImportTask(ctx, params, func(o *Options) {
 			o.APIOptions = append(o.APIOptions, apiOptions...)
+			for _, opt := range options.ClientOptions {
+				opt(o)
+			}
 		})
 
 		retryable, err := options.Retryable(ctx, params, out, err)
@@ -443,7 +469,16 @@ type ImportTaskCancelledWaiterOptions struct {
 	// Set of options to modify how an operation is invoked. These apply to all
 	// operations invoked for this client. Use functional options on operation call to
 	// modify this list for per operation behavior.
+	//
+	// Passing options here is functionally equivalent to passing values to this
+	// config's ClientOptions field that extend the inner client's APIOptions directly.
 	APIOptions []func(*middleware.Stack) error
+
+	// Functional options to be passed to all operations invoked by this client.
+	//
+	// Function values that modify the inner APIOptions are applied after the waiter
+	// config's own APIOptions modifiers.
+	ClientOptions []func(*Options)
 
 	// MinDelay is the minimum amount of time to delay between retries. If unset,
 	// ImportTaskCancelledWaiter will use default minimum delay of 60 seconds. Note
@@ -461,12 +496,13 @@ type ImportTaskCancelledWaiterOptions struct {
 
 	// Retryable is function that can be used to override the service defined
 	// waiter-behavior based on operation output, or returned error. This function is
-	// used by the waiter to decide if a state is retryable or a terminal state. By
-	// default service-modeled logic will populate this option. This option can thus be
-	// used to define a custom waiter state with fall-back to service-modeled waiter
-	// state mutators.The function returns an error in case of a failure state. In case
-	// of retry state, this function returns a bool value of true and nil error, while
-	// in case of success it returns a bool value of false and nil error.
+	// used by the waiter to decide if a state is retryable or a terminal state.
+	//
+	// By default service-modeled logic will populate this option. This option can
+	// thus be used to define a custom waiter state with fall-back to service-modeled
+	// waiter state mutators.The function returns an error in case of a failure state.
+	// In case of retry state, this function returns a bool value of true and nil
+	// error, while in case of success it returns a bool value of false and nil error.
 	Retryable func(context.Context, *GetImportTaskInput, *GetImportTaskOutput, error) (bool, error)
 }
 
@@ -544,6 +580,9 @@ func (w *ImportTaskCancelledWaiter) WaitForOutput(ctx context.Context, params *G
 
 		out, err := w.client.GetImportTask(ctx, params, func(o *Options) {
 			o.APIOptions = append(o.APIOptions, apiOptions...)
+			for _, opt := range options.ClientOptions {
+				opt(o)
+			}
 		})
 
 		retryable, err := options.Retryable(ctx, params, out, err)
@@ -579,7 +618,7 @@ func (w *ImportTaskCancelledWaiter) WaitForOutput(ctx context.Context, params *G
 func importTaskCancelledStateRetryable(ctx context.Context, input *GetImportTaskInput, output *GetImportTaskOutput, err error) (bool, error) {
 
 	if err == nil {
-		pathValue, err := jmespath.Search("status != 'CANCELLING'", output)
+		pathValue, err := jmespath.Search("status != 'CANCELLING' && status != 'CANCELLED'", output)
 		if err != nil {
 			return false, fmt.Errorf("error evaluating waiter state: %w", err)
 		}

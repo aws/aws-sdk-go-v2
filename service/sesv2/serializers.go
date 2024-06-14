@@ -3479,10 +3479,10 @@ func (m *awsRestjson1_serializeOpListContacts) HandleSerialize(ctx context.Conte
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
 
-	opPath, opQuery := httpbinding.SplitURI("/v2/email/contact-lists/{ContactListName}/contacts")
+	opPath, opQuery := httpbinding.SplitURI("/v2/email/contact-lists/{ContactListName}/contacts/list")
 	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
 	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
-	request.Method = "GET"
+	request.Method = "POST"
 	var restEncoder *httpbinding.Encoder
 	if request.URL.RawPath == "" {
 		restEncoder, err = httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
@@ -3531,14 +3531,6 @@ func awsRestjson1_serializeOpHttpBindingsListContactsInput(v *ListContactsInput,
 		}
 	}
 
-	if v.NextToken != nil {
-		encoder.SetQuery("NextToken").String(*v.NextToken)
-	}
-
-	if v.PageSize != nil {
-		encoder.SetQuery("PageSize").Integer(*v.PageSize)
-	}
-
 	return nil
 }
 
@@ -3551,6 +3543,16 @@ func awsRestjson1_serializeOpDocumentListContactsInput(v *ListContactsInput, val
 		if err := awsRestjson1_serializeDocumentListContactsFilter(v.Filter, ok); err != nil {
 			return err
 		}
+	}
+
+	if v.NextToken != nil {
+		ok := object.Key("NextToken")
+		ok.String(*v.NextToken)
+	}
+
+	if v.PageSize != nil {
+		ok := object.Key("PageSize")
+		ok.Integer(*v.PageSize)
 	}
 
 	return nil
@@ -4068,10 +4070,10 @@ func (m *awsRestjson1_serializeOpListImportJobs) HandleSerialize(ctx context.Con
 		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
 	}
 
-	opPath, opQuery := httpbinding.SplitURI("/v2/email/import-jobs")
+	opPath, opQuery := httpbinding.SplitURI("/v2/email/import-jobs/list")
 	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
 	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
-	request.Method = "GET"
+	request.Method = "POST"
 	var restEncoder *httpbinding.Encoder
 	if request.URL.RawPath == "" {
 		restEncoder, err = httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
@@ -4081,10 +4083,6 @@ func (m *awsRestjson1_serializeOpListImportJobs) HandleSerialize(ctx context.Con
 	}
 
 	if err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-
-	if err := awsRestjson1_serializeOpHttpBindingsListImportJobsInput(input, restEncoder); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -4111,14 +4109,6 @@ func awsRestjson1_serializeOpHttpBindingsListImportJobsInput(v *ListImportJobsIn
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
-	if v.NextToken != nil {
-		encoder.SetQuery("NextToken").String(*v.NextToken)
-	}
-
-	if v.PageSize != nil {
-		encoder.SetQuery("PageSize").Integer(*v.PageSize)
-	}
-
 	return nil
 }
 
@@ -4129,6 +4119,16 @@ func awsRestjson1_serializeOpDocumentListImportJobsInput(v *ListImportJobsInput,
 	if len(v.ImportDestinationType) > 0 {
 		ok := object.Key("ImportDestinationType")
 		ok.String(string(v.ImportDestinationType))
+	}
+
+	if v.NextToken != nil {
+		ok := object.Key("NextToken")
+		ok.String(*v.NextToken)
+	}
+
+	if v.PageSize != nil {
+		ok := object.Key("PageSize")
+		ok.Integer(*v.PageSize)
 	}
 
 	return nil
@@ -7468,6 +7468,13 @@ func awsRestjson1_serializeDocumentBulkEmailEntry(v *types.BulkEmailEntry, value
 		}
 	}
 
+	if v.ReplacementHeaders != nil {
+		ok := object.Key("ReplacementHeaders")
+		if err := awsRestjson1_serializeDocumentMessageHeaderList(v.ReplacementHeaders, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.ReplacementTags != nil {
 		ok := object.Key("ReplacementTags")
 		if err := awsRestjson1_serializeDocumentMessageTagList(v.ReplacementTags, ok); err != nil {
@@ -7796,6 +7803,18 @@ func awsRestjson1_serializeDocumentEmailTemplateContent(v *types.EmailTemplateCo
 	return nil
 }
 
+func awsRestjson1_serializeDocumentEventBridgeDestination(v *types.EventBridgeDestination, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.EventBusArn != nil {
+		ok := object.Key("EventBusArn")
+		ok.String(*v.EventBusArn)
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentEventDestinationDefinition(v *types.EventDestinationDefinition, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -7810,6 +7829,13 @@ func awsRestjson1_serializeDocumentEventDestinationDefinition(v *types.EventDest
 	if v.Enabled {
 		ok := object.Key("Enabled")
 		ok.Boolean(v.Enabled)
+	}
+
+	if v.EventBridgeDestination != nil {
+		ok := object.Key("EventBridgeDestination")
+		if err := awsRestjson1_serializeDocumentEventBridgeDestination(v.EventBridgeDestination, ok); err != nil {
+			return err
+		}
 	}
 
 	if v.KinesisFirehoseDestination != nil {
@@ -8149,6 +8175,13 @@ func awsRestjson1_serializeDocumentMessage(v *types.Message, value smithyjson.Va
 		}
 	}
 
+	if v.Headers != nil {
+		ok := object.Key("Headers")
+		if err := awsRestjson1_serializeDocumentMessageHeaderList(v.Headers, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.Subject != nil {
 		ok := object.Key("Subject")
 		if err := awsRestjson1_serializeDocumentContent(v.Subject, ok); err != nil {
@@ -8156,6 +8189,36 @@ func awsRestjson1_serializeDocumentMessage(v *types.Message, value smithyjson.Va
 		}
 	}
 
+	return nil
+}
+
+func awsRestjson1_serializeDocumentMessageHeader(v *types.MessageHeader, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Name != nil {
+		ok := object.Key("Name")
+		ok.String(*v.Name)
+	}
+
+	if v.Value != nil {
+		ok := object.Key("Value")
+		ok.String(*v.Value)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentMessageHeaderList(v []types.MessageHeader, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentMessageHeader(&v[i], av); err != nil {
+			return err
+		}
+	}
 	return nil
 }
 
@@ -8471,6 +8534,13 @@ func awsRestjson1_serializeDocumentTagList(v []types.Tag, value smithyjson.Value
 func awsRestjson1_serializeDocumentTemplate(v *types.Template, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.Headers != nil {
+		ok := object.Key("Headers")
+		if err := awsRestjson1_serializeDocumentMessageHeaderList(v.Headers, ok); err != nil {
+			return err
+		}
+	}
 
 	if v.TemplateArn != nil {
 		ok := object.Key("TemplateArn")

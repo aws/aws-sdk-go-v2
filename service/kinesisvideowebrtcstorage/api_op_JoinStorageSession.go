@@ -6,26 +6,32 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Join the ongoing one way-video and/or multi-way audio WebRTC session as a video
-// producing device for an input channel. If there’s no existing session for the
-// channel, a new streaming session needs to be created, and the Amazon Resource
-// Name (ARN) of the signaling channel must be provided. Currently for the
-// SINGLE_MASTER type, a video producing device is able to ingest both audio and
-// video media into a stream, while viewers can only ingest audio. Both a video
-// producing device and viewers can join the session first, and wait for other
-// participants. While participants are having peer to peer conversations through
-// webRTC, the ingested media session will be stored into the Kinesis Video Stream.
-// Multiple viewers are able to playback real-time media. Customers can also use
-// existing Kinesis Video Streams features like HLS or DASH playback, Image
-// generation, and more with ingested WebRTC media. Assume that only one video
-// producing device client can be associated with a session for the channel. If
-// more than one client joins the session of a specific channel as a video
-// producing device, the most recent client request takes precedence.
+//	Join the ongoing one way-video and/or multi-way audio WebRTC session as a
+//
+// video producing device for an input channel. If there’s no existing session for
+// the channel, a new streaming session needs to be created, and the Amazon
+// Resource Name (ARN) of the signaling channel must be provided.
+//
+// Currently for the SINGLE_MASTER type, a video producing device is able to
+// ingest both audio and video media into a stream, while viewers can only ingest
+// audio. Both a video producing device and viewers can join the session first, and
+// wait for other participants.
+//
+// While participants are having peer to peer conversations through webRTC, the
+// ingested media session will be stored into the Kinesis Video Stream. Multiple
+// viewers are able to playback real-time media.
+//
+// Customers can also use existing Kinesis Video Streams features like HLS or DASH
+// playback, Image generation, and more with ingested WebRTC media.
+//
+// Assume that only one video producing device client can be associated with a
+// session for the channel. If more than one client joins the session of a specific
+// channel as a video producing device, the most recent client request takes
+// precedence.
 func (c *Client) JoinStorageSession(ctx context.Context, params *JoinStorageSessionInput, optFns ...func(*Options)) (*JoinStorageSessionOutput, error) {
 	if params == nil {
 		params = &JoinStorageSessionInput{}
@@ -43,7 +49,7 @@ func (c *Client) JoinStorageSession(ctx context.Context, params *JoinStorageSess
 
 type JoinStorageSessionInput struct {
 
-	// The Amazon Resource Name (ARN) of the signaling channel.
+	//  The Amazon Resource Name (ARN) of the signaling channel.
 	//
 	// This member is required.
 	ChannelArn *string
@@ -80,25 +86,25 @@ func (c *Client) addOperationJoinStorageSessionMiddlewares(stack *middleware.Sta
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -113,13 +119,16 @@ func (c *Client) addOperationJoinStorageSessionMiddlewares(stack *middleware.Sta
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpJoinStorageSessionValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opJoinStorageSession(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

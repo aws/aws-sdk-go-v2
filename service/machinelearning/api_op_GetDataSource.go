@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/machinelearning/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -14,9 +13,11 @@ import (
 )
 
 // Returns a DataSource that includes metadata and data file information, as well
-// as the current status of the DataSource . GetDataSource provides results in
-// normal or verbose format. The verbose format adds the schema description and the
-// list of files pointed to by the DataSource to the normal format.
+// as the current status of the DataSource .
+//
+// GetDataSource provides results in normal or verbose format. The verbose format
+// adds the schema description and the list of files pointed to by the DataSource
+// to the normal format.
 func (c *Client) GetDataSource(ctx context.Context, params *GetDataSourceInput, optFns ...func(*Options)) (*GetDataSourceOutput, error) {
 	if params == nil {
 		params = &GetDataSourceInput{}
@@ -40,8 +41,10 @@ type GetDataSourceInput struct {
 	DataSourceId *string
 
 	// Specifies whether the GetDataSource operation should return DataSourceSchema .
-	// If true, DataSourceSchema is returned. If false, DataSourceSchema is not
-	// returned.
+	//
+	// If true, DataSourceSchema is returned.
+	//
+	// If false, DataSourceSchema is not returned.
 	Verbose bool
 
 	noSmithyDocumentSerde
@@ -50,7 +53,7 @@ type GetDataSourceInput struct {
 // Represents the output of a GetDataSource operation and describes a DataSource .
 type GetDataSourceOutput struct {
 
-	// The parameter is true if statistics need to be generated from the observation
+	//  The parameter is true if statistics need to be generated from the observation
 	// data.
 	ComputeStatistics bool
 
@@ -83,8 +86,9 @@ type GetDataSourceOutput struct {
 	// to the value of the DataSourceId in the request.
 	DataSourceId *string
 
-	// The schema used by all of the data files of this DataSource . Note: This
-	// parameter is provided as part of the verbose format.
+	// The schema used by all of the data files of this DataSource .
+	//
+	// Note: This parameter is provided as part of the verbose format.
 	DataSourceSchema *string
 
 	// The epoch time when Amazon Machine Learning marked the DataSource as COMPLETED
@@ -115,8 +119,10 @@ type GetDataSourceOutput struct {
 	// Describes the DataSource details specific to Amazon Redshift.
 	RedshiftMetadata *types.RedshiftMetadata
 
-	// The Amazon Resource Name (ARN) of an AWS IAM Role (https://docs.aws.amazon.com/IAM/latest/UserGuide/roles-toplevel.html#roles-about-termsandconcepts)
-	// , such as the following: arn:aws:iam::account:role/rolename.
+	// The Amazon Resource Name (ARN) of an [AWS IAM Role], such as the following:
+	// arn:aws:iam::account:role/rolename.
+	//
+	// [AWS IAM Role]: https://docs.aws.amazon.com/IAM/latest/UserGuide/roles-toplevel.html#roles-about-termsandconcepts
 	RoleARN *string
 
 	// The epoch time when Amazon Machine Learning marked the DataSource as INPROGRESS
@@ -125,11 +131,16 @@ type GetDataSourceOutput struct {
 
 	// The current status of the DataSource . This element can have one of the
 	// following values:
+	//
 	//   - PENDING - Amazon ML submitted a request to create a DataSource .
+	//
 	//   - INPROGRESS - The creation process is underway.
+	//
 	//   - FAILED - The request to create a DataSource did not run to completion. It is
 	//   not usable.
+	//
 	//   - COMPLETED - The creation process completed successfully.
+	//
 	//   - DELETED - The DataSource is marked as deleted. It is not usable.
 	Status types.EntityStatus
 
@@ -161,25 +172,25 @@ func (c *Client) addOperationGetDataSourceMiddlewares(stack *middleware.Stack, o
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -194,13 +205,16 @@ func (c *Client) addOperationGetDataSourceMiddlewares(stack *middleware.Stack, o
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpGetDataSourceValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetDataSource(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/rds/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -15,16 +14,22 @@ import (
 // Modifies the parameters of a DB cluster parameter group to the default value.
 // To reset specific parameters submit a list of the following: ParameterName and
 // ApplyMethod . To reset the entire DB cluster parameter group, specify the
-// DBClusterParameterGroupName and ResetAllParameters parameters. When resetting
-// the entire group, dynamic parameters are updated immediately and static
-// parameters are set to pending-reboot to take effect on the next DB instance
-// restart or RebootDBInstance request. You must call RebootDBInstance for every
-// DB instance in your DB cluster that you want the updated static parameter to
-// apply to. For more information on Amazon Aurora DB clusters, see What is Amazon
-// Aurora? (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/CHAP_AuroraOverview.html)
-// in the Amazon Aurora User Guide. For more information on Multi-AZ DB clusters,
-// see Multi-AZ DB cluster deployments (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/multi-az-db-clusters-concepts.html)
-// in the Amazon RDS User Guide.
+// DBClusterParameterGroupName and ResetAllParameters parameters.
+//
+// When resetting the entire group, dynamic parameters are updated immediately and
+// static parameters are set to pending-reboot to take effect on the next DB
+// instance restart or RebootDBInstance request. You must call RebootDBInstance
+// for every DB instance in your DB cluster that you want the updated static
+// parameter to apply to.
+//
+// For more information on Amazon Aurora DB clusters, see [What is Amazon Aurora?] in the Amazon Aurora
+// User Guide.
+//
+// For more information on Multi-AZ DB clusters, see [Multi-AZ DB cluster deployments] in the Amazon RDS User
+// Guide.
+//
+// [What is Amazon Aurora?]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/CHAP_AuroraOverview.html
+// [Multi-AZ DB cluster deployments]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/multi-az-db-clusters-concepts.html
 func (c *Client) ResetDBClusterParameterGroup(ctx context.Context, params *ResetDBClusterParameterGroupInput, optFns ...func(*Options)) (*ResetDBClusterParameterGroupOutput, error) {
 	if params == nil {
 		params = &ResetDBClusterParameterGroupInput{}
@@ -62,10 +67,16 @@ type ResetDBClusterParameterGroupInput struct {
 
 type ResetDBClusterParameterGroupOutput struct {
 
-	// The name of the DB cluster parameter group. Constraints:
+	// The name of the DB cluster parameter group.
+	//
+	// Constraints:
+	//
 	//   - Must be 1 to 255 letters or numbers.
+	//
 	//   - First character must be a letter
+	//
 	//   - Can't end with a hyphen or contain two consecutive hyphens
+	//
 	// This value is stored as a lowercase string.
 	DBClusterParameterGroupName *string
 
@@ -97,25 +108,25 @@ func (c *Client) addOperationResetDBClusterParameterGroupMiddlewares(stack *midd
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -130,13 +141,16 @@ func (c *Client) addOperationResetDBClusterParameterGroupMiddlewares(stack *midd
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpResetDBClusterParameterGroupValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opResetDBClusterParameterGroup(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

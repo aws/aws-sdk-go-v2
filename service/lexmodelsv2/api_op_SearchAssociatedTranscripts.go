@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/lexmodelsv2/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -53,8 +52,9 @@ type SearchAssociatedTranscriptsInput struct {
 	Filters []types.AssociatedTranscriptFilter
 
 	// The identifier of the language and locale of the transcripts to search. The
-	// string must match one of the supported locales. For more information, see
-	// Supported languages (https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html)
+	// string must match one of the supported locales. For more information, see [Supported languages]
+	//
+	// [Supported languages]: https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html
 	//
 	// This member is required.
 	LocaleId *string
@@ -87,16 +87,17 @@ type SearchAssociatedTranscriptsOutput struct {
 	// searching.
 	BotId *string
 
-	// The unique identifier of the bot recommendation associated with the transcripts
-	// to search.
+	//  The unique identifier of the bot recommendation associated with the
+	// transcripts to search.
 	BotRecommendationId *string
 
 	// The version of the bot containing the transcripts that you are searching.
 	BotVersion *string
 
 	// The identifier of the language and locale of the transcripts to search. The
-	// string must match one of the supported locales. For more information, see
-	// Supported languages (https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html)
+	// string must match one of the supported locales. For more information, see [Supported languages]
+	//
+	// [Supported languages]: https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html
 	LocaleId *string
 
 	// A index that indicates whether there are more results to return in a response
@@ -136,25 +137,25 @@ func (c *Client) addOperationSearchAssociatedTranscriptsMiddlewares(stack *middl
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -169,13 +170,16 @@ func (c *Client) addOperationSearchAssociatedTranscriptsMiddlewares(stack *middl
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpSearchAssociatedTranscriptsValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opSearchAssociatedTranscripts(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

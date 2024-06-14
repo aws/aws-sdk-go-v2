@@ -10,8 +10,9 @@ const (
 )
 
 // Values returns all known values for Category. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (Category) Values() []Category {
 	return []Category{
 		"AWSIoT",
@@ -27,8 +28,9 @@ const (
 )
 
 // Values returns all known values for EncryptionAlgorithm. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (EncryptionAlgorithm) Values() []EncryptionAlgorithm {
 	return []EncryptionAlgorithm{
 		"RSA",
@@ -45,8 +47,9 @@ const (
 )
 
 // Values returns all known values for HashAlgorithm. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (HashAlgorithm) Values() []HashAlgorithm {
 	return []HashAlgorithm{
 		"SHA1",
@@ -64,8 +67,9 @@ const (
 )
 
 // Values returns all known values for ImageFormat. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ImageFormat) Values() []ImageFormat {
 	return []ImageFormat{
 		"JSON",
@@ -84,8 +88,9 @@ const (
 )
 
 // Values returns all known values for SigningProfileStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (SigningProfileStatus) Values() []SigningProfileStatus {
 	return []SigningProfileStatus{
 		"Active",
@@ -104,8 +109,9 @@ const (
 )
 
 // Values returns all known values for SigningStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (SigningStatus) Values() []SigningStatus {
 	return []SigningStatus{
 		"InProgress",
@@ -124,8 +130,9 @@ const (
 )
 
 // Values returns all known values for ValidityType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ValidityType) Values() []ValidityType {
 	return []ValidityType{
 		"DAYS",

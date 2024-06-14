@@ -16,13 +16,16 @@ import (
 	"strings"
 )
 
-// Updates the existing Storage Lens group. To use this operation, you must have
-// the permission to perform the s3:UpdateStorageLensGroup action. For more
-// information about the required Storage Lens Groups permissions, see Setting
-// account permissions to use S3 Storage Lens groups (https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage_lens_iam_permissions.html#storage_lens_groups_permissions)
-// . For information about Storage Lens groups errors, see List of Amazon S3
-// Storage Lens error codes (https://docs.aws.amazon.com/AmazonS3/latest/API/ErrorResponses.html#S3LensErrorCodeList)
-// .
+//	Updates the existing Storage Lens group.
+//
+// To use this operation, you must have the permission to perform the
+// s3:UpdateStorageLensGroup action. For more information about the required
+// Storage Lens Groups permissions, see [Setting account permissions to use S3 Storage Lens groups].
+//
+// For information about Storage Lens groups errors, see [List of Amazon S3 Storage Lens error codes].
+//
+// [Setting account permissions to use S3 Storage Lens groups]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage_lens_iam_permissions.html#storage_lens_groups_permissions
+// [List of Amazon S3 Storage Lens error codes]: https://docs.aws.amazon.com/AmazonS3/latest/API/ErrorResponses.html#S3LensErrorCodeList
 func (c *Client) UpdateStorageLensGroup(ctx context.Context, params *UpdateStorageLensGroupInput, optFns ...func(*Options)) (*UpdateStorageLensGroupOutput, error) {
 	if params == nil {
 		params = &UpdateStorageLensGroupInput{}
@@ -40,17 +43,17 @@ func (c *Client) UpdateStorageLensGroup(ctx context.Context, params *UpdateStora
 
 type UpdateStorageLensGroupInput struct {
 
-	// The Amazon Web Services account ID of the Storage Lens group owner.
+	//  The Amazon Web Services account ID of the Storage Lens group owner.
 	//
 	// This member is required.
 	AccountId *string
 
-	// The name of the Storage Lens group that you want to update.
+	//  The name of the Storage Lens group that you want to update.
 	//
 	// This member is required.
 	Name *string
 
-	// The JSON file that contains the Storage Lens group configuration.
+	//  The JSON file that contains the Storage Lens group configuration.
 	//
 	// This member is required.
 	StorageLensGroup *types.StorageLensGroup
@@ -92,25 +95,25 @@ func (c *Client) addOperationUpdateStorageLensGroupMiddlewares(stack *middleware
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -128,6 +131,9 @@ func (c *Client) addOperationUpdateStorageLensGroupMiddlewares(stack *middleware
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addEndpointPrefix_opUpdateStorageLensGroupMiddleware(stack); err != nil {
 		return err
 	}
@@ -140,7 +146,7 @@ func (c *Client) addOperationUpdateStorageLensGroupMiddlewares(stack *middleware
 	if err = addMetadataRetrieverMiddleware(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addUpdateStorageLensGroupUpdateEndpoint(stack, options); err != nil {

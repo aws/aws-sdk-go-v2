@@ -6,15 +6,15 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/devicefarm/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Gets information about unique problems, such as exceptions or crashes. Unique
-// problems are defined as a single instance of an error across a run, job, or
-// suite. For example, if a call in your application consistently raises an
+// Gets information about unique problems, such as exceptions or crashes.
+//
+// Unique problems are defined as a single instance of an error across a run, job,
+// or suite. For example, if a call in your application consistently raises an
 // exception ( OutOfBoundsException in MyActivity.java:386 ), ListUniqueProblems
 // returns a single entry instead of many individual entries for that exception.
 func (c *Client) ListUniqueProblems(ctx context.Context, params *ListUniqueProblemsInput, optFns ...func(*Options)) (*ListUniqueProblemsOutput, error) {
@@ -55,13 +55,22 @@ type ListUniqueProblemsOutput struct {
 	// operation to return the next set of items in the list.
 	NextToken *string
 
-	// Information about the unique problems. Allowed values include:
+	// Information about the unique problems.
+	//
+	// Allowed values include:
+	//
 	//   - PENDING
+	//
 	//   - PASSED
+	//
 	//   - WARNED
+	//
 	//   - FAILED
+	//
 	//   - SKIPPED
+	//
 	//   - ERRORED
+	//
 	//   - STOPPED
 	UniqueProblems map[string][]types.UniqueProblem
 
@@ -93,25 +102,25 @@ func (c *Client) addOperationListUniqueProblemsMiddlewares(stack *middleware.Sta
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -126,13 +135,16 @@ func (c *Client) addOperationListUniqueProblemsMiddlewares(stack *middleware.Sta
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpListUniqueProblemsValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListUniqueProblems(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

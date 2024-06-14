@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/gamelift/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -14,19 +13,31 @@ import (
 
 // Suspends certain types of activity in a fleet location. Currently, this
 // operation is used to stop auto-scaling activity. For multi-location fleets,
-// fleet actions are managed separately for each location. Stopping fleet actions
-// has several potential purposes. It allows you to temporarily stop auto-scaling
-// activity but retain your scaling policies for use in the future. For
-// multi-location fleets, you can set up fleet-wide auto-scaling, and then opt out
-// of it for certain locations. This operation can be used in the following ways:
+// fleet actions are managed separately for each location.
+//
+// Stopping fleet actions has several potential purposes. It allows you to
+// temporarily stop auto-scaling activity but retain your scaling policies for use
+// in the future. For multi-location fleets, you can set up fleet-wide
+// auto-scaling, and then opt out of it for certain locations.
+//
+// This operation can be used in the following ways:
+//
 //   - To stop actions on instances in the fleet's home Region, provide a fleet ID
 //     and the type of actions to suspend.
+//
 //   - To stop actions on instances in one of the fleet's remote locations,
 //     provide a fleet ID, a location name, and the type of actions to suspend.
 //
 // If successful, Amazon GameLift no longer initiates scaling events except in
-// response to manual changes using UpdateFleetCapacity (https://docs.aws.amazon.com/gamelift/latest/apireference/API_UpdateFleetCapacity.html)
-// . Learn more Setting up Amazon GameLift Fleets (https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-intro.html)
+// response to manual changes using [UpdateFleetCapacity]. To restart fleet actions again, call [StartFleetActions].
+//
+// # Learn more
+//
+// [Setting up Amazon GameLift Fleets]
+//
+// [UpdateFleetCapacity]: https://docs.aws.amazon.com/gamelift/latest/apireference/API_UpdateFleetCapacity.html
+// [Setting up Amazon GameLift Fleets]: https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-intro.html
+// [StartFleetActions]: https://docs.aws.amazon.com/gamelift/latest/apireference/API_StartFleetActions.html
 func (c *Client) StopFleetActions(ctx context.Context, params *StopFleetActionsInput, optFns ...func(*Options)) (*StopFleetActionsOutput, error) {
 	if params == nil {
 		params = &StopFleetActionsInput{}
@@ -64,10 +75,11 @@ type StopFleetActionsInput struct {
 
 type StopFleetActionsOutput struct {
 
-	// The Amazon Resource Name ( ARN (https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-arn-format.html)
-	// ) that is assigned to a Amazon GameLift fleet resource and uniquely identifies
-	// it. ARNs are unique across all Regions. Format is
-	// arn:aws:gamelift:::fleet/fleet-a1234567-b8c9-0d1e-2fa3-b45c6d7e8912 .
+	// The Amazon Resource Name ([ARN] ) that is assigned to a Amazon GameLift fleet
+	// resource and uniquely identifies it. ARNs are unique across all Regions. Format
+	// is arn:aws:gamelift:::fleet/fleet-a1234567-b8c9-0d1e-2fa3-b45c6d7e8912 .
+	//
+	// [ARN]: https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-arn-format.html
 	FleetArn *string
 
 	// A unique identifier for the fleet to stop actions on.
@@ -101,25 +113,25 @@ func (c *Client) addOperationStopFleetActionsMiddlewares(stack *middleware.Stack
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -134,13 +146,16 @@ func (c *Client) addOperationStopFleetActionsMiddlewares(stack *middleware.Stack
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpStopFleetActionsValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opStopFleetActions(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

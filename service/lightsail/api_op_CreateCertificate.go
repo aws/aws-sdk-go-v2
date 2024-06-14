@@ -6,22 +6,24 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/lightsail/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates an SSL/TLS certificate for an Amazon Lightsail content delivery network
-// (CDN) distribution and a container service. After the certificate is valid, use
-// the AttachCertificateToDistribution action to use the certificate and its
-// domains with your distribution. Or use the UpdateContainerService action to use
-// the certificate and its domains with your container service. Only certificates
-// created in the us-east-1 Amazon Web Services Region can be attached to
-// Lightsail distributions. Lightsail distributions are global resources that can
-// reference an origin in any Amazon Web Services Region, and distribute its
-// content globally. However, all distributions are located in the us-east-1
-// Region.
+// (CDN) distribution and a container service.
+//
+// After the certificate is valid, use the AttachCertificateToDistribution action
+// to use the certificate and its domains with your distribution. Or use the
+// UpdateContainerService action to use the certificate and its domains with your
+// container service.
+//
+// Only certificates created in the us-east-1 Amazon Web Services Region can be
+// attached to Lightsail distributions. Lightsail distributions are global
+// resources that can reference an origin in any Amazon Web Services Region, and
+// distribute its content globally. However, all distributions are located in the
+// us-east-1 Region.
 func (c *Client) CreateCertificate(ctx context.Context, params *CreateCertificateInput, optFns ...func(*Options)) (*CreateCertificateOutput, error) {
 	if params == nil {
 		params = &CreateCertificateInput{}
@@ -50,13 +52,17 @@ type CreateCertificateInput struct {
 	DomainName *string
 
 	// An array of strings that specify the alternate domains ( example2.com ) and
-	// subdomains ( blog.example.com ) for the certificate. You can specify a maximum
-	// of nine alternate domains (in addition to the primary domain name). Wildcard
-	// domain entries ( *.example.com ) are not supported.
+	// subdomains ( blog.example.com ) for the certificate.
+	//
+	// You can specify a maximum of nine alternate domains (in addition to the primary
+	// domain name).
+	//
+	// Wildcard domain entries ( *.example.com ) are not supported.
 	SubjectAlternativeNames []string
 
-	// The tag keys and optional values to add to the certificate during create. Use
-	// the TagResource action to tag a resource after it's created.
+	// The tag keys and optional values to add to the certificate during create.
+	//
+	// Use the TagResource action to tag a resource after it's created.
 	Tags []types.Tag
 
 	noSmithyDocumentSerde
@@ -100,25 +106,25 @@ func (c *Client) addOperationCreateCertificateMiddlewares(stack *middleware.Stac
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -133,13 +139,16 @@ func (c *Client) addOperationCreateCertificateMiddlewares(stack *middleware.Stac
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpCreateCertificateValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateCertificate(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

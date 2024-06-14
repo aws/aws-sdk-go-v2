@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/lookoutvision/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -14,11 +13,18 @@ import (
 
 // Starts the running of the version of an Amazon Lookout for Vision model.
 // Starting a model takes a while to complete. To check the current state of the
-// model, use DescribeModel . A model is ready to use when its status is HOSTED .
-// Once the model is running, you can detect custom labels in new images by calling
-// DetectAnomalies . You are charged for the amount of time that the model is
-// running. To stop a running model, call StopModel . This operation requires
-// permissions to perform the lookoutvision:StartModel operation.
+// model, use DescribeModel.
+//
+// A model is ready to use when its status is HOSTED .
+//
+// Once the model is running, you can detect custom labels in new images by
+// calling DetectAnomalies.
+//
+// You are charged for the amount of time that the model is running. To stop a
+// running model, call StopModel.
+//
+// This operation requires permissions to perform the lookoutvision:StartModel
+// operation.
 func (c *Client) StartModel(ctx context.Context, params *StartModelInput, optFns ...func(*Options)) (*StartModelOutput, error) {
 	if params == nil {
 		params = &StartModelInput{}
@@ -57,13 +63,16 @@ type StartModelInput struct {
 	// ClientToken is an idempotency token that ensures a call to StartModel completes
 	// only once. You choose the value to pass. For example, An issue might prevent you
 	// from getting a response from StartModel . In this case, safely retry your call
-	// to StartModel by using the same ClientToken parameter value. If you don't
-	// supply a value for ClientToken , the AWS SDK you are using inserts a value for
-	// you. This prevents retries after a network error from making multiple start
-	// requests. You'll need to provide your own value for other use cases. An error
-	// occurs if the other input parameters are not the same as in the first request.
-	// Using a different value for ClientToken is considered a new call to StartModel .
-	// An idempotency token is active for 8 hours.
+	// to StartModel by using the same ClientToken parameter value.
+	//
+	// If you don't supply a value for ClientToken , the AWS SDK you are using inserts
+	// a value for you. This prevents retries after a network error from making
+	// multiple start requests. You'll need to provide your own value for other use
+	// cases.
+	//
+	// An error occurs if the other input parameters are not the same as in the first
+	// request. Using a different value for ClientToken is considered a new call to
+	// StartModel . An idempotency token is active for 8 hours.
 	ClientToken *string
 
 	// The maximum number of inference units to use for auto-scaling the model. If you
@@ -106,25 +115,25 @@ func (c *Client) addOperationStartModelMiddlewares(stack *middleware.Stack, opti
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -139,6 +148,9 @@ func (c *Client) addOperationStartModelMiddlewares(stack *middleware.Stack, opti
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opStartModelMiddleware(stack, options); err != nil {
 		return err
 	}
@@ -148,7 +160,7 @@ func (c *Client) addOperationStartModelMiddlewares(stack *middleware.Stack, opti
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opStartModel(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

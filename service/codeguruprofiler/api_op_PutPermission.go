@@ -6,26 +6,31 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/codeguruprofiler/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Adds permissions to a profiling group's resource-based policy that are provided
-// using an action group. If a profiling group doesn't have a resource-based
-// policy, one is created for it using the permissions in the action group and the
-// roles and users in the principals parameter. The one supported action group
-// that can be added is agentPermission which grants ConfigureAgent and PostAgent
-// permissions. For more information, see Resource-based policies in CodeGuru
-// Profiler (https://docs.aws.amazon.com/codeguru/latest/profiler-ug/resource-based-policies.html)
-// in the Amazon CodeGuru Profiler User Guide, ConfigureAgent (https://docs.aws.amazon.com/codeguru/latest/profiler-api/API_ConfigureAgent.html)
-// , and PostAgentProfile (https://docs.aws.amazon.com/codeguru/latest/profiler-api/API_PostAgentProfile.html)
-// . The first time you call PutPermission on a profiling group, do not specify a
+//	Adds permissions to a profiling group's resource-based policy that are
+//
+// provided using an action group. If a profiling group doesn't have a
+// resource-based policy, one is created for it using the permissions in the action
+// group and the roles and users in the principals parameter.
+//
+// The one supported action group that can be added is agentPermission which
+// grants ConfigureAgent and PostAgent permissions. For more information, see [Resource-based policies in CodeGuru Profiler] in
+// the Amazon CodeGuru Profiler User Guide, [ConfigureAgent]ConfigureAgent , and [PostAgentProfile]PostAgentProfile .
+//
+// The first time you call PutPermission on a profiling group, do not specify a
 // revisionId because it doesn't have a resource-based policy. Subsequent calls
 // must provide a revisionId to specify which revision of the resource-based
-// policy to add the permissions to. The response contains the profiling group's
-// JSON-formatted resource policy.
+// policy to add the permissions to.
+//
+// The response contains the profiling group's JSON-formatted resource policy.
+//
+// [ConfigureAgent]: https://docs.aws.amazon.com/codeguru/latest/profiler-api/API_ConfigureAgent.html
+// [Resource-based policies in CodeGuru Profiler]: https://docs.aws.amazon.com/codeguru/latest/profiler-ug/resource-based-policies.html
+// [PostAgentProfile]: https://docs.aws.amazon.com/codeguru/latest/profiler-api/API_PostAgentProfile.html
 func (c *Client) PutPermission(ctx context.Context, params *PutPermissionInput, optFns ...func(*Options)) (*PutPermissionOutput, error) {
 	if params == nil {
 		params = &PutPermissionInput{}
@@ -44,15 +49,15 @@ func (c *Client) PutPermission(ctx context.Context, params *PutPermissionInput, 
 // The structure representing the putPermissionRequest .
 type PutPermissionInput struct {
 
-	// Specifies an action group that contains permissions to add to a profiling group
-	// resource. One action group is supported, agentPermissions , which grants
+	//  Specifies an action group that contains permissions to add to a profiling
+	// group resource. One action group is supported, agentPermissions , which grants
 	// permission to perform actions required by the profiling agent, ConfigureAgent
 	// and PostAgentProfile permissions.
 	//
 	// This member is required.
 	ActionGroup types.ActionGroup
 
-	// A list ARNs for the roles and users you want to grant access to the profiling
+	//  A list ARNs for the roles and users you want to grant access to the profiling
 	// group. Wildcards are not are supported in the ARNs.
 	//
 	// This member is required.
@@ -63,7 +68,7 @@ type PutPermissionInput struct {
 	// This member is required.
 	ProfilingGroupName *string
 
-	// A universally unique identifier (UUID) for the revision of the policy you are
+	//  A universally unique identifier (UUID) for the revision of the policy you are
 	// adding to the profiling group. Do not specify this when you add permissions to a
 	// profiling group for the first time. If a policy already exists on the profiling
 	// group, you must specify the revisionId .
@@ -75,13 +80,13 @@ type PutPermissionInput struct {
 // The structure representing the putPermissionResponse .
 type PutPermissionOutput struct {
 
-	// The JSON-formatted resource-based policy on the profiling group that includes
+	//  The JSON-formatted resource-based policy on the profiling group that includes
 	// the added permissions.
 	//
 	// This member is required.
 	Policy *string
 
-	// A universally unique identifier (UUID) for the revision of the resource-based
+	//  A universally unique identifier (UUID) for the revision of the resource-based
 	// policy that includes the added permissions. The JSON-formatted policy is in the
 	// policy element of the response.
 	//
@@ -116,25 +121,25 @@ func (c *Client) addOperationPutPermissionMiddlewares(stack *middleware.Stack, o
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -149,13 +154,16 @@ func (c *Client) addOperationPutPermissionMiddlewares(stack *middleware.Stack, o
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpPutPermissionValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opPutPermission(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

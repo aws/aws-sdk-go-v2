@@ -6,22 +6,27 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/eventbridge/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Removes the specified targets from the specified rule. When the rule is
-// triggered, those targets are no longer be invoked. A successful execution of
-// RemoveTargets doesn't guarantee all targets are removed from the rule, it means
-// that the target(s) listed in the request are removed. When you remove a target,
-// when the associated rule triggers, removed targets might continue to be invoked.
-// Allow a short period of time for changes to take effect. This action can
-// partially fail if too many requests are made at the same time. If that happens,
-// FailedEntryCount is non-zero in the response and each entry in FailedEntries
-// provides the ID of the failed target and the error code. The maximum number of
-// entries per request is 10.
+// triggered, those targets are no longer be invoked.
+//
+// A successful execution of RemoveTargets doesn't guarantee all targets are
+// removed from the rule, it means that the target(s) listed in the request are
+// removed.
+//
+// When you remove a target, when the associated rule triggers, removed targets
+// might continue to be invoked. Allow a short period of time for changes to take
+// effect.
+//
+// This action can partially fail if too many requests are made at the same time.
+// If that happens, FailedEntryCount is non-zero in the response and each entry in
+// FailedEntries provides the ID of the failed target and the error code.
+//
+// The maximum number of entries per request is 10.
 func (c *Client) RemoveTargets(ctx context.Context, params *RemoveTargetsInput, optFns ...func(*Options)) (*RemoveTargetsOutput, error) {
 	if params == nil {
 		params = &RemoveTargetsInput{}
@@ -99,25 +104,25 @@ func (c *Client) addOperationRemoveTargetsMiddlewares(stack *middleware.Stack, o
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -132,13 +137,16 @@ func (c *Client) addOperationRemoveTargetsMiddlewares(stack *middleware.Stack, o
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpRemoveTargetsValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opRemoveTargets(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

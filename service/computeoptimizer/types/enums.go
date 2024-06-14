@@ -12,6 +12,7 @@ const (
 
 // Values returns all known values for AutoScalingConfiguration. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (AutoScalingConfiguration) Values() []AutoScalingConfiguration {
 	return []AutoScalingConfiguration{
@@ -29,8 +30,9 @@ const (
 )
 
 // Values returns all known values for CpuVendorArchitecture. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (CpuVendorArchitecture) Values() []CpuVendorArchitecture {
 	return []CpuVendorArchitecture{
 		"AWS_ARM64",
@@ -47,8 +49,9 @@ const (
 )
 
 // Values returns all known values for Currency. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (Currency) Values() []Currency {
 	return []Currency{
 		"USD",
@@ -67,8 +70,9 @@ const (
 )
 
 // Values returns all known values for CurrentPerformanceRisk. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (CurrentPerformanceRisk) Values() []CurrentPerformanceRisk {
 	return []CurrentPerformanceRisk{
 		"VeryLow",
@@ -84,16 +88,19 @@ type CustomizableMetricHeadroom string
 const (
 	CustomizableMetricHeadroomPercent30 CustomizableMetricHeadroom = "PERCENT_30"
 	CustomizableMetricHeadroomPercent20 CustomizableMetricHeadroom = "PERCENT_20"
+	CustomizableMetricHeadroomPercent10 CustomizableMetricHeadroom = "PERCENT_10"
 	CustomizableMetricHeadroomPercent0  CustomizableMetricHeadroom = "PERCENT_0"
 )
 
 // Values returns all known values for CustomizableMetricHeadroom. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (CustomizableMetricHeadroom) Values() []CustomizableMetricHeadroom {
 	return []CustomizableMetricHeadroom{
 		"PERCENT_30",
 		"PERCENT_20",
+		"PERCENT_10",
 		"PERCENT_0",
 	}
 }
@@ -102,15 +109,18 @@ type CustomizableMetricName string
 
 // Enum values for CustomizableMetricName
 const (
-	CustomizableMetricNameCpuUtilization CustomizableMetricName = "CpuUtilization"
+	CustomizableMetricNameCpuUtilization    CustomizableMetricName = "CpuUtilization"
+	CustomizableMetricNameMemoryUtilization CustomizableMetricName = "MemoryUtilization"
 )
 
 // Values returns all known values for CustomizableMetricName. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (CustomizableMetricName) Values() []CustomizableMetricName {
 	return []CustomizableMetricName{
 		"CpuUtilization",
+		"MemoryUtilization",
 	}
 }
 
@@ -125,6 +135,7 @@ const (
 
 // Values returns all known values for CustomizableMetricThreshold. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (CustomizableMetricThreshold) Values() []CustomizableMetricThreshold {
 	return []CustomizableMetricThreshold{
@@ -142,8 +153,9 @@ const (
 )
 
 // Values returns all known values for EBSFilterName. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (EBSFilterName) Values() []EBSFilterName {
 	return []EBSFilterName{
 		"Finding",
@@ -159,8 +171,9 @@ const (
 )
 
 // Values returns all known values for EBSFinding. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (EBSFinding) Values() []EBSFinding {
 	return []EBSFinding{
 		"Optimized",
@@ -179,8 +192,9 @@ const (
 )
 
 // Values returns all known values for EBSMetricName. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (EBSMetricName) Values() []EBSMetricName {
 	return []EBSMetricName{
 		"VolumeReadOpsPerSecond",
@@ -201,8 +215,9 @@ const (
 
 // Values returns all known values for EBSSavingsEstimationModeSource. Note that
 // this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (EBSSavingsEstimationModeSource) Values() []EBSSavingsEstimationModeSource {
 	return []EBSSavingsEstimationModeSource{
 		"PublicPricing",
@@ -222,8 +237,9 @@ const (
 
 // Values returns all known values for ECSSavingsEstimationModeSource. Note that
 // this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ECSSavingsEstimationModeSource) Values() []ECSSavingsEstimationModeSource {
 	return []ECSSavingsEstimationModeSource{
 		"PublicPricing",
@@ -241,8 +257,9 @@ const (
 )
 
 // Values returns all known values for ECSServiceLaunchType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ECSServiceLaunchType) Values() []ECSServiceLaunchType {
 	return []ECSServiceLaunchType{
 		"EC2",
@@ -259,8 +276,9 @@ const (
 )
 
 // Values returns all known values for ECSServiceMetricName. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ECSServiceMetricName) Values() []ECSServiceMetricName {
 	return []ECSServiceMetricName{
 		"Cpu",
@@ -278,6 +296,7 @@ const (
 
 // Values returns all known values for ECSServiceMetricStatistic. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (ECSServiceMetricStatistic) Values() []ECSServiceMetricStatistic {
 	return []ECSServiceMetricStatistic{
@@ -296,8 +315,9 @@ const (
 
 // Values returns all known values for ECSServiceRecommendationFilterName. Note
 // that this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ECSServiceRecommendationFilterName) Values() []ECSServiceRecommendationFilterName {
 	return []ECSServiceRecommendationFilterName{
 		"Finding",
@@ -316,8 +336,9 @@ const (
 
 // Values returns all known values for ECSServiceRecommendationFinding. Note that
 // this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ECSServiceRecommendationFinding) Values() []ECSServiceRecommendationFinding {
 	return []ECSServiceRecommendationFinding{
 		"Optimized",
@@ -338,8 +359,9 @@ const (
 
 // Values returns all known values for ECSServiceRecommendationFindingReasonCode.
 // Note that this can be expanded in the future, and so it is only as up to date as
-// the client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ECSServiceRecommendationFindingReasonCode) Values() []ECSServiceRecommendationFindingReasonCode {
 	return []ECSServiceRecommendationFindingReasonCode{
 		"MemoryOverprovisioned",
@@ -359,8 +381,9 @@ const (
 
 // Values returns all known values for EnhancedInfrastructureMetrics. Note that
 // this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (EnhancedInfrastructureMetrics) Values() []EnhancedInfrastructureMetrics {
 	return []EnhancedInfrastructureMetrics{
 		"Active",
@@ -376,8 +399,9 @@ const (
 )
 
 // Values returns all known values for EnrollmentFilterName. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (EnrollmentFilterName) Values() []EnrollmentFilterName {
 	return []EnrollmentFilterName{
 		"Status",
@@ -458,8 +482,9 @@ const (
 
 // Values returns all known values for ExportableAutoScalingGroupField. Note that
 // this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ExportableAutoScalingGroupField) Values() []ExportableAutoScalingGroupField {
 	return []ExportableAutoScalingGroupField{
 		"AccountId",
@@ -567,6 +592,7 @@ const (
 
 // Values returns all known values for ExportableECSServiceField. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (ExportableECSServiceField) Values() []ExportableECSServiceField {
 	return []ExportableECSServiceField{
@@ -679,8 +705,9 @@ const (
 )
 
 // Values returns all known values for ExportableInstanceField. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ExportableInstanceField) Values() []ExportableInstanceField {
 	return []ExportableInstanceField{
 		"AccountId",
@@ -796,8 +823,9 @@ const (
 
 // Values returns all known values for ExportableLambdaFunctionField. Note that
 // this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ExportableLambdaFunctionField) Values() []ExportableLambdaFunctionField {
 	return []ExportableLambdaFunctionField{
 		"AccountId",
@@ -862,8 +890,9 @@ const (
 )
 
 // Values returns all known values for ExportableLicenseField. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ExportableLicenseField) Values() []ExportableLicenseField {
 	return []ExportableLicenseField{
 		"AccountId",
@@ -932,8 +961,9 @@ const (
 )
 
 // Values returns all known values for ExportableVolumeField. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ExportableVolumeField) Values() []ExportableVolumeField {
 	return []ExportableVolumeField{
 		"AccountId",
@@ -985,8 +1015,9 @@ const (
 )
 
 // Values returns all known values for ExternalMetricsSource. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ExternalMetricsSource) Values() []ExternalMetricsSource {
 	return []ExternalMetricsSource{
 		"Datadog",
@@ -1014,6 +1045,7 @@ const (
 
 // Values returns all known values for ExternalMetricStatusCode. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (ExternalMetricStatusCode) Values() []ExternalMetricStatusCode {
 	return []ExternalMetricStatusCode{
@@ -1038,8 +1070,9 @@ const (
 )
 
 // Values returns all known values for FileFormat. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (FileFormat) Values() []FileFormat {
 	return []FileFormat{
 		"Csv",
@@ -1057,8 +1090,9 @@ const (
 )
 
 // Values returns all known values for FilterName. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (FilterName) Values() []FilterName {
 	return []FilterName{
 		"Finding",
@@ -1079,8 +1113,9 @@ const (
 )
 
 // Values returns all known values for Finding. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (Finding) Values() []Finding {
 	return []Finding{
 		"Underprovisioned",
@@ -1099,8 +1134,9 @@ const (
 )
 
 // Values returns all known values for FindingReasonCode. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (FindingReasonCode) Values() []FindingReasonCode {
 	return []FindingReasonCode{
 		"MemoryOverprovisioned",
@@ -1124,8 +1160,9 @@ const (
 )
 
 // Values returns all known values for InferredWorkloadType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (InferredWorkloadType) Values() []InferredWorkloadType {
 	return []InferredWorkloadType{
 		"AmazonEmr",
@@ -1150,8 +1187,9 @@ const (
 
 // Values returns all known values for InferredWorkloadTypesPreference. Note that
 // this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (InferredWorkloadTypesPreference) Values() []InferredWorkloadTypesPreference {
 	return []InferredWorkloadTypesPreference{
 		"Active",
@@ -1168,8 +1206,9 @@ const (
 )
 
 // Values returns all known values for InstanceIdle. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (InstanceIdle) Values() []InstanceIdle {
 	return []InstanceIdle{
 		"True",
@@ -1205,8 +1244,9 @@ const (
 
 // Values returns all known values for InstanceRecommendationFindingReasonCode.
 // Note that this can be expanded in the future, and so it is only as up to date as
-// the client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (InstanceRecommendationFindingReasonCode) Values() []InstanceRecommendationFindingReasonCode {
 	return []InstanceRecommendationFindingReasonCode{
 		"CPUOverprovisioned",
@@ -1243,8 +1283,9 @@ const (
 
 // Values returns all known values for InstanceSavingsEstimationModeSource. Note
 // that this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (InstanceSavingsEstimationModeSource) Values() []InstanceSavingsEstimationModeSource {
 	return []InstanceSavingsEstimationModeSource{
 		"PublicPricing",
@@ -1266,8 +1307,9 @@ const (
 )
 
 // Values returns all known values for InstanceState. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (InstanceState) Values() []InstanceState {
 	return []InstanceState{
 		"pending",
@@ -1288,8 +1330,9 @@ const (
 )
 
 // Values returns all known values for JobFilterName. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (JobFilterName) Values() []JobFilterName {
 	return []JobFilterName{
 		"ResourceType",
@@ -1308,8 +1351,9 @@ const (
 )
 
 // Values returns all known values for JobStatus. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (JobStatus) Values() []JobStatus {
 	return []JobStatus{
 		"Queued",
@@ -1328,8 +1372,9 @@ const (
 
 // Values returns all known values for LambdaFunctionMemoryMetricName. Note that
 // this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (LambdaFunctionMemoryMetricName) Values() []LambdaFunctionMemoryMetricName {
 	return []LambdaFunctionMemoryMetricName{
 		"Duration",
@@ -1347,8 +1392,9 @@ const (
 
 // Values returns all known values for LambdaFunctionMemoryMetricStatistic. Note
 // that this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (LambdaFunctionMemoryMetricStatistic) Values() []LambdaFunctionMemoryMetricStatistic {
 	return []LambdaFunctionMemoryMetricStatistic{
 		"LowerBound",
@@ -1367,6 +1413,7 @@ const (
 
 // Values returns all known values for LambdaFunctionMetricName. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (LambdaFunctionMetricName) Values() []LambdaFunctionMetricName {
 	return []LambdaFunctionMetricName{
@@ -1385,8 +1432,9 @@ const (
 
 // Values returns all known values for LambdaFunctionMetricStatistic. Note that
 // this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (LambdaFunctionMetricStatistic) Values() []LambdaFunctionMetricStatistic {
 	return []LambdaFunctionMetricStatistic{
 		"Maximum",
@@ -1404,8 +1452,9 @@ const (
 
 // Values returns all known values for LambdaFunctionRecommendationFilterName.
 // Note that this can be expanded in the future, and so it is only as up to date as
-// the client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (LambdaFunctionRecommendationFilterName) Values() []LambdaFunctionRecommendationFilterName {
 	return []LambdaFunctionRecommendationFilterName{
 		"Finding",
@@ -1424,8 +1473,9 @@ const (
 
 // Values returns all known values for LambdaFunctionRecommendationFinding. Note
 // that this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (LambdaFunctionRecommendationFinding) Values() []LambdaFunctionRecommendationFinding {
 	return []LambdaFunctionRecommendationFinding{
 		"Optimized",
@@ -1446,8 +1496,9 @@ const (
 
 // Values returns all known values for
 // LambdaFunctionRecommendationFindingReasonCode. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (LambdaFunctionRecommendationFindingReasonCode) Values() []LambdaFunctionRecommendationFindingReasonCode {
 	return []LambdaFunctionRecommendationFindingReasonCode{
 		"MemoryOverprovisioned",
@@ -1468,8 +1519,9 @@ const (
 
 // Values returns all known values for LambdaSavingsEstimationModeSource. Note
 // that this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (LambdaSavingsEstimationModeSource) Values() []LambdaSavingsEstimationModeSource {
 	return []LambdaSavingsEstimationModeSource{
 		"PublicPricing",
@@ -1489,8 +1541,9 @@ const (
 )
 
 // Values returns all known values for LicenseEdition. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (LicenseEdition) Values() []LicenseEdition {
 	return []LicenseEdition{
 		"Enterprise",
@@ -1510,8 +1563,9 @@ const (
 )
 
 // Values returns all known values for LicenseFinding. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (LicenseFinding) Values() []LicenseFinding {
 	return []LicenseFinding{
 		"InsufficientMetrics",
@@ -1532,6 +1586,7 @@ const (
 
 // Values returns all known values for LicenseFindingReasonCode. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (LicenseFindingReasonCode) Values() []LicenseFindingReasonCode {
 	return []LicenseFindingReasonCode{
@@ -1551,8 +1606,9 @@ const (
 )
 
 // Values returns all known values for LicenseModel. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (LicenseModel) Values() []LicenseModel {
 	return []LicenseModel{
 		"LicenseIncluded",
@@ -1568,8 +1624,9 @@ const (
 )
 
 // Values returns all known values for LicenseName. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (LicenseName) Values() []LicenseName {
 	return []LicenseName{
 		"SQLServer",
@@ -1587,8 +1644,9 @@ const (
 
 // Values returns all known values for LicenseRecommendationFilterName. Note that
 // this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (LicenseRecommendationFilterName) Values() []LicenseRecommendationFilterName {
 	return []LicenseRecommendationFilterName{
 		"Finding",
@@ -1608,6 +1666,7 @@ const (
 
 // Values returns all known values for LookBackPeriodPreference. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (LookBackPeriodPreference) Values() []LookBackPeriodPreference {
 	return []LookBackPeriodPreference{
@@ -1640,8 +1699,9 @@ const (
 )
 
 // Values returns all known values for MetricName. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (MetricName) Values() []MetricName {
 	return []MetricName{
 		"Cpu",
@@ -1671,8 +1731,9 @@ const (
 )
 
 // Values returns all known values for MetricSourceProvider. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (MetricSourceProvider) Values() []MetricSourceProvider {
 	return []MetricSourceProvider{
 		"CloudWatchApplicationInsights",
@@ -1688,8 +1749,9 @@ const (
 )
 
 // Values returns all known values for MetricStatistic. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (MetricStatistic) Values() []MetricStatistic {
 	return []MetricStatistic{
 		"Maximum",
@@ -1708,8 +1770,9 @@ const (
 )
 
 // Values returns all known values for MigrationEffort. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (MigrationEffort) Values() []MigrationEffort {
 	return []MigrationEffort{
 		"VeryLow",
@@ -1732,8 +1795,9 @@ const (
 )
 
 // Values returns all known values for PlatformDifference. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (PlatformDifference) Values() []PlatformDifference {
 	return []PlatformDifference{
 		"Hypervisor",
@@ -1753,8 +1817,9 @@ const (
 )
 
 // Values returns all known values for PreferredResourceName. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (PreferredResourceName) Values() []PreferredResourceName {
 	return []PreferredResourceName{
 		"Ec2InstanceTypes",
@@ -1775,8 +1840,9 @@ const (
 
 // Values returns all known values for RecommendationPreferenceName. Note that
 // this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (RecommendationPreferenceName) Values() []RecommendationPreferenceName {
 	return []RecommendationPreferenceName{
 		"EnhancedInfrastructureMetrics",
@@ -1802,6 +1868,7 @@ const (
 
 // Values returns all known values for RecommendationSourceType. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (RecommendationSourceType) Values() []RecommendationSourceType {
 	return []RecommendationSourceType{
@@ -1828,8 +1895,9 @@ const (
 )
 
 // Values returns all known values for ResourceType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ResourceType) Values() []ResourceType {
 	return []ResourceType{
 		"Ec2Instance",
@@ -1851,8 +1919,9 @@ const (
 )
 
 // Values returns all known values for SavingsEstimationMode. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (SavingsEstimationMode) Values() []SavingsEstimationMode {
 	return []SavingsEstimationMode{
 		"AfterDiscounts",
@@ -1870,8 +1939,9 @@ const (
 )
 
 // Values returns all known values for ScopeName. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ScopeName) Values() []ScopeName {
 	return []ScopeName{
 		"Organization",
@@ -1891,8 +1961,9 @@ const (
 )
 
 // Values returns all known values for Status. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (Status) Values() []Status {
 	return []Status{
 		"Active",

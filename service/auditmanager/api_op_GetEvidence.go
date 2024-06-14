@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/auditmanager/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -30,22 +29,22 @@ func (c *Client) GetEvidence(ctx context.Context, params *GetEvidenceInput, optF
 
 type GetEvidenceInput struct {
 
-	// The unique identifier for the assessment.
+	//  The unique identifier for the assessment.
 	//
 	// This member is required.
 	AssessmentId *string
 
-	// The unique identifier for the control set.
+	//  The unique identifier for the control set.
 	//
 	// This member is required.
 	ControlSetId *string
 
-	// The unique identifier for the folder that the evidence is stored in.
+	//  The unique identifier for the folder that the evidence is stored in.
 	//
 	// This member is required.
 	EvidenceFolderId *string
 
-	// The unique identifier for the evidence.
+	//  The unique identifier for the evidence.
 	//
 	// This member is required.
 	EvidenceId *string
@@ -55,7 +54,7 @@ type GetEvidenceInput struct {
 
 type GetEvidenceOutput struct {
 
-	// The evidence that the GetEvidence API returned.
+	//  The evidence that the GetEvidence API returned.
 	Evidence *types.Evidence
 
 	// Metadata pertaining to the operation's result.
@@ -86,25 +85,25 @@ func (c *Client) addOperationGetEvidenceMiddlewares(stack *middleware.Stack, opt
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -119,13 +118,16 @@ func (c *Client) addOperationGetEvidenceMiddlewares(stack *middleware.Stack, opt
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpGetEvidenceValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetEvidence(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

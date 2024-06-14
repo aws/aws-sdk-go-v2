@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/eks/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -14,14 +13,17 @@ import (
 
 // Updates an Amazon EKS cluster to the specified Kubernetes version. Your cluster
 // continues to function during the update. The response output includes an update
-// ID that you can use to track the status of your cluster update with the
-// DescribeUpdate API operation. Cluster updates are asynchronous, and they should
-// finish within a few minutes. During an update, the cluster status moves to
-// UPDATING (this status transition is eventually consistent). When the update is
-// complete (either Failed or Successful ), the cluster status moves to Active . If
-// your cluster has managed node groups attached to it, all of your node groups’
-// Kubernetes versions must match the cluster’s Kubernetes version in order to
-// update the cluster to a new Kubernetes version.
+// ID that you can use to track the status of your cluster update with the DescribeUpdateAPI
+// operation.
+//
+// Cluster updates are asynchronous, and they should finish within a few minutes.
+// During an update, the cluster status moves to UPDATING (this status transition
+// is eventually consistent). When the update is complete (either Failed or
+// Successful ), the cluster status moves to Active .
+//
+// If your cluster has managed node groups attached to it, all of your node
+// groups’ Kubernetes versions must match the cluster’s Kubernetes version in order
+// to update the cluster to a new Kubernetes version.
 func (c *Client) UpdateClusterVersion(ctx context.Context, params *UpdateClusterVersionInput, optFns ...func(*Options)) (*UpdateClusterVersionOutput, error) {
 	if params == nil {
 		params = &UpdateClusterVersionInput{}
@@ -89,25 +91,25 @@ func (c *Client) addOperationUpdateClusterVersionMiddlewares(stack *middleware.S
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -122,6 +124,9 @@ func (c *Client) addOperationUpdateClusterVersionMiddlewares(stack *middleware.S
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opUpdateClusterVersionMiddleware(stack, options); err != nil {
 		return err
 	}
@@ -131,7 +136,7 @@ func (c *Client) addOperationUpdateClusterVersionMiddlewares(stack *middleware.S
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateClusterVersion(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

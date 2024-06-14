@@ -6,16 +6,17 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/iot/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
-// Updates a Device Defender security profile. Requires permission to access the
-// UpdateSecurityProfile (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
-// action.
+// Updates a Device Defender security profile.
+//
+// Requires permission to access the [UpdateSecurityProfile] action.
+//
+// [UpdateSecurityProfile]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions
 func (c *Client) UpdateSecurityProfile(ctx context.Context, params *UpdateSecurityProfileInput, optFns ...func(*Options)) (*UpdateSecurityProfileOutput, error) {
 	if params == nil {
 		params = &UpdateSecurityProfileInput{}
@@ -38,8 +39,9 @@ type UpdateSecurityProfileInput struct {
 	// This member is required.
 	SecurityProfileName *string
 
-	// Please use UpdateSecurityProfileRequest$additionalMetricsToRetainV2 instead. A
-	// list of metrics whose data is retained (stored). By default, data is retained
+	//  Please use UpdateSecurityProfileRequest$additionalMetricsToRetainV2 instead.
+	//
+	// A list of metrics whose data is retained (stored). By default, data is retained
 	// for any metric used in the profile's behaviors , but it is also retained for any
 	// metric specified here. Can be used with custom metrics; cannot be used with
 	// dimensions.
@@ -91,8 +93,9 @@ type UpdateSecurityProfileInput struct {
 
 type UpdateSecurityProfileOutput struct {
 
-	// Please use UpdateSecurityProfileResponse$additionalMetricsToRetainV2 instead. A
-	// list of metrics whose data is retained (stored). By default, data is retained
+	//  Please use UpdateSecurityProfileResponse$additionalMetricsToRetainV2 instead.
+	//
+	// A list of metrics whose data is retained (stored). By default, data is retained
 	// for any metric used in the security profile's behaviors , but it is also
 	// retained for any metric specified here.
 	//
@@ -160,25 +163,25 @@ func (c *Client) addOperationUpdateSecurityProfileMiddlewares(stack *middleware.
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -193,13 +196,16 @@ func (c *Client) addOperationUpdateSecurityProfileMiddlewares(stack *middleware.
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpUpdateSecurityProfileValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateSecurityProfile(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

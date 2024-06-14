@@ -6,19 +6,19 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/elasticloadbalancing/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Describes the specified policies. If you specify a load balancer name, the
-// action returns the descriptions of all policies created for the load balancer.
-// If you specify a policy name associated with your load balancer, the action
-// returns the description of that policy. If you don't specify a load balancer
-// name, the action returns descriptions of the specified sample policies, or
-// descriptions of all sample policies. The names of the sample policies have the
-// ELBSample- prefix.
+// Describes the specified policies.
+//
+// If you specify a load balancer name, the action returns the descriptions of all
+// policies created for the load balancer. If you specify a policy name associated
+// with your load balancer, the action returns the description of that policy. If
+// you don't specify a load balancer name, the action returns descriptions of the
+// specified sample policies, or descriptions of all sample policies. The names of
+// the sample policies have the ELBSample- prefix.
 func (c *Client) DescribeLoadBalancerPolicies(ctx context.Context, params *DescribeLoadBalancerPoliciesInput, optFns ...func(*Options)) (*DescribeLoadBalancerPoliciesOutput, error) {
 	if params == nil {
 		params = &DescribeLoadBalancerPoliciesInput{}
@@ -80,25 +80,25 @@ func (c *Client) addOperationDescribeLoadBalancerPoliciesMiddlewares(stack *midd
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -113,10 +113,13 @@ func (c *Client) addOperationDescribeLoadBalancerPoliciesMiddlewares(stack *midd
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeLoadBalancerPolicies(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

@@ -6,21 +6,23 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/chime/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists the SIP rules under the administrator's AWS account. This API is is no
-// longer supported and will not be updated. We recommend using the latest version,
-// ListSipRules (https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_voice-chime_ListSipRules.html)
-// , in the Amazon Chime SDK. Using the latest version requires migrating to a
-// dedicated namespace. For more information, refer to Migrating from the Amazon
-// Chime namespace (https://docs.aws.amazon.com/chime-sdk/latest/dg/migrate-from-chm-namespace.html)
-// in the Amazon Chime SDK Developer Guide.
+// Lists the SIP rules under the administrator's AWS account.
+//
+// This API is is no longer supported and will not be updated. We recommend using
+// the latest version, [ListSipRules], in the Amazon Chime SDK.
+//
+// Using the latest version requires migrating to a dedicated namespace. For more
+// information, refer to [Migrating from the Amazon Chime namespace]in the Amazon Chime SDK Developer Guide.
 //
 // Deprecated: Replaced by ListSipRules in the Amazon Chime SDK Voice Namespace
+//
+// [Migrating from the Amazon Chime namespace]: https://docs.aws.amazon.com/chime-sdk/latest/dg/migrate-from-chm-namespace.html
+// [ListSipRules]: https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_voice-chime_ListSipRules.html
 func (c *Client) ListSipRules(ctx context.Context, params *ListSipRulesInput, optFns ...func(*Options)) (*ListSipRulesOutput, error) {
 	if params == nil {
 		params = &ListSipRulesInput{}
@@ -86,25 +88,25 @@ func (c *Client) addOperationListSipRulesMiddlewares(stack *middleware.Stack, op
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -119,10 +121,13 @@ func (c *Client) addOperationListSipRulesMiddlewares(stack *middleware.Stack, op
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListSipRules(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

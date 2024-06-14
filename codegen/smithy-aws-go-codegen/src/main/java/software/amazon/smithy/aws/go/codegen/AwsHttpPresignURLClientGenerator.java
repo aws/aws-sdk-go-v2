@@ -484,7 +484,7 @@ public class AwsHttpPresignURLClientGenerator implements GoIntegration {
                     }
 
                     Symbol addAsPresignMiddlewareSymbol = SymbolUtils.createValueSymbolBuilder(
-                            "AddAsIsPresigingMiddleware",
+                            "AddAsIsPresigningMiddleware",
                             AwsCustomGoDependency.PRESIGNEDURL_CUSTOMIZATION).build();
                     writer.write("err = $T(stack)", addAsPresignMiddlewareSymbol);
                     writer.write("if err != nil { return err }");

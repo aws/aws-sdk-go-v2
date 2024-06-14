@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/eks/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -47,25 +46,30 @@ type UpdateAccessEntryInput struct {
 	// The value for name that you've specified for kind: Group as a subject in a
 	// Kubernetes RoleBinding or ClusterRoleBinding object. Amazon EKS doesn't confirm
 	// that the value for name exists in any bindings on your cluster. You can specify
-	// one or more names. Kubernetes authorizes the principalArn of the access entry
-	// to access any cluster objects that you've specified in a Kubernetes Role or
-	// ClusterRole object that is also specified in a binding's roleRef . For more
-	// information about creating Kubernetes RoleBinding , ClusterRoleBinding , Role ,
-	// or ClusterRole objects, see Using RBAC Authorization in the Kubernetes
-	// documentation (https://kubernetes.io/docs/reference/access-authn-authz/rbac/) .
+	// one or more names.
+	//
+	// Kubernetes authorizes the principalArn of the access entry to access any
+	// cluster objects that you've specified in a Kubernetes Role or ClusterRole
+	// object that is also specified in a binding's roleRef . For more information
+	// about creating Kubernetes RoleBinding , ClusterRoleBinding , Role , or
+	// ClusterRole objects, see [Using RBAC Authorization in the Kubernetes documentation].
+	//
 	// If you want Amazon EKS to authorize the principalArn (instead of, or in
 	// addition to Kubernetes authorizing the principalArn ), you can associate one or
 	// more access policies to the access entry using AssociateAccessPolicy . If you
 	// associate any access policies, the principalARN has all permissions assigned in
 	// the associated access policies and all permissions in any Kubernetes Role or
 	// ClusterRole objects that the group names are bound to.
+	//
+	// [Using RBAC Authorization in the Kubernetes documentation]: https://kubernetes.io/docs/reference/access-authn-authz/rbac/
 	KubernetesGroups []string
 
 	// The username to authenticate to Kubernetes with. We recommend not specifying a
 	// username and letting Amazon EKS specify it for you. For more information about
 	// the value Amazon EKS specifies for you, or constraints before specifying your
-	// own username, see Creating access entries (https://docs.aws.amazon.com/eks/latest/userguide/access-entries.html#creating-access-entries)
-	// in the Amazon EKS User Guide.
+	// own username, see [Creating access entries]in the Amazon EKS User Guide.
+	//
+	// [Creating access entries]: https://docs.aws.amazon.com/eks/latest/userguide/access-entries.html#creating-access-entries
 	Username *string
 
 	noSmithyDocumentSerde
@@ -104,25 +108,25 @@ func (c *Client) addOperationUpdateAccessEntryMiddlewares(stack *middleware.Stac
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -137,6 +141,9 @@ func (c *Client) addOperationUpdateAccessEntryMiddlewares(stack *middleware.Stac
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opUpdateAccessEntryMiddleware(stack, options); err != nil {
 		return err
 	}
@@ -146,7 +153,7 @@ func (c *Client) addOperationUpdateAccessEntryMiddlewares(stack *middleware.Stac
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateAccessEntry(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

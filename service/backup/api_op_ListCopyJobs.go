@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/backup/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -55,11 +54,19 @@ type ListCopyJobsInput struct {
 	ByDestinationVaultArn *string
 
 	// This is an optional parameter that can be used to filter out jobs with a
-	// MessageCategory which matches the value you input. Example strings may include
-	// AccessDenied , SUCCESS , AGGREGATE_ALL , and INVALIDPARAMETERS . View Monitoring (https://docs.aws.amazon.com/aws-backup/latest/devguide/monitoring.html)
-	// for a list of accepted strings. The the value ANY returns count of all message
-	// categories. AGGREGATE_ALL aggregates job counts for all message categories and
-	// returns the sum.
+	// MessageCategory which matches the value you input.
+	//
+	// Example strings may include AccessDenied , SUCCESS , AGGREGATE_ALL , and
+	// INVALIDPARAMETERS .
+	//
+	// View [Monitoring] for a list of accepted strings.
+	//
+	// The the value ANY returns count of all message categories.
+	//
+	// AGGREGATE_ALL aggregates job counts for all message categories and returns the
+	// sum.
+	//
+	// [Monitoring]: https://docs.aws.amazon.com/aws-backup/latest/devguide/monitoring.html
 	ByMessageCategory *string
 
 	// This is a filter to list child (nested) jobs based on parent job ID.
@@ -70,21 +77,37 @@ type ListCopyJobsInput struct {
 	ByResourceArn *string
 
 	// Returns only backup jobs for the specified resources:
+	//
 	//   - Aurora for Amazon Aurora
+	//
 	//   - CloudFormation for CloudFormation
+	//
 	//   - DocumentDB for Amazon DocumentDB (with MongoDB compatibility)
+	//
 	//   - DynamoDB for Amazon DynamoDB
+	//
 	//   - EBS for Amazon Elastic Block Store
+	//
 	//   - EC2 for Amazon Elastic Compute Cloud
+	//
 	//   - EFS for Amazon Elastic File System
+	//
 	//   - FSx for Amazon FSx
+	//
 	//   - Neptune for Amazon Neptune
+	//
 	//   - Redshift for Amazon Redshift
+	//
 	//   - RDS for Amazon Relational Database Service
+	//
 	//   - SAP HANA on Amazon EC2 for SAP HANA databases
+	//
 	//   - Storage Gateway for Storage Gateway
+	//
 	//   - S3 for Amazon S3
+	//
 	//   - Timestream for Amazon Timestream
+	//
 	//   - VirtualMachine for virtual machines
 	ByResourceType *string
 
@@ -143,25 +166,25 @@ func (c *Client) addOperationListCopyJobsMiddlewares(stack *middleware.Stack, op
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -176,10 +199,13 @@ func (c *Client) addOperationListCopyJobsMiddlewares(stack *middleware.Stack, op
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListCopyJobs(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

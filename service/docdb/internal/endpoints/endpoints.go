@@ -545,36 +545,9 @@ var defaultPartitions = endpoints.Partitions{
 		IsRegionalized: true,
 		Endpoints: endpoints.Endpoints{
 			endpoints.EndpointKey{
-				Region: "rds-fips.us-iso-east-1",
-			}: endpoints.Endpoint{
-				Hostname: "rds-fips.us-iso-east-1.c2s.ic.gov",
-				CredentialScope: endpoints.CredentialScope{
-					Region: "us-iso-east-1",
-				},
-				Deprecated: aws.TrueTernary,
-			},
-			endpoints.EndpointKey{
-				Region: "rds-fips.us-iso-west-1",
-			}: endpoints.Endpoint{
-				Hostname: "rds-fips.us-iso-west-1.c2s.ic.gov",
-				CredentialScope: endpoints.CredentialScope{
-					Region: "us-iso-west-1",
-				},
-				Deprecated: aws.TrueTernary,
-			},
-			endpoints.EndpointKey{
 				Region: "rds.us-iso-east-1",
 			}: endpoints.Endpoint{
-				CredentialScope: endpoints.CredentialScope{
-					Region: "us-iso-east-1",
-				},
-				Deprecated: aws.TrueTernary,
-			},
-			endpoints.EndpointKey{
-				Region:  "rds.us-iso-east-1",
-				Variant: endpoints.FIPSVariant,
-			}: {
-				Hostname: "rds-fips.us-iso-east-1.c2s.ic.gov",
+				Hostname: "rds.us-iso-east-1.c2s.ic.gov",
 				CredentialScope: endpoints.CredentialScope{
 					Region: "us-iso-east-1",
 				},
@@ -583,16 +556,7 @@ var defaultPartitions = endpoints.Partitions{
 			endpoints.EndpointKey{
 				Region: "rds.us-iso-west-1",
 			}: endpoints.Endpoint{
-				CredentialScope: endpoints.CredentialScope{
-					Region: "us-iso-west-1",
-				},
-				Deprecated: aws.TrueTernary,
-			},
-			endpoints.EndpointKey{
-				Region:  "rds.us-iso-west-1",
-				Variant: endpoints.FIPSVariant,
-			}: {
-				Hostname: "rds-fips.us-iso-west-1.c2s.ic.gov",
+				Hostname: "rds.us-iso-west-1.c2s.ic.gov",
 				CredentialScope: endpoints.CredentialScope{
 					Region: "us-iso-west-1",
 				},
@@ -605,12 +569,12 @@ var defaultPartitions = endpoints.Partitions{
 				Region:  "us-iso-east-1",
 				Variant: endpoints.FIPSVariant,
 			}: {
-				Hostname: "rds-fips.us-iso-east-1.c2s.ic.gov",
+				Hostname: "rds.us-iso-east-1.c2s.ic.gov",
 			},
 			endpoints.EndpointKey{
 				Region: "us-iso-east-1-fips",
 			}: endpoints.Endpoint{
-				Hostname: "rds-fips.us-iso-east-1.c2s.ic.gov",
+				Hostname: "rds.us-iso-east-1.c2s.ic.gov",
 				CredentialScope: endpoints.CredentialScope{
 					Region: "us-iso-east-1",
 				},
@@ -623,12 +587,12 @@ var defaultPartitions = endpoints.Partitions{
 				Region:  "us-iso-west-1",
 				Variant: endpoints.FIPSVariant,
 			}: {
-				Hostname: "rds-fips.us-iso-west-1.c2s.ic.gov",
+				Hostname: "rds.us-iso-west-1.c2s.ic.gov",
 			},
 			endpoints.EndpointKey{
 				Region: "us-iso-west-1-fips",
 			}: endpoints.Endpoint{
-				Hostname: "rds-fips.us-iso-west-1.c2s.ic.gov",
+				Hostname: "rds.us-iso-west-1.c2s.ic.gov",
 				CredentialScope: endpoints.CredentialScope{
 					Region: "us-iso-west-1",
 				},
@@ -658,27 +622,9 @@ var defaultPartitions = endpoints.Partitions{
 		IsRegionalized: true,
 		Endpoints: endpoints.Endpoints{
 			endpoints.EndpointKey{
-				Region: "rds-fips.us-isob-east-1",
-			}: endpoints.Endpoint{
-				Hostname: "rds-fips.us-isob-east-1.sc2s.sgov.gov",
-				CredentialScope: endpoints.CredentialScope{
-					Region: "us-isob-east-1",
-				},
-				Deprecated: aws.TrueTernary,
-			},
-			endpoints.EndpointKey{
 				Region: "rds.us-isob-east-1",
 			}: endpoints.Endpoint{
-				CredentialScope: endpoints.CredentialScope{
-					Region: "us-isob-east-1",
-				},
-				Deprecated: aws.TrueTernary,
-			},
-			endpoints.EndpointKey{
-				Region:  "rds.us-isob-east-1",
-				Variant: endpoints.FIPSVariant,
-			}: {
-				Hostname: "rds-fips.us-isob-east-1.sc2s.sgov.gov",
+				Hostname: "rds.us-isob-east-1.sc2s.sgov.gov",
 				CredentialScope: endpoints.CredentialScope{
 					Region: "us-isob-east-1",
 				},
@@ -691,12 +637,12 @@ var defaultPartitions = endpoints.Partitions{
 				Region:  "us-isob-east-1",
 				Variant: endpoints.FIPSVariant,
 			}: {
-				Hostname: "rds-fips.us-isob-east-1.sc2s.sgov.gov",
+				Hostname: "rds.us-isob-east-1.sc2s.sgov.gov",
 			},
 			endpoints.EndpointKey{
 				Region: "us-isob-east-1-fips",
 			}: endpoints.Endpoint{
-				Hostname: "rds-fips.us-isob-east-1.sc2s.sgov.gov",
+				Hostname: "rds.us-isob-east-1.sc2s.sgov.gov",
 				CredentialScope: endpoints.CredentialScope{
 					Region: "us-isob-east-1",
 				},

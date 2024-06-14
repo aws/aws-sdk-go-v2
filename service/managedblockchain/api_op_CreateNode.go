@@ -6,14 +6,14 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/managedblockchain/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a node on the specified blockchain network. Applies to Hyperledger
-// Fabric and Ethereum.
+// Creates a node on the specified blockchain network.
+//
+// Applies to Hyperledger Fabric and Ethereum.
 func (c *Client) CreateNode(ctx context.Context, params *CreateNodeInput, optFns ...func(*Options)) (*CreateNodeOutput, error) {
 	if params == nil {
 		params = &CreateNodeInput{}
@@ -40,10 +40,11 @@ type CreateNodeInput struct {
 	// This member is required.
 	ClientRequestToken *string
 
-	// The unique identifier of the network for the node. Ethereum public networks
-	// have the following NetworkId s:
+	// The unique identifier of the network for the node.
+	//
+	// Ethereum public networks have the following NetworkId s:
+	//
 	//   - n-ethereum-mainnet
-	//   - n-ethereum-goerli
 	//
 	// This member is required.
 	NetworkId *string
@@ -53,16 +54,22 @@ type CreateNodeInput struct {
 	// This member is required.
 	NodeConfiguration *types.NodeConfiguration
 
-	// The unique identifier of the member that owns this node. Applies only to
-	// Hyperledger Fabric.
+	// The unique identifier of the member that owns this node.
+	//
+	// Applies only to Hyperledger Fabric.
 	MemberId *string
 
-	// Tags to assign to the node. Each tag consists of a key and an optional value.
-	// You can specify multiple key-value pairs in a single request with an overall
-	// maximum of 50 tags allowed per resource. For more information about tags, see
-	// Tagging Resources (https://docs.aws.amazon.com/managed-blockchain/latest/ethereum-dev/tagging-resources.html)
-	// in the Amazon Managed Blockchain Ethereum Developer Guide, or Tagging Resources (https://docs.aws.amazon.com/managed-blockchain/latest/hyperledger-fabric-dev/tagging-resources.html)
-	// in the Amazon Managed Blockchain Hyperledger Fabric Developer Guide.
+	// Tags to assign to the node.
+	//
+	// Each tag consists of a key and an optional value. You can specify multiple
+	// key-value pairs in a single request with an overall maximum of 50 tags allowed
+	// per resource.
+	//
+	// For more information about tags, see [Tagging Resources] in the Amazon Managed Blockchain Ethereum
+	// Developer Guide, or [Tagging Resources]in the Amazon Managed Blockchain Hyperledger Fabric
+	// Developer Guide.
+	//
+	// [Tagging Resources]: https://docs.aws.amazon.com/managed-blockchain/latest/hyperledger-fabric-dev/tagging-resources.html
 	Tags map[string]string
 
 	noSmithyDocumentSerde
@@ -101,25 +108,25 @@ func (c *Client) addOperationCreateNodeMiddlewares(stack *middleware.Stack, opti
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -134,6 +141,9 @@ func (c *Client) addOperationCreateNodeMiddlewares(stack *middleware.Stack, opti
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opCreateNodeMiddleware(stack, options); err != nil {
 		return err
 	}
@@ -143,7 +153,7 @@ func (c *Client) addOperationCreateNodeMiddlewares(stack *middleware.Stack, opti
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateNode(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

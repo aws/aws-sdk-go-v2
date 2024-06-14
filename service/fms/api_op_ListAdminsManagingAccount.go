@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -14,7 +13,7 @@ import (
 // Lists the accounts that are managing the specified Organizations member
 // account. This is useful for any member account so that they can view the
 // accounts who are managing their account. This operation only returns the
-// managing administrators that have the requested account within their AdminScope .
+// managing administrators that have the requested account within their AdminScope.
 func (c *Client) ListAdminsManagingAccount(ctx context.Context, params *ListAdminsManagingAccountInput, optFns ...func(*Options)) (*ListAdminsManagingAccountOutput, error) {
 	if params == nil {
 		params = &ListAdminsManagingAccountInput{}
@@ -50,7 +49,7 @@ type ListAdminsManagingAccountInput struct {
 
 type ListAdminsManagingAccountOutput struct {
 
-	// The list of accounts who manage member accounts within their AdminScope .
+	// The list of accounts who manage member accounts within their AdminScope.
 	AdminAccounts []string
 
 	// When you request a list of objects with a MaxResults setting, if the number of
@@ -88,25 +87,25 @@ func (c *Client) addOperationListAdminsManagingAccountMiddlewares(stack *middlew
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -121,10 +120,13 @@ func (c *Client) addOperationListAdminsManagingAccountMiddlewares(stack *middlew
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListAdminsManagingAccount(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

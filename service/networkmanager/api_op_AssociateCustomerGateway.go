@@ -6,22 +6,24 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/networkmanager/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Associates a customer gateway with a device and optionally, with a link. If you
-// specify a link, it must be associated with the specified device. You can only
-// associate customer gateways that are connected to a VPN attachment on a transit
-// gateway or core network registered in your global network. When you register a
-// transit gateway or core network, customer gateways that are connected to the
-// transit gateway are automatically included in the global network. To list
-// customer gateways that are connected to a transit gateway, use the
-// DescribeVpnConnections (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeVpnConnections.html)
-// EC2 API and filter by transit-gateway-id . You cannot associate a customer
-// gateway with more than one device and link.
+// specify a link, it must be associated with the specified device.
+//
+// You can only associate customer gateways that are connected to a VPN attachment
+// on a transit gateway or core network registered in your global network. When you
+// register a transit gateway or core network, customer gateways that are connected
+// to the transit gateway are automatically included in the global network. To list
+// customer gateways that are connected to a transit gateway, use the [DescribeVpnConnections]EC2 API and
+// filter by transit-gateway-id .
+//
+// You cannot associate a customer gateway with more than one device and link.
+//
+// [DescribeVpnConnections]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeVpnConnections.html
 func (c *Client) AssociateCustomerGateway(ctx context.Context, params *AssociateCustomerGatewayInput, optFns ...func(*Options)) (*AssociateCustomerGatewayOutput, error) {
 	if params == nil {
 		params = &AssociateCustomerGatewayInput{}
@@ -93,25 +95,25 @@ func (c *Client) addOperationAssociateCustomerGatewayMiddlewares(stack *middlewa
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -126,13 +128,16 @@ func (c *Client) addOperationAssociateCustomerGatewayMiddlewares(stack *middlewa
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpAssociateCustomerGatewayValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opAssociateCustomerGateway(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

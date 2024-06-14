@@ -6,17 +6,18 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/computeoptimizer/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns Amazon Elastic Block Store (Amazon EBS) volume recommendations. Compute
-// Optimizer generates recommendations for Amazon EBS volumes that meet a specific
-// set of requirements. For more information, see the Supported resources and
-// requirements (https://docs.aws.amazon.com/compute-optimizer/latest/ug/requirements.html)
-// in the Compute Optimizer User Guide.
+// Returns Amazon Elastic Block Store (Amazon EBS) volume recommendations.
+//
+// Compute Optimizer generates recommendations for Amazon EBS volumes that meet a
+// specific set of requirements. For more information, see the [Supported resources and requirements]in the Compute
+// Optimizer User Guide.
+//
+// [Supported resources and requirements]: https://docs.aws.amazon.com/compute-optimizer/latest/ug/requirements.html
 func (c *Client) GetEBSVolumeRecommendations(ctx context.Context, params *GetEBSVolumeRecommendationsInput, optFns ...func(*Options)) (*GetEBSVolumeRecommendationsOutput, error) {
 	if params == nil {
 		params = &GetEBSVolumeRecommendationsInput{}
@@ -35,9 +36,13 @@ func (c *Client) GetEBSVolumeRecommendations(ctx context.Context, params *GetEBS
 type GetEBSVolumeRecommendationsInput struct {
 
 	// The ID of the Amazon Web Services account for which to return volume
-	// recommendations. If your account is the management account of an organization,
-	// use this parameter to specify the member account for which you want to return
-	// volume recommendations. Only one account ID can be specified per request.
+	// recommendations.
+	//
+	// If your account is the management account of an organization, use this
+	// parameter to specify the member account for which you want to return volume
+	// recommendations.
+	//
+	// Only one account ID can be specified per request.
 	AccountIds []string
 
 	// An array of objects to specify a filter that returns a more specific list of
@@ -45,6 +50,7 @@ type GetEBSVolumeRecommendationsInput struct {
 	Filters []types.EBSFilter
 
 	// The maximum number of volume recommendations to return with a single request.
+	//
 	// To retrieve the remaining results, make another request with the returned
 	// nextToken value.
 	MaxResults *int32
@@ -61,12 +67,16 @@ type GetEBSVolumeRecommendationsInput struct {
 
 type GetEBSVolumeRecommendationsOutput struct {
 
-	// An array of objects that describe errors of the request. For example, an error
-	// is returned if you request recommendations for an unsupported volume.
+	// An array of objects that describe errors of the request.
+	//
+	// For example, an error is returned if you request recommendations for an
+	// unsupported volume.
 	Errors []types.GetRecommendationError
 
-	// The token to use to advance to the next page of volume recommendations. This
-	// value is null when there are no more pages of volume recommendations to return.
+	// The token to use to advance to the next page of volume recommendations.
+	//
+	// This value is null when there are no more pages of volume recommendations to
+	// return.
 	NextToken *string
 
 	// An array of objects that describe volume recommendations.
@@ -100,25 +110,25 @@ func (c *Client) addOperationGetEBSVolumeRecommendationsMiddlewares(stack *middl
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -133,10 +143,13 @@ func (c *Client) addOperationGetEBSVolumeRecommendationsMiddlewares(stack *middl
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetEBSVolumeRecommendations(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

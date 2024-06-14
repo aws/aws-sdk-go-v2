@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/cleanrooms/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -46,11 +45,12 @@ type CreateConfiguredAudienceModelAssociationInput struct {
 	// resource being associated is configured for Clean Rooms to manage permissions
 	// related to the given collaboration. When FALSE , indicates that the configured
 	// audience model resource owner will manage permissions related to the given
-	// collaboration. Setting this to TRUE requires you to have permissions to create,
-	// update, and delete the resource policy for the cleanrooms-ml resource when you
-	// call the DeleteConfiguredAudienceModelAssociation resource. In addition, if you
-	// are the collaboration creator and specify TRUE , you must have the same
-	// permissions when you call the DeleteMember and DeleteCollaboration APIs.
+	// collaboration.
+	//
+	// Setting this to TRUE requires you to have permissions to create, update, and
+	// delete the resource policy for the cleanrooms-ml resource when you call the DeleteConfiguredAudienceModelAssociation
+	// resource. In addition, if you are the collaboration creator and specify TRUE ,
+	// you must have the same permissions when you call the DeleteMemberand DeleteCollaboration APIs.
 	//
 	// This member is required.
 	ManageResourcePolicies *bool
@@ -109,25 +109,25 @@ func (c *Client) addOperationCreateConfiguredAudienceModelAssociationMiddlewares
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -142,13 +142,16 @@ func (c *Client) addOperationCreateConfiguredAudienceModelAssociationMiddlewares
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpCreateConfiguredAudienceModelAssociationValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateConfiguredAudienceModelAssociation(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

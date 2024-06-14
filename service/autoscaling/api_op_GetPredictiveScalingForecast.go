@@ -6,22 +6,26 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/autoscaling/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
-// Retrieves the forecast data for a predictive scaling policy. Load forecasts are
-// predictions of the hourly load values using historical load data from CloudWatch
-// and an analysis of historical trends. Capacity forecasts are represented as
-// predicted values for the minimum capacity that is needed on an hourly basis,
-// based on the hourly load forecast. A minimum of 24 hours of data is required to
-// create the initial forecasts. However, having a full 14 days of historical data
-// results in more accurate forecasts. For more information, see Predictive
-// scaling for Amazon EC2 Auto Scaling (https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-predictive-scaling.html)
-// in the Amazon EC2 Auto Scaling User Guide.
+// Retrieves the forecast data for a predictive scaling policy.
+//
+// Load forecasts are predictions of the hourly load values using historical load
+// data from CloudWatch and an analysis of historical trends. Capacity forecasts
+// are represented as predicted values for the minimum capacity that is needed on
+// an hourly basis, based on the hourly load forecast.
+//
+// A minimum of 24 hours of data is required to create the initial forecasts.
+// However, having a full 14 days of historical data results in more accurate
+// forecasts.
+//
+// For more information, see [Predictive scaling for Amazon EC2 Auto Scaling] in the Amazon EC2 Auto Scaling User Guide.
+//
+// [Predictive scaling for Amazon EC2 Auto Scaling]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/ec2-auto-scaling-predictive-scaling.html
 func (c *Client) GetPredictiveScalingForecast(ctx context.Context, params *GetPredictiveScalingForecastInput, optFns ...func(*Options)) (*GetPredictiveScalingForecastOutput, error) {
 	if params == nil {
 		params = &GetPredictiveScalingForecastInput{}
@@ -45,10 +49,11 @@ type GetPredictiveScalingForecastInput struct {
 	AutoScalingGroupName *string
 
 	// The exclusive end time of the time range for the forecast data to get. The
-	// maximum time duration between the start and end time is 30 days. Although this
-	// parameter can accept a date and time that is more than two days in the future,
-	// the availability of forecast data has limits. Amazon EC2 Auto Scaling only
-	// issues forecasts for periods of two days in advance.
+	// maximum time duration between the start and end time is 30 days.
+	//
+	// Although this parameter can accept a date and time that is more than two days
+	// in the future, the availability of forecast data has limits. Amazon EC2 Auto
+	// Scaling only issues forecasts for periods of two days in advance.
 	//
 	// This member is required.
 	EndTime *time.Time
@@ -112,25 +117,25 @@ func (c *Client) addOperationGetPredictiveScalingForecastMiddlewares(stack *midd
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -145,13 +150,16 @@ func (c *Client) addOperationGetPredictiveScalingForecastMiddlewares(stack *midd
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpGetPredictiveScalingForecastValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetPredictiveScalingForecast(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

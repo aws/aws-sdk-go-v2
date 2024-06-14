@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/verifiedpermissions/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -14,21 +13,22 @@ import (
 
 // Makes an authorization decision about a service request described in the
 // parameters. The principal in this request comes from an external identity source
-// in the form of an identity token formatted as a JSON web token (JWT) (https://wikipedia.org/wiki/JSON_Web_Token)
-// . The information in the parameters can also define additional context that
-// Verified Permissions can include in the evaluation. The request is evaluated
-// against all matching policies in the specified policy store. The result of the
-// decision is either Allow or Deny , along with a list of the policies that
-// resulted in the decision. If you specify the identityToken parameter, then this
-// operation derives the principal from that token. You must not also include that
-// principal in the entities parameter or the operation fails and reports a
-// conflict between the two entity sources. If you provide only an accessToken ,
-// then you can include the entity as part of the entities parameter to provide
-// additional attributes. At this time, Verified Permissions accepts tokens from
-// only Amazon Cognito. Verified Permissions validates each token that is specified
-// in a request by checking its expiration date and its signature. If you delete a
-// Amazon Cognito user pool or user, tokens from that deleted pool or that deleted
-// user continue to be usable until they expire.
+// in the form of an identity token formatted as a [JSON web token (JWT)]. The information in the
+// parameters can also define additional context that Verified Permissions can
+// include in the evaluation. The request is evaluated against all matching
+// policies in the specified policy store. The result of the decision is either
+// Allow or Deny , along with a list of the policies that resulted in the decision.
+//
+// At this time, Verified Permissions accepts tokens from only Amazon Cognito.
+//
+// Verified Permissions validates each token that is specified in a request by
+// checking its expiration date and its signature.
+//
+// Tokens from an identity source user continue to be usable until they expire.
+// Token revocation and resource deletion have no effect on the validity of a token
+// in your policy store
+//
+// [JSON web token (JWT)]: https://wikipedia.org/wiki/JSON_Web_Token
 func (c *Client) IsAuthorizedWithToken(ctx context.Context, params *IsAuthorizedWithTokenInput, optFns ...func(*Options)) (*IsAuthorizedWithTokenOutput, error) {
 	if params == nil {
 		params = &IsAuthorizedWithTokenInput{}
@@ -54,8 +54,11 @@ type IsAuthorizedWithTokenInput struct {
 
 	// Specifies an access token for the principal to be authorized. This token is
 	// provided to you by the identity provider (IdP) associated with the specified
-	// identity source. You must specify either an AccessToken , or an IdentityToken ,
-	// or both.
+	// identity source. You must specify either an accessToken , an identityToken , or
+	// both.
+	//
+	// Must be an access token. Verified Permissions returns an error if the token_use
+	// claim in the submitted token isn't access .
 	AccessToken *string
 
 	// Specifies the requested action to be authorized. Is the specified principal
@@ -67,17 +70,25 @@ type IsAuthorizedWithTokenInput struct {
 	Context types.ContextDefinition
 
 	// Specifies the list of resources and their associated attributes that Verified
-	// Permissions can examine when evaluating the policies. You can include only
-	// resource and action entities in this parameter; you can't include principals.
+	// Permissions can examine when evaluating the policies.
+	//
+	// You can't include principals in this parameter, only resource and action
+	// entities. This parameter can't include any entities of a type that matches the
+	// user or group entity types that you defined in your identity source.
+	//
 	//   - The IsAuthorizedWithToken operation takes principal attributes from only the
 	//   identityToken or accessToken passed to the operation.
+	//
 	//   - For action entities, you can include only their Identifier and EntityType .
 	Entities types.EntitiesDefinition
 
 	// Specifies an identity token for the principal to be authorized. This token is
 	// provided to you by the identity provider (IdP) associated with the specified
-	// identity source. You must specify either an AccessToken or an IdentityToken , or
+	// identity source. You must specify either an accessToken , an identityToken , or
 	// both.
+	//
+	// Must be an ID token. Verified Permissions returns an error if the token_use
+	// claim in the submitted token isn't id .
 	IdentityToken *string
 
 	// Specifies the resource for which the authorization decision is made. For
@@ -112,6 +123,9 @@ type IsAuthorizedWithTokenOutput struct {
 	// This member is required.
 	Errors []types.EvaluationErrorItem
 
+	// The identifier of the principal in the ID or access token.
+	Principal *types.EntityIdentifier
+
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
 
@@ -140,25 +154,25 @@ func (c *Client) addOperationIsAuthorizedWithTokenMiddlewares(stack *middleware.
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -173,13 +187,16 @@ func (c *Client) addOperationIsAuthorizedWithTokenMiddlewares(stack *middleware.
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpIsAuthorizedWithTokenValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opIsAuthorizedWithToken(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

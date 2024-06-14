@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -29,15 +28,15 @@ func (c *Client) GetListElements(ctx context.Context, params *GetListElementsInp
 
 type GetListElementsInput struct {
 
-	// The name of the list.
+	//  The name of the list.
 	//
 	// This member is required.
 	Name *string
 
-	// The maximum number of objects to return for the request.
+	//  The maximum number of objects to return for the request.
 	MaxResults *int32
 
-	// The next token for the subsequent request.
+	//  The next token for the subsequent request.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -45,10 +44,10 @@ type GetListElementsInput struct {
 
 type GetListElementsOutput struct {
 
-	// The list elements.
+	//  The list elements.
 	Elements []string
 
-	// The next page token.
+	//  The next page token.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -79,25 +78,25 @@ func (c *Client) addOperationGetListElementsMiddlewares(stack *middleware.Stack,
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -112,13 +111,16 @@ func (c *Client) addOperationGetListElementsMiddlewares(stack *middleware.Stack,
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpGetListElementsValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetListElements(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -146,7 +148,7 @@ var _ GetListElementsAPIClient = (*Client)(nil)
 
 // GetListElementsPaginatorOptions is the paginator options for GetListElements
 type GetListElementsPaginatorOptions struct {
-	// The maximum number of objects to return for the request.
+	//  The maximum number of objects to return for the request.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

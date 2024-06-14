@@ -6,17 +6,18 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/quicksight/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Provides a detailed description of the definition of an analysis. If you do not
-// need to know details about the content of an Analysis, for instance if you are
-// trying to check the status of a recently created or updated Analysis, use the
-// DescribeAnalysis (https://docs.aws.amazon.com/quicksight/latest/APIReference/API_DescribeAnalysis.html)
-// instead.
+// Provides a detailed description of the definition of an analysis.
+//
+// If you do not need to know details about the content of an Analysis, for
+// instance if you are trying to check the status of a recently created or updated
+// Analysis, use the [DescribeAnalysis]DescribeAnalysis instead.
+//
+// [DescribeAnalysis]: https://docs.aws.amazon.com/quicksight/latest/APIReference/API_DescribeAnalysis.html
 func (c *Client) DescribeAnalysisDefinition(ctx context.Context, params *DescribeAnalysisDefinitionInput, optFns ...func(*Options)) (*DescribeAnalysisDefinitionOutput, error) {
 	if params == nil {
 		params = &DescribeAnalysisDefinitionInput{}
@@ -54,8 +55,10 @@ type DescribeAnalysisDefinitionOutput struct {
 	// The ID of the analysis described.
 	AnalysisId *string
 
-	// The definition of an analysis. A definition is the data model of all features
-	// in a Dashboard, Template, or Analysis.
+	// The definition of an analysis.
+	//
+	// A definition is the data model of all features in a Dashboard, Template, or
+	// Analysis.
 	Definition *types.AnalysisDefinition
 
 	// Errors associated with the analysis.
@@ -68,12 +71,19 @@ type DescribeAnalysisDefinitionOutput struct {
 	RequestId *string
 
 	// Status associated with the analysis.
+	//
 	//   - CREATION_IN_PROGRESS
+	//
 	//   - CREATION_SUCCESSFUL
+	//
 	//   - CREATION_FAILED
+	//
 	//   - UPDATE_IN_PROGRESS
+	//
 	//   - UPDATE_SUCCESSFUL
+	//
 	//   - UPDATE_FAILED
+	//
 	//   - DELETED
 	ResourceStatus types.ResourceStatus
 
@@ -111,25 +121,25 @@ func (c *Client) addOperationDescribeAnalysisDefinitionMiddlewares(stack *middle
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -144,13 +154,16 @@ func (c *Client) addOperationDescribeAnalysisDefinitionMiddlewares(stack *middle
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDescribeAnalysisDefinitionValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeAnalysisDefinition(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/cloudfront/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -15,13 +14,18 @@ import (
 // Updates a continuous deployment policy. You can update a continuous deployment
 // policy to enable or disable it, to change the percentage of traffic that it
 // sends to the staging distribution, or to change the staging distribution that it
-// sends traffic to. When you update a continuous deployment policy configuration,
-// all the fields are updated with the values that are provided in the request. You
-// cannot update some fields independent of others. To update a continuous
-// deployment policy configuration:
+// sends traffic to.
+//
+// When you update a continuous deployment policy configuration, all the fields
+// are updated with the values that are provided in the request. You cannot update
+// some fields independent of others. To update a continuous deployment policy
+// configuration:
+//
 //   - Use GetContinuousDeploymentPolicyConfig to get the current configuration.
+//
 //   - Locally modify the fields in the continuous deployment policy configuration
 //     that you want to update.
+//
 //   - Use UpdateContinuousDeploymentPolicy , providing the entire continuous
 //     deployment policy configuration, including the fields that you modified and
 //     those that you didn't.
@@ -96,25 +100,25 @@ func (c *Client) addOperationUpdateContinuousDeploymentPolicyMiddlewares(stack *
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -129,13 +133,16 @@ func (c *Client) addOperationUpdateContinuousDeploymentPolicyMiddlewares(stack *
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpUpdateContinuousDeploymentPolicyValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateContinuousDeploymentPolicy(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

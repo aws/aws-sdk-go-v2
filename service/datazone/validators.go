@@ -50,6 +50,46 @@ func (m *validateOpAcceptSubscriptionRequest) HandleInitialize(ctx context.Conte
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpAssociateEnvironmentRole struct {
+}
+
+func (*validateOpAssociateEnvironmentRole) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpAssociateEnvironmentRole) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*AssociateEnvironmentRoleInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpAssociateEnvironmentRoleInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpCancelMetadataGenerationRun struct {
+}
+
+func (*validateOpCancelMetadataGenerationRun) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCancelMetadataGenerationRun) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CancelMetadataGenerationRunInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCancelMetadataGenerationRunInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCancelSubscription struct {
 }
 
@@ -165,6 +205,26 @@ func (m *validateOpCreateDomain) HandleInitialize(ctx context.Context, in middle
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpCreateDomainInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpCreateEnvironmentAction struct {
+}
+
+func (*validateOpCreateEnvironmentAction) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateEnvironmentAction) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateEnvironmentActionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateEnvironmentActionInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -510,6 +570,26 @@ func (m *validateOpDeleteDomain) HandleInitialize(ctx context.Context, in middle
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDeleteEnvironmentAction struct {
+}
+
+func (*validateOpDeleteEnvironmentAction) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteEnvironmentAction) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteEnvironmentActionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteEnvironmentActionInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDeleteEnvironmentBlueprintConfiguration struct {
 }
 
@@ -750,6 +830,46 @@ func (m *validateOpDeleteSubscriptionTarget) HandleInitialize(ctx context.Contex
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDeleteTimeSeriesDataPoints struct {
+}
+
+func (*validateOpDeleteTimeSeriesDataPoints) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteTimeSeriesDataPoints) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteTimeSeriesDataPointsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteTimeSeriesDataPointsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDisassociateEnvironmentRole struct {
+}
+
+func (*validateOpDisassociateEnvironmentRole) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDisassociateEnvironmentRole) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DisassociateEnvironmentRoleInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDisassociateEnvironmentRoleInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetAsset struct {
 }
 
@@ -845,6 +965,26 @@ func (m *validateOpGetDomain) HandleInitialize(ctx context.Context, in middlewar
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpGetDomainInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetEnvironmentAction struct {
+}
+
+func (*validateOpGetEnvironmentAction) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetEnvironmentAction) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetEnvironmentActionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetEnvironmentActionInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -1050,6 +1190,26 @@ func (m *validateOpGetListing) HandleInitialize(ctx context.Context, in middlewa
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetMetadataGenerationRun struct {
+}
+
+func (*validateOpGetMetadataGenerationRun) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetMetadataGenerationRun) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetMetadataGenerationRunInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetMetadataGenerationRunInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetProject struct {
 }
 
@@ -1145,6 +1305,26 @@ func (m *validateOpGetSubscriptionTarget) HandleInitialize(ctx context.Context, 
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpGetSubscriptionTargetInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetTimeSeriesDataPoint struct {
+}
+
+func (*validateOpGetTimeSeriesDataPoint) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetTimeSeriesDataPoint) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetTimeSeriesDataPointInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetTimeSeriesDataPointInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -1250,6 +1430,26 @@ func (m *validateOpListDataSources) HandleInitialize(ctx context.Context, in mid
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpListEnvironmentActions struct {
+}
+
+func (*validateOpListEnvironmentActions) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListEnvironmentActions) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListEnvironmentActionsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListEnvironmentActionsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpListEnvironmentBlueprintConfigurations struct {
 }
 
@@ -1325,6 +1525,26 @@ func (m *validateOpListEnvironments) HandleInitialize(ctx context.Context, in mi
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpListEnvironmentsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListMetadataGenerationRuns struct {
+}
+
+func (*validateOpListMetadataGenerationRuns) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListMetadataGenerationRuns) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListMetadataGenerationRunsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListMetadataGenerationRunsInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -1485,6 +1705,46 @@ func (m *validateOpListTagsForResource) HandleInitialize(ctx context.Context, in
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpListTagsForResourceInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListTimeSeriesDataPoints struct {
+}
+
+func (*validateOpListTimeSeriesDataPoints) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListTimeSeriesDataPoints) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListTimeSeriesDataPointsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListTimeSeriesDataPointsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpPostTimeSeriesDataPoints struct {
+}
+
+func (*validateOpPostTimeSeriesDataPoints) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpPostTimeSeriesDataPoints) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*PostTimeSeriesDataPointsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpPostTimeSeriesDataPointsInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -1690,6 +1950,26 @@ func (m *validateOpStartDataSourceRun) HandleInitialize(ctx context.Context, in 
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpStartMetadataGenerationRun struct {
+}
+
+func (*validateOpStartMetadataGenerationRun) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpStartMetadataGenerationRun) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*StartMetadataGenerationRunInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpStartMetadataGenerationRunInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpTagResource struct {
 }
 
@@ -1765,6 +2045,26 @@ func (m *validateOpUpdateDomain) HandleInitialize(ctx context.Context, in middle
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpUpdateDomainInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpUpdateEnvironmentAction struct {
+}
+
+func (*validateOpUpdateEnvironmentAction) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateEnvironmentAction) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateEnvironmentActionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateEnvironmentActionInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -1978,6 +2278,14 @@ func addOpAcceptSubscriptionRequestValidationMiddleware(stack *middleware.Stack)
 	return stack.Initialize.Add(&validateOpAcceptSubscriptionRequest{}, middleware.After)
 }
 
+func addOpAssociateEnvironmentRoleValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpAssociateEnvironmentRole{}, middleware.After)
+}
+
+func addOpCancelMetadataGenerationRunValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCancelMetadataGenerationRun{}, middleware.After)
+}
+
 func addOpCancelSubscriptionValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCancelSubscription{}, middleware.After)
 }
@@ -2000,6 +2308,10 @@ func addOpCreateDataSourceValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpCreateDomainValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateDomain{}, middleware.After)
+}
+
+func addOpCreateEnvironmentActionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateEnvironmentAction{}, middleware.After)
 }
 
 func addOpCreateEnvironmentValidationMiddleware(stack *middleware.Stack) error {
@@ -2070,6 +2382,10 @@ func addOpDeleteDomainValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteDomain{}, middleware.After)
 }
 
+func addOpDeleteEnvironmentActionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteEnvironmentAction{}, middleware.After)
+}
+
 func addOpDeleteEnvironmentBlueprintConfigurationValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteEnvironmentBlueprintConfiguration{}, middleware.After)
 }
@@ -2118,6 +2434,14 @@ func addOpDeleteSubscriptionTargetValidationMiddleware(stack *middleware.Stack) 
 	return stack.Initialize.Add(&validateOpDeleteSubscriptionTarget{}, middleware.After)
 }
 
+func addOpDeleteTimeSeriesDataPointsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteTimeSeriesDataPoints{}, middleware.After)
+}
+
+func addOpDisassociateEnvironmentRoleValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDisassociateEnvironmentRole{}, middleware.After)
+}
+
 func addOpGetAssetValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetAsset{}, middleware.After)
 }
@@ -2136,6 +2460,10 @@ func addOpGetDataSourceRunValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpGetDomainValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetDomain{}, middleware.After)
+}
+
+func addOpGetEnvironmentActionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetEnvironmentAction{}, middleware.After)
 }
 
 func addOpGetEnvironmentBlueprintConfigurationValidationMiddleware(stack *middleware.Stack) error {
@@ -2178,6 +2506,10 @@ func addOpGetListingValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetListing{}, middleware.After)
 }
 
+func addOpGetMetadataGenerationRunValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetMetadataGenerationRun{}, middleware.After)
+}
+
 func addOpGetProjectValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetProject{}, middleware.After)
 }
@@ -2196,6 +2528,10 @@ func addOpGetSubscriptionRequestDetailsValidationMiddleware(stack *middleware.St
 
 func addOpGetSubscriptionTargetValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetSubscriptionTarget{}, middleware.After)
+}
+
+func addOpGetTimeSeriesDataPointValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetTimeSeriesDataPoint{}, middleware.After)
 }
 
 func addOpGetUserProfileValidationMiddleware(stack *middleware.Stack) error {
@@ -2218,6 +2554,10 @@ func addOpListDataSourcesValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListDataSources{}, middleware.After)
 }
 
+func addOpListEnvironmentActionsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListEnvironmentActions{}, middleware.After)
+}
+
 func addOpListEnvironmentBlueprintConfigurationsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListEnvironmentBlueprintConfigurations{}, middleware.After)
 }
@@ -2232,6 +2572,10 @@ func addOpListEnvironmentProfilesValidationMiddleware(stack *middleware.Stack) e
 
 func addOpListEnvironmentsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListEnvironments{}, middleware.After)
+}
+
+func addOpListMetadataGenerationRunsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListMetadataGenerationRuns{}, middleware.After)
 }
 
 func addOpListNotificationsValidationMiddleware(stack *middleware.Stack) error {
@@ -2264,6 +2608,14 @@ func addOpListSubscriptionTargetsValidationMiddleware(stack *middleware.Stack) e
 
 func addOpListTagsForResourceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListTagsForResource{}, middleware.After)
+}
+
+func addOpListTimeSeriesDataPointsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListTimeSeriesDataPoints{}, middleware.After)
+}
+
+func addOpPostTimeSeriesDataPointsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpPostTimeSeriesDataPoints{}, middleware.After)
 }
 
 func addOpPutEnvironmentBlueprintConfigurationValidationMiddleware(stack *middleware.Stack) error {
@@ -2306,6 +2658,10 @@ func addOpStartDataSourceRunValidationMiddleware(stack *middleware.Stack) error 
 	return stack.Initialize.Add(&validateOpStartDataSourceRun{}, middleware.After)
 }
 
+func addOpStartMetadataGenerationRunValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpStartMetadataGenerationRun{}, middleware.After)
+}
+
 func addOpTagResourceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpTagResource{}, middleware.After)
 }
@@ -2320,6 +2676,10 @@ func addOpUpdateDataSourceValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpUpdateDomainValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateDomain{}, middleware.After)
+}
+
+func addOpUpdateEnvironmentActionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateEnvironmentAction{}, middleware.After)
 }
 
 func addOpUpdateEnvironmentValidationMiddleware(stack *middleware.Stack) error {
@@ -2360,6 +2720,38 @@ func addOpUpdateSubscriptionTargetValidationMiddleware(stack *middleware.Stack) 
 
 func addOpUpdateUserProfileValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateUserProfile{}, middleware.After)
+}
+
+func validateAcceptChoice(v *types.AcceptChoice) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AcceptChoice"}
+	if v.PredictionTarget == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PredictionTarget"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAcceptChoices(v []types.AcceptChoice) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AcceptChoices"}
+	for i := range v {
+		if err := validateAcceptChoice(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
 }
 
 func validateAssetTargetNameMap(v *types.AssetTargetNameMap) error {
@@ -2644,6 +3036,24 @@ func validateListingRevisionInput(v *types.ListingRevisionInput) error {
 	}
 }
 
+func validateMetadataGenerationRunTarget(v *types.MetadataGenerationRunTarget) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "MetadataGenerationRunTarget"}
+	if len(v.Type) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Type"))
+	}
+	if v.Identifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Identifier"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateRedshiftClusterStorage(v *types.RedshiftClusterStorage) error {
 	if v == nil {
 		return nil
@@ -2738,6 +3148,38 @@ func validateRedshiftStorage(v types.RedshiftStorage) error {
 			invalidParams.AddNested("[redshiftServerlessSource]", err.(smithy.InvalidParamsError))
 		}
 
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateRejectChoice(v *types.RejectChoice) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RejectChoice"}
+	if v.PredictionTarget == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PredictionTarget"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateRejectChoices(v []types.RejectChoice) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RejectChoices"}
+	for i := range v {
+		if err := validateRejectChoice(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2897,6 +3339,44 @@ func validateSubscriptionTargetForms(v []types.SubscriptionTargetForm) error {
 	}
 }
 
+func validateTimeSeriesDataPointFormInput(v *types.TimeSeriesDataPointFormInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "TimeSeriesDataPointFormInput"}
+	if v.FormName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FormName"))
+	}
+	if v.TypeIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TypeIdentifier"))
+	}
+	if v.Timestamp == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Timestamp"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateTimeSeriesDataPointFormInputList(v []types.TimeSeriesDataPointFormInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "TimeSeriesDataPointFormInputList"}
+	for i := range v {
+		if err := validateTimeSeriesDataPointFormInput(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpAcceptPredictionsInput(v *AcceptPredictionsInput) error {
 	if v == nil {
 		return nil
@@ -2907,6 +3387,11 @@ func validateOpAcceptPredictionsInput(v *AcceptPredictionsInput) error {
 	}
 	if v.Identifier == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Identifier"))
+	}
+	if v.AcceptChoices != nil {
+		if err := validateAcceptChoices(v.AcceptChoices); err != nil {
+			invalidParams.AddNested("AcceptChoices", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2920,6 +3405,45 @@ func validateOpAcceptSubscriptionRequestInput(v *AcceptSubscriptionRequestInput)
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "AcceptSubscriptionRequestInput"}
+	if v.DomainIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DomainIdentifier"))
+	}
+	if v.Identifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Identifier"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpAssociateEnvironmentRoleInput(v *AssociateEnvironmentRoleInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AssociateEnvironmentRoleInput"}
+	if v.DomainIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DomainIdentifier"))
+	}
+	if v.EnvironmentIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EnvironmentIdentifier"))
+	}
+	if v.EnvironmentRoleArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EnvironmentRoleArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCancelMetadataGenerationRunInput(v *CancelMetadataGenerationRunInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CancelMetadataGenerationRunInput"}
 	if v.DomainIdentifier == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DomainIdentifier"))
 	}
@@ -3081,6 +3605,30 @@ func validateOpCreateDomainInput(v *CreateDomainInput) error {
 	}
 	if v.DomainExecutionRole == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DomainExecutionRole"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateEnvironmentActionInput(v *CreateEnvironmentActionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateEnvironmentActionInput"}
+	if v.DomainIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DomainIdentifier"))
+	}
+	if v.EnvironmentIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EnvironmentIdentifier"))
+	}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.Parameters == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Parameters"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3475,6 +4023,27 @@ func validateOpDeleteDomainInput(v *DeleteDomainInput) error {
 	}
 }
 
+func validateOpDeleteEnvironmentActionInput(v *DeleteEnvironmentActionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteEnvironmentActionInput"}
+	if v.DomainIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DomainIdentifier"))
+	}
+	if v.EnvironmentIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EnvironmentIdentifier"))
+	}
+	if v.Identifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Identifier"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDeleteEnvironmentBlueprintConfigurationInput(v *DeleteEnvironmentBlueprintConfigurationInput) error {
 	if v == nil {
 		return nil
@@ -3697,6 +4266,51 @@ func validateOpDeleteSubscriptionTargetInput(v *DeleteSubscriptionTargetInput) e
 	}
 }
 
+func validateOpDeleteTimeSeriesDataPointsInput(v *DeleteTimeSeriesDataPointsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteTimeSeriesDataPointsInput"}
+	if v.DomainIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DomainIdentifier"))
+	}
+	if v.EntityIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EntityIdentifier"))
+	}
+	if len(v.EntityType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("EntityType"))
+	}
+	if v.FormName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FormName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDisassociateEnvironmentRoleInput(v *DisassociateEnvironmentRoleInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DisassociateEnvironmentRoleInput"}
+	if v.DomainIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DomainIdentifier"))
+	}
+	if v.EnvironmentIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EnvironmentIdentifier"))
+	}
+	if v.EnvironmentRoleArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EnvironmentRoleArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpGetAssetInput(v *GetAssetInput) error {
 	if v == nil {
 		return nil
@@ -3774,6 +4388,27 @@ func validateOpGetDomainInput(v *GetDomainInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "GetDomainInput"}
+	if v.Identifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Identifier"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetEnvironmentActionInput(v *GetEnvironmentActionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetEnvironmentActionInput"}
+	if v.DomainIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DomainIdentifier"))
+	}
+	if v.EnvironmentIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EnvironmentIdentifier"))
+	}
 	if v.Identifier == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Identifier"))
 	}
@@ -3961,6 +4596,24 @@ func validateOpGetListingInput(v *GetListingInput) error {
 	}
 }
 
+func validateOpGetMetadataGenerationRunInput(v *GetMetadataGenerationRunInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetMetadataGenerationRunInput"}
+	if v.DomainIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DomainIdentifier"))
+	}
+	if v.Identifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Identifier"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpGetProjectInput(v *GetProjectInput) error {
 	if v == nil {
 		return nil
@@ -4046,6 +4699,33 @@ func validateOpGetSubscriptionTargetInput(v *GetSubscriptionTargetInput) error {
 	}
 	if v.Identifier == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Identifier"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetTimeSeriesDataPointInput(v *GetTimeSeriesDataPointInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetTimeSeriesDataPointInput"}
+	if v.DomainIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DomainIdentifier"))
+	}
+	if v.EntityIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EntityIdentifier"))
+	}
+	if len(v.EntityType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("EntityType"))
+	}
+	if v.Identifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Identifier"))
+	}
+	if v.FormName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FormName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -4144,6 +4824,24 @@ func validateOpListDataSourcesInput(v *ListDataSourcesInput) error {
 	}
 }
 
+func validateOpListEnvironmentActionsInput(v *ListEnvironmentActionsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListEnvironmentActionsInput"}
+	if v.DomainIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DomainIdentifier"))
+	}
+	if v.EnvironmentIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EnvironmentIdentifier"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpListEnvironmentBlueprintConfigurationsInput(v *ListEnvironmentBlueprintConfigurationsInput) error {
 	if v == nil {
 		return nil
@@ -4199,6 +4897,21 @@ func validateOpListEnvironmentsInput(v *ListEnvironmentsInput) error {
 	}
 	if v.ProjectIdentifier == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ProjectIdentifier"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListMetadataGenerationRunsInput(v *ListMetadataGenerationRunsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListMetadataGenerationRunsInput"}
+	if v.DomainIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DomainIdentifier"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -4336,6 +5049,58 @@ func validateOpListTagsForResourceInput(v *ListTagsForResourceInput) error {
 	}
 }
 
+func validateOpListTimeSeriesDataPointsInput(v *ListTimeSeriesDataPointsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListTimeSeriesDataPointsInput"}
+	if v.DomainIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DomainIdentifier"))
+	}
+	if v.EntityIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EntityIdentifier"))
+	}
+	if len(v.EntityType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("EntityType"))
+	}
+	if v.FormName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FormName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpPostTimeSeriesDataPointsInput(v *PostTimeSeriesDataPointsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PostTimeSeriesDataPointsInput"}
+	if v.DomainIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DomainIdentifier"))
+	}
+	if v.EntityIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EntityIdentifier"))
+	}
+	if len(v.EntityType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("EntityType"))
+	}
+	if v.Forms == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Forms"))
+	} else if v.Forms != nil {
+		if err := validateTimeSeriesDataPointFormInputList(v.Forms); err != nil {
+			invalidParams.AddNested("Forms", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpPutEnvironmentBlueprintConfigurationInput(v *PutEnvironmentBlueprintConfigurationInput) error {
 	if v == nil {
 		return nil
@@ -4367,6 +5132,11 @@ func validateOpRejectPredictionsInput(v *RejectPredictionsInput) error {
 	}
 	if v.Identifier == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Identifier"))
+	}
+	if v.RejectChoices != nil {
+		if err := validateRejectChoices(v.RejectChoices); err != nil {
+			invalidParams.AddNested("RejectChoices", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -4564,6 +5334,34 @@ func validateOpStartDataSourceRunInput(v *StartDataSourceRunInput) error {
 	}
 }
 
+func validateOpStartMetadataGenerationRunInput(v *StartMetadataGenerationRunInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StartMetadataGenerationRunInput"}
+	if v.DomainIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DomainIdentifier"))
+	}
+	if len(v.Type) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Type"))
+	}
+	if v.Target == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Target"))
+	} else if v.Target != nil {
+		if err := validateMetadataGenerationRunTarget(v.Target); err != nil {
+			invalidParams.AddNested("Target", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.OwningProjectIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("OwningProjectIdentifier"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpTagResourceInput(v *TagResourceInput) error {
 	if v == nil {
 		return nil
@@ -4633,6 +5431,27 @@ func validateOpUpdateDomainInput(v *UpdateDomainInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateDomainInput"}
+	if v.Identifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Identifier"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateEnvironmentActionInput(v *UpdateEnvironmentActionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateEnvironmentActionInput"}
+	if v.DomainIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DomainIdentifier"))
+	}
+	if v.EnvironmentIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EnvironmentIdentifier"))
+	}
 	if v.Identifier == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Identifier"))
 	}

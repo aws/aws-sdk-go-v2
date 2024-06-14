@@ -659,7 +659,7 @@ func (m *awsRestxml_serializeOpEndpointWithHostLabelOperation) HandleSerialize(c
 	rootAttr := []smithyxml.Attr{}
 	root := smithyxml.StartElement{
 		Name: smithyxml.Name{
-			Local: "HostLabelInput",
+			Local: "EndpointWithHostLabelOperationRequest",
 		},
 		Attr: rootAttr,
 	}
@@ -744,7 +744,7 @@ func (m *awsRestxml_serializeOpFlattenedXmlMap) HandleSerialize(ctx context.Cont
 	rootAttr := []smithyxml.Attr{}
 	root := smithyxml.StartElement{
 		Name: smithyxml.Name{
-			Local: "FlattenedXmlMapInputOutput",
+			Local: "FlattenedXmlMapRequest",
 		},
 		Attr: rootAttr,
 	}
@@ -831,7 +831,7 @@ func (m *awsRestxml_serializeOpFlattenedXmlMapWithXmlName) HandleSerialize(ctx c
 	rootAttr := []smithyxml.Attr{}
 	root := smithyxml.StartElement{
 		Name: smithyxml.Name{
-			Local: "FlattenedXmlMapWithXmlNameInputOutput",
+			Local: "FlattenedXmlMapWithXmlNameRequest",
 		},
 		Attr: rootAttr,
 	}
@@ -2544,7 +2544,7 @@ func (m *awsRestxml_serializeOpNestedXmlMaps) HandleSerialize(ctx context.Contex
 	rootAttr := []smithyxml.Attr{}
 	root := smithyxml.StartElement{
 		Name: smithyxml.Name{
-			Local: "NestedXmlMapsInputOutput",
+			Local: "NestedXmlMapsRequest",
 		},
 		Attr: rootAttr,
 	}
@@ -3266,7 +3266,7 @@ func (m *awsRestxml_serializeOpRecursiveShapes) HandleSerialize(ctx context.Cont
 	rootAttr := []smithyxml.Attr{}
 	root := smithyxml.StartElement{
 		Name: smithyxml.Name{
-			Local: "RecursiveShapesInputOutput",
+			Local: "RecursiveShapesRequest",
 		},
 		Attr: rootAttr,
 	}
@@ -3357,7 +3357,7 @@ func (m *awsRestxml_serializeOpSimpleScalarProperties) HandleSerialize(ctx conte
 	rootAttr := []smithyxml.Attr{}
 	root := smithyxml.StartElement{
 		Name: smithyxml.Name{
-			Local: "SimpleScalarPropertiesInputOutput",
+			Local: "SimpleScalarPropertiesRequest",
 		},
 		Attr: rootAttr,
 	}
@@ -3657,7 +3657,7 @@ func (m *awsRestxml_serializeOpXmlAttributes) HandleSerialize(ctx context.Contex
 	}
 	root := smithyxml.StartElement{
 		Name: smithyxml.Name{
-			Local: "XmlAttributesInputOutput",
+			Local: "XmlAttributesRequest",
 		},
 		Attr: rootAttr,
 	}
@@ -3751,11 +3751,11 @@ func (m *awsRestxml_serializeOpXmlAttributesOnPayload) HandleSerialize(ctx conte
 		}
 		payloadRoot := smithyxml.StartElement{
 			Name: smithyxml.Name{
-				Local: "XmlAttributesInputOutput",
+				Local: "XmlAttributesPayloadRequest",
 			},
 			Attr: payloadRootAttr,
 		}
-		if err := awsRestxml_serializeDocumentXmlAttributesInputOutput(input.Payload, xmlEncoder.RootElement(payloadRoot)); err != nil {
+		if err := awsRestxml_serializeDocumentXmlAttributesPayloadRequest(input.Payload, xmlEncoder.RootElement(payloadRoot)); err != nil {
 			return out, metadata, &smithy.SerializationError{Err: err}
 		}
 		payload := bytes.NewReader(xmlEncoder.Bytes())
@@ -3822,7 +3822,7 @@ func (m *awsRestxml_serializeOpXmlBlobs) HandleSerialize(ctx context.Context, in
 	rootAttr := []smithyxml.Attr{}
 	root := smithyxml.StartElement{
 		Name: smithyxml.Name{
-			Local: "XmlBlobsInputOutput",
+			Local: "XmlBlobsRequest",
 		},
 		Attr: rootAttr,
 	}
@@ -3907,7 +3907,7 @@ func (m *awsRestxml_serializeOpXmlEmptyBlobs) HandleSerialize(ctx context.Contex
 	rootAttr := []smithyxml.Attr{}
 	root := smithyxml.StartElement{
 		Name: smithyxml.Name{
-			Local: "XmlBlobsInputOutput",
+			Local: "XmlEmptyBlobsRequest",
 		},
 		Attr: rootAttr,
 	}
@@ -3992,7 +3992,7 @@ func (m *awsRestxml_serializeOpXmlEmptyLists) HandleSerialize(ctx context.Contex
 	rootAttr := []smithyxml.Attr{}
 	root := smithyxml.StartElement{
 		Name: smithyxml.Name{
-			Local: "XmlListsInputOutput",
+			Local: "XmlEmptyListsRequest",
 		},
 		Attr: rootAttr,
 	}
@@ -4261,7 +4261,7 @@ func (m *awsRestxml_serializeOpXmlEmptyMaps) HandleSerialize(ctx context.Context
 	rootAttr := []smithyxml.Attr{}
 	root := smithyxml.StartElement{
 		Name: smithyxml.Name{
-			Local: "XmlMapsInputOutput",
+			Local: "XmlEmptyMapsRequest",
 		},
 		Attr: rootAttr,
 	}
@@ -4348,7 +4348,7 @@ func (m *awsRestxml_serializeOpXmlEmptyStrings) HandleSerialize(ctx context.Cont
 	rootAttr := []smithyxml.Attr{}
 	root := smithyxml.StartElement{
 		Name: smithyxml.Name{
-			Local: "XmlEmptyStringsInputOutput",
+			Local: "XmlEmptyStringsRequest",
 		},
 		Attr: rootAttr,
 	}
@@ -4433,7 +4433,7 @@ func (m *awsRestxml_serializeOpXmlEnums) HandleSerialize(ctx context.Context, in
 	rootAttr := []smithyxml.Attr{}
 	root := smithyxml.StartElement{
 		Name: smithyxml.Name{
-			Local: "XmlEnumsInputOutput",
+			Local: "XmlEnumsRequest",
 		},
 		Attr: rootAttr,
 	}
@@ -4579,7 +4579,7 @@ func (m *awsRestxml_serializeOpXmlIntEnums) HandleSerialize(ctx context.Context,
 	rootAttr := []smithyxml.Attr{}
 	root := smithyxml.StartElement{
 		Name: smithyxml.Name{
-			Local: "XmlIntEnumsInputOutput",
+			Local: "XmlIntEnumsRequest",
 		},
 		Attr: rootAttr,
 	}
@@ -4725,7 +4725,7 @@ func (m *awsRestxml_serializeOpXmlLists) HandleSerialize(ctx context.Context, in
 	rootAttr := []smithyxml.Attr{}
 	root := smithyxml.StartElement{
 		Name: smithyxml.Name{
-			Local: "XmlListsInputOutput",
+			Local: "XmlListsRequest",
 		},
 		Attr: rootAttr,
 	}
@@ -4994,7 +4994,7 @@ func (m *awsRestxml_serializeOpXmlMaps) HandleSerialize(ctx context.Context, in 
 	rootAttr := []smithyxml.Attr{}
 	root := smithyxml.StartElement{
 		Name: smithyxml.Name{
-			Local: "XmlMapsInputOutput",
+			Local: "XmlMapsRequest",
 		},
 		Attr: rootAttr,
 	}
@@ -5081,7 +5081,7 @@ func (m *awsRestxml_serializeOpXmlMapsXmlName) HandleSerialize(ctx context.Conte
 	rootAttr := []smithyxml.Attr{}
 	root := smithyxml.StartElement{
 		Name: smithyxml.Name{
-			Local: "XmlMapsXmlNameInputOutput",
+			Local: "XmlMapsXmlNameRequest",
 		},
 		Attr: rootAttr,
 	}
@@ -5168,7 +5168,7 @@ func (m *awsRestxml_serializeOpXmlMapWithXmlNamespace) HandleSerialize(ctx conte
 	rootAttr := []smithyxml.Attr{}
 	root := smithyxml.StartElement{
 		Name: smithyxml.Name{
-			Local: "XmlMapWithXmlNamespaceInputOutput",
+			Local: "XmlMapWithXmlNamespaceRequest",
 		},
 		Attr: rootAttr,
 	}
@@ -5257,7 +5257,7 @@ func (m *awsRestxml_serializeOpXmlNamespaces) HandleSerialize(ctx context.Contex
 	rootAttr = append(rootAttr, smithyxml.NewNamespaceAttribute("", "http://foo.com"))
 	root := smithyxml.StartElement{
 		Name: smithyxml.Name{
-			Local: "XmlNamespacesInputOutput",
+			Local: "XmlNamespacesRequest",
 		},
 		Attr: rootAttr,
 	}
@@ -5344,7 +5344,7 @@ func (m *awsRestxml_serializeOpXmlTimestamps) HandleSerialize(ctx context.Contex
 	rootAttr := []smithyxml.Attr{}
 	root := smithyxml.StartElement{
 		Name: smithyxml.Name{
-			Local: "XmlTimestampsInputOutput",
+			Local: "XmlTimestampsRequest",
 		},
 		Attr: rootAttr,
 	}
@@ -5495,7 +5495,7 @@ func (m *awsRestxml_serializeOpXmlUnions) HandleSerialize(ctx context.Context, i
 	rootAttr := []smithyxml.Attr{}
 	root := smithyxml.StartElement{
 		Name: smithyxml.Name{
-			Local: "XmlUnionsInputOutput",
+			Local: "XmlUnionsRequest",
 		},
 		Attr: rootAttr,
 	}
@@ -5858,7 +5858,7 @@ func awsRestxml_serializeDocumentUnionPayload(v types.UnionPayload, value smithy
 	return nil
 }
 
-func awsRestxml_serializeDocumentXmlAttributesInputOutput(v *types.XmlAttributesInputOutput, value smithyxml.Value) error {
+func awsRestxml_serializeDocumentXmlAttributesPayloadRequest(v *types.XmlAttributesPayloadRequest, value smithyxml.Value) error {
 	defer value.Close()
 	if v.Foo != nil {
 		rootAttr := []smithyxml.Attr{}

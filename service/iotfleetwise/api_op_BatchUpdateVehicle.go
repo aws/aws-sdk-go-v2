@@ -6,16 +6,20 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/iotfleetwise/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates a group, or batch, of vehicles. You must specify a decoder manifest and
-// a vehicle model (model manifest) for each vehicle. For more information, see
-// Update multiple vehicles (AWS CLI) (https://docs.aws.amazon.com/iot-fleetwise/latest/developerguide/update-vehicles-cli.html)
-// in the Amazon Web Services IoT FleetWise Developer Guide.
+//	Updates a group, or batch, of vehicles.
+//
+// You must specify a decoder manifest and a vehicle model (model manifest) for
+// each vehicle.
+//
+// For more information, see [Update multiple vehicles (AWS CLI)] in the Amazon Web Services IoT FleetWise Developer
+// Guide.
+//
+// [Update multiple vehicles (AWS CLI)]: https://docs.aws.amazon.com/iot-fleetwise/latest/developerguide/update-vehicles-cli.html
 func (c *Client) BatchUpdateVehicle(ctx context.Context, params *BatchUpdateVehicleInput, optFns ...func(*Options)) (*BatchUpdateVehicleOutput, error) {
 	if params == nil {
 		params = &BatchUpdateVehicleInput{}
@@ -33,7 +37,7 @@ func (c *Client) BatchUpdateVehicle(ctx context.Context, params *BatchUpdateVehi
 
 type BatchUpdateVehicleInput struct {
 
-	// A list of information about the vehicles to update. For more information, see
+	//  A list of information about the vehicles to update. For more information, see
 	// the API data type.
 	//
 	// This member is required.
@@ -48,8 +52,9 @@ type BatchUpdateVehicleOutput struct {
 	// or, if there aren't any errors, an empty list.
 	Errors []types.UpdateVehicleError
 
-	// A list of information about the batch of updated vehicles. This list contains
-	// only unique IDs for the vehicles that were updated.
+	//  A list of information about the batch of updated vehicles.
+	//
+	// This list contains only unique IDs for the vehicles that were updated.
 	Vehicles []types.UpdateVehicleResponseItem
 
 	// Metadata pertaining to the operation's result.
@@ -80,25 +85,25 @@ func (c *Client) addOperationBatchUpdateVehicleMiddlewares(stack *middleware.Sta
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -113,13 +118,16 @@ func (c *Client) addOperationBatchUpdateVehicleMiddlewares(stack *middleware.Sta
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpBatchUpdateVehicleValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opBatchUpdateVehicle(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

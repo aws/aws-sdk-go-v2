@@ -6,14 +6,17 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates an empty receipt rule set. For information about setting up receipt
-// rule sets, see the Amazon SES Developer Guide (https://docs.aws.amazon.com/ses/latest/dg/receiving-email-concepts.html#receiving-email-concepts-rules)
-// . You can execute this operation no more than once per second.
+// Creates an empty receipt rule set.
+//
+// For information about setting up receipt rule sets, see the [Amazon SES Developer Guide].
+//
+// You can execute this operation no more than once per second.
+//
+// [Amazon SES Developer Guide]: https://docs.aws.amazon.com/ses/latest/dg/receiving-email-concepts.html#receiving-email-concepts-rules
 func (c *Client) CreateReceiptRuleSet(ctx context.Context, params *CreateReceiptRuleSetInput, optFns ...func(*Options)) (*CreateReceiptRuleSetOutput, error) {
 	if params == nil {
 		params = &CreateReceiptRuleSetInput{}
@@ -30,16 +33,19 @@ func (c *Client) CreateReceiptRuleSet(ctx context.Context, params *CreateReceipt
 }
 
 // Represents a request to create an empty receipt rule set. You use receipt rule
-// sets to receive email with Amazon SES. For more information, see the Amazon SES
-// Developer Guide (https://docs.aws.amazon.com/ses/latest/dg/receiving-email-concepts.html)
-// .
+// sets to receive email with Amazon SES. For more information, see the [Amazon SES Developer Guide].
+//
+// [Amazon SES Developer Guide]: https://docs.aws.amazon.com/ses/latest/dg/receiving-email-concepts.html
 type CreateReceiptRuleSetInput struct {
 
 	// The name of the rule set to create. The name must meet the following
 	// requirements:
+	//
 	//   - Contain only ASCII letters (a-z, A-Z), numbers (0-9), underscores (_), or
 	//   dashes (-).
+	//
 	//   - Start and end with a letter or number.
+	//
 	//   - Contain 64 characters or fewer.
 	//
 	// This member is required.
@@ -78,25 +84,25 @@ func (c *Client) addOperationCreateReceiptRuleSetMiddlewares(stack *middleware.S
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -111,13 +117,16 @@ func (c *Client) addOperationCreateReceiptRuleSetMiddlewares(stack *middleware.S
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpCreateReceiptRuleSetValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateReceiptRuleSet(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

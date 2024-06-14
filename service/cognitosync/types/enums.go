@@ -13,8 +13,9 @@ const (
 )
 
 // Values returns all known values for BulkPublishStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (BulkPublishStatus) Values() []BulkPublishStatus {
 	return []BulkPublishStatus{
 		"NOT_STARTED",
@@ -33,8 +34,9 @@ const (
 )
 
 // Values returns all known values for Operation. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (Operation) Values() []Operation {
 	return []Operation{
 		"replace",
@@ -53,8 +55,9 @@ const (
 )
 
 // Values returns all known values for Platform. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (Platform) Values() []Platform {
 	return []Platform{
 		"APNS",
@@ -73,8 +76,9 @@ const (
 )
 
 // Values returns all known values for StreamingStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (StreamingStatus) Values() []StreamingStatus {
 	return []StreamingStatus{
 		"ENABLED",

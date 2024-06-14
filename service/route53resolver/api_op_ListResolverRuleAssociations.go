@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/route53resolver/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -32,10 +31,11 @@ func (c *Client) ListResolverRuleAssociations(ctx context.Context, params *ListR
 type ListResolverRuleAssociationsInput struct {
 
 	// An optional specification to return a subset of Resolver rules, such as
-	// Resolver rules that are associated with the same VPC ID. If you submit a second
-	// or subsequent ListResolverRuleAssociations request and specify the NextToken
-	// parameter, you must use the same values for Filters , if any, as in the previous
-	// request.
+	// Resolver rules that are associated with the same VPC ID.
+	//
+	// If you submit a second or subsequent ListResolverRuleAssociations request and
+	// specify the NextToken parameter, you must use the same values for Filters , if
+	// any, as in the previous request.
 	Filters []types.Filter
 
 	// The maximum number of rule associations that you want to return in the response
@@ -43,8 +43,9 @@ type ListResolverRuleAssociationsInput struct {
 	// MaxResults , Resolver returns up to 100 rule associations.
 	MaxResults *int32
 
-	// For the first ListResolverRuleAssociation request, omit this value. If you have
-	// more than MaxResults rule associations, you can submit another
+	// For the first ListResolverRuleAssociation request, omit this value.
+	//
+	// If you have more than MaxResults rule associations, you can submit another
 	// ListResolverRuleAssociation request to get the next group of rule associations.
 	// In the next request, specify the value of NextToken from the previous response.
 	NextToken *string
@@ -96,25 +97,25 @@ func (c *Client) addOperationListResolverRuleAssociationsMiddlewares(stack *midd
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -129,10 +130,13 @@ func (c *Client) addOperationListResolverRuleAssociationsMiddlewares(stack *midd
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListResolverRuleAssociations(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

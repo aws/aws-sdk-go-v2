@@ -1,3 +1,119 @@
+# v1.145.0 (2024-06-11)
+
+* **Feature**: Introduced Scope and AuthenticationRequestExtraParams to SageMaker Workforce OIDC configuration; this allows customers to modify these options for their private Workforce IdP integration. Model Registry Cross-account model package groups are discoverable.
+
+# v1.144.0 (2024-06-07)
+
+* **Feature**: This release introduces a new optional parameter: InferenceAmiVersion, in ProductionVariant.
+* **Bug Fix**: Add clock skew correction on all service clients
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.143.0 (2024-06-04)
+
+* **Feature**: Extend DescribeClusterNode response with private DNS hostname and IP address, and placement information about availability zone and availability zone ID.
+
+# v1.142.1 (2024-06-03)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.142.0 (2024-05-30)
+
+* **Feature**: Adds Model Card information as a new component to Model Package. Autopilot launches algorithm selection for TimeSeries modality to generate AutoML candidates per algorithm.
+
+# v1.141.1 (2024-05-23)
+
+* No change notes available for this release.
+
+# v1.141.0 (2024-05-16)
+
+* **Feature**: Introduced WorkerAccessConfiguration to SageMaker Workteam. This allows customers to configure resource access for workers in a workteam.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.140.1 (2024-05-15)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.140.0 (2024-05-10)
+
+* **Feature**: Introduced support for G6 instance types on Sagemaker Notebook Instances and on SageMaker Studio for JupyterLab and CodeEditor applications.
+
+# v1.139.1 (2024-05-08)
+
+* **Bug Fix**: GoDoc improvement
+
+# v1.139.0 (2024-05-03)
+
+* **Feature**: Amazon SageMaker Inference now supports m6i, c6i, r6i, m7i, c7i, r7i and g5 instance types for Batch Transform Jobs
+
+# v1.138.0 (2024-04-30)
+
+* **Feature**: Amazon SageMaker Training now supports the use of attribute-based access control (ABAC) roles for training job execution roles. Amazon SageMaker Inference now supports G6 instance types.
+
+# v1.137.0 (2024-04-22)
+
+* **Feature**: This release adds support for Real-Time Collaboration and Shared Space for JupyterLab App on SageMaker Studio.
+
+# v1.136.0 (2024-04-18)
+
+* **Feature**: Removed deprecated enum values and updated API documentation.
+
+# v1.135.0 (2024-03-29)
+
+* **Feature**: This release adds support for custom images for the CodeEditor App on SageMaker Studio
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.134.0 (2024-03-25)
+
+* **Feature**: Introduced support for the following new instance types on SageMaker Studio for JupyterLab and CodeEditor applications: m6i, m6id, m7i, c6i, c6id, c7i, r6i, r6id, r7i, and p5
+
+# v1.133.1 (2024-03-18)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.133.0 (2024-03-15)
+
+* **Feature**: Adds m6i, m6id, m7i, c6i, c6id, c7i, r6i r6id, r7i, p5 instance type support to Sagemaker Notebook Instances and miscellaneous wording fixes for previous Sagemaker documentation.
+
+# v1.132.1 (2024-03-07)
+
+* **Bug Fix**: Remove dependency on go-cmp.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.132.0 (2024-02-29)
+
+* **Feature**: Adds support for ModelDataSource in Model Packages to support unzipped models. Adds support to specify SourceUri for models which allows registration of models without mandating a container for hosting. Using SourceUri, customers can decouple the model from hosting information during registration.
+
+# v1.131.1 (2024-02-23)
+
+* **Bug Fix**: Move all common, SDK-side middleware stack ops into the service client module to prevent cross-module compatibility issues in the future.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.131.0 (2024-02-22)
+
+* **Feature**: Add middleware stack snapshot tests.
+
+# v1.130.2 (2024-02-21)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.130.1 (2024-02-20)
+
+* **Bug Fix**: When sourcing values for a service's `EndpointParameters`, the lack of a configured region (i.e. `options.Region == ""`) will now translate to a `nil` value for `EndpointParameters.Region` instead of a pointer to the empty string `""`. This will result in a much more explicit error when calling an operation instead of an obscure hostname lookup failure.
+
+# v1.130.0 (2024-02-16)
+
+* **Feature**: Add new ClientOptions field to waiter config which allows you to extend the config for operation calls made by waiters.
+
+# v1.129.0 (2024-02-15)
+
+* **Feature**: This release adds a new API UpdateClusterSoftware for SageMaker HyperPod. This API allows users to patch HyperPod clusters with latest platform softwares.
+* **Bug Fix**: Correct failure to determine the error type in awsJson services that could occur when errors were modeled with a non-string `code` field.
+
+# v1.128.0 (2024-02-13)
+
+* **Feature**: Bump minimum Go version to 1.20 per our language support policy.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.127.0 (2024-02-02)
 
 * **Feature**: Amazon SageMaker Canvas adds GenerativeAiSettings support for CanvasAppSettings.

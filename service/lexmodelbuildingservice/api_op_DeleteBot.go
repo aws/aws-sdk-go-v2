@@ -6,23 +6,26 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Deletes all versions of the bot, including the $LATEST version. To delete a
-// specific version of the bot, use the DeleteBotVersion operation. The DeleteBot
-// operation doesn't immediately remove the bot schema. Instead, it is marked for
-// deletion and removed later. Amazon Lex stores utterances indefinitely for
-// improving the ability of your bot to respond to user inputs. These utterances
-// are not removed when the bot is deleted. To remove the utterances, use the
-// DeleteUtterances operation. If a bot has an alias, you can't delete it. Instead,
-// the DeleteBot operation returns a ResourceInUseException exception that
-// includes a reference to the alias that refers to the bot. To remove the
-// reference to the bot, delete the alias. If you get the same exception again,
-// delete the referring alias until the DeleteBot operation is successful. This
-// operation requires permissions for the lex:DeleteBot action.
+// specific version of the bot, use the DeleteBotVersionoperation. The DeleteBot operation doesn't
+// immediately remove the bot schema. Instead, it is marked for deletion and
+// removed later.
+//
+// Amazon Lex stores utterances indefinitely for improving the ability of your bot
+// to respond to user inputs. These utterances are not removed when the bot is
+// deleted. To remove the utterances, use the DeleteUtterancesoperation.
+//
+// If a bot has an alias, you can't delete it. Instead, the DeleteBot operation
+// returns a ResourceInUseException exception that includes a reference to the
+// alias that refers to the bot. To remove the reference to the bot, delete the
+// alias. If you get the same exception again, delete the referring alias until the
+// DeleteBot operation is successful.
+//
+// This operation requires permissions for the lex:DeleteBot action.
 func (c *Client) DeleteBot(ctx context.Context, params *DeleteBotInput, optFns ...func(*Options)) (*DeleteBotOutput, error) {
 	if params == nil {
 		params = &DeleteBotInput{}
@@ -77,25 +80,25 @@ func (c *Client) addOperationDeleteBotMiddlewares(stack *middleware.Stack, optio
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -110,13 +113,16 @@ func (c *Client) addOperationDeleteBotMiddlewares(stack *middleware.Stack, optio
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDeleteBotValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteBot(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

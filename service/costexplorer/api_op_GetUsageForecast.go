@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/costexplorer/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -32,15 +31,19 @@ func (c *Client) GetUsageForecast(ctx context.Context, params *GetUsageForecastI
 type GetUsageForecastInput struct {
 
 	// How granular you want the forecast to be. You can get 3 months of DAILY
-	// forecasts or 12 months of MONTHLY forecasts. The GetUsageForecast operation
-	// supports only DAILY and MONTHLY granularities.
+	// forecasts or 12 months of MONTHLY forecasts.
+	//
+	// The GetUsageForecast operation supports only DAILY and MONTHLY granularities.
 	//
 	// This member is required.
 	Granularity types.Granularity
 
-	// Which metric Cost Explorer uses to create your forecast. Valid values for a
-	// GetUsageForecast call are the following:
+	// Which metric Cost Explorer uses to create your forecast.
+	//
+	// Valid values for a GetUsageForecast call are the following:
+	//
 	//   - USAGE_QUANTITY
+	//
 	//   - NORMALIZED_USAGE_AMOUNT
 	//
 	// This member is required.
@@ -58,28 +61,51 @@ type GetUsageForecastInput struct {
 
 	// The filters that you want to use to filter your forecast. The GetUsageForecast
 	// API supports filtering by the following dimensions:
+	//
 	//   - AZ
+	//
 	//   - INSTANCE_TYPE
+	//
 	//   - LINKED_ACCOUNT
+	//
 	//   - LINKED_ACCOUNT_NAME
+	//
 	//   - OPERATION
+	//
 	//   - PURCHASE_TYPE
+	//
 	//   - REGION
+	//
 	//   - SERVICE
+	//
 	//   - USAGE_TYPE
+	//
 	//   - USAGE_TYPE_GROUP
+	//
 	//   - RECORD_TYPE
+	//
 	//   - OPERATING_SYSTEM
+	//
 	//   - TENANCY
+	//
 	//   - SCOPE
+	//
 	//   - PLATFORM
+	//
 	//   - SUBSCRIPTION_ID
+	//
 	//   - LEGAL_ENTITY_NAME
+	//
 	//   - DEPLOYMENT_OPTION
+	//
 	//   - DATABASE_ENGINE
+	//
 	//   - INSTANCE_TYPE_FAMILY
+	//
 	//   - BILLING_ENTITY
+	//
 	//   - RESERVATION_ID
+	//
 	//   - SAVINGS_PLAN_ARN
 	Filter *types.Expression
 
@@ -130,25 +156,25 @@ func (c *Client) addOperationGetUsageForecastMiddlewares(stack *middleware.Stack
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -163,13 +189,16 @@ func (c *Client) addOperationGetUsageForecastMiddlewares(stack *middleware.Stack
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpGetUsageForecastValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetUsageForecast(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

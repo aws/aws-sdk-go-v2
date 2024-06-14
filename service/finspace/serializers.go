@@ -671,6 +671,11 @@ func awsRestjson1_serializeOpDocumentCreateKxDataviewInput(v *CreateKxDataviewIn
 		ok.String(*v.Description)
 	}
 
+	if v.ReadWrite {
+		ok := object.Key("readWrite")
+		ok.Boolean(v.ReadWrite)
+	}
+
 	if v.SegmentConfigurations != nil {
 		ok := object.Key("segmentConfigurations")
 		if err := awsRestjson1_serializeDocumentKxDataviewSegmentConfigurationList(v.SegmentConfigurations, ok); err != nil {
@@ -1265,6 +1270,89 @@ func awsRestjson1_serializeOpHttpBindingsDeleteKxClusterInput(v *DeleteKxCluster
 	}
 	if v.EnvironmentId != nil {
 		if err := encoder.SetURI("environmentId").String(*v.EnvironmentId); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+type awsRestjson1_serializeOpDeleteKxClusterNode struct {
+}
+
+func (*awsRestjson1_serializeOpDeleteKxClusterNode) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpDeleteKxClusterNode) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*DeleteKxClusterNodeInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/kx/environments/{environmentId}/clusters/{clusterName}/nodes/{nodeId}")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "DELETE"
+	var restEncoder *httpbinding.Encoder
+	if request.URL.RawPath == "" {
+		restEncoder, err = httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	} else {
+		request.URL.RawPath = smithyhttp.JoinPath(request.URL.RawPath, opPath)
+		restEncoder, err = httpbinding.NewEncoderWithRawPath(request.URL.Path, request.URL.RawPath, request.URL.RawQuery, request.Header)
+	}
+
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsDeleteKxClusterNodeInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsDeleteKxClusterNodeInput(v *DeleteKxClusterNodeInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.ClusterName == nil || len(*v.ClusterName) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member clusterName must not be empty")}
+	}
+	if v.ClusterName != nil {
+		if err := encoder.SetURI("clusterName").String(*v.ClusterName); err != nil {
+			return err
+		}
+	}
+
+	if v.EnvironmentId == nil || len(*v.EnvironmentId) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member environmentId must not be empty")}
+	}
+	if v.EnvironmentId != nil {
+		if err := encoder.SetURI("environmentId").String(*v.EnvironmentId); err != nil {
+			return err
+		}
+	}
+
+	if v.NodeId == nil || len(*v.NodeId) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member nodeId must not be empty")}
+	}
+	if v.NodeId != nil {
+		if err := encoder.SetURI("nodeId").String(*v.NodeId); err != nil {
 			return err
 		}
 	}
@@ -4903,6 +4991,11 @@ func awsRestjson1_serializeDocumentKxDataviewSegmentConfiguration(v *types.KxDat
 		if err := awsRestjson1_serializeDocumentSegmentConfigurationDbPathList(v.DbPaths, ok); err != nil {
 			return err
 		}
+	}
+
+	if v.OnDemand {
+		ok := object.Key("onDemand")
+		ok.Boolean(v.OnDemand)
 	}
 
 	if v.VolumeName != nil {

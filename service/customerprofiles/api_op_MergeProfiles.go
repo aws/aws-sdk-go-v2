@@ -6,32 +6,41 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/customerprofiles/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Runs an AWS Lambda job that does the following:
+//
 //   - All the profileKeys in the ProfileToBeMerged will be moved to the main
 //     profile.
+//
 //   - All the objects in the ProfileToBeMerged will be moved to the main profile.
+//
 //   - All the ProfileToBeMerged will be deleted at the end.
+//
 //   - All the profileKeys in the ProfileIdsToBeMerged will be moved to the main
 //     profile.
+//
 //   - Standard fields are merged as follows:
+//
 //   - Fields are always "union"-ed if there are no conflicts in standard fields
 //     or attributeKeys.
+//
 //   - When there are conflicting fields:
+//
 //   - If no SourceProfileIds entry is specified, the main Profile value is always
 //     taken.
+//
 //   - If a SourceProfileIds entry is specified, the specified profileId is always
 //     taken, even if it is a NULL value.
 //
-// You can use MergeProfiles together with GetMatches (https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_GetMatches.html)
-// , which returns potentially matching profiles, or use it with the results of
-// another matching system. After profiles have been merged, they cannot be
-// separated (unmerged).
+// You can use MergeProfiles together with [GetMatches], which returns potentially matching
+// profiles, or use it with the results of another matching system. After profiles
+// have been merged, they cannot be separated (unmerged).
+//
+// [GetMatches]: https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_GetMatches.html
 func (c *Client) MergeProfiles(ctx context.Context, params *MergeProfilesInput, optFns ...func(*Options)) (*MergeProfilesOutput, error) {
 	if params == nil {
 		params = &MergeProfilesInput{}
@@ -106,25 +115,25 @@ func (c *Client) addOperationMergeProfilesMiddlewares(stack *middleware.Stack, o
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -139,13 +148,16 @@ func (c *Client) addOperationMergeProfilesMiddlewares(stack *middleware.Stack, o
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpMergeProfilesValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opMergeProfiles(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/verifiedpermissions/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -46,9 +45,10 @@ type ListPoliciesInput struct {
 	// NextToken request parameter in the next call to the operation to get the next
 	// set of results. Note that the service might return fewer results than the
 	// maximum even when there are more results available. You should check NextToken
-	// after every operation to ensure that you receive all of the results. If you do
-	// not specify this parameter, the operation defaults to 10 policies per response.
-	// You can specify a maximum of 50 policies per response.
+	// after every operation to ensure that you receive all of the results.
+	//
+	// If you do not specify this parameter, the operation defaults to 10 policies per
+	// response. You can specify a maximum of 50 policies per response.
 	MaxResults *int32
 
 	// Specifies that you want to receive the next page of results. Valid only if you
@@ -102,25 +102,25 @@ func (c *Client) addOperationListPoliciesMiddlewares(stack *middleware.Stack, op
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -135,13 +135,16 @@ func (c *Client) addOperationListPoliciesMiddlewares(stack *middleware.Stack, op
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpListPoliciesValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListPolicies(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -174,9 +177,10 @@ type ListPoliciesPaginatorOptions struct {
 	// NextToken request parameter in the next call to the operation to get the next
 	// set of results. Note that the service might return fewer results than the
 	// maximum even when there are more results available. You should check NextToken
-	// after every operation to ensure that you receive all of the results. If you do
-	// not specify this parameter, the operation defaults to 10 policies per response.
-	// You can specify a maximum of 50 policies per response.
+	// after every operation to ensure that you receive all of the results.
+	//
+	// If you do not specify this parameter, the operation defaults to 10 policies per
+	// response. You can specify a maximum of 50 policies per response.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

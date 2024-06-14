@@ -6,25 +6,28 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/chime/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates a new Amazon Chime SDK meeting in the specified media Region with no
-// initial attendees. For more information about specifying media Regions, see
-// Amazon Chime SDK Media Regions (https://docs.aws.amazon.com/chime-sdk/latest/dg/chime-sdk-meetings-regions.html)
-// in the Amazon Chime SDK Developer Guide . For more information about the Amazon
-// Chime SDK, see Using the Amazon Chime SDK (https://docs.aws.amazon.com/chime-sdk/latest/dg/meetings-sdk.html)
-// in the Amazon Chime SDK Developer Guide. This API is is no longer supported and
-// will not be updated. We recommend using the latest version, CreateMeeting (https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_meeting-chime_CreateMeeting.html)
-// , in the Amazon Chime SDK. Using the latest version requires migrating to a
-// dedicated namespace. For more information, refer to Migrating from the Amazon
-// Chime namespace (https://docs.aws.amazon.com/chime-sdk/latest/dg/migrate-from-chm-namespace.html)
-// in the Amazon Chime SDK Developer Guide.
+// initial attendees. For more information about specifying media Regions, see [Amazon Chime SDK Media Regions]in
+// the Amazon Chime SDK Developer Guide . For more information about the Amazon
+// Chime SDK, see [Using the Amazon Chime SDK]in the Amazon Chime SDK Developer Guide.
+//
+// This API is is no longer supported and will not be updated. We recommend using
+// the latest version, [CreateMeeting], in the Amazon Chime SDK.
+//
+// Using the latest version requires migrating to a dedicated namespace. For more
+// information, refer to [Migrating from the Amazon Chime namespace]in the Amazon Chime SDK Developer Guide.
 //
 // Deprecated: Replaced by CreateMeeting in the Amazon Chime SDK Meetings Namespace
+//
+// [CreateMeeting]: https://docs.aws.amazon.com/chime-sdk/latest/APIReference/API_meeting-chime_CreateMeeting.html
+// [Migrating from the Amazon Chime namespace]: https://docs.aws.amazon.com/chime-sdk/latest/dg/migrate-from-chm-namespace.html
+// [Amazon Chime SDK Media Regions]: https://docs.aws.amazon.com/chime-sdk/latest/dg/chime-sdk-meetings-regions.html
+// [Using the Amazon Chime SDK]: https://docs.aws.amazon.com/chime-sdk/latest/dg/meetings-sdk.html
 func (c *Client) CreateMeeting(ctx context.Context, params *CreateMeetingInput, optFns ...func(*Options)) (*CreateMeetingOutput, error) {
 	if params == nil {
 		params = &CreateMeetingInput{}
@@ -51,8 +54,9 @@ type CreateMeetingInput struct {
 	// The external meeting ID.
 	ExternalMeetingId *string
 
-	// The Region in which to create the meeting. Default: us-east-1 . Available
-	// values: af-south-1 , ap-northeast-1 , ap-northeast-2 , ap-south-1 ,
+	//  The Region in which to create the meeting. Default: us-east-1 .
+	//
+	// Available values: af-south-1 , ap-northeast-1 , ap-northeast-2 , ap-south-1 ,
 	// ap-southeast-1 , ap-southeast-2 , ca-central-1 , eu-central-1 , eu-north-1 ,
 	// eu-south-1 , eu-west-1 , eu-west-2 , eu-west-3 , sa-east-1 , us-east-1 ,
 	// us-east-2 , us-west-1 , us-west-2 .
@@ -73,7 +77,7 @@ type CreateMeetingInput struct {
 
 type CreateMeetingOutput struct {
 
-	// The meeting information, including the meeting ID and MediaPlacement .
+	//  The meeting information, including the meeting ID and MediaPlacement .
 	Meeting *types.Meeting
 
 	// Metadata pertaining to the operation's result.
@@ -104,25 +108,25 @@ func (c *Client) addOperationCreateMeetingMiddlewares(stack *middleware.Stack, o
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -137,6 +141,9 @@ func (c *Client) addOperationCreateMeetingMiddlewares(stack *middleware.Stack, o
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opCreateMeetingMiddleware(stack, options); err != nil {
 		return err
 	}
@@ -146,7 +153,7 @@ func (c *Client) addOperationCreateMeetingMiddlewares(stack *middleware.Stack, o
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateMeeting(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

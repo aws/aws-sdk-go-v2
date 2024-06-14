@@ -6,22 +6,31 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/appstream/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates the specified fleet. If the fleet is in the STOPPED state, you can
-// update any attribute except the fleet name. If the fleet is in the RUNNING
-// state, you can update the following based on the fleet type:
-//   - Always-On and On-Demand fleet types You can update the DisplayName ,
-//     ComputeCapacity , ImageARN , ImageName , IdleDisconnectTimeoutInSeconds , and
-//     DisconnectTimeoutInSeconds attributes.
-//   - Elastic fleet type You can update the DisplayName ,
-//     IdleDisconnectTimeoutInSeconds , DisconnectTimeoutInSeconds ,
-//     MaxConcurrentSessions , SessionScriptS3Location and UsbDeviceFilterStrings
-//     attributes.
+// Updates the specified fleet.
+//
+// If the fleet is in the STOPPED state, you can update any attribute except the
+// fleet name.
+//
+// If the fleet is in the RUNNING state, you can update the following based on the
+// fleet type:
+//
+//   - Always-On and On-Demand fleet types
+//
+// You can update the DisplayName , ComputeCapacity , ImageARN , ImageName ,
+//
+//	IdleDisconnectTimeoutInSeconds , and DisconnectTimeoutInSeconds attributes.
+//
+//	- Elastic fleet type
+//
+// You can update the DisplayName , IdleDisconnectTimeoutInSeconds ,
+//
+//	DisconnectTimeoutInSeconds , MaxConcurrentSessions , SessionScriptS3Location
+//	and UsbDeviceFilterStrings attributes.
 //
 // If the fleet is in the STARTING or STOPPED state, you can't update it.
 func (c *Client) UpdateFleet(ctx context.Context, params *UpdateFleetInput, optFns ...func(*Options)) (*UpdateFleetOutput, error) {
@@ -59,7 +68,9 @@ type UpdateFleetInput struct {
 	// disconnect. If users try to reconnect to the streaming session after a
 	// disconnection or network interruption within this time interval, they are
 	// connected to their previous session. Otherwise, they are connected to a new
-	// session with a new streaming instance. Specify a value between 60 and 360000.
+	// session with a new streaming instance.
+	//
+	// Specify a value between 60 and 360000.
 	DisconnectTimeoutInSeconds *int32
 
 	// The fleet name to display.
@@ -77,9 +88,11 @@ type UpdateFleetInput struct {
 	// API operation and passes the ARN of the role to use. The operation creates a new
 	// session with temporary credentials. AppStream 2.0 retrieves the temporary
 	// credentials and creates the appstream_machine_role credential profile on the
-	// instance. For more information, see Using an IAM Role to Grant Permissions to
-	// Applications and Scripts Running on AppStream 2.0 Streaming Instances (https://docs.aws.amazon.com/appstream2/latest/developerguide/using-iam-roles-to-grant-permissions-to-applications-scripts-streaming-instances.html)
-	// in the Amazon AppStream 2.0 Administration Guide.
+	// instance.
+	//
+	// For more information, see [Using an IAM Role to Grant Permissions to Applications and Scripts Running on AppStream 2.0 Streaming Instances] in the Amazon AppStream 2.0 Administration Guide.
+	//
+	// [Using an IAM Role to Grant Permissions to Applications and Scripts Running on AppStream 2.0 Streaming Instances]: https://docs.aws.amazon.com/appstream2/latest/developerguide/using-iam-roles-to-grant-permissions-to-applications-scripts-streaming-instances.html
 	IamRoleArn *string
 
 	// The amount of time that users can be idle (inactive) before they are
@@ -91,16 +104,18 @@ type UpdateFleetInput struct {
 	// keyboard or mouse input during their streaming session. File uploads and
 	// downloads, audio in, audio out, and pixels changing do not qualify as user
 	// activity. If users continue to be idle after the time interval in
-	// IdleDisconnectTimeoutInSeconds elapses, they are disconnected. To prevent users
-	// from being disconnected due to inactivity, specify a value of 0. Otherwise,
-	// specify a value between 60 and 3600. The default value is 0. If you enable this
-	// feature, we recommend that you specify a value that corresponds exactly to a
-	// whole number of minutes (for example, 60, 120, and 180). If you don't do this,
-	// the value is rounded to the nearest minute. For example, if you specify a value
-	// of 70, users are disconnected after 1 minute of inactivity. If you specify a
-	// value that is at the midpoint between two different minutes, the value is
-	// rounded up. For example, if you specify a value of 90, users are disconnected
-	// after 2 minutes of inactivity.
+	// IdleDisconnectTimeoutInSeconds elapses, they are disconnected.
+	//
+	// To prevent users from being disconnected due to inactivity, specify a value of
+	// 0. Otherwise, specify a value between 60 and 3600. The default value is 0.
+	//
+	// If you enable this feature, we recommend that you specify a value that
+	// corresponds exactly to a whole number of minutes (for example, 60, 120, and
+	// 180). If you don't do this, the value is rounded to the nearest minute. For
+	// example, if you specify a value of 70, users are disconnected after 1 minute of
+	// inactivity. If you specify a value that is at the midpoint between two different
+	// minutes, the value is rounded up. For example, if you specify a value of 90,
+	// users are disconnected after 2 minutes of inactivity.
 	IdleDisconnectTimeoutInSeconds *int32
 
 	// The ARN of the public, private, or shared image to use.
@@ -111,46 +126,87 @@ type UpdateFleetInput struct {
 
 	// The instance type to use when launching fleet instances. The following instance
 	// types are available:
+	//
 	//   - stream.standard.small
+	//
 	//   - stream.standard.medium
+	//
 	//   - stream.standard.large
+	//
 	//   - stream.standard.xlarge
+	//
 	//   - stream.standard.2xlarge
+	//
 	//   - stream.compute.large
+	//
 	//   - stream.compute.xlarge
+	//
 	//   - stream.compute.2xlarge
+	//
 	//   - stream.compute.4xlarge
+	//
 	//   - stream.compute.8xlarge
+	//
 	//   - stream.memory.large
+	//
 	//   - stream.memory.xlarge
+	//
 	//   - stream.memory.2xlarge
+	//
 	//   - stream.memory.4xlarge
+	//
 	//   - stream.memory.8xlarge
+	//
 	//   - stream.memory.z1d.large
+	//
 	//   - stream.memory.z1d.xlarge
+	//
 	//   - stream.memory.z1d.2xlarge
+	//
 	//   - stream.memory.z1d.3xlarge
+	//
 	//   - stream.memory.z1d.6xlarge
+	//
 	//   - stream.memory.z1d.12xlarge
+	//
 	//   - stream.graphics-design.large
+	//
 	//   - stream.graphics-design.xlarge
+	//
 	//   - stream.graphics-design.2xlarge
+	//
 	//   - stream.graphics-design.4xlarge
+	//
 	//   - stream.graphics-desktop.2xlarge
+	//
 	//   - stream.graphics.g4dn.xlarge
+	//
 	//   - stream.graphics.g4dn.2xlarge
+	//
 	//   - stream.graphics.g4dn.4xlarge
+	//
 	//   - stream.graphics.g4dn.8xlarge
+	//
 	//   - stream.graphics.g4dn.12xlarge
+	//
 	//   - stream.graphics.g4dn.16xlarge
+	//
 	//   - stream.graphics-pro.4xlarge
+	//
 	//   - stream.graphics-pro.8xlarge
+	//
 	//   - stream.graphics-pro.16xlarge
+	//
 	// The following instance types are available for Elastic fleets:
+	//
 	//   - stream.standard.small
+	//
 	//   - stream.standard.medium
+	//
 	//   - stream.standard.large
+	//
 	//   - stream.standard.xlarge
+	//
 	//   - stream.standard.2xlarge
 	InstanceType *string
 
@@ -165,7 +221,9 @@ type UpdateFleetInput struct {
 	// seconds. If users are still connected to a streaming instance five minutes
 	// before this limit is reached, they are prompted to save any open documents
 	// before being disconnected. After this time elapses, the instance is terminated
-	// and replaced by a new instance. Specify a value between 600 and 432000.
+	// and replaced by a new instance.
+	//
+	// Specify a value between 600 and 432000.
 	MaxUserDurationInSeconds *int32
 
 	// A unique name for the fleet.
@@ -182,7 +240,9 @@ type UpdateFleetInput struct {
 	// The AppStream 2.0 view that is displayed to your users when they stream from
 	// the fleet. When APP is specified, only the windows of applications opened by
 	// users display. When DESKTOP is specified, the standard desktop that is provided
-	// by the operating system displays. The default value is APP .
+	// by the operating system displays.
+	//
+	// The default value is APP .
 	StreamView types.StreamView
 
 	// The USB device filter strings that specify which USB devices a user can
@@ -231,25 +291,25 @@ func (c *Client) addOperationUpdateFleetMiddlewares(stack *middleware.Stack, opt
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -264,13 +324,16 @@ func (c *Client) addOperationUpdateFleetMiddlewares(stack *middleware.Stack, opt
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpUpdateFleetValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateFleet(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

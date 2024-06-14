@@ -6,21 +6,21 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Configures whether participant accounts in your organization can create Amazon
 // FSx for NetApp ONTAP Multi-AZ file systems in subnets that are shared by a
-// virtual private cloud (VPC) owner. For more information, see the Amazon FSx for
-// NetApp ONTAP User Guide (https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/maz-shared-vpc.html)
-// . We strongly recommend that participant-created Multi-AZ file systems in the
+// virtual private cloud (VPC) owner. For more information, see the [Amazon FSx for NetApp ONTAP User Guide].
+//
+// We strongly recommend that participant-created Multi-AZ file systems in the
 // shared VPC are deleted before you disable this feature. Once the feature is
 // disabled, these file systems will enter a MISCONFIGURED state and behave like
-// Single-AZ file systems. For more information, see Important considerations
-// before disabling shared VPC support for Multi-AZ file systems (https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/maz-shared-vpc.html#disabling-maz-vpc-sharing)
-// .
+// Single-AZ file systems. For more information, see [Important considerations before disabling shared VPC support for Multi-AZ file systems].
+//
+// [Amazon FSx for NetApp ONTAP User Guide]: https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/maz-shared-vpc.html
+// [Important considerations before disabling shared VPC support for Multi-AZ file systems]: https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/maz-shared-vpc.html#disabling-maz-vpc-sharing
 func (c *Client) UpdateSharedVpcConfiguration(ctx context.Context, params *UpdateSharedVpcConfigurationInput, optFns ...func(*Options)) (*UpdateSharedVpcConfigurationOutput, error) {
 	if params == nil {
 		params = &UpdateSharedVpcConfigurationInput{}
@@ -84,25 +84,25 @@ func (c *Client) addOperationUpdateSharedVpcConfigurationMiddlewares(stack *midd
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -117,13 +117,16 @@ func (c *Client) addOperationUpdateSharedVpcConfigurationMiddlewares(stack *midd
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opUpdateSharedVpcConfigurationMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateSharedVpcConfiguration(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

@@ -6,13 +6,17 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes the specified monitor. Once a probe is deleted you'll no longer incur
-// any billing fees for that probe.
+// Deletes the specified probe. Once a probe is deleted you'll no longer incur any
+// billing fees for that probe.
+//
+// This action requires both the monitorName and probeId parameters. Run
+// ListMonitors to get a list of monitor names. Run GetMonitor to get a list of
+// probes and probe IDs. You can only delete a single probe at a time using this
+// action.
 func (c *Client) DeleteProbe(ctx context.Context, params *DeleteProbeInput, optFns ...func(*Options)) (*DeleteProbeOutput, error) {
 	if params == nil {
 		params = &DeleteProbeInput{}
@@ -30,14 +34,12 @@ func (c *Client) DeleteProbe(ctx context.Context, params *DeleteProbeInput, optF
 
 type DeleteProbeInput struct {
 
-	// The name of the monitor to delete. For a list of the available monitors, use
-	// the ListMonitors action.
+	// The name of the monitor to delete.
 	//
 	// This member is required.
 	MonitorName *string
 
-	// The ID of the probe to delete. Run GetMonitor to get a lst of all probes and
-	// probe IDs associated with the monitor.
+	// The ID of the probe to delete.
 	//
 	// This member is required.
 	ProbeId *string
@@ -74,25 +76,25 @@ func (c *Client) addOperationDeleteProbeMiddlewares(stack *middleware.Stack, opt
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -107,13 +109,16 @@ func (c *Client) addOperationDeleteProbeMiddlewares(stack *middleware.Stack, opt
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDeleteProbeValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteProbe(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

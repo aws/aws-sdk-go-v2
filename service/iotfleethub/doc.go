@@ -3,7 +3,6 @@
 // Package iotfleethub provides the API client, operations, and parameter types
 // for AWS IoT Fleet Hub.
 //
-// With Fleet Hub for AWS IoT Device Management you can build stand-alone web
-// applications for monitoring the health of your device fleets. Fleet Hub for AWS
-// IoT Device Management is in public preview and is subject to change.
+// With Fleet Hub for IoT Device Management you can build stand-alone web
+// applications for monitoring the health of your device fleets.
 package iotfleethub

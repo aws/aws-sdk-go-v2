@@ -6,18 +6,21 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// This feature is in preview release and is subject to change. Your use of Amazon
-// Web Services Price List API is subject to the Beta Service Participation terms
-// of the Amazon Web Services Service Terms (https://aws.amazon.com/service-terms/)
-// (Section 1.10). This returns the URL that you can retrieve your Price List file
-// from. This URL is based on the PriceListArn and FileFormat that you retrieve
-// from the ListPriceLists (https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_pricing_ListPriceLists.html)
+//	This feature is in preview release and is subject to change. Your use of
+//
+// Amazon Web Services Price List API is subject to the Beta Service Participation
+// terms of the [Amazon Web Services Service Terms](Section 1.10).
+//
+// This returns the URL that you can retrieve your Price List file from. This URL
+// is based on the PriceListArn and FileFormat that you retrieve from the [ListPriceLists]
 // response.
+//
+// [Amazon Web Services Service Terms]: https://aws.amazon.com/service-terms/
+// [ListPriceLists]: https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_pricing_ListPriceLists.html
 func (c *Client) GetPriceListFileUrl(ctx context.Context, params *GetPriceListFileUrlInput, optFns ...func(*Options)) (*GetPriceListFileUrlOutput, error) {
 	if params == nil {
 		params = &GetPriceListFileUrlInput{}
@@ -36,15 +39,17 @@ func (c *Client) GetPriceListFileUrl(ctx context.Context, params *GetPriceListFi
 type GetPriceListFileUrlInput struct {
 
 	// The format that you want to retrieve your Price List files in. The FileFormat
-	// can be obtained from the ListPriceLists (https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_pricing_ListPriceLists.html)
-	// response.
+	// can be obtained from the [ListPriceLists]response.
+	//
+	// [ListPriceLists]: https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_pricing_ListPriceLists.html
 	//
 	// This member is required.
 	FileFormat *string
 
 	// The unique identifier that maps to where your Price List files are located.
-	// PriceListArn can be obtained from the ListPriceLists (https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_pricing_ListPriceLists.html)
-	// response.
+	// PriceListArn can be obtained from the [ListPriceLists] response.
+	//
+	// [ListPriceLists]: https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_pricing_ListPriceLists.html
 	//
 	// This member is required.
 	PriceListArn *string
@@ -85,25 +90,25 @@ func (c *Client) addOperationGetPriceListFileUrlMiddlewares(stack *middleware.St
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -118,13 +123,16 @@ func (c *Client) addOperationGetPriceListFileUrlMiddlewares(stack *middleware.St
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpGetPriceListFileUrlValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetPriceListFileUrl(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

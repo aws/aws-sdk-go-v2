@@ -6,14 +6,14 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/securityhub/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
-// Creates a configuration policy with the defined configuration. Only the
+//	Creates a configuration policy with the defined configuration. Only the
+//
 // Security Hub delegated administrator can invoke this operation from the home
 // Region.
 func (c *Client) CreateConfigurationPolicy(ctx context.Context, params *CreateConfigurationPolicyInput, optFns ...func(*Options)) (*CreateConfigurationPolicyOutput, error) {
@@ -33,7 +33,7 @@ func (c *Client) CreateConfigurationPolicy(ctx context.Context, params *CreateCo
 
 type CreateConfigurationPolicyInput struct {
 
-	// An object that defines how Security Hub is configured. It includes whether
+	//  An object that defines how Security Hub is configured. It includes whether
 	// Security Hub is enabled or disabled, a list of enabled security standards, a
 	// list of enabled or disabled security controls, and a list of custom parameter
 	// values for specified controls. If you provide a list of security controls that
@@ -45,18 +45,19 @@ type CreateConfigurationPolicyInput struct {
 	// This member is required.
 	ConfigurationPolicy types.Policy
 
-	// The name of the configuration policy. Alphanumeric characters and the following
-	// ASCII characters are permitted: -, ., !, *, / .
+	//  The name of the configuration policy. Alphanumeric characters and the
+	// following ASCII characters are permitted: -, ., !, *, / .
 	//
 	// This member is required.
 	Name *string
 
-	// The description of the configuration policy.
+	//  The description of the configuration policy.
 	Description *string
 
-	// User-defined tags associated with a configuration policy. For more information,
-	// see Tagging Security Hub resources (https://docs.aws.amazon.com/securityhub/latest/userguide/tagging-resources.html)
-	// in the Security Hub user guide.
+	//  User-defined tags associated with a configuration policy. For more
+	// information, see [Tagging Security Hub resources]in the Security Hub user guide.
+	//
+	// [Tagging Security Hub resources]: https://docs.aws.amazon.com/securityhub/latest/userguide/tagging-resources.html
 	Tags map[string]string
 
 	noSmithyDocumentSerde
@@ -64,10 +65,10 @@ type CreateConfigurationPolicyInput struct {
 
 type CreateConfigurationPolicyOutput struct {
 
-	// The Amazon Resource Name (ARN) of the configuration policy.
+	//  The Amazon Resource Name (ARN) of the configuration policy.
 	Arn *string
 
-	// An object that defines how Security Hub is configured. It includes whether
+	//  An object that defines how Security Hub is configured. It includes whether
 	// Security Hub is enabled or disabled, a list of enabled security standards, a
 	// list of enabled or disabled security controls, and a list of custom parameter
 	// values for specified controls. If the request included a list of security
@@ -77,20 +78,20 @@ type CreateConfigurationPolicyOutput struct {
 	// Security Hub enables all other controls (including newly released controls).
 	ConfigurationPolicy types.Policy
 
-	// The date and time, in UTC and ISO 8601 format, that the configuration policy
+	//  The date and time, in UTC and ISO 8601 format, that the configuration policy
 	// was created.
 	CreatedAt *time.Time
 
-	// The description of the configuration policy.
+	//  The description of the configuration policy.
 	Description *string
 
-	// The universally unique identifier (UUID) of the configuration policy.
+	//  The universally unique identifier (UUID) of the configuration policy.
 	Id *string
 
-	// The name of the configuration policy.
+	//  The name of the configuration policy.
 	Name *string
 
-	// The date and time, in UTC and ISO 8601 format, that the configuration policy
+	//  The date and time, in UTC and ISO 8601 format, that the configuration policy
 	// was last updated.
 	UpdatedAt *time.Time
 
@@ -122,25 +123,25 @@ func (c *Client) addOperationCreateConfigurationPolicyMiddlewares(stack *middlew
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -155,13 +156,16 @@ func (c *Client) addOperationCreateConfigurationPolicyMiddlewares(stack *middlew
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpCreateConfigurationPolicyValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateConfigurationPolicy(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

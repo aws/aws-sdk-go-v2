@@ -1847,6 +1847,96 @@
                 "smithy.api#error": "client"
             }
         },
+        "com.amazonaws.swf#DeleteActivityType": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.swf#DeleteActivityTypeInput"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.swf#OperationNotPermittedFault"
+                },
+                {
+                    "target": "com.amazonaws.swf#TypeNotDeprecatedFault"
+                },
+                {
+                    "target": "com.amazonaws.swf#UnknownResourceFault"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes the specified <i>activity type</i>.</p>\n         <p>Note: Prior to deletion, activity types must first be <b>deprecated</b>. </p>\n         <p>\n         After an activity type has been deleted, you cannot schedule new activities of that type. Activities that started before the type was deleted will continue to run.\n     </p>\n         <p>\n            <b>Access Control</b>\n         </p>\n         <p>You can use IAM policies to control this action's access to Amazon SWF resources as follows:</p>\n         <ul>\n            <li>\n               <p>Use a <code>Resource</code> element with the domain name to limit the action to\n            only specified domains.</p>\n            </li>\n            <li>\n               <p>Use an <code>Action</code> element to allow or deny permission to call this\n            action.</p>\n            </li>\n            <li>\n               <p>Constrain the following parameters by using a <code>Condition</code> element with\n            the appropriate keys.</p>\n               <ul>\n                  <li>\n                     <p>\n                        <code>activityType.name</code>: String constraint. The key is\n                <code>swf:activityType.name</code>.</p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>activityType.version</code>: String constraint. The key is\n                <code>swf:activityType.version</code>.</p>\n                  </li>\n               </ul>\n            </li>\n         </ul>\n         <p>If the caller doesn't have sufficient permissions to invoke the action, or the\n        parameter values fall outside the specified constraints, the action fails. The associated\n        event attribute's <code>cause</code> parameter is set to <code>OPERATION_NOT_PERMITTED</code>.\n        For details and example IAM policies, see <a href=\"https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html\">Using IAM to Manage Access to Amazon SWF\n        Workflows</a> in the <i>Amazon SWF Developer Guide</i>.</p>"
+            }
+        },
+        "com.amazonaws.swf#DeleteActivityTypeInput": {
+            "type": "structure",
+            "members": {
+                "domain": {
+                    "target": "com.amazonaws.swf#DomainName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the domain in which the activity type is registered.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "activityType": {
+                    "target": "com.amazonaws.swf#ActivityType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The activity type to delete.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.swf#DeleteWorkflowType": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.swf#DeleteWorkflowTypeInput"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.swf#OperationNotPermittedFault"
+                },
+                {
+                    "target": "com.amazonaws.swf#TypeNotDeprecatedFault"
+                },
+                {
+                    "target": "com.amazonaws.swf#UnknownResourceFault"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes the specified <i>workflow type</i>.</p>\n         <p>Note: Prior to deletion, workflow types must first be <b>deprecated</b>.</p>\n         <p>\n         After a workflow type has been deleted, you cannot create new executions of that type. Executions that\n      started before the type was deleted will continue to run.\n     </p>\n         <p>\n            <b>Access Control</b>\n         </p>\n         <p>You can use IAM policies to control this action's access to Amazon SWF resources as follows:</p>\n         <ul>\n            <li>\n               <p>Use a <code>Resource</code> element with the domain name to limit the action to\n            only specified domains.</p>\n            </li>\n            <li>\n               <p>Use an <code>Action</code> element to allow or deny permission to call this\n            action.</p>\n            </li>\n            <li>\n               <p>Constrain the following parameters by using a <code>Condition</code> element with\n            the appropriate keys.</p>\n               <ul>\n                  <li>\n                     <p>\n                        <code>workflowType.name</code>: String constraint. The key is\n                <code>swf:workflowType.name</code>.</p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>workflowType.version</code>: String constraint. The key is\n                <code>swf:workflowType.version</code>.</p>\n                  </li>\n               </ul>\n            </li>\n         </ul>\n         <p>If the caller doesn't have sufficient permissions to invoke the action, or the\n        parameter values fall outside the specified constraints, the action fails. The associated\n        event attribute's <code>cause</code> parameter is set to <code>OPERATION_NOT_PERMITTED</code>.\n        For details and example IAM policies, see <a href=\"https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html\">Using IAM to Manage Access to Amazon SWF\n        Workflows</a> in the <i>Amazon SWF Developer Guide</i>.</p>"
+            }
+        },
+        "com.amazonaws.swf#DeleteWorkflowTypeInput": {
+            "type": "structure",
+            "members": {
+                "domain": {
+                    "target": "com.amazonaws.swf#DomainName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the domain in which the workflow type is registered.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "workflowType": {
+                    "target": "com.amazonaws.swf#WorkflowType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The workflow type to delete.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
         "com.amazonaws.swf#DeprecateActivityType": {
             "type": "operation",
             "input": {
@@ -1867,7 +1957,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deprecates the specified <i>activity type</i>. After an activity type has\n      been deprecated, you cannot create new tasks of that activity type. Tasks of this type that\n      were scheduled before the type was deprecated continue to run.</p>\n         <note>\n            <p>This operation is eventually consistent. The results are best effort and may not\n        exactly reflect recent updates and changes.</p>\n         </note>\n         <p>\n            <b>Access Control</b>\n         </p>\n         <p>You can use IAM policies to control this action's access to Amazon SWF resources as\n      follows:</p>\n         <ul>\n            <li>\n               <p>Use a <code>Resource</code> element with the domain name to limit the action to\n          only specified domains.</p>\n            </li>\n            <li>\n               <p>Use an <code>Action</code> element to allow or deny permission to call this\n          action.</p>\n            </li>\n            <li>\n               <p>Constrain the following parameters by using a <code>Condition</code> element with\n          the appropriate keys.</p>\n               <ul>\n                  <li>\n                     <p>\n                        <code>activityType.name</code>: String constraint. The key is\n                <code>swf:activityType.name</code>.</p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>activityType.version</code>: String constraint. The key is\n                <code>swf:activityType.version</code>.</p>\n                  </li>\n               </ul>\n            </li>\n         </ul>\n         <p>If the caller doesn't have sufficient permissions to invoke the action, or the\n      parameter values fall outside the specified constraints, the action fails. The associated\n      event attribute's <code>cause</code> parameter is set to <code>OPERATION_NOT_PERMITTED</code>.\n      For details and example IAM policies, see <a href=\"https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html\">Using IAM to Manage Access to Amazon SWF\n        Workflows</a> in the <i>Amazon SWF Developer Guide</i>.</p>"
+                "smithy.api#documentation": "<p>Deprecates the specified <i>activity type</i>. After an activity type has\n      been deprecated, you cannot create new tasks of that activity type. Tasks of this type that\n      were scheduled before the type was deprecated continue to run.</p>\n         <p>\n            <b>Access Control</b>\n         </p>\n         <p>You can use IAM policies to control this action's access to Amazon SWF resources as\n      follows:</p>\n         <ul>\n            <li>\n               <p>Use a <code>Resource</code> element with the domain name to limit the action to\n          only specified domains.</p>\n            </li>\n            <li>\n               <p>Use an <code>Action</code> element to allow or deny permission to call this\n          action.</p>\n            </li>\n            <li>\n               <p>Constrain the following parameters by using a <code>Condition</code> element with\n          the appropriate keys.</p>\n               <ul>\n                  <li>\n                     <p>\n                        <code>activityType.name</code>: String constraint. The key is\n                <code>swf:activityType.name</code>.</p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>activityType.version</code>: String constraint. The key is\n                <code>swf:activityType.version</code>.</p>\n                  </li>\n               </ul>\n            </li>\n         </ul>\n         <p>If the caller doesn't have sufficient permissions to invoke the action, or the\n      parameter values fall outside the specified constraints, the action fails. The associated\n      event attribute's <code>cause</code> parameter is set to <code>OPERATION_NOT_PERMITTED</code>.\n      For details and example IAM policies, see <a href=\"https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html\">Using IAM to Manage Access to Amazon SWF\n        Workflows</a> in the <i>Amazon SWF Developer Guide</i>.</p>"
             }
         },
         "com.amazonaws.swf#DeprecateActivityTypeInput": {
@@ -5581,6 +5671,12 @@
                     "target": "com.amazonaws.swf#CountPendingDecisionTasks"
                 },
                 {
+                    "target": "com.amazonaws.swf#DeleteActivityType"
+                },
+                {
+                    "target": "com.amazonaws.swf#DeleteWorkflowType"
+                },
+                {
                     "target": "com.amazonaws.swf#DeprecateActivityType"
                 },
                 {
@@ -5739,7 +5835,6 @@
                                     ]
                                 }
                             ],
-                            "type": "tree",
                             "rules": [
                                 {
                                     "conditions": [
@@ -5782,7 +5877,8 @@
                                     },
                                     "type": "endpoint"
                                 }
-                            ]
+                            ],
+                            "type": "tree"
                         },
                         {
                             "conditions": [
@@ -5795,7 +5891,6 @@
                                     ]
                                 }
                             ],
-                            "type": "tree",
                             "rules": [
                                 {
                                     "conditions": [
@@ -5809,7 +5904,6 @@
                                             "assign": "PartitionResult"
                                         }
                                     ],
-                                    "type": "tree",
                                     "rules": [
                                         {
                                             "conditions": [
@@ -5832,7 +5926,6 @@
                                                     ]
                                                 }
                                             ],
-                                            "type": "tree",
                                             "rules": [
                                                 {
                                                     "conditions": [
@@ -5867,7 +5960,6 @@
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [],
@@ -5878,14 +5970,16 @@
                                                             },
                                                             "type": "endpoint"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [],
                                                     "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
                                                     "type": "error"
                                                 }
-                                            ]
+                                            ],
+                                            "type": "tree"
                                         },
                                         {
                                             "conditions": [
@@ -5899,14 +5993,12 @@
                                                     ]
                                                 }
                                             ],
-                                            "type": "tree",
                                             "rules": [
                                                 {
                                                     "conditions": [
                                                         {
                                                             "fn": "booleanEquals",
                                                             "argv": [
-                                                                true,
                                                                 {
                                                                     "fn": "getAttr",
                                                                     "argv": [
@@ -5915,18 +6007,17 @@
                                                                         },
                                                                         "supportsFIPS"
                                                                     ]
-                                                                }
+                                                                },
+                                                                true
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [
                                                                 {
                                                                     "fn": "stringEquals",
                                                                     "argv": [
-                                                                        "aws-us-gov",
                                                                         {
                                                                             "fn": "getAttr",
                                                                             "argv": [
@@ -5935,7 +6026,8 @@
                                                                                 },
                                                                                 "name"
                                                                             ]
-                                                                        }
+                                                                        },
+                                                                        "aws-us-gov"
                                                                     ]
                                                                 }
                                                             ],
@@ -5955,14 +6047,16 @@
                                                             },
                                                             "type": "endpoint"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [],
                                                     "error": "FIPS is enabled but this partition does not support FIPS",
                                                     "type": "error"
                                                 }
-                                            ]
+                                            ],
+                                            "type": "tree"
                                         },
                                         {
                                             "conditions": [
@@ -5976,7 +6070,6 @@
                                                     ]
                                                 }
                                             ],
-                                            "type": "tree",
                                             "rules": [
                                                 {
                                                     "conditions": [
@@ -5996,7 +6089,6 @@
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [],
@@ -6007,14 +6099,16 @@
                                                             },
                                                             "type": "endpoint"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [],
                                                     "error": "DualStack is enabled but this partition does not support DualStack",
                                                     "type": "error"
                                                 }
-                                            ]
+                                            ],
+                                            "type": "tree"
                                         },
                                         {
                                             "conditions": [],
@@ -6025,9 +6119,11 @@
                                             },
                                             "type": "endpoint"
                                         }
-                                    ]
+                                    ],
+                                    "type": "tree"
                                 }
-                            ]
+                            ],
+                            "type": "tree"
                         },
                         {
                             "conditions": [],
@@ -7574,6 +7670,18 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Returned when the specified activity or workflow type was already deprecated.</p>",
+                "smithy.api#error": "client"
+            }
+        },
+        "com.amazonaws.swf#TypeNotDeprecatedFault": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.swf#ErrorMessage"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Returned when the resource type has not been deprecated.</p>",
                 "smithy.api#error": "client"
             }
         },

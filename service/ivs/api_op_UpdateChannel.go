@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/ivs/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -40,12 +39,11 @@ type UpdateChannelInput struct {
 	// Whether the channel is private (enabled for playback authorization).
 	Authorized bool
 
-	// Whether the channel allows insecure RTMP ingest. Default: false .
+	// Whether the channel allows insecure RTMP and SRT ingest. Default: false .
 	InsecureIngest bool
 
 	// Channel latency mode. Use NORMAL to broadcast and deliver live video up to Full
-	// HD. Use LOW for near-real-time interaction with viewers. (Note: In the Amazon
-	// IVS console, LOW and NORMAL correspond to Ultra-low and Standard, respectively.)
+	// HD. Use LOW for near-real-time interaction with viewers.
 	LatencyMode types.ChannelLatencyMode
 
 	// Channel name.
@@ -68,8 +66,9 @@ type UpdateChannelInput struct {
 
 	// Channel type, which determines the allowable resolution and bitrate. If you
 	// exceed the allowable input resolution or bitrate, the stream probably will
-	// disconnect immediately. Default: STANDARD . For details, see Channel Types (https://docs.aws.amazon.com/ivs/latest/LowLatencyAPIReference/channel-types.html)
-	// .
+	// disconnect immediately. Default: STANDARD . For details, see [Channel Types].
+	//
+	// [Channel Types]: https://docs.aws.amazon.com/ivs/latest/LowLatencyAPIReference/channel-types.html
 	Type types.ChannelType
 
 	noSmithyDocumentSerde
@@ -108,25 +107,25 @@ func (c *Client) addOperationUpdateChannelMiddlewares(stack *middleware.Stack, o
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -141,13 +140,16 @@ func (c *Client) addOperationUpdateChannelMiddlewares(stack *middleware.Stack, o
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpUpdateChannelValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateChannel(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

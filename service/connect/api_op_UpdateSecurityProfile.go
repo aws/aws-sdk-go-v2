@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/connect/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -30,8 +29,10 @@ func (c *Client) UpdateSecurityProfile(ctx context.Context, params *UpdateSecuri
 
 type UpdateSecurityProfileInput struct {
 
-	// The identifier of the Amazon Connect instance. You can find the instance ID (https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html)
-	// in the Amazon Resource Name (ARN) of the instance.
+	// The identifier of the Amazon Connect instance. You can [find the instance ID] in the Amazon Resource
+	// Name (ARN) of the instance.
+	//
+	// [find the instance ID]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
 	//
 	// This member is required.
 	InstanceId *string
@@ -41,20 +42,28 @@ type UpdateSecurityProfileInput struct {
 	// This member is required.
 	SecurityProfileId *string
 
+	// The identifier of the hierarchy group that a security profile uses to restrict
+	// access to resources in Amazon Connect.
+	AllowedAccessControlHierarchyGroupId *string
+
 	// The list of tags that a security profile uses to restrict access to resources
 	// in Amazon Connect.
 	AllowedAccessControlTags map[string]string
 
-	// This API is in preview release for Amazon Connect and is subject to change. A
-	// list of the third-party application's metadata.
+	// A list of the third-party application's metadata.
 	Applications []types.Application
 
 	// The description of the security profile.
 	Description *string
 
+	// The list of resources that a security profile applies hierarchy restrictions to
+	// in Amazon Connect. Following are acceptable ResourceNames: User .
+	HierarchyRestrictedResources []string
+
 	// The permissions granted to a security profile. For a list of valid permissions,
-	// see List of security profile permissions (https://docs.aws.amazon.com/connect/latest/adminguide/security-profile-list.html)
-	// .
+	// see [List of security profile permissions].
+	//
+	// [List of security profile permissions]: https://docs.aws.amazon.com/connect/latest/adminguide/security-profile-list.html
 	Permissions []string
 
 	// The list of resources that a security profile applies tag restrictions to in
@@ -93,25 +102,25 @@ func (c *Client) addOperationUpdateSecurityProfileMiddlewares(stack *middleware.
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -126,13 +135,16 @@ func (c *Client) addOperationUpdateSecurityProfileMiddlewares(stack *middleware.
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpUpdateSecurityProfileValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateSecurityProfile(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

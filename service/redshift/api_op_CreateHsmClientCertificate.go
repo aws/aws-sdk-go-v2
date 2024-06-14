@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/redshift/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -14,12 +13,15 @@ import (
 
 // Creates an HSM client certificate that an Amazon Redshift cluster will use to
 // connect to the client's HSM in order to store and retrieve the keys used to
-// encrypt the cluster databases. The command returns a public key, which you must
-// store in the HSM. In addition to creating the HSM certificate, you must create
-// an Amazon Redshift HSM configuration that provides a cluster the information
-// needed to store and use encryption keys in the HSM. For more information, go to
-// Hardware Security Modules (https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-db-encryption.html#working-with-HSM)
-// in the Amazon Redshift Cluster Management Guide.
+// encrypt the cluster databases.
+//
+// The command returns a public key, which you must store in the HSM. In addition
+// to creating the HSM certificate, you must create an Amazon Redshift HSM
+// configuration that provides a cluster the information needed to store and use
+// encryption keys in the HSM. For more information, go to [Hardware Security Modules]in the Amazon Redshift
+// Cluster Management Guide.
+//
+// [Hardware Security Modules]: https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-db-encryption.html#working-with-HSM
 func (c *Client) CreateHsmClientCertificate(ctx context.Context, params *CreateHsmClientCertificateInput, optFns ...func(*Options)) (*CreateHsmClientCertificateOutput, error) {
 	if params == nil {
 		params = &CreateHsmClientCertificateInput{}
@@ -84,25 +86,25 @@ func (c *Client) addOperationCreateHsmClientCertificateMiddlewares(stack *middle
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -117,13 +119,16 @@ func (c *Client) addOperationCreateHsmClientCertificateMiddlewares(stack *middle
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpCreateHsmClientCertificateValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateHsmClientCertificate(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

@@ -6,17 +6,17 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/rds/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes a blue/green deployment. For more information, see Using Amazon RDS
-// Blue/Green Deployments for database updates (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/blue-green-deployments.html)
-// in the Amazon RDS User Guide and Using Amazon RDS Blue/Green Deployments for
-// database updates (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/blue-green-deployments.html)
-// in the Amazon Aurora User Guide.
+// Deletes a blue/green deployment.
+//
+// For more information, see [Using Amazon RDS Blue/Green Deployments for database updates] in the Amazon RDS User Guide and [Using Amazon RDS Blue/Green Deployments for database updates] in the Amazon
+// Aurora User Guide.
+//
+// [Using Amazon RDS Blue/Green Deployments for database updates]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/blue-green-deployments.html
 func (c *Client) DeleteBlueGreenDeployment(ctx context.Context, params *DeleteBlueGreenDeploymentInput, optFns ...func(*Options)) (*DeleteBlueGreenDeploymentOutput, error) {
 	if params == nil {
 		params = &DeleteBlueGreenDeploymentInput{}
@@ -35,15 +35,19 @@ func (c *Client) DeleteBlueGreenDeployment(ctx context.Context, params *DeleteBl
 type DeleteBlueGreenDeploymentInput struct {
 
 	// The unique identifier of the blue/green deployment to delete. This parameter
-	// isn't case-sensitive. Constraints:
+	// isn't case-sensitive.
+	//
+	// Constraints:
+	//
 	//   - Must match an existing blue/green deployment identifier.
 	//
 	// This member is required.
 	BlueGreenDeploymentIdentifier *string
 
 	// Specifies whether to delete the resources in the green environment. You can't
-	// specify this option if the blue/green deployment status (https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_BlueGreenDeployment.html)
-	// is SWITCHOVER_COMPLETED .
+	// specify this option if the blue/green deployment [status]is SWITCHOVER_COMPLETED .
+	//
+	// [status]: https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_BlueGreenDeployment.html
 	DeleteTarget *bool
 
 	noSmithyDocumentSerde
@@ -51,11 +55,12 @@ type DeleteBlueGreenDeploymentInput struct {
 
 type DeleteBlueGreenDeploymentOutput struct {
 
-	// Details about a blue/green deployment. For more information, see Using Amazon
-	// RDS Blue/Green Deployments for database updates (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/blue-green-deployments.html)
-	// in the Amazon RDS User Guide and Using Amazon RDS Blue/Green Deployments for
-	// database updates (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/blue-green-deployments.html)
-	// in the Amazon Aurora User Guide.
+	// Details about a blue/green deployment.
+	//
+	// For more information, see [Using Amazon RDS Blue/Green Deployments for database updates] in the Amazon RDS User Guide and [Using Amazon RDS Blue/Green Deployments for database updates] in the Amazon
+	// Aurora User Guide.
+	//
+	// [Using Amazon RDS Blue/Green Deployments for database updates]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/blue-green-deployments.html
 	BlueGreenDeployment *types.BlueGreenDeployment
 
 	// Metadata pertaining to the operation's result.
@@ -86,25 +91,25 @@ func (c *Client) addOperationDeleteBlueGreenDeploymentMiddlewares(stack *middlew
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -119,13 +124,16 @@ func (c *Client) addOperationDeleteBlueGreenDeploymentMiddlewares(stack *middlew
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDeleteBlueGreenDeploymentValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteBlueGreenDeployment(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

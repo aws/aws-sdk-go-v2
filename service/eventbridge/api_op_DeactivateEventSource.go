@@ -6,17 +6,19 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // You can use this operation to temporarily stop receiving events from the
-// specified partner event source. The matching event bus is not deleted. When you
-// deactivate a partner event source, the source goes into PENDING state. If it
-// remains in PENDING state for more than two weeks, it is deleted. To activate a
-// deactivated partner event source, use ActivateEventSource (https://docs.aws.amazon.com/eventbridge/latest/APIReference/API_ActivateEventSource.html)
-// .
+// specified partner event source. The matching event bus is not deleted.
+//
+// When you deactivate a partner event source, the source goes into PENDING state.
+// If it remains in PENDING state for more than two weeks, it is deleted.
+//
+// To activate a deactivated partner event source, use [ActivateEventSource].
+//
+// [ActivateEventSource]: https://docs.aws.amazon.com/eventbridge/latest/APIReference/API_ActivateEventSource.html
 func (c *Client) DeactivateEventSource(ctx context.Context, params *DeactivateEventSourceInput, optFns ...func(*Options)) (*DeactivateEventSourceOutput, error) {
 	if params == nil {
 		params = &DeactivateEventSourceInput{}
@@ -71,25 +73,25 @@ func (c *Client) addOperationDeactivateEventSourceMiddlewares(stack *middleware.
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -104,13 +106,16 @@ func (c *Client) addOperationDeactivateEventSourceMiddlewares(stack *middleware.
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDeactivateEventSourceValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDeactivateEventSource(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

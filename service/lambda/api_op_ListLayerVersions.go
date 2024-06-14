@@ -6,17 +6,18 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/lambda/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists the versions of an Lambda layer (https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html)
-// . Versions that have been deleted aren't listed. Specify a runtime identifier (https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html)
-// to list only versions that indicate that they're compatible with that runtime.
-// Specify a compatible architecture to include only layer versions that are
-// compatible with that architecture.
+// Lists the versions of an [Lambda layer]. Versions that have been deleted aren't listed.
+// Specify a [runtime identifier]to list only versions that indicate that they're compatible with that
+// runtime. Specify a compatible architecture to include only layer versions that
+// are compatible with that architecture.
+//
+// [Lambda layer]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html
+// [runtime identifier]: https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html
 func (c *Client) ListLayerVersions(ctx context.Context, params *ListLayerVersionsInput, optFns ...func(*Options)) (*ListLayerVersionsOutput, error) {
 	if params == nil {
 		params = &ListLayerVersionsInput{}
@@ -39,13 +40,16 @@ type ListLayerVersionsInput struct {
 	// This member is required.
 	LayerName *string
 
-	// The compatible instruction set architecture (https://docs.aws.amazon.com/lambda/latest/dg/foundation-arch.html)
-	// .
+	// The compatible [instruction set architecture].
+	//
+	// [instruction set architecture]: https://docs.aws.amazon.com/lambda/latest/dg/foundation-arch.html
 	CompatibleArchitecture types.Architecture
 
-	// A runtime identifier. For example, go1.x . The following list includes
-	// deprecated runtimes. For more information, see Runtime deprecation policy (https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html#runtime-support-policy)
-	// .
+	// A runtime identifier. For example, java21 .
+	//
+	// The following list includes deprecated runtimes. For more information, see [Runtime deprecation policy].
+	//
+	// [Runtime deprecation policy]: https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html#runtime-support-policy
 	CompatibleRuntime types.Runtime
 
 	// A pagination token returned by a previous call.
@@ -93,25 +97,25 @@ func (c *Client) addOperationListLayerVersionsMiddlewares(stack *middleware.Stac
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -126,13 +130,16 @@ func (c *Client) addOperationListLayerVersionsMiddlewares(stack *middleware.Stac
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpListLayerVersionsValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListLayerVersions(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

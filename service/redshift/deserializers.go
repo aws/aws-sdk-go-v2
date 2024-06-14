@@ -24,6 +24,14 @@ import (
 	"time"
 )
 
+func deserializeS3Expires(v string) (*time.Time, error) {
+	t, err := smithytime.ParseHTTPDate(v)
+	if err != nil {
+		return nil, nil
+	}
+	return &t, nil
+}
+
 type awsAwsquery_deserializeOpAcceptReservedNodeExchange struct {
 }
 
@@ -38384,6 +38392,19 @@ func awsAwsquery_deserializeDocumentSnapshot(v **types.Snapshot, decoder smithyx
 			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
 			if err := awsAwsquery_deserializeDocumentRestorableNodeTypeList(&sv.RestorableNodeTypes, nodeDecoder); err != nil {
 				return err
+			}
+
+		case strings.EqualFold("SnapshotArn", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.SnapshotArn = ptr.String(xtv)
 			}
 
 		case strings.EqualFold("SnapshotCreateTime", t.Name.Local):

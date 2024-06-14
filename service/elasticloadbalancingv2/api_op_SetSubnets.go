@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/elasticloadbalancingv2/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -14,9 +13,10 @@ import (
 
 // Enables the Availability Zones for the specified public subnets for the
 // specified Application Load Balancer, Network Load Balancer or Gateway Load
-// Balancer. The specified subnets replace the previously enabled subnets. When you
-// specify subnets for a Network Load Balancer, or Gateway Load Balancer you must
-// include all subnets that were enabled previously, with their existing
+// Balancer. The specified subnets replace the previously enabled subnets.
+//
+// When you specify subnets for a Network Load Balancer, or Gateway Load Balancer
+// you must include all subnets that were enabled previously, with their existing
 // configurations, plus any additional subnets.
 func (c *Client) SetSubnets(ctx context.Context, params *SetSubnetsInput, optFns ...func(*Options)) (*SetSubnetsOutput, error) {
 	if params == nil {
@@ -40,37 +40,59 @@ type SetSubnetsInput struct {
 	// This member is required.
 	LoadBalancerArn *string
 
+	// [Application Load Balancers] The IP address type. The possible values are ipv4
+	// (for only IPv4 addresses), dualstack (for IPv4 and IPv6 addresses), and
+	// dualstack-without-public-ipv4 (for IPv6 only public addresses, with private IPv4
+	// and IPv6 addresses).
+	//
 	// [Network Load Balancers] The type of IP addresses used by the subnets for your
 	// load balancer. The possible values are ipv4 (for IPv4 addresses) and dualstack
 	// (for IPv4 and IPv6 addresses). You can’t specify dualstack for a load balancer
-	// with a UDP or TCP_UDP listener. [Gateway Load Balancers] The type of IP
-	// addresses used by the subnets for your load balancer. The possible values are
-	// ipv4 (for IPv4 addresses) and dualstack (for IPv4 and IPv6 addresses).
+	// with a UDP or TCP_UDP listener.
+	//
+	// [Gateway Load Balancers] The type of IP addresses used by the subnets for your
+	// load balancer. The possible values are ipv4 (for IPv4 addresses) and dualstack
+	// (for IPv4 and IPv6 addresses).
 	IpAddressType types.IpAddressType
 
 	// The IDs of the public subnets. You can specify only one subnet per Availability
-	// Zone. You must specify either subnets or subnet mappings. [Application Load
-	// Balancers] You must specify subnets from at least two Availability Zones. You
-	// cannot specify Elastic IP addresses for your subnets. [Application Load
-	// Balancers on Outposts] You must specify one Outpost subnet. [Application Load
-	// Balancers on Local Zones] You can specify subnets from one or more Local Zones.
+	// Zone. You must specify either subnets or subnet mappings.
+	//
+	// [Application Load Balancers] You must specify subnets from at least two
+	// Availability Zones. You cannot specify Elastic IP addresses for your subnets.
+	//
+	// [Application Load Balancers on Outposts] You must specify one Outpost subnet.
+	//
+	// [Application Load Balancers on Local Zones] You can specify subnets from one or
+	// more Local Zones.
+	//
 	// [Network Load Balancers] You can specify subnets from one or more Availability
 	// Zones. You can specify one Elastic IP address per subnet if you need static IP
 	// addresses for your internet-facing load balancer. For internal load balancers,
 	// you can specify one private IP address per subnet from the IPv4 range of the
 	// subnet. For internet-facing load balancer, you can specify one IPv6 address per
-	// subnet. [Gateway Load Balancers] You can specify subnets from one or more
-	// Availability Zones.
+	// subnet.
+	//
+	// [Gateway Load Balancers] You can specify subnets from one or more Availability
+	// Zones.
 	SubnetMappings []types.SubnetMapping
 
 	// The IDs of the public subnets. You can specify only one subnet per Availability
-	// Zone. You must specify either subnets or subnet mappings. [Application Load
-	// Balancers] You must specify subnets from at least two Availability Zones.
+	// Zone. You must specify either subnets or subnet mappings.
+	//
+	// [Application Load Balancers] You must specify subnets from at least two
+	// Availability Zones.
+	//
 	// [Application Load Balancers on Outposts] You must specify one Outpost subnet.
+	//
 	// [Application Load Balancers on Local Zones] You can specify subnets from one or
-	// more Local Zones. [Network Load Balancers] You can specify subnets from one or
-	// more Availability Zones. [Gateway Load Balancers] You can specify subnets from
-	// one or more Availability Zones.
+	// more Local Zones.
+	//
+	// [Network Load Balancers] You can specify subnets from one or more Availability
+	// Zones.
+	//
+	// [Gateway Load Balancers] You can specify subnets from one or more Availability
+	// Zones.
 	Subnets []string
 
 	noSmithyDocumentSerde
@@ -81,8 +103,11 @@ type SetSubnetsOutput struct {
 	// Information about the subnets.
 	AvailabilityZones []types.AvailabilityZone
 
-	// [Network Load Balancers] The IP address type. [Gateway Load Balancers] The IP
-	// address type.
+	// [Application Load Balancers] The IP address type.
+	//
+	// [Network Load Balancers] The IP address type.
+	//
+	// [Gateway Load Balancers] The IP address type.
 	IpAddressType types.IpAddressType
 
 	// Metadata pertaining to the operation's result.
@@ -113,25 +138,25 @@ func (c *Client) addOperationSetSubnetsMiddlewares(stack *middleware.Stack, opti
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -146,13 +171,16 @@ func (c *Client) addOperationSetSubnetsMiddlewares(stack *middleware.Stack, opti
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpSetSubnetsValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opSetSubnets(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

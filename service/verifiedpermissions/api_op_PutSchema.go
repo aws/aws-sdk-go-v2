@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/verifiedpermissions/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -18,10 +17,13 @@ import (
 // policy store. Any changes to the schema validate only policies and templates
 // submitted after the schema change. Existing policies and templates are not
 // re-evaluated against the changed schema. If you later update a policy, then it
-// is evaluated against the new schema at that time. Verified Permissions is
-// eventually consistent (https://wikipedia.org/wiki/Eventual_consistency) . It can
-// take a few seconds for a new or changed element to be propagate through the
-// service and be visible in the results of other Verified Permissions operations.
+// is evaluated against the new schema at that time.
+//
+// Verified Permissions is [eventually consistent] . It can take a few seconds for a new or changed
+// element to propagate through the service and be visible in the results of other
+// Verified Permissions operations.
+//
+// [eventually consistent]: https://wikipedia.org/wiki/Eventual_consistency
 func (c *Client) PutSchema(ctx context.Context, params *PutSchemaInput, optFns ...func(*Options)) (*PutSchemaOutput, error) {
 	if params == nil {
 		params = &PutSchemaInput{}
@@ -103,25 +105,25 @@ func (c *Client) addOperationPutSchemaMiddlewares(stack *middleware.Stack, optio
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -136,13 +138,16 @@ func (c *Client) addOperationPutSchemaMiddlewares(stack *middleware.Stack, optio
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpPutSchemaValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opPutSchema(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

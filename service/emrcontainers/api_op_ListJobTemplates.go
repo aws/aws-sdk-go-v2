@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/emrcontainers/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -37,13 +36,13 @@ type ListJobTemplatesInput struct {
 	// The date and time after which the job templates were created.
 	CreatedAfter *time.Time
 
-	// The date and time before which the job templates were created.
+	//  The date and time before which the job templates were created.
 	CreatedBefore *time.Time
 
-	// The maximum number of job templates that can be listed.
+	//  The maximum number of job templates that can be listed.
 	MaxResults *int32
 
-	// The token for the next set of job templates to return.
+	//  The token for the next set of job templates to return.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -51,7 +50,7 @@ type ListJobTemplatesInput struct {
 
 type ListJobTemplatesOutput struct {
 
-	// This output displays the token for the next set of job templates.
+	//  This output displays the token for the next set of job templates.
 	NextToken *string
 
 	// This output lists information about the specified job templates.
@@ -85,25 +84,25 @@ func (c *Client) addOperationListJobTemplatesMiddlewares(stack *middleware.Stack
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -118,10 +117,13 @@ func (c *Client) addOperationListJobTemplatesMiddlewares(stack *middleware.Stack
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListJobTemplates(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -149,7 +151,7 @@ var _ ListJobTemplatesAPIClient = (*Client)(nil)
 
 // ListJobTemplatesPaginatorOptions is the paginator options for ListJobTemplates
 type ListJobTemplatesPaginatorOptions struct {
-	// The maximum number of job templates that can be listed.
+	//  The maximum number of job templates that can be listed.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

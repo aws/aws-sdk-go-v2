@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/lookoutequipment/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -31,28 +30,28 @@ func (c *Client) ListLabels(ctx context.Context, params *ListLabelsInput, optFns
 
 type ListLabelsInput struct {
 
-	// Retruns the name of the label group.
+	//  Returns the name of the label group.
 	//
 	// This member is required.
 	LabelGroupName *string
 
-	// Lists the labels that pertain to a particular piece of equipment.
+	//  Lists the labels that pertain to a particular piece of equipment.
 	Equipment *string
 
-	// Returns labels with a particular fault code.
+	//  Returns labels with a particular fault code.
 	FaultCode *string
 
-	// Returns all labels with a start time earlier than the end time given.
+	//  Returns all labels with a start time earlier than the end time given.
 	IntervalEndTime *time.Time
 
-	// Returns all the labels with a end time equal to or later than the start time
+	//  Returns all the labels with a end time equal to or later than the start time
 	// given.
 	IntervalStartTime *time.Time
 
-	// Specifies the maximum number of labels to list.
+	//  Specifies the maximum number of labels to list.
 	MaxResults *int32
 
-	// An opaque pagination token indicating where to continue the listing of label
+	//  An opaque pagination token indicating where to continue the listing of label
 	// groups.
 	NextToken *string
 
@@ -61,10 +60,15 @@ type ListLabelsInput struct {
 
 type ListLabelsOutput struct {
 
-	// A summary of the items in the label group.
+	//  A summary of the items in the label group.
+	//
+	// If you don't supply the LabelGroupName request parameter, or if you supply the
+	// name of a label group that doesn't exist, ListLabels returns an empty array in
+	// LabelSummaries .
 	LabelSummaries []types.LabelSummary
 
-	// An opaque pagination token indicating where to continue the listing of datasets.
+	//  An opaque pagination token indicating where to continue the listing of
+	// datasets.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -95,25 +99,25 @@ func (c *Client) addOperationListLabelsMiddlewares(stack *middleware.Stack, opti
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -128,13 +132,16 @@ func (c *Client) addOperationListLabelsMiddlewares(stack *middleware.Stack, opti
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpListLabelsValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListLabels(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -161,7 +168,7 @@ var _ ListLabelsAPIClient = (*Client)(nil)
 
 // ListLabelsPaginatorOptions is the paginator options for ListLabels
 type ListLabelsPaginatorOptions struct {
-	// Specifies the maximum number of labels to list.
+	//  Specifies the maximum number of labels to list.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

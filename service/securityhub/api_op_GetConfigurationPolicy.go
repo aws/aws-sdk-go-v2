@@ -6,14 +6,14 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/securityhub/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
-// Provides information about a configuration policy. Only the Security Hub
+//	Provides information about a configuration policy. Only the Security Hub
+//
 // delegated administrator can invoke this operation from the home Region.
 func (c *Client) GetConfigurationPolicy(ctx context.Context, params *GetConfigurationPolicyInput, optFns ...func(*Options)) (*GetConfigurationPolicyOutput, error) {
 	if params == nil {
@@ -32,7 +32,7 @@ func (c *Client) GetConfigurationPolicy(ctx context.Context, params *GetConfigur
 
 type GetConfigurationPolicyInput struct {
 
-	// The Amazon Resource Name (ARN) or universally unique identifier (UUID) of the
+	//  The Amazon Resource Name (ARN) or universally unique identifier (UUID) of the
 	// configuration policy.
 	//
 	// This member is required.
@@ -43,10 +43,10 @@ type GetConfigurationPolicyInput struct {
 
 type GetConfigurationPolicyOutput struct {
 
-	// The ARN of the configuration policy.
+	//  The ARN of the configuration policy.
 	Arn *string
 
-	// An object that defines how Security Hub is configured. It includes whether
+	//  An object that defines how Security Hub is configured. It includes whether
 	// Security Hub is enabled or disabled, a list of enabled security standards, a
 	// list of enabled or disabled security controls, and a list of custom parameter
 	// values for specified controls. If the policy includes a list of security
@@ -56,20 +56,20 @@ type GetConfigurationPolicyOutput struct {
 	// released controls).
 	ConfigurationPolicy types.Policy
 
-	// The date and time, in UTC and ISO 8601 format, that the configuration policy
+	//  The date and time, in UTC and ISO 8601 format, that the configuration policy
 	// was created.
 	CreatedAt *time.Time
 
-	// The description of the configuration policy.
+	//  The description of the configuration policy.
 	Description *string
 
-	// The UUID of the configuration policy.
+	//  The UUID of the configuration policy.
 	Id *string
 
-	// The name of the configuration policy.
+	//  The name of the configuration policy.
 	Name *string
 
-	// The date and time, in UTC and ISO 8601 format, that the configuration policy
+	//  The date and time, in UTC and ISO 8601 format, that the configuration policy
 	// was last updated.
 	UpdatedAt *time.Time
 
@@ -101,25 +101,25 @@ func (c *Client) addOperationGetConfigurationPolicyMiddlewares(stack *middleware
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -134,13 +134,16 @@ func (c *Client) addOperationGetConfigurationPolicyMiddlewares(stack *middleware
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpGetConfigurationPolicyValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetConfigurationPolicy(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

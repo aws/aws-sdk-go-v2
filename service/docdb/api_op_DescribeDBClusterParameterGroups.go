@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/docdb/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -30,11 +29,13 @@ func (c *Client) DescribeDBClusterParameterGroups(ctx context.Context, params *D
 	return out, nil
 }
 
-// Represents the input to DescribeDBClusterParameterGroups .
+// Represents the input to DescribeDBClusterParameterGroups.
 type DescribeDBClusterParameterGroupsInput struct {
 
 	// The name of a specific cluster parameter group to return details for.
+	//
 	// Constraints:
+	//
 	//   - If provided, must match the name of an existing DBClusterParameterGroup .
 	DBClusterParameterGroupName *string
 
@@ -46,16 +47,19 @@ type DescribeDBClusterParameterGroupsInput struct {
 	// value specified by MaxRecords .
 	Marker *string
 
-	// The maximum number of records to include in the response. If more records exist
-	// than the specified MaxRecords value, a pagination token (marker) is included in
-	// the response so that the remaining results can be retrieved. Default: 100
+	//  The maximum number of records to include in the response. If more records
+	// exist than the specified MaxRecords value, a pagination token (marker) is
+	// included in the response so that the remaining results can be retrieved.
+	//
+	// Default: 100
+	//
 	// Constraints: Minimum 20, maximum 100.
 	MaxRecords *int32
 
 	noSmithyDocumentSerde
 }
 
-// Represents the output of DBClusterParameterGroups .
+// Represents the output of DBClusterParameterGroups.
 type DescribeDBClusterParameterGroupsOutput struct {
 
 	// A list of cluster parameter groups.
@@ -94,25 +98,25 @@ func (c *Client) addOperationDescribeDBClusterParameterGroupsMiddlewares(stack *
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -127,13 +131,16 @@ func (c *Client) addOperationDescribeDBClusterParameterGroupsMiddlewares(stack *
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDescribeDBClusterParameterGroupsValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeDBClusterParameterGroups(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -162,9 +169,12 @@ var _ DescribeDBClusterParameterGroupsAPIClient = (*Client)(nil)
 // DescribeDBClusterParameterGroupsPaginatorOptions is the paginator options for
 // DescribeDBClusterParameterGroups
 type DescribeDBClusterParameterGroupsPaginatorOptions struct {
-	// The maximum number of records to include in the response. If more records exist
-	// than the specified MaxRecords value, a pagination token (marker) is included in
-	// the response so that the remaining results can be retrieved. Default: 100
+	//  The maximum number of records to include in the response. If more records
+	// exist than the specified MaxRecords value, a pagination token (marker) is
+	// included in the response so that the remaining results can be retrieved.
+	//
+	// Default: 100
+	//
 	// Constraints: Minimum 20, maximum 100.
 	Limit int32
 

@@ -6,18 +6,19 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Restores a directory using an existing directory snapshot. When you restore a
-// directory from a snapshot, any changes made to the directory after the snapshot
-// date are overwritten. This action returns as soon as the restore operation is
-// initiated. You can monitor the progress of the restore operation by calling the
-// DescribeDirectories operation with the directory identifier. When the
-// DirectoryDescription.Stage value changes to Active , the restore operation is
-// complete.
+// Restores a directory using an existing directory snapshot.
+//
+// When you restore a directory from a snapshot, any changes made to the directory
+// after the snapshot date are overwritten.
+//
+// This action returns as soon as the restore operation is initiated. You can
+// monitor the progress of the restore operation by calling the DescribeDirectoriesoperation with the
+// directory identifier. When the DirectoryDescription.Stage value changes to
+// Active , the restore operation is complete.
 func (c *Client) RestoreFromSnapshot(ctx context.Context, params *RestoreFromSnapshotInput, optFns ...func(*Options)) (*RestoreFromSnapshotOutput, error) {
 	if params == nil {
 		params = &RestoreFromSnapshotInput{}
@@ -74,25 +75,25 @@ func (c *Client) addOperationRestoreFromSnapshotMiddlewares(stack *middleware.St
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -107,13 +108,16 @@ func (c *Client) addOperationRestoreFromSnapshotMiddlewares(stack *middleware.St
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpRestoreFromSnapshotValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opRestoreFromSnapshot(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

@@ -6,31 +6,42 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/wafv2/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates the specified RegexPatternSet . This operation completely replaces the
-// mutable specifications that you already have for the regex pattern set with the
-// ones that you provide to this call. To modify a regex pattern set, do the
-// following:
+// Updates the specified RegexPatternSet.
+//
+// This operation completely replaces the mutable specifications that you already
+// have for the regex pattern set with the ones that you provide to this call.
+//
+// To modify a regex pattern set, do the following:
+//
 //   - Retrieve it by calling GetRegexPatternSet
+//
 //   - Update its settings as needed
+//
 //   - Provide the complete regex pattern set specification to this call
 //
-// Temporary inconsistencies during updates When you create or change a web ACL or
-// other WAF resources, the changes take a small amount of time to propagate to all
-// areas where the resources are stored. The propagation time can be from a few
-// seconds to a number of minutes. The following are examples of the temporary
-// inconsistencies that you might notice during change propagation:
+// # Temporary inconsistencies during updates
+//
+// When you create or change a web ACL or other WAF resources, the changes take a
+// small amount of time to propagate to all areas where the resources are stored.
+// The propagation time can be from a few seconds to a number of minutes.
+//
+// The following are examples of the temporary inconsistencies that you might
+// notice during change propagation:
+//
 //   - After you create a web ACL, if you try to associate it with a resource, you
 //     might get an exception indicating that the web ACL is unavailable.
+//
 //   - After you add a rule group to a web ACL, the new rule group rules might be
 //     in effect in one area where the web ACL is used and not in another.
+//
 //   - After you change a rule action setting, you might see the old action in
 //     some places and the new action in others.
+//
 //   - After you add an IP address to an IP set that is in use in a blocking rule,
 //     the new address might be blocked in one area while still allowed in another.
 func (c *Client) UpdateRegexPatternSet(ctx context.Context, params *UpdateRegexPatternSetInput, optFns ...func(*Options)) (*UpdateRegexPatternSetOutput, error) {
@@ -81,10 +92,14 @@ type UpdateRegexPatternSetInput struct {
 	// regional application. A regional application can be an Application Load Balancer
 	// (ALB), an Amazon API Gateway REST API, an AppSync GraphQL API, an Amazon Cognito
 	// user pool, an App Runner service, or an Amazon Web Services Verified Access
-	// instance. To work with CloudFront, you must also specify the Region US East (N.
-	// Virginia) as follows:
+	// instance.
+	//
+	// To work with CloudFront, you must also specify the Region US East (N. Virginia)
+	// as follows:
+	//
 	//   - CLI - Specify the Region when you use the CloudFront scope:
 	//   --scope=CLOUDFRONT --region=us-east-1 .
+	//
 	//   - API and SDKs - For all calls, use the Region endpoint us-east-1.
 	//
 	// This member is required.
@@ -130,25 +145,25 @@ func (c *Client) addOperationUpdateRegexPatternSetMiddlewares(stack *middleware.
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -163,13 +178,16 @@ func (c *Client) addOperationUpdateRegexPatternSetMiddlewares(stack *middleware.
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpUpdateRegexPatternSetValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateRegexPatternSet(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

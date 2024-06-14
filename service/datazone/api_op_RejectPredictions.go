@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/datazone/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -45,13 +44,14 @@ type RejectPredictionsInput struct {
 	// of the request.
 	ClientToken *string
 
-	//
+	// Specifies the prediction (aka, the automatically generated piece of metadata)
+	// and the target (for example, a column name) that can be rejected.
 	RejectChoices []types.RejectChoice
 
-	//
+	// Specifies the rule (or the conditions) under which a prediction can be rejected.
 	RejectRule *types.RejectRule
 
-	//
+	// The revision that is to be made to the asset.
 	Revision *string
 
 	noSmithyDocumentSerde
@@ -59,17 +59,17 @@ type RejectPredictionsInput struct {
 
 type RejectPredictionsOutput struct {
 
-	//
+	// The ID of the asset.
 	//
 	// This member is required.
 	AssetId *string
 
-	//
+	// The revision that is to be made to the asset.
 	//
 	// This member is required.
 	AssetRevision *string
 
-	//
+	// The ID of the Amazon DataZone domain.
 	//
 	// This member is required.
 	DomainId *string
@@ -102,25 +102,25 @@ func (c *Client) addOperationRejectPredictionsMiddlewares(stack *middleware.Stac
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -135,6 +135,9 @@ func (c *Client) addOperationRejectPredictionsMiddlewares(stack *middleware.Stac
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opRejectPredictionsMiddleware(stack, options); err != nil {
 		return err
 	}
@@ -144,7 +147,7 @@ func (c *Client) addOperationRejectPredictionsMiddlewares(stack *middleware.Stac
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opRejectPredictions(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

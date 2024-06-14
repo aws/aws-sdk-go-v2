@@ -6,19 +6,22 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/chimesdkvoice/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates phone number details, such as product type or calling name, for the
-// specified phone number ID. You can update one phone number detail at a time. For
-// example, you can update either the product type or the calling name in one
-// action. For numbers outside the U.S., you must use the Amazon Chime SDK SIP
-// Media Application Dial-In product type. Updates to outbound calling names can
-// take 72 hours to complete. Pending updates to outbound calling names must be
-// complete before you can request another update.
+// Updates phone number details, such as product type, calling name, or phone
+// number name for the specified phone number ID. You can update one phone number
+// detail at a time. For example, you can update either the product type, calling
+// name, or phone number name in one action.
+//
+// For numbers outside the U.S., you must use the Amazon Chime SDK SIP Media
+// Application Dial-In product type.
+//
+// Updates to outbound calling names can take 72 hours to complete. Pending
+// updates to outbound calling names must be complete before you can request
+// another update.
 func (c *Client) UpdatePhoneNumber(ctx context.Context, params *UpdatePhoneNumberInput, optFns ...func(*Options)) (*UpdatePhoneNumberOutput, error) {
 	if params == nil {
 		params = &UpdatePhoneNumberInput{}
@@ -44,7 +47,7 @@ type UpdatePhoneNumberInput struct {
 	// The outbound calling name associated with the phone number.
 	CallingName *string
 
-	// Specifies the name assigned to one or more phone numbers.
+	// Specifies the updated name assigned to one or more phone numbers.
 	Name *string
 
 	// The product type.
@@ -86,25 +89,25 @@ func (c *Client) addOperationUpdatePhoneNumberMiddlewares(stack *middleware.Stac
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -119,13 +122,16 @@ func (c *Client) addOperationUpdatePhoneNumberMiddlewares(stack *middleware.Stac
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpUpdatePhoneNumberValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdatePhoneNumber(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

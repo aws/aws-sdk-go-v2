@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/gamelift/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -15,34 +14,52 @@ import (
 // Creates a placement queue that processes requests for new game sessions. A
 // queue uses FleetIQ algorithms to determine the best placement locations and find
 // an available game server there, then prompts the game server process to start a
-// new game session. A game session queue is configured with a set of destinations
-// (Amazon GameLift fleets or aliases), which determine the locations where the
-// queue can place new game sessions. These destinations can span multiple fleet
-// types (Spot and On-Demand), instance types, and Amazon Web Services Regions. If
-// the queue includes multi-location fleets, the queue is able to place game
-// sessions in all of a fleet's remote locations. You can opt to filter out
-// individual locations if needed. The queue configuration also determines how
-// FleetIQ selects the best available placement for a new game session. Before
-// searching for an available game server, FleetIQ first prioritizes the queue's
-// destinations and locations, with the best placement locations on top. You can
-// set up the queue to use the FleetIQ default prioritization or provide an
-// alternate set of priorities. To create a new queue, provide a name, timeout
-// value, and a list of destinations. Optionally, specify a sort configuration
-// and/or a filter, and define a set of latency cap policies. You can also include
-// the ARN for an Amazon Simple Notification Service (SNS) topic to receive
-// notifications of game session placement activity. Notifications using SNS or
-// CloudWatch events is the preferred way to track placement activity. If
-// successful, a new GameSessionQueue object is returned with an assigned queue
-// ARN. New game session requests, which are submitted to queue with
-// StartGameSessionPlacement (https://docs.aws.amazon.com/gamelift/latest/apireference/API_StartGameSessionPlacement.html)
-// or StartMatchmaking (https://docs.aws.amazon.com/gamelift/latest/apireference/API_StartMatchmaking.html)
-// , reference a queue's name or ARN. Learn more Design a game session queue (https://docs.aws.amazon.com/gamelift/latest/developerguide/queues-design.html)
-// Create a game session queue (https://docs.aws.amazon.com/gamelift/latest/developerguide/queues-creating.html)
-// Related actions CreateGameSessionQueue (https://docs.aws.amazon.com/gamelift/latest/apireference/API_CreateGameSessionQueue.html)
-// | DescribeGameSessionQueues (https://docs.aws.amazon.com/gamelift/latest/apireference/API_DescribeGameSessionQueues.html)
-// | UpdateGameSessionQueue (https://docs.aws.amazon.com/gamelift/latest/apireference/API_UpdateGameSessionQueue.html)
-// | DeleteGameSessionQueue (https://docs.aws.amazon.com/gamelift/latest/apireference/API_DeleteGameSessionQueue.html)
-// | All APIs by task (https://docs.aws.amazon.com/gamelift/latest/developerguide/reference-awssdk.html#reference-awssdk-resources-fleets)
+// new game session.
+//
+// A game session queue is configured with a set of destinations (Amazon GameLift
+// fleets or aliases), which determine the locations where the queue can place new
+// game sessions. These destinations can span multiple fleet types (Spot and
+// On-Demand), instance types, and Amazon Web Services Regions. If the queue
+// includes multi-location fleets, the queue is able to place game sessions in all
+// of a fleet's remote locations. You can opt to filter out individual locations if
+// needed.
+//
+// The queue configuration also determines how FleetIQ selects the best available
+// placement for a new game session. Before searching for an available game server,
+// FleetIQ first prioritizes the queue's destinations and locations, with the best
+// placement locations on top. You can set up the queue to use the FleetIQ default
+// prioritization or provide an alternate set of priorities.
+//
+// To create a new queue, provide a name, timeout value, and a list of
+// destinations. Optionally, specify a sort configuration and/or a filter, and
+// define a set of latency cap policies. You can also include the ARN for an Amazon
+// Simple Notification Service (SNS) topic to receive notifications of game session
+// placement activity. Notifications using SNS or CloudWatch events is the
+// preferred way to track placement activity.
+//
+// If successful, a new GameSessionQueue object is returned with an assigned queue
+// ARN. New game session requests, which are submitted to queue with [StartGameSessionPlacement]or [StartMatchmaking],
+// reference a queue's name or ARN.
+//
+// # Learn more
+//
+// [Design a game session queue]
+//
+// [Create a game session queue]
+//
+// # Related actions
+//
+// [CreateGameSessionQueue]| [DescribeGameSessionQueues] | [UpdateGameSessionQueue] | [DeleteGameSessionQueue] | [All APIs by task]
+//
+// [StartMatchmaking]: https://docs.aws.amazon.com/gamelift/latest/apireference/API_StartMatchmaking.html
+// [DescribeGameSessionQueues]: https://docs.aws.amazon.com/gamelift/latest/apireference/API_DescribeGameSessionQueues.html
+// [StartGameSessionPlacement]: https://docs.aws.amazon.com/gamelift/latest/apireference/API_StartGameSessionPlacement.html
+// [Create a game session queue]: https://docs.aws.amazon.com/gamelift/latest/developerguide/queues-creating.html
+// [CreateGameSessionQueue]: https://docs.aws.amazon.com/gamelift/latest/apireference/API_CreateGameSessionQueue.html
+// [UpdateGameSessionQueue]: https://docs.aws.amazon.com/gamelift/latest/apireference/API_UpdateGameSessionQueue.html
+// [Design a game session queue]: https://docs.aws.amazon.com/gamelift/latest/developerguide/queues-design.html
+// [DeleteGameSessionQueue]: https://docs.aws.amazon.com/gamelift/latest/apireference/API_DeleteGameSessionQueue.html
+// [All APIs by task]: https://docs.aws.amazon.com/gamelift/latest/developerguide/reference-awssdk.html#reference-awssdk-resources-fleets
 func (c *Client) CreateGameSessionQueue(ctx context.Context, params *CreateGameSessionQueueInput, optFns ...func(*Options)) (*CreateGameSessionQueueOutput, error) {
 	if params == nil {
 		params = &CreateGameSessionQueueInput{}
@@ -82,8 +99,9 @@ type CreateGameSessionQueueInput struct {
 	FilterConfiguration *types.FilterConfiguration
 
 	// An SNS topic ARN that is set up to receive game session placement
-	// notifications. See Setting up notifications for game session placement (https://docs.aws.amazon.com/gamelift/latest/developerguide/queue-notification.html)
-	// .
+	// notifications. See [Setting up notifications for game session placement].
+	//
+	// [Setting up notifications for game session placement]: https://docs.aws.amazon.com/gamelift/latest/developerguide/queue-notification.html
 	NotificationTarget *string
 
 	// A set of policies that act as a sliding cap on player latency. FleetIQ works to
@@ -103,8 +121,9 @@ type CreateGameSessionQueueInput struct {
 	// A list of labels to assign to the new game session queue resource. Tags are
 	// developer-defined key-value pairs. Tagging Amazon Web Services resources are
 	// useful for resource management, access management and cost allocation. For more
-	// information, see Tagging Amazon Web Services Resources (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html)
-	// in the Amazon Web Services General Reference.
+	// information, see [Tagging Amazon Web Services Resources]in the Amazon Web Services General Reference.
+	//
+	// [Tagging Amazon Web Services Resources]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
 	Tags []types.Tag
 
 	// The maximum time, in seconds, that a new game session placement request remains
@@ -148,25 +167,25 @@ func (c *Client) addOperationCreateGameSessionQueueMiddlewares(stack *middleware
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -181,13 +200,16 @@ func (c *Client) addOperationCreateGameSessionQueueMiddlewares(stack *middleware
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpCreateGameSessionQueueValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateGameSessionQueue(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

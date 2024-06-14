@@ -6,14 +6,14 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/wellarchitected/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Get a consolidated report of your workloads. You can optionally choose to
-// include workloads that have been shared with you.
+// Get a consolidated report of your workloads.
+//
+// You can optionally choose to include workloads that have been shared with you.
 func (c *Client) GetConsolidatedReport(ctx context.Context, params *GetConsolidatedReportInput, optFns ...func(*Options)) (*GetConsolidatedReportOutput, error) {
 	if params == nil {
 		params = &GetConsolidatedReportInput{}
@@ -31,8 +31,9 @@ func (c *Client) GetConsolidatedReport(ctx context.Context, params *GetConsolida
 
 type GetConsolidatedReportInput struct {
 
-	// The format of the consolidated report. For PDF , Base64String is returned. For
-	// JSON , Metrics is returned.
+	// The format of the consolidated report.
+	//
+	// For PDF , Base64String is returned. For JSON , Metrics is returned.
 	//
 	// This member is required.
 	Format types.ReportFormat
@@ -51,13 +52,16 @@ type GetConsolidatedReportInput struct {
 
 type GetConsolidatedReportOutput struct {
 
-	// The Base64-encoded string representation of a lens review report. This data can
-	// be used to create a PDF file. Only returned by GetConsolidatedReport when PDF
-	// format is requested.
+	// The Base64-encoded string representation of a lens review report.
+	//
+	// This data can be used to create a PDF file.
+	//
+	// Only returned by GetConsolidatedReport when PDF format is requested.
 	Base64String *string
 
-	// The metrics that make up the consolidated report. Only returned when JSON
-	// format is requested.
+	// The metrics that make up the consolidated report.
+	//
+	// Only returned when JSON format is requested.
 	Metrics []types.ConsolidatedReportMetric
 
 	// The token to use to retrieve the next set of results.
@@ -91,25 +95,25 @@ func (c *Client) addOperationGetConsolidatedReportMiddlewares(stack *middleware.
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -124,13 +128,16 @@ func (c *Client) addOperationGetConsolidatedReportMiddlewares(stack *middleware.
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpGetConsolidatedReportValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetConsolidatedReport(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

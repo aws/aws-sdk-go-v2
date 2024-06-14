@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/mediapackagev2/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -58,8 +57,23 @@ type CreateChannelInput struct {
 	// Enter any descriptive text that helps you to identify the channel.
 	Description *string
 
+	// The input type will be an immutable field which will be used to define whether
+	// the channel will allow CMAF ingest or HLS ingest. If unprovided, it will default
+	// to HLS to preserve current behavior.
+	//
+	// The allowed values are:
+	//
+	//   - HLS - The HLS streaming specification (which defines M3U8 manifests and TS
+	//   segments).
+	//
+	//   - CMAF - The DASH-IF CMAF Ingest specification (which defines CMAF segments
+	//   with optional DASH manifests).
+	InputType types.InputType
+
 	// A comma-separated list of tag key:value pairs that you define. For example:
-	// "Key1": "Value1",
+	//
+	//     "Key1": "Value1",
+	//
 	//     "Key2": "Value2"
 	Tags map[string]string
 
@@ -99,8 +113,25 @@ type CreateChannelOutput struct {
 	// The description for your channel.
 	Description *string
 
+	// The current Entity Tag (ETag) associated with this resource. The entity tag can
+	// be used to safely make concurrent updates to the resource.
+	ETag *string
+
 	// The list of ingest endpoints.
 	IngestEndpoints []types.IngestEndpoint
+
+	// The input type will be an immutable field which will be used to define whether
+	// the channel will allow CMAF ingest or HLS ingest. If unprovided, it will default
+	// to HLS to preserve current behavior.
+	//
+	// The allowed values are:
+	//
+	//   - HLS - The HLS streaming specification (which defines M3U8 manifests and TS
+	//   segments).
+	//
+	//   - CMAF - The DASH-IF CMAF Ingest specification (which defines CMAF segments
+	//   with optional DASH manifests).
+	InputType types.InputType
 
 	// The comma-separated list of tag key:value pairs assigned to the channel.
 	Tags map[string]string
@@ -133,25 +164,25 @@ func (c *Client) addOperationCreateChannelMiddlewares(stack *middleware.Stack, o
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -166,6 +197,9 @@ func (c *Client) addOperationCreateChannelMiddlewares(stack *middleware.Stack, o
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opCreateChannelMiddleware(stack, options); err != nil {
 		return err
 	}
@@ -175,7 +209,7 @@ func (c *Client) addOperationCreateChannelMiddlewares(stack *middleware.Stack, o
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateChannel(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

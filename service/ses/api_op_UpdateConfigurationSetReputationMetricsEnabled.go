@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -15,8 +14,9 @@ import (
 // a specific configuration set in a given Amazon Web Services Region. Reputation
 // metrics include bounce and complaint rates. These metrics are published to
 // Amazon CloudWatch. By using CloudWatch, you can create alarms when bounce or
-// complaint rates exceed certain thresholds. You can execute this operation no
-// more than once per second.
+// complaint rates exceed certain thresholds.
+//
+// You can execute this operation no more than once per second.
 func (c *Client) UpdateConfigurationSetReputationMetricsEnabled(ctx context.Context, params *UpdateConfigurationSetReputationMetricsEnabledInput, optFns ...func(*Options)) (*UpdateConfigurationSetReputationMetricsEnabledOutput, error) {
 	if params == nil {
 		params = &UpdateConfigurationSetReputationMetricsEnabledInput{}
@@ -79,25 +79,25 @@ func (c *Client) addOperationUpdateConfigurationSetReputationMetricsEnabledMiddl
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -112,13 +112,16 @@ func (c *Client) addOperationUpdateConfigurationSetReputationMetricsEnabledMiddl
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpUpdateConfigurationSetReputationMetricsEnabledValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateConfigurationSetReputationMetricsEnabled(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

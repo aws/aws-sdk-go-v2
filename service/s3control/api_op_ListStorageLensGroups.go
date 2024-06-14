@@ -16,13 +16,16 @@ import (
 	"strings"
 )
 
-// Lists all the Storage Lens groups in the specified home Region. To use this
-// operation, you must have the permission to perform the s3:ListStorageLensGroups
-// action. For more information about the required Storage Lens Groups permissions,
-// see Setting account permissions to use S3 Storage Lens groups (https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage_lens_iam_permissions.html#storage_lens_groups_permissions)
-// . For information about Storage Lens groups errors, see List of Amazon S3
-// Storage Lens error codes (https://docs.aws.amazon.com/AmazonS3/latest/API/ErrorResponses.html#S3LensErrorCodeList)
-// .
+//	Lists all the Storage Lens groups in the specified home Region.
+//
+// To use this operation, you must have the permission to perform the
+// s3:ListStorageLensGroups action. For more information about the required Storage
+// Lens Groups permissions, see [Setting account permissions to use S3 Storage Lens groups].
+//
+// For information about Storage Lens groups errors, see [List of Amazon S3 Storage Lens error codes].
+//
+// [Setting account permissions to use S3 Storage Lens groups]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage_lens_iam_permissions.html#storage_lens_groups_permissions
+// [List of Amazon S3 Storage Lens error codes]: https://docs.aws.amazon.com/AmazonS3/latest/API/ErrorResponses.html#S3LensErrorCodeList
 func (c *Client) ListStorageLensGroups(ctx context.Context, params *ListStorageLensGroupsInput, optFns ...func(*Options)) (*ListStorageLensGroupsOutput, error) {
 	if params == nil {
 		params = &ListStorageLensGroupsInput{}
@@ -40,7 +43,7 @@ func (c *Client) ListStorageLensGroups(ctx context.Context, params *ListStorageL
 
 type ListStorageLensGroupsInput struct {
 
-	// The Amazon Web Services account ID that owns the Storage Lens groups.
+	//  The Amazon Web Services account ID that owns the Storage Lens groups.
 	//
 	// This member is required.
 	AccountId *string
@@ -58,13 +61,13 @@ func (in *ListStorageLensGroupsInput) bindEndpointParams(p *EndpointParameters) 
 
 type ListStorageLensGroupsOutput struct {
 
-	// If NextToken is returned, there are more Storage Lens groups results available.
-	// The value of NextToken is a unique pagination token for each page. Make the
-	// call again using the returned token to retrieve the next page. Keep all other
-	// arguments unchanged. Each pagination token expires after 24 hours.
+	//  If NextToken is returned, there are more Storage Lens groups results
+	// available. The value of NextToken is a unique pagination token for each page.
+	// Make the call again using the returned token to retrieve the next page. Keep all
+	// other arguments unchanged. Each pagination token expires after 24 hours.
 	NextToken *string
 
-	// The list of Storage Lens groups that exist in the specified home Region.
+	//  The list of Storage Lens groups that exist in the specified home Region.
 	StorageLensGroupList []types.ListStorageLensGroupEntry
 
 	// Metadata pertaining to the operation's result.
@@ -95,25 +98,25 @@ func (c *Client) addOperationListStorageLensGroupsMiddlewares(stack *middleware.
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -131,6 +134,9 @@ func (c *Client) addOperationListStorageLensGroupsMiddlewares(stack *middleware.
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addEndpointPrefix_opListStorageLensGroupsMiddleware(stack); err != nil {
 		return err
 	}
@@ -143,7 +149,7 @@ func (c *Client) addOperationListStorageLensGroupsMiddlewares(stack *middleware.
 	if err = addMetadataRetrieverMiddleware(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addListStorageLensGroupsUpdateEndpoint(stack, options); err != nil {

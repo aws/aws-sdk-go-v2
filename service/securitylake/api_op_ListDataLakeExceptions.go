@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/securitylake/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -36,12 +35,13 @@ type ListDataLakeExceptionsInput struct {
 
 	// List if there are more results available. The value of nextToken is a unique
 	// pagination token for each page. Repeat the call using the returned token to
-	// retrieve the next page. Keep all other arguments unchanged. Each pagination
-	// token expires after 24 hours. Using an expired pagination token will return an
-	// HTTP 400 InvalidToken error.
+	// retrieve the next page. Keep all other arguments unchanged.
+	//
+	// Each pagination token expires after 24 hours. Using an expired pagination token
+	// will return an HTTP 400 InvalidToken error.
 	NextToken *string
 
-	// List the Amazon Web Services Regions from which exceptions are retrieved.
+	// The Amazon Web Services Regions from which exceptions are retrieved.
 	Regions []string
 
 	noSmithyDocumentSerde
@@ -54,9 +54,10 @@ type ListDataLakeExceptionsOutput struct {
 
 	// List if there are more results available. The value of nextToken is a unique
 	// pagination token for each page. Repeat the call using the returned token to
-	// retrieve the next page. Keep all other arguments unchanged. Each pagination
-	// token expires after 24 hours. Using an expired pagination token will return an
-	// HTTP 400 InvalidToken error.
+	// retrieve the next page. Keep all other arguments unchanged.
+	//
+	// Each pagination token expires after 24 hours. Using an expired pagination token
+	// will return an HTTP 400 InvalidToken error.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -87,25 +88,25 @@ func (c *Client) addOperationListDataLakeExceptionsMiddlewares(stack *middleware
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -120,10 +121,13 @@ func (c *Client) addOperationListDataLakeExceptionsMiddlewares(stack *middleware
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListDataLakeExceptions(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

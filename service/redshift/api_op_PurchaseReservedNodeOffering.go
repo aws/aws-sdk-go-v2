@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/redshift/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -14,11 +13,14 @@ import (
 
 // Allows you to purchase reserved nodes. Amazon Redshift offers a predefined set
 // of reserved node offerings. You can purchase one or more of the offerings. You
-// can call the DescribeReservedNodeOfferings API to obtain the available reserved
-// node offerings. You can call this API by providing a specific reserved node
-// offering and the number of nodes you want to reserve. For more information about
-// reserved node offerings, go to Purchasing Reserved Nodes (https://docs.aws.amazon.com/redshift/latest/mgmt/purchase-reserved-node-instance.html)
-// in the Amazon Redshift Cluster Management Guide.
+// can call the DescribeReservedNodeOfferingsAPI to obtain the available reserved node offerings. You can call
+// this API by providing a specific reserved node offering and the number of nodes
+// you want to reserve.
+//
+// For more information about reserved node offerings, go to [Purchasing Reserved Nodes] in the Amazon
+// Redshift Cluster Management Guide.
+//
+// [Purchasing Reserved Nodes]: https://docs.aws.amazon.com/redshift/latest/mgmt/purchase-reserved-node-instance.html
 func (c *Client) PurchaseReservedNodeOffering(ctx context.Context, params *PurchaseReservedNodeOfferingInput, optFns ...func(*Options)) (*PurchaseReservedNodeOfferingOutput, error) {
 	if params == nil {
 		params = &PurchaseReservedNodeOfferingInput{}
@@ -41,7 +43,9 @@ type PurchaseReservedNodeOfferingInput struct {
 	// This member is required.
 	ReservedNodeOfferingId *string
 
-	// The number of reserved nodes that you want to purchase. Default: 1
+	// The number of reserved nodes that you want to purchase.
+	//
+	// Default: 1
 	NodeCount *int32
 
 	noSmithyDocumentSerde
@@ -49,8 +53,8 @@ type PurchaseReservedNodeOfferingInput struct {
 
 type PurchaseReservedNodeOfferingOutput struct {
 
-	// Describes a reserved node. You can call the DescribeReservedNodeOfferings API
-	// to obtain the available reserved node offerings.
+	// Describes a reserved node. You can call the DescribeReservedNodeOfferings API to obtain the available
+	// reserved node offerings.
 	ReservedNode *types.ReservedNode
 
 	// Metadata pertaining to the operation's result.
@@ -81,25 +85,25 @@ func (c *Client) addOperationPurchaseReservedNodeOfferingMiddlewares(stack *midd
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -114,13 +118,16 @@ func (c *Client) addOperationPurchaseReservedNodeOfferingMiddlewares(stack *midd
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpPurchaseReservedNodeOfferingValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opPurchaseReservedNodeOffering(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

@@ -6,16 +6,17 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/managedblockchainquery/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Gets the details of a transaction. This action will return transaction details
-// for all transactions that are confirmed on the blockchain, even if they have not
-// reached finality (https://docs.aws.amazon.com/managed-blockchain/latest/ambq-dg/key-concepts.html#finality)
-// .
+// Gets the details of a transaction.
+//
+// This action will return transaction details for all transactions that are
+// confirmed on the blockchain, even if they have not reached [finality].
+//
+// [finality]: https://docs.aws.amazon.com/managed-blockchain/latest/ambq-dg/key-concepts.html#finality
 func (c *Client) GetTransaction(ctx context.Context, params *GetTransactionInput, optFns ...func(*Options)) (*GetTransactionOutput, error) {
 	if params == nil {
 		params = &GetTransactionInput{}
@@ -38,11 +39,14 @@ type GetTransactionInput struct {
 	// This member is required.
 	Network types.QueryNetwork
 
-	// The hash of the transaction. It is generated whenever a transaction is verified
-	// and added to the blockchain.
-	//
-	// This member is required.
+	// The hash of a transaction. It is generated when a transaction is created.
 	TransactionHash *string
+
+	// The identifier of a Bitcoin transaction. It is generated when a transaction is
+	// created.
+	//
+	// transactionId is only supported on the Bitcoin networks.
+	TransactionId *string
 
 	noSmithyDocumentSerde
 }
@@ -82,25 +86,25 @@ func (c *Client) addOperationGetTransactionMiddlewares(stack *middleware.Stack, 
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -115,13 +119,16 @@ func (c *Client) addOperationGetTransactionMiddlewares(stack *middleware.Stack, 
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpGetTransactionValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetTransaction(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

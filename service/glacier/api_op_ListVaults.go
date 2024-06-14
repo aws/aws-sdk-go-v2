@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	glaciercust "github.com/aws/aws-sdk-go-v2/service/glacier/internal/customizations"
 	"github.com/aws/aws-sdk-go-v2/service/glacier/types"
 	"github.com/aws/smithy-go/middleware"
@@ -14,22 +13,27 @@ import (
 )
 
 // This operation lists all vaults owned by the calling user's account. The list
-// returned in the response is ASCII-sorted by vault name. By default, this
-// operation returns up to 10 items. If there are more vaults to list, the response
-// marker field contains the vault Amazon Resource Name (ARN) at which to continue
-// the list with a new List Vaults request; otherwise, the marker field is null .
-// To return a list of vaults that begins at a specific vault, set the marker
-// request parameter to the vault ARN you obtained from a previous List Vaults
-// request. You can also limit the number of vaults returned in the response by
-// specifying the limit parameter in the request. An AWS account has full
-// permission to perform all operations (actions). However, AWS Identity and Access
-// Management (IAM) users don't have any permissions by default. You must grant
-// them explicit permission to perform specific actions. For more information, see
-// Access Control Using AWS Identity and Access Management (IAM) (https://docs.aws.amazon.com/amazonglacier/latest/dev/using-iam-with-amazon-glacier.html)
-// . For conceptual information and underlying REST API, see Retrieving Vault
-// Metadata in Amazon S3 Glacier (https://docs.aws.amazon.com/amazonglacier/latest/dev/retrieving-vault-info.html)
-// and List Vaults  (https://docs.aws.amazon.com/amazonglacier/latest/dev/api-vaults-get.html)
-// in the Amazon Glacier Developer Guide.
+// returned in the response is ASCII-sorted by vault name.
+//
+// By default, this operation returns up to 10 items. If there are more vaults to
+// list, the response marker field contains the vault Amazon Resource Name (ARN)
+// at which to continue the list with a new List Vaults request; otherwise, the
+// marker field is null . To return a list of vaults that begins at a specific
+// vault, set the marker request parameter to the vault ARN you obtained from a
+// previous List Vaults request. You can also limit the number of vaults returned
+// in the response by specifying the limit parameter in the request.
+//
+// An AWS account has full permission to perform all operations (actions).
+// However, AWS Identity and Access Management (IAM) users don't have any
+// permissions by default. You must grant them explicit permission to perform
+// specific actions. For more information, see [Access Control Using AWS Identity and Access Management (IAM)].
+//
+// For conceptual information and underlying REST API, see [Retrieving Vault Metadata in Amazon S3 Glacier] and [List Vaults] in the Amazon
+// Glacier Developer Guide.
+//
+// [List Vaults]: https://docs.aws.amazon.com/amazonglacier/latest/dev/api-vaults-get.html
+// [Retrieving Vault Metadata in Amazon S3 Glacier]: https://docs.aws.amazon.com/amazonglacier/latest/dev/retrieving-vault-info.html
+// [Access Control Using AWS Identity and Access Management (IAM)]: https://docs.aws.amazon.com/amazonglacier/latest/dev/using-iam-with-amazon-glacier.html
 func (c *Client) ListVaults(ctx context.Context, params *ListVaultsInput, optFns ...func(*Options)) (*ListVaultsOutput, error) {
 	if params == nil {
 		params = &ListVaultsInput{}
@@ -109,25 +113,25 @@ func (c *Client) addOperationListVaultsMiddlewares(stack *middleware.Stack, opti
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -142,13 +146,16 @@ func (c *Client) addOperationListVaultsMiddlewares(stack *middleware.Stack, opti
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpListVaultsValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListVaults(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

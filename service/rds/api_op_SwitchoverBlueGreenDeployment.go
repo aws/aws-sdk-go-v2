@@ -6,20 +6,21 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/rds/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Switches over a blue/green deployment. Before you switch over, production
-// traffic is routed to the databases in the blue environment. After you switch
-// over, production traffic is routed to the databases in the green environment.
-// For more information, see Using Amazon RDS Blue/Green Deployments for database
-// updates (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/blue-green-deployments.html)
-// in the Amazon RDS User Guide and Using Amazon RDS Blue/Green Deployments for
-// database updates (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/blue-green-deployments.html)
-// in the Amazon Aurora User Guide.
+// Switches over a blue/green deployment.
+//
+// Before you switch over, production traffic is routed to the databases in the
+// blue environment. After you switch over, production traffic is routed to the
+// databases in the green environment.
+//
+// For more information, see [Using Amazon RDS Blue/Green Deployments for database updates] in the Amazon RDS User Guide and [Using Amazon RDS Blue/Green Deployments for database updates] in the Amazon
+// Aurora User Guide.
+//
+// [Using Amazon RDS Blue/Green Deployments for database updates]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/blue-green-deployments.html
 func (c *Client) SwitchoverBlueGreenDeployment(ctx context.Context, params *SwitchoverBlueGreenDeploymentInput, optFns ...func(*Options)) (*SwitchoverBlueGreenDeploymentOutput, error) {
 	if params == nil {
 		params = &SwitchoverBlueGreenDeploymentInput{}
@@ -37,15 +38,21 @@ func (c *Client) SwitchoverBlueGreenDeployment(ctx context.Context, params *Swit
 
 type SwitchoverBlueGreenDeploymentInput struct {
 
-	// The unique identifier of the blue/green deployment. Constraints:
+	// The unique identifier of the blue/green deployment.
+	//
+	// Constraints:
+	//
 	//   - Must match an existing blue/green deployment identifier.
 	//
 	// This member is required.
 	BlueGreenDeploymentIdentifier *string
 
-	// The amount of time, in seconds, for the switchover to complete. Default: 300 If
-	// the switchover takes longer than the specified duration, then any changes are
-	// rolled back, and no changes are made to the environments.
+	// The amount of time, in seconds, for the switchover to complete.
+	//
+	// Default: 300
+	//
+	// If the switchover takes longer than the specified duration, then any changes
+	// are rolled back, and no changes are made to the environments.
 	SwitchoverTimeout *int32
 
 	noSmithyDocumentSerde
@@ -53,11 +60,12 @@ type SwitchoverBlueGreenDeploymentInput struct {
 
 type SwitchoverBlueGreenDeploymentOutput struct {
 
-	// Details about a blue/green deployment. For more information, see Using Amazon
-	// RDS Blue/Green Deployments for database updates (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/blue-green-deployments.html)
-	// in the Amazon RDS User Guide and Using Amazon RDS Blue/Green Deployments for
-	// database updates (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/blue-green-deployments.html)
-	// in the Amazon Aurora User Guide.
+	// Details about a blue/green deployment.
+	//
+	// For more information, see [Using Amazon RDS Blue/Green Deployments for database updates] in the Amazon RDS User Guide and [Using Amazon RDS Blue/Green Deployments for database updates] in the Amazon
+	// Aurora User Guide.
+	//
+	// [Using Amazon RDS Blue/Green Deployments for database updates]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/blue-green-deployments.html
 	BlueGreenDeployment *types.BlueGreenDeployment
 
 	// Metadata pertaining to the operation's result.
@@ -88,25 +96,25 @@ func (c *Client) addOperationSwitchoverBlueGreenDeploymentMiddlewares(stack *mid
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -121,13 +129,16 @@ func (c *Client) addOperationSwitchoverBlueGreenDeploymentMiddlewares(stack *mid
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpSwitchoverBlueGreenDeploymentValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opSwitchoverBlueGreenDeployment(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

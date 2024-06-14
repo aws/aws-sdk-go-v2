@@ -1,3 +1,48 @@
+# v1.7.7 (2024-06-07)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.7.6 (2024-06-03)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.7.5 (2024-05-16)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.7.4 (2024-05-15)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.7.3 (2024-03-29)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.7.2 (2024-03-18)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.7.1 (2024-03-07)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.7.0 (2024-03-04)
+
+* **Feature**: Add http.SameSite config in CookieOptions.
+
+# v1.6.2 (2024-02-23)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.6.1 (2024-02-21)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.6.0 (2024-02-13)
+
+* **Feature**: Bump minimum Go version to 1.20 per our language support policy.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.5.10 (2024-01-04)
 
 * **Dependency Update**: Updated to the latest SDK module versions

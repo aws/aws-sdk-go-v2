@@ -2373,7 +2373,20 @@
                     "outputToken": "nextToken",
                     "items": "agentsInfo",
                     "pageSize": "maxResults"
-                }
+                },
+                "smithy.test#smokeTests": [
+                    {
+                        "id": "DescribeAgentsSuccess",
+                        "params": {},
+                        "vendorParams": {
+                            "region": "us-west-2"
+                        },
+                        "vendorParamsShape": "aws.test#AwsVendorParams",
+                        "expect": {
+                            "success": {}
+                        }
+                    }
+                ]
             }
         },
         "com.amazonaws.applicationdiscoveryservice#DescribeAgentsRequest": {

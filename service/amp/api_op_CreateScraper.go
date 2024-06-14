@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/amp/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -16,17 +15,24 @@ import (
 // pulls metrics from Prometheus-compatible sources within an Amazon EKS cluster,
 // and sends them to your Amazon Managed Service for Prometheus workspace. You can
 // configure the scraper to control what metrics are collected, and what
-// transformations are applied prior to sending them to your workspace. If needed,
-// an IAM role will be created for you that gives Amazon Managed Service for
-// Prometheus access to the metrics in your cluster. For more information, see
-// Using roles for scraping metrics from EKS (https://docs.aws.amazon.com/prometheus/latest/userguide/using-service-linked-roles.html#using-service-linked-roles-prom-scraper)
-// in the Amazon Managed Service for Prometheus User Guide. You cannot update a
-// scraper. If you want to change the configuration of the scraper, create a new
-// scraper and delete the old one. The scrapeConfiguration parameter contains the
-// base64-encoded version of the YAML configuration file. For more information
-// about collectors, including what metrics are collected, and how to configure the
-// scraper, see Amazon Web Services managed collectors (https://docs.aws.amazon.com/prometheus/latest/userguide/AMP-collector.html)
-// in the Amazon Managed Service for Prometheus User Guide.
+// transformations are applied prior to sending them to your workspace.
+//
+// If needed, an IAM role will be created for you that gives Amazon Managed
+// Service for Prometheus access to the metrics in your cluster. For more
+// information, see [Using roles for scraping metrics from EKS]in the Amazon Managed Service for Prometheus User Guide.
+//
+// You cannot update a scraper. If you want to change the configuration of the
+// scraper, create a new scraper and delete the old one.
+//
+// The scrapeConfiguration parameter contains the base64-encoded version of the
+// YAML configuration file.
+//
+// For more information about collectors, including what metrics are collected,
+// and how to configure the scraper, see [Amazon Web Services managed collectors]in the Amazon Managed Service for
+// Prometheus User Guide.
+//
+// [Amazon Web Services managed collectors]: https://docs.aws.amazon.com/prometheus/latest/userguide/AMP-collector.html
+// [Using roles for scraping metrics from EKS]: https://docs.aws.amazon.com/prometheus/latest/userguide/using-service-linked-roles.html#using-service-linked-roles-prom-scraper
 func (c *Client) CreateScraper(ctx context.Context, params *CreateScraperInput, optFns ...func(*Options)) (*CreateScraperOutput, error) {
 	if params == nil {
 		params = &CreateScraperInput{}
@@ -50,8 +56,8 @@ type CreateScraperInput struct {
 	// This member is required.
 	Destination types.Destination
 
-	// The configuration file to use in the new scraper. For more information, see
-	// Scraper configuration in the Amazon Managed Service for Prometheus User Guide.
+	// The configuration file to use in the new scraper. For more information, see Scraper configuration in
+	// the Amazon Managed Service for Prometheus User Guide.
 	//
 	// This member is required.
 	ScrapeConfiguration types.ScrapeConfiguration
@@ -124,25 +130,25 @@ func (c *Client) addOperationCreateScraperMiddlewares(stack *middleware.Stack, o
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -157,6 +163,9 @@ func (c *Client) addOperationCreateScraperMiddlewares(stack *middleware.Stack, o
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opCreateScraperMiddleware(stack, options); err != nil {
 		return err
 	}
@@ -166,7 +175,7 @@ func (c *Client) addOperationCreateScraperMiddlewares(stack *middleware.Stack, o
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateScraper(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

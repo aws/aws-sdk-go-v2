@@ -6,14 +6,13 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/servicediscovery/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Lists summary information for all the services that are associated with one or
-// more specified namespaces.
+// more namespaces.
 func (c *Client) ListServices(ctx context.Context, params *ListServicesInput, optFns ...func(*Options)) (*ListServicesOutput, error) {
 	if params == nil {
 		params = &ListServicesInput{}
@@ -32,8 +31,10 @@ func (c *Client) ListServices(ctx context.Context, params *ListServicesInput, op
 type ListServicesInput struct {
 
 	// A complex type that contains specifications for the namespaces that you want to
-	// list services for. If you specify more than one filter, an operation must match
-	// all filters to be returned by ListServices .
+	// list services for.
+	//
+	// If you specify more than one filter, an operation must match all filters to be
+	// returned by ListServices .
 	Filters []types.ServiceFilter
 
 	// The maximum number of services that you want Cloud Map to return in the
@@ -41,12 +42,15 @@ type ListServicesInput struct {
 	// , Cloud Map returns up to 100 services.
 	MaxResults *int32
 
-	// For the first ListServices request, omit this value. If the response contains
-	// NextToken , submit another ListServices request to get the next group of
-	// results. Specify the value of NextToken from the previous response in the next
-	// request. Cloud Map gets MaxResults services and then filters them based on the
-	// specified criteria. It's possible that no services in the first MaxResults
-	// services matched the specified criteria but that subsequent groups of MaxResults
+	// For the first ListServices request, omit this value.
+	//
+	// If the response contains NextToken , submit another ListServices request to get
+	// the next group of results. Specify the value of NextToken from the previous
+	// response in the next request.
+	//
+	// Cloud Map gets MaxResults services and then filters them based on the specified
+	// criteria. It's possible that no services in the first MaxResults services
+	// matched the specified criteria but that subsequent groups of MaxResults
 	// services do contain services that match the criteria.
 	NextToken *string
 
@@ -57,11 +61,12 @@ type ListServicesOutput struct {
 
 	// If the response contains NextToken , submit another ListServices request to get
 	// the next group of results. Specify the value of NextToken from the previous
-	// response in the next request. Cloud Map gets MaxResults services and then
-	// filters them based on the specified criteria. It's possible that no services in
-	// the first MaxResults services matched the specified criteria but that
-	// subsequent groups of MaxResults services do contain services that match the
-	// criteria.
+	// response in the next request.
+	//
+	// Cloud Map gets MaxResults services and then filters them based on the specified
+	// criteria. It's possible that no services in the first MaxResults services
+	// matched the specified criteria but that subsequent groups of MaxResults
+	// services do contain services that match the criteria.
 	NextToken *string
 
 	// An array that contains one ServiceSummary object for each service that matches
@@ -96,25 +101,25 @@ func (c *Client) addOperationListServicesMiddlewares(stack *middleware.Stack, op
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -129,13 +134,16 @@ func (c *Client) addOperationListServicesMiddlewares(stack *middleware.Stack, op
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpListServicesValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListServices(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

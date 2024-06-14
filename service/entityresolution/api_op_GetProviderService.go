@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/entityresolution/document"
 	"github.com/aws/aws-sdk-go-v2/service/entityresolution/types"
 	"github.com/aws/smithy-go/middleware"
@@ -92,12 +91,21 @@ type GetProviderServiceOutput struct {
 	// This member is required.
 	ProviderServiceType types.ServiceType
 
+	// Input schema for the provider service.
+	ProviderComponentSchema *types.ProviderComponentSchema
+
 	// The definition of the provider configuration.
 	ProviderConfigurationDefinition document.Interface
+
+	// The provider configuration required for different ID namespace types.
+	ProviderIdNameSpaceConfiguration *types.ProviderIdNameSpaceConfiguration
 
 	// The Amazon Web Services accounts and the S3 permissions that are required by
 	// some providers to create an S3 bucket for intermediate data storage.
 	ProviderIntermediateDataAccessConfiguration *types.ProviderIntermediateDataAccessConfiguration
+
+	// Provider service job configurations.
+	ProviderJobConfiguration document.Interface
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -127,25 +135,25 @@ func (c *Client) addOperationGetProviderServiceMiddlewares(stack *middleware.Sta
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -160,13 +168,16 @@ func (c *Client) addOperationGetProviderServiceMiddlewares(stack *middleware.Sta
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpGetProviderServiceValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetProviderService(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

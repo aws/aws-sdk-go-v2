@@ -6,20 +6,22 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/elasticinference/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Describes information over a provided set of accelerators belonging to an
-// account. February 15, 2023: Starting April 15, 2023, AWS will not onboard new
-// customers to Amazon Elastic Inference (EI), and will help current customers
-// migrate their workloads to options that offer better price and performance.
-// After April 15, 2023, new customers will not be able to launch instances with
-// Amazon EI accelerators in Amazon SageMaker, Amazon ECS, or Amazon EC2. However,
-// customers who have used Amazon EI at least once during the past 30-day period
-// are considered current customers and will be able to continue using the service.
+//	Describes information over a provided set of accelerators belonging to an
+//
+// account.
+//
+// February 15, 2023: Starting April 15, 2023, AWS will not onboard new customers
+// to Amazon Elastic Inference (EI), and will help current customers migrate their
+// workloads to options that offer better price and performance. After April 15,
+// 2023, new customers will not be able to launch instances with Amazon EI
+// accelerators in Amazon SageMaker, Amazon ECS, or Amazon EC2. However, customers
+// who have used Amazon EI at least once during the past 30-day period are
+// considered current customers and will be able to continue using the service.
 func (c *Client) DescribeAccelerators(ctx context.Context, params *DescribeAcceleratorsInput, optFns ...func(*Options)) (*DescribeAcceleratorsOutput, error) {
 	if params == nil {
 		params = &DescribeAcceleratorsInput{}
@@ -37,22 +39,22 @@ func (c *Client) DescribeAccelerators(ctx context.Context, params *DescribeAccel
 
 type DescribeAcceleratorsInput struct {
 
-	// The IDs of the accelerators to describe.
+	//  The IDs of the accelerators to describe.
 	AcceleratorIds []string
 
-	// One or more filters. Filter names and values are case-sensitive. Valid filter
+	//  One or more filters. Filter names and values are case-sensitive. Valid filter
 	// names are: accelerator-types: can provide a list of accelerator type names to
 	// filter for. instance-id: can provide a list of EC2 instance ids to filter for.
 	Filters []types.Filter
 
-	// The total number of items to return in the command's output. If the total
+	//  The total number of items to return in the command's output. If the total
 	// number of items available is more than the value specified, a NextToken is
 	// provided in the command's output. To resume pagination, provide the NextToken
 	// value in the starting-token argument of a subsequent command. Do not use the
 	// NextToken response element directly outside of the AWS CLI.
 	MaxResults int32
 
-	// A token to specify where to start paginating. This is the NextToken from a
+	//  A token to specify where to start paginating. This is the NextToken from a
 	// previously truncated response.
 	NextToken *string
 
@@ -61,10 +63,10 @@ type DescribeAcceleratorsInput struct {
 
 type DescribeAcceleratorsOutput struct {
 
-	// The details of the Elastic Inference Accelerators.
+	//  The details of the Elastic Inference Accelerators.
 	AcceleratorSet []types.ElasticInferenceAccelerator
 
-	// A token to specify where to start paginating. This is the NextToken from a
+	//  A token to specify where to start paginating. This is the NextToken from a
 	// previously truncated response.
 	NextToken *string
 
@@ -96,25 +98,25 @@ func (c *Client) addOperationDescribeAcceleratorsMiddlewares(stack *middleware.S
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -129,10 +131,13 @@ func (c *Client) addOperationDescribeAcceleratorsMiddlewares(stack *middleware.S
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeAccelerators(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -161,7 +166,7 @@ var _ DescribeAcceleratorsAPIClient = (*Client)(nil)
 // DescribeAcceleratorsPaginatorOptions is the paginator options for
 // DescribeAccelerators
 type DescribeAcceleratorsPaginatorOptions struct {
-	// The total number of items to return in the command's output. If the total
+	//  The total number of items to return in the command's output. If the total
 	// number of items available is more than the value specified, a NextToken is
 	// provided in the command's output. To resume pagination, provide the NextToken
 	// value in the starting-token argument of a subsequent command. Do not use the

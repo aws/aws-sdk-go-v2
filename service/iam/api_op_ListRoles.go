@@ -6,23 +6,30 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/iam/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Lists the IAM roles that have the specified path prefix. If there are none, the
-// operation returns an empty list. For more information about roles, see IAM roles (https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles.html)
-// in the IAM User Guide. IAM resource-listing operations return a subset of the
-// available attributes for the resource. This operation does not return the
-// following attributes, even though they are an attribute of the returned object:
+// operation returns an empty list. For more information about roles, see [IAM roles]in the
+// IAM User Guide.
+//
+// IAM resource-listing operations return a subset of the available attributes for
+// the resource. This operation does not return the following attributes, even
+// though they are an attribute of the returned object:
+//
 //   - PermissionsBoundary
+//
 //   - RoleLastUsed
+//
 //   - Tags
 //
-// To view all of the information for a role, see GetRole . You can paginate the
-// results using the MaxItems and Marker parameters.
+// To view all of the information for a role, see GetRole.
+//
+// You can paginate the results using the MaxItems and Marker parameters.
+//
+// [IAM roles]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles.html
 func (c *Client) ListRoles(ctx context.Context, params *ListRolesInput, optFns ...func(*Options)) (*ListRolesOutput, error) {
 	if params == nil {
 		params = &ListRolesInput{}
@@ -48,22 +55,27 @@ type ListRolesInput struct {
 
 	// Use this only when paginating results to indicate the maximum number of items
 	// you want in the response. If additional items exist beyond the maximum you
-	// specify, the IsTruncated response element is true . If you do not include this
-	// parameter, the number of items defaults to 100. Note that IAM might return fewer
-	// results, even when there are more results available. In that case, the
-	// IsTruncated response element returns true , and Marker contains a value to
-	// include in the subsequent call that tells the service where to continue from.
+	// specify, the IsTruncated response element is true .
+	//
+	// If you do not include this parameter, the number of items defaults to 100. Note
+	// that IAM might return fewer results, even when there are more results available.
+	// In that case, the IsTruncated response element returns true , and Marker
+	// contains a value to include in the subsequent call that tells the service where
+	// to continue from.
 	MaxItems *int32
 
-	// The path prefix for filtering the results. For example, the prefix
+	//  The path prefix for filtering the results. For example, the prefix
 	// /application_abc/component_xyz/ gets all roles whose path starts with
-	// /application_abc/component_xyz/ . This parameter is optional. If it is not
-	// included, it defaults to a slash (/), listing all roles. This parameter allows
-	// (through its regex pattern (http://wikipedia.org/wiki/regex) ) a string of
-	// characters consisting of either a forward slash (/) by itself or a string that
-	// must begin and end with forward slashes. In addition, it can contain any ASCII
-	// character from the ! ( \u0021 ) through the DEL character ( \u007F ), including
-	// most punctuation characters, digits, and upper and lowercased letters.
+	// /application_abc/component_xyz/ .
+	//
+	// This parameter is optional. If it is not included, it defaults to a slash (/),
+	// listing all roles. This parameter allows (through its [regex pattern]) a string of characters
+	// consisting of either a forward slash (/) by itself or a string that must begin
+	// and end with forward slashes. In addition, it can contain any ASCII character
+	// from the ! ( \u0021 ) through the DEL character ( \u007F ), including most
+	// punctuation characters, digits, and upper and lowercased letters.
+	//
+	// [regex pattern]: http://wikipedia.org/wiki/regex
 	PathPrefix *string
 
 	noSmithyDocumentSerde
@@ -117,25 +129,25 @@ func (c *Client) addOperationListRolesMiddlewares(stack *middleware.Stack, optio
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -150,10 +162,13 @@ func (c *Client) addOperationListRolesMiddlewares(stack *middleware.Stack, optio
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListRoles(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -182,11 +197,13 @@ var _ ListRolesAPIClient = (*Client)(nil)
 type ListRolesPaginatorOptions struct {
 	// Use this only when paginating results to indicate the maximum number of items
 	// you want in the response. If additional items exist beyond the maximum you
-	// specify, the IsTruncated response element is true . If you do not include this
-	// parameter, the number of items defaults to 100. Note that IAM might return fewer
-	// results, even when there are more results available. In that case, the
-	// IsTruncated response element returns true , and Marker contains a value to
-	// include in the subsequent call that tells the service where to continue from.
+	// specify, the IsTruncated response element is true .
+	//
+	// If you do not include this parameter, the number of items defaults to 100. Note
+	// that IAM might return fewer results, even when there are more results available.
+	// In that case, the IsTruncated response element returns true , and Marker
+	// contains a value to include in the subsequent call that tells the service where
+	// to continue from.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

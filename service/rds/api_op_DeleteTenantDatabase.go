@@ -6,15 +6,16 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/rds/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Deletes a tenant database from your DB instance. This command only applies to
-// RDS for Oracle container database (CDB) instances. You can't delete a tenant
-// database when it is the only tenant in the DB instance.
+// RDS for Oracle container database (CDB) instances.
+//
+// You can't delete a tenant database when it is the only tenant in the DB
+// instance.
 func (c *Client) DeleteTenantDatabase(ctx context.Context, params *DeleteTenantDatabaseInput, optFns ...func(*Options)) (*DeleteTenantDatabaseOutput, error) {
 	if params == nil {
 		params = &DeleteTenantDatabaseInput{}
@@ -46,8 +47,10 @@ type DeleteTenantDatabaseInput struct {
 	TenantDBName *string
 
 	// The DBSnapshotIdentifier of the new DBSnapshot created when the
-	// SkipFinalSnapshot parameter is disabled. If you enable this parameter and also
-	// enable SkipFinalShapshot , the command results in an error.
+	// SkipFinalSnapshot parameter is disabled.
+	//
+	// If you enable this parameter and also enable SkipFinalShapshot , the command
+	// results in an error.
 	FinalDBSnapshotIdentifier *string
 
 	// Specifies whether to skip the creation of a final DB snapshot before removing
@@ -95,25 +98,25 @@ func (c *Client) addOperationDeleteTenantDatabaseMiddlewares(stack *middleware.S
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -128,13 +131,16 @@ func (c *Client) addOperationDeleteTenantDatabaseMiddlewares(stack *middleware.S
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDeleteTenantDatabaseValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteTenantDatabase(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

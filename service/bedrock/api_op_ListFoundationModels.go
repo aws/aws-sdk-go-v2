@@ -6,15 +6,16 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/bedrock/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// List of Amazon Bedrock foundation models that you can use. For more
-// information, see Foundation models (https://docs.aws.amazon.com/bedrock/latest/userguide/foundation-models.html)
-// in the Bedrock User Guide.
+// Lists Amazon Bedrock foundation models that you can use. You can filter the
+// results with the request parameters. For more information, see [Foundation models]in the Amazon
+// Bedrock User Guide.
+//
+// [Foundation models]: https://docs.aws.amazon.com/bedrock/latest/userguide/foundation-models.html
 func (c *Client) ListFoundationModels(ctx context.Context, params *ListFoundationModelsInput, optFns ...func(*Options)) (*ListFoundationModelsOutput, error) {
 	if params == nil {
 		params = &ListFoundationModelsInput{}
@@ -32,16 +33,22 @@ func (c *Client) ListFoundationModels(ctx context.Context, params *ListFoundatio
 
 type ListFoundationModelsInput struct {
 
-	// List by customization type.
+	// Return models that support the customization type that you specify. For more
+	// information, see [Custom models]in the Amazon Bedrock User Guide.
+	//
+	// [Custom models]: https://docs.aws.amazon.com/bedrock/latest/userguide/custom-models.html
 	ByCustomizationType types.ModelCustomization
 
-	// List by inference type.
+	// Return models that support the inference type that you specify. For more
+	// information, see [Provisioned Throughput]in the Amazon Bedrock User Guide.
+	//
+	// [Provisioned Throughput]: https://docs.aws.amazon.com/bedrock/latest/userguide/prov-throughput.html
 	ByInferenceType types.InferenceType
 
-	// List by output modality type.
+	// Return models that support the output modality that you specify.
 	ByOutputModality types.ModelModality
 
-	// A Amazon Bedrock model provider.
+	// Return models belonging to the model provider that you specify.
 	ByProvider *string
 
 	noSmithyDocumentSerde
@@ -80,25 +87,25 @@ func (c *Client) addOperationListFoundationModelsMiddlewares(stack *middleware.S
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -113,10 +120,13 @@ func (c *Client) addOperationListFoundationModelsMiddlewares(stack *middleware.S
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListFoundationModels(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

@@ -28,8 +28,7 @@ func (c *Client) StopDevEnvironmentSession(ctx context.Context, params *StopDevE
 
 type StopDevEnvironmentSessionInput struct {
 
-	// The system-generated unique ID of the Dev Environment. To obtain this ID, use
-	// ListDevEnvironments .
+	// The system-generated unique ID of the Dev Environment. To obtain this ID, use ListDevEnvironments.
 	//
 	// This member is required.
 	Id *string
@@ -40,7 +39,7 @@ type StopDevEnvironmentSessionInput struct {
 	ProjectName *string
 
 	// The system-generated unique ID of the Dev Environment session. This ID is
-	// returned by StartDevEnvironmentSession .
+	// returned by StartDevEnvironmentSession.
 	//
 	// This member is required.
 	SessionId *string
@@ -103,22 +102,22 @@ func (c *Client) addOperationStopDevEnvironmentSessionMiddlewares(stack *middlew
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -133,13 +132,16 @@ func (c *Client) addOperationStopDevEnvironmentSessionMiddlewares(stack *middlew
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpStopDevEnvironmentSessionValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opStopDevEnvironmentSession(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

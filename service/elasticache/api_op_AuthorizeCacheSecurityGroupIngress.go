@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/elasticache/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -14,8 +13,10 @@ import (
 
 // Allows network ingress to a cache security group. Applications using
 // ElastiCache must be running on Amazon EC2, and Amazon EC2 security groups are
-// used as the authorization mechanism. You cannot authorize ingress from an Amazon
-// EC2 security group in one region to an ElastiCache cluster in another region.
+// used as the authorization mechanism.
+//
+// You cannot authorize ingress from an Amazon EC2 security group in one region to
+// an ElastiCache cluster in another region.
 func (c *Client) AuthorizeCacheSecurityGroupIngress(ctx context.Context, params *AuthorizeCacheSecurityGroupIngressInput, optFns ...func(*Options)) (*AuthorizeCacheSecurityGroupIngressOutput, error) {
 	if params == nil {
 		params = &AuthorizeCacheSecurityGroupIngressInput{}
@@ -58,8 +59,11 @@ type AuthorizeCacheSecurityGroupIngressInput struct {
 type AuthorizeCacheSecurityGroupIngressOutput struct {
 
 	// Represents the output of one of the following operations:
+	//
 	//   - AuthorizeCacheSecurityGroupIngress
+	//
 	//   - CreateCacheSecurityGroup
+	//
 	//   - RevokeCacheSecurityGroupIngress
 	CacheSecurityGroup *types.CacheSecurityGroup
 
@@ -91,25 +95,25 @@ func (c *Client) addOperationAuthorizeCacheSecurityGroupIngressMiddlewares(stack
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -124,13 +128,16 @@ func (c *Client) addOperationAuthorizeCacheSecurityGroupIngressMiddlewares(stack
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpAuthorizeCacheSecurityGroupIngressValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opAuthorizeCacheSecurityGroupIngress(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

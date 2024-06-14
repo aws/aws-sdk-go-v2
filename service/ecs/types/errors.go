@@ -34,8 +34,8 @@ func (e *AccessDeniedException) ErrorCode() string {
 func (e *AccessDeniedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // You can apply up to 10 custom attributes for each resource. You can view the
-// attributes of a resource with ListAttributes . You can remove existing
-// attributes on a resource with DeleteAttributes .
+// attributes of a resource with ListAttributes. You can remove existing attributes on a
+// resource with DeleteAttributes.
 type AttributeLimitExceededException struct {
 	Message *string
 
@@ -61,8 +61,9 @@ func (e *AttributeLimitExceededException) ErrorCode() string {
 }
 func (e *AttributeLimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// Your Amazon Web Services account was blocked. For more information, contact
-// Amazon Web Services Support (http://aws.amazon.com/contact-us/) .
+// Your Amazon Web Services account was blocked. For more information, contact [Amazon Web Services Support].
+//
+// [Amazon Web Services Support]: http://aws.amazon.com/contact-us/
 type BlockedException struct {
 	Message *string
 
@@ -119,7 +120,7 @@ func (e *ClientException) ErrorFault() smithy.ErrorFault { return smithy.FaultCl
 
 // You can't delete a cluster that has registered container instances. First,
 // deregister the container instances before you can delete the cluster. For more
-// information, see DeregisterContainerInstance .
+// information, see DeregisterContainerInstance.
 type ClusterContainsContainerInstancesException struct {
 	Message *string
 
@@ -149,7 +150,7 @@ func (e *ClusterContainsContainerInstancesException) ErrorFault() smithy.ErrorFa
 
 // You can't delete a cluster that contains services. First, update the service to
 // reduce its desired task count to 0, and then delete the service. For more
-// information, see UpdateService and DeleteService .
+// information, see UpdateServiceand DeleteService.
 type ClusterContainsServicesException struct {
 	Message *string
 
@@ -201,8 +202,8 @@ func (e *ClusterContainsTasksException) ErrorCode() string {
 }
 func (e *ClusterContainsTasksException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The specified cluster wasn't found. You can view your available clusters with
-// ListClusters . Amazon ECS clusters are Region specific.
+// The specified cluster wasn't found. You can view your available clusters with ListClusters.
+// Amazon ECS clusters are Region specific.
 type ClusterNotFoundException struct {
 	Message *string
 
@@ -231,8 +232,11 @@ func (e *ClusterNotFoundException) ErrorFault() smithy.ErrorFault { return smith
 // The RunTask request could not be processed due to conflicts. The provided
 // clientToken is already in use with a different RunTask request. The resourceIds
 // are the existing task ARNs which are already associated with the clientToken .
+//
 // To fix this issue:
+//
 //   - Run RunTask with a unique clientToken .
+//
 //   - Run RunTask with the clientToken and the original set of parameters
 type ConflictException struct {
 	Message *string
@@ -532,8 +536,7 @@ func (e *ServerException) ErrorCode() string {
 func (e *ServerException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
 // The specified service isn't active. You can't update a service that's inactive.
-// If you have previously deleted a service, you can re-create it with
-// CreateService .
+// If you have previously deleted a service, you can re-create it with CreateService.
 type ServiceNotActiveException struct {
 	Message *string
 
@@ -559,8 +562,8 @@ func (e *ServiceNotActiveException) ErrorCode() string {
 }
 func (e *ServiceNotActiveException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The specified service wasn't found. You can view your available services with
-// ListServices . Amazon ECS services are cluster specific and Region specific.
+// The specified service wasn't found. You can view your available services with ListServices.
+// Amazon ECS services are cluster specific and Region specific.
 type ServiceNotFoundException struct {
 	Message *string
 
@@ -588,14 +591,18 @@ func (e *ServiceNotFoundException) ErrorFault() smithy.ErrorFault { return smith
 
 // The execute command cannot run. This error can be caused by any of the
 // following configuration issues:
+//
 //   - Incorrect IAM permissions
+//
 //   - The SSM agent is not installed or is not running
+//
 //   - There is an interface Amazon VPC endpoint for Amazon ECS, but there is not
 //     one for Systems Manager Session Manager
 //
-// For information about how to troubleshoot the issues, see Troubleshooting
-// issues with ECS Exec (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-exec.html)
-// in the Amazon Elastic Container Service Developer Guide.
+// For information about how to troubleshoot the issues, see [Troubleshooting issues with ECS Exec] in the Amazon
+// Elastic Container Service Developer Guide.
+//
+// [Troubleshooting issues with ECS Exec]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-exec.html
 type TargetNotConnectedException struct {
 	Message *string
 
@@ -622,8 +629,8 @@ func (e *TargetNotConnectedException) ErrorCode() string {
 func (e *TargetNotConnectedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The specified target wasn't found. You can view your available container
-// instances with ListContainerInstances . Amazon ECS container instances are
-// cluster-specific and Region-specific.
+// instances with ListContainerInstances. Amazon ECS container instances are cluster-specific and
+// Region-specific.
 type TargetNotFoundException struct {
 	Message *string
 
@@ -649,8 +656,8 @@ func (e *TargetNotFoundException) ErrorCode() string {
 }
 func (e *TargetNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The specified task set wasn't found. You can view your available task sets with
-// DescribeTaskSets . Task sets are specific to each cluster, service and Region.
+// The specified task set wasn't found. You can view your available task sets with DescribeTaskSets
+// . Task sets are specific to each cluster, service and Region.
 type TaskSetNotFoundException struct {
 	Message *string
 

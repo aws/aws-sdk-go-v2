@@ -6,14 +6,14 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
-// Lists Amazon SageMaker Catalogs based on given filters and orders. The maximum
+//	Lists Amazon SageMaker Catalogs based on given filters and orders. The maximum
+//
 // number of ResourceCatalog s viewable is 1000.
 func (c *Client) ListResourceCatalogs(ctx context.Context, params *ListResourceCatalogsInput, optFns ...func(*Options)) (*ListResourceCatalogsOutput, error) {
 	if params == nil {
@@ -32,28 +32,28 @@ func (c *Client) ListResourceCatalogs(ctx context.Context, params *ListResourceC
 
 type ListResourceCatalogsInput struct {
 
-	// Use this parameter to search for ResourceCatalog s created after a specific date
-	// and time.
+	//  Use this parameter to search for ResourceCatalog s created after a specific
+	// date and time.
 	CreationTimeAfter *time.Time
 
-	// Use this parameter to search for ResourceCatalog s created before a specific
+	//  Use this parameter to search for ResourceCatalog s created before a specific
 	// date and time.
 	CreationTimeBefore *time.Time
 
-	// The maximum number of results returned by ListResourceCatalogs .
+	//  The maximum number of results returned by ListResourceCatalogs .
 	MaxResults *int32
 
-	// A string that partially matches one or more ResourceCatalog s names. Filters
+	//  A string that partially matches one or more ResourceCatalog s names. Filters
 	// ResourceCatalog by name.
 	NameContains *string
 
-	// A token to resume pagination of ListResourceCatalogs results.
+	//  A token to resume pagination of ListResourceCatalogs results.
 	NextToken *string
 
-	// The value on which the resource catalog list is sorted.
+	//  The value on which the resource catalog list is sorted.
 	SortBy types.ResourceCatalogSortBy
 
-	// The order in which the resource catalogs are listed.
+	//  The order in which the resource catalogs are listed.
 	SortOrder types.ResourceCatalogSortOrder
 
 	noSmithyDocumentSerde
@@ -61,10 +61,10 @@ type ListResourceCatalogsInput struct {
 
 type ListResourceCatalogsOutput struct {
 
-	// A token to resume pagination of ListResourceCatalogs results.
+	//  A token to resume pagination of ListResourceCatalogs results.
 	NextToken *string
 
-	// A list of the requested ResourceCatalog s.
+	//  A list of the requested ResourceCatalog s.
 	ResourceCatalogs []types.ResourceCatalog
 
 	// Metadata pertaining to the operation's result.
@@ -95,25 +95,25 @@ func (c *Client) addOperationListResourceCatalogsMiddlewares(stack *middleware.S
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -128,10 +128,13 @@ func (c *Client) addOperationListResourceCatalogsMiddlewares(stack *middleware.S
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListResourceCatalogs(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -160,7 +163,7 @@ var _ ListResourceCatalogsAPIClient = (*Client)(nil)
 // ListResourceCatalogsPaginatorOptions is the paginator options for
 // ListResourceCatalogs
 type ListResourceCatalogsPaginatorOptions struct {
-	// The maximum number of results returned by ListResourceCatalogs .
+	//  The maximum number of results returned by ListResourceCatalogs .
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

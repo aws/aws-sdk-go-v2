@@ -6,17 +6,19 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/computeoptimizer/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Returns license recommendations for Amazon EC2 instances that run on a specific
-// license. Compute Optimizer generates recommendations for licenses that meet a
-// specific set of requirements. For more information, see the Supported resources
-// and requirements (https://docs.aws.amazon.com/compute-optimizer/latest/ug/requirements.html)
-// in the Compute Optimizer User Guide.
+// license.
+//
+// Compute Optimizer generates recommendations for licenses that meet a specific
+// set of requirements. For more information, see the [Supported resources and requirements]in the Compute Optimizer
+// User Guide.
+//
+// [Supported resources and requirements]: https://docs.aws.amazon.com/compute-optimizer/latest/ug/requirements.html
 func (c *Client) GetLicenseRecommendations(ctx context.Context, params *GetLicenseRecommendationsInput, optFns ...func(*Options)) (*GetLicenseRecommendationsOutput, error) {
 	if params == nil {
 		params = &GetLicenseRecommendationsInput{}
@@ -35,25 +37,33 @@ func (c *Client) GetLicenseRecommendations(ctx context.Context, params *GetLicen
 type GetLicenseRecommendationsInput struct {
 
 	// The ID of the Amazon Web Services account for which to return license
-	// recommendations. If your account is the management account of an organization,
-	// use this parameter to specify the member account for which you want to return
-	// license recommendations. Only one account ID can be specified per request.
+	// recommendations.
+	//
+	// If your account is the management account of an organization, use this
+	// parameter to specify the member account for which you want to return license
+	// recommendations.
+	//
+	// Only one account ID can be specified per request.
 	AccountIds []string
 
-	// An array of objects to specify a filter that returns a more specific list of
+	//  An array of objects to specify a filter that returns a more specific list of
 	// license recommendations.
 	Filters []types.LicenseRecommendationFilter
 
-	// The maximum number of license recommendations to return with a single request.
+	//  The maximum number of license recommendations to return with a single request.
+	//
 	// To retrieve the remaining results, make another request with the returned
 	// nextToken value.
 	MaxResults *int32
 
-	// The token to advance to the next page of license recommendations.
+	//  The token to advance to the next page of license recommendations.
 	NextToken *string
 
-	// The ARN that identifies the Amazon EC2 instance. The following is the format of
-	// the ARN: arn:aws:ec2:region:aws_account_id:instance/instance-id
+	//  The ARN that identifies the Amazon EC2 instance.
+	//
+	// The following is the format of the ARN:
+	//
+	//     arn:aws:ec2:region:aws_account_id:instance/instance-id
 	ResourceArns []string
 
 	noSmithyDocumentSerde
@@ -61,13 +71,13 @@ type GetLicenseRecommendationsInput struct {
 
 type GetLicenseRecommendationsOutput struct {
 
-	// An array of objects that describe errors of the request.
+	//  An array of objects that describe errors of the request.
 	Errors []types.GetRecommendationError
 
-	// An array of objects that describe license recommendations.
+	//  An array of objects that describe license recommendations.
 	LicenseRecommendations []types.LicenseRecommendation
 
-	// The token to use to advance to the next page of license recommendations.
+	//  The token to use to advance to the next page of license recommendations.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -98,25 +108,25 @@ func (c *Client) addOperationGetLicenseRecommendationsMiddlewares(stack *middlew
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -131,10 +141,13 @@ func (c *Client) addOperationGetLicenseRecommendationsMiddlewares(stack *middlew
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetLicenseRecommendations(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

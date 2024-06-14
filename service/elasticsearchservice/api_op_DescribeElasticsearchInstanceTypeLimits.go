@@ -6,15 +6,15 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/elasticsearchservice/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Describe Elasticsearch Limits for a given InstanceType and
-// ElasticsearchVersion. When modifying existing Domain, specify the DomainName to
-// know what Limits are supported for modifying.
+//	Describe Elasticsearch Limits for a given InstanceType and
+//
+// ElasticsearchVersion. When modifying existing Domain, specify the DomainNameto know what
+// Limits are supported for modifying.
 func (c *Client) DescribeElasticsearchInstanceTypeLimits(ctx context.Context, params *DescribeElasticsearchInstanceTypeLimitsInput, optFns ...func(*Options)) (*DescribeElasticsearchInstanceTypeLimitsOutput, error) {
 	if params == nil {
 		params = &DescribeElasticsearchInstanceTypeLimitsInput{}
@@ -30,35 +30,34 @@ func (c *Client) DescribeElasticsearchInstanceTypeLimits(ctx context.Context, pa
 	return out, nil
 }
 
-// Container for the parameters to DescribeElasticsearchInstanceTypeLimits
-// operation.
+// Container for the parameters to DescribeElasticsearchInstanceTypeLimits operation.
 type DescribeElasticsearchInstanceTypeLimitsInput struct {
 
-	// Version of Elasticsearch for which Limits are needed.
+	//  Version of Elasticsearch for which Limits are needed.
 	//
 	// This member is required.
 	ElasticsearchVersion *string
 
-	// The instance type for an Elasticsearch cluster for which Elasticsearch Limits
-	// are needed.
+	//  The instance type for an Elasticsearch cluster for which Elasticsearch Limits are
+	// needed.
 	//
 	// This member is required.
 	InstanceType types.ESPartitionInstanceType
 
-	// DomainName represents the name of the Domain that we are trying to modify. This
-	// should be present only if we are querying for Elasticsearch Limits for existing
+	//  DomainName represents the name of the Domain that we are trying to modify.
+	// This should be present only if we are querying for Elasticsearch Limitsfor existing
 	// domain.
 	DomainName *string
 
 	noSmithyDocumentSerde
 }
 
-// Container for the parameters received from
-// DescribeElasticsearchInstanceTypeLimits operation.
+// Container for the parameters received from DescribeElasticsearchInstanceTypeLimits operation.
 type DescribeElasticsearchInstanceTypeLimitsOutput struct {
 
-	// Map of Role of the Instance and Limits that are applicable. Role performed by
+	//  Map of Role of the Instance and Limits that are applicable. Role performed by
 	// given Instance in Elasticsearch can be one of the following:
+	//
 	//   - data: If the given InstanceType is used as data node
 	//   - master: If the given InstanceType is used as master node
 	//   - ultra_warm: If the given InstanceType is used as warm node
@@ -92,25 +91,25 @@ func (c *Client) addOperationDescribeElasticsearchInstanceTypeLimitsMiddlewares(
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -125,13 +124,16 @@ func (c *Client) addOperationDescribeElasticsearchInstanceTypeLimitsMiddlewares(
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDescribeElasticsearchInstanceTypeLimitsValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeElasticsearchInstanceTypeLimits(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

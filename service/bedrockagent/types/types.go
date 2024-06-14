@@ -7,16 +7,30 @@ import (
 	"time"
 )
 
-// Type of Executors for an Action Group
+// Contains details about the Lambda function containing the business logic that
+// is carried out upon invoking the action or the custom control method for
+// handling the information elicited from the user.
 //
 // The following types satisfy this interface:
 //
+//	ActionGroupExecutorMemberCustomControl
 //	ActionGroupExecutorMemberLambda
 type ActionGroupExecutor interface {
 	isActionGroupExecutor()
 }
 
-// ARN of a Lambda.
+// To return the action group invocation results directly in the InvokeAgent
+// response, specify RETURN_CONTROL .
+type ActionGroupExecutorMemberCustomControl struct {
+	Value CustomControlMethod
+
+	noSmithyDocumentSerde
+}
+
+func (*ActionGroupExecutorMemberCustomControl) isActionGroupExecutor() {}
+
+// The Amazon Resource Name (ARN) of the Lambda function containing the business
+// logic that is carried out upon invoking the action.
 type ActionGroupExecutorMemberLambda struct {
 	Value string
 
@@ -25,321 +39,412 @@ type ActionGroupExecutorMemberLambda struct {
 
 func (*ActionGroupExecutorMemberLambda) isActionGroupExecutor() {}
 
-// ActionGroup Summary
+// Contains details about an action group.
 type ActionGroupSummary struct {
 
-	// Identifier for a resource.
+	// The unique identifier of the action group.
 	//
 	// This member is required.
 	ActionGroupId *string
 
-	// Name for a resource.
+	// The name of the action group.
 	//
 	// This member is required.
 	ActionGroupName *string
 
-	// State of the action group
+	// Specifies whether the action group is available for the agent to invoke or not
+	// when sending an [InvokeAgent]request.
+	//
+	// [InvokeAgent]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_InvokeAgent.html
 	//
 	// This member is required.
 	ActionGroupState ActionGroupState
 
-	// Time Stamp.
+	// The time at which the action group was last updated.
 	//
 	// This member is required.
 	UpdatedAt *time.Time
 
-	// Description of the Resource.
+	// The description of the action group.
 	Description *string
 
 	noSmithyDocumentSerde
 }
 
-// Contains the information of an agent
+// Contains details about an agent.
 type Agent struct {
 
-	// Arn representation of the Agent.
+	// The Amazon Resource Name (ARN) of the agent.
 	//
 	// This member is required.
 	AgentArn *string
 
-	// Identifier for a resource.
+	// The unique identifier of the agent.
 	//
 	// This member is required.
 	AgentId *string
 
-	// Name for a resource.
+	// The name of the agent.
 	//
 	// This member is required.
 	AgentName *string
 
-	// ARN of a IAM role.
+	// The Amazon Resource Name (ARN) of the IAM role with permissions to invoke API
+	// operations on the agent.
 	//
 	// This member is required.
 	AgentResourceRoleArn *string
 
-	// Schema Type for Action APIs.
+	// The status of the agent and whether it is ready for use. The following statuses
+	// are possible:
+	//
+	//   - CREATING – The agent is being created.
+	//
+	//   - PREPARING – The agent is being prepared.
+	//
+	//   - PREPARED – The agent is prepared and ready to be invoked.
+	//
+	//   - NOT_PREPARED – The agent has been created but not yet prepared.
+	//
+	//   - FAILED – The agent API operation failed.
+	//
+	//   - UPDATING – The agent is being updated.
+	//
+	//   - DELETING – The agent is being deleted.
 	//
 	// This member is required.
 	AgentStatus AgentStatus
 
-	// Draft Agent Version.
+	// The version of the agent.
 	//
 	// This member is required.
 	AgentVersion *string
 
-	// Time Stamp.
+	// The time at which the agent was created.
 	//
 	// This member is required.
 	CreatedAt *time.Time
 
-	// Max Session Time.
+	// The number of seconds for which Amazon Bedrock keeps information about a user's
+	// conversation with the agent.
+	//
+	// A user interaction remains active for the amount of time specified. If no
+	// conversation occurs during this time, the session expires and Amazon Bedrock
+	// deletes any data provided before the timeout.
 	//
 	// This member is required.
 	IdleSessionTTLInSeconds *int32
 
-	// Time Stamp.
+	// The time at which the agent was last updated.
 	//
 	// This member is required.
 	UpdatedAt *time.Time
 
-	// Client specified token used for idempotency checks
+	// A unique, case-sensitive identifier to ensure that the API request completes no
+	// more than one time. If this token matches a previous request, Amazon Bedrock
+	// ignores the request, but does not return an error. For more information, see [Ensuring idempotency].
+	//
+	// [Ensuring idempotency]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
 	ClientToken *string
 
-	// A KMS key ARN
+	// The Amazon Resource Name (ARN) of the KMS key that encrypts the agent.
 	CustomerEncryptionKeyArn *string
 
-	// Description of the Resource.
+	// The description of the agent.
 	Description *string
 
-	// Failure Reasons for Error.
+	// Contains reasons that the agent-related API that you invoked failed.
 	FailureReasons []string
 
-	// ARN or name of a Bedrock model.
+	// The foundation model used for orchestration by the agent.
 	FoundationModel *string
 
-	// Instruction for the agent.
+	// The guardrails configuration assigned to the agent.
+	GuardrailConfiguration *GuardrailConfiguration
+
+	// Instructions that tell the agent what it should do and how it should interact
+	// with users.
 	Instruction *string
 
-	// Time Stamp.
+	// The time at which the agent was last prepared.
 	PreparedAt *time.Time
 
-	// Configuration for prompt override.
+	// Contains configurations to override prompt templates in different parts of an
+	// agent sequence. For more information, see [Advanced prompts].
+	//
+	// [Advanced prompts]: https://docs.aws.amazon.com/bedrock/latest/userguide/advanced-prompts.html
 	PromptOverrideConfiguration *PromptOverrideConfiguration
 
-	// The recommended actions users can take to resolve an error in failureReasons.
+	// Contains recommended actions to take for the agent-related API that you invoked
+	// to succeed.
 	RecommendedActions []string
 
 	noSmithyDocumentSerde
 }
 
-// Contains the information of an Agent Action Group
+// Contains details about an action group.
 type AgentActionGroup struct {
 
-	// Identifier for a resource.
+	// The unique identifier of the action group.
 	//
 	// This member is required.
 	ActionGroupId *string
 
-	// Name for a resource.
+	// The name of the action group.
 	//
 	// This member is required.
 	ActionGroupName *string
 
-	// State of the action group
+	// Specifies whether the action group is available for the agent to invoke or not
+	// when sending an [InvokeAgent]request.
+	//
+	// [InvokeAgent]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_InvokeAgent.html
 	//
 	// This member is required.
 	ActionGroupState ActionGroupState
 
-	// Identifier for a resource.
+	// The unique identifier of the agent to which the action group belongs.
 	//
 	// This member is required.
 	AgentId *string
 
-	// Agent Version.
+	// The version of the agent to which the action group belongs.
 	//
 	// This member is required.
 	AgentVersion *string
 
-	// Time Stamp.
+	// The time at which the action group was created.
 	//
 	// This member is required.
 	CreatedAt *time.Time
 
-	// Time Stamp.
+	// The time at which the action group was last updated.
 	//
 	// This member is required.
 	UpdatedAt *time.Time
 
-	// Type of Executors for an Action Group
+	// The Amazon Resource Name (ARN) of the Lambda function containing the business
+	// logic that is carried out upon invoking the action or the custom control method
+	// for handling the information elicited from the user.
 	ActionGroupExecutor ActionGroupExecutor
 
-	// Contains information about the API Schema for the Action Group
+	// Contains either details about the S3 object containing the OpenAPI schema for
+	// the action group or the JSON or YAML-formatted payload defining the schema. For
+	// more information, see [Action group OpenAPI schemas].
+	//
+	// [Action group OpenAPI schemas]: https://docs.aws.amazon.com/bedrock/latest/userguide/agents-api-schema.html
 	ApiSchema APISchema
 
-	// Client specified token used for idempotency checks
+	// A unique, case-sensitive identifier to ensure that the API request completes no
+	// more than one time. If this token matches a previous request, Amazon Bedrock
+	// ignores the request, but does not return an error. For more information, see [Ensuring idempotency].
+	//
+	// [Ensuring idempotency]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
 	ClientToken *string
 
-	// Description of the Resource.
+	// The description of the action group.
 	Description *string
 
-	// Action Group Signature for a BuiltIn Action
+	// Defines functions that each define parameters that the agent needs to invoke
+	// from the user. Each function represents an action in an action group.
+	FunctionSchema FunctionSchema
+
+	// If this field is set as AMAZON.UserInput , the agent can request the user for
+	// additional information when trying to complete a task. The description ,
+	// apiSchema , and actionGroupExecutor fields must be blank for this action group.
+	//
+	// During orchestration, if the agent determines that it needs to invoke an API in
+	// an action group, but doesn't have enough information to complete the API
+	// request, it will invoke this action group instead and return an [Observation]reprompting the
+	// user for more information.
+	//
+	// [Observation]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_Observation.html
 	ParentActionSignature ActionGroupSignature
 
 	noSmithyDocumentSerde
 }
 
-// Contains the information of an agent alias
+// Contains details about an alias of an agent.
 type AgentAlias struct {
 
-	// Arn representation of the Agent Alias.
+	// The Amazon Resource Name (ARN) of the alias of the agent.
 	//
 	// This member is required.
 	AgentAliasArn *string
 
-	// Id for an Agent Alias generated at the server side.
+	// The unique identifier of the alias of the agent.
 	//
 	// This member is required.
 	AgentAliasId *string
 
-	// Name for a resource.
+	// The name of the alias of the agent.
 	//
 	// This member is required.
 	AgentAliasName *string
 
-	// The statuses an Agent Alias can be in.
+	// The status of the alias of the agent and whether it is ready for use. The
+	// following statuses are possible:
+	//
+	//   - CREATING – The agent alias is being created.
+	//
+	//   - PREPARED – The agent alias is finished being created or updated and is
+	//   ready to be invoked.
+	//
+	//   - FAILED – The agent alias API operation failed.
+	//
+	//   - UPDATING – The agent alias is being updated.
+	//
+	//   - DELETING – The agent alias is being deleted.
 	//
 	// This member is required.
 	AgentAliasStatus AgentAliasStatus
 
-	// Identifier for a resource.
+	// The unique identifier of the agent.
 	//
 	// This member is required.
 	AgentId *string
 
-	// Time Stamp.
+	// The time at which the alias of the agent was created.
 	//
 	// This member is required.
 	CreatedAt *time.Time
 
-	// Routing configuration for an Agent alias.
+	// Contains details about the routing configuration of the alias.
 	//
 	// This member is required.
 	RoutingConfiguration []AgentAliasRoutingConfigurationListItem
 
-	// Time Stamp.
+	// The time at which the alias was last updated.
 	//
 	// This member is required.
 	UpdatedAt *time.Time
 
-	// The list of history events for an alias for an Agent.
+	// Contains details about the history of the alias.
 	AgentAliasHistoryEvents []AgentAliasHistoryEvent
 
-	// Client specified token used for idempotency checks
+	// A unique, case-sensitive identifier to ensure that the API request completes no
+	// more than one time. If this token matches a previous request, Amazon Bedrock
+	// ignores the request, but does not return an error. For more information, see [Ensuring idempotency].
+	//
+	// [Ensuring idempotency]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
 	ClientToken *string
 
-	// Description of the Resource.
+	// The description of the alias of the agent.
 	Description *string
+
+	// Information on the failure of Provisioned Throughput assigned to an agent alias.
+	FailureReasons []string
 
 	noSmithyDocumentSerde
 }
 
-// History event for an alias for an Agent.
+// Contains details about the history of the alias.
 type AgentAliasHistoryEvent struct {
 
-	// Time Stamp.
+	// The date that the alias stopped being associated to the version in the
+	// routingConfiguration object
 	EndDate *time.Time
 
-	// Routing configuration for an Agent alias.
+	// Contains details about the version of the agent with which the alias is
+	// associated.
 	RoutingConfiguration []AgentAliasRoutingConfigurationListItem
 
-	// Time Stamp.
+	// The date that the alias began being associated to the version in the
+	// routingConfiguration object.
 	StartDate *time.Time
 
 	noSmithyDocumentSerde
 }
 
-// Details about the routing configuration for an Agent alias.
+// Contains details about the routing configuration of the alias.
 type AgentAliasRoutingConfigurationListItem struct {
 
-	// Agent Version.
-	//
-	// This member is required.
+	// The version of the agent with which the alias is associated.
 	AgentVersion *string
+
+	// Information on the Provisioned Throughput assigned to an agent alias.
+	ProvisionedThroughput *string
 
 	noSmithyDocumentSerde
 }
 
-// Summary of an alias for an Agent.
+// Contains details about an alias of an agent.
 type AgentAliasSummary struct {
 
-	// Id for an Agent Alias generated at the server side.
+	// Contains details about
 	//
 	// This member is required.
 	AgentAliasId *string
 
-	// Name for a resource.
+	// The name of the alias.
 	//
 	// This member is required.
 	AgentAliasName *string
 
-	// The statuses an Agent Alias can be in.
+	// The status of the alias.
 	//
 	// This member is required.
 	AgentAliasStatus AgentAliasStatus
 
-	// Time Stamp.
+	// The time at which the alias of the agent was created.
 	//
 	// This member is required.
 	CreatedAt *time.Time
 
-	// Time Stamp.
+	// The time at which the alias was last updated.
 	//
 	// This member is required.
 	UpdatedAt *time.Time
 
-	// Description of the Resource.
+	// The description of the alias.
 	Description *string
 
-	// Routing configuration for an Agent alias.
+	// Contains details about the version of the agent with which the alias is
+	// associated.
 	RoutingConfiguration []AgentAliasRoutingConfigurationListItem
 
 	noSmithyDocumentSerde
 }
 
-// Contains the information of an Agent Knowledge Base.
+// Contains details about a knowledge base that is associated with an agent.
 type AgentKnowledgeBase struct {
 
-	// Identifier for a resource.
+	// The unique identifier of the agent with which the knowledge base is associated.
 	//
 	// This member is required.
 	AgentId *string
 
-	// Agent Version.
+	// The version of the agent with which the knowledge base is associated.
 	//
 	// This member is required.
 	AgentVersion *string
 
-	// Time Stamp.
+	// The time at which the association between the agent and the knowledge base was
+	// created.
 	//
 	// This member is required.
 	CreatedAt *time.Time
 
-	// Description of the Resource.
+	// The description of the association between the agent and the knowledge base.
 	//
 	// This member is required.
 	Description *string
 
-	// Identifier for a resource.
+	// The unique identifier of the association between the agent and the knowledge
+	// base.
 	//
 	// This member is required.
 	KnowledgeBaseId *string
 
-	// State of the knowledge base; whether it is enabled or disabled
+	// Specifies whether to use the knowledge base or not when sending an [InvokeAgent] request.
+	//
+	// [InvokeAgent]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_InvokeAgent.html
 	//
 	// This member is required.
 	KnowledgeBaseState KnowledgeBaseState
 
-	// Time Stamp.
+	// The time at which the association between the agent and the knowledge base was
+	// last updated.
 	//
 	// This member is required.
 	UpdatedAt *time.Time
@@ -347,179 +452,209 @@ type AgentKnowledgeBase struct {
 	noSmithyDocumentSerde
 }
 
-// Agent Knowledge Base Summary
+// Contains details about a knowledge base associated with an agent.
 type AgentKnowledgeBaseSummary struct {
 
-	// Identifier for a resource.
+	// The unique identifier of the knowledge base associated with an agent.
 	//
 	// This member is required.
 	KnowledgeBaseId *string
 
-	// State of the knowledge base; whether it is enabled or disabled
+	// Specifies whether the agent uses the knowledge base or not when sending an [InvokeAgent]
+	// request.
+	//
+	// [InvokeAgent]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_InvokeAgent.html
 	//
 	// This member is required.
 	KnowledgeBaseState KnowledgeBaseState
 
-	// Time Stamp.
+	// The time at which the knowledge base associated with an agent was last updated.
 	//
 	// This member is required.
 	UpdatedAt *time.Time
 
-	// Description of the Resource.
+	// The description of the knowledge base associated with an agent.
 	Description *string
 
 	noSmithyDocumentSerde
 }
 
-// Summary of Agent.
+// Contains details about an agent.
 type AgentSummary struct {
 
-	// Identifier for a resource.
+	// The unique identifier of the agent.
 	//
 	// This member is required.
 	AgentId *string
 
-	// Name for a resource.
+	// The name of the agent.
 	//
 	// This member is required.
 	AgentName *string
 
-	// Schema Type for Action APIs.
+	// The status of the agent.
 	//
 	// This member is required.
 	AgentStatus AgentStatus
 
-	// Time Stamp.
+	// The time at which the agent was last updated.
 	//
 	// This member is required.
 	UpdatedAt *time.Time
 
-	// Description of the Resource.
+	// The description of the agent.
 	Description *string
 
-	// Agent Version.
+	// The details of the guardrails configuration in the agent summary.
+	GuardrailConfiguration *GuardrailConfiguration
+
+	// The latest version of the agent.
 	LatestAgentVersion *string
 
 	noSmithyDocumentSerde
 }
 
-// Contains the information of an agent version.
+// Contains details about a version of an agent.
 type AgentVersion struct {
 
-	// Arn representation of the Agent.
+	// The Amazon Resource Name (ARN) of the agent that the version belongs to.
 	//
 	// This member is required.
 	AgentArn *string
 
-	// Identifier for a resource.
+	// The unique identifier of the agent that the version belongs to.
 	//
 	// This member is required.
 	AgentId *string
 
-	// Name for a resource.
+	// The name of the agent that the version belongs to.
 	//
 	// This member is required.
 	AgentName *string
 
-	// ARN of a IAM role.
+	// The Amazon Resource Name (ARN) of the IAM role with permissions to invoke API
+	// operations on the agent.
 	//
 	// This member is required.
 	AgentResourceRoleArn *string
 
-	// Schema Type for Action APIs.
+	// The status of the agent that the version belongs to.
 	//
 	// This member is required.
 	AgentStatus AgentStatus
 
-	// Time Stamp.
+	// The time at which the version was created.
 	//
 	// This member is required.
 	CreatedAt *time.Time
 
-	// Max Session Time.
+	// The number of seconds for which Amazon Bedrock keeps information about a user's
+	// conversation with the agent.
+	//
+	// A user interaction remains active for the amount of time specified. If no
+	// conversation occurs during this time, the session expires and Amazon Bedrock
+	// deletes any data provided before the timeout.
 	//
 	// This member is required.
 	IdleSessionTTLInSeconds *int32
 
-	// Time Stamp.
+	// The time at which the version was last updated.
 	//
 	// This member is required.
 	UpdatedAt *time.Time
 
-	// Numerical Agent Version.
+	// The version number.
 	//
 	// This member is required.
 	Version *string
 
-	// A KMS key ARN
+	// The Amazon Resource Name (ARN) of the KMS key that encrypts the agent.
 	CustomerEncryptionKeyArn *string
 
-	// Description of the Resource.
+	// The description of the version.
 	Description *string
 
-	// Failure Reasons for Error.
+	// A list of reasons that the API operation on the version failed.
 	FailureReasons []string
 
-	// ARN or name of a Bedrock model.
+	// The foundation model that the version invokes.
 	FoundationModel *string
 
-	// Instruction for the agent.
+	// The guardrails configuration assigned to the agent version.
+	GuardrailConfiguration *GuardrailConfiguration
+
+	// The instructions provided to the agent.
 	Instruction *string
 
-	// Configuration for prompt override.
+	// Contains configurations to override prompt templates in different parts of an
+	// agent sequence. For more information, see [Advanced prompts].
+	//
+	// [Advanced prompts]: https://docs.aws.amazon.com/bedrock/latest/userguide/advanced-prompts.html
 	PromptOverrideConfiguration *PromptOverrideConfiguration
 
-	// The recommended actions users can take to resolve an error in failureReasons.
+	// A list of recommended actions to take for the failed API operation on the
+	// version to succeed.
 	RecommendedActions []string
 
 	noSmithyDocumentSerde
 }
 
-// Summary of agent version.
+// Contains details about a version of an agent.
 type AgentVersionSummary struct {
 
-	// Name for a resource.
+	// The name of the agent to which the version belongs.
 	//
 	// This member is required.
 	AgentName *string
 
-	// Schema Type for Action APIs.
+	// The status of the agent to which the version belongs.
 	//
 	// This member is required.
 	AgentStatus AgentStatus
 
-	// Agent Version.
+	// The version of the agent.
 	//
 	// This member is required.
 	AgentVersion *string
 
-	// Time Stamp.
+	// The time at which the version was created.
 	//
 	// This member is required.
 	CreatedAt *time.Time
 
-	// Time Stamp.
+	// The time at which the version was last updated.
 	//
 	// This member is required.
 	UpdatedAt *time.Time
 
-	// Description of the Resource.
+	// The description of the version of the agent.
 	Description *string
+
+	// The details of the guardrails configuration in the agent version summary.
+	GuardrailConfiguration *GuardrailConfiguration
 
 	noSmithyDocumentSerde
 }
 
-// Contains information about the API Schema for the Action Group
+// Contains details about the OpenAPI schema for the action group. For more
+// information, see [Action group OpenAPI schemas]. You can either include the schema directly in the payload
+// field or you can upload it to an S3 bucket and specify the S3 bucket location in
+// the s3 field.
 //
 // The following types satisfy this interface:
 //
 //	APISchemaMemberPayload
 //	APISchemaMemberS3
+//
+// [Action group OpenAPI schemas]: https://docs.aws.amazon.com/bedrock/latest/userguide/agents-api-schema.html
 type APISchema interface {
 	isAPISchema()
 }
 
-// String OpenAPI Payload
+// The JSON or YAML-formatted payload defining the OpenAPI schema for the action
+// group. For more information, see [Action group OpenAPI schemas].
+//
+// [Action group OpenAPI schemas]: https://docs.aws.amazon.com/bedrock/latest/userguide/agents-api-schema.html
 type APISchemaMemberPayload struct {
 	Value string
 
@@ -528,7 +663,10 @@ type APISchemaMemberPayload struct {
 
 func (*APISchemaMemberPayload) isAPISchema() {}
 
-// The identifier for the S3 resource.
+// Contains details about the S3 object containing the OpenAPI schema for the
+// action group. For more information, see [Action group OpenAPI schemas].
+//
+// [Action group OpenAPI schemas]: https://docs.aws.amazon.com/bedrock/latest/userguide/agents-api-schema.html
 type APISchemaMemberS3 struct {
 	Value S3Identifier
 
@@ -537,127 +675,173 @@ type APISchemaMemberS3 struct {
 
 func (*APISchemaMemberS3) isAPISchema() {}
 
-// Configures chunking strategy
+// The vector configuration details for the Bedrock embeddings model.
+type BedrockEmbeddingModelConfiguration struct {
+
+	// The dimensions details for the vector configuration used on the Bedrock
+	// embeddings model.
+	Dimensions *int32
+
+	noSmithyDocumentSerde
+}
+
+// Details about how to chunk the documents in the data source. A chunk refers to
+// an excerpt from a data source that is returned when the knowledge base that it
+// belongs to is queried.
 type ChunkingConfiguration struct {
 
-	// The type of chunking strategy
+	// Knowledge base can split your source data into chunks. A chunk refers to an
+	// excerpt from a data source that is returned when the knowledge base that it
+	// belongs to is queried. You have the following options for chunking your data. If
+	// you opt for NONE , then you may want to pre-process your files by splitting them
+	// up such that each file corresponds to a chunk.
+	//
+	//   - FIXED_SIZE – Amazon Bedrock splits your source data into chunks of the
+	//   approximate size that you set in the fixedSizeChunkingConfiguration .
+	//
+	//   - NONE – Amazon Bedrock treats each file as one chunk. If you choose this
+	//   option, you may want to pre-process your documents by splitting them into
+	//   separate files.
 	//
 	// This member is required.
 	ChunkingStrategy ChunkingStrategy
 
-	// Configures fixed size chunking strategy
+	// Configurations for when you choose fixed-size chunking. If you set the
+	// chunkingStrategy as NONE , exclude this field.
 	FixedSizeChunkingConfiguration *FixedSizeChunkingConfiguration
 
 	noSmithyDocumentSerde
 }
 
-// Contains the information of a data source.
+// Contains details about a data source.
 type DataSource struct {
 
-	// Time Stamp.
+	// The time at which the data source was created.
 	//
 	// This member is required.
 	CreatedAt *time.Time
 
-	// Specifies a raw data source location to ingest.
+	// Contains details about how the data source is stored.
 	//
 	// This member is required.
 	DataSourceConfiguration *DataSourceConfiguration
 
-	// Identifier for a resource.
+	// The unique identifier of the data source.
 	//
 	// This member is required.
 	DataSourceId *string
 
-	// Identifier for a resource.
+	// The unique identifier of the knowledge base to which the data source belongs.
 	//
 	// This member is required.
 	KnowledgeBaseId *string
 
-	// Name for a resource.
+	// The name of the data source.
 	//
 	// This member is required.
 	Name *string
 
-	// The status of a data source.
+	// The status of the data source. The following statuses are possible:
+	//
+	//   - Available – The data source has been created and is ready for ingestion
+	//   into the knowledge base.
+	//
+	//   - Deleting – The data source is being deleted.
 	//
 	// This member is required.
 	Status DataSourceStatus
 
-	// Time Stamp.
+	// The time at which the data source was last updated.
 	//
 	// This member is required.
 	UpdatedAt *time.Time
 
-	// Description of the Resource.
+	// The data deletion policy for a data source.
+	DataDeletionPolicy DataDeletionPolicy
+
+	// The description of the data source.
 	Description *string
 
-	// Server-side encryption configuration.
+	// The detailed reasons on the failure to delete a data source.
+	FailureReasons []string
+
+	// Contains details about the configuration of the server-side encryption.
 	ServerSideEncryptionConfiguration *ServerSideEncryptionConfiguration
 
-	// Configures ingestion for a vector knowledge base
+	// Contains details about how to ingest the documents in the data source.
 	VectorIngestionConfiguration *VectorIngestionConfiguration
 
 	noSmithyDocumentSerde
 }
 
-// Specifies a raw data source location to ingest.
+// Contains details about how a data source is stored.
 type DataSourceConfiguration struct {
 
-	// The type of the data source location.
+	// The type of storage for the data source.
 	//
 	// This member is required.
 	Type DataSourceType
 
-	// Configures an S3 data source location.
+	// Contains details about the configuration of the S3 object containing the data
+	// source.
 	S3Configuration *S3DataSourceConfiguration
 
 	noSmithyDocumentSerde
 }
 
-// Summary information of a data source.
+// Contains details about a data source.
 type DataSourceSummary struct {
 
-	// Identifier for a resource.
+	// The unique identifier of the data source.
 	//
 	// This member is required.
 	DataSourceId *string
 
-	// Identifier for a resource.
+	// The unique identifier of the knowledge base to which the data source belongs.
 	//
 	// This member is required.
 	KnowledgeBaseId *string
 
-	// Name for a resource.
+	// The name of the data source.
 	//
 	// This member is required.
 	Name *string
 
-	// The status of a data source.
+	// The status of the data source.
 	//
 	// This member is required.
 	Status DataSourceStatus
 
-	// Time Stamp.
+	// The time at which the data source was last updated.
 	//
 	// This member is required.
 	UpdatedAt *time.Time
 
-	// Description of the Resource.
+	// The description of the data source.
 	Description *string
 
 	noSmithyDocumentSerde
 }
 
-// Configures fixed size chunking strategy
+// The configuration details for the embeddings model.
+type EmbeddingModelConfiguration struct {
+
+	// The vector configuration details on the Bedrock embeddings model.
+	BedrockEmbeddingModelConfiguration *BedrockEmbeddingModelConfiguration
+
+	noSmithyDocumentSerde
+}
+
+// Configurations for when you choose fixed-size chunking. If you set the
+// chunkingStrategy as NONE , exclude this field.
 type FixedSizeChunkingConfiguration struct {
 
-	// The maximum number of tokens per chunk.
+	// The maximum number of tokens to include in a chunk.
 	//
 	// This member is required.
 	MaxTokens *int32
 
-	// The overlap percentage between adjacent chunks.
+	// The percentage of overlap between adjacent chunks of a data source.
 	//
 	// This member is required.
 	OverlapPercentage *int32
@@ -665,86 +849,202 @@ type FixedSizeChunkingConfiguration struct {
 	noSmithyDocumentSerde
 }
 
-// Configuration for inference in prompt configuration
+// Defines parameters that the agent needs to invoke from the user to complete the
+// function. Corresponds to an action in an action group.
+//
+// This data type is used in the following API operations:
+//
+// [CreateAgentActionGroup request]
+//
+// [CreateAgentActionGroup response]
+//
+// [UpdateAgentActionGroup request]
+//
+// [UpdateAgentActionGroup response]
+//
+// [GetAgentActionGroup response]
+//
+// [CreateAgentActionGroup response]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_CreateAgentActionGroup.html#API_agent_CreateAgentActionGroup_ResponseSyntax
+// [GetAgentActionGroup response]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_GetAgentActionGroup.html#API_agent_GetAgentActionGroup_ResponseSyntax
+// [UpdateAgentActionGroup request]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_UpdateAgentActionGroup.html#API_agent_UpdateAgentActionGroup_RequestSyntax
+// [CreateAgentActionGroup request]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_CreateAgentActionGroup.html#API_agent_CreateAgentActionGroup_RequestSyntax
+// [UpdateAgentActionGroup response]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_UpdateAgentActionGroup.html#API_agent_UpdateAgentActionGroup_ResponseSyntax
+type Function struct {
+
+	// A name for the function.
+	//
+	// This member is required.
+	Name *string
+
+	// A description of the function and its purpose.
+	Description *string
+
+	// The parameters that the agent elicits from the user to fulfill the function.
+	Parameters map[string]ParameterDetail
+
+	noSmithyDocumentSerde
+}
+
+// Defines functions that each define parameters that the agent needs to invoke
+// from the user. Each function represents an action in an action group.
+//
+// This data type is used in the following API operations:
+//
+// [CreateAgentActionGroup request]
+//
+// [CreateAgentActionGroup response]
+//
+// [UpdateAgentActionGroup request]
+//
+// [UpdateAgentActionGroup response]
+//
+// [GetAgentActionGroup response]
+//
+// The following types satisfy this interface:
+//
+//	FunctionSchemaMemberFunctions
+//
+// [CreateAgentActionGroup response]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_CreateAgentActionGroup.html#API_agent_CreateAgentActionGroup_ResponseSyntax
+// [GetAgentActionGroup response]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_GetAgentActionGroup.html#API_agent_GetAgentActionGroup_ResponseSyntax
+// [UpdateAgentActionGroup request]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_UpdateAgentActionGroup.html#API_agent_UpdateAgentActionGroup_RequestSyntax
+// [CreateAgentActionGroup request]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_CreateAgentActionGroup.html#API_agent_CreateAgentActionGroup_RequestSyntax
+// [UpdateAgentActionGroup response]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_UpdateAgentActionGroup.html#API_agent_UpdateAgentActionGroup_ResponseSyntax
+type FunctionSchema interface {
+	isFunctionSchema()
+}
+
+// A list of functions that each define an action in the action group.
+type FunctionSchemaMemberFunctions struct {
+	Value []Function
+
+	noSmithyDocumentSerde
+}
+
+func (*FunctionSchemaMemberFunctions) isFunctionSchema() {}
+
+// The details of the guardrails configuration.
+type GuardrailConfiguration struct {
+
+	// The guardrails identifier assigned to the guardrails configuration.
+	GuardrailIdentifier *string
+
+	// The guardrails version assigned to the guardrails configuration.
+	GuardrailVersion *string
+
+	noSmithyDocumentSerde
+}
+
+// Contains inference parameters to use when the agent invokes a foundation model
+// in the part of the agent sequence defined by the promptType . For more
+// information, see [Inference parameters for foundation models].
+//
+// [Inference parameters for foundation models]: https://docs.aws.amazon.com/bedrock/latest/userguide/model-parameters.html
 type InferenceConfiguration struct {
 
-	// Maximum length of output
+	// The maximum number of tokens to allow in the generated response.
 	MaximumLength *int32
 
-	// List of stop sequences
+	// A list of stop sequences. A stop sequence is a sequence of characters that
+	// causes the model to stop generating the response.
 	StopSequences []string
 
-	// Controls randomness, higher values increase diversity
+	// The likelihood of the model selecting higher-probability options while
+	// generating a response. A lower value makes the model more likely to choose
+	// higher-probability options, while a higher value makes the model more likely to
+	// choose lower-probability options.
 	Temperature *float32
 
-	// Sample from the k most likely next tokens
+	// While generating a response, the model determines the probability of the
+	// following token at each point of generation. The value that you set for topK is
+	// the number of most-likely candidates from which the model chooses the next token
+	// in the sequence. For example, if you set topK to 50, the model selects the next
+	// token from among the top 50 most likely choices.
 	TopK *int32
 
-	// Cumulative probability cutoff for token selection
+	// While generating a response, the model determines the probability of the
+	// following token at each point of generation. The value that you set for Top P
+	// determines the number of most-likely candidates from which the model chooses the
+	// next token in the sequence. For example, if you set topP to 80, the model only
+	// selects the next token from the top 80% of the probability distribution of next
+	// tokens.
 	TopP *float32
 
 	noSmithyDocumentSerde
 }
 
-// Contains the information of an ingestion job.
+// Contains details about an ingestion job, which converts a data source to
+// embeddings for a vector store in knowledge base.
+//
+// This data type is used in the following API operations:
+//
+// [StartIngestionJob response]
+//
+// [GetIngestionJob response]
+//
+// [ListIngestionJob response]
+//
+// [StartIngestionJob response]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_StartIngestionJob.html#API_agent_StartIngestionJob_ResponseSyntax
+// [ListIngestionJob response]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_ListIngestionJobs.html#API_agent_ListIngestionJobs_ResponseSyntax
+// [GetIngestionJob response]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_GetIngestionJob.html#API_agent_GetIngestionJob_ResponseSyntax
 type IngestionJob struct {
 
-	// Identifier for a resource.
+	// The unique identifier of the ingested data source.
 	//
 	// This member is required.
 	DataSourceId *string
 
-	// Identifier for a resource.
+	// The unique identifier of the ingestion job.
 	//
 	// This member is required.
 	IngestionJobId *string
 
-	// Identifier for a resource.
+	// The unique identifier of the knowledge base to which the data source is being
+	// added.
 	//
 	// This member is required.
 	KnowledgeBaseId *string
 
-	// Time Stamp.
+	// The time at which the ingestion job started.
 	//
 	// This member is required.
 	StartedAt *time.Time
 
-	// The status of an ingestion job.
+	// The status of the ingestion job.
 	//
 	// This member is required.
 	Status IngestionJobStatus
 
-	// Time Stamp.
+	// The time at which the ingestion job was last updated.
 	//
 	// This member is required.
 	UpdatedAt *time.Time
 
-	// Description of the Resource.
+	// The description of the ingestion job.
 	Description *string
 
-	// Failure Reasons for Error.
+	// A list of reasons that the ingestion job failed.
 	FailureReasons []string
 
-	// The document level statistics of an ingestion job
+	// Contains statistics about the ingestion job.
 	Statistics *IngestionJobStatistics
 
 	noSmithyDocumentSerde
 }
 
-// Filters the response returned by ListIngestionJobs operation.
+// Defines a filter by which to filter the results.
 type IngestionJobFilter struct {
 
-	// The name of the field to filter ingestion jobs.
+	// The attribute by which to filter the results.
 	//
 	// This member is required.
 	Attribute IngestionJobFilterAttribute
 
-	// The operator used to filter ingestion jobs.
+	// The operation to carry out between the attribute and the values.
 	//
 	// This member is required.
 	Operator IngestionJobFilterOperator
 
-	// The list of values used to filter ingestion jobs.
+	// A list of values for the attribute.
 	//
 	// This member is required.
 	Values []string
@@ -752,15 +1052,15 @@ type IngestionJobFilter struct {
 	noSmithyDocumentSerde
 }
 
-// Sorts the response returned by ListIngestionJobs operation.
+// Parameters by which to sort the results.
 type IngestionJobSortBy struct {
 
-	// The name of the field to sort ingestion jobs.
+	// The attribute by which to sort the results.
 	//
 	// This member is required.
 	Attribute IngestionJobSortByAttribute
 
-	// Order to sort results by.
+	// The order by which to sort the results.
 	//
 	// This member is required.
 	Order SortOrder
@@ -768,205 +1068,252 @@ type IngestionJobSortBy struct {
 	noSmithyDocumentSerde
 }
 
-// The document level statistics of an ingestion job
+// Contains the statistics for the ingestion job.
 type IngestionJobStatistics struct {
 
-	// Number of deleted documents
+	// The number of source documents that was deleted.
 	NumberOfDocumentsDeleted int64
 
-	// Number of failed documents
+	// The number of source documents that failed to be ingested.
 	NumberOfDocumentsFailed int64
 
-	// Number of scanned documents
+	// The total number of source documents that were scanned. Includes new, updated,
+	// and unchanged documents.
 	NumberOfDocumentsScanned int64
 
-	// Number of modified documents indexed
+	// The number of metadata files that were updated or deleted.
+	NumberOfMetadataDocumentsModified int64
+
+	// The total number of metadata files that were scanned. Includes new, updated,
+	// and unchanged files.
+	NumberOfMetadataDocumentsScanned int64
+
+	// The number of modified source documents in the data source that were
+	// successfully indexed.
 	NumberOfModifiedDocumentsIndexed int64
 
-	// Number of indexed documents
+	// The number of new source documents in the data source that were successfully
+	// indexed.
 	NumberOfNewDocumentsIndexed int64
 
 	noSmithyDocumentSerde
 }
 
-// Summary information of an ingestion job.
+// Contains details about an ingestion job.
 type IngestionJobSummary struct {
 
-	// Identifier for a resource.
+	// The unique identifier of the data source in the ingestion job.
 	//
 	// This member is required.
 	DataSourceId *string
 
-	// Identifier for a resource.
+	// The unique identifier of the ingestion job.
 	//
 	// This member is required.
 	IngestionJobId *string
 
-	// Identifier for a resource.
+	// The unique identifier of the knowledge base to which the data source is added.
 	//
 	// This member is required.
 	KnowledgeBaseId *string
 
-	// Time Stamp.
+	// The time at which the ingestion job was started.
 	//
 	// This member is required.
 	StartedAt *time.Time
 
-	// The status of an ingestion job.
+	// The status of the ingestion job.
 	//
 	// This member is required.
 	Status IngestionJobStatus
 
-	// Time Stamp.
+	// The time at which the ingestion job was last updated.
 	//
 	// This member is required.
 	UpdatedAt *time.Time
 
-	// Description of the Resource.
+	// The description of the ingestion job.
 	Description *string
 
-	// The document level statistics of an ingestion job
+	// Contains statistics for the ingestion job.
 	Statistics *IngestionJobStatistics
 
 	noSmithyDocumentSerde
 }
 
-// Contains the information of a knowledge base.
+// Contains information about a knowledge base.
 type KnowledgeBase struct {
 
-	// Time Stamp.
+	// The time at which the knowledge base was created.
 	//
 	// This member is required.
 	CreatedAt *time.Time
 
-	// ARN of a KnowledgeBase
+	// The Amazon Resource Name (ARN) of the knowledge base.
 	//
 	// This member is required.
 	KnowledgeBaseArn *string
 
-	// Configures a bedrock knowledge base.
+	// Contains details about the embeddings configuration of the knowledge base.
 	//
 	// This member is required.
 	KnowledgeBaseConfiguration *KnowledgeBaseConfiguration
 
-	// Identifier for a resource.
+	// The unique identifier of the knowledge base.
 	//
 	// This member is required.
 	KnowledgeBaseId *string
 
-	// Name for a resource.
+	// The name of the knowledge base.
 	//
 	// This member is required.
 	Name *string
 
-	// ARN of a IAM role.
+	// The Amazon Resource Name (ARN) of the IAM role with permissions to invoke API
+	// operations on the knowledge base.
 	//
 	// This member is required.
 	RoleArn *string
 
-	// The status of a knowledge base.
+	// The status of the knowledge base. The following statuses are possible:
+	//
+	//   - CREATING – The knowledge base is being created.
+	//
+	//   - ACTIVE – The knowledge base is ready to be queried.
+	//
+	//   - DELETING – The knowledge base is being deleted.
+	//
+	//   - UPDATING – The knowledge base is being updated.
+	//
+	//   - FAILED – The knowledge base API operation failed.
 	//
 	// This member is required.
 	Status KnowledgeBaseStatus
 
-	// Configures the physical storage of ingested data in a knowledge base.
+	// Contains details about the storage configuration of the knowledge base.
 	//
 	// This member is required.
 	StorageConfiguration *StorageConfiguration
 
-	// Time Stamp.
+	// The time at which the knowledge base was last updated.
 	//
 	// This member is required.
 	UpdatedAt *time.Time
 
-	// Description of the Resource.
+	// The description of the knowledge base.
 	Description *string
 
-	// Failure Reasons for Error.
+	// A list of reasons that the API operation on the knowledge base failed.
 	FailureReasons []string
 
 	noSmithyDocumentSerde
 }
 
-// Configures a bedrock knowledge base.
+// Contains details about the embeddings configuration of the knowledge base.
 type KnowledgeBaseConfiguration struct {
 
-	// The type of a knowledge base.
+	// The type of data that the data source is converted into for the knowledge base.
 	//
 	// This member is required.
 	Type KnowledgeBaseType
 
-	// Configurations for a vector knowledge base.
+	// Contains details about the embeddings model that'sused to convert the data
+	// source.
 	VectorKnowledgeBaseConfiguration *VectorKnowledgeBaseConfiguration
 
 	noSmithyDocumentSerde
 }
 
-// Summary information of a knowledge base.
+// Contains details about a knowledge base.
 type KnowledgeBaseSummary struct {
 
-	// Identifier for a resource.
+	// The unique identifier of the knowledge base.
 	//
 	// This member is required.
 	KnowledgeBaseId *string
 
-	// Name for a resource.
+	// The name of the knowledge base.
 	//
 	// This member is required.
 	Name *string
 
-	// The status of a knowledge base.
+	// The status of the knowledge base.
 	//
 	// This member is required.
 	Status KnowledgeBaseStatus
 
-	// Time Stamp.
+	// The time at which the knowledge base was last updated.
 	//
 	// This member is required.
 	UpdatedAt *time.Time
 
-	// Description of the Resource.
+	// The description of the knowledge base.
 	Description *string
 
 	noSmithyDocumentSerde
 }
 
-// Contains the configurations to use OpenSearch Serverless to store knowledge
-// base data.
-type OpenSearchServerlessConfiguration struct {
+// Contains details about the storage configuration of the knowledge base in
+// MongoDB Atlas.
+type MongoDbAtlasConfiguration struct {
 
-	// Arn of an OpenSearch Serverless collection.
+	// The collection name of the knowledge base in MongoDB Atlas.
 	//
 	// This member is required.
-	CollectionArn *string
+	CollectionName *string
 
-	// A mapping of Bedrock Knowledge Base fields to OpenSearch Serverless field names
+	// The Amazon Resource Name (ARN) of the secret that you created in Secrets
+	// Manager that contains user credentials for your MongoDB Atlas cluster.
 	//
 	// This member is required.
-	FieldMapping *OpenSearchServerlessFieldMapping
+	CredentialsSecretArn *string
 
-	// Arn of an OpenSearch Serverless index.
+	// The database name in your MongoDB Atlas cluster for your knowledge base.
+	//
+	// This member is required.
+	DatabaseName *string
+
+	// The endpoint URL of your MongoDB Atlas cluster for your knowledge base.
+	//
+	// This member is required.
+	Endpoint *string
+
+	// Contains the names of the fields to which to map information about the vector
+	// store.
+	//
+	// This member is required.
+	FieldMapping *MongoDbAtlasFieldMapping
+
+	// The name of the MongoDB Atlas vector search index.
 	//
 	// This member is required.
 	VectorIndexName *string
 
+	// The name of the VPC endpoint service in your account that is connected to your
+	// MongoDB Atlas cluster.
+	EndpointServiceName *string
+
 	noSmithyDocumentSerde
 }
 
-// A mapping of Bedrock Knowledge Base fields to OpenSearch Serverless field names
-type OpenSearchServerlessFieldMapping struct {
+// Contains the names of the fields to which to map information about the vector
+// store.
+type MongoDbAtlasFieldMapping struct {
 
-	// Name of the field
+	// The name of the field in which Amazon Bedrock stores metadata about the vector
+	// store.
 	//
 	// This member is required.
 	MetadataField *string
 
-	// Name of the field
+	// The name of the field in which Amazon Bedrock stores the raw text from your
+	// data. The text is split according to the chunking strategy you choose.
 	//
 	// This member is required.
 	TextField *string
 
-	// Name of the field
+	// The name of the field in which Amazon Bedrock stores the vector embeddings for
+	// your data sources.
 	//
 	// This member is required.
 	VectorField *string
@@ -974,39 +1321,134 @@ type OpenSearchServerlessFieldMapping struct {
 	noSmithyDocumentSerde
 }
 
-// Contains the configurations to use Pinecone to store knowledge base data.
+// Contains details about the storage configuration of the knowledge base in
+// Amazon OpenSearch Service. For more information, see [Create a vector index in Amazon OpenSearch Service].
+//
+// [Create a vector index in Amazon OpenSearch Service]: https://docs.aws.amazon.com/bedrock/latest/userguide/knowledge-base-setup-oss.html
+type OpenSearchServerlessConfiguration struct {
+
+	// The Amazon Resource Name (ARN) of the OpenSearch Service vector store.
+	//
+	// This member is required.
+	CollectionArn *string
+
+	// Contains the names of the fields to which to map information about the vector
+	// store.
+	//
+	// This member is required.
+	FieldMapping *OpenSearchServerlessFieldMapping
+
+	// The name of the vector store.
+	//
+	// This member is required.
+	VectorIndexName *string
+
+	noSmithyDocumentSerde
+}
+
+// Contains the names of the fields to which to map information about the vector
+// store.
+type OpenSearchServerlessFieldMapping struct {
+
+	// The name of the field in which Amazon Bedrock stores metadata about the vector
+	// store.
+	//
+	// This member is required.
+	MetadataField *string
+
+	// The name of the field in which Amazon Bedrock stores the raw text from your
+	// data. The text is split according to the chunking strategy you choose.
+	//
+	// This member is required.
+	TextField *string
+
+	// The name of the field in which Amazon Bedrock stores the vector embeddings for
+	// your data sources.
+	//
+	// This member is required.
+	VectorField *string
+
+	noSmithyDocumentSerde
+}
+
+// Contains details about a parameter in a function for an action group.
+//
+// This data type is used in the following API operations:
+//
+// [CreateAgentActionGroup request]
+//
+// [CreateAgentActionGroup response]
+//
+// [UpdateAgentActionGroup request]
+//
+// [UpdateAgentActionGroup response]
+//
+// [GetAgentActionGroup response]
+//
+// [CreateAgentActionGroup response]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_CreateAgentActionGroup.html#API_agent_CreateAgentActionGroup_ResponseSyntax
+// [GetAgentActionGroup response]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_GetAgentActionGroup.html#API_agent_GetAgentActionGroup_ResponseSyntax
+// [UpdateAgentActionGroup request]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_UpdateAgentActionGroup.html#API_agent_UpdateAgentActionGroup_RequestSyntax
+// [CreateAgentActionGroup request]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_CreateAgentActionGroup.html#API_agent_CreateAgentActionGroup_RequestSyntax
+// [UpdateAgentActionGroup response]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_UpdateAgentActionGroup.html#API_agent_UpdateAgentActionGroup_ResponseSyntax
+type ParameterDetail struct {
+
+	// The data type of the parameter.
+	//
+	// This member is required.
+	Type Type
+
+	// A description of the parameter. Helps the foundation model determine how to
+	// elicit the parameters from the user.
+	Description *string
+
+	// Whether the parameter is required for the agent to complete the function for
+	// action group invocation.
+	Required *bool
+
+	noSmithyDocumentSerde
+}
+
+// Contains details about the storage configuration of the knowledge base in
+// Pinecone. For more information, see [Create a vector index in Pinecone].
+//
+// [Create a vector index in Pinecone]: https://docs.aws.amazon.com/bedrock/latest/userguide/knowledge-base-setup-pinecone.html
 type PineconeConfiguration struct {
 
-	// Pinecone connection string
+	// The endpoint URL for your index management page.
 	//
 	// This member is required.
 	ConnectionString *string
 
-	// Arn of a SecretsManager Secret.
+	// The Amazon Resource Name (ARN) of the secret that you created in Secrets
+	// Manager that is linked to your Pinecone API key.
 	//
 	// This member is required.
 	CredentialsSecretArn *string
 
-	// A mapping of Bedrock Knowledge Base fields to Pinecone field names
+	// Contains the names of the fields to which to map information about the vector
+	// store.
 	//
 	// This member is required.
 	FieldMapping *PineconeFieldMapping
 
-	// Pinecone namespace
+	// The namespace to be used to write new data to your database.
 	Namespace *string
 
 	noSmithyDocumentSerde
 }
 
-// A mapping of Bedrock Knowledge Base fields to Pinecone field names
+// Contains the names of the fields to which to map information about the vector
+// store.
 type PineconeFieldMapping struct {
 
-	// Name of the field
+	// The name of the field in which Amazon Bedrock stores metadata about the vector
+	// store.
 	//
 	// This member is required.
 	MetadataField *string
 
-	// Name of the field
+	// The name of the field in which Amazon Bedrock stores the raw text from your
+	// data. The text is split according to the chunking strategy you choose.
 	//
 	// This member is required.
 	TextField *string
@@ -1014,68 +1456,114 @@ type PineconeFieldMapping struct {
 	noSmithyDocumentSerde
 }
 
-// BasePromptConfiguration per Prompt Type.
+// Contains configurations to override a prompt template in one part of an agent
+// sequence. For more information, see [Advanced prompts].
+//
+// [Advanced prompts]: https://docs.aws.amazon.com/bedrock/latest/userguide/advanced-prompts.html
 type PromptConfiguration struct {
 
-	// Base Prompt Template.
+	// Defines the prompt template with which to replace the default prompt template.
+	// You can use placeholder variables in the base prompt template to customize the
+	// prompt. For more information, see [Prompt template placeholder variables]. For more information, see [Configure the prompt templates].
+	//
+	// [Configure the prompt templates]: https://docs.aws.amazon.com/bedrock/latest/userguide/advanced-prompts-configure.html
+	// [Prompt template placeholder variables]: https://docs.aws.amazon.com/bedrock/latest/userguide/prompt-placeholders.html
 	BasePromptTemplate *string
 
-	// Configuration for inference in prompt configuration
+	// Contains inference parameters to use when the agent invokes a foundation model
+	// in the part of the agent sequence defined by the promptType . For more
+	// information, see [Inference parameters for foundation models].
+	//
+	// [Inference parameters for foundation models]: https://docs.aws.amazon.com/bedrock/latest/userguide/model-parameters.html
 	InferenceConfiguration *InferenceConfiguration
 
-	// Creation Mode for Prompt Configuration.
+	// Specifies whether to override the default parser Lambda function when parsing
+	// the raw foundation model output in the part of the agent sequence defined by the
+	// promptType . If you set the field as OVERRIDEN , the overrideLambda field in
+	// the [PromptOverrideConfiguration]must be specified with the ARN of a Lambda function.
+	//
+	// [PromptOverrideConfiguration]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_PromptOverrideConfiguration.html
 	ParserMode CreationMode
 
-	// Creation Mode for Prompt Configuration.
+	// Specifies whether to override the default prompt template for this promptType .
+	// Set this value to OVERRIDDEN to use the prompt that you provide in the
+	// basePromptTemplate . If you leave it as DEFAULT , the agent uses a default
+	// prompt template.
 	PromptCreationMode CreationMode
 
-	// Prompt State.
+	// Specifies whether to allow the agent to carry out the step specified in the
+	// promptType . If you set this value to DISABLED , the agent skips that step. The
+	// default state for each promptType is as follows.
+	//
+	//   - PRE_PROCESSING – ENABLED
+	//
+	//   - ORCHESTRATION – ENABLED
+	//
+	//   - KNOWLEDGE_BASE_RESPONSE_GENERATION – ENABLED
+	//
+	//   - POST_PROCESSING – DISABLED
 	PromptState PromptState
 
-	// Prompt Type.
+	// The step in the agent sequence that this prompt configuration applies to.
 	PromptType PromptType
 
 	noSmithyDocumentSerde
 }
 
-// Configuration for prompt override.
+// Contains configurations to override prompts in different parts of an agent
+// sequence. For more information, see [Advanced prompts].
+//
+// [Advanced prompts]: https://docs.aws.amazon.com/bedrock/latest/userguide/advanced-prompts.html
 type PromptOverrideConfiguration struct {
 
-	// List of BasePromptConfiguration
+	// Contains configurations to override a prompt template in one part of an agent
+	// sequence. For more information, see [Advanced prompts].
+	//
+	// [Advanced prompts]: https://docs.aws.amazon.com/bedrock/latest/userguide/advanced-prompts.html
 	//
 	// This member is required.
 	PromptConfigurations []PromptConfiguration
 
-	// ARN of a Lambda.
+	// The ARN of the Lambda function to use when parsing the raw foundation model
+	// output in parts of the agent sequence. If you specify this field, at least one
+	// of the promptConfigurations must contain a parserMode value that is set to
+	// OVERRIDDEN . For more information, see [Parser Lambda function in Agents for Amazon Bedrock].
+	//
+	// [Parser Lambda function in Agents for Amazon Bedrock]: https://docs.aws.amazon.com/bedrock/latest/userguide/lambda-parser.html
 	OverrideLambda *string
 
 	noSmithyDocumentSerde
 }
 
-// Contains the configurations to use RDS to store knowledge base data.
+// Contains details about the storage configuration of the knowledge base in
+// Amazon RDS. For more information, see [Create a vector index in Amazon RDS].
+//
+// [Create a vector index in Amazon RDS]: https://docs.aws.amazon.com/bedrock/latest/userguide/knowledge-base-setup-rds.html
 type RdsConfiguration struct {
 
-	// Arn of a SecretsManager Secret.
+	// The Amazon Resource Name (ARN) of the secret that you created in Secrets
+	// Manager that is linked to your Amazon RDS database.
 	//
 	// This member is required.
 	CredentialsSecretArn *string
 
-	// Name of the database within RDS
+	// The name of your Amazon RDS database.
 	//
 	// This member is required.
 	DatabaseName *string
 
-	// A mapping of Bedrock Knowledge Base fields to RDS column names
+	// Contains the names of the fields to which to map information about the vector
+	// store.
 	//
 	// This member is required.
 	FieldMapping *RdsFieldMapping
 
-	// Arn of a RDS Resource.
+	// The Amazon Resource Name (ARN) of the vector store.
 	//
 	// This member is required.
 	ResourceArn *string
 
-	// Name of the table within RDS
+	// The name of the table in the database.
 	//
 	// This member is required.
 	TableName *string
@@ -1083,25 +1571,29 @@ type RdsConfiguration struct {
 	noSmithyDocumentSerde
 }
 
-// A mapping of Bedrock Knowledge Base fields to RDS column names
+// Contains the names of the fields to which to map information about the vector
+// store.
 type RdsFieldMapping struct {
 
-	// Name of the column
+	// The name of the field in which Amazon Bedrock stores metadata about the vector
+	// store.
 	//
 	// This member is required.
 	MetadataField *string
 
-	// Name of the column
+	// The name of the field in which Amazon Bedrock stores the ID for each entry.
 	//
 	// This member is required.
 	PrimaryKeyField *string
 
-	// Name of the column
+	// The name of the field in which Amazon Bedrock stores the raw text from your
+	// data. The text is split according to the chunking strategy you choose.
 	//
 	// This member is required.
 	TextField *string
 
-	// Name of the column
+	// The name of the field in which Amazon Bedrock stores the vector embeddings for
+	// your data sources.
 	//
 	// This member is required.
 	VectorField *string
@@ -1109,26 +1601,30 @@ type RdsFieldMapping struct {
 	noSmithyDocumentSerde
 }
 
-// Contains the configurations to use Redis Enterprise Cloud to store knowledge
-// base data.
+// Contains details about the storage configuration of the knowledge base in Redis
+// Enterprise Cloud. For more information, see [Create a vector index in Redis Enterprise Cloud].
+//
+// [Create a vector index in Redis Enterprise Cloud]: https://docs.aws.amazon.com/bedrock/latest/userguide/knowledge-base-setup-oss.html
 type RedisEnterpriseCloudConfiguration struct {
 
-	// Arn of a SecretsManager Secret.
+	// The Amazon Resource Name (ARN) of the secret that you created in Secrets
+	// Manager that is linked to your Redis Enterprise Cloud database.
 	//
 	// This member is required.
 	CredentialsSecretArn *string
 
-	// Redis enterprise cloud endpoint
+	// The endpoint URL of the Redis Enterprise Cloud database.
 	//
 	// This member is required.
 	Endpoint *string
 
-	// A mapping of Bedrock Knowledge Base fields to Redis Cloud field names
+	// Contains the names of the fields to which to map information about the vector
+	// store.
 	//
 	// This member is required.
 	FieldMapping *RedisEnterpriseCloudFieldMapping
 
-	// Name of a redis enterprise cloud index
+	// The name of the vector index.
 	//
 	// This member is required.
 	VectorIndexName *string
@@ -1136,20 +1632,24 @@ type RedisEnterpriseCloudConfiguration struct {
 	noSmithyDocumentSerde
 }
 
-// A mapping of Bedrock Knowledge Base fields to Redis Cloud field names
+// Contains the names of the fields to which to map information about the vector
+// store.
 type RedisEnterpriseCloudFieldMapping struct {
 
-	// Name of the field
+	// The name of the field in which Amazon Bedrock stores metadata about the vector
+	// store.
 	//
 	// This member is required.
 	MetadataField *string
 
-	// Name of the field
+	// The name of the field in which Amazon Bedrock stores the raw text from your
+	// data. The text is split according to the chunking strategy you choose.
 	//
 	// This member is required.
 	TextField *string
 
-	// Name of the field
+	// The name of the field in which Amazon Bedrock stores the vector embeddings for
+	// your data sources.
 	//
 	// This member is required.
 	VectorField *string
@@ -1157,76 +1657,88 @@ type RedisEnterpriseCloudFieldMapping struct {
 	noSmithyDocumentSerde
 }
 
-// Configures an S3 data source location.
+// Contains information about the S3 configuration of the data source.
 type S3DataSourceConfiguration struct {
 
-	// A S3 bucket ARN
+	// The Amazon Resource Name (ARN) of the bucket that contains the data source.
 	//
 	// This member is required.
 	BucketArn *string
 
-	// A list of S3 prefixes.
+	// The bucket account owner ID for the S3 bucket.
+	BucketOwnerAccountId *string
+
+	// A list of S3 prefixes that define the object containing the data sources. For
+	// more information, see [Organizing objects using prefixes].
+	//
+	// [Organizing objects using prefixes]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-prefixes.html
 	InclusionPrefixes []string
 
 	noSmithyDocumentSerde
 }
 
-// The identifier for the S3 resource.
+// Contains information about the S3 object containing the resource.
 type S3Identifier struct {
 
-	// A bucket in S3.
+	// The name of the S3 bucket.
 	S3BucketName *string
 
-	// A object key in S3.
+	// The S3 object key containing the resource.
 	S3ObjectKey *string
 
 	noSmithyDocumentSerde
 }
 
-// Server-side encryption configuration.
+// Contains the configuration for server-side encryption.
 type ServerSideEncryptionConfiguration struct {
 
-	// A KMS key ARN
+	// The Amazon Resource Name (ARN) of the KMS key used to encrypt the resource.
 	KmsKeyArn *string
 
 	noSmithyDocumentSerde
 }
 
-// Configures the physical storage of ingested data in a knowledge base.
+// Contains the storage configuration of the knowledge base.
 type StorageConfiguration struct {
 
-	// The storage type of a knowledge base.
+	// The vector store service in which the knowledge base is stored.
 	//
 	// This member is required.
 	Type KnowledgeBaseStorageType
 
-	// Contains the configurations to use OpenSearch Serverless to store knowledge
-	// base data.
+	// Contains the storage configuration of the knowledge base in MongoDB Atlas.
+	MongoDbAtlasConfiguration *MongoDbAtlasConfiguration
+
+	// Contains the storage configuration of the knowledge base in Amazon OpenSearch
+	// Service.
 	OpensearchServerlessConfiguration *OpenSearchServerlessConfiguration
 
-	// Contains the configurations to use Pinecone to store knowledge base data.
+	// Contains the storage configuration of the knowledge base in Pinecone.
 	PineconeConfiguration *PineconeConfiguration
 
-	// Contains the configurations to use RDS to store knowledge base data.
+	// Contains details about the storage configuration of the knowledge base in
+	// Amazon RDS. For more information, see [Create a vector index in Amazon RDS].
+	//
+	// [Create a vector index in Amazon RDS]: https://docs.aws.amazon.com/bedrock/latest/userguide/knowledge-base-setup-rds.html
 	RdsConfiguration *RdsConfiguration
 
-	// Contains the configurations to use Redis Enterprise Cloud to store knowledge
-	// base data.
+	// Contains the storage configuration of the knowledge base in Redis Enterprise
+	// Cloud.
 	RedisEnterpriseCloudConfiguration *RedisEnterpriseCloudConfiguration
 
 	noSmithyDocumentSerde
 }
 
 // Stores information about a field passed inside a request that resulted in an
-// exception
+// validation error.
 type ValidationExceptionField struct {
 
-	// Non Blank String
+	// A message describing why this field failed validation.
 	//
 	// This member is required.
 	Message *string
 
-	// Non Blank String
+	// The name of the field.
 	//
 	// This member is required.
 	Name *string
@@ -1234,22 +1746,30 @@ type ValidationExceptionField struct {
 	noSmithyDocumentSerde
 }
 
-// Configures ingestion for a vector knowledge base
+// Contains details about how to ingest the documents in a data source.
 type VectorIngestionConfiguration struct {
 
-	// Configures chunking strategy
+	// Details about how to chunk the documents in the data source. A chunk refers to
+	// an excerpt from a data source that is returned when the knowledge base that it
+	// belongs to is queried.
 	ChunkingConfiguration *ChunkingConfiguration
 
 	noSmithyDocumentSerde
 }
 
-// Configurations for a vector knowledge base.
+// Contains details about the model used to create vector embeddings for the
+// knowledge base.
 type VectorKnowledgeBaseConfiguration struct {
 
-	// Arn of a Bedrock model.
+	// The Amazon Resource Name (ARN) of the model used to create vector embeddings
+	// for the knowledge base.
 	//
 	// This member is required.
 	EmbeddingModelArn *string
+
+	// The embeddings model configuration details for the vector model used in
+	// Knowledge Base.
+	EmbeddingModelConfiguration *EmbeddingModelConfiguration
 
 	noSmithyDocumentSerde
 }
@@ -1267,3 +1787,4 @@ type UnknownUnionMember struct {
 
 func (*UnknownUnionMember) isActionGroupExecutor() {}
 func (*UnknownUnionMember) isAPISchema()           {}
+func (*UnknownUnionMember) isFunctionSchema()      {}

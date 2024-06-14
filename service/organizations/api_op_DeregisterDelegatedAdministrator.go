@@ -6,22 +6,25 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Removes the specified member Amazon Web Services account as a delegated
-// administrator for the specified Amazon Web Services service. Deregistering a
-// delegated administrator can have unintended impacts on the functionality of the
-// enabled Amazon Web Services service. See the documentation for the enabled
-// service before you deregister a delegated administrator so that you understand
-// any potential impacts. You can run this action only for Amazon Web Services
-// services that support this feature. For a current list of services that support
-// it, see the column Supports Delegated Administrator in the table at Amazon Web
-// Services Services that you can use with Organizations (https://docs.aws.amazon.com/organizations/latest/userguide/orgs_integrate_services_list.html)
-// in the Organizations User Guide. This operation can be called only from the
-// organization's management account.
+// administrator for the specified Amazon Web Services service.
+//
+// Deregistering a delegated administrator can have unintended impacts on the
+// functionality of the enabled Amazon Web Services service. See the documentation
+// for the enabled service before you deregister a delegated administrator so that
+// you understand any potential impacts.
+//
+// You can run this action only for Amazon Web Services services that support this
+// feature. For a current list of services that support it, see the column Supports
+// Delegated Administrator in the table at [Amazon Web Services Services that you can use with Organizations]in the Organizations User Guide.
+//
+// This operation can be called only from the organization's management account.
+//
+// [Amazon Web Services Services that you can use with Organizations]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_integrate_services_list.html
 func (c *Client) DeregisterDelegatedAdministrator(ctx context.Context, params *DeregisterDelegatedAdministratorInput, optFns ...func(*Options)) (*DeregisterDelegatedAdministratorOutput, error) {
 	if params == nil {
 		params = &DeregisterDelegatedAdministratorInput{}
@@ -46,11 +49,12 @@ type DeregisterDelegatedAdministratorInput struct {
 	AccountId *string
 
 	// The service principal name of an Amazon Web Services service for which the
-	// account is a delegated administrator. Delegated administrator privileges are
-	// revoked for only the specified Amazon Web Services service from the member
-	// account. If the specified service is the only service for which the member
-	// account is a delegated administrator, the operation also revokes Organizations
-	// read action permissions.
+	// account is a delegated administrator.
+	//
+	// Delegated administrator privileges are revoked for only the specified Amazon
+	// Web Services service from the member account. If the specified service is the
+	// only service for which the member account is a delegated administrator, the
+	// operation also revokes Organizations read action permissions.
 	//
 	// This member is required.
 	ServicePrincipal *string
@@ -87,25 +91,25 @@ func (c *Client) addOperationDeregisterDelegatedAdministratorMiddlewares(stack *
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -120,13 +124,16 @@ func (c *Client) addOperationDeregisterDelegatedAdministratorMiddlewares(stack *
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDeregisterDelegatedAdministratorValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDeregisterDelegatedAdministrator(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

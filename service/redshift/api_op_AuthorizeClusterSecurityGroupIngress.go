@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/redshift/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -17,16 +16,22 @@ import (
 // an Amazon EC2 instance, you can authorize inbound access to either a Classless
 // Interdomain Routing (CIDR)/Internet Protocol (IP) range or to an Amazon EC2
 // security group. You can add as many as 20 ingress rules to an Amazon Redshift
-// security group. If you authorize access to an Amazon EC2 security group, specify
+// security group.
+//
+// If you authorize access to an Amazon EC2 security group, specify
 // EC2SecurityGroupName and EC2SecurityGroupOwnerId. The Amazon EC2 security group
-// and Amazon Redshift cluster must be in the same Amazon Web Services Region. If
-// you authorize access to a CIDR/IP address range, specify CIDRIP. For an overview
-// of CIDR blocks, see the Wikipedia article on Classless Inter-Domain Routing (http://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing)
-// . You must also associate the security group with a cluster so that clients
+// and Amazon Redshift cluster must be in the same Amazon Web Services Region.
+//
+// If you authorize access to a CIDR/IP address range, specify CIDRIP. For an
+// overview of CIDR blocks, see the Wikipedia article on [Classless Inter-Domain Routing].
+//
+// You must also associate the security group with a cluster so that clients
 // running on these IP addresses or the EC2 instance are authorized to connect to
-// the cluster. For information about managing security groups, go to Working with
-// Security Groups (https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-security-groups.html)
-// in the Amazon Redshift Cluster Management Guide.
+// the cluster. For information about managing security groups, go to [Working with Security Groups]in the
+// Amazon Redshift Cluster Management Guide.
+//
+// [Classless Inter-Domain Routing]: http://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing
+// [Working with Security Groups]: https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-security-groups.html
 func (c *Client) AuthorizeClusterSecurityGroupIngress(ctx context.Context, params *AuthorizeClusterSecurityGroupIngressInput, optFns ...func(*Options)) (*AuthorizeClusterSecurityGroupIngressOutput, error) {
 	if params == nil {
 		params = &AuthorizeClusterSecurityGroupIngressInput{}
@@ -57,7 +62,9 @@ type AuthorizeClusterSecurityGroupIngressInput struct {
 
 	// The Amazon Web Services account number of the owner of the security group
 	// specified by the EC2SecurityGroupName parameter. The Amazon Web Services Access
-	// Key ID is not an acceptable value. Example: 111122223333
+	// Key ID is not an acceptable value.
+	//
+	// Example: 111122223333
 	EC2SecurityGroupOwnerId *string
 
 	noSmithyDocumentSerde
@@ -96,25 +103,25 @@ func (c *Client) addOperationAuthorizeClusterSecurityGroupIngressMiddlewares(sta
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -129,13 +136,16 @@ func (c *Client) addOperationAuthorizeClusterSecurityGroupIngressMiddlewares(sta
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpAuthorizeClusterSecurityGroupIngressValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opAuthorizeClusterSecurityGroupIngress(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

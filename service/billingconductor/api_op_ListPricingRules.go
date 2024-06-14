@@ -6,13 +6,13 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/billingconductor/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Describes a pricing rule that can be associated to a pricing plan, or set of
+//	Describes a pricing rule that can be associated to a pricing plan, or set of
+//
 // pricing plans.
 func (c *Client) ListPricingRules(ctx context.Context, params *ListPricingRulesInput, optFns ...func(*Options)) (*ListPricingRulesOutput, error) {
 	if params == nil {
@@ -31,17 +31,17 @@ func (c *Client) ListPricingRules(ctx context.Context, params *ListPricingRulesI
 
 type ListPricingRulesInput struct {
 
-	// The preferred billing period to get the pricing plan.
+	//  The preferred billing period to get the pricing plan.
 	BillingPeriod *string
 
-	// A DescribePricingRuleFilter that specifies the Amazon Resource Name (ARNs) of
+	//  A DescribePricingRuleFilter that specifies the Amazon Resource Name (ARNs) of
 	// pricing rules to retrieve pricing rules information.
 	Filters *types.ListPricingRulesFilter
 
-	// The maximum number of pricing rules to retrieve.
+	//  The maximum number of pricing rules to retrieve.
 	MaxResults *int32
 
-	// The pagination token that's used on subsequent call to get pricing rules.
+	//  The pagination token that's used on subsequent call to get pricing rules.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -49,13 +49,13 @@ type ListPricingRulesInput struct {
 
 type ListPricingRulesOutput struct {
 
-	// The billing period for which the described pricing rules are applicable.
+	//  The billing period for which the described pricing rules are applicable.
 	BillingPeriod *string
 
-	// The pagination token that's used on subsequent calls to get pricing rules.
+	//  The pagination token that's used on subsequent calls to get pricing rules.
 	NextToken *string
 
-	// A list containing the described pricing rules.
+	//  A list containing the described pricing rules.
 	PricingRules []types.PricingRuleListElement
 
 	// Metadata pertaining to the operation's result.
@@ -86,25 +86,25 @@ func (c *Client) addOperationListPricingRulesMiddlewares(stack *middleware.Stack
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -119,10 +119,13 @@ func (c *Client) addOperationListPricingRulesMiddlewares(stack *middleware.Stack
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListPricingRules(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -150,7 +153,7 @@ var _ ListPricingRulesAPIClient = (*Client)(nil)
 
 // ListPricingRulesPaginatorOptions is the paginator options for ListPricingRules
 type ListPricingRulesPaginatorOptions struct {
-	// The maximum number of pricing rules to retrieve.
+	//  The maximum number of pricing rules to retrieve.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

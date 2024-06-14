@@ -12,8 +12,9 @@ const (
 
 // Values returns all known values for ApplicationLayerAutomaticResponseStatus.
 // Note that this can be expanded in the future, and so it is only as up to date as
-// the client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ApplicationLayerAutomaticResponseStatus) Values() []ApplicationLayerAutomaticResponseStatus {
 	return []ApplicationLayerAutomaticResponseStatus{
 		"ENABLED",
@@ -30,8 +31,9 @@ const (
 )
 
 // Values returns all known values for AttackLayer. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (AttackLayer) Values() []AttackLayer {
 	return []AttackLayer{
 		"NETWORK",
@@ -55,6 +57,7 @@ const (
 
 // Values returns all known values for AttackPropertyIdentifier. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (AttackPropertyIdentifier) Values() []AttackPropertyIdentifier {
 	return []AttackPropertyIdentifier{
@@ -78,8 +81,9 @@ const (
 )
 
 // Values returns all known values for AutoRenew. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (AutoRenew) Values() []AutoRenew {
 	return []AutoRenew{
 		"ENABLED",
@@ -98,6 +102,7 @@ const (
 
 // Values returns all known values for ProactiveEngagementStatus. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (ProactiveEngagementStatus) Values() []ProactiveEngagementStatus {
 	return []ProactiveEngagementStatus{
@@ -120,8 +125,9 @@ const (
 )
 
 // Values returns all known values for ProtectedResourceType. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ProtectedResourceType) Values() []ProtectedResourceType {
 	return []ProtectedResourceType{
 		"CLOUDFRONT_DISTRIBUTION",
@@ -144,6 +150,7 @@ const (
 
 // Values returns all known values for ProtectionGroupAggregation. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (ProtectionGroupAggregation) Values() []ProtectionGroupAggregation {
 	return []ProtectionGroupAggregation{
@@ -163,8 +170,9 @@ const (
 )
 
 // Values returns all known values for ProtectionGroupPattern. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ProtectionGroupPattern) Values() []ProtectionGroupPattern {
 	return []ProtectionGroupPattern{
 		"ALL",
@@ -182,8 +190,9 @@ const (
 )
 
 // Values returns all known values for SubResourceType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (SubResourceType) Values() []SubResourceType {
 	return []SubResourceType{
 		"IP",
@@ -200,8 +209,9 @@ const (
 )
 
 // Values returns all known values for SubscriptionState. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (SubscriptionState) Values() []SubscriptionState {
 	return []SubscriptionState{
 		"ACTIVE",
@@ -220,8 +230,9 @@ const (
 )
 
 // Values returns all known values for Unit. Note that this can be expanded in the
-// future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (Unit) Values() []Unit {
 	return []Unit{
 		"BITS",
@@ -241,6 +252,7 @@ const (
 
 // Values returns all known values for ValidationExceptionReason. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (ValidationExceptionReason) Values() []ValidationExceptionReason {
 	return []ValidationExceptionReason{

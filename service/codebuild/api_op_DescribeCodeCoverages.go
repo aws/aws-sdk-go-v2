@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/codebuild/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -30,7 +29,7 @@ func (c *Client) DescribeCodeCoverages(ctx context.Context, params *DescribeCode
 
 type DescribeCodeCoveragesInput struct {
 
-	// The ARN of the report for which test cases are returned.
+	//  The ARN of the report for which test cases are returned.
 	//
 	// This member is required.
 	ReportArn *string
@@ -49,9 +48,12 @@ type DescribeCodeCoveragesInput struct {
 	// exclude this parameter.
 	NextToken *string
 
-	// Specifies how the results are sorted. Possible values are: FILE_PATH The
-	// results are sorted by file path. LINE_COVERAGE_PERCENTAGE The results are sorted
-	// by the percentage of lines that are covered.
+	// Specifies how the results are sorted. Possible values are:
+	//
+	// FILE_PATH The results are sorted by file path.
+	//
+	// LINE_COVERAGE_PERCENTAGE The results are sorted by the percentage of lines that
+	// are covered.
 	SortBy types.ReportCodeCoverageSortByType
 
 	// Specifies if the results are sorted in ascending or descending order.
@@ -97,25 +99,25 @@ func (c *Client) addOperationDescribeCodeCoveragesMiddlewares(stack *middleware.
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -130,13 +132,16 @@ func (c *Client) addOperationDescribeCodeCoveragesMiddlewares(stack *middleware.
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDescribeCodeCoveragesValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeCodeCoverages(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

@@ -3446,6 +3446,46 @@
                                 "CacheNodeType": "cache.r3.large"
                             }
                         }
+                    },
+                    {
+                        "title": "CreateCacheCluster",
+                        "documentation": "Creates a Redis cluster with 1 node. ",
+                        "input": {
+                            "CacheClusterId": "my-redis",
+                            "PreferredAvailabilityZone": "us-east-1c",
+                            "NumCacheNodes": 1,
+                            "CacheNodeType": "cache.r3.larage",
+                            "Engine": "redis",
+                            "EngineVersion": "3.2.4",
+                            "CacheSubnetGroupName": "default",
+                            "Port": 6379,
+                            "SnapshotRetentionLimit": 7,
+                            "AutoMinorVersionUpgrade": true
+                        },
+                        "output": {
+                            "CacheCluster": {
+                                "Engine": "redis",
+                                "CacheParameterGroup": {
+                                    "CacheNodeIdsToReboot": [],
+                                    "CacheParameterGroupName": "default.redis3.2",
+                                    "ParameterApplyStatus": "in-sync"
+                                },
+                                "SnapshotRetentionLimit": 7,
+                                "CacheClusterId": "my-redis",
+                                "CacheSecurityGroups": [],
+                                "NumCacheNodes": 1,
+                                "SnapshotWindow": "10: 00-11: 00",
+                                "AutoMinorVersionUpgrade": true,
+                                "CacheClusterStatus": "creating",
+                                "PreferredAvailabilityZone": "us-east-1c",
+                                "ClientDownloadLandingPage": "https: //console.aws.amazon.com/elasticache/home#client-download: ",
+                                "CacheSubnetGroupName": "default",
+                                "EngineVersion": "3.2.4",
+                                "PendingModifiedValues": {},
+                                "PreferredMaintenanceWindow": "fri: 05: 30-fri: 06: 30",
+                                "CacheNodeType": "cache.m3.large"
+                            }
+                        }
                     }
                 ]
             }
@@ -4095,7 +4135,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a Redis (cluster mode disabled) or a Redis (cluster mode enabled) replication\n            group.</p>\n         <p>This API can be used to create a standalone regional replication group or a secondary\n            replication group associated with a Global datastore.</p>\n         <p>A Redis (cluster mode disabled) replication group is a collection of clusters, where\n            one of the clusters is a read/write primary and the others are read-only replicas.\n            Writes to the primary are asynchronously propagated to the replicas.</p>\n         <p>A Redis cluster-mode enabled cluster is comprised of from 1 to 90 shards (API/CLI:\n            node groups). Each shard has a primary node and up to 5 read-only replica nodes. The\n            configuration can range from 90 shards and 0 replicas to 15 shards and 5 replicas, which\n            is the maximum number or replicas allowed. </p>\n         <p>The node or shard limit can be increased to a maximum of 500 per cluster if the Redis\n            engine version is 5.0.6 or higher. For example, you can choose to configure a 500 node\n            cluster that ranges between 83 shards (one primary and 5 replicas per shard) and 500\n            shards (single primary and no replicas). Make sure there are enough available IP\n            addresses to accommodate the increase. Common pitfalls include the subnets in the subnet\n            group have too small a CIDR range or the subnets are shared and heavily used by other\n            clusters. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/SubnetGroups.Creating.html\">Creating a Subnet\n                Group</a>. For versions below 5.0.6, the limit is 250 per cluster.</p>\n         <p>To request a limit increase, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws_service_limits.html\">Amazon Service Limits</a> and\n            choose the limit type <b>Nodes per cluster per instance\n                type</b>. </p>\n         <p>When a Redis (cluster mode disabled) replication group has been successfully created,\n            you can add one or more read replicas to it, up to a total of 5 read replicas. If you\n            need to increase or decrease the number of node groups (console: shards), you can avail\n            yourself of ElastiCache for Redis' scaling. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/Scaling.html\">Scaling\n                ElastiCache for Redis Clusters</a> in the <i>ElastiCache User\n                Guide</i>.</p>\n         <note>\n            <p>This operation is valid for Redis only.</p>\n         </note>",
+                "smithy.api#documentation": "<p>Creates a Redis (cluster mode disabled) or a Redis (cluster mode enabled) replication\n            group.</p>\n         <p>This API can be used to create a standalone regional replication group or a secondary\n            replication group associated with a Global datastore.</p>\n         <p>A Redis (cluster mode disabled) replication group is a collection of nodes, where\n            one of the nodes is a read/write primary and the others are read-only replicas.\n            Writes to the primary are asynchronously propagated to the replicas.</p>\n         <p>A Redis cluster-mode enabled cluster is comprised of from 1 to 90 shards (API/CLI:\n            node groups). Each shard has a primary node and up to 5 read-only replica nodes. The\n            configuration can range from 90 shards and 0 replicas to 15 shards and 5 replicas, which\n            is the maximum number or replicas allowed. </p>\n         <p>The node or shard limit can be increased to a maximum of 500 per cluster if the Redis\n            engine version is 5.0.6 or higher. For example, you can choose to configure a 500 node\n            cluster that ranges between 83 shards (one primary and 5 replicas per shard) and 500\n            shards (single primary and no replicas). Make sure there are enough available IP\n            addresses to accommodate the increase. Common pitfalls include the subnets in the subnet\n            group have too small a CIDR range or the subnets are shared and heavily used by other\n            clusters. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/SubnetGroups.Creating.html\">Creating a Subnet\n                Group</a>. For versions below 5.0.6, the limit is 250 per cluster.</p>\n         <p>To request a limit increase, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws_service_limits.html\">Amazon Service Limits</a> and\n            choose the limit type <b>Nodes per cluster per instance\n                type</b>. </p>\n         <p>When a Redis (cluster mode disabled) replication group has been successfully created,\n            you can add one or more read replicas to it, up to a total of 5 read replicas. If you\n            need to increase or decrease the number of node groups (console: shards), you can avail\n            yourself of ElastiCache for Redis' scaling. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/Scaling.html\">Scaling\n                ElastiCache for Redis Clusters</a> in the <i>ElastiCache User\n                Guide</i>.</p>\n         <note>\n            <p>This operation is valid for Redis only.</p>\n         </note>",
                 "smithy.api#examples": [
                     {
                         "title": "CreateCacheReplicationGroup",
@@ -4121,6 +4161,58 @@
                                     "my-redis-rg-001",
                                     "my-redis-rg-002",
                                     "my-redis-rg-003"
+                                ],
+                                "PendingModifiedValues": {}
+                            }
+                        }
+                    },
+                    {
+                        "title": "CreateReplicationGroup",
+                        "documentation": "Creates a Redis (cluster mode enabled) replication group with two shards. One shard has one read replica node and the other shard has two read replicas.",
+                        "input": {
+                            "ReplicationGroupId": "clustered-redis-rg",
+                            "ReplicationGroupDescription": "A multi-sharded replication group",
+                            "NumNodeGroups": 2,
+                            "NodeGroupConfiguration": [
+                                {
+                                    "Slots": "0-8999",
+                                    "PrimaryAvailabilityZone": "us-east-1c",
+                                    "ReplicaCount": 1,
+                                    "ReplicaAvailabilityZones": [
+                                        "us-east-1b"
+                                    ]
+                                },
+                                {
+                                    "Slots": "9000-16383",
+                                    "PrimaryAvailabilityZone": "us-east-1a",
+                                    "ReplicaCount": 2,
+                                    "ReplicaAvailabilityZones": [
+                                        "us-east-1a",
+                                        "us-east-1c"
+                                    ]
+                                }
+                            ],
+                            "CacheNodeType": "cache.m3.medium",
+                            "Engine": "redis",
+                            "EngineVersion": "3.2.4",
+                            "CacheParameterGroupName": "default.redis3.2.cluster.on",
+                            "AutoMinorVersionUpgrade": true,
+                            "SnapshotRetentionLimit": 8
+                        },
+                        "output": {
+                            "ReplicationGroup": {
+                                "Status": "creating",
+                                "Description": "Sharded replication group",
+                                "ReplicationGroupId": "clustered-redis-rg",
+                                "SnapshotRetentionLimit": 8,
+                                "AutomaticFailover": "enabled",
+                                "SnapshotWindow": "05:30-06:30",
+                                "MemberClusters": [
+                                    "rc-rg3-0001-001",
+                                    "rc-rg3-0001-002",
+                                    "rc-rg3-0002-001",
+                                    "rc-rg3-0002-002",
+                                    "rc-rg3-0002-003"
                                 ],
                                 "PendingModifiedValues": {}
                             }
@@ -4265,7 +4357,7 @@
                 "PreferredMaintenanceWindow": {
                     "target": "com.amazonaws.elasticache#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the weekly time range during which maintenance on the cluster is performed.\n            It is specified as a range in the format ddd:hh24:mi-ddd:hh24:mi (24H Clock UTC). The\n            minimum maintenance window is a 60 minute period. Valid values for <code>ddd</code>\n            are:</p>\n         <p>Specifies the weekly time range during which maintenance on the cluster is performed.\n            It is specified as a range in the format ddd:hh24:mi-ddd:hh24:mi (24H Clock UTC). The\n            minimum maintenance window is a 60 minute period.</p>\n         <p>Valid values for <code>ddd</code> are:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>sun</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>mon</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>tue</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>wed</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>thu</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>fri</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>sat</code>\n               </p>\n            </li>\n         </ul>\n         <p>Example: <code>sun:23:00-mon:01:30</code>\n         </p>"
+                        "smithy.api#documentation": "<p>Specifies the weekly time range during which maintenance on the cluster is performed.\n            It is specified as a range in the format ddd:hh24:mi-ddd:hh24:mi (24H Clock UTC). The\n            minimum maintenance window is a 60 minute period.</p>\n         <p>Valid values for <code>ddd</code> are:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>sun</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>mon</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>tue</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>wed</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>thu</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>fri</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>sat</code>\n               </p>\n            </li>\n         </ul>\n         <p>Example: <code>sun:23:00-mon:01:30</code>\n         </p>"
                     }
                 },
                 "Port": {
@@ -4705,6 +4797,83 @@
                                 "CacheNodeType": "cache.m3.medium"
                             }
                         }
+                    },
+                    {
+                        "title": "CreateSnapshot - NonClustered Redis, 2 read-replicas",
+                        "documentation": "Creates a snapshot of a non-clustered Redis cluster that has only three nodes, primary and two read-replicas. CacheClusterId must be a specific node in the cluster.",
+                        "input": {
+                            "CacheClusterId": "threenoderedis-001",
+                            "SnapshotName": "snapshot-2"
+                        },
+                        "output": {
+                            "Snapshot": {
+                                "Engine": "redis",
+                                "CacheParameterGroupName": "default.redis3.2",
+                                "VpcId": "vpc-73c3cd17",
+                                "CacheClusterId": "threenoderedis-001",
+                                "SnapshotRetentionLimit": 1,
+                                "NumCacheNodes": 1,
+                                "SnapshotName": "snapshot-2",
+                                "CacheClusterCreateTime": "2017-02-03T15:43:36.278Z",
+                                "AutoMinorVersionUpgrade": true,
+                                "PreferredAvailabilityZone": "us-west-2c",
+                                "SnapshotStatus": "creating",
+                                "SnapshotSource": "manual",
+                                "SnapshotWindow": "00:00-01:00",
+                                "EngineVersion": "3.2.4",
+                                "NodeSnapshots": [
+                                    {
+                                        "CacheSize": "",
+                                        "CacheNodeId": "0001",
+                                        "CacheNodeCreateTime": "2017-02-03T15:43:36.278Z"
+                                    }
+                                ],
+                                "CacheSubnetGroupName": "default",
+                                "Port": 6379,
+                                "PreferredMaintenanceWindow": "sat:08:00-sat:09:00",
+                                "CacheNodeType": "cache.m3.medium"
+                            }
+                        }
+                    },
+                    {
+                        "title": "CreateSnapshot-clustered Redis",
+                        "documentation": "Creates a snapshot of a clustered Redis cluster that has 2 shards, each with a primary and 4 read-replicas.",
+                        "input": {
+                            "ReplicationGroupId": "clusteredredis",
+                            "SnapshotName": "snapshot-2x5"
+                        },
+                        "output": {
+                            "Snapshot": {
+                                "Engine": "redis",
+                                "CacheParameterGroupName": "default.redis3.2.cluster.on",
+                                "VpcId": "vpc-73c3cd17",
+                                "NodeSnapshots": [
+                                    {
+                                        "CacheSize": "",
+                                        "NodeGroupId": "0001"
+                                    },
+                                    {
+                                        "CacheSize": "",
+                                        "NodeGroupId": "0002"
+                                    }
+                                ],
+                                "NumNodeGroups": 2,
+                                "SnapshotName": "snapshot-2x5",
+                                "ReplicationGroupId": "clusteredredis",
+                                "AutoMinorVersionUpgrade": true,
+                                "SnapshotRetentionLimit": 1,
+                                "AutomaticFailover": "enabled",
+                                "SnapshotStatus": "creating",
+                                "SnapshotSource": "manual",
+                                "SnapshotWindow": "12:00-13:00",
+                                "EngineVersion": "3.2.4",
+                                "CacheSubnetGroupName": "default",
+                                "ReplicationGroupDescription": "Redis cluster with 2 shards.",
+                                "Port": 6379,
+                                "PreferredMaintenanceWindow": "mon:09:30-mon:10:30",
+                                "CacheNodeType": "cache.m3.medium"
+                            }
+                        }
                     }
                 ]
             }
@@ -4966,9 +5135,13 @@
                 "Maximum": {
                     "target": "com.amazonaws.elasticache#IntegerOptional",
                     "traits": {
-                        "smithy.api#clientOptional": {},
-                        "smithy.api#documentation": "<p>The upper limit for data storage the cache is set to use.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The upper limit for data storage the cache is set to use.</p>"
+                    }
+                },
+                "Minimum": {
+                    "target": "com.amazonaws.elasticache#IntegerOptional",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The lower limit for data storage the cache is set to use.</p>"
                     }
                 },
                 "Unit": {
@@ -6001,6 +6174,67 @@
                                 }
                             ]
                         }
+                    },
+                    {
+                        "title": "DescribeCacheClusters",
+                        "documentation": "Lists the details for the cache cluster my-mem-cluster.",
+                        "input": {
+                            "CacheClusterId": "my-mem-cluster",
+                            "ShowCacheNodeInfo": true
+                        },
+                        "output": {
+                            "CacheClusters": [
+                                {
+                                    "Engine": "memcached",
+                                    "CacheNodes": [
+                                        {
+                                            "CacheNodeId": "0001",
+                                            "Endpoint": {
+                                                "Port": 11211,
+                                                "Address": "my-mem-cluster.ameaqx.0001.use1.cache.amazonaws.com"
+                                            },
+                                            "CacheNodeStatus": "available",
+                                            "ParameterGroupStatus": "in-sync",
+                                            "CacheNodeCreateTime": "2016-12-21T21:59:43.794Z",
+                                            "CustomerAvailabilityZone": "us-east-1b"
+                                        },
+                                        {
+                                            "CacheNodeId": "0002",
+                                            "Endpoint": {
+                                                "Port": 11211,
+                                                "Address": "my-mem-cluster.ameaqx.0002.use1.cache.amazonaws.com"
+                                            },
+                                            "CacheNodeStatus": "available",
+                                            "ParameterGroupStatus": "in-sync",
+                                            "CacheNodeCreateTime": "2016-12-21T21:59:43.794Z",
+                                            "CustomerAvailabilityZone": "us-east-1a"
+                                        }
+                                    ],
+                                    "CacheParameterGroup": {
+                                        "CacheNodeIdsToReboot": [],
+                                        "CacheParameterGroupName": "default.memcached1.4",
+                                        "ParameterApplyStatus": "in-sync"
+                                    },
+                                    "CacheClusterId": "my-mem-cluster",
+                                    "PreferredAvailabilityZone": "Multiple",
+                                    "ConfigurationEndpoint": {
+                                        "Port": 11211,
+                                        "Address": "my-mem-cluster.ameaqx.cfg.use1.cache.amazonaws.com"
+                                    },
+                                    "CacheSecurityGroups": [],
+                                    "CacheClusterCreateTime": "2016-12-21T21:59:43.794Z",
+                                    "AutoMinorVersionUpgrade": true,
+                                    "CacheClusterStatus": "available",
+                                    "NumCacheNodes": 2,
+                                    "ClientDownloadLandingPage": "https://console.aws.amazon.com/elasticache/home#client-download:",
+                                    "CacheSubnetGroupName": "default",
+                                    "EngineVersion": "1.4.24",
+                                    "PendingModifiedValues": {},
+                                    "PreferredMaintenanceWindow": "wed:06:00-wed:07:00",
+                                    "CacheNodeType": "cache.t2.medium"
+                                }
+                            ]
+                        }
                     }
                 ],
                 "smithy.api#paginated": {
@@ -6237,6 +6471,76 @@
                                     "CacheParameterGroupFamily": "memcached1.4",
                                     "EngineVersion": "1.4.5"
                                 },
+                                {
+                                    "Engine": "redis",
+                                    "CacheEngineDescription": "Redis",
+                                    "CacheEngineVersionDescription": "redis version 2.6.13",
+                                    "CacheParameterGroupFamily": "redis2.6",
+                                    "EngineVersion": "2.6.13"
+                                },
+                                {
+                                    "Engine": "redis",
+                                    "CacheEngineDescription": "Redis",
+                                    "CacheEngineVersionDescription": "redis version 2.8.19",
+                                    "CacheParameterGroupFamily": "redis2.8",
+                                    "EngineVersion": "2.8.19"
+                                },
+                                {
+                                    "Engine": "redis",
+                                    "CacheEngineDescription": "Redis",
+                                    "CacheEngineVersionDescription": "redis version 2.8.21",
+                                    "CacheParameterGroupFamily": "redis2.8",
+                                    "EngineVersion": "2.8.21"
+                                },
+                                {
+                                    "Engine": "redis",
+                                    "CacheEngineDescription": "Redis",
+                                    "CacheEngineVersionDescription": "redis version 2.8.22 R5",
+                                    "CacheParameterGroupFamily": "redis2.8",
+                                    "EngineVersion": "2.8.22"
+                                },
+                                {
+                                    "Engine": "redis",
+                                    "CacheEngineDescription": "Redis",
+                                    "CacheEngineVersionDescription": "redis version 2.8.23 R4",
+                                    "CacheParameterGroupFamily": "redis2.8",
+                                    "EngineVersion": "2.8.23"
+                                },
+                                {
+                                    "Engine": "redis",
+                                    "CacheEngineDescription": "Redis",
+                                    "CacheEngineVersionDescription": "redis version 2.8.24 R3",
+                                    "CacheParameterGroupFamily": "redis2.8",
+                                    "EngineVersion": "2.8.24"
+                                },
+                                {
+                                    "Engine": "redis",
+                                    "CacheEngineDescription": "Redis",
+                                    "CacheEngineVersionDescription": "redis version 2.8.6",
+                                    "CacheParameterGroupFamily": "redis2.8",
+                                    "EngineVersion": "2.8.6"
+                                },
+                                {
+                                    "Engine": "redis",
+                                    "CacheEngineDescription": "Redis",
+                                    "CacheEngineVersionDescription": "redis version 3.2.4",
+                                    "CacheParameterGroupFamily": "redis3.2",
+                                    "EngineVersion": "3.2.4"
+                                }
+                            ]
+                        }
+                    },
+                    {
+                        "title": "DescribeCacheEngineVersions",
+                        "documentation": "Lists the details for up to 50 Redis cache engine versions.",
+                        "input": {
+                            "Engine": "redis",
+                            "MaxRecords": 50,
+                            "DefaultOnly": false
+                        },
+                        "output": {
+                            "Marker": "",
+                            "CacheEngineVersions": [
                                 {
                                     "Engine": "redis",
                                     "CacheEngineDescription": "Redis",
@@ -7784,6 +8088,54 @@
                                 }
                             ]
                         }
+                    },
+                    {
+                        "title": "DescribeEvents",
+                        "documentation": "Describes all the replication-group events from 3:00P to 5:00P on November 11, 2016.",
+                        "input": {
+                            "StartTime": "2016-12-22T15:00:00.000Z"
+                        },
+                        "output": {
+                            "Marker": "",
+                            "Events": [
+                                {
+                                    "Date": "2016-12-22T21:35:46.674Z",
+                                    "Message": "Snapshot succeeded for snapshot with ID 'cr-bkup' of replication group with ID 'clustered-redis'",
+                                    "SourceIdentifier": "clustered-redis-0001-001",
+                                    "SourceType": "cache-cluster"
+                                },
+                                {
+                                    "Date": "2016-12-22T16:27:56.088Z",
+                                    "Message": "Added cache node 0001 in availability zone us-east-1e",
+                                    "SourceIdentifier": "redis-cluster",
+                                    "SourceType": "cache-cluster"
+                                },
+                                {
+                                    "Date": "2016-12-22T16:27:56.078Z",
+                                    "Message": "Cache cluster created",
+                                    "SourceIdentifier": "redis-cluster",
+                                    "SourceType": "cache-cluster"
+                                },
+                                {
+                                    "Date": "2016-12-22T16:05:17.326Z",
+                                    "Message": "Added cache node 0002 in availability zone us-east-1c",
+                                    "SourceIdentifier": "my-memcached2",
+                                    "SourceType": "cache-cluster"
+                                },
+                                {
+                                    "Date": "2016-12-22T16:05:17.323Z",
+                                    "Message": "Added cache node 0001 in availability zone us-east-1e",
+                                    "SourceIdentifier": "my-memcached2",
+                                    "SourceType": "cache-cluster"
+                                },
+                                {
+                                    "Date": "2016-12-22T16:05:17.314Z",
+                                    "Message": "Cache cluster created",
+                                    "SourceIdentifier": "my-memcached2",
+                                    "SourceType": "cache-cluster"
+                                }
+                            ]
+                        }
                     }
                 ],
                 "smithy.api#paginated": {
@@ -8483,6 +8835,38 @@
                                 }
                             ]
                         }
+                    },
+                    {
+                        "title": "DescribeReseredCacheNodeOfferings",
+                        "documentation": "Lists available reserved cache node offerings for cache.r3.large nodes with a 3 year commitment.",
+                        "input": {
+                            "ReservedCacheNodesOfferingId": "",
+                            "CacheNodeType": "cache.r3.large",
+                            "Duration": "3",
+                            "OfferingType": "Light Utilization",
+                            "MaxRecords": 25
+                        },
+                        "output": {
+                            "Marker": "",
+                            "ReservedCacheNodesOfferings": []
+                        }
+                    },
+                    {
+                        "title": "DescribeReseredCacheNodeOfferings",
+                        "documentation": "Lists available reserved cache node offerings.",
+                        "input": {
+                            "ReservedCacheNodesOfferingId": "438012d3-4052-4cc7-b2e3-8d3372e0e706",
+                            "CacheNodeType": "",
+                            "Duration": "",
+                            "ProductDescription": "",
+                            "OfferingType": "",
+                            "MaxRecords": 25,
+                            "Marker": ""
+                        },
+                        "output": {
+                            "Marker": "",
+                            "ReservedCacheNodesOfferings": []
+                        }
                     }
                 ],
                 "smithy.api#paginated": {
@@ -9077,7 +9461,7 @@
                 "Marker": {
                     "target": "com.amazonaws.elasticache#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>An optional marker returned from a prior request. Use this marker for pagination of\n            results from this operation. If this parameter is specified, the response includes only\n            records beyond the marker, up to the value specified by MaxRecords. ></p>"
+                        "smithy.api#documentation": "<p>An optional marker returned from a prior request. Use this marker for pagination of\n            results from this operation. If this parameter is specified, the response includes only\n            records beyond the marker, up to the value specified by MaxRecords.></p>"
                     }
                 }
             },
@@ -9339,9 +9723,13 @@
                 "Maximum": {
                     "target": "com.amazonaws.elasticache#IntegerOptional",
                     "traits": {
-                        "smithy.api#clientOptional": {},
-                        "smithy.api#documentation": "<p>The configuration for the maximum number of ECPUs the cache can consume per second.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The configuration for the maximum number of ECPUs the cache can consume per second.</p>"
+                    }
+                },
+                "Minimum": {
+                    "target": "com.amazonaws.elasticache#IntegerOptional",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration for the minimum number of ECPUs the cache should be able consume per second.</p>"
                     }
                 }
             },
@@ -9366,7 +9754,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Represents the information required for client programs to connect to a cache\n            node.</p>"
+                "smithy.api#documentation": "<p>Represents the information required for client programs to connect to a cache\n            node. This value is read-only.</p>"
             }
         },
         "com.amazonaws.elasticache#EngineDefaults": {
@@ -10482,6 +10870,16 @@
                                 "cache.r3.xlarge"
                             ]
                         }
+                    },
+                    {
+                        "title": "ListAllowedNodeTypeModifications",
+                        "documentation": "Lists all available node types that you can scale your Redis cluster's or replication group's current node type up to.",
+                        "input": {
+                            "CacheClusterId": "mycluster"
+                        },
+                        "output": {
+                            "ScaleUpModifications": []
+                        }
                     }
                 ]
             }
@@ -10972,7 +11370,7 @@
                 "AuthTokenUpdateStrategy": {
                     "target": "com.amazonaws.elasticache#AuthTokenUpdateStrategyType",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the strategy to use to update the AUTH token. This parameter must be\n            specified with the <code>auth-token</code> parameter. Possible values:</p>\n         <ul>\n            <li>\n               <p>Rotate</p>\n            </li>\n            <li>\n               <p>Set</p>\n            </li>\n         </ul>\n         <p> For more information, see <a href=\"http://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/auth.html\">Authenticating Users with Redis AUTH</a>\n         </p>"
+                        "smithy.api#documentation": "<p>Specifies the strategy to use to update the AUTH token. This parameter must be\n            specified with the <code>auth-token</code> parameter. Possible values:</p>\n         <ul>\n            <li>\n               <p>ROTATE - default, if no update strategy is provided</p>\n            </li>\n            <li>\n               <p>SET - allowed only after ROTATE</p>\n            </li>\n            <li>\n               <p>DELETE - allowed only when transitioning to RBAC</p>\n            </li>\n         </ul>\n         <p> For more information, see <a href=\"http://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/auth.html\">Authenticating Users with Redis AUTH</a>\n         </p>"
                     }
                 },
                 "LogDeliveryConfigurations": {
@@ -11549,7 +11947,7 @@
                 "AuthTokenUpdateStrategy": {
                     "target": "com.amazonaws.elasticache#AuthTokenUpdateStrategyType",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the strategy to use to update the AUTH token. This parameter must be\n            specified with the <code>auth-token</code> parameter. Possible values:</p>\n         <ul>\n            <li>\n               <p>Rotate</p>\n            </li>\n            <li>\n               <p>Set</p>\n            </li>\n         </ul>\n         <p> For more information, see <a href=\"http://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/auth.html\">Authenticating Users with Redis AUTH</a>\n         </p>"
+                        "smithy.api#documentation": "<p>Specifies the strategy to use to update the AUTH token. This parameter must be\n            specified with the <code>auth-token</code> parameter. Possible values:</p>\n         <ul>\n            <li>\n               <p>ROTATE - default, if no update strategy is provided</p>\n            </li>\n            <li>\n               <p>SET - allowed only after ROTATE</p>\n            </li>\n            <li>\n               <p>DELETE - allowed only when transitioning to RBAC</p>\n            </li>\n         </ul>\n         <p> For more information, see <a href=\"http://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/auth.html\">Authenticating Users with Redis AUTH</a>\n         </p>"
                     }
                 },
                 "UserGroupIdsToAdd": {
@@ -12061,7 +12459,7 @@
                 "ReaderEndpoint": {
                     "target": "com.amazonaws.elasticache#Endpoint",
                     "traits": {
-                        "smithy.api#documentation": "<p>The endpoint of the replica nodes in this node group (shard).</p>"
+                        "smithy.api#documentation": "<p>The endpoint of the replica nodes in this node group (shard). This value is read-only.</p>"
                     }
                 },
                 "Slots": {
@@ -14251,7 +14649,7 @@
                 "SubnetIds": {
                     "target": "com.amazonaws.elasticache#SubnetIdsList",
                     "traits": {
-                        "smithy.api#documentation": "<p>If no subnet IDs are given and your VPC is in SFO, then ElastiCache will select 2 default subnets across AZs in your VPC. \n           For all other Regions, if no subnet IDs are given then ElastiCache will select 3 default subnets across AZs in your default VPC.</p>"
+                        "smithy.api#documentation": "<p>If no subnet IDs are given and your VPC is in us-west-1, then ElastiCache will select 2 default subnets across AZs in your VPC. \n           For all other Regions, if no subnet IDs are given then ElastiCache will select 3 default subnets across AZs in your default VPC.</p>"
                     }
                 },
                 "SnapshotRetentionLimit": {
@@ -15341,7 +15739,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Represents the input of a <code>TestFailover</code> operation which test automatic\n            failover on a specified node group (called shard in the console) in a replication group\n            (called cluster in the console).</p>\n         <p>This API is designed for testing the behavior of your application in case of\n            ElastiCache failover. It is not designed to be an operational tool for initiating a\n            failover to overcome a problem you may have with the cluster. Moreover, in certain\n            conditions such as large-scale operational events, Amazon may block this API. </p>\n         <p class=\"title\">\n            <b>Note the following</b>\n         </p>\n         <ul>\n            <li>\n               <p>A customer can use this operation to test automatic failover on up to 5 shards\n                    (called node groups in the ElastiCache API and Amazon CLI) in any rolling\n                    24-hour period.</p>\n            </li>\n            <li>\n               <p>If calling this operation on shards in different clusters (called replication\n                    groups in the API and CLI), the calls can be made concurrently.</p>\n               <p> </p>\n            </li>\n            <li>\n               <p>If calling this operation multiple times on different shards in the same Redis\n                    (cluster mode enabled) replication group, the first node replacement must\n                    complete before a subsequent call can be made.</p>\n            </li>\n            <li>\n               <p>To determine whether the node replacement is complete you can check Events\n                    using the Amazon ElastiCache console, the Amazon CLI, or the ElastiCache API.\n                    Look for the following automatic failover related events, listed here in order\n                    of occurrance:</p>\n               <ol>\n                  <li>\n                     <p>Replication group message: <code>Test Failover API called for node\n                                group <node-group-id></code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>Cache cluster message: <code>Failover from primary node\n                                <primary-node-id> to replica node <node-id>\n                                completed</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>Replication group message: <code>Failover from primary node\n                                <primary-node-id> to replica node <node-id>\n                                completed</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>Cache cluster message: <code>Recovering cache nodes\n                                <node-id></code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>Cache cluster message: <code>Finished recovery for cache nodes\n                                <node-id></code>\n                     </p>\n                  </li>\n               </ol>\n               <p>For more information see:</p>\n               <ul>\n                  <li>\n                     <p>\n                        <a href=\"https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/ECEvents.Viewing.html\">Viewing\n                                ElastiCache Events</a> in the <i>ElastiCache User\n                                Guide</i>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <a href=\"https://docs.aws.amazon.com/AmazonElastiCache/latest/APIReference/API_DescribeEvents.html\">DescribeEvents</a> in the ElastiCache API Reference</p>\n                  </li>\n               </ul>\n            </li>\n         </ul>\n         <p>Also see, <a href=\"https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/AutoFailover.html#auto-failover-test\">Testing\n                Multi-AZ </a> in the <i>ElastiCache User Guide</i>.</p>"
+                "smithy.api#documentation": "<p>Represents the input of a <code>TestFailover</code> operation which tests automatic\n            failover on a specified node group (called shard in the console) in a replication group\n            (called cluster in the console).</p>\n         <p>This API is designed for testing the behavior of your application in case of\n            ElastiCache failover. It is not designed to be an operational tool for initiating a\n            failover to overcome a problem you may have with the cluster. Moreover, in certain\n            conditions such as large-scale operational events, Amazon may block this API. </p>\n         <p class=\"title\">\n            <b>Note the following</b>\n         </p>\n         <ul>\n            <li>\n               <p>A customer can use this operation to test automatic failover on up to 15 shards\n                    (called node groups in the ElastiCache API and Amazon CLI) in any rolling\n                    24-hour period.</p>\n            </li>\n            <li>\n               <p>If calling this operation on shards in different clusters (called replication\n                    groups in the API and CLI), the calls can be made concurrently.</p>\n               <p> </p>\n            </li>\n            <li>\n               <p>If calling this operation multiple times on different shards in the same Redis\n                    (cluster mode enabled) replication group, the first node replacement must\n                    complete before a subsequent call can be made.</p>\n            </li>\n            <li>\n               <p>To determine whether the node replacement is complete you can check Events\n                    using the Amazon ElastiCache console, the Amazon CLI, or the ElastiCache API.\n                    Look for the following automatic failover related events, listed here in order\n                    of occurrance:</p>\n               <ol>\n                  <li>\n                     <p>Replication group message: <code>Test Failover API called for node\n                                group <node-group-id></code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>Cache cluster message: <code>Failover from primary node\n                                <primary-node-id> to replica node <node-id>\n                                completed</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>Replication group message: <code>Failover from primary node\n                                <primary-node-id> to replica node <node-id>\n                                completed</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>Cache cluster message: <code>Recovering cache nodes\n                                <node-id></code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>Cache cluster message: <code>Finished recovery for cache nodes\n                                <node-id></code>\n                     </p>\n                  </li>\n               </ol>\n               <p>For more information see:</p>\n               <ul>\n                  <li>\n                     <p>\n                        <a href=\"https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/ECEvents.Viewing.html\">Viewing\n                                ElastiCache Events</a> in the <i>ElastiCache User\n                                Guide</i>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <a href=\"https://docs.aws.amazon.com/AmazonElastiCache/latest/APIReference/API_DescribeEvents.html\">DescribeEvents</a> in the ElastiCache API Reference</p>\n                  </li>\n               </ul>\n            </li>\n         </ul>\n         <p>Also see, <a href=\"https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/AutoFailover.html#auto-failover-test\">Testing\n                Multi-AZ </a> in the <i>ElastiCache User Guide</i>.</p>"
             }
         },
         "com.amazonaws.elasticache#TestFailoverMessage": {
@@ -15359,7 +15757,7 @@
                     "target": "com.amazonaws.elasticache#AllowedNodeGroupId",
                     "traits": {
                         "smithy.api#clientOptional": {},
-                        "smithy.api#documentation": "<p>The name of the node group (called shard in the console) in this replication group on\n            which automatic failover is to be tested. You may test automatic failover on up to 5\n            node groups in any rolling 24-hour period.</p>",
+                        "smithy.api#documentation": "<p>The name of the node group (called shard in the console) in this replication group on\n            which automatic failover is to be tested. You may test automatic failover on up to 15\n            node groups in any rolling 24-hour period.</p>",
                         "smithy.api#required": {}
                     }
                 }

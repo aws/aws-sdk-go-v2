@@ -6,14 +6,14 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes a virtual MFA device. You must deactivate a user's virtual MFA device
-// before you can delete it. For information about deactivating MFA devices, see
-// DeactivateMFADevice .
+// Deletes a virtual MFA device.
+//
+// You must deactivate a user's virtual MFA device before you can delete it. For
+// information about deactivating MFA devices, see DeactivateMFADevice.
 func (c *Client) DeleteVirtualMFADevice(ctx context.Context, params *DeleteVirtualMFADeviceInput, optFns ...func(*Options)) (*DeleteVirtualMFADeviceOutput, error) {
 	if params == nil {
 		params = &DeleteVirtualMFADeviceInput{}
@@ -32,10 +32,13 @@ func (c *Client) DeleteVirtualMFADevice(ctx context.Context, params *DeleteVirtu
 type DeleteVirtualMFADeviceInput struct {
 
 	// The serial number that uniquely identifies the MFA device. For virtual MFA
-	// devices, the serial number is the same as the ARN. This parameter allows
-	// (through its regex pattern (http://wikipedia.org/wiki/regex) ) a string of
-	// characters consisting of upper and lowercase alphanumeric characters with no
-	// spaces. You can also include any of the following characters: =,.@:/-
+	// devices, the serial number is the same as the ARN.
+	//
+	// This parameter allows (through its [regex pattern]) a string of characters consisting of upper
+	// and lowercase alphanumeric characters with no spaces. You can also include any
+	// of the following characters: =,.@:/-
+	//
+	// [regex pattern]: http://wikipedia.org/wiki/regex
 	//
 	// This member is required.
 	SerialNumber *string
@@ -72,25 +75,25 @@ func (c *Client) addOperationDeleteVirtualMFADeviceMiddlewares(stack *middleware
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -105,13 +108,16 @@ func (c *Client) addOperationDeleteVirtualMFADeviceMiddlewares(stack *middleware
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDeleteVirtualMFADeviceValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteVirtualMFADevice(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

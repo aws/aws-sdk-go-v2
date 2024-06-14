@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/finspace/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -14,9 +13,10 @@ import (
 
 // Updates the databases mounted on a kdb cluster, which includes the changesetId
 // and all the dbPaths to be cached. This API does not allow you to change a
-// database name or add a database if you created a cluster without one. Using this
-// API you can point a cluster to a different changeset and modify a list of
-// partitions being cached.
+// database name or add a database if you created a cluster without one.
+//
+// Using this API you can point a cluster to a different changeset and modify a
+// list of partitions being cached.
 func (c *Client) UpdateKxClusterDatabases(ctx context.Context, params *UpdateKxClusterDatabasesInput, optFns ...func(*Options)) (*UpdateKxClusterDatabasesOutput, error) {
 	if params == nil {
 		params = &UpdateKxClusterDatabasesInput{}
@@ -39,7 +39,7 @@ type UpdateKxClusterDatabasesInput struct {
 	// This member is required.
 	ClusterName *string
 
-	// The structure of databases mounted on the cluster.
+	//  The structure of databases mounted on the cluster.
 	//
 	// This member is required.
 	Databases []types.KxDatabaseConfiguration
@@ -52,7 +52,7 @@ type UpdateKxClusterDatabasesInput struct {
 	// A token that ensures idempotency. This token expires in 10 minutes.
 	ClientToken *string
 
-	// The configuration that allows you to choose how you want to update the
+	//  The configuration that allows you to choose how you want to update the
 	// databases on a cluster.
 	DeploymentConfiguration *types.KxDeploymentConfiguration
 
@@ -88,25 +88,25 @@ func (c *Client) addOperationUpdateKxClusterDatabasesMiddlewares(stack *middlewa
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -124,6 +124,9 @@ func (c *Client) addOperationUpdateKxClusterDatabasesMiddlewares(stack *middlewa
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opUpdateKxClusterDatabasesMiddleware(stack, options); err != nil {
 		return err
 	}
@@ -133,7 +136,7 @@ func (c *Client) addOperationUpdateKxClusterDatabasesMiddlewares(stack *middlewa
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateKxClusterDatabases(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

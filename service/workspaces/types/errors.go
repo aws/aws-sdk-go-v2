@@ -85,6 +85,32 @@ func (e *ComputeNotCompatibleException) ErrorCode() string {
 }
 func (e *ComputeNotCompatibleException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// The TargetAccountId is already linked or invited.
+type ConflictException struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *ConflictException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *ConflictException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *ConflictException) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "ConflictException"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *ConflictException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
 // The specified application is not compatible with the resource.
 type IncompatibleApplicationsException struct {
 	Message *string
@@ -110,6 +136,32 @@ func (e *IncompatibleApplicationsException) ErrorCode() string {
 	return *e.ErrorCodeOverride
 }
 func (e *IncompatibleApplicationsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// Unexpected server error occured.
+type InternalServerException struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *InternalServerException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *InternalServerException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *InternalServerException) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "InternalServerException"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *InternalServerException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // One or more parameter values are not valid.
 type InvalidParameterValuesException struct {
@@ -436,8 +488,9 @@ func (e *ResourceUnavailableException) ErrorFault() smithy.ErrorFault { return s
 
 // The configuration of this network is not supported for this operation, or your
 // network configuration conflicts with the Amazon WorkSpaces management network IP
-// range. For more information, see Configure a VPC for Amazon WorkSpaces (https://docs.aws.amazon.com/workspaces/latest/adminguide/amazon-workspaces-vpc.html)
-// .
+// range. For more information, see [Configure a VPC for Amazon WorkSpaces].
+//
+// [Configure a VPC for Amazon WorkSpaces]: https://docs.aws.amazon.com/workspaces/latest/adminguide/amazon-workspaces-vpc.html
 type UnsupportedNetworkConfigurationException struct {
 	Message *string
 
@@ -466,9 +519,9 @@ func (e *UnsupportedNetworkConfigurationException) ErrorFault() smithy.ErrorFaul
 }
 
 // The configuration of this WorkSpace is not supported for this operation. For
-// more information, see Required Configuration and Service Components for
-// WorkSpaces  (https://docs.aws.amazon.com/workspaces/latest/adminguide/required-service-components.html)
-// .
+// more information, see [Required Configuration and Service Components for WorkSpaces].
+//
+// [Required Configuration and Service Components for WorkSpaces]: https://docs.aws.amazon.com/workspaces/latest/adminguide/required-service-components.html
 type UnsupportedWorkspaceConfigurationException struct {
 	Message *string
 
@@ -496,11 +549,39 @@ func (e *UnsupportedWorkspaceConfigurationException) ErrorFault() smithy.ErrorFa
 	return smithy.FaultClient
 }
 
+// You either haven't provided a TargetAccountId or are using the same value for
+// TargetAccountId and SourceAccountId .
+type ValidationException struct {
+	Message *string
+
+	ErrorCodeOverride *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *ValidationException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *ValidationException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *ValidationException) ErrorCode() string {
+	if e == nil || e.ErrorCodeOverride == nil {
+		return "ValidationException"
+	}
+	return *e.ErrorCodeOverride
+}
+func (e *ValidationException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
 // The workspaces_DefaultRole role could not be found. If this is the first time
 // you are registering a directory, you will need to create the
 // workspaces_DefaultRole role before you can register a directory. For more
-// information, see Creating the workspaces_DefaultRole Role (https://docs.aws.amazon.com/workspaces/latest/adminguide/workspaces-access-control.html#create-default-role)
-// .
+// information, see [Creating the workspaces_DefaultRole Role].
+//
+// [Creating the workspaces_DefaultRole Role]: https://docs.aws.amazon.com/workspaces/latest/adminguide/workspaces-access-control.html#create-default-role
 type WorkspacesDefaultRoleNotFoundException struct {
 	Message *string
 

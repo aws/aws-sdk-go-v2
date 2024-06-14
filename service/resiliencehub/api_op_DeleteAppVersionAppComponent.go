@@ -6,16 +6,17 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/resiliencehub/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Deletes an Application Component from the Resilience Hub application.
+//
 //   - This API updates the Resilience Hub application draft version. To use this
 //     Application Component for running assessments, you must publish the Resilience
 //     Hub application using the PublishAppVersion API.
+//
 //   - You will not be able to delete an Application Component if it has resources
 //     associated with it.
 func (c *Client) DeleteAppVersionAppComponent(ctx context.Context, params *DeleteAppVersionAppComponentInput, optFns ...func(*Options)) (*DeleteAppVersionAppComponentOutput, error) {
@@ -37,8 +38,10 @@ type DeleteAppVersionAppComponentInput struct {
 
 	// Amazon Resource Name (ARN) of the Resilience Hub application. The format for
 	// this ARN is: arn: partition :resiliencehub: region : account :app/ app-id . For
-	// more information about ARNs, see Amazon Resource Names (ARNs) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
-	// in the Amazon Web Services General Reference guide.
+	// more information about ARNs, see [Amazon Resource Names (ARNs)]in the Amazon Web Services General Reference
+	// guide.
+	//
+	// [Amazon Resource Names (ARNs)]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
 	//
 	// This member is required.
 	AppArn *string
@@ -60,8 +63,10 @@ type DeleteAppVersionAppComponentOutput struct {
 
 	// Amazon Resource Name (ARN) of the Resilience Hub application. The format for
 	// this ARN is: arn: partition :resiliencehub: region : account :app/ app-id . For
-	// more information about ARNs, see Amazon Resource Names (ARNs) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
-	// in the Amazon Web Services General Reference guide.
+	// more information about ARNs, see [Amazon Resource Names (ARNs)]in the Amazon Web Services General Reference
+	// guide.
+	//
+	// [Amazon Resource Names (ARNs)]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
 	//
 	// This member is required.
 	AppArn *string
@@ -102,25 +107,25 @@ func (c *Client) addOperationDeleteAppVersionAppComponentMiddlewares(stack *midd
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -135,6 +140,9 @@ func (c *Client) addOperationDeleteAppVersionAppComponentMiddlewares(stack *midd
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opDeleteAppVersionAppComponentMiddleware(stack, options); err != nil {
 		return err
 	}
@@ -144,7 +152,7 @@ func (c *Client) addOperationDeleteAppVersionAppComponentMiddlewares(stack *midd
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteAppVersionAppComponent(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

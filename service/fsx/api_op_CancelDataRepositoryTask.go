@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/fsx/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -15,9 +14,12 @@ import (
 // Cancels an existing Amazon FSx for Lustre data repository task if that task is
 // in either the PENDING or EXECUTING state. When you cancel am export task,
 // Amazon FSx does the following.
+//
 //   - Any files that FSx has already exported are not reverted.
+//
 //   - FSx continues to export any files that are in-flight when the cancel
 //     operation is received.
+//
 //   - FSx does not export any files that have not yet been exported.
 //
 // For a release task, Amazon FSx will stop releasing files upon cancellation. Any
@@ -51,13 +53,19 @@ type CancelDataRepositoryTaskInput struct {
 type CancelDataRepositoryTaskOutput struct {
 
 	// The lifecycle status of the data repository task, as follows:
+	//
 	//   - PENDING - Amazon FSx has not started the task.
+	//
 	//   - EXECUTING - Amazon FSx is processing the task.
+	//
 	//   - FAILED - Amazon FSx was not able to complete the task. For example, there
-	//   may be files the task failed to process. The DataRepositoryTaskFailureDetails
-	//   property provides more information about task failures.
+	//   may be files the task failed to process. The DataRepositoryTaskFailureDetailsproperty provides more
+	//   information about task failures.
+	//
 	//   - SUCCEEDED - FSx completed the task successfully.
+	//
 	//   - CANCELED - Amazon FSx canceled the task and it did not complete.
+	//
 	//   - CANCELING - FSx is in process of canceling the task.
 	Lifecycle types.DataRepositoryTaskLifecycle
 
@@ -92,25 +100,25 @@ func (c *Client) addOperationCancelDataRepositoryTaskMiddlewares(stack *middlewa
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -125,13 +133,16 @@ func (c *Client) addOperationCancelDataRepositoryTaskMiddlewares(stack *middlewa
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpCancelDataRepositoryTaskValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCancelDataRepositoryTask(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

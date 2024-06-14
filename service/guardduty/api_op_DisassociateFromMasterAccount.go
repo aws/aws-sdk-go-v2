@@ -6,23 +6,26 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Disassociates the current GuardDuty member account from its administrator
-// account. When you disassociate an invited member from a GuardDuty delegated
-// administrator, the member account details obtained from the CreateMembers (https://docs.aws.amazon.com/guardduty/latest/APIReference/API_CreateMembers.html)
-// API, including the associated email addresses, are retained. This is done so
-// that the delegated administrator can invoke the InviteMembers (https://docs.aws.amazon.com/guardduty/latest/APIReference/API_InviteMembers.html)
-// API without the need to invoke the CreateMembers API again. To remove the
-// details associated with a member account, the delegated administrator must
-// invoke the DeleteMembers (https://docs.aws.amazon.com/guardduty/latest/APIReference/API_DeleteMembers.html)
-// API.
+// account.
+//
+// When you disassociate an invited member from a GuardDuty delegated
+// administrator, the member account details obtained from the [CreateMembers]API, including the
+// associated email addresses, are retained. This is done so that the delegated
+// administrator can invoke the [InviteMembers]API without the need to invoke the CreateMembers
+// API again. To remove the details associated with a member account, the delegated
+// administrator must invoke the [DeleteMembers]API.
 //
 // Deprecated: This operation is deprecated, use
 // DisassociateFromAdministratorAccount instead
+//
+// [DeleteMembers]: https://docs.aws.amazon.com/guardduty/latest/APIReference/API_DeleteMembers.html
+// [CreateMembers]: https://docs.aws.amazon.com/guardduty/latest/APIReference/API_CreateMembers.html
+// [InviteMembers]: https://docs.aws.amazon.com/guardduty/latest/APIReference/API_InviteMembers.html
 func (c *Client) DisassociateFromMasterAccount(ctx context.Context, params *DisassociateFromMasterAccountInput, optFns ...func(*Options)) (*DisassociateFromMasterAccountOutput, error) {
 	if params == nil {
 		params = &DisassociateFromMasterAccountInput{}
@@ -77,25 +80,25 @@ func (c *Client) addOperationDisassociateFromMasterAccountMiddlewares(stack *mid
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -110,13 +113,16 @@ func (c *Client) addOperationDisassociateFromMasterAccountMiddlewares(stack *mid
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDisassociateFromMasterAccountValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDisassociateFromMasterAccount(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

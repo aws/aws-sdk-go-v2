@@ -6,15 +6,16 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/codeartifact/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Adds an existing external connection to a repository. One external connection
-// is allowed per repository. A repository can have one or more upstream
-// repositories, or an external connection.
+// is allowed per repository.
+//
+// A repository can have one or more upstream repositories, or an external
+// connection.
 func (c *Client) AssociateExternalConnection(ctx context.Context, params *AssociateExternalConnectionInput, optFns ...func(*Options)) (*AssociateExternalConnectionOutput, error) {
 	if params == nil {
 		params = &AssociateExternalConnectionInput{}
@@ -37,26 +38,34 @@ type AssociateExternalConnectionInput struct {
 	// This member is required.
 	Domain *string
 
-	// The name of the external connection to add to the repository. The following
+	//  The name of the external connection to add to the repository. The following
 	// values are supported:
+	//
 	//   - public:npmjs - for the npm public repository.
+	//
 	//   - public:nuget-org - for the NuGet Gallery.
+	//
 	//   - public:pypi - for the Python Package Index.
+	//
 	//   - public:maven-central - for Maven Central.
+	//
 	//   - public:maven-googleandroid - for the Google Android repository.
+	//
 	//   - public:maven-gradleplugins - for the Gradle plugins repository.
+	//
 	//   - public:maven-commonsware - for the CommonsWare Android repository.
+	//
 	//   - public:maven-clojars - for the Clojars repository.
 	//
 	// This member is required.
 	ExternalConnection *string
 
-	// The name of the repository to which the external connection is added.
+	//  The name of the repository to which the external connection is added.
 	//
 	// This member is required.
 	Repository *string
 
-	// The 12-digit account number of the Amazon Web Services account that owns the
+	//  The 12-digit account number of the Amazon Web Services account that owns the
 	// domain. It does not include dashes or spaces.
 	DomainOwner *string
 
@@ -65,7 +74,7 @@ type AssociateExternalConnectionInput struct {
 
 type AssociateExternalConnectionOutput struct {
 
-	// Information about the connected repository after processing the request.
+	//  Information about the connected repository after processing the request.
 	Repository *types.RepositoryDescription
 
 	// Metadata pertaining to the operation's result.
@@ -96,25 +105,25 @@ func (c *Client) addOperationAssociateExternalConnectionMiddlewares(stack *middl
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -129,13 +138,16 @@ func (c *Client) addOperationAssociateExternalConnectionMiddlewares(stack *middl
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpAssociateExternalConnectionValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opAssociateExternalConnection(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

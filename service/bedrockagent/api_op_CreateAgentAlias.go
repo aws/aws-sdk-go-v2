@@ -6,13 +6,12 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockagent/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates an Alias for an existing Amazon Bedrock Agent
+// Creates an alias of an agent that can be used to deploy the agent.
 func (c *Client) CreateAgentAlias(ctx context.Context, params *CreateAgentAliasInput, optFns ...func(*Options)) (*CreateAgentAliasOutput, error) {
 	if params == nil {
 		params = &CreateAgentAliasInput{}
@@ -28,38 +27,40 @@ func (c *Client) CreateAgentAlias(ctx context.Context, params *CreateAgentAliasI
 	return out, nil
 }
 
-// Create Agent Alias Request
 type CreateAgentAliasInput struct {
 
-	// Name for a resource.
+	// The name of the alias.
 	//
 	// This member is required.
 	AgentAliasName *string
 
-	// Id generated at the server side when an Agent is created
+	// The unique identifier of the agent.
 	//
 	// This member is required.
 	AgentId *string
 
-	// Client specified token used for idempotency checks
+	// A unique, case-sensitive identifier to ensure that the API request completes no
+	// more than one time. If this token matches a previous request, Amazon Bedrock
+	// ignores the request, but does not return an error. For more information, see [Ensuring idempotency].
+	//
+	// [Ensuring idempotency]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
 	ClientToken *string
 
-	// Description of the Resource.
+	// A description of the alias of the agent.
 	Description *string
 
-	// Routing configuration for an Agent alias.
+	// Contains details about the routing configuration of the alias.
 	RoutingConfiguration []types.AgentAliasRoutingConfigurationListItem
 
-	// A map of tag keys and values
+	// Any tags that you want to attach to the alias of the agent.
 	Tags map[string]string
 
 	noSmithyDocumentSerde
 }
 
-// Create Agent Alias Response
 type CreateAgentAliasOutput struct {
 
-	// Contains the information of an agent alias
+	// Contains details about the alias that was created.
 	//
 	// This member is required.
 	AgentAlias *types.AgentAlias
@@ -92,25 +93,25 @@ func (c *Client) addOperationCreateAgentAliasMiddlewares(stack *middleware.Stack
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -125,6 +126,9 @@ func (c *Client) addOperationCreateAgentAliasMiddlewares(stack *middleware.Stack
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opCreateAgentAliasMiddleware(stack, options); err != nil {
 		return err
 	}
@@ -134,7 +138,7 @@ func (c *Client) addOperationCreateAgentAliasMiddlewares(stack *middleware.Stack
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateAgentAlias(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

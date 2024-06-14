@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/resiliencehub/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -14,9 +13,9 @@ import (
 
 // Imports resources to Resilience Hub application draft version from different
 // input sources. For more information about the input sources supported by
-// Resilience Hub, see Discover the structure and describe your Resilience Hub
-// application (https://docs.aws.amazon.com/resilience-hub/latest/userguide/discover-structure.html)
-// .
+// Resilience Hub, see [Discover the structure and describe your Resilience Hub application].
+//
+// [Discover the structure and describe your Resilience Hub application]: https://docs.aws.amazon.com/resilience-hub/latest/userguide/discover-structure.html
 func (c *Client) ImportResourcesToDraftAppVersion(ctx context.Context, params *ImportResourcesToDraftAppVersionInput, optFns ...func(*Options)) (*ImportResourcesToDraftAppVersionOutput, error) {
 	if params == nil {
 		params = &ImportResourcesToDraftAppVersionInput{}
@@ -36,8 +35,10 @@ type ImportResourcesToDraftAppVersionInput struct {
 
 	// Amazon Resource Name (ARN) of the Resilience Hub application. The format for
 	// this ARN is: arn: partition :resiliencehub: region : account :app/ app-id . For
-	// more information about ARNs, see Amazon Resource Names (ARNs) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
-	// in the Amazon Web Services General Reference guide.
+	// more information about ARNs, see [Amazon Resource Names (ARNs)]in the Amazon Web Services General Reference
+	// guide.
+	//
+	// [Amazon Resource Names (ARNs)]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
 	//
 	// This member is required.
 	AppArn *string
@@ -53,7 +54,7 @@ type ImportResourcesToDraftAppVersionInput struct {
 	// The Amazon Resource Names (ARNs) for the resources.
 	SourceArns []string
 
-	// A list of terraform file s3 URLs you need to import.
+	//  A list of terraform file s3 URLs you need to import.
 	TerraformSources []types.TerraformSource
 
 	noSmithyDocumentSerde
@@ -63,8 +64,10 @@ type ImportResourcesToDraftAppVersionOutput struct {
 
 	// Amazon Resource Name (ARN) of the Resilience Hub application. The format for
 	// this ARN is: arn: partition :resiliencehub: region : account :app/ app-id . For
-	// more information about ARNs, see Amazon Resource Names (ARNs) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
-	// in the Amazon Web Services General Reference guide.
+	// more information about ARNs, see [Amazon Resource Names (ARNs)]in the Amazon Web Services General Reference
+	// guide.
+	//
+	// [Amazon Resource Names (ARNs)]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
 	//
 	// This member is required.
 	AppArn *string
@@ -86,7 +89,7 @@ type ImportResourcesToDraftAppVersionOutput struct {
 	// The Amazon Resource Names (ARNs) for the resources you have imported.
 	SourceArns []string
 
-	// A list of terraform file s3 URLs you have imported.
+	//  A list of terraform file s3 URLs you have imported.
 	TerraformSources []types.TerraformSource
 
 	// Metadata pertaining to the operation's result.
@@ -117,25 +120,25 @@ func (c *Client) addOperationImportResourcesToDraftAppVersionMiddlewares(stack *
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -150,13 +153,16 @@ func (c *Client) addOperationImportResourcesToDraftAppVersionMiddlewares(stack *
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpImportResourcesToDraftAppVersionValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opImportResourcesToDraftAppVersion(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

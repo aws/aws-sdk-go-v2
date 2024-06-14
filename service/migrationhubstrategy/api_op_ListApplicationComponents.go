@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/migrationhubstrategy/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -30,29 +29,29 @@ func (c *Client) ListApplicationComponents(ctx context.Context, params *ListAppl
 
 type ListApplicationComponentsInput struct {
 
-	// Criteria for filtering the list of application components.
+	//  Criteria for filtering the list of application components.
 	ApplicationComponentCriteria types.ApplicationComponentCriteria
 
-	// Specify the value based on the application component criteria type. For
+	//  Specify the value based on the application component criteria type. For
 	// example, if applicationComponentCriteria is set to SERVER_ID and filterValue is
-	// set to server1 , then ListApplicationComponents returns all the application
-	// components running on server1.
+	// set to server1 , then ListApplicationComponents returns all the application components running on
+	// server1.
 	FilterValue *string
 
-	// The group ID specified in to filter on.
+	//  The group ID specified in to filter on.
 	GroupIdFilter []types.Group
 
-	// The maximum number of items to include in the response. The maximum value is
+	//  The maximum number of items to include in the response. The maximum value is
 	// 100.
 	MaxResults *int32
 
-	// The token from a previous call that you use to retrieve the next set of
+	//  The token from a previous call that you use to retrieve the next set of
 	// results. For example, if a previous call to this action returned 100 items, but
 	// you set maxResults to 10. You'll receive a set of 10 results along with a
 	// token. You then use the returned token to retrieve the next set of 10.
 	NextToken *string
 
-	// Specifies whether to sort by ascending ( ASC ) or descending ( DESC ) order.
+	//  Specifies whether to sort by ascending ( ASC ) or descending ( DESC ) order.
 	Sort types.SortOrder
 
 	noSmithyDocumentSerde
@@ -60,11 +59,11 @@ type ListApplicationComponentsInput struct {
 
 type ListApplicationComponentsOutput struct {
 
-	// The list of application components with detailed information about each
+	//  The list of application components with detailed information about each
 	// component.
 	ApplicationComponentInfos []types.ApplicationComponentDetail
 
-	// The token you use to retrieve the next set of results, or null if there are no
+	//  The token you use to retrieve the next set of results, or null if there are no
 	// more results.
 	NextToken *string
 
@@ -96,25 +95,25 @@ func (c *Client) addOperationListApplicationComponentsMiddlewares(stack *middlew
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -129,10 +128,13 @@ func (c *Client) addOperationListApplicationComponentsMiddlewares(stack *middlew
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListApplicationComponents(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -161,7 +163,7 @@ var _ ListApplicationComponentsAPIClient = (*Client)(nil)
 // ListApplicationComponentsPaginatorOptions is the paginator options for
 // ListApplicationComponents
 type ListApplicationComponentsPaginatorOptions struct {
-	// The maximum number of items to include in the response. The maximum value is
+	//  The maximum number of items to include in the response. The maximum value is
 	// 100.
 	Limit int32
 

@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	glaciercust "github.com/aws/aws-sdk-go-v2/service/glacier/internal/customizations"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -14,20 +13,25 @@ import (
 
 // This operation retrieves the following attributes from the lock-policy
 // subresource set on the specified vault:
+//
 //   - The vault lock policy set on the vault.
+//
 //   - The state of the vault lock, which is either InProgess or Locked .
+//
 //   - When the lock ID expires. The lock ID is used to complete the vault locking
 //     process.
+//
 //   - When the vault lock was initiated and put into the InProgress state.
 //
-// A vault lock is put into the InProgress state by calling InitiateVaultLock . A
-// vault lock is put into the Locked state by calling CompleteVaultLock . You can
-// abort the vault locking process by calling AbortVaultLock . For more information
-// about the vault locking process, Amazon Glacier Vault Lock (https://docs.aws.amazon.com/amazonglacier/latest/dev/vault-lock.html)
-// . If there is no vault lock policy set on the vault, the operation returns a
-// 404 Not found error. For more information about vault lock policies, Amazon
-// Glacier Access Control with Vault Lock Policies (https://docs.aws.amazon.com/amazonglacier/latest/dev/vault-lock-policy.html)
-// .
+// A vault lock is put into the InProgress state by calling InitiateVaultLock. A vault lock is put
+// into the Locked state by calling CompleteVaultLock. You can abort the vault locking process by
+// calling AbortVaultLock. For more information about the vault locking process, [Amazon Glacier Vault Lock].
+//
+// If there is no vault lock policy set on the vault, the operation returns a 404
+// Not found error. For more information about vault lock policies, [Amazon Glacier Access Control with Vault Lock Policies].
+//
+// [Amazon Glacier Vault Lock]: https://docs.aws.amazon.com/amazonglacier/latest/dev/vault-lock.html
+// [Amazon Glacier Access Control with Vault Lock Policies]: https://docs.aws.amazon.com/amazonglacier/latest/dev/vault-lock-policy.html
 func (c *Client) GetVaultLock(ctx context.Context, params *GetVaultLockInput, optFns ...func(*Options)) (*GetVaultLockOutput, error) {
 	if params == nil {
 		params = &GetVaultLockInput{}
@@ -107,25 +111,25 @@ func (c *Client) addOperationGetVaultLockMiddlewares(stack *middleware.Stack, op
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -140,13 +144,16 @@ func (c *Client) addOperationGetVaultLockMiddlewares(stack *middleware.Stack, op
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpGetVaultLockValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetVaultLock(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

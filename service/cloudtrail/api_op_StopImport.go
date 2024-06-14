@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/cloudtrail/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -31,7 +30,7 @@ func (c *Client) StopImport(ctx context.Context, params *StopImportInput, optFns
 
 type StopImportInput struct {
 
-	// The ID of the import.
+	//  The ID of the import.
 	//
 	// This member is required.
 	ImportId *string
@@ -41,33 +40,33 @@ type StopImportInput struct {
 
 type StopImportOutput struct {
 
-	// The timestamp of the import's creation.
+	//  The timestamp of the import's creation.
 	CreatedTimestamp *time.Time
 
-	// The ARN of the destination event data store.
+	//  The ARN of the destination event data store.
 	Destinations []string
 
-	// Used with StartEventTime to bound a StartImport request, and limit imported
+	//  Used with StartEventTime to bound a StartImport request, and limit imported
 	// trail events to only those events logged within a specified time period.
 	EndEventTime *time.Time
 
-	// The ID for the import.
+	//  The ID for the import.
 	ImportId *string
 
-	// The source S3 bucket for the import.
+	//  The source S3 bucket for the import.
 	ImportSource *types.ImportSource
 
-	// Returns information on the stopped import.
+	//  Returns information on the stopped import.
 	ImportStatistics *types.ImportStatistics
 
-	// The status of the import.
+	//  The status of the import.
 	ImportStatus types.ImportStatus
 
-	// Used with EndEventTime to bound a StartImport request, and limit imported trail
-	// events to only those events logged within a specified time period.
+	//  Used with EndEventTime to bound a StartImport request, and limit imported
+	// trail events to only those events logged within a specified time period.
 	StartEventTime *time.Time
 
-	// The timestamp of the import's last update.
+	//  The timestamp of the import's last update.
 	UpdatedTimestamp *time.Time
 
 	// Metadata pertaining to the operation's result.
@@ -98,25 +97,25 @@ func (c *Client) addOperationStopImportMiddlewares(stack *middleware.Stack, opti
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -131,13 +130,16 @@ func (c *Client) addOperationStopImportMiddlewares(stack *middleware.Stack, opti
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpStopImportValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opStopImport(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

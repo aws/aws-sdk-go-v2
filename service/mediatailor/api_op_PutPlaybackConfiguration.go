@@ -6,15 +6,15 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/mediatailor/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates a playback configuration. For information about MediaTailor
-// configurations, see Working with configurations in AWS Elemental MediaTailor (https://docs.aws.amazon.com/mediatailor/latest/ug/configurations.html)
-// .
+// configurations, see [Working with configurations in AWS Elemental MediaTailor].
+//
+// [Working with configurations in AWS Elemental MediaTailor]: https://docs.aws.amazon.com/mediatailor/latest/ug/configurations.html
 func (c *Client) PutPlaybackConfiguration(ctx context.Context, params *PutPlaybackConfigurationInput, optFns ...func(*Options)) (*PutPlaybackConfigurationOutput, error) {
 	if params == nil {
 		params = &PutPlaybackConfigurationInput{}
@@ -45,13 +45,16 @@ type PutPlaybackConfigurationInput struct {
 	AdDecisionServerUrl *string
 
 	// The configuration for avail suppression, also known as ad suppression. For more
-	// information about ad suppression, see Ad Suppression (https://docs.aws.amazon.com/mediatailor/latest/ug/ad-behavior.html)
-	// .
+	// information about ad suppression, see [Ad Suppression].
+	//
+	// [Ad Suppression]: https://docs.aws.amazon.com/mediatailor/latest/ug/ad-behavior.html
 	AvailSuppression *types.AvailSuppression
 
 	// The configuration for bumpers. Bumpers are short audio or video clips that play
-	// at the start or before the end of an ad break. To learn more about bumpers, see
-	// Bumpers (https://docs.aws.amazon.com/mediatailor/latest/ug/bumpers.html) .
+	// at the start or before the end of an ad break. To learn more about bumpers, see [Bumpers]
+	// .
+	//
+	// [Bumpers]: https://docs.aws.amazon.com/mediatailor/latest/ug/bumpers.html
 	Bumper *types.Bumper
 
 	// The configuration for using a content delivery network (CDN), like Amazon
@@ -59,12 +62,20 @@ type PutPlaybackConfigurationInput struct {
 	CdnConfiguration *types.CdnConfiguration
 
 	// The player parameters and aliases used as dynamic variables during session
-	// initialization. For more information, see Domain Variables (https://docs.aws.amazon.com/mediatailor/latest/ug/variables-domain.html)
-	// .
+	// initialization. For more information, see [Domain Variables].
+	//
+	// [Domain Variables]: https://docs.aws.amazon.com/mediatailor/latest/ug/variables-domain.html
 	ConfigurationAliases map[string]map[string]string
 
 	// The configuration for DASH content.
 	DashConfiguration *types.DashConfigurationForPut
+
+	// The setting that controls whether players can use stitched or guided ad
+	// insertion. The default, STITCHED_ONLY , forces all player sessions to use
+	// stitched (server-side) ad insertion. Choosing PLAYER_SELECT allows players to
+	// select either stitched or guided ad insertion at session-initialization time.
+	// The default for players that do not specify an insertion mode is stitched.
+	InsertionMode types.InsertionMode
 
 	// The configuration for pre-roll ad insertion.
 	LivePreRollConfiguration *types.LivePreRollConfiguration
@@ -79,8 +90,9 @@ type PutPlaybackConfigurationInput struct {
 	// underlying content is shown. This feature applies to ad replacement in live and
 	// VOD streams, rather than ad insertion, because it relies on an underlying
 	// content stream. For more information about ad break behavior, including ad
-	// replacement and insertion, see Ad Behavior in AWS Elemental MediaTailor (https://docs.aws.amazon.com/mediatailor/latest/ug/ad-behavior.html)
-	// .
+	// replacement and insertion, see [Ad Behavior in AWS Elemental MediaTailor].
+	//
+	// [Ad Behavior in AWS Elemental MediaTailor]: https://docs.aws.amazon.com/mediatailor/latest/ug/ad-behavior.html
 	PersonalizationThresholdSeconds *int32
 
 	// The URL for a high-quality video asset to transcode and use to fill in time
@@ -93,9 +105,9 @@ type PutPlaybackConfigurationInput struct {
 
 	// The tags to assign to the playback configuration. Tags are key-value pairs that
 	// you can associate with Amazon resources to help with organization, access
-	// control, and cost tracking. For more information, see Tagging AWS Elemental
-	// MediaTailor Resources (https://docs.aws.amazon.com/mediatailor/latest/ug/tagging.html)
-	// .
+	// control, and cost tracking. For more information, see [Tagging AWS Elemental MediaTailor Resources].
+	//
+	// [Tagging AWS Elemental MediaTailor Resources]: https://docs.aws.amazon.com/mediatailor/latest/ug/tagging.html
 	Tags map[string]string
 
 	// The name that is used to associate this playback configuration with a custom
@@ -121,13 +133,16 @@ type PutPlaybackConfigurationOutput struct {
 	AdDecisionServerUrl *string
 
 	// The configuration for avail suppression, also known as ad suppression. For more
-	// information about ad suppression, see Ad Suppression (https://docs.aws.amazon.com/mediatailor/latest/ug/ad-behavior.html)
-	// .
+	// information about ad suppression, see [Ad Suppression].
+	//
+	// [Ad Suppression]: https://docs.aws.amazon.com/mediatailor/latest/ug/ad-behavior.html
 	AvailSuppression *types.AvailSuppression
 
 	// The configuration for bumpers. Bumpers are short audio or video clips that play
-	// at the start or before the end of an ad break. To learn more about bumpers, see
-	// Bumpers (https://docs.aws.amazon.com/mediatailor/latest/ug/bumpers.html) .
+	// at the start or before the end of an ad break. To learn more about bumpers, see [Bumpers]
+	// .
+	//
+	// [Bumpers]: https://docs.aws.amazon.com/mediatailor/latest/ug/bumpers.html
 	Bumper *types.Bumper
 
 	// The configuration for using a content delivery network (CDN), like Amazon
@@ -135,8 +150,9 @@ type PutPlaybackConfigurationOutput struct {
 	CdnConfiguration *types.CdnConfiguration
 
 	// The player parameters and aliases used as dynamic variables during session
-	// initialization. For more information, see Domain Variables (https://docs.aws.amazon.com/mediatailor/latest/ug/variables-domain.html)
-	// .
+	// initialization. For more information, see [Domain Variables].
+	//
+	// [Domain Variables]: https://docs.aws.amazon.com/mediatailor/latest/ug/variables-domain.html
 	ConfigurationAliases map[string]map[string]string
 
 	// The configuration for DASH content.
@@ -144,6 +160,13 @@ type PutPlaybackConfigurationOutput struct {
 
 	// The configuration for HLS content.
 	HlsConfiguration *types.HlsConfiguration
+
+	// The setting that controls whether players can use stitched or guided ad
+	// insertion. The default, STITCHED_ONLY , forces all player sessions to use
+	// stitched (server-side) ad insertion. Choosing PLAYER_SELECT allows players to
+	// select either stitched or guided ad insertion at session-initialization time.
+	// The default for players that do not specify an insertion mode is stitched.
+	InsertionMode types.InsertionMode
 
 	// The configuration for pre-roll ad insertion.
 	LivePreRollConfiguration *types.LivePreRollConfiguration
@@ -164,8 +187,9 @@ type PutPlaybackConfigurationOutput struct {
 	// underlying content is shown. This feature applies to ad replacement in live and
 	// VOD streams, rather than ad insertion, because it relies on an underlying
 	// content stream. For more information about ad break behavior, including ad
-	// replacement and insertion, see Ad Behavior in AWS Elemental MediaTailor (https://docs.aws.amazon.com/mediatailor/latest/ug/ad-behavior.html)
-	// .
+	// replacement and insertion, see [Ad Behavior in AWS Elemental MediaTailor].
+	//
+	// [Ad Behavior in AWS Elemental MediaTailor]: https://docs.aws.amazon.com/mediatailor/latest/ug/ad-behavior.html
 	PersonalizationThresholdSeconds *int32
 
 	// The Amazon Resource Name (ARN) associated with the playback configuration.
@@ -188,9 +212,9 @@ type PutPlaybackConfigurationOutput struct {
 
 	// The tags to assign to the playback configuration. Tags are key-value pairs that
 	// you can associate with Amazon resources to help with organization, access
-	// control, and cost tracking. For more information, see Tagging AWS Elemental
-	// MediaTailor Resources (https://docs.aws.amazon.com/mediatailor/latest/ug/tagging.html)
-	// .
+	// control, and cost tracking. For more information, see [Tagging AWS Elemental MediaTailor Resources].
+	//
+	// [Tagging AWS Elemental MediaTailor Resources]: https://docs.aws.amazon.com/mediatailor/latest/ug/tagging.html
 	Tags map[string]string
 
 	// The name that is used to associate this playback configuration with a custom
@@ -231,25 +255,25 @@ func (c *Client) addOperationPutPlaybackConfigurationMiddlewares(stack *middlewa
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -264,13 +288,16 @@ func (c *Client) addOperationPutPlaybackConfigurationMiddlewares(stack *middlewa
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpPutPlaybackConfigurationValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opPutPlaybackConfiguration(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

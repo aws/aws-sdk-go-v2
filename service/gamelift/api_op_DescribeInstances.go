@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/gamelift/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -15,23 +14,39 @@ import (
 // Retrieves information about the EC2 instances in an Amazon GameLift managed
 // fleet, including instance ID, connection data, and status. You can use this
 // operation with a multi-location fleet to get location-specific instance
-// information. As an alternative, use the operations ListCompute and
-// DescribeCompute to retrieve information for compute resources, including EC2 and
-// Anywhere fleets. You can call this operation in the following ways:
+// information. As an alternative, use the operations ListComputeand DescribeCompute to retrieve information
+// for compute resources, including EC2 and Anywhere fleets.
+//
+// You can call this operation in the following ways:
+//
 //   - To get information on all instances in a fleet's home Region, specify the
 //     fleet ID.
+//
 //   - To get information on all instances in a fleet's remote location, specify
 //     the fleet ID and location name.
+//
 //   - To get information on a specific instance in a fleet, specify the fleet ID
 //     and instance ID.
 //
 // Use the pagination parameters to retrieve results as a set of sequential pages.
+//
 // If successful, this operation returns Instance objects for each requested
 // instance, listed in no particular order. If you call this operation for an
-// Anywhere fleet, you receive an InvalidRequestException. Learn more Remotely
-// connect to fleet instances (https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-remote-access.html)
-// Debug fleet issues (https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-creating-debug.html)
-// Related actions All APIs by task (https://docs.aws.amazon.com/gamelift/latest/developerguide/reference-awssdk.html#reference-awssdk-resources-fleets)
+// Anywhere fleet, you receive an InvalidRequestException.
+//
+// # Learn more
+//
+// [Remotely connect to fleet instances]
+//
+// [Debug fleet issues]
+//
+// # Related actions
+//
+// [All APIs by task]
+//
+// [Remotely connect to fleet instances]: https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-remote-access.html
+// [Debug fleet issues]: https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-creating-debug.html
+// [All APIs by task]: https://docs.aws.amazon.com/gamelift/latest/developerguide/reference-awssdk.html#reference-awssdk-resources-fleets
 func (c *Client) DescribeInstances(ctx context.Context, params *DescribeInstancesInput, optFns ...func(*Options)) (*DescribeInstancesOutput, error) {
 	if params == nil {
 		params = &DescribeInstancesInput{}
@@ -113,25 +128,25 @@ func (c *Client) addOperationDescribeInstancesMiddlewares(stack *middleware.Stac
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -146,13 +161,16 @@ func (c *Client) addOperationDescribeInstancesMiddlewares(stack *middleware.Stac
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDescribeInstancesValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeInstances(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

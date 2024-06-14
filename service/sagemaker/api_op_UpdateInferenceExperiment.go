@@ -6,16 +6,17 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates an inference experiment that you created. The status of the inference
+//	Updates an inference experiment that you created. The status of the inference
+//
 // experiment has to be either Created , Running . For more information on the
-// status of an inference experiment, see DescribeInferenceExperiment (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_DescribeInferenceExperiment.html)
-// .
+// status of an inference experiment, see [DescribeInferenceExperiment].
+//
+// [DescribeInferenceExperiment]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_DescribeInferenceExperiment.html
 func (c *Client) UpdateInferenceExperiment(ctx context.Context, params *UpdateInferenceExperimentInput, optFns ...func(*Options)) (*UpdateInferenceExperimentOutput, error) {
 	if params == nil {
 		params = &UpdateInferenceExperimentInput{}
@@ -45,17 +46,17 @@ type UpdateInferenceExperimentInput struct {
 	// The description of the inference experiment.
 	Description *string
 
-	// An array of ModelVariantConfig objects. There is one for each variant, whose
+	//  An array of ModelVariantConfig objects. There is one for each variant, whose
 	// infrastructure configuration you want to update.
 	ModelVariants []types.ModelVariantConfig
 
-	// The duration for which the inference experiment will run. If the status of the
+	//  The duration for which the inference experiment will run. If the status of the
 	// inference experiment is Created , then you can update both the start and end
 	// dates. If the status of the inference experiment is Running , then you can
 	// update only the end date.
 	Schedule *types.InferenceExperimentSchedule
 
-	// The configuration of ShadowMode inference experiment type. Use this field to
+	//  The configuration of ShadowMode inference experiment type. Use this field to
 	// specify a production variant which takes all the inference requests, and a
 	// shadow variant to which Amazon SageMaker replicates a percentage of the
 	// inference requests. For the shadow variant also specify the percentage of
@@ -100,25 +101,25 @@ func (c *Client) addOperationUpdateInferenceExperimentMiddlewares(stack *middlew
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -133,13 +134,16 @@ func (c *Client) addOperationUpdateInferenceExperimentMiddlewares(stack *middlew
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpUpdateInferenceExperimentValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateInferenceExperiment(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

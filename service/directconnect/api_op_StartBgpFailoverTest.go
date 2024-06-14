@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/directconnect/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -14,12 +13,16 @@ import (
 
 // Starts the virtual interface failover test that verifies your configuration
 // meets your resiliency requirements by placing the BGP peering session in the
-// DOWN state. You can then send traffic to verify that there are no outages. You
-// can run the test on public, private, transit, and hosted virtual interfaces. You
-// can use ListVirtualInterfaceTestHistory (https://docs.aws.amazon.com/directconnect/latest/APIReference/API_ListVirtualInterfaceTestHistory.html)
-// to view the virtual interface test history. If you need to stop the test before
-// the test interval completes, use StopBgpFailoverTest (https://docs.aws.amazon.com/directconnect/latest/APIReference/API_StopBgpFailoverTest.html)
-// .
+// DOWN state. You can then send traffic to verify that there are no outages.
+//
+// You can run the test on public, private, transit, and hosted virtual interfaces.
+//
+// You can use [ListVirtualInterfaceTestHistory] to view the virtual interface test history.
+//
+// If you need to stop the test before the test interval completes, use [StopBgpFailoverTest].
+//
+// [ListVirtualInterfaceTestHistory]: https://docs.aws.amazon.com/directconnect/latest/APIReference/API_ListVirtualInterfaceTestHistory.html
+// [StopBgpFailoverTest]: https://docs.aws.amazon.com/directconnect/latest/APIReference/API_StopBgpFailoverTest.html
 func (c *Client) StartBgpFailoverTest(ctx context.Context, params *StartBgpFailoverTestInput, optFns ...func(*Options)) (*StartBgpFailoverTestOutput, error) {
 	if params == nil {
 		params = &StartBgpFailoverTestInput{}
@@ -45,8 +48,11 @@ type StartBgpFailoverTestInput struct {
 	// The BGP peers to place in the DOWN state.
 	BgpPeers []string
 
-	// The time in minutes that the virtual interface failover test will last. Maximum
-	// value: 4,320 minutes (72 hours). Default: 180 minutes (3 hours).
+	// The time in minutes that the virtual interface failover test will last.
+	//
+	// Maximum value: 4,320 minutes (72 hours).
+	//
+	// Default: 180 minutes (3 hours).
 	TestDurationInMinutes *int32
 
 	noSmithyDocumentSerde
@@ -85,25 +91,25 @@ func (c *Client) addOperationStartBgpFailoverTestMiddlewares(stack *middleware.S
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -118,13 +124,16 @@ func (c *Client) addOperationStartBgpFailoverTestMiddlewares(stack *middleware.S
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpStartBgpFailoverTestValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opStartBgpFailoverTest(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/macie2/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -48,46 +47,58 @@ type GetSensitiveDataOccurrencesAvailabilityOutput struct {
 
 	// Specifies why occurrences of sensitive data can't be retrieved for the finding.
 	// Possible values are:
+	//
 	//   - ACCOUNT_NOT_IN_ORGANIZATION - The affected account isn't currently part of
 	//   your organization. Or the account is part of your organization but Macie isn't
 	//   currently enabled for the account. You're not allowed to access the affected S3
 	//   object by using Macie.
+	//
 	//   - INVALID_CLASSIFICATION_RESULT - There isn't a corresponding sensitive data
 	//   discovery result for the finding. Or the corresponding sensitive data discovery
 	//   result isn't available in the current Amazon Web Services Region, is malformed
 	//   or corrupted, or uses an unsupported storage format. Macie can't verify the
 	//   location of the sensitive data to retrieve.
+	//
 	//   - INVALID_RESULT_SIGNATURE - The corresponding sensitive data discovery
 	//   result is stored in an S3 object that wasn't signed by Macie. Macie can't verify
 	//   the integrity and authenticity of the sensitive data discovery result.
 	//   Therefore, Macie can't verify the location of the sensitive data to retrieve.
+	//
 	//   - MEMBER_ROLE_TOO_PERMISSIVE - The trust or permissions policy for the IAM
 	//   role in the affected member account doesn't meet Macie requirements for
 	//   restricting access to the role. Or the role's trust policy doesn't specify the
 	//   correct external ID for your organization. Macie can't assume the role to
 	//   retrieve the sensitive data.
+	//
 	//   - MISSING_GET_MEMBER_PERMISSION - You're not allowed to retrieve information
 	//   about the association between your account and the affected account. Macie can't
 	//   determine whether you’re allowed to access the affected S3 object as the
 	//   delegated Macie administrator for the affected account.
+	//
 	//   - OBJECT_EXCEEDS_SIZE_QUOTA - The storage size of the affected S3 object
 	//   exceeds the size quota for retrieving occurrences of sensitive data from this
 	//   type of file.
+	//
 	//   - OBJECT_UNAVAILABLE - The affected S3 object isn't available. The object was
 	//   renamed, moved, deleted, or changed after Macie created the finding. Or the
 	//   object is encrypted with an KMS key that's currently disabled.
+	//
 	//   - RESULT_NOT_SIGNED - The corresponding sensitive data discovery result is
 	//   stored in an S3 object that hasn't been signed. Macie can't verify the integrity
 	//   and authenticity of the sensitive data discovery result. Therefore, Macie can't
 	//   verify the location of the sensitive data to retrieve.
+	//
 	//   - ROLE_TOO_PERMISSIVE - Your account is configured to retrieve occurrences of
 	//   sensitive data by using an IAM role whose trust or permissions policy doesn't
 	//   meet Macie requirements for restricting access to the role. Macie can’t assume
 	//   the role to retrieve the sensitive data.
+	//
 	//   - UNSUPPORTED_FINDING_TYPE - The specified finding isn't a sensitive data
 	//   finding.
+	//
 	//   - UNSUPPORTED_OBJECT_TYPE - The affected S3 object uses a file or storage
 	//   format that Macie doesn't support for retrieving occurrences of sensitive data.
+	//
 	// This value is null if sensitive data can be retrieved for the finding.
 	Reasons []types.UnavailabilityReasonCode
 
@@ -119,25 +130,25 @@ func (c *Client) addOperationGetSensitiveDataOccurrencesAvailabilityMiddlewares(
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -152,13 +163,16 @@ func (c *Client) addOperationGetSensitiveDataOccurrencesAvailabilityMiddlewares(
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpGetSensitiveDataOccurrencesAvailabilityValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetSensitiveDataOccurrencesAvailability(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

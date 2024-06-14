@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	glaciercust "github.com/aws/aws-sdk-go-v2/service/glacier/internal/customizations"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -15,16 +14,19 @@ import (
 // This operation deletes the notification configuration set for a vault. The
 // operation is eventually consistent; that is, it might take some time for Amazon
 // S3 Glacier to completely disable the notifications and you might still receive
-// some notifications for a short time after you send the delete request. An AWS
-// account has full permission to perform all operations (actions). However, AWS
-// Identity and Access Management (IAM) users don't have any permissions by
-// default. You must grant them explicit permission to perform specific actions.
-// For more information, see Access Control Using AWS Identity and Access
-// Management (IAM) (https://docs.aws.amazon.com/amazonglacier/latest/dev/using-iam-with-amazon-glacier.html)
-// . For conceptual information and underlying REST API, see Configuring Vault
-// Notifications in Amazon S3 Glacier (https://docs.aws.amazon.com/amazonglacier/latest/dev/configuring-notifications.html)
-// and Delete Vault Notification Configuration  (https://docs.aws.amazon.com/amazonglacier/latest/dev/api-vault-notifications-delete.html)
-// in the Amazon S3 Glacier Developer Guide.
+// some notifications for a short time after you send the delete request.
+//
+// An AWS account has full permission to perform all operations (actions).
+// However, AWS Identity and Access Management (IAM) users don't have any
+// permissions by default. You must grant them explicit permission to perform
+// specific actions. For more information, see [Access Control Using AWS Identity and Access Management (IAM)].
+//
+// For conceptual information and underlying REST API, see [Configuring Vault Notifications in Amazon S3 Glacier] and [Delete Vault Notification Configuration] in the Amazon S3
+// Glacier Developer Guide.
+//
+// [Configuring Vault Notifications in Amazon S3 Glacier]: https://docs.aws.amazon.com/amazonglacier/latest/dev/configuring-notifications.html
+// [Access Control Using AWS Identity and Access Management (IAM)]: https://docs.aws.amazon.com/amazonglacier/latest/dev/using-iam-with-amazon-glacier.html
+// [Delete Vault Notification Configuration]: https://docs.aws.amazon.com/amazonglacier/latest/dev/api-vault-notifications-delete.html
 func (c *Client) DeleteVaultNotifications(ctx context.Context, params *DeleteVaultNotificationsInput, optFns ...func(*Options)) (*DeleteVaultNotificationsOutput, error) {
 	if params == nil {
 		params = &DeleteVaultNotificationsInput{}
@@ -90,25 +92,25 @@ func (c *Client) addOperationDeleteVaultNotificationsMiddlewares(stack *middlewa
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -123,13 +125,16 @@ func (c *Client) addOperationDeleteVaultNotificationsMiddlewares(stack *middlewa
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDeleteVaultNotificationsValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteVaultNotifications(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

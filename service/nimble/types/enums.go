@@ -12,6 +12,7 @@ const (
 
 // Values returns all known values for AutomaticTerminationMode. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (AutomaticTerminationMode) Values() []AutomaticTerminationMode {
 	return []AutomaticTerminationMode{
@@ -28,8 +29,9 @@ const (
 )
 
 // Values returns all known values for LaunchProfilePersona. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (LaunchProfilePersona) Values() []LaunchProfilePersona {
 	return []LaunchProfilePersona{
 		"USER",
@@ -45,8 +47,9 @@ const (
 )
 
 // Values returns all known values for LaunchProfilePlatform. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (LaunchProfilePlatform) Values() []LaunchProfilePlatform {
 	return []LaunchProfilePlatform{
 		"LINUX",
@@ -69,8 +72,9 @@ const (
 )
 
 // Values returns all known values for LaunchProfileState. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (LaunchProfileState) Values() []LaunchProfileState {
 	return []LaunchProfileState{
 		"CREATE_IN_PROGRESS",
@@ -106,8 +110,9 @@ const (
 )
 
 // Values returns all known values for LaunchProfileStatusCode. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (LaunchProfileStatusCode) Values() []LaunchProfileStatusCode {
 	return []LaunchProfileStatusCode{
 		"LAUNCH_PROFILE_CREATED",
@@ -141,8 +146,9 @@ const (
 
 // Values returns all known values for LaunchProfileValidationState. Note that
 // this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (LaunchProfileValidationState) Values() []LaunchProfileValidationState {
 	return []LaunchProfileValidationState{
 		"VALIDATION_NOT_STARTED",
@@ -170,8 +176,9 @@ const (
 
 // Values returns all known values for LaunchProfileValidationStatusCode. Note
 // that this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (LaunchProfileValidationStatusCode) Values() []LaunchProfileValidationStatusCode {
 	return []LaunchProfileValidationStatusCode{
 		"VALIDATION_NOT_STARTED",
@@ -198,6 +205,7 @@ const (
 
 // Values returns all known values for LaunchProfileValidationType. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (LaunchProfileValidationType) Values() []LaunchProfileValidationType {
 	return []LaunchProfileValidationType{
@@ -217,8 +225,9 @@ const (
 )
 
 // Values returns all known values for SessionBackupMode. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (SessionBackupMode) Values() []SessionBackupMode {
 	return []SessionBackupMode{
 		"AUTOMATIC",
@@ -235,8 +244,9 @@ const (
 )
 
 // Values returns all known values for SessionPersistenceMode. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (SessionPersistenceMode) Values() []SessionPersistenceMode {
 	return []SessionPersistenceMode{
 		"DEACTIVATED",
@@ -253,8 +263,9 @@ const (
 )
 
 // Values returns all known values for StreamingClipboardMode. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (StreamingClipboardMode) Values() []StreamingClipboardMode {
 	return []StreamingClipboardMode{
 		"ENABLED",
@@ -271,8 +282,9 @@ const (
 
 // Values returns all known values for
 // StreamingImageEncryptionConfigurationKeyType. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (StreamingImageEncryptionConfigurationKeyType) Values() []StreamingImageEncryptionConfigurationKeyType {
 	return []StreamingImageEncryptionConfigurationKeyType{
 		"CUSTOMER_MANAGED_KEY",
@@ -294,8 +306,9 @@ const (
 )
 
 // Values returns all known values for StreamingImageState. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (StreamingImageState) Values() []StreamingImageState {
 	return []StreamingImageState{
 		"CREATE_IN_PROGRESS",
@@ -324,6 +337,7 @@ const (
 
 // Values returns all known values for StreamingImageStatusCode. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (StreamingImageStatusCode) Values() []StreamingImageStatusCode {
 	return []StreamingImageStatusCode{
@@ -357,8 +371,9 @@ const (
 )
 
 // Values returns all known values for StreamingInstanceType. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (StreamingInstanceType) Values() []StreamingInstanceType {
 	return []StreamingInstanceType{
 		"g4dn.xlarge",
@@ -395,8 +410,9 @@ const (
 )
 
 // Values returns all known values for StreamingSessionState. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (StreamingSessionState) Values() []StreamingSessionState {
 	return []StreamingSessionState{
 		"CREATE_IN_PROGRESS",
@@ -437,6 +453,7 @@ const (
 
 // Values returns all known values for StreamingSessionStatusCode. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (StreamingSessionStatusCode) Values() []StreamingSessionStatusCode {
 	return []StreamingSessionStatusCode{
@@ -468,6 +485,7 @@ const (
 
 // Values returns all known values for StreamingSessionStorageMode. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (StreamingSessionStorageMode) Values() []StreamingSessionStorageMode {
 	return []StreamingSessionStorageMode{
@@ -489,6 +507,7 @@ const (
 
 // Values returns all known values for StreamingSessionStreamState. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (StreamingSessionStreamState) Values() []StreamingSessionStreamState {
 	return []StreamingSessionStreamState{
@@ -515,8 +534,9 @@ const (
 
 // Values returns all known values for StreamingSessionStreamStatusCode. Note that
 // this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (StreamingSessionStreamStatusCode) Values() []StreamingSessionStreamStatusCode {
 	return []StreamingSessionStreamStatusCode{
 		"STREAM_CREATE_IN_PROGRESS",
@@ -538,8 +558,9 @@ const (
 
 // Values returns all known values for
 // StudioComponentInitializationScriptRunContext. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (StudioComponentInitializationScriptRunContext) Values() []StudioComponentInitializationScriptRunContext {
 	return []StudioComponentInitializationScriptRunContext{
 		"SYSTEM_INITIALIZATION",
@@ -562,8 +583,9 @@ const (
 )
 
 // Values returns all known values for StudioComponentState. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (StudioComponentState) Values() []StudioComponentState {
 	return []StudioComponentState{
 		"CREATE_IN_PROGRESS",
@@ -595,6 +617,7 @@ const (
 
 // Values returns all known values for StudioComponentStatusCode. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (StudioComponentStatusCode) Values() []StudioComponentStatusCode {
 	return []StudioComponentStatusCode{
@@ -622,8 +645,9 @@ const (
 )
 
 // Values returns all known values for StudioComponentSubtype. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (StudioComponentSubtype) Values() []StudioComponentSubtype {
 	return []StudioComponentSubtype{
 		"AWS_MANAGED_MICROSOFT_AD",
@@ -645,8 +669,9 @@ const (
 )
 
 // Values returns all known values for StudioComponentType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (StudioComponentType) Values() []StudioComponentType {
 	return []StudioComponentType{
 		"ACTIVE_DIRECTORY",
@@ -667,8 +692,9 @@ const (
 
 // Values returns all known values for StudioEncryptionConfigurationKeyType. Note
 // that this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (StudioEncryptionConfigurationKeyType) Values() []StudioEncryptionConfigurationKeyType {
 	return []StudioEncryptionConfigurationKeyType{
 		"AWS_OWNED_KEY",
@@ -684,8 +710,9 @@ const (
 )
 
 // Values returns all known values for StudioPersona. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (StudioPersona) Values() []StudioPersona {
 	return []StudioPersona{
 		"ADMINISTRATOR",
@@ -707,8 +734,9 @@ const (
 )
 
 // Values returns all known values for StudioState. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (StudioState) Values() []StudioState {
 	return []StudioState{
 		"CREATE_IN_PROGRESS",
@@ -748,8 +776,9 @@ const (
 )
 
 // Values returns all known values for StudioStatusCode. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (StudioStatusCode) Values() []StudioStatusCode {
 	return []StudioStatusCode{
 		"STUDIO_CREATED",
@@ -783,8 +812,9 @@ const (
 )
 
 // Values returns all known values for VolumeRetentionMode. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (VolumeRetentionMode) Values() []VolumeRetentionMode {
 	return []VolumeRetentionMode{
 		"RETAIN",

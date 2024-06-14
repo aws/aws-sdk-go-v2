@@ -6,17 +6,22 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/wafregional/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// This is AWS WAF Classic documentation. For more information, see AWS WAF Classic (https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html)
-// in the developer guide. For the latest version of AWS WAF, use the AWS WAFV2 API
-// and see the AWS WAF Developer Guide (https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html)
-// . With the latest version, AWS WAF has a single set of endpoints for regional
-// and global use. Returns the RegexMatchSet specified by RegexMatchSetId .
+// This is AWS WAF Classic documentation. For more information, see [AWS WAF Classic] in the
+// developer guide.
+//
+// For the latest version of AWS WAF, use the AWS WAFV2 API and see the [AWS WAF Developer Guide]. With the
+// latest version, AWS WAF has a single set of endpoints for regional and global
+// use.
+//
+// Returns the RegexMatchSet specified by RegexMatchSetId .
+//
+// [AWS WAF Classic]: https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html
+// [AWS WAF Developer Guide]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html
 func (c *Client) GetRegexMatchSet(ctx context.Context, params *GetRegexMatchSetInput, optFns ...func(*Options)) (*GetRegexMatchSetOutput, error) {
 	if params == nil {
 		params = &GetRegexMatchSetInput{}
@@ -34,8 +39,8 @@ func (c *Client) GetRegexMatchSet(ctx context.Context, params *GetRegexMatchSetI
 
 type GetRegexMatchSetInput struct {
 
-	// The RegexMatchSetId of the RegexMatchSet that you want to get. RegexMatchSetId
-	// is returned by CreateRegexMatchSet and by ListRegexMatchSets .
+	// The RegexMatchSetId of the RegexMatchSet that you want to get. RegexMatchSetId is returned
+	// by CreateRegexMatchSetand by ListRegexMatchSets.
 	//
 	// This member is required.
 	RegexMatchSetId *string
@@ -45,8 +50,8 @@ type GetRegexMatchSetInput struct {
 
 type GetRegexMatchSetOutput struct {
 
-	// Information about the RegexMatchSet that you specified in the GetRegexMatchSet
-	// request. For more information, see RegexMatchTuple .
+	// Information about the RegexMatchSet that you specified in the GetRegexMatchSet request. For
+	// more information, see RegexMatchTuple.
 	RegexMatchSet *types.RegexMatchSet
 
 	// Metadata pertaining to the operation's result.
@@ -77,25 +82,25 @@ func (c *Client) addOperationGetRegexMatchSetMiddlewares(stack *middleware.Stack
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -110,13 +115,16 @@ func (c *Client) addOperationGetRegexMatchSetMiddlewares(stack *middleware.Stack
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpGetRegexMatchSetValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetRegexMatchSet(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

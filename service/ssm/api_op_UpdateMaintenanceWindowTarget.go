@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/ssm/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -14,13 +13,19 @@ import (
 
 // Modifies the target of an existing maintenance window. You can change the
 // following:
+//
 //   - Name
+//
 //   - Description
+//
 //   - Owner
+//
 //   - IDs for an ID target
+//
 //   - Tags for a Tag target
+//
 //   - From any supported tag type to another. The three supported tag types are
-//     ID target, Tag target, and resource group. For more information, see Target .
+//     ID target, Tag target, and resource group. For more information, see Target.
 //
 // If a parameter is null, then the corresponding field isn't modified.
 func (c *Client) UpdateMaintenanceWindowTarget(ctx context.Context, params *UpdateMaintenanceWindowTargetInput, optFns ...func(*Options)) (*UpdateMaintenanceWindowTargetOutput, error) {
@@ -60,9 +65,8 @@ type UpdateMaintenanceWindowTargetInput struct {
 	// events raised while running tasks for these targets in this maintenance window.
 	OwnerInformation *string
 
-	// If True , then all fields that are required by the
-	// RegisterTargetWithMaintenanceWindow operation are also required for this API
-	// request. Optional fields that aren't specified are set to null.
+	// If True , then all fields that are required by the RegisterTargetWithMaintenanceWindow operation are also required
+	// for this API request. Optional fields that aren't specified are set to null.
 	Replace *bool
 
 	// The targets to add or replace.
@@ -119,25 +123,25 @@ func (c *Client) addOperationUpdateMaintenanceWindowTargetMiddlewares(stack *mid
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -152,13 +156,16 @@ func (c *Client) addOperationUpdateMaintenanceWindowTargetMiddlewares(stack *mid
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpUpdateMaintenanceWindowTargetValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateMaintenanceWindowTarget(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

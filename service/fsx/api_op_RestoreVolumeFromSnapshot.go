@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/fsx/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -48,9 +47,11 @@ type RestoreVolumeFromSnapshotInput struct {
 	ClientRequestToken *string
 
 	// The settings used when restoring the specified volume from snapshot.
+	//
 	//   - DELETE_INTERMEDIATE_SNAPSHOTS - Deletes snapshots between the current state
 	//   and the specified snapshot. If there are intermediate snapshots and this option
 	//   isn't used, RestoreVolumeFromSnapshot fails.
+	//
 	//   - DELETE_CLONED_VOLUMES - Deletes any dependent clone volumes created from
 	//   intermediate snapshots. If there are any dependent clone volumes and this option
 	//   isn't used, RestoreVolumeFromSnapshot fails.
@@ -100,25 +101,25 @@ func (c *Client) addOperationRestoreVolumeFromSnapshotMiddlewares(stack *middlew
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -133,6 +134,9 @@ func (c *Client) addOperationRestoreVolumeFromSnapshotMiddlewares(stack *middlew
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opRestoreVolumeFromSnapshotMiddleware(stack, options); err != nil {
 		return err
 	}
@@ -142,7 +146,7 @@ func (c *Client) addOperationRestoreVolumeFromSnapshotMiddlewares(stack *middlew
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opRestoreVolumeFromSnapshot(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

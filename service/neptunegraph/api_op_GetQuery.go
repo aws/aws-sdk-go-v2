@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/neptunegraph/types"
 	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
@@ -15,9 +14,11 @@ import (
 	"strings"
 )
 
-// Retrieves the status of a specified query. When invoking this operation in a
-// Neptune Analytics cluster, the IAM user or role making the request must have the
-// neptune-graph:GetQueryStatus IAM action attached.
+// Retrieves the status of a specified query.
+//
+// When invoking this operation in a Neptune Analytics cluster, the IAM user or
+// role making the request must have the neptune-graph:GetQueryStatus IAM action
+// attached.
 func (c *Client) GetQuery(ctx context.Context, params *GetQueryInput, optFns ...func(*Options)) (*GetQueryOutput, error) {
 	if params == nil {
 		params = &GetQueryInput{}
@@ -98,25 +99,25 @@ func (c *Client) addOperationGetQueryMiddlewares(stack *middleware.Stack, option
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -131,6 +132,9 @@ func (c *Client) addOperationGetQueryMiddlewares(stack *middleware.Stack, option
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addEndpointPrefix_opGetQueryMiddleware(stack); err != nil {
 		return err
 	}
@@ -140,7 +144,7 @@ func (c *Client) addOperationGetQueryMiddlewares(stack *middleware.Stack, option
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetQuery(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

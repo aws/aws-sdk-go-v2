@@ -6,13 +6,13 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/mturk/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// The ListWorkersWithQualificationType operation returns all of the Workers that
+//	The ListWorkersWithQualificationType operation returns all of the Workers that
+//
 // have been associated with a given Qualification type.
 func (c *Client) ListWorkersWithQualificationType(ctx context.Context, params *ListWorkersWithQualificationTypeInput, optFns ...func(*Options)) (*ListWorkersWithQualificationTypeOutput, error) {
 	if params == nil {
@@ -36,13 +36,13 @@ type ListWorkersWithQualificationTypeInput struct {
 	// This member is required.
 	QualificationTypeId *string
 
-	// Limit the number of results returned.
+	//  Limit the number of results returned.
 	MaxResults *int32
 
 	// Pagination Token
 	NextToken *string
 
-	// The status of the Qualifications to return. Can be Granted | Revoked .
+	//  The status of the Qualifications to return. Can be Granted | Revoked .
 	Status types.QualificationStatus
 
 	noSmithyDocumentSerde
@@ -55,11 +55,11 @@ type ListWorkersWithQualificationTypeOutput struct {
 	// You can use this pagination token to retrieve the next set of results.
 	NextToken *string
 
-	// The number of Qualifications on this page in the filtered results list,
+	//  The number of Qualifications on this page in the filtered results list,
 	// equivalent to the number of Qualifications being returned by this call.
 	NumResults *int32
 
-	// The list of Qualification elements returned by this call.
+	//  The list of Qualification elements returned by this call.
 	Qualifications []types.Qualification
 
 	// Metadata pertaining to the operation's result.
@@ -90,25 +90,25 @@ func (c *Client) addOperationListWorkersWithQualificationTypeMiddlewares(stack *
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -123,13 +123,16 @@ func (c *Client) addOperationListWorkersWithQualificationTypeMiddlewares(stack *
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpListWorkersWithQualificationTypeValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListWorkersWithQualificationType(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -158,7 +161,7 @@ var _ ListWorkersWithQualificationTypeAPIClient = (*Client)(nil)
 // ListWorkersWithQualificationTypePaginatorOptions is the paginator options for
 // ListWorkersWithQualificationType
 type ListWorkersWithQualificationTypePaginatorOptions struct {
-	// Limit the number of results returned.
+	//  Limit the number of results returned.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

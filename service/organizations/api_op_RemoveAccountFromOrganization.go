@@ -6,32 +6,38 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Removes the specified account from the organization. The removed account
-// becomes a standalone account that isn't a member of any organization. It's no
-// longer subject to any policies and is responsible for its own bill payments. The
-// organization's management account is no longer charged for any expenses accrued
-// by the member account after it's removed from the organization. This operation
-// can be called only from the organization's management account. Member accounts
-// can remove themselves with LeaveOrganization instead.
+// Removes the specified account from the organization.
+//
+// The removed account becomes a standalone account that isn't a member of any
+// organization. It's no longer subject to any policies and is responsible for its
+// own bill payments. The organization's management account is no longer charged
+// for any expenses accrued by the member account after it's removed from the
+// organization.
+//
+// This operation can be called only from the organization's management account.
+// Member accounts can remove themselves with LeaveOrganizationinstead.
+//
 //   - You can remove an account from your organization only if the account is
 //     configured with the information required to operate as a standalone account.
 //     When you create an account in an organization using the Organizations console,
 //     API, or CLI commands, the information required of standalone accounts is not
-//     automatically collected. For more information, see Considerations before
-//     removing an account from an organization (https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_account-before-remove.html)
-//     in the Organizations User Guide.
+//     automatically collected. For more information, see [Considerations before removing an account from an organization]in the Organizations User
+//     Guide.
+//
 //   - The account that you want to leave must not be a delegated administrator
 //     account for any Amazon Web Services service enabled for your organization. If
 //     the account is a delegated administrator, you must first change the delegated
 //     administrator account to another account that is remaining in the organization.
+//
 //   - After the account leaves the organization, all tags that were attached to
 //     the account object in the organization are deleted. Amazon Web Services accounts
 //     outside of an organization do not support tags.
+//
+// [Considerations before removing an account from an organization]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_account-before-remove.html
 func (c *Client) RemoveAccountFromOrganization(ctx context.Context, params *RemoveAccountFromOrganizationInput, optFns ...func(*Options)) (*RemoveAccountFromOrganizationOutput, error) {
 	if params == nil {
 		params = &RemoveAccountFromOrganizationInput{}
@@ -50,8 +56,11 @@ func (c *Client) RemoveAccountFromOrganization(ctx context.Context, params *Remo
 type RemoveAccountFromOrganizationInput struct {
 
 	// The unique identifier (ID) of the member account that you want to remove from
-	// the organization. The regex pattern (http://wikipedia.org/wiki/regex) for an
-	// account ID string requires exactly 12 digits.
+	// the organization.
+	//
+	// The [regex pattern] for an account ID string requires exactly 12 digits.
+	//
+	// [regex pattern]: http://wikipedia.org/wiki/regex
 	//
 	// This member is required.
 	AccountId *string
@@ -88,25 +97,25 @@ func (c *Client) addOperationRemoveAccountFromOrganizationMiddlewares(stack *mid
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -121,13 +130,16 @@ func (c *Client) addOperationRemoveAccountFromOrganizationMiddlewares(stack *mid
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpRemoveAccountFromOrganizationValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opRemoveAccountFromOrganization(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

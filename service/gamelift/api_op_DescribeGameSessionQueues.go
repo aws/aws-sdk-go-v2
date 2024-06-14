@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/gamelift/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -15,7 +14,13 @@ import (
 // Retrieves the properties for one or more game session queues. When requesting
 // multiple queues, use the pagination parameters to retrieve results as a set of
 // sequential pages. When specifying a list of queues, objects are returned only
-// for queues that currently exist in the Region. Learn more View Your Queues (https://docs.aws.amazon.com/gamelift/latest/developerguide/queues-console.html)
+// for queues that currently exist in the Region.
+//
+// # Learn more
+//
+// [View Your Queues]
+//
+// [View Your Queues]: https://docs.aws.amazon.com/gamelift/latest/developerguide/queues-console.html
 func (c *Client) DescribeGameSessionQueues(ctx context.Context, params *DescribeGameSessionQueuesInput, optFns ...func(*Options)) (*DescribeGameSessionQueuesOutput, error) {
 	if params == nil {
 		params = &DescribeGameSessionQueuesInput{}
@@ -87,25 +92,25 @@ func (c *Client) addOperationDescribeGameSessionQueuesMiddlewares(stack *middlew
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -120,10 +125,13 @@ func (c *Client) addOperationDescribeGameSessionQueuesMiddlewares(stack *middlew
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeGameSessionQueues(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

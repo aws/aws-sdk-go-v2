@@ -14,8 +14,9 @@ const (
 )
 
 // Values returns all known values for DukptDerivationType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (DukptDerivationType) Values() []DukptDerivationType {
 	return []DukptDerivationType{
 		"TDES_2KEY",
@@ -35,8 +36,9 @@ const (
 )
 
 // Values returns all known values for DukptEncryptionMode. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (DukptEncryptionMode) Values() []DukptEncryptionMode {
 	return []DukptEncryptionMode{
 		"ECB",
@@ -54,13 +56,52 @@ const (
 )
 
 // Values returns all known values for DukptKeyVariant. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (DukptKeyVariant) Values() []DukptKeyVariant {
 	return []DukptKeyVariant{
 		"BIDIRECTIONAL",
 		"REQUEST",
 		"RESPONSE",
+	}
+}
+
+type EmvEncryptionMode string
+
+// Enum values for EmvEncryptionMode
+const (
+	EmvEncryptionModeEcb EmvEncryptionMode = "ECB"
+	EmvEncryptionModeCbc EmvEncryptionMode = "CBC"
+)
+
+// Values returns all known values for EmvEncryptionMode. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (EmvEncryptionMode) Values() []EmvEncryptionMode {
+	return []EmvEncryptionMode{
+		"ECB",
+		"CBC",
+	}
+}
+
+type EmvMajorKeyDerivationMode string
+
+// Enum values for EmvMajorKeyDerivationMode
+const (
+	EmvMajorKeyDerivationModeEmvOptionA EmvMajorKeyDerivationMode = "EMV_OPTION_A"
+	EmvMajorKeyDerivationModeEmvOptionB EmvMajorKeyDerivationMode = "EMV_OPTION_B"
+)
+
+// Values returns all known values for EmvMajorKeyDerivationMode. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (EmvMajorKeyDerivationMode) Values() []EmvMajorKeyDerivationMode {
+	return []EmvMajorKeyDerivationMode{
+		"EMV_OPTION_A",
+		"EMV_OPTION_B",
 	}
 }
 
@@ -79,8 +120,9 @@ const (
 )
 
 // Values returns all known values for EncryptionMode. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (EncryptionMode) Values() []EncryptionMode {
 	return []EncryptionMode{
 		"ECB",
@@ -108,8 +150,9 @@ const (
 )
 
 // Values returns all known values for MacAlgorithm. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (MacAlgorithm) Values() []MacAlgorithm {
 	return []MacAlgorithm{
 		"ISO9797_ALGORITHM1",
@@ -131,8 +174,9 @@ const (
 )
 
 // Values returns all known values for MajorKeyDerivationMode. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (MajorKeyDerivationMode) Values() []MajorKeyDerivationMode {
 	return []MajorKeyDerivationMode{
 		"EMV_OPTION_A",
@@ -151,8 +195,9 @@ const (
 )
 
 // Values returns all known values for PaddingType. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (PaddingType) Values() []PaddingType {
 	return []PaddingType{
 		"PKCS1",
@@ -172,6 +217,7 @@ const (
 
 // Values returns all known values for PinBlockFormatForPinData. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (PinBlockFormatForPinData) Values() []PinBlockFormatForPinData {
 	return []PinBlockFormatForPinData{
@@ -193,6 +239,7 @@ const (
 
 // Values returns all known values for SessionKeyDerivationMode. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (SessionKeyDerivationMode) Values() []SessionKeyDerivationMode {
 	return []SessionKeyDerivationMode{
@@ -216,6 +263,7 @@ const (
 
 // Values returns all known values for VerificationFailedReason. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (VerificationFailedReason) Values() []VerificationFailedReason {
 	return []VerificationFailedReason{

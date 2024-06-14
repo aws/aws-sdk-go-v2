@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/redshift/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -31,17 +30,19 @@ func (c *Client) DescribeReservedNodes(ctx context.Context, params *DescribeRese
 type DescribeReservedNodesInput struct {
 
 	// An optional parameter that specifies the starting point to return a set of
-	// response records. When the results of a DescribeReservedNodes request exceed
-	// the value specified in MaxRecords , Amazon Web Services returns a value in the
-	// Marker field of the response. You can retrieve the next set of response records
-	// by providing the returned marker value in the Marker parameter and retrying the
-	// request.
+	// response records. When the results of a DescribeReservedNodesrequest exceed the value specified in
+	// MaxRecords , Amazon Web Services returns a value in the Marker field of the
+	// response. You can retrieve the next set of response records by providing the
+	// returned marker value in the Marker parameter and retrying the request.
 	Marker *string
 
 	// The maximum number of response records to return in each call. If the number of
 	// remaining response records exceeds the specified MaxRecords value, a value is
 	// returned in a marker field of the response. You can retrieve the next set of
-	// records by retrying the command with the returned marker value. Default: 100
+	// records by retrying the command with the returned marker value.
+	//
+	// Default: 100
+	//
 	// Constraints: minimum 20, maximum 100.
 	MaxRecords *int32
 
@@ -91,25 +92,25 @@ func (c *Client) addOperationDescribeReservedNodesMiddlewares(stack *middleware.
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -124,10 +125,13 @@ func (c *Client) addOperationDescribeReservedNodesMiddlewares(stack *middleware.
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeReservedNodes(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -159,7 +163,10 @@ type DescribeReservedNodesPaginatorOptions struct {
 	// The maximum number of response records to return in each call. If the number of
 	// remaining response records exceeds the specified MaxRecords value, a value is
 	// returned in a marker field of the response. You can retrieve the next set of
-	// records by retrying the command with the returned marker value. Default: 100
+	// records by retrying the command with the returned marker value.
+	//
+	// Default: 100
+	//
 	// Constraints: minimum 20, maximum 100.
 	Limit int32
 

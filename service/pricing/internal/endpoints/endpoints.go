@@ -223,6 +223,9 @@ var defaultPartitions = endpoints.Partitions{
 				Hostname:          "api.pricing-fips.{region}.c2s.ic.gov",
 				Protocols:         []string{"https"},
 				SignatureVersions: []string{"v4"},
+				CredentialScope: endpoints.CredentialScope{
+					Service: "pricing",
+				},
 			},
 			{
 				Variant: 0,
@@ -230,10 +233,18 @@ var defaultPartitions = endpoints.Partitions{
 				Hostname:          "api.pricing.{region}.c2s.ic.gov",
 				Protocols:         []string{"https"},
 				SignatureVersions: []string{"v4"},
+				CredentialScope: endpoints.CredentialScope{
+					Service: "pricing",
+				},
 			},
 		},
 		RegionRegex:    partitionRegexp.AwsIso,
 		IsRegionalized: true,
+		Endpoints: endpoints.Endpoints{
+			endpoints.EndpointKey{
+				Region: "us-iso-east-1",
+			}: endpoints.Endpoint{},
+		},
 	},
 	{
 		ID: "aws-iso-b",
@@ -244,6 +255,9 @@ var defaultPartitions = endpoints.Partitions{
 				Hostname:          "api.pricing-fips.{region}.sc2s.sgov.gov",
 				Protocols:         []string{"https"},
 				SignatureVersions: []string{"v4"},
+				CredentialScope: endpoints.CredentialScope{
+					Service: "pricing",
+				},
 			},
 			{
 				Variant: 0,
@@ -251,10 +265,18 @@ var defaultPartitions = endpoints.Partitions{
 				Hostname:          "api.pricing.{region}.sc2s.sgov.gov",
 				Protocols:         []string{"https"},
 				SignatureVersions: []string{"v4"},
+				CredentialScope: endpoints.CredentialScope{
+					Service: "pricing",
+				},
 			},
 		},
 		RegionRegex:    partitionRegexp.AwsIsoB,
 		IsRegionalized: true,
+		Endpoints: endpoints.Endpoints{
+			endpoints.EndpointKey{
+				Region: "us-isob-east-1",
+			}: endpoints.Endpoint{},
+		},
 	},
 	{
 		ID: "aws-iso-e",

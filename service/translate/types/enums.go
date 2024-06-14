@@ -10,8 +10,9 @@ const (
 )
 
 // Values returns all known values for Brevity. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (Brevity) Values() []Brevity {
 	return []Brevity{
 		"ON",
@@ -27,8 +28,9 @@ const (
 )
 
 // Values returns all known values for Directionality. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (Directionality) Values() []Directionality {
 	return []Directionality{
 		"UNI",
@@ -53,8 +55,9 @@ const (
 )
 
 // Values returns all known values for DisplayLanguageCode. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (DisplayLanguageCode) Values() []DisplayLanguageCode {
 	return []DisplayLanguageCode{
 		"de",
@@ -78,8 +81,9 @@ const (
 )
 
 // Values returns all known values for EncryptionKeyType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (EncryptionKeyType) Values() []EncryptionKeyType {
 	return []EncryptionKeyType{
 		"KMS",
@@ -95,8 +99,9 @@ const (
 )
 
 // Values returns all known values for Formality. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (Formality) Values() []Formality {
 	return []Formality{
 		"FORMAL",
@@ -118,8 +123,9 @@ const (
 )
 
 // Values returns all known values for JobStatus. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (JobStatus) Values() []JobStatus {
 	return []JobStatus{
 		"SUBMITTED",
@@ -140,8 +146,9 @@ const (
 )
 
 // Values returns all known values for MergeStrategy. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (MergeStrategy) Values() []MergeStrategy {
 	return []MergeStrategy{
 		"OVERWRITE",
@@ -158,8 +165,9 @@ const (
 )
 
 // Values returns all known values for ParallelDataFormat. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ParallelDataFormat) Values() []ParallelDataFormat {
 	return []ParallelDataFormat{
 		"TSV",
@@ -180,8 +188,9 @@ const (
 )
 
 // Values returns all known values for ParallelDataStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ParallelDataStatus) Values() []ParallelDataStatus {
 	return []ParallelDataStatus{
 		"CREATING",
@@ -200,8 +209,9 @@ const (
 )
 
 // Values returns all known values for Profanity. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (Profanity) Values() []Profanity {
 	return []Profanity{
 		"MASK",
@@ -218,8 +228,9 @@ const (
 )
 
 // Values returns all known values for TerminologyDataFormat. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (TerminologyDataFormat) Values() []TerminologyDataFormat {
 	return []TerminologyDataFormat{
 		"CSV",

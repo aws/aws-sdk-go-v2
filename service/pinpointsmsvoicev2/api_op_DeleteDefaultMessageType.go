@@ -6,18 +6,18 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/pinpointsmsvoicev2/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes an existing default message type on a configuration set. A message type
-// is a type of messages that you plan to send. If you send account-related
-// messages or time-sensitive messages such as one-time passcodes, choose
-// Transactional. If you plan to send messages that contain marketing material or
-// other promotional content, choose Promotional. This setting applies to your
-// entire Amazon Web Services account.
+// Deletes an existing default message type on a configuration set.
+//
+// A message type is a type of messages that you plan to send. If you send
+// account-related messages or time-sensitive messages such as one-time passcodes,
+// choose Transactional. If you plan to send messages that contain marketing
+// material or other promotional content, choose Promotional. This setting applies
+// to your entire Amazon Web Services account.
 func (c *Client) DeleteDefaultMessageType(ctx context.Context, params *DeleteDefaultMessageTypeInput, optFns ...func(*Options)) (*DeleteDefaultMessageTypeOutput, error) {
 	if params == nil {
 		params = &DeleteDefaultMessageTypeInput{}
@@ -37,7 +37,7 @@ type DeleteDefaultMessageTypeInput struct {
 
 	// The name of the configuration set or the configuration set Amazon Resource Name
 	// (ARN) to delete the default message type from. The ConfigurationSetName and
-	// ConfigurationSetArn can be found using the DescribeConfigurationSets action.
+	// ConfigurationSetArn can be found using the DescribeConfigurationSetsaction.
 	//
 	// This member is required.
 	ConfigurationSetName *string
@@ -84,25 +84,25 @@ func (c *Client) addOperationDeleteDefaultMessageTypeMiddlewares(stack *middlewa
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -117,13 +117,16 @@ func (c *Client) addOperationDeleteDefaultMessageTypeMiddlewares(stack *middlewa
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDeleteDefaultMessageTypeValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteDefaultMessageType(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

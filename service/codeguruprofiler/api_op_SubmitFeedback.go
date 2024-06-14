@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/codeguruprofiler/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -32,8 +31,10 @@ func (c *Client) SubmitFeedback(ctx context.Context, params *SubmitFeedbackInput
 // The structure representing the SubmitFeedbackRequest.
 type SubmitFeedbackInput struct {
 
-	// The universally unique identifier (UUID) of the AnomalyInstance (https://docs.aws.amazon.com/codeguru/latest/profiler-api/API_AnomalyInstance.html)
-	// object that is included in the analysis data.
+	// The universally unique identifier (UUID) of the [AnomalyInstance]AnomalyInstance object that is
+	// included in the analysis data.
+	//
+	// [AnomalyInstance]: https://docs.aws.amazon.com/codeguru/latest/profiler-api/API_AnomalyInstance.html
 	//
 	// This member is required.
 	AnomalyInstanceId *string
@@ -43,7 +44,7 @@ type SubmitFeedbackInput struct {
 	// This member is required.
 	ProfilingGroupName *string
 
-	// The feedback tpye. Thee are two valid values, Positive and Negative .
+	//  The feedback tpye. Thee are two valid values, Positive and Negative .
 	//
 	// This member is required.
 	Type types.FeedbackType
@@ -84,25 +85,25 @@ func (c *Client) addOperationSubmitFeedbackMiddlewares(stack *middleware.Stack, 
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -117,13 +118,16 @@ func (c *Client) addOperationSubmitFeedbackMiddlewares(stack *middleware.Stack, 
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpSubmitFeedbackValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opSubmitFeedback(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

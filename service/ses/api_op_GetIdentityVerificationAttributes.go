@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/ses/types"
 	"github.com/aws/smithy-go/middleware"
 	smithytime "github.com/aws/smithy-go/time"
@@ -18,21 +17,25 @@ import (
 
 // Given a list of identities (email addresses and/or domains), returns the
 // verification status and (for domain identities) the verification token for each
-// identity. The verification status of an email address is "Pending" until the
-// email address owner clicks the link within the verification email that Amazon
-// SES sent to that address. If the email address owner clicks the link within 24
-// hours, the verification status of the email address changes to "Success". If the
-// link is not clicked within 24 hours, the verification status changes to
-// "Failed." In that case, to verify the email address, you must restart the
-// verification process from the beginning. For domain identities, the domain's
-// verification status is "Pending" as Amazon SES searches for the required TXT
-// record in the DNS settings of the domain. When Amazon SES detects the record,
-// the domain's verification status changes to "Success". If Amazon SES is unable
-// to detect the record within 72 hours, the domain's verification status changes
-// to "Failed." In that case, to verify the domain, you must restart the
-// verification process from the beginning. This operation is throttled at one
-// request per second and can only get verification attributes for up to 100
-// identities at a time.
+// identity.
+//
+// The verification status of an email address is "Pending" until the email
+// address owner clicks the link within the verification email that Amazon SES sent
+// to that address. If the email address owner clicks the link within 24 hours, the
+// verification status of the email address changes to "Success". If the link is
+// not clicked within 24 hours, the verification status changes to "Failed." In
+// that case, to verify the email address, you must restart the verification
+// process from the beginning.
+//
+// For domain identities, the domain's verification status is "Pending" as Amazon
+// SES searches for the required TXT record in the DNS settings of the domain. When
+// Amazon SES detects the record, the domain's verification status changes to
+// "Success". If Amazon SES is unable to detect the record within 72 hours, the
+// domain's verification status changes to "Failed." In that case, to verify the
+// domain, you must restart the verification process from the beginning.
+//
+// This operation is throttled at one request per second and can only get
+// verification attributes for up to 100 identities at a time.
 func (c *Client) GetIdentityVerificationAttributes(ctx context.Context, params *GetIdentityVerificationAttributesInput, optFns ...func(*Options)) (*GetIdentityVerificationAttributesOutput, error) {
 	if params == nil {
 		params = &GetIdentityVerificationAttributesInput{}
@@ -50,9 +53,9 @@ func (c *Client) GetIdentityVerificationAttributes(ctx context.Context, params *
 
 // Represents a request to return the Amazon SES verification status of a list of
 // identities. For domain identities, this request also returns the verification
-// token. For information about verifying identities with Amazon SES, see the
-// Amazon SES Developer Guide (https://docs.aws.amazon.com/ses/latest/dg/creating-identities.html)
-// .
+// token. For information about verifying identities with Amazon SES, see the [Amazon SES Developer Guide].
+//
+// [Amazon SES Developer Guide]: https://docs.aws.amazon.com/ses/latest/dg/creating-identities.html
 type GetIdentityVerificationAttributesInput struct {
 
 	// A list of identities.
@@ -100,25 +103,25 @@ func (c *Client) addOperationGetIdentityVerificationAttributesMiddlewares(stack 
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -133,13 +136,16 @@ func (c *Client) addOperationGetIdentityVerificationAttributesMiddlewares(stack 
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpGetIdentityVerificationAttributesValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetIdentityVerificationAttributes(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -171,7 +177,16 @@ type IdentityExistsWaiterOptions struct {
 	// Set of options to modify how an operation is invoked. These apply to all
 	// operations invoked for this client. Use functional options on operation call to
 	// modify this list for per operation behavior.
+	//
+	// Passing options here is functionally equivalent to passing values to this
+	// config's ClientOptions field that extend the inner client's APIOptions directly.
 	APIOptions []func(*middleware.Stack) error
+
+	// Functional options to be passed to all operations invoked by this client.
+	//
+	// Function values that modify the inner APIOptions are applied after the waiter
+	// config's own APIOptions modifiers.
+	ClientOptions []func(*Options)
 
 	// MinDelay is the minimum amount of time to delay between retries. If unset,
 	// IdentityExistsWaiter will use default minimum delay of 3 seconds. Note that
@@ -188,12 +203,13 @@ type IdentityExistsWaiterOptions struct {
 
 	// Retryable is function that can be used to override the service defined
 	// waiter-behavior based on operation output, or returned error. This function is
-	// used by the waiter to decide if a state is retryable or a terminal state. By
-	// default service-modeled logic will populate this option. This option can thus be
-	// used to define a custom waiter state with fall-back to service-modeled waiter
-	// state mutators.The function returns an error in case of a failure state. In case
-	// of retry state, this function returns a bool value of true and nil error, while
-	// in case of success it returns a bool value of false and nil error.
+	// used by the waiter to decide if a state is retryable or a terminal state.
+	//
+	// By default service-modeled logic will populate this option. This option can
+	// thus be used to define a custom waiter state with fall-back to service-modeled
+	// waiter state mutators.The function returns an error in case of a failure state.
+	// In case of retry state, this function returns a bool value of true and nil
+	// error, while in case of success it returns a bool value of false and nil error.
 	Retryable func(context.Context, *GetIdentityVerificationAttributesInput, *GetIdentityVerificationAttributesOutput, error) (bool, error)
 }
 
@@ -271,6 +287,9 @@ func (w *IdentityExistsWaiter) WaitForOutput(ctx context.Context, params *GetIde
 
 		out, err := w.client.GetIdentityVerificationAttributes(ctx, params, func(o *Options) {
 			o.APIOptions = append(o.APIOptions, apiOptions...)
+			for _, opt := range options.ClientOptions {
+				opt(o)
+			}
 		})
 
 		retryable, err := options.Retryable(ctx, params, out, err)

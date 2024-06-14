@@ -16,8 +16,9 @@ const (
 )
 
 // Values returns all known values for ActiveDirectoryStatus. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ActiveDirectoryStatus) Values() []ActiveDirectoryStatus {
 	return []ActiveDirectoryStatus{
 		"ACCESS_DENIED",
@@ -27,6 +28,25 @@ func (ActiveDirectoryStatus) Values() []ActiveDirectoryStatus {
 		"NETWORK_ERROR",
 		"TIMEOUT",
 		"UNKNOWN_ERROR",
+	}
+}
+
+type AutomaticUpdatePolicy string
+
+// Enum values for AutomaticUpdatePolicy
+const (
+	AutomaticUpdatePolicyAllVersions           AutomaticUpdatePolicy = "ALL_VERSIONS"
+	AutomaticUpdatePolicyEmergencyVersionsOnly AutomaticUpdatePolicy = "EMERGENCY_VERSIONS_ONLY"
+)
+
+// Values returns all known values for AutomaticUpdatePolicy. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (AutomaticUpdatePolicy) Values() []AutomaticUpdatePolicy {
+	return []AutomaticUpdatePolicy{
+		"ALL_VERSIONS",
+		"EMERGENCY_VERSIONS_ONLY",
 	}
 }
 
@@ -41,8 +61,9 @@ const (
 
 // Values returns all known values for AvailabilityMonitorTestStatus. Note that
 // this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (AvailabilityMonitorTestStatus) Values() []AvailabilityMonitorTestStatus {
 	return []AvailabilityMonitorTestStatus{
 		"COMPLETE",
@@ -60,8 +81,9 @@ const (
 )
 
 // Values returns all known values for CaseSensitivity. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (CaseSensitivity) Values() []CaseSensitivity {
 	return []CaseSensitivity{
 		"ClientSpecified",
@@ -138,8 +160,9 @@ const (
 )
 
 // Values returns all known values for ErrorCode. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ErrorCode) Values() []ErrorCode {
 	return []ErrorCode{
 		"ActivationKeyExpired",
@@ -216,8 +239,9 @@ const (
 )
 
 // Values returns all known values for FileShareType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (FileShareType) Values() []FileShareType {
 	return []FileShareType{
 		"NFS",
@@ -235,8 +259,9 @@ const (
 )
 
 // Values returns all known values for GatewayCapacity. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (GatewayCapacity) Values() []GatewayCapacity {
 	return []GatewayCapacity{
 		"Small",
@@ -258,8 +283,9 @@ const (
 )
 
 // Values returns all known values for HostEnvironment. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (HostEnvironment) Values() []HostEnvironment {
 	return []HostEnvironment{
 		"VMWARE",
@@ -285,8 +311,9 @@ const (
 )
 
 // Values returns all known values for ObjectACL. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ObjectACL) Values() []ObjectACL {
 	return []ObjectACL{
 		"private",
@@ -308,8 +335,9 @@ const (
 )
 
 // Values returns all known values for PoolStatus. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (PoolStatus) Values() []PoolStatus {
 	return []PoolStatus{
 		"ACTIVE",
@@ -327,8 +355,9 @@ const (
 )
 
 // Values returns all known values for RetentionLockType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (RetentionLockType) Values() []RetentionLockType {
 	return []RetentionLockType{
 		"COMPLIANCE",
@@ -341,19 +370,22 @@ type SMBSecurityStrategy string
 
 // Enum values for SMBSecurityStrategy
 const (
-	SMBSecurityStrategyClientSpecified     SMBSecurityStrategy = "ClientSpecified"
-	SMBSecurityStrategyMandatorySigning    SMBSecurityStrategy = "MandatorySigning"
-	SMBSecurityStrategyMandatoryEncryption SMBSecurityStrategy = "MandatoryEncryption"
+	SMBSecurityStrategyClientSpecified             SMBSecurityStrategy = "ClientSpecified"
+	SMBSecurityStrategyMandatorySigning            SMBSecurityStrategy = "MandatorySigning"
+	SMBSecurityStrategyMandatoryEncryption         SMBSecurityStrategy = "MandatoryEncryption"
+	SMBSecurityStrategyMandatoryEncryptionNoAes128 SMBSecurityStrategy = "MandatoryEncryptionNoAes128"
 )
 
 // Values returns all known values for SMBSecurityStrategy. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (SMBSecurityStrategy) Values() []SMBSecurityStrategy {
 	return []SMBSecurityStrategy{
 		"ClientSpecified",
 		"MandatorySigning",
 		"MandatoryEncryption",
+		"MandatoryEncryptionNoAes128",
 	}
 }
 
@@ -366,8 +398,9 @@ const (
 )
 
 // Values returns all known values for TapeStorageClass. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (TapeStorageClass) Values() []TapeStorageClass {
 	return []TapeStorageClass{
 		"DEEP_ARCHIVE",

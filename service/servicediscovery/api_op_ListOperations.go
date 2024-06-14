@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/servicediscovery/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -32,8 +31,10 @@ type ListOperationsInput struct {
 
 	// A complex type that contains specifications for the operations that you want to
 	// list, for example, operations that you started between a specified start date
-	// and end date. If you specify more than one filter, an operation must match all
-	// filters to be returned by ListOperations .
+	// and end date.
+	//
+	// If you specify more than one filter, an operation must match all filters to be
+	// returned by ListOperations .
 	Filters []types.OperationFilter
 
 	// The maximum number of items that you want Cloud Map to return in the response
@@ -41,11 +42,14 @@ type ListOperationsInput struct {
 	// Map returns up to 100 operations.
 	MaxResults *int32
 
-	// For the first ListOperations request, omit this value. If the response contains
-	// NextToken , submit another ListOperations request to get the next group of
-	// results. Specify the value of NextToken from the previous response in the next
-	// request. Cloud Map gets MaxResults operations and then filters them based on
-	// the specified criteria. It's possible that no operations in the first MaxResults
+	// For the first ListOperations request, omit this value.
+	//
+	// If the response contains NextToken , submit another ListOperations request to
+	// get the next group of results. Specify the value of NextToken from the previous
+	// response in the next request.
+	//
+	// Cloud Map gets MaxResults operations and then filters them based on the
+	// specified criteria. It's possible that no operations in the first MaxResults
 	// operations matched the specified criteria but that subsequent groups of
 	// MaxResults operations do contain operations that match the criteria.
 	NextToken *string
@@ -57,11 +61,12 @@ type ListOperationsOutput struct {
 
 	// If the response contains NextToken , submit another ListOperations request to
 	// get the next group of results. Specify the value of NextToken from the previous
-	// response in the next request. Cloud Map gets MaxResults operations and then
-	// filters them based on the specified criteria. It's possible that no operations
-	// in the first MaxResults operations matched the specified criteria but that
-	// subsequent groups of MaxResults operations do contain operations that match the
-	// criteria.
+	// response in the next request.
+	//
+	// Cloud Map gets MaxResults operations and then filters them based on the
+	// specified criteria. It's possible that no operations in the first MaxResults
+	// operations matched the specified criteria but that subsequent groups of
+	// MaxResults operations do contain operations that match the criteria.
 	NextToken *string
 
 	// Summary information about the operations that match the specified criteria.
@@ -95,25 +100,25 @@ func (c *Client) addOperationListOperationsMiddlewares(stack *middleware.Stack, 
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -128,13 +133,16 @@ func (c *Client) addOperationListOperationsMiddlewares(stack *middleware.Stack, 
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpListOperationsValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListOperations(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

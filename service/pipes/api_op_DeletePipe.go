@@ -6,16 +6,16 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/pipes/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
-// Delete an existing pipe. For more information about pipes, see Amazon
-// EventBridge Pipes (https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-pipes.html)
-// in the Amazon EventBridge User Guide.
+// Delete an existing pipe. For more information about pipes, see [Amazon EventBridge Pipes] in the Amazon
+// EventBridge User Guide.
+//
+// [Amazon EventBridge Pipes]: https://docs.aws.amazon.com/eventbridge/latest/userguide/eb-pipes.html
 func (c *Client) DeletePipe(ctx context.Context, params *DeletePipeInput, optFns ...func(*Options)) (*DeletePipeOutput, error) {
 	if params == nil {
 		params = &DeletePipeInput{}
@@ -55,8 +55,9 @@ type DeletePipeOutput struct {
 	// The state the pipe should be in.
 	DesiredState types.RequestedPipeStateDescribeResponse
 
-	// When the pipe was last updated, in ISO-8601 format (https://www.w3.org/TR/NOTE-datetime)
-	// (YYYY-MM-DDThh:mm:ss.sTZD).
+	// When the pipe was last updated, in [ISO-8601 format] (YYYY-MM-DDThh:mm:ss.sTZD).
+	//
+	// [ISO-8601 format]: https://www.w3.org/TR/NOTE-datetime
 	LastModifiedTime *time.Time
 
 	// The name of the pipe.
@@ -90,25 +91,25 @@ func (c *Client) addOperationDeletePipeMiddlewares(stack *middleware.Stack, opti
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -123,13 +124,16 @@ func (c *Client) addOperationDeletePipeMiddlewares(stack *middleware.Stack, opti
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDeletePipeValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDeletePipe(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

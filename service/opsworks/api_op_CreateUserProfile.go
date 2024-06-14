@@ -6,15 +6,17 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a new user profile. Required Permissions: To use this action, an IAM
-// user must have an attached policy that explicitly grants permissions. For more
-// information about user permissions, see Managing User Permissions (https://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html)
-// .
+// Creates a new user profile.
+//
+// Required Permissions: To use this action, an IAM user must have an attached
+// policy that explicitly grants permissions. For more information about user
+// permissions, see [Managing User Permissions].
+//
+// [Managing User Permissions]: https://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html
 func (c *Client) CreateUserProfile(ctx context.Context, params *CreateUserProfileInput, optFns ...func(*Options)) (*CreateUserProfileOutput, error) {
 	if params == nil {
 		params = &CreateUserProfileInput{}
@@ -38,18 +40,18 @@ type CreateUserProfileInput struct {
 	IamUserArn *string
 
 	// Whether users can specify their own SSH public key through the My Settings
-	// page. For more information, see Setting an IAM User's Public SSH Key (https://docs.aws.amazon.com/opsworks/latest/userguide/security-settingsshkey.html)
-	// .
+	// page. For more information, see [Setting an IAM User's Public SSH Key].
+	//
+	// [Setting an IAM User's Public SSH Key]: https://docs.aws.amazon.com/opsworks/latest/userguide/security-settingsshkey.html
 	AllowSelfManagement *bool
 
 	// The user's public SSH key.
 	SshPublicKey *string
 
 	// The user's SSH user name. The allowable characters are [a-z], [A-Z], [0-9],
-	// '-', and '_'. If the specified name includes other punctuation marks, AWS
-	// OpsWorks Stacks removes them. For example, my.name will be changed to myname .
-	// If you do not specify an SSH user name, AWS OpsWorks Stacks generates one from
-	// the IAM user name.
+	// '-', and '_'. If the specified name includes other punctuation marks, OpsWorks
+	// Stacks removes them. For example, my.name is changed to myname . If you do not
+	// specify an SSH user name, OpsWorks Stacks generates one from the IAM user name.
 	SshUsername *string
 
 	noSmithyDocumentSerde
@@ -89,25 +91,25 @@ func (c *Client) addOperationCreateUserProfileMiddlewares(stack *middleware.Stac
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -122,13 +124,16 @@ func (c *Client) addOperationCreateUserProfileMiddlewares(stack *middleware.Stac
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpCreateUserProfileValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateUserProfile(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

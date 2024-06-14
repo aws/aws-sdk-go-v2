@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/fsx/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -14,14 +13,18 @@ import (
 
 // Creates a snapshot of an existing Amazon FSx for OpenZFS volume. With
 // snapshots, you can easily undo file changes and compare file versions by
-// restoring the volume to a previous version. If a snapshot with the specified
-// client request token exists, and the parameters match, this operation returns
-// the description of the existing snapshot. If a snapshot with the specified
-// client request token exists, and the parameters don't match, this operation
-// returns IncompatibleParameterError . If a snapshot with the specified client
-// request token doesn't exist, CreateSnapshot does the following:
+// restoring the volume to a previous version.
+//
+// If a snapshot with the specified client request token exists, and the
+// parameters match, this operation returns the description of the existing
+// snapshot. If a snapshot with the specified client request token exists, and the
+// parameters don't match, this operation returns IncompatibleParameterError . If a
+// snapshot with the specified client request token doesn't exist, CreateSnapshot
+// does the following:
+//
 //   - Creates a new OpenZFS snapshot with an assigned ID, and an initial
 //     lifecycle state of CREATING .
+//
 //   - Returns the description of the snapshot.
 //
 // By using the idempotent operation, you can retry a CreateSnapshot operation
@@ -29,10 +32,13 @@ import (
 // an initial call fails in a way that makes it unclear whether a snapshot was
 // created. If you use the same client request token and the initial call created a
 // snapshot, the operation returns a successful result because all the parameters
-// are the same. The CreateSnapshot operation returns while the snapshot's
-// lifecycle state is still CREATING . You can check the snapshot creation status
-// by calling the DescribeSnapshots (https://docs.aws.amazon.com/fsx/latest/APIReference/API_DescribeSnapshots.html)
+// are the same.
+//
+// The CreateSnapshot operation returns while the snapshot's lifecycle state is
+// still CREATING . You can check the snapshot creation status by calling the [DescribeSnapshots]
 // operation, which returns the snapshot state along with other information.
+//
+// [DescribeSnapshots]: https://docs.aws.amazon.com/fsx/latest/APIReference/API_DescribeSnapshots.html
 func (c *Client) CreateSnapshot(ctx context.Context, params *CreateSnapshotInput, optFns ...func(*Options)) (*CreateSnapshotOutput, error) {
 	if params == nil {
 		params = &CreateSnapshotInput{}
@@ -104,25 +110,25 @@ func (c *Client) addOperationCreateSnapshotMiddlewares(stack *middleware.Stack, 
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -137,6 +143,9 @@ func (c *Client) addOperationCreateSnapshotMiddlewares(stack *middleware.Stack, 
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opCreateSnapshotMiddleware(stack, options); err != nil {
 		return err
 	}
@@ -146,7 +155,7 @@ func (c *Client) addOperationCreateSnapshotMiddlewares(stack *middleware.Stack, 
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateSnapshot(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

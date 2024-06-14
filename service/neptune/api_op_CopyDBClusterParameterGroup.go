@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/neptune/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -31,16 +30,21 @@ func (c *Client) CopyDBClusterParameterGroup(ctx context.Context, params *CopyDB
 type CopyDBClusterParameterGroupInput struct {
 
 	// The identifier or Amazon Resource Name (ARN) for the source DB cluster
-	// parameter group. For information about creating an ARN, see Constructing an
-	// Amazon Resource Name (ARN) (https://docs.aws.amazon.com/neptune/latest/UserGuide/tagging.ARN.html#tagging.ARN.Constructing)
-	// . Constraints:
+	// parameter group. For information about creating an ARN, see [Constructing an Amazon Resource Name (ARN)].
+	//
+	// Constraints:
+	//
 	//   - Must specify a valid DB cluster parameter group.
+	//
 	//   - If the source DB cluster parameter group is in the same Amazon Region as
 	//   the copy, specify a valid DB parameter group identifier, for example
 	//   my-db-cluster-param-group , or a valid ARN.
+	//
 	//   - If the source DB parameter group is in a different Amazon Region than the
 	//   copy, specify a valid DB cluster parameter group ARN, for example
 	//   arn:aws:rds:us-east-1:123456789012:cluster-pg:custom-cluster-group1 .
+	//
+	// [Constructing an Amazon Resource Name (ARN)]: https://docs.aws.amazon.com/neptune/latest/UserGuide/tagging.ARN.html#tagging.ARN.Constructing
 	//
 	// This member is required.
 	SourceDBClusterParameterGroupIdentifier *string
@@ -50,11 +54,18 @@ type CopyDBClusterParameterGroupInput struct {
 	// This member is required.
 	TargetDBClusterParameterGroupDescription *string
 
-	// The identifier for the copied DB cluster parameter group. Constraints:
+	// The identifier for the copied DB cluster parameter group.
+	//
+	// Constraints:
+	//
 	//   - Cannot be null, empty, or blank
+	//
 	//   - Must contain from 1 to 255 letters, numbers, or hyphens
+	//
 	//   - First character must be a letter
+	//
 	//   - Cannot end with a hyphen or contain two consecutive hyphens
+	//
 	// Example: my-cluster-param-group1
 	//
 	// This member is required.
@@ -68,9 +79,9 @@ type CopyDBClusterParameterGroupInput struct {
 
 type CopyDBClusterParameterGroupOutput struct {
 
-	// Contains the details of an Amazon Neptune DB cluster parameter group. This data
-	// type is used as a response element in the DescribeDBClusterParameterGroups
-	// action.
+	// Contains the details of an Amazon Neptune DB cluster parameter group.
+	//
+	// This data type is used as a response element in the DescribeDBClusterParameterGroups action.
 	DBClusterParameterGroup *types.DBClusterParameterGroup
 
 	// Metadata pertaining to the operation's result.
@@ -101,25 +112,25 @@ func (c *Client) addOperationCopyDBClusterParameterGroupMiddlewares(stack *middl
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -134,13 +145,16 @@ func (c *Client) addOperationCopyDBClusterParameterGroupMiddlewares(stack *middl
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpCopyDBClusterParameterGroupValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCopyDBClusterParameterGroup(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

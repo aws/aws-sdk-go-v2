@@ -6,17 +6,19 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/cognitosync/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Gets usage information for an identity, including number of datasets and data
-// usage. This API can be called with temporary user credentials provided by
-// Cognito Identity or with developer credentials. DescribeIdentityUsage The
-// following examples have been edited for readability. POST / HTTP/1.1
-// CONTENT-TYPE: application/json X-AMZN-REQUESTID:
+// usage.
+//
+// This API can be called with temporary user credentials provided by Cognito
+// Identity or with developer credentials.
+//
+// DescribeIdentityUsage The following examples have been edited for readability.
+// POST / HTTP/1.1 CONTENT-TYPE: application/json X-AMZN-REQUESTID:
 // 33f9b4e4-a177-4aad-a3bb-6edb7980b283 X-AMZ-TARGET:
 // com.amazonaws.cognito.sync.model.AWSCognitoSyncService.DescribeIdentityUsage
 // HOST: cognito-sync.us-east-1.amazonaws.com:443 X-AMZ-DATE: 20141111T215129Z
@@ -27,8 +29,9 @@ import (
 // "com.amazonaws.cognito.sync.model#AWSCognitoSyncService", "Input": {
 // "IdentityPoolId": "IDENTITY_POOL_ID", "IdentityId": "IDENTITY_ID" } } 1.1 200 OK
 // x-amzn-requestid: 33f9b4e4-a177-4aad-a3bb-6edb7980b283 content-type:
-// application/json content-length: 318 date: Tue, 11 Nov 2014 21:51:29 GMT {
-// "Output": { "__type":
+// application/json content-length: 318 date: Tue, 11 Nov 2014 21:51:29 GMT
+//
+// { "Output": { "__type":
 // "com.amazonaws.cognito.sync.model#DescribeIdentityUsageResponse",
 // "IdentityUsage": { "DataStorage": 16, "DatasetCount": 1, "IdentityId":
 // "IDENTITY_ID", "IdentityPoolId": "IDENTITY_POOL_ID", "LastModifiedDate":
@@ -102,25 +105,25 @@ func (c *Client) addOperationDescribeIdentityUsageMiddlewares(stack *middleware.
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -135,13 +138,16 @@ func (c *Client) addOperationDescribeIdentityUsageMiddlewares(stack *middleware.
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDescribeIdentityUsageValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeIdentityUsage(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

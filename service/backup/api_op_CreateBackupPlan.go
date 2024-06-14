@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/backup/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -15,8 +14,10 @@ import (
 
 // Creates a backup plan using a backup plan name and backup rules. A backup plan
 // is a document that contains information that Backup uses to schedule tasks that
-// create recovery points for resources. If you call CreateBackupPlan with a plan
-// that already exists, you receive an AlreadyExistsException exception.
+// create recovery points for resources.
+//
+// If you call CreateBackupPlan with a plan that already exists, you receive an
+// AlreadyExistsException exception.
 func (c *Client) CreateBackupPlan(ctx context.Context, params *CreateBackupPlanInput, optFns ...func(*Options)) (*CreateBackupPlanOutput, error) {
 	if params == nil {
 		params = &CreateBackupPlanInput{}
@@ -48,8 +49,9 @@ type CreateBackupPlanInput struct {
 	// Identifies the request and allows failed requests to be retried without the
 	// risk of running the operation twice. If the request includes a CreatorRequestId
 	// that matches an existing backup plan, that plan is returned. This parameter is
-	// optional. If used, this parameter must contain 1 to 50 alphanumeric or '-_.'
-	// characters.
+	// optional.
+	//
+	// If used, this parameter must contain 1 to 50 alphanumeric or '-_.' characters.
 	CreatorRequestId *string
 
 	noSmithyDocumentSerde
@@ -107,25 +109,25 @@ func (c *Client) addOperationCreateBackupPlanMiddlewares(stack *middleware.Stack
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -140,13 +142,16 @@ func (c *Client) addOperationCreateBackupPlanMiddlewares(stack *middleware.Stack
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpCreateBackupPlanValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateBackupPlan(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

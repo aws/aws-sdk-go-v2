@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/backup/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -15,6 +14,7 @@ import (
 // This is a request for a summary of backup jobs created or running within the
 // most recent 30 days. You can include parameters AccountID, State, ResourceType,
 // MessageCategory, AggregationPeriod, MaxResults, or NextToken to filter results.
+//
 // This request returns a summary that contains Region, Account, State,
 // ResourceType, MessageCategory, StartTime, EndTime, and Count of included jobs.
 func (c *Client) ListBackupJobSummaries(ctx context.Context, params *ListBackupJobSummariesInput, optFns ...func(*Options)) (*ListBackupJobSummariesOutput, error) {
@@ -34,31 +34,45 @@ func (c *Client) ListBackupJobSummaries(ctx context.Context, params *ListBackupJ
 
 type ListBackupJobSummariesInput struct {
 
-	// Returns the job count for the specified account. If the request is sent from a
-	// member account or an account not part of Amazon Web Services Organizations, jobs
-	// within requestor's account will be returned. Root, admin, and delegated
-	// administrator accounts can use the value ANY to return job counts from every
-	// account in the organization. AGGREGATE_ALL aggregates job counts from all
-	// accounts within the authenticated organization, then returns the sum.
+	// Returns the job count for the specified account.
+	//
+	// If the request is sent from a member account or an account not part of Amazon
+	// Web Services Organizations, jobs within requestor's account will be returned.
+	//
+	// Root, admin, and delegated administrator accounts can use the value ANY to
+	// return job counts from every account in the organization.
+	//
+	// AGGREGATE_ALL aggregates job counts from all accounts within the authenticated
+	// organization, then returns the sum.
 	AccountId *string
 
-	// This is the period that sets the boundaries for returned results. Acceptable
-	// values include
+	// This is the period that sets the boundaries for returned results.
+	//
+	// Acceptable values include
+	//
 	//   - ONE_DAY for daily job count for the prior 14 days.
+	//
 	//   - SEVEN_DAYS for the aggregated job count for the prior 7 days.
+	//
 	//   - FOURTEEN_DAYS for aggregated job count for prior 14 days.
 	AggregationPeriod types.AggregationPeriod
 
-	// This parameter sets the maximum number of items to be returned. The value is an
-	// integer. Range of accepted values is from 1 to 500.
+	// This parameter sets the maximum number of items to be returned.
+	//
+	// The value is an integer. Range of accepted values is from 1 to 500.
 	MaxResults *int32
 
 	// This parameter returns the job count for the specified message category.
+	//
 	// Example accepted strings include AccessDenied , Success , and InvalidParameters
-	// . See Monitoring (https://docs.aws.amazon.com/aws-backup/latest/devguide/monitoring.html)
-	// for a list of accepted MessageCategory strings. The the value ANY returns count
-	// of all message categories. AGGREGATE_ALL aggregates job counts for all message
-	// categories and returns the sum.
+	// . See [Monitoring]for a list of accepted MessageCategory strings.
+	//
+	// The the value ANY returns count of all message categories.
+	//
+	// AGGREGATE_ALL aggregates job counts for all message categories and returns the
+	// sum.
+	//
+	// [Monitoring]: https://docs.aws.amazon.com/aws-backup/latest/devguide/monitoring.html
 	MessageCategory *string
 
 	// The next item following a partial list of returned resources. For example, if a
@@ -68,17 +82,33 @@ type ListBackupJobSummariesInput struct {
 	NextToken *string
 
 	// Returns the job count for the specified resource type. Use request
-	// GetSupportedResourceTypes to obtain strings for supported resource types. The
-	// the value ANY returns count of all resource types. AGGREGATE_ALL aggregates job
-	// counts for all resource types and returns the sum. The type of Amazon Web
-	// Services resource to be backed up; for example, an Amazon Elastic Block Store
-	// (Amazon EBS) volume or an Amazon Relational Database Service (Amazon RDS)
-	// database.
+	// GetSupportedResourceTypes to obtain strings for supported resource types.
+	//
+	// The the value ANY returns count of all resource types.
+	//
+	// AGGREGATE_ALL aggregates job counts for all resource types and returns the sum.
+	//
+	// The type of Amazon Web Services resource to be backed up; for example, an
+	// Amazon Elastic Block Store (Amazon EBS) volume or an Amazon Relational Database
+	// Service (Amazon RDS) database.
 	ResourceType *string
 
-	// This parameter returns the job count for jobs with the specified state. The the
-	// value ANY returns count of all states. AGGREGATE_ALL aggregates job counts for
-	// all states and returns the sum.
+	// This parameter returns the job count for jobs with the specified state.
+	//
+	// The the value ANY returns count of all states.
+	//
+	// AGGREGATE_ALL aggregates job counts for all states and returns the sum.
+	//
+	// Completed with issues is a status found only in the Backup console. For API,
+	// this status refers to jobs with a state of COMPLETED and a MessageCategory with
+	// a value other than SUCCESS ; that is, the status is completed but comes with a
+	// status message. To obtain the job count for Completed with issues , run two GET
+	// requests, and subtract the second, smaller number:
+	//
+	// GET /audit/backup-job-summaries?AggregationPeriod=FOURTEEN_DAYS&State=COMPLETED
+	//
+	// GET
+	// /audit/backup-job-summaries?AggregationPeriod=FOURTEEN_DAYS&MessageCategory=SUCCESS&State=COMPLETED
 	State types.BackupJobStatus
 
 	noSmithyDocumentSerde
@@ -87,8 +117,11 @@ type ListBackupJobSummariesInput struct {
 type ListBackupJobSummariesOutput struct {
 
 	// This is the period that sets the boundaries for returned results.
+	//
 	//   - ONE_DAY for daily job count for the prior 14 days.
+	//
 	//   - SEVEN_DAYS for the aggregated job count for the prior 7 days.
+	//
 	//   - FOURTEEN_DAYS for aggregated job count for prior 14 days.
 	AggregationPeriod *string
 
@@ -130,25 +163,25 @@ func (c *Client) addOperationListBackupJobSummariesMiddlewares(stack *middleware
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -163,10 +196,13 @@ func (c *Client) addOperationListBackupJobSummariesMiddlewares(stack *middleware
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListBackupJobSummaries(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -195,8 +231,9 @@ var _ ListBackupJobSummariesAPIClient = (*Client)(nil)
 // ListBackupJobSummariesPaginatorOptions is the paginator options for
 // ListBackupJobSummaries
 type ListBackupJobSummariesPaginatorOptions struct {
-	// This parameter sets the maximum number of items to be returned. The value is an
-	// integer. Range of accepted values is from 1 to 500.
+	// This parameter sets the maximum number of items to be returned.
+	//
+	// The value is an integer. Range of accepted values is from 1 to 500.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

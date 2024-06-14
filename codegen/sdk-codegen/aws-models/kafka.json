@@ -260,6 +260,28 @@
                 "smithy.api#documentation": "<p>The distribution of broker nodes across Availability Zones. This is an optional parameter. If you don't specify it, Amazon MSK gives it the value DEFAULT. You can also explicitly set this parameter to the value DEFAULT. No other values are currently allowed.</p>\n         <p>Amazon MSK distributes the broker nodes evenly across the Availability Zones that correspond to the subnets you provide when you create the cluster.</p>"
             }
         },
+        "com.amazonaws.kafka#BrokerCountUpdateInfo": {
+            "type": "structure",
+            "members": {
+                "CreatedBrokerIds": {
+                    "target": "com.amazonaws.kafka#__listOf__double",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Kafka Broker IDs of brokers being created.</p>",
+                        "smithy.api#jsonName": "createdBrokerIds"
+                    }
+                },
+                "DeletedBrokerIds": {
+                    "target": "com.amazonaws.kafka#__listOf__double",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Kafka Broker IDs of brokers being deleted.</p>",
+                        "smithy.api#jsonName": "deletedBrokerIds"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information regarding UpdateBrokerCount.</p>"
+            }
+        },
         "com.amazonaws.kafka#BrokerEBSVolumeInfo": {
             "type": "structure",
             "members": {
@@ -1499,6 +1521,21 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Details about consumer group replication.</p>"
+            }
+        },
+        "com.amazonaws.kafka#ControllerNodeInfo": {
+            "type": "structure",
+            "members": {
+                "Endpoints": {
+                    "target": "com.amazonaws.kafka#__listOf__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Endpoints for accessing the Controller.</p>",
+                        "smithy.api#jsonName": "endpoints"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Controller node information.</p>"
             }
         },
         "com.amazonaws.kafka#CreateCluster": {
@@ -6375,6 +6412,13 @@
                         "smithy.api#documentation": "<p>This controls storage mode for supported storage tiers.</p>",
                         "smithy.api#jsonName": "storageMode"
                     }
+                },
+                "BrokerCountUpdateInfo": {
+                    "target": "com.amazonaws.kafka#BrokerCountUpdateInfo",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Describes brokers being changed during a broker count update.</p>",
+                        "smithy.api#jsonName": "brokerCountUpdateInfo"
+                    }
                 }
             },
             "traits": {
@@ -6430,6 +6474,13 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The broker node info.</p>",
                         "smithy.api#jsonName": "brokerNodeInfo"
+                    }
+                },
+                "ControllerNodeInfo": {
+                    "target": "com.amazonaws.kafka#ControllerNodeInfo",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ControllerNodeInfo.</p>",
+                        "smithy.api#jsonName": "controllerNodeInfo"
                     }
                 },
                 "InstanceType": {
@@ -7145,6 +7196,41 @@
                 "smithy.api#documentation": "<p>Summarized information of replication between clusters.</p>"
             }
         },
+        "com.amazonaws.kafka#ReplicationStartingPosition": {
+            "type": "structure",
+            "members": {
+                "Type": {
+                    "target": "com.amazonaws.kafka#ReplicationStartingPositionType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of replication starting position.</p>",
+                        "smithy.api#jsonName": "type"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Configuration for specifying the position in the topics to start replicating from.</p>"
+            }
+        },
+        "com.amazonaws.kafka#ReplicationStartingPositionType": {
+            "type": "enum",
+            "members": {
+                "LATEST": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "LATEST"
+                    }
+                },
+                "EARLIEST": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EARLIEST"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The type of replication starting position.</p>"
+            }
+        },
         "com.amazonaws.kafka#ReplicationStateInfo": {
             "type": "structure",
             "members": {
@@ -7651,6 +7737,13 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Whether to periodically check for new topics and partitions.</p>",
                         "smithy.api#jsonName": "detectAndCopyNewTopics"
+                    }
+                },
+                "StartingPosition": {
+                    "target": "com.amazonaws.kafka#ReplicationStartingPosition",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Configuration for specifying the position in the topics to start replicating from.</p>",
+                        "smithy.api#jsonName": "startingPosition"
                     }
                 },
                 "TopicsToExclude": {
@@ -9489,6 +9582,12 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.kafka#VpcConnection"
+            }
+        },
+        "com.amazonaws.kafka#__listOf__double": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.kafka#__double"
             }
         },
         "com.amazonaws.kafka#__listOf__string": {

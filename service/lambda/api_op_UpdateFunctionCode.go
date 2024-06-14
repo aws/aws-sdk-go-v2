@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/lambda/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -14,19 +13,28 @@ import (
 
 // Updates a Lambda function's code. If code signing is enabled for the function,
 // the code package must be signed by a trusted publisher. For more information,
-// see Configuring code signing for Lambda (https://docs.aws.amazon.com/lambda/latest/dg/configuration-codesigning.html)
-// . If the function's package type is Image , then you must specify the code
-// package in ImageUri as the URI of a container image (https://docs.aws.amazon.com/lambda/latest/dg/lambda-images.html)
-// in the Amazon ECR registry. If the function's package type is Zip , then you
-// must specify the deployment package as a .zip file archive (https://docs.aws.amazon.com/lambda/latest/dg/gettingstarted-package.html#gettingstarted-package-zip)
-// . Enter the Amazon S3 bucket and key of the code .zip file location. You can
-// also provide the function code inline using the ZipFile field. The code in the
-// deployment package must be compatible with the target instruction set
-// architecture of the function ( x86-64 or arm64 ). The function's code is locked
-// when you publish a version. You can't modify the code of a published version,
-// only the unpublished version. For a function defined as a container image,
-// Lambda resolves the image tag to an image digest. In Amazon ECR, if you update
-// the image tag to a new image, Lambda does not automatically update the function.
+// see [Configuring code signing for Lambda].
+//
+// If the function's package type is Image , then you must specify the code package
+// in ImageUri as the URI of a [container image] in the Amazon ECR registry.
+//
+// If the function's package type is Zip , then you must specify the deployment
+// package as a [.zip file archive]. Enter the Amazon S3 bucket and key of the code .zip file
+// location. You can also provide the function code inline using the ZipFile field.
+//
+// The code in the deployment package must be compatible with the target
+// instruction set architecture of the function ( x86-64 or arm64 ).
+//
+// The function's code is locked when you publish a version. You can't modify the
+// code of a published version, only the unpublished version.
+//
+// For a function defined as a container image, Lambda resolves the image tag to
+// an image digest. In Amazon ECR, if you update the image tag to a new image,
+// Lambda does not automatically update the function.
+//
+// [.zip file archive]: https://docs.aws.amazon.com/lambda/latest/dg/gettingstarted-package.html#gettingstarted-package-zip
+// [Configuring code signing for Lambda]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-codesigning.html
+// [container image]: https://docs.aws.amazon.com/lambda/latest/dg/lambda-images.html
 func (c *Client) UpdateFunctionCode(ctx context.Context, params *UpdateFunctionCodeInput, optFns ...func(*Options)) (*UpdateFunctionCodeOutput, error) {
 	if params == nil {
 		params = &UpdateFunctionCodeInput{}
@@ -44,10 +52,16 @@ func (c *Client) UpdateFunctionCode(ctx context.Context, params *UpdateFunctionC
 
 type UpdateFunctionCodeInput struct {
 
-	// The name of the Lambda function. Name formats
+	// The name or ARN of the Lambda function.
+	//
+	// Name formats
+	//
 	//   - Function name – my-function .
+	//
 	//   - Function ARN – arn:aws:lambda:us-west-2:123456789012:function:my-function .
+	//
 	//   - Partial ARN – 123456789012:function:my-function .
+	//
 	// The length constraint applies only to the full ARN. If you specify only the
 	// function name, it is limited to 64 characters in length.
 	//
@@ -68,7 +82,7 @@ type UpdateFunctionCodeInput struct {
 	ImageUri *string
 
 	// Set to true to publish a new version of the function after updating the code.
-	// This has the same effect as calling PublishVersion separately.
+	// This has the same effect as calling PublishVersionseparately.
 	Publish bool
 
 	// Update the function only if the revision ID matches the ID that's specified.
@@ -116,16 +130,20 @@ type UpdateFunctionCodeOutput struct {
 	// The function's description.
 	Description *string
 
-	// The function's environment variables (https://docs.aws.amazon.com/lambda/latest/dg/configuration-envvars.html)
-	// . Omitted from CloudTrail logs.
+	// The function's [environment variables]. Omitted from CloudTrail logs.
+	//
+	// [environment variables]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-envvars.html
 	Environment *types.EnvironmentResponse
 
-	// The size of the function’s /tmp directory in MB. The default value is 512, but
-	// it can be any whole number between 512 and 10,240 MB.
+	// The size of the function's /tmp directory in MB. The default value is 512, but
+	// can be any whole number between 512 and 10,240 MB. For more information, see [Configuring ephemeral storage (console)].
+	//
+	// [Configuring ephemeral storage (console)]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-function-common.html#configuration-ephemeral-storage
 	EphemeralStorage *types.EphemeralStorage
 
-	// Connection settings for an Amazon EFS file system (https://docs.aws.amazon.com/lambda/latest/dg/configuration-filesystem.html)
-	// .
+	// Connection settings for an [Amazon EFS file system].
+	//
+	// [Amazon EFS file system]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-filesystem.html
 	FileSystemConfigs []types.FileSystemConfig
 
 	// The function's Amazon Resource Name (ARN).
@@ -140,14 +158,18 @@ type UpdateFunctionCodeOutput struct {
 	// The function's image configuration values.
 	ImageConfigResponse *types.ImageConfigResponse
 
-	// The KMS key that's used to encrypt the function's environment variables (https://docs.aws.amazon.com/lambda/latest/dg/configuration-envvars.html#configuration-envvars-encryption)
-	// . When Lambda SnapStart (https://docs.aws.amazon.com/lambda/latest/dg/snapstart-security.html)
-	// is activated, this key is also used to encrypt the function's snapshot. This key
-	// is returned only if you've configured a customer managed key.
+	// The KMS key that's used to encrypt the function's [environment variables]. When [Lambda SnapStart] is activated, this
+	// key is also used to encrypt the function's snapshot. This key is returned only
+	// if you've configured a customer managed key.
+	//
+	// [Lambda SnapStart]: https://docs.aws.amazon.com/lambda/latest/dg/snapstart-security.html
+	// [environment variables]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-envvars.html#configuration-envvars-encryption
 	KMSKeyArn *string
 
-	// The date and time that the function was last updated, in ISO-8601 format (https://www.w3.org/TR/NOTE-datetime)
+	// The date and time that the function was last updated, in [ISO-8601 format]
 	// (YYYY-MM-DDThh:mm:ss.sTZD).
+	//
+	// [ISO-8601 format]: https://www.w3.org/TR/NOTE-datetime
 	LastModified *string
 
 	// The status of the last update that was performed on the function. This is first
@@ -160,8 +182,9 @@ type UpdateFunctionCodeOutput struct {
 	// The reason code for the last update that was performed on the function.
 	LastUpdateStatusReasonCode types.LastUpdateStatusReasonCode
 
-	// The function's layers (https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html)
-	// .
+	// The function's [layers].
+	//
+	// [layers]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-layers.html
 	Layers []types.Layer
 
 	// The function's Amazon CloudWatch Logs configuration settings.
@@ -183,11 +206,13 @@ type UpdateFunctionCodeOutput struct {
 	// The function's execution role.
 	Role *string
 
-	// The identifier of the function's runtime (https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html)
-	// . Runtime is required if the deployment package is a .zip file archive. The
-	// following list includes deprecated runtimes. For more information, see Runtime
-	// deprecation policy (https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html#runtime-support-policy)
-	// .
+	// The identifier of the function's [runtime]. Runtime is required if the deployment
+	// package is a .zip file archive.
+	//
+	// The following list includes deprecated runtimes. For more information, see [Runtime deprecation policy].
+	//
+	// [runtime]: https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html
+	// [Runtime deprecation policy]: https://docs.aws.amazon.com/lambda/latest/dg/lambda-runtimes.html#runtime-support-policy
 	Runtime types.Runtime
 
 	// The ARN of the runtime and any errors that occured.
@@ -201,8 +226,9 @@ type UpdateFunctionCodeOutput struct {
 
 	// Set ApplyOn to PublishedVersions to create a snapshot of the initialized
 	// execution environment when you publish a function version. For more information,
-	// see Improving startup performance with Lambda SnapStart (https://docs.aws.amazon.com/lambda/latest/dg/snapstart.html)
-	// .
+	// see [Improving startup performance with Lambda SnapStart].
+	//
+	// [Improving startup performance with Lambda SnapStart]: https://docs.aws.amazon.com/lambda/latest/dg/snapstart.html
 	SnapStart *types.SnapStartResponse
 
 	// The current state of the function. When the state is Inactive , you can
@@ -257,25 +283,25 @@ func (c *Client) addOperationUpdateFunctionCodeMiddlewares(stack *middleware.Sta
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -290,13 +316,16 @@ func (c *Client) addOperationUpdateFunctionCodeMiddlewares(stack *middleware.Sta
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpUpdateFunctionCodeValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateFunctionCode(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

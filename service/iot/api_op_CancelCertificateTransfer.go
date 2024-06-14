@@ -6,20 +6,23 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Cancels a pending transfer for the specified certificate. Note Only the
-// transfer source account can use this operation to cancel a transfer. (Transfer
-// destinations can use RejectCertificateTransfer instead.) After transfer, IoT
-// returns the certificate to the source account in the INACTIVE state. After the
+// Cancels a pending transfer for the specified certificate.
+//
+// Note Only the transfer source account can use this operation to cancel a
+// transfer. (Transfer destinations can use RejectCertificateTransferinstead.) After transfer, IoT returns
+// the certificate to the source account in the INACTIVE state. After the
 // destination account has accepted the transfer, the transfer cannot be cancelled.
-// After a certificate transfer is cancelled, the status of the certificate changes
-// from PENDING_TRANSFER to INACTIVE. Requires permission to access the
-// CancelCertificateTransfer (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
-// action.
+//
+// After a certificate transfer is cancelled, the status of the certificate
+// changes from PENDING_TRANSFER to INACTIVE.
+//
+// Requires permission to access the [CancelCertificateTransfer] action.
+//
+// [CancelCertificateTransfer]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions
 func (c *Client) CancelCertificateTransfer(ctx context.Context, params *CancelCertificateTransferInput, optFns ...func(*Options)) (*CancelCertificateTransferOutput, error) {
 	if params == nil {
 		params = &CancelCertificateTransferInput{}
@@ -76,25 +79,25 @@ func (c *Client) addOperationCancelCertificateTransferMiddlewares(stack *middlew
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -109,13 +112,16 @@ func (c *Client) addOperationCancelCertificateTransferMiddlewares(stack *middlew
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpCancelCertificateTransferValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCancelCertificateTransfer(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

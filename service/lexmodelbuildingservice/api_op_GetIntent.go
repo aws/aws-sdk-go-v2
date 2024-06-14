@@ -6,16 +6,17 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/lexmodelbuildingservice/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
-// Returns information about an intent. In addition to the intent name, you must
-// specify the intent version. This operation requires permissions to perform the
-// lex:GetIntent action.
+//	Returns information about an intent. In addition to the intent name, you must
+//
+// specify the intent version.
+//
+// This operation requires permissions to perform the lex:GetIntent action.
 func (c *Client) GetIntent(ctx context.Context, params *GetIntentInput, optFns ...func(*Options)) (*GetIntentOutput, error) {
 	if params == nil {
 		params = &GetIntentInput{}
@@ -56,7 +57,7 @@ type GetIntentOutput struct {
 	ConclusionStatement *types.Statement
 
 	// If defined in the bot, Amazon Lex uses prompt to confirm the intent before
-	// fulfilling the user's request. For more information, see PutIntent .
+	// fulfilling the user's request. For more information, see PutIntent.
 	ConfirmationPrompt *types.Prompt
 
 	// The date that the intent was created.
@@ -66,14 +67,14 @@ type GetIntentOutput struct {
 	Description *string
 
 	// If defined in the bot, Amazon Amazon Lex invokes this Lambda function for each
-	// user input. For more information, see PutIntent .
+	// user input. For more information, see PutIntent.
 	DialogCodeHook *types.CodeHook
 
 	// If defined in the bot, Amazon Lex uses this prompt to solicit additional user
-	// activity after the intent is fulfilled. For more information, see PutIntent .
+	// activity after the intent is fulfilled. For more information, see PutIntent.
 	FollowUpPrompt *types.FollowUpPrompt
 
-	// Describes how the intent is fulfilled. For more information, see PutIntent .
+	// Describes how the intent is fulfilled. For more information, see PutIntent.
 	FulfillmentActivity *types.FulfillmentActivity
 
 	// An array of InputContext objects that lists the contexts that must be active
@@ -139,25 +140,25 @@ func (c *Client) addOperationGetIntentMiddlewares(stack *middleware.Stack, optio
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -172,13 +173,16 @@ func (c *Client) addOperationGetIntentMiddlewares(stack *middleware.Stack, optio
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpGetIntentValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetIntent(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

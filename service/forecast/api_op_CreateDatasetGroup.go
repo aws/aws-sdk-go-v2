@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/forecast/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -14,15 +13,20 @@ import (
 
 // Creates a dataset group, which holds a collection of related datasets. You can
 // add datasets to the dataset group when you create the dataset group, or later by
-// using the UpdateDatasetGroup (https://docs.aws.amazon.com/forecast/latest/dg/API_UpdateDatasetGroup.html)
-// operation. After creating a dataset group and adding datasets, you use the
-// dataset group when you create a predictor. For more information, see Dataset
-// groups (https://docs.aws.amazon.com/forecast/latest/dg/howitworks-datasets-groups.html)
-// . To get a list of all your datasets groups, use the ListDatasetGroups (https://docs.aws.amazon.com/forecast/latest/dg/API_ListDatasetGroups.html)
-// operation. The Status of a dataset group must be ACTIVE before you can use the
-// dataset group to create a predictor. To get the status, use the
-// DescribeDatasetGroup (https://docs.aws.amazon.com/forecast/latest/dg/API_DescribeDatasetGroup.html)
-// operation.
+// using the [UpdateDatasetGroup]operation.
+//
+// After creating a dataset group and adding datasets, you use the dataset group
+// when you create a predictor. For more information, see [Dataset groups].
+//
+// To get a list of all your datasets groups, use the [ListDatasetGroups] operation.
+//
+// The Status of a dataset group must be ACTIVE before you can use the dataset
+// group to create a predictor. To get the status, use the [DescribeDatasetGroup]operation.
+//
+// [ListDatasetGroups]: https://docs.aws.amazon.com/forecast/latest/dg/API_ListDatasetGroups.html
+// [DescribeDatasetGroup]: https://docs.aws.amazon.com/forecast/latest/dg/API_DescribeDatasetGroup.html
+// [UpdateDatasetGroup]: https://docs.aws.amazon.com/forecast/latest/dg/API_UpdateDatasetGroup.html
+// [Dataset groups]: https://docs.aws.amazon.com/forecast/latest/dg/howitworks-datasets-groups.html
 func (c *Client) CreateDatasetGroup(ctx context.Context, params *CreateDatasetGroupInput, optFns ...func(*Options)) (*CreateDatasetGroupOutput, error) {
 	if params == nil {
 		params = &CreateDatasetGroupInput{}
@@ -47,13 +51,16 @@ type CreateDatasetGroupInput struct {
 
 	// The domain associated with the dataset group. When you add a dataset to a
 	// dataset group, this value and the value specified for the Domain parameter of
-	// the CreateDataset (https://docs.aws.amazon.com/forecast/latest/dg/API_CreateDataset.html)
-	// operation must match. The Domain and DatasetType that you choose determine the
-	// fields that must be present in training data that you import to a dataset. For
-	// example, if you choose the RETAIL domain and TARGET_TIME_SERIES as the
-	// DatasetType , Amazon Forecast requires that item_id , timestamp , and demand
-	// fields are present in your data. For more information, see Dataset groups (https://docs.aws.amazon.com/forecast/latest/dg/howitworks-datasets-groups.html)
-	// .
+	// the [CreateDataset]operation must match.
+	//
+	// The Domain and DatasetType that you choose determine the fields that must be
+	// present in training data that you import to a dataset. For example, if you
+	// choose the RETAIL domain and TARGET_TIME_SERIES as the DatasetType , Amazon
+	// Forecast requires that item_id , timestamp , and demand fields are present in
+	// your data. For more information, see [Dataset groups].
+	//
+	// [CreateDataset]: https://docs.aws.amazon.com/forecast/latest/dg/API_CreateDataset.html
+	// [Dataset groups]: https://docs.aws.amazon.com/forecast/latest/dg/howitworks-datasets-groups.html
 	//
 	// This member is required.
 	Domain types.Domain
@@ -64,17 +71,26 @@ type CreateDatasetGroupInput struct {
 
 	// The optional metadata that you apply to the dataset group to help you
 	// categorize and organize them. Each tag consists of a key and an optional value,
-	// both of which you define. The following basic restrictions apply to tags:
+	// both of which you define.
+	//
+	// The following basic restrictions apply to tags:
+	//
 	//   - Maximum number of tags per resource - 50.
+	//
 	//   - For each resource, each tag key must be unique, and each tag key can have
 	//   only one value.
+	//
 	//   - Maximum key length - 128 Unicode characters in UTF-8.
+	//
 	//   - Maximum value length - 256 Unicode characters in UTF-8.
+	//
 	//   - If your tagging schema is used across multiple services and resources,
 	//   remember that other services may have restrictions on allowed characters.
 	//   Generally allowed characters are: letters, numbers, and spaces representable in
 	//   UTF-8, and the following characters: + - = . _ : / @.
+	//
 	//   - Tag keys and values are case sensitive.
+	//
 	//   - Do not use aws: , AWS: , or any upper or lowercase combination of such as a
 	//   prefix for keys as it is reserved for Amazon Web Services use. You cannot edit
 	//   or delete tag keys with this prefix. Values can have this prefix. If a tag value
@@ -119,25 +135,25 @@ func (c *Client) addOperationCreateDatasetGroupMiddlewares(stack *middleware.Sta
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -152,13 +168,16 @@ func (c *Client) addOperationCreateDatasetGroupMiddlewares(stack *middleware.Sta
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpCreateDatasetGroupValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateDatasetGroup(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

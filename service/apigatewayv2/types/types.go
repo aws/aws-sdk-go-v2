@@ -54,9 +54,9 @@ type Api struct {
 	// The API ID.
 	ApiId *string
 
-	// An API key selection expression. Supported only for WebSocket APIs. See API Key
-	// Selection Expressions (https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-websocket-api-selection-expressions.html#apigateway-websocket-api-apikey-selection-expressions)
-	// .
+	// An API key selection expression. Supported only for WebSocket APIs. See [API Key Selection Expressions].
+	//
+	// [API Key Selection Expressions]: https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-websocket-api-selection-expressions.html#apigateway-websocket-api-apikey-selection-expressions
 	ApiKeySelectionExpression *string
 
 	// A CORS configuration. Supported only for HTTP APIs.
@@ -138,8 +138,9 @@ type Authorizer struct {
 
 	// Specifies the format of the payload sent to an HTTP API Lambda authorizer.
 	// Required for HTTP API Lambda authorizers. Supported values are 1.0 and 2.0. To
-	// learn more, see Working with AWS Lambda authorizers for HTTP APIs (https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-lambda-authorizer.html)
-	// .
+	// learn more, see [Working with AWS Lambda authorizers for HTTP APIs].
+	//
+	// [Working with AWS Lambda authorizers for HTTP APIs]: https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-lambda-authorizer.html
 	AuthorizerPayloadFormatVersion *string
 
 	// The time to live (TTL) for cached authorizer results, in seconds. If it equals
@@ -167,15 +168,17 @@ type Authorizer struct {
 
 	// Specifies whether a Lambda authorizer returns a response in a simple format. If
 	// enabled, the Lambda authorizer can return a boolean value instead of an IAM
-	// policy. Supported only for HTTP APIs. To learn more, see Working with AWS
-	// Lambda authorizers for HTTP APIs (https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-lambda-authorizer.html)
+	// policy. Supported only for HTTP APIs. To learn more, see [Working with AWS Lambda authorizers for HTTP APIs]
+	//
+	// [Working with AWS Lambda authorizers for HTTP APIs]: https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-lambda-authorizer.html
 	EnableSimpleResponses *bool
 
-	// The identity source for which authorization is requested. For a REQUEST
-	// authorizer, this is optional. The value is a set of one or more mapping
-	// expressions of the specified request parameters. The identity source can be
-	// headers, query string parameters, stage variables, and context parameters. For
-	// example, if an Auth header and a Name query string parameter are defined as
+	// The identity source for which authorization is requested.
+	//
+	// For a REQUEST authorizer, this is optional. The value is a set of one or more
+	// mapping expressions of the specified request parameters. The identity source can
+	// be headers, query string parameters, stage variables, and context parameters.
+	// For example, if an Auth header and a Name query string parameter are defined as
 	// identity sources, this value is route.request.header.Auth,
 	// route.request.querystring.Name for WebSocket APIs. For HTTP APIs, use selection
 	// expressions prefixed with $, for example, $request.header.Auth,
@@ -185,12 +188,14 @@ type Authorizer struct {
 	// when this is true does the authorizer invoke the authorizer Lambda function.
 	// Otherwise, it returns a 401 Unauthorized response without calling the Lambda
 	// function. For HTTP APIs, identity sources are also used as the cache key when
-	// caching is enabled. To learn more, see Working with AWS Lambda authorizers for
-	// HTTP APIs (https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-lambda-authorizer.html)
-	// . For JWT, a single entry that specifies where to extract the JSON Web Token
+	// caching is enabled. To learn more, see [Working with AWS Lambda authorizers for HTTP APIs].
+	//
+	// For JWT, a single entry that specifies where to extract the JSON Web Token
 	// (JWT) from inbound requests. Currently only header-based and query
 	// parameter-based selections are supported, for example
 	// $request.header.Authorization.
+	//
+	// [Working with AWS Lambda authorizers for HTTP APIs]: https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-lambda-authorizer.html
 	IdentitySource []string
 
 	// The validation expression does not apply to the REQUEST authorizer.
@@ -203,9 +208,10 @@ type Authorizer struct {
 	noSmithyDocumentSerde
 }
 
-// Represents a CORS configuration. Supported only for HTTP APIs. See Configuring
-// CORS (https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-cors.html)
-// for more information.
+// Represents a CORS configuration. Supported only for HTTP APIs. See [Configuring CORS] for more
+// information.
+//
+// [Configuring CORS]: https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-cors.html
 type Cors struct {
 
 	// Specifies whether credentials are included in the CORS request. Supported only
@@ -344,12 +350,17 @@ type Integration struct {
 
 	// Supported only for WebSocket APIs. Specifies how to handle response payload
 	// content type conversions. Supported values are CONVERT_TO_BINARY and
-	// CONVERT_TO_TEXT, with the following behaviors: CONVERT_TO_BINARY: Converts a
-	// response payload from a Base64-encoded string to the corresponding binary blob.
+	// CONVERT_TO_TEXT, with the following behaviors:
+	//
+	// CONVERT_TO_BINARY: Converts a response payload from a Base64-encoded string to
+	// the corresponding binary blob.
+	//
 	// CONVERT_TO_TEXT: Converts a response payload from a binary blob to a
-	// Base64-encoded string. If this property is not defined, the response payload
-	// will be passed through from the integration response to the route response or
-	// method response without modification.
+	// Base64-encoded string.
+	//
+	// If this property is not defined, the response payload will be passed through
+	// from the integration response to the route response or method response without
+	// modification.
 	ContentHandlingStrategy ContentHandlingStrategy
 
 	// Specifies the credentials required for the integration, if any. For AWS
@@ -370,48 +381,68 @@ type Integration struct {
 	IntegrationMethod *string
 
 	// The integration response selection expression for the integration. Supported
-	// only for WebSocket APIs. See Integration Response Selection Expressions (https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-websocket-api-selection-expressions.html#apigateway-websocket-api-integration-response-selection-expressions)
-	// .
+	// only for WebSocket APIs. See [Integration Response Selection Expressions].
+	//
+	// [Integration Response Selection Expressions]: https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-websocket-api-selection-expressions.html#apigateway-websocket-api-integration-response-selection-expressions
 	IntegrationResponseSelectionExpression *string
 
 	// Supported only for HTTP API AWS_PROXY integrations. Specifies the AWS service
-	// action to invoke. To learn more, see Integration subtype reference (https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-develop-integrations-aws-services-reference.html)
-	// .
+	// action to invoke. To learn more, see [Integration subtype reference].
+	//
+	// [Integration subtype reference]: https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-develop-integrations-aws-services-reference.html
 	IntegrationSubtype *string
 
-	// The integration type of an integration. One of the following: AWS: for
-	// integrating the route or method request with an AWS service action, including
-	// the Lambda function-invoking action. With the Lambda function-invoking action,
-	// this is referred to as the Lambda custom integration. With any other AWS service
-	// action, this is known as AWS integration. Supported only for WebSocket APIs.
-	// AWS_PROXY: for integrating the route or method request with a Lambda function or
-	// other AWS service action. This integration is also referred to as a Lambda proxy
-	// integration. HTTP: for integrating the route or method request with an HTTP
-	// endpoint. This integration is also referred to as the HTTP custom integration.
-	// Supported only for WebSocket APIs. HTTP_PROXY: for integrating the route or
-	// method request with an HTTP endpoint, with the client request passed through
-	// as-is. This is also referred to as HTTP proxy integration. MOCK: for integrating
-	// the route or method request with API Gateway as a "loopback" endpoint without
-	// invoking any backend. Supported only for WebSocket APIs.
+	// The integration type of an integration. One of the following:
+	//
+	// AWS: for integrating the route or method request with an AWS service action,
+	// including the Lambda function-invoking action. With the Lambda function-invoking
+	// action, this is referred to as the Lambda custom integration. With any other AWS
+	// service action, this is known as AWS integration. Supported only for WebSocket
+	// APIs.
+	//
+	// AWS_PROXY: for integrating the route or method request with a Lambda function
+	// or other AWS service action. This integration is also referred to as a Lambda
+	// proxy integration.
+	//
+	// HTTP: for integrating the route or method request with an HTTP endpoint. This
+	// integration is also referred to as the HTTP custom integration. Supported only
+	// for WebSocket APIs.
+	//
+	// HTTP_PROXY: for integrating the route or method request with an HTTP endpoint,
+	// with the client request passed through as-is. This is also referred to as HTTP
+	// proxy integration.
+	//
+	// MOCK: for integrating the route or method request with API Gateway as a
+	// "loopback" endpoint without invoking any backend. Supported only for WebSocket
+	// APIs.
 	IntegrationType IntegrationType
 
-	// For a Lambda integration, specify the URI of a Lambda function. For an HTTP
-	// integration, specify a fully-qualified URL. For an HTTP API private integration,
-	// specify the ARN of an Application Load Balancer listener, Network Load Balancer
-	// listener, or AWS Cloud Map service. If you specify the ARN of an AWS Cloud Map
-	// service, API Gateway uses DiscoverInstances to identify resources. You can use
-	// query parameters to target specific resources. To learn more, see
-	// DiscoverInstances (https://docs.aws.amazon.com/cloud-map/latest/api/API_DiscoverInstances.html)
-	// . For private integrations, all resources must be owned by the same AWS account.
+	// For a Lambda integration, specify the URI of a Lambda function.
+	//
+	// For an HTTP integration, specify a fully-qualified URL.
+	//
+	// For an HTTP API private integration, specify the ARN of an Application Load
+	// Balancer listener, Network Load Balancer listener, or AWS Cloud Map service. If
+	// you specify the ARN of an AWS Cloud Map service, API Gateway uses
+	// DiscoverInstances to identify resources. You can use query parameters to target
+	// specific resources. To learn more, see [DiscoverInstances]. For private integrations, all
+	// resources must be owned by the same AWS account.
+	//
+	// [DiscoverInstances]: https://docs.aws.amazon.com/cloud-map/latest/api/API_DiscoverInstances.html
 	IntegrationUri *string
 
 	// Specifies the pass-through behavior for incoming requests based on the
 	// Content-Type header in the request, and the available mapping templates
 	// specified as the requestTemplates property on the Integration resource. There
 	// are three valid values: WHEN_NO_MATCH, WHEN_NO_TEMPLATES, and NEVER. Supported
-	// only for WebSocket APIs. WHEN_NO_MATCH passes the request body for unmapped
-	// content types through to the integration backend without transformation. NEVER
-	// rejects unmapped content types with an HTTP 415 Unsupported Media Type response.
+	// only for WebSocket APIs.
+	//
+	// WHEN_NO_MATCH passes the request body for unmapped content types through to the
+	// integration backend without transformation.
+	//
+	// NEVER rejects unmapped content types with an HTTP 415 Unsupported Media Type
+	// response.
+	//
 	// WHEN_NO_TEMPLATES allows pass-through when the integration has no content types
 	// mapped to templates. However, if there is at least one content type defined,
 	// unmapped content types will be rejected with the same HTTP 415 Unsupported Media
@@ -429,19 +460,24 @@ type Integration struct {
 	// required by the backend. The method request parameter value must match the
 	// pattern of method.request.{location}.{name} , where {location} is querystring,
 	// path, or header; and {name} must be a valid and unique method request parameter
-	// name. For HTTP API integrations with a specified integrationSubtype, request
+	// name.
+	//
+	// For HTTP API integrations with a specified integrationSubtype, request
 	// parameters are a key-value map specifying parameters that are passed to
 	// AWS_PROXY integrations. You can provide static values, or map request data,
 	// stage variables, or context variables that are evaluated at runtime. To learn
-	// more, see Working with AWS service integrations for HTTP APIs (https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-develop-integrations-aws-services.html)
-	// . For HTTP API integrations, without a specified integrationSubtype request
+	// more, see [Working with AWS service integrations for HTTP APIs].
+	//
+	// For HTTP API integrations, without a specified integrationSubtype request
 	// parameters are a key-value map specifying how to transform HTTP requests before
 	// sending them to backend integrations. The key should follow the pattern
 	// <action>:<header|querystring|path>.<location>. The action can be append,
 	// overwrite or remove. For values, you can provide static values, or map request
 	// data, stage variables, or context variables that are evaluated at runtime. To
-	// learn more, see Transforming API requests and responses (https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-parameter-mapping.html)
-	// .
+	// learn more, see [Transforming API requests and responses].
+	//
+	// [Working with AWS service integrations for HTTP APIs]: https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-develop-integrations-aws-services.html
+	// [Transforming API requests and responses]: https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-parameter-mapping.html
 	RequestParameters map[string]string
 
 	// Represents a map of Velocity templates that are applied on the request payload
@@ -458,8 +494,9 @@ type Integration struct {
 	// <action>:<header>.<location> or overwrite.statuscode. The action can be append,
 	// overwrite or remove. The value can be a static value, or map to response data,
 	// stage variables, or context variables that are evaluated at runtime. To learn
-	// more, see Transforming API requests and responses (https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-parameter-mapping.html)
-	// .
+	// more, see [Transforming API requests and responses].
+	//
+	// [Transforming API requests and responses]: https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-parameter-mapping.html
 	ResponseParameters map[string]map[string]string
 
 	// The template selection expression for the integration. Supported only for
@@ -489,12 +526,17 @@ type IntegrationResponse struct {
 
 	// Supported only for WebSocket APIs. Specifies how to handle response payload
 	// content type conversions. Supported values are CONVERT_TO_BINARY and
-	// CONVERT_TO_TEXT, with the following behaviors: CONVERT_TO_BINARY: Converts a
-	// response payload from a Base64-encoded string to the corresponding binary blob.
+	// CONVERT_TO_TEXT, with the following behaviors:
+	//
+	// CONVERT_TO_BINARY: Converts a response payload from a Base64-encoded string to
+	// the corresponding binary blob.
+	//
 	// CONVERT_TO_TEXT: Converts a response payload from a binary blob to a
-	// Base64-encoded string. If this property is not defined, the response payload
-	// will be passed through from the integration response to the route response or
-	// method response without modification.
+	// Base64-encoded string.
+	//
+	// If this property is not defined, the response payload will be passed through
+	// from the integration response to the route response or method response without
+	// modification.
 	ContentHandlingStrategy ContentHandlingStrategy
 
 	// The integration response ID.
@@ -529,8 +571,10 @@ type IntegrationResponse struct {
 type JWTConfiguration struct {
 
 	// A list of the intended recipients of the JWT. A valid JWT must provide an aud
-	// that matches at least one entry in this list. See RFC 7519 (https://tools.ietf.org/html/rfc7519#section-4.1.3)
-	// . Supported only for HTTP APIs.
+	// that matches at least one entry in this list. See [RFC 7519]. Supported only for HTTP
+	// APIs.
+	//
+	// [RFC 7519]: https://tools.ietf.org/html/rfc7519#section-4.1.3
 	Audience []string
 
 	// The base domain of the identity provider that issues JSON Web Tokens. For
@@ -542,9 +586,9 @@ type JWTConfiguration struct {
 	noSmithyDocumentSerde
 }
 
-// Represents a data model for an API. Supported only for WebSocket APIs. See
-// Create Models and Mapping Templates for Request and Response Mappings (https://docs.aws.amazon.com/apigateway/latest/developerguide/models-mappings.html)
-// .
+// Represents a data model for an API. Supported only for WebSocket APIs. See [Create Models and Mapping Templates for Request and Response Mappings].
+//
+// [Create Models and Mapping Templates for Request and Response Mappings]: https://docs.aws.amazon.com/apigateway/latest/developerguide/models-mappings.html
 type Model struct {
 
 	// The name of the model. Must be alphanumeric.

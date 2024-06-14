@@ -6,20 +6,26 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/elasticbeanstalk/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Initiates a request to compile the specified type of information of the
-// deployed environment. Setting the InfoType to tail compiles the last lines from
-// the application server log files of every Amazon EC2 instance in your
-// environment. Setting the InfoType to bundle compresses the application server
-// log files for every Amazon EC2 instance into a .zip file. Legacy and .NET
-// containers do not support bundle logs. Use RetrieveEnvironmentInfo to obtain
-// the set of logs. Related Topics
-//   - RetrieveEnvironmentInfo
+// deployed environment.
+//
+// Setting the InfoType to tail compiles the last lines from the application
+// server log files of every Amazon EC2 instance in your environment.
+//
+// Setting the InfoType to bundle compresses the application server log files for
+// every Amazon EC2 instance into a .zip file. Legacy and .NET containers do not
+// support bundle logs.
+//
+// Use RetrieveEnvironmentInfo to obtain the set of logs.
+//
+// # Related Topics
+//
+// RetrieveEnvironmentInfo
 func (c *Client) RequestEnvironmentInfo(ctx context.Context, params *RequestEnvironmentInfoInput, optFns ...func(*Options)) (*RequestEnvironmentInfoOutput, error) {
 	if params == nil {
 		params = &RequestEnvironmentInfoInput{}
@@ -44,15 +50,21 @@ type RequestEnvironmentInfoInput struct {
 	// This member is required.
 	InfoType types.EnvironmentInfoType
 
-	// The ID of the environment of the requested data. If no such environment is
-	// found, RequestEnvironmentInfo returns an InvalidParameterValue error.
+	// The ID of the environment of the requested data.
+	//
+	// If no such environment is found, RequestEnvironmentInfo returns an
+	// InvalidParameterValue error.
+	//
 	// Condition: You must specify either this or an EnvironmentName, or both. If you
 	// do not specify either, AWS Elastic Beanstalk returns MissingRequiredParameter
 	// error.
 	EnvironmentId *string
 
-	// The name of the environment of the requested data. If no such environment is
-	// found, RequestEnvironmentInfo returns an InvalidParameterValue error.
+	// The name of the environment of the requested data.
+	//
+	// If no such environment is found, RequestEnvironmentInfo returns an
+	// InvalidParameterValue error.
+	//
 	// Condition: You must specify either this or an EnvironmentId, or both. If you do
 	// not specify either, AWS Elastic Beanstalk returns MissingRequiredParameter
 	// error.
@@ -90,25 +102,25 @@ func (c *Client) addOperationRequestEnvironmentInfoMiddlewares(stack *middleware
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -123,13 +135,16 @@ func (c *Client) addOperationRequestEnvironmentInfoMiddlewares(stack *middleware
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpRequestEnvironmentInfoValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opRequestEnvironmentInfo(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

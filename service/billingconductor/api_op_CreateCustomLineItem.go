@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/billingconductor/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -32,25 +31,25 @@ func (c *Client) CreateCustomLineItem(ctx context.Context, params *CreateCustomL
 
 type CreateCustomLineItemInput struct {
 
-	// The Amazon Resource Name (ARN) that references the billing group where the
+	//  The Amazon Resource Name (ARN) that references the billing group where the
 	// custom line item applies to.
 	//
 	// This member is required.
 	BillingGroupArn *string
 
-	// A CustomLineItemChargeDetails that describes the charge details for a custom
+	//  A CustomLineItemChargeDetails that describes the charge details for a custom
 	// line item.
 	//
 	// This member is required.
 	ChargeDetails *types.CustomLineItemChargeDetails
 
-	// The description of the custom line item. This is shown on the Bills page in
+	//  The description of the custom line item. This is shown on the Bills page in
 	// association with the charge value.
 	//
 	// This member is required.
 	Description *string
 
-	// The name of the custom line item.
+	//  The name of the custom line item.
 	//
 	// This member is required.
 	Name *string
@@ -59,14 +58,14 @@ type CreateCustomLineItemInput struct {
 	// to.
 	AccountId *string
 
-	// A time range for which the custom line item is effective.
+	//  A time range for which the custom line item is effective.
 	BillingPeriodRange *types.CustomLineItemBillingPeriodRange
 
-	// The token that is needed to support idempotency. Idempotency isn't currently
+	//  The token that is needed to support idempotency. Idempotency isn't currently
 	// supported, but will be implemented in a future update.
 	ClientToken *string
 
-	// A map that contains tag keys and tag values that are attached to a custom line
+	//  A map that contains tag keys and tag values that are attached to a custom line
 	// item.
 	Tags map[string]string
 
@@ -75,7 +74,7 @@ type CreateCustomLineItemInput struct {
 
 type CreateCustomLineItemOutput struct {
 
-	// The Amazon Resource Name (ARN) of the created custom line item.
+	//  The Amazon Resource Name (ARN) of the created custom line item.
 	Arn *string
 
 	// Metadata pertaining to the operation's result.
@@ -106,25 +105,25 @@ func (c *Client) addOperationCreateCustomLineItemMiddlewares(stack *middleware.S
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -139,6 +138,9 @@ func (c *Client) addOperationCreateCustomLineItemMiddlewares(stack *middleware.S
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opCreateCustomLineItemMiddleware(stack, options); err != nil {
 		return err
 	}
@@ -148,7 +150,7 @@ func (c *Client) addOperationCreateCustomLineItemMiddlewares(stack *middleware.S
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateCustomLineItem(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

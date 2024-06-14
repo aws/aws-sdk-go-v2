@@ -6,14 +6,13 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/qbusiness/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
-// Gets information about an existing Amazon Q plugin.
+// Gets information about an existing Amazon Q Business plugin.
 func (c *Client) GetPlugin(ctx context.Context, params *GetPluginInput, optFns ...func(*Options)) (*GetPluginOutput, error) {
 	if params == nil {
 		params = &GetPluginInput{}
@@ -49,11 +48,17 @@ type GetPluginOutput struct {
 	// The identifier of the application which contains the plugin.
 	ApplicationId *string
 
-	// Authentication configuration information for an Amazon Q plugin.
+	// Authentication configuration information for an Amazon Q Business plugin.
 	AuthConfiguration types.PluginAuthConfiguration
+
+	// The current status of a plugin. A plugin is modified asynchronously.
+	BuildStatus types.PluginBuildStatus
 
 	// The timestamp for when the plugin was created.
 	CreatedAt *time.Time
+
+	// Configuration information required to create a custom plugin.
+	CustomPluginConfiguration *types.CustomPluginConfiguration
 
 	// The name of the plugin.
 	DisplayName *string
@@ -105,25 +110,25 @@ func (c *Client) addOperationGetPluginMiddlewares(stack *middleware.Stack, optio
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -138,13 +143,16 @@ func (c *Client) addOperationGetPluginMiddlewares(stack *middleware.Stack, optio
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpGetPluginValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetPlugin(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/auditmanager/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -30,29 +29,29 @@ func (c *Client) CreateControl(ctx context.Context, params *CreateControlInput, 
 
 type CreateControlInput struct {
 
-	// The data mapping sources for the control.
+	//  The data mapping sources for the control.
 	//
 	// This member is required.
 	ControlMappingSources []types.CreateControlMappingSource
 
-	// The name of the control.
+	//  The name of the control.
 	//
 	// This member is required.
 	Name *string
 
-	// The recommended actions to carry out if the control isn't fulfilled.
+	//  The recommended actions to carry out if the control isn't fulfilled.
 	ActionPlanInstructions *string
 
-	// The title of the action plan for remediating the control.
+	//  The title of the action plan for remediating the control.
 	ActionPlanTitle *string
 
-	// The description of the control.
+	//  The description of the control.
 	Description *string
 
-	// The tags that are associated with the control.
+	//  The tags that are associated with the control.
 	Tags map[string]string
 
-	// The steps to follow to determine if the control is satisfied.
+	//  The steps to follow to determine if the control is satisfied.
 	TestingInformation *string
 
 	noSmithyDocumentSerde
@@ -60,7 +59,7 @@ type CreateControlInput struct {
 
 type CreateControlOutput struct {
 
-	// The new control that the CreateControl API returned.
+	//  The new control that the CreateControl API returned.
 	Control *types.Control
 
 	// Metadata pertaining to the operation's result.
@@ -91,25 +90,25 @@ func (c *Client) addOperationCreateControlMiddlewares(stack *middleware.Stack, o
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -124,13 +123,16 @@ func (c *Client) addOperationCreateControlMiddlewares(stack *middleware.Stack, o
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpCreateControlValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateControl(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

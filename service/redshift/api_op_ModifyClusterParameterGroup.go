@@ -6,16 +6,18 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/redshift/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Modifies the parameters of a parameter group. For the parameters parameter, it
-// can't contain ASCII characters. For more information about parameters and
-// parameter groups, go to Amazon Redshift Parameter Groups (https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-parameter-groups.html)
-// in the Amazon Redshift Cluster Management Guide.
+// can't contain ASCII characters.
+//
+// For more information about parameters and parameter groups, go to [Amazon Redshift Parameter Groups] in the
+// Amazon Redshift Cluster Management Guide.
+//
+// [Amazon Redshift Parameter Groups]: https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-parameter-groups.html
 func (c *Client) ModifyClusterParameterGroup(ctx context.Context, params *ModifyClusterParameterGroupInput, optFns ...func(*Options)) (*ModifyClusterParameterGroupOutput, error) {
 	if params == nil {
 		params = &ModifyClusterParameterGroupInput{}
@@ -40,10 +42,13 @@ type ModifyClusterParameterGroupInput struct {
 	ParameterGroupName *string
 
 	// An array of parameters to be modified. A maximum of 20 parameters can be
-	// modified in a single request. For each parameter to be modified, you must supply
-	// at least the parameter name and parameter value; other name-value pairs of the
-	// parameter are optional. For the workload management (WLM) configuration, you
-	// must supply all the name-value pairs in the wlm_json_configuration parameter.
+	// modified in a single request.
+	//
+	// For each parameter to be modified, you must supply at least the parameter name
+	// and parameter value; other name-value pairs of the parameter are optional.
+	//
+	// For the workload management (WLM) configuration, you must supply all the
+	// name-value pairs in the wlm_json_configuration parameter.
 	//
 	// This member is required.
 	Parameters []types.Parameter
@@ -89,25 +94,25 @@ func (c *Client) addOperationModifyClusterParameterGroupMiddlewares(stack *middl
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -122,13 +127,16 @@ func (c *Client) addOperationModifyClusterParameterGroupMiddlewares(stack *middl
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpModifyClusterParameterGroupValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opModifyClusterParameterGroup(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

@@ -215,9 +215,41 @@ var defaultPartitions = endpoints.Partitions{
 				Protocols: []string{"https"},
 			},
 			endpoints.EndpointKey{
+				Region:  "us-east-1",
+				Variant: endpoints.FIPSVariant,
+			}: {
+				Hostname:  "serverlessrepo-fips.us-east-1.amazonaws.com",
+				Protocols: []string{"https"},
+			},
+			endpoints.EndpointKey{
+				Region: "us-east-1-fips",
+			}: endpoints.Endpoint{
+				Hostname: "serverlessrepo-fips.us-east-1.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "us-east-1",
+				},
+				Deprecated: aws.TrueTernary,
+			},
+			endpoints.EndpointKey{
 				Region: "us-east-2",
 			}: endpoints.Endpoint{
 				Protocols: []string{"https"},
+			},
+			endpoints.EndpointKey{
+				Region:  "us-east-2",
+				Variant: endpoints.FIPSVariant,
+			}: {
+				Hostname:  "serverlessrepo-fips.us-east-2.amazonaws.com",
+				Protocols: []string{"https"},
+			},
+			endpoints.EndpointKey{
+				Region: "us-east-2-fips",
+			}: endpoints.Endpoint{
+				Hostname: "serverlessrepo-fips.us-east-2.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "us-east-2",
+				},
+				Deprecated: aws.TrueTernary,
 			},
 			endpoints.EndpointKey{
 				Region: "us-west-1",
@@ -225,9 +257,41 @@ var defaultPartitions = endpoints.Partitions{
 				Protocols: []string{"https"},
 			},
 			endpoints.EndpointKey{
+				Region:  "us-west-1",
+				Variant: endpoints.FIPSVariant,
+			}: {
+				Hostname:  "serverlessrepo-fips.us-west-1.amazonaws.com",
+				Protocols: []string{"https"},
+			},
+			endpoints.EndpointKey{
+				Region: "us-west-1-fips",
+			}: endpoints.Endpoint{
+				Hostname: "serverlessrepo-fips.us-west-1.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "us-west-1",
+				},
+				Deprecated: aws.TrueTernary,
+			},
+			endpoints.EndpointKey{
 				Region: "us-west-2",
 			}: endpoints.Endpoint{
 				Protocols: []string{"https"},
+			},
+			endpoints.EndpointKey{
+				Region:  "us-west-2",
+				Variant: endpoints.FIPSVariant,
+			}: {
+				Hostname:  "serverlessrepo-fips.us-west-2.amazonaws.com",
+				Protocols: []string{"https"},
+			},
+			endpoints.EndpointKey{
+				Region: "us-west-2-fips",
+			}: endpoints.Endpoint{
+				Hostname: "serverlessrepo-fips.us-west-2.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "us-west-2",
+				},
+				Deprecated: aws.TrueTernary,
 			},
 		},
 	},

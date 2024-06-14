@@ -6,23 +6,28 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/eks/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Connects a Kubernetes cluster to the Amazon EKS control plane. Any Kubernetes
-// cluster can be connected to the Amazon EKS control plane to view current
-// information about the cluster and its nodes. Cluster connection requires two
-// steps. First, send a RegisterClusterRequest to add it to the Amazon EKS control
-// plane. Second, a Manifest (https://amazon-eks.s3.us-west-2.amazonaws.com/eks-connector/manifests/eks-connector/latest/eks-connector.yaml)
-// containing the activationID and activationCode must be applied to the
-// Kubernetes cluster through it's native provider to provide visibility. After the
-// manifest is updated and applied, the connected cluster is visible to the Amazon
-// EKS control plane. If the manifest isn't applied within three days, the
-// connected cluster will no longer be visible and must be deregistered using
+// Connects a Kubernetes cluster to the Amazon EKS control plane.
+//
+// Any Kubernetes cluster can be connected to the Amazon EKS control plane to view
+// current information about the cluster and its nodes.
+//
+// Cluster connection requires two steps. First, send a RegisterClusterRequest to add it to the Amazon
+// EKS control plane.
+//
+// Second, a [Manifest] containing the activationID and activationCode must be applied to
+// the Kubernetes cluster through it's native provider to provide visibility.
+//
+// After the manifest is updated and applied, the connected cluster is visible to
+// the Amazon EKS control plane. If the manifest isn't applied within three days,
+// the connected cluster will no longer be visible and must be deregistered using
 // DeregisterCluster .
+//
+// [Manifest]: https://amazon-eks.s3.us-west-2.amazonaws.com/eks-connector/manifests/eks-connector/latest/eks-connector.yaml
 func (c *Client) RegisterCluster(ctx context.Context, params *RegisterClusterInput, optFns ...func(*Options)) (*RegisterClusterOutput, error) {
 	if params == nil {
 		params = &RegisterClusterInput{}
@@ -96,25 +101,25 @@ func (c *Client) addOperationRegisterClusterMiddlewares(stack *middleware.Stack,
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -129,6 +134,9 @@ func (c *Client) addOperationRegisterClusterMiddlewares(stack *middleware.Stack,
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opRegisterClusterMiddleware(stack, options); err != nil {
 		return err
 	}
@@ -138,7 +146,7 @@ func (c *Client) addOperationRegisterClusterMiddlewares(stack *middleware.Stack,
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opRegisterCluster(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

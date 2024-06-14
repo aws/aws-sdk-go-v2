@@ -1758,6 +1758,11 @@ func awsRestjson1_serializeOpDocumentGetCisScanReportInput(v *GetCisScanReportIn
 	object := value.Object()
 	defer object.Close()
 
+	if len(v.ReportFormat) > 0 {
+		ok := object.Key("reportFormat")
+		ok.String(string(v.ReportFormat))
+	}
+
 	if v.ScanArn != nil {
 		ok := object.Key("scanArn")
 		ok.String(*v.ScanArn)
@@ -4419,6 +4424,13 @@ func awsRestjson1_serializeOpDocumentUpdateConfigurationInput(v *UpdateConfigura
 	object := value.Object()
 	defer object.Close()
 
+	if v.Ec2Configuration != nil {
+		ok := object.Key("ec2Configuration")
+		if err := awsRestjson1_serializeDocumentEc2Configuration(v.Ec2Configuration, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.EcrConfiguration != nil {
 		ok := object.Key("ecrConfiguration")
 		if err := awsRestjson1_serializeDocumentEcrConfiguration(v.EcrConfiguration, ok); err != nil {
@@ -5733,6 +5745,13 @@ func awsRestjson1_serializeDocumentCoverageFilterCriteria(v *types.CoverageFilte
 		}
 	}
 
+	if v.ScanMode != nil {
+		ok := object.Key("scanMode")
+		if err := awsRestjson1_serializeDocumentCoverageStringFilterList(v.ScanMode, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.ScanStatusCode != nil {
 		ok := object.Key("scanStatusCode")
 		if err := awsRestjson1_serializeDocumentCoverageStringFilterList(v.ScanStatusCode, ok); err != nil {
@@ -5928,6 +5947,18 @@ func awsRestjson1_serializeDocumentDisableResourceTypeList(v []types.ResourceSca
 		av := array.Value()
 		av.String(string(v[i]))
 	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentEc2Configuration(v *types.Ec2Configuration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.ScanMode) > 0 {
+		ok := object.Key("scanMode")
+		ok.String(string(v.ScanMode))
+	}
+
 	return nil
 }
 

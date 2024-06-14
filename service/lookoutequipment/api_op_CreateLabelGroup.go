@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/lookoutequipment/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -30,26 +29,31 @@ func (c *Client) CreateLabelGroup(ctx context.Context, params *CreateLabelGroupI
 
 type CreateLabelGroupInput struct {
 
-	// A unique identifier for the request to create a label group. If you do not set
+	//  A unique identifier for the request to create a label group. If you do not set
 	// the client request token, Lookout for Equipment generates one.
 	//
 	// This member is required.
 	ClientToken *string
 
-	// Names a group of labels. Data in this field will be retained for service usage.
-	// Follow best practices for the security of your data.
+	//  Names a group of labels.
+	//
+	// Data in this field will be retained for service usage. Follow best practices
+	// for the security of your data.
 	//
 	// This member is required.
 	LabelGroupName *string
 
-	// The acceptable fault codes (indicating the type of anomaly associated with the
-	// label) that can be used with this label group. Data in this field will be
-	// retained for service usage. Follow best practices for the security of your data.
+	//  The acceptable fault codes (indicating the type of anomaly associated with the
+	// label) that can be used with this label group.
+	//
+	// Data in this field will be retained for service usage. Follow best practices
+	// for the security of your data.
 	FaultCodes []string
 
-	// Tags that provide metadata about the label group you are creating. Data in this
-	// field will be retained for service usage. Follow best practices for the security
-	// of your data.
+	//  Tags that provide metadata about the label group you are creating.
+	//
+	// Data in this field will be retained for service usage. Follow best practices
+	// for the security of your data.
 	Tags []types.Tag
 
 	noSmithyDocumentSerde
@@ -57,10 +61,10 @@ type CreateLabelGroupInput struct {
 
 type CreateLabelGroupOutput struct {
 
-	// The Amazon Resource Name (ARN) of the label group that you have created.
+	//  The Amazon Resource Name (ARN) of the label group that you have created.
 	LabelGroupArn *string
 
-	// The name of the label group that you have created. Data in this field will be
+	//  The name of the label group that you have created. Data in this field will be
 	// retained for service usage. Follow best practices for the security of your data.
 	LabelGroupName *string
 
@@ -92,25 +96,25 @@ func (c *Client) addOperationCreateLabelGroupMiddlewares(stack *middleware.Stack
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -125,6 +129,9 @@ func (c *Client) addOperationCreateLabelGroupMiddlewares(stack *middleware.Stack
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opCreateLabelGroupMiddleware(stack, options); err != nil {
 		return err
 	}
@@ -134,7 +141,7 @@ func (c *Client) addOperationCreateLabelGroupMiddlewares(stack *middleware.Stack
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateLabelGroup(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

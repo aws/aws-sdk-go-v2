@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/backup/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -14,8 +13,9 @@ import (
 )
 
 // Creates a JSON document that specifies a set of resources to assign to a backup
-// plan. For examples, see Assigning resources programmatically (https://docs.aws.amazon.com/aws-backup/latest/devguide/assigning-resources.html#assigning-resources-json)
-// .
+// plan. For examples, see [Assigning resources programmatically].
+//
+// [Assigning resources programmatically]: https://docs.aws.amazon.com/aws-backup/latest/devguide/assigning-resources.html#assigning-resources-json
 func (c *Client) CreateBackupSelection(ctx context.Context, params *CreateBackupSelectionInput, optFns ...func(*Options)) (*CreateBackupSelectionOutput, error) {
 	if params == nil {
 		params = &CreateBackupSelectionInput{}
@@ -46,8 +46,9 @@ type CreateBackupSelectionInput struct {
 
 	// A unique string that identifies the request and allows failed requests to be
 	// retried without the risk of running the operation twice. This parameter is
-	// optional. If used, this parameter must contain 1 to 50 alphanumeric or '-_.'
-	// characters.
+	// optional.
+	//
+	// If used, this parameter must contain 1 to 50 alphanumeric or '-_.' characters.
 	CreatorRequestId *string
 
 	noSmithyDocumentSerde
@@ -96,25 +97,25 @@ func (c *Client) addOperationCreateBackupSelectionMiddlewares(stack *middleware.
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -129,13 +130,16 @@ func (c *Client) addOperationCreateBackupSelectionMiddlewares(stack *middleware.
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpCreateBackupSelectionValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateBackupSelection(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

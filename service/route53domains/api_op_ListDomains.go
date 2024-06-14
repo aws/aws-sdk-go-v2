@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/route53domains/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -42,11 +41,14 @@ type ListDomainsInput struct {
 	// greater than the value that you specified for MaxItems , you can use Marker to
 	// return additional domains. Get the value of NextPageMarker from the previous
 	// response, and submit another request that includes the value of NextPageMarker
-	// in the Marker element. Constraints: The marker must match the value specified
-	// in the previous request.
+	// in the Marker element.
+	//
+	// Constraints: The marker must match the value specified in the previous request.
 	Marker *string
 
-	// Number of domains to be returned. Default: 20
+	// Number of domains to be returned.
+	//
+	// Default: 20
 	MaxItems *int32
 
 	// A complex type that contains information about the requested ordering of
@@ -95,25 +97,25 @@ func (c *Client) addOperationListDomainsMiddlewares(stack *middleware.Stack, opt
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -128,13 +130,16 @@ func (c *Client) addOperationListDomainsMiddlewares(stack *middleware.Stack, opt
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpListDomainsValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListDomains(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -161,7 +166,9 @@ var _ ListDomainsAPIClient = (*Client)(nil)
 
 // ListDomainsPaginatorOptions is the paginator options for ListDomains
 type ListDomainsPaginatorOptions struct {
-	// Number of domains to be returned. Default: 20
+	// Number of domains to be returned.
+	//
+	// Default: 20
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/auditmanager/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -30,27 +29,27 @@ func (c *Client) UpdateAssessment(ctx context.Context, params *UpdateAssessmentI
 
 type UpdateAssessmentInput struct {
 
-	// The unique identifier for the assessment.
+	//  The unique identifier for the assessment.
 	//
 	// This member is required.
 	AssessmentId *string
 
-	// The scope of the assessment.
+	//  The scope of the assessment.
 	//
 	// This member is required.
 	Scope *types.Scope
 
-	// The description of the assessment.
+	//  The description of the assessment.
 	AssessmentDescription *string
 
-	// The name of the assessment to be updated.
+	//  The name of the assessment to be updated.
 	AssessmentName *string
 
-	// The assessment report storage destination for the assessment that's being
+	//  The assessment report storage destination for the assessment that's being
 	// updated.
 	AssessmentReportsDestination *types.AssessmentReportsDestination
 
-	// The list of roles for the assessment.
+	//  The list of roles for the assessment.
 	Roles []types.Role
 
 	noSmithyDocumentSerde
@@ -58,7 +57,7 @@ type UpdateAssessmentInput struct {
 
 type UpdateAssessmentOutput struct {
 
-	// The response object for the UpdateAssessment API. This is the name of the
+	//  The response object for the UpdateAssessment API. This is the name of the
 	// updated assessment.
 	Assessment *types.Assessment
 
@@ -90,25 +89,25 @@ func (c *Client) addOperationUpdateAssessmentMiddlewares(stack *middleware.Stack
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -123,13 +122,16 @@ func (c *Client) addOperationUpdateAssessmentMiddlewares(stack *middleware.Stack
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpUpdateAssessmentValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateAssessment(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

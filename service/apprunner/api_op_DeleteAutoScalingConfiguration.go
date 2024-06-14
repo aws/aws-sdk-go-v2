@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/apprunner/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -35,17 +34,20 @@ func (c *Client) DeleteAutoScalingConfiguration(ctx context.Context, params *Del
 type DeleteAutoScalingConfigurationInput struct {
 
 	// The Amazon Resource Name (ARN) of the App Runner auto scaling configuration
-	// that you want to delete. The ARN can be a full auto scaling configuration ARN,
-	// or a partial ARN ending with either .../name  or .../name/revision . If a
-	// revision isn't specified, the latest active revision is deleted.
+	// that you want to delete.
+	//
+	// The ARN can be a full auto scaling configuration ARN, or a partial ARN ending
+	// with either .../name  or .../name/revision . If a revision isn't specified, the
+	// latest active revision is deleted.
 	//
 	// This member is required.
 	AutoScalingConfigurationArn *string
 
 	// Set to true to delete all of the revisions associated with the
-	// AutoScalingConfigurationArn parameter value. When DeleteAllRevisions is set to
-	// true , the only valid value for the Amazon Resource Name (ARN) is a partial ARN
-	// ending with: .../name .
+	// AutoScalingConfigurationArn parameter value.
+	//
+	// When DeleteAllRevisions is set to true , the only valid value for the Amazon
+	// Resource Name (ARN) is a partial ARN ending with: .../name .
 	DeleteAllRevisions bool
 
 	noSmithyDocumentSerde
@@ -87,25 +89,25 @@ func (c *Client) addOperationDeleteAutoScalingConfigurationMiddlewares(stack *mi
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -120,13 +122,16 @@ func (c *Client) addOperationDeleteAutoScalingConfigurationMiddlewares(stack *mi
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDeleteAutoScalingConfigurationValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteAutoScalingConfiguration(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

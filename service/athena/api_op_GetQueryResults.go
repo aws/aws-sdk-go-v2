@@ -6,24 +6,27 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/athena/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Streams the results of a single query execution specified by QueryExecutionId
-// from the Athena query results location in Amazon S3. For more information, see
-// Working with query results, recent queries, and output files (https://docs.aws.amazon.com/athena/latest/ug/querying.html)
+// from the Athena query results location in Amazon S3. For more information, see [Working with query results, recent queries, and output files]
 // in the Amazon Athena User Guide. This request does not execute the query but
-// returns results. Use StartQueryExecution to run a query. To stream query
-// results successfully, the IAM principal with permission to call GetQueryResults
-// also must have permissions to the Amazon S3 GetObject action for the Athena
-// query results location. IAM principals with permission to the Amazon S3
-// GetObject action for the query results location are able to retrieve query
-// results from Amazon S3 even if permission to the GetQueryResults action is
-// denied. To restrict user or role access, ensure that Amazon S3 permissions to
-// the Athena query location are denied.
+// returns results. Use StartQueryExecutionto run a query.
+//
+// To stream query results successfully, the IAM principal with permission to call
+// GetQueryResults also must have permissions to the Amazon S3 GetObject action
+// for the Athena query results location.
+//
+// IAM principals with permission to the Amazon S3 GetObject action for the query
+// results location are able to retrieve query results from Amazon S3 even if
+// permission to the GetQueryResults action is denied. To restrict user or role
+// access, ensure that Amazon S3 permissions to the Athena query location are
+// denied.
+//
+// [Working with query results, recent queries, and output files]: https://docs.aws.amazon.com/athena/latest/ug/querying.html
 func (c *Client) GetQueryResults(ctx context.Context, params *GetQueryResultsInput, optFns ...func(*Options)) (*GetQueryResultsOutput, error) {
 	if params == nil {
 		params = &GetQueryResultsInput{}
@@ -98,25 +101,25 @@ func (c *Client) addOperationGetQueryResultsMiddlewares(stack *middleware.Stack,
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -131,13 +134,16 @@ func (c *Client) addOperationGetQueryResultsMiddlewares(stack *middleware.Stack,
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpGetQueryResultsValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetQueryResults(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

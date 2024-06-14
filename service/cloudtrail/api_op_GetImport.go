@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/cloudtrail/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -31,7 +30,7 @@ func (c *Client) GetImport(ctx context.Context, params *GetImportInput, optFns .
 
 type GetImportInput struct {
 
-	// The ID for the import.
+	//  The ID for the import.
 	//
 	// This member is required.
 	ImportId *string
@@ -41,36 +40,36 @@ type GetImportInput struct {
 
 type GetImportOutput struct {
 
-	// The timestamp of the import's creation.
+	//  The timestamp of the import's creation.
 	CreatedTimestamp *time.Time
 
-	// The ARN of the destination event data store.
+	//  The ARN of the destination event data store.
 	Destinations []string
 
-	// Used with StartEventTime to bound a StartImport request, and limit imported
+	//  Used with StartEventTime to bound a StartImport request, and limit imported
 	// trail events to only those events logged within a specified time period.
 	EndEventTime *time.Time
 
-	// The ID of the import.
+	//  The ID of the import.
 	ImportId *string
 
-	// The source S3 bucket.
+	//  The source S3 bucket.
 	ImportSource *types.ImportSource
 
-	// Provides statistics for the import. CloudTrail does not update import
+	//  Provides statistics for the import. CloudTrail does not update import
 	// statistics in real-time. Returned values for parameters such as EventsCompleted
 	// may be lower than the actual value, because CloudTrail updates statistics
 	// incrementally over the course of the import.
 	ImportStatistics *types.ImportStatistics
 
-	// The status of the import.
+	//  The status of the import.
 	ImportStatus types.ImportStatus
 
-	// Used with EndEventTime to bound a StartImport request, and limit imported trail
-	// events to only those events logged within a specified time period.
+	//  Used with EndEventTime to bound a StartImport request, and limit imported
+	// trail events to only those events logged within a specified time period.
 	StartEventTime *time.Time
 
-	// The timestamp of when the import was updated.
+	//  The timestamp of when the import was updated.
 	UpdatedTimestamp *time.Time
 
 	// Metadata pertaining to the operation's result.
@@ -101,25 +100,25 @@ func (c *Client) addOperationGetImportMiddlewares(stack *middleware.Stack, optio
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -134,13 +133,16 @@ func (c *Client) addOperationGetImportMiddlewares(stack *middleware.Stack, optio
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpGetImportValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetImport(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

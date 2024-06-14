@@ -6,16 +6,16 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// This action is deprecated. Describes one or more of your linked EC2-Classic
-// instances. This request only returns information about EC2-Classic instances
-// linked to a VPC through ClassicLink. You cannot use this request to return
-// information about other instances.
+// This action is deprecated.
+//
+// Describes your linked EC2-Classic instances. This request only returns
+// information about EC2-Classic instances linked to a VPC through ClassicLink. You
+// cannot use this request to return information about other instances.
 func (c *Client) DescribeClassicLinkInstances(ctx context.Context, params *DescribeClassicLinkInstancesInput, optFns ...func(*Options)) (*DescribeClassicLinkInstancesOutput, error) {
 	if params == nil {
 		params = &DescribeClassicLinkInstancesInput{}
@@ -40,15 +40,20 @@ type DescribeClassicLinkInstancesInput struct {
 	DryRun *bool
 
 	// The filters.
+	//
 	//   - group-id - The ID of a VPC security group that's associated with the
 	//   instance.
+	//
 	//   - instance-id - The ID of the instance.
+	//
 	//   - tag : - The key/value combination of a tag assigned to the resource. Use the
 	//   tag key in the filter name and the tag value as the filter value. For example,
 	//   to find all resources that have a tag with the key Owner and the value TeamA ,
 	//   specify tag:Owner for the filter name and TeamA for the filter value.
+	//
 	//   - tag-key - The key of a tag assigned to the resource. Use this filter to find
 	//   all resources assigned a tag with a specific key, regardless of the tag value.
+	//
 	//   - vpc-id - The ID of the VPC to which the instance is linked.
 	Filters []types.Filter
 
@@ -57,8 +62,11 @@ type DescribeClassicLinkInstancesInput struct {
 
 	// The maximum number of items to return for this request. To get the next page of
 	// items, make another request with the token returned in the output. For more
-	// information, see Pagination (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination)
-	// . Constraint: If the value is greater than 1000, we return only 1000 items.
+	// information, see [Pagination].
+	//
+	// Constraint: If the value is greater than 1000, we return only 1000 items.
+	//
+	// [Pagination]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination
 	MaxResults *int32
 
 	// The token returned from a previous paginated request. Pagination continues from
@@ -105,25 +113,25 @@ func (c *Client) addOperationDescribeClassicLinkInstancesMiddlewares(stack *midd
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -138,10 +146,13 @@ func (c *Client) addOperationDescribeClassicLinkInstancesMiddlewares(stack *midd
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeClassicLinkInstances(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -172,8 +183,11 @@ var _ DescribeClassicLinkInstancesAPIClient = (*Client)(nil)
 type DescribeClassicLinkInstancesPaginatorOptions struct {
 	// The maximum number of items to return for this request. To get the next page of
 	// items, make another request with the token returned in the output. For more
-	// information, see Pagination (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination)
-	// . Constraint: If the value is greater than 1000, we return only 1000 items.
+	// information, see [Pagination].
+	//
+	// Constraint: If the value is greater than 1000, we return only 1000 items.
+	//
+	// [Pagination]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

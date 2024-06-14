@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/athena/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -49,18 +48,25 @@ type UpdateDataCatalogInput struct {
 
 	// Specifies the Lambda function or functions to use for updating the data
 	// catalog. This is a mapping whose values depend on the catalog type.
+	//
 	//   - For the HIVE data catalog type, use the following syntax. The
 	//   metadata-function parameter is required. The sdk-version parameter is optional
 	//   and defaults to the currently supported version.
-	//   metadata-function=lambda_arn, sdk-version=version_number
+	//
+	// metadata-function=lambda_arn, sdk-version=version_number
+	//
 	//   - For the LAMBDA data catalog type, use one of the following sets of required
 	//   parameters, but not both.
+	//
 	//   - If you have one Lambda function that processes metadata and another for
 	//   reading the actual data, use the following syntax. Both parameters are required.
-	//   metadata-function=lambda_arn, record-function=lambda_arn
+	//
+	// metadata-function=lambda_arn, record-function=lambda_arn
+	//
 	//   - If you have a composite Lambda function that processes both metadata and
 	//   data, use the following syntax to specify your Lambda function.
-	//   function=lambda_arn
+	//
+	// function=lambda_arn
 	Parameters map[string]string
 
 	noSmithyDocumentSerde
@@ -95,25 +101,25 @@ func (c *Client) addOperationUpdateDataCatalogMiddlewares(stack *middleware.Stac
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -128,13 +134,16 @@ func (c *Client) addOperationUpdateDataCatalogMiddlewares(stack *middleware.Stac
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpUpdateDataCatalogValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateDataCatalog(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

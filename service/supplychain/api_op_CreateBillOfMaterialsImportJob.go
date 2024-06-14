@@ -6,16 +6,17 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // CreateBillOfMaterialsImportJob creates an import job for the Product Bill Of
 // Materials (BOM) entity. For information on the product_bom entity, see the AWS
-// Supply Chain User Guide. The CSV file must be located in an Amazon S3 location
-// accessible to AWS Supply Chain. It is recommended to use the same Amazon S3
-// bucket created during your AWS Supply Chain instance creation.
+// Supply Chain User Guide.
+//
+// The CSV file must be located in an Amazon S3 location accessible to AWS Supply
+// Chain. It is recommended to use the same Amazon S3 bucket created during your
+// AWS Supply Chain instance creation.
 func (c *Client) CreateBillOfMaterialsImportJob(ctx context.Context, params *CreateBillOfMaterialsImportJobInput, optFns ...func(*Options)) (*CreateBillOfMaterialsImportJobOutput, error) {
 	if params == nil {
 		params = &CreateBillOfMaterialsImportJobInput{}
@@ -87,25 +88,25 @@ func (c *Client) addOperationCreateBillOfMaterialsImportJobMiddlewares(stack *mi
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -120,6 +121,9 @@ func (c *Client) addOperationCreateBillOfMaterialsImportJobMiddlewares(stack *mi
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opCreateBillOfMaterialsImportJobMiddleware(stack, options); err != nil {
 		return err
 	}
@@ -129,7 +133,7 @@ func (c *Client) addOperationCreateBillOfMaterialsImportJobMiddlewares(stack *mi
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateBillOfMaterialsImportJob(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

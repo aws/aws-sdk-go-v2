@@ -6,22 +6,25 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// The AssociateQualificationWithWorker operation gives a Worker a Qualification.
+//	The AssociateQualificationWithWorker operation gives a Worker a Qualification.
+//
 // AssociateQualificationWithWorker does not require that the Worker submit a
-// Qualification request. It gives the Qualification directly to the Worker. You
-// can only assign a Qualification of a Qualification type that you created (using
-// the CreateQualificationType operation). Note: AssociateQualificationWithWorker
-// does not affect any pending Qualification requests for the Qualification by the
-// Worker. If you assign a Qualification to a Worker, then later grant a
-// Qualification request made by the Worker, the granting of the request may modify
-// the Qualification score. To resolve a pending Qualification request without
-// affecting the Qualification the Worker already has, reject the request with the
-// RejectQualificationRequest operation.
+// Qualification request. It gives the Qualification directly to the Worker.
+//
+// You can only assign a Qualification of a Qualification type that you created
+// (using the CreateQualificationType operation).
+//
+// Note: AssociateQualificationWithWorker does not affect any pending
+// Qualification requests for the Qualification by the Worker. If you assign a
+// Qualification to a Worker, then later grant a Qualification request made by the
+// Worker, the granting of the request may modify the Qualification score. To
+// resolve a pending Qualification request without affecting the Qualification the
+// Worker already has, reject the request with the RejectQualificationRequest
+// operation.
 func (c *Client) AssociateQualificationWithWorker(ctx context.Context, params *AssociateQualificationWithWorkerInput, optFns ...func(*Options)) (*AssociateQualificationWithWorkerOutput, error) {
 	if params == nil {
 		params = &AssociateQualificationWithWorkerInput{}
@@ -44,7 +47,7 @@ type AssociateQualificationWithWorkerInput struct {
 	// This member is required.
 	QualificationTypeId *string
 
-	// The ID of the Worker to whom the Qualification is being assigned. Worker IDs
+	//  The ID of the Worker to whom the Qualification is being assigned. Worker IDs
 	// are included with submitted HIT assignments and Qualification requests.
 	//
 	// This member is required.
@@ -53,7 +56,7 @@ type AssociateQualificationWithWorkerInput struct {
 	// The value of the Qualification to assign.
 	IntegerValue *int32
 
-	// Specifies whether to send a notification email message to the Worker saying
+	//  Specifies whether to send a notification email message to the Worker saying
 	// that the qualification was assigned to the Worker. Note: this is true by
 	// default.
 	SendNotification *bool
@@ -90,25 +93,25 @@ func (c *Client) addOperationAssociateQualificationWithWorkerMiddlewares(stack *
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -123,13 +126,16 @@ func (c *Client) addOperationAssociateQualificationWithWorkerMiddlewares(stack *
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpAssociateQualificationWithWorkerValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opAssociateQualificationWithWorker(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

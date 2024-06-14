@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/docdb/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -33,14 +32,18 @@ func (c *Client) DescribeEvents(ctx context.Context, params *DescribeEventsInput
 	return out, nil
 }
 
-// Represents the input to DescribeEvents .
+// Represents the input to DescribeEvents.
 type DescribeEventsInput struct {
 
-	// The number of minutes to retrieve events for. Default: 60
+	// The number of minutes to retrieve events for.
+	//
+	// Default: 60
 	Duration *int32
 
-	// The end of the time interval for which to retrieve events, specified in ISO
-	// 8601 format. Example: 2009-07-08T18:00Z
+	//  The end of the time interval for which to retrieve events, specified in ISO
+	// 8601 format.
+	//
+	// Example: 2009-07-08T18:00Z
 	EndTime *time.Time
 
 	// A list of event categories that trigger notifications for an event notification
@@ -55,21 +58,32 @@ type DescribeEventsInput struct {
 	// value specified by MaxRecords .
 	Marker *string
 
-	// The maximum number of records to include in the response. If more records exist
-	// than the specified MaxRecords value, a pagination token (marker) is included in
-	// the response so that the remaining results can be retrieved. Default: 100
+	//  The maximum number of records to include in the response. If more records
+	// exist than the specified MaxRecords value, a pagination token (marker) is
+	// included in the response so that the remaining results can be retrieved.
+	//
+	// Default: 100
+	//
 	// Constraints: Minimum 20, maximum 100.
 	MaxRecords *int32
 
 	// The identifier of the event source for which events are returned. If not
-	// specified, then all sources are included in the response. Constraints:
+	// specified, then all sources are included in the response.
+	//
+	// Constraints:
+	//
 	//   - If SourceIdentifier is provided, SourceType must also be provided.
+	//
 	//   - If the source type is DBInstance , a DBInstanceIdentifier must be provided.
+	//
 	//   - If the source type is DBSecurityGroup , a DBSecurityGroupName must be
 	//   provided.
+	//
 	//   - If the source type is DBParameterGroup , a DBParameterGroupName must be
 	//   provided.
+	//
 	//   - If the source type is DBSnapshot , a DBSnapshotIdentifier must be provided.
+	//
 	//   - Cannot end with a hyphen or contain two consecutive hyphens.
 	SourceIdentifier *string
 
@@ -77,14 +91,16 @@ type DescribeEventsInput struct {
 	// are returned.
 	SourceType types.SourceType
 
-	// The beginning of the time interval to retrieve events for, specified in ISO
-	// 8601 format. Example: 2009-07-08T18:00Z
+	//  The beginning of the time interval to retrieve events for, specified in ISO
+	// 8601 format.
+	//
+	// Example: 2009-07-08T18:00Z
 	StartTime *time.Time
 
 	noSmithyDocumentSerde
 }
 
-// Represents the output of DescribeEvents .
+// Represents the output of DescribeEvents.
 type DescribeEventsOutput struct {
 
 	// Detailed information about one or more events.
@@ -123,25 +139,25 @@ func (c *Client) addOperationDescribeEventsMiddlewares(stack *middleware.Stack, 
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -156,13 +172,16 @@ func (c *Client) addOperationDescribeEventsMiddlewares(stack *middleware.Stack, 
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDescribeEventsValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeEvents(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -190,9 +209,12 @@ var _ DescribeEventsAPIClient = (*Client)(nil)
 
 // DescribeEventsPaginatorOptions is the paginator options for DescribeEvents
 type DescribeEventsPaginatorOptions struct {
-	// The maximum number of records to include in the response. If more records exist
-	// than the specified MaxRecords value, a pagination token (marker) is included in
-	// the response so that the remaining results can be retrieved. Default: 100
+	//  The maximum number of records to include in the response. If more records
+	// exist than the specified MaxRecords value, a pagination token (marker) is
+	// included in the response so that the remaining results can be retrieved.
+	//
+	// Default: 100
+	//
 	// Constraints: Minimum 20, maximum 100.
 	Limit int32
 

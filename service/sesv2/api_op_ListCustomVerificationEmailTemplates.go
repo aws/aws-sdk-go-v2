@@ -6,17 +6,20 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/sesv2/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Lists the existing custom verification email templates for your account in the
-// current Amazon Web Services Region. For more information about custom
-// verification email templates, see Using custom verification email templates (https://docs.aws.amazon.com/ses/latest/dg/creating-identities.html#send-email-verify-address-custom)
-// in the Amazon SES Developer Guide. You can execute this operation no more than
-// once per second.
+// current Amazon Web Services Region.
+//
+// For more information about custom verification email templates, see [Using custom verification email templates] in the
+// Amazon SES Developer Guide.
+//
+// You can execute this operation no more than once per second.
+//
+// [Using custom verification email templates]: https://docs.aws.amazon.com/ses/latest/dg/creating-identities.html#send-email-verify-address-custom
 func (c *Client) ListCustomVerificationEmailTemplates(ctx context.Context, params *ListCustomVerificationEmailTemplatesInput, optFns ...func(*Options)) (*ListCustomVerificationEmailTemplatesOutput, error) {
 	if params == nil {
 		params = &ListCustomVerificationEmailTemplatesInput{}
@@ -43,8 +46,9 @@ type ListCustomVerificationEmailTemplatesInput struct {
 	// The number of results to show in a single call to
 	// ListCustomVerificationEmailTemplates . If the number of results is larger than
 	// the number you specified in this parameter, then the response includes a
-	// NextToken element, which you can use to obtain additional results. The value you
-	// specify has to be at least 1, and can be no more than 50.
+	// NextToken element, which you can use to obtain additional results.
+	//
+	// The value you specify has to be at least 1, and can be no more than 50.
 	PageSize *int32
 
 	noSmithyDocumentSerde
@@ -90,25 +94,25 @@ func (c *Client) addOperationListCustomVerificationEmailTemplatesMiddlewares(sta
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -123,10 +127,13 @@ func (c *Client) addOperationListCustomVerificationEmailTemplatesMiddlewares(sta
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListCustomVerificationEmailTemplates(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -158,8 +165,9 @@ type ListCustomVerificationEmailTemplatesPaginatorOptions struct {
 	// The number of results to show in a single call to
 	// ListCustomVerificationEmailTemplates . If the number of results is larger than
 	// the number you specified in this parameter, then the response includes a
-	// NextToken element, which you can use to obtain additional results. The value you
-	// specify has to be at least 1, and can be no more than 50.
+	// NextToken element, which you can use to obtain additional results.
+	//
+	// The value you specify has to be at least 1, and can be no more than 50.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

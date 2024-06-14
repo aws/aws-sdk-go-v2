@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/vpclattice/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -14,9 +13,10 @@ import (
 
 // Creates a listener for a service. Before you start using your Amazon VPC
 // Lattice service, you must add one or more listeners. A listener is a process
-// that checks for connection requests to your services. For more information, see
-// Listeners (https://docs.aws.amazon.com/vpc-lattice/latest/ug/listeners.html) in
-// the Amazon VPC Lattice User Guide.
+// that checks for connection requests to your services. For more information, see [Listeners]
+// in the Amazon VPC Lattice User Guide.
+//
+// [Listeners]: https://docs.aws.amazon.com/vpc-lattice/latest/ug/listeners.html
 func (c *Client) CreateListener(ctx context.Context, params *CreateListenerInput, optFns ...func(*Options)) (*CreateListenerOutput, error) {
 	if params == nil {
 		params = &CreateListenerInput{}
@@ -34,11 +34,8 @@ func (c *Client) CreateListener(ctx context.Context, params *CreateListenerInput
 
 type CreateListenerInput struct {
 
-	// The action for the default rule. Each listener has a default rule. Each rule
-	// consists of a priority, one or more actions, and one or more conditions. The
-	// default rule is the rule that's used if no other rules match. Each rule must
-	// include exactly one of the following types of actions: forward or fixed-response
-	// , and it must be the last action to be performed.
+	// The action for the default rule. Each listener has a default rule. The default
+	// rule is used if no other rules match.
 	//
 	// This member is required.
 	DefaultAction types.RuleAction
@@ -50,7 +47,7 @@ type CreateListenerInput struct {
 	// This member is required.
 	Name *string
 
-	// The listener protocol HTTP or HTTPS.
+	// The listener protocol.
 	//
 	// This member is required.
 	Protocol types.ListenerProtocol
@@ -66,8 +63,8 @@ type CreateListenerInput struct {
 	// actions. If the parameters aren't identical, the retry fails.
 	ClientToken *string
 
-	// The listener port. You can specify a value from 1 to 65535 . For HTTP, the
-	// default is 80 . For HTTPS, the default is 443 .
+	// The listener port. You can specify a value from 1 to 65535. For HTTP, the
+	// default is 80. For HTTPS, the default is 443.
 	Port *int32
 
 	// The tags for the listener.
@@ -130,25 +127,25 @@ func (c *Client) addOperationCreateListenerMiddlewares(stack *middleware.Stack, 
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -163,6 +160,9 @@ func (c *Client) addOperationCreateListenerMiddlewares(stack *middleware.Stack, 
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opCreateListenerMiddleware(stack, options); err != nil {
 		return err
 	}
@@ -172,7 +172,7 @@ func (c *Client) addOperationCreateListenerMiddlewares(stack *middleware.Stack, 
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateListener(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

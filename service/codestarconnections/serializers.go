@@ -1706,6 +1706,11 @@ func awsAwsjson10_serializeOpDocumentCreateSyncConfigurationInput(v *CreateSyncC
 		ok.String(*v.ConfigFile)
 	}
 
+	if len(v.PublishDeploymentStatus) > 0 {
+		ok := object.Key("PublishDeploymentStatus")
+		ok.String(string(v.PublishDeploymentStatus))
+	}
+
 	if v.RepositoryLinkId != nil {
 		ok := object.Key("RepositoryLinkId")
 		ok.String(*v.RepositoryLinkId)
@@ -1724,6 +1729,11 @@ func awsAwsjson10_serializeOpDocumentCreateSyncConfigurationInput(v *CreateSyncC
 	if len(v.SyncType) > 0 {
 		ok := object.Key("SyncType")
 		ok.String(string(v.SyncType))
+	}
+
+	if len(v.TriggerResourceUpdateOn) > 0 {
+		ok := object.Key("TriggerResourceUpdateOn")
+		ok.String(string(v.TriggerResourceUpdateOn))
 	}
 
 	return nil
@@ -2133,6 +2143,11 @@ func awsAwsjson10_serializeOpDocumentUpdateSyncConfigurationInput(v *UpdateSyncC
 		ok.String(*v.ConfigFile)
 	}
 
+	if len(v.PublishDeploymentStatus) > 0 {
+		ok := object.Key("PublishDeploymentStatus")
+		ok.String(string(v.PublishDeploymentStatus))
+	}
+
 	if v.RepositoryLinkId != nil {
 		ok := object.Key("RepositoryLinkId")
 		ok.String(*v.RepositoryLinkId)
@@ -2151,6 +2166,11 @@ func awsAwsjson10_serializeOpDocumentUpdateSyncConfigurationInput(v *UpdateSyncC
 	if len(v.SyncType) > 0 {
 		ok := object.Key("SyncType")
 		ok.String(string(v.SyncType))
+	}
+
+	if len(v.TriggerResourceUpdateOn) > 0 {
+		ok := object.Key("TriggerResourceUpdateOn")
+		ok.String(string(v.TriggerResourceUpdateOn))
 	}
 
 	return nil

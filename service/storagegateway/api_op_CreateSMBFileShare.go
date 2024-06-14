@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/storagegateway/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -15,16 +14,18 @@ import (
 // Creates a Server Message Block (SMB) file share on an existing S3 File Gateway.
 // In Storage Gateway, a file share is a file system mount point backed by Amazon
 // S3 cloud storage. Storage Gateway exposes file shares using an SMB interface.
-// This operation is only supported for S3 File Gateways. S3 File Gateways require
-// Security Token Service (Amazon Web Services STS) to be activated to enable you
-// to create a file share. Make sure that Amazon Web Services STS is activated in
-// the Amazon Web Services Region you are creating your S3 File Gateway in. If
-// Amazon Web Services STS is not activated in this Amazon Web Services Region,
-// activate it. For information about how to activate Amazon Web Services STS, see
-// Activating and deactivating Amazon Web Services STS in an Amazon Web Services
-// Region (https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_enable-regions.html)
-// in the Identity and Access Management User Guide. File gateways don't support
-// creating hard or symbolic links on a file share.
+// This operation is only supported for S3 File Gateways.
+//
+// S3 File Gateways require Security Token Service (Amazon Web Services STS) to be
+// activated to enable you to create a file share. Make sure that Amazon Web
+// Services STS is activated in the Amazon Web Services Region you are creating
+// your S3 File Gateway in. If Amazon Web Services STS is not activated in this
+// Amazon Web Services Region, activate it. For information about how to activate
+// Amazon Web Services STS, see [Activating and deactivating Amazon Web Services STS in an Amazon Web Services Region]in the Identity and Access Management User Guide.
+//
+// File gateways don't support creating hard or symbolic links on a file share.
+//
+// [Activating and deactivating Amazon Web Services STS in an Amazon Web Services Region]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_enable-regions.html
 func (c *Client) CreateSMBFileShare(ctx context.Context, params *CreateSMBFileShareInput, optFns ...func(*Options)) (*CreateSMBFileShareOutput, error) {
 	if params == nil {
 		params = &CreateSMBFileShareInput{}
@@ -56,15 +57,28 @@ type CreateSMBFileShareInput struct {
 
 	// A custom ARN for the backend storage used for storing data for file shares. It
 	// includes a resource ARN with an optional prefix concatenation. The prefix must
-	// end with a forward slash (/). You can specify LocationARN as a bucket ARN,
-	// access point ARN or access point alias, as shown in the following examples.
-	// Bucket ARN: arn:aws:s3:::my-bucket/prefix/ Access point ARN:
-	// arn:aws:s3:region:account-id:accesspoint/access-point-name/prefix/ If you
-	// specify an access point, the bucket policy must be configured to delegate access
-	// control to the access point. For information, see Delegating access control to
-	// access points (https://docs.aws.amazon.com/AmazonS3/latest/userguide/access-points-policies.html#access-points-delegating-control)
-	// in the Amazon S3 User Guide. Access point alias:
-	// test-ap-ab123cdef4gehijklmn5opqrstuvuse1a-s3alias
+	// end with a forward slash (/).
+	//
+	// You can specify LocationARN as a bucket ARN, access point ARN or access point
+	// alias, as shown in the following examples.
+	//
+	// Bucket ARN:
+	//
+	//     arn:aws:s3:::my-bucket/prefix/
+	//
+	// Access point ARN:
+	//
+	//     arn:aws:s3:region:account-id:accesspoint/access-point-name/prefix/
+	//
+	// If you specify an access point, the bucket policy must be configured to
+	// delegate access control to the access point. For information, see [Delegating access control to access points]in the Amazon
+	// S3 User Guide.
+	//
+	// Access point alias:
+	//
+	//     test-ap-ab123cdef4gehijklmn5opqrstuvuse1a-s3alias
+	//
+	// [Delegating access control to access points]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/access-points-policies.html#access-points-delegating-control
 	//
 	// This member is required.
 	LocationARN *string
@@ -82,22 +96,26 @@ type CreateSMBFileShareInput struct {
 	// A list of users or groups in the Active Directory that will be granted
 	// administrator privileges on the file share. These users can do all file
 	// operations as the super-user. Acceptable formats include: DOMAIN\User1 , user1 ,
-	// @group1 , and @DOMAIN\group1 . Use this option very carefully, because any user
-	// in this list can do anything they like on the file share, regardless of file
-	// permissions.
+	// @group1 , and @DOMAIN\group1 .
+	//
+	// Use this option very carefully, because any user in this list can do anything
+	// they like on the file share, regardless of file permissions.
 	AdminUserList []string
 
 	// The Amazon Resource Name (ARN) of the storage used for audit logs.
 	AuditDestinationARN *string
 
 	// The authentication method that users use to access the file share. The default
-	// is ActiveDirectory . Valid Values: ActiveDirectory | GuestAccess
+	// is ActiveDirectory .
+	//
+	// Valid Values: ActiveDirectory | GuestAccess
 	Authentication *string
 
 	// Specifies the Region of the S3 bucket where the SMB file share stores files.
-	// This parameter is required for SMB file shares that connect to Amazon S3 through
-	// a VPC endpoint, a VPC access point, or an access point alias that points to a
-	// VPC access point.
+	//
+	// This parameter is required for SMB file shares that connect to Amazon S3
+	// through a VPC endpoint, a VPC access point, or an access point alias that points
+	// to a VPC access point.
 	BucketRegion *string
 
 	// Specifies refresh cache information for the file share.
@@ -109,17 +127,23 @@ type CreateSMBFileShareInput struct {
 	CaseSensitivity types.CaseSensitivity
 
 	// The default storage class for objects put into an Amazon S3 bucket by the S3
-	// File Gateway. The default value is S3_STANDARD . Optional. Valid Values:
-	// S3_STANDARD | S3_INTELLIGENT_TIERING | S3_STANDARD_IA | S3_ONEZONE_IA
+	// File Gateway. The default value is S3_STANDARD . Optional.
+	//
+	// Valid Values: S3_STANDARD | S3_INTELLIGENT_TIERING | S3_STANDARD_IA |
+	// S3_ONEZONE_IA
 	DefaultStorageClass *string
 
-	// The name of the file share. Optional. FileShareName must be set if an S3 prefix
-	// name is set in LocationARN , or if an access point or access point alias is used.
+	// The name of the file share. Optional.
+	//
+	// FileShareName must be set if an S3 prefix name is set in LocationARN , or if an
+	// access point or access point alias is used.
 	FileShareName *string
 
 	// A value that enables guessing of the MIME type for uploaded objects based on
 	// file extensions. Set this value to true to enable MIME type guessing, otherwise
-	// set to false . The default value is true . Valid Values: true | false
+	// set to false . The default value is true .
+	//
+	// Valid Values: true | false
 	GuessMIMETypeEnabled *bool
 
 	// A list of users or groups in the Active Directory that are not allowed to
@@ -129,7 +153,9 @@ type CreateSMBFileShareInput struct {
 	InvalidUserList []string
 
 	// Set to true to use Amazon S3 server-side encryption with your own KMS key, or
-	// false to use a key managed by Amazon S3. Optional. Valid Values: true | false
+	// false to use a key managed by Amazon S3. Optional.
+	//
+	// Valid Values: true | false
 	KMSEncrypted *bool
 
 	// The Amazon Resource Name (ARN) of a symmetric customer master key (CMK) used
@@ -142,11 +168,19 @@ type CreateSMBFileShareInput struct {
 	// before generating an ObjectUploaded notification. Because clients can make many
 	// small writes to files, it's best to set this parameter for as long as possible
 	// to avoid generating multiple notifications for the same file in a small time
-	// period. SettlingTimeInSeconds has no effect on the timing of the object
-	// uploading to Amazon S3, only the timing of the notification. The following
-	// example sets NotificationPolicy on with SettlingTimeInSeconds set to 60.
-	// {\"Upload\": {\"SettlingTimeInSeconds\": 60}} The following example sets
-	// NotificationPolicy off. {}
+	// period.
+	//
+	// SettlingTimeInSeconds has no effect on the timing of the object uploading to
+	// Amazon S3, only the timing of the notification.
+	//
+	// The following example sets NotificationPolicy on with SettlingTimeInSeconds set
+	// to 60.
+	//
+	//     {\"Upload\": {\"SettlingTimeInSeconds\": 60}}
+	//
+	// The following example sets NotificationPolicy off.
+	//
+	//     {}
 	NotificationPolicy *string
 
 	// A value that sets the access control list (ACL) permission for objects in the
@@ -155,43 +189,57 @@ type CreateSMBFileShareInput struct {
 	ObjectACL types.ObjectACL
 
 	// Specifies whether opportunistic locking is enabled for the SMB file share.
+	//
 	// Enabling opportunistic locking on case-sensitive shares is not recommended for
 	// workloads that involve access to files with the same name in different case.
+	//
 	// Valid Values: true | false
 	OplocksEnabled *bool
 
 	// A value that sets the write status of a file share. Set this value to true to
-	// set the write status to read-only, otherwise set to false . Valid Values: true
-	// | false
+	// set the write status to read-only, otherwise set to false .
+	//
+	// Valid Values: true | false
 	ReadOnly *bool
 
 	// A value that sets who pays the cost of the request and the cost associated with
 	// data download from the S3 bucket. If this value is set to true , the requester
 	// pays the costs; otherwise, the S3 bucket owner pays. However, the S3 bucket
-	// owner always pays the cost of storing data. RequesterPays is a configuration
-	// for the S3 bucket that backs the file share, so make sure that the configuration
-	// on the file share is the same as the S3 bucket configuration. Valid Values: true
-	// | false
+	// owner always pays the cost of storing data.
+	//
+	// RequesterPays is a configuration for the S3 bucket that backs the file share,
+	// so make sure that the configuration on the file share is the same as the S3
+	// bucket configuration.
+	//
+	// Valid Values: true | false
 	RequesterPays *bool
 
 	// Set this value to true to enable access control list (ACL) on the SMB file
 	// share. Set it to false to map file and directory permissions to the POSIX
-	// permissions. For more information, see Using Microsoft Windows ACLs to control
-	// access to an SMB file share (https://docs.aws.amazon.com/storagegateway/latest/userguide/smb-acl.html)
-	// in the Storage Gateway User Guide. Valid Values: true | false
+	// permissions.
+	//
+	// For more information, see [Using Microsoft Windows ACLs to control access to an SMB file share] in the Storage Gateway User Guide.
+	//
+	// Valid Values: true | false
+	//
+	// [Using Microsoft Windows ACLs to control access to an SMB file share]: https://docs.aws.amazon.com/storagegateway/latest/userguide/smb-acl.html
 	SMBACLEnabled *bool
 
 	// A list of up to 50 tags that can be assigned to the NFS file share. Each tag is
-	// a key-value pair. Valid characters for key and value are letters, spaces, and
-	// numbers representable in UTF-8 format, and the following special characters: + -
-	// = . _ : / @. The maximum length of a tag's key is 128 characters, and the
-	// maximum length for a tag's value is 256.
+	// a key-value pair.
+	//
+	// Valid characters for key and value are letters, spaces, and numbers
+	// representable in UTF-8 format, and the following special characters: + - = . _ :
+	// / @. The maximum length of a tag's key is 128 characters, and the maximum length
+	// for a tag's value is 256.
 	Tags []types.Tag
 
 	// Specifies the DNS name for the VPC endpoint that the SMB file share uses to
-	// connect to Amazon S3. This parameter is required for SMB file shares that
-	// connect to Amazon S3 through a VPC endpoint, a VPC access point, or an access
-	// point alias that points to a VPC access point.
+	// connect to Amazon S3.
+	//
+	// This parameter is required for SMB file shares that connect to Amazon S3
+	// through a VPC endpoint, a VPC access point, or an access point alias that points
+	// to a VPC access point.
 	VPCEndpointDNSName *string
 
 	// A list of users or groups in the Active Directory that are allowed to access
@@ -237,25 +285,25 @@ func (c *Client) addOperationCreateSMBFileShareMiddlewares(stack *middleware.Sta
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -270,13 +318,16 @@ func (c *Client) addOperationCreateSMBFileShareMiddlewares(stack *middleware.Sta
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpCreateSMBFileShareValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateSMBFileShare(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

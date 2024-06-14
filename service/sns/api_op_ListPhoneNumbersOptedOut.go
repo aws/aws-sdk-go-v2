@@ -6,18 +6,19 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Returns a list of phone numbers that are opted out, meaning you cannot send SMS
-// messages to them. The results for ListPhoneNumbersOptedOut are paginated, and
-// each page returns up to 100 phone numbers. If additional phone numbers are
-// available after the first page of results, then a NextToken string will be
-// returned. To receive the next page, you call ListPhoneNumbersOptedOut again
-// using the NextToken string received from the previous call. When there are no
-// more records to return, NextToken will be null.
+// messages to them.
+//
+// The results for ListPhoneNumbersOptedOut are paginated, and each page returns
+// up to 100 phone numbers. If additional phone numbers are available after the
+// first page of results, then a NextToken string will be returned. To receive the
+// next page, you call ListPhoneNumbersOptedOut again using the NextToken string
+// received from the previous call. When there are no more records to return,
+// NextToken will be null.
 func (c *Client) ListPhoneNumbersOptedOut(ctx context.Context, params *ListPhoneNumbersOptedOutInput, optFns ...func(*Options)) (*ListPhoneNumbersOptedOutOutput, error) {
 	if params == nil {
 		params = &ListPhoneNumbersOptedOutInput{}
@@ -82,25 +83,25 @@ func (c *Client) addOperationListPhoneNumbersOptedOutMiddlewares(stack *middlewa
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -115,10 +116,13 @@ func (c *Client) addOperationListPhoneNumbersOptedOutMiddlewares(stack *middlewa
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListPhoneNumbersOptedOut(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

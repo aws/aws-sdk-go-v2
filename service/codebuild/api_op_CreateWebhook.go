@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/codebuild/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -14,15 +13,17 @@ import (
 
 // For an existing CodeBuild build project that has its source code stored in a
 // GitHub or Bitbucket repository, enables CodeBuild to start rebuilding the source
-// code every time a code change is pushed to the repository. If you enable
-// webhooks for an CodeBuild project, and the project is used as a build step in
-// CodePipeline, then two identical builds are created for each commit. One build
-// is triggered through webhooks, and one through CodePipeline. Because billing is
-// on a per-build basis, you are billed for both builds. Therefore, if you are
-// using CodePipeline, we recommend that you disable webhooks in CodeBuild. In the
-// CodeBuild console, clear the Webhook box. For more information, see step 5 in
-// Change a Build Project's Settings (https://docs.aws.amazon.com/codebuild/latest/userguide/change-project.html#change-project-console)
-// .
+// code every time a code change is pushed to the repository.
+//
+// If you enable webhooks for an CodeBuild project, and the project is used as a
+// build step in CodePipeline, then two identical builds are created for each
+// commit. One build is triggered through webhooks, and one through CodePipeline.
+// Because billing is on a per-build basis, you are billed for both builds.
+// Therefore, if you are using CodePipeline, we recommend that you disable webhooks
+// in CodeBuild. In the CodeBuild console, clear the Webhook box. For more
+// information, see step 5 in [Change a Build Project's Settings].
+//
+// [Change a Build Project's Settings]: https://docs.aws.amazon.com/codebuild/latest/userguide/change-project.html#change-project-console
 func (c *Client) CreateWebhook(ctx context.Context, params *CreateWebhookInput, optFns ...func(*Options)) (*CreateWebhookOutput, error) {
 	if params == nil {
 		params = &CreateWebhookInput{}
@@ -47,8 +48,9 @@ type CreateWebhookInput struct {
 
 	// A regular expression used to determine which repository branches are built when
 	// a webhook is triggered. If the name of a branch matches the regular expression,
-	// then it is built. If branchFilter is empty, then all branches are built. It is
-	// recommended that you use filterGroups instead of branchFilter .
+	// then it is built. If branchFilter is empty, then all branches are built.
+	//
+	// It is recommended that you use filterGroups instead of branchFilter .
 	BranchFilter *string
 
 	// Specifies the type of build this webhook will trigger.
@@ -56,10 +58,19 @@ type CreateWebhookInput struct {
 
 	// An array of arrays of WebhookFilter objects used to determine which webhooks
 	// are triggered. At least one WebhookFilter in the array must specify EVENT as
-	// its type . For a build to be triggered, at least one filter group in the
-	// filterGroups array must pass. For a filter group to pass, each of its filters
-	// must pass.
+	// its type .
+	//
+	// For a build to be triggered, at least one filter group in the filterGroups
+	// array must pass. For a filter group to pass, each of its filters must pass.
 	FilterGroups [][]types.WebhookFilter
+
+	// If manualCreation is true, CodeBuild doesn't create a webhook in GitHub and
+	// instead returns payloadUrl and secret values for the webhook. The payloadUrl
+	// and secret values in the output can be used to manually create a webhook within
+	// GitHub.
+	//
+	// manualCreation is only available for GitHub webhooks.
+	ManualCreation *bool
 
 	noSmithyDocumentSerde
 }
@@ -98,25 +109,25 @@ func (c *Client) addOperationCreateWebhookMiddlewares(stack *middleware.Stack, o
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -131,13 +142,16 @@ func (c *Client) addOperationCreateWebhookMiddlewares(stack *middleware.Stack, o
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpCreateWebhookValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateWebhook(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

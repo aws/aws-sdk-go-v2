@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/opensearch/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -53,10 +52,13 @@ type DescribeDomainHealthOutput struct {
 	AvailabilityZoneCount *string
 
 	// The current health status of your cluster.
+	//
 	//   - Red - At least one primary shard is not allocated to any node.
-	//   - Yellow - All primary shards are allocated to nodes, but some replicas
-	//   aren’t.
+	//
+	//   - Yellow - All primary shards are allocated to nodes, but some replicas aren’t.
+	//
 	//   - Green - All primary shards and their replicas are allocated to nodes.
+	//
 	//   - NotAvailable - Unable to retrieve cluster health.
 	ClusterHealth types.DomainHealth
 
@@ -68,7 +70,9 @@ type DescribeDomainHealthOutput struct {
 	DedicatedMaster *bool
 
 	// The current state of the domain.
+	//
 	//   - Processing - The domain has updates in progress.
+	//
 	//   - Active - Requested changes have been processed and deployed to the domain.
 	DomainState types.DomainState
 
@@ -82,7 +86,9 @@ type DescribeDomainHealthOutput struct {
 	MasterEligibleNodeCount *string
 
 	// Indicates whether the domain has an elected master node.
+	//
 	//   - Available - The domain has an elected master node.
+	//
 	//   - UnAvailable - The master node hasn't yet been elected, and a quorum to
 	//   elect a new master node hasn't been reached.
 	MasterNode types.MasterNodeStatus
@@ -129,25 +135,25 @@ func (c *Client) addOperationDescribeDomainHealthMiddlewares(stack *middleware.S
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -162,13 +168,16 @@ func (c *Client) addOperationDescribeDomainHealthMiddlewares(stack *middleware.S
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDescribeDomainHealthValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeDomainHealth(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

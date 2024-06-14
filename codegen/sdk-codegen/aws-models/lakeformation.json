@@ -97,6 +97,9 @@
                     "target": "com.amazonaws.lakeformation#GetDataCellsFilter"
                 },
                 {
+                    "target": "com.amazonaws.lakeformation#GetDataLakePrincipal"
+                },
+                {
                     "target": "com.amazonaws.lakeformation#GetDataLakeSettings"
                 },
                 {
@@ -2174,6 +2177,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>A list of the account IDs of Amazon Web Services accounts of third-party applications\n         that are allowed to access data managed by Lake Formation.</p>"
                     }
+                },
+                "ShareRecipients": {
+                    "target": "com.amazonaws.lakeformation#DataLakePrincipalList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of Amazon Web Services account IDs and/or Amazon Web Services organization/organizational unit ARNs\n         that are allowed to access data managed by Lake Formation. </p>\n         <p>If the <code>ShareRecipients</code> list includes valid values, a resource share is created with the principals you want to have access to the resources.</p>\n         <p>If the <code>ShareRecipients</code> value is null or the list is empty, no resource share is created.</p>"
+                    }
                 }
             },
             "traits": {
@@ -2186,7 +2195,7 @@
                 "ApplicationArn": {
                     "target": "com.amazonaws.lakeformation#ApplicationArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the integrated application.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Lake Formation application integrated with IAM Identity Center.</p>"
                     }
                 }
             },
@@ -3070,13 +3079,25 @@
                 "ApplicationArn": {
                     "target": "com.amazonaws.lakeformation#ApplicationArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the integrated application.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Lake Formation application integrated with IAM Identity Center.</p>"
                     }
                 },
                 "ExternalFiltering": {
                     "target": "com.amazonaws.lakeformation#ExternalFilteringConfiguration",
                     "traits": {
                         "smithy.api#documentation": "<p>Indicates if external filtering is enabled.</p>"
+                    }
+                },
+                "ShareRecipients": {
+                    "target": "com.amazonaws.lakeformation#DataLakePrincipalList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of Amazon Web Services account IDs or Amazon Web Services organization/organizational unit ARNs that\n         are allowed to access data managed by Lake Formation. </p>\n         <p>If the <code>ShareRecipients</code> list includes valid values, a resource share is created with the principals you want to have access to the resources as the <code>ShareRecipients</code>.</p>\n         <p>If the <code>ShareRecipients</code> value is null or the list is empty, no resource share is created.</p>"
+                    }
+                },
+                "ResourceShare": {
+                    "target": "com.amazonaws.lakeformation#RAMResourceShareArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the RAM share.</p>"
                     }
                 }
             },
@@ -3568,6 +3589,55 @@
                     "target": "com.amazonaws.lakeformation#DataCellsFilter",
                     "traits": {
                         "smithy.api#documentation": "<p>A structure that describes certain columns on certain rows.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.lakeformation#GetDataLakePrincipal": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.lakeformation#GetDataLakePrincipalRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.lakeformation#GetDataLakePrincipalResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.lakeformation#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.lakeformation#InternalServiceException"
+                },
+                {
+                    "target": "com.amazonaws.lakeformation#OperationTimeoutException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns the identity of the invoking principal.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/GetDataLakePrincipal",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.lakeformation#GetDataLakePrincipalRequest": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.lakeformation#GetDataLakePrincipalResponse": {
+            "type": "structure",
+            "members": {
+                "Identity": {
+                    "target": "com.amazonaws.lakeformation#IdentityString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique identifier of the invoking principal.</p>"
                     }
                 }
             },
@@ -4755,6 +4825,9 @@
             }
         },
         "com.amazonaws.lakeformation#IdentityCenterInstanceArn": {
+            "type": "string"
+        },
+        "com.amazonaws.lakeformation#IdentityString": {
             "type": "string"
         },
         "com.amazonaws.lakeformation#InternalServiceException": {
@@ -7776,6 +7849,12 @@
                     "target": "com.amazonaws.lakeformation#CatalogIdString",
                     "traits": {
                         "smithy.api#documentation": "<p>The identifier for the Data Catalog. By default, the account ID. The Data Catalog is the\n         persistent metadata store. It contains database definitions, table definitions, view\n         definitions, and other control information to manage your Lake Formation\n         environment.</p>"
+                    }
+                },
+                "ShareRecipients": {
+                    "target": "com.amazonaws.lakeformation#DataLakePrincipalList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of Amazon Web Services account IDs or Amazon Web Services organization/organizational unit ARNs that\n         are allowed to access to access data managed by Lake Formation. </p>\n         <p>If the <code>ShareRecipients</code> list includes valid values, then the resource share is updated with the principals you want to have access to the resources.</p>\n         <p>If the <code>ShareRecipients</code> value is null, both the list of share recipients and\n         the resource share remain unchanged.</p>\n         <p>If the <code>ShareRecipients</code> value is an empty list, then the existing share\n         recipients list will be cleared, and the resource share will be deleted.</p>"
                     }
                 },
                 "ApplicationStatus": {

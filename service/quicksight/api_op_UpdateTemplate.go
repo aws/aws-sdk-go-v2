@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/quicksight/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -42,8 +41,10 @@ type UpdateTemplateInput struct {
 	// This member is required.
 	TemplateId *string
 
-	// The definition of a template. A definition is the data model of all features in
-	// a Dashboard, Template, or Analysis.
+	// The definition of a template.
+	//
+	// A definition is the data model of all features in a Dashboard, Template, or
+	// Analysis.
 	Definition *types.TemplateVersionDefinition
 
 	// The name for the template.
@@ -55,10 +56,11 @@ type UpdateTemplateInput struct {
 	// require an Amazon Resource Name (ARN). For SourceTemplate , specify the ARN of
 	// the source template. For SourceAnalysis , specify the ARN of the source
 	// analysis. The SourceTemplate ARN can contain any Amazon Web Services account
-	// and any Amazon QuickSight-supported Amazon Web Services Region;. Use the
-	// DataSetReferences entity within SourceTemplate or SourceAnalysis to list the
-	// replacement datasets for the placeholders listed in the original. The schema in
-	// each dataset must match its placeholder.
+	// and any Amazon QuickSight-supported Amazon Web Services Region;.
+	//
+	// Use the DataSetReferences entity within SourceTemplate or SourceAnalysis to
+	// list the replacement datasets for the placeholders listed in the original. The
+	// schema in each dataset must match its placeholder.
 	SourceEntity *types.TemplateSourceEntity
 
 	// The option to relax the validation needed to update a template with definition
@@ -123,25 +125,25 @@ func (c *Client) addOperationUpdateTemplateMiddlewares(stack *middleware.Stack, 
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -156,13 +158,16 @@ func (c *Client) addOperationUpdateTemplateMiddlewares(stack *middleware.Stack, 
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpUpdateTemplateValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateTemplate(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

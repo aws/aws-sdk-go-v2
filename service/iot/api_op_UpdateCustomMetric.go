@@ -6,16 +6,17 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/iot/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
-// Updates a Device Defender detect custom metric. Requires permission to access
-// the UpdateCustomMetric (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
-// action.
+// Updates a Device Defender detect custom metric.
+//
+// Requires permission to access the [UpdateCustomMetric] action.
+//
+// [UpdateCustomMetric]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions
 func (c *Client) UpdateCustomMetric(ctx context.Context, params *UpdateCustomMetricInput, optFns ...func(*Options)) (*UpdateCustomMetricOutput, error) {
 	if params == nil {
 		params = &UpdateCustomMetricInput{}
@@ -33,14 +34,14 @@ func (c *Client) UpdateCustomMetric(ctx context.Context, params *UpdateCustomMet
 
 type UpdateCustomMetricInput struct {
 
-	// Field represents a friendly name in the console for the custom metric, it
+	//  Field represents a friendly name in the console for the custom metric, it
 	// doesn't have to be unique. Don't use this name as the metric identifier in the
 	// device metric report. Can be updated.
 	//
 	// This member is required.
 	DisplayName *string
 
-	// The name of the custom metric. Cannot be updated.
+	//  The name of the custom metric. Cannot be updated.
 	//
 	// This member is required.
 	MetricName *string
@@ -50,24 +51,26 @@ type UpdateCustomMetricInput struct {
 
 type UpdateCustomMetricOutput struct {
 
-	// The creation date of the custom metric in milliseconds since epoch.
+	//  The creation date of the custom metric in milliseconds since epoch.
 	CreationDate *time.Time
 
-	// A friendly name in the console for the custom metric
+	//  A friendly name in the console for the custom metric
 	DisplayName *string
 
-	// The time the custom metric was last modified in milliseconds since epoch.
+	//  The time the custom metric was last modified in milliseconds since epoch.
 	LastModifiedDate *time.Time
 
-	// The Amazon Resource Number (ARN) of the custom metric.
+	//  The Amazon Resource Number (ARN) of the custom metric.
 	MetricArn *string
 
-	// The name of the custom metric.
+	//  The name of the custom metric.
 	MetricName *string
 
-	// The type of the custom metric. The type number only takes a single metric value
-	// as an input, but while submitting the metrics value in the DeviceMetrics report,
-	// it must be passed as an array with a single value.
+	//  The type of the custom metric.
+	//
+	// The type number only takes a single metric value as an input, but while
+	// submitting the metrics value in the DeviceMetrics report, it must be passed as
+	// an array with a single value.
 	MetricType types.CustomMetricType
 
 	// Metadata pertaining to the operation's result.
@@ -98,25 +101,25 @@ func (c *Client) addOperationUpdateCustomMetricMiddlewares(stack *middleware.Sta
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -131,13 +134,16 @@ func (c *Client) addOperationUpdateCustomMetricMiddlewares(stack *middleware.Sta
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpUpdateCustomMetricValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateCustomMetric(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/accessanalyzer/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -31,7 +30,12 @@ func (c *Client) CheckAccessNotGranted(ctx context.Context, params *CheckAccessN
 type CheckAccessNotGrantedInput struct {
 
 	// An access object containing the permissions that shouldn't be granted by the
-	// specified policy.
+	// specified policy. If only actions are specified, IAM Access Analyzer checks for
+	// access of the actions on all resources in the policy. If only resources are
+	// specified, then IAM Access Analyzer checks which actions have access to the
+	// specified resources. If both actions and resources are specified, then IAM
+	// Access Analyzer checks which of the specified actions have access to the
+	// specified resources.
 	//
 	// This member is required.
 	Access []types.Access
@@ -43,11 +47,12 @@ type CheckAccessNotGrantedInput struct {
 
 	// The type of policy. Identity policies grant permissions to IAM principals.
 	// Identity policies include managed and inline policies for IAM roles, users, and
-	// groups. Resource policies grant permissions on Amazon Web Services resources.
-	// Resource policies include trust policies for IAM roles and bucket policies for
-	// Amazon S3 buckets. You can provide a generic input such as identity policy or
-	// resource policy or a specific input such as managed policy or Amazon S3 bucket
-	// policy.
+	// groups.
+	//
+	// Resource policies grant permissions on Amazon Web Services resources. Resource
+	// policies include trust policies for IAM roles and bucket policies for Amazon S3
+	// buckets. You can provide a generic input such as identity policy or resource
+	// policy or a specific input such as managed policy or Amazon S3 bucket policy.
 	//
 	// This member is required.
 	PolicyType types.AccessCheckPolicyType
@@ -97,25 +102,25 @@ func (c *Client) addOperationCheckAccessNotGrantedMiddlewares(stack *middleware.
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -130,13 +135,16 @@ func (c *Client) addOperationCheckAccessNotGrantedMiddlewares(stack *middleware.
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpCheckAccessNotGrantedValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCheckAccessNotGranted(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

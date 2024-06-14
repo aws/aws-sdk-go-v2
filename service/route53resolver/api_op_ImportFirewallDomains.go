@@ -6,18 +6,22 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/route53resolver/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Imports domain names from a file into a domain list, for use in a DNS firewall
-// rule group. Each domain specification in your domain list must satisfy the
-// following requirements:
+// rule group.
+//
+// Each domain specification in your domain list must satisfy the following
+// requirements:
+//
 //   - It can optionally start with * (asterisk).
+//
 //   - With the exception of the optional starting asterisk, it must only contain
 //     the following characters: A-Z , a-z , 0-9 , - (hyphen).
+//
 //   - It must be from 1-255 characters in length.
 func (c *Client) ImportFirewallDomains(ctx context.Context, params *ImportFirewallDomainsInput, optFns ...func(*Options)) (*ImportFirewallDomainsOutput, error) {
 	if params == nil {
@@ -37,9 +41,11 @@ func (c *Client) ImportFirewallDomains(ctx context.Context, params *ImportFirewa
 type ImportFirewallDomainsInput struct {
 
 	// The fully qualified URL or URI of the file stored in Amazon Simple Storage
-	// Service (Amazon S3) that contains the list of domains to import. The file must
-	// be in an S3 bucket that's in the same Region as your DNS Firewall. The file must
-	// be a text file and must contain a single domain per line.
+	// Service (Amazon S3) that contains the list of domains to import.
+	//
+	// The file must be in an S3 bucket that's in the same Region as your DNS
+	// Firewall. The file must be a text file and must contain a single domain per
+	// line.
 	//
 	// This member is required.
 	DomainFileUrl *string
@@ -101,25 +107,25 @@ func (c *Client) addOperationImportFirewallDomainsMiddlewares(stack *middleware.
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -134,13 +140,16 @@ func (c *Client) addOperationImportFirewallDomainsMiddlewares(stack *middleware.
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpImportFirewallDomainsValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opImportFirewallDomains(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

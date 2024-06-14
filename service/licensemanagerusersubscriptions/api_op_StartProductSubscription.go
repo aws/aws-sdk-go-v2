@@ -6,18 +6,19 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/licensemanagerusersubscriptions/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Starts a product subscription for a user with the specified identity provider.
+//
 // Your estimated bill for charges on the number of users and related costs will
 // take 48 hours to appear for billing periods that haven't closed (marked as
 // Pending billing status) in Amazon Web Services Billing. For more information,
-// see Viewing your monthly charges (https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/invoice.html)
-// in the Amazon Web Services Billing User Guide.
+// see [Viewing your monthly charges]in the Amazon Web Services Billing User Guide.
+//
+// [Viewing your monthly charges]: https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/invoice.html
 func (c *Client) StartProductSubscription(ctx context.Context, params *StartProductSubscriptionInput, optFns ...func(*Options)) (*StartProductSubscriptionOutput, error) {
 	if params == nil {
 		params = &StartProductSubscriptionInput{}
@@ -91,25 +92,25 @@ func (c *Client) addOperationStartProductSubscriptionMiddlewares(stack *middlewa
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -124,13 +125,16 @@ func (c *Client) addOperationStartProductSubscriptionMiddlewares(stack *middlewa
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpStartProductSubscriptionValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opStartProductSubscription(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

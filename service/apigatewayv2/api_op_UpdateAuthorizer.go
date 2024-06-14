@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/apigatewayv2/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -49,8 +48,9 @@ type UpdateAuthorizerInput struct {
 
 	// Specifies the format of the payload sent to an HTTP API Lambda authorizer.
 	// Required for HTTP API Lambda authorizers. Supported values are 1.0 and 2.0. To
-	// learn more, see Working with AWS Lambda authorizers for HTTP APIs (https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-lambda-authorizer.html)
-	// .
+	// learn more, see [Working with AWS Lambda authorizers for HTTP APIs].
+	//
+	// [Working with AWS Lambda authorizers for HTTP APIs]: https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-lambda-authorizer.html
 	AuthorizerPayloadFormatVersion *string
 
 	// The time to live (TTL) for cached authorizer results, in seconds. If it equals
@@ -79,15 +79,17 @@ type UpdateAuthorizerInput struct {
 	// Specifies whether a Lambda authorizer returns a response in a simple format. By
 	// default, a Lambda authorizer must return an IAM policy. If enabled, the Lambda
 	// authorizer can return a boolean value instead of an IAM policy. Supported only
-	// for HTTP APIs. To learn more, see Working with AWS Lambda authorizers for HTTP
-	// APIs (https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-lambda-authorizer.html)
+	// for HTTP APIs. To learn more, see [Working with AWS Lambda authorizers for HTTP APIs]
+	//
+	// [Working with AWS Lambda authorizers for HTTP APIs]: https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-lambda-authorizer.html
 	EnableSimpleResponses *bool
 
-	// The identity source for which authorization is requested. For a REQUEST
-	// authorizer, this is optional. The value is a set of one or more mapping
-	// expressions of the specified request parameters. The identity source can be
-	// headers, query string parameters, stage variables, and context parameters. For
-	// example, if an Auth header and a Name query string parameter are defined as
+	// The identity source for which authorization is requested.
+	//
+	// For a REQUEST authorizer, this is optional. The value is a set of one or more
+	// mapping expressions of the specified request parameters. The identity source can
+	// be headers, query string parameters, stage variables, and context parameters.
+	// For example, if an Auth header and a Name query string parameter are defined as
 	// identity sources, this value is route.request.header.Auth,
 	// route.request.querystring.Name for WebSocket APIs. For HTTP APIs, use selection
 	// expressions prefixed with $, for example, $request.header.Auth,
@@ -97,12 +99,14 @@ type UpdateAuthorizerInput struct {
 	// when this is true does the authorizer invoke the authorizer Lambda function.
 	// Otherwise, it returns a 401 Unauthorized response without calling the Lambda
 	// function. For HTTP APIs, identity sources are also used as the cache key when
-	// caching is enabled. To learn more, see Working with AWS Lambda authorizers for
-	// HTTP APIs (https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-lambda-authorizer.html)
-	// . For JWT, a single entry that specifies where to extract the JSON Web Token
+	// caching is enabled. To learn more, see [Working with AWS Lambda authorizers for HTTP APIs].
+	//
+	// For JWT, a single entry that specifies where to extract the JSON Web Token
 	// (JWT) from inbound requests. Currently only header-based and query
 	// parameter-based selections are supported, for example
 	// $request.header.Authorization.
+	//
+	// [Working with AWS Lambda authorizers for HTTP APIs]: https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-lambda-authorizer.html
 	IdentitySource []string
 
 	// This parameter is not used.
@@ -131,8 +135,9 @@ type UpdateAuthorizerOutput struct {
 
 	// Specifies the format of the payload sent to an HTTP API Lambda authorizer.
 	// Required for HTTP API Lambda authorizers. Supported values are 1.0 and 2.0. To
-	// learn more, see Working with AWS Lambda authorizers for HTTP APIs (https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-lambda-authorizer.html)
-	// .
+	// learn more, see [Working with AWS Lambda authorizers for HTTP APIs].
+	//
+	// [Working with AWS Lambda authorizers for HTTP APIs]: https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-lambda-authorizer.html
 	AuthorizerPayloadFormatVersion *string
 
 	// The time to live (TTL) for cached authorizer results, in seconds. If it equals
@@ -160,15 +165,17 @@ type UpdateAuthorizerOutput struct {
 
 	// Specifies whether a Lambda authorizer returns a response in a simple format. If
 	// enabled, the Lambda authorizer can return a boolean value instead of an IAM
-	// policy. Supported only for HTTP APIs. To learn more, see Working with AWS
-	// Lambda authorizers for HTTP APIs (https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-lambda-authorizer.html)
+	// policy. Supported only for HTTP APIs. To learn more, see [Working with AWS Lambda authorizers for HTTP APIs]
+	//
+	// [Working with AWS Lambda authorizers for HTTP APIs]: https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-lambda-authorizer.html
 	EnableSimpleResponses *bool
 
-	// The identity source for which authorization is requested. For a REQUEST
-	// authorizer, this is optional. The value is a set of one or more mapping
-	// expressions of the specified request parameters. The identity source can be
-	// headers, query string parameters, stage variables, and context parameters. For
-	// example, if an Auth header and a Name query string parameter are defined as
+	// The identity source for which authorization is requested.
+	//
+	// For a REQUEST authorizer, this is optional. The value is a set of one or more
+	// mapping expressions of the specified request parameters. The identity source can
+	// be headers, query string parameters, stage variables, and context parameters.
+	// For example, if an Auth header and a Name query string parameter are defined as
 	// identity sources, this value is route.request.header.Auth,
 	// route.request.querystring.Name for WebSocket APIs. For HTTP APIs, use selection
 	// expressions prefixed with $, for example, $request.header.Auth,
@@ -178,12 +185,14 @@ type UpdateAuthorizerOutput struct {
 	// when this is true does the authorizer invoke the authorizer Lambda function.
 	// Otherwise, it returns a 401 Unauthorized response without calling the Lambda
 	// function. For HTTP APIs, identity sources are also used as the cache key when
-	// caching is enabled. To learn more, see Working with AWS Lambda authorizers for
-	// HTTP APIs (https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-lambda-authorizer.html)
-	// . For JWT, a single entry that specifies where to extract the JSON Web Token
+	// caching is enabled. To learn more, see [Working with AWS Lambda authorizers for HTTP APIs].
+	//
+	// For JWT, a single entry that specifies where to extract the JSON Web Token
 	// (JWT) from inbound requests. Currently only header-based and query
 	// parameter-based selections are supported, for example
 	// $request.header.Authorization.
+	//
+	// [Working with AWS Lambda authorizers for HTTP APIs]: https://docs.aws.amazon.com/apigateway/latest/developerguide/http-api-lambda-authorizer.html
 	IdentitySource []string
 
 	// The validation expression does not apply to the REQUEST authorizer.
@@ -224,25 +233,25 @@ func (c *Client) addOperationUpdateAuthorizerMiddlewares(stack *middleware.Stack
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -257,13 +266,16 @@ func (c *Client) addOperationUpdateAuthorizerMiddlewares(stack *middleware.Stack
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpUpdateAuthorizerValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateAuthorizer(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

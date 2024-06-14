@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/sfn/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -14,10 +13,12 @@ import (
 )
 
 // Provides information about a Map Run's configuration, progress, and results. If
-// you've redriven (https://docs.aws.amazon.com/step-functions/latest/dg/redrive-map-run.html)
-// a Map Run, this API action also returns information about the redrives of that
-// Map Run. For more information, see Examining Map Run (https://docs.aws.amazon.com/step-functions/latest/dg/concepts-examine-map-run.html)
-// in the Step Functions Developer Guide.
+// you've [redriven]a Map Run, this API action also returns information about the redrives
+// of that Map Run. For more information, see [Examining Map Run]in the Step Functions Developer
+// Guide.
+//
+// [redriven]: https://docs.aws.amazon.com/step-functions/latest/dg/redrive-map-run.html
+// [Examining Map Run]: https://docs.aws.amazon.com/step-functions/latest/dg/concepts-examine-map-run.html
 func (c *Client) DescribeMapRun(ctx context.Context, params *DescribeMapRunInput, optFns ...func(*Options)) (*DescribeMapRunOutput, error) {
 	if params == nil {
 		params = &DescribeMapRunInput{}
@@ -136,25 +137,25 @@ func (c *Client) addOperationDescribeMapRunMiddlewares(stack *middleware.Stack, 
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -169,13 +170,16 @@ func (c *Client) addOperationDescribeMapRunMiddlewares(stack *middleware.Stack, 
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDescribeMapRunValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeMapRun(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

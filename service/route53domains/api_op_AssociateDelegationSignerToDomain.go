@@ -6,19 +6,21 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/route53domains/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a delegation signer (DS) record in the registry zone for this domain
-// name. Note that creating DS record at the registry impacts DNSSEC validation of
-// your DNS records. This action may render your domain name unavailable on the
-// internet if the steps are completed in the wrong order, or with incorrect
-// timing. For more information about DNSSEC signing, see Configuring DNSSEC
-// signing (https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/dns-configuring-dnssec.html)
-// in the Route 53 developer guide.
+//	Creates a delegation signer (DS) record in the registry zone for this domain
+//
+// name.
+//
+// Note that creating DS record at the registry impacts DNSSEC validation of your
+// DNS records. This action may render your domain name unavailable on the internet
+// if the steps are completed in the wrong order, or with incorrect timing. For
+// more information about DNSSEC signing, see [Configuring DNSSEC signing]in the Route 53 developer guide.
+//
+// [Configuring DNSSEC signing]: https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/dns-configuring-dnssec.html
 func (c *Client) AssociateDelegationSignerToDomain(ctx context.Context, params *AssociateDelegationSignerToDomainInput, optFns ...func(*Options)) (*AssociateDelegationSignerToDomainOutput, error) {
 	if params == nil {
 		params = &AssociateDelegationSignerToDomainInput{}
@@ -53,8 +55,9 @@ type AssociateDelegationSignerToDomainInput struct {
 type AssociateDelegationSignerToDomainOutput struct {
 
 	// The identifier for tracking the progress of the request. To query the operation
-	// status, use GetOperationDetail (https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_GetOperationDetail.html)
-	// .
+	// status, use [GetOperationDetail].
+	//
+	// [GetOperationDetail]: https://docs.aws.amazon.com/Route53/latest/APIReference/API_domains_GetOperationDetail.html
 	OperationId *string
 
 	// Metadata pertaining to the operation's result.
@@ -85,25 +88,25 @@ func (c *Client) addOperationAssociateDelegationSignerToDomainMiddlewares(stack 
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -118,13 +121,16 @@ func (c *Client) addOperationAssociateDelegationSignerToDomainMiddlewares(stack 
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpAssociateDelegationSignerToDomainValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opAssociateDelegationSignerToDomain(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

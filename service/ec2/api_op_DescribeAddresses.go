@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -41,28 +40,38 @@ type DescribeAddressesInput struct {
 	DryRun *bool
 
 	// One or more filters. Filter names and values are case-sensitive.
+	//
 	//   - allocation-id - The allocation ID for the address.
+	//
 	//   - association-id - The association ID for the address.
+	//
 	//   - instance-id - The ID of the instance the address is associated with, if any.
+	//
 	//   - network-border-group - A unique set of Availability Zones, Local Zones, or
 	//   Wavelength Zones from where Amazon Web Services advertises IP addresses.
+	//
 	//   - network-interface-id - The ID of the network interface that the address is
 	//   associated with, if any.
-	//   - network-interface-owner-id - The Amazon Web Services account ID of the
-	//   owner.
+	//
+	//   - network-interface-owner-id - The Amazon Web Services account ID of the owner.
+	//
 	//   - private-ip-address - The private IP address associated with the Elastic IP
 	//   address.
+	//
 	//   - public-ip - The Elastic IP address, or the carrier IP address.
+	//
 	//   - tag : - The key/value combination of a tag assigned to the resource. Use the
 	//   tag key in the filter name and the tag value as the filter value. For example,
 	//   to find all resources that have a tag with the key Owner and the value TeamA ,
 	//   specify tag:Owner for the filter name and TeamA for the filter value.
+	//
 	//   - tag-key - The key of a tag assigned to the resource. Use this filter to find
 	//   all resources assigned a tag with a specific key, regardless of the tag value.
 	Filters []types.Filter
 
-	// One or more Elastic IP addresses. Default: Describes all your Elastic IP
-	// addresses.
+	// One or more Elastic IP addresses.
+	//
+	// Default: Describes all your Elastic IP addresses.
 	PublicIps []string
 
 	noSmithyDocumentSerde
@@ -101,25 +110,25 @@ func (c *Client) addOperationDescribeAddressesMiddlewares(stack *middleware.Stac
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -134,10 +143,13 @@ func (c *Client) addOperationDescribeAddressesMiddlewares(stack *middleware.Stac
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeAddresses(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

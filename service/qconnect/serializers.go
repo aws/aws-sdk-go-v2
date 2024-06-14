@@ -706,6 +706,13 @@ func awsRestjson1_serializeOpDocumentCreateSessionInput(v *CreateSessionInput, v
 		ok.String(*v.Name)
 	}
 
+	if v.TagFilter != nil {
+		ok := object.Key("tagFilter")
+		if err := awsRestjson1_serializeDocumentTagFilter(v.TagFilter, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.Tags != nil {
 		ok := object.Key("tags")
 		if err := awsRestjson1_serializeDocumentTags(v.Tags, ok); err != nil {
@@ -3694,6 +3701,123 @@ func awsRestjson1_serializeOpDocumentUpdateQuickResponseInput(v *UpdateQuickResp
 	return nil
 }
 
+type awsRestjson1_serializeOpUpdateSession struct {
+}
+
+func (*awsRestjson1_serializeOpUpdateSession) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpUpdateSession) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*UpdateSessionInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/assistants/{assistantId}/sessions/{sessionId}")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "POST"
+	var restEncoder *httpbinding.Encoder
+	if request.URL.RawPath == "" {
+		restEncoder, err = httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	} else {
+		request.URL.RawPath = smithyhttp.JoinPath(request.URL.RawPath, opPath)
+		restEncoder, err = httpbinding.NewEncoderWithRawPath(request.URL.Path, request.URL.RawPath, request.URL.RawQuery, request.Header)
+	}
+
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsUpdateSessionInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentUpdateSessionInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsUpdateSessionInput(v *UpdateSessionInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.AssistantId == nil || len(*v.AssistantId) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member assistantId must not be empty")}
+	}
+	if v.AssistantId != nil {
+		if err := encoder.SetURI("assistantId").String(*v.AssistantId); err != nil {
+			return err
+		}
+	}
+
+	if v.SessionId == nil || len(*v.SessionId) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member sessionId must not be empty")}
+	}
+	if v.SessionId != nil {
+		if err := encoder.SetURI("sessionId").String(*v.SessionId); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentUpdateSessionInput(v *UpdateSessionInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Description != nil {
+		ok := object.Key("description")
+		ok.String(*v.Description)
+	}
+
+	if v.TagFilter != nil {
+		ok := object.Key("tagFilter")
+		if err := awsRestjson1_serializeDocumentTagFilter(v.TagFilter, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentAndConditions(v []types.TagCondition, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentTagCondition(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
 func awsRestjson1_serializeDocumentAppIntegrationsConfiguration(v *types.AppIntegrationsConfiguration, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -3913,6 +4037,46 @@ func awsRestjson1_serializeDocumentObjectFieldsList(v []string, value smithyjson
 	for i := range v {
 		av := array.Value()
 		av.String(v[i])
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentOrCondition(v types.OrCondition, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	switch uv := v.(type) {
+	case *types.OrConditionMemberAndConditions:
+		av := object.Key("andConditions")
+		if err := awsRestjson1_serializeDocumentAndConditions(uv.Value, av); err != nil {
+			return err
+		}
+
+	case *types.OrConditionMemberTagCondition:
+		av := object.Key("tagCondition")
+		if err := awsRestjson1_serializeDocumentTagCondition(&uv.Value, av); err != nil {
+			return err
+		}
+
+	default:
+		return fmt.Errorf("attempted to serialize unknown member type %T for union %T", uv, v)
+
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentOrConditions(v []types.OrCondition, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if vv := v[i]; vv == nil {
+			continue
+		}
+		if err := awsRestjson1_serializeDocumentOrCondition(v[i], av); err != nil {
+			return err
+		}
 	}
 	return nil
 }
@@ -4202,6 +4366,53 @@ func awsRestjson1_serializeDocumentSourceConfiguration(v types.SourceConfigurati
 	case *types.SourceConfigurationMemberAppIntegrations:
 		av := object.Key("appIntegrations")
 		if err := awsRestjson1_serializeDocumentAppIntegrationsConfiguration(&uv.Value, av); err != nil {
+			return err
+		}
+
+	default:
+		return fmt.Errorf("attempted to serialize unknown member type %T for union %T", uv, v)
+
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentTagCondition(v *types.TagCondition, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Key != nil {
+		ok := object.Key("key")
+		ok.String(*v.Key)
+	}
+
+	if v.Value != nil {
+		ok := object.Key("value")
+		ok.String(*v.Value)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentTagFilter(v types.TagFilter, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	switch uv := v.(type) {
+	case *types.TagFilterMemberAndConditions:
+		av := object.Key("andConditions")
+		if err := awsRestjson1_serializeDocumentAndConditions(uv.Value, av); err != nil {
+			return err
+		}
+
+	case *types.TagFilterMemberOrConditions:
+		av := object.Key("orConditions")
+		if err := awsRestjson1_serializeDocumentOrConditions(uv.Value, av); err != nil {
+			return err
+		}
+
+	case *types.TagFilterMemberTagCondition:
+		av := object.Key("tagCondition")
+		if err := awsRestjson1_serializeDocumentTagCondition(&uv.Value, av); err != nil {
 			return err
 		}
 

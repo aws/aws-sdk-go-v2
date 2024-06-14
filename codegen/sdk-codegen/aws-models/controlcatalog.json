@@ -1,0 +1,1441 @@
+{
+    "smithy": "2.0",
+    "shapes": {
+        "com.amazonaws.controlcatalog#AccessDeniedException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "smithy.api#String"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>You do not have sufficient access to perform this action.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 403
+            }
+        },
+        "com.amazonaws.controlcatalog#AssociatedDomainSummary": {
+            "type": "structure",
+            "members": {
+                "Arn": {
+                    "target": "com.amazonaws.controlcatalog#DomainArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the related domain.</p>"
+                    }
+                },
+                "Name": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the related domain.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A summary of the domain that a common control or an objective belongs to.</p>"
+            }
+        },
+        "com.amazonaws.controlcatalog#AssociatedObjectiveSummary": {
+            "type": "structure",
+            "members": {
+                "Arn": {
+                    "target": "com.amazonaws.controlcatalog#ObjectiveArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the related objective.</p>"
+                    }
+                },
+                "Name": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the related objective.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A summary of the objective that a common control supports.</p>"
+            }
+        },
+        "com.amazonaws.controlcatalog#CommonControlArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 41,
+                    "max": 2048
+                },
+                "smithy.api#pattern": "^arn:(aws(?:[-a-z]*)?):controlcatalog:::common-control/[0-9a-z]+$"
+            }
+        },
+        "com.amazonaws.controlcatalog#CommonControlFilter": {
+            "type": "structure",
+            "members": {
+                "Objectives": {
+                    "target": "com.amazonaws.controlcatalog#ObjectiveResourceFilterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The objective that's used as filter criteria.</p>\n         <p>You can use this parameter to specify one objective ARN at a time. Passing multiple ARNs\n      in the <code>CommonControlFilter</code> isn’t currently supported.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An optional filter that narrows the results to a specific objective.</p>"
+            }
+        },
+        "com.amazonaws.controlcatalog#CommonControlResource": {
+            "type": "resource",
+            "identifiers": {
+                "CommonControlArn": {
+                    "target": "com.amazonaws.controlcatalog#CommonControlArn"
+                }
+            },
+            "list": {
+                "target": "com.amazonaws.controlcatalog#ListCommonControls"
+            },
+            "traits": {
+                "aws.api#arn": {
+                    "template": "{CommonControlArn}",
+                    "noAccount": true,
+                    "absolute": true
+                },
+                "aws.iam#disableConditionKeyInference": {},
+                "aws.iam#iamResource": {
+                    "name": "common-control"
+                }
+            }
+        },
+        "com.amazonaws.controlcatalog#CommonControlSummary": {
+            "type": "structure",
+            "members": {
+                "Arn": {
+                    "target": "com.amazonaws.controlcatalog#CommonControlArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) that identifies the common control.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Name": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the common control.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Description": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description of the common control.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Domain": {
+                    "target": "com.amazonaws.controlcatalog#AssociatedDomainSummary",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The domain that the common control belongs to.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Objective": {
+                    "target": "com.amazonaws.controlcatalog#AssociatedObjectiveSummary",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The objective that the common control belongs to.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "CreateTime": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time when the common control was created.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "LastUpdateTime": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time when the common control was most recently updated.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A summary of metadata for a common control.</p>"
+            }
+        },
+        "com.amazonaws.controlcatalog#CommonControlSummaryList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.controlcatalog#CommonControlSummary"
+            }
+        },
+        "com.amazonaws.controlcatalog#ControlCatalog": {
+            "type": "service",
+            "version": "2018-05-10",
+            "resources": [
+                {
+                    "target": "com.amazonaws.controlcatalog#CommonControlResource"
+                },
+                {
+                    "target": "com.amazonaws.controlcatalog#DomainResource"
+                },
+                {
+                    "target": "com.amazonaws.controlcatalog#ObjectiveResource"
+                }
+            ],
+            "traits": {
+                "aws.api#service": {
+                    "sdkId": "ControlCatalog",
+                    "arnNamespace": "controlcatalog",
+                    "cloudTrailEventSource": "controlcatalog.amazonaws.com"
+                },
+                "aws.auth#sigv4": {
+                    "name": "controlcatalog"
+                },
+                "aws.iam#supportedPrincipalTypes": [
+                    "Root",
+                    "IAMUser",
+                    "IAMRole",
+                    "FederatedUser"
+                ],
+                "aws.protocols#restJson1": {},
+                "smithy.api#cors": {
+                    "origin": "*",
+                    "additionalAllowedHeaders": [
+                        "*",
+                        "access-control-allow-origin",
+                        "Amz-Sdk-Invocation-Id",
+                        "Amz-Sdk-Request",
+                        "Authorization",
+                        "Content-Length",
+                        "Content-Type",
+                        "Date",
+                        "Host",
+                        "X-Amz-Content-Sha256",
+                        "X-Amz-Date",
+                        "X-Amz-Security-Token",
+                        "X-Amz-Target",
+                        "X-Amz-User-Agent",
+                        "X-Amzn-Trace-Id"
+                    ]
+                },
+                "smithy.api#documentation": "<p>Welcome to the Amazon Web Services Control Catalog API reference. This guide is for \n      developers who need detailed information about how to programmatically identify and filter \n      the common controls and related metadata that are available to Amazon Web Services customers. This API reference provides \n      descriptions, syntax, and usage examples for each of the actions and data types that are \n      supported by Amazon Web Services Control Catalog. </p>\n         <p>Use the following links to get started with the Amazon Web Services Control Catalog API:</p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/controlcatalog/latest/APIReference/API_Operations.html\">Actions</a>: An\n          alphabetical list of all Control Catalog API operations.</p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/controlcatalog/latest/APIReference/API_Types.html\">Data types</a>: An\n          alphabetical list of all Control Catalog data types.</p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/controlcatalog/latest/APIReference/CommonParameters.html\">Common\n          parameters</a>: Parameters that all operations can use.</p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/controlcatalog/latest/APIReference/CommonErrors.html\">Common errors</a>:\n          Client and server errors that all operations can return.</p>\n            </li>\n         </ul>",
+                "smithy.api#title": "AWS Control Catalog",
+                "smithy.rules#endpointRuleSet": {
+                    "version": "1.0",
+                    "parameters": {
+                        "Region": {
+                            "builtIn": "AWS::Region",
+                            "required": false,
+                            "documentation": "The AWS region used to dispatch the request.",
+                            "type": "String"
+                        },
+                        "UseDualStack": {
+                            "builtIn": "AWS::UseDualStack",
+                            "required": true,
+                            "default": false,
+                            "documentation": "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.",
+                            "type": "Boolean"
+                        },
+                        "UseFIPS": {
+                            "builtIn": "AWS::UseFIPS",
+                            "required": true,
+                            "default": false,
+                            "documentation": "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.",
+                            "type": "Boolean"
+                        },
+                        "Endpoint": {
+                            "builtIn": "SDK::Endpoint",
+                            "required": false,
+                            "documentation": "Override the endpoint used to send this request",
+                            "type": "String"
+                        }
+                    },
+                    "rules": [
+                        {
+                            "conditions": [
+                                {
+                                    "fn": "isSet",
+                                    "argv": [
+                                        {
+                                            "ref": "Endpoint"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "rules": [
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "booleanEquals",
+                                            "argv": [
+                                                {
+                                                    "ref": "UseFIPS"
+                                                },
+                                                true
+                                            ]
+                                        }
+                                    ],
+                                    "error": "Invalid Configuration: FIPS and custom endpoint are not supported",
+                                    "type": "error"
+                                },
+                                {
+                                    "conditions": [],
+                                    "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "UseDualStack"
+                                                        },
+                                                        true
+                                                    ]
+                                                }
+                                            ],
+                                            "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
+                                            "type": "error"
+                                        },
+                                        {
+                                            "conditions": [],
+                                            "endpoint": {
+                                                "url": {
+                                                    "ref": "Endpoint"
+                                                },
+                                                "properties": {},
+                                                "headers": {}
+                                            },
+                                            "type": "endpoint"
+                                        }
+                                    ],
+                                    "type": "tree"
+                                }
+                            ],
+                            "type": "tree"
+                        },
+                        {
+                            "conditions": [],
+                            "rules": [
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "isSet",
+                                            "argv": [
+                                                {
+                                                    "ref": "Region"
+                                                }
+                                            ]
+                                        }
+                                    ],
+                                    "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "aws.partition",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "Region"
+                                                        }
+                                                    ],
+                                                    "assign": "PartitionResult"
+                                                }
+                                            ],
+                                            "rules": [
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseFIPS"
+                                                                },
+                                                                true
+                                                            ]
+                                                        },
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseDualStack"
+                                                                },
+                                                                true
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [
+                                                                {
+                                                                    "fn": "booleanEquals",
+                                                                    "argv": [
+                                                                        true,
+                                                                        {
+                                                                            "fn": "getAttr",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "ref": "PartitionResult"
+                                                                                },
+                                                                                "supportsFIPS"
+                                                                            ]
+                                                                        }
+                                                                    ]
+                                                                },
+                                                                {
+                                                                    "fn": "booleanEquals",
+                                                                    "argv": [
+                                                                        true,
+                                                                        {
+                                                                            "fn": "getAttr",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "ref": "PartitionResult"
+                                                                                },
+                                                                                "supportsDualStack"
+                                                                            ]
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ],
+                                                            "rules": [
+                                                                {
+                                                                    "conditions": [],
+                                                                    "rules": [
+                                                                        {
+                                                                            "conditions": [],
+                                                                            "endpoint": {
+                                                                                "url": "https://controlcatalog-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                                                "properties": {},
+                                                                                "headers": {}
+                                                                            },
+                                                                            "type": "endpoint"
+                                                                        }
+                                                                    ],
+                                                                    "type": "tree"
+                                                                }
+                                                            ],
+                                                            "type": "tree"
+                                                        },
+                                                        {
+                                                            "conditions": [],
+                                                            "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
+                                                            "type": "error"
+                                                        }
+                                                    ],
+                                                    "type": "tree"
+                                                },
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseFIPS"
+                                                                },
+                                                                true
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [
+                                                                {
+                                                                    "fn": "booleanEquals",
+                                                                    "argv": [
+                                                                        {
+                                                                            "fn": "getAttr",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "ref": "PartitionResult"
+                                                                                },
+                                                                                "supportsFIPS"
+                                                                            ]
+                                                                        },
+                                                                        true
+                                                                    ]
+                                                                }
+                                                            ],
+                                                            "rules": [
+                                                                {
+                                                                    "conditions": [],
+                                                                    "rules": [
+                                                                        {
+                                                                            "conditions": [],
+                                                                            "endpoint": {
+                                                                                "url": "https://controlcatalog-fips.{Region}.{PartitionResult#dnsSuffix}",
+                                                                                "properties": {},
+                                                                                "headers": {}
+                                                                            },
+                                                                            "type": "endpoint"
+                                                                        }
+                                                                    ],
+                                                                    "type": "tree"
+                                                                }
+                                                            ],
+                                                            "type": "tree"
+                                                        },
+                                                        {
+                                                            "conditions": [],
+                                                            "error": "FIPS is enabled but this partition does not support FIPS",
+                                                            "type": "error"
+                                                        }
+                                                    ],
+                                                    "type": "tree"
+                                                },
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseDualStack"
+                                                                },
+                                                                true
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [
+                                                                {
+                                                                    "fn": "booleanEquals",
+                                                                    "argv": [
+                                                                        true,
+                                                                        {
+                                                                            "fn": "getAttr",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "ref": "PartitionResult"
+                                                                                },
+                                                                                "supportsDualStack"
+                                                                            ]
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ],
+                                                            "rules": [
+                                                                {
+                                                                    "conditions": [],
+                                                                    "rules": [
+                                                                        {
+                                                                            "conditions": [],
+                                                                            "endpoint": {
+                                                                                "url": "https://controlcatalog.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                                                "properties": {},
+                                                                                "headers": {}
+                                                                            },
+                                                                            "type": "endpoint"
+                                                                        }
+                                                                    ],
+                                                                    "type": "tree"
+                                                                }
+                                                            ],
+                                                            "type": "tree"
+                                                        },
+                                                        {
+                                                            "conditions": [],
+                                                            "error": "DualStack is enabled but this partition does not support DualStack",
+                                                            "type": "error"
+                                                        }
+                                                    ],
+                                                    "type": "tree"
+                                                },
+                                                {
+                                                    "conditions": [],
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [],
+                                                            "endpoint": {
+                                                                "url": "https://controlcatalog.{Region}.{PartitionResult#dnsSuffix}",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        }
+                                                    ],
+                                                    "type": "tree"
+                                                }
+                                            ],
+                                            "type": "tree"
+                                        }
+                                    ],
+                                    "type": "tree"
+                                },
+                                {
+                                    "conditions": [],
+                                    "error": "Invalid Configuration: Missing Region",
+                                    "type": "error"
+                                }
+                            ],
+                            "type": "tree"
+                        }
+                    ]
+                },
+                "smithy.rules#endpointTests": {
+                    "testCases": [
+                        {
+                            "documentation": "For region us-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://controlcatalog-fips.us-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://controlcatalog-fips.us-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://controlcatalog.us-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://controlcatalog.us-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-north-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://controlcatalog-fips.cn-north-1.api.amazonwebservices.com.cn"
+                                }
+                            },
+                            "params": {
+                                "Region": "cn-north-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-north-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://controlcatalog-fips.cn-north-1.amazonaws.com.cn"
+                                }
+                            },
+                            "params": {
+                                "Region": "cn-north-1",
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-north-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://controlcatalog.cn-north-1.api.amazonwebservices.com.cn"
+                                }
+                            },
+                            "params": {
+                                "Region": "cn-north-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-north-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://controlcatalog.cn-north-1.amazonaws.com.cn"
+                                }
+                            },
+                            "params": {
+                                "Region": "cn-north-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://controlcatalog-fips.us-gov-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://controlcatalog-fips.us-gov-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://controlcatalog.us-gov-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://controlcatalog.us-gov-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://controlcatalog-fips.us-iso-east-1.c2s.ic.gov"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "error": "DualStack is enabled but this partition does not support DualStack"
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://controlcatalog.us-iso-east-1.c2s.ic.gov"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
+                            },
+                            "params": {
+                                "Region": "us-isob-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://controlcatalog-fips.us-isob-east-1.sc2s.sgov.gov"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-isob-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "error": "DualStack is enabled but this partition does not support DualStack"
+                            },
+                            "params": {
+                                "Region": "us-isob-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://controlcatalog.us-isob-east-1.sc2s.sgov.gov"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-isob-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with region set and fips disabled and dualstack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://example.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false,
+                                "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with region not set and fips disabled and dualstack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://example.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "UseDualStack": false,
+                                "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with fips enabled and dualstack disabled",
+                            "expect": {
+                                "error": "Invalid Configuration: FIPS and custom endpoint are not supported"
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": false,
+                                "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with fips disabled and dualstack enabled",
+                            "expect": {
+                                "error": "Invalid Configuration: Dualstack and custom endpoint are not supported"
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true,
+                                "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "Missing region",
+                            "expect": {
+                                "error": "Invalid Configuration: Missing Region"
+                            }
+                        }
+                    ],
+                    "version": "1.0"
+                }
+            }
+        },
+        "com.amazonaws.controlcatalog#DomainArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 33,
+                    "max": 2048
+                },
+                "smithy.api#pattern": "^arn:(aws(?:[-a-z]*)?):controlcatalog:::domain/[0-9a-z]+$"
+            }
+        },
+        "com.amazonaws.controlcatalog#DomainResource": {
+            "type": "resource",
+            "identifiers": {
+                "DomainArn": {
+                    "target": "com.amazonaws.controlcatalog#DomainArn"
+                }
+            },
+            "list": {
+                "target": "com.amazonaws.controlcatalog#ListDomains"
+            },
+            "traits": {
+                "aws.api#arn": {
+                    "template": "{DomainArn}",
+                    "noAccount": true,
+                    "absolute": true
+                },
+                "aws.iam#disableConditionKeyInference": {},
+                "aws.iam#iamResource": {
+                    "name": "domain"
+                }
+            }
+        },
+        "com.amazonaws.controlcatalog#DomainResourceFilter": {
+            "type": "structure",
+            "members": {
+                "Arn": {
+                    "target": "com.amazonaws.controlcatalog#DomainArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the domain.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The domain resource that's being used as a filter.</p>"
+            }
+        },
+        "com.amazonaws.controlcatalog#DomainResourceFilterList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.controlcatalog#DomainResourceFilter"
+            }
+        },
+        "com.amazonaws.controlcatalog#DomainSummary": {
+            "type": "structure",
+            "members": {
+                "Arn": {
+                    "target": "com.amazonaws.controlcatalog#DomainArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) that identifies the domain.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Name": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the domain.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Description": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description of the domain.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "CreateTime": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time when the domain was created.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "LastUpdateTime": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time when the domain was most recently updated.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A summary of metadata for a domain.</p>"
+            }
+        },
+        "com.amazonaws.controlcatalog#DomainSummaryList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.controlcatalog#DomainSummary"
+            }
+        },
+        "com.amazonaws.controlcatalog#InternalServerException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "smithy.api#String"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An internal service error occurred during the processing of your request. Try again later.</p>",
+                "smithy.api#error": "server",
+                "smithy.api#httpError": 500,
+                "smithy.api#retryable": {}
+            }
+        },
+        "com.amazonaws.controlcatalog#ListCommonControls": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.controlcatalog#ListCommonControlsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.controlcatalog#ListCommonControlsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.controlcatalog#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.controlcatalog#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.controlcatalog#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.controlcatalog#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns a paginated list of common controls from the Amazon Web Services Control\n      Catalog.</p>\n         <p>You can apply an optional filter to see common controls that have a specific objective. If\n      you don’t provide a filter, the operation returns all common controls. </p>",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "POST",
+                    "uri": "/common-controls"
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "pageSize": "MaxResults",
+                    "items": "CommonControls"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.controlcatalog#ListCommonControlsRequest": {
+            "type": "structure",
+            "members": {
+                "MaxResults": {
+                    "target": "com.amazonaws.controlcatalog#MaxListCommonControlsResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of results on a page or for an API request call.</p>",
+                        "smithy.api#httpQuery": "maxResults"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.controlcatalog#PaginationToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pagination token that's used to fetch the next set of results.</p>",
+                        "smithy.api#httpQuery": "nextToken"
+                    }
+                },
+                "CommonControlFilter": {
+                    "target": "com.amazonaws.controlcatalog#CommonControlFilter",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An optional filter that narrows the results to a specific objective.</p>\n         <p>This filter allows you to specify one objective ARN at a time. Passing multiple ARNs in\n      the <code>CommonControlFilter</code> isn’t currently supported.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.controlcatalog#ListCommonControlsResponse": {
+            "type": "structure",
+            "members": {
+                "CommonControls": {
+                    "target": "com.amazonaws.controlcatalog#CommonControlSummaryList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of common controls that the <code>ListCommonControls</code> API returns.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.controlcatalog#PaginationToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pagination token that's used to fetch the next set of results.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.controlcatalog#ListDomains": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.controlcatalog#ListDomainsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.controlcatalog#ListDomainsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.controlcatalog#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.controlcatalog#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.controlcatalog#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.controlcatalog#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns a paginated list of domains from the Amazon Web Services Control Catalog.</p>",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "POST",
+                    "uri": "/domains"
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "pageSize": "MaxResults",
+                    "items": "Domains"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.controlcatalog#ListDomainsRequest": {
+            "type": "structure",
+            "members": {
+                "MaxResults": {
+                    "target": "com.amazonaws.controlcatalog#MaxListDomainsResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of results on a page or for an API request call.</p>",
+                        "smithy.api#httpQuery": "maxResults"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.controlcatalog#PaginationToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pagination token that's used to fetch the next set of results.</p>",
+                        "smithy.api#httpQuery": "nextToken"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.controlcatalog#ListDomainsResponse": {
+            "type": "structure",
+            "members": {
+                "Domains": {
+                    "target": "com.amazonaws.controlcatalog#DomainSummaryList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of domains that the <code>ListDomains</code> API returns.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.controlcatalog#PaginationToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pagination token that's used to fetch the next set of results.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.controlcatalog#ListObjectives": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.controlcatalog#ListObjectivesRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.controlcatalog#ListObjectivesResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.controlcatalog#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.controlcatalog#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.controlcatalog#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.controlcatalog#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns a paginated list of objectives from the Amazon Web Services Control Catalog.</p>\n         <p>You can apply an optional filter to see the objectives that belong to a specific domain.\n      If you don’t provide a filter, the operation returns all objectives. </p>",
+                "smithy.api#http": {
+                    "code": 200,
+                    "method": "POST",
+                    "uri": "/objectives"
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "pageSize": "MaxResults",
+                    "items": "Objectives"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.controlcatalog#ListObjectivesRequest": {
+            "type": "structure",
+            "members": {
+                "MaxResults": {
+                    "target": "com.amazonaws.controlcatalog#MaxListObjectivesResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of results on a page or for an API request call.</p>",
+                        "smithy.api#httpQuery": "maxResults"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.controlcatalog#PaginationToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pagination token that's used to fetch the next set of results.</p>",
+                        "smithy.api#httpQuery": "nextToken"
+                    }
+                },
+                "ObjectiveFilter": {
+                    "target": "com.amazonaws.controlcatalog#ObjectiveFilter",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An optional filter that narrows the results to a specific domain.</p>\n         <p>This filter allows you to specify one domain ARN at a time. \n      Passing multiple ARNs in the <code>ObjectiveFilter</code> isn’t currently supported.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.controlcatalog#ListObjectivesResponse": {
+            "type": "structure",
+            "members": {
+                "Objectives": {
+                    "target": "com.amazonaws.controlcatalog#ObjectiveSummaryList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of objectives that the <code>ListObjectives</code> API returns.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.controlcatalog#PaginationToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pagination token that's used to fetch the next set of results.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.controlcatalog#MaxListCommonControlsResults": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 100
+                }
+            }
+        },
+        "com.amazonaws.controlcatalog#MaxListDomainsResults": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 100
+                }
+            }
+        },
+        "com.amazonaws.controlcatalog#MaxListObjectivesResults": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 100
+                }
+            }
+        },
+        "com.amazonaws.controlcatalog#ObjectiveArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 36,
+                    "max": 2048
+                },
+                "smithy.api#pattern": "^arn:(aws(?:[-a-z]*)?):controlcatalog:::objective/[0-9a-z]+$"
+            }
+        },
+        "com.amazonaws.controlcatalog#ObjectiveFilter": {
+            "type": "structure",
+            "members": {
+                "Domains": {
+                    "target": "com.amazonaws.controlcatalog#DomainResourceFilterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The domain that's used as filter criteria.</p>\n         <p>You can use this parameter to specify one domain ARN at a time. Passing multiple ARNs in\n      the <code>ObjectiveFilter</code> isn’t currently supported.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An optional filter that narrows the list of objectives to a specific domain.</p>"
+            }
+        },
+        "com.amazonaws.controlcatalog#ObjectiveResource": {
+            "type": "resource",
+            "identifiers": {
+                "ObjectiveArn": {
+                    "target": "com.amazonaws.controlcatalog#ObjectiveArn"
+                }
+            },
+            "list": {
+                "target": "com.amazonaws.controlcatalog#ListObjectives"
+            },
+            "traits": {
+                "aws.api#arn": {
+                    "template": "{ObjectiveArn}",
+                    "noAccount": true,
+                    "absolute": true
+                },
+                "aws.iam#disableConditionKeyInference": {},
+                "aws.iam#iamResource": {
+                    "name": "objective"
+                }
+            }
+        },
+        "com.amazonaws.controlcatalog#ObjectiveResourceFilter": {
+            "type": "structure",
+            "members": {
+                "Arn": {
+                    "target": "com.amazonaws.controlcatalog#ObjectiveArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the objective.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The objective resource that's being used as a filter.</p>"
+            }
+        },
+        "com.amazonaws.controlcatalog#ObjectiveResourceFilterList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.controlcatalog#ObjectiveResourceFilter"
+            }
+        },
+        "com.amazonaws.controlcatalog#ObjectiveSummary": {
+            "type": "structure",
+            "members": {
+                "Arn": {
+                    "target": "com.amazonaws.controlcatalog#ObjectiveArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) that identifies the objective.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Name": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the objective.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Description": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description of the objective.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Domain": {
+                    "target": "com.amazonaws.controlcatalog#AssociatedDomainSummary",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The domain that the objective belongs to.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "CreateTime": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time when the objective was created.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "LastUpdateTime": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time when the objective was most recently updated.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A summary of metadata for an objective.</p>"
+            }
+        },
+        "com.amazonaws.controlcatalog#ObjectiveSummaryList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.controlcatalog#ObjectiveSummary"
+            }
+        },
+        "com.amazonaws.controlcatalog#PaginationToken": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "max": 1024
+                }
+            }
+        },
+        "com.amazonaws.controlcatalog#ThrottlingException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "smithy.api#String"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The request was denied due to request throttling.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 429,
+                "smithy.api#retryable": {
+                    "throttling": true
+                }
+            }
+        },
+        "com.amazonaws.controlcatalog#ValidationException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "smithy.api#String"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The request has invalid or missing parameters.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400
+            }
+        }
+    }
+}

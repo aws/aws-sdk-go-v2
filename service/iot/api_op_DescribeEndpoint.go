@@ -6,16 +6,19 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Returns or creates a unique endpoint specific to the Amazon Web Services
-// account making the call. The first time DescribeEndpoint is called, an endpoint
-// is created. All subsequent calls to DescribeEndpoint return the same endpoint.
-// Requires permission to access the DescribeEndpoint (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
-// action.
+// account making the call.
+//
+// The first time DescribeEndpoint is called, an endpoint is created. All
+// subsequent calls to DescribeEndpoint return the same endpoint.
+//
+// Requires permission to access the [DescribeEndpoint] action.
+//
+// [DescribeEndpoint]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions
 func (c *Client) DescribeEndpoint(ctx context.Context, params *DescribeEndpointInput, optFns ...func(*Options)) (*DescribeEndpointOutput, error) {
 	if params == nil {
 		params = &DescribeEndpointInput{}
@@ -35,6 +38,7 @@ func (c *Client) DescribeEndpoint(ctx context.Context, params *DescribeEndpointI
 type DescribeEndpointInput struct {
 
 	// The endpoint type. Valid endpoint types include:
+	//
 	//   - iot:Data - Returns a VeriSign signed data endpoint.
 	//
 	//   - iot:Data-ATS - Returns an ATS signed data endpoint.
@@ -42,6 +46,7 @@ type DescribeEndpointInput struct {
 	//   - iot:CredentialProvider - Returns an IoT credentials provider API endpoint.
 	//
 	//   - iot:Jobs - Returns an IoT device management Jobs API endpoint.
+	//
 	// We strongly recommend that customers use the newer iot:Data-ATS endpoint type
 	// to avoid issues related to the widespread distrust of Symantec certificate
 	// authorities. ATS Signed Certificates are more secure and are trusted by most
@@ -86,25 +91,25 @@ func (c *Client) addOperationDescribeEndpointMiddlewares(stack *middleware.Stack
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -119,10 +124,13 @@ func (c *Client) addOperationDescribeEndpointMiddlewares(stack *middleware.Stack
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeEndpoint(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

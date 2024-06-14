@@ -14,6 +14,12 @@
                 "smithy.api#httpError": 403
             }
         },
+        "com.amazonaws.qconnect#AndConditions": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.qconnect#TagCondition"
+            }
+        },
         "com.amazonaws.qconnect#AppIntegrationsConfiguration": {
             "type": "structure",
             "members": {
@@ -27,7 +33,7 @@
                 "objectFields": {
                     "target": "com.amazonaws.qconnect#ObjectFieldsList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The fields from the source that are made available to your agents in Amazon Q. Optional if\n      ObjectConfiguration is included in the provided DataIntegration. </p>\n         <ul>\n            <li>\n               <p> For <a href=\"https://developer.salesforce.com/docs/atlas.en-us.knowledge_dev.meta/knowledge_dev/sforce_api_objects_knowledge__kav.htm\"> Salesforce</a>, you must include at least <code>Id</code>,\n            <code>ArticleNumber</code>, <code>VersionNumber</code>, <code>Title</code>,\n            <code>PublishStatus</code>, and <code>IsDeleted</code>. </p>\n            </li>\n            <li>\n               <p>For <a href=\"https://developer.servicenow.com/dev.do#!/reference/api/rome/rest/knowledge-management-api\"> ServiceNow</a>, you must include at least <code>number</code>,\n            <code>short_description</code>, <code>sys_mod_count</code>, <code>workflow_state</code>,\n          and <code>active</code>. </p>\n            </li>\n            <li>\n               <p>For <a href=\"https://developer.zendesk.com/api-reference/help_center/help-center-api/articles/\">\n            Zendesk</a>, you must include at least <code>id</code>, <code>title</code>,\n            <code>updated_at</code>, and <code>draft</code>. </p>\n            </li>\n         </ul>\n         <p>Make sure to include additional fields. These fields are indexed and used to source\n      recommendations. </p>"
+                        "smithy.api#documentation": "<p>The fields from the source that are made available to your agents in Amazon Q in Connect. Optional if\n      ObjectConfiguration is included in the provided DataIntegration. </p>\n         <ul>\n            <li>\n               <p> For <a href=\"https://developer.salesforce.com/docs/atlas.en-us.knowledge_dev.meta/knowledge_dev/sforce_api_objects_knowledge__kav.htm\"> Salesforce</a>, you must include at least <code>Id</code>,\n            <code>ArticleNumber</code>, <code>VersionNumber</code>, <code>Title</code>,\n            <code>PublishStatus</code>, and <code>IsDeleted</code>. </p>\n            </li>\n            <li>\n               <p>For <a href=\"https://developer.servicenow.com/dev.do#!/reference/api/rome/rest/knowledge-management-api\"> ServiceNow</a>, you must include at least <code>number</code>,\n            <code>short_description</code>, <code>sys_mod_count</code>, <code>workflow_state</code>,\n          and <code>active</code>. </p>\n            </li>\n            <li>\n               <p>For <a href=\"https://developer.zendesk.com/api-reference/help_center/help-center-api/articles/\">\n            Zendesk</a>, you must include at least <code>id</code>, <code>title</code>,\n            <code>updated_at</code>, and <code>draft</code>. </p>\n            </li>\n         </ul>\n         <p>Make sure to include additional fields. These fields are indexed and used to source\n      recommendations. </p>"
                     }
                 }
             },
@@ -143,14 +149,14 @@
                 "assistantId": {
                     "target": "com.amazonaws.qconnect#Uuid",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier of the Amazon Q assistant.</p>",
+                        "smithy.api#documentation": "<p>The identifier of the Amazon Q in Connect assistant.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "assistantArn": {
                     "target": "com.amazonaws.qconnect#Arn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Amazon Q assistant.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Amazon Q in Connect assistant.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -190,12 +196,12 @@
                 "knowledgeBaseId": {
                     "target": "com.amazonaws.qconnect#Uuid",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier of the knowledge base. This should not be a QUICK_RESPONSES type knowledge \nbase if you're storing Amazon Q Content resource to it.</p>"
+                        "smithy.api#documentation": "<p>The identifier of the knowledge base. This should not be a QUICK_RESPONSES type knowledge base.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The data that is input into Amazon Q as a result of the assistant association.</p>"
+                "smithy.api#documentation": "<p>The data that is input into Amazon Q in Connect as a result of the assistant association.</p>"
             }
         },
         "com.amazonaws.qconnect#AssistantAssociationOutputData": {
@@ -232,14 +238,14 @@
                 "assistantId": {
                     "target": "com.amazonaws.qconnect#Uuid",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier of the Amazon Q assistant.</p>",
+                        "smithy.api#documentation": "<p>The identifier of the Amazon Q in Connect assistant.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "assistantArn": {
                     "target": "com.amazonaws.qconnect#Arn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Amazon Q assistant.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Amazon Q in Connect assistant.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -285,12 +291,12 @@
                 "type": {
                     "target": "com.amazonaws.qconnect#AssistantCapabilityType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of Amazon Q assistant capability. </p>"
+                        "smithy.api#documentation": "<p>The type of Amazon Q in Connect assistant capability. </p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The capability configuration for an Amazon Q assistant. </p>"
+                "smithy.api#documentation": "<p>The capability configuration for an Amazon Q in Connect assistant. </p>"
             }
         },
         "com.amazonaws.qconnect#AssistantCapabilityType": {
@@ -314,14 +320,14 @@
                 "assistantId": {
                     "target": "com.amazonaws.qconnect#Uuid",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier of the Amazon Q assistant.</p>",
+                        "smithy.api#documentation": "<p>The identifier of the Amazon Q in Connect assistant.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "assistantArn": {
                     "target": "com.amazonaws.qconnect#Arn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Amazon Q assistant.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Amazon Q in Connect assistant.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -361,19 +367,19 @@
                 "serverSideEncryptionConfiguration": {
                     "target": "com.amazonaws.qconnect#ServerSideEncryptionConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>The configuration information for the customer managed key used for encryption. </p>\n         <p>This KMS key must have a policy that allows <code>kms:CreateGrant</code>,\n        <code>kms:DescribeKey</code>, <code>kms:Decrypt</code>, and\n        <code>kms:GenerateDataKey*</code> permissions to the IAM identity using the\n      key to invoke Amazon Q. To use Amazon Q with chat, the key policy must also allow\n        <code>kms:Decrypt</code>, <code>kms:GenerateDataKey*</code>, and\n        <code>kms:DescribeKey</code> permissions to the <code>connect.amazonaws.com</code> service\n      principal. </p>\n         <p>For more information about setting up a customer managed key for Amazon Q, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/enable-q.html\">Enable Amazon Q in Connect for\n        your instance</a>.</p>"
+                        "smithy.api#documentation": "<p>The configuration information for the customer managed key used for encryption. </p>\n         <p>This KMS key must have a policy that allows <code>kms:CreateGrant</code>,\n        <code>kms:DescribeKey</code>, <code>kms:Decrypt</code>, and\n        <code>kms:GenerateDataKey*</code> permissions to the IAM identity using the\n      key to invoke Amazon Q in Connect. To use Amazon Q in Connect with chat, the key policy must also allow\n        <code>kms:Decrypt</code>, <code>kms:GenerateDataKey*</code>, and\n        <code>kms:DescribeKey</code> permissions to the <code>connect.amazonaws.com</code> service\n      principal. </p>\n         <p>For more information about setting up a customer managed key for Amazon Q in Connect, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/enable-q.html\">Enable Amazon Q in Connect for\n        your instance</a>.</p>"
                     }
                 },
                 "integrationConfiguration": {
                     "target": "com.amazonaws.qconnect#AssistantIntegrationConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>The configuration information for the Amazon Q assistant integration.</p>"
+                        "smithy.api#documentation": "<p>The configuration information for the Amazon Q in Connect assistant integration.</p>"
                     }
                 },
                 "capabilityConfiguration": {
                     "target": "com.amazonaws.qconnect#AssistantCapabilityConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>The configuration information for the Amazon Q assistant capability. </p>"
+                        "smithy.api#documentation": "<p>The configuration information for the Amazon Q in Connect assistant capability. </p>"
                     }
                 }
             },
@@ -392,7 +398,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The configuration information for the Amazon Q assistant integration.</p>"
+                "smithy.api#documentation": "<p>The configuration information for the Amazon Q in Connect assistant integration.</p>"
             }
         },
         "com.amazonaws.qconnect#AssistantList": {
@@ -438,14 +444,14 @@
                 "assistantId": {
                     "target": "com.amazonaws.qconnect#Uuid",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier of the Amazon Q assistant.</p>",
+                        "smithy.api#documentation": "<p>The identifier of the Amazon Q in Connect assistant.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "assistantArn": {
                     "target": "com.amazonaws.qconnect#Arn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Amazon Q assistant.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Amazon Q in Connect assistant.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -485,19 +491,19 @@
                 "serverSideEncryptionConfiguration": {
                     "target": "com.amazonaws.qconnect#ServerSideEncryptionConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>The configuration information for the customer managed key used for encryption. </p>\n         <p>This KMS key must have a policy that allows <code>kms:CreateGrant</code>,\n        <code>kms:DescribeKey</code>, <code>kms:Decrypt</code>, and\n        <code>kms:GenerateDataKey*</code> permissions to the IAM identity using the\n      key to invoke Amazon Q. To use Amazon Q with chat, the key policy must also allow\n        <code>kms:Decrypt</code>, <code>kms:GenerateDataKey*</code>, and\n        <code>kms:DescribeKey</code> permissions to the <code>connect.amazonaws.com</code> service\n      principal. </p>\n         <p>For more information about setting up a customer managed key for Amazon Q, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/enable-q.html\">Enable Amazon Q in Connect for\n        your instance</a>.</p>"
+                        "smithy.api#documentation": "<p>The configuration information for the customer managed key used for encryption. </p>\n         <p>This KMS key must have a policy that allows <code>kms:CreateGrant</code>,\n        <code>kms:DescribeKey</code>, <code>kms:Decrypt</code>, and\n        <code>kms:GenerateDataKey*</code> permissions to the IAM identity using the\n      key to invoke Amazon Q in Connect. To use Amazon Q in Connect with chat, the key policy must also allow\n        <code>kms:Decrypt</code>, <code>kms:GenerateDataKey*</code>, and\n        <code>kms:DescribeKey</code> permissions to the <code>connect.amazonaws.com</code> service\n      principal. </p>\n         <p>For more information about setting up a customer managed key for Amazon Q in Connect, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/enable-q.html\">Enable Amazon Q in Connect for\n        your instance</a>.</p>"
                     }
                 },
                 "integrationConfiguration": {
                     "target": "com.amazonaws.qconnect#AssistantIntegrationConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>The configuration information for the Amazon Q assistant integration.</p>"
+                        "smithy.api#documentation": "<p>The configuration information for the Amazon Q in Connect assistant integration.</p>"
                     }
                 },
                 "capabilityConfiguration": {
                     "target": "com.amazonaws.qconnect#AssistantCapabilityConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>The configuration information for the Amazon Q assistant capability. </p>"
+                        "smithy.api#documentation": "<p>The configuration information for the Amazon Q in Connect assistant capability. </p>"
                     }
                 }
             },
@@ -688,7 +694,7 @@
                 "knowledgeBaseId": {
                     "target": "com.amazonaws.qconnect#Uuid",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier of the knowledge base. This should not be a QUICK_RESPONSES type knowledge \nbase if you're storing Amazon Q Content resource to it.</p>",
+                        "smithy.api#documentation": "<p>The identifier of the knowledge base.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -730,7 +736,7 @@
                 "metadata": {
                     "target": "com.amazonaws.qconnect#ContentMetadata",
                     "traits": {
-                        "smithy.api#documentation": "<p>A key/value map to store attributes without affecting tagging or recommendations. \nFor example, when synchronizing data between an external system and Amazon Q, you can store an external version identifier as metadata to utilize for determining drift.</p>",
+                        "smithy.api#documentation": "<p>A key/value map to store attributes without affecting tagging or recommendations. \nFor example, when synchronizing data between an external system and Amazon Q in Connect, you can store an external version identifier as metadata to utilize for determining drift.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -837,7 +843,7 @@
                 "knowledgeBaseId": {
                     "target": "com.amazonaws.qconnect#Uuid",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier of the knowledge base. This should not be a QUICK_RESPONSES type knowledge \nbase if you're storing Amazon Q Content resource to it.</p>"
+                        "smithy.api#documentation": "<p>The identifier of the knowledge base. This should not be a QUICK_RESPONSES type knowledge base.</p>"
                     }
                 },
                 "contentArn": {
@@ -919,7 +925,7 @@
                 "knowledgeBaseId": {
                     "target": "com.amazonaws.qconnect#Uuid",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier of the knowledge base. This should not be a QUICK_RESPONSES type knowledge \nbase if you're storing Amazon Q Content resource to it.</p>",
+                        "smithy.api#documentation": "<p>The identifier of the knowledge base. This should not be a QUICK_RESPONSES type knowledge base.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -961,7 +967,7 @@
                 "metadata": {
                     "target": "com.amazonaws.qconnect#ContentMetadata",
                     "traits": {
-                        "smithy.api#documentation": "<p>A key/value map to store attributes without affecting tagging or recommendations. \nFor example, when synchronizing data between an external system and Amazon Q, you can store an external version identifier as metadata to utilize for determining drift.</p>",
+                        "smithy.api#documentation": "<p>A key/value map to store attributes without affecting tagging or recommendations. \nFor example, when synchronizing data between an external system and Amazon Q in Connect, you can store an external version identifier as metadata to utilize for determining drift.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1076,7 +1082,7 @@
                 "assistantId": {
                     "target": "com.amazonaws.qconnect#UuidOrArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier of the Amazon Q assistant. Can be either the ID or the ARN. URLs cannot contain the ARN.</p>",
+                        "smithy.api#documentation": "<p>The identifier of the Amazon Q in Connect assistant. Can be either the ID or the ARN. URLs cannot contain the ARN.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -1160,7 +1166,7 @@
                 "serverSideEncryptionConfiguration": {
                     "target": "com.amazonaws.qconnect#ServerSideEncryptionConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>The configuration information for the customer managed key used for encryption. </p>\n         <p>The customer managed key must have a policy that allows <code>kms:CreateGrant</code>,\n        <code> kms:DescribeKey</code>, <code>kms:Decrypt</code>, and\n        <code>kms:GenerateDataKey*</code> permissions to the IAM identity using the\n      key to invoke Amazon Q. To use Amazon Q with chat, the key policy must also allow\n        <code>kms:Decrypt</code>, <code>kms:GenerateDataKey*</code>, and\n        <code>kms:DescribeKey</code> permissions to the <code>connect.amazonaws.com</code> service\n      principal. </p>\n         <p>For more information about setting up a customer managed key for Amazon Q, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/enable-q.html\">Enable Amazon Q in Connect for\n        your instance</a>.</p>"
+                        "smithy.api#documentation": "<p>The configuration information for the customer managed key used for encryption. </p>\n         <p>The customer managed key must have a policy that allows <code>kms:CreateGrant</code>,\n        <code> kms:DescribeKey</code>, <code>kms:Decrypt</code>, and\n        <code>kms:GenerateDataKey*</code> permissions to the IAM identity using the\n      key to invoke Amazon Q in Connect. To use Amazon Q in Connect with chat, the key policy must also allow\n        <code>kms:Decrypt</code>, <code>kms:GenerateDataKey*</code>, and\n        <code>kms:DescribeKey</code> permissions to the <code>connect.amazonaws.com</code> service\n      principal. </p>\n         <p>For more information about setting up a customer managed key for Amazon Q in Connect, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/enable-q.html\">Enable Amazon Q in Connect for\n        your instance</a>.</p>"
                     }
                 }
             }
@@ -1202,7 +1208,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates Amazon Q content. Before to calling this API, use <a href=\"https://docs.aws.amazon.com/amazon-q-connect/latest/APIReference/API_StartContentUpload.html\">StartContentUpload</a> to\n      upload an asset.</p>",
+                "smithy.api#documentation": "<p>Creates Amazon Q in Connect content. Before to calling this API, use <a href=\"https://docs.aws.amazon.com/amazon-q-connect/latest/APIReference/API_StartContentUpload.html\">StartContentUpload</a> to upload an asset.</p>",
                 "smithy.api#http": {
                     "uri": "/knowledgeBases/{knowledgeBaseId}/contents",
                     "method": "POST"
@@ -1216,7 +1222,7 @@
                 "knowledgeBaseId": {
                     "target": "com.amazonaws.qconnect#UuidOrArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier of the knowledge base. This should not be a QUICK_RESPONSES type knowledge \nbase if you're storing Amazon Q Content resource to it. Can be either the ID or the ARN. URLs cannot contain the ARN.</p>",
+                        "smithy.api#documentation": "<p>The identifier of the knowledge base. This should not be a QUICK_RESPONSES type knowledge base. Can be either the ID or the ARN. URLs cannot contain the ARN.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -1224,7 +1230,7 @@
                 "name": {
                     "target": "com.amazonaws.qconnect#Name",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the content. Each piece of content in a knowledge base must have a unique\n      name. You can retrieve a piece of content using only its knowledge base and its name with the\n        <a href=\"https://docs.aws.amazon.com/amazon-q-connect/latest/APIReference/API_SearchContent.html\">SearchContent</a> API.</p>",
+                        "smithy.api#documentation": "<p>The name of the content. Each piece of content in a knowledge base must have a unique\n      name. You can retrieve a piece of content using only its knowledge base and its name with the\n        <a href=\"https://docs.aws.amazon.com/amazon-q-connect/latest/APIReference/API_SearchContent.html\">SearchContent</a>\n      API.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1243,7 +1249,7 @@
                 "metadata": {
                     "target": "com.amazonaws.qconnect#ContentMetadata",
                     "traits": {
-                        "smithy.api#documentation": "<p>A key/value map to store attributes without affecting tagging or recommendations. \nFor example, when synchronizing data between an external system and Amazon Q, you can store an external version identifier as metadata to utilize for determining drift.</p>"
+                        "smithy.api#documentation": "<p>A key/value map to store attributes without affecting tagging or recommendations. \nFor example, when synchronizing data between an external system and Amazon Q in Connect, you can store an external version identifier as metadata to utilize for determining drift.</p>"
                     }
                 },
                 "uploadId": {
@@ -1349,7 +1355,7 @@
                 "serverSideEncryptionConfiguration": {
                     "target": "com.amazonaws.qconnect#ServerSideEncryptionConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>The configuration information for the customer managed key used for encryption. </p>\n         <p>This KMS key must have a policy that allows <code>kms:CreateGrant</code>,\n        <code>kms:DescribeKey</code>, <code>kms:Decrypt</code>, and\n        <code>kms:GenerateDataKey*</code> permissions to the IAM identity using the\n      key to invoke Amazon Q.</p>\n         <p>For more information about setting up a customer managed key for Amazon Q, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/enable-q.html\">Enable Amazon Q in Connect for\n        your instance</a>.</p>"
+                        "smithy.api#documentation": "<p>The configuration information for the customer managed key used for encryption. </p>\n         <p>This KMS key must have a policy that allows <code>kms:CreateGrant</code>,\n        <code>kms:DescribeKey</code>, <code>kms:Decrypt</code>, and\n        <code>kms:GenerateDataKey*</code> permissions to the IAM identity using the\n      key to invoke Amazon Q in Connect.</p>\n         <p>For more information about setting up a customer managed key for Amazon Q in Connect, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/enable-q.html\">Enable Amazon Q in Connect for\n        your instance</a>.</p>"
                     }
                 },
                 "description": {
@@ -1403,7 +1409,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates an Amazon Q quick response.</p>",
+                "smithy.api#documentation": "<p>Creates an Amazon Q in Connect quick response.</p>",
                 "smithy.api#http": {
                     "uri": "/knowledgeBases/{knowledgeBaseId}/quickResponses",
                     "method": "POST"
@@ -1417,7 +1423,7 @@
                 "knowledgeBaseId": {
                     "target": "com.amazonaws.qconnect#UuidOrArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier of the knowledge base. This should not be a QUICK_RESPONSES type knowledge \nbase if you're storing Amazon Q Content resource to it. Can be either the ID or the ARN. URLs cannot contain the ARN.</p>",
+                        "smithy.api#documentation": "<p>The identifier of the knowledge base. Can be either the ID or the ARN. URLs cannot contain the ARN.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -1439,13 +1445,13 @@
                 "contentType": {
                     "target": "com.amazonaws.qconnect#QuickResponseType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The media type of the quick response content.</p>\n         <ul>\n            <li>\n               <p>Use <code>application/x.quickresponse;format=plain</code> for a quick response written in plain text.</p>\n            </li>\n            <li>\n               <p>Use <code>application/x.quickresponse;format=markdown</code> for a quick response written in richtext.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The media type of the quick response content.</p>\n         <ul>\n            <li>\n               <p>Use <code>application/x.quickresponse;format=plain</code> for a quick response written\n          in plain text.</p>\n            </li>\n            <li>\n               <p>Use <code>application/x.quickresponse;format=markdown</code> for a quick response\n          written in richtext.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "groupingConfiguration": {
                     "target": "com.amazonaws.qconnect#GroupingConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>The configuration information of the user groups that the quick response is accessible to.</p>"
+                        "smithy.api#documentation": "<p>The configuration information of the user groups that the quick response is accessible\n      to.</p>"
                     }
                 },
                 "description": {
@@ -1457,7 +1463,7 @@
                 "shortcutKey": {
                     "target": "com.amazonaws.qconnect#ShortCutKey",
                     "traits": {
-                        "smithy.api#documentation": "<p>The shortcut key of the quick response. The value should be unique across the\n  knowledge base.\n    </p>"
+                        "smithy.api#documentation": "<p>The shortcut key of the quick response. The value should be unique across the\n  knowledge base. </p>"
                     }
                 },
                 "isActive": {
@@ -1475,7 +1481,7 @@
                 "language": {
                     "target": "com.amazonaws.qconnect#LanguageCode",
                     "traits": {
-                        "smithy.api#documentation": "<p>The language code value for the language in which the quick response is written.  The supported language codes include <code>de_DE</code>, <code>en_US</code>, <code>es_ES</code>,\n  <code>fr_FR</code>, <code>id_ID</code>, <code>it_IT</code>, <code>ja_JP</code>, <code>ko_KR</code>, <code>pt_BR</code>,\n  <code>zh_CN</code>, <code>zh_TW</code>\n         </p>"
+                        "smithy.api#documentation": "<p>The language code value for the language in which the quick response is written. The supported language codes include <code>de_DE</code>, <code>en_US</code>, <code>es_ES</code>,\n  <code>fr_FR</code>, <code>id_ID</code>, <code>it_IT</code>, <code>ja_JP</code>, <code>ko_KR</code>, <code>pt_BR</code>,\n  <code>zh_CN</code>, <code>zh_TW</code>\n         </p>"
                     }
                 },
                 "clientToken": {
@@ -1520,6 +1526,9 @@
             },
             "errors": [
                 {
+                    "target": "com.amazonaws.qconnect#AccessDeniedException"
+                },
+                {
                     "target": "com.amazonaws.qconnect#ConflictException"
                 },
                 {
@@ -1530,7 +1539,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a session. A session is a contextual container used for generating\n      recommendations. Amazon Connect creates a new Amazon Q session for each contact on which\n      Amazon Q is enabled.</p>",
+                "smithy.api#documentation": "<p>Creates a session. A session is a contextual container used for generating\n      recommendations. Amazon Connect creates a new Amazon Q in Connect session for each contact on which\n      Amazon Q in Connect is enabled.</p>",
                 "smithy.api#http": {
                     "uri": "/assistants/{assistantId}/sessions",
                     "method": "POST"
@@ -1551,7 +1560,7 @@
                 "assistantId": {
                     "target": "com.amazonaws.qconnect#UuidOrArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier of the Amazon Q assistant. Can be either the ID or the ARN. URLs cannot contain the ARN.</p>",
+                        "smithy.api#documentation": "<p>The identifier of the Amazon Q in Connect assistant. Can be either the ID or the ARN. URLs cannot contain the ARN.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -1573,6 +1582,12 @@
                     "target": "com.amazonaws.qconnect#Tags",
                     "traits": {
                         "smithy.api#documentation": "<p>The tags used to organize, track, or control access for this resource.</p>"
+                    }
+                },
+                "tagFilter": {
+                    "target": "com.amazonaws.qconnect#TagFilter",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An object that can be used to specify Tag conditions. </p>"
                     }
                 }
             }
@@ -1731,7 +1746,7 @@
                 "assistantId": {
                     "target": "com.amazonaws.qconnect#UuidOrArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier of the Amazon Q assistant. Can be either the ID or the ARN. URLs cannot contain the ARN.</p>",
+                        "smithy.api#documentation": "<p>The identifier of the Amazon Q in Connect assistant. Can be either the ID or the ARN. URLs cannot contain the ARN.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -1748,7 +1763,7 @@
                 "assistantId": {
                     "target": "com.amazonaws.qconnect#UuidOrArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier of the Amazon Q assistant. Can be either the ID or the ARN. URLs cannot contain the ARN.</p>",
+                        "smithy.api#documentation": "<p>The identifier of the Amazon Q in Connect assistant. Can be either the ID or the ARN. URLs cannot contain the ARN.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -1794,7 +1809,7 @@
                 "knowledgeBaseId": {
                     "target": "com.amazonaws.qconnect#UuidOrArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier of the knowledge base. This should not be a QUICK_RESPONSES type knowledge \nbase if you're storing Amazon Q Content resource to it. Can be either the ID or the ARN. URLs cannot contain the ARN.</p>",
+                        "smithy.api#documentation": "<p>The identifier of the knowledge base. Can be either the ID or the ARN. URLs cannot contain the ARN.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -1851,7 +1866,7 @@
                 "knowledgeBaseId": {
                     "target": "com.amazonaws.qconnect#UuidOrArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier of the knowledge base. This should not be a QUICK_RESPONSES type knowledge \nbase if you're storing Amazon Q Content resource to it.</p>",
+                        "smithy.api#documentation": "<p>The identifier of the knowledge base.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -1960,7 +1975,7 @@
                 "knowledgeBaseId": {
                     "target": "com.amazonaws.qconnect#UuidOrArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The knowledge base from which the quick response is deleted. The identifier of the knowledge base. This should not be a QUICK_RESPONSES type knowledge \nbase if you're storing Amazon Q Content resource to it.</p>",
+                        "smithy.api#documentation": "<p>The knowledge base from which the quick response is deleted. The identifier of the knowledge base.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -2276,7 +2291,7 @@
                 "assistantId": {
                     "target": "com.amazonaws.qconnect#UuidOrArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier of the Amazon Q assistant. Can be either the ID or the ARN. URLs cannot contain the ARN.</p>",
+                        "smithy.api#documentation": "<p>The identifier of the Amazon Q in Connect assistant. Can be either the ID or the ARN. URLs cannot contain the ARN.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -2300,7 +2315,7 @@
                 "assistantId": {
                     "target": "com.amazonaws.qconnect#UuidOrArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier of the Amazon Q assistant. Can be either the ID or the ARN. URLs cannot contain the ARN.</p>",
+                        "smithy.api#documentation": "<p>The identifier of the Amazon Q in Connect assistant. Can be either the ID or the ARN. URLs cannot contain the ARN.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -2360,7 +2375,7 @@
                 "knowledgeBaseId": {
                     "target": "com.amazonaws.qconnect#UuidOrArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier of the knowledge base. This should not be a QUICK_RESPONSES type knowledge \nbase if you're storing Amazon Q Content resource to it. Can be either the ID or the ARN. URLs cannot contain the ARN.</p>",
+                        "smithy.api#documentation": "<p>The identifier of the knowledge base. This should not be a QUICK_RESPONSES type knowledge base. Can be either the ID or the ARN. URLs cannot contain the ARN.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -2420,7 +2435,7 @@
                 "knowledgeBaseId": {
                     "target": "com.amazonaws.qconnect#UuidOrArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier of the knowledge base. This should not be a QUICK_RESPONSES type knowledge \nbase if you're storing Amazon Q Content resource to it. Can be either the ID or the ARN. URLs cannot contain the ARN.</p>",
+                        "smithy.api#documentation": "<p>The identifier of the knowledge base. Can be either the ID or the ARN. URLs cannot contain the ARN.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -2538,7 +2553,7 @@
                 "knowledgeBaseId": {
                     "target": "com.amazonaws.qconnect#UuidOrArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier of the knowledge base. This should not be a QUICK_RESPONSES type knowledge \nbase if you're storing Amazon Q Content resource to it. Can be either the ID or the ARN. URLs cannot contain the ARN.</p>",
+                        "smithy.api#documentation": "<p>The identifier of the knowledge base. Can be either the ID or the ARN. URLs cannot contain the ARN.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -2645,7 +2660,7 @@
                 "smithy.api#deprecated": {
                     "message": "GetRecommendations API will be discontinued starting June 1, 2024. To receive generative responses after March 1, 2024 you will need to create a new Assistant in the Connect console and integrate the Amazon Q in Connect JavaScript library (amazon-q-connectjs) into your applications."
                 },
-                "smithy.api#documentation": "<p>Retrieves recommendations for the specified session. To avoid retrieving the same\n      recommendations in subsequent calls, use <a href=\"https://docs.aws.amazon.com/amazon-q-connect/latest/APIReference/API_NotifyRecommendationsReceived.html\">NotifyRecommendationsReceived</a>. This API supports long-polling behavior with the\n        <code>waitTimeSeconds</code> parameter. Short poll is the default behavior and only returns\n      recommendations already available. To perform a manual query against an assistant, use <a href=\"https://docs.aws.amazon.com/amazon-q-connect/latest/APIReference/API_QueryAssistant.html\">QueryAssistant</a>.</p>",
+                "smithy.api#documentation": "<important>\n            <p>This API will be discontinued starting June 1, 2024. To receive generative responses\n        after March 1, 2024, you will need to create a new Assistant in the Amazon Connect\n        console and integrate the Amazon Q in Connect JavaScript library (amazon-q-connectjs) into\n        your applications.</p>\n         </important>\n         <p>Retrieves recommendations for the specified session. To avoid retrieving the same\n      recommendations in subsequent calls, use <a href=\"https://docs.aws.amazon.com/amazon-q-connect/latest/APIReference/API_NotifyRecommendationsReceived.html\">NotifyRecommendationsReceived</a>. This API supports long-polling behavior with the\n        <code>waitTimeSeconds</code> parameter. Short poll is the default behavior and only returns\n      recommendations already available. To perform a manual query against an assistant, use <a href=\"https://docs.aws.amazon.com/amazon-q-connect/latest/APIReference/API_QueryAssistant.html\">QueryAssistant</a>.</p>",
                 "smithy.api#http": {
                     "uri": "/assistants/{assistantId}/sessions/{sessionId}/recommendations",
                     "method": "GET"
@@ -2659,7 +2674,7 @@
                 "assistantId": {
                     "target": "com.amazonaws.qconnect#UuidOrArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier of the Amazon Q assistant. Can be either the ID or the ARN. URLs cannot contain the ARN.</p>",
+                        "smithy.api#documentation": "<p>The identifier of the Amazon Q in Connect assistant. Can be either the ID or the ARN. URLs cannot contain the ARN.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -2741,7 +2756,7 @@
                 "assistantId": {
                     "target": "com.amazonaws.qconnect#UuidOrArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier of the Amazon Q assistant. Can be either the ID or the ARN. URLs cannot contain the ARN.</p>",
+                        "smithy.api#documentation": "<p>The identifier of the Amazon Q in Connect assistant. Can be either the ID or the ARN. URLs cannot contain the ARN.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -2773,18 +2788,18 @@
                 "criteria": {
                     "target": "com.amazonaws.qconnect#GroupingCriteria",
                     "traits": {
-                        "smithy.api#documentation": "<p>The criteria used for grouping Amazon Q users.</p>\n         <p>The following is the list of supported criteria values.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>RoutingProfileArn</code>: Grouping the users by their <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/API_RoutingProfile.html\">Amazon Connect routing profile ARN</a>. User should have <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/API_SearchRoutingProfiles.html\">SearchRoutingProfile</a> and\n            <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/API_DescribeRoutingProfile.html\">DescribeRoutingProfile</a> permissions when setting criteria to this value.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The criteria used for grouping Amazon Q in Connect users.</p>\n         <p>The following is the list of supported criteria values.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>RoutingProfileArn</code>: Grouping the users by their <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/API_RoutingProfile.html\">Amazon\n            Connect routing profile ARN</a>. User should have <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/API_SearchRoutingProfiles.html\">SearchRoutingProfile</a> and <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/API_DescribeRoutingProfile.html\">DescribeRoutingProfile</a> permissions when setting criteria to this value.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "values": {
                     "target": "com.amazonaws.qconnect#GroupingValues",
                     "traits": {
-                        "smithy.api#documentation": "<p>The list of values that define different groups of Amazon Q users.</p>\n         <ul>\n            <li>\n               <p>When setting <code>criteria</code> to <code>RoutingProfileArn</code>, you need to provide a list of\n            ARNs of <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/API_RoutingProfile.html\">Amazon Connect routing profiles</a> as values of this parameter.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The list of values that define different groups of Amazon Q in Connect users.</p>\n         <ul>\n            <li>\n               <p>When setting <code>criteria</code> to <code>RoutingProfileArn</code>, you need to\n          provide a list of ARNs of <a href=\"https://docs.aws.amazon.com/connect/latest/APIReference/API_RoutingProfile.html\">Amazon Connect routing\n            profiles</a> as values of this parameter.</p>\n            </li>\n         </ul>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The configuration information of the grouping of Amazon Q users.</p>"
+                "smithy.api#documentation": "<p>The configuration information of the grouping of Amazon Q in Connect users.</p>"
             }
         },
         "com.amazonaws.qconnect#GroupingCriteria": {
@@ -2872,7 +2887,7 @@
                 "knowledgeBaseId": {
                     "target": "com.amazonaws.qconnect#Uuid",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier of the knowledge base. This should not be a QUICK_RESPONSES type knowledge \nbase if you're storing Amazon Q Content resource to it.</p>",
+                        "smithy.api#documentation": "<p>The identifier of the knowledge base.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -2944,7 +2959,7 @@
                 "metadata": {
                     "target": "com.amazonaws.qconnect#ContentMetadata",
                     "traits": {
-                        "smithy.api#documentation": "<p>The metadata fields of the imported Amazon Q resources.</p>"
+                        "smithy.api#documentation": "<p>The metadata fields of the imported Amazon Q in Connect resources.</p>"
                     }
                 },
                 "externalSourceConfiguration": {
@@ -3005,7 +3020,7 @@
                 "knowledgeBaseId": {
                     "target": "com.amazonaws.qconnect#Uuid",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier of the knowledge base. This should not be a QUICK_RESPONSES type knowledge \nbase if you're storing Amazon Q Content resource to it.</p>",
+                        "smithy.api#documentation": "<p>The identifier of the knowledge base.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -3056,13 +3071,13 @@
                 "metadata": {
                     "target": "com.amazonaws.qconnect#ContentMetadata",
                     "traits": {
-                        "smithy.api#documentation": "<p>The metadata fields of the imported Amazon Q resources.</p>"
+                        "smithy.api#documentation": "<p>The metadata fields of the imported Amazon Q in Connect resources.</p>"
                     }
                 },
                 "externalSourceConfiguration": {
                     "target": "com.amazonaws.qconnect#ExternalSourceConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>The configuration information of the external source that the resource data are imported from.</p>"
+                        "smithy.api#documentation": "<p>The configuration information of the external source that the resource data are imported\n      from.</p>"
                     }
                 }
             },
@@ -3151,7 +3166,7 @@
                 "knowledgeBaseId": {
                     "target": "com.amazonaws.qconnect#Uuid",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier of the knowledge base. This should not be a QUICK_RESPONSES type knowledge \nbase if you're storing Amazon Q Content resource to it.</p>"
+                        "smithy.api#documentation": "<p>The identifier of the knowledge base.</p>"
                     }
                 },
                 "knowledgeBaseArn": {
@@ -3171,7 +3186,7 @@
                 "knowledgeBaseId": {
                     "target": "com.amazonaws.qconnect#Uuid",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier of the knowledge base. This should not be a QUICK_RESPONSES type knowledge \nbase if you're storing Amazon Q Content resource to it.</p>",
+                        "smithy.api#documentation": "<p>The identifier of the knowledge base.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -3225,7 +3240,7 @@
                 "serverSideEncryptionConfiguration": {
                     "target": "com.amazonaws.qconnect#ServerSideEncryptionConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>The configuration information for the customer managed key used for encryption. </p>\n         <p>This KMS key must have a policy that allows <code>kms:CreateGrant</code>,\n        <code>kms:DescribeKey</code>, <code>kms:Decrypt</code>, and\n        <code>kms:GenerateDataKey*</code> permissions to the IAM identity using the\n      key to invoke Amazon Q. </p>\n         <p>For more information about setting up a customer managed key for Amazon Q, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/enable-q.html\">Enable Amazon Q in Connect for\n        your instance</a>.</p>"
+                        "smithy.api#documentation": "<p>The configuration information for the customer managed key used for encryption. </p>\n         <p>This KMS key must have a policy that allows <code>kms:CreateGrant</code>,\n        <code>kms:DescribeKey</code>, <code>kms:Decrypt</code>, and\n        <code>kms:GenerateDataKey*</code> permissions to the IAM identity using the\n      key to invoke Amazon Q in Connect. </p>\n         <p>For more information about setting up a customer managed key for Amazon Q in Connect, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/enable-q.html\">Enable Amazon Q in Connect for\n        your instance</a>.</p>"
                     }
                 },
                 "description": {
@@ -3293,7 +3308,7 @@
                 "knowledgeBaseId": {
                     "target": "com.amazonaws.qconnect#Uuid",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier of the knowledge base. This should not be a QUICK_RESPONSES type knowledge \nbase if you're storing Amazon Q Content resource to it.</p>",
+                        "smithy.api#documentation": "<p>The identifier of the knowledge base.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -3340,7 +3355,7 @@
                 "serverSideEncryptionConfiguration": {
                     "target": "com.amazonaws.qconnect#ServerSideEncryptionConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>The configuration information for the customer managed key used for encryption. </p>\n         <p>This KMS key must have a policy that allows <code>kms:CreateGrant</code>,\n        <code>kms:DescribeKey</code>, <code>kms:Decrypt</code>, and\n        <code>kms:GenerateDataKey*</code> permissions to the IAM identity using the\n      key to invoke Amazon Q. </p>\n         <p>For more information about setting up a customer managed key for Amazon Q, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/enable-q.html\">Enable Amazon Q in Connect for\n        your instance</a>.</p>"
+                        "smithy.api#documentation": "<p>The configuration information for the customer managed key used for encryption. </p>\n         <p>This KMS key must have a policy that allows <code>kms:CreateGrant</code>,\n        <code>kms:DescribeKey</code>, <code>kms:Decrypt</code>, and\n        <code>kms:GenerateDataKey*</code> permissions to the IAM identity using the\n      key to invoke Amazon Q in Connect. </p>\n         <p>For more information about setting up a customer managed key for Amazon Q in Connect, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/enable-q.html\">Enable Amazon Q in Connect for\n        your instance</a>.</p>"
                     }
                 },
                 "description": {
@@ -3447,7 +3462,7 @@
                 "assistantId": {
                     "target": "com.amazonaws.qconnect#UuidOrArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier of the Amazon Q assistant. Can be either the ID or the ARN. URLs cannot contain the ARN.</p>",
+                        "smithy.api#documentation": "<p>The identifier of the Amazon Q in Connect assistant. Can be either the ID or the ARN. URLs cannot contain the ARN.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -3594,7 +3609,7 @@
                 "knowledgeBaseId": {
                     "target": "com.amazonaws.qconnect#UuidOrArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier of the knowledge base. This should not be a QUICK_RESPONSES type knowledge \nbase if you're storing Amazon Q Content resource to it. Can be either the ID or the ARN. URLs cannot contain the ARN.</p>",
+                        "smithy.api#documentation": "<p>The identifier of the knowledge base. This should not be a QUICK_RESPONSES type knowledge base. Can be either the ID or the ARN. URLs cannot contain the ARN.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -3670,7 +3685,7 @@
                 "knowledgeBaseId": {
                     "target": "com.amazonaws.qconnect#UuidOrArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier of the knowledge base. This should not be a QUICK_RESPONSES type knowledge \nbase if you're storing Amazon Q Content resource to it. Can be either the ID or the ARN. URLs cannot contain the ARN.</p>",
+                        "smithy.api#documentation": "<p>The identifier of the knowledge base. Can be either the ID or the ARN. URLs cannot contain the ARN.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -3823,7 +3838,7 @@
                 "knowledgeBaseId": {
                     "target": "com.amazonaws.qconnect#UuidOrArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier of the knowledge base. This should not be a QUICK_RESPONSES type knowledge \nbase if you're storing Amazon Q Content resource to it. Can be either the ID or the ARN. URLs cannot contain the ARN.</p>",
+                        "smithy.api#documentation": "<p>The identifier of the knowledge base. Can be either the ID or the ARN. URLs cannot contain the ARN.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -4009,7 +4024,7 @@
                 "assistantId": {
                     "target": "com.amazonaws.qconnect#UuidOrArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier of the Amazon Q assistant. Can be either the ID or the ARN. URLs cannot contain the ARN.</p>",
+                        "smithy.api#documentation": "<p>The identifier of the Amazon Q in Connect assistant. Can be either the ID or the ARN. URLs cannot contain the ARN.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -4058,6 +4073,32 @@
                     "min": 1,
                     "max": 100
                 }
+            }
+        },
+        "com.amazonaws.qconnect#OrCondition": {
+            "type": "union",
+            "members": {
+                "andConditions": {
+                    "target": "com.amazonaws.qconnect#AndConditions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of conditions which would be applied together with an <code>AND</code> condition.</p>"
+                    }
+                },
+                "tagCondition": {
+                    "target": "com.amazonaws.qconnect#TagCondition",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A leaf node condition which can be used to specify a tag condition.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A list of conditions which would be applied together with an <code>OR</code> condition.</p>"
+            }
+        },
+        "com.amazonaws.qconnect#OrConditions": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.qconnect#OrCondition"
             }
         },
         "com.amazonaws.qconnect#Order": {
@@ -4127,7 +4168,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Provides feedback against the specified assistant for the specified target. This API only supports generative targets.</p>",
+                "smithy.api#documentation": "<p>Provides feedback against the specified assistant for the specified target. This API only\n      supports generative targets.</p>",
                 "smithy.api#http": {
                     "uri": "/assistants/{assistantId}/feedback",
                     "method": "PUT"
@@ -4141,7 +4182,7 @@
                 "assistantId": {
                     "target": "com.amazonaws.qconnect#UuidOrArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier of the Amazon Q assistant.</p>",
+                        "smithy.api#documentation": "<p>The identifier of the Amazon Q in Connect assistant.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -4178,14 +4219,14 @@
                 "assistantId": {
                     "target": "com.amazonaws.qconnect#Uuid",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier of the Amazon Q assistant.</p>",
+                        "smithy.api#documentation": "<p>The identifier of the Amazon Q in Connect assistant.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "assistantArn": {
                     "target": "com.amazonaws.qconnect#UuidOrArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Amazon Q assistant.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Amazon Q in Connect assistant.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -4241,7 +4282,7 @@
                 "smithy.api#deprecated": {
                     "message": "QueryAssistant API will be discontinued starting June 1, 2024. To receive generative responses after March 1, 2024 you will need to create a new Assistant in the Connect console and integrate the Amazon Q in Connect JavaScript library (amazon-q-connectjs) into your applications."
                 },
-                "smithy.api#documentation": "<p>Performs a manual search against the specified assistant. To retrieve recommendations for\n      an assistant, use <a href=\"https://docs.aws.amazon.com/amazon-q-connect/latest/APIReference/API_GetRecommendations.html\">GetRecommendations</a>.\n    </p>",
+                "smithy.api#documentation": "<important>\n            <p>This API will be discontinued starting June 1, 2024. To receive generative responses\n        after March 1, 2024, you will need to create a new Assistant in the Amazon Connect\n        console and integrate the Amazon Q in Connect JavaScript library (amazon-q-connectjs) into\n        your applications.</p>\n         </important>\n         <p>Performs a manual search against the specified assistant. To retrieve recommendations for\n      an assistant, use <a href=\"https://docs.aws.amazon.com/amazon-q-connect/latest/APIReference/API_GetRecommendations.html\">GetRecommendations</a>. </p>",
                 "smithy.api#http": {
                     "uri": "/assistants/{assistantId}/query",
                     "method": "POST"
@@ -4264,7 +4305,7 @@
                 "assistantId": {
                     "target": "com.amazonaws.qconnect#UuidOrArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier of the Amazon Q assistant. Can be either the ID or the ARN. URLs cannot contain the ARN.</p>",
+                        "smithy.api#documentation": "<p>The identifier of the Amazon Q in Connect assistant. Can be either the ID or the ARN. URLs cannot contain the ARN.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -4291,7 +4332,7 @@
                 "sessionId": {
                     "target": "com.amazonaws.qconnect#UuidOrArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier of the Amazon Q session. Can be either the ID or the ARN. URLs cannot\n      contain the ARN.</p>"
+                        "smithy.api#documentation": "<p>The identifier of the Amazon Q in Connect session. Can be either the ID or the ARN. URLs cannot\n      contain the ARN.</p>"
                     }
                 },
                 "queryCondition": {
@@ -4538,7 +4579,7 @@
                 "knowledgeBaseId": {
                     "target": "com.amazonaws.qconnect#Uuid",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier of the knowledge base. This should not be a QUICK_RESPONSES type knowledge \nbase if you're storing Amazon Q Content resource to it. Can be either the ID or the ARN. URLs cannot contain the ARN.</p>",
+                        "smithy.api#documentation": "<p>The identifier of the knowledge base. Can be either the ID or the ARN. URLs cannot contain the ARN.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -4552,7 +4593,7 @@
                 "contentType": {
                     "target": "com.amazonaws.qconnect#QuickResponseType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The media type of the quick response content.</p>\n         <ul>\n            <li>\n               <p>Use <code>application/x.quickresponse;format=plain</code> for quick response written in plain text.</p>\n            </li>\n            <li>\n               <p>Use <code>application/x.quickresponse;format=markdown</code> for quick response written in richtext.</p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>The media type of the quick response content.</p>\n         <ul>\n            <li>\n               <p>Use <code>application/x.quickresponse;format=plain</code> for quick response written\n          in plain text.</p>\n            </li>\n            <li>\n               <p>Use <code>application/x.quickresponse;format=markdown</code> for quick response\n          written in richtext.</p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 },
@@ -4594,7 +4635,7 @@
                 "groupingConfiguration": {
                     "target": "com.amazonaws.qconnect#GroupingConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>The configuration information of the user groups that the quick response is accessible to.</p>"
+                        "smithy.api#documentation": "<p>The configuration information of the user groups that the quick response is accessible\n      to.</p>"
                     }
                 },
                 "shortcutKey": {
@@ -4606,7 +4647,7 @@
                 "lastModifiedBy": {
                     "target": "com.amazonaws.qconnect#GenericArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the user who last updated the quick response data.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the user who last updated the quick response\n      data.</p>"
                     }
                 },
                 "isActive": {
@@ -4618,7 +4659,7 @@
                 "channels": {
                     "target": "com.amazonaws.qconnect#Channels",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Connect contact channels this quick response applies to. The supported contact channel types include <code>Chat</code>.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Connect contact channels this quick response applies to.\n      The supported contact channel types include <code>Chat</code>.</p>"
                     }
                 },
                 "language": {
@@ -4809,13 +4850,13 @@
                 "allowFuzziness": {
                     "target": "smithy.api#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>Whether the query expects only exact matches on the attribute field values. The results of the query will only include exact matches if this parameter is set to false.</p>"
+                        "smithy.api#documentation": "<p>Whether the query expects only exact matches on the attribute field values. The results of\n      the query will only include exact matches if this parameter is set to false.</p>"
                     }
                 },
                 "priority": {
                     "target": "com.amazonaws.qconnect#Priority",
                     "traits": {
-                        "smithy.api#documentation": "<p>The importance of the attribute field when calculating query result relevancy scores.\n      The value set for this parameter affects the ordering of search results.</p>"
+                        "smithy.api#documentation": "<p>The importance of the attribute field when calculating query result relevancy scores. The\n      value set for this parameter affects the ordering of search results.</p>"
                     }
                 }
             },
@@ -4925,7 +4966,7 @@
                 "knowledgeBaseId": {
                     "target": "com.amazonaws.qconnect#Uuid",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier of the knowledge base. This should not be a QUICK_RESPONSES type knowledge \nbase if you're storing Amazon Q Content resource to it. Can be either the ID or the ARN. URLs cannot contain the ARN.</p>",
+                        "smithy.api#documentation": "<p>The identifier of the knowledge base. Can be either the ID or the ARN. URLs cannot contain the ARN.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -4939,7 +4980,7 @@
                 "contentType": {
                     "target": "com.amazonaws.qconnect#QuickResponseType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The media type of the quick response content.</p>\n         <ul>\n            <li>\n               <p>Use <code>application/x.quickresponse;format=plain</code> for quick response written in plain text.</p>\n            </li>\n            <li>\n               <p>Use <code>application/x.quickresponse;format=markdown</code> for quick response written in richtext.</p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>The media type of the quick response content.</p>\n         <ul>\n            <li>\n               <p>Use <code>application/x.quickresponse;format=plain</code> for quick response written\n          in plain text.</p>\n            </li>\n            <li>\n               <p>Use <code>application/x.quickresponse;format=markdown</code> for quick response\n          written in richtext.</p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 },
@@ -4989,7 +5030,7 @@
                 "groupingConfiguration": {
                     "target": "com.amazonaws.qconnect#GroupingConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>The configuration information of the user groups that the quick response is accessible to.</p>"
+                        "smithy.api#documentation": "<p>The configuration information of the user groups that the quick response is accessible\n      to.</p>"
                     }
                 },
                 "shortcutKey": {
@@ -5001,13 +5042,13 @@
                 "lastModifiedBy": {
                     "target": "com.amazonaws.qconnect#GenericArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the user who last updated the quick response search result data.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the user who last updated the quick response search\n      result data.</p>"
                     }
                 },
                 "channels": {
                     "target": "com.amazonaws.qconnect#Channels",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Connect contact channels this quick response applies to. The supported contact channel types include <code>Chat</code>.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Connect contact channels this quick response applies to.\n      The supported contact channel types include <code>Chat</code>.</p>"
                     }
                 },
                 "language": {
@@ -5019,13 +5060,13 @@
                 "attributesNotInterpolated": {
                     "target": "com.amazonaws.qconnect#ContactAttributeKeys",
                     "traits": {
-                        "smithy.api#documentation": "<p>The user defined contact attributes that are not resolved when the search result is returned.</p>"
+                        "smithy.api#documentation": "<p>The user defined contact attributes that are not resolved when the search result is\n      returned.</p>"
                     }
                 },
                 "attributesInterpolated": {
                     "target": "com.amazonaws.qconnect#ContactAttributeKeys",
                     "traits": {
-                        "smithy.api#documentation": "<p>The user defined contact attributes that are resolved when the search result is returned.</p>"
+                        "smithy.api#documentation": "<p>The user defined contact attributes that are resolved when the search result is\n      returned.</p>"
                     }
                 },
                 "tags": {
@@ -5119,7 +5160,7 @@
                 "knowledgeBaseId": {
                     "target": "com.amazonaws.qconnect#Uuid",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier of the knowledge base. This should not be a QUICK_RESPONSES type knowledge \nbase if you're storing Amazon Q Content resource to it.</p>",
+                        "smithy.api#documentation": "<p>The identifier of the knowledge base.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -5133,7 +5174,7 @@
                 "contentType": {
                     "target": "com.amazonaws.qconnect#QuickResponseType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The media type of the quick response content.</p>\n         <ul>\n            <li>\n               <p>Use <code>application/x.quickresponse;format=plain</code> for quick response written in plain text.</p>\n            </li>\n            <li>\n               <p>Use <code>application/x.quickresponse;format=markdown</code> for quick response written in richtext.</p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>The media type of the quick response content.</p>\n         <ul>\n            <li>\n               <p>Use <code>application/x.quickresponse;format=plain</code> for quick response written\n          in plain text.</p>\n            </li>\n            <li>\n               <p>Use <code>application/x.quickresponse;format=markdown</code> for quick response\n          written in richtext.</p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 },
@@ -5169,7 +5210,7 @@
                 "lastModifiedBy": {
                     "target": "com.amazonaws.qconnect#GenericArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the user who last updated the quick response data.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the user who last updated the quick response\n      data.</p>"
                     }
                 },
                 "isActive": {
@@ -5181,7 +5222,7 @@
                 "channels": {
                     "target": "com.amazonaws.qconnect#Channels",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Connect contact channels this quick response applies to. The supported contact channel types include <code>Chat</code>.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Connect contact channels this quick response applies to.\n      The supported contact channel types include <code>Chat</code>.</p>"
                     }
                 },
                 "tags": {
@@ -5502,7 +5543,7 @@
                 "knowledgeBaseId": {
                     "target": "com.amazonaws.qconnect#UuidOrArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier of the knowledge base. This should not be a QUICK_RESPONSES type knowledge \nbase if you're storing Amazon Q Content resource to it. Can be either the ID or the ARN. URLs cannot contain the ARN.</p>",
+                        "smithy.api#documentation": "<p>The identifier of the knowledge base. Can be either the ID or the ARN. URLs cannot contain the ARN.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -5654,7 +5695,7 @@
                 "knowledgeBaseId": {
                     "target": "com.amazonaws.qconnect#UuidOrArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier of the knowledge base. This should not be a QUICK_RESPONSES type knowledge \nbase if you're storing Amazon Q Content resource to it. Can be either the ID or the ARN. URLs cannot contain the ARN.</p>",
+                        "smithy.api#documentation": "<p>The identifier of the knowledge base. This should not be a QUICK_RESPONSES type knowledge base. Can be either the ID or the ARN. URLs cannot contain the ARN.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -5724,7 +5765,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Searches existing Amazon Q quick responses in an Amazon Q knowledge base.</p>",
+                "smithy.api#documentation": "<p>Searches existing Amazon Q in Connect quick responses in an Amazon Q in Connect knowledge base.</p>",
                 "smithy.api#http": {
                     "uri": "/knowledgeBases/{knowledgeBaseId}/search/quickResponses",
                     "method": "POST"
@@ -5773,7 +5814,7 @@
                 "attributes": {
                     "target": "com.amazonaws.qconnect#ContactAttributes",
                     "traits": {
-                        "smithy.api#documentation": "<p>The <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/connect-attrib-list.html#user-defined-attributes\">user-defined Amazon Connect contact attributes</a> to be resolved when search results are returned.</p>"
+                        "smithy.api#documentation": "<p>The <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/connect-attrib-list.html#user-defined-attributes\">user-defined Amazon Connect contact attributes</a> to be resolved when search\n      results are returned.</p>"
                     }
                 }
             },
@@ -5856,7 +5897,7 @@
                 "assistantId": {
                     "target": "com.amazonaws.qconnect#UuidOrArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier of the Amazon Q assistant. Can be either the ID or the ARN. URLs cannot contain the ARN.</p>",
+                        "smithy.api#documentation": "<p>The identifier of the Amazon Q in Connect assistant. Can be either the ID or the ARN. URLs cannot contain the ARN.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -5900,7 +5941,7 @@
                 "kmsKeyId": {
                     "target": "com.amazonaws.qconnect#NonEmptyString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The customer managed key used for encryption. For more information about setting up a\n        customer managed key for Amazon Q, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/enable-q.html\">Enable Amazon Q in Connect for your instance</a>.\n      For information about valid ID values, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#key-id\">Key identifiers (KeyId)</a>.</p>"
+                        "smithy.api#documentation": "<p>The customer managed key used for encryption. For more information about setting up a\n        customer managed key for Amazon Q in Connect, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/enable-q.html\">Enable Amazon Q in Connect for your instance</a>.\n      For information about valid ID values, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#key-id\">Key identifiers (KeyId)</a>.</p>"
                     }
                 }
             },
@@ -5936,6 +5977,9 @@
             },
             "read": {
                 "target": "com.amazonaws.qconnect#GetSession"
+            },
+            "update": {
+                "target": "com.amazonaws.qconnect#UpdateSession"
             },
             "traits": {
                 "aws.api#arn": {
@@ -5985,6 +6029,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The configuration information for the session integration.</p>"
                     }
+                },
+                "tagFilter": {
+                    "target": "com.amazonaws.qconnect#TagFilter",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An object that can be used to specify Tag conditions.</p>"
+                    }
                 }
             },
             "traits": {
@@ -6031,14 +6081,14 @@
                 "assistantId": {
                     "target": "com.amazonaws.qconnect#Uuid",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier of the Amazon Q assistant.</p>",
+                        "smithy.api#documentation": "<p>The identifier of the Amazon Q in Connect assistant.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "assistantArn": {
                     "target": "com.amazonaws.qconnect#Arn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Amazon Q assistant.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Amazon Q in Connect assistant.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -6137,7 +6187,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Get a URL to upload content to a knowledge base. To upload content, first make a PUT\n      request to the returned URL with your file, making sure to include the required headers. Then\n      use <a href=\"https://docs.aws.amazon.com/amazon-q-connect/latest/APIReference/API_CreateContent.html\">CreateContent</a> to finalize the content creation process or <a href=\"https://docs.aws.amazon.com/amazon-q-connect/latest/APIReference/API_UpdateContent.html\">UpdateContent</a> to modify an existing resource. You can only upload content to a\n      knowledge base of type CUSTOM.</p>",
+                "smithy.api#documentation": "<p>Get a URL to upload content to a knowledge base. To upload content, first make a PUT\n      request to the returned URL with your file, making sure to include the required headers. Then\n      use <a href=\"https://docs.aws.amazon.com/amazon-q-connect/latest/APIReference/API_CreateContent.html\">CreateContent</a> to\n      finalize the content creation process or <a href=\"https://docs.aws.amazon.com/amazon-q-connect/latest/APIReference/API_UpdateContent.html\">UpdateContent</a> to\n      modify an existing resource. You can only upload content to a knowledge base of type\n      CUSTOM.</p>",
                 "smithy.api#http": {
                     "uri": "/knowledgeBases/{knowledgeBaseId}/upload",
                     "method": "POST"
@@ -6150,7 +6200,7 @@
                 "knowledgeBaseId": {
                     "target": "com.amazonaws.qconnect#UuidOrArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier of the knowledge base. This should not be a QUICK_RESPONSES type knowledge \nbase if you're storing Amazon Q Content resource to it. Can be either the ID or the ARN. URLs cannot contain the ARN.</p>",
+                        "smithy.api#documentation": "<p>The identifier of the knowledge base. Can be either the ID or the ARN. URLs cannot contain the ARN.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -6230,7 +6280,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Start an asynchronous job to import Amazon Q resources from an uploaded source file. Before calling this API, use <a href=\"https://docs.aws.amazon.com/wisdom/latest/APIReference/API_StartContentUpload.html\">StartContentUpload</a> to\n      upload an asset that contains the resource data.</p>\n         <ul>\n            <li>\n               <p>For importing Amazon Q quick responses, you need to upload a csv file including the quick responses. For information about how to format the csv file for importing quick responses, see <a href=\"https://docs.aws.amazon.com/console/connect/quick-responses/add-data\">Import quick responses</a>.</p>\n            </li>\n         </ul>",
+                "smithy.api#documentation": "<p>Start an asynchronous job to import Amazon Q in Connect resources from an uploaded source file.\n      Before calling this API, use <a href=\"https://docs.aws.amazon.com/wisdom/latest/APIReference/API_StartContentUpload.html\">StartContentUpload</a> to\n      upload an asset that contains the resource data.</p>\n         <ul>\n            <li>\n               <p>For importing Amazon Q in Connect quick responses, you need to upload a csv file including the\n          quick responses. For information about how to format the csv file for importing quick\n          responses, see <a href=\"https://docs.aws.amazon.com/console/connect/quick-responses/add-data\">Import quick responses</a>.</p>\n            </li>\n         </ul>",
                 "smithy.api#http": {
                     "uri": "/knowledgeBases/{knowledgeBaseId}/importJobs",
                     "method": "POST"
@@ -6244,7 +6294,7 @@
                 "knowledgeBaseId": {
                     "target": "com.amazonaws.qconnect#UuidOrArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier of the knowledge base. This should not be a QUICK_RESPONSES type knowledge \nbase if you're storing Amazon Q Content resource to it. Can be either the ID or the ARN. URLs cannot contain the ARN.</p>\n         <ul>\n            <li>\n               <p>For importing Amazon Q quick responses, this should be a <code>QUICK_RESPONSES</code> type knowledge base.</p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>The identifier of the knowledge base. Can be either the ID or the ARN. URLs cannot contain the ARN.</p>\n         <ul>\n            <li>\n               <p>For importing Amazon Q in Connect quick responses, this should be a <code>QUICK_RESPONSES</code>\n          type knowledge base.</p>\n            </li>\n         </ul>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -6252,7 +6302,7 @@
                 "importJobType": {
                     "target": "com.amazonaws.qconnect#ImportJobType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of the import job.</p>\n         <ul>\n            <li>\n               <p>For importing quick response resource, set the value to <code>QUICK_RESPONSES</code>.</p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>The type of the import job.</p>\n         <ul>\n            <li>\n               <p>For importing quick response resource, set the value to\n          <code>QUICK_RESPONSES</code>.</p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 },
@@ -6273,13 +6323,13 @@
                 "metadata": {
                     "target": "com.amazonaws.qconnect#ContentMetadata",
                     "traits": {
-                        "smithy.api#documentation": "<p>The metadata fields of the imported Amazon Q resources.</p>"
+                        "smithy.api#documentation": "<p>The metadata fields of the imported Amazon Q in Connect resources.</p>"
                     }
                 },
                 "externalSourceConfiguration": {
                     "target": "com.amazonaws.qconnect#ExternalSourceConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>The configuration information of the external source that the resource data are imported from.</p>"
+                        "smithy.api#documentation": "<p>The configuration information of the external source that the resource data are imported\n      from.</p>"
                     }
                 }
             },
@@ -6299,6 +6349,53 @@
             },
             "traits": {
                 "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.qconnect#TagCondition": {
+            "type": "structure",
+            "members": {
+                "key": {
+                    "target": "com.amazonaws.qconnect#TagKey",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tag key in the tag condition.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "value": {
+                    "target": "com.amazonaws.qconnect#TagValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tag value in the tag condition.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A leaf node condition which can be used to specify a tag condition.\n  </p>"
+            }
+        },
+        "com.amazonaws.qconnect#TagFilter": {
+            "type": "union",
+            "members": {
+                "tagCondition": {
+                    "target": "com.amazonaws.qconnect#TagCondition",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A leaf node condition which can be used to specify a tag condition.</p>"
+                    }
+                },
+                "andConditions": {
+                    "target": "com.amazonaws.qconnect#AndConditions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of conditions which would be applied together with an <code>AND</code> condition.</p>"
+                    }
+                },
+                "orConditions": {
+                    "target": "com.amazonaws.qconnect#OrConditions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of conditions which would be applied together with an <code>OR</code> condition.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An object that can be used to specify Tag conditions.</p>"
             }
         },
         "com.amazonaws.qconnect#TagKey": {
@@ -6531,7 +6628,7 @@
                 "knowledgeBaseId": {
                     "target": "com.amazonaws.qconnect#UuidOrArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier of the knowledge base. This should not be a QUICK_RESPONSES type knowledge \nbase if you're storing Amazon Q Content resource to it. Can be either the ID or the ARN</p>",
+                        "smithy.api#documentation": "<p>The identifier of the knowledge base. This should not be a QUICK_RESPONSES type knowledge base. Can be either the ID or the ARN</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -6571,13 +6668,13 @@
                 "metadata": {
                     "target": "com.amazonaws.qconnect#ContentMetadata",
                     "traits": {
-                        "smithy.api#documentation": "<p>A key/value map to store attributes without affecting tagging or recommendations. For\n      example, when synchronizing data between an external system and Amazon Q, you can store an\n      external version identifier as metadata to utilize for determining drift.</p>"
+                        "smithy.api#documentation": "<p>A key/value map to store attributes without affecting tagging or recommendations. For\n      example, when synchronizing data between an external system and Amazon Q in Connect, you can store an\n      external version identifier as metadata to utilize for determining drift.</p>"
                     }
                 },
                 "uploadId": {
                     "target": "com.amazonaws.qconnect#UploadId",
                     "traits": {
-                        "smithy.api#documentation": "<p>A pointer to the uploaded asset. This value is returned by <a href=\"https://docs.aws.amazon.com/amazon-q-connect/latest/APIReference/API_StartContentUpload.html\">StartContentUpload</a>.\n    </p>"
+                        "smithy.api#documentation": "<p>A pointer to the uploaded asset. This value is returned by <a href=\"https://docs.aws.amazon.com/amazon-q-connect/latest/APIReference/API_StartContentUpload.html\">StartContentUpload</a>. </p>"
                     }
                 }
             }
@@ -6613,7 +6710,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Updates the template URI of a knowledge base. This is only supported for knowledge bases\n      of type EXTERNAL. Include a single variable in <code>${variable}</code> format; this\n      interpolated by Amazon Q using ingested content. For example, if you ingest a Salesforce\n      article, it has an <code>Id</code> value, and you can set the template URI to\n        <code>https://myInstanceName.lightning.force.com/lightning/r/Knowledge__kav/*${Id}*/view</code>.\n    </p>",
+                "smithy.api#documentation": "<p>Updates the template URI of a knowledge base. This is only supported for knowledge bases\n      of type EXTERNAL. Include a single variable in <code>${variable}</code> format; this\n      interpolated by Amazon Q in Connect using ingested content. For example, if you ingest a Salesforce\n      article, it has an <code>Id</code> value, and you can set the template URI to\n        <code>https://myInstanceName.lightning.force.com/lightning/r/Knowledge__kav/*${Id}*/view</code>.\n    </p>",
                 "smithy.api#http": {
                     "uri": "/knowledgeBases/{knowledgeBaseId}/templateUri",
                     "method": "POST"
@@ -6626,7 +6723,7 @@
                 "knowledgeBaseId": {
                     "target": "com.amazonaws.qconnect#UuidOrArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier of the knowledge base. This should not be a QUICK_RESPONSES type knowledge \nbase if you're storing Amazon Q Content resource to it. Can be either the ID or the ARN. URLs cannot contain the ARN.</p>",
+                        "smithy.api#documentation": "<p>The identifier of the knowledge base. This should not be a QUICK_RESPONSES type knowledge base. Can be either the ID or the ARN. URLs cannot contain the ARN.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -6677,7 +6774,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Updates an existing Amazon Q quick response.</p>",
+                "smithy.api#documentation": "<p>Updates an existing Amazon Q in Connect quick response.</p>",
                 "smithy.api#http": {
                     "uri": "/knowledgeBases/{knowledgeBaseId}/quickResponses/{quickResponseId}",
                     "method": "POST"
@@ -6690,7 +6787,7 @@
                 "knowledgeBaseId": {
                     "target": "com.amazonaws.qconnect#UuidOrArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier of the knowledge base. This should not be a QUICK_RESPONSES type knowledge \nbase if you're storing Amazon Q Content resource to it. Can be either the ID or the ARN. URLs cannot contain the ARN.</p>",
+                        "smithy.api#documentation": "<p>The identifier of the knowledge base. Can be either the ID or the ARN. URLs cannot contain the ARN.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -6718,7 +6815,7 @@
                 "contentType": {
                     "target": "com.amazonaws.qconnect#QuickResponseType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The media type of the quick response content.</p>\n         <ul>\n            <li>\n               <p>Use <code>application/x.quickresponse;format=plain</code> for quick response written in plain text.</p>\n            </li>\n            <li>\n               <p>Use <code>application/x.quickresponse;format=markdown</code> for quick response written in richtext.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The media type of the quick response content.</p>\n         <ul>\n            <li>\n               <p>Use <code>application/x.quickresponse;format=plain</code> for quick response written\n          in plain text.</p>\n            </li>\n            <li>\n               <p>Use <code>application/x.quickresponse;format=markdown</code> for quick response\n          written in richtext.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "groupingConfiguration": {
@@ -6766,7 +6863,7 @@
                 "channels": {
                     "target": "com.amazonaws.qconnect#Channels",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Connect contact channels this quick response applies to. The supported contact channel types include <code>Chat</code>.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Connect contact channels this quick response applies to.\n      The supported contact channel types include <code>Chat</code>.</p>"
                     }
                 },
                 "language": {
@@ -6788,6 +6885,80 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The quick response.</p>"
                     }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.qconnect#UpdateSession": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.qconnect#UpdateSessionRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.qconnect#UpdateSessionResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.qconnect#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.qconnect#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.qconnect#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Updates a session. A session is a contextual container used for generating recommendations.\n        Amazon Connect updates the existing Amazon Q in Connect session for each contact on which Amazon Q in Connect\n      is enabled.</p>",
+                "smithy.api#http": {
+                    "uri": "/assistants/{assistantId}/sessions/{sessionId}",
+                    "method": "POST"
+                }
+            }
+        },
+        "com.amazonaws.qconnect#UpdateSessionRequest": {
+            "type": "structure",
+            "members": {
+                "assistantId": {
+                    "target": "com.amazonaws.qconnect#UuidOrArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the Amazon Q in Connect assistant. Can be either the ID or the ARN. URLs cannot contain the ARN.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "sessionId": {
+                    "target": "com.amazonaws.qconnect#UuidOrArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the session. Can be either the ID or the ARN. URLs cannot contain the ARN.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "description": {
+                    "target": "com.amazonaws.qconnect#Description",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description.</p>"
+                    }
+                },
+                "tagFilter": {
+                    "target": "com.amazonaws.qconnect#TagFilter",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An object that can be used to specify Tag conditions.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.qconnect#UpdateSessionResponse": {
+            "type": "structure",
+            "members": {
+                "session": {
+                    "target": "com.amazonaws.qconnect#SessionData"
                 }
             },
             "traits": {
@@ -6890,7 +7061,7 @@
                 },
                 "aws.protocols#restJson1": {},
                 "smithy.api#cors": {},
-                "smithy.api#documentation": "<note>\n            <p>\n               <b>Powered by Amazon Bedrock</b>: Amazon Web Services implements <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/abuse-detection.html\">automated abuse\n      detection</a>. Because Amazon Q in Connect is built on Amazon Bedrock, users can take full\n      advantage of the controls implemented in Amazon Bedrock to enforce safety, security, and the\n      responsible use of artificial intelligence (AI).</p>\n         </note>\n         <p>Amazon Q in Connect is a generative AI customer service assistant. It is an LLM-enhanced evolution\n      of Amazon Connect Wisdom that delivers real-time recommendations to help contact center\n      agents resolve customer issues quickly and accurately.</p>\n         <p>Amazon Q automatically detects customer intent during calls and chats using\n      conversational analytics and natural language understanding (NLU). It then provides agents\n      with immediate, real-time generative responses and suggested actions, and links to relevant\n      documents and articles. Agents can also query Amazon Q directly using natural language or\n      keywords to answer customer requests.</p>\n         <p>Use the Amazon Q in Connect APIs to create an assistant and a knowledge base, for example, or\n      manage content by uploading custom files.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/amazon-q-connect.html\">Use Amazon Q in Connect for generative AI\n        powered agent assistance in real-time</a> in the <i>Amazon Connect\n        Administrator Guide</i>.</p>",
+                "smithy.api#documentation": "<note>\n            <p>\n               <b>Powered by Amazon Bedrock</b>: Amazon Web Services implements <a href=\"https://docs.aws.amazon.com/bedrock/latest/userguide/abuse-detection.html\">automated abuse\n          detection</a>. Because Amazon Q in Connect is built on Amazon Bedrock, users can take full advantage of\n        the controls implemented in Amazon Bedrock to enforce safety, security, and the responsible use of\n        artificial intelligence (AI).</p>\n         </note>\n         <p>Amazon Q in Connect is a generative AI customer service assistant. It is an LLM-enhanced\n      evolution of Amazon Connect Wisdom that delivers real-time recommendations to help contact\n      center agents resolve customer issues quickly and accurately.</p>\n         <p>Amazon Q in Connect automatically detects customer intent during calls and chats using conversational\n      analytics and natural language understanding (NLU). It then provides agents with immediate,\n      real-time generative responses and suggested actions, and links to relevant documents and\n      articles. Agents can also query Amazon Q in Connect directly using natural language or keywords to answer\n      customer requests.</p>\n         <p>Use the Amazon Q in Connect APIs to create an assistant and a knowledge base, for example, or\n      manage content by uploading custom files.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/amazon-q-connect.html\">Use Amazon Q in Connect for generative AI\n        powered agent assistance in real-time</a> in the <i>Amazon Connect\n        Administrator Guide</i>.</p>",
                 "smithy.api#title": "Amazon Q Connect",
                 "smithy.rules#endpointRuleSet": {
                     "version": "1.0",

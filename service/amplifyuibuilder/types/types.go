@@ -1037,16 +1037,19 @@ type FileUploaderFieldConfig struct {
 	// The access level to assign to the uploaded files in the Amazon S3 bucket where
 	// they are stored. The valid values for this property are private , protected , or
 	// public . For detailed information about the permissions associated with each
-	// access level, see File access levels (https://docs.amplify.aws/lib/storage/configureaccess/q/platform/js/)
-	// in the Amplify documentation.
+	// access level, see [File access levels]in the Amplify documentation.
+	//
+	// [File access levels]: https://docs.amplify.aws/lib/storage/configureaccess/q/platform/js/
 	//
 	// This member is required.
 	AccessLevel StorageAccessLevel
 
 	// Allows the file upload operation to be paused and resumed. The default value is
-	// false . When isResumable is set to true , the file uploader uses a multipart
-	// upload to break the files into chunks before upload. The progress of the upload
-	// isn't continuous, because the file uploader uploads a chunk at a time.
+	// false .
+	//
+	// When isResumable is set to true , the file uploader uses a multipart upload to
+	// break the files into chunks before upload. The progress of the upload isn't
+	// continuous, because the file uploader uploads a chunk at a time.
 	IsResumable *bool
 
 	// Specifies the maximum number of files that can be selected to upload. The

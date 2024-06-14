@@ -11,8 +11,9 @@ const (
 )
 
 // Values returns all known values for DeploymentFilterKey. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (DeploymentFilterKey) Values() []DeploymentFilterKey {
 	return []DeploymentFilterKey{
 		"WORKLOAD_NAME",
@@ -36,8 +37,9 @@ const (
 )
 
 // Values returns all known values for DeploymentStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (DeploymentStatus) Values() []DeploymentStatus {
 	return []DeploymentStatus{
 		"COMPLETED",
@@ -67,8 +69,9 @@ const (
 )
 
 // Values returns all known values for EventStatus. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (EventStatus) Values() []EventStatus {
 	return []EventStatus{
 		"CANCELED",
@@ -94,8 +97,9 @@ const (
 
 // Values returns all known values for WorkloadDeploymentPatternStatus. Note that
 // this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (WorkloadDeploymentPatternStatus) Values() []WorkloadDeploymentPatternStatus {
 	return []WorkloadDeploymentPatternStatus{
 		"ACTIVE",
@@ -116,8 +120,9 @@ const (
 )
 
 // Values returns all known values for WorkloadStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (WorkloadStatus) Values() []WorkloadStatus {
 	return []WorkloadStatus{
 		"ACTIVE",

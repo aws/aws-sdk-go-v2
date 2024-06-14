@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/iot/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -15,11 +14,15 @@ import (
 // Creates a thing record in the registry. If this call is made multiple times
 // using the same thing name and configuration, the call will succeed. If this call
 // is made with the same thing name but different configuration a
-// ResourceAlreadyExistsException is thrown. This is a control plane operation. See
-// Authorization (https://docs.aws.amazon.com/iot/latest/developerguide/iot-authorization.html)
-// for information about authorizing control plane actions. Requires permission to
-// access the CreateThing (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
-// action.
+// ResourceAlreadyExistsException is thrown.
+//
+// This is a control plane operation. See [Authorization] for information about authorizing
+// control plane actions.
+//
+// Requires permission to access the [CreateThing] action.
+//
+// [Authorization]: https://docs.aws.amazon.com/iot/latest/developerguide/iot-authorization.html
+// [CreateThing]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions
 func (c *Client) CreateThing(ctx context.Context, params *CreateThingInput, optFns ...func(*Options)) (*CreateThingOutput, error) {
 	if params == nil {
 		params = &CreateThingInput{}
@@ -38,15 +41,19 @@ func (c *Client) CreateThing(ctx context.Context, params *CreateThingInput, optF
 // The input for the CreateThing operation.
 type CreateThingInput struct {
 
-	// The name of the thing to create. You can't change a thing's name after you
-	// create it. To change a thing's name, you must create a new thing, give it the
-	// new name, and then delete the old thing.
+	// The name of the thing to create.
+	//
+	// You can't change a thing's name after you create it. To change a thing's name,
+	// you must create a new thing, give it the new name, and then delete the old
+	// thing.
 	//
 	// This member is required.
 	ThingName *string
 
 	// The attribute payload, which consists of up to three name/value pairs in a JSON
-	// document. For example: {\"attributes\":{\"string1\":\"string2\"}}
+	// document. For example:
+	//
+	//     {\"attributes\":{\"string1\":\"string2\"}}
 	AttributePayload *types.AttributePayload
 
 	// The name of the billing group the thing will be added to.
@@ -98,25 +105,25 @@ func (c *Client) addOperationCreateThingMiddlewares(stack *middleware.Stack, opt
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -131,13 +138,16 @@ func (c *Client) addOperationCreateThingMiddlewares(stack *middleware.Stack, opt
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpCreateThingValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateThing(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

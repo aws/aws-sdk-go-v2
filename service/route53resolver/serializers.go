@@ -4216,6 +4216,11 @@ func awsAwsjson11_serializeOpDocumentCreateFirewallRuleInput(v *CreateFirewallRu
 		ok.String(*v.FirewallDomainListId)
 	}
 
+	if len(v.FirewallDomainRedirectionAction) > 0 {
+		ok := object.Key("FirewallDomainRedirectionAction")
+		ok.String(string(v.FirewallDomainRedirectionAction))
+	}
+
 	if v.FirewallRuleGroupId != nil {
 		ok := object.Key("FirewallRuleGroupId")
 		ok.String(*v.FirewallRuleGroupId)
@@ -5357,6 +5362,11 @@ func awsAwsjson11_serializeOpDocumentUpdateFirewallRuleInput(v *UpdateFirewallRu
 	if v.FirewallDomainListId != nil {
 		ok := object.Key("FirewallDomainListId")
 		ok.String(*v.FirewallDomainListId)
+	}
+
+	if len(v.FirewallDomainRedirectionAction) > 0 {
+		ok := object.Key("FirewallDomainRedirectionAction")
+		ok.String(string(v.FirewallDomainRedirectionAction))
 	}
 
 	if v.FirewallRuleGroupId != nil {

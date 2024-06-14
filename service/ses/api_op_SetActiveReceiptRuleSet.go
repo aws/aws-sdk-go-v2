@@ -6,16 +6,20 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Sets the specified receipt rule set as the active receipt rule set. To disable
-// your email-receiving through Amazon SES completely, you can call this operation
-// with RuleSetName set to null. For information about managing receipt rule sets,
-// see the Amazon SES Developer Guide (https://docs.aws.amazon.com/ses/latest/dg/receiving-email-receipt-rules-console-walkthrough.html)
-// . You can execute this operation no more than once per second.
+// Sets the specified receipt rule set as the active receipt rule set.
+//
+// To disable your email-receiving through Amazon SES completely, you can call
+// this operation with RuleSetName set to null.
+//
+// For information about managing receipt rule sets, see the [Amazon SES Developer Guide].
+//
+// You can execute this operation no more than once per second.
+//
+// [Amazon SES Developer Guide]: https://docs.aws.amazon.com/ses/latest/dg/receiving-email-receipt-rules-console-walkthrough.html
 func (c *Client) SetActiveReceiptRuleSet(ctx context.Context, params *SetActiveReceiptRuleSetInput, optFns ...func(*Options)) (*SetActiveReceiptRuleSetOutput, error) {
 	if params == nil {
 		params = &SetActiveReceiptRuleSetInput{}
@@ -33,8 +37,9 @@ func (c *Client) SetActiveReceiptRuleSet(ctx context.Context, params *SetActiveR
 
 // Represents a request to set a receipt rule set as the active receipt rule set.
 // You use receipt rule sets to receive email with Amazon SES. For more
-// information, see the Amazon SES Developer Guide (https://docs.aws.amazon.com/ses/latest/dg/receiving-email-concepts.html)
-// .
+// information, see the [Amazon SES Developer Guide].
+//
+// [Amazon SES Developer Guide]: https://docs.aws.amazon.com/ses/latest/dg/receiving-email-concepts.html
 type SetActiveReceiptRuleSetInput struct {
 
 	// The name of the receipt rule set to make active. Setting this value to null
@@ -74,25 +79,25 @@ func (c *Client) addOperationSetActiveReceiptRuleSetMiddlewares(stack *middlewar
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -107,10 +112,13 @@ func (c *Client) addOperationSetActiveReceiptRuleSetMiddlewares(stack *middlewar
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opSetActiveReceiptRuleSet(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

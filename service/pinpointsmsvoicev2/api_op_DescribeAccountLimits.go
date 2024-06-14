@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/pinpointsmsvoicev2/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -14,11 +13,14 @@ import (
 
 // Describes the current Amazon Pinpoint SMS Voice V2 resource quotas for your
 // account. The description for a quota includes the quota name, current usage
-// toward that quota, and the quota's maximum value. When you establish an Amazon
-// Web Services account, the account has initial quotas on the maximum number of
-// configuration sets, opt-out lists, phone numbers, and pools that you can create
-// in a given Region. For more information see Amazon Pinpoint quotas  (https://docs.aws.amazon.com/pinpoint/latest/developerguide/quotas.html)
-// in the Amazon Pinpoint Developer Guide.
+// toward that quota, and the quota's maximum value.
+//
+// When you establish an Amazon Web Services account, the account has initial
+// quotas on the maximum number of configuration sets, opt-out lists, phone
+// numbers, and pools that you can create in a given Region. For more information
+// see [Amazon Pinpoint quotas]in the Amazon Pinpoint Developer Guide.
+//
+// [Amazon Pinpoint quotas]: https://docs.aws.amazon.com/pinpoint/latest/developerguide/quotas.html
 func (c *Client) DescribeAccountLimits(ctx context.Context, params *DescribeAccountLimitsInput, optFns ...func(*Options)) (*DescribeAccountLimitsOutput, error) {
 	if params == nil {
 		params = &DescribeAccountLimitsInput{}
@@ -83,25 +85,25 @@ func (c *Client) addOperationDescribeAccountLimitsMiddlewares(stack *middleware.
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -116,10 +118,13 @@ func (c *Client) addOperationDescribeAccountLimitsMiddlewares(stack *middleware.
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeAccountLimits(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

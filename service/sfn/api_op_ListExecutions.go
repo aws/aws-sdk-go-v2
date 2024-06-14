@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/sfn/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -15,18 +14,27 @@ import (
 // Lists all executions of a state machine or a Map Run. You can list all
 // executions related to a state machine by specifying a state machine Amazon
 // Resource Name (ARN), or those related to a Map Run by specifying a Map Run ARN.
-// Using this API action, you can also list all redriven (https://docs.aws.amazon.com/step-functions/latest/dg/redrive-executions.html)
-// executions. You can also provide a state machine alias (https://docs.aws.amazon.com/step-functions/latest/dg/concepts-state-machine-alias.html)
-// ARN or version (https://docs.aws.amazon.com/step-functions/latest/dg/concepts-state-machine-version.html)
-// ARN to list the executions associated with a specific alias or version. Results
-// are sorted by time, with the most recent execution first. If nextToken is
-// returned, there are more results available. The value of nextToken is a unique
-// pagination token for each page. Make the call again using the returned token to
-// retrieve the next page. Keep all other arguments unchanged. Each pagination
-// token expires after 24 hours. Using an expired pagination token will return an
-// HTTP 400 InvalidToken error. This operation is eventually consistent. The
-// results are best effort and may not reflect very recent updates and changes.
+// Using this API action, you can also list all [redriven]executions.
+//
+// You can also provide a state machine [alias] ARN or [version] ARN to list the executions
+// associated with a specific alias or version.
+//
+// Results are sorted by time, with the most recent execution first.
+//
+// If nextToken is returned, there are more results available. The value of
+// nextToken is a unique pagination token for each page. Make the call again using
+// the returned token to retrieve the next page. Keep all other arguments
+// unchanged. Each pagination token expires after 24 hours. Using an expired
+// pagination token will return an HTTP 400 InvalidToken error.
+//
+// This operation is eventually consistent. The results are best effort and may
+// not reflect very recent updates and changes.
+//
 // This API action is not supported by EXPRESS state machines.
+//
+// [redriven]: https://docs.aws.amazon.com/step-functions/latest/dg/redrive-executions.html
+// [alias]: https://docs.aws.amazon.com/step-functions/latest/dg/concepts-state-machine-alias.html
+// [version]: https://docs.aws.amazon.com/step-functions/latest/dg/concepts-state-machine-version.html
 func (c *Client) ListExecutions(ctx context.Context, params *ListExecutionsInput, optFns ...func(*Options)) (*ListExecutionsOutput, error) {
 	if params == nil {
 		params = &ListExecutionsInput{}
@@ -46,17 +54,20 @@ type ListExecutionsInput struct {
 
 	// The Amazon Resource Name (ARN) of the Map Run that started the child workflow
 	// executions. If the mapRunArn field is specified, a list of all of the child
-	// workflow executions started by a Map Run is returned. For more information, see
-	// Examining Map Run (https://docs.aws.amazon.com/step-functions/latest/dg/concepts-examine-map-run.html)
-	// in the Step Functions Developer Guide. You can specify either a mapRunArn or a
-	// stateMachineArn , but not both.
+	// workflow executions started by a Map Run is returned. For more information, see [Examining Map Run]
+	// in the Step Functions Developer Guide.
+	//
+	// You can specify either a mapRunArn or a stateMachineArn , but not both.
+	//
+	// [Examining Map Run]: https://docs.aws.amazon.com/step-functions/latest/dg/concepts-examine-map-run.html
 	MapRunArn *string
 
 	// The maximum number of results that are returned per call. You can use nextToken
 	// to obtain further pages of results. The default is 100 and the maximum allowed
-	// page size is 1000. A value of 0 uses the default. This is only an upper limit.
-	// The actual number of results returned per call might be fewer than the specified
-	// maximum.
+	// page size is 1000. A value of 0 uses the default.
+	//
+	// This is only an upper limit. The actual number of results returned per call
+	// might be fewer than the specified maximum.
 	MaxResults int32
 
 	// If nextToken is returned, there are more results available. The value of
@@ -67,18 +78,27 @@ type ListExecutionsInput struct {
 	NextToken *string
 
 	// Sets a filter to list executions based on whether or not they have been
-	// redriven. For a Distributed Map, redriveFilter sets a filter to list child
-	// workflow executions based on whether or not they have been redriven. If you do
-	// not provide a redriveFilter , Step Functions returns a list of both redriven and
-	// non-redriven executions. If you provide a state machine ARN in redriveFilter ,
-	// the API returns a validation exception.
+	// redriven.
+	//
+	// For a Distributed Map, redriveFilter sets a filter to list child workflow
+	// executions based on whether or not they have been redriven.
+	//
+	// If you do not provide a redriveFilter , Step Functions returns a list of both
+	// redriven and non-redriven executions.
+	//
+	// If you provide a state machine ARN in redriveFilter , the API returns a
+	// validation exception.
 	RedriveFilter types.ExecutionRedriveFilter
 
 	// The Amazon Resource Name (ARN) of the state machine whose executions is listed.
-	// You can specify either a mapRunArn or a stateMachineArn , but not both. You can
-	// also return a list of executions associated with a specific alias (https://docs.aws.amazon.com/step-functions/latest/dg/concepts-state-machine-alias.html)
-	// or version (https://docs.aws.amazon.com/step-functions/latest/dg/concepts-state-machine-version.html)
-	// , by specifying an alias ARN or a version ARN in the stateMachineArn parameter.
+	//
+	// You can specify either a mapRunArn or a stateMachineArn , but not both.
+	//
+	// You can also return a list of executions associated with a specific [alias] or [version], by
+	// specifying an alias ARN or a version ARN in the stateMachineArn parameter.
+	//
+	// [alias]: https://docs.aws.amazon.com/step-functions/latest/dg/concepts-state-machine-alias.html
+	// [version]: https://docs.aws.amazon.com/step-functions/latest/dg/concepts-state-machine-version.html
 	StateMachineArn *string
 
 	// If specified, only list the executions whose current execution status matches
@@ -130,25 +150,25 @@ func (c *Client) addOperationListExecutionsMiddlewares(stack *middleware.Stack, 
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -163,10 +183,13 @@ func (c *Client) addOperationListExecutionsMiddlewares(stack *middleware.Stack, 
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListExecutions(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -196,9 +219,10 @@ var _ ListExecutionsAPIClient = (*Client)(nil)
 type ListExecutionsPaginatorOptions struct {
 	// The maximum number of results that are returned per call. You can use nextToken
 	// to obtain further pages of results. The default is 100 and the maximum allowed
-	// page size is 1000. A value of 0 uses the default. This is only an upper limit.
-	// The actual number of results returned per call might be fewer than the specified
-	// maximum.
+	// page size is 1000. A value of 0 uses the default.
+	//
+	// This is only an upper limit. The actual number of results returned per call
+	// might be fewer than the specified maximum.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

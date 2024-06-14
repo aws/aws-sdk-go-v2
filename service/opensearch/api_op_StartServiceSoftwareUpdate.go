@@ -6,15 +6,15 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/opensearch/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Schedules a service software update for an Amazon OpenSearch Service domain.
-// For more information, see Service software updates in Amazon OpenSearch Service (https://docs.aws.amazon.com/opensearch-service/latest/developerguide/service-software.html)
-// .
+// For more information, see [Service software updates in Amazon OpenSearch Service].
+//
+// [Service software updates in Amazon OpenSearch Service]: https://docs.aws.amazon.com/opensearch-service/latest/developerguide/service-software.html
 func (c *Client) StartServiceSoftwareUpdate(ctx context.Context, params *StartServiceSoftwareUpdateInput, optFns ...func(*Options)) (*StartServiceSoftwareUpdateOutput, error) {
 	if params == nil {
 		params = &StartServiceSoftwareUpdateInput{}
@@ -44,14 +44,18 @@ type StartServiceSoftwareUpdateInput struct {
 	DesiredStartTime *int64
 
 	// When to start the service software update.
+	//
 	//   - NOW - Immediately schedules the update to happen in the current hour if
 	//   there's capacity available.
+	//
 	//   - TIMESTAMP - Lets you specify a custom date and time to apply the update. If
 	//   you specify this value, you must also provide a value for DesiredStartTime .
+	//
 	//   - OFF_PEAK_WINDOW - Marks the update to be picked up during an upcoming
 	//   off-peak window. There's no guarantee that the update will happen during the
 	//   next immediate window. Depending on capacity, it might happen in subsequent
 	//   days.
+	//
 	// Default: NOW if you don't specify a value for DesiredStartTime , and TIMESTAMP
 	// if you do.
 	ScheduleAt types.ScheduleAt
@@ -94,25 +98,25 @@ func (c *Client) addOperationStartServiceSoftwareUpdateMiddlewares(stack *middle
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -127,13 +131,16 @@ func (c *Client) addOperationStartServiceSoftwareUpdateMiddlewares(stack *middle
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpStartServiceSoftwareUpdateValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opStartServiceSoftwareUpdate(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

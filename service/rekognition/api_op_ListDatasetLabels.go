@@ -6,18 +6,21 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/rekognition/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// This operation applies only to Amazon Rekognition Custom Labels. Lists the
-// labels in a dataset. Amazon Rekognition Custom Labels uses labels to describe
-// images. For more information, see Labeling images (https://docs.aws.amazon.com/rekognition/latest/customlabels-dg/md-labeling-images.html)
-// . Lists the labels in a dataset. Amazon Rekognition Custom Labels uses labels to
+// This operation applies only to Amazon Rekognition Custom Labels.
+//
+// Lists the labels in a dataset. Amazon Rekognition Custom Labels uses labels to
+// describe images. For more information, see [Labeling images].
+//
+// Lists the labels in a dataset. Amazon Rekognition Custom Labels uses labels to
 // describe images. For more information, see Labeling images in the Amazon
 // Rekognition Custom Labels Developer Guide.
+//
+// [Labeling images]: https://docs.aws.amazon.com/rekognition/latest/customlabels-dg/md-labeling-images.html
 func (c *Client) ListDatasetLabels(ctx context.Context, params *ListDatasetLabelsInput, optFns ...func(*Options)) (*ListDatasetLabelsOutput, error) {
 	if params == nil {
 		params = &ListDatasetLabelsInput{}
@@ -35,7 +38,7 @@ func (c *Client) ListDatasetLabels(ctx context.Context, params *ListDatasetLabel
 
 type ListDatasetLabelsInput struct {
 
-	// The Amazon Resource Name (ARN) of the dataset that you want to use.
+	//  The Amazon Resource Name (ARN) of the dataset that you want to use.
 	//
 	// This member is required.
 	DatasetArn *string
@@ -55,7 +58,7 @@ type ListDatasetLabelsInput struct {
 
 type ListDatasetLabelsOutput struct {
 
-	// A list of the labels in the dataset.
+	//  A list of the labels in the dataset.
 	DatasetLabelDescriptions []types.DatasetLabelDescription
 
 	// If the previous response was incomplete (because there is more results to
@@ -91,25 +94,25 @@ func (c *Client) addOperationListDatasetLabelsMiddlewares(stack *middleware.Stac
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -124,13 +127,16 @@ func (c *Client) addOperationListDatasetLabelsMiddlewares(stack *middleware.Stac
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpListDatasetLabelsValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListDatasetLabels(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

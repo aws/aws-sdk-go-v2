@@ -6,15 +6,15 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/comprehend/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Inspects text for syntax and the part of speech of words in the document. For
-// more information, see Syntax (https://docs.aws.amazon.com/comprehend/latest/dg/how-syntax.html)
-// in the Comprehend Developer Guide.
+// more information, see [Syntax]in the Comprehend Developer Guide.
+//
+// [Syntax]: https://docs.aws.amazon.com/comprehend/latest/dg/how-syntax.html
 func (c *Client) DetectSyntax(ctx context.Context, params *DetectSyntaxInput, optFns ...func(*Options)) (*DetectSyntaxOutput, error) {
 	if params == nil {
 		params = &DetectSyntaxInput{}
@@ -52,8 +52,9 @@ type DetectSyntaxOutput struct {
 	// A collection of syntax tokens describing the text. For each token, the response
 	// provides the text, the token type, where the text begins and ends, and the level
 	// of confidence that Amazon Comprehend has that the token is correct. For a list
-	// of token types, see Syntax (https://docs.aws.amazon.com/comprehend/latest/dg/how-syntax.html)
-	// in the Comprehend Developer Guide.
+	// of token types, see [Syntax]in the Comprehend Developer Guide.
+	//
+	// [Syntax]: https://docs.aws.amazon.com/comprehend/latest/dg/how-syntax.html
 	SyntaxTokens []types.SyntaxToken
 
 	// Metadata pertaining to the operation's result.
@@ -84,25 +85,25 @@ func (c *Client) addOperationDetectSyntaxMiddlewares(stack *middleware.Stack, op
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -117,13 +118,16 @@ func (c *Client) addOperationDetectSyntaxMiddlewares(stack *middleware.Stack, op
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDetectSyntaxValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDetectSyntax(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

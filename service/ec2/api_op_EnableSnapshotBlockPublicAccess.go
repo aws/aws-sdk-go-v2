@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -17,12 +16,15 @@ import (
 // block public access for snapshots in a Region, users can no longer request
 // public sharing for snapshots in that Region. Snapshots that are already publicly
 // shared are either treated as private or they remain publicly shared, depending
-// on the State that you specify. If block public access is enabled in
-// block-all-sharing mode, and you change the mode to block-new-sharing , all
-// snapshots that were previously publicly shared are no longer treated as private
-// and they become publicly accessible again. For more information, see Block
-// public access for snapshots (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/block-public-access-snapshots.html)
-// in the Amazon Elastic Compute Cloud User Guide.
+// on the State that you specify.
+//
+// If block public access is enabled in block-all-sharing mode, and you change the
+// mode to block-new-sharing , all snapshots that were previously publicly shared
+// are no longer treated as private and they become publicly accessible again.
+//
+// For more information, see [Block public access for snapshots] in the Amazon EBS User Guide.
+//
+// [Block public access for snapshots]: https://docs.aws.amazon.com/ebs/latest/userguide/block-public-access-snapshots.html
 func (c *Client) EnableSnapshotBlockPublicAccess(ctx context.Context, params *EnableSnapshotBlockPublicAccessInput, optFns ...func(*Options)) (*EnableSnapshotBlockPublicAccessOutput, error) {
 	if params == nil {
 		params = &EnableSnapshotBlockPublicAccessInput{}
@@ -42,19 +44,23 @@ type EnableSnapshotBlockPublicAccessInput struct {
 
 	// The mode in which to enable block public access for snapshots for the Region.
 	// Specify one of the following values:
+	//
 	//   - block-all-sharing - Prevents all public sharing of snapshots in the Region.
 	//   Users in the account will no longer be able to request new public sharing.
 	//   Additionally, snapshots that are already publicly shared are treated as private
-	//   and they are no longer publicly available. If you enable block public access for
-	//   snapshots in block-all-sharing mode, it does not change the permissions for
-	//   snapshots that are already publicly shared. Instead, it prevents these snapshots
-	//   from be publicly visible and publicly accessible. Therefore, the attributes for
-	//   these snapshots still indicate that they are publicly shared, even though they
-	//   are not publicly available.
+	//   and they are no longer publicly available.
+	//
+	// If you enable block public access for snapshots in block-all-sharing mode, it
+	//   does not change the permissions for snapshots that are already publicly shared.
+	//   Instead, it prevents these snapshots from be publicly visible and publicly
+	//   accessible. Therefore, the attributes for these snapshots still indicate that
+	//   they are publicly shared, even though they are not publicly available.
+	//
 	//   - block-new-sharing - Prevents only new public sharing of snapshots in the
 	//   Region. Users in the account will no longer be able to request new public
 	//   sharing. However, snapshots that are already publicly shared, remain publicly
 	//   available.
+	//
 	// unblocked is not a valid value for EnableSnapshotBlockPublicAccess.
 	//
 	// This member is required.
@@ -103,25 +109,25 @@ func (c *Client) addOperationEnableSnapshotBlockPublicAccessMiddlewares(stack *m
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -136,13 +142,16 @@ func (c *Client) addOperationEnableSnapshotBlockPublicAccessMiddlewares(stack *m
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpEnableSnapshotBlockPublicAccessValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opEnableSnapshotBlockPublicAccess(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

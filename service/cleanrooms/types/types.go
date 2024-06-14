@@ -154,13 +154,13 @@ type AnalysisRuleAggregation struct {
 // queries on their configured tables. It supports differential privacy.
 type AnalysisRuleCustom struct {
 
-	// The analysis templates that are allowed by the custom analysis rule.
+	// The ARN of the analysis templates that are allowed by the custom analysis rule.
 	//
 	// This member is required.
 	AllowedAnalyses []string
 
-	// The Amazon Web Services accounts that are allowed to query by the custom
-	// analysis rule. Required when allowedAnalyses is ANY_QUERY .
+	// The IDs of the Amazon Web Services accounts that are allowed to query by the
+	// custom analysis rule. Required when allowedAnalyses is ANY_QUERY .
 	AllowedAnalysisProviders []string
 
 	// The differential privacy configuration.
@@ -342,6 +342,9 @@ type AnalysisTemplate struct {
 	// The description of the analysis template.
 	Description *string
 
+	// Information about the validations performed on the analysis template.
+	Validations []AnalysisTemplateValidationStatusDetail
+
 	noSmithyDocumentSerde
 }
 
@@ -400,6 +403,46 @@ type AnalysisTemplateSummary struct {
 	noSmithyDocumentSerde
 }
 
+// The status details of the analysis template validation. Clean Rooms
+// Differential Privacy uses a general-purpose query structure to support complex
+// SQL queries and validates whether an analysis template fits that general-purpose
+// query structure. Validation is performed when analysis templates are created and
+// fetched. Because analysis templates are immutable by design, we recommend that
+// you create analysis templates after you associate the configured tables with
+// their analysis rule to your collaboration.
+//
+// For more information, see [https://docs.aws.amazon.com/clean-rooms/latest/userguide/analysis-rules-custom.html#custom-diff-privacy].
+//
+// [https://docs.aws.amazon.com/clean-rooms/latest/userguide/analysis-rules-custom.html#custom-diff-privacy]: https://docs.aws.amazon.com/clean-rooms/latest/userguide/analysis-rules-custom.html#custom-diff-privacy
+type AnalysisTemplateValidationStatusDetail struct {
+
+	// The status of the validation.
+	//
+	// This member is required.
+	Status AnalysisTemplateValidationStatus
+
+	// The type of validation that was performed.
+	//
+	// This member is required.
+	Type AnalysisTemplateValidationType
+
+	// The reasons for the validation results.
+	Reasons []AnalysisTemplateValidationStatusReason
+
+	noSmithyDocumentSerde
+}
+
+// The reasons for the validation results.
+type AnalysisTemplateValidationStatusReason struct {
+
+	// The validation message.
+	//
+	// This member is required.
+	Message *string
+
+	noSmithyDocumentSerde
+}
+
 // Details of errors thrown by the call to retrieve multiple analysis templates
 // within a collaboration by their identifiers.
 type BatchGetCollaborationAnalysisTemplateError struct {
@@ -418,6 +461,32 @@ type BatchGetCollaborationAnalysisTemplateError struct {
 	//
 	// This member is required.
 	Message *string
+
+	noSmithyDocumentSerde
+}
+
+// An error that describes why a schema could not be fetched.
+type BatchGetSchemaAnalysisRuleError struct {
+
+	// An error code for the error.
+	//
+	// This member is required.
+	Code *string
+
+	// A description of why the call failed.
+	//
+	// This member is required.
+	Message *string
+
+	// An error name for the error.
+	//
+	// This member is required.
+	Name *string
+
+	// The analysis rule type.
+	//
+	// This member is required.
+	Type AnalysisRuleType
 
 	noSmithyDocumentSerde
 }
@@ -575,6 +644,9 @@ type CollaborationAnalysisTemplate struct {
 
 	// The description of the analysis template.
 	Description *string
+
+	// The validations that were performed.
+	Validations []AnalysisTemplateValidationStatusDetail
 
 	noSmithyDocumentSerde
 }
@@ -808,12 +880,14 @@ type CollaborationPrivacyBudgetTemplate struct {
 	// This member is required.
 	Arn *string
 
-	// How often the privacy budget refreshes. If you plan to regularly bring new data
-	// into the collaboration, use CALENDAR_MONTH to automatically get a new privacy
-	// budget for the collaboration every calendar month. Choosing this option allows
-	// arbitrary amounts of information to be revealed about rows of the data when
-	// repeatedly queried across refreshes. Avoid choosing this if the same rows will
-	// be repeatedly queried between privacy budget refreshes.
+	// How often the privacy budget refreshes.
+	//
+	// If you plan to regularly bring new data into the collaboration, use
+	// CALENDAR_MONTH to automatically get a new privacy budget for the collaboration
+	// every calendar month. Choosing this option allows arbitrary amounts of
+	// information to be revealed about rows of the data when repeatedly queried across
+	// refreshes. Avoid choosing this if the same rows will be repeatedly queried
+	// between privacy budget refreshes.
 	//
 	// This member is required.
 	AutoRefresh PrivacyBudgetTemplateAutoRefresh
@@ -1820,11 +1894,16 @@ type MembershipQueryComputePaymentConfig struct {
 
 	// Indicates whether the collaboration member has accepted to pay for query
 	// compute costs ( TRUE ) or has not accepted to pay for query compute costs ( FALSE
-	// ). If the collaboration creator has not specified anyone to pay for query
-	// compute costs, then the member who can query is the default payer. An error
-	// message is returned for the following reasons:
+	// ).
+	//
+	// If the collaboration creator has not specified anyone to pay for query compute
+	// costs, then the member who can query is the default payer.
+	//
+	// An error message is returned for the following reasons:
+	//
 	//   - If you set the value to FALSE but you are responsible to pay for query
 	//   compute costs.
+	//
 	//   - If you set the value to TRUE but you are not responsible to pay for query
 	//   compute costs.
 	//
@@ -1921,9 +2000,10 @@ type MemberSpecification struct {
 	MemberAbilities []MemberAbility
 
 	// The collaboration member's payment responsibilities set by the collaboration
-	// creator. If the collaboration creator hasn't speciﬁed anyone as the member
-	// paying for query compute costs, then the member who can query is the default
-	// payer.
+	// creator.
+	//
+	// If the collaboration creator hasn't speciﬁed anyone as the member paying for
+	// query compute costs, then the member who can query is the default payer.
 	PaymentConfiguration *PaymentConfiguration
 
 	noSmithyDocumentSerde
@@ -2104,12 +2184,14 @@ type PrivacyBudgetTemplate struct {
 	// This member is required.
 	Arn *string
 
-	// How often the privacy budget refreshes. If you plan to regularly bring new data
-	// into the collaboration, use CALENDAR_MONTH to automatically get a new privacy
-	// budget for the collaboration every calendar month. Choosing this option allows
-	// arbitrary amounts of information to be revealed about rows of the data when
-	// repeatedly queried across refreshes. Avoid choosing this if the same rows will
-	// be repeatedly queried between privacy budget refreshes.
+	// How often the privacy budget refreshes.
+	//
+	// If you plan to regularly bring new data into the collaboration, use
+	// CALENDAR_MONTH to automatically get a new privacy budget for the collaboration
+	// every calendar month. Choosing this option allows arbitrary amounts of
+	// information to be revealed about rows of the data when repeatedly queried across
+	// refreshes. Avoid choosing this if the same rows will be repeatedly queried
+	// between privacy budget refreshes.
 	//
 	// This member is required.
 	AutoRefresh PrivacyBudgetTemplateAutoRefresh
@@ -2535,13 +2617,16 @@ type QueryComputePaymentConfig struct {
 
 	// Indicates whether the collaboration creator has configured the collaboration
 	// member to pay for query compute costs ( TRUE ) or has not configured the
-	// collaboration member to pay for query compute costs ( FALSE ). Exactly one
-	// member can be configured to pay for query compute costs. An error is returned if
-	// the collaboration creator sets a TRUE value for more than one member in the
-	// collaboration. If the collaboration creator hasn't specified anyone as the
-	// member paying for query compute costs, then the member who can query is the
-	// default payer. An error is returned if the collaboration creator sets a FALSE
-	// value for the member who can query.
+	// collaboration member to pay for query compute costs ( FALSE ).
+	//
+	// Exactly one member can be configured to pay for query compute costs. An error
+	// is returned if the collaboration creator sets a TRUE value for more than one
+	// member in the collaboration.
+	//
+	// If the collaboration creator hasn't specified anyone as the member paying for
+	// query compute costs, then the member who can query is the default payer. An
+	// error is returned if the collaboration creator sets a FALSE value for the
+	// member who can query.
 	//
 	// This member is required.
 	IsResponsible *bool
@@ -2599,6 +2684,11 @@ type Schema struct {
 	// This member is required.
 	PartitionKeys []Column
 
+	// Details about the status of the schema. Currently, only one entry is present.
+	//
+	// This member is required.
+	SchemaStatusDetails []SchemaStatusDetail
+
 	// The type of schema. The only valid value is currently `TABLE`.
 	//
 	// This member is required.
@@ -2612,6 +2702,63 @@ type Schema struct {
 	// The analysis method for the schema. The only valid value is currently
 	// DIRECT_QUERY.
 	AnalysisMethod AnalysisMethod
+
+	noSmithyDocumentSerde
+}
+
+// Defines the information that's necessary to retrieve an analysis rule schema.
+// Schema analysis rules are uniquely identiﬁed by a combination of the schema name
+// and the analysis rule type for a given collaboration.
+type SchemaAnalysisRuleRequest struct {
+
+	// The name of the analysis rule schema that you are requesting.
+	//
+	// This member is required.
+	Name *string
+
+	// The type of analysis rule schema that you are requesting.
+	//
+	// This member is required.
+	Type AnalysisRuleType
+
+	noSmithyDocumentSerde
+}
+
+// Information about the schema status.
+//
+// A status of READY means that based on the schema analysis rule, queries of the
+// given analysis rule type are properly configured to run queries on this schema.
+type SchemaStatusDetail struct {
+
+	// The status of the schema.
+	//
+	// This member is required.
+	Status SchemaStatus
+
+	// The analysis rule type for which the schema status has been evaluated.
+	AnalysisRuleType AnalysisRuleType
+
+	// The configuration details of the schema analysis rule for the given type.
+	Configurations []SchemaConfiguration
+
+	// The reasons why the schema status is set to its current state.
+	Reasons []SchemaStatusReason
+
+	noSmithyDocumentSerde
+}
+
+// A reason why the schema status is set to its current value.
+type SchemaStatusReason struct {
+
+	// The schema status reason code.
+	//
+	// This member is required.
+	Code SchemaStatusReasonCode
+
+	// An explanation of the schema status reason code.
+	//
+	// This member is required.
+	Message *string
 
 	noSmithyDocumentSerde
 }

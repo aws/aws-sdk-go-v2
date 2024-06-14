@@ -6,19 +6,22 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Use the UpdatePublicSharingSettings operation to turn on or turn off the public
-// sharing settings of an Amazon QuickSight dashboard. To use this operation, turn
-// on session capacity pricing for your Amazon QuickSight account. Before you can
-// turn on public sharing on your account, make sure to give public sharing
-// permissions to an administrative user in the Identity and Access Management
-// (IAM) console. For more information on using IAM with Amazon QuickSight, see
-// Using Amazon QuickSight with IAM (https://docs.aws.amazon.com/quicksight/latest/user/security_iam_service-with-iam.html)
-// in the Amazon QuickSight User Guide.
+// sharing settings of an Amazon QuickSight dashboard.
+//
+// To use this operation, turn on session capacity pricing for your Amazon
+// QuickSight account.
+//
+// Before you can turn on public sharing on your account, make sure to give public
+// sharing permissions to an administrative user in the Identity and Access
+// Management (IAM) console. For more information on using IAM with Amazon
+// QuickSight, see [Using Amazon QuickSight with IAM]in the Amazon QuickSight User Guide.
+//
+// [Using Amazon QuickSight with IAM]: https://docs.aws.amazon.com/quicksight/latest/user/security_iam_service-with-iam.html
 func (c *Client) UpdatePublicSharingSettings(ctx context.Context, params *UpdatePublicSharingSettingsInput, optFns ...func(*Options)) (*UpdatePublicSharingSettingsOutput, error) {
 	if params == nil {
 		params = &UpdatePublicSharingSettingsInput{}
@@ -85,25 +88,25 @@ func (c *Client) addOperationUpdatePublicSharingSettingsMiddlewares(stack *middl
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -118,13 +121,16 @@ func (c *Client) addOperationUpdatePublicSharingSettingsMiddlewares(stack *middl
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpUpdatePublicSharingSettingsValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdatePublicSharingSettings(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

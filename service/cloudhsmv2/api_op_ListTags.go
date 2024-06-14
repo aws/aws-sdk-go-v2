@@ -6,18 +6,18 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/cloudhsmv2/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Gets a list of tags for the specified AWS CloudHSM cluster. This is a paginated
-// operation, which means that each response might contain only a subset of all the
-// tags. When the response contains only a subset of tags, it includes a NextToken
-// value. Use this value in a subsequent ListTags request to get more tags. When
-// you receive a response with no NextToken (or an empty or null value), that
-// means there are no more tags to get.
+// Gets a list of tags for the specified AWS CloudHSM cluster.
+//
+// This is a paginated operation, which means that each response might contain
+// only a subset of all the tags. When the response contains only a subset of tags,
+// it includes a NextToken value. Use this value in a subsequent ListTags request
+// to get more tags. When you receive a response with no NextToken (or an empty or
+// null value), that means there are no more tags to get.
 func (c *Client) ListTags(ctx context.Context, params *ListTagsInput, optFns ...func(*Options)) (*ListTagsOutput, error) {
 	if params == nil {
 		params = &ListTagsInput{}
@@ -36,7 +36,7 @@ func (c *Client) ListTags(ctx context.Context, params *ListTagsInput, optFns ...
 type ListTagsInput struct {
 
 	// The cluster identifier (ID) for the cluster whose tags you are getting. To find
-	// the cluster ID, use DescribeClusters .
+	// the cluster ID, use DescribeClusters.
 	//
 	// This member is required.
 	ResourceId *string
@@ -91,25 +91,25 @@ func (c *Client) addOperationListTagsMiddlewares(stack *middleware.Stack, option
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -124,13 +124,16 @@ func (c *Client) addOperationListTagsMiddlewares(stack *middleware.Stack, option
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpListTagsValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListTags(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

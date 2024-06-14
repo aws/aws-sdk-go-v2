@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/fms/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -49,10 +48,11 @@ type ListThirdPartyFirewallFirewallPoliciesInput struct {
 	// If the previous response included a NextToken element, the specified
 	// third-party firewall vendor is associated with more third-party firewall
 	// policies. To get more third-party firewall policies, submit another
-	// ListThirdPartyFirewallFirewallPoliciesRequest request. For the value of
-	// NextToken , specify the value of NextToken from the previous response. If the
-	// previous response didn't include a NextToken element, there are no more
-	// third-party firewall policies to get.
+	// ListThirdPartyFirewallFirewallPoliciesRequest request.
+	//
+	// For the value of NextToken , specify the value of NextToken from the previous
+	// response. If the previous response didn't include a NextToken element, there
+	// are no more third-party firewall policies to get.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -98,25 +98,25 @@ func (c *Client) addOperationListThirdPartyFirewallFirewallPoliciesMiddlewares(s
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -131,13 +131,16 @@ func (c *Client) addOperationListThirdPartyFirewallFirewallPoliciesMiddlewares(s
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpListThirdPartyFirewallFirewallPoliciesValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListThirdPartyFirewallFirewallPolicies(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

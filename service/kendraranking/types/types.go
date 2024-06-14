@@ -13,9 +13,10 @@ import (
 // usage requirements.
 type CapacityUnitsConfiguration struct {
 
-	// The amount of extra capacity for your rescore execution plan. A single extra
-	// capacity unit for a rescore execution plan provides 0.01 rescore requests per
-	// second. You can add up to 1000 extra capacity units.
+	// The amount of extra capacity for your rescore execution plan.
+	//
+	// A single extra capacity unit for a rescore execution plan provides 0.01 rescore
+	// requests per second. You can add up to 1000 extra capacity units.
 	//
 	// This member is required.
 	RescoreCapacityUnits *int32

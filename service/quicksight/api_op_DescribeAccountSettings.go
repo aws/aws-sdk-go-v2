@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/quicksight/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -45,12 +44,13 @@ type DescribeAccountSettingsOutput struct {
 	// The Amazon QuickSight settings for this Amazon Web Services account. This
 	// information includes the edition of Amazon Amazon QuickSight that you subscribed
 	// to (Standard or Enterprise) and the notification email for the Amazon QuickSight
-	// subscription. In the QuickSight console, the Amazon QuickSight subscription is
-	// sometimes referred to as a QuickSight "account" even though it's technically not
-	// an account by itself. Instead, it's a subscription to the Amazon QuickSight
-	// service for your Amazon Web Services account. The edition that you subscribe to
-	// applies to Amazon QuickSight in every Amazon Web Services Region where you use
-	// it.
+	// subscription.
+	//
+	// In the QuickSight console, the Amazon QuickSight subscription is sometimes
+	// referred to as a QuickSight "account" even though it's technically not an
+	// account by itself. Instead, it's a subscription to the Amazon QuickSight service
+	// for your Amazon Web Services account. The edition that you subscribe to applies
+	// to Amazon QuickSight in every Amazon Web Services Region where you use it.
 	AccountSettings *types.AccountSettings
 
 	// The Amazon Web Services request ID for this operation.
@@ -87,25 +87,25 @@ func (c *Client) addOperationDescribeAccountSettingsMiddlewares(stack *middlewar
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -120,13 +120,16 @@ func (c *Client) addOperationDescribeAccountSettingsMiddlewares(stack *middlewar
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDescribeAccountSettingsValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeAccountSettings(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

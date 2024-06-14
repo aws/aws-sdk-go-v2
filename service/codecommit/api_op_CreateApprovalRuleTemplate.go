@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/codecommit/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -16,7 +15,7 @@ import (
 // more repositories in your Amazon Web Services account. When you associate a
 // template with a repository, CodeCommit creates an approval rule that matches the
 // conditions of the template for all pull requests that meet the conditions of the
-// template. For more information, see AssociateApprovalRuleTemplateWithRepository .
+// template. For more information, see AssociateApprovalRuleTemplateWithRepository.
 func (c *Client) CreateApprovalRuleTemplate(ctx context.Context, params *CreateApprovalRuleTemplateInput, optFns ...func(*Options)) (*CreateApprovalRuleTemplateOutput, error) {
 	if params == nil {
 		params = &CreateApprovalRuleTemplateInput{}
@@ -37,26 +36,35 @@ type CreateApprovalRuleTemplateInput struct {
 	// The content of the approval rule that is created on pull requests in associated
 	// repositories. If you specify one or more destination references (branches),
 	// approval rules are created in an associated repository only if their destination
-	// references (branches) match those specified in the template. When you create the
-	// content of the approval rule template, you can specify approvers in an approval
-	// pool in one of two ways:
+	// references (branches) match those specified in the template.
+	//
+	// When you create the content of the approval rule template, you can specify
+	// approvers in an approval pool in one of two ways:
+	//
 	//   - CodeCommitApprovers: This option only requires an Amazon Web Services
 	//   account and a resource. It can be used for both IAM users and federated access
 	//   users whose name matches the provided resource name. This is a very powerful
 	//   option that offers a great deal of flexibility. For example, if you specify the
 	//   Amazon Web Services account 123456789012 and Mary_Major, all of the following
 	//   are counted as approvals coming from that user:
+	//
 	//   - An IAM user in the account (arn:aws:iam::123456789012:user/Mary_Major)
+	//
 	//   - A federated user identified in IAM as Mary_Major
-	//   (arn:aws:sts::123456789012:federated-user/Mary_Major) This option does not
-	//   recognize an active session of someone assuming the role of CodeCommitReview
-	//   with a role session name of Mary_Major
+	//   (arn:aws:sts::123456789012:federated-user/Mary_Major)
+	//
+	// This option does not recognize an active session of someone assuming the role
+	//   of CodeCommitReview with a role session name of Mary_Major
 	//   (arn:aws:sts::123456789012:assumed-role/CodeCommitReview/Mary_Major) unless you
 	//   include a wildcard (*Mary_Major).
+	//
 	//   - Fully qualified ARN: This option allows you to specify the fully qualified
 	//   Amazon Resource Name (ARN) of the IAM user or role.
-	// For more information about IAM ARNs, wildcards, and formats, see IAM Identifiers (https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_identifiers.html)
-	// in the IAM User Guide.
+	//
+	// For more information about IAM ARNs, wildcards, and formats, see [IAM Identifiers] in the IAM
+	// User Guide.
+	//
+	// [IAM Identifiers]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_identifiers.html
 	//
 	// This member is required.
 	ApprovalRuleTemplateContent *string
@@ -111,25 +119,25 @@ func (c *Client) addOperationCreateApprovalRuleTemplateMiddlewares(stack *middle
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -144,13 +152,16 @@ func (c *Client) addOperationCreateApprovalRuleTemplateMiddlewares(stack *middle
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpCreateApprovalRuleTemplateValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateApprovalRuleTemplate(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

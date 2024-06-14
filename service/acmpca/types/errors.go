@@ -113,8 +113,9 @@ func (e *InvalidArnException) ErrorCode() string {
 func (e *InvalidArnException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The token specified in the NextToken argument is not valid. Use the token
-// returned from your previous call to ListCertificateAuthorities (https://docs.aws.amazon.com/privateca/latest/APIReference/API_ListCertificateAuthorities.html)
-// .
+// returned from your previous call to [ListCertificateAuthorities].
+//
+// [ListCertificateAuthorities]: https://docs.aws.amazon.com/privateca/latest/APIReference/API_ListCertificateAuthorities.html
 type InvalidNextTokenException struct {
 	Message *string
 
@@ -141,9 +142,9 @@ func (e *InvalidNextTokenException) ErrorCode() string {
 func (e *InvalidNextTokenException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The resource policy is invalid or is missing a required statement. For general
-// information about IAM policy and statement structure, see Overview of JSON
-// Policies (https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies.html#access_policies-json)
-// .
+// information about IAM policy and statement structure, see [Overview of JSON Policies].
+//
+// [Overview of JSON Policies]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies.html#access_policies-json
 type InvalidPolicyException struct {
 	Message *string
 

@@ -6,18 +6,22 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/proton/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Update a service instance. There are a few modes for updating a service
-// instance. The deploymentType field defines the mode. You can't update a service
-// instance while its deployment status, or the deployment status of a component
-// attached to it, is IN_PROGRESS . For more information about components, see
-// Proton components (https://docs.aws.amazon.com/proton/latest/userguide/ag-components.html)
-// in the Proton User Guide.
+// Update a service instance.
+//
+// There are a few modes for updating a service instance. The deploymentType field
+// defines the mode.
+//
+// You can't update a service instance while its deployment status, or the
+// deployment status of a component attached to it, is IN_PROGRESS .
+//
+// For more information about components, see [Proton components] in the Proton User Guide.
+//
+// [Proton components]: https://docs.aws.amazon.com/proton/latest/userguide/ag-components.html
 func (c *Client) UpdateServiceInstance(ctx context.Context, params *UpdateServiceInstanceInput, optFns ...func(*Options)) (*UpdateServiceInstanceOutput, error) {
 	if params == nil {
 		params = &UpdateServiceInstanceInput{}
@@ -36,18 +40,32 @@ func (c *Client) UpdateServiceInstance(ctx context.Context, params *UpdateServic
 type UpdateServiceInstanceInput struct {
 
 	// The deployment type. It defines the mode for updating a service instance, as
-	// follows: NONE In this mode, a deployment doesn't occur. Only the requested
-	// metadata parameters are updated. CURRENT_VERSION In this mode, the service
-	// instance is deployed and updated with the new spec that you provide. Only
-	// requested parameters are updated. Don’t include major or minor version
-	// parameters when you use this deployment type. MINOR_VERSION In this mode, the
-	// service instance is deployed and updated with the published, recommended
-	// (latest) minor version of the current major version in use, by default. You can
-	// also specify a different minor version of the current major version in use.
-	// MAJOR_VERSION In this mode, the service instance is deployed and updated with
-	// the published, recommended (latest) major and minor version of the current
-	// template, by default. You can specify a different major version that's higher
-	// than the major version in use and a minor version.
+	// follows:
+	//
+	//     NONE
+	//
+	// In this mode, a deployment doesn't occur. Only the requested metadata
+	// parameters are updated.
+	//
+	//     CURRENT_VERSION
+	//
+	// In this mode, the service instance is deployed and updated with the new spec
+	// that you provide. Only requested parameters are updated. Don’t include major or
+	// minor version parameters when you use this deployment type.
+	//
+	//     MINOR_VERSION
+	//
+	// In this mode, the service instance is deployed and updated with the published,
+	// recommended (latest) minor version of the current major version in use, by
+	// default. You can also specify a different minor version of the current major
+	// version in use.
+	//
+	//     MAJOR_VERSION
+	//
+	// In this mode, the service instance is deployed and updated with the published,
+	// recommended (latest) major and minor version of the current template, by
+	// default. You can specify a different major version that's higher than the major
+	// version in use and a minor version.
 	//
 	// This member is required.
 	DeploymentType types.DeploymentUpdateType
@@ -114,25 +132,25 @@ func (c *Client) addOperationUpdateServiceInstanceMiddlewares(stack *middleware.
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -147,6 +165,9 @@ func (c *Client) addOperationUpdateServiceInstanceMiddlewares(stack *middleware.
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opUpdateServiceInstanceMiddleware(stack, options); err != nil {
 		return err
 	}
@@ -156,7 +177,7 @@ func (c *Client) addOperationUpdateServiceInstanceMiddlewares(stack *middleware.
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateServiceInstance(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

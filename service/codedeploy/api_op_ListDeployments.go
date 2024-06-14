@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/codedeploy/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -33,17 +32,19 @@ func (c *Client) ListDeployments(ctx context.Context, params *ListDeploymentsInp
 type ListDeploymentsInput struct {
 
 	// The name of an CodeDeploy application associated with the user or Amazon Web
-	// Services account. If applicationName is specified, then deploymentGroupName
-	// must be specified. If it is not specified, then deploymentGroupName must not be
-	// specified.
+	// Services account.
+	//
+	// If applicationName is specified, then deploymentGroupName must be specified. If
+	// it is not specified, then deploymentGroupName must not be specified.
 	ApplicationName *string
 
 	// A time range (start and end) for returning a subset of the list of deployments.
 	CreateTimeRange *types.TimeRange
 
-	// The name of a deployment group for the specified application. If
-	// deploymentGroupName is specified, then applicationName must be specified. If it
-	// is not specified, then applicationName must not be specified.
+	// The name of a deployment group for the specified application.
+	//
+	// If deploymentGroupName is specified, then applicationName must be specified. If
+	// it is not specified, then applicationName must not be specified.
 	DeploymentGroupName *string
 
 	// The unique ID of an external resource for returning deployments linked to the
@@ -51,11 +52,17 @@ type ListDeploymentsInput struct {
 	ExternalId *string
 
 	// A subset of deployments to list by status:
+	//
 	//   - Created : Include created deployments in the resulting list.
+	//
 	//   - Queued : Include queued deployments in the resulting list.
+	//
 	//   - In Progress : Include in-progress deployments in the resulting list.
+	//
 	//   - Succeeded : Include successful deployments in the resulting list.
+	//
 	//   - Failed : Include failed deployments in the resulting list.
+	//
 	//   - Stopped : Include stopped deployments in the resulting list.
 	IncludeOnlyStatuses []types.DeploymentStatus
 
@@ -105,25 +112,25 @@ func (c *Client) addOperationListDeploymentsMiddlewares(stack *middleware.Stack,
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -138,10 +145,13 @@ func (c *Client) addOperationListDeploymentsMiddlewares(stack *middleware.Stack,
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListDeployments(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

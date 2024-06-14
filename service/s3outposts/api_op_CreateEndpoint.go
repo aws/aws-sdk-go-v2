@@ -6,16 +6,23 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/s3outposts/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates an endpoint and associates it with the specified Outpost. It can take
-// up to 5 minutes for this action to finish. Related actions include:
-//   - DeleteEndpoint (https://docs.aws.amazon.com/AmazonS3/latest/API/API_s3outposts_DeleteEndpoint.html)
-//   - ListEndpoints (https://docs.aws.amazon.com/AmazonS3/latest/API/API_s3outposts_ListEndpoints.html)
+// Creates an endpoint and associates it with the specified Outpost.
+//
+// It can take up to 5 minutes for this action to finish.
+//
+// Related actions include:
+//
+// [DeleteEndpoint]
+//
+// [ListEndpoints]
+//
+// [ListEndpoints]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_s3outposts_ListEndpoints.html
+// [DeleteEndpoint]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_s3outposts_DeleteEndpoint.html
 func (c *Client) CreateEndpoint(ctx context.Context, params *CreateEndpointInput, optFns ...func(*Options)) (*CreateEndpointOutput, error) {
 	if params == nil {
 		params = &CreateEndpointInput{}
@@ -53,7 +60,9 @@ type CreateEndpointInput struct {
 	// endpoint. To use the Amazon Web Services VPC, choose Private . To use the
 	// endpoint with an on-premises network, choose CustomerOwnedIp . If you choose
 	// CustomerOwnedIp , you must also provide the customer-owned IP address pool (CoIP
-	// pool). Private is the default access type value.
+	// pool).
+	//
+	// Private is the default access type value.
 	AccessType types.EndpointAccessType
 
 	// The ID of the customer-owned IPv4 address pool (CoIP pool) for the endpoint. IP
@@ -96,25 +105,25 @@ func (c *Client) addOperationCreateEndpointMiddlewares(stack *middleware.Stack, 
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -129,13 +138,16 @@ func (c *Client) addOperationCreateEndpointMiddlewares(stack *middleware.Stack, 
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpCreateEndpointValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateEndpoint(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

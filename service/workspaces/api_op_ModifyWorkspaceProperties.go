@@ -6,18 +6,20 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/workspaces/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Modifies the specified WorkSpace properties. For important information about
-// how to modify the size of the root and user volumes, see Modify a WorkSpace (https://docs.aws.amazon.com/workspaces/latest/adminguide/modify-workspaces.html)
-// . The MANUAL running mode value is only supported by Amazon WorkSpaces Core.
+// how to modify the size of the root and user volumes, see [Modify a WorkSpace].
+//
+// The MANUAL running mode value is only supported by Amazon WorkSpaces Core.
 // Contact your account team to be allow-listed to use this value. For more
-// information, see Amazon WorkSpaces Core (http://aws.amazon.com/workspaces/core/)
-// .
+// information, see [Amazon WorkSpaces Core].
+//
+// [Amazon WorkSpaces Core]: http://aws.amazon.com/workspaces/core/
+// [Modify a WorkSpace]: https://docs.aws.amazon.com/workspaces/latest/adminguide/modify-workspaces.html
 func (c *Client) ModifyWorkspaceProperties(ctx context.Context, params *ModifyWorkspacePropertiesInput, optFns ...func(*Options)) (*ModifyWorkspacePropertiesOutput, error) {
 	if params == nil {
 		params = &ModifyWorkspacePropertiesInput{}
@@ -78,25 +80,25 @@ func (c *Client) addOperationModifyWorkspacePropertiesMiddlewares(stack *middlew
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -111,13 +113,16 @@ func (c *Client) addOperationModifyWorkspacePropertiesMiddlewares(stack *middlew
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpModifyWorkspacePropertiesValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opModifyWorkspaceProperties(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

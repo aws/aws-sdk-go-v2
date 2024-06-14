@@ -1,3 +1,83 @@
+# v1.21.2 (2024-06-07)
+
+* **Bug Fix**: Add clock skew correction on all service clients
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.21.1 (2024-06-03)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.21.0 (2024-05-30)
+
+* **Feature**: The release adds support for spark structured streaming.
+
+# v1.20.0 (2024-05-23)
+
+* **Feature**: This release adds the capability to run interactive workloads using Apache Livy Endpoint.
+
+# v1.19.4 (2024-05-16)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.19.3 (2024-05-15)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.19.2 (2024-05-09)
+
+* No change notes available for this release.
+
+# v1.19.1 (2024-05-08)
+
+* **Bug Fix**: GoDoc improvement
+
+# v1.19.0 (2024-04-18)
+
+* **Feature**: This release adds the capability to publish detailed Spark engine metrics to Amazon Managed Service for Prometheus (AMP) for  enhanced monitoring for Spark jobs.
+
+# v1.18.0 (2024-04-16)
+
+* **Feature**: This release adds support for shuffle optimized disks that allow larger disk sizes and higher IOPS to efficiently run shuffle heavy workloads.
+
+# v1.17.5 (2024-03-29)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.17.4 (2024-03-18)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.17.3 (2024-03-07)
+
+* **Bug Fix**: Remove dependency on go-cmp.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.17.2 (2024-02-29)
+
+* No change notes available for this release.
+
+# v1.17.1 (2024-02-23)
+
+* **Bug Fix**: Move all common, SDK-side middleware stack ops into the service client module to prevent cross-module compatibility issues in the future.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.17.0 (2024-02-22)
+
+* **Feature**: Add middleware stack snapshot tests.
+
+# v1.16.2 (2024-02-21)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.16.1 (2024-02-20)
+
+* **Bug Fix**: When sourcing values for a service's `EndpointParameters`, the lack of a configured region (i.e. `options.Region == ""`) will now translate to a `nil` value for `EndpointParameters.Region` instead of a pointer to the empty string `""`. This will result in a much more explicit error when calling an operation instead of an obscure hostname lookup failure.
+
+# v1.16.0 (2024-02-13)
+
+* **Feature**: Bump minimum Go version to 1.20 per our language support policy.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.15.1 (2024-02-09)
 
 * No change notes available for this release.

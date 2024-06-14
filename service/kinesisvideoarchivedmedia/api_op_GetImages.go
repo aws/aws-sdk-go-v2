@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/kinesisvideoarchivedmedia/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -73,9 +72,11 @@ type GetImagesInput struct {
 	// image size will be returned.
 	HeightPixels *int32
 
-	// The maximum number of images to be returned by the API. The default limit is 25
-	// images per API response. Providing a MaxResults greater than this value will
-	// result in a page size of 25. Any additional results will be paginated.
+	// The maximum number of images to be returned by the API.
+	//
+	// The default limit is 25 images per API response. Providing a MaxResults greater
+	// than this value will result in a page size of 25. Any additional results will be
+	// paginated.
 	MaxResults *int64
 
 	// A token that specifies where to start paginating the next set of Images. This
@@ -146,25 +147,25 @@ func (c *Client) addOperationGetImagesMiddlewares(stack *middleware.Stack, optio
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -179,13 +180,16 @@ func (c *Client) addOperationGetImagesMiddlewares(stack *middleware.Stack, optio
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpGetImagesValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetImages(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -212,9 +216,11 @@ var _ GetImagesAPIClient = (*Client)(nil)
 
 // GetImagesPaginatorOptions is the paginator options for GetImages
 type GetImagesPaginatorOptions struct {
-	// The maximum number of images to be returned by the API. The default limit is 25
-	// images per API response. Providing a MaxResults greater than this value will
-	// result in a page size of 25. Any additional results will be paginated.
+	// The maximum number of images to be returned by the API.
+	//
+	// The default limit is 25 images per API response. Providing a MaxResults greater
+	// than this value will result in a page size of 25. Any additional results will be
+	// paginated.
 	Limit int64
 
 	// Set to true if pagination should stop if the service returns a pagination token

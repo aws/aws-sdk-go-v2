@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -40,20 +39,26 @@ type ListResourcesInProtectionGroupInput struct {
 	// list request. Shield Advanced might return fewer objects than you indicate in
 	// this setting, even if more objects are available. If there are more objects
 	// remaining, Shield Advanced will always also return a NextToken value in the
-	// response. The default setting is 20.
+	// response.
+	//
+	// The default setting is 20.
 	MaxResults *int32
 
 	// When you request a list of objects from Shield Advanced, if the response does
 	// not include all of the remaining available objects, Shield Advanced includes a
 	// NextToken value in the response. You can retrieve the next batch of objects by
 	// requesting the list again and providing the token that was returned by the prior
-	// call in your request. You can indicate the maximum number of objects that you
-	// want Shield Advanced to return for a single call with the MaxResults setting.
-	// Shield Advanced will not return more than MaxResults objects, but may return
-	// fewer, even if more objects are still available. Whenever more objects remain
-	// that Shield Advanced has not yet returned to you, the response will include a
-	// NextToken value. On your first call to a list operation, leave this setting
-	// empty.
+	// call in your request.
+	//
+	// You can indicate the maximum number of objects that you want Shield Advanced to
+	// return for a single call with the MaxResults setting. Shield Advanced will not
+	// return more than MaxResults objects, but may return fewer, even if more objects
+	// are still available.
+	//
+	// Whenever more objects remain that Shield Advanced has not yet returned to you,
+	// the response will include a NextToken value.
+	//
+	// On your first call to a list operation, leave this setting empty.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -71,12 +76,15 @@ type ListResourcesInProtectionGroupOutput struct {
 	// not include all of the remaining available objects, Shield Advanced includes a
 	// NextToken value in the response. You can retrieve the next batch of objects by
 	// requesting the list again and providing the token that was returned by the prior
-	// call in your request. You can indicate the maximum number of objects that you
-	// want Shield Advanced to return for a single call with the MaxResults setting.
-	// Shield Advanced will not return more than MaxResults objects, but may return
-	// fewer, even if more objects are still available. Whenever more objects remain
-	// that Shield Advanced has not yet returned to you, the response will include a
-	// NextToken value.
+	// call in your request.
+	//
+	// You can indicate the maximum number of objects that you want Shield Advanced to
+	// return for a single call with the MaxResults setting. Shield Advanced will not
+	// return more than MaxResults objects, but may return fewer, even if more objects
+	// are still available.
+	//
+	// Whenever more objects remain that Shield Advanced has not yet returned to you,
+	// the response will include a NextToken value.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -107,25 +115,25 @@ func (c *Client) addOperationListResourcesInProtectionGroupMiddlewares(stack *mi
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -140,13 +148,16 @@ func (c *Client) addOperationListResourcesInProtectionGroupMiddlewares(stack *mi
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpListResourcesInProtectionGroupValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListResourcesInProtectionGroup(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -179,7 +190,9 @@ type ListResourcesInProtectionGroupPaginatorOptions struct {
 	// list request. Shield Advanced might return fewer objects than you indicate in
 	// this setting, even if more objects are available. If there are more objects
 	// remaining, Shield Advanced will always also return a NextToken value in the
-	// response. The default setting is 20.
+	// response.
+	//
+	// The default setting is 20.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

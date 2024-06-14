@@ -6,21 +6,23 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/kendra/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns the indexing status for one or more documents submitted with the
-// BatchPutDocument (https://docs.aws.amazon.com/kendra/latest/dg/API_BatchPutDocument.html)
-// API. When you use the BatchPutDocument API, documents are indexed
-// asynchronously. You can use the BatchGetDocumentStatus API to get the current
-// status of a list of documents so that you can determine if they have been
-// successfully indexed. You can also use the BatchGetDocumentStatus API to check
-// the status of the BatchDeleteDocument (https://docs.aws.amazon.com/kendra/latest/dg/API_BatchDeleteDocument.html)
+// Returns the indexing status for one or more documents submitted with the [BatchPutDocument] API.
+//
+// When you use the BatchPutDocument API, documents are indexed asynchronously.
+// You can use the BatchGetDocumentStatus API to get the current status of a list
+// of documents so that you can determine if they have been successfully indexed.
+//
+// You can also use the BatchGetDocumentStatus API to check the status of the [BatchDeleteDocument]
 // API. When a document is deleted from the index, Amazon Kendra returns NOT_FOUND
 // as the status.
+//
+// [BatchPutDocument]: https://docs.aws.amazon.com/kendra/latest/dg/API_BatchPutDocument.html
+// [BatchDeleteDocument]: https://docs.aws.amazon.com/kendra/latest/dg/API_BatchDeleteDocument.html
 func (c *Client) BatchGetDocumentStatus(ctx context.Context, params *BatchGetDocumentStatusInput, optFns ...func(*Options)) (*BatchGetDocumentStatusOutput, error) {
 	if params == nil {
 		params = &BatchGetDocumentStatusInput{}
@@ -45,8 +47,9 @@ type BatchGetDocumentStatusInput struct {
 	DocumentInfoList []types.DocumentInfo
 
 	// The identifier of the index to add documents to. The index ID is returned by
-	// the CreateIndex  (https://docs.aws.amazon.com/kendra/latest/dg/API_CreateIndex.html)
-	// API.
+	// the [CreateIndex]API.
+	//
+	// [CreateIndex]: https://docs.aws.amazon.com/kendra/latest/dg/API_CreateIndex.html
 	//
 	// This member is required.
 	IndexId *string
@@ -94,25 +97,25 @@ func (c *Client) addOperationBatchGetDocumentStatusMiddlewares(stack *middleware
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -127,13 +130,16 @@ func (c *Client) addOperationBatchGetDocumentStatusMiddlewares(stack *middleware
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpBatchGetDocumentStatusValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opBatchGetDocumentStatus(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

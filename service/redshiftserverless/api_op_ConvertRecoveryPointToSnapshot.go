@@ -6,15 +6,15 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/redshiftserverless/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Converts a recovery point to a snapshot. For more information about recovery
-// points and snapshots, see Working with snapshots and recovery points (https://docs.aws.amazon.com/redshift/latest/mgmt/serverless-snapshots-recovery.html)
-// .
+// points and snapshots, see [Working with snapshots and recovery points].
+//
+// [Working with snapshots and recovery points]: https://docs.aws.amazon.com/redshift/latest/mgmt/serverless-snapshots-recovery.html
 func (c *Client) ConvertRecoveryPointToSnapshot(ctx context.Context, params *ConvertRecoveryPointToSnapshotInput, optFns ...func(*Options)) (*ConvertRecoveryPointToSnapshotOutput, error) {
 	if params == nil {
 		params = &ConvertRecoveryPointToSnapshotInput{}
@@ -45,8 +45,9 @@ type ConvertRecoveryPointToSnapshotInput struct {
 	// How long to retain the snapshot.
 	RetentionPeriod *int32
 
-	// An array of Tag objects (https://docs.aws.amazon.com/redshift-serverless/latest/APIReference/API_Tag.html)
-	// to associate with the created snapshot.
+	// An array of [Tag objects] to associate with the created snapshot.
+	//
+	// [Tag objects]: https://docs.aws.amazon.com/redshift-serverless/latest/APIReference/API_Tag.html
 	Tags []types.Tag
 
 	noSmithyDocumentSerde
@@ -85,25 +86,25 @@ func (c *Client) addOperationConvertRecoveryPointToSnapshotMiddlewares(stack *mi
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -118,13 +119,16 @@ func (c *Client) addOperationConvertRecoveryPointToSnapshotMiddlewares(stack *mi
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpConvertRecoveryPointToSnapshotValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opConvertRecoveryPointToSnapshot(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

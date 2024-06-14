@@ -16,13 +16,16 @@ import (
 	"strings"
 )
 
-// Retrieves the Storage Lens group configuration details. To use this operation,
-// you must have the permission to perform the s3:GetStorageLensGroup action. For
-// more information about the required Storage Lens Groups permissions, see
-// Setting account permissions to use S3 Storage Lens groups (https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage_lens_iam_permissions.html#storage_lens_groups_permissions)
-// . For information about Storage Lens groups errors, see List of Amazon S3
-// Storage Lens error codes (https://docs.aws.amazon.com/AmazonS3/latest/API/ErrorResponses.html#S3LensErrorCodeList)
-// .
+//	Retrieves the Storage Lens group configuration details.
+//
+// To use this operation, you must have the permission to perform the
+// s3:GetStorageLensGroup action. For more information about the required Storage
+// Lens Groups permissions, see [Setting account permissions to use S3 Storage Lens groups].
+//
+// For information about Storage Lens groups errors, see [List of Amazon S3 Storage Lens error codes].
+//
+// [Setting account permissions to use S3 Storage Lens groups]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage_lens_iam_permissions.html#storage_lens_groups_permissions
+// [List of Amazon S3 Storage Lens error codes]: https://docs.aws.amazon.com/AmazonS3/latest/API/ErrorResponses.html#S3LensErrorCodeList
 func (c *Client) GetStorageLensGroup(ctx context.Context, params *GetStorageLensGroupInput, optFns ...func(*Options)) (*GetStorageLensGroupOutput, error) {
 	if params == nil {
 		params = &GetStorageLensGroupInput{}
@@ -40,13 +43,13 @@ func (c *Client) GetStorageLensGroup(ctx context.Context, params *GetStorageLens
 
 type GetStorageLensGroupInput struct {
 
-	// The Amazon Web Services account ID associated with the Storage Lens group that
+	//  The Amazon Web Services account ID associated with the Storage Lens group that
 	// you're trying to retrieve the details for.
 	//
 	// This member is required.
 	AccountId *string
 
-	// The name of the Storage Lens group that you're trying to retrieve the
+	//  The name of the Storage Lens group that you're trying to retrieve the
 	// configuration details for.
 	//
 	// This member is required.
@@ -62,7 +65,7 @@ func (in *GetStorageLensGroupInput) bindEndpointParams(p *EndpointParameters) {
 
 type GetStorageLensGroupOutput struct {
 
-	// The name of the Storage Lens group that you're trying to retrieve the
+	//  The name of the Storage Lens group that you're trying to retrieve the
 	// configuration details for.
 	StorageLensGroup *types.StorageLensGroup
 
@@ -94,25 +97,25 @@ func (c *Client) addOperationGetStorageLensGroupMiddlewares(stack *middleware.St
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -130,6 +133,9 @@ func (c *Client) addOperationGetStorageLensGroupMiddlewares(stack *middleware.St
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addEndpointPrefix_opGetStorageLensGroupMiddleware(stack); err != nil {
 		return err
 	}
@@ -142,7 +148,7 @@ func (c *Client) addOperationGetStorageLensGroupMiddlewares(stack *middleware.St
 	if err = addMetadataRetrieverMiddleware(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addGetStorageLensGroupUpdateEndpoint(stack, options); err != nil {

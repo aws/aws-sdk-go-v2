@@ -3656,6 +3656,70 @@ func (m *awsAwsquery_serializeOpListStacks) HandleSerialize(ctx context.Context,
 	return next.HandleSerialize(ctx, in)
 }
 
+type awsAwsquery_serializeOpListStackSetAutoDeploymentTargets struct {
+}
+
+func (*awsAwsquery_serializeOpListStackSetAutoDeploymentTargets) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsquery_serializeOpListStackSetAutoDeploymentTargets) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*ListStackSetAutoDeploymentTargetsInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-www-form-urlencoded")
+
+	bodyWriter := bytes.NewBuffer(nil)
+	bodyEncoder := query.NewEncoder(bodyWriter)
+	body := bodyEncoder.Object()
+	body.Key("Action").String("ListStackSetAutoDeploymentTargets")
+	body.Key("Version").String("2010-05-15")
+
+	if err := awsAwsquery_serializeOpDocumentListStackSetAutoDeploymentTargetsInput(input, bodyEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	err = bodyEncoder.Encode()
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(bodyWriter.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
 type awsAwsquery_serializeOpListStackSetOperationResults struct {
 }
 
@@ -6450,6 +6514,11 @@ func awsAwsquery_serializeOpDocumentDeleteStackInput(v *DeleteStackInput, value 
 		objectKey.String(*v.ClientRequestToken)
 	}
 
+	if len(v.DeletionMode) > 0 {
+		objectKey := object.Key("DeletionMode")
+		objectKey.String(string(v.DeletionMode))
+	}
+
 	if v.RetainResources != nil {
 		objectKey := object.Key("RetainResources")
 		if err := awsAwsquery_serializeDocumentRetainResources(v.RetainResources, objectKey); err != nil {
@@ -6615,6 +6684,11 @@ func awsAwsquery_serializeOpDocumentDescribeChangeSetInput(v *DescribeChangeSetI
 	if v.ChangeSetName != nil {
 		objectKey := object.Key("ChangeSetName")
 		objectKey.String(*v.ChangeSetName)
+	}
+
+	if v.IncludePropertyValues != nil {
+		objectKey := object.Key("IncludePropertyValues")
+		objectKey.Boolean(*v.IncludePropertyValues)
 	}
 
 	if v.NextToken != nil {
@@ -7422,6 +7496,33 @@ func awsAwsquery_serializeOpDocumentListStackResourcesInput(v *ListStackResource
 	if v.StackName != nil {
 		objectKey := object.Key("StackName")
 		objectKey.String(*v.StackName)
+	}
+
+	return nil
+}
+
+func awsAwsquery_serializeOpDocumentListStackSetAutoDeploymentTargetsInput(v *ListStackSetAutoDeploymentTargetsInput, value query.Value) error {
+	object := value.Object()
+	_ = object
+
+	if len(v.CallAs) > 0 {
+		objectKey := object.Key("CallAs")
+		objectKey.String(string(v.CallAs))
+	}
+
+	if v.MaxResults != nil {
+		objectKey := object.Key("MaxResults")
+		objectKey.Integer(*v.MaxResults)
+	}
+
+	if v.NextToken != nil {
+		objectKey := object.Key("NextToken")
+		objectKey.String(*v.NextToken)
+	}
+
+	if v.StackSetName != nil {
+		objectKey := object.Key("StackSetName")
+		objectKey.String(*v.StackSetName)
 	}
 
 	return nil

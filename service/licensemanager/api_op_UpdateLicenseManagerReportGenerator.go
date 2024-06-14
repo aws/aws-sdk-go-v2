@@ -6,14 +6,15 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/licensemanager/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates a report generator. After you make changes to a report generator, it
-// starts generating new reports within 60 minutes of being updated.
+// Updates a report generator.
+//
+// After you make changes to a report generator, it starts generating new reports
+// within 60 minutes of being updated.
 func (c *Client) UpdateLicenseManagerReportGenerator(ctx context.Context, params *UpdateLicenseManagerReportGeneratorInput, optFns ...func(*Options)) (*UpdateLicenseManagerReportGeneratorOutput, error) {
 	if params == nil {
 		params = &UpdateLicenseManagerReportGeneratorInput{}
@@ -58,8 +59,10 @@ type UpdateLicenseManagerReportGeneratorInput struct {
 	ReportGeneratorName *string
 
 	// Type of reports to generate. The following report types are supported:
+	//
 	//   - License configuration report - Reports the number and details of consumed
 	//   licenses for a license configuration.
+	//
 	//   - Resource report - Reports the tracked licenses and resource consumption for
 	//   a license configuration.
 	//
@@ -101,25 +104,25 @@ func (c *Client) addOperationUpdateLicenseManagerReportGeneratorMiddlewares(stac
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -134,13 +137,16 @@ func (c *Client) addOperationUpdateLicenseManagerReportGeneratorMiddlewares(stac
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpUpdateLicenseManagerReportGeneratorValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateLicenseManagerReportGenerator(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

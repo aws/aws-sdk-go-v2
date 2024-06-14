@@ -16,8 +16,8 @@ type AmiProductEntityIdFilter struct {
 	noSmithyDocumentSerde
 }
 
-// Object containing all the filter fields for AMI products. Client can add a
-// maximum of 8 filters in a single ListEntities request.
+// Object containing all the filter fields for AMI products. Client can add only
+// one wildcard filter and a maximum of 8 filters in a single ListEntities request.
 type AmiProductFilters struct {
 
 	// Unique identifier for the AMI product.
@@ -124,10 +124,11 @@ type Change struct {
 	// Change types are single string values that describe your intention for the
 	// change. Each change type is unique for each EntityType provided in the change's
 	// scope. For more information about change types available for single-AMI
-	// products, see Working with single-AMI products (https://docs.aws.amazon.com/marketplace-catalog/latest/api-reference/ami-products.html#working-with-single-AMI-products)
-	// . Also, for more information about change types available for container-based
-	// products, see Working with container products (https://docs.aws.amazon.com/marketplace-catalog/latest/api-reference/container-products.html#working-with-container-products)
-	// .
+	// products, see [Working with single-AMI products]. Also, for more information about change types available for
+	// container-based products, see [Working with container products].
+	//
+	// [Working with single-AMI products]: https://docs.aws.amazon.com/marketplace-catalog/latest/api-reference/ami-products.html#working-with-single-AMI-products
+	// [Working with container products]: https://docs.aws.amazon.com/marketplace-catalog/latest/api-reference/container-products.html#working-with-container-products
 	//
 	// This member is required.
 	ChangeType *string
@@ -142,10 +143,11 @@ type Change struct {
 
 	// This object contains details specific to the change type of the requested
 	// change. For more information about change types available for single-AMI
-	// products, see Working with single-AMI products (https://docs.aws.amazon.com/marketplace-catalog/latest/api-reference/ami-products.html#working-with-single-AMI-products)
-	// . Also, for more information about change types available for container-based
-	// products, see Working with container products (https://docs.aws.amazon.com/marketplace-catalog/latest/api-reference/container-products.html#working-with-container-products)
-	// .
+	// products, see [Working with single-AMI products]. Also, for more information about change types available for
+	// container-based products, see [Working with container products].
+	//
+	// [Working with single-AMI products]: https://docs.aws.amazon.com/marketplace-catalog/latest/api-reference/ami-products.html#working-with-single-AMI-products
+	// [Working with container products]: https://docs.aws.amazon.com/marketplace-catalog/latest/api-reference/container-products.html#working-with-container-products
 	Details *string
 
 	// Alternative field that accepts a JSON value instead of a string for ChangeType
@@ -234,7 +236,8 @@ type ContainerProductEntityIdFilter struct {
 }
 
 // Object containing all the filter fields for container products. Client can add
-// a maximum of 8 filters in a single ListEntities request.
+// only one wildcard filter and a maximum of 8 filters in a single ListEntities
+// request.
 type ContainerProductFilters struct {
 
 	// Unique identifier for the container product.
@@ -333,8 +336,8 @@ type DataProductEntityIdFilter struct {
 	noSmithyDocumentSerde
 }
 
-// Object containing all the filter fields for data products. Client can add a
-// maximum of 8 filters in a single ListEntities request.
+// Object containing all the filter fields for data products. Client can add only
+// one wildcard filter and a maximum of 8 filters in a single ListEntities request.
 type DataProductFilters struct {
 
 	// Unique identifier for the data product.
@@ -677,23 +680,33 @@ type ErrorDetail struct {
 // ListEntities and ListChangeSets actions.
 type Filter struct {
 
-	// For ListEntities , the supported value for this is an EntityId . For
-	// ListChangeSets , the supported values are as follows:
+	// For ListEntities , the supported value for this is an EntityId .
+	//
+	// For ListChangeSets , the supported values are as follows:
 	Name *string
 
-	// ListEntities - This is a list of unique EntityId s. ListChangeSets - The
-	// supported filter names and associated ValueList s is as follows:
+	// ListEntities - This is a list of unique EntityId s.
+	//
+	// ListChangeSets - The supported filter names and associated ValueList s is as
+	// follows:
+	//
 	//   - ChangeSetName - The supported ValueList is a list of non-unique
 	//   ChangeSetName s. These are defined when you call the StartChangeSet action.
+	//
 	//   - Status - The supported ValueList is a list of statuses for all change set
 	//   requests.
+	//
 	//   - EntityId - The supported ValueList is a list of unique EntityId s.
+	//
 	//   - BeforeStartTime - The supported ValueList is a list of all change sets that
 	//   started before the filter value.
+	//
 	//   - AfterStartTime - The supported ValueList is a list of all change sets that
 	//   started after the filter value.
+	//
 	//   - BeforeEndTime - The supported ValueList is a list of all change sets that
 	//   ended before the filter value.
+	//
 	//   - AfterEndTime - The supported ValueList is a list of all change sets that
 	//   ended after the filter value.
 	ValueList []string
@@ -742,7 +755,8 @@ type OfferEntityIdFilter struct {
 	noSmithyDocumentSerde
 }
 
-// A filter for offers entity.
+// Object containing all the filter fields for offers entity. Client can add only
+// one wildcard filter and a maximum of 8 filters in a single ListEntities request.
 type OfferFilters struct {
 
 	// Allows filtering on the AvailabilityEndDate of an offer.
@@ -765,6 +779,12 @@ type OfferFilters struct {
 
 	// Allows filtering on the ReleaseDate of an offer.
 	ReleaseDate *OfferReleaseDateFilter
+
+	// Allows filtering on the ResaleAuthorizationId of an offer.
+	//
+	// Not all offers have a ResaleAuthorizationId . The response will only include
+	// offers for which you have permissions.
+	ResaleAuthorizationId *OfferResaleAuthorizationIdFilter
 
 	// Allows filtering on the State of an offer.
 	State *OfferStateFilter
@@ -838,6 +858,18 @@ type OfferReleaseDateFilterDateRange struct {
 	noSmithyDocumentSerde
 }
 
+// Allows filtering on the ResaleAuthorizationId of an offer.
+//
+// Not all offers have a ResaleAuthorizationId . The response will only include
+// offers for which you have permissions.
+type OfferResaleAuthorizationIdFilter struct {
+
+	// Allows filtering on the ResaleAuthorizationId of an offer with list input.
+	ValueList []string
+
+	noSmithyDocumentSerde
+}
+
 // Allows to sort offers.
 type OfferSort struct {
 
@@ -876,6 +908,9 @@ type OfferSummary struct {
 
 	// The release date of the offer.
 	ReleaseDate *string
+
+	// The ResaleAuthorizationId of the offer.
+	ResaleAuthorizationId *string
 
 	// The status of the offer.
 	State OfferStateString
@@ -958,7 +993,9 @@ type ResaleAuthorizationEntityIdFilter struct {
 	noSmithyDocumentSerde
 }
 
-// A filter for ResaleAuthorization entity.
+// Object containing all the filter fields for resale authorization entity. Client
+// can add only one wildcard filter and a maximum of 8 filters in a single
+// ListEntities request.
 type ResaleAuthorizationFilters struct {
 
 	// Allows filtering on the AvailabilityEndDate of a ResaleAuthorization.
@@ -1198,8 +1235,8 @@ type SaaSProductEntityIdFilter struct {
 	noSmithyDocumentSerde
 }
 
-// Object containing all the filter fields for SaaS products. Client can add a
-// maximum of 8 filters in a single ListEntities request.
+// Object containing all the filter fields for SaaS products. Client can add only
+// one wildcard filter and a maximum of 8 filters in a single ListEntities request.
 type SaaSProductFilters struct {
 
 	// Unique identifier for the SaaS product.
@@ -1293,8 +1330,9 @@ type Sort struct {
 
 	// For ListEntities , supported attributes include LastModifiedDate (default) and
 	// EntityId . In addition to LastModifiedDate and EntityId , each EntityType might
-	// support additional fields. For ListChangeSets , supported attributes include
-	// StartTime and EndTime .
+	// support additional fields.
+	//
+	// For ListChangeSets , supported attributes include StartTime and EndTime .
 	SortBy *string
 
 	// The sorting order. Can be ASCENDING or DESCENDING . The default value is

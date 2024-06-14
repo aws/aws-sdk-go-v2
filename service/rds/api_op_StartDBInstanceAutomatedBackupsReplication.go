@@ -6,16 +6,19 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/rds/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Enables replication of automated backups to a different Amazon Web Services
-// Region. This command doesn't apply to RDS Custom. For more information, see
-// Replicating Automated Backups to Another Amazon Web Services Region (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_ReplicateBackups.html)
-// in the Amazon RDS User Guide.
+// Region.
+//
+// This command doesn't apply to RDS Custom.
+//
+// For more information, see [Replicating Automated Backups to Another Amazon Web Services Region] in the Amazon RDS User Guide.
+//
+// [Replicating Automated Backups to Another Amazon Web Services Region]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_ReplicateBackups.html
 func (c *Client) StartDBInstanceAutomatedBackupsReplication(ctx context.Context, params *StartDBInstanceAutomatedBackupsReplicationInput, optFns ...func(*Options)) (*StartDBInstanceAutomatedBackupsReplicationOutput, error) {
 	if params == nil {
 		params = &StartDBInstanceAutomatedBackupsReplicationInput{}
@@ -55,15 +58,19 @@ type StartDBInstanceAutomatedBackupsReplicationInput struct {
 	// Services Region of the source DB instance. The presigned URL must be a valid
 	// request for the StartDBInstanceAutomatedBackupsReplication API operation that
 	// can run in the Amazon Web Services Region that contains the source DB instance.
+	//
 	// This setting applies only to Amazon Web Services GovCloud (US) Regions. It's
-	// ignored in other Amazon Web Services Regions. To learn how to generate a
-	// Signature Version 4 signed request, see Authenticating Requests: Using Query
-	// Parameters (Amazon Web Services Signature Version 4) (https://docs.aws.amazon.com/AmazonS3/latest/API/sigv4-query-string-auth.html)
-	// and Signature Version 4 Signing Process (https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html)
-	// . If you are using an Amazon Web Services SDK tool or the CLI, you can specify
+	// ignored in other Amazon Web Services Regions.
+	//
+	// To learn how to generate a Signature Version 4 signed request, see [Authenticating Requests: Using Query Parameters (Amazon Web Services Signature Version 4)] and [Signature Version 4 Signing Process].
+	//
+	// If you are using an Amazon Web Services SDK tool or the CLI, you can specify
 	// SourceRegion (or --source-region for the CLI) instead of specifying PreSignedUrl
 	// manually. Specifying SourceRegion autogenerates a presigned URL that is a valid
 	// request for the operation that can run in the source Amazon Web Services Region.
+	//
+	// [Authenticating Requests: Using Query Parameters (Amazon Web Services Signature Version 4)]: https://docs.aws.amazon.com/AmazonS3/latest/API/sigv4-query-string-auth.html
+	// [Signature Version 4 Signing Process]: https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html
 	PreSignedUrl *string
 
 	noSmithyDocumentSerde
@@ -104,25 +111,25 @@ func (c *Client) addOperationStartDBInstanceAutomatedBackupsReplicationMiddlewar
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -137,13 +144,16 @@ func (c *Client) addOperationStartDBInstanceAutomatedBackupsReplicationMiddlewar
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpStartDBInstanceAutomatedBackupsReplicationValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opStartDBInstanceAutomatedBackupsReplication(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

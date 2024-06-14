@@ -6,16 +6,23 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/gamelift/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates a fleet's mutable attributes, including game session protection and
-// resource creation limits. To update fleet attributes, specify the fleet ID and
-// the property values that you want to change. If successful, an updated
-// FleetAttributes object is returned. Learn more Setting up Amazon GameLift fleets (https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-intro.html)
+// Updates a fleet's mutable attributes, such as game session protection and
+// resource creation limits.
+//
+// To update fleet attributes, specify the fleet ID and the property values that
+// you want to change. If successful, Amazon GameLift returns the identifiers for
+// the updated fleet.
+//
+// # Learn more
+//
+// [Setting up Amazon GameLift fleets]
+//
+// [Setting up Amazon GameLift fleets]: https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-intro.html
 func (c *Client) UpdateFleetAttributes(ctx context.Context, params *UpdateFleetAttributesInput, optFns ...func(*Options)) (*UpdateFleetAttributesOutput, error) {
 	if params == nil {
 		params = &UpdateFleetAttributesInput{}
@@ -57,12 +64,15 @@ type UpdateFleetAttributesInput struct {
 
 	// The game session protection policy to apply to all new game sessions created in
 	// this fleet. Game sessions that already exist are not affected. You can set
-	// protection for individual game sessions using UpdateGameSession (https://docs.aws.amazon.com/gamelift/latest/apireference/API_UpdateGameSession.html)
-	// .
+	// protection for individual game sessions using [UpdateGameSession].
+	//
 	//   - NoProtection -- The game session can be terminated during a scale-down
 	//   event.
+	//
 	//   - FullProtection -- If the game session is in an ACTIVE status, it cannot be
 	//   terminated during a scale-down event.
+	//
+	// [UpdateGameSession]: https://docs.aws.amazon.com/gamelift/latest/apireference/API_UpdateGameSession.html
 	NewGameSessionProtectionPolicy types.ProtectionPolicy
 
 	// Policy settings that limit the number of game sessions an individual player can
@@ -74,10 +84,11 @@ type UpdateFleetAttributesInput struct {
 
 type UpdateFleetAttributesOutput struct {
 
-	// The Amazon Resource Name ( ARN (https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-arn-format.html)
-	// ) that is assigned to a Amazon GameLift fleet resource and uniquely identifies
-	// it. ARNs are unique across all Regions. Format is
-	// arn:aws:gamelift:::fleet/fleet-a1234567-b8c9-0d1e-2fa3-b45c6d7e8912 .
+	// The Amazon Resource Name ([ARN] ) that is assigned to a Amazon GameLift fleet
+	// resource and uniquely identifies it. ARNs are unique across all Regions. Format
+	// is arn:aws:gamelift:::fleet/fleet-a1234567-b8c9-0d1e-2fa3-b45c6d7e8912 .
+	//
+	// [ARN]: https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-arn-format.html
 	FleetArn *string
 
 	// A unique identifier for the fleet that was updated.
@@ -111,25 +122,25 @@ func (c *Client) addOperationUpdateFleetAttributesMiddlewares(stack *middleware.
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -144,13 +155,16 @@ func (c *Client) addOperationUpdateFleetAttributesMiddlewares(stack *middleware.
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpUpdateFleetAttributesValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateFleetAttributes(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

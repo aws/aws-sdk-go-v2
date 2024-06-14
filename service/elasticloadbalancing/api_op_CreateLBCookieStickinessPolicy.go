@@ -6,24 +6,28 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Generates a stickiness policy with sticky session lifetimes controlled by the
 // lifetime of the browser (user-agent) or a specified expiration period. This
-// policy can be associated only with HTTP/HTTPS listeners. When a load balancer
-// implements this policy, the load balancer uses a special cookie to track the
-// instance for each request. When the load balancer receives a request, it first
-// checks to see if this cookie is present in the request. If so, the load balancer
-// sends the request to the application server specified in the cookie. If not, the
-// load balancer sends the request to a server that is chosen based on the existing
-// load-balancing algorithm. A cookie is inserted into the response for binding
-// subsequent requests from the same user to that server. The validity of the
-// cookie is based on the cookie expiration time, which is specified in the policy
-// configuration. For more information, see Duration-Based Session Stickiness (https://docs.aws.amazon.com/elasticloadbalancing/latest/classic/elb-sticky-sessions.html#enable-sticky-sessions-duration)
-// in the Classic Load Balancers Guide.
+// policy can be associated only with HTTP/HTTPS listeners.
+//
+// When a load balancer implements this policy, the load balancer uses a special
+// cookie to track the instance for each request. When the load balancer receives a
+// request, it first checks to see if this cookie is present in the request. If so,
+// the load balancer sends the request to the application server specified in the
+// cookie. If not, the load balancer sends the request to a server that is chosen
+// based on the existing load-balancing algorithm.
+//
+// A cookie is inserted into the response for binding subsequent requests from the
+// same user to that server. The validity of the cookie is based on the cookie
+// expiration time, which is specified in the policy configuration.
+//
+// For more information, see [Duration-Based Session Stickiness] in the Classic Load Balancers Guide.
+//
+// [Duration-Based Session Stickiness]: https://docs.aws.amazon.com/elasticloadbalancing/latest/classic/elb-sticky-sessions.html#enable-sticky-sessions-duration
 func (c *Client) CreateLBCookieStickinessPolicy(ctx context.Context, params *CreateLBCookieStickinessPolicyInput, optFns ...func(*Options)) (*CreateLBCookieStickinessPolicyOutput, error) {
 	if params == nil {
 		params = &CreateLBCookieStickinessPolicyInput{}
@@ -92,25 +96,25 @@ func (c *Client) addOperationCreateLBCookieStickinessPolicyMiddlewares(stack *mi
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -125,13 +129,16 @@ func (c *Client) addOperationCreateLBCookieStickinessPolicyMiddlewares(stack *mi
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpCreateLBCookieStickinessPolicyValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateLBCookieStickinessPolicy(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

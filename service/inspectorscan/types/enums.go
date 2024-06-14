@@ -12,8 +12,9 @@ const (
 
 // Values returns all known values for InternalServerExceptionReason. Note that
 // this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (InternalServerExceptionReason) Values() []InternalServerExceptionReason {
 	return []InternalServerExceptionReason{
 		"FAILED_TO_GENERATE_SBOM",
@@ -30,8 +31,9 @@ const (
 )
 
 // Values returns all known values for OutputFormat. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (OutputFormat) Values() []OutputFormat {
 	return []OutputFormat{
 		"CYCLONE_DX_1_5",
@@ -52,6 +54,7 @@ const (
 
 // Values returns all known values for ValidationExceptionReason. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (ValidationExceptionReason) Values() []ValidationExceptionReason {
 	return []ValidationExceptionReason{

@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/kinesisanalyticsv2/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -16,10 +15,12 @@ import (
 // evaluating sample records on the specified streaming source (Kinesis data stream
 // or Kinesis Data Firehose delivery stream) or Amazon S3 object. In the response,
 // the operation returns the inferred schema and also the sample records that the
-// operation used to infer the schema. You can use the inferred schema when
-// configuring a streaming source for your application. When you create an
-// application using the Kinesis Data Analytics console, the console uses this
-// operation to infer a schema and show it in the console user interface.
+// operation used to infer the schema.
+//
+// You can use the inferred schema when configuring a streaming source for your
+// application. When you create an application using the Kinesis Data Analytics
+// console, the console uses this operation to infer a schema and show it in the
+// console user interface.
 func (c *Client) DiscoverInputSchema(ctx context.Context, params *DiscoverInputSchemaInput, optFns ...func(*Options)) (*DiscoverInputSchemaOutput, error) {
 	if params == nil {
 		params = &DiscoverInputSchemaInput{}
@@ -42,12 +43,12 @@ type DiscoverInputSchemaInput struct {
 	// This member is required.
 	ServiceExecutionRole *string
 
-	// The InputProcessingConfiguration to use to preprocess the records before
-	// discovering the schema of the records.
+	// The InputProcessingConfiguration to use to preprocess the records before discovering the schema of the
+	// records.
 	InputProcessingConfiguration *types.InputProcessingConfiguration
 
 	// The point at which you want Kinesis Data Analytics to start reading records
-	// from the specified streaming source discovery purposes.
+	// from the specified streaming source for discovery purposes.
 	InputStartingPositionConfiguration *types.InputStartingPositionConfiguration
 
 	// The Amazon Resource Name (ARN) of the streaming source.
@@ -105,25 +106,25 @@ func (c *Client) addOperationDiscoverInputSchemaMiddlewares(stack *middleware.St
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -138,13 +139,16 @@ func (c *Client) addOperationDiscoverInputSchemaMiddlewares(stack *middleware.St
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDiscoverInputSchemaValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDiscoverInputSchema(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

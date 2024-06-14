@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/computeoptimizer/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -14,11 +13,12 @@ import (
 )
 
 // Returns the enrollment (opt in) status of an account to the Compute Optimizer
-// service. If the account is the management account of an organization, this
-// action also confirms the enrollment status of member accounts of the
-// organization. Use the GetEnrollmentStatusesForOrganization action to get
-// detailed information about the enrollment status of member accounts of an
-// organization.
+// service.
+//
+// If the account is the management account of an organization, this action also
+// confirms the enrollment status of member accounts of the organization. Use the GetEnrollmentStatusesForOrganization
+// action to get detailed information about the enrollment status of member
+// accounts of an organization.
 func (c *Client) GetEnrollmentStatus(ctx context.Context, params *GetEnrollmentStatusInput, optFns ...func(*Options)) (*GetEnrollmentStatusOutput, error) {
 	if params == nil {
 		params = &GetEnrollmentStatusInput{}
@@ -55,9 +55,10 @@ type GetEnrollmentStatusOutput struct {
 	// The enrollment status of the account.
 	Status types.Status
 
-	// The reason for the enrollment status of the account. For example, an account
-	// might show a status of Pending because member accounts of an organization
-	// require more time to be enrolled in the service.
+	// The reason for the enrollment status of the account.
+	//
+	// For example, an account might show a status of Pending because member accounts
+	// of an organization require more time to be enrolled in the service.
 	StatusReason *string
 
 	// Metadata pertaining to the operation's result.
@@ -88,25 +89,25 @@ func (c *Client) addOperationGetEnrollmentStatusMiddlewares(stack *middleware.St
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -121,10 +122,13 @@ func (c *Client) addOperationGetEnrollmentStatusMiddlewares(stack *middleware.St
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetEnrollmentStatus(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

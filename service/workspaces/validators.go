@@ -10,6 +10,26 @@ import (
 	"github.com/aws/smithy-go/middleware"
 )
 
+type validateOpAcceptAccountLinkInvitation struct {
+}
+
+func (*validateOpAcceptAccountLinkInvitation) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpAcceptAccountLinkInvitation) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*AcceptAccountLinkInvitationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpAcceptAccountLinkInvitationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpAssociateConnectionAlias struct {
 }
 
@@ -105,6 +125,26 @@ func (m *validateOpCopyWorkspaceImage) HandleInitialize(ctx context.Context, in 
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpCopyWorkspaceImageInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpCreateAccountLinkInvitation struct {
+}
+
+func (*validateOpCreateAccountLinkInvitation) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateAccountLinkInvitation) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateAccountLinkInvitationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateAccountLinkInvitationInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -285,6 +325,26 @@ func (m *validateOpCreateWorkspaces) HandleInitialize(ctx context.Context, in mi
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpCreateWorkspacesInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteAccountLinkInvitation struct {
+}
+
+func (*validateOpDeleteAccountLinkInvitation) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteAccountLinkInvitation) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteAccountLinkInvitationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteAccountLinkInvitationInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -1030,6 +1090,26 @@ func (m *validateOpRegisterWorkspaceDirectory) HandleInitialize(ctx context.Cont
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpRejectAccountLinkInvitation struct {
+}
+
+func (*validateOpRejectAccountLinkInvitation) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpRejectAccountLinkInvitation) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*RejectAccountLinkInvitationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpRejectAccountLinkInvitationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpRestoreWorkspace struct {
 }
 
@@ -1210,6 +1290,10 @@ func (m *validateOpUpdateWorkspaceImagePermission) HandleInitialize(ctx context.
 	return next.HandleInitialize(ctx, in)
 }
 
+func addOpAcceptAccountLinkInvitationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpAcceptAccountLinkInvitation{}, middleware.After)
+}
+
 func addOpAssociateConnectionAliasValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpAssociateConnectionAlias{}, middleware.After)
 }
@@ -1228,6 +1312,10 @@ func addOpAuthorizeIpRulesValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpCopyWorkspaceImageValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCopyWorkspaceImage{}, middleware.After)
+}
+
+func addOpCreateAccountLinkInvitationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateAccountLinkInvitation{}, middleware.After)
 }
 
 func addOpCreateConnectClientAddInValidationMiddleware(stack *middleware.Stack) error {
@@ -1264,6 +1352,10 @@ func addOpCreateWorkspaceImageValidationMiddleware(stack *middleware.Stack) erro
 
 func addOpCreateWorkspacesValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateWorkspaces{}, middleware.After)
+}
+
+func addOpDeleteAccountLinkInvitationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteAccountLinkInvitation{}, middleware.After)
 }
 
 func addOpDeleteClientBrandingValidationMiddleware(stack *middleware.Stack) error {
@@ -1412,6 +1504,10 @@ func addOpRebuildWorkspacesValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpRegisterWorkspaceDirectoryValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpRegisterWorkspaceDirectory{}, middleware.After)
+}
+
+func addOpRejectAccountLinkInvitationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpRejectAccountLinkInvitation{}, middleware.After)
 }
 
 func addOpRestoreWorkspaceValidationMiddleware(stack *middleware.Stack) error {
@@ -1679,6 +1775,21 @@ func validateWorkspaceRequestList(v []types.WorkspaceRequest) error {
 	}
 }
 
+func validateOpAcceptAccountLinkInvitationInput(v *AcceptAccountLinkInvitationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AcceptAccountLinkInvitationInput"}
+	if v.LinkId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("LinkId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpAssociateConnectionAliasInput(v *AssociateConnectionAliasInput) error {
 	if v == nil {
 		return nil
@@ -1769,6 +1880,21 @@ func validateOpCopyWorkspaceImageInput(v *CopyWorkspaceImageInput) error {
 		if err := validateTagList(v.Tags); err != nil {
 			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateAccountLinkInvitationInput(v *CreateAccountLinkInvitationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateAccountLinkInvitationInput"}
+	if v.TargetAccountId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TargetAccountId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1977,6 +2103,21 @@ func validateOpCreateWorkspacesInput(v *CreateWorkspacesInput) error {
 		if err := validateWorkspaceRequestList(v.Workspaces); err != nil {
 			invalidParams.AddNested("Workspaces", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteAccountLinkInvitationInput(v *DeleteAccountLinkInvitationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteAccountLinkInvitationInput"}
+	if v.LinkId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("LinkId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2607,6 +2748,21 @@ func validateOpRegisterWorkspaceDirectoryInput(v *RegisterWorkspaceDirectoryInpu
 		if err := validateTagList(v.Tags); err != nil {
 			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpRejectAccountLinkInvitationInput(v *RejectAccountLinkInvitationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RejectAccountLinkInvitationInput"}
+	if v.LinkId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("LinkId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

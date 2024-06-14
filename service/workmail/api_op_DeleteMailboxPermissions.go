@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -29,24 +28,32 @@ func (c *Client) DeleteMailboxPermissions(ctx context.Context, params *DeleteMai
 
 type DeleteMailboxPermissionsInput struct {
 
-	// The identifier of the entity that owns the mailbox. The identifier can be
-	// UserId or Group Id, Username or Groupname, or email.
+	// The identifier of the entity that owns the mailbox.
+	//
+	// The identifier can be UserId or Group Id, Username or Groupname, or email.
+	//
 	//   - Entity ID: 12345678-1234-1234-1234-123456789012,
 	//   r-0123456789a0123456789b0123456789, or
 	//   S-1-1-12-1234567890-123456789-123456789-1234
+	//
 	//   - Email address: entity@domain.tld
+	//
 	//   - Entity name: entity
 	//
 	// This member is required.
 	EntityId *string
 
-	// The identifier of the entity for which to delete granted permissions. The
-	// identifier can be UserId, ResourceID, or Group Id, Username or Groupname, or
-	// email.
+	// The identifier of the entity for which to delete granted permissions.
+	//
+	// The identifier can be UserId, ResourceID, or Group Id, Username or Groupname,
+	// or email.
+	//
 	//   - Grantee ID:
 	//   12345678-1234-1234-1234-123456789012,r-0123456789a0123456789b0123456789, or
 	//   S-1-1-12-1234567890-123456789-123456789-1234
+	//
 	//   - Email address: grantee@domain.tld
+	//
 	//   - Grantee name: grantee
 	//
 	// This member is required.
@@ -90,25 +97,25 @@ func (c *Client) addOperationDeleteMailboxPermissionsMiddlewares(stack *middlewa
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -123,13 +130,16 @@ func (c *Client) addOperationDeleteMailboxPermissionsMiddlewares(stack *middlewa
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDeleteMailboxPermissionsValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteMailboxPermissions(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

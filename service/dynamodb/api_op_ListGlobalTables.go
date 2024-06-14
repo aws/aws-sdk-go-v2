@@ -6,22 +6,22 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/dynamodb/types"
 	internalEndpointDiscovery "github.com/aws/aws-sdk-go-v2/service/internal/endpoint-discovery"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists all global tables that have a replica in the specified Region. This
-// operation only applies to Version 2017.11.29 (Legacy) (https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/globaltables.V1.html)
-// of global tables. We recommend using Version 2019.11.21 (Current) (https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/globaltables.V2.html)
-// when creating new global tables, as it provides greater flexibility, higher
+// Lists all global tables that have a replica in the specified Region.
+//
+// For global tables, this operation only applies to global tables using Version
+// 2019.11.21 (Current version), as it provides greater flexibility, higher
 // efficiency and consumes less write capacity than 2017.11.29 (Legacy). To
-// determine which version you are using, see Determining the version (https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/globaltables.DetermineVersion.html)
-// . To update existing global tables from version 2017.11.29 (Legacy) to version
-// 2019.11.21 (Current), see Updating global tables (https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/V2globaltables_upgrade.html)
-// .
+// determine which version you are using, see [Determining the version]. To update existing global tables
+// from version 2017.11.29 (Legacy) to version 2019.11.21 (Current), see [Updating global tables].
+//
+// [Updating global tables]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/V2globaltables_upgrade.html
+// [Determining the version]: https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/globaltables.DetermineVersion.html
 func (c *Client) ListGlobalTables(ctx context.Context, params *ListGlobalTablesInput, optFns ...func(*Options)) (*ListGlobalTablesOutput, error) {
 	if params == nil {
 		params = &ListGlobalTablesInput{}
@@ -43,10 +43,12 @@ type ListGlobalTablesInput struct {
 	ExclusiveStartGlobalTableName *string
 
 	// The maximum number of table names to return, if the parameter is not specified
-	// DynamoDB defaults to 100. If the number of global tables DynamoDB finds reaches
-	// this limit, it stops the operation and returns the table names collected up to
-	// that point, with a table name in the LastEvaluatedGlobalTableName to apply in a
-	// subsequent operation to the ExclusiveStartGlobalTableName parameter.
+	// DynamoDB defaults to 100.
+	//
+	// If the number of global tables DynamoDB finds reaches this limit, it stops the
+	// operation and returns the table names collected up to that point, with a table
+	// name in the LastEvaluatedGlobalTableName to apply in a subsequent operation to
+	// the ExclusiveStartGlobalTableName parameter.
 	Limit *int32
 
 	// Lists the global tables in a specific Region.
@@ -91,25 +93,25 @@ func (c *Client) addOperationListGlobalTablesMiddlewares(stack *middleware.Stack
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -127,10 +129,13 @@ func (c *Client) addOperationListGlobalTablesMiddlewares(stack *middleware.Stack
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListGlobalTables(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

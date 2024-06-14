@@ -6,18 +6,17 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/iam/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Adds one or more tags to a Security Assertion Markup Language (SAML) identity
-// provider. For more information about these providers, see About SAML 2.0-based
-// federation  (https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_providers_saml.html)
-// . If a tag with the same key name already exists, then that tag is overwritten
-// with the new value. A tag consists of a key name and an associated value. By
-// assigning tags to your resources, you can do the following:
+// provider. For more information about these providers, see [About SAML 2.0-based federation]. If a tag with the
+// same key name already exists, then that tag is overwritten with the new value.
+//
+// A tag consists of a key name and an associated value. By assigning tags to your
+// resources, you can do the following:
 //
 //   - Administrative grouping and discovery - Attach tags to resources to aid in
 //     organization and search. For example, you could search for all resources with
@@ -27,17 +26,19 @@ import (
 //   - Access control - Include tags in IAM user-based and resource-based
 //     policies. You can use tags to restrict access to only a SAML identity provider
 //     that has a specified tag attached. For examples of policies that show how to use
-//     tags to control access, see Control access using IAM tags (https://docs.aws.amazon.com/IAM/latest/UserGuide/access_tags.html)
-//     in the IAM User Guide.
+//     tags to control access, see [Control access using IAM tags]in the IAM User Guide.
 //
 //   - If any one of the tags is invalid or if you exceed the allowed maximum
 //     number of tags, then the entire request fails and the resource is not created.
-//     For more information about tagging, see Tagging IAM resources (https://docs.aws.amazon.com/IAM/latest/UserGuide/id_tags.html)
-//     in the IAM User Guide.
+//     For more information about tagging, see [Tagging IAM resources]in the IAM User Guide.
 //
 //   - Amazon Web Services always interprets the tag Value as a single string. If
 //     you need to store an array, you can store comma-separated values in the string.
 //     However, you must interpret the value in your code.
+//
+// [Control access using IAM tags]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access_tags.html
+// [About SAML 2.0-based federation]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_providers_saml.html
+// [Tagging IAM resources]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_tags.html
 func (c *Client) TagSAMLProvider(ctx context.Context, params *TagSAMLProviderInput, optFns ...func(*Options)) (*TagSAMLProviderOutput, error) {
 	if params == nil {
 		params = &TagSAMLProviderInput{}
@@ -56,10 +57,12 @@ func (c *Client) TagSAMLProvider(ctx context.Context, params *TagSAMLProviderInp
 type TagSAMLProviderInput struct {
 
 	// The ARN of the SAML identity provider in IAM to which you want to add tags.
-	// This parameter allows (through its regex pattern (http://wikipedia.org/wiki/regex)
-	// ) a string of characters consisting of upper and lowercase alphanumeric
-	// characters with no spaces. You can also include any of the following characters:
-	// _+=,.@-
+	//
+	// This parameter allows (through its [regex pattern]) a string of characters consisting of upper
+	// and lowercase alphanumeric characters with no spaces. You can also include any
+	// of the following characters: _+=,.@-
+	//
+	// [regex pattern]: http://wikipedia.org/wiki/regex
 	//
 	// This member is required.
 	SAMLProviderArn *string
@@ -102,25 +105,25 @@ func (c *Client) addOperationTagSAMLProviderMiddlewares(stack *middleware.Stack,
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -135,13 +138,16 @@ func (c *Client) addOperationTagSAMLProviderMiddlewares(stack *middleware.Stack,
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpTagSAMLProviderValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opTagSAMLProvider(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/osis/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -14,8 +13,9 @@ import (
 
 // Retrieves information about a specific blueprint for OpenSearch Ingestion.
 // Blueprints are templates for the configuration needed for a CreatePipeline
-// request. For more information, see Using blueprints to create a pipeline (https://docs.aws.amazon.com/opensearch-service/latest/developerguide/creating-pipeline.html#pipeline-blueprint)
-// .
+// request. For more information, see [Using blueprints to create a pipeline].
+//
+// [Using blueprints to create a pipeline]: https://docs.aws.amazon.com/opensearch-service/latest/developerguide/creating-pipeline.html#pipeline-blueprint
 func (c *Client) GetPipelineBlueprint(ctx context.Context, params *GetPipelineBlueprintInput, optFns ...func(*Options)) (*GetPipelineBlueprintOutput, error) {
 	if params == nil {
 		params = &GetPipelineBlueprintInput{}
@@ -38,6 +38,9 @@ type GetPipelineBlueprintInput struct {
 	// This member is required.
 	BlueprintName *string
 
+	// The format format of the blueprint to retrieve.
+	Format *string
+
 	noSmithyDocumentSerde
 }
 
@@ -45,6 +48,9 @@ type GetPipelineBlueprintOutput struct {
 
 	// The requested blueprint in YAML format.
 	Blueprint *types.PipelineBlueprint
+
+	// The format of the blueprint.
+	Format *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -74,25 +80,25 @@ func (c *Client) addOperationGetPipelineBlueprintMiddlewares(stack *middleware.S
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -107,13 +113,16 @@ func (c *Client) addOperationGetPipelineBlueprintMiddlewares(stack *middleware.S
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpGetPipelineBlueprintValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetPipelineBlueprint(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

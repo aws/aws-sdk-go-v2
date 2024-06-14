@@ -6,14 +6,16 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/vpclattice/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates the service network and VPC association. Once you add a security group,
-// it cannot be removed.
+// Updates the service network and VPC association. If you add a security group to
+// the service network and VPC association, the association must continue to always
+// have at least one security group. You can add or edit security groups at any
+// time. However, to remove all security groups, you must first delete the
+// association and recreate it without security groups.
 func (c *Client) UpdateServiceNetworkVpcAssociation(ctx context.Context, params *UpdateServiceNetworkVpcAssociationInput, optFns ...func(*Options)) (*UpdateServiceNetworkVpcAssociationOutput, error) {
 	if params == nil {
 		params = &UpdateServiceNetworkVpcAssociationInput{}
@@ -31,8 +33,7 @@ func (c *Client) UpdateServiceNetworkVpcAssociation(ctx context.Context, params 
 
 type UpdateServiceNetworkVpcAssociationInput struct {
 
-	// The IDs of the security groups. Once you add a security group, it cannot be
-	// removed.
+	// The IDs of the security groups.
 	//
 	// This member is required.
 	SecurityGroupIds []string
@@ -92,25 +93,25 @@ func (c *Client) addOperationUpdateServiceNetworkVpcAssociationMiddlewares(stack
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -125,13 +126,16 @@ func (c *Client) addOperationUpdateServiceNetworkVpcAssociationMiddlewares(stack
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpUpdateServiceNetworkVpcAssociationValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateServiceNetworkVpcAssociation(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

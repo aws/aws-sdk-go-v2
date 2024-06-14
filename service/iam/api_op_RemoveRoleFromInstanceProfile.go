@@ -6,19 +6,22 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Removes the specified IAM role from the specified EC2 instance profile. Make
-// sure that you do not have any Amazon EC2 instances running with the role you are
-// about to remove from the instance profile. Removing a role from an instance
-// profile that is associated with a running instance might break any applications
-// running on the instance. For more information about roles, see IAM roles (https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles.html)
-// in the IAM User Guide. For more information about instance profiles, see Using
-// instance profiles (https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use_switch-role-ec2_instance-profiles.html)
-// in the IAM User Guide.
+// Removes the specified IAM role from the specified Amazon EC2 instance profile.
+//
+// Make sure that you do not have any Amazon EC2 instances running with the role
+// you are about to remove from the instance profile. Removing a role from an
+// instance profile that is associated with a running instance might break any
+// applications running on the instance.
+//
+// For more information about roles, see [IAM roles] in the IAM User Guide. For more
+// information about instance profiles, see [Using instance profiles]in the IAM User Guide.
+//
+// [Using instance profiles]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use_switch-role-ec2_instance-profiles.html
+// [IAM roles]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles.html
 func (c *Client) RemoveRoleFromInstanceProfile(ctx context.Context, params *RemoveRoleFromInstanceProfileInput, optFns ...func(*Options)) (*RemoveRoleFromInstanceProfileOutput, error) {
 	if params == nil {
 		params = &RemoveRoleFromInstanceProfileInput{}
@@ -36,18 +39,24 @@ func (c *Client) RemoveRoleFromInstanceProfile(ctx context.Context, params *Remo
 
 type RemoveRoleFromInstanceProfileInput struct {
 
-	// The name of the instance profile to update. This parameter allows (through its
-	// regex pattern (http://wikipedia.org/wiki/regex) ) a string of characters
-	// consisting of upper and lowercase alphanumeric characters with no spaces. You
-	// can also include any of the following characters: _+=,.@-
+	// The name of the instance profile to update.
+	//
+	// This parameter allows (through its [regex pattern]) a string of characters consisting of upper
+	// and lowercase alphanumeric characters with no spaces. You can also include any
+	// of the following characters: _+=,.@-
+	//
+	// [regex pattern]: http://wikipedia.org/wiki/regex
 	//
 	// This member is required.
 	InstanceProfileName *string
 
-	// The name of the role to remove. This parameter allows (through its regex pattern (http://wikipedia.org/wiki/regex)
-	// ) a string of characters consisting of upper and lowercase alphanumeric
-	// characters with no spaces. You can also include any of the following characters:
-	// _+=,.@-
+	// The name of the role to remove.
+	//
+	// This parameter allows (through its [regex pattern]) a string of characters consisting of upper
+	// and lowercase alphanumeric characters with no spaces. You can also include any
+	// of the following characters: _+=,.@-
+	//
+	// [regex pattern]: http://wikipedia.org/wiki/regex
 	//
 	// This member is required.
 	RoleName *string
@@ -84,25 +93,25 @@ func (c *Client) addOperationRemoveRoleFromInstanceProfileMiddlewares(stack *mid
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -117,13 +126,16 @@ func (c *Client) addOperationRemoveRoleFromInstanceProfileMiddlewares(stack *mid
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpRemoveRoleFromInstanceProfileValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opRemoveRoleFromInstanceProfile(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

@@ -6,25 +6,37 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/wellarchitected/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Create a new workload. The owner of a workload can share the workload with
-// other Amazon Web Services accounts, users, an organization, and organizational
-// units (OUs) in the same Amazon Web Services Region. Only the owner of a workload
-// can delete it. For more information, see Defining a Workload (https://docs.aws.amazon.com/wellarchitected/latest/userguide/define-workload.html)
-// in the Well-Architected Tool User Guide. Either AwsRegions , NonAwsRegions , or
-// both must be specified when creating a workload. You also must specify
-// ReviewOwner , even though the parameter is listed as not being required in the
-// following section. When creating a workload using a review template, you must
-// have the following IAM permissions:
+// Create a new workload.
+//
+// The owner of a workload can share the workload with other Amazon Web Services
+// accounts, users, an organization, and organizational units (OUs) in the same
+// Amazon Web Services Region. Only the owner of a workload can delete it.
+//
+// For more information, see [Defining a Workload] in the Well-Architected Tool User Guide.
+//
+// Either AwsRegions , NonAwsRegions , or both must be specified when creating a
+// workload.
+//
+// You also must specify ReviewOwner , even though the parameter is listed as not
+// being required in the following section.
+//
+// When creating a workload using a review template, you must have the following
+// IAM permissions:
+//
 //   - wellarchitected:GetReviewTemplate
+//
 //   - wellarchitected:GetReviewTemplateAnswer
+//
 //   - wellarchitected:ListReviewTemplateAnswers
+//
 //   - wellarchitected:GetReviewTemplateLensReview
+//
+// [Defining a Workload]: https://docs.aws.amazon.com/wellarchitected/latest/userguide/define-workload.html
 func (c *Client) CreateWorkload(ctx context.Context, params *CreateWorkloadInput, optFns ...func(*Options)) (*CreateWorkloadOutput, error) {
 	if params == nil {
 		params = &CreateWorkloadInput{}
@@ -44,13 +56,17 @@ func (c *Client) CreateWorkload(ctx context.Context, params *CreateWorkloadInput
 type CreateWorkloadInput struct {
 
 	// A unique case-sensitive string used to ensure that this request is idempotent
-	// (executes only once). You should not reuse the same token for other requests. If
-	// you retry a request with the same client request token and the same parameters
-	// after the original request has completed successfully, the result of the
-	// original request is returned. This token is listed as required, however, if you
-	// do not specify it, the Amazon Web Services SDKs automatically generate one for
-	// you. If you are not using the Amazon Web Services SDK or the CLI, you must
-	// provide this token or the request will fail.
+	// (executes only once).
+	//
+	// You should not reuse the same token for other requests. If you retry a request
+	// with the same client request token and the same parameters after the original
+	// request has completed successfully, the result of the original request is
+	// returned.
+	//
+	// This token is listed as required, however, if you do not specify it, the Amazon
+	// Web Services SDKs automatically generate one for you. If you are not using the
+	// Amazon Web Services SDK or the CLI, you must provide this token or the request
+	// will fail.
 	//
 	// This member is required.
 	ClientRequestToken *string
@@ -65,17 +81,19 @@ type CreateWorkloadInput struct {
 	// This member is required.
 	Environment types.WorkloadEnvironment
 
-	// The list of lenses associated with the workload. Each lens is identified by its
-	// LensSummary$LensAlias . If a review template that specifies lenses is applied to
-	// the workload, those lenses are applied to the workload in addition to these
-	// lenses.
+	// The list of lenses associated with the workload. Each lens is identified by its LensSummary$LensAlias
+	// .
+	//
+	// If a review template that specifies lenses is applied to the workload, those
+	// lenses are applied to the workload in addition to these lenses.
 	//
 	// This member is required.
 	Lenses []string
 
-	// The name of the workload. The name must be unique within an account within an
-	// Amazon Web Services Region. Spaces and capitalization are ignored when checking
-	// for uniqueness.
+	// The name of the workload.
+	//
+	// The name must be unique within an account within an Amazon Web Services Region.
+	// Spaces and capitalization are ignored when checking for uniqueness.
 	//
 	// This member is required.
 	WorkloadName *string
@@ -99,45 +117,79 @@ type CreateWorkloadInput struct {
 	// The industry for the workload.
 	Industry *string
 
-	// The industry type for the workload. If specified, must be one of the following:
+	// The industry type for the workload.
+	//
+	// If specified, must be one of the following:
+	//
 	//   - Agriculture
+	//
 	//   - Automobile
+	//
 	//   - Defense
+	//
 	//   - Design and Engineering
+	//
 	//   - Digital Advertising
+	//
 	//   - Education
+	//
 	//   - Environmental Protection
+	//
 	//   - Financial Services
+	//
 	//   - Gaming
+	//
 	//   - General Public Services
+	//
 	//   - Healthcare
+	//
 	//   - Hospitality
+	//
 	//   - InfoTech
+	//
 	//   - Justice and Public Safety
+	//
 	//   - Life Sciences
+	//
 	//   - Manufacturing
+	//
 	//   - Media & Entertainment
+	//
 	//   - Mining & Resources
+	//
 	//   - Oil & Gas
+	//
 	//   - Power & Utilities
+	//
 	//   - Professional Services
+	//
 	//   - Real Estate & Construction
+	//
 	//   - Retail & Wholesale
+	//
 	//   - Social Protection
+	//
 	//   - Telecommunications
+	//
 	//   - Travel, Transportation & Logistics
+	//
 	//   - Other
 	IndustryType *string
 
-	// The list of non-Amazon Web Services Regions associated with the workload.
+	// Jira configuration settings when creating a workload.
+	JiraConfiguration *types.WorkloadJiraConfigurationInput
+
+	//  The list of non-Amazon Web Services Regions associated with the workload.
 	NonAwsRegions []string
 
-	// The notes associated with the workload. For a review template, these are the
-	// notes that will be associated with the workload when the template is applied.
+	// The notes associated with the workload.
+	//
+	// For a review template, these are the notes that will be associated with the
+	// workload when the template is applied.
 	Notes *string
 
 	// The priorities of the pillars, which are used to order items in the improvement
-	// plan. Each pillar is represented by its PillarReviewSummary$PillarId .
+	// plan. Each pillar is represented by its PillarReviewSummary$PillarId.
 	PillarPriorities []string
 
 	// The list of profile ARNs associated with the workload.
@@ -194,25 +246,25 @@ func (c *Client) addOperationCreateWorkloadMiddlewares(stack *middleware.Stack, 
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -227,6 +279,9 @@ func (c *Client) addOperationCreateWorkloadMiddlewares(stack *middleware.Stack, 
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opCreateWorkloadMiddleware(stack, options); err != nil {
 		return err
 	}
@@ -236,7 +291,7 @@ func (c *Client) addOperationCreateWorkloadMiddlewares(stack *middleware.Stack, 
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateWorkload(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

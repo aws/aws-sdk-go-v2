@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/servicecatalog/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -30,34 +29,35 @@ func (c *Client) NotifyProvisionProductEngineWorkflowResult(ctx context.Context,
 
 type NotifyProvisionProductEngineWorkflowResultInput struct {
 
-	// The idempotency token that identifies the provisioning engine execution.
+	//  The idempotency token that identifies the provisioning engine execution.
 	//
 	// This member is required.
 	IdempotencyToken *string
 
-	// The identifier of the record.
+	//  The identifier of the record.
 	//
 	// This member is required.
 	RecordId *string
 
-	// The status of the provisioning engine execution.
+	//  The status of the provisioning engine execution.
 	//
 	// This member is required.
 	Status types.EngineWorkflowStatus
 
-	// The encrypted contents of the provisioning engine execution payload that
+	//  The encrypted contents of the provisioning engine execution payload that
 	// Service Catalog sends after the Terraform product provisioning workflow starts.
 	//
 	// This member is required.
 	WorkflowToken *string
 
-	// The reason why the provisioning engine execution failed.
+	//  The reason why the provisioning engine execution failed.
 	FailureReason *string
 
-	// The output of the provisioning engine execution.
+	//  The output of the provisioning engine execution.
 	Outputs []types.RecordOutput
 
-	// The ID for the provisioned product resources that are part of a resource group.
+	//  The ID for the provisioned product resources that are part of a resource
+	// group.
 	ResourceIdentifier *types.EngineWorkflowResourceIdentifier
 
 	noSmithyDocumentSerde
@@ -92,25 +92,25 @@ func (c *Client) addOperationNotifyProvisionProductEngineWorkflowResultMiddlewar
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -125,6 +125,9 @@ func (c *Client) addOperationNotifyProvisionProductEngineWorkflowResultMiddlewar
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opNotifyProvisionProductEngineWorkflowResultMiddleware(stack, options); err != nil {
 		return err
 	}
@@ -134,7 +137,7 @@ func (c *Client) addOperationNotifyProvisionProductEngineWorkflowResultMiddlewar
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opNotifyProvisionProductEngineWorkflowResult(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

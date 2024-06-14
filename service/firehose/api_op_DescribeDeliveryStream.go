@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/firehose/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -14,12 +13,12 @@ import (
 
 // Describes the specified delivery stream and its status. For example, after your
 // delivery stream is created, call DescribeDeliveryStream to see whether the
-// delivery stream is ACTIVE and therefore ready for data to be sent to it. If the
-// status of a delivery stream is CREATING_FAILED , this status doesn't change, and
-// you can't invoke CreateDeliveryStream again on it. However, you can invoke the
-// DeleteDeliveryStream operation to delete it. If the status is DELETING_FAILED ,
-// you can force deletion by invoking DeleteDeliveryStream again but with
-// DeleteDeliveryStreamInput$AllowForceDelete set to true.
+// delivery stream is ACTIVE and therefore ready for data to be sent to it.
+//
+// If the status of a delivery stream is CREATING_FAILED , this status doesn't
+// change, and you can't invoke CreateDeliveryStreamagain on it. However, you can invoke the DeleteDeliveryStream
+// operation to delete it. If the status is DELETING_FAILED , you can force
+// deletion by invoking DeleteDeliveryStreamagain but with DeleteDeliveryStreamInput$AllowForceDelete set to true.
 func (c *Client) DescribeDeliveryStream(ctx context.Context, params *DescribeDeliveryStreamInput, optFns ...func(*Options)) (*DescribeDeliveryStreamOutput, error) {
 	if params == nil {
 		params = &DescribeDeliveryStreamInput{}
@@ -43,7 +42,7 @@ type DescribeDeliveryStreamInput struct {
 	DeliveryStreamName *string
 
 	// The ID of the destination to start returning the destination information.
-	// Kinesis Data Firehose supports one destination per delivery stream.
+	// Firehose supports one destination per delivery stream.
 	ExclusiveStartDestinationId *string
 
 	// The limit on the number of destinations to return. You can have one destination
@@ -88,25 +87,25 @@ func (c *Client) addOperationDescribeDeliveryStreamMiddlewares(stack *middleware
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -121,13 +120,16 @@ func (c *Client) addOperationDescribeDeliveryStreamMiddlewares(stack *middleware
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDescribeDeliveryStreamValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeDeliveryStream(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

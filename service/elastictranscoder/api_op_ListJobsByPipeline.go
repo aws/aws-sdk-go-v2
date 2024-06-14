@@ -6,16 +6,17 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/elastictranscoder/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // The ListJobsByPipeline operation gets a list of the jobs currently in a
-// pipeline. Elastic Transcoder returns all of the jobs currently in the specified
-// pipeline. The response body contains one element for each job that satisfies the
-// search criteria.
+// pipeline.
+//
+// Elastic Transcoder returns all of the jobs currently in the specified pipeline.
+// The response body contains one element for each job that satisfies the search
+// criteria.
 func (c *Client) ListJobsByPipeline(ctx context.Context, params *ListJobsByPipelineInput, optFns ...func(*Options)) (*ListJobsByPipelineOutput, error) {
 	if params == nil {
 		params = &ListJobsByPipelineInput{}
@@ -39,13 +40,13 @@ type ListJobsByPipelineInput struct {
 	// This member is required.
 	PipelineId *string
 
-	// To list jobs in chronological order by the date and time that they were
+	//  To list jobs in chronological order by the date and time that they were
 	// submitted, enter true . To list jobs in reverse chronological order, enter false
 	// .
 	Ascending *string
 
-	// When Elastic Transcoder returns more than one page of results, use pageToken in
-	// subsequent GET requests to get each successive page of results.
+	//  When Elastic Transcoder returns more than one page of results, use pageToken
+	// in subsequent GET requests to get each successive page of results.
 	PageToken *string
 
 	noSmithyDocumentSerde
@@ -57,7 +58,7 @@ type ListJobsByPipelineOutput struct {
 	// An array of Job objects that are in the specified pipeline.
 	Jobs []types.Job
 
-	// A value that you use to access the second and subsequent pages of results, if
+	//  A value that you use to access the second and subsequent pages of results, if
 	// any. When the jobs in the specified pipeline fit on one page or when you've
 	// reached the last page of results, the value of NextPageToken is null .
 	NextPageToken *string
@@ -90,25 +91,25 @@ func (c *Client) addOperationListJobsByPipelineMiddlewares(stack *middleware.Sta
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -123,13 +124,16 @@ func (c *Client) addOperationListJobsByPipelineMiddlewares(stack *middleware.Sta
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpListJobsByPipelineValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListJobsByPipeline(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

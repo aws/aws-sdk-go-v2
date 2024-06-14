@@ -6,20 +6,29 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/gamelift/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// This operation is used with the Amazon GameLift FleetIQ solution and game
-// server groups. Retrieves information on a game server group. This operation
-// returns only properties related to Amazon GameLift FleetIQ. To view or update
-// properties for the corresponding Auto Scaling group, such as launch template,
-// auto scaling policies, and maximum/minimum group size, access the Auto Scaling
-// group directly. To get attributes for a game server group, provide a group name
-// or ARN value. If successful, a GameServerGroup object is returned. Learn more
-// Amazon GameLift FleetIQ Guide (https://docs.aws.amazon.com/gamelift/latest/fleetiqguide/gsg-intro.html)
+//	This operation is used with the Amazon GameLift FleetIQ solution and game
+//
+// server groups.
+//
+// Retrieves information on a game server group. This operation returns only
+// properties related to Amazon GameLift FleetIQ. To view or update properties for
+// the corresponding Auto Scaling group, such as launch template, auto scaling
+// policies, and maximum/minimum group size, access the Auto Scaling group
+// directly.
+//
+// To get attributes for a game server group, provide a group name or ARN value.
+// If successful, a GameServerGroup object is returned.
+//
+// # Learn more
+//
+// [Amazon GameLift FleetIQ Guide]
+//
+// [Amazon GameLift FleetIQ Guide]: https://docs.aws.amazon.com/gamelift/latest/fleetiqguide/gsg-intro.html
 func (c *Client) DescribeGameServerGroup(ctx context.Context, params *DescribeGameServerGroupInput, optFns ...func(*Options)) (*DescribeGameServerGroupOutput, error) {
 	if params == nil {
 		params = &DescribeGameServerGroupInput{}
@@ -79,25 +88,25 @@ func (c *Client) addOperationDescribeGameServerGroupMiddlewares(stack *middlewar
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -112,13 +121,16 @@ func (c *Client) addOperationDescribeGameServerGroupMiddlewares(stack *middlewar
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDescribeGameServerGroupValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeGameServerGroup(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

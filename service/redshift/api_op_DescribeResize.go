@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -14,9 +13,10 @@ import (
 // Returns information about the last resize operation for the specified cluster.
 // If no resize operation has ever been initiated for the specified cluster, a
 // HTTP 404 error is returned. If a resize operation was initiated and completed,
-// the status of the resize remains as SUCCEEDED until the next resize. A resize
-// operation can be requested using ModifyCluster and specifying a different
-// number or type of nodes for the cluster.
+// the status of the resize remains as SUCCEEDED until the next resize.
+//
+// A resize operation can be requested using ModifyCluster and specifying a different number or
+// type of nodes for the cluster.
 func (c *Client) DescribeResize(ctx context.Context, params *DescribeResizeInput, optFns ...func(*Options)) (*DescribeResizeOutput, error) {
 	if params == nil {
 		params = &DescribeResizeInput{}
@@ -35,8 +35,10 @@ func (c *Client) DescribeResize(ctx context.Context, params *DescribeResizeInput
 type DescribeResizeInput struct {
 
 	// The unique identifier of a cluster whose resize progress you are requesting.
-	// This parameter is case-sensitive. By default, resize operations for all clusters
-	// defined for an Amazon Web Services account are returned.
+	// This parameter is case-sensitive.
+	//
+	// By default, resize operations for all clusters defined for an Amazon Web
+	// Services account are returned.
 	//
 	// This member is required.
 	ClusterIdentifier *string
@@ -66,16 +68,19 @@ type DescribeResizeOutput struct {
 	// complete, this value will be 0.
 	EstimatedTimeToCompletionInSeconds *int64
 
-	// The names of tables that have been completely imported . Valid Values: List of
-	// table names.
+	// The names of tables that have been completely imported .
+	//
+	// Valid Values: List of table names.
 	ImportTablesCompleted []string
 
-	// The names of tables that are being currently imported. Valid Values: List of
-	// table names.
+	// The names of tables that are being currently imported.
+	//
+	// Valid Values: List of table names.
 	ImportTablesInProgress []string
 
-	// The names of tables that have not been yet imported. Valid Values: List of
-	// table names
+	// The names of tables that have not been yet imported.
+	//
+	// Valid Values: List of table names
 	ImportTablesNotStarted []string
 
 	// An optional string to provide additional details about the resize action.
@@ -92,16 +97,19 @@ type DescribeResizeOutput struct {
 	// describe the type of resize operation being performed.
 	ResizeType *string
 
-	// The status of the resize operation. Valid Values: NONE | IN_PROGRESS | FAILED |
-	// SUCCEEDED | CANCELLING
+	// The status of the resize operation.
+	//
+	// Valid Values: NONE | IN_PROGRESS | FAILED | SUCCEEDED | CANCELLING
 	Status *string
 
-	// The cluster type after the resize operation is complete. Valid Values:
-	// multi-node | single-node
+	// The cluster type after the resize operation is complete.
+	//
+	// Valid Values: multi-node | single-node
 	TargetClusterType *string
 
-	// The type of encryption for the cluster after the resize is complete. Possible
-	// values are KMS and None .
+	// The type of encryption for the cluster after the resize is complete.
+	//
+	// Possible values are KMS and None .
 	TargetEncryptionType *string
 
 	// The node type that the cluster will have after the resize operation is complete.
@@ -143,25 +151,25 @@ func (c *Client) addOperationDescribeResizeMiddlewares(stack *middleware.Stack, 
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -176,13 +184,16 @@ func (c *Client) addOperationDescribeResizeMiddlewares(stack *middleware.Stack, 
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDescribeResizeValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeResize(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

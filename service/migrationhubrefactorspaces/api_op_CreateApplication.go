@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/migrationhubrefactorspaces/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -17,13 +16,16 @@ import (
 // account that owns the environment also owns the applications created inside the
 // environment, regardless of the account that creates the application. Refactor
 // Spaces provisions an Amazon API Gateway, API Gateway VPC link, and Network Load
-// Balancer for the application proxy inside your account. In environments created
-// with a CreateEnvironment:NetworkFabricType (https://docs.aws.amazon.com/migrationhub-refactor-spaces/latest/APIReference/API_CreateEnvironment.html#migrationhubrefactorspaces-CreateEnvironment-request-NetworkFabricType)
-// of NONE you need to configure  VPC to VPC connectivity (https://docs.aws.amazon.com/whitepapers/latest/aws-vpc-connectivity-options/amazon-vpc-to-amazon-vpc-connectivity-options.html)
-// between your service VPC and the application proxy VPC to route traffic through
-// the application proxy to a service with a private URL endpoint. For more
-// information, see Create an application (https://docs.aws.amazon.com/migrationhub-refactor-spaces/latest/userguide/getting-started-create-application.html)
-// in the Refactor Spaces User Guide.
+// Balancer for the application proxy inside your account.
+//
+// In environments created with a [CreateEnvironment:NetworkFabricType] of NONE you need to configure [VPC to VPC connectivity] between your
+// service VPC and the application proxy VPC to route traffic through the
+// application proxy to a service with a private URL endpoint. For more
+// information, see [Create an application]in the Refactor Spaces User Guide.
+//
+// [VPC to VPC connectivity]: https://docs.aws.amazon.com/whitepapers/latest/aws-vpc-connectivity-options/amazon-vpc-to-amazon-vpc-connectivity-options.html
+// [Create an application]: https://docs.aws.amazon.com/migrationhub-refactor-spaces/latest/userguide/getting-started-create-application.html
+// [CreateEnvironment:NetworkFabricType]: https://docs.aws.amazon.com/migrationhub-refactor-spaces/latest/APIReference/API_CreateEnvironment.html#migrationhubrefactorspaces-CreateEnvironment-request-NetworkFabricType
 func (c *Client) CreateApplication(ctx context.Context, params *CreateApplicationInput, optFns ...func(*Options)) (*CreateApplicationOutput, error) {
 	if params == nil {
 		params = &CreateApplicationInput{}
@@ -87,8 +89,9 @@ type CreateApplicationOutput struct {
 
 	// The Amazon Resource Name (ARN) of the application. The format for this ARN is
 	// arn:aws:refactor-spaces:region:account-id:resource-type/resource-id . For more
-	// information about ARNs, see Amazon Resource Names (ARNs) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
-	// in the Amazon Web Services General Reference.
+	// information about ARNs, see [Amazon Resource Names (ARNs)]in the Amazon Web Services General Reference.
+	//
+	// [Amazon Resource Names (ARNs)]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
 	Arn *string
 
 	// The Amazon Web Services account ID of application creator.
@@ -151,25 +154,25 @@ func (c *Client) addOperationCreateApplicationMiddlewares(stack *middleware.Stac
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -184,6 +187,9 @@ func (c *Client) addOperationCreateApplicationMiddlewares(stack *middleware.Stac
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opCreateApplicationMiddleware(stack, options); err != nil {
 		return err
 	}
@@ -193,7 +199,7 @@ func (c *Client) addOperationCreateApplicationMiddlewares(stack *middleware.Stac
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateApplication(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

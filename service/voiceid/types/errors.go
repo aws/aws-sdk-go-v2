@@ -118,8 +118,9 @@ func (e *ResourceNotFoundException) ErrorCode() string {
 }
 func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The request exceeded the service quota. Refer to Voice ID Service Quotas (https://docs.aws.amazon.com/connect/latest/adminguide/amazon-connect-service-limits.html#voiceid-quotas)
-// and try your request again.
+// The request exceeded the service quota. Refer to [Voice ID Service Quotas] and try your request again.
+//
+// [Voice ID Service Quotas]: https://docs.aws.amazon.com/connect/latest/adminguide/amazon-connect-service-limits.html#voiceid-quotas
 type ServiceQuotaExceededException struct {
 	Message *string
 
@@ -146,8 +147,9 @@ func (e *ServiceQuotaExceededException) ErrorCode() string {
 func (e *ServiceQuotaExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The request was denied due to request throttling. Please slow down your request
-// rate. Refer to Amazon Connect Voice ID Service API throttling quotas  (https://docs.aws.amazon.com/connect/latest/adminguide/amazon-connect-service-limits.html##voiceid-api-quotas)
-// and try your request again.
+// rate. Refer to [Amazon Connect Voice ID Service API throttling quotas]and try your request again.
+//
+// [Amazon Connect Voice ID Service API throttling quotas]: https://docs.aws.amazon.com/connect/latest/adminguide/amazon-connect-service-limits.html##voiceid-api-quotas
 type ThrottlingException struct {
 	Message *string
 

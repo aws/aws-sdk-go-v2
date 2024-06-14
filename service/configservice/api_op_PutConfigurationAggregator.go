@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/configservice/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -14,23 +13,32 @@ import (
 
 // Creates and updates the configuration aggregator with the selected source
 // accounts and regions. The source account can be individual account(s) or an
-// organization. accountIds that are passed will be replaced with existing
-// accounts. If you want to add additional accounts into the aggregator, call
+// organization.
+//
+// accountIds that are passed will be replaced with existing accounts. If you want
+// to add additional accounts into the aggregator, call
 // DescribeConfigurationAggregators to get the previous accounts and then append
-// new ones. Config should be enabled in source accounts and regions you want to
-// aggregate. If your source type is an organization, you must be signed in to the
-// management account or a registered delegated administrator and all the features
-// must be enabled in your organization. If the caller is a management account,
-// Config calls EnableAwsServiceAccess API to enable integration between Config
-// and Organizations. If the caller is a registered delegated administrator, Config
+// new ones.
+//
+// Config should be enabled in source accounts and regions you want to aggregate.
+//
+// If your source type is an organization, you must be signed in to the management
+// account or a registered delegated administrator and all the features must be
+// enabled in your organization. If the caller is a management account, Config
+// calls EnableAwsServiceAccess API to enable integration between Config and
+// Organizations. If the caller is a registered delegated administrator, Config
 // calls ListDelegatedAdministrators API to verify whether the caller is a valid
-// delegated administrator. To register a delegated administrator, see Register a
-// Delegated Administrator (https://docs.aws.amazon.com/config/latest/developerguide/set-up-aggregator-cli.html#register-a-delegated-administrator-cli)
-// in the Config developer guide. PutConfigurationAggregator is an idempotent API.
-// Subsequent requests won’t create a duplicate resource if one was already
-// created. If a following request has different tags values, Config will ignore
-// these differences and treat it as an idempotent request of the previous. In this
-// case, tags will not be updated, even if they are different.
+// delegated administrator.
+//
+// To register a delegated administrator, see [Register a Delegated Administrator] in the Config developer guide.
+//
+// PutConfigurationAggregator is an idempotent API. Subsequent requests won’t
+// create a duplicate resource if one was already created. If a following request
+// has different tags values, Config will ignore these differences and treat it as
+// an idempotent request of the previous. In this case, tags will not be updated,
+// even if they are different.
+//
+// [Register a Delegated Administrator]: https://docs.aws.amazon.com/config/latest/developerguide/set-up-aggregator-cli.html#register-a-delegated-administrator-cli
 func (c *Client) PutConfigurationAggregator(ctx context.Context, params *PutConfigurationAggregatorInput, optFns ...func(*Options)) (*PutConfigurationAggregatorOutput, error) {
 	if params == nil {
 		params = &PutConfigurationAggregatorInput{}
@@ -98,25 +106,25 @@ func (c *Client) addOperationPutConfigurationAggregatorMiddlewares(stack *middle
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -131,13 +139,16 @@ func (c *Client) addOperationPutConfigurationAggregatorMiddlewares(stack *middle
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpPutConfigurationAggregatorValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opPutConfigurationAggregator(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

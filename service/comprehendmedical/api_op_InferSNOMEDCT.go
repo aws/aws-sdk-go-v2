@@ -6,13 +6,13 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/comprehendmedical/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// InferSNOMEDCT detects possible medical concepts as entities and links them to
+//	InferSNOMEDCT detects possible medical concepts as entities and links them to
+//
 // codes from the Systematized Nomenclature of Medicine, Clinical Terms (SNOMED-CT)
 // ontology
 func (c *Client) InferSNOMEDCT(ctx context.Context, params *InferSNOMEDCTInput, optFns ...func(*Options)) (*InferSNOMEDCTOutput, error) {
@@ -42,7 +42,7 @@ type InferSNOMEDCTInput struct {
 
 type InferSNOMEDCTOutput struct {
 
-	// The collection of medical concept entities extracted from the input text and
+	//  The collection of medical concept entities extracted from the input text and
 	// their associated information. For each entity, the response provides the entity
 	// text, the entity category, where the entity text begins and ends, and the level
 	// of confidence that Amazon Comprehend Medical has in the detection and analysis.
@@ -51,19 +51,19 @@ type InferSNOMEDCTOutput struct {
 	// This member is required.
 	Entities []types.SNOMEDCTEntity
 
-	// The number of characters in the input request documentation.
+	//  The number of characters in the input request documentation.
 	Characters *types.Characters
 
-	// The version of the model used to analyze the documents, in the format n.n.n You
-	// can use this information to track the model used for a particular batch of
+	//  The version of the model used to analyze the documents, in the format n.n.n
+	// You can use this information to track the model used for a particular batch of
 	// documents.
 	ModelVersion *string
 
-	// If the result of the request is truncated, the pagination token can be used to
+	//  If the result of the request is truncated, the pagination token can be used to
 	// fetch the next page of entities.
 	PaginationToken *string
 
-	// The details of the SNOMED-CT revision, including the edition, language, and
+	//  The details of the SNOMED-CT revision, including the edition, language, and
 	// version date.
 	SNOMEDCTDetails *types.SNOMEDCTDetails
 
@@ -95,25 +95,25 @@ func (c *Client) addOperationInferSNOMEDCTMiddlewares(stack *middleware.Stack, o
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -128,13 +128,16 @@ func (c *Client) addOperationInferSNOMEDCTMiddlewares(stack *middleware.Stack, o
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpInferSNOMEDCTValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opInferSNOMEDCT(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

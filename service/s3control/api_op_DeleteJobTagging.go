@@ -16,13 +16,23 @@ import (
 )
 
 // Removes the entire tag set from the specified S3 Batch Operations job.
+//
 // Permissions To use the DeleteJobTagging operation, you must have permission to
-// perform the s3:DeleteJobTagging action. For more information, see Controlling
-// access and labeling jobs using tags (https://docs.aws.amazon.com/AmazonS3/latest/dev/batch-ops-managing-jobs.html#batch-ops-job-tags)
-// in the Amazon S3 User Guide. Related actions include:
-//   - CreateJob (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_CreateJob.html)
-//   - GetJobTagging (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetJobTagging.html)
-//   - PutJobTagging (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_PutJobTagging.html)
+// perform the s3:DeleteJobTagging action. For more information, see [Controlling access and labeling jobs using tags] in the
+// Amazon S3 User Guide.
+//
+// Related actions include:
+//
+// [CreateJob]
+//
+// [GetJobTagging]
+//
+// [PutJobTagging]
+//
+// [Controlling access and labeling jobs using tags]: https://docs.aws.amazon.com/AmazonS3/latest/dev/batch-ops-managing-jobs.html#batch-ops-job-tags
+// [GetJobTagging]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetJobTagging.html
+// [PutJobTagging]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_PutJobTagging.html
+// [CreateJob]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_CreateJob.html
 func (c *Client) DeleteJobTagging(ctx context.Context, params *DeleteJobTaggingInput, optFns ...func(*Options)) (*DeleteJobTaggingOutput, error) {
 	if params == nil {
 		params = &DeleteJobTaggingInput{}
@@ -87,25 +97,25 @@ func (c *Client) addOperationDeleteJobTaggingMiddlewares(stack *middleware.Stack
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -123,6 +133,9 @@ func (c *Client) addOperationDeleteJobTaggingMiddlewares(stack *middleware.Stack
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addEndpointPrefix_opDeleteJobTaggingMiddleware(stack); err != nil {
 		return err
 	}
@@ -135,7 +148,7 @@ func (c *Client) addOperationDeleteJobTaggingMiddlewares(stack *middleware.Stack
 	if err = addMetadataRetrieverMiddleware(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addDeleteJobTaggingUpdateEndpoint(stack, options); err != nil {

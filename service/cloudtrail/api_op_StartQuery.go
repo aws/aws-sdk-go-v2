@@ -6,18 +6,18 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Starts a CloudTrail Lake query. Use the QueryStatement parameter to provide
 // your SQL query, enclosed in single quotation marks. Use the optional
-// DeliveryS3Uri parameter to deliver the query results to an S3 bucket. StartQuery
-// requires you specify either the QueryStatement parameter, or a QueryAlias and
-// any QueryParameters . In the current release, the QueryAlias and QueryParameters
-// parameters are used only for the queries that populate the CloudTrail Lake
-// dashboards.
+// DeliveryS3Uri parameter to deliver the query results to an S3 bucket.
+//
+// StartQuery requires you specify either the QueryStatement parameter, or a
+// QueryAlias and any QueryParameters . In the current release, the QueryAlias and
+// QueryParameters parameters are used only for the queries that populate the
+// CloudTrail Lake dashboards.
 func (c *Client) StartQuery(ctx context.Context, params *StartQueryInput, optFns ...func(*Options)) (*StartQueryOutput, error) {
 	if params == nil {
 		params = &StartQueryInput{}
@@ -35,13 +35,13 @@ func (c *Client) StartQuery(ctx context.Context, params *StartQueryInput, optFns
 
 type StartQueryInput struct {
 
-	// The URI for the S3 bucket where CloudTrail delivers the query results.
+	//  The URI for the S3 bucket where CloudTrail delivers the query results.
 	DeliveryS3Uri *string
 
-	// The alias that identifies a query template.
+	//  The alias that identifies a query template.
 	QueryAlias *string
 
-	// The query parameters for the specified QueryAlias .
+	//  The query parameters for the specified QueryAlias .
 	QueryParameters []string
 
 	// The SQL code of your query.
@@ -83,25 +83,25 @@ func (c *Client) addOperationStartQueryMiddlewares(stack *middleware.Stack, opti
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -116,10 +116,13 @@ func (c *Client) addOperationStartQueryMiddlewares(stack *middleware.Stack, opti
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opStartQuery(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

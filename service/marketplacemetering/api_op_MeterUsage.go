@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/marketplacemetering/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -14,13 +13,18 @@ import (
 )
 
 // API to emit metering records. For identical requests, the API is idempotent. It
-// simply returns the metering record ID. MeterUsage is authenticated on the
-// buyer's AWS account using credentials from the EC2 instance, ECS task, or EKS
-// pod. MeterUsage can optionally include multiple usage allocations, to provide
+// simply returns the metering record ID.
+//
+// MeterUsage is authenticated on the buyer's AWS account using credentials from
+// the EC2 instance, ECS task, or EKS pod.
+//
+// MeterUsage can optionally include multiple usage allocations, to provide
 // customers with usage data split into buckets by tags that you define (or allow
-// the customer to define). Usage records are expected to be submitted as quickly
-// as possible after the event that is being recorded, and are not accepted more
-// than 6 hours after the event.
+// the customer to define).
+//
+// Usage records are expected to be submitted as quickly as possible after the
+// event that is being recorded, and are not accepted more than 6 hours after the
+// event.
 func (c *Client) MeterUsage(ctx context.Context, params *MeterUsageInput, optFns ...func(*Options)) (*MeterUsageOutput, error) {
 	if params == nil {
 		params = &MeterUsageInput{}
@@ -64,9 +68,11 @@ type MeterUsageInput struct {
 	// false if not specified.
 	DryRun *bool
 
-	// The set of UsageAllocations to submit. The sum of all UsageAllocation
-	// quantities must equal the UsageQuantity of the MeterUsage request, and each
-	// UsageAllocation must have a unique set of tags (include no tags).
+	// The set of UsageAllocations to submit.
+	//
+	// The sum of all UsageAllocation quantities must equal the UsageQuantity of the
+	// MeterUsage request, and each UsageAllocation must have a unique set of tags
+	// (include no tags).
 	UsageAllocations []types.UsageAllocation
 
 	// Consumption value for the hour. Defaults to 0 if not specified.
@@ -108,25 +114,25 @@ func (c *Client) addOperationMeterUsageMiddlewares(stack *middleware.Stack, opti
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -141,13 +147,16 @@ func (c *Client) addOperationMeterUsageMiddlewares(stack *middleware.Stack, opti
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpMeterUsageValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opMeterUsage(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

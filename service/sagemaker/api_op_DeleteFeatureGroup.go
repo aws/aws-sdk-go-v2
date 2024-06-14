@@ -6,18 +6,20 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Delete the FeatureGroup and any data that was written to the OnlineStore of the
 // FeatureGroup . Data cannot be accessed from the OnlineStore immediately after
-// DeleteFeatureGroup is called. Data written into the OfflineStore will not be
-// deleted. The Amazon Web Services Glue database and tables that are automatically
-// created for your OfflineStore are not deleted. Note that it can take
-// approximately 10-15 minutes to delete an OnlineStore FeatureGroup with the
-// InMemory StorageType .
+// DeleteFeatureGroup is called.
+//
+// Data written into the OfflineStore will not be deleted. The Amazon Web Services
+// Glue database and tables that are automatically created for your OfflineStore
+// are not deleted.
+//
+// Note that it can take approximately 10-15 minutes to delete an OnlineStore
+// FeatureGroup with the InMemory StorageType .
 func (c *Client) DeleteFeatureGroup(ctx context.Context, params *DeleteFeatureGroupInput, optFns ...func(*Options)) (*DeleteFeatureGroupOutput, error) {
 	if params == nil {
 		params = &DeleteFeatureGroupInput{}
@@ -73,25 +75,25 @@ func (c *Client) addOperationDeleteFeatureGroupMiddlewares(stack *middleware.Sta
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -106,13 +108,16 @@ func (c *Client) addOperationDeleteFeatureGroupMiddlewares(stack *middleware.Sta
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDeleteFeatureGroupValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteFeatureGroup(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/datasync/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -39,14 +38,17 @@ type UpdateLocationAzureBlobInput struct {
 
 	// Specifies the access tier that you want your objects or files transferred into.
 	// This only applies when using the location as a transfer destination. For more
-	// information, see Access tiers (https://docs.aws.amazon.com/datasync/latest/userguide/creating-azure-blob-location.html#azure-blob-access-tiers)
-	// .
+	// information, see [Access tiers].
+	//
+	// [Access tiers]: https://docs.aws.amazon.com/datasync/latest/userguide/creating-azure-blob-location.html#azure-blob-access-tiers
 	AccessTier types.AzureAccessTier
 
 	// Specifies the Amazon Resource Name (ARN) of the DataSync agent that can connect
-	// with your Azure Blob Storage container. You can specify more than one agent. For
-	// more information, see Using multiple agents for your transfer (https://docs.aws.amazon.com/datasync/latest/userguide/multiple-agents.html)
-	// .
+	// with your Azure Blob Storage container.
+	//
+	// You can specify more than one agent. For more information, see [Using multiple agents for your transfer].
+	//
+	// [Using multiple agents for your transfer]: https://docs.aws.amazon.com/datasync/latest/userguide/multiple-agents.html
 	AgentArns []string
 
 	// Specifies the authentication method DataSync uses to access your Azure Blob
@@ -56,8 +58,9 @@ type UpdateLocationAzureBlobInput struct {
 	// Specifies the type of blob that you want your objects or files to be when
 	// transferring them into Azure Blob Storage. Currently, DataSync only supports
 	// moving data into Azure Blob Storage as block blobs. For more information on blob
-	// types, see the Azure Blob Storage documentation (https://learn.microsoft.com/en-us/rest/api/storageservices/understanding-block-blobs--append-blobs--and-page-blobs)
-	// .
+	// types, see the [Azure Blob Storage documentation].
+	//
+	// [Azure Blob Storage documentation]: https://learn.microsoft.com/en-us/rest/api/storageservices/understanding-block-blobs--append-blobs--and-page-blobs
 	BlobType types.AzureBlobType
 
 	// Specifies the SAS configuration that allows DataSync to access your Azure Blob
@@ -100,25 +103,25 @@ func (c *Client) addOperationUpdateLocationAzureBlobMiddlewares(stack *middlewar
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -133,13 +136,16 @@ func (c *Client) addOperationUpdateLocationAzureBlobMiddlewares(stack *middlewar
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpUpdateLocationAzureBlobValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateLocationAzureBlob(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

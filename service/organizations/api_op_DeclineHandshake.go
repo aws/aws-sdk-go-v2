@@ -6,19 +6,21 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/organizations/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Declines a handshake request. This sets the handshake state to DECLINED and
-// effectively deactivates the request. This operation can be called only from the
-// account that received the handshake. The originator of the handshake can use
-// CancelHandshake instead. The originator can't reactivate a declined request, but
-// can reinitiate the process with a new handshake request. After you decline a
-// handshake, it continues to appear in the results of relevant APIs for only 30
-// days. After that, it's deleted.
+// effectively deactivates the request.
+//
+// This operation can be called only from the account that received the handshake.
+// The originator of the handshake can use CancelHandshakeinstead. The originator can't
+// reactivate a declined request, but can reinitiate the process with a new
+// handshake request.
+//
+// After you decline a handshake, it continues to appear in the results of
+// relevant APIs for only 30 days. After that, it's deleted.
 func (c *Client) DeclineHandshake(ctx context.Context, params *DeclineHandshakeInput, optFns ...func(*Options)) (*DeclineHandshakeOutput, error) {
 	if params == nil {
 		params = &DeclineHandshakeInput{}
@@ -37,9 +39,12 @@ func (c *Client) DeclineHandshake(ctx context.Context, params *DeclineHandshakeI
 type DeclineHandshakeInput struct {
 
 	// The unique identifier (ID) of the handshake that you want to decline. You can
-	// get the ID from the ListHandshakesForAccount operation. The regex pattern (http://wikipedia.org/wiki/regex)
-	// for handshake ID string requires "h-" followed by from 8 to 32 lowercase letters
-	// or digits.
+	// get the ID from the ListHandshakesForAccountoperation.
+	//
+	// The [regex pattern] for handshake ID string requires "h-" followed by from 8 to 32 lowercase
+	// letters or digits.
+	//
+	// [regex pattern]: http://wikipedia.org/wiki/regex
 	//
 	// This member is required.
 	HandshakeId *string
@@ -81,25 +86,25 @@ func (c *Client) addOperationDeclineHandshakeMiddlewares(stack *middleware.Stack
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -114,13 +119,16 @@ func (c *Client) addOperationDeclineHandshakeMiddlewares(stack *middleware.Stack
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDeclineHandshakeValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDeclineHandshake(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

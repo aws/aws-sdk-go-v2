@@ -77,7 +77,7 @@
                 "parameterKey": {
                     "target": "com.amazonaws.redshiftserverless#ParameterKey",
                     "traits": {
-                        "smithy.api#documentation": "<p>The key of the parameter. The\n         options are <code>auto_mv</code>, <code>datestyle</code>, <code>enable_case_sensitive_identifier</code>, <code>enable_user_activity_logging</code>,\n         <code>query_group</code>, <code>search_path</code>, <code>require_ssl</code>, and query monitoring metrics that let \n         you define performance boundaries. For more information about query monitoring rules and available metrics, see \n         <a href=\"https://docs.aws.amazon.com/redshift/latest/dg/cm-c-wlm-query-monitoring-rules.html#cm-c-wlm-query-monitoring-metrics-serverless\">Query monitoring metrics for Amazon Redshift Serverless</a>.</p>"
+                        "smithy.api#documentation": "<p>The key of the parameter. The\n         options are <code>auto_mv</code>, <code>datestyle</code>, <code>enable_case_sensitive_identifier</code>, <code>enable_user_activity_logging</code>,\n         <code>query_group</code>, <code>search_path</code>, <code>require_ssl</code>, <code>use_fips_ssl</code>, and query monitoring metrics that let \n         you define performance boundaries. For more information about query monitoring rules and available metrics, see \n         <a href=\"https://docs.aws.amazon.com/redshift/latest/dg/cm-c-wlm-query-monitoring-rules.html#cm-c-wlm-query-monitoring-metrics-serverless\">Query monitoring metrics for Amazon Redshift Serverless</a>.</p>"
                     }
                 },
                 "parameterValue": {
@@ -543,7 +543,7 @@
                 "schedule": {
                     "target": "com.amazonaws.redshiftserverless#Schedule",
                     "traits": {
-                        "smithy.api#documentation": "<p>The schedule for a one-time (at format) or recurring (cron format) scheduled action. Schedule invocations must be separated by at least one hour.</p>\n         <p>Format of at expressions is \"<code>at(yyyy-mm-ddThh:mm:ss)</code>\". For example, \"<code>at(2016-03-04T17:27:00)</code>\".</p>\n         <p>Format of cron expressions is \"<code>cron(Minutes Hours Day-of-month Month Day-of-week Year)</code>\". For example, \"<code>cron(0 10 ? * MON *)</code>\". For more information, see \n         <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/events/ScheduledEvents.html#CronExpressions\">Cron Expressions</a> in the <i>Amazon CloudWatch Events User Guide</i>.</p>",
+                        "smithy.api#documentation": "<p>The schedule for a one-time (at timestamp format) or recurring (cron format) scheduled action. Schedule invocations must be separated by at least one hour. Times are in UTC.</p>\n         <ul>\n            <li> \n               <p>Format of at timestamp is <code>yyyy-mm-ddThh:mm:ss</code>. For example, <code>2016-03-04T17:27:00</code>.</p>\n            </li>\n            <li>\n               <p>Format of cron expression is <code>(Minutes Hours Day-of-month Month Day-of-week Year)</code>. For example, <code>\"(0 10 ? * MON *)\"</code>. For more information, see \n            <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/events/ScheduledEvents.html#CronExpressions\">Cron Expressions</a> in the <i>Amazon CloudWatch Events User Guide</i>.</p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 },
@@ -951,7 +951,7 @@
                 "configParameters": {
                     "target": "com.amazonaws.redshiftserverless#ConfigParameterList",
                     "traits": {
-                        "smithy.api#documentation": "<p>An array of parameters to set for advanced control over a database. The\n         options are <code>auto_mv</code>, <code>datestyle</code>, <code>enable_case_sensitive_identifier</code>, <code>enable_user_activity_logging</code>,\n         <code>query_group</code>, <code>search_path</code>, <code>require_ssl</code>, and query monitoring metrics that let you define performance boundaries. For more information about query monitoring rules and available metrics, see \n         <a href=\"https://docs.aws.amazon.com/redshift/latest/dg/cm-c-wlm-query-monitoring-rules.html#cm-c-wlm-query-monitoring-metrics-serverless\">\n            Query monitoring metrics for Amazon Redshift Serverless</a>.</p>"
+                        "smithy.api#documentation": "<p>An array of parameters to set for advanced control over a database. The\n         options are <code>auto_mv</code>, <code>datestyle</code>, <code>enable_case_sensitive_identifier</code>, <code>enable_user_activity_logging</code>,\n         <code>query_group</code>, <code>search_path</code>, <code>require_ssl</code>, <code>use_fips_ssl</code>, and query monitoring metrics that let you define performance boundaries. For more information about query monitoring rules and available metrics, see \n         <a href=\"https://docs.aws.amazon.com/redshift/latest/dg/cm-c-wlm-query-monitoring-rules.html#cm-c-wlm-query-monitoring-metrics-serverless\">\n            Query monitoring metrics for Amazon Redshift Serverless</a>.</p>"
                     }
                 },
                 "securityGroupIds": {
@@ -2855,7 +2855,7 @@
                 "scheduledActions": {
                     "target": "com.amazonaws.redshiftserverless#ScheduledActionsList",
                     "traits": {
-                        "smithy.api#documentation": "<p>All of the returned scheduled action objects.</p>"
+                        "smithy.api#documentation": "<p>All of the returned scheduled action association objects.</p>"
                     }
                 }
             },
@@ -5072,18 +5072,38 @@
                 "at": {
                     "target": "smithy.api#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>The timestamp of when Amazon Redshift Serverless should run the scheduled action. Format of at expressions is \"<code>at(yyyy-mm-ddThh:mm:ss)</code>\". For example, \"<code>at(2016-03-04T17:27:00)</code>\".</p>"
+                        "smithy.api#documentation": "<p>The timestamp of when Amazon Redshift Serverless should run the scheduled action. Timestamp is in UTC. Format of at expression is <code>yyyy-mm-ddThh:mm:ss</code>. For example, <code>2016-03-04T17:27:00</code>.</p>"
                     }
                 },
                 "cron": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The cron expression to use to schedule a recurring scheduled action. Schedule invocations must be separated by at least one hour.</p>\n         <p>Format of cron expressions is \"<code>cron(Minutes Hours Day-of-month Month Day-of-week Year)</code>\". For example, \"<code>cron(0 10 ? * MON *)</code>\". For more information, see \n         <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/events/ScheduledEvents.html#CronExpressions\">Cron Expressions</a> in the <i>Amazon CloudWatch Events User Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>The cron expression to use to schedule a recurring scheduled action. Schedule invocations must be separated by at least one hour. Times are in UTC.</p>\n         <p>Format of cron expressions is <code>(Minutes Hours Day-of-month Month Day-of-week Year)</code>. For example, <code>\"(0 10 ? * MON *)\"</code>. For more information, see \n         <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/events/ScheduledEvents.html#CronExpressions\">Cron Expressions</a> in the <i>Amazon CloudWatch Events User Guide</i>.</p>"
                     }
                 }
             },
             "traits": {
                 "smithy.api#documentation": "<p>The schedule of when Amazon Redshift Serverless should run the scheduled action.</p>"
+            }
+        },
+        "com.amazonaws.redshiftserverless#ScheduledActionAssociation": {
+            "type": "structure",
+            "members": {
+                "namespaceName": {
+                    "target": "com.amazonaws.redshiftserverless#NamespaceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Name of associated Amazon Redshift Serverless namespace.</p>"
+                    }
+                },
+                "scheduledActionName": {
+                    "target": "com.amazonaws.redshiftserverless#ScheduledActionName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Name of associated scheduled action.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains names of objects associated with a scheduled action.</p>"
             }
         },
         "com.amazonaws.redshiftserverless#ScheduledActionName": {
@@ -5128,7 +5148,7 @@
                 "schedule": {
                     "target": "com.amazonaws.redshiftserverless#Schedule",
                     "traits": {
-                        "smithy.api#documentation": "<p>The schedule for a one-time (at format) or recurring (cron format) scheduled action. Schedule invocations must be separated by at least one hour.</p>\n         <p>Format of at expressions is \"<code>at(yyyy-mm-ddThh:mm:ss)</code>\". For example, \"<code>at(2016-03-04T17:27:00)</code>\".</p>\n         <p>Format of cron expressions is \"<code>cron(Minutes Hours Day-of-month Month Day-of-week Year)</code>\". For example, \"<code>cron(0 10 ? * MON *)</code>\". For more information, see \n         <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/events/ScheduledEvents.html#CronExpressions\">Cron Expressions</a> in the <i>Amazon CloudWatch Events User Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>The schedule for a one-time (at timestamp format) or recurring (cron format) scheduled action. Schedule invocations must be separated by at least one hour. Times are in UTC.</p>\n         <ul>\n            <li> \n               <p>Format of at timestamp is <code>yyyy-mm-ddThh:mm:ss</code>. For example, <code>2016-03-04T17:27:00</code>.</p>\n            </li>\n            <li>\n               <p>Format of cron expression is <code>(Minutes Hours Day-of-month Month Day-of-week Year)</code>. For example, <code>\"(0 10 ? * MON *)\"</code>. For more information, see \n            <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/events/ScheduledEvents.html#CronExpressions\">Cron Expressions</a> in the <i>Amazon CloudWatch Events User Guide</i>.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "scheduledActionDescription": {
@@ -5190,7 +5210,7 @@
         "com.amazonaws.redshiftserverless#ScheduledActionsList": {
             "type": "list",
             "member": {
-                "target": "com.amazonaws.redshiftserverless#ScheduledActionName"
+                "target": "com.amazonaws.redshiftserverless#ScheduledActionAssociation"
             }
         },
         "com.amazonaws.redshiftserverless#SecurityGroupId": {
@@ -6169,7 +6189,7 @@
                 "schedule": {
                     "target": "com.amazonaws.redshiftserverless#Schedule",
                     "traits": {
-                        "smithy.api#documentation": "<p>The schedule for a one-time (at format) or recurring (cron format) scheduled action. Schedule invocations must be separated by at least one hour.</p>\n         <p>Format of at expressions is \"<code>at(yyyy-mm-ddThh:mm:ss)</code>\". For example, \"<code>at(2016-03-04T17:27:00)</code>\".</p>\n         <p>Format of cron expressions is \"<code>cron(Minutes Hours Day-of-month Month Day-of-week Year)</code>\". For example, \"<code>cron(0 10 ? * MON *)</code>\". For more information, see \n         <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/events/ScheduledEvents.html#CronExpressions\">Cron Expressions</a> in the <i>Amazon CloudWatch Events User Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>The schedule for a one-time (at timestamp format) or recurring (cron format) scheduled action. Schedule invocations must be separated by at least one hour. Times are in UTC.</p>\n         <ul>\n            <li> \n               <p>Format of at timestamp is <code>yyyy-mm-ddThh:mm:ss</code>. For example, <code>2016-03-04T17:27:00</code>.</p>\n            </li>\n            <li>\n               <p>Format of cron expression is <code>(Minutes Hours Day-of-month Month Day-of-week Year)</code>. For example, <code>\"(0 10 ? * MON *)\"</code>. For more information, see \n            <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/events/ScheduledEvents.html#CronExpressions\">Cron Expressions</a> in the <i>Amazon CloudWatch Events User Guide</i>.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "roleArn": {
@@ -6468,7 +6488,7 @@
                 "configParameters": {
                     "target": "com.amazonaws.redshiftserverless#ConfigParameterList",
                     "traits": {
-                        "smithy.api#documentation": "<p>An array of parameters to set for advanced control over a database. The\n         options are <code>auto_mv</code>, <code>datestyle</code>, <code>enable_case_sensitive_identifier</code>, <code>enable_user_activity_logging</code>,\n         <code>query_group</code>, <code>search_path</code>, <code>require_ssl</code>, and query monitoring metrics that let you \n         define performance boundaries. For more information about query monitoring rules and available metrics, see \n         <a href=\"https://docs.aws.amazon.com/redshift/latest/dg/cm-c-wlm-query-monitoring-rules.html#cm-c-wlm-query-monitoring-metrics-serverless\"> \n            Query monitoring metrics for Amazon Redshift Serverless</a>.</p>"
+                        "smithy.api#documentation": "<p>An array of parameters to set for advanced control over a database. The\n         options are <code>auto_mv</code>, <code>datestyle</code>, <code>enable_case_sensitive_identifier</code>, <code>enable_user_activity_logging</code>,\n         <code>query_group</code>, <code>search_path</code>, <code>require_ssl</code>, <code>use_fips_ssl</code>, and query monitoring metrics that let you \n         define performance boundaries. For more information about query monitoring rules and available metrics, see \n         <a href=\"https://docs.aws.amazon.com/redshift/latest/dg/cm-c-wlm-query-monitoring-rules.html#cm-c-wlm-query-monitoring-metrics-serverless\"> \n            Query monitoring metrics for Amazon Redshift Serverless</a>.</p>"
                     }
                 },
                 "publiclyAccessible": {
@@ -6787,7 +6807,7 @@
                 "configParameters": {
                     "target": "com.amazonaws.redshiftserverless#ConfigParameterList",
                     "traits": {
-                        "smithy.api#documentation": "<p>An array of parameters to set for advanced control over a database. The\n        options are <code>auto_mv</code>, <code>datestyle</code>, <code>enable_case_sensitive_identifier</code>, <code>enable_user_activity_logging</code>,\n        <code>query_group</code>, <code>search_path</code>, <code>require_ssl</code>, and query monitoring metrics that let you define performance boundaries. \n        For more information about query monitoring rules and available metrics, see <a href=\"https://docs.aws.amazon.com/redshift/latest/dg/cm-c-wlm-query-monitoring-rules.html#cm-c-wlm-query-monitoring-metrics-serverless\"> Query monitoring metrics for Amazon Redshift Serverless</a>.</p>"
+                        "smithy.api#documentation": "<p>An array of parameters to set for advanced control over a database. The\n        options are <code>auto_mv</code>, <code>datestyle</code>, <code>enable_case_sensitive_identifier</code>, <code>enable_user_activity_logging</code>,\n        <code>query_group</code>, <code>search_path</code>, <code>require_ssl</code>, <code>use_fips_ssl</code>, and query monitoring metrics that let you define performance boundaries. \n        For more information about query monitoring rules and available metrics, see <a href=\"https://docs.aws.amazon.com/redshift/latest/dg/cm-c-wlm-query-monitoring-rules.html#cm-c-wlm-query-monitoring-metrics-serverless\"> Query monitoring metrics for Amazon Redshift Serverless</a>.</p>"
                     }
                 },
                 "securityGroupIds": {
@@ -6817,7 +6837,7 @@
                 "publiclyAccessible": {
                     "target": "smithy.api#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>A value that specifies whether the workgroup \n      can be accessible from a public network</p>"
+                        "smithy.api#documentation": "<p>A value that specifies whether the workgroup can be accessible from a public network.</p>"
                     }
                 },
                 "creationDate": {

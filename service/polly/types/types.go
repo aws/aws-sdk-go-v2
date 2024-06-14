@@ -8,8 +8,9 @@ import (
 )
 
 // Provides lexicon name and lexicon content in string format. For more
-// information, see Pronunciation Lexicon Specification (PLS) Version 1.0 (https://www.w3.org/TR/pronunciation-lexicon/)
-// .
+// information, see [Pronunciation Lexicon Specification (PLS) Version 1.0].
+//
+// [Pronunciation Lexicon Specification (PLS) Version 1.0]: https://www.w3.org/TR/pronunciation-lexicon/
 type Lexicon struct {
 
 	// Lexicon content in string format. The content of a lexicon must be in PLS
@@ -23,8 +24,9 @@ type Lexicon struct {
 }
 
 // Contains metadata describing the lexicon such as the number of lexemes,
-// language code, and so on. For more information, see Managing Lexicons (https://docs.aws.amazon.com/polly/latest/dg/managing-lexicons.html)
-// .
+// language code, and so on. For more information, see [Managing Lexicons].
+//
+// [Managing Lexicons]: https://docs.aws.amazon.com/polly/latest/dg/managing-lexicons.html
 type LexiconAttributes struct {
 
 	// Phonetic alphabet used in the lexicon. Valid values are ipa and x-sampa .
@@ -68,18 +70,22 @@ type SynthesisTask struct {
 	// Timestamp for the time the synthesis task was started.
 	CreationTime *time.Time
 
-	// Specifies the engine ( standard , neural or long-form ) for Amazon Polly to use
-	// when processing input text for speech synthesis. Using a voice that is not
-	// supported for the engine selected will result in an error.
+	// Specifies the engine ( standard , neural , long-form or generative ) for Amazon
+	// Polly to use when processing input text for speech synthesis. Using a voice that
+	// is not supported for the engine selected will result in an error.
 	Engine Engine
 
 	// Optional language code for a synthesis task. This is only necessary if using a
 	// bilingual voice, such as Aditi, which can be used for either Indian English
-	// (en-IN) or Hindi (hi-IN). If a bilingual voice is used and no language code is
-	// specified, Amazon Polly uses the default language of the bilingual voice. The
-	// default language for any voice is the one returned by the DescribeVoices (https://docs.aws.amazon.com/polly/latest/dg/API_DescribeVoices.html)
-	// operation for the LanguageCode parameter. For example, if no language code is
-	// specified, Aditi will use Indian English rather than Hindi.
+	// (en-IN) or Hindi (hi-IN).
+	//
+	// If a bilingual voice is used and no language code is specified, Amazon Polly
+	// uses the default language of the bilingual voice. The default language for any
+	// voice is the one returned by the [DescribeVoices]operation for the LanguageCode parameter. For
+	// example, if no language code is specified, Aditi will use Indian English rather
+	// than Hindi.
+	//
+	// [DescribeVoices]: https://docs.aws.amazon.com/polly/latest/dg/API_DescribeVoices.html
 	LanguageCode LanguageCode
 
 	// List of one or more pronunciation lexicon names you want the service to apply
@@ -97,11 +103,14 @@ type SynthesisTask struct {
 	// Number of billable characters synthesized.
 	RequestCharacters int32
 
-	// The audio frequency specified in Hz. The valid values for mp3 and ogg_vorbis
-	// are "8000", "16000", "22050", and "24000". The default value for standard voices
-	// is "22050". The default value for neural voices is "24000". The default value
-	// for long-form voices is "24000". Valid values for pcm are "8000" and "16000" The
-	// default value is "16000".
+	// The audio frequency specified in Hz.
+	//
+	// The valid values for mp3 and ogg_vorbis are "8000", "16000", "22050", and
+	// "24000". The default value for standard voices is "22050". The default value for
+	// neural voices is "24000". The default value for long-form voices is "24000". The
+	// default value for generative voices is "24000".
+	//
+	// Valid values for pcm are "8000" and "16000" The default value is "16000".
 	SampleRate *string
 
 	// ARN for the SNS topic optionally used for providing status notification for a
@@ -135,10 +144,11 @@ type SynthesisTask struct {
 type Voice struct {
 
 	// Additional codes for languages available for the specified voice in addition to
-	// its default language. For example, the default language for Aditi is Indian
-	// English (en-IN) because it was first used for that language. Since Aditi is
-	// bilingual and fluent in both Indian English and Hindi, this parameter would show
-	// the code hi-IN .
+	// its default language.
+	//
+	// For example, the default language for Aditi is Indian English (en-IN) because
+	// it was first used for that language. Since Aditi is bilingual and fluent in both
+	// Indian English and Hindi, this parameter would show the code hi-IN .
 	AdditionalLanguageCodes []LanguageCode
 
 	// Gender of the voice.
@@ -158,8 +168,8 @@ type Voice struct {
 	// readable voice name that you might display in your application.
 	Name *string
 
-	// Specifies which engines ( standard , neural or long-form ) are supported by a
-	// given voice.
+	// Specifies which engines ( standard , neural , long-form or generative ) are
+	// supported by a given voice.
 	SupportedEngines []Engine
 
 	noSmithyDocumentSerde

@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/configservice/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -15,12 +14,17 @@ import (
 // Returns the details of one or more remediation exceptions. A detailed view of a
 // remediation exception for a set of resources that includes an explanation of an
 // exception and the time when the exception will be deleted. When you specify the
-// limit and the next token, you receive a paginated response. Config generates a
-// remediation exception when a problem occurs executing a remediation action to a
-// specific resource. Remediation exceptions blocks auto-remediation until the
-// exception is cleared. When you specify the limit and the next token, you receive
-// a paginated response. Limit and next token are not applicable if you request
-// resources in batch. It is only applicable, when you request all resources.
+// limit and the next token, you receive a paginated response.
+//
+// Config generates a remediation exception when a problem occurs executing a
+// remediation action to a specific resource. Remediation exceptions blocks
+// auto-remediation until the exception is cleared.
+//
+// When you specify the limit and the next token, you receive a paginated
+// response.
+//
+// Limit and next token are not applicable if you request resources in batch. It
+// is only applicable, when you request all resources.
 func (c *Client) DescribeRemediationExceptions(ctx context.Context, params *DescribeRemediationExceptionsInput, optFns ...func(*Options)) (*DescribeRemediationExceptionsOutput, error) {
 	if params == nil {
 		params = &DescribeRemediationExceptionsInput{}
@@ -96,25 +100,25 @@ func (c *Client) addOperationDescribeRemediationExceptionsMiddlewares(stack *mid
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -129,13 +133,16 @@ func (c *Client) addOperationDescribeRemediationExceptionsMiddlewares(stack *mid
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDescribeRemediationExceptionsValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeRemediationExceptions(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

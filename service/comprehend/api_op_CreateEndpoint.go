@@ -6,15 +6,15 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/comprehend/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates a model-specific endpoint for synchronous inference for a previously
-// trained custom model For information about endpoints, see Managing endpoints (https://docs.aws.amazon.com/comprehend/latest/dg/manage-endpoints.html)
-// .
+// trained custom model For information about endpoints, see [Managing endpoints].
+//
+// [Managing endpoints]: https://docs.aws.amazon.com/comprehend/latest/dg/manage-endpoints.html
 func (c *Client) CreateEndpoint(ctx context.Context, params *CreateEndpointInput, optFns ...func(*Options)) (*CreateEndpointOutput, error) {
 	if params == nil {
 		params = &CreateEndpointInput{}
@@ -32,9 +32,10 @@ func (c *Client) CreateEndpoint(ctx context.Context, params *CreateEndpointInput
 
 type CreateEndpointInput struct {
 
-	// The desired number of inference units to be used by the model using this
-	// endpoint. Each inference unit represents of a throughput of 100 characters per
-	// second.
+	//  The desired number of inference units to be used by the model using this
+	// endpoint.
+	//
+	// Each inference unit represents of a throughput of 100 characters per second.
 	//
 	// This member is required.
 	DesiredInferenceUnits *int32
@@ -107,25 +108,25 @@ func (c *Client) addOperationCreateEndpointMiddlewares(stack *middleware.Stack, 
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -140,6 +141,9 @@ func (c *Client) addOperationCreateEndpointMiddlewares(stack *middleware.Stack, 
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opCreateEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
@@ -149,7 +153,7 @@ func (c *Client) addOperationCreateEndpointMiddlewares(stack *middleware.Stack, 
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateEndpoint(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

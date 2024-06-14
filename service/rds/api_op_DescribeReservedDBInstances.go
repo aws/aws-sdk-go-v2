@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/rds/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -36,16 +35,19 @@ type DescribeReservedDBInstancesInput struct {
 	DBInstanceClass *string
 
 	// The duration filter value, specified in years or seconds. Specify this
-	// parameter to show only reservations for this duration. Valid Values: 1 | 3 |
-	// 31536000 | 94608000
+	// parameter to show only reservations for this duration.
+	//
+	// Valid Values: 1 | 3 | 31536000 | 94608000
 	Duration *string
 
 	// This parameter isn't currently supported.
 	Filters []types.Filter
 
 	// The lease identifier filter value. Specify this parameter to show only the
-	// reservation that matches the specified lease ID. Amazon Web Services Support
-	// might request the lease ID for an issue related to a reserved DB instance.
+	// reservation that matches the specified lease ID.
+	//
+	// Amazon Web Services Support might request the lease ID for an issue related to
+	// a reserved DB instance.
 	LeaseId *string
 
 	// An optional pagination token provided by a previous request. If this parameter
@@ -55,7 +57,10 @@ type DescribeReservedDBInstancesInput struct {
 
 	// The maximum number of records to include in the response. If more than the
 	// MaxRecords value is available, a pagination token called a marker is included in
-	// the response so you can retrieve the remaining results. Default: 100
+	// the response so you can retrieve the remaining results.
+	//
+	// Default: 100
+	//
 	// Constraints: Minimum 20, maximum 100.
 	MaxRecords *int32
 
@@ -63,8 +68,9 @@ type DescribeReservedDBInstancesInput struct {
 	MultiAZ *bool
 
 	// The offering type filter value. Specify this parameter to show only the
-	// available offerings matching the specified offering type. Valid Values:
-	// "Partial Upfront" | "All Upfront" | "No Upfront"
+	// available offerings matching the specified offering type.
+	//
+	// Valid Values: "Partial Upfront" | "All Upfront" | "No Upfront"
 	OfferingType *string
 
 	// The product description filter value. Specify this parameter to show only those
@@ -122,25 +128,25 @@ func (c *Client) addOperationDescribeReservedDBInstancesMiddlewares(stack *middl
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -155,13 +161,16 @@ func (c *Client) addOperationDescribeReservedDBInstancesMiddlewares(stack *middl
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDescribeReservedDBInstancesValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeReservedDBInstances(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -192,7 +201,10 @@ var _ DescribeReservedDBInstancesAPIClient = (*Client)(nil)
 type DescribeReservedDBInstancesPaginatorOptions struct {
 	// The maximum number of records to include in the response. If more than the
 	// MaxRecords value is available, a pagination token called a marker is included in
-	// the response so you can retrieve the remaining results. Default: 100
+	// the response so you can retrieve the remaining results.
+	//
+	// Default: 100
+	//
 	// Constraints: Minimum 20, maximum 100.
 	Limit int32
 

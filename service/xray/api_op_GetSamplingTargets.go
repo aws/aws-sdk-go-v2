@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/xray/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -44,15 +43,17 @@ type GetSamplingTargetsOutput struct {
 
 	// The last time a user changed the sampling rule configuration. If the sampling
 	// rule configuration changed since the service last retrieved it, the service
-	// should call GetSamplingRules (https://docs.aws.amazon.com/xray/latest/api/API_GetSamplingRules.html)
-	// to get the latest version.
+	// should call [GetSamplingRules]to get the latest version.
+	//
+	// [GetSamplingRules]: https://docs.aws.amazon.com/xray/latest/api/API_GetSamplingRules.html
 	LastRuleModification *time.Time
 
 	// Updated rules that the service should use to sample requests.
 	SamplingTargetDocuments []types.SamplingTargetDocument
 
-	// Information about SamplingStatisticsDocument (https://docs.aws.amazon.com/xray/latest/api/API_SamplingStatisticsDocument.html)
-	// that X-Ray could not process.
+	// Information about [SamplingStatisticsDocument] that X-Ray could not process.
+	//
+	// [SamplingStatisticsDocument]: https://docs.aws.amazon.com/xray/latest/api/API_SamplingStatisticsDocument.html
 	UnprocessedStatistics []types.UnprocessedStatistics
 
 	// Metadata pertaining to the operation's result.
@@ -83,25 +84,25 @@ func (c *Client) addOperationGetSamplingTargetsMiddlewares(stack *middleware.Sta
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -116,13 +117,16 @@ func (c *Client) addOperationGetSamplingTargetsMiddlewares(stack *middleware.Sta
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpGetSamplingTargetsValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetSamplingTargets(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

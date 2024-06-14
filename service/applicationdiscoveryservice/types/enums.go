@@ -15,8 +15,9 @@ const (
 )
 
 // Values returns all known values for AgentStatus. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (AgentStatus) Values() []AgentStatus {
 	return []AgentStatus{
 		"HEALTHY",
@@ -41,8 +42,9 @@ const (
 
 // Values returns all known values for BatchDeleteConfigurationTaskStatus. Note
 // that this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (BatchDeleteConfigurationTaskStatus) Values() []BatchDeleteConfigurationTaskStatus {
 	return []BatchDeleteConfigurationTaskStatus{
 		"INITIALIZING",
@@ -64,8 +66,9 @@ const (
 
 // Values returns all known values for BatchDeleteImportDataErrorCode. Note that
 // this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (BatchDeleteImportDataErrorCode) Values() []BatchDeleteImportDataErrorCode {
 	return []BatchDeleteImportDataErrorCode{
 		"NOT_FOUND",
@@ -85,8 +88,9 @@ const (
 )
 
 // Values returns all known values for ConfigurationItemType. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ConfigurationItemType) Values() []ConfigurationItemType {
 	return []ConfigurationItemType{
 		"SERVER",
@@ -110,8 +114,9 @@ const (
 )
 
 // Values returns all known values for ContinuousExportStatus. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ContinuousExportStatus) Values() []ContinuousExportStatus {
 	return []ContinuousExportStatus{
 		"START_IN_PROGRESS",
@@ -132,8 +137,9 @@ const (
 )
 
 // Values returns all known values for DataSource. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (DataSource) Values() []DataSource {
 	return []DataSource{
 		"AGENT",
@@ -150,8 +156,9 @@ const (
 )
 
 // Values returns all known values for DeleteAgentErrorCode. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (DeleteAgentErrorCode) Values() []DeleteAgentErrorCode {
 	return []DeleteAgentErrorCode{
 		"NOT_FOUND",
@@ -169,8 +176,9 @@ const (
 
 // Values returns all known values for DeletionConfigurationItemType. Note that
 // this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (DeletionConfigurationItemType) Values() []DeletionConfigurationItemType {
 	return []DeletionConfigurationItemType{
 		"SERVER",
@@ -185,8 +193,9 @@ const (
 )
 
 // Values returns all known values for ExportDataFormat. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ExportDataFormat) Values() []ExportDataFormat {
 	return []ExportDataFormat{
 		"CSV",
@@ -203,8 +212,9 @@ const (
 )
 
 // Values returns all known values for ExportStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ExportStatus) Values() []ExportStatus {
 	return []ExportStatus{
 		"FAILED",
@@ -231,8 +241,9 @@ const (
 )
 
 // Values returns all known values for ImportStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ImportStatus) Values() []ImportStatus {
 	return []ImportStatus{
 		"IMPORT_IN_PROGRESS",
@@ -259,8 +270,9 @@ const (
 )
 
 // Values returns all known values for ImportTaskFilterName. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ImportTaskFilterName) Values() []ImportTaskFilterName {
 	return []ImportTaskFilterName{
 		"IMPORT_TASK_ID",
@@ -278,8 +290,9 @@ const (
 )
 
 // Values returns all known values for OfferingClass. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (OfferingClass) Values() []OfferingClass {
 	return []OfferingClass{
 		"STANDARD",
@@ -296,8 +309,9 @@ const (
 )
 
 // Values returns all known values for OrderString. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (OrderString) Values() []OrderString {
 	return []OrderString{
 		"ASC",
@@ -315,8 +329,9 @@ const (
 )
 
 // Values returns all known values for PurchasingOption. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (PurchasingOption) Values() []PurchasingOption {
 	return []PurchasingOption{
 		"ALL_UPFRONT",
@@ -334,8 +349,9 @@ const (
 )
 
 // Values returns all known values for Tenancy. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (Tenancy) Values() []Tenancy {
 	return []Tenancy{
 		"DEDICATED",
@@ -352,8 +368,9 @@ const (
 )
 
 // Values returns all known values for TermLength. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (TermLength) Values() []TermLength {
 	return []TermLength{
 		"ONE_YEAR",

@@ -177,7 +177,7 @@
                     "name": "amplify"
                 },
                 "aws.protocols#restJson1": {},
-                "smithy.api#documentation": "<p>Amplify enables developers to develop and deploy cloud-powered mobile and web apps.\n            Amplify Hosting provides a continuous delivery and hosting service for web\n            applications. For more information, see the <a href=\"https://docs.aws.amazon.com/amplify/latest/userguide/welcome.html\">Amplify Hosting User Guide</a>. The\n            Amplify Framework is a comprehensive set of SDKs, libraries, tools, and documentation\n            for client app development. For more information, see the <a href=\"https://docs.amplify.aws/\">Amplify Framework.</a>\n         </p>",
+                "smithy.api#documentation": "<p>Amplify enables developers to develop and deploy cloud-powered mobile and web apps.\n            Amplify Hosting provides a continuous delivery and hosting service for web applications.\n            For more information, see the <a href=\"https://docs.aws.amazon.com/amplify/latest/userguide/welcome.html\">Amplify Hosting User Guide</a>. The\n            Amplify Framework is a comprehensive set of SDKs, libraries, tools, and documentation\n            for client app development. For more information, see the <a href=\"https://docs.amplify.aws/\">Amplify Framework.</a>\n         </p>",
                 "smithy.api#title": "AWS Amplify",
                 "smithy.api#xmlNamespace": {
                     "uri": "http://amplify.amazonaws.com"
@@ -1093,7 +1093,7 @@
                 "platform": {
                     "target": "com.amazonaws.amplify#Platform",
                     "traits": {
-                        "smithy.api#documentation": "<p>The platform for the Amplify app. For a static app, set the platform type to <code>WEB</code>.\n            For a dynamic server-side rendered (SSR) app, set the platform type to\n            <code>WEB_COMPUTE</code>. For an app requiring Amplify Hosting's original SSR support only, set the platform type to\n            <code>WEB_DYNAMIC</code>.</p>",
+                        "smithy.api#documentation": "<p>The platform for the Amplify app. For a static app, set the platform type to\n                <code>WEB</code>. For a dynamic server-side rendered (SSR) app, set the platform\n            type to <code>WEB_COMPUTE</code>. For an app requiring Amplify Hosting's original SSR\n            support only, set the platform type to <code>WEB_DYNAMIC</code>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1114,13 +1114,13 @@
                 "iamServiceRoleArn": {
                     "target": "com.amazonaws.amplify#ServiceRoleArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The AWS Identity and Access Management (IAM) service role for the Amazon Resource\n            Name (ARN) of the Amplify app. </p>"
+                        "smithy.api#documentation": "<p>The AWS Identity and Access Management (IAM) service role for the Amazon Resource Name\n            (ARN) of the Amplify app. </p>"
                     }
                 },
                 "environmentVariables": {
                     "target": "com.amazonaws.amplify#EnvironmentVariables",
                     "traits": {
-                        "smithy.api#documentation": "<p>The environment variables for the Amplify app. </p>\n         <p>For a list of the environment variables that are accessible to Amplify by default, see <a href=\"https://docs.aws.amazon.com/amplify/latest/userguide/amplify-console-environment-variables.html\">Amplify Environment variables</a> in the <i>Amplify Hosting User Guide</i>.</p>",
+                        "smithy.api#documentation": "<p>The environment variables for the Amplify app. </p>\n         <p>For a list of the environment variables that are accessible to Amplify by default, see\n                <a href=\"https://docs.aws.amazon.com/amplify/latest/userguide/amplify-console-environment-variables.html\">Amplify\n                Environment variables</a> in the <i>Amplify Hosting User\n            Guide</i>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1141,7 +1141,7 @@
                 "enableBranchAutoDeletion": {
                     "target": "com.amazonaws.amplify#EnableBranchAutoDeletion",
                     "traits": {
-                        "smithy.api#documentation": "<p>Automatically disconnect a branch in the Amplify console when you delete a branch\n            from your Git repository.</p>"
+                        "smithy.api#documentation": "<p>Automatically disconnect a branch in the Amplify console when you delete a branch from\n            your Git repository.</p>"
                     }
                 },
                 "enableBasicAuth": {
@@ -1202,12 +1202,12 @@
                 "repositoryCloneMethod": {
                     "target": "com.amazonaws.amplify#RepositoryCloneMethod",
                     "traits": {
-                        "smithy.api#documentation": "<note>\n            <p>This is for internal use.</p>\n         </note>\n         <p>The Amplify service uses this parameter to specify the authentication protocol to use to access\n            the Git repository for an Amplify app. Amplify specifies <code>TOKEN</code> for a GitHub\n            repository, <code>SIGV4</code> for an Amazon Web Services CodeCommit repository, and\n                <code>SSH</code> for GitLab and Bitbucket repositories.</p>"
+                        "smithy.api#documentation": "<note>\n            <p>This is for internal use.</p>\n         </note>\n         <p>The Amplify service uses this parameter to specify the authentication protocol to use\n            to access the Git repository for an Amplify app. Amplify specifies <code>TOKEN</code>\n            for a GitHub repository, <code>SIGV4</code> for an Amazon Web Services CodeCommit\n            repository, and <code>SSH</code> for GitLab and Bitbucket repositories.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Represents the different branches of a repository for building, deploying, and\n            hosting an Amplify app. </p>"
+                "smithy.api#documentation": "<p>Represents the different branches of a repository for building, deploying, and hosting\n            an Amplify app. </p>"
             }
         },
         "com.amazonaws.amplify#AppArn": {
@@ -1345,7 +1345,7 @@
                 "basicAuthCredentials": {
                     "target": "com.amazonaws.amplify#BasicAuthCredentials",
                     "traits": {
-                        "smithy.api#documentation": "<p>The basic authorization credentials for the autocreated branch. You must\n            base64-encode the authorization credentials and provide them in the format\n                <code>user:password</code>.</p>"
+                        "smithy.api#documentation": "<p>The basic authorization credentials for the autocreated branch. You must base64-encode\n            the authorization credentials and provide them in the format\n            <code>user:password</code>.</p>"
                     }
                 },
                 "enableBasicAuth": {
@@ -1436,7 +1436,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Describes the backend properties associated with an Amplify <code>Branch</code>.</p>"
+                "smithy.api#documentation": "<p>Describes the backend associated with an Amplify\n            <code>Branch</code>.</p>\n         <p>This property is available to Amplify Gen 2 apps only. When you deploy an application with\n            Amplify Gen 2, you provision the app's backend infrastructure using Typescript\n            code.</p>"
             }
         },
         "com.amazonaws.amplify#BackendEnvironment": {
@@ -1484,7 +1484,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Describes the backend environment for an Amplify app. </p>"
+                "smithy.api#documentation": "<p>Describes the backend environment associated with a <code>Branch</code> of a Gen 1\n                Amplify app. Amplify Gen 1 applications are created\n            using Amplify Studio or the Amplify command line\n            interface (CLI).</p>"
             }
         },
         "com.amazonaws.amplify#BackendEnvironmentArn": {
@@ -1706,7 +1706,7 @@
                 "backendEnvironmentArn": {
                     "target": "com.amazonaws.amplify#BackendEnvironmentArn",
                     "traits": {
-                        "smithy.api#documentation": "<p> The Amazon Resource Name (ARN) for a backend environment that is part of an Amplify\n            app. </p>"
+                        "smithy.api#documentation": "<p> The Amazon Resource Name (ARN) for a backend environment that is part of an Amplify app. </p>\n         <p>This property is available to Amplify Gen 1 apps only. When you deploy an application with\n            Amplify Gen 2, you provision the app's backend infrastructure using Typescript\n            code.</p>"
                     }
                 },
                 "backend": {
@@ -1759,6 +1759,81 @@
                 },
                 "smithy.api#pattern": "^(?s).+$",
                 "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.amplify#Certificate": {
+            "type": "structure",
+            "members": {
+                "type": {
+                    "target": "com.amazonaws.amplify#CertificateType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of SSL/TLS certificate that you want to use.</p>\n         <p>Specify <code>AMPLIFY_MANAGED</code> to use the default certificate that Amplify\n            provisions for you.</p>\n         <p>Specify <code>CUSTOM</code> to use your own certificate that you have already added to\n                Certificate Manager in your Amazon Web Services account. Make sure you request (or\n            import) the certificate in the US East (N. Virginia) Region (us-east-1). For more\n            information about using ACM, see <a href=\"https://docs.aws.amazon.com/acm/latest/userguide/import-certificate.html\">Importing certificates into\n                    Certificate Manager</a> in the <i>ACM User\n                guide</i> .</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "customCertificateArn": {
+                    "target": "com.amazonaws.amplify#CertificateArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon resource name (ARN) for a custom certificate that you have already added to\n                Certificate Manager in your Amazon Web Services account. </p>\n         <p>This field is required only when the certificate type is <code>CUSTOM</code>.</p>"
+                    }
+                },
+                "certificateVerificationDNSRecord": {
+                    "target": "com.amazonaws.amplify#CertificateVerificationDNSRecord",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The DNS record for certificate verification.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes the current SSL/TLS certificate that is in use for the domain. If you are\n            using <code>CreateDomainAssociation</code> to create a new domain association,\n                <code>Certificate</code> describes the new certificate that you are creating.</p>"
+            }
+        },
+        "com.amazonaws.amplify#CertificateArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 1000
+                },
+                "smithy.api#pattern": "^arn:aws:acm:[a-z0-9-]+:\\d{12}:certificate\\/.+$"
+            }
+        },
+        "com.amazonaws.amplify#CertificateSettings": {
+            "type": "structure",
+            "members": {
+                "type": {
+                    "target": "com.amazonaws.amplify#CertificateType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The certificate type.</p>\n         <p>Specify <code>AMPLIFY_MANAGED</code> to use the default certificate that Amplify\n            provisions for you.</p>\n         <p>Specify <code>CUSTOM</code> to use your own certificate that you have already added to\n                Certificate Manager in your Amazon Web Services account. Make sure you request (or\n            import) the certificate in the US East (N. Virginia) Region (us-east-1). For more\n            information about using ACM, see <a href=\"https://docs.aws.amazon.com/acm/latest/userguide/import-certificate.html\">Importing certificates into\n                    Certificate Manager</a> in the <i>ACM User\n                guide</i>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "customCertificateArn": {
+                    "target": "com.amazonaws.amplify#CertificateArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon resource name (ARN) for the custom certificate that you have already added\n            to Certificate Manager in your Amazon Web Services account.</p>\n         <p>This field is required only when the certificate type is <code>CUSTOM</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The type of SSL/TLS certificate to use for your custom domain. If a certificate type\n            isn't specified, Amplify uses the default <code>AMPLIFY_MANAGED</code>\n            certificate.</p>"
+            }
+        },
+        "com.amazonaws.amplify#CertificateType": {
+            "type": "enum",
+            "members": {
+                "AMPLIFY_MANAGED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AMPLIFY_MANAGED"
+                    }
+                },
+                "CUSTOM": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CUSTOM"
+                    }
+                }
             }
         },
         "com.amazonaws.amplify#CertificateVerificationDNSRecord": {
@@ -1868,7 +1943,7 @@
                 "platform": {
                     "target": "com.amazonaws.amplify#Platform",
                     "traits": {
-                        "smithy.api#documentation": "<p>The platform for the Amplify app. For a static app, set the platform type to <code>WEB</code>.\n            For a dynamic server-side rendered (SSR) app, set the platform type to\n            <code>WEB_COMPUTE</code>. For an app requiring Amplify Hosting's original SSR support only, set the platform type to\n            <code>WEB_DYNAMIC</code>.</p>"
+                        "smithy.api#documentation": "<p>The platform for the Amplify app. For a static app, set the platform type to\n                <code>WEB</code>. For a dynamic server-side rendered (SSR) app, set the platform\n            type to <code>WEB_COMPUTE</code>. For an app requiring Amplify Hosting's original SSR\n            support only, set the platform type to <code>WEB_DYNAMIC</code>.</p>"
                     }
                 },
                 "iamServiceRoleArn": {
@@ -1892,7 +1967,7 @@
                 "environmentVariables": {
                     "target": "com.amazonaws.amplify#EnvironmentVariables",
                     "traits": {
-                        "smithy.api#documentation": "<p>The environment variables map for an Amplify app. </p>\n         <p>For a list of the environment variables that are accessible to Amplify by default, see <a href=\"https://docs.aws.amazon.com/amplify/latest/userguide/amplify-console-environment-variables.html\">Amplify Environment variables</a> in the <i>Amplify Hosting User Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>The environment variables map for an Amplify app. </p>\n         <p>For a list of the environment variables that are accessible to Amplify by default, see\n                <a href=\"https://docs.aws.amazon.com/amplify/latest/userguide/amplify-console-environment-variables.html\">Amplify\n                Environment variables</a> in the <i>Amplify Hosting User\n            Guide</i>.</p>"
                     }
                 },
                 "enableBranchAutoBuild": {
@@ -1916,7 +1991,7 @@
                 "basicAuthCredentials": {
                     "target": "com.amazonaws.amplify#BasicAuthCredentials",
                     "traits": {
-                        "smithy.api#documentation": "<p>The credentials for basic authorization for an Amplify app. You must base64-encode\n            the authorization credentials and provide them in the format\n            <code>user:password</code>.</p>"
+                        "smithy.api#documentation": "<p>The credentials for basic authorization for an Amplify app. You must base64-encode the\n            authorization credentials and provide them in the format\n            <code>user:password</code>.</p>"
                     }
                 },
                 "customRules": {
@@ -2007,7 +2082,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a new backend environment for an Amplify app. </p>",
+                "smithy.api#documentation": "<p>Creates a new backend environment for an Amplify app. </p>\n         <p>This API is available only to Amplify Gen 1 applications where the\n            backend is created using Amplify Studio or the Amplify\n            command line interface (CLI). This API isn’t available to Amplify Gen 2 applications. \n            When you deploy an application with\n            Amplify Gen 2, you provision the app's backend infrastructure using Typescript\n            code.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/apps/{appId}/backendenvironments",
@@ -2215,13 +2290,13 @@
                 "backendEnvironmentArn": {
                     "target": "com.amazonaws.amplify#BackendEnvironmentArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) for a backend environment that is part of an Amplify\n            app. </p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) for a backend environment that is part of a Gen 1 Amplify\n            app. </p>\n         <p>This field is available to Amplify Gen 1 apps only where the\n            backend is created using Amplify Studio or the Amplify\n            command line interface (CLI).</p>"
                     }
                 },
                 "backend": {
                     "target": "com.amazonaws.amplify#Backend",
                     "traits": {
-                        "smithy.api#documentation": "<p>The backend for a <code>Branch</code> of an Amplify app. Use for a backend created from an CloudFormation stack.</p>"
+                        "smithy.api#documentation": "<p>The backend for a <code>Branch</code> of an Amplify app. Use for a\n            backend created from an CloudFormation stack.</p>\n         <p>This field is available to Amplify Gen 2 apps only. When you deploy an application with\n            Amplify Gen 2, you provision the app's backend infrastructure using Typescript\n            code.</p>"
                     }
                 }
             },
@@ -2269,7 +2344,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a deployment for a manually deployed Amplify app. Manually deployed apps are\n            not connected to a repository. </p>\n         <p>The maximum duration between the <code>CreateDeployment</code> call and the\n            <code>StartDeployment</code> call cannot exceed 8 hours. If the duration exceeds 8 hours, the\n            <code>StartDeployment</code> call and the associated <code>Job</code> will\n            fail.</p>",
+                "smithy.api#documentation": "<p>Creates a deployment for a manually deployed Amplify app. Manually deployed apps are\n            not connected to a repository. </p>\n         <p>The maximum duration between the <code>CreateDeployment</code> call and the\n                <code>StartDeployment</code> call cannot exceed 8 hours. If the duration exceeds 8\n            hours, the <code>StartDeployment</code> call and the associated <code>Job</code> will\n            fail.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/apps/{appId}/branches/{branchName}/deployments",
@@ -2366,7 +2441,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p> Creates a new domain association for an Amplify app. This action associates a custom\n            domain with the Amplify app </p>",
+                "smithy.api#documentation": "<p>Creates a new domain association for an Amplify app. This action associates a custom\n            domain with the Amplify app </p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/apps/{appId}/domains",
@@ -2415,6 +2490,12 @@
                     "target": "com.amazonaws.amplify#AutoSubDomainIAMRole",
                     "traits": {
                         "smithy.api#documentation": "<p> The required AWS Identity and Access Management (IAM) service role for the Amazon\n            Resource Name (ARN) for automatically creating subdomains. </p>"
+                    }
+                },
+                "certificateSettings": {
+                    "target": "com.amazonaws.amplify#CertificateSettings",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of SSL/TLS certificate to use for your custom domain. If you don't specify a\n            certificate type, Amplify uses the default certificate that it provisions and manages\n            for you.</p>"
                     }
                 }
             },
@@ -2576,7 +2657,7 @@
                 "status": {
                     "target": "com.amazonaws.amplify#Status",
                     "traits": {
-                        "smithy.api#documentation": "<p>The status code for a URL rewrite or redirect rule. </p>\n         <dl>\n            <dt>200</dt>\n            <dd>\n               <p>Represents a 200 rewrite rule.</p>\n            </dd>\n            <dt>301</dt>\n            <dd>\n               <p>Represents a 301 (moved pemanently) redirect rule. This and all future\n                        requests should be directed to the target URL. </p>\n            </dd>\n            <dt>302</dt>\n            <dd>\n               <p>Represents a 302 temporary redirect rule.</p>\n            </dd>\n            <dt>404</dt>\n            <dd>\n               <p>Represents a 404 redirect rule.</p>\n            </dd>\n            <dt>404-200</dt>\n            <dd>\n               <p>Represents a 404 rewrite rule.</p>\n            </dd>\n         </dl>"
+                        "smithy.api#documentation": "<p>The status code for a URL rewrite or redirect rule. </p>\n         <dl>\n            <dt>200</dt>\n            <dd>\n               <p>Represents a 200 rewrite rule.</p>\n            </dd>\n            <dt>301</dt>\n            <dd>\n               <p>Represents a 301 (moved permanently) redirect rule. This and all future\n                        requests should be directed to the target URL. </p>\n            </dd>\n            <dt>302</dt>\n            <dd>\n               <p>Represents a 302 temporary redirect rule.</p>\n            </dd>\n            <dt>404</dt>\n            <dd>\n               <p>Represents a 404 redirect rule.</p>\n            </dd>\n            <dt>404-200</dt>\n            <dd>\n               <p>Represents a 404 rewrite rule.</p>\n            </dd>\n         </dl>"
                     }
                 },
                 "condition": {
@@ -2706,7 +2787,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes a backend environment for an Amplify app. </p>",
+                "smithy.api#documentation": "<p>Deletes a backend environment for an Amplify app. </p>\n         <p>This API is available only to Amplify Gen 1 applications where the\n            backend is created using Amplify Studio or the Amplify\n            command line interface (CLI). This API isn’t available to Amplify Gen 2 applications. \n            When you deploy an application with\n            Amplify Gen 2, you provision the app's backend infrastructure using Typescript\n            code.</p>",
                 "smithy.api#http": {
                     "method": "DELETE",
                     "uri": "/apps/{appId}/backendenvironments/{environmentName}",
@@ -2856,7 +2937,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p> Deletes a domain association for an Amplify app. </p>",
+                "smithy.api#documentation": "<p>Deletes a domain association for an Amplify app. </p>",
                 "smithy.api#http": {
                     "method": "DELETE",
                     "uri": "/apps/{appId}/domains/{domainName}",
@@ -3138,10 +3219,16 @@
                         "smithy.api#required": {}
                     }
                 },
+                "updateStatus": {
+                    "target": "com.amazonaws.amplify#UpdateStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the domain update operation that is currently in progress. The following\n            list describes the valid update states.</p>\n         <dl>\n            <dt>REQUESTING_CERTIFICATE</dt>\n            <dd>\n               <p>The certificate is in the process of being updated.</p>\n            </dd>\n            <dt>PENDING_VERIFICATION</dt>\n            <dd>\n               <p>Indicates that an Amplify managed certificate is in the\n                        process of being verified. This occurs during the creation of a custom\n                        domain or when a custom domain is updated to use a managed\n                        certificate.</p>\n            </dd>\n            <dt>IMPORTING_CUSTOM_CERTIFICATE</dt>\n            <dd>\n               <p>Indicates that an Amplify custom certificate is in the\n                        process of being imported. This occurs during the creation of a custom\n                        domain or when a custom domain is updated to use a custom\n                        certificate.</p>\n            </dd>\n            <dt>PENDING_DEPLOYMENT</dt>\n            <dd>\n               <p>Indicates that the subdomain or certificate changes are being\n                        propagated.</p>\n            </dd>\n            <dt>AWAITING_APP_CNAME</dt>\n            <dd>\n               <p>Amplify is waiting for CNAME records corresponding to\n                        subdomains to be propagated. If your custom domain is on Route 53,\n                            Amplify handles this for you automatically. For more\n                        information about custom domains, see <a href=\"https://docs.aws.amazon.com/amplify/latest/userguide/custom-domains.html\">Setting up custom\n                            domains</a> in the <i>Amplify Hosting User\n                            Guide</i>. </p>\n            </dd>\n            <dt>UPDATE_COMPLETE</dt>\n            <dd>\n               <p>The certificate has been associated with a domain.</p>\n            </dd>\n            <dt>UPDATE_FAILED</dt>\n            <dd>\n               <p>The certificate has failed to be provisioned or associated, and there is\n                        no existing active certificate to roll back to.</p>\n            </dd>\n         </dl>"
+                    }
+                },
                 "statusReason": {
                     "target": "com.amazonaws.amplify#StatusReason",
                     "traits": {
-                        "smithy.api#documentation": "<p> The reason for the current status of the domain association. </p>",
+                        "smithy.api#documentation": "<p> Additional information that describes why the domain association is in the current\n            state.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -3157,10 +3244,16 @@
                         "smithy.api#documentation": "<p> The subdomains for the domain association. </p>",
                         "smithy.api#required": {}
                     }
+                },
+                "certificate": {
+                    "target": "com.amazonaws.amplify#Certificate",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Describes the SSL/TLS certificate for the domain association. This can be your own\n            custom certificate or the default certificate that Amplify provisions for\n            you.</p>\n         <p>If you are updating your domain to use a different certificate,\n                <code>certificate</code> points to the new certificate that is being created instead\n            of the current active certificate. Otherwise, <code>certificate</code> points to the\n            current active certificate.</p>"
+                    }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p> Describes a domain association that associates a custom domain with an Amplify app.\n        </p>"
+                "smithy.api#documentation": "<p>Describes the association between a custom domain and an Amplify app. </p>"
             }
         },
         "com.amazonaws.amplify#DomainAssociationArn": {
@@ -3225,10 +3318,22 @@
                         "smithy.api#enumValue": "AVAILABLE"
                     }
                 },
+                "IMPORTING_CUSTOM_CERTIFICATE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IMPORTING_CUSTOM_CERTIFICATE"
+                    }
+                },
                 "PENDING_DEPLOYMENT": {
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "PENDING_DEPLOYMENT"
+                    }
+                },
+                "AWAITING_APP_CNAME": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AWAITING_APP_CNAME"
                     }
                 },
                 "FAILED": {
@@ -3614,7 +3719,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns a backend environment for an Amplify app. </p>",
+                "smithy.api#documentation": "<p>Returns a backend environment for an Amplify app. </p>\n         <p>This API is available only to Amplify Gen 1 applications where the\n            backend is created using Amplify Studio or the Amplify\n            command line interface (CLI). This API isn’t available to Amplify Gen 2 applications. \n            When you deploy an application with\n            Amplify Gen 2, you provision the app's backend infrastructure using Typescript\n            code.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/apps/{appId}/backendenvironments/{environmentName}",
@@ -3756,7 +3861,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p> Returns the domain information for an Amplify app. </p>",
+                "smithy.api#documentation": "<p>Returns the domain information for an Amplify app. </p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/apps/{appId}/domains/{domainName}",
@@ -4236,7 +4341,7 @@
                     }
                 },
                 "maxResults": {
-                    "target": "com.amazonaws.amplify#MaxResults",
+                    "target": "com.amazonaws.amplify#MaxResultsForListApps",
                     "traits": {
                         "smithy.api#default": 0,
                         "smithy.api#documentation": "<p>The maximum number of records to list in a single response. </p>",
@@ -4392,7 +4497,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Lists the backend environments for an Amplify app. </p>",
+                "smithy.api#documentation": "<p>Lists the backend environments for an Amplify app. </p>\n         <p>This API is available only to Amplify Gen 1 applications where the\n            backend is created using Amplify Studio or the Amplify\n            command line interface (CLI). This API isn’t available to Amplify Gen 2 applications. \n            When you deploy an application with\n            Amplify Gen 2, you provision the app's backend infrastructure using Typescript\n            code.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/apps/{appId}/backendenvironments",
@@ -4569,7 +4674,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p> Returns the domain associations for an Amplify app. </p>",
+                "smithy.api#documentation": "<p>Returns the domain associations for an Amplify app. </p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/apps/{appId}/domains",
@@ -4727,7 +4832,7 @@
                 "nextToken": {
                     "target": "com.amazonaws.amplify#NextToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>A pagination token. If non-null the pagination token is returned in a result. Pass\n            its value in another request to retrieve more entries. </p>"
+                        "smithy.api#documentation": "<p>A pagination token. If non-null the pagination token is returned in a result. Pass its\n            value in another request to retrieve more entries. </p>"
                     }
                 }
             },
@@ -4901,6 +5006,16 @@
             }
         },
         "com.amazonaws.amplify#MaxResults": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#default": 0,
+                "smithy.api#range": {
+                    "min": 0,
+                    "max": 50
+                }
+            }
+        },
+        "com.amazonaws.amplify#MaxResultsForListApps": {
             "type": "integer",
             "traits": {
                 "smithy.api#default": 0,
@@ -5204,7 +5319,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Starts a deployment for a manually deployed app. Manually deployed apps are not\n            connected to a repository. </p>\n         <p>The maximum duration between the <code>CreateDeployment</code> call and the\n            <code>StartDeployment</code> call cannot exceed 8 hours. If the duration exceeds 8 hours, the\n            <code>StartDeployment</code> call and the associated <code>Job</code> will\n            fail.</p>",
+                "smithy.api#documentation": "<p>Starts a deployment for a manually deployed app. Manually deployed apps are not\n            connected to a repository. </p>\n         <p>The maximum duration between the <code>CreateDeployment</code> call and the\n                <code>StartDeployment</code> call cannot exceed 8 hours. If the duration exceeds 8\n            hours, the <code>StartDeployment</code> call and the associated <code>Job</code> will\n            fail.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/apps/{appId}/branches/{branchName}/deployments/start",
@@ -5327,7 +5442,7 @@
                 "jobType": {
                     "target": "com.amazonaws.amplify#JobType",
                     "traits": {
-                        "smithy.api#documentation": "<p>Describes the type for the job. The job type <code>RELEASE</code> starts a new job\n            with the latest change from the specified branch. This value is available only for apps\n            that are connected to a repository. </p>\n         <p>The job type <code>RETRY</code> retries an existing\n            job. If the job type value is <code>RETRY</code>, the <code>jobId</code> is also\n            required. </p>",
+                        "smithy.api#documentation": "<p>Describes the type for the job. The job type <code>RELEASE</code> starts a new job\n            with the latest change from the specified branch. This value is available only for apps\n            that are connected to a repository. </p>\n         <p>The job type <code>RETRY</code> retries an existing job. If the job type value is\n                <code>RETRY</code>, the <code>jobId</code> is also required. </p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -5954,7 +6069,7 @@
                 "platform": {
                     "target": "com.amazonaws.amplify#Platform",
                     "traits": {
-                        "smithy.api#documentation": "<p>The platform for the Amplify app. For a static app, set the platform type to <code>WEB</code>.\n            For a dynamic server-side rendered (SSR) app, set the platform type to\n            <code>WEB_COMPUTE</code>. For an app requiring Amplify Hosting's original SSR support only, set the platform type to\n            <code>WEB_DYNAMIC</code>.</p>"
+                        "smithy.api#documentation": "<p>The platform for the Amplify app. For a static app, set the platform type to\n                <code>WEB</code>. For a dynamic server-side rendered (SSR) app, set the platform\n            type to <code>WEB_COMPUTE</code>. For an app requiring Amplify Hosting's original SSR\n            support only, set the platform type to <code>WEB_DYNAMIC</code>.</p>"
                     }
                 },
                 "iamServiceRoleArn": {
@@ -6209,13 +6324,13 @@
                 "backendEnvironmentArn": {
                     "target": "com.amazonaws.amplify#BackendEnvironmentArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) for a backend environment that is part of an Amplify\n            app. </p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) for a backend environment that is part of a Gen 1 Amplify\n            app. </p>\n         <p>This field is available to Amplify Gen 1 apps only where the\n            backend is created using Amplify Studio or the Amplify\n            command line interface (CLI).</p>"
                     }
                 },
                 "backend": {
                     "target": "com.amazonaws.amplify#Backend",
                     "traits": {
-                        "smithy.api#documentation": "<p>The backend for a <code>Branch</code> of an Amplify app. Use for a backend created from an CloudFormation stack.</p>"
+                        "smithy.api#documentation": "<p>The backend for a <code>Branch</code> of an Amplify app. Use for a\n            backend created from an CloudFormation stack.</p>\n         <p>This field is available to Amplify Gen 2 apps only. When you deploy an application with\n            Amplify Gen 2, you provision the app's backend infrastructure using Typescript\n            code.</p>"
                     }
                 }
             },
@@ -6266,7 +6381,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p> Creates a new domain association for an Amplify app.</p>",
+                "smithy.api#documentation": "<p>Creates a new domain association for an Amplify app.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/apps/{appId}/domains/{domainName}",
@@ -6316,6 +6431,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p> The required AWS Identity and Access Management (IAM) service role for the Amazon\n            Resource Name (ARN) for automatically creating subdomains. </p>"
                     }
+                },
+                "certificateSettings": {
+                    "target": "com.amazonaws.amplify#CertificateSettings",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of SSL/TLS certificate to use for your custom domain.</p>"
+                    }
                 }
             },
             "traits": {
@@ -6337,6 +6458,53 @@
             "traits": {
                 "smithy.api#documentation": "<p> The result structure for the update domain association request. </p>",
                 "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.amplify#UpdateStatus": {
+            "type": "enum",
+            "members": {
+                "REQUESTING_CERTIFICATE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "REQUESTING_CERTIFICATE"
+                    }
+                },
+                "PENDING_VERIFICATION": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PENDING_VERIFICATION"
+                    }
+                },
+                "IMPORTING_CUSTOM_CERTIFICATE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "IMPORTING_CUSTOM_CERTIFICATE"
+                    }
+                },
+                "PENDING_DEPLOYMENT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PENDING_DEPLOYMENT"
+                    }
+                },
+                "AWAITING_APP_CNAME": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AWAITING_APP_CNAME"
+                    }
+                },
+                "UPDATE_COMPLETE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UPDATE_COMPLETE"
+                    }
+                },
+                "UPDATE_FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UPDATE_FAILED"
+                    }
+                }
             }
         },
         "com.amazonaws.amplify#UpdateTime": {

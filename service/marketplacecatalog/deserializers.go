@@ -15,10 +15,20 @@ import (
 	smithyio "github.com/aws/smithy-go/io"
 	"github.com/aws/smithy-go/middleware"
 	"github.com/aws/smithy-go/ptr"
+	smithytime "github.com/aws/smithy-go/time"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"io"
 	"strings"
+	"time"
 )
+
+func deserializeS3Expires(v string) (*time.Time, error) {
+	t, err := smithytime.ParseHTTPDate(v)
+	if err != nil {
+		return nil, nil
+	}
+	return &t, nil
+}
 
 type awsRestjson1_deserializeOpBatchDescribeEntities struct {
 }
@@ -653,6 +663,15 @@ func awsRestjson1_deserializeOpDocumentDescribeChangeSetOutput(v **DescribeChang
 					return fmt.Errorf("expected ExceptionMessageContent to be of type string, got %T instead", value)
 				}
 				sv.FailureDescription = ptr.String(jtv)
+			}
+
+		case "Intent":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Intent to be of type string, got %T instead", value)
+				}
+				sv.Intent = types.Intent(jtv)
 			}
 
 		case "StartTime":
@@ -3348,6 +3367,15 @@ func awsRestjson1_deserializeDocumentOfferSummary(v **types.OfferSummary, value 
 					return fmt.Errorf("expected DateTimeISO8601 to be of type string, got %T instead", value)
 				}
 				sv.ReleaseDate = ptr.String(jtv)
+			}
+
+		case "ResaleAuthorizationId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected OfferResaleAuthorizationIdString to be of type string, got %T instead", value)
+				}
+				sv.ResaleAuthorizationId = ptr.String(jtv)
 			}
 
 		case "State":

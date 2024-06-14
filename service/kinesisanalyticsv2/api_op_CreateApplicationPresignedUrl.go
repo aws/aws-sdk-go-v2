@@ -6,23 +6,26 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/kinesisanalyticsv2/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates and returns a URL that you can use to connect to an application's
-// extension. The IAM role or user used to call this API defines the permissions to
-// access the extension. After the presigned URL is created, no additional
-// permission is required to access this URL. IAM authorization policies for this
-// API are also enforced for every HTTP request that attempts to connect to the
-// extension. You control the amount of time that the URL will be valid using the
+// extension.
+//
+// The IAM role or user used to call this API defines the permissions to access
+// the extension. After the presigned URL is created, no additional permission is
+// required to access this URL. IAM authorization policies for this API are also
+// enforced for every HTTP request that attempts to connect to the extension.
+//
+// You control the amount of time that the URL will be valid using the
 // SessionExpirationDurationInSeconds parameter. If you do not provide this
-// parameter, the returned URL is valid for twelve hours. The URL that you get from
-// a call to CreateApplicationPresignedUrl must be used within 3 minutes to be
-// valid. If you first try to use the URL after the 3-minute limit expires, the
-// service returns an HTTP 403 Forbidden error.
+// parameter, the returned URL is valid for twelve hours.
+//
+// The URL that you get from a call to CreateApplicationPresignedUrl must be used
+// within 3 minutes to be valid. If you first try to use the URL after the 3-minute
+// limit expires, the service returns an HTTP 403 Forbidden error.
 func (c *Client) CreateApplicationPresignedUrl(ctx context.Context, params *CreateApplicationPresignedUrlInput, optFns ...func(*Options)) (*CreateApplicationPresignedUrlOutput, error) {
 	if params == nil {
 		params = &CreateApplicationPresignedUrlInput{}
@@ -90,25 +93,25 @@ func (c *Client) addOperationCreateApplicationPresignedUrlMiddlewares(stack *mid
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -123,13 +126,16 @@ func (c *Client) addOperationCreateApplicationPresignedUrlMiddlewares(stack *mid
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpCreateApplicationPresignedUrlValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateApplicationPresignedUrl(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

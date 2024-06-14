@@ -10,8 +10,9 @@ const (
 )
 
 // Values returns all known values for DefinitionLanguage. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (DefinitionLanguage) Values() []DefinitionLanguage {
 	return []DefinitionLanguage{
 		"GRAPHQL",
@@ -27,8 +28,9 @@ const (
 )
 
 // Values returns all known values for DeploymentTarget. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (DeploymentTarget) Values() []DeploymentTarget {
 	return []DeploymentTarget{
 		"GREENGRASS",
@@ -47,8 +49,9 @@ const (
 )
 
 // Values returns all known values for EntityFilterName. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (EntityFilterName) Values() []EntityFilterName {
 	return []EntityFilterName{
 		"NAME",
@@ -75,8 +78,9 @@ const (
 )
 
 // Values returns all known values for EntityType. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (EntityType) Values() []EntityType {
 	return []EntityType{
 		"DEVICE",
@@ -116,8 +120,9 @@ const (
 )
 
 // Values returns all known values for FlowExecutionEventType. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (FlowExecutionEventType) Values() []FlowExecutionEventType {
 	return []FlowExecutionEventType{
 		"EXECUTION_STARTED",
@@ -151,8 +156,9 @@ const (
 )
 
 // Values returns all known values for FlowExecutionStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (FlowExecutionStatus) Values() []FlowExecutionStatus {
 	return []FlowExecutionStatus{
 		"RUNNING",
@@ -170,8 +176,9 @@ const (
 )
 
 // Values returns all known values for FlowTemplateFilterName. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (FlowTemplateFilterName) Values() []FlowTemplateFilterName {
 	return []FlowTemplateFilterName{
 		"DEVICE_MODEL_ID",
@@ -188,8 +195,9 @@ const (
 )
 
 // Values returns all known values for NamespaceDeletionStatus. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (NamespaceDeletionStatus) Values() []NamespaceDeletionStatus {
 	return []NamespaceDeletionStatus{
 		"IN_PROGRESS",
@@ -207,8 +215,9 @@ const (
 
 // Values returns all known values for NamespaceDeletionStatusErrorCodes. Note
 // that this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (NamespaceDeletionStatusErrorCodes) Values() []NamespaceDeletionStatusErrorCodes {
 	return []NamespaceDeletionStatusErrorCodes{
 		"VALIDATION_FAILED",
@@ -231,8 +240,9 @@ const (
 
 // Values returns all known values for SystemInstanceDeploymentStatus. Note that
 // this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (SystemInstanceDeploymentStatus) Values() []SystemInstanceDeploymentStatus {
 	return []SystemInstanceDeploymentStatus{
 		"NOT_DEPLOYED",
@@ -257,6 +267,7 @@ const (
 
 // Values returns all known values for SystemInstanceFilterName. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (SystemInstanceFilterName) Values() []SystemInstanceFilterName {
 	return []SystemInstanceFilterName{
@@ -275,6 +286,7 @@ const (
 
 // Values returns all known values for SystemTemplateFilterName. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (SystemTemplateFilterName) Values() []SystemTemplateFilterName {
 	return []SystemTemplateFilterName{
@@ -292,8 +304,9 @@ const (
 )
 
 // Values returns all known values for UploadStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (UploadStatus) Values() []UploadStatus {
 	return []UploadStatus{
 		"IN_PROGRESS",

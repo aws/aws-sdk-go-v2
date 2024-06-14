@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/apigatewayv2/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -48,12 +47,17 @@ type UpdateIntegrationResponseInput struct {
 
 	// Supported only for WebSocket APIs. Specifies how to handle response payload
 	// content type conversions. Supported values are CONVERT_TO_BINARY and
-	// CONVERT_TO_TEXT, with the following behaviors: CONVERT_TO_BINARY: Converts a
-	// response payload from a Base64-encoded string to the corresponding binary blob.
+	// CONVERT_TO_TEXT, with the following behaviors:
+	//
+	// CONVERT_TO_BINARY: Converts a response payload from a Base64-encoded string to
+	// the corresponding binary blob.
+	//
 	// CONVERT_TO_TEXT: Converts a response payload from a binary blob to a
-	// Base64-encoded string. If this property is not defined, the response payload
-	// will be passed through from the integration response to the route response or
-	// method response without modification.
+	// Base64-encoded string.
+	//
+	// If this property is not defined, the response payload will be passed through
+	// from the integration response to the route response or method response without
+	// modification.
 	ContentHandlingStrategy types.ContentHandlingStrategy
 
 	// The integration response key.
@@ -88,12 +92,17 @@ type UpdateIntegrationResponseOutput struct {
 
 	// Supported only for WebSocket APIs. Specifies how to handle response payload
 	// content type conversions. Supported values are CONVERT_TO_BINARY and
-	// CONVERT_TO_TEXT, with the following behaviors: CONVERT_TO_BINARY: Converts a
-	// response payload from a Base64-encoded string to the corresponding binary blob.
+	// CONVERT_TO_TEXT, with the following behaviors:
+	//
+	// CONVERT_TO_BINARY: Converts a response payload from a Base64-encoded string to
+	// the corresponding binary blob.
+	//
 	// CONVERT_TO_TEXT: Converts a response payload from a binary blob to a
-	// Base64-encoded string. If this property is not defined, the response payload
-	// will be passed through from the integration response to the route response or
-	// method response without modification.
+	// Base64-encoded string.
+	//
+	// If this property is not defined, the response payload will be passed through
+	// from the integration response to the route response or method response without
+	// modification.
 	ContentHandlingStrategy types.ContentHandlingStrategy
 
 	// The integration response ID.
@@ -151,25 +160,25 @@ func (c *Client) addOperationUpdateIntegrationResponseMiddlewares(stack *middlew
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -184,13 +193,16 @@ func (c *Client) addOperationUpdateIntegrationResponseMiddlewares(stack *middlew
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpUpdateIntegrationResponseValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateIntegrationResponse(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

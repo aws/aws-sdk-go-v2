@@ -6,16 +6,16 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/emr/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Returns the Amazon EMR block public access configuration for your Amazon Web
-// Services account in the current Region. For more information see Configure
-// Block Public Access for Amazon EMR (https://docs.aws.amazon.com/emr/latest/ManagementGuide/configure-block-public-access.html)
-// in the Amazon EMR Management Guide.
+// Services account in the current Region. For more information see [Configure Block Public Access for Amazon EMR]in the Amazon
+// EMR Management Guide.
+//
+// [Configure Block Public Access for Amazon EMR]: https://docs.aws.amazon.com/emr/latest/ManagementGuide/configure-block-public-access.html
 func (c *Client) GetBlockPublicAccessConfiguration(ctx context.Context, params *GetBlockPublicAccessConfigurationInput, optFns ...func(*Options)) (*GetBlockPublicAccessConfigurationOutput, error) {
 	if params == nil {
 		params = &GetBlockPublicAccessConfigurationInput{}
@@ -45,11 +45,13 @@ type GetBlockPublicAccessConfigurationOutput struct {
 	// specified as an exception using PermittedPublicSecurityGroupRuleRanges in the
 	// BlockPublicAccessConfiguration . By default, Port 22 (SSH) is an exception, and
 	// public access is allowed on this port. You can change this by updating the block
-	// public access configuration to remove the exception. For accounts that created
-	// clusters in a Region before November 25, 2019, block public access is disabled
-	// by default in that Region. To use this feature, you must manually enable and
-	// configure it. For accounts that did not create an Amazon EMR cluster in a Region
-	// before this date, block public access is enabled by default in that Region.
+	// public access configuration to remove the exception.
+	//
+	// For accounts that created clusters in a Region before November 25, 2019, block
+	// public access is disabled by default in that Region. To use this feature, you
+	// must manually enable and configure it. For accounts that did not create an
+	// Amazon EMR cluster in a Region before this date, block public access is enabled
+	// by default in that Region.
 	//
 	// This member is required.
 	BlockPublicAccessConfiguration *types.BlockPublicAccessConfiguration
@@ -91,25 +93,25 @@ func (c *Client) addOperationGetBlockPublicAccessConfigurationMiddlewares(stack 
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -124,10 +126,13 @@ func (c *Client) addOperationGetBlockPublicAccessConfigurationMiddlewares(stack 
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetBlockPublicAccessConfiguration(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

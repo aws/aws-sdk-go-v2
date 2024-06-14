@@ -6,17 +6,20 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/gamelift/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Retrieves properties for one or more player sessions. This action can be used
-// in the following ways:
+// Retrieves properties for one or more player sessions.
+//
+// This action can be used in the following ways:
+//
 //   - To retrieve a specific player session, provide the player session ID only.
+//
 //   - To retrieve all player sessions in a game session, provide the game session
 //     ID only.
+//
 //   - To retrieve all player sessions for a specific player, provide a player ID
 //     only.
 //
@@ -24,8 +27,16 @@ import (
 // ID, or player ID. You can filter this request by player session status. If you
 // provide a specific PlayerSessionId or PlayerId , Amazon GameLift ignores the
 // filter criteria. Use the pagination parameters to retrieve results as a set of
-// sequential pages. If successful, a PlayerSession object is returned for each
-// session that matches the request. Related actions All APIs by task (https://docs.aws.amazon.com/gamelift/latest/developerguide/reference-awssdk.html#reference-awssdk-resources-fleets)
+// sequential pages.
+//
+// If successful, a PlayerSession object is returned for each session that matches
+// the request.
+//
+// # Related actions
+//
+// [All APIs by task]
+//
+// [All APIs by task]: https://docs.aws.amazon.com/gamelift/latest/developerguide/reference-awssdk.html#reference-awssdk-resources-fleets
 func (c *Client) DescribePlayerSessions(ctx context.Context, params *DescribePlayerSessionsInput, optFns ...func(*Options)) (*DescribePlayerSessionsOutput, error) {
 	if params == nil {
 		params = &DescribePlayerSessionsInput{}
@@ -65,13 +76,18 @@ type DescribePlayerSessionsInput struct {
 
 	// Player session status to filter results on. Note that when a PlayerSessionId or
 	// PlayerId is provided in a DescribePlayerSessions request, then the
-	// PlayerSessionStatusFilter has no effect on the response. Possible player session
-	// statuses include the following:
+	// PlayerSessionStatusFilter has no effect on the response.
+	//
+	// Possible player session statuses include the following:
+	//
 	//   - RESERVED -- The player session request has been received, but the player
 	//   has not yet connected to the server process and/or been validated.
+	//
 	//   - ACTIVE -- The player has been validated by the server process and is
 	//   currently connected.
+	//
 	//   - COMPLETED -- The player connection has been dropped.
+	//
 	//   - TIMEDOUT -- A player session request was received, but the player did not
 	//   connect and/or was not validated within the timeout limit (60 seconds).
 	PlayerSessionStatusFilter *string
@@ -118,25 +134,25 @@ func (c *Client) addOperationDescribePlayerSessionsMiddlewares(stack *middleware
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -151,10 +167,13 @@ func (c *Client) addOperationDescribePlayerSessionsMiddlewares(stack *middleware
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribePlayerSessions(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

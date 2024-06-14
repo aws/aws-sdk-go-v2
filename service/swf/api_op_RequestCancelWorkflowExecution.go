@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -15,24 +14,33 @@ import (
 // workflow execution identified by the given domain, workflowId, and runId. This
 // logically requests the cancellation of the workflow execution as a whole. It is
 // up to the decider to take appropriate actions when it receives an execution
-// history with this event. If the runId isn't specified, the
-// WorkflowExecutionCancelRequested event is recorded in the history of the current
-// open workflow execution with the specified workflowId in the domain. Because
-// this action allows the workflow to properly clean up and gracefully close, it
-// should be used instead of TerminateWorkflowExecution when possible. Access
-// Control You can use IAM policies to control this action's access to Amazon SWF
+// history with this event.
+//
+// If the runId isn't specified, the WorkflowExecutionCancelRequested event is
+// recorded in the history of the current open workflow execution with the
+// specified workflowId in the domain.
+//
+// Because this action allows the workflow to properly clean up and gracefully
+// close, it should be used instead of TerminateWorkflowExecutionwhen possible.
+//
+// # Access Control
+//
+// You can use IAM policies to control this action's access to Amazon SWF
 // resources as follows:
+//
 //   - Use a Resource element with the domain name to limit the action to only
 //     specified domains.
+//
 //   - Use an Action element to allow or deny permission to call this action.
+//
 //   - You cannot use an IAM policy to constrain this action's parameters.
 //
 // If the caller doesn't have sufficient permissions to invoke the action, or the
 // parameter values fall outside the specified constraints, the action fails. The
 // associated event attribute's cause parameter is set to OPERATION_NOT_PERMITTED .
-// For details and example IAM policies, see Using IAM to Manage Access to Amazon
-// SWF Workflows (https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html)
-// in the Amazon SWF Developer Guide.
+// For details and example IAM policies, see [Using IAM to Manage Access to Amazon SWF Workflows]in the Amazon SWF Developer Guide.
+//
+// [Using IAM to Manage Access to Amazon SWF Workflows]: https://docs.aws.amazon.com/amazonswf/latest/developerguide/swf-dev-iam.html
 func (c *Client) RequestCancelWorkflowExecution(ctx context.Context, params *RequestCancelWorkflowExecutionInput, optFns ...func(*Options)) (*RequestCancelWorkflowExecutionOutput, error) {
 	if params == nil {
 		params = &RequestCancelWorkflowExecutionInput{}
@@ -95,25 +103,25 @@ func (c *Client) addOperationRequestCancelWorkflowExecutionMiddlewares(stack *mi
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -128,13 +136,16 @@ func (c *Client) addOperationRequestCancelWorkflowExecutionMiddlewares(stack *mi
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpRequestCancelWorkflowExecutionValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opRequestCancelWorkflowExecution(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

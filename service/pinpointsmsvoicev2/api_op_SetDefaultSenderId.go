@@ -6,15 +6,16 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Sets default sender ID on a configuration set. When sending a text message to a
-// destination country that supports sender IDs, the default sender ID on the
-// configuration set specified will be used if no dedicated origination phone
-// numbers or registered sender IDs are available in your account.
+// Sets default sender ID on a configuration set.
+//
+// When sending a text message to a destination country that supports sender IDs,
+// the default sender ID on the configuration set specified will be used if no
+// dedicated origination phone numbers or registered sender IDs are available in
+// your account.
 func (c *Client) SetDefaultSenderId(ctx context.Context, params *SetDefaultSenderIdInput, optFns ...func(*Options)) (*SetDefaultSenderIdOutput, error) {
 	if params == nil {
 		params = &SetDefaultSenderIdInput{}
@@ -40,9 +41,9 @@ type SetDefaultSenderIdInput struct {
 
 	// The current sender ID for the configuration set. When sending a text message to
 	// a destination country which supports SenderIds, the default sender ID on the
-	// configuration set specified on SendTextMessage will be used if no dedicated
-	// origination phone numbers or registered SenderIds are available in your account,
-	// instead of a generic sender ID, such as 'NOTICE'.
+	// configuration set specified on SendTextMessagewill be used if no dedicated origination phone
+	// numbers or registered SenderIds are available in your account, instead of a
+	// generic sender ID, such as 'NOTICE'.
 	//
 	// This member is required.
 	SenderId *string
@@ -89,25 +90,25 @@ func (c *Client) addOperationSetDefaultSenderIdMiddlewares(stack *middleware.Sta
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -122,13 +123,16 @@ func (c *Client) addOperationSetDefaultSenderIdMiddlewares(stack *middleware.Sta
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpSetDefaultSenderIdValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opSetDefaultSenderId(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

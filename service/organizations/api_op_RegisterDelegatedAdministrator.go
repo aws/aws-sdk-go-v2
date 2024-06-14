@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -14,12 +13,15 @@ import (
 // Enables the specified member account to administer the Organizations features
 // of the specified Amazon Web Services service. It grants read-only access to
 // Organizations service data. The account still requires IAM permissions to access
-// and administer the Amazon Web Services service. You can run this action only for
-// Amazon Web Services services that support this feature. For a current list of
-// services that support it, see the column Supports Delegated Administrator in the
-// table at Amazon Web Services Services that you can use with Organizations (https://docs.aws.amazon.com/organizations/latest/userguide/orgs_integrate_services_list.html)
-// in the Organizations User Guide. This operation can be called only from the
-// organization's management account.
+// and administer the Amazon Web Services service.
+//
+// You can run this action only for Amazon Web Services services that support this
+// feature. For a current list of services that support it, see the column Supports
+// Delegated Administrator in the table at [Amazon Web Services Services that you can use with Organizations]in the Organizations User Guide.
+//
+// This operation can be called only from the organization's management account.
+//
+// [Amazon Web Services Services that you can use with Organizations]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_integrate_services_list.html
 func (c *Client) RegisterDelegatedAdministrator(ctx context.Context, params *RegisterDelegatedAdministratorInput, optFns ...func(*Options)) (*RegisterDelegatedAdministratorOutput, error) {
 	if params == nil {
 		params = &RegisterDelegatedAdministratorInput{}
@@ -81,25 +83,25 @@ func (c *Client) addOperationRegisterDelegatedAdministratorMiddlewares(stack *mi
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -114,13 +116,16 @@ func (c *Client) addOperationRegisterDelegatedAdministratorMiddlewares(stack *mi
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpRegisterDelegatedAdministratorValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opRegisterDelegatedAdministrator(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

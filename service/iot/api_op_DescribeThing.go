@@ -6,14 +6,15 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Gets information about the specified thing. Requires permission to access the
-// DescribeThing (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
-// action.
+// Gets information about the specified thing.
+//
+// Requires permission to access the [DescribeThing] action.
+//
+// [DescribeThing]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions
 func (c *Client) DescribeThing(ctx context.Context, params *DescribeThingInput, optFns ...func(*Options)) (*DescribeThingOutput, error) {
 	if params == nil {
 		params = &DescribeThingInput{}
@@ -53,9 +54,10 @@ type DescribeThingOutput struct {
 	// as the default MQTT client ID. Although we don’t require a mapping between a
 	// thing's registry name and its use of MQTT client IDs, certificates, or shadow
 	// state, we recommend that you choose a thing name and use it as the MQTT client
-	// ID for the registry and the Device Shadow service. This lets you better organize
-	// your IoT fleet without removing the flexibility of the underlying device
-	// certificate model or shadows.
+	// ID for the registry and the Device Shadow service.
+	//
+	// This lets you better organize your IoT fleet without removing the flexibility
+	// of the underlying device certificate model or shadows.
 	DefaultClientId *string
 
 	// The ARN of the thing to describe.
@@ -70,9 +72,11 @@ type DescribeThingOutput struct {
 	// The thing type name.
 	ThingTypeName *string
 
-	// The current version of the thing record in the registry. To avoid unintentional
-	// changes to the information in the registry, you can pass the version information
-	// in the expectedVersion parameter of the UpdateThing and DeleteThing calls.
+	// The current version of the thing record in the registry.
+	//
+	// To avoid unintentional changes to the information in the registry, you can pass
+	// the version information in the expectedVersion parameter of the UpdateThing and
+	// DeleteThing calls.
 	Version int64
 
 	// Metadata pertaining to the operation's result.
@@ -103,25 +107,25 @@ func (c *Client) addOperationDescribeThingMiddlewares(stack *middleware.Stack, o
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -136,13 +140,16 @@ func (c *Client) addOperationDescribeThingMiddlewares(stack *middleware.Stack, o
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDescribeThingValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeThing(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

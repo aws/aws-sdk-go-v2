@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/apigateway/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -42,8 +41,9 @@ type UpdateStageInput struct {
 	// This member is required.
 	StageName *string
 
-	// For more information about supported patch operations, see Patch Operations (https://docs.aws.amazon.com/apigateway/latest/api/patch-operations.html)
-	// .
+	// For more information about supported patch operations, see [Patch Operations].
+	//
+	// [Patch Operations]: https://docs.aws.amazon.com/apigateway/latest/api/patch-operations.html
 	PatchOperations []types.PatchOperation
 
 	noSmithyDocumentSerde
@@ -56,12 +56,14 @@ type UpdateStageOutput struct {
 	// Settings for logging access in this stage.
 	AccessLogSettings *types.AccessLogSettings
 
-	// Specifies whether a cache cluster is enabled for the stage.
+	// Specifies whether a cache cluster is enabled for the stage. To activate a
+	// method-level cache, set CachingEnabled to true for a method.
 	CacheClusterEnabled bool
 
 	// The stage's cache capacity in GB. For more information about choosing a cache
-	// size, see Enabling API caching to enhance responsiveness (https://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-caching.html)
-	// .
+	// size, see [Enabling API caching to enhance responsiveness].
+	//
+	// [Enabling API caching to enhance responsiveness]: https://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-caching.html
 	CacheClusterSize types.CacheClusterSize
 
 	// The status of the cache cluster for the stage, if enabled.
@@ -142,25 +144,25 @@ func (c *Client) addOperationUpdateStageMiddlewares(stack *middleware.Stack, opt
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -175,13 +177,16 @@ func (c *Client) addOperationUpdateStageMiddlewares(stack *middleware.Stack, opt
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpUpdateStageValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateStage(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

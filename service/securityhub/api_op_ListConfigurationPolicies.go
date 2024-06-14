@@ -6,13 +6,13 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/securityhub/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists the configuration policies that the Security Hub delegated administrator
+//	Lists the configuration policies that the Security Hub delegated administrator
+//
 // has created for your organization. Only the delegated administrator can invoke
 // this operation from the home Region.
 func (c *Client) ListConfigurationPolicies(ctx context.Context, params *ListConfigurationPoliciesInput, optFns ...func(*Options)) (*ListConfigurationPoliciesOutput, error) {
@@ -32,7 +32,7 @@ func (c *Client) ListConfigurationPolicies(ctx context.Context, params *ListConf
 
 type ListConfigurationPoliciesInput struct {
 
-	// The maximum number of results that's returned by ListConfigurationPolicies in
+	//  The maximum number of results that's returned by ListConfigurationPolicies in
 	// each page of the response. When this parameter is used,
 	// ListConfigurationPolicies returns the specified number of results in a single
 	// page and a NextToken response element. You can see the remaining results of the
@@ -40,7 +40,7 @@ type ListConfigurationPoliciesInput struct {
 	// returned NextToken value. A valid range for MaxResults is between 1 and 100.
 	MaxResults *int32
 
-	// The NextToken value that's returned from a previous paginated
+	//  The NextToken value that's returned from a previous paginated
 	// ListConfigurationPolicies request where MaxResults was used but the results
 	// exceeded the value of that parameter. Pagination continues from the MaxResults
 	// was used but the results exceeded the value of that parameter. Pagination
@@ -53,10 +53,10 @@ type ListConfigurationPoliciesInput struct {
 
 type ListConfigurationPoliciesOutput struct {
 
-	// Provides metadata for each of your configuration policies.
+	//  Provides metadata for each of your configuration policies.
 	ConfigurationPolicySummaries []types.ConfigurationPolicySummary
 
-	// The NextToken value to include in the next ListConfigurationPolicies request.
+	//  The NextToken value to include in the next ListConfigurationPolicies request.
 	// When the results of a ListConfigurationPolicies request exceed MaxResults , this
 	// value can be used to retrieve the next page of results. This value is null when
 	// there are no more results to return.
@@ -90,25 +90,25 @@ func (c *Client) addOperationListConfigurationPoliciesMiddlewares(stack *middlew
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -123,10 +123,13 @@ func (c *Client) addOperationListConfigurationPoliciesMiddlewares(stack *middlew
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListConfigurationPolicies(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -155,7 +158,7 @@ var _ ListConfigurationPoliciesAPIClient = (*Client)(nil)
 // ListConfigurationPoliciesPaginatorOptions is the paginator options for
 // ListConfigurationPolicies
 type ListConfigurationPoliciesPaginatorOptions struct {
-	// The maximum number of results that's returned by ListConfigurationPolicies in
+	//  The maximum number of results that's returned by ListConfigurationPolicies in
 	// each page of the response. When this parameter is used,
 	// ListConfigurationPolicies returns the specified number of results in a single
 	// page and a NextToken response element. You can see the remaining results of the

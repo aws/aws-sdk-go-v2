@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/codegurureviewer/types"
 	"github.com/aws/smithy-go/middleware"
 	smithytime "github.com/aws/smithy-go/time"
@@ -16,8 +15,10 @@ import (
 	"time"
 )
 
-// Returns a RepositoryAssociation (https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_RepositoryAssociation.html)
-// object that contains information about the requested repository association.
+// Returns a [RepositoryAssociation] object that contains information about the requested repository
+// association.
+//
+// [RepositoryAssociation]: https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_RepositoryAssociation.html
 func (c *Client) DescribeRepositoryAssociation(ctx context.Context, params *DescribeRepositoryAssociationInput, optFns ...func(*Options)) (*DescribeRepositoryAssociationOutput, error) {
 	if params == nil {
 		params = &DescribeRepositoryAssociationInput{}
@@ -35,9 +36,11 @@ func (c *Client) DescribeRepositoryAssociation(ctx context.Context, params *Desc
 
 type DescribeRepositoryAssociationInput struct {
 
-	// The Amazon Resource Name (ARN) of the RepositoryAssociation (https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_RepositoryAssociation.html)
-	// object. You can retrieve this ARN by calling ListRepositoryAssociations (https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_ListRepositoryAssociations.html)
-	// .
+	// The Amazon Resource Name (ARN) of the [RepositoryAssociation] object. You can retrieve this ARN by
+	// calling [ListRepositoryAssociations].
+	//
+	// [ListRepositoryAssociations]: https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_ListRepositoryAssociations.html
+	// [RepositoryAssociation]: https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_RepositoryAssociation.html
 	//
 	// This member is required.
 	AssociationArn *string
@@ -52,8 +55,10 @@ type DescribeRepositoryAssociationOutput struct {
 
 	// An array of key-value pairs used to tag an associated repository. A tag is a
 	// custom attribute label with two parts:
+	//
 	//   - A tag key (for example, CostCenter , Environment , Project , or Secret ).
 	//   Tag keys are case sensitive.
+	//
 	//   - An optional field known as a tag value (for example, 111122223333 ,
 	//   Production , or a team name). Omitting the tag value is the same as using an
 	//   empty string. Like tag keys, tag values are case sensitive.
@@ -87,25 +92,25 @@ func (c *Client) addOperationDescribeRepositoryAssociationMiddlewares(stack *mid
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -120,13 +125,16 @@ func (c *Client) addOperationDescribeRepositoryAssociationMiddlewares(stack *mid
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDescribeRepositoryAssociationValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeRepositoryAssociation(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -159,7 +167,16 @@ type RepositoryAssociationSucceededWaiterOptions struct {
 	// Set of options to modify how an operation is invoked. These apply to all
 	// operations invoked for this client. Use functional options on operation call to
 	// modify this list for per operation behavior.
+	//
+	// Passing options here is functionally equivalent to passing values to this
+	// config's ClientOptions field that extend the inner client's APIOptions directly.
 	APIOptions []func(*middleware.Stack) error
+
+	// Functional options to be passed to all operations invoked by this client.
+	//
+	// Function values that modify the inner APIOptions are applied after the waiter
+	// config's own APIOptions modifiers.
+	ClientOptions []func(*Options)
 
 	// MinDelay is the minimum amount of time to delay between retries. If unset,
 	// RepositoryAssociationSucceededWaiter will use default minimum delay of 10
@@ -178,12 +195,13 @@ type RepositoryAssociationSucceededWaiterOptions struct {
 
 	// Retryable is function that can be used to override the service defined
 	// waiter-behavior based on operation output, or returned error. This function is
-	// used by the waiter to decide if a state is retryable or a terminal state. By
-	// default service-modeled logic will populate this option. This option can thus be
-	// used to define a custom waiter state with fall-back to service-modeled waiter
-	// state mutators.The function returns an error in case of a failure state. In case
-	// of retry state, this function returns a bool value of true and nil error, while
-	// in case of success it returns a bool value of false and nil error.
+	// used by the waiter to decide if a state is retryable or a terminal state.
+	//
+	// By default service-modeled logic will populate this option. This option can
+	// thus be used to define a custom waiter state with fall-back to service-modeled
+	// waiter state mutators.The function returns an error in case of a failure state.
+	// In case of retry state, this function returns a bool value of true and nil
+	// error, while in case of success it returns a bool value of false and nil error.
 	Retryable func(context.Context, *DescribeRepositoryAssociationInput, *DescribeRepositoryAssociationOutput, error) (bool, error)
 }
 
@@ -263,6 +281,9 @@ func (w *RepositoryAssociationSucceededWaiter) WaitForOutput(ctx context.Context
 
 		out, err := w.client.DescribeRepositoryAssociation(ctx, params, func(o *Options) {
 			o.APIOptions = append(o.APIOptions, apiOptions...)
+			for _, opt := range options.ClientOptions {
+				opt(o)
+			}
 		})
 
 		retryable, err := options.Retryable(ctx, params, out, err)

@@ -6,15 +6,15 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/eks/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes an Amazon EKS add-on. When you remove an add-on, it's deleted from the
-// cluster. You can always manually start an add-on on the cluster using the
-// Kubernetes API.
+// Deletes an Amazon EKS add-on.
+//
+// When you remove an add-on, it's deleted from the cluster. You can always
+// manually start an add-on on the cluster using the Kubernetes API.
 func (c *Client) DeleteAddon(ctx context.Context, params *DeleteAddonInput, optFns ...func(*Options)) (*DeleteAddonOutput, error) {
 	if params == nil {
 		params = &DeleteAddonInput{}
@@ -32,9 +32,10 @@ func (c *Client) DeleteAddon(ctx context.Context, params *DeleteAddonInput, optF
 
 type DeleteAddonInput struct {
 
-	// The name of the add-on. The name must match one of the names returned by
-	// ListAddons (https://docs.aws.amazon.com/eks/latest/APIReference/API_ListAddons.html)
-	// .
+	// The name of the add-on. The name must match one of the names returned by [ListAddons]
+	// ListAddons .
+	//
+	// [ListAddons]: https://docs.aws.amazon.com/eks/latest/APIReference/API_ListAddons.html
 	//
 	// This member is required.
 	AddonName *string
@@ -54,8 +55,9 @@ type DeleteAddonInput struct {
 
 type DeleteAddonOutput struct {
 
-	// An Amazon EKS add-on. For more information, see Amazon EKS add-ons (https://docs.aws.amazon.com/eks/latest/userguide/eks-add-ons.html)
-	// in the Amazon EKS User Guide.
+	// An Amazon EKS add-on. For more information, see [Amazon EKS add-ons] in the Amazon EKS User Guide.
+	//
+	// [Amazon EKS add-ons]: https://docs.aws.amazon.com/eks/latest/userguide/eks-add-ons.html
 	Addon *types.Addon
 
 	// Metadata pertaining to the operation's result.
@@ -86,25 +88,25 @@ func (c *Client) addOperationDeleteAddonMiddlewares(stack *middleware.Stack, opt
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -119,13 +121,16 @@ func (c *Client) addOperationDeleteAddonMiddlewares(stack *middleware.Stack, opt
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDeleteAddonValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteAddon(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

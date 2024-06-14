@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/robomaker/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -71,16 +70,25 @@ type CreateWorldExportJobOutput struct {
 	// created.
 	CreatedAt *time.Time
 
-	// The failure code of the world export job if it failed: InternalServiceError
-	// Internal service error. LimitExceeded The requested resource exceeds the maximum
-	// number allowed, or the number of concurrent stream requests exceeds the maximum
-	// number allowed. ResourceNotFound The specified resource could not be found.
-	// RequestThrottled The request was throttled. InvalidInput An input parameter in
-	// the request is not valid. AllWorldGenerationFailed All of the worlds in the
-	// world generation job failed. This can happen if your worldCount is greater than
-	// 50 or less than 1. For more information about troubleshooting WorldForge, see
-	// Troubleshooting Simulation WorldForge (https://docs.aws.amazon.com/robomaker/latest/dg/troubleshooting-worldforge.html)
-	// .
+	// The failure code of the world export job if it failed:
+	//
+	// InternalServiceError Internal service error.
+	//
+	// LimitExceeded The requested resource exceeds the maximum number allowed, or the
+	// number of concurrent stream requests exceeds the maximum number allowed.
+	//
+	// ResourceNotFound The specified resource could not be found.
+	//
+	// RequestThrottled The request was throttled.
+	//
+	// InvalidInput An input parameter in the request is not valid.
+	//
+	// AllWorldGenerationFailed All of the worlds in the world generation job failed.
+	// This can happen if your worldCount is greater than 50 or less than 1.
+	//
+	// For more information about troubleshooting WorldForge, see [Troubleshooting Simulation WorldForge].
+	//
+	// [Troubleshooting Simulation WorldForge]: https://docs.aws.amazon.com/robomaker/latest/dg/troubleshooting-worldforge.html
 	FailureCode types.WorldExportJobErrorCode
 
 	// The IAM role that the world export process uses to access the Amazon S3 bucket
@@ -90,11 +98,19 @@ type CreateWorldExportJobOutput struct {
 	// The output location.
 	OutputLocation *types.OutputLocation
 
-	// The status of the world export job. Pending The world export job request is
-	// pending. Running The world export job is running. Completed The world export job
-	// completed. Failed The world export job failed. See failureCode for more
-	// information. Canceled The world export job was cancelled. Canceling The world
-	// export job is being cancelled.
+	// The status of the world export job.
+	//
+	// Pending The world export job request is pending.
+	//
+	// Running The world export job is running.
+	//
+	// Completed The world export job completed.
+	//
+	// Failed The world export job failed. See failureCode for more information.
+	//
+	// Canceled The world export job was cancelled.
+	//
+	// Canceling The world export job is being cancelled.
 	Status types.WorldExportJobStatus
 
 	// A map that contains tag keys and tag values that are attached to the world
@@ -129,25 +145,25 @@ func (c *Client) addOperationCreateWorldExportJobMiddlewares(stack *middleware.S
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -162,6 +178,9 @@ func (c *Client) addOperationCreateWorldExportJobMiddlewares(stack *middleware.S
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opCreateWorldExportJobMiddleware(stack, options); err != nil {
 		return err
 	}
@@ -171,7 +190,7 @@ func (c *Client) addOperationCreateWorldExportJobMiddlewares(stack *middleware.S
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateWorldExportJob(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

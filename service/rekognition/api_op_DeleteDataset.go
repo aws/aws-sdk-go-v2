@@ -6,19 +6,22 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// This operation applies only to Amazon Rekognition Custom Labels. Deletes an
-// existing Amazon Rekognition Custom Labels dataset. Deleting a dataset might take
-// while. Use DescribeDataset to check the current status. The dataset is still
+// This operation applies only to Amazon Rekognition Custom Labels.
+//
+// Deletes an existing Amazon Rekognition Custom Labels dataset. Deleting a
+// dataset might take while. Use DescribeDatasetto check the current status. The dataset is still
 // deleting if the value of Status is DELETE_IN_PROGRESS . If you try to access the
-// dataset after it is deleted, you get a ResourceNotFoundException exception. You
-// can't delete a dataset while it is creating ( Status = CREATE_IN_PROGRESS ) or
-// if the dataset is updating ( Status = UPDATE_IN_PROGRESS ). This operation
-// requires permissions to perform the rekognition:DeleteDataset action.
+// dataset after it is deleted, you get a ResourceNotFoundException exception.
+//
+// You can't delete a dataset while it is creating ( Status = CREATE_IN_PROGRESS )
+// or if the dataset is updating ( Status = UPDATE_IN_PROGRESS ).
+//
+// This operation requires permissions to perform the rekognition:DeleteDataset
+// action.
 func (c *Client) DeleteDataset(ctx context.Context, params *DeleteDatasetInput, optFns ...func(*Options)) (*DeleteDatasetOutput, error) {
 	if params == nil {
 		params = &DeleteDatasetInput{}
@@ -36,7 +39,8 @@ func (c *Client) DeleteDataset(ctx context.Context, params *DeleteDatasetInput, 
 
 type DeleteDatasetInput struct {
 
-	// The ARN of the Amazon Rekognition Custom Labels dataset that you want to delete.
+	//  The ARN of the Amazon Rekognition Custom Labels dataset that you want to
+	// delete.
 	//
 	// This member is required.
 	DatasetArn *string
@@ -73,25 +77,25 @@ func (c *Client) addOperationDeleteDatasetMiddlewares(stack *middleware.Stack, o
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -106,13 +110,16 @@ func (c *Client) addOperationDeleteDatasetMiddlewares(stack *middleware.Stack, o
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDeleteDatasetValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteDataset(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

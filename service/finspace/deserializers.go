@@ -18,7 +18,16 @@ import (
 	"io"
 	"math"
 	"strings"
+	"time"
 )
+
+func deserializeS3Expires(v string) (*time.Time, error) {
+	t, err := smithytime.ParseHTTPDate(v)
+	if err != nil {
+		return nil, nil
+	}
+	return &t, nil
+}
 
 type awsRestjson1_deserializeOpCreateEnvironment struct {
 }
@@ -1277,6 +1286,15 @@ func awsRestjson1_deserializeOpDocumentCreateKxDataviewOutput(v **CreateKxDatavi
 				}
 			}
 
+		case "readWrite":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected booleanValue to be of type *bool, got %T instead", value)
+				}
+				sv.ReadWrite = jtv
+			}
+
 		case "segmentConfigurations":
 			if err := awsRestjson1_deserializeDocumentKxDataviewSegmentConfigurationList(&sv.SegmentConfigurations, value); err != nil {
 				return err
@@ -2403,6 +2421,101 @@ func awsRestjson1_deserializeOpErrorDeleteKxCluster(response *smithyhttp.Respons
 
 	case strings.EqualFold("LimitExceededException", errorCode):
 		return awsRestjson1_deserializeErrorLimitExceededException(response, errorBody)
+
+	case strings.EqualFold("ResourceNotFoundException", errorCode):
+		return awsRestjson1_deserializeErrorResourceNotFoundException(response, errorBody)
+
+	case strings.EqualFold("ThrottlingException", errorCode):
+		return awsRestjson1_deserializeErrorThrottlingException(response, errorBody)
+
+	case strings.EqualFold("ValidationException", errorCode):
+		return awsRestjson1_deserializeErrorValidationException(response, errorBody)
+
+	default:
+		genericError := &smithy.GenericAPIError{
+			Code:    errorCode,
+			Message: errorMessage,
+		}
+		return genericError
+
+	}
+}
+
+type awsRestjson1_deserializeOpDeleteKxClusterNode struct {
+}
+
+func (*awsRestjson1_deserializeOpDeleteKxClusterNode) ID() string {
+	return "OperationDeserializer"
+}
+
+func (m *awsRestjson1_deserializeOpDeleteKxClusterNode) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
+) {
+	out, metadata, err = next.HandleDeserialize(ctx, in)
+	if err != nil {
+		return out, metadata, err
+	}
+
+	response, ok := out.RawResponse.(*smithyhttp.Response)
+	if !ok {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
+	}
+
+	if response.StatusCode < 200 || response.StatusCode >= 300 {
+		return out, metadata, awsRestjson1_deserializeOpErrorDeleteKxClusterNode(response, &metadata)
+	}
+	output := &DeleteKxClusterNodeOutput{}
+	out.Result = output
+
+	return out, metadata, err
+}
+
+func awsRestjson1_deserializeOpErrorDeleteKxClusterNode(response *smithyhttp.Response, metadata *middleware.Metadata) error {
+	var errorBuffer bytes.Buffer
+	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
+		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
+	}
+	errorBody := bytes.NewReader(errorBuffer.Bytes())
+
+	errorCode := "UnknownError"
+	errorMessage := errorCode
+
+	headerCode := response.Header.Get("X-Amzn-ErrorType")
+	if len(headerCode) != 0 {
+		errorCode = restjson.SanitizeErrorCode(headerCode)
+	}
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(errorBody, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	jsonCode, message, err := restjson.GetErrorInfo(decoder)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	errorBody.Seek(0, io.SeekStart)
+	if len(headerCode) == 0 && len(jsonCode) != 0 {
+		errorCode = restjson.SanitizeErrorCode(jsonCode)
+	}
+	if len(message) != 0 {
+		errorMessage = message
+	}
+
+	switch {
+	case strings.EqualFold("AccessDeniedException", errorCode):
+		return awsRestjson1_deserializeErrorAccessDeniedException(response, errorBody)
+
+	case strings.EqualFold("InternalServerException", errorCode):
+		return awsRestjson1_deserializeErrorInternalServerException(response, errorBody)
 
 	case strings.EqualFold("ResourceNotFoundException", errorCode):
 		return awsRestjson1_deserializeErrorResourceNotFoundException(response, errorBody)
@@ -4443,6 +4556,15 @@ func awsRestjson1_deserializeOpDocumentGetKxDataviewOutput(v **GetKxDataviewOutp
 					return fmt.Errorf("expected Timestamp to be a JSON Number, got %T instead", value)
 
 				}
+			}
+
+		case "readWrite":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected booleanValue to be of type *bool, got %T instead", value)
+				}
+				sv.ReadWrite = jtv
 			}
 
 		case "segmentConfigurations":
@@ -8347,6 +8469,15 @@ func awsRestjson1_deserializeOpDocumentUpdateKxDataviewOutput(v **UpdateKxDatavi
 				}
 			}
 
+		case "readWrite":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected booleanValue to be of type *bool, got %T instead", value)
+				}
+				sv.ReadWrite = jtv
+			}
+
 		case "segmentConfigurations":
 			if err := awsRestjson1_deserializeDocumentKxDataviewSegmentConfigurationList(&sv.SegmentConfigurations, value); err != nil {
 				return err
@@ -12154,6 +12285,15 @@ func awsRestjson1_deserializeDocumentKxDataviewListEntry(v **types.KxDataviewLis
 				}
 			}
 
+		case "readWrite":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected booleanValue to be of type *bool, got %T instead", value)
+				}
+				sv.ReadWrite = jtv
+			}
+
 		case "segmentConfigurations":
 			if err := awsRestjson1_deserializeDocumentKxDataviewSegmentConfigurationList(&sv.SegmentConfigurations, value); err != nil {
 				return err
@@ -12245,6 +12385,15 @@ func awsRestjson1_deserializeDocumentKxDataviewSegmentConfiguration(v **types.Kx
 		case "dbPaths":
 			if err := awsRestjson1_deserializeDocumentSegmentConfigurationDbPathList(&sv.DbPaths, value); err != nil {
 				return err
+			}
+
+		case "onDemand":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected booleanValue to be of type *bool, got %T instead", value)
+				}
+				sv.OnDemand = jtv
 			}
 
 		case "volumeName":
@@ -12626,6 +12775,15 @@ func awsRestjson1_deserializeDocumentKxNode(v **types.KxNode, value interface{})
 					return fmt.Errorf("expected KxClusterNodeIdString to be of type string, got %T instead", value)
 				}
 				sv.NodeId = ptr.String(jtv)
+			}
+
+		case "status":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected KxNodeStatus to be of type string, got %T instead", value)
+				}
+				sv.Status = types.KxNodeStatus(jtv)
 			}
 
 		default:

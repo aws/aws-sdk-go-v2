@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -30,9 +29,9 @@ func (c *Client) UpdateWorkspaceConfiguration(ctx context.Context, params *Updat
 type UpdateWorkspaceConfigurationInput struct {
 
 	// The new configuration string for the workspace. For more information about the
-	// format and configuration options available, see Working in your Grafana
-	// workspace (https://docs.aws.amazon.com/grafana/latest/userguide/AMG-configure-workspace.html)
-	// .
+	// format and configuration options available, see [Working in your Grafana workspace].
+	//
+	// [Working in your Grafana workspace]: https://docs.aws.amazon.com/grafana/latest/userguide/AMG-configure-workspace.html
 	//
 	// This value conforms to the media type: application/json
 	//
@@ -44,10 +43,16 @@ type UpdateWorkspaceConfigurationInput struct {
 	// This member is required.
 	WorkspaceId *string
 
-	// Specifies the version of Grafana to support in the new workspace. Can only be
-	// used to upgrade (for example, from 8.4 to 9.4), not downgrade (for example, from
-	// 9.4 to 8.4). To know what versions are available to upgrade to for a specific
-	// workspace, see the ListVersions operation.
+	// Specifies the version of Grafana to support in the workspace. If not specified,
+	// keeps the current version of the workspace.
+	//
+	// Can only be used to upgrade (for example, from 8.4 to 9.4), not downgrade (for
+	// example, from 9.4 to 8.4).
+	//
+	// To know what versions are available to upgrade to for a specific workspace, see
+	// the [ListVersions]operation.
+	//
+	// [ListVersions]: https://docs.aws.amazon.com/grafana/latest/APIReference/API_ListVersions.html
 	GrafanaVersion *string
 
 	noSmithyDocumentSerde
@@ -82,25 +87,25 @@ func (c *Client) addOperationUpdateWorkspaceConfigurationMiddlewares(stack *midd
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -115,13 +120,16 @@ func (c *Client) addOperationUpdateWorkspaceConfigurationMiddlewares(stack *midd
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpUpdateWorkspaceConfigurationValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateWorkspaceConfiguration(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

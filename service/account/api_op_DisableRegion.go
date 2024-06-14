@@ -6,12 +6,14 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Disables (opts-out) a particular Region for an account.
+//
+// The act of disabling a Region will remove all IAM access to any resources that
+// reside in that Region.
 func (c *Client) DisableRegion(ctx context.Context, params *DisableRegionInput, optFns ...func(*Options)) (*DisableRegionOutput, error) {
 	if params == nil {
 		params = &DisableRegionInput{}
@@ -43,17 +45,22 @@ type DisableRegionInput struct {
 	// that you want to access or modify with this operation. If you don't specify this
 	// parameter, it defaults to the Amazon Web Services account of the identity used
 	// to call the operation. To use this parameter, the caller must be an identity in
-	// the organization's management account (https://docs.aws.amazon.com/organizations/latest/userguide/orgs_getting-started_concepts.html#account)
-	// or a delegated administrator account. The specified account ID must also be a
-	// member account in the same organization. The organization must have all
-	// features enabled (https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_org_support-all-features.html)
-	// , and the organization must have trusted access (https://docs.aws.amazon.com/organizations/latest/userguide/using-orgs-trusted-access.html)
-	// enabled for the Account Management service, and optionally a delegated admin (https://docs.aws.amazon.com/organizations/latest/userguide/using-orgs-delegated-admin.html)
-	// account assigned. The management account can't specify its own AccountId . It
-	// must call the operation in standalone context by not including the AccountId
-	// parameter. To call this operation on an account that is not a member of an
-	// organization, don't specify this parameter. Instead, call the operation using an
-	// identity belonging to the account whose contacts you wish to retrieve or modify.
+	// the [organization's management account]or a delegated administrator account. The specified account ID must be a
+	// member account in the same organization. The organization must have [all features enabled], and the
+	// organization must have [trusted access]enabled for the Account Management service, and
+	// optionally a [delegated admin]account assigned.
+	//
+	// The management account can't specify its own AccountId . It must call the
+	// operation in standalone context by not including the AccountId parameter.
+	//
+	// To call this operation on an account that is not a member of an organization,
+	// don't specify this parameter. Instead, call the operation using an identity
+	// belonging to the account whose contacts you wish to retrieve or modify.
+	//
+	// [organization's management account]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_getting-started_concepts.html#account
+	// [all features enabled]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_org_support-all-features.html
+	// [delegated admin]: https://docs.aws.amazon.com/organizations/latest/userguide/using-orgs-delegated-admin.html
+	// [trusted access]: https://docs.aws.amazon.com/organizations/latest/userguide/using-orgs-trusted-access.html
 	AccountId *string
 
 	noSmithyDocumentSerde
@@ -88,25 +95,25 @@ func (c *Client) addOperationDisableRegionMiddlewares(stack *middleware.Stack, o
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -121,13 +128,16 @@ func (c *Client) addOperationDisableRegionMiddlewares(stack *middleware.Stack, o
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDisableRegionValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDisableRegion(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

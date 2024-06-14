@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/codegurureviewer/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -30,8 +29,9 @@ func (c *Client) DescribeRecommendationFeedback(ctx context.Context, params *Des
 
 type DescribeRecommendationFeedbackInput struct {
 
-	// The Amazon Resource Name (ARN) of the CodeReview (https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_CodeReview.html)
-	// object.
+	// The Amazon Resource Name (ARN) of the [CodeReview] object.
+	//
+	// [CodeReview]: https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_CodeReview.html
 	//
 	// This member is required.
 	CodeReviewArn *string
@@ -43,10 +43,13 @@ type DescribeRecommendationFeedbackInput struct {
 	RecommendationId *string
 
 	// Optional parameter to describe the feedback for a given user. If this is not
-	// supplied, it defaults to the user making the request. The UserId is an IAM
-	// principal that can be specified as an Amazon Web Services account ID or an
-	// Amazon Resource Name (ARN). For more information, see Specifying a Principal (https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements_principal.html#Principal_specifying)
-	// in the Amazon Web Services Identity and Access Management User Guide.
+	// supplied, it defaults to the user making the request.
+	//
+	// The UserId is an IAM principal that can be specified as an Amazon Web Services
+	// account ID or an Amazon Resource Name (ARN). For more information, see [Specifying a Principal]in the
+	// Amazon Web Services Identity and Access Management User Guide.
+	//
+	// [Specifying a Principal]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements_principal.html#Principal_specifying
 	UserId *string
 
 	noSmithyDocumentSerde
@@ -85,25 +88,25 @@ func (c *Client) addOperationDescribeRecommendationFeedbackMiddlewares(stack *mi
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -118,13 +121,16 @@ func (c *Client) addOperationDescribeRecommendationFeedbackMiddlewares(stack *mi
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDescribeRecommendationFeedbackValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeRecommendationFeedback(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

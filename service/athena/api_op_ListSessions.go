@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/athena/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -46,13 +45,23 @@ type ListSessionsInput struct {
 	NextToken *string
 
 	// A filter for a specific session state. A description of each state follows.
-	// CREATING - The session is being started, including acquiring resources. CREATED
-	// - The session has been started. IDLE - The session is able to accept a
-	// calculation. BUSY - The session is processing another task and is unable to
-	// accept a calculation. TERMINATING - The session is in the process of shutting
-	// down. TERMINATED - The session and its resources are no longer running. DEGRADED
-	// - The session has no healthy coordinators. FAILED - Due to a failure, the
-	// session and its resources are no longer running.
+	//
+	// CREATING - The session is being started, including acquiring resources.
+	//
+	// CREATED - The session has been started.
+	//
+	// IDLE - The session is able to accept a calculation.
+	//
+	// BUSY - The session is processing another task and is unable to accept a
+	// calculation.
+	//
+	// TERMINATING - The session is in the process of shutting down.
+	//
+	// TERMINATED - The session and its resources are no longer running.
+	//
+	// DEGRADED - The session has no healthy coordinators.
+	//
+	// FAILED - Due to a failure, the session and its resources are no longer running.
 	StateFilter types.SessionState
 
 	noSmithyDocumentSerde
@@ -96,25 +105,25 @@ func (c *Client) addOperationListSessionsMiddlewares(stack *middleware.Stack, op
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -129,13 +138,16 @@ func (c *Client) addOperationListSessionsMiddlewares(stack *middleware.Stack, op
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpListSessionsValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListSessions(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/lookoutequipment/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -31,12 +30,12 @@ func (c *Client) DescribeLabel(ctx context.Context, params *DescribeLabelInput, 
 
 type DescribeLabelInput struct {
 
-	// Returns the name of the group containing the label.
+	//  Returns the name of the group containing the label.
 	//
 	// This member is required.
 	LabelGroupName *string
 
-	// Returns the ID of the label.
+	//  Returns the ID of the label.
 	//
 	// This member is required.
 	LabelId *string
@@ -46,38 +45,40 @@ type DescribeLabelInput struct {
 
 type DescribeLabelOutput struct {
 
-	// The time at which the label was created.
+	//  The time at which the label was created.
 	CreatedAt *time.Time
 
-	// The end time of the requested label.
+	//  The end time of the requested label.
 	EndTime *time.Time
 
-	// Indicates that a label pertains to a particular piece of equipment.
+	//  Indicates that a label pertains to a particular piece of equipment.
 	Equipment *string
 
-	// Indicates the type of anomaly associated with the label. Data in this field
-	// will be retained for service usage. Follow best practices for the security of
-	// your data.
+	//  Indicates the type of anomaly associated with the label.
+	//
+	// Data in this field will be retained for service usage. Follow best practices
+	// for the security of your data.
 	FaultCode *string
 
-	// The Amazon Resource Name (ARN) of the requested label group.
+	//  The Amazon Resource Name (ARN) of the requested label group.
 	LabelGroupArn *string
 
-	// The name of the requested label group.
+	//  The name of the requested label group.
 	LabelGroupName *string
 
-	// The ID of the requested label.
+	//  The ID of the requested label.
 	LabelId *string
 
-	// Metadata providing additional information about the label. Data in this field
-	// will be retained for service usage. Follow best practices for the security of
-	// your data.
+	// Metadata providing additional information about the label.
+	//
+	// Data in this field will be retained for service usage. Follow best practices
+	// for the security of your data.
 	Notes *string
 
-	// Indicates whether a labeled event represents an anomaly.
+	//  Indicates whether a labeled event represents an anomaly.
 	Rating types.LabelRating
 
-	// The start time of the requested label.
+	//  The start time of the requested label.
 	StartTime *time.Time
 
 	// Metadata pertaining to the operation's result.
@@ -108,25 +109,25 @@ func (c *Client) addOperationDescribeLabelMiddlewares(stack *middleware.Stack, o
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -141,13 +142,16 @@ func (c *Client) addOperationDescribeLabelMiddlewares(stack *middleware.Stack, o
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDescribeLabelValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeLabel(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

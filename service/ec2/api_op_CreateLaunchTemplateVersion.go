@@ -6,21 +6,26 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a new version of a launch template. You can specify an existing version
-// of launch template from which to base the new version. Launch template versions
-// are numbered in the order in which they are created. You cannot specify, change,
-// or replace the numbering of launch template versions. Launch templates are
-// immutable; after you create a launch template, you can't modify it. Instead, you
-// can create a new version of the launch template that includes any changes you
-// require. For more information, see Modify a launch template (manage launch
-// template versions) (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-launch-templates.html#manage-launch-template-versions)
-// in the Amazon Elastic Compute Cloud User Guide.
+// Creates a new version of a launch template. You must specify an existing launch
+// template, either by name or ID. You can determine whether the new version
+// inherits parameters from a source version, and add or overwrite parameters as
+// needed.
+//
+// Launch template versions are numbered in the order in which they are created.
+// You can't specify, change, or replace the numbering of launch template versions.
+//
+// Launch templates are immutable; after you create a launch template, you can't
+// modify it. Instead, you can create a new version of the launch template that
+// includes the changes that you require.
+//
+// For more information, see [Modify a launch template (manage launch template versions)] in the Amazon EC2 User Guide.
+//
+// [Modify a launch template (manage launch template versions)]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-launch-templates.html#manage-launch-template-versions
 func (c *Client) CreateLaunchTemplateVersion(ctx context.Context, params *CreateLaunchTemplateVersionInput, optFns ...func(*Options)) (*CreateLaunchTemplateVersionOutput, error) {
 	if params == nil {
 		params = &CreateLaunchTemplateVersionInput{}
@@ -44,8 +49,11 @@ type CreateLaunchTemplateVersionInput struct {
 	LaunchTemplateData *types.RequestLaunchTemplateData
 
 	// Unique, case-sensitive identifier you provide to ensure the idempotency of the
-	// request. For more information, see Ensuring idempotency (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html)
-	// . Constraint: Maximum 128 ASCII characters.
+	// request. For more information, see [Ensuring idempotency].
+	//
+	// Constraint: Maximum 128 ASCII characters.
+	//
+	// [Ensuring idempotency]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
 	ClientToken *string
 
 	// Checks whether you have the required permissions for the action, without
@@ -54,25 +62,38 @@ type CreateLaunchTemplateVersionInput struct {
 	// UnauthorizedOperation .
 	DryRun *bool
 
-	// The ID of the launch template. You must specify either the LaunchTemplateId or
-	// the LaunchTemplateName , but not both.
+	// The ID of the launch template.
+	//
+	// You must specify either the launch template ID or the launch template name, but
+	// not both.
 	LaunchTemplateId *string
 
-	// The name of the launch template. You must specify the LaunchTemplateName or the
-	// LaunchTemplateId , but not both.
+	// The name of the launch template.
+	//
+	// You must specify either the launch template ID or the launch template name, but
+	// not both.
 	LaunchTemplateName *string
 
 	// If true , and if a Systems Manager parameter is specified for ImageId , the AMI
-	// ID is displayed in the response for imageID . For more information, see Use a
-	// Systems Manager parameter instead of an AMI ID (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-launch-templates.html#use-an-ssm-parameter-instead-of-an-ami-id)
-	// in the Amazon Elastic Compute Cloud User Guide. Default: false
+	// ID is displayed in the response for imageID . For more information, see [Use a Systems Manager parameter instead of an AMI ID] in the
+	// Amazon EC2 User Guide.
+	//
+	// Default: false
+	//
+	// [Use a Systems Manager parameter instead of an AMI ID]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-launch-templates.html#use-an-ssm-parameter-instead-of-an-ami-id
 	ResolveAlias *bool
 
-	// The version number of the launch template version on which to base the new
-	// version. The new version inherits the same launch parameters as the source
-	// version, except for parameters that you specify in LaunchTemplateData .
-	// Snapshots applied to the block device mapping are ignored when creating a new
-	// version unless they are explicitly included.
+	// The version of the launch template on which to base the new version. Snapshots
+	// applied to the block device mapping are ignored when creating a new version
+	// unless they are explicitly included.
+	//
+	// If you specify this parameter, the new version inherits the launch parameters
+	// from the source version. If you specify additional launch parameters for the new
+	// version, they overwrite any corresponding launch parameters inherited from the
+	// source version.
+	//
+	// If you omit this parameter, the new version contains only the launch parameters
+	// that you specify for the new version.
 	SourceVersion *string
 
 	// A description for the version of the launch template.
@@ -119,25 +140,25 @@ func (c *Client) addOperationCreateLaunchTemplateVersionMiddlewares(stack *middl
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -152,13 +173,16 @@ func (c *Client) addOperationCreateLaunchTemplateVersionMiddlewares(stack *middl
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpCreateLaunchTemplateVersionValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateLaunchTemplateVersion(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

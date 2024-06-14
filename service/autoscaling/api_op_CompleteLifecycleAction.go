@@ -6,32 +6,40 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Completes the lifecycle action for the specified token or instance with the
-// specified result. This step is a part of the procedure for adding a lifecycle
-// hook to an Auto Scaling group:
+// specified result.
+//
+// This step is a part of the procedure for adding a lifecycle hook to an Auto
+// Scaling group:
+//
 //   - (Optional) Create a launch template or launch configuration with a user
 //     data script that runs while an instance is in a wait state due to a lifecycle
 //     hook.
+//
 //   - (Optional) Create a Lambda function and a rule that allows Amazon
 //     EventBridge to invoke your Lambda function when an instance is put into a wait
 //     state due to a lifecycle hook.
+//
 //   - (Optional) Create a notification target and an IAM role. The target can be
 //     either an Amazon SQS queue or an Amazon SNS topic. The role allows Amazon EC2
 //     Auto Scaling to publish lifecycle notifications to the target.
+//
 //   - Create the lifecycle hook. Specify whether the hook is used when the
 //     instances launch or terminate.
+//
 //   - If you need more time, record the lifecycle action heartbeat to keep the
 //     instance in a wait state.
-//   - If you finish before the timeout period ends, send a callback by using the
-//     CompleteLifecycleAction API call.
 //
-// For more information, see Complete a lifecycle action (https://docs.aws.amazon.com/autoscaling/ec2/userguide/completing-lifecycle-hooks.html)
-// in the Amazon EC2 Auto Scaling User Guide.
+//   - If you finish before the timeout period ends, send a callback by using the CompleteLifecycleAction
+//     API call.
+//
+// For more information, see [Complete a lifecycle action] in the Amazon EC2 Auto Scaling User Guide.
+//
+// [Complete a lifecycle action]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/completing-lifecycle-hooks.html
 func (c *Client) CompleteLifecycleAction(ctx context.Context, params *CompleteLifecycleActionInput, optFns ...func(*Options)) (*CompleteLifecycleActionOutput, error) {
 	if params == nil {
 		params = &CompleteLifecycleActionInput{}
@@ -104,25 +112,25 @@ func (c *Client) addOperationCompleteLifecycleActionMiddlewares(stack *middlewar
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -137,13 +145,16 @@ func (c *Client) addOperationCompleteLifecycleActionMiddlewares(stack *middlewar
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpCompleteLifecycleActionValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCompleteLifecycleAction(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

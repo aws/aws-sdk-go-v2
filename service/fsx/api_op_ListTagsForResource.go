@@ -6,24 +6,29 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/fsx/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists tags for Amazon FSx resources. When retrieving all tags, you can
-// optionally specify the MaxResults parameter to limit the number of tags in a
-// response. If more tags remain, Amazon FSx returns a NextToken value in the
-// response. In this case, send a later request with the NextToken request
-// parameter set to the value of NextToken from the last response. This action is
-// used in an iterative process to retrieve a list of your tags.
+// Lists tags for Amazon FSx resources.
+//
+// When retrieving all tags, you can optionally specify the MaxResults parameter
+// to limit the number of tags in a response. If more tags remain, Amazon FSx
+// returns a NextToken value in the response. In this case, send a later request
+// with the NextToken request parameter set to the value of NextToken from the
+// last response.
+//
+// This action is used in an iterative process to retrieve a list of your tags.
 // ListTagsForResource is called first without a NextToken value. Then the action
 // continues to be called with the NextToken parameter set to the value of the
-// last NextToken value until a response has no NextToken . When using this action,
-// keep the following in mind:
+// last NextToken value until a response has no NextToken .
+//
+// When using this action, keep the following in mind:
+//
 //   - The implementation might return fewer than MaxResults file system
 //     descriptions while still including a NextToken value.
+//
 //   - The order of tags returned in the response of one ListTagsForResource call
 //     and the order of tags returned across the responses of a multi-call iteration is
 //     unspecified.
@@ -102,25 +107,25 @@ func (c *Client) addOperationListTagsForResourceMiddlewares(stack *middleware.St
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -135,13 +140,16 @@ func (c *Client) addOperationListTagsForResourceMiddlewares(stack *middleware.St
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpListTagsForResourceValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListTagsForResource(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

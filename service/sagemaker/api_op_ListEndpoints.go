@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -39,11 +38,11 @@ type ListEndpointsInput struct {
 	// time (timestamp).
 	CreationTimeBefore *time.Time
 
-	// A filter that returns only endpoints that were modified after the specified
+	//  A filter that returns only endpoints that were modified after the specified
 	// timestamp.
 	LastModifiedTimeAfter *time.Time
 
-	// A filter that returns only endpoints that were modified before the specified
+	//  A filter that returns only endpoints that were modified before the specified
 	// timestamp.
 	LastModifiedTimeBefore *time.Time
 
@@ -66,7 +65,7 @@ type ListEndpointsInput struct {
 	// The sort order for results. The default is Descending .
 	SortOrder types.OrderKey
 
-	// A filter that returns only endpoints with the specified status.
+	//  A filter that returns only endpoints with the specified status.
 	StatusEquals types.EndpointStatus
 
 	noSmithyDocumentSerde
@@ -74,12 +73,12 @@ type ListEndpointsInput struct {
 
 type ListEndpointsOutput struct {
 
-	// An array or endpoint objects.
+	//  An array or endpoint objects.
 	//
 	// This member is required.
 	Endpoints []types.EndpointSummary
 
-	// If the response is truncated, SageMaker returns this token. To retrieve the
+	//  If the response is truncated, SageMaker returns this token. To retrieve the
 	// next set of training jobs, use it in the subsequent request.
 	NextToken *string
 
@@ -111,25 +110,25 @@ func (c *Client) addOperationListEndpointsMiddlewares(stack *middleware.Stack, o
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -144,10 +143,13 @@ func (c *Client) addOperationListEndpointsMiddlewares(stack *middleware.Stack, o
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListEndpoints(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

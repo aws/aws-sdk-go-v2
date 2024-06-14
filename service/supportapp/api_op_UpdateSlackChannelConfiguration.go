@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/supportapp/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -46,25 +45,35 @@ type UpdateSlackChannelConfigurationInput struct {
 	ChannelName *string
 
 	// The Amazon Resource Name (ARN) of an IAM role that you want to use to perform
-	// operations on Amazon Web Services. For more information, see Managing access to
-	// the Amazon Web Services Support App (https://docs.aws.amazon.com/awssupport/latest/user/support-app-permissions.html)
-	// in the Amazon Web Services Support User Guide.
+	// operations on Amazon Web Services. For more information, see [Managing access to the Amazon Web Services Support App]in the Amazon Web
+	// Services Support User Guide.
+	//
+	// [Managing access to the Amazon Web Services Support App]: https://docs.aws.amazon.com/awssupport/latest/user/support-app-permissions.html
 	ChannelRoleArn *string
 
 	// Whether you want to get notified when a support case has a new correspondence.
 	NotifyOnAddCorrespondenceToCase *bool
 
-	// The case severity for a support case that you want to receive notifications. If
-	// you specify high or all , at least one of the following parameters must be true
-	// :
+	// The case severity for a support case that you want to receive notifications.
+	//
+	// If you specify high or all , at least one of the following parameters must be
+	// true :
+	//
 	//   - notifyOnAddCorrespondenceToCase
+	//
 	//   - notifyOnCreateOrReopenCase
+	//
 	//   - notifyOnResolveCase
+	//
 	// If you specify none , any of the following parameters that you specify in your
 	// request must be false :
+	//
 	//   - notifyOnAddCorrespondenceToCase
+	//
 	//   - notifyOnCreateOrReopenCase
+	//
 	//   - notifyOnResolveCase
+	//
 	// If you don't specify these parameters in your request, the Amazon Web Services
 	// Support App uses the current values by default.
 	NotifyOnCaseSeverity types.NotificationSeverityLevel
@@ -88,9 +97,10 @@ type UpdateSlackChannelConfigurationOutput struct {
 	ChannelName *string
 
 	// The Amazon Resource Name (ARN) of an IAM role that you want to use to perform
-	// operations on Amazon Web Services. For more information, see Managing access to
-	// the Amazon Web Services Support App (https://docs.aws.amazon.com/awssupport/latest/user/support-app-permissions.html)
-	// in the Amazon Web Services Support User Guide.
+	// operations on Amazon Web Services. For more information, see [Managing access to the Amazon Web Services Support App]in the Amazon Web
+	// Services Support User Guide.
+	//
+	// [Managing access to the Amazon Web Services Support App]: https://docs.aws.amazon.com/awssupport/latest/user/support-app-permissions.html
 	ChannelRoleArn *string
 
 	// Whether you want to get notified when a support case has a new correspondence.
@@ -137,25 +147,25 @@ func (c *Client) addOperationUpdateSlackChannelConfigurationMiddlewares(stack *m
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -170,13 +180,16 @@ func (c *Client) addOperationUpdateSlackChannelConfigurationMiddlewares(stack *m
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpUpdateSlackChannelConfigurationValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateSlackChannelConfiguration(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/sesv2/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -14,13 +13,16 @@ import (
 
 // Sends an email message. You can use the Amazon SES API v2 to send the following
 // types of messages:
+//
 //   - Simple – A standard email message. When you create this type of message,
 //     you specify the sender, the recipient, and the message body, and Amazon SES
 //     assembles the message for you.
+//
 //   - Raw – A raw, MIME-formatted email message. When you send this type of
 //     email, you have to specify all of the message headers, as well as the message
 //     body. You can use this message type to send messages that contain attachments.
 //     The message that you specify has to be a valid MIME message.
+//
 //   - Templated – A message that contains personalization tags. When you send
 //     this type of email, Amazon SES API v2 automatically replaces the tags with
 //     values that you specify.
@@ -40,12 +42,13 @@ func (c *Client) SendEmail(ctx context.Context, params *SendEmailInput, optFns .
 }
 
 // Represents a request to send a single formatted email using Amazon SES. For
-// more information, see the Amazon SES Developer Guide (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/send-email-formatted.html)
-// .
+// more information, see the [Amazon SES Developer Guide].
+//
+// [Amazon SES Developer Guide]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/send-email-formatted.html
 type SendEmailInput struct {
 
 	// An object that contains the body of the message. You can send either a Simple
-	// message Raw message or a template Message.
+	// message, Raw message, or a Templated message.
 	//
 	// This member is required.
 	Content *types.EmailContent
@@ -67,14 +70,18 @@ type SendEmailInput struct {
 	// This parameter is used only for sending authorization. It is the ARN of the
 	// identity that is associated with the sending authorization policy that permits
 	// you to use the email address specified in the FeedbackForwardingEmailAddress
-	// parameter. For example, if the owner of example.com (which has ARN
+	// parameter.
+	//
+	// For example, if the owner of example.com (which has ARN
 	// arn:aws:ses:us-east-1:123456789012:identity/example.com) attaches a policy to it
 	// that authorizes you to use feedback@example.com, then you would specify the
 	// FeedbackForwardingEmailAddressIdentityArn to be
 	// arn:aws:ses:us-east-1:123456789012:identity/example.com, and the
-	// FeedbackForwardingEmailAddress to be feedback@example.com. For more information
-	// about sending authorization, see the Amazon SES Developer Guide (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization.html)
-	// .
+	// FeedbackForwardingEmailAddress to be feedback@example.com.
+	//
+	// For more information about sending authorization, see the [Amazon SES Developer Guide].
+	//
+	// [Amazon SES Developer Guide]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization.html
 	FeedbackForwardingEmailAddressIdentityArn *string
 
 	// The email address to use as the "From" address for the email. The address that
@@ -83,17 +90,22 @@ type SendEmailInput struct {
 
 	// This parameter is used only for sending authorization. It is the ARN of the
 	// identity that is associated with the sending authorization policy that permits
-	// you to use the email address specified in the FromEmailAddress parameter. For
-	// example, if the owner of example.com (which has ARN
+	// you to use the email address specified in the FromEmailAddress parameter.
+	//
+	// For example, if the owner of example.com (which has ARN
 	// arn:aws:ses:us-east-1:123456789012:identity/example.com) attaches a policy to it
 	// that authorizes you to use sender@example.com, then you would specify the
 	// FromEmailAddressIdentityArn to be
 	// arn:aws:ses:us-east-1:123456789012:identity/example.com, and the
-	// FromEmailAddress to be sender@example.com. For more information about sending
-	// authorization, see the Amazon SES Developer Guide (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization.html)
-	// . For Raw emails, the FromEmailAddressIdentityArn value overrides the
+	// FromEmailAddress to be sender@example.com.
+	//
+	// For more information about sending authorization, see the [Amazon SES Developer Guide].
+	//
+	// For Raw emails, the FromEmailAddressIdentityArn value overrides the
 	// X-SES-SOURCE-ARN and X-SES-FROM-ARN headers specified in raw email message
 	// content.
+	//
+	// [Amazon SES Developer Guide]: https://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization.html
 	FromEmailAddressIdentityArn *string
 
 	// An object used to specify a list or topic to which an email belongs, which will
@@ -111,10 +123,12 @@ type SendEmailInput struct {
 type SendEmailOutput struct {
 
 	// A unique identifier for the message that is generated when the message is
-	// accepted. It's possible for Amazon SES to accept a message without sending it.
-	// This can happen when the message that you're trying to send has an attachment
-	// contains a virus, or when you send a templated email that contains invalid
-	// personalization content, for example.
+	// accepted.
+	//
+	// It's possible for Amazon SES to accept a message without sending it. For
+	// example, this can happen when the message that you're trying to send has an
+	// attachment that contains a virus, or when you send a templated email that
+	// contains invalid personalization content.
 	MessageId *string
 
 	// Metadata pertaining to the operation's result.
@@ -145,25 +159,25 @@ func (c *Client) addOperationSendEmailMiddlewares(stack *middleware.Stack, optio
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -178,13 +192,16 @@ func (c *Client) addOperationSendEmailMiddlewares(stack *middleware.Stack, optio
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpSendEmailValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opSendEmail(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

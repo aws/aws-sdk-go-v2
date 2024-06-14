@@ -6,15 +6,16 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/kendra/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Provides a list of groups that are mapped to users before a given ordering or
-// timestamp identifier. ListGroupsOlderThanOrderingId is currently not supported
-// in the Amazon Web Services GovCloud (US-West) region.
+// timestamp identifier.
+//
+// ListGroupsOlderThanOrderingId is currently not supported in the Amazon Web
+// Services GovCloud (US-West) region.
 func (c *Client) ListGroupsOlderThanOrderingId(ctx context.Context, params *ListGroupsOlderThanOrderingIdInput, optFns ...func(*Options)) (*ListGroupsOlderThanOrderingIdOutput, error) {
 	if params == nil {
 		params = &ListGroupsOlderThanOrderingIdInput{}
@@ -48,11 +49,11 @@ type ListGroupsOlderThanOrderingIdInput struct {
 	// before a given ordering timestamp identifier.
 	DataSourceId *string
 
-	// The maximum number of returned groups that are mapped to users before a given
+	//  The maximum number of returned groups that are mapped to users before a given
 	// ordering or timestamp identifier.
 	MaxResults *int32
 
-	// If the previous response was incomplete (because there is more data to
+	//  If the previous response was incomplete (because there is more data to
 	// retrieve), Amazon Kendra returns a pagination token in the response. You can use
 	// this pagination token to retrieve the next set of groups that are mapped to
 	// users before a given ordering or timestamp identifier.
@@ -63,13 +64,13 @@ type ListGroupsOlderThanOrderingIdInput struct {
 
 type ListGroupsOlderThanOrderingIdOutput struct {
 
-	// Summary information for list of groups that are mapped to users before a given
+	//  Summary information for list of groups that are mapped to users before a given
 	// ordering or timestamp identifier.
 	GroupsSummaries []types.GroupSummary
 
-	// If the response is truncated, Amazon Kendra returns this token that you can use
-	// in the subsequent request to retrieve the next set of groups that are mapped to
-	// users before a given ordering or timestamp identifier.
+	//  If the response is truncated, Amazon Kendra returns this token that you can
+	// use in the subsequent request to retrieve the next set of groups that are mapped
+	// to users before a given ordering or timestamp identifier.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -100,25 +101,25 @@ func (c *Client) addOperationListGroupsOlderThanOrderingIdMiddlewares(stack *mid
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -133,13 +134,16 @@ func (c *Client) addOperationListGroupsOlderThanOrderingIdMiddlewares(stack *mid
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpListGroupsOlderThanOrderingIdValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListGroupsOlderThanOrderingId(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -168,7 +172,7 @@ var _ ListGroupsOlderThanOrderingIdAPIClient = (*Client)(nil)
 // ListGroupsOlderThanOrderingIdPaginatorOptions is the paginator options for
 // ListGroupsOlderThanOrderingId
 type ListGroupsOlderThanOrderingIdPaginatorOptions struct {
-	// The maximum number of returned groups that are mapped to users before a given
+	//  The maximum number of returned groups that are mapped to users before a given
 	// ordering or timestamp identifier.
 	Limit int32
 

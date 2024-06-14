@@ -130,6 +130,26 @@ func (m *validateOpGetJobRun) HandleInitialize(ctx context.Context, in middlewar
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpListJobRunAttempts struct {
+}
+
+func (*validateOpListJobRunAttempts) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListJobRunAttempts) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListJobRunAttemptsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListJobRunAttemptsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpListJobRuns struct {
 }
 
@@ -312,6 +332,10 @@ func addOpGetDashboardForJobRunValidationMiddleware(stack *middleware.Stack) err
 
 func addOpGetJobRunValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetJobRun{}, middleware.After)
+}
+
+func addOpListJobRunAttemptsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListJobRunAttempts{}, middleware.After)
 }
 
 func addOpListJobRunsValidationMiddleware(stack *middleware.Stack) error {
@@ -677,6 +701,24 @@ func validateOpGetJobRunInput(v *GetJobRunInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "GetJobRunInput"}
+	if v.ApplicationId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ApplicationId"))
+	}
+	if v.JobRunId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("JobRunId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListJobRunAttemptsInput(v *ListJobRunAttemptsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListJobRunAttemptsInput"}
 	if v.ApplicationId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ApplicationId"))
 	}

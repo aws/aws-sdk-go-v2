@@ -6,14 +6,14 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/qbusiness/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
-// Gets information about an existing retriever used by an Amazon Q application.
+// Gets information about an existing retriever used by an Amazon Q Business
+// application.
 func (c *Client) GetRetriever(ctx context.Context, params *GetRetrieverInput, optFns ...func(*Options)) (*GetRetrieverOutput, error) {
 	if params == nil {
 		params = &GetRetrieverInput{}
@@ -31,7 +31,7 @@ func (c *Client) GetRetriever(ctx context.Context, params *GetRetrieverInput, op
 
 type GetRetrieverInput struct {
 
-	// The identifier of the Amazon Q application using the retriever.
+	// The identifier of the Amazon Q Business application using the retriever.
 	//
 	// This member is required.
 	ApplicationId *string
@@ -46,11 +46,11 @@ type GetRetrieverInput struct {
 
 type GetRetrieverOutput struct {
 
-	// The identifier of the Amazon Q application using the retriever.
+	// The identifier of the Amazon Q Business application using the retriever.
 	ApplicationId *string
 
-	// Provides information on how the retriever used for your Amazon Q application is
-	// configured.
+	// Provides information on how the retriever used for your Amazon Q Business
+	// application is configured.
 	Configuration types.RetrieverConfiguration
 
 	// The Unix timestamp when the retriever was created.
@@ -106,25 +106,25 @@ func (c *Client) addOperationGetRetrieverMiddlewares(stack *middleware.Stack, op
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -139,13 +139,16 @@ func (c *Client) addOperationGetRetrieverMiddlewares(stack *middleware.Stack, op
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpGetRetrieverValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetRetriever(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

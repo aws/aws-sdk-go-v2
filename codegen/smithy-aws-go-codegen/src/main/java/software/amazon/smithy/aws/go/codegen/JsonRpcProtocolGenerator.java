@@ -17,7 +17,7 @@ package software.amazon.smithy.aws.go.codegen;
 
 import static software.amazon.smithy.aws.go.codegen.AwsProtocolUtils.handleDecodeError;
 import static software.amazon.smithy.aws.go.codegen.AwsProtocolUtils.initializeJsonDecoder;
-import static software.amazon.smithy.aws.go.codegen.AwsProtocolUtils.writeJsonErrorMessageCodeDeserializer;
+import static software.amazon.smithy.go.codegen.GoWriter.goTemplate;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -44,6 +44,7 @@ import software.amazon.smithy.model.traits.EventHeaderTrait;
 import software.amazon.smithy.model.traits.EventPayloadTrait;
 import software.amazon.smithy.go.codegen.endpoints.EndpointResolutionGenerator;
 import software.amazon.smithy.go.codegen.endpoints.FnGenerator;
+import software.amazon.smithy.utils.MapUtils;
 
 /**
  * Handles generating the aws.rest-json protocol for services.
@@ -174,7 +175,30 @@ abstract class JsonRpcProtocolGenerator extends HttpRpcProtocolGenerator {
 
     @Override
     protected void writeErrorMessageCodeDeserializer(GenerationContext context) {
-        writeJsonErrorMessageCodeDeserializer(context);
+        var tmpl = goTemplate("""
+                headerCode := response.Header.Get("X-Amzn-ErrorType")
+
+                $initDecoder:W
+                bodyInfo, err := getProtocolErrorInfo(decoder)
+                $handleDecodeError:W
+
+                errorBody.Seek(0, io.SeekStart)
+                if typ, ok := resolveProtocolErrorType(headerCode, bodyInfo); ok {
+                    errorCode = restjson.SanitizeErrorCode(typ)
+                }
+                if len(bodyInfo.Message) != 0 {
+                    errorMessage = bodyInfo.Message
+                }
+
+                """,
+                MapUtils.of(
+                        "initDecoder", (GoWriter.Writable) writer -> initializeJsonDecoder(writer, "errorBody"),
+                        "handleDecodeError", (GoWriter.Writable) AwsProtocolUtils::handleDecodeError
+                ));
+        context.getWriter().get()
+                .addUseImports(AwsGoDependency.AWS_REST_JSON_PROTOCOL)
+                .addUseImports(SmithyGoDependency.IO)
+                .write(tmpl);
     }
 
     @Override
@@ -367,4 +391,47 @@ abstract class JsonRpcProtocolGenerator extends HttpRpcProtocolGenerator {
         generator.generate(context);
     }
 
+    @Override
+    public void generateSharedDeserializerComponents(GenerationContext context) {
+        super.generateSharedDeserializerComponents(context);
+        writeGetProtocolErrorInfo(context);
+    }
+
+    private void writeGetProtocolErrorInfo(GenerationContext context) {
+        var tmpl = goTemplate("""
+                type protocolErrorInfo struct {
+                    Type    string `json:"__type"`
+                    Message string
+                    Code    any // nonstandard for awsjson but some services do present the type here
+                }
+
+                func getProtocolErrorInfo(decoder *json.Decoder) (protocolErrorInfo, error) {
+                    var errInfo protocolErrorInfo
+                    if err := decoder.Decode(&errInfo); err != nil {
+                        if err == io.EOF {
+                            return errInfo, nil
+                        }
+                        return errInfo, err
+                    }
+
+                    return errInfo, nil
+                }
+
+                func resolveProtocolErrorType(headerType string, bodyInfo protocolErrorInfo) (string, bool) {
+                    if len(headerType) != 0 {
+                        return headerType, true
+                    } else if len(bodyInfo.Type) != 0 {
+                        return bodyInfo.Type, true
+                    } else if code, ok := bodyInfo.Code.(string); ok && len(code) != 0 {
+                        return code, true
+                    }
+                    return "", false
+                }
+
+                """);
+        context.getWriter().get()
+                .addUseImports(SmithyGoDependency.JSON)
+                .addUseImports(SmithyGoDependency.IO)
+                .write(tmpl);
+    }
 }

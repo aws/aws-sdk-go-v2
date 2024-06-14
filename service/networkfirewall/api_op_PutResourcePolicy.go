@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -14,21 +13,29 @@ import (
 // Creates or updates an IAM policy for your rule group or firewall policy. Use
 // this to share rule groups and firewall policies between accounts. This operation
 // works in conjunction with the Amazon Web Services Resource Access Manager (RAM)
-// service to manage resource sharing for Network Firewall. Use this operation to
-// create or update a resource policy for your rule group or firewall policy. In
-// the policy, you specify the accounts that you want to share the resource with
-// and the operations that you want the accounts to be able to perform. When you
-// add an account in the resource policy, you then run the following Resource
-// Access Manager (RAM) operations to access and accept the shared rule group or
-// firewall policy.
-//   - GetResourceShareInvitations (https://docs.aws.amazon.com/ram/latest/APIReference/API_GetResourceShareInvitations.html)
-//   - Returns the Amazon Resource Names (ARNs) of the resource share invitations.
-//   - AcceptResourceShareInvitation (https://docs.aws.amazon.com/ram/latest/APIReference/API_AcceptResourceShareInvitation.html)
-//   - Accepts the share invitation for a specified resource share.
+// service to manage resource sharing for Network Firewall.
 //
-// For additional information about resource sharing using RAM, see Resource
-// Access Manager User Guide (https://docs.aws.amazon.com/ram/latest/userguide/what-is.html)
-// .
+// Use this operation to create or update a resource policy for your rule group or
+// firewall policy. In the policy, you specify the accounts that you want to share
+// the resource with and the operations that you want the accounts to be able to
+// perform.
+//
+// When you add an account in the resource policy, you then run the following
+// Resource Access Manager (RAM) operations to access and accept the shared rule
+// group or firewall policy.
+//
+// [GetResourceShareInvitations]
+//   - - Returns the Amazon Resource Names (ARNs) of the resource share
+//     invitations.
+//
+// [AcceptResourceShareInvitation]
+//   - - Accepts the share invitation for a specified resource share.
+//
+// For additional information about resource sharing using RAM, see [Resource Access Manager User Guide].
+//
+// [AcceptResourceShareInvitation]: https://docs.aws.amazon.com/ram/latest/APIReference/API_AcceptResourceShareInvitation.html
+// [GetResourceShareInvitations]: https://docs.aws.amazon.com/ram/latest/APIReference/API_GetResourceShareInvitations.html
+// [Resource Access Manager User Guide]: https://docs.aws.amazon.com/ram/latest/userguide/what-is.html
 func (c *Client) PutResourcePolicy(ctx context.Context, params *PutResourcePolicyInput, optFns ...func(*Options)) (*PutResourcePolicyOutput, error) {
 	if params == nil {
 		params = &PutResourcePolicyInput{}
@@ -48,15 +55,24 @@ type PutResourcePolicyInput struct {
 
 	// The IAM policy statement that lists the accounts that you want to share your
 	// rule group or firewall policy with and the operations that you want the accounts
-	// to be able to perform. For a rule group resource, you can specify the following
-	// operations in the Actions section of the statement:
+	// to be able to perform.
+	//
+	// For a rule group resource, you can specify the following operations in the
+	// Actions section of the statement:
+	//
 	//   - network-firewall:CreateFirewallPolicy
+	//
 	//   - network-firewall:UpdateFirewallPolicy
+	//
 	//   - network-firewall:ListRuleGroups
+	//
 	// For a firewall policy resource, you can specify the following operations in the
 	// Actions section of the statement:
+	//
 	//   - network-firewall:AssociateFirewallPolicy
+	//
 	//   - network-firewall:ListFirewallPolicies
+	//
 	// In the Resource section of the statement, you specify the ARNs for the rule
 	// groups and firewall policies that you want to share with the account that you
 	// specified in Arn .
@@ -102,25 +118,25 @@ func (c *Client) addOperationPutResourcePolicyMiddlewares(stack *middleware.Stac
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -135,13 +151,16 @@ func (c *Client) addOperationPutResourcePolicyMiddlewares(stack *middleware.Stac
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpPutResourcePolicyValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opPutResourcePolicy(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

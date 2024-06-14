@@ -6,18 +6,20 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/databasemigrationservice/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Starts the analysis of up to 20 source databases to recommend target engines
-// for each source database. This is a batch version of StartRecommendations (https://docs.aws.amazon.com/dms/latest/APIReference/API_StartRecommendations.html)
-// . The result of analysis of each source database is reported individually in the
+// for each source database. This is a batch version of [StartRecommendations].
+//
+// The result of analysis of each source database is reported individually in the
 // response. Because the batch request can result in a combination of successful
 // and unsuccessful actions, you should check for batch errors even when the call
 // returns an HTTP status code of 200 .
+//
+// [StartRecommendations]: https://docs.aws.amazon.com/dms/latest/APIReference/API_StartRecommendations.html
 func (c *Client) BatchStartRecommendations(ctx context.Context, params *BatchStartRecommendationsInput, optFns ...func(*Options)) (*BatchStartRecommendationsOutput, error) {
 	if params == nil {
 		params = &BatchStartRecommendationsInput{}
@@ -75,25 +77,25 @@ func (c *Client) addOperationBatchStartRecommendationsMiddlewares(stack *middlew
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -108,13 +110,16 @@ func (c *Client) addOperationBatchStartRecommendationsMiddlewares(stack *middlew
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpBatchStartRecommendationsValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opBatchStartRecommendations(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

@@ -13,44 +13,58 @@ type AppIntegrationsConfiguration struct {
 
 	// The Amazon Resource Name (ARN) of the AppIntegrations DataIntegration to use
 	// for ingesting content.
-	//   - For Salesforce (https://developer.salesforce.com/docs/atlas.en-us.knowledge_dev.meta/knowledge_dev/sforce_api_objects_knowledge__kav.htm)
-	//   , your AppIntegrations DataIntegration must have an ObjectConfiguration if
-	//   objectFields is not provided, including at least Id , ArticleNumber ,
+	//
+	//   - For [Salesforce], your AppIntegrations DataIntegration must have an ObjectConfiguration
+	//   if objectFields is not provided, including at least Id , ArticleNumber ,
 	//   VersionNumber , Title , PublishStatus , and IsDeleted as source fields.
-	//   - For ServiceNow (https://developer.servicenow.com/dev.do#!/reference/api/rome/rest/knowledge-management-api)
-	//   , your AppIntegrations DataIntegration must have an ObjectConfiguration if
-	//   objectFields is not provided, including at least number , short_description ,
-	//   sys_mod_count , workflow_state , and active as source fields.
-	//   - For Zendesk (https://developer.zendesk.com/api-reference/help_center/help-center-api/articles/)
-	//   , your AppIntegrations DataIntegration must have an ObjectConfiguration if
-	//   objectFields is not provided, including at least id , title , updated_at , and
-	//   draft as source fields.
-	//   - For SharePoint (https://learn.microsoft.com/en-us/sharepoint/dev/sp-add-ins/sharepoint-net-server-csom-jsom-and-rest-api-index)
-	//   , your AppIntegrations DataIntegration must have a FileConfiguration, including
-	//   only file extensions that are among docx , pdf , html , htm , and txt .
-	//   - For Amazon S3 (https://aws.amazon.com/s3/) , the ObjectConfiguration and
-	//   FileConfiguration of your AppIntegrations DataIntegration must be null. The
-	//   SourceURI of your DataIntegration must use the following format:
-	//   s3://your_s3_bucket_name . The bucket policy of the corresponding S3 bucket
-	//   must allow the Amazon Web Services principal app-integrations.amazonaws.com to
-	//   perform s3:ListBucket , s3:GetObject , and s3:GetBucketLocation against the
-	//   bucket.
+	//
+	//   - For [ServiceNow], your AppIntegrations DataIntegration must have an ObjectConfiguration
+	//   if objectFields is not provided, including at least number , short_description
+	//   , sys_mod_count , workflow_state , and active as source fields.
+	//
+	//   - For [Zendesk], your AppIntegrations DataIntegration must have an ObjectConfiguration
+	//   if objectFields is not provided, including at least id , title , updated_at ,
+	//   and draft as source fields.
+	//
+	//   - For [SharePoint], your AppIntegrations DataIntegration must have a FileConfiguration,
+	//   including only file extensions that are among docx , pdf , html , htm , and
+	//   txt .
+	//
+	//   - For [Amazon S3], the ObjectConfiguration and FileConfiguration of your AppIntegrations
+	//   DataIntegration must be null. The SourceURI of your DataIntegration must use
+	//   the following format: s3://your_s3_bucket_name .
+	//
+	// The bucket policy of the corresponding S3 bucket must allow the Amazon Web
+	//   Services principal app-integrations.amazonaws.com to perform s3:ListBucket ,
+	//   s3:GetObject , and s3:GetBucketLocation against the bucket.
+	//
+	// [ServiceNow]: https://developer.servicenow.com/dev.do#!/reference/api/rome/rest/knowledge-management-api
+	// [Amazon S3]: https://aws.amazon.com/s3/
+	// [Zendesk]: https://developer.zendesk.com/api-reference/help_center/help-center-api/articles/
+	// [SharePoint]: https://learn.microsoft.com/en-us/sharepoint/dev/sp-add-ins/sharepoint-net-server-csom-jsom-and-rest-api-index
+	// [Salesforce]: https://developer.salesforce.com/docs/atlas.en-us.knowledge_dev.meta/knowledge_dev/sforce_api_objects_knowledge__kav.htm
 	//
 	// This member is required.
 	AppIntegrationArn *string
 
-	// The fields from the source that are made available to your agents in Amazon Q.
-	// Optional if ObjectConfiguration is included in the provided DataIntegration.
-	//   - For Salesforce (https://developer.salesforce.com/docs/atlas.en-us.knowledge_dev.meta/knowledge_dev/sforce_api_objects_knowledge__kav.htm)
-	//   , you must include at least Id , ArticleNumber , VersionNumber , Title ,
+	// The fields from the source that are made available to your agents in Amazon Q
+	// in Connect. Optional if ObjectConfiguration is included in the provided
+	// DataIntegration.
+	//
+	//   - For [Salesforce], you must include at least Id , ArticleNumber , VersionNumber , Title ,
 	//   PublishStatus , and IsDeleted .
-	//   - For ServiceNow (https://developer.servicenow.com/dev.do#!/reference/api/rome/rest/knowledge-management-api)
-	//   , you must include at least number , short_description , sys_mod_count ,
+	//
+	//   - For [ServiceNow], you must include at least number , short_description , sys_mod_count ,
 	//   workflow_state , and active .
-	//   - For Zendesk (https://developer.zendesk.com/api-reference/help_center/help-center-api/articles/)
-	//   , you must include at least id , title , updated_at , and draft .
+	//
+	//   - For [Zendesk], you must include at least id , title , updated_at , and draft .
+	//
 	// Make sure to include additional fields. These fields are indexed and used to
 	// source recommendations.
+	//
+	// [ServiceNow]: https://developer.servicenow.com/dev.do#!/reference/api/rome/rest/knowledge-management-api
+	// [Zendesk]: https://developer.zendesk.com/api-reference/help_center/help-center-api/articles/
+	// [Salesforce]: https://developer.salesforce.com/docs/atlas.en-us.knowledge_dev.meta/knowledge_dev/sforce_api_objects_knowledge__kav.htm
 	ObjectFields []string
 
 	noSmithyDocumentSerde
@@ -59,7 +73,7 @@ type AppIntegrationsConfiguration struct {
 // Information about the assistant association.
 type AssistantAssociationData struct {
 
-	// The Amazon Resource Name (ARN) of the Amazon Q assistant.
+	// The Amazon Resource Name (ARN) of the Amazon Q in Connect assistant.
 	//
 	// This member is required.
 	AssistantArn *string
@@ -74,7 +88,7 @@ type AssistantAssociationData struct {
 	// This member is required.
 	AssistantAssociationId *string
 
-	// The identifier of the Amazon Q assistant.
+	// The identifier of the Amazon Q in Connect assistant.
 	//
 	// This member is required.
 	AssistantId *string
@@ -95,7 +109,8 @@ type AssistantAssociationData struct {
 	noSmithyDocumentSerde
 }
 
-// The data that is input into Amazon Q as a result of the assistant association.
+// The data that is input into Amazon Q in Connect as a result of the assistant
+// association.
 //
 // The following types satisfy this interface:
 //
@@ -105,7 +120,7 @@ type AssistantAssociationInputData interface {
 }
 
 // The identifier of the knowledge base. This should not be a QUICK_RESPONSES type
-// knowledge base if you're storing Amazon Q Content resource to it.
+// knowledge base.
 type AssistantAssociationInputDataMemberKnowledgeBaseId struct {
 	Value string
 
@@ -136,7 +151,7 @@ func (*AssistantAssociationOutputDataMemberKnowledgeBaseAssociation) isAssistant
 // Summary information about the assistant association.
 type AssistantAssociationSummary struct {
 
-	// The Amazon Resource Name (ARN) of the Amazon Q assistant.
+	// The Amazon Resource Name (ARN) of the Amazon Q in Connect assistant.
 	//
 	// This member is required.
 	AssistantArn *string
@@ -151,7 +166,7 @@ type AssistantAssociationSummary struct {
 	// This member is required.
 	AssistantAssociationId *string
 
-	// The identifier of the Amazon Q assistant.
+	// The identifier of the Amazon Q in Connect assistant.
 	//
 	// This member is required.
 	AssistantId *string
@@ -172,10 +187,10 @@ type AssistantAssociationSummary struct {
 	noSmithyDocumentSerde
 }
 
-// The capability configuration for an Amazon Q assistant.
+// The capability configuration for an Amazon Q in Connect assistant.
 type AssistantCapabilityConfiguration struct {
 
-	// The type of Amazon Q assistant capability.
+	// The type of Amazon Q in Connect assistant capability.
 	Type AssistantCapabilityType
 
 	noSmithyDocumentSerde
@@ -184,12 +199,12 @@ type AssistantCapabilityConfiguration struct {
 // The assistant data.
 type AssistantData struct {
 
-	// The Amazon Resource Name (ARN) of the Amazon Q assistant.
+	// The Amazon Resource Name (ARN) of the Amazon Q in Connect assistant.
 	//
 	// This member is required.
 	AssistantArn *string
 
-	// The identifier of the Amazon Q assistant.
+	// The identifier of the Amazon Q in Connect assistant.
 	//
 	// This member is required.
 	AssistantId *string
@@ -209,23 +224,27 @@ type AssistantData struct {
 	// This member is required.
 	Type AssistantType
 
-	// The configuration information for the Amazon Q assistant capability.
+	// The configuration information for the Amazon Q in Connect assistant capability.
 	CapabilityConfiguration *AssistantCapabilityConfiguration
 
 	// The description.
 	Description *string
 
-	// The configuration information for the Amazon Q assistant integration.
+	// The configuration information for the Amazon Q in Connect assistant integration.
 	IntegrationConfiguration *AssistantIntegrationConfiguration
 
 	// The configuration information for the customer managed key used for encryption.
+	//
 	// This KMS key must have a policy that allows kms:CreateGrant , kms:DescribeKey ,
 	// kms:Decrypt , and kms:GenerateDataKey* permissions to the IAM identity using
-	// the key to invoke Amazon Q. To use Amazon Q with chat, the key policy must also
-	// allow kms:Decrypt , kms:GenerateDataKey* , and kms:DescribeKey permissions to
-	// the connect.amazonaws.com service principal. For more information about setting
-	// up a customer managed key for Amazon Q, see Enable Amazon Q in Connect for your
-	// instance (https://docs.aws.amazon.com/connect/latest/adminguide/enable-q.html) .
+	// the key to invoke Amazon Q in Connect. To use Amazon Q in Connect with chat, the
+	// key policy must also allow kms:Decrypt , kms:GenerateDataKey* , and
+	// kms:DescribeKey permissions to the connect.amazonaws.com service principal.
+	//
+	// For more information about setting up a customer managed key for Amazon Q in
+	// Connect, see [Enable Amazon Q in Connect for your instance].
+	//
+	// [Enable Amazon Q in Connect for your instance]: https://docs.aws.amazon.com/connect/latest/adminguide/enable-q.html
 	ServerSideEncryptionConfiguration *ServerSideEncryptionConfiguration
 
 	// The tags used to organize, track, or control access for this resource.
@@ -234,7 +253,7 @@ type AssistantData struct {
 	noSmithyDocumentSerde
 }
 
-// The configuration information for the Amazon Q assistant integration.
+// The configuration information for the Amazon Q in Connect assistant integration.
 type AssistantIntegrationConfiguration struct {
 
 	// The Amazon Resource Name (ARN) of the integrated Amazon SNS topic used for
@@ -247,12 +266,12 @@ type AssistantIntegrationConfiguration struct {
 // Summary information about the assistant.
 type AssistantSummary struct {
 
-	// The Amazon Resource Name (ARN) of the Amazon Q assistant.
+	// The Amazon Resource Name (ARN) of the Amazon Q in Connect assistant.
 	//
 	// This member is required.
 	AssistantArn *string
 
-	// The identifier of the Amazon Q assistant.
+	// The identifier of the Amazon Q in Connect assistant.
 	//
 	// This member is required.
 	AssistantId *string
@@ -272,23 +291,27 @@ type AssistantSummary struct {
 	// This member is required.
 	Type AssistantType
 
-	// The configuration information for the Amazon Q assistant capability.
+	// The configuration information for the Amazon Q in Connect assistant capability.
 	CapabilityConfiguration *AssistantCapabilityConfiguration
 
 	// The description of the assistant.
 	Description *string
 
-	// The configuration information for the Amazon Q assistant integration.
+	// The configuration information for the Amazon Q in Connect assistant integration.
 	IntegrationConfiguration *AssistantIntegrationConfiguration
 
 	// The configuration information for the customer managed key used for encryption.
+	//
 	// This KMS key must have a policy that allows kms:CreateGrant , kms:DescribeKey ,
 	// kms:Decrypt , and kms:GenerateDataKey* permissions to the IAM identity using
-	// the key to invoke Amazon Q. To use Amazon Q with chat, the key policy must also
-	// allow kms:Decrypt , kms:GenerateDataKey* , and kms:DescribeKey permissions to
-	// the connect.amazonaws.com service principal. For more information about setting
-	// up a customer managed key for Amazon Q, see Enable Amazon Q in Connect for your
-	// instance (https://docs.aws.amazon.com/connect/latest/adminguide/enable-q.html) .
+	// the key to invoke Amazon Q in Connect. To use Amazon Q in Connect with chat, the
+	// key policy must also allow kms:Decrypt , kms:GenerateDataKey* , and
+	// kms:DescribeKey permissions to the connect.amazonaws.com service principal.
+	//
+	// For more information about setting up a customer managed key for Amazon Q in
+	// Connect, see [Enable Amazon Q in Connect for your instance].
+	//
+	// [Enable Amazon Q in Connect for your instance]: https://docs.aws.amazon.com/connect/latest/adminguide/enable-q.html
 	ServerSideEncryptionConfiguration *ServerSideEncryptionConfiguration
 
 	// The tags used to organize, track, or control access for this resource.
@@ -348,16 +371,15 @@ type ContentData struct {
 	// This member is required.
 	KnowledgeBaseArn *string
 
-	// The identifier of the knowledge base. This should not be a QUICK_RESPONSES type
-	// knowledge base if you're storing Amazon Q Content resource to it.
+	// The identifier of the knowledge base.
 	//
 	// This member is required.
 	KnowledgeBaseId *string
 
 	// A key/value map to store attributes without affecting tagging or
 	// recommendations. For example, when synchronizing data between an external system
-	// and Amazon Q, you can store an external version identifier as metadata to
-	// utilize for determining drift.
+	// and Amazon Q in Connect, you can store an external version identifier as
+	// metadata to utilize for determining drift.
 	//
 	// This member is required.
 	Metadata map[string]string
@@ -448,7 +470,7 @@ type ContentReference struct {
 	KnowledgeBaseArn *string
 
 	// The identifier of the knowledge base. This should not be a QUICK_RESPONSES type
-	// knowledge base if you're storing Amazon Q Content resource to it.
+	// knowledge base.
 	KnowledgeBaseId *string
 
 	noSmithyDocumentSerde
@@ -478,15 +500,15 @@ type ContentSummary struct {
 	KnowledgeBaseArn *string
 
 	// The identifier of the knowledge base. This should not be a QUICK_RESPONSES type
-	// knowledge base if you're storing Amazon Q Content resource to it.
+	// knowledge base.
 	//
 	// This member is required.
 	KnowledgeBaseId *string
 
 	// A key/value map to store attributes without affecting tagging or
 	// recommendations. For example, when synchronizing data between an external system
-	// and Amazon Q, you can store an external version identifier as metadata to
-	// utilize for determining drift.
+	// and Amazon Q in Connect, you can store an external version identifier as
+	// metadata to utilize for determining drift.
 	//
 	// This member is required.
 	Metadata map[string]string
@@ -700,7 +722,7 @@ type GenerativeDataDetails struct {
 // Reference information about generative content.
 type GenerativeReference struct {
 
-	// The identifier of the LLM model.
+	//  The identifier of the LLM model.
 	GenerationId *string
 
 	// The identifier of the LLM model.
@@ -709,22 +731,27 @@ type GenerativeReference struct {
 	noSmithyDocumentSerde
 }
 
-// The configuration information of the grouping of Amazon Q users.
+// The configuration information of the grouping of Amazon Q in Connect users.
 type GroupingConfiguration struct {
 
-	// The criteria used for grouping Amazon Q users. The following is the list of
-	// supported criteria values.
-	//   - RoutingProfileArn : Grouping the users by their Amazon Connect routing
-	//   profile ARN (https://docs.aws.amazon.com/connect/latest/APIReference/API_RoutingProfile.html)
-	//   . User should have SearchRoutingProfile (https://docs.aws.amazon.com/connect/latest/APIReference/API_SearchRoutingProfiles.html)
-	//   and DescribeRoutingProfile (https://docs.aws.amazon.com/connect/latest/APIReference/API_DescribeRoutingProfile.html)
+	// The criteria used for grouping Amazon Q in Connect users.
+	//
+	// The following is the list of supported criteria values.
+	//
+	//   - RoutingProfileArn : Grouping the users by their [Amazon Connect routing profile ARN]. User should have [SearchRoutingProfile]and [DescribeRoutingProfile]
 	//   permissions when setting criteria to this value.
+	//
+	// [Amazon Connect routing profile ARN]: https://docs.aws.amazon.com/connect/latest/APIReference/API_RoutingProfile.html
+	// [SearchRoutingProfile]: https://docs.aws.amazon.com/connect/latest/APIReference/API_SearchRoutingProfiles.html
+	// [DescribeRoutingProfile]: https://docs.aws.amazon.com/connect/latest/APIReference/API_DescribeRoutingProfile.html
 	Criteria *string
 
-	// The list of values that define different groups of Amazon Q users.
+	// The list of values that define different groups of Amazon Q in Connect users.
+	//
 	//   - When setting criteria to RoutingProfileArn , you need to provide a list of
-	//   ARNs of Amazon Connect routing profiles (https://docs.aws.amazon.com/connect/latest/APIReference/API_RoutingProfile.html)
-	//   as values of this parameter.
+	//   ARNs of [Amazon Connect routing profiles]as values of this parameter.
+	//
+	// [Amazon Connect routing profiles]: https://docs.aws.amazon.com/connect/latest/APIReference/API_RoutingProfile.html
 	Values []string
 
 	noSmithyDocumentSerde
@@ -766,8 +793,7 @@ type ImportJobData struct {
 	// This member is required.
 	KnowledgeBaseArn *string
 
-	// The identifier of the knowledge base. This should not be a QUICK_RESPONSES type
-	// knowledge base if you're storing Amazon Q Content resource to it.
+	// The identifier of the knowledge base.
 	//
 	// This member is required.
 	KnowledgeBaseId *string
@@ -782,8 +808,9 @@ type ImportJobData struct {
 	// This member is required.
 	Status ImportJobStatus
 
-	// A pointer to the uploaded asset. This value is returned by StartContentUpload (https://docs.aws.amazon.com/wisdom/latest/APIReference/API_StartContentUpload.html)
-	// .
+	// A pointer to the uploaded asset. This value is returned by [StartContentUpload].
+	//
+	// [StartContentUpload]: https://docs.aws.amazon.com/wisdom/latest/APIReference/API_StartContentUpload.html
 	//
 	// This member is required.
 	UploadId *string
@@ -805,7 +832,7 @@ type ImportJobData struct {
 	// imported.
 	FailedRecordReport *string
 
-	// The metadata fields of the imported Amazon Q resources.
+	// The metadata fields of the imported Amazon Q in Connect resources.
 	Metadata map[string]string
 
 	noSmithyDocumentSerde
@@ -834,8 +861,7 @@ type ImportJobSummary struct {
 	// This member is required.
 	KnowledgeBaseArn *string
 
-	// The identifier of the knowledge base. This should not be a QUICK_RESPONSES type
-	// knowledge base if you're storing Amazon Q Content resource to it.
+	// The identifier of the knowledge base.
 	//
 	// This member is required.
 	KnowledgeBaseId *string
@@ -850,8 +876,9 @@ type ImportJobSummary struct {
 	// This member is required.
 	Status ImportJobStatus
 
-	// A pointer to the uploaded asset. This value is returned by StartContentUpload (https://docs.aws.amazon.com/wisdom/latest/APIReference/API_StartContentUpload.html)
-	// .
+	// A pointer to the uploaded asset. This value is returned by [StartContentUpload].
+	//
+	// [StartContentUpload]: https://docs.aws.amazon.com/wisdom/latest/APIReference/API_StartContentUpload.html
 	//
 	// This member is required.
 	UploadId *string
@@ -860,7 +887,7 @@ type ImportJobSummary struct {
 	// imported from.
 	ExternalSourceConfiguration *ExternalSourceConfiguration
 
-	// The metadata fields of the imported Amazon Q resources.
+	// The metadata fields of the imported Amazon Q in Connect resources.
 	Metadata map[string]string
 
 	noSmithyDocumentSerde
@@ -872,8 +899,7 @@ type KnowledgeBaseAssociationData struct {
 	// The Amazon Resource Name (ARN) of the knowledge base.
 	KnowledgeBaseArn *string
 
-	// The identifier of the knowledge base. This should not be a QUICK_RESPONSES type
-	// knowledge base if you're storing Amazon Q Content resource to it.
+	// The identifier of the knowledge base.
 	KnowledgeBaseId *string
 
 	noSmithyDocumentSerde
@@ -887,8 +913,7 @@ type KnowledgeBaseData struct {
 	// This member is required.
 	KnowledgeBaseArn *string
 
-	// The identifier of the knowledge base. This should not be a QUICK_RESPONSES type
-	// knowledge base if you're storing Amazon Q Content resource to it.
+	// The identifier of the knowledge base.
 	//
 	// This member is required.
 	KnowledgeBaseId *string
@@ -919,11 +944,15 @@ type KnowledgeBaseData struct {
 	RenderingConfiguration *RenderingConfiguration
 
 	// The configuration information for the customer managed key used for encryption.
+	//
 	// This KMS key must have a policy that allows kms:CreateGrant , kms:DescribeKey ,
 	// kms:Decrypt , and kms:GenerateDataKey* permissions to the IAM identity using
-	// the key to invoke Amazon Q. For more information about setting up a customer
-	// managed key for Amazon Q, see Enable Amazon Q in Connect for your instance (https://docs.aws.amazon.com/connect/latest/adminguide/enable-q.html)
-	// .
+	// the key to invoke Amazon Q in Connect.
+	//
+	// For more information about setting up a customer managed key for Amazon Q in
+	// Connect, see [Enable Amazon Q in Connect for your instance].
+	//
+	// [Enable Amazon Q in Connect for your instance]: https://docs.aws.amazon.com/connect/latest/adminguide/enable-q.html
 	ServerSideEncryptionConfiguration *ServerSideEncryptionConfiguration
 
 	// Source configuration information about the knowledge base.
@@ -943,8 +972,7 @@ type KnowledgeBaseSummary struct {
 	// This member is required.
 	KnowledgeBaseArn *string
 
-	// The identifier of the knowledge base. This should not be a QUICK_RESPONSES type
-	// knowledge base if you're storing Amazon Q Content resource to it.
+	// The identifier of the knowledge base.
 	//
 	// This member is required.
 	KnowledgeBaseId *string
@@ -971,11 +999,15 @@ type KnowledgeBaseSummary struct {
 	RenderingConfiguration *RenderingConfiguration
 
 	// The configuration information for the customer managed key used for encryption.
+	//
 	// This KMS key must have a policy that allows kms:CreateGrant , kms:DescribeKey ,
 	// kms:Decrypt , and kms:GenerateDataKey* permissions to the IAM identity using
-	// the key to invoke Amazon Q. For more information about setting up a customer
-	// managed key for Amazon Q, see Enable Amazon Q in Connect for your instance (https://docs.aws.amazon.com/connect/latest/adminguide/enable-q.html)
-	// .
+	// the key to invoke Amazon Q in Connect.
+	//
+	// For more information about setting up a customer managed key for Amazon Q in
+	// Connect, see [Enable Amazon Q in Connect for your instance].
+	//
+	// [Enable Amazon Q in Connect for your instance]: https://docs.aws.amazon.com/connect/latest/adminguide/enable-q.html
 	ServerSideEncryptionConfiguration *ServerSideEncryptionConfiguration
 
 	// Configuration information about the external data source.
@@ -998,6 +1030,34 @@ type NotifyRecommendationsReceivedError struct {
 
 	noSmithyDocumentSerde
 }
+
+// A list of conditions which would be applied together with an OR condition.
+//
+// The following types satisfy this interface:
+//
+//	OrConditionMemberAndConditions
+//	OrConditionMemberTagCondition
+type OrCondition interface {
+	isOrCondition()
+}
+
+// A list of conditions which would be applied together with an AND condition.
+type OrConditionMemberAndConditions struct {
+	Value []TagCondition
+
+	noSmithyDocumentSerde
+}
+
+func (*OrConditionMemberAndConditions) isOrCondition() {}
+
+// A leaf node condition which can be used to specify a tag condition.
+type OrConditionMemberTagCondition struct {
+	Value TagCondition
+
+	noSmithyDocumentSerde
+}
+
+func (*OrConditionMemberTagCondition) isOrCondition() {}
 
 // Information about how to query content.
 //
@@ -1025,7 +1085,7 @@ type QueryConditionItem struct {
 	// This member is required.
 	Comparator QueryConditionComparisonOperator
 
-	// The name of the field for query condition to query on.
+	//  The name of the field for query condition to query on.
 	//
 	// This member is required.
 	Field QueryConditionFieldName
@@ -1081,8 +1141,10 @@ type QuickResponseContents struct {
 type QuickResponseData struct {
 
 	// The media type of the quick response content.
+	//
 	//   - Use application/x.quickresponse;format=plain for quick response written in
 	//   plain text.
+	//
 	//   - Use application/x.quickresponse;format=markdown for quick response written
 	//   in richtext.
 	//
@@ -1099,9 +1161,8 @@ type QuickResponseData struct {
 	// This member is required.
 	KnowledgeBaseArn *string
 
-	// The identifier of the knowledge base. This should not be a QUICK_RESPONSES type
-	// knowledge base if you're storing Amazon Q Content resource to it. Can be either
-	// the ID or the ARN. URLs cannot contain the ARN.
+	// The identifier of the knowledge base. Can be either the ID or the ARN. URLs
+	// cannot contain the ARN.
 	//
 	// This member is required.
 	KnowledgeBaseId *string
@@ -1183,19 +1244,32 @@ type QuickResponseDataProviderMemberContent struct {
 
 func (*QuickResponseDataProviderMemberContent) isQuickResponseDataProvider() {}
 
-// The quick response fields to filter the quick response query results by. The
-// following is the list of supported field names.
+// The quick response fields to filter the quick response query results by.
+//
+// The following is the list of supported field names.
+//
 //   - name
+//
 //   - description
+//
 //   - shortcutKey
+//
 //   - isActive
+//
 //   - channels
+//
 //   - language
+//
 //   - contentType
+//
 //   - createdTime
+//
 //   - lastModifiedTime
+//
 //   - lastModifiedBy
+//
 //   - groupingConfiguration.criteria
+//
 //   - groupingConfiguration.values
 type QuickResponseFilterField struct {
 
@@ -1218,19 +1292,32 @@ type QuickResponseFilterField struct {
 	noSmithyDocumentSerde
 }
 
-// The quick response fields to order the quick response query results by. The
-// following is the list of supported field names.
+// The quick response fields to order the quick response query results by.
+//
+// The following is the list of supported field names.
+//
 //   - name
+//
 //   - description
+//
 //   - shortcutKey
+//
 //   - isActive
+//
 //   - channels
+//
 //   - language
+//
 //   - contentType
+//
 //   - createdTime
+//
 //   - lastModifiedTime
+//
 //   - lastModifiedBy
+//
 //   - groupingConfiguration.criteria
+//
 //   - groupingConfiguration.values
 type QuickResponseOrderField struct {
 
@@ -1245,11 +1332,16 @@ type QuickResponseOrderField struct {
 	noSmithyDocumentSerde
 }
 
-// The quick response fields to query quick responses by. The following is the
-// list of supported field names.
+// The quick response fields to query quick responses by.
+//
+// The following is the list of supported field names.
+//
 //   - content
+//
 //   - name
+//
 //   - description
+//
 //   - shortcutKey
 type QuickResponseQueryField struct {
 
@@ -1299,8 +1391,10 @@ type QuickResponseSearchExpression struct {
 type QuickResponseSearchResultData struct {
 
 	// The media type of the quick response content.
+	//
 	//   - Use application/x.quickresponse;format=plain for quick response written in
 	//   plain text.
+	//
 	//   - Use application/x.quickresponse;format=markdown for quick response written
 	//   in richtext.
 	//
@@ -1327,9 +1421,8 @@ type QuickResponseSearchResultData struct {
 	// This member is required.
 	KnowledgeBaseArn *string
 
-	// The identifier of the knowledge base. This should not be a QUICK_RESPONSES type
-	// knowledge base if you're storing Amazon Q Content resource to it. Can be either
-	// the ID or the ARN. URLs cannot contain the ARN.
+	// The identifier of the knowledge base. Can be either the ID or the ARN. URLs
+	// cannot contain the ARN.
 	//
 	// This member is required.
 	KnowledgeBaseId *string
@@ -1399,8 +1492,10 @@ type QuickResponseSearchResultData struct {
 type QuickResponseSummary struct {
 
 	// The media type of the quick response content.
+	//
 	//   - Use application/x.quickresponse;format=plain for quick response written in
 	//   plain text.
+	//
 	//   - Use application/x.quickresponse;format=markdown for quick response written
 	//   in richtext.
 	//
@@ -1417,8 +1512,7 @@ type QuickResponseSummary struct {
 	// This member is required.
 	KnowledgeBaseArn *string
 
-	// The identifier of the knowledge base. This should not be a QUICK_RESPONSES type
-	// knowledge base if you're storing Amazon Q Content resource to it.
+	// The identifier of the knowledge base.
 	//
 	// This member is required.
 	KnowledgeBaseId *string
@@ -1488,7 +1582,7 @@ type RecommendationData struct {
 	// This member is required.
 	RecommendationId *string
 
-	// Summary of the recommended content.
+	//  Summary of the recommended content.
 	Data *DataSummary
 
 	// The recommended document.
@@ -1527,8 +1621,10 @@ type RecommendationTrigger struct {
 	RecommendationIds []string
 
 	// The source of the recommendation trigger.
+	//
 	//   - ISSUE_DETECTION: The corresponding recommendations were triggered by a
 	//   Contact Lens issue.
+	//
 	//   - RULE_EVALUATION: The corresponding recommendations were triggered by a
 	//   Contact Lens rule.
 	//
@@ -1567,14 +1663,19 @@ type RenderingConfiguration struct {
 	// A URI template containing exactly one variable in ${variableName} format. This
 	// can only be set for EXTERNAL knowledge bases. For Salesforce, ServiceNow, and
 	// Zendesk, the variable must be one of the following:
+	//
 	//   - Salesforce: Id , ArticleNumber , VersionNumber , Title , PublishStatus , or
 	//   IsDeleted
+	//
 	//   - ServiceNow: number , short_description , sys_mod_count , workflow_state , or
 	//   active
+	//
 	//   - Zendesk: id , title , updated_at , or draft
+	//
 	// The variable is replaced with the actual value for a piece of content when
-	// calling GetContent (https://docs.aws.amazon.com/amazon-q-connect/latest/APIReference/API_GetContent.html)
-	// .
+	// calling [GetContent].
+	//
+	// [GetContent]: https://docs.aws.amazon.com/amazon-q-connect/latest/APIReference/API_GetContent.html
 	TemplateUri *string
 
 	noSmithyDocumentSerde
@@ -1588,7 +1689,7 @@ type ResultData struct {
 	// This member is required.
 	ResultId *string
 
-	// Summary of the recommended content.
+	//  Summary of the recommended content.
 	Data *DataSummary
 
 	// The document.
@@ -1618,10 +1719,11 @@ type SearchExpression struct {
 type ServerSideEncryptionConfiguration struct {
 
 	// The customer managed key used for encryption. For more information about
-	// setting up a customer managed key for Amazon Q, see Enable Amazon Q in Connect
-	// for your instance (https://docs.aws.amazon.com/connect/latest/adminguide/enable-q.html)
-	// . For information about valid ID values, see Key identifiers (KeyId) (https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#key-id)
-	// .
+	// setting up a customer managed key for Amazon Q in Connect, see [Enable Amazon Q in Connect for your instance]. For
+	// information about valid ID values, see [Key identifiers (KeyId)].
+	//
+	// [Key identifiers (KeyId)]: https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#key-id
+	// [Enable Amazon Q in Connect for your instance]: https://docs.aws.amazon.com/connect/latest/adminguide/enable-q.html
 	KmsKeyId *string
 
 	noSmithyDocumentSerde
@@ -1651,6 +1753,9 @@ type SessionData struct {
 	// The configuration information for the session integration.
 	IntegrationConfiguration *SessionIntegrationConfiguration
 
+	// An object that can be used to specify Tag conditions.
+	TagFilter TagFilter
+
 	// The tags used to organize, track, or control access for this resource.
 	Tags map[string]string
 
@@ -1670,12 +1775,12 @@ type SessionIntegrationConfiguration struct {
 // Summary information about the session.
 type SessionSummary struct {
 
-	// The Amazon Resource Name (ARN) of the Amazon Q assistant.
+	// The Amazon Resource Name (ARN) of the Amazon Q in Connect assistant.
 	//
 	// This member is required.
 	AssistantArn *string
 
-	// The identifier of the Amazon Q assistant.
+	// The identifier of the Amazon Q in Connect assistant.
 	//
 	// This member is required.
 	AssistantId *string
@@ -1725,7 +1830,7 @@ type SourceContentDataDetails struct {
 	// This member is required.
 	RankingData *RankingData
 
-	// Details about the source content text data.
+	//  Details about the source content text data.
 	//
 	// This member is required.
 	TextData *TextData
@@ -1737,6 +1842,58 @@ type SourceContentDataDetails struct {
 
 	noSmithyDocumentSerde
 }
+
+// A leaf node condition which can be used to specify a tag condition.
+type TagCondition struct {
+
+	// The tag key in the tag condition.
+	//
+	// This member is required.
+	Key *string
+
+	// The tag value in the tag condition.
+	Value *string
+
+	noSmithyDocumentSerde
+}
+
+// An object that can be used to specify Tag conditions.
+//
+// The following types satisfy this interface:
+//
+//	TagFilterMemberAndConditions
+//	TagFilterMemberOrConditions
+//	TagFilterMemberTagCondition
+type TagFilter interface {
+	isTagFilter()
+}
+
+// A list of conditions which would be applied together with an AND condition.
+type TagFilterMemberAndConditions struct {
+	Value []TagCondition
+
+	noSmithyDocumentSerde
+}
+
+func (*TagFilterMemberAndConditions) isTagFilter() {}
+
+// A list of conditions which would be applied together with an OR condition.
+type TagFilterMemberOrConditions struct {
+	Value []OrCondition
+
+	noSmithyDocumentSerde
+}
+
+func (*TagFilterMemberOrConditions) isTagFilter() {}
+
+// A leaf node condition which can be used to specify a tag condition.
+type TagFilterMemberTagCondition struct {
+	Value TagCondition
+
+	noSmithyDocumentSerde
+}
+
+func (*TagFilterMemberTagCondition) isTagFilter() {}
 
 // Details about the source content text data.
 type TextData struct {
@@ -1767,8 +1924,10 @@ func (*UnknownUnionMember) isConfiguration()                  {}
 func (*UnknownUnionMember) isContentFeedbackData()            {}
 func (*UnknownUnionMember) isDataDetails()                    {}
 func (*UnknownUnionMember) isDataReference()                  {}
+func (*UnknownUnionMember) isOrCondition()                    {}
 func (*UnknownUnionMember) isQueryCondition()                 {}
 func (*UnknownUnionMember) isQuickResponseContentProvider()   {}
 func (*UnknownUnionMember) isQuickResponseDataProvider()      {}
 func (*UnknownUnionMember) isRecommendationTriggerData()      {}
 func (*UnknownUnionMember) isSourceConfiguration()            {}
+func (*UnknownUnionMember) isTagFilter()                      {}

@@ -6,16 +6,18 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/apprunner/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Create an App Runner service. After the service is created, the action also
-// automatically starts a deployment. This is an asynchronous operation. On a
-// successful call, you can use the returned OperationId and the ListOperations (https://docs.aws.amazon.com/apprunner/latest/api/API_ListOperations.html)
-// call to track the operation's progress.
+// automatically starts a deployment.
+//
+// This is an asynchronous operation. On a successful call, you can use the
+// returned OperationId and the [ListOperations] call to track the operation's progress.
+//
+// [ListOperations]: https://docs.aws.amazon.com/apprunner/latest/api/API_ListOperations.html
 func (c *Client) CreateService(ctx context.Context, params *CreateServiceInput, optFns ...func(*Options)) (*CreateServiceOutput, error) {
 	if params == nil {
 		params = &CreateServiceInput{}
@@ -49,9 +51,11 @@ type CreateServiceInput struct {
 	// The Amazon Resource Name (ARN) of an App Runner automatic scaling configuration
 	// resource that you want to associate with your service. If not provided, App
 	// Runner associates the latest revision of a default auto scaling configuration.
-	// Specify an ARN with a name and a revision number to associate that revision. For
-	// example:
+	//
+	// Specify an ARN with a name and a revision number to associate that revision.
+	// For example:
 	// arn:aws:apprunner:us-east-1:123456789012:autoscalingconfiguration/high-availability/3
+	//
 	// Specify just the name to associate the latest revision. For example:
 	// arn:aws:apprunner:us-east-1:123456789012:autoscalingconfiguration/high-availability
 	AutoScalingConfigurationArn *string
@@ -85,8 +89,9 @@ type CreateServiceInput struct {
 type CreateServiceOutput struct {
 
 	// The unique ID of the asynchronous operation that this request started. You can
-	// use it combined with the ListOperations (https://docs.aws.amazon.com/apprunner/latest/api/API_ListOperations.html)
-	// call to track the operation's progress.
+	// use it combined with the [ListOperations]call to track the operation's progress.
+	//
+	// [ListOperations]: https://docs.aws.amazon.com/apprunner/latest/api/API_ListOperations.html
 	//
 	// This member is required.
 	OperationId *string
@@ -124,25 +129,25 @@ func (c *Client) addOperationCreateServiceMiddlewares(stack *middleware.Stack, o
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -157,13 +162,16 @@ func (c *Client) addOperationCreateServiceMiddlewares(stack *middleware.Stack, o
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpCreateServiceValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateService(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

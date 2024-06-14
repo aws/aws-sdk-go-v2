@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/iotsitewise/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -16,14 +15,18 @@ import (
 // create assets from asset models. With asset models, you can easily create assets
 // of the same type that have standardized definitions. Each asset created from a
 // model inherits the asset model's property and hierarchy definitions. For more
-// information, see Defining asset models (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/define-models.html)
-// in the IoT SiteWise User Guide. You can create two types of asset models,
-// ASSET_MODEL or COMPONENT_MODEL .
+// information, see [Defining asset models]in the IoT SiteWise User Guide.
+//
+// You can create two types of asset models, ASSET_MODEL or COMPONENT_MODEL .
+//
 //   - ASSET_MODEL – (default) An asset model that you can use to create assets.
 //     Can't be included as a component in another asset model.
+//
 //   - COMPONENT_MODEL – A reusable component that you can include in the
 //     composite models of other asset models. You can't create assets directly from
 //     this type of asset model.
+//
+// [Defining asset models]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/define-models.html
 func (c *Client) CreateAssetModel(ctx context.Context, params *CreateAssetModelInput, optFns ...func(*Options)) (*CreateAssetModelOutput, error) {
 	if params == nil {
 		params = &CreateAssetModelInput{}
@@ -50,26 +53,33 @@ type CreateAssetModelInput struct {
 	// (such as attributes, measurements, transforms, and metrics) and child composite
 	// models that model parts of your industrial equipment. Each composite model has a
 	// type that defines the properties that the composite model supports. Use
-	// composite models to define alarms on this asset model. When creating custom
-	// composite models, you need to use CreateAssetModelCompositeModel (https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_CreateAssetModelCompositeModel.html)
-	// . For more information, see .
+	// composite models to define alarms on this asset model.
+	//
+	// When creating custom composite models, you need to use [CreateAssetModelCompositeModel]. For more information,
+	// see .
+	//
+	// [CreateAssetModelCompositeModel]: https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_CreateAssetModelCompositeModel.html
 	AssetModelCompositeModels []types.AssetModelCompositeModelDefinition
 
 	// A description for the asset model.
 	AssetModelDescription *string
 
 	// An external ID to assign to the asset model. The external ID must be unique
-	// within your Amazon Web Services account. For more information, see Using
-	// external IDs (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/object-ids.html#external-ids)
-	// in the IoT SiteWise User Guide.
+	// within your Amazon Web Services account. For more information, see [Using external IDs]in the IoT
+	// SiteWise User Guide.
+	//
+	// [Using external IDs]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/object-ids.html#external-ids
 	AssetModelExternalId *string
 
 	// The hierarchy definitions of the asset model. Each hierarchy specifies an asset
 	// model whose assets can be children of any other assets created from this asset
-	// model. For more information, see Asset hierarchies (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/asset-hierarchies.html)
-	// in the IoT SiteWise User Guide. You can specify up to 10 hierarchies per asset
-	// model. For more information, see Quotas (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/quotas.html)
+	// model. For more information, see [Asset hierarchies]in the IoT SiteWise User Guide.
+	//
+	// You can specify up to 10 hierarchies per asset model. For more information, see [Quotas]
 	// in the IoT SiteWise User Guide.
+	//
+	// [Asset hierarchies]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/asset-hierarchies.html
+	// [Quotas]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/quotas.html
 	AssetModelHierarchies []types.AssetModelHierarchyDefinition
 
 	// The ID to assign to the asset model, if desired. IoT SiteWise automatically
@@ -78,16 +88,21 @@ type CreateAssetModelInput struct {
 	// format. If you specify your own ID, it must be globally unique.
 	AssetModelId *string
 
-	// The property definitions of the asset model. For more information, see Asset
-	// properties (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/asset-properties.html)
-	// in the IoT SiteWise User Guide. You can specify up to 200 properties per asset
-	// model. For more information, see Quotas (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/quotas.html)
+	// The property definitions of the asset model. For more information, see [Asset properties] in the
+	// IoT SiteWise User Guide.
+	//
+	// You can specify up to 200 properties per asset model. For more information, see [Quotas]
 	// in the IoT SiteWise User Guide.
+	//
+	// [Asset properties]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/asset-properties.html
+	// [Quotas]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/quotas.html
 	AssetModelProperties []types.AssetModelPropertyDefinition
 
 	// The type of asset model.
+	//
 	//   - ASSET_MODEL – (default) An asset model that you can use to create assets.
 	//   Can't be included as a component in another asset model.
+	//
 	//   - COMPONENT_MODEL – A reusable component that you can include in the
 	//   composite models of other asset models. You can't create assets directly from
 	//   this type of asset model.
@@ -99,8 +114,9 @@ type CreateAssetModelInput struct {
 	ClientToken *string
 
 	// A list of key-value pairs that contain metadata for the asset model. For more
-	// information, see Tagging your IoT SiteWise resources (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/tag-resources.html)
-	// in the IoT SiteWise User Guide.
+	// information, see [Tagging your IoT SiteWise resources]in the IoT SiteWise User Guide.
+	//
+	// [Tagging your IoT SiteWise resources]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/tag-resources.html
 	Tags map[string]string
 
 	noSmithyDocumentSerde
@@ -108,9 +124,11 @@ type CreateAssetModelInput struct {
 
 type CreateAssetModelOutput struct {
 
-	// The ARN (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
-	// of the asset model, which has the following format.
-	// arn:${Partition}:iotsitewise:${Region}:${Account}:asset-model/${AssetModelId}
+	// The [ARN] of the asset model, which has the following format.
+	//
+	//     arn:${Partition}:iotsitewise:${Region}:${Account}:asset-model/${AssetModelId}
+	//
+	// [ARN]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
 	//
 	// This member is required.
 	AssetModelArn *string
@@ -155,25 +173,25 @@ func (c *Client) addOperationCreateAssetModelMiddlewares(stack *middleware.Stack
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -188,6 +206,9 @@ func (c *Client) addOperationCreateAssetModelMiddlewares(stack *middleware.Stack
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addEndpointPrefix_opCreateAssetModelMiddleware(stack); err != nil {
 		return err
 	}
@@ -200,7 +221,7 @@ func (c *Client) addOperationCreateAssetModelMiddlewares(stack *middleware.Stack
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateAssetModel(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

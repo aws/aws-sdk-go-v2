@@ -6,29 +6,34 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/health/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns information about events that meet the specified filter criteria.
+//	Returns information about events that meet the specified filter criteria.
+//
 // Events are returned in a summary form and do not include the detailed
 // description, any additional metadata that depends on the event type, or any
-// affected resources. To retrieve that information, use the DescribeEventDetails (https://docs.aws.amazon.com/health/latest/APIReference/API_DescribeEventDetails.html)
-// and DescribeAffectedEntities (https://docs.aws.amazon.com/health/latest/APIReference/API_DescribeAffectedEntities.html)
-// operations. If no filter criteria are specified, all events are returned.
-// Results are sorted by lastModifiedTime , starting with the most recent event.
+// affected resources. To retrieve that information, use the [DescribeEventDetails]and [DescribeAffectedEntities] operations.
+//
+// If no filter criteria are specified, all events are returned. Results are
+// sorted by lastModifiedTime , starting with the most recent event.
+//
 //   - When you call the DescribeEvents operation and specify an entity for the
 //     entityValues parameter, Health might return public events that aren't specific
 //     to that resource. For example, if you call DescribeEvents and specify an ID
 //     for an Amazon Elastic Compute Cloud (Amazon EC2) instance, Health might return
 //     events that aren't specific to that resource or service. To get events that are
 //     specific to a service, use the services parameter in the filter object. For
-//     more information, see Event (https://docs.aws.amazon.com/health/latest/APIReference/API_Event.html)
-//     .
+//     more information, see [Event].
+//
 //   - This API operation uses pagination. Specify the nextToken parameter in the
 //     next request to return more results.
+//
+// [DescribeEventDetails]: https://docs.aws.amazon.com/health/latest/APIReference/API_DescribeEventDetails.html
+// [DescribeAffectedEntities]: https://docs.aws.amazon.com/health/latest/APIReference/API_DescribeAffectedEntities.html
+// [Event]: https://docs.aws.amazon.com/health/latest/APIReference/API_Event.html
 func (c *Client) DescribeEvents(ctx context.Context, params *DescribeEventsInput, optFns ...func(*Options)) (*DescribeEventsOutput, error) {
 	if params == nil {
 		params = &DescribeEventsInput{}
@@ -107,25 +112,25 @@ func (c *Client) addOperationDescribeEventsMiddlewares(stack *middleware.Stack, 
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -140,10 +145,13 @@ func (c *Client) addOperationDescribeEventsMiddlewares(stack *middleware.Stack, 
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeEvents(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

@@ -6,14 +6,15 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes a model package. A model package is used to create SageMaker models or
-// list on Amazon Web Services Marketplace. Buyers can subscribe to model packages
-// listed on Amazon Web Services Marketplace to create models in SageMaker.
+// Deletes a model package.
+//
+// A model package is used to create SageMaker models or list on Amazon Web
+// Services Marketplace. Buyers can subscribe to model packages listed on Amazon
+// Web Services Marketplace to create models in SageMaker.
 func (c *Client) DeleteModelPackage(ctx context.Context, params *DeleteModelPackageInput, optFns ...func(*Options)) (*DeleteModelPackageOutput, error) {
 	if params == nil {
 		params = &DeleteModelPackageInput{}
@@ -31,9 +32,10 @@ func (c *Client) DeleteModelPackage(ctx context.Context, params *DeleteModelPack
 
 type DeleteModelPackageInput struct {
 
-	// The name or Amazon Resource Name (ARN) of the model package to delete. When you
-	// specify a name, the name must have 1 to 63 characters. Valid characters are a-z,
-	// A-Z, 0-9, and - (hyphen).
+	// The name or Amazon Resource Name (ARN) of the model package to delete.
+	//
+	// When you specify a name, the name must have 1 to 63 characters. Valid
+	// characters are a-z, A-Z, 0-9, and - (hyphen).
 	//
 	// This member is required.
 	ModelPackageName *string
@@ -70,25 +72,25 @@ func (c *Client) addOperationDeleteModelPackageMiddlewares(stack *middleware.Sta
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -103,13 +105,16 @@ func (c *Client) addOperationDeleteModelPackageMiddlewares(stack *middleware.Sta
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDeleteModelPackageValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteModelPackage(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

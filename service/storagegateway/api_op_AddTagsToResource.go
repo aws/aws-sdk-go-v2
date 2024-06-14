@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/storagegateway/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -17,10 +16,15 @@ import (
 // can categorize resources by purpose, owner, environment, or team. Each tag
 // consists of a key and a value, which you define. You can add tags to the
 // following Storage Gateway resources:
+//
 //   - Storage gateways of all types
+//
 //   - Storage volumes
+//
 //   - Virtual tapes
+//
 //   - NFS and SMB file shares
+//
 //   - File System associations
 //
 // You can create a maximum of 50 tags for each resource. Virtual tapes and
@@ -49,10 +53,12 @@ type AddTagsToResourceInput struct {
 	ResourceARN *string
 
 	// The key-value pair that represents the tag you want to add to the resource. The
-	// value can be an empty string. Valid characters for key and value are letters,
-	// spaces, and numbers representable in UTF-8 format, and the following special
-	// characters: + - = . _ : / @. The maximum length of a tag's key is 128
-	// characters, and the maximum length for a tag's value is 256.
+	// value can be an empty string.
+	//
+	// Valid characters for key and value are letters, spaces, and numbers
+	// representable in UTF-8 format, and the following special characters: + - = . _ :
+	// / @. The maximum length of a tag's key is 128 characters, and the maximum length
+	// for a tag's value is 256.
 	//
 	// This member is required.
 	Tags []types.Tag
@@ -94,25 +100,25 @@ func (c *Client) addOperationAddTagsToResourceMiddlewares(stack *middleware.Stac
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -127,13 +133,16 @@ func (c *Client) addOperationAddTagsToResourceMiddlewares(stack *middleware.Stac
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpAddTagsToResourceValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opAddTagsToResource(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

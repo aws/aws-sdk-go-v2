@@ -6,13 +6,13 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/cloudtrail/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns information on all imports, or a select set of imports by ImportStatus
+//	Returns information on all imports, or a select set of imports by ImportStatus
+//
 // or Destination .
 func (c *Client) ListImports(ctx context.Context, params *ListImportsInput, optFns ...func(*Options)) (*ListImportsOutput, error) {
 	if params == nil {
@@ -31,16 +31,16 @@ func (c *Client) ListImports(ctx context.Context, params *ListImportsInput, optF
 
 type ListImportsInput struct {
 
-	// The ARN of the destination event data store.
+	//  The ARN of the destination event data store.
 	Destination *string
 
-	// The status of the import.
+	//  The status of the import.
 	ImportStatus types.ImportStatus
 
-	// The maximum number of imports to display on a single page.
+	//  The maximum number of imports to display on a single page.
 	MaxResults *int32
 
-	// A token you can use to get the next page of import results.
+	//  A token you can use to get the next page of import results.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -48,10 +48,10 @@ type ListImportsInput struct {
 
 type ListImportsOutput struct {
 
-	// The list of returned imports.
+	//  The list of returned imports.
 	Imports []types.ImportsListItem
 
-	// A token you can use to get the next page of import results.
+	//  A token you can use to get the next page of import results.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -82,25 +82,25 @@ func (c *Client) addOperationListImportsMiddlewares(stack *middleware.Stack, opt
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -115,10 +115,13 @@ func (c *Client) addOperationListImportsMiddlewares(stack *middleware.Stack, opt
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListImports(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -145,7 +148,7 @@ var _ ListImportsAPIClient = (*Client)(nil)
 
 // ListImportsPaginatorOptions is the paginator options for ListImports
 type ListImportsPaginatorOptions struct {
-	// The maximum number of imports to display on a single page.
+	//  The maximum number of imports to display on a single page.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

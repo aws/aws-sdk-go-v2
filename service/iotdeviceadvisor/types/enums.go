@@ -11,8 +11,9 @@ const (
 )
 
 // Values returns all known values for AuthenticationMethod. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (AuthenticationMethod) Values() []AuthenticationMethod {
 	return []AuthenticationMethod{
 		"X509ClientCertificate",
@@ -31,8 +32,9 @@ const (
 )
 
 // Values returns all known values for Protocol. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (Protocol) Values() []Protocol {
 	return []Protocol{
 		"MqttV3_1_1",
@@ -58,8 +60,9 @@ const (
 )
 
 // Values returns all known values for Status. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (Status) Values() []Status {
 	return []Status{
 		"PASS",
@@ -90,8 +93,9 @@ const (
 )
 
 // Values returns all known values for SuiteRunStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (SuiteRunStatus) Values() []SuiteRunStatus {
 	return []SuiteRunStatus{
 		"PASS",
@@ -122,8 +126,9 @@ const (
 )
 
 // Values returns all known values for TestCaseScenarioStatus. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (TestCaseScenarioStatus) Values() []TestCaseScenarioStatus {
 	return []TestCaseScenarioStatus{
 		"PASS",
@@ -147,8 +152,9 @@ const (
 )
 
 // Values returns all known values for TestCaseScenarioType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (TestCaseScenarioType) Values() []TestCaseScenarioType {
 	return []TestCaseScenarioType{
 		"Advanced",

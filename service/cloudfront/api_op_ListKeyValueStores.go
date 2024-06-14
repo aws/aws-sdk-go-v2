@@ -6,13 +6,12 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/cloudfront/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Specifies the Key Value Stores to list.
+// Specifies the key value stores to list.
 func (c *Client) ListKeyValueStores(ctx context.Context, params *ListKeyValueStoresInput, optFns ...func(*Options)) (*ListKeyValueStoresOutput, error) {
 	if params == nil {
 		params = &ListKeyValueStoresInput{}
@@ -30,13 +29,13 @@ func (c *Client) ListKeyValueStores(ctx context.Context, params *ListKeyValueSto
 
 type ListKeyValueStoresInput struct {
 
-	// The marker associated with the Key Value Stores list.
+	// The marker associated with the key value stores list.
 	Marker *string
 
-	// The maximum number of items in the Key Value Stores list.
+	// The maximum number of items in the key value stores list.
 	MaxItems *int32
 
-	// The status of the request for the Key Value Stores list.
+	// The status of the request for the key value stores list.
 	Status *string
 
 	noSmithyDocumentSerde
@@ -44,7 +43,7 @@ type ListKeyValueStoresInput struct {
 
 type ListKeyValueStoresOutput struct {
 
-	// The resulting Key Value Stores list.
+	// The resulting key value stores list.
 	KeyValueStoreList *types.KeyValueStoreList
 
 	// Metadata pertaining to the operation's result.
@@ -75,25 +74,25 @@ func (c *Client) addOperationListKeyValueStoresMiddlewares(stack *middleware.Sta
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -108,10 +107,13 @@ func (c *Client) addOperationListKeyValueStoresMiddlewares(stack *middleware.Sta
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListKeyValueStores(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -140,7 +142,7 @@ var _ ListKeyValueStoresAPIClient = (*Client)(nil)
 // ListKeyValueStoresPaginatorOptions is the paginator options for
 // ListKeyValueStores
 type ListKeyValueStoresPaginatorOptions struct {
-	// The maximum number of items in the Key Value Stores list.
+	// The maximum number of items in the key value stores list.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

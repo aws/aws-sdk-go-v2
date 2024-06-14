@@ -31,6 +31,10 @@ type ConversionProperties struct {
 	// A mapping between the volumes being converted and the converted snapshot ids
 	VolumeToConversionMap map[string]map[string]string
 
+	// A mapping between the volumes being converted and the product codes associated
+	// with them
+	VolumeToProductCodes map[string][]ProductCode
+
 	// A mapping between the volumes and their sizes
 	VolumeToVolumeSize map[string]int64
 
@@ -85,6 +89,9 @@ type DataReplicationInfo struct {
 	// AWS Availability zone into which data is being replicated.
 	StagingAvailabilityZone *string
 
+	// The ARN of the staging Outpost
+	StagingOutpostArn *string
+
 	noSmithyDocumentSerde
 }
 
@@ -105,6 +112,9 @@ type DataReplicationInfoReplicatedDisk struct {
 
 	// The total amount of data to be replicated in bytes.
 	TotalStorageBytes int64
+
+	// The status of the volume.
+	VolumeStatus VolumeStatus
 
 	noSmithyDocumentSerde
 }
@@ -637,6 +647,18 @@ type PITPolicyRule struct {
 	noSmithyDocumentSerde
 }
 
+// Properties of a product code associated with a volume.
+type ProductCode struct {
+
+	// Id of a product code associated with a volume.
+	ProductCodeId *string
+
+	// Mode of a product code associated with a volume.
+	ProductCodeMode ProductCodeMode
+
+	noSmithyDocumentSerde
+}
+
 // A Recovery Instance is a replica of a Source Server running on EC2.
 type RecoveryInstance struct {
 
@@ -682,6 +704,9 @@ type RecoveryInstance struct {
 	// Properties of the Recovery Instance machine.
 	RecoveryInstanceProperties *RecoveryInstanceProperties
 
+	// The ARN of the source Outpost
+	SourceOutpostArn *string
+
 	// The Source Server ID that this Recovery Instance is associated with.
 	SourceServerID *string
 
@@ -726,6 +751,9 @@ type RecoveryInstanceDataReplicationInfo struct {
 
 	// AWS Availability zone into which data is being replicated.
 	StagingAvailabilityZone *string
+
+	// The ARN of the staging Outpost
+	StagingOutpostArn *string
 
 	noSmithyDocumentSerde
 }
@@ -1000,6 +1028,9 @@ type SourceCloudProperties struct {
 
 	// AWS Region for an EC2-originated Source Server.
 	OriginRegion *string
+
+	// The ARN of the source Outpost
+	SourceOutpostArn *string
 
 	noSmithyDocumentSerde
 }

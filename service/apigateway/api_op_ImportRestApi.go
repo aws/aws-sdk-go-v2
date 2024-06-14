@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/apigateway/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -47,12 +46,17 @@ type ImportRestApiInput struct {
 
 	// A key-value map of context-specific query string parameters specifying the
 	// behavior of different API importing operations. The following shows
-	// operation-specific parameters and their supported values. To exclude
-	// DocumentationParts from the import, set parameters as ignore=documentation . To
-	// configure the endpoint type, set parameters as endpointConfigurationTypes=EDGE ,
-	// endpointConfigurationTypes=REGIONAL , or endpointConfigurationTypes=PRIVATE .
-	// The default endpoint type is EDGE . To handle imported basepath , set parameters
-	// as basepath=ignore , basepath=prepend or basepath=split .
+	// operation-specific parameters and their supported values.
+	//
+	// To exclude DocumentationParts from the import, set parameters as
+	// ignore=documentation .
+	//
+	// To configure the endpoint type, set parameters as
+	// endpointConfigurationTypes=EDGE , endpointConfigurationTypes=REGIONAL , or
+	// endpointConfigurationTypes=PRIVATE . The default endpoint type is EDGE .
+	//
+	// To handle imported basepath , set parameters as basepath=ignore ,
+	// basepath=prepend or basepath=split .
 	Parameters map[string]string
 
 	noSmithyDocumentSerde
@@ -147,25 +151,25 @@ func (c *Client) addOperationImportRestApiMiddlewares(stack *middleware.Stack, o
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -180,13 +184,16 @@ func (c *Client) addOperationImportRestApiMiddlewares(stack *middleware.Stack, o
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpImportRestApiValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opImportRestApi(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

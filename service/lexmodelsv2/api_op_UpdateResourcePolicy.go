@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -33,8 +32,11 @@ type UpdateResourcePolicyInput struct {
 	// A resource policy to add to the resource. The policy is a JSON structure that
 	// contains one or more statements that define the policy. The policy must follow
 	// the IAM syntax. For more information about the contents of a JSON policy
-	// document, see IAM JSON policy reference  (https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies.html)
-	// . If the policy isn't valid, Amazon Lex returns a validation exception.
+	// document, see [IAM JSON policy reference].
+	//
+	// If the policy isn't valid, Amazon Lex returns a validation exception.
+	//
+	// [IAM JSON policy reference]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies.html
 	//
 	// This member is required.
 	Policy *string
@@ -46,9 +48,10 @@ type UpdateResourcePolicyInput struct {
 	ResourceArn *string
 
 	// The identifier of the revision of the policy to update. If this revision ID
-	// doesn't match the current revision ID, Amazon Lex throws an exception. If you
-	// don't specify a revision, Amazon Lex overwrites the contents of the policy with
-	// the new values.
+	// doesn't match the current revision ID, Amazon Lex throws an exception.
+	//
+	// If you don't specify a revision, Amazon Lex overwrites the contents of the
+	// policy with the new values.
 	ExpectedRevisionId *string
 
 	noSmithyDocumentSerde
@@ -93,25 +96,25 @@ func (c *Client) addOperationUpdateResourcePolicyMiddlewares(stack *middleware.S
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -126,13 +129,16 @@ func (c *Client) addOperationUpdateResourcePolicyMiddlewares(stack *middleware.S
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpUpdateResourcePolicyValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateResourcePolicy(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

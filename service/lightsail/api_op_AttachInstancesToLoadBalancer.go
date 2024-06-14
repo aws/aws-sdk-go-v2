@@ -6,18 +6,21 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/lightsail/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Attaches one or more Lightsail instances to a load balancer. After some time,
-// the instances are attached to the load balancer and the health check status is
-// available. The attach instances to load balancer operation supports tag-based
-// access control via resource tags applied to the resource identified by load
-// balancer name . For more information, see the Lightsail Developer Guide (https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-controlling-access-using-tags)
-// .
+// Attaches one or more Lightsail instances to a load balancer.
+//
+// After some time, the instances are attached to the load balancer and the health
+// check status is available.
+//
+// The attach instances to load balancer operation supports tag-based access
+// control via resource tags applied to the resource identified by load balancer
+// name . For more information, see the [Lightsail Developer Guide].
+//
+// [Lightsail Developer Guide]: https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-controlling-access-using-tags
 func (c *Client) AttachInstancesToLoadBalancer(ctx context.Context, params *AttachInstancesToLoadBalancerInput, optFns ...func(*Options)) (*AttachInstancesToLoadBalancerOutput, error) {
 	if params == nil {
 		params = &AttachInstancesToLoadBalancerInput{}
@@ -36,10 +39,13 @@ func (c *Client) AttachInstancesToLoadBalancer(ctx context.Context, params *Atta
 type AttachInstancesToLoadBalancerInput struct {
 
 	// An array of strings representing the instance name(s) you want to attach to
-	// your load balancer. An instance must be running before you can attach it to
-	// your load balancer. There are no additional limits on the number of instances
-	// you can attach to your load balancer, aside from the limit of Lightsail
-	// instances you can create in your account (20).
+	// your load balancer.
+	//
+	// An instance must be running before you can attach it to your load balancer.
+	//
+	// There are no additional limits on the number of instances you can attach to
+	// your load balancer, aside from the limit of Lightsail instances you can create
+	// in your account (20).
 	//
 	// This member is required.
 	InstanceNames []string
@@ -87,25 +93,25 @@ func (c *Client) addOperationAttachInstancesToLoadBalancerMiddlewares(stack *mid
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -120,13 +126,16 @@ func (c *Client) addOperationAttachInstancesToLoadBalancerMiddlewares(stack *mid
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpAttachInstancesToLoadBalancerValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opAttachInstancesToLoadBalancer(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

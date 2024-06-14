@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/tnb/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -14,7 +13,9 @@ import (
 
 // Gets the details of a network function instance, including the instantation
 // state and metadata from the function package descriptor in the network function
-// package. A network function instance is a function in a function package .
+// package.
+//
+// A network function instance is a function in a function package .
 func (c *Client) GetSolFunctionInstance(ctx context.Context, params *GetSolFunctionInstanceInput, optFns ...func(*Options)) (*GetSolFunctionInstanceOutput, error) {
 	if params == nil {
 		params = &GetSolFunctionInstanceInput{}
@@ -57,8 +58,9 @@ type GetSolFunctionInstanceOutput struct {
 	// This member is required.
 	InstantiationState types.VnfInstantiationState
 
-	// The metadata of a network function instance. A network function instance is a
-	// function in a function package .
+	// The metadata of a network function instance.
+	//
+	// A network function instance is a function in a function package .
 	//
 	// This member is required.
 	Metadata *types.GetSolFunctionInstanceMetadata
@@ -78,8 +80,9 @@ type GetSolFunctionInstanceOutput struct {
 	// This member is required.
 	VnfdId *string
 
-	// Information about the network function. A network function instance is a
-	// function in a function package .
+	// Information about the network function.
+	//
+	// A network function instance is a function in a function package .
 	InstantiatedVnfInfo *types.GetSolVnfInfo
 
 	// A tag is a label that you assign to an Amazon Web Services resource. Each tag
@@ -124,25 +127,25 @@ func (c *Client) addOperationGetSolFunctionInstanceMiddlewares(stack *middleware
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -157,13 +160,16 @@ func (c *Client) addOperationGetSolFunctionInstanceMiddlewares(stack *middleware
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpGetSolFunctionInstanceValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetSolFunctionInstance(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

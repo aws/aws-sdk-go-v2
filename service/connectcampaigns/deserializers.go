@@ -13,12 +13,22 @@ import (
 	smithyio "github.com/aws/smithy-go/io"
 	"github.com/aws/smithy-go/middleware"
 	"github.com/aws/smithy-go/ptr"
+	smithytime "github.com/aws/smithy-go/time"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"io"
 	"io/ioutil"
 	"math"
 	"strings"
+	"time"
 )
+
+func deserializeS3Expires(v string) (*time.Time, error) {
+	t, err := smithytime.ParseHTTPDate(v)
+	if err != nil {
+		return nil, nil
+	}
+	return &t, nil
+}
 
 type awsRestjson1_deserializeOpCreateCampaign struct {
 }
@@ -3491,6 +3501,15 @@ func awsRestjson1_deserializeDocumentAnswerMachineDetectionConfig(v **types.Answ
 
 	for key, value := range shape {
 		switch key {
+		case "awaitAnswerMachinePrompt":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.AwaitAnswerMachinePrompt = ptr.Bool(jtv)
+			}
+
 		case "enableAnswerMachineDetection":
 			if value != nil {
 				jtv, ok := value.(bool)

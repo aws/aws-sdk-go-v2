@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -15,12 +14,17 @@ import (
 // ECR container images that are created during the image build process. You must
 // clean those up separately, using the appropriate Amazon EC2 or Amazon ECR
 // console actions, or API or CLI commands.
-//   - To deregister an EC2 Linux AMI, see Deregister your Linux AMI (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/deregister-ami.html)
-//     in the Amazon EC2 User Guide .
-//   - To deregister an EC2 Windows AMI, see Deregister your Windows AMI (https://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/deregister-ami.html)
-//     in the Amazon EC2 Windows Guide .
-//   - To delete a container image from Amazon ECR, see Deleting an image (https://docs.aws.amazon.com/AmazonECR/latest/userguide/delete_image.html)
-//     in the Amazon ECR User Guide.
+//
+//   - To deregister an EC2 Linux AMI, see [Deregister your Linux AMI]in the Amazon EC2 User Guide .
+//
+//   - To deregister an EC2 Windows AMI, see [Deregister your Windows AMI]in the Amazon EC2 Windows Guide .
+//
+//   - To delete a container image from Amazon ECR, see [Deleting an image]in the Amazon ECR User
+//     Guide.
+//
+// [Deregister your Linux AMI]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/deregister-ami.html
+// [Deregister your Windows AMI]: https://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/deregister-ami.html
+// [Deleting an image]: https://docs.aws.amazon.com/AmazonECR/latest/userguide/delete_image.html
 func (c *Client) DeleteImage(ctx context.Context, params *DeleteImageInput, optFns ...func(*Options)) (*DeleteImageOutput, error) {
 	if params == nil {
 		params = &DeleteImageInput{}
@@ -82,25 +86,25 @@ func (c *Client) addOperationDeleteImageMiddlewares(stack *middleware.Stack, opt
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -115,13 +119,16 @@ func (c *Client) addOperationDeleteImageMiddlewares(stack *middleware.Stack, opt
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDeleteImageValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteImage(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

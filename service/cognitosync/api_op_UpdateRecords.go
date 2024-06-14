@@ -6,24 +6,27 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/cognitosync/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Posts updates to records and adds and deletes records for a dataset and user.
+//
 // The sync count in the record patch is your last known sync count for that
 // record. The server will reject an UpdateRecords request with a
 // ResourceConflictException if you try to patch a record with a new value but a
-// stale sync count.For example, if the sync count on the server is 5 for a key
-// called highScore and you try and submit a new highScore with sync count of 4,
-// the request will be rejected. To obtain the current sync count for a record,
-// call ListRecords. On a successful update of the record, the response returns the
-// new sync count for that record. You should present that sync count the next time
-// you try to update that same record. When the record does not exist, specify the
-// sync count as 0. This API can be called with temporary user credentials provided
-// by Cognito Identity or with developer credentials.
+// stale sync count.
+//
+// For example, if the sync count on the server is 5 for a key called highScore
+// and you try and submit a new highScore with sync count of 4, the request will be
+// rejected. To obtain the current sync count for a record, call ListRecords. On a
+// successful update of the record, the response returns the new sync count for
+// that record. You should present that sync count the next time you try to update
+// that same record. When the record does not exist, specify the sync count as 0.
+//
+// This API can be called with temporary user credentials provided by Cognito
+// Identity or with developer credentials.
 func (c *Client) UpdateRecords(ctx context.Context, params *UpdateRecordsInput, optFns ...func(*Options)) (*UpdateRecordsOutput, error) {
 	if params == nil {
 		params = &UpdateRecordsInput{}
@@ -116,25 +119,25 @@ func (c *Client) addOperationUpdateRecordsMiddlewares(stack *middleware.Stack, o
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -149,13 +152,16 @@ func (c *Client) addOperationUpdateRecordsMiddlewares(stack *middleware.Stack, o
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpUpdateRecordsValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateRecords(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

@@ -6,26 +6,28 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Delete an accelerator. Before you can delete an accelerator, you must disable
 // it and remove all dependent resources (listeners and endpoint groups). To
-// disable the accelerator, update the accelerator to set Enabled to false. When
-// you create an accelerator, by default, Global Accelerator provides you with a
-// set of two static IP addresses. Alternatively, you can bring your own IP address
-// ranges to Global Accelerator and assign IP addresses from those ranges. The IP
-// addresses are assigned to your accelerator for as long as it exists, even if you
-// disable the accelerator and it no longer accepts or routes traffic. However,
-// when you delete an accelerator, you lose the static IP addresses that are
-// assigned to the accelerator, so you can no longer route traffic by using them.
-// As a best practice, ensure that you have permissions in place to avoid
+// disable the accelerator, update the accelerator to set Enabled to false.
+//
+// When you create an accelerator, by default, Global Accelerator provides you
+// with a set of two static IP addresses. Alternatively, you can bring your own IP
+// address ranges to Global Accelerator and assign IP addresses from those ranges.
+//
+// The IP addresses are assigned to your accelerator for as long as it exists,
+// even if you disable the accelerator and it no longer accepts or routes traffic.
+// However, when you delete an accelerator, you lose the static IP addresses that
+// are assigned to the accelerator, so you can no longer route traffic by using
+// them. As a best practice, ensure that you have permissions in place to avoid
 // inadvertently deleting accelerators. You can use IAM policies with Global
 // Accelerator to limit the users who have permissions to delete an accelerator.
-// For more information, see Identity and access management (https://docs.aws.amazon.com/global-accelerator/latest/dg/auth-and-access-control.html)
-// in the Global Accelerator Developer Guide.
+// For more information, see [Identity and access management]in the Global Accelerator Developer Guide.
+//
+// [Identity and access management]: https://docs.aws.amazon.com/global-accelerator/latest/dg/auth-and-access-control.html
 func (c *Client) DeleteAccelerator(ctx context.Context, params *DeleteAcceleratorInput, optFns ...func(*Options)) (*DeleteAcceleratorOutput, error) {
 	if params == nil {
 		params = &DeleteAcceleratorInput{}
@@ -80,25 +82,25 @@ func (c *Client) addOperationDeleteAcceleratorMiddlewares(stack *middleware.Stac
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -113,13 +115,16 @@ func (c *Client) addOperationDeleteAcceleratorMiddlewares(stack *middleware.Stac
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDeleteAcceleratorValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteAccelerator(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

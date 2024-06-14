@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/lexmodelbuildingservice/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -14,8 +13,9 @@ import (
 )
 
 // Returns metadata information for a specific bot. You must provide the bot name
-// and the bot version or alias. This operation requires permissions for the
-// lex:GetBot action.
+// and the bot version or alias.
+//
+// This operation requires permissions for the lex:GetBot action.
 func (c *Client) GetBot(ctx context.Context, params *GetBotInput, optFns ...func(*Options)) (*GetBotOutput, error) {
 	if params == nil {
 		params = &GetBotInput{}
@@ -49,7 +49,7 @@ type GetBotInput struct {
 type GetBotOutput struct {
 
 	// The message that Amazon Lex returns when the user elects to end the
-	// conversation without completing it. For more information, see PutBot .
+	// conversation without completing it. For more information, see PutBot.
 	AbortStatement *types.Statement
 
 	// Checksum of the bot used to identify a specific revision of the bot's $LATEST
@@ -70,16 +70,20 @@ type GetBotOutput struct {
 	// You may not specify a default value for the childDirected field that does not
 	// accurately reflect whether your use of Amazon Lex is related to a website,
 	// program, or other application that is directed or targeted, in whole or in part,
-	// to children under age 13 and subject to COPPA. If your use of Amazon Lex relates
-	// to a website, program, or other application that is directed in whole or in
-	// part, to children under age 13, you must obtain any required verifiable parental
-	// consent under COPPA. For information regarding the use of Amazon Lex in
-	// connection with websites, programs, or other applications that are directed or
-	// targeted, in whole or in part, to children under age 13, see the Amazon Lex FAQ. (https://aws.amazon.com/lex/faqs#data-security)
+	// to children under age 13 and subject to COPPA.
+	//
+	// If your use of Amazon Lex relates to a website, program, or other application
+	// that is directed in whole or in part, to children under age 13, you must obtain
+	// any required verifiable parental consent under COPPA. For information regarding
+	// the use of Amazon Lex in connection with websites, programs, or other
+	// applications that are directed or targeted, in whole or in part, to children
+	// under age 13, see the [Amazon Lex FAQ.]
+	//
+	// [Amazon Lex FAQ.]: https://aws.amazon.com/lex/faqs#data-security
 	ChildDirected *bool
 
 	// The message Amazon Lex uses when it doesn't understand the user's request. For
-	// more information, see PutBot .
+	// more information, see PutBot.
 	ClarificationPrompt *types.Prompt
 
 	// The date that the bot was created.
@@ -100,45 +104,51 @@ type GetBotOutput struct {
 	FailureReason *string
 
 	// The maximum time in seconds that Amazon Lex retains the data gathered in a
-	// conversation. For more information, see PutBot .
+	// conversation. For more information, see PutBot.
 	IdleSessionTTLInSeconds *int32
 
-	// An array of intent objects. For more information, see PutBot .
+	// An array of intent objects. For more information, see PutBot.
 	Intents []types.Intent
 
 	// The date that the bot was updated. When you create a resource, the creation
 	// date and last updated date are the same.
 	LastUpdatedDate *time.Time
 
-	// The target locale for the bot.
+	//  The target locale for the bot.
 	Locale types.Locale
 
 	// The name of the bot.
 	Name *string
 
 	// The score that determines where Amazon Lex inserts the AMAZON.FallbackIntent ,
-	// AMAZON.KendraSearchIntent , or both when returning alternative intents in a
-	// PostContent (https://docs.aws.amazon.com/lex/latest/dg/API_runtime_PostContent.html)
-	// or PostText (https://docs.aws.amazon.com/lex/latest/dg/API_runtime_PostText.html)
+	// AMAZON.KendraSearchIntent , or both when returning alternative intents in a [PostContent] or [PostText]
 	// response. AMAZON.FallbackIntent is inserted if the confidence score for all
 	// intents is below this value. AMAZON.KendraSearchIntent is only inserted if it
 	// is configured for the bot.
+	//
+	// [PostText]: https://docs.aws.amazon.com/lex/latest/dg/API_runtime_PostText.html
+	// [PostContent]: https://docs.aws.amazon.com/lex/latest/dg/API_runtime_PostContent.html
 	NluIntentConfidenceThreshold *float64
 
-	// The status of the bot. When the status is BUILDING Amazon Lex is building the
-	// bot for testing and use. If the status of the bot is READY_BASIC_TESTING , you
-	// can test the bot using the exact utterances specified in the bot's intents. When
-	// the bot is ready for full testing or to run, the status is READY . If there was
-	// a problem with building the bot, the status is FAILED and the failureReason
-	// field explains why the bot did not build. If the bot was saved but not built,
-	// the status is NOT_BUILT .
+	// The status of the bot.
+	//
+	// When the status is BUILDING Amazon Lex is building the bot for testing and use.
+	//
+	// If the status of the bot is READY_BASIC_TESTING , you can test the bot using the
+	// exact utterances specified in the bot's intents. When the bot is ready for full
+	// testing or to run, the status is READY .
+	//
+	// If there was a problem with building the bot, the status is FAILED and the
+	// failureReason field explains why the bot did not build.
+	//
+	// If the bot was saved but not built, the status is NOT_BUILT .
 	Status types.Status
 
 	// The version of the bot. For a new bot, the version is always $LATEST .
 	Version *string
 
 	// The Amazon Polly voice ID that Amazon Lex uses for voice interaction with the
-	// user. For more information, see PutBot .
+	// user. For more information, see PutBot.
 	VoiceId *string
 
 	// Metadata pertaining to the operation's result.
@@ -169,25 +179,25 @@ func (c *Client) addOperationGetBotMiddlewares(stack *middleware.Stack, options 
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -202,13 +212,16 @@ func (c *Client) addOperationGetBotMiddlewares(stack *middleware.Stack, options 
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpGetBotValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetBot(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

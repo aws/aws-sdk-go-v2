@@ -790,6 +790,26 @@ func (m *validateOpListStackResources) HandleInitialize(ctx context.Context, in 
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpListStackSetAutoDeploymentTargets struct {
+}
+
+func (*validateOpListStackSetAutoDeploymentTargets) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListStackSetAutoDeploymentTargets) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListStackSetAutoDeploymentTargetsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListStackSetAutoDeploymentTargetsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpListStackSetOperationResults struct {
 }
 
@@ -1224,6 +1244,10 @@ func addOpListStackInstancesValidationMiddleware(stack *middleware.Stack) error 
 
 func addOpListStackResourcesValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListStackResources{}, middleware.After)
+}
+
+func addOpListStackSetAutoDeploymentTargetsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListStackSetAutoDeploymentTargets{}, middleware.After)
 }
 
 func addOpListStackSetOperationResultsValidationMiddleware(stack *middleware.Stack) error {
@@ -2152,6 +2176,21 @@ func validateOpListStackResourcesInput(v *ListStackResourcesInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "ListStackResourcesInput"}
 	if v.StackName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("StackName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListStackSetAutoDeploymentTargetsInput(v *ListStackSetAutoDeploymentTargetsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListStackSetAutoDeploymentTargetsInput"}
+	if v.StackSetName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("StackSetName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

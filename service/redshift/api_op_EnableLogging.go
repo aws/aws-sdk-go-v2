@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/redshift/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -32,15 +31,19 @@ func (c *Client) EnableLogging(ctx context.Context, params *EnableLoggingInput, 
 
 type EnableLoggingInput struct {
 
-	// The identifier of the cluster on which logging is to be started. Example:
-	// examplecluster
+	// The identifier of the cluster on which logging is to be started.
+	//
+	// Example: examplecluster
 	//
 	// This member is required.
 	ClusterIdentifier *string
 
 	// The name of an existing S3 bucket where the log files are to be stored.
+	//
 	// Constraints:
+	//
 	//   - Must be in the same region as the cluster
+	//
 	//   - The cluster must have read bucket and put object permissions
 	BucketName *string
 
@@ -51,14 +54,23 @@ type EnableLoggingInput struct {
 	// useractivitylog , and userlog .
 	LogExports []string
 
-	// The prefix applied to the log file names. Constraints:
+	// The prefix applied to the log file names.
+	//
+	// Constraints:
+	//
 	//   - Cannot exceed 512 characters
+	//
 	//   - Cannot contain spaces( ), double quotes ("), single quotes ('), a backslash
 	//   (\), or control characters. The hexadecimal codes for invalid characters are:
+	//
 	//   - x00 to x20
+	//
 	//   - x22
+	//
 	//   - x27
+	//
 	//   - x5c
+	//
 	//   - x7f or larger
 	S3KeyPrefix *string
 
@@ -121,25 +133,25 @@ func (c *Client) addOperationEnableLoggingMiddlewares(stack *middleware.Stack, o
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -154,13 +166,16 @@ func (c *Client) addOperationEnableLoggingMiddlewares(stack *middleware.Stack, o
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpEnableLoggingValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opEnableLogging(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

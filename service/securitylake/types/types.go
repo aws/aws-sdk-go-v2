@@ -101,7 +101,9 @@ type CustomLogSourceCrawlerConfiguration struct {
 
 	// The Amazon Resource Name (ARN) of the Identity and Access Management (IAM) role
 	// to be used by the Glue crawler. The recommended IAM policies are:
+	//
 	//   - The managed policy AWSGlueServiceRole
+	//
 	//   - A custom policy granting access to your Amazon S3 Data Lake
 	//
 	// This member is required.
@@ -248,17 +250,24 @@ type DataLakeLifecycleTransition struct {
 	noSmithyDocumentSerde
 }
 
-// Provides replication details of Amazon Security Lake object.
+// Provides replication details for objects stored in the Amazon Security Lake
+// data lake.
 type DataLakeReplicationConfiguration struct {
 
+	// Specifies one or more centralized rollup Regions. The Amazon Web Services
+	// Region specified in the region parameter of the [CreateDataLake]CreateDataLake or [UpdateDataLake]UpdateDataLake
+	// operations contributes data to the rollup Region or Regions specified in this
+	// parameter.
+	//
 	// Replication enables automatic, asynchronous copying of objects across Amazon S3
-	// buckets. Amazon S3 buckets that are configured for object replication can be
-	// owned by the same Amazon Web Services account or by different accounts. You can
-	// replicate objects to a single destination bucket or to multiple destination
-	// buckets. The destination buckets can be in different Amazon Web Services Regions
-	// or within the same Region as the source bucket. Set up one or more rollup
-	// Regions by providing the Region or Regions that should contribute to the central
-	// rollup Region.
+	// buckets. S3 buckets that are configured for object replication can be owned by
+	// the same Amazon Web Services account or by different accounts. You can replicate
+	// objects to a single destination bucket or to multiple destination buckets. The
+	// destination buckets can be in different Regions or within the same Region as the
+	// source bucket.
+	//
+	// [UpdateDataLake]: https://docs.aws.amazon.com/security-lake/latest/APIReference/API_UpdateDataLake.html
+	// [CreateDataLake]: https://docs.aws.amazon.com/security-lake/latest/APIReference/API_CreateDataLake.html
 	Regions []string
 
 	// Replication settings for the Amazon S3 buckets. This parameter uses the
@@ -273,9 +282,9 @@ type DataLakeReplicationConfiguration struct {
 type DataLakeResource struct {
 
 	// The Amazon Resource Name (ARN) created by you to provide to the subscriber. For
-	// more information about ARNs and how to use them in policies, see the Amazon
-	// Security Lake User Guide (https://docs.aws.amazon.com/security-lake/latest/userguide/subscriber-management.html)
-	// .
+	// more information about ARNs and how to use them in policies, see the [Amazon Security Lake User Guide].
+	//
+	// [Amazon Security Lake User Guide]: https://docs.aws.amazon.com/security-lake/latest/userguide/subscriber-management.html
 	//
 	// This member is required.
 	DataLakeArn *string
@@ -309,8 +318,9 @@ type DataLakeResource struct {
 
 // Amazon Security Lake collects logs and events from supported Amazon Web
 // Services and custom sources. For the list of supported Amazon Web Services, see
-// the Amazon Security Lake User Guide (https://docs.aws.amazon.com/security-lake/latest/userguide/internal-sources.html)
-// .
+// the [Amazon Security Lake User Guide].
+//
+// [Amazon Security Lake User Guide]: https://docs.aws.amazon.com/security-lake/latest/userguide/internal-sources.html
 type DataLakeSource struct {
 
 	// The ID of the Security Lake account for which logs are collected.
@@ -319,34 +329,63 @@ type DataLakeSource struct {
 	// The Open Cybersecurity Schema Framework (OCSF) event classes which describes
 	// the type of data that the custom source will send to Security Lake. The
 	// supported event classes are:
+	//
 	//   - ACCESS_ACTIVITY
+	//
 	//   - FILE_ACTIVITY
+	//
 	//   - KERNEL_ACTIVITY
+	//
 	//   - KERNEL_EXTENSION
+	//
 	//   - MEMORY_ACTIVITY
+	//
 	//   - MODULE_ACTIVITY
+	//
 	//   - PROCESS_ACTIVITY
+	//
 	//   - REGISTRY_KEY_ACTIVITY
+	//
 	//   - REGISTRY_VALUE_ACTIVITY
+	//
 	//   - RESOURCE_ACTIVITY
+	//
 	//   - SCHEDULED_JOB_ACTIVITY
+	//
 	//   - SECURITY_FINDING
+	//
 	//   - ACCOUNT_CHANGE
+	//
 	//   - AUTHENTICATION
+	//
 	//   - AUTHORIZATION
+	//
 	//   - ENTITY_MANAGEMENT_AUDIT
+	//
 	//   - DHCP_ACTIVITY
+	//
 	//   - NETWORK_ACTIVITY
+	//
 	//   - DNS_ACTIVITY
+	//
 	//   - FTP_ACTIVITY
+	//
 	//   - HTTP_ACTIVITY
+	//
 	//   - RDP_ACTIVITY
+	//
 	//   - SMB_ACTIVITY
+	//
 	//   - SSH_ACTIVITY
+	//
 	//   - CONFIG_STATE
+	//
 	//   - INVENTORY_INFO
+	//
 	//   - EMAIL_ACTIVITY
+	//
 	//   - API_ACTIVITY
+	//
 	//   - CLOUD_API
 	EventClasses []string
 
@@ -419,9 +458,10 @@ type HttpsNotificationConfiguration struct {
 
 	// The Amazon Resource Name (ARN) of the EventBridge API destinations IAM role
 	// that you created. For more information about ARNs and how to use them in
-	// policies, see Managing data access (https://docs.aws.amazon.com//security-lake/latest/userguide/subscriber-data-access.html)
-	// and Amazon Web Services Managed Policies (https://docs.aws.amazon.com/security-lake/latest/userguide/security-iam-awsmanpol.html)
-	// in the Amazon Security Lake User Guide.
+	// policies, see [Managing data access]and [Amazon Web Services Managed Policies] in the Amazon Security Lake User Guide.
+	//
+	// [Managing data access]: https://docs.aws.amazon.com//security-lake/latest/userguide/subscriber-data-access.html
+	// [Amazon Web Services Managed Policies]: https://docs.aws.amazon.com/security-lake/latest/userguide/security-iam-awsmanpol.html
 	//
 	// This member is required.
 	TargetRoleArn *string
@@ -455,22 +495,22 @@ type LogSource struct {
 }
 
 // The supported source types from which logs and events are collected in Amazon
-// Security Lake. For a list of supported Amazon Web Services, see the Amazon
-// Security Lake User Guide (https://docs.aws.amazon.com/security-lake/latest/userguide/internal-sources.html)
-// .
+// Security Lake. For a list of supported Amazon Web Services, see the [Amazon Security Lake User Guide].
 //
 // The following types satisfy this interface:
 //
 //	LogSourceResourceMemberAwsLogSource
 //	LogSourceResourceMemberCustomLogSource
+//
+// [Amazon Security Lake User Guide]: https://docs.aws.amazon.com/security-lake/latest/userguide/internal-sources.html
 type LogSourceResource interface {
 	isLogSourceResource()
 }
 
 // Amazon Security Lake supports log and event collection for natively supported
-// Amazon Web Services. For more information, see the Amazon Security Lake User
-// Guide (https://docs.aws.amazon.com/security-lake/latest/userguide/internal-sources.html)
-// .
+// Amazon Web Services. For more information, see the [Amazon Security Lake User Guide].
+//
+// [Amazon Security Lake User Guide]: https://docs.aws.amazon.com/security-lake/latest/userguide/internal-sources.html
 type LogSourceResourceMemberAwsLogSource struct {
 	Value AwsLogSourceResource
 
@@ -480,8 +520,9 @@ type LogSourceResourceMemberAwsLogSource struct {
 func (*LogSourceResourceMemberAwsLogSource) isLogSourceResource() {}
 
 // Amazon Security Lake supports custom source types. For more information, see
-// the Amazon Security Lake User Guide (https://docs.aws.amazon.com/security-lake/latest/userguide/custom-sources.html)
-// .
+// the [Amazon Security Lake User Guide].
+//
+// [Amazon Security Lake User Guide]: https://docs.aws.amazon.com/security-lake/latest/userguide/custom-sources.html
 type LogSourceResourceMemberCustomLogSource struct {
 	Value CustomLogSourceResource
 
@@ -531,9 +572,9 @@ type SqsNotificationConfiguration struct {
 type SubscriberResource struct {
 
 	// Amazon Security Lake supports log and event collection for natively supported
-	// Amazon Web Services. For more information, see the Amazon Security Lake User
-	// Guide (https://docs.aws.amazon.com/security-lake/latest/userguide/source-management.html)
-	// .
+	// Amazon Web Services. For more information, see the [Amazon Security Lake User Guide].
+	//
+	// [Amazon Security Lake User Guide]: https://docs.aws.amazon.com/security-lake/latest/userguide/source-management.html
 	//
 	// This member is required.
 	Sources []LogSourceResource
@@ -548,7 +589,7 @@ type SubscriberResource struct {
 	// This member is required.
 	SubscriberId *string
 
-	// The AWS identity used to access your data.
+	// The Amazon Web Services identity used to access your data.
 	//
 	// This member is required.
 	SubscriberIdentity *AwsIdentity
@@ -560,18 +601,22 @@ type SubscriberResource struct {
 
 	// You can choose to notify subscribers of new objects with an Amazon Simple Queue
 	// Service (Amazon SQS) queue or through messaging to an HTTPS endpoint provided by
-	// the subscriber. Subscribers can consume data by directly querying Lake Formation
-	// tables in your Amazon S3 bucket through services like Amazon Athena. This
-	// subscription type is defined as LAKEFORMATION .
+	// the subscriber.
+	//
+	// Subscribers can consume data by directly querying Lake Formation tables in your
+	// Amazon S3 bucket through services like Amazon Athena. This subscription type is
+	// defined as LAKEFORMATION .
 	AccessTypes []AccessType
 
 	// The date and time when the subscriber was created.
 	CreatedAt *time.Time
 
-	// The Amazon Resource Name (ARN) which uniquely defines the AWS RAM resource
-	// share. Before accepting the RAM resource share invitation, you can view details
-	// related to the RAM resource share. This field is available only for Lake
-	// Formation subscribers created after March 8, 2023.
+	// The Amazon Resource Name (ARN) which uniquely defines the Amazon Web Services
+	// RAM resource share. Before accepting the RAM resource share invitation, you can
+	// view details related to the RAM resource share.
+	//
+	// This field is available only for Lake Formation subscribers created after March
+	// 8, 2023.
 	ResourceShareArn *string
 
 	// The name of the resource share.
@@ -605,14 +650,18 @@ type SubscriberResource struct {
 // by owner, environment, or other criteria. You can associate tags with the
 // following types of Security Lake resources: subscribers, and the data lake
 // configuration for your Amazon Web Services account in individual Amazon Web
-// Services Regions. A resource can have up to 50 tags. Each tag consists of a
-// required tag key and an associated tag value. A tag key is a general label that
-// acts as a category for a more specific tag value. Each tag key must be unique
-// and it can have only one tag value. A tag value acts as a descriptor for a tag
-// key. Tag keys and values are case sensitive. They can contain letters, numbers,
-// spaces, or the following symbols: _ . : / = + @ - For more information, see
-// Tagging Amazon Security Lake resources (https://docs.aws.amazon.com/security-lake/latest/userguide/tagging-resources.html)
-// in the Amazon Security Lake User Guide.
+// Services Regions.
+//
+// A resource can have up to 50 tags. Each tag consists of a required tag key and
+// an associated tag value. A tag key is a general label that acts as a category
+// for a more specific tag value. Each tag key must be unique and it can have only
+// one tag value. A tag value acts as a descriptor for a tag key. Tag keys and
+// values are case sensitive. They can contain letters, numbers, spaces, or the
+// following symbols: _ . : / = + @ -
+//
+// For more information, see [Tagging Amazon Security Lake resources] in the Amazon Security Lake User Guide.
+//
+// [Tagging Amazon Security Lake resources]: https://docs.aws.amazon.com/security-lake/latest/userguide/tagging-resources.html
 type Tag struct {
 
 	// The name of the tag. This is a general label that acts as a category for a more

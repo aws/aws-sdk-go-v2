@@ -6,19 +6,26 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/cloudformation/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns information about a CloudFormation extension publisher. If you don't
-// supply a PublisherId , and you have registered as an extension publisher,
-// DescribePublisher returns information about your own publisher account. For more
-// information about registering as a publisher, see:
-//   - RegisterPublisher (https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_RegisterPublisher.html)
-//   - Publishing extensions to make them available for public use (https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/publish-extension.html)
-//     in the CloudFormation CLI User Guide
+// Returns information about a CloudFormation extension publisher.
+//
+// If you don't supply a PublisherId , and you have registered as an extension
+// publisher, DescribePublisher returns information about your own publisher
+// account.
+//
+// For more information about registering as a publisher, see:
+//
+// [RegisterPublisher]
+//
+// [Publishing extensions to make them available for public use]
+//   - in the CloudFormation CLI User Guide
+//
+// [Publishing extensions to make them available for public use]: https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/publish-extension.html
+// [RegisterPublisher]: https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_RegisterPublisher.html
 func (c *Client) DescribePublisher(ctx context.Context, params *DescribePublisherInput, optFns ...func(*Options)) (*DescribePublisherOutput, error) {
 	if params == nil {
 		params = &DescribePublisherInput{}
@@ -36,9 +43,11 @@ func (c *Client) DescribePublisher(ctx context.Context, params *DescribePublishe
 
 type DescribePublisherInput struct {
 
-	// The ID of the extension publisher. If you don't supply a PublisherId , and you
-	// have registered as an extension publisher, DescribePublisher returns
-	// information about your own publisher account.
+	// The ID of the extension publisher.
+	//
+	// If you don't supply a PublisherId , and you have registered as an extension
+	// publisher, DescribePublisher returns information about your own publisher
+	// account.
 	PublisherId *string
 
 	noSmithyDocumentSerde
@@ -88,25 +97,25 @@ func (c *Client) addOperationDescribePublisherMiddlewares(stack *middleware.Stac
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -121,10 +130,13 @@ func (c *Client) addOperationDescribePublisherMiddlewares(stack *middleware.Stac
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribePublisher(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

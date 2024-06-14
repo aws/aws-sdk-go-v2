@@ -6,18 +6,25 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Gets a key policy attached to the specified KMS key. Cross-account use: No. You
-// cannot perform this operation on a KMS key in a different Amazon Web Services
-// account. Required permissions: kms:GetKeyPolicy (https://docs.aws.amazon.com/kms/latest/developerguide/kms-api-permissions-reference.html)
-// (key policy) Related operations: PutKeyPolicy (https://docs.aws.amazon.com/kms/latest/APIReference/API_PutKeyPolicy.html)
+// Gets a key policy attached to the specified KMS key.
+//
+// Cross-account use: No. You cannot perform this operation on a KMS key in a
+// different Amazon Web Services account.
+//
+// Required permissions: [kms:GetKeyPolicy] (key policy)
+//
+// Related operations: [PutKeyPolicy]
+//
 // Eventual consistency: The KMS API follows an eventual consistency model. For
-// more information, see KMS eventual consistency (https://docs.aws.amazon.com/kms/latest/developerguide/programming-eventual-consistency.html)
-// .
+// more information, see [KMS eventual consistency].
+//
+// [kms:GetKeyPolicy]: https://docs.aws.amazon.com/kms/latest/developerguide/kms-api-permissions-reference.html
+// [PutKeyPolicy]: https://docs.aws.amazon.com/kms/latest/APIReference/API_PutKeyPolicy.html
+// [KMS eventual consistency]: https://docs.aws.amazon.com/kms/latest/developerguide/programming-eventual-consistency.html
 func (c *Client) GetKeyPolicy(ctx context.Context, params *GetKeyPolicyInput, optFns ...func(*Options)) (*GetKeyPolicyOutput, error) {
 	if params == nil {
 		params = &GetKeyPolicyInput{}
@@ -35,20 +42,25 @@ func (c *Client) GetKeyPolicy(ctx context.Context, params *GetKeyPolicyInput, op
 
 type GetKeyPolicyInput struct {
 
-	// Gets the key policy for the specified KMS key. Specify the key ID or key ARN of
-	// the KMS key. For example:
+	// Gets the key policy for the specified KMS key.
+	//
+	// Specify the key ID or key ARN of the KMS key.
+	//
+	// For example:
+	//
 	//   - Key ID: 1234abcd-12ab-34cd-56ef-1234567890ab
+	//
 	//   - Key ARN:
 	//   arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab
-	// To get the key ID and key ARN for a KMS key, use ListKeys or DescribeKey .
+	//
+	// To get the key ID and key ARN for a KMS key, use ListKeys or DescribeKey.
 	//
 	// This member is required.
 	KeyId *string
 
-	// Specifies the name of the key policy. The only valid name is default . To get
-	// the names of key policies, use ListKeyPolicies .
-	//
-	// This member is required.
+	// Specifies the name of the key policy. If no policy name is specified, the
+	// default value is default . The only valid name is default . To get the names of
+	// key policies, use ListKeyPolicies.
 	PolicyName *string
 
 	noSmithyDocumentSerde
@@ -58,6 +70,9 @@ type GetKeyPolicyOutput struct {
 
 	// A key policy document in JSON format.
 	Policy *string
+
+	// The name of the key policy. The only valid value is default .
+	PolicyName *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
@@ -87,25 +102,25 @@ func (c *Client) addOperationGetKeyPolicyMiddlewares(stack *middleware.Stack, op
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -120,13 +135,16 @@ func (c *Client) addOperationGetKeyPolicyMiddlewares(stack *middleware.Stack, op
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpGetKeyPolicyValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetKeyPolicy(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

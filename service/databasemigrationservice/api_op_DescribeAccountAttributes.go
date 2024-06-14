@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/databasemigrationservice/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -18,8 +17,9 @@ import (
 // the account, such as the number of replication instances allowed. The
 // description for each resource quota, includes the quota name, current usage
 // toward that quota, and the quota's maximum value. DMS uses the unique account
-// identifier to name each artifact used by DMS in the given region. This command
-// does not take any parameters.
+// identifier to name each artifact used by DMS in the given region.
+//
+// This command does not take any parameters.
 func (c *Client) DescribeAccountAttributes(ctx context.Context, params *DescribeAccountAttributesInput, optFns ...func(*Options)) (*DescribeAccountAttributesOutput, error) {
 	if params == nil {
 		params = &DescribeAccountAttributesInput{}
@@ -50,8 +50,9 @@ type DescribeAccountAttributesOutput struct {
 	// identifier to name the default Amazon S3 bucket for storing task assessment
 	// reports in a given Amazon Web Services Region. The format of this S3 bucket name
 	// is the following: dms-AccountNumber-UniqueAccountIdentifier. Here is an example
-	// name for this default S3 bucket: dms-111122223333-c44445555666 . DMS supports
-	// the UniqueAccountIdentifier parameter in versions 3.1.4 and later.
+	// name for this default S3 bucket: dms-111122223333-c44445555666 .
+	//
+	// DMS supports the UniqueAccountIdentifier parameter in versions 3.1.4 and later.
 	UniqueAccountIdentifier *string
 
 	// Metadata pertaining to the operation's result.
@@ -82,25 +83,25 @@ func (c *Client) addOperationDescribeAccountAttributesMiddlewares(stack *middlew
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -115,10 +116,13 @@ func (c *Client) addOperationDescribeAccountAttributesMiddlewares(stack *middlew
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeAccountAttributes(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

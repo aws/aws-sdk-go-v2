@@ -24,11 +24,16 @@ type AuthenticationConfiguration struct {
 	noSmithyDocumentSerde
 }
 
-// Describes an App Runner automatic scaling configuration resource. A higher
-// MinSize increases the spread of your App Runner service over more Availability
-// Zones in the Amazon Web Services Region. The tradeoff is a higher minimal cost.
+// Describes an App Runner automatic scaling configuration resource.
+//
+// A higher MinSize increases the spread of your App Runner service over more
+// Availability Zones in the Amazon Web Services Region. The tradeoff is a higher
+// minimal cost.
+//
 // A lower MaxSize controls your cost. The tradeoff is lower responsiveness during
-// peak demand. Multiple revisions of a configuration might have the same
+// peak demand.
+//
+// Multiple revisions of a configuration might have the same
 // AutoScalingConfigurationName and different AutoScalingConfigurationRevision
 // values.
 type AutoScalingConfiguration struct {
@@ -84,9 +89,10 @@ type AutoScalingConfiguration struct {
 	// actively serve traffic. The rest of them (provisioned and inactive instances)
 	// are a cost-effective compute capacity reserve and are ready to be quickly
 	// activated. You pay for memory usage of all the provisioned instances. You pay
-	// for CPU usage of only the active subset. App Runner temporarily doubles the
-	// number of provisioned instances during deployments, to maintain the same
-	// capacity for both old and new code.
+	// for CPU usage of only the active subset.
+	//
+	// App Runner temporarily doubles the number of provisioned instances during
+	// deployments, to maintain the same capacity for both old and new code.
 	MinSize *int32
 
 	// The current state of the auto scaling configuration. If the status of a
@@ -99,12 +105,12 @@ type AutoScalingConfiguration struct {
 }
 
 // Provides summary information about an App Runner automatic scaling
-// configuration resource. This type contains limited information about an auto
-// scaling configuration. It includes only identification information, without
-// configuration details. It's returned by the ListAutoScalingConfigurations
-// action. Complete configuration information is returned by the
-// CreateAutoScalingConfiguration , DescribeAutoScalingConfiguration , and
-// DeleteAutoScalingConfiguration actions using the AutoScalingConfiguration type.
+// configuration resource.
+//
+// This type contains limited information about an auto scaling configuration. It
+// includes only identification information, without configuration details. It's
+// returned by the ListAutoScalingConfigurationsaction. Complete configuration information is returned by the CreateAutoScalingConfiguration, DescribeAutoScalingConfiguration
+// , and DeleteAutoScalingConfigurationactions using the AutoScalingConfiguration type.
 type AutoScalingConfigurationSummary struct {
 
 	// The Amazon Resource Name (ARN) of this auto scaling configuration.
@@ -145,8 +151,9 @@ type AutoScalingConfigurationSummary struct {
 }
 
 // Describes a certificate CNAME record to add to your DNS. For more information,
-// see AssociateCustomDomain (https://docs.aws.amazon.com/apprunner/latest/api/API_AssociateCustomDomain.html)
-// .
+// see [AssociateCustomDomain].
+//
+// [AssociateCustomDomain]: https://docs.aws.amazon.com/apprunner/latest/api/API_AssociateCustomDomain.html
 type CertificateValidationRecord struct {
 
 	// The certificate CNAME record name.
@@ -170,8 +177,10 @@ type CertificateValidationRecord struct {
 type CodeConfiguration struct {
 
 	// The source of the App Runner configuration. Values are interpreted as follows:
+	//
 	//   - REPOSITORY – App Runner reads configuration values from the apprunner.yaml
 	//   file in the source code repository and ignores CodeConfigurationValues .
+	//
 	//   - API – App Runner uses configuration values provided in
 	//   CodeConfigurationValues and ignores the apprunner.yaml file in the source code
 	//   repository.
@@ -202,7 +211,9 @@ type CodeConfigurationValues struct {
 	// The command App Runner runs to build your application.
 	BuildCommand *string
 
-	// The port that your application listens to in the container. Default: 8080
+	// The port that your application listens to in the container.
+	//
+	// Default: 8080
 	Port *string
 
 	// An array of key-value pairs representing the secrets and parameters that get
@@ -210,10 +221,12 @@ type CodeConfigurationValues struct {
 	// either the full Amazon Resource Name (ARN) of the Secrets Manager secret or the
 	// full ARN of the parameter in the Amazon Web Services Systems Manager Parameter
 	// Store.
+	//
 	//   - If the Amazon Web Services Systems Manager Parameter Store parameter exists
 	//   in the same Amazon Web Services Region as the service that you're launching, you
 	//   can use either the full ARN or name of the secret. If the parameter exists in a
 	//   different Region, then the full ARN must be specified.
+	//
 	//   - Currently, cross account referencing of Amazon Web Services Systems Manager
 	//   Parameter Store parameter is not supported.
 	RuntimeEnvironmentSecrets map[string]string
@@ -242,7 +255,9 @@ type CodeRepository struct {
 	SourceCodeVersion *SourceCodeVersion
 
 	// Configuration for building and running the service from a source code
-	// repository. CodeConfiguration is required only for CreateService request.
+	// repository.
+	//
+	// CodeConfiguration is required only for CreateService request.
 	CodeConfiguration *CodeConfiguration
 
 	// The path of the directory that stores source code and configuration files. The
@@ -328,9 +343,12 @@ type CustomDomain struct {
 // Runner service.
 type EgressConfiguration struct {
 
-	// The type of egress configuration. Set to DEFAULT for access to resources hosted
-	// on public networks. Set to VPC to associate your service to a custom VPC
-	// specified by VpcConnectorArn .
+	// The type of egress configuration.
+	//
+	// Set to DEFAULT for access to resources hosted on public networks.
+	//
+	// Set to VPC to associate your service to a custom VPC specified by
+	// VpcConnectorArn .
 	EgressType EgressType
 
 	// The Amazon Resource Name (ARN) of the App Runner VPC connector that you want to
@@ -357,27 +375,41 @@ type EncryptionConfiguration struct {
 type HealthCheckConfiguration struct {
 
 	// The number of consecutive checks that must succeed before App Runner decides
-	// that the service is healthy. Default: 1
+	// that the service is healthy.
+	//
+	// Default: 1
 	HealthyThreshold *int32
 
-	// The time interval, in seconds, between health checks. Default: 5
+	// The time interval, in seconds, between health checks.
+	//
+	// Default: 5
 	Interval *int32
 
-	// The URL that health check requests are sent to. Path is only applicable when
-	// you set Protocol to HTTP . Default: "/"
+	// The URL that health check requests are sent to.
+	//
+	// Path is only applicable when you set Protocol to HTTP .
+	//
+	// Default: "/"
 	Path *string
 
 	// The IP protocol that App Runner uses to perform health checks for your service.
+	//
 	// If you set Protocol to HTTP , App Runner sends health check requests to the HTTP
-	// path specified by Path . Default: TCP
+	// path specified by Path .
+	//
+	// Default: TCP
 	Protocol HealthCheckProtocol
 
 	// The time, in seconds, to wait for a health check response before deciding it
-	// failed. Default: 2
+	// failed.
+	//
+	// Default: 2
 	Timeout *int32
 
 	// The number of consecutive checks that must fail before App Runner decides that
-	// the service is unhealthy. Default: 5
+	// the service is unhealthy.
+	//
+	// Default: 5
 	UnhealthyThreshold *int32
 
 	noSmithyDocumentSerde
@@ -387,7 +419,9 @@ type HealthCheckConfiguration struct {
 // using an image pulled from a source image repository.
 type ImageConfiguration struct {
 
-	// The port that your application listens to in the container. Default: 8080
+	// The port that your application listens to in the container.
+	//
+	// Default: 8080
 	Port *string
 
 	// An array of key-value pairs representing the secrets and parameters that get
@@ -395,10 +429,12 @@ type ImageConfiguration struct {
 	// either the full Amazon Resource Name (ARN) of the Secrets Manager secret or the
 	// full ARN of the parameter in the Amazon Web Services Systems Manager Parameter
 	// Store.
+	//
 	//   - If the Amazon Web Services Systems Manager Parameter Store parameter exists
 	//   in the same Amazon Web Services Region as the service that you're launching, you
 	//   can use either the full ARN or name of the secret. If the parameter exists in a
 	//   different Region, then the full ARN must be specified.
+	//
 	//   - Currently, cross account referencing of Amazon Web Services Systems Manager
 	//   Parameter Store parameter is not supported.
 	RuntimeEnvironmentSecrets map[string]string
@@ -418,10 +454,12 @@ type ImageConfiguration struct {
 // Describes a source image repository.
 type ImageRepository struct {
 
-	// The identifier of an image. For an image in Amazon Elastic Container Registry
-	// (Amazon ECR), this is an image name. For the image name format, see Pulling an
-	// image (https://docs.aws.amazon.com/AmazonECR/latest/userguide/docker-pull-ecr-image.html)
-	// in the Amazon ECR User Guide.
+	// The identifier of an image.
+	//
+	// For an image in Amazon Elastic Container Registry (Amazon ECR), this is an
+	// image name. For the image name format, see [Pulling an image]in the Amazon ECR User Guide.
+	//
+	// [Pulling an image]: https://docs.aws.amazon.com/AmazonECR/latest/userguide/docker-pull-ecr-image.html
 	//
 	// This member is required.
 	ImageIdentifier *string
@@ -468,6 +506,7 @@ type IngressVpcConfiguration struct {
 type InstanceConfiguration struct {
 
 	// The number of CPU units reserved for each instance of your App Runner service.
+	//
 	// Default: 1 vCPU
 	Cpu *string
 
@@ -477,7 +516,9 @@ type InstanceConfiguration struct {
 	InstanceRoleArn *string
 
 	// The amount of memory, in MB or GB, reserved for each instance of your App
-	// Runner service. Default: 2 GB
+	// Runner service.
+	//
+	// Default: 2 GB
 	Memory *string
 
 	noSmithyDocumentSerde
@@ -509,11 +550,13 @@ type NetworkConfiguration struct {
 	// App Runner provides you with the option to choose between Internet Protocol
 	// version 4 (IPv4) and dual stack (IPv4 and IPv6) for your incoming public network
 	// configuration. This is an optional parameter. If you do not specify an
-	// IpAddressType , it defaults to select IPv4. Currently, App Runner supports dual
-	// stack for only Public endpoint. Only IPv4 is supported for Private endpoint. If
-	// you update a service that's using dual-stack Public endpoint to a Private
-	// endpoint, your App Runner service will default to support only IPv4 for Private
-	// endpoint and fail to receive traffic originating from IPv6 endpoint.
+	// IpAddressType , it defaults to select IPv4.
+	//
+	// Currently, App Runner supports dual stack for only Public endpoint. Only IPv4
+	// is supported for Private endpoint. If you update a service that's using
+	// dual-stack Public endpoint to a Private endpoint, your App Runner service will
+	// default to support only IPv4 for Private endpoint and fail to receive traffic
+	// originating from IPv6 endpoint.
 	IpAddressType IpAddressType
 
 	noSmithyDocumentSerde
@@ -521,11 +564,12 @@ type NetworkConfiguration struct {
 
 // Describes an App Runner observability configuration resource. Multiple
 // revisions of a configuration have the same ObservabilityConfigurationName and
-// different ObservabilityConfigurationRevision values. The resource is designed
-// to configure multiple features (currently one feature, tracing). This type
-// contains optional members that describe the configuration of these features
-// (currently one member, TraceConfiguration ). If a feature member isn't
-// specified, the feature isn't enabled.
+// different ObservabilityConfigurationRevision values.
+//
+// The resource is designed to configure multiple features (currently one feature,
+// tracing). This type contains optional members that describe the configuration of
+// these features (currently one member, TraceConfiguration ). If a feature member
+// isn't specified, the feature isn't enabled.
 type ObservabilityConfiguration struct {
 
 	// The time when the observability configuration was created. It's in Unix time
@@ -567,13 +611,12 @@ type ObservabilityConfiguration struct {
 }
 
 // Provides summary information about an App Runner observability configuration
-// resource. This type contains limited information about an observability
-// configuration. It includes only identification information, without
-// configuration details. It's returned by the ListObservabilityConfigurations
-// action. Complete configuration information is returned by the
-// CreateObservabilityConfiguration , DescribeObservabilityConfiguration , and
-// DeleteObservabilityConfiguration actions using the ObservabilityConfiguration
-// type.
+// resource.
+//
+// This type contains limited information about an observability configuration. It
+// includes only identification information, without configuration details. It's
+// returned by the ListObservabilityConfigurationsaction. Complete configuration information is returned by the CreateObservabilityConfiguration, DescribeObservabilityConfiguration
+// , and DeleteObservabilityConfigurationactions using the ObservabilityConfiguration type.
 type ObservabilityConfigurationSummary struct {
 
 	// The Amazon Resource Name (ARN) of this observability configuration.
@@ -623,13 +666,17 @@ type OperationSummary struct {
 }
 
 // Describes an App Runner service. It can describe a service in any state,
-// including deleted services. This type contains the full information about a
-// service, including configuration details. It's returned by the CreateService (https://docs.aws.amazon.com/apprunner/latest/api/API_CreateService.html)
-// , DescribeService (https://docs.aws.amazon.com/apprunner/latest/api/API_DescribeService.html)
-// , and DeleteService (https://docs.aws.amazon.com/apprunner/latest/api/API_DeleteService.html)
-// actions. A subset of this information is returned by the ListServices (https://docs.aws.amazon.com/apprunner/latest/api/API_ListServices.html)
-// action using the ServiceSummary (https://docs.aws.amazon.com/apprunner/latest/api/API_ServiceSummary.html)
-// type.
+// including deleted services.
+//
+// This type contains the full information about a service, including
+// configuration details. It's returned by the [CreateService], [DescribeService], and [DeleteService] actions. A subset of this
+// information is returned by the [ListServices]action using the [ServiceSummary] type.
+//
+// [CreateService]: https://docs.aws.amazon.com/apprunner/latest/api/API_CreateService.html
+// [DeleteService]: https://docs.aws.amazon.com/apprunner/latest/api/API_DeleteService.html
+// [ListServices]: https://docs.aws.amazon.com/apprunner/latest/api/API_ListServices.html
+// [ServiceSummary]: https://docs.aws.amazon.com/apprunner/latest/api/API_ServiceSummary.html
+// [DescribeService]: https://docs.aws.amazon.com/apprunner/latest/api/API_DescribeService.html
 type Service struct {
 
 	// Summary information for the App Runner automatic scaling configuration resource
@@ -679,10 +726,12 @@ type Service struct {
 
 	// The current state of the App Runner service. These particular values mean the
 	// following.
+	//
 	//   - CREATE_FAILED – The service failed to create. The failed service isn't
 	//   usable, and still counts towards your service quota. To troubleshoot this
 	//   failure, read the failure events and logs, change any parameters that need to be
 	//   fixed, and rebuild your service using UpdateService .
+	//
 	//   - DELETE_FAILED – The service failed to delete and can't be successfully
 	//   recovered. Retry the service deletion call to ensure that all related resources
 	//   are removed.
@@ -733,9 +782,11 @@ type ServiceObservabilityConfiguration struct {
 
 	// The Amazon Resource Name (ARN) of the observability configuration that is
 	// associated with the service. Specified only when ObservabilityEnabled is true .
-	// Specify an ARN with a name and a revision number to associate that revision. For
-	// example:
+	//
+	// Specify an ARN with a name and a revision number to associate that revision.
+	// For example:
 	// arn:aws:apprunner:us-east-1:123456789012:observabilityconfiguration/xray-tracing/3
+	//
 	// Specify just the name to associate the latest revision. For example:
 	// arn:aws:apprunner:us-east-1:123456789012:observabilityconfiguration/xray-tracing
 	ObservabilityConfigurationArn *string
@@ -743,14 +794,17 @@ type ServiceObservabilityConfiguration struct {
 	noSmithyDocumentSerde
 }
 
-// Provides summary information for an App Runner service. This type contains
-// limited information about a service. It doesn't include configuration details.
-// It's returned by the ListServices (https://docs.aws.amazon.com/apprunner/latest/api/API_ListServices.html)
-// action. Complete service information is returned by the CreateService (https://docs.aws.amazon.com/apprunner/latest/api/API_CreateService.html)
-// , DescribeService (https://docs.aws.amazon.com/apprunner/latest/api/API_DescribeService.html)
-// , and DeleteService (https://docs.aws.amazon.com/apprunner/latest/api/API_DeleteService.html)
-// actions using the Service (https://docs.aws.amazon.com/apprunner/latest/api/API_Service.html)
-// type.
+// Provides summary information for an App Runner service.
+//
+// This type contains limited information about a service. It doesn't include
+// configuration details. It's returned by the [ListServices]action. Complete service
+// information is returned by the [CreateService], [DescribeService], and [DeleteService] actions using the [Service] type.
+//
+// [CreateService]: https://docs.aws.amazon.com/apprunner/latest/api/API_CreateService.html
+// [DeleteService]: https://docs.aws.amazon.com/apprunner/latest/api/API_DeleteService.html
+// [ListServices]: https://docs.aws.amazon.com/apprunner/latest/api/API_ListServices.html
+// [Service]: https://docs.aws.amazon.com/apprunner/latest/api/API_Service.html
+// [DescribeService]: https://docs.aws.amazon.com/apprunner/latest/api/API_DescribeService.html
 type ServiceSummary struct {
 
 	// The time when the App Runner service was created. It's in the Unix time stamp
@@ -773,10 +827,12 @@ type ServiceSummary struct {
 
 	// The current state of the App Runner service. These particular values mean the
 	// following.
+	//
 	//   - CREATE_FAILED – The service failed to create. The failed service isn't
 	//   usable, and still counts towards your service quota. To troubleshoot this
 	//   failure, read the failure events and logs, change any parameters that need to be
 	//   fixed, and rebuild your service using UpdateService .
+	//
 	//   - DELETE_FAILED – The service failed to delete and can't be successfully
 	//   recovered. Retry the service deletion call to ensure that all related resources
 	//   are removed.
@@ -793,14 +849,17 @@ type ServiceSummary struct {
 // repository.
 type SourceCodeVersion struct {
 
-	// The type of version identifier. For a git-based repository, branches represent
-	// versions.
+	// The type of version identifier.
+	//
+	// For a git-based repository, branches represent versions.
 	//
 	// This member is required.
 	Type SourceCodeVersionType
 
-	// A source code version. For a git-based repository, a branch name maps to a
-	// specific version. App Runner uses the most recent commit to the branch.
+	// A source code version.
+	//
+	// For a git-based repository, a branch name maps to a specific version. App
+	// Runner uses the most recent commit to the branch.
 	//
 	// This member is required.
 	Value *string
@@ -818,19 +877,23 @@ type SourceConfiguration struct {
 
 	// If true , continuous integration from the source repository is enabled for the
 	// App Runner service. Each repository change (including any source code commit or
-	// new image version) starts a deployment. Default: App Runner sets to false for a
-	// source image that uses an ECR Public repository or an ECR repository that's in
-	// an Amazon Web Services account other than the one that the service is in. App
-	// Runner sets to true in all other cases (which currently include a source code
-	// repository or a source image using a same-account ECR repository).
+	// new image version) starts a deployment.
+	//
+	// Default: App Runner sets to false for a source image that uses an ECR Public
+	// repository or an ECR repository that's in an Amazon Web Services account other
+	// than the one that the service is in. App Runner sets to true in all other cases
+	// (which currently include a source code repository or a source image using a
+	// same-account ECR repository).
 	AutoDeploymentsEnabled *bool
 
-	// The description of a source code repository. You must provide either this
-	// member or ImageRepository (but not both).
+	// The description of a source code repository.
+	//
+	// You must provide either this member or ImageRepository (but not both).
 	CodeRepository *CodeRepository
 
-	// The description of a source image repository. You must provide either this
-	// member or CodeRepository (but not both).
+	// The description of a source image repository.
+	//
+	// You must provide either this member or CodeRepository (but not both).
 	ImageRepository *ImageRepository
 
 	noSmithyDocumentSerde
@@ -863,9 +926,12 @@ type TraceConfiguration struct {
 
 // Describes an App Runner VPC connector resource. A VPC connector describes the
 // Amazon Virtual Private Cloud (Amazon VPC) that an App Runner service is
-// associated with, and the subnets and security group that are used. Multiple
-// revisions of a connector might have the same Name and different Revision
-// values. At this time, App Runner supports only one revision per name.
+// associated with, and the subnets and security group that are used.
+//
+// Multiple revisions of a connector might have the same Name and different
+// Revision values.
+//
+// At this time, App Runner supports only one revision per name.
 type VpcConnector struct {
 
 	// The time when the VPC connector was created. It's in Unix time stamp format.
@@ -896,8 +962,9 @@ type VpcConnector struct {
 	VpcConnectorName *string
 
 	// The revision of this VPC connector. It's unique among all the active connectors
-	// ( "Status": "ACTIVE" ) that share the same Name . At this time, App Runner
-	// supports only one revision per name.
+	// ( "Status": "ACTIVE" ) that share the same Name .
+	//
+	// At this time, App Runner supports only one revision per name.
 	VpcConnectorRevision int32
 
 	noSmithyDocumentSerde
@@ -931,13 +998,17 @@ type VpcIngressConnection struct {
 
 	// The time when the VPC Ingress Connection was created. It's in the Unix time
 	// stamp format.
+	//
 	//   - Type: Timestamp
+	//
 	//   - Required: Yes
 	CreatedAt *time.Time
 
 	// The time when the App Runner service was deleted. It's in the Unix time stamp
 	// format.
+	//
 	//   - Type: Timestamp
+	//
 	//   - Required: No
 	DeletedAt *time.Time
 

@@ -6,14 +6,14 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Removes the specified origination identity from an existing pool. If the
-// origination identity isn't associated with the specified pool, an error is
-// returned.
+// Removes the specified origination identity from an existing pool.
+//
+// If the origination identity isn't associated with the specified pool, an error
+// is returned.
 func (c *Client) DisassociateOriginationIdentity(ctx context.Context, params *DisassociateOriginationIdentityInput, optFns ...func(*Options)) (*DisassociateOriginationIdentityOutput, error) {
 	if params == nil {
 		params = &DisassociateOriginationIdentityInput{}
@@ -31,15 +31,15 @@ func (c *Client) DisassociateOriginationIdentity(ctx context.Context, params *Di
 
 type DisassociateOriginationIdentityInput struct {
 
-	// The two-character code, in ISO 3166-1 alpha-2 format, for the country or region.
+	// The two-character code, in ISO 3166-1 alpha-2 format, for the country or
+	// region.
 	//
 	// This member is required.
 	IsoCountryCode *string
 
 	// The origination identity to use such as a PhoneNumberId, PhoneNumberArn,
-	// SenderId or SenderIdArn. You can use DescribePhoneNumbers find the values for
-	// PhoneNumberId and PhoneNumberArn, or use DescribeSenderIds to get the values
-	// for SenderId and SenderIdArn.
+	// SenderId or SenderIdArn. You can use DescribePhoneNumbersfind the values for PhoneNumberId and
+	// PhoneNumberArn, or use DescribeSenderIdsto get the values for SenderId and SenderIdArn.
 	//
 	// This member is required.
 	OriginationIdentity *string
@@ -103,25 +103,25 @@ func (c *Client) addOperationDisassociateOriginationIdentityMiddlewares(stack *m
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -136,6 +136,9 @@ func (c *Client) addOperationDisassociateOriginationIdentityMiddlewares(stack *m
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opDisassociateOriginationIdentityMiddleware(stack, options); err != nil {
 		return err
 	}
@@ -145,7 +148,7 @@ func (c *Client) addOperationDisassociateOriginationIdentityMiddlewares(stack *m
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDisassociateOriginationIdentity(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

@@ -6,15 +6,16 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/kendra/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
-// Gets information on the settings of query suggestions for an index. This is
-// used to check the current settings applied to query suggestions.
+// Gets information on the settings of query suggestions for an index.
+//
+// This is used to check the current settings applied to query suggestions.
+//
 // DescribeQuerySuggestionsConfig is currently not supported in the Amazon Web
 // Services GovCloud (US-West) region.
 func (c *Client) DescribeQuerySuggestionsConfig(ctx context.Context, params *DescribeQuerySuggestionsConfigInput, optFns ...func(*Options)) (*DescribeQuerySuggestionsConfigOutput, error) {
@@ -53,16 +54,20 @@ type DescribeQuerySuggestionsConfigOutput struct {
 	// information to generate the query suggestions.
 	IncludeQueriesWithoutUserInformation *bool
 
-	// The Unix timestamp when query suggestions for an index was last cleared. After
-	// you clear suggestions, Amazon Kendra learns new suggestions based on new queries
-	// added to the query log from the time you cleared suggestions. Amazon Kendra only
-	// considers re-occurences of a query from the time you cleared suggestions.
+	// The Unix timestamp when query suggestions for an index was last cleared.
+	//
+	// After you clear suggestions, Amazon Kendra learns new suggestions based on new
+	// queries added to the query log from the time you cleared suggestions. Amazon
+	// Kendra only considers re-occurences of a query from the time you cleared
+	// suggestions.
 	LastClearTime *time.Time
 
-	// The Unix timestamp when query suggestions for an index was last updated. Amazon
-	// Kendra automatically updates suggestions every 24 hours, after you change a
-	// setting or after you apply a block list (https://docs.aws.amazon.com/kendra/latest/dg/query-suggestions.html#query-suggestions-blocklist)
-	// .
+	// The Unix timestamp when query suggestions for an index was last updated.
+	//
+	// Amazon Kendra automatically updates suggestions every 24 hours, after you
+	// change a setting or after you apply a [block list].
+	//
+	// [block list]: https://docs.aws.amazon.com/kendra/latest/dg/query-suggestions.html#query-suggestions-blocklist
 	LastSuggestionsBuildTime *time.Time
 
 	// The minimum number of unique users who must search a query in order for the
@@ -73,28 +78,33 @@ type DescribeQuerySuggestionsConfigOutput struct {
 	// be eligible to suggest to your users.
 	MinimumQueryCount *int32
 
-	// Whether query suggestions are currently in ENABLED mode or LEARN_ONLY mode. By
-	// default, Amazon Kendra enables query suggestions. LEARN_ONLY turns off query
-	// suggestions for your users. You can change the mode using the
-	// UpdateQuerySuggestionsConfig (https://docs.aws.amazon.com/kendra/latest/dg/API_UpdateQuerySuggestionsConfig.html)
-	// API.
+	// Whether query suggestions are currently in ENABLED mode or LEARN_ONLY mode.
+	//
+	// By default, Amazon Kendra enables query suggestions. LEARN_ONLY turns off query
+	// suggestions for your users. You can change the mode using the [UpdateQuerySuggestionsConfig]API.
+	//
+	// [UpdateQuerySuggestionsConfig]: https://docs.aws.amazon.com/kendra/latest/dg/API_UpdateQuerySuggestionsConfig.html
 	Mode types.Mode
 
 	// How recent your queries are in your query log time window (in days).
 	QueryLogLookBackWindowInDays *int32
 
 	// Whether the status of query suggestions settings is currently ACTIVE or UPDATING
-	// . Active means the current settings apply and Updating means your changed
+	// .
+	//
+	// Active means the current settings apply and Updating means your changed
 	// settings are in the process of applying.
 	Status types.QuerySuggestionsStatus
 
-	// The current total count of query suggestions for an index. This count can
-	// change when you update your query suggestions settings, if you filter out
-	// certain queries from suggestions using a block list, and as the query log
-	// accumulates more queries for Amazon Kendra to learn from. If the count is much
-	// lower than you expected, it could be because Amazon Kendra needs more queries in
-	// the query history to learn from or your current query suggestions settings are
-	// too strict.
+	// The current total count of query suggestions for an index.
+	//
+	// This count can change when you update your query suggestions settings, if you
+	// filter out certain queries from suggestions using a block list, and as the query
+	// log accumulates more queries for Amazon Kendra to learn from.
+	//
+	// If the count is much lower than you expected, it could be because Amazon Kendra
+	// needs more queries in the query history to learn from or your current query
+	// suggestions settings are too strict.
 	TotalSuggestionsCount *int32
 
 	// Metadata pertaining to the operation's result.
@@ -125,25 +135,25 @@ func (c *Client) addOperationDescribeQuerySuggestionsConfigMiddlewares(stack *mi
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -158,13 +168,16 @@ func (c *Client) addOperationDescribeQuerySuggestionsConfigMiddlewares(stack *mi
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDescribeQuerySuggestionsConfigValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeQuerySuggestionsConfig(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

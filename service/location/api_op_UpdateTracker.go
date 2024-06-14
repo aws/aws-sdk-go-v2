@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/location/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -40,26 +39,35 @@ type UpdateTrackerInput struct {
 	Description *string
 
 	// Whether to enable position UPDATE events from this tracker to be sent to
-	// EventBridge. You do not need enable this feature to get ENTER and EXIT events
-	// for geofences with this tracker. Those events are always sent to EventBridge.
+	// EventBridge.
+	//
+	// You do not need enable this feature to get ENTER and EXIT events for geofences
+	// with this tracker. Those events are always sent to EventBridge.
 	EventBridgeEnabled *bool
 
-	// Enables GeospatialQueries for a tracker that uses a Amazon Web Services KMS
-	// customer managed key (https://docs.aws.amazon.com/kms/latest/developerguide/create-keys.html)
-	// . This parameter is only used if you are using a KMS customer managed key.
+	// Enables GeospatialQueries for a tracker that uses a [Amazon Web Services KMS customer managed key].
+	//
+	// This parameter is only used if you are using a KMS customer managed key.
+	//
+	// [Amazon Web Services KMS customer managed key]: https://docs.aws.amazon.com/kms/latest/developerguide/create-keys.html
 	KmsKeyEnableGeospatialQueries *bool
 
-	// Updates the position filtering for the tracker resource. Valid values:
+	// Updates the position filtering for the tracker resource.
+	//
+	// Valid values:
+	//
 	//   - TimeBased - Location updates are evaluated against linked geofence
 	//   collections, but not every location update is stored. If your update frequency
 	//   is more often than 30 seconds, only one update per 30 seconds is stored for each
 	//   unique device ID.
+	//
 	//   - DistanceBased - If the device has moved less than 30 m (98.4 ft), location
 	//   updates are ignored. Location updates within this distance are neither evaluated
 	//   against linked geofence collections, nor stored. This helps control costs by
 	//   reducing the number of geofence evaluations and historical device positions to
 	//   paginate through. Distance-based filtering can also reduce the effects of GPS
 	//   noise when displaying device trajectories on a map.
+	//
 	//   - AccuracyBased - If the device has moved less than the measured accuracy,
 	//   location updates are ignored. For example, if two consecutive updates from a
 	//   device have a horizontal accuracy of 5 m and 10 m, the second update is ignored
@@ -87,6 +95,7 @@ type UpdateTrackerOutput struct {
 
 	// The Amazon Resource Name (ARN) of the updated tracker resource. Used to specify
 	// a resource across AWS.
+	//
 	//   - Format example: arn:aws:geo:region:account-id:tracker/ExampleTracker
 	//
 	// This member is required.
@@ -97,8 +106,10 @@ type UpdateTrackerOutput struct {
 	// This member is required.
 	TrackerName *string
 
-	// The timestamp for when the tracker resource was last updated in  ISO 8601 (https://www.iso.org/iso-8601-date-and-time-format.html)
-	// format: YYYY-MM-DDThh:mm:ss.sssZ .
+	// The timestamp for when the tracker resource was last updated in [ISO 8601] format:
+	// YYYY-MM-DDThh:mm:ss.sssZ .
+	//
+	// [ISO 8601]: https://www.iso.org/iso-8601-date-and-time-format.html
 	//
 	// This member is required.
 	UpdateTime *time.Time
@@ -131,25 +142,25 @@ func (c *Client) addOperationUpdateTrackerMiddlewares(stack *middleware.Stack, o
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -164,6 +175,9 @@ func (c *Client) addOperationUpdateTrackerMiddlewares(stack *middleware.Stack, o
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addEndpointPrefix_opUpdateTrackerMiddleware(stack); err != nil {
 		return err
 	}
@@ -173,7 +187,7 @@ func (c *Client) addOperationUpdateTrackerMiddlewares(stack *middleware.Stack, o
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateTracker(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

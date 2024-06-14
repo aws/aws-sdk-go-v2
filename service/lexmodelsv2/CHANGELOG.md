@@ -1,3 +1,75 @@
+# v1.43.10 (2024-06-07)
+
+* **Bug Fix**: Add clock skew correction on all service clients
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.43.9 (2024-06-03)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.43.8 (2024-05-23)
+
+* No change notes available for this release.
+
+# v1.43.7 (2024-05-16)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.43.6 (2024-05-15)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.43.5 (2024-05-08)
+
+* **Bug Fix**: GoDoc improvement
+
+# v1.43.4 (2024-03-29)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.43.3 (2024-03-25)
+
+* No change notes available for this release.
+
+# v1.43.2 (2024-03-18)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.43.1 (2024-03-07)
+
+* **Bug Fix**: Remove dependency on go-cmp.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.43.0 (2024-02-29)
+
+* **Feature**: This release makes AMAZON.QnAIntent generally available in Amazon Lex. This generative AI feature leverages large language models available through Amazon Bedrock to automate frequently asked questions (FAQ) experience for end-users.
+
+# v1.42.1 (2024-02-23)
+
+* **Bug Fix**: Move all common, SDK-side middleware stack ops into the service client module to prevent cross-module compatibility issues in the future.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.42.0 (2024-02-22)
+
+* **Feature**: Add middleware stack snapshot tests.
+
+# v1.41.2 (2024-02-21)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.41.1 (2024-02-20)
+
+* **Bug Fix**: When sourcing values for a service's `EndpointParameters`, the lack of a configured region (i.e. `options.Region == ""`) will now translate to a `nil` value for `EndpointParameters.Region` instead of a pointer to the empty string `""`. This will result in a much more explicit error when calling an operation instead of an obscure hostname lookup failure.
+
+# v1.41.0 (2024-02-16)
+
+* **Feature**: Add new ClientOptions field to waiter config which allows you to extend the config for operation calls made by waiters.
+
+# v1.40.0 (2024-02-13)
+
+* **Feature**: Bump minimum Go version to 1.20 per our language support policy.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.39.0 (2024-02-07)
 
 * **Feature**: This release introduces a new bot replication feature as part of Lex Global Resiliency offering. This feature leverages a new set of APIs that allow customers to create bot replicas and replicate changes to bots across regions.

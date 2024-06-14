@@ -1869,6 +1869,23 @@
                 "smithy.api#pattern": "^\\d{12}|o-[a-z0-9]{10,32}$"
             }
         },
+        "com.amazonaws.inspector2#CisReportFormat": {
+            "type": "enum",
+            "members": {
+                "PDF": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "PDF"
+                    }
+                },
+                "CSV": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CSV"
+                    }
+                }
+            }
+        },
         "com.amazonaws.inspector2#CisReportStatus": {
             "type": "enum",
             "members": {
@@ -3530,6 +3547,12 @@
                         "smithy.api#documentation": "<p>Filters Amazon Web Services resources based on whether Amazon Inspector has checked them for vulnerabilities within the specified time range.</p>"
                     }
                 },
+                "scanMode": {
+                    "target": "com.amazonaws.inspector2#CoverageStringFilterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The filter to search for Amazon EC2 instance coverage by scan mode. Valid values are <code>EC2_SSM_AGENT_BASED</code> and <code>EC2_HYBRID</code>.</p>"
+                    }
+                },
                 "imagePulledAt": {
                     "target": "com.amazonaws.inspector2#CoverageDateFilterList",
                     "traits": {
@@ -3720,6 +3743,12 @@
                     "target": "com.amazonaws.inspector2#DateTimeTimestamp",
                     "traits": {
                         "smithy.api#documentation": "<p>The date and time the resource was last checked for vulnerabilities.</p>"
+                    }
+                },
+                "scanMode": {
+                    "target": "com.amazonaws.inspector2#ScanMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The scan method that is applied to the instance.</p>"
                     }
                 }
             },
@@ -4952,6 +4981,35 @@
                 }
             }
         },
+        "com.amazonaws.inspector2#Ec2Configuration": {
+            "type": "structure",
+            "members": {
+                "scanMode": {
+                    "target": "com.amazonaws.inspector2#Ec2ScanMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The scan method that is applied to the instance.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Enables agent-based scanning, which scans instances that are not managed by SSM.</p>"
+            }
+        },
+        "com.amazonaws.inspector2#Ec2ConfigurationState": {
+            "type": "structure",
+            "members": {
+                "scanModeState": {
+                    "target": "com.amazonaws.inspector2#Ec2ScanModeState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An object that contains details about the state of the Amazon EC2 scan mode.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Details about the state of the EC2 scan configuration for your environment.</p>"
+            }
+        },
         "com.amazonaws.inspector2#Ec2DeepInspectionStatus": {
             "type": "string",
             "traits": {
@@ -5138,6 +5196,56 @@
                     {
                         "value": "MACOS",
                         "name": "MACOS"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.inspector2#Ec2ScanMode": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "EC2_SSM_AGENT_BASED",
+                        "name": "EC2_SSM_AGENT_BASED"
+                    },
+                    {
+                        "value": "EC2_HYBRID",
+                        "name": "EC2_HYBRID"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.inspector2#Ec2ScanModeState": {
+            "type": "structure",
+            "members": {
+                "scanMode": {
+                    "target": "com.amazonaws.inspector2#Ec2ScanMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The scan method that is applied to the instance.</p>"
+                    }
+                },
+                "scanModeStatus": {
+                    "target": "com.amazonaws.inspector2#Ec2ScanModeStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the Amazon EC2 scan mode setting.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The state of your Amazon EC2 scan mode configuration.</p>"
+            }
+        },
+        "com.amazonaws.inspector2#Ec2ScanModeStatus": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "SUCCESS",
+                        "name": "SUCCESS"
+                    },
+                    {
+                        "value": "PENDING",
+                        "name": "PENDING"
                     }
                 ]
             }
@@ -6308,7 +6416,7 @@
                 "lastObservedAt": {
                     "target": "com.amazonaws.inspector2#DateTimeTimestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>The date and time that the finding was last observed.</p>",
+                        "smithy.api#documentation": "<p>\n         The date and time the finding was last observed. \n         This timestamp for this field remains unchanged until a finding is updated.\n      </p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -6890,6 +6998,9 @@
                     "target": "com.amazonaws.inspector2#InternalServerException"
                 },
                 {
+                    "target": "com.amazonaws.inspector2#ResourceNotFoundException"
+                },
+                {
                     "target": "com.amazonaws.inspector2#ThrottlingException"
                 },
                 {
@@ -6902,7 +7013,8 @@
                     {
                         "title": "Sample GetCisScanReport Call",
                         "input": {
-                            "scanArn": "arn:aws:inspector2:us-east-1:123412341234:owner/123412341234/cis-scan/624b746d-e080-44ae-8c1d-48e653365a38"
+                            "scanArn": "arn:aws:inspector2:us-east-1:123412341234:owner/123412341234/cis-scan/624b746d-e080-44ae-8c1d-48e653365a38",
+                            "reportFormat": "PDF"
                         },
                         "output": {
                             "url": "www.s3.amazon.com/abcdef",
@@ -6932,6 +7044,13 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The target accounts.</p>"
                     }
+                },
+                "reportFormat": {
+                    "target": "com.amazonaws.inspector2#CisReportFormat",
+                    "traits": {
+                        "smithy.api#default": "PDF",
+                        "smithy.api#documentation": "<p>\n         The format of the report. \n         Valid values are <code>PDF</code> and <code>CSV</code>. \n         If no value is specified, the report format defaults to <code>PDF</code>.\n      </p>"
+                    }
                 }
             },
             "traits": {
@@ -6944,7 +7063,7 @@
                 "url": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n         The URL where the CIS scan report PDF can be downloaded.\n      </p>"
+                        "smithy.api#documentation": "<p>\n         The URL where a PDF or CSV of the CIS scan report can be downloaded.\n      </p>"
                     }
                 },
                 "status": {
@@ -7150,6 +7269,12 @@
                     "target": "com.amazonaws.inspector2#EcrConfigurationState",
                     "traits": {
                         "smithy.api#documentation": "<p>Specifies how the ECR automated re-scan duration is currently configured for your environment.</p>"
+                    }
+                },
+                "ec2Configuration": {
+                    "target": "com.amazonaws.inspector2#Ec2ConfigurationState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies how the Amazon EC2 automated scan mode is currently configured for your environment.</p>"
                     }
                 }
             }
@@ -12454,6 +12579,21 @@
                 ]
             }
         },
+        "com.amazonaws.inspector2#ScanMode": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "EC2_SSM_AGENT_BASED",
+                        "name": "EC2_SSM_AGENT_BASED"
+                    },
+                    {
+                        "value": "EC2_AGENTLESS",
+                        "name": "EC2_AGENTLESS"
+                    }
+                ]
+            }
+        },
         "com.amazonaws.inspector2#ScanStatus": {
             "type": "structure",
             "members": {
@@ -14393,8 +14533,13 @@
                 "ecrConfiguration": {
                     "target": "com.amazonaws.inspector2#EcrConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies how the ECR automated re-scan will be updated for your environment.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>Specifies how the ECR automated re-scan will be updated for your environment.</p>"
+                    }
+                },
+                "ec2Configuration": {
+                    "target": "com.amazonaws.inspector2#Ec2Configuration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies how the Amazon EC2 automated scan will be updated for your environment.</p>"
                     }
                 }
             }

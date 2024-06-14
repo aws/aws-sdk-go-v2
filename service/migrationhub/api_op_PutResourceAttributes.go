@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/migrationhub/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -15,18 +14,21 @@ import (
 // Provides identifying details of the resource being migrated so that it can be
 // associated in the Application Discovery Service repository. This association
 // occurs asynchronously after PutResourceAttributes returns.
+//
 //   - Keep in mind that subsequent calls to PutResourceAttributes will override
 //     previously stored attributes. For example, if it is first called with a MAC
 //     address, but later, it is desired to add an IP address, it will then be required
 //     to call it with both the IP and MAC addresses to prevent overriding the MAC
 //     address.
-//   - Note the instructions regarding the special use case of the
-//     ResourceAttributeList (https://docs.aws.amazon.com/migrationhub/latest/ug/API_PutResourceAttributes.html#migrationhub-PutResourceAttributes-request-ResourceAttributeList)
-//     parameter when specifying any "VM" related value.
+//
+//   - Note the instructions regarding the special use case of the [ResourceAttributeList]
+//     ResourceAttributeList parameter when specifying any "VM" related value.
 //
 // Because this is an asynchronous call, it will always return 200, whether an
 // association occurs or not. To confirm if an association was found based on the
 // provided details, call ListDiscoveredResources .
+//
+// [ResourceAttributeList]: https://docs.aws.amazon.com/migrationhub/latest/ug/API_PutResourceAttributes.html#migrationhub-PutResourceAttributes-request-ResourceAttributeList
 func (c *Client) PutResourceAttributes(ctx context.Context, params *PutResourceAttributesInput, optFns ...func(*Options)) (*PutResourceAttributesOutput, error) {
 	if params == nil {
 		params = &PutResourceAttributesInput{}
@@ -57,20 +59,25 @@ type PutResourceAttributesInput struct {
 
 	// Information about the resource that is being migrated. This data will be used
 	// to map the task to a resource in the Application Discovery Service repository.
+	//
 	// Takes the object array of ResourceAttribute where the Type field is reserved
 	// for the following values: IPV4_ADDRESS | IPV6_ADDRESS | MAC_ADDRESS | FQDN |
 	// VM_MANAGER_ID | VM_MANAGED_OBJECT_REFERENCE | VM_NAME | VM_PATH | BIOS_ID |
 	// MOTHERBOARD_SERIAL_NUMBER where the identifying value can be a string up to 256
 	// characters.
+	//
 	//   - If any "VM" related value is set for a ResourceAttribute object, it is
 	//   required that VM_MANAGER_ID , as a minimum, is always set. If VM_MANAGER_ID is
 	//   not set, then all "VM" fields will be discarded and "VM" fields will not be used
 	//   for matching the migration task to a server in Application Discovery Service
-	//   repository. See the Example (https://docs.aws.amazon.com/migrationhub/latest/ug/API_PutResourceAttributes.html#API_PutResourceAttributes_Examples)
-	//   section below for a use case of specifying "VM" related values.
+	//   repository. See the [Example]section below for a use case of specifying "VM" related
+	//   values.
+	//
 	//   - If a server you are trying to match has multiple IP or MAC addresses, you
 	//   should provide as many as you know in separate type/value pairs passed to the
 	//   ResourceAttributeList parameter to maximize the chances of matching.
+	//
+	// [Example]: https://docs.aws.amazon.com/migrationhub/latest/ug/API_PutResourceAttributes.html#API_PutResourceAttributes_Examples
 	//
 	// This member is required.
 	ResourceAttributeList []types.ResourceAttribute
@@ -111,25 +118,25 @@ func (c *Client) addOperationPutResourceAttributesMiddlewares(stack *middleware.
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -144,13 +151,16 @@ func (c *Client) addOperationPutResourceAttributesMiddlewares(stack *middleware.
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpPutResourceAttributesValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opPutResourceAttributes(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

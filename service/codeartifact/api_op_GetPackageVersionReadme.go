@@ -6,15 +6,15 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/codeartifact/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Gets the readme file or descriptive text for a package version. The returned
-// text might contain formatting. For example, it might contain formatting for
-// Markdown or reStructuredText.
+//	Gets the readme file or descriptive text for a package version.
+//
+// The returned text might contain formatting. For example, it might contain
+// formatting for Markdown or reStructuredText.
 func (c *Client) GetPackageVersionReadme(ctx context.Context, params *GetPackageVersionReadmeInput, optFns ...func(*Options)) (*GetPackageVersionReadmeOutput, error) {
 	if params == nil {
 		params = &GetPackageVersionReadmeInput{}
@@ -32,43 +32,57 @@ func (c *Client) GetPackageVersionReadme(ctx context.Context, params *GetPackage
 
 type GetPackageVersionReadmeInput struct {
 
-	// The name of the domain that contains the repository that contains the package
+	//  The name of the domain that contains the repository that contains the package
 	// version with the requested readme file.
 	//
 	// This member is required.
 	Domain *string
 
-	// A format that specifies the type of the package version with the requested
+	//  A format that specifies the type of the package version with the requested
 	// readme file.
 	//
 	// This member is required.
 	Format types.PackageFormat
 
-	// The name of the package version that contains the requested readme file.
+	//  The name of the package version that contains the requested readme file.
 	//
 	// This member is required.
 	Package *string
 
-	// A string that contains the package version (for example, 3.5.2 ).
+	//  A string that contains the package version (for example, 3.5.2 ).
 	//
 	// This member is required.
 	PackageVersion *string
 
-	// The repository that contains the package with the requested readme file.
+	//  The repository that contains the package with the requested readme file.
 	//
 	// This member is required.
 	Repository *string
 
-	// The 12-digit account number of the Amazon Web Services account that owns the
+	//  The 12-digit account number of the Amazon Web Services account that owns the
 	// domain. It does not include dashes or spaces.
 	DomainOwner *string
 
 	// The namespace of the package version with the requested readme file. The
-	// package version component that specifies its namespace depends on its type. For
-	// example:
-	//   - The namespace of an npm package version is its scope .
-	//   - Python and NuGet package versions do not contain a corresponding component,
-	//   package versions of those formats do not have a namespace.
+	// package component that specifies its namespace depends on its type. For example:
+	//
+	// The namespace is required when requesting the readme from package versions of
+	// the following formats:
+	//
+	//   - Maven
+	//
+	//   - Swift
+	//
+	//   - generic
+	//
+	//   - The namespace of a Maven package version is its groupId .
+	//
+	//   - The namespace of an npm or Swift package version is its scope .
+	//
+	//   - The namespace of a generic package is its namespace .
+	//
+	//   - Python, NuGet, and Ruby package versions do not contain a corresponding
+	//   component, package versions of those formats do not have a namespace.
 	Namespace *string
 
 	noSmithyDocumentSerde
@@ -76,28 +90,32 @@ type GetPackageVersionReadmeInput struct {
 
 type GetPackageVersionReadmeOutput struct {
 
-	// The format of the package with the requested readme file.
+	//  The format of the package with the requested readme file.
 	Format types.PackageFormat
 
 	// The namespace of the package version with the requested readme file. The
-	// package version component that specifies its namespace depends on its type. For
-	// example:
+	// package component that specifies its namespace depends on its type. For example:
+	//
 	//   - The namespace of a Maven package version is its groupId .
-	//   - The namespace of an npm package version is its scope .
-	//   - Python and NuGet package versions do not contain a corresponding component,
-	//   package versions of those formats do not have a namespace.
+	//
+	//   - The namespace of an npm or Swift package version is its scope .
+	//
+	//   - The namespace of a generic package is its namespace .
+	//
+	//   - Python, NuGet, and Ruby package versions do not contain a corresponding
+	//   component, package versions of those formats do not have a namespace.
 	Namespace *string
 
-	// The name of the package that contains the returned readme file.
+	//  The name of the package that contains the returned readme file.
 	Package *string
 
-	// The text of the returned readme file.
+	//  The text of the returned readme file.
 	Readme *string
 
-	// The version of the package with the requested readme file.
+	//  The version of the package with the requested readme file.
 	Version *string
 
-	// The current revision associated with the package version.
+	//  The current revision associated with the package version.
 	VersionRevision *string
 
 	// Metadata pertaining to the operation's result.
@@ -128,25 +146,25 @@ func (c *Client) addOperationGetPackageVersionReadmeMiddlewares(stack *middlewar
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -161,13 +179,16 @@ func (c *Client) addOperationGetPackageVersionReadmeMiddlewares(stack *middlewar
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpGetPackageVersionReadmeValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetPackageVersionReadme(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

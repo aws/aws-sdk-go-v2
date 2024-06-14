@@ -6,13 +6,12 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockagent/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes an Agent version for existing Amazon Bedrock Agent
+// Deletes a version of an agent.
 func (c *Client) DeleteAgentVersion(ctx context.Context, params *DeleteAgentVersionInput, optFns ...func(*Options)) (*DeleteAgentVersionOutput, error) {
 	if params == nil {
 		params = &DeleteAgentVersionInput{}
@@ -28,39 +27,39 @@ func (c *Client) DeleteAgentVersion(ctx context.Context, params *DeleteAgentVers
 	return out, nil
 }
 
-// Delete Agent Version Request
 type DeleteAgentVersionInput struct {
 
-	// Id generated at the server side when an Agent is created
+	// The unique identifier of the agent that the version belongs to.
 	//
 	// This member is required.
 	AgentId *string
 
-	// Numerical Agent Version.
+	// The version of the agent to delete.
 	//
 	// This member is required.
 	AgentVersion *string
 
-	// Skips checking if resource is in use when set to true. Defaults to false
+	// By default, this value is false and deletion is stopped if the resource is in
+	// use. If you set it to true , the resource will be deleted even if the resource
+	// is in use.
 	SkipResourceInUseCheck bool
 
 	noSmithyDocumentSerde
 }
 
-// Delete Agent Version Response
 type DeleteAgentVersionOutput struct {
 
-	// Identifier for a resource.
+	// The unique identifier of the agent that the version belongs to.
 	//
 	// This member is required.
 	AgentId *string
 
-	// Schema Type for Action APIs.
+	// The status of the agent version.
 	//
 	// This member is required.
 	AgentStatus types.AgentStatus
 
-	// Numerical Agent Version.
+	// The version that was deleted.
 	//
 	// This member is required.
 	AgentVersion *string
@@ -93,25 +92,25 @@ func (c *Client) addOperationDeleteAgentVersionMiddlewares(stack *middleware.Sta
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -126,13 +125,16 @@ func (c *Client) addOperationDeleteAgentVersionMiddlewares(stack *middleware.Sta
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDeleteAgentVersionValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteAgentVersion(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

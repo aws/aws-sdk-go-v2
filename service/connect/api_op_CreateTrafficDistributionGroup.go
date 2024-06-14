@@ -6,20 +6,23 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates a traffic distribution group given an Amazon Connect instance that has
-// been replicated. The SignInConfig distribution is available only on a default
-// TrafficDistributionGroup (see the IsDefault parameter in the
-// TrafficDistributionGroup (https://docs.aws.amazon.com/connect/latest/APIReference/API_TrafficDistributionGroup.html)
-// data type). If you call UpdateTrafficDistribution with a modified SignInConfig
-// and a non-default TrafficDistributionGroup , an InvalidRequestException is
-// returned. For more information about creating traffic distribution groups, see
-// Set up traffic distribution groups (https://docs.aws.amazon.com/connect/latest/adminguide/setup-traffic-distribution-groups.html)
-// in the Amazon Connect Administrator Guide.
+// been replicated.
+//
+// The SignInConfig distribution is available only on a default
+// TrafficDistributionGroup (see the IsDefault parameter in the [TrafficDistributionGroup] data type). If
+// you call UpdateTrafficDistribution with a modified SignInConfig and a
+// non-default TrafficDistributionGroup , an InvalidRequestException is returned.
+//
+// For more information about creating traffic distribution groups, see [Set up traffic distribution groups] in the
+// Amazon Connect Administrator Guide.
+//
+// [Set up traffic distribution groups]: https://docs.aws.amazon.com/connect/latest/adminguide/setup-traffic-distribution-groups.html
+// [TrafficDistributionGroup]: https://docs.aws.amazon.com/connect/latest/APIReference/API_TrafficDistributionGroup.html
 func (c *Client) CreateTrafficDistributionGroup(ctx context.Context, params *CreateTrafficDistributionGroupInput, optFns ...func(*Options)) (*CreateTrafficDistributionGroupOutput, error) {
 	if params == nil {
 		params = &CreateTrafficDistributionGroupInput{}
@@ -50,9 +53,9 @@ type CreateTrafficDistributionGroupInput struct {
 
 	// A unique, case-sensitive identifier that you provide to ensure the idempotency
 	// of the request. If not provided, the Amazon Web Services SDK populates this
-	// field. For more information about idempotency, see Making retries safe with
-	// idempotent APIs (https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/)
-	// .
+	// field. For more information about idempotency, see [Making retries safe with idempotent APIs].
+	//
+	// [Making retries safe with idempotent APIs]: https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/
 	ClientToken *string
 
 	// A description for the traffic distribution group.
@@ -103,25 +106,25 @@ func (c *Client) addOperationCreateTrafficDistributionGroupMiddlewares(stack *mi
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -136,6 +139,9 @@ func (c *Client) addOperationCreateTrafficDistributionGroupMiddlewares(stack *mi
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opCreateTrafficDistributionGroupMiddleware(stack, options); err != nil {
 		return err
 	}
@@ -145,7 +151,7 @@ func (c *Client) addOperationCreateTrafficDistributionGroupMiddlewares(stack *mi
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateTrafficDistributionGroup(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

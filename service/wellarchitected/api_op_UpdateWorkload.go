@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/wellarchitected/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -65,60 +64,96 @@ type UpdateWorkloadInput struct {
 	// The industry for the workload.
 	Industry *string
 
-	// The industry type for the workload. If specified, must be one of the following:
+	// The industry type for the workload.
+	//
+	// If specified, must be one of the following:
+	//
 	//   - Agriculture
+	//
 	//   - Automobile
+	//
 	//   - Defense
+	//
 	//   - Design and Engineering
+	//
 	//   - Digital Advertising
+	//
 	//   - Education
+	//
 	//   - Environmental Protection
+	//
 	//   - Financial Services
+	//
 	//   - Gaming
+	//
 	//   - General Public Services
+	//
 	//   - Healthcare
+	//
 	//   - Hospitality
+	//
 	//   - InfoTech
+	//
 	//   - Justice and Public Safety
+	//
 	//   - Life Sciences
+	//
 	//   - Manufacturing
+	//
 	//   - Media & Entertainment
+	//
 	//   - Mining & Resources
+	//
 	//   - Oil & Gas
+	//
 	//   - Power & Utilities
+	//
 	//   - Professional Services
+	//
 	//   - Real Estate & Construction
+	//
 	//   - Retail & Wholesale
+	//
 	//   - Social Protection
+	//
 	//   - Telecommunications
+	//
 	//   - Travel, Transportation & Logistics
+	//
 	//   - Other
 	IndustryType *string
 
 	// Flag indicating whether the workload owner has acknowledged that the Review
-	// owner field is required. If a Review owner is not added to the workload within
-	// 60 days of acknowledgement, access to the workload is restricted until an owner
-	// is added.
+	// owner field is required.
+	//
+	// If a Review owner is not added to the workload within 60 days of
+	// acknowledgement, access to the workload is restricted until an owner is added.
 	IsReviewOwnerUpdateAcknowledged *bool
 
-	// The list of non-Amazon Web Services Regions associated with the workload.
+	// Configuration of the Jira integration.
+	JiraConfiguration *types.WorkloadJiraConfigurationInput
+
+	//  The list of non-Amazon Web Services Regions associated with the workload.
 	NonAwsRegions []string
 
-	// The notes associated with the workload. For a review template, these are the
-	// notes that will be associated with the workload when the template is applied.
+	// The notes associated with the workload.
+	//
+	// For a review template, these are the notes that will be associated with the
+	// workload when the template is applied.
 	Notes *string
 
 	// The priorities of the pillars, which are used to order items in the improvement
-	// plan. Each pillar is represented by its PillarReviewSummary$PillarId .
+	// plan. Each pillar is represented by its PillarReviewSummary$PillarId.
 	PillarPriorities []string
 
 	// The review owner of the workload. The name, email address, or identifier for
 	// the primary group or individual that owns the workload review process.
 	ReviewOwner *string
 
-	// The name of the workload. The name must be unique within an account within an
-	// Amazon Web Services Region. Spaces and capitalization are ignored when checking
-	// for uniqueness.
+	// The name of the workload.
+	//
+	// The name must be unique within an account within an Amazon Web Services Region.
+	// Spaces and capitalization are ignored when checking for uniqueness.
 	WorkloadName *string
 
 	noSmithyDocumentSerde
@@ -158,25 +193,25 @@ func (c *Client) addOperationUpdateWorkloadMiddlewares(stack *middleware.Stack, 
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -191,13 +226,16 @@ func (c *Client) addOperationUpdateWorkloadMiddlewares(stack *middleware.Stack, 
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpUpdateWorkloadValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateWorkload(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

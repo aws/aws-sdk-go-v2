@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/servicecatalogappregistry/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -30,7 +29,7 @@ func (c *Client) GetAssociatedResource(ctx context.Context, params *GetAssociate
 
 type GetAssociatedResourceInput struct {
 
-	// The name, ID, or ARN of the application.
+	//  The name, ID, or ARN of the application.
 	//
 	// This member is required.
 	Application *string
@@ -45,15 +44,15 @@ type GetAssociatedResourceInput struct {
 	// This member is required.
 	ResourceType types.ResourceType
 
-	// The maximum number of results to return. If the parameter is omitted, it
+	//  The maximum number of results to return. If the parameter is omitted, it
 	// defaults to 25. The value is optional.
 	MaxResults *int32
 
-	// A unique pagination token for each page of results. Make the call again with
+	//  A unique pagination token for each page of results. Make the call again with
 	// the returned token to retrieve the next page of results.
 	NextToken *string
 
-	// States whether an application tag is applied, not applied, in the process of
+	//  States whether an application tag is applied, not applied, in the process of
 	// being applied, or skipped.
 	ResourceTagStatus []types.ResourceItemStatus
 
@@ -62,10 +61,10 @@ type GetAssociatedResourceInput struct {
 
 type GetAssociatedResourceOutput struct {
 
-	// The result of the application that's tag applied to a resource.
+	//  The result of the application that's tag applied to a resource.
 	ApplicationTagResult *types.ApplicationTagResult
 
-	// Determines whether an application tag is applied or skipped.
+	//  Determines whether an application tag is applied or skipped.
 	Options []types.AssociationOption
 
 	// The resource associated with the application.
@@ -99,25 +98,25 @@ func (c *Client) addOperationGetAssociatedResourceMiddlewares(stack *middleware.
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -132,13 +131,16 @@ func (c *Client) addOperationGetAssociatedResourceMiddlewares(stack *middleware.
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpGetAssociatedResourceValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetAssociatedResource(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

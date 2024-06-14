@@ -6,25 +6,30 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/rekognition/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// This operation applies only to Amazon Rekognition Custom Labels. Distributes
-// the entries (images) in a training dataset across the training dataset and the
-// test dataset for a project. DistributeDatasetEntries moves 20% of the training
-// dataset images to the test dataset. An entry is a JSON Line that describes an
-// image. You supply the Amazon Resource Names (ARN) of a project's training
-// dataset and test dataset. The training dataset must contain the images that you
-// want to split. The test dataset must be empty. The datasets must belong to the
-// same project. To create training and test datasets for a project, call
-// CreateDataset . Distributing a dataset takes a while to complete. To check the
-// status call DescribeDataset . The operation is complete when the Status field
-// for the training dataset and the test dataset is UPDATE_COMPLETE . If the
-// dataset split fails, the value of Status is UPDATE_FAILED . This operation
-// requires permissions to perform the rekognition:DistributeDatasetEntries action.
+// This operation applies only to Amazon Rekognition Custom Labels.
+//
+// Distributes the entries (images) in a training dataset across the training
+// dataset and the test dataset for a project. DistributeDatasetEntries moves 20%
+// of the training dataset images to the test dataset. An entry is a JSON Line that
+// describes an image.
+//
+// You supply the Amazon Resource Names (ARN) of a project's training dataset and
+// test dataset. The training dataset must contain the images that you want to
+// split. The test dataset must be empty. The datasets must belong to the same
+// project. To create training and test datasets for a project, call CreateDataset.
+//
+// Distributing a dataset takes a while to complete. To check the status call
+// DescribeDataset . The operation is complete when the Status field for the
+// training dataset and the test dataset is UPDATE_COMPLETE . If the dataset split
+// fails, the value of Status is UPDATE_FAILED .
+//
+// This operation requires permissions to perform the
+// rekognition:DistributeDatasetEntries action.
 func (c *Client) DistributeDatasetEntries(ctx context.Context, params *DistributeDatasetEntriesInput, optFns ...func(*Options)) (*DistributeDatasetEntriesOutput, error) {
 	if params == nil {
 		params = &DistributeDatasetEntriesInput{}
@@ -80,25 +85,25 @@ func (c *Client) addOperationDistributeDatasetEntriesMiddlewares(stack *middlewa
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -113,13 +118,16 @@ func (c *Client) addOperationDistributeDatasetEntriesMiddlewares(stack *middlewa
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDistributeDatasetEntriesValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDistributeDatasetEntries(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

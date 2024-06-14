@@ -6,15 +6,15 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/lambda/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns a list of versions (https://docs.aws.amazon.com/lambda/latest/dg/versioning-aliases.html)
-// , with the version-specific configuration of each. Lambda returns up to 50
-// versions per call.
+// Returns a list of [versions], with the version-specific configuration of each. Lambda
+// returns up to 50 versions per call.
+//
+// [versions]: https://docs.aws.amazon.com/lambda/latest/dg/versioning-aliases.html
 func (c *Client) ListVersionsByFunction(ctx context.Context, params *ListVersionsByFunctionInput, optFns ...func(*Options)) (*ListVersionsByFunctionOutput, error) {
 	if params == nil {
 		params = &ListVersionsByFunctionInput{}
@@ -32,10 +32,16 @@ func (c *Client) ListVersionsByFunction(ctx context.Context, params *ListVersion
 
 type ListVersionsByFunctionInput struct {
 
-	// The name of the Lambda function. Name formats
+	// The name or ARN of the Lambda function.
+	//
+	// Name formats
+	//
 	//   - Function name - MyFunction .
+	//
 	//   - Function ARN - arn:aws:lambda:us-west-2:123456789012:function:MyFunction .
+	//
 	//   - Partial ARN - 123456789012:function:MyFunction .
+	//
 	// The length constraint applies only to the full ARN. If you specify only the
 	// function name, it is limited to 64 characters in length.
 	//
@@ -90,25 +96,25 @@ func (c *Client) addOperationListVersionsByFunctionMiddlewares(stack *middleware
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -123,13 +129,16 @@ func (c *Client) addOperationListVersionsByFunctionMiddlewares(stack *middleware
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpListVersionsByFunctionValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListVersionsByFunction(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

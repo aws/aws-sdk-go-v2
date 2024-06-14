@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/rds/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -14,9 +13,13 @@ import (
 
 // Starts an Amazon Aurora DB cluster that was stopped using the Amazon Web
 // Services console, the stop-db-cluster CLI command, or the StopDBCluster
-// operation. For more information, see Stopping and Starting an Aurora Cluster (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-cluster-stop-start.html)
-// in the Amazon Aurora User Guide. This operation only applies to Aurora DB
-// clusters.
+// operation.
+//
+// For more information, see [Stopping and Starting an Aurora Cluster] in the Amazon Aurora User Guide.
+//
+// This operation only applies to Aurora DB clusters.
+//
+// [Stopping and Starting an Aurora Cluster]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-cluster-stop-start.html
 func (c *Client) StartDBCluster(ctx context.Context, params *StartDBClusterInput, optFns ...func(*Options)) (*StartDBClusterOutput, error) {
 	if params == nil {
 		params = &StartDBClusterInput{}
@@ -45,20 +48,27 @@ type StartDBClusterInput struct {
 
 type StartDBClusterOutput struct {
 
-	// Contains the details of an Amazon Aurora DB cluster or Multi-AZ DB cluster. For
-	// an Amazon Aurora DB cluster, this data type is used as a response element in the
-	// operations CreateDBCluster , DeleteDBCluster , DescribeDBClusters ,
+	// Contains the details of an Amazon Aurora DB cluster or Multi-AZ DB cluster.
+	//
+	// For an Amazon Aurora DB cluster, this data type is used as a response element
+	// in the operations CreateDBCluster , DeleteDBCluster , DescribeDBClusters ,
 	// FailoverDBCluster , ModifyDBCluster , PromoteReadReplicaDBCluster ,
 	// RestoreDBClusterFromS3 , RestoreDBClusterFromSnapshot ,
-	// RestoreDBClusterToPointInTime , StartDBCluster , and StopDBCluster . For a
-	// Multi-AZ DB cluster, this data type is used as a response element in the
+	// RestoreDBClusterToPointInTime , StartDBCluster , and StopDBCluster .
+	//
+	// For a Multi-AZ DB cluster, this data type is used as a response element in the
 	// operations CreateDBCluster , DeleteDBCluster , DescribeDBClusters ,
 	// FailoverDBCluster , ModifyDBCluster , RebootDBCluster ,
-	// RestoreDBClusterFromSnapshot , and RestoreDBClusterToPointInTime . For more
-	// information on Amazon Aurora DB clusters, see What is Amazon Aurora? (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/CHAP_AuroraOverview.html)
-	// in the Amazon Aurora User Guide. For more information on Multi-AZ DB clusters,
-	// see Multi-AZ deployments with two readable standby DB instances (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/multi-az-db-clusters-concepts.html)
-	// in the Amazon RDS User Guide.
+	// RestoreDBClusterFromSnapshot , and RestoreDBClusterToPointInTime .
+	//
+	// For more information on Amazon Aurora DB clusters, see [What is Amazon Aurora?] in the Amazon Aurora
+	// User Guide.
+	//
+	// For more information on Multi-AZ DB clusters, see [Multi-AZ deployments with two readable standby DB instances] in the Amazon RDS User
+	// Guide.
+	//
+	// [Multi-AZ deployments with two readable standby DB instances]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/multi-az-db-clusters-concepts.html
+	// [What is Amazon Aurora?]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/CHAP_AuroraOverview.html
 	DBCluster *types.DBCluster
 
 	// Metadata pertaining to the operation's result.
@@ -89,25 +99,25 @@ func (c *Client) addOperationStartDBClusterMiddlewares(stack *middleware.Stack, 
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -122,13 +132,16 @@ func (c *Client) addOperationStartDBClusterMiddlewares(stack *middleware.Stack, 
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpStartDBClusterValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opStartDBCluster(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

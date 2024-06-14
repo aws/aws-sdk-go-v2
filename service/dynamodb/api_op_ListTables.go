@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	internalEndpointDiscovery "github.com/aws/aws-sdk-go-v2/service/internal/endpoint-discovery"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -50,16 +49,18 @@ type ListTablesOutput struct {
 
 	// The name of the last table in the current page of results. Use this value as
 	// the ExclusiveStartTableName in a new request to obtain the next page of
-	// results, until all the table names are returned. If you do not receive a
-	// LastEvaluatedTableName value in the response, this means that there are no more
-	// table names to be retrieved.
+	// results, until all the table names are returned.
+	//
+	// If you do not receive a LastEvaluatedTableName value in the response, this
+	// means that there are no more table names to be retrieved.
 	LastEvaluatedTableName *string
 
 	// The names of the tables associated with the current account at the current
-	// endpoint. The maximum size of this array is 100. If LastEvaluatedTableName also
-	// appears in the output, you can use this value as the ExclusiveStartTableName
-	// parameter in a subsequent ListTables request and obtain the next page of
-	// results.
+	// endpoint. The maximum size of this array is 100.
+	//
+	// If LastEvaluatedTableName also appears in the output, you can use this value as
+	// the ExclusiveStartTableName parameter in a subsequent ListTables request and
+	// obtain the next page of results.
 	TableNames []string
 
 	// Metadata pertaining to the operation's result.
@@ -90,25 +91,25 @@ func (c *Client) addOperationListTablesMiddlewares(stack *middleware.Stack, opti
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -126,10 +127,13 @@ func (c *Client) addOperationListTablesMiddlewares(stack *middleware.Stack, opti
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListTables(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

@@ -6,27 +6,32 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	glaciercust "github.com/aws/aws-sdk-go-v2/service/glacier/internal/customizations"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// This operation aborts a multipart upload identified by the upload ID. After the
-// Abort Multipart Upload request succeeds, you cannot upload any more parts to the
-// multipart upload or complete the multipart upload. Aborting a completed upload
-// fails. However, aborting an already-aborted upload will succeed, for a short
-// time. For more information about uploading a part and completing a multipart
-// upload, see UploadMultipartPart and CompleteMultipartUpload . This operation is
-// idempotent. An AWS account has full permission to perform all operations
-// (actions). However, AWS Identity and Access Management (IAM) users don't have
-// any permissions by default. You must grant them explicit permission to perform
-// specific actions. For more information, see Access Control Using AWS Identity
-// and Access Management (IAM) (https://docs.aws.amazon.com/amazonglacier/latest/dev/using-iam-with-amazon-glacier.html)
-// . For conceptual information and underlying REST API, see Working with Archives
-// in Amazon S3 Glacier (https://docs.aws.amazon.com/amazonglacier/latest/dev/working-with-archives.html)
-// and Abort Multipart Upload (https://docs.aws.amazon.com/amazonglacier/latest/dev/api-multipart-abort-upload.html)
-// in the Amazon Glacier Developer Guide.
+// This operation aborts a multipart upload identified by the upload ID.
+//
+// After the Abort Multipart Upload request succeeds, you cannot upload any more
+// parts to the multipart upload or complete the multipart upload. Aborting a
+// completed upload fails. However, aborting an already-aborted upload will
+// succeed, for a short time. For more information about uploading a part and
+// completing a multipart upload, see UploadMultipartPartand CompleteMultipartUpload.
+//
+// This operation is idempotent.
+//
+// An AWS account has full permission to perform all operations (actions).
+// However, AWS Identity and Access Management (IAM) users don't have any
+// permissions by default. You must grant them explicit permission to perform
+// specific actions. For more information, see [Access Control Using AWS Identity and Access Management (IAM)].
+//
+// For conceptual information and underlying REST API, see [Working with Archives in Amazon S3 Glacier] and [Abort Multipart Upload] in the Amazon
+// Glacier Developer Guide.
+//
+// [Abort Multipart Upload]: https://docs.aws.amazon.com/amazonglacier/latest/dev/api-multipart-abort-upload.html
+// [Access Control Using AWS Identity and Access Management (IAM)]: https://docs.aws.amazon.com/amazonglacier/latest/dev/using-iam-with-amazon-glacier.html
+// [Working with Archives in Amazon S3 Glacier]: https://docs.aws.amazon.com/amazonglacier/latest/dev/working-with-archives.html
 func (c *Client) AbortMultipartUpload(ctx context.Context, params *AbortMultipartUploadInput, optFns ...func(*Options)) (*AbortMultipartUploadOutput, error) {
 	if params == nil {
 		params = &AbortMultipartUploadInput{}
@@ -42,10 +47,13 @@ func (c *Client) AbortMultipartUpload(ctx context.Context, params *AbortMultipar
 	return out, nil
 }
 
-// Provides options to abort a multipart upload identified by the upload ID. For
-// information about the underlying REST API, see Abort Multipart Upload (https://docs.aws.amazon.com/amazonglacier/latest/dev/api-multipart-abort-upload.html)
-// . For conceptual information, see Working with Archives in Amazon S3 Glacier (https://docs.aws.amazon.com/amazonglacier/latest/dev/working-with-archives.html)
-// .
+// Provides options to abort a multipart upload identified by the upload ID.
+//
+// For information about the underlying REST API, see [Abort Multipart Upload]. For conceptual
+// information, see [Working with Archives in Amazon S3 Glacier].
+//
+// [Abort Multipart Upload]: https://docs.aws.amazon.com/amazonglacier/latest/dev/api-multipart-abort-upload.html
+// [Working with Archives in Amazon S3 Glacier]: https://docs.aws.amazon.com/amazonglacier/latest/dev/working-with-archives.html
 type AbortMultipartUploadInput struct {
 
 	// The AccountId value is the AWS account ID of the account that owns the vault.
@@ -99,25 +107,25 @@ func (c *Client) addOperationAbortMultipartUploadMiddlewares(stack *middleware.S
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -132,13 +140,16 @@ func (c *Client) addOperationAbortMultipartUploadMiddlewares(stack *middleware.S
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpAbortMultipartUploadValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opAbortMultipartUpload(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

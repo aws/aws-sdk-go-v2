@@ -6,13 +6,12 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/docdbelastic/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns information about provisioned Elastic DocumentDB clusters.
+// Returns information about provisioned Amazon DocumentDB elastic clusters.
 func (c *Client) ListClusters(ctx context.Context, params *ListClustersInput, optFns ...func(*Options)) (*ListClustersOutput, error) {
 	if params == nil {
 		params = &ListClustersInput{}
@@ -30,10 +29,15 @@ func (c *Client) ListClusters(ctx context.Context, params *ListClustersInput, op
 
 type ListClustersInput struct {
 
-	// The maximum number of entries to recieve in the response.
+	// The maximum number of elastic cluster snapshot results to receive in the
+	// response.
 	MaxResults *int32
 
-	// The nextToken which is used the get the next page of data.
+	// A pagination token provided by a previous request. If this parameter is
+	// specified, the response includes only records beyond this token, up to the value
+	// specified by max-results .
+	//
+	// If there is no more data in the responce, the nextToken will not be returned.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -41,12 +45,14 @@ type ListClustersInput struct {
 
 type ListClustersOutput struct {
 
-	// A list of Elastic DocumentDB cluster.
+	// A list of Amazon DocumentDB elastic clusters.
 	Clusters []types.ClusterInList
 
-	// The response will provide a nextToken if there is more data beyond the
-	// maxResults. If there is no more data in the responce, the nextToken will not be
-	// returned.
+	// A pagination token provided by a previous request. If this parameter is
+	// specified, the response includes only records beyond this token, up to the value
+	// specified by max-results .
+	//
+	// If there is no more data in the responce, the nextToken will not be returned.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -77,25 +83,25 @@ func (c *Client) addOperationListClustersMiddlewares(stack *middleware.Stack, op
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -110,10 +116,13 @@ func (c *Client) addOperationListClustersMiddlewares(stack *middleware.Stack, op
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListClusters(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -140,7 +149,8 @@ var _ ListClustersAPIClient = (*Client)(nil)
 
 // ListClustersPaginatorOptions is the paginator options for ListClusters
 type ListClustersPaginatorOptions struct {
-	// The maximum number of entries to recieve in the response.
+	// The maximum number of elastic cluster snapshot results to receive in the
+	// response.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

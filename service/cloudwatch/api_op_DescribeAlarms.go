@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/cloudwatch/types"
 	"github.com/aws/smithy-go/middleware"
 	smithytime "github.com/aws/smithy-go/time"
@@ -18,11 +17,12 @@ import (
 )
 
 // Retrieves the specified alarms. You can filter the results by specifying a
-// prefix for the alarm name, the alarm state, or a prefix for any action. To use
-// this operation and return information about composite alarms, you must be signed
-// on with the cloudwatch:DescribeAlarms permission that is scoped to * . You can't
-// return information about composite alarms if your cloudwatch:DescribeAlarms
-// permission has a narrower scope.
+// prefix for the alarm name, the alarm state, or a prefix for any action.
+//
+// To use this operation and return information about composite alarms, you must
+// be signed on with the cloudwatch:DescribeAlarms permission that is scoped to * .
+// You can't return information about composite alarms if your
+// cloudwatch:DescribeAlarms permission has a narrower scope.
 func (c *Client) DescribeAlarms(ctx context.Context, params *DescribeAlarmsInput, optFns ...func(*Options)) (*DescribeAlarmsOutput, error) {
 	if params == nil {
 		params = &DescribeAlarmsInput{}
@@ -46,8 +46,9 @@ type DescribeAlarmsInput struct {
 	ActionPrefix *string
 
 	// An alarm name prefix. If you specify this parameter, you receive information
-	// about all alarms that have names that start with this prefix. If this parameter
-	// is specified, you cannot specify AlarmNames .
+	// about all alarms that have names that start with this prefix.
+	//
+	// If this parameter is specified, you cannot specify AlarmNames .
 	AlarmNamePrefix *string
 
 	// The names of the alarms to retrieve information about.
@@ -55,11 +56,14 @@ type DescribeAlarmsInput struct {
 
 	// Use this parameter to specify whether you want the operation to return metric
 	// alarms or composite alarms. If you omit this parameter, only metric alarms are
-	// returned, even if composite alarms exist in the account. For example, if you
-	// omit this parameter or specify MetricAlarms , the operation returns only a list
-	// of metric alarms. It does not return any composite alarms, even if composite
-	// alarms exist in the account. If you specify CompositeAlarms , the operation
-	// returns only a list of composite alarms, and does not return any metric alarms.
+	// returned, even if composite alarms exist in the account.
+	//
+	// For example, if you omit this parameter or specify MetricAlarms , the operation
+	// returns only a list of metric alarms. It does not return any composite alarms,
+	// even if composite alarms exist in the account.
+	//
+	// If you specify CompositeAlarms , the operation returns only a list of composite
+	// alarms, and does not return any metric alarms.
 	AlarmTypes []types.AlarmType
 
 	// If you use this parameter and specify the name of a composite alarm, the
@@ -67,13 +71,17 @@ type DescribeAlarmsInput struct {
 	// specify. These are the metric alarms and composite alarms referenced in the
 	// AlarmRule field of the composite alarm that you specify in ChildrenOfAlarmName .
 	// Information about the composite alarm that you name in ChildrenOfAlarmName is
-	// not returned. If you specify ChildrenOfAlarmName , you cannot specify any other
-	// parameters in the request except for MaxRecords and NextToken . If you do so,
-	// you receive a validation error. Only the Alarm Name , ARN , StateValue
-	// (OK/ALARM/INSUFFICIENT_DATA), and StateUpdatedTimestamp information are
-	// returned by this operation when you use this parameter. To get complete
-	// information about these alarms, perform another DescribeAlarms operation and
-	// specify the parent alarm names in the AlarmNames parameter.
+	// not returned.
+	//
+	// If you specify ChildrenOfAlarmName , you cannot specify any other parameters in
+	// the request except for MaxRecords and NextToken . If you do so, you receive a
+	// validation error.
+	//
+	// Only the Alarm Name , ARN , StateValue (OK/ALARM/INSUFFICIENT_DATA), and
+	// StateUpdatedTimestamp information are returned by this operation when you use
+	// this parameter. To get complete information about these alarms, perform another
+	// DescribeAlarms operation and specify the parent alarm names in the AlarmNames
+	// parameter.
 	ChildrenOfAlarmName *string
 
 	// The maximum number of alarm descriptions to retrieve.
@@ -87,11 +95,14 @@ type DescribeAlarmsInput struct {
 	// the operation returns information about the "parent" alarms of the alarm you
 	// specify. These are the composite alarms that have AlarmRule parameters that
 	// reference the alarm named in ParentsOfAlarmName . Information about the alarm
-	// that you specify in ParentsOfAlarmName is not returned. If you specify
-	// ParentsOfAlarmName , you cannot specify any other parameters in the request
-	// except for MaxRecords and NextToken . If you do so, you receive a validation
-	// error. Only the Alarm Name and ARN are returned by this operation when you use
-	// this parameter. To get complete information about these alarms, perform another
+	// that you specify in ParentsOfAlarmName is not returned.
+	//
+	// If you specify ParentsOfAlarmName , you cannot specify any other parameters in
+	// the request except for MaxRecords and NextToken . If you do so, you receive a
+	// validation error.
+	//
+	// Only the Alarm Name and ARN are returned by this operation when you use this
+	// parameter. To get complete information about these alarms, perform another
 	// DescribeAlarms operation and specify the parent alarm names in the AlarmNames
 	// parameter.
 	ParentsOfAlarmName *string
@@ -142,25 +153,25 @@ func (c *Client) addOperationDescribeAlarmsMiddlewares(stack *middleware.Stack, 
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -175,10 +186,13 @@ func (c *Client) addOperationDescribeAlarmsMiddlewares(stack *middleware.Stack, 
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeAlarms(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -292,7 +306,16 @@ type AlarmExistsWaiterOptions struct {
 	// Set of options to modify how an operation is invoked. These apply to all
 	// operations invoked for this client. Use functional options on operation call to
 	// modify this list for per operation behavior.
+	//
+	// Passing options here is functionally equivalent to passing values to this
+	// config's ClientOptions field that extend the inner client's APIOptions directly.
 	APIOptions []func(*middleware.Stack) error
+
+	// Functional options to be passed to all operations invoked by this client.
+	//
+	// Function values that modify the inner APIOptions are applied after the waiter
+	// config's own APIOptions modifiers.
+	ClientOptions []func(*Options)
 
 	// MinDelay is the minimum amount of time to delay between retries. If unset,
 	// AlarmExistsWaiter will use default minimum delay of 5 seconds. Note that
@@ -309,12 +332,13 @@ type AlarmExistsWaiterOptions struct {
 
 	// Retryable is function that can be used to override the service defined
 	// waiter-behavior based on operation output, or returned error. This function is
-	// used by the waiter to decide if a state is retryable or a terminal state. By
-	// default service-modeled logic will populate this option. This option can thus be
-	// used to define a custom waiter state with fall-back to service-modeled waiter
-	// state mutators.The function returns an error in case of a failure state. In case
-	// of retry state, this function returns a bool value of true and nil error, while
-	// in case of success it returns a bool value of false and nil error.
+	// used by the waiter to decide if a state is retryable or a terminal state.
+	//
+	// By default service-modeled logic will populate this option. This option can
+	// thus be used to define a custom waiter state with fall-back to service-modeled
+	// waiter state mutators.The function returns an error in case of a failure state.
+	// In case of retry state, this function returns a bool value of true and nil
+	// error, while in case of success it returns a bool value of false and nil error.
 	Retryable func(context.Context, *DescribeAlarmsInput, *DescribeAlarmsOutput, error) (bool, error)
 }
 
@@ -391,6 +415,9 @@ func (w *AlarmExistsWaiter) WaitForOutput(ctx context.Context, params *DescribeA
 
 		out, err := w.client.DescribeAlarms(ctx, params, func(o *Options) {
 			o.APIOptions = append(o.APIOptions, apiOptions...)
+			for _, opt := range options.ClientOptions {
+				opt(o)
+			}
 		})
 
 		retryable, err := options.Retryable(ctx, params, out, err)
@@ -456,7 +483,16 @@ type CompositeAlarmExistsWaiterOptions struct {
 	// Set of options to modify how an operation is invoked. These apply to all
 	// operations invoked for this client. Use functional options on operation call to
 	// modify this list for per operation behavior.
+	//
+	// Passing options here is functionally equivalent to passing values to this
+	// config's ClientOptions field that extend the inner client's APIOptions directly.
 	APIOptions []func(*middleware.Stack) error
+
+	// Functional options to be passed to all operations invoked by this client.
+	//
+	// Function values that modify the inner APIOptions are applied after the waiter
+	// config's own APIOptions modifiers.
+	ClientOptions []func(*Options)
 
 	// MinDelay is the minimum amount of time to delay between retries. If unset,
 	// CompositeAlarmExistsWaiter will use default minimum delay of 5 seconds. Note
@@ -474,12 +510,13 @@ type CompositeAlarmExistsWaiterOptions struct {
 
 	// Retryable is function that can be used to override the service defined
 	// waiter-behavior based on operation output, or returned error. This function is
-	// used by the waiter to decide if a state is retryable or a terminal state. By
-	// default service-modeled logic will populate this option. This option can thus be
-	// used to define a custom waiter state with fall-back to service-modeled waiter
-	// state mutators.The function returns an error in case of a failure state. In case
-	// of retry state, this function returns a bool value of true and nil error, while
-	// in case of success it returns a bool value of false and nil error.
+	// used by the waiter to decide if a state is retryable or a terminal state.
+	//
+	// By default service-modeled logic will populate this option. This option can
+	// thus be used to define a custom waiter state with fall-back to service-modeled
+	// waiter state mutators.The function returns an error in case of a failure state.
+	// In case of retry state, this function returns a bool value of true and nil
+	// error, while in case of success it returns a bool value of false and nil error.
 	Retryable func(context.Context, *DescribeAlarmsInput, *DescribeAlarmsOutput, error) (bool, error)
 }
 
@@ -557,6 +594,9 @@ func (w *CompositeAlarmExistsWaiter) WaitForOutput(ctx context.Context, params *
 
 		out, err := w.client.DescribeAlarms(ctx, params, func(o *Options) {
 			o.APIOptions = append(o.APIOptions, apiOptions...)
+			for _, opt := range options.ClientOptions {
+				opt(o)
+			}
 		})
 
 		retryable, err := options.Retryable(ctx, params, out, err)

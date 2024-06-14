@@ -6,25 +6,32 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/sns/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Add tags to the specified Amazon SNS topic. For an overview, see Amazon SNS Tags (https://docs.aws.amazon.com/sns/latest/dg/sns-tags.html)
-// in the Amazon SNS Developer Guide. When you use topic tags, keep the following
-// guidelines in mind:
+// Add tags to the specified Amazon SNS topic. For an overview, see [Amazon SNS Tags] in the Amazon
+// SNS Developer Guide.
+//
+// When you use topic tags, keep the following guidelines in mind:
+//
 //   - Adding more than 50 tags to a topic isn't recommended.
+//
 //   - Tags don't have any semantic meaning. Amazon SNS interprets tags as
 //     character strings.
+//
 //   - Tags are case-sensitive.
+//
 //   - A new tag with a key identical to that of an existing tag overwrites the
 //     existing tag.
+//
 //   - Tagging actions are limited to 10 TPS per Amazon Web Services account, per
 //     Amazon Web Services Region. If your application requires a higher throughput,
-//     file a technical support request (https://console.aws.amazon.com/support/home#/case/create?issueType=technical)
-//     .
+//     file a [technical support request].
+//
+// [Amazon SNS Tags]: https://docs.aws.amazon.com/sns/latest/dg/sns-tags.html
+// [technical support request]: https://console.aws.amazon.com/support/home#/case/create?issueType=technical
 func (c *Client) TagResource(ctx context.Context, params *TagResourceInput, optFns ...func(*Options)) (*TagResourceOutput, error) {
 	if params == nil {
 		params = &TagResourceInput{}
@@ -85,25 +92,25 @@ func (c *Client) addOperationTagResourceMiddlewares(stack *middleware.Stack, opt
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -118,13 +125,16 @@ func (c *Client) addOperationTagResourceMiddlewares(stack *middleware.Stack, opt
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpTagResourceValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opTagResource(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

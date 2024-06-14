@@ -6,20 +6,24 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Removes the specified Availability Zones from the set of Availability Zones for
-// the specified load balancer in EC2-Classic or a default VPC. For load balancers
-// in a non-default VPC, use DetachLoadBalancerFromSubnets . There must be at least
-// one Availability Zone registered with a load balancer at all times. After an
-// Availability Zone is removed, all instances registered with the load balancer
-// that are in the removed Availability Zone go into the OutOfService state. Then,
-// the load balancer attempts to equally balance the traffic among its remaining
-// Availability Zones. For more information, see Add or Remove Availability Zones (https://docs.aws.amazon.com/elasticloadbalancing/latest/classic/enable-disable-az.html)
-// in the Classic Load Balancers Guide.
+// the specified load balancer in EC2-Classic or a default VPC.
+//
+// For load balancers in a non-default VPC, use DetachLoadBalancerFromSubnets.
+//
+// There must be at least one Availability Zone registered with a load balancer at
+// all times. After an Availability Zone is removed, all instances registered with
+// the load balancer that are in the removed Availability Zone go into the
+// OutOfService state. Then, the load balancer attempts to equally balance the
+// traffic among its remaining Availability Zones.
+//
+// For more information, see [Add or Remove Availability Zones] in the Classic Load Balancers Guide.
+//
+// [Add or Remove Availability Zones]: https://docs.aws.amazon.com/elasticloadbalancing/latest/classic/enable-disable-az.html
 func (c *Client) DisableAvailabilityZonesForLoadBalancer(ctx context.Context, params *DisableAvailabilityZonesForLoadBalancerInput, optFns ...func(*Options)) (*DisableAvailabilityZonesForLoadBalancerOutput, error) {
 	if params == nil {
 		params = &DisableAvailabilityZonesForLoadBalancerInput{}
@@ -85,25 +89,25 @@ func (c *Client) addOperationDisableAvailabilityZonesForLoadBalancerMiddlewares(
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -118,13 +122,16 @@ func (c *Client) addOperationDisableAvailabilityZonesForLoadBalancerMiddlewares(
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDisableAvailabilityZonesForLoadBalancerValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDisableAvailabilityZonesForLoadBalancer(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

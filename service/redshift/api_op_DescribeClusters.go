@@ -7,7 +7,6 @@ import (
 	"errors"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/redshift/types"
 	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
@@ -21,14 +20,19 @@ import (
 // Returns properties of provisioned clusters including general cluster
 // properties, cluster database properties, maintenance and backup properties, and
 // security and access properties. This operation supports pagination. For more
-// information about managing clusters, go to Amazon Redshift Clusters (https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-clusters.html)
-// in the Amazon Redshift Cluster Management Guide. If you specify both tag keys
-// and tag values in the same request, Amazon Redshift returns all clusters that
-// match any combination of the specified keys and values. For example, if you have
-// owner and environment for tag keys, and admin and test for tag values, all
-// clusters that have any combination of those values are returned. If both tag
-// keys and values are omitted from the request, clusters are returned regardless
-// of whether they have tag keys or values associated with them.
+// information about managing clusters, go to [Amazon Redshift Clusters]in the Amazon Redshift Cluster
+// Management Guide.
+//
+// If you specify both tag keys and tag values in the same request, Amazon
+// Redshift returns all clusters that match any combination of the specified keys
+// and values. For example, if you have owner and environment for tag keys, and
+// admin and test for tag values, all clusters that have any combination of those
+// values are returned.
+//
+// If both tag keys and values are omitted from the request, clusters are returned
+// regardless of whether they have tag keys or values associated with them.
+//
+// [Amazon Redshift Clusters]: https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-clusters.html
 func (c *Client) DescribeClusters(ctx context.Context, params *DescribeClustersInput, optFns ...func(*Options)) (*DescribeClustersOutput, error) {
 	if params == nil {
 		params = &DescribeClustersInput{}
@@ -47,23 +51,28 @@ func (c *Client) DescribeClusters(ctx context.Context, params *DescribeClustersI
 type DescribeClustersInput struct {
 
 	// The unique identifier of a cluster whose properties you are requesting. This
-	// parameter is case sensitive. The default is that all clusters defined for an
-	// account are returned.
+	// parameter is case sensitive.
+	//
+	// The default is that all clusters defined for an account are returned.
 	ClusterIdentifier *string
 
 	// An optional parameter that specifies the starting point to return a set of
-	// response records. When the results of a DescribeClusters request exceed the
-	// value specified in MaxRecords , Amazon Web Services returns a value in the
-	// Marker field of the response. You can retrieve the next set of response records
-	// by providing the returned marker value in the Marker parameter and retrying the
-	// request. Constraints: You can specify either the ClusterIdentifier parameter or
-	// the Marker parameter, but not both.
+	// response records. When the results of a DescribeClustersrequest exceed the value specified in
+	// MaxRecords , Amazon Web Services returns a value in the Marker field of the
+	// response. You can retrieve the next set of response records by providing the
+	// returned marker value in the Marker parameter and retrying the request.
+	//
+	// Constraints: You can specify either the ClusterIdentifier parameter or the
+	// Marker parameter, but not both.
 	Marker *string
 
 	// The maximum number of response records to return in each call. If the number of
 	// remaining response records exceeds the specified MaxRecords value, a value is
 	// returned in a marker field of the response. You can retrieve the next set of
-	// records by retrying the command with the returned marker value. Default: 100
+	// records by retrying the command with the returned marker value.
+	//
+	// Default: 100
+	//
 	// Constraints: minimum 20, maximum 100.
 	MaxRecords *int32
 
@@ -126,25 +135,25 @@ func (c *Client) addOperationDescribeClustersMiddlewares(stack *middleware.Stack
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -159,10 +168,13 @@ func (c *Client) addOperationDescribeClustersMiddlewares(stack *middleware.Stack
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeClusters(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -193,7 +205,10 @@ type DescribeClustersPaginatorOptions struct {
 	// The maximum number of response records to return in each call. If the number of
 	// remaining response records exceeds the specified MaxRecords value, a value is
 	// returned in a marker field of the response. You can retrieve the next set of
-	// records by retrying the command with the returned marker value. Default: 100
+	// records by retrying the command with the returned marker value.
+	//
+	// Default: 100
+	//
 	// Constraints: minimum 20, maximum 100.
 	Limit int32
 
@@ -280,7 +295,16 @@ type ClusterAvailableWaiterOptions struct {
 	// Set of options to modify how an operation is invoked. These apply to all
 	// operations invoked for this client. Use functional options on operation call to
 	// modify this list for per operation behavior.
+	//
+	// Passing options here is functionally equivalent to passing values to this
+	// config's ClientOptions field that extend the inner client's APIOptions directly.
 	APIOptions []func(*middleware.Stack) error
+
+	// Functional options to be passed to all operations invoked by this client.
+	//
+	// Function values that modify the inner APIOptions are applied after the waiter
+	// config's own APIOptions modifiers.
+	ClientOptions []func(*Options)
 
 	// MinDelay is the minimum amount of time to delay between retries. If unset,
 	// ClusterAvailableWaiter will use default minimum delay of 60 seconds. Note that
@@ -297,12 +321,13 @@ type ClusterAvailableWaiterOptions struct {
 
 	// Retryable is function that can be used to override the service defined
 	// waiter-behavior based on operation output, or returned error. This function is
-	// used by the waiter to decide if a state is retryable or a terminal state. By
-	// default service-modeled logic will populate this option. This option can thus be
-	// used to define a custom waiter state with fall-back to service-modeled waiter
-	// state mutators.The function returns an error in case of a failure state. In case
-	// of retry state, this function returns a bool value of true and nil error, while
-	// in case of success it returns a bool value of false and nil error.
+	// used by the waiter to decide if a state is retryable or a terminal state.
+	//
+	// By default service-modeled logic will populate this option. This option can
+	// thus be used to define a custom waiter state with fall-back to service-modeled
+	// waiter state mutators.The function returns an error in case of a failure state.
+	// In case of retry state, this function returns a bool value of true and nil
+	// error, while in case of success it returns a bool value of false and nil error.
 	Retryable func(context.Context, *DescribeClustersInput, *DescribeClustersOutput, error) (bool, error)
 }
 
@@ -380,6 +405,9 @@ func (w *ClusterAvailableWaiter) WaitForOutput(ctx context.Context, params *Desc
 
 		out, err := w.client.DescribeClusters(ctx, params, func(o *Options) {
 			o.APIOptions = append(o.APIOptions, apiOptions...)
+			for _, opt := range options.ClientOptions {
+				opt(o)
+			}
 		})
 
 		retryable, err := options.Retryable(ctx, params, out, err)
@@ -491,7 +519,16 @@ type ClusterDeletedWaiterOptions struct {
 	// Set of options to modify how an operation is invoked. These apply to all
 	// operations invoked for this client. Use functional options on operation call to
 	// modify this list for per operation behavior.
+	//
+	// Passing options here is functionally equivalent to passing values to this
+	// config's ClientOptions field that extend the inner client's APIOptions directly.
 	APIOptions []func(*middleware.Stack) error
+
+	// Functional options to be passed to all operations invoked by this client.
+	//
+	// Function values that modify the inner APIOptions are applied after the waiter
+	// config's own APIOptions modifiers.
+	ClientOptions []func(*Options)
 
 	// MinDelay is the minimum amount of time to delay between retries. If unset,
 	// ClusterDeletedWaiter will use default minimum delay of 60 seconds. Note that
@@ -508,12 +545,13 @@ type ClusterDeletedWaiterOptions struct {
 
 	// Retryable is function that can be used to override the service defined
 	// waiter-behavior based on operation output, or returned error. This function is
-	// used by the waiter to decide if a state is retryable or a terminal state. By
-	// default service-modeled logic will populate this option. This option can thus be
-	// used to define a custom waiter state with fall-back to service-modeled waiter
-	// state mutators.The function returns an error in case of a failure state. In case
-	// of retry state, this function returns a bool value of true and nil error, while
-	// in case of success it returns a bool value of false and nil error.
+	// used by the waiter to decide if a state is retryable or a terminal state.
+	//
+	// By default service-modeled logic will populate this option. This option can
+	// thus be used to define a custom waiter state with fall-back to service-modeled
+	// waiter state mutators.The function returns an error in case of a failure state.
+	// In case of retry state, this function returns a bool value of true and nil
+	// error, while in case of success it returns a bool value of false and nil error.
 	Retryable func(context.Context, *DescribeClustersInput, *DescribeClustersOutput, error) (bool, error)
 }
 
@@ -591,6 +629,9 @@ func (w *ClusterDeletedWaiter) WaitForOutput(ctx context.Context, params *Descri
 
 		out, err := w.client.DescribeClusters(ctx, params, func(o *Options) {
 			o.APIOptions = append(o.APIOptions, apiOptions...)
+			for _, opt := range options.ClientOptions {
+				opt(o)
+			}
 		})
 
 		retryable, err := options.Retryable(ctx, params, out, err)
@@ -694,7 +735,16 @@ type ClusterRestoredWaiterOptions struct {
 	// Set of options to modify how an operation is invoked. These apply to all
 	// operations invoked for this client. Use functional options on operation call to
 	// modify this list for per operation behavior.
+	//
+	// Passing options here is functionally equivalent to passing values to this
+	// config's ClientOptions field that extend the inner client's APIOptions directly.
 	APIOptions []func(*middleware.Stack) error
+
+	// Functional options to be passed to all operations invoked by this client.
+	//
+	// Function values that modify the inner APIOptions are applied after the waiter
+	// config's own APIOptions modifiers.
+	ClientOptions []func(*Options)
 
 	// MinDelay is the minimum amount of time to delay between retries. If unset,
 	// ClusterRestoredWaiter will use default minimum delay of 60 seconds. Note that
@@ -711,12 +761,13 @@ type ClusterRestoredWaiterOptions struct {
 
 	// Retryable is function that can be used to override the service defined
 	// waiter-behavior based on operation output, or returned error. This function is
-	// used by the waiter to decide if a state is retryable or a terminal state. By
-	// default service-modeled logic will populate this option. This option can thus be
-	// used to define a custom waiter state with fall-back to service-modeled waiter
-	// state mutators.The function returns an error in case of a failure state. In case
-	// of retry state, this function returns a bool value of true and nil error, while
-	// in case of success it returns a bool value of false and nil error.
+	// used by the waiter to decide if a state is retryable or a terminal state.
+	//
+	// By default service-modeled logic will populate this option. This option can
+	// thus be used to define a custom waiter state with fall-back to service-modeled
+	// waiter state mutators.The function returns an error in case of a failure state.
+	// In case of retry state, this function returns a bool value of true and nil
+	// error, while in case of success it returns a bool value of false and nil error.
 	Retryable func(context.Context, *DescribeClustersInput, *DescribeClustersOutput, error) (bool, error)
 }
 
@@ -794,6 +845,9 @@ func (w *ClusterRestoredWaiter) WaitForOutput(ctx context.Context, params *Descr
 
 		out, err := w.client.DescribeClusters(ctx, params, func(o *Options) {
 			o.APIOptions = append(o.APIOptions, apiOptions...)
+			for _, opt := range options.ClientOptions {
+				opt(o)
+			}
 		})
 
 		retryable, err := options.Retryable(ctx, params, out, err)

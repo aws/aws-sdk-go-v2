@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -15,19 +14,25 @@ import (
 // instance. In the SageMaker console, when you choose Open next to a notebook
 // instance, SageMaker opens a new tab showing the Jupyter server home page from
 // the notebook instance. The console uses this API to get the URL and show the
-// page. The IAM role or user used to call this API defines the permissions to
-// access the notebook instance. Once the presigned URL is created, no additional
+// page.
+//
+// The IAM role or user used to call this API defines the permissions to access
+// the notebook instance. Once the presigned URL is created, no additional
 // permission is required to access this URL. IAM authorization policies for this
 // API are also enforced for every HTTP request and WebSocket frame that attempts
-// to connect to the notebook instance. You can restrict access to this API and to
-// the URL that it returns to a list of IP addresses that you specify. Use the
-// NotIpAddress condition operator and the aws:SourceIP condition context key to
-// specify the list of IP addresses that you want to have access to the notebook
-// instance. For more information, see Limit Access to a Notebook Instance by IP
-// Address (https://docs.aws.amazon.com/sagemaker/latest/dg/security_iam_id-based-policy-examples.html#nbi-ip-filter)
-// . The URL that you get from a call to CreatePresignedNotebookInstanceUrl (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreatePresignedNotebookInstanceUrl.html)
-// is valid only for 5 minutes. If you try to use the URL after the 5-minute limit
-// expires, you are directed to the Amazon Web Services console sign-in page.
+// to connect to the notebook instance.
+//
+// You can restrict access to this API and to the URL that it returns to a list of
+// IP addresses that you specify. Use the NotIpAddress condition operator and the
+// aws:SourceIP condition context key to specify the list of IP addresses that you
+// want to have access to the notebook instance. For more information, see [Limit Access to a Notebook Instance by IP Address].
+//
+// The URL that you get from a call to [CreatePresignedNotebookInstanceUrl] is valid only for 5 minutes. If you try to
+// use the URL after the 5-minute limit expires, you are directed to the Amazon Web
+// Services console sign-in page.
+//
+// [CreatePresignedNotebookInstanceUrl]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreatePresignedNotebookInstanceUrl.html
+// [Limit Access to a Notebook Instance by IP Address]: https://docs.aws.amazon.com/sagemaker/latest/dg/security_iam_id-based-policy-examples.html#nbi-ip-filter
 func (c *Client) CreatePresignedNotebookInstanceUrl(ctx context.Context, params *CreatePresignedNotebookInstanceUrlInput, optFns ...func(*Options)) (*CreatePresignedNotebookInstanceUrlOutput, error) {
 	if params == nil {
 		params = &CreatePresignedNotebookInstanceUrlInput{}
@@ -89,25 +94,25 @@ func (c *Client) addOperationCreatePresignedNotebookInstanceUrlMiddlewares(stack
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -122,13 +127,16 @@ func (c *Client) addOperationCreatePresignedNotebookInstanceUrlMiddlewares(stack
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpCreatePresignedNotebookInstanceUrlValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreatePresignedNotebookInstanceUrl(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

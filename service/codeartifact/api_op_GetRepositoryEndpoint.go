@@ -6,18 +6,28 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/codeartifact/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns the endpoint of a repository for a specific package format. A
+//	Returns the endpoint of a repository for a specific package format. A
+//
 // repository has one endpoint for each package format:
+//
+//   - generic
+//
 //   - maven
+//
 //   - npm
+//
 //   - nuget
+//
 //   - pypi
+//
+//   - ruby
+//
+//   - swift
 func (c *Client) GetRepositoryEndpoint(ctx context.Context, params *GetRepositoryEndpointInput, optFns ...func(*Options)) (*GetRepositoryEndpointOutput, error) {
 	if params == nil {
 		params = &GetRepositoryEndpointInput{}
@@ -35,23 +45,23 @@ func (c *Client) GetRepositoryEndpoint(ctx context.Context, params *GetRepositor
 
 type GetRepositoryEndpointInput struct {
 
-	// The name of the domain that contains the repository.
+	//  The name of the domain that contains the repository.
 	//
 	// This member is required.
 	Domain *string
 
-	// Returns which endpoint of a repository to return. A repository has one endpoint
-	// for each package format.
+	//  Returns which endpoint of a repository to return. A repository has one
+	// endpoint for each package format.
 	//
 	// This member is required.
 	Format types.PackageFormat
 
-	// The name of the repository.
+	//  The name of the repository.
 	//
 	// This member is required.
 	Repository *string
 
-	// The 12-digit account number of the Amazon Web Services account that owns the
+	//  The 12-digit account number of the Amazon Web Services account that owns the
 	// domain that contains the repository. It does not include dashes or spaces.
 	DomainOwner *string
 
@@ -60,7 +70,7 @@ type GetRepositoryEndpointInput struct {
 
 type GetRepositoryEndpointOutput struct {
 
-	// A string that specifies the URL of the returned endpoint.
+	//  A string that specifies the URL of the returned endpoint.
 	RepositoryEndpoint *string
 
 	// Metadata pertaining to the operation's result.
@@ -91,25 +101,25 @@ func (c *Client) addOperationGetRepositoryEndpointMiddlewares(stack *middleware.
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -124,13 +134,16 @@ func (c *Client) addOperationGetRepositoryEndpointMiddlewares(stack *middleware.
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpGetRepositoryEndpointValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetRepositoryEndpoint(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

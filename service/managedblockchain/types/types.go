@@ -11,8 +11,9 @@ import (
 type Accessor struct {
 
 	// The Amazon Resource Name (ARN) of the accessor. For more information about ARNs
-	// and their format, see Amazon Resource Names (ARNs) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
-	// in the Amazon Web Services General Reference.
+	// and their format, see [Amazon Resource Names (ARNs)]in the Amazon Web Services General Reference.
+	//
+	// [Amazon Resource Names (ARNs)]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
 	Arn *string
 
 	// The billing token is a property of the Accessor. Use this token to when making
@@ -32,14 +33,18 @@ type Accessor struct {
 	// The current status of the accessor.
 	Status AccessorStatus
 
-	// The tags assigned to the Accessor. For more information about tags, see Tagging
-	// Resources (https://docs.aws.amazon.com/managed-blockchain/latest/ethereum-dev/tagging-resources.html)
-	// in the Amazon Managed Blockchain Ethereum Developer Guide, or Tagging Resources (https://docs.aws.amazon.com/managed-blockchain/latest/hyperledger-fabric-dev/tagging-resources.html)
-	// in the Amazon Managed Blockchain Hyperledger Fabric Developer Guide.
+	// The tags assigned to the Accessor.
+	//
+	// For more information about tags, see [Tagging Resources] in the Amazon Managed Blockchain Ethereum
+	// Developer Guide, or [Tagging Resources]in the Amazon Managed Blockchain Hyperledger Fabric
+	// Developer Guide.
+	//
+	// [Tagging Resources]: https://docs.aws.amazon.com/managed-blockchain/latest/hyperledger-fabric-dev/tagging-resources.html
 	Tags map[string]string
 
-	// The type of the accessor. Currently, accessor type is restricted to
-	// BILLING_TOKEN .
+	// The type of the accessor.
+	//
+	// Currently, accessor type is restricted to BILLING_TOKEN .
 	Type AccessorType
 
 	noSmithyDocumentSerde
@@ -49,8 +54,9 @@ type Accessor struct {
 type AccessorSummary struct {
 
 	// The Amazon Resource Name (ARN) of the accessor. For more information about ARNs
-	// and their format, see Amazon Resource Names (ARNs) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
-	// in the Amazon Web Services General Reference.
+	// and their format, see [Amazon Resource Names (ARNs)]in the Amazon Web Services General Reference.
+	//
+	// [Amazon Resource Names (ARNs)]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
 	Arn *string
 
 	// The creation date and time of the accessor.
@@ -65,8 +71,9 @@ type AccessorSummary struct {
 	// The current status of the accessor.
 	Status AccessorStatus
 
-	// The type of the accessor. Currently accessor type is restricted to BILLING_TOKEN
-	// .
+	// The type of the accessor.
+	//
+	// Currently accessor type is restricted to BILLING_TOKEN .
 	Type AccessorType
 
 	noSmithyDocumentSerde
@@ -75,8 +82,9 @@ type AccessorSummary struct {
 // A policy type that defines the voting rules for the network. The rules decide
 // if a proposal is approved. Approval may be based on criteria such as the
 // percentage of YES votes and the duration of the proposal. The policy applies to
-// all proposals and is specified when the network is created. Applies only to
-// Hyperledger Fabric.
+// all proposals and is specified when the network is created.
+//
+// Applies only to Hyperledger Fabric.
 type ApprovalThresholdPolicy struct {
 
 	// The duration from the time that a proposal is created until it expires. If
@@ -102,12 +110,15 @@ type ApprovalThresholdPolicy struct {
 }
 
 // An invitation to an Amazon Web Services account to create a member and join the
-// network. Applies only to Hyperledger Fabric.
+// network.
+//
+// Applies only to Hyperledger Fabric.
 type Invitation struct {
 
 	// The Amazon Resource Name (ARN) of the invitation. For more information about
-	// ARNs and their format, see Amazon Resource Names (ARNs) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
-	// in the Amazon Web Services General Reference.
+	// ARNs and their format, see [Amazon Resource Names (ARNs)]in the Amazon Web Services General Reference.
+	//
+	// [Amazon Resource Names (ARNs)]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
 	Arn *string
 
 	// The date and time that the invitation was created.
@@ -126,13 +137,18 @@ type Invitation struct {
 	NetworkSummary *NetworkSummary
 
 	// The status of the invitation:
+	//
 	//   - PENDING - The invitee hasn't created a member to join the network, and the
 	//   invitation hasn't yet expired.
+	//
 	//   - ACCEPTING - The invitee has begun creating a member, and creation hasn't yet
 	//   completed.
+	//
 	//   - ACCEPTED - The invitee created a member and joined the network using the
 	//   InvitationID .
+	//
 	//   - REJECTED - The invitee rejected the invitation.
+	//
 	//   - EXPIRED - The invitee neither created a member nor rejected the invitation
 	//   before the ExpirationDate .
 	Status InvitationStatus
@@ -142,7 +158,9 @@ type Invitation struct {
 
 // An action to invite a specific Amazon Web Services account to create a member
 // and join the network. The InviteAction is carried out when a Proposal is
-// APPROVED . Applies only to Hyperledger Fabric.
+// APPROVED .
+//
+// Applies only to Hyperledger Fabric.
 type InviteAction struct {
 
 	// The Amazon Web Services account ID to invite.
@@ -171,12 +189,15 @@ type LogConfigurations struct {
 	noSmithyDocumentSerde
 }
 
-// Member configuration properties. Applies only to Hyperledger Fabric.
+// Member configuration properties.
+//
+// Applies only to Hyperledger Fabric.
 type Member struct {
 
 	// The Amazon Resource Name (ARN) of the member. For more information about ARNs
-	// and their format, see Amazon Resource Names (ARNs) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
-	// in the Amazon Web Services General Reference.
+	// and their format, see [Amazon Resource Names (ARNs)]in the Amazon Web Services General Reference.
+	//
+	// [Amazon Resource Names (ARNs)]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
 	Arn *string
 
 	// The date and time that the member was created.
@@ -196,8 +217,12 @@ type Member struct {
 	// Service (KMS) that the member uses for encryption at rest. If the value of this
 	// parameter is "AWS Owned KMS Key" , the member uses an Amazon Web Services owned
 	// KMS key for encryption. This parameter is inherited by the nodes that this
-	// member owns. For more information, see Encryption at Rest (https://docs.aws.amazon.com/managed-blockchain/latest/hyperledger-fabric-dev/managed-blockchain-encryption-at-rest.html)
-	// in the Amazon Managed Blockchain Hyperledger Fabric Developer Guide.
+	// member owns.
+	//
+	// For more information, see [Encryption at Rest] in the Amazon Managed Blockchain Hyperledger Fabric
+	// Developer Guide.
+	//
+	// [Encryption at Rest]: https://docs.aws.amazon.com/managed-blockchain/latest/hyperledger-fabric-dev/managed-blockchain-encryption-at-rest.html
 	KmsKeyArn *string
 
 	// Configuration properties for logging events associated with a member.
@@ -210,39 +235,53 @@ type Member struct {
 	NetworkId *string
 
 	// The status of a member.
+	//
 	//   - CREATING - The Amazon Web Services account is in the process of creating a
 	//   member.
+	//
 	//   - AVAILABLE - The member has been created and can participate in the network.
+	//
 	//   - CREATE_FAILED - The Amazon Web Services account attempted to create a member
 	//   and creation failed.
+	//
 	//   - UPDATING - The member is in the process of being updated.
+	//
 	//   - DELETING - The member and all associated resources are in the process of
 	//   being deleted. Either the Amazon Web Services account that owns the member
 	//   deleted it, or the member is being deleted as the result of an APPROVED
 	//   PROPOSAL to remove the member.
+	//
 	//   - DELETED - The member can no longer participate on the network and all
 	//   associated resources are deleted. Either the Amazon Web Services account that
 	//   owns the member deleted it, or the member is being deleted as the result of an
 	//   APPROVED PROPOSAL to remove the member.
+	//
 	//   - INACCESSIBLE_ENCRYPTION_KEY - The member is impaired and might not function
 	//   as expected because it cannot access the specified customer managed key in KMS
 	//   for encryption at rest. Either the KMS key was disabled or deleted, or the
-	//   grants on the key were revoked. The effect of disabling or deleting a key or of
-	//   revoking a grant isn't immediate. It might take some time for the member
-	//   resource to discover that the key is inaccessible. When a resource is in this
-	//   state, we recommend deleting and recreating the resource.
+	//   grants on the key were revoked.
+	//
+	// The effect of disabling or deleting a key or of revoking a grant isn't
+	//   immediate. It might take some time for the member resource to discover that the
+	//   key is inaccessible. When a resource is in this state, we recommend deleting and
+	//   recreating the resource.
 	Status MemberStatus
 
-	// Tags assigned to the member. Tags consist of a key and optional value. For more
-	// information about tags, see Tagging Resources (https://docs.aws.amazon.com/managed-blockchain/latest/ethereum-dev/tagging-resources.html)
-	// in the Amazon Managed Blockchain Ethereum Developer Guide, or Tagging Resources (https://docs.aws.amazon.com/managed-blockchain/latest/hyperledger-fabric-dev/tagging-resources.html)
-	// in the Amazon Managed Blockchain Hyperledger Fabric Developer Guide.
+	// Tags assigned to the member. Tags consist of a key and optional value.
+	//
+	// For more information about tags, see [Tagging Resources] in the Amazon Managed Blockchain Ethereum
+	// Developer Guide, or [Tagging Resources]in the Amazon Managed Blockchain Hyperledger Fabric
+	// Developer Guide.
+	//
+	// [Tagging Resources]: https://docs.aws.amazon.com/managed-blockchain/latest/hyperledger-fabric-dev/tagging-resources.html
 	Tags map[string]string
 
 	noSmithyDocumentSerde
 }
 
-// Configuration properties of the member. Applies only to Hyperledger Fabric.
+// Configuration properties of the member.
+//
+// Applies only to Hyperledger Fabric.
 type MemberConfiguration struct {
 
 	// Configuration properties of the blockchain framework relevant to the member.
@@ -260,31 +299,41 @@ type MemberConfiguration struct {
 
 	// The Amazon Resource Name (ARN) of the customer managed key in Key Management
 	// Service (KMS) to use for encryption at rest in the member. This parameter is
-	// inherited by any nodes that this member creates. For more information, see
-	// Encryption at Rest (https://docs.aws.amazon.com/managed-blockchain/latest/hyperledger-fabric-dev/managed-blockchain-encryption-at-rest.html)
-	// in the Amazon Managed Blockchain Hyperledger Fabric Developer Guide. Use one of
-	// the following options to specify this parameter:
+	// inherited by any nodes that this member creates. For more information, see [Encryption at Rest]in
+	// the Amazon Managed Blockchain Hyperledger Fabric Developer Guide.
+	//
+	// Use one of the following options to specify this parameter:
+	//
 	//   - Undefined or empty string - By default, use an KMS key that is owned and
 	//   managed by Amazon Web Services on your behalf.
+	//
 	//   - A valid symmetric customer managed KMS key - Use the specified KMS key in
-	//   your account that you create, own, and manage. Amazon Managed Blockchain doesn't
-	//   support asymmetric keys. For more information, see Using symmetric and
-	//   asymmetric keys (https://docs.aws.amazon.com/kms/latest/developerguide/symmetric-asymmetric.html)
-	//   in the Key Management Service Developer Guide. The following is an example of a
-	//   KMS key ARN:
+	//   your account that you create, own, and manage.
+	//
+	// Amazon Managed Blockchain doesn't support asymmetric keys. For more
+	//   information, see [Using symmetric and asymmetric keys]in the Key Management Service Developer Guide.
+	//
+	// The following is an example of a KMS key ARN:
 	//   arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab
+	//
+	// [Using symmetric and asymmetric keys]: https://docs.aws.amazon.com/kms/latest/developerguide/symmetric-asymmetric.html
+	// [Encryption at Rest]: https://docs.aws.amazon.com/managed-blockchain/latest/hyperledger-fabric-dev/managed-blockchain-encryption-at-rest.html
 	KmsKeyArn *string
 
 	// Configuration properties for logging events associated with a member of a
 	// Managed Blockchain network.
 	LogPublishingConfiguration *MemberLogPublishingConfiguration
 
-	// Tags assigned to the member. Tags consist of a key and optional value. When
-	// specifying tags during creation, you can specify multiple key-value pairs in a
-	// single request, with an overall maximum of 50 tags added to each resource. For
-	// more information about tags, see Tagging Resources (https://docs.aws.amazon.com/managed-blockchain/latest/ethereum-dev/tagging-resources.html)
-	// in the Amazon Managed Blockchain Ethereum Developer Guide, or Tagging Resources (https://docs.aws.amazon.com/managed-blockchain/latest/hyperledger-fabric-dev/tagging-resources.html)
-	// in the Amazon Managed Blockchain Hyperledger Fabric Developer Guide.
+	// Tags assigned to the member. Tags consist of a key and optional value.
+	//
+	// When specifying tags during creation, you can specify multiple key-value pairs
+	// in a single request, with an overall maximum of 50 tags added to each resource.
+	//
+	// For more information about tags, see [Tagging Resources] in the Amazon Managed Blockchain Ethereum
+	// Developer Guide, or [Tagging Resources]in the Amazon Managed Blockchain Hyperledger Fabric
+	// Developer Guide.
+	//
+	// [Tagging Resources]: https://docs.aws.amazon.com/managed-blockchain/latest/hyperledger-fabric-dev/tagging-resources.html
 	Tags map[string]string
 
 	noSmithyDocumentSerde
@@ -369,13 +418,15 @@ type MemberLogPublishingConfiguration struct {
 	noSmithyDocumentSerde
 }
 
-// A summary of configuration properties for a member. Applies only to Hyperledger
-// Fabric.
+// A summary of configuration properties for a member.
+//
+// Applies only to Hyperledger Fabric.
 type MemberSummary struct {
 
 	// The Amazon Resource Name (ARN) of the member. For more information about ARNs
-	// and their format, see Amazon Resource Names (ARNs) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
-	// in the Amazon Web Services General Reference.
+	// and their format, see [Amazon Resource Names (ARNs)]in the Amazon Web Services General Reference.
+	//
+	// [Amazon Resource Names (ARNs)]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
 	Arn *string
 
 	// The date and time that the member was created.
@@ -395,27 +446,36 @@ type MemberSummary struct {
 	Name *string
 
 	// The status of the member.
+	//
 	//   - CREATING - The Amazon Web Services account is in the process of creating a
 	//   member.
+	//
 	//   - AVAILABLE - The member has been created and can participate in the network.
+	//
 	//   - CREATE_FAILED - The Amazon Web Services account attempted to create a member
 	//   and creation failed.
+	//
 	//   - UPDATING - The member is in the process of being updated.
+	//
 	//   - DELETING - The member and all associated resources are in the process of
 	//   being deleted. Either the Amazon Web Services account that owns the member
 	//   deleted it, or the member is being deleted as the result of an APPROVED
 	//   PROPOSAL to remove the member.
+	//
 	//   - DELETED - The member can no longer participate on the network and all
 	//   associated resources are deleted. Either the Amazon Web Services account that
 	//   owns the member deleted it, or the member is being deleted as the result of an
 	//   APPROVED PROPOSAL to remove the member.
+	//
 	//   - INACCESSIBLE_ENCRYPTION_KEY - The member is impaired and might not function
 	//   as expected because it cannot access the specified customer managed key in Key
 	//   Management Service (KMS) for encryption at rest. Either the KMS key was disabled
-	//   or deleted, or the grants on the key were revoked. The effect of disabling or
-	//   deleting a key or of revoking a grant isn't immediate. It might take some time
-	//   for the member resource to discover that the key is inaccessible. When a
-	//   resource is in this state, we recommend deleting and recreating the resource.
+	//   or deleted, or the grants on the key were revoked.
+	//
+	// The effect of disabling or deleting a key or of revoking a grant isn't
+	//   immediate. It might take some time for the member resource to discover that the
+	//   key is inaccessible. When a resource is in this state, we recommend deleting and
+	//   recreating the resource.
 	Status MemberStatus
 
 	noSmithyDocumentSerde
@@ -425,8 +485,9 @@ type MemberSummary struct {
 type Network struct {
 
 	// The Amazon Resource Name (ARN) of the network. For more information about ARNs
-	// and their format, see Amazon Resource Names (ARNs) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
-	// in the Amazon Web Services General Reference.
+	// and their format, see [Amazon Resource Names (ARNs)]in the Amazon Web Services General Reference.
+	//
+	// [Amazon Resource Names (ARNs)]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
 	Arn *string
 
 	// The date and time that the network was created.
@@ -454,9 +515,12 @@ type Network struct {
 	Status NetworkStatus
 
 	// Tags assigned to the network. Each tag consists of a key and optional value.
-	// For more information about tags, see Tagging Resources (https://docs.aws.amazon.com/managed-blockchain/latest/ethereum-dev/tagging-resources.html)
-	// in the Amazon Managed Blockchain Ethereum Developer Guide, or Tagging Resources (https://docs.aws.amazon.com/managed-blockchain/latest/hyperledger-fabric-dev/tagging-resources.html)
-	// in the Amazon Managed Blockchain Hyperledger Fabric Developer Guide.
+	//
+	// For more information about tags, see [Tagging Resources] in the Amazon Managed Blockchain Ethereum
+	// Developer Guide, or [Tagging Resources]in the Amazon Managed Blockchain Hyperledger Fabric
+	// Developer Guide.
+	//
+	// [Tagging Resources]: https://docs.aws.amazon.com/managed-blockchain/latest/hyperledger-fabric-dev/tagging-resources.html
 	Tags map[string]string
 
 	// The voting rules that the network uses to decide if a proposal is accepted.
@@ -475,8 +539,8 @@ type NetworkEthereumAttributes struct {
 
 	// The Ethereum CHAIN_ID associated with the Ethereum network. Chain IDs are as
 	// follows:
+	//
 	//   - mainnet = 1
-	//   - goerli = 5
 	ChainId *string
 
 	noSmithyDocumentSerde
@@ -486,8 +550,9 @@ type NetworkEthereumAttributes struct {
 type NetworkFabricAttributes struct {
 
 	// The edition of Amazon Managed Blockchain that Hyperledger Fabric uses. For more
-	// information, see Amazon Managed Blockchain Pricing (http://aws.amazon.com/managed-blockchain/pricing/)
-	// .
+	// information, see [Amazon Managed Blockchain Pricing].
+	//
+	// [Amazon Managed Blockchain Pricing]: http://aws.amazon.com/managed-blockchain/pricing/
 	Edition Edition
 
 	// The endpoint of the ordering service for the network.
@@ -500,8 +565,9 @@ type NetworkFabricAttributes struct {
 type NetworkFabricConfiguration struct {
 
 	// The edition of Amazon Managed Blockchain that the network uses. For more
-	// information, see Amazon Managed Blockchain Pricing (http://aws.amazon.com/managed-blockchain/pricing/)
-	// .
+	// information, see [Amazon Managed Blockchain Pricing].
+	//
+	// [Amazon Managed Blockchain Pricing]: http://aws.amazon.com/managed-blockchain/pricing/
 	//
 	// This member is required.
 	Edition Edition
@@ -524,11 +590,12 @@ type NetworkFrameworkAttributes struct {
 	noSmithyDocumentSerde
 }
 
-// Configuration properties relevant to the network for the blockchain framework
+//	Configuration properties relevant to the network for the blockchain framework
+//
 // that the network uses.
 type NetworkFrameworkConfiguration struct {
 
-	// Hyperledger Fabric configuration properties for a Managed Blockchain network
+	//  Hyperledger Fabric configuration properties for a Managed Blockchain network
 	// that uses Hyperledger Fabric.
 	Fabric *NetworkFabricConfiguration
 
@@ -539,8 +606,9 @@ type NetworkFrameworkConfiguration struct {
 type NetworkSummary struct {
 
 	// The Amazon Resource Name (ARN) of the network. For more information about ARNs
-	// and their format, see Amazon Resource Names (ARNs) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
-	// in the Amazon Web Services General Reference.
+	// and their format, see [Amazon Resource Names (ARNs)]in the Amazon Web Services General Reference.
+	//
+	// [Amazon Resource Names (ARNs)]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
 	Arn *string
 
 	// The date and time that the network was created.
@@ -571,8 +639,9 @@ type NetworkSummary struct {
 type Node struct {
 
 	// The Amazon Resource Name (ARN) of the node. For more information about ARNs and
-	// their format, see Amazon Resource Names (ARNs) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
-	// in the Amazon Web Services General Reference.
+	// their format, see [Amazon Resource Names (ARNs)]in the Amazon Web Services General Reference.
+	//
+	// [Amazon Resource Names (ARNs)]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
 	Arn *string
 
 	// The Availability Zone in which the node exists. Required for Ethereum nodes.
@@ -594,54 +663,75 @@ type Node struct {
 	// Service (KMS) that the node uses for encryption at rest. If the value of this
 	// parameter is "AWS Owned KMS Key" , the node uses an Amazon Web Services owned
 	// KMS key for encryption. The node inherits this parameter from the member that it
-	// belongs to. For more information, see Encryption at Rest (https://docs.aws.amazon.com/managed-blockchain/latest/hyperledger-fabric-dev/managed-blockchain-encryption-at-rest.html)
-	// in the Amazon Managed Blockchain Hyperledger Fabric Developer Guide. Applies
-	// only to Hyperledger Fabric.
+	// belongs to.
+	//
+	// For more information, see [Encryption at Rest] in the Amazon Managed Blockchain Hyperledger Fabric
+	// Developer Guide.
+	//
+	// Applies only to Hyperledger Fabric.
+	//
+	// [Encryption at Rest]: https://docs.aws.amazon.com/managed-blockchain/latest/hyperledger-fabric-dev/managed-blockchain-encryption-at-rest.html
 	KmsKeyArn *string
 
 	// Configuration properties for logging events associated with a peer node on a
 	// Hyperledger Fabric network on Managed Blockchain.
 	LogPublishingConfiguration *NodeLogPublishingConfiguration
 
-	// The unique identifier of the member to which the node belongs. Applies only to
-	// Hyperledger Fabric.
+	// The unique identifier of the member to which the node belongs.
+	//
+	// Applies only to Hyperledger Fabric.
 	MemberId *string
 
 	// The unique identifier of the network that the node is on.
 	NetworkId *string
 
-	// The state database that the node uses. Values are LevelDB or CouchDB . Applies
-	// only to Hyperledger Fabric.
+	// The state database that the node uses. Values are LevelDB or CouchDB .
+	//
+	// Applies only to Hyperledger Fabric.
 	StateDB StateDBType
 
 	// The status of the node.
+	//
 	//   - CREATING - The Amazon Web Services account is in the process of creating a
 	//   node.
+	//
 	//   - AVAILABLE - The node has been created and can participate in the network.
+	//
 	//   - UNHEALTHY - The node is impaired and might not function as expected. Amazon
 	//   Managed Blockchain automatically finds nodes in this state and tries to recover
 	//   them. If a node is recoverable, it returns to AVAILABLE . Otherwise, it moves
 	//   to FAILED status.
+	//
 	//   - CREATE_FAILED - The Amazon Web Services account attempted to create a node
 	//   and creation failed.
+	//
 	//   - UPDATING - The node is in the process of being updated.
+	//
 	//   - DELETING - The node is in the process of being deleted.
+	//
 	//   - DELETED - The node can no longer participate on the network.
+	//
 	//   - FAILED - The node is no longer functional, cannot be recovered, and must be
 	//   deleted.
+	//
 	//   - INACCESSIBLE_ENCRYPTION_KEY - The node is impaired and might not function as
 	//   expected because it cannot access the specified customer managed key in KMS for
 	//   encryption at rest. Either the KMS key was disabled or deleted, or the grants on
-	//   the key were revoked. The effect of disabling or deleting a key or of revoking a
-	//   grant isn't immediate. It might take some time for the node resource to discover
-	//   that the key is inaccessible. When a resource is in this state, we recommend
-	//   deleting and recreating the resource.
+	//   the key were revoked.
+	//
+	// The effect of disabling or deleting a key or of revoking a grant isn't
+	//   immediate. It might take some time for the node resource to discover that the
+	//   key is inaccessible. When a resource is in this state, we recommend deleting and
+	//   recreating the resource.
 	Status NodeStatus
 
-	// Tags assigned to the node. Each tag consists of a key and optional value. For
-	// more information about tags, see Tagging Resources (https://docs.aws.amazon.com/managed-blockchain/latest/ethereum-dev/tagging-resources.html)
-	// in the Amazon Managed Blockchain Ethereum Developer Guide, or Tagging Resources (https://docs.aws.amazon.com/managed-blockchain/latest/hyperledger-fabric-dev/tagging-resources.html)
-	// in the Amazon Managed Blockchain Hyperledger Fabric Developer Guide.
+	// Tags assigned to the node. Each tag consists of a key and optional value.
+	//
+	// For more information about tags, see [Tagging Resources] in the Amazon Managed Blockchain Ethereum
+	// Developer Guide, or [Tagging Resources]in the Amazon Managed Blockchain Hyperledger Fabric
+	// Developer Guide.
+	//
+	// [Tagging Resources]: https://docs.aws.amazon.com/managed-blockchain/latest/hyperledger-fabric-dev/tagging-resources.html
 	Tags map[string]string
 
 	noSmithyDocumentSerde
@@ -664,7 +754,9 @@ type NodeConfiguration struct {
 
 	// The state database that the node uses. Values are LevelDB or CouchDB . When
 	// using an Amazon Managed Blockchain network with Hyperledger Fabric version 1.4
-	// or later, the default is CouchDB . Applies only to Hyperledger Fabric.
+	// or later, the default is CouchDB .
+	//
+	// Applies only to Hyperledger Fabric.
 	StateDB StateDBType
 
 	noSmithyDocumentSerde
@@ -676,15 +768,17 @@ type NodeEthereumAttributes struct {
 	// The endpoint on which the Ethereum node listens to run Ethereum API methods
 	// over HTTP connections from a client. Use this endpoint in client code for smart
 	// contracts when using an HTTP connection. Connections to this endpoint are
-	// authenticated using Signature Version 4 (https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html)
-	// .
+	// authenticated using [Signature Version 4].
+	//
+	// [Signature Version 4]: https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html
 	HttpEndpoint *string
 
 	// The endpoint on which the Ethereum node listens to run Ethereum JSON-RPC
 	// methods over WebSocket connections from a client. Use this endpoint in client
 	// code for smart contracts when using a WebSocket connection. Connections to this
-	// endpoint are authenticated using Signature Version 4 (https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html)
-	// .
+	// endpoint are authenticated using [Signature Version 4].
+	//
+	// [Signature Version 4]: https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html
 	WebSocketEndpoint *string
 
 	noSmithyDocumentSerde
@@ -756,8 +850,9 @@ type NodeLogPublishingConfiguration struct {
 type NodeSummary struct {
 
 	// The Amazon Resource Name (ARN) of the node. For more information about ARNs and
-	// their format, see Amazon Resource Names (ARNs) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
-	// in the Amazon Web Services General Reference.
+	// their format, see [Amazon Resource Names (ARNs)]in the Amazon Web Services General Reference.
+	//
+	// [Amazon Resource Names (ARNs)]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
 	Arn *string
 
 	// The Availability Zone in which the node exists.
@@ -778,25 +873,27 @@ type NodeSummary struct {
 	noSmithyDocumentSerde
 }
 
-// Properties of a proposal on a Managed Blockchain network. Applies only to
-// Hyperledger Fabric.
+// Properties of a proposal on a Managed Blockchain network.
+//
+// Applies only to Hyperledger Fabric.
 type Proposal struct {
 
 	// The actions to perform on the network if the proposal is APPROVED .
 	Actions *ProposalActions
 
 	// The Amazon Resource Name (ARN) of the proposal. For more information about ARNs
-	// and their format, see Amazon Resource Names (ARNs) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
-	// in the Amazon Web Services General Reference.
+	// and their format, see [Amazon Resource Names (ARNs)]in the Amazon Web Services General Reference.
+	//
+	// [Amazon Resource Names (ARNs)]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
 	Arn *string
 
-	// The date and time that the proposal was created.
+	//  The date and time that the proposal was created.
 	CreationDate *time.Time
 
 	// The description of the proposal.
 	Description *string
 
-	// The date and time that the proposal expires. This is the CreationDate plus the
+	//  The date and time that the proposal expires. This is the CreationDate plus the
 	// ProposalDurationInHours that is specified in the ProposalThresholdPolicy . After
 	// this date and time, if members haven't cast enough votes to determine the
 	// outcome according to the voting policy, the proposal is EXPIRED and Actions
@@ -806,10 +903,10 @@ type Proposal struct {
 	// The unique identifier of the network for which the proposal is made.
 	NetworkId *string
 
-	// The current total of NO votes cast on the proposal by members.
+	//  The current total of NO votes cast on the proposal by members.
 	NoVoteCount *int32
 
-	// The number of votes remaining to be cast on the proposal by members. In other
+	//  The number of votes remaining to be cast on the proposal by members. In other
 	// words, the number of members minus the sum of YES votes and NO votes.
 	OutstandingVoteCount *int32
 
@@ -823,16 +920,21 @@ type Proposal struct {
 	ProposedByMemberName *string
 
 	// The status of the proposal. Values are as follows:
+	//
 	//   - IN_PROGRESS - The proposal is active and open for member voting.
+	//
 	//   - APPROVED - The proposal was approved with sufficient YES votes among members
 	//   according to the VotingPolicy specified for the Network . The specified
 	//   proposal actions are carried out.
+	//
 	//   - REJECTED - The proposal was rejected with insufficient YES votes among
 	//   members according to the VotingPolicy specified for the Network . The
 	//   specified ProposalActions aren't carried out.
+	//
 	//   - EXPIRED - Members didn't cast the number of votes required to determine the
 	//   proposal outcome before the proposal expired. The specified ProposalActions
 	//   aren't carried out.
+	//
 	//   - ACTION_FAILED - One or more of the specified ProposalActions in a proposal
 	//   that was approved couldn't be completed because of an error. The ACTION_FAILED
 	//   status occurs even if only one ProposalAction fails and other actions are
@@ -840,26 +942,30 @@ type Proposal struct {
 	Status ProposalStatus
 
 	// Tags assigned to the proposal. Each tag consists of a key and optional value.
-	// For more information about tags, see Tagging Resources (https://docs.aws.amazon.com/managed-blockchain/latest/ethereum-dev/tagging-resources.html)
-	// in the Amazon Managed Blockchain Ethereum Developer Guide, or Tagging Resources (https://docs.aws.amazon.com/managed-blockchain/latest/hyperledger-fabric-dev/tagging-resources.html)
-	// in the Amazon Managed Blockchain Hyperledger Fabric Developer Guide.
+	//
+	// For more information about tags, see [Tagging Resources] in the Amazon Managed Blockchain Ethereum
+	// Developer Guide, or [Tagging Resources]in the Amazon Managed Blockchain Hyperledger Fabric
+	// Developer Guide.
+	//
+	// [Tagging Resources]: https://docs.aws.amazon.com/managed-blockchain/latest/hyperledger-fabric-dev/tagging-resources.html
 	Tags map[string]string
 
-	// The current total of YES votes cast on the proposal by members.
+	//  The current total of YES votes cast on the proposal by members.
 	YesVoteCount *int32
 
 	noSmithyDocumentSerde
 }
 
-// The actions to carry out if a proposal is APPROVED . Applies only to Hyperledger
-// Fabric.
+//	The actions to carry out if a proposal is APPROVED .
+//
+// Applies only to Hyperledger Fabric.
 type ProposalActions struct {
 
-	// The actions to perform for an APPROVED proposal to invite an Amazon Web
+	//  The actions to perform for an APPROVED proposal to invite an Amazon Web
 	// Services account to create a member and join the network.
 	Invitations []InviteAction
 
-	// The actions to perform for an APPROVED proposal to remove a member from the
+	//  The actions to perform for an APPROVED proposal to remove a member from the
 	// network, which deletes the member and all associated member resources from the
 	// network.
 	Removals []RemoveAction
@@ -867,47 +973,55 @@ type ProposalActions struct {
 	noSmithyDocumentSerde
 }
 
-// Properties of a proposal. Applies only to Hyperledger Fabric.
+// Properties of a proposal.
+//
+// Applies only to Hyperledger Fabric.
 type ProposalSummary struct {
 
 	// The Amazon Resource Name (ARN) of the proposal. For more information about ARNs
-	// and their format, see Amazon Resource Names (ARNs) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
-	// in the Amazon Web Services General Reference.
+	// and their format, see [Amazon Resource Names (ARNs)]in the Amazon Web Services General Reference.
+	//
+	// [Amazon Resource Names (ARNs)]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
 	Arn *string
 
-	// The date and time that the proposal was created.
+	//  The date and time that the proposal was created.
 	CreationDate *time.Time
 
-	// The description of the proposal.
+	//  The description of the proposal.
 	Description *string
 
-	// The date and time that the proposal expires. This is the CreationDate plus the
+	//  The date and time that the proposal expires. This is the CreationDate plus the
 	// ProposalDurationInHours that is specified in the ProposalThresholdPolicy . After
 	// this date and time, if members haven't cast enough votes to determine the
 	// outcome according to the voting policy, the proposal is EXPIRED and Actions
 	// aren't carried out.
 	ExpirationDate *time.Time
 
-	// The unique identifier of the proposal.
+	//  The unique identifier of the proposal.
 	ProposalId *string
 
-	// The unique identifier of the member that created the proposal.
+	//  The unique identifier of the member that created the proposal.
 	ProposedByMemberId *string
 
-	// The name of the member that created the proposal.
+	//  The name of the member that created the proposal.
 	ProposedByMemberName *string
 
 	// The status of the proposal. Values are as follows:
+	//
 	//   - IN_PROGRESS - The proposal is active and open for member voting.
+	//
 	//   - APPROVED - The proposal was approved with sufficient YES votes among members
 	//   according to the VotingPolicy specified for the Network . The specified
 	//   proposal actions are carried out.
+	//
 	//   - REJECTED - The proposal was rejected with insufficient YES votes among
 	//   members according to the VotingPolicy specified for the Network . The
 	//   specified ProposalActions aren't carried out.
+	//
 	//   - EXPIRED - Members didn't cast the number of votes required to determine the
 	//   proposal outcome before the proposal expired. The specified ProposalActions
 	//   aren't carried out.
+	//
 	//   - ACTION_FAILED - One or more of the specified ProposalActions in a proposal
 	//   that was approved couldn't be completed because of an error.
 	Status ProposalStatus
@@ -917,7 +1031,9 @@ type ProposalSummary struct {
 
 // An action to remove a member from a Managed Blockchain network as the result of
 // a removal proposal that is APPROVED . The member and all associated resources
-// are deleted from the network. Applies only to Hyperledger Fabric.
+// are deleted from the network.
+//
+// Applies only to Hyperledger Fabric.
 type RemoveAction struct {
 
 	// The unique identifier of the member to remove.
@@ -928,24 +1044,26 @@ type RemoveAction struct {
 	noSmithyDocumentSerde
 }
 
-// Properties of an individual vote that a member cast for a proposal. Applies
-// only to Hyperledger Fabric.
+//	Properties of an individual vote that a member cast for a proposal.
+//
+// Applies only to Hyperledger Fabric.
 type VoteSummary struct {
 
-	// The unique identifier of the member that cast the vote.
+	//  The unique identifier of the member that cast the vote.
 	MemberId *string
 
-	// The name of the member that cast the vote.
+	//  The name of the member that cast the vote.
 	MemberName *string
 
-	// The vote value, either YES or NO .
+	//  The vote value, either YES or NO .
 	Vote VoteValue
 
 	noSmithyDocumentSerde
 }
 
-// The voting rules for the network to decide if a proposal is accepted Applies
-// only to Hyperledger Fabric.
+//	The voting rules for the network to decide if a proposal is accepted
+//
+// Applies only to Hyperledger Fabric.
 type VotingPolicy struct {
 
 	// Defines the rules for the network for voting on proposals, such as the

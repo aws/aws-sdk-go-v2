@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/datazone/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -44,6 +43,10 @@ type DeleteDataSourceInput struct {
 	// A unique, case-sensitive identifier that is provided to ensure the idempotency
 	// of the request.
 	ClientToken *string
+
+	// Specifies that the granted permissions are retained in case of a self-subscribe
+	// functionality failure for a data source.
+	RetainPermissionsOnRevokeFailure *bool
 
 	noSmithyDocumentSerde
 }
@@ -110,8 +113,15 @@ type DeleteDataSourceOutput struct {
 	// to be also automatically published to the catalog.
 	PublishOnImport *bool
 
+	// Specifies that the granted permissions are retained in case of a self-subscribe
+	// functionality failure for a data source.
+	RetainPermissionsOnRevokeFailure *bool
+
 	// The schedule of runs for this data source.
 	Schedule *types.ScheduleConfiguration
+
+	// Specifies the status of the self-granting functionality.
+	SelfGrantStatus types.SelfGrantStatusOutput
 
 	// The status of this data source.
 	Status types.DataSourceStatus
@@ -150,25 +160,25 @@ func (c *Client) addOperationDeleteDataSourceMiddlewares(stack *middleware.Stack
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -183,6 +193,9 @@ func (c *Client) addOperationDeleteDataSourceMiddlewares(stack *middleware.Stack
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opDeleteDataSourceMiddleware(stack, options); err != nil {
 		return err
 	}
@@ -192,7 +205,7 @@ func (c *Client) addOperationDeleteDataSourceMiddlewares(stack *middleware.Stack
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteDataSource(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/licensemanager/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -32,17 +31,23 @@ type ListResourceInventoryInput struct {
 
 	// Filters to scope the results. The following filters and logical operators are
 	// supported:
+	//
 	//   - account_id - The ID of the Amazon Web Services account that owns the
 	//   resource. Logical operators are EQUALS | NOT_EQUALS .
+	//
 	//   - application_name - The name of the application. Logical operators are EQUALS
 	//   | BEGINS_WITH .
+	//
 	//   - license_included - The type of license included. Logical operators are
 	//   EQUALS | NOT_EQUALS . Possible values are sql-server-enterprise |
 	//   sql-server-standard | sql-server-web | windows-server-datacenter .
+	//
 	//   - platform - The platform of the resource. Logical operators are EQUALS |
 	//   BEGINS_WITH .
+	//
 	//   - resource_id - The ID of the resource. Logical operators are EQUALS |
 	//   NOT_EQUALS .
+	//
 	//   - tag: - The key/value combination of a tag assigned to the resource. Logical
 	//   operators are EQUALS (single account) or EQUALS | NOT_EQUALS (cross account).
 	Filters []types.InventoryFilter
@@ -92,25 +97,25 @@ func (c *Client) addOperationListResourceInventoryMiddlewares(stack *middleware.
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -125,13 +130,16 @@ func (c *Client) addOperationListResourceInventoryMiddlewares(stack *middleware.
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpListResourceInventoryValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListResourceInventory(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

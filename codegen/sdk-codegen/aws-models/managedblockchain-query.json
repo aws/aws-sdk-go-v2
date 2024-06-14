@@ -18,6 +18,25 @@
                 "smithy.api#httpError": 403
             }
         },
+        "com.amazonaws.managedblockchainquery#AddressIdentifierFilter": {
+            "type": "structure",
+            "members": {
+                "transactionEventToAddress": {
+                    "target": "com.amazonaws.managedblockchainquery#ChainAddresses",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The container for the recipient address of the transaction. </p>",
+                        "smithy.api#length": {
+                            "min": 1,
+                            "max": 1
+                        },
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>This is the container for the unique public address on the blockchain.</p>"
+            }
+        },
         "com.amazonaws.managedblockchainquery#AssetContract": {
             "type": "structure",
             "members": {
@@ -272,6 +291,12 @@
             "type": "string",
             "traits": {
                 "smithy.api#pattern": "^[-A-Za-z0-9]{13,74}$"
+            }
+        },
+        "com.amazonaws.managedblockchainquery#ChainAddresses": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.managedblockchainquery#ChainAddress"
             }
         },
         "com.amazonaws.managedblockchainquery#ConfirmationStatus": {
@@ -669,8 +694,13 @@
                 "transactionHash": {
                     "target": "com.amazonaws.managedblockchainquery#QueryTransactionHash",
                     "traits": {
-                        "smithy.api#documentation": "<p>The hash of the transaction.  It is generated whenever a transaction is verified and added to the blockchain.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The hash of a transaction. It is generated when a transaction is created.</p>"
+                    }
+                },
+                "transactionId": {
+                    "target": "com.amazonaws.managedblockchainquery#QueryTransactionId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of a Bitcoin transaction. It is generated when a transaction is created.</p>\n         <note>\n            <p>\n               <code>transactionId</code> is only supported on the Bitcoin networks.</p>\n         </note>"
                     }
                 },
                 "network": {
@@ -713,7 +743,7 @@
                 "retryAfterSeconds": {
                     "target": "smithy.api#Integer",
                     "traits": {
-                        "smithy.api#documentation": "<p>The container of the <code>retryAfterSeconds</code> value.</p>",
+                        "smithy.api#documentation": "<p>Specifies the <code>retryAfterSeconds</code> value.</p>",
                         "smithy.api#httpHeader": "Retry-After"
                     }
                 }
@@ -785,7 +815,7 @@
                 "maxResults": {
                     "target": "smithy.api#Integer",
                     "traits": {
-                        "smithy.api#documentation": "<p>The maximum number of contracts to list.</p>\n         <p>Default:<code>100</code>\n         </p>\n         <note>\n            <p>Even if additional results can be retrieved, the request can return less \n       results than <code>maxResults</code> or an empty array of results.</p>\n            <p>To retrieve the next set of results, make another request with the \n         returned <code>nextToken</code> value. The value of <code>nextToken</code> is \n         <code>null</code> when there are no more results to return</p>\n         </note>",
+                        "smithy.api#documentation": "<p>The maximum number of contracts to list.</p>\n         <p>Default: <code>100</code>\n         </p>\n         <note>\n            <p>Even if additional results can be retrieved, the request can return less \n       results than <code>maxResults</code> or an empty array of results.</p>\n            <p>To retrieve the next set of results, make another request with the \n         returned <code>nextToken</code> value. The value of <code>nextToken</code> is \n         <code>null</code> when there are no more results to return</p>\n         </note>",
                         "smithy.api#range": {
                             "min": 1,
                             "max": 250
@@ -816,6 +846,159 @@
             },
             "traits": {
                 "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.managedblockchainquery#ListFilteredTransactionEvents": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.managedblockchainquery#ListFilteredTransactionEventsInput"
+            },
+            "output": {
+                "target": "com.amazonaws.managedblockchainquery#ListFilteredTransactionEventsOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.managedblockchainquery#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.managedblockchainquery#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.managedblockchainquery#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.managedblockchainquery#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.managedblockchainquery#ValidationException"
+                }
+            ],
+            "traits": {
+                "aws.iam#actionPermissionDescription": "Grants permission to retrieve events on the blockchain with additional filters",
+                "smithy.api#documentation": "<p>Lists all the transaction events for an address on the blockchain.</p>\n         <note>\n            <p>This operation is only supported on the Bitcoin networks.</p>\n         </note>",
+                "smithy.api#http": {
+                    "uri": "/list-filtered-transaction-events",
+                    "method": "POST"
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "items": "events",
+                    "pageSize": "maxResults"
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.managedblockchainquery#ListFilteredTransactionEventsInput": {
+            "type": "structure",
+            "members": {
+                "network": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The blockchain network where the transaction occurred.</p>\n         <p>Valid Values: <code>BITCOIN_MAINNET</code> | <code>BITCOIN_TESTNET</code>\n         </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "addressIdentifierFilter": {
+                    "target": "com.amazonaws.managedblockchainquery#AddressIdentifierFilter",
+                    "traits": {
+                        "smithy.api#documentation": "<p>This is the unique public address on the blockchain for which the transaction events are being requested.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "timeFilter": {
+                    "target": "com.amazonaws.managedblockchainquery#TimeFilter",
+                    "traits": {
+                        "smithy.api#documentation": "<p>This container specifies the time frame for the transaction events returned in the response.</p>"
+                    }
+                },
+                "voutFilter": {
+                    "target": "com.amazonaws.managedblockchainquery#VoutFilter",
+                    "traits": {
+                        "smithy.api#documentation": "<p>This container specifies filtering attributes related to BITCOIN_VOUT event types</p>"
+                    }
+                },
+                "confirmationStatusFilter": {
+                    "target": "com.amazonaws.managedblockchainquery#ConfirmationStatusFilter"
+                },
+                "sort": {
+                    "target": "com.amazonaws.managedblockchainquery#ListFilteredTransactionEventsSort",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The order by which the results will be sorted.</p>"
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.managedblockchainquery#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pagination token that indicates the next set of results to retrieve.</p>"
+                    }
+                },
+                "maxResults": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of transaction events to list.</p>\n         <p>Default: <code>100</code>\n         </p>\n         <note>\n            <p>Even if additional results can be retrieved, the request can return less \n       results than <code>maxResults</code> or an empty array of results.</p>\n            <p>To retrieve the next set of results, make another request with the \n         returned <code>nextToken</code> value. The value of <code>nextToken</code> is \n         <code>null</code> when there are no more results to return</p>\n         </note>",
+                        "smithy.api#range": {
+                            "min": 1,
+                            "max": 250
+                        }
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.managedblockchainquery#ListFilteredTransactionEventsOutput": {
+            "type": "structure",
+            "members": {
+                "events": {
+                    "target": "com.amazonaws.managedblockchainquery#TransactionEventList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The transaction events returned by the request.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.managedblockchainquery#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pagination token that indicates the next set of results to retrieve.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.managedblockchainquery#ListFilteredTransactionEventsSort": {
+            "type": "structure",
+            "members": {
+                "sortBy": {
+                    "target": "com.amazonaws.managedblockchainquery#ListFilteredTransactionEventsSortBy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Container on how the results will be sorted by?</p>"
+                    }
+                },
+                "sortOrder": {
+                    "target": "com.amazonaws.managedblockchainquery#SortOrder",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The container for the <i>sort order</i> for <code>ListFilteredTransactionEvents</code>. \n         The <code>SortOrder</code> field only accepts the values <code>ASCENDING</code> \n         and <code>DESCENDING</code>. Not providing <code>SortOrder</code> will default \n         to <code>ASCENDING</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Lists all the transaction events for an address on the blockchain.</p>\n         <note>\n            <p>This operation is only supported on the Bitcoin blockchain networks.</p>\n         </note>"
+            }
+        },
+        "com.amazonaws.managedblockchainquery#ListFilteredTransactionEventsSortBy": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "blockchainInstant",
+                        "name": "blockchainInstant",
+                        "documentation": "Timestamp of a transaction"
+                    }
+                ]
             }
         },
         "com.amazonaws.managedblockchainquery#ListTokenBalances": {
@@ -884,7 +1067,7 @@
                 "maxResults": {
                     "target": "smithy.api#Integer",
                     "traits": {
-                        "smithy.api#documentation": "<p>The maximum number of token balances to return.</p>\n         <p>Default:<code>100</code>\n         </p>\n         <note>\n            <p>Even if additional results can be retrieved, the request can return less \n       results than <code>maxResults</code> or an empty array of results.</p>\n            <p>To retrieve the next set of results, make another request with the \n         returned <code>nextToken</code> value. The value of <code>nextToken</code> is \n         <code>null</code> when there are no more results to return</p>\n         </note>",
+                        "smithy.api#documentation": "<p>The maximum number of token balances to return.</p>\n         <p>Default: <code>100</code>\n         </p>\n         <note>\n            <p>Even if additional results can be retrieved, the request can return less \n       results than <code>maxResults</code> or an empty array of results.</p>\n            <p>To retrieve the next set of results, make another request with the \n         returned <code>nextToken</code> value. The value of <code>nextToken</code> is \n         <code>null</code> when there are no more results to return</p>\n         </note>",
                         "smithy.api#range": {
                             "min": 1,
                             "max": 250
@@ -944,7 +1127,7 @@
             ],
             "traits": {
                 "aws.iam#actionPermissionDescription": "Grants permission to retrieve events in a transaction on the blockchain",
-                "smithy.api#documentation": "<p>An array of <code>TransactionEvent</code> objects. Each object contains details \n         about the transaction event.</p>\n         <note>\n            <p>This action will return transaction details for all transactions \n         that are <i>confirmed</i> on the blockchain, even if they have not reached \n         <a href=\"https://docs.aws.amazon.com/managed-blockchain/latest/ambq-dg/key-concepts.html#finality\">finality</a>.\n      </p>\n         </note>",
+                "smithy.api#documentation": "<p>Lists all the transaction events for a transaction </p>\n         <note>\n            <p>This action will return transaction details for all transactions \n         that are <i>confirmed</i> on the blockchain, even if they have not reached \n         <a href=\"https://docs.aws.amazon.com/managed-blockchain/latest/ambq-dg/key-concepts.html#finality\">finality</a>.\n      </p>\n         </note>",
                 "smithy.api#http": {
                     "uri": "/list-transaction-events",
                     "method": "POST"
@@ -964,8 +1147,13 @@
                 "transactionHash": {
                     "target": "com.amazonaws.managedblockchainquery#QueryTransactionHash",
                     "traits": {
-                        "smithy.api#documentation": "<p>The hash of the transaction. It is generated whenever a transaction is verified and added to the blockchain.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The hash of a transaction. It is generated when a transaction is created.</p>"
+                    }
+                },
+                "transactionId": {
+                    "target": "com.amazonaws.managedblockchainquery#QueryTransactionId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of a Bitcoin transaction. It is generated when a transaction is created.</p>\n         <note>\n            <p>\n               <code>transactionId</code> is only supported on the Bitcoin networks.</p>\n         </note>"
                     }
                 },
                 "network": {
@@ -984,7 +1172,7 @@
                 "maxResults": {
                     "target": "smithy.api#Integer",
                     "traits": {
-                        "smithy.api#documentation": "<p>The maximum number of transaction events to list.</p>\n         <p>Default:<code>100</code>\n         </p>\n         <note>\n            <p>Even if additional results can be retrieved, the request can return less \n       results than <code>maxResults</code> or an empty array of results.</p>\n            <p>To retrieve the next set of results, make another request with the \n         returned <code>nextToken</code> value. The value of <code>nextToken</code> is \n         <code>null</code> when there are no more results to return</p>\n         </note>",
+                        "smithy.api#documentation": "<p>The maximum number of transaction events to list.</p>\n         <p>Default: <code>100</code>\n         </p>\n         <note>\n            <p>Even if additional results can be retrieved, the request can return less \n       results than <code>maxResults</code> or an empty array of results.</p>\n            <p>To retrieve the next set of results, make another request with the \n         returned <code>nextToken</code> value. The value of <code>nextToken</code> is \n         <code>null</code> when there are no more results to return</p>\n         </note>",
                         "smithy.api#range": {
                             "min": 1,
                             "max": 250
@@ -1044,7 +1232,7 @@
             ],
             "traits": {
                 "aws.iam#actionPermissionDescription": "Grants permission to retrieve a multiple transactions on a blockchain",
-                "smithy.api#documentation": "<p>Lists all of the transactions on a given wallet address or to a specific contract.</p>",
+                "smithy.api#documentation": "<p>Lists all the transaction events for a transaction.</p>",
                 "smithy.api#http": {
                     "uri": "/list-transactions",
                     "method": "POST"
@@ -1084,7 +1272,7 @@
                 "sort": {
                     "target": "com.amazonaws.managedblockchainquery#ListTransactionsSort",
                     "traits": {
-                        "smithy.api#documentation": "<p>The order by which the results will be sorted. If <code>ASCENNDING</code> is selected, the results \n         will be ordered by <code>fromTime</code>. </p>"
+                        "smithy.api#documentation": "<p>The order by which the results will be sorted. </p>"
                     }
                 },
                 "nextToken": {
@@ -1096,7 +1284,7 @@
                 "maxResults": {
                     "target": "smithy.api#Integer",
                     "traits": {
-                        "smithy.api#documentation": "<p>The maximum number of transactions to list.</p>\n         <p>Default:<code>100</code>\n         </p>\n         <note>\n            <p>Even if additional results can be retrieved, the request can return less \n       results than <code>maxResults</code> or an empty array of results.</p>\n            <p>To retrieve the next set of results, make another request with the \n         returned <code>nextToken</code> value. The value of <code>nextToken</code> is \n         <code>null</code> when there are no more results to return</p>\n         </note>",
+                        "smithy.api#documentation": "<p>The maximum number of transactions to list.</p>\n         <p>Default: <code>100</code>\n         </p>\n         <note>\n            <p>Even if additional results can be retrieved, the request can return less \n       results than <code>maxResults</code> or an empty array of results.</p>\n            <p>To retrieve the next set of results, make another request with the \n         returned <code>nextToken</code> value. The value of <code>nextToken</code> is \n         <code>null</code> when there are no more results to return</p>\n         </note>",
                         "smithy.api#range": {
                             "min": 1,
                             "max": 250
@@ -1106,7 +1294,7 @@
                 "confirmationStatusFilter": {
                     "target": "com.amazonaws.managedblockchainquery#ConfirmationStatusFilter",
                     "traits": {
-                        "smithy.api#documentation": "<p>This filter is used to include transactions in the response that haven't reached <a href=\"https://docs.aws.amazon.com/managed-blockchain/latest/ambq-dg/key-concepts.html#finality\">\n               <i>finality</i>\n            </a>. Transactions that have reached finiality are always \n         part of the response.</p>"
+                        "smithy.api#documentation": "<p>This filter is used to include transactions in the response that haven't reached <a href=\"https://docs.aws.amazon.com/managed-blockchain/latest/ambq-dg/key-concepts.html#finality\">\n               <i>finality</i>\n            </a>. Transactions that have reached finality are always \n         part of the response.</p>"
                     }
                 }
             },
@@ -1203,7 +1391,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The container for the identifier of the owner.</p>"
+                "smithy.api#documentation": "<p>The container for the owner identifier.</p>"
             }
         },
         "com.amazonaws.managedblockchainquery#QueryNetwork": {
@@ -1321,6 +1509,12 @@
             }
         },
         "com.amazonaws.managedblockchainquery#QueryTransactionHash": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "^(0x[A-Fa-f0-9]{64}|[A-Fa-f0-9]{64})$"
+            }
+        },
+        "com.amazonaws.managedblockchainquery#QueryTransactionId": {
             "type": "string",
             "traits": {
                 "smithy.api#pattern": "^(0x[A-Fa-f0-9]{64}|[A-Fa-f0-9]{64})$"
@@ -1498,6 +1692,9 @@
                 },
                 {
                     "target": "com.amazonaws.managedblockchainquery#ListAssetContracts"
+                },
+                {
+                    "target": "com.amazonaws.managedblockchainquery#ListFilteredTransactionEvents"
                 },
                 {
                     "target": "com.amazonaws.managedblockchainquery#ListTokenBalances"
@@ -2210,6 +2407,20 @@
                 }
             }
         },
+        "com.amazonaws.managedblockchainquery#TimeFilter": {
+            "type": "structure",
+            "members": {
+                "from": {
+                    "target": "com.amazonaws.managedblockchainquery#BlockchainInstant"
+                },
+                "to": {
+                    "target": "com.amazonaws.managedblockchainquery#BlockchainInstant"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>This container is used to specify a time frame.</p>"
+            }
+        },
         "com.amazonaws.managedblockchainquery#TokenBalance": {
             "type": "structure",
             "members": {
@@ -2335,7 +2546,7 @@
                 "transactionHash": {
                     "target": "com.amazonaws.managedblockchainquery#QueryTransactionHash",
                     "traits": {
-                        "smithy.api#documentation": "<p>The hash of the transaction. It is generated whenever a transaction is verified and added to the blockchain.</p>",
+                        "smithy.api#documentation": "<p>The hash of a transaction. It is generated when a transaction is created.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -2430,7 +2641,7 @@
                 "transactionId": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The unique identifier of the transaction. It is generated whenever a transaction is verified and added to the blockchain.</p>"
+                        "smithy.api#documentation": "<p>The identifier of a Bitcoin transaction. It is generated when a transaction is created.</p>"
                     }
                 },
                 "confirmationStatus": {
@@ -2463,7 +2674,7 @@
                 "transactionHash": {
                     "target": "com.amazonaws.managedblockchainquery#QueryTransactionHash",
                     "traits": {
-                        "smithy.api#documentation": "<p>The hash of the transaction. It is generated whenever a transaction is verified and added to the blockchain.</p>",
+                        "smithy.api#documentation": "<p>The hash of a transaction. It is generated when a transaction is created.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -2495,7 +2706,7 @@
                 "contractAddress": {
                     "target": "com.amazonaws.managedblockchainquery#ChainAddress",
                     "traits": {
-                        "smithy.api#documentation": "<p>The blockchain address. for the contract</p>"
+                        "smithy.api#documentation": "<p>The blockchain address for the contract</p>"
                     }
                 },
                 "tokenId": {
@@ -2507,13 +2718,46 @@
                 "transactionId": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The unique identifier of the transaction. It is generated whenever a transaction is verified and added to the blockchain.</p>"
+                        "smithy.api#documentation": "<p>The identifier of a Bitcoin transaction. It is generated when a transaction is created.</p>"
                     }
                 },
                 "voutIndex": {
                     "target": "smithy.api#Integer",
                     "traits": {
-                        "smithy.api#documentation": "<p>The position of the vout in the transaction output list.</p>"
+                        "smithy.api#documentation": "<p>The position of the transaction output in the transaction output list.</p>"
+                    }
+                },
+                "voutSpent": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies if the transaction output is spent or unspent. This is only returned for BITCOIN_VOUT event types.</p>\n         <note>\n            <p>This is only returned for <code>BITCOIN_VOUT</code> event types.</p>\n         </note>"
+                    }
+                },
+                "spentVoutTransactionId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The transactionId that <i>created</i> the spent transaction output.</p>\n         <note>\n            <p>This is only returned for <code>BITCOIN_VIN</code> event types.</p>\n         </note>"
+                    }
+                },
+                "spentVoutTransactionHash": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The transactionHash that <i>created</i> the spent transaction output.</p>\n         <note>\n            <p>This is only returned for <code>BITCOIN_VIN</code> event types.</p>\n         </note>"
+                    }
+                },
+                "spentVoutIndex": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The position of the spent transaction output in the output list of the <i>creating transaction</i>.</p>\n         <note>\n            <p>This is only returned for <code>BITCOIN_VIN</code> event types.</p>\n         </note>"
+                    }
+                },
+                "blockchainInstant": {
+                    "target": "com.amazonaws.managedblockchainquery#BlockchainInstant"
+                },
+                "confirmationStatus": {
+                    "target": "com.amazonaws.managedblockchainquery#ConfirmationStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>This container specifies whether the transaction has reached Finality.</p>"
                     }
                 }
             },
@@ -2539,8 +2783,14 @@
                 "transactionHash": {
                     "target": "com.amazonaws.managedblockchainquery#QueryTransactionHash",
                     "traits": {
-                        "smithy.api#documentation": "<p>The hash of the transaction. It is generated whenever a transaction is verified and added to the blockchain.</p>",
+                        "smithy.api#documentation": "<p>The hash of a transaction. It is generated when a transaction is created.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "transactionId": {
+                    "target": "com.amazonaws.managedblockchainquery#QueryTransactionId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of a Bitcoin transaction. It is generated when a transaction is created.</p>"
                     }
                 },
                 "network": {
@@ -2659,6 +2909,21 @@
                         "name": "OTHER"
                     }
                 ]
+            }
+        },
+        "com.amazonaws.managedblockchainquery#VoutFilter": {
+            "type": "structure",
+            "members": {
+                "voutSpent": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies if the transaction output is spent or unspent.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>This container specifies filtering attributes related to <code>BITCOIN_VOUT</code> event types</p>"
             }
         }
     }

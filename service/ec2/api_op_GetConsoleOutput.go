@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -15,15 +14,20 @@ import (
 // Gets the console output for the specified instance. For Linux instances, the
 // instance console output displays the exact console output that would normally be
 // displayed on a physical monitor attached to a computer. For Windows instances,
-// the instance console output includes the last three system event log errors. By
-// default, the console output returns buffered information that was posted shortly
-// after an instance transition state (start, stop, reboot, or terminate). This
-// information is available for at least one hour after the most recent post. Only
-// the most recent 64 KB of console output is available. You can optionally
-// retrieve the latest serial console output at any time during the instance
-// lifecycle. This option is supported on instance types that use the Nitro
-// hypervisor. For more information, see Instance console output (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-console.html#instance-console-console-output)
-// in the Amazon EC2 User Guide.
+// the instance console output includes the last three system event log errors.
+//
+// By default, the console output returns buffered information that was posted
+// shortly after an instance transition state (start, stop, reboot, or terminate).
+// This information is available for at least one hour after the most recent post.
+// Only the most recent 64 KB of console output is available.
+//
+// You can optionally retrieve the latest serial console output at any time during
+// the instance lifecycle. This option is supported on instance types that use the
+// Nitro hypervisor.
+//
+// For more information, see [Instance console output] in the Amazon EC2 User Guide.
+//
+// [Instance console output]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-console.html#instance-console-console-output
 func (c *Client) GetConsoleOutput(ctx context.Context, params *GetConsoleOutputInput, optFns ...func(*Options)) (*GetConsoleOutputOutput, error) {
 	if params == nil {
 		params = &GetConsoleOutputInput{}
@@ -52,8 +56,9 @@ type GetConsoleOutputInput struct {
 	// UnauthorizedOperation .
 	DryRun *bool
 
-	// When enabled, retrieves the latest console output for the instance. Default:
-	// disabled ( false )
+	// When enabled, retrieves the latest console output for the instance.
+	//
+	// Default: disabled ( false )
 	Latest *bool
 
 	noSmithyDocumentSerde
@@ -99,25 +104,25 @@ func (c *Client) addOperationGetConsoleOutputMiddlewares(stack *middleware.Stack
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -132,13 +137,16 @@ func (c *Client) addOperationGetConsoleOutputMiddlewares(stack *middleware.Stack
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpGetConsoleOutputValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetConsoleOutput(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

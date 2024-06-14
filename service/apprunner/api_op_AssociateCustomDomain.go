@@ -6,21 +6,22 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/apprunner/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Associate your own domain name with the App Runner subdomain URL of your App
-// Runner service. After you call AssociateCustomDomain and receive a successful
-// response, use the information in the CustomDomain record that's returned to add
-// CNAME records to your Domain Name System (DNS). For each mapped domain name, add
-// a mapping to the target App Runner subdomain and one or more certificate
-// validation records. App Runner then performs DNS validation to verify that you
-// own or control the domain name that you associated. App Runner tracks domain
-// validity in a certificate stored in AWS Certificate Manager (ACM) (https://docs.aws.amazon.com/acm/latest/userguide)
-// .
+// Runner service.
+//
+// After you call AssociateCustomDomain and receive a successful response, use the
+// information in the CustomDomainrecord that's returned to add CNAME records to your Domain
+// Name System (DNS). For each mapped domain name, add a mapping to the target App
+// Runner subdomain and one or more certificate validation records. App Runner then
+// performs DNS validation to verify that you own or control the domain name that
+// you associated. App Runner tracks domain validity in a certificate stored in [AWS Certificate Manager (ACM)].
+//
+// [AWS Certificate Manager (ACM)]: https://docs.aws.amazon.com/acm/latest/userguide
 func (c *Client) AssociateCustomDomain(ctx context.Context, params *AssociateCustomDomainInput, optFns ...func(*Options)) (*AssociateCustomDomainOutput, error) {
 	if params == nil {
 		params = &AssociateCustomDomainInput{}
@@ -52,7 +53,9 @@ type AssociateCustomDomainInput struct {
 	ServiceArn *string
 
 	// Set to true to associate the subdomain www.DomainName  with the App Runner
-	// service in addition to the base domain. Default: true
+	// service in addition to the base domain.
+	//
+	// Default: true
 	EnableWWWSubdomain *bool
 
 	noSmithyDocumentSerde
@@ -110,25 +113,25 @@ func (c *Client) addOperationAssociateCustomDomainMiddlewares(stack *middleware.
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -143,13 +146,16 @@ func (c *Client) addOperationAssociateCustomDomainMiddlewares(stack *middleware.
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpAssociateCustomDomainValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opAssociateCustomDomain(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -32,8 +31,10 @@ func (c *Client) CreateDeployment(ctx context.Context, params *CreateDeploymentI
 type CreateDeploymentInput struct {
 
 	// The name of the deployment pattern supported by a given workload. You can use
-	// the ListWorkloadDeploymentPatterns (https://docs.aws.amazon.com/launchwizard/latest/APIReference/API_ListWorkloadDeploymentPatterns.html)
-	// operation to discover supported values for this parameter.
+	// the [ListWorkloadDeploymentPatterns]ListWorkloadDeploymentPatterns operation to discover supported values for
+	// this parameter.
+	//
+	// [ListWorkloadDeploymentPatterns]: https://docs.aws.amazon.com/launchwizard/latest/APIReference/API_ListWorkloadDeploymentPatterns.html
 	//
 	// This member is required.
 	DeploymentPatternName *string
@@ -43,15 +44,22 @@ type CreateDeploymentInput struct {
 	// This member is required.
 	Name *string
 
-	// The settings specified for the deployment. For more information on the
-	// specifications required for creating a deployment, see Workload specifications (https://docs.aws.amazon.com/launchwizard/latest/APIReference/launch-wizard-specifications.html)
-	// .
+	// The settings specified for the deployment. These settings define how to deploy
+	// and configure your resources created by the deployment. For more information
+	// about the specifications required for creating a deployment for a SAP workload,
+	// see [SAP deployment specifications]. To retrieve the specifications required to create a deployment for other
+	// workloads, use the [GetWorkloadDeploymentPattern]GetWorkloadDeploymentPattern operation.
+	//
+	// [GetWorkloadDeploymentPattern]: https://docs.aws.amazon.com/launchwizard/latest/APIReference/API_GetWorkloadDeploymentPattern.html
+	// [SAP deployment specifications]: https://docs.aws.amazon.com/launchwizard/latest/APIReference/launch-wizard-specifications-sap.html
 	//
 	// This member is required.
 	Specifications map[string]string
 
-	// The name of the workload. You can use the ListWorkloadDeploymentPatterns (https://docs.aws.amazon.com/launchwizard/latest/APIReference/API_ListWorkloadDeploymentPatterns.html)
-	// operation to discover supported values for this parameter.
+	// The name of the workload. You can use the [ListWorkloads]ListWorkloads operation to discover
+	// supported values for this parameter.
+	//
+	// [ListWorkloads]: https://docs.aws.amazon.com/launchwizard/latest/APIReference/API_ListWorkloads.html
 	//
 	// This member is required.
 	WorkloadName *string
@@ -61,6 +69,9 @@ type CreateDeploymentInput struct {
 	// required permissions, the error response is DryRunOperation . Otherwise, it is
 	// UnauthorizedOperation .
 	DryRun bool
+
+	// The tags to add to the deployment.
+	Tags map[string]string
 
 	noSmithyDocumentSerde
 }
@@ -98,25 +109,25 @@ func (c *Client) addOperationCreateDeploymentMiddlewares(stack *middleware.Stack
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -131,13 +142,16 @@ func (c *Client) addOperationCreateDeploymentMiddlewares(stack *middleware.Stack
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpCreateDeploymentValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateDeployment(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

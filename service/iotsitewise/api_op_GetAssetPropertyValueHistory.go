@@ -6,22 +6,25 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/iotsitewise/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
-// Gets the history of an asset property's values. For more information, see
-// Querying historical values (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/query-industrial-data.html#historical-values)
-// in the IoT SiteWise User Guide. To identify an asset property, you must specify
-// one of the following:
+// Gets the history of an asset property's values. For more information, see [Querying historical values] in
+// the IoT SiteWise User Guide.
+//
+// To identify an asset property, you must specify one of the following:
+//
 //   - The assetId and propertyId of an asset property.
+//
 //   - A propertyAlias , which is a data stream alias (for example,
 //     /company/windfarm/3/turbine/7/temperature ). To define an asset property's
-//     alias, see UpdateAssetProperty (https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_UpdateAssetProperty.html)
-//     .
+//     alias, see [UpdateAssetProperty].
+//
+// [UpdateAssetProperty]: https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_UpdateAssetProperty.html
+// [Querying historical values]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/query-industrial-data.html#historical-values
 func (c *Client) GetAssetPropertyValueHistory(ctx context.Context, params *GetAssetPropertyValueHistoryInput, optFns ...func(*Options)) (*GetAssetPropertyValueHistoryOutput, error) {
 	if params == nil {
 		params = &GetAssetPropertyValueHistoryInput{}
@@ -48,7 +51,9 @@ type GetAssetPropertyValueHistoryInput struct {
 
 	// The maximum number of results to return for each paginated request. A result
 	// set is returned in the two cases, whichever occurs first.
+	//
 	//   - The size of the result set is equal to 4 MB.
+	//
 	//   - The number of data points in the result set is equal to the value of
 	//   maxResults . The maximum value of maxResults is 20000.
 	MaxResults *int32
@@ -58,8 +63,9 @@ type GetAssetPropertyValueHistoryInput struct {
 
 	// The alias that identifies the property, such as an OPC-UA server data stream
 	// path (for example, /company/windfarm/3/turbine/7/temperature ). For more
-	// information, see Mapping industrial data streams to asset properties (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/connect-data-streams.html)
-	// in the IoT SiteWise User Guide.
+	// information, see [Mapping industrial data streams to asset properties]in the IoT SiteWise User Guide.
+	//
+	// [Mapping industrial data streams to asset properties]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/connect-data-streams.html
 	PropertyAlias *string
 
 	// The ID of the asset property, in UUID format.
@@ -72,7 +78,9 @@ type GetAssetPropertyValueHistoryInput struct {
 	// in seconds in Unix epoch time.
 	StartDate *time.Time
 
-	// The chronological sorting order of the requested information. Default: ASCENDING
+	// The chronological sorting order of the requested information.
+	//
+	// Default: ASCENDING
 	TimeOrdering types.TimeOrdering
 
 	noSmithyDocumentSerde
@@ -117,25 +125,25 @@ func (c *Client) addOperationGetAssetPropertyValueHistoryMiddlewares(stack *midd
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -150,13 +158,16 @@ func (c *Client) addOperationGetAssetPropertyValueHistoryMiddlewares(stack *midd
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addEndpointPrefix_opGetAssetPropertyValueHistoryMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetAssetPropertyValueHistory(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -214,7 +225,9 @@ var _ GetAssetPropertyValueHistoryAPIClient = (*Client)(nil)
 type GetAssetPropertyValueHistoryPaginatorOptions struct {
 	// The maximum number of results to return for each paginated request. A result
 	// set is returned in the two cases, whichever occurs first.
+	//
 	//   - The size of the result set is equal to 4 MB.
+	//
 	//   - The number of data points in the result set is equal to the value of
 	//   maxResults . The maximum value of maxResults is 20000.
 	Limit int32

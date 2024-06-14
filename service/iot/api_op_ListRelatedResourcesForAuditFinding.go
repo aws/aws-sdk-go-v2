@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/iot/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -14,22 +13,33 @@ import (
 
 // The related resources of an Audit finding. The following resources can be
 // returned from calling this API:
+//
 //   - DEVICE_CERTIFICATE
+//
 //   - CA_CERTIFICATE
+//
 //   - IOT_POLICY
+//
 //   - COGNITO_IDENTITY_POOL
+//
 //   - CLIENT_ID
+//
 //   - ACCOUNT_SETTINGS
+//
 //   - ROLE_ALIAS
+//
 //   - IAM_ROLE
+//
 //   - ISSUER_CERTIFICATE
 //
-// This API is similar to DescribeAuditFinding's RelatedResources (https://docs.aws.amazon.com/iot/latest/apireference/API_DescribeAuditFinding.html)
-// but provides pagination and is not limited to 10 resources. When calling
-// DescribeAuditFinding (https://docs.aws.amazon.com/iot/latest/apireference/API_DescribeAuditFinding.html)
-// for the intermediate CA revoked for active device certificates check,
-// RelatedResources will not be populated. You must use this API,
-// ListRelatedResourcesForAuditFinding, to list the certificates.
+// This API is similar to DescribeAuditFinding's [RelatedResources] but provides pagination and is
+// not limited to 10 resources. When calling [DescribeAuditFinding]for the intermediate CA revoked for
+// active device certificates check, RelatedResources will not be populated. You
+// must use this API, ListRelatedResourcesForAuditFinding, to list the
+// certificates.
+//
+// [RelatedResources]: https://docs.aws.amazon.com/iot/latest/apireference/API_DescribeAuditFinding.html
+// [DescribeAuditFinding]: https://docs.aws.amazon.com/iot/latest/apireference/API_DescribeAuditFinding.html
 func (c *Client) ListRelatedResourcesForAuditFinding(ctx context.Context, params *ListRelatedResourcesForAuditFindingInput, optFns ...func(*Options)) (*ListRelatedResourcesForAuditFindingOutput, error) {
 	if params == nil {
 		params = &ListRelatedResourcesForAuditFindingInput{}
@@ -99,25 +109,25 @@ func (c *Client) addOperationListRelatedResourcesForAuditFindingMiddlewares(stac
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -132,13 +142,16 @@ func (c *Client) addOperationListRelatedResourcesForAuditFindingMiddlewares(stac
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpListRelatedResourcesForAuditFindingValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListRelatedResourcesForAuditFinding(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

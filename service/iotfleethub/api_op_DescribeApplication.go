@@ -6,15 +6,12 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/iotfleethub/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Gets information about a Fleet Hub for AWS IoT Device Management web
-// application. Fleet Hub for AWS IoT Device Management is in public preview and is
-// subject to change.
+// Gets information about a Fleet Hub for IoT Device Management web application.
 func (c *Client) DescribeApplication(ctx context.Context, params *DescribeApplicationInput, optFns ...func(*Options)) (*DescribeApplicationOutput, error) {
 	if params == nil {
 		params = &DescribeApplicationInput{}
@@ -77,8 +74,8 @@ type DescribeApplicationOutput struct {
 	// This member is required.
 	ApplicationUrl *string
 
-	// The ARN of the role that the web application assumes when it interacts with AWS
-	// IoT Core.
+	// The ARN of the role that the web application assumes when it interacts with
+	// Amazon Web Services IoT Core.
 	//
 	// This member is required.
 	RoleArn *string
@@ -86,7 +83,9 @@ type DescribeApplicationOutput struct {
 	// An optional description of the web application.
 	ApplicationDescription *string
 
-	// A message indicating why the DescribeApplication API failed.
+	// A message that explains any failures included in the applicationState response
+	// field. This message explains failures in the CreateApplication and
+	// DeleteApplication actions.
 	ErrorMessage *string
 
 	// The Id of the single sign-on client that you use to authenticate and authorize
@@ -125,25 +124,25 @@ func (c *Client) addOperationDescribeApplicationMiddlewares(stack *middleware.St
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -158,13 +157,16 @@ func (c *Client) addOperationDescribeApplicationMiddlewares(stack *middleware.St
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDescribeApplicationValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeApplication(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

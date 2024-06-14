@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/connect/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -14,15 +13,19 @@ import (
 
 // Processes chat integration events from Amazon Web Services or external
 // integrations to Amazon Connect. A chat integration event includes:
+//
 //   - SourceId, DestinationId, and Subtype: a set of identifiers, uniquely
 //     representing a chat
+//
 //   - ChatEvent: details of the chat action to perform such as sending a message,
 //     event, or disconnecting from a chat
 //
 // When a chat integration event is sent with chat identifiers that do not map to
 // an active chat contact, a new chat contact is also created before handling chat
-// action. Access to this API is currently restricted to Amazon Pinpoint for
-// supporting SMS integration.
+// action.
+//
+// Access to this API is currently restricted to Amazon Pinpoint for supporting
+// SMS integration.
 func (c *Client) SendChatIntegrationEvent(ctx context.Context, params *SendChatIntegrationEventInput, optFns ...func(*Options)) (*SendChatIntegrationEventOutput, error) {
 	if params == nil {
 		params = &SendChatIntegrationEventInput{}
@@ -65,6 +68,7 @@ type SendChatIntegrationEventInput struct {
 	NewSessionDetails *types.NewSessionDetails
 
 	// Classification of a channel. This is used in part to uniquely identify chat.
+	//
 	// Valid value: ["connect:sms"]
 	Subtype *string
 
@@ -109,25 +113,25 @@ func (c *Client) addOperationSendChatIntegrationEventMiddlewares(stack *middlewa
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -142,13 +146,16 @@ func (c *Client) addOperationSendChatIntegrationEventMiddlewares(stack *middlewa
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpSendChatIntegrationEventValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opSendChatIntegrationEvent(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

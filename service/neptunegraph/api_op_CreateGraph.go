@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/neptunegraph/types"
 	"github.com/aws/smithy-go/middleware"
 	"github.com/aws/smithy-go/ptr"
@@ -32,9 +31,11 @@ func (c *Client) CreateGraph(ctx context.Context, params *CreateGraphInput, optF
 
 type CreateGraphInput struct {
 
-	// A name for the new Neptune Analytics graph to be created. The name must contain
-	// from 1 to 63 letters, numbers, or hyphens, and its first character must be a
-	// letter. It cannot end with a hyphen or contain two consecutive hyphens.
+	// A name for the new Neptune Analytics graph to be created.
+	//
+	// The name must contain from 1 to 63 letters, numbers, or hyphens, and its first
+	// character must be a letter. It cannot end with a hyphen or contain two
+	// consecutive hyphens.
 	//
 	// This member is required.
 	GraphName *string
@@ -57,6 +58,9 @@ type CreateGraphInput struct {
 	PublicConnectivity *bool
 
 	// The number of replicas in other AZs. Min =0, Max = 2, Default = 1.
+	//
+	// Additional charges equivalent to the m-NCUs selected for the graph apply for
+	// each replica.
 	ReplicaCount *int32
 
 	// Adds metadata tags to the new graph. These tags can also be used with cost
@@ -87,9 +91,11 @@ type CreateGraphOutput struct {
 	// This member is required.
 	Id *string
 
-	// The graph name. For example: my-graph-1 . The name must contain from 1 to 63
-	// letters, numbers, or hyphens, and its first character must be a letter. It
-	// cannot end with a hyphen or contain two consecutive hyphens.
+	// The graph name. For example: my-graph-1 .
+	//
+	// The name must contain from 1 to 63 letters, numbers, or hyphens, and its first
+	// character must be a letter. It cannot end with a hyphen or contain two
+	// consecutive hyphens.
 	//
 	// This member is required.
 	Name *string
@@ -111,14 +117,21 @@ type CreateGraphOutput struct {
 	KmsKeyIdentifier *string
 
 	// The provisioned memory-optimized Neptune Capacity Units (m-NCUs) to use for the
-	// graph. Min = 128
+	// graph.
+	//
+	// Min = 128
 	ProvisionedMemory *int32
 
 	// Specifies whether or not the graph can be reachable over the internet. All
 	// access to graphs is IAM authenticated.
+	//
+	// If enabling public connectivity for the first time, there will be a delay while
+	// it is enabled.
 	PublicConnectivity *bool
 
 	// The number of replicas in other AZs.
+	//
+	// Default: If not specified, the default value is 1.
 	ReplicaCount *int32
 
 	// The ID of the source graph.
@@ -162,25 +175,25 @@ func (c *Client) addOperationCreateGraphMiddlewares(stack *middleware.Stack, opt
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -195,13 +208,16 @@ func (c *Client) addOperationCreateGraphMiddlewares(stack *middleware.Stack, opt
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpCreateGraphValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateGraph(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

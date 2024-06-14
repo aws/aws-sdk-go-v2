@@ -6,15 +6,19 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// The AcceptQualificationRequest operation approves a Worker's request for a
-// Qualification. Only the owner of the Qualification type can grant a
-// Qualification request for that type. A successful request for the
-// AcceptQualificationRequest operation returns with no errors and an empty body.
+//	The AcceptQualificationRequest operation approves a Worker's request for a
+//
+// Qualification.
+//
+// Only the owner of the Qualification type can grant a Qualification request for
+// that type.
+//
+// A successful request for the AcceptQualificationRequest operation returns with
+// no errors and an empty body.
 func (c *Client) AcceptQualificationRequest(ctx context.Context, params *AcceptQualificationRequestInput, optFns ...func(*Options)) (*AcceptQualificationRequestOutput, error) {
 	if params == nil {
 		params = &AcceptQualificationRequestInput{}
@@ -38,7 +42,7 @@ type AcceptQualificationRequestInput struct {
 	// This member is required.
 	QualificationRequestId *string
 
-	// The value of the Qualification. You can omit this value if you are using the
+	//  The value of the Qualification. You can omit this value if you are using the
 	// presence or absence of the Qualification as the basis for a HIT requirement.
 	IntegerValue *int32
 
@@ -74,25 +78,25 @@ func (c *Client) addOperationAcceptQualificationRequestMiddlewares(stack *middle
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -107,13 +111,16 @@ func (c *Client) addOperationAcceptQualificationRequestMiddlewares(stack *middle
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpAcceptQualificationRequestValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opAcceptQualificationRequest(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

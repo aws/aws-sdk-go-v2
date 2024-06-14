@@ -7,8 +7,9 @@ import (
 	"time"
 )
 
-// An access control entry allows or denies Active Directory groups based on their
-// security identifiers (SIDs) from enrolling and/or autoenrolling with the
+//	An access control entry allows or denies Active Directory groups based on
+//
+// their security identifiers (SIDs) from enrolling and/or autoenrolling with the
 // template.
 type AccessControlEntry struct {
 
@@ -27,8 +28,9 @@ type AccessControlEntry struct {
 	// starts with "S-".
 	GroupSecurityIdentifier *string
 
-	// The Amazon Resource Name (ARN) that was returned when you called CreateTemplate (https://docs.aws.amazon.com/pca-connector-ad/latest/APIReference/API_CreateTemplate.html)
-	// .
+	// The Amazon Resource Name (ARN) that was returned when you called [CreateTemplate].
+	//
+	// [CreateTemplate]: https://docs.aws.amazon.com/pca-connector-ad/latest/APIReference/API_CreateTemplate.html
 	TemplateArn *string
 
 	// The date and time that the Access Control Entry was updated.
@@ -57,8 +59,9 @@ type AccessControlEntrySummary struct {
 	// starts with "S-".
 	GroupSecurityIdentifier *string
 
-	// The Amazon Resource Name (ARN) that was returned when you called CreateTemplate (https://docs.aws.amazon.com/pca-connector-ad/latest/APIReference/API_CreateTemplate.html)
-	// .
+	// The Amazon Resource Name (ARN) that was returned when you called [CreateTemplate].
+	//
+	// [CreateTemplate]: https://docs.aws.amazon.com/pca-connector-ad/latest/APIReference/API_CreateTemplate.html
 	TemplateArn *string
 
 	// The date and time that the Access Control Entry was updated.
@@ -67,8 +70,9 @@ type AccessControlEntrySummary struct {
 	noSmithyDocumentSerde
 }
 
-// Allow or deny permissions for an Active Directory group to enroll or autoenroll
-// certificates for a template.
+//	Allow or deny permissions for an Active Directory group to enroll or
+//
+// autoenroll certificates for a template.
 type AccessRights struct {
 
 	// Allow or deny an Active Directory group from autoenrolling certificates issued
@@ -164,8 +168,9 @@ type CertificateValidity struct {
 // domain-joined users and machines managed with Active Directory.
 type Connector struct {
 
-	// The Amazon Resource Name (ARN) that was returned when you called CreateConnector (https://docs.aws.amazon.com/pca-connector-ad/latest/APIReference/API_CreateConnector.html)
-	// .
+	// The Amazon Resource Name (ARN) that was returned when you called [CreateConnector].
+	//
+	// [CreateConnector]: https://docs.aws.amazon.com/pca-connector-ad/latest/APIReference/API_CreateConnector.html
 	Arn *string
 
 	// The Amazon Resource Name (ARN) of the certificate authority being used.
@@ -200,8 +205,9 @@ type Connector struct {
 // belonging to an Amazon Web Services account.
 type ConnectorSummary struct {
 
-	// The Amazon Resource Name (ARN) that was returned when you called CreateConnector (https://docs.aws.amazon.com/pca-connector-ad/latest/APIReference/API_CreateConnector.html)
-	// .
+	//  The Amazon Resource Name (ARN) that was returned when you called [CreateConnector].
+	//
+	// [CreateConnector]: https://docs.aws.amazon.com/pca-connector-ad/latest/APIReference/API_CreateConnector.html
 	Arn *string
 
 	// The Amazon Resource Name (ARN) of the certificate authority being used.
@@ -263,9 +269,9 @@ type DirectoryRegistration struct {
 // service with the Active Directory.
 type DirectoryRegistrationSummary struct {
 
-	// The Amazon Resource Name (ARN) that was returned when you called
-	// CreateDirectoryRegistration (https://docs.aws.amazon.com/pca-connector-ad/latest/APIReference/API_CreateDirectoryRegistration.html)
-	// .
+	// The Amazon Resource Name (ARN) that was returned when you called [CreateDirectoryRegistration].
+	//
+	// [CreateDirectoryRegistration]: https://docs.aws.amazon.com/pca-connector-ad/latest/APIReference/API_CreateDirectoryRegistration.html
 	Arn *string
 
 	// The date and time that the directory registration was created.
@@ -699,17 +705,17 @@ type PrivateKeyFlagsV4 struct {
 // Directory.
 type ServicePrincipalName struct {
 
-	// The Amazon Resource Name (ARN) that was returned when you called
-	// CreateConnector.html (https://docs.aws.amazon.com/pca-connector-ad/latest/APIReference/API_CreateConnector.html)
-	// .
+	// The Amazon Resource Name (ARN) that was returned when you called [CreateConnector.html].
+	//
+	// [CreateConnector.html]: https://docs.aws.amazon.com/pca-connector-ad/latest/APIReference/API_CreateConnector.html
 	ConnectorArn *string
 
 	// The date and time that the service principal name was created.
 	CreatedAt *time.Time
 
-	// The Amazon Resource Name (ARN) that was returned when you called
-	// CreateDirectoryRegistration (https://docs.aws.amazon.com/pca-connector-ad/latest/APIReference/API_CreateDirectoryRegistration.html)
-	// .
+	// The Amazon Resource Name (ARN) that was returned when you called [CreateDirectoryRegistration].
+	//
+	// [CreateDirectoryRegistration]: https://docs.aws.amazon.com/pca-connector-ad/latest/APIReference/API_CreateDirectoryRegistration.html
 	DirectoryRegistrationArn *string
 
 	// The status of a service principal name.
@@ -729,16 +735,17 @@ type ServicePrincipalName struct {
 // Directory.
 type ServicePrincipalNameSummary struct {
 
-	// The Amazon Resource Name (ARN) that was returned when you called CreateConnector (https://docs.aws.amazon.com/pca-connector-ad/latest/APIReference/API_CreateConnector.html)
-	// .
+	// The Amazon Resource Name (ARN) that was returned when you called [CreateConnector].
+	//
+	// [CreateConnector]: https://docs.aws.amazon.com/pca-connector-ad/latest/APIReference/API_CreateConnector.html
 	ConnectorArn *string
 
 	// The date and time that the service principal name was created.
 	CreatedAt *time.Time
 
-	// The Amazon Resource Name (ARN) that was returned when you called
-	// CreateDirectoryRegistration (https://docs.aws.amazon.com/pca-connector-ad/latest/APIReference/API_CreateDirectoryRegistration.html)
-	// .
+	// The Amazon Resource Name (ARN) that was returned when you called [CreateDirectoryRegistration].
+	//
+	// [CreateDirectoryRegistration]: https://docs.aws.amazon.com/pca-connector-ad/latest/APIReference/API_CreateDirectoryRegistration.html
 	DirectoryRegistrationArn *string
 
 	// The status of a service principal name.
@@ -888,12 +895,14 @@ type SubjectNameFlagsV4 struct {
 // group membership.
 type Template struct {
 
-	// The Amazon Resource Name (ARN) that was returned when you called CreateTemplate (https://docs.aws.amazon.com/pca-connector-ad/latest/APIReference/API_CreateTemplate.html)
-	// .
+	// The Amazon Resource Name (ARN) that was returned when you called [CreateTemplate].
+	//
+	// [CreateTemplate]: https://docs.aws.amazon.com/pca-connector-ad/latest/APIReference/API_CreateTemplate.html
 	Arn *string
 
-	// The Amazon Resource Name (ARN) that was returned when you called CreateConnector (https://docs.aws.amazon.com/pca-connector-ad/latest/APIReference/API_CreateConnector.html)
-	// .
+	//  The Amazon Resource Name (ARN) that was returned when you called [CreateConnector].
+	//
+	// [CreateConnector]: https://docs.aws.amazon.com/pca-connector-ad/latest/APIReference/API_CreateConnector.html
 	ConnectorArn *string
 
 	// The date and time that the template was created.
@@ -1004,12 +1013,14 @@ type TemplateRevision struct {
 // group membership.
 type TemplateSummary struct {
 
-	// The Amazon Resource Name (ARN) that was returned when you called CreateTemplate (https://docs.aws.amazon.com/pca-connector-ad/latest/APIReference/API_CreateTemplate.html)
-	// .
+	// The Amazon Resource Name (ARN) that was returned when you called [CreateTemplate].
+	//
+	// [CreateTemplate]: https://docs.aws.amazon.com/pca-connector-ad/latest/APIReference/API_CreateTemplate.html
 	Arn *string
 
-	// The Amazon Resource Name (ARN) that was returned when you called CreateConnector (https://docs.aws.amazon.com/pca-connector-ad/latest/APIReference/API_CreateConnector.html)
-	// .
+	//  The Amazon Resource Name (ARN) that was returned when you called [CreateConnector].
+	//
+	// [CreateConnector]: https://docs.aws.amazon.com/pca-connector-ad/latest/APIReference/API_CreateConnector.html
 	ConnectorArn *string
 
 	// The date and time that the template was created.

@@ -6,13 +6,12 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockagent/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Start a new ingestion job
+// Begins an ingestion job, in which a data source is added to a knowledge base.
 func (c *Client) StartIngestionJob(ctx context.Context, params *StartIngestionJobInput, optFns ...func(*Options)) (*StartIngestionJobOutput, error) {
 	if params == nil {
 		params = &StartIngestionJobInput{}
@@ -30,20 +29,24 @@ func (c *Client) StartIngestionJob(ctx context.Context, params *StartIngestionJo
 
 type StartIngestionJobInput struct {
 
-	// Identifier for a resource.
+	// The unique identifier of the data source to ingest.
 	//
 	// This member is required.
 	DataSourceId *string
 
-	// Identifier for a resource.
+	// The unique identifier of the knowledge base to which to add the data source.
 	//
 	// This member is required.
 	KnowledgeBaseId *string
 
-	// Client specified token used for idempotency checks
+	// A unique, case-sensitive identifier to ensure that the API request completes no
+	// more than one time. If this token matches a previous request, Amazon Bedrock
+	// ignores the request, but does not return an error. For more information, see [Ensuring idempotency].
+	//
+	// [Ensuring idempotency]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
 	ClientToken *string
 
-	// Description of the Resource.
+	// A description of the ingestion job.
 	Description *string
 
 	noSmithyDocumentSerde
@@ -51,7 +54,7 @@ type StartIngestionJobInput struct {
 
 type StartIngestionJobOutput struct {
 
-	// Contains the information of an ingestion job.
+	// An object containing information about the ingestion job.
 	//
 	// This member is required.
 	IngestionJob *types.IngestionJob
@@ -84,25 +87,25 @@ func (c *Client) addOperationStartIngestionJobMiddlewares(stack *middleware.Stac
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -117,6 +120,9 @@ func (c *Client) addOperationStartIngestionJobMiddlewares(stack *middleware.Stac
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opStartIngestionJobMiddleware(stack, options); err != nil {
 		return err
 	}
@@ -126,7 +132,7 @@ func (c *Client) addOperationStartIngestionJobMiddlewares(stack *middleware.Stac
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opStartIngestionJob(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

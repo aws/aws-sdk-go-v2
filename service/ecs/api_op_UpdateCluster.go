@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/ecs/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -44,13 +43,16 @@ type UpdateClusterInput struct {
 	// namespace. This setting only applies to new services that set the enabled
 	// parameter to true in the ServiceConnectConfiguration . You can set the namespace
 	// of each service individually in the ServiceConnectConfiguration to override
-	// this default parameter. Tasks that run in a namespace can use short names to
-	// connect to services in the namespace. Tasks can connect to services across all
-	// of the clusters in the namespace. Tasks connect through a managed proxy
-	// container that collects logs and metrics for increased visibility. Only the
-	// tasks that Amazon ECS services create are supported with Service Connect. For
-	// more information, see Service Connect (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-connect.html)
-	// in the Amazon Elastic Container Service Developer Guide.
+	// this default parameter.
+	//
+	// Tasks that run in a namespace can use short names to connect to services in the
+	// namespace. Tasks can connect to services across all of the clusters in the
+	// namespace. Tasks connect through a managed proxy container that collects logs
+	// and metrics for increased visibility. Only the tasks that Amazon ECS services
+	// create are supported with Service Connect. For more information, see [Service Connect]in the
+	// Amazon Elastic Container Service Developer Guide.
+	//
+	// [Service Connect]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/service-connect.html
 	ServiceConnectDefaults *types.ClusterServiceConnectDefaultsRequest
 
 	// The cluster settings for your cluster.
@@ -92,25 +94,25 @@ func (c *Client) addOperationUpdateClusterMiddlewares(stack *middleware.Stack, o
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -125,13 +127,16 @@ func (c *Client) addOperationUpdateClusterMiddlewares(stack *middleware.Stack, o
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpUpdateClusterValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateCluster(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

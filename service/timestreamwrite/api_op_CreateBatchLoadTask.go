@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	internalEndpointDiscovery "github.com/aws/aws-sdk-go-v2/service/internal/endpoint-discovery"
 	"github.com/aws/aws-sdk-go-v2/service/timestreamwrite/types"
 	"github.com/aws/smithy-go/middleware"
@@ -18,11 +17,11 @@ import (
 // source to target is defined in a batch load task. Errors and events are written
 // to a report at an S3 location. For the report, if the KMS key is not specified,
 // the report will be encrypted with an S3 managed key when SSE_S3 is the option.
-// Otherwise an error is thrown. For more information, see Amazon Web Services
-// managed keys (https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#aws-managed-cmk)
-// . Service quotas apply (https://docs.aws.amazon.com/timestream/latest/developerguide/ts-limits.html)
-// . For details, see code sample (https://docs.aws.amazon.com/timestream/latest/developerguide/code-samples.create-batch-load.html)
-// .
+// Otherwise an error is thrown. For more information, see [Amazon Web Services managed keys]. [Service quotas apply]. For details, see [code sample].
+//
+// [Service quotas apply]: https://docs.aws.amazon.com/timestream/latest/developerguide/ts-limits.html
+// [code sample]: https://docs.aws.amazon.com/timestream/latest/developerguide/code-samples.create-batch-load.html
+// [Amazon Web Services managed keys]: https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#aws-managed-cmk
 func (c *Client) CreateBatchLoadTask(ctx context.Context, params *CreateBatchLoadTaskInput, optFns ...func(*Options)) (*CreateBatchLoadTaskOutput, error) {
 	if params == nil {
 		params = &CreateBatchLoadTaskInput{}
@@ -108,25 +107,25 @@ func (c *Client) addOperationCreateBatchLoadTaskMiddlewares(stack *middleware.St
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -144,6 +143,9 @@ func (c *Client) addOperationCreateBatchLoadTaskMiddlewares(stack *middleware.St
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opCreateBatchLoadTaskMiddleware(stack, options); err != nil {
 		return err
 	}
@@ -153,7 +155,7 @@ func (c *Client) addOperationCreateBatchLoadTaskMiddlewares(stack *middleware.St
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateBatchLoadTask(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

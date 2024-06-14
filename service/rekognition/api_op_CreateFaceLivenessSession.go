@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/rekognition/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -14,13 +13,16 @@ import (
 
 // This API operation initiates a Face Liveness session. It returns a SessionId ,
 // which you can use to start streaming Face Liveness video and get the results for
-// a Face Liveness session. You can use the OutputConfig option in the Settings
-// parameter to provide an Amazon S3 bucket location. The Amazon S3 bucket stores
-// reference images and audit images. If no Amazon S3 bucket is defined, raw bytes
-// are sent instead. You can use AuditImagesLimit to limit the number of audit
-// images returned when GetFaceLivenessSessionResults is called. This number is
-// between 0 and 4. By default, it is set to 0. The limit is best effort and based
-// on the duration of the selfie-video.
+// a Face Liveness session.
+//
+// You can use the OutputConfig option in the Settings parameter to provide an
+// Amazon S3 bucket location. The Amazon S3 bucket stores reference images and
+// audit images. If no Amazon S3 bucket is defined, raw bytes are sent instead.
+//
+// You can use AuditImagesLimit to limit the number of audit images returned when
+// GetFaceLivenessSessionResults is called. This number is between 0 and 4. By
+// default, it is set to 0. The limit is best effort and based on the duration of
+// the selfie-video.
 func (c *Client) CreateFaceLivenessSession(ctx context.Context, params *CreateFaceLivenessSessionInput, optFns ...func(*Options)) (*CreateFaceLivenessSessionOutput, error) {
 	if params == nil {
 		params = &CreateFaceLivenessSessionInput{}
@@ -44,7 +46,7 @@ type CreateFaceLivenessSessionInput struct {
 	// the same session multiple times.
 	ClientRequestToken *string
 
-	// The identifier for your AWS Key Management Service key (AWS KMS key). Used to
+	//  The identifier for your AWS Key Management Service key (AWS KMS key). Used to
 	// encrypt audit images and reference images.
 	KmsKeyId *string
 
@@ -57,7 +59,11 @@ type CreateFaceLivenessSessionInput struct {
 
 type CreateFaceLivenessSessionOutput struct {
 
-	// A unique 128-bit UUID identifying a Face Liveness session.
+	// A unique 128-bit UUID identifying a Face Liveness session. A new sessionID must
+	// be used for every Face Liveness check. If a given sessionID is used for
+	// subsequent Face Liveness checks, the checks will fail. Additionally, a SessionId
+	// expires 3 minutes after it's sent, making all Liveness data associated with the
+	// session (e.g., sessionID, reference image, audit images, etc.) unavailable.
 	//
 	// This member is required.
 	SessionId *string
@@ -90,25 +96,25 @@ func (c *Client) addOperationCreateFaceLivenessSessionMiddlewares(stack *middlew
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -123,13 +129,16 @@ func (c *Client) addOperationCreateFaceLivenessSessionMiddlewares(stack *middlew
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpCreateFaceLivenessSessionValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateFaceLivenessSession(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

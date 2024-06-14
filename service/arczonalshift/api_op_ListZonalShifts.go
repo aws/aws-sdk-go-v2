@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/arczonalshift/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -16,9 +15,12 @@ import (
 // Recovery Controller in your Amazon Web Services account in this Amazon Web
 // Services Region. ListZonalShifts returns customer-started zonal shifts, as well
 // as practice run zonal shifts that Route 53 ARC started on your behalf for zonal
-// autoshift. The ListZonalShifts operation does not list autoshifts. For more
-// information about listing autoshifts, see ">ListAutoshifts (https://docs.aws.amazon.com/arc-zonal-shift/latest/api/API_ListAutoshifts.html)
-// .
+// autoshift.
+//
+// The ListZonalShifts operation does not list autoshifts. For more information
+// about listing autoshifts, see [">ListAutoshifts].
+//
+// [">ListAutoshifts]: https://docs.aws.amazon.com/arc-zonal-shift/latest/api/API_ListAutoshifts.html
 func (c *Client) ListZonalShifts(ctx context.Context, params *ListZonalShiftsInput, optFns ...func(*Options)) (*ListZonalShiftsOutput, error) {
 	if params == nil {
 		params = &ListZonalShiftsInput{}
@@ -49,10 +51,14 @@ type ListZonalShiftsInput struct {
 	// identifier is the Amazon Resource Name (ARN) for the resource.
 	ResourceIdentifier *string
 
-	// A status for a zonal shift. The Status for a zonal shift can have one of the
-	// following values:
+	// A status for a zonal shift.
+	//
+	// The Status for a zonal shift can have one of the following values:
+	//
 	//   - ACTIVE: The zonal shift has been started and active.
+	//
 	//   - EXPIRED: The zonal shift has expired (the expiry time was exceeded).
+	//
 	//   - CANCELED: The zonal shift was canceled.
 	Status types.ZonalShiftStatus
 
@@ -98,25 +104,25 @@ func (c *Client) addOperationListZonalShiftsMiddlewares(stack *middleware.Stack,
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -131,10 +137,13 @@ func (c *Client) addOperationListZonalShiftsMiddlewares(stack *middleware.Stack,
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListZonalShifts(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

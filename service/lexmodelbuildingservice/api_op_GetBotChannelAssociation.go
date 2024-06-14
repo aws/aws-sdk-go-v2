@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/lexmodelbuildingservice/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -14,8 +13,9 @@ import (
 )
 
 // Returns information about the association between an Amazon Lex bot and a
-// messaging platform. This operation requires permissions for the
-// lex:GetBotChannelAssociation action.
+// messaging platform.
+//
+// This operation requires permissions for the lex:GetBotChannelAssociation action.
 func (c *Client) GetBotChannelAssociation(ctx context.Context, params *GetBotChannelAssociationInput, optFns ...func(*Options)) (*GetBotChannelAssociationOutput, error) {
 	if params == nil {
 		params = &GetBotChannelAssociationInput{}
@@ -80,8 +80,11 @@ type GetBotChannelAssociationOutput struct {
 	Name *string
 
 	// The status of the bot channel.
+	//
 	//   - CREATED - The channel has been created and is ready for use.
+	//
 	//   - IN_PROGRESS - Channel creation is in progress.
+	//
 	//   - FAILED - There was an error creating the channel. For information about the
 	//   reason for the failure, see the failureReason field.
 	Status types.ChannelStatus
@@ -117,25 +120,25 @@ func (c *Client) addOperationGetBotChannelAssociationMiddlewares(stack *middlewa
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -150,13 +153,16 @@ func (c *Client) addOperationGetBotChannelAssociationMiddlewares(stack *middlewa
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpGetBotChannelAssociationValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetBotChannelAssociation(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

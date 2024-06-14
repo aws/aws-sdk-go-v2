@@ -6,18 +6,20 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/forecast/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns a list of dataset import jobs created using the CreateDatasetImportJob (https://docs.aws.amazon.com/forecast/latest/dg/API_CreateDatasetImportJob.html)
-// operation. For each import job, this operation returns a summary of its
-// properties, including its Amazon Resource Name (ARN). You can retrieve the
-// complete set of properties by using the ARN with the DescribeDatasetImportJob (https://docs.aws.amazon.com/forecast/latest/dg/API_DescribeDatasetImportJob.html)
-// operation. You can filter the list by providing an array of Filter (https://docs.aws.amazon.com/forecast/latest/dg/API_Filter.html)
-// objects.
+// Returns a list of dataset import jobs created using the [CreateDatasetImportJob] operation. For each
+// import job, this operation returns a summary of its properties, including its
+// Amazon Resource Name (ARN). You can retrieve the complete set of properties by
+// using the ARN with the [DescribeDatasetImportJob]operation. You can filter the list by providing an array
+// of [Filter]objects.
+//
+// [CreateDatasetImportJob]: https://docs.aws.amazon.com/forecast/latest/dg/API_CreateDatasetImportJob.html
+// [DescribeDatasetImportJob]: https://docs.aws.amazon.com/forecast/latest/dg/API_DescribeDatasetImportJob.html
+// [Filter]: https://docs.aws.amazon.com/forecast/latest/dg/API_Filter.html
 func (c *Client) ListDatasetImportJobs(ctx context.Context, params *ListDatasetImportJobsInput, optFns ...func(*Options)) (*ListDatasetImportJobsOutput, error) {
 	if params == nil {
 		params = &ListDatasetImportJobsInput{}
@@ -38,17 +40,23 @@ type ListDatasetImportJobsInput struct {
 	// An array of filters. For each filter, you provide a condition and a match
 	// statement. The condition is either IS or IS_NOT , which specifies whether to
 	// include or exclude the datasets that match the statement from the list,
-	// respectively. The match statement consists of a key and a value. Filter
-	// properties
+	// respectively. The match statement consists of a key and a value.
+	//
+	// Filter properties
+	//
 	//   - Condition - The condition to apply. Valid values are IS and IS_NOT . To
 	//   include the datasets that match the statement, specify IS . To exclude
 	//   matching datasets, specify IS_NOT .
+	//
 	//   - Key - The name of the parameter to filter on. Valid values are DatasetArn
 	//   and Status .
+	//
 	//   - Value - The value to match.
+	//
 	// For example, to list all dataset import jobs whose status is ACTIVE, you
-	// specify the following filter: "Filters": [ { "Condition": "IS", "Key":
-	// "Status", "Value": "ACTIVE" } ]
+	// specify the following filter:
+	//
+	//     "Filters": [ { "Condition": "IS", "Key": "Status", "Value": "ACTIVE" } ]
 	Filters []types.Filter
 
 	// The number of items to return in the response.
@@ -99,25 +107,25 @@ func (c *Client) addOperationListDatasetImportJobsMiddlewares(stack *middleware.
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -132,13 +140,16 @@ func (c *Client) addOperationListDatasetImportJobsMiddlewares(stack *middleware.
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpListDatasetImportJobsValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListDatasetImportJobs(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/cloudfront/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -14,12 +13,15 @@ import (
 
 // Creates a new origin access control in CloudFront. After you create an origin
 // access control, you can add it to an origin in a CloudFront distribution so that
-// CloudFront sends authenticated (signed) requests to the origin. This makes it
-// possible to block public access to the origin, allowing viewers (users) to
-// access the origin's content only through CloudFront. For more information about
-// using a CloudFront origin access control, see Restricting access to an Amazon
-// Web Services origin (https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/private-content-restricting-access-to-origin.html)
-// in the Amazon CloudFront Developer Guide.
+// CloudFront sends authenticated (signed) requests to the origin.
+//
+// This makes it possible to block public access to the origin, allowing viewers
+// (users) to access the origin's content only through CloudFront.
+//
+// For more information about using a CloudFront origin access control, see [Restricting access to an Amazon Web Services origin] in
+// the Amazon CloudFront Developer Guide.
+//
+// [Restricting access to an Amazon Web Services origin]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/private-content-restricting-access-to-origin.html
 func (c *Client) CreateOriginAccessControl(ctx context.Context, params *CreateOriginAccessControlInput, optFns ...func(*Options)) (*CreateOriginAccessControlOutput, error) {
 	if params == nil {
 		params = &CreateOriginAccessControlInput{}
@@ -84,25 +86,25 @@ func (c *Client) addOperationCreateOriginAccessControlMiddlewares(stack *middlew
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -117,13 +119,16 @@ func (c *Client) addOperationCreateOriginAccessControlMiddlewares(stack *middlew
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpCreateOriginAccessControlValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateOriginAccessControl(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

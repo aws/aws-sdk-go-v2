@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -15,8 +14,9 @@ import (
 // Creates an association between the source and the destination. A source can be
 // associated with multiple destinations, and a destination can be associated with
 // multiple sources. An association is a lineage tracking entity. For more
-// information, see Amazon SageMaker ML Lineage Tracking (https://docs.aws.amazon.com/sagemaker/latest/dg/lineage-tracking.html)
-// .
+// information, see [Amazon SageMaker ML Lineage Tracking].
+//
+// [Amazon SageMaker ML Lineage Tracking]: https://docs.aws.amazon.com/sagemaker/latest/dg/lineage-tracking.html
 func (c *Client) AddAssociation(ctx context.Context, params *AddAssociationInput, optFns ...func(*Options)) (*AddAssociationOutput, error) {
 	if params == nil {
 		params = &AddAssociationInput{}
@@ -46,14 +46,18 @@ type AddAssociationInput struct {
 
 	// The type of association. The following are suggested uses for each type. Amazon
 	// SageMaker places no restrictions on their use.
+	//
 	//   - ContributedTo - The source contributed to the destination or had a part in
 	//   enabling the destination. For example, the training data contributed to the
 	//   training job.
+	//
 	//   - AssociatedWith - The source is connected to the destination. For example,
 	//   an approval workflow is associated with a model deployment.
+	//
 	//   - DerivedFrom - The destination is a modification of the source. For example,
 	//   a digest output of a channel input for a processing job is derived from the
 	//   original inputs.
+	//
 	//   - Produced - The source generated the destination. For example, a training
 	//   job produced a model artifact.
 	AssociationType types.AssociationEdgeType
@@ -97,25 +101,25 @@ func (c *Client) addOperationAddAssociationMiddlewares(stack *middleware.Stack, 
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -130,13 +134,16 @@ func (c *Client) addOperationAddAssociationMiddlewares(stack *middleware.Stack, 
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpAddAssociationValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opAddAssociation(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

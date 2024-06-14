@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	glaciercust "github.com/aws/aws-sdk-go-v2/service/glacier/internal/customizations"
 	"github.com/aws/aws-sdk-go-v2/service/glacier/types"
 	"github.com/aws/smithy-go/middleware"
@@ -16,10 +15,13 @@ import (
 // This operation sets and then enacts a data retrieval policy in the region
 // specified in the PUT request. You can set one policy per region for an AWS
 // account. The policy is enacted within a few minutes of a successful PUT
-// operation. The set policy operation does not affect retrieval jobs that were in
-// progress before the policy was enacted. For more information about data
-// retrieval policies, see Amazon Glacier Data Retrieval Policies (https://docs.aws.amazon.com/amazonglacier/latest/dev/data-retrieval-policy.html)
-// .
+// operation.
+//
+// The set policy operation does not affect retrieval jobs that were in progress
+// before the policy was enacted. For more information about data retrieval
+// policies, see [Amazon Glacier Data Retrieval Policies].
+//
+// [Amazon Glacier Data Retrieval Policies]: https://docs.aws.amazon.com/amazonglacier/latest/dev/data-retrieval-policy.html
 func (c *Client) SetDataRetrievalPolicy(ctx context.Context, params *SetDataRetrievalPolicyInput, optFns ...func(*Options)) (*SetDataRetrievalPolicyOutput, error) {
 	if params == nil {
 		params = &SetDataRetrievalPolicyInput{}
@@ -83,25 +85,25 @@ func (c *Client) addOperationSetDataRetrievalPolicyMiddlewares(stack *middleware
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -116,13 +118,16 @@ func (c *Client) addOperationSetDataRetrievalPolicyMiddlewares(stack *middleware
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpSetDataRetrievalPolicyValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opSetDataRetrievalPolicy(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

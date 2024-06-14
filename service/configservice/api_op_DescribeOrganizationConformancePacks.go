@@ -6,27 +6,32 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/configservice/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns a list of organization conformance packs. When you specify the limit
-// and the next token, you receive a paginated response. Limit and next token are
-// not applicable if you specify organization conformance packs names. They are
-// only applicable, when you request all the organization conformance packs. For
-// accounts within an organzation If you deploy an organizational rule or
-// conformance pack in an organization administrator account, and then establish a
-// delegated administrator and deploy an organizational rule or conformance pack in
-// the delegated administrator account, you won't be able to see the organizational
-// rule or conformance pack in the organization administrator account from the
-// delegated administrator account or see the organizational rule or conformance
-// pack in the delegated administrator account from organization administrator
-// account. The DescribeOrganizationConfigRules and
-// DescribeOrganizationConformancePacks APIs can only see and interact with the
-// organization-related resource that were deployed from within the account calling
-// those APIs.
+// Returns a list of organization conformance packs.
+//
+// When you specify the limit and the next token, you receive a paginated
+// response.
+//
+// Limit and next token are not applicable if you specify organization conformance
+// packs names. They are only applicable, when you request all the organization
+// conformance packs.
+//
+// # For accounts within an organization
+//
+// If you deploy an organizational rule or conformance pack in an organization
+// administrator account, and then establish a delegated administrator and deploy
+// an organizational rule or conformance pack in the delegated administrator
+// account, you won't be able to see the organizational rule or conformance pack in
+// the organization administrator account from the delegated administrator account
+// or see the organizational rule or conformance pack in the delegated
+// administrator account from organization administrator account. The
+// DescribeOrganizationConfigRules and DescribeOrganizationConformancePacks APIs
+// can only see and interact with the organization-related resource that were
+// deployed from within the account calling those APIs.
 func (c *Client) DescribeOrganizationConformancePacks(ctx context.Context, params *DescribeOrganizationConformancePacksInput, optFns ...func(*Options)) (*DescribeOrganizationConformancePacksOutput, error) {
 	if params == nil {
 		params = &DescribeOrganizationConformancePacksInput{}
@@ -95,25 +100,25 @@ func (c *Client) addOperationDescribeOrganizationConformancePacksMiddlewares(sta
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -128,10 +133,13 @@ func (c *Client) addOperationDescribeOrganizationConformancePacksMiddlewares(sta
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeOrganizationConformancePacks(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

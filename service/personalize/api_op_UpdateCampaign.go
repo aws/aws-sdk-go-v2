@@ -6,24 +6,39 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/personalize/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates a campaign to deploy a retrained solution version with an existing
+//	Updates a campaign to deploy a retrained solution version with an existing
+//
 // campaign, change your campaign's minProvisionedTPS , or modify your campaign's
-// configuration, such as the exploration configuration. To update a campaign, the
-// campaign status must be ACTIVE or CREATE FAILED. Check the campaign status using
-// the DescribeCampaign (https://docs.aws.amazon.com/personalize/latest/dg/API_DescribeCampaign.html)
-// operation. You can still get recommendations from a campaign while an update is
-// in progress. The campaign will use the previous solution version and campaign
+// configuration. For example, you can set enableMetadataWithRecommendations to
+// true for an existing campaign.
+//
+// To update a campaign to start automatically using the latest solution version,
+// specify the following:
+//
+//   - For the SolutionVersionArn parameter, specify the Amazon Resource Name (ARN)
+//     of your solution in SolutionArn/$LATEST format.
+//
+//   - In the campaignConfig , set syncWithLatestSolutionVersion to true .
+//
+// To update a campaign, the campaign status must be ACTIVE or CREATE FAILED.
+// Check the campaign status using the [DescribeCampaign]operation.
+//
+// You can still get recommendations from a campaign while an update is in
+// progress. The campaign will use the previous solution version and campaign
 // configuration to generate recommendations until the latest campaign update
-// status is Active . For more information about updating a campaign, including
-// code samples, see Updating a campaign (https://docs.aws.amazon.com/personalize/latest/dg/update-campaigns.html)
-// . For more information about campaigns, see Creating a campaign (https://docs.aws.amazon.com/personalize/latest/dg/campaigns.html)
-// .
+// status is Active .
+//
+// For more information about updating a campaign, including code samples, see [Updating a campaign].
+// For more information about campaigns, see [Creating a campaign].
+//
+// [Creating a campaign]: https://docs.aws.amazon.com/personalize/latest/dg/campaigns.html
+// [Updating a campaign]: https://docs.aws.amazon.com/personalize/latest/dg/update-campaigns.html
+// [DescribeCampaign]: https://docs.aws.amazon.com/personalize/latest/dg/API_DescribeCampaign.html
 func (c *Client) UpdateCampaign(ctx context.Context, params *UpdateCampaignInput, optFns ...func(*Options)) (*UpdateCampaignOutput, error) {
 	if params == nil {
 		params = &UpdateCampaignInput{}
@@ -56,7 +71,18 @@ type UpdateCampaignInput struct {
 	// minProvisionedTPS as necessary.
 	MinProvisionedTPS *int32
 
-	// The ARN of a new solution version to deploy.
+	// The Amazon Resource Name (ARN) of a new model to deploy. To specify the latest
+	// solution version of your solution, specify the ARN of your solution in
+	// SolutionArn/$LATEST format. You must use this format if you set
+	// syncWithLatestSolutionVersion to True in the [CampaignConfig].
+	//
+	// To deploy a model that isn't the latest solution version of your solution,
+	// specify the ARN of the solution version.
+	//
+	// For more information about automatic campaign updates, see [Enabling automatic campaign updates].
+	//
+	// [Enabling automatic campaign updates]: https://docs.aws.amazon.com/personalize/latest/dg/campaigns.html#create-campaign-automatic-latest-sv-update
+	// [CampaignConfig]: https://docs.aws.amazon.com/personalize/latest/dg/API_CampaignConfig.html
 	SolutionVersionArn *string
 
 	noSmithyDocumentSerde
@@ -95,25 +121,25 @@ func (c *Client) addOperationUpdateCampaignMiddlewares(stack *middleware.Stack, 
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -128,13 +154,16 @@ func (c *Client) addOperationUpdateCampaignMiddlewares(stack *middleware.Stack, 
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpUpdateCampaignValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateCampaign(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

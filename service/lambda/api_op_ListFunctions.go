@@ -6,20 +6,21 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/lambda/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Returns a list of Lambda functions, with the version-specific configuration of
-// each. Lambda returns up to 50 functions per call. Set FunctionVersion to ALL to
-// include all published versions of each function in addition to the unpublished
-// version. The ListFunctions operation returns a subset of the
-// FunctionConfiguration fields. To get the additional fields (State,
-// StateReasonCode, StateReason, LastUpdateStatus, LastUpdateStatusReason,
-// LastUpdateStatusReasonCode, RuntimeVersionConfig) for a function or version, use
-// GetFunction .
+// each. Lambda returns up to 50 functions per call.
+//
+// Set FunctionVersion to ALL to include all published versions of each function
+// in addition to the unpublished version.
+//
+// The ListFunctions operation returns a subset of the FunctionConfiguration fields. To get the
+// additional fields (State, StateReasonCode, StateReason, LastUpdateStatus,
+// LastUpdateStatusReason, LastUpdateStatusReasonCode, RuntimeVersionConfig) for a
+// function or version, use GetFunction.
 func (c *Client) ListFunctions(ctx context.Context, params *ListFunctionsInput, optFns ...func(*Options)) (*ListFunctionsOutput, error) {
 	if params == nil {
 		params = &ListFunctionsInput{}
@@ -95,25 +96,25 @@ func (c *Client) addOperationListFunctionsMiddlewares(stack *middleware.Stack, o
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -128,10 +129,13 @@ func (c *Client) addOperationListFunctionsMiddlewares(stack *middleware.Stack, o
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListFunctions(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

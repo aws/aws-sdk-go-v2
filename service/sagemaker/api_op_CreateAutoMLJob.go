@@ -6,25 +6,29 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates an Autopilot job also referred to as Autopilot experiment or AutoML
-// job. We recommend using the new versions CreateAutoMLJobV2 (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateAutoMLJobV2.html)
-// and DescribeAutoMLJobV2 (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_DescribeAutoMLJobV2.html)
-// , which offer backward compatibility. CreateAutoMLJobV2 can manage tabular
-// problem types identical to those of its previous version CreateAutoMLJob , as
-// well as time-series forecasting, non-tabular problem types such as image or text
-// classification, and text generation (LLMs fine-tuning). Find guidelines about
-// how to migrate a CreateAutoMLJob to CreateAutoMLJobV2 in Migrate a
-// CreateAutoMLJob to CreateAutoMLJobV2 (https://docs.aws.amazon.com/sagemaker/latest/dg/autopilot-automate-model-development-create-experiment.html#autopilot-create-experiment-api-migrate-v1-v2)
-// . You can find the best-performing model after you run an AutoML job by calling
-// DescribeAutoMLJobV2 (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_DescribeAutoMLJobV2.html)
-// (recommended) or DescribeAutoMLJob (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_DescribeAutoMLJob.html)
-// .
+// Creates an Autopilot job also referred to as Autopilot experiment or AutoML job.
+//
+// We recommend using the new versions [CreateAutoMLJobV2] and [DescribeAutoMLJobV2], which offer backward compatibility.
+//
+// CreateAutoMLJobV2 can manage tabular problem types identical to those of its
+// previous version CreateAutoMLJob , as well as time-series forecasting,
+// non-tabular problem types such as image or text classification, and text
+// generation (LLMs fine-tuning).
+//
+// Find guidelines about how to migrate a CreateAutoMLJob to CreateAutoMLJobV2 in [Migrate a CreateAutoMLJob to CreateAutoMLJobV2].
+//
+// You can find the best-performing model after you run an AutoML job by calling [DescribeAutoMLJobV2]
+// (recommended) or [DescribeAutoMLJob].
+//
+// [DescribeAutoMLJob]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_DescribeAutoMLJob.html
+// [DescribeAutoMLJobV2]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_DescribeAutoMLJobV2.html
+// [CreateAutoMLJobV2]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateAutoMLJobV2.html
+// [Migrate a CreateAutoMLJob to CreateAutoMLJobV2]: https://docs.aws.amazon.com/sagemaker/latest/dg/autopilot-automate-model-development-create-experiment.html#autopilot-create-experiment-api-migrate-v1-v2
 func (c *Client) CreateAutoMLJob(ctx context.Context, params *CreateAutoMLJobInput, optFns ...func(*Options)) (*CreateAutoMLJobOutput, error) {
 	if params == nil {
 		params = &CreateAutoMLJobInput{}
@@ -49,11 +53,12 @@ type CreateAutoMLJobInput struct {
 	AutoMLJobName *string
 
 	// An array of channel objects that describes the input data and its location.
-	// Each channel is a named input source. Similar to InputDataConfig supported by
-	// HyperParameterTrainingJobDefinition (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_HyperParameterTrainingJobDefinition.html)
-	// . Format(s) supported: CSV, Parquet. A minimum of 500 rows is required for the
+	// Each channel is a named input source. Similar to InputDataConfig supported by [HyperParameterTrainingJobDefinition].
+	// Format(s) supported: CSV, Parquet. A minimum of 500 rows is required for the
 	// training dataset. There is not a minimum number of rows required for the
 	// validation dataset.
+	//
+	// [HyperParameterTrainingJobDefinition]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_HyperParameterTrainingJobDefinition.html
 	//
 	// This member is required.
 	InputDataConfig []types.AutoMLChannel
@@ -73,9 +78,10 @@ type CreateAutoMLJobInput struct {
 	AutoMLJobConfig *types.AutoMLJobConfig
 
 	// Specifies a metric to minimize or maximize as the objective of a job. If not
-	// specified, the default objective metric depends on the problem type. See
-	// AutoMLJobObjective (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_AutoMLJobObjective.html)
-	// for the default values.
+	// specified, the default objective metric depends on the problem type. See [AutoMLJobObjective]for
+	// the default values.
+	//
+	// [AutoMLJobObjective]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_AutoMLJobObjective.html
 	AutoMLJobObjective *types.AutoMLJobObjective
 
 	// Generates possible candidates without training the models. A candidate is a
@@ -87,14 +93,16 @@ type CreateAutoMLJobInput struct {
 	ModelDeployConfig *types.ModelDeployConfig
 
 	// Defines the type of supervised learning problem available for the candidates.
-	// For more information, see SageMaker Autopilot problem types (https://docs.aws.amazon.com/sagemaker/latest/dg/autopilot-datasets-problem-types.html#autopilot-problem-types)
-	// .
+	// For more information, see [SageMaker Autopilot problem types].
+	//
+	// [SageMaker Autopilot problem types]: https://docs.aws.amazon.com/sagemaker/latest/dg/autopilot-datasets-problem-types.html#autopilot-problem-types
 	ProblemType types.ProblemType
 
 	// An array of key-value pairs. You can use tags to categorize your Amazon Web
 	// Services resources in different ways, for example, by purpose, owner, or
-	// environment. For more information, see Tagging Amazon Web ServicesResources (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html)
-	// . Tag keys must be unique per resource.
+	// environment. For more information, see [Tagging Amazon Web ServicesResources]. Tag keys must be unique per resource.
+	//
+	// [Tagging Amazon Web ServicesResources]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
 	Tags []types.Tag
 
 	noSmithyDocumentSerde
@@ -135,25 +143,25 @@ func (c *Client) addOperationCreateAutoMLJobMiddlewares(stack *middleware.Stack,
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -168,13 +176,16 @@ func (c *Client) addOperationCreateAutoMLJobMiddlewares(stack *middleware.Stack,
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpCreateAutoMLJobValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateAutoMLJob(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

@@ -237,7 +237,6 @@
                                     ]
                                 }
                             ],
-                            "type": "tree",
                             "rules": [
                                 {
                                     "conditions": [
@@ -280,7 +279,8 @@
                                     },
                                     "type": "endpoint"
                                 }
-                            ]
+                            ],
+                            "type": "tree"
                         },
                         {
                             "conditions": [
@@ -293,7 +293,6 @@
                                     ]
                                 }
                             ],
-                            "type": "tree",
                             "rules": [
                                 {
                                     "conditions": [
@@ -307,7 +306,6 @@
                                             "assign": "PartitionResult"
                                         }
                                     ],
-                                    "type": "tree",
                                     "rules": [
                                         {
                                             "conditions": [
@@ -330,7 +328,6 @@
                                                     ]
                                                 }
                                             ],
-                                            "type": "tree",
                                             "rules": [
                                                 {
                                                     "conditions": [
@@ -365,7 +362,6 @@
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [],
@@ -376,14 +372,16 @@
                                                             },
                                                             "type": "endpoint"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [],
                                                     "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
                                                     "type": "error"
                                                 }
-                                            ]
+                                            ],
+                                            "type": "tree"
                                         },
                                         {
                                             "conditions": [
@@ -397,14 +395,12 @@
                                                     ]
                                                 }
                                             ],
-                                            "type": "tree",
                                             "rules": [
                                                 {
                                                     "conditions": [
                                                         {
                                                             "fn": "booleanEquals",
                                                             "argv": [
-                                                                true,
                                                                 {
                                                                     "fn": "getAttr",
                                                                     "argv": [
@@ -413,11 +409,11 @@
                                                                         },
                                                                         "supportsFIPS"
                                                                     ]
-                                                                }
+                                                                },
+                                                                true
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [],
@@ -428,14 +424,16 @@
                                                             },
                                                             "type": "endpoint"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [],
                                                     "error": "FIPS is enabled but this partition does not support FIPS",
                                                     "type": "error"
                                                 }
-                                            ]
+                                            ],
+                                            "type": "tree"
                                         },
                                         {
                                             "conditions": [
@@ -449,7 +447,6 @@
                                                     ]
                                                 }
                                             ],
-                                            "type": "tree",
                                             "rules": [
                                                 {
                                                     "conditions": [
@@ -469,7 +466,6 @@
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [],
@@ -480,14 +476,16 @@
                                                             },
                                                             "type": "endpoint"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [],
                                                     "error": "DualStack is enabled but this partition does not support DualStack",
                                                     "type": "error"
                                                 }
-                                            ]
+                                            ],
+                                            "type": "tree"
                                         },
                                         {
                                             "conditions": [],
@@ -498,9 +496,11 @@
                                             },
                                             "type": "endpoint"
                                         }
-                                    ]
+                                    ],
+                                    "type": "tree"
                                 }
-                            ]
+                            ],
+                            "type": "tree"
                         },
                         {
                             "conditions": [],
@@ -1256,6 +1256,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Indicates the status of the <code>CreateInferenceScheduler</code> operation. </p>"
                     }
+                },
+                "ModelQuality": {
+                    "target": "com.amazonaws.lookoutequipment#ModelQuality",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Provides a quality assessment for a model that uses labels. \n         If Lookout for Equipment determines that the\n         model quality is poor based on training metrics, the value is\n         <code>POOR_QUALITY_DETECTED</code>. Otherwise, the value is\n         <code>QUALITY_THRESHOLD_MET</code>. </p>\n         <p>If the model is unlabeled, the model quality can't\n         be assessed and the value of <code>ModelQuality</code> is\n         <code>CANNOT_DETERMINE_QUALITY</code>. In this situation, you can get a model quality\n         assessment by adding labels to the input dataset and retraining the model.</p>\n         <p>For information about using labels with your models, see <a href=\"https://docs.aws.amazon.com/lookout-for-equipment/latest/ug/understanding-labeling.html\">Understanding labeling</a>.</p>\n         <p>For information about improving the quality of a model, see <a href=\"https://docs.aws.amazon.com/lookout-for-equipment/latest/ug/best-practices.html\">Best practices with\n         Amazon Lookout for Equipment</a>.</p>"
+                    }
                 }
             },
             "traits": {
@@ -1585,6 +1591,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Indicates that the asset associated with this sensor has been shut off. As long as this\n         condition is met, Lookout for Equipment will not use data from this asset for training,\n         evaluation, or inference.</p>"
                     }
+                },
+                "ModelDiagnosticsOutputConfiguration": {
+                    "target": "com.amazonaws.lookoutequipment#ModelDiagnosticsOutputConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon S3 location where you want Amazon Lookout for Equipment to save the pointwise model diagnostics.\n        \n         \n      You must also specify the <code>RoleArn</code> request parameter.</p>"
+                    }
                 }
             },
             "traits": {
@@ -1650,6 +1662,22 @@
                             "RetrainingFrequency": "P1M",
                             "LookbackWindow": "P360D",
                             "PromoteMode": "MANUAL",
+                            "ClientToken": "sample-client-token"
+                        },
+                        "output": {
+                            "ModelName": "sample-model",
+                            "ModelArn": "arn:aws:lookoutequipment:us-east-1:123456789012:model/sample-model/a1b2c3d4-5678-90ab-cdef-EXAMPLE11111",
+                            "Status": "PENDING"
+                        }
+                    },
+                    {
+                        "title": "Creates a retraining scheduler with a specific start date",
+                        "documentation": "",
+                        "input": {
+                            "ModelName": "sample-model",
+                            "RetrainingStartDate": "2024-01-01T00:00:00Z",
+                            "RetrainingFrequency": "P1M",
+                            "LookbackWindow": "P360D",
                             "ClientToken": "sample-client-token"
                         },
                         "output": {
@@ -1896,7 +1924,7 @@
                     "min": 20,
                     "max": 2048
                 },
-                "smithy.api#pattern": "^arn:aws(-[^:]+)?:lookoutequipment:[a-zA-Z0-9\\-]*:[0-9]{12}:dataset\\/.+$"
+                "smithy.api#pattern": "^arn:aws(-[^:]+)?:lookoutequipment:[a-zA-Z0-9\\-]*:[0-9]{12}:dataset\\/[0-9a-zA-Z_-]{1,200}\\/.+$"
             }
         },
         "com.amazonaws.lookoutequipment#DatasetIdentifier": {
@@ -2582,7 +2610,7 @@
                 "IngestedFilesSummary": {
                     "target": "com.amazonaws.lookoutequipment#IngestedFilesSummary",
                     "traits": {
-                        "smithy.api#documentation": "<p> IngestedFilesSummary associated with the given dataset for the latest successful\n         associated ingestion job id. </p>"
+                        "smithy.api#documentation": "<p>IngestedFilesSummary associated with the given dataset for the latest successful\n         associated ingestion job id. </p>"
                     }
                 },
                 "RoleArn": {
@@ -3237,6 +3265,18 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Indicates the status of the retraining scheduler. </p>"
                     }
+                },
+                "ModelDiagnosticsOutputConfiguration": {
+                    "target": "com.amazonaws.lookoutequipment#ModelDiagnosticsOutputConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Configuration information for the model's pointwise model diagnostics.</p>"
+                    }
+                },
+                "ModelQuality": {
+                    "target": "com.amazonaws.lookoutequipment#ModelQuality",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Provides a quality assessment for a model that uses labels. If Lookout for Equipment determines that the\n         model quality is poor based on training metrics, the value is\n         <code>POOR_QUALITY_DETECTED</code>. Otherwise, the value is\n         <code>QUALITY_THRESHOLD_MET</code>.</p>\n         <p>If the model is unlabeled, the model quality can't\n         be assessed and the value of <code>ModelQuality</code> is\n         <code>CANNOT_DETERMINE_QUALITY</code>. In this situation, you can get a model quality\n         assessment by adding labels to the input dataset and retraining the model.</p>\n         <p>For information about using labels with your models, see <a href=\"https://docs.aws.amazon.com/lookout-for-equipment/latest/ug/understanding-labeling.html\">Understanding labeling</a>.</p>\n         <p>For information about improving the quality of a model, see <a href=\"https://docs.aws.amazon.com/lookout-for-equipment/latest/ug/best-practices.html\">Best practices with\n         Amazon Lookout for Equipment</a>.</p>"
+                    }
                 }
             },
             "traits": {
@@ -3481,6 +3521,24 @@
                     "target": "com.amazonaws.lookoutequipment#AutoPromotionResultReason",
                     "traits": {
                         "smithy.api#documentation": "<p>Indicates the reason for the <code>AutoPromotionResult</code>. For example, a model\n         might not be promoted if its performance was worse than the active version, if there was an\n         error during training, or if the retraining scheduler was using <code>MANUAL</code> promote\n         mode. The model will be promoted in <code>MANAGED</code> promote mode if the performance is\n         better than the previous model. </p>"
+                    }
+                },
+                "ModelDiagnosticsOutputConfiguration": {
+                    "target": "com.amazonaws.lookoutequipment#ModelDiagnosticsOutputConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon S3 location where Amazon Lookout for Equipment saves the pointwise model diagnostics for the model version.</p>"
+                    }
+                },
+                "ModelDiagnosticsResultsObject": {
+                    "target": "com.amazonaws.lookoutequipment#S3Object",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon S3 output prefix for where Lookout for Equipment saves the pointwise model diagnostics for the model version.</p>"
+                    }
+                },
+                "ModelQuality": {
+                    "target": "com.amazonaws.lookoutequipment#ModelQuality",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Provides a quality assessment for a model that uses labels. If Lookout for Equipment determines that the\n         model quality is poor based on training metrics, the value is\n         <code>POOR_QUALITY_DETECTED</code>. Otherwise, the value is\n         <code>QUALITY_THRESHOLD_MET</code>.</p>\n         <p>If the model is unlabeled, the model quality can't\n         be assessed and the value of <code>ModelQuality</code> is\n         <code>CANNOT_DETERMINE_QUALITY</code>. In this situation, you can get a model quality\n         assessment by adding labels to the input dataset and retraining the model.</p>\n         <p>For information about using labels with your models, see <a href=\"https://docs.aws.amazon.com/lookout-for-equipment/latest/ug/understanding-labeling.html\">Understanding labeling</a>.</p>\n         <p>For information about improving the quality of a model, see <a href=\"https://docs.aws.amazon.com/lookout-for-equipment/latest/ug/best-practices.html\">Best practices with\n         Amazon Lookout for Equipment</a>.</p>"
                     }
                 }
             },
@@ -4576,7 +4634,7 @@
                 "SensorsWithShortDateRange": {
                     "target": "com.amazonaws.lookoutequipment#SensorsWithShortDateRange",
                     "traits": {
-                        "smithy.api#documentation": "<p> Parameter that describes the total number of sensors that have a short date range of\n         less than 90 days of data overall. </p>",
+                        "smithy.api#documentation": "<p> Parameter that describes the total number of sensors that have a short date range of\n         less than 14 days of data overall. </p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -5235,7 +5293,7 @@
                 "InferenceExecutionSummaries": {
                     "target": "com.amazonaws.lookoutequipment#InferenceExecutionSummaries",
                     "traits": {
-                        "smithy.api#documentation": "<p>Provides an array of information about the individual inference executions returned from\n         the <code>ListInferenceExecutions</code> operation, including model used, inference\n         scheduler, data configuration, and so on. </p>"
+                        "smithy.api#documentation": "<p>Provides an array of information about the individual inference executions returned from\n         the <code>ListInferenceExecutions</code> operation, including model used, inference\n         scheduler, data configuration, and so on.  </p>\n         <note>\n            <p>If you don't supply the <code>InferenceSchedulerName</code> request parameter, or\n            if you supply the name of an inference scheduler that doesn't exist,\n               <code>ListInferenceExecutions</code> returns an empty array in\n               <code>InferenceExecutionSummaries</code>.</p>\n         </note>"
                     }
                 }
             },
@@ -5446,7 +5504,7 @@
                 "LabelGroupName": {
                     "target": "com.amazonaws.lookoutequipment#LabelGroupName",
                     "traits": {
-                        "smithy.api#documentation": "<p> Retruns the name of the label group. </p>",
+                        "smithy.api#documentation": "<p> Returns the name of the label group. </p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -5503,7 +5561,7 @@
                 "LabelSummaries": {
                     "target": "com.amazonaws.lookoutequipment#LabelSummaries",
                     "traits": {
-                        "smithy.api#documentation": "<p> A summary of the items in the label group. </p>"
+                        "smithy.api#documentation": "<p> A summary of the items in the label group. </p>\n         <note>\n            <p>If you don't supply the <code>LabelGroupName</code> request parameter, or if you supply\n            the name of a label group that doesn't exist, <code>ListLabels</code> returns an empty array in\n               <code>LabelSummaries</code>.</p>\n         </note>"
                     }
                 }
             },
@@ -5620,7 +5678,7 @@
                 "ModelVersionSummaries": {
                     "target": "com.amazonaws.lookoutequipment#ModelVersionSummaries",
                     "traits": {
-                        "smithy.api#documentation": "<p>Provides information on the specified model version, including the created time, model\n         and dataset ARNs, and status.</p>"
+                        "smithy.api#documentation": "<p>Provides information on the specified model version, including the created time, model\n         and dataset ARNs, and status.</p>\n         <note>\n            <p>If you don't supply the <code>ModelName</code> request parameter, or if you supply the name\n            of a model that doesn't exist, <code>ListModelVersions</code> returns an empty array in\n               <code>ModelVersionSummaries</code>. </p>\n         </note>"
                     }
                 }
             },
@@ -6055,6 +6113,48 @@
                 "smithy.api#pattern": "^arn:aws(-[^:]+)?:lookoutequipment:[a-zA-Z0-9\\-]*:[0-9]{12}:model\\/.+$"
             }
         },
+        "com.amazonaws.lookoutequipment#ModelDiagnosticsOutputConfiguration": {
+            "type": "structure",
+            "members": {
+                "S3OutputConfiguration": {
+                    "target": "com.amazonaws.lookoutequipment#ModelDiagnosticsS3OutputConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon S3 location for the pointwise model diagnostics. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "KmsKeyId": {
+                    "target": "com.amazonaws.lookoutequipment#NameOrArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services Key Management Service (KMS) key identifier to encrypt the pointwise model diagnostics files.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Output configuration information for the pointwise model diagnostics for an Amazon Lookout for Equipment model.</p>"
+            }
+        },
+        "com.amazonaws.lookoutequipment#ModelDiagnosticsS3OutputConfiguration": {
+            "type": "structure",
+            "members": {
+                "Bucket": {
+                    "target": "com.amazonaws.lookoutequipment#S3Bucket",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the Amazon S3 bucket where the pointwise model diagnostics are located. You must be the owner of the Amazon S3 bucket. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Prefix": {
+                    "target": "com.amazonaws.lookoutequipment#S3Prefix",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon S3 prefix for the location of the pointwise model diagnostics. The\n         prefix specifies the folder and evaluation result file name.\n         (<code>bucket</code>).</p>\n         <p>When you call <code>CreateModel</code> or <code>UpdateModel</code>, specify the path\n         within the bucket that you want Lookout for Equipment to save the model to. During training, Lookout for Equipment creates the model evaluation model\n         as a compressed JSON file with the name <code>model_diagnostics_results.json.gz</code>.</p>\n         <p>When you call <code>DescribeModel</code> or <code>DescribeModelVersion</code>, <code>prefix</code> contains\n         the file path and filename of the model evaluation file. </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The Amazon S3 location for the pointwise model diagnostics for an Amazon Lookout for Equipment model. </p>"
+            }
+        },
         "com.amazonaws.lookoutequipment#ModelMetrics": {
             "type": "string",
             "traits": {
@@ -6087,6 +6187,29 @@
                     "target": "smithy.api#Unit",
                     "traits": {
                         "smithy.api#enumValue": "MANUAL"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.lookoutequipment#ModelQuality": {
+            "type": "enum",
+            "members": {
+                "QUALITY_THRESHOLD_MET": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "QUALITY_THRESHOLD_MET"
+                    }
+                },
+                "CANNOT_DETERMINE_QUALITY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CANNOT_DETERMINE_QUALITY"
+                    }
+                },
+                "POOR_QUALITY_DETECTED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "POOR_QUALITY_DETECTED"
                     }
                 }
             }
@@ -6206,6 +6329,15 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Indicates the status of the retraining scheduler. </p>"
                     }
+                },
+                "ModelDiagnosticsOutputConfiguration": {
+                    "target": "com.amazonaws.lookoutequipment#ModelDiagnosticsOutputConfiguration"
+                },
+                "ModelQuality": {
+                    "target": "com.amazonaws.lookoutequipment#ModelQuality",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Provides a quality assessment for a model that uses labels. If Lookout for Equipment determines that the\n         model quality is poor based on training metrics, the value is\n         <code>POOR_QUALITY_DETECTED</code>. Otherwise, the value is\n         <code>QUALITY_THRESHOLD_MET</code>.</p>\n         <p>If the model is unlabeled, the model quality can't\n         be assessed and the value of <code>ModelQuality</code> is\n         <code>CANNOT_DETERMINE_QUALITY</code>. In this situation, you can get a model quality\n         assessment by adding labels to the input dataset and retraining the model.</p>\n         <p>For information about using labels with your models, see <a href=\"https://docs.aws.amazon.com/lookout-for-equipment/latest/ug/understanding-labeling.html\">Understanding labeling</a>.</p>\n         <p>For information about improving the quality of a model, see <a href=\"https://docs.aws.amazon.com/lookout-for-equipment/latest/ug/best-practices.html\">Best practices with\n         Amazon Lookout for Equipment</a>.</p>"
+                    }
                 }
             },
             "traits": {
@@ -6227,7 +6359,7 @@
                     "min": 20,
                     "max": 2048
                 },
-                "smithy.api#pattern": "^arn:aws(-[^:]+)?:lookoutequipment:[a-zA-Z0-9\\-]*:[0-9]{12}:model\\/.+\\/.+\\/model-version\\/[0-9]{1,}$"
+                "smithy.api#pattern": "^arn:aws(-[^:]+)?:lookoutequipment:[a-zA-Z0-9\\-]*:[0-9]{12}:model\\/[0-9a-zA-Z_-]{1,200}\\/.+\\/model-version\\/[0-9]{1,}$"
             }
         },
         "com.amazonaws.lookoutequipment#ModelVersionSourceType": {
@@ -6337,6 +6469,12 @@
                     "target": "com.amazonaws.lookoutequipment#ModelVersionSourceType",
                     "traits": {
                         "smithy.api#documentation": "<p>Indicates how this model version was generated.</p>"
+                    }
+                },
+                "ModelQuality": {
+                    "target": "com.amazonaws.lookoutequipment#ModelQuality",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Provides a quality assessment for a model that uses labels. If Lookout for Equipment determines that the\n         model quality is poor based on training metrics, the value is\n         <code>POOR_QUALITY_DETECTED</code>. Otherwise, the value is\n         <code>QUALITY_THRESHOLD_MET</code>. </p>\n         <p>If the model is unlabeled, the model quality can't\n         be assessed and the value of <code>ModelQuality</code> is\n         <code>CANNOT_DETERMINE_QUALITY</code>. In this situation, you can get a model quality\n         assessment by adding labels to the input dataset and retraining the model.</p>\n         <p>For information about improving the quality of a model, see <a href=\"https://docs.aws.amazon.com/lookout-for-equipment/latest/ug/best-practices.html\">Best practices with\n         Amazon Lookout for Equipment</a>.</p>"
                     }
                 }
             },
@@ -6819,7 +6957,7 @@
                 "AffectedSensorCount": {
                     "target": "com.amazonaws.lookoutequipment#Integer",
                     "traits": {
-                        "smithy.api#documentation": "<p> Indicates the number of sensors that have less than 90 days of data. </p>",
+                        "smithy.api#documentation": "<p> Indicates the number of sensors that have less than 14 days of data. </p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -7902,6 +8040,12 @@
                     "target": "com.amazonaws.lookoutequipment#IamRoleArn",
                     "traits": {
                         "smithy.api#documentation": "<p>The ARN of the model to update.</p>"
+                    }
+                },
+                "ModelDiagnosticsOutputConfiguration": {
+                    "target": "com.amazonaws.lookoutequipment#ModelDiagnosticsOutputConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon S3 location where you want Amazon Lookout for Equipment to save the pointwise model diagnostics for the model.\n         You must also specify the <code>RoleArn</code> request parameter.</p>"
                     }
                 }
             },

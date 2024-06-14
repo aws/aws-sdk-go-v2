@@ -16,16 +16,19 @@ import (
 )
 
 // Deletes your S3 Access Grants instance. You must first delete the access grants
-// and locations before S3 Access Grants can delete the instance. See
-// DeleteAccessGrant (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteAccessGrant.html)
-// and DeleteAccessGrantsLocation (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteAccessGrantsLocation.html)
-// . If you have associated an IAM Identity Center instance with your S3 Access
-// Grants instance, you must first dissassociate the Identity Center instance from
-// the S3 Access Grants instance before you can delete the S3 Access Grants
-// instance. See AssociateAccessGrantsIdentityCenter (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_AssociateAccessGrantsIdentityCenter.html)
-// and DissociateAccessGrantsIdentityCenter (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DissociateAccessGrantsIdentityCenter.html)
-// . Permissions You must have the s3:DeleteAccessGrantsInstance permission to use
+// and locations before S3 Access Grants can delete the instance. See [DeleteAccessGrant]and [DeleteAccessGrantsLocation]. If you
+// have associated an IAM Identity Center instance with your S3 Access Grants
+// instance, you must first dissassociate the Identity Center instance from the S3
+// Access Grants instance before you can delete the S3 Access Grants instance. See [AssociateAccessGrantsIdentityCenter]
+// and [DissociateAccessGrantsIdentityCenter].
+//
+// Permissions You must have the s3:DeleteAccessGrantsInstance permission to use
 // this operation.
+//
+// [DeleteAccessGrant]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteAccessGrant.html
+// [AssociateAccessGrantsIdentityCenter]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_AssociateAccessGrantsIdentityCenter.html
+// [DeleteAccessGrantsLocation]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteAccessGrantsLocation.html
+// [DissociateAccessGrantsIdentityCenter]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DissociateAccessGrantsIdentityCenter.html
 func (c *Client) DeleteAccessGrantsInstance(ctx context.Context, params *DeleteAccessGrantsInstanceInput, optFns ...func(*Options)) (*DeleteAccessGrantsInstanceOutput, error) {
 	if params == nil {
 		params = &DeleteAccessGrantsInstanceInput{}
@@ -85,25 +88,25 @@ func (c *Client) addOperationDeleteAccessGrantsInstanceMiddlewares(stack *middle
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -121,6 +124,9 @@ func (c *Client) addOperationDeleteAccessGrantsInstanceMiddlewares(stack *middle
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = smithyhttp.AddContentChecksumMiddleware(stack); err != nil {
 		return err
 	}
@@ -136,7 +142,7 @@ func (c *Client) addOperationDeleteAccessGrantsInstanceMiddlewares(stack *middle
 	if err = addMetadataRetrieverMiddleware(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addDeleteAccessGrantsInstanceUpdateEndpoint(stack, options); err != nil {

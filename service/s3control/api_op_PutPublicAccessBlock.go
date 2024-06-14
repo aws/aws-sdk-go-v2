@@ -16,13 +16,21 @@ import (
 	"strings"
 )
 
-// This operation is not supported by directory buckets. Creates or modifies the
-// PublicAccessBlock configuration for an Amazon Web Services account. For this
-// operation, users must have the s3:PutAccountPublicAccessBlock permission. For
-// more information, see Using Amazon S3 block public access (https://docs.aws.amazon.com/AmazonS3/latest/dev/access-control-block-public-access.html)
-// . Related actions include:
-//   - GetPublicAccessBlock (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetPublicAccessBlock.html)
-//   - DeletePublicAccessBlock (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeletePublicAccessBlock.html)
+// This operation is not supported by directory buckets.
+//
+// Creates or modifies the PublicAccessBlock configuration for an Amazon Web
+// Services account. For this operation, users must have the
+// s3:PutAccountPublicAccessBlock permission. For more information, see [Using Amazon S3 block public access].
+//
+// Related actions include:
+//
+// [GetPublicAccessBlock]
+//
+// [DeletePublicAccessBlock]
+//
+// [GetPublicAccessBlock]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetPublicAccessBlock.html
+// [DeletePublicAccessBlock]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeletePublicAccessBlock.html
+// [Using Amazon S3 block public access]: https://docs.aws.amazon.com/AmazonS3/latest/dev/access-control-block-public-access.html
 func (c *Client) PutPublicAccessBlock(ctx context.Context, params *PutPublicAccessBlockInput, optFns ...func(*Options)) (*PutPublicAccessBlockOutput, error) {
 	if params == nil {
 		params = &PutPublicAccessBlockInput{}
@@ -89,25 +97,25 @@ func (c *Client) addOperationPutPublicAccessBlockMiddlewares(stack *middleware.S
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -125,6 +133,9 @@ func (c *Client) addOperationPutPublicAccessBlockMiddlewares(stack *middleware.S
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addEndpointPrefix_opPutPublicAccessBlockMiddleware(stack); err != nil {
 		return err
 	}
@@ -137,7 +148,7 @@ func (c *Client) addOperationPutPublicAccessBlockMiddlewares(stack *middleware.S
 	if err = addMetadataRetrieverMiddleware(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addPutPublicAccessBlockUpdateEndpoint(stack, options); err != nil {

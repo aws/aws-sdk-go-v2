@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/redshift/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -14,9 +13,12 @@ import (
 
 // Creates a snapshot copy grant that permits Amazon Redshift to use an encrypted
 // symmetric key from Key Management Service (KMS) to encrypt copied snapshots in a
-// destination region. For more information about managing snapshot copy grants, go
-// to Amazon Redshift Database Encryption (https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-db-encryption.html)
-// in the Amazon Redshift Cluster Management Guide.
+// destination region.
+//
+// For more information about managing snapshot copy grants, go to [Amazon Redshift Database Encryption] in the Amazon
+// Redshift Cluster Management Guide.
+//
+// [Amazon Redshift Database Encryption]: https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-db-encryption.html
 func (c *Client) CreateSnapshotCopyGrant(ctx context.Context, params *CreateSnapshotCopyGrantInput, optFns ...func(*Options)) (*CreateSnapshotCopyGrantOutput, error) {
 	if params == nil {
 		params = &CreateSnapshotCopyGrantInput{}
@@ -36,11 +38,18 @@ func (c *Client) CreateSnapshotCopyGrant(ctx context.Context, params *CreateSnap
 type CreateSnapshotCopyGrantInput struct {
 
 	// The name of the snapshot copy grant. This name must be unique in the region for
-	// the Amazon Web Services account. Constraints:
+	// the Amazon Web Services account.
+	//
+	// Constraints:
+	//
 	//   - Must contain from 1 to 63 alphanumeric characters or hyphens.
+	//
 	//   - Alphabetic characters must be lowercase.
+	//
 	//   - First character must be a letter.
+	//
 	//   - Cannot end with a hyphen or contain two consecutive hyphens.
+	//
 	//   - Must be unique for all clusters within an Amazon Web Services account.
 	//
 	// This member is required.
@@ -60,9 +69,12 @@ type CreateSnapshotCopyGrantOutput struct {
 
 	// The snapshot copy grant that grants Amazon Redshift permission to encrypt
 	// copied snapshots with the specified encrypted symmetric key from Amazon Web
-	// Services KMS in the destination region. For more information about managing
-	// snapshot copy grants, go to Amazon Redshift Database Encryption (https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-db-encryption.html)
-	// in the Amazon Redshift Cluster Management Guide.
+	// Services KMS in the destination region.
+	//
+	// For more information about managing snapshot copy grants, go to [Amazon Redshift Database Encryption] in the Amazon
+	// Redshift Cluster Management Guide.
+	//
+	// [Amazon Redshift Database Encryption]: https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-db-encryption.html
 	SnapshotCopyGrant *types.SnapshotCopyGrant
 
 	// Metadata pertaining to the operation's result.
@@ -93,25 +105,25 @@ func (c *Client) addOperationCreateSnapshotCopyGrantMiddlewares(stack *middlewar
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -126,13 +138,16 @@ func (c *Client) addOperationCreateSnapshotCopyGrantMiddlewares(stack *middlewar
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpCreateSnapshotCopyGrantValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateSnapshotCopyGrant(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

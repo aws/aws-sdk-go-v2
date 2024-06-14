@@ -6,15 +6,15 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/managedblockchainquery/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Lists all the contracts for a given contract type deployed by an address
-// (either a contract address or a wallet address). The Bitcoin blockchain networks
-// do not support this operation.
+// (either a contract address or a wallet address).
+//
+// The Bitcoin blockchain networks do not support this operation.
 func (c *Client) ListAssetContracts(ctx context.Context, params *ListAssetContractsInput, optFns ...func(*Options)) (*ListAssetContractsOutput, error) {
 	if params == nil {
 		params = &ListAssetContractsInput{}
@@ -37,14 +37,19 @@ type ListAssetContractsInput struct {
 	// This member is required.
 	ContractFilter *types.ContractFilter
 
-	// The maximum number of contracts to list. Default: 100 Even if additional
-	// results can be retrieved, the request can return less results than maxResults
-	// or an empty array of results. To retrieve the next set of results, make another
-	// request with the returned nextToken value. The value of nextToken is null when
-	// there are no more results to return
+	// The maximum number of contracts to list.
+	//
+	// Default: 100
+	//
+	// Even if additional results can be retrieved, the request can return less
+	// results than maxResults or an empty array of results.
+	//
+	// To retrieve the next set of results, make another request with the returned
+	// nextToken value. The value of nextToken is null when there are no more results
+	// to return
 	MaxResults *int32
 
-	// The pagination token that indicates the next set of results to retrieve.
+	//  The pagination token that indicates the next set of results to retrieve.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -88,25 +93,25 @@ func (c *Client) addOperationListAssetContractsMiddlewares(stack *middleware.Sta
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -121,13 +126,16 @@ func (c *Client) addOperationListAssetContractsMiddlewares(stack *middleware.Sta
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpListAssetContractsValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListAssetContracts(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -156,11 +164,16 @@ var _ ListAssetContractsAPIClient = (*Client)(nil)
 // ListAssetContractsPaginatorOptions is the paginator options for
 // ListAssetContracts
 type ListAssetContractsPaginatorOptions struct {
-	// The maximum number of contracts to list. Default: 100 Even if additional
-	// results can be retrieved, the request can return less results than maxResults
-	// or an empty array of results. To retrieve the next set of results, make another
-	// request with the returned nextToken value. The value of nextToken is null when
-	// there are no more results to return
+	// The maximum number of contracts to list.
+	//
+	// Default: 100
+	//
+	// Even if additional results can be retrieved, the request can return less
+	// results than maxResults or an empty array of results.
+	//
+	// To retrieve the next set of results, make another request with the returned
+	// nextToken value. The value of nextToken is null when there are no more results
+	// to return
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

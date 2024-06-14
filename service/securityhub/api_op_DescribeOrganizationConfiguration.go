@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/securityhub/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -36,33 +35,41 @@ type DescribeOrganizationConfigurationInput struct {
 type DescribeOrganizationConfigurationOutput struct {
 
 	// Whether to automatically enable Security Hub in new member accounts when they
-	// join the organization. If set to true , then Security Hub is automatically
-	// enabled in new accounts. If set to false , then Security Hub isn't enabled in
-	// new accounts automatically. The default value is false . If the
-	// ConfigurationType of your organization is set to CENTRAL , then this field is
-	// set to false and can't be changed in the home Region and linked Regions.
-	// However, in that case, the delegated administrator can create a configuration
-	// policy in which Security Hub is enabled and associate the policy with new
-	// organization accounts.
+	// join the organization.
+	//
+	// If set to true , then Security Hub is automatically enabled in new accounts. If
+	// set to false , then Security Hub isn't enabled in new accounts automatically.
+	// The default value is false .
+	//
+	// If the ConfigurationType of your organization is set to CENTRAL , then this
+	// field is set to false and can't be changed in the home Region and linked
+	// Regions. However, in that case, the delegated administrator can create a
+	// configuration policy in which Security Hub is enabled and associate the policy
+	// with new organization accounts.
 	AutoEnable *bool
 
-	// Whether to automatically enable Security Hub default standards (https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-standards-enable-disable.html)
-	// in new member accounts when they join the organization. If equal to DEFAULT ,
-	// then Security Hub default standards are automatically enabled for new member
-	// accounts. If equal to NONE , then default standards are not automatically
-	// enabled for new member accounts. The default value of this parameter is equal to
-	// DEFAULT . If the ConfigurationType of your organization is set to CENTRAL , then
-	// this field is set to NONE and can't be changed in the home Region and linked
+	// Whether to automatically enable Security Hub [default standards] in new member accounts when they
+	// join the organization.
+	//
+	// If equal to DEFAULT , then Security Hub default standards are automatically
+	// enabled for new member accounts. If equal to NONE , then default standards are
+	// not automatically enabled for new member accounts. The default value of this
+	// parameter is equal to DEFAULT .
+	//
+	// If the ConfigurationType of your organization is set to CENTRAL , then this
+	// field is set to NONE and can't be changed in the home Region and linked
 	// Regions. However, in that case, the delegated administrator can create a
 	// configuration policy in which specific security standards are enabled and
 	// associate the policy with new organization accounts.
+	//
+	// [default standards]: https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-standards-enable-disable.html
 	AutoEnableStandards types.AutoEnableStandards
 
 	// Whether the maximum number of allowed member accounts are already associated
 	// with the Security Hub administrator account.
 	MemberAccountLimitReached *bool
 
-	// Provides information about the way an organization is configured in Security
+	//  Provides information about the way an organization is configured in Security
 	// Hub.
 	OrganizationConfiguration *types.OrganizationConfiguration
 
@@ -94,25 +101,25 @@ func (c *Client) addOperationDescribeOrganizationConfigurationMiddlewares(stack 
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -127,10 +134,13 @@ func (c *Client) addOperationDescribeOrganizationConfigurationMiddlewares(stack 
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeOrganizationConfiguration(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

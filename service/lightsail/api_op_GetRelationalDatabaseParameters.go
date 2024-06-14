@@ -6,17 +6,18 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/lightsail/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Returns all of the runtime parameters offered by the underlying database
-// software, or engine, for a specific database in Amazon Lightsail. In addition to
-// the parameter names and values, this operation returns other information about
-// each parameter. This information includes whether changes require a reboot,
-// whether the parameter is modifiable, the allowed values, and the data types.
+// software, or engine, for a specific database in Amazon Lightsail.
+//
+// In addition to the parameter names and values, this operation returns other
+// information about each parameter. This information includes whether changes
+// require a reboot, whether the parameter is modifiable, the allowed values, and
+// the data types.
 func (c *Client) GetRelationalDatabaseParameters(ctx context.Context, params *GetRelationalDatabaseParametersInput, optFns ...func(*Options)) (*GetRelationalDatabaseParametersOutput, error) {
 	if params == nil {
 		params = &GetRelationalDatabaseParametersInput{}
@@ -39,10 +40,11 @@ type GetRelationalDatabaseParametersInput struct {
 	// This member is required.
 	RelationalDatabaseName *string
 
-	// The token to advance to the next page of results from your request. To get a
-	// page token, perform an initial GetRelationalDatabaseParameters request. If your
-	// results are paginated, the response will return a next page token that you can
-	// specify as the page token in a subsequent request.
+	// The token to advance to the next page of results from your request.
+	//
+	// To get a page token, perform an initial GetRelationalDatabaseParameters
+	// request. If your results are paginated, the response will return a next page
+	// token that you can specify as the page token in a subsequent request.
 	PageToken *string
 
 	noSmithyDocumentSerde
@@ -50,10 +52,12 @@ type GetRelationalDatabaseParametersInput struct {
 
 type GetRelationalDatabaseParametersOutput struct {
 
-	// The token to advance to the next page of results from your request. A next page
-	// token is not returned if there are no more results to display. To get the next
-	// page of results, perform another GetRelationalDatabaseParameters request and
-	// specify the next page token using the pageToken parameter.
+	// The token to advance to the next page of results from your request.
+	//
+	// A next page token is not returned if there are no more results to display.
+	//
+	// To get the next page of results, perform another GetRelationalDatabaseParameters
+	// request and specify the next page token using the pageToken parameter.
 	NextPageToken *string
 
 	// An object describing the result of your get relational database parameters
@@ -88,25 +92,25 @@ func (c *Client) addOperationGetRelationalDatabaseParametersMiddlewares(stack *m
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -121,13 +125,16 @@ func (c *Client) addOperationGetRelationalDatabaseParametersMiddlewares(stack *m
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpGetRelationalDatabaseParametersValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetRelationalDatabaseParameters(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

@@ -17,7 +17,16 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"io"
 	"strings"
+	"time"
 )
+
+func deserializeS3Expires(v string) (*time.Time, error) {
+	t, err := smithytime.ParseHTTPDate(v)
+	if err != nil {
+		return nil, nil
+	}
+	return &t, nil
+}
 
 type awsRestjson1_deserializeOpCreateExperimentTemplate struct {
 }
@@ -3711,6 +3720,15 @@ func awsRestjson1_deserializeDocumentAction(v **types.Action, value interface{})
 
 	for key, value := range shape {
 		switch key {
+		case "arn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ResourceArn to be of type string, got %T instead", value)
+				}
+				sv.Arn = ptr.String(jtv)
+			}
+
 		case "description":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3859,6 +3877,15 @@ func awsRestjson1_deserializeDocumentActionSummary(v **types.ActionSummary, valu
 
 	for key, value := range shape {
 		switch key {
+		case "arn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ResourceArn to be of type string, got %T instead", value)
+				}
+				sv.Arn = ptr.String(jtv)
+			}
+
 		case "description":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4070,6 +4097,15 @@ func awsRestjson1_deserializeDocumentExperiment(v **types.Experiment, value inte
 		case "actions":
 			if err := awsRestjson1_deserializeDocumentExperimentActionMap(&sv.Actions, value); err != nil {
 				return err
+			}
+
+		case "arn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ResourceArn to be of type string, got %T instead", value)
+				}
+				sv.Arn = ptr.String(jtv)
 			}
 
 		case "creationTime":
@@ -4617,6 +4653,15 @@ func awsRestjson1_deserializeDocumentExperimentOptions(v **types.ExperimentOptio
 				sv.AccountTargeting = types.AccountTargeting(jtv)
 			}
 
+		case "actionsMode":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ActionsMode to be of type string, got %T instead", value)
+				}
+				sv.ActionsMode = types.ActionsMode(jtv)
+			}
+
 		case "emptyTargetResolutionMode":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4838,6 +4883,15 @@ func awsRestjson1_deserializeDocumentExperimentSummary(v **types.ExperimentSumma
 
 	for key, value := range shape {
 		switch key {
+		case "arn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ResourceArn to be of type string, got %T instead", value)
+				}
+				sv.Arn = ptr.String(jtv)
+			}
+
 		case "creationTime":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -4852,6 +4906,11 @@ func awsRestjson1_deserializeDocumentExperimentSummary(v **types.ExperimentSumma
 					return fmt.Errorf("expected CreationTime to be a JSON Number, got %T instead", value)
 
 				}
+			}
+
+		case "experimentOptions":
+			if err := awsRestjson1_deserializeDocumentExperimentOptions(&sv.ExperimentOptions, value); err != nil {
+				return err
 			}
 
 		case "experimentTemplateId":
@@ -5355,6 +5414,15 @@ func awsRestjson1_deserializeDocumentExperimentTemplate(v **types.ExperimentTemp
 		case "actions":
 			if err := awsRestjson1_deserializeDocumentExperimentTemplateActionMap(&sv.Actions, value); err != nil {
 				return err
+			}
+
+		case "arn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ResourceArn to be of type string, got %T instead", value)
+				}
+				sv.Arn = ptr.String(jtv)
 			}
 
 		case "creationTime":
@@ -5967,6 +6035,15 @@ func awsRestjson1_deserializeDocumentExperimentTemplateSummary(v **types.Experim
 
 	for key, value := range shape {
 		switch key {
+		case "arn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ResourceArn to be of type string, got %T instead", value)
+				}
+				sv.Arn = ptr.String(jtv)
+			}
+
 		case "creationTime":
 			if value != nil {
 				switch jtv := value.(type) {

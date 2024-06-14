@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/mq/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -92,9 +91,9 @@ type DescribeBrokerOutput struct {
 	// The type of broker engine. Currently, Amazon MQ supports ACTIVEMQ and RABBITMQ.
 	EngineType types.EngineType
 
-	// The broker engine's version. For a list of supported engine versions, see
-	// Supported engines (https://docs.aws.amazon.com//amazon-mq/latest/developer-guide/broker-engine.html)
-	// .
+	// The broker engine's version. For a list of supported engine versions, see [Supported engines].
+	//
+	// [Supported engines]: https://docs.aws.amazon.com//amazon-mq/latest/developer-guide/broker-engine.html
 	EngineVersion *string
 
 	// The broker's instance type.
@@ -124,13 +123,15 @@ type DescribeBrokerOutput struct {
 	PendingDataReplicationMode types.DataReplicationMode
 
 	// The broker engine version to upgrade to. For a list of supported engine
-	// versions, see Supported engines (https://docs.aws.amazon.com//amazon-mq/latest/developer-guide/broker-engine.html)
-	// .
+	// versions, see [Supported engines].
+	//
+	// [Supported engines]: https://docs.aws.amazon.com//amazon-mq/latest/developer-guide/broker-engine.html
 	PendingEngineVersion *string
 
 	// The broker's host instance type to upgrade to. For a list of supported instance
-	// types, see Broker instance types (https://docs.aws.amazon.com//amazon-mq/latest/developer-guide/broker.html#broker-instance-types)
-	// .
+	// types, see [Broker instance types].
+	//
+	// [Broker instance types]: https://docs.aws.amazon.com//amazon-mq/latest/developer-guide/broker.html#broker-instance-types
 	PendingHostInstanceType *string
 
 	// The metadata of the LDAP server that will be used to authenticate and authorize
@@ -189,25 +190,25 @@ func (c *Client) addOperationDescribeBrokerMiddlewares(stack *middleware.Stack, 
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -222,13 +223,16 @@ func (c *Client) addOperationDescribeBrokerMiddlewares(stack *middleware.Stack, 
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDescribeBrokerValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeBroker(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

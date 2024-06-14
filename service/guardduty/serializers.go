@@ -633,6 +633,107 @@ func awsRestjson1_serializeOpDocumentCreateIPSetInput(v *CreateIPSetInput, value
 	return nil
 }
 
+type awsRestjson1_serializeOpCreateMalwareProtectionPlan struct {
+}
+
+func (*awsRestjson1_serializeOpCreateMalwareProtectionPlan) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpCreateMalwareProtectionPlan) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*CreateMalwareProtectionPlanInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/malware-protection-plan")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "POST"
+	var restEncoder *httpbinding.Encoder
+	if request.URL.RawPath == "" {
+		restEncoder, err = httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	} else {
+		request.URL.RawPath = smithyhttp.JoinPath(request.URL.RawPath, opPath)
+		restEncoder, err = httpbinding.NewEncoderWithRawPath(request.URL.Path, request.URL.RawPath, request.URL.RawQuery, request.Header)
+	}
+
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentCreateMalwareProtectionPlanInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsCreateMalwareProtectionPlanInput(v *CreateMalwareProtectionPlanInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentCreateMalwareProtectionPlanInput(v *CreateMalwareProtectionPlanInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Actions != nil {
+		ok := object.Key("actions")
+		if err := awsRestjson1_serializeDocumentMalwareProtectionPlanActions(v.Actions, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.ClientToken != nil {
+		ok := object.Key("clientToken")
+		ok.String(*v.ClientToken)
+	}
+
+	if v.ProtectedResource != nil {
+		ok := object.Key("protectedResource")
+		if err := awsRestjson1_serializeDocumentCreateProtectedResource(v.ProtectedResource, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Role != nil {
+		ok := object.Key("role")
+		ok.String(*v.Role)
+	}
+
+	if v.Tags != nil {
+		ok := object.Key("tags")
+		if err := awsRestjson1_serializeDocumentTagMap(v.Tags, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 type awsRestjson1_serializeOpCreateMembers struct {
 }
 
@@ -1388,6 +1489,71 @@ func awsRestjson1_serializeOpHttpBindingsDeleteIPSetInput(v *DeleteIPSetInput, e
 	}
 	if v.IpSetId != nil {
 		if err := encoder.SetURI("IpSetId").String(*v.IpSetId); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+type awsRestjson1_serializeOpDeleteMalwareProtectionPlan struct {
+}
+
+func (*awsRestjson1_serializeOpDeleteMalwareProtectionPlan) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpDeleteMalwareProtectionPlan) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*DeleteMalwareProtectionPlanInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/malware-protection-plan/{MalwareProtectionPlanId}")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "DELETE"
+	var restEncoder *httpbinding.Encoder
+	if request.URL.RawPath == "" {
+		restEncoder, err = httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	} else {
+		request.URL.RawPath = smithyhttp.JoinPath(request.URL.RawPath, opPath)
+		restEncoder, err = httpbinding.NewEncoderWithRawPath(request.URL.Path, request.URL.RawPath, request.URL.RawQuery, request.Header)
+	}
+
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsDeleteMalwareProtectionPlanInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsDeleteMalwareProtectionPlanInput(v *DeleteMalwareProtectionPlanInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.MalwareProtectionPlanId == nil || len(*v.MalwareProtectionPlanId) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member MalwareProtectionPlanId must not be empty")}
+	}
+	if v.MalwareProtectionPlanId != nil {
+		if err := encoder.SetURI("MalwareProtectionPlanId").String(*v.MalwareProtectionPlanId); err != nil {
 			return err
 		}
 	}
@@ -2878,6 +3044,71 @@ func awsRestjson1_serializeOpHttpBindingsGetIPSetInput(v *GetIPSetInput, encoder
 	return nil
 }
 
+type awsRestjson1_serializeOpGetMalwareProtectionPlan struct {
+}
+
+func (*awsRestjson1_serializeOpGetMalwareProtectionPlan) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpGetMalwareProtectionPlan) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*GetMalwareProtectionPlanInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/malware-protection-plan/{MalwareProtectionPlanId}")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "GET"
+	var restEncoder *httpbinding.Encoder
+	if request.URL.RawPath == "" {
+		restEncoder, err = httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	} else {
+		request.URL.RawPath = smithyhttp.JoinPath(request.URL.RawPath, opPath)
+		restEncoder, err = httpbinding.NewEncoderWithRawPath(request.URL.Path, request.URL.RawPath, request.URL.RawQuery, request.Header)
+	}
+
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsGetMalwareProtectionPlanInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsGetMalwareProtectionPlanInput(v *GetMalwareProtectionPlanInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.MalwareProtectionPlanId == nil || len(*v.MalwareProtectionPlanId) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member MalwareProtectionPlanId must not be empty")}
+	}
+	if v.MalwareProtectionPlanId != nil {
+		if err := encoder.SetURI("MalwareProtectionPlanId").String(*v.MalwareProtectionPlanId); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 type awsRestjson1_serializeOpGetMalwareScanSettings struct {
 }
 
@@ -4093,6 +4324,66 @@ func awsRestjson1_serializeOpHttpBindingsListIPSetsInput(v *ListIPSetsInput, enc
 
 	if v.MaxResults != nil {
 		encoder.SetQuery("maxResults").Integer(*v.MaxResults)
+	}
+
+	if v.NextToken != nil {
+		encoder.SetQuery("nextToken").String(*v.NextToken)
+	}
+
+	return nil
+}
+
+type awsRestjson1_serializeOpListMalwareProtectionPlans struct {
+}
+
+func (*awsRestjson1_serializeOpListMalwareProtectionPlans) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpListMalwareProtectionPlans) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*ListMalwareProtectionPlansInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/malware-protection-plan")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "GET"
+	var restEncoder *httpbinding.Encoder
+	if request.URL.RawPath == "" {
+		restEncoder, err = httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	} else {
+		request.URL.RawPath = smithyhttp.JoinPath(request.URL.RawPath, opPath)
+		restEncoder, err = httpbinding.NewEncoderWithRawPath(request.URL.Path, request.URL.RawPath, request.URL.RawQuery, request.Header)
+	}
+
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsListMalwareProtectionPlansInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsListMalwareProtectionPlansInput(v *ListMalwareProtectionPlansInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
 	if v.NextToken != nil {
@@ -5388,6 +5679,108 @@ func awsRestjson1_serializeOpDocumentUpdateIPSetInput(v *UpdateIPSetInput, value
 	return nil
 }
 
+type awsRestjson1_serializeOpUpdateMalwareProtectionPlan struct {
+}
+
+func (*awsRestjson1_serializeOpUpdateMalwareProtectionPlan) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpUpdateMalwareProtectionPlan) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*UpdateMalwareProtectionPlanInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/malware-protection-plan/{MalwareProtectionPlanId}")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "PATCH"
+	var restEncoder *httpbinding.Encoder
+	if request.URL.RawPath == "" {
+		restEncoder, err = httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	} else {
+		request.URL.RawPath = smithyhttp.JoinPath(request.URL.RawPath, opPath)
+		restEncoder, err = httpbinding.NewEncoderWithRawPath(request.URL.Path, request.URL.RawPath, request.URL.RawQuery, request.Header)
+	}
+
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsUpdateMalwareProtectionPlanInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentUpdateMalwareProtectionPlanInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsUpdateMalwareProtectionPlanInput(v *UpdateMalwareProtectionPlanInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.MalwareProtectionPlanId == nil || len(*v.MalwareProtectionPlanId) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member MalwareProtectionPlanId must not be empty")}
+	}
+	if v.MalwareProtectionPlanId != nil {
+		if err := encoder.SetURI("MalwareProtectionPlanId").String(*v.MalwareProtectionPlanId); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentUpdateMalwareProtectionPlanInput(v *UpdateMalwareProtectionPlanInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Actions != nil {
+		ok := object.Key("actions")
+		if err := awsRestjson1_serializeDocumentMalwareProtectionPlanActions(v.Actions, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.ProtectedResource != nil {
+		ok := object.Key("protectedResource")
+		if err := awsRestjson1_serializeDocumentUpdateProtectedResource(v.ProtectedResource, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Role != nil {
+		ok := object.Key("role")
+		ok.String(*v.Role)
+	}
+
+	return nil
+}
+
 type awsRestjson1_serializeOpUpdateMalwareScanSettings struct {
 }
 
@@ -6111,6 +6504,39 @@ func awsRestjson1_serializeDocumentCoverageStatisticsTypeList(v []types.Coverage
 	return nil
 }
 
+func awsRestjson1_serializeDocumentCreateProtectedResource(v *types.CreateProtectedResource, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.S3Bucket != nil {
+		ok := object.Key("s3Bucket")
+		if err := awsRestjson1_serializeDocumentCreateS3BucketResource(v.S3Bucket, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentCreateS3BucketResource(v *types.CreateS3BucketResource, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.BucketName != nil {
+		ok := object.Key("bucketName")
+		ok.String(*v.BucketName)
+	}
+
+	if v.ObjectPrefixes != nil {
+		ok := object.Key("objectPrefixes")
+		if err := awsRestjson1_serializeDocumentMalwareProtectionPlanObjectPrefixesList(v.ObjectPrefixes, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentCriterion(v map[string]types.Condition, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -6420,6 +6846,43 @@ func awsRestjson1_serializeDocumentMalwareProtectionConfiguration(v *types.Malwa
 		if err := awsRestjson1_serializeDocumentScanEc2InstanceWithFindings(v.ScanEc2InstanceWithFindings, ok); err != nil {
 			return err
 		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentMalwareProtectionPlanActions(v *types.MalwareProtectionPlanActions, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Tagging != nil {
+		ok := object.Key("tagging")
+		if err := awsRestjson1_serializeDocumentMalwareProtectionPlanTaggingAction(v.Tagging, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentMalwareProtectionPlanObjectPrefixesList(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentMalwareProtectionPlanTaggingAction(v *types.MalwareProtectionPlanTaggingAction, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.Status) > 0 {
+		ok := object.Key("status")
+		ok.String(string(v.Status))
 	}
 
 	return nil
@@ -6826,6 +7289,34 @@ func awsRestjson1_serializeDocumentTagMap(v map[string]string, value smithyjson.
 		om := object.Key(key)
 		om.String(v[key])
 	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentUpdateProtectedResource(v *types.UpdateProtectedResource, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.S3Bucket != nil {
+		ok := object.Key("s3Bucket")
+		if err := awsRestjson1_serializeDocumentUpdateS3BucketResource(v.S3Bucket, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentUpdateS3BucketResource(v *types.UpdateS3BucketResource, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ObjectPrefixes != nil {
+		ok := object.Key("objectPrefixes")
+		if err := awsRestjson1_serializeDocumentMalwareProtectionPlanObjectPrefixesList(v.ObjectPrefixes, ok); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 

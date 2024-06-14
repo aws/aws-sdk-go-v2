@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -33,24 +32,34 @@ type ListClustersInput struct {
 
 	// Set a start time for the time range during which you want to list SageMaker
 	// HyperPod clusters. Timestamps are formatted according to the ISO 8601 standard.
+	//
 	// Acceptable formats include:
+	//
 	//   - YYYY-MM-DDThh:mm:ss.sssTZD (UTC), for example, 2014-10-01T20:30:00.000Z
+	//
 	//   - YYYY-MM-DDThh:mm:ss.sssTZD (with offset), for example,
 	//   2014-10-01T12:30:00.000-08:00
+	//
 	//   - YYYY-MM-DD , for example, 2014-10-01
+	//
 	//   - Unix time in seconds, for example, 1412195400 . This is also referred to as
 	//   Unix Epoch time and represents the number of seconds since midnight, January 1,
 	//   1970 UTC.
-	// For more information about the timestamp format, see Timestamp (https://docs.aws.amazon.com/cli/latest/userguide/cli-usage-parameters-types.html#parameter-type-timestamp)
-	// in the Amazon Web Services Command Line Interface User Guide.
+	//
+	// For more information about the timestamp format, see [Timestamp] in the Amazon Web
+	// Services Command Line Interface User Guide.
+	//
+	// [Timestamp]: https://docs.aws.amazon.com/cli/latest/userguide/cli-usage-parameters-types.html#parameter-type-timestamp
 	CreationTimeAfter *time.Time
 
 	// Set an end time for the time range during which you want to list SageMaker
 	// HyperPod clusters. A filter that returns nodes in a SageMaker HyperPod cluster
 	// created before the specified time. The acceptable formats are the same as the
 	// timestamp formats for CreationTimeAfter . For more information about the
-	// timestamp format, see Timestamp (https://docs.aws.amazon.com/cli/latest/userguide/cli-usage-parameters-types.html#parameter-type-timestamp)
-	// in the Amazon Web Services Command Line Interface User Guide.
+	// timestamp format, see [Timestamp]in the Amazon Web Services Command Line Interface User
+	// Guide.
+	//
+	// [Timestamp]: https://docs.aws.amazon.com/cli/latest/userguide/cli-usage-parameters-types.html#parameter-type-timestamp
 	CreationTimeBefore *time.Time
 
 	// Set the maximum number of SageMaker HyperPod clusters to list.
@@ -113,25 +122,25 @@ func (c *Client) addOperationListClustersMiddlewares(stack *middleware.Stack, op
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -146,10 +155,13 @@ func (c *Client) addOperationListClustersMiddlewares(stack *middleware.Stack, op
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListClusters(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

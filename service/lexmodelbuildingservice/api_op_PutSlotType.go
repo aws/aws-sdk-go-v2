@@ -6,24 +6,26 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/lexmodelbuildingservice/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
-// Creates a custom slot type or replaces an existing custom slot type. To create
-// a custom slot type, specify a name for the slot type and a set of enumeration
-// values, which are the values that a slot of this type can assume. For more
-// information, see how-it-works . If you specify the name of an existing slot
-// type, the fields in the request replace the existing values in the $LATEST
-// version of the slot type. Amazon Lex removes the fields that you don't provide
-// in the request. If you don't specify required fields, Amazon Lex throws an
-// exception. When you update the $LATEST version of a slot type, if a bot uses
-// the $LATEST version of an intent that contains the slot type, the bot's status
-// field is set to NOT_BUILT . This operation requires permissions for the
-// lex:PutSlotType action.
+// Creates a custom slot type or replaces an existing custom slot type.
+//
+// To create a custom slot type, specify a name for the slot type and a set of
+// enumeration values, which are the values that a slot of this type can assume.
+// For more information, see how-it-works.
+//
+// If you specify the name of an existing slot type, the fields in the request
+// replace the existing values in the $LATEST version of the slot type. Amazon Lex
+// removes the fields that you don't provide in the request. If you don't specify
+// required fields, Amazon Lex throws an exception. When you update the $LATEST
+// version of a slot type, if a bot uses the $LATEST version of an intent that
+// contains the slot type, the bot's status field is set to NOT_BUILT .
+//
+// This operation requires permissions for the lex:PutSlotType action.
 func (c *Client) PutSlotType(ctx context.Context, params *PutSlotTypeInput, optFns ...func(*Options)) (*PutSlotTypeOutput, error) {
 	if params == nil {
 		params = &PutSlotTypeInput{}
@@ -41,22 +43,28 @@ func (c *Client) PutSlotType(ctx context.Context, params *PutSlotTypeInput, optF
 
 type PutSlotTypeInput struct {
 
-	// The name of the slot type. The name is not case sensitive. The name can't match
-	// a built-in slot type name, or a built-in slot type name with "AMAZON." removed.
-	// For example, because there is a built-in slot type called AMAZON.DATE , you
-	// can't create a custom slot type called DATE . For a list of built-in slot types,
-	// see Slot Type Reference (https://developer.amazon.com/public/solutions/alexa/alexa-skills-kit/docs/built-in-intent-ref/slot-type-reference)
-	// in the Alexa Skills Kit.
+	// The name of the slot type. The name is not case sensitive.
+	//
+	// The name can't match a built-in slot type name, or a built-in slot type name
+	// with "AMAZON." removed. For example, because there is a built-in slot type
+	// called AMAZON.DATE , you can't create a custom slot type called DATE .
+	//
+	// For a list of built-in slot types, see [Slot Type Reference] in the Alexa Skills Kit.
+	//
+	// [Slot Type Reference]: https://developer.amazon.com/public/solutions/alexa/alexa-skills-kit/docs/built-in-intent-ref/slot-type-reference
 	//
 	// This member is required.
 	Name *string
 
-	// Identifies a specific revision of the $LATEST version. When you create a new
-	// slot type, leave the checksum field blank. If you specify a checksum you get a
-	// BadRequestException exception. When you want to update a slot type, set the
-	// checksum field to the checksum of the most recent revision of the $LATEST
-	// version. If you don't specify the checksum field, or if the checksum does not
-	// match the $LATEST version, you get a PreconditionFailedException exception.
+	// Identifies a specific revision of the $LATEST version.
+	//
+	// When you create a new slot type, leave the checksum field blank. If you specify
+	// a checksum you get a BadRequestException exception.
+	//
+	// When you want to update a slot type, set the checksum field to the checksum of
+	// the most recent revision of the $LATEST version. If you don't specify the
+	// checksum field, or if the checksum does not match the $LATEST version, you get
+	// a PreconditionFailedException exception.
 	Checksum *string
 
 	// When set to true a new numbered version of the slot type is created. This is
@@ -70,18 +78,24 @@ type PutSlotTypeInput struct {
 	// A list of EnumerationValue objects that defines the values that the slot type
 	// can take. Each value can have a list of synonyms , which are additional values
 	// that help train the machine learning model about the values that it resolves for
-	// a slot. A regular expression slot type doesn't require enumeration values. All
-	// other slot types require a list of enumeration values. When Amazon Lex resolves
-	// a slot value, it generates a resolution list that contains up to five possible
-	// values for the slot. If you are using a Lambda function, this resolution list is
-	// passed to the function. If you are not using a Lambda function you can choose to
-	// return the value that the user entered or the first value in the resolution list
-	// as the slot value. The valueSelectionStrategy field indicates the option to use.
+	// a slot.
+	//
+	// A regular expression slot type doesn't require enumeration values. All other
+	// slot types require a list of enumeration values.
+	//
+	// When Amazon Lex resolves a slot value, it generates a resolution list that
+	// contains up to five possible values for the slot. If you are using a Lambda
+	// function, this resolution list is passed to the function. If you are not using a
+	// Lambda function you can choose to return the value that the user entered or the
+	// first value in the resolution list as the slot value. The valueSelectionStrategy
+	// field indicates the option to use.
 	EnumerationValues []types.EnumerationValue
 
 	// The built-in slot type used as the parent of the slot type. When you define a
 	// parent slot type, the new slot type has all of the same configuration as the
-	// parent. Only AMAZON.AlphaNumeric is supported.
+	// parent.
+	//
+	// Only AMAZON.AlphaNumeric is supported.
 	ParentSlotTypeSignature *string
 
 	// Configuration information that extends the parent built-in slot type. The
@@ -90,11 +104,14 @@ type PutSlotTypeInput struct {
 
 	// Determines the slot resolution strategy that Amazon Lex uses to return slot
 	// type values. The field can be set to one of the following values:
+	//
 	//   - ORIGINAL_VALUE - Returns the value entered by the user, if the user value is
 	//   similar to the slot value.
+	//
 	//   - TOP_RESOLUTION - If there is a resolution list for the slot, return the
 	//   first value in the resolution list as the slot type value. If there is no
 	//   resolution list, null is returned.
+	//
 	// If you don't specify the valueSelectionStrategy , the default is ORIGINAL_VALUE .
 	ValueSelectionStrategy types.SlotValueSelectionStrategy
 
@@ -135,7 +152,7 @@ type PutSlotTypeOutput struct {
 	SlotTypeConfigurations []types.SlotTypeConfiguration
 
 	// The slot resolution strategy that Amazon Lex uses to determine the value of the
-	// slot. For more information, see PutSlotType .
+	// slot. For more information, see PutSlotType.
 	ValueSelectionStrategy types.SlotValueSelectionStrategy
 
 	// The version of the slot type. For a new slot type, the version is always
@@ -170,25 +187,25 @@ func (c *Client) addOperationPutSlotTypeMiddlewares(stack *middleware.Stack, opt
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -203,13 +220,16 @@ func (c *Client) addOperationPutSlotTypeMiddlewares(stack *middleware.Stack, opt
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpPutSlotTypeValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opPutSlotType(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

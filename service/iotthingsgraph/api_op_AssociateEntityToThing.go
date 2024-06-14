@@ -6,14 +6,14 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Associates a device with a concrete thing that is in the user's registry. A
-// thing can be associated with only one device at a time. If you associate a thing
-// with a new device id, its previous association will be removed.
+// Associates a device with a concrete thing that is in the user's registry.
+//
+// A thing can be associated with only one device at a time. If you associate a
+// thing with a new device id, its previous association will be removed.
 //
 // Deprecated: since: 2022-08-30
 func (c *Client) AssociateEntityToThing(ctx context.Context, params *AssociateEntityToThingInput, optFns ...func(*Options)) (*AssociateEntityToThingOutput, error) {
@@ -33,8 +33,11 @@ func (c *Client) AssociateEntityToThing(ctx context.Context, params *AssociateEn
 
 type AssociateEntityToThingInput struct {
 
-	// The ID of the device to be associated with the thing. The ID should be in the
-	// following format. urn:tdm:REGION/ACCOUNT ID/default:device:DEVICENAME
+	// The ID of the device to be associated with the thing.
+	//
+	// The ID should be in the following format.
+	//
+	//     urn:tdm:REGION/ACCOUNT ID/default:device:DEVICENAME
 	//
 	// This member is required.
 	EntityId *string
@@ -80,25 +83,25 @@ func (c *Client) addOperationAssociateEntityToThingMiddlewares(stack *middleware
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -113,13 +116,16 @@ func (c *Client) addOperationAssociateEntityToThingMiddlewares(stack *middleware
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpAssociateEntityToThingValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opAssociateEntityToThing(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

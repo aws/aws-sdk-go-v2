@@ -6,46 +6,76 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/personalize/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a campaign that deploys a solution version. When a client calls the
-// GetRecommendations (https://docs.aws.amazon.com/personalize/latest/dg/API_RS_GetRecommendations.html)
-// and GetPersonalizedRanking (https://docs.aws.amazon.com/personalize/latest/dg/API_RS_GetPersonalizedRanking.html)
-// APIs, a campaign is specified in the request. Minimum Provisioned TPS and
-// Auto-Scaling A high minProvisionedTPS will increase your cost. We recommend
-// starting with 1 for minProvisionedTPS (the default). Track your usage using
-// Amazon CloudWatch metrics, and increase the minProvisionedTPS as necessary.
+//	You incur campaign costs while it is active. To avoid unnecessary costs, make
+//
+// sure to delete the campaign when you are finished. For information about
+// campaign costs, see [Amazon Personalize pricing].
+//
+// Creates a campaign that deploys a solution version. When a client calls the [GetRecommendations]
+// and [GetPersonalizedRanking]APIs, a campaign is specified in the request.
+//
+// # Minimum Provisioned TPS and Auto-Scaling
+//
+// A high minProvisionedTPS will increase your cost. We recommend starting with 1
+// for minProvisionedTPS (the default). Track your usage using Amazon CloudWatch
+// metrics, and increase the minProvisionedTPS as necessary.
+//
 // When you create an Amazon Personalize campaign, you can specify the minimum
 // provisioned transactions per second ( minProvisionedTPS ) for the campaign. This
 // is the baseline transaction throughput for the campaign provisioned by Amazon
 // Personalize. It sets the minimum billing charge for the campaign while it is
 // active. A transaction is a single GetRecommendations or GetPersonalizedRanking
-// request. The default minProvisionedTPS is 1. If your TPS increases beyond the
-// minProvisionedTPS , Amazon Personalize auto-scales the provisioned capacity up
-// and down, but never below minProvisionedTPS . There's a short time delay while
-// the capacity is increased that might cause loss of transactions. When your
-// traffic reduces, capacity returns to the minProvisionedTPS . You are charged for
-// the the minimum provisioned TPS or, if your requests exceed the
-// minProvisionedTPS , the actual TPS. The actual TPS is the total number of
+// request. The default minProvisionedTPS is 1.
+//
+// If your TPS increases beyond the minProvisionedTPS , Amazon Personalize
+// auto-scales the provisioned capacity up and down, but never below
+// minProvisionedTPS . There's a short time delay while the capacity is increased
+// that might cause loss of transactions. When your traffic reduces, capacity
+// returns to the minProvisionedTPS .
+//
+// You are charged for the the minimum provisioned TPS or, if your requests exceed
+// the minProvisionedTPS , the actual TPS. The actual TPS is the total number of
 // recommendation requests you make. We recommend starting with a low
 // minProvisionedTPS , track your usage using Amazon CloudWatch metrics, and then
-// increase the minProvisionedTPS as necessary. For more information about
-// campaign costs, see Amazon Personalize pricing (https://aws.amazon.com/personalize/pricing/)
-// . Status A campaign can be in one of the following states:
+// increase the minProvisionedTPS as necessary.
+//
+// For more information about campaign costs, see [Amazon Personalize pricing].
+//
+// # Status
+//
+// A campaign can be in one of the following states:
+//
 //   - CREATE PENDING > CREATE IN_PROGRESS > ACTIVE -or- CREATE FAILED
+//
 //   - DELETE PENDING > DELETE IN_PROGRESS
 //
-// To get the campaign status, call DescribeCampaign (https://docs.aws.amazon.com/personalize/latest/dg/API_DescribeCampaign.html)
-// . Wait until the status of the campaign is ACTIVE before asking the campaign
-// for recommendations. Related APIs
-//   - ListCampaigns (https://docs.aws.amazon.com/personalize/latest/dg/API_ListCampaigns.html)
-//   - DescribeCampaign (https://docs.aws.amazon.com/personalize/latest/dg/API_DescribeCampaign.html)
-//   - UpdateCampaign (https://docs.aws.amazon.com/personalize/latest/dg/API_UpdateCampaign.html)
-//   - DeleteCampaign (https://docs.aws.amazon.com/personalize/latest/dg/API_DeleteCampaign.html)
+// To get the campaign status, call [DescribeCampaign].
+//
+// Wait until the status of the campaign is ACTIVE before asking the campaign for
+// recommendations.
+//
+// # Related APIs
+//
+// [ListCampaigns]
+//
+// [DescribeCampaign]
+//
+// [UpdateCampaign]
+//
+// [DeleteCampaign]
+//
+// [UpdateCampaign]: https://docs.aws.amazon.com/personalize/latest/dg/API_UpdateCampaign.html
+// [GetRecommendations]: https://docs.aws.amazon.com/personalize/latest/dg/API_RS_GetRecommendations.html
+// [ListCampaigns]: https://docs.aws.amazon.com/personalize/latest/dg/API_ListCampaigns.html
+// [DeleteCampaign]: https://docs.aws.amazon.com/personalize/latest/dg/API_DeleteCampaign.html
+// [GetPersonalizedRanking]: https://docs.aws.amazon.com/personalize/latest/dg/API_RS_GetPersonalizedRanking.html
+// [Amazon Personalize pricing]: https://aws.amazon.com/personalize/pricing/
+// [DescribeCampaign]: https://docs.aws.amazon.com/personalize/latest/dg/API_DescribeCampaign.html
 func (c *Client) CreateCampaign(ctx context.Context, params *CreateCampaignInput, optFns ...func(*Options)) (*CreateCampaignOutput, error) {
 	if params == nil {
 		params = &CreateCampaignInput{}
@@ -69,7 +99,18 @@ type CreateCampaignInput struct {
 	// This member is required.
 	Name *string
 
-	// The Amazon Resource Name (ARN) of the solution version to deploy.
+	// The Amazon Resource Name (ARN) of the trained model to deploy with the
+	// campaign. To specify the latest solution version of your solution, specify the
+	// ARN of your solution in SolutionArn/$LATEST format. You must use this format if
+	// you set syncWithLatestSolutionVersion to True in the [CampaignConfig].
+	//
+	// To deploy a model that isn't the latest solution version of your solution,
+	// specify the ARN of the solution version.
+	//
+	// For more information about automatic campaign updates, see [Enabling automatic campaign updates].
+	//
+	// [Enabling automatic campaign updates]: https://docs.aws.amazon.com/personalize/latest/dg/campaigns.html#create-campaign-automatic-latest-sv-update
+	// [CampaignConfig]: https://docs.aws.amazon.com/personalize/latest/dg/API_CampaignConfig.html
 	//
 	// This member is required.
 	SolutionVersionArn *string
@@ -84,8 +125,9 @@ type CreateCampaignInput struct {
 	// minProvisionedTPS as necessary.
 	MinProvisionedTPS *int32
 
-	// A list of tags (https://docs.aws.amazon.com/personalize/latest/dg/tagging-resources.html)
-	// to apply to the campaign.
+	// A list of [tags] to apply to the campaign.
+	//
+	// [tags]: https://docs.aws.amazon.com/personalize/latest/dg/tagging-resources.html
 	Tags []types.Tag
 
 	noSmithyDocumentSerde
@@ -124,25 +166,25 @@ func (c *Client) addOperationCreateCampaignMiddlewares(stack *middleware.Stack, 
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -157,13 +199,16 @@ func (c *Client) addOperationCreateCampaignMiddlewares(stack *middleware.Stack, 
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpCreateCampaignValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateCampaign(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

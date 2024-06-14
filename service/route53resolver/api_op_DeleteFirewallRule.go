@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/route53resolver/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -41,21 +40,40 @@ type DeleteFirewallRuleInput struct {
 	// This member is required.
 	FirewallRuleGroupId *string
 
-	// The DNS query type that the rule you are deleting evaluates. Allowed values
+	//  The DNS query type that the rule you are deleting evaluates. Allowed values
 	// are;
+	//
 	//   - A: Returns an IPv4 address.
+	//
 	//   - AAAA: Returns an Ipv6 address.
+	//
 	//   - CAA: Restricts CAs that can create SSL/TLS certifications for the domain.
+	//
 	//   - CNAME: Returns another domain name.
+	//
 	//   - DS: Record that identifies the DNSSEC signing key of a delegated zone.
+	//
 	//   - MX: Specifies mail servers.
+	//
 	//   - NAPTR: Regular-expression-based rewriting of domain names.
+	//
 	//   - NS: Authoritative name servers.
+	//
 	//   - PTR: Maps an IP address to a domain name.
+	//
 	//   - SOA: Start of authority record for the zone.
+	//
 	//   - SPF: Lists the servers authorized to send emails from a domain.
+	//
 	//   - SRV: Application specific values that identify servers.
+	//
 	//   - TXT: Verifies email senders and application-specific values.
+	//
+	//   - A query type you define by using the DNS type ID, for example 28 for AAAA.
+	//   The values must be defined as TYPENUMBER, where the NUMBER can be 1-65334, for
+	//   example, TYPE28. For more information, see [List of DNS record types].
+	//
+	// [List of DNS record types]: https://en.wikipedia.org/wiki/List_of_DNS_record_types
 	Qtype *string
 
 	noSmithyDocumentSerde
@@ -94,25 +112,25 @@ func (c *Client) addOperationDeleteFirewallRuleMiddlewares(stack *middleware.Sta
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -127,13 +145,16 @@ func (c *Client) addOperationDeleteFirewallRuleMiddlewares(stack *middleware.Sta
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDeleteFirewallRuleValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteFirewallRule(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

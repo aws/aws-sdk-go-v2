@@ -6,17 +6,19 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Updates a WorkSpace bundle with a new image. For more information about
-// updating WorkSpace bundles, see Update a Custom WorkSpaces Bundle (https://docs.aws.amazon.com/workspaces/latest/adminguide/update-custom-bundle.html)
-// . Existing WorkSpaces aren't automatically updated when you update the bundle
+// updating WorkSpace bundles, see [Update a Custom WorkSpaces Bundle].
+//
+// Existing WorkSpaces aren't automatically updated when you update the bundle
 // that they're based on. To update existing WorkSpaces that are based on a bundle
 // that you've updated, you must either rebuild the WorkSpaces or delete and
 // recreate them.
+//
+// [Update a Custom WorkSpaces Bundle]: https://docs.aws.amazon.com/workspaces/latest/adminguide/update-custom-bundle.html
 func (c *Client) UpdateWorkspaceBundle(ctx context.Context, params *UpdateWorkspaceBundleInput, optFns ...func(*Options)) (*UpdateWorkspaceBundleOutput, error) {
 	if params == nil {
 		params = &UpdateWorkspaceBundleInput{}
@@ -72,25 +74,25 @@ func (c *Client) addOperationUpdateWorkspaceBundleMiddlewares(stack *middleware.
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -105,10 +107,13 @@ func (c *Client) addOperationUpdateWorkspaceBundleMiddlewares(stack *middleware.
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateWorkspaceBundle(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

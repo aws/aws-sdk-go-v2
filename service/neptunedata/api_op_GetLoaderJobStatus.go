@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/neptunedata/document"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -14,11 +13,16 @@ import (
 
 // Gets status information about a specified load job. Neptune keeps track of the
 // most recent 1,024 bulk load jobs, and stores the last 10,000 error details per
-// job. See Neptune Loader Get-Status API (https://docs.aws.amazon.com/neptune/latest/userguide/load-api-reference-status.htm)
-// for more information. When invoking this operation in a Neptune cluster that has
-// IAM authentication enabled, the IAM user or role making the request must have a
-// policy attached that allows the neptune-db:GetLoaderJobStatus (https://docs.aws.amazon.com/neptune/latest/userguide/iam-dp-actions.html#getloaderjobstatus)
-// IAM action in that cluster..
+// job.
+//
+// See [Neptune Loader Get-Status API] for more information.
+//
+// When invoking this operation in a Neptune cluster that has IAM authentication
+// enabled, the IAM user or role making the request must have a policy attached
+// that allows the [neptune-db:GetLoaderJobStatus]IAM action in that cluster..
+//
+// [neptune-db:GetLoaderJobStatus]: https://docs.aws.amazon.com/neptune/latest/userguide/iam-dp-actions.html#getloaderjobstatus
+// [Neptune Loader Get-Status API]: https://docs.aws.amazon.com/neptune/latest/userguide/load-api-reference-status.htm
 func (c *Client) GetLoaderJobStatus(ctx context.Context, params *GetLoaderJobStatusInput, optFns ...func(*Options)) (*GetLoaderJobStatusOutput, error) {
 	if params == nil {
 		params = &GetLoaderJobStatusInput{}
@@ -46,8 +50,10 @@ type GetLoaderJobStatusInput struct {
 	Details *bool
 
 	// Flag indicating whether or not to include a list of errors encountered ( TRUE
-	// or FALSE ; the default is FALSE ). The list of errors is paged. The page and
-	// errorsPerPage parameters allow you to page through all the errors.
+	// or FALSE ; the default is FALSE ).
+	//
+	// The list of errors is paged. The page and errorsPerPage parameters allow you to
+	// page through all the errors.
 	Errors *bool
 
 	// The number of errors returned in each page (a positive integer; the default is
@@ -101,25 +107,25 @@ func (c *Client) addOperationGetLoaderJobStatusMiddlewares(stack *middleware.Sta
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -134,13 +140,16 @@ func (c *Client) addOperationGetLoaderJobStatusMiddlewares(stack *middleware.Sta
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpGetLoaderJobStatusValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetLoaderJobStatus(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

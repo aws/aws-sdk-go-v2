@@ -6,17 +6,18 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates an EC2 Instance Connect Endpoint. An EC2 Instance Connect Endpoint
-// allows you to connect to an instance, without requiring the instance to have a
-// public IPv4 address. For more information, see Connect to your instances
-// without requiring a public IPv4 address using EC2 Instance Connect Endpoint (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Connect-using-EC2-Instance-Connect-Endpoint.html)
+// Creates an EC2 Instance Connect Endpoint.
+//
+// An EC2 Instance Connect Endpoint allows you to connect to an instance, without
+// requiring the instance to have a public IPv4 address. For more information, see [Connect to your instances without requiring a public IPv4 address using EC2 Instance Connect Endpoint]
 // in the Amazon EC2 User Guide.
+//
+// [Connect to your instances without requiring a public IPv4 address using EC2 Instance Connect Endpoint]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Connect-using-EC2-Instance-Connect-Endpoint.html
 func (c *Client) CreateInstanceConnectEndpoint(ctx context.Context, params *CreateInstanceConnectEndpointInput, optFns ...func(*Options)) (*CreateInstanceConnectEndpointOutput, error) {
 	if params == nil {
 		params = &CreateInstanceConnectEndpointInput{}
@@ -51,9 +52,12 @@ type CreateInstanceConnectEndpointInput struct {
 
 	// Indicates whether your client's IP address is preserved as the source. The
 	// value is true or false .
+	//
 	//   - If true , your client's IP address is used when you connect to a resource.
+	//
 	//   - If false , the elastic network interface IP address is used when you connect
 	//   to a resource.
+	//
 	// Default: true
 	PreserveClientIp *bool
 
@@ -105,25 +109,25 @@ func (c *Client) addOperationCreateInstanceConnectEndpointMiddlewares(stack *mid
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -138,6 +142,9 @@ func (c *Client) addOperationCreateInstanceConnectEndpointMiddlewares(stack *mid
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opCreateInstanceConnectEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
@@ -147,7 +154,7 @@ func (c *Client) addOperationCreateInstanceConnectEndpointMiddlewares(stack *mid
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateInstanceConnectEndpoint(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

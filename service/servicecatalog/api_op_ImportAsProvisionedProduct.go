@@ -6,29 +6,39 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/servicecatalog/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Requests the import of a resource as an Service Catalog provisioned product
+//	Requests the import of a resource as an Service Catalog provisioned product
+//
 // that is associated to an Service Catalog product and provisioning artifact. Once
 // imported, all supported governance actions are supported on the provisioned
-// product. Resource import only supports CloudFormation stack ARNs. CloudFormation
-// StackSets, and non-root nested stacks, are not supported. The CloudFormation
-// stack must have one of the following statuses to be imported: CREATE_COMPLETE ,
-// UPDATE_COMPLETE , UPDATE_ROLLBACK_COMPLETE , IMPORT_COMPLETE , and
-// IMPORT_ROLLBACK_COMPLETE . Import of the resource requires that the
-// CloudFormation stack template matches the associated Service Catalog product
-// provisioning artifact. When you import an existing CloudFormation stack into a
-// portfolio, Service Catalog does not apply the product's associated constraints
-// during the import process. Service Catalog applies the constraints after you
-// call UpdateProvisionedProduct for the provisioned product. The user or role
-// that performs this operation must have the cloudformation:GetTemplate and
-// cloudformation:DescribeStacks IAM policy permissions. You can only import one
-// provisioned product at a time. The product's CloudFormation stack must have the
-// IMPORT_COMPLETE status before you import another.
+// product.
+//
+// Resource import only supports CloudFormation stack ARNs. CloudFormation
+// StackSets, and non-root nested stacks, are not supported.
+//
+// The CloudFormation stack must have one of the following statuses to be
+// imported: CREATE_COMPLETE , UPDATE_COMPLETE , UPDATE_ROLLBACK_COMPLETE ,
+// IMPORT_COMPLETE , and IMPORT_ROLLBACK_COMPLETE .
+//
+// Import of the resource requires that the CloudFormation stack template matches
+// the associated Service Catalog product provisioning artifact.
+//
+// When you import an existing CloudFormation stack into a portfolio, Service
+// Catalog does not apply the product's associated constraints during the import
+// process. Service Catalog applies the constraints after you call
+// UpdateProvisionedProduct for the provisioned product.
+//
+// The user or role that performs this operation must have the
+// cloudformation:GetTemplate and cloudformation:DescribeStacks IAM policy
+// permissions.
+//
+// You can only import one provisioned product at a time. The product's
+// CloudFormation stack must have the IMPORT_COMPLETE status before you import
+// another.
 func (c *Client) ImportAsProvisionedProduct(ctx context.Context, params *ImportAsProvisionedProductInput, optFns ...func(*Options)) (*ImportAsProvisionedProductOutput, error) {
 	if params == nil {
 		params = &ImportAsProvisionedProductInput{}
@@ -77,7 +87,9 @@ type ImportAsProvisionedProductInput struct {
 	ProvisioningArtifactId *string
 
 	// The language code.
+	//
 	//   - jp - Japanese
+	//
 	//   - zh - Chinese
 	AcceptLanguage *string
 
@@ -117,25 +129,25 @@ func (c *Client) addOperationImportAsProvisionedProductMiddlewares(stack *middle
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -150,6 +162,9 @@ func (c *Client) addOperationImportAsProvisionedProductMiddlewares(stack *middle
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opImportAsProvisionedProductMiddleware(stack, options); err != nil {
 		return err
 	}
@@ -159,7 +174,7 @@ func (c *Client) addOperationImportAsProvisionedProductMiddlewares(stack *middle
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opImportAsProvisionedProduct(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

@@ -6,25 +6,35 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// This is AWS WAF Classic documentation. For more information, see AWS WAF Classic (https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html)
-// in the developer guide. For the latest version of AWS WAF, use the AWS WAFV2 API
-// and see the AWS WAF Developer Guide (https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html)
-// . With the latest version, AWS WAF has a single set of endpoints for regional
-// and global use. Permanently deletes a SqlInjectionMatchSet . You can't delete a
-// SqlInjectionMatchSet if it's still used in any Rules or if it still contains
-// any SqlInjectionMatchTuple objects. If you just want to remove a
-// SqlInjectionMatchSet from a Rule , use UpdateRule . To permanently delete a
-// SqlInjectionMatchSet from AWS WAF, perform the following steps:
+// This is AWS WAF Classic documentation. For more information, see [AWS WAF Classic] in the
+// developer guide.
+//
+// For the latest version of AWS WAF, use the AWS WAFV2 API and see the [AWS WAF Developer Guide]. With the
+// latest version, AWS WAF has a single set of endpoints for regional and global
+// use.
+//
+// Permanently deletes a SqlInjectionMatchSet. You can't delete a SqlInjectionMatchSet if it's still
+// used in any Rules or if it still contains any SqlInjectionMatchTuple objects.
+//
+// If you just want to remove a SqlInjectionMatchSet from a Rule , use UpdateRule.
+//
+// To permanently delete a SqlInjectionMatchSet from AWS WAF, perform the
+// following steps:
+//
 //   - Update the SqlInjectionMatchSet to remove filters, if any. For more
-//     information, see UpdateSqlInjectionMatchSet .
-//   - Use GetChangeToken to get the change token that you provide in the
-//     ChangeToken parameter of a DeleteSqlInjectionMatchSet request.
+//     information, see UpdateSqlInjectionMatchSet.
+//
+//   - Use GetChangeTokento get the change token that you provide in the ChangeToken parameter of
+//     a DeleteSqlInjectionMatchSet request.
+//
 //   - Submit a DeleteSqlInjectionMatchSet request.
+//
+// [AWS WAF Classic]: https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html
+// [AWS WAF Developer Guide]: https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html
 func (c *Client) DeleteSqlInjectionMatchSet(ctx context.Context, params *DeleteSqlInjectionMatchSetInput, optFns ...func(*Options)) (*DeleteSqlInjectionMatchSetOutput, error) {
 	if params == nil {
 		params = &DeleteSqlInjectionMatchSetInput{}
@@ -43,14 +53,13 @@ func (c *Client) DeleteSqlInjectionMatchSet(ctx context.Context, params *DeleteS
 // A request to delete a SqlInjectionMatchSet from AWS WAF.
 type DeleteSqlInjectionMatchSetInput struct {
 
-	// The value returned by the most recent call to GetChangeToken .
+	// The value returned by the most recent call to GetChangeToken.
 	//
 	// This member is required.
 	ChangeToken *string
 
 	// The SqlInjectionMatchSetId of the SqlInjectionMatchSet that you want to delete.
-	// SqlInjectionMatchSetId is returned by CreateSqlInjectionMatchSet and by
-	// ListSqlInjectionMatchSets .
+	// SqlInjectionMatchSetId is returned by CreateSqlInjectionMatchSet and by ListSqlInjectionMatchSets.
 	//
 	// This member is required.
 	SqlInjectionMatchSetId *string
@@ -63,7 +72,7 @@ type DeleteSqlInjectionMatchSetOutput struct {
 
 	// The ChangeToken that you used to submit the DeleteSqlInjectionMatchSet request.
 	// You can also use this value to query the status of the request. For more
-	// information, see GetChangeTokenStatus .
+	// information, see GetChangeTokenStatus.
 	ChangeToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -94,25 +103,25 @@ func (c *Client) addOperationDeleteSqlInjectionMatchSetMiddlewares(stack *middle
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -127,13 +136,16 @@ func (c *Client) addOperationDeleteSqlInjectionMatchSetMiddlewares(stack *middle
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDeleteSqlInjectionMatchSetValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteSqlInjectionMatchSet(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

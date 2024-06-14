@@ -3,4 +3,4 @@
 package appstream
 
 // goModuleVersion is the tagged release for this module
-const goModuleVersion = "1.31.1"
+const goModuleVersion = "1.34.10"

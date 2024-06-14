@@ -14,8 +14,9 @@ const (
 )
 
 // Values returns all known values for DatastoreStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (DatastoreStatus) Values() []DatastoreStatus {
 	return []DatastoreStatus{
 		"CREATING",
@@ -36,8 +37,9 @@ const (
 )
 
 // Values returns all known values for ImageSetState. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ImageSetState) Values() []ImageSetState {
 	return []ImageSetState{
 		"ACTIVE",
@@ -63,8 +65,9 @@ const (
 )
 
 // Values returns all known values for ImageSetWorkflowStatus. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ImageSetWorkflowStatus) Values() []ImageSetWorkflowStatus {
 	return []ImageSetWorkflowStatus{
 		"CREATED",
@@ -91,8 +94,9 @@ const (
 )
 
 // Values returns all known values for JobStatus. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (JobStatus) Values() []JobStatus {
 	return []JobStatus{
 		"SUBMITTED",
@@ -111,11 +115,52 @@ const (
 )
 
 // Values returns all known values for Operator. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (Operator) Values() []Operator {
 	return []Operator{
 		"EQUAL",
 		"BETWEEN",
+	}
+}
+
+type SortField string
+
+// Enum values for SortField
+const (
+	SortFieldUpdatedAt             SortField = "updatedAt"
+	SortFieldCreatedAt             SortField = "createdAt"
+	SortFieldDICOMStudyDateAndTime SortField = "DICOMStudyDateAndTime"
+)
+
+// Values returns all known values for SortField. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (SortField) Values() []SortField {
+	return []SortField{
+		"updatedAt",
+		"createdAt",
+		"DICOMStudyDateAndTime",
+	}
+}
+
+type SortOrder string
+
+// Enum values for SortOrder
+const (
+	SortOrderAsc  SortOrder = "ASC"
+	SortOrderDesc SortOrder = "DESC"
+)
+
+// Values returns all known values for SortOrder. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (SortOrder) Values() []SortOrder {
+	return []SortOrder{
+		"ASC",
+		"DESC",
 	}
 }

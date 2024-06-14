@@ -6,13 +6,13 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/devopsguru/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns a list of the anomalies that belong to an insight that you specify
+//	Returns a list of the anomalies that belong to an insight that you specify
+//
 // using its ID.
 func (c *Client) ListAnomaliesForInsight(ctx context.Context, params *ListAnomaliesForInsightInput, optFns ...func(*Options)) (*ListAnomaliesForInsightOutput, error) {
 	if params == nil {
@@ -31,7 +31,7 @@ func (c *Client) ListAnomaliesForInsight(ctx context.Context, params *ListAnomal
 
 type ListAnomaliesForInsightInput struct {
 
-	// The ID of the insight. The returned anomalies belong to this insight.
+	//  The ID of the insight. The returned anomalies belong to this insight.
 	//
 	// This member is required.
 	InsightId *string
@@ -39,7 +39,7 @@ type ListAnomaliesForInsightInput struct {
 	// The ID of the Amazon Web Services account.
 	AccountId *string
 
-	// Specifies one or more service names that are used to list anomalies.
+	//  Specifies one or more service names that are used to list anomalies.
 	Filters *types.ListAnomaliesForInsightFilters
 
 	// The maximum number of results to return with a single call. To retrieve the
@@ -50,8 +50,8 @@ type ListAnomaliesForInsightInput struct {
 	// operation. If this value is null, it retrieves the first page.
 	NextToken *string
 
-	// A time range used to specify when the requested anomalies started. All returned
-	// anomalies started during this time range.
+	//  A time range used to specify when the requested anomalies started. All
+	// returned anomalies started during this time range.
 	StartTimeRange *types.StartTimeRange
 
 	noSmithyDocumentSerde
@@ -63,11 +63,11 @@ type ListAnomaliesForInsightOutput struct {
 	// operation. If there are no more pages, this value is null.
 	NextToken *string
 
-	// An array of ProactiveAnomalySummary objects that represent the requested
+	//  An array of ProactiveAnomalySummary objects that represent the requested
 	// anomalies
 	ProactiveAnomalies []types.ProactiveAnomalySummary
 
-	// An array of ReactiveAnomalySummary objects that represent the requested
+	//  An array of ReactiveAnomalySummary objects that represent the requested
 	// anomalies
 	ReactiveAnomalies []types.ReactiveAnomalySummary
 
@@ -99,25 +99,25 @@ func (c *Client) addOperationListAnomaliesForInsightMiddlewares(stack *middlewar
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -132,13 +132,16 @@ func (c *Client) addOperationListAnomaliesForInsightMiddlewares(stack *middlewar
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpListAnomaliesForInsightValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListAnomaliesForInsight(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

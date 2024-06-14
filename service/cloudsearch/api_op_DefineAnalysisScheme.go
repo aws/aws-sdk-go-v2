@@ -6,16 +6,16 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/cloudsearch/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Configures an analysis scheme that can be applied to a text or text-array field
-// to define language-specific text processing options. For more information, see
-// Configuring Analysis Schemes (http://docs.aws.amazon.com/cloudsearch/latest/developerguide/configuring-analysis-schemes.html)
+// to define language-specific text processing options. For more information, see [Configuring Analysis Schemes]
 // in the Amazon CloudSearch Developer Guide.
+//
+// [Configuring Analysis Schemes]: http://docs.aws.amazon.com/cloudsearch/latest/developerguide/configuring-analysis-schemes.html
 func (c *Client) DefineAnalysisScheme(ctx context.Context, params *DefineAnalysisSchemeInput, optFns ...func(*Options)) (*DefineAnalysisSchemeOutput, error) {
 	if params == nil {
 		params = &DefineAnalysisSchemeInput{}
@@ -31,8 +31,8 @@ func (c *Client) DefineAnalysisScheme(ctx context.Context, params *DefineAnalysi
 	return out, nil
 }
 
-// Container for the parameters to the DefineAnalysisScheme operation. Specifies
-// the name of the domain you want to update and the analysis scheme configuration.
+// Container for the parameters to the DefineAnalysisScheme operation. Specifies the name of the
+// domain you want to update and the analysis scheme configuration.
 type DefineAnalysisSchemeInput struct {
 
 	// Configuration information for an analysis scheme. Each analysis scheme has a
@@ -54,8 +54,8 @@ type DefineAnalysisSchemeInput struct {
 	noSmithyDocumentSerde
 }
 
-// The result of a DefineAnalysisScheme request. Contains the status of the
-// newly-configured analysis scheme.
+// The result of a DefineAnalysisScheme request. Contains the status of the newly-configured analysis
+// scheme.
 type DefineAnalysisSchemeOutput struct {
 
 	// The status and configuration of an AnalysisScheme .
@@ -91,25 +91,25 @@ func (c *Client) addOperationDefineAnalysisSchemeMiddlewares(stack *middleware.S
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -124,13 +124,16 @@ func (c *Client) addOperationDefineAnalysisSchemeMiddlewares(stack *middleware.S
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDefineAnalysisSchemeValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDefineAnalysisScheme(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

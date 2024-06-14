@@ -20,14 +20,22 @@ import (
 // Creates an access grant that gives a grantee access to your S3 data. The
 // grantee can be an IAM user or role or a directory user, or group. Before you can
 // create a grant, you must have an S3 Access Grants instance in the same Region as
-// the S3 data. You can create an S3 Access Grants instance using the
-// CreateAccessGrantsInstance (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_CreateAccessGrantsInstance.html)
-// . You must also have registered at least one S3 data location in your S3 Access
-// Grants instance using CreateAccessGrantsLocation (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_CreateAccessGrantsLocation.html)
-// . Permissions You must have the s3:CreateAccessGrant permission to use this
-// operation. Additional Permissions For any directory identity -
-// sso:DescribeInstance and sso:DescribeApplication For directory users -
-// identitystore:DescribeUser For directory groups - identitystore:DescribeGroup
+// the S3 data. You can create an S3 Access Grants instance using the [CreateAccessGrantsInstance]. You must
+// also have registered at least one S3 data location in your S3 Access Grants
+// instance using [CreateAccessGrantsLocation].
+//
+// Permissions You must have the s3:CreateAccessGrant permission to use this
+// operation.
+//
+// Additional Permissions For any directory identity - sso:DescribeInstance and
+// sso:DescribeApplication
+//
+// For directory users - identitystore:DescribeUser
+//
+// For directory groups - identitystore:DescribeGroup
+//
+// [CreateAccessGrantsLocation]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_CreateAccessGrantsLocation.html
+// [CreateAccessGrantsInstance]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_CreateAccessGrantsInstance.html
 func (c *Client) CreateAccessGrant(ctx context.Context, params *CreateAccessGrantInput, optFns ...func(*Options)) (*CreateAccessGrantOutput, error) {
 	if params == nil {
 		params = &CreateAccessGrantInput{}
@@ -48,9 +56,11 @@ type CreateAccessGrantInput struct {
 	// The ID of the registered location to which you are granting access. S3 Access
 	// Grants assigns this ID when you register the location. S3 Access Grants assigns
 	// the ID default to the default location s3:// and assigns an auto-generated ID
-	// to other locations that you register. If you are passing the default location,
-	// you cannot create an access grant for the entire default location. You must also
-	// specify a bucket or a bucket and prefix in the Subprefix field.
+	// to other locations that you register.
+	//
+	// If you are passing the default location, you cannot create an access grant for
+	// the entire default location. You must also specify a bucket or a bucket and
+	// prefix in the Subprefix field.
 	//
 	// This member is required.
 	AccessGrantsLocationId *string
@@ -71,8 +81,11 @@ type CreateAccessGrantInput struct {
 
 	// The type of access that you are granting to your S3 data, which can be set to
 	// one of the following values:
+	//
 	//   - READ – Grant read-only access to the S3 data.
+	//
 	//   - WRITE – Grant write-only access to the S3 data.
+	//
 	//   - READWRITE – Grant both read and write access to the S3 data.
 	//
 	// This member is required.
@@ -149,8 +162,11 @@ type CreateAccessGrantOutput struct {
 
 	// The type of access that you are granting to your S3 data, which can be set to
 	// one of the following values:
+	//
 	//   - READ – Grant read-only access to the S3 data.
+	//
 	//   - WRITE – Grant write-only access to the S3 data.
+	//
 	//   - READWRITE – Grant both read and write access to the S3 data.
 	Permission types.Permission
 
@@ -182,25 +198,25 @@ func (c *Client) addOperationCreateAccessGrantMiddlewares(stack *middleware.Stac
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -218,6 +234,9 @@ func (c *Client) addOperationCreateAccessGrantMiddlewares(stack *middleware.Stac
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = smithyhttp.AddContentChecksumMiddleware(stack); err != nil {
 		return err
 	}
@@ -233,7 +252,7 @@ func (c *Client) addOperationCreateAccessGrantMiddlewares(stack *middleware.Stac
 	if err = addMetadataRetrieverMiddleware(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addCreateAccessGrantUpdateEndpoint(stack, options); err != nil {

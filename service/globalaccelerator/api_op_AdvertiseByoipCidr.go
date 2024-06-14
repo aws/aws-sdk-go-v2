@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/globalaccelerator/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -15,10 +14,14 @@ import (
 // Advertises an IPv4 address range that is provisioned for use with your Amazon
 // Web Services resources through bring your own IP addresses (BYOIP). It can take
 // a few minutes before traffic to the specified addresses starts routing to Amazon
-// Web Services because of propagation delays. To stop advertising the BYOIP
-// address range, use WithdrawByoipCidr (https://docs.aws.amazon.com/global-accelerator/latest/api/WithdrawByoipCidr.html)
-// . For more information, see Bring your own IP addresses (BYOIP) (https://docs.aws.amazon.com/global-accelerator/latest/dg/using-byoip.html)
-// in the Global Accelerator Developer Guide.
+// Web Services because of propagation delays.
+//
+// To stop advertising the BYOIP address range, use [WithdrawByoipCidr].
+//
+// For more information, see [Bring your own IP addresses (BYOIP)] in the Global Accelerator Developer Guide.
+//
+// [Bring your own IP addresses (BYOIP)]: https://docs.aws.amazon.com/global-accelerator/latest/dg/using-byoip.html
+// [WithdrawByoipCidr]: https://docs.aws.amazon.com/global-accelerator/latest/api/WithdrawByoipCidr.html
 func (c *Client) AdvertiseByoipCidr(ctx context.Context, params *AdvertiseByoipCidrInput, optFns ...func(*Options)) (*AdvertiseByoipCidrOutput, error) {
 	if params == nil {
 		params = &AdvertiseByoipCidrInput{}
@@ -38,6 +41,10 @@ type AdvertiseByoipCidrInput struct {
 
 	// The address range, in CIDR notation. This must be the exact range that you
 	// provisioned. You can't advertise only a portion of the provisioned range.
+	//
+	// For more information, see [Bring your own IP addresses (BYOIP)] in the Global Accelerator Developer Guide.
+	//
+	// [Bring your own IP addresses (BYOIP)]: https://docs.aws.amazon.com/global-accelerator/latest/dg/using-byoip.html
 	//
 	// This member is required.
 	Cidr *string
@@ -78,25 +85,25 @@ func (c *Client) addOperationAdvertiseByoipCidrMiddlewares(stack *middleware.Sta
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -111,13 +118,16 @@ func (c *Client) addOperationAdvertiseByoipCidrMiddlewares(stack *middleware.Sta
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpAdvertiseByoipCidrValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opAdvertiseByoipCidr(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

@@ -6,16 +6,16 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/mediatailor/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
-// Updates a channel. For information about MediaTailor channels, see Working with
-// channels (https://docs.aws.amazon.com/mediatailor/latest/ug/channel-assembly-channels.html)
-// in the MediaTailor User Guide.
+// Updates a channel. For information about MediaTailor channels, see [Working with channels] in the
+// MediaTailor User Guide.
+//
+// [Working with channels]: https://docs.aws.amazon.com/mediatailor/latest/ug/channel-assembly-channels.html
 func (c *Client) UpdateChannel(ctx context.Context, params *UpdateChannelInput, optFns ...func(*Options)) (*UpdateChannelOutput, error) {
 	if params == nil {
 		params = &UpdateChannelInput{}
@@ -43,13 +43,16 @@ type UpdateChannelInput struct {
 	// This member is required.
 	Outputs []types.RequestOutputItem
 
+	// The list of audiences defined in channel.
+	Audiences []string
+
 	// The slate used to fill gaps between programs in the schedule. You must
 	// configure filler slate if your channel uses the LINEAR PlaybackMode .
 	// MediaTailor doesn't support filler slate for channels using the LOOP PlaybackMode
 	// .
 	FillerSlate *types.SlateSource
 
-	// The time-shifted viewing configuration you want to associate to the channel.
+	//  The time-shifted viewing configuration you want to associate to the channel.
 	TimeShiftConfiguration *types.TimeShiftConfiguration
 
 	noSmithyDocumentSerde
@@ -59,6 +62,9 @@ type UpdateChannelOutput struct {
 
 	// The Amazon Resource Name (ARN) associated with the channel.
 	Arn *string
+
+	// The list of audiences defined in channel.
+	Audiences []string
 
 	// The name of the channel.
 	ChannelName *string
@@ -81,22 +87,25 @@ type UpdateChannelOutput struct {
 	// The channel's output properties.
 	Outputs []types.ResponseOutputItem
 
-	// The type of playback mode for this channel. LINEAR - Programs play back-to-back
-	// only once. LOOP - Programs play back-to-back in an endless loop. When the last
-	// program in the schedule plays, playback loops back to the first program in the
-	// schedule.
+	// The type of playback mode for this channel.
+	//
+	// LINEAR - Programs play back-to-back only once.
+	//
+	// LOOP - Programs play back-to-back in an endless loop. When the last program in
+	// the schedule plays, playback loops back to the first program in the schedule.
 	PlaybackMode *string
 
 	// The tags to assign to the channel. Tags are key-value pairs that you can
 	// associate with Amazon resources to help with organization, access control, and
-	// cost tracking. For more information, see Tagging AWS Elemental MediaTailor
-	// Resources (https://docs.aws.amazon.com/mediatailor/latest/ug/tagging.html) .
+	// cost tracking. For more information, see [Tagging AWS Elemental MediaTailor Resources].
+	//
+	// [Tagging AWS Elemental MediaTailor Resources]: https://docs.aws.amazon.com/mediatailor/latest/ug/tagging.html
 	Tags map[string]string
 
 	// The tier associated with this Channel.
 	Tier *string
 
-	// The time-shifted viewing configuration for the channel.
+	//  The time-shifted viewing configuration for the channel.
 	TimeShiftConfiguration *types.TimeShiftConfiguration
 
 	// Metadata pertaining to the operation's result.
@@ -127,25 +136,25 @@ func (c *Client) addOperationUpdateChannelMiddlewares(stack *middleware.Stack, o
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -160,13 +169,16 @@ func (c *Client) addOperationUpdateChannelMiddlewares(stack *middleware.Stack, o
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpUpdateChannelValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateChannel(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

@@ -6,15 +6,15 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Use this action to inspect your lineage and discover relationships between
-// entities. For more information, see Querying Lineage Entities (https://docs.aws.amazon.com/sagemaker/latest/dg/querying-lineage-entities.html)
-// in the Amazon SageMaker Developer Guide.
+// entities. For more information, see [Querying Lineage Entities]in the Amazon SageMaker Developer Guide.
+//
+// [Querying Lineage Entities]: https://docs.aws.amazon.com/sagemaker/latest/dg/querying-lineage-entities.html
 func (c *Client) QueryLineage(ctx context.Context, params *QueryLineageInput, optFns ...func(*Options)) (*QueryLineageOutput, error) {
 	if params == nil {
 		params = &QueryLineageInput{}
@@ -38,18 +38,24 @@ type QueryLineageInput struct {
 
 	// A set of filtering parameters that allow you to specify which entities should
 	// be returned.
+	//
 	//   - Properties - Key-value pairs to match on the lineage entities' properties.
+	//
 	//   - LineageTypes - A set of lineage entity types to match on. For example:
 	//   TrialComponent , Artifact , or Context .
+	//
 	//   - CreatedBefore - Filter entities created before this date.
+	//
 	//   - ModifiedBefore - Filter entities modified before this date.
+	//
 	//   - ModifiedAfter - Filter entities modified after this date.
 	Filters *types.QueryFilters
 
-	// Setting this value to True retrieves not only the entities of interest but also
-	// the Associations (https://docs.aws.amazon.com/sagemaker/latest/dg/lineage-tracking-entities.html)
-	// and lineage entities on the path. Set to False to only return lineage entities
-	// that match your query.
+	//  Setting this value to True retrieves not only the entities of interest but
+	// also the [Associations]and lineage entities on the path. Set to False to only return lineage
+	// entities that match your query.
+	//
+	// [Associations]: https://docs.aws.amazon.com/sagemaker/latest/dg/lineage-tracking-entities.html
 	IncludeEdges *bool
 
 	// The maximum depth in lineage relationships from the StartArns that are
@@ -112,25 +118,25 @@ func (c *Client) addOperationQueryLineageMiddlewares(stack *middleware.Stack, op
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -145,10 +151,13 @@ func (c *Client) addOperationQueryLineageMiddlewares(stack *middleware.Stack, op
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opQueryLineage(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

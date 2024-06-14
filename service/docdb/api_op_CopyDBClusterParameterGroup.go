@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/docdb/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -28,15 +27,20 @@ func (c *Client) CopyDBClusterParameterGroup(ctx context.Context, params *CopyDB
 	return out, nil
 }
 
-// Represents the input to CopyDBClusterParameterGroup .
+// Represents the input to CopyDBClusterParameterGroup.
 type CopyDBClusterParameterGroupInput struct {
 
 	// The identifier or Amazon Resource Name (ARN) for the source cluster parameter
-	// group. Constraints:
+	// group.
+	//
+	// Constraints:
+	//
 	//   - Must specify a valid cluster parameter group.
+	//
 	//   - If the source cluster parameter group is in the same Amazon Web Services
 	//   Region as the copy, specify a valid parameter group identifier; for example,
 	//   my-db-cluster-param-group , or a valid ARN.
+	//
 	//   - If the source parameter group is in a different Amazon Web Services Region
 	//   than the copy, specify a valid cluster parameter group ARN; for example,
 	//   arn:aws:rds:us-east-1:123456789012:sample-cluster:sample-parameter-group .
@@ -49,11 +53,18 @@ type CopyDBClusterParameterGroupInput struct {
 	// This member is required.
 	TargetDBClusterParameterGroupDescription *string
 
-	// The identifier for the copied cluster parameter group. Constraints:
+	// The identifier for the copied cluster parameter group.
+	//
+	// Constraints:
+	//
 	//   - Cannot be null, empty, or blank.
+	//
 	//   - Must contain from 1 to 255 letters, numbers, or hyphens.
+	//
 	//   - The first character must be a letter.
+	//
 	//   - Cannot end with a hyphen or contain two consecutive hyphens.
+	//
 	// Example: my-cluster-param-group1
 	//
 	// This member is required.
@@ -98,25 +109,25 @@ func (c *Client) addOperationCopyDBClusterParameterGroupMiddlewares(stack *middl
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -131,13 +142,16 @@ func (c *Client) addOperationCopyDBClusterParameterGroupMiddlewares(stack *middl
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpCopyDBClusterParameterGroupValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCopyDBClusterParameterGroup(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

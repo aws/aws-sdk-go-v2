@@ -6,20 +6,22 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/internetmonitor/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
-// Gets information the Amazon CloudWatch Internet Monitor has created and stored
+// Gets information that Amazon CloudWatch Internet Monitor has created and stored
 // about a health event for a specified monitor. This information includes the
 // impacted locations, and all the information related to the event, by location.
+//
 // The information returned includes the impact on performance, availability, and
 // round-trip time, information about the network providers (ASNs), the event type,
-// and so on. Information rolled up at the global traffic level is also returned,
-// including the impact type and total traffic impact.
+// and so on.
+//
+// Information rolled up at the global traffic level is also returned, including
+// the impact type and total traffic impact.
 func (c *Client) GetHealthEvent(ctx context.Context, params *GetHealthEventInput, optFns ...func(*Options)) (*GetHealthEventOutput, error) {
 	if params == nil {
 		params = &GetHealthEventInput{}
@@ -48,6 +50,14 @@ type GetHealthEventInput struct {
 	//
 	// This member is required.
 	MonitorName *string
+
+	// The account ID for an account that you've set up cross-account sharing for in
+	// Amazon CloudWatch Internet Monitor. You configure cross-account sharing by using
+	// Amazon CloudWatch Observability Access Manager. For more information, see [Internet Monitor cross-account observability]in
+	// the Amazon CloudWatch Internet Monitor User Guide.
+	//
+	// [Internet Monitor cross-account observability]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/cwim-cross-account.html
+	LinkedAccountId *string
 
 	noSmithyDocumentSerde
 }
@@ -136,25 +146,25 @@ func (c *Client) addOperationGetHealthEventMiddlewares(stack *middleware.Stack, 
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -169,13 +179,16 @@ func (c *Client) addOperationGetHealthEventMiddlewares(stack *middleware.Stack, 
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpGetHealthEventValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetHealthEvent(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

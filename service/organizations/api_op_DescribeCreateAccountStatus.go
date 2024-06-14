@@ -6,13 +6,13 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/organizations/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Retrieves the current status of an asynchronous request to create an account.
+//
 // This operation can be called only from the organization's management account or
 // by a member account that is a delegated administrator for an Amazon Web Services
 // service.
@@ -34,10 +34,13 @@ func (c *Client) DescribeCreateAccountStatus(ctx context.Context, params *Descri
 type DescribeCreateAccountStatusInput struct {
 
 	// Specifies the Id value that uniquely identifies the CreateAccount request. You
-	// can get the value from the CreateAccountStatus.Id response in an earlier
-	// CreateAccount request, or from the ListCreateAccountStatus operation. The regex
-	// pattern (http://wikipedia.org/wiki/regex) for a create account request ID string
-	// requires "car-" followed by from 8 to 32 lowercase letters or digits.
+	// can get the value from the CreateAccountStatus.Id response in an earlier CreateAccount
+	// request, or from the ListCreateAccountStatusoperation.
+	//
+	// The [regex pattern] for a create account request ID string requires "car-" followed by from 8
+	// to 32 lowercase letters or digits.
+	//
+	// [regex pattern]: http://wikipedia.org/wiki/regex
 	//
 	// This member is required.
 	CreateAccountRequestId *string
@@ -78,25 +81,25 @@ func (c *Client) addOperationDescribeCreateAccountStatusMiddlewares(stack *middl
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -111,13 +114,16 @@ func (c *Client) addOperationDescribeCreateAccountStatusMiddlewares(stack *middl
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDescribeCreateAccountStatusValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeCreateAccountStatus(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

@@ -6,14 +6,15 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/efs/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates protection on the file system. This operation requires permissions for
-// the elasticfilesystem:UpdateFileSystemProtection action.
+// Updates protection on the file system.
+//
+// This operation requires permissions for the
+// elasticfilesystem:UpdateFileSystemProtection action.
 func (c *Client) UpdateFileSystemProtection(ctx context.Context, params *UpdateFileSystemProtectionInput, optFns ...func(*Options)) (*UpdateFileSystemProtectionOutput, error) {
 	if params == nil {
 		params = &UpdateFileSystemProtectionInput{}
@@ -37,15 +38,19 @@ type UpdateFileSystemProtectionInput struct {
 	FileSystemId *string
 
 	// The status of the file system's replication overwrite protection.
+	//
 	//   - ENABLED – The file system cannot be used as the destination file system in a
 	//   replication configuration. The file system is writeable. Replication overwrite
 	//   protection is ENABLED by default.
+	//
 	//   - DISABLED – The file system can be used as the destination file system in a
 	//   replication configuration. The file system is read-only and can only be modified
 	//   by EFS replication.
+	//
 	//   - REPLICATING – The file system is being used as the destination file system
 	//   in a replication configuration. The file system is read-only and is only
 	//   modified only by EFS replication.
+	//
 	// If the replication configuration is deleted, the file system's replication
 	// overwrite protection is re-enabled, the file system becomes writeable.
 	ReplicationOverwriteProtection types.ReplicationOverwriteProtection
@@ -57,15 +62,19 @@ type UpdateFileSystemProtectionInput struct {
 type UpdateFileSystemProtectionOutput struct {
 
 	// The status of the file system's replication overwrite protection.
+	//
 	//   - ENABLED – The file system cannot be used as the destination file system in a
 	//   replication configuration. The file system is writeable. Replication overwrite
 	//   protection is ENABLED by default.
+	//
 	//   - DISABLED – The file system can be used as the destination file system in a
 	//   replication configuration. The file system is read-only and can only be modified
 	//   by EFS replication.
+	//
 	//   - REPLICATING – The file system is being used as the destination file system
 	//   in a replication configuration. The file system is read-only and is only
 	//   modified only by EFS replication.
+	//
 	// If the replication configuration is deleted, the file system's replication
 	// overwrite protection is re-enabled, the file system becomes writeable.
 	ReplicationOverwriteProtection types.ReplicationOverwriteProtection
@@ -98,25 +107,25 @@ func (c *Client) addOperationUpdateFileSystemProtectionMiddlewares(stack *middle
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -131,13 +140,16 @@ func (c *Client) addOperationUpdateFileSystemProtectionMiddlewares(stack *middle
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpUpdateFileSystemProtectionValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateFileSystemProtection(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

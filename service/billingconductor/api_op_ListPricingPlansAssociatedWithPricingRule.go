@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -29,19 +28,19 @@ func (c *Client) ListPricingPlansAssociatedWithPricingRule(ctx context.Context, 
 
 type ListPricingPlansAssociatedWithPricingRuleInput struct {
 
-	// The pricing rule Amazon Resource Name (ARN) for which associations will be
+	//  The pricing rule Amazon Resource Name (ARN) for which associations will be
 	// listed.
 	//
 	// This member is required.
 	PricingRuleArn *string
 
-	// The pricing plan billing period for which associations will be listed.
+	//  The pricing plan billing period for which associations will be listed.
 	BillingPeriod *string
 
-	// The optional maximum number of pricing rule associations to retrieve.
+	//  The optional maximum number of pricing rule associations to retrieve.
 	MaxResults *int32
 
-	// The optional pagination token returned by a previous call.
+	//  The optional pagination token returned by a previous call.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -49,17 +48,17 @@ type ListPricingPlansAssociatedWithPricingRuleInput struct {
 
 type ListPricingPlansAssociatedWithPricingRuleOutput struct {
 
-	// The pricing plan billing period for which associations will be listed.
+	//  The pricing plan billing period for which associations will be listed.
 	BillingPeriod *string
 
-	// The pagination token to be used on subsequent calls.
+	//  The pagination token to be used on subsequent calls.
 	NextToken *string
 
-	// The list containing pricing plans that are associated with the requested
+	//  The list containing pricing plans that are associated with the requested
 	// pricing rule.
 	PricingPlanArns []string
 
-	// The pricing rule Amazon Resource Name (ARN) for which associations will be
+	//  The pricing rule Amazon Resource Name (ARN) for which associations will be
 	// listed.
 	PricingRuleArn *string
 
@@ -91,25 +90,25 @@ func (c *Client) addOperationListPricingPlansAssociatedWithPricingRuleMiddleware
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -124,13 +123,16 @@ func (c *Client) addOperationListPricingPlansAssociatedWithPricingRuleMiddleware
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpListPricingPlansAssociatedWithPricingRuleValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListPricingPlansAssociatedWithPricingRule(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -159,7 +161,7 @@ var _ ListPricingPlansAssociatedWithPricingRuleAPIClient = (*Client)(nil)
 // ListPricingPlansAssociatedWithPricingRulePaginatorOptions is the paginator
 // options for ListPricingPlansAssociatedWithPricingRule
 type ListPricingPlansAssociatedWithPricingRulePaginatorOptions struct {
-	// The optional maximum number of pricing rule associations to retrieve.
+	//  The optional maximum number of pricing rule associations to retrieve.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

@@ -6,15 +6,16 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/dlm/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Gets summary information about all or the specified data lifecycle policies. To
-// get complete information about a policy, use GetLifecyclePolicy (https://docs.aws.amazon.com/dlm/latest/APIReference/API_GetLifecyclePolicy.html)
-// .
+// Gets summary information about all or the specified data lifecycle policies.
+//
+// To get complete information about a policy, use [GetLifecyclePolicy].
+//
+// [GetLifecyclePolicy]: https://docs.aws.amazon.com/dlm/latest/APIReference/API_GetLifecyclePolicy.html
 func (c *Client) GetLifecyclePolicies(ctx context.Context, params *GetLifecyclePoliciesInput, optFns ...func(*Options)) (*GetLifecyclePoliciesOutput, error) {
 	if params == nil {
 		params = &GetLifecyclePoliciesInput{}
@@ -32,10 +33,13 @@ func (c *Client) GetLifecyclePolicies(ctx context.Context, params *GetLifecycleP
 
 type GetLifecyclePoliciesInput struct {
 
-	// [Default policies only] Specifies the type of default policy to get. Specify
+	//  [Default policies only] Specifies the type of default policy to get. Specify
 	// one of the following:
+	//
 	//   - VOLUME - To get only the default policy for EBS snapshots
+	//
 	//   - INSTANCE - To get only the default policy for EBS-backed AMIs
+	//
 	//   - ALL - To get all default policies
 	DefaultPolicyType types.DefaultPoliciesTypeValues
 
@@ -48,12 +52,17 @@ type GetLifecyclePoliciesInput struct {
 	// The activation state.
 	State types.GettablePolicyStateValues
 
-	// The tags to add to objects created by the policy. Tags are strings in the
-	// format key=value . These user-defined tags are added in addition to the Amazon
-	// Web Services-added lifecycle tags.
+	// The tags to add to objects created by the policy.
+	//
+	// Tags are strings in the format key=value .
+	//
+	// These user-defined tags are added in addition to the Amazon Web Services-added
+	// lifecycle tags.
 	TagsToAdd []string
 
-	// The target tag for a policy. Tags are strings in the format key=value .
+	// The target tag for a policy.
+	//
+	// Tags are strings in the format key=value .
 	TargetTags []string
 
 	noSmithyDocumentSerde
@@ -92,25 +101,25 @@ func (c *Client) addOperationGetLifecyclePoliciesMiddlewares(stack *middleware.S
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -125,10 +134,13 @@ func (c *Client) addOperationGetLifecyclePoliciesMiddlewares(stack *middleware.S
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetLifecyclePolicies(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

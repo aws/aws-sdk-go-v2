@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/redshiftserverless/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -47,18 +46,24 @@ type UpdateScheduledActionInput struct {
 	// scheduled action. This IAM role must allow the Amazon Redshift scheduler to
 	// schedule creating snapshots (Principal scheduler.redshift.amazonaws.com) to
 	// assume permissions on your behalf. For more information about the IAM role to
-	// use with the Amazon Redshift scheduler, see Using Identity-Based Policies for
-	// Amazon Redshift (https://docs.aws.amazon.com/redshift/latest/mgmt/redshift-iam-access-control-identity-based.html)
-	// in the Amazon Redshift Cluster Management Guide
+	// use with the Amazon Redshift scheduler, see [Using Identity-Based Policies for Amazon Redshift]in the Amazon Redshift Cluster
+	// Management Guide
+	//
+	// [Using Identity-Based Policies for Amazon Redshift]: https://docs.aws.amazon.com/redshift/latest/mgmt/redshift-iam-access-control-identity-based.html
 	RoleArn *string
 
-	// The schedule for a one-time (at format) or recurring (cron format) scheduled
-	// action. Schedule invocations must be separated by at least one hour. Format of
-	// at expressions is " at(yyyy-mm-ddThh:mm:ss) ". For example, "
-	// at(2016-03-04T17:27:00) ". Format of cron expressions is " cron(Minutes Hours
-	// Day-of-month Month Day-of-week Year) ". For example, " cron(0 10 ? * MON *) ".
-	// For more information, see Cron Expressions (https://docs.aws.amazon.com/AmazonCloudWatch/latest/events/ScheduledEvents.html#CronExpressions)
-	// in the Amazon CloudWatch Events User Guide.
+	// The schedule for a one-time (at timestamp format) or recurring (cron format)
+	// scheduled action. Schedule invocations must be separated by at least one hour.
+	// Times are in UTC.
+	//
+	//   - Format of at timestamp is yyyy-mm-ddThh:mm:ss . For example,
+	//   2016-03-04T17:27:00 .
+	//
+	//   - Format of cron expression is (Minutes Hours Day-of-month Month Day-of-week
+	//   Year) . For example, "(0 10 ? * MON *)" . For more information, see [Cron Expressions]in the
+	//   Amazon CloudWatch Events User Guide.
+	//
+	// [Cron Expressions]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/events/ScheduledEvents.html#CronExpressions
 	Schedule types.Schedule
 
 	// The descripion of the scheduled action to update to.
@@ -68,9 +73,10 @@ type UpdateScheduledActionInput struct {
 	StartTime *time.Time
 
 	// A JSON format string of the Amazon Redshift Serverless API operation with input
-	// parameters. The following is an example of a target action. "{"CreateSnapshot":
-	// {"NamespaceName": "sampleNamespace","SnapshotName": "sampleSnapshot",
-	// "retentionPeriod": "1"}}"
+	// parameters. The following is an example of a target action.
+	//
+	//     "{"CreateSnapshot": {"NamespaceName": "sampleNamespace","SnapshotName":
+	//     "sampleSnapshot", "retentionPeriod": "1"}}"
 	TargetAction types.TargetAction
 
 	noSmithyDocumentSerde
@@ -109,25 +115,25 @@ func (c *Client) addOperationUpdateScheduledActionMiddlewares(stack *middleware.
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -142,13 +148,16 @@ func (c *Client) addOperationUpdateScheduledActionMiddlewares(stack *middleware.
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpUpdateScheduledActionValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateScheduledAction(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

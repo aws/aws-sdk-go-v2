@@ -113,8 +113,10 @@ func (e *ResourceNotFoundException) ErrorCode() string {
 }
 func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The operation was denied because the request would exceed the maximum quota (https://docs.aws.amazon.com/location/latest/developerguide/location-quotas.html)
-// set for Amazon Location Service.
+// The operation was denied because the request would exceed the maximum [quota] set for
+// Amazon Location Service.
+//
+// [quota]: https://docs.aws.amazon.com/location/latest/developerguide/location-quotas.html
 type ServiceQuotaExceededException struct {
 	Message *string
 

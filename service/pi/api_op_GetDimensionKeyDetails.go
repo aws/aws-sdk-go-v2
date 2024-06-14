@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/pi/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -36,7 +35,9 @@ type GetDimensionKeyDetailsInput struct {
 
 	// The name of the dimension group. Performance Insights searches the specified
 	// group for the dimension group ID. The following group name values are valid:
+	//
 	//   - db.query (Amazon DocumentDB only)
+	//
 	//   - db.sql (Amazon RDS and Aurora only)
 	//
 	// This member is required.
@@ -45,7 +46,9 @@ type GetDimensionKeyDetailsInput struct {
 	// The ID of the dimension group from which to retrieve dimension details. For
 	// dimension group db.sql , the group ID is db.sql.id . The following group ID
 	// values are valid:
+	//
 	//   - db.sql.id for dimension group db.sql (Aurora and RDS only)
+	//
 	//   - db.query.id for dimension group db.query (DocumentDB only)
 	//
 	// This member is required.
@@ -69,8 +72,10 @@ type GetDimensionKeyDetailsInput struct {
 	// group. If you don't specify this parameter, Performance Insights returns all
 	// dimension data within the specified dimension group. Specify dimension names for
 	// the following dimension groups:
+	//
 	//   - db.sql - Specify either the full dimension name db.sql.statement or the
 	//   short dimension name statement (Aurora and RDS only).
+	//
 	//   - db.query - Specify either the full dimension name db.query.statement or the
 	//   short dimension name statement (DocumentDB only).
 	RequestedDimensions []string
@@ -111,25 +116,25 @@ func (c *Client) addOperationGetDimensionKeyDetailsMiddlewares(stack *middleware
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -144,13 +149,16 @@ func (c *Client) addOperationGetDimensionKeyDetailsMiddlewares(stack *middleware
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpGetDimensionKeyDetailsValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetDimensionKeyDetails(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

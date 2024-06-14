@@ -6,17 +6,17 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/qconnect/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Removes the specified recommendations from the specified assistant's queue of
-// newly available recommendations. You can use this API in conjunction with
-// GetRecommendations (https://docs.aws.amazon.com/amazon-q-connect/latest/APIReference/API_GetRecommendations.html)
-// and a waitTimeSeconds input for long-polling behavior and avoiding duplicate
+// newly available recommendations. You can use this API in conjunction with [GetRecommendations]and a
+// waitTimeSeconds input for long-polling behavior and avoiding duplicate
 // recommendations.
+//
+// [GetRecommendations]: https://docs.aws.amazon.com/amazon-q-connect/latest/APIReference/API_GetRecommendations.html
 func (c *Client) NotifyRecommendationsReceived(ctx context.Context, params *NotifyRecommendationsReceivedInput, optFns ...func(*Options)) (*NotifyRecommendationsReceivedOutput, error) {
 	if params == nil {
 		params = &NotifyRecommendationsReceivedInput{}
@@ -34,8 +34,8 @@ func (c *Client) NotifyRecommendationsReceived(ctx context.Context, params *Noti
 
 type NotifyRecommendationsReceivedInput struct {
 
-	// The identifier of the Amazon Q assistant. Can be either the ID or the ARN. URLs
-	// cannot contain the ARN.
+	// The identifier of the Amazon Q in Connect assistant. Can be either the ID or
+	// the ARN. URLs cannot contain the ARN.
 	//
 	// This member is required.
 	AssistantId *string
@@ -90,25 +90,25 @@ func (c *Client) addOperationNotifyRecommendationsReceivedMiddlewares(stack *mid
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -123,13 +123,16 @@ func (c *Client) addOperationNotifyRecommendationsReceivedMiddlewares(stack *mid
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpNotifyRecommendationsReceivedValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opNotifyRecommendationsReceived(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

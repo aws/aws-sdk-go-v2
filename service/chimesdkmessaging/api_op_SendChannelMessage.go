@@ -6,19 +6,22 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/chimesdkmessaging/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Sends a message to a particular channel that the member is a part of. The
-// x-amz-chime-bearer request header is mandatory. Use the ARN of the
+// Sends a message to a particular channel that the member is a part of.
+//
+// The x-amz-chime-bearer request header is mandatory. Use the ARN of the
 // AppInstanceUser or AppInstanceBot that makes the API call as the value in the
-// header. Also, STANDARD messages can be up to 4KB in size and contain metadata.
-// Metadata is arbitrary, and you can use it in a variety of ways, such as
-// containing a link to an attachment. CONTROL messages are limited to 30 bytes
-// and do not contain metadata.
+// header.
+//
+// Also, STANDARD messages can be up to 4KB in size and contain metadata. Metadata
+// is arbitrary, and you can use it in a variety of ways, such as containing a link
+// to an attachment.
+//
+// CONTROL messages are limited to 30 bytes and do not contain metadata.
 func (c *Client) SendChannelMessage(ctx context.Context, params *SendChannelMessageInput, optFns ...func(*Options)) (*SendChannelMessageOutput, error) {
 	if params == nil {
 		params = &SendChannelMessageInput{}
@@ -62,10 +65,13 @@ type SendChannelMessageInput struct {
 	// This member is required.
 	Persistence types.ChannelMessagePersistenceType
 
-	// The type of message, STANDARD or CONTROL . STANDARD messages can be up to 4KB
-	// in size and contain metadata. Metadata is arbitrary, and you can use it in a
-	// variety of ways, such as containing a link to an attachment. CONTROL messages
-	// are limited to 30 bytes and do not contain metadata.
+	// The type of message, STANDARD or CONTROL .
+	//
+	// STANDARD messages can be up to 4KB in size and contain metadata. Metadata is
+	// arbitrary, and you can use it in a variety of ways, such as containing a link to
+	// an attachment.
+	//
+	// CONTROL messages are limited to 30 bytes and do not contain metadata.
 	//
 	// This member is required.
 	Type types.ChannelMessageType
@@ -137,25 +143,25 @@ func (c *Client) addOperationSendChannelMessageMiddlewares(stack *middleware.Sta
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -170,6 +176,9 @@ func (c *Client) addOperationSendChannelMessageMiddlewares(stack *middleware.Sta
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opSendChannelMessageMiddleware(stack, options); err != nil {
 		return err
 	}
@@ -179,7 +188,7 @@ func (c *Client) addOperationSendChannelMessageMiddlewares(stack *middleware.Sta
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opSendChannelMessage(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

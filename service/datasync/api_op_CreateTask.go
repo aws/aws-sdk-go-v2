@@ -6,19 +6,21 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/datasync/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Configures a transfer task, which defines where and how DataSync moves your
-// data. A task includes a source location, destination location, and the options
-// for how and when you want to transfer your data (such as bandwidth limits,
-// scheduling, among other options). If you're planning to transfer data to or from
-// an Amazon S3 location, review how DataSync can affect your S3 request charges (https://docs.aws.amazon.com/datasync/latest/userguide/create-s3-location.html#create-s3-location-s3-requests)
-// and the DataSync pricing page (http://aws.amazon.com/datasync/pricing/) before
-// you begin.
+// Configures a task, which defines where and how DataSync transfers your data.
+//
+// A task includes a source location, destination location, and transfer options
+// (such as bandwidth limits, scheduling, and more).
+//
+// If you're planning to transfer data to or from an Amazon S3 location, review [how DataSync can affect your S3 request charges]
+// and the [DataSync pricing page]before you begin.
+//
+// [how DataSync can affect your S3 request charges]: https://docs.aws.amazon.com/datasync/latest/userguide/create-s3-location.html#create-s3-location-s3-requests
+// [DataSync pricing page]: http://aws.amazon.com/datasync/pricing/
 func (c *Client) CreateTask(ctx context.Context, params *CreateTaskInput, optFns ...func(*Options)) (*CreateTaskOutput, error) {
 	if params == nil {
 		params = &CreateTaskInput{}
@@ -37,67 +39,73 @@ func (c *Client) CreateTask(ctx context.Context, params *CreateTaskInput, optFns
 // CreateTaskRequest
 type CreateTaskInput struct {
 
-	// The Amazon Resource Name (ARN) of an Amazon Web Services storage resource's
-	// location.
+	// Specifies the ARN of your transfer's destination location.
 	//
 	// This member is required.
 	DestinationLocationArn *string
 
-	// The Amazon Resource Name (ARN) of the source location for the task.
+	// Specifies the ARN of your transfer's source location.
 	//
 	// This member is required.
 	SourceLocationArn *string
 
-	// The Amazon Resource Name (ARN) of the Amazon CloudWatch log group that is used
-	// to monitor and log events in the task.
+	// Specifies the Amazon Resource Name (ARN) of an Amazon CloudWatch log group for
+	// monitoring your task.
 	CloudWatchLogGroupArn *string
 
-	// Specifies a list of filter rules that exclude specific data during your
-	// transfer. For more information and examples, see Filtering data transferred by
-	// DataSync (https://docs.aws.amazon.com/datasync/latest/userguide/filtering.html) .
+	// Specifies exclude filters that define the files, objects, and folders in your
+	// source location that you don't want DataSync to transfer. For more information
+	// and examples, see [Specifying what DataSync transfers by using filters].
+	//
+	// [Specifying what DataSync transfers by using filters]: https://docs.aws.amazon.com/datasync/latest/userguide/filtering.html
 	Excludes []types.FilterRule
 
-	// Specifies a list of filter rules that include specific data during your
-	// transfer. For more information and examples, see Filtering data transferred by
-	// DataSync (https://docs.aws.amazon.com/datasync/latest/userguide/filtering.html) .
+	// Specifies include filters define the files, objects, and folders in your source
+	// location that you want DataSync to transfer. For more information and examples,
+	// see [Specifying what DataSync transfers by using filters].
+	//
+	// [Specifying what DataSync transfers by using filters]: https://docs.aws.amazon.com/datasync/latest/userguide/filtering.html
 	Includes []types.FilterRule
 
 	// Configures a manifest, which is a list of files or objects that you want
-	// DataSync to transfer. For more information and configuration examples, see
-	// Specifying what DataSync transfers by using a manifest (https://docs.aws.amazon.com/datasync/latest/userguide/transferring-with-manifest.html)
-	// . When using this parameter, your caller identity (the role that you're using
-	// DataSync with) must have the iam:PassRole permission. The AWSDataSyncFullAccess (https://docs.aws.amazon.com/datasync/latest/userguide/security-iam-awsmanpol.html#security-iam-awsmanpol-awsdatasyncfullaccess)
-	// policy includes this permission.
+	// DataSync to transfer. For more information and configuration examples, see [Specifying what DataSync transfers by using a manifest].
+	//
+	// When using this parameter, your caller identity (the role that you're using
+	// DataSync with) must have the iam:PassRole permission. The [AWSDataSyncFullAccess] policy includes this
+	// permission.
+	//
+	// [AWSDataSyncFullAccess]: https://docs.aws.amazon.com/datasync/latest/userguide/security-iam-awsmanpol.html#security-iam-awsmanpol-awsdatasyncfullaccess
+	// [Specifying what DataSync transfers by using a manifest]: https://docs.aws.amazon.com/datasync/latest/userguide/transferring-with-manifest.html
 	ManifestConfig *types.ManifestConfig
 
-	// The name of a task. This value is a text reference that is used to identify the
-	// task in the console.
+	// Specifies the name of your task.
 	Name *string
 
-	// Specifies the configuration options for a task. Some options include preserving
-	// file or object metadata and verifying data integrity. You can also override
-	// these options before starting an individual run of a task (also known as a task
-	// execution). For more information, see StartTaskExecution (https://docs.aws.amazon.com/datasync/latest/userguide/API_StartTaskExecution.html)
-	// .
+	// Specifies your task's settings, such as preserving file metadata, verifying
+	// data integrity, among other options.
 	Options *types.Options
 
-	// Specifies a schedule used to periodically transfer files from a source to a
-	// destination location. The schedule should be specified in UTC time. For more
-	// information, see Scheduling your task (https://docs.aws.amazon.com/datasync/latest/userguide/task-scheduling.html)
-	// .
+	// Specifies a schedule for when you want your task to run. For more information,
+	// see [Scheduling your task].
+	//
+	// [Scheduling your task]: https://docs.aws.amazon.com/datasync/latest/userguide/task-scheduling.html
 	Schedule *types.TaskSchedule
 
-	// Specifies the tags that you want to apply to the Amazon Resource Name (ARN)
-	// representing the task. Tags are key-value pairs that help you manage, filter,
-	// and search for your DataSync resources.
+	// Specifies the tags that you want to apply to your task.
+	//
+	// Tags are key-value pairs that help you manage, filter, and search for your
+	// DataSync resources.
 	Tags []types.TagListEntry
 
 	// Specifies how you want to configure a task report, which provides detailed
-	// information about your DataSync transfer. For more information, see Monitoring
-	// your DataSync transfers with task reports (https://docs.aws.amazon.com/datasync/latest/userguide/task-reports.html)
-	// . When using this parameter, your caller identity (the role that you're using
-	// DataSync with) must have the iam:PassRole permission. The AWSDataSyncFullAccess (https://docs.aws.amazon.com/datasync/latest/userguide/security-iam-awsmanpol.html#security-iam-awsmanpol-awsdatasyncfullaccess)
-	// policy includes this permission.
+	// information about your DataSync transfer. For more information, see [Monitoring your DataSync transfers with task reports].
+	//
+	// When using this parameter, your caller identity (the role that you're using
+	// DataSync with) must have the iam:PassRole permission. The [AWSDataSyncFullAccess] policy includes this
+	// permission.
+	//
+	// [AWSDataSyncFullAccess]: https://docs.aws.amazon.com/datasync/latest/userguide/security-iam-awsmanpol.html#security-iam-awsmanpol-awsdatasyncfullaccess
+	// [Monitoring your DataSync transfers with task reports]: https://docs.aws.amazon.com/datasync/latest/userguide/task-reports.html
 	TaskReportConfig *types.TaskReportConfig
 
 	noSmithyDocumentSerde
@@ -137,25 +145,25 @@ func (c *Client) addOperationCreateTaskMiddlewares(stack *middleware.Stack, opti
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -170,13 +178,16 @@ func (c *Client) addOperationCreateTaskMiddlewares(stack *middleware.Stack, opti
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpCreateTaskValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateTask(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

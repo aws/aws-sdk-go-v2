@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/connect/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -14,13 +13,17 @@ import (
 
 // Supports SAML sign-in for Amazon Connect. Retrieves a token for federation. The
 // token is for the Amazon Connect user which corresponds to the IAM credentials
-// that were used to invoke this action. For more information about how SAML
-// sign-in works in Amazon Connect, see Configure SAML with IAM for Amazon Connect
-// in the Amazon Connect Administrator Guide. (https://docs.aws.amazon.com/connect/latest/adminguide/configure-saml.html)
+// that were used to invoke this action.
+//
+// For more information about how SAML sign-in works in Amazon Connect, see [Configure SAML with IAM for Amazon Connect in the Amazon Connect Administrator Guide.]
+//
 // This API doesn't support root users. If you try to invoke GetFederationToken
 // with root credentials, an error message similar to the following one appears:
-// Provided identity: Principal: .... User: .... cannot be used for federation with
-// Amazon Connect
+//
+//	Provided identity: Principal: .... User: .... cannot be used for federation
+//	with Amazon Connect
+//
+// [Configure SAML with IAM for Amazon Connect in the Amazon Connect Administrator Guide.]: https://docs.aws.amazon.com/connect/latest/adminguide/configure-saml.html
 func (c *Client) GetFederationToken(ctx context.Context, params *GetFederationTokenInput, optFns ...func(*Options)) (*GetFederationTokenOutput, error) {
 	if params == nil {
 		params = &GetFederationTokenInput{}
@@ -38,8 +41,10 @@ func (c *Client) GetFederationToken(ctx context.Context, params *GetFederationTo
 
 type GetFederationTokenInput struct {
 
-	// The identifier of the Amazon Connect instance. You can find the instance ID (https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html)
-	// in the Amazon Resource Name (ARN) of the instance.
+	// The identifier of the Amazon Connect instance. You can [find the instance ID] in the Amazon Resource
+	// Name (ARN) of the instance.
+	//
+	// [find the instance ID]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
 	//
 	// This member is required.
 	InstanceId *string
@@ -89,25 +94,25 @@ func (c *Client) addOperationGetFederationTokenMiddlewares(stack *middleware.Sta
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -122,13 +127,16 @@ func (c *Client) addOperationGetFederationTokenMiddlewares(stack *middleware.Sta
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpGetFederationTokenValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetFederationToken(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

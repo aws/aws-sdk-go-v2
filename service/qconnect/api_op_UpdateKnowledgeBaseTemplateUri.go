@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/qconnect/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -14,9 +13,9 @@ import (
 
 // Updates the template URI of a knowledge base. This is only supported for
 // knowledge bases of type EXTERNAL. Include a single variable in ${variable}
-// format; this interpolated by Amazon Q using ingested content. For example, if
-// you ingest a Salesforce article, it has an Id value, and you can set the
-// template URI to
+// format; this interpolated by Amazon Q in Connect using ingested content. For
+// example, if you ingest a Salesforce article, it has an Id value, and you can
+// set the template URI to
 // https://myInstanceName.lightning.force.com/lightning/r/Knowledge__kav/*${Id}*/view
 // .
 func (c *Client) UpdateKnowledgeBaseTemplateUri(ctx context.Context, params *UpdateKnowledgeBaseTemplateUriInput, optFns ...func(*Options)) (*UpdateKnowledgeBaseTemplateUriOutput, error) {
@@ -37,8 +36,7 @@ func (c *Client) UpdateKnowledgeBaseTemplateUri(ctx context.Context, params *Upd
 type UpdateKnowledgeBaseTemplateUriInput struct {
 
 	// The identifier of the knowledge base. This should not be a QUICK_RESPONSES type
-	// knowledge base if you're storing Amazon Q Content resource to it. Can be either
-	// the ID or the ARN. URLs cannot contain the ARN.
+	// knowledge base. Can be either the ID or the ARN. URLs cannot contain the ARN.
 	//
 	// This member is required.
 	KnowledgeBaseId *string
@@ -84,25 +82,25 @@ func (c *Client) addOperationUpdateKnowledgeBaseTemplateUriMiddlewares(stack *mi
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -117,13 +115,16 @@ func (c *Client) addOperationUpdateKnowledgeBaseTemplateUriMiddlewares(stack *mi
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpUpdateKnowledgeBaseTemplateUriValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateKnowledgeBaseTemplateUri(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

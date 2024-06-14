@@ -6,13 +6,13 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/auditmanager/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns a list of sent or received share requests for custom frameworks in
+//	Returns a list of sent or received share requests for custom frameworks in
+//
 // Audit Manager.
 func (c *Client) ListAssessmentFrameworkShareRequests(ctx context.Context, params *ListAssessmentFrameworkShareRequestsInput, optFns ...func(*Options)) (*ListAssessmentFrameworkShareRequestsOutput, error) {
 	if params == nil {
@@ -31,15 +31,15 @@ func (c *Client) ListAssessmentFrameworkShareRequests(ctx context.Context, param
 
 type ListAssessmentFrameworkShareRequestsInput struct {
 
-	// Specifies whether the share request is a sent request or a received request.
+	//  Specifies whether the share request is a sent request or a received request.
 	//
 	// This member is required.
 	RequestType types.ShareRequestType
 
-	// Represents the maximum number of results on a page or for an API request call.
+	//  Represents the maximum number of results on a page or for an API request call.
 	MaxResults *int32
 
-	// The pagination token that's used to fetch the next set of results.
+	//  The pagination token that's used to fetch the next set of results.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -47,11 +47,11 @@ type ListAssessmentFrameworkShareRequestsInput struct {
 
 type ListAssessmentFrameworkShareRequestsOutput struct {
 
-	// The list of share requests that the ListAssessmentFrameworkShareRequests API
+	//  The list of share requests that the ListAssessmentFrameworkShareRequests API
 	// returned.
 	AssessmentFrameworkShareRequests []types.AssessmentFrameworkShareRequest
 
-	// The pagination token that's used to fetch the next set of results.
+	//  The pagination token that's used to fetch the next set of results.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -82,25 +82,25 @@ func (c *Client) addOperationListAssessmentFrameworkShareRequestsMiddlewares(sta
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -115,13 +115,16 @@ func (c *Client) addOperationListAssessmentFrameworkShareRequestsMiddlewares(sta
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpListAssessmentFrameworkShareRequestsValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListAssessmentFrameworkShareRequests(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -150,7 +153,7 @@ var _ ListAssessmentFrameworkShareRequestsAPIClient = (*Client)(nil)
 // ListAssessmentFrameworkShareRequestsPaginatorOptions is the paginator options
 // for ListAssessmentFrameworkShareRequests
 type ListAssessmentFrameworkShareRequestsPaginatorOptions struct {
-	// Represents the maximum number of results on a page or for an API request call.
+	//  Represents the maximum number of results on a page or for an API request call.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

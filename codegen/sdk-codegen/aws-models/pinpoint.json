@@ -1939,6 +1939,12 @@
                         "smithy.api#documentation": "<p>The verified email address to send the email from. The default address is the FromAddress specified for the email channel for the application.</p>"
                     }
                 },
+                "Headers": {
+                    "target": "com.amazonaws.pinpoint#ListOfMessageHeader",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of <a href=\"https://docs.aws.amazon.com/pinpoint/latest/apireference/apps-application-id-campaigns-campaign-id.html#apps-application-id-campaigns-campaign-id-model-messageheader\">MessageHeaders</a> for the email. You can have up to 15 MessageHeaders for each email.</p>"
+                    }
+                },
                 "HtmlBody": {
                     "target": "com.amazonaws.pinpoint#__string",
                     "traits": {
@@ -5906,6 +5912,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The ARN of the AWS Identity and Access Management (IAM) role that you want Amazon Pinpoint to use when it submits email-related event data for the channel.</p>"
                     }
+                },
+                "OrchestrationSendingRoleArn": {
+                    "target": "com.amazonaws.pinpoint#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of an IAM role for Amazon Pinpoint to use to send email from your campaigns or journeys through Amazon SES.</p>"
+                    }
                 }
             },
             "traits": {
@@ -5999,6 +6011,12 @@
                     "target": "com.amazonaws.pinpoint#__string",
                     "traits": {
                         "smithy.api#documentation": "<p>The ARN of the AWS Identity and Access Management (IAM) role that Amazon Pinpoint uses to submit email-related event data for the channel.</p>"
+                    }
+                },
+                "OrchestrationSendingRoleArn": {
+                    "target": "com.amazonaws.pinpoint#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of an IAM role for Amazon Pinpoint to use to send email from your campaigns or journeys through Amazon SES.</p>"
                     }
                 },
                 "Version": {
@@ -6121,6 +6139,12 @@
                         "smithy.api#documentation": "<p>The subject line, or title, to use in email messages that are based on the message template.</p>"
                     }
                 },
+                "Headers": {
+                    "target": "com.amazonaws.pinpoint#ListOfMessageHeader",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of <a href=\"https://docs.aws.amazon.com/pinpoint/latest/apireference/templates-template-name-email.html#templates-template-name-email-model-messageheader\">MessageHeaders</a> for the email. You can have up to 15 Headers.</p>"
+                    }
+                },
                 "tags": {
                     "target": "com.amazonaws.pinpoint#MapOf__string",
                     "traits": {
@@ -6192,6 +6216,12 @@
                     "target": "com.amazonaws.pinpoint#__string",
                     "traits": {
                         "smithy.api#documentation": "<p>The subject line, or title, that's used in email messages that are based on the message template.</p>"
+                    }
+                },
+                "Headers": {
+                    "target": "com.amazonaws.pinpoint#ListOfMessageHeader",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of <a href=\"https://docs.aws.amazon.com/pinpoint/latest/apireference/templates-template-name-email.html#templates-template-name-email-model-messageheader\">MessageHeaders</a> for the email. You can have up to 15 Headers.</p>"
                     }
                 },
                 "tags": {
@@ -6469,7 +6499,7 @@
                     "target": "com.amazonaws.pinpoint#DeliveryStatus",
                     "traits": {
                         "smithy.api#clientOptional": {},
-                        "smithy.api#documentation": "<p>The delivery status of the message. Possible values are:</p> <ul> <li><p>DUPLICATE - The endpoint address is a duplicate of another endpoint address. Amazon Pinpoint won't attempt to send the message again.</p></li> <li><p>OPT_OUT - The user who's associated with the endpoint has opted out of receiving messages from you. Amazon Pinpoint won't attempt to send the message again.</p></li> <li><p>PERMANENT_FAILURE - An error occurred when delivering the message to the endpoint. Amazon Pinpoint won't attempt to send the message again.</p></li>    <li><p>SUCCESSFUL - The message was successfully delivered to the endpoint.</p></li> <li><p>TEMPORARY_FAILURE - A temporary error occurred. Amazon Pinpoint won't attempt to send the message again.</p></li> <li><p>THROTTLED - Amazon Pinpoint throttled the operation to send the message to the endpoint.</p></li> <li><p>TIMEOUT - The message couldn't be sent within the timeout period.</p></li> <li><p>UNKNOWN_FAILURE - An unknown error occurred.</p></li></ul>",
+                        "smithy.api#documentation": "<p>The delivery status of the message. Possible values are:</p> <ul> <li><p>DUPLICATE - The endpoint address is a duplicate of another endpoint address. Amazon Pinpoint won't attempt to send the message again.</p></li> <li><p>OPT_OUT - The user who's associated with the endpoint has opted out of receiving messages from you. Amazon Pinpoint won't attempt to send the message again.</p></li> <li><p>PERMANENT_FAILURE - An error occurred when delivering the message to the endpoint. Amazon Pinpoint won't attempt to send the message again.</p></li>    <li><p>SUCCESSFUL - The message was successfully delivered to the endpoint.</p></li> <li><p>TEMPORARY_FAILURE - A temporary error occurred. Amazon Pinpoint won't attempt to send the message again.</p></li> <li><p>THROTTLED - Amazon Pinpoint throttled the operation to send the message to the endpoint.</p></li> <li><p>UNKNOWN_FAILURE - An unknown error occurred.</p></li></ul>",
                         "smithy.api#required": {}
                     }
                 },
@@ -13497,6 +13527,12 @@
                 "target": "com.amazonaws.pinpoint#JourneyRunResponse"
             }
         },
+        "com.amazonaws.pinpoint#ListOfMessageHeader": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.pinpoint#MessageHeader"
+            }
+        },
         "com.amazonaws.pinpoint#ListOfMultiConditionalBranch": {
             "type": "list",
             "member": {
@@ -14190,6 +14226,26 @@
                 "smithy.api#documentation": "<p>Specifies the message configuration settings for a campaign.</p>"
             }
         },
+        "com.amazonaws.pinpoint#MessageHeader": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.pinpoint#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the message header. The header name can contain up to 126 characters.</p>"
+                    }
+                },
+                "Value": {
+                    "target": "com.amazonaws.pinpoint#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The value of the message header. The header value can contain up to 870 characters, including the length of any rendered attributes. For example if you add the {CreationDate} attribute, it renders as YYYY-MM-DDTHH:MM:SS.SSSZ and is 24 characters in length.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains the name and value pair of an email header to add to your email. You can have up to 15 MessageHeaders. A header can contain information such as the sender, receiver, route, or timestamp.</p>"
+            }
+        },
         "com.amazonaws.pinpoint#MessageRequest": {
             "type": "structure",
             "members": {
@@ -14277,7 +14333,7 @@
                     "target": "com.amazonaws.pinpoint#DeliveryStatus",
                     "traits": {
                         "smithy.api#clientOptional": {},
-                        "smithy.api#documentation": "<p>The delivery status of the message. Possible values are:</p> <ul> <li><p>DUPLICATE - The endpoint address is a duplicate of another endpoint address. Amazon Pinpoint won't attempt to send the message again.</p></li>   <li><p>OPT_OUT - The user who's associated with the endpoint address has opted out of receiving messages from you. Amazon Pinpoint won't attempt to send the message again.</p></li> <li><p>PERMANENT_FAILURE - An error occurred when delivering the message to the endpoint address. Amazon Pinpoint won't attempt to send the message again.</p></li>   <li><p>SUCCESSFUL - The message was successfully delivered to the endpoint address.</p></li> <li><p>TEMPORARY_FAILURE - A temporary error occurred. Amazon Pinpoint won't attempt to send the message again.</p></li> <li><p>THROTTLED - Amazon Pinpoint throttled the operation to send the message to the endpoint address.</p></li> <li><p>TIMEOUT - The message couldn't be sent within the timeout period.</p></li> <li><p>UNKNOWN_FAILURE - An unknown error occurred.</p></li></ul>",
+                        "smithy.api#documentation": "<p>The delivery status of the message. Possible values are:</p> <ul> <li><p>DUPLICATE - The endpoint address is a duplicate of another endpoint address. Amazon Pinpoint won't attempt to send the message again.</p></li>   <li><p>OPT_OUT - The user who's associated with the endpoint address has opted out of receiving messages from you. Amazon Pinpoint won't attempt to send the message again.</p></li> <li><p>PERMANENT_FAILURE - An error occurred when delivering the message to the endpoint address. Amazon Pinpoint won't attempt to send the message again.</p></li>   <li><p>SUCCESSFUL - The message was successfully delivered to the endpoint address.</p></li> <li><p>TEMPORARY_FAILURE - A temporary error occurred. Amazon Pinpoint won't attempt to send the message again.</p></li> <li><p>THROTTLED - Amazon Pinpoint throttled the operation to send the message to the endpoint address.</p></li> <li><p>UNKNOWN_FAILURE - An unknown error occurred.</p></li></ul>",
                         "smithy.api#required": {}
                     }
                 },
@@ -18115,6 +18171,12 @@
                     "target": "com.amazonaws.pinpoint#SimpleEmailPart",
                     "traits": {
                         "smithy.api#documentation": "<p>The body of the email message, in plain text format. We recommend using plain text format for email clients that don't render HTML content and clients that are connected to high-latency networks, such as mobile devices.</p>"
+                    }
+                },
+                "Headers": {
+                    "target": "com.amazonaws.pinpoint#ListOfMessageHeader",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of MessageHeaders for the email. You can have up to 15 Headers.</p>"
                     }
                 }
             },

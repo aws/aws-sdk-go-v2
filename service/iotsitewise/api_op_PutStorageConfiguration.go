@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/iotsitewise/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -32,8 +31,10 @@ type PutStorageConfigurationInput struct {
 
 	// The storage tier that you specified for your data. The storageType parameter
 	// can be one of the following values:
+	//
 	//   - SITEWISE_DEFAULT_STORAGE – IoT SiteWise saves your data into the hot tier.
 	//   The hot tier is a service-managed database.
+	//
 	//   - MULTI_LAYER_STORAGE – IoT SiteWise saves your data in both the cold tier and
 	//   the hot tier. The cold tier is a customer-managed Amazon S3 bucket.
 	//
@@ -43,13 +44,18 @@ type PutStorageConfigurationInput struct {
 	// Contains the storage configuration for time series (data streams) that aren't
 	// associated with asset properties. The disassociatedDataStorage can be one of
 	// the following values:
+	//
 	//   - ENABLED – IoT SiteWise accepts time series that aren't associated with asset
-	//   properties. After the disassociatedDataStorage is enabled, you can't disable
-	//   it.
+	//   properties.
+	//
+	// After the disassociatedDataStorage is enabled, you can't disable it.
+	//
 	//   - DISABLED – IoT SiteWise doesn't accept time series (data streams) that
 	//   aren't associated with asset properties.
-	// For more information, see Data streams (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/data-streams.html)
-	// in the IoT SiteWise User Guide.
+	//
+	// For more information, see [Data streams] in the IoT SiteWise User Guide.
+	//
+	// [Data streams]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/data-streams.html
 	DisassociatedDataStorage types.DisassociatedDataStorageState
 
 	// Identifies a storage destination. If you specified MULTI_LAYER_STORAGE for the
@@ -81,8 +87,10 @@ type PutStorageConfigurationOutput struct {
 
 	// The storage tier that you specified for your data. The storageType parameter
 	// can be one of the following values:
+	//
 	//   - SITEWISE_DEFAULT_STORAGE – IoT SiteWise saves your data into the hot tier.
 	//   The hot tier is a service-managed database.
+	//
 	//   - MULTI_LAYER_STORAGE – IoT SiteWise saves your data in both the cold tier and
 	//   the hot tier. The cold tier is a customer-managed Amazon S3 bucket.
 	//
@@ -92,13 +100,18 @@ type PutStorageConfigurationOutput struct {
 	// Contains the storage configuration for time series (data streams) that aren't
 	// associated with asset properties. The disassociatedDataStorage can be one of
 	// the following values:
+	//
 	//   - ENABLED – IoT SiteWise accepts time series that aren't associated with asset
-	//   properties. After the disassociatedDataStorage is enabled, you can't disable
-	//   it.
+	//   properties.
+	//
+	// After the disassociatedDataStorage is enabled, you can't disable it.
+	//
 	//   - DISABLED – IoT SiteWise doesn't accept time series (data streams) that
 	//   aren't associated with asset properties.
-	// For more information, see Data streams (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/data-streams.html)
-	// in the IoT SiteWise User Guide.
+	//
+	// For more information, see [Data streams] in the IoT SiteWise User Guide.
+	//
+	// [Data streams]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/data-streams.html
 	DisassociatedDataStorage types.DisassociatedDataStorageState
 
 	// Contains information about the storage destination.
@@ -145,25 +158,25 @@ func (c *Client) addOperationPutStorageConfigurationMiddlewares(stack *middlewar
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -178,6 +191,9 @@ func (c *Client) addOperationPutStorageConfigurationMiddlewares(stack *middlewar
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addEndpointPrefix_opPutStorageConfigurationMiddleware(stack); err != nil {
 		return err
 	}
@@ -187,7 +203,7 @@ func (c *Client) addOperationPutStorageConfigurationMiddlewares(stack *middlewar
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opPutStorageConfiguration(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

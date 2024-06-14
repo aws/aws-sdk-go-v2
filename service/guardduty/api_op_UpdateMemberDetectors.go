@@ -6,17 +6,24 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/guardduty/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Contains information on member accounts to be updated. There might be regional
-// differences because some data sources might not be available in all the Amazon
-// Web Services Regions where GuardDuty is presently supported. For more
-// information, see Regions and endpoints (https://docs.aws.amazon.com/guardduty/latest/ug/guardduty_regions.html)
-// .
+// Contains information on member accounts to be updated.
+//
+// Specifying both EKS Runtime Monitoring ( EKS_RUNTIME_MONITORING ) and Runtime
+// Monitoring ( RUNTIME_MONITORING ) will cause an error. You can add only one of
+// these two features because Runtime Monitoring already includes the threat
+// detection for Amazon EKS resources. For more information, see [Runtime Monitoring].
+//
+// There might be regional differences because some data sources might not be
+// available in all the Amazon Web Services Regions where GuardDuty is presently
+// supported. For more information, see [Regions and endpoints].
+//
+// [Regions and endpoints]: https://docs.aws.amazon.com/guardduty/latest/ug/guardduty_regions.html
+// [Runtime Monitoring]: https://docs.aws.amazon.com/guardduty/latest/ug/runtime-monitoring.html
 func (c *Client) UpdateMemberDetectors(ctx context.Context, params *UpdateMemberDetectorsInput, optFns ...func(*Options)) (*UpdateMemberDetectorsOutput, error) {
 	if params == nil {
 		params = &UpdateMemberDetectorsInput{}
@@ -91,25 +98,25 @@ func (c *Client) addOperationUpdateMemberDetectorsMiddlewares(stack *middleware.
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -124,13 +131,16 @@ func (c *Client) addOperationUpdateMemberDetectorsMiddlewares(stack *middleware.
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpUpdateMemberDetectorsValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateMemberDetectors(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

@@ -6,19 +6,19 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/qbusiness/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Create, or updates, a mapping of users—who have access to a document—to groups.
+//
 // You can also map sub groups to groups. For example, the group "Company
 // Intellectual Property Teams" includes sub groups "Research" and "Engineering".
 // These sub groups include their own list of users or people who work in these
 // teams. Only users who work in research and engineering, and therefore belong in
 // the intellectual property group, can see top-secret company documents in their
-// Amazon Q chat results.
+// Amazon Q Business chat results.
 func (c *Client) PutGroup(ctx context.Context, params *PutGroupInput, optFns ...func(*Options)) (*PutGroupOutput, error) {
 	if params == nil {
 		params = &PutGroupInput{}
@@ -42,18 +42,19 @@ type PutGroupInput struct {
 	ApplicationId *string
 
 	// A list of users or sub groups that belong to a group. This is for generating
-	// Amazon Q chat results only from document a user has access to.
+	// Amazon Q Business chat results only from document a user has access to.
 	//
 	// This member is required.
 	GroupMembers *types.GroupMembers
 
 	// The list that contains your users or sub groups that belong the same group. For
 	// example, the group "Company" includes the user "CEO" and the sub groups
-	// "Research", "Engineering", and "Sales and Marketing". If you have more than 1000
-	// users and/or sub groups for a single group, you need to provide the path to the
-	// S3 file that lists your users and sub groups for a group. Your sub groups can
-	// contain more than 1000 users, but the list of sub groups that belong to a group
-	// (and/or users) must be no more than 1000.
+	// "Research", "Engineering", and "Sales and Marketing".
+	//
+	// If you have more than 1000 users and/or sub groups for a single group, you need
+	// to provide the path to the S3 file that lists your users and sub groups for a
+	// group. Your sub groups can contain more than 1000 users, but the list of sub
+	// groups that belong to a group (and/or users) must be no more than 1000.
 	//
 	// This member is required.
 	GroupName *string
@@ -109,25 +110,25 @@ func (c *Client) addOperationPutGroupMiddlewares(stack *middleware.Stack, option
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -142,13 +143,16 @@ func (c *Client) addOperationPutGroupMiddlewares(stack *middleware.Stack, option
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpPutGroupValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opPutGroup(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

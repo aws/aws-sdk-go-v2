@@ -6,14 +6,15 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Sets the health status of the specified instance. For more information, see
-// Health checks for Auto Scaling instances (https://docs.aws.amazon.com/autoscaling/ec2/userguide/healthcheck.html)
-// in the Amazon EC2 Auto Scaling User Guide.
+// Sets the health status of the specified instance.
+//
+// For more information, see [Health checks for Auto Scaling instances] in the Amazon EC2 Auto Scaling User Guide.
+//
+// [Health checks for Auto Scaling instances]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/healthcheck.html
 func (c *Client) SetInstanceHealth(ctx context.Context, params *SetInstanceHealthInput, optFns ...func(*Options)) (*SetInstanceHealthOutput, error) {
 	if params == nil {
 		params = &SetInstanceHealthInput{}
@@ -46,9 +47,12 @@ type SetInstanceHealthInput struct {
 	// If the Auto Scaling group of the specified instance has a HealthCheckGracePeriod
 	// specified for the group, by default, this call respects the grace period. Set
 	// this to False , to have the call not respect the grace period associated with
-	// the group. For more information about the health check grace period, see
-	// CreateAutoScalingGroup (https://docs.aws.amazon.com/autoscaling/ec2/APIReference/API_CreateAutoScalingGroup.html)
-	// in the Amazon EC2 Auto Scaling API Reference.
+	// the group.
+	//
+	// For more information about the health check grace period, see [CreateAutoScalingGroup] in the Amazon
+	// EC2 Auto Scaling API Reference.
+	//
+	// [CreateAutoScalingGroup]: https://docs.aws.amazon.com/autoscaling/ec2/APIReference/API_CreateAutoScalingGroup.html
 	ShouldRespectGracePeriod *bool
 
 	noSmithyDocumentSerde
@@ -83,25 +87,25 @@ func (c *Client) addOperationSetInstanceHealthMiddlewares(stack *middleware.Stac
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -116,13 +120,16 @@ func (c *Client) addOperationSetInstanceHealthMiddlewares(stack *middleware.Stac
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpSetInstanceHealthValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opSetInstanceHealth(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

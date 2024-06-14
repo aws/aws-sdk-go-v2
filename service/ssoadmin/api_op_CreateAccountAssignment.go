@@ -6,23 +6,26 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/ssoadmin/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Assigns access to a principal for a specified Amazon Web Services account using
-// a specified permission set. The term principal here refers to a user or group
-// that is defined in IAM Identity Center. As part of a successful
-// CreateAccountAssignment call, the specified permission set will automatically be
-// provisioned to the account in the form of an IAM policy. That policy is attached
-// to the IAM role created in IAM Identity Center. If the permission set is
-// subsequently updated, the corresponding IAM policies attached to roles in your
-// accounts will not be updated automatically. In this case, you must call
-// ProvisionPermissionSet to make these updates. After a successful response, call
-// DescribeAccountAssignmentCreationStatus to describe the status of an assignment
-// creation request.
+// a specified permission set.
+//
+// The term principal here refers to a user or group that is defined in IAM
+// Identity Center.
+//
+// As part of a successful CreateAccountAssignment call, the specified permission
+// set will automatically be provisioned to the account in the form of an IAM
+// policy. That policy is attached to the IAM role created in IAM Identity Center.
+// If the permission set is subsequently updated, the corresponding IAM policies
+// attached to roles in your accounts will not be updated automatically. In this
+// case, you must call ProvisionPermissionSetto make these updates.
+//
+// After a successful response, call DescribeAccountAssignmentCreationStatus to
+// describe the status of an assignment creation request.
 func (c *Client) CreateAccountAssignment(ctx context.Context, params *CreateAccountAssignmentInput, optFns ...func(*Options)) (*CreateAccountAssignmentOutput, error) {
 	if params == nil {
 		params = &CreateAccountAssignmentInput{}
@@ -41,9 +44,8 @@ func (c *Client) CreateAccountAssignment(ctx context.Context, params *CreateAcco
 type CreateAccountAssignmentInput struct {
 
 	// The ARN of the IAM Identity Center instance under which the operation will be
-	// executed. For more information about ARNs, see Amazon Resource Names (ARNs) and
-	// Amazon Web Services Service Namespaces in the Amazon Web Services General
-	// Reference.
+	// executed. For more information about ARNs, see Amazon Resource Names (ARNs) and Amazon Web Services Service Namespacesin the Amazon Web Services
+	// General Reference.
 	//
 	// This member is required.
 	InstanceArn *string
@@ -56,8 +58,7 @@ type CreateAccountAssignmentInput struct {
 
 	// An identifier for an object in IAM Identity Center, such as a user or group.
 	// PrincipalIds are GUIDs (For example, f81d4fae-7dec-11d0-a765-00a0c91e6bf6). For
-	// more information about PrincipalIds in IAM Identity Center, see the IAM
-	// Identity Center Identity Store API Reference .
+	// more information about PrincipalIds in IAM Identity Center, see the IAM Identity Center Identity Store API Reference.
 	//
 	// This member is required.
 	PrincipalId *string
@@ -114,25 +115,25 @@ func (c *Client) addOperationCreateAccountAssignmentMiddlewares(stack *middlewar
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -147,13 +148,16 @@ func (c *Client) addOperationCreateAccountAssignmentMiddlewares(stack *middlewar
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpCreateAccountAssignmentValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateAccountAssignment(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

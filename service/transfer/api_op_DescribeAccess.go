@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/transfer/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -14,8 +13,10 @@ import (
 
 // Describes the access that is assigned to the specific file transfer
 // protocol-enabled server, as identified by its ServerId property and its
-// ExternalId . The response from this call returns the properties of the access
-// that is associated with the ServerId value that was specified.
+// ExternalId .
+//
+// The response from this call returns the properties of the access that is
+// associated with the ServerId value that was specified.
 func (c *Client) DescribeAccess(ctx context.Context, params *DescribeAccessInput, optFns ...func(*Options)) (*DescribeAccessOutput, error) {
 	if params == nil {
 		params = &DescribeAccessInput{}
@@ -37,12 +38,18 @@ type DescribeAccessInput struct {
 	// directory. The users of the group that you associate have access to your Amazon
 	// S3 or Amazon EFS resources over the enabled protocols using Transfer Family. If
 	// you know the group name, you can view the SID values by running the following
-	// command using Windows PowerShell. Get-ADGroup -Filter {samAccountName -like
-	// "YourGroupName*"} -Properties * | Select SamAccountName,ObjectSid In that
-	// command, replace YourGroupName with the name of your Active Directory group. The
-	// regular expression used to validate this parameter is a string of characters
-	// consisting of uppercase and lowercase alphanumeric characters with no spaces.
-	// You can also include underscores or any of the following characters: =,.@:/-
+	// command using Windows PowerShell.
+	//
+	//     Get-ADGroup -Filter {samAccountName -like "YourGroupName*"} -Properties * |
+	//     Select SamAccountName,ObjectSid
+	//
+	// In that command, replace YourGroupName with the name of your Active Directory
+	// group.
+	//
+	// The regular expression used to validate this parameter is a string of
+	// characters consisting of uppercase and lowercase alphanumeric characters with no
+	// spaces. You can also include underscores or any of the following characters:
+	// =,.@:/-
 	//
 	// This member is required.
 	ExternalId *string
@@ -95,25 +102,25 @@ func (c *Client) addOperationDescribeAccessMiddlewares(stack *middleware.Stack, 
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -128,13 +135,16 @@ func (c *Client) addOperationDescribeAccessMiddlewares(stack *middleware.Stack, 
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDescribeAccessValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeAccess(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

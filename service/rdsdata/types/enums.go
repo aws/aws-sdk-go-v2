@@ -11,8 +11,9 @@ const (
 )
 
 // Values returns all known values for DecimalReturnType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (DecimalReturnType) Values() []DecimalReturnType {
 	return []DecimalReturnType{
 		"STRING",
@@ -29,8 +30,9 @@ const (
 )
 
 // Values returns all known values for LongReturnType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (LongReturnType) Values() []LongReturnType {
 	return []LongReturnType{
 		"STRING",
@@ -47,8 +49,9 @@ const (
 )
 
 // Values returns all known values for RecordsFormatType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (RecordsFormatType) Values() []RecordsFormatType {
 	return []RecordsFormatType{
 		"NONE",
@@ -69,8 +72,9 @@ const (
 )
 
 // Values returns all known values for TypeHint. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (TypeHint) Values() []TypeHint {
 	return []TypeHint{
 		"JSON",

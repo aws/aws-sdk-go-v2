@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -18,9 +17,11 @@ import (
 // that has auto-placement enabled. When auto-placement is disabled, you need to
 // provide a host ID to have the instance launch onto a specific host. If no host
 // ID is provided, the instance is launched onto a suitable host with
-// auto-placement enabled. You can also use this API action to modify a Dedicated
-// Host to support either multiple instance types in an instance family, or to
-// support a specific instance type only.
+// auto-placement enabled.
+//
+// You can also use this API action to modify a Dedicated Host to support either
+// multiple instance types in an instance family, or to support a specific instance
+// type only.
 func (c *Client) ModifyHosts(ctx context.Context, params *ModifyHostsInput, optFns ...func(*Options)) (*ModifyHostsOutput, error) {
 	if params == nil {
 		params = &ModifyHostsInput{}
@@ -47,28 +48,32 @@ type ModifyHostsInput struct {
 	AutoPlacement types.AutoPlacement
 
 	// Indicates whether to enable or disable host maintenance for the Dedicated Host.
-	// For more information, see Host maintenance (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/dedicated-hosts-maintenance.html)
-	// in the Amazon EC2 User Guide.
+	// For more information, see [Host maintenance]in the Amazon EC2 User Guide.
+	//
+	// [Host maintenance]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/dedicated-hosts-maintenance.html
 	HostMaintenance types.HostMaintenance
 
 	// Indicates whether to enable or disable host recovery for the Dedicated Host.
-	// For more information, see Host recovery (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/dedicated-hosts-recovery.html)
-	// in the Amazon EC2 User Guide.
+	// For more information, see [Host recovery]in the Amazon EC2 User Guide.
+	//
+	// [Host recovery]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/dedicated-hosts-recovery.html
 	HostRecovery types.HostRecovery
 
 	// Specifies the instance family to be supported by the Dedicated Host. Specify
 	// this parameter to modify a Dedicated Host to support multiple instance types
-	// within its current instance family. If you want to modify a Dedicated Host to
-	// support a specific instance type only, omit this parameter and specify
-	// InstanceType instead. You cannot specify InstanceFamily and InstanceType in the
-	// same request.
+	// within its current instance family.
+	//
+	// If you want to modify a Dedicated Host to support a specific instance type
+	// only, omit this parameter and specify InstanceType instead. You cannot specify
+	// InstanceFamily and InstanceType in the same request.
 	InstanceFamily *string
 
 	// Specifies the instance type to be supported by the Dedicated Host. Specify this
 	// parameter to modify a Dedicated Host to support only a specific instance type.
-	// If you want to modify a Dedicated Host to support multiple instance types in its
-	// current instance family, omit this parameter and specify InstanceFamily instead.
-	// You cannot specify InstanceType and InstanceFamily in the same request.
+	//
+	// If you want to modify a Dedicated Host to support multiple instance types in
+	// its current instance family, omit this parameter and specify InstanceFamily
+	// instead. You cannot specify InstanceType and InstanceFamily in the same request.
 	InstanceType *string
 
 	noSmithyDocumentSerde
@@ -111,25 +116,25 @@ func (c *Client) addOperationModifyHostsMiddlewares(stack *middleware.Stack, opt
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -144,13 +149,16 @@ func (c *Client) addOperationModifyHostsMiddlewares(stack *middleware.Stack, opt
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpModifyHostsValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opModifyHosts(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

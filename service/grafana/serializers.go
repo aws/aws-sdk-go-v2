@@ -67,6 +67,11 @@ func awsRestjson1_serializeOpHttpBindingsAssociateLicenseInput(v *AssociateLicen
 		return fmt.Errorf("unsupported serialization of nil %T", v)
 	}
 
+	if v.GrafanaToken != nil && len(*v.GrafanaToken) > 0 {
+		locationName := "Grafana-Token"
+		encoder.SetHeader(locationName).String(*v.GrafanaToken)
+	}
+
 	if len(v.LicenseType) == 0 {
 		return &smithy.SerializationError{Err: fmt.Errorf("input member licenseType must not be empty")}
 	}
@@ -355,6 +360,201 @@ func awsRestjson1_serializeOpDocumentCreateWorkspaceApiKeyInput(v *CreateWorkspa
 	return nil
 }
 
+type awsRestjson1_serializeOpCreateWorkspaceServiceAccount struct {
+}
+
+func (*awsRestjson1_serializeOpCreateWorkspaceServiceAccount) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpCreateWorkspaceServiceAccount) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*CreateWorkspaceServiceAccountInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/workspaces/{workspaceId}/serviceaccounts")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "POST"
+	var restEncoder *httpbinding.Encoder
+	if request.URL.RawPath == "" {
+		restEncoder, err = httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	} else {
+		request.URL.RawPath = smithyhttp.JoinPath(request.URL.RawPath, opPath)
+		restEncoder, err = httpbinding.NewEncoderWithRawPath(request.URL.Path, request.URL.RawPath, request.URL.RawQuery, request.Header)
+	}
+
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsCreateWorkspaceServiceAccountInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentCreateWorkspaceServiceAccountInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsCreateWorkspaceServiceAccountInput(v *CreateWorkspaceServiceAccountInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.WorkspaceId == nil || len(*v.WorkspaceId) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member workspaceId must not be empty")}
+	}
+	if v.WorkspaceId != nil {
+		if err := encoder.SetURI("workspaceId").String(*v.WorkspaceId); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentCreateWorkspaceServiceAccountInput(v *CreateWorkspaceServiceAccountInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.GrafanaRole) > 0 {
+		ok := object.Key("grafanaRole")
+		ok.String(string(v.GrafanaRole))
+	}
+
+	if v.Name != nil {
+		ok := object.Key("name")
+		ok.String(*v.Name)
+	}
+
+	return nil
+}
+
+type awsRestjson1_serializeOpCreateWorkspaceServiceAccountToken struct {
+}
+
+func (*awsRestjson1_serializeOpCreateWorkspaceServiceAccountToken) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpCreateWorkspaceServiceAccountToken) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*CreateWorkspaceServiceAccountTokenInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/workspaces/{workspaceId}/serviceaccounts/{serviceAccountId}/tokens")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "POST"
+	var restEncoder *httpbinding.Encoder
+	if request.URL.RawPath == "" {
+		restEncoder, err = httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	} else {
+		request.URL.RawPath = smithyhttp.JoinPath(request.URL.RawPath, opPath)
+		restEncoder, err = httpbinding.NewEncoderWithRawPath(request.URL.Path, request.URL.RawPath, request.URL.RawQuery, request.Header)
+	}
+
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsCreateWorkspaceServiceAccountTokenInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentCreateWorkspaceServiceAccountTokenInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsCreateWorkspaceServiceAccountTokenInput(v *CreateWorkspaceServiceAccountTokenInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.ServiceAccountId == nil || len(*v.ServiceAccountId) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member serviceAccountId must not be empty")}
+	}
+	if v.ServiceAccountId != nil {
+		if err := encoder.SetURI("serviceAccountId").String(*v.ServiceAccountId); err != nil {
+			return err
+		}
+	}
+
+	if v.WorkspaceId == nil || len(*v.WorkspaceId) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member workspaceId must not be empty")}
+	}
+	if v.WorkspaceId != nil {
+		if err := encoder.SetURI("workspaceId").String(*v.WorkspaceId); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentCreateWorkspaceServiceAccountTokenInput(v *CreateWorkspaceServiceAccountTokenInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Name != nil {
+		ok := object.Key("name")
+		ok.String(*v.Name)
+	}
+
+	if v.SecondsToLive != nil {
+		ok := object.Key("secondsToLive")
+		ok.Integer(*v.SecondsToLive)
+	}
+
+	return nil
+}
+
 type awsRestjson1_serializeOpDeleteWorkspace struct {
 }
 
@@ -478,6 +678,163 @@ func awsRestjson1_serializeOpHttpBindingsDeleteWorkspaceApiKeyInput(v *DeleteWor
 	}
 	if v.KeyName != nil {
 		if err := encoder.SetURI("keyName").String(*v.KeyName); err != nil {
+			return err
+		}
+	}
+
+	if v.WorkspaceId == nil || len(*v.WorkspaceId) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member workspaceId must not be empty")}
+	}
+	if v.WorkspaceId != nil {
+		if err := encoder.SetURI("workspaceId").String(*v.WorkspaceId); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+type awsRestjson1_serializeOpDeleteWorkspaceServiceAccount struct {
+}
+
+func (*awsRestjson1_serializeOpDeleteWorkspaceServiceAccount) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpDeleteWorkspaceServiceAccount) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*DeleteWorkspaceServiceAccountInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/workspaces/{workspaceId}/serviceaccounts/{serviceAccountId}")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "DELETE"
+	var restEncoder *httpbinding.Encoder
+	if request.URL.RawPath == "" {
+		restEncoder, err = httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	} else {
+		request.URL.RawPath = smithyhttp.JoinPath(request.URL.RawPath, opPath)
+		restEncoder, err = httpbinding.NewEncoderWithRawPath(request.URL.Path, request.URL.RawPath, request.URL.RawQuery, request.Header)
+	}
+
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsDeleteWorkspaceServiceAccountInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsDeleteWorkspaceServiceAccountInput(v *DeleteWorkspaceServiceAccountInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.ServiceAccountId == nil || len(*v.ServiceAccountId) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member serviceAccountId must not be empty")}
+	}
+	if v.ServiceAccountId != nil {
+		if err := encoder.SetURI("serviceAccountId").String(*v.ServiceAccountId); err != nil {
+			return err
+		}
+	}
+
+	if v.WorkspaceId == nil || len(*v.WorkspaceId) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member workspaceId must not be empty")}
+	}
+	if v.WorkspaceId != nil {
+		if err := encoder.SetURI("workspaceId").String(*v.WorkspaceId); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+type awsRestjson1_serializeOpDeleteWorkspaceServiceAccountToken struct {
+}
+
+func (*awsRestjson1_serializeOpDeleteWorkspaceServiceAccountToken) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpDeleteWorkspaceServiceAccountToken) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*DeleteWorkspaceServiceAccountTokenInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/workspaces/{workspaceId}/serviceaccounts/{serviceAccountId}/tokens/{tokenId}")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "DELETE"
+	var restEncoder *httpbinding.Encoder
+	if request.URL.RawPath == "" {
+		restEncoder, err = httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	} else {
+		request.URL.RawPath = smithyhttp.JoinPath(request.URL.RawPath, opPath)
+		restEncoder, err = httpbinding.NewEncoderWithRawPath(request.URL.Path, request.URL.RawPath, request.URL.RawQuery, request.Header)
+	}
+
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsDeleteWorkspaceServiceAccountTokenInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsDeleteWorkspaceServiceAccountTokenInput(v *DeleteWorkspaceServiceAccountTokenInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.ServiceAccountId == nil || len(*v.ServiceAccountId) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member serviceAccountId must not be empty")}
+	}
+	if v.ServiceAccountId != nil {
+		if err := encoder.SetURI("serviceAccountId").String(*v.ServiceAccountId); err != nil {
+			return err
+		}
+	}
+
+	if v.TokenId == nil || len(*v.TokenId) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member tokenId must not be empty")}
+	}
+	if v.TokenId != nil {
+		if err := encoder.SetURI("tokenId").String(*v.TokenId); err != nil {
 			return err
 		}
 	}
@@ -1040,6 +1397,161 @@ func awsRestjson1_serializeOpHttpBindingsListWorkspacesInput(v *ListWorkspacesIn
 
 	if v.NextToken != nil {
 		encoder.SetQuery("nextToken").String(*v.NextToken)
+	}
+
+	return nil
+}
+
+type awsRestjson1_serializeOpListWorkspaceServiceAccounts struct {
+}
+
+func (*awsRestjson1_serializeOpListWorkspaceServiceAccounts) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpListWorkspaceServiceAccounts) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*ListWorkspaceServiceAccountsInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/workspaces/{workspaceId}/serviceaccounts")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "GET"
+	var restEncoder *httpbinding.Encoder
+	if request.URL.RawPath == "" {
+		restEncoder, err = httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	} else {
+		request.URL.RawPath = smithyhttp.JoinPath(request.URL.RawPath, opPath)
+		restEncoder, err = httpbinding.NewEncoderWithRawPath(request.URL.Path, request.URL.RawPath, request.URL.RawQuery, request.Header)
+	}
+
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsListWorkspaceServiceAccountsInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsListWorkspaceServiceAccountsInput(v *ListWorkspaceServiceAccountsInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.MaxResults != nil {
+		encoder.SetQuery("maxResults").Integer(*v.MaxResults)
+	}
+
+	if v.NextToken != nil {
+		encoder.SetQuery("nextToken").String(*v.NextToken)
+	}
+
+	if v.WorkspaceId == nil || len(*v.WorkspaceId) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member workspaceId must not be empty")}
+	}
+	if v.WorkspaceId != nil {
+		if err := encoder.SetURI("workspaceId").String(*v.WorkspaceId); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+type awsRestjson1_serializeOpListWorkspaceServiceAccountTokens struct {
+}
+
+func (*awsRestjson1_serializeOpListWorkspaceServiceAccountTokens) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpListWorkspaceServiceAccountTokens) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*ListWorkspaceServiceAccountTokensInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/workspaces/{workspaceId}/serviceaccounts/{serviceAccountId}/tokens")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "GET"
+	var restEncoder *httpbinding.Encoder
+	if request.URL.RawPath == "" {
+		restEncoder, err = httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	} else {
+		request.URL.RawPath = smithyhttp.JoinPath(request.URL.RawPath, opPath)
+		restEncoder, err = httpbinding.NewEncoderWithRawPath(request.URL.Path, request.URL.RawPath, request.URL.RawQuery, request.Header)
+	}
+
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsListWorkspaceServiceAccountTokensInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsListWorkspaceServiceAccountTokensInput(v *ListWorkspaceServiceAccountTokensInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.MaxResults != nil {
+		encoder.SetQuery("maxResults").Integer(*v.MaxResults)
+	}
+
+	if v.NextToken != nil {
+		encoder.SetQuery("nextToken").String(*v.NextToken)
+	}
+
+	if v.ServiceAccountId == nil || len(*v.ServiceAccountId) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member serviceAccountId must not be empty")}
+	}
+	if v.ServiceAccountId != nil {
+		if err := encoder.SetURI("serviceAccountId").String(*v.ServiceAccountId); err != nil {
+			return err
+		}
+	}
+
+	if v.WorkspaceId == nil || len(*v.WorkspaceId) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member workspaceId must not be empty")}
+	}
+	if v.WorkspaceId != nil {
+		if err := encoder.SetURI("workspaceId").String(*v.WorkspaceId); err != nil {
+			return err
+		}
 	}
 
 	return nil

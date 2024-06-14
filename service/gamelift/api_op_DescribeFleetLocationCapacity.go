@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/gamelift/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -14,13 +13,26 @@ import (
 
 // Retrieves the resource capacity settings for a fleet location. The data
 // returned includes the current capacity (number of EC2 instances) and some
-// scaling settings for the requested fleet location. Use this operation to
-// retrieve capacity information for a fleet's remote location or home Region (you
-// can also retrieve home Region capacity by calling DescribeFleetCapacity ). To
-// retrieve capacity data, identify a fleet and location. If successful, a
-// FleetCapacity object is returned for the requested fleet location. Learn more
-// Setting up Amazon GameLift fleets (https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-intro.html)
-// GameLift metrics for fleets (https://docs.aws.amazon.com/gamelift/latest/developerguide/monitoring-cloudwatch.html#gamelift-metrics-fleet)
+// scaling settings for the requested fleet location. For a container fleet, this
+// operation also returns counts for replica container groups.
+//
+// Use this operation to retrieve capacity information for a fleet's remote
+// location or home Region (you can also retrieve home Region capacity by calling
+// DescribeFleetCapacity ).
+//
+// To retrieve capacity data, identify a fleet and location.
+//
+// If successful, a FleetCapacity object is returned for the requested fleet
+// location.
+//
+// # Learn more
+//
+// [Setting up Amazon GameLift fleets]
+//
+// [GameLift metrics for fleets]
+//
+// [Setting up Amazon GameLift fleets]: https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-intro.html
+// [GameLift metrics for fleets]: https://docs.aws.amazon.com/gamelift/latest/developerguide/monitoring-cloudwatch.html#gamelift-metrics-fleet
 func (c *Client) DescribeFleetLocationCapacity(ctx context.Context, params *DescribeFleetLocationCapacityInput, optFns ...func(*Options)) (*DescribeFleetLocationCapacityOutput, error) {
 	if params == nil {
 		params = &DescribeFleetLocationCapacityInput{}
@@ -88,25 +100,25 @@ func (c *Client) addOperationDescribeFleetLocationCapacityMiddlewares(stack *mid
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -121,13 +133,16 @@ func (c *Client) addOperationDescribeFleetLocationCapacityMiddlewares(stack *mid
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDescribeFleetLocationCapacityValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeFleetLocationCapacity(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

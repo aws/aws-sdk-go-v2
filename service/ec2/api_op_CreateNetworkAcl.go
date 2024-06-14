@@ -6,16 +6,17 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates a network ACL in a VPC. Network ACLs provide an optional layer of
-// security (in addition to security groups) for the instances in your VPC. For
-// more information, see Network ACLs (https://docs.aws.amazon.com/vpc/latest/userguide/vpc-network-acls.html)
-// in the Amazon VPC User Guide.
+// security (in addition to security groups) for the instances in your VPC.
+//
+// For more information, see [Network ACLs] in the Amazon VPC User Guide.
+//
+// [Network ACLs]: https://docs.aws.amazon.com/vpc/latest/userguide/vpc-network-acls.html
 func (c *Client) CreateNetworkAcl(ctx context.Context, params *CreateNetworkAclInput, optFns ...func(*Options)) (*CreateNetworkAclOutput, error) {
 	if params == nil {
 		params = &CreateNetworkAclInput{}
@@ -39,8 +40,9 @@ type CreateNetworkAclInput struct {
 	VpcId *string
 
 	// Unique, case-sensitive identifier that you provide to ensure the idempotency of
-	// the request. For more information, see Ensuring idempotency (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Run_Instance_Idempotency.html)
-	// .
+	// the request. For more information, see [Ensuring idempotency].
+	//
+	// [Ensuring idempotency]: https://docs.aws.amazon.com/ec2/latest/devguide/ec2-api-idempotency.html
 	ClientToken *string
 
 	// Checks whether you have the required permissions for the action, without
@@ -92,25 +94,25 @@ func (c *Client) addOperationCreateNetworkAclMiddlewares(stack *middleware.Stack
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -125,6 +127,9 @@ func (c *Client) addOperationCreateNetworkAclMiddlewares(stack *middleware.Stack
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opCreateNetworkAclMiddleware(stack, options); err != nil {
 		return err
 	}
@@ -134,7 +139,7 @@ func (c *Client) addOperationCreateNetworkAclMiddlewares(stack *middleware.Stack
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateNetworkAcl(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

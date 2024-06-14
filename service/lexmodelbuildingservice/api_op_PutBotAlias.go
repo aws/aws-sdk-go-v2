@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/lexmodelbuildingservice/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -15,7 +14,8 @@ import (
 
 // Creates an alias for the specified version of the bot or replaces an alias for
 // the specified bot. To change the version of the bot that the alias points to,
-// replace the alias. For more information about aliases, see versioning-aliases .
+// replace the alias. For more information about aliases, see versioning-aliases.
+//
 // This operation requires permissions for the lex:PutBotAlias action.
 func (c *Client) PutBotAlias(ctx context.Context, params *PutBotAliasInput, optFns ...func(*Options)) (*PutBotAliasOutput, error) {
 	if params == nil {
@@ -49,12 +49,15 @@ type PutBotAliasInput struct {
 	// This member is required.
 	Name *string
 
-	// Identifies a specific revision of the $LATEST version. When you create a new
-	// bot alias, leave the checksum field blank. If you specify a checksum you get a
-	// BadRequestException exception. When you want to update a bot alias, set the
-	// checksum field to the checksum of the most recent revision of the $LATEST
-	// version. If you don't specify the checksum field, or if the checksum does not
-	// match the $LATEST version, you get a PreconditionFailedException exception.
+	// Identifies a specific revision of the $LATEST version.
+	//
+	// When you create a new bot alias, leave the checksum field blank. If you specify
+	// a checksum you get a BadRequestException exception.
+	//
+	// When you want to update a bot alias, set the checksum field to the checksum of
+	// the most recent revision of the $LATEST version. If you don't specify the
+	// checksum field, or if the checksum does not match the $LATEST version, you get
+	// a PreconditionFailedException exception.
 	Checksum *string
 
 	// Settings for conversation logs for the alias.
@@ -129,25 +132,25 @@ func (c *Client) addOperationPutBotAliasMiddlewares(stack *middleware.Stack, opt
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -162,13 +165,16 @@ func (c *Client) addOperationPutBotAliasMiddlewares(stack *middleware.Stack, opt
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpPutBotAliasValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opPutBotAlias(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

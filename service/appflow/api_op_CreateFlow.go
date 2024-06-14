@@ -6,13 +6,13 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/appflow/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Enables your application to create a new flow using Amazon AppFlow. You must
+//	Enables your application to create a new flow using Amazon AppFlow. You must
+//
 // create a connector profile before calling this API. Please note that the Request
 // Syntax below shows syntax for multiple destinations, however, you can only
 // transfer data to one item in this list at a time. Amazon AppFlow does not
@@ -34,31 +34,31 @@ func (c *Client) CreateFlow(ctx context.Context, params *CreateFlowInput, optFns
 
 type CreateFlowInput struct {
 
-	// The configuration that controls how Amazon AppFlow places data in the
+	//  The configuration that controls how Amazon AppFlow places data in the
 	// destination connector.
 	//
 	// This member is required.
 	DestinationFlowConfigList []types.DestinationFlowConfig
 
-	// The specified name of the flow. Spaces are not allowed. Use underscores (_) or
+	//  The specified name of the flow. Spaces are not allowed. Use underscores (_) or
 	// hyphens (-) only.
 	//
 	// This member is required.
 	FlowName *string
 
-	// The configuration that controls how Amazon AppFlow retrieves data from the
+	//  The configuration that controls how Amazon AppFlow retrieves data from the
 	// source connector.
 	//
 	// This member is required.
 	SourceFlowConfig *types.SourceFlowConfig
 
-	// A list of tasks that Amazon AppFlow performs while transferring the data in the
-	// flow run.
+	//  A list of tasks that Amazon AppFlow performs while transferring the data in
+	// the flow run.
 	//
 	// This member is required.
 	Tasks []types.Task
 
-	// The trigger settings that determine how and when the flow runs.
+	//  The trigger settings that determine how and when the flow runs.
 	//
 	// This member is required.
 	TriggerConfig *types.TriggerConfig
@@ -66,19 +66,22 @@ type CreateFlowInput struct {
 	// The clientToken parameter is an idempotency token. It ensures that your
 	// CreateFlow request completes only once. You choose the value to pass. For
 	// example, if you don't receive a response from your request, you can safely retry
-	// the request with the same clientToken parameter value. If you omit a clientToken
-	// value, the Amazon Web Services SDK that you are using inserts a value for you.
-	// This way, the SDK can safely retry requests multiple times after a network
-	// error. You must provide your own value for other use cases. If you specify input
-	// parameters that differ from your first request, an error occurs. If you use a
-	// different value for clientToken , Amazon AppFlow considers it a new call to
-	// CreateFlow . The token is active for 8 hours.
+	// the request with the same clientToken parameter value.
+	//
+	// If you omit a clientToken value, the Amazon Web Services SDK that you are using
+	// inserts a value for you. This way, the SDK can safely retry requests multiple
+	// times after a network error. You must provide your own value for other use
+	// cases.
+	//
+	// If you specify input parameters that differ from your first request, an error
+	// occurs. If you use a different value for clientToken , Amazon AppFlow considers
+	// it a new call to CreateFlow . The token is active for 8 hours.
 	ClientToken *string
 
-	// A description of the flow you want to create.
+	//  A description of the flow you want to create.
 	Description *string
 
-	// The ARN (Amazon Resource Name) of the Key Management Service (KMS) key you
+	//  The ARN (Amazon Resource Name) of the Key Management Service (KMS) key you
 	// provide for encryption. This is required if you do not want to use the Amazon
 	// AppFlow-managed KMS key. If you don't provide anything here, Amazon AppFlow uses
 	// the Amazon AppFlow-managed KMS key.
@@ -89,7 +92,7 @@ type CreateFlowInput struct {
 	// from a flow, it stores metadata in a data catalog.
 	MetadataCatalogConfig *types.MetadataCatalogConfig
 
-	// The tags used to organize, track, or control access for your flow.
+	//  The tags used to organize, track, or control access for your flow.
 	Tags map[string]string
 
 	noSmithyDocumentSerde
@@ -97,10 +100,10 @@ type CreateFlowInput struct {
 
 type CreateFlowOutput struct {
 
-	// The flow's Amazon Resource Name (ARN).
+	//  The flow's Amazon Resource Name (ARN).
 	FlowArn *string
 
-	// Indicates the current status of the flow.
+	//  Indicates the current status of the flow.
 	FlowStatus types.FlowStatus
 
 	// Metadata pertaining to the operation's result.
@@ -131,25 +134,25 @@ func (c *Client) addOperationCreateFlowMiddlewares(stack *middleware.Stack, opti
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -164,6 +167,9 @@ func (c *Client) addOperationCreateFlowMiddlewares(stack *middleware.Stack, opti
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opCreateFlowMiddleware(stack, options); err != nil {
 		return err
 	}
@@ -173,7 +179,7 @@ func (c *Client) addOperationCreateFlowMiddlewares(stack *middleware.Stack, opti
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateFlow(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

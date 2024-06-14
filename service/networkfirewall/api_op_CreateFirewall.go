@@ -6,24 +6,28 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/networkfirewall/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates an Network Firewall Firewall and accompanying FirewallStatus for a VPC.
+//
 // The firewall defines the configuration settings for an Network Firewall
 // firewall. The settings that you can define at creation include the firewall
 // policy, the subnets in your VPC to use for the firewall endpoints, and any tags
-// that are attached to the firewall Amazon Web Services resource. After you create
-// a firewall, you can provide additional settings, like the logging configuration.
+// that are attached to the firewall Amazon Web Services resource.
+//
+// After you create a firewall, you can provide additional settings, like the
+// logging configuration.
+//
 // To update the settings for a firewall, you use the operations that apply to the
-// settings themselves, for example UpdateLoggingConfiguration , AssociateSubnets ,
-// and UpdateFirewallDeleteProtection . To manage a firewall's tags, use the
-// standard Amazon Web Services resource tagging operations, ListTagsForResource ,
-// TagResource , and UntagResource . To retrieve information about firewalls, use
-// ListFirewalls and DescribeFirewall .
+// settings themselves, for example UpdateLoggingConfiguration, AssociateSubnets, and UpdateFirewallDeleteProtection.
+//
+// To manage a firewall's tags, use the standard Amazon Web Services resource
+// tagging operations, ListTagsForResource, TagResource, and UntagResource.
+//
+// To retrieve information about firewalls, use ListFirewalls and DescribeFirewall.
 func (c *Client) CreateFirewall(ctx context.Context, params *CreateFirewallInput, optFns ...func(*Options)) (*CreateFirewallOutput, error) {
 	if params == nil {
 		params = &CreateFirewallInput{}
@@ -47,8 +51,7 @@ type CreateFirewallInput struct {
 	// This member is required.
 	FirewallName *string
 
-	// The Amazon Resource Name (ARN) of the FirewallPolicy that you want to use for
-	// the firewall.
+	// The Amazon Resource Name (ARN) of the FirewallPolicy that you want to use for the firewall.
 	//
 	// This member is required.
 	FirewallPolicyArn *string
@@ -61,7 +64,9 @@ type CreateFirewallInput struct {
 	SubnetMappings []types.SubnetMapping
 
 	// The unique identifier of the VPC where Network Firewall should create the
-	// firewall. You can't change this setting after you create the firewall.
+	// firewall.
+	//
+	// You can't change this setting after you create the firewall.
 	//
 	// This member is required.
 	VpcId *string
@@ -102,9 +107,8 @@ type CreateFirewallOutput struct {
 	// firewall policy and the subnets in your VPC to use for the firewall endpoints.
 	Firewall *types.Firewall
 
-	// Detailed information about the current status of a Firewall . You can retrieve
-	// this for a firewall by calling DescribeFirewall and providing the firewall name
-	// and ARN.
+	// Detailed information about the current status of a Firewall. You can retrieve this for
+	// a firewall by calling DescribeFirewalland providing the firewall name and ARN.
 	FirewallStatus *types.FirewallStatus
 
 	// Metadata pertaining to the operation's result.
@@ -135,25 +139,25 @@ func (c *Client) addOperationCreateFirewallMiddlewares(stack *middleware.Stack, 
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -168,13 +172,16 @@ func (c *Client) addOperationCreateFirewallMiddlewares(stack *middleware.Stack, 
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpCreateFirewallValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateFirewall(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

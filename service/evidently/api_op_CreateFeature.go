@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/evidently/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -15,10 +14,12 @@ import (
 // Creates an Evidently feature that you want to launch or test. You can define up
 // to five variations of a feature, and use these variations in your launches and
 // experiments. A feature must be created in a project. For information about
-// creating a project, see CreateProject (https://docs.aws.amazon.com/cloudwatchevidently/latest/APIReference/API_CreateProject.html)
-// . Don't use this operation to update an existing feature. Instead, use
-// UpdateFeature (https://docs.aws.amazon.com/cloudwatchevidently/latest/APIReference/API_UpdateFeature.html)
-// .
+// creating a project, see [CreateProject].
+//
+// Don't use this operation to update an existing feature. Instead, use [UpdateFeature].
+//
+// [UpdateFeature]: https://docs.aws.amazon.com/cloudwatchevidently/latest/APIReference/API_UpdateFeature.html
+// [CreateProject]: https://docs.aws.amazon.com/cloudwatchevidently/latest/APIReference/API_CreateProject.html
 func (c *Client) CreateFeature(ctx context.Context, params *CreateFeatureInput, optFns ...func(*Options)) (*CreateFeatureOutput, error) {
 	if params == nil {
 		params = &CreateFeatureInput{}
@@ -54,9 +55,12 @@ type CreateFeatureInput struct {
 
 	// The name of the variation to use as the default variation. The default
 	// variation is served to users who are not allocated to any ongoing launches or
-	// experiments of this feature. This variation must also be listed in the
-	// variations structure. If you omit defaultVariation , the first variation listed
-	// in the variations structure is used as the default variation.
+	// experiments of this feature.
+	//
+	// This variation must also be listed in the variations structure.
+	//
+	// If you omit defaultVariation , the first variation listed in the variations
+	// structure is used as the default variation.
 	DefaultVariation *string
 
 	// An optional description of the feature.
@@ -65,9 +69,10 @@ type CreateFeatureInput struct {
 	// Specify users that should always be served a specific variation of a feature.
 	// Each user is specified by a key-value pair . For each key, specify a user by
 	// entering their user ID, account ID, or some other identifier. For the value,
-	// specify the name of the variation that they are to be served. This parameter is
-	// limited to 2500 overrides or a total of 40KB. The 40KB limit includes an
-	// overhead of 6 bytes per override.
+	// specify the name of the variation that they are to be served.
+	//
+	// This parameter is limited to 2500 overrides or a total of 40KB. The 40KB limit
+	// includes an overhead of 6 bytes per override.
 	EntityOverrides map[string]string
 
 	// Specify ALL_RULES to activate the traffic allocation specified by any ongoing
@@ -75,14 +80,20 @@ type CreateFeatureInput struct {
 	// variation to all users instead.
 	EvaluationStrategy types.FeatureEvaluationStrategy
 
-	// Assigns one or more tags (key-value pairs) to the feature. Tags can help you
-	// organize and categorize your resources. You can also use them to scope user
-	// permissions by granting a user permission to access or change only resources
-	// with certain tag values. Tags don't have any semantic meaning to Amazon Web
-	// Services and are interpreted strictly as strings of characters. You can
-	// associate as many as 50 tags with a feature. For more information, see Tagging
-	// Amazon Web Services resources (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html)
-	// .
+	// Assigns one or more tags (key-value pairs) to the feature.
+	//
+	// Tags can help you organize and categorize your resources. You can also use them
+	// to scope user permissions by granting a user permission to access or change only
+	// resources with certain tag values.
+	//
+	// Tags don't have any semantic meaning to Amazon Web Services and are interpreted
+	// strictly as strings of characters.
+	//
+	// You can associate as many as 50 tags with a feature.
+	//
+	// For more information, see [Tagging Amazon Web Services resources].
+	//
+	// [Tagging Amazon Web Services resources]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
 	Tags map[string]string
 
 	noSmithyDocumentSerde
@@ -121,25 +132,25 @@ func (c *Client) addOperationCreateFeatureMiddlewares(stack *middleware.Stack, o
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -154,13 +165,16 @@ func (c *Client) addOperationCreateFeatureMiddlewares(stack *middleware.Stack, o
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpCreateFeatureValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateFeature(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

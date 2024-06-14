@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -15,14 +14,16 @@ import (
 // specify one or more specific IPv6 addresses, or you can specify the number of
 // IPv6 addresses to be automatically assigned from within the subnet's IPv6 CIDR
 // block range. You can assign as many IPv6 addresses to a network interface as you
-// can assign private IPv4 addresses, and the limit varies per instance type. For
-// information, see IP Addresses Per Network Interface Per Instance Type (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-eni.html#AvailableIpPerENI)
-// in the Amazon Elastic Compute Cloud User Guide. You must specify either the IPv6
-// addresses or the IPv6 address count in the request. You can optionally use
-// Prefix Delegation on the network interface. You must specify either the IPV6
-// Prefix Delegation prefixes, or the IPv6 Prefix Delegation count. For
-// information, see Assigning prefixes to Amazon EC2 network interfaces (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-prefix-eni.html)
-// in the Amazon Elastic Compute Cloud User Guide.
+// can assign private IPv4 addresses, and the limit varies per instance type.
+//
+// You must specify either the IPv6 addresses or the IPv6 address count in the
+// request.
+//
+// You can optionally use Prefix Delegation on the network interface. You must
+// specify either the IPV6 Prefix Delegation prefixes, or the IPv6 Prefix
+// Delegation count. For information, see [Assigning prefixes to network interfaces]in the Amazon EC2 User Guide.
+//
+// [Assigning prefixes to network interfaces]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-prefix-eni.html
 func (c *Client) AssignIpv6Addresses(ctx context.Context, params *AssignIpv6AddressesInput, optFns ...func(*Options)) (*AssignIpv6AddressesOutput, error) {
 	if params == nil {
 		params = &AssignIpv6AddressesInput{}
@@ -109,25 +110,25 @@ func (c *Client) addOperationAssignIpv6AddressesMiddlewares(stack *middleware.St
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -142,13 +143,16 @@ func (c *Client) addOperationAssignIpv6AddressesMiddlewares(stack *middleware.St
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpAssignIpv6AddressesValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opAssignIpv6Addresses(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

@@ -58,8 +58,7 @@ type AuditEventField struct {
 	noSmithyDocumentSerde
 }
 
-// Object to store union of Field values. This data type is a UNION, so only one
-// of the following members can be specified when used or returned.
+// Object to store union of Field values.
 //
 // The following types satisfy this interface:
 //
@@ -92,8 +91,10 @@ type AuditEventFieldValueUnionMemberDoubleValue struct {
 func (*AuditEventFieldValueUnionMemberDoubleValue) isAuditEventFieldValueUnion() {}
 
 // An empty value. You cannot set EmptyFieldValue on a field that is required on a
-// case template. This structure will never have any data members. It signifies an
-// empty value on a case field.
+// case template.
+//
+// This structure will never have any data members. It signifies an empty value on
+// a case field.
 type AuditEventFieldValueUnionMemberEmptyValue struct {
 	Value EmptyFieldValue
 
@@ -311,8 +312,10 @@ type DomainSummary struct {
 }
 
 // An empty value. You cannot set EmptyFieldValue on a field that is required on a
-// case template. This structure will never have any data members. It signifies an
-// empty value on a case field.
+// case template.
+//
+// This structure will never have any data members. It signifies an empty value on
+// a case field.
 type EmptyFieldValue struct {
 	noSmithyDocumentSerde
 }
@@ -559,8 +562,10 @@ type FieldValue struct {
 	noSmithyDocumentSerde
 }
 
-// Object to store union of Field values. The Summary system field accepts 1500
-// characters while all other fields accept 500 characters.
+// Object to store union of Field values.
+//
+// The Summary system field accepts 1500 characters while all other fields accept
+// 500 characters.
 //
 // The following types satisfy this interface:
 //
@@ -620,6 +625,26 @@ type FieldValueUnionMemberUserArnValue struct {
 
 func (*FieldValueUnionMemberUserArnValue) isFieldValueUnion() {}
 
+// An object that represents a content of an Amazon Connect file object.
+type FileContent struct {
+
+	// The Amazon Resource Name (ARN) of a File in Amazon Connect.
+	//
+	// This member is required.
+	FileArn *string
+
+	noSmithyDocumentSerde
+}
+
+// A filter for related items of type File .
+type FileFilter struct {
+
+	// The Amazon Resource Name (ARN) of the file.
+	FileArn *string
+
+	noSmithyDocumentSerde
+}
+
 // Object to store detailed field information.
 type GetFieldResponse struct {
 
@@ -648,8 +673,17 @@ type GetFieldResponse struct {
 	// This member is required.
 	Type FieldType
 
+	// Timestamp at which the resource was created.
+	CreatedTime *time.Time
+
+	// Denotes whether or not the resource has been deleted.
+	Deleted bool
+
 	// Description of the field.
 	Description *string
+
+	// Timestamp at which the resource was created or last modified.
+	LastModifiedTime *time.Time
 
 	// A map of of key-value pairs that represent tags on a resource. Tags are used to
 	// organize, track, or control access for this resource.
@@ -661,7 +695,7 @@ type GetFieldResponse struct {
 // Object to store configuration of layouts associated to the template.
 type LayoutConfiguration struct {
 
-	// Unique identifier of a layout.
+	//  Unique identifier of a layout.
 	DefaultLayout *string
 
 	noSmithyDocumentSerde
@@ -723,6 +757,7 @@ type LayoutSummary struct {
 //
 //	RelatedItemContentMemberComment
 //	RelatedItemContentMemberContact
+//	RelatedItemContentMemberFile
 type RelatedItemContent interface {
 	isRelatedItemContent()
 }
@@ -745,6 +780,15 @@ type RelatedItemContentMemberContact struct {
 
 func (*RelatedItemContentMemberContact) isRelatedItemContent() {}
 
+// Represents the content of a File to be returned to agents.
+type RelatedItemContentMemberFile struct {
+	Value FileContent
+
+	noSmithyDocumentSerde
+}
+
+func (*RelatedItemContentMemberFile) isRelatedItemContent() {}
+
 // Details of what related item data is published through the case event stream.
 type RelatedItemEventIncludedData struct {
 
@@ -762,6 +806,7 @@ type RelatedItemEventIncludedData struct {
 //
 //	RelatedItemInputContentMemberComment
 //	RelatedItemInputContentMemberContact
+//	RelatedItemInputContentMemberFile
 type RelatedItemInputContent interface {
 	isRelatedItemInputContent()
 }
@@ -784,12 +829,22 @@ type RelatedItemInputContentMemberContact struct {
 
 func (*RelatedItemInputContentMemberContact) isRelatedItemInputContent() {}
 
+// A file of related items.
+type RelatedItemInputContentMemberFile struct {
+	Value FileContent
+
+	noSmithyDocumentSerde
+}
+
+func (*RelatedItemInputContentMemberFile) isRelatedItemInputContent() {}
+
 // The list of types of related items and their parameters to use for filtering.
 //
 // The following types satisfy this interface:
 //
 //	RelatedItemTypeFilterMemberComment
 //	RelatedItemTypeFilterMemberContact
+//	RelatedItemTypeFilterMemberFile
 type RelatedItemTypeFilter interface {
 	isRelatedItemTypeFilter()
 }
@@ -811,6 +866,15 @@ type RelatedItemTypeFilterMemberContact struct {
 }
 
 func (*RelatedItemTypeFilterMemberContact) isRelatedItemTypeFilter() {}
+
+// A filter for related items of this type of File .
+type RelatedItemTypeFilterMemberFile struct {
+	Value FileFilter
+
+	noSmithyDocumentSerde
+}
+
+func (*RelatedItemTypeFilterMemberFile) isRelatedItemTypeFilter() {}
 
 // List of fields that must have a value provided to create a case.
 type RequiredField struct {

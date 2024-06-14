@@ -6,13 +6,14 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates the MLModelName and the ScoreThreshold of an MLModel . You can use the
-// GetMLModel operation to view the contents of the updated data element.
+// Updates the MLModelName and the ScoreThreshold of an MLModel .
+//
+// You can use the GetMLModel operation to view the contents of the updated data
+// element.
 func (c *Client) UpdateMLModel(ctx context.Context, params *UpdateMLModelInput, optFns ...func(*Options)) (*UpdateMLModelOutput, error) {
 	if params == nil {
 		params = &UpdateMLModelInput{}
@@ -39,17 +40,19 @@ type UpdateMLModelInput struct {
 	MLModelName *string
 
 	// The ScoreThreshold used in binary classification MLModel that marks the
-	// boundary between a positive prediction and a negative prediction. Output values
-	// greater than or equal to the ScoreThreshold receive a positive result from the
-	// MLModel , such as true . Output values less than the ScoreThreshold receive a
-	// negative response from the MLModel , such as false .
+	// boundary between a positive prediction and a negative prediction.
+	//
+	// Output values greater than or equal to the ScoreThreshold receive a positive
+	// result from the MLModel , such as true . Output values less than the
+	// ScoreThreshold receive a negative response from the MLModel , such as false .
 	ScoreThreshold *float32
 
 	noSmithyDocumentSerde
 }
 
-// Represents the output of an UpdateMLModel operation. You can see the updated
-// content by using the GetMLModel operation.
+// Represents the output of an UpdateMLModel operation.
+//
+// You can see the updated content by using the GetMLModel operation.
 type UpdateMLModelOutput struct {
 
 	// The ID assigned to the MLModel during creation. This value should be identical
@@ -84,25 +87,25 @@ func (c *Client) addOperationUpdateMLModelMiddlewares(stack *middleware.Stack, o
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -117,13 +120,16 @@ func (c *Client) addOperationUpdateMLModelMiddlewares(stack *middleware.Stack, o
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpUpdateMLModelValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateMLModel(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

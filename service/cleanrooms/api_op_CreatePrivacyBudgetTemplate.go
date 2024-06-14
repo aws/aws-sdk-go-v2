@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/cleanrooms/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -14,8 +13,8 @@ import (
 
 // Creates a privacy budget template for a specified membership. Each membership
 // can have only one privacy budget template, but it can be deleted and recreated.
-// If you need to change the privacy budget template for a membership, use the
-// UpdatePrivacyBudgetTemplate operation.
+// If you need to change the privacy budget template for a membership, use the UpdatePrivacyBudgetTemplate
+// operation.
 func (c *Client) CreatePrivacyBudgetTemplate(ctx context.Context, params *CreatePrivacyBudgetTemplateInput, optFns ...func(*Options)) (*CreatePrivacyBudgetTemplateOutput, error) {
 	if params == nil {
 		params = &CreatePrivacyBudgetTemplateInput{}
@@ -33,12 +32,14 @@ func (c *Client) CreatePrivacyBudgetTemplate(ctx context.Context, params *Create
 
 type CreatePrivacyBudgetTemplateInput struct {
 
-	// How often the privacy budget refreshes. If you plan to regularly bring new data
-	// into the collaboration, you can use CALENDAR_MONTH to automatically get a new
-	// privacy budget for the collaboration every calendar month. Choosing this option
-	// allows arbitrary amounts of information to be revealed about rows of the data
-	// when repeatedly queries across refreshes. Avoid choosing this if the same rows
-	// will be repeatedly queried between privacy budget refreshes.
+	// How often the privacy budget refreshes.
+	//
+	// If you plan to regularly bring new data into the collaboration, you can use
+	// CALENDAR_MONTH to automatically get a new privacy budget for the collaboration
+	// every calendar month. Choosing this option allows arbitrary amounts of
+	// information to be revealed about rows of the data when repeatedly queries across
+	// refreshes. Avoid choosing this if the same rows will be repeatedly queried
+	// between privacy budget refreshes.
 	//
 	// This member is required.
 	AutoRefresh types.PrivacyBudgetTemplateAutoRefresh
@@ -104,25 +105,25 @@ func (c *Client) addOperationCreatePrivacyBudgetTemplateMiddlewares(stack *middl
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -137,13 +138,16 @@ func (c *Client) addOperationCreatePrivacyBudgetTemplateMiddlewares(stack *middl
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpCreatePrivacyBudgetTemplateValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreatePrivacyBudgetTemplate(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

@@ -6,20 +6,23 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a network instance. A network instance is a single network created in
-// Amazon Web Services TNB that can be deployed and on which life-cycle operations
-// (like terminate, update, and delete) can be performed. Creating a network
-// instance is the third step after creating a network package. For more
-// information about network instances, Network instances (https://docs.aws.amazon.com/tnb/latest/ug/network-instances.html)
-// in the Amazon Web Services Telco Network Builder User Guide. Once you create a
-// network instance, you can instantiate it. To instantiate a network, see
-// InstantiateSolNetworkInstance (https://docs.aws.amazon.com/tnb/latest/APIReference/API_InstantiateSolNetworkInstance.html)
-// .
+// Creates a network instance.
+//
+// A network instance is a single network created in Amazon Web Services TNB that
+// can be deployed and on which life-cycle operations (like terminate, update, and
+// delete) can be performed. Creating a network instance is the third step after
+// creating a network package. For more information about network instances, [Network instances]in
+// the Amazon Web Services Telco Network Builder User Guide.
+//
+// Once you create a network instance, you can instantiate it. To instantiate a
+// network, see [InstantiateSolNetworkInstance].
+//
+// [InstantiateSolNetworkInstance]: https://docs.aws.amazon.com/tnb/latest/APIReference/API_InstantiateSolNetworkInstance.html
+// [Network instances]: https://docs.aws.amazon.com/tnb/latest/ug/network-instances.html
 func (c *Client) CreateSolNetworkInstance(ctx context.Context, params *CreateSolNetworkInstanceInput, optFns ...func(*Options)) (*CreateSolNetworkInstanceOutput, error) {
 	if params == nil {
 		params = &CreateSolNetworkInstanceInput{}
@@ -113,25 +116,25 @@ func (c *Client) addOperationCreateSolNetworkInstanceMiddlewares(stack *middlewa
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -146,13 +149,16 @@ func (c *Client) addOperationCreateSolNetworkInstanceMiddlewares(stack *middlewa
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpCreateSolNetworkInstanceValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateSolNetworkInstance(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

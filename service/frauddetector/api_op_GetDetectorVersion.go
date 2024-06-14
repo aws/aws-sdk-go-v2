@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/frauddetector/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -69,12 +68,15 @@ type GetDetectorVersionOutput struct {
 	// The model versions included in the detector version.
 	ModelVersions []types.ModelVersion
 
-	// The execution mode of the rule in the dectector FIRST_MATCHED indicates that
-	// Amazon Fraud Detector evaluates rules sequentially, first to last, stopping at
-	// the first matched rule. Amazon Fraud dectector then provides the outcomes for
-	// that single rule. ALL_MATCHED indicates that Amazon Fraud Detector evaluates
-	// all rules and returns the outcomes for all matched rules. You can define and
-	// edit the rule mode at the detector version level, when it is in draft status.
+	// The execution mode of the rule in the dectector
+	//
+	// FIRST_MATCHED indicates that Amazon Fraud Detector evaluates rules
+	// sequentially, first to last, stopping at the first matched rule. Amazon Fraud
+	// dectector then provides the outcomes for that single rule.
+	//
+	// ALL_MATCHED indicates that Amazon Fraud Detector evaluates all rules and
+	// returns the outcomes for all matched rules. You can define and edit the rule
+	// mode at the detector version level, when it is in draft status.
 	RuleExecutionMode types.RuleExecutionMode
 
 	// The rules included in the detector version.
@@ -111,25 +113,25 @@ func (c *Client) addOperationGetDetectorVersionMiddlewares(stack *middleware.Sta
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -144,13 +146,16 @@ func (c *Client) addOperationGetDetectorVersionMiddlewares(stack *middleware.Sta
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpGetDetectorVersionValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetDetectorVersion(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

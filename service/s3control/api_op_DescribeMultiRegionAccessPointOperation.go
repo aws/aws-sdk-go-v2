@@ -16,16 +16,27 @@ import (
 	"strings"
 )
 
-// This operation is not supported by directory buckets. Retrieves the status of
-// an asynchronous request to manage a Multi-Region Access Point. For more
-// information about managing Multi-Region Access Points and how asynchronous
-// requests work, see Managing Multi-Region Access Points (https://docs.aws.amazon.com/AmazonS3/latest/userguide/ManagingMultiRegionAccessPoints.html)
-// in the Amazon S3 User Guide. The following actions are related to
-// GetMultiRegionAccessPoint :
-//   - CreateMultiRegionAccessPoint (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_CreateMultiRegionAccessPoint.html)
-//   - DeleteMultiRegionAccessPoint (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteMultiRegionAccessPoint.html)
-//   - GetMultiRegionAccessPoint (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetMultiRegionAccessPoint.html)
-//   - ListMultiRegionAccessPoints (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_ListMultiRegionAccessPoints.html)
+// This operation is not supported by directory buckets.
+//
+// Retrieves the status of an asynchronous request to manage a Multi-Region Access
+// Point. For more information about managing Multi-Region Access Points and how
+// asynchronous requests work, see [Using Multi-Region Access Points]in the Amazon S3 User Guide.
+//
+// The following actions are related to GetMultiRegionAccessPoint :
+//
+// [CreateMultiRegionAccessPoint]
+//
+// [DeleteMultiRegionAccessPoint]
+//
+// [GetMultiRegionAccessPoint]
+//
+// [ListMultiRegionAccessPoints]
+//
+// [Using Multi-Region Access Points]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/MrapOperations.html
+// [DeleteMultiRegionAccessPoint]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteMultiRegionAccessPoint.html
+// [GetMultiRegionAccessPoint]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetMultiRegionAccessPoint.html
+// [ListMultiRegionAccessPoints]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_ListMultiRegionAccessPoints.html
+// [CreateMultiRegionAccessPoint]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_CreateMultiRegionAccessPoint.html
 func (c *Client) DescribeMultiRegionAccessPointOperation(ctx context.Context, params *DescribeMultiRegionAccessPointOperationInput, optFns ...func(*Options)) (*DescribeMultiRegionAccessPointOperationOutput, error) {
 	if params == nil {
 		params = &DescribeMultiRegionAccessPointOperationInput{}
@@ -98,25 +109,25 @@ func (c *Client) addOperationDescribeMultiRegionAccessPointOperationMiddlewares(
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -134,6 +145,9 @@ func (c *Client) addOperationDescribeMultiRegionAccessPointOperationMiddlewares(
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = smithyhttp.AddContentChecksumMiddleware(stack); err != nil {
 		return err
 	}
@@ -149,7 +163,7 @@ func (c *Client) addOperationDescribeMultiRegionAccessPointOperationMiddlewares(
 	if err = addMetadataRetrieverMiddleware(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addDescribeMultiRegionAccessPointOperationUpdateEndpoint(stack, options); err != nil {

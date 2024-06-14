@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/lakeformation/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -47,12 +46,24 @@ type CreateLakeFormationIdentityCenterConfigurationInput struct {
 	// Reference.
 	InstanceArn *string
 
+	// A list of Amazon Web Services account IDs and/or Amazon Web Services
+	// organization/organizational unit ARNs that are allowed to access data managed by
+	// Lake Formation.
+	//
+	// If the ShareRecipients list includes valid values, a resource share is created
+	// with the principals you want to have access to the resources.
+	//
+	// If the ShareRecipients value is null or the list is empty, no resource share is
+	// created.
+	ShareRecipients []types.DataLakePrincipal
+
 	noSmithyDocumentSerde
 }
 
 type CreateLakeFormationIdentityCenterConfigurationOutput struct {
 
-	// The Amazon Resource Name (ARN) of the integrated application.
+	// The Amazon Resource Name (ARN) of the Lake Formation application integrated
+	// with IAM Identity Center.
 	ApplicationArn *string
 
 	// Metadata pertaining to the operation's result.
@@ -83,25 +94,25 @@ func (c *Client) addOperationCreateLakeFormationIdentityCenterConfigurationMiddl
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -116,13 +127,16 @@ func (c *Client) addOperationCreateLakeFormationIdentityCenterConfigurationMiddl
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpCreateLakeFormationIdentityCenterConfigurationValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateLakeFormationIdentityCenterConfiguration(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

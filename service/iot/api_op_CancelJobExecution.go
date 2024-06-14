@@ -6,14 +6,15 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Cancels the execution of a job for a given thing. Requires permission to access
-// the CancelJobExecution (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
-// action.
+// Cancels the execution of a job for a given thing.
+//
+// Requires permission to access the [CancelJobExecution] action.
+//
+// [CancelJobExecution]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions
 func (c *Client) CancelJobExecution(ctx context.Context, params *CancelJobExecutionInput, optFns ...func(*Options)) (*CancelJobExecutionOutput, error) {
 	if params == nil {
 		params = &CancelJobExecutionInput{}
@@ -54,10 +55,11 @@ type CancelJobExecutionInput struct {
 	// IN_PROGRESS or QUEUED, otherwise the job execution will be canceled only if it
 	// has status QUEUED. If you attempt to cancel a job execution that is IN_PROGRESS,
 	// and you do not set force to true , then an InvalidStateTransitionException will
-	// be thrown. The default is false . Canceling a job execution which is
-	// "IN_PROGRESS", will cause the device to be unable to update the job execution
-	// status. Use caution and ensure that the device is able to recover to a valid
-	// state.
+	// be thrown. The default is false .
+	//
+	// Canceling a job execution which is "IN_PROGRESS", will cause the device to be
+	// unable to update the job execution status. Use caution and ensure that the
+	// device is able to recover to a valid state.
 	Force bool
 
 	// A collection of name/value pairs that describe the status of the job execution.
@@ -97,25 +99,25 @@ func (c *Client) addOperationCancelJobExecutionMiddlewares(stack *middleware.Sta
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -130,13 +132,16 @@ func (c *Client) addOperationCancelJobExecutionMiddlewares(stack *middleware.Sta
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpCancelJobExecutionValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCancelJobExecution(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

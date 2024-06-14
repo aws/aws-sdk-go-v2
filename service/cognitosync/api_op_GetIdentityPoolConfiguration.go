@@ -6,17 +6,18 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/cognitosync/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Gets the configuration settings of an identity pool.This API can only be called
-// with developer credentials. You cannot call this API with the temporary user
-// credentials provided by Cognito Identity. GetIdentityPoolConfiguration The
-// following examples have been edited for readability. POST / HTTP/1.1
-// CONTENT-TYPE: application/json X-AMZN-REQUESTID:
+// Gets the configuration settings of an identity pool.
+//
+// This API can only be called with developer credentials. You cannot call this
+// API with the temporary user credentials provided by Cognito Identity.
+//
+// GetIdentityPoolConfiguration The following examples have been edited for
+// readability. POST / HTTP/1.1 CONTENT-TYPE: application/json X-AMZN-REQUESTID:
 // b1cfdd4b-f620-4fe4-be0f-02024a1d33da X-AMZ-TARGET:
 // com.amazonaws.cognito.sync.model.AWSCognitoSyncService.GetIdentityPoolConfiguration
 // HOST: cognito-sync.us-east-1.amazonaws.com X-AMZ-DATE: 20141004T195722Z
@@ -25,9 +26,12 @@ import (
 // Signature= { "Operation":
 // "com.amazonaws.cognito.sync.model#GetIdentityPoolConfiguration", "Service":
 // "com.amazonaws.cognito.sync.model#AWSCognitoSyncService", "Input": {
-// "IdentityPoolId": "ID_POOL_ID" } } 1.1 200 OK x-amzn-requestid:
-// b1cfdd4b-f620-4fe4-be0f-02024a1d33da date: Sat, 04 Oct 2014 19:57:22 GMT
-// content-type: application/json content-length: 332 { "Output": { "__type":
+// "IdentityPoolId": "ID_POOL_ID" } }
+//
+// 1.1 200 OK x-amzn-requestid: b1cfdd4b-f620-4fe4-be0f-02024a1d33da date: Sat, 04
+// Oct 2014 19:57:22 GMT content-type: application/json content-length: 332
+//
+// { "Output": { "__type":
 // "com.amazonaws.cognito.sync.model#GetIdentityPoolConfigurationResponse",
 // "IdentityPoolId": "ID_POOL_ID", "PushSync": { "ApplicationArns":
 // ["PLATFORMARN1", "PLATFORMARN2"], "RoleArn": "ROLEARN" } }, "Version": "1.0" }
@@ -100,25 +104,25 @@ func (c *Client) addOperationGetIdentityPoolConfigurationMiddlewares(stack *midd
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -133,13 +137,16 @@ func (c *Client) addOperationGetIdentityPoolConfigurationMiddlewares(stack *midd
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpGetIdentityPoolConfigurationValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetIdentityPoolConfiguration(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/voiceid/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -32,8 +31,9 @@ type StartFraudsterRegistrationJobInput struct {
 
 	// The IAM role Amazon Resource Name (ARN) that grants Voice ID permissions to
 	// access customer's buckets to read the input manifest file and write the Job
-	// output file. Refer to the Create and edit a fraudster watchlist (https://docs.aws.amazon.com/connect/latest/adminguide/voiceid-fraudster-watchlist.html)
-	// documentation for the permissions needed in this role.
+	// output file. Refer to the [Create and edit a fraudster watchlist]documentation for the permissions needed in this role.
+	//
+	// [Create and edit a fraudster watchlist]: https://docs.aws.amazon.com/connect/latest/adminguide/voiceid-fraudster-watchlist.html
 	//
 	// This member is required.
 	DataAccessRoleArn *string
@@ -58,9 +58,9 @@ type StartFraudsterRegistrationJobInput struct {
 
 	// A unique, case-sensitive identifier that you provide to ensure the idempotency
 	// of the request. If not provided, the Amazon Web Services SDK populates this
-	// field. For more information about idempotency, see Making retries safe with
-	// idempotent APIs (https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/)
-	// .
+	// field. For more information about idempotency, see [Making retries safe with idempotent APIs].
+	//
+	// [Making retries safe with idempotent APIs]: https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/
 	ClientToken *string
 
 	// The name of the new fraudster registration job.
@@ -107,25 +107,25 @@ func (c *Client) addOperationStartFraudsterRegistrationJobMiddlewares(stack *mid
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -140,6 +140,9 @@ func (c *Client) addOperationStartFraudsterRegistrationJobMiddlewares(stack *mid
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opStartFraudsterRegistrationJobMiddleware(stack, options); err != nil {
 		return err
 	}
@@ -149,7 +152,7 @@ func (c *Client) addOperationStartFraudsterRegistrationJobMiddlewares(stack *mid
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opStartFraudsterRegistrationJob(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

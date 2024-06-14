@@ -6,16 +6,19 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Sets the size of the specified Auto Scaling group. If a scale-in activity
-// occurs as a result of a new DesiredCapacity value that is lower than the
-// current size of the group, the Auto Scaling group uses its termination policy to
-// determine which instances to terminate. For more information, see Manual scaling (https://docs.aws.amazon.com/autoscaling/ec2/userguide/as-manual-scaling.html)
-// in the Amazon EC2 Auto Scaling User Guide.
+// Sets the size of the specified Auto Scaling group.
+//
+// If a scale-in activity occurs as a result of a new DesiredCapacity value that
+// is lower than the current size of the group, the Auto Scaling group uses its
+// termination policy to determine which instances to terminate.
+//
+// For more information, see [Manual scaling] in the Amazon EC2 Auto Scaling User Guide.
+//
+// [Manual scaling]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/as-manual-scaling.html
 func (c *Client) SetDesiredCapacity(ctx context.Context, params *SetDesiredCapacityInput, optFns ...func(*Options)) (*SetDesiredCapacityOutput, error) {
 	if params == nil {
 		params = &SetDesiredCapacityInput{}
@@ -82,25 +85,25 @@ func (c *Client) addOperationSetDesiredCapacityMiddlewares(stack *middleware.Sta
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -115,13 +118,16 @@ func (c *Client) addOperationSetDesiredCapacityMiddlewares(stack *middleware.Sta
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpSetDesiredCapacityValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opSetDesiredCapacity(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

@@ -4,12 +4,12 @@ import (
 	"fmt"
 	"reflect"
 	"strconv"
+	"strings"
 	"testing"
 	"time"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/service/dynamodbstreams/types"
-	"github.com/google/go-cmp/cmp"
 )
 
 func TestUnmarshalShared(t *testing.T) {
@@ -700,7 +700,7 @@ func TestDecodeArrayType(t *testing.T) {
 			t.Errorf("expected no error, but received %v", err)
 		}
 
-		if diff := cmp.Diff(c.to, c.from); len(diff) != 0 {
+		if diff := cmpDiff(c.to, c.from); len(diff) != 0 {
 			t.Errorf("expected match\n:%s", diff)
 		}
 	}
@@ -871,7 +871,7 @@ func TestUnmarshalTime_S_SS(t *testing.T) {
 			}); err != nil {
 				t.Errorf("expect no error, got %v", err)
 			}
-			if diff := cmp.Diff(expectedValue, actualValue, getIgnoreAVUnexportedOptions()...); diff != "" {
+			if diff := cmpDiff(expectedValue, actualValue); diff != "" {
 				t.Errorf("expect attribute value match\n%s", diff)
 			}
 		})
@@ -932,7 +932,7 @@ func TestUnmarshalTime_N_NS(t *testing.T) {
 			}); err != nil {
 				t.Errorf("expect no error, got %v", err)
 			}
-			if diff := cmp.Diff(expectedValue, actualValue, getIgnoreAVUnexportedOptions()...); diff != "" {
+			if diff := cmpDiff(expectedValue, actualValue); diff != "" {
 				t.Errorf("expect attribute value match\n%s", diff)
 			}
 		})
@@ -952,7 +952,7 @@ func TestCustomDecodeSAndDefaultDecodeN(t *testing.T) {
 	}
 	expectedValue := A{
 		TimeFieldS: time.Unix(120, 0).UTC(),
-		TimeFieldN: time.Unix(123, 0).UTC(),
+		TimeFieldN: time.Unix(123, 0), // will use system's locale
 	}
 
 	var actualValue A
@@ -968,7 +968,7 @@ func TestCustomDecodeSAndDefaultDecodeN(t *testing.T) {
 	}); err != nil {
 		t.Errorf("expect no error, got %v", err)
 	}
-	if diff := cmp.Diff(expectedValue, actualValue, getIgnoreAVUnexportedOptions()...); diff != "" {
+	if diff := cmpDiff(expectedValue, actualValue); diff != "" {
 		t.Errorf("expect attribute value match\n%s", diff)
 	}
 }
@@ -986,7 +986,7 @@ func TestCustomDecodeNAndDefaultDecodeS(t *testing.T) {
 	}
 	expectedValue := A{
 		TimeFieldS: time.Unix(123, 10000000).UTC(),
-		TimeFieldN: time.Unix(123, 10000000).UTC(),
+		TimeFieldN: time.Unix(123, 10000000), // will use system's locale
 	}
 
 	var actualValue A
@@ -1004,7 +1004,7 @@ func TestCustomDecodeNAndDefaultDecodeS(t *testing.T) {
 	}); err != nil {
 		t.Errorf("expect no error, got %v", err)
 	}
-	if diff := cmp.Diff(expectedValue, actualValue, getIgnoreAVUnexportedOptions()...); diff != "" {
+	if diff := cmpDiff(expectedValue, actualValue); diff != "" {
 		t.Errorf("expect attribute value match\n%s", diff)
 	}
 }
@@ -1129,7 +1129,7 @@ func TestUnmarshalMap_keyTypes(t *testing.T) {
 			}
 			t.Logf("expectType, %T", actualVal)
 
-			if diff := cmp.Diff(c.expectVal, actualVal); diff != "" {
+			if diff := cmpDiff(c.expectVal, actualVal); diff != "" {
 				t.Errorf("expect value match\n%s", diff)
 			}
 		})
@@ -1163,7 +1163,7 @@ func TestUnmarshalMap_keyPtrTypes(t *testing.T) {
 		for ak, av := range actualVal {
 			if *k == *ak {
 				found = true
-				if diff := cmp.Diff(v, av); diff != "" {
+				if diff := cmpDiff(v, av); diff != "" {
 					t.Errorf("expect value match\n%s", diff)
 				}
 			}
@@ -1173,4 +1173,98 @@ func TestUnmarshalMap_keyPtrTypes(t *testing.T) {
 		}
 	}
 
+}
+
+type textUnmarshalerString string
+
+func (v *textUnmarshalerString) UnmarshalText(text []byte) error {
+	*v = textUnmarshalerString("[[" + string(text) + "]]")
+	return nil
+}
+
+func TestUnmarshalTextString(t *testing.T) {
+	in := &types.AttributeValueMemberS{Value: "foo"}
+
+	var actual textUnmarshalerString
+	err := UnmarshalWithOptions(in, &actual, func(o *DecoderOptions) {
+		o.UseEncodingUnmarshalers = true
+	})
+	if err != nil {
+		t.Fatalf("expect no error, got %v", err)
+	}
+
+	if string(actual) != "[[foo]]" {
+		t.Errorf("expected [[foo]], got %s", actual)
+	}
+}
+
+func TestUnmarshalTextStringDisabled(t *testing.T) {
+	in := &types.AttributeValueMemberS{Value: "foo"}
+
+	var actual textUnmarshalerString
+	err := UnmarshalWithOptions(in, &actual, func(o *DecoderOptions) {
+		o.UseEncodingUnmarshalers = false
+	})
+	if err != nil {
+		t.Fatalf("expect no error, got %v", err)
+	}
+
+	if string(actual) != "foo" {
+		t.Errorf("expected foo, got %s", actual)
+	}
+}
+
+type textUnmarshalerStruct struct {
+	I, J string
+}
+
+func (v *textUnmarshalerStruct) UnmarshalText(text []byte) error {
+	parts := strings.Split(string(text), ";")
+	v.I = parts[0]
+	v.J = parts[1]
+	return nil
+}
+
+func TestUnmarshalTextStruct(t *testing.T) {
+	in := &types.AttributeValueMemberS{Value: "foo;bar"}
+
+	var actual textUnmarshalerStruct
+	err := UnmarshalWithOptions(in, &actual, func(o *DecoderOptions) {
+		o.UseEncodingUnmarshalers = true
+	})
+	if err != nil {
+		t.Fatalf("expect no error, got %v", err)
+	}
+
+	expected := textUnmarshalerStruct{"foo", "bar"}
+	if actual != expected {
+		t.Errorf("expected %v, got %v", expected, actual)
+	}
+}
+
+type binaryUnmarshaler struct {
+	I, J byte
+}
+
+func (v *binaryUnmarshaler) UnmarshalBinary(b []byte) error {
+	v.I = b[0]
+	v.J = b[1]
+	return nil
+}
+
+func TestUnmarshalBinary(t *testing.T) {
+	in := &types.AttributeValueMemberB{Value: []byte{1, 2}}
+
+	var actual binaryUnmarshaler
+	err := UnmarshalWithOptions(in, &actual, func(o *DecoderOptions) {
+		o.UseEncodingUnmarshalers = true
+	})
+	if err != nil {
+		t.Fatalf("expect no error, got %v", err)
+	}
+
+	expected := binaryUnmarshaler{1, 2}
+	if actual != expected {
+		t.Errorf("expected %v, got %v", expected, actual)
+	}
 }

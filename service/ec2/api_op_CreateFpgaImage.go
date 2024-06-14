@@ -6,18 +6,21 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates an Amazon FPGA Image (AFI) from the specified design checkpoint (DCP).
+//
 // The create operation is asynchronous. To verify that the AFI is ready for use,
-// check the output logs. An AFI contains the FPGA bitstream that is ready to
-// download to an FPGA. You can securely deploy an AFI on multiple FPGA-accelerated
-// instances. For more information, see the Amazon Web Services FPGA Hardware
-// Development Kit (https://github.com/aws/aws-fpga/) .
+// check the output logs.
+//
+// An AFI contains the FPGA bitstream that is ready to download to an FPGA. You
+// can securely deploy an AFI on multiple FPGA-accelerated instances. For more
+// information, see the [Amazon Web Services FPGA Hardware Development Kit].
+//
+// [Amazon Web Services FPGA Hardware Development Kit]: https://github.com/aws/aws-fpga/
 func (c *Client) CreateFpgaImage(ctx context.Context, params *CreateFpgaImageInput, optFns ...func(*Options)) (*CreateFpgaImageOutput, error) {
 	if params == nil {
 		params = &CreateFpgaImageInput{}
@@ -42,8 +45,9 @@ type CreateFpgaImageInput struct {
 	InputStorageLocation *types.StorageLocation
 
 	// Unique, case-sensitive identifier that you provide to ensure the idempotency of
-	// the request. For more information, see Ensuring Idempotency (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Run_Instance_Idempotency.html)
-	// .
+	// the request. For more information, see [Ensuring Idempotency].
+	//
+	// [Ensuring Idempotency]: https://docs.aws.amazon.com/ec2/latest/devguide/ec2-api-idempotency.html
 	ClientToken *string
 
 	// A description for the AFI.
@@ -103,25 +107,25 @@ func (c *Client) addOperationCreateFpgaImageMiddlewares(stack *middleware.Stack,
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -136,13 +140,16 @@ func (c *Client) addOperationCreateFpgaImageMiddlewares(stack *middleware.Stack,
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpCreateFpgaImageValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateFpgaImage(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

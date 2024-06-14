@@ -6,20 +6,22 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/route53/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Gets information about the traffic policy instances that you created by using a
-// specify traffic policy version. After you submit a CreateTrafficPolicyInstance
-// or an UpdateTrafficPolicyInstance request, there's a brief delay while Amazon
-// Route 53 creates the resource record sets that are specified in the traffic
-// policy definition. For more information, see the State response element. Route
-// 53 returns a maximum of 100 items in each response. If you have a lot of traffic
-// policy instances, you can use the MaxItems parameter to list them in groups of
-// up to 100.
+// specify traffic policy version.
+//
+// After you submit a CreateTrafficPolicyInstance or an UpdateTrafficPolicyInstance
+// request, there's a brief delay while Amazon Route 53 creates the resource record
+// sets that are specified in the traffic policy definition. For more information,
+// see the State response element.
+//
+// Route 53 returns a maximum of 100 items in each response. If you have a lot of
+// traffic policy instances, you can use the MaxItems parameter to list them in
+// groups of up to 100.
 func (c *Client) ListTrafficPolicyInstancesByPolicy(ctx context.Context, params *ListTrafficPolicyInstancesByPolicyInput, optFns ...func(*Options)) (*ListTrafficPolicyInstancesByPolicyOutput, error) {
 	if params == nil {
 		params = &ListTrafficPolicyInstancesByPolicyInput{}
@@ -54,11 +56,14 @@ type ListTrafficPolicyInstancesByPolicyInput struct {
 
 	// If the value of IsTruncated in the previous response was true , you have more
 	// traffic policy instances. To get more traffic policy instances, submit another
-	// ListTrafficPolicyInstancesByPolicy request. For the value of hostedzoneid ,
-	// specify the value of HostedZoneIdMarker from the previous response, which is
-	// the hosted zone ID of the first traffic policy instance that Amazon Route 53
-	// will return if you submit another request. If the value of IsTruncated in the
-	// previous response was false , there are no more traffic policy instances to get.
+	// ListTrafficPolicyInstancesByPolicy request.
+	//
+	// For the value of hostedzoneid , specify the value of HostedZoneIdMarker from
+	// the previous response, which is the hosted zone ID of the first traffic policy
+	// instance that Amazon Route 53 will return if you submit another request.
+	//
+	// If the value of IsTruncated in the previous response was false , there are no
+	// more traffic policy instances to get.
 	HostedZoneIdMarker *string
 
 	// The maximum number of traffic policy instances to be included in the response
@@ -71,22 +76,28 @@ type ListTrafficPolicyInstancesByPolicyInput struct {
 
 	// If the value of IsTruncated in the previous response was true , you have more
 	// traffic policy instances. To get more traffic policy instances, submit another
-	// ListTrafficPolicyInstancesByPolicy request. For the value of
-	// trafficpolicyinstancename , specify the value of TrafficPolicyInstanceNameMarker
-	// from the previous response, which is the name of the first traffic policy
-	// instance that Amazon Route 53 will return if you submit another request. If the
-	// value of IsTruncated in the previous response was false , there are no more
-	// traffic policy instances to get.
+	// ListTrafficPolicyInstancesByPolicy request.
+	//
+	// For the value of trafficpolicyinstancename , specify the value of
+	// TrafficPolicyInstanceNameMarker from the previous response, which is the name of
+	// the first traffic policy instance that Amazon Route 53 will return if you submit
+	// another request.
+	//
+	// If the value of IsTruncated in the previous response was false , there are no
+	// more traffic policy instances to get.
 	TrafficPolicyInstanceNameMarker *string
 
 	// If the value of IsTruncated in the previous response was true , you have more
 	// traffic policy instances. To get more traffic policy instances, submit another
-	// ListTrafficPolicyInstancesByPolicy request. For the value of
-	// trafficpolicyinstancetype , specify the value of TrafficPolicyInstanceTypeMarker
-	// from the previous response, which is the name of the first traffic policy
-	// instance that Amazon Route 53 will return if you submit another request. If the
-	// value of IsTruncated in the previous response was false , there are no more
-	// traffic policy instances to get.
+	// ListTrafficPolicyInstancesByPolicy request.
+	//
+	// For the value of trafficpolicyinstancetype , specify the value of
+	// TrafficPolicyInstanceTypeMarker from the previous response, which is the name of
+	// the first traffic policy instance that Amazon Route 53 will return if you submit
+	// another request.
+	//
+	// If the value of IsTruncated in the previous response was false , there are no
+	// more traffic policy instances to get.
 	TrafficPolicyInstanceTypeMarker types.RRType
 
 	noSmithyDocumentSerde
@@ -159,25 +170,25 @@ func (c *Client) addOperationListTrafficPolicyInstancesByPolicyMiddlewares(stack
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -192,13 +203,16 @@ func (c *Client) addOperationListTrafficPolicyInstancesByPolicyMiddlewares(stack
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpListTrafficPolicyInstancesByPolicyValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListTrafficPolicyInstancesByPolicy(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

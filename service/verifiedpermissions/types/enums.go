@@ -11,8 +11,9 @@ const (
 )
 
 // Values returns all known values for Decision. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (Decision) Values() []Decision {
 	return []Decision{
 		"ALLOW",
@@ -28,11 +29,31 @@ const (
 )
 
 // Values returns all known values for OpenIdIssuer. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (OpenIdIssuer) Values() []OpenIdIssuer {
 	return []OpenIdIssuer{
 		"COGNITO",
+	}
+}
+
+type PolicyEffect string
+
+// Enum values for PolicyEffect
+const (
+	PolicyEffectPermit PolicyEffect = "Permit"
+	PolicyEffectForbid PolicyEffect = "Forbid"
+)
+
+// Values returns all known values for PolicyEffect. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (PolicyEffect) Values() []PolicyEffect {
+	return []PolicyEffect{
+		"Permit",
+		"Forbid",
 	}
 }
 
@@ -45,8 +66,9 @@ const (
 )
 
 // Values returns all known values for PolicyType. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (PolicyType) Values() []PolicyType {
 	return []PolicyType{
 		"STATIC",
@@ -66,8 +88,9 @@ const (
 )
 
 // Values returns all known values for ResourceType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ResourceType) Values() []ResourceType {
 	return []ResourceType{
 		"IDENTITY_SOURCE",
@@ -87,8 +110,9 @@ const (
 )
 
 // Values returns all known values for ValidationMode. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ValidationMode) Values() []ValidationMode {
 	return []ValidationMode{
 		"OFF",

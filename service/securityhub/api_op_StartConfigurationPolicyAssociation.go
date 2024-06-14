@@ -6,14 +6,14 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/securityhub/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
-// Associates a target account, organizational unit, or the root with a specified
+//	Associates a target account, organizational unit, or the root with a specified
+//
 // configuration. The target can be associated with a configuration policy or
 // self-managed behavior. Only the Security Hub delegated administrator can invoke
 // this operation from the home Region.
@@ -34,13 +34,14 @@ func (c *Client) StartConfigurationPolicyAssociation(ctx context.Context, params
 
 type StartConfigurationPolicyAssociationInput struct {
 
-	// The Amazon Resource Name (ARN) or universally unique identifier (UUID) of the
-	// configuration policy.
+	//  The Amazon Resource Name (ARN) of a configuration policy, the universally
+	// unique identifier (UUID) of a configuration policy, or a value of
+	// SELF_MANAGED_SECURITY_HUB for a self-managed configuration.
 	//
 	// This member is required.
 	ConfigurationPolicyIdentifier *string
 
-	// The identifier of the target account, organizational unit, or the root to
+	//  The identifier of the target account, organizational unit, or the root to
 	// associate with the specified configuration.
 	//
 	// This member is required.
@@ -51,30 +52,30 @@ type StartConfigurationPolicyAssociationInput struct {
 
 type StartConfigurationPolicyAssociationOutput struct {
 
-	// The current status of the association between the specified target and the
+	//  The current status of the association between the specified target and the
 	// configuration.
 	AssociationStatus types.ConfigurationPolicyAssociationStatus
 
-	// An explanation for a FAILED value for AssociationStatus .
+	//  An explanation for a FAILED value for AssociationStatus .
 	AssociationStatusMessage *string
 
-	// Indicates whether the association between the specified target and the
+	//  Indicates whether the association between the specified target and the
 	// configuration was directly applied by the Security Hub delegated administrator
 	// or inherited from a parent.
 	AssociationType types.AssociationType
 
-	// The UUID of the configuration policy.
+	//  The UUID of the configuration policy.
 	ConfigurationPolicyId *string
 
-	// The identifier of the target account, organizational unit, or the organization
+	//  The identifier of the target account, organizational unit, or the organization
 	// root with which the configuration is associated.
 	TargetId *string
 
-	// Indicates whether the target is an Amazon Web Services account, organizational
+	//  Indicates whether the target is an Amazon Web Services account, organizational
 	// unit, or the organization root.
 	TargetType types.TargetType
 
-	// The date and time, in UTC and ISO 8601 format, that the configuration policy
+	//  The date and time, in UTC and ISO 8601 format, that the configuration policy
 	// association was last updated.
 	UpdatedAt *time.Time
 
@@ -106,25 +107,25 @@ func (c *Client) addOperationStartConfigurationPolicyAssociationMiddlewares(stac
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -139,13 +140,16 @@ func (c *Client) addOperationStartConfigurationPolicyAssociationMiddlewares(stac
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpStartConfigurationPolicyAssociationValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opStartConfigurationPolicyAssociation(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/omics/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -30,17 +29,17 @@ func (c *Client) DeleteAnnotationStoreVersions(ctx context.Context, params *Dele
 
 type DeleteAnnotationStoreVersionsInput struct {
 
-	// The name of the annotation store from which versions are being deleted.
+	//  The name of the annotation store from which versions are being deleted.
 	//
 	// This member is required.
 	Name *string
 
-	// The versions of an annotation store to be deleted.
+	//  The versions of an annotation store to be deleted.
 	//
 	// This member is required.
 	Versions []string
 
-	// Forces the deletion of an annotation store version when imports are
+	//  Forces the deletion of an annotation store version when imports are
 	// in-progress..
 	Force bool
 
@@ -49,7 +48,7 @@ type DeleteAnnotationStoreVersionsInput struct {
 
 type DeleteAnnotationStoreVersionsOutput struct {
 
-	// Any errors that occur when attempting to delete an annotation store version.
+	//  Any errors that occur when attempting to delete an annotation store version.
 	Errors []types.VersionDeleteError
 
 	// Metadata pertaining to the operation's result.
@@ -80,25 +79,25 @@ func (c *Client) addOperationDeleteAnnotationStoreVersionsMiddlewares(stack *mid
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -113,6 +112,9 @@ func (c *Client) addOperationDeleteAnnotationStoreVersionsMiddlewares(stack *mid
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addEndpointPrefix_opDeleteAnnotationStoreVersionsMiddleware(stack); err != nil {
 		return err
 	}
@@ -122,7 +124,7 @@ func (c *Client) addOperationDeleteAnnotationStoreVersionsMiddlewares(stack *mid
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteAnnotationStoreVersions(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

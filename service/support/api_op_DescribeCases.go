@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/support/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -15,22 +14,28 @@ import (
 // Returns a list of cases that you specify by passing one or more case IDs. You
 // can use the afterTime and beforeTime parameters to filter the cases by date.
 // You can set values for the includeResolvedCases and includeCommunications
-// parameters to specify how much information to return. The response returns the
-// following in JSON format:
-//   - One or more CaseDetails (https://docs.aws.amazon.com/awssupport/latest/APIReference/API_CaseDetails.html)
-//     data types.
+// parameters to specify how much information to return.
+//
+// The response returns the following in JSON format:
+//
+//   - One or more [CaseDetails]data types.
+//
 //   - One or more nextToken values, which specify where to paginate the returned
 //     records represented by the CaseDetails objects.
 //
 // Case data is available for 12 months after creation. If a case was created more
 // than 12 months ago, a request might return an error.
+//
 //   - You must have a Business, Enterprise On-Ramp, or Enterprise Support plan to
 //     use the Amazon Web Services Support API.
+//
 //   - If you call the Amazon Web Services Support API from an account that
 //     doesn't have a Business, Enterprise On-Ramp, or Enterprise Support plan, the
 //     SubscriptionRequiredException error message appears. For information about
-//     changing your support plan, see Amazon Web Services Support (http://aws.amazon.com/premiumsupport/)
-//     .
+//     changing your support plan, see [Amazon Web Services Support].
+//
+// [Amazon Web Services Support]: http://aws.amazon.com/premiumsupport/
+// [CaseDetails]: https://docs.aws.amazon.com/awssupport/latest/APIReference/API_CaseDetails.html
 func (c *Client) DescribeCases(ctx context.Context, params *DescribeCasesInput, optFns ...func(*Options)) (*DescribeCasesOutput, error) {
 	if params == nil {
 		params = &DescribeCasesInput{}
@@ -87,8 +92,10 @@ type DescribeCasesInput struct {
 	noSmithyDocumentSerde
 }
 
-// Returns an array of CaseDetails (https://docs.aws.amazon.com/awssupport/latest/APIReference/API_CaseDetails.html)
-// objects and a nextToken that defines a point for pagination in the result set.
+// Returns an array of [CaseDetails] objects and a nextToken that defines a point for
+// pagination in the result set.
+//
+// [CaseDetails]: https://docs.aws.amazon.com/awssupport/latest/APIReference/API_CaseDetails.html
 type DescribeCasesOutput struct {
 
 	// The details for the cases that match the request.
@@ -125,25 +132,25 @@ func (c *Client) addOperationDescribeCasesMiddlewares(stack *middleware.Stack, o
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -158,10 +165,13 @@ func (c *Client) addOperationDescribeCasesMiddlewares(stack *middleware.Stack, o
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeCases(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

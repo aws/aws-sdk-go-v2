@@ -11,8 +11,9 @@ const (
 )
 
 // Values returns all known values for AllowMessages. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (AllowMessages) Values() []AllowMessages {
 	return []AllowMessages{
 		"ALL",
@@ -31,6 +32,7 @@ const (
 
 // Values returns all known values for AppInstanceUserEndpointType. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (AppInstanceUserEndpointType) Values() []AppInstanceUserEndpointType {
 	return []AppInstanceUserEndpointType{
@@ -49,8 +51,9 @@ const (
 )
 
 // Values returns all known values for EndpointStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (EndpointStatus) Values() []EndpointStatus {
 	return []EndpointStatus{
 		"ACTIVE",
@@ -67,8 +70,9 @@ const (
 )
 
 // Values returns all known values for EndpointStatusReason. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (EndpointStatusReason) Values() []EndpointStatusReason {
 	return []EndpointStatusReason{
 		"INVALID_DEVICE_TOKEN",
@@ -98,8 +102,9 @@ const (
 )
 
 // Values returns all known values for ErrorCode. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ErrorCode) Values() []ErrorCode {
 	return []ErrorCode{
 		"BadRequest",
@@ -128,8 +133,9 @@ const (
 )
 
 // Values returns all known values for ExpirationCriterion. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ExpirationCriterion) Values() []ExpirationCriterion {
 	return []ExpirationCriterion{
 		"CREATED_TIMESTAMP",
@@ -144,8 +150,9 @@ const (
 )
 
 // Values returns all known values for RespondsTo. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (RespondsTo) Values() []RespondsTo {
 	return []RespondsTo{
 		"STANDARD_MESSAGES",
@@ -163,8 +170,9 @@ const (
 )
 
 // Values returns all known values for StandardMessages. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (StandardMessages) Values() []StandardMessages {
 	return []StandardMessages{
 		"AUTO",
@@ -183,8 +191,9 @@ const (
 )
 
 // Values returns all known values for TargetedMessages. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (TargetedMessages) Values() []TargetedMessages {
 	return []TargetedMessages{
 		"ALL",

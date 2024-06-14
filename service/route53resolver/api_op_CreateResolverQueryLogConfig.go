@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/route53resolver/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -15,14 +14,18 @@ import (
 // Creates a Resolver query logging configuration, which defines where you want
 // Resolver to save DNS query logs that originate in your VPCs. Resolver can log
 // queries only for VPCs that are in the same Region as the query logging
-// configuration. To specify which VPCs you want to log queries for, you use
-// AssociateResolverQueryLogConfig . For more information, see
-// AssociateResolverQueryLogConfig (https://docs.aws.amazon.com/Route53/latest/APIReference/API_route53resolver_AssociateResolverQueryLogConfig.html)
-// . You can optionally use Resource Access Manager (RAM) to share a query logging
+// configuration.
+//
+// To specify which VPCs you want to log queries for, you use
+// AssociateResolverQueryLogConfig . For more information, see [AssociateResolverQueryLogConfig].
+//
+// You can optionally use Resource Access Manager (RAM) to share a query logging
 // configuration with other Amazon Web Services accounts. The other accounts can
 // then associate VPCs with the configuration. The query logs that Resolver creates
 // for a configuration include all DNS queries that originate in all VPCs that are
 // associated with the configuration.
+//
+// [AssociateResolverQueryLogConfig]: https://docs.aws.amazon.com/Route53/latest/APIReference/API_route53resolver_AssociateResolverQueryLogConfig.html
 func (c *Client) CreateResolverQueryLogConfig(ctx context.Context, params *CreateResolverQueryLogConfigInput, optFns ...func(*Options)) (*CreateResolverQueryLogConfigOutput, error) {
 	if params == nil {
 		params = &CreateResolverQueryLogConfigInput{}
@@ -50,12 +53,22 @@ type CreateResolverQueryLogConfigInput struct {
 	// The ARN of the resource that you want Resolver to send query logs. You can send
 	// query logs to an S3 bucket, a CloudWatch Logs log group, or a Kinesis Data
 	// Firehose delivery stream. Examples of valid values include the following:
-	//   - S3 bucket: arn:aws:s3:::examplebucket You can optionally append a file
-	//   prefix to the end of the ARN. arn:aws:s3:::examplebucket/development/
+	//
+	//   - S3 bucket:
+	//
+	// arn:aws:s3:::examplebucket
+	//
+	// You can optionally append a file prefix to the end of the ARN.
+	//
+	// arn:aws:s3:::examplebucket/development/
+	//
 	//   - CloudWatch Logs log group:
-	//   arn:aws:logs:us-west-1:123456789012:log-group:/mystack-testgroup-12ABC1AB12A1:*
+	//
+	// arn:aws:logs:us-west-1:123456789012:log-group:/mystack-testgroup-12ABC1AB12A1:*
+	//
 	//   - Kinesis Data Firehose delivery stream:
-	//   arn:aws:kinesis:us-east-2:0123456789:stream/my_stream_name
+	//
+	// arn:aws:kinesis:us-east-2:0123456789:stream/my_stream_name
 	//
 	// This member is required.
 	DestinationArn *string
@@ -106,25 +119,25 @@ func (c *Client) addOperationCreateResolverQueryLogConfigMiddlewares(stack *midd
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -139,6 +152,9 @@ func (c *Client) addOperationCreateResolverQueryLogConfigMiddlewares(stack *midd
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opCreateResolverQueryLogConfigMiddleware(stack, options); err != nil {
 		return err
 	}
@@ -148,7 +164,7 @@ func (c *Client) addOperationCreateResolverQueryLogConfigMiddlewares(stack *midd
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateResolverQueryLogConfig(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/appflow/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -30,17 +29,17 @@ func (c *Client) DescribeFlowExecutionRecords(ctx context.Context, params *Descr
 
 type DescribeFlowExecutionRecordsInput struct {
 
-	// The specified name of the flow. Spaces are not allowed. Use underscores (_) or
+	//  The specified name of the flow. Spaces are not allowed. Use underscores (_) or
 	// hyphens (-) only.
 	//
 	// This member is required.
 	FlowName *string
 
-	// Specifies the maximum number of items that should be returned in the result
+	//  Specifies the maximum number of items that should be returned in the result
 	// set. The default for maxResults is 20 (for all paginated API operations).
 	MaxResults *int32
 
-	// The pagination token for the next page of data.
+	//  The pagination token for the next page of data.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -48,10 +47,10 @@ type DescribeFlowExecutionRecordsInput struct {
 
 type DescribeFlowExecutionRecordsOutput struct {
 
-	// Returns a list of all instances when this flow was run.
+	//  Returns a list of all instances when this flow was run.
 	FlowExecutions []types.ExecutionRecord
 
-	// The pagination token for the next page of data.
+	//  The pagination token for the next page of data.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -82,25 +81,25 @@ func (c *Client) addOperationDescribeFlowExecutionRecordsMiddlewares(stack *midd
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -115,13 +114,16 @@ func (c *Client) addOperationDescribeFlowExecutionRecordsMiddlewares(stack *midd
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDescribeFlowExecutionRecordsValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeFlowExecutionRecords(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -150,7 +152,7 @@ var _ DescribeFlowExecutionRecordsAPIClient = (*Client)(nil)
 // DescribeFlowExecutionRecordsPaginatorOptions is the paginator options for
 // DescribeFlowExecutionRecords
 type DescribeFlowExecutionRecordsPaginatorOptions struct {
-	// Specifies the maximum number of items that should be returned in the result
+	//  Specifies the maximum number of items that should be returned in the result
 	// set. The default for maxResults is 20 (for all paginated API operations).
 	Limit int32
 

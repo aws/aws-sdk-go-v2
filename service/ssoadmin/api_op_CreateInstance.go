@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/ssoadmin/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -15,9 +14,12 @@ import (
 // Creates an instance of IAM Identity Center for a standalone Amazon Web Services
 // account that is not managed by Organizations or a member Amazon Web Services
 // account in an organization. You can create only one instance per account and
-// across all Amazon Web Services Regions. The CreateInstance request is rejected
-// if the following apply:
+// across all Amazon Web Services Regions.
+//
+// The CreateInstance request is rejected if the following apply:
+//
 //   - The instance is created within the organization management account.
+//
 //   - An instance already exists in the same account.
 func (c *Client) CreateInstance(ctx context.Context, params *CreateInstanceInput, optFns ...func(*Options)) (*CreateInstanceOutput, error) {
 	if params == nil {
@@ -40,10 +42,15 @@ type CreateInstanceInput struct {
 	// idempotency of the request. This lets you safely retry the request without
 	// accidentally performing the same operation a second time. Passing the same value
 	// to a later call to an operation requires that you also pass the same value for
-	// all other parameters. We recommend that you use a UUID type of value (https://wikipedia.org/wiki/Universally_unique_identifier)
-	// . If you don't provide this value, then Amazon Web Services generates a random
-	// one for you. If you retry the operation with the same ClientToken , but with
-	// different parameters, the retry fails with an IdempotentParameterMismatch error.
+	// all other parameters. We recommend that you use a [UUID type of value].
+	//
+	// If you don't provide this value, then Amazon Web Services generates a random
+	// one for you.
+	//
+	// If you retry the operation with the same ClientToken , but with different
+	// parameters, the retry fails with an IdempotentParameterMismatch error.
+	//
+	// [UUID type of value]: https://wikipedia.org/wiki/Universally_unique_identifier
 	ClientToken *string
 
 	// The name of the instance of IAM Identity Center.
@@ -58,8 +65,9 @@ type CreateInstanceInput struct {
 type CreateInstanceOutput struct {
 
 	// The ARN of the instance of IAM Identity Center under which the operation will
-	// run. For more information about ARNs, see Amazon Resource Names (ARNs) and
-	// Amazon Web Services Service Namespaces in the Amazon Web Services General
+	// run.
+	//
+	// For more information about ARNs, see Amazon Resource Names (ARNs) and Amazon Web Services Service Namespaces in the Amazon Web Services General
 	// Reference.
 	InstanceArn *string
 
@@ -91,25 +99,25 @@ func (c *Client) addOperationCreateInstanceMiddlewares(stack *middleware.Stack, 
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -124,6 +132,9 @@ func (c *Client) addOperationCreateInstanceMiddlewares(stack *middleware.Stack, 
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opCreateInstanceMiddleware(stack, options); err != nil {
 		return err
 	}
@@ -133,7 +144,7 @@ func (c *Client) addOperationCreateInstanceMiddlewares(stack *middleware.Stack, 
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateInstance(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

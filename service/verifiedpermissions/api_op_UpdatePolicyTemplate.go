@@ -6,21 +6,24 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
 // Updates the specified policy template. You can update only the description and
-// the some elements of the policyBody (https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_UpdatePolicyTemplate.html#amazonverifiedpermissions-UpdatePolicyTemplate-request-policyBody)
-// . Changes you make to the policy template content are immediately (within the
+// the some elements of the [policyBody].
+//
+// Changes you make to the policy template content are immediately (within the
 // constraints of eventual consistency) reflected in authorization decisions that
-// involve all template-linked policies instantiated from this template. Verified
-// Permissions is eventually consistent (https://wikipedia.org/wiki/Eventual_consistency)
-// . It can take a few seconds for a new or changed element to be propagate through
-// the service and be visible in the results of other Verified Permissions
-// operations.
+// involve all template-linked policies instantiated from this template.
+//
+// Verified Permissions is [eventually consistent] . It can take a few seconds for a new or changed
+// element to propagate through the service and be visible in the results of other
+// Verified Permissions operations.
+//
+// [eventually consistent]: https://wikipedia.org/wiki/Eventual_consistency
+// [policyBody]: https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_UpdatePolicyTemplate.html#amazonverifiedpermissions-UpdatePolicyTemplate-request-policyBody
 func (c *Client) UpdatePolicyTemplate(ctx context.Context, params *UpdatePolicyTemplateInput, optFns ...func(*Options)) (*UpdatePolicyTemplateOutput, error) {
 	if params == nil {
 		params = &UpdatePolicyTemplateInput{}
@@ -50,13 +53,20 @@ type UpdatePolicyTemplateInput struct {
 	PolicyTemplateId *string
 
 	// Specifies new statement content written in Cedar policy language to replace the
-	// current body of the policy template. You can change only the following elements
-	// of the policy body:
+	// current body of the policy template.
+	//
+	// You can change only the following elements of the policy body:
+	//
 	//   - The action referenced by the policy template.
+	//
 	//   - Any conditional clauses, such as when or unless clauses.
+	//
 	// You can't change the following elements:
+	//
 	//   - The effect ( permit or forbid ) of the policy template.
+	//
 	//   - The principal referenced by the policy template.
+	//
 	//   - The resource referenced by the policy template.
 	//
 	// This member is required.
@@ -118,25 +128,25 @@ func (c *Client) addOperationUpdatePolicyTemplateMiddlewares(stack *middleware.S
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -151,13 +161,16 @@ func (c *Client) addOperationUpdatePolicyTemplateMiddlewares(stack *middleware.S
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpUpdatePolicyTemplateValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdatePolicyTemplate(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

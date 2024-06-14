@@ -19,16 +19,23 @@ import (
 // This operation allows you to list all the Amazon Web Services resource tags for
 // a specified resource. Each tag is a label consisting of a user-defined key and
 // value. Tags can help you manage, identify, organize, search for, and filter
-// resources. Permissions You must have the s3:ListTagsForResource permission to
-// use this operation. This operation is only supported for S3 Storage Lens groups (https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage-lens-groups.html)
-// and for S3 Access Grants (https://docs.aws.amazon.com/AmazonS3/latest/userguide/access-grants-tagging.html)
-// . The tagged resource can be an S3 Storage Lens group or S3 Access Grants
-// instance, registered location, or grant. For more information about the required
-// Storage Lens Groups permissions, see Setting account permissions to use S3
-// Storage Lens groups (https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage_lens_iam_permissions.html#storage_lens_groups_permissions)
-// . For information about S3 Tagging errors, see List of Amazon S3 Tagging error
-// codes (https://docs.aws.amazon.com/AmazonS3/latest/API/ErrorResponses.html#S3TaggingErrorCodeList)
-// .
+// resources.
+//
+// Permissions You must have the s3:ListTagsForResource permission to use this
+// operation.
+//
+// This operation is only supported for [S3 Storage Lens groups] and for [S3 Access Grants]. The tagged resource can be an
+// S3 Storage Lens group or S3 Access Grants instance, registered location, or
+// grant.
+//
+// For more information about the required Storage Lens Groups permissions, see [Setting account permissions to use S3 Storage Lens groups].
+//
+// For information about S3 Tagging errors, see [List of Amazon S3 Tagging error codes].
+//
+// [Setting account permissions to use S3 Storage Lens groups]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage_lens_iam_permissions.html#storage_lens_groups_permissions
+// [S3 Access Grants]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/access-grants-tagging.html
+// [List of Amazon S3 Tagging error codes]: https://docs.aws.amazon.com/AmazonS3/latest/API/ErrorResponses.html#S3TaggingErrorCodeList
+// [S3 Storage Lens groups]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage-lens-groups.html
 func (c *Client) ListTagsForResource(ctx context.Context, params *ListTagsForResourceInput, optFns ...func(*Options)) (*ListTagsForResourceOutput, error) {
 	if params == nil {
 		params = &ListTagsForResourceInput{}
@@ -46,12 +53,12 @@ func (c *Client) ListTagsForResource(ctx context.Context, params *ListTagsForRes
 
 type ListTagsForResourceInput struct {
 
-	// The Amazon Web Services account ID of the resource owner.
+	//  The Amazon Web Services account ID of the resource owner.
 	//
 	// This member is required.
 	AccountId *string
 
-	// The Amazon Resource Name (ARN) of the S3 resource that you want to list the
+	//  The Amazon Resource Name (ARN) of the S3 resource that you want to list the
 	// tags for. The tagged resource can be an S3 Storage Lens group or S3 Access
 	// Grants instance, registered location, or grant.
 	//
@@ -68,7 +75,7 @@ func (in *ListTagsForResourceInput) bindEndpointParams(p *EndpointParameters) {
 
 type ListTagsForResourceOutput struct {
 
-	// The Amazon Web Services resource tags that are associated with the resource.
+	//  The Amazon Web Services resource tags that are associated with the resource.
 	Tags []types.Tag
 
 	// Metadata pertaining to the operation's result.
@@ -99,25 +106,25 @@ func (c *Client) addOperationListTagsForResourceMiddlewares(stack *middleware.St
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -135,6 +142,9 @@ func (c *Client) addOperationListTagsForResourceMiddlewares(stack *middleware.St
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addEndpointPrefix_opListTagsForResourceMiddleware(stack); err != nil {
 		return err
 	}
@@ -147,7 +157,7 @@ func (c *Client) addOperationListTagsForResourceMiddlewares(stack *middleware.St
 	if err = addMetadataRetrieverMiddleware(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addListTagsForResourceUpdateEndpoint(stack, options); err != nil {

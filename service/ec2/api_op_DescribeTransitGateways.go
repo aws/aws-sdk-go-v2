@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -38,29 +37,46 @@ type DescribeTransitGatewaysInput struct {
 	DryRun *bool
 
 	// One or more filters. The possible values are:
+	//
 	//   - options.propagation-default-route-table-id - The ID of the default
 	//   propagation route table.
+	//
 	//   - options.amazon-side-asn - The private ASN for the Amazon side of a BGP
 	//   session.
+	//
 	//   - options.association-default-route-table-id - The ID of the default
 	//   association route table.
+	//
 	//   - options.auto-accept-shared-attachments - Indicates whether there is
 	//   automatic acceptance of attachment requests ( enable | disable ).
+	//
 	//   - options.default-route-table-association - Indicates whether resource
 	//   attachments are automatically associated with the default association route
 	//   table ( enable | disable ).
+	//
 	//   - options.default-route-table-propagation - Indicates whether resource
 	//   attachments automatically propagate routes to the default propagation route
 	//   table ( enable | disable ).
+	//
 	//   - options.dns-support - Indicates whether DNS support is enabled ( enable |
 	//   disable ).
+	//
 	//   - options.vpn-ecmp-support - Indicates whether Equal Cost Multipath Protocol
 	//   support is enabled ( enable | disable ).
+	//
 	//   - owner-id - The ID of the Amazon Web Services account that owns the transit
 	//   gateway.
+	//
 	//   - state - The state of the transit gateway ( available | deleted | deleting |
 	//   modifying | pending ).
+	//
 	//   - transit-gateway-id - The ID of the transit gateway.
+	//
+	//   - tag-key - The key/value combination of a tag assigned to the resource. Use
+	//   the tag key in the filter name and the tag value as the filter value. For
+	//   example, to find all resources that have a tag with the key Owner and the
+	//   value TeamA , specify tag:Owner for the filter name and TeamA for the filter
+	//   value.
 	Filters []types.Filter
 
 	// The maximum number of results to return with a single call. To retrieve the
@@ -113,25 +129,25 @@ func (c *Client) addOperationDescribeTransitGatewaysMiddlewares(stack *middlewar
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -146,10 +162,13 @@ func (c *Client) addOperationDescribeTransitGatewaysMiddlewares(stack *middlewar
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeTransitGateways(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

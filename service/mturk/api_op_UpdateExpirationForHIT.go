@@ -6,14 +6,14 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
-// The UpdateExpirationForHIT operation allows you update the expiration time of a
-// HIT. If you update it to a time in the past, the HIT will be immediately
+//	The UpdateExpirationForHIT operation allows you update the expiration time of
+//
+// a HIT. If you update it to a time in the past, the HIT will be immediately
 // expired.
 func (c *Client) UpdateExpirationForHIT(ctx context.Context, params *UpdateExpirationForHITInput, optFns ...func(*Options)) (*UpdateExpirationForHITOutput, error) {
 	if params == nil {
@@ -32,12 +32,12 @@ func (c *Client) UpdateExpirationForHIT(ctx context.Context, params *UpdateExpir
 
 type UpdateExpirationForHITInput struct {
 
-	// The date and time at which you want the HIT to expire
+	//  The date and time at which you want the HIT to expire
 	//
 	// This member is required.
 	ExpireAt *time.Time
 
-	// The HIT to update.
+	//  The HIT to update.
 	//
 	// This member is required.
 	HITId *string
@@ -74,25 +74,25 @@ func (c *Client) addOperationUpdateExpirationForHITMiddlewares(stack *middleware
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -107,13 +107,16 @@ func (c *Client) addOperationUpdateExpirationForHITMiddlewares(stack *middleware
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpUpdateExpirationForHITValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateExpirationForHIT(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

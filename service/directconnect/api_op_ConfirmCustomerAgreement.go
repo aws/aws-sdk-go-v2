@@ -6,12 +6,12 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// The confirmation of the terms of agreement when creating the connection/link
+//	The confirmation of the terms of agreement when creating the connection/link
+//
 // aggregation group (LAG).
 func (c *Client) ConfirmCustomerAgreement(ctx context.Context, params *ConfirmCustomerAgreementInput, optFns ...func(*Options)) (*ConfirmCustomerAgreementOutput, error) {
 	if params == nil {
@@ -38,8 +38,8 @@ type ConfirmCustomerAgreementInput struct {
 
 type ConfirmCustomerAgreementOutput struct {
 
-	// The status of the customer agreement when the connection was created. This will
-	// be either signed or unsigned .
+	//  The status of the customer agreement when the connection was created. This
+	// will be either signed or unsigned .
 	Status *string
 
 	// Metadata pertaining to the operation's result.
@@ -70,25 +70,25 @@ func (c *Client) addOperationConfirmCustomerAgreementMiddlewares(stack *middlewa
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -103,10 +103,13 @@ func (c *Client) addOperationConfirmCustomerAgreementMiddlewares(stack *middlewa
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opConfirmCustomerAgreement(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/kendra/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -16,9 +15,12 @@ import (
 // page. Featured results are placed above all other results for certain queries.
 // You map specific queries to specific documents for featuring in the results. If
 // a query contains an exact match, then one or more specific documents are
-// featured in the search results. You can create up to 50 sets of featured results
-// per index. You can request to increase this limit by contacting Support (http://aws.amazon.com/contact-us/)
-// .
+// featured in the search results.
+//
+// You can create up to 50 sets of featured results per index. You can request to
+// increase this limit by contacting [Support].
+//
+// [Support]: http://aws.amazon.com/contact-us/
 func (c *Client) CreateFeaturedResultsSet(ctx context.Context, params *CreateFeaturedResultsSetInput, optFns ...func(*Options)) (*CreateFeaturedResultsSetOutput, error) {
 	if params == nil {
 		params = &CreateFeaturedResultsSetInput{}
@@ -55,22 +57,24 @@ type CreateFeaturedResultsSetInput struct {
 	Description *string
 
 	// A list of document IDs for the documents you want to feature at the top of the
-	// search results page. For more information on the list of documents, see
-	// FeaturedResultsSet (https://docs.aws.amazon.com/kendra/latest/dg/API_FeaturedResultsSet.html)
-	// .
+	// search results page. For more information on the list of documents, see [FeaturedResultsSet].
+	//
+	// [FeaturedResultsSet]: https://docs.aws.amazon.com/kendra/latest/dg/API_FeaturedResultsSet.html
 	FeaturedDocuments []types.FeaturedDocument
 
 	// A list of queries for featuring results. For more information on the list of
-	// queries, see FeaturedResultsSet (https://docs.aws.amazon.com/kendra/latest/dg/API_FeaturedResultsSet.html)
-	// .
+	// queries, see [FeaturedResultsSet].
+	//
+	// [FeaturedResultsSet]: https://docs.aws.amazon.com/kendra/latest/dg/API_FeaturedResultsSet.html
 	QueryTexts []string
 
 	// The current status of the set of featured results. When the value is ACTIVE ,
 	// featured results are ready for use. You can still configure your settings before
 	// setting the status to ACTIVE . You can set the status to ACTIVE or INACTIVE
-	// using the UpdateFeaturedResultsSet (https://docs.aws.amazon.com/kendra/latest/dg/API_UpdateFeaturedResultsSet.html)
-	// API. The queries you specify for featured results must be unique per featured
-	// results set for each index, whether the status is ACTIVE or INACTIVE .
+	// using the [UpdateFeaturedResultsSet]API. The queries you specify for featured results must be unique per
+	// featured results set for each index, whether the status is ACTIVE or INACTIVE .
+	//
+	// [UpdateFeaturedResultsSet]: https://docs.aws.amazon.com/kendra/latest/dg/API_UpdateFeaturedResultsSet.html
 	Status types.FeaturedResultsSetStatus
 
 	// A list of key-value pairs that identify or categorize the featured results set.
@@ -117,25 +121,25 @@ func (c *Client) addOperationCreateFeaturedResultsSetMiddlewares(stack *middlewa
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -150,13 +154,16 @@ func (c *Client) addOperationCreateFeaturedResultsSetMiddlewares(stack *middlewa
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpCreateFeaturedResultsSetValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateFeaturedResultsSet(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

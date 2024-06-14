@@ -30,6 +30,26 @@ func (m *validateOpBatchIsAuthorized) HandleInitialize(ctx context.Context, in m
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpBatchIsAuthorizedWithToken struct {
+}
+
+func (*validateOpBatchIsAuthorizedWithToken) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpBatchIsAuthorizedWithToken) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*BatchIsAuthorizedWithTokenInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpBatchIsAuthorizedWithTokenInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateIdentitySource struct {
 }
 
@@ -494,6 +514,10 @@ func addOpBatchIsAuthorizedValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpBatchIsAuthorized{}, middleware.After)
 }
 
+func addOpBatchIsAuthorizedWithTokenValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpBatchIsAuthorizedWithToken{}, middleware.After)
+}
+
 func addOpCreateIdentitySourceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateIdentitySource{}, middleware.After)
 }
@@ -682,6 +706,65 @@ func validateBatchIsAuthorizedInputList(v []types.BatchIsAuthorizedInputItem) er
 	}
 }
 
+func validateBatchIsAuthorizedWithTokenInputItem(v *types.BatchIsAuthorizedWithTokenInputItem) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "BatchIsAuthorizedWithTokenInputItem"}
+	if v.Action != nil {
+		if err := validateActionIdentifier(v.Action); err != nil {
+			invalidParams.AddNested("Action", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Resource != nil {
+		if err := validateEntityIdentifier(v.Resource); err != nil {
+			invalidParams.AddNested("Resource", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Context != nil {
+		if err := validateContextDefinition(v.Context); err != nil {
+			invalidParams.AddNested("Context", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateBatchIsAuthorizedWithTokenInputList(v []types.BatchIsAuthorizedWithTokenInputItem) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "BatchIsAuthorizedWithTokenInputList"}
+	for i := range v {
+		if err := validateBatchIsAuthorizedWithTokenInputItem(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateCognitoGroupConfiguration(v *types.CognitoGroupConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CognitoGroupConfiguration"}
+	if v.GroupEntityType == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("GroupEntityType"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateCognitoUserPoolConfiguration(v *types.CognitoUserPoolConfiguration) error {
 	if v == nil {
 		return nil
@@ -689,6 +772,11 @@ func validateCognitoUserPoolConfiguration(v *types.CognitoUserPoolConfiguration)
 	invalidParams := smithy.InvalidParamsError{Context: "CognitoUserPoolConfiguration"}
 	if v.UserPoolArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("UserPoolArn"))
+	}
+	if v.GroupConfiguration != nil {
+		if err := validateCognitoGroupConfiguration(v.GroupConfiguration); err != nil {
+			invalidParams.AddNested("GroupConfiguration", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -706,6 +794,11 @@ func validateConfiguration(v types.Configuration) error {
 	case *types.ConfigurationMemberCognitoUserPoolConfiguration:
 		if err := validateCognitoUserPoolConfiguration(&uv.Value); err != nil {
 			invalidParams.AddNested("[cognitoUserPoolConfiguration]", err.(smithy.InvalidParamsError))
+		}
+
+	case *types.ConfigurationMemberOpenIdConnectConfiguration:
+		if err := validateOpenIdConnectConfiguration(&uv.Value); err != nil {
+			invalidParams.AddNested("[openIdConnectConfiguration]", err.(smithy.InvalidParamsError))
 		}
 
 	}
@@ -871,6 +964,47 @@ func validateEntityReference(v types.EntityReference) error {
 	}
 }
 
+func validateOpenIdConnectConfiguration(v *types.OpenIdConnectConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "OpenIdConnectConfiguration"}
+	if v.Issuer == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Issuer"))
+	}
+	if v.GroupConfiguration != nil {
+		if err := validateOpenIdConnectGroupConfiguration(v.GroupConfiguration); err != nil {
+			invalidParams.AddNested("GroupConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.TokenSelection == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TokenSelection"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpenIdConnectGroupConfiguration(v *types.OpenIdConnectGroupConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "OpenIdConnectGroupConfiguration"}
+	if v.GroupClaim == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("GroupClaim"))
+	}
+	if v.GroupEntityType == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("GroupEntityType"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateParentList(v []types.EntityIdentifier) error {
 	if v == nil {
 		return nil
@@ -1008,6 +1142,21 @@ func validateTemplateLinkedPolicyDefinition(v *types.TemplateLinkedPolicyDefinit
 	}
 }
 
+func validateUpdateCognitoGroupConfiguration(v *types.UpdateCognitoGroupConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateCognitoGroupConfiguration"}
+	if v.GroupEntityType == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("GroupEntityType"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateUpdateCognitoUserPoolConfiguration(v *types.UpdateCognitoUserPoolConfiguration) error {
 	if v == nil {
 		return nil
@@ -1015,6 +1164,11 @@ func validateUpdateCognitoUserPoolConfiguration(v *types.UpdateCognitoUserPoolCo
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateCognitoUserPoolConfiguration"}
 	if v.UserPoolArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("UserPoolArn"))
+	}
+	if v.GroupConfiguration != nil {
+		if err := validateUpdateCognitoGroupConfiguration(v.GroupConfiguration); err != nil {
+			invalidParams.AddNested("GroupConfiguration", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1034,6 +1188,52 @@ func validateUpdateConfiguration(v types.UpdateConfiguration) error {
 			invalidParams.AddNested("[cognitoUserPoolConfiguration]", err.(smithy.InvalidParamsError))
 		}
 
+	case *types.UpdateConfigurationMemberOpenIdConnectConfiguration:
+		if err := validateUpdateOpenIdConnectConfiguration(&uv.Value); err != nil {
+			invalidParams.AddNested("[openIdConnectConfiguration]", err.(smithy.InvalidParamsError))
+		}
+
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateUpdateOpenIdConnectConfiguration(v *types.UpdateOpenIdConnectConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateOpenIdConnectConfiguration"}
+	if v.Issuer == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Issuer"))
+	}
+	if v.GroupConfiguration != nil {
+		if err := validateUpdateOpenIdConnectGroupConfiguration(v.GroupConfiguration); err != nil {
+			invalidParams.AddNested("GroupConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.TokenSelection == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TokenSelection"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateUpdateOpenIdConnectGroupConfiguration(v *types.UpdateOpenIdConnectGroupConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateOpenIdConnectGroupConfiguration"}
+	if v.GroupClaim == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("GroupClaim"))
+	}
+	if v.GroupEntityType == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("GroupEntityType"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1108,6 +1308,33 @@ func validateOpBatchIsAuthorizedInput(v *BatchIsAuthorizedInput) error {
 		invalidParams.Add(smithy.NewErrParamRequired("Requests"))
 	} else if v.Requests != nil {
 		if err := validateBatchIsAuthorizedInputList(v.Requests); err != nil {
+			invalidParams.AddNested("Requests", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpBatchIsAuthorizedWithTokenInput(v *BatchIsAuthorizedWithTokenInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "BatchIsAuthorizedWithTokenInput"}
+	if v.PolicyStoreId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PolicyStoreId"))
+	}
+	if v.Entities != nil {
+		if err := validateEntitiesDefinition(v.Entities); err != nil {
+			invalidParams.AddNested("Entities", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Requests == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Requests"))
+	} else if v.Requests != nil {
+		if err := validateBatchIsAuthorizedWithTokenInputList(v.Requests); err != nil {
 			invalidParams.AddNested("Requests", err.(smithy.InvalidParamsError))
 		}
 	}

@@ -6,21 +6,25 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates or updates a query definition for CloudWatch Logs Insights. For more
-// information, see Analyzing Log Data with CloudWatch Logs Insights (https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/AnalyzingLogData.html)
-// . To update a query definition, specify its queryDefinitionId in your request.
+// information, see [Analyzing Log Data with CloudWatch Logs Insights].
+//
+// To update a query definition, specify its queryDefinitionId in your request.
 // The values of name , queryString , and logGroupNames are changed to the values
 // that you specify in your update operation. No current values are retained from
 // the current query definition. For example, imagine updating a current query
 // definition that includes log groups. If you don't specify the logGroupNames
 // parameter in your update operation, the query definition changes to contain no
-// log groups. You must have the logs:PutQueryDefinition permission to be able to
-// perform this operation.
+// log groups.
+//
+// You must have the logs:PutQueryDefinition permission to be able to perform this
+// operation.
+//
+// [Analyzing Log Data with CloudWatch Logs Insights]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/AnalyzingLogData.html
 func (c *Client) PutQueryDefinition(ctx context.Context, params *PutQueryDefinitionInput, optFns ...func(*Options)) (*PutQueryDefinitionOutput, error) {
 	if params == nil {
 		params = &PutQueryDefinitionInput{}
@@ -41,34 +45,42 @@ type PutQueryDefinitionInput struct {
 	// A name for the query definition. If you are saving numerous query definitions,
 	// we recommend that you name them. This way, you can find the ones you want by
 	// using the first part of the name as a filter in the queryDefinitionNamePrefix
-	// parameter of DescribeQueryDefinitions (https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_DescribeQueryDefinitions.html)
-	// .
+	// parameter of [DescribeQueryDefinitions].
+	//
+	// [DescribeQueryDefinitions]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_DescribeQueryDefinitions.html
 	//
 	// This member is required.
 	Name *string
 
-	// The query string to use for this definition. For more information, see
-	// CloudWatch Logs Insights Query Syntax (https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/CWL_QuerySyntax.html)
-	// .
+	// The query string to use for this definition. For more information, see [CloudWatch Logs Insights Query Syntax].
+	//
+	// [CloudWatch Logs Insights Query Syntax]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/CWL_QuerySyntax.html
 	//
 	// This member is required.
 	QueryString *string
 
 	// Used as an idempotency token, to avoid returning an exception if the service
-	// receives the same request twice because of a network error.
+	// receives the same request twice because of a network
+	//
+	// error.
 	ClientToken *string
 
 	// Use this parameter to include specific log groups as part of your query
-	// definition. If you are updating a query definition and you omit this parameter,
-	// then the updated definition will contain no log groups.
+	// definition.
+	//
+	// If you are updating a query definition and you omit this parameter, then the
+	// updated definition will contain no log groups.
 	LogGroupNames []string
 
 	// If you are updating a query definition, use this parameter to specify the ID of
-	// the query definition that you want to update. You can use
-	// DescribeQueryDefinitions (https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_DescribeQueryDefinitions.html)
-	// to retrieve the IDs of your saved query definitions. If you are creating a query
-	// definition, do not specify this parameter. CloudWatch generates a unique ID for
-	// the new query definition and include it in the response to this operation.
+	// the query definition that you want to update. You can use [DescribeQueryDefinitions]to retrieve the IDs
+	// of your saved query definitions.
+	//
+	// If you are creating a query definition, do not specify this parameter.
+	// CloudWatch generates a unique ID for the new query definition and include it in
+	// the response to this operation.
+	//
+	// [DescribeQueryDefinitions]: https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_DescribeQueryDefinitions.html
 	QueryDefinitionId *string
 
 	noSmithyDocumentSerde
@@ -107,25 +119,25 @@ func (c *Client) addOperationPutQueryDefinitionMiddlewares(stack *middleware.Sta
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -140,6 +152,9 @@ func (c *Client) addOperationPutQueryDefinitionMiddlewares(stack *middleware.Sta
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opPutQueryDefinitionMiddleware(stack, options); err != nil {
 		return err
 	}
@@ -149,7 +164,7 @@ func (c *Client) addOperationPutQueryDefinitionMiddlewares(stack *middleware.Sta
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opPutQueryDefinition(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

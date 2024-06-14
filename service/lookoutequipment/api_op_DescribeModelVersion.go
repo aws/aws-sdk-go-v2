@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/lookoutequipment/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -65,10 +64,11 @@ type DescribeModelVersionOutput struct {
 	// data after post processing by Amazon Lookout for Equipment. For example, if you
 	// provide data that has been collected at a 1 second level and you want the system
 	// to resample the data at a 1 minute rate before training, the TargetSamplingRate
-	// is 1 minute. When providing a value for the TargetSamplingRate , you must attach
-	// the prefix "PT" to the rate you want. The value for a 1 second rate is therefore
-	// PT1S, the value for a 15 minute rate is PT15M, and the value for a 1 hour rate
-	// is PT1H
+	// is 1 minute.
+	//
+	// When providing a value for the TargetSamplingRate , you must attach the prefix
+	// "PT" to the rate you want. The value for a 1 second rate is therefore PT1S, the
+	// value for a 15 minute rate is PT15M, and the value for a 1 hour rate is PT1H
 	DataPreProcessingConfiguration *types.DataPreProcessingConfiguration
 
 	// The Amazon Resource Name (ARN) of the dataset used to train the model version.
@@ -113,12 +113,38 @@ type DescribeModelVersionOutput struct {
 	// version belong to.
 	ModelArn *string
 
+	// The Amazon S3 location where Amazon Lookout for Equipment saves the pointwise
+	// model diagnostics for the model version.
+	ModelDiagnosticsOutputConfiguration *types.ModelDiagnosticsOutputConfiguration
+
+	// The Amazon S3 output prefix for where Lookout for Equipment saves the pointwise
+	// model diagnostics for the model version.
+	ModelDiagnosticsResultsObject *types.S3Object
+
 	// Shows an aggregated summary, in JSON format, of the model's performance within
 	// the evaluation time range. These metrics are created when evaluating the model.
 	ModelMetrics *string
 
 	// The name of the machine learning model that this version belongs to.
 	ModelName *string
+
+	// Provides a quality assessment for a model that uses labels. If Lookout for
+	// Equipment determines that the model quality is poor based on training metrics,
+	// the value is POOR_QUALITY_DETECTED . Otherwise, the value is
+	// QUALITY_THRESHOLD_MET .
+	//
+	// If the model is unlabeled, the model quality can't be assessed and the value of
+	// ModelQuality is CANNOT_DETERMINE_QUALITY . In this situation, you can get a
+	// model quality assessment by adding labels to the input dataset and retraining
+	// the model.
+	//
+	// For information about using labels with your models, see [Understanding labeling].
+	//
+	// For information about improving the quality of a model, see [Best practices with Amazon Lookout for Equipment].
+	//
+	// [Best practices with Amazon Lookout for Equipment]: https://docs.aws.amazon.com/lookout-for-equipment/latest/ug/best-practices.html
+	// [Understanding labeling]: https://docs.aws.amazon.com/lookout-for-equipment/latest/ug/understanding-labeling.html
+	ModelQuality types.ModelQuality
 
 	// The version of the machine learning model.
 	ModelVersion *int64
@@ -206,25 +232,25 @@ func (c *Client) addOperationDescribeModelVersionMiddlewares(stack *middleware.S
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -239,13 +265,16 @@ func (c *Client) addOperationDescribeModelVersionMiddlewares(stack *middleware.S
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDescribeModelVersionValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeModelVersion(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

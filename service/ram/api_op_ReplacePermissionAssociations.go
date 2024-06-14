@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/ram/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -17,12 +16,17 @@ import (
 // target managed permission. You can optionally specify that the update applies to
 // only resource shares that currently use a specified version. This enables you to
 // update to the latest version, without changing the which managed permission is
-// used. You can use this operation to update all of your resource shares to use
-// the current default version of the permission by specifying the same value for
-// the fromPermissionArn and toPermissionArn parameters. You can use the optional
-// fromPermissionVersion parameter to update only those resources that use a
-// specified version of the managed permission to the new managed permission. To
-// successfully perform this operation, you must have permission to update the
+// used.
+//
+// You can use this operation to update all of your resource shares to use the
+// current default version of the permission by specifying the same value for the
+// fromPermissionArn and toPermissionArn parameters.
+//
+// You can use the optional fromPermissionVersion parameter to update only those
+// resources that use a specified version of the managed permission to the new
+// managed permission.
+//
+// To successfully perform this operation, you must have permission to update the
 // resource-based policy on all affected resource types.
 func (c *Client) ReplacePermissionAssociations(ctx context.Context, params *ReplacePermissionAssociationsInput, optFns ...func(*Options)) (*ReplacePermissionAssociationsOutput, error) {
 	if params == nil {
@@ -41,16 +45,19 @@ func (c *Client) ReplacePermissionAssociations(ctx context.Context, params *Repl
 
 type ReplacePermissionAssociationsInput struct {
 
-	// Specifies the Amazon Resource Name (ARN) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
-	// of the managed permission that you want to replace.
+	// Specifies the [Amazon Resource Name (ARN)] of the managed permission that you want to replace.
+	//
+	// [Amazon Resource Name (ARN)]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
 	//
 	// This member is required.
 	FromPermissionArn *string
 
 	// Specifies the ARN of the managed permission that you want to associate with
 	// resource shares in place of the one specified by fromPerssionArn and
-	// fromPermissionVersion . The operation always associates the version that is
-	// currently the default for the specified managed permission.
+	// fromPermissionVersion .
+	//
+	// The operation always associates the version that is currently the default for
+	// the specified managed permission.
 	//
 	// This member is required.
 	ToPermissionArn *string
@@ -59,10 +66,15 @@ type ReplacePermissionAssociationsInput struct {
 	// idempotency of the request. This lets you safely retry the request without
 	// accidentally performing the same operation a second time. Passing the same value
 	// to a later call to an operation requires that you also pass the same value for
-	// all other parameters. We recommend that you use a UUID type of value. (https://wikipedia.org/wiki/Universally_unique_identifier)
-	// . If you don't provide this value, then Amazon Web Services generates a random
-	// one for you. If you retry the operation with the same ClientToken , but with
-	// different parameters, the retry fails with an IdempotentParameterMismatch error.
+	// all other parameters. We recommend that you use a [UUID type of value.].
+	//
+	// If you don't provide this value, then Amazon Web Services generates a random
+	// one for you.
+	//
+	// If you retry the operation with the same ClientToken , but with different
+	// parameters, the retry fails with an IdempotentParameterMismatch error.
+	//
+	// [UUID type of value.]: https://wikipedia.org/wiki/Universally_unique_identifier
 	ClientToken *string
 
 	// Specifies that you want to updated the permissions for only those resource
@@ -81,9 +93,8 @@ type ReplacePermissionAssociationsOutput struct {
 	ClientToken *string
 
 	// Specifies a data structure that you can use to track the asynchronous tasks
-	// that RAM performs to complete this operation. You can use the
-	// ListReplacePermissionAssociationsWork operation and pass the id value returned
-	// in this structure.
+	// that RAM performs to complete this operation. You can use the ListReplacePermissionAssociationsWorkoperation and
+	// pass the id value returned in this structure.
 	ReplacePermissionAssociationsWork *types.ReplacePermissionAssociationsWork
 
 	// Metadata pertaining to the operation's result.
@@ -114,25 +125,25 @@ func (c *Client) addOperationReplacePermissionAssociationsMiddlewares(stack *mid
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -147,13 +158,16 @@ func (c *Client) addOperationReplacePermissionAssociationsMiddlewares(stack *mid
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpReplacePermissionAssociationsValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opReplacePermissionAssociations(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

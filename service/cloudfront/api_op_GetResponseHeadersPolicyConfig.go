@@ -6,18 +6,18 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/cloudfront/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Gets a response headers policy configuration. To get a response headers policy
-// configuration, you must provide the policy's identifier. If the response headers
-// policy is attached to a distribution's cache behavior, you can get the policy's
-// identifier using ListDistributions or GetDistribution . If the response headers
-// policy is not attached to a cache behavior, you can get the identifier using
-// ListResponseHeadersPolicies .
+// Gets a response headers policy configuration.
+//
+// To get a response headers policy configuration, you must provide the policy's
+// identifier. If the response headers policy is attached to a distribution's cache
+// behavior, you can get the policy's identifier using ListDistributions or
+// GetDistribution . If the response headers policy is not attached to a cache
+// behavior, you can get the identifier using ListResponseHeadersPolicies .
 func (c *Client) GetResponseHeadersPolicyConfig(ctx context.Context, params *GetResponseHeadersPolicyConfigInput, optFns ...func(*Options)) (*GetResponseHeadersPolicyConfigOutput, error) {
 	if params == nil {
 		params = &GetResponseHeadersPolicyConfigInput{}
@@ -35,11 +35,12 @@ func (c *Client) GetResponseHeadersPolicyConfig(ctx context.Context, params *Get
 
 type GetResponseHeadersPolicyConfigInput struct {
 
-	// The identifier for the response headers policy. If the response headers policy
-	// is attached to a distribution's cache behavior, you can get the policy's
-	// identifier using ListDistributions or GetDistribution . If the response headers
-	// policy is not attached to a cache behavior, you can get the identifier using
-	// ListResponseHeadersPolicies .
+	// The identifier for the response headers policy.
+	//
+	// If the response headers policy is attached to a distribution's cache behavior,
+	// you can get the policy's identifier using ListDistributions or GetDistribution .
+	// If the response headers policy is not attached to a cache behavior, you can get
+	// the identifier using ListResponseHeadersPolicies .
 	//
 	// This member is required.
 	Id *string
@@ -83,25 +84,25 @@ func (c *Client) addOperationGetResponseHeadersPolicyConfigMiddlewares(stack *mi
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -116,13 +117,16 @@ func (c *Client) addOperationGetResponseHeadersPolicyConfigMiddlewares(stack *mi
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpGetResponseHeadersPolicyConfigValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetResponseHeadersPolicyConfig(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

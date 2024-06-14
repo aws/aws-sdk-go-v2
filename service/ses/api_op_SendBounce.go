@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/ses/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -14,10 +13,16 @@ import (
 
 // Generates and sends a bounce message to the sender of an email you received
 // through Amazon SES. You can only use this operation on an email up to 24 hours
-// after you receive it. You cannot use this operation to send generic bounces for
-// mail that was not received by Amazon SES. For information about receiving email
-// through Amazon SES, see the Amazon SES Developer Guide (https://docs.aws.amazon.com/ses/latest/dg/receiving-email.html)
-// . You can execute this operation no more than once per second.
+// after you receive it.
+//
+// You cannot use this operation to send generic bounces for mail that was not
+// received by Amazon SES.
+//
+// For information about receiving email through Amazon SES, see the [Amazon SES Developer Guide].
+//
+// You can execute this operation no more than once per second.
+//
+// [Amazon SES Developer Guide]: https://docs.aws.amazon.com/ses/latest/dg/receiving-email.html
 func (c *Client) SendBounce(ctx context.Context, params *SendBounceInput, optFns ...func(*Options)) (*SendBounceOutput, error) {
 	if params == nil {
 		params = &SendBounceInput{}
@@ -58,8 +63,9 @@ type SendBounceInput struct {
 	// This parameter is used only for sending authorization. It is the ARN of the
 	// identity that is associated with the sending authorization policy that permits
 	// you to use the address in the "From" header of the bounce. For more information
-	// about sending authorization, see the Amazon SES Developer Guide (https://docs.aws.amazon.com/ses/latest/dg/sending-authorization.html)
-	// .
+	// about sending authorization, see the [Amazon SES Developer Guide].
+	//
+	// [Amazon SES Developer Guide]: https://docs.aws.amazon.com/ses/latest/dg/sending-authorization.html
 	BounceSenderArn *string
 
 	// Human-readable text for the bounce message to explain the failure. If not
@@ -107,25 +113,25 @@ func (c *Client) addOperationSendBounceMiddlewares(stack *middleware.Stack, opti
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -140,13 +146,16 @@ func (c *Client) addOperationSendBounceMiddlewares(stack *middleware.Stack, opti
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpSendBounceValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opSendBounce(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

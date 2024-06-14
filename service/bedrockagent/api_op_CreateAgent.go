@@ -6,13 +6,35 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockagent/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates an Amazon Bedrock Agent
+// Creates an agent that orchestrates interactions between foundation models, data
+// sources, software applications, user conversations, and APIs to carry out tasks
+// to help customers.
+//
+//   - Specify the following fields for security purposes.
+//
+//   - agentResourceRoleArn – The Amazon Resource Name (ARN) of the role with
+//     permissions to invoke API operations on an agent.
+//
+//   - (Optional) customerEncryptionKeyArn – The Amazon Resource Name (ARN) of a
+//     KMS key to encrypt the creation of the agent.
+//
+//   - (Optional) idleSessionTTLinSeconds – Specify the number of seconds for which
+//     the agent should maintain session information. After this time expires, the
+//     subsequent InvokeAgent request begins a new session.
+//
+//   - To override the default prompt behavior for agent orchestration and to use
+//     advanced prompts, include a promptOverrideConfiguration object. For more
+//     information, see [Advanced prompts].
+//
+//   - If you agent fails to be created, the response returns a list of
+//     failureReasons alongside a list of recommendedActions for you to troubleshoot.
+//
+// [Advanced prompts]: https://docs.aws.amazon.com/bedrock/latest/userguide/advanced-prompts.html
 func (c *Client) CreateAgent(ctx context.Context, params *CreateAgentInput, optFns ...func(*Options)) (*CreateAgentOutput, error) {
 	if params == nil {
 		params = &CreateAgentInput{}
@@ -28,50 +50,63 @@ func (c *Client) CreateAgent(ctx context.Context, params *CreateAgentInput, optF
 	return out, nil
 }
 
-// Create Agent Request
 type CreateAgentInput struct {
 
-	// Name for a resource.
+	// A name for the agent that you create.
 	//
 	// This member is required.
 	AgentName *string
 
-	// ARN of a IAM role.
-	//
-	// This member is required.
+	// The Amazon Resource Name (ARN) of the IAM role with permissions to invoke API
+	// operations on the agent.
 	AgentResourceRoleArn *string
 
-	// Client specified token used for idempotency checks
+	// A unique, case-sensitive identifier to ensure that the API request completes no
+	// more than one time. If this token matches a previous request, Amazon Bedrock
+	// ignores the request, but does not return an error. For more information, see [Ensuring idempotency].
+	//
+	// [Ensuring idempotency]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
 	ClientToken *string
 
-	// A KMS key ARN
+	// The Amazon Resource Name (ARN) of the KMS key with which to encrypt the agent.
 	CustomerEncryptionKeyArn *string
 
-	// Description of the Resource.
+	// A description of the agent.
 	Description *string
 
-	// ARN or name of a Bedrock model.
+	// The foundation model to be used for orchestration by the agent you create.
 	FoundationModel *string
 
-	// Max Session Time.
+	// The unique Guardrail configuration assigned to the agent when it is created.
+	GuardrailConfiguration *types.GuardrailConfiguration
+
+	// The number of seconds for which Amazon Bedrock keeps information about a user's
+	// conversation with the agent.
+	//
+	// A user interaction remains active for the amount of time specified. If no
+	// conversation occurs during this time, the session expires and Amazon Bedrock
+	// deletes any data provided before the timeout.
 	IdleSessionTTLInSeconds *int32
 
-	// Instruction for the agent.
+	// Instructions that tell the agent what it should do and how it should interact
+	// with users.
 	Instruction *string
 
-	// Configuration for prompt override.
+	// Contains configurations to override prompts in different parts of an agent
+	// sequence. For more information, see [Advanced prompts].
+	//
+	// [Advanced prompts]: https://docs.aws.amazon.com/bedrock/latest/userguide/advanced-prompts.html
 	PromptOverrideConfiguration *types.PromptOverrideConfiguration
 
-	// A map of tag keys and values
+	// Any tags that you want to attach to the agent.
 	Tags map[string]string
 
 	noSmithyDocumentSerde
 }
 
-// Create Agent Response
 type CreateAgentOutput struct {
 
-	// Contains the information of an agent
+	// Contains details about the agent created.
 	//
 	// This member is required.
 	Agent *types.Agent
@@ -104,25 +139,25 @@ func (c *Client) addOperationCreateAgentMiddlewares(stack *middleware.Stack, opt
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -137,6 +172,9 @@ func (c *Client) addOperationCreateAgentMiddlewares(stack *middleware.Stack, opt
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opCreateAgentMiddleware(stack, options); err != nil {
 		return err
 	}
@@ -146,7 +184,7 @@ func (c *Client) addOperationCreateAgentMiddlewares(stack *middleware.Stack, opt
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateAgent(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

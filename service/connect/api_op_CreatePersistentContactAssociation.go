@@ -6,15 +6,16 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/connect/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Enables rehydration of chats for the lifespan of a contact. For more
-// information about chat rehydration, see Enable persistent chat (https://docs.aws.amazon.com/connect/latest/adminguide/chat-persistence.html)
-// in the Amazon Connect Administrator Guide.
+// information about chat rehydration, see [Enable persistent chat]in the Amazon Connect Administrator
+// Guide.
+//
+// [Enable persistent chat]: https://docs.aws.amazon.com/connect/latest/adminguide/chat-persistence.html
 func (c *Client) CreatePersistentContactAssociation(ctx context.Context, params *CreatePersistentContactAssociationInput, optFns ...func(*Options)) (*CreatePersistentContactAssociationOutput, error) {
 	if params == nil {
 		params = &CreatePersistentContactAssociationInput{}
@@ -38,24 +39,31 @@ type CreatePersistentContactAssociationInput struct {
 	// This member is required.
 	InitialContactId *string
 
-	// The identifier of the Amazon Connect instance. You can find the instance ID (https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html)
-	// in the Amazon Resource Name (ARN) of the instance.
+	// The identifier of the Amazon Connect instance. You can [find the instance ID] in the Amazon Resource
+	// Name (ARN) of the instance.
+	//
+	// [find the instance ID]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
 	//
 	// This member is required.
 	InstanceId *string
 
 	// The contactId chosen for rehydration depends on the type chosen.
+	//
 	//   - ENTIRE_PAST_SESSION : Rehydrates a chat from the most recently terminated
 	//   past chat contact of the specified past ended chat session. To use this type,
 	//   provide the initialContactId of the past ended chat session in the
 	//   sourceContactId field. In this type, Amazon Connect determines what the most
 	//   recent chat contact on the past ended chat session and uses it to start a
 	//   persistent chat.
+	//
 	//   - FROM_SEGMENT : Rehydrates a chat from the specified past chat contact
 	//   provided in the sourceContactId field.
+	//
 	// The actual contactId used for rehydration is provided in the response of this
-	// API. To illustrate how to use rehydration type, consider the following example:
-	// A customer starts a chat session. Agent a1 accepts the chat and a conversation
+	// API.
+	//
+	// To illustrate how to use rehydration type, consider the following example: A
+	// customer starts a chat session. Agent a1 accepts the chat and a conversation
 	// starts between the customer and Agent a1. This first contact creates a contact
 	// ID C1. Agent a1 then transfers the chat to Agent a2. This creates another
 	// contact ID C2. At this point Agent a2 ends the chat. The customer is forwarded
@@ -63,24 +71,36 @@ type CreatePersistentContactAssociationInput struct {
 	// C3. After the chat survey, the chat session ends. Later, the customer returns
 	// and wants to resume their past chat session. At this point, the customer can
 	// have following use cases:
+	//
 	//   - Use Case 1: The customer wants to continue the past chat session but they
 	//   want to hide the post chat survey. For this they will use the following
 	//   configuration:
+	//
 	//   - Configuration
+	//
 	//   - SourceContactId = "C2"
+	//
 	//   - RehydrationType = "FROM_SEGMENT"
+	//
 	//   - Expected behavior
+	//
 	//   - This starts a persistent chat session from the specified past ended contact
 	//   (C2). Transcripts of past chat sessions C2 and C1 are accessible in the current
 	//   persistent chat session. Note that chat segment C3 is dropped from the
 	//   persistent chat session.
+	//
 	//   - Use Case 2: The customer wants to continue the past chat session and see
 	//   the transcript of the entire past engagement, including the post chat survey.
 	//   For this they will use the following configuration:
+	//
 	//   - Configuration
+	//
 	//   - SourceContactId = "C1"
+	//
 	//   - RehydrationType = "ENTIRE_PAST_SESSION"
+	//
 	//   - Expected behavior
+	//
 	//   - This starts a persistent chat session from the most recently ended chat
 	//   contact (C3). Transcripts of past chat sessions C3, C2 and C1 are accessible in
 	//   the current persistent chat session.
@@ -95,9 +115,9 @@ type CreatePersistentContactAssociationInput struct {
 
 	// A unique, case-sensitive identifier that you provide to ensure the idempotency
 	// of the request. If not provided, the Amazon Web Services SDK populates this
-	// field. For more information about idempotency, see Making retries safe with
-	// idempotent APIs (https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/)
-	// .
+	// field. For more information about idempotency, see [Making retries safe with idempotent APIs].
+	//
+	// [Making retries safe with idempotent APIs]: https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/
 	ClientToken *string
 
 	noSmithyDocumentSerde
@@ -137,25 +157,25 @@ func (c *Client) addOperationCreatePersistentContactAssociationMiddlewares(stack
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -170,13 +190,16 @@ func (c *Client) addOperationCreatePersistentContactAssociationMiddlewares(stack
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpCreatePersistentContactAssociationValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreatePersistentContactAssociation(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

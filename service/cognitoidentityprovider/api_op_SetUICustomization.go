@@ -6,21 +6,23 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/cognitoidentityprovider/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Sets the user interface (UI) customization information for a user pool's
-// built-in app UI. You can specify app UI customization settings for a single
-// client (with a specific clientId ) or for all clients (by setting the clientId
-// to ALL ). If you specify ALL , the default configuration is used for every
-// client that has no previously set UI customization. If you specify UI
-// customization settings for a particular client, it will no longer return to the
-// ALL configuration. To use this API, your user pool must have a domain associated
-// with it. Otherwise, there is no place to host the app's pages, and the service
-// will throw an error.
+// built-in app UI.
+//
+// You can specify app UI customization settings for a single client (with a
+// specific clientId ) or for all clients (by setting the clientId to ALL ). If you
+// specify ALL , the default configuration is used for every client that has no
+// previously set UI customization. If you specify UI customization settings for a
+// particular client, it will no longer return to the ALL configuration.
+//
+// To use this API, your user pool must have a domain associated with it.
+// Otherwise, there is no place to host the app's pages, and the service will throw
+// an error.
 func (c *Client) SetUICustomization(ctx context.Context, params *SetUICustomizationInput, optFns ...func(*Options)) (*SetUICustomizationOutput, error) {
 	if params == nil {
 		params = &SetUICustomizationInput{}
@@ -90,25 +92,25 @@ func (c *Client) addOperationSetUICustomizationMiddlewares(stack *middleware.Sta
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -123,13 +125,16 @@ func (c *Client) addOperationSetUICustomizationMiddlewares(stack *middleware.Sta
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpSetUICustomizationValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opSetUICustomization(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

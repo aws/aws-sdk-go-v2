@@ -6,18 +6,19 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
-// Lists model compilation jobs that satisfy various filters. To create a model
-// compilation job, use CreateCompilationJob (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateCompilationJob.html)
-// . To get information about a particular model compilation job you have created,
-// use DescribeCompilationJob (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_DescribeCompilationJob.html)
-// .
+// Lists model compilation jobs that satisfy various filters.
+//
+// To create a model compilation job, use [CreateCompilationJob]. To get information about a particular
+// model compilation job you have created, use [DescribeCompilationJob].
+//
+// [DescribeCompilationJob]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_DescribeCompilationJob.html
+// [CreateCompilationJob]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateCompilationJob.html
 func (c *Client) ListCompilationJobs(ctx context.Context, params *ListCompilationJobsInput, optFns ...func(*Options)) (*ListCompilationJobsOutput, error) {
 	if params == nil {
 		params = &ListCompilationJobsInput{}
@@ -78,8 +79,9 @@ type ListCompilationJobsInput struct {
 
 type ListCompilationJobsOutput struct {
 
-	// An array of CompilationJobSummary (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CompilationJobSummary.html)
-	// objects, each describing a model compilation job.
+	// An array of [CompilationJobSummary] objects, each describing a model compilation job.
+	//
+	// [CompilationJobSummary]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CompilationJobSummary.html
 	//
 	// This member is required.
 	CompilationJobSummaries []types.CompilationJobSummary
@@ -117,25 +119,25 @@ func (c *Client) addOperationListCompilationJobsMiddlewares(stack *middleware.St
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -150,10 +152,13 @@ func (c *Client) addOperationListCompilationJobsMiddlewares(stack *middleware.St
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListCompilationJobs(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

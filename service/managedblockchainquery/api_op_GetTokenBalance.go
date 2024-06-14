@@ -6,15 +6,16 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/managedblockchainquery/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Gets the balance of a specific token, including native tokens, for a given
-// address (wallet or contract) on the blockchain. Only the native tokens BTC and
-// ETH, and the ERC-20, ERC-721, and ERC 1155 token standards are supported.
+// address (wallet or contract) on the blockchain.
+//
+// Only the native tokens BTC and ETH, and the ERC-20, ERC-721, and ERC 1155 token
+// standards are supported.
 func (c *Client) GetTokenBalance(ctx context.Context, params *GetTokenBalanceInput, optFns ...func(*Options)) (*GetTokenBalanceOutput, error) {
 	if params == nil {
 		params = &GetTokenBalanceInput{}
@@ -44,8 +45,9 @@ type GetTokenBalanceInput struct {
 	TokenIdentifier *types.TokenIdentifier
 
 	// The time for when the TokenBalance is requested or the current time if a time
-	// is not provided in the request. This time will only be recorded up to the
-	// second.
+	// is not provided in the request.
+	//
+	// This time will only be recorded up to the second.
 	AtBlockchainInstant *types.BlockchainInstant
 
 	noSmithyDocumentSerde
@@ -66,12 +68,14 @@ type GetTokenBalanceOutput struct {
 	// The container for time.
 	LastUpdatedTime *types.BlockchainInstant
 
-	// The container for the identifier of the owner.
+	// The container for the owner identifier.
 	OwnerIdentifier *types.OwnerIdentifier
 
 	// The container for the identifier for the token including the unique token ID
-	// and its blockchain network. Only the native tokens BTC and ETH, and the ERC-20,
-	// ERC-721, and ERC 1155 token standards are supported.
+	// and its blockchain network.
+	//
+	// Only the native tokens BTC and ETH, and the ERC-20, ERC-721, and ERC 1155 token
+	// standards are supported.
 	TokenIdentifier *types.TokenIdentifier
 
 	// Metadata pertaining to the operation's result.
@@ -102,25 +106,25 @@ func (c *Client) addOperationGetTokenBalanceMiddlewares(stack *middleware.Stack,
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -135,13 +139,16 @@ func (c *Client) addOperationGetTokenBalanceMiddlewares(stack *middleware.Stack,
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpGetTokenBalanceValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetTokenBalance(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

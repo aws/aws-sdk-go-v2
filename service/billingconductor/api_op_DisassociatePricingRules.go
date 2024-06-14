@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -29,13 +28,14 @@ func (c *Client) DisassociatePricingRules(ctx context.Context, params *Disassoci
 
 type DisassociatePricingRulesInput struct {
 
-	// The pricing plan Amazon Resource Name (ARN) to disassociate pricing rules from.
+	//  The pricing plan Amazon Resource Name (ARN) to disassociate pricing rules
+	// from.
 	//
 	// This member is required.
 	Arn *string
 
-	// A list containing the Amazon Resource Name (ARN) of the pricing rules that will
-	// be disassociated.
+	//  A list containing the Amazon Resource Name (ARN) of the pricing rules that
+	// will be disassociated.
 	//
 	// This member is required.
 	PricingRuleArns []string
@@ -45,7 +45,7 @@ type DisassociatePricingRulesInput struct {
 
 type DisassociatePricingRulesOutput struct {
 
-	// The Amazon Resource Name (ARN) of the pricing plan that the pricing rules
+	//  The Amazon Resource Name (ARN) of the pricing plan that the pricing rules
 	// successfully disassociated from.
 	Arn *string
 
@@ -77,25 +77,25 @@ func (c *Client) addOperationDisassociatePricingRulesMiddlewares(stack *middlewa
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -110,13 +110,16 @@ func (c *Client) addOperationDisassociatePricingRulesMiddlewares(stack *middlewa
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDisassociatePricingRulesValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDisassociatePricingRules(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

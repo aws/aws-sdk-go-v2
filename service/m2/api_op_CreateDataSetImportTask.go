@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/m2/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -40,7 +39,7 @@ type CreateDataSetImportTaskInput struct {
 	// This member is required.
 	ImportConfig types.DataSetImportConfig
 
-	// Unique, case-sensitive identifier you provide to ensure the idempotency of the
+	//  Unique, case-sensitive identifier you provide to ensure the idempotency of the
 	// request to create a data set import. The service generates the clientToken when
 	// the API call is triggered. The token expires after one hour, so if you retry the
 	// API within this timeframe with the same clientToken, you will get the same
@@ -53,7 +52,7 @@ type CreateDataSetImportTaskInput struct {
 type CreateDataSetImportTaskOutput struct {
 
 	// The task identifier. This operation is asynchronous. Use this identifier with
-	// the GetDataSetImportTask operation to obtain the status of this task.
+	// the GetDataSetImportTaskoperation to obtain the status of this task.
 	//
 	// This member is required.
 	TaskId *string
@@ -86,25 +85,25 @@ func (c *Client) addOperationCreateDataSetImportTaskMiddlewares(stack *middlewar
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -119,6 +118,9 @@ func (c *Client) addOperationCreateDataSetImportTaskMiddlewares(stack *middlewar
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opCreateDataSetImportTaskMiddleware(stack, options); err != nil {
 		return err
 	}
@@ -128,7 +130,7 @@ func (c *Client) addOperationCreateDataSetImportTaskMiddlewares(stack *middlewar
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateDataSetImportTask(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

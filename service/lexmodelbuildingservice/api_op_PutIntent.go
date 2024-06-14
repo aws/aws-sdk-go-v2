@@ -6,17 +6,20 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/lexmodelbuildingservice/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
-// Creates an intent or replaces an existing intent. To define the interaction
-// between the user and your bot, you use one or more intents. For a pizza ordering
-// bot, for example, you would create an OrderPizza intent. To create an intent or
-// replace an existing intent, you must provide the following:
+// Creates an intent or replaces an existing intent.
+//
+// To define the interaction between the user and your bot, you use one or more
+// intents. For a pizza ordering bot, for example, you would create an OrderPizza
+// intent.
+//
+// To create an intent or replace an existing intent, you must provide the
+// following:
 //
 //   - Intent name. For example, OrderPizza .
 //
@@ -34,10 +37,13 @@ import (
 //     the intent information to the client application.
 //
 // You can specify other optional information in the request, such as:
+//
 //   - A confirmation prompt to ask the user to confirm an intent. For example,
 //     "Shall I order your pizza?"
+//
 //   - A conclusion statement to send to the user after the intent has been
 //     fulfilled. For example, "I placed your pizza order."
+//
 //   - A follow-up prompt that asks the user for additional activity. For example,
 //     asking "Do you want to order a drink with your pizza?"
 //
@@ -46,9 +52,11 @@ import (
 // request. Amazon Lex removes fields that you don't provide in the request. If you
 // don't specify the required fields, Amazon Lex throws an exception. When you
 // update the $LATEST version of an intent, the status field of any bot that uses
-// the $LATEST version of the intent is set to NOT_BUILT . For more information,
-// see how-it-works . This operation requires permissions for the lex:PutIntent
-// action.
+// the $LATEST version of the intent is set to NOT_BUILT .
+//
+// For more information, see how-it-works.
+//
+// This operation requires permissions for the lex:PutIntent action.
 func (c *Client) PutIntent(ctx context.Context, params *PutIntentInput, optFns ...func(*Options)) (*PutIntentOutput, error) {
 	if params == nil {
 		params = &PutIntentInput{}
@@ -66,39 +74,52 @@ func (c *Client) PutIntent(ctx context.Context, params *PutIntentInput, optFns .
 
 type PutIntentInput struct {
 
-	// The name of the intent. The name is not case sensitive. The name can't match a
-	// built-in intent name, or a built-in intent name with "AMAZON." removed. For
-	// example, because there is a built-in intent called AMAZON.HelpIntent , you can't
-	// create a custom intent called HelpIntent . For a list of built-in intents, see
-	// Standard Built-in Intents (https://developer.amazon.com/public/solutions/alexa/alexa-skills-kit/docs/built-in-intent-ref/standard-intents)
-	// in the Alexa Skills Kit.
+	// The name of the intent. The name is not case sensitive.
+	//
+	// The name can't match a built-in intent name, or a built-in intent name with
+	// "AMAZON." removed. For example, because there is a built-in intent called
+	// AMAZON.HelpIntent , you can't create a custom intent called HelpIntent .
+	//
+	// For a list of built-in intents, see [Standard Built-in Intents] in the Alexa Skills Kit.
+	//
+	// [Standard Built-in Intents]: https://developer.amazon.com/public/solutions/alexa/alexa-skills-kit/docs/built-in-intent-ref/standard-intents
 	//
 	// This member is required.
 	Name *string
 
-	// Identifies a specific revision of the $LATEST version. When you create a new
-	// intent, leave the checksum field blank. If you specify a checksum you get a
-	// BadRequestException exception. When you want to update a intent, set the
-	// checksum field to the checksum of the most recent revision of the $LATEST
-	// version. If you don't specify the checksum field, or if the checksum does not
-	// match the $LATEST version, you get a PreconditionFailedException exception.
+	// Identifies a specific revision of the $LATEST version.
+	//
+	// When you create a new intent, leave the checksum field blank. If you specify a
+	// checksum you get a BadRequestException exception.
+	//
+	// When you want to update a intent, set the checksum field to the checksum of the
+	// most recent revision of the $LATEST version. If you don't specify the  checksum
+	// field, or if the checksum does not match the $LATEST version, you get a
+	// PreconditionFailedException exception.
 	Checksum *string
 
-	// The statement that you want Amazon Lex to convey to the user after the intent
-	// is successfully fulfilled by the Lambda function. This element is relevant only
-	// if you provide a Lambda function in the fulfillmentActivity . If you return the
-	// intent to the client application, you can't specify this element. The
-	// followUpPrompt and conclusionStatement are mutually exclusive. You can specify
-	// only one.
+	//  The statement that you want Amazon Lex to convey to the user after the intent
+	// is successfully fulfilled by the Lambda function.
+	//
+	// This element is relevant only if you provide a Lambda function in the
+	// fulfillmentActivity . If you return the intent to the client application, you
+	// can't specify this element.
+	//
+	// The followUpPrompt and conclusionStatement are mutually exclusive. You can
+	// specify only one.
 	ConclusionStatement *types.Statement
 
 	// Prompts the user to confirm the intent. This question should have a yes or no
-	// answer. Amazon Lex uses this prompt to ensure that the user acknowledges that
-	// the intent is ready for fulfillment. For example, with the OrderPizza intent,
-	// you might want to confirm that the order is correct before placing it. For other
+	// answer.
+	//
+	// Amazon Lex uses this prompt to ensure that the user acknowledges that the
+	// intent is ready for fulfillment. For example, with the OrderPizza intent, you
+	// might want to confirm that the order is correct before placing it. For other
 	// intents, such as intents that simply respond to user questions, you might not
-	// need to ask the user for confirmation before providing the information. You you
-	// must provide both the rejectionStatement and the confirmationPrompt , or neither.
+	// need to ask the user for confirmation before providing the information.
+	//
+	// You you must provide both the rejectionStatement and the confirmationPrompt , or
+	// neither.
 	ConfirmationPrompt *types.Prompt
 
 	// When set to true a new numbered version of the intent is created. This is the
@@ -109,37 +130,45 @@ type PutIntentInput struct {
 	// A description of the intent.
 	Description *string
 
-	// Specifies a Lambda function to invoke for each user input. You can invoke this
-	// Lambda function to personalize user interaction. For example, suppose your bot
-	// determines that the user is John. Your Lambda function might retrieve John's
-	// information from a backend database and prepopulate some of the values. For
-	// example, if you find that John is gluten intolerant, you might set the
-	// corresponding intent slot, GlutenIntolerant , to true. You might find John's
-	// phone number and set the corresponding session attribute.
+	//  Specifies a Lambda function to invoke for each user input. You can invoke this
+	// Lambda function to personalize user interaction.
+	//
+	// For example, suppose your bot determines that the user is John. Your Lambda
+	// function might retrieve John's information from a backend database and
+	// prepopulate some of the values. For example, if you find that John is gluten
+	// intolerant, you might set the corresponding intent slot, GlutenIntolerant , to
+	// true. You might find John's phone number and set the corresponding session
+	// attribute.
 	DialogCodeHook *types.CodeHook
 
 	// Amazon Lex uses this prompt to solicit additional activity after fulfilling an
 	// intent. For example, after the OrderPizza intent is fulfilled, you might prompt
-	// the user to order a drink. The action that Amazon Lex takes depends on the
-	// user's response, as follows:
+	// the user to order a drink.
+	//
+	// The action that Amazon Lex takes depends on the user's response, as follows:
+	//
 	//   - If the user says "Yes" it responds with the clarification prompt that is
 	//   configured for the bot.
+	//
 	//   - if the user says "Yes" and continues with an utterance that triggers an
 	//   intent it starts a conversation for the intent.
+	//
 	//   - If the user says "No" it responds with the rejection statement configured
 	//   for the the follow-up prompt.
-	//   - If it doesn't recognize the utterance it repeats the follow-up prompt
-	//   again.
+	//
+	//   - If it doesn't recognize the utterance it repeats the follow-up prompt again.
+	//
 	// The followUpPrompt field and the conclusionStatement field are mutually
 	// exclusive. You can specify only one.
 	FollowUpPrompt *types.FollowUpPrompt
 
 	// Required. Describes how the intent is fulfilled. For example, after a user
 	// provides all of the information for a pizza order, fulfillmentActivity defines
-	// how the bot places an order with a local pizza store. You might configure Amazon
-	// Lex to return all of the intent information to the client application, or direct
-	// it to invoke a Lambda function that can process the intent (for example, place
-	// an order with a pizzeria).
+	// how the bot places an order with a local pizza store.
+	//
+	// You might configure Amazon Lex to return all of the intent information to the
+	// client application, or direct it to invoke a Lambda function that can process
+	// the intent (for example, place an order with a pizzeria).
 	FulfillmentActivity *types.FulfillmentActivity
 
 	// An array of InputContext objects that lists the contexts that must be active
@@ -147,9 +176,9 @@ type PutIntentInput struct {
 	InputContexts []types.InputContext
 
 	// Configuration information required to use the AMAZON.KendraSearchIntent intent
-	// to connect to an Amazon Kendra index. For more information, see
-	// AMAZON.KendraSearchIntent (http://docs.aws.amazon.com/lex/latest/dg/built-in-intent-kendra-search.html)
-	// .
+	// to connect to an Amazon Kendra index. For more information, see [AMAZON.KendraSearchIntent].
+	//
+	// [AMAZON.KendraSearchIntent]: http://docs.aws.amazon.com/lex/latest/dg/built-in-intent-kendra-search.html
 	KendraConfiguration *types.KendraConfiguration
 
 	// An array of OutputContext objects that lists the contexts that the intent
@@ -157,24 +186,27 @@ type PutIntentInput struct {
 	OutputContexts []types.OutputContext
 
 	// A unique identifier for the built-in intent to base this intent on. To find the
-	// signature for an intent, see Standard Built-in Intents (https://developer.amazon.com/public/solutions/alexa/alexa-skills-kit/docs/built-in-intent-ref/standard-intents)
-	// in the Alexa Skills Kit.
+	// signature for an intent, see [Standard Built-in Intents]in the Alexa Skills Kit.
+	//
+	// [Standard Built-in Intents]: https://developer.amazon.com/public/solutions/alexa/alexa-skills-kit/docs/built-in-intent-ref/standard-intents
 	ParentIntentSignature *string
 
 	// When the user answers "no" to the question defined in confirmationPrompt ,
 	// Amazon Lex responds with this statement to acknowledge that the intent was
-	// canceled. You must provide both the rejectionStatement and the
-	// confirmationPrompt , or neither.
+	// canceled.
+	//
+	// You must provide both the rejectionStatement and the confirmationPrompt , or
+	// neither.
 	RejectionStatement *types.Statement
 
 	// An array of utterances (strings) that a user might say to signal the intent.
 	// For example, "I want {PizzaSize} pizza", "Order {Quantity} {PizzaSize} pizzas".
+	//
 	// In each utterance, a slot name is enclosed in curly braces.
 	SampleUtterances []string
 
 	// An array of intent slots. At runtime, Amazon Lex elicits required slot values
-	// from the user using prompts defined in the slots. For more information, see
-	// how-it-works .
+	// from the user using prompts defined in the slots. For more information, see how-it-works.
 	Slots []types.Slot
 
 	noSmithyDocumentSerde
@@ -243,7 +275,7 @@ type PutIntentOutput struct {
 	// Lex responds with this statement to acknowledge that the intent was canceled.
 	RejectionStatement *types.Statement
 
-	// An array of sample utterances that are configured for the intent.
+	//  An array of sample utterances that are configured for the intent.
 	SampleUtterances []string
 
 	// An array of intent slots that are configured for the intent.
@@ -280,25 +312,25 @@ func (c *Client) addOperationPutIntentMiddlewares(stack *middleware.Stack, optio
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -313,13 +345,16 @@ func (c *Client) addOperationPutIntentMiddlewares(stack *middleware.Stack, optio
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpPutIntentValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opPutIntent(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

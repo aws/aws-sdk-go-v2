@@ -6,15 +6,16 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/robomaker/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Returns a list of robots. You can optionally provide filters to retrieve
-// specific robots. This API will no longer be supported as of May 2, 2022. Use it
-// to remove resources that were created for Deployment Service.
+// specific robots.
+//
+// This API will no longer be supported as of May 2, 2022. Use it to remove
+// resources that were created for Deployment Service.
 //
 // Deprecated: Support for the AWS RoboMaker application deployment feature has
 // ended. For additional information, see
@@ -36,11 +37,12 @@ func (c *Client) ListRobots(ctx context.Context, params *ListRobotsInput, optFns
 
 type ListRobotsInput struct {
 
-	// Optional filters to limit results. The filter names status and fleetName are
-	// supported. When filtering, you must use the complete value of the filtered item.
-	// You can use up to three filters, but they must be for the same named item. For
-	// example, if you are looking for items with the status Registered or the status
-	// Available .
+	// Optional filters to limit results.
+	//
+	// The filter names status and fleetName are supported. When filtering, you must
+	// use the complete value of the filtered item. You can use up to three filters,
+	// but they must be for the same named item. For example, if you are looking for
+	// items with the status Registered or the status Available .
 	Filters []types.Filter
 
 	// When this parameter is used, ListRobots only returns maxResults results in a
@@ -101,25 +103,25 @@ func (c *Client) addOperationListRobotsMiddlewares(stack *middleware.Stack, opti
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -134,10 +136,13 @@ func (c *Client) addOperationListRobotsMiddlewares(stack *middleware.Stack, opti
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListRobots(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

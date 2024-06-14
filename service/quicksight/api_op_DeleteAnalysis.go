@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -17,13 +16,16 @@ import (
 // a recovery window value, the operation defaults to 30 days. Amazon QuickSight
 // attaches a DeletionTime stamp to the response that specifies the end of the
 // recovery window. At the end of the recovery window, Amazon QuickSight deletes
-// the analysis permanently. At any time before recovery window ends, you can use
-// the RestoreAnalysis API operation to remove the DeletionTime stamp and cancel
-// the deletion of the analysis. The analysis remains visible in the API until it's
-// deleted, so you can describe it but you can't make a template from it. An
-// analysis that's scheduled for deletion isn't accessible in the Amazon QuickSight
-// console. To access it in the console, restore it. Deleting an analysis doesn't
-// delete the dashboards that you publish from it.
+// the analysis permanently.
+//
+// At any time before recovery window ends, you can use the RestoreAnalysis API
+// operation to remove the DeletionTime stamp and cancel the deletion of the
+// analysis. The analysis remains visible in the API until it's deleted, so you can
+// describe it but you can't make a template from it.
+//
+// An analysis that's scheduled for deletion isn't accessible in the Amazon
+// QuickSight console. To access it in the console, restore it. Deleting an
+// analysis doesn't delete the dashboards that you publish from it.
 func (c *Client) DeleteAnalysis(ctx context.Context, params *DeleteAnalysisInput, optFns ...func(*Options)) (*DeleteAnalysisOutput, error) {
 	if params == nil {
 		params = &DeleteAnalysisInput{}
@@ -109,25 +111,25 @@ func (c *Client) addOperationDeleteAnalysisMiddlewares(stack *middleware.Stack, 
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -142,13 +144,16 @@ func (c *Client) addOperationDeleteAnalysisMiddlewares(stack *middleware.Stack, 
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDeleteAnalysisValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteAnalysis(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

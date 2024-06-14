@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/ram/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -33,7 +32,9 @@ type ListPrincipalsInput struct {
 
 	// Specifies that you want to list information for only resource shares that match
 	// the following:
+	//
 	//   - SELF – principals that your account is sharing resources with
+	//
 	//   - OTHER-ACCOUNTS – principals that are sharing resources with your account
 	//
 	// This member is required.
@@ -56,34 +57,45 @@ type ListPrincipalsInput struct {
 	// previous call's NextToken response to request the next page of results.
 	NextToken *string
 
-	// Specifies that you want to list information for only the listed principals. You
-	// can include the following values:
+	// Specifies that you want to list information for only the listed principals.
+	//
+	// You can include the following values:
+	//
 	//   - An Amazon Web Services account ID, for example: 123456789012
-	//   - An Amazon Resource Name (ARN) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
-	//   of an organization in Organizations, for example:
+	//
+	//   - An [Amazon Resource Name (ARN)]of an organization in Organizations, for example:
 	//   organizations::123456789012:organization/o-exampleorgid
+	//
 	//   - An ARN of an organizational unit (OU) in Organizations, for example:
 	//   organizations::123456789012:ou/o-exampleorgid/ou-examplerootid-exampleouid123
+	//
 	//   - An ARN of an IAM role, for example: iam::123456789012:role/rolename
+	//
 	//   - An ARN of an IAM user, for example: iam::123456789012user/username
+	//
 	// Not all resource types can be shared with IAM roles and users. For more
-	// information, see Sharing with IAM roles and users (https://docs.aws.amazon.com/ram/latest/userguide/permissions.html#permissions-rbp-supported-resource-types)
-	// in the Resource Access Manager User Guide.
+	// information, see [Sharing with IAM roles and users]in the Resource Access Manager User Guide.
+	//
+	// [Amazon Resource Name (ARN)]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+	// [Sharing with IAM roles and users]: https://docs.aws.amazon.com/ram/latest/userguide/permissions.html#permissions-rbp-supported-resource-types
 	Principals []string
 
 	// Specifies that you want to list principal information for the resource share
-	// with the specified Amazon Resource Name (ARN) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
-	// .
+	// with the specified [Amazon Resource Name (ARN)].
+	//
+	// [Amazon Resource Name (ARN)]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
 	ResourceArn *string
 
 	// Specifies that you want to list information for only principals associated with
-	// the resource shares specified by a list the Amazon Resource Names (ARNs) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
-	// .
+	// the resource shares specified by a list the [Amazon Resource Names (ARNs)].
+	//
+	// [Amazon Resource Names (ARNs)]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
 	ResourceShareArns []string
 
 	// Specifies that you want to list information for only principals associated with
-	// resource shares that include the specified resource type. For a list of valid
-	// values, query the ListResourceTypes operation.
+	// resource shares that include the specified resource type.
+	//
+	// For a list of valid values, query the ListResourceTypes operation.
 	ResourceType *string
 
 	noSmithyDocumentSerde
@@ -129,25 +141,25 @@ func (c *Client) addOperationListPrincipalsMiddlewares(stack *middleware.Stack, 
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -162,13 +174,16 @@ func (c *Client) addOperationListPrincipalsMiddlewares(stack *middleware.Stack, 
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpListPrincipalsValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListPrincipals(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

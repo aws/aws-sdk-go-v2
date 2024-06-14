@@ -6,16 +6,17 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Attaches a resource-based permission policy to a CloudTrail channel that is
+//	Attaches a resource-based permission policy to a CloudTrail channel that is
+//
 // used for an integration with an event source outside of Amazon Web Services. For
-// more information about resource-based policies, see CloudTrail resource-based
-// policy examples (https://docs.aws.amazon.com/awscloudtrail/latest/userguide/security_iam_resource-based-policy-examples.html)
-// in the CloudTrail User Guide.
+// more information about resource-based policies, see [CloudTrail resource-based policy examples]in the CloudTrail User
+// Guide.
+//
+// [CloudTrail resource-based policy examples]: https://docs.aws.amazon.com/awscloudtrail/latest/userguide/security_iam_resource-based-policy-examples.html
 func (c *Client) PutResourcePolicy(ctx context.Context, params *PutResourcePolicyInput, optFns ...func(*Options)) (*PutResourcePolicyOutput, error) {
 	if params == nil {
 		params = &PutResourcePolicyInput{}
@@ -33,18 +34,22 @@ func (c *Client) PutResourcePolicy(ctx context.Context, params *PutResourcePolic
 
 type PutResourcePolicyInput struct {
 
-	// The Amazon Resource Name (ARN) of the CloudTrail channel attached to the
+	//  The Amazon Resource Name (ARN) of the CloudTrail channel attached to the
 	// resource-based policy. The following is the format of a resource ARN:
 	// arn:aws:cloudtrail:us-east-2:123456789012:channel/MyChannel .
 	//
 	// This member is required.
 	ResourceArn *string
 
-	// A JSON-formatted string for an Amazon Web Services resource-based policy. The
-	// following are requirements for the resource policy:
+	//  A JSON-formatted string for an Amazon Web Services resource-based policy.
+	//
+	// The following are requirements for the resource policy:
+	//
 	//   - Contains only one action: cloudtrail-data:PutAuditEvents
+	//
 	//   - Contains at least one statement. The policy can have a maximum of 20
 	//   statements.
+	//
 	//   - Each statement contains at least one principal. A statement can have a
 	//   maximum of 50 principals.
 	//
@@ -56,11 +61,11 @@ type PutResourcePolicyInput struct {
 
 type PutResourcePolicyOutput struct {
 
-	// The Amazon Resource Name (ARN) of the CloudTrail channel attached to the
+	//  The Amazon Resource Name (ARN) of the CloudTrail channel attached to the
 	// resource-based policy.
 	ResourceArn *string
 
-	// The JSON-formatted string of the Amazon Web Services resource-based policy
+	//  The JSON-formatted string of the Amazon Web Services resource-based policy
 	// attached to the CloudTrail channel.
 	ResourcePolicy *string
 
@@ -92,25 +97,25 @@ func (c *Client) addOperationPutResourcePolicyMiddlewares(stack *middleware.Stac
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -125,13 +130,16 @@ func (c *Client) addOperationPutResourcePolicyMiddlewares(stack *middleware.Stac
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpPutResourcePolicyValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opPutResourcePolicy(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

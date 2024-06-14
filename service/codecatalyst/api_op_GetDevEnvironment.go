@@ -32,8 +32,7 @@ func (c *Client) GetDevEnvironment(ctx context.Context, params *GetDevEnvironmen
 type GetDevEnvironmentInput struct {
 
 	// The system-generated unique ID of the Dev Environment for which you want to
-	// view information. To retrieve a list of Dev Environment IDs, use
-	// ListDevEnvironments .
+	// view information. To retrieve a list of Dev Environment IDs, use ListDevEnvironments.
 	//
 	// This member is required.
 	Id *string
@@ -75,8 +74,9 @@ type GetDevEnvironmentOutput struct {
 	InstanceType types.InstanceType
 
 	// The time when the Dev Environment was last updated, in coordinated universal
-	// time (UTC) timestamp format as specified in RFC 3339 (https://www.rfc-editor.org/rfc/rfc3339#section-5.6)
-	// .
+	// time (UTC) timestamp format as specified in [RFC 3339].
+	//
+	// [RFC 3339]: https://www.rfc-editor.org/rfc/rfc3339#section-5.6
 	//
 	// This member is required.
 	LastUpdatedTime *time.Time
@@ -149,22 +149,22 @@ func (c *Client) addOperationGetDevEnvironmentMiddlewares(stack *middleware.Stac
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -179,13 +179,16 @@ func (c *Client) addOperationGetDevEnvironmentMiddlewares(stack *middleware.Stac
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpGetDevEnvironmentValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetDevEnvironment(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

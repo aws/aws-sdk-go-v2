@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -14,12 +13,15 @@ import (
 
 // Modifies the instance tenancy attribute of the specified VPC. You can change
 // the instance tenancy attribute of a VPC to default only. You cannot change the
-// instance tenancy attribute to dedicated . After you modify the tenancy of the
-// VPC, any new instances that you launch into the VPC have a tenancy of default ,
-// unless you specify otherwise during launch. The tenancy of any existing
-// instances in the VPC is not affected. For more information, see Dedicated
-// Instances (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/dedicated-instance.html)
-// in the Amazon EC2 User Guide.
+// instance tenancy attribute to dedicated .
+//
+// After you modify the tenancy of the VPC, any new instances that you launch into
+// the VPC have a tenancy of default , unless you specify otherwise during launch.
+// The tenancy of any existing instances in the VPC is not affected.
+//
+// For more information, see [Dedicated Instances] in the Amazon EC2 User Guide.
+//
+// [Dedicated Instances]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/dedicated-instance.html
 func (c *Client) ModifyVpcTenancy(ctx context.Context, params *ModifyVpcTenancyInput, optFns ...func(*Options)) (*ModifyVpcTenancyOutput, error) {
 	if params == nil {
 		params = &ModifyVpcTenancyInput{}
@@ -89,25 +91,25 @@ func (c *Client) addOperationModifyVpcTenancyMiddlewares(stack *middleware.Stack
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -122,13 +124,16 @@ func (c *Client) addOperationModifyVpcTenancyMiddlewares(stack *middleware.Stack
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpModifyVpcTenancyValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opModifyVpcTenancy(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

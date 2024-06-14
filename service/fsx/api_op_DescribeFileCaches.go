@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/fsx/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -15,19 +14,24 @@ import (
 // Returns the description of a specific Amazon File Cache resource, if a
 // FileCacheIds value is provided for that cache. Otherwise, it returns
 // descriptions of all caches owned by your Amazon Web Services account in the
-// Amazon Web Services Region of the endpoint that you're calling. When retrieving
-// all cache descriptions, you can optionally specify the MaxResults parameter to
-// limit the number of descriptions in a response. If more cache descriptions
-// remain, the operation returns a NextToken value in the response. In this case,
-// send a later request with the NextToken request parameter set to the value of
-// NextToken from the last response. This operation is used in an iterative process
-// to retrieve a list of your cache descriptions. DescribeFileCaches is called
-// first without a NextToken value. Then the operation continues to be called with
-// the NextToken parameter set to the value of the last NextToken value until a
-// response has no NextToken . When using this operation, keep the following in
-// mind:
+// Amazon Web Services Region of the endpoint that you're calling.
+//
+// When retrieving all cache descriptions, you can optionally specify the
+// MaxResults parameter to limit the number of descriptions in a response. If more
+// cache descriptions remain, the operation returns a NextToken value in the
+// response. In this case, send a later request with the NextToken request
+// parameter set to the value of NextToken from the last response.
+//
+// This operation is used in an iterative process to retrieve a list of your cache
+// descriptions. DescribeFileCaches is called first without a NextToken value. Then
+// the operation continues to be called with the NextToken parameter set to the
+// value of the last NextToken value until a response has no NextToken .
+//
+// When using this operation, keep the following in mind:
+//
 //   - The implementation might return fewer than MaxResults cache descriptions
 //     while still including a NextToken value.
+//
 //   - The order of caches returned in the response of one DescribeFileCaches call
 //     and the order of caches returned across the responses of a multicall iteration
 //     is unspecified.
@@ -101,25 +105,25 @@ func (c *Client) addOperationDescribeFileCachesMiddlewares(stack *middleware.Sta
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -134,10 +138,13 @@ func (c *Client) addOperationDescribeFileCachesMiddlewares(stack *middleware.Sta
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeFileCaches(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

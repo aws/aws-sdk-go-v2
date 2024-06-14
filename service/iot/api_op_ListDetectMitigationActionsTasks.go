@@ -6,16 +6,17 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/iot/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
-// List of Device Defender ML Detect mitigation actions tasks. Requires permission
-// to access the ListDetectMitigationActionsTasks (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
-// action.
+//	List of Device Defender ML Detect mitigation actions tasks.
+//
+// Requires permission to access the [ListDetectMitigationActionsTasks] action.
+//
+// [ListDetectMitigationActionsTasks]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions
 func (c *Client) ListDetectMitigationActionsTasks(ctx context.Context, params *ListDetectMitigationActionsTasksInput, optFns ...func(*Options)) (*ListDetectMitigationActionsTasksOutput, error) {
 	if params == nil {
 		params = &ListDetectMitigationActionsTasksInput{}
@@ -33,13 +34,13 @@ func (c *Client) ListDetectMitigationActionsTasks(ctx context.Context, params *L
 
 type ListDetectMitigationActionsTasksInput struct {
 
-	// The end of the time period for which ML Detect mitigation actions tasks are
+	//  The end of the time period for which ML Detect mitigation actions tasks are
 	// returned.
 	//
 	// This member is required.
 	EndTime *time.Time
 
-	// A filter to limit results to those found after the specified time. You must
+	//  A filter to limit results to those found after the specified time. You must
 	// specify either the startTime and endTime or the taskId, but not both.
 	//
 	// This member is required.
@@ -48,7 +49,7 @@ type ListDetectMitigationActionsTasksInput struct {
 	// The maximum number of results to return at one time. The default is 25.
 	MaxResults *int32
 
-	// The token for the next set of results.
+	//  The token for the next set of results.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -56,11 +57,11 @@ type ListDetectMitigationActionsTasksInput struct {
 
 type ListDetectMitigationActionsTasksOutput struct {
 
-	// A token that can be used to retrieve the next set of results, or null if there
+	//  A token that can be used to retrieve the next set of results, or null if there
 	// are no additional results.
 	NextToken *string
 
-	// The collection of ML Detect mitigation tasks that matched the filter criteria.
+	//  The collection of ML Detect mitigation tasks that matched the filter criteria.
 	Tasks []types.DetectMitigationActionsTaskSummary
 
 	// Metadata pertaining to the operation's result.
@@ -91,25 +92,25 @@ func (c *Client) addOperationListDetectMitigationActionsTasksMiddlewares(stack *
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -124,13 +125,16 @@ func (c *Client) addOperationListDetectMitigationActionsTasksMiddlewares(stack *
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpListDetectMitigationActionsTasksValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListDetectMitigationActionsTasks(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

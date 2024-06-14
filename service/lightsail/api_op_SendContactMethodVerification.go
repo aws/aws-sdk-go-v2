@@ -6,23 +6,28 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/lightsail/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Sends a verification request to an email contact method to ensure it's owned by
-// the requester. SMS contact methods don't need to be verified. A contact method
-// is used to send you notifications about your Amazon Lightsail resources. You can
-// add one email address and one mobile phone number contact method in each Amazon
-// Web Services Region. However, SMS text messaging is not supported in some Amazon
-// Web Services Regions, and SMS text messages cannot be sent to some
-// countries/regions. For more information, see Notifications in Amazon Lightsail (https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-notifications)
-// . A verification request is sent to the contact method when you initially create
+// the requester. SMS contact methods don't need to be verified.
+//
+// A contact method is used to send you notifications about your Amazon Lightsail
+// resources. You can add one email address and one mobile phone number contact
+// method in each Amazon Web Services Region. However, SMS text messaging is not
+// supported in some Amazon Web Services Regions, and SMS text messages cannot be
+// sent to some countries/regions. For more information, see [Notifications in Amazon Lightsail].
+//
+// A verification request is sent to the contact method when you initially create
 // it. Use this action to send another verification request if a previous
-// verification request was deleted, or has expired. Notifications are not sent to
-// an email contact method until after it is verified, and confirmed as valid.
+// verification request was deleted, or has expired.
+//
+// Notifications are not sent to an email contact method until after it is
+// verified, and confirmed as valid.
+//
+// [Notifications in Amazon Lightsail]: https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-notifications
 func (c *Client) SendContactMethodVerification(ctx context.Context, params *SendContactMethodVerificationInput, optFns ...func(*Options)) (*SendContactMethodVerificationOutput, error) {
 	if params == nil {
 		params = &SendContactMethodVerificationInput{}
@@ -83,25 +88,25 @@ func (c *Client) addOperationSendContactMethodVerificationMiddlewares(stack *mid
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -116,13 +121,16 @@ func (c *Client) addOperationSendContactMethodVerificationMiddlewares(stack *mid
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpSendContactMethodVerificationValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opSendContactMethodVerification(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

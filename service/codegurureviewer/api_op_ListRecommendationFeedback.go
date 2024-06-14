@@ -6,15 +6,15 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/codegurureviewer/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns a list of RecommendationFeedbackSummary (https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_RecommendationFeedbackSummary.html)
-// objects that contain customer recommendation feedback for all CodeGuru Reviewer
-// users.
+// Returns a list of [RecommendationFeedbackSummary] objects that contain customer recommendation feedback for
+// all CodeGuru Reviewer users.
+//
+// [RecommendationFeedbackSummary]: https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_RecommendationFeedbackSummary.html
 func (c *Client) ListRecommendationFeedback(ctx context.Context, params *ListRecommendationFeedbackInput, optFns ...func(*Options)) (*ListRecommendationFeedbackOutput, error) {
 	if params == nil {
 		params = &ListRecommendationFeedbackInput{}
@@ -32,8 +32,9 @@ func (c *Client) ListRecommendationFeedback(ctx context.Context, params *ListRec
 
 type ListRecommendationFeedbackInput struct {
 
-	// The Amazon Resource Name (ARN) of the CodeReview (https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_CodeReview.html)
-	// object.
+	// The Amazon Resource Name (ARN) of the [CodeReview] object.
+	//
+	// [CodeReview]: https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_CodeReview.html
 	//
 	// This member is required.
 	CodeReviewArn *string
@@ -52,10 +53,12 @@ type ListRecommendationFeedbackInput struct {
 
 	// An Amazon Web Services user's account ID or Amazon Resource Name (ARN). Use
 	// this ID to query the recommendation feedback for a code review from that user.
+	//
 	// The UserId is an IAM principal that can be specified as an Amazon Web Services
-	// account ID or an Amazon Resource Name (ARN). For more information, see
-	// Specifying a Principal (https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements_principal.html#Principal_specifying)
-	// in the Amazon Web Services Identity and Access Management User Guide.
+	// account ID or an Amazon Resource Name (ARN). For more information, see [Specifying a Principal]in the
+	// Amazon Web Services Identity and Access Management User Guide.
+	//
+	// [Specifying a Principal]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements_principal.html#Principal_specifying
 	UserIds []string
 
 	noSmithyDocumentSerde
@@ -100,25 +103,25 @@ func (c *Client) addOperationListRecommendationFeedbackMiddlewares(stack *middle
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -133,13 +136,16 @@ func (c *Client) addOperationListRecommendationFeedbackMiddlewares(stack *middle
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpListRecommendationFeedbackValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListRecommendationFeedback(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

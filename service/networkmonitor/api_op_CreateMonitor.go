@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/networkmonitor/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -16,6 +15,23 @@ import (
 // monitor you'll create one or more probes that monitor network traffic between
 // your source Amazon Web Services VPC subnets and your destination IP addresses.
 // Each probe then aggregates and sends metrics to Amazon CloudWatch.
+//
+// You can also create a monitor with probes using this command. For each probe,
+// you define the following:
+//
+//   - source —The subnet IDs where the probes will be created.
+//
+//   - destination — The target destination IP address for the probe.
+//
+//   - destinationPort —Required only if the protocol is TCP .
+//
+//   - protocol —The communication protocol between the source and destination.
+//     This will be either TCP or ICMP .
+//
+//   - packetSize —The size of the packets. This must be a number between 56 and
+//     8500 .
+//
+//   - (Optional) tags —Key-value pairs created and assigned to the probe.
 func (c *Client) CreateMonitor(ctx context.Context, params *CreateMonitorInput, optFns ...func(*Options)) (*CreateMonitorOutput, error) {
 	if params == nil {
 		params = &CreateMonitorInput{}
@@ -34,13 +50,14 @@ func (c *Client) CreateMonitor(ctx context.Context, params *CreateMonitorInput, 
 type CreateMonitorInput struct {
 
 	// The name identifying the monitor. It can contain only letters, underscores (_),
-	// or dashes (-), and can be up to 255 characters.
+	// or dashes (-), and can be up to 200 characters.
 	//
 	// This member is required.
 	MonitorName *string
 
 	// The time, in seconds, that metrics are aggregated and sent to Amazon
-	// CloudWatch. Valid values are either 30 or 60 .
+	// CloudWatch. Valid values are either 30 or 60 . 60 is the default if no period
+	// is chosen.
 	AggregationPeriod *int64
 
 	// Unique, case-sensitive identifier to ensure the idempotency of the request.
@@ -108,25 +125,25 @@ func (c *Client) addOperationCreateMonitorMiddlewares(stack *middleware.Stack, o
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -141,6 +158,9 @@ func (c *Client) addOperationCreateMonitorMiddlewares(stack *middleware.Stack, o
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opCreateMonitorMiddleware(stack, options); err != nil {
 		return err
 	}
@@ -150,7 +170,7 @@ func (c *Client) addOperationCreateMonitorMiddlewares(stack *middleware.Stack, o
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateMonitor(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

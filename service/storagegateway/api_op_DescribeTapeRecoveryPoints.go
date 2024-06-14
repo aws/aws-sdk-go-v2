@@ -6,17 +6,18 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/storagegateway/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Returns a list of virtual tape recovery points that are available for the
-// specified tape gateway. A recovery point is a point-in-time view of a virtual
-// tape at which all the data on the virtual tape is consistent. If your gateway
-// crashes, virtual tapes that have recovery points can be recovered to a new
-// gateway. This operation is only supported in the tape gateway type.
+// specified tape gateway.
+//
+// A recovery point is a point-in-time view of a virtual tape at which all the
+// data on the virtual tape is consistent. If your gateway crashes, virtual tapes
+// that have recovery points can be recovered to a new gateway. This operation is
+// only supported in the tape gateway type.
 func (c *Client) DescribeTapeRecoveryPoints(ctx context.Context, params *DescribeTapeRecoveryPointsInput, optFns ...func(*Options)) (*DescribeTapeRecoveryPointsOutput, error) {
 	if params == nil {
 		params = &DescribeTapeRecoveryPointsInput{}
@@ -35,8 +36,8 @@ func (c *Client) DescribeTapeRecoveryPoints(ctx context.Context, params *Describ
 // DescribeTapeRecoveryPointsInput
 type DescribeTapeRecoveryPointsInput struct {
 
-	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation
-	// to return a list of gateways for your account and Amazon Web Services Region.
+	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation to return a
+	// list of gateways for your account and Amazon Web Services Region.
 	//
 	// This member is required.
 	GatewayARN *string
@@ -55,15 +56,16 @@ type DescribeTapeRecoveryPointsInput struct {
 // DescribeTapeRecoveryPointsOutput
 type DescribeTapeRecoveryPointsOutput struct {
 
-	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation
-	// to return a list of gateways for your account and Amazon Web Services Region.
+	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation to return a
+	// list of gateways for your account and Amazon Web Services Region.
 	GatewayARN *string
 
 	// An opaque string that indicates the position at which the virtual tape recovery
-	// points that were listed for description ended. Use this marker in your next
-	// request to list the next set of virtual tape recovery points in the list. If
-	// there are no more recovery points to describe, this field does not appear in the
-	// response.
+	// points that were listed for description ended.
+	//
+	// Use this marker in your next request to list the next set of virtual tape
+	// recovery points in the list. If there are no more recovery points to describe,
+	// this field does not appear in the response.
 	Marker *string
 
 	// An array of TapeRecoveryPointInfos that are available for the specified gateway.
@@ -97,25 +99,25 @@ func (c *Client) addOperationDescribeTapeRecoveryPointsMiddlewares(stack *middle
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -130,13 +132,16 @@ func (c *Client) addOperationDescribeTapeRecoveryPointsMiddlewares(stack *middle
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDescribeTapeRecoveryPointsValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeTapeRecoveryPoints(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -15,10 +14,12 @@ import (
 // default administrator account can manage third-party firewalls and has full
 // administrative scope that allows administration of all policy types, accounts,
 // organizational units, and Regions. This account must be a member account of the
-// organization in Organizations whose resources you want to protect. For
-// information about working with Firewall Manager administrator accounts, see
-// Managing Firewall Manager administrators (https://docs.aws.amazon.com/organizations/latest/userguide/fms-administrators.html)
+// organization in Organizations whose resources you want to protect.
+//
+// For information about working with Firewall Manager administrator accounts, see [Managing Firewall Manager administrators]
 // in the Firewall Manager Developer Guide.
+//
+// [Managing Firewall Manager administrators]: https://docs.aws.amazon.com/organizations/latest/userguide/fms-administrators.html
 func (c *Client) AssociateAdminAccount(ctx context.Context, params *AssociateAdminAccountInput, optFns ...func(*Options)) (*AssociateAdminAccountOutput, error) {
 	if params == nil {
 		params = &AssociateAdminAccountInput{}
@@ -39,9 +40,9 @@ type AssociateAdminAccountInput struct {
 	// The Amazon Web Services account ID to associate with Firewall Manager as the
 	// Firewall Manager default administrator account. This account must be a member
 	// account of the organization in Organizations whose resources you want to
-	// protect. For more information about Organizations, see Managing the Amazon Web
-	// Services Accounts in Your Organization (https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_accounts.html)
-	// .
+	// protect. For more information about Organizations, see [Managing the Amazon Web Services Accounts in Your Organization].
+	//
+	// [Managing the Amazon Web Services Accounts in Your Organization]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_accounts.html
 	//
 	// This member is required.
 	AdminAccount *string
@@ -78,25 +79,25 @@ func (c *Client) addOperationAssociateAdminAccountMiddlewares(stack *middleware.
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -111,13 +112,16 @@ func (c *Client) addOperationAssociateAdminAccountMiddlewares(stack *middleware.
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpAssociateAdminAccountValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opAssociateAdminAccount(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

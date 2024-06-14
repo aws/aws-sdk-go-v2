@@ -6,13 +6,14 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a project in the specified portal. Make sure that the project name and
-// description don't contain confidential information.
+// Creates a project in the specified portal.
+//
+// Make sure that the project name and description don't contain confidential
+// information.
 func (c *Client) CreateProject(ctx context.Context, params *CreateProjectInput, optFns ...func(*Options)) (*CreateProjectOutput, error) {
 	if params == nil {
 		params = &CreateProjectInput{}
@@ -49,8 +50,9 @@ type CreateProjectInput struct {
 	ProjectDescription *string
 
 	// A list of key-value pairs that contain metadata for the project. For more
-	// information, see Tagging your IoT SiteWise resources (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/tag-resources.html)
-	// in the IoT SiteWise User Guide.
+	// information, see [Tagging your IoT SiteWise resources]in the IoT SiteWise User Guide.
+	//
+	// [Tagging your IoT SiteWise resources]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/tag-resources.html
 	Tags map[string]string
 
 	noSmithyDocumentSerde
@@ -58,9 +60,11 @@ type CreateProjectInput struct {
 
 type CreateProjectOutput struct {
 
-	// The ARN (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
-	// of the project, which has the following format.
-	// arn:${Partition}:iotsitewise:${Region}:${Account}:project/${ProjectId}
+	// The [ARN] of the project, which has the following format.
+	//
+	//     arn:${Partition}:iotsitewise:${Region}:${Account}:project/${ProjectId}
+	//
+	// [ARN]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
 	//
 	// This member is required.
 	ProjectArn *string
@@ -98,25 +102,25 @@ func (c *Client) addOperationCreateProjectMiddlewares(stack *middleware.Stack, o
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -131,6 +135,9 @@ func (c *Client) addOperationCreateProjectMiddlewares(stack *middleware.Stack, o
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addEndpointPrefix_opCreateProjectMiddleware(stack); err != nil {
 		return err
 	}
@@ -143,7 +150,7 @@ func (c *Client) addOperationCreateProjectMiddlewares(stack *middleware.Stack, o
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateProject(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -53,8 +52,9 @@ type DescribeHyperParameterTuningJobOutput struct {
 	// This member is required.
 	HyperParameterTuningJobArn *string
 
-	// The HyperParameterTuningJobConfig (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_HyperParameterTuningJobConfig.html)
-	// object that specifies the configuration of the tuning job.
+	// The [HyperParameterTuningJobConfig] object that specifies the configuration of the tuning job.
+	//
+	// [HyperParameterTuningJobConfig]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_HyperParameterTuningJobConfig.html
 	//
 	// This member is required.
 	HyperParameterTuningJobConfig *types.HyperParameterTuningJobConfig
@@ -69,16 +69,18 @@ type DescribeHyperParameterTuningJobOutput struct {
 	// This member is required.
 	HyperParameterTuningJobStatus types.HyperParameterTuningJobStatus
 
-	// The ObjectiveStatusCounters (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_ObjectiveStatusCounters.html)
-	// object that specifies the number of training jobs, categorized by the status of
-	// their final objective metric, that this tuning job launched.
+	// The [ObjectiveStatusCounters] object that specifies the number of training jobs, categorized by the
+	// status of their final objective metric, that this tuning job launched.
+	//
+	// [ObjectiveStatusCounters]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_ObjectiveStatusCounters.html
 	//
 	// This member is required.
 	ObjectiveStatusCounters *types.ObjectiveStatusCounters
 
-	// The TrainingJobStatusCounters (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_TrainingJobStatusCounters.html)
-	// object that specifies the number of training jobs, categorized by status, that
-	// this tuning job launched.
+	// The [TrainingJobStatusCounters] object that specifies the number of training jobs, categorized by status,
+	// that this tuning job launched.
+	//
+	// [TrainingJobStatusCounters]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_TrainingJobStatusCounters.html
 	//
 	// This member is required.
 	TrainingJobStatusCounters *types.TrainingJobStatusCounters
@@ -86,10 +88,10 @@ type DescribeHyperParameterTuningJobOutput struct {
 	// A flag to indicate if autotune is enabled for the hyperparameter tuning job.
 	Autotune *types.Autotune
 
-	// A TrainingJobSummary (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_TrainingJobSummary.html)
-	// object that describes the training job that completed with the best current
-	// HyperParameterTuningJobObjective (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_HyperParameterTuningJobObjective.html)
-	// .
+	// A [TrainingJobSummary] object that describes the training job that completed with the best current [HyperParameterTuningJobObjective].
+	//
+	// [TrainingJobSummary]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_TrainingJobSummary.html
+	// [HyperParameterTuningJobObjective]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_HyperParameterTuningJobObjective.html
 	BestTrainingJob *types.HyperParameterTrainingJobSummary
 
 	// The total resources consumed by your hyperparameter tuning job.
@@ -105,19 +107,22 @@ type DescribeHyperParameterTuningJobOutput struct {
 	LastModifiedTime *time.Time
 
 	// If the hyperparameter tuning job is an warm start tuning job with a
-	// WarmStartType of IDENTICAL_DATA_AND_ALGORITHM , this is the TrainingJobSummary (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_TrainingJobSummary.html)
-	// for the training job with the best objective metric value of all training jobs
-	// launched by this tuning job and all parent jobs specified for the warm start
-	// tuning job.
+	// WarmStartType of IDENTICAL_DATA_AND_ALGORITHM , this is the [TrainingJobSummary] for the training
+	// job with the best objective metric value of all training jobs launched by this
+	// tuning job and all parent jobs specified for the warm start tuning job.
+	//
+	// [TrainingJobSummary]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_TrainingJobSummary.html
 	OverallBestTrainingJob *types.HyperParameterTrainingJobSummary
 
-	// The HyperParameterTrainingJobDefinition (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_HyperParameterTrainingJobDefinition.html)
-	// object that specifies the definition of the training jobs that this tuning job
-	// launches.
+	// The [HyperParameterTrainingJobDefinition] object that specifies the definition of the training jobs that this tuning
+	// job launches.
+	//
+	// [HyperParameterTrainingJobDefinition]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_HyperParameterTrainingJobDefinition.html
 	TrainingJobDefinition *types.HyperParameterTrainingJobDefinition
 
-	// A list of the HyperParameterTrainingJobDefinition (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_HyperParameterTrainingJobDefinition.html)
-	// objects launched for this tuning job.
+	// A list of the [HyperParameterTrainingJobDefinition] objects launched for this tuning job.
+	//
+	// [HyperParameterTrainingJobDefinition]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_HyperParameterTrainingJobDefinition.html
 	TrainingJobDefinitions []types.HyperParameterTrainingJobDefinition
 
 	// Tuning job completion information returned as the response from a
@@ -160,25 +165,25 @@ func (c *Client) addOperationDescribeHyperParameterTuningJobMiddlewares(stack *m
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -193,13 +198,16 @@ func (c *Client) addOperationDescribeHyperParameterTuningJobMiddlewares(stack *m
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDescribeHyperParameterTuningJobValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeHyperParameterTuningJob(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

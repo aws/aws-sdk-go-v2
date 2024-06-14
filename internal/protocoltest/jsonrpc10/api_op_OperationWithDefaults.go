@@ -29,7 +29,11 @@ func (c *Client) OperationWithDefaults(ctx context.Context, params *OperationWit
 }
 
 type OperationWithDefaultsInput struct {
+	ClientOptionalDefaults *types.ClientOptionalDefaults
+
 	Defaults *types.Defaults
+
+	OtherTopLevelDefault int32
 
 	TopLevelDefault *string
 
@@ -75,6 +79,24 @@ type OperationWithDefaultsOutput struct {
 
 	DefaultTimestamp *time.Time
 
+	EmptyBlob []byte
+
+	EmptyString *string
+
+	FalseBoolean bool
+
+	ZeroByte int8
+
+	ZeroDouble float64
+
+	ZeroFloat float32
+
+	ZeroInteger int32
+
+	ZeroLong int64
+
+	ZeroShort int16
+
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
 
@@ -103,22 +125,25 @@ func (c *Client) addOperationOperationWithDefaultsMiddlewares(stack *middleware.
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
+		return err
+	}
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -133,10 +158,13 @@ func (c *Client) addOperationOperationWithDefaultsMiddlewares(stack *middleware.
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opOperationWithDefaults(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/glue/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -15,13 +14,16 @@ import (
 // Adds a new version to the existing schema. Returns an error if new version of
 // schema does not meet the compatibility requirements of the schema set. This API
 // will not create a new schema set and will return a 404 error if the schema set
-// is not already present in the Schema Registry. If this is the first schema
-// definition to be registered in the Schema Registry, this API will store the
-// schema version and return immediately. Otherwise, this call has the potential to
-// run longer than other operations due to compatibility modes. You can call the
-// GetSchemaVersion API with the SchemaVersionId to check compatibility modes. If
-// the same schema definition is already stored in Schema Registry as a version,
-// the schema ID of the existing schema is returned to the caller.
+// is not already present in the Schema Registry.
+//
+// If this is the first schema definition to be registered in the Schema Registry,
+// this API will store the schema version and return immediately. Otherwise, this
+// call has the potential to run longer than other operations due to compatibility
+// modes. You can call the GetSchemaVersion API with the SchemaVersionId to check
+// compatibility modes.
+//
+// If the same schema definition is already stored in Schema Registry as a
+// version, the schema ID of the existing schema is returned to the caller.
 func (c *Client) RegisterSchemaVersion(ctx context.Context, params *RegisterSchemaVersionInput, optFns ...func(*Options)) (*RegisterSchemaVersionOutput, error) {
 	if params == nil {
 		params = &RegisterSchemaVersionInput{}
@@ -46,8 +48,10 @@ type RegisterSchemaVersionInput struct {
 
 	// This is a wrapper structure to contain schema identity fields. The structure
 	// contains:
+	//
 	//   - SchemaId$SchemaArn: The Amazon Resource Name (ARN) of the schema. Either
 	//   SchemaArn or SchemaName and RegistryName has to be provided.
+	//
 	//   - SchemaId$SchemaName: The name of the schema. Either SchemaArn or SchemaName
 	//   and RegistryName has to be provided.
 	//
@@ -97,25 +101,25 @@ func (c *Client) addOperationRegisterSchemaVersionMiddlewares(stack *middleware.
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -130,13 +134,16 @@ func (c *Client) addOperationRegisterSchemaVersionMiddlewares(stack *middleware.
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpRegisterSchemaVersionValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opRegisterSchemaVersion(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

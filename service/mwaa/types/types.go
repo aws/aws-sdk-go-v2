@@ -7,18 +7,19 @@ import (
 	"time"
 )
 
-// Internal only. Represents the dimensions of a metric. To learn more about the
-// metrics published to Amazon CloudWatch, see Amazon MWAA performance metrics in
-// Amazon CloudWatch (https://docs.aws.amazon.com/mwaa/latest/userguide/cw-metrics.html)
-// .
+//	Internal only. Represents the dimensions of a metric. To learn more about the
+//
+// metrics published to Amazon CloudWatch, see [Amazon MWAA performance metrics in Amazon CloudWatch].
+//
+// [Amazon MWAA performance metrics in Amazon CloudWatch]: https://docs.aws.amazon.com/mwaa/latest/userguide/cw-metrics.html
 type Dimension struct {
 
-	// Internal only. The name of the dimension.
+	//  Internal only. The name of the dimension.
 	//
 	// This member is required.
 	Name *string
 
-	// Internal only. The value of the dimension.
+	//  Internal only. The value of the dimension.
 	//
 	// This member is required.
 	Value *string
@@ -30,30 +31,33 @@ type Dimension struct {
 type Environment struct {
 
 	// A list of key-value pairs containing the Apache Airflow configuration options
-	// attached to your environment. For more information, see Apache Airflow
-	// configuration options (https://docs.aws.amazon.com/mwaa/latest/userguide/configuring-env-variables.html)
-	// .
+	// attached to your environment. For more information, see [Apache Airflow configuration options].
+	//
+	// [Apache Airflow configuration options]: https://docs.aws.amazon.com/mwaa/latest/userguide/configuring-env-variables.html
 	AirflowConfigurationOptions map[string]string
 
-	// The Apache Airflow version on your environment. Valid values: 1.10.12 , 2.0.2 ,
-	// 2.2.2 , 2.4.3 , 2.5.1 , 2.6.3 , 2.7.2 .
+	// The Apache Airflow version on your environment.
+	//
+	// Valid values: 1.10.12 , 2.0.2 , 2.2.2 , 2.4.3 , 2.5.1 , 2.6.3 , 2.7.2 , 2.8.1 .
 	AirflowVersion *string
 
 	// The Amazon Resource Name (ARN) of the Amazon MWAA environment.
 	Arn *string
 
-	// The queue ARN for the environment's Celery Executor (https://airflow.apache.org/docs/apache-airflow/stable/core-concepts/executor/celery.html)
-	// . Amazon MWAA uses a Celery Executor to distribute tasks across multiple
-	// workers. When you create an environment in a shared VPC, you must provide access
-	// to the Celery Executor queue from your VPC.
+	// The queue ARN for the environment's [Celery Executor]. Amazon MWAA uses a Celery Executor to
+	// distribute tasks across multiple workers. When you create an environment in a
+	// shared VPC, you must provide access to the Celery Executor queue from your VPC.
+	//
+	// [Celery Executor]: https://airflow.apache.org/docs/apache-airflow/stable/core-concepts/executor/celery.html
 	CeleryExecutorQueue *string
 
 	// The day and time the environment was created.
 	CreatedAt *time.Time
 
 	// The relative path to the DAGs folder in your Amazon S3 bucket. For example,
-	// s3://mwaa-environment/dags . For more information, see Adding or updating DAGs (https://docs.aws.amazon.com/mwaa/latest/userguide/configuring-dag-folder.html)
-	// .
+	// s3://mwaa-environment/dags . For more information, see [Adding or updating DAGs].
+	//
+	// [Adding or updating DAGs]: https://docs.aws.amazon.com/mwaa/latest/userguide/configuring-dag-folder.html
 	DagS3Path *string
 
 	// The VPC endpoint for the environment's Amazon RDS database.
@@ -65,16 +69,17 @@ type Environment struct {
 	// CUSTOMER , you must create, and manage, the VPC endpoints in your VPC.
 	EndpointManagement EndpointManagement
 
-	// The environment class type. Valid values: mw1.small , mw1.medium , mw1.large .
-	// For more information, see Amazon MWAA environment class (https://docs.aws.amazon.com/mwaa/latest/userguide/environment-class.html)
-	// .
+	// The environment class type. Valid values: mw1.small , mw1.medium , mw1.large ,
+	// mw1.xlarge , and mw1.2xlarge . For more information, see [Amazon MWAA environment class].
+	//
+	// [Amazon MWAA environment class]: https://docs.aws.amazon.com/mwaa/latest/userguide/environment-class.html
 	EnvironmentClass *string
 
 	// The Amazon Resource Name (ARN) of the execution role in IAM that allows MWAA to
 	// access Amazon Web Services resources in your environment. For example,
-	// arn:aws:iam::123456789:role/my-execution-role . For more information, see
-	// Amazon MWAA Execution role (https://docs.aws.amazon.com/mwaa/latest/userguide/mwaa-create-role.html)
-	// .
+	// arn:aws:iam::123456789:role/my-execution-role . For more information, see [Amazon MWAA Execution role].
+	//
+	// [Amazon MWAA Execution role]: https://docs.aws.amazon.com/mwaa/latest/userguide/mwaa-create-role.html
 	ExecutionRoleArn *string
 
 	// The KMS encryption key used to encrypt the data in your environment.
@@ -86,8 +91,32 @@ type Environment struct {
 	// The Apache Airflow logs published to CloudWatch Logs.
 	LoggingConfiguration *LoggingConfiguration
 
+	//  The maximum number of web servers that you want to run in your environment.
+	// Amazon MWAA scales the number of Apache Airflow web servers up to the number you
+	// specify for MaxWebservers when you interact with your Apache Airflow
+	// environment using Apache Airflow REST API, or the Apache Airflow CLI. For
+	// example, in scenarios where your workload requires network calls to the Apache
+	// Airflow REST API with a high transaction-per-second (TPS) rate, Amazon MWAA will
+	// increase the number of web servers up to the number set in MaxWebserers . As TPS
+	// rates decrease Amazon MWAA disposes of the additional web servers, and scales
+	// down to the number set in MinxWebserers .
+	//
+	// Valid values: Accepts between 2 and 5 . Defaults to 2 .
+	MaxWebservers *int32
+
 	// The maximum number of workers that run in your environment. For example, 20 .
 	MaxWorkers *int32
+
+	//  The minimum number of web servers that you want to run in your environment.
+	// Amazon MWAA scales the number of Apache Airflow web servers up to the number you
+	// specify for MaxWebservers when you interact with your Apache Airflow
+	// environment using Apache Airflow REST API, or the Apache Airflow CLI. As the
+	// transaction-per-second rate, and the network load, decrease, Amazon MWAA
+	// disposes of the additional web servers, and scales down to the number set in
+	// MinxWebserers .
+	//
+	// Valid values: Accepts between 2 and 5 . Defaults to 2 .
+	MinWebservers *int32
 
 	// The minimum number of workers that run in your environment. For example, 2 .
 	MinWorkers *int32
@@ -97,38 +126,49 @@ type Environment struct {
 
 	// Describes the VPC networking components used to secure and enable network
 	// traffic between the Amazon Web Services resources for your environment. For more
-	// information, see About networking on Amazon MWAA (https://docs.aws.amazon.com/mwaa/latest/userguide/networking-about.html)
-	// .
+	// information, see [About networking on Amazon MWAA].
+	//
+	// [About networking on Amazon MWAA]: https://docs.aws.amazon.com/mwaa/latest/userguide/networking-about.html
 	NetworkConfiguration *NetworkConfiguration
 
 	// The version of the plugins.zip file in your Amazon S3 bucket. You must specify
-	// the version ID (https://docs.aws.amazon.com/AmazonS3/latest/userguide/versioning-workflows.html)
-	// that Amazon S3 assigns to the file. Version IDs are Unicode, UTF-8 encoded,
-	// URL-ready, opaque strings that are no more than 1,024 bytes long. The following
-	// is an example: 3sL4kqtJlcpXroDTDmJ+rmSpXd3dIbrHY+MTRCxf3vjVBH40Nr8X8gdRQBpUMLUo
-	// For more information, see Installing custom plugins (https://docs.aws.amazon.com/mwaa/latest/userguide/configuring-dag-import-plugins.html)
-	// .
+	// the [version ID]that Amazon S3 assigns to the file.
+	//
+	// Version IDs are Unicode, UTF-8 encoded, URL-ready, opaque strings that are no
+	// more than 1,024 bytes long. The following is an example:
+	//
+	//     3sL4kqtJlcpXroDTDmJ+rmSpXd3dIbrHY+MTRCxf3vjVBH40Nr8X8gdRQBpUMLUo
+	//
+	// For more information, see [Installing custom plugins].
+	//
+	// [Installing custom plugins]: https://docs.aws.amazon.com/mwaa/latest/userguide/configuring-dag-import-plugins.html
+	// [version ID]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/versioning-workflows.html
 	PluginsS3ObjectVersion *string
 
 	// The relative path to the file in your Amazon S3 bucket. For example,
-	// s3://mwaa-environment/plugins.zip . For more information, see Installing custom
-	// plugins (https://docs.aws.amazon.com/mwaa/latest/userguide/configuring-dag-import-plugins.html)
-	// .
+	// s3://mwaa-environment/plugins.zip . For more information, see [Installing custom plugins].
+	//
+	// [Installing custom plugins]: https://docs.aws.amazon.com/mwaa/latest/userguide/configuring-dag-import-plugins.html
 	PluginsS3Path *string
 
 	// The version of the requirements.txt  file on your Amazon S3 bucket. You must
-	// specify the version ID (https://docs.aws.amazon.com/AmazonS3/latest/userguide/versioning-workflows.html)
-	// that Amazon S3 assigns to the file. Version IDs are Unicode, UTF-8 encoded,
-	// URL-ready, opaque strings that are no more than 1,024 bytes long. The following
-	// is an example: 3sL4kqtJlcpXroDTDmJ+rmSpXd3dIbrHY+MTRCxf3vjVBH40Nr8X8gdRQBpUMLUo
-	// For more information, see Installing Python dependencies (https://docs.aws.amazon.com/mwaa/latest/userguide/working-dags-dependencies.html)
-	// .
+	// specify the [version ID]that Amazon S3 assigns to the file.
+	//
+	// Version IDs are Unicode, UTF-8 encoded, URL-ready, opaque strings that are no
+	// more than 1,024 bytes long. The following is an example:
+	//
+	//     3sL4kqtJlcpXroDTDmJ+rmSpXd3dIbrHY+MTRCxf3vjVBH40Nr8X8gdRQBpUMLUo
+	//
+	// For more information, see [Installing Python dependencies].
+	//
+	// [Installing Python dependencies]: https://docs.aws.amazon.com/mwaa/latest/userguide/working-dags-dependencies.html
+	// [version ID]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/versioning-workflows.html
 	RequirementsS3ObjectVersion *string
 
 	// The relative path to the requirements.txt file in your Amazon S3 bucket. For
-	// example, s3://mwaa-environment/requirements.txt . For more information, see
-	// Installing Python dependencies (https://docs.aws.amazon.com/mwaa/latest/userguide/working-dags-dependencies.html)
-	// .
+	// example, s3://mwaa-environment/requirements.txt . For more information, see [Installing Python dependencies].
+	//
+	// [Installing Python dependencies]: https://docs.aws.amazon.com/mwaa/latest/userguide/working-dags-dependencies.html
 	RequirementsS3Path *string
 
 	// The number of Apache Airflow schedulers that run in your Amazon MWAA
@@ -136,85 +176,110 @@ type Environment struct {
 	Schedulers *int32
 
 	// The Amazon Resource Name (ARN) for the service-linked role of the environment.
-	// For more information, see Amazon MWAA Service-linked role (https://docs.aws.amazon.com/mwaa/latest/userguide/mwaa-slr.html)
-	// .
+	// For more information, see [Amazon MWAA Service-linked role].
+	//
+	// [Amazon MWAA Service-linked role]: https://docs.aws.amazon.com/mwaa/latest/userguide/mwaa-slr.html
 	ServiceRoleArn *string
 
 	// The Amazon Resource Name (ARN) of the Amazon S3 bucket where your DAG code and
 	// supporting files are stored. For example,
-	// arn:aws:s3:::my-airflow-bucket-unique-name . For more information, see Create
-	// an Amazon S3 bucket for Amazon MWAA (https://docs.aws.amazon.com/mwaa/latest/userguide/mwaa-s3-bucket.html)
-	// .
+	// arn:aws:s3:::my-airflow-bucket-unique-name . For more information, see [Create an Amazon S3 bucket for Amazon MWAA].
+	//
+	// [Create an Amazon S3 bucket for Amazon MWAA]: https://docs.aws.amazon.com/mwaa/latest/userguide/mwaa-s3-bucket.html
 	SourceBucketArn *string
 
 	// The version of the startup shell script in your Amazon S3 bucket. You must
-	// specify the version ID (https://docs.aws.amazon.com/AmazonS3/latest/userguide/versioning-workflows.html)
-	// that Amazon S3 assigns to the file. Version IDs are Unicode, UTF-8 encoded,
-	// URL-ready, opaque strings that are no more than 1,024 bytes long. The following
-	// is an example: 3sL4kqtJlcpXroDTDmJ+rmSpXd3dIbrHY+MTRCxf3vjVBH40Nr8X8gdRQBpUMLUo
-	// For more information, see Using a startup script (https://docs.aws.amazon.com/mwaa/latest/userguide/using-startup-script.html)
-	// .
+	// specify the [version ID]that Amazon S3 assigns to the file.
+	//
+	// Version IDs are Unicode, UTF-8 encoded, URL-ready, opaque strings that are no
+	// more than 1,024 bytes long. The following is an example:
+	//
+	//     3sL4kqtJlcpXroDTDmJ+rmSpXd3dIbrHY+MTRCxf3vjVBH40Nr8X8gdRQBpUMLUo
+	//
+	// For more information, see [Using a startup script].
+	//
+	// [Using a startup script]: https://docs.aws.amazon.com/mwaa/latest/userguide/using-startup-script.html
+	// [version ID]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/versioning-workflows.html
 	StartupScriptS3ObjectVersion *string
 
 	// The relative path to the startup shell script in your Amazon S3 bucket. For
-	// example, s3://mwaa-environment/startup.sh . Amazon MWAA runs the script as your
-	// environment starts, and before running the Apache Airflow process. You can use
-	// this script to install dependencies, modify Apache Airflow configuration
-	// options, and set environment variables. For more information, see Using a
-	// startup script (https://docs.aws.amazon.com/mwaa/latest/userguide/using-startup-script.html)
-	// .
+	// example, s3://mwaa-environment/startup.sh .
+	//
+	// Amazon MWAA runs the script as your environment starts, and before running the
+	// Apache Airflow process. You can use this script to install dependencies, modify
+	// Apache Airflow configuration options, and set environment variables. For more
+	// information, see [Using a startup script].
+	//
+	// [Using a startup script]: https://docs.aws.amazon.com/mwaa/latest/userguide/using-startup-script.html
 	StartupScriptS3Path *string
 
-	// The status of the Amazon MWAA environment. Valid values:
+	// The status of the Amazon MWAA environment.
+	//
+	// Valid values:
+	//
 	//   - CREATING - Indicates the request to create the environment is in progress.
+	//
 	//   - CREATING_SNAPSHOT - Indicates the request to update environment details, or
 	//   upgrade the environment version, is in progress and Amazon MWAA is creating a
 	//   storage volume snapshot of the Amazon RDS database cluster associated with the
 	//   environment. A database snapshot is a backup created at a specific point in
 	//   time. Amazon MWAA uses snapshots to recover environment metadata if the process
 	//   to update or upgrade an environment fails.
+	//
 	//   - CREATE_FAILED - Indicates the request to create the environment failed, and
 	//   the environment could not be created.
+	//
 	//   - AVAILABLE - Indicates the request was successful and the environment is
 	//   ready to use.
+	//
 	//   - PENDING - Indicates the request was successful, but the process to create
 	//   the environment is paused until you create the required VPC endpoints in your
 	//   VPC. After you create the VPC endpoints, the process resumes.
+	//
 	//   - UPDATING - Indicates the request to update the environment is in progress.
+	//
 	//   - ROLLING_BACK - Indicates the request to update environment details, or
 	//   upgrade the environment version, failed and Amazon MWAA is restoring the
 	//   environment using the latest storage volume snapshot.
+	//
 	//   - DELETING - Indicates the request to delete the environment is in progress.
+	//
 	//   - DELETED - Indicates the request to delete the environment is complete, and
 	//   the environment has been deleted.
+	//
 	//   - UNAVAILABLE - Indicates the request failed, but the environment did not
 	//   return to its previous state and is not stable.
+	//
 	//   - UPDATE_FAILED - Indicates the request to update the environment failed, and
 	//   the environment was restored to its previous state successfully and is ready to
 	//   use.
+	//
 	//   - MAINTENANCE - Indicates that the environment is undergoing maintenance.
 	//   Depending on the type of work Amazon MWAA is performing, your environment might
 	//   become unavailable during this process. After all operations are done, your
 	//   environment will return to its status prior to mainteneace operations.
+	//
 	// We recommend reviewing our troubleshooting guide for a list of common errors
-	// and their solutions. For more information, see Amazon MWAA troubleshooting (https://docs.aws.amazon.com/mwaa/latest/userguide/troubleshooting.html)
-	// .
+	// and their solutions. For more information, see [Amazon MWAA troubleshooting].
+	//
+	// [Amazon MWAA troubleshooting]: https://docs.aws.amazon.com/mwaa/latest/userguide/troubleshooting.html
 	Status EnvironmentStatus
 
 	// The key-value tag pairs associated to your environment. For example,
-	// "Environment": "Staging" . For more information, see Tagging Amazon Web
-	// Services resources (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html)
-	// .
+	// "Environment": "Staging" . For more information, see [Tagging Amazon Web Services resources].
+	//
+	// [Tagging Amazon Web Services resources]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
 	Tags map[string]string
 
-	// The Apache Airflow web server access mode. For more information, see Apache
-	// Airflow access modes (https://docs.aws.amazon.com/mwaa/latest/userguide/configuring-networking.html)
-	// .
+	// The Apache Airflow web server access mode. For more information, see [Apache Airflow access modes].
+	//
+	// [Apache Airflow access modes]: https://docs.aws.amazon.com/mwaa/latest/userguide/configuring-networking.html
 	WebserverAccessMode WebserverAccessMode
 
 	// The Apache Airflow web server host name for the Amazon MWAA environment. For
-	// more information, see Accessing the Apache Airflow UI (https://docs.aws.amazon.com/mwaa/latest/userguide/access-airflow-ui.html)
-	// .
+	// more information, see [Accessing the Apache Airflow UI].
+	//
+	// [Accessing the Apache Airflow UI]: https://docs.aws.amazon.com/mwaa/latest/userguide/access-airflow-ui.html
 	WebserverUrl *string
 
 	// The VPC endpoint for the environment's web server.
@@ -290,37 +355,39 @@ type LoggingConfigurationInput struct {
 	noSmithyDocumentSerde
 }
 
-// Internal only. Collects Apache Airflow metrics. To learn more about the metrics
-// published to Amazon CloudWatch, see Amazon MWAA performance metrics in Amazon
-// CloudWatch (https://docs.aws.amazon.com/mwaa/latest/userguide/cw-metrics.html) .
+//	Internal only. Collects Apache Airflow metrics. To learn more about the
+//
+// metrics published to Amazon CloudWatch, see [Amazon MWAA performance metrics in Amazon CloudWatch].
+//
+// [Amazon MWAA performance metrics in Amazon CloudWatch]: https://docs.aws.amazon.com/mwaa/latest/userguide/cw-metrics.html
 type MetricDatum struct {
 
-	// Internal only. The name of the metric.
+	//  Internal only. The name of the metric.
 	//
 	// This member is required.
 	MetricName *string
 
-	// Internal only. The time the metric data was received.
+	//  Internal only. The time the metric data was received.
 	//
 	// This member is required.
 	Timestamp *time.Time
 
-	// Internal only. The dimensions associated with the metric.
+	//  Internal only. The dimensions associated with the metric.
 	//
 	// Deprecated: This type is for internal use and not meant for public use. Data
 	// set for this type will be ignored.
 	Dimensions []Dimension
 
-	// Internal only. The statistical values for the metric.
+	//  Internal only. The statistical values for the metric.
 	//
 	// Deprecated: This type is for internal use and not meant for public use. Data
 	// set for this type will be ignored.
 	StatisticValues *StatisticSet
 
-	// Internal only. The unit used to store the metric.
+	//  Internal only. The unit used to store the metric.
 	Unit Unit
 
-	// Internal only. The value for the metric.
+	//  Internal only. The value for the metric.
 	Value *float64
 
 	noSmithyDocumentSerde
@@ -366,38 +433,41 @@ type ModuleLoggingConfigurationInput struct {
 
 // Describes the VPC networking components used to secure and enable network
 // traffic between the Amazon Web Services resources for your environment. For more
-// information, see About networking on Amazon MWAA (https://docs.aws.amazon.com/mwaa/latest/userguide/networking-about.html)
-// .
+// information, see [About networking on Amazon MWAA].
+//
+// [About networking on Amazon MWAA]: https://docs.aws.amazon.com/mwaa/latest/userguide/networking-about.html
 type NetworkConfiguration struct {
 
-	// A list of security group IDs. For more information, see Security in your VPC on
-	// Amazon MWAA (https://docs.aws.amazon.com/mwaa/latest/userguide/vpc-security.html)
-	// .
+	// A list of security group IDs. For more information, see [Security in your VPC on Amazon MWAA].
+	//
+	// [Security in your VPC on Amazon MWAA]: https://docs.aws.amazon.com/mwaa/latest/userguide/vpc-security.html
 	SecurityGroupIds []string
 
-	// A list of subnet IDs. For more information, see About networking on Amazon MWAA (https://docs.aws.amazon.com/mwaa/latest/userguide/networking-about.html)
-	// .
+	// A list of subnet IDs. For more information, see [About networking on Amazon MWAA].
+	//
+	// [About networking on Amazon MWAA]: https://docs.aws.amazon.com/mwaa/latest/userguide/networking-about.html
 	SubnetIds []string
 
 	noSmithyDocumentSerde
 }
 
-// Internal only. Represents a set of statistics that describe a specific metric.
-// To learn more about the metrics published to Amazon CloudWatch, see Amazon MWAA
-// performance metrics in Amazon CloudWatch (https://docs.aws.amazon.com/mwaa/latest/userguide/cw-metrics.html)
-// .
+//	Internal only. Represents a set of statistics that describe a specific metric.
+//
+// To learn more about the metrics published to Amazon CloudWatch, see [Amazon MWAA performance metrics in Amazon CloudWatch].
+//
+// [Amazon MWAA performance metrics in Amazon CloudWatch]: https://docs.aws.amazon.com/mwaa/latest/userguide/cw-metrics.html
 type StatisticSet struct {
 
-	// Internal only. The maximum value of the sample set.
+	//  Internal only. The maximum value of the sample set.
 	Maximum *float64
 
-	// Internal only. The minimum value of the sample set.
+	//  Internal only. The minimum value of the sample set.
 	Minimum *float64
 
-	// Internal only. The number of samples used for the statistic set.
+	//  Internal only. The number of samples used for the statistic set.
 	SampleCount *int32
 
-	// Internal only. The sum of values for the sample set.
+	//  Internal only. The sum of values for the sample set.
 	Sum *float64
 
 	noSmithyDocumentSerde
@@ -417,13 +487,15 @@ type UpdateError struct {
 
 // Defines the VPC networking components used to secure and enable network traffic
 // between the Amazon Web Services resources for your environment. For more
-// information, see About networking on Amazon MWAA (https://docs.aws.amazon.com/mwaa/latest/userguide/networking-about.html)
-// .
+// information, see [About networking on Amazon MWAA].
+//
+// [About networking on Amazon MWAA]: https://docs.aws.amazon.com/mwaa/latest/userguide/networking-about.html
 type UpdateNetworkConfigurationInput struct {
 
 	// A list of security group IDs. A security group must be attached to the same VPC
-	// as the subnets. For more information, see Security in your VPC on Amazon MWAA (https://docs.aws.amazon.com/mwaa/latest/userguide/vpc-security.html)
-	// .
+	// as the subnets. For more information, see [Security in your VPC on Amazon MWAA].
+	//
+	// [Security in your VPC on Amazon MWAA]: https://docs.aws.amazon.com/mwaa/latest/userguide/vpc-security.html
 	//
 	// This member is required.
 	SecurityGroupIds []string

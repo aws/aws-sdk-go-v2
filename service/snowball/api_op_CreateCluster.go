@@ -6,15 +6,14 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/snowball/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates an empty cluster. Each cluster supports five nodes. You use the
-// CreateJob action separately to create the jobs for each of these nodes. The
-// cluster does not ship until these five node jobs have been created.
+// Creates an empty cluster. Each cluster supports five nodes. You use the CreateJob action
+// separately to create the jobs for each of these nodes. The cluster does not ship
+// until these five node jobs have been created.
 func (c *Client) CreateCluster(ctx context.Context, params *CreateClusterInput, optFns ...func(*Options)) (*CreateClusterOutput, error) {
 	if params == nil {
 		params = &CreateClusterInput{}
@@ -38,7 +37,9 @@ type CreateClusterInput struct {
 	AddressId *string
 
 	// The type of job for this cluster. Currently, the only job type supported for
-	// clusters is LOCAL_USE . For more information, see
+	// clusters is LOCAL_USE .
+	//
+	// For more information, see
 	// "https://docs.aws.amazon.com/snowball/latest/snowcone-guide/snow-device-types.html"
 	// (Snow Family Devices and Capacity) in the Snowcone User Guide or
 	// "https://docs.aws.amazon.com/snowball/latest/developer-guide/snow-device-types.html"
@@ -51,30 +52,40 @@ type CreateClusterInput struct {
 	// how soon you'll get each Snowball Edge device, rather it represents how quickly
 	// each device moves to its destination while in transit. Regional shipping speeds
 	// are as follows:
+	//
 	//   - In Australia, you have access to express shipping. Typically, Snow devices
 	//   shipped express are delivered in about a day.
+	//
 	//   - In the European Union (EU), you have access to express shipping. Typically,
 	//   Snow devices shipped express are delivered in about a day. In addition, most
 	//   countries in the EU have access to standard shipping, which typically takes less
 	//   than a week, one way.
+	//
 	//   - In India, Snow devices are delivered in one to seven days.
+	//
 	//   - In the United States of America (US), you have access to one-day shipping
 	//   and two-day shipping.
 	//
 	//   - In Australia, you have access to express shipping. Typically, devices
 	//   shipped express are delivered in about a day.
+	//
 	//   - In the European Union (EU), you have access to express shipping. Typically,
 	//   Snow devices shipped express are delivered in about a day. In addition, most
 	//   countries in the EU have access to standard shipping, which typically takes less
 	//   than a week, one way.
+	//
 	//   - In India, Snow devices are delivered in one to seven days.
+	//
 	//   - In the US, you have access to one-day shipping and two-day shipping.
 	//
 	// This member is required.
 	ShippingOption types.ShippingOption
 
-	// The type of Snow Family devices to use for this cluster. For cluster jobs,
-	// Amazon Web Services Snow Family currently supports only the EDGE device type.
+	// The type of Snow Family devices to use for this cluster.
+	//
+	// For cluster jobs, Amazon Web Services Snow Family currently supports only the
+	// EDGE device type.
+	//
 	// For more information, see
 	// "https://docs.aws.amazon.com/snowball/latest/snowcone-guide/snow-device-types.html"
 	// (Snow Family Devices and Capacity) in the Snowcone User Guide or
@@ -103,8 +114,9 @@ type CreateClusterInput struct {
 	InitialClusterSize *int32
 
 	// The KmsKeyARN value that you want to associate with this cluster. KmsKeyARN
-	// values are created by using the CreateKey (https://docs.aws.amazon.com/kms/latest/APIReference/API_CreateKey.html)
-	// API action in Key Management Service (KMS).
+	// values are created by using the [CreateKey]API action in Key Management Service (KMS).
+	//
+	// [CreateKey]: https://docs.aws.amazon.com/kms/latest/APIReference/API_CreateKey.html
 	KmsKeyARN *string
 
 	// Lists long-term pricing id that will be used to associate with jobs
@@ -131,13 +143,16 @@ type CreateClusterInput struct {
 	Resources *types.JobResource
 
 	// The RoleARN that you want to associate with this cluster. RoleArn values are
-	// created by using the CreateRole (https://docs.aws.amazon.com/IAM/latest/APIReference/API_CreateRole.html)
-	// API action in Identity and Access Management (IAM).
+	// created by using the [CreateRole]API action in Identity and Access Management (IAM).
+	//
+	// [CreateRole]: https://docs.aws.amazon.com/IAM/latest/APIReference/API_CreateRole.html
 	RoleARN *string
 
 	// If your job is being created in one of the US regions, you have the option of
 	// specifying what size Snow device you'd like for this job. In all other regions,
-	// Snowballs come with 80 TB in storage capacity. For more information, see
+	// Snowballs come with 80 TB in storage capacity.
+	//
+	// For more information, see
 	// "https://docs.aws.amazon.com/snowball/latest/snowcone-guide/snow-device-types.html"
 	// (Snow Family Devices and Capacity) in the Snowcone User Guide or
 	// "https://docs.aws.amazon.com/snowball/latest/developer-guide/snow-device-types.html"
@@ -155,9 +170,9 @@ type CreateClusterOutput struct {
 	// The automatically generated ID for a cluster.
 	ClusterId *string
 
-	// List of jobs created for this cluster. For syntax, see
-	// ListJobsResult$JobListEntries (http://amazonaws.com/snowball/latest/api-reference/API_ListJobs.html#API_ListJobs_ResponseSyntax)
-	// in this guide.
+	// List of jobs created for this cluster. For syntax, see [ListJobsResult$JobListEntries] in this guide.
+	//
+	// [ListJobsResult$JobListEntries]: http://amazonaws.com/snowball/latest/api-reference/API_ListJobs.html#API_ListJobs_ResponseSyntax
 	JobListEntries []types.JobListEntry
 
 	// Metadata pertaining to the operation's result.
@@ -188,25 +203,25 @@ func (c *Client) addOperationCreateClusterMiddlewares(stack *middleware.Stack, o
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -221,13 +236,16 @@ func (c *Client) addOperationCreateClusterMiddlewares(stack *middleware.Stack, o
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpCreateClusterValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateCluster(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

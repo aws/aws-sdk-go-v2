@@ -305,6 +305,8 @@ type InvalidRequestException struct {
 
 	ErrorCodeOverride *string
 
+	Reason InvalidRequestExceptionReason
+
 	noSmithyDocumentSerde
 }
 

@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/batch/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -42,10 +41,16 @@ type UpdateJobQueueInput struct {
 	// must be in the VALID state before you can associate them with a job queue. All
 	// of the compute environments must be either EC2 ( EC2 or SPOT ) or Fargate (
 	// FARGATE or FARGATE_SPOT ). EC2 and Fargate compute environments can't be mixed.
+	//
 	// All compute environments that are associated with a job queue must share the
 	// same architecture. Batch doesn't support mixing compute environment architecture
 	// types in a single job queue.
 	ComputeEnvironmentOrder []types.ComputeEnvironmentOrder
+
+	// The set of actions that Batch perform on jobs that remain at the head of the
+	// job queue in the specified state longer than specified times. Batch will perform
+	// each action after maxTimeSeconds has passed.
+	JobStateTimeLimitActions []types.JobStateTimeLimitAction
 
 	// The priority of the job queue. Job queues with a higher priority (or a higher
 	// integer value for the priority parameter) are evaluated first when associated
@@ -107,25 +112,25 @@ func (c *Client) addOperationUpdateJobQueueMiddlewares(stack *middleware.Stack, 
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -140,13 +145,16 @@ func (c *Client) addOperationUpdateJobQueueMiddlewares(stack *middleware.Stack, 
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpUpdateJobQueueValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateJobQueue(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

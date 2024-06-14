@@ -11,8 +11,9 @@ const (
 )
 
 // Values returns all known values for AggregationFunction. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (AggregationFunction) Values() []AggregationFunction {
 	return []AggregationFunction{
 		"AVG",
@@ -29,8 +30,9 @@ const (
 )
 
 // Values returns all known values for AlertStatus. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (AlertStatus) Values() []AlertStatus {
 	return []AlertStatus{
 		"ACTIVE",
@@ -47,8 +49,9 @@ const (
 )
 
 // Values returns all known values for AlertType. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (AlertType) Values() []AlertType {
 	return []AlertType{
 		"SNS",
@@ -69,6 +72,7 @@ const (
 
 // Values returns all known values for AnomalyDetectionTaskStatus. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (AnomalyDetectionTaskStatus) Values() []AnomalyDetectionTaskStatus {
 	return []AnomalyDetectionTaskStatus{
@@ -92,6 +96,7 @@ const (
 
 // Values returns all known values for AnomalyDetectorFailureType. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (AnomalyDetectorFailureType) Values() []AnomalyDetectorFailureType {
 	return []AnomalyDetectorFailureType{
@@ -120,8 +125,9 @@ const (
 )
 
 // Values returns all known values for AnomalyDetectorStatus. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (AnomalyDetectorStatus) Values() []AnomalyDetectorStatus {
 	return []AnomalyDetectorStatus{
 		"ACTIVE",
@@ -148,8 +154,9 @@ const (
 )
 
 // Values returns all known values for Confidence. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (Confidence) Values() []Confidence {
 	return []Confidence{
 		"HIGH",
@@ -167,8 +174,9 @@ const (
 )
 
 // Values returns all known values for CSVFileCompression. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (CSVFileCompression) Values() []CSVFileCompression {
 	return []CSVFileCompression{
 		"NONE",
@@ -193,8 +201,9 @@ const (
 )
 
 // Values returns all known values for DataQualityMetricType. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (DataQualityMetricType) Values() []DataQualityMetricType {
 	return []DataQualityMetricType{
 		"COLUMN_COMPLETENESS",
@@ -218,8 +227,9 @@ const (
 )
 
 // Values returns all known values for FilterOperation. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (FilterOperation) Values() []FilterOperation {
 	return []FilterOperation{
 		"EQUALS",
@@ -237,8 +247,9 @@ const (
 )
 
 // Values returns all known values for Frequency. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (Frequency) Values() []Frequency {
 	return []Frequency{
 		"P1D",
@@ -257,8 +268,9 @@ const (
 )
 
 // Values returns all known values for JsonFileCompression. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (JsonFileCompression) Values() []JsonFileCompression {
 	return []JsonFileCompression{
 		"NONE",
@@ -275,8 +287,9 @@ const (
 )
 
 // Values returns all known values for RelationshipType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (RelationshipType) Values() []RelationshipType {
 	return []RelationshipType{
 		"CAUSE_OF_INPUT_ANOMALY_GROUP",
@@ -294,8 +307,9 @@ const (
 )
 
 // Values returns all known values for SnsFormat. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (SnsFormat) Values() []SnsFormat {
 	return []SnsFormat{
 		"LONG_TEXT",
@@ -316,6 +330,7 @@ const (
 
 // Values returns all known values for ValidationExceptionReason. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (ValidationExceptionReason) Values() []ValidationExceptionReason {
 	return []ValidationExceptionReason{

@@ -6,14 +6,14 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Deletes a traffic policy instance and all of the resource record sets that
-// Amazon Route 53 created when you created the instance. In the Route 53 console,
-// traffic policy instances are known as policy records.
+// Amazon Route 53 created when you created the instance.
+//
+// In the Route 53 console, traffic policy instances are known as policy records.
 func (c *Client) DeleteTrafficPolicyInstance(ctx context.Context, params *DeleteTrafficPolicyInstanceInput, optFns ...func(*Options)) (*DeleteTrafficPolicyInstanceOutput, error) {
 	if params == nil {
 		params = &DeleteTrafficPolicyInstanceInput{}
@@ -32,9 +32,11 @@ func (c *Client) DeleteTrafficPolicyInstance(ctx context.Context, params *Delete
 // A request to delete a specified traffic policy instance.
 type DeleteTrafficPolicyInstanceInput struct {
 
-	// The ID of the traffic policy instance that you want to delete. When you delete
-	// a traffic policy instance, Amazon Route 53 also deletes all of the resource
-	// record sets that were created when you created the traffic policy instance.
+	// The ID of the traffic policy instance that you want to delete.
+	//
+	// When you delete a traffic policy instance, Amazon Route 53 also deletes all of
+	// the resource record sets that were created when you created the traffic policy
+	// instance.
 	//
 	// This member is required.
 	Id *string
@@ -72,25 +74,25 @@ func (c *Client) addOperationDeleteTrafficPolicyInstanceMiddlewares(stack *middl
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -105,13 +107,16 @@ func (c *Client) addOperationDeleteTrafficPolicyInstanceMiddlewares(stack *middl
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDeleteTrafficPolicyInstanceValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteTrafficPolicyInstance(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

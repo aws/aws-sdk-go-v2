@@ -4,6 +4,7 @@ import (
 	"bytes"
 	"context"
 	"errors"
+	"fmt"
 	"reflect"
 	"strings"
 	"sync"
@@ -17,10 +18,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/transcribestreaming"
 	"github.com/aws/aws-sdk-go-v2/service/transcribestreaming/types"
 	"github.com/aws/smithy-go"
-	"github.com/aws/smithy-go/document"
 	"github.com/aws/smithy-go/middleware"
-	"github.com/google/go-cmp/cmp"
-	"github.com/google/go-cmp/cmp/cmpopts"
 )
 
 func removeValidationMiddleware(stack *middleware.Stack) error {
@@ -77,7 +75,7 @@ func TestStartStreamTranscription_Read(t *testing.T) {
 		if event == nil {
 			t.Errorf("%d, expect event, got nil", i)
 		}
-		if diff := cmp.Diff(expectEvents[i], event, cmpopts.IgnoreTypes(document.NoSerde{})); len(diff) > 0 {
+		if diff := cmpDiff(expectEvents[i], event); len(diff) > 0 {
 			t.Errorf("%d, %v", i, diff)
 		}
 	}
@@ -211,7 +209,7 @@ func TestStartStreamTranscription_ReadUnknownEvent(t *testing.T) {
 		if event == nil {
 			t.Errorf("%d, expect event, got nil", i)
 		}
-		if diff := cmp.Diff(expectEvents[i], event, cmpopts.IgnoreTypes(document.NoSerde{})); len(diff) > 0 {
+		if diff := cmpDiff(expectEvents[i], event); len(diff) > 0 {
 			t.Errorf("%d, %v", i, diff)
 		}
 	}
@@ -268,10 +266,9 @@ func TestStartStreamTranscription_ReadException(t *testing.T) {
 		t.Errorf("expect err type %T", expectedErr)
 	}
 
-	if diff := cmp.Diff(
+	if diff := cmpDiff(
 		expectedErr,
 		&types.BadRequestException{Message: aws.String("this is an exception message")},
-		cmpopts.IgnoreTypes(document.NoSerde{}),
 	); len(diff) > 0 {
 		t.Errorf(diff)
 	}
@@ -324,13 +321,12 @@ func TestStartStreamTranscription_ReadUnmodeledException(t *testing.T) {
 		t.Errorf("expect err type %T", expectedErr)
 	}
 
-	if diff := cmp.Diff(
+	if diff := cmpDiff(
 		expectedErr,
 		&smithy.GenericAPIError{
 			Code:    "UnmodeledException",
 			Message: "this is an unmodeled exception message",
 		},
-		cmpopts.IgnoreTypes(document.NoSerde{}),
 	); len(diff) > 0 {
 		t.Errorf(diff)
 	}
@@ -387,13 +383,12 @@ func TestStartStreamTranscription_ReadErrorEvent(t *testing.T) {
 		t.Errorf("expect err type %T", expectedErr)
 	}
 
-	if diff := cmp.Diff(
+	if diff := cmpDiff(
 		expectedErr,
 		&smithy.GenericAPIError{
 			Code:    "AnErrorCode",
 			Message: "An error message",
 		},
-		cmpopts.IgnoreTypes(document.NoSerde{}),
 	); len(diff) > 0 {
 		t.Errorf(diff)
 	}
@@ -647,14 +642,20 @@ func TestStartStreamTranscription_ResponseError(t *testing.T) {
 		t.Errorf("expect err type %T, got %v", expectedErr, err)
 	}
 
-	if diff := cmp.Diff(
+	if diff := cmpDiff(
 		expectedErr,
 		&smithy.GenericAPIError{
 			Code:    "UnknownError",
 			Message: "this is an exception message",
 		},
-		cmpopts.IgnoreTypes(document.NoSerde{}),
 	); len(diff) > 0 {
 		t.Errorf(diff)
 	}
+}
+
+func cmpDiff(e, a interface{}) string {
+	if !reflect.DeepEqual(e, a) {
+		return fmt.Sprintf("%v != %v", e, a)
+	}
+	return ""
 }

@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/textract/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -14,23 +13,27 @@ import (
 
 // Gets the results for an Amazon Textract asynchronous operation that analyzes
 // invoices and receipts. Amazon Textract finds contact information, items
-// purchased, and vendor name, from input invoices and receipts. You start
-// asynchronous invoice/receipt analysis by calling StartExpenseAnalysis , which
-// returns a job identifier ( JobId ). Upon completion of the invoice/receipt
-// analysis, Amazon Textract publishes the completion status to the Amazon Simple
+// purchased, and vendor name, from input invoices and receipts.
+//
+// You start asynchronous invoice/receipt analysis by calling StartExpenseAnalysis, which returns a
+// job identifier ( JobId ). Upon completion of the invoice/receipt analysis,
+// Amazon Textract publishes the completion status to the Amazon Simple
 // Notification Service (Amazon SNS) topic. This topic must be registered in the
 // initial call to StartExpenseAnalysis . To get the results of the invoice/receipt
 // analysis operation, first ensure that the status value published to the Amazon
 // SNS topic is SUCCEEDED . If so, call GetExpenseAnalysis , and pass the job
-// identifier ( JobId ) from the initial call to StartExpenseAnalysis . Use the
-// MaxResults parameter to limit the number of blocks that are returned. If there
-// are more results than specified in MaxResults , the value of NextToken in the
-// operation response contains a pagination token for getting the next set of
-// results. To get the next page of results, call GetExpenseAnalysis , and populate
-// the NextToken request parameter with the token value that's returned from the
-// previous call to GetExpenseAnalysis . For more information, see Analyzing
-// Invoices and Receipts (https://docs.aws.amazon.com/textract/latest/dg/invoices-receipts.html)
-// .
+// identifier ( JobId ) from the initial call to StartExpenseAnalysis .
+//
+// Use the MaxResults parameter to limit the number of blocks that are returned.
+// If there are more results than specified in MaxResults , the value of NextToken
+// in the operation response contains a pagination token for getting the next set
+// of results. To get the next page of results, call GetExpenseAnalysis , and
+// populate the NextToken request parameter with the token value that's returned
+// from the previous call to GetExpenseAnalysis .
+//
+// For more information, see [Analyzing Invoices and Receipts].
+//
+// [Analyzing Invoices and Receipts]: https://docs.aws.amazon.com/textract/latest/dg/invoices-receipts.html
 func (c *Client) GetExpenseAnalysis(ctx context.Context, params *GetExpenseAnalysisInput, optFns ...func(*Options)) (*GetExpenseAnalysisOutput, error) {
 	if params == nil {
 		params = &GetExpenseAnalysisInput{}
@@ -124,25 +127,25 @@ func (c *Client) addOperationGetExpenseAnalysisMiddlewares(stack *middleware.Sta
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -157,13 +160,16 @@ func (c *Client) addOperationGetExpenseAnalysisMiddlewares(stack *middleware.Sta
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpGetExpenseAnalysisValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetExpenseAnalysis(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

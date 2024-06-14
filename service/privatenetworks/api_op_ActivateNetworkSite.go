@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/privatenetworks/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -41,20 +40,29 @@ type ActivateNetworkSiteInput struct {
 	ShippingAddress *types.Address
 
 	// Unique, case-sensitive identifier that you provide to ensure the idempotency of
-	// the request. For more information, see How to ensure idempotency (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Run_Instance_Idempotency.html)
-	// .
+	// the request. For more information, see [How to ensure idempotency].
+	//
+	// [How to ensure idempotency]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Run_Instance_Idempotency.html
 	ClientToken *string
 
 	// Determines the duration and renewal status of the commitment period for all
-	// pending radio units. If you include commitmentConfiguration in the
-	// ActivateNetworkSiteRequest action, you must specify the following:
+	// pending radio units.
+	//
+	// If you include commitmentConfiguration in the ActivateNetworkSiteRequest
+	// action, you must specify the following:
+	//
 	//   - The commitment period for the radio unit. You can choose a 60-day, 1-year,
 	//   or 3-year period.
+	//
 	//   - Whether you want your commitment period to automatically renew for one more
 	//   year after your current commitment period expires.
-	// For pricing, see Amazon Web Services Private 5G Pricing (http://aws.amazon.com/private5g/pricing)
-	// . If you do not include commitmentConfiguration in the
-	// ActivateNetworkSiteRequest action, the commitment period is set to 60-days.
+	//
+	// For pricing, see [Amazon Web Services Private 5G Pricing].
+	//
+	// If you do not include commitmentConfiguration in the ActivateNetworkSiteRequest
+	// action, the commitment period is set to 60-days.
+	//
+	// [Amazon Web Services Private 5G Pricing]: http://aws.amazon.com/private5g/pricing
 	CommitmentConfiguration *types.CommitmentConfiguration
 
 	noSmithyDocumentSerde
@@ -93,25 +101,25 @@ func (c *Client) addOperationActivateNetworkSiteMiddlewares(stack *middleware.St
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -126,13 +134,16 @@ func (c *Client) addOperationActivateNetworkSiteMiddlewares(stack *middleware.St
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpActivateNetworkSiteValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opActivateNetworkSite(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

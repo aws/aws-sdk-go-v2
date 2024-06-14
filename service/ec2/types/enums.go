@@ -14,8 +14,9 @@ const (
 )
 
 // Values returns all known values for AcceleratorManufacturer. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (AcceleratorManufacturer) Values() []AcceleratorManufacturer {
 	return []AcceleratorManufacturer{
 		"amazon-web-services",
@@ -45,8 +46,9 @@ const (
 )
 
 // Values returns all known values for AcceleratorName. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (AcceleratorName) Values() []AcceleratorName {
 	return []AcceleratorName{
 		"a100",
@@ -74,8 +76,9 @@ const (
 )
 
 // Values returns all known values for AcceleratorType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (AcceleratorType) Values() []AcceleratorType {
 	return []AcceleratorType{
 		"gpu",
@@ -93,8 +96,9 @@ const (
 )
 
 // Values returns all known values for AccountAttributeName. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (AccountAttributeName) Values() []AccountAttributeName {
 	return []AccountAttributeName{
 		"supported-platforms",
@@ -113,8 +117,9 @@ const (
 )
 
 // Values returns all known values for ActivityStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ActivityStatus) Values() []ActivityStatus {
 	return []ActivityStatus{
 		"error",
@@ -132,8 +137,9 @@ const (
 )
 
 // Values returns all known values for AddressAttributeName. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (AddressAttributeName) Values() []AddressAttributeName {
 	return []AddressAttributeName{
 		"domain-name",
@@ -149,8 +155,9 @@ const (
 )
 
 // Values returns all known values for AddressFamily. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (AddressFamily) Values() []AddressFamily {
 	return []AddressFamily{
 		"ipv4",
@@ -168,8 +175,9 @@ const (
 )
 
 // Values returns all known values for AddressTransferStatus. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (AddressTransferStatus) Values() []AddressTransferStatus {
 	return []AddressTransferStatus{
 		"pending",
@@ -187,8 +195,9 @@ const (
 )
 
 // Values returns all known values for Affinity. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (Affinity) Values() []Affinity {
 	return []Affinity{
 		"default",
@@ -209,8 +218,9 @@ const (
 )
 
 // Values returns all known values for AllocationState. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (AllocationState) Values() []AllocationState {
 	return []AllocationState{
 		"available",
@@ -234,8 +244,9 @@ const (
 )
 
 // Values returns all known values for AllocationStrategy. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (AllocationStrategy) Values() []AllocationStrategy {
 	return []AllocationStrategy{
 		"lowestPrice",
@@ -254,8 +265,9 @@ const (
 )
 
 // Values returns all known values for AllocationType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (AllocationType) Values() []AllocationType {
 	return []AllocationType{
 		"used",
@@ -272,6 +284,7 @@ const (
 
 // Values returns all known values for AllowsMultipleInstanceTypes. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (AllowsMultipleInstanceTypes) Values() []AllowsMultipleInstanceTypes {
 	return []AllowsMultipleInstanceTypes{
@@ -289,8 +302,9 @@ const (
 )
 
 // Values returns all known values for AmdSevSnpSpecification. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (AmdSevSnpSpecification) Values() []AmdSevSnpSpecification {
 	return []AmdSevSnpSpecification{
 		"enabled",
@@ -308,8 +322,9 @@ const (
 )
 
 // Values returns all known values for AnalysisStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (AnalysisStatus) Values() []AnalysisStatus {
 	return []AnalysisStatus{
 		"running",
@@ -328,6 +343,7 @@ const (
 
 // Values returns all known values for ApplianceModeSupportValue. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (ApplianceModeSupportValue) Values() []ApplianceModeSupportValue {
 	return []ApplianceModeSupportValue{
@@ -348,8 +364,9 @@ const (
 )
 
 // Values returns all known values for ArchitectureType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ArchitectureType) Values() []ArchitectureType {
 	return []ArchitectureType{
 		"i386",
@@ -372,8 +389,9 @@ const (
 )
 
 // Values returns all known values for ArchitectureValues. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ArchitectureValues) Values() []ArchitectureValues {
 	return []ArchitectureValues{
 		"i386",
@@ -397,8 +415,9 @@ const (
 )
 
 // Values returns all known values for AsnAssociationState. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (AsnAssociationState) Values() []AsnAssociationState {
 	return []AsnAssociationState{
 		"disassociated",
@@ -423,8 +442,9 @@ const (
 )
 
 // Values returns all known values for AsnState. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (AsnState) Values() []AsnState {
 	return []AsnState{
 		"deprovisioned",
@@ -444,8 +464,9 @@ const (
 )
 
 // Values returns all known values for AssociatedNetworkType. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (AssociatedNetworkType) Values() []AssociatedNetworkType {
 	return []AssociatedNetworkType{
 		"vpc",
@@ -464,8 +485,9 @@ const (
 )
 
 // Values returns all known values for AssociationStatusCode. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (AssociationStatusCode) Values() []AssociationStatusCode {
 	return []AssociationStatusCode{
 		"associating",
@@ -487,8 +509,9 @@ const (
 )
 
 // Values returns all known values for AttachmentStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (AttachmentStatus) Values() []AttachmentStatus {
 	return []AttachmentStatus{
 		"attaching",
@@ -508,8 +531,9 @@ const (
 
 // Values returns all known values for AutoAcceptSharedAssociationsValue. Note
 // that this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (AutoAcceptSharedAssociationsValue) Values() []AutoAcceptSharedAssociationsValue {
 	return []AutoAcceptSharedAssociationsValue{
 		"enable",
@@ -527,8 +551,9 @@ const (
 
 // Values returns all known values for AutoAcceptSharedAttachmentsValue. Note that
 // this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (AutoAcceptSharedAttachmentsValue) Values() []AutoAcceptSharedAttachmentsValue {
 	return []AutoAcceptSharedAttachmentsValue{
 		"enable",
@@ -545,8 +570,9 @@ const (
 )
 
 // Values returns all known values for AutoPlacement. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (AutoPlacement) Values() []AutoPlacement {
 	return []AutoPlacement{
 		"on",
@@ -565,6 +591,7 @@ const (
 
 // Values returns all known values for AvailabilityZoneOptInStatus. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (AvailabilityZoneOptInStatus) Values() []AvailabilityZoneOptInStatus {
 	return []AvailabilityZoneOptInStatus{
@@ -586,8 +613,9 @@ const (
 )
 
 // Values returns all known values for AvailabilityZoneState. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (AvailabilityZoneState) Values() []AvailabilityZoneState {
 	return []AvailabilityZoneState{
 		"available",
@@ -608,8 +636,9 @@ const (
 )
 
 // Values returns all known values for BareMetal. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (BareMetal) Values() []BareMetal {
 	return []BareMetal{
 		"included",
@@ -632,8 +661,9 @@ const (
 )
 
 // Values returns all known values for BatchState. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (BatchState) Values() []BatchState {
 	return []BatchState{
 		"submitted",
@@ -655,8 +685,9 @@ const (
 )
 
 // Values returns all known values for BgpStatus. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (BgpStatus) Values() []BgpStatus {
 	return []BgpStatus{
 		"up",
@@ -673,8 +704,9 @@ const (
 )
 
 // Values returns all known values for BootModeType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (BootModeType) Values() []BootModeType {
 	return []BootModeType{
 		"legacy-bios",
@@ -692,8 +724,9 @@ const (
 )
 
 // Values returns all known values for BootModeValues. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (BootModeValues) Values() []BootModeValues {
 	return []BootModeValues{
 		"legacy-bios",
@@ -716,8 +749,9 @@ const (
 )
 
 // Values returns all known values for BundleTaskState. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (BundleTaskState) Values() []BundleTaskState {
 	return []BundleTaskState{
 		"pending",
@@ -740,8 +774,9 @@ const (
 )
 
 // Values returns all known values for BurstablePerformance. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (BurstablePerformance) Values() []BurstablePerformance {
 	return []BurstablePerformance{
 		"included",
@@ -765,8 +800,9 @@ const (
 )
 
 // Values returns all known values for ByoipCidrState. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ByoipCidrState) Values() []ByoipCidrState {
 	return []ByoipCidrState{
 		"advertised",
@@ -791,8 +827,9 @@ const (
 )
 
 // Values returns all known values for CancelBatchErrorCode. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (CancelBatchErrorCode) Values() []CancelBatchErrorCode {
 	return []CancelBatchErrorCode{
 		"fleetRequestIdDoesNotExist",
@@ -815,8 +852,9 @@ const (
 
 // Values returns all known values for CancelSpotInstanceRequestState. Note that
 // this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (CancelSpotInstanceRequestState) Values() []CancelSpotInstanceRequestState {
 	return []CancelSpotInstanceRequestState{
 		"active",
@@ -844,8 +882,9 @@ const (
 
 // Values returns all known values for CapacityReservationFleetState. Note that
 // this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (CapacityReservationFleetState) Values() []CapacityReservationFleetState {
 	return []CapacityReservationFleetState{
 		"submitted",
@@ -886,8 +925,9 @@ const (
 
 // Values returns all known values for CapacityReservationInstancePlatform. Note
 // that this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (CapacityReservationInstancePlatform) Values() []CapacityReservationInstancePlatform {
 	return []CapacityReservationInstancePlatform{
 		"Linux/UNIX",
@@ -921,8 +961,9 @@ const (
 
 // Values returns all known values for CapacityReservationPreference. Note that
 // this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (CapacityReservationPreference) Values() []CapacityReservationPreference {
 	return []CapacityReservationPreference{
 		"open",
@@ -946,6 +987,7 @@ const (
 
 // Values returns all known values for CapacityReservationState. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (CapacityReservationState) Values() []CapacityReservationState {
 	return []CapacityReservationState{
@@ -970,6 +1012,7 @@ const (
 
 // Values returns all known values for CapacityReservationTenancy. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (CapacityReservationTenancy) Values() []CapacityReservationTenancy {
 	return []CapacityReservationTenancy{
@@ -987,8 +1030,9 @@ const (
 )
 
 // Values returns all known values for CapacityReservationType. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (CapacityReservationType) Values() []CapacityReservationType {
 	return []CapacityReservationType{
 		"default",
@@ -1007,8 +1051,9 @@ const (
 )
 
 // Values returns all known values for CarrierGatewayState. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (CarrierGatewayState) Values() []CarrierGatewayState {
 	return []CarrierGatewayState{
 		"pending",
@@ -1028,8 +1073,9 @@ const (
 
 // Values returns all known values for ClientCertificateRevocationListStatusCode.
 // Note that this can be expanded in the future, and so it is only as up to date as
-// the client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ClientCertificateRevocationListStatusCode) Values() []ClientCertificateRevocationListStatusCode {
 	return []ClientCertificateRevocationListStatusCode{
 		"pending",
@@ -1048,6 +1094,7 @@ const (
 
 // Values returns all known values for ClientVpnAuthenticationType. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (ClientVpnAuthenticationType) Values() []ClientVpnAuthenticationType {
 	return []ClientVpnAuthenticationType{
@@ -1069,8 +1116,9 @@ const (
 
 // Values returns all known values for ClientVpnAuthorizationRuleStatusCode. Note
 // that this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ClientVpnAuthorizationRuleStatusCode) Values() []ClientVpnAuthorizationRuleStatusCode {
 	return []ClientVpnAuthorizationRuleStatusCode{
 		"authorizing",
@@ -1092,8 +1140,9 @@ const (
 
 // Values returns all known values for ClientVpnConnectionStatusCode. Note that
 // this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ClientVpnConnectionStatusCode) Values() []ClientVpnConnectionStatusCode {
 	return []ClientVpnConnectionStatusCode{
 		"active",
@@ -1113,8 +1162,9 @@ const (
 
 // Values returns all known values for ClientVpnEndpointAttributeStatusCode. Note
 // that this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ClientVpnEndpointAttributeStatusCode) Values() []ClientVpnEndpointAttributeStatusCode {
 	return []ClientVpnEndpointAttributeStatusCode{
 		"applying",
@@ -1134,6 +1184,7 @@ const (
 
 // Values returns all known values for ClientVpnEndpointStatusCode. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (ClientVpnEndpointStatusCode) Values() []ClientVpnEndpointStatusCode {
 	return []ClientVpnEndpointStatusCode{
@@ -1156,6 +1207,7 @@ const (
 
 // Values returns all known values for ClientVpnRouteStatusCode. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (ClientVpnRouteStatusCode) Values() []ClientVpnRouteStatusCode {
 	return []ClientVpnRouteStatusCode{
@@ -1176,6 +1228,7 @@ const (
 
 // Values returns all known values for ConnectionNotificationState. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (ConnectionNotificationState) Values() []ConnectionNotificationState {
 	return []ConnectionNotificationState{
@@ -1193,6 +1246,7 @@ const (
 
 // Values returns all known values for ConnectionNotificationType. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (ConnectionNotificationType) Values() []ConnectionNotificationType {
 	return []ConnectionNotificationType{
@@ -1209,8 +1263,9 @@ const (
 )
 
 // Values returns all known values for ConnectivityType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ConnectivityType) Values() []ConnectivityType {
 	return []ConnectivityType{
 		"private",
@@ -1226,8 +1281,9 @@ const (
 )
 
 // Values returns all known values for ContainerFormat. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ContainerFormat) Values() []ContainerFormat {
 	return []ContainerFormat{
 		"ova",
@@ -1245,8 +1301,9 @@ const (
 )
 
 // Values returns all known values for ConversionTaskState. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ConversionTaskState) Values() []ConversionTaskState {
 	return []ConversionTaskState{
 		"active",
@@ -1264,8 +1321,9 @@ const (
 )
 
 // Values returns all known values for CopyTagsFromSource. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (CopyTagsFromSource) Values() []CopyTagsFromSource {
 	return []CopyTagsFromSource{
 		"volume",
@@ -1282,8 +1340,9 @@ const (
 )
 
 // Values returns all known values for CpuManufacturer. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (CpuManufacturer) Values() []CpuManufacturer {
 	return []CpuManufacturer{
 		"intel",
@@ -1300,8 +1359,9 @@ const (
 )
 
 // Values returns all known values for CurrencyCodeValues. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (CurrencyCodeValues) Values() []CurrencyCodeValues {
 	return []CurrencyCodeValues{
 		"USD",
@@ -1318,11 +1378,56 @@ const (
 
 // Values returns all known values for DatafeedSubscriptionState. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (DatafeedSubscriptionState) Values() []DatafeedSubscriptionState {
 	return []DatafeedSubscriptionState{
 		"Active",
 		"Inactive",
+	}
+}
+
+type DefaultInstanceMetadataEndpointState string
+
+// Enum values for DefaultInstanceMetadataEndpointState
+const (
+	DefaultInstanceMetadataEndpointStateDisabled     DefaultInstanceMetadataEndpointState = "disabled"
+	DefaultInstanceMetadataEndpointStateEnabled      DefaultInstanceMetadataEndpointState = "enabled"
+	DefaultInstanceMetadataEndpointStateNoPreference DefaultInstanceMetadataEndpointState = "no-preference"
+)
+
+// Values returns all known values for DefaultInstanceMetadataEndpointState. Note
+// that this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (DefaultInstanceMetadataEndpointState) Values() []DefaultInstanceMetadataEndpointState {
+	return []DefaultInstanceMetadataEndpointState{
+		"disabled",
+		"enabled",
+		"no-preference",
+	}
+}
+
+type DefaultInstanceMetadataTagsState string
+
+// Enum values for DefaultInstanceMetadataTagsState
+const (
+	DefaultInstanceMetadataTagsStateDisabled     DefaultInstanceMetadataTagsState = "disabled"
+	DefaultInstanceMetadataTagsStateEnabled      DefaultInstanceMetadataTagsState = "enabled"
+	DefaultInstanceMetadataTagsStateNoPreference DefaultInstanceMetadataTagsState = "no-preference"
+)
+
+// Values returns all known values for DefaultInstanceMetadataTagsState. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (DefaultInstanceMetadataTagsState) Values() []DefaultInstanceMetadataTagsState {
+	return []DefaultInstanceMetadataTagsState{
+		"disabled",
+		"enabled",
+		"no-preference",
 	}
 }
 
@@ -1336,8 +1441,9 @@ const (
 
 // Values returns all known values for DefaultRouteTableAssociationValue. Note
 // that this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (DefaultRouteTableAssociationValue) Values() []DefaultRouteTableAssociationValue {
 	return []DefaultRouteTableAssociationValue{
 		"enable",
@@ -1355,8 +1461,9 @@ const (
 
 // Values returns all known values for DefaultRouteTablePropagationValue. Note
 // that this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (DefaultRouteTablePropagationValue) Values() []DefaultRouteTablePropagationValue {
 	return []DefaultRouteTablePropagationValue{
 		"enable",
@@ -1375,6 +1482,7 @@ const (
 
 // Values returns all known values for DefaultTargetCapacityType. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (DefaultTargetCapacityType) Values() []DefaultTargetCapacityType {
 	return []DefaultTargetCapacityType{
@@ -1395,8 +1503,9 @@ const (
 )
 
 // Values returns all known values for DeleteFleetErrorCode. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (DeleteFleetErrorCode) Values() []DeleteFleetErrorCode {
 	return []DeleteFleetErrorCode{
 		"fleetIdDoesNotExist",
@@ -1417,8 +1526,9 @@ const (
 
 // Values returns all known values for DeleteQueuedReservedInstancesErrorCode.
 // Note that this can be expanded in the future, and so it is only as up to date as
-// the client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (DeleteQueuedReservedInstancesErrorCode) Values() []DeleteQueuedReservedInstancesErrorCode {
 	return []DeleteQueuedReservedInstancesErrorCode{
 		"reserved-instances-id-invalid",
@@ -1436,8 +1546,9 @@ const (
 )
 
 // Values returns all known values for DestinationFileFormat. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (DestinationFileFormat) Values() []DestinationFileFormat {
 	return []DestinationFileFormat{
 		"plain-text",
@@ -1455,8 +1566,9 @@ const (
 )
 
 // Values returns all known values for DeviceTrustProviderType. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (DeviceTrustProviderType) Values() []DeviceTrustProviderType {
 	return []DeviceTrustProviderType{
 		"jamf",
@@ -1474,8 +1586,9 @@ const (
 )
 
 // Values returns all known values for DeviceType. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (DeviceType) Values() []DeviceType {
 	return []DeviceType{
 		"ebs",
@@ -1493,8 +1606,9 @@ const (
 )
 
 // Values returns all known values for DiskImageFormat. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (DiskImageFormat) Values() []DiskImageFormat {
 	return []DiskImageFormat{
 		"VMDK",
@@ -1512,8 +1626,9 @@ const (
 )
 
 // Values returns all known values for DiskType. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (DiskType) Values() []DiskType {
 	return []DiskType{
 		"hdd",
@@ -1531,8 +1646,9 @@ const (
 )
 
 // Values returns all known values for DnsNameState. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (DnsNameState) Values() []DnsNameState {
 	return []DnsNameState{
 		"pendingVerification",
@@ -1552,8 +1668,9 @@ const (
 )
 
 // Values returns all known values for DnsRecordIpType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (DnsRecordIpType) Values() []DnsRecordIpType {
 	return []DnsRecordIpType{
 		"ipv4",
@@ -1572,8 +1689,9 @@ const (
 )
 
 // Values returns all known values for DnsSupportValue. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (DnsSupportValue) Values() []DnsSupportValue {
 	return []DnsSupportValue{
 		"enable",
@@ -1590,8 +1708,9 @@ const (
 )
 
 // Values returns all known values for DomainType. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (DomainType) Values() []DomainType {
 	return []DomainType{
 		"vpc",
@@ -1608,8 +1727,9 @@ const (
 )
 
 // Values returns all known values for DynamicRoutingValue. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (DynamicRoutingValue) Values() []DynamicRoutingValue {
 	return []DynamicRoutingValue{
 		"enable",
@@ -1626,8 +1746,9 @@ const (
 )
 
 // Values returns all known values for EbsEncryptionSupport. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (EbsEncryptionSupport) Values() []EbsEncryptionSupport {
 	return []EbsEncryptionSupport{
 		"unsupported",
@@ -1645,8 +1766,9 @@ const (
 )
 
 // Values returns all known values for EbsNvmeSupport. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (EbsNvmeSupport) Values() []EbsNvmeSupport {
 	return []EbsNvmeSupport{
 		"unsupported",
@@ -1665,8 +1787,9 @@ const (
 )
 
 // Values returns all known values for EbsOptimizedSupport. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (EbsOptimizedSupport) Values() []EbsOptimizedSupport {
 	return []EbsOptimizedSupport{
 		"unsupported",
@@ -1689,8 +1812,9 @@ const (
 
 // Values returns all known values for Ec2InstanceConnectEndpointState. Note that
 // this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (Ec2InstanceConnectEndpointState) Values() []Ec2InstanceConnectEndpointState {
 	return []Ec2InstanceConnectEndpointState{
 		"create-in-progress",
@@ -1702,6 +1826,44 @@ func (Ec2InstanceConnectEndpointState) Values() []Ec2InstanceConnectEndpointStat
 	}
 }
 
+type EkPubKeyFormat string
+
+// Enum values for EkPubKeyFormat
+const (
+	EkPubKeyFormatDer  EkPubKeyFormat = "der"
+	EkPubKeyFormatTpmt EkPubKeyFormat = "tpmt"
+)
+
+// Values returns all known values for EkPubKeyFormat. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (EkPubKeyFormat) Values() []EkPubKeyFormat {
+	return []EkPubKeyFormat{
+		"der",
+		"tpmt",
+	}
+}
+
+type EkPubKeyType string
+
+// Enum values for EkPubKeyType
+const (
+	EkPubKeyTypeRsa2048    EkPubKeyType = "rsa-2048"
+	EkPubKeyTypeEccSecP384 EkPubKeyType = "ecc-sec-p384"
+)
+
+// Values returns all known values for EkPubKeyType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (EkPubKeyType) Values() []EkPubKeyType {
+	return []EkPubKeyType{
+		"rsa-2048",
+		"ecc-sec-p384",
+	}
+}
+
 type ElasticGpuState string
 
 // Enum values for ElasticGpuState
@@ -1710,8 +1872,9 @@ const (
 )
 
 // Values returns all known values for ElasticGpuState. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ElasticGpuState) Values() []ElasticGpuState {
 	return []ElasticGpuState{
 		"ATTACHED",
@@ -1727,8 +1890,9 @@ const (
 )
 
 // Values returns all known values for ElasticGpuStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ElasticGpuStatus) Values() []ElasticGpuStatus {
 	return []ElasticGpuStatus{
 		"OK",
@@ -1746,8 +1910,9 @@ const (
 )
 
 // Values returns all known values for EnaSupport. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (EnaSupport) Values() []EnaSupport {
 	return []EnaSupport{
 		"unsupported",
@@ -1765,8 +1930,9 @@ const (
 )
 
 // Values returns all known values for EndDateType. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (EndDateType) Values() []EndDateType {
 	return []EndDateType{
 		"unlimited",
@@ -1784,8 +1950,9 @@ const (
 )
 
 // Values returns all known values for EphemeralNvmeSupport. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (EphemeralNvmeSupport) Values() []EphemeralNvmeSupport {
 	return []EphemeralNvmeSupport{
 		"unsupported",
@@ -1806,8 +1973,9 @@ const (
 )
 
 // Values returns all known values for EventCode. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (EventCode) Values() []EventCode {
 	return []EventCode{
 		"instance-reboot",
@@ -1829,8 +1997,9 @@ const (
 )
 
 // Values returns all known values for EventType. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (EventType) Values() []EventType {
 	return []EventType{
 		"instanceChange",
@@ -1850,8 +2019,9 @@ const (
 
 // Values returns all known values for ExcessCapacityTerminationPolicy. Note that
 // this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ExcessCapacityTerminationPolicy) Values() []ExcessCapacityTerminationPolicy {
 	return []ExcessCapacityTerminationPolicy{
 		"noTermination",
@@ -1869,8 +2039,9 @@ const (
 )
 
 // Values returns all known values for ExportEnvironment. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ExportEnvironment) Values() []ExportEnvironment {
 	return []ExportEnvironment{
 		"citrix",
@@ -1890,8 +2061,9 @@ const (
 )
 
 // Values returns all known values for ExportTaskState. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ExportTaskState) Values() []ExportTaskState {
 	return []ExportTaskState{
 		"active",
@@ -1909,8 +2081,9 @@ const (
 )
 
 // Values returns all known values for FastLaunchResourceType. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (FastLaunchResourceType) Values() []FastLaunchResourceType {
 	return []FastLaunchResourceType{
 		"snapshot",
@@ -1930,8 +2103,9 @@ const (
 )
 
 // Values returns all known values for FastLaunchStateCode. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (FastLaunchStateCode) Values() []FastLaunchStateCode {
 	return []FastLaunchStateCode{
 		"enabling",
@@ -1956,8 +2130,9 @@ const (
 
 // Values returns all known values for FastSnapshotRestoreStateCode. Note that
 // this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (FastSnapshotRestoreStateCode) Values() []FastSnapshotRestoreStateCode {
 	return []FastSnapshotRestoreStateCode{
 		"enabling",
@@ -1978,8 +2153,9 @@ const (
 )
 
 // Values returns all known values for FindingsFound. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (FindingsFound) Values() []FindingsFound {
 	return []FindingsFound{
 		"true",
@@ -1999,8 +2175,9 @@ const (
 )
 
 // Values returns all known values for FleetActivityStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (FleetActivityStatus) Values() []FleetActivityStatus {
 	return []FleetActivityStatus{
 		"error",
@@ -2019,8 +2196,9 @@ const (
 
 // Values returns all known values for FleetCapacityReservationTenancy. Note that
 // this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (FleetCapacityReservationTenancy) Values() []FleetCapacityReservationTenancy {
 	return []FleetCapacityReservationTenancy{
 		"default",
@@ -2036,8 +2214,9 @@ const (
 
 // Values returns all known values for FleetCapacityReservationUsageStrategy. Note
 // that this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (FleetCapacityReservationUsageStrategy) Values() []FleetCapacityReservationUsageStrategy {
 	return []FleetCapacityReservationUsageStrategy{
 		"use-capacity-reservations-first",
@@ -2054,8 +2233,9 @@ const (
 )
 
 // Values returns all known values for FleetEventType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (FleetEventType) Values() []FleetEventType {
 	return []FleetEventType{
 		"instance-change",
@@ -2074,8 +2254,9 @@ const (
 
 // Values returns all known values for FleetExcessCapacityTerminationPolicy. Note
 // that this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (FleetExcessCapacityTerminationPolicy) Values() []FleetExcessCapacityTerminationPolicy {
 	return []FleetExcessCapacityTerminationPolicy{
 		"no-termination",
@@ -2092,6 +2273,7 @@ const (
 
 // Values returns all known values for FleetInstanceMatchCriteria. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (FleetInstanceMatchCriteria) Values() []FleetInstanceMatchCriteria {
 	return []FleetInstanceMatchCriteria{
@@ -2109,8 +2291,9 @@ const (
 
 // Values returns all known values for FleetOnDemandAllocationStrategy. Note that
 // this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (FleetOnDemandAllocationStrategy) Values() []FleetOnDemandAllocationStrategy {
 	return []FleetOnDemandAllocationStrategy{
 		"lowest-price",
@@ -2128,6 +2311,7 @@ const (
 
 // Values returns all known values for FleetReplacementStrategy. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (FleetReplacementStrategy) Values() []FleetReplacementStrategy {
 	return []FleetReplacementStrategy{
@@ -2150,8 +2334,9 @@ const (
 )
 
 // Values returns all known values for FleetStateCode. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (FleetStateCode) Values() []FleetStateCode {
 	return []FleetStateCode{
 		"submitted",
@@ -2174,8 +2359,9 @@ const (
 )
 
 // Values returns all known values for FleetType. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (FleetType) Values() []FleetType {
 	return []FleetType{
 		"request",
@@ -2196,8 +2382,9 @@ const (
 )
 
 // Values returns all known values for FlowLogsResourceType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (FlowLogsResourceType) Values() []FlowLogsResourceType {
 	return []FlowLogsResourceType{
 		"VPC",
@@ -2219,8 +2406,9 @@ const (
 )
 
 // Values returns all known values for FpgaImageAttributeName. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (FpgaImageAttributeName) Values() []FpgaImageAttributeName {
 	return []FpgaImageAttributeName{
 		"description",
@@ -2241,8 +2429,9 @@ const (
 )
 
 // Values returns all known values for FpgaImageStateCode. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (FpgaImageStateCode) Values() []FpgaImageStateCode {
 	return []FpgaImageStateCode{
 		"pending",
@@ -2263,8 +2452,9 @@ const (
 )
 
 // Values returns all known values for GatewayAssociationState. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (GatewayAssociationState) Values() []GatewayAssociationState {
 	return []GatewayAssociationState{
 		"associated",
@@ -2282,8 +2472,9 @@ const (
 )
 
 // Values returns all known values for GatewayType. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (GatewayType) Values() []GatewayType {
 	return []GatewayType{
 		"ipsec.1",
@@ -2299,8 +2490,9 @@ const (
 )
 
 // Values returns all known values for HostMaintenance. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (HostMaintenance) Values() []HostMaintenance {
 	return []HostMaintenance{
 		"on",
@@ -2317,8 +2509,9 @@ const (
 )
 
 // Values returns all known values for HostnameType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (HostnameType) Values() []HostnameType {
 	return []HostnameType{
 		"ip-name",
@@ -2335,8 +2528,9 @@ const (
 )
 
 // Values returns all known values for HostRecovery. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (HostRecovery) Values() []HostRecovery {
 	return []HostRecovery{
 		"on",
@@ -2353,8 +2547,9 @@ const (
 )
 
 // Values returns all known values for HostTenancy. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (HostTenancy) Values() []HostTenancy {
 	return []HostTenancy{
 		"dedicated",
@@ -2371,8 +2566,9 @@ const (
 )
 
 // Values returns all known values for HttpTokensState. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (HttpTokensState) Values() []HttpTokensState {
 	return []HttpTokensState{
 		"optional",
@@ -2389,8 +2585,9 @@ const (
 )
 
 // Values returns all known values for HypervisorType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (HypervisorType) Values() []HypervisorType {
 	return []HypervisorType{
 		"ovm",
@@ -2410,8 +2607,9 @@ const (
 
 // Values returns all known values for IamInstanceProfileAssociationState. Note
 // that this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (IamInstanceProfileAssociationState) Values() []IamInstanceProfileAssociationState {
 	return []IamInstanceProfileAssociationState{
 		"associating",
@@ -2430,8 +2628,9 @@ const (
 )
 
 // Values returns all known values for Igmpv2SupportValue. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (Igmpv2SupportValue) Values() []Igmpv2SupportValue {
 	return []Igmpv2SupportValue{
 		"enable",
@@ -2443,23 +2642,25 @@ type ImageAttributeName string
 
 // Enum values for ImageAttributeName
 const (
-	ImageAttributeNameDescription        ImageAttributeName = "description"
-	ImageAttributeNameKernel             ImageAttributeName = "kernel"
-	ImageAttributeNameRamdisk            ImageAttributeName = "ramdisk"
-	ImageAttributeNameLaunchPermission   ImageAttributeName = "launchPermission"
-	ImageAttributeNameProductCodes       ImageAttributeName = "productCodes"
-	ImageAttributeNameBlockDeviceMapping ImageAttributeName = "blockDeviceMapping"
-	ImageAttributeNameSriovNetSupport    ImageAttributeName = "sriovNetSupport"
-	ImageAttributeNameBootMode           ImageAttributeName = "bootMode"
-	ImageAttributeNameTpmSupport         ImageAttributeName = "tpmSupport"
-	ImageAttributeNameUefiData           ImageAttributeName = "uefiData"
-	ImageAttributeNameLastLaunchedTime   ImageAttributeName = "lastLaunchedTime"
-	ImageAttributeNameImdsSupport        ImageAttributeName = "imdsSupport"
+	ImageAttributeNameDescription              ImageAttributeName = "description"
+	ImageAttributeNameKernel                   ImageAttributeName = "kernel"
+	ImageAttributeNameRamdisk                  ImageAttributeName = "ramdisk"
+	ImageAttributeNameLaunchPermission         ImageAttributeName = "launchPermission"
+	ImageAttributeNameProductCodes             ImageAttributeName = "productCodes"
+	ImageAttributeNameBlockDeviceMapping       ImageAttributeName = "blockDeviceMapping"
+	ImageAttributeNameSriovNetSupport          ImageAttributeName = "sriovNetSupport"
+	ImageAttributeNameBootMode                 ImageAttributeName = "bootMode"
+	ImageAttributeNameTpmSupport               ImageAttributeName = "tpmSupport"
+	ImageAttributeNameUefiData                 ImageAttributeName = "uefiData"
+	ImageAttributeNameLastLaunchedTime         ImageAttributeName = "lastLaunchedTime"
+	ImageAttributeNameImdsSupport              ImageAttributeName = "imdsSupport"
+	ImageAttributeNameDeregistrationProtection ImageAttributeName = "deregistrationProtection"
 )
 
 // Values returns all known values for ImageAttributeName. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ImageAttributeName) Values() []ImageAttributeName {
 	return []ImageAttributeName{
 		"description",
@@ -2474,6 +2675,7 @@ func (ImageAttributeName) Values() []ImageAttributeName {
 		"uefiData",
 		"lastLaunchedTime",
 		"imdsSupport",
+		"deregistrationProtection",
 	}
 }
 
@@ -2486,8 +2688,9 @@ const (
 
 // Values returns all known values for ImageBlockPublicAccessDisabledState. Note
 // that this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ImageBlockPublicAccessDisabledState) Values() []ImageBlockPublicAccessDisabledState {
 	return []ImageBlockPublicAccessDisabledState{
 		"unblocked",
@@ -2503,8 +2706,9 @@ const (
 
 // Values returns all known values for ImageBlockPublicAccessEnabledState. Note
 // that this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ImageBlockPublicAccessEnabledState) Values() []ImageBlockPublicAccessEnabledState {
 	return []ImageBlockPublicAccessEnabledState{
 		"block-new-sharing",
@@ -2526,8 +2730,9 @@ const (
 )
 
 // Values returns all known values for ImageState. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ImageState) Values() []ImageState {
 	return []ImageState{
 		"pending",
@@ -2551,8 +2756,9 @@ const (
 )
 
 // Values returns all known values for ImageTypeValues. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ImageTypeValues) Values() []ImageTypeValues {
 	return []ImageTypeValues{
 		"machine",
@@ -2569,8 +2775,9 @@ const (
 )
 
 // Values returns all known values for ImdsSupportValues. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ImdsSupportValues) Values() []ImdsSupportValues {
 	return []ImdsSupportValues{
 		"v2.0",
@@ -2600,8 +2807,9 @@ const (
 )
 
 // Values returns all known values for InstanceAttributeName. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (InstanceAttributeName) Values() []InstanceAttributeName {
 	return []InstanceAttributeName{
 		"instanceType",
@@ -2633,6 +2841,7 @@ const (
 
 // Values returns all known values for InstanceAutoRecoveryState. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (InstanceAutoRecoveryState) Values() []InstanceAutoRecoveryState {
 	return []InstanceAutoRecoveryState{
@@ -2650,8 +2859,9 @@ const (
 )
 
 // Values returns all known values for InstanceBootModeValues. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (InstanceBootModeValues) Values() []InstanceBootModeValues {
 	return []InstanceBootModeValues{
 		"legacy-bios",
@@ -2671,6 +2881,7 @@ const (
 
 // Values returns all known values for InstanceEventWindowState. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (InstanceEventWindowState) Values() []InstanceEventWindowState {
 	return []InstanceEventWindowState{
@@ -2690,8 +2901,9 @@ const (
 )
 
 // Values returns all known values for InstanceGeneration. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (InstanceGeneration) Values() []InstanceGeneration {
 	return []InstanceGeneration{
 		"current",
@@ -2708,8 +2920,9 @@ const (
 )
 
 // Values returns all known values for InstanceHealthStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (InstanceHealthStatus) Values() []InstanceHealthStatus {
 	return []InstanceHealthStatus{
 		"healthy",
@@ -2728,8 +2941,9 @@ const (
 
 // Values returns all known values for InstanceInterruptionBehavior. Note that
 // this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (InstanceInterruptionBehavior) Values() []InstanceInterruptionBehavior {
 	return []InstanceInterruptionBehavior{
 		"hibernate",
@@ -2747,8 +2961,9 @@ const (
 )
 
 // Values returns all known values for InstanceLifecycle. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (InstanceLifecycle) Values() []InstanceLifecycle {
 	return []InstanceLifecycle{
 		"spot",
@@ -2766,8 +2981,9 @@ const (
 )
 
 // Values returns all known values for InstanceLifecycleType. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (InstanceLifecycleType) Values() []InstanceLifecycleType {
 	return []InstanceLifecycleType{
 		"spot",
@@ -2785,8 +3001,9 @@ const (
 )
 
 // Values returns all known values for InstanceMatchCriteria. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (InstanceMatchCriteria) Values() []InstanceMatchCriteria {
 	return []InstanceMatchCriteria{
 		"open",
@@ -2804,8 +3021,9 @@ const (
 
 // Values returns all known values for InstanceMetadataEndpointState. Note that
 // this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (InstanceMetadataEndpointState) Values() []InstanceMetadataEndpointState {
 	return []InstanceMetadataEndpointState{
 		"disabled",
@@ -2823,8 +3041,9 @@ const (
 
 // Values returns all known values for InstanceMetadataOptionsState. Note that
 // this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (InstanceMetadataOptionsState) Values() []InstanceMetadataOptionsState {
 	return []InstanceMetadataOptionsState{
 		"pending",
@@ -2842,8 +3061,9 @@ const (
 
 // Values returns all known values for InstanceMetadataProtocolState. Note that
 // this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (InstanceMetadataProtocolState) Values() []InstanceMetadataProtocolState {
 	return []InstanceMetadataProtocolState{
 		"disabled",
@@ -2861,6 +3081,7 @@ const (
 
 // Values returns all known values for InstanceMetadataTagsState. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (InstanceMetadataTagsState) Values() []InstanceMetadataTagsState {
 	return []InstanceMetadataTagsState{
@@ -2882,8 +3103,9 @@ const (
 )
 
 // Values returns all known values for InstanceStateName. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (InstanceStateName) Values() []InstanceStateName {
 	return []InstanceStateName{
 		"pending",
@@ -2905,8 +3127,9 @@ const (
 
 // Values returns all known values for InstanceStorageEncryptionSupport. Note that
 // this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (InstanceStorageEncryptionSupport) Values() []InstanceStorageEncryptionSupport {
 	return []InstanceStorageEncryptionSupport{
 		"unsupported",
@@ -2918,794 +3141,817 @@ type InstanceType string
 
 // Enum values for InstanceType
 const (
-	InstanceTypeA1Medium        InstanceType = "a1.medium"
-	InstanceTypeA1Large         InstanceType = "a1.large"
-	InstanceTypeA1Xlarge        InstanceType = "a1.xlarge"
-	InstanceTypeA12xlarge       InstanceType = "a1.2xlarge"
-	InstanceTypeA14xlarge       InstanceType = "a1.4xlarge"
-	InstanceTypeA1Metal         InstanceType = "a1.metal"
-	InstanceTypeC1Medium        InstanceType = "c1.medium"
-	InstanceTypeC1Xlarge        InstanceType = "c1.xlarge"
-	InstanceTypeC3Large         InstanceType = "c3.large"
-	InstanceTypeC3Xlarge        InstanceType = "c3.xlarge"
-	InstanceTypeC32xlarge       InstanceType = "c3.2xlarge"
-	InstanceTypeC34xlarge       InstanceType = "c3.4xlarge"
-	InstanceTypeC38xlarge       InstanceType = "c3.8xlarge"
-	InstanceTypeC4Large         InstanceType = "c4.large"
-	InstanceTypeC4Xlarge        InstanceType = "c4.xlarge"
-	InstanceTypeC42xlarge       InstanceType = "c4.2xlarge"
-	InstanceTypeC44xlarge       InstanceType = "c4.4xlarge"
-	InstanceTypeC48xlarge       InstanceType = "c4.8xlarge"
-	InstanceTypeC5Large         InstanceType = "c5.large"
-	InstanceTypeC5Xlarge        InstanceType = "c5.xlarge"
-	InstanceTypeC52xlarge       InstanceType = "c5.2xlarge"
-	InstanceTypeC54xlarge       InstanceType = "c5.4xlarge"
-	InstanceTypeC59xlarge       InstanceType = "c5.9xlarge"
-	InstanceTypeC512xlarge      InstanceType = "c5.12xlarge"
-	InstanceTypeC518xlarge      InstanceType = "c5.18xlarge"
-	InstanceTypeC524xlarge      InstanceType = "c5.24xlarge"
-	InstanceTypeC5Metal         InstanceType = "c5.metal"
-	InstanceTypeC5aLarge        InstanceType = "c5a.large"
-	InstanceTypeC5aXlarge       InstanceType = "c5a.xlarge"
-	InstanceTypeC5a2xlarge      InstanceType = "c5a.2xlarge"
-	InstanceTypeC5a4xlarge      InstanceType = "c5a.4xlarge"
-	InstanceTypeC5a8xlarge      InstanceType = "c5a.8xlarge"
-	InstanceTypeC5a12xlarge     InstanceType = "c5a.12xlarge"
-	InstanceTypeC5a16xlarge     InstanceType = "c5a.16xlarge"
-	InstanceTypeC5a24xlarge     InstanceType = "c5a.24xlarge"
-	InstanceTypeC5adLarge       InstanceType = "c5ad.large"
-	InstanceTypeC5adXlarge      InstanceType = "c5ad.xlarge"
-	InstanceTypeC5ad2xlarge     InstanceType = "c5ad.2xlarge"
-	InstanceTypeC5ad4xlarge     InstanceType = "c5ad.4xlarge"
-	InstanceTypeC5ad8xlarge     InstanceType = "c5ad.8xlarge"
-	InstanceTypeC5ad12xlarge    InstanceType = "c5ad.12xlarge"
-	InstanceTypeC5ad16xlarge    InstanceType = "c5ad.16xlarge"
-	InstanceTypeC5ad24xlarge    InstanceType = "c5ad.24xlarge"
-	InstanceTypeC5dLarge        InstanceType = "c5d.large"
-	InstanceTypeC5dXlarge       InstanceType = "c5d.xlarge"
-	InstanceTypeC5d2xlarge      InstanceType = "c5d.2xlarge"
-	InstanceTypeC5d4xlarge      InstanceType = "c5d.4xlarge"
-	InstanceTypeC5d9xlarge      InstanceType = "c5d.9xlarge"
-	InstanceTypeC5d12xlarge     InstanceType = "c5d.12xlarge"
-	InstanceTypeC5d18xlarge     InstanceType = "c5d.18xlarge"
-	InstanceTypeC5d24xlarge     InstanceType = "c5d.24xlarge"
-	InstanceTypeC5dMetal        InstanceType = "c5d.metal"
-	InstanceTypeC5nLarge        InstanceType = "c5n.large"
-	InstanceTypeC5nXlarge       InstanceType = "c5n.xlarge"
-	InstanceTypeC5n2xlarge      InstanceType = "c5n.2xlarge"
-	InstanceTypeC5n4xlarge      InstanceType = "c5n.4xlarge"
-	InstanceTypeC5n9xlarge      InstanceType = "c5n.9xlarge"
-	InstanceTypeC5n18xlarge     InstanceType = "c5n.18xlarge"
-	InstanceTypeC5nMetal        InstanceType = "c5n.metal"
-	InstanceTypeC6gMedium       InstanceType = "c6g.medium"
-	InstanceTypeC6gLarge        InstanceType = "c6g.large"
-	InstanceTypeC6gXlarge       InstanceType = "c6g.xlarge"
-	InstanceTypeC6g2xlarge      InstanceType = "c6g.2xlarge"
-	InstanceTypeC6g4xlarge      InstanceType = "c6g.4xlarge"
-	InstanceTypeC6g8xlarge      InstanceType = "c6g.8xlarge"
-	InstanceTypeC6g12xlarge     InstanceType = "c6g.12xlarge"
-	InstanceTypeC6g16xlarge     InstanceType = "c6g.16xlarge"
-	InstanceTypeC6gMetal        InstanceType = "c6g.metal"
-	InstanceTypeC6gdMedium      InstanceType = "c6gd.medium"
-	InstanceTypeC6gdLarge       InstanceType = "c6gd.large"
-	InstanceTypeC6gdXlarge      InstanceType = "c6gd.xlarge"
-	InstanceTypeC6gd2xlarge     InstanceType = "c6gd.2xlarge"
-	InstanceTypeC6gd4xlarge     InstanceType = "c6gd.4xlarge"
-	InstanceTypeC6gd8xlarge     InstanceType = "c6gd.8xlarge"
-	InstanceTypeC6gd12xlarge    InstanceType = "c6gd.12xlarge"
-	InstanceTypeC6gd16xlarge    InstanceType = "c6gd.16xlarge"
-	InstanceTypeC6gdMetal       InstanceType = "c6gd.metal"
-	InstanceTypeC6gnMedium      InstanceType = "c6gn.medium"
-	InstanceTypeC6gnLarge       InstanceType = "c6gn.large"
-	InstanceTypeC6gnXlarge      InstanceType = "c6gn.xlarge"
-	InstanceTypeC6gn2xlarge     InstanceType = "c6gn.2xlarge"
-	InstanceTypeC6gn4xlarge     InstanceType = "c6gn.4xlarge"
-	InstanceTypeC6gn8xlarge     InstanceType = "c6gn.8xlarge"
-	InstanceTypeC6gn12xlarge    InstanceType = "c6gn.12xlarge"
-	InstanceTypeC6gn16xlarge    InstanceType = "c6gn.16xlarge"
-	InstanceTypeC6iLarge        InstanceType = "c6i.large"
-	InstanceTypeC6iXlarge       InstanceType = "c6i.xlarge"
-	InstanceTypeC6i2xlarge      InstanceType = "c6i.2xlarge"
-	InstanceTypeC6i4xlarge      InstanceType = "c6i.4xlarge"
-	InstanceTypeC6i8xlarge      InstanceType = "c6i.8xlarge"
-	InstanceTypeC6i12xlarge     InstanceType = "c6i.12xlarge"
-	InstanceTypeC6i16xlarge     InstanceType = "c6i.16xlarge"
-	InstanceTypeC6i24xlarge     InstanceType = "c6i.24xlarge"
-	InstanceTypeC6i32xlarge     InstanceType = "c6i.32xlarge"
-	InstanceTypeC6iMetal        InstanceType = "c6i.metal"
-	InstanceTypeCc14xlarge      InstanceType = "cc1.4xlarge"
-	InstanceTypeCc28xlarge      InstanceType = "cc2.8xlarge"
-	InstanceTypeCg14xlarge      InstanceType = "cg1.4xlarge"
-	InstanceTypeCr18xlarge      InstanceType = "cr1.8xlarge"
-	InstanceTypeD2Xlarge        InstanceType = "d2.xlarge"
-	InstanceTypeD22xlarge       InstanceType = "d2.2xlarge"
-	InstanceTypeD24xlarge       InstanceType = "d2.4xlarge"
-	InstanceTypeD28xlarge       InstanceType = "d2.8xlarge"
-	InstanceTypeD3Xlarge        InstanceType = "d3.xlarge"
-	InstanceTypeD32xlarge       InstanceType = "d3.2xlarge"
-	InstanceTypeD34xlarge       InstanceType = "d3.4xlarge"
-	InstanceTypeD38xlarge       InstanceType = "d3.8xlarge"
-	InstanceTypeD3enXlarge      InstanceType = "d3en.xlarge"
-	InstanceTypeD3en2xlarge     InstanceType = "d3en.2xlarge"
-	InstanceTypeD3en4xlarge     InstanceType = "d3en.4xlarge"
-	InstanceTypeD3en6xlarge     InstanceType = "d3en.6xlarge"
-	InstanceTypeD3en8xlarge     InstanceType = "d3en.8xlarge"
-	InstanceTypeD3en12xlarge    InstanceType = "d3en.12xlarge"
-	InstanceTypeDl124xlarge     InstanceType = "dl1.24xlarge"
-	InstanceTypeF12xlarge       InstanceType = "f1.2xlarge"
-	InstanceTypeF14xlarge       InstanceType = "f1.4xlarge"
-	InstanceTypeF116xlarge      InstanceType = "f1.16xlarge"
-	InstanceTypeG22xlarge       InstanceType = "g2.2xlarge"
-	InstanceTypeG28xlarge       InstanceType = "g2.8xlarge"
-	InstanceTypeG34xlarge       InstanceType = "g3.4xlarge"
-	InstanceTypeG38xlarge       InstanceType = "g3.8xlarge"
-	InstanceTypeG316xlarge      InstanceType = "g3.16xlarge"
-	InstanceTypeG3sXlarge       InstanceType = "g3s.xlarge"
-	InstanceTypeG4adXlarge      InstanceType = "g4ad.xlarge"
-	InstanceTypeG4ad2xlarge     InstanceType = "g4ad.2xlarge"
-	InstanceTypeG4ad4xlarge     InstanceType = "g4ad.4xlarge"
-	InstanceTypeG4ad8xlarge     InstanceType = "g4ad.8xlarge"
-	InstanceTypeG4ad16xlarge    InstanceType = "g4ad.16xlarge"
-	InstanceTypeG4dnXlarge      InstanceType = "g4dn.xlarge"
-	InstanceTypeG4dn2xlarge     InstanceType = "g4dn.2xlarge"
-	InstanceTypeG4dn4xlarge     InstanceType = "g4dn.4xlarge"
-	InstanceTypeG4dn8xlarge     InstanceType = "g4dn.8xlarge"
-	InstanceTypeG4dn12xlarge    InstanceType = "g4dn.12xlarge"
-	InstanceTypeG4dn16xlarge    InstanceType = "g4dn.16xlarge"
-	InstanceTypeG4dnMetal       InstanceType = "g4dn.metal"
-	InstanceTypeG5Xlarge        InstanceType = "g5.xlarge"
-	InstanceTypeG52xlarge       InstanceType = "g5.2xlarge"
-	InstanceTypeG54xlarge       InstanceType = "g5.4xlarge"
-	InstanceTypeG58xlarge       InstanceType = "g5.8xlarge"
-	InstanceTypeG512xlarge      InstanceType = "g5.12xlarge"
-	InstanceTypeG516xlarge      InstanceType = "g5.16xlarge"
-	InstanceTypeG524xlarge      InstanceType = "g5.24xlarge"
-	InstanceTypeG548xlarge      InstanceType = "g5.48xlarge"
-	InstanceTypeG5gXlarge       InstanceType = "g5g.xlarge"
-	InstanceTypeG5g2xlarge      InstanceType = "g5g.2xlarge"
-	InstanceTypeG5g4xlarge      InstanceType = "g5g.4xlarge"
-	InstanceTypeG5g8xlarge      InstanceType = "g5g.8xlarge"
-	InstanceTypeG5g16xlarge     InstanceType = "g5g.16xlarge"
-	InstanceTypeG5gMetal        InstanceType = "g5g.metal"
-	InstanceTypeHi14xlarge      InstanceType = "hi1.4xlarge"
-	InstanceTypeHpc6a48xlarge   InstanceType = "hpc6a.48xlarge"
-	InstanceTypeHs18xlarge      InstanceType = "hs1.8xlarge"
-	InstanceTypeH12xlarge       InstanceType = "h1.2xlarge"
-	InstanceTypeH14xlarge       InstanceType = "h1.4xlarge"
-	InstanceTypeH18xlarge       InstanceType = "h1.8xlarge"
-	InstanceTypeH116xlarge      InstanceType = "h1.16xlarge"
-	InstanceTypeI2Xlarge        InstanceType = "i2.xlarge"
-	InstanceTypeI22xlarge       InstanceType = "i2.2xlarge"
-	InstanceTypeI24xlarge       InstanceType = "i2.4xlarge"
-	InstanceTypeI28xlarge       InstanceType = "i2.8xlarge"
-	InstanceTypeI3Large         InstanceType = "i3.large"
-	InstanceTypeI3Xlarge        InstanceType = "i3.xlarge"
-	InstanceTypeI32xlarge       InstanceType = "i3.2xlarge"
-	InstanceTypeI34xlarge       InstanceType = "i3.4xlarge"
-	InstanceTypeI38xlarge       InstanceType = "i3.8xlarge"
-	InstanceTypeI316xlarge      InstanceType = "i3.16xlarge"
-	InstanceTypeI3Metal         InstanceType = "i3.metal"
-	InstanceTypeI3enLarge       InstanceType = "i3en.large"
-	InstanceTypeI3enXlarge      InstanceType = "i3en.xlarge"
-	InstanceTypeI3en2xlarge     InstanceType = "i3en.2xlarge"
-	InstanceTypeI3en3xlarge     InstanceType = "i3en.3xlarge"
-	InstanceTypeI3en6xlarge     InstanceType = "i3en.6xlarge"
-	InstanceTypeI3en12xlarge    InstanceType = "i3en.12xlarge"
-	InstanceTypeI3en24xlarge    InstanceType = "i3en.24xlarge"
-	InstanceTypeI3enMetal       InstanceType = "i3en.metal"
-	InstanceTypeIm4gnLarge      InstanceType = "im4gn.large"
-	InstanceTypeIm4gnXlarge     InstanceType = "im4gn.xlarge"
-	InstanceTypeIm4gn2xlarge    InstanceType = "im4gn.2xlarge"
-	InstanceTypeIm4gn4xlarge    InstanceType = "im4gn.4xlarge"
-	InstanceTypeIm4gn8xlarge    InstanceType = "im4gn.8xlarge"
-	InstanceTypeIm4gn16xlarge   InstanceType = "im4gn.16xlarge"
-	InstanceTypeInf1Xlarge      InstanceType = "inf1.xlarge"
-	InstanceTypeInf12xlarge     InstanceType = "inf1.2xlarge"
-	InstanceTypeInf16xlarge     InstanceType = "inf1.6xlarge"
-	InstanceTypeInf124xlarge    InstanceType = "inf1.24xlarge"
-	InstanceTypeIs4genMedium    InstanceType = "is4gen.medium"
-	InstanceTypeIs4genLarge     InstanceType = "is4gen.large"
-	InstanceTypeIs4genXlarge    InstanceType = "is4gen.xlarge"
-	InstanceTypeIs4gen2xlarge   InstanceType = "is4gen.2xlarge"
-	InstanceTypeIs4gen4xlarge   InstanceType = "is4gen.4xlarge"
-	InstanceTypeIs4gen8xlarge   InstanceType = "is4gen.8xlarge"
-	InstanceTypeM1Small         InstanceType = "m1.small"
-	InstanceTypeM1Medium        InstanceType = "m1.medium"
-	InstanceTypeM1Large         InstanceType = "m1.large"
-	InstanceTypeM1Xlarge        InstanceType = "m1.xlarge"
-	InstanceTypeM2Xlarge        InstanceType = "m2.xlarge"
-	InstanceTypeM22xlarge       InstanceType = "m2.2xlarge"
-	InstanceTypeM24xlarge       InstanceType = "m2.4xlarge"
-	InstanceTypeM3Medium        InstanceType = "m3.medium"
-	InstanceTypeM3Large         InstanceType = "m3.large"
-	InstanceTypeM3Xlarge        InstanceType = "m3.xlarge"
-	InstanceTypeM32xlarge       InstanceType = "m3.2xlarge"
-	InstanceTypeM4Large         InstanceType = "m4.large"
-	InstanceTypeM4Xlarge        InstanceType = "m4.xlarge"
-	InstanceTypeM42xlarge       InstanceType = "m4.2xlarge"
-	InstanceTypeM44xlarge       InstanceType = "m4.4xlarge"
-	InstanceTypeM410xlarge      InstanceType = "m4.10xlarge"
-	InstanceTypeM416xlarge      InstanceType = "m4.16xlarge"
-	InstanceTypeM5Large         InstanceType = "m5.large"
-	InstanceTypeM5Xlarge        InstanceType = "m5.xlarge"
-	InstanceTypeM52xlarge       InstanceType = "m5.2xlarge"
-	InstanceTypeM54xlarge       InstanceType = "m5.4xlarge"
-	InstanceTypeM58xlarge       InstanceType = "m5.8xlarge"
-	InstanceTypeM512xlarge      InstanceType = "m5.12xlarge"
-	InstanceTypeM516xlarge      InstanceType = "m5.16xlarge"
-	InstanceTypeM524xlarge      InstanceType = "m5.24xlarge"
-	InstanceTypeM5Metal         InstanceType = "m5.metal"
-	InstanceTypeM5aLarge        InstanceType = "m5a.large"
-	InstanceTypeM5aXlarge       InstanceType = "m5a.xlarge"
-	InstanceTypeM5a2xlarge      InstanceType = "m5a.2xlarge"
-	InstanceTypeM5a4xlarge      InstanceType = "m5a.4xlarge"
-	InstanceTypeM5a8xlarge      InstanceType = "m5a.8xlarge"
-	InstanceTypeM5a12xlarge     InstanceType = "m5a.12xlarge"
-	InstanceTypeM5a16xlarge     InstanceType = "m5a.16xlarge"
-	InstanceTypeM5a24xlarge     InstanceType = "m5a.24xlarge"
-	InstanceTypeM5adLarge       InstanceType = "m5ad.large"
-	InstanceTypeM5adXlarge      InstanceType = "m5ad.xlarge"
-	InstanceTypeM5ad2xlarge     InstanceType = "m5ad.2xlarge"
-	InstanceTypeM5ad4xlarge     InstanceType = "m5ad.4xlarge"
-	InstanceTypeM5ad8xlarge     InstanceType = "m5ad.8xlarge"
-	InstanceTypeM5ad12xlarge    InstanceType = "m5ad.12xlarge"
-	InstanceTypeM5ad16xlarge    InstanceType = "m5ad.16xlarge"
-	InstanceTypeM5ad24xlarge    InstanceType = "m5ad.24xlarge"
-	InstanceTypeM5dLarge        InstanceType = "m5d.large"
-	InstanceTypeM5dXlarge       InstanceType = "m5d.xlarge"
-	InstanceTypeM5d2xlarge      InstanceType = "m5d.2xlarge"
-	InstanceTypeM5d4xlarge      InstanceType = "m5d.4xlarge"
-	InstanceTypeM5d8xlarge      InstanceType = "m5d.8xlarge"
-	InstanceTypeM5d12xlarge     InstanceType = "m5d.12xlarge"
-	InstanceTypeM5d16xlarge     InstanceType = "m5d.16xlarge"
-	InstanceTypeM5d24xlarge     InstanceType = "m5d.24xlarge"
-	InstanceTypeM5dMetal        InstanceType = "m5d.metal"
-	InstanceTypeM5dnLarge       InstanceType = "m5dn.large"
-	InstanceTypeM5dnXlarge      InstanceType = "m5dn.xlarge"
-	InstanceTypeM5dn2xlarge     InstanceType = "m5dn.2xlarge"
-	InstanceTypeM5dn4xlarge     InstanceType = "m5dn.4xlarge"
-	InstanceTypeM5dn8xlarge     InstanceType = "m5dn.8xlarge"
-	InstanceTypeM5dn12xlarge    InstanceType = "m5dn.12xlarge"
-	InstanceTypeM5dn16xlarge    InstanceType = "m5dn.16xlarge"
-	InstanceTypeM5dn24xlarge    InstanceType = "m5dn.24xlarge"
-	InstanceTypeM5dnMetal       InstanceType = "m5dn.metal"
-	InstanceTypeM5nLarge        InstanceType = "m5n.large"
-	InstanceTypeM5nXlarge       InstanceType = "m5n.xlarge"
-	InstanceTypeM5n2xlarge      InstanceType = "m5n.2xlarge"
-	InstanceTypeM5n4xlarge      InstanceType = "m5n.4xlarge"
-	InstanceTypeM5n8xlarge      InstanceType = "m5n.8xlarge"
-	InstanceTypeM5n12xlarge     InstanceType = "m5n.12xlarge"
-	InstanceTypeM5n16xlarge     InstanceType = "m5n.16xlarge"
-	InstanceTypeM5n24xlarge     InstanceType = "m5n.24xlarge"
-	InstanceTypeM5nMetal        InstanceType = "m5n.metal"
-	InstanceTypeM5znLarge       InstanceType = "m5zn.large"
-	InstanceTypeM5znXlarge      InstanceType = "m5zn.xlarge"
-	InstanceTypeM5zn2xlarge     InstanceType = "m5zn.2xlarge"
-	InstanceTypeM5zn3xlarge     InstanceType = "m5zn.3xlarge"
-	InstanceTypeM5zn6xlarge     InstanceType = "m5zn.6xlarge"
-	InstanceTypeM5zn12xlarge    InstanceType = "m5zn.12xlarge"
-	InstanceTypeM5znMetal       InstanceType = "m5zn.metal"
-	InstanceTypeM6aLarge        InstanceType = "m6a.large"
-	InstanceTypeM6aXlarge       InstanceType = "m6a.xlarge"
-	InstanceTypeM6a2xlarge      InstanceType = "m6a.2xlarge"
-	InstanceTypeM6a4xlarge      InstanceType = "m6a.4xlarge"
-	InstanceTypeM6a8xlarge      InstanceType = "m6a.8xlarge"
-	InstanceTypeM6a12xlarge     InstanceType = "m6a.12xlarge"
-	InstanceTypeM6a16xlarge     InstanceType = "m6a.16xlarge"
-	InstanceTypeM6a24xlarge     InstanceType = "m6a.24xlarge"
-	InstanceTypeM6a32xlarge     InstanceType = "m6a.32xlarge"
-	InstanceTypeM6a48xlarge     InstanceType = "m6a.48xlarge"
-	InstanceTypeM6gMetal        InstanceType = "m6g.metal"
-	InstanceTypeM6gMedium       InstanceType = "m6g.medium"
-	InstanceTypeM6gLarge        InstanceType = "m6g.large"
-	InstanceTypeM6gXlarge       InstanceType = "m6g.xlarge"
-	InstanceTypeM6g2xlarge      InstanceType = "m6g.2xlarge"
-	InstanceTypeM6g4xlarge      InstanceType = "m6g.4xlarge"
-	InstanceTypeM6g8xlarge      InstanceType = "m6g.8xlarge"
-	InstanceTypeM6g12xlarge     InstanceType = "m6g.12xlarge"
-	InstanceTypeM6g16xlarge     InstanceType = "m6g.16xlarge"
-	InstanceTypeM6gdMetal       InstanceType = "m6gd.metal"
-	InstanceTypeM6gdMedium      InstanceType = "m6gd.medium"
-	InstanceTypeM6gdLarge       InstanceType = "m6gd.large"
-	InstanceTypeM6gdXlarge      InstanceType = "m6gd.xlarge"
-	InstanceTypeM6gd2xlarge     InstanceType = "m6gd.2xlarge"
-	InstanceTypeM6gd4xlarge     InstanceType = "m6gd.4xlarge"
-	InstanceTypeM6gd8xlarge     InstanceType = "m6gd.8xlarge"
-	InstanceTypeM6gd12xlarge    InstanceType = "m6gd.12xlarge"
-	InstanceTypeM6gd16xlarge    InstanceType = "m6gd.16xlarge"
-	InstanceTypeM6iLarge        InstanceType = "m6i.large"
-	InstanceTypeM6iXlarge       InstanceType = "m6i.xlarge"
-	InstanceTypeM6i2xlarge      InstanceType = "m6i.2xlarge"
-	InstanceTypeM6i4xlarge      InstanceType = "m6i.4xlarge"
-	InstanceTypeM6i8xlarge      InstanceType = "m6i.8xlarge"
-	InstanceTypeM6i12xlarge     InstanceType = "m6i.12xlarge"
-	InstanceTypeM6i16xlarge     InstanceType = "m6i.16xlarge"
-	InstanceTypeM6i24xlarge     InstanceType = "m6i.24xlarge"
-	InstanceTypeM6i32xlarge     InstanceType = "m6i.32xlarge"
-	InstanceTypeM6iMetal        InstanceType = "m6i.metal"
-	InstanceTypeMac1Metal       InstanceType = "mac1.metal"
-	InstanceTypeP2Xlarge        InstanceType = "p2.xlarge"
-	InstanceTypeP28xlarge       InstanceType = "p2.8xlarge"
-	InstanceTypeP216xlarge      InstanceType = "p2.16xlarge"
-	InstanceTypeP32xlarge       InstanceType = "p3.2xlarge"
-	InstanceTypeP38xlarge       InstanceType = "p3.8xlarge"
-	InstanceTypeP316xlarge      InstanceType = "p3.16xlarge"
-	InstanceTypeP3dn24xlarge    InstanceType = "p3dn.24xlarge"
-	InstanceTypeP4d24xlarge     InstanceType = "p4d.24xlarge"
-	InstanceTypeR3Large         InstanceType = "r3.large"
-	InstanceTypeR3Xlarge        InstanceType = "r3.xlarge"
-	InstanceTypeR32xlarge       InstanceType = "r3.2xlarge"
-	InstanceTypeR34xlarge       InstanceType = "r3.4xlarge"
-	InstanceTypeR38xlarge       InstanceType = "r3.8xlarge"
-	InstanceTypeR4Large         InstanceType = "r4.large"
-	InstanceTypeR4Xlarge        InstanceType = "r4.xlarge"
-	InstanceTypeR42xlarge       InstanceType = "r4.2xlarge"
-	InstanceTypeR44xlarge       InstanceType = "r4.4xlarge"
-	InstanceTypeR48xlarge       InstanceType = "r4.8xlarge"
-	InstanceTypeR416xlarge      InstanceType = "r4.16xlarge"
-	InstanceTypeR5Large         InstanceType = "r5.large"
-	InstanceTypeR5Xlarge        InstanceType = "r5.xlarge"
-	InstanceTypeR52xlarge       InstanceType = "r5.2xlarge"
-	InstanceTypeR54xlarge       InstanceType = "r5.4xlarge"
-	InstanceTypeR58xlarge       InstanceType = "r5.8xlarge"
-	InstanceTypeR512xlarge      InstanceType = "r5.12xlarge"
-	InstanceTypeR516xlarge      InstanceType = "r5.16xlarge"
-	InstanceTypeR524xlarge      InstanceType = "r5.24xlarge"
-	InstanceTypeR5Metal         InstanceType = "r5.metal"
-	InstanceTypeR5aLarge        InstanceType = "r5a.large"
-	InstanceTypeR5aXlarge       InstanceType = "r5a.xlarge"
-	InstanceTypeR5a2xlarge      InstanceType = "r5a.2xlarge"
-	InstanceTypeR5a4xlarge      InstanceType = "r5a.4xlarge"
-	InstanceTypeR5a8xlarge      InstanceType = "r5a.8xlarge"
-	InstanceTypeR5a12xlarge     InstanceType = "r5a.12xlarge"
-	InstanceTypeR5a16xlarge     InstanceType = "r5a.16xlarge"
-	InstanceTypeR5a24xlarge     InstanceType = "r5a.24xlarge"
-	InstanceTypeR5adLarge       InstanceType = "r5ad.large"
-	InstanceTypeR5adXlarge      InstanceType = "r5ad.xlarge"
-	InstanceTypeR5ad2xlarge     InstanceType = "r5ad.2xlarge"
-	InstanceTypeR5ad4xlarge     InstanceType = "r5ad.4xlarge"
-	InstanceTypeR5ad8xlarge     InstanceType = "r5ad.8xlarge"
-	InstanceTypeR5ad12xlarge    InstanceType = "r5ad.12xlarge"
-	InstanceTypeR5ad16xlarge    InstanceType = "r5ad.16xlarge"
-	InstanceTypeR5ad24xlarge    InstanceType = "r5ad.24xlarge"
-	InstanceTypeR5bLarge        InstanceType = "r5b.large"
-	InstanceTypeR5bXlarge       InstanceType = "r5b.xlarge"
-	InstanceTypeR5b2xlarge      InstanceType = "r5b.2xlarge"
-	InstanceTypeR5b4xlarge      InstanceType = "r5b.4xlarge"
-	InstanceTypeR5b8xlarge      InstanceType = "r5b.8xlarge"
-	InstanceTypeR5b12xlarge     InstanceType = "r5b.12xlarge"
-	InstanceTypeR5b16xlarge     InstanceType = "r5b.16xlarge"
-	InstanceTypeR5b24xlarge     InstanceType = "r5b.24xlarge"
-	InstanceTypeR5bMetal        InstanceType = "r5b.metal"
-	InstanceTypeR5dLarge        InstanceType = "r5d.large"
-	InstanceTypeR5dXlarge       InstanceType = "r5d.xlarge"
-	InstanceTypeR5d2xlarge      InstanceType = "r5d.2xlarge"
-	InstanceTypeR5d4xlarge      InstanceType = "r5d.4xlarge"
-	InstanceTypeR5d8xlarge      InstanceType = "r5d.8xlarge"
-	InstanceTypeR5d12xlarge     InstanceType = "r5d.12xlarge"
-	InstanceTypeR5d16xlarge     InstanceType = "r5d.16xlarge"
-	InstanceTypeR5d24xlarge     InstanceType = "r5d.24xlarge"
-	InstanceTypeR5dMetal        InstanceType = "r5d.metal"
-	InstanceTypeR5dnLarge       InstanceType = "r5dn.large"
-	InstanceTypeR5dnXlarge      InstanceType = "r5dn.xlarge"
-	InstanceTypeR5dn2xlarge     InstanceType = "r5dn.2xlarge"
-	InstanceTypeR5dn4xlarge     InstanceType = "r5dn.4xlarge"
-	InstanceTypeR5dn8xlarge     InstanceType = "r5dn.8xlarge"
-	InstanceTypeR5dn12xlarge    InstanceType = "r5dn.12xlarge"
-	InstanceTypeR5dn16xlarge    InstanceType = "r5dn.16xlarge"
-	InstanceTypeR5dn24xlarge    InstanceType = "r5dn.24xlarge"
-	InstanceTypeR5dnMetal       InstanceType = "r5dn.metal"
-	InstanceTypeR5nLarge        InstanceType = "r5n.large"
-	InstanceTypeR5nXlarge       InstanceType = "r5n.xlarge"
-	InstanceTypeR5n2xlarge      InstanceType = "r5n.2xlarge"
-	InstanceTypeR5n4xlarge      InstanceType = "r5n.4xlarge"
-	InstanceTypeR5n8xlarge      InstanceType = "r5n.8xlarge"
-	InstanceTypeR5n12xlarge     InstanceType = "r5n.12xlarge"
-	InstanceTypeR5n16xlarge     InstanceType = "r5n.16xlarge"
-	InstanceTypeR5n24xlarge     InstanceType = "r5n.24xlarge"
-	InstanceTypeR5nMetal        InstanceType = "r5n.metal"
-	InstanceTypeR6gMedium       InstanceType = "r6g.medium"
-	InstanceTypeR6gLarge        InstanceType = "r6g.large"
-	InstanceTypeR6gXlarge       InstanceType = "r6g.xlarge"
-	InstanceTypeR6g2xlarge      InstanceType = "r6g.2xlarge"
-	InstanceTypeR6g4xlarge      InstanceType = "r6g.4xlarge"
-	InstanceTypeR6g8xlarge      InstanceType = "r6g.8xlarge"
-	InstanceTypeR6g12xlarge     InstanceType = "r6g.12xlarge"
-	InstanceTypeR6g16xlarge     InstanceType = "r6g.16xlarge"
-	InstanceTypeR6gMetal        InstanceType = "r6g.metal"
-	InstanceTypeR6gdMedium      InstanceType = "r6gd.medium"
-	InstanceTypeR6gdLarge       InstanceType = "r6gd.large"
-	InstanceTypeR6gdXlarge      InstanceType = "r6gd.xlarge"
-	InstanceTypeR6gd2xlarge     InstanceType = "r6gd.2xlarge"
-	InstanceTypeR6gd4xlarge     InstanceType = "r6gd.4xlarge"
-	InstanceTypeR6gd8xlarge     InstanceType = "r6gd.8xlarge"
-	InstanceTypeR6gd12xlarge    InstanceType = "r6gd.12xlarge"
-	InstanceTypeR6gd16xlarge    InstanceType = "r6gd.16xlarge"
-	InstanceTypeR6gdMetal       InstanceType = "r6gd.metal"
-	InstanceTypeR6iLarge        InstanceType = "r6i.large"
-	InstanceTypeR6iXlarge       InstanceType = "r6i.xlarge"
-	InstanceTypeR6i2xlarge      InstanceType = "r6i.2xlarge"
-	InstanceTypeR6i4xlarge      InstanceType = "r6i.4xlarge"
-	InstanceTypeR6i8xlarge      InstanceType = "r6i.8xlarge"
-	InstanceTypeR6i12xlarge     InstanceType = "r6i.12xlarge"
-	InstanceTypeR6i16xlarge     InstanceType = "r6i.16xlarge"
-	InstanceTypeR6i24xlarge     InstanceType = "r6i.24xlarge"
-	InstanceTypeR6i32xlarge     InstanceType = "r6i.32xlarge"
-	InstanceTypeR6iMetal        InstanceType = "r6i.metal"
-	InstanceTypeT1Micro         InstanceType = "t1.micro"
-	InstanceTypeT2Nano          InstanceType = "t2.nano"
-	InstanceTypeT2Micro         InstanceType = "t2.micro"
-	InstanceTypeT2Small         InstanceType = "t2.small"
-	InstanceTypeT2Medium        InstanceType = "t2.medium"
-	InstanceTypeT2Large         InstanceType = "t2.large"
-	InstanceTypeT2Xlarge        InstanceType = "t2.xlarge"
-	InstanceTypeT22xlarge       InstanceType = "t2.2xlarge"
-	InstanceTypeT3Nano          InstanceType = "t3.nano"
-	InstanceTypeT3Micro         InstanceType = "t3.micro"
-	InstanceTypeT3Small         InstanceType = "t3.small"
-	InstanceTypeT3Medium        InstanceType = "t3.medium"
-	InstanceTypeT3Large         InstanceType = "t3.large"
-	InstanceTypeT3Xlarge        InstanceType = "t3.xlarge"
-	InstanceTypeT32xlarge       InstanceType = "t3.2xlarge"
-	InstanceTypeT3aNano         InstanceType = "t3a.nano"
-	InstanceTypeT3aMicro        InstanceType = "t3a.micro"
-	InstanceTypeT3aSmall        InstanceType = "t3a.small"
-	InstanceTypeT3aMedium       InstanceType = "t3a.medium"
-	InstanceTypeT3aLarge        InstanceType = "t3a.large"
-	InstanceTypeT3aXlarge       InstanceType = "t3a.xlarge"
-	InstanceTypeT3a2xlarge      InstanceType = "t3a.2xlarge"
-	InstanceTypeT4gNano         InstanceType = "t4g.nano"
-	InstanceTypeT4gMicro        InstanceType = "t4g.micro"
-	InstanceTypeT4gSmall        InstanceType = "t4g.small"
-	InstanceTypeT4gMedium       InstanceType = "t4g.medium"
-	InstanceTypeT4gLarge        InstanceType = "t4g.large"
-	InstanceTypeT4gXlarge       InstanceType = "t4g.xlarge"
-	InstanceTypeT4g2xlarge      InstanceType = "t4g.2xlarge"
-	InstanceTypeU6tb156xlarge   InstanceType = "u-6tb1.56xlarge"
-	InstanceTypeU6tb1112xlarge  InstanceType = "u-6tb1.112xlarge"
-	InstanceTypeU9tb1112xlarge  InstanceType = "u-9tb1.112xlarge"
-	InstanceTypeU12tb1112xlarge InstanceType = "u-12tb1.112xlarge"
-	InstanceTypeU6tb1Metal      InstanceType = "u-6tb1.metal"
-	InstanceTypeU9tb1Metal      InstanceType = "u-9tb1.metal"
-	InstanceTypeU12tb1Metal     InstanceType = "u-12tb1.metal"
-	InstanceTypeU18tb1Metal     InstanceType = "u-18tb1.metal"
-	InstanceTypeU24tb1Metal     InstanceType = "u-24tb1.metal"
-	InstanceTypeVt13xlarge      InstanceType = "vt1.3xlarge"
-	InstanceTypeVt16xlarge      InstanceType = "vt1.6xlarge"
-	InstanceTypeVt124xlarge     InstanceType = "vt1.24xlarge"
-	InstanceTypeX116xlarge      InstanceType = "x1.16xlarge"
-	InstanceTypeX132xlarge      InstanceType = "x1.32xlarge"
-	InstanceTypeX1eXlarge       InstanceType = "x1e.xlarge"
-	InstanceTypeX1e2xlarge      InstanceType = "x1e.2xlarge"
-	InstanceTypeX1e4xlarge      InstanceType = "x1e.4xlarge"
-	InstanceTypeX1e8xlarge      InstanceType = "x1e.8xlarge"
-	InstanceTypeX1e16xlarge     InstanceType = "x1e.16xlarge"
-	InstanceTypeX1e32xlarge     InstanceType = "x1e.32xlarge"
-	InstanceTypeX2iezn2xlarge   InstanceType = "x2iezn.2xlarge"
-	InstanceTypeX2iezn4xlarge   InstanceType = "x2iezn.4xlarge"
-	InstanceTypeX2iezn6xlarge   InstanceType = "x2iezn.6xlarge"
-	InstanceTypeX2iezn8xlarge   InstanceType = "x2iezn.8xlarge"
-	InstanceTypeX2iezn12xlarge  InstanceType = "x2iezn.12xlarge"
-	InstanceTypeX2ieznMetal     InstanceType = "x2iezn.metal"
-	InstanceTypeX2gdMedium      InstanceType = "x2gd.medium"
-	InstanceTypeX2gdLarge       InstanceType = "x2gd.large"
-	InstanceTypeX2gdXlarge      InstanceType = "x2gd.xlarge"
-	InstanceTypeX2gd2xlarge     InstanceType = "x2gd.2xlarge"
-	InstanceTypeX2gd4xlarge     InstanceType = "x2gd.4xlarge"
-	InstanceTypeX2gd8xlarge     InstanceType = "x2gd.8xlarge"
-	InstanceTypeX2gd12xlarge    InstanceType = "x2gd.12xlarge"
-	InstanceTypeX2gd16xlarge    InstanceType = "x2gd.16xlarge"
-	InstanceTypeX2gdMetal       InstanceType = "x2gd.metal"
-	InstanceTypeZ1dLarge        InstanceType = "z1d.large"
-	InstanceTypeZ1dXlarge       InstanceType = "z1d.xlarge"
-	InstanceTypeZ1d2xlarge      InstanceType = "z1d.2xlarge"
-	InstanceTypeZ1d3xlarge      InstanceType = "z1d.3xlarge"
-	InstanceTypeZ1d6xlarge      InstanceType = "z1d.6xlarge"
-	InstanceTypeZ1d12xlarge     InstanceType = "z1d.12xlarge"
-	InstanceTypeZ1dMetal        InstanceType = "z1d.metal"
-	InstanceTypeX2idn16xlarge   InstanceType = "x2idn.16xlarge"
-	InstanceTypeX2idn24xlarge   InstanceType = "x2idn.24xlarge"
-	InstanceTypeX2idn32xlarge   InstanceType = "x2idn.32xlarge"
-	InstanceTypeX2iednXlarge    InstanceType = "x2iedn.xlarge"
-	InstanceTypeX2iedn2xlarge   InstanceType = "x2iedn.2xlarge"
-	InstanceTypeX2iedn4xlarge   InstanceType = "x2iedn.4xlarge"
-	InstanceTypeX2iedn8xlarge   InstanceType = "x2iedn.8xlarge"
-	InstanceTypeX2iedn16xlarge  InstanceType = "x2iedn.16xlarge"
-	InstanceTypeX2iedn24xlarge  InstanceType = "x2iedn.24xlarge"
-	InstanceTypeX2iedn32xlarge  InstanceType = "x2iedn.32xlarge"
-	InstanceTypeC6aLarge        InstanceType = "c6a.large"
-	InstanceTypeC6aXlarge       InstanceType = "c6a.xlarge"
-	InstanceTypeC6a2xlarge      InstanceType = "c6a.2xlarge"
-	InstanceTypeC6a4xlarge      InstanceType = "c6a.4xlarge"
-	InstanceTypeC6a8xlarge      InstanceType = "c6a.8xlarge"
-	InstanceTypeC6a12xlarge     InstanceType = "c6a.12xlarge"
-	InstanceTypeC6a16xlarge     InstanceType = "c6a.16xlarge"
-	InstanceTypeC6a24xlarge     InstanceType = "c6a.24xlarge"
-	InstanceTypeC6a32xlarge     InstanceType = "c6a.32xlarge"
-	InstanceTypeC6a48xlarge     InstanceType = "c6a.48xlarge"
-	InstanceTypeC6aMetal        InstanceType = "c6a.metal"
-	InstanceTypeM6aMetal        InstanceType = "m6a.metal"
-	InstanceTypeI4iLarge        InstanceType = "i4i.large"
-	InstanceTypeI4iXlarge       InstanceType = "i4i.xlarge"
-	InstanceTypeI4i2xlarge      InstanceType = "i4i.2xlarge"
-	InstanceTypeI4i4xlarge      InstanceType = "i4i.4xlarge"
-	InstanceTypeI4i8xlarge      InstanceType = "i4i.8xlarge"
-	InstanceTypeI4i16xlarge     InstanceType = "i4i.16xlarge"
-	InstanceTypeI4i32xlarge     InstanceType = "i4i.32xlarge"
-	InstanceTypeI4iMetal        InstanceType = "i4i.metal"
-	InstanceTypeX2idnMetal      InstanceType = "x2idn.metal"
-	InstanceTypeX2iednMetal     InstanceType = "x2iedn.metal"
-	InstanceTypeC7gMedium       InstanceType = "c7g.medium"
-	InstanceTypeC7gLarge        InstanceType = "c7g.large"
-	InstanceTypeC7gXlarge       InstanceType = "c7g.xlarge"
-	InstanceTypeC7g2xlarge      InstanceType = "c7g.2xlarge"
-	InstanceTypeC7g4xlarge      InstanceType = "c7g.4xlarge"
-	InstanceTypeC7g8xlarge      InstanceType = "c7g.8xlarge"
-	InstanceTypeC7g12xlarge     InstanceType = "c7g.12xlarge"
-	InstanceTypeC7g16xlarge     InstanceType = "c7g.16xlarge"
-	InstanceTypeMac2Metal       InstanceType = "mac2.metal"
-	InstanceTypeC6idLarge       InstanceType = "c6id.large"
-	InstanceTypeC6idXlarge      InstanceType = "c6id.xlarge"
-	InstanceTypeC6id2xlarge     InstanceType = "c6id.2xlarge"
-	InstanceTypeC6id4xlarge     InstanceType = "c6id.4xlarge"
-	InstanceTypeC6id8xlarge     InstanceType = "c6id.8xlarge"
-	InstanceTypeC6id12xlarge    InstanceType = "c6id.12xlarge"
-	InstanceTypeC6id16xlarge    InstanceType = "c6id.16xlarge"
-	InstanceTypeC6id24xlarge    InstanceType = "c6id.24xlarge"
-	InstanceTypeC6id32xlarge    InstanceType = "c6id.32xlarge"
-	InstanceTypeC6idMetal       InstanceType = "c6id.metal"
-	InstanceTypeM6idLarge       InstanceType = "m6id.large"
-	InstanceTypeM6idXlarge      InstanceType = "m6id.xlarge"
-	InstanceTypeM6id2xlarge     InstanceType = "m6id.2xlarge"
-	InstanceTypeM6id4xlarge     InstanceType = "m6id.4xlarge"
-	InstanceTypeM6id8xlarge     InstanceType = "m6id.8xlarge"
-	InstanceTypeM6id12xlarge    InstanceType = "m6id.12xlarge"
-	InstanceTypeM6id16xlarge    InstanceType = "m6id.16xlarge"
-	InstanceTypeM6id24xlarge    InstanceType = "m6id.24xlarge"
-	InstanceTypeM6id32xlarge    InstanceType = "m6id.32xlarge"
-	InstanceTypeM6idMetal       InstanceType = "m6id.metal"
-	InstanceTypeR6idLarge       InstanceType = "r6id.large"
-	InstanceTypeR6idXlarge      InstanceType = "r6id.xlarge"
-	InstanceTypeR6id2xlarge     InstanceType = "r6id.2xlarge"
-	InstanceTypeR6id4xlarge     InstanceType = "r6id.4xlarge"
-	InstanceTypeR6id8xlarge     InstanceType = "r6id.8xlarge"
-	InstanceTypeR6id12xlarge    InstanceType = "r6id.12xlarge"
-	InstanceTypeR6id16xlarge    InstanceType = "r6id.16xlarge"
-	InstanceTypeR6id24xlarge    InstanceType = "r6id.24xlarge"
-	InstanceTypeR6id32xlarge    InstanceType = "r6id.32xlarge"
-	InstanceTypeR6idMetal       InstanceType = "r6id.metal"
-	InstanceTypeR6aLarge        InstanceType = "r6a.large"
-	InstanceTypeR6aXlarge       InstanceType = "r6a.xlarge"
-	InstanceTypeR6a2xlarge      InstanceType = "r6a.2xlarge"
-	InstanceTypeR6a4xlarge      InstanceType = "r6a.4xlarge"
-	InstanceTypeR6a8xlarge      InstanceType = "r6a.8xlarge"
-	InstanceTypeR6a12xlarge     InstanceType = "r6a.12xlarge"
-	InstanceTypeR6a16xlarge     InstanceType = "r6a.16xlarge"
-	InstanceTypeR6a24xlarge     InstanceType = "r6a.24xlarge"
-	InstanceTypeR6a32xlarge     InstanceType = "r6a.32xlarge"
-	InstanceTypeR6a48xlarge     InstanceType = "r6a.48xlarge"
-	InstanceTypeR6aMetal        InstanceType = "r6a.metal"
-	InstanceTypeP4de24xlarge    InstanceType = "p4de.24xlarge"
-	InstanceTypeU3tb156xlarge   InstanceType = "u-3tb1.56xlarge"
-	InstanceTypeU18tb1112xlarge InstanceType = "u-18tb1.112xlarge"
-	InstanceTypeU24tb1112xlarge InstanceType = "u-24tb1.112xlarge"
-	InstanceTypeTrn12xlarge     InstanceType = "trn1.2xlarge"
-	InstanceTypeTrn132xlarge    InstanceType = "trn1.32xlarge"
-	InstanceTypeHpc6id32xlarge  InstanceType = "hpc6id.32xlarge"
-	InstanceTypeC6inLarge       InstanceType = "c6in.large"
-	InstanceTypeC6inXlarge      InstanceType = "c6in.xlarge"
-	InstanceTypeC6in2xlarge     InstanceType = "c6in.2xlarge"
-	InstanceTypeC6in4xlarge     InstanceType = "c6in.4xlarge"
-	InstanceTypeC6in8xlarge     InstanceType = "c6in.8xlarge"
-	InstanceTypeC6in12xlarge    InstanceType = "c6in.12xlarge"
-	InstanceTypeC6in16xlarge    InstanceType = "c6in.16xlarge"
-	InstanceTypeC6in24xlarge    InstanceType = "c6in.24xlarge"
-	InstanceTypeC6in32xlarge    InstanceType = "c6in.32xlarge"
-	InstanceTypeM6inLarge       InstanceType = "m6in.large"
-	InstanceTypeM6inXlarge      InstanceType = "m6in.xlarge"
-	InstanceTypeM6in2xlarge     InstanceType = "m6in.2xlarge"
-	InstanceTypeM6in4xlarge     InstanceType = "m6in.4xlarge"
-	InstanceTypeM6in8xlarge     InstanceType = "m6in.8xlarge"
-	InstanceTypeM6in12xlarge    InstanceType = "m6in.12xlarge"
-	InstanceTypeM6in16xlarge    InstanceType = "m6in.16xlarge"
-	InstanceTypeM6in24xlarge    InstanceType = "m6in.24xlarge"
-	InstanceTypeM6in32xlarge    InstanceType = "m6in.32xlarge"
-	InstanceTypeM6idnLarge      InstanceType = "m6idn.large"
-	InstanceTypeM6idnXlarge     InstanceType = "m6idn.xlarge"
-	InstanceTypeM6idn2xlarge    InstanceType = "m6idn.2xlarge"
-	InstanceTypeM6idn4xlarge    InstanceType = "m6idn.4xlarge"
-	InstanceTypeM6idn8xlarge    InstanceType = "m6idn.8xlarge"
-	InstanceTypeM6idn12xlarge   InstanceType = "m6idn.12xlarge"
-	InstanceTypeM6idn16xlarge   InstanceType = "m6idn.16xlarge"
-	InstanceTypeM6idn24xlarge   InstanceType = "m6idn.24xlarge"
-	InstanceTypeM6idn32xlarge   InstanceType = "m6idn.32xlarge"
-	InstanceTypeR6inLarge       InstanceType = "r6in.large"
-	InstanceTypeR6inXlarge      InstanceType = "r6in.xlarge"
-	InstanceTypeR6in2xlarge     InstanceType = "r6in.2xlarge"
-	InstanceTypeR6in4xlarge     InstanceType = "r6in.4xlarge"
-	InstanceTypeR6in8xlarge     InstanceType = "r6in.8xlarge"
-	InstanceTypeR6in12xlarge    InstanceType = "r6in.12xlarge"
-	InstanceTypeR6in16xlarge    InstanceType = "r6in.16xlarge"
-	InstanceTypeR6in24xlarge    InstanceType = "r6in.24xlarge"
-	InstanceTypeR6in32xlarge    InstanceType = "r6in.32xlarge"
-	InstanceTypeR6idnLarge      InstanceType = "r6idn.large"
-	InstanceTypeR6idnXlarge     InstanceType = "r6idn.xlarge"
-	InstanceTypeR6idn2xlarge    InstanceType = "r6idn.2xlarge"
-	InstanceTypeR6idn4xlarge    InstanceType = "r6idn.4xlarge"
-	InstanceTypeR6idn8xlarge    InstanceType = "r6idn.8xlarge"
-	InstanceTypeR6idn12xlarge   InstanceType = "r6idn.12xlarge"
-	InstanceTypeR6idn16xlarge   InstanceType = "r6idn.16xlarge"
-	InstanceTypeR6idn24xlarge   InstanceType = "r6idn.24xlarge"
-	InstanceTypeR6idn32xlarge   InstanceType = "r6idn.32xlarge"
-	InstanceTypeC7gMetal        InstanceType = "c7g.metal"
-	InstanceTypeM7gMedium       InstanceType = "m7g.medium"
-	InstanceTypeM7gLarge        InstanceType = "m7g.large"
-	InstanceTypeM7gXlarge       InstanceType = "m7g.xlarge"
-	InstanceTypeM7g2xlarge      InstanceType = "m7g.2xlarge"
-	InstanceTypeM7g4xlarge      InstanceType = "m7g.4xlarge"
-	InstanceTypeM7g8xlarge      InstanceType = "m7g.8xlarge"
-	InstanceTypeM7g12xlarge     InstanceType = "m7g.12xlarge"
-	InstanceTypeM7g16xlarge     InstanceType = "m7g.16xlarge"
-	InstanceTypeM7gMetal        InstanceType = "m7g.metal"
-	InstanceTypeR7gMedium       InstanceType = "r7g.medium"
-	InstanceTypeR7gLarge        InstanceType = "r7g.large"
-	InstanceTypeR7gXlarge       InstanceType = "r7g.xlarge"
-	InstanceTypeR7g2xlarge      InstanceType = "r7g.2xlarge"
-	InstanceTypeR7g4xlarge      InstanceType = "r7g.4xlarge"
-	InstanceTypeR7g8xlarge      InstanceType = "r7g.8xlarge"
-	InstanceTypeR7g12xlarge     InstanceType = "r7g.12xlarge"
-	InstanceTypeR7g16xlarge     InstanceType = "r7g.16xlarge"
-	InstanceTypeR7gMetal        InstanceType = "r7g.metal"
-	InstanceTypeC6inMetal       InstanceType = "c6in.metal"
-	InstanceTypeM6inMetal       InstanceType = "m6in.metal"
-	InstanceTypeM6idnMetal      InstanceType = "m6idn.metal"
-	InstanceTypeR6inMetal       InstanceType = "r6in.metal"
-	InstanceTypeR6idnMetal      InstanceType = "r6idn.metal"
-	InstanceTypeInf2Xlarge      InstanceType = "inf2.xlarge"
-	InstanceTypeInf28xlarge     InstanceType = "inf2.8xlarge"
-	InstanceTypeInf224xlarge    InstanceType = "inf2.24xlarge"
-	InstanceTypeInf248xlarge    InstanceType = "inf2.48xlarge"
-	InstanceTypeTrn1n32xlarge   InstanceType = "trn1n.32xlarge"
-	InstanceTypeI4gLarge        InstanceType = "i4g.large"
-	InstanceTypeI4gXlarge       InstanceType = "i4g.xlarge"
-	InstanceTypeI4g2xlarge      InstanceType = "i4g.2xlarge"
-	InstanceTypeI4g4xlarge      InstanceType = "i4g.4xlarge"
-	InstanceTypeI4g8xlarge      InstanceType = "i4g.8xlarge"
-	InstanceTypeI4g16xlarge     InstanceType = "i4g.16xlarge"
-	InstanceTypeHpc7g4xlarge    InstanceType = "hpc7g.4xlarge"
-	InstanceTypeHpc7g8xlarge    InstanceType = "hpc7g.8xlarge"
-	InstanceTypeHpc7g16xlarge   InstanceType = "hpc7g.16xlarge"
-	InstanceTypeC7gnMedium      InstanceType = "c7gn.medium"
-	InstanceTypeC7gnLarge       InstanceType = "c7gn.large"
-	InstanceTypeC7gnXlarge      InstanceType = "c7gn.xlarge"
-	InstanceTypeC7gn2xlarge     InstanceType = "c7gn.2xlarge"
-	InstanceTypeC7gn4xlarge     InstanceType = "c7gn.4xlarge"
-	InstanceTypeC7gn8xlarge     InstanceType = "c7gn.8xlarge"
-	InstanceTypeC7gn12xlarge    InstanceType = "c7gn.12xlarge"
-	InstanceTypeC7gn16xlarge    InstanceType = "c7gn.16xlarge"
-	InstanceTypeP548xlarge      InstanceType = "p5.48xlarge"
-	InstanceTypeM7iLarge        InstanceType = "m7i.large"
-	InstanceTypeM7iXlarge       InstanceType = "m7i.xlarge"
-	InstanceTypeM7i2xlarge      InstanceType = "m7i.2xlarge"
-	InstanceTypeM7i4xlarge      InstanceType = "m7i.4xlarge"
-	InstanceTypeM7i8xlarge      InstanceType = "m7i.8xlarge"
-	InstanceTypeM7i12xlarge     InstanceType = "m7i.12xlarge"
-	InstanceTypeM7i16xlarge     InstanceType = "m7i.16xlarge"
-	InstanceTypeM7i24xlarge     InstanceType = "m7i.24xlarge"
-	InstanceTypeM7i48xlarge     InstanceType = "m7i.48xlarge"
-	InstanceTypeM7iFlexLarge    InstanceType = "m7i-flex.large"
-	InstanceTypeM7iFlexXlarge   InstanceType = "m7i-flex.xlarge"
-	InstanceTypeM7iFlex2xlarge  InstanceType = "m7i-flex.2xlarge"
-	InstanceTypeM7iFlex4xlarge  InstanceType = "m7i-flex.4xlarge"
-	InstanceTypeM7iFlex8xlarge  InstanceType = "m7i-flex.8xlarge"
-	InstanceTypeM7aMedium       InstanceType = "m7a.medium"
-	InstanceTypeM7aLarge        InstanceType = "m7a.large"
-	InstanceTypeM7aXlarge       InstanceType = "m7a.xlarge"
-	InstanceTypeM7a2xlarge      InstanceType = "m7a.2xlarge"
-	InstanceTypeM7a4xlarge      InstanceType = "m7a.4xlarge"
-	InstanceTypeM7a8xlarge      InstanceType = "m7a.8xlarge"
-	InstanceTypeM7a12xlarge     InstanceType = "m7a.12xlarge"
-	InstanceTypeM7a16xlarge     InstanceType = "m7a.16xlarge"
-	InstanceTypeM7a24xlarge     InstanceType = "m7a.24xlarge"
-	InstanceTypeM7a32xlarge     InstanceType = "m7a.32xlarge"
-	InstanceTypeM7a48xlarge     InstanceType = "m7a.48xlarge"
-	InstanceTypeM7aMetal48xl    InstanceType = "m7a.metal-48xl"
-	InstanceTypeHpc7a12xlarge   InstanceType = "hpc7a.12xlarge"
-	InstanceTypeHpc7a24xlarge   InstanceType = "hpc7a.24xlarge"
-	InstanceTypeHpc7a48xlarge   InstanceType = "hpc7a.48xlarge"
-	InstanceTypeHpc7a96xlarge   InstanceType = "hpc7a.96xlarge"
-	InstanceTypeC7gdMedium      InstanceType = "c7gd.medium"
-	InstanceTypeC7gdLarge       InstanceType = "c7gd.large"
-	InstanceTypeC7gdXlarge      InstanceType = "c7gd.xlarge"
-	InstanceTypeC7gd2xlarge     InstanceType = "c7gd.2xlarge"
-	InstanceTypeC7gd4xlarge     InstanceType = "c7gd.4xlarge"
-	InstanceTypeC7gd8xlarge     InstanceType = "c7gd.8xlarge"
-	InstanceTypeC7gd12xlarge    InstanceType = "c7gd.12xlarge"
-	InstanceTypeC7gd16xlarge    InstanceType = "c7gd.16xlarge"
-	InstanceTypeM7gdMedium      InstanceType = "m7gd.medium"
-	InstanceTypeM7gdLarge       InstanceType = "m7gd.large"
-	InstanceTypeM7gdXlarge      InstanceType = "m7gd.xlarge"
-	InstanceTypeM7gd2xlarge     InstanceType = "m7gd.2xlarge"
-	InstanceTypeM7gd4xlarge     InstanceType = "m7gd.4xlarge"
-	InstanceTypeM7gd8xlarge     InstanceType = "m7gd.8xlarge"
-	InstanceTypeM7gd12xlarge    InstanceType = "m7gd.12xlarge"
-	InstanceTypeM7gd16xlarge    InstanceType = "m7gd.16xlarge"
-	InstanceTypeR7gdMedium      InstanceType = "r7gd.medium"
-	InstanceTypeR7gdLarge       InstanceType = "r7gd.large"
-	InstanceTypeR7gdXlarge      InstanceType = "r7gd.xlarge"
-	InstanceTypeR7gd2xlarge     InstanceType = "r7gd.2xlarge"
-	InstanceTypeR7gd4xlarge     InstanceType = "r7gd.4xlarge"
-	InstanceTypeR7gd8xlarge     InstanceType = "r7gd.8xlarge"
-	InstanceTypeR7gd12xlarge    InstanceType = "r7gd.12xlarge"
-	InstanceTypeR7gd16xlarge    InstanceType = "r7gd.16xlarge"
-	InstanceTypeR7aMedium       InstanceType = "r7a.medium"
-	InstanceTypeR7aLarge        InstanceType = "r7a.large"
-	InstanceTypeR7aXlarge       InstanceType = "r7a.xlarge"
-	InstanceTypeR7a2xlarge      InstanceType = "r7a.2xlarge"
-	InstanceTypeR7a4xlarge      InstanceType = "r7a.4xlarge"
-	InstanceTypeR7a8xlarge      InstanceType = "r7a.8xlarge"
-	InstanceTypeR7a12xlarge     InstanceType = "r7a.12xlarge"
-	InstanceTypeR7a16xlarge     InstanceType = "r7a.16xlarge"
-	InstanceTypeR7a24xlarge     InstanceType = "r7a.24xlarge"
-	InstanceTypeR7a32xlarge     InstanceType = "r7a.32xlarge"
-	InstanceTypeR7a48xlarge     InstanceType = "r7a.48xlarge"
-	InstanceTypeC7iLarge        InstanceType = "c7i.large"
-	InstanceTypeC7iXlarge       InstanceType = "c7i.xlarge"
-	InstanceTypeC7i2xlarge      InstanceType = "c7i.2xlarge"
-	InstanceTypeC7i4xlarge      InstanceType = "c7i.4xlarge"
-	InstanceTypeC7i8xlarge      InstanceType = "c7i.8xlarge"
-	InstanceTypeC7i12xlarge     InstanceType = "c7i.12xlarge"
-	InstanceTypeC7i16xlarge     InstanceType = "c7i.16xlarge"
-	InstanceTypeC7i24xlarge     InstanceType = "c7i.24xlarge"
-	InstanceTypeC7i48xlarge     InstanceType = "c7i.48xlarge"
-	InstanceTypeMac2M2proMetal  InstanceType = "mac2-m2pro.metal"
-	InstanceTypeR7izLarge       InstanceType = "r7iz.large"
-	InstanceTypeR7izXlarge      InstanceType = "r7iz.xlarge"
-	InstanceTypeR7iz2xlarge     InstanceType = "r7iz.2xlarge"
-	InstanceTypeR7iz4xlarge     InstanceType = "r7iz.4xlarge"
-	InstanceTypeR7iz8xlarge     InstanceType = "r7iz.8xlarge"
-	InstanceTypeR7iz12xlarge    InstanceType = "r7iz.12xlarge"
-	InstanceTypeR7iz16xlarge    InstanceType = "r7iz.16xlarge"
-	InstanceTypeR7iz32xlarge    InstanceType = "r7iz.32xlarge"
-	InstanceTypeC7aMedium       InstanceType = "c7a.medium"
-	InstanceTypeC7aLarge        InstanceType = "c7a.large"
-	InstanceTypeC7aXlarge       InstanceType = "c7a.xlarge"
-	InstanceTypeC7a2xlarge      InstanceType = "c7a.2xlarge"
-	InstanceTypeC7a4xlarge      InstanceType = "c7a.4xlarge"
-	InstanceTypeC7a8xlarge      InstanceType = "c7a.8xlarge"
-	InstanceTypeC7a12xlarge     InstanceType = "c7a.12xlarge"
-	InstanceTypeC7a16xlarge     InstanceType = "c7a.16xlarge"
-	InstanceTypeC7a24xlarge     InstanceType = "c7a.24xlarge"
-	InstanceTypeC7a32xlarge     InstanceType = "c7a.32xlarge"
-	InstanceTypeC7a48xlarge     InstanceType = "c7a.48xlarge"
-	InstanceTypeC7aMetal48xl    InstanceType = "c7a.metal-48xl"
-	InstanceTypeR7aMetal48xl    InstanceType = "r7a.metal-48xl"
-	InstanceTypeR7iLarge        InstanceType = "r7i.large"
-	InstanceTypeR7iXlarge       InstanceType = "r7i.xlarge"
-	InstanceTypeR7i2xlarge      InstanceType = "r7i.2xlarge"
-	InstanceTypeR7i4xlarge      InstanceType = "r7i.4xlarge"
-	InstanceTypeR7i8xlarge      InstanceType = "r7i.8xlarge"
-	InstanceTypeR7i12xlarge     InstanceType = "r7i.12xlarge"
-	InstanceTypeR7i16xlarge     InstanceType = "r7i.16xlarge"
-	InstanceTypeR7i24xlarge     InstanceType = "r7i.24xlarge"
-	InstanceTypeR7i48xlarge     InstanceType = "r7i.48xlarge"
-	InstanceTypeDl2q24xlarge    InstanceType = "dl2q.24xlarge"
-	InstanceTypeMac2M2Metal     InstanceType = "mac2-m2.metal"
-	InstanceTypeI4i12xlarge     InstanceType = "i4i.12xlarge"
-	InstanceTypeI4i24xlarge     InstanceType = "i4i.24xlarge"
-	InstanceTypeC7iMetal24xl    InstanceType = "c7i.metal-24xl"
-	InstanceTypeC7iMetal48xl    InstanceType = "c7i.metal-48xl"
-	InstanceTypeM7iMetal24xl    InstanceType = "m7i.metal-24xl"
-	InstanceTypeM7iMetal48xl    InstanceType = "m7i.metal-48xl"
-	InstanceTypeR7iMetal24xl    InstanceType = "r7i.metal-24xl"
-	InstanceTypeR7iMetal48xl    InstanceType = "r7i.metal-48xl"
-	InstanceTypeR7izMetal16xl   InstanceType = "r7iz.metal-16xl"
-	InstanceTypeR7izMetal32xl   InstanceType = "r7iz.metal-32xl"
+	InstanceTypeA1Medium          InstanceType = "a1.medium"
+	InstanceTypeA1Large           InstanceType = "a1.large"
+	InstanceTypeA1Xlarge          InstanceType = "a1.xlarge"
+	InstanceTypeA12xlarge         InstanceType = "a1.2xlarge"
+	InstanceTypeA14xlarge         InstanceType = "a1.4xlarge"
+	InstanceTypeA1Metal           InstanceType = "a1.metal"
+	InstanceTypeC1Medium          InstanceType = "c1.medium"
+	InstanceTypeC1Xlarge          InstanceType = "c1.xlarge"
+	InstanceTypeC3Large           InstanceType = "c3.large"
+	InstanceTypeC3Xlarge          InstanceType = "c3.xlarge"
+	InstanceTypeC32xlarge         InstanceType = "c3.2xlarge"
+	InstanceTypeC34xlarge         InstanceType = "c3.4xlarge"
+	InstanceTypeC38xlarge         InstanceType = "c3.8xlarge"
+	InstanceTypeC4Large           InstanceType = "c4.large"
+	InstanceTypeC4Xlarge          InstanceType = "c4.xlarge"
+	InstanceTypeC42xlarge         InstanceType = "c4.2xlarge"
+	InstanceTypeC44xlarge         InstanceType = "c4.4xlarge"
+	InstanceTypeC48xlarge         InstanceType = "c4.8xlarge"
+	InstanceTypeC5Large           InstanceType = "c5.large"
+	InstanceTypeC5Xlarge          InstanceType = "c5.xlarge"
+	InstanceTypeC52xlarge         InstanceType = "c5.2xlarge"
+	InstanceTypeC54xlarge         InstanceType = "c5.4xlarge"
+	InstanceTypeC59xlarge         InstanceType = "c5.9xlarge"
+	InstanceTypeC512xlarge        InstanceType = "c5.12xlarge"
+	InstanceTypeC518xlarge        InstanceType = "c5.18xlarge"
+	InstanceTypeC524xlarge        InstanceType = "c5.24xlarge"
+	InstanceTypeC5Metal           InstanceType = "c5.metal"
+	InstanceTypeC5aLarge          InstanceType = "c5a.large"
+	InstanceTypeC5aXlarge         InstanceType = "c5a.xlarge"
+	InstanceTypeC5a2xlarge        InstanceType = "c5a.2xlarge"
+	InstanceTypeC5a4xlarge        InstanceType = "c5a.4xlarge"
+	InstanceTypeC5a8xlarge        InstanceType = "c5a.8xlarge"
+	InstanceTypeC5a12xlarge       InstanceType = "c5a.12xlarge"
+	InstanceTypeC5a16xlarge       InstanceType = "c5a.16xlarge"
+	InstanceTypeC5a24xlarge       InstanceType = "c5a.24xlarge"
+	InstanceTypeC5adLarge         InstanceType = "c5ad.large"
+	InstanceTypeC5adXlarge        InstanceType = "c5ad.xlarge"
+	InstanceTypeC5ad2xlarge       InstanceType = "c5ad.2xlarge"
+	InstanceTypeC5ad4xlarge       InstanceType = "c5ad.4xlarge"
+	InstanceTypeC5ad8xlarge       InstanceType = "c5ad.8xlarge"
+	InstanceTypeC5ad12xlarge      InstanceType = "c5ad.12xlarge"
+	InstanceTypeC5ad16xlarge      InstanceType = "c5ad.16xlarge"
+	InstanceTypeC5ad24xlarge      InstanceType = "c5ad.24xlarge"
+	InstanceTypeC5dLarge          InstanceType = "c5d.large"
+	InstanceTypeC5dXlarge         InstanceType = "c5d.xlarge"
+	InstanceTypeC5d2xlarge        InstanceType = "c5d.2xlarge"
+	InstanceTypeC5d4xlarge        InstanceType = "c5d.4xlarge"
+	InstanceTypeC5d9xlarge        InstanceType = "c5d.9xlarge"
+	InstanceTypeC5d12xlarge       InstanceType = "c5d.12xlarge"
+	InstanceTypeC5d18xlarge       InstanceType = "c5d.18xlarge"
+	InstanceTypeC5d24xlarge       InstanceType = "c5d.24xlarge"
+	InstanceTypeC5dMetal          InstanceType = "c5d.metal"
+	InstanceTypeC5nLarge          InstanceType = "c5n.large"
+	InstanceTypeC5nXlarge         InstanceType = "c5n.xlarge"
+	InstanceTypeC5n2xlarge        InstanceType = "c5n.2xlarge"
+	InstanceTypeC5n4xlarge        InstanceType = "c5n.4xlarge"
+	InstanceTypeC5n9xlarge        InstanceType = "c5n.9xlarge"
+	InstanceTypeC5n18xlarge       InstanceType = "c5n.18xlarge"
+	InstanceTypeC5nMetal          InstanceType = "c5n.metal"
+	InstanceTypeC6gMedium         InstanceType = "c6g.medium"
+	InstanceTypeC6gLarge          InstanceType = "c6g.large"
+	InstanceTypeC6gXlarge         InstanceType = "c6g.xlarge"
+	InstanceTypeC6g2xlarge        InstanceType = "c6g.2xlarge"
+	InstanceTypeC6g4xlarge        InstanceType = "c6g.4xlarge"
+	InstanceTypeC6g8xlarge        InstanceType = "c6g.8xlarge"
+	InstanceTypeC6g12xlarge       InstanceType = "c6g.12xlarge"
+	InstanceTypeC6g16xlarge       InstanceType = "c6g.16xlarge"
+	InstanceTypeC6gMetal          InstanceType = "c6g.metal"
+	InstanceTypeC6gdMedium        InstanceType = "c6gd.medium"
+	InstanceTypeC6gdLarge         InstanceType = "c6gd.large"
+	InstanceTypeC6gdXlarge        InstanceType = "c6gd.xlarge"
+	InstanceTypeC6gd2xlarge       InstanceType = "c6gd.2xlarge"
+	InstanceTypeC6gd4xlarge       InstanceType = "c6gd.4xlarge"
+	InstanceTypeC6gd8xlarge       InstanceType = "c6gd.8xlarge"
+	InstanceTypeC6gd12xlarge      InstanceType = "c6gd.12xlarge"
+	InstanceTypeC6gd16xlarge      InstanceType = "c6gd.16xlarge"
+	InstanceTypeC6gdMetal         InstanceType = "c6gd.metal"
+	InstanceTypeC6gnMedium        InstanceType = "c6gn.medium"
+	InstanceTypeC6gnLarge         InstanceType = "c6gn.large"
+	InstanceTypeC6gnXlarge        InstanceType = "c6gn.xlarge"
+	InstanceTypeC6gn2xlarge       InstanceType = "c6gn.2xlarge"
+	InstanceTypeC6gn4xlarge       InstanceType = "c6gn.4xlarge"
+	InstanceTypeC6gn8xlarge       InstanceType = "c6gn.8xlarge"
+	InstanceTypeC6gn12xlarge      InstanceType = "c6gn.12xlarge"
+	InstanceTypeC6gn16xlarge      InstanceType = "c6gn.16xlarge"
+	InstanceTypeC6iLarge          InstanceType = "c6i.large"
+	InstanceTypeC6iXlarge         InstanceType = "c6i.xlarge"
+	InstanceTypeC6i2xlarge        InstanceType = "c6i.2xlarge"
+	InstanceTypeC6i4xlarge        InstanceType = "c6i.4xlarge"
+	InstanceTypeC6i8xlarge        InstanceType = "c6i.8xlarge"
+	InstanceTypeC6i12xlarge       InstanceType = "c6i.12xlarge"
+	InstanceTypeC6i16xlarge       InstanceType = "c6i.16xlarge"
+	InstanceTypeC6i24xlarge       InstanceType = "c6i.24xlarge"
+	InstanceTypeC6i32xlarge       InstanceType = "c6i.32xlarge"
+	InstanceTypeC6iMetal          InstanceType = "c6i.metal"
+	InstanceTypeCc14xlarge        InstanceType = "cc1.4xlarge"
+	InstanceTypeCc28xlarge        InstanceType = "cc2.8xlarge"
+	InstanceTypeCg14xlarge        InstanceType = "cg1.4xlarge"
+	InstanceTypeCr18xlarge        InstanceType = "cr1.8xlarge"
+	InstanceTypeD2Xlarge          InstanceType = "d2.xlarge"
+	InstanceTypeD22xlarge         InstanceType = "d2.2xlarge"
+	InstanceTypeD24xlarge         InstanceType = "d2.4xlarge"
+	InstanceTypeD28xlarge         InstanceType = "d2.8xlarge"
+	InstanceTypeD3Xlarge          InstanceType = "d3.xlarge"
+	InstanceTypeD32xlarge         InstanceType = "d3.2xlarge"
+	InstanceTypeD34xlarge         InstanceType = "d3.4xlarge"
+	InstanceTypeD38xlarge         InstanceType = "d3.8xlarge"
+	InstanceTypeD3enXlarge        InstanceType = "d3en.xlarge"
+	InstanceTypeD3en2xlarge       InstanceType = "d3en.2xlarge"
+	InstanceTypeD3en4xlarge       InstanceType = "d3en.4xlarge"
+	InstanceTypeD3en6xlarge       InstanceType = "d3en.6xlarge"
+	InstanceTypeD3en8xlarge       InstanceType = "d3en.8xlarge"
+	InstanceTypeD3en12xlarge      InstanceType = "d3en.12xlarge"
+	InstanceTypeDl124xlarge       InstanceType = "dl1.24xlarge"
+	InstanceTypeF12xlarge         InstanceType = "f1.2xlarge"
+	InstanceTypeF14xlarge         InstanceType = "f1.4xlarge"
+	InstanceTypeF116xlarge        InstanceType = "f1.16xlarge"
+	InstanceTypeG22xlarge         InstanceType = "g2.2xlarge"
+	InstanceTypeG28xlarge         InstanceType = "g2.8xlarge"
+	InstanceTypeG34xlarge         InstanceType = "g3.4xlarge"
+	InstanceTypeG38xlarge         InstanceType = "g3.8xlarge"
+	InstanceTypeG316xlarge        InstanceType = "g3.16xlarge"
+	InstanceTypeG3sXlarge         InstanceType = "g3s.xlarge"
+	InstanceTypeG4adXlarge        InstanceType = "g4ad.xlarge"
+	InstanceTypeG4ad2xlarge       InstanceType = "g4ad.2xlarge"
+	InstanceTypeG4ad4xlarge       InstanceType = "g4ad.4xlarge"
+	InstanceTypeG4ad8xlarge       InstanceType = "g4ad.8xlarge"
+	InstanceTypeG4ad16xlarge      InstanceType = "g4ad.16xlarge"
+	InstanceTypeG4dnXlarge        InstanceType = "g4dn.xlarge"
+	InstanceTypeG4dn2xlarge       InstanceType = "g4dn.2xlarge"
+	InstanceTypeG4dn4xlarge       InstanceType = "g4dn.4xlarge"
+	InstanceTypeG4dn8xlarge       InstanceType = "g4dn.8xlarge"
+	InstanceTypeG4dn12xlarge      InstanceType = "g4dn.12xlarge"
+	InstanceTypeG4dn16xlarge      InstanceType = "g4dn.16xlarge"
+	InstanceTypeG4dnMetal         InstanceType = "g4dn.metal"
+	InstanceTypeG5Xlarge          InstanceType = "g5.xlarge"
+	InstanceTypeG52xlarge         InstanceType = "g5.2xlarge"
+	InstanceTypeG54xlarge         InstanceType = "g5.4xlarge"
+	InstanceTypeG58xlarge         InstanceType = "g5.8xlarge"
+	InstanceTypeG512xlarge        InstanceType = "g5.12xlarge"
+	InstanceTypeG516xlarge        InstanceType = "g5.16xlarge"
+	InstanceTypeG524xlarge        InstanceType = "g5.24xlarge"
+	InstanceTypeG548xlarge        InstanceType = "g5.48xlarge"
+	InstanceTypeG5gXlarge         InstanceType = "g5g.xlarge"
+	InstanceTypeG5g2xlarge        InstanceType = "g5g.2xlarge"
+	InstanceTypeG5g4xlarge        InstanceType = "g5g.4xlarge"
+	InstanceTypeG5g8xlarge        InstanceType = "g5g.8xlarge"
+	InstanceTypeG5g16xlarge       InstanceType = "g5g.16xlarge"
+	InstanceTypeG5gMetal          InstanceType = "g5g.metal"
+	InstanceTypeHi14xlarge        InstanceType = "hi1.4xlarge"
+	InstanceTypeHpc6a48xlarge     InstanceType = "hpc6a.48xlarge"
+	InstanceTypeHs18xlarge        InstanceType = "hs1.8xlarge"
+	InstanceTypeH12xlarge         InstanceType = "h1.2xlarge"
+	InstanceTypeH14xlarge         InstanceType = "h1.4xlarge"
+	InstanceTypeH18xlarge         InstanceType = "h1.8xlarge"
+	InstanceTypeH116xlarge        InstanceType = "h1.16xlarge"
+	InstanceTypeI2Xlarge          InstanceType = "i2.xlarge"
+	InstanceTypeI22xlarge         InstanceType = "i2.2xlarge"
+	InstanceTypeI24xlarge         InstanceType = "i2.4xlarge"
+	InstanceTypeI28xlarge         InstanceType = "i2.8xlarge"
+	InstanceTypeI3Large           InstanceType = "i3.large"
+	InstanceTypeI3Xlarge          InstanceType = "i3.xlarge"
+	InstanceTypeI32xlarge         InstanceType = "i3.2xlarge"
+	InstanceTypeI34xlarge         InstanceType = "i3.4xlarge"
+	InstanceTypeI38xlarge         InstanceType = "i3.8xlarge"
+	InstanceTypeI316xlarge        InstanceType = "i3.16xlarge"
+	InstanceTypeI3Metal           InstanceType = "i3.metal"
+	InstanceTypeI3enLarge         InstanceType = "i3en.large"
+	InstanceTypeI3enXlarge        InstanceType = "i3en.xlarge"
+	InstanceTypeI3en2xlarge       InstanceType = "i3en.2xlarge"
+	InstanceTypeI3en3xlarge       InstanceType = "i3en.3xlarge"
+	InstanceTypeI3en6xlarge       InstanceType = "i3en.6xlarge"
+	InstanceTypeI3en12xlarge      InstanceType = "i3en.12xlarge"
+	InstanceTypeI3en24xlarge      InstanceType = "i3en.24xlarge"
+	InstanceTypeI3enMetal         InstanceType = "i3en.metal"
+	InstanceTypeIm4gnLarge        InstanceType = "im4gn.large"
+	InstanceTypeIm4gnXlarge       InstanceType = "im4gn.xlarge"
+	InstanceTypeIm4gn2xlarge      InstanceType = "im4gn.2xlarge"
+	InstanceTypeIm4gn4xlarge      InstanceType = "im4gn.4xlarge"
+	InstanceTypeIm4gn8xlarge      InstanceType = "im4gn.8xlarge"
+	InstanceTypeIm4gn16xlarge     InstanceType = "im4gn.16xlarge"
+	InstanceTypeInf1Xlarge        InstanceType = "inf1.xlarge"
+	InstanceTypeInf12xlarge       InstanceType = "inf1.2xlarge"
+	InstanceTypeInf16xlarge       InstanceType = "inf1.6xlarge"
+	InstanceTypeInf124xlarge      InstanceType = "inf1.24xlarge"
+	InstanceTypeIs4genMedium      InstanceType = "is4gen.medium"
+	InstanceTypeIs4genLarge       InstanceType = "is4gen.large"
+	InstanceTypeIs4genXlarge      InstanceType = "is4gen.xlarge"
+	InstanceTypeIs4gen2xlarge     InstanceType = "is4gen.2xlarge"
+	InstanceTypeIs4gen4xlarge     InstanceType = "is4gen.4xlarge"
+	InstanceTypeIs4gen8xlarge     InstanceType = "is4gen.8xlarge"
+	InstanceTypeM1Small           InstanceType = "m1.small"
+	InstanceTypeM1Medium          InstanceType = "m1.medium"
+	InstanceTypeM1Large           InstanceType = "m1.large"
+	InstanceTypeM1Xlarge          InstanceType = "m1.xlarge"
+	InstanceTypeM2Xlarge          InstanceType = "m2.xlarge"
+	InstanceTypeM22xlarge         InstanceType = "m2.2xlarge"
+	InstanceTypeM24xlarge         InstanceType = "m2.4xlarge"
+	InstanceTypeM3Medium          InstanceType = "m3.medium"
+	InstanceTypeM3Large           InstanceType = "m3.large"
+	InstanceTypeM3Xlarge          InstanceType = "m3.xlarge"
+	InstanceTypeM32xlarge         InstanceType = "m3.2xlarge"
+	InstanceTypeM4Large           InstanceType = "m4.large"
+	InstanceTypeM4Xlarge          InstanceType = "m4.xlarge"
+	InstanceTypeM42xlarge         InstanceType = "m4.2xlarge"
+	InstanceTypeM44xlarge         InstanceType = "m4.4xlarge"
+	InstanceTypeM410xlarge        InstanceType = "m4.10xlarge"
+	InstanceTypeM416xlarge        InstanceType = "m4.16xlarge"
+	InstanceTypeM5Large           InstanceType = "m5.large"
+	InstanceTypeM5Xlarge          InstanceType = "m5.xlarge"
+	InstanceTypeM52xlarge         InstanceType = "m5.2xlarge"
+	InstanceTypeM54xlarge         InstanceType = "m5.4xlarge"
+	InstanceTypeM58xlarge         InstanceType = "m5.8xlarge"
+	InstanceTypeM512xlarge        InstanceType = "m5.12xlarge"
+	InstanceTypeM516xlarge        InstanceType = "m5.16xlarge"
+	InstanceTypeM524xlarge        InstanceType = "m5.24xlarge"
+	InstanceTypeM5Metal           InstanceType = "m5.metal"
+	InstanceTypeM5aLarge          InstanceType = "m5a.large"
+	InstanceTypeM5aXlarge         InstanceType = "m5a.xlarge"
+	InstanceTypeM5a2xlarge        InstanceType = "m5a.2xlarge"
+	InstanceTypeM5a4xlarge        InstanceType = "m5a.4xlarge"
+	InstanceTypeM5a8xlarge        InstanceType = "m5a.8xlarge"
+	InstanceTypeM5a12xlarge       InstanceType = "m5a.12xlarge"
+	InstanceTypeM5a16xlarge       InstanceType = "m5a.16xlarge"
+	InstanceTypeM5a24xlarge       InstanceType = "m5a.24xlarge"
+	InstanceTypeM5adLarge         InstanceType = "m5ad.large"
+	InstanceTypeM5adXlarge        InstanceType = "m5ad.xlarge"
+	InstanceTypeM5ad2xlarge       InstanceType = "m5ad.2xlarge"
+	InstanceTypeM5ad4xlarge       InstanceType = "m5ad.4xlarge"
+	InstanceTypeM5ad8xlarge       InstanceType = "m5ad.8xlarge"
+	InstanceTypeM5ad12xlarge      InstanceType = "m5ad.12xlarge"
+	InstanceTypeM5ad16xlarge      InstanceType = "m5ad.16xlarge"
+	InstanceTypeM5ad24xlarge      InstanceType = "m5ad.24xlarge"
+	InstanceTypeM5dLarge          InstanceType = "m5d.large"
+	InstanceTypeM5dXlarge         InstanceType = "m5d.xlarge"
+	InstanceTypeM5d2xlarge        InstanceType = "m5d.2xlarge"
+	InstanceTypeM5d4xlarge        InstanceType = "m5d.4xlarge"
+	InstanceTypeM5d8xlarge        InstanceType = "m5d.8xlarge"
+	InstanceTypeM5d12xlarge       InstanceType = "m5d.12xlarge"
+	InstanceTypeM5d16xlarge       InstanceType = "m5d.16xlarge"
+	InstanceTypeM5d24xlarge       InstanceType = "m5d.24xlarge"
+	InstanceTypeM5dMetal          InstanceType = "m5d.metal"
+	InstanceTypeM5dnLarge         InstanceType = "m5dn.large"
+	InstanceTypeM5dnXlarge        InstanceType = "m5dn.xlarge"
+	InstanceTypeM5dn2xlarge       InstanceType = "m5dn.2xlarge"
+	InstanceTypeM5dn4xlarge       InstanceType = "m5dn.4xlarge"
+	InstanceTypeM5dn8xlarge       InstanceType = "m5dn.8xlarge"
+	InstanceTypeM5dn12xlarge      InstanceType = "m5dn.12xlarge"
+	InstanceTypeM5dn16xlarge      InstanceType = "m5dn.16xlarge"
+	InstanceTypeM5dn24xlarge      InstanceType = "m5dn.24xlarge"
+	InstanceTypeM5dnMetal         InstanceType = "m5dn.metal"
+	InstanceTypeM5nLarge          InstanceType = "m5n.large"
+	InstanceTypeM5nXlarge         InstanceType = "m5n.xlarge"
+	InstanceTypeM5n2xlarge        InstanceType = "m5n.2xlarge"
+	InstanceTypeM5n4xlarge        InstanceType = "m5n.4xlarge"
+	InstanceTypeM5n8xlarge        InstanceType = "m5n.8xlarge"
+	InstanceTypeM5n12xlarge       InstanceType = "m5n.12xlarge"
+	InstanceTypeM5n16xlarge       InstanceType = "m5n.16xlarge"
+	InstanceTypeM5n24xlarge       InstanceType = "m5n.24xlarge"
+	InstanceTypeM5nMetal          InstanceType = "m5n.metal"
+	InstanceTypeM5znLarge         InstanceType = "m5zn.large"
+	InstanceTypeM5znXlarge        InstanceType = "m5zn.xlarge"
+	InstanceTypeM5zn2xlarge       InstanceType = "m5zn.2xlarge"
+	InstanceTypeM5zn3xlarge       InstanceType = "m5zn.3xlarge"
+	InstanceTypeM5zn6xlarge       InstanceType = "m5zn.6xlarge"
+	InstanceTypeM5zn12xlarge      InstanceType = "m5zn.12xlarge"
+	InstanceTypeM5znMetal         InstanceType = "m5zn.metal"
+	InstanceTypeM6aLarge          InstanceType = "m6a.large"
+	InstanceTypeM6aXlarge         InstanceType = "m6a.xlarge"
+	InstanceTypeM6a2xlarge        InstanceType = "m6a.2xlarge"
+	InstanceTypeM6a4xlarge        InstanceType = "m6a.4xlarge"
+	InstanceTypeM6a8xlarge        InstanceType = "m6a.8xlarge"
+	InstanceTypeM6a12xlarge       InstanceType = "m6a.12xlarge"
+	InstanceTypeM6a16xlarge       InstanceType = "m6a.16xlarge"
+	InstanceTypeM6a24xlarge       InstanceType = "m6a.24xlarge"
+	InstanceTypeM6a32xlarge       InstanceType = "m6a.32xlarge"
+	InstanceTypeM6a48xlarge       InstanceType = "m6a.48xlarge"
+	InstanceTypeM6gMetal          InstanceType = "m6g.metal"
+	InstanceTypeM6gMedium         InstanceType = "m6g.medium"
+	InstanceTypeM6gLarge          InstanceType = "m6g.large"
+	InstanceTypeM6gXlarge         InstanceType = "m6g.xlarge"
+	InstanceTypeM6g2xlarge        InstanceType = "m6g.2xlarge"
+	InstanceTypeM6g4xlarge        InstanceType = "m6g.4xlarge"
+	InstanceTypeM6g8xlarge        InstanceType = "m6g.8xlarge"
+	InstanceTypeM6g12xlarge       InstanceType = "m6g.12xlarge"
+	InstanceTypeM6g16xlarge       InstanceType = "m6g.16xlarge"
+	InstanceTypeM6gdMetal         InstanceType = "m6gd.metal"
+	InstanceTypeM6gdMedium        InstanceType = "m6gd.medium"
+	InstanceTypeM6gdLarge         InstanceType = "m6gd.large"
+	InstanceTypeM6gdXlarge        InstanceType = "m6gd.xlarge"
+	InstanceTypeM6gd2xlarge       InstanceType = "m6gd.2xlarge"
+	InstanceTypeM6gd4xlarge       InstanceType = "m6gd.4xlarge"
+	InstanceTypeM6gd8xlarge       InstanceType = "m6gd.8xlarge"
+	InstanceTypeM6gd12xlarge      InstanceType = "m6gd.12xlarge"
+	InstanceTypeM6gd16xlarge      InstanceType = "m6gd.16xlarge"
+	InstanceTypeM6iLarge          InstanceType = "m6i.large"
+	InstanceTypeM6iXlarge         InstanceType = "m6i.xlarge"
+	InstanceTypeM6i2xlarge        InstanceType = "m6i.2xlarge"
+	InstanceTypeM6i4xlarge        InstanceType = "m6i.4xlarge"
+	InstanceTypeM6i8xlarge        InstanceType = "m6i.8xlarge"
+	InstanceTypeM6i12xlarge       InstanceType = "m6i.12xlarge"
+	InstanceTypeM6i16xlarge       InstanceType = "m6i.16xlarge"
+	InstanceTypeM6i24xlarge       InstanceType = "m6i.24xlarge"
+	InstanceTypeM6i32xlarge       InstanceType = "m6i.32xlarge"
+	InstanceTypeM6iMetal          InstanceType = "m6i.metal"
+	InstanceTypeMac1Metal         InstanceType = "mac1.metal"
+	InstanceTypeP2Xlarge          InstanceType = "p2.xlarge"
+	InstanceTypeP28xlarge         InstanceType = "p2.8xlarge"
+	InstanceTypeP216xlarge        InstanceType = "p2.16xlarge"
+	InstanceTypeP32xlarge         InstanceType = "p3.2xlarge"
+	InstanceTypeP38xlarge         InstanceType = "p3.8xlarge"
+	InstanceTypeP316xlarge        InstanceType = "p3.16xlarge"
+	InstanceTypeP3dn24xlarge      InstanceType = "p3dn.24xlarge"
+	InstanceTypeP4d24xlarge       InstanceType = "p4d.24xlarge"
+	InstanceTypeR3Large           InstanceType = "r3.large"
+	InstanceTypeR3Xlarge          InstanceType = "r3.xlarge"
+	InstanceTypeR32xlarge         InstanceType = "r3.2xlarge"
+	InstanceTypeR34xlarge         InstanceType = "r3.4xlarge"
+	InstanceTypeR38xlarge         InstanceType = "r3.8xlarge"
+	InstanceTypeR4Large           InstanceType = "r4.large"
+	InstanceTypeR4Xlarge          InstanceType = "r4.xlarge"
+	InstanceTypeR42xlarge         InstanceType = "r4.2xlarge"
+	InstanceTypeR44xlarge         InstanceType = "r4.4xlarge"
+	InstanceTypeR48xlarge         InstanceType = "r4.8xlarge"
+	InstanceTypeR416xlarge        InstanceType = "r4.16xlarge"
+	InstanceTypeR5Large           InstanceType = "r5.large"
+	InstanceTypeR5Xlarge          InstanceType = "r5.xlarge"
+	InstanceTypeR52xlarge         InstanceType = "r5.2xlarge"
+	InstanceTypeR54xlarge         InstanceType = "r5.4xlarge"
+	InstanceTypeR58xlarge         InstanceType = "r5.8xlarge"
+	InstanceTypeR512xlarge        InstanceType = "r5.12xlarge"
+	InstanceTypeR516xlarge        InstanceType = "r5.16xlarge"
+	InstanceTypeR524xlarge        InstanceType = "r5.24xlarge"
+	InstanceTypeR5Metal           InstanceType = "r5.metal"
+	InstanceTypeR5aLarge          InstanceType = "r5a.large"
+	InstanceTypeR5aXlarge         InstanceType = "r5a.xlarge"
+	InstanceTypeR5a2xlarge        InstanceType = "r5a.2xlarge"
+	InstanceTypeR5a4xlarge        InstanceType = "r5a.4xlarge"
+	InstanceTypeR5a8xlarge        InstanceType = "r5a.8xlarge"
+	InstanceTypeR5a12xlarge       InstanceType = "r5a.12xlarge"
+	InstanceTypeR5a16xlarge       InstanceType = "r5a.16xlarge"
+	InstanceTypeR5a24xlarge       InstanceType = "r5a.24xlarge"
+	InstanceTypeR5adLarge         InstanceType = "r5ad.large"
+	InstanceTypeR5adXlarge        InstanceType = "r5ad.xlarge"
+	InstanceTypeR5ad2xlarge       InstanceType = "r5ad.2xlarge"
+	InstanceTypeR5ad4xlarge       InstanceType = "r5ad.4xlarge"
+	InstanceTypeR5ad8xlarge       InstanceType = "r5ad.8xlarge"
+	InstanceTypeR5ad12xlarge      InstanceType = "r5ad.12xlarge"
+	InstanceTypeR5ad16xlarge      InstanceType = "r5ad.16xlarge"
+	InstanceTypeR5ad24xlarge      InstanceType = "r5ad.24xlarge"
+	InstanceTypeR5bLarge          InstanceType = "r5b.large"
+	InstanceTypeR5bXlarge         InstanceType = "r5b.xlarge"
+	InstanceTypeR5b2xlarge        InstanceType = "r5b.2xlarge"
+	InstanceTypeR5b4xlarge        InstanceType = "r5b.4xlarge"
+	InstanceTypeR5b8xlarge        InstanceType = "r5b.8xlarge"
+	InstanceTypeR5b12xlarge       InstanceType = "r5b.12xlarge"
+	InstanceTypeR5b16xlarge       InstanceType = "r5b.16xlarge"
+	InstanceTypeR5b24xlarge       InstanceType = "r5b.24xlarge"
+	InstanceTypeR5bMetal          InstanceType = "r5b.metal"
+	InstanceTypeR5dLarge          InstanceType = "r5d.large"
+	InstanceTypeR5dXlarge         InstanceType = "r5d.xlarge"
+	InstanceTypeR5d2xlarge        InstanceType = "r5d.2xlarge"
+	InstanceTypeR5d4xlarge        InstanceType = "r5d.4xlarge"
+	InstanceTypeR5d8xlarge        InstanceType = "r5d.8xlarge"
+	InstanceTypeR5d12xlarge       InstanceType = "r5d.12xlarge"
+	InstanceTypeR5d16xlarge       InstanceType = "r5d.16xlarge"
+	InstanceTypeR5d24xlarge       InstanceType = "r5d.24xlarge"
+	InstanceTypeR5dMetal          InstanceType = "r5d.metal"
+	InstanceTypeR5dnLarge         InstanceType = "r5dn.large"
+	InstanceTypeR5dnXlarge        InstanceType = "r5dn.xlarge"
+	InstanceTypeR5dn2xlarge       InstanceType = "r5dn.2xlarge"
+	InstanceTypeR5dn4xlarge       InstanceType = "r5dn.4xlarge"
+	InstanceTypeR5dn8xlarge       InstanceType = "r5dn.8xlarge"
+	InstanceTypeR5dn12xlarge      InstanceType = "r5dn.12xlarge"
+	InstanceTypeR5dn16xlarge      InstanceType = "r5dn.16xlarge"
+	InstanceTypeR5dn24xlarge      InstanceType = "r5dn.24xlarge"
+	InstanceTypeR5dnMetal         InstanceType = "r5dn.metal"
+	InstanceTypeR5nLarge          InstanceType = "r5n.large"
+	InstanceTypeR5nXlarge         InstanceType = "r5n.xlarge"
+	InstanceTypeR5n2xlarge        InstanceType = "r5n.2xlarge"
+	InstanceTypeR5n4xlarge        InstanceType = "r5n.4xlarge"
+	InstanceTypeR5n8xlarge        InstanceType = "r5n.8xlarge"
+	InstanceTypeR5n12xlarge       InstanceType = "r5n.12xlarge"
+	InstanceTypeR5n16xlarge       InstanceType = "r5n.16xlarge"
+	InstanceTypeR5n24xlarge       InstanceType = "r5n.24xlarge"
+	InstanceTypeR5nMetal          InstanceType = "r5n.metal"
+	InstanceTypeR6gMedium         InstanceType = "r6g.medium"
+	InstanceTypeR6gLarge          InstanceType = "r6g.large"
+	InstanceTypeR6gXlarge         InstanceType = "r6g.xlarge"
+	InstanceTypeR6g2xlarge        InstanceType = "r6g.2xlarge"
+	InstanceTypeR6g4xlarge        InstanceType = "r6g.4xlarge"
+	InstanceTypeR6g8xlarge        InstanceType = "r6g.8xlarge"
+	InstanceTypeR6g12xlarge       InstanceType = "r6g.12xlarge"
+	InstanceTypeR6g16xlarge       InstanceType = "r6g.16xlarge"
+	InstanceTypeR6gMetal          InstanceType = "r6g.metal"
+	InstanceTypeR6gdMedium        InstanceType = "r6gd.medium"
+	InstanceTypeR6gdLarge         InstanceType = "r6gd.large"
+	InstanceTypeR6gdXlarge        InstanceType = "r6gd.xlarge"
+	InstanceTypeR6gd2xlarge       InstanceType = "r6gd.2xlarge"
+	InstanceTypeR6gd4xlarge       InstanceType = "r6gd.4xlarge"
+	InstanceTypeR6gd8xlarge       InstanceType = "r6gd.8xlarge"
+	InstanceTypeR6gd12xlarge      InstanceType = "r6gd.12xlarge"
+	InstanceTypeR6gd16xlarge      InstanceType = "r6gd.16xlarge"
+	InstanceTypeR6gdMetal         InstanceType = "r6gd.metal"
+	InstanceTypeR6iLarge          InstanceType = "r6i.large"
+	InstanceTypeR6iXlarge         InstanceType = "r6i.xlarge"
+	InstanceTypeR6i2xlarge        InstanceType = "r6i.2xlarge"
+	InstanceTypeR6i4xlarge        InstanceType = "r6i.4xlarge"
+	InstanceTypeR6i8xlarge        InstanceType = "r6i.8xlarge"
+	InstanceTypeR6i12xlarge       InstanceType = "r6i.12xlarge"
+	InstanceTypeR6i16xlarge       InstanceType = "r6i.16xlarge"
+	InstanceTypeR6i24xlarge       InstanceType = "r6i.24xlarge"
+	InstanceTypeR6i32xlarge       InstanceType = "r6i.32xlarge"
+	InstanceTypeR6iMetal          InstanceType = "r6i.metal"
+	InstanceTypeT1Micro           InstanceType = "t1.micro"
+	InstanceTypeT2Nano            InstanceType = "t2.nano"
+	InstanceTypeT2Micro           InstanceType = "t2.micro"
+	InstanceTypeT2Small           InstanceType = "t2.small"
+	InstanceTypeT2Medium          InstanceType = "t2.medium"
+	InstanceTypeT2Large           InstanceType = "t2.large"
+	InstanceTypeT2Xlarge          InstanceType = "t2.xlarge"
+	InstanceTypeT22xlarge         InstanceType = "t2.2xlarge"
+	InstanceTypeT3Nano            InstanceType = "t3.nano"
+	InstanceTypeT3Micro           InstanceType = "t3.micro"
+	InstanceTypeT3Small           InstanceType = "t3.small"
+	InstanceTypeT3Medium          InstanceType = "t3.medium"
+	InstanceTypeT3Large           InstanceType = "t3.large"
+	InstanceTypeT3Xlarge          InstanceType = "t3.xlarge"
+	InstanceTypeT32xlarge         InstanceType = "t3.2xlarge"
+	InstanceTypeT3aNano           InstanceType = "t3a.nano"
+	InstanceTypeT3aMicro          InstanceType = "t3a.micro"
+	InstanceTypeT3aSmall          InstanceType = "t3a.small"
+	InstanceTypeT3aMedium         InstanceType = "t3a.medium"
+	InstanceTypeT3aLarge          InstanceType = "t3a.large"
+	InstanceTypeT3aXlarge         InstanceType = "t3a.xlarge"
+	InstanceTypeT3a2xlarge        InstanceType = "t3a.2xlarge"
+	InstanceTypeT4gNano           InstanceType = "t4g.nano"
+	InstanceTypeT4gMicro          InstanceType = "t4g.micro"
+	InstanceTypeT4gSmall          InstanceType = "t4g.small"
+	InstanceTypeT4gMedium         InstanceType = "t4g.medium"
+	InstanceTypeT4gLarge          InstanceType = "t4g.large"
+	InstanceTypeT4gXlarge         InstanceType = "t4g.xlarge"
+	InstanceTypeT4g2xlarge        InstanceType = "t4g.2xlarge"
+	InstanceTypeU6tb156xlarge     InstanceType = "u-6tb1.56xlarge"
+	InstanceTypeU6tb1112xlarge    InstanceType = "u-6tb1.112xlarge"
+	InstanceTypeU9tb1112xlarge    InstanceType = "u-9tb1.112xlarge"
+	InstanceTypeU12tb1112xlarge   InstanceType = "u-12tb1.112xlarge"
+	InstanceTypeU6tb1Metal        InstanceType = "u-6tb1.metal"
+	InstanceTypeU9tb1Metal        InstanceType = "u-9tb1.metal"
+	InstanceTypeU12tb1Metal       InstanceType = "u-12tb1.metal"
+	InstanceTypeU18tb1Metal       InstanceType = "u-18tb1.metal"
+	InstanceTypeU24tb1Metal       InstanceType = "u-24tb1.metal"
+	InstanceTypeVt13xlarge        InstanceType = "vt1.3xlarge"
+	InstanceTypeVt16xlarge        InstanceType = "vt1.6xlarge"
+	InstanceTypeVt124xlarge       InstanceType = "vt1.24xlarge"
+	InstanceTypeX116xlarge        InstanceType = "x1.16xlarge"
+	InstanceTypeX132xlarge        InstanceType = "x1.32xlarge"
+	InstanceTypeX1eXlarge         InstanceType = "x1e.xlarge"
+	InstanceTypeX1e2xlarge        InstanceType = "x1e.2xlarge"
+	InstanceTypeX1e4xlarge        InstanceType = "x1e.4xlarge"
+	InstanceTypeX1e8xlarge        InstanceType = "x1e.8xlarge"
+	InstanceTypeX1e16xlarge       InstanceType = "x1e.16xlarge"
+	InstanceTypeX1e32xlarge       InstanceType = "x1e.32xlarge"
+	InstanceTypeX2iezn2xlarge     InstanceType = "x2iezn.2xlarge"
+	InstanceTypeX2iezn4xlarge     InstanceType = "x2iezn.4xlarge"
+	InstanceTypeX2iezn6xlarge     InstanceType = "x2iezn.6xlarge"
+	InstanceTypeX2iezn8xlarge     InstanceType = "x2iezn.8xlarge"
+	InstanceTypeX2iezn12xlarge    InstanceType = "x2iezn.12xlarge"
+	InstanceTypeX2ieznMetal       InstanceType = "x2iezn.metal"
+	InstanceTypeX2gdMedium        InstanceType = "x2gd.medium"
+	InstanceTypeX2gdLarge         InstanceType = "x2gd.large"
+	InstanceTypeX2gdXlarge        InstanceType = "x2gd.xlarge"
+	InstanceTypeX2gd2xlarge       InstanceType = "x2gd.2xlarge"
+	InstanceTypeX2gd4xlarge       InstanceType = "x2gd.4xlarge"
+	InstanceTypeX2gd8xlarge       InstanceType = "x2gd.8xlarge"
+	InstanceTypeX2gd12xlarge      InstanceType = "x2gd.12xlarge"
+	InstanceTypeX2gd16xlarge      InstanceType = "x2gd.16xlarge"
+	InstanceTypeX2gdMetal         InstanceType = "x2gd.metal"
+	InstanceTypeZ1dLarge          InstanceType = "z1d.large"
+	InstanceTypeZ1dXlarge         InstanceType = "z1d.xlarge"
+	InstanceTypeZ1d2xlarge        InstanceType = "z1d.2xlarge"
+	InstanceTypeZ1d3xlarge        InstanceType = "z1d.3xlarge"
+	InstanceTypeZ1d6xlarge        InstanceType = "z1d.6xlarge"
+	InstanceTypeZ1d12xlarge       InstanceType = "z1d.12xlarge"
+	InstanceTypeZ1dMetal          InstanceType = "z1d.metal"
+	InstanceTypeX2idn16xlarge     InstanceType = "x2idn.16xlarge"
+	InstanceTypeX2idn24xlarge     InstanceType = "x2idn.24xlarge"
+	InstanceTypeX2idn32xlarge     InstanceType = "x2idn.32xlarge"
+	InstanceTypeX2iednXlarge      InstanceType = "x2iedn.xlarge"
+	InstanceTypeX2iedn2xlarge     InstanceType = "x2iedn.2xlarge"
+	InstanceTypeX2iedn4xlarge     InstanceType = "x2iedn.4xlarge"
+	InstanceTypeX2iedn8xlarge     InstanceType = "x2iedn.8xlarge"
+	InstanceTypeX2iedn16xlarge    InstanceType = "x2iedn.16xlarge"
+	InstanceTypeX2iedn24xlarge    InstanceType = "x2iedn.24xlarge"
+	InstanceTypeX2iedn32xlarge    InstanceType = "x2iedn.32xlarge"
+	InstanceTypeC6aLarge          InstanceType = "c6a.large"
+	InstanceTypeC6aXlarge         InstanceType = "c6a.xlarge"
+	InstanceTypeC6a2xlarge        InstanceType = "c6a.2xlarge"
+	InstanceTypeC6a4xlarge        InstanceType = "c6a.4xlarge"
+	InstanceTypeC6a8xlarge        InstanceType = "c6a.8xlarge"
+	InstanceTypeC6a12xlarge       InstanceType = "c6a.12xlarge"
+	InstanceTypeC6a16xlarge       InstanceType = "c6a.16xlarge"
+	InstanceTypeC6a24xlarge       InstanceType = "c6a.24xlarge"
+	InstanceTypeC6a32xlarge       InstanceType = "c6a.32xlarge"
+	InstanceTypeC6a48xlarge       InstanceType = "c6a.48xlarge"
+	InstanceTypeC6aMetal          InstanceType = "c6a.metal"
+	InstanceTypeM6aMetal          InstanceType = "m6a.metal"
+	InstanceTypeI4iLarge          InstanceType = "i4i.large"
+	InstanceTypeI4iXlarge         InstanceType = "i4i.xlarge"
+	InstanceTypeI4i2xlarge        InstanceType = "i4i.2xlarge"
+	InstanceTypeI4i4xlarge        InstanceType = "i4i.4xlarge"
+	InstanceTypeI4i8xlarge        InstanceType = "i4i.8xlarge"
+	InstanceTypeI4i16xlarge       InstanceType = "i4i.16xlarge"
+	InstanceTypeI4i32xlarge       InstanceType = "i4i.32xlarge"
+	InstanceTypeI4iMetal          InstanceType = "i4i.metal"
+	InstanceTypeX2idnMetal        InstanceType = "x2idn.metal"
+	InstanceTypeX2iednMetal       InstanceType = "x2iedn.metal"
+	InstanceTypeC7gMedium         InstanceType = "c7g.medium"
+	InstanceTypeC7gLarge          InstanceType = "c7g.large"
+	InstanceTypeC7gXlarge         InstanceType = "c7g.xlarge"
+	InstanceTypeC7g2xlarge        InstanceType = "c7g.2xlarge"
+	InstanceTypeC7g4xlarge        InstanceType = "c7g.4xlarge"
+	InstanceTypeC7g8xlarge        InstanceType = "c7g.8xlarge"
+	InstanceTypeC7g12xlarge       InstanceType = "c7g.12xlarge"
+	InstanceTypeC7g16xlarge       InstanceType = "c7g.16xlarge"
+	InstanceTypeMac2Metal         InstanceType = "mac2.metal"
+	InstanceTypeC6idLarge         InstanceType = "c6id.large"
+	InstanceTypeC6idXlarge        InstanceType = "c6id.xlarge"
+	InstanceTypeC6id2xlarge       InstanceType = "c6id.2xlarge"
+	InstanceTypeC6id4xlarge       InstanceType = "c6id.4xlarge"
+	InstanceTypeC6id8xlarge       InstanceType = "c6id.8xlarge"
+	InstanceTypeC6id12xlarge      InstanceType = "c6id.12xlarge"
+	InstanceTypeC6id16xlarge      InstanceType = "c6id.16xlarge"
+	InstanceTypeC6id24xlarge      InstanceType = "c6id.24xlarge"
+	InstanceTypeC6id32xlarge      InstanceType = "c6id.32xlarge"
+	InstanceTypeC6idMetal         InstanceType = "c6id.metal"
+	InstanceTypeM6idLarge         InstanceType = "m6id.large"
+	InstanceTypeM6idXlarge        InstanceType = "m6id.xlarge"
+	InstanceTypeM6id2xlarge       InstanceType = "m6id.2xlarge"
+	InstanceTypeM6id4xlarge       InstanceType = "m6id.4xlarge"
+	InstanceTypeM6id8xlarge       InstanceType = "m6id.8xlarge"
+	InstanceTypeM6id12xlarge      InstanceType = "m6id.12xlarge"
+	InstanceTypeM6id16xlarge      InstanceType = "m6id.16xlarge"
+	InstanceTypeM6id24xlarge      InstanceType = "m6id.24xlarge"
+	InstanceTypeM6id32xlarge      InstanceType = "m6id.32xlarge"
+	InstanceTypeM6idMetal         InstanceType = "m6id.metal"
+	InstanceTypeR6idLarge         InstanceType = "r6id.large"
+	InstanceTypeR6idXlarge        InstanceType = "r6id.xlarge"
+	InstanceTypeR6id2xlarge       InstanceType = "r6id.2xlarge"
+	InstanceTypeR6id4xlarge       InstanceType = "r6id.4xlarge"
+	InstanceTypeR6id8xlarge       InstanceType = "r6id.8xlarge"
+	InstanceTypeR6id12xlarge      InstanceType = "r6id.12xlarge"
+	InstanceTypeR6id16xlarge      InstanceType = "r6id.16xlarge"
+	InstanceTypeR6id24xlarge      InstanceType = "r6id.24xlarge"
+	InstanceTypeR6id32xlarge      InstanceType = "r6id.32xlarge"
+	InstanceTypeR6idMetal         InstanceType = "r6id.metal"
+	InstanceTypeR6aLarge          InstanceType = "r6a.large"
+	InstanceTypeR6aXlarge         InstanceType = "r6a.xlarge"
+	InstanceTypeR6a2xlarge        InstanceType = "r6a.2xlarge"
+	InstanceTypeR6a4xlarge        InstanceType = "r6a.4xlarge"
+	InstanceTypeR6a8xlarge        InstanceType = "r6a.8xlarge"
+	InstanceTypeR6a12xlarge       InstanceType = "r6a.12xlarge"
+	InstanceTypeR6a16xlarge       InstanceType = "r6a.16xlarge"
+	InstanceTypeR6a24xlarge       InstanceType = "r6a.24xlarge"
+	InstanceTypeR6a32xlarge       InstanceType = "r6a.32xlarge"
+	InstanceTypeR6a48xlarge       InstanceType = "r6a.48xlarge"
+	InstanceTypeR6aMetal          InstanceType = "r6a.metal"
+	InstanceTypeP4de24xlarge      InstanceType = "p4de.24xlarge"
+	InstanceTypeU3tb156xlarge     InstanceType = "u-3tb1.56xlarge"
+	InstanceTypeU18tb1112xlarge   InstanceType = "u-18tb1.112xlarge"
+	InstanceTypeU24tb1112xlarge   InstanceType = "u-24tb1.112xlarge"
+	InstanceTypeTrn12xlarge       InstanceType = "trn1.2xlarge"
+	InstanceTypeTrn132xlarge      InstanceType = "trn1.32xlarge"
+	InstanceTypeHpc6id32xlarge    InstanceType = "hpc6id.32xlarge"
+	InstanceTypeC6inLarge         InstanceType = "c6in.large"
+	InstanceTypeC6inXlarge        InstanceType = "c6in.xlarge"
+	InstanceTypeC6in2xlarge       InstanceType = "c6in.2xlarge"
+	InstanceTypeC6in4xlarge       InstanceType = "c6in.4xlarge"
+	InstanceTypeC6in8xlarge       InstanceType = "c6in.8xlarge"
+	InstanceTypeC6in12xlarge      InstanceType = "c6in.12xlarge"
+	InstanceTypeC6in16xlarge      InstanceType = "c6in.16xlarge"
+	InstanceTypeC6in24xlarge      InstanceType = "c6in.24xlarge"
+	InstanceTypeC6in32xlarge      InstanceType = "c6in.32xlarge"
+	InstanceTypeM6inLarge         InstanceType = "m6in.large"
+	InstanceTypeM6inXlarge        InstanceType = "m6in.xlarge"
+	InstanceTypeM6in2xlarge       InstanceType = "m6in.2xlarge"
+	InstanceTypeM6in4xlarge       InstanceType = "m6in.4xlarge"
+	InstanceTypeM6in8xlarge       InstanceType = "m6in.8xlarge"
+	InstanceTypeM6in12xlarge      InstanceType = "m6in.12xlarge"
+	InstanceTypeM6in16xlarge      InstanceType = "m6in.16xlarge"
+	InstanceTypeM6in24xlarge      InstanceType = "m6in.24xlarge"
+	InstanceTypeM6in32xlarge      InstanceType = "m6in.32xlarge"
+	InstanceTypeM6idnLarge        InstanceType = "m6idn.large"
+	InstanceTypeM6idnXlarge       InstanceType = "m6idn.xlarge"
+	InstanceTypeM6idn2xlarge      InstanceType = "m6idn.2xlarge"
+	InstanceTypeM6idn4xlarge      InstanceType = "m6idn.4xlarge"
+	InstanceTypeM6idn8xlarge      InstanceType = "m6idn.8xlarge"
+	InstanceTypeM6idn12xlarge     InstanceType = "m6idn.12xlarge"
+	InstanceTypeM6idn16xlarge     InstanceType = "m6idn.16xlarge"
+	InstanceTypeM6idn24xlarge     InstanceType = "m6idn.24xlarge"
+	InstanceTypeM6idn32xlarge     InstanceType = "m6idn.32xlarge"
+	InstanceTypeR6inLarge         InstanceType = "r6in.large"
+	InstanceTypeR6inXlarge        InstanceType = "r6in.xlarge"
+	InstanceTypeR6in2xlarge       InstanceType = "r6in.2xlarge"
+	InstanceTypeR6in4xlarge       InstanceType = "r6in.4xlarge"
+	InstanceTypeR6in8xlarge       InstanceType = "r6in.8xlarge"
+	InstanceTypeR6in12xlarge      InstanceType = "r6in.12xlarge"
+	InstanceTypeR6in16xlarge      InstanceType = "r6in.16xlarge"
+	InstanceTypeR6in24xlarge      InstanceType = "r6in.24xlarge"
+	InstanceTypeR6in32xlarge      InstanceType = "r6in.32xlarge"
+	InstanceTypeR6idnLarge        InstanceType = "r6idn.large"
+	InstanceTypeR6idnXlarge       InstanceType = "r6idn.xlarge"
+	InstanceTypeR6idn2xlarge      InstanceType = "r6idn.2xlarge"
+	InstanceTypeR6idn4xlarge      InstanceType = "r6idn.4xlarge"
+	InstanceTypeR6idn8xlarge      InstanceType = "r6idn.8xlarge"
+	InstanceTypeR6idn12xlarge     InstanceType = "r6idn.12xlarge"
+	InstanceTypeR6idn16xlarge     InstanceType = "r6idn.16xlarge"
+	InstanceTypeR6idn24xlarge     InstanceType = "r6idn.24xlarge"
+	InstanceTypeR6idn32xlarge     InstanceType = "r6idn.32xlarge"
+	InstanceTypeC7gMetal          InstanceType = "c7g.metal"
+	InstanceTypeM7gMedium         InstanceType = "m7g.medium"
+	InstanceTypeM7gLarge          InstanceType = "m7g.large"
+	InstanceTypeM7gXlarge         InstanceType = "m7g.xlarge"
+	InstanceTypeM7g2xlarge        InstanceType = "m7g.2xlarge"
+	InstanceTypeM7g4xlarge        InstanceType = "m7g.4xlarge"
+	InstanceTypeM7g8xlarge        InstanceType = "m7g.8xlarge"
+	InstanceTypeM7g12xlarge       InstanceType = "m7g.12xlarge"
+	InstanceTypeM7g16xlarge       InstanceType = "m7g.16xlarge"
+	InstanceTypeM7gMetal          InstanceType = "m7g.metal"
+	InstanceTypeR7gMedium         InstanceType = "r7g.medium"
+	InstanceTypeR7gLarge          InstanceType = "r7g.large"
+	InstanceTypeR7gXlarge         InstanceType = "r7g.xlarge"
+	InstanceTypeR7g2xlarge        InstanceType = "r7g.2xlarge"
+	InstanceTypeR7g4xlarge        InstanceType = "r7g.4xlarge"
+	InstanceTypeR7g8xlarge        InstanceType = "r7g.8xlarge"
+	InstanceTypeR7g12xlarge       InstanceType = "r7g.12xlarge"
+	InstanceTypeR7g16xlarge       InstanceType = "r7g.16xlarge"
+	InstanceTypeR7gMetal          InstanceType = "r7g.metal"
+	InstanceTypeC6inMetal         InstanceType = "c6in.metal"
+	InstanceTypeM6inMetal         InstanceType = "m6in.metal"
+	InstanceTypeM6idnMetal        InstanceType = "m6idn.metal"
+	InstanceTypeR6inMetal         InstanceType = "r6in.metal"
+	InstanceTypeR6idnMetal        InstanceType = "r6idn.metal"
+	InstanceTypeInf2Xlarge        InstanceType = "inf2.xlarge"
+	InstanceTypeInf28xlarge       InstanceType = "inf2.8xlarge"
+	InstanceTypeInf224xlarge      InstanceType = "inf2.24xlarge"
+	InstanceTypeInf248xlarge      InstanceType = "inf2.48xlarge"
+	InstanceTypeTrn1n32xlarge     InstanceType = "trn1n.32xlarge"
+	InstanceTypeI4gLarge          InstanceType = "i4g.large"
+	InstanceTypeI4gXlarge         InstanceType = "i4g.xlarge"
+	InstanceTypeI4g2xlarge        InstanceType = "i4g.2xlarge"
+	InstanceTypeI4g4xlarge        InstanceType = "i4g.4xlarge"
+	InstanceTypeI4g8xlarge        InstanceType = "i4g.8xlarge"
+	InstanceTypeI4g16xlarge       InstanceType = "i4g.16xlarge"
+	InstanceTypeHpc7g4xlarge      InstanceType = "hpc7g.4xlarge"
+	InstanceTypeHpc7g8xlarge      InstanceType = "hpc7g.8xlarge"
+	InstanceTypeHpc7g16xlarge     InstanceType = "hpc7g.16xlarge"
+	InstanceTypeC7gnMedium        InstanceType = "c7gn.medium"
+	InstanceTypeC7gnLarge         InstanceType = "c7gn.large"
+	InstanceTypeC7gnXlarge        InstanceType = "c7gn.xlarge"
+	InstanceTypeC7gn2xlarge       InstanceType = "c7gn.2xlarge"
+	InstanceTypeC7gn4xlarge       InstanceType = "c7gn.4xlarge"
+	InstanceTypeC7gn8xlarge       InstanceType = "c7gn.8xlarge"
+	InstanceTypeC7gn12xlarge      InstanceType = "c7gn.12xlarge"
+	InstanceTypeC7gn16xlarge      InstanceType = "c7gn.16xlarge"
+	InstanceTypeP548xlarge        InstanceType = "p5.48xlarge"
+	InstanceTypeM7iLarge          InstanceType = "m7i.large"
+	InstanceTypeM7iXlarge         InstanceType = "m7i.xlarge"
+	InstanceTypeM7i2xlarge        InstanceType = "m7i.2xlarge"
+	InstanceTypeM7i4xlarge        InstanceType = "m7i.4xlarge"
+	InstanceTypeM7i8xlarge        InstanceType = "m7i.8xlarge"
+	InstanceTypeM7i12xlarge       InstanceType = "m7i.12xlarge"
+	InstanceTypeM7i16xlarge       InstanceType = "m7i.16xlarge"
+	InstanceTypeM7i24xlarge       InstanceType = "m7i.24xlarge"
+	InstanceTypeM7i48xlarge       InstanceType = "m7i.48xlarge"
+	InstanceTypeM7iFlexLarge      InstanceType = "m7i-flex.large"
+	InstanceTypeM7iFlexXlarge     InstanceType = "m7i-flex.xlarge"
+	InstanceTypeM7iFlex2xlarge    InstanceType = "m7i-flex.2xlarge"
+	InstanceTypeM7iFlex4xlarge    InstanceType = "m7i-flex.4xlarge"
+	InstanceTypeM7iFlex8xlarge    InstanceType = "m7i-flex.8xlarge"
+	InstanceTypeM7aMedium         InstanceType = "m7a.medium"
+	InstanceTypeM7aLarge          InstanceType = "m7a.large"
+	InstanceTypeM7aXlarge         InstanceType = "m7a.xlarge"
+	InstanceTypeM7a2xlarge        InstanceType = "m7a.2xlarge"
+	InstanceTypeM7a4xlarge        InstanceType = "m7a.4xlarge"
+	InstanceTypeM7a8xlarge        InstanceType = "m7a.8xlarge"
+	InstanceTypeM7a12xlarge       InstanceType = "m7a.12xlarge"
+	InstanceTypeM7a16xlarge       InstanceType = "m7a.16xlarge"
+	InstanceTypeM7a24xlarge       InstanceType = "m7a.24xlarge"
+	InstanceTypeM7a32xlarge       InstanceType = "m7a.32xlarge"
+	InstanceTypeM7a48xlarge       InstanceType = "m7a.48xlarge"
+	InstanceTypeM7aMetal48xl      InstanceType = "m7a.metal-48xl"
+	InstanceTypeHpc7a12xlarge     InstanceType = "hpc7a.12xlarge"
+	InstanceTypeHpc7a24xlarge     InstanceType = "hpc7a.24xlarge"
+	InstanceTypeHpc7a48xlarge     InstanceType = "hpc7a.48xlarge"
+	InstanceTypeHpc7a96xlarge     InstanceType = "hpc7a.96xlarge"
+	InstanceTypeC7gdMedium        InstanceType = "c7gd.medium"
+	InstanceTypeC7gdLarge         InstanceType = "c7gd.large"
+	InstanceTypeC7gdXlarge        InstanceType = "c7gd.xlarge"
+	InstanceTypeC7gd2xlarge       InstanceType = "c7gd.2xlarge"
+	InstanceTypeC7gd4xlarge       InstanceType = "c7gd.4xlarge"
+	InstanceTypeC7gd8xlarge       InstanceType = "c7gd.8xlarge"
+	InstanceTypeC7gd12xlarge      InstanceType = "c7gd.12xlarge"
+	InstanceTypeC7gd16xlarge      InstanceType = "c7gd.16xlarge"
+	InstanceTypeM7gdMedium        InstanceType = "m7gd.medium"
+	InstanceTypeM7gdLarge         InstanceType = "m7gd.large"
+	InstanceTypeM7gdXlarge        InstanceType = "m7gd.xlarge"
+	InstanceTypeM7gd2xlarge       InstanceType = "m7gd.2xlarge"
+	InstanceTypeM7gd4xlarge       InstanceType = "m7gd.4xlarge"
+	InstanceTypeM7gd8xlarge       InstanceType = "m7gd.8xlarge"
+	InstanceTypeM7gd12xlarge      InstanceType = "m7gd.12xlarge"
+	InstanceTypeM7gd16xlarge      InstanceType = "m7gd.16xlarge"
+	InstanceTypeR7gdMedium        InstanceType = "r7gd.medium"
+	InstanceTypeR7gdLarge         InstanceType = "r7gd.large"
+	InstanceTypeR7gdXlarge        InstanceType = "r7gd.xlarge"
+	InstanceTypeR7gd2xlarge       InstanceType = "r7gd.2xlarge"
+	InstanceTypeR7gd4xlarge       InstanceType = "r7gd.4xlarge"
+	InstanceTypeR7gd8xlarge       InstanceType = "r7gd.8xlarge"
+	InstanceTypeR7gd12xlarge      InstanceType = "r7gd.12xlarge"
+	InstanceTypeR7gd16xlarge      InstanceType = "r7gd.16xlarge"
+	InstanceTypeR7aMedium         InstanceType = "r7a.medium"
+	InstanceTypeR7aLarge          InstanceType = "r7a.large"
+	InstanceTypeR7aXlarge         InstanceType = "r7a.xlarge"
+	InstanceTypeR7a2xlarge        InstanceType = "r7a.2xlarge"
+	InstanceTypeR7a4xlarge        InstanceType = "r7a.4xlarge"
+	InstanceTypeR7a8xlarge        InstanceType = "r7a.8xlarge"
+	InstanceTypeR7a12xlarge       InstanceType = "r7a.12xlarge"
+	InstanceTypeR7a16xlarge       InstanceType = "r7a.16xlarge"
+	InstanceTypeR7a24xlarge       InstanceType = "r7a.24xlarge"
+	InstanceTypeR7a32xlarge       InstanceType = "r7a.32xlarge"
+	InstanceTypeR7a48xlarge       InstanceType = "r7a.48xlarge"
+	InstanceTypeC7iLarge          InstanceType = "c7i.large"
+	InstanceTypeC7iXlarge         InstanceType = "c7i.xlarge"
+	InstanceTypeC7i2xlarge        InstanceType = "c7i.2xlarge"
+	InstanceTypeC7i4xlarge        InstanceType = "c7i.4xlarge"
+	InstanceTypeC7i8xlarge        InstanceType = "c7i.8xlarge"
+	InstanceTypeC7i12xlarge       InstanceType = "c7i.12xlarge"
+	InstanceTypeC7i16xlarge       InstanceType = "c7i.16xlarge"
+	InstanceTypeC7i24xlarge       InstanceType = "c7i.24xlarge"
+	InstanceTypeC7i48xlarge       InstanceType = "c7i.48xlarge"
+	InstanceTypeMac2M2proMetal    InstanceType = "mac2-m2pro.metal"
+	InstanceTypeR7izLarge         InstanceType = "r7iz.large"
+	InstanceTypeR7izXlarge        InstanceType = "r7iz.xlarge"
+	InstanceTypeR7iz2xlarge       InstanceType = "r7iz.2xlarge"
+	InstanceTypeR7iz4xlarge       InstanceType = "r7iz.4xlarge"
+	InstanceTypeR7iz8xlarge       InstanceType = "r7iz.8xlarge"
+	InstanceTypeR7iz12xlarge      InstanceType = "r7iz.12xlarge"
+	InstanceTypeR7iz16xlarge      InstanceType = "r7iz.16xlarge"
+	InstanceTypeR7iz32xlarge      InstanceType = "r7iz.32xlarge"
+	InstanceTypeC7aMedium         InstanceType = "c7a.medium"
+	InstanceTypeC7aLarge          InstanceType = "c7a.large"
+	InstanceTypeC7aXlarge         InstanceType = "c7a.xlarge"
+	InstanceTypeC7a2xlarge        InstanceType = "c7a.2xlarge"
+	InstanceTypeC7a4xlarge        InstanceType = "c7a.4xlarge"
+	InstanceTypeC7a8xlarge        InstanceType = "c7a.8xlarge"
+	InstanceTypeC7a12xlarge       InstanceType = "c7a.12xlarge"
+	InstanceTypeC7a16xlarge       InstanceType = "c7a.16xlarge"
+	InstanceTypeC7a24xlarge       InstanceType = "c7a.24xlarge"
+	InstanceTypeC7a32xlarge       InstanceType = "c7a.32xlarge"
+	InstanceTypeC7a48xlarge       InstanceType = "c7a.48xlarge"
+	InstanceTypeC7aMetal48xl      InstanceType = "c7a.metal-48xl"
+	InstanceTypeR7aMetal48xl      InstanceType = "r7a.metal-48xl"
+	InstanceTypeR7iLarge          InstanceType = "r7i.large"
+	InstanceTypeR7iXlarge         InstanceType = "r7i.xlarge"
+	InstanceTypeR7i2xlarge        InstanceType = "r7i.2xlarge"
+	InstanceTypeR7i4xlarge        InstanceType = "r7i.4xlarge"
+	InstanceTypeR7i8xlarge        InstanceType = "r7i.8xlarge"
+	InstanceTypeR7i12xlarge       InstanceType = "r7i.12xlarge"
+	InstanceTypeR7i16xlarge       InstanceType = "r7i.16xlarge"
+	InstanceTypeR7i24xlarge       InstanceType = "r7i.24xlarge"
+	InstanceTypeR7i48xlarge       InstanceType = "r7i.48xlarge"
+	InstanceTypeDl2q24xlarge      InstanceType = "dl2q.24xlarge"
+	InstanceTypeMac2M2Metal       InstanceType = "mac2-m2.metal"
+	InstanceTypeI4i12xlarge       InstanceType = "i4i.12xlarge"
+	InstanceTypeI4i24xlarge       InstanceType = "i4i.24xlarge"
+	InstanceTypeC7iMetal24xl      InstanceType = "c7i.metal-24xl"
+	InstanceTypeC7iMetal48xl      InstanceType = "c7i.metal-48xl"
+	InstanceTypeM7iMetal24xl      InstanceType = "m7i.metal-24xl"
+	InstanceTypeM7iMetal48xl      InstanceType = "m7i.metal-48xl"
+	InstanceTypeR7iMetal24xl      InstanceType = "r7i.metal-24xl"
+	InstanceTypeR7iMetal48xl      InstanceType = "r7i.metal-48xl"
+	InstanceTypeR7izMetal16xl     InstanceType = "r7iz.metal-16xl"
+	InstanceTypeR7izMetal32xl     InstanceType = "r7iz.metal-32xl"
+	InstanceTypeC7gdMetal         InstanceType = "c7gd.metal"
+	InstanceTypeM7gdMetal         InstanceType = "m7gd.metal"
+	InstanceTypeR7gdMetal         InstanceType = "r7gd.metal"
+	InstanceTypeG6Xlarge          InstanceType = "g6.xlarge"
+	InstanceTypeG62xlarge         InstanceType = "g6.2xlarge"
+	InstanceTypeG64xlarge         InstanceType = "g6.4xlarge"
+	InstanceTypeG68xlarge         InstanceType = "g6.8xlarge"
+	InstanceTypeG612xlarge        InstanceType = "g6.12xlarge"
+	InstanceTypeG616xlarge        InstanceType = "g6.16xlarge"
+	InstanceTypeG624xlarge        InstanceType = "g6.24xlarge"
+	InstanceTypeG648xlarge        InstanceType = "g6.48xlarge"
+	InstanceTypeGr64xlarge        InstanceType = "gr6.4xlarge"
+	InstanceTypeGr68xlarge        InstanceType = "gr6.8xlarge"
+	InstanceTypeC7iFlexLarge      InstanceType = "c7i-flex.large"
+	InstanceTypeC7iFlexXlarge     InstanceType = "c7i-flex.xlarge"
+	InstanceTypeC7iFlex2xlarge    InstanceType = "c7i-flex.2xlarge"
+	InstanceTypeC7iFlex4xlarge    InstanceType = "c7i-flex.4xlarge"
+	InstanceTypeC7iFlex8xlarge    InstanceType = "c7i-flex.8xlarge"
+	InstanceTypeU7i12tb224xlarge  InstanceType = "u7i-12tb.224xlarge"
+	InstanceTypeU7in16tb224xlarge InstanceType = "u7in-16tb.224xlarge"
+	InstanceTypeU7in24tb224xlarge InstanceType = "u7in-24tb.224xlarge"
+	InstanceTypeU7in32tb224xlarge InstanceType = "u7in-32tb.224xlarge"
 )
 
 // Values returns all known values for InstanceType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (InstanceType) Values() []InstanceType {
 	return []InstanceType{
 		"a1.medium",
@@ -4491,6 +4737,28 @@ func (InstanceType) Values() []InstanceType {
 		"r7i.metal-48xl",
 		"r7iz.metal-16xl",
 		"r7iz.metal-32xl",
+		"c7gd.metal",
+		"m7gd.metal",
+		"r7gd.metal",
+		"g6.xlarge",
+		"g6.2xlarge",
+		"g6.4xlarge",
+		"g6.8xlarge",
+		"g6.12xlarge",
+		"g6.16xlarge",
+		"g6.24xlarge",
+		"g6.48xlarge",
+		"gr6.4xlarge",
+		"gr6.8xlarge",
+		"c7i-flex.large",
+		"c7i-flex.xlarge",
+		"c7i-flex.2xlarge",
+		"c7i-flex.4xlarge",
+		"c7i-flex.8xlarge",
+		"u7i-12tb.224xlarge",
+		"u7in-16tb.224xlarge",
+		"u7in-24tb.224xlarge",
+		"u7in-32tb.224xlarge",
 	}
 }
 
@@ -4503,8 +4771,9 @@ const (
 )
 
 // Values returns all known values for InstanceTypeHypervisor. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (InstanceTypeHypervisor) Values() []InstanceTypeHypervisor {
 	return []InstanceTypeHypervisor{
 		"nitro",
@@ -4521,8 +4790,9 @@ const (
 )
 
 // Values returns all known values for InterfacePermissionType. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (InterfacePermissionType) Values() []InterfacePermissionType {
 	return []InterfacePermissionType{
 		"INSTANCE-ATTACH",
@@ -4539,8 +4809,9 @@ const (
 )
 
 // Values returns all known values for InterfaceProtocolType. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (InterfaceProtocolType) Values() []InterfaceProtocolType {
 	return []InterfaceProtocolType{
 		"VLAN",
@@ -4558,8 +4829,9 @@ const (
 )
 
 // Values returns all known values for IpAddressType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (IpAddressType) Values() []IpAddressType {
 	return []IpAddressType{
 		"ipv4",
@@ -4581,8 +4853,9 @@ const (
 
 // Values returns all known values for IpamAddressHistoryResourceType. Note that
 // this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (IpamAddressHistoryResourceType) Values() []IpamAddressHistoryResourceType {
 	return []IpamAddressHistoryResourceType{
 		"eip",
@@ -4603,8 +4876,9 @@ const (
 
 // Values returns all known values for IpamAssociatedResourceDiscoveryStatus. Note
 // that this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (IpamAssociatedResourceDiscoveryStatus) Values() []IpamAssociatedResourceDiscoveryStatus {
 	return []IpamAssociatedResourceDiscoveryStatus{
 		"active",
@@ -4623,8 +4897,9 @@ const (
 )
 
 // Values returns all known values for IpamComplianceStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (IpamComplianceStatus) Values() []IpamComplianceStatus {
 	return []IpamComplianceStatus{
 		"compliant",
@@ -4645,6 +4920,7 @@ const (
 
 // Values returns all known values for IpamDiscoveryFailureCode. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (IpamDiscoveryFailureCode) Values() []IpamDiscoveryFailureCode {
 	return []IpamDiscoveryFailureCode{
@@ -4664,8 +4940,9 @@ const (
 )
 
 // Values returns all known values for IpamManagementState. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (IpamManagementState) Values() []IpamManagementState {
 	return []IpamManagementState{
 		"managed",
@@ -4684,8 +4961,9 @@ const (
 )
 
 // Values returns all known values for IpamOverlapStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (IpamOverlapStatus) Values() []IpamOverlapStatus {
 	return []IpamOverlapStatus{
 		"overlapping",
@@ -4707,8 +4985,9 @@ const (
 
 // Values returns all known values for IpamPoolAllocationResourceType. Note that
 // this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (IpamPoolAllocationResourceType) Values() []IpamPoolAllocationResourceType {
 	return []IpamPoolAllocationResourceType{
 		"ipam-pool",
@@ -4727,8 +5006,9 @@ const (
 )
 
 // Values returns all known values for IpamPoolAwsService. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (IpamPoolAwsService) Values() []IpamPoolAwsService {
 	return []IpamPoolAwsService{
 		"ec2",
@@ -4744,8 +5024,9 @@ const (
 )
 
 // Values returns all known values for IpamPoolCidrFailureCode. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (IpamPoolCidrFailureCode) Values() []IpamPoolCidrFailureCode {
 	return []IpamPoolCidrFailureCode{
 		"cidr-not-available",
@@ -4768,8 +5049,9 @@ const (
 )
 
 // Values returns all known values for IpamPoolCidrState. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (IpamPoolCidrState) Values() []IpamPoolCidrState {
 	return []IpamPoolCidrState{
 		"pending-provision",
@@ -4792,8 +5074,9 @@ const (
 )
 
 // Values returns all known values for IpamPoolPublicIpSource. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (IpamPoolPublicIpSource) Values() []IpamPoolPublicIpSource {
 	return []IpamPoolPublicIpSource{
 		"amazon",
@@ -4810,6 +5093,7 @@ const (
 
 // Values returns all known values for IpamPoolSourceResourceType. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (IpamPoolSourceResourceType) Values() []IpamPoolSourceResourceType {
 	return []IpamPoolSourceResourceType{
@@ -4836,8 +5120,9 @@ const (
 )
 
 // Values returns all known values for IpamPoolState. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (IpamPoolState) Values() []IpamPoolState {
 	return []IpamPoolState{
 		"create-in-progress",
@@ -4865,8 +5150,9 @@ const (
 
 // Values returns all known values for IpamPublicAddressAssociationStatus. Note
 // that this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (IpamPublicAddressAssociationStatus) Values() []IpamPublicAddressAssociationStatus {
 	return []IpamPublicAddressAssociationStatus{
 		"associated",
@@ -4891,6 +5177,7 @@ const (
 
 // Values returns all known values for IpamPublicAddressAwsService. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (IpamPublicAddressAwsService) Values() []IpamPublicAddressAwsService {
 	return []IpamPublicAddressAwsService{
@@ -4918,8 +5205,9 @@ const (
 )
 
 // Values returns all known values for IpamPublicAddressType. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (IpamPublicAddressType) Values() []IpamPublicAddressType {
 	return []IpamPublicAddressType{
 		"service-managed-ip",
@@ -4947,8 +5235,9 @@ const (
 
 // Values returns all known values for IpamResourceDiscoveryAssociationState. Note
 // that this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (IpamResourceDiscoveryAssociationState) Values() []IpamResourceDiscoveryAssociationState {
 	return []IpamResourceDiscoveryAssociationState{
 		"associate-in-progress",
@@ -4983,6 +5272,7 @@ const (
 
 // Values returns all known values for IpamResourceDiscoveryState. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (IpamResourceDiscoveryState) Values() []IpamResourceDiscoveryState {
 	return []IpamResourceDiscoveryState{
@@ -5014,8 +5304,9 @@ const (
 )
 
 // Values returns all known values for IpamResourceType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (IpamResourceType) Values() []IpamResourceType {
 	return []IpamResourceType{
 		"vpc",
@@ -5046,8 +5337,9 @@ const (
 )
 
 // Values returns all known values for IpamScopeState. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (IpamScopeState) Values() []IpamScopeState {
 	return []IpamScopeState{
 		"create-in-progress",
@@ -5074,8 +5366,9 @@ const (
 )
 
 // Values returns all known values for IpamScopeType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (IpamScopeType) Values() []IpamScopeType {
 	return []IpamScopeType{
 		"public",
@@ -5102,8 +5395,9 @@ const (
 )
 
 // Values returns all known values for IpamState. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (IpamState) Values() []IpamState {
 	return []IpamState{
 		"create-in-progress",
@@ -5130,8 +5424,9 @@ const (
 )
 
 // Values returns all known values for IpamTier. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (IpamTier) Values() []IpamTier {
 	return []IpamTier{
 		"free",
@@ -5148,8 +5443,9 @@ const (
 )
 
 // Values returns all known values for Ipv6SupportValue. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (Ipv6SupportValue) Values() []Ipv6SupportValue {
 	return []Ipv6SupportValue{
 		"enable",
@@ -5166,8 +5462,9 @@ const (
 )
 
 // Values returns all known values for KeyFormat. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (KeyFormat) Values() []KeyFormat {
 	return []KeyFormat{
 		"pem",
@@ -5184,8 +5481,9 @@ const (
 )
 
 // Values returns all known values for KeyType. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (KeyType) Values() []KeyType {
 	return []KeyType{
 		"rsa",
@@ -5203,8 +5501,9 @@ const (
 
 // Values returns all known values for LaunchTemplateAutoRecoveryState. Note that
 // this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (LaunchTemplateAutoRecoveryState) Values() []LaunchTemplateAutoRecoveryState {
 	return []LaunchTemplateAutoRecoveryState{
 		"default",
@@ -5225,8 +5524,9 @@ const (
 )
 
 // Values returns all known values for LaunchTemplateErrorCode. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (LaunchTemplateErrorCode) Values() []LaunchTemplateErrorCode {
 	return []LaunchTemplateErrorCode{
 		"launchTemplateIdDoesNotExist",
@@ -5248,8 +5548,9 @@ const (
 
 // Values returns all known values for LaunchTemplateHttpTokensState. Note that
 // this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (LaunchTemplateHttpTokensState) Values() []LaunchTemplateHttpTokensState {
 	return []LaunchTemplateHttpTokensState{
 		"optional",
@@ -5267,8 +5568,9 @@ const (
 
 // Values returns all known values for
 // LaunchTemplateInstanceMetadataEndpointState. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (LaunchTemplateInstanceMetadataEndpointState) Values() []LaunchTemplateInstanceMetadataEndpointState {
 	return []LaunchTemplateInstanceMetadataEndpointState{
 		"disabled",
@@ -5286,8 +5588,9 @@ const (
 
 // Values returns all known values for LaunchTemplateInstanceMetadataOptionsState.
 // Note that this can be expanded in the future, and so it is only as up to date as
-// the client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (LaunchTemplateInstanceMetadataOptionsState) Values() []LaunchTemplateInstanceMetadataOptionsState {
 	return []LaunchTemplateInstanceMetadataOptionsState{
 		"pending",
@@ -5305,8 +5608,9 @@ const (
 
 // Values returns all known values for LaunchTemplateInstanceMetadataProtocolIpv6.
 // Note that this can be expanded in the future, and so it is only as up to date as
-// the client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (LaunchTemplateInstanceMetadataProtocolIpv6) Values() []LaunchTemplateInstanceMetadataProtocolIpv6 {
 	return []LaunchTemplateInstanceMetadataProtocolIpv6{
 		"disabled",
@@ -5324,8 +5628,9 @@ const (
 
 // Values returns all known values for LaunchTemplateInstanceMetadataTagsState.
 // Note that this can be expanded in the future, and so it is only as up to date as
-// the client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (LaunchTemplateInstanceMetadataTagsState) Values() []LaunchTemplateInstanceMetadataTagsState {
 	return []LaunchTemplateInstanceMetadataTagsState{
 		"disabled",
@@ -5344,8 +5649,9 @@ const (
 )
 
 // Values returns all known values for ListingState. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ListingState) Values() []ListingState {
 	return []ListingState{
 		"available",
@@ -5366,8 +5672,9 @@ const (
 )
 
 // Values returns all known values for ListingStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ListingStatus) Values() []ListingStatus {
 	return []ListingStatus{
 		"active",
@@ -5389,8 +5696,9 @@ const (
 )
 
 // Values returns all known values for LocalGatewayRouteState. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (LocalGatewayRouteState) Values() []LocalGatewayRouteState {
 	return []LocalGatewayRouteState{
 		"pending",
@@ -5411,6 +5719,7 @@ const (
 
 // Values returns all known values for LocalGatewayRouteTableMode. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (LocalGatewayRouteTableMode) Values() []LocalGatewayRouteTableMode {
 	return []LocalGatewayRouteTableMode{
@@ -5428,8 +5737,9 @@ const (
 )
 
 // Values returns all known values for LocalGatewayRouteType. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (LocalGatewayRouteType) Values() []LocalGatewayRouteType {
 	return []LocalGatewayRouteType{
 		"static",
@@ -5447,8 +5757,9 @@ const (
 )
 
 // Values returns all known values for LocalStorage. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (LocalStorage) Values() []LocalStorage {
 	return []LocalStorage{
 		"included",
@@ -5466,8 +5777,9 @@ const (
 )
 
 // Values returns all known values for LocalStorageType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (LocalStorageType) Values() []LocalStorageType {
 	return []LocalStorageType{
 		"hdd",
@@ -5486,8 +5798,9 @@ const (
 )
 
 // Values returns all known values for LocationType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (LocationType) Values() []LocationType {
 	return []LocationType{
 		"region",
@@ -5506,8 +5819,9 @@ const (
 )
 
 // Values returns all known values for LockMode. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (LockMode) Values() []LockMode {
 	return []LockMode{
 		"compliance",
@@ -5526,8 +5840,9 @@ const (
 )
 
 // Values returns all known values for LockState. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (LockState) Values() []LockState {
 	return []LockState{
 		"compliance",
@@ -5547,8 +5862,9 @@ const (
 )
 
 // Values returns all known values for LogDestinationType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (LogDestinationType) Values() []LogDestinationType {
 	return []LogDestinationType{
 		"cloud-watch-logs",
@@ -5566,8 +5882,9 @@ const (
 )
 
 // Values returns all known values for MarketType. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (MarketType) Values() []MarketType {
 	return []MarketType{
 		"spot",
@@ -5584,12 +5901,35 @@ const (
 )
 
 // Values returns all known values for MembershipType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (MembershipType) Values() []MembershipType {
 	return []MembershipType{
 		"static",
 		"igmp",
+	}
+}
+
+type MetadataDefaultHttpTokensState string
+
+// Enum values for MetadataDefaultHttpTokensState
+const (
+	MetadataDefaultHttpTokensStateOptional     MetadataDefaultHttpTokensState = "optional"
+	MetadataDefaultHttpTokensStateRequired     MetadataDefaultHttpTokensState = "required"
+	MetadataDefaultHttpTokensStateNoPreference MetadataDefaultHttpTokensState = "no-preference"
+)
+
+// Values returns all known values for MetadataDefaultHttpTokensState. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (MetadataDefaultHttpTokensState) Values() []MetadataDefaultHttpTokensState {
+	return []MetadataDefaultHttpTokensState{
+		"optional",
+		"required",
+		"no-preference",
 	}
 }
 
@@ -5601,8 +5941,9 @@ const (
 )
 
 // Values returns all known values for MetricType. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (MetricType) Values() []MetricType {
 	return []MetricType{
 		"aggregate-latency",
@@ -5619,8 +5960,9 @@ const (
 
 // Values returns all known values for ModifyAvailabilityZoneOptInStatus. Note
 // that this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ModifyAvailabilityZoneOptInStatus) Values() []ModifyAvailabilityZoneOptInStatus {
 	return []ModifyAvailabilityZoneOptInStatus{
 		"opted-in",
@@ -5639,8 +5981,9 @@ const (
 )
 
 // Values returns all known values for MonitoringState. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (MonitoringState) Values() []MonitoringState {
 	return []MonitoringState{
 		"disabled",
@@ -5659,8 +6002,9 @@ const (
 )
 
 // Values returns all known values for MoveStatus. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (MoveStatus) Values() []MoveStatus {
 	return []MoveStatus{
 		"movingToVpc",
@@ -5677,8 +6021,9 @@ const (
 )
 
 // Values returns all known values for MulticastSupportValue. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (MulticastSupportValue) Values() []MulticastSupportValue {
 	return []MulticastSupportValue{
 		"enable",
@@ -5699,8 +6044,9 @@ const (
 )
 
 // Values returns all known values for NatGatewayAddressStatus. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (NatGatewayAddressStatus) Values() []NatGatewayAddressStatus {
 	return []NatGatewayAddressStatus{
 		"assigning",
@@ -5724,8 +6070,9 @@ const (
 )
 
 // Values returns all known values for NatGatewayState. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (NatGatewayState) Values() []NatGatewayState {
 	return []NatGatewayState{
 		"pending",
@@ -5740,14 +6087,16 @@ type NetworkInterfaceAttribute string
 
 // Enum values for NetworkInterfaceAttribute
 const (
-	NetworkInterfaceAttributeDescription     NetworkInterfaceAttribute = "description"
-	NetworkInterfaceAttributeGroupSet        NetworkInterfaceAttribute = "groupSet"
-	NetworkInterfaceAttributeSourceDestCheck NetworkInterfaceAttribute = "sourceDestCheck"
-	NetworkInterfaceAttributeAttachment      NetworkInterfaceAttribute = "attachment"
+	NetworkInterfaceAttributeDescription              NetworkInterfaceAttribute = "description"
+	NetworkInterfaceAttributeGroupSet                 NetworkInterfaceAttribute = "groupSet"
+	NetworkInterfaceAttributeSourceDestCheck          NetworkInterfaceAttribute = "sourceDestCheck"
+	NetworkInterfaceAttributeAttachment               NetworkInterfaceAttribute = "attachment"
+	NetworkInterfaceAttributeAssociatePublicIpAddress NetworkInterfaceAttribute = "associatePublicIpAddress"
 )
 
 // Values returns all known values for NetworkInterfaceAttribute. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (NetworkInterfaceAttribute) Values() []NetworkInterfaceAttribute {
 	return []NetworkInterfaceAttribute{
@@ -5755,6 +6104,7 @@ func (NetworkInterfaceAttribute) Values() []NetworkInterfaceAttribute {
 		"groupSet",
 		"sourceDestCheck",
 		"attachment",
+		"associatePublicIpAddress",
 	}
 }
 
@@ -5769,8 +6119,9 @@ const (
 
 // Values returns all known values for NetworkInterfaceCreationType. Note that
 // this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (NetworkInterfaceCreationType) Values() []NetworkInterfaceCreationType {
 	return []NetworkInterfaceCreationType{
 		"efa",
@@ -5791,8 +6142,9 @@ const (
 
 // Values returns all known values for NetworkInterfacePermissionStateCode. Note
 // that this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (NetworkInterfacePermissionStateCode) Values() []NetworkInterfacePermissionStateCode {
 	return []NetworkInterfacePermissionStateCode{
 		"pending",
@@ -5814,8 +6166,9 @@ const (
 )
 
 // Values returns all known values for NetworkInterfaceStatus. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (NetworkInterfaceStatus) Values() []NetworkInterfaceStatus {
 	return []NetworkInterfaceStatus{
 		"available",
@@ -5850,8 +6203,9 @@ const (
 )
 
 // Values returns all known values for NetworkInterfaceType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (NetworkInterfaceType) Values() []NetworkInterfaceType {
 	return []NetworkInterfaceType{
 		"interface",
@@ -5883,8 +6237,9 @@ const (
 )
 
 // Values returns all known values for NitroEnclavesSupport. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (NitroEnclavesSupport) Values() []NitroEnclavesSupport {
 	return []NitroEnclavesSupport{
 		"unsupported",
@@ -5901,8 +6256,9 @@ const (
 )
 
 // Values returns all known values for NitroTpmSupport. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (NitroTpmSupport) Values() []NitroTpmSupport {
 	return []NitroTpmSupport{
 		"unsupported",
@@ -5919,8 +6275,9 @@ const (
 )
 
 // Values returns all known values for OfferingClassType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (OfferingClassType) Values() []OfferingClassType {
 	return []OfferingClassType{
 		"standard",
@@ -5941,8 +6298,9 @@ const (
 )
 
 // Values returns all known values for OfferingTypeValues. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (OfferingTypeValues) Values() []OfferingTypeValues {
 	return []OfferingTypeValues{
 		"Heavy Utilization",
@@ -5964,6 +6322,7 @@ const (
 
 // Values returns all known values for OnDemandAllocationStrategy. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (OnDemandAllocationStrategy) Values() []OnDemandAllocationStrategy {
 	return []OnDemandAllocationStrategy{
@@ -5981,8 +6340,9 @@ const (
 )
 
 // Values returns all known values for OperationType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (OperationType) Values() []OperationType {
 	return []OperationType{
 		"add",
@@ -6001,8 +6361,9 @@ const (
 )
 
 // Values returns all known values for PartitionLoadFrequency. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (PartitionLoadFrequency) Values() []PartitionLoadFrequency {
 	return []PartitionLoadFrequency{
 		"none",
@@ -6020,8 +6381,9 @@ const (
 )
 
 // Values returns all known values for PayerResponsibility. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (PayerResponsibility) Values() []PayerResponsibility {
 	return []PayerResponsibility{
 		"ServiceOwner",
@@ -6038,8 +6400,9 @@ const (
 )
 
 // Values returns all known values for PaymentOption. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (PaymentOption) Values() []PaymentOption {
 	return []PaymentOption{
 		"AllUpfront",
@@ -6061,8 +6424,9 @@ const (
 )
 
 // Values returns all known values for PeriodType. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (PeriodType) Values() []PeriodType {
 	return []PeriodType{
 		"five-minutes",
@@ -6082,11 +6446,31 @@ const (
 )
 
 // Values returns all known values for PermissionGroup. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (PermissionGroup) Values() []PermissionGroup {
 	return []PermissionGroup{
 		"all",
+	}
+}
+
+type PhcSupport string
+
+// Enum values for PhcSupport
+const (
+	PhcSupportUnsupported PhcSupport = "unsupported"
+	PhcSupportSupported   PhcSupport = "supported"
+)
+
+// Values returns all known values for PhcSupport. Note that this can be expanded
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (PhcSupport) Values() []PhcSupport {
+	return []PhcSupport{
+		"unsupported",
+		"supported",
 	}
 }
 
@@ -6101,8 +6485,9 @@ const (
 )
 
 // Values returns all known values for PlacementGroupState. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (PlacementGroupState) Values() []PlacementGroupState {
 	return []PlacementGroupState{
 		"pending",
@@ -6122,8 +6507,9 @@ const (
 )
 
 // Values returns all known values for PlacementGroupStrategy. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (PlacementGroupStrategy) Values() []PlacementGroupStrategy {
 	return []PlacementGroupStrategy{
 		"cluster",
@@ -6142,8 +6528,9 @@ const (
 )
 
 // Values returns all known values for PlacementStrategy. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (PlacementStrategy) Values() []PlacementStrategy {
 	return []PlacementStrategy{
 		"cluster",
@@ -6160,8 +6547,9 @@ const (
 )
 
 // Values returns all known values for PlatformValues. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (PlatformValues) Values() []PlatformValues {
 	return []PlatformValues{
 		"Windows",
@@ -6187,8 +6575,9 @@ const (
 )
 
 // Values returns all known values for PrefixListState. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (PrefixListState) Values() []PrefixListState {
 	return []PrefixListState{
 		"create-in-progress",
@@ -6219,8 +6608,9 @@ const (
 )
 
 // Values returns all known values for PrincipalType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (PrincipalType) Values() []PrincipalType {
 	return []PrincipalType{
 		"All",
@@ -6241,8 +6631,9 @@ const (
 )
 
 // Values returns all known values for ProductCodeValues. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ProductCodeValues) Values() []ProductCodeValues {
 	return []ProductCodeValues{
 		"devpay",
@@ -6259,8 +6650,9 @@ const (
 )
 
 // Values returns all known values for Protocol. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (Protocol) Values() []Protocol {
 	return []Protocol{
 		"tcp",
@@ -6276,8 +6668,9 @@ const (
 )
 
 // Values returns all known values for ProtocolValue. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ProtocolValue) Values() []ProtocolValue {
 	return []ProtocolValue{
 		"gre",
@@ -6293,6 +6686,7 @@ const (
 
 // Values returns all known values for RecurringChargeFrequency. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (RecurringChargeFrequency) Values() []RecurringChargeFrequency {
 	return []RecurringChargeFrequency{
@@ -6309,8 +6703,9 @@ const (
 )
 
 // Values returns all known values for ReplacementStrategy. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ReplacementStrategy) Values() []ReplacementStrategy {
 	return []ReplacementStrategy{
 		"launch",
@@ -6332,6 +6727,7 @@ const (
 
 // Values returns all known values for ReplaceRootVolumeTaskState. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (ReplaceRootVolumeTaskState) Values() []ReplaceRootVolumeTaskState {
 	return []ReplaceRootVolumeTaskState{
@@ -6361,6 +6757,7 @@ const (
 
 // Values returns all known values for ReportInstanceReasonCodes. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (ReportInstanceReasonCodes) Values() []ReportInstanceReasonCodes {
 	return []ReportInstanceReasonCodes{
@@ -6385,8 +6782,9 @@ const (
 )
 
 // Values returns all known values for ReportStatusType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ReportStatusType) Values() []ReportStatusType {
 	return []ReportStatusType{
 		"ok",
@@ -6405,8 +6803,9 @@ const (
 )
 
 // Values returns all known values for ReservationState. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ReservationState) Values() []ReservationState {
 	return []ReservationState{
 		"payment-pending",
@@ -6429,8 +6828,9 @@ const (
 )
 
 // Values returns all known values for ReservedInstanceState. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ReservedInstanceState) Values() []ReservedInstanceState {
 	return []ReservedInstanceState{
 		"payment-pending",
@@ -6451,6 +6851,7 @@ const (
 
 // Values returns all known values for ResetFpgaImageAttributeName. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (ResetFpgaImageAttributeName) Values() []ResetFpgaImageAttributeName {
 	return []ResetFpgaImageAttributeName{
@@ -6466,8 +6867,9 @@ const (
 )
 
 // Values returns all known values for ResetImageAttributeName. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ResetImageAttributeName) Values() []ResetImageAttributeName {
 	return []ResetImageAttributeName{
 		"launchPermission",
@@ -6561,14 +6963,16 @@ const (
 	ResourceTypeVerifiedAccessTrustProvider                            ResourceType = "verified-access-trust-provider"
 	ResourceTypeVpnConnectionDeviceType                                ResourceType = "vpn-connection-device-type"
 	ResourceTypeVpcBlockPublicAccessExclusion                          ResourceType = "vpc-block-public-access-exclusion"
+	ResourceTypeVpcEncryptionControl                                   ResourceType = "vpc-encryption-control"
 	ResourceTypeIpamResourceDiscovery                                  ResourceType = "ipam-resource-discovery"
 	ResourceTypeIpamResourceDiscoveryAssociation                       ResourceType = "ipam-resource-discovery-association"
 	ResourceTypeInstanceConnectEndpoint                                ResourceType = "instance-connect-endpoint"
 )
 
 // Values returns all known values for ResourceType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ResourceType) Values() []ResourceType {
 	return []ResourceType{
 		"capacity-reservation",
@@ -6654,6 +7058,7 @@ func (ResourceType) Values() []ResourceType {
 		"verified-access-trust-provider",
 		"vpn-connection-device-type",
 		"vpc-block-public-access-exclusion",
+		"vpc-encryption-control",
 		"ipam-resource-discovery",
 		"ipam-resource-discovery-association",
 		"instance-connect-endpoint",
@@ -6671,8 +7076,9 @@ const (
 )
 
 // Values returns all known values for RIProductDescription. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (RIProductDescription) Values() []RIProductDescription {
 	return []RIProductDescription{
 		"Linux/UNIX",
@@ -6691,8 +7097,9 @@ const (
 )
 
 // Values returns all known values for RootDeviceType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (RootDeviceType) Values() []RootDeviceType {
 	return []RootDeviceType{
 		"ebs",
@@ -6710,8 +7117,9 @@ const (
 )
 
 // Values returns all known values for RouteOrigin. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (RouteOrigin) Values() []RouteOrigin {
 	return []RouteOrigin{
 		"CreateRouteTable",
@@ -6729,8 +7137,9 @@ const (
 )
 
 // Values returns all known values for RouteState. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (RouteState) Values() []RouteState {
 	return []RouteState{
 		"active",
@@ -6751,8 +7160,9 @@ const (
 
 // Values returns all known values for RouteTableAssociationStateCode. Note that
 // this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (RouteTableAssociationStateCode) Values() []RouteTableAssociationStateCode {
 	return []RouteTableAssociationStateCode{
 		"associating",
@@ -6772,8 +7182,9 @@ const (
 )
 
 // Values returns all known values for RuleAction. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (RuleAction) Values() []RuleAction {
 	return []RuleAction{
 		"allow",
@@ -6790,8 +7201,9 @@ const (
 )
 
 // Values returns all known values for Scope. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (Scope) Values() []Scope {
 	return []Scope{
 		"Availability Zone",
@@ -6809,8 +7221,9 @@ const (
 
 // Values returns all known values for SecurityGroupReferencingSupportValue. Note
 // that this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (SecurityGroupReferencingSupportValue) Values() []SecurityGroupReferencingSupportValue {
 	return []SecurityGroupReferencingSupportValue{
 		"enable",
@@ -6827,8 +7240,9 @@ const (
 )
 
 // Values returns all known values for SelfServicePortal. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (SelfServicePortal) Values() []SelfServicePortal {
 	return []SelfServicePortal{
 		"enabled",
@@ -6845,8 +7259,9 @@ const (
 )
 
 // Values returns all known values for ServiceConnectivityType. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ServiceConnectivityType) Values() []ServiceConnectivityType {
 	return []ServiceConnectivityType{
 		"ipv4",
@@ -6866,8 +7281,9 @@ const (
 )
 
 // Values returns all known values for ServiceState. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ServiceState) Values() []ServiceState {
 	return []ServiceState{
 		"Pending",
@@ -6888,8 +7304,9 @@ const (
 )
 
 // Values returns all known values for ServiceType. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ServiceType) Values() []ServiceType {
 	return []ServiceType{
 		"Interface",
@@ -6907,8 +7324,9 @@ const (
 )
 
 // Values returns all known values for ShutdownBehavior. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ShutdownBehavior) Values() []ShutdownBehavior {
 	return []ShutdownBehavior{
 		"stop",
@@ -6925,8 +7343,9 @@ const (
 )
 
 // Values returns all known values for SnapshotAttributeName. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (SnapshotAttributeName) Values() []SnapshotAttributeName {
 	return []SnapshotAttributeName{
 		"productCodes",
@@ -6945,8 +7364,9 @@ const (
 
 // Values returns all known values for SnapshotBlockPublicAccessState. Note that
 // this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (SnapshotBlockPublicAccessState) Values() []SnapshotBlockPublicAccessState {
 	return []SnapshotBlockPublicAccessState{
 		"block-all-sharing",
@@ -6967,8 +7387,9 @@ const (
 )
 
 // Values returns all known values for SnapshotState. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (SnapshotState) Values() []SnapshotState {
 	return []SnapshotState{
 		"pending",
@@ -6991,8 +7412,9 @@ const (
 )
 
 // Values returns all known values for SpotAllocationStrategy. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (SpotAllocationStrategy) Values() []SpotAllocationStrategy {
 	return []SpotAllocationStrategy{
 		"lowest-price",
@@ -7014,8 +7436,9 @@ const (
 
 // Values returns all known values for SpotInstanceInterruptionBehavior. Note that
 // this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (SpotInstanceInterruptionBehavior) Values() []SpotInstanceInterruptionBehavior {
 	return []SpotInstanceInterruptionBehavior{
 		"hibernate",
@@ -7037,8 +7460,9 @@ const (
 )
 
 // Values returns all known values for SpotInstanceState. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (SpotInstanceState) Values() []SpotInstanceState {
 	return []SpotInstanceState{
 		"open",
@@ -7059,8 +7483,9 @@ const (
 )
 
 // Values returns all known values for SpotInstanceType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (SpotInstanceType) Values() []SpotInstanceType {
 	return []SpotInstanceType{
 		"one-time",
@@ -7077,8 +7502,9 @@ const (
 )
 
 // Values returns all known values for SpreadLevel. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (SpreadLevel) Values() []SpreadLevel {
 	return []SpreadLevel{
 		"host",
@@ -7096,8 +7522,9 @@ const (
 )
 
 // Values returns all known values for SSEType. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (SSEType) Values() []SSEType {
 	return []SSEType{
 		"sse-ebs",
@@ -7121,8 +7548,9 @@ const (
 )
 
 // Values returns all known values for State. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (State) Values() []State {
 	return []State{
 		"PendingAcceptance",
@@ -7146,6 +7574,7 @@ const (
 
 // Values returns all known values for StaticSourcesSupportValue. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (StaticSourcesSupportValue) Values() []StaticSourcesSupportValue {
 	return []StaticSourcesSupportValue{
@@ -7162,8 +7591,9 @@ const (
 )
 
 // Values returns all known values for StatisticType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (StatisticType) Values() []StatisticType {
 	return []StatisticType{
 		"p50",
@@ -7180,8 +7610,9 @@ const (
 )
 
 // Values returns all known values for Status. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (Status) Values() []Status {
 	return []Status{
 		"MoveInProgress",
@@ -7198,8 +7629,9 @@ const (
 )
 
 // Values returns all known values for StatusName. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (StatusName) Values() []StatusName {
 	return []StatusName{
 		"reachability",
@@ -7217,8 +7649,9 @@ const (
 )
 
 // Values returns all known values for StatusType. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (StatusType) Values() []StatusType {
 	return []StatusType{
 		"passed",
@@ -7237,8 +7670,9 @@ const (
 )
 
 // Values returns all known values for StorageTier. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (StorageTier) Values() []StorageTier {
 	return []StorageTier{
 		"archive",
@@ -7260,6 +7694,7 @@ const (
 
 // Values returns all known values for SubnetCidrBlockStateCode. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (SubnetCidrBlockStateCode) Values() []SubnetCidrBlockStateCode {
 	return []SubnetCidrBlockStateCode{
@@ -7282,6 +7717,7 @@ const (
 
 // Values returns all known values for SubnetCidrReservationType. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (SubnetCidrReservationType) Values() []SubnetCidrReservationType {
 	return []SubnetCidrReservationType{
@@ -7300,8 +7736,9 @@ const (
 )
 
 // Values returns all known values for SubnetState. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (SubnetState) Values() []SubnetState {
 	return []SubnetState{
 		"pending",
@@ -7322,8 +7759,9 @@ const (
 )
 
 // Values returns all known values for SummaryStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (SummaryStatus) Values() []SummaryStatus {
 	return []SummaryStatus{
 		"ok",
@@ -7343,8 +7781,9 @@ const (
 
 // Values returns all known values for SupportedAdditionalProcessorFeature. Note
 // that this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (SupportedAdditionalProcessorFeature) Values() []SupportedAdditionalProcessorFeature {
 	return []SupportedAdditionalProcessorFeature{
 		"amd-sev-snp",
@@ -7361,8 +7800,9 @@ const (
 )
 
 // Values returns all known values for TargetCapacityUnitType. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (TargetCapacityUnitType) Values() []TargetCapacityUnitType {
 	return []TargetCapacityUnitType{
 		"vcpu",
@@ -7379,8 +7819,9 @@ const (
 )
 
 // Values returns all known values for TargetStorageTier. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (TargetStorageTier) Values() []TargetStorageTier {
 	return []TargetStorageTier{
 		"archive",
@@ -7396,8 +7837,9 @@ const (
 )
 
 // Values returns all known values for TelemetryStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (TelemetryStatus) Values() []TelemetryStatus {
 	return []TelemetryStatus{
 		"UP",
@@ -7415,8 +7857,9 @@ const (
 )
 
 // Values returns all known values for Tenancy. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (Tenancy) Values() []Tenancy {
 	return []Tenancy{
 		"default",
@@ -7441,8 +7884,9 @@ const (
 )
 
 // Values returns all known values for TieringOperationStatus. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (TieringOperationStatus) Values() []TieringOperationStatus {
 	return []TieringOperationStatus{
 		"archival-in-progress",
@@ -7465,8 +7909,9 @@ const (
 )
 
 // Values returns all known values for TpmSupportValues. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (TpmSupportValues) Values() []TpmSupportValues {
 	return []TpmSupportValues{
 		"v2.0",
@@ -7482,8 +7927,9 @@ const (
 )
 
 // Values returns all known values for TrafficDirection. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (TrafficDirection) Values() []TrafficDirection {
 	return []TrafficDirection{
 		"ingress",
@@ -7503,8 +7949,9 @@ const (
 
 // Values returns all known values for TrafficMirrorFilterRuleField. Note that
 // this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (TrafficMirrorFilterRuleField) Values() []TrafficMirrorFilterRuleField {
 	return []TrafficMirrorFilterRuleField{
 		"destination-port-range",
@@ -7523,6 +7970,7 @@ const (
 
 // Values returns all known values for TrafficMirrorNetworkService. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (TrafficMirrorNetworkService) Values() []TrafficMirrorNetworkService {
 	return []TrafficMirrorNetworkService{
@@ -7539,8 +7987,9 @@ const (
 )
 
 // Values returns all known values for TrafficMirrorRuleAction. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (TrafficMirrorRuleAction) Values() []TrafficMirrorRuleAction {
 	return []TrafficMirrorRuleAction{
 		"accept",
@@ -7559,6 +8008,7 @@ const (
 
 // Values returns all known values for TrafficMirrorSessionField. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (TrafficMirrorSessionField) Values() []TrafficMirrorSessionField {
 	return []TrafficMirrorSessionField{
@@ -7578,8 +8028,9 @@ const (
 )
 
 // Values returns all known values for TrafficMirrorTargetType. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (TrafficMirrorTargetType) Values() []TrafficMirrorTargetType {
 	return []TrafficMirrorTargetType{
 		"network-interface",
@@ -7598,8 +8049,9 @@ const (
 )
 
 // Values returns all known values for TrafficType. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (TrafficType) Values() []TrafficType {
 	return []TrafficType{
 		"ACCEPT",
@@ -7620,8 +8072,9 @@ const (
 
 // Values returns all known values for TransitGatewayAssociationState. Note that
 // this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (TransitGatewayAssociationState) Values() []TransitGatewayAssociationState {
 	return []TransitGatewayAssociationState{
 		"associating",
@@ -7645,8 +8098,9 @@ const (
 
 // Values returns all known values for TransitGatewayAttachmentResourceType. Note
 // that this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (TransitGatewayAttachmentResourceType) Values() []TransitGatewayAttachmentResourceType {
 	return []TransitGatewayAttachmentResourceType{
 		"vpc",
@@ -7679,8 +8133,9 @@ const (
 
 // Values returns all known values for TransitGatewayAttachmentState. Note that
 // this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (TransitGatewayAttachmentState) Values() []TransitGatewayAttachmentState {
 	return []TransitGatewayAttachmentState{
 		"initiating",
@@ -7711,8 +8166,9 @@ const (
 
 // Values returns all known values for TransitGatewayConnectPeerState. Note that
 // this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (TransitGatewayConnectPeerState) Values() []TransitGatewayConnectPeerState {
 	return []TransitGatewayConnectPeerState{
 		"pending",
@@ -7737,8 +8193,9 @@ const (
 
 // Values returns all known values for
 // TransitGatewayMulitcastDomainAssociationState. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (TransitGatewayMulitcastDomainAssociationState) Values() []TransitGatewayMulitcastDomainAssociationState {
 	return []TransitGatewayMulitcastDomainAssociationState{
 		"pendingAcceptance",
@@ -7763,8 +8220,9 @@ const (
 
 // Values returns all known values for TransitGatewayMulticastDomainState. Note
 // that this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (TransitGatewayMulticastDomainState) Values() []TransitGatewayMulticastDomainState {
 	return []TransitGatewayMulticastDomainState{
 		"pending",
@@ -7786,8 +8244,9 @@ const (
 
 // Values returns all known values for TransitGatewayPolicyTableState. Note that
 // this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (TransitGatewayPolicyTableState) Values() []TransitGatewayPolicyTableState {
 	return []TransitGatewayPolicyTableState{
 		"pending",
@@ -7809,8 +8268,9 @@ const (
 
 // Values returns all known values for TransitGatewayPrefixListReferenceState.
 // Note that this can be expanded in the future, and so it is only as up to date as
-// the client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (TransitGatewayPrefixListReferenceState) Values() []TransitGatewayPrefixListReferenceState {
 	return []TransitGatewayPrefixListReferenceState{
 		"pending",
@@ -7832,8 +8292,9 @@ const (
 
 // Values returns all known values for TransitGatewayPropagationState. Note that
 // this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (TransitGatewayPropagationState) Values() []TransitGatewayPropagationState {
 	return []TransitGatewayPropagationState{
 		"enabling",
@@ -7856,6 +8317,7 @@ const (
 
 // Values returns all known values for TransitGatewayRouteState. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (TransitGatewayRouteState) Values() []TransitGatewayRouteState {
 	return []TransitGatewayRouteState{
@@ -7877,8 +8339,9 @@ const (
 
 // Values returns all known values for
 // TransitGatewayRouteTableAnnouncementDirection. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (TransitGatewayRouteTableAnnouncementDirection) Values() []TransitGatewayRouteTableAnnouncementDirection {
 	return []TransitGatewayRouteTableAnnouncementDirection{
 		"outgoing",
@@ -7900,8 +8363,9 @@ const (
 
 // Values returns all known values for TransitGatewayRouteTableAnnouncementState.
 // Note that this can be expanded in the future, and so it is only as up to date as
-// the client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (TransitGatewayRouteTableAnnouncementState) Values() []TransitGatewayRouteTableAnnouncementState {
 	return []TransitGatewayRouteTableAnnouncementState{
 		"available",
@@ -7925,8 +8389,9 @@ const (
 
 // Values returns all known values for TransitGatewayRouteTableState. Note that
 // this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (TransitGatewayRouteTableState) Values() []TransitGatewayRouteTableState {
 	return []TransitGatewayRouteTableState{
 		"pending",
@@ -7945,8 +8410,9 @@ const (
 )
 
 // Values returns all known values for TransitGatewayRouteType. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (TransitGatewayRouteType) Values() []TransitGatewayRouteType {
 	return []TransitGatewayRouteType{
 		"static",
@@ -7966,8 +8432,9 @@ const (
 )
 
 // Values returns all known values for TransitGatewayState. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (TransitGatewayState) Values() []TransitGatewayState {
 	return []TransitGatewayState{
 		"pending",
@@ -7987,8 +8454,9 @@ const (
 )
 
 // Values returns all known values for TransportProtocol. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (TransportProtocol) Values() []TransportProtocol {
 	return []TransportProtocol{
 		"tcp",
@@ -8005,8 +8473,9 @@ const (
 )
 
 // Values returns all known values for TrustProviderType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (TrustProviderType) Values() []TrustProviderType {
 	return []TrustProviderType{
 		"user",
@@ -8023,8 +8492,9 @@ const (
 )
 
 // Values returns all known values for TunnelInsideIpVersion. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (TunnelInsideIpVersion) Values() []TunnelInsideIpVersion {
 	return []TunnelInsideIpVersion{
 		"ipv4",
@@ -8044,8 +8514,9 @@ const (
 
 // Values returns all known values for UnlimitedSupportedInstanceFamily. Note that
 // this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (UnlimitedSupportedInstanceFamily) Values() []UnlimitedSupportedInstanceFamily {
 	return []UnlimitedSupportedInstanceFamily{
 		"t2",
@@ -8067,8 +8538,9 @@ const (
 
 // Values returns all known values for
 // UnsuccessfulInstanceCreditSpecificationErrorCode. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (UnsuccessfulInstanceCreditSpecificationErrorCode) Values() []UnsuccessfulInstanceCreditSpecificationErrorCode {
 	return []UnsuccessfulInstanceCreditSpecificationErrorCode{
 		"InvalidInstanceID.Malformed",
@@ -8088,8 +8560,9 @@ const (
 )
 
 // Values returns all known values for UsageClassType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (UsageClassType) Values() []UsageClassType {
 	return []UsageClassType{
 		"spot",
@@ -8107,8 +8580,9 @@ const (
 )
 
 // Values returns all known values for UserTrustProviderType. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (UserTrustProviderType) Values() []UserTrustProviderType {
 	return []UserTrustProviderType{
 		"iam-identity-center",
@@ -8125,8 +8599,9 @@ const (
 
 // Values returns all known values for VerifiedAccessEndpointAttachmentType. Note
 // that this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (VerifiedAccessEndpointAttachmentType) Values() []VerifiedAccessEndpointAttachmentType {
 	return []VerifiedAccessEndpointAttachmentType{
 		"vpc",
@@ -8143,8 +8618,9 @@ const (
 
 // Values returns all known values for VerifiedAccessEndpointProtocol. Note that
 // this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (VerifiedAccessEndpointProtocol) Values() []VerifiedAccessEndpointProtocol {
 	return []VerifiedAccessEndpointProtocol{
 		"http",
@@ -8165,8 +8641,9 @@ const (
 
 // Values returns all known values for VerifiedAccessEndpointStatusCode. Note that
 // this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (VerifiedAccessEndpointStatusCode) Values() []VerifiedAccessEndpointStatusCode {
 	return []VerifiedAccessEndpointStatusCode{
 		"pending",
@@ -8187,6 +8664,7 @@ const (
 
 // Values returns all known values for VerifiedAccessEndpointType. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (VerifiedAccessEndpointType) Values() []VerifiedAccessEndpointType {
 	return []VerifiedAccessEndpointType{
@@ -8205,8 +8683,9 @@ const (
 
 // Values returns all known values for VerifiedAccessLogDeliveryStatusCode. Note
 // that this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (VerifiedAccessLogDeliveryStatusCode) Values() []VerifiedAccessLogDeliveryStatusCode {
 	return []VerifiedAccessLogDeliveryStatusCode{
 		"success",
@@ -8223,8 +8702,9 @@ const (
 )
 
 // Values returns all known values for VirtualizationType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (VirtualizationType) Values() []VirtualizationType {
 	return []VirtualizationType{
 		"hvm",
@@ -8244,8 +8724,9 @@ const (
 )
 
 // Values returns all known values for VolumeAttachmentState. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (VolumeAttachmentState) Values() []VolumeAttachmentState {
 	return []VolumeAttachmentState{
 		"attaching",
@@ -8265,8 +8746,9 @@ const (
 )
 
 // Values returns all known values for VolumeAttributeName. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (VolumeAttributeName) Values() []VolumeAttributeName {
 	return []VolumeAttributeName{
 		"autoEnableIO",
@@ -8285,8 +8767,9 @@ const (
 )
 
 // Values returns all known values for VolumeModificationState. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (VolumeModificationState) Values() []VolumeModificationState {
 	return []VolumeModificationState{
 		"modifying",
@@ -8309,8 +8792,9 @@ const (
 )
 
 // Values returns all known values for VolumeState. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (VolumeState) Values() []VolumeState {
 	return []VolumeState{
 		"creating",
@@ -8332,8 +8816,9 @@ const (
 )
 
 // Values returns all known values for VolumeStatusInfoStatus. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (VolumeStatusInfoStatus) Values() []VolumeStatusInfoStatus {
 	return []VolumeStatusInfoStatus{
 		"ok",
@@ -8351,8 +8836,9 @@ const (
 )
 
 // Values returns all known values for VolumeStatusName. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (VolumeStatusName) Values() []VolumeStatusName {
 	return []VolumeStatusName{
 		"io-enabled",
@@ -8374,8 +8860,9 @@ const (
 )
 
 // Values returns all known values for VolumeType. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (VolumeType) Values() []VolumeType {
 	return []VolumeType{
 		"standard",
@@ -8398,8 +8885,9 @@ const (
 )
 
 // Values returns all known values for VpcAttributeName. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (VpcAttributeName) Values() []VpcAttributeName {
 	return []VpcAttributeName{
 		"enableDnsSupport",
@@ -8421,8 +8909,9 @@ const (
 )
 
 // Values returns all known values for VpcCidrBlockStateCode. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (VpcCidrBlockStateCode) Values() []VpcCidrBlockStateCode {
 	return []VpcCidrBlockStateCode{
 		"associating",
@@ -8444,8 +8933,9 @@ const (
 )
 
 // Values returns all known values for VpcEndpointType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (VpcEndpointType) Values() []VpcEndpointType {
 	return []VpcEndpointType{
 		"Interface",
@@ -8471,8 +8961,9 @@ const (
 
 // Values returns all known values for VpcPeeringConnectionStateReasonCode. Note
 // that this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (VpcPeeringConnectionStateReasonCode) Values() []VpcPeeringConnectionStateReasonCode {
 	return []VpcPeeringConnectionStateReasonCode{
 		"initiating-request",
@@ -8496,8 +8987,9 @@ const (
 )
 
 // Values returns all known values for VpcState. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (VpcState) Values() []VpcState {
 	return []VpcState{
 		"pending",
@@ -8513,8 +9005,9 @@ const (
 )
 
 // Values returns all known values for VpcTenancy. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (VpcTenancy) Values() []VpcTenancy {
 	return []VpcTenancy{
 		"default",
@@ -8530,8 +9023,9 @@ const (
 )
 
 // Values returns all known values for VpnEcmpSupportValue. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (VpnEcmpSupportValue) Values() []VpnEcmpSupportValue {
 	return []VpnEcmpSupportValue{
 		"enable",
@@ -8547,8 +9041,9 @@ const (
 )
 
 // Values returns all known values for VpnProtocol. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (VpnProtocol) Values() []VpnProtocol {
 	return []VpnProtocol{
 		"openvpn",
@@ -8566,8 +9061,9 @@ const (
 )
 
 // Values returns all known values for VpnState. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (VpnState) Values() []VpnState {
 	return []VpnState{
 		"pending",
@@ -8585,8 +9081,9 @@ const (
 )
 
 // Values returns all known values for VpnStaticRouteSource. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (VpnStaticRouteSource) Values() []VpnStaticRouteSource {
 	return []VpnStaticRouteSource{
 		"Static",
@@ -8607,8 +9104,9 @@ const (
 )
 
 // Values returns all known values for WeekDay. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (WeekDay) Values() []WeekDay {
 	return []WeekDay{
 		"sunday",

@@ -3,8 +3,7 @@
         "github.com/aws/aws-sdk-go-v2": "v1.4.0",
         "github.com/aws/aws-sdk-go-v2/internal/configsources": "v0.0.0-00010101000000-000000000000",
         "github.com/aws/aws-sdk-go-v2/internal/endpoints/v2": "v2.0.0-00010101000000-000000000000",
-        "github.com/aws/smithy-go": "v1.4.0",
-        "github.com/google/go-cmp": "v0.5.4"
+        "github.com/aws/smithy-go": "v1.4.0"
     },
     "files": [
         "api_client.go",
@@ -12,6 +11,7 @@
         "api_op_CreateBatchInferenceJob.go",
         "api_op_CreateBatchSegmentJob.go",
         "api_op_CreateCampaign.go",
+        "api_op_CreateDataDeletionJob.go",
         "api_op_CreateDataset.go",
         "api_op_CreateDatasetExportJob.go",
         "api_op_CreateDatasetGroup.go",
@@ -36,6 +36,7 @@
         "api_op_DescribeBatchInferenceJob.go",
         "api_op_DescribeBatchSegmentJob.go",
         "api_op_DescribeCampaign.go",
+        "api_op_DescribeDataDeletionJob.go",
         "api_op_DescribeDataset.go",
         "api_op_DescribeDatasetExportJob.go",
         "api_op_DescribeDatasetGroup.go",
@@ -53,6 +54,7 @@
         "api_op_ListBatchInferenceJobs.go",
         "api_op_ListBatchSegmentJobs.go",
         "api_op_ListCampaigns.go",
+        "api_op_ListDataDeletionJobs.go",
         "api_op_ListDatasetExportJobs.go",
         "api_op_ListDatasetGroups.go",
         "api_op_ListDatasetImportJobs.go",
@@ -88,6 +90,7 @@
         "options.go",
         "protocol_test.go",
         "serializers.go",
+        "snapshot_test.go",
         "types/enums.go",
         "types/errors.go",
         "types/types.go",

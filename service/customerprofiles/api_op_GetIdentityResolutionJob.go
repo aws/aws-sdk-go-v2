@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/customerprofiles/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -14,9 +13,11 @@ import (
 )
 
 // Returns information about an Identity Resolution Job in a specific domain.
+//
 // Identity Resolution Jobs are set up using the Amazon Connect admin console. For
-// more information, see Use Identity Resolution to consolidate similar profiles (https://docs.aws.amazon.com/connect/latest/adminguide/use-identity-resolution.html)
-// .
+// more information, see [Use Identity Resolution to consolidate similar profiles].
+//
+// [Use Identity Resolution to consolidate similar profiles]: https://docs.aws.amazon.com/connect/latest/adminguide/use-identity-resolution.html
 func (c *Client) GetIdentityResolutionJob(ctx context.Context, params *GetIdentityResolutionJobInput, optFns ...func(*Options)) (*GetIdentityResolutionJobOutput, error) {
 	if params == nil {
 		params = &GetIdentityResolutionJobInput{}
@@ -81,17 +82,24 @@ type GetIdentityResolutionJobOutput struct {
 	Message *string
 
 	// The status of the Identity Resolution Job.
+	//
 	//   - PENDING : The Identity Resolution Job is scheduled but has not started yet.
 	//   If you turn off the Identity Resolution feature in your domain, jobs in the
 	//   PENDING state are deleted.
+	//
 	//   - PREPROCESSING : The Identity Resolution Job is loading your data.
+	//
 	//   - FIND_MATCHING : The Identity Resolution Job is using the machine learning
 	//   model to identify profiles that belong to the same matching group.
+	//
 	//   - MERGING : The Identity Resolution Job is merging duplicate profiles.
+	//
 	//   - COMPLETED : The Identity Resolution Job completed successfully.
+	//
 	//   - PARTIAL_SUCCESS : There's a system error and not all of the data is merged.
 	//   The Identity Resolution Job writes a message indicating the source of the
 	//   problem.
+	//
 	//   - FAILED : The Identity Resolution Job did not merge any data. It writes a
 	//   message indicating the source of the problem.
 	Status types.IdentityResolutionJobStatus
@@ -124,25 +132,25 @@ func (c *Client) addOperationGetIdentityResolutionJobMiddlewares(stack *middlewa
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -157,13 +165,16 @@ func (c *Client) addOperationGetIdentityResolutionJobMiddlewares(stack *middlewa
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpGetIdentityResolutionJobValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetIdentityResolutionJob(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

@@ -6,18 +6,19 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/organizations/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Retrieves information about a previously requested handshake. The handshake ID
-// comes from the response to the original InviteAccountToOrganization operation
-// that generated the handshake. You can access handshakes that are ACCEPTED ,
-// DECLINED , or CANCELED for only 30 days after they change to that state.
-// They're then deleted and no longer accessible. This operation can be called from
-// any account in the organization.
+// comes from the response to the original InviteAccountToOrganizationoperation that generated the handshake.
+//
+// You can access handshakes that are ACCEPTED , DECLINED , or CANCELED for only
+// 30 days after they change to that state. They're then deleted and no longer
+// accessible.
+//
+// This operation can be called from any account in the organization.
 func (c *Client) DescribeHandshake(ctx context.Context, params *DescribeHandshakeInput, optFns ...func(*Options)) (*DescribeHandshakeOutput, error) {
 	if params == nil {
 		params = &DescribeHandshakeInput{}
@@ -36,10 +37,12 @@ func (c *Client) DescribeHandshake(ctx context.Context, params *DescribeHandshak
 type DescribeHandshakeInput struct {
 
 	// The unique identifier (ID) of the handshake that you want information about.
-	// You can get the ID from the original call to InviteAccountToOrganization , or
-	// from a call to ListHandshakesForAccount or ListHandshakesForOrganization . The
-	// regex pattern (http://wikipedia.org/wiki/regex) for handshake ID string requires
-	// "h-" followed by from 8 to 32 lowercase letters or digits.
+	// You can get the ID from the original call to InviteAccountToOrganization, or from a call to ListHandshakesForAccount or ListHandshakesForOrganization.
+	//
+	// The [regex pattern] for handshake ID string requires "h-" followed by from 8 to 32 lowercase
+	// letters or digits.
+	//
+	// [regex pattern]: http://wikipedia.org/wiki/regex
 	//
 	// This member is required.
 	HandshakeId *string
@@ -80,25 +83,25 @@ func (c *Client) addOperationDescribeHandshakeMiddlewares(stack *middleware.Stac
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -113,13 +116,16 @@ func (c *Client) addOperationDescribeHandshakeMiddlewares(stack *middleware.Stac
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDescribeHandshakeValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeHandshake(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

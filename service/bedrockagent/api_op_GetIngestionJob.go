@@ -6,13 +6,13 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockagent/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Get an ingestion job
+// Gets information about a ingestion job, in which a data source is added to a
+// knowledge base.
 func (c *Client) GetIngestionJob(ctx context.Context, params *GetIngestionJobInput, optFns ...func(*Options)) (*GetIngestionJobOutput, error) {
 	if params == nil {
 		params = &GetIngestionJobInput{}
@@ -30,17 +30,17 @@ func (c *Client) GetIngestionJob(ctx context.Context, params *GetIngestionJobInp
 
 type GetIngestionJobInput struct {
 
-	// Identifier for a resource.
+	// The unique identifier of the data source in the ingestion job.
 	//
 	// This member is required.
 	DataSourceId *string
 
-	// Identifier for a resource.
+	// The unique identifier of the ingestion job.
 	//
 	// This member is required.
 	IngestionJobId *string
 
-	// Identifier for a resource.
+	// The unique identifier of the knowledge base for which the ingestion job applies.
 	//
 	// This member is required.
 	KnowledgeBaseId *string
@@ -50,7 +50,7 @@ type GetIngestionJobInput struct {
 
 type GetIngestionJobOutput struct {
 
-	// Contains the information of an ingestion job.
+	// Contains details about the ingestion job.
 	//
 	// This member is required.
 	IngestionJob *types.IngestionJob
@@ -83,25 +83,25 @@ func (c *Client) addOperationGetIngestionJobMiddlewares(stack *middleware.Stack,
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -116,13 +116,16 @@ func (c *Client) addOperationGetIngestionJobMiddlewares(stack *middleware.Stack,
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpGetIngestionJobValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetIngestionJob(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

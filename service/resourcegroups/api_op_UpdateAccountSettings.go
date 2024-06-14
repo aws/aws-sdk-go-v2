@@ -6,16 +6,16 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/resourcegroups/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Turns on or turns off optional features in Resource Groups. The preceding
-// example shows that the request to turn on group lifecycle events is IN_PROGRESS
-// . You can call the GetAccountSettings operation to check for completion by
-// looking for GroupLifecycleEventsStatus to change to ACTIVE .
+// Turns on or turns off optional features in Resource Groups.
+//
+// The preceding example shows that the request to turn on group lifecycle events
+// is IN_PROGRESS . You can call the GetAccountSettings operation to check for completion by looking
+// for GroupLifecycleEventsStatus to change to ACTIVE .
 func (c *Client) UpdateAccountSettings(ctx context.Context, params *UpdateAccountSettingsInput, optFns ...func(*Options)) (*UpdateAccountSettingsOutput, error) {
 	if params == nil {
 		params = &UpdateAccountSettingsInput{}
@@ -33,8 +33,9 @@ func (c *Client) UpdateAccountSettings(ctx context.Context, params *UpdateAccoun
 
 type UpdateAccountSettingsInput struct {
 
-	// Specifies whether you want to turn group lifecycle events (https://docs.aws.amazon.com/ARG/latest/userguide/monitor-groups.html)
-	// on or off.
+	// Specifies whether you want to turn [group lifecycle events] on or off.
+	//
+	// [group lifecycle events]: https://docs.aws.amazon.com/ARG/latest/userguide/monitor-groups.html
 	GroupLifecycleEventsDesiredStatus types.GroupLifecycleEventsDesiredStatus
 
 	noSmithyDocumentSerde
@@ -73,25 +74,25 @@ func (c *Client) addOperationUpdateAccountSettingsMiddlewares(stack *middleware.
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -106,10 +107,13 @@ func (c *Client) addOperationUpdateAccountSettingsMiddlewares(stack *middleware.
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateAccountSettings(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

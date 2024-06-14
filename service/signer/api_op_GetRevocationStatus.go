@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -31,12 +30,17 @@ func (c *Client) GetRevocationStatus(ctx context.Context, params *GetRevocationS
 
 type GetRevocationStatusInput struct {
 
-	// A list of composite signed hashes that identify certificates. A certificate
-	// identifier consists of a subject certificate TBS hash (signed by the parent CA)
-	// combined with a parent CA TBS hash (signed by the parent CA’s CA). Root
-	// certificates are defined as their own CA. The following example shows how to
-	// calculate a hash for this parameter using OpenSSL commands: openssl asn1parse
-	// -in childCert.pem -strparse 4 -out childCert.tbs
+	// A list of composite signed hashes that identify certificates.
+	//
+	// A certificate identifier consists of a subject certificate TBS hash (signed by
+	// the parent CA) combined with a parent CA TBS hash (signed by the parent CA’s
+	// CA). Root certificates are defined as their own CA.
+	//
+	// The following example shows how to calculate a hash for this parameter using
+	// OpenSSL commands:
+	//
+	//     openssl asn1parse -in childCert.pem -strparse 4 -out childCert.tbs
+	//
 	//     openssl sha384 < childCert.tbs -binary > childCertTbsHash
 	//
 	//     openssl asn1parse -in parentCert.pem -strparse 4 -out parentCert.tbs
@@ -107,25 +111,25 @@ func (c *Client) addOperationGetRevocationStatusMiddlewares(stack *middleware.St
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -140,6 +144,9 @@ func (c *Client) addOperationGetRevocationStatusMiddlewares(stack *middleware.St
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addEndpointPrefix_opGetRevocationStatusMiddleware(stack); err != nil {
 		return err
 	}
@@ -149,7 +156,7 @@ func (c *Client) addOperationGetRevocationStatusMiddlewares(stack *middleware.St
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetRevocationStatus(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

@@ -8,17 +8,13 @@ import (
 	"github.com/aws/aws-sdk-go-v2/aws"
 	protocoltesthttp "github.com/aws/aws-sdk-go-v2/internal/protocoltest"
 	"github.com/aws/aws-sdk-go-v2/internal/protocoltest/restxml/types"
-	smithydocument "github.com/aws/smithy-go/document"
 	"github.com/aws/smithy-go/middleware"
 	smithyprivateprotocol "github.com/aws/smithy-go/private/protocol"
 	smithyrand "github.com/aws/smithy-go/rand"
 	smithytesting "github.com/aws/smithy-go/testing"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
-	"github.com/google/go-cmp/cmp"
-	"github.com/google/go-cmp/cmp/cmpopts"
 	"io"
 	"io/ioutil"
-	"math"
 	"net/http"
 	"net/url"
 	"testing"
@@ -66,9 +62,6 @@ func TestClient_HttpPayloadWithUnion_awsRestxmlSerialize(t *testing.T) {
 			ExpectMethod:  "PUT",
 			ExpectURIPath: "/HttpPayloadWithUnion",
 			ExpectQuery:   []smithytesting.QueryItem{},
-			ExpectHeader: http.Header{
-				"Content-Type": []string{"application/xml"},
-			},
 			BodyAssert: func(actual io.Reader) error {
 				return smithytesting.CompareReaderEmpty(actual)
 			},
@@ -229,19 +222,7 @@ func TestClient_HttpPayloadWithUnion_awsRestxmlDeserialize(t *testing.T) {
 			if result == nil {
 				t.Fatalf("expect not nil result")
 			}
-			opts := cmp.Options{
-				cmpopts.IgnoreUnexported(
-					middleware.Metadata{},
-				),
-				cmp.FilterValues(func(x, y float64) bool {
-					return math.IsNaN(x) && math.IsNaN(y)
-				}, cmp.Comparer(func(_, _ interface{}) bool { return true })),
-				cmp.FilterValues(func(x, y float32) bool {
-					return math.IsNaN(float64(x)) && math.IsNaN(float64(y))
-				}, cmp.Comparer(func(_, _ interface{}) bool { return true })),
-				cmpopts.IgnoreTypes(smithydocument.NoSerde{}),
-			}
-			if err := smithytesting.CompareValues(c.ExpectResult, result, opts...); err != nil {
+			if err := smithytesting.CompareValues(c.ExpectResult, result); err != nil {
 				t.Errorf("expect c.ExpectResult value match:\n%v", err)
 			}
 		})

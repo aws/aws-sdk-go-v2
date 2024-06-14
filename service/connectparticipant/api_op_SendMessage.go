@@ -6,15 +6,17 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Sends a message. ConnectionToken is used for invoking this API instead of
-// ParticipantToken . The Amazon Connect Participant Service APIs do not use
-// Signature Version 4 authentication (https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html)
-// .
+// Sends a message.
+//
+// ConnectionToken is used for invoking this API instead of ParticipantToken .
+//
+// The Amazon Connect Participant Service APIs do not use [Signature Version 4 authentication].
+//
+// [Signature Version 4 authentication]: https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html
 func (c *Client) SendMessage(ctx context.Context, params *SendMessageInput, optFns ...func(*Options)) (*SendMessageOutput, error) {
 	if params == nil {
 		params = &SendMessageInput{}
@@ -38,10 +40,13 @@ type SendMessageInput struct {
 	ConnectionToken *string
 
 	// The content of the message.
+	//
 	//   - For text/plain and text/markdown , the Length Constraints are Minimum of 1,
 	//   Maximum of 1024.
+	//
 	//   - For application/json , the Length Constraints are Minimum of 1, Maximum of
 	//   12000.
+	//
 	//   - For application/vnd.amazonaws.connect.message.interactive.response , the
 	//   Length Constraints are Minimum of 1, Maximum of 12288.
 	//
@@ -57,9 +62,9 @@ type SendMessageInput struct {
 
 	// A unique, case-sensitive identifier that you provide to ensure the idempotency
 	// of the request. If not provided, the Amazon Web Services SDK populates this
-	// field. For more information about idempotency, see Making retries safe with
-	// idempotent APIs (https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/)
-	// .
+	// field. For more information about idempotency, see [Making retries safe with idempotent APIs].
+	//
+	// [Making retries safe with idempotent APIs]: https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/
 	ClientToken *string
 
 	noSmithyDocumentSerde
@@ -67,8 +72,10 @@ type SendMessageInput struct {
 
 type SendMessageOutput struct {
 
-	// The time when the message was sent. It's specified in ISO 8601 format:
-	// yyyy-MM-ddThh:mm:ss.SSSZ. For example, 2019-11-08T02:41:28.172Z.
+	// The time when the message was sent.
+	//
+	// It's specified in ISO 8601 format: yyyy-MM-ddThh:mm:ss.SSSZ. For example,
+	// 2019-11-08T02:41:28.172Z.
 	AbsoluteTime *string
 
 	// The ID of the message.
@@ -102,25 +109,25 @@ func (c *Client) addOperationSendMessageMiddlewares(stack *middleware.Stack, opt
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -135,6 +142,9 @@ func (c *Client) addOperationSendMessageMiddlewares(stack *middleware.Stack, opt
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opSendMessageMiddleware(stack, options); err != nil {
 		return err
 	}
@@ -144,7 +154,7 @@ func (c *Client) addOperationSendMessageMiddlewares(stack *middleware.Stack, opt
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opSendMessage(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

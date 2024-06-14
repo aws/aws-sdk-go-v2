@@ -6,13 +6,13 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockagent/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates an existing Knowledge Base associated to an Amazon Bedrock Agent
+// Updates the configuration for a knowledge base that has been associated with an
+// agent.
 func (c *Client) UpdateAgentKnowledgeBase(ctx context.Context, params *UpdateAgentKnowledgeBaseInput, optFns ...func(*Options)) (*UpdateAgentKnowledgeBaseOutput, error) {
 	if params == nil {
 		params = &UpdateAgentKnowledgeBaseInput{}
@@ -28,37 +28,42 @@ func (c *Client) UpdateAgentKnowledgeBase(ctx context.Context, params *UpdateAge
 	return out, nil
 }
 
-// Update Agent Knowledge Base Request
 type UpdateAgentKnowledgeBaseInput struct {
 
-	// Id generated at the server side when an Agent is created
+	// The unique identifier of the agent associated with the knowledge base that you
+	// want to update.
 	//
 	// This member is required.
 	AgentId *string
 
-	// Draft Version of the Agent.
+	// The version of the agent associated with the knowledge base that you want to
+	// update.
 	//
 	// This member is required.
 	AgentVersion *string
 
-	// Id generated at the server side when a Knowledge Base is associated to an Agent
+	// The unique identifier of the knowledge base that has been associated with an
+	// agent.
 	//
 	// This member is required.
 	KnowledgeBaseId *string
 
-	// Description of the Resource.
+	// Specifies a new description for the knowledge base associated with an agent.
 	Description *string
 
-	// State of the knowledge base; whether it is enabled or disabled
+	// Specifies whether the agent uses the knowledge base or not when sending an [InvokeAgent]
+	// request.
+	//
+	// [InvokeAgent]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_InvokeAgent.html
 	KnowledgeBaseState types.KnowledgeBaseState
 
 	noSmithyDocumentSerde
 }
 
-// Update Agent Knowledge Base Response
 type UpdateAgentKnowledgeBaseOutput struct {
 
-	// Contains the information of an Agent Knowledge Base.
+	// Contains details about the knowledge base that has been associated with an
+	// agent.
 	//
 	// This member is required.
 	AgentKnowledgeBase *types.AgentKnowledgeBase
@@ -91,25 +96,25 @@ func (c *Client) addOperationUpdateAgentKnowledgeBaseMiddlewares(stack *middlewa
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -124,13 +129,16 @@ func (c *Client) addOperationUpdateAgentKnowledgeBaseMiddlewares(stack *middlewa
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpUpdateAgentKnowledgeBaseValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateAgentKnowledgeBase(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

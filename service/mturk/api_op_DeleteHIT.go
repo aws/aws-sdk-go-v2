@@ -6,23 +6,28 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// The DeleteHIT operation is used to delete HIT that is no longer needed. Only
-// the Requester who created the HIT can delete it. You can only dispose of HITs
-// that are in the Reviewable state, with all of their submitted assignments
-// already either approved or rejected. If you call the DeleteHIT operation on a
-// HIT that is not in the Reviewable state (for example, that has not expired, or
-// still has active assignments), or on a HIT that is Reviewable but without all of
-// its submitted assignments already approved or rejected, the service will return
-// an error.
+//	The DeleteHIT operation is used to delete HIT that is no longer needed. Only
+//
+// the Requester who created the HIT can delete it.
+//
+// You can only dispose of HITs that are in the Reviewable state, with all of
+// their submitted assignments already either approved or rejected. If you call the
+// DeleteHIT operation on a HIT that is not in the Reviewable state (for example,
+// that has not expired, or still has active assignments), or on a HIT that is
+// Reviewable but without all of its submitted assignments already approved or
+// rejected, the service will return an error.
+//
 //   - HITs are automatically disposed of after 120 days.
+//
 //   - After you dispose of a HIT, you can no longer approve the HIT's rejected
 //     assignments.
+//
 //   - Disposed HITs are not returned in results for the ListHITs operation.
+//
 //   - Disposing HITs can improve the performance of operations such as
 //     ListReviewableHITs and ListHITs.
 func (c *Client) DeleteHIT(ctx context.Context, params *DeleteHITInput, optFns ...func(*Options)) (*DeleteHITOutput, error) {
@@ -79,25 +84,25 @@ func (c *Client) addOperationDeleteHITMiddlewares(stack *middleware.Stack, optio
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -112,13 +117,16 @@ func (c *Client) addOperationDeleteHITMiddlewares(stack *middleware.Stack, optio
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDeleteHITValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteHIT(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

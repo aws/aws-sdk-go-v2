@@ -6,13 +6,13 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/elastictranscoder/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // The CreatePreset operation creates a preset with settings that you specify.
+//
 // Elastic Transcoder checks the CreatePreset settings to ensure that they meet
 // Elastic Transcoder requirements and to determine whether they comply with H.264
 // standards. If your settings are not valid for Elastic Transcoder, Elastic
@@ -21,10 +21,12 @@ import (
 // strictly compliant with the H.264 standard, Elastic Transcoder creates the
 // preset and returns a warning message in the response. This helps you determine
 // whether your settings comply with the H.264 standard while giving you greater
-// flexibility with respect to the video that Elastic Transcoder produces. Elastic
-// Transcoder uses the H.264 video-compression format. For more information, see
-// the International Telecommunication Union publication Recommendation ITU-T
-// H.264: Advanced video coding for generic audiovisual services.
+// flexibility with respect to the video that Elastic Transcoder produces.
+//
+// Elastic Transcoder uses the H.264 video-compression format. For more
+// information, see the International Telecommunication Union publication
+// Recommendation ITU-T H.264: Advanced video coding for generic audiovisual
+// services.
 func (c *Client) CreatePreset(ctx context.Context, params *CreatePresetInput, optFns ...func(*Options)) (*CreatePresetOutput, error) {
 	if params == nil {
 		params = &CreatePresetInput{}
@@ -111,25 +113,25 @@ func (c *Client) addOperationCreatePresetMiddlewares(stack *middleware.Stack, op
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -144,13 +146,16 @@ func (c *Client) addOperationCreatePresetMiddlewares(stack *middleware.Stack, op
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpCreatePresetValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreatePreset(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

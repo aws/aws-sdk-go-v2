@@ -26,6 +26,7 @@ type AacSettings struct {
 	// AD". Note that the input received by the encoder must contain pre-mixed audio;
 	// the encoder does not perform the mixing. The values in audioTypeControl and
 	// audioType (in AudioDescription) are ignored when set to broadcasterMixedAd.
+	//
 	// Leave set to "normal" when input does not contain pre-mixed audio + AD.
 	InputType AacInputType
 
@@ -248,6 +249,10 @@ type AudioDescription struct {
 	// This member is required.
 	Name *string
 
+	// Identifies the DASH roles to assign to this audio output. Applies only when the
+	// audio output is configured for DVB DASH accessibility signaling.
+	AudioDashRoles []DashRoleAudio
+
 	// Advanced audio normalization settings.
 	AudioNormalizationSettings *AudioNormalizationSettings
 
@@ -269,6 +274,11 @@ type AudioDescription struct {
 
 	// Audio codec settings.
 	CodecSettings *AudioCodecSettings
+
+	// Identifies DVB DASH accessibility signaling in this audio output. Used in
+	// Microsoft Smooth Streaming outputs to signal accessibility information to
+	// packagers.
+	DvbDashAccessibility DvbDashAccessibility
 
 	// RFC 5646 language code representing the language of the audio output track.
 	// Only used if languageControlMode is useConfigured, or there is no ISO 639
@@ -372,22 +382,29 @@ type AudioOnlyHlsSettings struct {
 
 	// Optional. Specifies the .jpg or .png image to use as the cover art for an
 	// audio-only output. We recommend a low bit-size file because the image increases
-	// the output audio bandwidth. The image is attached to the audio as an ID3 tag,
-	// frame type APIC, picture type 0x10, as per the "ID3 tag version 2.4.0 - Native
-	// Frames" standard.
+	// the output audio bandwidth.
+	//
+	// The image is attached to the audio as an ID3 tag, frame type APIC, picture type
+	// 0x10, as per the "ID3 tag version 2.4.0 - Native Frames" standard.
 	AudioOnlyImage *InputLocation
 
-	// Four types of audio-only tracks are supported: Audio-Only Variant Stream The
-	// client can play back this audio-only stream instead of video in low-bandwidth
-	// scenarios. Represented as an EXT-X-STREAM-INF in the HLS manifest. Alternate
-	// Audio, Auto Select, Default Alternate rendition that the client should try to
-	// play back by default. Represented as an EXT-X-MEDIA in the HLS manifest with
-	// DEFAULT=YES, AUTOSELECT=YES Alternate Audio, Auto Select, Not Default Alternate
-	// rendition that the client may try to play back by default. Represented as an
-	// EXT-X-MEDIA in the HLS manifest with DEFAULT=NO, AUTOSELECT=YES Alternate Audio,
-	// not Auto Select Alternate rendition that the client will not try to play back by
-	// default. Represented as an EXT-X-MEDIA in the HLS manifest with DEFAULT=NO,
-	// AUTOSELECT=NO
+	// Four types of audio-only tracks are supported:
+	//
+	// Audio-Only Variant Stream The client can play back this audio-only stream
+	// instead of video in low-bandwidth scenarios. Represented as an EXT-X-STREAM-INF
+	// in the HLS manifest.
+	//
+	// Alternate Audio, Auto Select, Default Alternate rendition that the client
+	// should try to play back by default. Represented as an EXT-X-MEDIA in the HLS
+	// manifest with DEFAULT=YES, AUTOSELECT=YES
+	//
+	// Alternate Audio, Auto Select, Not Default Alternate rendition that the client
+	// may try to play back by default. Represented as an EXT-X-MEDIA in the HLS
+	// manifest with DEFAULT=NO, AUTOSELECT=YES
+	//
+	// Alternate Audio, not Auto Select Alternate rendition that the client will not
+	// try to play back by default. Represented as an EXT-X-MEDIA in the HLS manifest
+	// with DEFAULT=NO, AUTOSELECT=NO
 	AudioTrackType AudioOnlyHlsTrackType
 
 	// Specifies the segment type.
@@ -541,6 +558,19 @@ type AvailConfiguration struct {
 	// Placement Opportunity and Break messages create segment breaks. With ESAM mode,
 	// signals are forwarded to an ESAM server for possible update.
 	AvailSettings *AvailSettings
+
+	// Configures whether SCTE 35 passthrough triggers segment breaks in all output
+	// groups that use segmented outputs. Insertion of a SCTE 35 message typically
+	// results in a segment break, in addition to the regular cadence of breaks. The
+	// segment breaks appear in video outputs, audio outputs, and captions outputs (if
+	// any).
+	//
+	// ALL_OUTPUT_GROUPS: Default. Insert the segment break in in all output groups
+	// that have segmented outputs. This is the legacy behavior.
+	// SCTE35_ENABLED_OUTPUT_GROUPS: Insert the segment break only in output groups
+	// that have SCTE 35 passthrough enabled. This is the recommended value, because it
+	// reduces unnecessary segment breaks.
+	Scte35SegmentationScope Scte35SegmentationScope
 
 	noSmithyDocumentSerde
 }
@@ -787,12 +817,22 @@ type CaptionDescription struct {
 	Name *string
 
 	// Indicates whether the caption track implements accessibility features such as
-	// written descriptions of spoken dialog, music, and sounds.
+	// written descriptions of spoken dialog, music, and sounds. This signaling is
+	// added to HLS output group and MediaPackage output group.
 	Accessibility AccessibilityType
+
+	// Identifies the DASH roles to assign to this captions output. Applies only when
+	// the captions output is configured for DVB DASH accessibility signaling.
+	CaptionDashRoles []DashRoleCaption
 
 	// Additional settings for captions destination that depend on the destination
 	// type.
 	DestinationSettings *CaptionDestinationSettings
+
+	// Identifies DVB DASH accessibility signaling in this captions output. Used in
+	// Microsoft Smooth Streaming outputs to signal accessibility information to
+	// packagers.
+	DvbDashAccessibility DvbDashAccessibility
 
 	// ISO 639-2 three-digit code: http://www.loc.gov/standards/iso639-2/
 	LanguageCode *string
@@ -1105,6 +1145,180 @@ type ChannelSummary struct {
 
 	// Settings for any VPC outputs.
 	Vpc *VpcOutputSettingsDescription
+
+	noSmithyDocumentSerde
+}
+
+// Placeholder documentation for CloudWatchAlarmTemplateGroupSummary
+type CloudWatchAlarmTemplateGroupSummary struct {
+
+	// A cloudwatch alarm template group's ARN (Amazon Resource Name)
+	//
+	// This member is required.
+	Arn *string
+
+	// Placeholder documentation for __timestampIso8601
+	//
+	// This member is required.
+	CreatedAt *time.Time
+
+	// A cloudwatch alarm template group's id. AWS provided template groups have ids
+	// that start with aws-
+	//
+	// This member is required.
+	Id *string
+
+	// A resource's name. Names must be unique within the scope of a resource type in
+	// a specific region.
+	//
+	// This member is required.
+	Name *string
+
+	// The number of templates in a group.
+	//
+	// This member is required.
+	TemplateCount *int32
+
+	// A resource's optional description.
+	Description *string
+
+	// Placeholder documentation for __timestampIso8601
+	ModifiedAt *time.Time
+
+	// Represents the tags associated with a resource.
+	Tags map[string]string
+
+	noSmithyDocumentSerde
+}
+
+// Placeholder documentation for CloudWatchAlarmTemplateSummary
+type CloudWatchAlarmTemplateSummary struct {
+
+	// A cloudwatch alarm template's ARN (Amazon Resource Name)
+	//
+	// This member is required.
+	Arn *string
+
+	// The comparison operator used to compare the specified statistic and the
+	// threshold.
+	//
+	// This member is required.
+	ComparisonOperator CloudWatchAlarmTemplateComparisonOperator
+
+	// Placeholder documentation for __timestampIso8601
+	//
+	// This member is required.
+	CreatedAt *time.Time
+
+	// The number of periods over which data is compared to the specified threshold.
+	//
+	// This member is required.
+	EvaluationPeriods *int32
+
+	// A cloudwatch alarm template group's id. AWS provided template groups have ids
+	// that start with aws-
+	//
+	// This member is required.
+	GroupId *string
+
+	// A cloudwatch alarm template's id. AWS provided templates have ids that start
+	// with aws-
+	//
+	// This member is required.
+	Id *string
+
+	// The name of the metric associated with the alarm. Must be compatible with
+	// targetResourceType.
+	//
+	// This member is required.
+	MetricName *string
+
+	// A resource's name. Names must be unique within the scope of a resource type in
+	// a specific region.
+	//
+	// This member is required.
+	Name *string
+
+	// The period, in seconds, over which the specified statistic is applied.
+	//
+	// This member is required.
+	Period *int32
+
+	// The statistic to apply to the alarm's metric data.
+	//
+	// This member is required.
+	Statistic CloudWatchAlarmTemplateStatistic
+
+	// The resource type this template should dynamically generate cloudwatch metric
+	// alarms for.
+	//
+	// This member is required.
+	TargetResourceType CloudWatchAlarmTemplateTargetResourceType
+
+	// The threshold value to compare with the specified statistic.
+	//
+	// This member is required.
+	Threshold *float64
+
+	// Specifies how missing data points are treated when evaluating the alarm's
+	// condition.
+	//
+	// This member is required.
+	TreatMissingData CloudWatchAlarmTemplateTreatMissingData
+
+	// The number of datapoints within the evaluation period that must be breaching to
+	// trigger the alarm.
+	DatapointsToAlarm *int32
+
+	// A resource's optional description.
+	Description *string
+
+	// Placeholder documentation for __timestampIso8601
+	ModifiedAt *time.Time
+
+	// Represents the tags associated with a resource.
+	Tags map[string]string
+
+	noSmithyDocumentSerde
+}
+
+// Cmaf Ingest Group Settings
+type CmafIngestGroupSettings struct {
+
+	// A HTTP destination for the tracks
+	//
+	// This member is required.
+	Destination *OutputLocationRef
+
+	// If set to passthrough, Nielsen inaudible tones for media tracking will be
+	// detected in the input audio and an equivalent ID3 tag will be inserted in the
+	// output.
+	NielsenId3Behavior CmafNielsenId3Behavior
+
+	// Type of scte35 track to add. none or scte35WithoutSegmentation
+	Scte35Type Scte35Type
+
+	// The nominal duration of segments. The units are specified in
+	// SegmentLengthUnits. The segments will end on the next keyframe after the
+	// specified duration, so the actual segment length might be longer, and it might
+	// be a fraction of the units.
+	SegmentLength *int32
+
+	// Time unit for segment length parameter.
+	SegmentLengthUnits CmafIngestSegmentLengthUnits
+
+	// Number of milliseconds to delay the output from the second pipeline.
+	SendDelayMs *int32
+
+	noSmithyDocumentSerde
+}
+
+// Cmaf Ingest Output Settings
+type CmafIngestOutputSettings struct {
+
+	// String concatenated to the end of the destination filename. Required for
+	// multiple outputs of the same type.
+	NameModifier *string
 
 	noSmithyDocumentSerde
 }
@@ -1461,6 +1675,7 @@ type EbuTtDDestinationSettings struct {
 	CopyrightHolder *string
 
 	// Specifies how to handle the gap between the lines (in multi-line captions).
+	//
 	//   - enabled: Fill with the captions background color (as specified in the input
 	//   captions).
 	//   - disabled: Leave the gap unfilled.
@@ -1469,10 +1684,12 @@ type EbuTtDDestinationSettings struct {
 	// Specifies the font family to include in the font data attached to the EBU-TT
 	// captions. Valid only if styleControl is set to include. If you leave this field
 	// empty, the font family is set to "monospaced". (If styleControl is set to
-	// exclude, the font family is always set to "monospaced".) You specify only the
-	// font family. All other style information (color, bold, position and so on) is
-	// copied from the input captions. The size is always set to 100% to allow the
-	// downstream player to choose the size.
+	// exclude, the font family is always set to "monospaced".)
+	//
+	// You specify only the font family. All other style information (color, bold,
+	// position and so on) is copied from the input captions. The size is always set to
+	// 100% to allow the downstream player to choose the size.
+	//
 	//   - Enter a list of font families, as a comma-separated list of font names, in
 	//   order of preference. The name can be a font family (such as “Arial”), or a
 	//   generic font family (such as “serif”), or “default” (to let the downstream
@@ -1482,6 +1699,7 @@ type EbuTtDDestinationSettings struct {
 
 	// Specifies the style information (font color, font position, and so on) to
 	// include in the font data that is attached to the EBU-TT captions.
+	//
 	//   - include: Take the style information (font color, font position, and so on)
 	//   from the source captions and include that information in the font data attached
 	//   to the EBU-TT captions. This option is valid only if the source captions are
@@ -1629,6 +1847,112 @@ type Esam struct {
 	// Optional data sent as zoneIdentity to identify the MediaLive channel to the
 	// POIS.
 	ZoneIdentity *string
+
+	noSmithyDocumentSerde
+}
+
+// Placeholder documentation for EventBridgeRuleTemplateGroupSummary
+type EventBridgeRuleTemplateGroupSummary struct {
+
+	// An eventbridge rule template group's ARN (Amazon Resource Name)
+	//
+	// This member is required.
+	Arn *string
+
+	// Placeholder documentation for __timestampIso8601
+	//
+	// This member is required.
+	CreatedAt *time.Time
+
+	// An eventbridge rule template group's id. AWS provided template groups have ids
+	// that start with aws-
+	//
+	// This member is required.
+	Id *string
+
+	// A resource's name. Names must be unique within the scope of a resource type in
+	// a specific region.
+	//
+	// This member is required.
+	Name *string
+
+	// The number of templates in a group.
+	//
+	// This member is required.
+	TemplateCount *int32
+
+	// A resource's optional description.
+	Description *string
+
+	// Placeholder documentation for __timestampIso8601
+	ModifiedAt *time.Time
+
+	// Represents the tags associated with a resource.
+	Tags map[string]string
+
+	noSmithyDocumentSerde
+}
+
+// Placeholder documentation for EventBridgeRuleTemplateSummary
+type EventBridgeRuleTemplateSummary struct {
+
+	// An eventbridge rule template's ARN (Amazon Resource Name)
+	//
+	// This member is required.
+	Arn *string
+
+	// Placeholder documentation for __timestampIso8601
+	//
+	// This member is required.
+	CreatedAt *time.Time
+
+	// The number of targets configured to send matching events.
+	//
+	// This member is required.
+	EventTargetCount *int32
+
+	// The type of event to match with the rule.
+	//
+	// This member is required.
+	EventType EventBridgeRuleTemplateEventType
+
+	// An eventbridge rule template group's id. AWS provided template groups have ids
+	// that start with aws-
+	//
+	// This member is required.
+	GroupId *string
+
+	// An eventbridge rule template's id. AWS provided templates have ids that start
+	// with aws-
+	//
+	// This member is required.
+	Id *string
+
+	// A resource's name. Names must be unique within the scope of a resource type in
+	// a specific region.
+	//
+	// This member is required.
+	Name *string
+
+	// A resource's optional description.
+	Description *string
+
+	// Placeholder documentation for __timestampIso8601
+	ModifiedAt *time.Time
+
+	// Represents the tags associated with a resource.
+	Tags map[string]string
+
+	noSmithyDocumentSerde
+}
+
+// The target to which to send matching events.
+type EventBridgeRuleTemplateTarget struct {
+
+	// Target ARNs must be either an SNS topic or CloudWatch log group.
+	//
+	// This member is required.
+	Arn *string
 
 	noSmithyDocumentSerde
 }
@@ -1838,10 +2162,11 @@ type GlobalConfiguration struct {
 	// Settings for system actions when input is lost.
 	InputLossBehavior *InputLossBehavior
 
-	// Indicates how MediaLive pipelines are synchronized. PIPELINE_LOCKING -
-	// MediaLive will attempt to synchronize the output of each pipeline to the other.
-	// EPOCH_LOCKING - MediaLive will attempt to synchronize the output of each
-	// pipeline to the Unix epoch.
+	// Indicates how MediaLive pipelines are synchronized.
+	//
+	// PIPELINE_LOCKING - MediaLive will attempt to synchronize the output of each
+	// pipeline to the other. EPOCH_LOCKING - MediaLive will attempt to synchronize the
+	// output of each pipeline to the Unix epoch.
 	OutputLockingMode GlobalConfigurationOutputLockingMode
 
 	// Advanced output locking settings
@@ -1993,8 +2318,10 @@ type H264Settings struct {
 	// while high can produce better quality for certain content.
 	LookAheadRateControl H264LookAheadRateControl
 
-	// For QVBR: See the tooltip for Quality level For VBR: Set the maximum bitrate in
-	// order to accommodate expected spikes in the complexity of the video.
+	// For QVBR: See the tooltip for Quality level
+	//
+	// For VBR: Set the maximum bitrate in order to accommodate expected spikes in the
+	// complexity of the video.
 	MaxBitrate *int32
 
 	// Only meaningful if sceneChangeDetect is set to enabled. Defaults to 5 if
@@ -2028,6 +2355,7 @@ type H264Settings struct {
 
 	// Leave as STANDARD_QUALITY or choose a different value (which might result in
 	// additional costs to run the channel).
+	//
 	//   - ENHANCED_QUALITY: Produces a slightly better video quality without an
 	//   increase in the bitrate. Has an effect only when the Rate control mode is QVBR
 	//   or CBR. If this channel is in a MediaLive multiplex, the value must be
@@ -2040,6 +2368,7 @@ type H264Settings struct {
 	// determine the best quality. To set a target quality, enter values in the QVBR
 	// quality level field and the Max bitrate field. Enter values that suit your most
 	// important viewing devices. Recommended values are:
+	//
 	//   - Primary screen: Quality level: 8 to 10. Max bitrate: 4M
 	//   - PC or tablet: Quality level: 7. Max bitrate: 1.5M to 3M
 	//   - Smartphone: Quality level: 6. Max bitrate: 1M to 1.5M To let MediaLive
@@ -2048,22 +2377,29 @@ type H264Settings struct {
 	//   "Video - rate control mode" in the MediaLive user guide
 	QvbrQualityLevel *int32
 
-	// Rate control mode. QVBR: Quality will match the specified quality level except
-	// when it is constrained by the maximum bitrate. Recommended if you or your
-	// viewers pay for bandwidth. VBR: Quality and bitrate vary, depending on the video
-	// complexity. Recommended instead of QVBR if you want to maintain a specific
-	// average bitrate over the duration of the channel. CBR: Quality varies, depending
-	// on the video complexity. Recommended only if you distribute your assets to
-	// devices that cannot handle variable bitrates. Multiplex: This rate control mode
-	// is only supported (and is required) when the video is being delivered to a
-	// MediaLive Multiplex in which case the rate control configuration is controlled
-	// by the properties within the Multiplex Program.
+	// Rate control mode.
+	//
+	// QVBR: Quality will match the specified quality level except when it is
+	// constrained by the maximum bitrate. Recommended if you or your viewers pay for
+	// bandwidth.
+	//
+	// VBR: Quality and bitrate vary, depending on the video complexity. Recommended
+	// instead of QVBR if you want to maintain a specific average bitrate over the
+	// duration of the channel.
+	//
+	// CBR: Quality varies, depending on the video complexity. Recommended only if you
+	// distribute your assets to devices that cannot handle variable bitrates.
+	//
+	// Multiplex: This rate control mode is only supported (and is required) when the
+	// video is being delivered to a MediaLive Multiplex in which case the rate control
+	// configuration is controlled by the properties within the Multiplex Program.
 	RateControlMode H264RateControlMode
 
 	// Sets the scan type of the output to progressive or top-field-first interlaced.
 	ScanType H264ScanType
 
 	// Scene change detection.
+	//
 	//   - On: inserts I-frames when scene change is detected.
 	//   - Off: does not force an I-frame when scene change is detected.
 	SceneChangeDetect H264SceneChangeDetect
@@ -2114,6 +2450,7 @@ type H264Settings struct {
 	TimecodeBurninSettings *TimecodeBurninSettings
 
 	// Determines how timecodes should be inserted into the video elementary stream.
+	//
 	//   - 'disabled': Do not include timecodes
 	//   - 'picTimingSei': Pass through picture timing SEI messages from the source
 	//   specified in Timecode Config
@@ -2238,6 +2575,14 @@ type H265Settings struct {
 	// GOP. Note: Maximum GOP stretch = GOP size + Min-I-interval - 1
 	MinIInterval *int32
 
+	// If you are setting up the picture as a tile, you must set this to "disabled".
+	// In all other configurations, you typically enter "enabled".
+	MvOverPictureBoundaries H265MvOverPictureBoundaries
+
+	// If you are setting up the picture as a tile, you must set this to "disabled".
+	// In other configurations, you typically enter "enabled".
+	MvTemporalPredictor H265MvTemporalPredictor
+
 	// Pixel Aspect Ratio denominator.
 	ParDenominator *int32
 
@@ -2251,19 +2596,24 @@ type H265Settings struct {
 	// control mode is QVBR. Set values for the QVBR quality level field and Max
 	// bitrate field that suit your most important viewing devices. Recommended values
 	// are:
+	//
 	//   - Primary screen: Quality level: 8 to 10. Max bitrate: 4M
 	//   - PC or tablet: Quality level: 7. Max bitrate: 1.5M to 3M
 	//   - Smartphone: Quality level: 6. Max bitrate: 1M to 1.5M
 	QvbrQualityLevel *int32
 
-	// Rate control mode. QVBR: Quality will match the specified quality level except
-	// when it is constrained by the maximum bitrate. Recommended if you or your
-	// viewers pay for bandwidth. CBR: Quality varies, depending on the video
-	// complexity. Recommended only if you distribute your assets to devices that
-	// cannot handle variable bitrates. Multiplex: This rate control mode is only
-	// supported (and is required) when the video is being delivered to a MediaLive
-	// Multiplex in which case the rate control configuration is controlled by the
-	// properties within the Multiplex Program.
+	// Rate control mode.
+	//
+	// QVBR: Quality will match the specified quality level except when it is
+	// constrained by the maximum bitrate. Recommended if you or your viewers pay for
+	// bandwidth.
+	//
+	// CBR: Quality varies, depending on the video complexity. Recommended only if you
+	// distribute your assets to devices that cannot handle variable bitrates.
+	//
+	// Multiplex: This rate control mode is only supported (and is required) when the
+	// video is being delivered to a MediaLive Multiplex in which case the rate control
+	// configuration is controlled by the properties within the Multiplex Program.
 	RateControlMode H265RateControlMode
 
 	// Sets the scan type of the output to progressive or top-field-first interlaced.
@@ -2282,14 +2632,38 @@ type H265Settings struct {
 	// H.265 Tier.
 	Tier H265Tier
 
+	// Set this field to set up the picture as a tile. You must also set tileWidth.
+	// The tile height must result in 22 or fewer rows in the frame. The tile width
+	// must result in 20 or fewer columns in the frame. And finally, the product of the
+	// column count and row count must be 64 of less. If the tile width and height are
+	// specified, MediaLive will override the video codec slices field with a value
+	// that MediaLive calculates
+	TileHeight *int32
+
+	// Set to "padded" to force MediaLive to add padding to the frame, to obtain a
+	// frame that is a whole multiple of the tile size. If you are setting up the
+	// picture as a tile, you must enter "padded". In all other configurations, you
+	// typically enter "none".
+	TilePadding H265TilePadding
+
+	// Set this field to set up the picture as a tile. See tileHeight for more
+	// information.
+	TileWidth *int32
+
 	// Timecode burn-in settings
 	TimecodeBurninSettings *TimecodeBurninSettings
 
 	// Determines how timecodes should be inserted into the video elementary stream.
+	//
 	//   - 'disabled': Do not include timecodes
 	//   - 'picTimingSei': Pass through picture timing SEI messages from the source
 	//   specified in Timecode Config
 	TimecodeInsertion H265TimecodeInsertionBehavior
+
+	// Select the tree block size used for encoding. If you enter "auto", the encoder
+	// will pick the best size. If you are setting up the picture as a tile, you must
+	// set this to 32x32. In all other configurations, you typically enter "auto".
+	TreeblockSize H265TreeblockSize
 
 	noSmithyDocumentSerde
 }
@@ -2403,10 +2777,11 @@ type HlsGroupSettings struct {
 	// main .m3u8 file.
 	BaseUrlContent *string
 
-	// Optional. One value per output group. This field is required only if you are
-	// completing Base URL content A, and the downstream system has notified you that
-	// the media files for pipeline 1 of all outputs are in a location different from
-	// the media files for pipeline 0.
+	// Optional. One value per output group.
+	//
+	// This field is required only if you are completing Base URL content A, and the
+	// downstream system has notified you that the media files for pipeline 1 of all
+	// outputs are in a location different from the media files for pipeline 0.
 	BaseUrlContent1 *string
 
 	// A partial URI prefix that will be prepended to each output in the media .m3u8
@@ -2414,10 +2789,12 @@ type HlsGroupSettings struct {
 	// main .m3u8 file.
 	BaseUrlManifest *string
 
-	// Optional. One value per output group. Complete this field only if you are
-	// completing Base URL manifest A, and the downstream system has notified you that
-	// the child manifest files for pipeline 1 of all outputs are in a location
-	// different from the child manifest files for pipeline 0.
+	// Optional. One value per output group.
+	//
+	// Complete this field only if you are completing Base URL manifest A, and the
+	// downstream system has notified you that the child manifest files for pipeline 1
+	// of all outputs are in a location different from the child manifest files for
+	// pipeline 0.
 	BaseUrlManifest1 *string
 
 	// Mapping of up to 4 caption channels to caption languages. Is only meaningful if
@@ -2470,12 +2847,13 @@ type HlsGroupSettings struct {
 	HlsId3SegmentTagging HlsId3SegmentTaggingState
 
 	// DISABLED: Do not create an I-frame-only manifest, but do create the master and
-	// media manifests (according to the Output Selection field). STANDARD: Create an
-	// I-frame-only manifest for each output that contains video, as well as the other
-	// manifests (according to the Output Selection field). The I-frame manifest
-	// contains a #EXT-X-I-FRAMES-ONLY tag to indicate it is I-frame only, and one or
-	// more #EXT-X-BYTERANGE entries identifying the I-frame position. For example,
-	// #EXT-X-BYTERANGE:160364@1461888"
+	// media manifests (according to the Output Selection field).
+	//
+	// STANDARD: Create an I-frame-only manifest for each output that contains video,
+	// as well as the other manifests (according to the Output Selection field). The
+	// I-frame manifest contains a #EXT-X-I-FRAMES-ONLY tag to indicate it is I-frame
+	// only, and one or more #EXT-X-BYTERANGE entries identifying the I-frame position.
+	// For example, #EXT-X-BYTERANGE:160364@1461888"
 	IFrameOnlyPlaylists IFrameOnlyPlaylistType
 
 	// Specifies whether to include the final (incomplete) segment in the media output
@@ -2486,10 +2864,11 @@ type HlsGroupSettings struct {
 	// We recommend you choose Auto and let MediaLive control the behavior.
 	IncompleteSegmentBehavior HlsIncompleteSegmentBehavior
 
-	// Applies only if Mode field is LIVE. Specifies the maximum number of segments in
-	// the media manifest file. After this maximum, older segments are removed from the
-	// media manifest. This number must be smaller than the number in the Keep Segments
-	// field.
+	// Applies only if Mode field is LIVE.
+	//
+	// Specifies the maximum number of segments in the media manifest file. After this
+	// maximum, older segments are removed from the media manifest. This number must be
+	// smaller than the number in the Keep Segments field.
 	IndexNSegments *int32
 
 	// Parameter that control output group behavior on input loss.
@@ -2507,9 +2886,12 @@ type HlsGroupSettings struct {
 	// value.
 	IvSource HlsIvSource
 
-	// Applies only if Mode field is LIVE. Specifies the number of media segments to
-	// retain in the destination directory. This number should be bigger than
-	// indexNSegments (Num segments). We recommend (value = (2 x indexNsegments) + 1).
+	// Applies only if Mode field is LIVE.
+	//
+	// Specifies the number of media segments to retain in the destination directory.
+	// This number should be bigger than indexNSegments (Num segments). We recommend
+	// (value = (2 x indexNsegments) + 1).
+	//
 	// If this "keep segments" number is too low, the following might happen: the
 	// player is still reading a media manifest file that lists this segment, but that
 	// segment has been removed from the destination directory (as directed by
@@ -2543,14 +2925,18 @@ type HlsGroupSettings struct {
 	// If "vod", all segments are indexed and kept permanently in the destination and
 	// manifest. If "live", only the number segments specified in keepSegments and
 	// indexNSegments are kept; newer segments replace older segments, which may
-	// prevent players from rewinding all the way to the beginning of the event. VOD
-	// mode uses HLS EXT-X-PLAYLIST-TYPE of EVENT while the channel is running,
+	// prevent players from rewinding all the way to the beginning of the event.
+	//
+	// VOD mode uses HLS EXT-X-PLAYLIST-TYPE of EVENT while the channel is running,
 	// converting it to a "VOD" type manifest on completion of the stream.
 	Mode HlsMode
 
 	// MANIFESTS_AND_SEGMENTS: Generates manifests (master manifest, if applicable,
-	// and media manifests) for this output group. VARIANT_MANIFESTS_AND_SEGMENTS:
-	// Generates media manifests for this output group, but not a master manifest.
+	// and media manifests) for this output group.
+	//
+	// VARIANT_MANIFESTS_AND_SEGMENTS: Generates media manifests for this output
+	// group, but not a master manifest.
+	//
 	// SEGMENTS_ONLY: Does not generate any manifests for this output group.
 	OutputSelection HlsOutputSelection
 
@@ -2559,12 +2945,16 @@ type HlsGroupSettings struct {
 	ProgramDateTime HlsProgramDateTime
 
 	// Specifies the algorithm used to drive the HLS EXT-X-PROGRAM-DATE-TIME clock.
-	// Options include: INITIALIZE_FROM_OUTPUT_TIMECODE: The PDT clock is initialized
-	// as a function of the first output timecode, then incremented by the EXTINF
-	// duration of each encoded segment. SYSTEM_CLOCK: The PDT clock is initialized as
-	// a function of the UTC wall clock, then incremented by the EXTINF duration of
-	// each encoded segment. If the PDT clock diverges from the wall clock by more than
-	// 500ms, it is resynchronized to the wall clock.
+	// Options include:
+	//
+	// INITIALIZE_FROM_OUTPUT_TIMECODE: The PDT clock is initialized as a function of
+	// the first output timecode, then incremented by the EXTINF duration of each
+	// encoded segment.
+	//
+	// SYSTEM_CLOCK: The PDT clock is initialized as a function of the UTC wall clock,
+	// then incremented by the EXTINF duration of each encoded segment. If the PDT
+	// clock diverges from the wall clock by more than 500ms, it is resynchronized to
+	// the wall clock.
 	ProgramDateTimeClock HlsProgramDateTimeClock
 
 	// Period of insertion of EXT-X-PROGRAM-DATE-TIME entry, in seconds.
@@ -2576,11 +2966,14 @@ type HlsGroupSettings struct {
 	// stale manifest detection to switch from one manifest to the other, when the
 	// current manifest seems to be stale. There are still two destinations and two
 	// master manifests, but both master manifests reference the media files from both
-	// pipelines. DISABLED: The master manifest (.m3u8 file) for each pipeline includes
-	// information about its own pipeline only. For an HLS output group with
-	// MediaPackage as the destination, the DISABLED behavior is always followed.
-	// MediaPackage regenerates the manifests it serves to players so a redundant
-	// manifest from MediaLive is irrelevant.
+	// pipelines.
+	//
+	// DISABLED: The master manifest (.m3u8 file) for each pipeline includes
+	// information about its own pipeline only.
+	//
+	// For an HLS output group with MediaPackage as the destination, the DISABLED
+	// behavior is always followed. MediaPackage regenerates the manifests it serves to
+	// players so a redundant manifest from MediaLive is irrelevant.
 	RedundantManifest HlsRedundantManifest
 
 	// Length of MPEG-2 Transport Stream segments to create in seconds. Note that
@@ -2611,11 +3004,13 @@ type HlsGroupSettings struct {
 	TimestampDeltaMilliseconds *int32
 
 	// SEGMENTED_FILES: Emit the program as segments - multiple .ts media files.
-	// SINGLE_FILE: Applies only if Mode field is VOD. Emit the program as a single .ts
-	// media file. The media manifest includes #EXT-X-BYTERANGE tags to index segments
-	// for playback. A typical use for this value is when sending the output to AWS
-	// Elemental MediaConvert, which can accept only a single media file. Playback
-	// while the channel is running is not guaranteed due to HTTP server caching.
+	//
+	// SINGLE_FILE: Applies only if Mode field is VOD. Emit the program as a single
+	// .ts media file. The media manifest includes #EXT-X-BYTERANGE tags to index
+	// segments for playback. A typical use for this value is when sending the output
+	// to AWS Elemental MediaConvert, which can accept only a single media file.
+	// Playback while the channel is running is not guaranteed due to HTTP server
+	// caching.
 	TsFileMode HlsTsFileMode
 
 	noSmithyDocumentSerde
@@ -3369,6 +3764,7 @@ type InputSettings struct {
 
 	// Turns on the filter for this input. MPEG-2 inputs have the deblocking filter
 	// enabled by default.
+	//
 	//   - auto - filtering will be applied depending on input type/quality
 	//   - disabled - no filtering will be applied to the input
 	//   - forced - filtering will be applied regardless of input type
@@ -3384,6 +3780,7 @@ type InputSettings struct {
 	// Specifies whether to extract applicable ancillary data from a SMPTE-2038 source
 	// in this input. Applicable data types are captions, timecode, AFD, and SCTE-104
 	// messages.
+	//
 	//   - PREFER: Extract from SMPTE-2038 if present in this input, otherwise extract
 	//   from another source (if any).
 	//   - IGNORE: Never extract any ancillary data from SMPTE-2038.
@@ -3725,14 +4122,16 @@ type M2tsSettings struct {
 	// The segmentation style parameter controls how segmentation markers are inserted
 	// into the transport stream. With avails, it is possible that segments may be
 	// truncated, which can influence where future segmentation markers are inserted.
+	//
 	// When a segmentation style of "resetCadence" is selected and a segment is
 	// truncated due to an avail, we will reset the segmentation cadence. This means
-	// the subsequent segment will have a duration of $segmentationTime seconds. When
-	// a segmentation style of "maintainCadence" is selected and a segment is truncated
-	// due to an avail, we will not reset the segmentation cadence. This means the
-	// subsequent segment will likely be truncated as well. However, all segments after
-	// that will have a duration of $segmentationTime seconds. Note that EBP lookahead
-	// is a slight exception to this rule.
+	// the subsequent segment will have a duration of $segmentationTime seconds.
+	//
+	// When a segmentation style of "maintainCadence" is selected and a segment is
+	// truncated due to an avail, we will not reset the segmentation cadence. This
+	// means the subsequent segment will likely be truncated as well. However, all
+	// segments after that will have a duration of $segmentationTime seconds. Note
+	// that EBP lookahead is a slight exception to this rule.
 	SegmentationStyle M2tsSegmentationStyle
 
 	// The length in seconds of each segment. Required unless markers is set to none.
@@ -3935,6 +4334,52 @@ type MediaPackageOutputDestinationSettings struct {
 
 // Media Package Output Settings
 type MediaPackageOutputSettings struct {
+	noSmithyDocumentSerde
+}
+
+// An AWS resource used in media workflows.
+type MediaResource struct {
+
+	// Placeholder documentation for __listOfMediaResourceNeighbor
+	Destinations []MediaResourceNeighbor
+
+	// The logical name of an AWS media resource.
+	Name *string
+
+	// Placeholder documentation for __listOfMediaResourceNeighbor
+	Sources []MediaResourceNeighbor
+
+	noSmithyDocumentSerde
+}
+
+// A direct source or destination neighbor to an AWS media resource.
+type MediaResourceNeighbor struct {
+
+	// The ARN of a resource used in AWS media workflows.
+	//
+	// This member is required.
+	Arn *string
+
+	// The logical name of an AWS media resource.
+	Name *string
+
+	noSmithyDocumentSerde
+}
+
+// Represents the latest monitor deployment of a signal map.
+type MonitorDeployment struct {
+
+	// A signal map's monitor deployment status.
+	//
+	// This member is required.
+	Status SignalMapMonitorDeploymentStatus
+
+	// URI associated with a signal map's monitor deployment.
+	DetailsUri *string
+
+	// Error message associated with a failed monitor deployment of a signal map.
+	ErrorMessage *string
+
 	noSmithyDocumentSerde
 }
 
@@ -4142,13 +4587,17 @@ type MsSmoothGroupSettings struct {
 	// be be delivered to the IIS server once the connection is re-established.
 	ConnectionRetryInterval *int32
 
-	// MS Smooth event ID to be sent to the IIS server. Should only be specified if
-	// eventIdMode is set to useConfigured.
+	// MS Smooth event ID to be sent to the IIS server.
+	//
+	// Should only be specified if eventIdMode is set to useConfigured.
 	EventId *string
 
 	// Specifies whether or not to send an event ID to the IIS server. If no event ID
 	// is sent and the same Live Event is used without changing the publishing point,
-	// clients might see cached video from the previous run. Options:
+	// clients might see cached video from the previous run.
+	//
+	// Options:
+	//
 	//   - "useConfigured" - use the value provided in eventId
 	//   - "useTimestamp" - generate and send an event ID based on the current
 	//   timestamp
@@ -4183,6 +4632,7 @@ type MsSmoothGroupSettings struct {
 	SendDelayMs *int32
 
 	// Identifies the type of data to place in the sparse track:
+	//
 	//   - SCTE35: Insert SCTE-35 messages from the source content. With each message,
 	//   insert an IDR frame to start a new segment.
 	//   - SCTE35_WITHOUT_SEGMENTATION: Insert SCTE-35 messages from the source
@@ -4199,6 +4649,7 @@ type MsSmoothGroupSettings struct {
 	TimestampOffset *string
 
 	// Type of timestamp date offset to use.
+	//
 	//   - useEventStartDate: Use the date the event was started as the offset
 	//   - useConfiguredOffset: Use an explicitly configured date as the offset
 	TimestampOffsetMode SmoothGroupTimestampOffsetMode
@@ -4613,6 +5064,7 @@ type NielsenWatermarksSettings struct {
 	NielsenCbetSettings *NielsenCBET
 
 	// Choose the distribution types that you want to assign to the watermarks:
+	//
 	//   - PROGRAM_CONTENT
 	//   - FINAL_DISTRIBUTOR
 	NielsenDistributionType NielsenWatermarksDistributionTypes
@@ -4752,6 +5204,9 @@ type OutputGroupSettings struct {
 	// Archive Group Settings
 	ArchiveGroupSettings *ArchiveGroupSettings
 
+	// Cmaf Ingest Group Settings
+	CmafIngestGroupSettings *CmafIngestGroupSettings
+
 	// Frame Capture Group Settings
 	FrameCaptureGroupSettings *FrameCaptureGroupSettings
 
@@ -4802,6 +5257,9 @@ type OutputSettings struct {
 
 	// Archive Output Settings
 	ArchiveOutputSettings *ArchiveOutputSettings
+
+	// Cmaf Ingest Output Settings
+	CmafIngestOutputSettings *CmafIngestOutputSettings
 
 	// Frame Capture Output Settings
 	FrameCaptureOutputSettings *FrameCaptureOutputSettings
@@ -5064,6 +5522,7 @@ type RtmpGroupSettings struct {
 	IncludeFillerNalUnits IncludeFillerNalUnits
 
 	// Controls the behavior of this RTMP group if input becomes unavailable.
+	//
 	//   - emitOutput: Emit a slate until input returns.
 	//   - pauseOutput: Stop transmitting data until input returns. This does not
 	//   close the underlying RTMP connection.
@@ -5228,6 +5687,7 @@ type Scte27SourceSettings struct {
 
 	// The pid field is used in conjunction with the caption selector languageCode
 	// field as follows:
+	//
 	//   - Specify PID and Language: Extracts captions from that PID; the language is
 	//   "informational".
 	//   - Specify PID and omit Language: Extracts the specified PID.
@@ -5447,6 +5907,53 @@ type Scte35TimeSignalScheduleActionSettings struct {
 	noSmithyDocumentSerde
 }
 
+// Placeholder documentation for SignalMapSummary
+type SignalMapSummary struct {
+
+	// A signal map's ARN (Amazon Resource Name)
+	//
+	// This member is required.
+	Arn *string
+
+	// Placeholder documentation for __timestampIso8601
+	//
+	// This member is required.
+	CreatedAt *time.Time
+
+	// A signal map's id.
+	//
+	// This member is required.
+	Id *string
+
+	// A signal map's monitor deployment status.
+	//
+	// This member is required.
+	MonitorDeploymentStatus SignalMapMonitorDeploymentStatus
+
+	// A resource's name. Names must be unique within the scope of a resource type in
+	// a specific region.
+	//
+	// This member is required.
+	Name *string
+
+	// A signal map's current status which is dependent on its lifecycle actions or
+	// associated jobs.
+	//
+	// This member is required.
+	Status SignalMapStatus
+
+	// A resource's optional description.
+	Description *string
+
+	// Placeholder documentation for __timestampIso8601
+	ModifiedAt *time.Time
+
+	// Represents the tags associated with a resource.
+	Tags map[string]string
+
+	noSmithyDocumentSerde
+}
+
 // Smpte Tt Destination Settings
 type SmpteTtDestinationSettings struct {
 	noSmithyDocumentSerde
@@ -5658,6 +6165,22 @@ type StopTimecode struct {
 	noSmithyDocumentSerde
 }
 
+// Represents the latest successful monitor deployment of a signal map.
+type SuccessfulMonitorDeployment struct {
+
+	// URI associated with a signal map's monitor deployment.
+	//
+	// This member is required.
+	DetailsUri *string
+
+	// A signal map's monitor deployment status.
+	//
+	// This member is required.
+	Status SignalMapMonitorDeploymentStatus
+
+	noSmithyDocumentSerde
+}
+
 // Teletext Destination Settings
 type TeletextDestinationSettings struct {
 	noSmithyDocumentSerde
@@ -5681,6 +6204,7 @@ type TeletextSourceSettings struct {
 type TemporalFilterSettings struct {
 
 	// If you enable this filter, the results are the following:
+	//
 	//   - If the source content is noisy (it contains excessive digital artifacts),
 	//   the filter cleans up the source.
 	//   - If the source content is already clean, the filter tends to decrease the

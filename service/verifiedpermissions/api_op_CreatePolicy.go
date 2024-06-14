@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/verifiedpermissions/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -15,8 +14,10 @@ import (
 
 // Creates a Cedar policy and saves it in the specified policy store. You can
 // create either a static policy or a policy linked to a policy template.
+//
 //   - To create a static policy, provide the Cedar policy text in the StaticPolicy
 //     section of the PolicyDefinition .
+//
 //   - To create a policy that is dynamically linked to a policy template, specify
 //     the policy template ID and the principal and resource to associate with this
 //     policy in the templateLinked section of the PolicyDefinition . If the policy
@@ -25,10 +26,13 @@ import (
 //
 // Creating a policy causes it to be validated against the schema in the policy
 // store. If the policy doesn't pass validation, the operation fails and the policy
-// isn't stored. Verified Permissions is eventually consistent (https://wikipedia.org/wiki/Eventual_consistency)
-// . It can take a few seconds for a new or changed element to be propagate through
-// the service and be visible in the results of other Verified Permissions
-// operations.
+// isn't stored.
+//
+// Verified Permissions is [eventually consistent] . It can take a few seconds for a new or changed
+// element to propagate through the service and be visible in the results of other
+// Verified Permissions operations.
+//
+// [eventually consistent]: https://wikipedia.org/wiki/Eventual_consistency
 func (c *Client) CreatePolicy(ctx context.Context, params *CreatePolicyInput, optFns ...func(*Options)) (*CreatePolicyOutput, error) {
 	if params == nil {
 		params = &CreatePolicyInput{}
@@ -62,10 +66,19 @@ type CreatePolicyInput struct {
 	// idempotency of the request. This lets you safely retry the request without
 	// accidentally performing the same operation a second time. Passing the same value
 	// to a later call to an operation requires that you also pass the same value for
-	// all other parameters. We recommend that you use a UUID type of value. (https://wikipedia.org/wiki/Universally_unique_identifier)
-	// . If you don't provide this value, then Amazon Web Services generates a random
-	// one for you. If you retry the operation with the same ClientToken , but with
-	// different parameters, the retry fails with an IdempotentParameterMismatch error.
+	// all other parameters. We recommend that you use a [UUID type of value.].
+	//
+	// If you don't provide this value, then Amazon Web Services generates a random
+	// one for you.
+	//
+	// If you retry the operation with the same ClientToken , but with different
+	// parameters, the retry fails with an ConflictException error.
+	//
+	// Verified Permissions recognizes a ClientToken for eight hours. After eight
+	// hours, the next request with the same parameters performs the operation again
+	// regardless of the value of ClientToken .
+	//
+	// [UUID type of value.]: https://wikipedia.org/wiki/Universally_unique_identifier
 	ClientToken *string
 
 	noSmithyDocumentSerde
@@ -97,6 +110,15 @@ type CreatePolicyOutput struct {
 	//
 	// This member is required.
 	PolicyType types.PolicyType
+
+	// The action that a policy permits or forbids. For example, {"actions":
+	// [{"actionId": "ViewPhoto", "actionType": "PhotoFlash::Action"}, {"entityID":
+	// "SharePhoto", "entityType": "PhotoFlash::Action"}]} .
+	Actions []types.ActionIdentifier
+
+	// The effect of the decision that a policy returns to an authorization request.
+	// For example, "effect": "Permit" .
+	Effect types.PolicyEffect
 
 	// The principal specified in the new policy's scope. This response element isn't
 	// present when principal isn't specified in the policy content.
@@ -134,25 +156,25 @@ func (c *Client) addOperationCreatePolicyMiddlewares(stack *middleware.Stack, op
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -167,6 +189,9 @@ func (c *Client) addOperationCreatePolicyMiddlewares(stack *middleware.Stack, op
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opCreatePolicyMiddleware(stack, options); err != nil {
 		return err
 	}
@@ -176,7 +201,7 @@ func (c *Client) addOperationCreatePolicyMiddlewares(stack *middleware.Stack, op
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreatePolicy(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

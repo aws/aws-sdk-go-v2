@@ -6,14 +6,14 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/codeartifact/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns a PackageDescription (https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_PackageDescription.html)
-// object that contains information about the requested package.
+//	Returns a [PackageDescription] object that contains information about the requested package.
+//
+// [PackageDescription]: https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_PackageDescription.html
 func (c *Client) DescribePackage(ctx context.Context, params *DescribePackageInput, optFns ...func(*Options)) (*DescribePackageOutput, error) {
 	if params == nil {
 		params = &DescribePackageInput{}
@@ -51,18 +51,29 @@ type DescribePackageInput struct {
 	// This member is required.
 	Repository *string
 
-	// The 12-digit account number of the Amazon Web Services account that owns the
+	//  The 12-digit account number of the Amazon Web Services account that owns the
 	// domain. It does not include dashes or spaces.
 	DomainOwner *string
 
 	// The namespace of the requested package. The package component that specifies
 	// its namespace depends on its type. For example:
-	//   - The namespace of a Maven package is its groupId . The namespace is required
-	//   when requesting Maven packages.
-	//   - The namespace of an npm package is its scope .
-	//   - Python and NuGet packages do not contain a corresponding component,
-	//   packages of those formats do not have a namespace.
+	//
+	// The namespace is required when requesting packages of the following formats:
+	//
+	//   - Maven
+	//
+	//   - Swift
+	//
+	//   - generic
+	//
+	//   - The namespace of a Maven package version is its groupId .
+	//
+	//   - The namespace of an npm or Swift package version is its scope .
+	//
 	//   - The namespace of a generic package is its namespace .
+	//
+	//   - Python, NuGet, and Ruby package versions do not contain a corresponding
+	//   component, package versions of those formats do not have a namespace.
 	Namespace *string
 
 	noSmithyDocumentSerde
@@ -70,8 +81,9 @@ type DescribePackageInput struct {
 
 type DescribePackageOutput struct {
 
-	// A PackageDescription (https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_PackageDescription.html)
-	// object that contains information about the requested package.
+	// A [PackageDescription] object that contains information about the requested package.
+	//
+	// [PackageDescription]: https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_PackageDescription.html
 	//
 	// This member is required.
 	Package *types.PackageDescription
@@ -104,25 +116,25 @@ func (c *Client) addOperationDescribePackageMiddlewares(stack *middleware.Stack,
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -137,13 +149,16 @@ func (c *Client) addOperationDescribePackageMiddlewares(stack *middleware.Stack,
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDescribePackageValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribePackage(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

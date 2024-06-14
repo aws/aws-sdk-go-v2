@@ -6,13 +6,13 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/iotfleetwise/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates a vehicle model (model manifest). If created vehicles are associated
+//	Updates a vehicle model (model manifest). If created vehicles are associated
+//
 // with a vehicle model, it can't be updated.
 func (c *Client) UpdateModelManifest(ctx context.Context, params *UpdateModelManifestInput, optFns ...func(*Options)) (*UpdateModelManifestOutput, error) {
 	if params == nil {
@@ -31,23 +31,23 @@ func (c *Client) UpdateModelManifest(ctx context.Context, params *UpdateModelMan
 
 type UpdateModelManifestInput struct {
 
-	// The name of the vehicle model to update.
+	//  The name of the vehicle model to update.
 	//
 	// This member is required.
 	Name *string
 
-	// A brief description of the vehicle model.
+	//  A brief description of the vehicle model.
 	Description *string
 
-	// A list of fullyQualifiedName of nodes, which are a general abstraction of
+	//  A list of fullyQualifiedName of nodes, which are a general abstraction of
 	// signals, to add to the vehicle model.
 	NodesToAdd []string
 
-	// A list of fullyQualifiedName of nodes, which are a general abstraction of
+	//  A list of fullyQualifiedName of nodes, which are a general abstraction of
 	// signals, to remove from the vehicle model.
 	NodesToRemove []string
 
-	// The state of the vehicle model. If the status is ACTIVE , the vehicle model
+	//  The state of the vehicle model. If the status is ACTIVE , the vehicle model
 	// can't be edited. If the status is DRAFT , you can edit the vehicle model.
 	Status types.ManifestStatus
 
@@ -56,12 +56,12 @@ type UpdateModelManifestInput struct {
 
 type UpdateModelManifestOutput struct {
 
-	// The Amazon Resource Name (ARN) of the updated vehicle model.
+	//  The Amazon Resource Name (ARN) of the updated vehicle model.
 	//
 	// This member is required.
 	Arn *string
 
-	// The name of the updated vehicle model.
+	//  The name of the updated vehicle model.
 	//
 	// This member is required.
 	Name *string
@@ -94,25 +94,25 @@ func (c *Client) addOperationUpdateModelManifestMiddlewares(stack *middleware.St
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -127,13 +127,16 @@ func (c *Client) addOperationUpdateModelManifestMiddlewares(stack *middleware.St
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpUpdateModelManifestValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateModelManifest(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

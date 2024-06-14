@@ -6,13 +6,13 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/xray/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Sets the resource policy to grant one or more Amazon Web Services services and
+//	Sets the resource policy to grant one or more Amazon Web Services services and
+//
 // accounts permissions to access X-Ray. Each resource policy will be associated
 // with a specific Amazon Web Services account. Each Amazon Web Services account
 // can have a maximum of 5 resource policies, and each policy name must be unique
@@ -46,21 +46,27 @@ type PutResourcePolicyInput struct {
 	PolicyName *string
 
 	// A flag to indicate whether to bypass the resource policy lockout safety check.
+	//
 	// Setting this value to true increases the risk that the policy becomes
-	// unmanageable. Do not set this value to true indiscriminately. Use this parameter
-	// only when you include a policy in the request and you intend to prevent the
-	// principal that is making the request from making a subsequent PutResourcePolicy
-	// request. The default value is false.
+	// unmanageable. Do not set this value to true indiscriminately.
+	//
+	// Use this parameter only when you include a policy in the request and you intend
+	// to prevent the principal that is making the request from making a subsequent
+	// PutResourcePolicy request.
+	//
+	// The default value is false.
 	BypassPolicyLockoutCheck bool
 
 	// Specifies a specific policy revision, to ensure an atomic create operation. By
 	// default the resource policy is created if it does not exist, or updated with an
 	// incremented revision id. The revision id is unique to each policy in the
-	// account. If the policy revision id does not match the latest revision id, the
-	// operation will fail with an InvalidPolicyRevisionIdException exception. You can
-	// also provide a PolicyRevisionId of 0. In this case, the operation will fail
-	// with an InvalidPolicyRevisionIdException exception if a resource policy with
-	// the same name already exists.
+	// account.
+	//
+	// If the policy revision id does not match the latest revision id, the operation
+	// will fail with an InvalidPolicyRevisionIdException exception. You can also
+	// provide a PolicyRevisionId of 0. In this case, the operation will fail with an
+	// InvalidPolicyRevisionIdException exception if a resource policy with the same
+	// name already exists.
 	PolicyRevisionId *string
 
 	noSmithyDocumentSerde
@@ -99,25 +105,25 @@ func (c *Client) addOperationPutResourcePolicyMiddlewares(stack *middleware.Stac
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -132,13 +138,16 @@ func (c *Client) addOperationPutResourcePolicyMiddlewares(stack *middleware.Stac
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpPutResourcePolicyValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opPutResourcePolicy(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

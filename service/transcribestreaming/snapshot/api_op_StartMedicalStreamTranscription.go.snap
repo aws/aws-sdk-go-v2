@@ -1,0 +1,37 @@
+StartMedicalStreamTranscription
+	Initialize stack step
+		RegisterServiceMetadata
+		legacyEndpointContextSetter
+		SetLogger
+		OperationInputValidation
+	Serialize stack step
+		setOperationInput
+		ResolveEndpoint
+		OperationSerializer
+	Build stack step
+		ClientRequestID
+		UserAgent
+		AddTimeOffsetMiddleware
+		RecursionDetection
+	Finalize stack step
+		ComputePayloadHash
+		SigV4ContentSHA256Header
+		ResolveAuthScheme
+		GetIdentity
+		ResolveEndpointV2
+		disableHTTPS
+		Retry
+		RetryMetricsHeader
+		setLegacyContextSigningOptions
+		Signing
+		InitializeStreamWriter
+	Deserialize stack step
+		AddRawResponseToMetadata
+		OperationEventStreamDeserializer
+		RequireMinimumProtocol
+		ResponseErrorWrapper
+		RequestIDRetriever
+		OperationDeserializer
+		AddTimeOffsetMiddleware
+		RecordResponseTiming
+		RequestResponseLogger

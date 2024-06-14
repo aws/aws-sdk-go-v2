@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/mediatailor/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -42,11 +41,15 @@ type ListPrefetchSchedulesInput struct {
 	MaxResults *int32
 
 	// (Optional) If the playback configuration has more than MaxResults prefetch
-	// schedules, use NextToken to get the second and subsequent pages of results. For
-	// the first ListPrefetchSchedulesRequest request, omit this value. For the second
-	// and subsequent requests, get the value of NextToken from the previous response
-	// and specify that value for NextToken in the request. If the previous response
-	// didn't include a NextToken element, there are no more prefetch schedules to get.
+	// schedules, use NextToken to get the second and subsequent pages of results.
+	//
+	// For the first ListPrefetchSchedulesRequest request, omit this value.
+	//
+	// For the second and subsequent requests, get the value of NextToken from the
+	// previous response and specify that value for NextToken in the request.
+	//
+	// If the previous response didn't include a NextToken element, there are no more
+	// prefetch schedules to get.
 	NextToken *string
 
 	// An optional filtering parameter whereby MediaTailor filters the prefetch
@@ -94,25 +97,25 @@ func (c *Client) addOperationListPrefetchSchedulesMiddlewares(stack *middleware.
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -127,13 +130,16 @@ func (c *Client) addOperationListPrefetchSchedulesMiddlewares(stack *middleware.
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpListPrefetchSchedulesValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListPrefetchSchedules(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

@@ -6,14 +6,16 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/codeartifact/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Sets the resource policy on a repository that specifies permissions to access
-// it. When you call PutRepositoryPermissionsPolicy , the resource policy on the
+//	Sets the resource policy on a repository that specifies permissions to access
+//
+// it.
+//
+// When you call PutRepositoryPermissionsPolicy , the resource policy on the
 // repository is ignored when evaluting permissions. This ensures that the owner of
 // a repository cannot lock themselves out of the repository, which would prevent
 // them from being able to update the resource policy.
@@ -34,27 +36,28 @@ func (c *Client) PutRepositoryPermissionsPolicy(ctx context.Context, params *Put
 
 type PutRepositoryPermissionsPolicyInput struct {
 
-	// The name of the domain containing the repository to set the resource policy on.
+	//  The name of the domain containing the repository to set the resource policy
+	// on.
 	//
 	// This member is required.
 	Domain *string
 
-	// A valid displayable JSON Aspen policy string to be set as the access control
+	//  A valid displayable JSON Aspen policy string to be set as the access control
 	// resource policy on the provided repository.
 	//
 	// This member is required.
 	PolicyDocument *string
 
-	// The name of the repository to set the resource policy on.
+	//  The name of the repository to set the resource policy on.
 	//
 	// This member is required.
 	Repository *string
 
-	// The 12-digit account number of the Amazon Web Services account that owns the
+	//  The 12-digit account number of the Amazon Web Services account that owns the
 	// domain. It does not include dashes or spaces.
 	DomainOwner *string
 
-	// Sets the revision of the resource policy that specifies permissions to access
+	//  Sets the revision of the resource policy that specifies permissions to access
 	// the repository. This revision is used for optimistic locking, which prevents
 	// others from overwriting your changes to the repository's resource policy.
 	PolicyRevision *string
@@ -64,7 +67,7 @@ type PutRepositoryPermissionsPolicyInput struct {
 
 type PutRepositoryPermissionsPolicyOutput struct {
 
-	// The resource policy that was set after processing the request.
+	//  The resource policy that was set after processing the request.
 	Policy *types.ResourcePolicy
 
 	// Metadata pertaining to the operation's result.
@@ -95,25 +98,25 @@ func (c *Client) addOperationPutRepositoryPermissionsPolicyMiddlewares(stack *mi
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -128,13 +131,16 @@ func (c *Client) addOperationPutRepositoryPermissionsPolicyMiddlewares(stack *mi
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpPutRepositoryPermissionsPolicyValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opPutRepositoryPermissionsPolicy(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

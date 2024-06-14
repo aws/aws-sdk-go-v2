@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/rds/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -14,8 +13,11 @@ import (
 
 // Returns a list of DBSubnetGroup descriptions. If a DBSubnetGroupName is
 // specified, the list will contain only the descriptions of the specified
-// DBSubnetGroup. For an overview of CIDR ranges, go to the Wikipedia Tutorial (http://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing)
-// .
+// DBSubnetGroup.
+//
+// For an overview of CIDR ranges, go to the [Wikipedia Tutorial].
+//
+// [Wikipedia Tutorial]: http://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing
 func (c *Client) DescribeDBSubnetGroups(ctx context.Context, params *DescribeDBSubnetGroupsInput, optFns ...func(*Options)) (*DescribeDBSubnetGroupsOutput, error) {
 	if params == nil {
 		params = &DescribeDBSubnetGroupsInput{}
@@ -47,7 +49,10 @@ type DescribeDBSubnetGroupsInput struct {
 	// The maximum number of records to include in the response. If more records exist
 	// than the specified MaxRecords value, a pagination token called a marker is
 	// included in the response so that you can retrieve the remaining results.
-	// Default: 100 Constraints: Minimum 20, maximum 100.
+	//
+	// Default: 100
+	//
+	// Constraints: Minimum 20, maximum 100.
 	MaxRecords *int32
 
 	noSmithyDocumentSerde
@@ -93,25 +98,25 @@ func (c *Client) addOperationDescribeDBSubnetGroupsMiddlewares(stack *middleware
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -126,13 +131,16 @@ func (c *Client) addOperationDescribeDBSubnetGroupsMiddlewares(stack *middleware
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDescribeDBSubnetGroupsValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeDBSubnetGroups(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -164,7 +172,10 @@ type DescribeDBSubnetGroupsPaginatorOptions struct {
 	// The maximum number of records to include in the response. If more records exist
 	// than the specified MaxRecords value, a pagination token called a marker is
 	// included in the response so that you can retrieve the remaining results.
-	// Default: 100 Constraints: Minimum 20, maximum 100.
+	//
+	// Default: 100
+	//
+	// Constraints: Minimum 20, maximum 100.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

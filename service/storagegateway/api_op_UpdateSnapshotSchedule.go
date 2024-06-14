@@ -6,20 +6,21 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/storagegateway/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Updates a snapshot schedule configured for a gateway volume. This operation is
-// only supported in the cached volume and stored volume gateway types. The default
-// snapshot schedule for volume is once every 24 hours, starting at the creation
-// time of the volume. You can use this API to change the snapshot schedule
-// configured for the volume. In the request you must identify the gateway volume
-// whose snapshot schedule you want to update, and the schedule information,
-// including when you want the snapshot to begin on a day and the frequency (in
-// hours) of snapshots.
+// only supported in the cached volume and stored volume gateway types.
+//
+// The default snapshot schedule for volume is once every 24 hours, starting at
+// the creation time of the volume. You can use this API to change the snapshot
+// schedule configured for the volume.
+//
+// In the request you must identify the gateway volume whose snapshot schedule you
+// want to update, and the schedule information, including when you want the
+// snapshot to begin on a day and the frequency (in hours) of snapshots.
 func (c *Client) UpdateSnapshotSchedule(ctx context.Context, params *UpdateSnapshotScheduleInput, optFns ...func(*Options)) (*UpdateSnapshotScheduleOutput, error) {
 	if params == nil {
 		params = &UpdateSnapshotScheduleInput{}
@@ -36,10 +37,14 @@ func (c *Client) UpdateSnapshotSchedule(ctx context.Context, params *UpdateSnaps
 }
 
 // A JSON object containing one or more of the following fields:
-//   - UpdateSnapshotScheduleInput$Description
-//   - UpdateSnapshotScheduleInput$RecurrenceInHours
-//   - UpdateSnapshotScheduleInput$StartAt
-//   - UpdateSnapshotScheduleInput$VolumeARN
+//
+// # UpdateSnapshotScheduleInput$Description
+//
+// # UpdateSnapshotScheduleInput$RecurrenceInHours
+//
+// # UpdateSnapshotScheduleInput$StartAt
+//
+// UpdateSnapshotScheduleInput$VolumeARN
 type UpdateSnapshotScheduleInput struct {
 
 	// Frequency of snapshots. Specify the number of hours between snapshots.
@@ -54,8 +59,8 @@ type UpdateSnapshotScheduleInput struct {
 	// This member is required.
 	StartAt *int32
 
-	// The Amazon Resource Name (ARN) of the volume. Use the ListVolumes operation to
-	// return a list of gateway volumes.
+	// The Amazon Resource Name (ARN) of the volume. Use the ListVolumes operation to return a
+	// list of gateway volumes.
 	//
 	// This member is required.
 	VolumeARN *string
@@ -64,10 +69,12 @@ type UpdateSnapshotScheduleInput struct {
 	Description *string
 
 	// A list of up to 50 tags that can be assigned to a snapshot. Each tag is a
-	// key-value pair. Valid characters for key and value are letters, spaces, and
-	// numbers representable in UTF-8 format, and the following special characters: + -
-	// = . _ : / @. The maximum length of a tag's key is 128 characters, and the
-	// maximum length for a tag's value is 256.
+	// key-value pair.
+	//
+	// Valid characters for key and value are letters, spaces, and numbers
+	// representable in UTF-8 format, and the following special characters: + - = . _ :
+	// / @. The maximum length of a tag's key is 128 characters, and the maximum length
+	// for a tag's value is 256.
 	Tags []types.Tag
 
 	noSmithyDocumentSerde
@@ -77,8 +84,8 @@ type UpdateSnapshotScheduleInput struct {
 // volume.
 type UpdateSnapshotScheduleOutput struct {
 
-	// The Amazon Resource Name (ARN) of the volume. Use the ListVolumes operation to
-	// return a list of gateway volumes.
+	// The Amazon Resource Name (ARN) of the volume. Use the ListVolumes operation to return a
+	// list of gateway volumes.
 	VolumeARN *string
 
 	// Metadata pertaining to the operation's result.
@@ -109,25 +116,25 @@ func (c *Client) addOperationUpdateSnapshotScheduleMiddlewares(stack *middleware
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -142,13 +149,16 @@ func (c *Client) addOperationUpdateSnapshotScheduleMiddlewares(stack *middleware
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpUpdateSnapshotScheduleValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateSnapshotSchedule(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

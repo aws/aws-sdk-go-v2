@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/codeartifact/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -30,16 +29,16 @@ func (c *Client) DeleteDomainPermissionsPolicy(ctx context.Context, params *Dele
 
 type DeleteDomainPermissionsPolicyInput struct {
 
-	// The name of the domain associated with the resource policy to be deleted.
+	//  The name of the domain associated with the resource policy to be deleted.
 	//
 	// This member is required.
 	Domain *string
 
-	// The 12-digit account number of the Amazon Web Services account that owns the
+	//  The 12-digit account number of the Amazon Web Services account that owns the
 	// domain. It does not include dashes or spaces.
 	DomainOwner *string
 
-	// The current revision of the resource policy to be deleted. This revision is
+	//  The current revision of the resource policy to be deleted. This revision is
 	// used for optimistic locking, which prevents others from overwriting your changes
 	// to the domain's resource policy.
 	PolicyRevision *string
@@ -49,7 +48,7 @@ type DeleteDomainPermissionsPolicyInput struct {
 
 type DeleteDomainPermissionsPolicyOutput struct {
 
-	// Information about the deleted resource policy after processing the request.
+	//  Information about the deleted resource policy after processing the request.
 	Policy *types.ResourcePolicy
 
 	// Metadata pertaining to the operation's result.
@@ -80,25 +79,25 @@ func (c *Client) addOperationDeleteDomainPermissionsPolicyMiddlewares(stack *mid
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -113,13 +112,16 @@ func (c *Client) addOperationDeleteDomainPermissionsPolicyMiddlewares(stack *mid
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDeleteDomainPermissionsPolicyValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteDomainPermissionsPolicy(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

@@ -6,19 +6,23 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Rejects a pending certificate transfer. After IoT rejects a certificate
-// transfer, the certificate status changes from PENDING_TRANSFER to INACTIVE. To
-// check for pending certificate transfers, call ListCertificates to enumerate
-// your certificates. This operation can only be called by the transfer
-// destination. After it is called, the certificate will be returned to the
-// source's account in the INACTIVE state. Requires permission to access the
-// RejectCertificateTransfer (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
-// action.
+// transfer, the certificate status changes from PENDING_TRANSFER to INACTIVE.
+//
+// To check for pending certificate transfers, call ListCertificates to enumerate your
+// certificates.
+//
+// This operation can only be called by the transfer destination. After it is
+// called, the certificate will be returned to the source's account in the INACTIVE
+// state.
+//
+// Requires permission to access the [RejectCertificateTransfer] action.
+//
+// [RejectCertificateTransfer]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions
 func (c *Client) RejectCertificateTransfer(ctx context.Context, params *RejectCertificateTransferInput, optFns ...func(*Options)) (*RejectCertificateTransferOutput, error) {
 	if params == nil {
 		params = &RejectCertificateTransferInput{}
@@ -78,25 +82,25 @@ func (c *Client) addOperationRejectCertificateTransferMiddlewares(stack *middlew
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -111,13 +115,16 @@ func (c *Client) addOperationRejectCertificateTransferMiddlewares(stack *middlew
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpRejectCertificateTransferValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opRejectCertificateTransfer(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

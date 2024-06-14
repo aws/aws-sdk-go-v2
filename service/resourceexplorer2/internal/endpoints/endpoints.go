@@ -117,7 +117,7 @@ var defaultPartitions = endpoints.Partitions{
 			{
 				Variant: endpoints.FIPSVariant,
 			}: {
-				Hostname:          "resource-explorer-2-fips.{region}.api.aws",
+				Hostname:          "resource-explorer-2-fips.{region}.amazonaws.com",
 				Protocols:         []string{"https"},
 				SignatureVersions: []string{"v4"},
 			},
@@ -140,100 +140,92 @@ var defaultPartitions = endpoints.Partitions{
 		IsRegionalized: true,
 		Endpoints: endpoints.Endpoints{
 			endpoints.EndpointKey{
+				Region: "af-south-1",
+			}: endpoints.Endpoint{},
+			endpoints.EndpointKey{
+				Region: "ap-east-1",
+			}: endpoints.Endpoint{},
+			endpoints.EndpointKey{
 				Region: "ap-northeast-1",
-			}: endpoints.Endpoint{
-				Hostname: "resource-explorer-2.ap-northeast-1.api.aws",
-			},
+			}: endpoints.Endpoint{},
 			endpoints.EndpointKey{
 				Region: "ap-northeast-2",
-			}: endpoints.Endpoint{
-				Hostname: "resource-explorer-2.ap-northeast-2.api.aws",
-			},
+			}: endpoints.Endpoint{},
 			endpoints.EndpointKey{
 				Region: "ap-northeast-3",
-			}: endpoints.Endpoint{
-				Hostname: "resource-explorer-2.ap-northeast-3.api.aws",
-			},
+			}: endpoints.Endpoint{},
 			endpoints.EndpointKey{
 				Region: "ap-south-1",
-			}: endpoints.Endpoint{
-				Hostname: "resource-explorer-2.ap-south-1.api.aws",
-			},
+			}: endpoints.Endpoint{},
+			endpoints.EndpointKey{
+				Region: "ap-south-2",
+			}: endpoints.Endpoint{},
 			endpoints.EndpointKey{
 				Region: "ap-southeast-1",
-			}: endpoints.Endpoint{
-				Hostname: "resource-explorer-2.ap-southeast-1.api.aws",
-			},
+			}: endpoints.Endpoint{},
 			endpoints.EndpointKey{
 				Region: "ap-southeast-2",
-			}: endpoints.Endpoint{
-				Hostname: "resource-explorer-2.ap-southeast-2.api.aws",
-			},
+			}: endpoints.Endpoint{},
 			endpoints.EndpointKey{
 				Region: "ap-southeast-3",
-			}: endpoints.Endpoint{
-				Hostname: "resource-explorer-2.ap-southeast-3.api.aws",
-			},
+			}: endpoints.Endpoint{},
+			endpoints.EndpointKey{
+				Region: "ap-southeast-4",
+			}: endpoints.Endpoint{},
 			endpoints.EndpointKey{
 				Region: "ca-central-1",
-			}: endpoints.Endpoint{
-				Hostname: "resource-explorer-2.ca-central-1.api.aws",
-			},
+			}: endpoints.Endpoint{},
+			endpoints.EndpointKey{
+				Region: "ca-west-1",
+			}: endpoints.Endpoint{},
 			endpoints.EndpointKey{
 				Region: "eu-central-1",
-			}: endpoints.Endpoint{
-				Hostname: "resource-explorer-2.eu-central-1.api.aws",
-			},
+			}: endpoints.Endpoint{},
+			endpoints.EndpointKey{
+				Region: "eu-central-2",
+			}: endpoints.Endpoint{},
 			endpoints.EndpointKey{
 				Region: "eu-north-1",
-			}: endpoints.Endpoint{
-				Hostname: "resource-explorer-2.eu-north-1.api.aws",
-			},
+			}: endpoints.Endpoint{},
+			endpoints.EndpointKey{
+				Region: "eu-south-1",
+			}: endpoints.Endpoint{},
+			endpoints.EndpointKey{
+				Region: "eu-south-2",
+			}: endpoints.Endpoint{},
 			endpoints.EndpointKey{
 				Region: "eu-west-1",
-			}: endpoints.Endpoint{
-				Hostname: "resource-explorer-2.eu-west-1.api.aws",
-			},
+			}: endpoints.Endpoint{},
 			endpoints.EndpointKey{
 				Region: "eu-west-2",
-			}: endpoints.Endpoint{
-				Hostname: "resource-explorer-2.eu-west-2.api.aws",
-			},
+			}: endpoints.Endpoint{},
 			endpoints.EndpointKey{
 				Region: "eu-west-3",
-			}: endpoints.Endpoint{
-				Hostname: "resource-explorer-2.eu-west-3.api.aws",
-			},
+			}: endpoints.Endpoint{},
+			endpoints.EndpointKey{
+				Region: "il-central-1",
+			}: endpoints.Endpoint{},
+			endpoints.EndpointKey{
+				Region: "me-central-1",
+			}: endpoints.Endpoint{},
 			endpoints.EndpointKey{
 				Region: "me-south-1",
-			}: endpoints.Endpoint{
-				Hostname: "resource-explorer-2.me-south-1.api.aws",
-			},
+			}: endpoints.Endpoint{},
 			endpoints.EndpointKey{
 				Region: "sa-east-1",
-			}: endpoints.Endpoint{
-				Hostname: "resource-explorer-2.sa-east-1.api.aws",
-			},
+			}: endpoints.Endpoint{},
 			endpoints.EndpointKey{
 				Region: "us-east-1",
-			}: endpoints.Endpoint{
-				Hostname: "resource-explorer-2.us-east-1.api.aws",
-			},
+			}: endpoints.Endpoint{},
 			endpoints.EndpointKey{
 				Region: "us-east-2",
-			}: endpoints.Endpoint{
-				Hostname: "resource-explorer-2.us-east-2.api.aws",
-			},
+			}: endpoints.Endpoint{},
 			endpoints.EndpointKey{
 				Region: "us-west-1",
-			}: endpoints.Endpoint{
-				Hostname: "resource-explorer-2.us-west-1.api.aws",
-			},
+			}: endpoints.Endpoint{},
 			endpoints.EndpointKey{
 				Region: "us-west-2",
-			}: endpoints.Endpoint{
-				Hostname: "resource-explorer-2.us-west-2.api.aws",
-			},
+			}: endpoints.Endpoint{},
 		},
 	},
 	{
@@ -249,7 +241,7 @@ var defaultPartitions = endpoints.Partitions{
 			{
 				Variant: endpoints.FIPSVariant,
 			}: {
-				Hostname:          "resource-explorer-2-fips.{region}.api.amazonwebservices.com.cn",
+				Hostname:          "resource-explorer-2-fips.{region}.amazonaws.com.cn",
 				Protocols:         []string{"https"},
 				SignatureVersions: []string{"v4"},
 			},
@@ -270,18 +262,6 @@ var defaultPartitions = endpoints.Partitions{
 		},
 		RegionRegex:    partitionRegexp.AwsCn,
 		IsRegionalized: true,
-		Endpoints: endpoints.Endpoints{
-			endpoints.EndpointKey{
-				Region: "cn-north-1",
-			}: endpoints.Endpoint{
-				Hostname: "resource-explorer-2.cn-north-1.api.amazonwebservices.com.cn",
-			},
-			endpoints.EndpointKey{
-				Region: "cn-northwest-1",
-			}: endpoints.Endpoint{
-				Hostname: "resource-explorer-2.cn-northwest-1.api.amazonwebservices.com.cn",
-			},
-		},
 	},
 	{
 		ID: "aws-iso",
@@ -380,7 +360,7 @@ var defaultPartitions = endpoints.Partitions{
 			{
 				Variant: endpoints.FIPSVariant,
 			}: {
-				Hostname:          "resource-explorer-2-fips.{region}.api.aws",
+				Hostname:          "resource-explorer-2-fips.{region}.amazonaws.com",
 				Protocols:         []string{"https"},
 				SignatureVersions: []string{"v4"},
 			},
@@ -401,17 +381,5 @@ var defaultPartitions = endpoints.Partitions{
 		},
 		RegionRegex:    partitionRegexp.AwsUsGov,
 		IsRegionalized: true,
-		Endpoints: endpoints.Endpoints{
-			endpoints.EndpointKey{
-				Region: "us-gov-east-1",
-			}: endpoints.Endpoint{
-				Hostname: "resource-explorer-2.us-gov-east-1.api.aws",
-			},
-			endpoints.EndpointKey{
-				Region: "us-gov-west-1",
-			}: endpoints.Endpoint{
-				Hostname: "resource-explorer-2.us-gov-west-1.api.aws",
-			},
-		},
 	},
 }

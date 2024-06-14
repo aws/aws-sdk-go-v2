@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -16,15 +15,17 @@ import (
 // permission that has the same IAM permissions as the original resource-based
 // policy. However, this type of managed permission is visible to only the resource
 // share owner, and the associated resource share can't be modified by using RAM.
+//
 // This operation promotes the resource share to a STANDARD resource share that is
 // fully manageable in RAM. When you promote a resource share, you can then manage
 // the resource share in RAM and it becomes visible to all of the principals you
-// shared it with. Before you perform this operation, you should first run
-// PromotePermissionCreatedFromPolicy to ensure that you have an appropriate
-// customer managed permission that can be associated with this resource share
-// after its is promoted. If this operation can't find a managed permission that
-// exactly matches the existing CREATED_FROM_POLICY permission, then this
-// operation fails.
+// shared it with.
+//
+// Before you perform this operation, you should first run PromotePermissionCreatedFromPolicyto ensure that you have
+// an appropriate customer managed permission that can be associated with this
+// resource share after its is promoted. If this operation can't find a managed
+// permission that exactly matches the existing CREATED_FROM_POLICY permission,
+// then this operation fails.
 func (c *Client) PromoteResourceShareCreatedFromPolicy(ctx context.Context, params *PromoteResourceShareCreatedFromPolicyInput, optFns ...func(*Options)) (*PromoteResourceShareCreatedFromPolicyOutput, error) {
 	if params == nil {
 		params = &PromoteResourceShareCreatedFromPolicyInput{}
@@ -42,8 +43,9 @@ func (c *Client) PromoteResourceShareCreatedFromPolicy(ctx context.Context, para
 
 type PromoteResourceShareCreatedFromPolicyInput struct {
 
-	// Specifies the Amazon Resource Name (ARN) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
-	// of the resource share to promote.
+	// Specifies the [Amazon Resource Name (ARN)] of the resource share to promote.
+	//
+	// [Amazon Resource Name (ARN)]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
 	//
 	// This member is required.
 	ResourceShareArn *string
@@ -85,25 +87,25 @@ func (c *Client) addOperationPromoteResourceShareCreatedFromPolicyMiddlewares(st
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -118,13 +120,16 @@ func (c *Client) addOperationPromoteResourceShareCreatedFromPolicyMiddlewares(st
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpPromoteResourceShareCreatedFromPolicyValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opPromoteResourceShareCreatedFromPolicy(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

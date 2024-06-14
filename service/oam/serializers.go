@@ -86,6 +86,13 @@ func awsRestjson1_serializeOpDocumentCreateLinkInput(v *CreateLinkInput, value s
 		ok.String(*v.LabelTemplate)
 	}
 
+	if v.LinkConfiguration != nil {
+		ok := object.Key("LinkConfiguration")
+		if err := awsRestjson1_serializeDocumentLinkConfiguration(v.LinkConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.ResourceTypes != nil {
 		ok := object.Key("ResourceTypes")
 		if err := awsRestjson1_serializeDocumentResourceTypesInput(v.ResourceTypes, ok); err != nil {
@@ -1188,11 +1195,63 @@ func awsRestjson1_serializeOpDocumentUpdateLinkInput(v *UpdateLinkInput, value s
 		ok.String(*v.Identifier)
 	}
 
+	if v.LinkConfiguration != nil {
+		ok := object.Key("LinkConfiguration")
+		if err := awsRestjson1_serializeDocumentLinkConfiguration(v.LinkConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.ResourceTypes != nil {
 		ok := object.Key("ResourceTypes")
 		if err := awsRestjson1_serializeDocumentResourceTypesInput(v.ResourceTypes, ok); err != nil {
 			return err
 		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentLinkConfiguration(v *types.LinkConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.LogGroupConfiguration != nil {
+		ok := object.Key("LogGroupConfiguration")
+		if err := awsRestjson1_serializeDocumentLogGroupConfiguration(v.LogGroupConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.MetricConfiguration != nil {
+		ok := object.Key("MetricConfiguration")
+		if err := awsRestjson1_serializeDocumentMetricConfiguration(v.MetricConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentLogGroupConfiguration(v *types.LogGroupConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Filter != nil {
+		ok := object.Key("Filter")
+		ok.String(*v.Filter)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentMetricConfiguration(v *types.MetricConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Filter != nil {
+		ok := object.Key("Filter")
+		ok.String(*v.Filter)
 	}
 
 	return nil

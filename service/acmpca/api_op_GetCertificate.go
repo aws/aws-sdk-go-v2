@@ -7,8 +7,8 @@ import (
 	"errors"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/acmpca/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
 	smithytime "github.com/aws/smithy-go/time"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -17,13 +17,15 @@ import (
 )
 
 // Retrieves a certificate from your private CA or one that has been shared with
-// you. The ARN of the certificate is returned when you call the IssueCertificate (https://docs.aws.amazon.com/privateca/latest/APIReference/API_IssueCertificate.html)
-// action. You must specify both the ARN of your private CA and the ARN of the
-// issued certificate when calling the GetCertificate action. You can retrieve the
-// certificate if it is in the ISSUED state. You can call the
-// CreateCertificateAuthorityAuditReport (https://docs.aws.amazon.com/privateca/latest/APIReference/API_CreateCertificateAuthorityAuditReport.html)
-// action to create a report that contains information about all of the
-// certificates issued and revoked by your private CA.
+// you. The ARN of the certificate is returned when you call the [IssueCertificate]action. You must
+// specify both the ARN of your private CA and the ARN of the issued certificate
+// when calling the GetCertificate action. You can retrieve the certificate if it
+// is in the ISSUED state. You can call the [CreateCertificateAuthorityAuditReport]action to create a report that
+// contains information about all of the certificates issued and revoked by your
+// private CA.
+//
+// [IssueCertificate]: https://docs.aws.amazon.com/privateca/latest/APIReference/API_IssueCertificate.html
+// [CreateCertificateAuthorityAuditReport]: https://docs.aws.amazon.com/privateca/latest/APIReference/API_CreateCertificateAuthorityAuditReport.html
 func (c *Client) GetCertificate(ctx context.Context, params *GetCertificateInput, optFns ...func(*Options)) (*GetCertificateOutput, error) {
 	if params == nil {
 		params = &GetCertificateInput{}
@@ -43,16 +45,19 @@ type GetCertificateInput struct {
 
 	// The ARN of the issued certificate. The ARN contains the certificate serial
 	// number and must be in the following form:
-	// arn:aws:acm-pca:region:account:certificate-authority/12345678-1234-1234-1234-123456789012/certificate/286535153982981100925020015808220737245
+	//
+	//     arn:aws:acm-pca:region:account:certificate-authority/12345678-1234-1234-1234-123456789012/certificate/286535153982981100925020015808220737245
 	//
 	// This member is required.
 	CertificateArn *string
 
-	// The Amazon Resource Name (ARN) that was returned when you called
-	// CreateCertificateAuthority (https://docs.aws.amazon.com/privateca/latest/APIReference/API_CreateCertificateAuthority.html)
-	// . This must be of the form:
+	// The Amazon Resource Name (ARN) that was returned when you called [CreateCertificateAuthority]. This must be
+	// of the form:
+	//
 	// arn:aws:acm-pca:region:account:certificate-authority/12345678-1234-1234-1234-123456789012
 	// .
+	//
+	// [CreateCertificateAuthority]: https://docs.aws.amazon.com/privateca/latest/APIReference/API_CreateCertificateAuthority.html
 	//
 	// This member is required.
 	CertificateAuthorityArn *string
@@ -97,25 +102,25 @@ func (c *Client) addOperationGetCertificateMiddlewares(stack *middleware.Stack, 
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -130,13 +135,16 @@ func (c *Client) addOperationGetCertificateMiddlewares(stack *middleware.Stack, 
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpGetCertificateValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetCertificate(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -168,7 +176,16 @@ type CertificateIssuedWaiterOptions struct {
 	// Set of options to modify how an operation is invoked. These apply to all
 	// operations invoked for this client. Use functional options on operation call to
 	// modify this list for per operation behavior.
+	//
+	// Passing options here is functionally equivalent to passing values to this
+	// config's ClientOptions field that extend the inner client's APIOptions directly.
 	APIOptions []func(*middleware.Stack) error
+
+	// Functional options to be passed to all operations invoked by this client.
+	//
+	// Function values that modify the inner APIOptions are applied after the waiter
+	// config's own APIOptions modifiers.
+	ClientOptions []func(*Options)
 
 	// MinDelay is the minimum amount of time to delay between retries. If unset,
 	// CertificateIssuedWaiter will use default minimum delay of 1 seconds. Note that
@@ -185,12 +202,13 @@ type CertificateIssuedWaiterOptions struct {
 
 	// Retryable is function that can be used to override the service defined
 	// waiter-behavior based on operation output, or returned error. This function is
-	// used by the waiter to decide if a state is retryable or a terminal state. By
-	// default service-modeled logic will populate this option. This option can thus be
-	// used to define a custom waiter state with fall-back to service-modeled waiter
-	// state mutators.The function returns an error in case of a failure state. In case
-	// of retry state, this function returns a bool value of true and nil error, while
-	// in case of success it returns a bool value of false and nil error.
+	// used by the waiter to decide if a state is retryable or a terminal state.
+	//
+	// By default service-modeled logic will populate this option. This option can
+	// thus be used to define a custom waiter state with fall-back to service-modeled
+	// waiter state mutators.The function returns an error in case of a failure state.
+	// In case of retry state, this function returns a bool value of true and nil
+	// error, while in case of success it returns a bool value of false and nil error.
 	Retryable func(context.Context, *GetCertificateInput, *GetCertificateOutput, error) (bool, error)
 }
 
@@ -268,6 +286,9 @@ func (w *CertificateIssuedWaiter) WaitForOutput(ctx context.Context, params *Get
 
 		out, err := w.client.GetCertificate(ctx, params, func(o *Options) {
 			o.APIOptions = append(o.APIOptions, apiOptions...)
+			for _, opt := range options.ClientOptions {
+				opt(o)
+			}
 		})
 
 		retryable, err := options.Retryable(ctx, params, out, err)
@@ -310,6 +331,18 @@ func certificateIssuedStateRetryable(ctx context.Context, input *GetCertificateI
 		var errorType *types.RequestInProgressException
 		if errors.As(err, &errorType) {
 			return true, nil
+		}
+	}
+
+	if err != nil {
+		var apiErr smithy.APIError
+		ok := errors.As(err, &apiErr)
+		if !ok {
+			return false, fmt.Errorf("expected err to be of type smithy.APIError, got %w", err)
+		}
+
+		if "AccessDeniedException" == apiErr.ErrorCode() {
+			return false, fmt.Errorf("waiter state transitioned to Failure")
 		}
 	}
 

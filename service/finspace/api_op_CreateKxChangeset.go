@@ -6,14 +6,14 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/finspace/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
-// Creates a changeset for a kdb database. A changeset allows you to add and
+//	Creates a changeset for a kdb database. A changeset allows you to add and
+//
 // delete existing files by using an ordered list of change requests.
 func (c *Client) CreateKxChangeset(ctx context.Context, params *CreateKxChangesetInput, optFns ...func(*Options)) (*CreateKxChangesetOutput, error) {
 	if params == nil {
@@ -33,30 +33,47 @@ func (c *Client) CreateKxChangeset(ctx context.Context, params *CreateKxChangese
 type CreateKxChangesetInput struct {
 
 	// A list of change request objects that are run in order. A change request object
-	// consists of changeType , s3Path , and dbPath . A changeType can has the
+	// consists of changeType , s3Path , and dbPath . A changeType can have the
 	// following values:
+	//
 	//   - PUT – Adds or updates files in a database.
+	//
 	//   - DELETE – Deletes files in a database.
+	//
 	// All the change requests require a mandatory dbPath attribute that defines the
 	// path within the database directory. All database paths must start with a leading
 	// / and end with a trailing /. The s3Path attribute defines the s3 source file
 	// path and is required for a PUT change type. The s3path must end with a trailing
-	// / if it is a directory and must end without a trailing / if it is a file. Here
-	// are few examples of how you can use the change request object:
-	//   - This request adds a single sym file at database root location. {
-	//   "changeType": "PUT", "s3Path":"s3://bucket/db/sym", "dbPath":"/"}
+	// / if it is a directory and must end without a trailing / if it is a file.
+	//
+	// Here are few examples of how you can use the change request object:
+	//
+	//   - This request adds a single sym file at database root location.
+	//
+	// { "changeType": "PUT", "s3Path":"s3://bucket/db/sym", "dbPath":"/"}
+	//
 	//   - This request adds files in the given s3Path under the 2020.01.02 partition
-	//   of the database. { "changeType": "PUT",
-	//   "s3Path":"s3://bucket/db/2020.01.02/", "dbPath":"/2020.01.02/"}
+	//   of the database.
+	//
+	// { "changeType": "PUT", "s3Path":"s3://bucket/db/2020.01.02/",
+	//   "dbPath":"/2020.01.02/"}
+	//
 	//   - This request adds files in the given s3Path under the taq table partition of
-	//   the database. [ { "changeType": "PUT",
-	//   "s3Path":"s3://bucket/db/2020.01.02/taq/", "dbPath":"/2020.01.02/taq/"}]
-	//   - This request deletes the 2020.01.02 partition of the database. [{
-	//   "changeType": "DELETE", "dbPath": "/2020.01.02/"} ]
+	//   the database.
+	//
+	// [ { "changeType": "PUT", "s3Path":"s3://bucket/db/2020.01.02/taq/",
+	//   "dbPath":"/2020.01.02/taq/"}]
+	//
+	//   - This request deletes the 2020.01.02 partition of the database.
+	//
+	// [{ "changeType": "DELETE", "dbPath": "/2020.01.02/"} ]
+	//
 	//   - The DELETE request allows you to delete the existing files under the
 	//   2020.01.02 partition of the database, and the PUT request adds a new taq table
-	//   under it. [ {"changeType": "DELETE", "dbPath":"/2020.01.02/"}, {"changeType":
-	//   "PUT", "s3Path":"s3://bucket/db/2020.01.02/taq/", "dbPath":"/2020.01.02/taq/"}]
+	//   under it.
+	//
+	// [ {"changeType": "DELETE", "dbPath":"/2020.01.02/"}, {"changeType": "PUT",
+	//   "s3Path":"s3://bucket/db/2020.01.02/taq/", "dbPath":"/2020.01.02/taq/"}]
 	//
 	// This member is required.
 	ChangeRequests []types.ChangeRequest
@@ -108,9 +125,13 @@ type CreateKxChangesetOutput struct {
 	LastModifiedTimestamp *time.Time
 
 	// Status of the changeset creation process.
+	//
 	//   - Pending – Changeset creation is pending.
+	//
 	//   - Processing – Changeset creation is running.
+	//
 	//   - Failed – Changeset creation has failed.
+	//
 	//   - Complete – Changeset creation has succeeded.
 	Status types.ChangesetStatus
 
@@ -142,25 +163,25 @@ func (c *Client) addOperationCreateKxChangesetMiddlewares(stack *middleware.Stac
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -178,6 +199,9 @@ func (c *Client) addOperationCreateKxChangesetMiddlewares(stack *middleware.Stac
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opCreateKxChangesetMiddleware(stack, options); err != nil {
 		return err
 	}
@@ -187,7 +211,7 @@ func (c *Client) addOperationCreateKxChangesetMiddlewares(stack *middleware.Stac
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateKxChangeset(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

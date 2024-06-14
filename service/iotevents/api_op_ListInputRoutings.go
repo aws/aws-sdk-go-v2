@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/iotevents/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -30,15 +29,15 @@ func (c *Client) ListInputRoutings(ctx context.Context, params *ListInputRouting
 
 type ListInputRoutingsInput struct {
 
-	// The identifer of the routed input.
+	//  The identifer of the routed input.
 	//
 	// This member is required.
 	InputIdentifier *types.InputIdentifier
 
-	// The maximum number of results to be returned per request.
+	//  The maximum number of results to be returned per request.
 	MaxResults *int32
 
-	// The token that you can use to return the next set of results.
+	//  The token that you can use to return the next set of results.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -46,11 +45,11 @@ type ListInputRoutingsInput struct {
 
 type ListInputRoutingsOutput struct {
 
-	// The token that you can use to return the next set of results, or null if there
+	//  The token that you can use to return the next set of results, or null if there
 	// are no more results.
 	NextToken *string
 
-	// Summary information about the routed resources.
+	//  Summary information about the routed resources.
 	RoutedResources []types.RoutedResource
 
 	// Metadata pertaining to the operation's result.
@@ -81,25 +80,25 @@ func (c *Client) addOperationListInputRoutingsMiddlewares(stack *middleware.Stac
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -114,13 +113,16 @@ func (c *Client) addOperationListInputRoutingsMiddlewares(stack *middleware.Stac
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpListInputRoutingsValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListInputRoutings(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

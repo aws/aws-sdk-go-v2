@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/amplify/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -36,7 +35,7 @@ type ListBranchesInput struct {
 	// This member is required.
 	AppId *string
 
-	// The maximum number of records to list in a single response.
+	//  The maximum number of records to list in a single response.
 	MaxResults int32
 
 	// A pagination token. Set to null to start listing branches from the start. If a
@@ -50,12 +49,12 @@ type ListBranchesInput struct {
 // The result structure for the list branches request.
 type ListBranchesOutput struct {
 
-	// A list of branches for an Amplify app.
+	//  A list of branches for an Amplify app.
 	//
 	// This member is required.
 	Branches []types.Branch
 
-	// A pagination token. If a non-null pagination token is returned in a result,
+	//  A pagination token. If a non-null pagination token is returned in a result,
 	// pass its value in another request to retrieve more entries.
 	NextToken *string
 
@@ -87,25 +86,25 @@ func (c *Client) addOperationListBranchesMiddlewares(stack *middleware.Stack, op
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -120,13 +119,16 @@ func (c *Client) addOperationListBranchesMiddlewares(stack *middleware.Stack, op
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpListBranchesValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListBranches(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -153,7 +155,7 @@ var _ ListBranchesAPIClient = (*Client)(nil)
 
 // ListBranchesPaginatorOptions is the paginator options for ListBranches
 type ListBranchesPaginatorOptions struct {
-	// The maximum number of records to list in a single response.
+	//  The maximum number of records to list in a single response.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

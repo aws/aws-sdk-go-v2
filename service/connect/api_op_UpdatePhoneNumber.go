@@ -6,21 +6,24 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Updates your claimed phone number from its current Amazon Connect instance or
 // traffic distribution group to another Amazon Connect instance or traffic
-// distribution group in the same Amazon Web Services Region. After using this API,
-// you must verify that the phone number is attached to the correct flow in the
-// target instance or traffic distribution group. You need to do this because the
-// API switches only the phone number to a new instance or traffic distribution
-// group. It doesn't migrate the flow configuration of the phone number, too. You
-// can call DescribePhoneNumber (https://docs.aws.amazon.com/connect/latest/APIReference/API_DescribePhoneNumber.html)
-// API to verify the status of a previous UpdatePhoneNumber (https://docs.aws.amazon.com/connect/latest/APIReference/API_UpdatePhoneNumber.html)
-// operation.
+// distribution group in the same Amazon Web Services Region.
+//
+// After using this API, you must verify that the phone number is attached to the
+// correct flow in the target instance or traffic distribution group. You need to
+// do this because the API switches only the phone number to a new instance or
+// traffic distribution group. It doesn't migrate the flow configuration of the
+// phone number, too.
+//
+// You can call [DescribePhoneNumber] API to verify the status of a previous [UpdatePhoneNumber] operation.
+//
+// [UpdatePhoneNumber]: https://docs.aws.amazon.com/connect/latest/APIReference/API_UpdatePhoneNumber.html
+// [DescribePhoneNumber]: https://docs.aws.amazon.com/connect/latest/APIReference/API_DescribePhoneNumber.html
 func (c *Client) UpdatePhoneNumber(ctx context.Context, params *UpdatePhoneNumberInput, optFns ...func(*Options)) (*UpdatePhoneNumberOutput, error) {
 	if params == nil {
 		params = &UpdatePhoneNumberInput{}
@@ -45,15 +48,16 @@ type UpdatePhoneNumberInput struct {
 
 	// A unique, case-sensitive identifier that you provide to ensure the idempotency
 	// of the request. If not provided, the Amazon Web Services SDK populates this
-	// field. For more information about idempotency, see Making retries safe with
-	// idempotent APIs (https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/)
-	// .
+	// field. For more information about idempotency, see [Making retries safe with idempotent APIs].
+	//
+	// [Making retries safe with idempotent APIs]: https://aws.amazon.com/builders-library/making-retries-safe-with-idempotent-APIs/
 	ClientToken *string
 
 	// The identifier of the Amazon Connect instance that phone numbers are claimed
-	// to. You can find the instance ID (https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html)
-	// in the Amazon Resource Name (ARN) of the instance. You must enter InstanceId or
-	// TargetArn .
+	// to. You can [find the instance ID]in the Amazon Resource Name (ARN) of the instance. You must enter
+	// InstanceId or TargetArn .
+	//
+	// [find the instance ID]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
 	InstanceId *string
 
 	// The Amazon Resource Name (ARN) for Amazon Connect instances or traffic
@@ -100,25 +104,25 @@ func (c *Client) addOperationUpdatePhoneNumberMiddlewares(stack *middleware.Stac
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -133,6 +137,9 @@ func (c *Client) addOperationUpdatePhoneNumberMiddlewares(stack *middleware.Stac
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opUpdatePhoneNumberMiddleware(stack, options); err != nil {
 		return err
 	}
@@ -142,7 +149,7 @@ func (c *Client) addOperationUpdatePhoneNumberMiddlewares(stack *middleware.Stac
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdatePhoneNumber(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

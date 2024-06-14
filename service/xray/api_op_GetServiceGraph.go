@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/xray/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -16,9 +15,10 @@ import (
 // Retrieves a document that describes services that process incoming requests,
 // and downstream services that they call as a result. Root services process
 // incoming requests and make calls to downstream services. Root services are
-// applications that use the Amazon Web Services X-Ray SDK (https://docs.aws.amazon.com/xray/index.html)
-// . Downstream services can be other applications, Amazon Web Services resources,
-// HTTP web APIs, or SQL databases.
+// applications that use the [Amazon Web Services X-Ray SDK]. Downstream services can be other applications,
+// Amazon Web Services resources, HTTP web APIs, or SQL databases.
+//
+// [Amazon Web Services X-Ray SDK]: https://docs.aws.amazon.com/xray/index.html
 func (c *Client) GetServiceGraph(ctx context.Context, params *GetServiceGraphInput, optFns ...func(*Options)) (*GetServiceGraphOutput, error) {
 	if params == nil {
 		params = &GetServiceGraphInput{}
@@ -107,25 +107,25 @@ func (c *Client) addOperationGetServiceGraphMiddlewares(stack *middleware.Stack,
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -140,13 +140,16 @@ func (c *Client) addOperationGetServiceGraphMiddlewares(stack *middleware.Stack,
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpGetServiceGraphValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetServiceGraph(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

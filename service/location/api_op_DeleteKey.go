@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -37,9 +36,14 @@ type DeleteKeyInput struct {
 
 	// ForceDelete bypasses an API key's expiry conditions and deletes the key. Set
 	// the parameter true to delete the key or to false to not preemptively delete the
-	// API key. Valid values: true , or false . Required: No This action is
-	// irreversible. Only use ForceDelete if you are certain the key is no longer in
-	// use.
+	// API key.
+	//
+	// Valid values: true , or false .
+	//
+	// Required: No
+	//
+	// This action is irreversible. Only use ForceDelete if you are certain the key is
+	// no longer in use.
 	ForceDelete *bool
 
 	noSmithyDocumentSerde
@@ -74,25 +78,25 @@ func (c *Client) addOperationDeleteKeyMiddlewares(stack *middleware.Stack, optio
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -107,6 +111,9 @@ func (c *Client) addOperationDeleteKeyMiddlewares(stack *middleware.Stack, optio
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addEndpointPrefix_opDeleteKeyMiddleware(stack); err != nil {
 		return err
 	}
@@ -116,7 +123,7 @@ func (c *Client) addOperationDeleteKeyMiddlewares(stack *middleware.Stack, optio
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteKey(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

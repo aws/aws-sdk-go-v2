@@ -6,15 +6,15 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Use this operation to run a canary that has already been created. The frequency
 // of the canary runs is determined by the value of the canary's Schedule . To see
-// a canary's schedule, use GetCanary (https://docs.aws.amazon.com/AmazonSynthetics/latest/APIReference/API_GetCanary.html)
-// .
+// a canary's schedule, use [GetCanary].
+//
+// [GetCanary]: https://docs.aws.amazon.com/AmazonSynthetics/latest/APIReference/API_GetCanary.html
 func (c *Client) StartCanary(ctx context.Context, params *StartCanaryInput, optFns ...func(*Options)) (*StartCanaryOutput, error) {
 	if params == nil {
 		params = &StartCanaryInput{}
@@ -32,9 +32,9 @@ func (c *Client) StartCanary(ctx context.Context, params *StartCanaryInput, optF
 
 type StartCanaryInput struct {
 
-	// The name of the canary that you want to run. To find canary names, use
-	// DescribeCanaries (https://docs.aws.amazon.com/AmazonSynthetics/latest/APIReference/API_DescribeCanaries.html)
-	// .
+	// The name of the canary that you want to run. To find canary names, use [DescribeCanaries].
+	//
+	// [DescribeCanaries]: https://docs.aws.amazon.com/AmazonSynthetics/latest/APIReference/API_DescribeCanaries.html
 	//
 	// This member is required.
 	Name *string
@@ -71,25 +71,25 @@ func (c *Client) addOperationStartCanaryMiddlewares(stack *middleware.Stack, opt
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -104,13 +104,16 @@ func (c *Client) addOperationStartCanaryMiddlewares(stack *middleware.Stack, opt
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpStartCanaryValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opStartCanary(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

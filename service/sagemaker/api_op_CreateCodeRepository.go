@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -17,9 +16,11 @@ import (
 // control for the notebooks you create. The Git repository is a resource in your
 // SageMaker account, so it can be associated with more than one notebook instance,
 // and it persists independently from the lifecycle of any notebook instances it is
-// associated with. The repository can be hosted either in Amazon Web Services
-// CodeCommit (https://docs.aws.amazon.com/codecommit/latest/userguide/welcome.html)
-// or in any other Git repository.
+// associated with.
+//
+// The repository can be hosted either in [Amazon Web Services CodeCommit] or in any other Git repository.
+//
+// [Amazon Web Services CodeCommit]: https://docs.aws.amazon.com/codecommit/latest/userguide/welcome.html
 func (c *Client) CreateCodeRepository(ctx context.Context, params *CreateCodeRepositoryInput, optFns ...func(*Options)) (*CreateCodeRepositoryOutput, error) {
 	if params == nil {
 		params = &CreateCodeRepositoryInput{}
@@ -51,8 +52,9 @@ type CreateCodeRepositoryInput struct {
 
 	// An array of key-value pairs. You can use tags to categorize your Amazon Web
 	// Services resources in different ways, for example, by purpose, owner, or
-	// environment. For more information, see Tagging Amazon Web Services Resources (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html)
-	// .
+	// environment. For more information, see [Tagging Amazon Web Services Resources].
+	//
+	// [Tagging Amazon Web Services Resources]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
 	Tags []types.Tag
 
 	noSmithyDocumentSerde
@@ -93,25 +95,25 @@ func (c *Client) addOperationCreateCodeRepositoryMiddlewares(stack *middleware.S
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -126,13 +128,16 @@ func (c *Client) addOperationCreateCodeRepositoryMiddlewares(stack *middleware.S
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpCreateCodeRepositoryValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateCodeRepository(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

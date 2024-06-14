@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/billingconductor/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -30,7 +29,7 @@ func (c *Client) UpdateCustomLineItem(ctx context.Context, params *UpdateCustomL
 
 type UpdateCustomLineItemInput struct {
 
-	// The ARN of the custom line item to be updated.
+	//  The ARN of the custom line item to be updated.
 	//
 	// This member is required.
 	Arn *string
@@ -38,14 +37,14 @@ type UpdateCustomLineItemInput struct {
 	// The billing period range in which the custom line item request will be applied.
 	BillingPeriodRange *types.CustomLineItemBillingPeriodRange
 
-	// A ListCustomLineItemChargeDetails containing the new charge details for the
+	//  A ListCustomLineItemChargeDetails containing the new charge details for the
 	// custom line item.
 	ChargeDetails *types.UpdateCustomLineItemChargeDetails
 
-	// The new line item description of the custom line item.
+	//  The new line item description of the custom line item.
 	Description *string
 
-	// The new name for the custom line item.
+	//  The new name for the custom line item.
 	Name *string
 
 	noSmithyDocumentSerde
@@ -53,26 +52,26 @@ type UpdateCustomLineItemInput struct {
 
 type UpdateCustomLineItemOutput struct {
 
-	// The ARN of the successfully updated custom line item.
+	//  The ARN of the successfully updated custom line item.
 	Arn *string
 
-	// The number of resources that are associated to the custom line item.
+	//  The number of resources that are associated to the custom line item.
 	AssociationSize int64
 
-	// The ARN of the billing group that the custom line item is applied to.
+	//  The ARN of the billing group that the custom line item is applied to.
 	BillingGroupArn *string
 
-	// A ListCustomLineItemChargeDetails containing the charge details of the
+	//  A ListCustomLineItemChargeDetails containing the charge details of the
 	// successfully updated custom line item.
 	ChargeDetails *types.ListCustomLineItemChargeDetails
 
-	// The description of the successfully updated custom line item.
+	//  The description of the successfully updated custom line item.
 	Description *string
 
-	// The most recent time when the custom line item was modified.
+	//  The most recent time when the custom line item was modified.
 	LastModifiedTime int64
 
-	// The name of the successfully updated custom line item.
+	//  The name of the successfully updated custom line item.
 	Name *string
 
 	// Metadata pertaining to the operation's result.
@@ -103,25 +102,25 @@ func (c *Client) addOperationUpdateCustomLineItemMiddlewares(stack *middleware.S
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -136,13 +135,16 @@ func (c *Client) addOperationUpdateCustomLineItemMiddlewares(stack *middleware.S
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpUpdateCustomLineItemValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateCustomLineItem(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/pinpointsmsvoicev2/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -15,8 +14,8 @@ import (
 // Before you can send test messages to a verified destination phone number you
 // need to opt-in the verified destination phone number. Creates a new text message
 // with a verification code and send it to a verified destination phone number.
-// Once you have the verification code use VerifyDestinationNumber to opt-in the
-// verified destination phone number to receive messages.
+// Once you have the verification code use VerifyDestinationNumberto opt-in the verified destination
+// phone number to receive messages.
 func (c *Client) SendDestinationNumberVerificationCode(ctx context.Context, params *SendDestinationNumberVerificationCodeInput, optFns ...func(*Options)) (*SendDestinationNumberVerificationCodeOutput, error) {
 	if params == nil {
 		params = &SendDestinationNumberVerificationCodeInput{}
@@ -54,9 +53,9 @@ type SendDestinationNumberVerificationCodeInput struct {
 
 	// This field is used for any country-specific registration requirements.
 	// Currently, this setting is only used when you send messages to recipients in
-	// India using a sender ID. For more information see Special requirements for
-	// sending SMS messages to recipients in India (https://docs.aws.amazon.com/pinpoint/latest/userguide/channels-sms-senderid-india.html)
-	// .
+	// India using a sender ID. For more information see [Special requirements for sending SMS messages to recipients in India].
+	//
+	// [Special requirements for sending SMS messages to recipients in India]: https://docs.aws.amazon.com/pinpoint/latest/userguide/channels-sms-senderid-india.html
 	DestinationCountryParameters map[string]string
 
 	// Choose the language to use for the message.
@@ -104,25 +103,25 @@ func (c *Client) addOperationSendDestinationNumberVerificationCodeMiddlewares(st
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -137,13 +136,16 @@ func (c *Client) addOperationSendDestinationNumberVerificationCodeMiddlewares(st
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpSendDestinationNumberVerificationCodeValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opSendDestinationNumberVerificationCode(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

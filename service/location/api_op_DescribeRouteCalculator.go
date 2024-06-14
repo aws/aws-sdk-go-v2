@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/location/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -43,6 +42,7 @@ type DescribeRouteCalculatorOutput struct {
 
 	// The Amazon Resource Name (ARN) for the Route calculator resource. Use the ARN
 	// when you specify a resource across Amazon Web Services.
+	//
 	//   - Format example:
 	//   arn:aws:geo:region:account-id:route-calculator/ExampleCalculator
 	//
@@ -54,21 +54,28 @@ type DescribeRouteCalculatorOutput struct {
 	// This member is required.
 	CalculatorName *string
 
-	// The timestamp when the route calculator resource was created in ISO 8601 (https://www.iso.org/iso-8601-date-and-time-format.html)
-	// format: YYYY-MM-DDThh:mm:ss.sssZ .
+	// The timestamp when the route calculator resource was created in [ISO 8601] format:
+	// YYYY-MM-DDThh:mm:ss.sssZ .
+	//
 	//   - For example, 2020–07-2T12:15:20.000Z+01:00
+	//
+	// [ISO 8601]: https://www.iso.org/iso-8601-date-and-time-format.html
 	//
 	// This member is required.
 	CreateTime *time.Time
 
 	// The data provider of traffic and road network data. Indicates one of the
 	// available providers:
+	//
 	//   - Esri
+	//
 	//   - Grab
+	//
 	//   - Here
-	// For more information about data providers, see Amazon Location Service data
-	// providers (https://docs.aws.amazon.com/location/latest/developerguide/what-is-data-provider.html)
-	// .
+	//
+	// For more information about data providers, see [Amazon Location Service data providers].
+	//
+	// [Amazon Location Service data providers]: https://docs.aws.amazon.com/location/latest/developerguide/what-is-data-provider.html
 	//
 	// This member is required.
 	DataSource *string
@@ -78,9 +85,12 @@ type DescribeRouteCalculatorOutput struct {
 	// This member is required.
 	Description *string
 
-	// The timestamp when the route calculator resource was last updated in ISO 8601 (https://www.iso.org/iso-8601-date-and-time-format.html)
-	// format: YYYY-MM-DDThh:mm:ss.sssZ .
+	// The timestamp when the route calculator resource was last updated in [ISO 8601] format:
+	// YYYY-MM-DDThh:mm:ss.sssZ .
+	//
 	//   - For example, 2020–07-2T12:15:20.000Z+01:00
+	//
+	// [ISO 8601]: https://www.iso.org/iso-8601-date-and-time-format.html
 	//
 	// This member is required.
 	UpdateTime *time.Time
@@ -121,25 +131,25 @@ func (c *Client) addOperationDescribeRouteCalculatorMiddlewares(stack *middlewar
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -154,6 +164,9 @@ func (c *Client) addOperationDescribeRouteCalculatorMiddlewares(stack *middlewar
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addEndpointPrefix_opDescribeRouteCalculatorMiddleware(stack); err != nil {
 		return err
 	}
@@ -163,7 +176,7 @@ func (c *Client) addOperationDescribeRouteCalculatorMiddlewares(stack *middlewar
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeRouteCalculator(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

@@ -6,21 +6,23 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/lightsail/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Stops a specific Amazon Lightsail instance that is currently running. When you
-// start a stopped instance, Lightsail assigns a new public IP address to the
-// instance. To use the same IP address after stopping and starting an instance,
-// create a static IP address and attach it to the instance. For more information,
-// see the Amazon Lightsail Developer Guide (https://lightsail.aws.amazon.com/ls/docs/en_us/articles/lightsail-create-static-ip)
-// . The stop instance operation supports tag-based access control via resource
-// tags applied to the resource identified by instance name . For more information,
-// see the Amazon Lightsail Developer Guide (https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-controlling-access-using-tags)
-// .
+// Stops a specific Amazon Lightsail instance that is currently running.
+//
+// When you start a stopped instance, Lightsail assigns a new public IP address to
+// the instance. To use the same IP address after stopping and starting an
+// instance, create a static IP address and attach it to the instance. For more
+// information, see the [Amazon Lightsail Developer Guide].
+//
+// The stop instance operation supports tag-based access control via resource tags
+// applied to the resource identified by instance name . For more information, see
+// the [Amazon Lightsail Developer Guide].
+//
+// [Amazon Lightsail Developer Guide]: https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-controlling-access-using-tags
 func (c *Client) StopInstance(ctx context.Context, params *StopInstanceInput, optFns ...func(*Options)) (*StopInstanceOutput, error) {
 	if params == nil {
 		params = &StopInstanceInput{}
@@ -44,9 +46,11 @@ type StopInstanceInput struct {
 	InstanceName *string
 
 	// When set to True , forces a Lightsail instance that is stuck in a stopping
-	// state to stop. Only use the force parameter if your instance is stuck in the
-	// stopping state. In any other state, your instance should stop normally without
-	// adding this parameter to your API request.
+	// state to stop.
+	//
+	// Only use the force parameter if your instance is stuck in the stopping state.
+	// In any other state, your instance should stop normally without adding this
+	// parameter to your API request.
 	Force *bool
 
 	noSmithyDocumentSerde
@@ -87,25 +91,25 @@ func (c *Client) addOperationStopInstanceMiddlewares(stack *middleware.Stack, op
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -120,13 +124,16 @@ func (c *Client) addOperationStopInstanceMiddlewares(stack *middleware.Stack, op
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpStopInstanceValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opStopInstance(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

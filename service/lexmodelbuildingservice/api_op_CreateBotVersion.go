@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/lexmodelbuildingservice/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -16,11 +15,14 @@ import (
 // Creates a new version of the bot based on the $LATEST version. If the $LATEST
 // version of this resource hasn't changed since you created the last version,
 // Amazon Lex doesn't create a new version. It returns the last created version.
+//
 // You can update only the $LATEST version of the bot. You can't update the
-// numbered versions that you create with the CreateBotVersion operation. When you
-// create the first version of a bot, Amazon Lex sets the version to 1. Subsequent
-// versions increment by 1. For more information, see versioning-intro . This
-// operation requires permission for the lex:CreateBotVersion action.
+// numbered versions that you create with the CreateBotVersion operation.
+//
+// When you create the first version of a bot, Amazon Lex sets the version to 1.
+// Subsequent versions increment by 1. For more information, see versioning-intro.
+//
+// This operation requires permission for the lex:CreateBotVersion action.
 func (c *Client) CreateBotVersion(ctx context.Context, params *CreateBotVersionInput, optFns ...func(*Options)) (*CreateBotVersionOutput, error) {
 	if params == nil {
 		params = &CreateBotVersionInput{}
@@ -57,7 +59,7 @@ type CreateBotVersionInput struct {
 type CreateBotVersionOutput struct {
 
 	// The message that Amazon Lex uses to cancel a conversation. For more
-	// information, see PutBot .
+	// information, see PutBot.
 	AbortStatement *types.Statement
 
 	// Checksum identifying the version of the bot that was created.
@@ -77,16 +79,20 @@ type CreateBotVersionOutput struct {
 	// You may not specify a default value for the childDirected field that does not
 	// accurately reflect whether your use of Amazon Lex is related to a website,
 	// program, or other application that is directed or targeted, in whole or in part,
-	// to children under age 13 and subject to COPPA. If your use of Amazon Lex relates
-	// to a website, program, or other application that is directed in whole or in
-	// part, to children under age 13, you must obtain any required verifiable parental
-	// consent under COPPA. For information regarding the use of Amazon Lex in
-	// connection with websites, programs, or other applications that are directed or
-	// targeted, in whole or in part, to children under age 13, see the Amazon Lex FAQ. (https://aws.amazon.com/lex/faqs#data-security)
+	// to children under age 13 and subject to COPPA.
+	//
+	// If your use of Amazon Lex relates to a website, program, or other application
+	// that is directed in whole or in part, to children under age 13, you must obtain
+	// any required verifiable parental consent under COPPA. For information regarding
+	// the use of Amazon Lex in connection with websites, programs, or other
+	// applications that are directed or targeted, in whole or in part, to children
+	// under age 13, see the [Amazon Lex FAQ.]
+	//
+	// [Amazon Lex FAQ.]: https://aws.amazon.com/lex/faqs#data-security
 	ChildDirected *bool
 
 	// The message that Amazon Lex uses when it doesn't understand the user's request.
-	// For more information, see PutBot .
+	// For more information, see PutBot.
 	ClarificationPrompt *types.Prompt
 
 	// The date when the bot version was created.
@@ -108,22 +114,22 @@ type CreateBotVersionOutput struct {
 	FailureReason *string
 
 	// The maximum time in seconds that Amazon Lex retains the data gathered in a
-	// conversation. For more information, see PutBot .
+	// conversation. For more information, see PutBot.
 	IdleSessionTTLInSeconds *int32
 
-	// An array of Intent objects. For more information, see PutBot .
+	// An array of Intent objects. For more information, see PutBot.
 	Intents []types.Intent
 
 	// The date when the $LATEST version of this bot was updated.
 	LastUpdatedDate *time.Time
 
-	// Specifies the target locale for the bot.
+	//  Specifies the target locale for the bot.
 	Locale types.Locale
 
 	// The name of the bot.
 	Name *string
 
-	// When you send a request to create or update a bot, Amazon Lex sets the status
+	//  When you send a request to create or update a bot, Amazon Lex sets the status
 	// response element to BUILDING . After Amazon Lex builds the bot, it sets status
 	// to READY . If Amazon Lex can't build the bot, it sets status to FAILED . Amazon
 	// Lex returns the reason for the failure in the failureReason response element.
@@ -164,25 +170,25 @@ func (c *Client) addOperationCreateBotVersionMiddlewares(stack *middleware.Stack
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -197,13 +203,16 @@ func (c *Client) addOperationCreateBotVersionMiddlewares(stack *middleware.Stack
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpCreateBotVersionValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateBotVersion(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

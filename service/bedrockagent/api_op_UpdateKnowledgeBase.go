@@ -6,13 +6,28 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockagent/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Update an existing knowledge base
+// Updates the configuration of a knowledge base with the fields that you specify.
+// Because all fields will be overwritten, you must include the same values for
+// fields that you want to keep the same.
+//
+// You can change the following fields:
+//
+//   - name
+//
+//   - description
+//
+//   - roleArn
+//
+// You can't change the knowledgeBaseConfiguration or storageConfiguration fields,
+// so you must specify the same configurations as when you created the knowledge
+// base. You can send a [GetKnowledgeBase]request and copy the same configurations.
+//
+// [GetKnowledgeBase]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_GetKnowledgeBase.html
 func (c *Client) UpdateKnowledgeBase(ctx context.Context, params *UpdateKnowledgeBaseInput, optFns ...func(*Options)) (*UpdateKnowledgeBaseOutput, error) {
 	if params == nil {
 		params = &UpdateKnowledgeBaseInput{}
@@ -30,32 +45,36 @@ func (c *Client) UpdateKnowledgeBase(ctx context.Context, params *UpdateKnowledg
 
 type UpdateKnowledgeBaseInput struct {
 
-	// Configures a bedrock knowledge base.
+	// Specifies the configuration for the embeddings model used for the knowledge
+	// base. You must use the same configuration as when the knowledge base was
+	// created.
 	//
 	// This member is required.
 	KnowledgeBaseConfiguration *types.KnowledgeBaseConfiguration
 
-	// Identifier for a resource.
+	// The unique identifier of the knowledge base to update.
 	//
 	// This member is required.
 	KnowledgeBaseId *string
 
-	// Name for a resource.
+	// Specifies a new name for the knowledge base.
 	//
 	// This member is required.
 	Name *string
 
-	// ARN of a IAM role.
+	// Specifies a different Amazon Resource Name (ARN) of the IAM role with
+	// permissions to invoke API operations on the knowledge base.
 	//
 	// This member is required.
 	RoleArn *string
 
-	// Configures the physical storage of ingested data in a knowledge base.
+	// Specifies the configuration for the vector store used for the knowledge base.
+	// You must use the same configuration as when the knowledge base was created.
 	//
 	// This member is required.
 	StorageConfiguration *types.StorageConfiguration
 
-	// Description of the Resource.
+	// Specifies a new description for the knowledge base.
 	Description *string
 
 	noSmithyDocumentSerde
@@ -63,7 +82,7 @@ type UpdateKnowledgeBaseInput struct {
 
 type UpdateKnowledgeBaseOutput struct {
 
-	// Contains the information of a knowledge base.
+	// Contains details about the knowledge base.
 	//
 	// This member is required.
 	KnowledgeBase *types.KnowledgeBase
@@ -96,25 +115,25 @@ func (c *Client) addOperationUpdateKnowledgeBaseMiddlewares(stack *middleware.St
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -129,13 +148,16 @@ func (c *Client) addOperationUpdateKnowledgeBaseMiddlewares(stack *middleware.St
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpUpdateKnowledgeBaseValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateKnowledgeBase(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

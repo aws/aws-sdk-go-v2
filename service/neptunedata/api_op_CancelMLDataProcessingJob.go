@@ -6,16 +6,18 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Cancels a Neptune ML data processing job. See The dataprocessing command (https://docs.aws.amazon.com/neptune/latest/userguide/machine-learning-api-dataprocessing.html)
-// . When invoking this operation in a Neptune cluster that has IAM authentication
+// Cancels a Neptune ML data processing job. See [The dataprocessing command]dataprocessing .
+//
+// When invoking this operation in a Neptune cluster that has IAM authentication
 // enabled, the IAM user or role making the request must have a policy attached
-// that allows the neptune-db:CancelMLDataProcessingJob (https://docs.aws.amazon.com/neptune/latest/userguide/iam-dp-actions.html#cancelmldataprocessingjob)
-// IAM action in that cluster.
+// that allows the [neptune-db:CancelMLDataProcessingJob]IAM action in that cluster.
+//
+// [neptune-db:CancelMLDataProcessingJob]: https://docs.aws.amazon.com/neptune/latest/userguide/iam-dp-actions.html#cancelmldataprocessingjob
+// [The dataprocessing command]: https://docs.aws.amazon.com/neptune/latest/userguide/machine-learning-api-dataprocessing.html
 func (c *Client) CancelMLDataProcessingJob(ctx context.Context, params *CancelMLDataProcessingJobInput, optFns ...func(*Options)) (*CancelMLDataProcessingJobOutput, error) {
 	if params == nil {
 		params = &CancelMLDataProcessingJobInput{}
@@ -83,25 +85,25 @@ func (c *Client) addOperationCancelMLDataProcessingJobMiddlewares(stack *middlew
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -116,13 +118,16 @@ func (c *Client) addOperationCancelMLDataProcessingJobMiddlewares(stack *middlew
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpCancelMLDataProcessingJobValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCancelMLDataProcessingJob(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

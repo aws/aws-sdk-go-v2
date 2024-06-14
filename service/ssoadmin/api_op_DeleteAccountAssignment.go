@@ -6,16 +6,16 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/ssoadmin/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Deletes a principal's access from a specified Amazon Web Services account using
-// a specified permission set. After a successful response, call
-// DescribeAccountAssignmentDeletionStatus to describe the status of an assignment
-// deletion request.
+// a specified permission set.
+//
+// After a successful response, call DescribeAccountAssignmentDeletionStatus to
+// describe the status of an assignment deletion request.
 func (c *Client) DeleteAccountAssignment(ctx context.Context, params *DeleteAccountAssignmentInput, optFns ...func(*Options)) (*DeleteAccountAssignmentOutput, error) {
 	if params == nil {
 		params = &DeleteAccountAssignmentInput{}
@@ -34,9 +34,8 @@ func (c *Client) DeleteAccountAssignment(ctx context.Context, params *DeleteAcco
 type DeleteAccountAssignmentInput struct {
 
 	// The ARN of the IAM Identity Center instance under which the operation will be
-	// executed. For more information about ARNs, see Amazon Resource Names (ARNs) and
-	// Amazon Web Services Service Namespaces in the Amazon Web Services General
-	// Reference.
+	// executed. For more information about ARNs, see Amazon Resource Names (ARNs) and Amazon Web Services Service Namespacesin the Amazon Web Services
+	// General Reference.
 	//
 	// This member is required.
 	InstanceArn *string
@@ -48,8 +47,7 @@ type DeleteAccountAssignmentInput struct {
 
 	// An identifier for an object in IAM Identity Center, such as a user or group.
 	// PrincipalIds are GUIDs (For example, f81d4fae-7dec-11d0-a765-00a0c91e6bf6). For
-	// more information about PrincipalIds in IAM Identity Center, see the IAM
-	// Identity Center Identity Store API Reference .
+	// more information about PrincipalIds in IAM Identity Center, see the IAM Identity Center Identity Store API Reference.
 	//
 	// This member is required.
 	PrincipalId *string
@@ -106,25 +104,25 @@ func (c *Client) addOperationDeleteAccountAssignmentMiddlewares(stack *middlewar
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -139,13 +137,16 @@ func (c *Client) addOperationDeleteAccountAssignmentMiddlewares(stack *middlewar
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDeleteAccountAssignmentValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteAccountAssignment(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

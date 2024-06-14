@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/machinelearning/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -14,22 +13,27 @@ import (
 
 // Creates a DataSource object. A DataSource references data that can be used to
 // perform CreateMLModel , CreateEvaluation , or CreateBatchPrediction operations.
+//
 // CreateDataSourceFromS3 is an asynchronous operation. In response to
 // CreateDataSourceFromS3 , Amazon Machine Learning (Amazon ML) immediately returns
 // and sets the DataSource status to PENDING . After the DataSource has been
 // created and is ready for use, Amazon ML sets the Status parameter to COMPLETED .
 // DataSource in the COMPLETED or PENDING state can be used to perform only
-// CreateMLModel , CreateEvaluation or CreateBatchPrediction operations. If Amazon
-// ML can't accept the input source, it sets the Status parameter to FAILED and
-// includes an error message in the Message attribute of the GetDataSource
-// operation response. The observation data used in a DataSource should be ready
-// to use; that is, it should have a consistent structure, and missing data values
-// should be kept to a minimum. The observation data must reside in one or more
-// .csv files in an Amazon Simple Storage Service (Amazon S3) location, along with
-// a schema that describes the data items by name and type. The same schema must be
-// used for all of the data files referenced by the DataSource . After the
-// DataSource has been created, it's ready to use in evaluations and batch
-// predictions. If you plan to use the DataSource to train an MLModel , the
+// CreateMLModel , CreateEvaluation or CreateBatchPrediction operations.
+//
+// If Amazon ML can't accept the input source, it sets the Status parameter to
+// FAILED and includes an error message in the Message attribute of the
+// GetDataSource operation response.
+//
+// The observation data used in a DataSource should be ready to use; that is, it
+// should have a consistent structure, and missing data values should be kept to a
+// minimum. The observation data must reside in one or more .csv files in an Amazon
+// Simple Storage Service (Amazon S3) location, along with a schema that describes
+// the data items by name and type. The same schema must be used for all of the
+// data files referenced by the DataSource .
+//
+// After the DataSource has been created, it's ready to use in evaluations and
+// batch predictions. If you plan to use the DataSource to train an MLModel , the
 // DataSource also needs a recipe. A recipe describes how each input variable will
 // be used in training an MLModel . Will the variable be included or excluded from
 // training? Will the variable be manipulated; for example, will it be combined
@@ -58,13 +62,18 @@ type CreateDataSourceFromS3Input struct {
 	DataSourceId *string
 
 	// The data specification of a DataSource :
+	//
 	//   - DataLocationS3 - The Amazon S3 location of the observation data.
+	//
 	//   - DataSchemaLocationS3 - The Amazon S3 location of the DataSchema .
+	//
 	//   - DataSchema - A JSON string representing the schema. This is not required if
 	//   DataSchemaUri is specified.
+	//
 	//   - DataRearrangement - A JSON string that represents the splitting and
-	//   rearrangement requirements for the Datasource . Sample -
-	//   "{\"splitting\":{\"percentBegin\":10,\"percentEnd\":60}}"
+	//   rearrangement requirements for the Datasource .
+	//
+	// Sample - "{\"splitting\":{\"percentBegin\":10,\"percentEnd\":60}}"
 	//
 	// This member is required.
 	DataSpec *types.S3DataSpec
@@ -81,10 +90,12 @@ type CreateDataSourceFromS3Input struct {
 	noSmithyDocumentSerde
 }
 
-// Represents the output of a CreateDataSourceFromS3 operation, and is an
-// acknowledgement that Amazon ML received the request. The CreateDataSourceFromS3
-// operation is asynchronous. You can poll for updates by using the
-// GetBatchPrediction operation and checking the Status parameter.
+//	Represents the output of a CreateDataSourceFromS3 operation, and is an
+//
+// acknowledgement that Amazon ML received the request.
+//
+// The CreateDataSourceFromS3 operation is asynchronous. You can poll for updates
+// by using the GetBatchPrediction operation and checking the Status parameter.
 type CreateDataSourceFromS3Output struct {
 
 	// A user-supplied ID that uniquely identifies the DataSource . This value should
@@ -119,25 +130,25 @@ func (c *Client) addOperationCreateDataSourceFromS3Middlewares(stack *middleware
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -152,13 +163,16 @@ func (c *Client) addOperationCreateDataSourceFromS3Middlewares(stack *middleware
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpCreateDataSourceFromS3ValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateDataSourceFromS3(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

@@ -6,16 +6,17 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/organizations/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Lists the Amazon Web Services accounts that are designated as delegated
-// administrators in this organization. This operation can be called only from the
-// organization's management account or by a member account that is a delegated
-// administrator for an Amazon Web Services service.
+// administrators in this organization.
+//
+// This operation can be called only from the organization's management account or
+// by a member account that is a delegated administrator for an Amazon Web Services
+// service.
 func (c *Client) ListDelegatedAdministrators(ctx context.Context, params *ListDelegatedAdministratorsInput, optFns ...func(*Options)) (*ListDelegatedAdministratorsOutput, error) {
 	if params == nil {
 		params = &ListDelegatedAdministratorsInput{}
@@ -51,9 +52,10 @@ type ListDelegatedAdministratorsInput struct {
 	NextToken *string
 
 	// Specifies a service principal name. If specified, then the operation lists the
-	// delegated administrators only for the specified service. If you don't specify a
-	// service principal, the operation lists all delegated administrators for all
-	// services in your organization.
+	// delegated administrators only for the specified service.
+	//
+	// If you don't specify a service principal, the operation lists all delegated
+	// administrators for all services in your organization.
 	ServicePrincipal *string
 
 	noSmithyDocumentSerde
@@ -98,25 +100,25 @@ func (c *Client) addOperationListDelegatedAdministratorsMiddlewares(stack *middl
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -131,10 +133,13 @@ func (c *Client) addOperationListDelegatedAdministratorsMiddlewares(stack *middl
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListDelegatedAdministrators(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

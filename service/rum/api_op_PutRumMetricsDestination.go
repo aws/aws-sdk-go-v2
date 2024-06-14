@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/rum/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -14,9 +13,11 @@ import (
 
 // Creates or updates a destination to receive extended metrics from CloudWatch
 // RUM. You can send extended metrics to CloudWatch or to a CloudWatch Evidently
-// experiment. For more information about extended metrics, see
-// BatchCreateRumMetricDefinitions (https://docs.aws.amazon.com/cloudwatchrum/latest/APIReference/API_BatchCreateRumMetricDefinitions.html)
-// .
+// experiment.
+//
+// For more information about extended metrics, see [BatchCreateRumMetricDefinitions].
+//
+// [BatchCreateRumMetricDefinitions]: https://docs.aws.amazon.com/cloudwatchrum/latest/APIReference/API_BatchCreateRumMetricDefinitions.html
 func (c *Client) PutRumMetricsDestination(ctx context.Context, params *PutRumMetricsDestinationInput, optFns ...func(*Options)) (*PutRumMetricsDestinationOutput, error) {
 	if params == nil {
 		params = &PutRumMetricsDestinationInput{}
@@ -52,9 +53,18 @@ type PutRumMetricsDestinationInput struct {
 	DestinationArn *string
 
 	// This parameter is required if Destination is Evidently . If Destination is
-	// CloudWatch , do not use this parameter. This parameter specifies the ARN of an
-	// IAM role that RUM will assume to write to the Evidently experiment that you are
-	// sending metrics to. This role must have permission to write to that experiment.
+	// CloudWatch , don't use this parameter.
+	//
+	// This parameter specifies the ARN of an IAM role that RUM will assume to write
+	// to the Evidently experiment that you are sending metrics to. This role must have
+	// permission to write to that experiment.
+	//
+	// If you specify this parameter, you must be signed on to a role that has [PassRole]
+	// permissions attached to it, to allow the role to be passed. The [CloudWatchAmazonCloudWatchRUMFullAccess]policy doesn't
+	// include PassRole permissions.
+	//
+	// [PassRole]: https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use_passrole.html
+	// [CloudWatchAmazonCloudWatchRUMFullAccess]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/auth-and-access-control-cw.html#managed-policies-cloudwatch-RUM
 	IamRoleArn *string
 
 	noSmithyDocumentSerde
@@ -89,25 +99,25 @@ func (c *Client) addOperationPutRumMetricsDestinationMiddlewares(stack *middlewa
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -122,13 +132,16 @@ func (c *Client) addOperationPutRumMetricsDestinationMiddlewares(stack *middlewa
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpPutRumMetricsDestinationValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opPutRumMetricsDestination(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

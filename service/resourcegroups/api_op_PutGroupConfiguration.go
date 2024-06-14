@@ -6,16 +6,19 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/resourcegroups/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Attaches a service configuration to the specified group. This occurs
-// asynchronously, and can take time to complete. You can use GetGroupConfiguration
-// to check the status of the update. Minimum permissions To run this command, you
-// must have the following permissions:
+// asynchronously, and can take time to complete. You can use GetGroupConfigurationto check the status
+// of the update.
+//
+// # Minimum permissions
+//
+// To run this command, you must have the following permissions:
+//
 //   - resource-groups:PutGroupConfiguration
 func (c *Client) PutGroupConfiguration(ctx context.Context, params *PutGroupConfigurationInput, optFns ...func(*Options)) (*PutGroupConfigurationOutput, error) {
 	if params == nil {
@@ -37,10 +40,14 @@ type PutGroupConfigurationInput struct {
 	// The new configuration to associate with the specified group. A configuration
 	// associates the resource group with an Amazon Web Services service and specifies
 	// how the service can interact with the resources in the group. A configuration is
-	// an array of GroupConfigurationItem elements. For information about the syntax
-	// of a service configuration, see Service configurations for Resource Groups (https://docs.aws.amazon.com/ARG/latest/APIReference/about-slg.html)
-	// . A resource group can contain either a Configuration or a ResourceQuery , but
-	// not both.
+	// an array of GroupConfigurationItemelements.
+	//
+	// For information about the syntax of a service configuration, see [Service configurations for Resource Groups].
+	//
+	// A resource group can contain either a Configuration or a ResourceQuery , but not
+	// both.
+	//
+	// [Service configurations for Resource Groups]: https://docs.aws.amazon.com/ARG/latest/APIReference/about-slg.html
 	Configuration []types.GroupConfigurationItem
 
 	// The name or ARN of the resource group with the configuration that you want to
@@ -79,25 +86,25 @@ func (c *Client) addOperationPutGroupConfigurationMiddlewares(stack *middleware.
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -112,13 +119,16 @@ func (c *Client) addOperationPutGroupConfigurationMiddlewares(stack *middleware.
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpPutGroupConfigurationValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opPutGroupConfiguration(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

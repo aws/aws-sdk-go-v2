@@ -6,19 +6,31 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/gamelift/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Retrieves a fleet's runtime configuration settings. The runtime configuration
-// tells Amazon GameLift which server processes to run (and how) on each instance
-// in the fleet. To get the runtime configuration that is currently in forces for a
-// fleet, provide the fleet ID. If successful, a RuntimeConfiguration object is
-// returned for the requested fleet. If the requested fleet has been deleted, the
-// result set is empty. Learn more Setting up Amazon GameLift fleets (https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-intro.html)
-// Running multiple processes on a fleet (https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-multiprocess.html)
+// determines which server processes run, and how, on computes in the fleet. For
+// managed EC2 fleets, the runtime configuration describes server processes that
+// run on each fleet instance. For container fleets, the runtime configuration
+// describes server processes that run in each replica container group. You can
+// update a fleet's runtime configuration at any time using UpdateRuntimeConfiguration.
+//
+// To get the current runtime configuration for a fleet, provide the fleet ID.
+//
+// If successful, a RuntimeConfiguration object is returned for the requested
+// fleet. If the requested fleet has been deleted, the result set is empty.
+//
+// # Learn more
+//
+// [Setting up Amazon GameLift fleets]
+//
+// [Running multiple processes on a fleet]
+//
+// [Setting up Amazon GameLift fleets]: https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-intro.html
+// [Running multiple processes on a fleet]: https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-multiprocess.html
 func (c *Client) DescribeRuntimeConfiguration(ctx context.Context, params *DescribeRuntimeConfigurationInput, optFns ...func(*Options)) (*DescribeRuntimeConfigurationOutput, error) {
 	if params == nil {
 		params = &DescribeRuntimeConfigurationInput{}
@@ -47,8 +59,8 @@ type DescribeRuntimeConfigurationInput struct {
 
 type DescribeRuntimeConfigurationOutput struct {
 
-	// Instructions that describe how server processes should be launched and
-	// maintained on each instance in the fleet.
+	// Instructions that describe how server processes are launched and maintained on
+	// computes in the fleet.
 	RuntimeConfiguration *types.RuntimeConfiguration
 
 	// Metadata pertaining to the operation's result.
@@ -79,25 +91,25 @@ func (c *Client) addOperationDescribeRuntimeConfigurationMiddlewares(stack *midd
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -112,13 +124,16 @@ func (c *Client) addOperationDescribeRuntimeConfigurationMiddlewares(stack *midd
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDescribeRuntimeConfigurationValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeRuntimeConfiguration(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

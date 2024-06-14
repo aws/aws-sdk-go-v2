@@ -6,22 +6,26 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/connect/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
-// Gets metric data from the specified Amazon Connect instance. GetMetricDataV2
-// offers more features than GetMetricData (https://docs.aws.amazon.com/connect/latest/APIReference/API_GetMetricData.html)
-// , the previous version of this API. It has new metrics, offers filtering at a
-// metric level, and offers the ability to filter and group data by channels,
-// queues, routing profiles, agents, and agent hierarchy levels. It can retrieve
-// historical data for the last 3 months, at varying intervals. For a description
-// of the historical metrics that are supported by GetMetricDataV2 and
-// GetMetricData , see Historical metrics definitions (https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html)
-// in the Amazon Connect Administrator's Guide.
+// Gets metric data from the specified Amazon Connect instance.
+//
+// GetMetricDataV2 offers more features than [GetMetricData], the previous version of this API.
+// It has new metrics, offers filtering at a metric level, and offers the ability
+// to filter and group data by channels, queues, routing profiles, agents, and
+// agent hierarchy levels. It can retrieve historical data for the last 3 months,
+// at varying intervals.
+//
+// For a description of the historical metrics that are supported by
+// GetMetricDataV2 and GetMetricData , see [Historical metrics definitions] in the Amazon Connect Administrator
+// Guide.
+//
+// [Historical metrics definitions]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html
+// [GetMetricData]: https://docs.aws.amazon.com/connect/latest/APIReference/API_GetMetricData.html
 func (c *Client) GetMetricDataV2(ctx context.Context, params *GetMetricDataV2Input, optFns ...func(*Options)) (*GetMetricDataV2Output, error) {
 	if params == nil {
 		params = &GetMetricDataV2Input{}
@@ -48,227 +52,877 @@ type GetMetricDataV2Input struct {
 
 	// The filters to apply to returned metrics. You can filter on the following
 	// resources:
-	//   - Queues
-	//   - Routing profiles
+	//
 	//   - Agents
+	//
 	//   - Channels
-	//   - User hierarchy groups
+	//
 	//   - Feature
+	//
+	//   - Queues
+	//
+	//   - Routing profiles
+	//
 	//   - Routing step expression
+	//
+	//   - User hierarchy groups
+	//
 	// At least one filter must be passed from queues, routing profiles, agents, or
-	// user hierarchy groups. To filter by phone number, see Create a historical
-	// metrics report (https://docs.aws.amazon.com/connect/latest/adminguide/create-historical-metrics-report.html)
-	// in the Amazon Connect Administrator's Guide. Note the following limits:
+	// user hierarchy groups.
+	//
+	// To filter by phone number, see [Create a historical metrics report] in the Amazon Connect Administrator Guide.
+	//
+	// Note the following limits:
+	//
 	//   - Filter keys: A maximum of 5 filter keys are supported in a single request.
-	//   Valid filter keys: QUEUE | ROUTING_PROFILE | AGENT | CHANNEL |
-	//   AGENT_HIERARCHY_LEVEL_ONE | AGENT_HIERARCHY_LEVEL_TWO |
-	//   AGENT_HIERARCHY_LEVEL_THREE | AGENT_HIERARCHY_LEVEL_FOUR |
-	//   AGENT_HIERARCHY_LEVEL_FIVE | FEATURE |
-	//   contact/segmentAttributes/connect:Subtype | ROUTING_STEP_EXPRESSION
+	//   Valid filter keys: AGENT | AGENT_HIERARCHY_LEVEL_ONE |
+	//   AGENT_HIERARCHY_LEVEL_TWO | AGENT_HIERARCHY_LEVEL_THREE |
+	//   AGENT_HIERARCHY_LEVEL_FOUR | AGENT_HIERARCHY_LEVEL_FIVE | CASE_TEMPLATE_ARN |
+	//   CASE_STATUS | CHANNEL | contact/segmentAttributes/connect:Subtype | FEATURE |
+	//   FLOW_TYPE | FLOWS_NEXT_RESOURCE_ID | FLOWS_NEXT_RESOURCE_QUEUE_ID |
+	//   FLOWS_OUTCOME_TYPE | FLOWS_RESOURCE_ID | INITIATION_METHOD |
+	//   RESOURCE_PUBLISHED_TIMESTAMP | ROUTING_PROFILE | ROUTING_STEP_EXPRESSION |
+	//   QUEUE | Q_CONNECT_ENABLED |
+	//
 	//   - Filter values: A maximum of 100 filter values are supported in a single
 	//   request. VOICE, CHAT, and TASK are valid filterValue for the CHANNEL filter
 	//   key. They do not count towards limitation of 100 filter values. For example, a
 	//   GetMetricDataV2 request can filter by 50 queues, 35 agents, and 15 routing
 	//   profiles for a total of 100 filter values, along with 3 channel filters.
-	//   contact_lens_conversational_analytics is a valid filterValue for the FEATURE
+	//
+	// contact_lens_conversational_analytics is a valid filterValue for the FEATURE
 	//   filter key. It is available only to contacts analyzed by Contact Lens
-	//   conversational analytics. connect:Chat , connect:SMS , connect:Telephony , and
-	//   connect:WebRTC are valid filterValue examples (not exhaustive) for the
-	//   contact/segmentAttributes/connect:Subtype filter key. ROUTING_STEP_EXPRESSION
-	//   is a valid filter key with a filter value up to 3000 length. This filter is case
-	//   and order sensitive. JSON string fields must be sorted in ascending order and
-	//   JSON array order should be kept as is.
+	//   conversational analytics.
+	//
+	// connect:Chat , connect:SMS , connect:Telephony , and connect:WebRTC are valid
+	//   filterValue examples (not exhaustive) for the
+	//   contact/segmentAttributes/connect:Subtype filter key.
+	//
+	// ROUTING_STEP_EXPRESSION is a valid filter key with a filter value up to 3000
+	//   length. This filter is case and order sensitive. JSON string fields must be
+	//   sorted in ascending order and JSON array order should be kept as is.
+	//
+	// Q_CONNECT_ENABLED . TRUE and FALSE are the only valid filterValues for the
+	//   Q_CONNECT_ENABLED filter key.
+	//
+	//   - TRUE includes all contacts that had Amazon Q in Connect enabled as part of
+	//   the flow.
+	//
+	//   - FALSE includes all contacts that did not have Amazon Q in Connect enabled
+	//   as part of the flow
+	//
+	// This filter is available only for contact record-driven metrics.
+	//
+	// [Create a historical metrics report]: https://docs.aws.amazon.com/connect/latest/adminguide/create-historical-metrics-report.html
 	//
 	// This member is required.
 	Filters []types.FilterV2
 
 	// The metrics to retrieve. Specify the name, groupings, and filters for each
 	// metric. The following historical metrics are available. For a description of
-	// each metric, see Historical metrics definitions (https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html)
-	// in the Amazon Connect Administrator's Guide. ABANDONMENT_RATE Unit: Percent
+	// each metric, see [Historical metrics definitions]in the Amazon Connect Administrator Guide.
+	//
+	// ABANDONMENT_RATE Unit: Percent
+	//
 	// Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent
-	// Hierarchy, Feature, contact/segmentAttributes/connect:Subtype
-	// AGENT_ADHERENT_TIME This metric is available only in Amazon Web Services Regions
-	// where Forecasting, capacity planning, and scheduling (https://docs.aws.amazon.com/connect/latest/adminguide/regions.html#optimization_region)
-	// is available. Unit: Seconds Valid groupings and filters: Queue, Channel, Routing
-	// Profile, Agent, Agent Hierarchy AGENT_ANSWER_RATE Unit: Percent Valid groupings
-	// and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy
-	// AGENT_NON_ADHERENT_TIME Unit: Seconds Valid groupings and filters: Queue,
-	// Channel, Routing Profile, Agent, Agent Hierarchy AGENT_NON_RESPONSE Unit: Count
+	// Hierarchy, Feature, contact/segmentAttributes/connect:Subtype, Q in Connect
+	//
+	// UI name: [Abandonment rate]
+	//
+	// AGENT_ADHERENT_TIME This metric is available only in Amazon Web Services
+	// Regions where [Forecasting, capacity planning, and scheduling]is available.
+	//
+	// Unit: Seconds
+	//
 	// Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent
-	// Hierarchy AGENT_NON_RESPONSE_WITHOUT_CUSTOMER_ABANDONS Unit: Count Valid
-	// groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy
+	// Hierarchy
+	//
+	// UI name: [Adherent time]
+	//
+	// AGENT_ANSWER_RATE Unit: Percent
+	//
+	// Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent
+	// Hierarchy
+	//
+	// UI name: [Agent answer rate]
+	//
+	// AGENT_NON_ADHERENT_TIME Unit: Seconds
+	//
+	// Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent
+	// Hierarchy
+	//
+	// UI name: [Non-adherent time]
+	//
+	// AGENT_NON_RESPONSE Unit: Count
+	//
+	// Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent
+	// Hierarchy
+	//
+	// UI name: [Agent non-response]
+	//
+	// AGENT_NON_RESPONSE_WITHOUT_CUSTOMER_ABANDONS Unit: Count
+	//
+	// Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent
+	// Hierarchy
+	//
 	// Data for this metric is available starting from October 1, 2023 0:00:00 GMT.
-	// AGENT_OCCUPANCY Unit: Percentage Valid groupings and filters: Routing Profile,
-	// Agent, Agent Hierarchy AGENT_SCHEDULE_ADHERENCE This metric is available only in
-	// Amazon Web Services Regions where Forecasting, capacity planning, and scheduling (https://docs.aws.amazon.com/connect/latest/adminguide/regions.html#optimization_region)
-	// is available. Unit: Percent Valid groupings and filters: Queue, Channel, Routing
-	// Profile, Agent, Agent Hierarchy AGENT_SCHEDULED_TIME This metric is available
-	// only in Amazon Web Services Regions where Forecasting, capacity planning, and
-	// scheduling (https://docs.aws.amazon.com/connect/latest/adminguide/regions.html#optimization_region)
-	// is available. Unit: Seconds Valid groupings and filters: Queue, Channel, Routing
-	// Profile, Agent, Agent Hierarchy AVG_ABANDON_TIME Unit: Seconds Valid groupings
-	// and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy, Feature,
-	// contact/segmentAttributes/connect:Subtype AVG_ACTIVE_TIME Unit: Seconds Valid
-	// groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy
-	// AVG_AFTER_CONTACT_WORK_TIME Unit: Seconds Valid metric filter key:
-	// INITIATION_METHOD Valid groupings and filters: Queue, Channel, Routing Profile,
-	// Agent, Agent Hierarchy, Feature, contact/segmentAttributes/connect:Subtype
-	// Feature is a valid filter but not a valid grouping. AVG_AGENT_CONNECTING_TIME
-	// Unit: Seconds Valid metric filter key: INITIATION_METHOD . For now, this metric
-	// only supports the following as INITIATION_METHOD : INBOUND | OUTBOUND | CALLBACK
-	// | API Valid groupings and filters: Queue, Channel, Routing Profile, Agent,
-	// Agent Hierarchy The Negate key in Metric Level Filters is not applicable for
-	// this metric. AVG_AGENT_PAUSE_TIME Unit: Seconds Valid groupings and filters:
-	// Queue, Channel, Routing Profile, Agent, Agent Hierarchy AVG_CONTACT_DURATION
-	// Unit: Seconds Valid groupings and filters: Queue, Channel, Routing Profile,
-	// Agent, Agent Hierarchy, Feature, contact/segmentAttributes/connect:Subtype
-	// Feature is a valid filter but not a valid grouping. AVG_CONVERSATION_DURATION
-	// Unit: Seconds Valid groupings and filters: Queue, Channel, Routing Profile,
-	// Agent, Agent Hierarchy, Feature, contact/segmentAttributes/connect:Subtype
+	//
+	// UI name: [Agent non-response without customer abandons]
+	//
+	// AGENT_OCCUPANCY Unit: Percentage
+	//
+	// Valid groupings and filters: Routing Profile, Agent, Agent Hierarchy
+	//
+	// UI name: [Occupancy]
+	//
+	// AGENT_SCHEDULE_ADHERENCE This metric is available only in Amazon Web Services
+	// Regions where [Forecasting, capacity planning, and scheduling]is available.
+	//
+	// Unit: Percent
+	//
+	// Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent
+	// Hierarchy
+	//
+	// UI name: [Adherence]
+	//
+	// AGENT_SCHEDULED_TIME This metric is available only in Amazon Web Services
+	// Regions where [Forecasting, capacity planning, and scheduling]is available.
+	//
+	// Unit: Seconds
+	//
+	// Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent
+	// Hierarchy
+	//
+	// UI name: [Scheduled time]
+	//
+	// AVG_ABANDON_TIME Unit: Seconds
+	//
+	// Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent
+	// Hierarchy, Feature, contact/segmentAttributes/connect:Subtype, Q in Connect
+	//
+	// UI name: [Average queue abandon time]
+	//
+	// AVG_ACTIVE_TIME Unit: Seconds
+	//
+	// Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent
+	// Hierarchy, Q in Connect
+	//
+	// UI name: [Average active time]
+	//
+	// AVG_AFTER_CONTACT_WORK_TIME Unit: Seconds
+	//
+	// Valid metric filter key: INITIATION_METHOD
+	//
+	// Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent
+	// Hierarchy, Feature, contact/segmentAttributes/connect:Subtype, Q in Connect
+	//
+	// UI name: [Average after contact work time]
+	//
+	// Feature is a valid filter but not a valid grouping.
+	//
+	// AVG_AGENT_CONNECTING_TIME Unit: Seconds
+	//
+	// Valid metric filter key: INITIATION_METHOD . For now, this metric only supports
+	// the following as INITIATION_METHOD : INBOUND | OUTBOUND | CALLBACK | API
+	//
+	// Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent
+	// Hierarchy
+	//
+	// UI name: [Average agent API connecting time]
+	//
+	// The Negate key in Metric Level Filters is not applicable for this metric.
+	//
+	// AVG_AGENT_PAUSE_TIME Unit: Seconds
+	//
+	// Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent
+	// Hierarchy, Q in Connect
+	//
+	// UI name: [Average agent pause time]
+	//
+	// AVG_CASE_RELATED_CONTACTS Unit: Count
+	//
+	// Required filter key: CASE_TEMPLATE_ARN
+	//
+	// Valid groupings and filters: CASE_TEMPLATE_ARN, CASE_STATUS
+	//
+	// UI name: [Average contacts per case]
+	//
+	// AVG_CASE_RESOLUTION_TIME Unit: Seconds
+	//
+	// Required filter key: CASE_TEMPLATE_ARN
+	//
+	// Valid groupings and filters: CASE_TEMPLATE_ARN, CASE_STATUS
+	//
+	// UI name: [Average case resolution time]
+	//
+	// AVG_CONTACT_DURATION Unit: Seconds
+	//
+	// Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent
+	// Hierarchy, Feature, contact/segmentAttributes/connect:Subtype, Q in Connect
+	//
+	// UI name: [Average contact duration]
+	//
+	// Feature is a valid filter but not a valid grouping.
+	//
+	// AVG_CONVERSATION_DURATION Unit: Seconds
+	//
+	// Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent
+	// Hierarchy, Feature, contact/segmentAttributes/connect:Subtype, Q in Connect
+	//
+	// UI name: [Average conversation duration]
+	//
+	// AVG_FLOW_TIME Unit: Seconds
+	//
+	// Valid groupings and filters: Channel,
+	// contact/segmentAttributes/connect:Subtype, Flow type, Flows module resource ID,
+	// Flows next resource ID, Flows next resource queue ID, Flows outcome type, Flows
+	// resource ID, Initiation method, Resource published timestamp
+	//
+	// UI name: [Average flow time]
+	//
 	// AVG_GREETING_TIME_AGENT This metric is available only for contacts analyzed by
-	// Contact Lens conversational analytics. Unit: Seconds Valid groupings and
-	// filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy,
-	// contact/segmentAttributes/connect:Subtype AVG_HANDLE_TIME Unit: Seconds Valid
-	// groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy,
-	// Feature, contact/segmentAttributes/connect:Subtype, RoutingStepExpression
-	// Feature is a valid filter but not a valid grouping. AVG_HOLD_TIME Unit: Seconds
+	// Contact Lens conversational analytics.
+	//
+	// Unit: Seconds
+	//
 	// Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent
-	// Hierarchy, Feature, contact/segmentAttributes/connect:Subtype Feature is a valid
-	// filter but not a valid grouping. AVG_HOLD_TIME_ALL_CONTACTS Unit: Seconds Valid
-	// groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy,
-	// contact/segmentAttributes/connect:Subtype AVG_HOLDS Unit: Count Valid groupings
-	// and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy, Feature,
-	// contact/segmentAttributes/connect:Subtype Feature is a valid filter but not a
-	// valid grouping. AVG_INTERACTION_AND_HOLD_TIME Unit: Seconds Valid groupings and
-	// filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy,
-	// contact/segmentAttributes/connect:Subtype AVG_INTERACTION_TIME Unit: Seconds
-	// Valid metric filter key: INITIATION_METHOD Valid groupings and filters: Queue,
-	// Channel, Routing Profile, Feature, contact/segmentAttributes/connect:Subtype
-	// Feature is a valid filter but not a valid grouping. AVG_INTERRUPTIONS_AGENT This
-	// metric is available only for contacts analyzed by Contact Lens conversational
-	// analytics. Unit: Count Valid groupings and filters: Queue, Channel, Routing
-	// Profile, Agent, Agent Hierarchy, contact/segmentAttributes/connect:Subtype
+	// Hierarchy, contact/segmentAttributes/connect:Subtype, Q in Connect
+	//
+	// UI name: [Average agent greeting time]
+	//
+	// AVG_HANDLE_TIME Unit: Seconds
+	//
+	// Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent
+	// Hierarchy, Feature, contact/segmentAttributes/connect:Subtype,
+	// RoutingStepExpression
+	//
+	// UI name: [Average handle time]
+	//
+	// Feature is a valid filter but not a valid grouping.
+	//
+	// AVG_HOLD_TIME Unit: Seconds
+	//
+	// Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent
+	// Hierarchy, Feature, contact/segmentAttributes/connect:Subtype, Q in Connect
+	//
+	// UI name: [Average customer hold time]
+	//
+	// Feature is a valid filter but not a valid grouping.
+	//
+	// AVG_HOLD_TIME_ALL_CONTACTS Unit: Seconds
+	//
+	// Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent
+	// Hierarchy, contact/segmentAttributes/connect:Subtype, Q in Connect
+	//
+	// UI name: [Average customer hold time all contacts]
+	//
+	// AVG_HOLDS Unit: Count
+	//
+	// Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent
+	// Hierarchy, Feature, contact/segmentAttributes/connect:Subtype, Q in Connect
+	//
+	// UI name: [Average holds]
+	//
+	// Feature is a valid filter but not a valid grouping.
+	//
+	// AVG_INTERACTION_AND_HOLD_TIME Unit: Seconds
+	//
+	// Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent
+	// Hierarchy, contact/segmentAttributes/connect:Subtype, Q in Connect
+	//
+	// UI name: [Average agent interaction and customer hold time]
+	//
+	// AVG_INTERACTION_TIME Unit: Seconds
+	//
+	// Valid metric filter key: INITIATION_METHOD
+	//
+	// Valid groupings and filters: Queue, Channel, Routing Profile, Feature,
+	// contact/segmentAttributes/connect:Subtype, Q in Connect
+	//
+	// UI name: [Average agent interaction time]
+	//
+	// Feature is a valid filter but not a valid grouping.
+	//
+	// AVG_INTERRUPTIONS_AGENT This metric is available only for contacts analyzed by
+	// Contact Lens conversational analytics.
+	//
+	// Unit: Count
+	//
+	// Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent
+	// Hierarchy, contact/segmentAttributes/connect:Subtype, Q in Connect
+	//
+	// UI name: [Average agent interruptions]
+	//
 	// AVG_INTERRUPTION_TIME_AGENT This metric is available only for contacts analyzed
-	// by Contact Lens conversational analytics. Unit: Seconds Valid groupings and
-	// filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy,
-	// contact/segmentAttributes/connect:Subtype AVG_NON_TALK_TIME This metric is
-	// available only for contacts analyzed by Contact Lens conversational analytics.
-	// Unit: Seconds Valid groupings and filters: Queue, Channel, Routing Profile,
-	// Agent, Agent Hierarchy, contact/segmentAttributes/connect:Subtype
-	// AVG_QUEUE_ANSWER_TIME Unit: Seconds Valid groupings and filters: Queue, Channel,
-	// Routing Profile, Feature, contact/segmentAttributes/connect:Subtype Feature is a
-	// valid filter but not a valid grouping. AVG_RESOLUTION_TIME Unit: Seconds Valid
-	// groupings and filters: Queue, Channel, Routing Profile,
-	// contact/segmentAttributes/connect:Subtype AVG_TALK_TIME This metric is available
-	// only for contacts analyzed by Contact Lens conversational analytics. Unit:
-	// Seconds Valid groupings and filters: Queue, Channel, Routing Profile, Agent,
-	// Agent Hierarchy, contact/segmentAttributes/connect:Subtype AVG_TALK_TIME_AGENT
-	// This metric is available only for contacts analyzed by Contact Lens
-	// conversational analytics. Unit: Seconds Valid groupings and filters: Queue,
-	// Channel, Routing Profile, Agent, Agent Hierarchy,
-	// contact/segmentAttributes/connect:Subtype AVG_TALK_TIME_CUSTOMER This metric is
-	// available only for contacts analyzed by Contact Lens conversational analytics.
-	// Unit: Seconds Valid groupings and filters: Queue, Channel, Routing Profile,
-	// Agent, Agent Hierarchy, contact/segmentAttributes/connect:Subtype
-	// CONTACTS_ABANDONED Unit: Count Valid groupings and filters: Queue, Channel,
-	// Routing Profile, Agent, Agent Hierarchy,
-	// contact/segmentAttributes/connect:Subtype, RoutingStepExpression
-	// CONTACTS_CREATED Unit: Count Valid metric filter key: INITIATION_METHOD Valid
-	// groupings and filters: Queue, Channel, Routing Profile, Feature,
-	// contact/segmentAttributes/connect:Subtype Feature is a valid filter but not a
-	// valid grouping. CONTACTS_HANDLED Unit: Count Valid metric filter key:
-	// INITIATION_METHOD , DISCONNECT_REASON Valid groupings and filters: Queue,
-	// Channel, Routing Profile, Agent, Agent Hierarchy, Feature,
-	// contact/segmentAttributes/connect:Subtype, RoutingStepExpression Feature is a
-	// valid filter but not a valid grouping. CONTACTS_HANDLED_BY_CONNECTED_TO_AGENT
-	// Unit: Count Valid metric filter key: INITIATION_METHOD Valid groupings and
-	// filters: Queue, Channel, Agent, Agent Hierarchy,
-	// contact/segmentAttributes/connect:Subtype CONTACTS_HOLD_ABANDONS Unit: Count
+	// by Contact Lens conversational analytics.
+	//
+	// Unit: Seconds
+	//
 	// Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent
-	// Hierarchy, contact/segmentAttributes/connect:Subtype
-	// CONTACTS_ON_HOLD_AGENT_DISCONNECT Unit: Count Valid groupings and filters:
-	// Queue, Channel, Routing Profile, Agent, Agent Hierarchy
-	// CONTACTS_ON_HOLD_CUSTOMER_DISCONNECT Unit: Count Valid groupings and filters:
-	// Queue, Channel, Routing Profile, Agent, Agent Hierarchy CONTACTS_PUT_ON_HOLD
-	// Unit: Count Valid groupings and filters: Queue, Channel, Routing Profile, Agent,
-	// Agent Hierarchy CONTACTS_TRANSFERRED_OUT_EXTERNAL Unit: Count Valid groupings
-	// and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy
-	// CONTACTS_TRANSFERRED_OUT_INTERNAL Unit: Percent Valid groupings and filters:
-	// Queue, Channel, Routing Profile, Agent, Agent Hierarchy CONTACTS_QUEUED Unit:
-	// Count Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent
-	// Hierarchy, contact/segmentAttributes/connect:Subtype CONTACTS_QUEUED_BY_ENQUEUE
-	// Unit: Count Valid groupings and filters: Queue, Channel, Agent, Agent Hierarchy,
-	// contact/segmentAttributes/connect:Subtype CONTACTS_RESOLVED_IN_X Unit: Count
+	// Hierarchy, contact/segmentAttributes/connect:Subtype, Q in Connect
+	//
+	// UI name: [Average agent interruption time]
+	//
+	// AVG_NON_TALK_TIME This metric is available only for contacts analyzed by
+	// Contact Lens conversational analytics.
+	//
+	// Unit: Seconds
+	//
+	// Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent
+	// Hierarchy, contact/segmentAttributes/connect:Subtype, Q in Connect
+	//
+	// UI name: [Average non-talk time]
+	//
+	// AVG_QUEUE_ANSWER_TIME Unit: Seconds
+	//
+	// Valid groupings and filters: Queue, Channel, Routing Profile, Feature,
+	// contact/segmentAttributes/connect:Subtype, Q in Connect
+	//
+	// UI name: [Average queue answer time]
+	//
+	// Feature is a valid filter but not a valid grouping.
+	//
+	// AVG_RESOLUTION_TIME Unit: Seconds
+	//
 	// Valid groupings and filters: Queue, Channel, Routing Profile,
-	// contact/segmentAttributes/connect:Subtype Threshold: For ThresholdValue enter
-	// any whole number from 1 to 604800 (inclusive), in seconds. For Comparison , you
-	// must enter LT (for "Less than"). CONTACTS_TRANSFERRED_OUT Unit: Count Valid
-	// groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy,
-	// Feature, contact/segmentAttributes/connect:Subtype Feature is a valid filter but
-	// not a valid grouping. CONTACTS_TRANSFERRED_OUT_BY_AGENT Unit: Count Valid
-	// groupings and filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy,
-	// contact/segmentAttributes/connect:Subtype CONTACTS_TRANSFERRED_OUT_FROM_QUEUE
-	// Unit: Count Valid groupings and filters: Queue, Channel, Routing Profile, Agent,
-	// Agent Hierarchy, contact/segmentAttributes/connect:Subtype MAX_QUEUED_TIME Unit:
-	// Seconds Valid groupings and filters: Queue, Channel, Routing Profile, Agent,
-	// Agent Hierarchy, contact/segmentAttributes/connect:Subtype
-	// PERCENT_CONTACTS_STEP_EXPIRED Unit: Percent Valid groupings and filters: Queue,
-	// RoutingStepExpression PERCENT_CONTACTS_STEP_JOINED Unit: Percent Valid groupings
-	// and filters: Queue, RoutingStepExpression PERCENT_NON_TALK_TIME This metric is
-	// available only for contacts analyzed by Contact Lens conversational analytics.
-	// Unit: Percentage Valid groupings and filters: Queue, Channel, Routing Profile,
-	// Agent, Agent Hierarchy, contact/segmentAttributes/connect:Subtype
-	// PERCENT_TALK_TIME This metric is available only for contacts analyzed by Contact
-	// Lens conversational analytics. Unit: Percentage Valid groupings and filters:
-	// Queue, Channel, Routing Profile, Agent, Agent Hierarchy,
-	// contact/segmentAttributes/connect:Subtype PERCENT_TALK_TIME_AGENT This metric is
-	// available only for contacts analyzed by Contact Lens conversational analytics.
-	// Unit: Percentage Valid groupings and filters: Queue, Channel, Routing Profile,
-	// Agent, Agent Hierarchy, contact/segmentAttributes/connect:Subtype
-	// PERCENT_TALK_TIME_CUSTOMER This metric is available only for contacts analyzed
-	// by Contact Lens conversational analytics. Unit: Percentage Valid groupings and
-	// filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy,
-	// contact/segmentAttributes/connect:Subtype SERVICE_LEVEL You can include up to 20
-	// SERVICE_LEVEL metrics in a request. Unit: Percent Valid groupings and filters:
-	// Queue, Channel, Routing Profile Threshold: For ThresholdValue , enter any whole
-	// number from 1 to 604800 (inclusive), in seconds. For Comparison , you must enter
-	// LT (for "Less than"). STEP_CONTACTS_QUEUED Unit: Count Valid groupings and
-	// filters: Queue, RoutingStepExpression SUM_AFTER_CONTACT_WORK_TIME Unit: Seconds
+	// contact/segmentAttributes/connect:Subtype, Q in Connect
+	//
+	// UI name: [Average resolution time]
+	//
+	// AVG_TALK_TIME This metric is available only for contacts analyzed by Contact
+	// Lens conversational analytics.
+	//
+	// Unit: Seconds
+	//
 	// Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent
-	// Hierarchy SUM_CONNECTING_TIME_AGENT Unit: Seconds Valid metric filter key:
-	// INITIATION_METHOD . This metric only supports the following filter keys as
-	// INITIATION_METHOD : INBOUND | OUTBOUND | CALLBACK | API Valid groupings and
-	// filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy The Negate key
-	// in Metric Level Filters is not applicable for this metric. SUM_CONTACT_FLOW_TIME
-	// Unit: Seconds Valid groupings and filters: Queue, Channel, Routing Profile,
-	// Agent, Agent Hierarchy SUM_CONTACT_TIME_AGENT Unit: Seconds Valid groupings and
-	// filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy
-	// SUM_CONTACTS_ANSWERED_IN_X Unit: Count Valid groupings and filters: Queue,
-	// Channel, Routing Profile, contact/segmentAttributes/connect:Subtype Threshold:
-	// For ThresholdValue , enter any whole number from 1 to 604800 (inclusive), in
-	// seconds. For Comparison , you must enter LT (for "Less than").
-	// SUM_CONTACTS_ABANDONED_IN_X Unit: Count Valid groupings and filters: Queue,
-	// Channel, Routing Profile, contact/segmentAttributes/connect:Subtype Threshold:
-	// For ThresholdValue , enter any whole number from 1 to 604800 (inclusive), in
-	// seconds. For Comparison , you must enter LT (for "Less than").
-	// SUM_CONTACTS_DISCONNECTED Valid metric filter key: DISCONNECT_REASON Unit:
-	// Count Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent
-	// Hierarchy, contact/segmentAttributes/connect:Subtype SUM_ERROR_STATUS_TIME_AGENT
-	// Unit: Seconds Valid groupings and filters: Queue, Channel, Routing Profile,
-	// Agent, Agent Hierarchy SUM_HANDLE_TIME Unit: Seconds Valid groupings and
-	// filters: Queue, Channel, Routing Profile, Agent, Agent Hierarchy SUM_HOLD_TIME
-	// Unit: Count Valid groupings and filters: Queue, Channel, Routing Profile, Agent,
-	// Agent Hierarchy SUM_IDLE_TIME_AGENT Unit: Seconds Valid groupings and filters:
-	// Routing Profile, Agent, Agent Hierarchy SUM_INTERACTION_AND_HOLD_TIME Unit:
-	// Seconds Valid groupings and filters: Queue, Channel, Routing Profile, Agent,
-	// Agent Hierarchy SUM_INTERACTION_TIME Unit: Seconds Valid groupings and filters:
-	// Queue, Channel, Routing Profile, Agent, Agent Hierarchy
-	// SUM_NON_PRODUCTIVE_TIME_AGENT Unit: Seconds Valid groupings and filters: Routing
-	// Profile, Agent, Agent Hierarchy SUM_ONLINE_TIME_AGENT Unit: Seconds Valid
-	// groupings and filters: Routing Profile, Agent, Agent Hierarchy
-	// SUM_RETRY_CALLBACK_ATTEMPTS Unit: Count Valid groupings and filters: Queue,
-	// Channel, Routing Profile, contact/segmentAttributes/connect:Subtype
+	// Hierarchy, contact/segmentAttributes/connect:Subtype, Q in Connect
+	//
+	// UI name: [Average talk time]
+	//
+	// AVG_TALK_TIME_AGENT This metric is available only for contacts analyzed by
+	// Contact Lens conversational analytics.
+	//
+	// Unit: Seconds
+	//
+	// Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent
+	// Hierarchy, contact/segmentAttributes/connect:Subtype, Q in Connect
+	//
+	// UI name: [Average agent talk time]
+	//
+	// AVG_TALK_TIME_CUSTOMER This metric is available only for contacts analyzed by
+	// Contact Lens conversational analytics.
+	//
+	// Unit: Seconds
+	//
+	// Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent
+	// Hierarchy, contact/segmentAttributes/connect:Subtype, Q in Connect
+	//
+	// UI name: [Average customer talk time]
+	//
+	// CASES_CREATED Unit: Count
+	//
+	// Required filter key: CASE_TEMPLATE_ARN
+	//
+	// Valid groupings and filters: CASE_TEMPLATE_ARN, CASE_STATUS
+	//
+	// UI name: [Cases created]
+	//
+	// CONTACTS_ABANDONED Unit: Count
+	//
+	// Metric filter:
+	//
+	//   - Valid values: API | Incoming | Outbound | Transfer | Callback |
+	//   Queue_Transfer | Disconnect
+	//
+	// Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent
+	// Hierarchy, contact/segmentAttributes/connect:Subtype, RoutingStepExpression, Q
+	// in Connect
+	//
+	// UI name: [Contact abandoned]
+	//
+	// CONTACTS_ABANDONED_IN_X Unit: Count
+	//
+	// Valid groupings and filters: Queue, Channel, Routing Profile,
+	// contact/segmentAttributes/connect:Subtype, Q in Connect
+	//
+	// Threshold: For ThresholdValue , enter any whole number from 1 to 604800
+	// (inclusive), in seconds. For Comparison , you must enter LT (for "Less than").
+	//
+	// UI name: [Contacts abandoned in X seconds]
+	//
+	// CONTACTS_ANSWERED_IN_X Unit: Count
+	//
+	// Valid groupings and filters: Queue, Channel, Routing Profile,
+	// contact/segmentAttributes/connect:Subtype, Q in Connect
+	//
+	// Threshold: For ThresholdValue , enter any whole number from 1 to 604800
+	// (inclusive), in seconds. For Comparison , you must enter LT (for "Less than").
+	//
+	// UI name: [Contacts answered in X seconds]
+	//
+	// CONTACTS_CREATED Unit: Count
+	//
+	// Valid metric filter key: INITIATION_METHOD
+	//
+	// Valid groupings and filters: Queue, Channel, Routing Profile, Feature,
+	// contact/segmentAttributes/connect:Subtype, Q in Connect
+	//
+	// UI name: [Contacts created]
+	//
+	// Feature is a valid filter but not a valid grouping.
+	//
+	// CONTACTS_HANDLED Unit: Count
+	//
+	// Valid metric filter key: INITIATION_METHOD , DISCONNECT_REASON
+	//
+	// Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent
+	// Hierarchy, Feature, contact/segmentAttributes/connect:Subtype,
+	// RoutingStepExpression, Q in Connect
+	//
+	// UI name: [API contacts handled]
+	//
+	// Feature is a valid filter but not a valid grouping.
+	//
+	// CONTACTS_HANDLED_BY_CONNECTED_TO_AGENT Unit: Count
+	//
+	// Valid metric filter key: INITIATION_METHOD
+	//
+	// Valid groupings and filters: Queue, Channel, Agent, Agent Hierarchy,
+	// contact/segmentAttributes/connect:Subtype, Q in Connect
+	//
+	// UI name: [Contacts handled (connected to agent timestamp)]
+	//
+	// CONTACTS_HOLD_ABANDONS Unit: Count
+	//
+	// Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent
+	// Hierarchy, contact/segmentAttributes/connect:Subtype, Q in Connect
+	//
+	// UI name: [Contacts hold disconnect]
+	//
+	// CONTACTS_ON_HOLD_AGENT_DISCONNECT Unit: Count
+	//
+	// Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent
+	// Hierarchy, Q in Connect
+	//
+	// UI name: [Contacts hold agent disconnect]
+	//
+	// CONTACTS_ON_HOLD_CUSTOMER_DISCONNECT Unit: Count
+	//
+	// Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent
+	// Hierarchy, Q in Connect
+	//
+	// UI name: [Contacts hold customer disconnect]
+	//
+	// CONTACTS_PUT_ON_HOLD Unit: Count
+	//
+	// Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent
+	// Hierarchy, Q in Connect
+	//
+	// UI name: [Contacts put on hold]
+	//
+	// CONTACTS_TRANSFERRED_OUT_EXTERNAL Unit: Count
+	//
+	// Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent
+	// Hierarchy, Q in Connect
+	//
+	// UI name: [Contacts transferred out external]
+	//
+	// CONTACTS_TRANSFERRED_OUT_INTERNAL Unit: Percent
+	//
+	// Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent
+	// Hierarchy, Q in Connect
+	//
+	// UI name: [Contacts transferred out internal]
+	//
+	// CONTACTS_QUEUED Unit: Count
+	//
+	// Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent
+	// Hierarchy, contact/segmentAttributes/connect:Subtype, Q in Connect
+	//
+	// UI name: [Contacts queued]
+	//
+	// CONTACTS_QUEUED_BY_ENQUEUE Unit: Count
+	//
+	// Valid groupings and filters: Queue, Channel, Agent, Agent Hierarchy,
+	// contact/segmentAttributes/connect:Subtype
+	//
+	// UI name: [Contacts queued (enqueue timestamp)]
+	//
+	// CONTACTS_RESOLVED_IN_X Unit: Count
+	//
+	// Valid groupings and filters: Queue, Channel, Routing Profile,
+	// contact/segmentAttributes/connect:Subtype, Q in Connect
+	//
+	// Threshold: For ThresholdValue enter any whole number from 1 to 604800
+	// (inclusive), in seconds. For Comparison , you must enter LT (for "Less than").
+	//
+	// UI name: [Contacts resolved in X]
+	//
+	// CONTACTS_TRANSFERRED_OUT Unit: Count
+	//
+	// Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent
+	// Hierarchy, Feature, contact/segmentAttributes/connect:Subtype, Q in Connect
+	//
+	// UI name: [Contacts transferred out]
+	//
+	// Feature is a valid filter but not a valid grouping.
+	//
+	// CONTACTS_TRANSFERRED_OUT_BY_AGENT Unit: Count
+	//
+	// Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent
+	// Hierarchy, contact/segmentAttributes/connect:Subtype, Q in Connect
+	//
+	// UI name: [Contacts transferred out by agent]
+	//
+	// CONTACTS_TRANSFERRED_OUT_FROM_QUEUE Unit: Count
+	//
+	// Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent
+	// Hierarchy, contact/segmentAttributes/connect:Subtype, Q in Connect
+	//
+	// UI name: [Contacts transferred out queue]
+	//
+	// CURRENT_CASES Unit: Count
+	//
+	// Required filter key: CASE_TEMPLATE_ARN
+	//
+	// Valid groupings and filters: CASE_TEMPLATE_ARN, CASE_STATUS
+	//
+	// UI name: [Current cases]
+	//
+	// FLOWS_OUTCOME Unit: Count
+	//
+	// Valid groupings and filters: Channel,
+	// contact/segmentAttributes/connect:Subtype, Flow type, Flows module resource ID,
+	// Flows next resource ID, Flows next resource queue ID, Flows outcome type, Flows
+	// resource ID, Initiation method, Resource published timestamp
+	//
+	// UI name: [Flows outcome]
+	//
+	// FLOWS_STARTED Unit: Count
+	//
+	// Valid groupings and filters: Channel,
+	// contact/segmentAttributes/connect:Subtype, Flow type, Flows module resource ID,
+	// Flows resource ID, Initiation method, Resource published timestamp
+	//
+	// UI name: [Flows started]
+	//
+	// MAX_FLOW_TIME Unit: Seconds
+	//
+	// Valid groupings and filters: Channel,
+	// contact/segmentAttributes/connect:Subtype, Flow type, Flows module resource ID,
+	// Flows next resource ID, Flows next resource queue ID, Flows outcome type, Flows
+	// resource ID, Initiation method, Resource published timestamp
+	//
+	// UI name: [Maximum flow time]
+	//
+	// MAX_QUEUED_TIME Unit: Seconds
+	//
+	// Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent
+	// Hierarchy, contact/segmentAttributes/connect:Subtype, Q in Connect
+	//
+	// UI name: [Maximum queued time]
+	//
+	// MIN_FLOW_TIME Unit: Seconds
+	//
+	// Valid groupings and filters: Channel,
+	// contact/segmentAttributes/connect:Subtype, Flow type, Flows module resource ID,
+	// Flows next resource ID, Flows next resource queue ID, Flows outcome type, Flows
+	// resource ID, Initiation method, Resource published timestamp
+	//
+	// UI name: [Minimum flow time]
+	//
+	// PERCENT_CASES_FIRST_CONTACT_RESOLVED Unit: Percent
+	//
+	// Required filter key: CASE_TEMPLATE_ARN
+	//
+	// Valid groupings and filters: CASE_TEMPLATE_ARN, CASE_STATUS
+	//
+	// UI name: [Cases resolved on first contact]
+	//
+	// PERCENT_CONTACTS_STEP_EXPIRED Unit: Percent
+	//
+	// Valid groupings and filters: Queue, RoutingStepExpression
+	//
+	// UI name: Not available
+	//
+	// PERCENT_CONTACTS_STEP_JOINED Unit: Percent
+	//
+	// Valid groupings and filters: Queue, RoutingStepExpression
+	//
+	// UI name: Not available
+	//
+	// PERCENT_FLOWS_OUTCOME Unit: Percent
+	//
+	// Valid metric filter key: FLOWS_OUTCOME_TYPE
+	//
+	// Valid groupings and filters: Channel,
+	// contact/segmentAttributes/connect:Subtype, Flow type, Flows module resource ID,
+	// Flows next resource ID, Flows next resource queue ID, Flows outcome type, Flows
+	// resource ID, Initiation method, Resource published timestamp
+	//
+	// UI name: [Flows outcome percentage].
+	//
+	// The FLOWS_OUTCOME_TYPE is not a valid grouping.
+	//
+	// PERCENT_NON_TALK_TIME This metric is available only for contacts analyzed by
+	// Contact Lens conversational analytics.
+	//
+	// Unit: Percentage
+	//
+	// Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent
+	// Hierarchy, contact/segmentAttributes/connect:Subtype, Q in Connect
+	//
+	// UI name: [Non-talk time percent]
+	//
+	// PERCENT_TALK_TIME This metric is available only for contacts analyzed by
+	// Contact Lens conversational analytics.
+	//
+	// Unit: Percentage
+	//
+	// Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent
+	// Hierarchy, contact/segmentAttributes/connect:Subtype, Q in Connect
+	//
+	// UI name: [Talk time percent]
+	//
+	// PERCENT_TALK_TIME_AGENT This metric is available only for contacts analyzed by
+	// Contact Lens conversational analytics.
+	//
+	// Unit: Percentage
+	//
+	// Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent
+	// Hierarchy, contact/segmentAttributes/connect:Subtype, Q in Connect
+	//
+	// UI name: [Agent talk time percent]
+	//
+	// PERCENT_TALK_TIME_CUSTOMER This metric is available only for contacts analyzed
+	// by Contact Lens conversational analytics.
+	//
+	// Unit: Percentage
+	//
+	// Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent
+	// Hierarchy, contact/segmentAttributes/connect:Subtype, Q in Connect
+	//
+	// UI name: [Customer talk time percent]
+	//
+	// REOPENED_CASE_ACTIONS Unit: Count
+	//
+	// Required filter key: CASE_TEMPLATE_ARN
+	//
+	// Valid groupings and filters: CASE_TEMPLATE_ARN, CASE_STATUS
+	//
+	// UI name: [Cases reopened]
+	//
+	// RESOLVED_CASE_ACTIONS Unit: Count
+	//
+	// Required filter key: CASE_TEMPLATE_ARN
+	//
+	// Valid groupings and filters: CASE_TEMPLATE_ARN, CASE_STATUS
+	//
+	// UI name: [Cases resolved]
+	//
+	// SERVICE_LEVEL You can include up to 20 SERVICE_LEVEL metrics in a request.
+	//
+	// Unit: Percent
+	//
+	// Valid groupings and filters: Queue, Channel, Routing Profile, Q in Connect
+	//
+	// Threshold: For ThresholdValue , enter any whole number from 1 to 604800
+	// (inclusive), in seconds. For Comparison , you must enter LT (for "Less than").
+	//
+	// UI name: [Service level X]
+	//
+	// STEP_CONTACTS_QUEUED Unit: Count
+	//
+	// Valid groupings and filters: Queue, RoutingStepExpression
+	//
+	// UI name: Not available
+	//
+	// SUM_AFTER_CONTACT_WORK_TIME Unit: Seconds
+	//
+	// Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent
+	// Hierarchy, Q in Connect
+	//
+	// UI name: [After contact work time]
+	//
+	// SUM_CONNECTING_TIME_AGENT Unit: Seconds
+	//
+	// Valid metric filter key: INITIATION_METHOD . This metric only supports the
+	// following filter keys as INITIATION_METHOD : INBOUND | OUTBOUND | CALLBACK | API
+	//
+	// Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent
+	// Hierarchy
+	//
+	// UI name: [Agent API connecting time]
+	//
+	// The Negate key in Metric Level Filters is not applicable for this metric.
+	//
+	// SUM_CONTACT_FLOW_TIME Unit: Seconds
+	//
+	// Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent
+	// Hierarchy, Q in Connect
+	//
+	// UI name: [Contact flow time]
+	//
+	// SUM_CONTACT_TIME_AGENT Unit: Seconds
+	//
+	// Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent
+	// Hierarchy
+	//
+	// UI name: [Agent on contact time]
+	//
+	// SUM_CONTACTS_DISCONNECTED Valid metric filter key: DISCONNECT_REASON
+	//
+	// Unit: Count
+	//
+	// Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent
+	// Hierarchy, contact/segmentAttributes/connect:Subtype, Q in Connect
+	//
+	// UI name: [Contact disconnected]
+	//
+	// SUM_ERROR_STATUS_TIME_AGENT Unit: Seconds
+	//
+	// Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent
+	// Hierarchy
+	//
+	// UI name: [Error status time]
+	//
+	// SUM_HANDLE_TIME Unit: Seconds
+	//
+	// Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent
+	// Hierarchy, Q in Connect
+	//
+	// UI name: [Contact handle time]
+	//
+	// SUM_HOLD_TIME Unit: Count
+	//
+	// Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent
+	// Hierarchy, Q in Connect
+	//
+	// UI name: [Customer hold time]
+	//
+	// SUM_IDLE_TIME_AGENT Unit: Seconds
+	//
+	// Valid groupings and filters: Routing Profile, Agent, Agent Hierarchy
+	//
+	// UI name: [Agent idle time]
+	//
+	// SUM_INTERACTION_AND_HOLD_TIME Unit: Seconds
+	//
+	// Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent
+	// Hierarchy, Q in Connect
+	//
+	// UI name: [Agent interaction and hold time]
+	//
+	// SUM_INTERACTION_TIME Unit: Seconds
+	//
+	// Valid groupings and filters: Queue, Channel, Routing Profile, Agent, Agent
+	// Hierarchy
+	//
+	// UI name: [Agent interaction time]
+	//
+	// SUM_NON_PRODUCTIVE_TIME_AGENT Unit: Seconds
+	//
+	// Valid groupings and filters: Routing Profile, Agent, Agent Hierarchy
+	//
+	// UI name: [Non-Productive Time]
+	//
+	// SUM_ONLINE_TIME_AGENT Unit: Seconds
+	//
+	// Valid groupings and filters: Routing Profile, Agent, Agent Hierarchy
+	//
+	// UI name: [Online time]
+	//
+	// SUM_RETRY_CALLBACK_ATTEMPTS Unit: Count
+	//
+	// Valid groupings and filters: Queue, Channel, Routing Profile,
+	// contact/segmentAttributes/connect:Subtype, Q in Connect
+	//
+	// UI name: [Callback attempts]
+	//
+	// [Historical metrics definitions]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html
+	// [Contacts transferred out external]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#contacts-transferred-out-external-historical
+	// [Average agent greeting time]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#average-greeting-time-agent-historical
+	// [Non-talk time percent]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#ntt-historical
+	// [Average agent pause time]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#average-agent-pause-time-historical
+	// [Average queue abandon time]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#average-queue-abandon-time-historical
+	// [Contacts transferred out by agent]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#contacts-transferred-out-by-agent-historical
+	// [Average agent API connecting time]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#htm-avg-agent-api-connecting-time
+	// [Maximum flow time]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#maximum-flow-time-historical
+	// [Average contact duration]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#average-contact-duration-historical
+	// [Non-adherent time]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#non-adherent-time
+	// [Average agent interaction and customer hold time]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#average-agent-interaction-customer-hold-time-historical
+	// [Contacts created]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#contacts-created-historical
+	// [Adherence]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#adherence-historical
+	// [Customer talk time percent]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#ttcustomer-historical
+	// [Average conversation duration]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#average-conversation-duration-historical
+	// [After contact work time]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#acw-historical
+	// [Average customer talk time]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#average-talk-time-customer-historical
+	// [Flows outcome]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#flows-outcome-historical
+	// [Contacts queued]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#contacts-queued-historical
+	// [Occupancy]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#occupancy-historical
+	// [Error status time]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#error-status-time-historical
+	// [Maximum queued time]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#maximum-queued-time-historical
+	// [Contacts answered in X seconds]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#contacts-answered-x-historical
+	// [Minimum flow time]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#minimum-flow-time-historical
+	// [Average active time]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#average-active-time-historical
+	// [Contacts transferred out queue]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#contacts-transferred-out-by-agent-historical
+	// [Cases reopened]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#cases-reopened-historical
+	// [Average case resolution time]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#average-case-resolution-time-historical
+	// [Contact flow time]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#contact-flow-time-historical
+	// [Average customer hold time all contacts]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#avg-customer-hold-time-all-contacts-historical
+	// [Agent API connecting time]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#htm-agent-api-connecting-time
+	// [Average agent interaction time]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#average-agent-interaction-time-historical
+	// [Talk time percent]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#tt-historical
+	// [Agent on contact time]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#agent-on-contact-time-historical
+	// [Average non-talk time]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html##average-non-talk-time-historical
+	// [Average agent talk time]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#average-talk-time-agent-historical
+	// [Flows started]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#flows-started-historical
+	// [Average agent interruption time]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#average-interruptions-time-agent-historical
+	// [Contacts transferred out]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#contacts-transferred-out-historical
+	// [Average contacts per case]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#average-contacts-case-historical
+	// [Agent talk time percent]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#ttagent-historical
+	// [Average resolution time]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#average-resolution-time-historical
+	// [Flows outcome percentage]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#flows-outcome-percentage-historical
+	// [Cases resolved]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#cases-resolved-historicall
+	// [Contacts queued (enqueue timestamp)]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#contacts-queued-by-enqueue-historical
+	// [Average flow time]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#average-flow-time-historical
+	// [Contacts hold disconnect]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#contacts-handled-by-connected-to-agent-historical
+	// [Online time]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#online-time-historical
+	// [Average holds]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#average-holds-historical
+	// [API contacts handled]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#api-contacts-handled-historical
+	// [Agent interaction time]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#agent-interaction-time-historical
+	// [Agent non-response without customer abandons]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#agent-nonresponse-no-abandon-historical
+	// [Average agent interruptions]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#average-interruptions-agent-historical
+	// [Service level X]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#service-level-historical
+	// [Contact handle time]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#contact-handle-time-historical
+	// [Contact disconnected]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#contact-disconnected-historical
+	// [Contacts handled (connected to agent timestamp)]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#contacts-handled-by-connected-to-agent-historical
+	// [Agent idle time]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#agent-idle-time-historica
+	// [Contacts resolved in X]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#contacts-resolved-historical
+	// [Contact abandoned]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#contacts-abandoned-historical
+	// [Cases resolved on first contact]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#cases-resolved-first-contact-historical
+	// [Adherent time]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#adherent-time-historical
+	// [Abandonment rate]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#abandonment-rate-historical
+	// [Average talk time]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#average-talk-time-historical
+	// [Scheduled time]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#scheduled-time-historical
+	// [Average after contact work time]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#average-acw-time-historical
+	// [Contacts abandoned in X seconds]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#contacts-abandoned-x-historical
+	// [Non-Productive Time]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#npt-historical
+	// [Cases created]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html##cases-created-historical
+	// [Current cases]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#current-cases-historical
+	// [Average queue answer time]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#average-queue-answer-time-historical
+	// [Customer hold time]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#customer-hold-time-historical
+	// [Average handle time]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#average-handle-time-historical
+	// [Average customer hold time]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#average-customer-hold-time-historical
+	// [Agent interaction and hold time]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#agent-interaction-hold-time-historical
+	// [Contacts hold customer disconnect]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#contacts-hold-customer-disconnect-historical
+	// [Contacts put on hold]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#contacts-hold-customer-disconnect-historical
+	// [Contacts hold agent disconnect]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#contacts-hold-agent-disconnect-historical
+	// [Contacts transferred out internal]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#contacts-transferred-out-internal-historical
+	// [Agent non-response]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#agent-non-response
+	// [Callback attempts]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#callback-attempts-historical
+	// [Forecasting, capacity planning, and scheduling]: https://docs.aws.amazon.com/connect/latest/adminguide/regions.html#optimization_region
+	// [Agent answer rate]: https://docs.aws.amazon.com/connect/latest/adminguide/historical-metrics-definitions.html#agent-answer-rate-historical
 	//
 	// This member is required.
 	Metrics []types.MetricV2
@@ -291,35 +945,49 @@ type GetMetricDataV2Input struct {
 	// The grouping applied to the metrics that are returned. For example, when
 	// results are grouped by queue, the metrics returned are grouped by queue. The
 	// values that are returned apply to the metrics for each queue. They are not
-	// aggregated for all queues. If no grouping is specified, a summary of all metrics
-	// is returned. Valid grouping keys: QUEUE | ROUTING_PROFILE | AGENT | CHANNEL |
-	// AGENT_HIERARCHY_LEVEL_ONE | AGENT_HIERARCHY_LEVEL_TWO |
-	// AGENT_HIERARCHY_LEVEL_THREE | AGENT_HIERARCHY_LEVEL_FOUR |
-	// AGENT_HIERARCHY_LEVEL_FIVE , contact/segmentAttributes/connect:Subtype |
-	// ROUTING_STEP_EXPRESSION
+	// aggregated for all queues.
+	//
+	// If no grouping is specified, a summary of all metrics is returned.
+	//
+	// Valid grouping keys: AGENT | AGENT_HIERARCHY_LEVEL_ONE |
+	// AGENT_HIERARCHY_LEVEL_TWO | AGENT_HIERARCHY_LEVEL_THREE |
+	// AGENT_HIERARCHY_LEVEL_FOUR | AGENT_HIERARCHY_LEVEL_FIVE | CASE_TEMPLATE_ARN |
+	// CASE_STATUS | CHANNEL | contact/segmentAttributes/connect:Subtype |
+	// FLOWS_RESOURCE_ID | FLOWS_MODULE_RESOURCE_ID | FLOW_TYPE | FLOWS_OUTCOME_TYPE |
+	// INITIATION_METHOD | Q_CONNECT_ENABLED | QUEUE | RESOURCE_PUBLISHED_TIMESTAMP |
+	// ROUTING_PROFILE | ROUTING_STEP_EXPRESSION
 	Groupings []string
 
 	// The interval period and timezone to apply to returned metrics.
+	//
 	//   - IntervalPeriod : An aggregated grouping applied to request metrics. Valid
 	//   IntervalPeriod values are: FIFTEEN_MIN | THIRTY_MIN | HOUR | DAY | WEEK |
-	//   TOTAL . For example, if IntervalPeriod is selected THIRTY_MIN , StartTime and
-	//   EndTime differs by 1 day, then Amazon Connect returns 48 results in the
-	//   response. Each result is aggregated by the THIRTY_MIN period. By default Amazon
-	//   Connect aggregates results based on the TOTAL interval period. The following
-	//   list describes restrictions on StartTime and EndTime based on which
-	//   IntervalPeriod is requested.
+	//   TOTAL .
+	//
+	// For example, if IntervalPeriod is selected THIRTY_MIN , StartTime and EndTime
+	//   differs by 1 day, then Amazon Connect returns 48 results in the response. Each
+	//   result is aggregated by the THIRTY_MIN period. By default Amazon Connect
+	//   aggregates results based on the TOTAL interval period.
+	//
+	// The following list describes restrictions on StartTime and EndTime based on
+	//   which IntervalPeriod is requested.
+	//
 	//   - FIFTEEN_MIN : The difference between StartTime and EndTime must be less than
 	//   3 days.
+	//
 	//   - THIRTY_MIN : The difference between StartTime and EndTime must be less than
 	//   3 days.
-	//   - HOUR : The difference between StartTime and EndTime must be less than 3
-	//   days.
-	//   - DAY : The difference between StartTime and EndTime must be less than 35
-	//   days.
+	//
+	//   - HOUR : The difference between StartTime and EndTime must be less than 3 days.
+	//
+	//   - DAY : The difference between StartTime and EndTime must be less than 35 days.
+	//
 	//   - WEEK : The difference between StartTime and EndTime must be less than 35
 	//   days.
+	//
 	//   - TOTAL : The difference between StartTime and EndTime must be less than 35
 	//   days.
+	//
 	//   - TimeZone : The timezone applied to requested metrics.
 	Interval *types.IntervalDetails
 
@@ -370,25 +1038,25 @@ func (c *Client) addOperationGetMetricDataV2Middlewares(stack *middleware.Stack,
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -403,13 +1071,16 @@ func (c *Client) addOperationGetMetricDataV2Middlewares(stack *middleware.Stack,
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpGetMetricDataV2ValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetMetricDataV2(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

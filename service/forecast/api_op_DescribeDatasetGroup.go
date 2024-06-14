@@ -6,20 +6,26 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/forecast/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
-// Describes a dataset group created using the CreateDatasetGroup (https://docs.aws.amazon.com/forecast/latest/dg/API_CreateDatasetGroup.html)
-// operation. In addition to listing the parameters provided in the
-// CreateDatasetGroup request, this operation includes the following properties:
+// Describes a dataset group created using the [CreateDatasetGroup] operation.
+//
+// In addition to listing the parameters provided in the CreateDatasetGroup
+// request, this operation includes the following properties:
+//
 //   - DatasetArns - The datasets belonging to the group.
+//
 //   - CreationTime
+//
 //   - LastModificationTime
+//
 //   - Status
+//
+// [CreateDatasetGroup]: https://docs.aws.amazon.com/forecast/latest/dg/API_CreateDatasetGroup.html
 func (c *Client) DescribeDatasetGroup(ctx context.Context, params *DescribeDatasetGroupInput, optFns ...func(*Options)) (*DescribeDatasetGroupOutput, error) {
 	if params == nil {
 		params = &DescribeDatasetGroupInput{}
@@ -63,20 +69,29 @@ type DescribeDatasetGroupOutput struct {
 	// The domain associated with the dataset group.
 	Domain types.Domain
 
-	// When the dataset group was created or last updated from a call to the
-	// UpdateDatasetGroup (https://docs.aws.amazon.com/forecast/latest/dg/API_UpdateDatasetGroup.html)
+	// When the dataset group was created or last updated from a call to the [UpdateDatasetGroup]
 	// operation. While the dataset group is being updated, LastModificationTime is
 	// the current time of the DescribeDatasetGroup call.
+	//
+	// [UpdateDatasetGroup]: https://docs.aws.amazon.com/forecast/latest/dg/API_UpdateDatasetGroup.html
 	LastModificationTime *time.Time
 
 	// The status of the dataset group. States include:
+	//
 	//   - ACTIVE
+	//
 	//   - CREATE_PENDING , CREATE_IN_PROGRESS , CREATE_FAILED
+	//
 	//   - DELETE_PENDING , DELETE_IN_PROGRESS , DELETE_FAILED
+	//
 	//   - UPDATE_PENDING , UPDATE_IN_PROGRESS , UPDATE_FAILED
-	// The UPDATE states apply when you call the UpdateDatasetGroup (https://docs.aws.amazon.com/forecast/latest/dg/API_UpdateDatasetGroup.html)
-	// operation. The Status of the dataset group must be ACTIVE before you can use
-	// the dataset group to create a predictor.
+	//
+	// The UPDATE states apply when you call the [UpdateDatasetGroup] operation.
+	//
+	// The Status of the dataset group must be ACTIVE before you can use the dataset
+	// group to create a predictor.
+	//
+	// [UpdateDatasetGroup]: https://docs.aws.amazon.com/forecast/latest/dg/API_UpdateDatasetGroup.html
 	Status *string
 
 	// Metadata pertaining to the operation's result.
@@ -107,25 +122,25 @@ func (c *Client) addOperationDescribeDatasetGroupMiddlewares(stack *middleware.S
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -140,13 +155,16 @@ func (c *Client) addOperationDescribeDatasetGroupMiddlewares(stack *middleware.S
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDescribeDatasetGroupValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeDatasetGroup(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

@@ -6,21 +6,26 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates a collection in an AWS Region. You can add faces to the collection
-// using the IndexFaces operation. For example, you might create collections, one
-// for each of your application users. A user can then index faces using the
-// IndexFaces operation and persist results in a specific collection. Then, a user
-// can search the collection for faces in the user-specific container. When you
-// create a collection, it is associated with the latest version of the face model
-// version. Collection names are case-sensitive. This operation requires
-// permissions to perform the rekognition:CreateCollection action. If you want to
-// tag your collection, you also require permission to perform the
-// rekognition:TagResource operation.
+// using the IndexFacesoperation.
+//
+// For example, you might create collections, one for each of your application
+// users. A user can then index faces using the IndexFaces operation and persist
+// results in a specific collection. Then, a user can search the collection for
+// faces in the user-specific container.
+//
+// When you create a collection, it is associated with the latest version of the
+// face model version.
+//
+// Collection names are case-sensitive.
+//
+// This operation requires permissions to perform the rekognition:CreateCollection
+// action. If you want to tag your collection, you also require permission to
+// perform the rekognition:TagResource operation.
 func (c *Client) CreateCollection(ctx context.Context, params *CreateCollectionInput, optFns ...func(*Options)) (*CreateCollectionOutput, error) {
 	if params == nil {
 		params = &CreateCollectionInput{}
@@ -43,7 +48,7 @@ type CreateCollectionInput struct {
 	// This member is required.
 	CollectionId *string
 
-	// A set of tags (key-value pairs) that you want to attach to the collection.
+	//  A set of tags (key-value pairs) that you want to attach to the collection.
 	Tags map[string]string
 
 	noSmithyDocumentSerde
@@ -90,25 +95,25 @@ func (c *Client) addOperationCreateCollectionMiddlewares(stack *middleware.Stack
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -123,13 +128,16 @@ func (c *Client) addOperationCreateCollectionMiddlewares(stack *middleware.Stack
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpCreateCollectionValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateCollection(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

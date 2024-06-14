@@ -1466,6 +1466,11 @@ func awsAwsjson11_serializeDocumentExtendedS3DestinationConfiguration(v *types.E
 		ok.String(string(v.CompressionFormat))
 	}
 
+	if v.CustomTimeZone != nil {
+		ok := object.Key("CustomTimeZone")
+		ok.String(*v.CustomTimeZone)
+	}
+
 	if v.DataFormatConversionConfiguration != nil {
 		ok := object.Key("DataFormatConversionConfiguration")
 		if err := awsAwsjson11_serializeDocumentDataFormatConversionConfiguration(v.DataFormatConversionConfiguration, ok); err != nil {
@@ -1490,6 +1495,11 @@ func awsAwsjson11_serializeDocumentExtendedS3DestinationConfiguration(v *types.E
 	if v.ErrorOutputPrefix != nil {
 		ok := object.Key("ErrorOutputPrefix")
 		ok.String(*v.ErrorOutputPrefix)
+	}
+
+	if v.FileExtension != nil {
+		ok := object.Key("FileExtension")
+		ok.String(*v.FileExtension)
 	}
 
 	if v.Prefix != nil {
@@ -1552,6 +1562,11 @@ func awsAwsjson11_serializeDocumentExtendedS3DestinationUpdate(v *types.Extended
 		ok.String(string(v.CompressionFormat))
 	}
 
+	if v.CustomTimeZone != nil {
+		ok := object.Key("CustomTimeZone")
+		ok.String(*v.CustomTimeZone)
+	}
+
 	if v.DataFormatConversionConfiguration != nil {
 		ok := object.Key("DataFormatConversionConfiguration")
 		if err := awsAwsjson11_serializeDocumentDataFormatConversionConfiguration(v.DataFormatConversionConfiguration, ok); err != nil {
@@ -1576,6 +1591,11 @@ func awsAwsjson11_serializeDocumentExtendedS3DestinationUpdate(v *types.Extended
 	if v.ErrorOutputPrefix != nil {
 		ok := object.Key("ErrorOutputPrefix")
 		ok.String(*v.ErrorOutputPrefix)
+	}
+
+	if v.FileExtension != nil {
+		ok := object.Key("FileExtension")
+		ok.String(*v.FileExtension)
 	}
 
 	if v.Prefix != nil {
@@ -1756,6 +1776,13 @@ func awsAwsjson11_serializeDocumentHttpEndpointDestinationConfiguration(v *types
 		}
 	}
 
+	if v.SecretsManagerConfiguration != nil {
+		ok := object.Key("SecretsManagerConfiguration")
+		if err := awsAwsjson11_serializeDocumentSecretsManagerConfiguration(v.SecretsManagerConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -1818,6 +1845,13 @@ func awsAwsjson11_serializeDocumentHttpEndpointDestinationUpdate(v *types.HttpEn
 	if v.S3Update != nil {
 		ok := object.Key("S3Update")
 		if err := awsAwsjson11_serializeDocumentS3DestinationUpdate(v.S3Update, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.SecretsManagerConfiguration != nil {
+		ok := object.Key("SecretsManagerConfiguration")
+		if err := awsAwsjson11_serializeDocumentSecretsManagerConfiguration(v.SecretsManagerConfiguration, ok); err != nil {
 			return err
 		}
 	}
@@ -2290,6 +2324,13 @@ func awsAwsjson11_serializeDocumentRedshiftDestinationConfiguration(v *types.Red
 		}
 	}
 
+	if v.SecretsManagerConfiguration != nil {
+		ok := object.Key("SecretsManagerConfiguration")
+		if err := awsAwsjson11_serializeDocumentSecretsManagerConfiguration(v.SecretsManagerConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.Username != nil {
 		ok := object.Key("Username")
 		ok.String(*v.Username)
@@ -2360,6 +2401,13 @@ func awsAwsjson11_serializeDocumentRedshiftDestinationUpdate(v *types.RedshiftDe
 	if v.S3Update != nil {
 		ok := object.Key("S3Update")
 		if err := awsAwsjson11_serializeDocumentS3DestinationUpdate(v.S3Update, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.SecretsManagerConfiguration != nil {
+		ok := object.Key("SecretsManagerConfiguration")
+		if err := awsAwsjson11_serializeDocumentSecretsManagerConfiguration(v.SecretsManagerConfiguration, ok); err != nil {
 			return err
 		}
 	}
@@ -2539,6 +2587,28 @@ func awsAwsjson11_serializeDocumentSchemaConfiguration(v *types.SchemaConfigurat
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentSecretsManagerConfiguration(v *types.SecretsManagerConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Enabled != nil {
+		ok := object.Key("Enabled")
+		ok.Boolean(*v.Enabled)
+	}
+
+	if v.RoleARN != nil {
+		ok := object.Key("RoleARN")
+		ok.String(*v.RoleARN)
+	}
+
+	if v.SecretARN != nil {
+		ok := object.Key("SecretARN")
+		ok.String(*v.SecretARN)
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentSecurityGroupIdList(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
@@ -2653,6 +2723,13 @@ func awsAwsjson11_serializeDocumentSnowflakeDestinationConfiguration(v *types.Sn
 		ok.String(*v.Schema)
 	}
 
+	if v.SecretsManagerConfiguration != nil {
+		ok := object.Key("SecretsManagerConfiguration")
+		if err := awsAwsjson11_serializeDocumentSecretsManagerConfiguration(v.SecretsManagerConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.SnowflakeRoleConfiguration != nil {
 		ok := object.Key("SnowflakeRoleConfiguration")
 		if err := awsAwsjson11_serializeDocumentSnowflakeRoleConfiguration(v.SnowflakeRoleConfiguration, ok); err != nil {
@@ -2760,6 +2837,13 @@ func awsAwsjson11_serializeDocumentSnowflakeDestinationUpdate(v *types.Snowflake
 	if v.Schema != nil {
 		ok := object.Key("Schema")
 		ok.String(*v.Schema)
+	}
+
+	if v.SecretsManagerConfiguration != nil {
+		ok := object.Key("SecretsManagerConfiguration")
+		if err := awsAwsjson11_serializeDocumentSecretsManagerConfiguration(v.SecretsManagerConfiguration, ok); err != nil {
+			return err
+		}
 	}
 
 	if v.SnowflakeRoleConfiguration != nil {
@@ -2904,6 +2988,13 @@ func awsAwsjson11_serializeDocumentSplunkDestinationConfiguration(v *types.Splun
 		}
 	}
 
+	if v.SecretsManagerConfiguration != nil {
+		ok := object.Key("SecretsManagerConfiguration")
+		if err := awsAwsjson11_serializeDocumentSecretsManagerConfiguration(v.SecretsManagerConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -2967,6 +3058,13 @@ func awsAwsjson11_serializeDocumentSplunkDestinationUpdate(v *types.SplunkDestin
 	if v.S3Update != nil {
 		ok := object.Key("S3Update")
 		if err := awsAwsjson11_serializeDocumentS3DestinationUpdate(v.S3Update, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.SecretsManagerConfiguration != nil {
+		ok := object.Key("SecretsManagerConfiguration")
+		if err := awsAwsjson11_serializeDocumentSecretsManagerConfiguration(v.SecretsManagerConfiguration, ok); err != nil {
 			return err
 		}
 	}

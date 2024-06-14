@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/redshift/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -18,9 +17,10 @@ import (
 // specify, and the node types you can request. The node types differ by available
 // storage, memory, CPU and price. With the cost involved you might want to obtain
 // a list of cluster options in the specific region and specify values when
-// creating a cluster. For more information about managing clusters, go to Amazon
-// Redshift Clusters (https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-clusters.html)
-// in the Amazon Redshift Cluster Management Guide.
+// creating a cluster. For more information about managing clusters, go to [Amazon Redshift Clusters]in the
+// Amazon Redshift Cluster Management Guide.
+//
+// [Amazon Redshift Clusters]: https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-clusters.html
 func (c *Client) DescribeOrderableClusterOptions(ctx context.Context, params *DescribeOrderableClusterOptionsInput, optFns ...func(*Options)) (*DescribeOrderableClusterOptionsOutput, error) {
 	if params == nil {
 		params = &DescribeOrderableClusterOptionsInput{}
@@ -39,22 +39,27 @@ func (c *Client) DescribeOrderableClusterOptions(ctx context.Context, params *De
 type DescribeOrderableClusterOptionsInput struct {
 
 	// The version filter value. Specify this parameter to show only the available
-	// offerings matching the specified version. Default: All versions. Constraints:
-	// Must be one of the version returned from DescribeClusterVersions .
+	// offerings matching the specified version.
+	//
+	// Default: All versions.
+	//
+	// Constraints: Must be one of the version returned from DescribeClusterVersions.
 	ClusterVersion *string
 
 	// An optional parameter that specifies the starting point to return a set of
-	// response records. When the results of a DescribeOrderableClusterOptions request
-	// exceed the value specified in MaxRecords , Amazon Web Services returns a value
-	// in the Marker field of the response. You can retrieve the next set of response
-	// records by providing the returned marker value in the Marker parameter and
-	// retrying the request.
+	// response records. When the results of a DescribeOrderableClusterOptionsrequest exceed the value specified in
+	// MaxRecords , Amazon Web Services returns a value in the Marker field of the
+	// response. You can retrieve the next set of response records by providing the
+	// returned marker value in the Marker parameter and retrying the request.
 	Marker *string
 
 	// The maximum number of response records to return in each call. If the number of
 	// remaining response records exceeds the specified MaxRecords value, a value is
 	// returned in a marker field of the response. You can retrieve the next set of
-	// records by retrying the command with the returned marker value. Default: 100
+	// records by retrying the command with the returned marker value.
+	//
+	// Default: 100
+	//
 	// Constraints: minimum 20, maximum 100.
 	MaxRecords *int32
 
@@ -107,25 +112,25 @@ func (c *Client) addOperationDescribeOrderableClusterOptionsMiddlewares(stack *m
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -140,10 +145,13 @@ func (c *Client) addOperationDescribeOrderableClusterOptionsMiddlewares(stack *m
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeOrderableClusterOptions(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -175,7 +183,10 @@ type DescribeOrderableClusterOptionsPaginatorOptions struct {
 	// The maximum number of response records to return in each call. If the number of
 	// remaining response records exceeds the specified MaxRecords value, a value is
 	// returned in a marker field of the response. You can retrieve the next set of
-	// records by retrying the command with the returned marker value. Default: 100
+	// records by retrying the command with the returned marker value.
+	//
+	// Default: 100
+	//
 	// Constraints: minimum 20, maximum 100.
 	Limit int32
 

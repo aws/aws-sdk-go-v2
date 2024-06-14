@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -14,17 +13,22 @@ import (
 // Deletes a progress update stream, including all of its tasks, which was
 // previously created as an AWS resource used for access control. This API has the
 // following traits:
+//
 //   - The only parameter needed for DeleteProgressUpdateStream is the stream name
 //     (same as a CreateProgressUpdateStream call).
+//
 //   - The call will return, and a background process will asynchronously delete
 //     the stream and all of its resources (tasks, associated resources, resource
 //     attributes, created artifacts).
+//
 //   - If the stream takes time to be deleted, it might still show up on a
 //     ListProgressUpdateStreams call.
+//
 //   - CreateProgressUpdateStream , ImportMigrationTask , NotifyMigrationTaskState
 //     , and all Associate[*] APIs related to the tasks belonging to the stream will
 //     throw "InvalidInputException" if the stream of the same name is in the process
 //     of being deleted.
+//
 //   - Once the stream and all of its resources are deleted,
 //     CreateProgressUpdateStream for a stream of the same name will succeed, and
 //     that stream will be an entirely new logical resource (without any resources
@@ -87,25 +91,25 @@ func (c *Client) addOperationDeleteProgressUpdateStreamMiddlewares(stack *middle
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -120,13 +124,16 @@ func (c *Client) addOperationDeleteProgressUpdateStreamMiddlewares(stack *middle
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDeleteProgressUpdateStreamValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteProgressUpdateStream(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

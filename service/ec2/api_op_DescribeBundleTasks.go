@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
 	"github.com/aws/smithy-go/middleware"
 	smithytime "github.com/aws/smithy-go/time"
@@ -16,11 +15,16 @@ import (
 	"time"
 )
 
-// Describes the specified bundle tasks or all of your bundle tasks. Completed
-// bundle tasks are listed for only a limited time. If your bundle task is no
-// longer in the list, you can still register an AMI from it. Just use
+// Describes the specified bundle tasks or all of your bundle tasks.
+//
+// Completed bundle tasks are listed for only a limited time. If your bundle task
+// is no longer in the list, you can still register an AMI from it. Just use
 // RegisterImage with the Amazon S3 bucket name and image manifest name you
 // provided to the bundle task.
+//
+// The order of the elements in the response, including those within nested
+// structures, might vary. Applications should not assume the elements appear in a
+// particular order.
 func (c *Client) DescribeBundleTasks(ctx context.Context, params *DescribeBundleTasksInput, optFns ...func(*Options)) (*DescribeBundleTasksOutput, error) {
 	if params == nil {
 		params = &DescribeBundleTasksInput{}
@@ -38,7 +42,9 @@ func (c *Client) DescribeBundleTasks(ctx context.Context, params *DescribeBundle
 
 type DescribeBundleTasksInput struct {
 
-	// The bundle task IDs. Default: Describes all your bundle tasks.
+	// The bundle task IDs.
+	//
+	// Default: Describes all your bundle tasks.
 	BundleIds []string
 
 	// Checks whether you have the required permissions for the action, without
@@ -48,17 +54,27 @@ type DescribeBundleTasksInput struct {
 	DryRun *bool
 
 	// The filters.
+	//
 	//   - bundle-id - The ID of the bundle task.
+	//
 	//   - error-code - If the task failed, the error code returned.
+	//
 	//   - error-message - If the task failed, the error message returned.
+	//
 	//   - instance-id - The ID of the instance.
+	//
 	//   - progress - The level of task completion, as a percentage (for example, 20%).
+	//
 	//   - s3-bucket - The Amazon S3 bucket to store the AMI.
+	//
 	//   - s3-prefix - The beginning of the AMI name.
+	//
 	//   - start-time - The time the task started (for example,
 	//   2013-09-15T17:15:20.000Z).
+	//
 	//   - state - The state of the task ( pending | waiting-for-shutdown | bundling |
 	//   storing | cancelling | complete | failed ).
+	//
 	//   - update-time - The time of the most recent update for the task.
 	Filters []types.Filter
 
@@ -98,25 +114,25 @@ func (c *Client) addOperationDescribeBundleTasksMiddlewares(stack *middleware.St
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -131,10 +147,13 @@ func (c *Client) addOperationDescribeBundleTasksMiddlewares(stack *middleware.St
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeBundleTasks(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -166,7 +185,16 @@ type BundleTaskCompleteWaiterOptions struct {
 	// Set of options to modify how an operation is invoked. These apply to all
 	// operations invoked for this client. Use functional options on operation call to
 	// modify this list for per operation behavior.
+	//
+	// Passing options here is functionally equivalent to passing values to this
+	// config's ClientOptions field that extend the inner client's APIOptions directly.
 	APIOptions []func(*middleware.Stack) error
+
+	// Functional options to be passed to all operations invoked by this client.
+	//
+	// Function values that modify the inner APIOptions are applied after the waiter
+	// config's own APIOptions modifiers.
+	ClientOptions []func(*Options)
 
 	// MinDelay is the minimum amount of time to delay between retries. If unset,
 	// BundleTaskCompleteWaiter will use default minimum delay of 15 seconds. Note that
@@ -183,12 +211,13 @@ type BundleTaskCompleteWaiterOptions struct {
 
 	// Retryable is function that can be used to override the service defined
 	// waiter-behavior based on operation output, or returned error. This function is
-	// used by the waiter to decide if a state is retryable or a terminal state. By
-	// default service-modeled logic will populate this option. This option can thus be
-	// used to define a custom waiter state with fall-back to service-modeled waiter
-	// state mutators.The function returns an error in case of a failure state. In case
-	// of retry state, this function returns a bool value of true and nil error, while
-	// in case of success it returns a bool value of false and nil error.
+	// used by the waiter to decide if a state is retryable or a terminal state.
+	//
+	// By default service-modeled logic will populate this option. This option can
+	// thus be used to define a custom waiter state with fall-back to service-modeled
+	// waiter state mutators.The function returns an error in case of a failure state.
+	// In case of retry state, this function returns a bool value of true and nil
+	// error, while in case of success it returns a bool value of false and nil error.
 	Retryable func(context.Context, *DescribeBundleTasksInput, *DescribeBundleTasksOutput, error) (bool, error)
 }
 
@@ -266,6 +295,9 @@ func (w *BundleTaskCompleteWaiter) WaitForOutput(ctx context.Context, params *De
 
 		out, err := w.client.DescribeBundleTasks(ctx, params, func(o *Options) {
 			o.APIOptions = append(o.APIOptions, apiOptions...)
+			for _, opt := range options.ClientOptions {
+				opt(o)
+			}
 		})
 
 		retryable, err := options.Retryable(ctx, params, out, err)

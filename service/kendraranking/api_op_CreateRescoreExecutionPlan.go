@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/kendraranking/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -15,10 +14,12 @@ import (
 // Creates a rescore execution plan. A rescore execution plan is an Amazon Kendra
 // Intelligent Ranking resource used for provisioning the Rescore API. You set the
 // number of capacity units that you require for Amazon Kendra Intelligent Ranking
-// to rescore or re-rank a search service's results. For an example of using the
-// CreateRescoreExecutionPlan API, including using the Python and Java SDKs, see
-// Semantically ranking a search service's results (https://docs.aws.amazon.com/kendra/latest/dg/search-service-rerank.html)
-// .
+// to rescore or re-rank a search service's results.
+//
+// For an example of using the CreateRescoreExecutionPlan API, including using the
+// Python and Java SDKs, see [Semantically ranking a search service's results].
+//
+// [Semantically ranking a search service's results]: https://docs.aws.amazon.com/kendra/latest/dg/search-service-rerank.html
 func (c *Client) CreateRescoreExecutionPlan(ctx context.Context, params *CreateRescoreExecutionPlanInput, optFns ...func(*Options)) (*CreateRescoreExecutionPlanOutput, error) {
 	if params == nil {
 		params = &CreateRescoreExecutionPlanInput{}
@@ -44,9 +45,9 @@ type CreateRescoreExecutionPlanInput struct {
 	// You can set additional capacity units to meet the needs of your rescore
 	// execution plan. You are given a single capacity unit by default. If you want to
 	// use the default capacity, you don't set additional capacity units. For more
-	// information on the default capacity and additional capacity units, see
-	// Adjusting capacity (https://docs.aws.amazon.com/kendra/latest/dg/adjusting-capacity.html)
-	// .
+	// information on the default capacity and additional capacity units, see [Adjusting capacity].
+	//
+	// [Adjusting capacity]: https://docs.aws.amazon.com/kendra/latest/dg/adjusting-capacity.html
 	CapacityUnits *types.CapacityUnitsConfiguration
 
 	// A token that you provide to identify the request to create a rescore execution
@@ -106,25 +107,25 @@ func (c *Client) addOperationCreateRescoreExecutionPlanMiddlewares(stack *middle
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -139,6 +140,9 @@ func (c *Client) addOperationCreateRescoreExecutionPlanMiddlewares(stack *middle
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opCreateRescoreExecutionPlanMiddleware(stack, options); err != nil {
 		return err
 	}
@@ -148,7 +152,7 @@ func (c *Client) addOperationCreateRescoreExecutionPlanMiddlewares(stack *middle
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateRescoreExecutionPlan(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

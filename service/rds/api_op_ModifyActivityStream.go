@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/rds/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -16,10 +15,12 @@ import (
 // (default) or unlocked. A locked policy is read-only, whereas an unlocked policy
 // is read/write. If your activity stream is started and locked, you can unlock it,
 // customize your audit policy, and then lock your activity stream. Restarting the
-// activity stream isn't required. For more information, see Modifying a database
-// activity stream (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/DBActivityStreams.Modifying.html)
-// in the Amazon RDS User Guide. This operation is supported for RDS for Oracle and
-// Microsoft SQL Server.
+// activity stream isn't required. For more information, see [Modifying a database activity stream]in the Amazon RDS
+// User Guide.
+//
+// This operation is supported for RDS for Oracle and Microsoft SQL Server.
+//
+// [Modifying a database activity stream]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/DBActivityStreams.Modifying.html
 func (c *Client) ModifyActivityStream(ctx context.Context, params *ModifyActivityStreamInput, optFns ...func(*Options)) (*ModifyActivityStreamOutput, error) {
 	if params == nil {
 		params = &ModifyActivityStreamInput{}
@@ -43,7 +44,7 @@ type ModifyActivityStreamInput struct {
 	AuditPolicyState types.AuditPolicyState
 
 	// The Amazon Resource Name (ARN) of the RDS for Oracle or Microsoft SQL Server DB
-	// instance. For example, arn:aws:rds:us-east-1:12345667890:instance:my-orcl-db .
+	// instance. For example, arn:aws:rds:us-east-1:12345667890:db:my-orcl-db .
 	ResourceArn *string
 
 	noSmithyDocumentSerde
@@ -101,25 +102,25 @@ func (c *Client) addOperationModifyActivityStreamMiddlewares(stack *middleware.S
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -134,10 +135,13 @@ func (c *Client) addOperationModifyActivityStreamMiddlewares(stack *middleware.S
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opModifyActivityStream(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

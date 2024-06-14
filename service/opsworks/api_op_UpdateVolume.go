@@ -6,18 +6,18 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates an Amazon EBS volume's name or mount point. For more information, see
-// Resource Management (https://docs.aws.amazon.com/opsworks/latest/userguide/resources.html)
-// . Required Permissions: To use this action, an IAM user must have a Manage
+// Updates an Amazon EBS volume's name or mount point. For more information, see [Resource Management].
+//
+// Required Permissions: To use this action, an IAM user must have a Manage
 // permissions level for the stack, or an attached policy that explicitly grants
-// permissions. For more information on user permissions, see Managing User
-// Permissions (https://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html)
-// .
+// permissions. For more information on user permissions, see [Managing User Permissions].
+//
+// [Resource Management]: https://docs.aws.amazon.com/opsworks/latest/userguide/resources.html
+// [Managing User Permissions]: https://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html
 func (c *Client) UpdateVolume(ctx context.Context, params *UpdateVolumeInput, optFns ...func(*Options)) (*UpdateVolumeOutput, error) {
 	if params == nil {
 		params = &UpdateVolumeInput{}
@@ -43,7 +43,7 @@ type UpdateVolumeInput struct {
 	// The new mount point.
 	MountPoint *string
 
-	// The new name.
+	// The new name. Volume names can be a maximum of 128 characters.
 	Name *string
 
 	noSmithyDocumentSerde
@@ -78,25 +78,25 @@ func (c *Client) addOperationUpdateVolumeMiddlewares(stack *middleware.Stack, op
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -111,13 +111,16 @@ func (c *Client) addOperationUpdateVolumeMiddlewares(stack *middleware.Stack, op
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpUpdateVolumeValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateVolume(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

@@ -6,19 +6,22 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/cloudfront/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates a real-time log configuration. When you update a real-time log
-// configuration, all the parameters are updated with the values provided in the
-// request. You cannot update some parameters independent of others. To update a
-// real-time log configuration:
+// Updates a real-time log configuration.
+//
+// When you update a real-time log configuration, all the parameters are updated
+// with the values provided in the request. You cannot update some parameters
+// independent of others. To update a real-time log configuration:
+//
 //   - Call GetRealtimeLogConfig to get the current real-time log configuration.
+//
 //   - Locally modify the parameters in the real-time log configuration that you
 //     want to update.
+//
 //   - Call this API ( UpdateRealtimeLogConfig ) by providing the entire real-time
 //     log configuration, including the parameters that you modified and those that you
 //     didn't.
@@ -48,9 +51,12 @@ type UpdateRealtimeLogConfigInput struct {
 	// real-time log data.
 	EndPoints []types.EndPoint
 
-	// A list of fields to include in each real-time log record. For more information
-	// about fields, see Real-time log configuration fields (https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/real-time-logs.html#understand-real-time-log-config-fields)
-	// in the Amazon CloudFront Developer Guide.
+	// A list of fields to include in each real-time log record.
+	//
+	// For more information about fields, see [Real-time log configuration fields] in the Amazon CloudFront Developer
+	// Guide.
+	//
+	// [Real-time log configuration fields]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/real-time-logs.html#understand-real-time-log-config-fields
 	Fields []string
 
 	// The name for this real-time log configuration.
@@ -97,25 +103,25 @@ func (c *Client) addOperationUpdateRealtimeLogConfigMiddlewares(stack *middlewar
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -130,13 +136,16 @@ func (c *Client) addOperationUpdateRealtimeLogConfigMiddlewares(stack *middlewar
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpUpdateRealtimeLogConfigValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateRealtimeLogConfig(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

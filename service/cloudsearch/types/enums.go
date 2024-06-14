@@ -13,8 +13,9 @@ const (
 )
 
 // Values returns all known values for AlgorithmicStemming. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (AlgorithmicStemming) Values() []AlgorithmicStemming {
 	return []AlgorithmicStemming{
 		"none",
@@ -66,8 +67,9 @@ const (
 )
 
 // Values returns all known values for AnalysisSchemeLanguage. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (AnalysisSchemeLanguage) Values() []AnalysisSchemeLanguage {
 	return []AnalysisSchemeLanguage{
 		"ar",
@@ -126,8 +128,9 @@ const (
 )
 
 // Values returns all known values for IndexFieldType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (IndexFieldType) Values() []IndexFieldType {
 	return []IndexFieldType{
 		"int",
@@ -155,8 +158,9 @@ const (
 )
 
 // Values returns all known values for OptionState. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (OptionState) Values() []OptionState {
 	return []OptionState{
 		"RequiresIndexDocuments",
@@ -190,8 +194,9 @@ const (
 )
 
 // Values returns all known values for PartitionInstanceType. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (PartitionInstanceType) Values() []PartitionInstanceType {
 	return []PartitionInstanceType{
 		"search.m1.small",
@@ -224,8 +229,9 @@ const (
 )
 
 // Values returns all known values for SuggesterFuzzyMatching. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (SuggesterFuzzyMatching) Values() []SuggesterFuzzyMatching {
 	return []SuggesterFuzzyMatching{
 		"none",
@@ -243,8 +249,9 @@ const (
 )
 
 // Values returns all known values for TLSSecurityPolicy. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (TLSSecurityPolicy) Values() []TLSSecurityPolicy {
 	return []TLSSecurityPolicy{
 		"Policy-Min-TLS-1-0-2019-07",

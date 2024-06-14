@@ -6,17 +6,17 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/managedblockchainquery/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// An array of TransactionEvent objects. Each object contains details about the
-// transaction event. This action will return transaction details for all
-// transactions that are confirmed on the blockchain, even if they have not reached
-// finality (https://docs.aws.amazon.com/managed-blockchain/latest/ambq-dg/key-concepts.html#finality)
-// .
+// Lists all the transaction events for a transaction
+//
+// This action will return transaction details for all transactions that are
+// confirmed on the blockchain, even if they have not reached [finality].
+//
+// [finality]: https://docs.aws.amazon.com/managed-blockchain/latest/ambq-dg/key-concepts.html#finality
 func (c *Client) ListTransactionEvents(ctx context.Context, params *ListTransactionEventsInput, optFns ...func(*Options)) (*ListTransactionEventsOutput, error) {
 	if params == nil {
 		params = &ListTransactionEventsInput{}
@@ -39,21 +39,29 @@ type ListTransactionEventsInput struct {
 	// This member is required.
 	Network types.QueryNetwork
 
-	// The hash of the transaction. It is generated whenever a transaction is verified
-	// and added to the blockchain.
+	// The maximum number of transaction events to list.
 	//
-	// This member is required.
-	TransactionHash *string
-
-	// The maximum number of transaction events to list. Default: 100 Even if
-	// additional results can be retrieved, the request can return less results than
-	// maxResults or an empty array of results. To retrieve the next set of results,
-	// make another request with the returned nextToken value. The value of nextToken
-	// is null when there are no more results to return
+	// Default: 100
+	//
+	// Even if additional results can be retrieved, the request can return less
+	// results than maxResults or an empty array of results.
+	//
+	// To retrieve the next set of results, make another request with the returned
+	// nextToken value. The value of nextToken is null when there are no more results
+	// to return
 	MaxResults *int32
 
 	// The pagination token that indicates the next set of results to retrieve.
 	NextToken *string
+
+	// The hash of a transaction. It is generated when a transaction is created.
+	TransactionHash *string
+
+	// The identifier of a Bitcoin transaction. It is generated when a transaction is
+	// created.
+	//
+	// transactionId is only supported on the Bitcoin networks.
+	TransactionId *string
 
 	noSmithyDocumentSerde
 }
@@ -97,25 +105,25 @@ func (c *Client) addOperationListTransactionEventsMiddlewares(stack *middleware.
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -130,13 +138,16 @@ func (c *Client) addOperationListTransactionEventsMiddlewares(stack *middleware.
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpListTransactionEventsValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListTransactionEvents(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -165,11 +176,16 @@ var _ ListTransactionEventsAPIClient = (*Client)(nil)
 // ListTransactionEventsPaginatorOptions is the paginator options for
 // ListTransactionEvents
 type ListTransactionEventsPaginatorOptions struct {
-	// The maximum number of transaction events to list. Default: 100 Even if
-	// additional results can be retrieved, the request can return less results than
-	// maxResults or an empty array of results. To retrieve the next set of results,
-	// make another request with the returned nextToken value. The value of nextToken
-	// is null when there are no more results to return
+	// The maximum number of transaction events to list.
+	//
+	// Default: 100
+	//
+	// Even if additional results can be retrieved, the request can return less
+	// results than maxResults or an empty array of results.
+	//
+	// To retrieve the next set of results, make another request with the returned
+	// nextToken value. The value of nextToken is null when there are no more results
+	// to return
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

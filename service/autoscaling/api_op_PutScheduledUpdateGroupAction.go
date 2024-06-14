@@ -6,19 +6,23 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
-// Creates or updates a scheduled scaling action for an Auto Scaling group. For
-// more information, see Scheduled scaling (https://docs.aws.amazon.com/autoscaling/ec2/userguide/schedule_time.html)
-// in the Amazon EC2 Auto Scaling User Guide. You can view the scheduled actions
-// for an Auto Scaling group using the DescribeScheduledActions API call. If you
-// are no longer using a scheduled action, you can delete it by calling the
-// DeleteScheduledAction API. If you try to schedule your action in the past,
-// Amazon EC2 Auto Scaling returns an error message.
+// Creates or updates a scheduled scaling action for an Auto Scaling group.
+//
+// For more information, see [Scheduled scaling] in the Amazon EC2 Auto Scaling User Guide.
+//
+// You can view the scheduled actions for an Auto Scaling group using the DescribeScheduledActions API
+// call. If you are no longer using a scheduled action, you can delete it by
+// calling the DeleteScheduledActionAPI.
+//
+// If you try to schedule your action in the past, Amazon EC2 Auto Scaling returns
+// an error message.
+//
+// [Scheduled scaling]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/schedule_time.html
 func (c *Client) PutScheduledUpdateGroupAction(ctx context.Context, params *PutScheduledUpdateGroupActionInput, optFns ...func(*Options)) (*PutScheduledUpdateGroupActionOutput, error) {
 	if params == nil {
 		params = &PutScheduledUpdateGroupActionInput{}
@@ -48,8 +52,10 @@ type PutScheduledUpdateGroupActionInput struct {
 
 	// The desired capacity is the initial capacity of the Auto Scaling group after
 	// the scheduled action runs and the capacity it attempts to maintain. It can scale
-	// beyond this capacity if you add more scaling conditions. You must specify at
-	// least one of the following properties: MaxSize , MinSize , or DesiredCapacity .
+	// beyond this capacity if you add more scaling conditions.
+	//
+	// You must specify at least one of the following properties: MaxSize , MinSize ,
+	// or DesiredCapacity .
 	DesiredCapacity *int32
 
 	// The date and time for the recurring schedule to end, in UTC. For example,
@@ -65,27 +71,35 @@ type PutScheduledUpdateGroupActionInput struct {
 	// The recurring schedule for this action. This format consists of five fields
 	// separated by white spaces: [Minute] [Hour] [Day_of_Month] [Month_of_Year]
 	// [Day_of_Week]. The value must be in quotes (for example, "30 0 1 1,6,12 *" ).
-	// For more information about this format, see Crontab (http://crontab.org) . When
-	// StartTime and EndTime are specified with Recurrence , they form the boundaries
-	// of when the recurring action starts and stops. Cron expressions use Universal
-	// Coordinated Time (UTC) by default.
+	// For more information about this format, see [Crontab].
+	//
+	// When StartTime and EndTime are specified with Recurrence , they form the
+	// boundaries of when the recurring action starts and stops.
+	//
+	// Cron expressions use Universal Coordinated Time (UTC) by default.
+	//
+	// [Crontab]: http://crontab.org
 	Recurrence *string
 
 	// The date and time for this action to start, in YYYY-MM-DDThh:mm:ssZ format in
-	// UTC/GMT only and in quotes (for example, "2021-06-01T00:00:00Z" ). If you
-	// specify Recurrence and StartTime , Amazon EC2 Auto Scaling performs the action
-	// at this time, and then performs the action based on the specified recurrence.
+	// UTC/GMT only and in quotes (for example, "2021-06-01T00:00:00Z" ).
+	//
+	// If you specify Recurrence and StartTime , Amazon EC2 Auto Scaling performs the
+	// action at this time, and then performs the action based on the specified
+	// recurrence.
 	StartTime *time.Time
 
 	// This property is no longer used.
 	Time *time.Time
 
 	// Specifies the time zone for a cron expression. If a time zone is not provided,
-	// UTC is used by default. Valid values are the canonical names of the IANA time
-	// zones, derived from the IANA Time Zone Database (such as Etc/GMT+9 or
-	// Pacific/Tahiti ). For more information, see
-	// https://en.wikipedia.org/wiki/List_of_tz_database_time_zones (https://en.wikipedia.org/wiki/List_of_tz_database_time_zones)
-	// .
+	// UTC is used by default.
+	//
+	// Valid values are the canonical names of the IANA time zones, derived from the
+	// IANA Time Zone Database (such as Etc/GMT+9 or Pacific/Tahiti ). For more
+	// information, see [https://en.wikipedia.org/wiki/List_of_tz_database_time_zones].
+	//
+	// [https://en.wikipedia.org/wiki/List_of_tz_database_time_zones]: https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
 	TimeZone *string
 
 	noSmithyDocumentSerde
@@ -120,25 +134,25 @@ func (c *Client) addOperationPutScheduledUpdateGroupActionMiddlewares(stack *mid
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -153,13 +167,16 @@ func (c *Client) addOperationPutScheduledUpdateGroupActionMiddlewares(stack *mid
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpPutScheduledUpdateGroupActionValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opPutScheduledUpdateGroupAction(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

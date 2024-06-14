@@ -6,26 +6,29 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/lightsail/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates the bundle, or storage plan, of an existing Amazon Lightsail bucket. A
-// bucket bundle specifies the monthly cost, storage space, and data transfer quota
-// for a bucket. You can update a bucket's bundle only one time within a monthly
-// Amazon Web Services billing cycle. To determine if you can update a bucket's
-// bundle, use the GetBuckets (https://docs.aws.amazon.com/lightsail/2016-11-28/api-reference/API_GetBuckets.html)
-// action. The ableToUpdateBundle parameter in the response will indicate whether
-// you can currently update a bucket's bundle. Update a bucket's bundle if it's
-// consistently going over its storage space or data transfer quota, or if a
-// bucket's usage is consistently in the lower range of its storage space or data
-// transfer quota. Due to the unpredictable usage fluctuations that a bucket might
-// experience, we strongly recommend that you update a bucket's bundle only as a
-// long-term strategy, instead of as a short-term, monthly cost-cutting measure.
-// Choose a bucket bundle that will provide the bucket with ample storage space and
-// data transfer for a long time to come.
+// Updates the bundle, or storage plan, of an existing Amazon Lightsail bucket.
+//
+// A bucket bundle specifies the monthly cost, storage space, and data transfer
+// quota for a bucket. You can update a bucket's bundle only one time within a
+// monthly Amazon Web Services billing cycle. To determine if you can update a
+// bucket's bundle, use the [GetBuckets]action. The ableToUpdateBundle parameter in the
+// response will indicate whether you can currently update a bucket's bundle.
+//
+// Update a bucket's bundle if it's consistently going over its storage space or
+// data transfer quota, or if a bucket's usage is consistently in the lower range
+// of its storage space or data transfer quota. Due to the unpredictable usage
+// fluctuations that a bucket might experience, we strongly recommend that you
+// update a bucket's bundle only as a long-term strategy, instead of as a
+// short-term, monthly cost-cutting measure. Choose a bucket bundle that will
+// provide the bucket with ample storage space and data transfer for a long time to
+// come.
+//
+// [GetBuckets]: https://docs.aws.amazon.com/lightsail/2016-11-28/api-reference/API_GetBuckets.html
 func (c *Client) UpdateBucketBundle(ctx context.Context, params *UpdateBucketBundleInput, optFns ...func(*Options)) (*UpdateBucketBundleOutput, error) {
 	if params == nil {
 		params = &UpdateBucketBundleInput{}
@@ -48,8 +51,11 @@ type UpdateBucketBundleInput struct {
 	// This member is required.
 	BucketName *string
 
-	// The ID of the new bundle to apply to the bucket. Use the GetBucketBundles (https://docs.aws.amazon.com/lightsail/2016-11-28/api-reference/API_GetBucketBundles.html)
-	// action to get a list of bundle IDs that you can specify.
+	// The ID of the new bundle to apply to the bucket.
+	//
+	// Use the [GetBucketBundles] action to get a list of bundle IDs that you can specify.
+	//
+	// [GetBucketBundles]: https://docs.aws.amazon.com/lightsail/2016-11-28/api-reference/API_GetBucketBundles.html
 	//
 	// This member is required.
 	BundleId *string
@@ -92,25 +98,25 @@ func (c *Client) addOperationUpdateBucketBundleMiddlewares(stack *middleware.Sta
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -125,13 +131,16 @@ func (c *Client) addOperationUpdateBucketBundleMiddlewares(stack *middleware.Sta
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpUpdateBucketBundleValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateBucketBundle(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

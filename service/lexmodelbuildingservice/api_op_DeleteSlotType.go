@@ -6,22 +6,25 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Deletes all versions of the slot type, including the $LATEST version. To delete
-// a specific version of the slot type, use the DeleteSlotTypeVersion operation.
+// a specific version of the slot type, use the DeleteSlotTypeVersionoperation.
+//
 // You can delete a version of a slot type only if it is not referenced. To delete
 // a slot type that is referred to in one or more intents, you must remove those
-// references first. If you get the ResourceInUseException exception, the
-// exception provides an example reference that shows the intent where the slot
-// type is referenced. To remove the reference to the slot type, either update the
-// intent or delete it. If you get the same exception when you attempt to delete
-// the slot type again, repeat until the slot type has no references and the
-// DeleteSlotType call is successful. This operation requires permission for the
-// lex:DeleteSlotType action.
+// references first.
+//
+// If you get the ResourceInUseException exception, the exception provides an
+// example reference that shows the intent where the slot type is referenced. To
+// remove the reference to the slot type, either update the intent or delete it. If
+// you get the same exception when you attempt to delete the slot type again,
+// repeat until the slot type has no references and the DeleteSlotType call is
+// successful.
+//
+// This operation requires permission for the lex:DeleteSlotType action.
 func (c *Client) DeleteSlotType(ctx context.Context, params *DeleteSlotTypeInput, optFns ...func(*Options)) (*DeleteSlotTypeOutput, error) {
 	if params == nil {
 		params = &DeleteSlotTypeInput{}
@@ -76,25 +79,25 @@ func (c *Client) addOperationDeleteSlotTypeMiddlewares(stack *middleware.Stack, 
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -109,13 +112,16 @@ func (c *Client) addOperationDeleteSlotTypeMiddlewares(stack *middleware.Stack, 
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDeleteSlotTypeValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteSlotType(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/route53resolver/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -40,20 +39,33 @@ type UpdateResolverEndpointInput struct {
 	// The name of the Resolver endpoint that you want to update.
 	Name *string
 
-	// The protocols you want to use for the endpoint. DoH-FIPS is applicable for
-	// inbound endpoints only. For an inbound endpoint you can apply the protocols as
-	// follows:
+	//  The protocols you want to use for the endpoint. DoH-FIPS is applicable for
+	// inbound endpoints only.
+	//
+	// For an inbound endpoint you can apply the protocols as follows:
+	//
 	//   - Do53 and DoH in combination.
+	//
 	//   - Do53 and DoH-FIPS in combination.
+	//
 	//   - Do53 alone.
+	//
 	//   - DoH alone.
+	//
 	//   - DoH-FIPS alone.
+	//
 	//   - None, which is treated as Do53.
+	//
 	// For an outbound endpoint you can apply the protocols as follows:
+	//
 	//   - Do53 and DoH in combination.
+	//
 	//   - Do53 alone.
+	//
 	//   - DoH alone.
+	//
 	//   - None, which is treated as Do53.
+	//
 	// You can't change the protocol of an inbound endpoint directly from only Do53 to
 	// only DoH, or DoH-FIPS. This is to prevent a sudden disruption to incoming
 	// traffic that relies on Do53. To change the protocol from Do53 to DoH, or
@@ -62,11 +74,13 @@ type UpdateResolverEndpointInput struct {
 	// DoH-FIPS, and then remove the Do53.
 	Protocols []types.Protocol
 
-	// Specifies the endpoint type for what type of IP address the endpoint uses to
-	// forward DNS queries. Updating to IPV6 type isn't currently supported.
+	//  Specifies the endpoint type for what type of IP address the endpoint uses to
+	// forward DNS queries.
+	//
+	// Updating to IPV6 type isn't currently supported.
 	ResolverEndpointType types.ResolverEndpointType
 
-	// Specifies the IPv6 address when you update the Resolver endpoint from IPv4 to
+	//  Specifies the IPv6 address when you update the Resolver endpoint from IPv4 to
 	// dual-stack. If you don't specify an IPv6 address, one will be automatically
 	// chosen from your subnet.
 	UpdateIpAddresses []types.UpdateIpAddress
@@ -107,25 +121,25 @@ func (c *Client) addOperationUpdateResolverEndpointMiddlewares(stack *middleware
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -140,13 +154,16 @@ func (c *Client) addOperationUpdateResolverEndpointMiddlewares(stack *middleware
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpUpdateResolverEndpointValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateResolverEndpoint(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

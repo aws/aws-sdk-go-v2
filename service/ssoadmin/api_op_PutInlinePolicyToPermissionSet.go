@@ -6,14 +6,14 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Attaches an inline policy to a permission set. If the permission set is already
-// referenced by one or more account assignments, you will need to call
-// ProvisionPermissionSet after this action to apply the corresponding IAM policy
+// Attaches an inline policy to a permission set.
+//
+// If the permission set is already referenced by one or more account assignments,
+// you will need to call ProvisionPermissionSetafter this action to apply the corresponding IAM policy
 // updates to all assigned accounts.
 func (c *Client) PutInlinePolicyToPermissionSet(ctx context.Context, params *PutInlinePolicyToPermissionSetInput, optFns ...func(*Options)) (*PutInlinePolicyToPermissionSetOutput, error) {
 	if params == nil {
@@ -32,15 +32,14 @@ func (c *Client) PutInlinePolicyToPermissionSet(ctx context.Context, params *Put
 
 type PutInlinePolicyToPermissionSetInput struct {
 
-	// The inline policy to attach to a PermissionSet .
+	// The inline policy to attach to a PermissionSet.
 	//
 	// This member is required.
 	InlinePolicy *string
 
 	// The ARN of the IAM Identity Center instance under which the operation will be
-	// executed. For more information about ARNs, see Amazon Resource Names (ARNs) and
-	// Amazon Web Services Service Namespaces in the Amazon Web Services General
-	// Reference.
+	// executed. For more information about ARNs, see Amazon Resource Names (ARNs) and Amazon Web Services Service Namespacesin the Amazon Web Services
+	// General Reference.
 	//
 	// This member is required.
 	InstanceArn *string
@@ -82,25 +81,25 @@ func (c *Client) addOperationPutInlinePolicyToPermissionSetMiddlewares(stack *mi
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -115,13 +114,16 @@ func (c *Client) addOperationPutInlinePolicyToPermissionSetMiddlewares(stack *mi
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpPutInlinePolicyToPermissionSetValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opPutInlinePolicyToPermissionSet(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

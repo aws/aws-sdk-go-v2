@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/eks/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -41,9 +40,10 @@ type ListAccessPoliciesInput struct {
 	// The nextToken value returned from a previous paginated request, where maxResults
 	// was used and the results exceeded the value of that parameter. Pagination
 	// continues from the end of the previous results that returned the nextToken
-	// value. This value is null when there are no more results to return. This token
-	// should be treated as an opaque identifier that is used only to retrieve the next
-	// items in a list and not for other programmatic purposes.
+	// value. This value is null when there are no more results to return.
+	//
+	// This token should be treated as an opaque identifier that is used only to
+	// retrieve the next items in a list and not for other programmatic purposes.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -52,16 +52,18 @@ type ListAccessPoliciesInput struct {
 type ListAccessPoliciesOutput struct {
 
 	// The list of available access policies. You can't view the contents of an access
-	// policy using the API. To view the contents, see Access policy permissions (https://docs.aws.amazon.com/eks/latest/userguide/access-policies.html#access-policy-permissions)
-	// in the Amazon EKS User Guide.
+	// policy using the API. To view the contents, see [Access policy permissions]in the Amazon EKS User Guide.
+	//
+	// [Access policy permissions]: https://docs.aws.amazon.com/eks/latest/userguide/access-policies.html#access-policy-permissions
 	AccessPolicies []types.AccessPolicy
 
 	// The nextToken value returned from a previous paginated request, where maxResults
 	// was used and the results exceeded the value of that parameter. Pagination
 	// continues from the end of the previous results that returned the nextToken
-	// value. This value is null when there are no more results to return. This token
-	// should be treated as an opaque identifier that is used only to retrieve the next
-	// items in a list and not for other programmatic purposes.
+	// value. This value is null when there are no more results to return.
+	//
+	// This token should be treated as an opaque identifier that is used only to
+	// retrieve the next items in a list and not for other programmatic purposes.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -92,25 +94,25 @@ func (c *Client) addOperationListAccessPoliciesMiddlewares(stack *middleware.Sta
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -125,10 +127,13 @@ func (c *Client) addOperationListAccessPoliciesMiddlewares(stack *middleware.Sta
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListAccessPolicies(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

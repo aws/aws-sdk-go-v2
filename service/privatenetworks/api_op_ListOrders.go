@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/privatenetworks/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -14,9 +13,10 @@ import (
 
 // Lists orders. Add filters to your request to return a more specific list of
 // results. Use filters to match the Amazon Resource Name (ARN) of the network site
-// or the status of the order. If you specify multiple filters, filters are joined
-// with an OR, and the request returns results that match all of the specified
-// filters.
+// or the status of the order.
+//
+// If you specify multiple filters, filters are joined with an OR, and the request
+// returns results that match all of the specified filters.
 func (c *Client) ListOrders(ctx context.Context, params *ListOrdersInput, optFns ...func(*Options)) (*ListOrdersOutput, error) {
 	if params == nil {
 		params = &ListOrdersInput{}
@@ -40,8 +40,11 @@ type ListOrdersInput struct {
 	NetworkArn *string
 
 	// The filters.
+	//
 	//   - NETWORK_SITE - The Amazon Resource Name (ARN) of the network site.
+	//
 	//   - STATUS - The status ( ACKNOWLEDGING | ACKNOWLEDGED | UNACKNOWLEDGED ).
+	//
 	// Filter values are case sensitive. If you specify multiple values for a filter,
 	// the values are joined with an OR , and the request returns all results that
 	// match any of the specified values.
@@ -92,25 +95,25 @@ func (c *Client) addOperationListOrdersMiddlewares(stack *middleware.Stack, opti
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -125,13 +128,16 @@ func (c *Client) addOperationListOrdersMiddlewares(stack *middleware.Stack, opti
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpListOrdersValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListOrders(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

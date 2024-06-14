@@ -6,18 +6,22 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/qbusiness/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates an Amazon Q index. To determine if index creation has completed, check
-// the Status field returned from a call to DescribeIndex . The Status field is
-// set to ACTIVE when the index is ready to use. Once the index is active, you can
-// index your documents using the BatchPutDocument (https://docs.aws.amazon.com/enterpriseq/latest/APIReference/API_BatchPutDocument.html)
-// API or the CreateDataSource (https://docs.aws.amazon.com/enterpriseq/latest/APIReference/API_CreateDataSource.html)
-// API.
+// Creates an Amazon Q Business index.
+//
+// To determine if index creation has completed, check the Status field returned
+// from a call to DescribeIndex . The Status field is set to ACTIVE when the index
+// is ready to use.
+//
+// Once the index is active, you can index your documents using the [BatchPutDocument]
+// BatchPutDocument API or the [CreateDataSource]CreateDataSource API.
+//
+// [BatchPutDocument]: https://docs.aws.amazon.com/amazonq/latest/api-reference/API_BatchPutDocument.html
+// [CreateDataSource]: https://docs.aws.amazon.com/amazonq/latest/api-reference/API_CreateDataSource.html
 func (c *Client) CreateIndex(ctx context.Context, params *CreateIndexInput, optFns ...func(*Options)) (*CreateIndexOutput, error) {
 	if params == nil {
 		params = &CreateIndexInput{}
@@ -35,12 +39,12 @@ func (c *Client) CreateIndex(ctx context.Context, params *CreateIndexInput, optF
 
 type CreateIndexInput struct {
 
-	// The identifier of the Amazon Q application using the index.
+	// The identifier of the Amazon Q Business application using the index.
 	//
 	// This member is required.
 	ApplicationId *string
 
-	// A name for the Amazon Q index.
+	// A name for the Amazon Q Business index.
 	//
 	// This member is required.
 	DisplayName *string
@@ -54,7 +58,7 @@ type CreateIndexInput struct {
 	// index.
 	ClientToken *string
 
-	// A description for the Amazon Q index.
+	// A description for the Amazon Q Business index.
 	Description *string
 
 	// A list of key-value pairs that identify or categorize the index. You can also
@@ -63,15 +67,21 @@ type CreateIndexInput struct {
 	// = + - @.
 	Tags []types.Tag
 
+	// The index type that's suitable for your needs. For more information on what's
+	// included in each type of index or index tier, see [Amazon Q Business tiers].
+	//
+	// [Amazon Q Business tiers]: https://docs.aws.amazon.com/amazonq/latest/qbusiness-ug/what-is.html#tiers
+	Type types.IndexType
+
 	noSmithyDocumentSerde
 }
 
 type CreateIndexOutput struct {
 
-	// The Amazon Resource Name (ARN) of an Amazon Q index.
+	//  The Amazon Resource Name (ARN) of an Amazon Q Business index.
 	IndexArn *string
 
-	// The identifier for the Amazon Q index.
+	// The identifier for the Amazon Q Business index.
 	IndexId *string
 
 	// Metadata pertaining to the operation's result.
@@ -102,25 +112,25 @@ func (c *Client) addOperationCreateIndexMiddlewares(stack *middleware.Stack, opt
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -135,6 +145,9 @@ func (c *Client) addOperationCreateIndexMiddlewares(stack *middleware.Stack, opt
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opCreateIndexMiddleware(stack, options); err != nil {
 		return err
 	}
@@ -144,7 +157,7 @@ func (c *Client) addOperationCreateIndexMiddlewares(stack *middleware.Stack, opt
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateIndex(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

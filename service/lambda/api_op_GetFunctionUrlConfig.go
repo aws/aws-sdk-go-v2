@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/lambda/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -30,10 +29,16 @@ func (c *Client) GetFunctionUrlConfig(ctx context.Context, params *GetFunctionUr
 
 type GetFunctionUrlConfigInput struct {
 
-	// The name of the Lambda function. Name formats
+	// The name or ARN of the Lambda function.
+	//
+	// Name formats
+	//
 	//   - Function name – my-function .
+	//
 	//   - Function ARN – arn:aws:lambda:us-west-2:123456789012:function:my-function .
+	//
 	//   - Partial ARN – 123456789012:function:my-function .
+	//
 	// The length constraint applies only to the full ARN. If you specify only the
 	// function name, it is limited to 64 characters in length.
 	//
@@ -51,14 +56,16 @@ type GetFunctionUrlConfigOutput struct {
 	// The type of authentication that your function URL uses. Set to AWS_IAM if you
 	// want to restrict access to authenticated users only. Set to NONE if you want to
 	// bypass IAM authentication to create a public endpoint. For more information, see
-	// Security and auth model for Lambda function URLs (https://docs.aws.amazon.com/lambda/latest/dg/urls-auth.html)
-	// .
+	// [Security and auth model for Lambda function URLs].
+	//
+	// [Security and auth model for Lambda function URLs]: https://docs.aws.amazon.com/lambda/latest/dg/urls-auth.html
 	//
 	// This member is required.
 	AuthType types.FunctionUrlAuthType
 
-	// When the function URL was created, in ISO-8601 format (https://www.w3.org/TR/NOTE-datetime)
-	// (YYYY-MM-DDThh:mm:ss.sTZD).
+	// When the function URL was created, in [ISO-8601 format] (YYYY-MM-DDThh:mm:ss.sTZD).
+	//
+	// [ISO-8601 format]: https://www.w3.org/TR/NOTE-datetime
 	//
 	// This member is required.
 	CreationTime *string
@@ -73,25 +80,30 @@ type GetFunctionUrlConfigOutput struct {
 	// This member is required.
 	FunctionUrl *string
 
-	// When the function URL configuration was last updated, in ISO-8601 format (https://www.w3.org/TR/NOTE-datetime)
+	// When the function URL configuration was last updated, in [ISO-8601 format]
 	// (YYYY-MM-DDThh:mm:ss.sTZD).
+	//
+	// [ISO-8601 format]: https://www.w3.org/TR/NOTE-datetime
 	//
 	// This member is required.
 	LastModifiedTime *string
 
-	// The cross-origin resource sharing (CORS) (https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS)
-	// settings for your function URL.
+	// The [cross-origin resource sharing (CORS)] settings for your function URL.
+	//
+	// [cross-origin resource sharing (CORS)]: https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS
 	Cors *types.Cors
 
 	// Use one of the following options:
+	//
 	//   - BUFFERED – This is the default option. Lambda invokes your function using
 	//   the Invoke API operation. Invocation results are available when the payload is
 	//   complete. The maximum payload size is 6 MB.
+	//
 	//   - RESPONSE_STREAM – Your function streams payload results as they become
 	//   available. Lambda invokes your function using the InvokeWithResponseStream API
-	//   operation. The maximum response payload size is 20 MB, however, you can
-	//   request a quota increase (https://docs.aws.amazon.com/servicequotas/latest/userguide/request-quota-increase.html)
-	//   .
+	//   operation. The maximum response payload size is 20 MB, however, you can [request a quota increase].
+	//
+	// [request a quota increase]: https://docs.aws.amazon.com/servicequotas/latest/userguide/request-quota-increase.html
 	InvokeMode types.InvokeMode
 
 	// Metadata pertaining to the operation's result.
@@ -122,25 +134,25 @@ func (c *Client) addOperationGetFunctionUrlConfigMiddlewares(stack *middleware.S
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -155,13 +167,16 @@ func (c *Client) addOperationGetFunctionUrlConfigMiddlewares(stack *middleware.S
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpGetFunctionUrlConfigValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetFunctionUrlConfig(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

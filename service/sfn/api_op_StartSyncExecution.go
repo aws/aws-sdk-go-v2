@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/sfn/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -14,12 +13,15 @@ import (
 )
 
 // Starts a Synchronous Express state machine execution. StartSyncExecution is not
-// available for STANDARD workflows. StartSyncExecution will return a 200 OK
-// response, even if your execution fails, because the status code in the API
-// response doesn't reflect function errors. Error codes are reserved for errors
-// that prevent your execution from running, such as permissions errors, limit
-// errors, or issues with your state machine code and configuration. This API
-// action isn't logged in CloudTrail.
+// available for STANDARD workflows.
+//
+// StartSyncExecution will return a 200 OK response, even if your execution fails,
+// because the status code in the API response doesn't reflect function errors.
+// Error codes are reserved for errors that prevent your execution from running,
+// such as permissions errors, limit errors, or issues with your state machine code
+// and configuration.
+//
+// This API action isn't logged in CloudTrail.
 func (c *Client) StartSyncExecution(ctx context.Context, params *StartSyncExecutionInput, optFns ...func(*Options)) (*StartSyncExecutionOutput, error) {
 	if params == nil {
 		params = &StartSyncExecutionInput{}
@@ -43,10 +45,14 @@ type StartSyncExecutionInput struct {
 	StateMachineArn *string
 
 	// The string that contains the JSON input data for the execution, for example:
-	// "input": "{\"first_name\" : \"test\"}" If you don't include any JSON input data,
-	// you still must include the two braces, for example: "input": "{}" Length
-	// constraints apply to the payload size, and are expressed as bytes in UTF-8
-	// encoding.
+	//
+	//     "input": "{\"first_name\" : \"test\"}"
+	//
+	// If you don't include any JSON input data, you still must include the two
+	// braces, for example: "input": "{}"
+	//
+	// Length constraints apply to the payload size, and are expressed as bytes in
+	// UTF-8 encoding.
 	Input *string
 
 	// The name of the execution.
@@ -103,8 +109,10 @@ type StartSyncExecutionOutput struct {
 	Name *string
 
 	// The JSON output data of the execution. Length constraints apply to the payload
-	// size, and are expressed as bytes in UTF-8 encoding. This field is set only if
-	// the execution succeeds. If the execution fails, this field is null.
+	// size, and are expressed as bytes in UTF-8 encoding.
+	//
+	// This field is set only if the execution succeeds. If the execution fails, this
+	// field is null.
 	Output *string
 
 	// Provides details about execution input or output.
@@ -144,25 +152,25 @@ func (c *Client) addOperationStartSyncExecutionMiddlewares(stack *middleware.Sta
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -177,6 +185,9 @@ func (c *Client) addOperationStartSyncExecutionMiddlewares(stack *middleware.Sta
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addEndpointPrefix_opStartSyncExecutionMiddleware(stack); err != nil {
 		return err
 	}
@@ -186,7 +197,7 @@ func (c *Client) addOperationStartSyncExecutionMiddlewares(stack *middleware.Sta
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opStartSyncExecution(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

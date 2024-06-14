@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/route53recoverycluster/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -16,21 +15,31 @@ import (
 // routing control state for each routing control, along with the control panel
 // name and control panel ARN for the routing controls. If you specify a control
 // panel ARN, this call lists the routing controls in the control panel. Otherwise,
-// it lists all the routing controls in the cluster. A routing control is a simple
-// on/off switch in Route 53 ARC that you can use to route traffic to cells. When a
-// routing control state is set to ON, traffic flows to a cell. When the state is
-// set to OFF, traffic does not flow. Before you can create a routing control, you
-// must first create a cluster, and then host the control in a control panel on the
-// cluster. For more information, see Create routing control structures (https://docs.aws.amazon.com/r53recovery/latest/dg/routing-control.create.html)
-// in the Amazon Route 53 Application Recovery Controller Developer Guide. You
+// it lists all the routing controls in the cluster.
+//
+// A routing control is a simple on/off switch in Route 53 ARC that you can use to
+// route traffic to cells. When a routing control state is set to ON, traffic flows
+// to a cell. When the state is set to OFF, traffic does not flow.
+//
+// Before you can create a routing control, you must first create a cluster, and
+// then host the control in a control panel on the cluster. For more information,
+// see [Create routing control structures]in the Amazon Route 53 Application Recovery Controller Developer Guide. You
 // access one of the endpoints for the cluster to get or update the routing control
-// state to redirect traffic for your application. You must specify Regional
-// endpoints when you work with API cluster operations to use this API operation to
-// list routing controls in Route 53 ARC. Learn more about working with routing
-// controls in the following topics in the Amazon Route 53 Application Recovery
-// Controller Developer Guide:
-//   - Viewing and updating routing control states (https://docs.aws.amazon.com/r53recovery/latest/dg/routing-control.update.html)
-//   - Working with routing controls in Route 53 ARC (https://docs.aws.amazon.com/r53recovery/latest/dg/routing-control.html)
+// state to redirect traffic for your application.
+//
+// You must specify Regional endpoints when you work with API cluster operations
+// to use this API operation to list routing controls in Route 53 ARC.
+//
+// Learn more about working with routing controls in the following topics in the
+// Amazon Route 53 Application Recovery Controller Developer Guide:
+//
+// [Viewing and updating routing control states]
+//
+// [Working with routing controls in Route 53 ARC]
+//
+// [Working with routing controls in Route 53 ARC]: https://docs.aws.amazon.com/r53recovery/latest/dg/routing-control.html
+// [Create routing control structures]: https://docs.aws.amazon.com/r53recovery/latest/dg/routing-control.create.html
+// [Viewing and updating routing control states]: https://docs.aws.amazon.com/r53recovery/latest/dg/routing-control.update.html
 func (c *Client) ListRoutingControls(ctx context.Context, params *ListRoutingControlsInput, optFns ...func(*Options)) (*ListRoutingControlsOutput, error) {
 	if params == nil {
 		params = &ListRoutingControlsInput{}
@@ -102,25 +111,25 @@ func (c *Client) addOperationListRoutingControlsMiddlewares(stack *middleware.St
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -135,10 +144,13 @@ func (c *Client) addOperationListRoutingControlsMiddlewares(stack *middleware.St
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListRoutingControls(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

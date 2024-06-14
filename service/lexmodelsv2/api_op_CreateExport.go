@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/lexmodelsv2/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -15,10 +14,16 @@ import (
 
 // Creates a zip archive containing the contents of a bot or a bot locale. The
 // archive contains a directory structure that contains JSON files that define the
-// bot. You can create an archive that contains the complete definition of a bot,
-// or you can specify that the archive contain only the definition of a single bot
-// locale. For more information about exporting bots, and about the structure of
-// the export archive, see Importing and exporting bots  (https://docs.aws.amazon.com/lexv2/latest/dg/importing-exporting.html)
+// bot.
+//
+// You can create an archive that contains the complete definition of a bot, or
+// you can specify that the archive contain only the definition of a single bot
+// locale.
+//
+// For more information about exporting bots, and about the structure of the
+// export archive, see [Importing and exporting bots]
+//
+// [Importing and exporting bots]: https://docs.aws.amazon.com/lexv2/latest/dg/importing-exporting.html
 func (c *Client) CreateExport(ctx context.Context, params *CreateExportInput, optFns ...func(*Options)) (*CreateExportOutput, error) {
 	if params == nil {
 		params = &CreateExportInput{}
@@ -63,9 +68,10 @@ type CreateExportOutput struct {
 	// An identifier for a specific request to create an export.
 	ExportId *string
 
-	// The status of the export. When the status is Completed , you can use the
-	// DescribeExport (https://docs.aws.amazon.com/lexv2/latest/APIReference/API_DescribeExport.html)
+	// The status of the export. When the status is Completed , you can use the [DescribeExport]
 	// operation to get the pre-signed S3 URL link to your exported bot or bot locale.
+	//
+	// [DescribeExport]: https://docs.aws.amazon.com/lexv2/latest/APIReference/API_DescribeExport.html
 	ExportStatus types.ExportStatus
 
 	// The file format used for the bot or bot locale definition files.
@@ -103,25 +109,25 @@ func (c *Client) addOperationCreateExportMiddlewares(stack *middleware.Stack, op
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -136,13 +142,16 @@ func (c *Client) addOperationCreateExportMiddlewares(stack *middleware.Stack, op
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpCreateExportValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateExport(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

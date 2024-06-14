@@ -6,17 +6,18 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Cancels a Neptune ML model training job. See Model training using the
-// modeltraining command (https://docs.aws.amazon.com/neptune/latest/userguide/machine-learning-api-modeltraining.html)
-// . When invoking this operation in a Neptune cluster that has IAM authentication
+// Cancels a Neptune ML model training job. See [Model training using the modeltraining command]modeltraining .
+//
+// When invoking this operation in a Neptune cluster that has IAM authentication
 // enabled, the IAM user or role making the request must have a policy attached
-// that allows the neptune-db:CancelMLModelTrainingJob (https://docs.aws.amazon.com/neptune/latest/userguide/iam-dp-actions.html#cancelmlmodeltrainingjob)
-// IAM action in that cluster.
+// that allows the [neptune-db:CancelMLModelTrainingJob]IAM action in that cluster.
+//
+// [Model training using the modeltraining command]: https://docs.aws.amazon.com/neptune/latest/userguide/machine-learning-api-modeltraining.html
+// [neptune-db:CancelMLModelTrainingJob]: https://docs.aws.amazon.com/neptune/latest/userguide/iam-dp-actions.html#cancelmlmodeltrainingjob
 func (c *Client) CancelMLModelTrainingJob(ctx context.Context, params *CancelMLModelTrainingJobInput, optFns ...func(*Options)) (*CancelMLModelTrainingJobOutput, error) {
 	if params == nil {
 		params = &CancelMLModelTrainingJobInput{}
@@ -84,25 +85,25 @@ func (c *Client) addOperationCancelMLModelTrainingJobMiddlewares(stack *middlewa
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -117,13 +118,16 @@ func (c *Client) addOperationCancelMLModelTrainingJobMiddlewares(stack *middlewa
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpCancelMLModelTrainingJobValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCancelMLModelTrainingJob(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

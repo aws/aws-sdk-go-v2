@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -15,33 +14,47 @@ import (
 // Creates a Domain . A domain consists of an associated Amazon Elastic File System
 // volume, a list of authorized users, and a variety of security, application,
 // policy, and Amazon Virtual Private Cloud (VPC) configurations. Users within a
-// domain can share notebook files and other artifacts with each other. EFS storage
+// domain can share notebook files and other artifacts with each other.
+//
+// # EFS storage
+//
 // When a domain is created, an EFS volume is created for use by all of the users
 // within the domain. Each user receives a private home directory within the EFS
-// volume for notebooks, Git repositories, and data files. SageMaker uses the
-// Amazon Web Services Key Management Service (Amazon Web Services KMS) to encrypt
-// the EFS volume attached to the domain with an Amazon Web Services managed key by
-// default. For more control, you can specify a customer managed key. For more
-// information, see Protect Data at Rest Using Encryption (https://docs.aws.amazon.com/sagemaker/latest/dg/encryption-at-rest.html)
-// . VPC configuration All traffic between the domain and the Amazon EFS volume is
-// through the specified VPC and subnets. For other traffic, you can specify the
+// volume for notebooks, Git repositories, and data files.
+//
+// SageMaker uses the Amazon Web Services Key Management Service (Amazon Web
+// Services KMS) to encrypt the EFS volume attached to the domain with an Amazon
+// Web Services managed key by default. For more control, you can specify a
+// customer managed key. For more information, see [Protect Data at Rest Using Encryption].
+//
+// # VPC configuration
+//
+// All traffic between the domain and the Amazon EFS volume is through the
+// specified VPC and subnets. For other traffic, you can specify the
 // AppNetworkAccessType parameter. AppNetworkAccessType corresponds to the network
 // access type that you choose when you onboard to the domain. The following
 // options are available:
+//
 //   - PublicInternetOnly - Non-EFS traffic goes through a VPC managed by Amazon
 //     SageMaker, which allows internet access. This is the default value.
+//
 //   - VpcOnly - All traffic is through the specified VPC and subnets. Internet
 //     access is disabled by default. To allow internet access, you must specify a NAT
-//     gateway. When internet access is disabled, you won't be able to run a Amazon
-//     SageMaker Studio notebook or to train or host models unless your VPC has an
-//     interface endpoint to the SageMaker API and runtime or a NAT gateway and your
-//     security groups allow outbound connections.
+//     gateway.
+//
+// When internet access is disabled, you won't be able to run a Amazon SageMaker
+//
+//	Studio notebook or to train or host models unless your VPC has an interface
+//	endpoint to the SageMaker API and runtime or a NAT gateway and your security
+//	groups allow outbound connections.
 //
 // NFS traffic over TCP on port 2049 needs to be allowed in both inbound and
 // outbound rules in order to launch a Amazon SageMaker Studio app successfully.
-// For more information, see Connect Amazon SageMaker Studio Notebooks to
-// Resources in a VPC (https://docs.aws.amazon.com/sagemaker/latest/dg/studio-notebooks-and-internet-access.html)
-// .
+//
+// For more information, see [Connect Amazon SageMaker Studio Notebooks to Resources in a VPC].
+//
+// [Connect Amazon SageMaker Studio Notebooks to Resources in a VPC]: https://docs.aws.amazon.com/sagemaker/latest/dg/studio-notebooks-and-internet-access.html
+// [Protect Data at Rest Using Encryption]: https://docs.aws.amazon.com/sagemaker/latest/dg/encryption-at-rest.html
 func (c *Client) CreateDomain(ctx context.Context, params *CreateDomainInput, optFns ...func(*Options)) (*CreateDomainOutput, error) {
 	if params == nil {
 		params = &CreateDomainInput{}
@@ -65,10 +78,11 @@ type CreateDomainInput struct {
 	AuthMode types.AuthMode
 
 	// The default settings to use to create a user profile when UserSettings isn't
-	// specified in the call to the CreateUserProfile API. SecurityGroups is
-	// aggregated when specified in both calls. For all other settings in UserSettings
-	// , the values specified in CreateUserProfile take precedence over those
-	// specified in CreateDomain .
+	// specified in the call to the CreateUserProfile API.
+	//
+	// SecurityGroups is aggregated when specified in both calls. For all other
+	// settings in UserSettings , the values specified in CreateUserProfile take
+	// precedence over those specified in CreateDomain .
 	//
 	// This member is required.
 	DefaultUserSettings *types.UserSettings
@@ -91,8 +105,10 @@ type CreateDomainInput struct {
 
 	// Specifies the VPC used for non-EFS traffic. The default value is
 	// PublicInternetOnly .
+	//
 	//   - PublicInternetOnly - Non-EFS traffic is through a VPC managed by Amazon
 	//   SageMaker, which allows direct internet access
+	//
 	//   - VpcOnly - All traffic is through the specified VPC and subnets
 	AppNetworkAccessType types.AppNetworkAccessType
 
@@ -115,15 +131,17 @@ type CreateDomainInput struct {
 	// Deprecated: This property is deprecated, use KmsKeyId instead.
 	HomeEfsFileSystemKmsKeyId *string
 
-	// SageMaker uses Amazon Web Services KMS to encrypt the EFS volume attached to
-	// the domain with an Amazon Web Services managed key by default. For more control,
-	// specify a customer managed key.
+	// SageMaker uses Amazon Web Services KMS to encrypt EFS and EBS volumes attached
+	// to the domain with an Amazon Web Services managed key by default. For more
+	// control, specify a customer managed key.
 	KmsKeyId *string
 
 	// Tags to associated with the Domain. Each tag consists of a key and an optional
 	// value. Tag keys must be unique per resource. Tags are searchable using the
-	// Search API. Tags that you specify for the Domain are also added to all Apps that
-	// the Domain launches.
+	// Search API.
+	//
+	// Tags that you specify for the Domain are also added to all Apps that the Domain
+	// launches.
 	Tags []types.Tag
 
 	noSmithyDocumentSerde
@@ -165,25 +183,25 @@ func (c *Client) addOperationCreateDomainMiddlewares(stack *middleware.Stack, op
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -198,13 +216,16 @@ func (c *Client) addOperationCreateDomainMiddlewares(stack *middleware.Stack, op
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpCreateDomainValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateDomain(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

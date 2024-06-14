@@ -69,6 +69,10 @@
                     {
                         "value": "ACCOUNT_TIER",
                         "name": "ACCOUNT_TIER"
+                    },
+                    {
+                        "value": "DEFAULT_PROTECT_CONFIGURATION_ID",
+                        "name": "DEFAULT_PROTECT_CONFIGURATION_ID"
                     }
                 ]
             }
@@ -268,6 +272,96 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.pinpointsmsvoicev2#AssociateProtectConfiguration": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.pinpointsmsvoicev2#AssociateProtectConfigurationRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.pinpointsmsvoicev2#AssociateProtectConfigurationResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Associate a protect configuration with a configuration set. This replaces the\n            configuration sets current protect configuration. A configuration set can\n            only be associated with one protect configuration at a time. A protect configuration can\n            be associated with multiple configuration sets.</p>"
+            }
+        },
+        "com.amazonaws.pinpointsmsvoicev2#AssociateProtectConfigurationRequest": {
+            "type": "structure",
+            "members": {
+                "ProtectConfigurationId": {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#ProtectConfigurationIdOrArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier for the protect configuration.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ConfigurationSetName": {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#ConfigurationSetNameOrArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the ConfigurationSet.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.pinpointsmsvoicev2#AssociateProtectConfigurationResult": {
+            "type": "structure",
+            "members": {
+                "ConfigurationSetArn": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the configuration set.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ConfigurationSetName": {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#ConfigurationSetName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the ConfigurationSet.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ProtectConfigurationArn": {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#ProtectConfigurationArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the protect configuration.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ProtectConfigurationId": {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#ProtectConfigurationId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier for the protect configuration.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.pinpointsmsvoicev2#AttachmentBody": {
             "type": "blob",
             "traits": {
@@ -337,7 +431,7 @@
                 "IamRoleArn": {
                     "target": "com.amazonaws.pinpointsmsvoicev2#IamRoleArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of an Amazon Identity and Access Management (IAM) role\n            that is able to write event data to an Amazon CloudWatch destination.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of an Identity and Access Management role\n            that is able to write event data to an Amazon CloudWatch destination.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -405,6 +499,10 @@
                     {
                         "value": "default-sender-id",
                         "name": "DEFAULT_SENDER_ID"
+                    },
+                    {
+                        "value": "protect-configuration-id",
+                        "name": "PROTECT_CONFIGURATION_ID"
                     }
                 ]
             }
@@ -450,6 +548,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The time when the ConfigurationSet was created, in <a href=\"https://www.epochconverter.com/\">UNIX epoch time</a> format.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "ProtectConfigurationId": {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#ProtectConfigurationIdOrArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier for the protect configuration.</p>"
                     }
                 }
             },
@@ -651,6 +755,22 @@
                     {
                         "value": "VERIFICATION_ALREADY_COMPLETE",
                         "name": "VERIFICATION_ALREADY_COMPLETE"
+                    },
+                    {
+                        "value": "PROTECT_CONFIGURATION_IS_ACCOUNT_DEFAULT",
+                        "name": "PROTECT_CONFIGURATION_IS_ACCOUNT_DEFAULT"
+                    },
+                    {
+                        "value": "PROTECT_CONFIGURATION_ASSOCIATED_WITH_CONFIGURATION_SET",
+                        "name": "PROTECT_CONFIGURATION_ASSOCIATED_WITH_CONFIGURATION_SET"
+                    },
+                    {
+                        "value": "PROTECT_CONFIGURATION_NOT_ASSOCIATED_WITH_CONFIGURATION_SET",
+                        "name": "PROTECT_CONFIGURATION_NOT_ASSOCIATED_WITH_CONFIGURATION_SET"
+                    },
+                    {
+                        "value": "DESTINATION_COUNTRY_BLOCKED_BY_PROTECT_CONFIGURATION",
+                        "name": "DESTINATION_COUNTRY_BLOCKED_BY_PROTECT_CONFIGURATION"
                     }
                 ]
             }
@@ -843,13 +963,13 @@
                 "CloudWatchLogsDestination": {
                     "target": "com.amazonaws.pinpointsmsvoicev2#CloudWatchLogsDestination",
                     "traits": {
-                        "smithy.api#documentation": "<p>An object that contains information about an event destination for logging to Amazon\n            CloudWatch logs.</p>"
+                        "smithy.api#documentation": "<p>An object that contains information about an event destination for logging to Amazon CloudWatch Logs.</p>"
                     }
                 },
                 "KinesisFirehoseDestination": {
                     "target": "com.amazonaws.pinpointsmsvoicev2#KinesisFirehoseDestination",
                     "traits": {
-                        "smithy.api#documentation": "<p>An object that contains information about an event destination for logging to Amazon\n            Kinesis Data Firehose.</p>"
+                        "smithy.api#documentation": "<p>An object that contains information about an event destination for logging to Amazon Kinesis Data Firehose.</p>"
                     }
                 },
                 "SnsDestination": {
@@ -1154,6 +1274,113 @@
                     "target": "smithy.api#Timestamp",
                     "traits": {
                         "smithy.api#documentation": "<p>The time when the pool was created, in <a href=\"https://www.epochconverter.com/\">UNIX epoch time</a> format.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.pinpointsmsvoicev2#CreateProtectConfiguration": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.pinpointsmsvoicev2#CreateProtectConfigurationRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.pinpointsmsvoicev2#CreateProtectConfigurationResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Create a new protect configuration. By default all country rule sets for each capability are set to <code>ALLOW</code>. Update the country rule sets using <code>UpdateProtectConfigurationCountryRuleSet</code>. A protect configurations name is stored as a Tag with the key set to <code>Name</code> and value as the name of the protect configuration.</p>"
+            }
+        },
+        "com.amazonaws.pinpointsmsvoicev2#CreateProtectConfigurationRequest": {
+            "type": "structure",
+            "members": {
+                "ClientToken": {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#ClientToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the\n           request. If you don't specify a client token, a randomly generated token is used for the\n           request to ensure idempotency.</p>",
+                        "smithy.api#idempotencyToken": {}
+                    }
+                },
+                "DeletionProtectionEnabled": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>When set to true deletion protection is enabled. By default this is set to false.\n       </p>"
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#TagList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of key and value pair tags that are associated with the resource.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.pinpointsmsvoicev2#CreateProtectConfigurationResult": {
+            "type": "structure",
+            "members": {
+                "ProtectConfigurationArn": {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#ProtectConfigurationArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the protect configuration.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ProtectConfigurationId": {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#ProtectConfigurationId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier for the protect configuration.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "CreatedTimestamp": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time when the protect configuration was created, in <a href=\"https://www.epochconverter.com/\">UNIX epoch time</a> format.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "AccountDefault": {
+                    "target": "smithy.api#PrimitiveBoolean",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>This is true if the protect configuration is set as your account default protect configuration.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "DeletionProtectionEnabled": {
+                    "target": "smithy.api#PrimitiveBoolean",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>When set to true deletion protection is enabled. By default this is set to false.\n       </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#TagList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of key and value pair tags that are associated with the resource.</p>"
                     }
                 }
             },
@@ -1711,6 +1938,64 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.pinpointsmsvoicev2#DeleteAccountDefaultProtectConfiguration": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.pinpointsmsvoicev2#DeleteAccountDefaultProtectConfigurationRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.pinpointsmsvoicev2#DeleteAccountDefaultProtectConfigurationResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Removes the current account default protect configuration.</p>"
+            }
+        },
+        "com.amazonaws.pinpointsmsvoicev2#DeleteAccountDefaultProtectConfigurationRequest": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.pinpointsmsvoicev2#DeleteAccountDefaultProtectConfigurationResult": {
+            "type": "structure",
+            "members": {
+                "DefaultProtectConfigurationArn": {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#ProtectConfigurationArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the account default protect configuration.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "DefaultProtectConfigurationId": {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#ProtectConfigurationId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the account default protect configuration.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.pinpointsmsvoicev2#DeleteConfigurationSet": {
             "type": "operation",
             "input": {
@@ -2108,6 +2393,53 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.pinpointsmsvoicev2#DeleteMediaMessageSpendLimitOverride": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.pinpointsmsvoicev2#DeleteMediaMessageSpendLimitOverrideRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.pinpointsmsvoicev2#DeleteMediaMessageSpendLimitOverrideResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes an account-level monthly spending limit override for sending multimedia messages (MMS).\n           Deleting a spend limit override will set the <code>EnforcedLimit</code> to equal the\n           <code>MaxLimit</code>, which is controlled by Amazon Web Services. For more\n           information on spend limits (quotas) see <a href=\"https://docs.aws.amazon.com/sms-voice/latest/userguide/quotas.html\">Quotas for Server Migration Service</a>\n           in the <i>Server Migration Service User Guide</i>.</p>"
+            }
+        },
+        "com.amazonaws.pinpointsmsvoicev2#DeleteMediaMessageSpendLimitOverrideRequest": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.pinpointsmsvoicev2#DeleteMediaMessageSpendLimitOverrideResult": {
+            "type": "structure",
+            "members": {
+                "MonthlyLimit": {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#MonthlyLimit",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current monthly limit, in US dollars.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.pinpointsmsvoicev2#DeleteOptOutList": {
             "type": "operation",
             "input": {
@@ -2391,6 +2723,98 @@
                     "target": "smithy.api#Timestamp",
                     "traits": {
                         "smithy.api#documentation": "<p>The time when the pool was created, in <a href=\"https://www.epochconverter.com/\">UNIX epoch time</a> format.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.pinpointsmsvoicev2#DeleteProtectConfiguration": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.pinpointsmsvoicev2#DeleteProtectConfigurationRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.pinpointsmsvoicev2#DeleteProtectConfigurationResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Permanently delete the protect configuration. The protect configuration must have deletion protection disabled and must not be associated as the account default protect configuration or associated with a configuration set.</p>"
+            }
+        },
+        "com.amazonaws.pinpointsmsvoicev2#DeleteProtectConfigurationRequest": {
+            "type": "structure",
+            "members": {
+                "ProtectConfigurationId": {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#ProtectConfigurationIdOrArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier for the protect configuration.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.pinpointsmsvoicev2#DeleteProtectConfigurationResult": {
+            "type": "structure",
+            "members": {
+                "ProtectConfigurationArn": {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#ProtectConfigurationArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the protect configuration.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ProtectConfigurationId": {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#ProtectConfigurationId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier for the protect configuration.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "CreatedTimestamp": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time when the protect configuration was created, in <a href=\"https://www.epochconverter.com/\">UNIX epoch time</a> format.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "AccountDefault": {
+                    "target": "smithy.api#PrimitiveBoolean",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>This is true if the protect configuration is set as your account default protect configuration.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "DeletionProtectionEnabled": {
+                    "target": "smithy.api#PrimitiveBoolean",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>The status of deletion protection for the protect configuration. When set to true deletion protection is enabled. By default this is set to false.\n       </p>",
+                        "smithy.api#required": {}
                     }
                 }
             },
@@ -3571,6 +3995,90 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.pinpointsmsvoicev2#DescribeProtectConfigurations": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.pinpointsmsvoicev2#DescribeProtectConfigurationsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.pinpointsmsvoicev2#DescribeProtectConfigurationsResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Retrieves the protect configurations that match any of filters. If a filter isn’t provided then all protect configurations are returned.</p>",
+                "smithy.api#paginated": {
+                    "items": "ProtectConfigurations"
+                }
+            }
+        },
+        "com.amazonaws.pinpointsmsvoicev2#DescribeProtectConfigurationsRequest": {
+            "type": "structure",
+            "members": {
+                "ProtectConfigurationIds": {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#ProtectConfigurationIdList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of protect configuration identifiers to search for.</p>"
+                    }
+                },
+                "Filters": {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#ProtectConfigurationFilterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of ProtectConfigurationFilter objects to filter the results.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token to be used for the next set of paginated results. You don't need to supply a\n           value for this field in the initial request.</p>"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of results to return per each request.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.pinpointsmsvoicev2#DescribeProtectConfigurationsResult": {
+            "type": "structure",
+            "members": {
+                "ProtectConfigurations": {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#ProtectConfigurationInformationList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of ProtectConfigurationInformation objects that contain the details for the request. </p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token to be used for the next set of paginated results. You don't need to supply a\n           value for this field in the initial request.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.pinpointsmsvoicev2#DescribeRegistrationAttachments": {
             "type": "operation",
             "input": {
@@ -4634,6 +5142,96 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.pinpointsmsvoicev2#DisassociateProtectConfiguration": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.pinpointsmsvoicev2#DisassociateProtectConfigurationRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.pinpointsmsvoicev2#DisassociateProtectConfigurationResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Disassociate a protect configuration from a configuration set.</p>"
+            }
+        },
+        "com.amazonaws.pinpointsmsvoicev2#DisassociateProtectConfigurationRequest": {
+            "type": "structure",
+            "members": {
+                "ProtectConfigurationId": {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#ProtectConfigurationIdOrArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier for the protect configuration.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ConfigurationSetName": {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#ConfigurationSetNameOrArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the ConfigurationSet.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.pinpointsmsvoicev2#DisassociateProtectConfigurationResult": {
+            "type": "structure",
+            "members": {
+                "ConfigurationSetArn": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the configuration set.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ConfigurationSetName": {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#ConfigurationSetName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the ConfigurationSet.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ProtectConfigurationArn": {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#ProtectConfigurationArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the protect configuration.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ProtectConfigurationId": {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#ProtectConfigurationId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier for the protect configuration.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.pinpointsmsvoicev2#DiscardRegistrationVersion": {
             "type": "operation",
             "input": {
@@ -4757,7 +5355,7 @@
                 "KinesisFirehoseDestination": {
                     "target": "com.amazonaws.pinpointsmsvoicev2#KinesisFirehoseDestination",
                     "traits": {
-                        "smithy.api#documentation": "<p>An object that contains information about an event destination for logging to Amazon\n            Kinesis Data Firehose.</p>"
+                        "smithy.api#documentation": "<p>An object that contains information about an event destination for logging to Amazon Kinesis Data Firehose.</p>"
                     }
                 },
                 "SnsDestination": {
@@ -4768,7 +5366,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Contains information about an event destination.</p>\n         <p>Event destinations are associated with configuration sets, which enable you to publish\n            message sending events to CloudWatch, Kinesis Data Firehose,or Amazon SNS.</p>"
+                "smithy.api#documentation": "<p>Contains information about an event destination.</p>\n         <p>Event destinations are associated with configuration sets, which enable you to publish\n            message sending events to CloudWatch, Kinesis Data Firehose, or Amazon SNS.</p>"
             }
         },
         "com.amazonaws.pinpointsmsvoicev2#EventDestinationList": {
@@ -4890,6 +5488,74 @@
                     {
                         "value": "VOICE_TTL_EXPIRED",
                         "name": "VOICE_TTL_EXPIRED"
+                    },
+                    {
+                        "value": "MEDIA_ALL",
+                        "name": "MEDIA_ALL"
+                    },
+                    {
+                        "value": "MEDIA_PENDING",
+                        "name": "MEDIA_PENDING"
+                    },
+                    {
+                        "value": "MEDIA_QUEUED",
+                        "name": "MEDIA_QUEUED"
+                    },
+                    {
+                        "value": "MEDIA_SUCCESSFUL",
+                        "name": "MEDIA_SUCCESSFUL"
+                    },
+                    {
+                        "value": "MEDIA_DELIVERED",
+                        "name": "MEDIA_DELIVERED"
+                    },
+                    {
+                        "value": "MEDIA_INVALID",
+                        "name": "MEDIA_INVALID"
+                    },
+                    {
+                        "value": "MEDIA_INVALID_MESSAGE",
+                        "name": "MEDIA_INVALID_MESSAGE"
+                    },
+                    {
+                        "value": "MEDIA_UNREACHABLE",
+                        "name": "MEDIA_UNREACHABLE"
+                    },
+                    {
+                        "value": "MEDIA_CARRIER_UNREACHABLE",
+                        "name": "MEDIA_CARRIER_UNREACHABLE"
+                    },
+                    {
+                        "value": "MEDIA_BLOCKED",
+                        "name": "MEDIA_BLOCKED"
+                    },
+                    {
+                        "value": "MEDIA_CARRIER_BLOCKED",
+                        "name": "MEDIA_CARRIER_BLOCKED"
+                    },
+                    {
+                        "value": "MEDIA_SPAM",
+                        "name": "MEDIA_SPAM"
+                    },
+                    {
+                        "value": "MEDIA_UNKNOWN",
+                        "name": "MEDIA_UNKNOWN"
+                    },
+                    {
+                        "value": "MEDIA_TTL_EXPIRED",
+                        "name": "MEDIA_TTL_EXPIRED"
+                    },
+                    {
+                        "value": "MEDIA_FILE_INACCESSIBLE",
+                        "name": "MEDIA_FILE_INACCESSIBLE"
+                    },
+                    {
+                        "value": "MEDIA_FILE_TYPE_UNSUPPORTED",
+                        "name": "MEDIA_FILE_TYPE_UNSUPPORTED"
+                    },
+                    {
+                        "value": "MEDIA_FILE_SIZE_EXCEEDED",
+                        "name": "MEDIA_FILE_SIZE_EXCEEDED"
                     }
                 ]
             }
@@ -4902,7 +5568,7 @@
             "traits": {
                 "smithy.api#length": {
                     "min": 1,
-                    "max": 25
+                    "max": 43
                 }
             }
         },
@@ -4970,9 +5636,9 @@
             "traits": {
                 "smithy.api#length": {
                     "min": 1,
-                    "max": 100
+                    "max": 128
                 },
-                "smithy.api#pattern": "^[\\.:A-Za-z0-9_-]+$"
+                "smithy.api#pattern": "^[/\\.:A-Za-z0-9_-]+$"
             }
         },
         "com.amazonaws.pinpointsmsvoicev2#FilterValueList": {
@@ -4985,6 +5651,93 @@
                     "min": 1,
                     "max": 20
                 }
+            }
+        },
+        "com.amazonaws.pinpointsmsvoicev2#GetProtectConfigurationCountryRuleSet": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.pinpointsmsvoicev2#GetProtectConfigurationCountryRuleSetRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.pinpointsmsvoicev2#GetProtectConfigurationCountryRuleSetResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Retrieve the CountryRuleSet for the specified NumberCapability from a protect configuration.</p>"
+            }
+        },
+        "com.amazonaws.pinpointsmsvoicev2#GetProtectConfigurationCountryRuleSetRequest": {
+            "type": "structure",
+            "members": {
+                "ProtectConfigurationId": {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#ProtectConfigurationIdOrArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier for the protect configuration.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "NumberCapability": {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#NumberCapability",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The capability type to return the CountryRuleSet for. Valid values are <code>SMS</code>, <code>VOICE</code>, or <code>MMS</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.pinpointsmsvoicev2#GetProtectConfigurationCountryRuleSetResult": {
+            "type": "structure",
+            "members": {
+                "ProtectConfigurationArn": {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#ProtectConfigurationArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the protect configuration.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ProtectConfigurationId": {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#ProtectConfigurationId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier for the protect configuration.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "NumberCapability": {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#NumberCapability",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The capability type associated with the returned ProtectConfigurationCountryRuleSetInformation objects.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "CountryRuleSet": {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#ProtectConfigurationCountryRuleSet",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A map of ProtectConfigurationCountryRuleSetInformation objects that contain the\n            details for the requested NumberCapability. The Key is the two-letter ISO country code. For a list of supported ISO country codes, see <a href=\"https://docs.aws.amazon.com/sms-voice/latest/userguide/phone-numbers-sms-by-country.html\">Supported countries and regions (SMS channel)</a> in the Amazon Pinpoint SMS user guide.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.pinpointsmsvoicev2#IamRoleArn": {
@@ -5161,7 +5914,7 @@
                 "IamRoleArn": {
                     "target": "com.amazonaws.pinpointsmsvoicev2#IamRoleArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of an Amazon Identity and Access Management (IAM) role that is able to write\n            event data to an Amazon Firehose destination.</p>",
+                        "smithy.api#documentation": "<p>The ARN of an Identity and Access Management role that is able to write\n            event data to an Amazon Kinesis Data Firehose destination.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -5174,7 +5927,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Contains the delivery stream Amazon Resource Name (ARN), and the ARN of the Identity and Access Management (IAM) role associated with an Kinesis Data Firehose event\n            destination.</p>\n         <p>Event destinations, such as Kinesis Data Firehose, are associated with configuration\n            sets, which enable you to publish message sending events.</p>"
+                "smithy.api#documentation": "<p>Contains the delivery stream Amazon Resource Name (ARN), and the ARN of the Identity and Access Management (IAM) role associated with a Kinesis Data Firehose event\n            destination.</p>\n         <p>Event destinations, such as Kinesis Data Firehose, are associated with configuration\n            sets, which enable you to publish message sending events.</p>"
             }
         },
         "com.amazonaws.pinpointsmsvoicev2#LanguageCode": {
@@ -5533,6 +6286,38 @@
                 }
             }
         },
+        "com.amazonaws.pinpointsmsvoicev2#MediaMessageOriginationIdentity": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 256
+                },
+                "smithy.api#pattern": "^[A-Za-z0-9_:/\\+-]+$"
+            }
+        },
+        "com.amazonaws.pinpointsmsvoicev2#MediaUrlList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.pinpointsmsvoicev2#MediaUrlValue"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1
+                }
+            }
+        },
+        "com.amazonaws.pinpointsmsvoicev2#MediaUrlValue": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 2048
+                },
+                "smithy.api#pattern": "^s3://([a-z0-9\\.-]{3,63})/(.+)$"
+            }
+        },
         "com.amazonaws.pinpointsmsvoicev2#MessageType": {
             "type": "string",
             "traits": {
@@ -5601,6 +6386,10 @@
                     {
                         "value": "VOICE",
                         "name": "VOICE"
+                    },
+                    {
+                        "value": "MMS",
+                        "name": "MMS"
                     }
                 ]
             }
@@ -5613,7 +6402,7 @@
             "traits": {
                 "smithy.api#length": {
                     "min": 1,
-                    "max": 2
+                    "max": 3
                 }
             }
         },
@@ -6153,6 +6942,9 @@
                     "target": "com.amazonaws.pinpointsmsvoicev2#AssociateOriginationIdentity"
                 },
                 {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#AssociateProtectConfiguration"
+                },
+                {
                     "target": "com.amazonaws.pinpointsmsvoicev2#CreateConfigurationSet"
                 },
                 {
@@ -6163,6 +6955,9 @@
                 },
                 {
                     "target": "com.amazonaws.pinpointsmsvoicev2#CreatePool"
+                },
+                {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#CreateProtectConfiguration"
                 },
                 {
                     "target": "com.amazonaws.pinpointsmsvoicev2#CreateRegistration"
@@ -6180,6 +6975,9 @@
                     "target": "com.amazonaws.pinpointsmsvoicev2#CreateVerifiedDestinationNumber"
                 },
                 {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#DeleteAccountDefaultProtectConfiguration"
+                },
+                {
                     "target": "com.amazonaws.pinpointsmsvoicev2#DeleteConfigurationSet"
                 },
                 {
@@ -6195,6 +6993,9 @@
                     "target": "com.amazonaws.pinpointsmsvoicev2#DeleteKeyword"
                 },
                 {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#DeleteMediaMessageSpendLimitOverride"
+                },
+                {
                     "target": "com.amazonaws.pinpointsmsvoicev2#DeleteOptedOutNumber"
                 },
                 {
@@ -6202,6 +7003,9 @@
                 },
                 {
                     "target": "com.amazonaws.pinpointsmsvoicev2#DeletePool"
+                },
+                {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#DeleteProtectConfiguration"
                 },
                 {
                     "target": "com.amazonaws.pinpointsmsvoicev2#DeleteRegistration"
@@ -6246,6 +7050,9 @@
                     "target": "com.amazonaws.pinpointsmsvoicev2#DescribePools"
                 },
                 {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#DescribeProtectConfigurations"
+                },
+                {
                     "target": "com.amazonaws.pinpointsmsvoicev2#DescribeRegistrationAttachments"
                 },
                 {
@@ -6279,7 +7086,13 @@
                     "target": "com.amazonaws.pinpointsmsvoicev2#DisassociateOriginationIdentity"
                 },
                 {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#DisassociateProtectConfiguration"
+                },
+                {
                     "target": "com.amazonaws.pinpointsmsvoicev2#DiscardRegistrationVersion"
+                },
+                {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#GetProtectConfigurationCountryRuleSet"
                 },
                 {
                     "target": "com.amazonaws.pinpointsmsvoicev2#ListPoolOriginationIdentities"
@@ -6315,16 +7128,25 @@
                     "target": "com.amazonaws.pinpointsmsvoicev2#SendDestinationNumberVerificationCode"
                 },
                 {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#SendMediaMessage"
+                },
+                {
                     "target": "com.amazonaws.pinpointsmsvoicev2#SendTextMessage"
                 },
                 {
                     "target": "com.amazonaws.pinpointsmsvoicev2#SendVoiceMessage"
                 },
                 {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#SetAccountDefaultProtectConfiguration"
+                },
+                {
                     "target": "com.amazonaws.pinpointsmsvoicev2#SetDefaultMessageType"
                 },
                 {
                     "target": "com.amazonaws.pinpointsmsvoicev2#SetDefaultSenderId"
+                },
+                {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#SetMediaMessageSpendLimitOverride"
                 },
                 {
                     "target": "com.amazonaws.pinpointsmsvoicev2#SetTextMessageSpendLimitOverride"
@@ -6351,6 +7173,12 @@
                     "target": "com.amazonaws.pinpointsmsvoicev2#UpdatePool"
                 },
                 {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#UpdateProtectConfiguration"
+                },
+                {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#UpdateProtectConfigurationCountryRuleSet"
+                },
+                {
                     "target": "com.amazonaws.pinpointsmsvoicev2#UpdateSenderId"
                 },
                 {
@@ -6367,7 +7195,7 @@
                     "name": "sms-voice"
                 },
                 "aws.protocols#awsJson1_0": {},
-                "smithy.api#documentation": "<p>Welcome to the <i>Amazon Pinpoint SMS and Voice, version 2 API Reference</i>.\n            This guide provides information about Amazon Pinpoint SMS and Voice, version 2 API\n            resources, including supported HTTP methods, parameters, and schemas.</p>\n         <p>Amazon Pinpoint is an Amazon Web Services service that you can use to engage with\n            your recipients across multiple messaging channels. The Amazon Pinpoint SMS and\n            Voice, version 2 API provides programmatic access to options that are unique to the SMS\n            and voice channels and supplements the resources provided by the Amazon Pinpoint\n            API.</p>\n         <p>If you're new to Amazon Pinpoint, it's also helpful to review the <a href=\"https://docs.aws.amazon.com/pinpoint/latest/developerguide/welcome.html\">\n                Amazon Pinpoint Developer Guide</a>. The <i>Amazon Pinpoint\n                Developer Guide</i> provides tutorials, code samples, and procedures that\n            demonstrate how to use Amazon Pinpoint features programmatically and how to integrate\n                Amazon Pinpoint functionality into mobile apps and other types of applications.\n            The guide also provides key information, such as Amazon Pinpoint integration with\n            other Amazon Web Services services, and the quotas that apply to use of the\n            service.</p>\n         <p>\n            <b>Regional availability</b>\n         </p>\n         <p>The <i>Amazon Pinpoint SMS and Voice, version 2 API Reference</i> is\n            available in several Amazon Web Services Regions and it provides an endpoint for each of\n            these Regions. For a list of all the Regions and endpoints where the API is currently\n            available, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/rande.html#pinpoint_region\">Amazon Web Services Service Endpoints</a> and <a href=\"https://docs.aws.amazon.com/general/latest/gr/pinpoint.html\">Amazon Pinpoint\n                endpoints and quotas</a> in the Amazon Web Services General Reference. To\n            learn more about Amazon Web Services Regions, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/rande-manage.html\">Managing\n                    Amazon Web Services Regions</a> in the Amazon Web Services General\n            Reference.</p>\n         <p>In each Region, Amazon Web Services maintains multiple Availability Zones. These\n            Availability Zones are physically isolated from each other, but are united by private,\n            low-latency, high-throughput, and highly redundant network connections. These\n            Availability Zones enable us to provide very high levels of availability and redundancy,\n            while also minimizing latency. To learn more about the number of Availability Zones that\n            are available in each Region, see <a href=\"https://aws.amazon.com/about-aws/global-infrastructure/\">Amazon Web Services\n                Global Infrastructure.</a>\n         </p>",
+                "smithy.api#documentation": "<p>Welcome to the <i>Amazon Pinpoint SMS and Voice, version 2 API Reference</i>.\n            This guide provides information about Amazon Pinpoint SMS and Voice, version 2 API\n            resources, including supported HTTP methods, parameters, and schemas.</p>\n         <p>Amazon Pinpoint is an Amazon Web Services service that you can use to engage with\n            your recipients across multiple messaging channels. The Amazon Pinpoint SMS and\n            Voice, version 2 API provides programmatic access to options that are unique to the SMS\n            and voice channels. Amazon Pinpoint SMS and Voice, version 2 resources such as phone numbers, sender IDs, and opt-out lists can be used by the Amazon Pinpoint API.</p>\n         <p>If you're new to Amazon Pinpoint SMS, it's also helpful to review the <a href=\"https://docs.aws.amazon.com/sms-voice/latest/userguide/what-is-service.html\">\n                Amazon Pinpoint SMS User Guide</a>. The <i>Amazon Pinpoint\n                Developer Guide</i> provides tutorials, code samples, and procedures that\n            demonstrate how to use Amazon Pinpoint SMS features programmatically and how to integrate\n                Amazon Pinpoint functionality into mobile apps and other types of applications.\n            The guide also provides key information, such as Amazon Pinpoint integration with\n            other Amazon Web Services services, and the quotas that apply to use of the\n            service.</p>\n         <p>\n            <b>Regional availability</b>\n         </p>\n         <p>The <i>Amazon Pinpoint SMS and Voice, version 2 API Reference</i> is\n            available in several Amazon Web Services Regions and it provides an endpoint for each of\n            these Regions. For a list of all the Regions and endpoints where the API is currently\n            available, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/rande.html#pinpoint_region\">Amazon Web Services Service Endpoints</a> and <a href=\"https://docs.aws.amazon.com/general/latest/gr/pinpoint.html\">Amazon Pinpoint\n                endpoints and quotas</a> in the Amazon Web Services General Reference. To\n            learn more about Amazon Web Services Regions, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/rande-manage.html\">Managing\n                    Amazon Web Services Regions</a> in the Amazon Web Services General\n            Reference.</p>\n         <p>In each Region, Amazon Web Services maintains multiple Availability Zones. These\n            Availability Zones are physically isolated from each other, but are united by private,\n            low-latency, high-throughput, and highly redundant network connections. These\n            Availability Zones enable us to provide very high levels of availability and redundancy,\n            while also minimizing latency. To learn more about the number of Availability Zones that\n            are available in each Region, see <a href=\"https://aws.amazon.com/about-aws/global-infrastructure/\">Amazon Web Services\n                Global Infrastructure.</a>\n         </p>",
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
@@ -7390,6 +8218,197 @@
                     {
                         "value": "DELETING",
                         "name": "DELETING"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.pinpointsmsvoicev2#ProtectConfigurationArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 256
+                },
+                "smithy.api#pattern": "^arn:\\S+$"
+            }
+        },
+        "com.amazonaws.pinpointsmsvoicev2#ProtectConfigurationCountryRuleSet": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.pinpointsmsvoicev2#IsoCountryCode"
+            },
+            "value": {
+                "target": "com.amazonaws.pinpointsmsvoicev2#ProtectConfigurationCountryRuleSetInformation"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 300
+                }
+            }
+        },
+        "com.amazonaws.pinpointsmsvoicev2#ProtectConfigurationCountryRuleSetInformation": {
+            "type": "structure",
+            "members": {
+                "ProtectStatus": {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#ProtectStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The types of protection that can be used.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The types of statuses that can be used.</p>"
+            }
+        },
+        "com.amazonaws.pinpointsmsvoicev2#ProtectConfigurationFilter": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#ProtectConfigurationFilterName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the attribute to filter on.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Values": {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#FilterValueList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of values to filter for.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The filter definition for filtering protect configurations that meet a specified criteria.</p>"
+            }
+        },
+        "com.amazonaws.pinpointsmsvoicev2#ProtectConfigurationFilterList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.pinpointsmsvoicev2#ProtectConfigurationFilter"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "max": 20
+                }
+            }
+        },
+        "com.amazonaws.pinpointsmsvoicev2#ProtectConfigurationFilterName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "account-default",
+                        "name": "ACCOUNT_DEFAULT"
+                    },
+                    {
+                        "value": "deletion-protection-enabled",
+                        "name": "DELETION_PROTECTION_ENABLED"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.pinpointsmsvoicev2#ProtectConfigurationId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 64
+                },
+                "smithy.api#pattern": "^[A-Za-z0-9_-]+$"
+            }
+        },
+        "com.amazonaws.pinpointsmsvoicev2#ProtectConfigurationIdList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.pinpointsmsvoicev2#ProtectConfigurationIdOrArn"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "max": 5
+                }
+            }
+        },
+        "com.amazonaws.pinpointsmsvoicev2#ProtectConfigurationIdOrArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 256
+                },
+                "smithy.api#pattern": "^[A-Za-z0-9_:/-]+$"
+            }
+        },
+        "com.amazonaws.pinpointsmsvoicev2#ProtectConfigurationInformation": {
+            "type": "structure",
+            "members": {
+                "ProtectConfigurationArn": {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#ProtectConfigurationArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the protect configuration.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ProtectConfigurationId": {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#ProtectConfigurationId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier for the protect configuration.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "CreatedTimestamp": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time when the protect configuration was created, in <a href=\"https://www.epochconverter.com/\">UNIX epoch time</a> format.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "AccountDefault": {
+                    "target": "smithy.api#PrimitiveBoolean",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>This is true if the protect configuration is set as your account default protect configuration.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "DeletionProtectionEnabled": {
+                    "target": "smithy.api#PrimitiveBoolean",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>The status of deletion protection for the protect configuration. When set to true deletion protection is enabled. By default this is set to false.\n       </p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Provides information on the specified protect configuration.</p>"
+            }
+        },
+        "com.amazonaws.pinpointsmsvoicev2#ProtectConfigurationInformationList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.pinpointsmsvoicev2#ProtectConfigurationInformation"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 100
+                }
+            }
+        },
+        "com.amazonaws.pinpointsmsvoicev2#ProtectStatus": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "ALLOW",
+                        "name": "ALLOW"
+                    },
+                    {
+                        "value": "BLOCK",
+                        "name": "BLOCK"
                     }
                 ]
             }
@@ -9516,6 +10535,10 @@
                     {
                         "value": "verified-destination-number",
                         "name": "VERIFIED_DESTINATION_NUMBER"
+                    },
+                    {
+                        "value": "protect-configuration",
+                        "name": "PROTECT_CONFIGURATION"
                     }
                 ]
             }
@@ -9725,6 +10748,126 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.pinpointsmsvoicev2#SendMediaMessage": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.pinpointsmsvoicev2#SendMediaMessageRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.pinpointsmsvoicev2#SendMediaMessageResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates a new multimedia message (MMS) and sends it to a recipient's phone number. </p>"
+            }
+        },
+        "com.amazonaws.pinpointsmsvoicev2#SendMediaMessageRequest": {
+            "type": "structure",
+            "members": {
+                "DestinationPhoneNumber": {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#PhoneNumber",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The destination phone number in E.164 format.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "OriginationIdentity": {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#MediaMessageOriginationIdentity",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The origination identity of the message. This can be either the PhoneNumber,\n           PhoneNumberId, PhoneNumberArn, SenderId, SenderIdArn, PoolId, or PoolArn.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "MessageBody": {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#TextMessageBody",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The text body of the message.</p>"
+                    }
+                },
+                "MediaUrls": {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#MediaUrlList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of URLs to each media file to send. </p>\n         <p>The media files have to be stored in a publicly available S3 bucket. Supported media file formats\n           are listed in <a href=\"https://docs.aws.amazon.com/sms-voice/latest/userguide/mms-limitations-character.html\">MMS file types, size and character limits</a>. For more information on creating an S3 bucket and managing\n           objects, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/create-bucket-overview.html\">Creating a bucket</a> and <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/upload-objects.html\">Uploading objects</a> in the S3 user guide.</p>"
+                    }
+                },
+                "ConfigurationSetName": {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#ConfigurationSetNameOrArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the configuration set to use. This can be either the ConfigurationSetName\n           or ConfigurationSetArn.</p>"
+                    }
+                },
+                "MaxPrice": {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#MaxPrice",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum amount that you want to spend, in US dollars, per each MMS message.</p>"
+                    }
+                },
+                "TimeToLive": {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#TimeToLive",
+                    "traits": {
+                        "smithy.api#documentation": "<p>How long the text message is valid for. By default this is 72 hours.</p>"
+                    }
+                },
+                "Context": {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#ContextMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>You can specify custom data in this field. If you do, that data is logged to the event\n           destination.</p>"
+                    }
+                },
+                "DryRun": {
+                    "target": "smithy.api#PrimitiveBoolean",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>When set to true, the message is checked and validated, but isn't sent to the end\n           recipient.</p>"
+                    }
+                },
+                "ProtectConfigurationId": {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#ProtectConfigurationIdOrArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the protect configuration to use.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.pinpointsmsvoicev2#SendMediaMessageResult": {
+            "type": "structure",
+            "members": {
+                "MessageId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier for the message.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.pinpointsmsvoicev2#SendTextMessage": {
             "type": "operation",
             "input": {
@@ -9829,6 +10972,12 @@
                     "traits": {
                         "smithy.api#default": false,
                         "smithy.api#documentation": "<p>When set to true, the message is checked and validated, but isn't sent to the end\n            recipient.</p>"
+                    }
+                },
+                "ProtectConfigurationId": {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#ProtectConfigurationIdOrArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier for the protect configuration.</p>"
                     }
                 }
             },
@@ -9949,6 +11098,12 @@
                     "traits": {
                         "smithy.api#default": false,
                         "smithy.api#documentation": "<p>When set to true, the message is checked and validated, but isn't sent to the end\n            recipient.</p>"
+                    }
+                },
+                "ProtectConfigurationId": {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#ProtectConfigurationIdOrArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier for the protect configuration.</p>"
                     }
                 }
             },
@@ -10201,6 +11356,10 @@
                         "name": "KEYWORDS_PER_POOL"
                     },
                     {
+                        "value": "MONTHLY_SPEND_LIMIT_REACHED_FOR_MEDIA",
+                        "name": "MONTHLY_SPEND_LIMIT_REACHED_FOR_MEDIA"
+                    },
+                    {
                         "value": "MONTHLY_SPEND_LIMIT_REACHED_FOR_TEXT",
                         "name": "MONTHLY_SPEND_LIMIT_REACHED_FOR_TEXT"
                     },
@@ -10259,8 +11418,78 @@
                     {
                         "value": "VERIFICATION_ATTEMPTS_PER_DAY",
                         "name": "VERIFICATION_ATTEMPTS_PER_DAY"
+                    },
+                    {
+                        "value": "PROTECT_CONFIGURATIONS_PER_ACCOUNT",
+                        "name": "PROTECT_CONFIGURATIONS_PER_ACCOUNT"
                     }
                 ]
+            }
+        },
+        "com.amazonaws.pinpointsmsvoicev2#SetAccountDefaultProtectConfiguration": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.pinpointsmsvoicev2#SetAccountDefaultProtectConfigurationRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.pinpointsmsvoicev2#SetAccountDefaultProtectConfigurationResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Set a protect configuration as your account default. You can only have one account\n            default protect configuration at a time. The current account default protect configuration is replaced with the provided protect configuration.</p>"
+            }
+        },
+        "com.amazonaws.pinpointsmsvoicev2#SetAccountDefaultProtectConfigurationRequest": {
+            "type": "structure",
+            "members": {
+                "ProtectConfigurationId": {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#ProtectConfigurationIdOrArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier for the protect configuration.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.pinpointsmsvoicev2#SetAccountDefaultProtectConfigurationResult": {
+            "type": "structure",
+            "members": {
+                "DefaultProtectConfigurationArn": {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#ProtectConfigurationArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the account default protect configuration.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "DefaultProtectConfigurationId": {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#ProtectConfigurationId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the account default protect configuration.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
             }
         },
         "com.amazonaws.pinpointsmsvoicev2#SetDefaultMessageType": {
@@ -10410,6 +11639,61 @@
                     "target": "com.amazonaws.pinpointsmsvoicev2#SenderId",
                     "traits": {
                         "smithy.api#documentation": "<p>The default sender ID to set for the ConfigurationSet.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.pinpointsmsvoicev2#SetMediaMessageSpendLimitOverride": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.pinpointsmsvoicev2#SetMediaMessageSpendLimitOverrideRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.pinpointsmsvoicev2#SetMediaMessageSpendLimitOverrideResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Sets an account level monthly spend limit override for sending MMS messages. The\n           requested spend limit must be less than or equal to the <code>MaxLimit</code>, which is\n           set by Amazon Web Services. </p>"
+            }
+        },
+        "com.amazonaws.pinpointsmsvoicev2#SetMediaMessageSpendLimitOverrideRequest": {
+            "type": "structure",
+            "members": {
+                "MonthlyLimit": {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#MonthlyLimit",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The new monthly limit to enforce on text messages.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.pinpointsmsvoicev2#SetMediaMessageSpendLimitOverrideResult": {
+            "type": "structure",
+            "members": {
+                "MonthlyLimit": {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#MonthlyLimit",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current monthly limit to enforce on sending text messages.</p>"
                     }
                 }
             },
@@ -10608,6 +11892,10 @@
                     {
                         "value": "VOICE_MESSAGE_MONTHLY_SPEND_LIMIT",
                         "name": "VOICE_MESSAGE_MONTHLY_SPEND_LIMIT"
+                    },
+                    {
+                        "value": "MEDIA_MESSAGE_MONTHLY_SPEND_LIMIT",
+                        "name": "MEDIA_MESSAGE_MONTHLY_SPEND_LIMIT"
                     }
                 ]
             }
@@ -11512,6 +12800,195 @@
                 "smithy.api#output": {}
             }
         },
+        "com.amazonaws.pinpointsmsvoicev2#UpdateProtectConfiguration": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.pinpointsmsvoicev2#UpdateProtectConfigurationRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.pinpointsmsvoicev2#UpdateProtectConfigurationResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Update the setting for an existing protect configuration.</p>"
+            }
+        },
+        "com.amazonaws.pinpointsmsvoicev2#UpdateProtectConfigurationCountryRuleSet": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.pinpointsmsvoicev2#UpdateProtectConfigurationCountryRuleSetRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.pinpointsmsvoicev2#UpdateProtectConfigurationCountryRuleSetResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Update a country rule set to <code>ALLOW</code> or <code>BLOCK</code> messages to be sent to the specified destination counties. You can update one or multiple countries at a time. The updates are only applied to the specified NumberCapability type.</p>"
+            }
+        },
+        "com.amazonaws.pinpointsmsvoicev2#UpdateProtectConfigurationCountryRuleSetRequest": {
+            "type": "structure",
+            "members": {
+                "ProtectConfigurationId": {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#ProtectConfigurationIdOrArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier for the protect configuration.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "NumberCapability": {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#NumberCapability",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number capability to apply the CountryRuleSetUpdates updates to.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "CountryRuleSetUpdates": {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#ProtectConfigurationCountryRuleSet",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A map of ProtectConfigurationCountryRuleSetInformation objects that contain the\n           details for the requested NumberCapability. The Key is the two-letter ISO country code. For a list of supported ISO country codes, see <a href=\"https://docs.aws.amazon.com/sms-voice/latest/userguide/phone-numbers-sms-by-country.html\">Supported countries and regions (SMS channel)</a> in the Amazon Pinpoint SMS user guide.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.pinpointsmsvoicev2#UpdateProtectConfigurationCountryRuleSetResult": {
+            "type": "structure",
+            "members": {
+                "ProtectConfigurationArn": {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#ProtectConfigurationArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the protect configuration.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ProtectConfigurationId": {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#ProtectConfigurationId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier for the protect configuration.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "NumberCapability": {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#NumberCapability",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number capability that was updated</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "CountryRuleSet": {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#ProtectConfigurationCountryRuleSet",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of ProtectConfigurationCountryRuleSetInformation containing the rules for the NumberCapability.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.pinpointsmsvoicev2#UpdateProtectConfigurationRequest": {
+            "type": "structure",
+            "members": {
+                "ProtectConfigurationId": {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#ProtectConfigurationIdOrArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier for the protect configuration.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "DeletionProtectionEnabled": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>When set to true deletion protection is enabled. By default this is set to false.\n       </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.pinpointsmsvoicev2#UpdateProtectConfigurationResult": {
+            "type": "structure",
+            "members": {
+                "ProtectConfigurationArn": {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#ProtectConfigurationArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the protect configuration.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ProtectConfigurationId": {
+                    "target": "com.amazonaws.pinpointsmsvoicev2#ProtectConfigurationId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier for the protect configuration.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "CreatedTimestamp": {
+                    "target": "smithy.api#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time when the protect configuration was created, in <a href=\"https://www.epochconverter.com/\">UNIX epoch time</a> format.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "AccountDefault": {
+                    "target": "smithy.api#PrimitiveBoolean",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>This is true if the protect configuration is set as your account default protect configuration.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "DeletionProtectionEnabled": {
+                    "target": "smithy.api#PrimitiveBoolean",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>The status of deletion protection for the protect configuration. When set to true deletion protection is enabled. By default this is set to false.\n       </p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
         "com.amazonaws.pinpointsmsvoicev2#UpdateSenderId": {
             "type": "operation",
             "input": {
@@ -11745,6 +13222,10 @@
                     {
                         "value": "MAXIMUM_SIZE_EXCEEDED",
                         "name": "MAXIMUM_SIZE_EXCEEDED"
+                    },
+                    {
+                        "value": "MEDIA_TYPE_NOT_SUPPORTED",
+                        "name": "MEDIA_TYPE_NOT_SUPPORTED"
                     },
                     {
                         "value": "MISSING_PARAMETER",

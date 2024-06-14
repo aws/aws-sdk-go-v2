@@ -922,38 +922,6 @@ func addOpUpdateKnowledgeBaseValidationMiddleware(stack *middleware.Stack) error
 	return stack.Initialize.Add(&validateOpUpdateKnowledgeBase{}, middleware.After)
 }
 
-func validateAgentAliasRoutingConfiguration(v []types.AgentAliasRoutingConfigurationListItem) error {
-	if v == nil {
-		return nil
-	}
-	invalidParams := smithy.InvalidParamsError{Context: "AgentAliasRoutingConfiguration"}
-	for i := range v {
-		if err := validateAgentAliasRoutingConfigurationListItem(&v[i]); err != nil {
-			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
-		}
-	}
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	} else {
-		return nil
-	}
-}
-
-func validateAgentAliasRoutingConfigurationListItem(v *types.AgentAliasRoutingConfigurationListItem) error {
-	if v == nil {
-		return nil
-	}
-	invalidParams := smithy.InvalidParamsError{Context: "AgentAliasRoutingConfigurationListItem"}
-	if v.AgentVersion == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("AgentVersion"))
-	}
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	} else {
-		return nil
-	}
-}
-
 func validateChunkingConfiguration(v *types.ChunkingConfiguration) error {
 	if v == nil {
 		return nil
@@ -1004,6 +972,62 @@ func validateFixedSizeChunkingConfiguration(v *types.FixedSizeChunkingConfigurat
 	}
 	if v.OverlapPercentage == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("OverlapPercentage"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateFunction(v *types.Function) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "Function"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.Parameters != nil {
+		if err := validateParameterMap(v.Parameters); err != nil {
+			invalidParams.AddNested("Parameters", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateFunctions(v []types.Function) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "Functions"}
+	for i := range v {
+		if err := validateFunction(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateFunctionSchema(v types.FunctionSchema) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "FunctionSchema"}
+	switch uv := v.(type) {
+	case *types.FunctionSchemaMemberFunctions:
+		if err := validateFunctions(uv.Value); err != nil {
+			invalidParams.AddNested("[functions]", err.(smithy.InvalidParamsError))
+		}
+
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1088,6 +1112,61 @@ func validateKnowledgeBaseConfiguration(v *types.KnowledgeBaseConfiguration) err
 	}
 }
 
+func validateMongoDbAtlasConfiguration(v *types.MongoDbAtlasConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "MongoDbAtlasConfiguration"}
+	if v.Endpoint == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Endpoint"))
+	}
+	if v.DatabaseName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DatabaseName"))
+	}
+	if v.CollectionName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CollectionName"))
+	}
+	if v.VectorIndexName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("VectorIndexName"))
+	}
+	if v.CredentialsSecretArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CredentialsSecretArn"))
+	}
+	if v.FieldMapping == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FieldMapping"))
+	} else if v.FieldMapping != nil {
+		if err := validateMongoDbAtlasFieldMapping(v.FieldMapping); err != nil {
+			invalidParams.AddNested("FieldMapping", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateMongoDbAtlasFieldMapping(v *types.MongoDbAtlasFieldMapping) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "MongoDbAtlasFieldMapping"}
+	if v.VectorField == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("VectorField"))
+	}
+	if v.TextField == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TextField"))
+	}
+	if v.MetadataField == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MetadataField"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpenSearchServerlessConfiguration(v *types.OpenSearchServerlessConfiguration) error {
 	if v == nil {
 		return nil
@@ -1126,6 +1205,39 @@ func validateOpenSearchServerlessFieldMapping(v *types.OpenSearchServerlessField
 	}
 	if v.MetadataField == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("MetadataField"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateParameterDetail(v *types.ParameterDetail) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ParameterDetail"}
+	if len(v.Type) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Type"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateParameterMap(v map[string]types.ParameterDetail) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ParameterMap"}
+	for key := range v {
+		value := v[key]
+		if err := validateParameterDetail(&value); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%q]", key), err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1339,6 +1451,11 @@ func validateStorageConfiguration(v *types.StorageConfiguration) error {
 			invalidParams.AddNested("RdsConfiguration", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.MongoDbAtlasConfiguration != nil {
+		if err := validateMongoDbAtlasConfiguration(v.MongoDbAtlasConfiguration); err != nil {
+			invalidParams.AddNested("MongoDbAtlasConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -1416,6 +1533,11 @@ func validateOpCreateAgentActionGroupInput(v *CreateAgentActionGroupInput) error
 	if v.ActionGroupName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ActionGroupName"))
 	}
+	if v.FunctionSchema != nil {
+		if err := validateFunctionSchema(v.FunctionSchema); err != nil {
+			invalidParams.AddNested("FunctionSchema", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -1434,11 +1556,6 @@ func validateOpCreateAgentAliasInput(v *CreateAgentAliasInput) error {
 	if v.AgentAliasName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AgentAliasName"))
 	}
-	if v.RoutingConfiguration != nil {
-		if err := validateAgentAliasRoutingConfiguration(v.RoutingConfiguration); err != nil {
-			invalidParams.AddNested("RoutingConfiguration", err.(smithy.InvalidParamsError))
-		}
-	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -1453,9 +1570,6 @@ func validateOpCreateAgentInput(v *CreateAgentInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "CreateAgentInput"}
 	if v.AgentName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AgentName"))
-	}
-	if v.AgentResourceRoleArn == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("AgentResourceRoleArn"))
 	}
 	if v.PromptOverrideConfiguration != nil {
 		if err := validatePromptOverrideConfiguration(v.PromptOverrideConfiguration); err != nil {
@@ -2014,6 +2128,11 @@ func validateOpUpdateAgentActionGroupInput(v *UpdateAgentActionGroupInput) error
 	if v.ActionGroupName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ActionGroupName"))
 	}
+	if v.FunctionSchema != nil {
+		if err := validateFunctionSchema(v.FunctionSchema); err != nil {
+			invalidParams.AddNested("FunctionSchema", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -2035,11 +2154,6 @@ func validateOpUpdateAgentAliasInput(v *UpdateAgentAliasInput) error {
 	if v.AgentAliasName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AgentAliasName"))
 	}
-	if v.RoutingConfiguration != nil {
-		if err := validateAgentAliasRoutingConfiguration(v.RoutingConfiguration); err != nil {
-			invalidParams.AddNested("RoutingConfiguration", err.(smithy.InvalidParamsError))
-		}
-	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -2057,6 +2171,9 @@ func validateOpUpdateAgentInput(v *UpdateAgentInput) error {
 	}
 	if v.AgentName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AgentName"))
+	}
+	if v.FoundationModel == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FoundationModel"))
 	}
 	if v.AgentResourceRoleArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AgentResourceRoleArn"))

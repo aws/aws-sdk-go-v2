@@ -6,20 +6,20 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/cloudsearch/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Configures an IndexField for the search domain. Used to create new fields and
-// modify existing ones. You must specify the name of the domain you are
-// configuring and an index field configuration. The index field configuration
-// specifies a unique name, the index field type, and the options you want to
-// configure for the field. The options you can specify depend on the
-// IndexFieldType . If the field exists, the new configuration replaces the old
-// one. For more information, see Configuring Index Fields (http://docs.aws.amazon.com/cloudsearch/latest/developerguide/configuring-index-fields.html)
-// in the Amazon CloudSearch Developer Guide.
+// Configures an IndexField for the search domain. Used to create new fields and modify
+// existing ones. You must specify the name of the domain you are configuring and
+// an index field configuration. The index field configuration specifies a unique
+// name, the index field type, and the options you want to configure for the field.
+// The options you can specify depend on the IndexFieldType. If the field exists, the new
+// configuration replaces the old one. For more information, see [Configuring Index Fields]in the Amazon
+// CloudSearch Developer Guide.
+//
+// [Configuring Index Fields]: http://docs.aws.amazon.com/cloudsearch/latest/developerguide/configuring-index-fields.html
 func (c *Client) DefineIndexField(ctx context.Context, params *DefineIndexFieldInput, optFns ...func(*Options)) (*DefineIndexFieldOutput, error) {
 	if params == nil {
 		params = &DefineIndexFieldInput{}
@@ -35,8 +35,8 @@ func (c *Client) DefineIndexField(ctx context.Context, params *DefineIndexFieldI
 	return out, nil
 }
 
-// Container for the parameters to the DefineIndexField operation. Specifies the
-// name of the domain you want to update and the index field configuration.
+// Container for the parameters to the DefineIndexField operation. Specifies the name of the
+// domain you want to update and the index field configuration.
 type DefineIndexFieldInput struct {
 
 	// A string that represents the name of a domain. Domain names are unique across
@@ -55,8 +55,8 @@ type DefineIndexFieldInput struct {
 	noSmithyDocumentSerde
 }
 
-// The result of a DefineIndexField request. Contains the status of the
-// newly-configured index field.
+// The result of a DefineIndexField request. Contains the status of the newly-configured index
+// field.
 type DefineIndexFieldOutput struct {
 
 	// The value of an IndexField and its current status.
@@ -92,25 +92,25 @@ func (c *Client) addOperationDefineIndexFieldMiddlewares(stack *middleware.Stack
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -125,13 +125,16 @@ func (c *Client) addOperationDefineIndexFieldMiddlewares(stack *middleware.Stack
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDefineIndexFieldValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDefineIndexField(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

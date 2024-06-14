@@ -6,23 +6,28 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/eks/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a managed node group for an Amazon EKS cluster. You can only create a
-// node group for your cluster that is equal to the current Kubernetes version for
-// the cluster. All node groups are created with the latest AMI release version for
-// the respective minor Kubernetes version of the cluster, unless you deploy a
-// custom AMI using a launch template. For more information about using launch
-// templates, see Launch template support (https://docs.aws.amazon.com/eks/latest/userguide/launch-templates.html)
-// . An Amazon EKS managed node group is an Amazon EC2 Auto Scaling group and
+// Creates a managed node group for an Amazon EKS cluster.
+//
+// You can only create a node group for your cluster that is equal to the current
+// Kubernetes version for the cluster. All node groups are created with the latest
+// AMI release version for the respective minor Kubernetes version of the cluster,
+// unless you deploy a custom AMI using a launch template. For more information
+// about using launch templates, see [Customizing managed nodes with launch templates].
+//
+// An Amazon EKS managed node group is an Amazon EC2 Auto Scaling group and
 // associated Amazon EC2 instances that are managed by Amazon Web Services for an
-// Amazon EKS cluster. For more information, see Managed node groups (https://docs.aws.amazon.com/eks/latest/userguide/managed-node-groups.html)
-// in the Amazon EKS User Guide. Windows AMI types are only supported for
-// commercial Amazon Web Services Regions that support Windows on Amazon EKS.
+// Amazon EKS cluster. For more information, see [Managed node groups]in the Amazon EKS User Guide.
+//
+// Windows AMI types are only supported for commercial Amazon Web Services Regions
+// that support Windows on Amazon EKS.
+//
+// [Customizing managed nodes with launch templates]: https://docs.aws.amazon.com/eks/latest/userguide/launch-templates.html
+// [Managed node groups]: https://docs.aws.amazon.com/eks/latest/userguide/managed-node-groups.html
 func (c *Client) CreateNodegroup(ctx context.Context, params *CreateNodegroupInput, optFns ...func(*Options)) (*CreateNodegroupOutput, error) {
 	if params == nil {
 		params = &CreateNodegroupInput{}
@@ -50,14 +55,14 @@ type CreateNodegroupInput struct {
 	// Services APIs on your behalf. Nodes receive permissions for these API calls
 	// through an IAM instance profile and associated policies. Before you can launch
 	// nodes and register them into a cluster, you must create an IAM role for those
-	// nodes to use when they are launched. For more information, see Amazon EKS node
-	// IAM role (https://docs.aws.amazon.com/eks/latest/userguide/create-node-role.html)
-	// in the Amazon EKS User Guide . If you specify launchTemplate , then don't
-	// specify IamInstanceProfile (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_IamInstanceProfile.html)
-	// in your launch template, or the node group deployment will fail. For more
-	// information about using launch templates with Amazon EKS, see Launch template
-	// support (https://docs.aws.amazon.com/eks/latest/userguide/launch-templates.html)
-	// in the Amazon EKS User Guide.
+	// nodes to use when they are launched. For more information, see [Amazon EKS node IAM role]in the Amazon
+	// EKS User Guide . If you specify launchTemplate , then don't specify [IamInstanceProfile] in your
+	// launch template, or the node group deployment will fail. For more information
+	// about using launch templates with Amazon EKS, see [Customizing managed nodes with launch templates]in the Amazon EKS User Guide.
+	//
+	// [Customizing managed nodes with launch templates]: https://docs.aws.amazon.com/eks/latest/userguide/launch-templates.html
+	// [IamInstanceProfile]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_IamInstanceProfile.html
+	// [Amazon EKS node IAM role]: https://docs.aws.amazon.com/eks/latest/userguide/create-node-role.html
 	//
 	// This member is required.
 	NodeRole *string
@@ -68,11 +73,12 @@ type CreateNodegroupInput struct {
 	NodegroupName *string
 
 	// The subnets to use for the Auto Scaling group that is created for your node
-	// group. If you specify launchTemplate , then don't specify SubnetId (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateNetworkInterface.html)
-	// in your launch template, or the node group deployment will fail. For more
-	// information about using launch templates with Amazon EKS, see Launch template
-	// support (https://docs.aws.amazon.com/eks/latest/userguide/launch-templates.html)
-	// in the Amazon EKS User Guide.
+	// group. If you specify launchTemplate , then don't specify [SubnetId] in your launch
+	// template, or the node group deployment will fail. For more information about
+	// using launch templates with Amazon EKS, see [Customizing managed nodes with launch templates]in the Amazon EKS User Guide.
+	//
+	// [Customizing managed nodes with launch templates]: https://docs.aws.amazon.com/eks/latest/userguide/launch-templates.html
+	// [SubnetId]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateNetworkInterface.html
 	//
 	// This member is required.
 	Subnets []string
@@ -82,8 +88,9 @@ type CreateNodegroupInput struct {
 	// group deployment will fail. If your launch template uses a Windows custom AMI,
 	// then add eks:kube-proxy-windows to your Windows nodes rolearn in the aws-auth
 	// ConfigMap . For more information about using launch templates with Amazon EKS,
-	// see Launch template support (https://docs.aws.amazon.com/eks/latest/userguide/launch-templates.html)
-	// in the Amazon EKS User Guide.
+	// see [Customizing managed nodes with launch templates]in the Amazon EKS User Guide.
+	//
+	// [Customizing managed nodes with launch templates]: https://docs.aws.amazon.com/eks/latest/userguide/launch-templates.html
 	AmiType types.AMITypes
 
 	// The capacity type for your node group.
@@ -97,8 +104,9 @@ type CreateNodegroupInput struct {
 	// disk size is 20 GiB for Linux and Bottlerocket. The default disk size is 50 GiB
 	// for Windows. If you specify launchTemplate , then don't specify diskSize , or
 	// the node group deployment will fail. For more information about using launch
-	// templates with Amazon EKS, see Launch template support (https://docs.aws.amazon.com/eks/latest/userguide/launch-templates.html)
-	// in the Amazon EKS User Guide.
+	// templates with Amazon EKS, see [Customizing managed nodes with launch templates]in the Amazon EKS User Guide.
+	//
+	// [Customizing managed nodes with launch templates]: https://docs.aws.amazon.com/eks/latest/userguide/launch-templates.html
 	DiskSize *int32
 
 	// Specify the instance types for a node group. If you specify a GPU instance
@@ -110,41 +118,48 @@ type CreateNodegroupInput struct {
 	// don't specify an instance type in a launch template or for instanceTypes , then
 	// t3.medium is used, by default. If you specify Spot for capacityType , then we
 	// recommend specifying multiple values for instanceTypes . For more information,
-	// see Managed node group capacity types (https://docs.aws.amazon.com/eks/latest/userguide/managed-node-groups.html#managed-node-group-capacity-types)
-	// and Launch template support (https://docs.aws.amazon.com/eks/latest/userguide/launch-templates.html)
-	// in the Amazon EKS User Guide.
+	// see [Managed node group capacity types]and [Customizing managed nodes with launch templates] in the Amazon EKS User Guide.
+	//
+	// [Customizing managed nodes with launch templates]: https://docs.aws.amazon.com/eks/latest/userguide/launch-templates.html
+	// [Managed node group capacity types]: https://docs.aws.amazon.com/eks/latest/userguide/managed-node-groups.html#managed-node-group-capacity-types
 	InstanceTypes []string
 
 	// The Kubernetes labels to apply to the nodes in the node group when they are
 	// created.
 	Labels map[string]string
 
-	// An object representing a node group's launch template specification. If
-	// specified, then do not specify instanceTypes , diskSize , or remoteAccess and
-	// make sure that the launch template meets the requirements in
-	// launchTemplateSpecification .
+	// An object representing a node group's launch template specification. When using
+	// this object, don't directly specify instanceTypes , diskSize , or remoteAccess .
+	// Make sure that the launch template meets the requirements in
+	// launchTemplateSpecification . Also refer to [Customizing managed nodes with launch templates] in the Amazon EKS User Guide.
+	//
+	// [Customizing managed nodes with launch templates]: https://docs.aws.amazon.com/eks/latest/userguide/launch-templates.html
 	LaunchTemplate *types.LaunchTemplateSpecification
 
 	// The AMI version of the Amazon EKS optimized AMI to use with your node group. By
 	// default, the latest available AMI version for the node group's current
-	// Kubernetes version is used. For information about Linux versions, see Amazon
-	// EKS optimized Amazon Linux AMI versions (https://docs.aws.amazon.com/eks/latest/userguide/eks-linux-ami-versions.html)
-	// in the Amazon EKS User Guide. Amazon EKS managed node groups support the
-	// November 2022 and later releases of the Windows AMIs. For information about
-	// Windows versions, see Amazon EKS optimized Windows AMI versions (https://docs.aws.amazon.com/eks/latest/userguide/eks-ami-versions-windows.html)
-	// in the Amazon EKS User Guide. If you specify launchTemplate , and your launch
-	// template uses a custom AMI, then don't specify releaseVersion , or the node
-	// group deployment will fail. For more information about using launch templates
-	// with Amazon EKS, see Launch template support (https://docs.aws.amazon.com/eks/latest/userguide/launch-templates.html)
-	// in the Amazon EKS User Guide.
+	// Kubernetes version is used. For information about Linux versions, see [Amazon EKS optimized Amazon Linux AMI versions]in the
+	// Amazon EKS User Guide. Amazon EKS managed node groups support the November 2022
+	// and later releases of the Windows AMIs. For information about Windows versions,
+	// see [Amazon EKS optimized Windows AMI versions]in the Amazon EKS User Guide.
+	//
+	// If you specify launchTemplate , and your launch template uses a custom AMI, then
+	// don't specify releaseVersion , or the node group deployment will fail. For more
+	// information about using launch templates with Amazon EKS, see [Customizing managed nodes with launch templates]in the Amazon EKS
+	// User Guide.
+	//
+	// [Customizing managed nodes with launch templates]: https://docs.aws.amazon.com/eks/latest/userguide/launch-templates.html
+	// [Amazon EKS optimized Amazon Linux AMI versions]: https://docs.aws.amazon.com/eks/latest/userguide/eks-linux-ami-versions.html
+	// [Amazon EKS optimized Windows AMI versions]: https://docs.aws.amazon.com/eks/latest/userguide/eks-ami-versions-windows.html
 	ReleaseVersion *string
 
 	// The remote access configuration to use with your node group. For Linux, the
 	// protocol is SSH. For Windows, the protocol is RDP. If you specify launchTemplate
 	// , then don't specify remoteAccess , or the node group deployment will fail. For
-	// more information about using launch templates with Amazon EKS, see Launch
-	// template support (https://docs.aws.amazon.com/eks/latest/userguide/launch-templates.html)
-	// in the Amazon EKS User Guide.
+	// more information about using launch templates with Amazon EKS, see [Customizing managed nodes with launch templates]in the
+	// Amazon EKS User Guide.
+	//
+	// [Customizing managed nodes with launch templates]: https://docs.aws.amazon.com/eks/latest/userguide/launch-templates.html
 	RemoteAccess *types.RemoteAccessConfig
 
 	// The scaling configuration details for the Auto Scaling group that is created
@@ -157,8 +172,9 @@ type CreateNodegroupInput struct {
 	Tags map[string]string
 
 	// The Kubernetes taints to be applied to the nodes in the node group. For more
-	// information, see Node taints on managed node groups (https://docs.aws.amazon.com/eks/latest/userguide/node-taints-managed-node-groups.html)
-	// .
+	// information, see [Node taints on managed node groups].
+	//
+	// [Node taints on managed node groups]: https://docs.aws.amazon.com/eks/latest/userguide/node-taints-managed-node-groups.html
 	Taints []types.Taint
 
 	// The node group update configuration.
@@ -168,9 +184,10 @@ type CreateNodegroupInput struct {
 	// Kubernetes version of the cluster is used, and this is the only accepted
 	// specified value. If you specify launchTemplate , and your launch template uses a
 	// custom AMI, then don't specify version , or the node group deployment will fail.
-	// For more information about using launch templates with Amazon EKS, see Launch
-	// template support (https://docs.aws.amazon.com/eks/latest/userguide/launch-templates.html)
-	// in the Amazon EKS User Guide.
+	// For more information about using launch templates with Amazon EKS, see [Customizing managed nodes with launch templates]in the
+	// Amazon EKS User Guide.
+	//
+	// [Customizing managed nodes with launch templates]: https://docs.aws.amazon.com/eks/latest/userguide/launch-templates.html
 	Version *string
 
 	noSmithyDocumentSerde
@@ -209,25 +226,25 @@ func (c *Client) addOperationCreateNodegroupMiddlewares(stack *middleware.Stack,
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -242,6 +259,9 @@ func (c *Client) addOperationCreateNodegroupMiddlewares(stack *middleware.Stack,
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opCreateNodegroupMiddleware(stack, options); err != nil {
 		return err
 	}
@@ -251,7 +271,7 @@ func (c *Client) addOperationCreateNodegroupMiddlewares(stack *middleware.Stack,
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateNodegroup(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

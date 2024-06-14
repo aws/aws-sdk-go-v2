@@ -6,28 +6,35 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/directconnect/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a BGP peer on the specified virtual interface. You must create a BGP
-// peer for the corresponding address family (IPv4/IPv6) in order to access Amazon
-// Web Services resources that also use that address family. If logical redundancy
-// is not supported by the connection, interconnect, or LAG, the BGP peer cannot be
-// in the same address family as an existing BGP peer on the virtual interface.
+// Creates a BGP peer on the specified virtual interface.
+//
+// You must create a BGP peer for the corresponding address family (IPv4/IPv6) in
+// order to access Amazon Web Services resources that also use that address family.
+//
+// If logical redundancy is not supported by the connection, interconnect, or LAG,
+// the BGP peer cannot be in the same address family as an existing BGP peer on the
+// virtual interface.
+//
 // When creating a IPv6 BGP peer, omit the Amazon address and customer address.
 // IPv6 addresses are automatically assigned from the Amazon pool of IPv6
-// addresses; you cannot specify custom IPv6 addresses. If you let Amazon Web
-// Services auto-assign IPv4 addresses, a /30 CIDR will be allocated from
-// 169.254.0.0/16. Amazon Web Services does not recommend this option if you intend
-// to use the customer router peer IP address as the source and destination for
-// traffic. Instead you should use RFC 1918 or other addressing, and specify the
-// address yourself. For more information about RFC 1918 see Address Allocation
-// for Private Internets (https://datatracker.ietf.org/doc/html/rfc1918) . For a
-// public virtual interface, the Autonomous System Number (ASN) must be private or
-// already on the allow list for the virtual interface.
+// addresses; you cannot specify custom IPv6 addresses.
+//
+// If you let Amazon Web Services auto-assign IPv4 addresses, a /30 CIDR will be
+// allocated from 169.254.0.0/16. Amazon Web Services does not recommend this
+// option if you intend to use the customer router peer IP address as the source
+// and destination for traffic. Instead you should use RFC 1918 or other
+// addressing, and specify the address yourself. For more information about RFC
+// 1918 see [Address Allocation for Private Internets].
+//
+// For a public virtual interface, the Autonomous System Number (ASN) must be
+// private or already on the allow list for the virtual interface.
+//
+// [Address Allocation for Private Internets]: https://datatracker.ietf.org/doc/html/rfc1918
 func (c *Client) CreateBGPPeer(ctx context.Context, params *CreateBGPPeerInput, optFns ...func(*Options)) (*CreateBGPPeerOutput, error) {
 	if params == nil {
 		params = &CreateBGPPeerInput{}
@@ -87,25 +94,25 @@ func (c *Client) addOperationCreateBGPPeerMiddlewares(stack *middleware.Stack, o
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -120,10 +127,13 @@ func (c *Client) addOperationCreateBGPPeerMiddlewares(stack *middleware.Stack, o
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateBGPPeer(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

@@ -92,34 +92,6 @@ func (e *InternalServerException) ErrorCode() string {
 }
 func (e *InternalServerException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
-// Request processing failed due to some unknown error, exception, or failure.
-type InternalServiceException struct {
-	Message *string
-
-	ErrorCodeOverride *string
-
-	RetryAfterSeconds *int32
-
-	noSmithyDocumentSerde
-}
-
-func (e *InternalServiceException) Error() string {
-	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
-}
-func (e *InternalServiceException) ErrorMessage() string {
-	if e.Message == nil {
-		return ""
-	}
-	return *e.Message
-}
-func (e *InternalServiceException) ErrorCode() string {
-	if e == nil || e.ErrorCodeOverride == nil {
-		return "InternalServiceException"
-	}
-	return *e.ErrorCodeOverride
-}
-func (e *InternalServiceException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
-
 // The resource specified in the request was not found.
 type ResourceNotFoundException struct {
 	Message *string

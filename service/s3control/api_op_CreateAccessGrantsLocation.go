@@ -20,18 +20,26 @@ import (
 // The S3 data location that you would like to register in your S3 Access Grants
 // instance. Your S3 data must be in the same Region as your S3 Access Grants
 // instance. The location can be one of the following:
+//
 //   - The default S3 location s3://
+//
 //   - A bucket - S3://
+//
 //   - A bucket and prefix - S3:///
 //
 // When you register a location, you must include the IAM role that has permission
 // to manage the S3 location that you are registering. Give S3 Access Grants
-// permission to assume this role using a policy (https://docs.aws.amazon.com/AmazonS3/latest/userguide/access-grants-location.html)
-// . S3 Access Grants assumes this role to manage access to the location and to
-// vend temporary credentials to grantees or client applications. Permissions You
-// must have the s3:CreateAccessGrantsLocation permission to use this operation.
+// permission to assume this role [using a policy]. S3 Access Grants assumes this role to manage
+// access to the location and to vend temporary credentials to grantees or client
+// applications.
+//
+// Permissions You must have the s3:CreateAccessGrantsLocation permission to use
+// this operation.
+//
 // Additional Permissions You must also have the following permission for the
 // specified IAM role: iam:PassRole
+//
+// [using a policy]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/access-grants-location.html
 func (c *Client) CreateAccessGrantsLocation(ctx context.Context, params *CreateAccessGrantsLocationInput, optFns ...func(*Options)) (*CreateAccessGrantsLocationOutput, error) {
 	if params == nil {
 		params = &CreateAccessGrantsLocationInput{}
@@ -137,25 +145,25 @@ func (c *Client) addOperationCreateAccessGrantsLocationMiddlewares(stack *middle
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -173,6 +181,9 @@ func (c *Client) addOperationCreateAccessGrantsLocationMiddlewares(stack *middle
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = smithyhttp.AddContentChecksumMiddleware(stack); err != nil {
 		return err
 	}
@@ -188,7 +199,7 @@ func (c *Client) addOperationCreateAccessGrantsLocationMiddlewares(stack *middle
 	if err = addMetadataRetrieverMiddleware(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addCreateAccessGrantsLocationUpdateEndpoint(stack, options); err != nil {

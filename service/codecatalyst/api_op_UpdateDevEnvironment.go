@@ -61,12 +61,16 @@ type UpdateDevEnvironmentInput struct {
 
 	// The amount of time the Dev Environment will run without any activity detected
 	// before stopping, in minutes. Only whole integers are allowed. Dev Environments
-	// consume compute minutes when running. Changing this value will cause a restart
-	// of the Dev Environment if it is running.
+	// consume compute minutes when running.
+	//
+	// Changing this value will cause a restart of the Dev Environment if it is
+	// running.
 	InactivityTimeoutMinutes int32
 
-	// The Amazon EC2 instace type to use for the Dev Environment. Changing this value
-	// will cause a restart of the Dev Environment if it is running.
+	// The Amazon EC2 instace type to use for the Dev Environment.
+	//
+	// Changing this value will cause a restart of the Dev Environment if it is
+	// running.
 	InstanceType types.InstanceType
 
 	noSmithyDocumentSerde
@@ -137,22 +141,22 @@ func (c *Client) addOperationUpdateDevEnvironmentMiddlewares(stack *middleware.S
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -167,13 +171,16 @@ func (c *Client) addOperationUpdateDevEnvironmentMiddlewares(stack *middleware.S
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpUpdateDevEnvironmentValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateDevEnvironment(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

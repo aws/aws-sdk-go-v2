@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -16,8 +15,10 @@ import (
 // Archives an Amazon EBS snapshot. When you archive a snapshot, it is converted
 // to a full snapshot that includes all of the blocks of data that were written to
 // the volume at the time the snapshot was created, and moved from the standard
-// tier to the archive tier. For more information, see Archive Amazon EBS snapshots (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/snapshot-archive.html)
-// in the Amazon Elastic Compute Cloud User Guide.
+// tier to the archive tier. For more information, see [Archive Amazon EBS snapshots]in the Amazon EBS User
+// Guide.
+//
+// [Archive Amazon EBS snapshots]: https://docs.aws.amazon.com/ebs/latest/userguide/snapshot-archive.html
 func (c *Client) ModifySnapshotTier(ctx context.Context, params *ModifySnapshotTierInput, optFns ...func(*Options)) (*ModifySnapshotTierOutput, error) {
 	if params == nil {
 		params = &ModifySnapshotTierInput{}
@@ -88,25 +89,25 @@ func (c *Client) addOperationModifySnapshotTierMiddlewares(stack *middleware.Sta
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -121,13 +122,16 @@ func (c *Client) addOperationModifySnapshotTierMiddlewares(stack *middleware.Sta
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpModifySnapshotTierValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opModifySnapshotTier(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

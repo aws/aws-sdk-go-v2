@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -30,7 +29,7 @@ func (c *Client) DescribeLabelGroup(ctx context.Context, params *DescribeLabelGr
 
 type DescribeLabelGroupInput struct {
 
-	// Returns the name of the label group.
+	//  Returns the name of the label group.
 	//
 	// This member is required.
 	LabelGroupName *string
@@ -40,20 +39,20 @@ type DescribeLabelGroupInput struct {
 
 type DescribeLabelGroupOutput struct {
 
-	// The time at which the label group was created.
+	//  The time at which the label group was created.
 	CreatedAt *time.Time
 
-	// Codes indicating the type of anomaly associated with the labels in the lagbel
+	//  Codes indicating the type of anomaly associated with the labels in the lagbel
 	// group.
 	FaultCodes []string
 
-	// The Amazon Resource Name (ARN) of the label group.
+	//  The Amazon Resource Name (ARN) of the label group.
 	LabelGroupArn *string
 
-	// The name of the label group.
+	//  The name of the label group.
 	LabelGroupName *string
 
-	// The time at which the label group was updated.
+	//  The time at which the label group was updated.
 	UpdatedAt *time.Time
 
 	// Metadata pertaining to the operation's result.
@@ -84,25 +83,25 @@ func (c *Client) addOperationDescribeLabelGroupMiddlewares(stack *middleware.Sta
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -117,13 +116,16 @@ func (c *Client) addOperationDescribeLabelGroupMiddlewares(stack *middleware.Sta
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDescribeLabelGroupValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeLabelGroup(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

@@ -6,16 +6,18 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/costexplorer/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Updates an existing cost anomaly subscription. Specify the fields that you want
-// to update. Omitted fields are unchanged. The JSON below describes the generic
-// construct for each type. See Request Parameters (https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_UpdateAnomalySubscription.html#API_UpdateAnomalySubscription_RequestParameters)
-// for possible values as they apply to AnomalySubscription .
+// to update. Omitted fields are unchanged.
+//
+// The JSON below describes the generic construct for each type. See [Request Parameters] for possible
+// values as they apply to AnomalySubscription .
+//
+// [Request Parameters]: https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_UpdateAnomalySubscription.html#API_UpdateAnomalySubscription_RequestParameters
 func (c *Client) UpdateAnomalySubscription(ctx context.Context, params *UpdateAnomalySubscriptionInput, optFns ...func(*Options)) (*UpdateAnomalySubscriptionOutput, error) {
 	if params == nil {
 		params = &UpdateAnomalySubscriptionInput{}
@@ -50,42 +52,54 @@ type UpdateAnomalySubscriptionInput struct {
 	// The new name of the subscription.
 	SubscriptionName *string
 
-	// (deprecated) The update to the threshold value for receiving notifications.
+	// (deprecated)
+	//
+	// The update to the threshold value for receiving notifications.
+	//
 	// This field has been deprecated. To update a threshold, use ThresholdExpression.
 	// Continued use of Threshold will be treated as shorthand syntax for a
-	// ThresholdExpression. You can specify either Threshold or ThresholdExpression,
-	// but not both.
+	// ThresholdExpression.
+	//
+	// You can specify either Threshold or ThresholdExpression, but not both.
 	//
 	// Deprecated: Threshold has been deprecated in favor of ThresholdExpression
 	Threshold *float64
 
-	// The update to the Expression (https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_Expression.html)
-	// object used to specify the anomalies that you want to generate alerts for. This
-	// supports dimensions and nested expressions. The supported dimensions are
-	// ANOMALY_TOTAL_IMPACT_ABSOLUTE and ANOMALY_TOTAL_IMPACT_PERCENTAGE ,
-	// corresponding to an anomaly’s TotalImpact and TotalImpactPercentage,
-	// respectively (see Impact (https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_Impact.html)
-	// for more details). The supported nested expression types are AND and OR . The
-	// match option GREATER_THAN_OR_EQUAL is required. Values must be numbers between
-	// 0 and 10,000,000,000 in string format. You can specify either Threshold or
-	// ThresholdExpression, but not both. The following are examples of valid
-	// ThresholdExpressions:
+	// The update to the [Expression] object used to specify the anomalies that you want to
+	// generate alerts for. This supports dimensions and nested expressions. The
+	// supported dimensions are ANOMALY_TOTAL_IMPACT_ABSOLUTE and
+	// ANOMALY_TOTAL_IMPACT_PERCENTAGE , corresponding to an anomaly’s TotalImpact and
+	// TotalImpactPercentage, respectively (see [Impact]for more details). The supported
+	// nested expression types are AND and OR . The match option GREATER_THAN_OR_EQUAL
+	// is required. Values must be numbers between 0 and 10,000,000,000 in string
+	// format.
+	//
+	// You can specify either Threshold or ThresholdExpression, but not both.
+	//
+	// The following are examples of valid ThresholdExpressions:
+	//
 	//   - Absolute threshold: { "Dimensions": { "Key":
 	//   "ANOMALY_TOTAL_IMPACT_ABSOLUTE", "MatchOptions": [ "GREATER_THAN_OR_EQUAL" ],
 	//   "Values": [ "100" ] } }
+	//
 	//   - Percentage threshold: { "Dimensions": { "Key":
 	//   "ANOMALY_TOTAL_IMPACT_PERCENTAGE", "MatchOptions": [ "GREATER_THAN_OR_EQUAL" ],
 	//   "Values": [ "100" ] } }
+	//
 	//   - AND two thresholds together: { "And": [ { "Dimensions": { "Key":
 	//   "ANOMALY_TOTAL_IMPACT_ABSOLUTE", "MatchOptions": [ "GREATER_THAN_OR_EQUAL" ],
 	//   "Values": [ "100" ] } }, { "Dimensions": { "Key":
 	//   "ANOMALY_TOTAL_IMPACT_PERCENTAGE", "MatchOptions": [ "GREATER_THAN_OR_EQUAL" ],
 	//   "Values": [ "100" ] } } ] }
+	//
 	//   - OR two thresholds together: { "Or": [ { "Dimensions": { "Key":
 	//   "ANOMALY_TOTAL_IMPACT_ABSOLUTE", "MatchOptions": [ "GREATER_THAN_OR_EQUAL" ],
 	//   "Values": [ "100" ] } }, { "Dimensions": { "Key":
 	//   "ANOMALY_TOTAL_IMPACT_PERCENTAGE", "MatchOptions": [ "GREATER_THAN_OR_EQUAL" ],
 	//   "Values": [ "100" ] } } ] }
+	//
+	// [Impact]: https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_Impact.html
+	// [Expression]: https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_Expression.html
 	ThresholdExpression *types.Expression
 
 	noSmithyDocumentSerde
@@ -126,25 +140,25 @@ func (c *Client) addOperationUpdateAnomalySubscriptionMiddlewares(stack *middlew
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -159,13 +173,16 @@ func (c *Client) addOperationUpdateAnomalySubscriptionMiddlewares(stack *middlew
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpUpdateAnomalySubscriptionValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateAnomalySubscription(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

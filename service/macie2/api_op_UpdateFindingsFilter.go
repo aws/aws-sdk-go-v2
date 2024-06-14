@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/macie2/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -45,20 +44,23 @@ type UpdateFindingsFilterInput struct {
 	ClientToken *string
 
 	// A custom description of the filter. The description can contain as many as 512
-	// characters. We strongly recommend that you avoid including any sensitive data in
-	// the description of a filter. Other users of your account might be able to see
-	// this description, depending on the actions that they're allowed to perform in
-	// Amazon Macie.
+	// characters.
+	//
+	// We strongly recommend that you avoid including any sensitive data in the
+	// description of a filter. Other users of your account might be able to see this
+	// description, depending on the actions that they're allowed to perform in Amazon
+	// Macie.
 	Description *string
 
 	// The criteria to use to filter findings.
 	FindingCriteria *types.FindingCriteria
 
 	// A custom name for the filter. The name must contain at least 3 characters and
-	// can contain as many as 64 characters. We strongly recommend that you avoid
-	// including any sensitive data in the name of a filter. Other users of your
-	// account might be able to see this name, depending on the actions that they're
-	// allowed to perform in Amazon Macie.
+	// can contain as many as 64 characters.
+	//
+	// We strongly recommend that you avoid including any sensitive data in the name
+	// of a filter. Other users of your account might be able to see this name,
+	// depending on the actions that they're allowed to perform in Amazon Macie.
 	Name *string
 
 	// The position of the filter in the list of saved filters on the Amazon Macie
@@ -105,25 +107,25 @@ func (c *Client) addOperationUpdateFindingsFilterMiddlewares(stack *middleware.S
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -138,6 +140,9 @@ func (c *Client) addOperationUpdateFindingsFilterMiddlewares(stack *middleware.S
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opUpdateFindingsFilterMiddleware(stack, options); err != nil {
 		return err
 	}
@@ -147,7 +152,7 @@ func (c *Client) addOperationUpdateFindingsFilterMiddlewares(stack *middleware.S
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateFindingsFilter(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

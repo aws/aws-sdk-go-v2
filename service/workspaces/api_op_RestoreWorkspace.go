@@ -6,17 +6,22 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Restores the specified WorkSpace to its last known healthy state. You cannot
-// restore a WorkSpace unless its state is AVAILABLE , ERROR , UNHEALTHY , or
-// STOPPED . Restoring a WorkSpace is a potentially destructive action that can
-// result in the loss of data. For more information, see Restore a WorkSpace (https://docs.aws.amazon.com/workspaces/latest/adminguide/restore-workspace.html)
-// . This operation is asynchronous and returns before the WorkSpace is completely
+// Restores the specified WorkSpace to its last known healthy state.
+//
+// You cannot restore a WorkSpace unless its state is  AVAILABLE , ERROR ,
+// UNHEALTHY , or STOPPED .
+//
+// Restoring a WorkSpace is a potentially destructive action that can result in
+// the loss of data. For more information, see [Restore a WorkSpace].
+//
+// This operation is asynchronous and returns before the WorkSpace is completely
 // restored.
+//
+// [Restore a WorkSpace]: https://docs.aws.amazon.com/workspaces/latest/adminguide/restore-workspace.html
 func (c *Client) RestoreWorkspace(ctx context.Context, params *RestoreWorkspaceInput, optFns ...func(*Options)) (*RestoreWorkspaceOutput, error) {
 	if params == nil {
 		params = &RestoreWorkspaceInput{}
@@ -71,25 +76,25 @@ func (c *Client) addOperationRestoreWorkspaceMiddlewares(stack *middleware.Stack
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -104,13 +109,16 @@ func (c *Client) addOperationRestoreWorkspaceMiddlewares(stack *middleware.Stack
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpRestoreWorkspaceValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opRestoreWorkspace(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

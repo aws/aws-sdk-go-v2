@@ -6,22 +6,25 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Sets the maximum number of simultaneous executions for a function, and reserves
-// capacity for that concurrency level. Concurrency settings apply to the function
-// as a whole, including all published versions and the unpublished version.
-// Reserving concurrency both ensures that your function has capacity to process
-// the specified number of events simultaneously, and prevents it from scaling
-// beyond that level. Use GetFunction to see the current setting for a function.
-// Use GetAccountSettings to see your Regional concurrency limit. You can reserve
-// concurrency for as many functions as you like, as long as you leave at least 100
-// simultaneous executions unreserved for functions that aren't configured with a
-// per-function limit. For more information, see Lambda function scaling (https://docs.aws.amazon.com/lambda/latest/dg/invocation-scaling.html)
-// .
+// capacity for that concurrency level.
+//
+// Concurrency settings apply to the function as a whole, including all published
+// versions and the unpublished version. Reserving concurrency both ensures that
+// your function has capacity to process the specified number of events
+// simultaneously, and prevents it from scaling beyond that level. Use GetFunctionto see the
+// current setting for a function.
+//
+// Use GetAccountSettings to see your Regional concurrency limit. You can reserve concurrency for as
+// many functions as you like, as long as you leave at least 100 simultaneous
+// executions unreserved for functions that aren't configured with a per-function
+// limit. For more information, see [Lambda function scaling].
+//
+// [Lambda function scaling]: https://docs.aws.amazon.com/lambda/latest/dg/invocation-scaling.html
 func (c *Client) PutFunctionConcurrency(ctx context.Context, params *PutFunctionConcurrencyInput, optFns ...func(*Options)) (*PutFunctionConcurrencyOutput, error) {
 	if params == nil {
 		params = &PutFunctionConcurrencyInput{}
@@ -39,10 +42,16 @@ func (c *Client) PutFunctionConcurrency(ctx context.Context, params *PutFunction
 
 type PutFunctionConcurrencyInput struct {
 
-	// The name of the Lambda function. Name formats
+	// The name or ARN of the Lambda function.
+	//
+	// Name formats
+	//
 	//   - Function name – my-function .
+	//
 	//   - Function ARN – arn:aws:lambda:us-west-2:123456789012:function:my-function .
+	//
 	//   - Partial ARN – 123456789012:function:my-function .
+	//
 	// The length constraint applies only to the full ARN. If you specify only the
 	// function name, it is limited to 64 characters in length.
 	//
@@ -60,8 +69,9 @@ type PutFunctionConcurrencyInput struct {
 type PutFunctionConcurrencyOutput struct {
 
 	// The number of concurrent executions that are reserved for this function. For
-	// more information, see Managing Lambda reserved concurrency (https://docs.aws.amazon.com/lambda/latest/dg/configuration-concurrency.html)
-	// .
+	// more information, see [Managing Lambda reserved concurrency].
+	//
+	// [Managing Lambda reserved concurrency]: https://docs.aws.amazon.com/lambda/latest/dg/configuration-concurrency.html
 	ReservedConcurrentExecutions *int32
 
 	// Metadata pertaining to the operation's result.
@@ -92,25 +102,25 @@ func (c *Client) addOperationPutFunctionConcurrencyMiddlewares(stack *middleware
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -125,13 +135,16 @@ func (c *Client) addOperationPutFunctionConcurrencyMiddlewares(stack *middleware
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpPutFunctionConcurrencyValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opPutFunctionConcurrency(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

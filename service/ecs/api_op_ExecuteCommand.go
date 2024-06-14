@@ -6,19 +6,22 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/ecs/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Runs a command remotely on a container within a task. If you use a condition
-// key in your IAM policy to refine the conditions for the policy statement, for
-// example limit the actions to a specific cluster, you receive an
-// AccessDeniedException when there is a mismatch between the condition key value
-// and the corresponding parameter value. For information about required
-// permissions and considerations, see Using Amazon ECS Exec for debugging (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-exec.html)
-// in the Amazon ECS Developer Guide.
+// Runs a command remotely on a container within a task.
+//
+// If you use a condition key in your IAM policy to refine the conditions for the
+// policy statement, for example limit the actions to a specific cluster, you
+// receive an AccessDeniedException when there is a mismatch between the condition
+// key value and the corresponding parameter value.
+//
+// For information about required permissions and considerations, see [Using Amazon ECS Exec for debugging] in the
+// Amazon ECS Developer Guide.
+//
+// [Using Amazon ECS Exec for debugging]: https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-exec.html
 func (c *Client) ExecuteCommand(ctx context.Context, params *ExecuteCommandInput, optFns ...func(*Options)) (*ExecuteCommandOutput, error) {
 	if params == nil {
 		params = &ExecuteCommandInput{}
@@ -113,25 +116,25 @@ func (c *Client) addOperationExecuteCommandMiddlewares(stack *middleware.Stack, 
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -146,13 +149,16 @@ func (c *Client) addOperationExecuteCommandMiddlewares(stack *middleware.Stack, 
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpExecuteCommandValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opExecuteCommand(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

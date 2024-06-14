@@ -892,7 +892,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Object to store union of Field values.</p>\n         <important>\n            <p>This data type is a UNION, so only one of the following members can be specified when\n        used or returned.</p>\n         </important>"
+                "smithy.api#documentation": "<p>Object to store union of Field values.</p>"
             }
         },
         "com.amazonaws.connectcases#AuditEventId": {
@@ -2076,6 +2076,219 @@
             "type": "structure",
             "members": {}
         },
+        "com.amazonaws.connectcases#DeleteField": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.connectcases#DeleteFieldRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.connectcases#DeleteFieldResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.connectcases#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.connectcases#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.connectcases#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.connectcases#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.connectcases#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.connectcases#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.connectcases#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes a field from a cases template. You can delete up to 100 fields per domain.</p>\n         <p>After a field is deleted:</p>\n         <ul>\n            <li>\n               <p>You can still retrieve the field by calling <code>BatchGetField</code>.</p>\n            </li>\n            <li>\n               <p>You cannot update a deleted field by calling <code>UpdateField</code>; it throws a\n          <code>ValidationException</code>.</p>\n            </li>\n            <li>\n               <p>Deleted fields are not included in the <code>ListFields</code> response.</p>\n            </li>\n            <li>\n               <p>Calling <code>CreateCase</code> with a deleted field throws a <code>ValidationException</code> denoting\n          which field IDs in the request have been deleted.</p>\n            </li>\n            <li>\n               <p>Calling <code>GetCase</code> with a deleted field ID returns the deleted field's value if one\n          exists.</p>\n            </li>\n            <li>\n               <p>Calling <code>UpdateCase</code> with a deleted field ID throws a <code>ValidationException</code> if the\n          case does not already contain a value for the deleted field. Otherwise it succeeds,\n          allowing you to update or remove (using <code>emptyValue: {}</code>) the field's value from the\n          case.</p>\n            </li>\n            <li>\n               <p>\n                  <code>GetTemplate</code> does not return field IDs for deleted fields.</p>\n            </li>\n            <li>\n               <p>\n                  <code>GetLayout</code> does not return field IDs for deleted fields.</p>\n            </li>\n            <li>\n               <p>Calling <code>SearchCases</code> with the deleted field ID as a filter returns any cases that\n          have a value for the deleted field that matches the filter criteria.</p>\n            </li>\n            <li>\n               <p>Calling <code>SearchCases</code> with a <code>searchTerm</code> value that matches a deleted field's value on a\n          case returns the case in the response.</p>\n            </li>\n            <li>\n               <p>Calling <code>BatchPutFieldOptions</code> with a deleted field ID throw a <code>ValidationException</code>.</p>\n            </li>\n            <li>\n               <p>Calling <code>GetCaseEventConfiguration</code> does not return field IDs for deleted fields.</p>\n            </li>\n         </ul>",
+                "smithy.api#http": {
+                    "uri": "/domains/{domainId}/fields/{fieldId}",
+                    "method": "DELETE"
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.connectcases#DeleteFieldRequest": {
+            "type": "structure",
+            "members": {
+                "domainId": {
+                    "target": "com.amazonaws.connectcases#DomainId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the Cases domain.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "fieldId": {
+                    "target": "com.amazonaws.connectcases#FieldId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Unique identifier of the field.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.connectcases#DeleteFieldResponse": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.connectcases#DeleteLayout": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.connectcases#DeleteLayoutRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.connectcases#DeleteLayoutResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.connectcases#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.connectcases#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.connectcases#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.connectcases#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.connectcases#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.connectcases#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes a layout from a cases template. You can delete up to 100 layouts per domain.</p>\n    \n         <p>After a layout is deleted:</p>\n         <ul>\n            <li>\n               <p>You can still retrieve the layout by calling <code>GetLayout</code>.</p>\n            </li>\n            <li>\n               <p>You cannot update a deleted layout by calling <code>UpdateLayout</code>; it throws a\n          <code>ValidationException</code>.</p>\n            </li>\n            <li>\n               <p>Deleted layouts are not included in the <code>ListLayouts</code> response.</p>\n            </li>\n         </ul>",
+                "smithy.api#http": {
+                    "uri": "/domains/{domainId}/layouts/{layoutId}",
+                    "method": "DELETE"
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.connectcases#DeleteLayoutRequest": {
+            "type": "structure",
+            "members": {
+                "domainId": {
+                    "target": "com.amazonaws.connectcases#DomainId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the Cases domain.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "layoutId": {
+                    "target": "com.amazonaws.connectcases#LayoutId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the layout.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.connectcases#DeleteLayoutResponse": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.connectcases#DeleteTemplate": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.connectcases#DeleteTemplateRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.connectcases#DeleteTemplateResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.connectcases#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.connectcases#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.connectcases#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.connectcases#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.connectcases#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.connectcases#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes a cases template. You can delete up to 100 templates per domain.</p>\n    \n         <p>After a cases template is deleted:</p>\n         <ul>\n            <li>\n               <p>You can still retrieve the template by calling <code>GetTemplate</code>.</p>\n            </li>\n            <li>\n               <p>You cannot update the template. </p>\n            </li>\n            <li>\n               <p>You cannot create a case by using the deleted template.</p>\n            </li>\n            <li>\n               <p>Deleted templates are not included in the <code>ListTemplates</code> response.</p>\n            </li>\n         </ul>",
+                "smithy.api#http": {
+                    "uri": "/domains/{domainId}/templates/{templateId}",
+                    "method": "DELETE"
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.connectcases#DeleteTemplateRequest": {
+            "type": "structure",
+            "members": {
+                "domainId": {
+                    "target": "com.amazonaws.connectcases#DomainId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique identifier of the Cases domain.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "templateId": {
+                    "target": "com.amazonaws.connectcases#TemplateId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique identifier of a template.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.connectcases#DeleteTemplateResponse": {
+            "type": "structure",
+            "members": {},
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.connectcases#Deleted": {
+            "type": "boolean",
+            "traits": {
+                "smithy.api#default": false
+            }
+        },
         "com.amazonaws.connectcases#Domain": {
             "type": "resource",
             "identifiers": {
@@ -2254,6 +2467,9 @@
             },
             "update": {
                 "target": "com.amazonaws.connectcases#UpdateField"
+            },
+            "delete": {
+                "target": "com.amazonaws.connectcases#DeleteField"
             },
             "list": {
                 "target": "com.amazonaws.connectcases#ListFields"
@@ -2712,6 +2928,44 @@
                 "smithy.api#documentation": "<p>Object to store union of Field values.</p>\n         <note>\n            <p>The <code>Summary</code> system field accepts 1500 characters while all other fields\n        accept 500 characters.</p>\n         </note>"
             }
         },
+        "com.amazonaws.connectcases#FileArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 500
+                }
+            }
+        },
+        "com.amazonaws.connectcases#FileContent": {
+            "type": "structure",
+            "members": {
+                "fileArn": {
+                    "target": "com.amazonaws.connectcases#FileArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of a File in Amazon Connect.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An object that represents a content of an Amazon Connect file object.</p>"
+            }
+        },
+        "com.amazonaws.connectcases#FileFilter": {
+            "type": "structure",
+            "members": {
+                "fileArn": {
+                    "target": "com.amazonaws.connectcases#FileArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the file.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A filter for related items of type <code>File</code>.</p>"
+            }
+        },
         "com.amazonaws.connectcases#GetCase": {
             "type": "operation",
             "input": {
@@ -3127,6 +3381,25 @@
                     "traits": {
                         "smithy.api#documentation": "<p>A map of of key-value pairs that represent tags on a resource. Tags are used to organize, track, or control access for this resource.</p>"
                     }
+                },
+                "deleted": {
+                    "target": "com.amazonaws.connectcases#Deleted",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>Denotes whether or not the resource has been deleted.</p>"
+                    }
+                },
+                "createdTime": {
+                    "target": "com.amazonaws.connectcases#CreatedTime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Timestamp at which the resource was created.</p>"
+                    }
+                },
+                "lastModifiedTime": {
+                    "target": "com.amazonaws.connectcases#LastModifiedTime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Timestamp at which the resource was created or last modified.</p>"
+                    }
                 }
             },
             "traits": {
@@ -3223,6 +3496,25 @@
                     "target": "com.amazonaws.connectcases#Tags",
                     "traits": {
                         "smithy.api#documentation": "<p>A map of of key-value pairs that represent tags on a resource. Tags are used to organize, track, or control access for this resource.</p>"
+                    }
+                },
+                "deleted": {
+                    "target": "com.amazonaws.connectcases#Deleted",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>Denotes whether or not the resource has been deleted.</p>"
+                    }
+                },
+                "createdTime": {
+                    "target": "com.amazonaws.connectcases#CreatedTime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Timestamp at which the resource was created.</p>"
+                    }
+                },
+                "lastModifiedTime": {
+                    "target": "com.amazonaws.connectcases#LastModifiedTime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Timestamp at which the resource was created or last modified.</p>"
                     }
                 }
             }
@@ -3336,6 +3628,25 @@
                         "smithy.api#documentation": "<p>The status of the template.</p>",
                         "smithy.api#required": {}
                     }
+                },
+                "deleted": {
+                    "target": "com.amazonaws.connectcases#Deleted",
+                    "traits": {
+                        "smithy.api#default": false,
+                        "smithy.api#documentation": "<p>Denotes whether or not the resource has been deleted.</p>"
+                    }
+                },
+                "createdTime": {
+                    "target": "com.amazonaws.connectcases#CreatedTime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Timestamp at which the resource was created.</p>"
+                    }
+                },
+                "lastModifiedTime": {
+                    "target": "com.amazonaws.connectcases#LastModifiedTime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Timestamp at which the resource was created or last modified.</p>"
+                    }
                 }
             }
         },
@@ -3372,6 +3683,12 @@
                 "smithy.api#retryable": {}
             }
         },
+        "com.amazonaws.connectcases#LastModifiedTime": {
+            "type": "timestamp",
+            "traits": {
+                "smithy.api#timestampFormat": "date-time"
+            }
+        },
         "com.amazonaws.connectcases#Layout": {
             "type": "resource",
             "identifiers": {
@@ -3390,6 +3707,9 @@
             },
             "update": {
                 "target": "com.amazonaws.connectcases#UpdateLayout"
+            },
+            "delete": {
+                "target": "com.amazonaws.connectcases#DeleteLayout"
             },
             "list": {
                 "target": "com.amazonaws.connectcases#ListLayouts"
@@ -4236,6 +4556,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Represents the content of a comment to be returned to agents.</p>"
                     }
+                },
+                "file": {
+                    "target": "com.amazonaws.connectcases#FileContent",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Represents the content of a File to be returned to agents.</p>"
+                    }
                 }
             },
             "traits": {
@@ -4286,6 +4612,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Represents the content of a comment to be returned to agents.</p>"
                     }
+                },
+                "file": {
+                    "target": "com.amazonaws.connectcases#FileContent",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A file of related items.</p>"
+                    }
                 }
             },
             "traits": {
@@ -4303,6 +4635,10 @@
                     {
                         "value": "Comment",
                         "name": "COMMENT"
+                    },
+                    {
+                        "value": "File",
+                        "name": "FILE"
                     }
                 ]
             }
@@ -4320,6 +4656,12 @@
                     "target": "com.amazonaws.connectcases#CommentFilter",
                     "traits": {
                         "smithy.api#documentation": "<p>A filter for related items of type <code>Comment</code>.</p>"
+                    }
+                },
+                "file": {
+                    "target": "com.amazonaws.connectcases#FileFilter",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A filter for related items of this type of <code>File</code>.</p>"
                     }
                 }
             },
@@ -4899,6 +5241,9 @@
             },
             "update": {
                 "target": "com.amazonaws.connectcases#UpdateTemplate"
+            },
+            "delete": {
+                "target": "com.amazonaws.connectcases#DeleteTemplate"
             },
             "list": {
                 "target": "com.amazonaws.connectcases#ListTemplates"

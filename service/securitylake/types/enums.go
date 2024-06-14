@@ -11,8 +11,9 @@ const (
 )
 
 // Values returns all known values for AccessType. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (AccessType) Values() []AccessType {
 	return []AccessType{
 		"LAKEFORMATION",
@@ -30,11 +31,14 @@ const (
 	AwsLogSourceNameCloudTrailMgmt  AwsLogSourceName = "CLOUD_TRAIL_MGMT"
 	AwsLogSourceNameLambdaExecution AwsLogSourceName = "LAMBDA_EXECUTION"
 	AwsLogSourceNameS3Data          AwsLogSourceName = "S3_DATA"
+	AwsLogSourceNameEksAudit        AwsLogSourceName = "EKS_AUDIT"
+	AwsLogSourceNameWaf             AwsLogSourceName = "WAF"
 )
 
 // Values returns all known values for AwsLogSourceName. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (AwsLogSourceName) Values() []AwsLogSourceName {
 	return []AwsLogSourceName{
 		"ROUTE53",
@@ -43,6 +47,8 @@ func (AwsLogSourceName) Values() []AwsLogSourceName {
 		"CLOUD_TRAIL_MGMT",
 		"LAMBDA_EXECUTION",
 		"S3_DATA",
+		"EKS_AUDIT",
+		"WAF",
 	}
 }
 
@@ -57,8 +63,9 @@ const (
 )
 
 // Values returns all known values for DataLakeStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (DataLakeStatus) Values() []DataLakeStatus {
 	return []DataLakeStatus{
 		"INITIALIZED",
@@ -77,8 +84,9 @@ const (
 )
 
 // Values returns all known values for HttpMethod. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (HttpMethod) Values() []HttpMethod {
 	return []HttpMethod{
 		"POST",
@@ -96,8 +104,9 @@ const (
 )
 
 // Values returns all known values for SourceCollectionStatus. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (SourceCollectionStatus) Values() []SourceCollectionStatus {
 	return []SourceCollectionStatus{
 		"COLLECTING",
@@ -117,8 +126,9 @@ const (
 )
 
 // Values returns all known values for SubscriberStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (SubscriberStatus) Values() []SubscriberStatus {
 	return []SubscriberStatus{
 		"ACTIVE",

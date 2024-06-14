@@ -6,24 +6,28 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/globalaccelerator/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Associate a virtual private cloud (VPC) subnet endpoint with your custom
-// routing accelerator. The listener port range must be large enough to support the
-// number of IP addresses that can be specified in your subnet. The number of ports
-// required is: subnet size times the number of ports per destination EC2
-// instances. For example, a subnet defined as /24 requires a listener port range
-// of at least 255 ports. Note: You must have enough remaining listener ports
-// available to map to the subnet ports, or the call will fail with a
-// LimitExceededException. By default, all destinations in a subnet in a custom
-// routing accelerator cannot receive traffic. To enable all destinations to
-// receive traffic, or to specify individual port mappings that can receive
-// traffic, see the AllowCustomRoutingTraffic (https://docs.aws.amazon.com/global-accelerator/latest/api/API_AllowCustomRoutingTraffic.html)
-// operation.
+// routing accelerator.
+//
+// The listener port range must be large enough to support the number of IP
+// addresses that can be specified in your subnet. The number of ports required is:
+// subnet size times the number of ports per destination EC2 instances. For
+// example, a subnet defined as /24 requires a listener port range of at least 255
+// ports.
+//
+// Note: You must have enough remaining listener ports available to map to the
+// subnet ports, or the call will fail with a LimitExceededException.
+//
+// By default, all destinations in a subnet in a custom routing accelerator cannot
+// receive traffic. To enable all destinations to receive traffic, or to specify
+// individual port mappings that can receive traffic, see the [AllowCustomRoutingTraffic]operation.
+//
+// [AllowCustomRoutingTraffic]: https://docs.aws.amazon.com/global-accelerator/latest/api/API_AllowCustomRoutingTraffic.html
 func (c *Client) AddCustomRoutingEndpoints(ctx context.Context, params *AddCustomRoutingEndpointsInput, optFns ...func(*Options)) (*AddCustomRoutingEndpointsOutput, error) {
 	if params == nil {
 		params = &AddCustomRoutingEndpointsInput{}
@@ -92,25 +96,25 @@ func (c *Client) addOperationAddCustomRoutingEndpointsMiddlewares(stack *middlew
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -125,13 +129,16 @@ func (c *Client) addOperationAddCustomRoutingEndpointsMiddlewares(stack *middlew
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpAddCustomRoutingEndpointsValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opAddCustomRoutingEndpoints(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

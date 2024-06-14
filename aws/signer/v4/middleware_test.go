@@ -19,7 +19,6 @@ import (
 	"github.com/aws/smithy-go/logging"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
-	"github.com/google/go-cmp/cmp"
 )
 
 func TestComputePayloadHashMiddleware(t *testing.T) {
@@ -51,7 +50,7 @@ func TestComputePayloadHashMiddleware(t *testing.T) {
 
 	for i, tt := range cases {
 		t.Run(strconv.Itoa(i), func(t *testing.T) {
-			c := &computePayloadSHA256{}
+			c := &ComputePayloadSHA256{}
 
 			next := middleware.FinalizeHandlerFunc(func(ctx context.Context, in middleware.FinalizeInput) (out middleware.FinalizeOutput, metadata middleware.Metadata, err error) {
 				value := GetPayloadHash(ctx)
@@ -303,7 +302,7 @@ func TestSwapComputePayloadSHA256ForUnsignedPayloadMiddleware(t *testing.T) {
 				t.Fatalf("expect no error, got %v", err)
 			}
 
-			if diff := cmp.Diff(c.ExpectIDs, stack.Finalize.List()); len(diff) != 0 {
+			if diff := cmpDiff(c.ExpectIDs, stack.Finalize.List()); len(diff) != 0 {
 				t.Errorf("expect match\n%v", diff)
 			}
 		})
@@ -408,8 +407,8 @@ func (*nopResolveEndpoint) HandleFinalize(
 }
 
 var (
-	_ middleware.FinalizeMiddleware = &unsignedPayload{}
-	_ middleware.FinalizeMiddleware = &computePayloadSHA256{}
-	_ middleware.FinalizeMiddleware = &contentSHA256Header{}
+	_ middleware.FinalizeMiddleware = &UnsignedPayload{}
+	_ middleware.FinalizeMiddleware = &ComputePayloadSHA256{}
+	_ middleware.FinalizeMiddleware = &ContentSHA256Header{}
 	_ middleware.FinalizeMiddleware = &SignHTTPRequestMiddleware{}
 )

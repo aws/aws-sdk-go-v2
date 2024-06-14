@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/cloudformation/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -18,13 +17,14 @@ import (
 // has drifted, from its expected configuration, as defined in the stack template
 // and any values specified as template parameters. A stack is considered to have
 // drifted if one or more of its resources have drifted. For more information about
-// stack and resource drift, see Detecting Unregulated Configuration Changes to
-// Stacks and Resources (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-stack-drift.html)
-// . Use DetectStackDrift to initiate a stack drift detection operation.
-// DetectStackDrift returns a StackDriftDetectionId you can use to monitor the
-// progress of the operation using DescribeStackDriftDetectionStatus . Once the
-// drift detection operation has completed, use DescribeStackResourceDrifts to
-// return drift information about the stack and its resources.
+// stack and resource drift, see [Detecting Unregulated Configuration Changes to Stacks and Resources].
+//
+// Use DetectStackDrift to initiate a stack drift detection operation. DetectStackDrift returns a
+// StackDriftDetectionId you can use to monitor the progress of the operation using
+// DescribeStackDriftDetectionStatus . Once the drift detection operation has
+// completed, use DescribeStackResourceDriftsto return drift information about the stack and its resources.
+//
+// [Detecting Unregulated Configuration Changes to Stacks and Resources]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-stack-drift.html
 func (c *Client) DescribeStackDriftDetectionStatus(ctx context.Context, params *DescribeStackDriftDetectionStatusInput, optFns ...func(*Options)) (*DescribeStackDriftDetectionStatusOutput, error) {
 	if params == nil {
 		params = &DescribeStackDriftDetectionStatusInput{}
@@ -42,10 +42,11 @@ func (c *Client) DescribeStackDriftDetectionStatus(ctx context.Context, params *
 
 type DescribeStackDriftDetectionStatusInput struct {
 
-	// The ID of the drift detection results of this operation. CloudFormation
-	// generates new results, with a new drift detection ID, each time this operation
-	// is run. However, the number of drift results CloudFormation retains for any
-	// given stack, and for how long, may vary.
+	// The ID of the drift detection results of this operation.
+	//
+	// CloudFormation generates new results, with a new drift detection ID, each time
+	// this operation is run. However, the number of drift results CloudFormation
+	// retains for any given stack, and for how long, may vary.
 	//
 	// This member is required.
 	StackDriftDetectionId *string
@@ -56,25 +57,30 @@ type DescribeStackDriftDetectionStatusInput struct {
 type DescribeStackDriftDetectionStatusOutput struct {
 
 	// The status of the stack drift detection operation.
+	//
 	//   - DETECTION_COMPLETE : The stack drift detection operation has successfully
 	//   completed for all resources in the stack that support drift detection.
-	//   (Resources that don't currently support stack detection remain unchecked.) If
-	//   you specified logical resource IDs for CloudFormation to use as a filter for the
-	//   stack drift detection operation, only the resources with those logical IDs are
-	//   checked for drift.
+	//   (Resources that don't currently support stack detection remain unchecked.)
+	//
+	// If you specified logical resource IDs for CloudFormation to use as a filter for
+	//   the stack drift detection operation, only the resources with those logical IDs
+	//   are checked for drift.
+	//
 	//   - DETECTION_FAILED : The stack drift detection operation has failed for at
 	//   least one resource in the stack. Results will be available for resources on
 	//   which CloudFormation successfully completed drift detection.
+	//
 	//   - DETECTION_IN_PROGRESS : The stack drift detection operation is currently in
 	//   progress.
 	//
 	// This member is required.
 	DetectionStatus types.StackDriftDetectionStatus
 
-	// The ID of the drift detection results of this operation. CloudFormation
-	// generates new results, with a new drift detection ID, each time this operation
-	// is run. However, the number of reports CloudFormation retains for any given
-	// stack, and for how long, may vary.
+	// The ID of the drift detection results of this operation.
+	//
+	// CloudFormation generates new results, with a new drift detection ID, each time
+	// this operation is run. However, the number of reports CloudFormation retains for
+	// any given stack, and for how long, may vary.
 	//
 	// This member is required.
 	StackDriftDetectionId *string
@@ -99,13 +105,17 @@ type DescribeStackDriftDetectionStatusOutput struct {
 
 	// Status of the stack's actual configuration compared to its expected
 	// configuration.
+	//
 	//   - DRIFTED : The stack differs from its expected template configuration. A
 	//   stack is considered to have drifted if one or more of its resources have
 	//   drifted.
+	//
 	//   - NOT_CHECKED : CloudFormation hasn't checked if the stack differs from its
 	//   expected template configuration.
+	//
 	//   - IN_SYNC : The stack's actual configuration matches its expected template
 	//   configuration.
+	//
 	//   - UNKNOWN : This value is reserved for future use.
 	StackDriftStatus types.StackDriftStatus
 
@@ -137,25 +147,25 @@ func (c *Client) addOperationDescribeStackDriftDetectionStatusMiddlewares(stack 
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -170,13 +180,16 @@ func (c *Client) addOperationDescribeStackDriftDetectionStatusMiddlewares(stack 
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDescribeStackDriftDetectionStatusValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeStackDriftDetectionStatus(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

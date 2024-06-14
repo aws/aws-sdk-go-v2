@@ -199,9 +199,9 @@ func (e *OperationNotFound) ErrorCode() string {
 func (e *OperationNotFound) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The operation can't be completed because you've reached the quota for the
-// number of requests. For more information, see Cloud Map API request throttling
-// quota (https://docs.aws.amazon.com/cloud-map/latest/dg/throttling.html) in the
-// Cloud Map Developer Guide.
+// number of requests. For more information, see [Cloud Map API request throttling quota]in the Cloud Map Developer Guide.
+//
+// [Cloud Map API request throttling quota]: https://docs.aws.amazon.com/cloud-map/latest/dg/throttling.html
 type RequestLimitExceeded struct {
 	Message *string
 

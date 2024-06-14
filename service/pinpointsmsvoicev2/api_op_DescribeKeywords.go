@@ -6,19 +6,21 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/pinpointsmsvoicev2/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Describes the specified keywords or all keywords on your origination phone
-// number or pool. A keyword is a word that you can search for on a particular
-// phone number or pool. It is also a specific word or phrase that an end user can
-// send to your number to elicit a response, such as an informational message or a
-// special offer. When your number receives a message that begins with a keyword,
-// Amazon Pinpoint responds with a customizable message. If you specify a keyword
-// that isn't valid, an error is returned.
+// number or pool.
+//
+// A keyword is a word that you can search for on a particular phone number or
+// pool. It is also a specific word or phrase that an end user can send to your
+// number to elicit a response, such as an informational message or a special
+// offer. When your number receives a message that begins with a keyword, Amazon
+// Pinpoint responds with a customizable message.
+//
+// If you specify a keyword that isn't valid, an error is returned.
 func (c *Client) DescribeKeywords(ctx context.Context, params *DescribeKeywordsInput, optFns ...func(*Options)) (*DescribeKeywordsOutput, error) {
 	if params == nil {
 		params = &DescribeKeywordsInput{}
@@ -37,9 +39,8 @@ func (c *Client) DescribeKeywords(ctx context.Context, params *DescribeKeywordsI
 type DescribeKeywordsInput struct {
 
 	// The origination identity to use such as a PhoneNumberId, PhoneNumberArn,
-	// SenderId or SenderIdArn. You can use DescribePhoneNumbers to find the values
-	// for PhoneNumberId and PhoneNumberArn while DescribeSenderIds can be used to get
-	// the values for SenderId and SenderIdArn.
+	// SenderId or SenderIdArn. You can use DescribePhoneNumbersto find the values for PhoneNumberId and
+	// PhoneNumberArn while DescribeSenderIdscan be used to get the values for SenderId and SenderIdArn.
 	//
 	// This member is required.
 	OriginationIdentity *string
@@ -103,25 +104,25 @@ func (c *Client) addOperationDescribeKeywordsMiddlewares(stack *middleware.Stack
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -136,13 +137,16 @@ func (c *Client) addOperationDescribeKeywordsMiddlewares(stack *middleware.Stack
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDescribeKeywordsValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeKeywords(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

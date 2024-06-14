@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/lookoutequipment/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -47,23 +46,28 @@ type CreateRetrainingSchedulerInput struct {
 	// This member is required.
 	ModelName *string
 
-	// This parameter uses the ISO 8601 (https://en.wikipedia.org/wiki/ISO_8601#Durations)
-	// standard to set the frequency at which you want retraining to occur in terms of
-	// Years, Months, and/or Days (note: other parameters like Time are not currently
-	// supported). The minimum value is 30 days (P30D) and the maximum value is 1 year
-	// (P1Y). For example, the following values are valid:
+	// This parameter uses the [ISO 8601] standard to set the frequency at which you want
+	// retraining to occur in terms of Years, Months, and/or Days (note: other
+	// parameters like Time are not currently supported). The minimum value is 30 days
+	// (P30D) and the maximum value is 1 year (P1Y). For example, the following values
+	// are valid:
+	//
 	//   - P3M15D – Every 3 months and 15 days
+	//
 	//   - P2M – Every 2 months
+	//
 	//   - P150D – Every 150 days
+	//
+	// [ISO 8601]: https://en.wikipedia.org/wiki/ISO_8601#Durations
 	//
 	// This member is required.
 	RetrainingFrequency *string
 
 	// Indicates how the service will use new models. In MANAGED mode, new models will
 	// automatically be used for inference if they have better performance than the
-	// current model. In MANUAL mode, the new models will not be used until they are
-	// manually activated (https://docs.aws.amazon.com/lookout-for-equipment/latest/ug/versioning-model.html#model-activation)
-	// .
+	// current model. In MANUAL mode, the new models will not be used [until they are manually activated].
+	//
+	// [until they are manually activated]: https://docs.aws.amazon.com/lookout-for-equipment/latest/ug/versioning-model.html#model-activation
 	PromoteMode types.ModelPromoteMode
 
 	// The start date for the retraining scheduler. Lookout for Equipment truncates
@@ -112,25 +116,25 @@ func (c *Client) addOperationCreateRetrainingSchedulerMiddlewares(stack *middlew
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -145,6 +149,9 @@ func (c *Client) addOperationCreateRetrainingSchedulerMiddlewares(stack *middlew
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opCreateRetrainingSchedulerMiddleware(stack, options); err != nil {
 		return err
 	}
@@ -154,7 +161,7 @@ func (c *Client) addOperationCreateRetrainingSchedulerMiddlewares(stack *middlew
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateRetrainingScheduler(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

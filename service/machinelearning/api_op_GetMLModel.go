@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/machinelearning/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -14,8 +13,9 @@ import (
 )
 
 // Returns an MLModel that includes detailed metadata, data source information,
-// and the current status of the MLModel . GetMLModel provides results in normal
-// or verbose format.
+// and the current status of the MLModel .
+//
+// GetMLModel provides results in normal or verbose format.
 func (c *Client) GetMLModel(ctx context.Context, params *GetMLModelInput, optFns ...func(*Options)) (*GetMLModelOutput, error) {
 	if params == nil {
 		params = &GetMLModelInput{}
@@ -38,8 +38,11 @@ type GetMLModelInput struct {
 	// This member is required.
 	MLModelId *string
 
-	// Specifies whether the GetMLModel operation should return Recipe . If true,
-	// Recipe is returned. If false, Recipe is not returned.
+	// Specifies whether the GetMLModel operation should return Recipe .
+	//
+	// If true, Recipe is returned.
+	//
+	// If false, Recipe is not returned.
 	Verbose bool
 
 	noSmithyDocumentSerde
@@ -85,10 +88,13 @@ type GetMLModelOutput struct {
 	MLModelId *string
 
 	// Identifies the MLModel category. The following are the available types:
+	//
 	//   - REGRESSION -- Produces a numeric result. For example, "What price should a
 	//   house be listed at?"
+	//
 	//   - BINARY -- Produces one of two possible results. For example, "Is this an
 	//   e-commerce website?"
+	//
 	//   - MULTICLASS -- Produces one of several possible results. For example, "Is
 	//   this a HIGH, LOW or MEDIUM risk trade?"
 	MLModelType types.MLModelType
@@ -101,19 +107,22 @@ type GetMLModelOutput struct {
 
 	// The recipe to use when training the MLModel . The Recipe provides detailed
 	// information about the observation data to use during training, and manipulations
-	// to perform on the observation data during training. Note: This parameter is
-	// provided as part of the verbose format.
+	// to perform on the observation data during training.
+	//
+	// Note: This parameter is provided as part of the verbose format.
 	Recipe *string
 
-	// The schema used by all of the data files referenced by the DataSource . Note:
-	// This parameter is provided as part of the verbose format.
+	// The schema used by all of the data files referenced by the DataSource .
+	//
+	// Note: This parameter is provided as part of the verbose format.
 	Schema *string
 
 	// The scoring threshold is used in binary classification MLModel models. It marks
-	// the boundary between a positive prediction and a negative prediction. Output
-	// values greater than or equal to the threshold receive a positive result from the
-	// MLModel, such as true . Output values less than the threshold receive a negative
-	// response from the MLModel, such as false .
+	// the boundary between a positive prediction and a negative prediction.
+	//
+	// Output values greater than or equal to the threshold receive a positive result
+	// from the MLModel, such as true . Output values less than the threshold receive a
+	// negative response from the MLModel, such as false .
 	ScoreThreshold *float32
 
 	// The time of the most recent edit to the ScoreThreshold . The time is expressed
@@ -129,11 +138,16 @@ type GetMLModelOutput struct {
 
 	// The current status of the MLModel . This element can have one of the following
 	// values:
+	//
 	//   - PENDING - Amazon Machine Learning (Amazon ML) submitted a request to
 	//   describe a MLModel .
+	//
 	//   - INPROGRESS - The request is processing.
+	//
 	//   - FAILED - The request did not run to completion. The ML model isn't usable.
+	//
 	//   - COMPLETED - The request completed successfully.
+	//
 	//   - DELETED - The MLModel is marked as deleted. It isn't usable.
 	Status types.EntityStatus
 
@@ -141,32 +155,42 @@ type GetMLModelOutput struct {
 	TrainingDataSourceId *string
 
 	// A list of the training parameters in the MLModel . The list is implemented as a
-	// map of key-value pairs. The following is the current set of training parameters:
+	// map of key-value pairs.
+	//
+	// The following is the current set of training parameters:
 	//
 	//   - sgd.maxMLModelSizeInBytes - The maximum allowed size of the model. Depending
-	//   on the input data, the size of the model might affect its performance. The value
-	//   is an integer that ranges from 100000 to 2147483648 . The default value is
-	//   33554432 .
+	//   on the input data, the size of the model might affect its performance.
+	//
+	// The value is an integer that ranges from 100000 to 2147483648 . The default
+	//   value is 33554432 .
+	//
 	//   - sgd.maxPasses - The number of times that the training process traverses the
 	//   observations to build the MLModel . The value is an integer that ranges from 1
 	//   to 10000 . The default value is 10 .
+	//
 	//   - sgd.shuffleType - Whether Amazon ML shuffles the training data. Shuffling
 	//   data improves a model's ability to find the optimal solution for a variety of
 	//   data types. The valid values are auto and none . The default value is none .
 	//   We strongly recommend that you shuffle your data.
+	//
 	//   - sgd.l1RegularizationAmount - The coefficient regularization L1 norm. It
 	//   controls overfitting the data by penalizing large coefficients. This tends to
 	//   drive coefficients to zero, resulting in a sparse feature set. If you use this
-	//   parameter, start by specifying a small value, such as 1.0E-08 . The value is a
-	//   double that ranges from 0 to MAX_DOUBLE . The default is to not use L1
-	//   normalization. This parameter can't be used when L2 is specified. Use this
-	//   parameter sparingly.
+	//   parameter, start by specifying a small value, such as 1.0E-08 .
+	//
+	// The value is a double that ranges from 0 to MAX_DOUBLE . The default is to not
+	//   use L1 normalization. This parameter can't be used when L2 is specified. Use
+	//   this parameter sparingly.
+	//
 	//   - sgd.l2RegularizationAmount - The coefficient regularization L2 norm. It
 	//   controls overfitting the data by penalizing large coefficients. This tends to
 	//   drive coefficients to small, nonzero values. If you use this parameter, start by
-	//   specifying a small value, such as 1.0E-08 . The value is a double that ranges
-	//   from 0 to MAX_DOUBLE . The default is to not use L2 normalization. This
-	//   parameter can't be used when L1 is specified. Use this parameter sparingly.
+	//   specifying a small value, such as 1.0E-08 .
+	//
+	// The value is a double that ranges from 0 to MAX_DOUBLE . The default is to not
+	//   use L2 normalization. This parameter can't be used when L1 is specified. Use
+	//   this parameter sparingly.
 	TrainingParameters map[string]string
 
 	// Metadata pertaining to the operation's result.
@@ -197,25 +221,25 @@ func (c *Client) addOperationGetMLModelMiddlewares(stack *middleware.Stack, opti
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -230,13 +254,16 @@ func (c *Client) addOperationGetMLModelMiddlewares(stack *middleware.Stack, opti
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpGetMLModelValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetMLModel(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

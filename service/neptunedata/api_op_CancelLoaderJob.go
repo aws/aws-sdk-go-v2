@@ -6,17 +6,19 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Cancels a specified load job. This is an HTTP DELETE request. See Neptune
-// Loader Get-Status API (https://docs.aws.amazon.com/neptune/latest/userguide/load-api-reference-status.htm)
-// for more information. When invoking this operation in a Neptune cluster that has
-// IAM authentication enabled, the IAM user or role making the request must have a
-// policy attached that allows the neptune-db:CancelLoaderJob (https://docs.aws.amazon.com/neptune/latest/userguide/iam-dp-actions.html#cancelloaderjob)
-// IAM action in that cluster..
+// Cancels a specified load job. This is an HTTP DELETE request. See [Neptune Loader Get-Status API] for more
+// information.
+//
+// When invoking this operation in a Neptune cluster that has IAM authentication
+// enabled, the IAM user or role making the request must have a policy attached
+// that allows the [neptune-db:CancelLoaderJob]IAM action in that cluster..
+//
+// [neptune-db:CancelLoaderJob]: https://docs.aws.amazon.com/neptune/latest/userguide/iam-dp-actions.html#cancelloaderjob
+// [Neptune Loader Get-Status API]: https://docs.aws.amazon.com/neptune/latest/userguide/load-api-reference-status.htm
 func (c *Client) CancelLoaderJob(ctx context.Context, params *CancelLoaderJobInput, optFns ...func(*Options)) (*CancelLoaderJobOutput, error) {
 	if params == nil {
 		params = &CancelLoaderJobInput{}
@@ -75,25 +77,25 @@ func (c *Client) addOperationCancelLoaderJobMiddlewares(stack *middleware.Stack,
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -108,13 +110,16 @@ func (c *Client) addOperationCancelLoaderJobMiddlewares(stack *middleware.Stack,
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpCancelLoaderJobValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCancelLoaderJob(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

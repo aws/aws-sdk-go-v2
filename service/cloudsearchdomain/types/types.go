@@ -44,28 +44,34 @@ type FieldStats struct {
 	// result set.
 	Count int64
 
-	// The maximum value found in the specified field in the result set. If the field
-	// is numeric ( int , int-array , double , or double-array ), max is the string
-	// representation of a double-precision 64-bit floating point value. If the field
-	// is date or date-array , max is the string representation of a date with the
-	// format specified in IETF RFC3339 (http://tools.ietf.org/html/rfc3339) :
-	// yyyy-mm-ddTHH:mm:ss.SSSZ.
+	// The maximum value found in the specified field in the result set.
+	//
+	// If the field is numeric ( int , int-array , double , or double-array ), max is
+	// the string representation of a double-precision 64-bit floating point value. If
+	// the field is date or date-array , max is the string representation of a date
+	// with the format specified in [IETF RFC3339]: yyyy-mm-ddTHH:mm:ss.SSSZ.
+	//
+	// [IETF RFC3339]: http://tools.ietf.org/html/rfc3339
 	Max *string
 
-	// The average of the values found in the specified field in the result set. If
-	// the field is numeric ( int , int-array , double , or double-array ), mean is
+	// The average of the values found in the specified field in the result set.
+	//
+	// If the field is numeric ( int , int-array , double , or double-array ), mean is
 	// the string representation of a double-precision 64-bit floating point value. If
 	// the field is date or date-array , mean is the string representation of a date
-	// with the format specified in IETF RFC3339 (http://tools.ietf.org/html/rfc3339) :
-	// yyyy-mm-ddTHH:mm:ss.SSSZ.
+	// with the format specified in [IETF RFC3339]: yyyy-mm-ddTHH:mm:ss.SSSZ.
+	//
+	// [IETF RFC3339]: http://tools.ietf.org/html/rfc3339
 	Mean *string
 
-	// The minimum value found in the specified field in the result set. If the field
-	// is numeric ( int , int-array , double , or double-array ), min is the string
-	// representation of a double-precision 64-bit floating point value. If the field
-	// is date or date-array , min is the string representation of a date with the
-	// format specified in IETF RFC3339 (http://tools.ietf.org/html/rfc3339) :
-	// yyyy-mm-ddTHH:mm:ss.SSSZ.
+	// The minimum value found in the specified field in the result set.
+	//
+	// If the field is numeric ( int , int-array , double , or double-array ), min is
+	// the string representation of a double-precision 64-bit floating point value. If
+	// the field is date or date-array , min is the string representation of a date
+	// with the format specified in [IETF RFC3339]: yyyy-mm-ddTHH:mm:ss.SSSZ.
+	//
+	// [IETF RFC3339]: http://tools.ietf.org/html/rfc3339
 	Min *string
 
 	// The number of documents that do not contain a value in the specified field in

@@ -6,18 +6,19 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // This documentation is for version 1 of the Amazon Kinesis Data Analytics API,
 // which only supports SQL applications. Version 2 of the API supports SQL and Java
-// applications. For more information about version 2, see Amazon Kinesis Data
-// Analytics API V2 Documentation . Deletes output destination configuration from
-// your application configuration. Amazon Kinesis Analytics will no longer write
-// data from the corresponding in-application stream to the external output
-// destination. This operation requires permissions to perform the
+// applications. For more information about version 2, see Amazon Kinesis Data Analytics API V2 Documentation.
+//
+// Deletes output destination configuration from your application configuration.
+// Amazon Kinesis Analytics will no longer write data from the corresponding
+// in-application stream to the external output destination.
+//
+// This operation requires permissions to perform the
 // kinesisanalytics:DeleteApplicationOutput action.
 func (c *Client) DeleteApplicationOutput(ctx context.Context, params *DeleteApplicationOutputInput, optFns ...func(*Options)) (*DeleteApplicationOutputOutput, error) {
 	if params == nil {
@@ -41,21 +42,23 @@ type DeleteApplicationOutputInput struct {
 	// This member is required.
 	ApplicationName *string
 
-	// Amazon Kinesis Analytics application version. You can use the
-	// DescribeApplication (https://docs.aws.amazon.com/kinesisanalytics/latest/dev/API_DescribeApplication.html)
-	// operation to get the current application version. If the version specified is
-	// not the current version, the ConcurrentModificationException is returned.
+	// Amazon Kinesis Analytics application version. You can use the [DescribeApplication] operation to get
+	// the current application version. If the version specified is not the current
+	// version, the ConcurrentModificationException is returned.
+	//
+	// [DescribeApplication]: https://docs.aws.amazon.com/kinesisanalytics/latest/dev/API_DescribeApplication.html
 	//
 	// This member is required.
 	CurrentApplicationVersionId *int64
 
 	// The ID of the configuration to delete. Each output configuration that is added
-	// to the application, either when the application is created or later using the
-	// AddApplicationOutput (https://docs.aws.amazon.com/kinesisanalytics/latest/dev/API_AddApplicationOutput.html)
+	// to the application, either when the application is created or later using the [AddApplicationOutput]
 	// operation, has a unique ID. You need to provide the ID to uniquely identify the
 	// output configuration that you want to delete from the application configuration.
-	// You can use the DescribeApplication (https://docs.aws.amazon.com/kinesisanalytics/latest/dev/API_DescribeApplication.html)
-	// operation to get the specific OutputId .
+	// You can use the [DescribeApplication]operation to get the specific OutputId .
+	//
+	// [DescribeApplication]: https://docs.aws.amazon.com/kinesisanalytics/latest/dev/API_DescribeApplication.html
+	// [AddApplicationOutput]: https://docs.aws.amazon.com/kinesisanalytics/latest/dev/API_AddApplicationOutput.html
 	//
 	// This member is required.
 	OutputId *string
@@ -92,25 +95,25 @@ func (c *Client) addOperationDeleteApplicationOutputMiddlewares(stack *middlewar
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -125,13 +128,16 @@ func (c *Client) addOperationDeleteApplicationOutputMiddlewares(stack *middlewar
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDeleteApplicationOutputValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteApplicationOutput(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

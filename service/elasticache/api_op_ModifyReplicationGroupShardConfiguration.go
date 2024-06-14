@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/elasticache/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -33,7 +32,9 @@ func (c *Client) ModifyReplicationGroupShardConfiguration(ctx context.Context, p
 type ModifyReplicationGroupShardConfigurationInput struct {
 
 	// Indicates that the shard reconfiguration process begins immediately. At
-	// present, the only permitted value for this parameter is true . Value: true
+	// present, the only permitted value for this parameter is true .
+	//
+	// Value: true
 	//
 	// This member is required.
 	ApplyImmediately *bool
@@ -53,6 +54,7 @@ type ModifyReplicationGroupShardConfigurationInput struct {
 	// If the value of NodeGroupCount is less than the current number of node groups
 	// (shards), then either NodeGroupsToRemove or NodeGroupsToRetain is required.
 	// NodeGroupsToRemove is a list of NodeGroupId s to remove from the cluster.
+	//
 	// ElastiCache for Redis will attempt to remove all node groups listed by
 	// NodeGroupsToRemove from the cluster.
 	NodeGroupsToRemove []string
@@ -60,17 +62,19 @@ type ModifyReplicationGroupShardConfigurationInput struct {
 	// If the value of NodeGroupCount is less than the current number of node groups
 	// (shards), then either NodeGroupsToRemove or NodeGroupsToRetain is required.
 	// NodeGroupsToRetain is a list of NodeGroupId s to retain in the cluster.
-	// ElastiCache for Redis will attempt to remove all node groups except those listed
-	// by NodeGroupsToRetain from the cluster.
+	//
+	// ElastiCache for Redis will attempt to remove all node groups except those
+	// listed by NodeGroupsToRetain from the cluster.
 	NodeGroupsToRetain []string
 
 	// Specifies the preferred availability zones for each node group in the cluster.
 	// If the value of NodeGroupCount is greater than the current number of node
 	// groups (shards), you can use this parameter to specify the preferred
 	// availability zones of the cluster's shards. If you omit this parameter
-	// ElastiCache selects availability zones for you. You can specify this parameter
-	// only if the value of NodeGroupCount is greater than the current number of node
-	// groups (shards).
+	// ElastiCache selects availability zones for you.
+	//
+	// You can specify this parameter only if the value of NodeGroupCount is greater
+	// than the current number of node groups (shards).
 	ReshardingConfiguration []types.ReshardingConfiguration
 
 	noSmithyDocumentSerde
@@ -109,25 +113,25 @@ func (c *Client) addOperationModifyReplicationGroupShardConfigurationMiddlewares
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -142,13 +146,16 @@ func (c *Client) addOperationModifyReplicationGroupShardConfigurationMiddlewares
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpModifyReplicationGroupShardConfigurationValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opModifyReplicationGroupShardConfiguration(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/location/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -14,6 +13,9 @@ import (
 )
 
 // Retrieves the geofence details from a geofence collection.
+//
+// The returned geometry will always match the geometry format used when the
+// geofence was created.
 func (c *Client) GetGeofence(ctx context.Context, params *GetGeofenceInput, optFns ...func(*Options)) (*GetGeofenceOutput, error) {
 	if params == nil {
 		params = &GetGeofenceInput{}
@@ -46,8 +48,10 @@ type GetGeofenceInput struct {
 
 type GetGeofenceOutput struct {
 
-	// The timestamp for when the geofence collection was created in ISO 8601 (https://www.iso.org/iso-8601-date-and-time-format.html)
-	// format: YYYY-MM-DDThh:mm:ss.sssZ
+	// The timestamp for when the geofence collection was created in [ISO 8601] format:
+	// YYYY-MM-DDThh:mm:ss.sssZ
+	//
+	// [ISO 8601]: https://www.iso.org/iso-8601-date-and-time-format.html
 	//
 	// This member is required.
 	CreateTime *time.Time
@@ -64,23 +68,31 @@ type GetGeofenceOutput struct {
 
 	// Identifies the state of the geofence. A geofence will hold one of the following
 	// states:
+	//
 	//   - ACTIVE — The geofence has been indexed by the system.
+	//
 	//   - PENDING — The geofence is being processed by the system.
+	//
 	//   - FAILED — The geofence failed to be indexed by the system.
+	//
 	//   - DELETED — The geofence has been deleted from the system index.
+	//
 	//   - DELETING — The geofence is being deleted from the system index.
 	//
 	// This member is required.
 	Status *string
 
-	// The timestamp for when the geofence collection was last updated in ISO 8601 (https://www.iso.org/iso-8601-date-and-time-format.html)
-	// format: YYYY-MM-DDThh:mm:ss.sssZ
+	// The timestamp for when the geofence collection was last updated in [ISO 8601] format:
+	// YYYY-MM-DDThh:mm:ss.sssZ
+	//
+	// [ISO 8601]: https://www.iso.org/iso-8601-date-and-time-format.html
 	//
 	// This member is required.
 	UpdateTime *time.Time
 
 	// User defined properties of the geofence. A property is a key-value pair stored
 	// with the geofence and added to any geofence event triggered with that geofence.
+	//
 	// Format: "key" : "value"
 	GeofenceProperties map[string]string
 
@@ -112,25 +124,25 @@ func (c *Client) addOperationGetGeofenceMiddlewares(stack *middleware.Stack, opt
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -145,6 +157,9 @@ func (c *Client) addOperationGetGeofenceMiddlewares(stack *middleware.Stack, opt
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addEndpointPrefix_opGetGeofenceMiddleware(stack); err != nil {
 		return err
 	}
@@ -154,7 +169,7 @@ func (c *Client) addOperationGetGeofenceMiddlewares(stack *middleware.Stack, opt
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetGeofence(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

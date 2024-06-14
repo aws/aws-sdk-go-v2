@@ -6,22 +6,25 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Used to enable or disable feedback forwarding for an identity. This setting
 // determines what happens when an identity is used to send an email that results
-// in a bounce or complaint event. When you enable feedback forwarding, Amazon
-// Pinpoint sends you email notifications when bounce or complaint events occur.
-// Amazon Pinpoint sends this notification to the address that you specified in the
-// Return-Path header of the original email. When you disable feedback forwarding,
-// Amazon Pinpoint sends notifications through other mechanisms, such as by
-// notifying an Amazon SNS topic. You're required to have a method of tracking
-// bounces and complaints. If you haven't set up another mechanism for receiving
-// bounce or complaint notifications, Amazon Pinpoint sends an email notification
-// when these events occur (even if this setting is disabled).
+// in a bounce or complaint event.
+//
+// When you enable feedback forwarding, Amazon Pinpoint sends you email
+// notifications when bounce or complaint events occur. Amazon Pinpoint sends this
+// notification to the address that you specified in the Return-Path header of the
+// original email.
+//
+// When you disable feedback forwarding, Amazon Pinpoint sends notifications
+// through other mechanisms, such as by notifying an Amazon SNS topic. You're
+// required to have a method of tracking bounces and complaints. If you haven't set
+// up another mechanism for receiving bounce or complaint notifications, Amazon
+// Pinpoint sends an email notification when these events occur (even if this
+// setting is disabled).
 func (c *Client) PutEmailIdentityFeedbackAttributes(ctx context.Context, params *PutEmailIdentityFeedbackAttributesInput, optFns ...func(*Options)) (*PutEmailIdentityFeedbackAttributesOutput, error) {
 	if params == nil {
 		params = &PutEmailIdentityFeedbackAttributesInput{}
@@ -47,16 +50,18 @@ type PutEmailIdentityFeedbackAttributesInput struct {
 	// This member is required.
 	EmailIdentity *string
 
-	// Sets the feedback forwarding configuration for the identity. If the value is
-	// true , Amazon Pinpoint sends you email notifications when bounce or complaint
-	// events occur. Amazon Pinpoint sends this notification to the address that you
-	// specified in the Return-Path header of the original email. When you set this
-	// value to false , Amazon Pinpoint sends notifications through other mechanisms,
-	// such as by notifying an Amazon SNS topic or another event destination. You're
-	// required to have a method of tracking bounces and complaints. If you haven't set
-	// up another mechanism for receiving bounce or complaint notifications, Amazon
-	// Pinpoint sends an email notification when these events occur (even if this
-	// setting is disabled).
+	// Sets the feedback forwarding configuration for the identity.
+	//
+	// If the value is true , Amazon Pinpoint sends you email notifications when bounce
+	// or complaint events occur. Amazon Pinpoint sends this notification to the
+	// address that you specified in the Return-Path header of the original email.
+	//
+	// When you set this value to false , Amazon Pinpoint sends notifications through
+	// other mechanisms, such as by notifying an Amazon SNS topic or another event
+	// destination. You're required to have a method of tracking bounces and
+	// complaints. If you haven't set up another mechanism for receiving bounce or
+	// complaint notifications, Amazon Pinpoint sends an email notification when these
+	// events occur (even if this setting is disabled).
 	EmailForwardingEnabled bool
 
 	noSmithyDocumentSerde
@@ -93,25 +98,25 @@ func (c *Client) addOperationPutEmailIdentityFeedbackAttributesMiddlewares(stack
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -126,13 +131,16 @@ func (c *Client) addOperationPutEmailIdentityFeedbackAttributesMiddlewares(stack
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpPutEmailIdentityFeedbackAttributesValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opPutEmailIdentityFeedbackAttributes(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/support/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -15,13 +14,16 @@ import (
 // Returns a list of CreateCaseOption types along with the corresponding supported
 // hours and language availability. You can specify the language categoryCode ,
 // issueType and serviceCode used to retrieve the CreateCaseOptions.
+//
 //   - You must have a Business, Enterprise On-Ramp, or Enterprise Support plan to
 //     use the Amazon Web Services Support API.
+//
 //   - If you call the Amazon Web Services Support API from an account that
 //     doesn't have a Business, Enterprise On-Ramp, or Enterprise Support plan, the
 //     SubscriptionRequiredException error message appears. For information about
-//     changing your support plan, see Amazon Web Services Support (http://aws.amazon.com/premiumsupport/)
-//     .
+//     changing your support plan, see [Amazon Web Services Support].
+//
+// [Amazon Web Services Support]: http://aws.amazon.com/premiumsupport/
 func (c *Client) DescribeCreateCaseOptions(ctx context.Context, params *DescribeCreateCaseOptionsInput, optFns ...func(*Options)) (*DescribeCreateCaseOptionsOutput, error) {
 	if params == nil {
 		params = &DescribeCreateCaseOptionsInput{}
@@ -39,9 +41,9 @@ func (c *Client) DescribeCreateCaseOptions(ctx context.Context, params *Describe
 
 type DescribeCreateCaseOptionsInput struct {
 
-	// The category of problem for the support case. You also use the DescribeServices
-	// operation to get the category code for a service. Each Amazon Web Services
-	// service defines its own set of category codes.
+	// The category of problem for the support case. You also use the DescribeServices operation to
+	// get the category code for a service. Each Amazon Web Services service defines
+	// its own set of category codes.
 	//
 	// This member is required.
 	CategoryCode *string
@@ -60,8 +62,8 @@ type DescribeCreateCaseOptionsInput struct {
 	// This member is required.
 	Language *string
 
-	// The code for the Amazon Web Services service. You can use the DescribeServices
-	// operation to get the possible serviceCode values.
+	// The code for the Amazon Web Services service. You can use the DescribeServices operation to get
+	// the possible serviceCode values.
 	//
 	// This member is required.
 	ServiceCode *string
@@ -71,13 +73,16 @@ type DescribeCreateCaseOptionsInput struct {
 
 type DescribeCreateCaseOptionsOutput struct {
 
-	// A JSON-formatted array that contains the available communication type options,
+	//  A JSON-formatted array that contains the available communication type options,
 	// along with the available support timeframes for the given inputs.
 	CommunicationTypes []types.CommunicationTypeOptions
 
 	// Language availability can be any of the following:
+	//
 	//   - available
+	//
 	//   - best_effort
+	//
 	//   - unavailable
 	LanguageAvailability *string
 
@@ -109,25 +114,25 @@ func (c *Client) addOperationDescribeCreateCaseOptionsMiddlewares(stack *middlew
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -142,13 +147,16 @@ func (c *Client) addOperationDescribeCreateCaseOptionsMiddlewares(stack *middlew
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDescribeCreateCaseOptionsValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeCreateCaseOptions(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

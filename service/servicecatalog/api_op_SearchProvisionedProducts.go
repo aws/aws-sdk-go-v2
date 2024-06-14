@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/servicecatalog/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -32,19 +31,24 @@ func (c *Client) SearchProvisionedProducts(ctx context.Context, params *SearchPr
 type SearchProvisionedProductsInput struct {
 
 	// The language code.
+	//
 	//   - jp - Japanese
+	//
 	//   - zh - Chinese
 	AcceptLanguage *string
 
 	// The access level to use to obtain results. The default is User .
 	AccessLevelFilter *types.AccessLevelFilter
 
-	// The search filters. When the key is SearchQuery , the searchable fields are arn
-	// , createdTime , id , lastRecordId , idempotencyToken , name , physicalId ,
-	// productId , provisioningArtifactId , type , status , tags , userArn ,
-	// userArnSession , lastProvisioningRecordId , lastSuccessfulProvisioningRecordId ,
-	// productName , and provisioningArtifactName . Example:
-	// "SearchQuery":["status:AVAILABLE"]
+	// The search filters.
+	//
+	// When the key is SearchQuery , the searchable fields are arn , createdTime , id ,
+	// lastRecordId , idempotencyToken , name , physicalId , productId ,
+	// provisioningArtifactId , type , status , tags , userArn , userArnSession ,
+	// lastProvisioningRecordId , lastSuccessfulProvisioningRecordId , productName ,
+	// and provisioningArtifactName .
+	//
+	// Example: "SearchQuery":["status:AVAILABLE"]
 	Filters map[string][]string
 
 	// The maximum number of items to return with this call.
@@ -104,25 +108,25 @@ func (c *Client) addOperationSearchProvisionedProductsMiddlewares(stack *middlew
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -137,10 +141,13 @@ func (c *Client) addOperationSearchProvisionedProductsMiddlewares(stack *middlew
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opSearchProvisionedProducts(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

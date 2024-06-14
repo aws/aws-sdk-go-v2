@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -56,17 +55,22 @@ type ModifyCapacityReservationInput struct {
 	// The date and time at which the Capacity Reservation expires. When a Capacity
 	// Reservation expires, the reserved capacity is released and you can no longer
 	// launch instances into it. The Capacity Reservation's state changes to expired
-	// when it reaches its end date and time. The Capacity Reservation is cancelled
-	// within an hour from the specified time. For example, if you specify 5/31/2019,
-	// 13:30:55, the Capacity Reservation is guaranteed to end between 13:30:55 and
-	// 14:30:55 on 5/31/2019. You must provide an EndDate value if EndDateType is
-	// limited . Omit EndDate if EndDateType is unlimited .
+	// when it reaches its end date and time.
+	//
+	// The Capacity Reservation is cancelled within an hour from the specified time.
+	// For example, if you specify 5/31/2019, 13:30:55, the Capacity Reservation is
+	// guaranteed to end between 13:30:55 and 14:30:55 on 5/31/2019.
+	//
+	// You must provide an EndDate value if EndDateType is limited . Omit EndDate if
+	// EndDateType is unlimited .
 	EndDate *time.Time
 
 	// Indicates the way in which the Capacity Reservation ends. A Capacity
 	// Reservation can have one of the following end types:
+	//
 	//   - unlimited - The Capacity Reservation remains active until you explicitly
 	//   cancel it. Do not provide an EndDate value if EndDateType is unlimited .
+	//
 	//   - limited - The Capacity Reservation expires automatically at a specified date
 	//   and time. You must provide an EndDate value if EndDateType is limited .
 	EndDateType types.EndDateType
@@ -111,25 +115,25 @@ func (c *Client) addOperationModifyCapacityReservationMiddlewares(stack *middlew
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -144,13 +148,16 @@ func (c *Client) addOperationModifyCapacityReservationMiddlewares(stack *middlew
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpModifyCapacityReservationValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opModifyCapacityReservation(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

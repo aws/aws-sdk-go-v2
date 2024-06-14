@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -16,19 +15,28 @@ import (
 // your EC2 instances within an Availability Zone or Local Zone. You can use this
 // information to determine the relative proximity of your EC2 instances within the
 // Amazon Web Services network to support your tightly coupled workloads.
+//
 // Limitations
+//
 //   - Supported zones
+//
 //   - Availability Zone
+//
 //   - Local Zone
+//
 //   - Supported instance types
+//
 //   - hpc6a.48xlarge | hpc6id.32xlarge | hpc7a.12xlarge | hpc7a.24xlarge |
 //     hpc7a.48xlarge | hpc7a.96xlarge | hpc7g.4xlarge | hpc7g.8xlarge |
 //     hpc7g.16xlarge
+//
 //   - p3dn.24xlarge | p4d.24xlarge | p4de.24xlarge | p5.48xlarge
+//
 //   - trn1.2xlarge | trn1.32xlarge | trn1n.32xlarge
 //
-// For more information, see Amazon EC2 instance topology (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-topology.html)
-// in the Amazon EC2 User Guide.
+// For more information, see [Amazon EC2 instance topology] in the Amazon EC2 User Guide.
+//
+// [Amazon EC2 instance topology]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-topology.html
 func (c *Client) DescribeInstanceTopology(ctx context.Context, params *DescribeInstanceTopologyInput, optFns ...func(*Options)) (*DescribeInstanceTopologyOutput, error) {
 	if params == nil {
 		params = &DescribeInstanceTopologyInput{}
@@ -53,29 +61,41 @@ type DescribeInstanceTopologyInput struct {
 	DryRun *bool
 
 	// The filters.
+	//
 	//   - availability-zone - The name of the Availability Zone (for example,
 	//   us-west-2a ) or Local Zone (for example, us-west-2-lax-1b ) that the instance
 	//   is in.
+	//
 	//   - instance-type - The instance type (for example, p4d.24xlarge ) or instance
 	//   family (for example, p4d* ). You can use the * wildcard to match zero or more
 	//   characters, or the ? wildcard to match zero or one character.
+	//
 	//   - zone-id - The ID of the Availability Zone (for example, usw2-az2 ) or Local
 	//   Zone (for example, usw2-lax1-az1 ) that the instance is in.
 	Filters []types.Filter
 
-	// The name of the placement group that each instance is in. Constraints: Maximum
-	// 100 explicitly specified placement group names.
+	// The name of the placement group that each instance is in.
+	//
+	// Constraints: Maximum 100 explicitly specified placement group names.
 	GroupNames []string
 
-	// The instance IDs. Default: Describes all your instances. Constraints: Maximum
-	// 100 explicitly specified instance IDs.
+	// The instance IDs.
+	//
+	// Default: Describes all your instances.
+	//
+	// Constraints: Maximum 100 explicitly specified instance IDs.
 	InstanceIds []string
 
 	// The maximum number of items to return for this request. To get the next page of
 	// items, make another request with the token returned in the output. For more
-	// information, see Pagination (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination)
-	// . You can't specify this parameter and the instance IDs parameter in the same
-	// request. Default: 20
+	// information, see [Pagination].
+	//
+	// You can't specify this parameter and the instance IDs parameter in the same
+	// request.
+	//
+	// Default: 20
+	//
+	// [Pagination]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination
 	MaxResults *int32
 
 	// The token returned from a previous paginated request. Pagination continues from
@@ -122,25 +142,25 @@ func (c *Client) addOperationDescribeInstanceTopologyMiddlewares(stack *middlewa
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -155,10 +175,13 @@ func (c *Client) addOperationDescribeInstanceTopologyMiddlewares(stack *middlewa
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeInstanceTopology(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -189,9 +212,14 @@ var _ DescribeInstanceTopologyAPIClient = (*Client)(nil)
 type DescribeInstanceTopologyPaginatorOptions struct {
 	// The maximum number of items to return for this request. To get the next page of
 	// items, make another request with the token returned in the output. For more
-	// information, see Pagination (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination)
-	// . You can't specify this parameter and the instance IDs parameter in the same
-	// request. Default: 20
+	// information, see [Pagination].
+	//
+	// You can't specify this parameter and the instance IDs parameter in the same
+	// request.
+	//
+	// Default: 20
+	//
+	// [Pagination]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

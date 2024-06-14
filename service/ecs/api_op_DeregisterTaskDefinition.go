@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/ecs/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -18,16 +17,22 @@ import (
 // disruption. Existing services that reference an INACTIVE task definition can
 // still scale up or down by modifying the service's desired count. If you want to
 // delete a task definition revision, you must first deregister the task definition
-// revision. You can't use an INACTIVE task definition to run new tasks or create
-// new services, and you can't update an existing service to reference an INACTIVE
+// revision.
+//
+// You can't use an INACTIVE task definition to run new tasks or create new
+// services, and you can't update an existing service to reference an INACTIVE
 // task definition. However, there may be up to a 10-minute window following
-// deregistration where these restrictions have not yet taken effect. At this time,
-// INACTIVE task definitions remain discoverable in your account indefinitely.
-// However, this behavior is subject to change in the future. We don't recommend
-// that you rely on INACTIVE task definitions persisting beyond the lifecycle of
-// any associated tasks and services. You must deregister a task definition
-// revision before you delete it. For more information, see DeleteTaskDefinitions (https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_DeleteTaskDefinitions.html)
-// .
+// deregistration where these restrictions have not yet taken effect.
+//
+// At this time, INACTIVE task definitions remain discoverable in your account
+// indefinitely. However, this behavior is subject to change in the future. We
+// don't recommend that you rely on INACTIVE task definitions persisting beyond
+// the lifecycle of any associated tasks and services.
+//
+// You must deregister a task definition revision before you delete it. For more
+// information, see [DeleteTaskDefinitions].
+//
+// [DeleteTaskDefinitions]: https://docs.aws.amazon.com/AmazonECS/latest/APIReference/API_DeleteTaskDefinitions.html
 func (c *Client) DeregisterTaskDefinition(ctx context.Context, params *DeregisterTaskDefinitionInput, optFns ...func(*Options)) (*DeregisterTaskDefinitionOutput, error) {
 	if params == nil {
 		params = &DeregisterTaskDefinitionInput{}
@@ -87,25 +92,25 @@ func (c *Client) addOperationDeregisterTaskDefinitionMiddlewares(stack *middlewa
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -120,13 +125,16 @@ func (c *Client) addOperationDeregisterTaskDefinitionMiddlewares(stack *middlewa
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDeregisterTaskDefinitionValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDeregisterTaskDefinition(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

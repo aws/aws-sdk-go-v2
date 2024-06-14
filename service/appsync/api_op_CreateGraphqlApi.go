@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/appsync/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -54,9 +53,11 @@ type CreateGraphqlApiInput struct {
 	// Sets the value of the GraphQL API to enable ( ENABLED ) or disable ( DISABLED )
 	// introspection. If no value is provided, the introspection configuration will be
 	// set to ENABLED by default. This field will produce an error if the operation
-	// attempts to use the introspection feature while this field is disabled. For more
-	// information about introspection, see GraphQL introspection (https://graphql.org/learn/introspection/)
-	// .
+	// attempts to use the introspection feature while this field is disabled.
+	//
+	// For more information about introspection, see [GraphQL introspection].
+	//
+	// [GraphQL introspection]: https://graphql.org/learn/introspection/
 	IntrospectionConfig types.GraphQLApiIntrospectionConfig
 
 	// Configuration for Lambda function authorization.
@@ -74,17 +75,20 @@ type CreateGraphqlApiInput struct {
 	// The OIDC configuration.
 	OpenIDConnectConfig *types.OpenIDConnectConfig
 
-	// The owner contact information for an API resource. This field accepts any
-	// string input with a length of 0 - 256 characters.
+	// The owner contact information for an API resource.
+	//
+	// This field accepts any string input with a length of 0 - 256 characters.
 	OwnerContact *string
 
 	// The maximum depth a query can have in a single request. Depth refers to the
 	// amount of nested levels allowed in the body of query. The default value is 0
 	// (or unspecified), which indicates there's no depth limit. If you set a limit, it
 	// can be between 1 and 75 nested levels. This field will produce a limit error if
-	// the operation falls out of bounds. Note that fields can still be set to nullable
-	// or non-nullable. If a non-nullable field produces an error, the error will be
-	// thrown upwards to the first nullable field available.
+	// the operation falls out of bounds.
+	//
+	// Note that fields can still be set to nullable or non-nullable. If a
+	// non-nullable field produces an error, the error will be thrown upwards to the
+	// first nullable field available.
 	QueryDepthLimit int32
 
 	// The maximum number of resolvers that can be invoked in a single request. The
@@ -143,25 +147,25 @@ func (c *Client) addOperationCreateGraphqlApiMiddlewares(stack *middleware.Stack
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -176,13 +180,16 @@ func (c *Client) addOperationCreateGraphqlApiMiddlewares(stack *middleware.Stack
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpCreateGraphqlApiValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateGraphqlApi(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

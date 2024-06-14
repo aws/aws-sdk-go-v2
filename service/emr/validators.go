@@ -810,6 +810,26 @@ func (m *validateOpSetTerminationProtection) HandleInitialize(ctx context.Contex
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpSetUnhealthyNodeReplacement struct {
+}
+
+func (*validateOpSetUnhealthyNodeReplacement) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpSetUnhealthyNodeReplacement) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*SetUnhealthyNodeReplacementInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpSetUnhealthyNodeReplacementInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpSetVisibleToAllUsers struct {
 }
 
@@ -1088,6 +1108,10 @@ func addOpSetKeepJobFlowAliveWhenNoStepsValidationMiddleware(stack *middleware.S
 
 func addOpSetTerminationProtectionValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpSetTerminationProtection{}, middleware.After)
+}
+
+func addOpSetUnhealthyNodeReplacementValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpSetUnhealthyNodeReplacement{}, middleware.After)
 }
 
 func addOpSetVisibleToAllUsersValidationMiddleware(stack *middleware.Stack) error {
@@ -2660,6 +2684,24 @@ func validateOpSetTerminationProtectionInput(v *SetTerminationProtectionInput) e
 	}
 	if v.TerminationProtected == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TerminationProtected"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpSetUnhealthyNodeReplacementInput(v *SetUnhealthyNodeReplacementInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SetUnhealthyNodeReplacementInput"}
+	if v.JobFlowIds == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("JobFlowIds"))
+	}
+	if v.UnhealthyNodeReplacement == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("UnhealthyNodeReplacement"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

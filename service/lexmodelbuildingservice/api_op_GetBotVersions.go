@@ -6,19 +6,22 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/lexmodelbuildingservice/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Gets information about all of the versions of a bot. The GetBotVersions
-// operation returns a BotMetadata object for each version of a bot. For example,
-// if a bot has three numbered versions, the GetBotVersions operation returns four
-// BotMetadata objects in the response, one for each numbered version and one for
-// the $LATEST version. The GetBotVersions operation always returns at least one
-// version, the $LATEST version. This operation requires permissions for the
-// lex:GetBotVersions action.
+// Gets information about all of the versions of a bot.
+//
+// The GetBotVersions operation returns a BotMetadata object for each version of a
+// bot. For example, if a bot has three numbered versions, the GetBotVersions
+// operation returns four BotMetadata objects in the response, one for each
+// numbered version and one for the $LATEST version.
+//
+// The GetBotVersions operation always returns at least one version, the $LATEST
+// version.
+//
+// This operation requires permissions for the lex:GetBotVersions action.
 func (c *Client) GetBotVersions(ctx context.Context, params *GetBotVersionsInput, optFns ...func(*Options)) (*GetBotVersionsOutput, error) {
 	if params == nil {
 		params = &GetBotVersionsInput{}
@@ -93,25 +96,25 @@ func (c *Client) addOperationGetBotVersionsMiddlewares(stack *middleware.Stack, 
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -126,13 +129,16 @@ func (c *Client) addOperationGetBotVersionsMiddlewares(stack *middleware.Stack, 
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpGetBotVersionsValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetBotVersions(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

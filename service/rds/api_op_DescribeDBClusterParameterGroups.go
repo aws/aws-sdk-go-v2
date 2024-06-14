@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/rds/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -14,11 +13,14 @@ import (
 
 // Returns a list of DBClusterParameterGroup descriptions. If a
 // DBClusterParameterGroupName parameter is specified, the list will contain only
-// the description of the specified DB cluster parameter group. For more
-// information on Amazon Aurora, see What is Amazon Aurora? (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/CHAP_AuroraOverview.html)
-// in the Amazon Aurora User Guide. For more information on Multi-AZ DB clusters,
-// see Multi-AZ DB cluster deployments (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/multi-az-db-clusters-concepts.html)
-// in the Amazon RDS User Guide.
+// the description of the specified DB cluster parameter group.
+//
+// For more information on Amazon Aurora, see [What is Amazon Aurora?] in the Amazon Aurora User Guide.
+//
+// For more information on Multi-AZ DB clusters, see [Multi-AZ DB cluster deployments] in the Amazon RDS User Guide.
+//
+// [What is Amazon Aurora?]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/CHAP_AuroraOverview.html
+// [Multi-AZ DB cluster deployments]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/multi-az-db-clusters-concepts.html
 func (c *Client) DescribeDBClusterParameterGroups(ctx context.Context, params *DescribeDBClusterParameterGroupsInput, optFns ...func(*Options)) (*DescribeDBClusterParameterGroupsOutput, error) {
 	if params == nil {
 		params = &DescribeDBClusterParameterGroupsInput{}
@@ -37,7 +39,9 @@ func (c *Client) DescribeDBClusterParameterGroups(ctx context.Context, params *D
 type DescribeDBClusterParameterGroupsInput struct {
 
 	// The name of a specific DB cluster parameter group to return details for.
+	//
 	// Constraints:
+	//
 	//   - If supplied, must match the name of an existing DBClusterParameterGroup.
 	DBClusterParameterGroupName *string
 
@@ -52,7 +56,10 @@ type DescribeDBClusterParameterGroupsInput struct {
 
 	// The maximum number of records to include in the response. If more records exist
 	// than the specified MaxRecords value, a pagination token called a marker is
-	// included in the response so you can retrieve the remaining results. Default: 100
+	// included in the response so you can retrieve the remaining results.
+	//
+	// Default: 100
+	//
 	// Constraints: Minimum 20, maximum 100.
 	MaxRecords *int32
 
@@ -98,25 +105,25 @@ func (c *Client) addOperationDescribeDBClusterParameterGroupsMiddlewares(stack *
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -131,13 +138,16 @@ func (c *Client) addOperationDescribeDBClusterParameterGroupsMiddlewares(stack *
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDescribeDBClusterParameterGroupsValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeDBClusterParameterGroups(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -168,7 +178,10 @@ var _ DescribeDBClusterParameterGroupsAPIClient = (*Client)(nil)
 type DescribeDBClusterParameterGroupsPaginatorOptions struct {
 	// The maximum number of records to include in the response. If more records exist
 	// than the specified MaxRecords value, a pagination token called a marker is
-	// included in the response so you can retrieve the remaining results. Default: 100
+	// included in the response so you can retrieve the remaining results.
+	//
+	// Default: 100
+	//
 	// Constraints: Minimum 20, maximum 100.
 	Limit int32
 

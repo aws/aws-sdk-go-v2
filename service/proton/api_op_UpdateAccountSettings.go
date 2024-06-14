@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/proton/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -44,15 +43,18 @@ type UpdateAccountSettingsInput struct {
 	// A linked repository for pipeline provisioning. Specify it if you have
 	// environments configured for self-managed provisioning with services that include
 	// pipelines. A linked repository is a repository that has been registered with
-	// Proton. For more information, see CreateRepository . To remove a previously
-	// configured repository, set deletePipelineProvisioningRepository to true , and
-	// don't set pipelineProvisioningRepository .
+	// Proton. For more information, see CreateRepository.
+	//
+	// To remove a previously configured repository, set
+	// deletePipelineProvisioningRepository to true , and don't set
+	// pipelineProvisioningRepository .
 	PipelineProvisioningRepository *types.RepositoryBranchInput
 
 	// The Amazon Resource Name (ARN) of the service role you want to use for
 	// provisioning pipelines. Assumed by Proton for Amazon Web Services-managed
-	// provisioning, and by customer-owned automation for self-managed provisioning. To
-	// remove a previously configured ARN, specify an empty string.
+	// provisioning, and by customer-owned automation for self-managed provisioning.
+	//
+	// To remove a previously configured ARN, specify an empty string.
 	PipelineServiceRoleArn *string
 
 	noSmithyDocumentSerde
@@ -94,25 +96,25 @@ func (c *Client) addOperationUpdateAccountSettingsMiddlewares(stack *middleware.
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -127,13 +129,16 @@ func (c *Client) addOperationUpdateAccountSettingsMiddlewares(stack *middleware.
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpUpdateAccountSettingsValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateAccountSettings(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

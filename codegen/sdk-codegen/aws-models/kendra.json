@@ -1477,42 +1477,42 @@
                 "ContainsAll": {
                     "target": "com.amazonaws.kendra#DocumentAttribute",
                     "traits": {
-                        "smithy.api#documentation": "<p>Returns true when a document contains all of the specified document attributes/fields. \n         This filter is only applicable to <a href=\"https://docs.aws.amazon.com/kendra/latest/APIReference/API_DocumentAttributeValue.html\">StringListValue</a>.</p>"
+                        "smithy.api#documentation": "<p>Returns true when a document contains all of the specified document attributes/fields.\n         This filter is only applicable to <a href=\"https://docs.aws.amazon.com/kendra/latest/APIReference/API_DocumentAttributeValue.html\">StringListValue</a>.</p>"
                     }
                 },
                 "ContainsAny": {
                     "target": "com.amazonaws.kendra#DocumentAttribute",
                     "traits": {
-                        "smithy.api#documentation": "<p>Returns true when a document contains any of the specified document attributes/fields. \n         This filter is only applicable to <a href=\"https://docs.aws.amazon.com/kendra/latest/APIReference/API_DocumentAttributeValue.html\">StringListValue</a>.</p>"
+                        "smithy.api#documentation": "<p>Returns true when a document contains any of the specified document attributes/fields.\n         This filter is only applicable to <a href=\"https://docs.aws.amazon.com/kendra/latest/APIReference/API_DocumentAttributeValue.html\">StringListValue</a>.</p>"
                     }
                 },
                 "GreaterThan": {
                     "target": "com.amazonaws.kendra#DocumentAttribute",
                     "traits": {
-                        "smithy.api#documentation": "<p>Performs a greater than operation on document attributes/fields and their \n         values. Use with the <a href=\"https://docs.aws.amazon.com/kendra/latest/APIReference/API_DocumentAttributeValue.html\">document attribute \n            type</a>\n            <code>Date</code> or <code>Long</code>.</p>"
+                        "smithy.api#documentation": "<p>Performs a greater than operation on document attributes/fields and their values. Use\n         with the <a href=\"https://docs.aws.amazon.com/kendra/latest/APIReference/API_DocumentAttributeValue.html\">document attribute\n            type</a>\n            <code>Date</code> or <code>Long</code>.</p>"
                     }
                 },
                 "GreaterThanOrEquals": {
                     "target": "com.amazonaws.kendra#DocumentAttribute",
                     "traits": {
-                        "smithy.api#documentation": "<p>Performs a greater or equals than operation on document attributes/fields and \n         their values. Use with the <a href=\"https://docs.aws.amazon.com/kendra/latest/APIReference/API_DocumentAttributeValue.html\">document attribute \n            type</a>\n            <code>Date</code> or <code>Long</code>.</p>"
+                        "smithy.api#documentation": "<p>Performs a greater or equals than operation on document attributes/fields and their\n         values. Use with the <a href=\"https://docs.aws.amazon.com/kendra/latest/APIReference/API_DocumentAttributeValue.html\">document attribute\n            type</a>\n            <code>Date</code> or <code>Long</code>.</p>"
                     }
                 },
                 "LessThan": {
                     "target": "com.amazonaws.kendra#DocumentAttribute",
                     "traits": {
-                        "smithy.api#documentation": "<p>Performs a less than operation on document attributes/fields and their values. \n         Use with the <a href=\"https://docs.aws.amazon.com/kendra/latest/APIReference/API_DocumentAttributeValue.html\">document attribute \n            type</a>\n            <code>Date</code> or <code>Long</code>.</p>"
+                        "smithy.api#documentation": "<p>Performs a less than operation on document attributes/fields and their values. Use with\n         the <a href=\"https://docs.aws.amazon.com/kendra/latest/APIReference/API_DocumentAttributeValue.html\">document attribute\n            type</a>\n            <code>Date</code> or <code>Long</code>.</p>"
                     }
                 },
                 "LessThanOrEquals": {
                     "target": "com.amazonaws.kendra#DocumentAttribute",
                     "traits": {
-                        "smithy.api#documentation": "<p>Performs a less than or equals operation on document attributes/fields and \n         their values. Use with the <a href=\"https://docs.aws.amazon.com/kendra/latest/APIReference/API_DocumentAttributeValue.html\">document attribute \n            type</a>\n            <code>Date</code> or <code>Long</code>.</p>"
+                        "smithy.api#documentation": "<p>Performs a less than or equals operation on document attributes/fields and their values.\n         Use with the <a href=\"https://docs.aws.amazon.com/kendra/latest/APIReference/API_DocumentAttributeValue.html\">document attribute\n            type</a>\n            <code>Date</code> or <code>Long</code>.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Filters the search results based on document attributes or fields.</p>\n         <p>You can filter results using attributes for your particular documents. \n         The attributes must exist in your index. For example, if your documents \n         include the custom attribute \"Department\", you can filter documents that \n         belong to the \"HR\" department. You would use the <code>EqualsTo</code> \n         operation to filter results or documents with \"Department\" equals to \"HR\".</p>\n         <p>You can use <code>AndAllFilters</code> and <code>AndOrFilters</code> in \n         combination with each other or with other operations such as <code>EqualsTo</code>. \n         For example:</p>\n         <p>\n            <code>AndAllFilters</code>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <code>EqualsTo</code>: \"Department\", \"HR\"</p>\n            </li>\n            <li>\n               <p>\n                  <code>AndOrFilters</code>\n               </p>\n               <ul>\n                  <li>\n                     <p>\n                        <code>ContainsAny</code>: \"Project Name\", [\"new hires\", \"new hiring\"]</p>\n                  </li>\n               </ul>\n            </li>\n         </ul>\n         <p>This example filters results or documents that belong to the HR department \n         <i>and</i> belong to projects that contain \"new hires\" \n         <i>or</i> \"new hiring\" in the project name (must use \n         <code>ContainAny</code> with <code>StringListValue</code>). This example is \n         filtering with a depth of 2.</p>\n         <p>You cannot filter more than a depth of 2, otherwise you receive a \n         <code>ValidationException</code> exception with the message \"AttributeFilter \n         cannot have a depth of more than 2.\" Also, if you use more than 10 attribute \n         filters in a given list for <code>AndAllFilters</code> or <code>OrAllFilters</code>, \n         you receive a <code>ValidationException</code> with the message \"AttributeFilter \n         cannot have a length of more than 10\".</p>\n         <p>For examples of using <code>AttributeFilter</code>, see <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/filtering.html#search-filtering\">Using \n         document attributes to filter search results</a>.</p>"
+                "smithy.api#documentation": "<p>Filters the search results based on document attributes or fields.</p>\n         <p>You can filter results using attributes for your particular documents. The attributes\n         must exist in your index. For example, if your documents include the custom attribute\n         \"Department\", you can filter documents that belong to the \"HR\" department. You would use\n         the <code>EqualsTo</code> operation to filter results or documents with \"Department\" equals\n         to \"HR\".</p>\n         <p>You can use <code>AndAllFilters</code> and <code>AndOrFilters</code> in combination with\n         each other or with other operations such as <code>EqualsTo</code>. For example:</p>\n         <p>\n            <code>AndAllFilters</code>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <code>EqualsTo</code>: \"Department\", \"HR\"</p>\n            </li>\n            <li>\n               <p>\n                  <code>AndOrFilters</code>\n               </p>\n               <ul>\n                  <li>\n                     <p>\n                        <code>ContainsAny</code>: \"Project Name\", [\"new hires\", \"new hiring\"]</p>\n                  </li>\n               </ul>\n            </li>\n         </ul>\n         <p>This example filters results or documents that belong to the HR department\n            <i>and</i> belong to projects that contain \"new hires\"\n            <i>or</i> \"new hiring\" in the project name (must use\n            <code>ContainAny</code> with <code>StringListValue</code>). This example is filtering\n         with a depth of 2.</p>\n         <p>You cannot filter more than a depth of 2, otherwise you receive a\n            <code>ValidationException</code> exception with the message \"AttributeFilter cannot have\n         a depth of more than 2.\" Also, if you use more than 10 attribute filters in a given list\n         for <code>AndAllFilters</code> or <code>OrAllFilters</code>, you receive a\n            <code>ValidationException</code> with the message \"AttributeFilter cannot have a length\n         of more than 10\".</p>\n         <p>For examples of using <code>AttributeFilter</code>, see <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/filtering.html#search-filtering\">Using document attributes to\n            filter search results</a>.</p>"
             }
         },
         "com.amazonaws.kendra#AttributeFilterList": {
@@ -4011,7 +4011,7 @@
                 "UserGroupResolutionConfiguration": {
                     "target": "com.amazonaws.kendra#UserGroupResolutionConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>Gets users and groups from IAM Identity Center \n         identity source. To configure this, see <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/API_UserGroupResolutionConfiguration.html\">UserGroupResolutionConfiguration</a>.</p>"
+                        "smithy.api#documentation": "<p>Gets users and groups from IAM Identity Center \n         identity source. To configure this, see <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/API_UserGroupResolutionConfiguration.html\">UserGroupResolutionConfiguration</a>. This is useful for user context filtering, where\n         search results are filtered based on the user or their group access to documents.</p>"
                     }
                 }
             },
@@ -4279,7 +4279,7 @@
                 "S3Configuration": {
                     "target": "com.amazonaws.kendra#S3DataSourceConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>Provides the configuration information to connect to an Amazon S3 bucket as your\n      data source.</p>"
+                        "smithy.api#documentation": "<p>Provides the configuration information to connect to an Amazon S3 bucket as your\n      data source.</p>\n         <note>\n            <p>Amazon Kendra now supports an upgraded Amazon S3 connector.</p>\n            <p>You must now use the <a href=\"https://docs.aws.amazon.com/kendra/latest/APIReference/API_TemplateConfiguration.html\">TemplateConfiguration</a> object instead of the \n        <code>S3DataSourceConfiguration</code> object to configure your connector.</p>\n            <p>Connectors configured using the older console and API architecture will continue to\n        function as configured. However, you won't be able to edit or update them. If you want\n        to edit or update your connector configuration, you must create a new connector.</p>\n            <p>We recommended migrating your connector workflow to the upgraded version. Support for \n        connectors configured using the older architecture is scheduled to end by June 2024.</p>\n         </note>"
                     }
                 },
                 "SharePointConfiguration": {
@@ -4336,13 +4336,13 @@
                 "FsxConfiguration": {
                     "target": "com.amazonaws.kendra#FsxConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>Provides the configuration information to connect to Amazon FSx as your data\n      source.</p>"
+                        "smithy.api#documentation": "<p>Provides the configuration information to connect to Amazon FSx as your data\n      source.</p>\n         <note>\n            <p>Amazon Kendra now supports an upgraded Amazon FSx Windows connector.</p>\n            <p>You must now use the <a href=\"https://docs.aws.amazon.com/kendra/latest/APIReference/API_TemplateConfiguration.html\">TemplateConfiguration</a> object instead of the \n        <code>FsxConfiguration</code> object to configure your connector.</p>\n            <p>Connectors configured using the older console and API architecture will continue to\n        function as configured. However, you won't be able to edit or update them. If you want\n        to edit or update your connector configuration, you must create a new connector.</p>\n            <p>We recommended migrating your connector workflow to the upgraded version. Support for \n        connectors configured using the older architecture is scheduled to end by June 2024.</p>\n         </note>"
                     }
                 },
                 "SlackConfiguration": {
                     "target": "com.amazonaws.kendra#SlackConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>Provides the configuration information to connect to Slack as your data source.</p>"
+                        "smithy.api#documentation": "<p>Provides the configuration information to connect to Slack as your data source.</p>\n         <note>\n            <p>Amazon Kendra now supports an upgraded Slack connector.</p>\n            <p>You must now use the <a href=\"https://docs.aws.amazon.com/kendra/latest/APIReference/API_TemplateConfiguration.html\">TemplateConfiguration</a> object instead of the \n        <code>SlackConfiguration</code> object to configure your connector.</p>\n            <p>Connectors configured using the older console and API architecture will continue to\n        function as configured. However, you won't be able to edit or update them. If you want\n        to edit or update your connector configuration, you must create a new connector.</p>\n            <p>We recommended migrating your connector workflow to the upgraded version. Support for \n        connectors configured using the older architecture is scheduled to end by June 2024.</p>\n         </note>"
                     }
                 },
                 "BoxConfiguration": {
@@ -4366,7 +4366,7 @@
                 "GitHubConfiguration": {
                     "target": "com.amazonaws.kendra#GitHubConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>Provides the configuration information to connect to GitHub as your data source.</p>"
+                        "smithy.api#documentation": "<p>Provides the configuration information to connect to GitHub as your data source.</p>\n         <note>\n            <p>Amazon Kendra now supports an upgraded GitHub connector.</p>\n            <p>You must now use the <a href=\"https://docs.aws.amazon.com/kendra/latest/APIReference/API_TemplateConfiguration.html\">TemplateConfiguration</a> object instead of the\n        <code>GitHubConfiguration</code> object to configure your connector.</p>\n            <p>Connectors configured using the older console and API architecture will continue\n        to function as configured. However, you won’t be able to edit or update them. If you\n        want to edit or update your connector configuration, you must create a new\n        connector.</p>\n            <p>We recommended migrating your connector workflow to the upgraded version. Support\n        for connectors configured using the older architecture is scheduled to end by June\n        2024.</p>\n         </note>"
                     }
                 },
                 "AlfrescoConfiguration": {
@@ -4375,7 +4375,7 @@
                         "smithy.api#deprecated": {
                             "message": "Deprecated AlfrescoConfiguration in favor of TemplateConfiguration"
                         },
-                        "smithy.api#documentation": "<p>Provides the configuration information to connect to Alfresco as your data source.</p>\n         <p>Support for <code>AlfrescoConfiguration</code> ended May 2023. \n      We recommend migrating to or using the Alfresco data source template \n      schema / <a href=\"https://docs.aws.amazon.com/kendra/latest/APIReference/API_TemplateConfiguration.html\">TemplateConfiguration</a> API.</p>"
+                        "smithy.api#documentation": "<p>Provides the configuration information to connect to Alfresco as your data source.</p>\n         <note>\n            <p>Support for <code>AlfrescoConfiguration</code> ended May 2023. \n        We recommend migrating to or using the Alfresco data source template \n        schema / <a href=\"https://docs.aws.amazon.com/kendra/latest/APIReference/API_TemplateConfiguration.html\">TemplateConfiguration</a> \n        API.</p>\n         </note>"
                     }
                 },
                 "TemplateConfiguration": {
@@ -5306,7 +5306,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes an existing Amazon Kendra index. An exception is not thrown if the index is\n      already being deleted. While the index is being deleted, the <code>Status</code> field\n      returned by a call to the <code>DescribeIndex</code> API is set to\n      <code>DELETING</code>.</p>"
+                "smithy.api#documentation": "<p>Deletes an Amazon Kendra index. An exception is not thrown if the index is\n      already being deleted. While the index is being deleted, the <code>Status</code> field\n      returned by a call to the <code>DescribeIndex</code> API is set to\n      <code>DELETING</code>.</p>"
             }
         },
         "com.amazonaws.kendra#DeleteIndexRequest": {
@@ -5473,7 +5473,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes an existing Amazon Kendra thesaurus. \n      </p>"
+                "smithy.api#documentation": "<p>Deletes an Amazon Kendra thesaurus. \n      </p>"
             }
         },
         "com.amazonaws.kendra#DeleteThesaurusRequest": {
@@ -6129,7 +6129,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Gets information about an existing Amazon Kendra index.</p>"
+                "smithy.api#documentation": "<p>Gets information about an Amazon Kendra index.</p>"
             }
         },
         "com.amazonaws.kendra#DescribeIndexRequest": {
@@ -6171,13 +6171,13 @@
                 "RoleArn": {
                     "target": "com.amazonaws.kendra#RoleArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the IAM role that gives Amazon Kendra permission to\n      write to your Amazon Cloudwatch logs.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the IAM role that gives \n      Amazon Kendra permission to write to your Amazon CloudWatch logs.</p>"
                     }
                 },
                 "ServerSideEncryptionConfiguration": {
                     "target": "com.amazonaws.kendra#ServerSideEncryptionConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier of the KMScustomer master key (CMK) that is used to encrypt\n      your data. Amazon Kendra doesn't support asymmetric CMKs.</p>"
+                        "smithy.api#documentation": "<p>The identifier of the KMS customer master key (CMK) that is used to encrypt\n      your data. Amazon Kendra doesn't support asymmetric CMKs.</p>"
                     }
                 },
                 "Status": {
@@ -6201,7 +6201,7 @@
                 "UpdatedAt": {
                     "target": "com.amazonaws.kendra#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Unix when the index was last updated.</p>"
+                        "smithy.api#documentation": "<p>The Unix timestamp when the index was last updated.</p>"
                     }
                 },
                 "DocumentMetadataConfigurations": {
@@ -6243,7 +6243,7 @@
                 "UserGroupResolutionConfiguration": {
                     "target": "com.amazonaws.kendra#UserGroupResolutionConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>Whether you have enabled the configuration for fetching access levels of groups and\n         users from an IAM Identity Center identity source.</p>"
+                        "smithy.api#documentation": "<p>Whether you have enabled IAM Identity Center identity source for your \n         users and groups. This is useful for user context filtering, where\n         search results are filtered based on the user or their group access to documents.</p>"
                     }
                 }
             },
@@ -6609,7 +6609,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Gets information about an existing Amazon Kendra thesaurus.</p>"
+                "smithy.api#documentation": "<p>Gets information about an Amazon Kendra thesaurus.</p>"
             }
         },
         "com.amazonaws.kendra#DescribeThesaurusRequest": {
@@ -7107,7 +7107,7 @@
                 "Count": {
                     "target": "com.amazonaws.kendra#Integer",
                     "traits": {
-                        "smithy.api#documentation": "<p>The number of documents in the response that have the attribute/field value for \n         the key.</p>"
+                        "smithy.api#documentation": "<p>The number of documents in the response that have the attribute/field value for the\n         key.</p>"
                     }
                 },
                 "FacetResults": {
@@ -7118,7 +7118,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Provides the count of documents that match a particular document attribute or \n         field when doing a faceted search.</p>"
+                "smithy.api#documentation": "<p>Provides the count of documents that match a particular document attribute or field when\n         doing a faceted search.</p>"
             }
         },
         "com.amazonaws.kendra#DocumentAttributeValueCountPairList": {
@@ -8547,7 +8547,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Provides the configuration information to connect to Amazon FSx as your data\n            source.</p>"
+                "smithy.api#documentation": "<p>Provides the configuration information to connect to Amazon FSx as your data\n            source.</p>\n         <note>\n            <p>Amazon Kendra now supports an upgraded Amazon FSx Windows connector.</p>\n            <p>You must now use the <a href=\"https://docs.aws.amazon.com/kendra/latest/APIReference/API_TemplateConfiguration.html\">TemplateConfiguration</a> object instead of the \n                <code>FsxConfiguration</code> object to configure your connector.</p>\n            <p>Connectors configured using the older console and API architecture will continue to\n                function as configured. However, you won't be able to edit or update them. If you want\n                to edit or update your connector configuration, you must create a new connector.</p>\n            <p>We recommended migrating your connector workflow to the upgraded version. Support for \n                connectors configured using the older architecture is scheduled to end by June 2024.</p>\n         </note>"
             }
         },
         "com.amazonaws.kendra#FsxFileSystemType": {
@@ -8899,7 +8899,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Provides the configuration information to connect to GitHub as your data\n            source.</p>"
+                "smithy.api#documentation": "<p>Provides the configuration information to connect to GitHub as your data\n            source.</p>\n         <note>\n            <p>Amazon Kendra now supports an upgraded GitHub connector.</p>\n            <p>You must now use the <a href=\"https://docs.aws.amazon.com/kendra/latest/APIReference/API_TemplateConfiguration.html\">TemplateConfiguration</a> object instead of the\n                    <code>GitHubConfiguration</code> object to configure your connector.</p>\n            <p>Connectors configured using the older console and API architecture will continue\n                to function as configured. However, you won’t be able to edit or update them. If you\n                want to edit or update your connector configuration, you must create a new\n                connector.</p>\n            <p>We recommended migrating your connector workflow to the upgraded version. Support\n                for connectors configured using the older architecture is scheduled to end by June\n                2024.</p>\n         </note>"
             }
         },
         "com.amazonaws.kendra#GitHubDocumentCrawlProperties": {
@@ -11285,7 +11285,7 @@
                 "OrganizationName": {
                     "target": "com.amazonaws.kendra#OrganizationName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the organization of the GitHub Enterprise Server (in-premise) account you\n            want to connect to. You can find your organization name by logging into GitHub desktop\n            and selecting <b>Your organizations</b> under your profile\n            picture dropdown.</p>",
+                        "smithy.api#documentation": "<p>The name of the organization of the GitHub Enterprise Server (on-premises) account you\n            want to connect to. You can find your organization name by logging into GitHub desktop\n            and selecting <b>Your organizations</b> under your profile\n            picture dropdown.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -11821,7 +11821,7 @@
                 "QueryText": {
                     "target": "com.amazonaws.kendra#QueryText",
                     "traits": {
-                        "smithy.api#documentation": "<p>The input query text for the search. Amazon Kendra truncates queries at 30 token\n         words, which excludes punctuation and stop words. Truncation still applies if you use\n         Boolean or more advanced, complex queries. </p>"
+                        "smithy.api#documentation": "<p>The input query text for the search. Amazon Kendra truncates queries at 30 token\n         words, which excludes punctuation and stop words. Truncation still applies if you use\n         Boolean or more advanced, complex queries. For example, <code>Timeoff AND October AND\n            Category:HR</code> is counted as 3 tokens: <code>timeoff</code>, <code>october</code>,\n            <code>hr</code>. For more information, see <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/searching-example.html#searching-index-query-syntax\">Searching with advanced query syntax</a> in the Amazon Kendra Developer Guide. </p>"
                     }
                 },
                 "AttributeFilter": {
@@ -11980,7 +11980,7 @@
                 "Id": {
                     "target": "com.amazonaws.kendra#ResultId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier for the query result.</p>"
+                        "smithy.api#documentation": "<p>The unique identifier for the query result item id (<code>Id</code>) and the query\n         result item document id (<code>DocumentId</code>) combined. The value of this field changes\n         with every request, even when you have the same documents.</p>"
                     }
                 },
                 "Type": {
@@ -12028,19 +12028,19 @@
                 "DocumentAttributes": {
                     "target": "com.amazonaws.kendra#DocumentAttributeList",
                     "traits": {
-                        "smithy.api#documentation": "<p>An array of document fields/attributes assigned to a document in the search results. \n         For example, the document author (<code>_author</code>) or the source URI \n         (<code>_source_uri</code>) of the document.</p>"
+                        "smithy.api#documentation": "<p>An array of document fields/attributes assigned to a document in the search results. For\n         example, the document author (<code>_author</code>) or the source URI\n            (<code>_source_uri</code>) of the document.</p>"
                     }
                 },
                 "ScoreAttributes": {
                     "target": "com.amazonaws.kendra#ScoreAttributes",
                     "traits": {
-                        "smithy.api#documentation": "<p>Indicates the confidence level of Amazon Kendra providing a relevant result for \n         the query. Each result is placed into a bin that indicates the confidence,\n            <code>VERY_HIGH</code>, <code>HIGH</code>, <code>MEDIUM</code> and <code>LOW</code>. \n         You can use the score to determine if a response meets the confidence needed for your\n         application.</p>\n         <p>The field is only set to <code>LOW</code> when the <code>Type</code> field is set to\n            <code>DOCUMENT</code> and Amazon Kendra is not confident that the result is \n         relevant to the query.</p>"
+                        "smithy.api#documentation": "<p>Indicates the confidence level of Amazon Kendra providing a relevant result for the\n         query. Each result is placed into a bin that indicates the confidence,\n            <code>VERY_HIGH</code>, <code>HIGH</code>, <code>MEDIUM</code> and <code>LOW</code>. You\n         can use the score to determine if a response meets the confidence needed for your\n         application.</p>\n         <p>The field is only set to <code>LOW</code> when the <code>Type</code> field is set to\n            <code>DOCUMENT</code> and Amazon Kendra is not confident that the result is\n         relevant to the query.</p>"
                     }
                 },
                 "FeedbackToken": {
                     "target": "com.amazonaws.kendra#FeedbackToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>A token that identifies a particular result from a particular query. Use this token to\n         provide click-through feedback for the result. For more information, see <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/submitting-feedback.html\">Submitting feedback</a>.</p>"
+                        "smithy.api#documentation": "<p>A token that identifies a particular result from a particular query. Use this token to\n         provide click-through feedback for the result. For more information, see <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/submitting-feedback.html\">Submitting\n            feedback</a>.</p>"
                     }
                 },
                 "TableExcerpt": {
@@ -12349,7 +12349,7 @@
                 "Freshness": {
                     "target": "com.amazonaws.kendra#DocumentMetadataBoolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>Indicates that this field determines how \"fresh\" a document is. For example, if\n            document 1 was created on November 5, and document 2 was created on October 31, document\n            1 is \"fresher\" than document 2. You can only set the <code>Freshness</code> field on one\n                <code>DATE</code> type field. Only applies to <code>DATE</code> fields.</p>"
+                        "smithy.api#documentation": "<p>Indicates that this field determines how \"fresh\" a document is. For example, if\n            document 1 was created on November 5, and document 2 was created on October 31, document\n            1 is \"fresher\" than document 2. Only applies to <code>DATE</code> fields.</p>"
                     }
                 },
                 "Importance": {
@@ -12367,13 +12367,13 @@
                 "RankOrder": {
                     "target": "com.amazonaws.kendra#Order",
                     "traits": {
-                        "smithy.api#documentation": "<p>Determines how values should be interpreted.</p>\n         <p>When the <code>RankOrder</code> field is <code>ASCENDING</code>, higher numbers are\n            better. For example, a document with a rating score of 10 is higher ranking than a\n            document with a rating score of 1.</p>\n         <p>When the <code>RankOrder</code> field is <code>DESCENDING</code>, lower numbers are\n            better. For example, in a task tracking application, a priority 1 task is more important\n            than a priority 5 task.</p>\n         <p>Only applies to <code>LONG</code> and <code>DOUBLE</code> fields.</p>"
+                        "smithy.api#documentation": "<p>Determines how values should be interpreted.</p>\n         <p>When the <code>RankOrder</code> field is <code>ASCENDING</code>, higher numbers are\n            better. For example, a document with a rating score of 10 is higher ranking than a\n            document with a rating score of 1.</p>\n         <p>When the <code>RankOrder</code> field is <code>DESCENDING</code>, lower numbers are\n            better. For example, in a task tracking application, a priority 1 task is more important\n            than a priority 5 task.</p>\n         <p>Only applies to <code>LONG</code> fields.</p>"
                     }
                 },
                 "ValueImportanceMap": {
                     "target": "com.amazonaws.kendra#ValueImportanceMap",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of values that should be given a different boost when they appear in the result\n            list. For example, if you are boosting a field called \"department,\" query terms that\n            match the department field are boosted in the result. However, you can add entries from\n            the department field to boost documents with those values higher. </p>\n         <p>For example, you can add entries to the map with names of departments. If you add\n            \"HR\",5 and \"Legal\",3 those departments are given special attention when they appear in\n            the metadata of a document. When those terms appear they are given the specified\n            importance instead of the regular importance for the boost.</p>"
+                        "smithy.api#documentation": "<p>A list of values that should be given a different boost when they appear in the result\n            list. For example, if you are boosting a field called \"department\", query terms that\n            match the department field are boosted in the result. However, you can add entries from\n            the department field to boost documents with those values higher. </p>\n         <p>For example, you can add entries to the map with names of departments. If you add\n            \"HR\",5 and \"Legal\",3 those departments are given special attention when they appear in\n            the metadata of a document. When those terms appear they are given the specified\n            importance instead of the regular importance for the boost.</p>"
                     }
                 }
             },
@@ -12551,7 +12551,7 @@
                 "QueryText": {
                     "target": "com.amazonaws.kendra#QueryText",
                     "traits": {
-                        "smithy.api#documentation": "<p>The input query text to retrieve relevant passages for the search. Amazon Kendra\n            truncates queries at 30 token words, which excludes punctuation and stop words.\n            Truncation still applies if you use Boolean or more advanced, complex queries.</p>",
+                        "smithy.api#documentation": "<p>The input query text to retrieve relevant passages for the search. Amazon Kendra\n            truncates queries at 30 token words, which excludes punctuation and stop words.\n            Truncation still applies if you use Boolean or more advanced, complex queries. For\n            example, <code>Timeoff AND October AND Category:HR</code> is counted as 3 tokens:\n                <code>timeoff</code>, <code>october</code>, <code>hr</code>. For more information,\n            see <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/searching-example.html#searching-index-query-syntax\">Searching with advanced query syntax</a> in the Amazon Kendra Developer Guide. </p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -12711,13 +12711,13 @@
                 "InclusionPatterns": {
                     "target": "com.amazonaws.kendra#DataSourceInclusionsExclusionsStrings",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of glob patterns for documents that should be indexed. If a document that\n            matches an inclusion pattern also matches an exclusion pattern, the document is not\n            indexed.</p>\n         <p>Some <a href=\"https://docs.aws.amazon.com/cli/latest/reference/s3/#use-of-exclude-and-include-filters\">examples</a>\n            are:</p>\n         <ul>\n            <li>\n               <p>\n                  <i>*.txt</i> will include all text files in a directory (files\n                    with the extension .txt).</p>\n            </li>\n            <li>\n               <p>\n                  <i>**/*.txt</i> will include all text files in a directory and\n                    its subdirectories.</p>\n            </li>\n            <li>\n               <p>\n                  <i>*tax*</i> will include all files in a directory that contain\n                    'tax' in the file name, such as 'tax', 'taxes', 'income_tax'.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>A list of glob patterns (patterns that can expand a wildcard pattern into a list of\n            path names that match the given pattern) for certain file names and file types to include \n            in your index. If a document matches both an inclusion and exclusion prefix or pattern, \n            the exclusion prefix takes precendence and the document is not indexed. Examples of glob \n            patterns include:</p>\n         <ul>\n            <li>\n               <p>\n                  <i>/myapp/config/*</i>—All files inside config directory.</p>\n            </li>\n            <li>\n               <p>\n                  <i>**/*.png</i>—All .png files in all directories.</p>\n            </li>\n            <li>\n               <p>\n                  <i>**/*.{png, ico, md}</i>—All .png, .ico or .md files in all\n                    directories.</p>\n            </li>\n            <li>\n               <p>\n                  <i>/myapp/src/**/*.ts</i>—All .ts files inside src directory (and all\n                    its subdirectories).</p>\n            </li>\n            <li>\n               <p>\n                  <i>**/!(*.module).ts</i>—All .ts files but not .module.ts</p>\n            </li>\n            <li>\n               <p>\n                  <i>*.png , *.jpg</i>—All PNG and JPEG image files\n                    in a directory (files with the extensions .png and .jpg).</p>\n            </li>\n            <li>\n               <p>\n                  <i>*internal*</i>—All files in a directory that\n                    contain 'internal' in the file name, such as 'internal', 'internal_only',\n                    'company_internal'.</p>\n            </li>\n            <li>\n               <p>\n                  <i>**/*internal*</i>—All internal-related files in\n                    a directory and its subdirectories.</p>\n            </li>\n         </ul>\n         <p>For more examples, see <a href=\"https://docs.aws.amazon.com/cli/latest/reference/s3/#use-of-exclude-and-include-filters\">Use of Exclude and\n            Include Filters</a> in the Amazon Web Services CLI Command Reference.</p>"
                     }
                 },
                 "ExclusionPatterns": {
                     "target": "com.amazonaws.kendra#DataSourceInclusionsExclusionsStrings",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of glob patterns for documents that should not be indexed. If a document that\n            matches an inclusion prefix or inclusion pattern also matches an exclusion pattern, the\n            document is not indexed.</p>\n         <p>Some <a href=\"https://docs.aws.amazon.com/cli/latest/reference/s3/#use-of-exclude-and-include-filters\">examples</a>\n            are:</p>\n         <ul>\n            <li>\n               <p>\n                  <i>*.png , *.jpg</i> will exclude all PNG and JPEG image files\n                    in a directory (files with the extensions .png and .jpg).</p>\n            </li>\n            <li>\n               <p>\n                  <i>*internal*</i> will exclude all files in a directory that\n                    contain 'internal' in the file name, such as 'internal', 'internal_only',\n                    'company_internal'.</p>\n            </li>\n            <li>\n               <p>\n                  <i>**/*internal*</i> will exclude all internal-related files in\n                    a directory and its subdirectories.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>A list of glob patterns (patterns that can expand a wildcard pattern into a list of\n            path names that match the given pattern) for certain file names and file types to exclude \n            from your index. If a document matches both an inclusion and exclusion prefix or pattern, \n            the exclusion prefix takes precendence and the document is not indexed. Examples of glob \n            patterns include:</p>\n         <ul>\n            <li>\n               <p>\n                  <i>/myapp/config/*</i>—All files inside config directory.</p>\n            </li>\n            <li>\n               <p>\n                  <i>**/*.png</i>—All .png files in all directories.</p>\n            </li>\n            <li>\n               <p>\n                  <i>**/*.{png, ico, md}</i>—All .png, .ico or .md files in all\n                    directories.</p>\n            </li>\n            <li>\n               <p>\n                  <i>/myapp/src/**/*.ts</i>—All .ts files inside src directory (and all\n                    its subdirectories).</p>\n            </li>\n            <li>\n               <p>\n                  <i>**/!(*.module).ts</i>—All .ts files but not .module.ts</p>\n            </li>\n            <li>\n               <p>\n                  <i>*.png , *.jpg</i>—All PNG and JPEG image files\n                    in a directory (files with the extensions .png and .jpg).</p>\n            </li>\n            <li>\n               <p>\n                  <i>*internal*</i>—All files in a directory that\n                    contain 'internal' in the file name, such as 'internal', 'internal_only',\n                    'company_internal'.</p>\n            </li>\n            <li>\n               <p>\n                  <i>**/*internal*</i>—All internal-related files in\n                    a directory and its subdirectories.</p>\n            </li>\n         </ul>\n         <p>For more examples, see <a href=\"https://docs.aws.amazon.com/cli/latest/reference/s3/#use-of-exclude-and-include-filters\">Use of Exclude and\n                Include Filters</a> in the Amazon Web Services CLI Command Reference.</p>"
                     }
                 },
                 "DocumentsMetadataConfiguration": {
@@ -12731,7 +12731,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Provides the configuration information to connect to an Amazon S3\n            bucket.</p>"
+                "smithy.api#documentation": "<p>Provides the configuration information to connect to an Amazon S3\n            bucket.</p>\n         <note>\n            <p>Amazon Kendra now supports an upgraded Amazon S3 connector.</p>\n            <p>You must now use the <a href=\"https://docs.aws.amazon.com/kendra/latest/APIReference/API_TemplateConfiguration.html\">TemplateConfiguration</a> object instead of the \n                <code>S3DataSourceConfiguration</code> object to configure your connector.</p>\n            <p>Connectors configured using the older console and API architecture will continue to\n                function as configured. However, you won't be able to edit or update them. If you want\n                to edit or update your connector configuration, you must create a new connector.</p>\n            <p>We recommended migrating your connector workflow to the upgraded version. Support for \n                connectors configured using the older architecture is scheduled to end by June 2024.</p>\n         </note>"
             }
         },
         "com.amazonaws.kendra#S3ObjectKey": {
@@ -13943,7 +13943,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Provides the configuration information to connect to Slack as your data source.</p>"
+                "smithy.api#documentation": "<p>Provides the configuration information to connect to Slack as your data source.</p>\n         <note>\n            <p>Amazon Kendra now supports an upgraded Slack connector.</p>\n            <p>You must now use the <a href=\"https://docs.aws.amazon.com/kendra/latest/APIReference/API_TemplateConfiguration.html\">TemplateConfiguration</a> object instead of the \n                <code>SlackConfiguration</code> object to configure your connector.</p>\n            <p>Connectors configured using the older console and API architecture will continue to\n                function as configured. However, you won’t be able to edit or update them. If you want\n                to edit or update your connector configuration, you must create a new connector.</p>\n            <p>We recommended migrating your connector workflow to the upgraded version. Support for \n                connectors configured using the older architecture is scheduled to end by June 2024.</p>\n         </note>"
             }
         },
         "com.amazonaws.kendra#SlackEntity": {
@@ -15217,7 +15217,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Updates an existing Amazon Kendra data source connector.</p>"
+                "smithy.api#documentation": "<p>Updates an Amazon Kendra data source connector.</p>"
             }
         },
         "com.amazonaws.kendra#UpdateDataSourceRequest": {
@@ -15498,7 +15498,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Updates an existing Amazon Kendra index.</p>"
+                "smithy.api#documentation": "<p>Updates an Amazon Kendra index.</p>"
             }
         },
         "com.amazonaws.kendra#UpdateIndexRequest": {
@@ -15514,7 +15514,7 @@
                 "Name": {
                     "target": "com.amazonaws.kendra#IndexName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the index you want to update.</p>"
+                        "smithy.api#documentation": "<p>A new name for the index.</p>"
                     }
                 },
                 "RoleArn": {
@@ -15556,7 +15556,7 @@
                 "UserGroupResolutionConfiguration": {
                     "target": "com.amazonaws.kendra#UserGroupResolutionConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>Enables fetching access levels of groups and users from an IAM Identity Center\n         identity source. To configure this, see <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/API_UserGroupResolutionConfiguration.html\">UserGroupResolutionConfiguration</a>.</p>"
+                        "smithy.api#documentation": "<p>Gets users and groups from IAM Identity Center\n         identity source. To configure this, see <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/API_UserGroupResolutionConfiguration.html\">UserGroupResolutionConfiguration</a>. This is useful for user context filtering, where\n         search results are filtered based on the user or their group access to documents.</p>"
                     }
                 }
             },

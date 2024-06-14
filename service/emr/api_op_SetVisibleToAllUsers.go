@@ -6,24 +6,28 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // The SetVisibleToAllUsers parameter is no longer supported. Your cluster may be
 // visible to all users in your account. To restrict cluster access using an IAM
-// policy, see Identity and Access Management for Amazon EMR (https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-plan-access-IAM.html)
-// . Sets the Cluster$VisibleToAllUsers value for an Amazon EMR cluster. When true
-// , IAM principals in the Amazon Web Services account can perform Amazon EMR
-// cluster actions that their IAM policies allow. When false , only the IAM
-// principal that created the cluster and the Amazon Web Services account root user
-// can perform Amazon EMR actions on the cluster, regardless of IAM permissions
-// policies attached to other IAM principals. This action works on running
-// clusters. When you create a cluster, use the RunJobFlowInput$VisibleToAllUsers
-// parameter. For more information, see Understanding the Amazon EMR Cluster
-// VisibleToAllUsers Setting (https://docs.aws.amazon.com/emr/latest/ManagementGuide/security_IAM_emr-with-IAM.html#security_set_visible_to_all_users)
-// in the Amazon EMR Management Guide.
+// policy, see [Identity and Access Management for Amazon EMR].
+//
+// Sets the Cluster$VisibleToAllUsers value for an Amazon EMR cluster. When true , IAM principals in the
+// Amazon Web Services account can perform Amazon EMR cluster actions that their
+// IAM policies allow. When false , only the IAM principal that created the cluster
+// and the Amazon Web Services account root user can perform Amazon EMR actions on
+// the cluster, regardless of IAM permissions policies attached to other IAM
+// principals.
+//
+// This action works on running clusters. When you create a cluster, use the RunJobFlowInput$VisibleToAllUsers
+// parameter.
+//
+// For more information, see [Understanding the Amazon EMR Cluster VisibleToAllUsers Setting] in the Amazon EMR Management Guide.
+//
+// [Understanding the Amazon EMR Cluster VisibleToAllUsers Setting]: https://docs.aws.amazon.com/emr/latest/ManagementGuide/security_IAM_emr-with-IAM.html#security_set_visible_to_all_users
+// [Identity and Access Management for Amazon EMR]: https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-plan-access-IAM.html
 func (c *Client) SetVisibleToAllUsers(ctx context.Context, params *SetVisibleToAllUsersInput, optFns ...func(*Options)) (*SetVisibleToAllUsersOutput, error) {
 	if params == nil {
 		params = &SetVisibleToAllUsersInput{}
@@ -88,25 +92,25 @@ func (c *Client) addOperationSetVisibleToAllUsersMiddlewares(stack *middleware.S
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -121,13 +125,16 @@ func (c *Client) addOperationSetVisibleToAllUsersMiddlewares(stack *middleware.S
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpSetVisibleToAllUsersValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opSetVisibleToAllUsers(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

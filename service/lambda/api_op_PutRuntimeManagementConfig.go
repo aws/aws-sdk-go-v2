@@ -6,15 +6,15 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/lambda/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Sets the runtime management configuration for a function's version. For more
-// information, see Runtime updates (https://docs.aws.amazon.com/lambda/latest/dg/runtimes-update.html)
-// .
+// information, see [Runtime updates].
+//
+// [Runtime updates]: https://docs.aws.amazon.com/lambda/latest/dg/runtimes-update.html
 func (c *Client) PutRuntimeManagementConfig(ctx context.Context, params *PutRuntimeManagementConfigInput, optFns ...func(*Options)) (*PutRuntimeManagementConfigOutput, error) {
 	if params == nil {
 		params = &PutRuntimeManagementConfigInput{}
@@ -32,10 +32,16 @@ func (c *Client) PutRuntimeManagementConfig(ctx context.Context, params *PutRunt
 
 type PutRuntimeManagementConfigInput struct {
 
-	// The name of the Lambda function. Name formats
+	// The name or ARN of the Lambda function.
+	//
+	// Name formats
+	//
 	//   - Function name – my-function .
+	//
 	//   - Function ARN – arn:aws:lambda:us-west-2:123456789012:function:my-function .
+	//
 	//   - Partial ARN – 123456789012:function:my-function .
+	//
 	// The length constraint applies only to the full ARN. If you specify only the
 	// function name, it is limited to 64 characters in length.
 	//
@@ -43,22 +49,26 @@ type PutRuntimeManagementConfigInput struct {
 	FunctionName *string
 
 	// Specify the runtime update mode.
+	//
 	//   - Auto (default) - Automatically update to the most recent and secure runtime
-	//   version using a Two-phase runtime version rollout (https://docs.aws.amazon.com/lambda/latest/dg/runtimes-update.html#runtime-management-two-phase)
-	//   . This is the best choice for most customers to ensure they always benefit from
-	//   runtime updates.
+	//   version using a [Two-phase runtime version rollout]. This is the best choice for most customers to ensure they
+	//   always benefit from runtime updates.
+	//
 	//   - Function update - Lambda updates the runtime of your function to the most
 	//   recent and secure runtime version when you update your function. This approach
 	//   synchronizes runtime updates with function deployments, giving you control over
 	//   when runtime updates are applied and allowing you to detect and mitigate rare
 	//   runtime update incompatibilities early. When using this setting, you need to
 	//   regularly update your functions to keep their runtime up-to-date.
+	//
 	//   - Manual - You specify a runtime version in your function configuration. The
 	//   function will use this runtime version indefinitely. In the rare case where a
 	//   new runtime version is incompatible with an existing function, this allows you
 	//   to roll back your function to an earlier runtime version. For more information,
-	//   see Roll back a runtime version (https://docs.aws.amazon.com/lambda/latest/dg/runtimes-update.html#runtime-management-rollback)
-	//   .
+	//   see [Roll back a runtime version].
+	//
+	// [Two-phase runtime version rollout]: https://docs.aws.amazon.com/lambda/latest/dg/runtimes-update.html#runtime-management-two-phase
+	// [Roll back a runtime version]: https://docs.aws.amazon.com/lambda/latest/dg/runtimes-update.html#runtime-management-rollback
 	//
 	// This member is required.
 	UpdateRuntimeOn types.UpdateRuntimeOn
@@ -68,8 +78,9 @@ type PutRuntimeManagementConfigInput struct {
 	// returned.
 	Qualifier *string
 
-	// The ARN of the runtime version you want the function to use. This is only
-	// required if you're using the Manual runtime update mode.
+	// The ARN of the runtime version you want the function to use.
+	//
+	// This is only required if you're using the Manual runtime update mode.
 	RuntimeVersionArn *string
 
 	noSmithyDocumentSerde
@@ -119,25 +130,25 @@ func (c *Client) addOperationPutRuntimeManagementConfigMiddlewares(stack *middle
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -152,13 +163,16 @@ func (c *Client) addOperationPutRuntimeManagementConfigMiddlewares(stack *middle
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpPutRuntimeManagementConfigValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opPutRuntimeManagementConfig(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

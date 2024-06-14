@@ -6,12 +6,12 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns the number of open reactive insights, the number of open proactive
+//	Returns the number of open reactive insights, the number of open proactive
+//
 // insights, and the number of metrics analyzed in your Amazon Web Services
 // account. Use these numbers to gauge the health of operations in your Amazon Web
 // Services account.
@@ -36,19 +36,19 @@ type DescribeAccountHealthInput struct {
 
 type DescribeAccountHealthOutput struct {
 
-	// An integer that specifies the number of metrics that have been analyzed in your
-	// Amazon Web Services account.
+	//  An integer that specifies the number of metrics that have been analyzed in
+	// your Amazon Web Services account.
 	//
 	// This member is required.
 	MetricsAnalyzed int32
 
-	// An integer that specifies the number of open proactive insights in your Amazon
+	//  An integer that specifies the number of open proactive insights in your Amazon
 	// Web Services account.
 	//
 	// This member is required.
 	OpenProactiveInsights int32
 
-	// An integer that specifies the number of open reactive insights in your Amazon
+	//  An integer that specifies the number of open reactive insights in your Amazon
 	// Web Services account.
 	//
 	// This member is required.
@@ -60,7 +60,7 @@ type DescribeAccountHealthOutput struct {
 	// This member is required.
 	ResourceHours *int64
 
-	// Number of resources that DevOps Guru is monitoring in your Amazon Web Services
+	//  Number of resources that DevOps Guru is monitoring in your Amazon Web Services
 	// account.
 	AnalyzedResourceCount *int64
 
@@ -92,25 +92,25 @@ func (c *Client) addOperationDescribeAccountHealthMiddlewares(stack *middleware.
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -125,10 +125,13 @@ func (c *Client) addOperationDescribeAccountHealthMiddlewares(stack *middleware.
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeAccountHealth(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

@@ -6,14 +6,14 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Deletes the configuration for asynchronous invocation for a function, version,
-// or alias. To configure options for asynchronous invocation, use
-// PutFunctionEventInvokeConfig .
+// or alias.
+//
+// To configure options for asynchronous invocation, use PutFunctionEventInvokeConfig.
 func (c *Client) DeleteFunctionEventInvokeConfig(ctx context.Context, params *DeleteFunctionEventInvokeConfigInput, optFns ...func(*Options)) (*DeleteFunctionEventInvokeConfigOutput, error) {
 	if params == nil {
 		params = &DeleteFunctionEventInvokeConfigInput{}
@@ -31,10 +31,16 @@ func (c *Client) DeleteFunctionEventInvokeConfig(ctx context.Context, params *De
 
 type DeleteFunctionEventInvokeConfigInput struct {
 
-	// The name of the Lambda function, version, or alias. Name formats
+	// The name or ARN of the Lambda function, version, or alias.
+	//
+	// Name formats
+	//
 	//   - Function name - my-function (name-only), my-function:v1 (with alias).
+	//
 	//   - Function ARN - arn:aws:lambda:us-west-2:123456789012:function:my-function .
+	//
 	//   - Partial ARN - 123456789012:function:my-function .
+	//
 	// You can append a version number or alias to any of the formats. The length
 	// constraint applies only to the full ARN. If you specify only the function name,
 	// it is limited to 64 characters in length.
@@ -77,25 +83,25 @@ func (c *Client) addOperationDeleteFunctionEventInvokeConfigMiddlewares(stack *m
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -110,13 +116,16 @@ func (c *Client) addOperationDeleteFunctionEventInvokeConfigMiddlewares(stack *m
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDeleteFunctionEventInvokeConfigValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteFunctionEventInvokeConfig(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

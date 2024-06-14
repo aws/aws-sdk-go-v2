@@ -6,17 +6,17 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/rds/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Starts a database activity stream to monitor activity on the database. For more
-// information, see Monitoring Amazon Aurora with Database Activity Streams (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/DBActivityStreams.html)
-// in the Amazon Aurora User Guide or Monitoring Amazon RDS with Database Activity
-// Streams (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/DBActivityStreams.html)
-// in the Amazon RDS User Guide.
+// information, see [Monitoring Amazon Aurora with Database Activity Streams]in the Amazon Aurora User Guide or [Monitoring Amazon RDS with Database Activity Streams] in the Amazon RDS User
+// Guide.
+//
+// [Monitoring Amazon Aurora with Database Activity Streams]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/DBActivityStreams.html
+// [Monitoring Amazon RDS with Database Activity Streams]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/DBActivityStreams.html
 func (c *Client) StartActivityStream(ctx context.Context, params *StartActivityStreamInput, optFns ...func(*Options)) (*StartActivityStreamOutput, error) {
 	if params == nil {
 		params = &StartActivityStreamInput{}
@@ -118,25 +118,25 @@ func (c *Client) addOperationStartActivityStreamMiddlewares(stack *middleware.St
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -151,13 +151,16 @@ func (c *Client) addOperationStartActivityStreamMiddlewares(stack *middleware.St
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpStartActivityStreamValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opStartActivityStream(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

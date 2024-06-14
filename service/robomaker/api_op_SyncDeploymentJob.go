@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/robomaker/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -14,9 +13,10 @@ import (
 )
 
 // Syncrhonizes robots in a fleet to the latest deployment. This is helpful if
-// robots were added after a deployment. This API will no longer be supported as of
-// May 2, 2022. Use it to remove resources that were created for Deployment
-// Service.
+// robots were added after a deployment.
+//
+// This API will no longer be supported as of May 2, 2022. Use it to remove
+// resources that were created for Deployment Service.
 //
 // Deprecated: Support for the AWS RoboMaker application deployment feature has
 // ended. For additional information, see
@@ -66,22 +66,41 @@ type SyncDeploymentJobOutput struct {
 	// Information about the deployment configuration.
 	DeploymentConfig *types.DeploymentConfig
 
-	// The failure code if the job fails: InternalServiceError Internal service error.
+	// The failure code if the job fails:
+	//
+	// InternalServiceError Internal service error.
+	//
 	// RobotApplicationCrash Robot application exited abnormally.
-	// SimulationApplicationCrash Simulation application exited abnormally.
+	//
+	// SimulationApplicationCrash  Simulation application exited abnormally.
+	//
 	// BadPermissionsRobotApplication Robot application bundle could not be downloaded.
+	//
 	// BadPermissionsSimulationApplication Simulation application bundle could not be
-	// downloaded. BadPermissionsS3Output Unable to publish outputs to
-	// customer-provided S3 bucket. BadPermissionsCloudwatchLogs Unable to publish logs
-	// to customer-provided CloudWatch Logs resource. SubnetIpLimitExceeded Subnet IP
-	// limit exceeded. ENILimitExceeded ENI limit exceeded.
+	// downloaded.
+	//
+	// BadPermissionsS3Output Unable to publish outputs to customer-provided S3 bucket.
+	//
+	// BadPermissionsCloudwatchLogs Unable to publish logs to customer-provided
+	// CloudWatch Logs resource.
+	//
+	// SubnetIpLimitExceeded Subnet IP limit exceeded.
+	//
+	// ENILimitExceeded ENI limit exceeded.
+	//
 	// BadPermissionsUserCredentials Unable to use the Role provided.
+	//
 	// InvalidBundleRobotApplication Robot bundle cannot be extracted (invalid format,
-	// bundling error, or other issue). InvalidBundleSimulationApplication Simulation
-	// bundle cannot be extracted (invalid format, bundling error, or other issue).
+	// bundling error, or other issue).
+	//
+	// InvalidBundleSimulationApplication Simulation bundle cannot be extracted
+	// (invalid format, bundling error, or other issue).
+	//
 	// RobotApplicationVersionMismatchedEtag Etag for RobotApplication does not match
-	// value during version creation. SimulationApplicationVersionMismatchedEtag Etag
-	// for SimulationApplication does not match value during version creation.
+	// value during version creation.
+	//
+	// SimulationApplicationVersionMismatchedEtag Etag for SimulationApplication does
+	// not match value during version creation.
 	FailureCode types.DeploymentJobErrorCode
 
 	// The failure reason if the job fails.
@@ -121,25 +140,25 @@ func (c *Client) addOperationSyncDeploymentJobMiddlewares(stack *middleware.Stac
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -154,6 +173,9 @@ func (c *Client) addOperationSyncDeploymentJobMiddlewares(stack *middleware.Stac
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opSyncDeploymentJobMiddleware(stack, options); err != nil {
 		return err
 	}
@@ -163,7 +185,7 @@ func (c *Client) addOperationSyncDeploymentJobMiddlewares(stack *middleware.Stac
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opSyncDeploymentJob(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

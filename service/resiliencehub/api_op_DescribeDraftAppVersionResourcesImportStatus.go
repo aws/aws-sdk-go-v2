@@ -6,17 +6,18 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/resiliencehub/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
-// Describes the status of importing resources to an application version. If you
-// get a 404 error with ResourceImportStatusNotFoundAppMetadataException , you must
-// call importResourcesToDraftAppVersion after creating the application and before
-// calling describeDraftAppVersionResourcesImportStatus to obtain the status.
+// Describes the status of importing resources to an application version.
+//
+// If you get a 404 error with ResourceImportStatusNotFoundAppMetadataException ,
+// you must call importResourcesToDraftAppVersion after creating the application
+// and before calling describeDraftAppVersionResourcesImportStatus to obtain the
+// status.
 func (c *Client) DescribeDraftAppVersionResourcesImportStatus(ctx context.Context, params *DescribeDraftAppVersionResourcesImportStatusInput, optFns ...func(*Options)) (*DescribeDraftAppVersionResourcesImportStatusOutput, error) {
 	if params == nil {
 		params = &DescribeDraftAppVersionResourcesImportStatusInput{}
@@ -36,8 +37,10 @@ type DescribeDraftAppVersionResourcesImportStatusInput struct {
 
 	// Amazon Resource Name (ARN) of the Resilience Hub application. The format for
 	// this ARN is: arn: partition :resiliencehub: region : account :app/ app-id . For
-	// more information about ARNs, see Amazon Resource Names (ARNs) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
-	// in the Amazon Web Services General Reference guide.
+	// more information about ARNs, see [Amazon Resource Names (ARNs)]in the Amazon Web Services General Reference
+	// guide.
+	//
+	// [Amazon Resource Names (ARNs)]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
 	//
 	// This member is required.
 	AppArn *string
@@ -49,8 +52,10 @@ type DescribeDraftAppVersionResourcesImportStatusOutput struct {
 
 	// Amazon Resource Name (ARN) of the Resilience Hub application. The format for
 	// this ARN is: arn: partition :resiliencehub: region : account :app/ app-id . For
-	// more information about ARNs, see Amazon Resource Names (ARNs) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
-	// in the Amazon Web Services General Reference guide.
+	// more information about ARNs, see [Amazon Resource Names (ARNs)]in the Amazon Web Services General Reference
+	// guide.
+	//
+	// [Amazon Resource Names (ARNs)]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
 	//
 	// This member is required.
 	AppArn *string
@@ -101,25 +106,25 @@ func (c *Client) addOperationDescribeDraftAppVersionResourcesImportStatusMiddlew
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -134,13 +139,16 @@ func (c *Client) addOperationDescribeDraftAppVersionResourcesImportStatusMiddlew
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDescribeDraftAppVersionResourcesImportStatusValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeDraftAppVersionResourcesImportStatus(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

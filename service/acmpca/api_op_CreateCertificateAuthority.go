@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/acmpca/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -23,14 +22,18 @@ import (
 // expiration period in days (the validity period of the CRL), the Amazon S3 bucket
 // that will contain the CRL, and a CNAME alias for the S3 bucket that is included
 // in certificates issued by the CA. If successful, this action returns the Amazon
-// Resource Name (ARN) of the CA. Both Amazon Web Services Private CA and the IAM
-// principal must have permission to write to the S3 bucket that you specify. If
-// the IAM principal making the call does not have permission to write to the
-// bucket, then an exception is thrown. For more information, see Access policies
-// for CRLs in Amazon S3 (https://docs.aws.amazon.com/privateca/latest/userguide/crl-planning.html#s3-policies)
-// . Amazon Web Services Private CA assets that are stored in Amazon S3 can be
-// protected with encryption. For more information, see Encrypting Your CRLs (https://docs.aws.amazon.com/privateca/latest/userguide/PcaCreateCa.html#crl-encryption)
-// .
+// Resource Name (ARN) of the CA.
+//
+// Both Amazon Web Services Private CA and the IAM principal must have permission
+// to write to the S3 bucket that you specify. If the IAM principal making the call
+// does not have permission to write to the bucket, then an exception is thrown.
+// For more information, see [Access policies for CRLs in Amazon S3].
+//
+// Amazon Web Services Private CA assets that are stored in Amazon S3 can be
+// protected with encryption. For more information, see [Encrypting Your CRLs].
+//
+// [Access policies for CRLs in Amazon S3]: https://docs.aws.amazon.com/privateca/latest/userguide/crl-planning.html#s3-policies
+// [Encrypting Your CRLs]: https://docs.aws.amazon.com/privateca/latest/userguide/PcaCreateCa.html#crl-encryption
 func (c *Client) CreateCertificateAuthority(ctx context.Context, params *CreateCertificateAuthorityInput, optFns ...func(*Options)) (*CreateCertificateAuthorityOutput, error) {
 	if params == nil {
 		params = &CreateCertificateAuthorityInput{}
@@ -70,47 +73,62 @@ type CreateCertificateAuthorityInput struct {
 	IdempotencyToken *string
 
 	// Specifies a cryptographic key management compliance standard used for handling
-	// CA keys. Default: FIPS_140_2_LEVEL_3_OR_HIGHER Some Amazon Web Services Regions
-	// do not support the default. When creating a CA in these Regions, you must
-	// provide FIPS_140_2_LEVEL_2_OR_HIGHER as the argument for
-	// KeyStorageSecurityStandard . Failure to do this results in an
+	// CA keys.
+	//
+	// Default: FIPS_140_2_LEVEL_3_OR_HIGHER
+	//
+	// Some Amazon Web Services Regions do not support the default. When creating a CA
+	// in these Regions, you must provide FIPS_140_2_LEVEL_2_OR_HIGHER as the argument
+	// for KeyStorageSecurityStandard . Failure to do this results in an
 	// InvalidArgsException with the message, "A certificate authority cannot be
-	// created in this region with the specified security standard." For information
-	// about security standard support in various Regions, see Storage and security
-	// compliance of Amazon Web Services Private CA private keys (https://docs.aws.amazon.com/privateca/latest/userguide/data-protection.html#private-keys)
-	// .
+	// created in this region with the specified security standard."
+	//
+	// For information about security standard support in various Regions, see [Storage and security compliance of Amazon Web Services Private CA private keys].
+	//
+	// [Storage and security compliance of Amazon Web Services Private CA private keys]: https://docs.aws.amazon.com/privateca/latest/userguide/data-protection.html#private-keys
 	KeyStorageSecurityStandard types.KeyStorageSecurityStandard
 
 	// Contains information to enable Online Certificate Status Protocol (OCSP)
 	// support, to enable a certificate revocation list (CRL), to enable both, or to
 	// enable neither. The default is for both certificate validation mechanisms to be
-	// disabled. The following requirements apply to revocation configurations.
+	// disabled.
+	//
+	// The following requirements apply to revocation configurations.
+	//
 	//   - A configuration disabling CRLs or OCSP must contain only the Enabled=False
 	//   parameter, and will fail if other parameters such as CustomCname or
 	//   ExpirationInDays are included.
-	//   - In a CRL configuration, the S3BucketName parameter must conform to Amazon
-	//   S3 bucket naming rules (https://docs.aws.amazon.com/AmazonS3/latest/userguide/bucketnamingrules.html)
-	//   .
+	//
+	//   - In a CRL configuration, the S3BucketName parameter must conform to [Amazon S3 bucket naming rules].
+	//
 	//   - A configuration containing a custom Canonical Name (CNAME) parameter for
-	//   CRLs or OCSP must conform to RFC2396 (https://www.ietf.org/rfc/rfc2396.txt)
-	//   restrictions on the use of special characters in a CNAME.
+	//   CRLs or OCSP must conform to [RFC2396]restrictions on the use of special characters in
+	//   a CNAME.
+	//
 	//   - In a CRL or OCSP configuration, the value of a CNAME parameter must not
 	//   include a protocol prefix such as "http://" or "https://".
-	// For more information, see the OcspConfiguration (https://docs.aws.amazon.com/privateca/latest/APIReference/API_OcspConfiguration.html)
-	// and CrlConfiguration (https://docs.aws.amazon.com/privateca/latest/APIReference/API_CrlConfiguration.html)
-	// types.
+	//
+	// For more information, see the [OcspConfiguration] and [CrlConfiguration] types.
+	//
+	// [RFC2396]: https://www.ietf.org/rfc/rfc2396.txt
+	// [OcspConfiguration]: https://docs.aws.amazon.com/privateca/latest/APIReference/API_OcspConfiguration.html
+	// [Amazon S3 bucket naming rules]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/bucketnamingrules.html
+	// [CrlConfiguration]: https://docs.aws.amazon.com/privateca/latest/APIReference/API_CrlConfiguration.html
 	RevocationConfiguration *types.RevocationConfiguration
 
 	// Key-value pairs that will be attached to the new private CA. You can associate
 	// up to 50 tags with a private CA. For information using tags with IAM to manage
-	// permissions, see Controlling Access Using IAM Tags (https://docs.aws.amazon.com/IAM/latest/UserGuide/access_iam-tags.html)
-	// .
+	// permissions, see [Controlling Access Using IAM Tags].
+	//
+	// [Controlling Access Using IAM Tags]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access_iam-tags.html
 	Tags []types.Tag
 
 	// Specifies whether the CA issues general-purpose certificates that typically
 	// require a revocation mechanism, or short-lived certificates that may optionally
 	// omit revocation because they expire quickly. Short-lived certificate validity is
-	// limited to seven days. The default value is GENERAL_PURPOSE.
+	// limited to seven days.
+	//
+	// The default value is GENERAL_PURPOSE.
 	UsageMode types.CertificateAuthorityUsageMode
 
 	noSmithyDocumentSerde
@@ -120,6 +138,7 @@ type CreateCertificateAuthorityOutput struct {
 
 	// If successful, the Amazon Resource Name (ARN) of the certificate authority
 	// (CA). This is of the form:
+	//
 	// arn:aws:acm-pca:region:account:certificate-authority/12345678-1234-1234-1234-123456789012
 	// .
 	CertificateAuthorityArn *string
@@ -152,25 +171,25 @@ func (c *Client) addOperationCreateCertificateAuthorityMiddlewares(stack *middle
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -185,13 +204,16 @@ func (c *Client) addOperationCreateCertificateAuthorityMiddlewares(stack *middle
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpCreateCertificateAuthorityValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateCertificateAuthority(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

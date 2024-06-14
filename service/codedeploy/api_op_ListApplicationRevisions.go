@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/codedeploy/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -31,17 +30,20 @@ func (c *Client) ListApplicationRevisions(ctx context.Context, params *ListAppli
 // Represents the input of a ListApplicationRevisions operation.
 type ListApplicationRevisionsInput struct {
 
-	// The name of an CodeDeploy application associated with the user or Amazon Web
+	//  The name of an CodeDeploy application associated with the user or Amazon Web
 	// Services account.
 	//
 	// This member is required.
 	ApplicationName *string
 
-	// Whether to list revisions based on whether the revision is the target revision
+	//  Whether to list revisions based on whether the revision is the target revision
 	// of a deployment group:
+	//
 	//   - include : List revisions that are target revisions of a deployment group.
+	//
 	//   - exclude : Do not list revisions that are target revisions of a deployment
 	//   group.
+	//
 	//   - ignore : List all revisions.
 	Deployed types.ListStateFilterAction
 
@@ -49,28 +51,38 @@ type ListApplicationRevisionsInput struct {
 	// be used to return the next set of applications in the list.
 	NextToken *string
 
-	// An Amazon S3 bucket name to limit the search for revisions. If set to null, all
-	// of the user's buckets are searched.
+	//  An Amazon S3 bucket name to limit the search for revisions.
+	//
+	// If set to null, all of the user's buckets are searched.
 	S3Bucket *string
 
-	// A key prefix for the set of Amazon S3 objects to limit the search for revisions.
+	//  A key prefix for the set of Amazon S3 objects to limit the search for
+	// revisions.
 	S3KeyPrefix *string
 
 	// The column name to use to sort the list results:
+	//
 	//   - registerTime : Sort by the time the revisions were registered with
 	//   CodeDeploy.
+	//
 	//   - firstUsedTime : Sort by the time the revisions were first used in a
 	//   deployment.
-	//   - lastUsedTime : Sort by the time the revisions were last used in a
-	//   deployment.
-	// If not specified or set to null, the results are returned in an arbitrary order.
+	//
+	//   - lastUsedTime : Sort by the time the revisions were last used in a deployment.
+	//
+	// If not specified or set to null, the results are returned in an arbitrary
+	// order.
 	SortBy types.ApplicationRevisionSortBy
 
-	// The order in which to sort the list results:
+	//  The order in which to sort the list results:
+	//
 	//   - ascending : ascending order.
+	//
 	//   - descending : descending order.
-	// If not specified, the results are sorted in ascending order. If set to null,
-	// the results are sorted in an arbitrary order.
+	//
+	// If not specified, the results are sorted in ascending order.
+	//
+	// If set to null, the results are sorted in an arbitrary order.
 	SortOrder types.SortOrder
 
 	noSmithyDocumentSerde
@@ -115,25 +127,25 @@ func (c *Client) addOperationListApplicationRevisionsMiddlewares(stack *middlewa
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -148,13 +160,16 @@ func (c *Client) addOperationListApplicationRevisionsMiddlewares(stack *middlewa
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpListApplicationRevisionsValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListApplicationRevisions(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

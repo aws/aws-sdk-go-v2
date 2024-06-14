@@ -1,3 +1,99 @@
+# v1.48.3 (2024-06-07)
+
+* **Bug Fix**: Add clock skew correction on all service clients
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.48.2 (2024-06-03)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.48.1 (2024-05-23)
+
+* No change notes available for this release.
+
+# v1.48.0 (2024-05-17)
+
+* **Feature**: Enable use of CloudFormation traits in Smithy model to improve generated CloudFormation schema from the Smithy API model.
+
+# v1.47.5 (2024-05-16)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.47.4 (2024-05-15)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.47.3 (2024-05-08)
+
+* **Bug Fix**: GoDoc improvement
+
+# v1.47.2 (2024-05-06)
+
+* No change notes available for this release.
+
+# v1.47.1 (2024-05-03)
+
+* No change notes available for this release.
+
+# v1.47.0 (2024-04-22)
+
+* **Feature**: Adding new API to support remote directory listing using SFTP connector
+
+# v1.46.0 (2024-04-12)
+
+* **Feature**: This change releases support for importing self signed certificates to the Transfer Family for sending outbound file transfers over TLS/HTTPS.
+
+# v1.45.0 (2024-04-03)
+
+* **Feature**: Add ability to specify Security Policies for SFTP Connectors
+
+# v1.44.2 (2024-03-29)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.44.1 (2024-03-18)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.44.0 (2024-03-08)
+
+* **Feature**: Added DES_EDE3_CBC to the list of supported encryption algorithms for messages sent with an AS2 connector.
+
+# v1.43.2 (2024-03-07)
+
+* **Bug Fix**: Remove dependency on go-cmp.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.43.1 (2024-02-23)
+
+* **Bug Fix**: Move all common, SDK-side middleware stack ops into the service client module to prevent cross-module compatibility issues in the future.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.43.0 (2024-02-22)
+
+* **Feature**: Add middleware stack snapshot tests.
+
+# v1.42.2 (2024-02-21)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.42.1 (2024-02-20)
+
+* **Bug Fix**: When sourcing values for a service's `EndpointParameters`, the lack of a configured region (i.e. `options.Region == ""`) will now translate to a `nil` value for `EndpointParameters.Region` instead of a pointer to the empty string `""`. This will result in a much more explicit error when calling an operation instead of an obscure hostname lookup failure.
+
+# v1.42.0 (2024-02-16)
+
+* **Feature**: Add new ClientOptions field to waiter config which allows you to extend the config for operation calls made by waiters.
+
+# v1.41.1 (2024-02-15)
+
+* **Bug Fix**: Correct failure to determine the error type in awsJson services that could occur when errors were modeled with a non-string `code` field.
+
+# v1.41.0 (2024-02-13)
+
+* **Feature**: Bump minimum Go version to 1.20 per our language support policy.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.40.0 (2024-01-12)
 
 * **Feature**: AWS Transfer Family now supports static IP addresses for SFTP & AS2 connectors and for async MDNs on AS2 servers.

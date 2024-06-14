@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/cloudsearch/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -15,9 +14,10 @@ import (
 // Gets information about the access policies that control access to the domain's
 // document and search endpoints. By default, shows the configuration with any
 // pending changes. Set the Deployed option to true to show the active
-// configuration and exclude pending changes. For more information, see
-// Configuring Access for a Search Domain (http://docs.aws.amazon.com/cloudsearch/latest/developerguide/configuring-access.html)
-// in the Amazon CloudSearch Developer Guide.
+// configuration and exclude pending changes. For more information, see [Configuring Access for a Search Domain]in the
+// Amazon CloudSearch Developer Guide.
+//
+// [Configuring Access for a Search Domain]: http://docs.aws.amazon.com/cloudsearch/latest/developerguide/configuring-access.html
 func (c *Client) DescribeServiceAccessPolicies(ctx context.Context, params *DescribeServiceAccessPoliciesInput, optFns ...func(*Options)) (*DescribeServiceAccessPoliciesOutput, error) {
 	if params == nil {
 		params = &DescribeServiceAccessPoliciesInput{}
@@ -33,9 +33,9 @@ func (c *Client) DescribeServiceAccessPolicies(ctx context.Context, params *Desc
 	return out, nil
 }
 
-// Container for the parameters to the DescribeServiceAccessPolicies operation.
-// Specifies the name of the domain you want to describe. To show the active
-// configuration and exclude any pending changes, set the Deployed option to true .
+// Container for the parameters to the DescribeServiceAccessPolicies operation. Specifies the name of the
+// domain you want to describe. To show the active configuration and exclude any
+// pending changes, set the Deployed option to true .
 type DescribeServiceAccessPoliciesInput struct {
 
 	// The name of the domain you want to describe.
@@ -86,25 +86,25 @@ func (c *Client) addOperationDescribeServiceAccessPoliciesMiddlewares(stack *mid
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -119,13 +119,16 @@ func (c *Client) addOperationDescribeServiceAccessPoliciesMiddlewares(stack *mid
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDescribeServiceAccessPoliciesValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeServiceAccessPolicies(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

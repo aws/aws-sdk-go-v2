@@ -6,32 +6,39 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/eks/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Updates the Kubernetes version or AMI version of an Amazon EKS managed node
-// group. You can update a node group using a launch template only if the node
-// group was originally deployed with a launch template. If you need to update a
-// custom AMI in a node group that was deployed with a launch template, then update
-// your custom AMI, specify the new ID in a new version of the launch template, and
-// then update the node group to the new version of the launch template. If you
-// update without a launch template, then you can update to the latest available
-// AMI version of a node group's current Kubernetes version by not specifying a
-// Kubernetes version in the request. You can update to the latest AMI version of
-// your cluster's current Kubernetes version by specifying your cluster's
-// Kubernetes version in the request. For information about Linux versions, see
-// Amazon EKS optimized Amazon Linux AMI versions (https://docs.aws.amazon.com/eks/latest/userguide/eks-linux-ami-versions.html)
-// in the Amazon EKS User Guide. For information about Windows versions, see
-// Amazon EKS optimized Windows AMI versions (https://docs.aws.amazon.com/eks/latest/userguide/eks-ami-versions-windows.html)
-// in the Amazon EKS User Guide. You cannot roll back a node group to an earlier
-// Kubernetes version or AMI version. When a node in a managed node group is
-// terminated due to a scaling action or update, every Pod on that node is drained
-// first. Amazon EKS attempts to drain the nodes gracefully and will fail if it is
-// unable to do so. You can force the update if Amazon EKS is unable to drain the
-// nodes as a result of a Pod disruption budget issue.
+// group.
+//
+// You can update a node group using a launch template only if the node group was
+// originally deployed with a launch template. If you need to update a custom AMI
+// in a node group that was deployed with a launch template, then update your
+// custom AMI, specify the new ID in a new version of the launch template, and then
+// update the node group to the new version of the launch template.
+//
+// If you update without a launch template, then you can update to the latest
+// available AMI version of a node group's current Kubernetes version by not
+// specifying a Kubernetes version in the request. You can update to the latest AMI
+// version of your cluster's current Kubernetes version by specifying your
+// cluster's Kubernetes version in the request. For information about Linux
+// versions, see [Amazon EKS optimized Amazon Linux AMI versions]in the Amazon EKS User Guide. For information about Windows
+// versions, see [Amazon EKS optimized Windows AMI versions]in the Amazon EKS User Guide.
+//
+// You cannot roll back a node group to an earlier Kubernetes version or AMI
+// version.
+//
+// When a node in a managed node group is terminated due to a scaling action or
+// update, every Pod on that node is drained first. Amazon EKS attempts to drain
+// the nodes gracefully and will fail if it is unable to do so. You can force the
+// update if Amazon EKS is unable to drain the nodes as a result of a Pod
+// disruption budget issue.
+//
+// [Amazon EKS optimized Amazon Linux AMI versions]: https://docs.aws.amazon.com/eks/latest/userguide/eks-linux-ami-versions.html
+// [Amazon EKS optimized Windows AMI versions]: https://docs.aws.amazon.com/eks/latest/userguide/eks-ami-versions-windows.html
 func (c *Client) UpdateNodegroupVersion(ctx context.Context, params *UpdateNodegroupVersionInput, optFns ...func(*Options)) (*UpdateNodegroupVersionOutput, error) {
 	if params == nil {
 		params = &UpdateNodegroupVersionInput{}
@@ -76,16 +83,19 @@ type UpdateNodegroupVersionInput struct {
 
 	// The AMI version of the Amazon EKS optimized AMI to use for the update. By
 	// default, the latest available AMI version for the node group's Kubernetes
-	// version is used. For information about Linux versions, see Amazon EKS optimized
-	// Amazon Linux AMI versions (https://docs.aws.amazon.com/eks/latest/userguide/eks-linux-ami-versions.html)
-	// in the Amazon EKS User Guide. Amazon EKS managed node groups support the
-	// November 2022 and later releases of the Windows AMIs. For information about
-	// Windows versions, see Amazon EKS optimized Windows AMI versions (https://docs.aws.amazon.com/eks/latest/userguide/eks-ami-versions-windows.html)
-	// in the Amazon EKS User Guide. If you specify launchTemplate , and your launch
-	// template uses a custom AMI, then don't specify releaseVersion , or the node
-	// group update will fail. For more information about using launch templates with
-	// Amazon EKS, see Launch template support (https://docs.aws.amazon.com/eks/latest/userguide/launch-templates.html)
-	// in the Amazon EKS User Guide.
+	// version is used. For information about Linux versions, see [Amazon EKS optimized Amazon Linux AMI versions]in the Amazon EKS
+	// User Guide. Amazon EKS managed node groups support the November 2022 and later
+	// releases of the Windows AMIs. For information about Windows versions, see [Amazon EKS optimized Windows AMI versions]in
+	// the Amazon EKS User Guide.
+	//
+	// If you specify launchTemplate , and your launch template uses a custom AMI, then
+	// don't specify releaseVersion , or the node group update will fail. For more
+	// information about using launch templates with Amazon EKS, see [Customizing managed nodes with launch templates]in the Amazon EKS
+	// User Guide.
+	//
+	// [Customizing managed nodes with launch templates]: https://docs.aws.amazon.com/eks/latest/userguide/launch-templates.html
+	// [Amazon EKS optimized Amazon Linux AMI versions]: https://docs.aws.amazon.com/eks/latest/userguide/eks-linux-ami-versions.html
+	// [Amazon EKS optimized Windows AMI versions]: https://docs.aws.amazon.com/eks/latest/userguide/eks-ami-versions-windows.html
 	ReleaseVersion *string
 
 	// The Kubernetes version to update to. If no version is specified, then the
@@ -94,8 +104,9 @@ type UpdateNodegroupVersionInput struct {
 	// version of the cluster's Kubernetes version. If you specify launchTemplate , and
 	// your launch template uses a custom AMI, then don't specify version , or the node
 	// group update will fail. For more information about using launch templates with
-	// Amazon EKS, see Launch template support (https://docs.aws.amazon.com/eks/latest/userguide/launch-templates.html)
-	// in the Amazon EKS User Guide.
+	// Amazon EKS, see [Customizing managed nodes with launch templates]in the Amazon EKS User Guide.
+	//
+	// [Customizing managed nodes with launch templates]: https://docs.aws.amazon.com/eks/latest/userguide/launch-templates.html
 	Version *string
 
 	noSmithyDocumentSerde
@@ -134,25 +145,25 @@ func (c *Client) addOperationUpdateNodegroupVersionMiddlewares(stack *middleware
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -167,6 +178,9 @@ func (c *Client) addOperationUpdateNodegroupVersionMiddlewares(stack *middleware
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opUpdateNodegroupVersionMiddleware(stack, options); err != nil {
 		return err
 	}
@@ -176,7 +190,7 @@ func (c *Client) addOperationUpdateNodegroupVersionMiddlewares(stack *middleware
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateNodegroupVersion(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

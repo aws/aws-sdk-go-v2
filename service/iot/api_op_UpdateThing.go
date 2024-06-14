@@ -6,14 +6,16 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/iot/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates the data for a thing. Requires permission to access the UpdateThing (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
-// action.
+// Updates the data for a thing.
+//
+// Requires permission to access the [UpdateThing] action.
+//
+// [UpdateThing]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions
 func (c *Client) UpdateThing(ctx context.Context, params *UpdateThingInput, optFns ...func(*Options)) (*UpdateThingOutput, error) {
 	if params == nil {
 		params = &UpdateThingInput{}
@@ -32,16 +34,20 @@ func (c *Client) UpdateThing(ctx context.Context, params *UpdateThingInput, optF
 // The input for the UpdateThing operation.
 type UpdateThingInput struct {
 
-	// The name of the thing to update. You can't change a thing's name. To change a
-	// thing's name, you must create a new thing, give it the new name, and then delete
-	// the old thing.
+	// The name of the thing to update.
+	//
+	// You can't change a thing's name. To change a thing's name, you must create a
+	// new thing, give it the new name, and then delete the old thing.
 	//
 	// This member is required.
 	ThingName *string
 
 	// A list of thing attributes, a JSON string containing name-value pairs. For
-	// example: {\"attributes\":{\"name1\":\"value2\"}} This data is used to add new
-	// attributes or update existing attributes.
+	// example:
+	//
+	//     {\"attributes\":{\"name1\":\"value2\"}}
+	//
+	// This data is used to add new attributes or update existing attributes.
 	AttributePayload *types.AttributePayload
 
 	// The expected version of the thing record in the registry. If the version of the
@@ -88,25 +94,25 @@ func (c *Client) addOperationUpdateThingMiddlewares(stack *middleware.Stack, opt
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -121,13 +127,16 @@ func (c *Client) addOperationUpdateThingMiddlewares(stack *middleware.Stack, opt
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpUpdateThingValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateThing(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

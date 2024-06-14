@@ -6,31 +6,38 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/chimesdkmeetings/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Updates AttendeeCapabilities except the capabilities listed in an
-// ExcludedAttendeeIds table. You use the capabilities with a set of values that
-// control what the capabilities can do, such as SendReceive data. For more
-// information about those values, see . When using capabilities, be aware of these
-// corner cases:
+// ExcludedAttendeeIds table.
+//
+// You use the capabilities with a set of values that control what the
+// capabilities can do, such as SendReceive data. For more information about those
+// values, see .
+//
+// When using capabilities, be aware of these corner cases:
+//
 //   - If you specify MeetingFeatures:Video:MaxResolution:None when you create a
 //     meeting, all API requests that include SendReceive , Send , or Receive for
 //     AttendeeCapabilities:Video will be rejected with ValidationError 400 .
+//
 //   - If you specify MeetingFeatures:Content:MaxResolution:None when you create a
 //     meeting, all API requests that include SendReceive , Send , or Receive for
 //     AttendeeCapabilities:Content will be rejected with ValidationError 400 .
+//
 //   - You can't set content capabilities to SendReceive or Receive unless you also
 //     set video capabilities to SendReceive or Receive . If you don't set the video
 //     capability to receive, the response will contain an HTTP 400 Bad Request status
 //     code. However, you can set your video capability to receive and you set your
 //     content capability to not receive.
+//
 //   - When you change an audio capability from None or Receive to Send or
 //     SendReceive , and if the attendee left their microphone unmuted, audio will
 //     flow from the attendee to the other meeting participants.
+//
 //   - When you change a video or content capability from None or Receive to Send
 //     or SendReceive , and if the attendee turned on their video or content streams,
 //     remote attendees can receive those streams, but only after media renegotiation
@@ -99,25 +106,25 @@ func (c *Client) addOperationBatchUpdateAttendeeCapabilitiesExceptMiddlewares(st
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -132,13 +139,16 @@ func (c *Client) addOperationBatchUpdateAttendeeCapabilitiesExceptMiddlewares(st
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpBatchUpdateAttendeeCapabilitiesExceptValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opBatchUpdateAttendeeCapabilitiesExcept(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

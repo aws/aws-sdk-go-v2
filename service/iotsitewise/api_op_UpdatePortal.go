@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/iotsitewise/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -45,11 +44,12 @@ type UpdatePortalInput struct {
 	// This member is required.
 	PortalName *string
 
-	// The ARN (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
-	// of a service role that allows the portal's users to access your IoT SiteWise
-	// resources on your behalf. For more information, see Using service roles for IoT
-	// SiteWise Monitor (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/monitor-service-role.html)
-	// in the IoT SiteWise User Guide.
+	// The [ARN] of a service role that allows the portal's users to access your IoT
+	// SiteWise resources on your behalf. For more information, see [Using service roles for IoT SiteWise Monitor]in the IoT
+	// SiteWise User Guide.
+	//
+	// [Using service roles for IoT SiteWise Monitor]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/monitor-service-role.html
+	// [ARN]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
 	//
 	// This member is required.
 	RoleArn *string
@@ -57,8 +57,9 @@ type UpdatePortalInput struct {
 	// Contains the configuration information of an alarm created in an IoT SiteWise
 	// Monitor portal. You can use the alarm to monitor an asset property and get
 	// notified when the asset property value is outside a specified range. For more
-	// information, see Monitoring with alarms (https://docs.aws.amazon.com/iot-sitewise/latest/appguide/monitor-alarms.html)
-	// in the IoT SiteWise Application Guide.
+	// information, see [Monitoring with alarms]in the IoT SiteWise Application Guide.
+	//
+	// [Monitoring with alarms]: https://docs.aws.amazon.com/iot-sitewise/latest/appguide/monitor-alarms.html
 	Alarms *types.Alarms
 
 	// A unique case-sensitive identifier that you can provide to ensure the
@@ -73,7 +74,9 @@ type UpdatePortalInput struct {
 	PortalDescription *string
 
 	// Contains an image that is one of the following:
+	//
 	//   - An image file. Choose this option to upload a new image.
+	//
 	//   - The ID of an existing image. Choose this option to keep an existing image.
 	PortalLogoImage *types.Image
 
@@ -116,25 +119,25 @@ func (c *Client) addOperationUpdatePortalMiddlewares(stack *middleware.Stack, op
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -149,6 +152,9 @@ func (c *Client) addOperationUpdatePortalMiddlewares(stack *middleware.Stack, op
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addEndpointPrefix_opUpdatePortalMiddleware(stack); err != nil {
 		return err
 	}
@@ -161,7 +167,7 @@ func (c *Client) addOperationUpdatePortalMiddlewares(stack *middleware.Stack, op
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdatePortal(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

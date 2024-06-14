@@ -6,31 +6,40 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/servicecatalogappregistry/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Associates a resource with an application. The resource can be specified by its
-// ARN or name. The application can be specified by ARN, ID, or name. Minimum
-// permissions You must have the following permissions to associate a resource
-// using the OPTIONS parameter set to APPLY_APPLICATION_TAG .
+//	Associates a resource with an application. The resource can be specified by
+//
+// its ARN or name. The application can be specified by ARN, ID, or name.
+//
+// # Minimum permissions
+//
+// You must have the following permissions to associate a resource using the
+// OPTIONS parameter set to APPLY_APPLICATION_TAG .
+//
 //   - tag:GetResources
+//
 //   - tag:TagResources
 //
 // You must also have these additional permissions if you don't use the
-// AWSServiceCatalogAppRegistryFullAccess policy. For more information, see
-// AWSServiceCatalogAppRegistryFullAccess (https://docs.aws.amazon.com/servicecatalog/latest/arguide/full.html)
-// in the AppRegistry Administrator Guide.
+// AWSServiceCatalogAppRegistryFullAccess policy. For more information, see [AWSServiceCatalogAppRegistryFullAccess] in
+// the AppRegistry Administrator Guide.
+//
 //   - resource-groups:AssociateResource
+//
 //   - cloudformation:UpdateStack
+//
 //   - cloudformation:DescribeStacks
 //
 // In addition, you must have the tagging permission defined by the Amazon Web
-// Services service that creates the resource. For more information, see
-// TagResources (https://docs.aws.amazon.com/resourcegroupstagging/latest/APIReference/API_TagResources.html)
-// in the Resource Groups Tagging API Reference.
+// Services service that creates the resource. For more information, see [TagResources]in the
+// Resource Groups Tagging API Reference.
+//
+// [TagResources]: https://docs.aws.amazon.com/resourcegroupstagging/latest/APIReference/API_TagResources.html
+// [AWSServiceCatalogAppRegistryFullAccess]: https://docs.aws.amazon.com/servicecatalog/latest/arguide/full.html
 func (c *Client) AssociateResource(ctx context.Context, params *AssociateResourceInput, optFns ...func(*Options)) (*AssociateResourceOutput, error) {
 	if params == nil {
 		params = &AssociateResourceInput{}
@@ -48,7 +57,7 @@ func (c *Client) AssociateResource(ctx context.Context, params *AssociateResourc
 
 type AssociateResourceInput struct {
 
-	// The name, ID, or ARN of the application.
+	//  The name, ID, or ARN of the application.
 	//
 	// This member is required.
 	Application *string
@@ -63,7 +72,7 @@ type AssociateResourceInput struct {
 	// This member is required.
 	ResourceType types.ResourceType
 
-	// Determines whether an application tag is applied or skipped.
+	//  Determines whether an application tag is applied or skipped.
 	Options []types.AssociationOption
 
 	noSmithyDocumentSerde
@@ -75,7 +84,7 @@ type AssociateResourceOutput struct {
 	// attributes.
 	ApplicationArn *string
 
-	// Determines whether an application tag is applied or skipped.
+	//  Determines whether an application tag is applied or skipped.
 	Options []types.AssociationOption
 
 	// The Amazon resource name (ARN) that specifies the resource.
@@ -109,25 +118,25 @@ func (c *Client) addOperationAssociateResourceMiddlewares(stack *middleware.Stac
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -142,13 +151,16 @@ func (c *Client) addOperationAssociateResourceMiddlewares(stack *middleware.Stac
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpAssociateResourceValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opAssociateResource(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

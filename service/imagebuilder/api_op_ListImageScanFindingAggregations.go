@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/imagebuilder/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -16,11 +15,16 @@ import (
 // the type of key that Image Builder uses to group results. For example, if you
 // want to get a list of findings by severity level for one of your pipelines, you
 // might specify your pipeline with the imagePipelineArn filter. If you don't
-// specify a filter, Image Builder returns an aggregation for your account. To
-// streamline results, you can use the following filters in your request:
+// specify a filter, Image Builder returns an aggregation for your account.
+//
+// To streamline results, you can use the following filters in your request:
+//
 //   - accountId
+//
 //   - imageBuildVersionArn
+//
 //   - imagePipelineArn
+//
 //   - vulnerabilityId
 func (c *Client) ListImageScanFindingAggregations(ctx context.Context, params *ListImageScanFindingAggregationsInput, optFns ...func(*Options)) (*ListImageScanFindingAggregationsOutput, error) {
 	if params == nil {
@@ -56,11 +60,17 @@ type ListImageScanFindingAggregationsOutput struct {
 	// The aggregation type specifies what type of key is used to group the image scan
 	// findings. Image Builder returns results based on the request filter. If you
 	// didn't specify a filter in the request, the type defaults to accountId .
+	//
 	// Aggregation types
+	//
 	//   - accountId
+	//
 	//   - imageBuildVersionArn
+	//
 	//   - imagePipelineArn
+	//
 	//   - vulnerabilityId
+	//
 	// Each aggregation includes counts by severity level for medium severity and
 	// higher level findings, plus a total for all of the findings for each key value.
 	AggregationType *string
@@ -104,25 +114,25 @@ func (c *Client) addOperationListImageScanFindingAggregationsMiddlewares(stack *
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -137,10 +147,13 @@ func (c *Client) addOperationListImageScanFindingAggregationsMiddlewares(stack *
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListImageScanFindingAggregations(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

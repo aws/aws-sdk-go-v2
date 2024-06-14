@@ -6,20 +6,28 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/gamelift/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Retrieves the details of FlexMatch matchmaking configurations. This operation
-// offers the following options: (1) retrieve all matchmaking configurations, (2)
-// retrieve configurations for a specified list, or (3) retrieve all configurations
-// that use a specified rule set name. When requesting multiple items, use the
-// pagination parameters to retrieve results as a set of sequential pages. If
-// successful, a configuration is returned for each requested name. When specifying
-// a list of names, only configurations that currently exist are returned. Learn
-// more Setting up FlexMatch matchmakers (https://docs.aws.amazon.com/gamelift/latest/flexmatchguide/matchmaker-build.html)
+// Retrieves the details of FlexMatch matchmaking configurations.
+//
+// This operation offers the following options: (1) retrieve all matchmaking
+// configurations, (2) retrieve configurations for a specified list, or (3)
+// retrieve all configurations that use a specified rule set name. When requesting
+// multiple items, use the pagination parameters to retrieve results as a set of
+// sequential pages.
+//
+// If successful, a configuration is returned for each requested name. When
+// specifying a list of names, only configurations that currently exist are
+// returned.
+//
+// # Learn more
+//
+// [Setting up FlexMatch matchmakers]
+//
+// [Setting up FlexMatch matchmakers]: https://docs.aws.amazon.com/gamelift/latest/flexmatchguide/matchmaker-build.html
 func (c *Client) DescribeMatchmakingConfigurations(ctx context.Context, params *DescribeMatchmakingConfigurationsInput, optFns ...func(*Options)) (*DescribeMatchmakingConfigurationsOutput, error) {
 	if params == nil {
 		params = &DescribeMatchmakingConfigurationsInput{}
@@ -97,25 +105,25 @@ func (c *Client) addOperationDescribeMatchmakingConfigurationsMiddlewares(stack 
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -130,10 +138,13 @@ func (c *Client) addOperationDescribeMatchmakingConfigurationsMiddlewares(stack 
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeMatchmakingConfigurations(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

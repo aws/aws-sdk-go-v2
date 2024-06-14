@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/iotsitewise/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -17,8 +16,9 @@ import (
 // capability configuration can contain multiple data source configurations. If you
 // define OPC-UA sources for a gateway in the IoT SiteWise console, all of your
 // OPC-UA sources are stored in one capability configuration. To list all
-// capability configurations for a gateway, use DescribeGateway (https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_DescribeGateway.html)
-// .
+// capability configurations for a gateway, use [DescribeGateway].
+//
+// [DescribeGateway]: https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_DescribeGateway.html
 func (c *Client) UpdateGatewayCapabilityConfiguration(ctx context.Context, params *UpdateGatewayCapabilityConfigurationInput, optFns ...func(*Options)) (*UpdateGatewayCapabilityConfigurationOutput, error) {
 	if params == nil {
 		params = &UpdateGatewayCapabilityConfigurationInput{}
@@ -37,8 +37,9 @@ func (c *Client) UpdateGatewayCapabilityConfiguration(ctx context.Context, param
 type UpdateGatewayCapabilityConfigurationInput struct {
 
 	// The JSON document that defines the configuration for the gateway capability.
-	// For more information, see Configuring data sources (CLI) (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/configure-sources.html#configure-source-cli)
-	// in the IoT SiteWise User Guide.
+	// For more information, see [Configuring data sources (CLI)]in the IoT SiteWise User Guide.
+	//
+	// [Configuring data sources (CLI)]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/configure-sources.html#configure-source-cli
 	//
 	// This member is required.
 	CapabilityConfiguration *string
@@ -68,9 +69,13 @@ type UpdateGatewayCapabilityConfigurationOutput struct {
 
 	// The synchronization status of the capability configuration. The sync status can
 	// be one of the following:
+	//
 	//   - IN_SYNC – The gateway is running the capability configuration.
+	//
 	//   - OUT_OF_SYNC – The gateway hasn't received the capability configuration.
+	//
 	//   - SYNC_FAILED – The gateway rejected the capability configuration.
+	//
 	// After you update a capability configuration, its sync status is OUT_OF_SYNC
 	// until the gateway receives and applies or rejects the updated configuration.
 	//
@@ -105,25 +110,25 @@ func (c *Client) addOperationUpdateGatewayCapabilityConfigurationMiddlewares(sta
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -138,6 +143,9 @@ func (c *Client) addOperationUpdateGatewayCapabilityConfigurationMiddlewares(sta
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addEndpointPrefix_opUpdateGatewayCapabilityConfigurationMiddleware(stack); err != nil {
 		return err
 	}
@@ -147,7 +155,7 @@ func (c *Client) addOperationUpdateGatewayCapabilityConfigurationMiddlewares(sta
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateGatewayCapabilityConfiguration(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

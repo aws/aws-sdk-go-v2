@@ -1,3 +1,67 @@
+# v1.53.9 (2024-06-07)
+
+* **Bug Fix**: Add clock skew correction on all service clients
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.53.8 (2024-06-03)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.53.7 (2024-05-23)
+
+* No change notes available for this release.
+
+# v1.53.6 (2024-05-16)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.53.5 (2024-05-15)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.53.4 (2024-05-08)
+
+* **Bug Fix**: GoDoc improvement
+
+# v1.53.3 (2024-03-29)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.53.2 (2024-03-18)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.53.1 (2024-03-07)
+
+* **Bug Fix**: Remove dependency on go-cmp.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.53.0 (2024-02-28)
+
+* **Feature**: This release reduces the maximum results returned per query invocation from 500 to 100 for the SearchIndex API. This change has no implications as long as the API is invoked until the nextToken is NULL.
+
+# v1.52.1 (2024-02-23)
+
+* **Bug Fix**: Move all common, SDK-side middleware stack ops into the service client module to prevent cross-module compatibility issues in the future.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.52.0 (2024-02-22)
+
+* **Feature**: Add middleware stack snapshot tests.
+
+# v1.51.2 (2024-02-21)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.51.1 (2024-02-20)
+
+* **Bug Fix**: When sourcing values for a service's `EndpointParameters`, the lack of a configured region (i.e. `options.Region == ""`) will now translate to a `nil` value for `EndpointParameters.Region` instead of a pointer to the empty string `""`. This will result in a much more explicit error when calling an operation instead of an obscure hostname lookup failure.
+
+# v1.51.0 (2024-02-13)
+
+* **Feature**: Bump minimum Go version to 1.20 per our language support policy.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.50.0 (2024-02-09)
 
 * **Feature**: This release allows AWS IoT Core users to enable Online Certificate Status Protocol (OCSP) Stapling for TLS X.509 Server Certificates when creating and updating AWS IoT Domain Configurations with Custom Domain.

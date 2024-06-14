@@ -6,13 +6,12 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockagent/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes an Alias for a Amazon Bedrock Agent
+// Deletes an alias of an agent.
 func (c *Client) DeleteAgentAlias(ctx context.Context, params *DeleteAgentAliasInput, optFns ...func(*Options)) (*DeleteAgentAliasOutput, error) {
 	if params == nil {
 		params = &DeleteAgentAliasInput{}
@@ -28,15 +27,14 @@ func (c *Client) DeleteAgentAlias(ctx context.Context, params *DeleteAgentAliasI
 	return out, nil
 }
 
-// Delete Agent Alias Request
 type DeleteAgentAliasInput struct {
 
-	// Id generated at the server side when an Agent Alias is created
+	// The unique identifier of the alias to delete.
 	//
 	// This member is required.
 	AgentAliasId *string
 
-	// Id generated at the server side when an Agent is created
+	// The unique identifier of the agent that the alias belongs to.
 	//
 	// This member is required.
 	AgentId *string
@@ -44,20 +42,19 @@ type DeleteAgentAliasInput struct {
 	noSmithyDocumentSerde
 }
 
-// Delete Agent Alias Response
 type DeleteAgentAliasOutput struct {
 
-	// Id for an Agent Alias generated at the server side.
+	// The unique identifier of the alias that was deleted.
 	//
 	// This member is required.
 	AgentAliasId *string
 
-	// The statuses an Agent Alias can be in.
+	// The status of the alias.
 	//
 	// This member is required.
 	AgentAliasStatus types.AgentAliasStatus
 
-	// Identifier for a resource.
+	// The unique identifier of the agent that the alias belongs to.
 	//
 	// This member is required.
 	AgentId *string
@@ -90,25 +87,25 @@ func (c *Client) addOperationDeleteAgentAliasMiddlewares(stack *middleware.Stack
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -123,13 +120,16 @@ func (c *Client) addOperationDeleteAgentAliasMiddlewares(stack *middleware.Stack
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDeleteAgentAliasValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteAgentAlias(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/kendra/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -15,23 +14,29 @@ import (
 // Creates an access configuration for your documents. This includes user and
 // group access information for your documents. This is useful for user context
 // filtering, where search results are filtered based on the user or their group
-// access to documents. You can use this to re-configure your existing document
-// level access control without indexing all of your documents again. For example,
-// your index contains top-secret company documents that only certain employees or
-// users should access. One of these users leaves the company or switches to a team
-// that should be blocked from accessing top-secret documents. The user still has
-// access to top-secret documents because the user had access when your documents
-// were previously indexed. You can create a specific access control configuration
-// for the user with deny access. You can later update the access control
-// configuration to allow access if the user returns to the company and re-joins
-// the 'top-secret' team. You can re-configure access control for your documents as
-// circumstances change. To apply your access control configuration to certain
-// documents, you call the BatchPutDocument (https://docs.aws.amazon.com/kendra/latest/dg/API_BatchPutDocument.html)
-// API with the AccessControlConfigurationId included in the Document (https://docs.aws.amazon.com/kendra/latest/dg/API_Document.html)
-// object. If you use an S3 bucket as a data source, you update the .metadata.json
-// with the AccessControlConfigurationId and synchronize your data source. Amazon
-// Kendra currently only supports access control configuration for S3 data sources
-// and documents indexed using the BatchPutDocument API.
+// access to documents.
+//
+// You can use this to re-configure your existing document level access control
+// without indexing all of your documents again. For example, your index contains
+// top-secret company documents that only certain employees or users should access.
+// One of these users leaves the company or switches to a team that should be
+// blocked from accessing top-secret documents. The user still has access to
+// top-secret documents because the user had access when your documents were
+// previously indexed. You can create a specific access control configuration for
+// the user with deny access. You can later update the access control configuration
+// to allow access if the user returns to the company and re-joins the 'top-secret'
+// team. You can re-configure access control for your documents as circumstances
+// change.
+//
+// To apply your access control configuration to certain documents, you call the [BatchPutDocument]
+// API with the AccessControlConfigurationId included in the [Document] object. If you use
+// an S3 bucket as a data source, you update the .metadata.json with the
+// AccessControlConfigurationId and synchronize your data source. Amazon Kendra
+// currently only supports access control configuration for S3 data sources and
+// documents indexed using the BatchPutDocument API.
+//
+// [BatchPutDocument]: https://docs.aws.amazon.com/kendra/latest/dg/API_BatchPutDocument.html
+// [Document]: https://docs.aws.amazon.com/kendra/latest/dg/API_Document.html
 func (c *Client) CreateAccessControlConfiguration(ctx context.Context, params *CreateAccessControlConfigurationInput, optFns ...func(*Options)) (*CreateAccessControlConfigurationOutput, error) {
 	if params == nil {
 		params = &CreateAccessControlConfigurationInput{}
@@ -73,8 +78,10 @@ type CreateAccessControlConfigurationInput struct {
 	// A description for the access control configuration.
 	Description *string
 
-	// The list of principal (https://docs.aws.amazon.com/kendra/latest/dg/API_Principal.html)
-	// lists that define the hierarchy for which documents users should have access to.
+	// The list of [principal] lists that define the hierarchy for which documents users should
+	// have access to.
+	//
+	// [principal]: https://docs.aws.amazon.com/kendra/latest/dg/API_Principal.html
 	HierarchicalAccessControlList []types.HierarchicalPrincipal
 
 	noSmithyDocumentSerde
@@ -116,25 +123,25 @@ func (c *Client) addOperationCreateAccessControlConfigurationMiddlewares(stack *
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -149,6 +156,9 @@ func (c *Client) addOperationCreateAccessControlConfigurationMiddlewares(stack *
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opCreateAccessControlConfigurationMiddleware(stack, options); err != nil {
 		return err
 	}
@@ -158,7 +168,7 @@ func (c *Client) addOperationCreateAccessControlConfigurationMiddlewares(stack *
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateAccessControlConfiguration(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

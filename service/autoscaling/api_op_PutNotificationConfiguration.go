@@ -6,18 +6,22 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Configures an Auto Scaling group to send notifications when specified events
 // take place. Subscribers to the specified topic can have messages delivered to an
-// endpoint such as a web server or an email address. This configuration overwrites
-// any existing configuration. For more information, see Getting Amazon SNS
-// notifications when your Auto Scaling group scales (https://docs.aws.amazon.com/autoscaling/ec2/userguide/ASGettingNotifications.html)
-// in the Amazon EC2 Auto Scaling User Guide. If you exceed your maximum limit of
-// SNS topics, which is 10 per Auto Scaling group, the call fails.
+// endpoint such as a web server or an email address.
+//
+// This configuration overwrites any existing configuration.
+//
+// For more information, see [Getting Amazon SNS notifications when your Auto Scaling group scales] in the Amazon EC2 Auto Scaling User Guide.
+//
+// If you exceed your maximum limit of SNS topics, which is 10 per Auto Scaling
+// group, the call fails.
+//
+// [Getting Amazon SNS notifications when your Auto Scaling group scales]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/ASGettingNotifications.html
 func (c *Client) PutNotificationConfiguration(ctx context.Context, params *PutNotificationConfigurationInput, optFns ...func(*Options)) (*PutNotificationConfigurationOutput, error) {
 	if params == nil {
 		params = &PutNotificationConfigurationInput{}
@@ -41,8 +45,7 @@ type PutNotificationConfigurationInput struct {
 	AutoScalingGroupName *string
 
 	// The type of event that causes the notification to be sent. To query the
-	// notification types supported by Amazon EC2 Auto Scaling, call the
-	// DescribeAutoScalingNotificationTypes API.
+	// notification types supported by Amazon EC2 Auto Scaling, call the DescribeAutoScalingNotificationTypesAPI.
 	//
 	// This member is required.
 	NotificationTypes []string
@@ -84,25 +87,25 @@ func (c *Client) addOperationPutNotificationConfigurationMiddlewares(stack *midd
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -117,13 +120,16 @@ func (c *Client) addOperationPutNotificationConfigurationMiddlewares(stack *midd
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpPutNotificationConfigurationValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opPutNotificationConfiguration(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/redshift/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -15,12 +14,16 @@ import (
 // Returns a detailed list of parameters contained within the specified Amazon
 // Redshift parameter group. For each parameter the response includes information
 // such as parameter name, description, data type, value, whether the parameter
-// value is modifiable, and so on. You can specify source filter to retrieve
-// parameters of only specific type. For example, to retrieve parameters that were
-// modified by a user action such as from ModifyClusterParameterGroup , you can
-// specify source equal to user. For more information about parameters and
-// parameter groups, go to Amazon Redshift Parameter Groups (https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-parameter-groups.html)
-// in the Amazon Redshift Cluster Management Guide.
+// value is modifiable, and so on.
+//
+// You can specify source filter to retrieve parameters of only specific type. For
+// example, to retrieve parameters that were modified by a user action such as from
+// ModifyClusterParameterGroup, you can specify source equal to user.
+//
+// For more information about parameters and parameter groups, go to [Amazon Redshift Parameter Groups] in the
+// Amazon Redshift Cluster Management Guide.
+//
+// [Amazon Redshift Parameter Groups]: https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-parameter-groups.html
 func (c *Client) DescribeClusterParameters(ctx context.Context, params *DescribeClusterParametersInput, optFns ...func(*Options)) (*DescribeClusterParametersOutput, error) {
 	if params == nil {
 		params = &DescribeClusterParametersInput{}
@@ -44,24 +47,29 @@ type DescribeClusterParametersInput struct {
 	ParameterGroupName *string
 
 	// An optional parameter that specifies the starting point to return a set of
-	// response records. When the results of a DescribeClusterParameters request
-	// exceed the value specified in MaxRecords , Amazon Web Services returns a value
-	// in the Marker field of the response. You can retrieve the next set of response
-	// records by providing the returned marker value in the Marker parameter and
-	// retrying the request.
+	// response records. When the results of a DescribeClusterParametersrequest exceed the value specified in
+	// MaxRecords , Amazon Web Services returns a value in the Marker field of the
+	// response. You can retrieve the next set of response records by providing the
+	// returned marker value in the Marker parameter and retrying the request.
 	Marker *string
 
 	// The maximum number of response records to return in each call. If the number of
 	// remaining response records exceeds the specified MaxRecords value, a value is
 	// returned in a marker field of the response. You can retrieve the next set of
-	// records by retrying the command with the returned marker value. Default: 100
+	// records by retrying the command with the returned marker value.
+	//
+	// Default: 100
+	//
 	// Constraints: minimum 20, maximum 100.
 	MaxRecords *int32
 
 	// The parameter types to return. Specify user to show parameters that are
 	// different form the default. Similarly, specify engine-default to show
-	// parameters that are the same as the default parameter group. Default: All
-	// parameter types returned. Valid Values: user | engine-default
+	// parameters that are the same as the default parameter group.
+	//
+	// Default: All parameter types returned.
+	//
+	// Valid Values: user | engine-default
 	Source *string
 
 	noSmithyDocumentSerde
@@ -77,8 +85,8 @@ type DescribeClusterParametersOutput struct {
 	// records have been retrieved for the request.
 	Marker *string
 
-	// A list of Parameter instances. Each instance lists the parameters of one
-	// cluster parameter group.
+	// A list of Parameter instances. Each instance lists the parameters of one cluster
+	// parameter group.
 	Parameters []types.Parameter
 
 	// Metadata pertaining to the operation's result.
@@ -109,25 +117,25 @@ func (c *Client) addOperationDescribeClusterParametersMiddlewares(stack *middlew
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -142,13 +150,16 @@ func (c *Client) addOperationDescribeClusterParametersMiddlewares(stack *middlew
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDescribeClusterParametersValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeClusterParameters(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -180,7 +191,10 @@ type DescribeClusterParametersPaginatorOptions struct {
 	// The maximum number of response records to return in each call. If the number of
 	// remaining response records exceeds the specified MaxRecords value, a value is
 	// returned in a marker field of the response. You can retrieve the next set of
-	// records by retrying the command with the returned marker value. Default: 100
+	// records by retrying the command with the returned marker value.
+	//
+	// Default: 100
+	//
 	// Constraints: minimum 20, maximum 100.
 	Limit int32
 

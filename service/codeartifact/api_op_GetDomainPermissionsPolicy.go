@@ -6,16 +6,17 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/codeartifact/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns the resource policy attached to the specified domain. The policy is a
-// resource-based policy, not an identity-based policy. For more information, see
-// Identity-based policies and resource-based policies  (https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_identity-vs-resource.html)
-// in the IAM User Guide.
+//	Returns the resource policy attached to the specified domain.
+//
+// The policy is a resource-based policy, not an identity-based policy. For more
+// information, see [Identity-based policies and resource-based policies]in the IAM User Guide.
+//
+// [Identity-based policies and resource-based policies]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_identity-vs-resource.html
 func (c *Client) GetDomainPermissionsPolicy(ctx context.Context, params *GetDomainPermissionsPolicyInput, optFns ...func(*Options)) (*GetDomainPermissionsPolicyOutput, error) {
 	if params == nil {
 		params = &GetDomainPermissionsPolicyInput{}
@@ -33,12 +34,12 @@ func (c *Client) GetDomainPermissionsPolicy(ctx context.Context, params *GetDoma
 
 type GetDomainPermissionsPolicyInput struct {
 
-	// The name of the domain to which the resource policy is attached.
+	//  The name of the domain to which the resource policy is attached.
 	//
 	// This member is required.
 	Domain *string
 
-	// The 12-digit account number of the Amazon Web Services account that owns the
+	//  The 12-digit account number of the Amazon Web Services account that owns the
 	// domain. It does not include dashes or spaces.
 	DomainOwner *string
 
@@ -47,7 +48,7 @@ type GetDomainPermissionsPolicyInput struct {
 
 type GetDomainPermissionsPolicyOutput struct {
 
-	// The returned resource policy.
+	//  The returned resource policy.
 	Policy *types.ResourcePolicy
 
 	// Metadata pertaining to the operation's result.
@@ -78,25 +79,25 @@ func (c *Client) addOperationGetDomainPermissionsPolicyMiddlewares(stack *middle
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -111,13 +112,16 @@ func (c *Client) addOperationGetDomainPermissionsPolicyMiddlewares(stack *middle
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpGetDomainPermissionsPolicyValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetDomainPermissionsPolicy(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

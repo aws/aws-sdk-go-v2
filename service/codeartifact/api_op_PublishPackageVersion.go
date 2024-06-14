@@ -6,23 +6,26 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/codeartifact/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"io"
 )
 
-// Creates a new package version containing one or more assets (or files). The
-// unfinished flag can be used to keep the package version in the Unfinished state
-// until all of its assets have been uploaded (see Package version status (https://docs.aws.amazon.com/codeartifact/latest/ug/packages-overview.html#package-version-status.html#package-version-status)
-// in the CodeArtifact user guide). To set the package version’s status to
-// Published , omit the unfinished flag when uploading the final asset, or set the
-// status using UpdatePackageVersionStatus (https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_UpdatePackageVersionsStatus.html)
-// . Once a package version’s status is set to Published , it cannot change back to
-// Unfinished . Only generic packages can be published using this API. For more
-// information, see Using generic packages (https://docs.aws.amazon.com/codeartifact/latest/ug/using-generic.html)
-// in the CodeArtifact User Guide.
+// Creates a new package version containing one or more assets (or files).
+//
+// The unfinished flag can be used to keep the package version in the Unfinished
+// state until all of its assets have been uploaded (see [Package version status]in the CodeArtifact user
+// guide). To set the package version’s status to Published , omit the unfinished
+// flag when uploading the final asset, or set the status using [UpdatePackageVersionStatus]. Once a package
+// version’s status is set to Published , it cannot change back to Unfinished .
+//
+// Only generic packages can be published using this API. For more information,
+// see [Using generic packages]in the CodeArtifact User Guide.
+//
+// [Using generic packages]: https://docs.aws.amazon.com/codeartifact/latest/ug/using-generic.html
+// [UpdatePackageVersionStatus]: https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_UpdatePackageVersionsStatus.html
+// [Package version status]: https://docs.aws.amazon.com/codeartifact/latest/ug/packages-overview.html#package-version-status.html#package-version-status
 func (c *Client) PublishPackageVersion(ctx context.Context, params *PublishPackageVersionInput, optFns ...func(*Options)) (*PublishPackageVersionOutput, error) {
 	if params == nil {
 		params = &PublishPackageVersionInput{}
@@ -53,9 +56,13 @@ type PublishPackageVersionInput struct {
 	AssetName *string
 
 	// The SHA256 hash of the assetContent to publish. This value must be calculated
-	// by the caller and provided with the request (see Publishing a generic package (https://docs.aws.amazon.com/codeartifact/latest/ug/using-generic.html#publishing-generic-packages)
-	// in the CodeArtifact User Guide). This value is used as an integrity check to
-	// verify that the assetContent has not changed after it was originally sent.
+	// by the caller and provided with the request (see [Publishing a generic package]in the CodeArtifact User
+	// Guide).
+	//
+	// This value is used as an integrity check to verify that the assetContent has
+	// not changed after it was originally sent.
+	//
+	// [Publishing a generic package]: https://docs.aws.amazon.com/codeartifact/latest/ug/using-generic.html#publishing-generic-packages
 	//
 	// This member is required.
 	AssetSHA256 *string
@@ -67,7 +74,9 @@ type PublishPackageVersionInput struct {
 	Domain *string
 
 	// A format that specifies the type of the package version with the requested
-	// asset file. The only supported value is generic .
+	// asset file.
+	//
+	// The only supported value is generic .
 	//
 	// This member is required.
 	Format types.PackageFormat
@@ -95,9 +104,12 @@ type PublishPackageVersionInput struct {
 	Namespace *string
 
 	// Specifies whether the package version should remain in the unfinished state. If
-	// omitted, the package version status will be set to Published (see Package
-	// version status (https://docs.aws.amazon.com/codeartifact/latest/ug/packages-overview.html#package-version-status)
-	// in the CodeArtifact User Guide). Valid values: unfinished
+	// omitted, the package version status will be set to Published (see [Package version status] in the
+	// CodeArtifact User Guide).
+	//
+	// Valid values: unfinished
+	//
+	// [Package version status]: https://docs.aws.amazon.com/codeartifact/latest/ug/packages-overview.html#package-version-status
 	Unfinished *bool
 
 	noSmithyDocumentSerde
@@ -105,8 +117,9 @@ type PublishPackageVersionInput struct {
 
 type PublishPackageVersionOutput struct {
 
-	// An AssetSummary (https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_AssetSummary.html)
-	// for the published asset.
+	// An [AssetSummary] for the published asset.
+	//
+	// [AssetSummary]: https://docs.aws.amazon.com/codeartifact/latest/APIReference/API_AssetSummary.html
 	Asset *types.AssetSummary
 
 	// The format of the package version.
@@ -119,8 +132,9 @@ type PublishPackageVersionOutput struct {
 	Package *string
 
 	// A string that contains the status of the package version. For more information,
-	// see Package version status (https://docs.aws.amazon.com/codeartifact/latest/ug/packages-overview.html#package-version-status.html#package-version-status)
-	// in the CodeArtifact User Guide.
+	// see [Package version status]in the CodeArtifact User Guide.
+	//
+	// [Package version status]: https://docs.aws.amazon.com/codeartifact/latest/ug/packages-overview.html#package-version-status.html#package-version-status
 	Status types.PackageVersionStatus
 
 	// The version of the package.
@@ -157,25 +171,25 @@ func (c *Client) addOperationPublishPackageVersionMiddlewares(stack *middleware.
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -190,13 +204,16 @@ func (c *Client) addOperationPublishPackageVersionMiddlewares(stack *middleware.
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpPublishPackageVersionValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opPublishPackageVersion(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

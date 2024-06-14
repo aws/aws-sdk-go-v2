@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/iotsitewise/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -14,18 +13,24 @@ import (
 
 // Updates a composite model and all of the assets that were created from the
 // model. Each asset created from the model inherits the updated asset model's
-// property and hierarchy definitions. For more information, see Updating assets
-// and models (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/update-assets-and-models.html)
-// in the IoT SiteWise User Guide. If you remove a property from a composite asset
-// model, IoT SiteWise deletes all previous data for that property. You can’t
-// change the type or data type of an existing property. To replace an existing
-// composite asset model property with a new one with the same name , do the
-// following:
+// property and hierarchy definitions. For more information, see [Updating assets and models]in the IoT
+// SiteWise User Guide.
+//
+// If you remove a property from a composite asset model, IoT SiteWise deletes all
+// previous data for that property. You can’t change the type or data type of an
+// existing property.
+//
+// To replace an existing composite asset model property with a new one with the
+// same name , do the following:
+//
 //   - Submit an UpdateAssetModelCompositeModel request with the entire existing
 //     property removed.
+//
 //   - Submit a second UpdateAssetModelCompositeModel request that includes the new
 //     property. The new asset property will have the same name as the previous one
 //     and IoT SiteWise will generate a new unique id .
+//
+// [Updating assets and models]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/update-assets-and-models.html
 func (c *Client) UpdateAssetModelCompositeModel(ctx context.Context, params *UpdateAssetModelCompositeModelInput, optFns ...func(*Options)) (*UpdateAssetModelCompositeModelOutput, error) {
 	if params == nil {
 		params = &UpdateAssetModelCompositeModelInput{}
@@ -67,9 +72,11 @@ type UpdateAssetModelCompositeModelInput struct {
 	AssetModelCompositeModelExternalId *string
 
 	// The property definitions of the composite model. For more information, see .
+	//
 	// You can specify up to 200 properties per composite model. For more information,
-	// see Quotas (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/quotas.html)
-	// in the IoT SiteWise User Guide.
+	// see [Quotas]in the IoT SiteWise User Guide.
+	//
+	// [Quotas]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/quotas.html
 	AssetModelCompositeModelProperties []types.AssetModelProperty
 
 	// A unique case-sensitive identifier that you can provide to ensure the
@@ -88,8 +95,9 @@ type UpdateAssetModelCompositeModelOutput struct {
 	AssetModelCompositeModelPath []types.AssetModelCompositeModelPathSegment
 
 	// Contains current status information for an asset model. For more information,
-	// see Asset and model states (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/asset-and-model-states.html)
-	// in the IoT SiteWise User Guide.
+	// see [Asset and model states]in the IoT SiteWise User Guide.
+	//
+	// [Asset and model states]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/asset-and-model-states.html
 	//
 	// This member is required.
 	AssetModelStatus *types.AssetModelStatus
@@ -122,25 +130,25 @@ func (c *Client) addOperationUpdateAssetModelCompositeModelMiddlewares(stack *mi
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -155,6 +163,9 @@ func (c *Client) addOperationUpdateAssetModelCompositeModelMiddlewares(stack *mi
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addEndpointPrefix_opUpdateAssetModelCompositeModelMiddleware(stack); err != nil {
 		return err
 	}
@@ -167,7 +178,7 @@ func (c *Client) addOperationUpdateAssetModelCompositeModelMiddlewares(stack *mi
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateAssetModelCompositeModel(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/greengrassv2/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -15,14 +14,19 @@ import (
 // Creates a continuous deployment for a target, which is a Greengrass core device
 // or group of core devices. When you add a new core device to a group of core
 // devices that has a deployment, IoT Greengrass deploys that group's deployment to
-// the new device. You can define one deployment for each target. When you create a
-// new deployment for a target that has an existing deployment, you replace the
-// previous deployment. IoT Greengrass applies the new deployment to the target
-// devices. Every deployment has a revision number that indicates how many
-// deployment revisions you define for a target. Use this operation to create a new
-// revision of an existing deployment. For more information, see the Create
-// deployments (https://docs.aws.amazon.com/greengrass/v2/developerguide/create-deployments.html)
-// in the IoT Greengrass V2 Developer Guide.
+// the new device.
+//
+// You can define one deployment for each target. When you create a new deployment
+// for a target that has an existing deployment, you replace the previous
+// deployment. IoT Greengrass applies the new deployment to the target devices.
+//
+// Every deployment has a revision number that indicates how many deployment
+// revisions you define for a target. Use this operation to create a new revision
+// of an existing deployment.
+//
+// For more information, see the [Create deployments] in the IoT Greengrass V2 Developer Guide.
+//
+// [Create deployments]: https://docs.aws.amazon.com/greengrass/v2/developerguide/create-deployments.html
 func (c *Client) CreateDeployment(ctx context.Context, params *CreateDeploymentInput, optFns ...func(*Options)) (*CreateDeploymentOutput, error) {
 	if params == nil {
 		params = &CreateDeploymentInput{}
@@ -40,9 +44,10 @@ func (c *Client) CreateDeployment(ctx context.Context, params *CreateDeploymentI
 
 type CreateDeploymentInput struct {
 
-	// The ARN (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
-	// of the target IoT thing or thing group. When creating a subdeployment, the
+	// The [ARN] of the target IoT thing or thing group. When creating a subdeployment, the
 	// targetARN can only be a thing group.
+	//
+	// [ARN]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
 	//
 	// This member is required.
 	TargetArn *string
@@ -73,13 +78,15 @@ type CreateDeploymentInput struct {
 	// configuration.
 	IotJobConfiguration *types.DeploymentIoTJobConfiguration
 
-	// The parent deployment's target ARN (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
-	// within a subdeployment.
+	// The parent deployment's target [ARN] within a subdeployment.
+	//
+	// [ARN]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
 	ParentTargetArn *string
 
 	// A list of key-value pairs that contain metadata for the resource. For more
-	// information, see Tag your resources (https://docs.aws.amazon.com/greengrass/v2/developerguide/tag-resources.html)
-	// in the IoT Greengrass V2 Developer Guide.
+	// information, see [Tag your resources]in the IoT Greengrass V2 Developer Guide.
+	//
+	// [Tag your resources]: https://docs.aws.amazon.com/greengrass/v2/developerguide/tag-resources.html
 	Tags map[string]string
 
 	noSmithyDocumentSerde
@@ -90,8 +97,9 @@ type CreateDeploymentOutput struct {
 	// The ID of the deployment.
 	DeploymentId *string
 
-	// The ARN (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
-	// of the IoT job that applies the deployment to target devices.
+	// The [ARN] of the IoT job that applies the deployment to target devices.
+	//
+	// [ARN]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
 	IotJobArn *string
 
 	// The ID of the IoT job that applies the deployment to target devices.
@@ -125,25 +133,25 @@ func (c *Client) addOperationCreateDeploymentMiddlewares(stack *middleware.Stack
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -158,6 +166,9 @@ func (c *Client) addOperationCreateDeploymentMiddlewares(stack *middleware.Stack
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opCreateDeploymentMiddleware(stack, options); err != nil {
 		return err
 	}
@@ -167,7 +178,7 @@ func (c *Client) addOperationCreateDeploymentMiddlewares(stack *middleware.Stack
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateDeployment(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

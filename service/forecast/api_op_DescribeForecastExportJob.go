@@ -6,19 +6,23 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/forecast/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
-// Describes a forecast export job created using the CreateForecastExportJob
-// operation. In addition to listing the properties provided by the user in the
+// Describes a forecast export job created using the CreateForecastExportJob operation.
+//
+// In addition to listing the properties provided by the user in the
 // CreateForecastExportJob request, this operation lists the following properties:
+//
 //   - CreationTime
+//
 //   - LastModificationTime
+//
 //   - Status
+//
 //   - Message - If an error occurred, information about the error.
 func (c *Client) DescribeForecastExportJob(ctx context.Context, params *DescribeForecastExportJobInput, optFns ...func(*Options)) (*DescribeForecastExportJobOutput, error) {
 	if params == nil {
@@ -68,10 +72,15 @@ type DescribeForecastExportJobOutput struct {
 
 	// The last time the resource was modified. The timestamp depends on the status of
 	// the job:
+	//
 	//   - CREATE_PENDING - The CreationTime .
+	//
 	//   - CREATE_IN_PROGRESS - The current timestamp.
+	//
 	//   - CREATE_STOPPING - The current timestamp.
+	//
 	//   - CREATE_STOPPED - When the job stopped.
+	//
 	//   - ACTIVE or CREATE_FAILED - When the job finished or failed.
 	LastModificationTime *time.Time
 
@@ -79,10 +88,15 @@ type DescribeForecastExportJobOutput struct {
 	Message *string
 
 	// The status of the forecast export job. States include:
+	//
 	//   - ACTIVE
+	//
 	//   - CREATE_PENDING , CREATE_IN_PROGRESS , CREATE_FAILED
+	//
 	//   - CREATE_STOPPING , CREATE_STOPPED
+	//
 	//   - DELETE_PENDING , DELETE_IN_PROGRESS , DELETE_FAILED
+	//
 	// The Status of the forecast export job must be ACTIVE before you can access the
 	// forecast in your S3 bucket.
 	Status *string
@@ -115,25 +129,25 @@ func (c *Client) addOperationDescribeForecastExportJobMiddlewares(stack *middlew
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -148,13 +162,16 @@ func (c *Client) addOperationDescribeForecastExportJobMiddlewares(stack *middlew
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDescribeForecastExportJobValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeForecastExportJob(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

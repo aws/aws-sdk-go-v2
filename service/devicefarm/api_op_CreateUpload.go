@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/devicefarm/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -45,39 +44,74 @@ type CreateUploadInput struct {
 	// This member is required.
 	ProjectArn *string
 
-	// The upload's upload type. Must be one of the following values:
+	// The upload's upload type.
+	//
+	// Must be one of the following values:
+	//
 	//   - ANDROID_APP
+	//
 	//   - IOS_APP
+	//
 	//   - WEB_APP
+	//
 	//   - EXTERNAL_DATA
+	//
 	//   - APPIUM_JAVA_JUNIT_TEST_PACKAGE
+	//
 	//   - APPIUM_JAVA_TESTNG_TEST_PACKAGE
+	//
 	//   - APPIUM_PYTHON_TEST_PACKAGE
+	//
 	//   - APPIUM_NODE_TEST_PACKAGE
+	//
 	//   - APPIUM_RUBY_TEST_PACKAGE
+	//
 	//   - APPIUM_WEB_JAVA_JUNIT_TEST_PACKAGE
+	//
 	//   - APPIUM_WEB_JAVA_TESTNG_TEST_PACKAGE
+	//
 	//   - APPIUM_WEB_PYTHON_TEST_PACKAGE
+	//
 	//   - APPIUM_WEB_NODE_TEST_PACKAGE
+	//
 	//   - APPIUM_WEB_RUBY_TEST_PACKAGE
+	//
 	//   - CALABASH_TEST_PACKAGE
+	//
 	//   - INSTRUMENTATION_TEST_PACKAGE
+	//
 	//   - UIAUTOMATION_TEST_PACKAGE
+	//
 	//   - UIAUTOMATOR_TEST_PACKAGE
+	//
 	//   - XCTEST_TEST_PACKAGE
+	//
 	//   - XCTEST_UI_TEST_PACKAGE
+	//
 	//   - APPIUM_JAVA_JUNIT_TEST_SPEC
+	//
 	//   - APPIUM_JAVA_TESTNG_TEST_SPEC
+	//
 	//   - APPIUM_PYTHON_TEST_SPEC
+	//
 	//   - APPIUM_NODE_TEST_SPEC
+	//
 	//   - APPIUM_RUBY_TEST_SPEC
+	//
 	//   - APPIUM_WEB_JAVA_JUNIT_TEST_SPEC
+	//
 	//   - APPIUM_WEB_JAVA_TESTNG_TEST_SPEC
+	//
 	//   - APPIUM_WEB_PYTHON_TEST_SPEC
+	//
 	//   - APPIUM_WEB_NODE_TEST_SPEC
+	//
 	//   - APPIUM_WEB_RUBY_TEST_SPEC
+	//
 	//   - INSTRUMENTATION_TEST_SPEC
+	//
 	//   - XCTEST_UI_TEST_SPEC
+	//
 	// If you call CreateUpload with WEB_APP specified, AWS Device Farm throws an
 	// ArgumentException error.
 	//
@@ -124,25 +158,25 @@ func (c *Client) addOperationCreateUploadMiddlewares(stack *middleware.Stack, op
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -157,13 +191,16 @@ func (c *Client) addOperationCreateUploadMiddlewares(stack *middleware.Stack, op
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpCreateUploadValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateUpload(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

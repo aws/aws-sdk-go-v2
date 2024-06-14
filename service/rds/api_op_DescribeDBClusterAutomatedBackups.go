@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/rds/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -15,8 +14,9 @@ import (
 // Displays backups for both current and deleted DB clusters. For example, use
 // this operation to find details about automated backups for previously deleted
 // clusters. Current clusters are returned for both the
-// DescribeDBClusterAutomatedBackups and DescribeDBClusters operations. All
-// parameters are optional.
+// DescribeDBClusterAutomatedBackups and DescribeDBClusters operations.
+//
+// All parameters are optional.
 func (c *Client) DescribeDBClusterAutomatedBackups(ctx context.Context, params *DescribeDBClusterAutomatedBackupsInput, optFns ...func(*Options)) (*DescribeDBClusterAutomatedBackupsOutput, error) {
 	if params == nil {
 		params = &DescribeDBClusterAutomatedBackupsInput{}
@@ -44,17 +44,23 @@ type DescribeDBClusterAutomatedBackupsInput struct {
 	// This parameter isn't case-sensitive.
 	DbClusterResourceId *string
 
-	// A filter that specifies which resources to return based on status. Supported
-	// filters are the following:
+	// A filter that specifies which resources to return based on status.
+	//
+	// Supported filters are the following:
+	//
 	//   - status
+	//
 	//   - retained - Automated backups for deleted clusters and after backup
 	//   replication is stopped.
+	//
 	//   - db-cluster-id - Accepts DB cluster identifiers and Amazon Resource Names
 	//   (ARNs). The results list includes only information about the DB cluster
 	//   automated backups identified by these ARNs.
+	//
 	//   - db-cluster-resource-id - Accepts DB resource identifiers and Amazon Resource
 	//   Names (ARNs). The results list includes only information about the DB cluster
 	//   resources identified by these ARNs.
+	//
 	// Returns all resources by default. The status for each resource is specified in
 	// the response.
 	Filters []types.Filter
@@ -110,25 +116,25 @@ func (c *Client) addOperationDescribeDBClusterAutomatedBackupsMiddlewares(stack 
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -143,13 +149,16 @@ func (c *Client) addOperationDescribeDBClusterAutomatedBackupsMiddlewares(stack 
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDescribeDBClusterAutomatedBackupsValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeDBClusterAutomatedBackups(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

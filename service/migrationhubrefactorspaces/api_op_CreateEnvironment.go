@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/migrationhubrefactorspaces/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -18,14 +17,15 @@ import (
 // services, and routes created within the environment. They are referred to as the
 // environment owner. The environment owner has cross-account visibility and
 // control of Refactor Spaces resources that are added to the environment by other
-// accounts that the environment is shared with. When creating an environment with
-// a CreateEnvironment:NetworkFabricType (https://docs.aws.amazon.com/migrationhub-refactor-spaces/latest/APIReference/API_CreateEnvironment.html#migrationhubrefactorspaces-CreateEnvironment-request-NetworkFabricType)
-// of TRANSIT_GATEWAY , Refactor Spaces provisions a transit gateway to enable
-// services in VPCs to communicate directly across accounts. If
-// CreateEnvironment:NetworkFabricType (https://docs.aws.amazon.com/migrationhub-refactor-spaces/latest/APIReference/API_CreateEnvironment.html#migrationhubrefactorspaces-CreateEnvironment-request-NetworkFabricType)
-// is NONE , Refactor Spaces does not create a transit gateway and you must use
-// your network infrastructure to route traffic to services with private URL
-// endpoints.
+// accounts that the environment is shared with.
+//
+// When creating an environment with a [CreateEnvironment:NetworkFabricType] of TRANSIT_GATEWAY , Refactor Spaces
+// provisions a transit gateway to enable services in VPCs to communicate directly
+// across accounts. If [CreateEnvironment:NetworkFabricType]is NONE , Refactor Spaces does not create a transit gateway
+// and you must use your network infrastructure to route traffic to services with
+// private URL endpoints.
+//
+// [CreateEnvironment:NetworkFabricType]: https://docs.aws.amazon.com/migrationhub-refactor-spaces/latest/APIReference/API_CreateEnvironment.html#migrationhubrefactorspaces-CreateEnvironment-request-NetworkFabricType
 func (c *Client) CreateEnvironment(ctx context.Context, params *CreateEnvironmentInput, optFns ...func(*Options)) (*CreateEnvironmentOutput, error) {
 	if params == nil {
 		params = &CreateEnvironmentInput{}
@@ -128,25 +128,25 @@ func (c *Client) addOperationCreateEnvironmentMiddlewares(stack *middleware.Stac
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -161,6 +161,9 @@ func (c *Client) addOperationCreateEnvironmentMiddlewares(stack *middleware.Stac
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opCreateEnvironmentMiddleware(stack, options); err != nil {
 		return err
 	}
@@ -170,7 +173,7 @@ func (c *Client) addOperationCreateEnvironmentMiddlewares(stack *middleware.Stac
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateEnvironment(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

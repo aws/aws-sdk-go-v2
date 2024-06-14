@@ -2,6 +2,23 @@
 
 package types
 
+type CertificateProviderType string
+
+// Enum values for CertificateProviderType
+const (
+	CertificateProviderTypePem CertificateProviderType = "PEM"
+)
+
+// Values returns all known values for CertificateProviderType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (CertificateProviderType) Values() []CertificateProviderType {
+	return []CertificateProviderType{
+		"PEM",
+	}
+}
+
 type ContainerProviderType string
 
 // Enum values for ContainerProviderType
@@ -10,8 +27,9 @@ const (
 )
 
 // Values returns all known values for ContainerProviderType. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ContainerProviderType) Values() []ContainerProviderType {
 	return []ContainerProviderType{
 		"EKS",
@@ -30,8 +48,9 @@ const (
 )
 
 // Values returns all known values for EndpointState. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (EndpointState) Values() []EndpointState {
 	return []EndpointState{
 		"CREATING",
@@ -53,8 +72,9 @@ const (
 )
 
 // Values returns all known values for FailureReason. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (FailureReason) Values() []FailureReason {
 	return []FailureReason{
 		"INTERNAL_ERROR",
@@ -78,8 +98,9 @@ const (
 )
 
 // Values returns all known values for JobRunState. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (JobRunState) Values() []JobRunState {
 	return []JobRunState{
 		"PENDING",
@@ -101,8 +122,9 @@ const (
 )
 
 // Values returns all known values for PersistentAppUI. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (PersistentAppUI) Values() []PersistentAppUI {
 	return []PersistentAppUI{
 		"ENABLED",
@@ -120,6 +142,7 @@ const (
 
 // Values returns all known values for TemplateParameterDataType. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (TemplateParameterDataType) Values() []TemplateParameterDataType {
 	return []TemplateParameterDataType{
@@ -139,8 +162,9 @@ const (
 )
 
 // Values returns all known values for VirtualClusterState. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (VirtualClusterState) Values() []VirtualClusterState {
 	return []VirtualClusterState{
 		"RUNNING",

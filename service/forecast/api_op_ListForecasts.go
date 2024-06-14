@@ -6,17 +6,15 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/forecast/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns a list of forecasts created using the CreateForecast operation. For
-// each forecast, this operation returns a summary of its properties, including its
-// Amazon Resource Name (ARN). To retrieve the complete set of properties, specify
-// the ARN with the DescribeForecast operation. You can filter the list using an
-// array of Filter objects.
+// Returns a list of forecasts created using the CreateForecast operation. For each forecast,
+// this operation returns a summary of its properties, including its Amazon
+// Resource Name (ARN). To retrieve the complete set of properties, specify the ARN
+// with the DescribeForecastoperation. You can filter the list using an array of Filter objects.
 func (c *Client) ListForecasts(ctx context.Context, params *ListForecastsInput, optFns ...func(*Options)) (*ListForecastsOutput, error) {
 	if params == nil {
 		params = &ListForecastsInput{}
@@ -37,17 +35,23 @@ type ListForecastsInput struct {
 	// An array of filters. For each filter, you provide a condition and a match
 	// statement. The condition is either IS or IS_NOT , which specifies whether to
 	// include or exclude the forecasts that match the statement from the list,
-	// respectively. The match statement consists of a key and a value. Filter
-	// properties
+	// respectively. The match statement consists of a key and a value.
+	//
+	// Filter properties
+	//
 	//   - Condition - The condition to apply. Valid values are IS and IS_NOT . To
 	//   include the forecasts that match the statement, specify IS . To exclude
 	//   matching forecasts, specify IS_NOT .
+	//
 	//   - Key - The name of the parameter to filter on. Valid values are
 	//   DatasetGroupArn , PredictorArn , and Status .
+	//
 	//   - Value - The value to match.
+	//
 	// For example, to list all forecasts whose status is not ACTIVE, you would
-	// specify: "Filters": [ { "Condition": "IS_NOT", "Key": "Status", "Value":
-	// "ACTIVE" } ]
+	// specify:
+	//
+	//     "Filters": [ { "Condition": "IS_NOT", "Key": "Status", "Value": "ACTIVE" } ]
 	Filters []types.Filter
 
 	// The number of items to return in the response.
@@ -98,25 +102,25 @@ func (c *Client) addOperationListForecastsMiddlewares(stack *middleware.Stack, o
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -131,13 +135,16 @@ func (c *Client) addOperationListForecastsMiddlewares(stack *middleware.Stack, o
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpListForecastsValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListForecasts(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

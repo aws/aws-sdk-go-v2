@@ -6,23 +6,29 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/memorydb/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // A tag is a key-value pair where the key and value are case-sensitive. You can
-// use tags to categorize and track all your MemoryDB resources. When you add or
-// remove tags on clusters, those actions will be replicated to all nodes in the
-// cluster. For more information, see Resource-level permissions (https://docs.aws.amazon.com/MemoryDB/latest/devguide/iam.resourcelevelpermissions.html)
-// . For example, you can use cost-allocation tags to your MemoryDB resources,
+// use tags to categorize and track all your MemoryDB resources.
+//
+// When you add or remove tags on clusters, those actions will be replicated to
+// all nodes in the cluster. For more information, see
+//
+// [Resource-level permissions].
+//
+// For example, you can use cost-allocation tags to your MemoryDB resources,
 // Amazon generates a cost allocation report as a comma-separated value (CSV) file
 // with your usage and costs aggregated by your tags. You can apply tags that
 // represent business categories (such as cost centers, application names, or
-// owners) to organize your costs across multiple services. For more information,
-// see Using Cost Allocation Tags (https://docs.aws.amazon.com/MemoryDB/latest/devguide/tagging.html)
-// .
+// owners) to organize your costs across multiple services.
+//
+// For more information, see [Using Cost Allocation Tags].
+//
+// [Using Cost Allocation Tags]: https://docs.aws.amazon.com/MemoryDB/latest/devguide/tagging.html
+// [Resource-level permissions]: https://docs.aws.amazon.com/MemoryDB/latest/devguide/iam.resourcelevelpermissions.html
 func (c *Client) TagResource(ctx context.Context, params *TagResourceInput, optFns ...func(*Options)) (*TagResourceOutput, error) {
 	if params == nil {
 		params = &TagResourceInput{}
@@ -87,25 +93,25 @@ func (c *Client) addOperationTagResourceMiddlewares(stack *middleware.Stack, opt
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -120,13 +126,16 @@ func (c *Client) addOperationTagResourceMiddlewares(stack *middleware.Stack, opt
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpTagResourceValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opTagResource(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

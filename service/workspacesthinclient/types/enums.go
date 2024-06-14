@@ -11,8 +11,9 @@ const (
 )
 
 // Values returns all known values for ApplyTimeOf. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ApplyTimeOf) Values() []ApplyTimeOf {
 	return []ApplyTimeOf{
 		"UTC",
@@ -34,8 +35,9 @@ const (
 )
 
 // Values returns all known values for DayOfWeek. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (DayOfWeek) Values() []DayOfWeek {
 	return []DayOfWeek{
 		"MONDAY",
@@ -58,8 +60,9 @@ const (
 )
 
 // Values returns all known values for DesktopType. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (DesktopType) Values() []DesktopType {
 	return []DesktopType{
 		"workspaces",
@@ -79,8 +82,9 @@ const (
 
 // Values returns all known values for DeviceSoftwareSetComplianceStatus. Note
 // that this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (DeviceSoftwareSetComplianceStatus) Values() []DeviceSoftwareSetComplianceStatus {
 	return []DeviceSoftwareSetComplianceStatus{
 		"NONE",
@@ -100,8 +104,9 @@ const (
 )
 
 // Values returns all known values for DeviceStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (DeviceStatus) Values() []DeviceStatus {
 	return []DeviceStatus{
 		"REGISTERED",
@@ -122,8 +127,9 @@ const (
 
 // Values returns all known values for EnvironmentSoftwareSetComplianceStatus.
 // Note that this can be expanded in the future, and so it is only as up to date as
-// the client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (EnvironmentSoftwareSetComplianceStatus) Values() []EnvironmentSoftwareSetComplianceStatus {
 	return []EnvironmentSoftwareSetComplianceStatus{
 		"NO_REGISTERED_DEVICES",
@@ -141,8 +147,9 @@ const (
 )
 
 // Values returns all known values for MaintenanceWindowType. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (MaintenanceWindowType) Values() []MaintenanceWindowType {
 	return []MaintenanceWindowType{
 		"SYSTEM",
@@ -159,8 +166,9 @@ const (
 )
 
 // Values returns all known values for SoftwareSetUpdateMode. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (SoftwareSetUpdateMode) Values() []SoftwareSetUpdateMode {
 	return []SoftwareSetUpdateMode{
 		"USE_LATEST",
@@ -178,6 +186,7 @@ const (
 
 // Values returns all known values for SoftwareSetUpdateSchedule. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (SoftwareSetUpdateSchedule) Values() []SoftwareSetUpdateSchedule {
 	return []SoftwareSetUpdateSchedule{
@@ -196,8 +205,9 @@ const (
 )
 
 // Values returns all known values for SoftwareSetUpdateStatus. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (SoftwareSetUpdateStatus) Values() []SoftwareSetUpdateStatus {
 	return []SoftwareSetUpdateStatus{
 		"AVAILABLE",
@@ -216,6 +226,7 @@ const (
 
 // Values returns all known values for SoftwareSetValidationStatus. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (SoftwareSetValidationStatus) Values() []SoftwareSetValidationStatus {
 	return []SoftwareSetValidationStatus{
@@ -233,8 +244,9 @@ const (
 )
 
 // Values returns all known values for TargetDeviceStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (TargetDeviceStatus) Values() []TargetDeviceStatus {
 	return []TargetDeviceStatus{
 		"DEREGISTERED",
@@ -254,6 +266,7 @@ const (
 
 // Values returns all known values for ValidationExceptionReason. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (ValidationExceptionReason) Values() []ValidationExceptionReason {
 	return []ValidationExceptionReason{

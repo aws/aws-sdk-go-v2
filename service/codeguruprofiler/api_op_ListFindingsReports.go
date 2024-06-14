@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/codeguruprofiler/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -32,7 +31,7 @@ func (c *Client) ListFindingsReports(ctx context.Context, params *ListFindingsRe
 // The structure representing the ListFindingsReportsRequest.
 type ListFindingsReportsInput struct {
 
-	// The end time of the profile to get analysis data about. You must specify
+	//  The end time of the profile to get analysis data about. You must specify
 	// startTime and endTime . This is specified using the ISO 8601 format. For
 	// example, 2020-06-01T13:15:02.001Z represents 1 millisecond past June 1, 2020
 	// 1:15:02 PM UTC.
@@ -45,7 +44,7 @@ type ListFindingsReportsInput struct {
 	// This member is required.
 	ProfilingGroupName *string
 
-	// The start time of the profile to get analysis data about. You must specify
+	//  The start time of the profile to get analysis data about. You must specify
 	// startTime and endTime . This is specified using the ISO 8601 format. For
 	// example, 2020-06-01T13:15:02.001Z represents 1 millisecond past June 1, 2020
 	// 1:15:02 PM UTC.
@@ -69,9 +68,10 @@ type ListFindingsReportsInput struct {
 	// The nextToken value returned from a previous paginated
 	// ListFindingsReportsRequest request where maxResults was used and the results
 	// exceeded the value of that parameter. Pagination continues from the end of the
-	// previous results that returned the nextToken value. This token should be
-	// treated as an opaque identifier that is only used to retrieve the next items in
-	// a list and not for other programmatic purposes.
+	// previous results that returned the nextToken value.
+	//
+	// This token should be treated as an opaque identifier that is only used to
+	// retrieve the next items in a list and not for other programmatic purposes.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -119,25 +119,25 @@ func (c *Client) addOperationListFindingsReportsMiddlewares(stack *middleware.St
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -152,13 +152,16 @@ func (c *Client) addOperationListFindingsReportsMiddlewares(stack *middleware.St
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpListFindingsReportsValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListFindingsReports(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

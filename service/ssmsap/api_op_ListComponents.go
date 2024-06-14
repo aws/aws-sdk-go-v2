@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/ssmsap/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -34,9 +33,10 @@ type ListComponentsInput struct {
 	ApplicationId *string
 
 	// The maximum number of results to return with a single call. To retrieve the
-	// remaining results, make another call with the returned nextToken value. If you
-	// do not specify a value for MaxResults, the request returns 50 items per page by
-	// default.
+	// remaining results, make another call with the returned nextToken value.
+	//
+	// If you do not specify a value for MaxResults, the request returns 50 items per
+	// page by default.
 	MaxResults *int32
 
 	// The token for the next page of results.
@@ -82,25 +82,25 @@ func (c *Client) addOperationListComponentsMiddlewares(stack *middleware.Stack, 
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -115,10 +115,13 @@ func (c *Client) addOperationListComponentsMiddlewares(stack *middleware.Stack, 
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListComponents(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -147,9 +150,10 @@ var _ ListComponentsAPIClient = (*Client)(nil)
 // ListComponentsPaginatorOptions is the paginator options for ListComponents
 type ListComponentsPaginatorOptions struct {
 	// The maximum number of results to return with a single call. To retrieve the
-	// remaining results, make another call with the returned nextToken value. If you
-	// do not specify a value for MaxResults, the request returns 50 items per page by
-	// default.
+	// remaining results, make another call with the returned nextToken value.
+	//
+	// If you do not specify a value for MaxResults, the request returns 50 items per
+	// page by default.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

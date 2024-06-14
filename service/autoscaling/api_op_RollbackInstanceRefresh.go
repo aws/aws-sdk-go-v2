@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -14,21 +13,28 @@ import (
 // Cancels an instance refresh that is in progress and rolls back any changes that
 // it made. Amazon EC2 Auto Scaling replaces any instances that were replaced
 // during the instance refresh. This restores your Auto Scaling group to the
-// configuration that it was using before the start of the instance refresh. This
-// operation is part of the instance refresh feature (https://docs.aws.amazon.com/autoscaling/ec2/userguide/asg-instance-refresh.html)
-// in Amazon EC2 Auto Scaling, which helps you update instances in your Auto
-// Scaling group after you make configuration changes. A rollback is not supported
-// in the following situations:
+// configuration that it was using before the start of the instance refresh.
+//
+// This operation is part of the [instance refresh feature] in Amazon EC2 Auto Scaling, which helps you
+// update instances in your Auto Scaling group after you make configuration
+// changes.
+//
+// A rollback is not supported in the following situations:
+//
 //   - There is no desired configuration specified for the instance refresh.
+//
 //   - The Auto Scaling group has a launch template that uses an Amazon Web
 //     Services Systems Manager parameter instead of an AMI ID for the ImageId
 //     property.
+//
 //   - The Auto Scaling group uses the launch template's $Latest or $Default
 //     version.
 //
 // When you receive a successful response from this operation, Amazon EC2 Auto
 // Scaling immediately begins replacing instances. You can check the status of this
-// operation through the DescribeInstanceRefreshes API operation.
+// operation through the DescribeInstanceRefreshesAPI operation.
+//
+// [instance refresh feature]: https://docs.aws.amazon.com/autoscaling/ec2/userguide/asg-instance-refresh.html
 func (c *Client) RollbackInstanceRefresh(ctx context.Context, params *RollbackInstanceRefreshInput, optFns ...func(*Options)) (*RollbackInstanceRefreshOutput, error) {
 	if params == nil {
 		params = &RollbackInstanceRefreshInput{}
@@ -88,25 +94,25 @@ func (c *Client) addOperationRollbackInstanceRefreshMiddlewares(stack *middlewar
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -121,13 +127,16 @@ func (c *Client) addOperationRollbackInstanceRefreshMiddlewares(stack *middlewar
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpRollbackInstanceRefreshValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opRollbackInstanceRefresh(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

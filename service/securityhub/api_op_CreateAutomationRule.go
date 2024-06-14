@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/securityhub/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -30,13 +29,13 @@ func (c *Client) CreateAutomationRule(ctx context.Context, params *CreateAutomat
 
 type CreateAutomationRuleInput struct {
 
-	// One or more actions to update finding fields if a finding matches the
+	//  One or more actions to update finding fields if a finding matches the
 	// conditions specified in Criteria .
 	//
 	// This member is required.
 	Actions []types.AutomationRulesAction
 
-	// A set of ASFF finding field attributes and corresponding expected values that
+	//  A set of ASFF finding field attributes and corresponding expected values that
 	// Security Hub uses to filter findings. If a rule is enabled and a finding matches
 	// the conditions specified in this parameter, Security Hub applies the rule action
 	// to the finding.
@@ -44,12 +43,12 @@ type CreateAutomationRuleInput struct {
 	// This member is required.
 	Criteria *types.AutomationRulesFindingFilters
 
-	// A description of the rule.
+	//  A description of the rule.
 	//
 	// This member is required.
 	Description *string
 
-	// The name of the rule.
+	//  The name of the rule.
 	//
 	// This member is required.
 	RuleName *string
@@ -69,14 +68,15 @@ type CreateAutomationRuleInput struct {
 	// rule isn't terminal.
 	IsTerminal *bool
 
-	// Whether the rule is active after it is created. If this parameter is equal to
+	//  Whether the rule is active after it is created. If this parameter is equal to
 	// ENABLED , Security Hub starts applying the rule to findings and finding updates
 	// after the rule is created. To change the value of this parameter after creating
-	// a rule, use BatchUpdateAutomationRules (https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchUpdateAutomationRules.html)
-	// .
+	// a rule, use [BatchUpdateAutomationRules]BatchUpdateAutomationRules .
+	//
+	// [BatchUpdateAutomationRules]: https://docs.aws.amazon.com/securityhub/1.0/APIReference/API_BatchUpdateAutomationRules.html
 	RuleStatus types.RuleStatus
 
-	// User-defined tags associated with an automation rule.
+	//  User-defined tags associated with an automation rule.
 	Tags map[string]string
 
 	noSmithyDocumentSerde
@@ -84,7 +84,7 @@ type CreateAutomationRuleInput struct {
 
 type CreateAutomationRuleOutput struct {
 
-	// The Amazon Resource Name (ARN) of the automation rule that you created.
+	//  The Amazon Resource Name (ARN) of the automation rule that you created.
 	RuleArn *string
 
 	// Metadata pertaining to the operation's result.
@@ -115,25 +115,25 @@ func (c *Client) addOperationCreateAutomationRuleMiddlewares(stack *middleware.S
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -148,13 +148,16 @@ func (c *Client) addOperationCreateAutomationRuleMiddlewares(stack *middleware.S
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpCreateAutomationRuleValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateAutomationRule(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

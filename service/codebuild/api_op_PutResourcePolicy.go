@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -29,14 +28,16 @@ func (c *Client) PutResourcePolicy(ctx context.Context, params *PutResourcePolic
 
 type PutResourcePolicyInput struct {
 
-	// A JSON-formatted resource policy. For more information, see Sharing a Project (https://docs.aws.amazon.com/codebuild/latest/userguide/project-sharing.html#project-sharing-share)
-	// and Sharing a Report Group (https://docs.aws.amazon.com/codebuild/latest/userguide/report-groups-sharing.html#report-groups-sharing-share)
-	// in the CodeBuild User Guide.
+	//  A JSON-formatted resource policy. For more information, see [Sharing a Project] and [Sharing a Report Group] in the
+	// CodeBuild User Guide.
+	//
+	// [Sharing a Report Group]: https://docs.aws.amazon.com/codebuild/latest/userguide/report-groups-sharing.html#report-groups-sharing-share
+	// [Sharing a Project]: https://docs.aws.amazon.com/codebuild/latest/userguide/project-sharing.html#project-sharing-share
 	//
 	// This member is required.
 	Policy *string
 
-	// The ARN of the Project or ReportGroup resource you want to associate with a
+	//  The ARN of the Project or ReportGroup resource you want to associate with a
 	// resource policy.
 	//
 	// This member is required.
@@ -47,7 +48,7 @@ type PutResourcePolicyInput struct {
 
 type PutResourcePolicyOutput struct {
 
-	// The ARN of the Project or ReportGroup resource that is associated with a
+	//  The ARN of the Project or ReportGroup resource that is associated with a
 	// resource policy.
 	ResourceArn *string
 
@@ -79,25 +80,25 @@ func (c *Client) addOperationPutResourcePolicyMiddlewares(stack *middleware.Stac
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -112,13 +113,16 @@ func (c *Client) addOperationPutResourcePolicyMiddlewares(stack *middleware.Stac
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpPutResourcePolicyValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opPutResourcePolicy(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

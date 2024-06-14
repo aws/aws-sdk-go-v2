@@ -16,20 +16,33 @@ import (
 )
 
 // This action deletes an Amazon S3 on Outposts bucket's tags. To delete an S3
-// bucket tags, see DeleteBucketTagging (https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteBucketTagging.html)
-// in the Amazon S3 API Reference. Deletes the tags from the Outposts bucket. For
-// more information, see Using Amazon S3 on Outposts (https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3onOutposts.html)
-// in Amazon S3 User Guide. To use this action, you must have permission to perform
-// the PutBucketTagging action. By default, the bucket owner has this permission
-// and can grant this permission to others. All Amazon S3 on Outposts REST API
-// requests for this action require an additional parameter of x-amz-outpost-id to
-// be passed with the request. In addition, you must use an S3 on Outposts endpoint
-// hostname prefix instead of s3-control . For an example of the request syntax for
-// Amazon S3 on Outposts that uses the S3 on Outposts endpoint hostname prefix and
-// the x-amz-outpost-id derived by using the access point ARN, see the Examples (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteBucketTagging.html#API_control_DeleteBucketTagging_Examples)
-// section. The following actions are related to DeleteBucketTagging :
-//   - GetBucketTagging (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetBucketTagging.html)
-//   - PutBucketTagging (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_PutBucketTagging.html)
+// bucket tags, see [DeleteBucketTagging]in the Amazon S3 API Reference.
+//
+// Deletes the tags from the Outposts bucket. For more information, see [Using Amazon S3 on Outposts] in Amazon
+// S3 User Guide.
+//
+// To use this action, you must have permission to perform the PutBucketTagging
+// action. By default, the bucket owner has this permission and can grant this
+// permission to others.
+//
+// All Amazon S3 on Outposts REST API requests for this action require an
+// additional parameter of x-amz-outpost-id to be passed with the request. In
+// addition, you must use an S3 on Outposts endpoint hostname prefix instead of
+// s3-control . For an example of the request syntax for Amazon S3 on Outposts that
+// uses the S3 on Outposts endpoint hostname prefix and the x-amz-outpost-id
+// derived by using the access point ARN, see the [Examples]section.
+//
+// The following actions are related to DeleteBucketTagging :
+//
+// [GetBucketTagging]
+//
+// [PutBucketTagging]
+//
+// [GetBucketTagging]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetBucketTagging.html
+// [PutBucketTagging]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_PutBucketTagging.html
+// [DeleteBucketTagging]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteBucketTagging.html
+// [Using Amazon S3 on Outposts]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3onOutposts.html
+// [Examples]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteBucketTagging.html#API_control_DeleteBucketTagging_Examples
 func (c *Client) DeleteBucketTagging(ctx context.Context, params *DeleteBucketTaggingInput, optFns ...func(*Options)) (*DeleteBucketTaggingOutput, error) {
 	if params == nil {
 		params = &DeleteBucketTaggingInput{}
@@ -52,13 +65,16 @@ type DeleteBucketTaggingInput struct {
 	// This member is required.
 	AccountId *string
 
-	// The bucket ARN that has the tag set to be removed. For using this parameter
-	// with Amazon S3 on Outposts with the REST API, you must specify the name and the
-	// x-amz-outpost-id as well. For using this parameter with S3 on Outposts with the
-	// Amazon Web Services SDK and CLI, you must specify the ARN of the bucket accessed
-	// in the format arn:aws:s3-outposts:::outpost//bucket/ . For example, to access
-	// the bucket reports through Outpost my-outpost owned by account 123456789012 in
-	// Region us-west-2 , use the URL encoding of
+	// The bucket ARN that has the tag set to be removed.
+	//
+	// For using this parameter with Amazon S3 on Outposts with the REST API, you must
+	// specify the name and the x-amz-outpost-id as well.
+	//
+	// For using this parameter with S3 on Outposts with the Amazon Web Services SDK
+	// and CLI, you must specify the ARN of the bucket accessed in the format
+	// arn:aws:s3-outposts:::outpost//bucket/ . For example, to access the bucket
+	// reports through Outpost my-outpost owned by account 123456789012 in Region
+	// us-west-2 , use the URL encoding of
 	// arn:aws:s3-outposts:us-west-2:123456789012:outpost/my-outpost/bucket/reports .
 	// The value must be URL encoded.
 	//
@@ -103,25 +119,25 @@ func (c *Client) addOperationDeleteBucketTaggingMiddlewares(stack *middleware.St
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -139,6 +155,9 @@ func (c *Client) addOperationDeleteBucketTaggingMiddlewares(stack *middleware.St
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addEndpointPrefix_opDeleteBucketTaggingMiddleware(stack); err != nil {
 		return err
 	}
@@ -151,7 +170,7 @@ func (c *Client) addOperationDeleteBucketTaggingMiddlewares(stack *middleware.St
 	if err = addMetadataRetrieverMiddleware(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addDeleteBucketTaggingUpdateEndpoint(stack, options); err != nil {

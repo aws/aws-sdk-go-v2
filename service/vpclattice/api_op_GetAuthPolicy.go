@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/vpclattice/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -54,11 +53,12 @@ type GetAuthPolicyOutput struct {
 	Policy *string
 
 	// The state of the auth policy. The auth policy is only active when the auth type
-	// is set to Amazon Web Services_IAM . If you provide a policy, then authentication
-	// and authorization decisions are made based on this policy and the client's IAM
-	// policy. If the auth type is NONE , then any auth policy you provide will remain
-	// inactive. For more information, see Create a service network (https://docs.aws.amazon.com/vpc-lattice/latest/ug/service-networks.html#create-service-network)
-	// in the Amazon VPC Lattice User Guide.
+	// is set to AWS_IAM . If you provide a policy, then authentication and
+	// authorization decisions are made based on this policy and the client's IAM
+	// policy. If the auth type is NONE , then any auth policy that you provide remains
+	// inactive. For more information, see [Create a service network]in the Amazon VPC Lattice User Guide.
+	//
+	// [Create a service network]: https://docs.aws.amazon.com/vpc-lattice/latest/ug/service-networks.html#create-service-network
 	State types.AuthPolicyState
 
 	// Metadata pertaining to the operation's result.
@@ -89,25 +89,25 @@ func (c *Client) addOperationGetAuthPolicyMiddlewares(stack *middleware.Stack, o
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -122,13 +122,16 @@ func (c *Client) addOperationGetAuthPolicyMiddlewares(stack *middleware.Stack, o
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpGetAuthPolicyValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetAuthPolicy(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

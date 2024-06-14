@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/amplify/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -44,19 +43,21 @@ type StartJobInput struct {
 
 	// Describes the type for the job. The job type RELEASE starts a new job with the
 	// latest change from the specified branch. This value is available only for apps
-	// that are connected to a repository. The job type RETRY retries an existing job.
-	// If the job type value is RETRY , the jobId is also required.
+	// that are connected to a repository.
+	//
+	// The job type RETRY retries an existing job. If the job type value is RETRY , the
+	// jobId is also required.
 	//
 	// This member is required.
 	JobType types.JobType
 
-	// The commit ID from a third-party repository provider for the job.
+	//  The commit ID from a third-party repository provider for the job.
 	CommitId *string
 
-	// The commit message from a third-party repository provider for the job.
+	//  The commit message from a third-party repository provider for the job.
 	CommitMessage *string
 
-	// The commit date and time for the job.
+	//  The commit date and time for the job.
 	CommitTime *time.Time
 
 	// The unique ID for an existing job. This is required if the value of jobType is
@@ -72,7 +73,7 @@ type StartJobInput struct {
 // The result structure for the run job request.
 type StartJobOutput struct {
 
-	// The summary for the job.
+	//  The summary for the job.
 	//
 	// This member is required.
 	JobSummary *types.JobSummary
@@ -105,25 +106,25 @@ func (c *Client) addOperationStartJobMiddlewares(stack *middleware.Stack, option
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -138,13 +139,16 @@ func (c *Client) addOperationStartJobMiddlewares(stack *middleware.Stack, option
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpStartJobValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opStartJob(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

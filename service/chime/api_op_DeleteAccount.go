@@ -6,19 +6,22 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Deletes the specified Amazon Chime account. You must suspend all users before
-// deleting Team account. You can use the BatchSuspendUser action to dodo. For
-// EnterpriseLWA and EnterpriseAD accounts, you must release the claimed domains
-// for your Amazon Chime account before deletion. As soon as you release the
-// domain, all users under that account are suspended. Deleted accounts appear in
-// your Disabled accounts list for 90 days. To restore deleted account from your
-// Disabled accounts list, you must contact AWS Support. After 90 days, deleted
-// accounts are permanently removed from your Disabled accounts list.
+// deleting Team account. You can use the BatchSuspendUser action to dodo.
+//
+// For EnterpriseLWA and EnterpriseAD accounts, you must release the claimed
+// domains for your Amazon Chime account before deletion. As soon as you release
+// the domain, all users under that account are suspended.
+//
+// Deleted accounts appear in your Disabled accounts list for 90 days. To restore
+// deleted account from your Disabled accounts list, you must contact AWS Support.
+//
+// After 90 days, deleted accounts are permanently removed from your Disabled
+// accounts list.
 func (c *Client) DeleteAccount(ctx context.Context, params *DeleteAccountInput, optFns ...func(*Options)) (*DeleteAccountOutput, error) {
 	if params == nil {
 		params = &DeleteAccountInput{}
@@ -73,25 +76,25 @@ func (c *Client) addOperationDeleteAccountMiddlewares(stack *middleware.Stack, o
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -106,13 +109,16 @@ func (c *Client) addOperationDeleteAccountMiddlewares(stack *middleware.Stack, o
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDeleteAccountValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteAccount(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

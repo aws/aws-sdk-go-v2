@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/wafv2/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -30,11 +29,29 @@ func (c *Client) GetLoggingConfiguration(ctx context.Context, params *GetLogging
 
 type GetLoggingConfigurationInput struct {
 
-	// The Amazon Resource Name (ARN) of the web ACL for which you want to get the
-	// LoggingConfiguration .
+	// The Amazon Resource Name (ARN) of the web ACL for which you want to get the LoggingConfiguration.
 	//
 	// This member is required.
 	ResourceArn *string
+
+	// The owner of the logging configuration, which must be set to CUSTOMER for the
+	// configurations that you manage.
+	//
+	// The log scope SECURITY_LAKE indicates a configuration that is managed through
+	// Amazon Security Lake. You can use Security Lake to collect log and event data
+	// from various sources for normalization, analysis, and management. For
+	// information, see [Collecting data from Amazon Web Services services]in the Amazon Security Lake user guide.
+	//
+	// Default: CUSTOMER
+	//
+	// [Collecting data from Amazon Web Services services]: https://docs.aws.amazon.com/security-lake/latest/userguide/internal-sources.html
+	LogScope types.LogScope
+
+	// Used to distinguish between various logging options. Currently, there is one
+	// option.
+	//
+	// Default: WAF_LOGS
+	LogType types.LogType
 
 	noSmithyDocumentSerde
 }
@@ -72,25 +89,25 @@ func (c *Client) addOperationGetLoggingConfigurationMiddlewares(stack *middlewar
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -105,13 +122,16 @@ func (c *Client) addOperationGetLoggingConfigurationMiddlewares(stack *middlewar
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpGetLoggingConfigurationValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetLoggingConfiguration(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

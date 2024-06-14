@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/elasticsearchservice/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -29,8 +28,7 @@ func (c *Client) CreateOutboundCrossClusterSearchConnection(ctx context.Context,
 	return out, nil
 }
 
-// Container for the parameters to the CreateOutboundCrossClusterSearchConnection
-// operation.
+// Container for the parameters to the CreateOutboundCrossClusterSearchConnection operation.
 type CreateOutboundCrossClusterSearchConnectionInput struct {
 
 	// Specifies the connection alias that will be used by the customer for this
@@ -52,15 +50,14 @@ type CreateOutboundCrossClusterSearchConnectionInput struct {
 	noSmithyDocumentSerde
 }
 
-// The result of a CreateOutboundCrossClusterSearchConnection request. Contains
-// the details of the newly created cross-cluster search connection.
+// The result of a CreateOutboundCrossClusterSearchConnection request. Contains the details of the newly created
+// cross-cluster search connection.
 type CreateOutboundCrossClusterSearchConnectionOutput struct {
 
 	// Specifies the connection alias provided during the create connection request.
 	ConnectionAlias *string
 
-	// Specifies the OutboundCrossClusterSearchConnectionStatus for the newly created
-	// connection.
+	// Specifies the OutboundCrossClusterSearchConnectionStatus for the newly created connection.
 	ConnectionStatus *types.OutboundCrossClusterSearchConnectionStatus
 
 	// Unique id for the created outbound connection, which is used for subsequent
@@ -101,25 +98,25 @@ func (c *Client) addOperationCreateOutboundCrossClusterSearchConnectionMiddlewar
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -134,13 +131,16 @@ func (c *Client) addOperationCreateOutboundCrossClusterSearchConnectionMiddlewar
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpCreateOutboundCrossClusterSearchConnectionValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateOutboundCrossClusterSearchConnection(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

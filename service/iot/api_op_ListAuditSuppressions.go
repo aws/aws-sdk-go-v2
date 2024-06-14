@@ -6,15 +6,16 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/iot/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists your Device Defender audit listings. Requires permission to access the
-// ListAuditSuppressions (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
-// action.
+//	Lists your Device Defender audit listings.
+//
+// Requires permission to access the [ListAuditSuppressions] action.
+//
+// [ListAuditSuppressions]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions
 func (c *Client) ListAuditSuppressions(ctx context.Context, params *ListAuditSuppressionsInput, optFns ...func(*Options)) (*ListAuditSuppressionsOutput, error) {
 	if params == nil {
 		params = &ListAuditSuppressionsInput{}
@@ -32,7 +33,7 @@ func (c *Client) ListAuditSuppressions(ctx context.Context, params *ListAuditSup
 
 type ListAuditSuppressionsInput struct {
 
-	// Determines whether suppressions are listed in ascending order by expiration
+	//  Determines whether suppressions are listed in ascending order by expiration
 	// date or not. If parameter isn't provided, ascendingOrder=true .
 	AscendingOrder bool
 
@@ -42,10 +43,10 @@ type ListAuditSuppressionsInput struct {
 	// are enabled.)
 	CheckName *string
 
-	// The maximum number of results to return at one time. The default is 25.
+	//  The maximum number of results to return at one time. The default is 25.
 	MaxResults *int32
 
-	// The token for the next set of results.
+	//  The token for the next set of results.
 	NextToken *string
 
 	// Information that identifies the noncompliant resource.
@@ -56,11 +57,11 @@ type ListAuditSuppressionsInput struct {
 
 type ListAuditSuppressionsOutput struct {
 
-	// A token that can be used to retrieve the next set of results, or null if there
+	//  A token that can be used to retrieve the next set of results, or null if there
 	// are no additional results.
 	NextToken *string
 
-	// List of audit suppressions.
+	//  List of audit suppressions.
 	Suppressions []types.AuditSuppression
 
 	// Metadata pertaining to the operation's result.
@@ -91,25 +92,25 @@ func (c *Client) addOperationListAuditSuppressionsMiddlewares(stack *middleware.
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -124,10 +125,13 @@ func (c *Client) addOperationListAuditSuppressionsMiddlewares(stack *middleware.
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListAuditSuppressions(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -156,7 +160,7 @@ var _ ListAuditSuppressionsAPIClient = (*Client)(nil)
 // ListAuditSuppressionsPaginatorOptions is the paginator options for
 // ListAuditSuppressions
 type ListAuditSuppressionsPaginatorOptions struct {
-	// The maximum number of results to return at one time. The default is 25.
+	//  The maximum number of results to return at one time. The default is 25.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

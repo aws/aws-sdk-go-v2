@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/amp/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -14,10 +13,13 @@ import (
 
 // Updates an existing rule groups namespace within a workspace. A rule groups
 // namespace is associated with exactly one rules file. A workspace can have
-// multiple rule groups namespaces. Use this operation only to update existing rule
-// groups namespaces. To create a new rule groups namespace, use
-// CreateRuleGroupsNamespace . You can't use this operation to add tags to an
-// existing rule groups namespace. Instead, use TagResource .
+// multiple rule groups namespaces.
+//
+// Use this operation only to update existing rule groups namespaces. To create a
+// new rule groups namespace, use CreateRuleGroupsNamespace .
+//
+// You can't use this operation to add tags to an existing rule groups namespace.
+// Instead, use TagResource .
 func (c *Client) PutRuleGroupsNamespace(ctx context.Context, params *PutRuleGroupsNamespaceInput, optFns ...func(*Options)) (*PutRuleGroupsNamespaceOutput, error) {
 	if params == nil {
 		params = &PutRuleGroupsNamespaceInput{}
@@ -37,9 +39,11 @@ func (c *Client) PutRuleGroupsNamespace(ctx context.Context, params *PutRuleGrou
 type PutRuleGroupsNamespaceInput struct {
 
 	// The new rules file to use in the namespace. A base64-encoded version of the
-	// YAML rule groups file. For details about the rule groups namespace structure,
-	// see RuleGroupsNamespaceData (https://docs.aws.amazon.com/prometheus/latest/APIReference/yaml-RuleGroupsNamespaceData.html)
-	// .
+	// YAML rule groups file.
+	//
+	// For details about the rule groups namespace structure, see [RuleGroupsNamespaceData].
+	//
+	// [RuleGroupsNamespaceData]: https://docs.aws.amazon.com/prometheus/latest/APIReference/yaml-RuleGroupsNamespaceData.html
 	//
 	// This member is required.
 	Data []byte
@@ -110,25 +114,25 @@ func (c *Client) addOperationPutRuleGroupsNamespaceMiddlewares(stack *middleware
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -143,6 +147,9 @@ func (c *Client) addOperationPutRuleGroupsNamespaceMiddlewares(stack *middleware
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opPutRuleGroupsNamespaceMiddleware(stack, options); err != nil {
 		return err
 	}
@@ -152,7 +159,7 @@ func (c *Client) addOperationPutRuleGroupsNamespaceMiddlewares(stack *middleware
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opPutRuleGroupsNamespace(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

@@ -6,17 +6,21 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Associate a lens to a workload. Up to 10 lenses can be associated with a
-// workload in a single API operation. A maximum of 20 lenses can be associated
-// with a workload. Disclaimer By accessing and/or applying custom lenses created
-// by another Amazon Web Services user or account, you acknowledge that custom
-// lenses created by other users and shared with you are Third Party Content as
-// defined in the Amazon Web Services Customer Agreement.
+// Associate a lens to a workload.
+//
+// Up to 10 lenses can be associated with a workload in a single API operation. A
+// maximum of 20 lenses can be associated with a workload.
+//
+// # Disclaimer
+//
+// By accessing and/or applying custom lenses created by another Amazon Web
+// Services user or account, you acknowledge that custom lenses created by other
+// users and shared with you are Third Party Content as defined in the Amazon Web
+// Services Customer Agreement.
 func (c *Client) AssociateLenses(ctx context.Context, params *AssociateLensesInput, optFns ...func(*Options)) (*AssociateLensesOutput, error) {
 	if params == nil {
 		params = &AssociateLensesInput{}
@@ -36,7 +40,9 @@ func (c *Client) AssociateLenses(ctx context.Context, params *AssociateLensesInp
 type AssociateLensesInput struct {
 
 	// List of lens aliases to associate or disassociate with a workload. Up to 10
-	// lenses can be specified. Identify a lens using its LensSummary$LensAlias .
+	// lenses can be specified.
+	//
+	// Identify a lens using its LensSummary$LensAlias.
 	//
 	// This member is required.
 	LensAliases []string
@@ -79,25 +85,25 @@ func (c *Client) addOperationAssociateLensesMiddlewares(stack *middleware.Stack,
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -112,13 +118,16 @@ func (c *Client) addOperationAssociateLensesMiddlewares(stack *middleware.Stack,
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpAssociateLensesValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opAssociateLenses(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

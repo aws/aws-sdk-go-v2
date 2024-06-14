@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/rds/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -15,10 +14,14 @@ import (
 // Stops an Amazon RDS DB instance. When you stop a DB instance, Amazon RDS
 // retains the DB instance's metadata, including its endpoint, DB parameter group,
 // and option group membership. Amazon RDS also retains the transaction logs so you
-// can do a point-in-time restore if necessary. For more information, see Stopping
-// an Amazon RDS DB Instance Temporarily (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_StopInstance.html)
-// in the Amazon RDS User Guide. This command doesn't apply to RDS Custom, Aurora
-// MySQL, and Aurora PostgreSQL. For Aurora clusters, use StopDBCluster instead.
+// can do a point-in-time restore if necessary.
+//
+// For more information, see [Stopping an Amazon RDS DB Instance Temporarily] in the Amazon RDS User Guide.
+//
+// This command doesn't apply to RDS Custom, Aurora MySQL, and Aurora PostgreSQL.
+// For Aurora clusters, use StopDBCluster instead.
+//
+// [Stopping an Amazon RDS DB Instance Temporarily]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_StopInstance.html
 func (c *Client) StopDBInstance(ctx context.Context, params *StopDBInstanceInput, optFns ...func(*Options)) (*StopDBInstanceOutput, error) {
 	if params == nil {
 		params = &StopDBInstanceInput{}
@@ -50,9 +53,10 @@ type StopDBInstanceInput struct {
 
 type StopDBInstanceOutput struct {
 
-	// Contains the details of an Amazon RDS DB instance. This data type is used as a
-	// response element in the operations CreateDBInstance ,
-	// CreateDBInstanceReadReplica , DeleteDBInstance , DescribeDBInstances ,
+	// Contains the details of an Amazon RDS DB instance.
+	//
+	// This data type is used as a response element in the operations CreateDBInstance
+	// , CreateDBInstanceReadReplica , DeleteDBInstance , DescribeDBInstances ,
 	// ModifyDBInstance , PromoteReadReplica , RebootDBInstance ,
 	// RestoreDBInstanceFromDBSnapshot , RestoreDBInstanceFromS3 ,
 	// RestoreDBInstanceToPointInTime , StartDBInstance , and StopDBInstance .
@@ -86,25 +90,25 @@ func (c *Client) addOperationStopDBInstanceMiddlewares(stack *middleware.Stack, 
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -119,13 +123,16 @@ func (c *Client) addOperationStopDBInstanceMiddlewares(stack *middleware.Stack, 
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpStopDBInstanceValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opStopDBInstance(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

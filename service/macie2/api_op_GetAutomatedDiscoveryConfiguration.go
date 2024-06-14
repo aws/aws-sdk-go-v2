@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/macie2/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -14,7 +13,7 @@ import (
 )
 
 // Retrieves the configuration settings and status of automated sensitive data
-// discovery for an account.
+// discovery for an organization or standalone account.
 func (c *Client) GetAutomatedDiscoveryConfiguration(ctx context.Context, params *GetAutomatedDiscoveryConfigurationInput, optFns ...func(*Options)) (*GetAutomatedDiscoveryConfigurationOutput, error) {
 	if params == nil {
 		params = &GetAutomatedDiscoveryConfigurationInput{}
@@ -36,37 +35,42 @@ type GetAutomatedDiscoveryConfigurationInput struct {
 
 type GetAutomatedDiscoveryConfigurationOutput struct {
 
+	// Specifies whether automated sensitive data discovery is enabled automatically
+	// for accounts in the organization. Possible values are: ALL, enable it for all
+	// existing accounts and new member accounts; NEW, enable it only for new member
+	// accounts; and, NONE, don't enable it for any accounts.
+	AutoEnableOrganizationMembers types.AutoEnableMode
+
 	// The unique identifier for the classification scope that's used when performing
-	// automated sensitive data discovery for the account. The classification scope
-	// specifies S3 buckets to exclude from automated sensitive data discovery.
+	// automated sensitive data discovery. The classification scope specifies S3
+	// buckets to exclude from analyses.
 	ClassificationScopeId *string
 
 	// The date and time, in UTC and extended ISO 8601 format, when automated
-	// sensitive data discovery was most recently disabled for the account. This value
-	// is null if automated sensitive data discovery wasn't enabled and subsequently
-	// disabled for the account.
+	// sensitive data discovery was most recently disabled. This value is null if
+	// automated sensitive data discovery is currently enabled.
 	DisabledAt *time.Time
 
 	// The date and time, in UTC and extended ISO 8601 format, when automated
-	// sensitive data discovery was initially enabled for the account. This value is
-	// null if automated sensitive data discovery has never been enabled for the
-	// account.
+	// sensitive data discovery was initially enabled. This value is null if automated
+	// sensitive data discovery has never been enabled.
 	FirstEnabledAt *time.Time
 
-	// The date and time, in UTC and extended ISO 8601 format, when automated
-	// sensitive data discovery was most recently enabled or disabled for the account.
+	// The date and time, in UTC and extended ISO 8601 format, when the configuration
+	// settings or status of automated sensitive data discovery was most recently
+	// changed.
 	LastUpdatedAt *time.Time
 
 	// The unique identifier for the sensitivity inspection template that's used when
-	// performing automated sensitive data discovery for the account. The template
-	// specifies which allow lists, custom data identifiers, and managed data
-	// identifiers to use when analyzing data.
+	// performing automated sensitive data discovery. The template specifies which
+	// allow lists, custom data identifiers, and managed data identifiers to use when
+	// analyzing data.
 	SensitivityInspectionTemplateId *string
 
-	// The current status of the automated sensitive data discovery configuration for
-	// the account. Possible values are: ENABLED, use the specified settings to perform
-	// automated sensitive data discovery activities for the account; and, DISABLED,
-	// don't perform automated sensitive data discovery activities for the account.
+	// The current status of automated sensitive data discovery for the organization
+	// or account. Possible values are: ENABLED, use the specified settings to perform
+	// automated sensitive data discovery activities; and, DISABLED, don't perform
+	// automated sensitive data discovery activities.
 	Status types.AutomatedDiscoveryStatus
 
 	// Metadata pertaining to the operation's result.
@@ -97,25 +101,25 @@ func (c *Client) addOperationGetAutomatedDiscoveryConfigurationMiddlewares(stack
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -130,10 +134,13 @@ func (c *Client) addOperationGetAutomatedDiscoveryConfigurationMiddlewares(stack
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetAutomatedDiscoveryConfiguration(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

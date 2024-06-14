@@ -6,29 +6,36 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Revokes permissions on a private CA granted to the Certificate Manager (ACM)
-// service principal (acm.amazonaws.com). These permissions allow ACM to issue and
-// renew ACM certificates that reside in the same Amazon Web Services account as
-// the CA. If you revoke these permissions, ACM will no longer renew the affected
-// certificates automatically. Permissions can be granted with the CreatePermission (https://docs.aws.amazon.com/privateca/latest/APIReference/API_CreatePermission.html)
-// action and listed with the ListPermissions (https://docs.aws.amazon.com/privateca/latest/APIReference/API_ListPermissions.html)
-// action. About Permissions
+// service principal (acm.amazonaws.com).
+//
+// These permissions allow ACM to issue and renew ACM certificates that reside in
+// the same Amazon Web Services account as the CA. If you revoke these permissions,
+// ACM will no longer renew the affected certificates automatically.
+//
+// Permissions can be granted with the [CreatePermission] action and listed with the [ListPermissions] action.
+//
+// About Permissions
+//
 //   - If the private CA and the certificates it issues reside in the same
 //     account, you can use CreatePermission to grant permissions for ACM to carry
 //     out automatic certificate renewals.
+//
 //   - For automatic certificate renewal to succeed, the ACM service principal
 //     needs permissions to create, retrieve, and list certificates.
+//
 //   - If the private CA and the ACM certificates reside in different accounts,
 //     then permissions cannot be used to enable automatic renewals. Instead, the ACM
 //     certificate owner must set up a resource-based policy to enable cross-account
-//     issuance and renewals. For more information, see Using a Resource Based
-//     Policy with Amazon Web Services Private CA (https://docs.aws.amazon.com/privateca/latest/userguide/pca-rbp.html)
-//     .
+//     issuance and renewals. For more information, see [Using a Resource Based Policy with Amazon Web Services Private CA].
+//
+// [Using a Resource Based Policy with Amazon Web Services Private CA]: https://docs.aws.amazon.com/privateca/latest/userguide/pca-rbp.html
+// [CreatePermission]: https://docs.aws.amazon.com/privateca/latest/APIReference/API_CreatePermission.html
+// [ListPermissions]: https://docs.aws.amazon.com/privateca/latest/APIReference/API_ListPermissions.html
 func (c *Client) DeletePermission(ctx context.Context, params *DeletePermissionInput, optFns ...func(*Options)) (*DeletePermissionOutput, error) {
 	if params == nil {
 		params = &DeletePermissionInput{}
@@ -47,10 +54,13 @@ func (c *Client) DeletePermission(ctx context.Context, params *DeletePermissionI
 type DeletePermissionInput struct {
 
 	// The Amazon Resource Number (ARN) of the private CA that issued the permissions.
-	// You can find the CA's ARN by calling the ListCertificateAuthorities (https://docs.aws.amazon.com/privateca/latest/APIReference/API_ListCertificateAuthorities.html)
-	// action. This must have the following form:
+	// You can find the CA's ARN by calling the [ListCertificateAuthorities]action. This must have the following
+	// form:
+	//
 	// arn:aws:acm-pca:region:account:certificate-authority/12345678-1234-1234-1234-123456789012
 	// .
+	//
+	// [ListCertificateAuthorities]: https://docs.aws.amazon.com/privateca/latest/APIReference/API_ListCertificateAuthorities.html
 	//
 	// This member is required.
 	CertificateAuthorityArn *string
@@ -96,25 +106,25 @@ func (c *Client) addOperationDeletePermissionMiddlewares(stack *middleware.Stack
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -129,13 +139,16 @@ func (c *Client) addOperationDeletePermissionMiddlewares(stack *middleware.Stack
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDeletePermissionValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDeletePermission(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

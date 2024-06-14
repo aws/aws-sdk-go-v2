@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/acm/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -15,10 +14,10 @@ import (
 // Remove one or more tags from an ACM certificate. A tag consists of a key-value
 // pair. If you do not specify the value portion of the tag when calling this
 // function, the tag will be removed regardless of value. If you specify a value,
-// the tag is removed only if it is associated with the specified value. To add
-// tags to a certificate, use the AddTagsToCertificate action. To view all of the
-// tags that have been applied to a specific ACM certificate, use the
-// ListTagsForCertificate action.
+// the tag is removed only if it is associated with the specified value.
+//
+// To add tags to a certificate, use the AddTagsToCertificate action. To view all of the tags that
+// have been applied to a specific ACM certificate, use the ListTagsForCertificateaction.
 func (c *Client) RemoveTagsFromCertificate(ctx context.Context, params *RemoveTagsFromCertificateInput, optFns ...func(*Options)) (*RemoveTagsFromCertificateOutput, error) {
 	if params == nil {
 		params = &RemoveTagsFromCertificateInput{}
@@ -38,9 +37,12 @@ type RemoveTagsFromCertificateInput struct {
 
 	// String that contains the ARN of the ACM Certificate with one or more tags that
 	// you want to remove. This must be of the form:
-	// arn:aws:acm:region:123456789012:certificate/12345678-1234-1234-1234-123456789012
-	// For more information about ARNs, see Amazon Resource Names (ARNs) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
-	// .
+	//
+	//     arn:aws:acm:region:123456789012:certificate/12345678-1234-1234-1234-123456789012
+	//
+	// For more information about ARNs, see [Amazon Resource Names (ARNs)].
+	//
+	// [Amazon Resource Names (ARNs)]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
 	//
 	// This member is required.
 	CertificateArn *string
@@ -82,25 +84,25 @@ func (c *Client) addOperationRemoveTagsFromCertificateMiddlewares(stack *middlew
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -115,13 +117,16 @@ func (c *Client) addOperationRemoveTagsFromCertificateMiddlewares(stack *middlew
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpRemoveTagsFromCertificateValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opRemoveTagsFromCertificate(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

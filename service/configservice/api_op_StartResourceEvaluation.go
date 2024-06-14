@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/configservice/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -17,14 +16,19 @@ import (
 // it for evaluation purposes. Config recommends using an evaluation context. It
 // runs an execution against the resource details with all of the Config rules in
 // your account that match with the specified proactive mode and resource type.
+//
 // Ensure you have the cloudformation:DescribeType role setup to validate the
-// resource type schema. You can find the Resource type schema (https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/resource-type-schema.html)
-// in "Amazon Web Services public extensions" within the CloudFormation registry or
-// with the following CLI commmand: aws cloudformation describe-type --type-name
-// "AWS::S3::Bucket" --type RESOURCE . For more information, see Managing
-// extensions through the CloudFormation registry (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/registry.html#registry-view)
-// and Amazon Web Services resource and property types reference (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-template-resource-type-ref.html)
-// in the CloudFormation User Guide.
+// resource type schema.
+//
+// You can find the [Resource type schema] in "Amazon Web Services public extensions" within the
+// CloudFormation registry or with the following CLI commmand: aws cloudformation
+// describe-type --type-name "AWS::S3::Bucket" --type RESOURCE .
+//
+// For more information, see [Managing extensions through the CloudFormation registry] and [Amazon Web Services resource and property types reference] in the CloudFormation User Guide.
+//
+// [Resource type schema]: https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/resource-type-schema.html
+// [Amazon Web Services resource and property types reference]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-template-resource-type-ref.html
+// [Managing extensions through the CloudFormation registry]: https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/registry.html#registry-view
 func (c *Client) StartResourceEvaluation(ctx context.Context, params *StartResourceEvaluationInput, optFns ...func(*Options)) (*StartResourceEvaluationOutput, error) {
 	if params == nil {
 		params = &StartResourceEvaluationInput{}
@@ -55,12 +59,14 @@ type StartResourceEvaluationInput struct {
 
 	// A client token is a unique, case-sensitive string of up to 64 ASCII characters.
 	// To make an idempotent API request using one of these actions, specify a client
-	// token in the request. Avoid reusing the same client token for other API
-	// requests. If you retry a request that completed successfully using the same
-	// client token and the same parameters, the retry succeeds without performing any
-	// further actions. If you retry a successful request using the same client token,
-	// but one or more of the parameters are different, other than the Region or
-	// Availability Zone, the retry fails with an IdempotentParameterMismatch error.
+	// token in the request.
+	//
+	// Avoid reusing the same client token for other API requests. If you retry a
+	// request that completed successfully using the same client token and the same
+	// parameters, the retry succeeds without performing any further actions. If you
+	// retry a successful request using the same client token, but one or more of the
+	// parameters are different, other than the Region or Availability Zone, the retry
+	// fails with an IdempotentParameterMismatch error.
 	ClientToken *string
 
 	// Returns an EvaluationContext object.
@@ -106,25 +112,25 @@ func (c *Client) addOperationStartResourceEvaluationMiddlewares(stack *middlewar
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -139,13 +145,16 @@ func (c *Client) addOperationStartResourceEvaluationMiddlewares(stack *middlewar
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpStartResourceEvaluationValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opStartResourceEvaluation(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

@@ -6,16 +6,17 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/securityhub/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Lists all Security Hub membership invitations that were sent to the current
-// Amazon Web Services account. This operation is only used by accounts that are
-// managed by invitation. Accounts that are managed using the integration with
-// Organizations do not receive invitations.
+// Amazon Web Services account.
+//
+// This operation is only used by accounts that are managed by invitation.
+// Accounts that are managed using the integration with Organizations do not
+// receive invitations.
 func (c *Client) ListInvitations(ctx context.Context, params *ListInvitationsInput, optFns ...func(*Options)) (*ListInvitationsOutput, error) {
 	if params == nil {
 		params = &ListInvitationsInput{}
@@ -37,9 +38,10 @@ type ListInvitationsInput struct {
 	MaxResults *int32
 
 	// The token that is required for pagination. On your first call to the
-	// ListInvitations operation, set the value of this parameter to NULL . For
-	// subsequent calls to the operation, to continue listing data, set the value of
-	// this parameter to the value returned from the previous response.
+	// ListInvitations operation, set the value of this parameter to NULL .
+	//
+	// For subsequent calls to the operation, to continue listing data, set the value
+	// of this parameter to the value returned from the previous response.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -81,25 +83,25 @@ func (c *Client) addOperationListInvitationsMiddlewares(stack *middleware.Stack,
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -114,10 +116,13 @@ func (c *Client) addOperationListInvitationsMiddlewares(stack *middleware.Stack,
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListInvitations(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

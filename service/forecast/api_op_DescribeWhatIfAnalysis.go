@@ -6,19 +6,23 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/forecast/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
-// Describes the what-if analysis created using the CreateWhatIfAnalysis
-// operation. In addition to listing the properties provided in the
-// CreateWhatIfAnalysis request, this operation lists the following properties:
+// Describes the what-if analysis created using the CreateWhatIfAnalysis operation.
+//
+// In addition to listing the properties provided in the CreateWhatIfAnalysis
+// request, this operation lists the following properties:
+//
 //   - CreationTime
+//
 //   - LastModificationTime
+//
 //   - Message - If an error occurred, information about the error.
+//
 //   - Status
 func (c *Client) DescribeWhatIfAnalysis(ctx context.Context, params *DescribeWhatIfAnalysisInput, optFns ...func(*Options)) (*DescribeWhatIfAnalysisOutput, error) {
 	if params == nil {
@@ -59,10 +63,15 @@ type DescribeWhatIfAnalysisOutput struct {
 
 	// The last time the resource was modified. The timestamp depends on the status of
 	// the job:
+	//
 	//   - CREATE_PENDING - The CreationTime .
+	//
 	//   - CREATE_IN_PROGRESS - The current timestamp.
+	//
 	//   - CREATE_STOPPING - The current timestamp.
+	//
 	//   - CREATE_STOPPED - When the job stopped.
+	//
 	//   - ACTIVE or CREATE_FAILED - When the job finished or failed.
 	LastModificationTime *time.Time
 
@@ -70,19 +79,28 @@ type DescribeWhatIfAnalysisOutput struct {
 	Message *string
 
 	// The status of the what-if analysis. States include:
+	//
 	//   - ACTIVE
+	//
 	//   - CREATE_PENDING , CREATE_IN_PROGRESS , CREATE_FAILED
+	//
 	//   - CREATE_STOPPING , CREATE_STOPPED
+	//
 	//   - DELETE_PENDING , DELETE_IN_PROGRESS , DELETE_FAILED
+	//
 	// The Status of the what-if analysis must be ACTIVE before you can access the
 	// analysis.
 	Status *string
 
 	// Defines the set of time series that are used to create the forecasts in a
-	// TimeSeriesIdentifiers object. The TimeSeriesIdentifiers object needs the
-	// following information:
+	// TimeSeriesIdentifiers object.
+	//
+	// The TimeSeriesIdentifiers object needs the following information:
+	//
 	//   - DataSource
+	//
 	//   - Format
+	//
 	//   - Schema
 	TimeSeriesSelector *types.TimeSeriesSelector
 
@@ -120,25 +138,25 @@ func (c *Client) addOperationDescribeWhatIfAnalysisMiddlewares(stack *middleware
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -153,13 +171,16 @@ func (c *Client) addOperationDescribeWhatIfAnalysisMiddlewares(stack *middleware
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDescribeWhatIfAnalysisValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeWhatIfAnalysis(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

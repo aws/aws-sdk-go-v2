@@ -217,6 +217,13 @@ func resolveBaseEndpoint(cfg aws.Config, o *Options) {
 	}
 }
 
+func bindRegion(region string) *string {
+	if region == "" {
+		return nil
+	}
+	return aws.String(endpoints.MapFIPSRegion(region))
+}
+
 // EndpointParameters provides the parameters that influence how endpoints are
 // resolved.
 type EndpointParameters struct {
@@ -441,6 +448,40 @@ func (r *resolver) ResolveEndpoint(
 					}
 				}
 			}
+			if _PartitionResult.Name == "aws-us-gov" {
+				if _UseFIPS == true {
+					if _UseDualStack == false {
+						uriString := "https://support.us-gov-west-1.amazonaws.com"
+
+						uri, err := url.Parse(uriString)
+						if err != nil {
+							return endpoint, fmt.Errorf("Failed to parse uri: %s", uriString)
+						}
+
+						return smithyendpoints.Endpoint{
+							URI:     *uri,
+							Headers: http.Header{},
+							Properties: func() smithy.Properties {
+								var out smithy.Properties
+								smithyauth.SetAuthOptions(&out, []*smithyauth.Option{
+									{
+										SchemeID: "aws.auth#sigv4",
+										SignerProperties: func() smithy.Properties {
+											var sp smithy.Properties
+											smithyhttp.SetSigV4SigningName(&sp, "support")
+											smithyhttp.SetSigV4ASigningName(&sp, "support")
+
+											smithyhttp.SetSigV4SigningRegion(&sp, "us-gov-west-1")
+											return sp
+										}(),
+									},
+								})
+								return out
+							}(),
+						}, nil
+					}
+				}
+			}
 			if _PartitionResult.Name == "aws-iso" {
 				if _UseFIPS == false {
 					if _UseDualStack == false {
@@ -537,7 +578,7 @@ func (r *resolver) ResolveEndpoint(
 				}
 			}
 			if _UseFIPS == true {
-				if true == _PartitionResult.SupportsFIPS {
+				if _PartitionResult.SupportsFIPS == true {
 					uriString := func() string {
 						var out strings.Builder
 						out.WriteString("https://support-fips.")
@@ -613,7 +654,7 @@ type endpointParamsBinder interface {
 func bindEndpointParams(ctx context.Context, input interface{}, options Options) *EndpointParameters {
 	params := &EndpointParameters{}
 
-	params.Region = aws.String(endpoints.MapFIPSRegion(options.Region))
+	params.Region = bindRegion(options.Region)
 	params.UseDualStack = aws.Bool(options.EndpointOptions.UseDualStackEndpoint == aws.DualStackEndpointStateEnabled)
 	params.UseFIPS = aws.Bool(options.EndpointOptions.UseFIPSEndpoint == aws.FIPSEndpointStateEnabled)
 	params.Endpoint = options.BaseEndpoint

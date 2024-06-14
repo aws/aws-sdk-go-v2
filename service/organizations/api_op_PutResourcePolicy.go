@@ -6,14 +6,14 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/organizations/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates or updates a resource policy. You can only call this operation from the
-// organization's management account.
+// Creates or updates a resource policy.
+//
+// You can only call this operation from the organization's management account.
 func (c *Client) PutResourcePolicy(ctx context.Context, params *PutResourcePolicyInput, optFns ...func(*Options)) (*PutResourcePolicyOutput, error) {
 	if params == nil {
 		params = &PutResourcePolicyInput{}
@@ -33,8 +33,9 @@ type PutResourcePolicyInput struct {
 
 	// If provided, the new content for the resource policy. The text must be
 	// correctly formatted JSON that complies with the syntax for the resource policy's
-	// type. For more information, see SCP syntax (https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_scps_syntax.html)
-	// in the Organizations User Guide.
+	// type. For more information, see [SCP syntax]in the Organizations User Guide.
+	//
+	// [SCP syntax]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_scps_syntax.html
 	//
 	// This member is required.
 	Content *string
@@ -42,11 +43,14 @@ type PutResourcePolicyInput struct {
 	// A list of tags that you want to attach to the newly created resource policy.
 	// For each tag in the list, you must specify both a tag key and a value. You can
 	// set the value to an empty string, but you can't set it to null . For more
-	// information about tagging, see Tagging Organizations resources (https://docs.aws.amazon.com/organizations/latest/userguide/orgs_tagging.html)
-	// in the Organizations User Guide. Calls with tags apply to the initial creation
-	// of the resource policy, otherwise an exception is thrown. If any one of the tags
-	// is not valid or if you exceed the allowed number of tags for the resource
-	// policy, then the entire request fails and the resource policy is not created.
+	// information about tagging, see [Tagging Organizations resources]in the Organizations User Guide.
+	//
+	// Calls with tags apply to the initial creation of the resource policy, otherwise
+	// an exception is thrown. If any one of the tags is not valid or if you exceed the
+	// allowed number of tags for the resource policy, then the entire request fails
+	// and the resource policy is not created.
+	//
+	// [Tagging Organizations resources]: https://docs.aws.amazon.com/organizations/latest/userguide/orgs_tagging.html
 	Tags []types.Tag
 
 	noSmithyDocumentSerde
@@ -85,25 +89,25 @@ func (c *Client) addOperationPutResourcePolicyMiddlewares(stack *middleware.Stac
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -118,13 +122,16 @@ func (c *Client) addOperationPutResourcePolicyMiddlewares(stack *middleware.Stac
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpPutResourcePolicyValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opPutResourcePolicy(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

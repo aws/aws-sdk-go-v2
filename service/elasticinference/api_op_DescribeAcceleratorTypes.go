@@ -6,21 +6,22 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/elasticinference/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Describes the accelerator types available in a given region, as well as their
-// characteristics, such as memory and throughput. February 15, 2023: Starting
-// April 15, 2023, AWS will not onboard new customers to Amazon Elastic Inference
-// (EI), and will help current customers migrate their workloads to options that
-// offer better price and performance. After April 15, 2023, new customers will not
-// be able to launch instances with Amazon EI accelerators in Amazon SageMaker,
-// Amazon ECS, or Amazon EC2. However, customers who have used Amazon EI at least
-// once during the past 30-day period are considered current customers and will be
-// able to continue using the service.
+//	Describes the accelerator types available in a given region, as well as their
+//
+// characteristics, such as memory and throughput.
+//
+// February 15, 2023: Starting April 15, 2023, AWS will not onboard new customers
+// to Amazon Elastic Inference (EI), and will help current customers migrate their
+// workloads to options that offer better price and performance. After April 15,
+// 2023, new customers will not be able to launch instances with Amazon EI
+// accelerators in Amazon SageMaker, Amazon ECS, or Amazon EC2. However, customers
+// who have used Amazon EI at least once during the past 30-day period are
+// considered current customers and will be able to continue using the service.
 func (c *Client) DescribeAcceleratorTypes(ctx context.Context, params *DescribeAcceleratorTypesInput, optFns ...func(*Options)) (*DescribeAcceleratorTypesOutput, error) {
 	if params == nil {
 		params = &DescribeAcceleratorTypesInput{}
@@ -42,7 +43,7 @@ type DescribeAcceleratorTypesInput struct {
 
 type DescribeAcceleratorTypesOutput struct {
 
-	// The available accelerator types.
+	//  The available accelerator types.
 	AcceleratorTypes []types.AcceleratorType
 
 	// Metadata pertaining to the operation's result.
@@ -73,25 +74,25 @@ func (c *Client) addOperationDescribeAcceleratorTypesMiddlewares(stack *middlewa
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -106,10 +107,13 @@ func (c *Client) addOperationDescribeAcceleratorTypesMiddlewares(stack *middlewa
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeAcceleratorTypes(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

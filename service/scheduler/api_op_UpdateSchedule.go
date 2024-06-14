@@ -6,20 +6,22 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/scheduler/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
-// Updates the specified schedule. When you call UpdateSchedule , EventBridge
+//	Updates the specified schedule. When you call UpdateSchedule , EventBridge
+//
 // Scheduler uses all values, including empty values, specified in the request and
 // overrides the existing schedule. This is by design. This means that if you do
 // not set an optional field in your request, that field will be set to its
-// system-default value after the update. Before calling this operation, we
-// recommend that you call the GetSchedule API operation and make a note of all
-// optional parameters for your UpdateSchedule call.
+// system-default value after the update.
+//
+// Before calling this operation, we recommend that you call the GetSchedule API
+// operation and make a note of all optional parameters for your UpdateSchedule
+// call.
 func (c *Client) UpdateSchedule(ctx context.Context, params *UpdateScheduleInput, optFns ...func(*Options)) (*UpdateScheduleOutput, error) {
 	if params == nil {
 		params = &UpdateScheduleInput{}
@@ -48,23 +50,33 @@ type UpdateScheduleInput struct {
 	// This member is required.
 	Name *string
 
-	// The expression that defines when the schedule runs. The following formats are
+	//  The expression that defines when the schedule runs. The following formats are
 	// supported.
+	//
 	//   - at expression - at(yyyy-mm-ddThh:mm:ss)
+	//
 	//   - rate expression - rate(value unit)
+	//
 	//   - cron expression - cron(fields)
+	//
 	// You can use at expressions to create one-time schedules that invoke a target
 	// once, at the time and in the time zone, that you specify. You can use rate and
 	// cron expressions to create recurring schedules. Rate-based schedules are useful
 	// when you want to invoke a target at regular intervals, such as every 15 minutes
 	// or every five days. Cron-based schedules are useful when you want to invoke a
 	// target periodically at a specific time, such as at 8:00 am (UTC+0) every 1st day
-	// of the month. A cron expression consists of six fields separated by white
-	// spaces: (minutes hours day_of_month month day_of_week year) . A rate expression
-	// consists of a value as a positive integer, and a unit with the following
-	// options: minute | minutes | hour | hours | day | days For more information and
-	// examples, see Schedule types on EventBridge Scheduler (https://docs.aws.amazon.com/scheduler/latest/UserGuide/schedule-types.html)
-	// in the EventBridge Scheduler User Guide.
+	// of the month.
+	//
+	// A cron expression consists of six fields separated by white spaces: (minutes
+	// hours day_of_month month day_of_week year) .
+	//
+	// A rate expression consists of a value as a positive integer, and a unit with
+	// the following options: minute | minutes | hour | hours | day | days
+	//
+	// For more information and examples, see [Schedule types on EventBridge Scheduler] in the EventBridge Scheduler User
+	// Guide.
+	//
+	// [Schedule types on EventBridge Scheduler]: https://docs.aws.amazon.com/scheduler/latest/UserGuide/schedule-types.html
 	//
 	// This member is required.
 	ScheduleExpression *string
@@ -79,7 +91,7 @@ type UpdateScheduleInput struct {
 	// the schedule completes invoking the target.
 	ActionAfterCompletion types.ActionAfterCompletion
 
-	// Unique, case-sensitive identifier you provide to ensure the idempotency of the
+	//  Unique, case-sensitive identifier you provide to ensure the idempotency of the
 	// request. If you do not specify a client token, EventBridge Scheduler uses a
 	// randomly generated token for the request to ensure idempotency.
 	ClientToken *string
@@ -153,25 +165,25 @@ func (c *Client) addOperationUpdateScheduleMiddlewares(stack *middleware.Stack, 
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -186,6 +198,9 @@ func (c *Client) addOperationUpdateScheduleMiddlewares(stack *middleware.Stack, 
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opUpdateScheduleMiddleware(stack, options); err != nil {
 		return err
 	}
@@ -195,7 +210,7 @@ func (c *Client) addOperationUpdateScheduleMiddlewares(stack *middleware.Stack, 
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateSchedule(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

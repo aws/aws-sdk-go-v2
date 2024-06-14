@@ -6,17 +6,21 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes a variable. You can't delete variables that are included in an event
-// type in Amazon Fraud Detector. Amazon Fraud Detector automatically deletes model
-// output variables and SageMaker model output variables when you delete the model.
-// You can't delete these variables manually. When you delete a variable, Amazon
-// Fraud Detector permanently deletes that variable and the data is no longer
-// stored in Amazon Fraud Detector.
+// Deletes a variable.
+//
+// You can't delete variables that are included in an event type in Amazon Fraud
+// Detector.
+//
+// Amazon Fraud Detector automatically deletes model output variables and
+// SageMaker model output variables when you delete the model. You can't delete
+// these variables manually.
+//
+// When you delete a variable, Amazon Fraud Detector permanently deletes that
+// variable and the data is no longer stored in Amazon Fraud Detector.
 func (c *Client) DeleteVariable(ctx context.Context, params *DeleteVariableInput, optFns ...func(*Options)) (*DeleteVariableOutput, error) {
 	if params == nil {
 		params = &DeleteVariableInput{}
@@ -71,25 +75,25 @@ func (c *Client) addOperationDeleteVariableMiddlewares(stack *middleware.Stack, 
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -104,13 +108,16 @@ func (c *Client) addOperationDeleteVariableMiddlewares(stack *middleware.Stack, 
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDeleteVariableValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteVariable(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

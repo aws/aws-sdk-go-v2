@@ -6,34 +6,40 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Attaches a resource-based policy to a private CA. A policy can also be applied
-// by sharing a private CA through Amazon Web Services Resource Access Manager
-// (RAM). For more information, see Attach a Policy for Cross-Account Access (https://docs.aws.amazon.com/privateca/latest/userguide/pca-ram.html)
-// . The policy can be displayed with GetPolicy (https://docs.aws.amazon.com/privateca/latest/APIReference/API_GetPolicy.html)
-// and removed with DeletePolicy (https://docs.aws.amazon.com/privateca/latest/APIReference/API_DeletePolicy.html)
-// . About Policies
+// Attaches a resource-based policy to a private CA.
+//
+// A policy can also be applied by sharing a private CA through Amazon Web
+// Services Resource Access Manager (RAM). For more information, see [Attach a Policy for Cross-Account Access].
+//
+// The policy can be displayed with [GetPolicy] and removed with [DeletePolicy].
+//
+// About Policies
+//
 //   - A policy grants access on a private CA to an Amazon Web Services customer
 //     account, to Amazon Web Services Organizations, or to an Amazon Web Services
 //     Organizations unit. Policies are under the control of a CA administrator. For
-//     more information, see Using a Resource Based Policy with Amazon Web Services
-//     Private CA (https://docs.aws.amazon.com/privateca/latest/userguide/pca-rbp.html)
-//     .
+//     more information, see [Using a Resource Based Policy with Amazon Web Services Private CA].
+//
 //   - A policy permits a user of Certificate Manager (ACM) to issue ACM
 //     certificates signed by a CA in another account.
+//
 //   - For ACM to manage automatic renewal of these certificates, the ACM user
 //     must configure a Service Linked Role (SLR). The SLR allows the ACM service to
 //     assume the identity of the user, subject to confirmation against the Amazon Web
-//     Services Private CA policy. For more information, see Using a Service Linked
-//     Role with ACM (https://docs.aws.amazon.com/acm/latest/userguide/acm-slr.html)
-//     .
+//     Services Private CA policy. For more information, see [Using a Service Linked Role with ACM].
+//
 //   - Updates made in Amazon Web Services Resource Manager (RAM) are reflected in
-//     policies. For more information, see Attach a Policy for Cross-Account Access (https://docs.aws.amazon.com/privateca/latest/userguide/pca-ram.html)
-//     .
+//     policies. For more information, see [Attach a Policy for Cross-Account Access].
+//
+// [Using a Resource Based Policy with Amazon Web Services Private CA]: https://docs.aws.amazon.com/privateca/latest/userguide/pca-rbp.html
+// [Using a Service Linked Role with ACM]: https://docs.aws.amazon.com/acm/latest/userguide/acm-slr.html
+// [Attach a Policy for Cross-Account Access]: https://docs.aws.amazon.com/privateca/latest/userguide/pca-ram.html
+// [DeletePolicy]: https://docs.aws.amazon.com/privateca/latest/APIReference/API_DeletePolicy.html
+// [GetPolicy]: https://docs.aws.amazon.com/privateca/latest/APIReference/API_GetPolicy.html
 func (c *Client) PutPolicy(ctx context.Context, params *PutPolicyInput, optFns ...func(*Options)) (*PutPolicyOutput, error) {
 	if params == nil {
 		params = &PutPolicyInput{}
@@ -55,15 +61,17 @@ type PutPolicyInput struct {
 	// specified private CA resource. If this policy does not contain all required
 	// statements or if it includes any statement that is not allowed, the PutPolicy
 	// action returns an InvalidPolicyException . For information about IAM policy and
-	// statement structure, see Overview of JSON Policies (https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies.html#access_policies-json)
-	// .
+	// statement structure, see [Overview of JSON Policies].
+	//
+	// [Overview of JSON Policies]: https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies.html#access_policies-json
 	//
 	// This member is required.
 	Policy *string
 
 	// The Amazon Resource Number (ARN) of the private CA to associate with the
-	// policy. The ARN of the CA can be found by calling the ListCertificateAuthorities (https://docs.aws.amazon.com/privateca/latest/APIReference/API_ListCertificateAuthorities.html)
-	// action.
+	// policy. The ARN of the CA can be found by calling the [ListCertificateAuthorities]action.
+	//
+	// [ListCertificateAuthorities]: https://docs.aws.amazon.com/privateca/latest/APIReference/API_ListCertificateAuthorities.html
 	//
 	// This member is required.
 	ResourceArn *string
@@ -100,25 +108,25 @@ func (c *Client) addOperationPutPolicyMiddlewares(stack *middleware.Stack, optio
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -133,13 +141,16 @@ func (c *Client) addOperationPutPolicyMiddlewares(stack *middleware.Stack, optio
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpPutPolicyValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opPutPolicy(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

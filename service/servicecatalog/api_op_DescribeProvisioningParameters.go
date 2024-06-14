@@ -6,20 +6,20 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/servicecatalog/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Gets information about the configuration required to provision the specified
-// product using the specified provisioning artifact. If the output contains a
-// TagOption key with an empty list of values, there is a TagOption conflict for
-// that key. The end user cannot take action to fix the conflict, and launch is not
-// blocked. In subsequent calls to ProvisionProduct , do not include conflicted
-// TagOption keys as tags, or this causes the error "Parameter validation failed:
-// Missing required parameter in Tags[N]:Value". Tag the provisioned product with
-// the value sc-tagoption-conflict-portfolioId-productId .
+// product using the specified provisioning artifact.
+//
+// If the output contains a TagOption key with an empty list of values, there is a
+// TagOption conflict for that key. The end user cannot take action to fix the
+// conflict, and launch is not blocked. In subsequent calls to ProvisionProduct, do not include
+// conflicted TagOption keys as tags, or this causes the error "Parameter
+// validation failed: Missing required parameter in Tags[N]:Value". Tag the
+// provisioned product with the value sc-tagoption-conflict-portfolioId-productId .
 func (c *Client) DescribeProvisioningParameters(ctx context.Context, params *DescribeProvisioningParametersInput, optFns ...func(*Options)) (*DescribeProvisioningParametersOutput, error) {
 	if params == nil {
 		params = &DescribeProvisioningParametersInput{}
@@ -38,14 +38,15 @@ func (c *Client) DescribeProvisioningParameters(ctx context.Context, params *Des
 type DescribeProvisioningParametersInput struct {
 
 	// The language code.
+	//
 	//   - jp - Japanese
+	//
 	//   - zh - Chinese
 	AcceptLanguage *string
 
 	// The path identifier of the product. This value is optional if the product has a
 	// default path, and required if the product has more than one path. To list the
-	// paths for a product, use ListLaunchPaths . You must provide the name or ID, but
-	// not both.
+	// paths for a product, use ListLaunchPaths. You must provide the name or ID, but not both.
 	PathId *string
 
 	// The name of the path. You must provide the name or ID, but not both.
@@ -126,25 +127,25 @@ func (c *Client) addOperationDescribeProvisioningParametersMiddlewares(stack *mi
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -159,10 +160,13 @@ func (c *Client) addOperationDescribeProvisioningParametersMiddlewares(stack *mi
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeProvisioningParameters(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

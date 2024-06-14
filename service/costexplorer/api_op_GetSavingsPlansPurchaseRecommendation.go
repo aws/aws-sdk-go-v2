@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/costexplorer/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -63,12 +62,13 @@ type GetSavingsPlansPurchaseRecommendationInput struct {
 	// You can filter your recommendations by Account ID with the LINKED_ACCOUNT
 	// dimension. To filter your recommendations by Account ID, specify Key as
 	// LINKED_ACCOUNT and Value as the comma-separated Acount ID(s) that you want to
-	// see Savings Plans purchase recommendations for. For
-	// GetSavingsPlansPurchaseRecommendation, the Filter doesn't include CostCategories
-	// or Tags . It only includes Dimensions . With Dimensions , Key must be
-	// LINKED_ACCOUNT and Value can be a single Account ID or multiple comma-separated
-	// Account IDs that you want to see Savings Plans Purchase Recommendations for. AND
-	// and OR operators are not supported.
+	// see Savings Plans purchase recommendations for.
+	//
+	// For GetSavingsPlansPurchaseRecommendation, the Filter doesn't include
+	// CostCategories or Tags . It only includes Dimensions . With Dimensions , Key
+	// must be LINKED_ACCOUNT and Value can be a single Account ID or multiple
+	// comma-separated Account IDs that you want to see Savings Plans Purchase
+	// Recommendations for. AND and OR operators are not supported.
 	Filter *types.Expression
 
 	// The token to retrieve the next set of results. Amazon Web Services provides the
@@ -125,25 +125,25 @@ func (c *Client) addOperationGetSavingsPlansPurchaseRecommendationMiddlewares(st
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -158,13 +158,16 @@ func (c *Client) addOperationGetSavingsPlansPurchaseRecommendationMiddlewares(st
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpGetSavingsPlansPurchaseRecommendationValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetSavingsPlansPurchaseRecommendation(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

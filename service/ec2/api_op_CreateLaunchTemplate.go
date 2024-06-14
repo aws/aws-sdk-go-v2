@@ -6,22 +6,24 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a launch template. A launch template contains the parameters to launch
-// an instance. When you launch an instance using RunInstances , you can specify a
-// launch template instead of providing the launch parameters in the request. For
-// more information, see Launch an instance from a launch template (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-launch-templates.html)
-// in the Amazon Elastic Compute Cloud User Guide. If you want to clone an existing
-// launch template as the basis for creating a new launch template, you can use the
-// Amazon EC2 console. The API, SDKs, and CLI do not support cloning a template.
-// For more information, see Create a launch template from an existing launch
-// template (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-launch-templates.html#create-launch-template-from-existing-launch-template)
-// in the Amazon Elastic Compute Cloud User Guide.
+// Creates a launch template.
+//
+// A launch template contains the parameters to launch an instance. When you
+// launch an instance using RunInstances, you can specify a launch template instead of
+// providing the launch parameters in the request. For more information, see [Launch an instance from a launch template]in
+// the Amazon EC2 User Guide.
+//
+// To clone an existing launch template as the basis for a new launch template,
+// use the Amazon EC2 console. The API, SDKs, and CLI do not support cloning a
+// template. For more information, see [Create a launch template from an existing launch template]in the Amazon EC2 User Guide.
+//
+// [Create a launch template from an existing launch template]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-launch-templates.html#create-launch-template-from-existing-launch-template
+// [Launch an instance from a launch template]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-launch-templates.html
 func (c *Client) CreateLaunchTemplate(ctx context.Context, params *CreateLaunchTemplateInput, optFns ...func(*Options)) (*CreateLaunchTemplateOutput, error) {
 	if params == nil {
 		params = &CreateLaunchTemplateInput{}
@@ -50,8 +52,11 @@ type CreateLaunchTemplateInput struct {
 	LaunchTemplateName *string
 
 	// Unique, case-sensitive identifier you provide to ensure the idempotency of the
-	// request. For more information, see Ensuring idempotency (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html)
-	// . Constraint: Maximum 128 ASCII characters.
+	// request. For more information, see [Ensuring idempotency].
+	//
+	// Constraint: Maximum 128 ASCII characters.
+	//
+	// [Ensuring idempotency]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
 	ClientToken *string
 
 	// Checks whether you have the required permissions for the action, without
@@ -61,10 +66,12 @@ type CreateLaunchTemplateInput struct {
 	DryRun *bool
 
 	// The tags to apply to the launch template on creation. To tag the launch
-	// template, the resource type must be launch-template . To specify the tags for
-	// the resources that are created when an instance is launched, you must use the
-	// TagSpecifications parameter in the launch template data (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_RequestLaunchTemplateData.html)
-	// structure.
+	// template, the resource type must be launch-template .
+	//
+	// To specify the tags for the resources that are created when an instance is
+	// launched, you must use the TagSpecifications parameter in the [launch template data] structure.
+	//
+	// [launch template data]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_RequestLaunchTemplateData.html
 	TagSpecifications []types.TagSpecification
 
 	// A description for the first version of the launch template.
@@ -111,25 +118,25 @@ func (c *Client) addOperationCreateLaunchTemplateMiddlewares(stack *middleware.S
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -144,13 +151,16 @@ func (c *Client) addOperationCreateLaunchTemplateMiddlewares(stack *middleware.S
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpCreateLaunchTemplateValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateLaunchTemplate(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

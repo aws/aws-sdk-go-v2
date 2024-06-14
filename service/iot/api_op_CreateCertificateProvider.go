@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/iot/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -15,15 +14,19 @@ import (
 // Creates an Amazon Web Services IoT Core certificate provider. You can use
 // Amazon Web Services IoT Core certificate provider to customize how to sign a
 // certificate signing request (CSR) in IoT fleet provisioning. For more
-// information, see Customizing certificate signing using Amazon Web Services IoT
-// Core certificate provider (https://docs.aws.amazon.com/iot/latest/developerguide/provisioning-cert-provider.html)
-// from Amazon Web Services IoT Core Developer Guide. Requires permission to access
-// the CreateCertificateProvider (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
-// action. After you create a certificate provider, the behavior of
-// CreateCertificateFromCsr API for fleet provisioning (https://docs.aws.amazon.com/iot/latest/developerguide/fleet-provision-api.html#create-cert-csr)
-// will change and all API calls to CreateCertificateFromCsr will invoke the
-// certificate provider to create the certificates. It can take up to a few minutes
-// for this behavior to change after a certificate provider is created.
+// information, see [Customizing certificate signing using Amazon Web Services IoT Core certificate provider]from Amazon Web Services IoT Core Developer Guide.
+//
+// Requires permission to access the [CreateCertificateProvider] action.
+//
+// After you create a certificate provider, the behavior of [CreateCertificateFromCsr API for fleet provisioning]
+// CreateCertificateFromCsr will change and all API calls to
+// CreateCertificateFromCsr will invoke the certificate provider to create the
+// certificates. It can take up to a few minutes for this behavior to change after
+// a certificate provider is created.
+//
+// [CreateCertificateProvider]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions
+// [CreateCertificateFromCsr API for fleet provisioning]: https://docs.aws.amazon.com/iot/latest/developerguide/fleet-provision-api.html#create-cert-csr
+// [Customizing certificate signing using Amazon Web Services IoT Core certificate provider]: https://docs.aws.amazon.com/iot/latest/developerguide/provisioning-cert-provider.html
 func (c *Client) CreateCertificateProvider(ctx context.Context, params *CreateCertificateProviderInput, optFns ...func(*Options)) (*CreateCertificateProviderOutput, error) {
 	if params == nil {
 		params = &CreateCertificateProviderInput{}
@@ -103,25 +106,25 @@ func (c *Client) addOperationCreateCertificateProviderMiddlewares(stack *middlew
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -136,6 +139,9 @@ func (c *Client) addOperationCreateCertificateProviderMiddlewares(stack *middlew
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opCreateCertificateProviderMiddleware(stack, options); err != nil {
 		return err
 	}
@@ -145,7 +151,7 @@ func (c *Client) addOperationCreateCertificateProviderMiddlewares(stack *middlew
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateCertificateProvider(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

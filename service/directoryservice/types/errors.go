@@ -321,8 +321,7 @@ func (e *DirectoryInDesiredStateException) ErrorCode() string {
 func (e *DirectoryInDesiredStateException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The maximum number of directories in the region has been reached. You can use
-// the GetDirectoryLimits operation to determine your directory limits in the
-// region.
+// the GetDirectoryLimitsoperation to determine your directory limits in the region.
 type DirectoryLimitExceededException struct {
 	Message *string
 
@@ -922,8 +921,7 @@ func (e *ShareLimitExceededException) ErrorCode() string {
 func (e *ShareLimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The maximum number of manual snapshots for the directory has been reached. You
-// can use the GetSnapshotLimits operation to determine the snapshot limits for a
-// directory.
+// can use the GetSnapshotLimitsoperation to determine the snapshot limits for a directory.
 type SnapshotLimitExceededException struct {
 	Message *string
 

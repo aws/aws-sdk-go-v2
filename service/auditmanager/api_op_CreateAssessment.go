@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/auditmanager/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -30,37 +29,47 @@ func (c *Client) CreateAssessment(ctx context.Context, params *CreateAssessmentI
 
 type CreateAssessmentInput struct {
 
-	// The assessment report storage destination for the assessment that's being
+	//  The assessment report storage destination for the assessment that's being
 	// created.
 	//
 	// This member is required.
 	AssessmentReportsDestination *types.AssessmentReportsDestination
 
-	// The identifier for the framework that the assessment will be created from.
+	//  The identifier for the framework that the assessment will be created from.
 	//
 	// This member is required.
 	FrameworkId *string
 
-	// The name of the assessment to be created.
+	//  The name of the assessment to be created.
 	//
 	// This member is required.
 	Name *string
 
-	// The list of roles for the assessment.
+	//  The list of roles for the assessment.
 	//
 	// This member is required.
 	Roles []types.Role
 
-	// The wrapper that contains the Amazon Web Services accounts and services that
-	// are in scope for the assessment.
+	//  The wrapper that contains the Amazon Web Services accounts that are in scope
+	// for the assessment.
+	//
+	// You no longer need to specify which Amazon Web Services are in scope when you
+	// create or update an assessment. Audit Manager infers the services in scope by
+	// examining your assessment controls and their data sources, and then mapping this
+	// information to the relevant Amazon Web Services.
+	//
+	// If an underlying data source changes for your assessment, we automatically
+	// update the services scope as needed to reflect the correct Amazon Web Services.
+	// This ensures that your assessment collects accurate and comprehensive evidence
+	// about all of the relevant services in your AWS environment.
 	//
 	// This member is required.
 	Scope *types.Scope
 
-	// The optional description of the assessment to be created.
+	//  The optional description of the assessment to be created.
 	Description *string
 
-	// The tags that are associated with the assessment.
+	//  The tags that are associated with the assessment.
 	Tags map[string]string
 
 	noSmithyDocumentSerde
@@ -68,7 +77,7 @@ type CreateAssessmentInput struct {
 
 type CreateAssessmentOutput struct {
 
-	// An entity that defines the scope of audit evidence collected by Audit Manager.
+	//  An entity that defines the scope of audit evidence collected by Audit Manager.
 	// An Audit Manager assessment is an implementation of an Audit Manager framework.
 	Assessment *types.Assessment
 
@@ -100,25 +109,25 @@ func (c *Client) addOperationCreateAssessmentMiddlewares(stack *middleware.Stack
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -133,13 +142,16 @@ func (c *Client) addOperationCreateAssessmentMiddlewares(stack *middleware.Stack
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpCreateAssessmentValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateAssessment(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

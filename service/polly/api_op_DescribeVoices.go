@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/polly/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -14,16 +13,21 @@ import (
 
 // Returns the list of voices that are available for use when requesting speech
 // synthesis. Each voice speaks a specified language, is either male or female, and
-// is identified by an ID, which is the ASCII version of the voice name. When
-// synthesizing speech ( SynthesizeSpeech ), you provide the voice ID for the
-// voice you want from the list of voices returned by DescribeVoices . For example,
-// you want your news reader application to read news in a specific language, but
-// giving a user the option to choose the voice. Using the DescribeVoices
-// operation you can provide the user with a list of available voices to select
-// from. You can optionally specify a language code to filter the available voices.
-// For example, if you specify en-US , the operation returns a list of all
-// available US English voices. This operation requires permissions to perform the
-// polly:DescribeVoices action.
+// is identified by an ID, which is the ASCII version of the voice name.
+//
+// When synthesizing speech ( SynthesizeSpeech ), you provide the voice ID for the
+// voice you want from the list of voices returned by DescribeVoices .
+//
+// For example, you want your news reader application to read news in a specific
+// language, but giving a user the option to choose the voice. Using the
+// DescribeVoices operation you can provide the user with a list of available
+// voices to select from.
+//
+// You can optionally specify a language code to filter the available voices. For
+// example, if you specify en-US , the operation returns a list of all available US
+// English voices.
+//
+// This operation requires permissions to perform the polly:DescribeVoices action.
 func (c *Client) DescribeVoices(ctx context.Context, params *DescribeVoicesInput, optFns ...func(*Options)) (*DescribeVoicesOutput, error) {
 	if params == nil {
 		params = &DescribeVoicesInput{}
@@ -41,8 +45,8 @@ func (c *Client) DescribeVoices(ctx context.Context, params *DescribeVoicesInput
 
 type DescribeVoicesInput struct {
 
-	// Specifies the engine ( standard , neural or long-form ) used by Amazon Polly
-	// when processing input text for speech synthesis.
+	// Specifies the engine ( standard , neural , long-form or generative ) used by
+	// Amazon Polly when processing input text for speech synthesis.
 	Engine types.Engine
 
 	// Boolean value indicating whether to return any bilingual voices that use the
@@ -52,7 +56,7 @@ type DescribeVoicesInput struct {
 	// yes but not if you specify no .
 	IncludeAdditionalLanguageCodes bool
 
-	// The language identification tag (ISO 639 code for the language name-ISO 3166
+	//  The language identification tag (ISO 639 code for the language name-ISO 3166
 	// country code) for filtering the list of voices returned. If you don't specify
 	// this optional parameter, all available voices are returned.
 	LanguageCode types.LanguageCode
@@ -101,25 +105,25 @@ func (c *Client) addOperationDescribeVoicesMiddlewares(stack *middleware.Stack, 
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -134,10 +138,13 @@ func (c *Client) addOperationDescribeVoicesMiddlewares(stack *middleware.Stack, 
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeVoices(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -33,10 +32,12 @@ type ListSpacesInput struct {
 	// A parameter to search for the domain ID.
 	DomainIdEquals *string
 
-	// The total number of items to return in the response. If the total number of
-	// items available is more than the value specified, a NextToken is provided in
-	// the response. To resume pagination, provide the NextToken value in the as part
-	// of a subsequent call. The default value is 10.
+	// This parameter defines the maximum number of results that can be return in a
+	// single response. The MaxResults parameter is an upper bound, not a target. If
+	// there are more results available than the value specified, a NextToken is
+	// provided in the response. The NextToken indicates that the user should get the
+	// next set of results by providing this token as a part of a subsequent call. The
+	// default value for MaxResults is 10.
 	MaxResults *int32
 
 	// If the previous response was truncated, you will receive this token. Use it in
@@ -92,25 +93,25 @@ func (c *Client) addOperationListSpacesMiddlewares(stack *middleware.Stack, opti
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -125,10 +126,13 @@ func (c *Client) addOperationListSpacesMiddlewares(stack *middleware.Stack, opti
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListSpaces(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -155,10 +159,12 @@ var _ ListSpacesAPIClient = (*Client)(nil)
 
 // ListSpacesPaginatorOptions is the paginator options for ListSpaces
 type ListSpacesPaginatorOptions struct {
-	// The total number of items to return in the response. If the total number of
-	// items available is more than the value specified, a NextToken is provided in
-	// the response. To resume pagination, provide the NextToken value in the as part
-	// of a subsequent call. The default value is 10.
+	// This parameter defines the maximum number of results that can be return in a
+	// single response. The MaxResults parameter is an upper bound, not a target. If
+	// there are more results available than the value specified, a NextToken is
+	// provided in the response. The NextToken indicates that the user should get the
+	// next set of results by providing this token as a part of a subsequent call. The
+	// default value for MaxResults is 10.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

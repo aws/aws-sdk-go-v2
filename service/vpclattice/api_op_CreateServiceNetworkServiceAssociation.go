@@ -6,20 +6,26 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/vpclattice/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Associates a service with a service network. You can't use this operation if
-// the service and service network are already associated or if there is a
-// disassociation or deletion in progress. If the association fails, you can retry
-// the operation by deleting the association and recreating it. You cannot
-// associate a service and service network that are shared with a caller. The
-// caller must own either the service or the service network. As a result of this
-// operation, the association is created in the service network account and the
-// association owner account.
+// Associates a service with a service network. For more information, see [Manage service associations] in the
+// Amazon VPC Lattice User Guide.
+//
+// You can't use this operation if the service and service network are already
+// associated or if there is a disassociation or deletion in progress. If the
+// association fails, you can retry the operation by deleting the association and
+// recreating it.
+//
+// You cannot associate a service and service network that are shared with a
+// caller. The caller must own either the service or the service network.
+//
+// As a result of this operation, the association is created in the service
+// network account and the association owner account.
+//
+// [Manage service associations]: https://docs.aws.amazon.com/vpc-lattice/latest/ug/service-network-associations.html#service-network-service-associations
 func (c *Client) CreateServiceNetworkServiceAssociation(ctx context.Context, params *CreateServiceNetworkServiceAssociationInput, optFns ...func(*Options)) (*CreateServiceNetworkServiceAssociationOutput, error) {
 	if params == nil {
 		params = &CreateServiceNetworkServiceAssociationInput{}
@@ -77,7 +83,7 @@ type CreateServiceNetworkServiceAssociationOutput struct {
 	// The ID of the association.
 	Id *string
 
-	// The operation's status.
+	// The association status.
 	Status types.ServiceNetworkServiceAssociationStatus
 
 	// Metadata pertaining to the operation's result.
@@ -108,25 +114,25 @@ func (c *Client) addOperationCreateServiceNetworkServiceAssociationMiddlewares(s
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -141,6 +147,9 @@ func (c *Client) addOperationCreateServiceNetworkServiceAssociationMiddlewares(s
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opCreateServiceNetworkServiceAssociationMiddleware(stack, options); err != nil {
 		return err
 	}
@@ -150,7 +159,7 @@ func (c *Client) addOperationCreateServiceNetworkServiceAssociationMiddlewares(s
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateServiceNetworkServiceAssociation(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

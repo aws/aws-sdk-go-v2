@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -15,15 +14,20 @@ import (
 // not delete your current shares, but prevents you from creating new shares
 // throughout your organization. Current shares are not kept in sync with your
 // organization structure if the structure changes after calling this API. Only the
-// management account in the organization can call this API. You cannot call this
-// API if there are active delegated administrators in the organization. Note that
-// a delegated administrator is not authorized to invoke
-// DisableAWSOrganizationsAccess . If you share an Service Catalog portfolio in an
-// organization within Organizations, and then disable Organizations access for
-// Service Catalog, the portfolio access permissions will not sync with the latest
-// changes to the organization structure. Specifically, accounts that you removed
-// from the organization after disabling Service Catalog access will retain access
-// to the previously shared portfolio.
+// management account in the organization can call this API.
+//
+// You cannot call this API if there are active delegated administrators in the
+// organization.
+//
+// Note that a delegated administrator is not authorized to invoke
+// DisableAWSOrganizationsAccess .
+//
+// If you share an Service Catalog portfolio in an organization within
+// Organizations, and then disable Organizations access for Service Catalog, the
+// portfolio access permissions will not sync with the latest changes to the
+// organization structure. Specifically, accounts that you removed from the
+// organization after disabling Service Catalog access will retain access to the
+// previously shared portfolio.
 func (c *Client) DisableAWSOrganizationsAccess(ctx context.Context, params *DisableAWSOrganizationsAccessInput, optFns ...func(*Options)) (*DisableAWSOrganizationsAccessOutput, error) {
 	if params == nil {
 		params = &DisableAWSOrganizationsAccessInput{}
@@ -72,25 +76,25 @@ func (c *Client) addOperationDisableAWSOrganizationsAccessMiddlewares(stack *mid
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -105,10 +109,13 @@ func (c *Client) addOperationDisableAWSOrganizationsAccessMiddlewares(stack *mid
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDisableAWSOrganizationsAccess(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -16,20 +15,26 @@ import (
 // allocate the Elastic IP address you can associate it with an instance or network
 // interface. After you release an Elastic IP address, it is released to the IP
 // address pool and can be allocated to a different Amazon Web Services account.
+//
 // You can allocate an Elastic IP address from an address pool owned by Amazon Web
 // Services or from an address pool created from a public IPv4 address range that
 // you have brought to Amazon Web Services for use with your Amazon Web Services
-// resources using bring your own IP addresses (BYOIP). For more information, see
-// Bring Your Own IP Addresses (BYOIP) (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-byoip.html)
-// in the Amazon Elastic Compute Cloud User Guide. If you release an Elastic IP
-// address, you might be able to recover it. You cannot recover an Elastic IP
-// address that you released after it is allocated to another Amazon Web Services
-// account. To attempt to recover an Elastic IP address that you released, specify
-// it in this operation. For more information, see Elastic IP Addresses (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/elastic-ip-addresses-eip.html)
-// in the Amazon Elastic Compute Cloud User Guide. You can allocate a carrier IP
-// address which is a public IP address from a telecommunication carrier, to a
-// network interface which resides in a subnet in a Wavelength Zone (for example an
-// EC2 instance).
+// resources using bring your own IP addresses (BYOIP). For more information, see [Bring Your Own IP Addresses (BYOIP)]
+// in the Amazon EC2 User Guide.
+//
+// If you release an Elastic IP address, you might be able to recover it. You
+// cannot recover an Elastic IP address that you released after it is allocated to
+// another Amazon Web Services account. To attempt to recover an Elastic IP address
+// that you released, specify it in this operation.
+//
+// For more information, see [Elastic IP Addresses] in the Amazon EC2 User Guide.
+//
+// You can allocate a carrier IP address which is a public IP address from a
+// telecommunication carrier, to a network interface which resides in a subnet in a
+// Wavelength Zone (for example an EC2 instance).
+//
+// [Bring Your Own IP Addresses (BYOIP)]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-byoip.html
+// [Elastic IP Addresses]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/elastic-ip-addresses-eip.html
 func (c *Client) AllocateAddress(ctx context.Context, params *AllocateAddressInput, optFns ...func(*Options)) (*AllocateAddressOutput, error) {
 	if params == nil {
 		params = &AllocateAddressInput{}
@@ -64,11 +69,10 @@ type AllocateAddressInput struct {
 	// UnauthorizedOperation .
 	DryRun *bool
 
-	// A unique set of Availability Zones, Local Zones, or Wavelength Zones from which
-	// Amazon Web Services advertises IP addresses. Use this parameter to limit the IP
-	// address to this location. IP addresses cannot move between network border
-	// groups. Use DescribeAvailabilityZones (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeAvailabilityZones.html)
-	// to view the network border groups.
+	//  A unique set of Availability Zones, Local Zones, or Wavelength Zones from
+	// which Amazon Web Services advertises IP addresses. Use this parameter to limit
+	// the IP address to this location. IP addresses cannot move between network border
+	// groups.
 	NetworkBorderGroup *string
 
 	// The ID of an address pool that you own. Use this parameter to let Amazon EC2
@@ -138,25 +142,25 @@ func (c *Client) addOperationAllocateAddressMiddlewares(stack *middleware.Stack,
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -171,10 +175,13 @@ func (c *Client) addOperationAllocateAddressMiddlewares(stack *middleware.Stack,
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opAllocateAddress(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

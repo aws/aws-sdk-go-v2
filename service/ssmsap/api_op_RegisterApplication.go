@@ -6,18 +6,22 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/ssmsap/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Register an SAP application with AWS Systems Manager for SAP. You must meet the
-// following requirements before registering. The SAP application you want to
-// register with AWS Systems Manager for SAP is running on Amazon EC2. AWS Systems
-// Manager Agent must be setup on an Amazon EC2 instance along with the required
-// IAM permissions. Amazon EC2 instance(s) must have access to the secrets created
-// in AWS Secrets Manager to manage SAP applications and components.
+// following requirements before registering.
+//
+// The SAP application you want to register with AWS Systems Manager for SAP is
+// running on Amazon EC2.
+//
+// AWS Systems Manager Agent must be setup on an Amazon EC2 instance along with
+// the required IAM permissions.
+//
+// Amazon EC2 instance(s) must have access to the secrets created in AWS Secrets
+// Manager to manage SAP applications and components.
 func (c *Client) RegisterApplication(ctx context.Context, params *RegisterApplicationInput, optFns ...func(*Options)) (*RegisterApplicationOutput, error) {
 	if params == nil {
 		params = &RegisterApplicationInput{}
@@ -104,25 +108,25 @@ func (c *Client) addOperationRegisterApplicationMiddlewares(stack *middleware.St
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -137,13 +141,16 @@ func (c *Client) addOperationRegisterApplicationMiddlewares(stack *middleware.St
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpRegisterApplicationValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opRegisterApplication(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

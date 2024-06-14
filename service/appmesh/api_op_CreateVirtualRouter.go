@@ -6,20 +6,22 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/appmesh/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a virtual router within a service mesh. Specify a listener for any
-// inbound traffic that your virtual router receives. Create a virtual router for
-// each protocol and port that you need to route. Virtual routers handle traffic
-// for one or more virtual services within your mesh. After you create your virtual
-// router, create and associate routes for your virtual router that direct incoming
-// requests to different virtual nodes. For more information about virtual routers,
-// see Virtual routers (https://docs.aws.amazon.com/app-mesh/latest/userguide/virtual_routers.html)
-// .
+// Creates a virtual router within a service mesh.
+//
+// Specify a listener for any inbound traffic that your virtual router receives.
+// Create a virtual router for each protocol and port that you need to route.
+// Virtual routers handle traffic for one or more virtual services within your
+// mesh. After you create your virtual router, create and associate routes for your
+// virtual router that direct incoming requests to different virtual nodes.
+//
+// For more information about virtual routers, see [Virtual routers].
+//
+// [Virtual routers]: https://docs.aws.amazon.com/app-mesh/latest/userguide/virtual_routers.html
 func (c *Client) CreateVirtualRouter(ctx context.Context, params *CreateVirtualRouterInput, optFns ...func(*Options)) (*CreateVirtualRouterOutput, error) {
 	if params == nil {
 		params = &CreateVirtualRouterInput{}
@@ -59,8 +61,9 @@ type CreateVirtualRouterInput struct {
 	// The Amazon Web Services IAM account ID of the service mesh owner. If the
 	// account ID is not your own, then the account that you specify must share the
 	// mesh with your account before you can create the resource in the service mesh.
-	// For more information about mesh sharing, see Working with shared meshes (https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html)
-	// .
+	// For more information about mesh sharing, see [Working with shared meshes].
+	//
+	// [Working with shared meshes]: https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html
 	MeshOwner *string
 
 	// Optional metadata that you can apply to the virtual router to assist with
@@ -107,25 +110,25 @@ func (c *Client) addOperationCreateVirtualRouterMiddlewares(stack *middleware.St
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -140,6 +143,9 @@ func (c *Client) addOperationCreateVirtualRouterMiddlewares(stack *middleware.St
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opCreateVirtualRouterMiddleware(stack, options); err != nil {
 		return err
 	}
@@ -149,7 +155,7 @@ func (c *Client) addOperationCreateVirtualRouterMiddlewares(stack *middleware.St
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateVirtualRouter(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

@@ -11,12 +11,51 @@ const (
 )
 
 // Values returns all known values for AttributeMatchingModel. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (AttributeMatchingModel) Values() []AttributeMatchingModel {
 	return []AttributeMatchingModel{
 		"ONE_TO_ONE",
 		"MANY_TO_MANY",
+	}
+}
+
+type DeleteUniqueIdErrorType string
+
+// Enum values for DeleteUniqueIdErrorType
+const (
+	DeleteUniqueIdErrorTypeServiceError    DeleteUniqueIdErrorType = "SERVICE_ERROR"
+	DeleteUniqueIdErrorTypeValidationError DeleteUniqueIdErrorType = "VALIDATION_ERROR"
+)
+
+// Values returns all known values for DeleteUniqueIdErrorType. Note that this can
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (DeleteUniqueIdErrorType) Values() []DeleteUniqueIdErrorType {
+	return []DeleteUniqueIdErrorType{
+		"SERVICE_ERROR",
+		"VALIDATION_ERROR",
+	}
+}
+
+type DeleteUniqueIdStatus string
+
+// Enum values for DeleteUniqueIdStatus
+const (
+	DeleteUniqueIdStatusCompleted DeleteUniqueIdStatus = "COMPLETED"
+	DeleteUniqueIdStatusAccepted  DeleteUniqueIdStatus = "ACCEPTED"
+)
+
+// Values returns all known values for DeleteUniqueIdStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (DeleteUniqueIdStatus) Values() []DeleteUniqueIdStatus {
+	return []DeleteUniqueIdStatus{
+		"COMPLETED",
+		"ACCEPTED",
 	}
 }
 
@@ -28,11 +67,31 @@ const (
 )
 
 // Values returns all known values for IdMappingType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (IdMappingType) Values() []IdMappingType {
 	return []IdMappingType{
 		"PROVIDER",
+	}
+}
+
+type IdNamespaceType string
+
+// Enum values for IdNamespaceType
+const (
+	IdNamespaceTypeSource IdNamespaceType = "SOURCE"
+	IdNamespaceTypeTarget IdNamespaceType = "TARGET"
+)
+
+// Values returns all known values for IdNamespaceType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (IdNamespaceType) Values() []IdNamespaceType {
+	return []IdNamespaceType{
+		"SOURCE",
+		"TARGET",
 	}
 }
 
@@ -44,8 +103,9 @@ const (
 )
 
 // Values returns all known values for IncrementalRunType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (IncrementalRunType) Values() []IncrementalRunType {
 	return []IncrementalRunType{
 		"IMMEDIATE",
@@ -63,8 +123,9 @@ const (
 )
 
 // Values returns all known values for JobStatus. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (JobStatus) Values() []JobStatus {
 	return []JobStatus{
 		"RUNNING",
@@ -84,8 +145,9 @@ const (
 )
 
 // Values returns all known values for ResolutionType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ResolutionType) Values() []ResolutionType {
 	return []ResolutionType{
 		"RULE_MATCHING",
@@ -121,8 +183,9 @@ const (
 )
 
 // Values returns all known values for SchemaAttributeType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (SchemaAttributeType) Values() []SchemaAttributeType {
 	return []SchemaAttributeType{
 		"NAME",
@@ -157,11 +220,31 @@ const (
 )
 
 // Values returns all known values for ServiceType. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ServiceType) Values() []ServiceType {
 	return []ServiceType{
 		"ASSIGNMENT",
 		"ID_MAPPING",
+	}
+}
+
+type StatementEffect string
+
+// Enum values for StatementEffect
+const (
+	StatementEffectAllow StatementEffect = "Allow"
+	StatementEffectDeny  StatementEffect = "Deny"
+)
+
+// Values returns all known values for StatementEffect. Note that this can be
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (StatementEffect) Values() []StatementEffect {
+	return []StatementEffect{
+		"Allow",
+		"Deny",
 	}
 }

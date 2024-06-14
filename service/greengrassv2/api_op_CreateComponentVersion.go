@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/greengrassv2/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -16,30 +15,42 @@ import (
 // Creates a component. Components are software that run on Greengrass core
 // devices. After you develop and test a component on your core device, you can use
 // this operation to upload your component to IoT Greengrass. Then, you can deploy
-// the component to other core devices. You can use this operation to do the
-// following:
-//   - Create components from recipes Create a component from a recipe, which is a
-//     file that defines the component's metadata, parameters, dependencies, lifecycle,
-//     artifacts, and platform capability. For more information, see IoT Greengrass
-//     component recipe reference (https://docs.aws.amazon.com/greengrass/v2/developerguide/component-recipe-reference.html)
-//     in the IoT Greengrass V2 Developer Guide. To create a component from a recipe,
-//     specify inlineRecipe when you call this operation.
-//   - Create components from Lambda functions Create a component from an Lambda
-//     function that runs on IoT Greengrass. This creates a recipe and artifacts from
-//     the Lambda function's deployment package. You can use this operation to migrate
-//     Lambda functions from IoT Greengrass V1 to IoT Greengrass V2. This function only
-//     accepts Lambda functions that use the following runtimes:
-//   - Python 2.7 – python2.7
-//   - Python 3.7 – python3.7
-//   - Python 3.8 – python3.8
-//   - Python 3.9 – python3.9
-//   - Java 8 – java8
-//   - Java 11 – java11
-//   - Node.js 10 – nodejs10.x
-//   - Node.js 12 – nodejs12.x
-//   - Node.js 14 – nodejs14.x To create a component from a Lambda function,
-//     specify lambdaFunction when you call this operation. IoT Greengrass currently
-//     supports Lambda functions on only Linux core devices.
+// the component to other core devices.
+//
+// You can use this operation to do the following:
+//
+//   - Create components from recipes
+//
+// Create a component from a recipe, which is a file that defines the component's
+//
+//	metadata, parameters, dependencies, lifecycle, artifacts, and platform
+//	capability. For more information, see [IoT Greengrass component recipe reference]in the IoT Greengrass V2 Developer
+//	Guide.
+//
+// To create a component from a recipe, specify inlineRecipe when you call this
+//
+//	operation.
+//
+//	- Create components from Lambda functions
+//
+// Create a component from an Lambda function that runs on IoT Greengrass. This
+//
+//	creates a recipe and artifacts from the Lambda function's deployment package.
+//	You can use this operation to migrate Lambda functions from IoT Greengrass V1 to
+//	IoT Greengrass V2.
+//
+// This function accepts Lambda functions in all supported versions of Python,
+//
+//	Node.js, and Java runtimes. IoT Greengrass doesn't apply any additional
+//	restrictions on deprecated Lambda runtime versions.
+//
+// To create a component from a Lambda function, specify lambdaFunction when you
+//
+//	call this operation.
+//
+// IoT Greengrass currently supports Lambda functions on only Linux core devices.
+//
+// [IoT Greengrass component recipe reference]: https://docs.aws.amazon.com/greengrass/v2/developerguide/component-recipe-reference.html
 func (c *Client) CreateComponentVersion(ctx context.Context, params *CreateComponentVersionInput, optFns ...func(*Options)) (*CreateComponentVersionOutput, error) {
 	if params == nil {
 		params = &CreateComponentVersionInput{}
@@ -68,16 +79,20 @@ type CreateComponentVersionInput struct {
 
 	// The recipe to use to create the component. The recipe defines the component's
 	// metadata, parameters, dependencies, lifecycle, artifacts, and platform
-	// compatibility. You must specify either inlineRecipe or lambdaFunction .
+	// compatibility.
+	//
+	// You must specify either inlineRecipe or lambdaFunction .
 	InlineRecipe []byte
 
-	// The parameters to create a component from a Lambda function. You must specify
-	// either inlineRecipe or lambdaFunction .
+	// The parameters to create a component from a Lambda function.
+	//
+	// You must specify either inlineRecipe or lambdaFunction .
 	LambdaFunction *types.LambdaFunctionRecipeSource
 
 	// A list of key-value pairs that contain metadata for the resource. For more
-	// information, see Tag your resources (https://docs.aws.amazon.com/greengrass/v2/developerguide/tag-resources.html)
-	// in the IoT Greengrass V2 Developer Guide.
+	// information, see [Tag your resources]in the IoT Greengrass V2 Developer Guide.
+	//
+	// [Tag your resources]: https://docs.aws.amazon.com/greengrass/v2/developerguide/tag-resources.html
 	Tags map[string]string
 
 	noSmithyDocumentSerde
@@ -106,8 +121,9 @@ type CreateComponentVersionOutput struct {
 	// This member is required.
 	Status *types.CloudComponentStatus
 
-	// The ARN (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
-	// of the component version.
+	// The [ARN] of the component version.
+	//
+	// [ARN]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
 	Arn *string
 
 	// Metadata pertaining to the operation's result.
@@ -138,25 +154,25 @@ func (c *Client) addOperationCreateComponentVersionMiddlewares(stack *middleware
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -171,6 +187,9 @@ func (c *Client) addOperationCreateComponentVersionMiddlewares(stack *middleware
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opCreateComponentVersionMiddleware(stack, options); err != nil {
 		return err
 	}
@@ -180,7 +199,7 @@ func (c *Client) addOperationCreateComponentVersionMiddlewares(stack *middleware
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateComponentVersion(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

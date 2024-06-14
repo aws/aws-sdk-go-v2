@@ -6,22 +6,33 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/gamelift/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates permissions that allow inbound traffic to connect to game sessions that
-// are being hosted on instances in the fleet. To update settings, specify the
-// fleet ID to be updated and specify the changes to be made. List the permissions
-// you want to add in InboundPermissionAuthorizations , and permissions you want to
-// remove in InboundPermissionRevocations . Permissions to be removed must match
-// existing fleet permissions. If successful, the fleet ID for the updated fleet is
-// returned. For fleets with remote locations, port setting updates can take time
-// to propagate across all locations. You can check the status of updates in each
-// location by calling DescribeFleetPortSettings with a location name. Learn more
-// Setting up Amazon GameLift fleets (https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-intro.html)
+// Updates permissions that allow inbound traffic to connect to game sessions in
+// the fleet.
+//
+// To update settings, specify the fleet ID to be updated and specify the changes
+// to be made. List the permissions you want to add in
+// InboundPermissionAuthorizations , and permissions you want to remove in
+// InboundPermissionRevocations . Permissions to be removed must match existing
+// fleet permissions.
+//
+// For a container fleet, inbound permissions must specify port numbers that are
+// defined in the fleet's connection port settings.
+//
+// If successful, the fleet ID for the updated fleet is returned. For fleets with
+// remote locations, port setting updates can take time to propagate across all
+// locations. You can check the status of updates in each location by calling
+// DescribeFleetPortSettings with a location name.
+//
+// # Learn more
+//
+// [Setting up Amazon GameLift fleets]
+//
+// [Setting up Amazon GameLift fleets]: https://docs.aws.amazon.com/gamelift/latest/developerguide/fleets-intro.html
 func (c *Client) UpdateFleetPortSettings(ctx context.Context, params *UpdateFleetPortSettingsInput, optFns ...func(*Options)) (*UpdateFleetPortSettingsOutput, error) {
 	if params == nil {
 		params = &UpdateFleetPortSettingsInput{}
@@ -56,10 +67,11 @@ type UpdateFleetPortSettingsInput struct {
 
 type UpdateFleetPortSettingsOutput struct {
 
-	// The Amazon Resource Name ( ARN (https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-arn-format.html)
-	// ) that is assigned to a Amazon GameLift fleet resource and uniquely identifies
-	// it. ARNs are unique across all Regions. Format is
-	// arn:aws:gamelift:::fleet/fleet-a1234567-b8c9-0d1e-2fa3-b45c6d7e8912 .
+	// The Amazon Resource Name ([ARN] ) that is assigned to a Amazon GameLift fleet
+	// resource and uniquely identifies it. ARNs are unique across all Regions. Format
+	// is arn:aws:gamelift:::fleet/fleet-a1234567-b8c9-0d1e-2fa3-b45c6d7e8912 .
+	//
+	// [ARN]: https://docs.aws.amazon.com/AmazonS3/latest/dev/s3-arn-format.html
 	FleetArn *string
 
 	// A unique identifier for the fleet that was updated.
@@ -93,25 +105,25 @@ func (c *Client) addOperationUpdateFleetPortSettingsMiddlewares(stack *middlewar
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -126,13 +138,16 @@ func (c *Client) addOperationUpdateFleetPortSettingsMiddlewares(stack *middlewar
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpUpdateFleetPortSettingsValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateFleetPortSettings(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

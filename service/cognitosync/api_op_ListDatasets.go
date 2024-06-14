@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/cognitosync/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -14,11 +13,14 @@ import (
 
 // Lists datasets for an identity. With Amazon Cognito Sync, each identity has
 // access only to its own data. Thus, the credentials used to make this API call
-// need to have access to the identity data. ListDatasets can be called with
-// temporary user credentials provided by Cognito Identity or with developer
-// credentials. You should use the Cognito Identity credentials to make this API
-// call. ListDatasets The following examples have been edited for readability. POST
-// / HTTP/1.1 CONTENT-TYPE: application/json X-AMZN-REQUESTID:
+// need to have access to the identity data.
+//
+// ListDatasets can be called with temporary user credentials provided by Cognito
+// Identity or with developer credentials. You should use the Cognito Identity
+// credentials to make this API call.
+//
+// ListDatasets The following examples have been edited for readability. POST /
+// HTTP/1.1 CONTENT-TYPE: application/json X-AMZN-REQUESTID:
 // 15225768-209f-4078-aaed-7494ace9f2db X-AMZ-TARGET:
 // com.amazonaws.cognito.sync.model.AWSCognitoSyncService.ListDatasets HOST:
 // cognito-sync.us-east-1.amazonaws.com:443 X-AMZ-DATE: 20141111T215640Z
@@ -29,7 +31,9 @@ import (
 // "IdentityPoolId": "IDENTITY_POOL_ID", "IdentityId": "IDENTITY_ID", "MaxResults":
 // "3" } } 1.1 200 OK x-amzn-requestid: 15225768-209f-4078-aaed-7494ace9f2db,
 // 15225768-209f-4078-aaed-7494ace9f2db content-type: application/json
-// content-length: 355 date: Tue, 11 Nov 2014 21:56:40 GMT { "Output": { "__type":
+// content-length: 355 date: Tue, 11 Nov 2014 21:56:40 GMT
+//
+// { "Output": { "__type":
 // "com.amazonaws.cognito.sync.model#ListDatasetsResponse", "Count": 1, "Datasets":
 // [ { "CreationDate": 1.412974057151E9, "DataStorage": 16, "DatasetName":
 // "my_list", "IdentityId": "IDENTITY_ID", "LastModifiedBy": "123456789012",
@@ -116,25 +120,25 @@ func (c *Client) addOperationListDatasetsMiddlewares(stack *middleware.Stack, op
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -149,13 +153,16 @@ func (c *Client) addOperationListDatasetsMiddlewares(stack *middleware.Stack, op
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpListDatasetsValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListDatasets(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

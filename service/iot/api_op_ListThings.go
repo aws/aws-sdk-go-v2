@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/iot/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -15,12 +14,17 @@ import (
 // Lists your things. Use the attributeName and attributeValue parameters to
 // filter your things. For example, calling ListThings with attributeName=Color
 // and attributeValue=Red retrieves all things in the registry that contain an
-// attribute Color with the value Red. For more information, see List Things (https://docs.aws.amazon.com/iot/latest/developerguide/thing-registry.html#list-things)
-// from the Amazon Web Services IoT Core Developer Guide. Requires permission to
-// access the ListThings (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
-// action. You will not be charged for calling this API if an Access denied error
-// is returned. You will also not be charged if no attributes or pagination token
-// was provided in request and no pagination token and no results were returned.
+// attribute Color with the value Red. For more information, see [List Things]from the Amazon
+// Web Services IoT Core Developer Guide.
+//
+// Requires permission to access the [ListThings] action.
+//
+// You will not be charged for calling this API if an Access denied error is
+// returned. You will also not be charged if no attributes or pagination token was
+// provided in request and no pagination token and no results were returned.
+//
+// [List Things]: https://docs.aws.amazon.com/iot/latest/developerguide/thing-registry.html#list-things
+// [ListThings]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions
 func (c *Client) ListThings(ctx context.Context, params *ListThingsInput, optFns ...func(*Options)) (*ListThingsOutput, error) {
 	if params == nil {
 		params = &ListThingsInput{}
@@ -56,9 +60,10 @@ type ListThingsInput struct {
 	ThingTypeName *string
 
 	// When true , the action returns the thing resources with attribute values that
-	// start with the attributeValue provided. When false , or not present, the action
-	// returns only the thing resources with attribute values that match the entire
-	// attributeValue provided.
+	// start with the attributeValue provided.
+	//
+	// When false , or not present, the action returns only the thing resources with
+	// attribute values that match the entire attributeValue provided.
 	UsePrefixAttributeValue bool
 
 	noSmithyDocumentSerde
@@ -102,25 +107,25 @@ func (c *Client) addOperationListThingsMiddlewares(stack *middleware.Stack, opti
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -135,10 +140,13 @@ func (c *Client) addOperationListThingsMiddlewares(stack *middleware.Stack, opti
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListThings(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

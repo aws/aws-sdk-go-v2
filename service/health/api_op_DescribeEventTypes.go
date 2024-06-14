@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/health/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -15,10 +14,15 @@ import (
 // Returns the event types that meet the specified filter criteria. You can use
 // this API operation to find information about the Health event, such as the
 // category, Amazon Web Service, and event code. The metadata for each event
-// appears in the EventType (https://docs.aws.amazon.com/health/latest/APIReference/API_EventType.html)
-// object. If you don't specify a filter criteria, the API operation returns all
-// event types, in no particular order. This API operation uses pagination. Specify
-// the nextToken parameter in the next request to return more results.
+// appears in the [EventType]object.
+//
+// If you don't specify a filter criteria, the API operation returns all event
+// types, in no particular order.
+//
+// This API operation uses pagination. Specify the nextToken parameter in the next
+// request to return more results.
+//
+// [EventType]: https://docs.aws.amazon.com/health/latest/APIReference/API_EventType.html
 func (c *Client) DescribeEventTypes(ctx context.Context, params *DescribeEventTypesInput, optFns ...func(*Options)) (*DescribeEventTypesOutput, error) {
 	if params == nil {
 		params = &DescribeEventTypesInput{}
@@ -44,8 +48,10 @@ type DescribeEventTypesInput struct {
 	Locale *string
 
 	// The maximum number of items to return in one batch, between 10 and 100,
-	// inclusive. If you don't specify the maxResults parameter, this operation
-	// returns a maximum of 30 items by default.
+	// inclusive.
+	//
+	// If you don't specify the maxResults parameter, this operation returns a maximum
+	// of 30 items by default.
 	MaxResults *int32
 
 	// If the results of a search are large, only a portion of the results are
@@ -101,25 +107,25 @@ func (c *Client) addOperationDescribeEventTypesMiddlewares(stack *middleware.Sta
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -134,10 +140,13 @@ func (c *Client) addOperationDescribeEventTypesMiddlewares(stack *middleware.Sta
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeEventTypes(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -167,8 +176,10 @@ var _ DescribeEventTypesAPIClient = (*Client)(nil)
 // DescribeEventTypes
 type DescribeEventTypesPaginatorOptions struct {
 	// The maximum number of items to return in one batch, between 10 and 100,
-	// inclusive. If you don't specify the maxResults parameter, this operation
-	// returns a maximum of 30 items by default.
+	// inclusive.
+	//
+	// If you don't specify the maxResults parameter, this operation returns a maximum
+	// of 30 items by default.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

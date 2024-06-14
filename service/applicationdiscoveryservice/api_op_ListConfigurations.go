@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/applicationdiscoveryservice/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -38,10 +37,14 @@ type ListConfigurationsInput struct {
 	ConfigurationType types.ConfigurationItemType
 
 	// You can filter the request using various logical operators and a key-value
-	// format. For example: {"key": "serverType", "value": "webServer"} For a complete
-	// list of filter options and guidance about using them with this action, see
-	// Using the ListConfigurations Action (https://docs.aws.amazon.com/application-discovery/latest/userguide/discovery-api-queries.html#ListConfigurations)
-	// in the Amazon Web Services Application Discovery Service User Guide.
+	// format. For example:
+	//
+	//     {"key": "serverType", "value": "webServer"}
+	//
+	// For a complete list of filter options and guidance about using them with this
+	// action, see [Using the ListConfigurations Action]in the Amazon Web Services Application Discovery Service User Guide.
+	//
+	// [Using the ListConfigurations Action]: https://docs.aws.amazon.com/application-discovery/latest/userguide/discovery-api-queries.html#ListConfigurations
 	Filters []types.Filter
 
 	// The total number of items to return. The maximum value is 100.
@@ -54,9 +57,10 @@ type ListConfigurationsInput struct {
 	NextToken *string
 
 	// Certain filter criteria return output that can be sorted in ascending or
-	// descending order. For a list of output characteristics for each filter, see
-	// Using the ListConfigurations Action (https://docs.aws.amazon.com/application-discovery/latest/userguide/discovery-api-queries.html#ListConfigurations)
-	// in the Amazon Web Services Application Discovery Service User Guide.
+	// descending order. For a list of output characteristics for each filter, see [Using the ListConfigurations Action]in
+	// the Amazon Web Services Application Discovery Service User Guide.
+	//
+	// [Using the ListConfigurations Action]: https://docs.aws.amazon.com/application-discovery/latest/userguide/discovery-api-queries.html#ListConfigurations
 	OrderBy []types.OrderByElement
 
 	noSmithyDocumentSerde
@@ -103,25 +107,25 @@ func (c *Client) addOperationListConfigurationsMiddlewares(stack *middleware.Sta
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -136,13 +140,16 @@ func (c *Client) addOperationListConfigurationsMiddlewares(stack *middleware.Sta
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpListConfigurationsValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListConfigurations(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

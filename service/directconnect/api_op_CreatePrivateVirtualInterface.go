@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/directconnect/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -18,13 +17,14 @@ import (
 // Connecting the private virtual interface to a Direct Connect gateway enables the
 // possibility for connecting to multiple VPCs, including VPCs in different Amazon
 // Web Services Regions. Connecting the private virtual interface to a VGW only
-// provides access to a single VPC within the same Region. Setting the MTU of a
-// virtual interface to 9001 (jumbo frames) can cause an update to the underlying
-// physical connection if it wasn't updated to support jumbo frames. Updating the
-// connection disrupts network connectivity for all virtual interfaces associated
-// with the connection for up to 30 seconds. To check whether your connection
-// supports jumbo frames, call DescribeConnections . To check whether your virtual
-// interface supports jumbo frames, call DescribeVirtualInterfaces .
+// provides access to a single VPC within the same Region.
+//
+// Setting the MTU of a virtual interface to 9001 (jumbo frames) can cause an
+// update to the underlying physical connection if it wasn't updated to support
+// jumbo frames. Updating the connection disrupts network connectivity for all
+// virtual interfaces associated with the connection for up to 30 seconds. To check
+// whether your connection supports jumbo frames, call DescribeConnections. To check whether your
+// virtual interface supports jumbo frames, call DescribeVirtualInterfaces.
 func (c *Client) CreatePrivateVirtualInterface(ctx context.Context, params *CreatePrivateVirtualInterfaceInput, optFns ...func(*Options)) (*CreatePrivateVirtualInterfaceOutput, error) {
 	if params == nil {
 		params = &CreatePrivateVirtualInterfaceInput{}
@@ -68,7 +68,9 @@ type CreatePrivateVirtualInterfaceOutput struct {
 	AmazonSideAsn *int64
 
 	// The autonomous system (AS) number for Border Gateway Protocol (BGP)
-	// configuration. The valid values are 1-2147483647.
+	// configuration.
+	//
+	// The valid values are 1-2147483647.
 	Asn int32
 
 	// The authentication key for BGP configuration. This string has a minimum length
@@ -136,24 +138,33 @@ type CreatePrivateVirtualInterfaceOutput struct {
 	VirtualInterfaceName *string
 
 	// The state of the virtual interface. The following are the possible values:
+	//
 	//   - confirming : The creation of the virtual interface is pending confirmation
 	//   from the virtual interface owner. If the owner of the virtual interface is
 	//   different from the owner of the connection on which it is provisioned, then the
 	//   virtual interface will remain in this state until it is confirmed by the virtual
 	//   interface owner.
+	//
 	//   - verifying : This state only applies to public virtual interfaces. Each
 	//   public virtual interface needs validation before the virtual interface can be
 	//   created.
+	//
 	//   - pending : A virtual interface is in this state from the time that it is
 	//   created until the virtual interface is ready to forward traffic.
+	//
 	//   - available : A virtual interface that is able to forward traffic.
+	//
 	//   - down : A virtual interface that is BGP down.
-	//   - deleting : A virtual interface is in this state immediately after calling
-	//   DeleteVirtualInterface until it can no longer forward traffic.
+	//
+	//   - deleting : A virtual interface is in this state immediately after calling DeleteVirtualInterface
+	//   until it can no longer forward traffic.
+	//
 	//   - deleted : A virtual interface that cannot forward traffic.
+	//
 	//   - rejected : The virtual interface owner has declined creation of the virtual
 	//   interface. If a virtual interface in the Confirming state is deleted by the
 	//   virtual interface owner, the virtual interface enters the Rejected state.
+	//
 	//   - unknown : The state of the virtual interface is not available.
 	VirtualInterfaceState types.VirtualInterfaceState
 
@@ -191,25 +202,25 @@ func (c *Client) addOperationCreatePrivateVirtualInterfaceMiddlewares(stack *mid
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -224,13 +235,16 @@ func (c *Client) addOperationCreatePrivateVirtualInterfaceMiddlewares(stack *mid
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpCreatePrivateVirtualInterfaceValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreatePrivateVirtualInterface(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

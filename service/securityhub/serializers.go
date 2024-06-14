@@ -30303,6 +30303,11 @@ func awsRestjson1_serializeDocumentVulnerability(v *types.Vulnerability, value s
 		ok.String(*v.Id)
 	}
 
+	if v.LastKnownExploitAt != nil {
+		ok := object.Key("LastKnownExploitAt")
+		ok.String(*v.LastKnownExploitAt)
+	}
+
 	if v.ReferenceUrls != nil {
 		ok := object.Key("ReferenceUrls")
 		if err := awsRestjson1_serializeDocumentStringList(v.ReferenceUrls, ok); err != nil {

@@ -18,8 +18,10 @@ import (
 
 // Returns a list of S3 Access Grants instances. An S3 Access Grants instance
 // serves as a logical grouping for your individual access grants. You can only
-// have one S3 Access Grants instance per Region per account. Permissions You must
-// have the s3:ListAccessGrantsInstances permission to use this operation.
+// have one S3 Access Grants instance per Region per account.
+//
+// Permissions You must have the s3:ListAccessGrantsInstances permission to use
+// this operation.
 func (c *Client) ListAccessGrantsInstances(ctx context.Context, params *ListAccessGrantsInstancesInput, optFns ...func(*Options)) (*ListAccessGrantsInstancesOutput, error) {
 	if params == nil {
 		params = &ListAccessGrantsInstancesInput{}
@@ -98,25 +100,25 @@ func (c *Client) addOperationListAccessGrantsInstancesMiddlewares(stack *middlew
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -134,6 +136,9 @@ func (c *Client) addOperationListAccessGrantsInstancesMiddlewares(stack *middlew
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = smithyhttp.AddContentChecksumMiddleware(stack); err != nil {
 		return err
 	}
@@ -149,7 +154,7 @@ func (c *Client) addOperationListAccessGrantsInstancesMiddlewares(stack *middlew
 	if err = addMetadataRetrieverMiddleware(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addListAccessGrantsInstancesUpdateEndpoint(stack, options); err != nil {

@@ -6,17 +6,18 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/opsworks/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates a specified layer. Required Permissions: To use this action, an IAM
-// user must have a Manage permissions level for the stack, or an attached policy
-// that explicitly grants permissions. For more information on user permissions,
-// see Managing User Permissions (https://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html)
-// .
+// Updates a specified layer.
+//
+// Required Permissions: To use this action, an IAM user must have a Manage
+// permissions level for the stack, or an attached policy that explicitly grants
+// permissions. For more information on user permissions, see [Managing User Permissions].
+//
+// [Managing User Permissions]: https://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html
 func (c *Client) UpdateLayer(ctx context.Context, params *UpdateLayerInput, optFns ...func(*Options)) (*UpdateLayerOutput, error) {
 	if params == nil {
 		params = &UpdateLayerInput{}
@@ -42,30 +43,34 @@ type UpdateLayerInput struct {
 	// One or more user-defined key/value pairs to be added to the stack attributes.
 	Attributes map[string]string
 
-	// Whether to automatically assign an Elastic IP address (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/elastic-ip-addresses-eip.html)
-	// to the layer's instances. For more information, see How to Edit a Layer (https://docs.aws.amazon.com/opsworks/latest/userguide/workinglayers-basics-edit.html)
-	// .
+	// Whether to automatically assign an [Elastic IP address] to the layer's instances. For more
+	// information, see [How to Edit a Layer].
+	//
+	// [How to Edit a Layer]: https://docs.aws.amazon.com/opsworks/latest/userguide/workinglayers-basics-edit.html
+	// [Elastic IP address]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/elastic-ip-addresses-eip.html
 	AutoAssignElasticIps *bool
 
 	// For stacks that are running in a VPC, whether to automatically assign a public
-	// IP address to the layer's instances. For more information, see How to Edit a
-	// Layer (https://docs.aws.amazon.com/opsworks/latest/userguide/workinglayers-basics-edit.html)
-	// .
+	// IP address to the layer's instances. For more information, see [How to Edit a Layer].
+	//
+	// [How to Edit a Layer]: https://docs.aws.amazon.com/opsworks/latest/userguide/workinglayers-basics-edit.html
 	AutoAssignPublicIps *bool
 
 	// Specifies CloudWatch Logs configuration options for the layer. For more
-	// information, see CloudWatchLogsLogStream .
+	// information, see CloudWatchLogsLogStream.
 	CloudWatchLogsConfiguration *types.CloudWatchLogsConfiguration
 
 	// The ARN of an IAM profile to be used for all of the layer's EC2 instances. For
-	// more information about IAM ARNs, see Using Identifiers (https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html)
-	// .
+	// more information about IAM ARNs, see [Using Identifiers].
+	//
+	// [Using Identifiers]: https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
 	CustomInstanceProfileArn *string
 
 	// A JSON-formatted string containing custom stack configuration and deployment
-	// attributes to be installed on the layer's instances. For more information, see
-	// Using Custom JSON (https://docs.aws.amazon.com/opsworks/latest/userguide/workingcookbook-json-override.html)
+	// attributes to be installed on the layer's instances. For more information, see [Using Custom JSON]
 	// .
+	//
+	// [Using Custom JSON]: https://docs.aws.amazon.com/opsworks/latest/userguide/workingcookbook-json-override.html
 	CustomJson *string
 
 	// A LayerCustomRecipes object that specifies the layer's custom recipes.
@@ -79,28 +84,34 @@ type UpdateLayerInput struct {
 
 	// Whether to install operating system and package updates when the instance
 	// boots. The default value is true . To control when updates are installed, set
-	// this value to false . You must then update your instances manually by using
-	// CreateDeployment to run the update_dependencies stack command or manually
-	// running yum (Amazon Linux) or apt-get (Ubuntu) on the instances. We strongly
-	// recommend using the default value of true , to ensure that your instances have
-	// the latest security updates.
+	// this value to false . You must then update your instances manually by using CreateDeployment to
+	// run the update_dependencies stack command or manually running yum (Amazon
+	// Linux) or apt-get (Ubuntu) on the instances.
+	//
+	// We strongly recommend using the default value of true , to ensure that your
+	// instances have the latest security updates.
 	InstallUpdatesOnBoot *bool
 
 	//
 	LifecycleEventConfiguration *types.LifecycleEventConfiguration
 
-	// The layer name, which is used by the console.
+	// The layer name, which is used by the console. Layer names can be a maximum of
+	// 32 characters.
 	Name *string
 
 	// An array of Package objects that describe the layer's packages.
 	Packages []string
 
 	// For custom layers only, use this parameter to specify the layer's short name,
-	// which is used internally by AWS OpsWorks Stacks and by Chef. The short name is
-	// also used as the name for the directory where your app files are installed. It
-	// can have a maximum of 200 characters and must be in the following format:
-	// /\A[a-z0-9\-\_\.]+\Z/. The built-in layers' short names are defined by AWS
-	// OpsWorks Stacks. For more information, see the Layer Reference (https://docs.aws.amazon.com/opsworks/latest/userguide/layers.html)
+	// which is used internally by OpsWorks Stacks and by Chef. The short name is also
+	// used as the name for the directory where your app files are installed. It can
+	// have a maximum of 32 characters and must be in the following format:
+	// /\A[a-z0-9\-\_\.]+\Z/.
+	//
+	// Built-in layer short names are defined by OpsWorks Stacks. For more
+	// information, see the [Layer reference]in the OpsWorks User Guide.
+	//
+	// [Layer reference]: https://docs.aws.amazon.com/opsworks/latest/userguide/layers.html
 	Shortname *string
 
 	// Whether to use Amazon EBS-optimized instances.
@@ -141,25 +152,25 @@ func (c *Client) addOperationUpdateLayerMiddlewares(stack *middleware.Stack, opt
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -174,13 +185,16 @@ func (c *Client) addOperationUpdateLayerMiddlewares(stack *middleware.Stack, opt
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpUpdateLayerValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateLayer(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

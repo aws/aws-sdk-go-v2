@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/neptune/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -15,11 +14,12 @@ import (
 // Creates a Neptune global database spread across multiple Amazon Regions. The
 // global database contains a single primary cluster with read-write capability,
 // and read-only secondary clusters that receive data from the primary cluster
-// through high-speed replication performed by the Neptune storage subsystem. You
-// can create a global database that is initially empty, and then add a primary
-// cluster and secondary clusters to it, or you can specify an existing Neptune
-// cluster during the create operation to become the primary cluster of the global
-// database.
+// through high-speed replication performed by the Neptune storage subsystem.
+//
+// You can create a global database that is initially empty, and then add a
+// primary cluster and secondary clusters to it, or you can specify an existing
+// Neptune cluster during the create operation to become the primary cluster of the
+// global database.
 func (c *Client) CreateGlobalCluster(ctx context.Context, params *CreateGlobalClusterInput, optFns ...func(*Options)) (*CreateGlobalClusterOutput, error) {
 	if params == nil {
 		params = &CreateGlobalClusterInput{}
@@ -46,12 +46,14 @@ type CreateGlobalClusterInput struct {
 	// database can't be deleted when deletion protection is enabled.
 	DeletionProtection *bool
 
-	// The name of the database engine to be used in the global database. Valid
-	// values: neptune
+	// The name of the database engine to be used in the global database.
+	//
+	// Valid values: neptune
 	Engine *string
 
-	// The Neptune engine version to be used by the global database. Valid values:
-	// 1.2.0.0 or above.
+	// The Neptune engine version to be used by the global database.
+	//
+	// Valid values: 1.2.0.0 or above.
 	EngineVersion *string
 
 	// (Optional) The Amazon Resource Name (ARN) of an existing Neptune DB cluster to
@@ -66,10 +68,9 @@ type CreateGlobalClusterInput struct {
 
 type CreateGlobalClusterOutput struct {
 
-	// Contains the details of an Amazon Neptune global database. This data type is
-	// used as a response element for the CreateGlobalCluster , DescribeGlobalClusters
-	// , ModifyGlobalCluster , DeleteGlobalCluster , FailoverGlobalCluster , and
-	// RemoveFromGlobalCluster actions.
+	// Contains the details of an Amazon Neptune global database.
+	//
+	// This data type is used as a response element for the CreateGlobalCluster, DescribeGlobalClusters, ModifyGlobalCluster, DeleteGlobalCluster, FailoverGlobalCluster, and RemoveFromGlobalCluster actions.
 	GlobalCluster *types.GlobalCluster
 
 	// Metadata pertaining to the operation's result.
@@ -100,25 +101,25 @@ func (c *Client) addOperationCreateGlobalClusterMiddlewares(stack *middleware.St
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -133,13 +134,16 @@ func (c *Client) addOperationCreateGlobalClusterMiddlewares(stack *middleware.St
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpCreateGlobalClusterValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateGlobalCluster(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

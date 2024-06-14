@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/internetmonitor/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -15,10 +14,13 @@ import (
 // Updates a monitor. You can update a monitor to change the percentage of traffic
 // to monitor or the maximum number of city-networks (locations and ASNs), to add
 // or remove resources, or to change the status of the monitor. Note that you can't
-// change the name of a monitor. The city-network maximum that you choose is the
-// limit, but you only pay for the number of city-networks that are actually
-// monitored. For more information, see Choosing a city-network maximum value (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/IMCityNetworksMaximum.html)
+// change the name of a monitor.
+//
+// The city-network maximum that you choose is the limit, but you only pay for the
+// number of city-networks that are actually monitored. For more information, see [Choosing a city-network maximum value]
 // in the Amazon CloudWatch User Guide.
+//
+// [Choosing a city-network maximum value]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/IMCityNetworksMaximum.html
 func (c *Client) UpdateMonitor(ctx context.Context, params *UpdateMonitorInput, optFns ...func(*Options)) (*UpdateMonitorOutput, error) {
 	if params == nil {
 		params = &UpdateMonitorInput{}
@@ -49,8 +51,12 @@ type UpdateMonitorInput struct {
 	// The list of health score thresholds. A threshold percentage for health scores,
 	// along with other configuration information, determines when Internet Monitor
 	// creates a health event when there's an internet issue that affects your
-	// application end users. For more information, see Change health event thresholds (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-IM-overview.html#IMUpdateThresholdFromOverview)
-	// in the Internet Monitor section of the CloudWatch User Guide.
+	// application end users.
+	//
+	// For more information, see [Change health event thresholds] in the Internet Monitor section of the CloudWatch
+	// User Guide.
+	//
+	// [Change health event thresholds]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch-IM-overview.html#IMUpdateThresholdFromOverview
 	HealthEventsConfig *types.HealthEventsConfig
 
 	// Publish internet measurements for Internet Monitor to another location, such as
@@ -67,12 +73,15 @@ type UpdateMonitorInput struct {
 
 	// The resources to include in a monitor, which you provide as a set of Amazon
 	// Resource Names (ARNs). Resources can be VPCs, NLBs, Amazon CloudFront
-	// distributions, or Amazon WorkSpaces directories. You can add a combination of
-	// VPCs and CloudFront distributions, or you can add WorkSpaces directories, or you
-	// can add NLBs. You can't add NLBs or WorkSpaces directories together with any
-	// other resources. If you add only Amazon Virtual Private Clouds resources, at
-	// least one VPC must have an Internet Gateway attached to it, to make sure that it
-	// has internet connectivity.
+	// distributions, or Amazon WorkSpaces directories.
+	//
+	// You can add a combination of VPCs and CloudFront distributions, or you can add
+	// WorkSpaces directories, or you can add NLBs. You can't add NLBs or WorkSpaces
+	// directories together with any other resources.
+	//
+	// If you add only Amazon Virtual Private Clouds resources, at least one VPC must
+	// have an Internet Gateway attached to it, to make sure that it has internet
+	// connectivity.
 	ResourcesToAdd []string
 
 	// The resources to remove from a monitor, which you provide as a set of Amazon
@@ -86,9 +95,12 @@ type UpdateMonitorInput struct {
 
 	// The percentage of the internet-facing traffic for your application that you
 	// want to monitor with this monitor. If you set a city-networks maximum, that
-	// limit overrides the traffic percentage that you set. To learn more, see
-	// Choosing an application traffic percentage to monitor  (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/IMTrafficPercentage.html)
-	// in the Amazon CloudWatch Internet Monitor section of the CloudWatch User Guide.
+	// limit overrides the traffic percentage that you set.
+	//
+	// To learn more, see [Choosing an application traffic percentage to monitor] in the Amazon CloudWatch Internet Monitor section of the
+	// CloudWatch User Guide.
+	//
+	// [Choosing an application traffic percentage to monitor]: https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/IMTrafficPercentage.html
 	TrafficPercentageToMonitor *int32
 
 	noSmithyDocumentSerde
@@ -134,25 +146,25 @@ func (c *Client) addOperationUpdateMonitorMiddlewares(stack *middleware.Stack, o
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -167,6 +179,9 @@ func (c *Client) addOperationUpdateMonitorMiddlewares(stack *middleware.Stack, o
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opUpdateMonitorMiddleware(stack, options); err != nil {
 		return err
 	}
@@ -176,7 +191,7 @@ func (c *Client) addOperationUpdateMonitorMiddlewares(stack *middleware.Stack, o
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateMonitor(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

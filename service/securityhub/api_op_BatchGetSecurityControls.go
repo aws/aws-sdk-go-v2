@@ -6,13 +6,13 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/securityhub/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Provides details about a batch of security controls for the current Amazon Web
+//	Provides details about a batch of security controls for the current Amazon Web
+//
 // Services account and Amazon Web Services Region.
 func (c *Client) BatchGetSecurityControls(ctx context.Context, params *BatchGetSecurityControlsInput, optFns ...func(*Options)) (*BatchGetSecurityControlsOutput, error) {
 	if params == nil {
@@ -31,7 +31,7 @@ func (c *Client) BatchGetSecurityControls(ctx context.Context, params *BatchGetS
 
 type BatchGetSecurityControlsInput struct {
 
-	// A list of security controls (identified with SecurityControlId ,
+	//  A list of security controls (identified with SecurityControlId ,
 	// SecurityControlArn , or a mix of both parameters). The security control ID or
 	// Amazon Resource Name (ARN) is the same across standards.
 	//
@@ -43,14 +43,14 @@ type BatchGetSecurityControlsInput struct {
 
 type BatchGetSecurityControlsOutput struct {
 
-	// An array that returns the identifier, Amazon Resource Name (ARN), and other
+	//  An array that returns the identifier, Amazon Resource Name (ARN), and other
 	// details about a security control. The same information is returned whether the
 	// request includes SecurityControlId or SecurityControlArn .
 	//
 	// This member is required.
 	SecurityControls []types.SecurityControl
 
-	// A security control (identified with SecurityControlId , SecurityControlArn , or
+	//  A security control (identified with SecurityControlId , SecurityControlArn , or
 	// a mix of both parameters) for which details cannot be returned.
 	UnprocessedIds []types.UnprocessedSecurityControl
 
@@ -82,25 +82,25 @@ func (c *Client) addOperationBatchGetSecurityControlsMiddlewares(stack *middlewa
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -115,13 +115,16 @@ func (c *Client) addOperationBatchGetSecurityControlsMiddlewares(stack *middlewa
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpBatchGetSecurityControlsValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opBatchGetSecurityControls(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

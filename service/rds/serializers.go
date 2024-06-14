@@ -8078,6 +8078,70 @@ func (m *awsAwsquery_serializeOpModifyGlobalCluster) HandleSerialize(ctx context
 	return next.HandleSerialize(ctx, in)
 }
 
+type awsAwsquery_serializeOpModifyIntegration struct {
+}
+
+func (*awsAwsquery_serializeOpModifyIntegration) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsquery_serializeOpModifyIntegration) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*ModifyIntegrationInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	operationPath := "/"
+	if len(request.Request.URL.Path) == 0 {
+		request.Request.URL.Path = operationPath
+	} else {
+		request.Request.URL.Path = path.Join(request.Request.URL.Path, operationPath)
+		if request.Request.URL.Path != "/" && operationPath[len(operationPath)-1] == '/' {
+			request.Request.URL.Path += "/"
+		}
+	}
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-www-form-urlencoded")
+
+	bodyWriter := bytes.NewBuffer(nil)
+	bodyEncoder := query.NewEncoder(bodyWriter)
+	body := bodyEncoder.Object()
+	body.Key("Action").String("ModifyIntegration")
+	body.Key("Version").String("2014-10-31")
+
+	if err := awsAwsquery_serializeOpDocumentModifyIntegrationInput(input, bodyEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	err = bodyEncoder.Encode()
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(bodyWriter.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
 type awsAwsquery_serializeOpModifyOptionGroup struct {
 }
 
@@ -11535,6 +11599,11 @@ func awsAwsquery_serializeOpDocumentCreateDBClusterInput(v *CreateDBClusterInput
 		objectKey.Integer(*v.BackupRetentionPeriod)
 	}
 
+	if v.CACertificateIdentifier != nil {
+		objectKey := object.Key("CACertificateIdentifier")
+		objectKey.String(*v.CACertificateIdentifier)
+	}
+
 	if v.CharacterSetName != nil {
 		objectKey := object.Key("CharacterSetName")
 		objectKey.String(*v.CharacterSetName)
@@ -11635,6 +11704,11 @@ func awsAwsquery_serializeOpDocumentCreateDBClusterInput(v *CreateDBClusterInput
 	if v.Engine != nil {
 		objectKey := object.Key("Engine")
 		objectKey.String(*v.Engine)
+	}
+
+	if v.EngineLifecycleSupport != nil {
+		objectKey := object.Key("EngineLifecycleSupport")
+		objectKey.String(*v.EngineLifecycleSupport)
 	}
 
 	if v.EngineMode != nil {
@@ -12003,6 +12077,11 @@ func awsAwsquery_serializeOpDocumentCreateDBInstanceInput(v *CreateDBInstanceInp
 		objectKey.String(*v.Engine)
 	}
 
+	if v.EngineLifecycleSupport != nil {
+		objectKey := object.Key("EngineLifecycleSupport")
+		objectKey.String(*v.EngineLifecycleSupport)
+	}
+
 	if v.EngineVersion != nil {
 		objectKey := object.Key("EngineVersion")
 		objectKey.String(*v.EngineVersion)
@@ -12189,6 +12268,11 @@ func awsAwsquery_serializeOpDocumentCreateDBInstanceReadReplicaInput(v *CreateDB
 	if v.AvailabilityZone != nil {
 		objectKey := object.Key("AvailabilityZone")
 		objectKey.String(*v.AvailabilityZone)
+	}
+
+	if v.CACertificateIdentifier != nil {
+		objectKey := object.Key("CACertificateIdentifier")
+		objectKey.String(*v.CACertificateIdentifier)
 	}
 
 	if v.CopyTagsToSnapshot != nil {
@@ -12742,6 +12826,11 @@ func awsAwsquery_serializeOpDocumentCreateGlobalClusterInput(v *CreateGlobalClus
 		objectKey.String(*v.Engine)
 	}
 
+	if v.EngineLifecycleSupport != nil {
+		objectKey := object.Key("EngineLifecycleSupport")
+		objectKey.String(*v.EngineLifecycleSupport)
+	}
+
 	if v.EngineVersion != nil {
 		objectKey := object.Key("EngineVersion")
 		objectKey.String(*v.EngineVersion)
@@ -12774,6 +12863,16 @@ func awsAwsquery_serializeOpDocumentCreateIntegrationInput(v *CreateIntegrationI
 		if err := awsAwsquery_serializeDocumentEncryptionContextMap(v.AdditionalEncryptionContext, objectKey); err != nil {
 			return err
 		}
+	}
+
+	if v.DataFilter != nil {
+		objectKey := object.Key("DataFilter")
+		objectKey.String(*v.DataFilter)
+	}
+
+	if v.Description != nil {
+		objectKey := object.Key("Description")
+		objectKey.String(*v.Description)
 	}
 
 	if v.IntegrationName != nil {
@@ -15043,6 +15142,11 @@ func awsAwsquery_serializeOpDocumentModifyDBClusterInput(v *ModifyDBClusterInput
 		objectKey.Integer(*v.BackupRetentionPeriod)
 	}
 
+	if v.CACertificateIdentifier != nil {
+		objectKey := object.Key("CACertificateIdentifier")
+		objectKey.String(*v.CACertificateIdentifier)
+	}
+
 	if v.CloudwatchLogsExportConfiguration != nil {
 		objectKey := object.Key("CloudwatchLogsExportConfiguration")
 		if err := awsAwsquery_serializeDocumentCloudwatchLogsExportConfiguration(v.CloudwatchLogsExportConfiguration, objectKey); err != nil {
@@ -15926,6 +16030,33 @@ func awsAwsquery_serializeOpDocumentModifyGlobalClusterInput(v *ModifyGlobalClus
 	return nil
 }
 
+func awsAwsquery_serializeOpDocumentModifyIntegrationInput(v *ModifyIntegrationInput, value query.Value) error {
+	object := value.Object()
+	_ = object
+
+	if v.DataFilter != nil {
+		objectKey := object.Key("DataFilter")
+		objectKey.String(*v.DataFilter)
+	}
+
+	if v.Description != nil {
+		objectKey := object.Key("Description")
+		objectKey.String(*v.Description)
+	}
+
+	if v.IntegrationIdentifier != nil {
+		objectKey := object.Key("IntegrationIdentifier")
+		objectKey.String(*v.IntegrationIdentifier)
+	}
+
+	if v.IntegrationName != nil {
+		objectKey := object.Key("IntegrationName")
+		objectKey.String(*v.IntegrationName)
+	}
+
+	return nil
+}
+
 func awsAwsquery_serializeOpDocumentModifyOptionGroupInput(v *ModifyOptionGroupInput, value query.Value) error {
 	object := value.Object()
 	_ = object
@@ -16347,6 +16478,11 @@ func awsAwsquery_serializeOpDocumentRestoreDBClusterFromS3Input(v *RestoreDBClus
 		objectKey.String(*v.Engine)
 	}
 
+	if v.EngineLifecycleSupport != nil {
+		objectKey := object.Key("EngineLifecycleSupport")
+		objectKey.String(*v.EngineLifecycleSupport)
+	}
+
 	if v.EngineVersion != nil {
 		objectKey := object.Key("EngineVersion")
 		objectKey.String(*v.EngineVersion)
@@ -16539,6 +16675,11 @@ func awsAwsquery_serializeOpDocumentRestoreDBClusterFromSnapshotInput(v *Restore
 		objectKey.String(*v.Engine)
 	}
 
+	if v.EngineLifecycleSupport != nil {
+		objectKey := object.Key("EngineLifecycleSupport")
+		objectKey.String(*v.EngineLifecycleSupport)
+	}
+
 	if v.EngineMode != nil {
 		objectKey := object.Key("EngineMode")
 		objectKey.String(*v.EngineMode)
@@ -16688,6 +16829,11 @@ func awsAwsquery_serializeOpDocumentRestoreDBClusterToPointInTimeInput(v *Restor
 		objectKey.Boolean(*v.EnableIAMDatabaseAuthentication)
 	}
 
+	if v.EngineLifecycleSupport != nil {
+		objectKey := object.Key("EngineLifecycleSupport")
+		objectKey.String(*v.EngineLifecycleSupport)
+	}
+
 	if v.EngineMode != nil {
 		objectKey := object.Key("EngineMode")
 		objectKey.String(*v.EngineMode)
@@ -16815,6 +16961,11 @@ func awsAwsquery_serializeOpDocumentRestoreDBInstanceFromDBSnapshotInput(v *Rest
 		objectKey.String(*v.BackupTarget)
 	}
 
+	if v.CACertificateIdentifier != nil {
+		objectKey := object.Key("CACertificateIdentifier")
+		objectKey.String(*v.CACertificateIdentifier)
+	}
+
 	if v.CopyTagsToSnapshot != nil {
 		objectKey := object.Key("CopyTagsToSnapshot")
 		objectKey.Boolean(*v.CopyTagsToSnapshot)
@@ -16922,6 +17073,11 @@ func awsAwsquery_serializeOpDocumentRestoreDBInstanceFromDBSnapshotInput(v *Rest
 	if v.Engine != nil {
 		objectKey := object.Key("Engine")
 		objectKey.String(*v.Engine)
+	}
+
+	if v.EngineLifecycleSupport != nil {
+		objectKey := object.Key("EngineLifecycleSupport")
+		objectKey.String(*v.EngineLifecycleSupport)
 	}
 
 	if v.Iops != nil {
@@ -17032,6 +17188,11 @@ func awsAwsquery_serializeOpDocumentRestoreDBInstanceFromS3Input(v *RestoreDBIns
 		objectKey.Integer(*v.BackupRetentionPeriod)
 	}
 
+	if v.CACertificateIdentifier != nil {
+		objectKey := object.Key("CACertificateIdentifier")
+		objectKey.String(*v.CACertificateIdentifier)
+	}
+
 	if v.CopyTagsToSnapshot != nil {
 		objectKey := object.Key("CopyTagsToSnapshot")
 		objectKey.Boolean(*v.CopyTagsToSnapshot)
@@ -17099,6 +17260,11 @@ func awsAwsquery_serializeOpDocumentRestoreDBInstanceFromS3Input(v *RestoreDBIns
 	if v.Engine != nil {
 		objectKey := object.Key("Engine")
 		objectKey.String(*v.Engine)
+	}
+
+	if v.EngineLifecycleSupport != nil {
+		objectKey := object.Key("EngineLifecycleSupport")
+		objectKey.String(*v.EngineLifecycleSupport)
 	}
 
 	if v.EngineVersion != nil {
@@ -17294,6 +17460,11 @@ func awsAwsquery_serializeOpDocumentRestoreDBInstanceToPointInTimeInput(v *Resto
 		objectKey.String(*v.BackupTarget)
 	}
 
+	if v.CACertificateIdentifier != nil {
+		objectKey := object.Key("CACertificateIdentifier")
+		objectKey.String(*v.CACertificateIdentifier)
+	}
+
 	if v.CopyTagsToSnapshot != nil {
 		objectKey := object.Key("CopyTagsToSnapshot")
 		objectKey.Boolean(*v.CopyTagsToSnapshot)
@@ -17386,6 +17557,11 @@ func awsAwsquery_serializeOpDocumentRestoreDBInstanceToPointInTimeInput(v *Resto
 	if v.Engine != nil {
 		objectKey := object.Key("Engine")
 		objectKey.String(*v.Engine)
+	}
+
+	if v.EngineLifecycleSupport != nil {
+		objectKey := object.Key("EngineLifecycleSupport")
+		objectKey.String(*v.EngineLifecycleSupport)
 	}
 
 	if v.Iops != nil {

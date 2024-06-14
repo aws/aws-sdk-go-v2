@@ -6,26 +6,36 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a list of environmental variables in an API by its ID value. When
-// creating an environmental variable, it must follow the constraints below:
+// Creates a list of environmental variables in an API by its ID value.
+//
+// When creating an environmental variable, it must follow the constraints below:
+//
 //   - Both JavaScript and VTL templates support environmental variables.
+//
 //   - Environmental variables are not evaluated before function invocation.
+//
 //   - Environmental variables only support string values.
+//
 //   - Any defined value in an environmental variable is considered a string
 //     literal and not expanded.
+//
 //   - Variable evaluations should ideally be performed in the function code.
 //
 // When creating an environmental variable key-value pair, it must follow the
 // additional constraints below:
+//
 //   - Keys must begin with a letter.
+//
 //   - Keys must be at least two characters long.
+//
 //   - Keys can only contain letters, numbers, and the underscore character (_).
+//
 //   - Values can be up to 512 characters long.
+//
 //   - You can configure up to 50 key-value pairs in a GraphQL API.
 //
 // You can create a list of environmental variables by adding it to the
@@ -58,14 +68,21 @@ type PutGraphqlApiEnvironmentVariablesInput struct {
 	// This member is required.
 	ApiId *string
 
-	// The list of environmental variables to add to the API. When creating an
-	// environmental variable key-value pair, it must follow the additional constraints
-	// below:
+	// The list of environmental variables to add to the API.
+	//
+	// When creating an environmental variable key-value pair, it must follow the
+	// additional constraints below:
+	//
 	//   - Keys must begin with a letter.
+	//
 	//   - Keys must be at least two characters long.
+	//
 	//   - Keys can only contain letters, numbers, and the underscore character (_).
+	//
 	//   - Values can be up to 512 characters long.
+	//
 	//   - You can configure up to 50 key-value pairs in a GraphQL API.
+	//
 	// You can create a list of environmental variables by adding it to the
 	// environmentVariables payload as a list in the format
 	// {"key1":"value1","key2":"value2", …} . Note that each call of the
@@ -115,25 +132,25 @@ func (c *Client) addOperationPutGraphqlApiEnvironmentVariablesMiddlewares(stack 
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -148,13 +165,16 @@ func (c *Client) addOperationPutGraphqlApiEnvironmentVariablesMiddlewares(stack 
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpPutGraphqlApiEnvironmentVariablesValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opPutGraphqlApiEnvironmentVariables(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

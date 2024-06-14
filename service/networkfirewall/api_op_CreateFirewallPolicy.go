@@ -6,13 +6,13 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/networkfirewall/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates the firewall policy for the firewall according to the specifications.
+//
 // An Network Firewall firewall policy defines the behavior of a firewall, in a
 // collection of stateless and stateful rule groups and other settings. You can use
 // one firewall policy for multiple firewalls.
@@ -48,13 +48,17 @@ type CreateFirewallPolicyInput struct {
 	Description *string
 
 	// Indicates whether you want Network Firewall to just check the validity of the
-	// request, rather than run the request. If set to TRUE , Network Firewall checks
-	// whether the request can run successfully, but doesn't actually make the
-	// requested changes. The call returns the value that the request would return if
-	// you ran it with dry run set to FALSE , but doesn't make additions or changes to
-	// your resources. This option allows you to make sure that you have the required
-	// permissions to run the request and that your request parameters are valid. If
-	// set to FALSE , Network Firewall makes the requested changes to your resources.
+	// request, rather than run the request.
+	//
+	// If set to TRUE , Network Firewall checks whether the request can run
+	// successfully, but doesn't actually make the requested changes. The call returns
+	// the value that the request would return if you ran it with dry run set to FALSE
+	// , but doesn't make additions or changes to your resources. This option allows
+	// you to make sure that you have the required permissions to run the request and
+	// that your request parameters are valid.
+	//
+	// If set to FALSE , Network Firewall makes the requested changes to your
+	// resources.
 	DryRun bool
 
 	// A complex type that contains settings for encryption of your firewall policy
@@ -69,22 +73,22 @@ type CreateFirewallPolicyInput struct {
 
 type CreateFirewallPolicyOutput struct {
 
-	// The high-level properties of a firewall policy. This, along with the
-	// FirewallPolicy , define the policy. You can retrieve all objects for a firewall
-	// policy by calling DescribeFirewallPolicy .
+	// The high-level properties of a firewall policy. This, along with the FirewallPolicy, define
+	// the policy. You can retrieve all objects for a firewall policy by calling DescribeFirewallPolicy.
 	//
 	// This member is required.
 	FirewallPolicyResponse *types.FirewallPolicyResponse
 
 	// A token used for optimistic locking. Network Firewall returns a token to your
 	// requests that access the firewall policy. The token marks the state of the
-	// policy resource at the time of the request. To make changes to the policy, you
-	// provide the token in your request. Network Firewall uses the token to ensure
-	// that the policy hasn't changed since you last retrieved it. If it has changed,
-	// the operation fails with an InvalidTokenException . If this happens, retrieve
-	// the firewall policy again to get a current copy of it with current token.
-	// Reapply your changes as needed, then try the operation again using the new
-	// token.
+	// policy resource at the time of the request.
+	//
+	// To make changes to the policy, you provide the token in your request. Network
+	// Firewall uses the token to ensure that the policy hasn't changed since you last
+	// retrieved it. If it has changed, the operation fails with an
+	// InvalidTokenException . If this happens, retrieve the firewall policy again to
+	// get a current copy of it with current token. Reapply your changes as needed,
+	// then try the operation again using the new token.
 	//
 	// This member is required.
 	UpdateToken *string
@@ -117,25 +121,25 @@ func (c *Client) addOperationCreateFirewallPolicyMiddlewares(stack *middleware.S
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -150,13 +154,16 @@ func (c *Client) addOperationCreateFirewallPolicyMiddlewares(stack *middleware.S
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpCreateFirewallPolicyValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateFirewallPolicy(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

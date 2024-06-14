@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -14,9 +13,10 @@ import (
 
 // Remove the association between your Autonomous System Number (ASN) and your
 // BYOIP CIDR. You may want to use this action to disassociate an ASN from a CIDR
-// or if you want to swap ASNs. For more information, see Tutorial: Bring your ASN
-// to IPAM (https://docs.aws.amazon.com/vpc/latest/ipam/tutorials-byoasn.html) in
-// the Amazon VPC IPAM guide.
+// or if you want to swap ASNs. For more information, see [Tutorial: Bring your ASN to IPAM]in the Amazon VPC IPAM
+// guide.
+//
+// [Tutorial: Bring your ASN to IPAM]: https://docs.aws.amazon.com/vpc/latest/ipam/tutorials-byoasn.html
 func (c *Client) DisassociateIpamByoasn(ctx context.Context, params *DisassociateIpamByoasnInput, optFns ...func(*Options)) (*DisassociateIpamByoasnOutput, error) {
 	if params == nil {
 		params = &DisassociateIpamByoasnInput{}
@@ -86,25 +86,25 @@ func (c *Client) addOperationDisassociateIpamByoasnMiddlewares(stack *middleware
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -119,13 +119,16 @@ func (c *Client) addOperationDisassociateIpamByoasnMiddlewares(stack *middleware
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDisassociateIpamByoasnValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDisassociateIpamByoasn(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

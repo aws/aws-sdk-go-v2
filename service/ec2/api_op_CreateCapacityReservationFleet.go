@@ -6,16 +6,16 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
-// Creates a Capacity Reservation Fleet. For more information, see Create a
-// Capacity Reservation Fleet (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/work-with-cr-fleets.html#create-crfleet)
-// in the Amazon EC2 User Guide.
+// Creates a Capacity Reservation Fleet. For more information, see [Create a Capacity Reservation Fleet] in the Amazon
+// EC2 User Guide.
+//
+// [Create a Capacity Reservation Fleet]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/work-with-cr-fleets.html#create-crfleet
 func (c *Client) CreateCapacityReservationFleet(ctx context.Context, params *CreateCapacityReservationFleetInput, optFns ...func(*Options)) (*CreateCapacityReservationFleetOutput, error) {
 	if params == nil {
 		params = &CreateCapacityReservationFleetInput{}
@@ -42,21 +42,26 @@ type CreateCapacityReservationFleetInput struct {
 	// Fleet. This value, together with the instance type weights that you assign to
 	// each instance type used by the Fleet determine the number of instances for which
 	// the Fleet reserves capacity. Both values are based on units that make sense for
-	// your workload. For more information, see Total target capacity (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/crfleet-concepts.html#target-capacity)
-	// in the Amazon EC2 User Guide.
+	// your workload. For more information, see [Total target capacity]in the Amazon EC2 User Guide.
+	//
+	// [Total target capacity]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/crfleet-concepts.html#target-capacity
 	//
 	// This member is required.
 	TotalTargetCapacity *int32
 
 	// The strategy used by the Capacity Reservation Fleet to determine which of the
 	// specified instance types to use. Currently, only the prioritized allocation
-	// strategy is supported. For more information, see Allocation strategy (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/crfleet-concepts.html#allocation-strategy)
-	// in the Amazon EC2 User Guide. Valid values: prioritized
+	// strategy is supported. For more information, see [Allocation strategy]in the Amazon EC2 User Guide.
+	//
+	// Valid values: prioritized
+	//
+	// [Allocation strategy]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/crfleet-concepts.html#allocation-strategy
 	AllocationStrategy *string
 
 	// Unique, case-sensitive identifier that you provide to ensure the idempotency of
-	// the request. For more information, see Ensure Idempotency (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html)
-	// .
+	// the request. For more information, see [Ensure Idempotency].
+	//
+	// [Ensure Idempotency]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
 	ClientToken *string
 
 	// Checks whether you have the required permissions for the action, without
@@ -67,19 +72,22 @@ type CreateCapacityReservationFleetInput struct {
 
 	// The date and time at which the Capacity Reservation Fleet expires. When the
 	// Capacity Reservation Fleet expires, its state changes to expired and all of the
-	// Capacity Reservations in the Fleet expire. The Capacity Reservation Fleet
-	// expires within an hour after the specified time. For example, if you specify
-	// 5/31/2019 , 13:30:55 , the Capacity Reservation Fleet is guaranteed to expire
-	// between 13:30:55 and 14:30:55 on 5/31/2019 .
+	// Capacity Reservations in the Fleet expire.
+	//
+	// The Capacity Reservation Fleet expires within an hour after the specified time.
+	// For example, if you specify 5/31/2019 , 13:30:55 , the Capacity Reservation
+	// Fleet is guaranteed to expire between 13:30:55 and 14:30:55 on 5/31/2019 .
 	EndDate *time.Time
 
 	// Indicates the type of instance launches that the Capacity Reservation Fleet
 	// accepts. All Capacity Reservations in the Fleet inherit this instance matching
-	// criteria. Currently, Capacity Reservation Fleets support open instance matching
-	// criteria only. This means that instances that have matching attributes (instance
-	// type, platform, and Availability Zone) run in the Capacity Reservations
-	// automatically. Instances do not need to explicitly target a Capacity Reservation
-	// Fleet to use its reserved capacity.
+	// criteria.
+	//
+	// Currently, Capacity Reservation Fleets support open instance matching criteria
+	// only. This means that instances that have matching attributes (instance type,
+	// platform, and Availability Zone) run in the Capacity Reservations automatically.
+	// Instances do not need to explicitly target a Capacity Reservation Fleet to use
+	// its reserved capacity.
 	InstanceMatchCriteria types.FleetInstanceMatchCriteria
 
 	// The tags to assign to the Capacity Reservation Fleet. The tags are
@@ -89,8 +97,10 @@ type CreateCapacityReservationFleetInput struct {
 	// Indicates the tenancy of the Capacity Reservation Fleet. All Capacity
 	// Reservations in the Fleet inherit this tenancy. The Capacity Reservation Fleet
 	// can have one of the following tenancy settings:
+	//
 	//   - default - The Capacity Reservation Fleet is created on hardware that is
 	//   shared with other Amazon Web Services accounts.
+	//
 	//   - dedicated - The Capacity Reservations are created on single-tenant hardware
 	//   that is dedicated to a single Amazon Web Services account.
 	Tenancy types.FleetCapacityReservationTenancy
@@ -163,25 +173,25 @@ func (c *Client) addOperationCreateCapacityReservationFleetMiddlewares(stack *mi
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -196,6 +206,9 @@ func (c *Client) addOperationCreateCapacityReservationFleetMiddlewares(stack *mi
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opCreateCapacityReservationFleetMiddleware(stack, options); err != nil {
 		return err
 	}
@@ -205,7 +218,7 @@ func (c *Client) addOperationCreateCapacityReservationFleetMiddlewares(stack *mi
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateCapacityReservationFleet(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

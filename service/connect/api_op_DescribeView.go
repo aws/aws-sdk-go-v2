@@ -6,20 +6,23 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/connect/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Retrieves the view for the specified Amazon Connect instance and view
-// identifier. The view identifier can be supplied as a ViewId or ARN. $SAVED
-// needs to be supplied if a view is unpublished. The view identifier can contain
-// an optional qualifier, for example, :$SAVED , which is either an actual version
-// number or an Amazon Connect managed qualifier $SAVED | $LATEST . If it is not
-// supplied, then $LATEST is assumed for customer managed views and an error is
-// returned if there is no published content available. Version 1 is assumed for
-// Amazon Web Services managed views.
+// identifier.
+//
+// The view identifier can be supplied as a ViewId or ARN.
+//
+// $SAVED needs to be supplied if a view is unpublished.
+//
+// The view identifier can contain an optional qualifier, for example, :$SAVED ,
+// which is either an actual version number or an Amazon Connect managed qualifier
+// $SAVED | $LATEST . If it is not supplied, then $LATEST is assumed for customer
+// managed views and an error is returned if there is no published content
+// available. Version 1 is assumed for Amazon Web Services managed views.
 func (c *Client) DescribeView(ctx context.Context, params *DescribeViewInput, optFns ...func(*Options)) (*DescribeViewOutput, error) {
 	if params == nil {
 		params = &DescribeViewInput{}
@@ -85,25 +88,25 @@ func (c *Client) addOperationDescribeViewMiddlewares(stack *middleware.Stack, op
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -118,13 +121,16 @@ func (c *Client) addOperationDescribeViewMiddlewares(stack *middleware.Stack, op
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDescribeViewValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeView(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

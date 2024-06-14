@@ -6,24 +6,26 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/ecs/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes the specified capacity provider. The FARGATE and FARGATE_SPOT capacity
-// providers are reserved and can't be deleted. You can disassociate them from a
-// cluster using either the PutClusterCapacityProviders API or by deleting the
-// cluster. Prior to a capacity provider being deleted, the capacity provider must
-// be removed from the capacity provider strategy from all services. The
-// UpdateService API can be used to remove a capacity provider from a service's
-// capacity provider strategy. When updating a service, the forceNewDeployment
-// option can be used to ensure that any tasks using the Amazon EC2 instance
-// capacity provided by the capacity provider are transitioned to use the capacity
-// from the remaining capacity providers. Only capacity providers that aren't
-// associated with a cluster can be deleted. To remove a capacity provider from a
-// cluster, you can either use PutClusterCapacityProviders or delete the cluster.
+// Deletes the specified capacity provider.
+//
+// The FARGATE and FARGATE_SPOT capacity providers are reserved and can't be
+// deleted. You can disassociate them from a cluster using either the PutClusterCapacityProvidersAPI or by
+// deleting the cluster.
+//
+// Prior to a capacity provider being deleted, the capacity provider must be
+// removed from the capacity provider strategy from all services. The UpdateServiceAPI can be
+// used to remove a capacity provider from a service's capacity provider strategy.
+// When updating a service, the forceNewDeployment option can be used to ensure
+// that any tasks using the Amazon EC2 instance capacity provided by the capacity
+// provider are transitioned to use the capacity from the remaining capacity
+// providers. Only capacity providers that aren't associated with a cluster can be
+// deleted. To remove a capacity provider from a cluster, you can either use PutClusterCapacityProvidersor
+// delete the cluster.
 func (c *Client) DeleteCapacityProvider(ctx context.Context, params *DeleteCapacityProviderInput, optFns ...func(*Options)) (*DeleteCapacityProviderOutput, error) {
 	if params == nil {
 		params = &DeleteCapacityProviderInput{}
@@ -83,25 +85,25 @@ func (c *Client) addOperationDeleteCapacityProviderMiddlewares(stack *middleware
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -116,13 +118,16 @@ func (c *Client) addOperationDeleteCapacityProviderMiddlewares(stack *middleware
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDeleteCapacityProviderValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteCapacityProvider(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

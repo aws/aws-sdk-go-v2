@@ -6,21 +6,24 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/workmailmessageflow/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates the raw content of an in-transit email message, in MIME format. This
-// example describes how to update in-transit email message. For more information
-// and examples for using this API, see Updating message content with AWS Lambda (https://docs.aws.amazon.com/workmail/latest/adminguide/update-with-lambda.html)
-// . Updates to an in-transit message only appear when you call
-// PutRawMessageContent from an AWS Lambda function configured with a synchronous
-// Run Lambda (https://docs.aws.amazon.com/workmail/latest/adminguide/lambda.html#synchronous-rules)
-// rule. If you call PutRawMessageContent on a delivered or sent message, the
-// message remains unchanged, even though GetRawMessageContent (https://docs.aws.amazon.com/workmail/latest/APIReference/API_messageflow_GetRawMessageContent.html)
-// returns an updated message.
+// Updates the raw content of an in-transit email message, in MIME format.
+//
+// This example describes how to update in-transit email message. For more
+// information and examples for using this API, see [Updating message content with AWS Lambda].
+//
+// Updates to an in-transit message only appear when you call PutRawMessageContent
+// from an AWS Lambda function configured with a synchronous [Run Lambda]rule. If you call
+// PutRawMessageContent on a delivered or sent message, the message remains
+// unchanged, even though [GetRawMessageContent]returns an updated message.
+//
+// [GetRawMessageContent]: https://docs.aws.amazon.com/workmail/latest/APIReference/API_messageflow_GetRawMessageContent.html
+// [Run Lambda]: https://docs.aws.amazon.com/workmail/latest/adminguide/lambda.html#synchronous-rules
+// [Updating message content with AWS Lambda]: https://docs.aws.amazon.com/workmail/latest/adminguide/update-with-lambda.html
 func (c *Client) PutRawMessageContent(ctx context.Context, params *PutRawMessageContentInput, optFns ...func(*Options)) (*PutRawMessageContentOutput, error) {
 	if params == nil {
 		params = &PutRawMessageContentInput{}
@@ -80,25 +83,25 @@ func (c *Client) addOperationPutRawMessageContentMiddlewares(stack *middleware.S
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -113,13 +116,16 @@ func (c *Client) addOperationPutRawMessageContentMiddlewares(stack *middleware.S
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpPutRawMessageContentValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opPutRawMessageContent(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

@@ -6,27 +6,37 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Describes your account's Reserved Instance listings in the Reserved Instance
-// Marketplace. The Reserved Instance Marketplace matches sellers who want to
-// resell Reserved Instance capacity that they no longer need with buyers who want
-// to purchase additional capacity. Reserved Instances bought and sold through the
-// Reserved Instance Marketplace work like any other Reserved Instances. As a
-// seller, you choose to list some or all of your Reserved Instances, and you
+// Marketplace.
+//
+// The Reserved Instance Marketplace matches sellers who want to resell Reserved
+// Instance capacity that they no longer need with buyers who want to purchase
+// additional capacity. Reserved Instances bought and sold through the Reserved
+// Instance Marketplace work like any other Reserved Instances.
+//
+// As a seller, you choose to list some or all of your Reserved Instances, and you
 // specify the upfront price to receive for them. Your Reserved Instances are then
-// listed in the Reserved Instance Marketplace and are available for purchase. As a
-// buyer, you specify the configuration of the Reserved Instance to purchase, and
-// the Marketplace matches what you're searching for with what's available. The
+// listed in the Reserved Instance Marketplace and are available for purchase.
+//
+// As a buyer, you specify the configuration of the Reserved Instance to purchase,
+// and the Marketplace matches what you're searching for with what's available. The
 // Marketplace first sells the lowest priced Reserved Instances to you, and
 // continues to sell available Reserved Instance listings to you until your demand
 // is met. You are charged based on the total price of all of the listings that you
-// purchase. For more information, see Reserved Instance Marketplace (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ri-market-general.html)
-// in the Amazon EC2 User Guide.
+// purchase.
+//
+// For more information, see [Sell in the Reserved Instance Marketplace] in the Amazon EC2 User Guide.
+//
+// The order of the elements in the response, including those within nested
+// structures, might vary. Applications should not assume the elements appear in a
+// particular order.
+//
+// [Sell in the Reserved Instance Marketplace]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ri-market-general.html
 func (c *Client) DescribeReservedInstancesListings(ctx context.Context, params *DescribeReservedInstancesListingsInput, optFns ...func(*Options)) (*DescribeReservedInstancesListingsOutput, error) {
 	if params == nil {
 		params = &DescribeReservedInstancesListingsInput{}
@@ -46,10 +56,14 @@ func (c *Client) DescribeReservedInstancesListings(ctx context.Context, params *
 type DescribeReservedInstancesListingsInput struct {
 
 	// One or more filters.
+	//
 	//   - reserved-instances-id - The ID of the Reserved Instances.
+	//
 	//   - reserved-instances-listing-id - The ID of the Reserved Instances listing.
+	//
 	//   - status - The status of the Reserved Instance listing ( pending | active |
 	//   cancelled | closed ).
+	//
 	//   - status-message - The reason for the status.
 	Filters []types.Filter
 
@@ -96,25 +110,25 @@ func (c *Client) addOperationDescribeReservedInstancesListingsMiddlewares(stack 
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -129,10 +143,13 @@ func (c *Client) addOperationDescribeReservedInstancesListingsMiddlewares(stack 
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeReservedInstancesListings(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

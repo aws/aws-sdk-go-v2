@@ -195,31 +195,51 @@ type AnalyticsBinKey struct {
 //	operator
 //
 // values . For example:
+//
 //   - IntentName CO Book – The intent name contains the string "Book."
+//
 //   - BotVersion EQ 2 – The bot version is equal to two.
 //
 // The operators that each filter supports are listed below:
+//
 //   - BotAlias – EQ .
+//
 //   - BotVersion – EQ .
+//
 //   - LocaleId – EQ .
+//
 //   - Modality – EQ .
+//
 //   - Channel – EQ .
+//
 //   - SessionId – EQ .
+//
 //   - OriginatingRequestId – EQ .
+//
 //   - IntentName – EQ , CO .
+//
 //   - IntentEndState – EQ , CO .
 type AnalyticsIntentFilter struct {
 
 	// The category by which to filter the intents. The descriptions for each option
 	// are as follows:
+	//
 	//   - BotAlias – The name of the bot alias.
+	//
 	//   - BotVersion – The version of the bot.
+	//
 	//   - LocaleId – The locale of the bot.
+	//
 	//   - Modality – The modality of the session with the bot (audio, DTMF, or text).
+	//
 	//   - Channel – The channel that the bot is integrated with.
+	//
 	//   - SessionId – The identifier of the session with the bot.
+	//
 	//   - OriginatingRequestId – The identifier of the first request in a session.
+	//
 	//   - IntentName – The name of the intent.
+	//
 	//   - IntentEndState – The final state of the intent.
 	//
 	// This member is required.
@@ -227,19 +247,33 @@ type AnalyticsIntentFilter struct {
 
 	// The operation by which to filter the category. The following operations are
 	// possible:
+	//
 	//   - CO – Contains
+	//
 	//   - EQ – Equals
+	//
 	//   - GT – Greater than
+	//
 	//   - LT – Less than
+	//
 	// The operators that each filter supports are listed below:
+	//
 	//   - BotAlias – EQ .
+	//
 	//   - BotVersion – EQ .
+	//
 	//   - LocaleId – EQ .
+	//
 	//   - Modality – EQ .
+	//
 	//   - Channel – EQ .
+	//
 	//   - SessionId – EQ .
+	//
 	//   - OriginatingRequestId – EQ .
+	//
 	//   - IntentName – EQ , CO .
+	//
 	//   - IntentEndState – EQ , CO .
 	//
 	// This member is required.
@@ -287,19 +321,27 @@ type AnalyticsIntentGroupBySpecification struct {
 type AnalyticsIntentMetric struct {
 
 	// The metric for which you want to get intent summary statistics.
+	//
 	//   - Count – The number of times the intent was invoked.
+	//
 	//   - Success – The number of times the intent succeeded.
+	//
 	//   - Failure – The number of times the intent failed.
+	//
 	//   - Switched – The number of times there was a switch to a different intent.
+	//
 	//   - Dropped – The number of times the user dropped the intent.
 	//
 	// This member is required.
 	Name AnalyticsIntentMetricName
 
 	// The summary statistic to calculate.
+	//
 	//   - Sum – The total count for the category you provide in name .
+	//
 	//   - Average – The total count divided by the number of intents in the category
 	//   you provide in name .
+	//
 	//   - Max – The highest count in the category you provide in name .
 	//
 	// This member is required.
@@ -314,19 +356,28 @@ type AnalyticsIntentMetric struct {
 // An object containing the results for the intent metric you requested.
 type AnalyticsIntentMetricResult struct {
 
-	// The metric that you requested. See Key definitions (https://docs.aws.amazon.com/lexv2/latest/dg/analytics-key-definitions.html)
-	// for more details about these metrics.
+	// The metric that you requested. See [Key definitions] for more details about these metrics.
+	//
 	//   - Count – The number of times the intent was invoked.
+	//
 	//   - Success – The number of times the intent succeeded.
+	//
 	//   - Failure – The number of times the intent failed.
+	//
 	//   - Switched – The number of times there was a switch to a different intent.
+	//
 	//   - Dropped – The number of times the user dropped the intent.
+	//
+	// [Key definitions]: https://docs.aws.amazon.com/lexv2/latest/dg/analytics-key-definitions.html
 	Name AnalyticsIntentMetricName
 
 	// The statistic that you requested to calculate.
+	//
 	//   - Sum – The total count for the category you provide in name .
+	//
 	//   - Average – The total count divided by the number of intents in the category
 	//   you provide in name .
+	//
 	//   - Max – The highest count in the category you provide in name .
 	Statistic AnalyticsMetricStatistic
 
@@ -383,31 +434,51 @@ type AnalyticsIntentResult struct {
 //	operator
 //
 // values . For example:
+//
 //   - IntentName CO Book – The intent name contains the string "Book."
+//
 //   - BotVersion EQ 2 – The bot version is equal to two.
 //
 // The operators that each filter supports are listed below:
+//
 //   - BotAlias – EQ .
+//
 //   - BotVersion – EQ .
+//
 //   - LocaleId – EQ .
+//
 //   - Modality – EQ .
+//
 //   - Channel – EQ .
+//
 //   - SessionId – EQ .
+//
 //   - OriginatingRequestId – EQ .
+//
 //   - IntentName – EQ , CO .
+//
 //   - IntentStageName – EQ , CO .
 type AnalyticsIntentStageFilter struct {
 
 	// The category by which to filter the intent stages. The descriptions for each
 	// option are as follows:
+	//
 	//   - BotAlias – The name of the bot alias.
+	//
 	//   - BotVersion – The version of the bot.
+	//
 	//   - LocaleId – The locale of the bot.
+	//
 	//   - Modality – The modality of the session with the bot (audio, DTMF, or text).
+	//
 	//   - Channel – The channel that the bot is integrated with.
+	//
 	//   - SessionId – The identifier of the session with the bot.
+	//
 	//   - OriginatingRequestId – The identifier of the first request in a session.
+	//
 	//   - IntentName – The name of the intent.
+	//
 	//   - IntentStageName – The stage in the intent.
 	//
 	// This member is required.
@@ -415,19 +486,33 @@ type AnalyticsIntentStageFilter struct {
 
 	// The operation by which to filter the category. The following operations are
 	// possible:
+	//
 	//   - CO – Contains
+	//
 	//   - EQ – Equals
+	//
 	//   - GT – Greater than
+	//
 	//   - LT – Less than
+	//
 	// The operators that each filter supports are listed below:
+	//
 	//   - BotAlias – EQ .
+	//
 	//   - BotVersion – EQ .
+	//
 	//   - LocaleId – EQ .
+	//
 	//   - Modality – EQ .
+	//
 	//   - Channel – EQ .
+	//
 	//   - SessionId – EQ .
+	//
 	//   - OriginatingRequestId – EQ .
+	//
 	//   - IntentName – EQ , CO .
+	//
 	//   - IntentStageName – EQ , CO .
 	//
 	// This member is required.
@@ -476,23 +561,32 @@ type AnalyticsIntentStageGroupBySpecification struct {
 // sessions with the bot.
 type AnalyticsIntentStageMetric struct {
 
-	// The metric for which you want to get intent stage summary statistics. See Key
-	// definitions (https://docs.aws.amazon.com/lexv2/latest/dg/analytics-key-definitions.html)
-	// for more details about these metrics.
+	// The metric for which you want to get intent stage summary statistics. See [Key definitions] for
+	// more details about these metrics.
+	//
 	//   - Count – The number of times the intent stage occurred.
+	//
 	//   - Success – The number of times the intent stage succeeded.
+	//
 	//   - Failure – The number of times the intent stage failed.
+	//
 	//   - Dropped – The number of times the user dropped the intent stage.
+	//
 	//   - Retry – The number of times the bot tried to elicit a response from the user
 	//   at this stage.
+	//
+	// [Key definitions]: https://docs.aws.amazon.com/lexv2/latest/dg/analytics-key-definitions.html
 	//
 	// This member is required.
 	Name AnalyticsIntentStageMetricName
 
 	// The summary statistic to calculate.
+	//
 	//   - Sum – The total count for the category you provide in name .
+	//
 	//   - Average – The total count divided by the number of intent stages in the
 	//   category you provide in name .
+	//
 	//   - Max – The highest count in the category you provide in name .
 	//
 	// This member is required.
@@ -509,18 +603,26 @@ type AnalyticsIntentStageMetric struct {
 type AnalyticsIntentStageMetricResult struct {
 
 	// The metric that you requested.
+	//
 	//   - Count – The number of times the intent stage occurred.
+	//
 	//   - Success – The number of times the intent stage succeeded.
+	//
 	//   - Failure – The number of times the intent stage failed.
+	//
 	//   - Dropped – The number of times the user dropped the intent stage.
+	//
 	//   - Retry – The number of times the bot tried to elicit a response from the user
 	//   at this stage.
 	Name AnalyticsIntentStageMetricName
 
 	// The summary statistic that you requested to calculate.
+	//
 	//   - Sum – The total count for the category you provide in name .
+	//
 	//   - Average – The total count divided by the number of intent stages in the
 	//   category you provide in name .
+	//
 	//   - Max – The highest count in the category you provide in name .
 	Statistic AnalyticsMetricStatistic
 
@@ -556,23 +658,35 @@ type AnalyticsIntentStageResult struct {
 //	operator
 //
 // values . For example:
+//
 //   - LocaleId EQ en – The locale is "en".
+//
 //   - BotVersion EQ 2 – The bot version is equal to two.
 //
 // The operators that each filter supports are listed below:
+//
 //   - BotAlias – EQ .
+//
 //   - BotVersion – EQ .
+//
 //   - LocaleId – EQ .
+//
 //   - Modality – EQ .
+//
 //   - Channel – EQ .
 type AnalyticsPathFilter struct {
 
 	// The category by which to filter the intent paths. The descriptions for each
 	// option are as follows:
+	//
 	//   - BotAlias – The name of the bot alias.
+	//
 	//   - BotVersion – The version of the bot.
+	//
 	//   - LocaleId – The locale of the bot.
+	//
 	//   - Modality – The modality of the session with the bot (audio, DTMF, or text).
+	//
 	//   - Channel – The channel that the bot is integrated with.
 	//
 	// This member is required.
@@ -580,15 +694,25 @@ type AnalyticsPathFilter struct {
 
 	// The operation by which to filter the category. The following operations are
 	// possible:
+	//
 	//   - CO – Contains
+	//
 	//   - EQ – Equals
+	//
 	//   - GT – Greater than
+	//
 	//   - LT – Less than
+	//
 	// The operators that each filter supports are listed below:
+	//
 	//   - BotAlias – EQ .
+	//
 	//   - BotVersion – EQ .
+	//
 	//   - LocaleId – EQ .
+	//
 	//   - Modality – EQ .
+	//
 	//   - Channel – EQ .
 	//
 	// This member is required.
@@ -613,33 +737,55 @@ type AnalyticsPathFilter struct {
 //	operator
 //
 // values . For example:
+//
 //   - LocaleId EQ en – The locale is "en".
+//
 //   - Duration GT 200 – The duration is greater than 200 seconds.
 //
 // The operators that each filter supports are listed below:
+//
 //   - BotAlias – EQ .
+//
 //   - BotVersion – EQ .
+//
 //   - LocaleId – EQ .
+//
 //   - Modality – EQ .
+//
 //   - Channel – EQ .
+//
 //   - Duration – EQ , GT , LT .
+//
 //   - conversationEndState – EQ , CO .
+//
 //   - SessionId – EQ .
+//
 //   - OriginatingRequestId – EQ .
+//
 //   - IntentPath – EQ .
 type AnalyticsSessionFilter struct {
 
 	// The category by which to filter the sessions. The descriptions for each option
 	// are as follows:
+	//
 	//   - BotAlias – The name of the bot alias.
+	//
 	//   - BotVersion – The version of the bot.
+	//
 	//   - LocaleId – The locale of the bot.
+	//
 	//   - Modality – The modality of the session with the bot (audio, DTMF, or text).
+	//
 	//   - Channel – The channel that the bot is integrated with.
+	//
 	//   - Duration – The duration of the session.
+	//
 	//   - conversationEndState – The final state of the session.
+	//
 	//   - SessionId – The identifier of the session with the bot.
+	//
 	//   - OriginatingRequestId – The identifier of the first request in a session.
+	//
 	//   - IntentPath – The order of intents taken in a session.
 	//
 	// This member is required.
@@ -647,20 +793,35 @@ type AnalyticsSessionFilter struct {
 
 	// The operation by which to filter the category. The following operations are
 	// possible:
+	//
 	//   - CO – Contains
+	//
 	//   - EQ – Equals
+	//
 	//   - GT – Greater than
+	//
 	//   - LT – Less than
+	//
 	// The operators that each filter supports are listed below:
+	//
 	//   - BotAlias – EQ .
+	//
 	//   - BotVersion – EQ .
+	//
 	//   - LocaleId – EQ .
+	//
 	//   - Modality – EQ .
+	//
 	//   - Channel – EQ .
+	//
 	//   - Duration – EQ , GT , LT .
+	//
 	//   - conversationEndState – EQ , CO .
+	//
 	//   - SessionId – EQ .
+	//
 	//   - OriginatingRequestId – EQ .
+	//
 	//   - IntentPath – EQ .
 	//
 	// This member is required.
@@ -708,21 +869,31 @@ type AnalyticsSessionGroupBySpecification struct {
 type AnalyticsSessionMetric struct {
 
 	// The metric for which you want to get session summary statistics.
+	//
 	//   - Count – The number of sessions.
+	//
 	//   - Success – The number of sessions that succeeded.
+	//
 	//   - Failure – The number of sessions that failed.
+	//
 	//   - Dropped – The number of sessions that the user dropped.
+	//
 	//   - Duration – The duration of sessions.
+	//
 	//   - TurnsPerSession – The number of turns in the sessions.
+	//
 	//   - Concurrency – The number of sessions occurring in the same period of time.
 	//
 	// This member is required.
 	Name AnalyticsSessionMetricName
 
 	// The summary statistic to calculate.
+	//
 	//   - Sum – The total count for the category you provide in name .
+	//
 	//   - Average – The total count divided by the number of sessions in the category
 	//   you provide in name .
+	//
 	//   - Max – The highest count in the category you provide in name .
 	//
 	// This member is required.
@@ -738,19 +909,29 @@ type AnalyticsSessionMetric struct {
 type AnalyticsSessionMetricResult struct {
 
 	// The metric that you requested.
+	//
 	//   - Count – The number of sessions.
+	//
 	//   - Success – The number of sessions that succeeded.
+	//
 	//   - Failure – The number of sessions that failed.
+	//
 	//   - Dropped – The number of sessions that the user dropped.
+	//
 	//   - Duration – The duration of sessions.
+	//
 	//   - TurnPersession – The number of turns in the sessions.
+	//
 	//   - Concurrency – The number of sessions occurring in the same period of time.
 	Name AnalyticsSessionMetricName
 
 	// The summary statistic that you requested to calculate.
+	//
 	//   - Sum – The total count for the category you provide in name .
+	//
 	//   - Average – The total count divided by the number of sessions in the category
 	//   you provide in name .
+	//
 	//   - Max – The highest count in the category you provide in name .
 	Statistic AnalyticsMetricStatistic
 
@@ -808,32 +989,51 @@ type AnalyticsUtteranceAttributeResult struct {
 //	operator
 //
 // values . For example:
+//
 //   - LocaleId EQ Book – The locale is the string "en".
-//   - UtteranceText CO help – The text of the utterance contains the string
-//     "help".
+//
+//   - UtteranceText CO help – The text of the utterance contains the string "help".
 //
 // The operators that each filter supports are listed below:
+//
 //   - BotAlias – EQ .
+//
 //   - BotVersion – EQ .
+//
 //   - LocaleId – EQ .
+//
 //   - Modality – EQ .
+//
 //   - Channel – EQ .
+//
 //   - SessionId – EQ .
+//
 //   - OriginatingRequestId – EQ .
+//
 //   - UtteranceState – EQ .
+//
 //   - UtteranceText – EQ , CO .
 type AnalyticsUtteranceFilter struct {
 
 	// The category by which to filter the utterances. The descriptions for each
 	// option are as follows:
+	//
 	//   - BotAlias – The name of the bot alias.
+	//
 	//   - BotVersion – The version of the bot.
+	//
 	//   - LocaleId – The locale of the bot.
+	//
 	//   - Modality – The modality of the session with the bot (audio, DTMF, or text).
+	//
 	//   - Channel – The channel that the bot is integrated with.
+	//
 	//   - SessionId – The identifier of the session with the bot.
+	//
 	//   - OriginatingRequestId – The identifier of the first request in a session.
+	//
 	//   - UtteranceState – The state of the utterance.
+	//
 	//   - UtteranceText – The text in the utterance.
 	//
 	// This member is required.
@@ -841,19 +1041,33 @@ type AnalyticsUtteranceFilter struct {
 
 	// The operation by which to filter the category. The following operations are
 	// possible:
+	//
 	//   - CO – Contains
+	//
 	//   - EQ – Equals
+	//
 	//   - GT – Greater than
+	//
 	//   - LT – Less than
+	//
 	// The operators that each filter supports are listed below:
+	//
 	//   - BotAlias – EQ .
+	//
 	//   - BotVersion – EQ .
+	//
 	//   - LocaleId – EQ .
+	//
 	//   - Modality – EQ .
+	//
 	//   - Channel – EQ .
+	//
 	//   - SessionId – EQ .
+	//
 	//   - OriginatingRequestId – EQ .
+	//
 	//   - UtteranceState – EQ .
+	//
 	//   - UtteranceText – EQ , CO .
 	//
 	// This member is required.
@@ -902,18 +1116,25 @@ type AnalyticsUtteranceGroupBySpecification struct {
 type AnalyticsUtteranceMetric struct {
 
 	// The metric for which you want to get utterance summary statistics.
+	//
 	//   - Count – The number of utterances.
+	//
 	//   - Missed – The number of utterances that Amazon Lex failed to recognize.
+	//
 	//   - Detected – The number of utterances that Amazon Lex managed to detect.
+	//
 	//   - UtteranceTimestamp – The date and time of the utterance.
 	//
 	// This member is required.
 	Name AnalyticsUtteranceMetricName
 
 	// The summary statistic to calculate.
+	//
 	//   - Sum – The total count for the category you provide in name .
+	//
 	//   - Average – The total count divided by the number of utterances in the
 	//   category you provide in name .
+	//
 	//   - Max – The highest count in the category you provide in name .
 	//
 	// This member is required.
@@ -929,16 +1150,23 @@ type AnalyticsUtteranceMetric struct {
 type AnalyticsUtteranceMetricResult struct {
 
 	// The metric that you requested.
+	//
 	//   - Count – The number of utterances.
+	//
 	//   - Missed – The number of utterances that Amazon Lex failed to recognize.
+	//
 	//   - Detected – The number of utterances that Amazon Lex managed to detect.
+	//
 	//   - UtteranceTimestamp – The date and time of the utterance.
 	Name AnalyticsUtteranceMetricName
 
 	// The summary statistic that you requested to calculate.
+	//
 	//   - Sum – The total count for the category you provide in name .
+	//
 	//   - Average – The total count divided by the number of utterances in the
 	//   category you provide in name .
+	//
 	//   - Max – The highest count in the category you provide in name .
 	Statistic AnalyticsMetricStatistic
 
@@ -977,8 +1205,9 @@ type AnalyticsUtteranceResult struct {
 type AssociatedTranscript struct {
 
 	// The content of the transcript that meets the search filter criteria. For the
-	// JSON format of the transcript, see Output transcript format (https://docs.aws.amazon.com/lexv2/latest/dg/designing-output-format.html)
-	// .
+	// JSON format of the transcript, see [Output transcript format].
+	//
+	// [Output transcript format]: https://docs.aws.amazon.com/lexv2/latest/dg/designing-output-format.html
 	Transcript *string
 
 	noSmithyDocumentSerde
@@ -1024,8 +1253,10 @@ type AudioAndDTMFInputSpecification struct {
 type AudioLogDestination struct {
 
 	// The Amazon S3 bucket where the audio log files are stored. The IAM role
-	// specified in the roleArn parameter of the CreateBot (https://docs.aws.amazon.com/lexv2/latest/APIReference/API_CreateBot.html)
-	// operation must have permission to write to this bucket.
+	// specified in the roleArn parameter of the [CreateBot] operation must have permission to
+	// write to this bucket.
+	//
+	// [CreateBot]: https://docs.aws.amazon.com/lexv2/latest/APIReference/API_CreateBot.html
 	//
 	// This member is required.
 	S3Bucket *S3BucketLogDestination
@@ -1069,6 +1300,17 @@ type AudioSpecification struct {
 	//
 	// This member is required.
 	MaxLengthMs *int32
+
+	noSmithyDocumentSerde
+}
+
+// Contains details about the configuration of a Amazon Bedrock knowledge base.
+type BedrockKnowledgeStoreConfiguration struct {
+
+	// The ARN of the knowledge base used.
+	//
+	// This member is required.
+	BedrockKnowledgeBaseArn *string
 
 	noSmithyDocumentSerde
 }
@@ -1142,13 +1384,15 @@ type BotAliasReplicaSummary struct {
 	noSmithyDocumentSerde
 }
 
-// Summary information about bot aliases returned from the ListBotAliases (https://docs.aws.amazon.com/lexv2/latest/APIReference/API_ListBotAliases.html)
-// operation.
+// Summary information about bot aliases returned from the [ListBotAliases] operation.
+//
+// [ListBotAliases]: https://docs.aws.amazon.com/lexv2/latest/APIReference/API_ListBotAliases.html
 type BotAliasSummary struct {
 
 	// The unique identifier assigned to the bot alias. You can use this ID to get
-	// detailed information about the alias using the DescribeBotAlias (https://docs.aws.amazon.com/lexv2/latest/APIReference/API_DescribeBotAlias.html)
-	// operation.
+	// detailed information about the alias using the [DescribeBotAlias]operation.
+	//
+	// [DescribeBotAlias]: https://docs.aws.amazon.com/lexv2/latest/APIReference/API_DescribeBotAlias.html
 	BotAliasId *string
 
 	// The name of the bot alias.
@@ -1260,10 +1504,13 @@ type BotImportSpecification struct {
 	BotTags map[string]string
 
 	// The time, in seconds, that Amazon Lex should keep information about a user's
-	// conversation with the bot. A user interaction remains active for the amount of
-	// time specified. If no conversation occurs during this time, the session expires
-	// and Amazon Lex deletes any data provided before the timeout. You can specify
-	// between 60 (1 minute) and 86,400 (24 hours) seconds.
+	// conversation with the bot.
+	//
+	// A user interaction remains active for the amount of time specified. If no
+	// conversation occurs during this time, the session expires and Amazon Lex deletes
+	// any data provided before the timeout.
+	//
+	// You can specify between 60 (1 minute) and 86,400 (24 hours) seconds.
 	IdleSessionTTLInSeconds *int32
 
 	// A list of tags to add to the test alias for a bot. You can only add tags when
@@ -1352,9 +1599,9 @@ type BotLocaleImportSpecification struct {
 
 	// The identifier of the language and locale that the bot will be used in. The
 	// string must match one of the supported locales. All of the intents, slot types,
-	// and slots used in the bot must have the same locale. For more information, see
-	// Supported languages (https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html)
-	// .
+	// and slots used in the bot must have the same locale. For more information, see [Supported languages].
+	//
+	// [Supported languages]: https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html
 	//
 	// This member is required.
 	LocaleId *string
@@ -1362,14 +1609,19 @@ type BotLocaleImportSpecification struct {
 	// Determines the threshold where Amazon Lex will insert the AMAZON.FallbackIntent
 	// , AMAZON.KendraSearchIntent , or both when returning alternative intents.
 	// AMAZON.FallbackIntent and AMAZON.KendraSearchIntent are only inserted if they
-	// are configured for the bot. For example, suppose a bot is configured with the
-	// confidence threshold of 0.80 and the AMAZON.FallbackIntent . Amazon Lex returns
-	// three alternative intents with the following confidence scores: IntentA (0.70),
-	// IntentB (0.60), IntentC (0.50). The response from the PostText operation would
-	// be:
+	// are configured for the bot.
+	//
+	// For example, suppose a bot is configured with the confidence threshold of 0.80
+	// and the AMAZON.FallbackIntent . Amazon Lex returns three alternative intents
+	// with the following confidence scores: IntentA (0.70), IntentB (0.60), IntentC
+	// (0.50). The response from the PostText operation would be:
+	//
 	//   - AMAZON.FallbackIntent
+	//
 	//   - IntentA
+	//
 	//   - IntentB
+	//
 	//   - IntentC
 	NluIntentConfidenceThreshold *float64
 
@@ -1395,8 +1647,9 @@ type BotLocaleSortBy struct {
 	noSmithyDocumentSerde
 }
 
-// Summary information about bot locales returned by the ListBotLocales (https://docs.aws.amazon.com/lexv2/latest/APIReference/API_ListBotLocales.html)
-// operation.
+// Summary information about bot locales returned by the [ListBotLocales] operation.
+//
+// [ListBotLocales]: https://docs.aws.amazon.com/lexv2/latest/APIReference/API_ListBotLocales.html
 type BotLocaleSummary struct {
 
 	// The current status of the bot locale. When the status is Built the locale is
@@ -1491,8 +1744,10 @@ type BotRecommendationSummary struct {
 	// This member is required.
 	BotRecommendationId *string
 
-	// The status of the bot recommendation. If the status is Failed, then the reasons
-	// for the failure are listed in the failureReasons field.
+	// The status of the bot recommendation.
+	//
+	// If the status is Failed, then the reasons for the failure are listed in the
+	// failureReasons field.
 	//
 	// This member is required.
 	BotRecommendationStatus BotRecommendationStatus
@@ -1541,13 +1796,15 @@ type BotSortBy struct {
 	noSmithyDocumentSerde
 }
 
-// Summary information about a bot returned by the ListBots (https://docs.aws.amazon.com/lexv2/latest/APIReference/API_ListBots.html)
-// operation.
+// Summary information about a bot returned by the [ListBots] operation.
+//
+// [ListBots]: https://docs.aws.amazon.com/lexv2/latest/APIReference/API_ListBots.html
 type BotSummary struct {
 
 	// The unique identifier assigned to the bot. Use this ID to get detailed
-	// information about the bot with the DescribeBot (https://docs.aws.amazon.com/lexv2/latest/APIReference/API_DescribeBot.html)
-	// operation.
+	// information about the bot with the [DescribeBot]operation.
+	//
+	// [DescribeBot]: https://docs.aws.amazon.com/lexv2/latest/APIReference/API_DescribeBot.html
 	BotId *string
 
 	// The name of the bot.
@@ -1636,8 +1893,9 @@ type BotVersionSortBy struct {
 	noSmithyDocumentSerde
 }
 
-// Summary information about a bot version returned by the ListBotVersions (https://docs.aws.amazon.com/lexv2/latest/APIReference/API_ListBotVersions.html)
-// operation.
+// Summary information about a bot version returned by the [ListBotVersions] operation.
+//
+// [ListBotVersions]: https://docs.aws.amazon.com/lexv2/latest/APIReference/API_ListBotVersions.html
 type BotVersionSummary struct {
 
 	// The name of the bot associated with the version.
@@ -1689,9 +1947,9 @@ type BuiltInIntentSortBy struct {
 	noSmithyDocumentSerde
 }
 
-// Provides summary information about a built-in intent for the
-// ListBuiltInIntents  (https://docs.aws.amazon.com/lexv2/latest/APIReference/API_ListBuiltInIntents.html)
-// operation.
+// Provides summary information about a built-in intent for the [ListBuiltInIntents] operation.
+//
+// [ListBuiltInIntents]: https://docs.aws.amazon.com/lexv2/latest/APIReference/API_ListBuiltInIntents.html
 type BuiltInIntentSummary struct {
 
 	// The description of the intent.
@@ -1720,9 +1978,9 @@ type BuiltInSlotTypeSortBy struct {
 	noSmithyDocumentSerde
 }
 
-// Provides summary information about a built-in slot type for the
-// ListBuiltInSlotTypes  (https://docs.aws.amazon.com/lexv2/latest/APIReference/API_ListBuiltInSlotTypes.html)
-// operation.
+// Provides summary information about a built-in slot type for the [ListBuiltInSlotTypes] operation.
+//
+// [ListBuiltInSlotTypes]: https://docs.aws.amazon.com/lexv2/latest/APIReference/API_ListBuiltInSlotTypes.html
 type BuiltInSlotTypeSummary struct {
 
 	// The description of the built-in slot type.
@@ -2141,11 +2399,40 @@ type DataPrivacy struct {
 	// part, to children under age 13, you must obtain any required verifiable parental
 	// consent under COPPA. For information regarding the use of Amazon Lex in
 	// connection with websites, programs, or other applications that are directed or
-	// targeted, in whole or in part, to children under age 13, see the Amazon Lex FAQ (http://aws.amazon.com/lex/faqs#data-security)
-	// .
+	// targeted, in whole or in part, to children under age 13, see the [Amazon Lex FAQ].
+	//
+	// [Amazon Lex FAQ]: http://aws.amazon.com/lex/faqs#data-security
 	//
 	// This member is required.
 	ChildDirected bool
+
+	noSmithyDocumentSerde
+}
+
+// Contains details about the configuration of the knowledge store used for the
+// AMAZON.QnAIntent . You must have already created the knowledge store and indexed
+// the documents within it.
+type DataSourceConfiguration struct {
+
+	// Contains details about the configuration of the Amazon Bedrock knowledge base
+	// used for the AMAZON.QnAIntent . To set up a knowledge base, follow the steps at [Building a knowledge base]
+	// .
+	//
+	// [Building a knowledge base]: https://docs.aws.amazon.com/bedrock/latest/userguide/knowledge-base.html
+	BedrockKnowledgeStoreConfiguration *BedrockKnowledgeStoreConfiguration
+
+	// Contains details about the configuration of the Amazon Kendra index used for
+	// the AMAZON.QnAIntent . To create a Amazon Kendra index, follow the steps at [Creating an index].
+	//
+	// [Creating an index]: https://docs.aws.amazon.com/kendra/latest/dg/create-index.html
+	KendraConfiguration *QnAKendraConfiguration
+
+	// Contains details about the configuration of the Amazon OpenSearch Service
+	// database used for the AMAZON.QnAIntent . To create a domain, follow the steps at [Creating and managing Amazon OpenSearch Service domains]
+	// .
+	//
+	// [Creating and managing Amazon OpenSearch Service domains]: https://docs.aws.amazon.com/opensearch-service/latest/developerguide/createupdatedomains.html
+	OpensearchConfiguration *OpensearchConfiguration
 
 	noSmithyDocumentSerde
 }
@@ -2334,6 +2621,24 @@ type EncryptionSetting struct {
 	noSmithyDocumentSerde
 }
 
+// Contains the names of the fields used for an exact response to the user.
+type ExactResponseFields struct {
+
+	// The name of the field that contains the answer to the query made to the
+	// OpenSearch Service database.
+	//
+	// This member is required.
+	AnswerField *string
+
+	// The name of the field that contains the query made to the OpenSearch Service
+	// database.
+	//
+	// This member is required.
+	QuestionField *string
+
+	noSmithyDocumentSerde
+}
+
 // Details about an error in an execution of a test set.
 type ExecutionErrorDetails struct {
 
@@ -2350,8 +2655,9 @@ type ExecutionErrorDetails struct {
 	noSmithyDocumentSerde
 }
 
-// Filters the response form the ListExports (https://docs.aws.amazon.com/lexv2/latest/APIReference/API_ListExports.html)
-// operation
+// Filters the response form the [ListExports] operation
+//
+// [ListExports]: https://docs.aws.amazon.com/lexv2/latest/APIReference/API_ListExports.html
 type ExportFilter struct {
 
 	// The name of the field to use for filtering.
@@ -2542,8 +2848,10 @@ type FulfillmentUpdateResponseSpecification struct {
 type FulfillmentUpdatesSpecification struct {
 
 	// Determines whether fulfillment updates are sent to the user. When this field is
-	// true, updates are sent. If the active field is set to true, the startResponse ,
-	// updateResponse , and timeoutInSeconds fields are required.
+	// true, updates are sent.
+	//
+	// If the active field is set to true, the startResponse , updateResponse , and
+	// timeoutInSeconds fields are required.
 	//
 	// This member is required.
 	Active *bool
@@ -2569,7 +2877,9 @@ type GenerationSortBy struct {
 
 	// The attribute by which to sort the generation request information. You can sort
 	// by the following attributes.
+	//
 	//   - creationStartTime – The time at which the generation request was created.
+	//
 	//   - lastUpdatedTime – The time at which the generation request was last updated.
 	//
 	// This member is required.
@@ -2646,9 +2956,10 @@ type GrammarSlotTypeSource struct {
 }
 
 // A card that is shown to the user by a messaging platform. You define the
-// contents of the card, the card is displayed by the platform. When you use a
-// response card, the response from the user is constrained to the text associated
-// with a button on the card.
+// contents of the card, the card is displayed by the platform.
+//
+// When you use a response card, the response from the user is constrained to the
+// text associated with a button on the card.
 type ImageResponseCard struct {
 
 	// The title to display on the response card. The format of the title is
@@ -2674,8 +2985,9 @@ type ImageResponseCard struct {
 	noSmithyDocumentSerde
 }
 
-// Filters the response from the ListImports (https://docs.aws.amazon.com/lexv2/latest/APIReference/API_ListImports.html)
-// operation.
+// Filters the response from the [ListImports] operation.
+//
+// [ListImports]: https://docs.aws.amazon.com/lexv2/latest/APIReference/API_ListImports.html
 type ImportFilter struct {
 
 	// The name of the field to use for filtering.
@@ -2902,9 +3214,11 @@ type IntentClosingSetting struct {
 type IntentConfirmationSetting struct {
 
 	// Prompts the user to confirm the intent. This question should have a yes or no
-	// answer. Amazon Lex uses this prompt to ensure that the user acknowledges that
-	// the intent is ready for fulfillment. For example, with the OrderPizza intent,
-	// you might want to confirm that the order is correct before placing it. For other
+	// answer.
+	//
+	// Amazon Lex uses this prompt to ensure that the user acknowledges that the
+	// intent is ready for fulfillment. For example, with the OrderPizza intent, you
+	// might want to confirm that the order is correct before placing it. For other
 	// intents, such as intents that simply respond to user questions, you might not
 	// need to ask the user for confirmation before providing the information.
 	//
@@ -3113,8 +3427,9 @@ type KendraConfiguration struct {
 
 	// A query filter that Amazon Lex sends to Amazon Kendra to filter the response
 	// from a query. The filter is in the format defined by Amazon Kendra. For more
-	// information, see Filtering queries (https://docs.aws.amazon.com/kendra/latest/dg/filtering.html)
-	// .
+	// information, see [Filtering queries].
+	//
+	// [Filtering queries]: https://docs.aws.amazon.com/kendra/latest/dg/filtering.html
 	QueryFilterString *string
 
 	// Determines whether the AMAZON.KendraSearchIntent intent uses a custom query
@@ -3193,10 +3508,12 @@ type MultipleValuesSetting struct {
 
 	// Indicates whether a slot can return multiple values. When true , the slot may
 	// return more than one value in a response. When false , the slot returns only a
-	// single value. Multi-value slots are only available in the en-US locale. If you
-	// set this value to true in any other locale, Amazon Lex throws a
-	// ValidationException . If the allowMutlipleValues is not set, the default value
-	// is false .
+	// single value.
+	//
+	// Multi-value slots are only available in the en-US locale. If you set this value
+	// to true in any other locale, Amazon Lex throws a ValidationException .
+	//
+	// If the allowMutlipleValues is not set, the default value is false .
 	AllowMultipleValues bool
 
 	noSmithyDocumentSerde
@@ -3230,6 +3547,34 @@ type ObfuscationSetting struct {
 	//
 	// This member is required.
 	ObfuscationSettingType ObfuscationSettingType
+
+	noSmithyDocumentSerde
+}
+
+// Contains details about the configuration of the Amazon OpenSearch Service
+// database used for the AMAZON.QnAIntent .
+type OpensearchConfiguration struct {
+
+	// The endpoint of the Amazon OpenSearch Service domain.
+	//
+	// This member is required.
+	DomainEndpoint *string
+
+	// The name of the Amazon OpenSearch Service index.
+	//
+	// This member is required.
+	IndexName *string
+
+	// Specifies whether to return an exact response or to return an answer generated
+	// by the model using the fields you specify from the database.
+	ExactResponse bool
+
+	// Contains the names of the fields used for an exact response to the user.
+	ExactResponseFields *ExactResponseFields
+
+	// Contains a list of fields from the Amazon OpenSearch Service that the model can
+	// use to generate the answer to the query.
+	IncludeFields []string
 
 	noSmithyDocumentSerde
 }
@@ -3374,8 +3719,9 @@ type PostDialogCodeHookInvocationSpecification struct {
 }
 
 // Provides a setting that determines whether the post-fulfillment response is
-// sent to the user. For more information, see
-// https://docs.aws.amazon.com/lexv2/latest/dg/streaming-progress.html#progress-complete (https://docs.aws.amazon.com/lexv2/latest/dg/streaming-progress.html#progress-complete)
+// sent to the user. For more information, see [https://docs.aws.amazon.com/lexv2/latest/dg/streaming-progress.html#progress-complete]
+//
+// [https://docs.aws.amazon.com/lexv2/latest/dg/streaming-progress.html#progress-complete]: https://docs.aws.amazon.com/lexv2/latest/dg/streaming-progress.html#progress-complete
 type PostFulfillmentStatusSpecification struct {
 
 	// A list of conditional branches to evaluate after the fulfillment code hook
@@ -3420,8 +3766,9 @@ type PostFulfillmentStatusSpecification struct {
 
 // The IAM principal that you allowing or denying access to an Amazon Lex action.
 // You must provide a service or an arn , but not both in the same statement. For
-// more information, see AWS JSON policy elements: Principal  (https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements_principal.html)
-// .
+// more information, see [AWS JSON policy elements: Principal].
+//
+// [AWS JSON policy elements: Principal]: https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements_principal.html
 type Principal struct {
 
 	// The Amazon Resource Name (ARN) of the principal.
@@ -3482,6 +3829,49 @@ type PromptSpecification struct {
 	noSmithyDocumentSerde
 }
 
+// Details about the the configuration of the built-in Amazon.QnAIntent .
+type QnAIntentConfiguration struct {
+
+	// Contains information about the Amazon Bedrock model used to interpret the
+	// prompt used in descriptive bot building.
+	BedrockModelConfiguration *BedrockModelSpecification
+
+	// Contains details about the configuration of the data source used for the
+	// AMAZON.QnAIntent .
+	DataSourceConfiguration *DataSourceConfiguration
+
+	noSmithyDocumentSerde
+}
+
+// Contains details about the configuration of the Amazon Kendra index used for
+// the AMAZON.QnAIntent .
+type QnAKendraConfiguration struct {
+
+	// The ARN of the Amazon Kendra index to use.
+	//
+	// This member is required.
+	KendraIndex *string
+
+	// Specifies whether to return an exact response from the Amazon Kendra index or
+	// to let the Amazon Bedrock model you select generate a response based on the
+	// results. To use this feature, you must first add FAQ questions to your index by
+	// following the steps at [Adding frequently asked questions (FAQs) to an index].
+	//
+	// [Adding frequently asked questions (FAQs) to an index]: https://docs.aws.amazon.com/kendra/latest/dg/in-creating-faq.html
+	ExactResponse bool
+
+	// Contains the Amazon Kendra filter string to use if enabled. For more
+	// information on the Amazon Kendra search filter JSON format, see [Using document attributes to filter search results].
+	//
+	// [Using document attributes to filter search results]: https://docs.aws.amazon.com/kendra/latest/dg/filtering.html#search-filtering
+	QueryFilterString *string
+
+	// Specifies whether to enable an Amazon Kendra filter string or not.
+	QueryFilterStringEnabled bool
+
+	noSmithyDocumentSerde
+}
+
 // An object that contains a summary of a recommended intent.
 type RecommendedIntentSummary struct {
 
@@ -3503,13 +3893,17 @@ type RecommendedIntentSummary struct {
 // window is always relative to the last time that the that utterances were
 // aggregated. For example, if the ListAggregatedUtterances operation is called at
 // 1600, the time window is set to 1 hour, and the last refresh time was 1530, only
-// utterances made between 1430 and 1530 are returned. You can choose the time
-// window that statistics should be returned for.
+// utterances made between 1430 and 1530 are returned.
+//
+// You can choose the time window that statistics should be returned for.
+//
 //   - Hours - You can request utterance statistics for 1, 3, 6, 12, or 24 hour
 //     time windows. Statistics are refreshed every half hour for 1 hour time windows,
 //     and hourly for the other time windows.
+//
 //   - Days - You can request utterance statistics for 3 days. Statistics are
 //     refreshed every 6 hours.
+//
 //   - Weeks - You can see statistics for one or two weeks. Statistics are
 //     refreshed every 12 hours for one week time windows, and once per day for two
 //     week time windows.
@@ -3522,8 +3916,11 @@ type RelativeAggregationDuration struct {
 
 	// The period of the time window to gather statistics for. The valid value depends
 	// on the setting of the timeDimension field.
+	//
 	//   - Hours - 1/3/6/12/24
+	//
 	//   - Days - 3
+	//
 	//   - Weeks - 1/2
 	//
 	// This member is required.
@@ -3569,17 +3966,25 @@ type RuntimeHintDetails struct {
 // You can provide Amazon Lex with hints to the phrases that a customer is likely
 // to use for a slot. When a slot with hints is resolved, the phrases in the
 // runtime hints are preferred in the resolution. You can provide hints for a
-// maximum of 100 intents. You can provide a maximum of 100 slots. Before you can
-// use runtime hints with an existing bot, you must first rebuild the bot. For more
-// information, see Using runtime hints to improve recognition of slot values (https://docs.aws.amazon.com/lexv2/latest/dg/using-hints.html)
-// .
+// maximum of 100 intents. You can provide a maximum of 100 slots.
+//
+// Before you can use runtime hints with an existing bot, you must first rebuild
+// the bot.
+//
+// For more information, see [Using runtime hints to improve recognition of slot values].
+//
+// [Using runtime hints to improve recognition of slot values]: https://docs.aws.amazon.com/lexv2/latest/dg/using-hints.html
 type RuntimeHints struct {
 
 	// A list of the slots in the intent that should have runtime hints added, and the
-	// phrases that should be added for each slot. The first level of the slotHints
-	// map is the name of the intent. The second level is the name of the slot within
-	// the intent. For more information, see Using hints to improve accuracy (https://docs.aws.amazon.com/lexv2/latest/dg/using-hints.html)
-	// . The intent name and slot name must exist.
+	// phrases that should be added for each slot.
+	//
+	// The first level of the slotHints map is the name of the intent. The second
+	// level is the name of the slot within the intent. For more information, see [Using hints to improve accuracy].
+	//
+	// The intent name and slot name must exist.
+	//
+	// [Using hints to improve accuracy]: https://docs.aws.amazon.com/lexv2/latest/dg/using-hints.html
 	SlotHints map[string]map[string]RuntimeHintDetails
 
 	noSmithyDocumentSerde
@@ -3718,10 +4123,13 @@ type SentimentAnalysisSettings struct {
 type SessionDataSortBy struct {
 
 	// The measure by which to sort the session analytics data.
+	//
 	//   - conversationStartTime – The date and time when the conversation began. A
 	//   conversation is defined as a unique combination of a sessionId and an
 	//   originatingRequestId .
+	//
 	//   - numberOfTurns – The number of turns that the session took.
+	//
 	//   - conversationDurationSeconds – The duration of the conversation in seconds.
 	//
 	// This member is required.
@@ -3770,9 +4178,13 @@ type SessionSpecification struct {
 	LocaleId *string
 
 	// The mode of the session. The possible values are as follows:
+	//
 	//   - Speech – The session was spoken.
+	//
 	//   - Text – The session was written.
+	//
 	//   - DTMF – The session used a touch-tone keypad (Dual Tone Multi-Frequency).
+	//
 	//   - MultiMode – The session used multiple modes.
 	Mode AnalyticsModality
 
@@ -4062,15 +4474,19 @@ type SlotTypeSummary struct {
 	ParentSlotTypeSignature *string
 
 	// Indicates the type of the slot type.
+	//
 	//   - Custom - A slot type that you created using custom values. For more
-	//   information, see Creating custom slot types (https://docs.aws.amazon.com/lexv2/latest/dg/custom-slot-types.html)
-	//   .
+	//   information, see [Creating custom slot types].
+	//
 	//   - Extended - A slot type created by extending the AMAZON.AlphaNumeric built-in
-	//   slot type. For more information, see AMAZON.AlphaNumeric (https://docs.aws.amazon.com/lexv2/latest/dg/built-in-slot-alphanumerice.html)
-	//   .
+	//   slot type. For more information, see [AMAZON.AlphaNumeric]AMAZON.AlphaNumeric .
+	//
 	//   - ExternalGrammar - A slot type using a custom GRXML grammar to define values.
-	//   For more information, see Using a custom grammar slot type (https://docs.aws.amazon.com/lexv2/latest/dg/building-grxml.html)
-	//   .
+	//   For more information, see [Using a custom grammar slot type].
+	//
+	// [AMAZON.AlphaNumeric]: https://docs.aws.amazon.com/lexv2/latest/dg/built-in-slot-alphanumerice.html
+	// [Creating custom slot types]: https://docs.aws.amazon.com/lexv2/latest/dg/custom-slot-types.html
+	// [Using a custom grammar slot type]: https://docs.aws.amazon.com/lexv2/latest/dg/building-grxml.html
 	SlotTypeCategory SlotTypeCategory
 
 	// The unique identifier assigned to the slot type.
@@ -4166,15 +4582,24 @@ type SlotValueOverride struct {
 // Provides a regular expression used to validate the value of a slot.
 type SlotValueRegexFilter struct {
 
-	// A regular expression used to validate the value of a slot. Use a standard
-	// regular expression. Amazon Lex supports the following characters in the regular
-	// expression:
+	// A regular expression used to validate the value of a slot.
+	//
+	// Use a standard regular expression. Amazon Lex supports the following characters
+	// in the regular expression:
+	//
 	//   - A-Z, a-z
+	//
 	//   - 0-9
+	//
 	//   - Unicode characters ("\⁠u")
+	//
 	// Represent Unicode characters with four digits, for example "\⁠u0041" or
-	// "\⁠u005A". The following regular expression operators are not supported:
+	// "\⁠u005A".
+	//
+	// The following regular expression operators are not supported:
+	//
 	//   - Infinite repeaters: *, +, or {x,} with no upper bound.
+	//
 	//   - Wild card (.)
 	//
 	// This member is required.
@@ -4188,11 +4613,14 @@ type SlotValueSelectionSetting struct {
 
 	// Determines the slot resolution strategy that Amazon Lex uses to return slot
 	// type values. The field can be set to one of the following values:
+	//
 	//   - ORIGINAL_VALUE - Returns the value entered by the user, if the user value is
 	//   similar to the slot value.
+	//
 	//   - TOP_RESOLUTION - If there is a resolution list for the slot, return the
 	//   first value in the resolution list as the slot type value. If there is no
 	//   resolution list, null is returned.
+	//
 	// If you don't specify the valueSelectionStrategy , the default is ORIGINAL_VALUE .
 	//
 	// This member is required.
@@ -4297,13 +4725,16 @@ type SubSlotTypeComposition struct {
 	noSmithyDocumentSerde
 }
 
-// Subslot elicitation settings. DefaultValueSpecification is a list of default
-// values for a constituent sub slot in a composite slot. Default values are used
-// when Amazon Lex hasn't determined a value for a slot. You can specify default
-// values from context variables, session attributes, and defined values. This is
-// similar to DefaultValueSpecification for slots. PromptSpecification is the
-// prompt that Amazon Lex uses to elicit the sub slot value from the user. This is
-// similar to PromptSpecification for slots.
+// Subslot elicitation settings.
+//
+// DefaultValueSpecification is a list of default values for a constituent sub
+// slot in a composite slot. Default values are used when Amazon Lex hasn't
+// determined a value for a slot. You can specify default values from context
+// variables, session attributes, and defined values. This is similar to
+// DefaultValueSpecification for slots.
+//
+// PromptSpecification is the prompt that Amazon Lex uses to elicit the sub slot
+// value from the user. This is similar to PromptSpecification for slots.
 type SubSlotValueElicitationSetting struct {
 
 	// Specifies a list of message groups that Amazon Lex sends to a user to elicit a
@@ -4333,8 +4764,10 @@ type SubSlotValueElicitationSetting struct {
 // test execution.
 type TestExecutionResultFilterBy struct {
 
-	// Specifies which results to filter. See Test result details">Test results details (https://docs.aws.amazon.com/lexv2/latest/dg/test-results-details-test-set.html)
-	// for details about different types of results.
+	// Specifies which results to filter. See [Test result details">Test results details] for details about different types of
+	// results.
+	//
+	// [Test result details">Test results details]: https://docs.aws.amazon.com/lexv2/latest/dg/test-results-details-test-set.html
 	//
 	// This member is required.
 	ResultTypeFilter TestResultTypeFilter
@@ -4346,9 +4779,10 @@ type TestExecutionResultFilterBy struct {
 	noSmithyDocumentSerde
 }
 
-// Contains the results of the test execution, grouped by type of results. See
-// Test result details">Test results details (https://docs.aws.amazon.com/lexv2/latest/dg/test-results-details-test-set.html)
+// Contains the results of the test execution, grouped by type of results. See [Test result details">Test results details]
 // for details about different types of results.
+//
+// [Test result details">Test results details]: https://docs.aws.amazon.com/lexv2/latest/dg/test-results-details-test-set.html
 type TestExecutionResultItems struct {
 
 	// Results related to conversations in the test set, including metrics about
@@ -4943,20 +5377,26 @@ type UtteranceBotResponse struct {
 	Content *string
 
 	// The type of the response. The following values are possible:
+	//
 	//   - PlainText – A plain text string.
+	//
 	//   - CustomPayload – A response string that you can customize to include data or
 	//   metadata for your application.
+	//
 	//   - SSML – A string that includes Speech Synthesis Markup Language to customize
 	//   the audio response.
-	//   - ImageResponseCard – An image with buttons that the customer can select. See
-	//   ImageResponseCard (https://docs.aws.amazon.com/lexv2/latest/APIReference/API_runtime_ImageResponseCard.html)
+	//
+	//   - ImageResponseCard – An image with buttons that the customer can select. See [ImageResponseCard]
 	//   for more information.
+	//
+	// [ImageResponseCard]: https://docs.aws.amazon.com/lexv2/latest/APIReference/API_runtime_ImageResponseCard.html
 	ContentType UtteranceContentType
 
 	// A card that is shown to the user by a messaging platform. You define the
-	// contents of the card, the card is displayed by the platform. When you use a
-	// response card, the response from the user is constrained to the text associated
-	// with a button on the card.
+	// contents of the card, the card is displayed by the platform.
+	//
+	// When you use a response card, the response from the user is constrained to the
+	// text associated with a button on the card.
 	ImageResponseCard *ImageResponseCard
 
 	noSmithyDocumentSerde
@@ -4966,7 +5406,9 @@ type UtteranceBotResponse struct {
 type UtteranceDataSortBy struct {
 
 	// The measure by which to sort the utterance analytics data.
+	//
 	//   - Count – The number of utterances.
+	//
 	//   - UtteranceTimestamp – The date and time of the utterance.
 	//
 	// This member is required.
@@ -5065,20 +5507,29 @@ type UtteranceSpecification struct {
 	ConversationStartTime *time.Time
 
 	// The type of dialog action that the utterance is associated to. See the type
-	// field in DialogAction (https://docs.aws.amazon.com/lexv2/latest/APIReference/API_runtime_DialogAction.html)
-	// for more information.
+	// field in [DialogAction]for more information.
+	//
+	// [DialogAction]: https://docs.aws.amazon.com/lexv2/latest/APIReference/API_runtime_DialogAction.html
 	DialogActionType *string
 
 	// The input type of the utterance. The possible values are as follows:
+	//
 	//   - PCM format: audio data must be in little-endian byte order.
+	//
 	//   - audio/l16; rate=16000; channels=1
+	//
 	//   - audio/x-l16; sample-rate=16000; channel-count=1
+	//
 	//   - audio/lpcm; sample-rate=8000; sample-size-bits=16; channel-count=1;
 	//   is-big-endian=false
+	//
 	//   - Opus format
+	//
 	//   -
 	//   audio/x-cbr-opus-with-preamble;preamble-size=0;bit-rate=256000;frame-size-milliseconds=4
+	//
 	//   - Text format
+	//
 	//   - text/plain; charset=utf-8
 	InputType *string
 
@@ -5089,18 +5540,27 @@ type UtteranceSpecification struct {
 	LocaleId *string
 
 	// The mode of the session. The possible values are as follows:
+	//
 	//   - Speech – The session consisted of spoken dialogue.
+	//
 	//   - Text – The session consisted of written dialogue.
+	//
 	//   - DTMF – The session consisted of touch-tone keypad (Dual Tone
 	//   Multi-Frequency) key presses.
+	//
 	//   - MultiMode – The session consisted of multiple modes.
 	Mode AnalyticsModality
 
 	// The output type of the utterance. The possible values are as follows:
+	//
 	//   - audio/mpeg
+	//
 	//   - audio/ogg
+	//
 	//   - audio/pcm (16 KHz)
+	//
 	//   - audio/ (defaults to mpeg )
+	//
 	//   - text/plain; charset=utf-8
 	OutputType *string
 
@@ -5134,10 +5594,12 @@ type VoiceSettings struct {
 	VoiceId *string
 
 	// Indicates the type of Amazon Polly voice that Amazon Lex should use for voice
-	// interaction with the user. For more information, see the engine parameter of
-	// the SynthesizeSpeech operation (https://docs.aws.amazon.com/polly/latest/dg/API_SynthesizeSpeech.html#polly-SynthesizeSpeech-request-Engine)
-	// in the Amazon Polly developer guide. If you do not specify a value, the default
-	// is standard .
+	// interaction with the user. For more information, see the [engine parameter of the SynthesizeSpeech operation]engine SynthesizeSpeech
+	// in the Amazon Polly developer guide.
+	//
+	// If you do not specify a value, the default is standard .
+	//
+	// [engine parameter of the SynthesizeSpeech operation]: https://docs.aws.amazon.com/polly/latest/dg/API_SynthesizeSpeech.html#polly-SynthesizeSpeech-request-Engine
 	Engine VoiceEngine
 
 	noSmithyDocumentSerde

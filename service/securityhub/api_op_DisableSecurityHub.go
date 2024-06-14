@@ -6,20 +6,24 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Disables Security Hub in your account only in the current Amazon Web Services
 // Region. To disable Security Hub in all Regions, you must submit one request per
-// Region where you have enabled Security Hub. You can't disable Security Hub in an
-// account that is currently the Security Hub administrator. When you disable
-// Security Hub, your existing findings and insights and any Security Hub
-// configuration settings are deleted after 90 days and cannot be recovered. Any
-// standards that were enabled are disabled, and your administrator and member
-// account associations are removed. If you want to save your existing findings,
-// you must export them before you disable Security Hub.
+// Region where you have enabled Security Hub.
+//
+// You can't disable Security Hub in an account that is currently the Security Hub
+// administrator.
+//
+// When you disable Security Hub, your existing findings and insights and any
+// Security Hub configuration settings are deleted after 90 days and cannot be
+// recovered. Any standards that were enabled are disabled, and your administrator
+// and member account associations are removed.
+//
+// If you want to save your existing findings, you must export them before you
+// disable Security Hub.
 func (c *Client) DisableSecurityHub(ctx context.Context, params *DisableSecurityHubInput, optFns ...func(*Options)) (*DisableSecurityHubOutput, error) {
 	if params == nil {
 		params = &DisableSecurityHubInput{}
@@ -68,25 +72,25 @@ func (c *Client) addOperationDisableSecurityHubMiddlewares(stack *middleware.Sta
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -101,10 +105,13 @@ func (c *Client) addOperationDisableSecurityHubMiddlewares(stack *middleware.Sta
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDisableSecurityHub(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

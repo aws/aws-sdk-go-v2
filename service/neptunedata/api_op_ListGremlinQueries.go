@@ -6,21 +6,24 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/neptunedata/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists active Gremlin queries. See Gremlin query status API (https://docs.aws.amazon.com/neptune/latest/userguide/gremlin-api-status.html)
-// for details about the output. When invoking this operation in a Neptune cluster
-// that has IAM authentication enabled, the IAM user or role making the request
-// must have a policy attached that allows the neptune-db:GetQueryStatus (https://docs.aws.amazon.com/neptune/latest/userguide/iam-dp-actions.html#getquerystatus)
-// IAM action in that cluster. Note that the neptune-db:QueryLanguage:Gremlin (https://docs.aws.amazon.com/neptune/latest/userguide/iam-data-condition-keys.html#iam-neptune-condition-keys)
-// IAM condition key can be used in the policy document to restrict the use of
-// Gremlin queries (see Condition keys available in Neptune IAM data-access policy
-// statements (https://docs.aws.amazon.com/neptune/latest/userguide/iam-data-condition-keys.html)
-// ).
+// Lists active Gremlin queries. See [Gremlin query status API] for details about the output.
+//
+// When invoking this operation in a Neptune cluster that has IAM authentication
+// enabled, the IAM user or role making the request must have a policy attached
+// that allows the [neptune-db:GetQueryStatus]IAM action in that cluster.
+//
+// Note that the [neptune-db:QueryLanguage:Gremlin] IAM condition key can be used in the policy document to restrict
+// the use of Gremlin queries (see [Condition keys available in Neptune IAM data-access policy statements]).
+//
+// [Condition keys available in Neptune IAM data-access policy statements]: https://docs.aws.amazon.com/neptune/latest/userguide/iam-data-condition-keys.html
+// [neptune-db:GetQueryStatus]: https://docs.aws.amazon.com/neptune/latest/userguide/iam-dp-actions.html#getquerystatus
+// [Gremlin query status API]: https://docs.aws.amazon.com/neptune/latest/userguide/gremlin-api-status.html
+// [neptune-db:QueryLanguage:Gremlin]: https://docs.aws.amazon.com/neptune/latest/userguide/iam-data-condition-keys.html#iam-neptune-condition-keys
 func (c *Client) ListGremlinQueries(ctx context.Context, params *ListGremlinQueriesInput, optFns ...func(*Options)) (*ListGremlinQueriesOutput, error) {
 	if params == nil {
 		params = &ListGremlinQueriesInput{}
@@ -85,25 +88,25 @@ func (c *Client) addOperationListGremlinQueriesMiddlewares(stack *middleware.Sta
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -118,10 +121,13 @@ func (c *Client) addOperationListGremlinQueriesMiddlewares(stack *middleware.Sta
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListGremlinQueries(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

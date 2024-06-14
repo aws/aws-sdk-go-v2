@@ -6,19 +6,20 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
-// Describes the Spot price history. For more information, see Spot Instance
-// pricing history (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-spot-instances-history.html)
-// in the Amazon EC2 User Guide for Linux Instances. When you specify a start and
-// end time, the operation returns the prices of the instance types within that
-// time range. It also returns the last price change before the start time, which
-// is the effective price as of the start time.
+// Describes the Spot price history. For more information, see [Spot Instance pricing history] in the Amazon EC2
+// User Guide.
+//
+// When you specify a start and end time, the operation returns the prices of the
+// instance types within that time range. It also returns the last price change
+// before the start time, which is the effective price as of the start time.
+//
+// [Spot Instance pricing history]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-spot-instances-history.html
 func (c *Client) DescribeSpotPriceHistory(ctx context.Context, params *DescribeSpotPriceHistoryInput, optFns ...func(*Options)) (*DescribeSpotPriceHistoryOutput, error) {
 	if params == nil {
 		params = &DescribeSpotPriceHistoryInput{}
@@ -51,15 +52,20 @@ type DescribeSpotPriceHistoryInput struct {
 	EndTime *time.Time
 
 	// The filters.
+	//
 	//   - availability-zone - The Availability Zone for which prices should be
 	//   returned.
+	//
 	//   - instance-type - The type of instance (for example, m3.medium ).
+	//
 	//   - product-description - The product description for the Spot price ( Linux/UNIX
 	//   | Red Hat Enterprise Linux | SUSE Linux | Windows | Linux/UNIX (Amazon VPC) |
 	//   Red Hat Enterprise Linux (Amazon VPC) | SUSE Linux (Amazon VPC) | Windows
 	//   (Amazon VPC) ).
+	//
 	//   - spot-price - The Spot price. The value must match exactly (or use wildcards;
 	//   greater than or less than comparison is not supported).
+	//
 	//   - timestamp - The time stamp of the Spot price history, in UTC format (for
 	//   example, ddd MMM dd HH:mm:ss UTC YYYY). You can use wildcards ( * and ? ).
 	//   Greater than or less than comparison is not supported.
@@ -70,8 +76,9 @@ type DescribeSpotPriceHistoryInput struct {
 
 	// The maximum number of items to return for this request. To get the next page of
 	// items, make another request with the token returned in the output. For more
-	// information, see Pagination (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination)
-	// .
+	// information, see [Pagination].
+	//
+	// [Pagination]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination
 	MaxResults *int32
 
 	// The token returned from a previous paginated request. Pagination continues from
@@ -92,7 +99,7 @@ type DescribeSpotPriceHistoryInput struct {
 type DescribeSpotPriceHistoryOutput struct {
 
 	// The token to include in another request to get the next page of items. This
-	// value is null when there are no more items to return.
+	// value is an empty string ( "" ) or null when there are no more items to return.
 	NextToken *string
 
 	// The historical Spot prices.
@@ -126,25 +133,25 @@ func (c *Client) addOperationDescribeSpotPriceHistoryMiddlewares(stack *middlewa
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -159,10 +166,13 @@ func (c *Client) addOperationDescribeSpotPriceHistoryMiddlewares(stack *middlewa
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeSpotPriceHistory(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -193,8 +203,9 @@ var _ DescribeSpotPriceHistoryAPIClient = (*Client)(nil)
 type DescribeSpotPriceHistoryPaginatorOptions struct {
 	// The maximum number of items to return for this request. To get the next page of
 	// items, make another request with the token returned in the output. For more
-	// information, see Pagination (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination)
-	// .
+	// information, see [Pagination].
+	//
+	// [Pagination]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Query-Requests.html#api-pagination
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/ses/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -17,10 +16,13 @@ import (
 // identity, such as an email address or domain. When you send an email that uses
 // the chosen identity in the Source field, Amazon SES sends notifications to the
 // topic you specified. You can send bounce, complaint, or delivery notifications
-// (or any combination of the three) to the Amazon SNS topic that you specify. You
-// can execute this operation no more than once per second. For more information
-// about feedback notification, see the Amazon SES Developer Guide (https://docs.aws.amazon.com/ses/latest/dg/monitor-sending-activity-using-notifications.html)
-// .
+// (or any combination of the three) to the Amazon SNS topic that you specify.
+//
+// You can execute this operation no more than once per second.
+//
+// For more information about feedback notification, see the [Amazon SES Developer Guide].
+//
+// [Amazon SES Developer Guide]: https://docs.aws.amazon.com/ses/latest/dg/monitor-sending-activity-using-notifications.html
 func (c *Client) SetIdentityNotificationTopic(ctx context.Context, params *SetIdentityNotificationTopicInput, optFns ...func(*Options)) (*SetIdentityNotificationTopicOutput, error) {
 	if params == nil {
 		params = &SetIdentityNotificationTopicInput{}
@@ -38,16 +40,19 @@ func (c *Client) SetIdentityNotificationTopic(ctx context.Context, params *SetId
 
 // Represents a request to specify the Amazon SNS topic to which Amazon SES
 // publishes bounce, complaint, or delivery notifications for emails sent with that
-// identity as the source. For information about Amazon SES notifications, see the
-// Amazon SES Developer Guide (https://docs.aws.amazon.com/ses/latest/dg/monitor-sending-activity-using-notifications-sns.html)
+// identity as the source. For information about Amazon SES notifications, see the [Amazon SES Developer Guide]
 // .
+//
+// [Amazon SES Developer Guide]: https://docs.aws.amazon.com/ses/latest/dg/monitor-sending-activity-using-notifications-sns.html
 type SetIdentityNotificationTopicInput struct {
 
-	// The identity (email address or domain) for the Amazon SNS topic. You can only
-	// specify a verified identity for this parameter. You can specify an identity by
-	// using its name or by using its Amazon Resource Name (ARN). The following
-	// examples are all valid identities: sender@example.com , example.com ,
-	// arn:aws:ses:us-east-1:123456789012:identity/example.com .
+	// The identity (email address or domain) for the Amazon SNS topic.
+	//
+	// You can only specify a verified identity for this parameter.
+	//
+	// You can specify an identity by using its name or by using its Amazon Resource
+	// Name (ARN). The following examples are all valid identities: sender@example.com
+	// , example.com , arn:aws:ses:us-east-1:123456789012:identity/example.com .
 	//
 	// This member is required.
 	Identity *string
@@ -95,25 +100,25 @@ func (c *Client) addOperationSetIdentityNotificationTopicMiddlewares(stack *midd
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -128,13 +133,16 @@ func (c *Client) addOperationSetIdentityNotificationTopicMiddlewares(stack *midd
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpSetIdentityNotificationTopicValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opSetIdentityNotificationTopic(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

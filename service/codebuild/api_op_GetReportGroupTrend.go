@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/codebuild/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -36,24 +35,39 @@ type GetReportGroupTrendInput struct {
 	ReportGroupArn *string
 
 	// The test report value to accumulate. This must be one of the following values:
+	//
 	// Test reports: DURATION Accumulate the test run times for the specified reports.
+	//
 	// PASS_RATE Accumulate the percentage of tests that passed for the specified test
-	// reports. TOTAL Accumulate the total number of tests for the specified test
-	// reports. Code coverage reports: BRANCH_COVERAGE Accumulate the branch coverage
-	// percentages for the specified test reports. BRANCHES_COVERED Accumulate the
-	// branches covered values for the specified test reports. BRANCHES_MISSED
-	// Accumulate the branches missed values for the specified test reports.
+	// reports.
+	//
+	// TOTAL Accumulate the total number of tests for the specified test reports.
+	//
+	// Code coverage reports: BRANCH_COVERAGE Accumulate the branch coverage
+	// percentages for the specified test reports.
+	//
+	// BRANCHES_COVERED Accumulate the branches covered values for the specified test
+	// reports.
+	//
+	// BRANCHES_MISSED Accumulate the branches missed values for the specified test
+	// reports.
+	//
 	// LINE_COVERAGE Accumulate the line coverage percentages for the specified test
-	// reports. LINES_COVERED Accumulate the lines covered values for the specified
-	// test reports. LINES_MISSED Accumulate the lines not covered values for the
-	// specified test reports.
+	// reports.
+	//
+	// LINES_COVERED Accumulate the lines covered values for the specified test
+	// reports.
+	//
+	// LINES_MISSED Accumulate the lines not covered values for the specified test
+	// reports.
 	//
 	// This member is required.
 	TrendField types.ReportGroupTrendFieldType
 
 	// The number of reports to analyze. This operation always retrieves the most
-	// recent reports. If this parameter is omitted, the most recent 100 reports are
-	// analyzed.
+	// recent reports.
+	//
+	// If this parameter is omitted, the most recent 100 reports are analyzed.
 	NumOfReports *int32
 
 	noSmithyDocumentSerde
@@ -95,25 +109,25 @@ func (c *Client) addOperationGetReportGroupTrendMiddlewares(stack *middleware.St
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -128,13 +142,16 @@ func (c *Client) addOperationGetReportGroupTrendMiddlewares(stack *middleware.St
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpGetReportGroupTrendValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetReportGroupTrend(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

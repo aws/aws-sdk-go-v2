@@ -6,16 +6,17 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/codeartifact/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a domain. CodeArtifact domains make it easier to manage multiple
+//	Creates a domain. CodeArtifact domains make it easier to manage multiple
+//
 // repositories across an organization. You can use a domain to apply permissions
 // across many repositories owned by different Amazon Web Services accounts. An
 // asset is stored only once in a domain, even if it's in multiple repositories.
+//
 // Although you can have multiple domains, we recommend a single production domain
 // that contains all published artifacts so that your development teams can find
 // and share packages. You can use a second pre-production domain to test changes
@@ -37,7 +38,7 @@ func (c *Client) CreateDomain(ctx context.Context, params *CreateDomainInput, op
 
 type CreateDomainInput struct {
 
-	// The name of the domain to create. All domain names in an Amazon Web Services
+	//  The name of the domain to create. All domain names in an Amazon Web Services
 	// Region that are in the same Amazon Web Services account must be unique. The
 	// domain name is used as the prefix in DNS hostnames. Do not use sensitive
 	// information in a domain name because it is publicly discoverable.
@@ -45,17 +46,20 @@ type CreateDomainInput struct {
 	// This member is required.
 	Domain *string
 
-	// The encryption key for the domain. This is used to encrypt content stored in a
+	//  The encryption key for the domain. This is used to encrypt content stored in a
 	// domain. An encryption key can be a key ID, a key Amazon Resource Name (ARN), a
 	// key alias, or a key alias ARN. To specify an encryptionKey , your IAM role must
 	// have kms:DescribeKey and kms:CreateGrant permissions on the encryption key that
-	// is used. For more information, see DescribeKey (https://docs.aws.amazon.com/kms/latest/APIReference/API_DescribeKey.html#API_DescribeKey_RequestSyntax)
-	// in the Key Management Service API Reference and Key Management Service API
-	// Permissions Reference (https://docs.aws.amazon.com/kms/latest/developerguide/kms-api-permissions-reference.html)
-	// in the Key Management Service Developer Guide. CodeArtifact supports only
-	// symmetric CMKs. Do not associate an asymmetric CMK with your domain. For more
-	// information, see Using symmetric and asymmetric keys (https://docs.aws.amazon.com/kms/latest/developerguide/symmetric-asymmetric.html)
-	// in the Key Management Service Developer Guide.
+	// is used. For more information, see [DescribeKey]in the Key Management Service API Reference
+	// and [Key Management Service API Permissions Reference]in the Key Management Service Developer Guide.
+	//
+	// CodeArtifact supports only symmetric CMKs. Do not associate an asymmetric CMK
+	// with your domain. For more information, see [Using symmetric and asymmetric keys]in the Key Management Service
+	// Developer Guide.
+	//
+	// [Using symmetric and asymmetric keys]: https://docs.aws.amazon.com/kms/latest/developerguide/symmetric-asymmetric.html
+	// [DescribeKey]: https://docs.aws.amazon.com/kms/latest/APIReference/API_DescribeKey.html#API_DescribeKey_RequestSyntax
+	// [Key Management Service API Permissions Reference]: https://docs.aws.amazon.com/kms/latest/developerguide/kms-api-permissions-reference.html
 	EncryptionKey *string
 
 	// One or more tag key-value pairs for the domain.
@@ -66,7 +70,7 @@ type CreateDomainInput struct {
 
 type CreateDomainOutput struct {
 
-	// Contains information about the created domain after processing the request.
+	//  Contains information about the created domain after processing the request.
 	Domain *types.DomainDescription
 
 	// Metadata pertaining to the operation's result.
@@ -97,25 +101,25 @@ func (c *Client) addOperationCreateDomainMiddlewares(stack *middleware.Stack, op
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -130,13 +134,16 @@ func (c *Client) addOperationCreateDomainMiddlewares(stack *middleware.Stack, op
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpCreateDomainValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateDomain(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

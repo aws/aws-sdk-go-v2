@@ -17,7 +17,16 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"io"
 	"strings"
+	"time"
 )
+
+func deserializeS3Expires(v string) (*time.Time, error) {
+	t, err := smithytime.ParseHTTPDate(v)
+	if err != nil {
+		return nil, nil
+	}
+	return &t, nil
+}
 
 type awsRestjson1_deserializeOpCreateApp struct {
 }
@@ -7164,6 +7173,64 @@ func awsRestjson1_deserializeDocumentBranches(v *[]types.Branch, value interface
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentCertificate(v **types.Certificate, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.Certificate
+	if *v == nil {
+		sv = &types.Certificate{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "certificateVerificationDNSRecord":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CertificateVerificationDNSRecord to be of type string, got %T instead", value)
+				}
+				sv.CertificateVerificationDNSRecord = ptr.String(jtv)
+			}
+
+		case "customCertificateArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CertificateArn to be of type string, got %T instead", value)
+				}
+				sv.CustomCertificateArn = ptr.String(jtv)
+			}
+
+		case "type":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CertificateType to be of type string, got %T instead", value)
+				}
+				sv.Type = types.CertificateType(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentCustomDomains(v *[]string, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -7377,6 +7444,11 @@ func awsRestjson1_deserializeDocumentDomainAssociation(v **types.DomainAssociati
 				sv.AutoSubDomainIAMRole = ptr.String(jtv)
 			}
 
+		case "certificate":
+			if err := awsRestjson1_deserializeDocumentCertificate(&sv.Certificate, value); err != nil {
+				return err
+			}
+
 		case "certificateVerificationDNSRecord":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -7434,6 +7506,15 @@ func awsRestjson1_deserializeDocumentDomainAssociation(v **types.DomainAssociati
 		case "subDomains":
 			if err := awsRestjson1_deserializeDocumentSubDomains(&sv.SubDomains, value); err != nil {
 				return err
+			}
+
+		case "updateStatus":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected UpdateStatus to be of type string, got %T instead", value)
+				}
+				sv.UpdateStatus = types.UpdateStatus(jtv)
 			}
 
 		default:

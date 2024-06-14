@@ -6,19 +6,22 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/iotsecuretunneling/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Revokes the current client access token (CAT) and returns new CAT for clients
-// to use when reconnecting to secure tunneling to access the same tunnel. Requires
-// permission to access the RotateTunnelAccessToken (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
-// action. Rotating the CAT doesn't extend the tunnel duration. For example, say
-// the tunnel duration is 12 hours and the tunnel has already been open for 4
-// hours. When you rotate the access tokens, the new tokens that are generated can
-// only be used for the remaining 8 hours.
+// to use when reconnecting to secure tunneling to access the same tunnel.
+//
+// Requires permission to access the [RotateTunnelAccessToken] action.
+//
+// Rotating the CAT doesn't extend the tunnel duration. For example, say the
+// tunnel duration is 12 hours and the tunnel has already been open for 4 hours.
+// When you rotate the access tokens, the new tokens that are generated can only be
+// used for the remaining 8 hours.
+//
+// [RotateTunnelAccessToken]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions
 func (c *Client) RotateTunnelAccessToken(ctx context.Context, params *RotateTunnelAccessTokenInput, optFns ...func(*Options)) (*RotateTunnelAccessTokenOutput, error) {
 	if params == nil {
 		params = &RotateTunnelAccessTokenInput{}
@@ -94,25 +97,25 @@ func (c *Client) addOperationRotateTunnelAccessTokenMiddlewares(stack *middlewar
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -127,13 +130,16 @@ func (c *Client) addOperationRotateTunnelAccessTokenMiddlewares(stack *middlewar
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpRotateTunnelAccessTokenValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opRotateTunnelAccessToken(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

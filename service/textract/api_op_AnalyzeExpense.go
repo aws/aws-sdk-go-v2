@@ -6,17 +6,19 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/textract/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // AnalyzeExpense synchronously analyzes an input document for financially related
-// relationships between text. Information is returned as ExpenseDocuments and
-// seperated as follows:
+// relationships between text.
+//
+// Information is returned as ExpenseDocuments and seperated as follows:
+//
 //   - LineItemGroups - A data set containing LineItems which store information
 //     about the lines of text, such as an item purchased and its price on a receipt.
+//
 //   - SummaryFields - Contains all other information a receipt, such as header
 //     information or the vendors name.
 func (c *Client) AnalyzeExpense(ctx context.Context, params *AnalyzeExpenseInput, optFns ...func(*Options)) (*AnalyzeExpenseOutput, error) {
@@ -36,20 +38,27 @@ func (c *Client) AnalyzeExpense(ctx context.Context, params *AnalyzeExpenseInput
 
 type AnalyzeExpenseInput struct {
 
-	// The input document, either as bytes or as an S3 object. You pass image bytes to
-	// an Amazon Textract API operation by using the Bytes property. For example, you
-	// would use the Bytes property to pass a document loaded from a local file
-	// system. Image bytes passed by using the Bytes property must be base64 encoded.
-	// Your code might not need to encode document file bytes if you're using an AWS
-	// SDK to call Amazon Textract API operations. You pass images stored in an S3
-	// bucket to an Amazon Textract API operation by using the S3Object property.
-	// Documents stored in an S3 bucket don't need to be base64 encoded. The AWS Region
-	// for the S3 bucket that contains the S3 object must match the AWS Region that you
-	// use for Amazon Textract operations. If you use the AWS CLI to call Amazon
-	// Textract operations, passing image bytes using the Bytes property isn't
-	// supported. You must first upload the document to an Amazon S3 bucket, and then
-	// call the operation using the S3Object property. For Amazon Textract to process
-	// an S3 object, the user must have permission to access the S3 object.
+	// The input document, either as bytes or as an S3 object.
+	//
+	// You pass image bytes to an Amazon Textract API operation by using the Bytes
+	// property. For example, you would use the Bytes property to pass a document
+	// loaded from a local file system. Image bytes passed by using the Bytes property
+	// must be base64 encoded. Your code might not need to encode document file bytes
+	// if you're using an AWS SDK to call Amazon Textract API operations.
+	//
+	// You pass images stored in an S3 bucket to an Amazon Textract API operation by
+	// using the S3Object property. Documents stored in an S3 bucket don't need to be
+	// base64 encoded.
+	//
+	// The AWS Region for the S3 bucket that contains the S3 object must match the AWS
+	// Region that you use for Amazon Textract operations.
+	//
+	// If you use the AWS CLI to call Amazon Textract operations, passing image bytes
+	// using the Bytes property isn't supported. You must first upload the document to
+	// an Amazon S3 bucket, and then call the operation using the S3Object property.
+	//
+	// For Amazon Textract to process an S3 object, the user must have permission to
+	// access the S3 object.
 	//
 	// This member is required.
 	Document *types.Document
@@ -93,25 +102,25 @@ func (c *Client) addOperationAnalyzeExpenseMiddlewares(stack *middleware.Stack, 
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -126,13 +135,16 @@ func (c *Client) addOperationAnalyzeExpenseMiddlewares(stack *middleware.Stack, 
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpAnalyzeExpenseValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opAnalyzeExpense(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

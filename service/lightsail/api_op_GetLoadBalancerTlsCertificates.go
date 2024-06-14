@@ -6,17 +6,18 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/lightsail/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Returns information about the TLS certificates that are associated with the
-// specified Lightsail load balancer. TLS is just an updated, more secure version
-// of Secure Socket Layer (SSL). You can have a maximum of 2 certificates
-// associated with a Lightsail load balancer. One is active and the other is
-// inactive.
+// specified Lightsail load balancer.
+//
+// TLS is just an updated, more secure version of Secure Socket Layer (SSL).
+//
+// You can have a maximum of 2 certificates associated with a Lightsail load
+// balancer. One is active and the other is inactive.
 func (c *Client) GetLoadBalancerTlsCertificates(ctx context.Context, params *GetLoadBalancerTlsCertificatesInput, optFns ...func(*Options)) (*GetLoadBalancerTlsCertificatesOutput, error) {
 	if params == nil {
 		params = &GetLoadBalancerTlsCertificatesInput{}
@@ -76,25 +77,25 @@ func (c *Client) addOperationGetLoadBalancerTlsCertificatesMiddlewares(stack *mi
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -109,13 +110,16 @@ func (c *Client) addOperationGetLoadBalancerTlsCertificatesMiddlewares(stack *mi
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpGetLoadBalancerTlsCertificatesValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetLoadBalancerTlsCertificates(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

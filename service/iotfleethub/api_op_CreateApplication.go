@@ -6,13 +6,19 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a Fleet Hub for AWS IoT Device Management web application. Fleet Hub
-// for AWS IoT Device Management is in public preview and is subject to change.
+// Creates a Fleet Hub for IoT Device Management web application.
+//
+// When creating a Fleet Hub application, you must create an organization instance
+// of IAM Identity Center if you don't already have one. The Fleet Hub application
+// you create must also be in the same Amazon Web Services Region of the
+// organization instance of IAM Identity Center. For more information see [Enabling IAM Identity Center]and [Organization instances of IAM Identity Center].
+//
+// [Enabling IAM Identity Center]: https://docs.aws.amazon.com/singlesignon/latest/userguide/get-set-up-for-idc.html
+// [Organization instances of IAM Identity Center]: https://docs.aws.amazon.com/singlesignon/latest/userguide/organization-instances-identity-center.html
 func (c *Client) CreateApplication(ctx context.Context, params *CreateApplicationInput, optFns ...func(*Options)) (*CreateApplicationOutput, error) {
 	if params == nil {
 		params = &CreateApplicationInput{}
@@ -35,9 +41,10 @@ type CreateApplicationInput struct {
 	// This member is required.
 	ApplicationName *string
 
-	// The ARN of the role that the web application assumes when it interacts with AWS
-	// IoT Core. The name of the role must be in the form AWSIotFleetHub_random_string
-	// .
+	// The ARN of the role that the web application assumes when it interacts with
+	// Amazon Web Services IoT Core.
+	//
+	// The name of the role must be in the form AWSIotFleetHub_random_string .
 	//
 	// This member is required.
 	RoleArn *string
@@ -97,25 +104,25 @@ func (c *Client) addOperationCreateApplicationMiddlewares(stack *middleware.Stac
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -130,6 +137,9 @@ func (c *Client) addOperationCreateApplicationMiddlewares(stack *middleware.Stac
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opCreateApplicationMiddleware(stack, options); err != nil {
 		return err
 	}
@@ -139,7 +149,7 @@ func (c *Client) addOperationCreateApplicationMiddlewares(stack *middleware.Stac
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateApplication(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

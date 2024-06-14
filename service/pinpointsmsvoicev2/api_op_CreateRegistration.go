@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/pinpointsmsvoicev2/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -32,7 +31,7 @@ func (c *Client) CreateRegistration(ctx context.Context, params *CreateRegistrat
 type CreateRegistrationInput struct {
 
 	// The type of registration form to create. The list of RegistrationTypes can be
-	// found using the DescribeRegistrationTypeDefinitions action.
+	// found using the DescribeRegistrationTypeDefinitionsaction.
 	//
 	// This member is required.
 	RegistrationType *string
@@ -50,8 +49,9 @@ type CreateRegistrationInput struct {
 
 type CreateRegistrationOutput struct {
 
-	// The time when the registration was created, in UNIX epoch time (https://www.epochconverter.com/)
-	// format.
+	// The time when the registration was created, in [UNIX epoch time] format.
+	//
+	// [UNIX epoch time]: https://www.epochconverter.com/
 	//
 	// This member is required.
 	CreatedTimestamp *time.Time
@@ -72,23 +72,31 @@ type CreateRegistrationOutput struct {
 	RegistrationId *string
 
 	// The status of the registration.
+	//
 	//   - CREATED : Your registration is created but not submitted.
+	//
 	//   - SUBMITTED : Your registration has been submitted and is awaiting review.
+	//
 	//   - REVIEWING : Your registration has been accepted and is being reviewed.
+	//
 	//   - PROVISIONING : Your registration has been approved and your origination
 	//   identity is being created.
+	//
 	//   - COMPLETE : Your registration has been approved and and your origination
 	//   identity has been created.
+	//
 	//   - REQUIRES_UPDATES : You must fix your registration and resubmit it.
+	//
 	//   - CLOSED : The phone number or sender ID has been deleted and you must also
 	//   delete the registration for the number.
+	//
 	//   - DELETED : The registration has been deleted.
 	//
 	// This member is required.
 	RegistrationStatus types.RegistrationStatus
 
 	// The type of registration form to create. The list of RegistrationTypes can be
-	// found using the DescribeRegistrationTypeDefinitions action.
+	// found using the DescribeRegistrationTypeDefinitionsaction.
 	//
 	// This member is required.
 	RegistrationType *string
@@ -127,25 +135,25 @@ func (c *Client) addOperationCreateRegistrationMiddlewares(stack *middleware.Sta
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -160,6 +168,9 @@ func (c *Client) addOperationCreateRegistrationMiddlewares(stack *middleware.Sta
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opCreateRegistrationMiddleware(stack, options); err != nil {
 		return err
 	}
@@ -169,7 +180,7 @@ func (c *Client) addOperationCreateRegistrationMiddlewares(stack *middleware.Sta
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateRegistration(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

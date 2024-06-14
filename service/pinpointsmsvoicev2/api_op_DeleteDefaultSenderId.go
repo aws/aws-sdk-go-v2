@@ -6,14 +6,15 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes an existing default sender ID on a configuration set. A default sender
-// ID is the identity that appears on recipients' devices when they receive SMS
-// messages. Support for sender ID capabilities varies by country or region.
+// Deletes an existing default sender ID on a configuration set.
+//
+// A default sender ID is the identity that appears on recipients' devices when
+// they receive SMS messages. Support for sender ID capabilities varies by country
+// or region.
 func (c *Client) DeleteDefaultSenderId(ctx context.Context, params *DeleteDefaultSenderIdInput, optFns ...func(*Options)) (*DeleteDefaultSenderIdOutput, error) {
 	if params == nil {
 		params = &DeleteDefaultSenderIdInput{}
@@ -33,7 +34,7 @@ type DeleteDefaultSenderIdInput struct {
 
 	// The name of the configuration set or the configuration set Amazon Resource Name
 	// (ARN) to delete the default sender ID from. The ConfigurationSetName and
-	// ConfigurationSetArn can be found using the DescribeConfigurationSets action.
+	// ConfigurationSetArn can be found using the DescribeConfigurationSetsaction.
 	//
 	// This member is required.
 	ConfigurationSetName *string
@@ -80,25 +81,25 @@ func (c *Client) addOperationDeleteDefaultSenderIdMiddlewares(stack *middleware.
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -113,13 +114,16 @@ func (c *Client) addOperationDeleteDefaultSenderIdMiddlewares(stack *middleware.
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDeleteDefaultSenderIdValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteDefaultSenderId(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

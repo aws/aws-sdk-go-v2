@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -29,7 +28,24 @@ func (c *Client) AddProfilePermission(ctx context.Context, params *AddProfilePer
 
 type AddProfilePermissionInput struct {
 
-	// The AWS Signer action permitted as part of cross-account permissions.
+	// For cross-account signing. Grant a designated account permission to perform one
+	// or more of the following actions. Each action is associated with a specific
+	// API's operations. For more information about cross-account signing, see [Using cross-account signing with signing profiles]in the
+	// AWS Signer Developer Guide.
+	//
+	// You can designate the following actions to an account.
+	//
+	//   - signer:StartSigningJob . This action isn't supported for container image
+	//   workflows. For details, see StartSigningJob.
+	//
+	//   - signer:SignPayload . This action isn't supported for AWS Lambda workflows.
+	//   For details, see SignPayload
+	//
+	//   - signer:GetSigningProfile . For details, see GetSigningProfile.
+	//
+	//   - signer:RevokeSignature . For details, see RevokeSignature.
+	//
+	// [Using cross-account signing with signing profiles]: https://docs.aws.amazon.com/signer/latest/developerguide/signing-profile-cross-account.html
 	//
 	// This member is required.
 	Action *string
@@ -92,25 +108,25 @@ func (c *Client) addOperationAddProfilePermissionMiddlewares(stack *middleware.S
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -125,13 +141,16 @@ func (c *Client) addOperationAddProfilePermissionMiddlewares(stack *middleware.S
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpAddProfilePermissionValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opAddProfilePermission(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

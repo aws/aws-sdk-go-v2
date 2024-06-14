@@ -3,8 +3,10 @@
 // Package inspector provides the API client, operations, and parameter types for
 // Amazon Inspector.
 //
-// Amazon Inspector Amazon Inspector enables you to analyze the behavior of your
-// AWS resources and to identify potential security issues. For more information,
-// see Amazon Inspector User Guide (https://docs.aws.amazon.com/inspector/latest/userguide/inspector_introduction.html)
-// .
+// # Amazon Inspector
+//
+// Amazon Inspector enables you to analyze the behavior of your AWS resources and
+// to identify potential security issues. For more information, see [Amazon Inspector User Guide].
+//
+// [Amazon Inspector User Guide]: https://docs.aws.amazon.com/inspector/latest/userguide/inspector_introduction.html
 package inspector

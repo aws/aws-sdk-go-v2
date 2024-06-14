@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/cloudtrail/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -42,13 +41,19 @@ type DescribeTrailsInput struct {
 
 	// Specifies a list of trail names, trail ARNs, or both, of the trails to
 	// describe. The format of a trail ARN is:
-	// arn:aws:cloudtrail:us-east-2:123456789012:trail/MyTrail If an empty list is
-	// specified, information for the trail in the current Region is returned.
+	//
+	//     arn:aws:cloudtrail:us-east-2:123456789012:trail/MyTrail
+	//
+	// If an empty list is specified, information for the trail in the current Region
+	// is returned.
+	//
 	//   - If an empty list is specified and IncludeShadowTrails is false, then
 	//   information for all trails in the current Region is returned.
+	//
 	//   - If an empty list is specified and IncludeShadowTrails is null or true, then
 	//   information for all trails in the current Region and any associated shadow
 	//   trails in other Regions is returned.
+	//
 	// If one or more trail names are specified, information is returned only if the
 	// names match the names of trails belonging only to the current Region and current
 	// account. To return information about a trail in another Region, you must specify
@@ -97,25 +102,25 @@ func (c *Client) addOperationDescribeTrailsMiddlewares(stack *middleware.Stack, 
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -130,10 +135,13 @@ func (c *Client) addOperationDescribeTrailsMiddlewares(stack *middleware.Stack, 
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeTrails(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

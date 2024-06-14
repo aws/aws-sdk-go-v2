@@ -6,13 +6,13 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/iotfleetwise/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a signal catalog using your existing VSS formatted content from your
+//	Creates a signal catalog using your existing VSS formatted content from your
+//
 // local device.
 func (c *Client) ImportSignalCatalog(ctx context.Context, params *ImportSignalCatalogInput, optFns ...func(*Options)) (*ImportSignalCatalogOutput, error) {
 	if params == nil {
@@ -36,7 +36,7 @@ type ImportSignalCatalogInput struct {
 	// This member is required.
 	Name *string
 
-	// A brief description of the signal catalog.
+	//  A brief description of the signal catalog.
 	Description *string
 
 	// Metadata that can be used to manage the signal catalog.
@@ -51,12 +51,12 @@ type ImportSignalCatalogInput struct {
 
 type ImportSignalCatalogOutput struct {
 
-	// The Amazon Resource Name (ARN) of the imported signal catalog.
+	//  The Amazon Resource Name (ARN) of the imported signal catalog.
 	//
 	// This member is required.
 	Arn *string
 
-	// The name of the imported signal catalog.
+	//  The name of the imported signal catalog.
 	//
 	// This member is required.
 	Name *string
@@ -89,25 +89,25 @@ func (c *Client) addOperationImportSignalCatalogMiddlewares(stack *middleware.St
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -122,13 +122,16 @@ func (c *Client) addOperationImportSignalCatalogMiddlewares(stack *middleware.St
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpImportSignalCatalogValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opImportSignalCatalog(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

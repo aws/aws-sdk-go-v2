@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/configservice/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -16,8 +15,10 @@ import (
 // with the count of compliant and noncompliant Config rules within each
 // conformance pack. Also returns the total rule count which includes compliant
 // rules, noncompliant rules, and rules that cannot be evaluated due to
-// insufficient data. The results can return an empty result page, but if you have
-// a nextToken , the results are displayed on the next page.
+// insufficient data.
+//
+// The results can return an empty result page, but if you have a nextToken , the
+// results are displayed on the next page.
 func (c *Client) DescribeAggregateComplianceByConformancePacks(ctx context.Context, params *DescribeAggregateComplianceByConformancePacksInput, optFns ...func(*Options)) (*DescribeAggregateComplianceByConformancePacksOutput, error) {
 	if params == nil {
 		params = &DescribeAggregateComplianceByConformancePacksInput{}
@@ -91,25 +92,25 @@ func (c *Client) addOperationDescribeAggregateComplianceByConformancePacksMiddle
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -124,13 +125,16 @@ func (c *Client) addOperationDescribeAggregateComplianceByConformancePacksMiddle
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDescribeAggregateComplianceByConformancePacksValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeAggregateComplianceByConformancePacks(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

@@ -6,17 +6,20 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes a SAML provider resource in IAM. Deleting the provider resource from
-// IAM does not update any roles that reference the SAML provider resource's ARN as
-// a principal in their trust policies. Any attempt to assume a role that
-// references a non-existent provider resource ARN fails. This operation requires
-// Signature Version 4 (https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html)
-// .
+// Deletes a SAML provider resource in IAM.
+//
+// Deleting the provider resource from IAM does not update any roles that
+// reference the SAML provider resource's ARN as a principal in their trust
+// policies. Any attempt to assume a role that references a non-existent provider
+// resource ARN fails.
+//
+// This operation requires [Signature Version 4].
+//
+// [Signature Version 4]: https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html
 func (c *Client) DeleteSAMLProvider(ctx context.Context, params *DeleteSAMLProviderInput, optFns ...func(*Options)) (*DeleteSAMLProviderOutput, error) {
 	if params == nil {
 		params = &DeleteSAMLProviderInput{}
@@ -71,25 +74,25 @@ func (c *Client) addOperationDeleteSAMLProviderMiddlewares(stack *middleware.Sta
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -104,13 +107,16 @@ func (c *Client) addOperationDeleteSAMLProviderMiddlewares(stack *middleware.Sta
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDeleteSAMLProviderValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteSAMLProvider(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

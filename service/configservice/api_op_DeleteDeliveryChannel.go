@@ -6,14 +6,14 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes the delivery channel. Before you can delete the delivery channel, you
-// must stop the configuration recorder by using the StopConfigurationRecorder
-// action.
+// Deletes the delivery channel.
+//
+// Before you can delete the delivery channel, you must stop the configuration
+// recorder by using the StopConfigurationRecorderaction.
 func (c *Client) DeleteDeliveryChannel(ctx context.Context, params *DeleteDeliveryChannelInput, optFns ...func(*Options)) (*DeleteDeliveryChannelOutput, error) {
 	if params == nil {
 		params = &DeleteDeliveryChannelInput{}
@@ -29,8 +29,8 @@ func (c *Client) DeleteDeliveryChannel(ctx context.Context, params *DeleteDelive
 	return out, nil
 }
 
-// The input for the DeleteDeliveryChannel action. The action accepts the
-// following data, in JSON format.
+// The input for the DeleteDeliveryChannel action. The action accepts the following data, in JSON
+// format.
 type DeleteDeliveryChannelInput struct {
 
 	// The name of the delivery channel to delete.
@@ -70,25 +70,25 @@ func (c *Client) addOperationDeleteDeliveryChannelMiddlewares(stack *middleware.
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -103,13 +103,16 @@ func (c *Client) addOperationDeleteDeliveryChannelMiddlewares(stack *middleware.
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDeleteDeliveryChannelValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteDeliveryChannel(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

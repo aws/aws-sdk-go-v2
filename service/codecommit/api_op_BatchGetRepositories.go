@@ -6,18 +6,18 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/codecommit/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns information about one or more repositories. The description field for a
-// repository accepts all HTML characters and all valid Unicode characters.
-// Applications that do not HTML-encode the description and display it in a webpage
-// can expose users to potentially malicious code. Make sure that you HTML-encode
-// the description field in any application that uses this API to display the
-// repository description on a webpage.
+// Returns information about one or more repositories.
+//
+// The description field for a repository accepts all HTML characters and all
+// valid Unicode characters. Applications that do not HTML-encode the description
+// and display it in a webpage can expose users to potentially malicious code. Make
+// sure that you HTML-encode the description field in any application that uses
+// this API to display the repository description on a webpage.
 func (c *Client) BatchGetRepositories(ctx context.Context, params *BatchGetRepositoriesInput, optFns ...func(*Options)) (*BatchGetRepositoriesOutput, error) {
 	if params == nil {
 		params = &BatchGetRepositoriesInput{}
@@ -36,8 +36,10 @@ func (c *Client) BatchGetRepositories(ctx context.Context, params *BatchGetRepos
 // Represents the input of a batch get repositories operation.
 type BatchGetRepositoriesInput struct {
 
-	// The names of the repositories to get information about. The length constraint
-	// limit is for each string in the array. The array itself can be empty.
+	// The names of the repositories to get information about.
+	//
+	// The length constraint limit is for each string in the array. The array itself
+	// can be empty.
 	//
 	// This member is required.
 	RepositoryNames []string
@@ -86,25 +88,25 @@ func (c *Client) addOperationBatchGetRepositoriesMiddlewares(stack *middleware.S
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -119,13 +121,16 @@ func (c *Client) addOperationBatchGetRepositoriesMiddlewares(stack *middleware.S
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpBatchGetRepositoriesValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opBatchGetRepositories(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

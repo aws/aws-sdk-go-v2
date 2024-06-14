@@ -6,18 +6,21 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/applicationinsights/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
-// Lists the INFO, WARN, and ERROR events for periodic configuration updates
+//	Lists the INFO, WARN, and ERROR events for periodic configuration updates
+//
 // performed by Application Insights. Examples of events represented are:
+//
 //   - INFO: creating a new alarm or updating an alarm threshold.
+//
 //   - WARN: alarm not created due to insufficient data points used to predict
 //     thresholds.
+//
 //   - ERROR: alarm not created due to permission errors or exceeding quotas.
 func (c *Client) ListConfigurationHistory(ctx context.Context, params *ListConfigurationHistoryInput, optFns ...func(*Options)) (*ListConfigurationHistoryOutput, error) {
 	if params == nil {
@@ -46,9 +49,9 @@ type ListConfigurationHistoryInput struct {
 	// WARN, and ERROR.
 	EventStatus types.ConfigurationEventStatus
 
-	// The maximum number of results returned by ListConfigurationHistory in paginated
-	// output. When this parameter is used, ListConfigurationHistory returns only
-	// MaxResults in a single page along with a NextToken response element. The
+	//  The maximum number of results returned by ListConfigurationHistory in
+	// paginated output. When this parameter is used, ListConfigurationHistory returns
+	// only MaxResults in a single page along with a NextToken response element. The
 	// remaining results of the initial request can be seen by sending another
 	// ListConfigurationHistory request with the returned NextToken value. If this
 	// parameter is not used, then ListConfigurationHistory returns all results.
@@ -72,7 +75,7 @@ type ListConfigurationHistoryInput struct {
 
 type ListConfigurationHistoryOutput struct {
 
-	// The list of configuration events and their corresponding details.
+	//  The list of configuration events and their corresponding details.
 	EventList []types.ConfigurationEvent
 
 	// The NextToken value to include in a future ListConfigurationHistory request.
@@ -109,25 +112,25 @@ func (c *Client) addOperationListConfigurationHistoryMiddlewares(stack *middlewa
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -142,10 +145,13 @@ func (c *Client) addOperationListConfigurationHistoryMiddlewares(stack *middlewa
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListConfigurationHistory(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -174,9 +180,9 @@ var _ ListConfigurationHistoryAPIClient = (*Client)(nil)
 // ListConfigurationHistoryPaginatorOptions is the paginator options for
 // ListConfigurationHistory
 type ListConfigurationHistoryPaginatorOptions struct {
-	// The maximum number of results returned by ListConfigurationHistory in paginated
-	// output. When this parameter is used, ListConfigurationHistory returns only
-	// MaxResults in a single page along with a NextToken response element. The
+	//  The maximum number of results returned by ListConfigurationHistory in
+	// paginated output. When this parameter is used, ListConfigurationHistory returns
+	// only MaxResults in a single page along with a NextToken response element. The
 	// remaining results of the initial request can be seen by sending another
 	// ListConfigurationHistory request with the returned NextToken value. If this
 	// parameter is not used, then ListConfigurationHistory returns all results.

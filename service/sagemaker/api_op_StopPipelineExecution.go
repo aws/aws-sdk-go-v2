@@ -6,27 +6,36 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Stops a pipeline execution. Callback Step A pipeline execution won't stop while
-// a callback step is running. When you call StopPipelineExecution on a pipeline
-// execution with a running callback step, SageMaker Pipelines sends an additional
-// Amazon SQS message to the specified SQS queue. The body of the SQS message
-// contains a "Status" field which is set to "Stopping". You should add logic to
-// your Amazon SQS message consumer to take any needed action (for example,
-// resource cleanup) upon receipt of the message followed by a call to
-// SendPipelineExecutionStepSuccess or SendPipelineExecutionStepFailure . Only when
-// SageMaker Pipelines receives one of these calls will it stop the pipeline
-// execution. Lambda Step A pipeline execution can't be stopped while a lambda step
-// is running because the Lambda function invoked by the lambda step can't be
-// stopped. If you attempt to stop the execution while the Lambda function is
-// running, the pipeline waits for the Lambda function to finish or until the
-// timeout is hit, whichever occurs first, and then stops. If the Lambda function
-// finishes, the pipeline execution status is Stopped . If the timeout is hit the
-// pipeline execution status is Failed .
+// Stops a pipeline execution.
+//
+// # Callback Step
+//
+// A pipeline execution won't stop while a callback step is running. When you call
+// StopPipelineExecution on a pipeline execution with a running callback step,
+// SageMaker Pipelines sends an additional Amazon SQS message to the specified SQS
+// queue. The body of the SQS message contains a "Status" field which is set to
+// "Stopping".
+//
+// You should add logic to your Amazon SQS message consumer to take any needed
+// action (for example, resource cleanup) upon receipt of the message followed by a
+// call to SendPipelineExecutionStepSuccess or SendPipelineExecutionStepFailure .
+//
+// Only when SageMaker Pipelines receives one of these calls will it stop the
+// pipeline execution.
+//
+// # Lambda Step
+//
+// A pipeline execution can't be stopped while a lambda step is running because
+// the Lambda function invoked by the lambda step can't be stopped. If you attempt
+// to stop the execution while the Lambda function is running, the pipeline waits
+// for the Lambda function to finish or until the timeout is hit, whichever occurs
+// first, and then stops. If the Lambda function finishes, the pipeline execution
+// status is Stopped . If the timeout is hit the pipeline execution status is
+// Failed .
 func (c *Client) StopPipelineExecution(ctx context.Context, params *StopPipelineExecutionInput, optFns ...func(*Options)) (*StopPipelineExecutionOutput, error) {
 	if params == nil {
 		params = &StopPipelineExecutionInput{}
@@ -91,25 +100,25 @@ func (c *Client) addOperationStopPipelineExecutionMiddlewares(stack *middleware.
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -124,6 +133,9 @@ func (c *Client) addOperationStopPipelineExecutionMiddlewares(stack *middleware.
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opStopPipelineExecutionMiddleware(stack, options); err != nil {
 		return err
 	}
@@ -133,7 +145,7 @@ func (c *Client) addOperationStopPipelineExecutionMiddlewares(stack *middleware.
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opStopPipelineExecution(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

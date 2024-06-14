@@ -6,14 +6,15 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes a provisioned throughput. For more information, see Provisioned
-// throughput (https://docs.aws.amazon.com/bedrock/latest/userguide/what-is-service.html)
-// in the Bedrock User Guide.
+// Deletes a Provisioned Throughput. You can't delete a Provisioned Throughput
+// before the commitment term is over. For more information, see [Provisioned Throughput]in the Amazon
+// Bedrock User Guide.
+//
+// [Provisioned Throughput]: https://docs.aws.amazon.com/bedrock/latest/userguide/prov-throughput.html
 func (c *Client) DeleteProvisionedModelThroughput(ctx context.Context, params *DeleteProvisionedModelThroughputInput, optFns ...func(*Options)) (*DeleteProvisionedModelThroughputOutput, error) {
 	if params == nil {
 		params = &DeleteProvisionedModelThroughputInput{}
@@ -31,7 +32,7 @@ func (c *Client) DeleteProvisionedModelThroughput(ctx context.Context, params *D
 
 type DeleteProvisionedModelThroughputInput struct {
 
-	// The ARN or name of the provisioned throughput.
+	// The Amazon Resource Name (ARN) or name of the Provisioned Throughput.
 	//
 	// This member is required.
 	ProvisionedModelId *string
@@ -68,25 +69,25 @@ func (c *Client) addOperationDeleteProvisionedModelThroughputMiddlewares(stack *
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -101,13 +102,16 @@ func (c *Client) addOperationDeleteProvisionedModelThroughputMiddlewares(stack *
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDeleteProvisionedModelThroughputValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteProvisionedModelThroughput(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

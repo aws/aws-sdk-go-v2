@@ -6,24 +6,28 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Disables Health from working with Organizations. To call this operation, you
 // must sign in to the organization's management account. For more information, see
-// Aggregating Health events (https://docs.aws.amazon.com/health/latest/ug/aggregate-events.html)
-// in the Health User Guide. This operation doesn't remove the service-linked role
-// from the management account in your organization. You must use the IAM console,
-// API, or Command Line Interface (CLI) to remove the service-linked role. For more
-// information, see Deleting a Service-Linked Role (https://docs.aws.amazon.com/IAM/latest/UserGuide/using-service-linked-roles.html#delete-service-linked-role)
-// in the IAM User Guide. You can also disable the organizational feature by using
-// the Organizations DisableAWSServiceAccess (https://docs.aws.amazon.com/organizations/latest/APIReference/API_DisableAWSServiceAccess.html)
-// API operation. After you call this operation, Health stops aggregating events
-// for all other Amazon Web Services accounts in your organization. If you call the
+// [Aggregating Health events]in the Health User Guide.
+//
+// This operation doesn't remove the service-linked role from the management
+// account in your organization. You must use the IAM console, API, or Command Line
+// Interface (CLI) to remove the service-linked role. For more information, see [Deleting a Service-Linked Role]in
+// the IAM User Guide.
+//
+// You can also disable the organizational feature by using the Organizations [DisableAWSServiceAccess] API
+// operation. After you call this operation, Health stops aggregating events for
+// all other Amazon Web Services accounts in your organization. If you call the
 // Health API operations for organizational view, Health returns an error. Health
 // continues to aggregate health events for your Amazon Web Services account.
+//
+// [DisableAWSServiceAccess]: https://docs.aws.amazon.com/organizations/latest/APIReference/API_DisableAWSServiceAccess.html
+// [Aggregating Health events]: https://docs.aws.amazon.com/health/latest/ug/aggregate-events.html
+// [Deleting a Service-Linked Role]: https://docs.aws.amazon.com/IAM/latest/UserGuide/using-service-linked-roles.html#delete-service-linked-role
 func (c *Client) DisableHealthServiceAccessForOrganization(ctx context.Context, params *DisableHealthServiceAccessForOrganizationInput, optFns ...func(*Options)) (*DisableHealthServiceAccessForOrganizationOutput, error) {
 	if params == nil {
 		params = &DisableHealthServiceAccessForOrganizationInput{}
@@ -72,25 +76,25 @@ func (c *Client) addOperationDisableHealthServiceAccessForOrganizationMiddleware
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -105,10 +109,13 @@ func (c *Client) addOperationDisableHealthServiceAccessForOrganizationMiddleware
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDisableHealthServiceAccessForOrganization(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

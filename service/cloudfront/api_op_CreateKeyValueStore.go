@@ -6,14 +6,13 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/cloudfront/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Specifies the Key Value Store resource to add to your account. In your account,
-// the Key Value Store names must be unique. You can also import Key Value Store
+// Specifies the key value store resource to add to your account. In your account,
+// the key value store names must be unique. You can also import key value store
 // data in JSON format from an S3 bucket by providing a valid ImportSource that
 // you own.
 func (c *Client) CreateKeyValueStore(ctx context.Context, params *CreateKeyValueStoreInput, optFns ...func(*Options)) (*CreateKeyValueStoreOutput, error) {
@@ -33,13 +32,13 @@ func (c *Client) CreateKeyValueStore(ctx context.Context, params *CreateKeyValue
 
 type CreateKeyValueStoreInput struct {
 
-	// The name of the Key Value Store. The maximum length of the name is 32
-	// characters.
+	// The name of the key value store. The minimum length is 1 character and the
+	// maximum length is 64 characters.
 	//
 	// This member is required.
 	Name *string
 
-	// The comment of the Key Value Store.
+	// The comment of the key value store.
 	Comment *string
 
 	// The S3 bucket that provides the source for the import. The source must be in a
@@ -51,13 +50,13 @@ type CreateKeyValueStoreInput struct {
 
 type CreateKeyValueStoreOutput struct {
 
-	// The ETag in the resulting Key Value Store.
+	// The ETag in the resulting key value store.
 	ETag *string
 
-	// The resulting Key Value Store.
+	// The resulting key value store.
 	KeyValueStore *types.KeyValueStore
 
-	// The location of the resulting Key Value Store.
+	// The location of the resulting key value store.
 	Location *string
 
 	// Metadata pertaining to the operation's result.
@@ -88,25 +87,25 @@ func (c *Client) addOperationCreateKeyValueStoreMiddlewares(stack *middleware.St
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -121,13 +120,16 @@ func (c *Client) addOperationCreateKeyValueStoreMiddlewares(stack *middleware.St
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpCreateKeyValueStoreValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateKeyValueStore(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

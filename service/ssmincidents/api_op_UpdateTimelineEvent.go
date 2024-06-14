@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/ssmincidents/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -54,10 +53,11 @@ type UpdateTimelineEventInput struct {
 	// reference, enter its Amazon Resource Name (ARN). You can also specify a related
 	// item associated with that resource. For example, to specify an Amazon DynamoDB
 	// (DynamoDB) table as a resource, use its ARN. You can also specify an Amazon
-	// CloudWatch metric associated with the DynamoDB table as a related item. This
-	// update action overrides all existing references. If you want to keep existing
-	// references, you must specify them in the call. If you don't, this action removes
-	// any existing references and enters only new references.
+	// CloudWatch metric associated with the DynamoDB table as a related item.
+	//
+	// This update action overrides all existing references. If you want to keep
+	// existing references, you must specify them in the call. If you don't, this
+	// action removes any existing references and enters only new references.
 	EventReferences []types.EventReference
 
 	// The timestamp for when the event occurred.
@@ -98,25 +98,25 @@ func (c *Client) addOperationUpdateTimelineEventMiddlewares(stack *middleware.St
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -131,6 +131,9 @@ func (c *Client) addOperationUpdateTimelineEventMiddlewares(stack *middleware.St
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opUpdateTimelineEventMiddleware(stack, options); err != nil {
 		return err
 	}
@@ -140,7 +143,7 @@ func (c *Client) addOperationUpdateTimelineEventMiddlewares(stack *middleware.St
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateTimelineEvent(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

@@ -6,13 +6,13 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/qconnect/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Searches existing Amazon Q quick responses in an Amazon Q knowledge base.
+// Searches existing Amazon Q in Connect quick responses in an Amazon Q in Connect
+// knowledge base.
 func (c *Client) SearchQuickResponses(ctx context.Context, params *SearchQuickResponsesInput, optFns ...func(*Options)) (*SearchQuickResponsesOutput, error) {
 	if params == nil {
 		params = &SearchQuickResponsesInput{}
@@ -41,8 +41,9 @@ type SearchQuickResponsesInput struct {
 	// This member is required.
 	SearchExpression *types.QuickResponseSearchExpression
 
-	// The user-defined Amazon Connect contact attributes (https://docs.aws.amazon.com/connect/latest/adminguide/connect-attrib-list.html#user-defined-attributes)
-	// to be resolved when search results are returned.
+	// The [user-defined Amazon Connect contact attributes] to be resolved when search results are returned.
+	//
+	// [user-defined Amazon Connect contact attributes]: https://docs.aws.amazon.com/connect/latest/adminguide/connect-attrib-list.html#user-defined-attributes
 	Attributes map[string]string
 
 	// The maximum number of results to return per page.
@@ -94,25 +95,25 @@ func (c *Client) addOperationSearchQuickResponsesMiddlewares(stack *middleware.S
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -127,13 +128,16 @@ func (c *Client) addOperationSearchQuickResponsesMiddlewares(stack *middleware.S
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpSearchQuickResponsesValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opSearchQuickResponses(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

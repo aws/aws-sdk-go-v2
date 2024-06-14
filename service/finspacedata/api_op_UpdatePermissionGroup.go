@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/finspacedata/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -39,20 +38,29 @@ type UpdatePermissionGroupInput struct {
 	PermissionGroupId *string
 
 	// The permissions that are granted to a specific group for accessing the FinSpace
-	// application. When assigning application permissions, be aware that the
-	// permission ManageUsersAndGroups allows users to grant themselves or others
-	// access to any functionality in their FinSpace environment's application. It
-	// should only be granted to trusted users.
+	// application.
+	//
+	// When assigning application permissions, be aware that the permission
+	// ManageUsersAndGroups allows users to grant themselves or others access to any
+	// functionality in their FinSpace environment's application. It should only be
+	// granted to trusted users.
+	//
 	//   - CreateDataset – Group members can create new datasets.
+	//
 	//   - ManageClusters – Group members can manage Apache Spark clusters from
 	//   FinSpace notebooks.
+	//
 	//   - ManageUsersAndGroups – Group members can manage users and permission groups.
 	//   This is a privileged permission that allows users to grant themselves or others
 	//   access to any functionality in the application. It should only be granted to
 	//   trusted users.
+	//
 	//   - ManageAttributeSets – Group members can manage attribute sets.
+	//
 	//   - ViewAuditData – Group members can view audit data.
+	//
 	//   - AccessNotebooks – Group members will have access to FinSpace notebooks.
+	//
 	//   - GetTemporaryCredentials – Group members can get temporary API credentials.
 	ApplicationPermissions []types.ApplicationPermission
 
@@ -101,25 +109,25 @@ func (c *Client) addOperationUpdatePermissionGroupMiddlewares(stack *middleware.
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -137,6 +145,9 @@ func (c *Client) addOperationUpdatePermissionGroupMiddlewares(stack *middleware.
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opUpdatePermissionGroupMiddleware(stack, options); err != nil {
 		return err
 	}
@@ -146,7 +157,7 @@ func (c *Client) addOperationUpdatePermissionGroupMiddlewares(stack *middleware.
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdatePermissionGroup(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

@@ -6,26 +6,30 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/timestreamwrite/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Returns a list of available endpoints to make Timestream API calls against.
-// This API operation is available through both the Write and Query APIs. Because
-// the Timestream SDKs are designed to transparently work with the service’s
-// architecture, including the management and mapping of the service endpoints, we
-// don't recommend that you use this API operation unless:
-//   - You are using VPC endpoints (Amazon Web Services PrivateLink) with
-//     Timestream (https://docs.aws.amazon.com/timestream/latest/developerguide/VPCEndpoints)
+// This API operation is available through both the Write and Query APIs.
+//
+// Because the Timestream SDKs are designed to transparently work with the
+// service’s architecture, including the management and mapping of the service
+// endpoints, we don't recommend that you use this API operation unless:
+//
+//   - You are using [VPC endpoints (Amazon Web Services PrivateLink) with Timestream]
+//
 //   - Your application uses a programming language that does not yet have SDK
 //     support
+//
 //   - You require better control over the client-side implementation
 //
 // For detailed information on how and when to use and implement
-// DescribeEndpoints, see The Endpoint Discovery Pattern (https://docs.aws.amazon.com/timestream/latest/developerguide/Using.API.html#Using-API.endpoint-discovery)
-// .
+// DescribeEndpoints, see [The Endpoint Discovery Pattern].
+//
+// [The Endpoint Discovery Pattern]: https://docs.aws.amazon.com/timestream/latest/developerguide/Using.API.html#Using-API.endpoint-discovery
+// [VPC endpoints (Amazon Web Services PrivateLink) with Timestream]: https://docs.aws.amazon.com/timestream/latest/developerguide/VPCEndpoints
 func (c *Client) DescribeEndpoints(ctx context.Context, params *DescribeEndpointsInput, optFns ...func(*Options)) (*DescribeEndpointsOutput, error) {
 	if params == nil {
 		params = &DescribeEndpointsInput{}
@@ -80,25 +84,25 @@ func (c *Client) addOperationDescribeEndpointsMiddlewares(stack *middleware.Stac
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -113,10 +117,13 @@ func (c *Client) addOperationDescribeEndpointsMiddlewares(stack *middleware.Stac
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeEndpoints(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

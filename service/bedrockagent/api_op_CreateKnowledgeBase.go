@@ -6,13 +6,48 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockagent/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Create a new knowledge base
+// Creates a knowledge base that contains data sources from which information can
+// be queried and used by LLMs. To create a knowledge base, you must first set up
+// your data sources and configure a supported vector store. For more information,
+// see [Set up your data for ingestion].
+//
+// If you prefer to let Amazon Bedrock create and manage a vector store for you in
+// Amazon OpenSearch Service, use the console. For more information, see [Create a knowledge base].
+//
+//   - Provide the name and an optional description .
+//
+//   - Provide the Amazon Resource Name (ARN) with permissions to create a
+//     knowledge base in the roleArn field.
+//
+//   - Provide the embedding model to use in the embeddingModelArn field in the
+//     knowledgeBaseConfiguration object.
+//
+//   - Provide the configuration for your vector store in the storageConfiguration
+//     object.
+//
+//   - For an Amazon OpenSearch Service database, use the
+//     opensearchServerlessConfiguration object. For more information, see [Create a vector store in Amazon OpenSearch Service].
+//
+//   - For an Amazon Aurora database, use the RdsConfiguration object. For more
+//     information, see [Create a vector store in Amazon Aurora].
+//
+//   - For a Pinecone database, use the pineconeConfiguration object. For more
+//     information, see [Create a vector store in Pinecone].
+//
+//   - For a Redis Enterprise Cloud database, use the
+//     redisEnterpriseCloudConfiguration object. For more information, see [Create a vector store in Redis Enterprise Cloud].
+//
+// [Set up your data for ingestion]: https://docs.aws.amazon.com/bedrock/latest/userguide/knowledge-base-setup.html
+// [Create a knowledge base]: https://docs.aws.amazon.com/bedrock/latest/userguide/knowledge-base-create
+// [Create a vector store in Amazon OpenSearch Service]: https://docs.aws.amazon.com/bedrock/latest/userguide/knowledge-base-setup-oss.html
+// [Create a vector store in Redis Enterprise Cloud]: https://docs.aws.amazon.com/bedrock/latest/userguide/knowledge-base-setup-redis.html
+// [Create a vector store in Amazon Aurora]: https://docs.aws.amazon.com/bedrock/latest/userguide/knowledge-base-setup-rds.html
+// [Create a vector store in Pinecone]: https://docs.aws.amazon.com/bedrock/latest/userguide/knowledge-base-setup-pinecone.html
 func (c *Client) CreateKnowledgeBase(ctx context.Context, params *CreateKnowledgeBaseInput, optFns ...func(*Options)) (*CreateKnowledgeBaseOutput, error) {
 	if params == nil {
 		params = &CreateKnowledgeBaseInput{}
@@ -30,33 +65,40 @@ func (c *Client) CreateKnowledgeBase(ctx context.Context, params *CreateKnowledg
 
 type CreateKnowledgeBaseInput struct {
 
-	// Configures a bedrock knowledge base.
+	// Contains details about the embeddings model used for the knowledge base.
 	//
 	// This member is required.
 	KnowledgeBaseConfiguration *types.KnowledgeBaseConfiguration
 
-	// Name for a resource.
+	// A name for the knowledge base.
 	//
 	// This member is required.
 	Name *string
 
-	// ARN of a IAM role.
+	// The Amazon Resource Name (ARN) of the IAM role with permissions to invoke API
+	// operations on the knowledge base.
 	//
 	// This member is required.
 	RoleArn *string
 
-	// Configures the physical storage of ingested data in a knowledge base.
+	// Contains details about the configuration of the vector database used for the
+	// knowledge base.
 	//
 	// This member is required.
 	StorageConfiguration *types.StorageConfiguration
 
-	// Client specified token used for idempotency checks
+	// A unique, case-sensitive identifier to ensure that the API request completes no
+	// more than one time. If this token matches a previous request, Amazon Bedrock
+	// ignores the request, but does not return an error. For more information, see [Ensuring idempotency].
+	//
+	// [Ensuring idempotency]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
 	ClientToken *string
 
-	// Description of the Resource.
+	// A description of the knowledge base.
 	Description *string
 
-	// A map of tag keys and values
+	// Specify the key-value pairs for the tags that you want to attach to your
+	// knowledge base in this object.
 	Tags map[string]string
 
 	noSmithyDocumentSerde
@@ -64,7 +106,7 @@ type CreateKnowledgeBaseInput struct {
 
 type CreateKnowledgeBaseOutput struct {
 
-	// Contains the information of a knowledge base.
+	// Contains details about the knowledge base.
 	//
 	// This member is required.
 	KnowledgeBase *types.KnowledgeBase
@@ -97,25 +139,25 @@ func (c *Client) addOperationCreateKnowledgeBaseMiddlewares(stack *middleware.St
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -130,6 +172,9 @@ func (c *Client) addOperationCreateKnowledgeBaseMiddlewares(stack *middleware.St
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opCreateKnowledgeBaseMiddleware(stack, options); err != nil {
 		return err
 	}
@@ -139,7 +184,7 @@ func (c *Client) addOperationCreateKnowledgeBaseMiddlewares(stack *middleware.St
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateKnowledgeBase(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

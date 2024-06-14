@@ -6,18 +6,18 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/storagegateway/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Lists the recovery points for a specified gateway. This operation is only
-// supported in the cached volume gateway type. Each cache volume has one recovery
-// point. A volume recovery point is a point in time at which all data of the
-// volume is consistent and from which you can create a snapshot or clone a new
-// cached volume from a source volume. To create a snapshot from a volume recovery
-// point use the CreateSnapshotFromVolumeRecoveryPoint operation.
+// supported in the cached volume gateway type.
+//
+// Each cache volume has one recovery point. A volume recovery point is a point in
+// time at which all data of the volume is consistent and from which you can create
+// a snapshot or clone a new cached volume from a source volume. To create a
+// snapshot from a volume recovery point use the CreateSnapshotFromVolumeRecoveryPointoperation.
 func (c *Client) ListVolumeRecoveryPoints(ctx context.Context, params *ListVolumeRecoveryPointsInput, optFns ...func(*Options)) (*ListVolumeRecoveryPointsOutput, error) {
 	if params == nil {
 		params = &ListVolumeRecoveryPointsInput{}
@@ -35,8 +35,8 @@ func (c *Client) ListVolumeRecoveryPoints(ctx context.Context, params *ListVolum
 
 type ListVolumeRecoveryPointsInput struct {
 
-	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation
-	// to return a list of gateways for your account and Amazon Web Services Region.
+	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation to return a
+	// list of gateways for your account and Amazon Web Services Region.
 	//
 	// This member is required.
 	GatewayARN *string
@@ -46,8 +46,8 @@ type ListVolumeRecoveryPointsInput struct {
 
 type ListVolumeRecoveryPointsOutput struct {
 
-	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation
-	// to return a list of gateways for your account and Amazon Web Services Region.
+	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation to return a
+	// list of gateways for your account and Amazon Web Services Region.
 	GatewayARN *string
 
 	// An array of VolumeRecoveryPointInfo objects.
@@ -81,25 +81,25 @@ func (c *Client) addOperationListVolumeRecoveryPointsMiddlewares(stack *middlewa
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -114,13 +114,16 @@ func (c *Client) addOperationListVolumeRecoveryPointsMiddlewares(stack *middlewa
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpListVolumeRecoveryPointsValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListVolumeRecoveryPoints(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

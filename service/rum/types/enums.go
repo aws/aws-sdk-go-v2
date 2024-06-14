@@ -11,8 +11,9 @@ const (
 )
 
 // Values returns all known values for CustomEventsStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (CustomEventsStatus) Values() []CustomEventsStatus {
 	return []CustomEventsStatus{
 		"ENABLED",
@@ -29,8 +30,9 @@ const (
 )
 
 // Values returns all known values for MetricDestination. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (MetricDestination) Values() []MetricDestination {
 	return []MetricDestination{
 		"CloudWatch",
@@ -48,8 +50,9 @@ const (
 )
 
 // Values returns all known values for StateEnum. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (StateEnum) Values() []StateEnum {
 	return []StateEnum{
 		"CREATED",
@@ -71,8 +74,9 @@ const (
 )
 
 // Values returns all known values for Telemetry. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (Telemetry) Values() []Telemetry {
 	return []Telemetry{
 		"errors",

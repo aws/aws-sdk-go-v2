@@ -6,14 +6,13 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/qbusiness/document"
 	"github.com/aws/aws-sdk-go-v2/service/qbusiness/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates an existing Amazon Q data source connector.
+// Updates an existing Amazon Q Business data source connector.
 func (c *Client) UpdateDataSource(ctx context.Context, params *UpdateDataSourceInput, optFns ...func(*Options)) (*UpdateDataSourceOutput, error) {
 	if params == nil {
 		params = &UpdateDataSourceInput{}
@@ -31,7 +30,8 @@ func (c *Client) UpdateDataSource(ctx context.Context, params *UpdateDataSourceI
 
 type UpdateDataSourceInput struct {
 
-	// The identifier of the Amazon Q application the data source is attached to.
+	//  The identifier of the Amazon Q Business application the data source is
+	// attached to.
 	//
 	// This member is required.
 	ApplicationId *string
@@ -46,7 +46,7 @@ type UpdateDataSourceInput struct {
 	// This member is required.
 	IndexId *string
 
-	// Provides the configuration information for an Amazon Q data source.
+	// Provides the configuration information for an Amazon Q Business data source.
 	Configuration document.Interface
 
 	// The description of the data source connector.
@@ -56,9 +56,11 @@ type UpdateDataSourceInput struct {
 	DisplayName *string
 
 	// Provides the configuration information for altering document metadata and
-	// content during the document ingestion process. For more information, see Custom
-	// document enrichment (https://docs.aws.amazon.com/amazonq/latest/business-use-dg/custom-document-enrichment.html)
-	// .
+	// content during the document ingestion process.
+	//
+	// For more information, see [Custom document enrichment].
+	//
+	// [Custom document enrichment]: https://docs.aws.amazon.com/amazonq/latest/business-use-dg/custom-document-enrichment.html
 	DocumentEnrichmentConfiguration *types.DocumentEnrichmentConfiguration
 
 	// The Amazon Resource Name (ARN) of an IAM role with permission to access the
@@ -104,25 +106,25 @@ func (c *Client) addOperationUpdateDataSourceMiddlewares(stack *middleware.Stack
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -137,13 +139,16 @@ func (c *Client) addOperationUpdateDataSourceMiddlewares(stack *middleware.Stack
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpUpdateDataSourceValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateDataSource(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

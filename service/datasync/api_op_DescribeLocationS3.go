@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/datasync/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -45,9 +44,11 @@ type DescribeLocationS3Input struct {
 type DescribeLocationS3Output struct {
 
 	// The ARNs of the DataSync agents deployed on your Outpost when using working
-	// with Amazon S3 on Outposts. For more information, see Deploy your DataSync
-	// agent on Outposts (https://docs.aws.amazon.com/datasync/latest/userguide/deploy-agents.html#outposts-agent)
-	// .
+	// with Amazon S3 on Outposts.
+	//
+	// For more information, see [Deploy your DataSync agent on Outposts].
+	//
+	// [Deploy your DataSync agent on Outposts]: https://docs.aws.amazon.com/datasync/latest/userguide/deploy-agents.html#outposts-agent
 	AgentArns []string
 
 	// The time that the Amazon S3 location was created.
@@ -60,16 +61,20 @@ type DescribeLocationS3Output struct {
 	LocationUri *string
 
 	// Specifies the Amazon Resource Name (ARN) of the Identity and Access Management
-	// (IAM) role that DataSync uses to access your S3 bucket. For more information,
-	// see Accessing S3 buckets (https://docs.aws.amazon.com/datasync/latest/userguide/create-s3-location.html#create-s3-location-access)
-	// .
+	// (IAM) role that DataSync uses to access your S3 bucket.
+	//
+	// For more information, see [Accessing S3 buckets].
+	//
+	// [Accessing S3 buckets]: https://docs.aws.amazon.com/datasync/latest/userguide/create-s3-location.html#create-s3-location-access
 	S3Config *types.S3Config
 
 	// When Amazon S3 is a destination location, this is the storage class that you
-	// chose for your objects. Some storage classes have behaviors that can affect your
-	// Amazon S3 storage costs. For more information, see Storage class considerations
-	// with Amazon S3 transfers (https://docs.aws.amazon.com/datasync/latest/userguide/create-s3-location.html#using-storage-classes)
-	// .
+	// chose for your objects.
+	//
+	// Some storage classes have behaviors that can affect your Amazon S3 storage
+	// costs. For more information, see [Storage class considerations with Amazon S3 transfers].
+	//
+	// [Storage class considerations with Amazon S3 transfers]: https://docs.aws.amazon.com/datasync/latest/userguide/create-s3-location.html#using-storage-classes
 	S3StorageClass types.S3StorageClass
 
 	// Metadata pertaining to the operation's result.
@@ -100,25 +105,25 @@ func (c *Client) addOperationDescribeLocationS3Middlewares(stack *middleware.Sta
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -133,13 +138,16 @@ func (c *Client) addOperationDescribeLocationS3Middlewares(stack *middleware.Sta
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDescribeLocationS3ValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeLocationS3(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

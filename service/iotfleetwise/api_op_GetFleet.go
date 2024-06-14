@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -30,7 +29,7 @@ func (c *Client) GetFleet(ctx context.Context, params *GetFleetInput, optFns ...
 
 type GetFleetInput struct {
 
-	// The ID of the fleet to retrieve information about.
+	//  The ID of the fleet to retrieve information about.
 	//
 	// This member is required.
 	FleetId *string
@@ -40,34 +39,34 @@ type GetFleetInput struct {
 
 type GetFleetOutput struct {
 
-	// The Amazon Resource Name (ARN) of the fleet.
+	//  The Amazon Resource Name (ARN) of the fleet.
 	//
 	// This member is required.
 	Arn *string
 
-	// The time the fleet was created in seconds since epoch (January 1, 1970 at
+	//  The time the fleet was created in seconds since epoch (January 1, 1970 at
 	// midnight UTC time).
 	//
 	// This member is required.
 	CreationTime *time.Time
 
-	// The ID of the fleet.
+	//  The ID of the fleet.
 	//
 	// This member is required.
 	Id *string
 
-	// The time the fleet was last updated, in seconds since epoch (January 1, 1970 at
-	// midnight UTC time).
+	//  The time the fleet was last updated, in seconds since epoch (January 1, 1970
+	// at midnight UTC time).
 	//
 	// This member is required.
 	LastModificationTime *time.Time
 
-	// The ARN of a signal catalog associated with the fleet.
+	//  The ARN of a signal catalog associated with the fleet.
 	//
 	// This member is required.
 	SignalCatalogArn *string
 
-	// A brief description of the fleet.
+	//  A brief description of the fleet.
 	Description *string
 
 	// Metadata pertaining to the operation's result.
@@ -98,25 +97,25 @@ func (c *Client) addOperationGetFleetMiddlewares(stack *middleware.Stack, option
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -131,13 +130,16 @@ func (c *Client) addOperationGetFleetMiddlewares(stack *middleware.Stack, option
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpGetFleetValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetFleet(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

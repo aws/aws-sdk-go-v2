@@ -130,6 +130,26 @@ func (m *validateOpCreateIPSet) HandleInitialize(ctx context.Context, in middlew
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateMalwareProtectionPlan struct {
+}
+
+func (*validateOpCreateMalwareProtectionPlan) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateMalwareProtectionPlan) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateMalwareProtectionPlanInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateMalwareProtectionPlanInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateMembers struct {
 }
 
@@ -305,6 +325,26 @@ func (m *validateOpDeleteIPSet) HandleInitialize(ctx context.Context, in middlew
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDeleteIPSetInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteMalwareProtectionPlan struct {
+}
+
+func (*validateOpDeleteMalwareProtectionPlan) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteMalwareProtectionPlan) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteMalwareProtectionPlanInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteMalwareProtectionPlanInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -665,6 +705,26 @@ func (m *validateOpGetIPSet) HandleInitialize(ctx context.Context, in middleware
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpGetIPSetInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetMalwareProtectionPlan struct {
+}
+
+func (*validateOpGetMalwareProtectionPlan) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetMalwareProtectionPlan) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetMalwareProtectionPlanInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetMalwareProtectionPlanInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -1190,6 +1250,26 @@ func (m *validateOpUpdateIPSet) HandleInitialize(ctx context.Context, in middlew
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateMalwareProtectionPlan struct {
+}
+
+func (*validateOpUpdateMalwareProtectionPlan) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateMalwareProtectionPlan) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateMalwareProtectionPlanInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateMalwareProtectionPlanInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateMalwareScanSettings struct {
 }
 
@@ -1314,6 +1394,10 @@ func addOpCreateIPSetValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateIPSet{}, middleware.After)
 }
 
+func addOpCreateMalwareProtectionPlanValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateMalwareProtectionPlan{}, middleware.After)
+}
+
 func addOpCreateMembersValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateMembers{}, middleware.After)
 }
@@ -1348,6 +1432,10 @@ func addOpDeleteInvitationsValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpDeleteIPSetValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteIPSet{}, middleware.After)
+}
+
+func addOpDeleteMalwareProtectionPlanValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteMalwareProtectionPlan{}, middleware.After)
 }
 
 func addOpDeleteMembersValidationMiddleware(stack *middleware.Stack) error {
@@ -1420,6 +1508,10 @@ func addOpGetFindingsStatisticsValidationMiddleware(stack *middleware.Stack) err
 
 func addOpGetIPSetValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetIPSet{}, middleware.After)
+}
+
+func addOpGetMalwareProtectionPlanValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetMalwareProtectionPlan{}, middleware.After)
 }
 
 func addOpGetMalwareScanSettingsValidationMiddleware(stack *middleware.Stack) error {
@@ -1524,6 +1616,10 @@ func addOpUpdateFindingsFeedbackValidationMiddleware(stack *middleware.Stack) er
 
 func addOpUpdateIPSetValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateIPSet{}, middleware.After)
+}
+
+func addOpUpdateMalwareProtectionPlanValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateMalwareProtectionPlan{}, middleware.After)
 }
 
 func addOpUpdateMalwareScanSettingsValidationMiddleware(stack *middleware.Stack) error {
@@ -1942,6 +2038,24 @@ func validateOpCreateIPSetInput(v *CreateIPSetInput) error {
 	}
 }
 
+func validateOpCreateMalwareProtectionPlanInput(v *CreateMalwareProtectionPlanInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateMalwareProtectionPlanInput"}
+	if v.Role == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Role"))
+	}
+	if v.ProtectedResource == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ProtectedResource"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCreateMembersInput(v *CreateMembersInput) error {
 	if v == nil {
 		return nil
@@ -2100,6 +2214,21 @@ func validateOpDeleteIPSetInput(v *DeleteIPSetInput) error {
 	}
 	if v.IpSetId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("IpSetId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteMalwareProtectionPlanInput(v *DeleteMalwareProtectionPlanInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteMalwareProtectionPlanInput"}
+	if v.MalwareProtectionPlanId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MalwareProtectionPlanId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2400,6 +2529,21 @@ func validateOpGetIPSetInput(v *GetIPSetInput) error {
 	}
 	if v.IpSetId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("IpSetId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetMalwareProtectionPlanInput(v *GetMalwareProtectionPlanInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetMalwareProtectionPlanInput"}
+	if v.MalwareProtectionPlanId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MalwareProtectionPlanId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2840,6 +2984,21 @@ func validateOpUpdateIPSetInput(v *UpdateIPSetInput) error {
 	}
 	if v.IpSetId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("IpSetId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateMalwareProtectionPlanInput(v *UpdateMalwareProtectionPlanInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateMalwareProtectionPlanInput"}
+	if v.MalwareProtectionPlanId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MalwareProtectionPlanId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/servicecatalog/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -14,24 +13,31 @@ import (
 
 // Updates the specified portfolio share. You can use this API to enable or
 // disable TagOptions sharing or Principal sharing for an existing portfolio
-// share. The portfolio share cannot be updated if the CreatePortfolioShare
-// operation is IN_PROGRESS , as the share is not available to recipient entities.
-// In this case, you must wait for the portfolio share to be completed. You must
-// provide the accountId or organization node in the input, but not both. If the
-// portfolio is shared to both an external account and an organization node, and
-// both shares need to be updated, you must invoke UpdatePortfolioShare separately
-// for each share type. This API cannot be used for removing the portfolio share.
-// You must use DeletePortfolioShare API for that action. When you associate a
-// principal with portfolio, a potential privilege escalation path may occur when
-// that portfolio is then shared with other accounts. For a user in a recipient
-// account who is not an Service Catalog Admin, but still has the ability to create
-// Principals (Users/Groups/Roles), that user could create a role that matches a
-// principal name association for the portfolio. Although this user may not know
-// which principal names are associated through Service Catalog, they may be able
-// to guess the user. If this potential escalation path is a concern, then Service
-// Catalog recommends using PrincipalType as IAM . With this configuration, the
-// PrincipalARN must already exist in the recipient account before it can be
-// associated.
+// share.
+//
+// The portfolio share cannot be updated if the CreatePortfolioShare operation is
+// IN_PROGRESS , as the share is not available to recipient entities. In this case,
+// you must wait for the portfolio share to be completed.
+//
+// You must provide the accountId or organization node in the input, but not both.
+//
+// If the portfolio is shared to both an external account and an organization
+// node, and both shares need to be updated, you must invoke UpdatePortfolioShare
+// separately for each share type.
+//
+// This API cannot be used for removing the portfolio share. You must use
+// DeletePortfolioShare API for that action.
+//
+// When you associate a principal with portfolio, a potential privilege escalation
+// path may occur when that portfolio is then shared with other accounts. For a
+// user in a recipient account who is not an Service Catalog Admin, but still has
+// the ability to create Principals (Users/Groups/Roles), that user could create a
+// role that matches a principal name association for the portfolio. Although this
+// user may not know which principal names are associated through Service Catalog,
+// they may be able to guess the user. If this potential escalation path is a
+// concern, then Service Catalog recommends using PrincipalType as IAM . With this
+// configuration, the PrincipalARN must already exist in the recipient account
+// before it can be associated.
 func (c *Client) UpdatePortfolioShare(ctx context.Context, params *UpdatePortfolioShareInput, optFns ...func(*Options)) (*UpdatePortfolioShareOutput, error) {
 	if params == nil {
 		params = &UpdatePortfolioShareInput{}
@@ -55,7 +61,9 @@ type UpdatePortfolioShareInput struct {
 	PortfolioId *string
 
 	// The language code.
+	//
 	//   - jp - Japanese
+	//
 	//   - zh - Chinese
 	AcceptLanguage *string
 
@@ -117,25 +125,25 @@ func (c *Client) addOperationUpdatePortfolioShareMiddlewares(stack *middleware.S
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -150,13 +158,16 @@ func (c *Client) addOperationUpdatePortfolioShareMiddlewares(stack *middleware.S
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpUpdatePortfolioShareValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdatePortfolioShare(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/machinelearning/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -15,30 +14,36 @@ import (
 // Creates a DataSource from a database hosted on an Amazon Redshift cluster. A
 // DataSource references data that can be used to perform either CreateMLModel ,
 // CreateEvaluation , or CreateBatchPrediction operations.
+//
 // CreateDataSourceFromRedshift is an asynchronous operation. In response to
 // CreateDataSourceFromRedshift , Amazon Machine Learning (Amazon ML) immediately
 // returns and sets the DataSource status to PENDING . After the DataSource is
 // created and ready for use, Amazon ML sets the Status parameter to COMPLETED .
 // DataSource in COMPLETED or PENDING states can be used to perform only
-// CreateMLModel , CreateEvaluation , or CreateBatchPrediction operations. If
-// Amazon ML can't accept the input source, it sets the Status parameter to FAILED
-// and includes an error message in the Message attribute of the GetDataSource
-// operation response. The observations should be contained in the database hosted
-// on an Amazon Redshift cluster and should be specified by a SelectSqlQuery
-// query. Amazon ML executes an Unload command in Amazon Redshift to transfer the
-// result set of the SelectSqlQuery query to S3StagingLocation . After the
-// DataSource has been created, it's ready for use in evaluations and batch
-// predictions. If you plan to use the DataSource to train an MLModel , the
+// CreateMLModel , CreateEvaluation , or CreateBatchPrediction operations.
+//
+// If Amazon ML can't accept the input source, it sets the Status parameter to
+// FAILED and includes an error message in the Message attribute of the
+// GetDataSource operation response.
+//
+// The observations should be contained in the database hosted on an Amazon
+// Redshift cluster and should be specified by a SelectSqlQuery query. Amazon ML
+// executes an Unload command in Amazon Redshift to transfer the result set of the
+// SelectSqlQuery query to S3StagingLocation .
+//
+// After the DataSource has been created, it's ready for use in evaluations and
+// batch predictions. If you plan to use the DataSource to train an MLModel , the
 // DataSource also requires a recipe. A recipe describes how each input variable
 // will be used in training an MLModel . Will the variable be included or excluded
 // from training? Will the variable be manipulated; for example, will it be
 // combined with another variable or will it be split apart into word combinations?
-// The recipe provides answers to these questions. You can't change an existing
-// datasource, but you can copy and modify the settings from an existing Amazon
-// Redshift datasource to create a new datasource. To do so, call GetDataSource
-// for an existing datasource and copy the values to a CreateDataSource call.
-// Change the settings that you want to change and make sure that all required
-// fields have the appropriate values.
+// The recipe provides answers to these questions.
+//
+// You can't change an existing datasource, but you can copy and modify the
+// settings from an existing Amazon Redshift datasource to create a new datasource.
+// To do so, call GetDataSource for an existing datasource and copy the values to
+// a CreateDataSource call. Change the settings that you want to change and make
+// sure that all required fields have the appropriate values.
 func (c *Client) CreateDataSourceFromRedshift(ctx context.Context, params *CreateDataSourceFromRedshiftInput, optFns ...func(*Options)) (*CreateDataSourceFromRedshiftOutput, error) {
 	if params == nil {
 		params = &CreateDataSourceFromRedshiftInput{}
@@ -62,30 +67,42 @@ type CreateDataSourceFromRedshiftInput struct {
 	DataSourceId *string
 
 	// The data specification of an Amazon Redshift DataSource :
+	//
 	//   - DatabaseInformation -
+	//
 	//   - DatabaseName - The name of the Amazon Redshift database.
+	//
 	//   - ClusterIdentifier - The unique ID for the Amazon Redshift cluster.
+	//
 	//   - DatabaseCredentials - The AWS Identity and Access Management (IAM)
 	//   credentials that are used to connect to the Amazon Redshift database.
+	//
 	//   - SelectSqlQuery - The query that is used to retrieve the observation data
 	//   for the Datasource .
+	//
 	//   - S3StagingLocation - The Amazon Simple Storage Service (Amazon S3) location
 	//   for staging Amazon Redshift data. The data retrieved from Amazon Redshift using
 	//   the SelectSqlQuery query is stored in this location.
+	//
 	//   - DataSchemaUri - The Amazon S3 location of the DataSchema .
+	//
 	//   - DataSchema - A JSON string representing the schema. This is not required if
 	//   DataSchemaUri is specified.
+	//
 	//   - DataRearrangement - A JSON string that represents the splitting and
-	//   rearrangement requirements for the DataSource . Sample -
-	//   "{\"splitting\":{\"percentBegin\":10,\"percentEnd\":60}}"
+	//   rearrangement requirements for the DataSource .
+	//
+	// Sample - "{\"splitting\":{\"percentBegin\":10,\"percentEnd\":60}}"
 	//
 	// This member is required.
 	DataSpec *types.RedshiftDataSpec
 
 	// A fully specified role Amazon Resource Name (ARN). Amazon ML assumes the role
 	// on behalf of the user to create the following:
+	//
 	//   - A security group to allow Amazon ML to execute the SelectSqlQuery query on
 	//   an Amazon Redshift cluster
+	//
 	//   - An Amazon S3 bucket policy to grant Amazon ML read/write permissions on the
 	//   S3StagingLocation
 	//
@@ -104,10 +121,13 @@ type CreateDataSourceFromRedshiftInput struct {
 	noSmithyDocumentSerde
 }
 
-// Represents the output of a CreateDataSourceFromRedshift operation, and is an
-// acknowledgement that Amazon ML received the request. The
-// CreateDataSourceFromRedshift operation is asynchronous. You can poll for updates
-// by using the GetBatchPrediction operation and checking the Status parameter.
+//	Represents the output of a CreateDataSourceFromRedshift operation, and is an
+//
+// acknowledgement that Amazon ML received the request.
+//
+// The CreateDataSourceFromRedshift operation is asynchronous. You can poll for
+// updates by using the GetBatchPrediction operation and checking the Status
+// parameter.
 type CreateDataSourceFromRedshiftOutput struct {
 
 	// A user-supplied ID that uniquely identifies the datasource. This value should
@@ -142,25 +162,25 @@ func (c *Client) addOperationCreateDataSourceFromRedshiftMiddlewares(stack *midd
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -175,13 +195,16 @@ func (c *Client) addOperationCreateDataSourceFromRedshiftMiddlewares(stack *midd
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpCreateDataSourceFromRedshiftValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateDataSourceFromRedshift(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

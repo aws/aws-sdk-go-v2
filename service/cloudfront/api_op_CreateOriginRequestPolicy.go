@@ -6,21 +6,25 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/cloudfront/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates an origin request policy. After you create an origin request policy,
-// you can attach it to one or more cache behaviors. When it's attached to a cache
-// behavior, the origin request policy determines the values that CloudFront
-// includes in requests that it sends to the origin. Each request that CloudFront
-// sends to the origin includes the following:
+// Creates an origin request policy.
+//
+// After you create an origin request policy, you can attach it to one or more
+// cache behaviors. When it's attached to a cache behavior, the origin request
+// policy determines the values that CloudFront includes in requests that it sends
+// to the origin. Each request that CloudFront sends to the origin includes the
+// following:
+//
 //   - The request body and the URL path (without the domain name) from the viewer
 //     request.
+//
 //   - The headers that CloudFront automatically includes in every origin request,
 //     including Host , User-Agent , and X-Amz-Cf-Id .
+//
 //   - All HTTP headers, cookies, and URL query strings that are specified in the
 //     cache policy or the origin request policy. These can include items from the
 //     viewer request and, in the case of headers, additional ones that are added by
@@ -28,9 +32,12 @@ import (
 //
 // CloudFront sends a request when it can't find a valid object in its cache that
 // matches the request. If you want to send values to the origin and also include
-// them in the cache key, use CachePolicy . For more information about origin
-// request policies, see Controlling origin requests (https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/controlling-origin-requests.html)
-// in the Amazon CloudFront Developer Guide.
+// them in the cache key, use CachePolicy .
+//
+// For more information about origin request policies, see [Controlling origin requests] in the Amazon
+// CloudFront Developer Guide.
+//
+// [Controlling origin requests]: https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/controlling-origin-requests.html
 func (c *Client) CreateOriginRequestPolicy(ctx context.Context, params *CreateOriginRequestPolicyInput, optFns ...func(*Options)) (*CreateOriginRequestPolicyOutput, error) {
 	if params == nil {
 		params = &CreateOriginRequestPolicyInput{}
@@ -95,25 +102,25 @@ func (c *Client) addOperationCreateOriginRequestPolicyMiddlewares(stack *middlew
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -128,13 +135,16 @@ func (c *Client) addOperationCreateOriginRequestPolicyMiddlewares(stack *middlew
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpCreateOriginRequestPolicyValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateOriginRequestPolicy(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

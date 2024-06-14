@@ -6,18 +6,22 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Lists the names of the inline policies that are embedded in the specified IAM
-// group. An IAM group can also have managed policies attached to it. To list the
-// managed policies that are attached to a group, use ListAttachedGroupPolicies .
-// For more information about policies, see Managed policies and inline policies (https://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html)
-// in the IAM User Guide. You can paginate the results using the MaxItems and
-// Marker parameters. If there are no inline policies embedded with the specified
-// group, the operation returns an empty list.
+// group.
+//
+// An IAM group can also have managed policies attached to it. To list the managed
+// policies that are attached to a group, use ListAttachedGroupPolicies. For more information about
+// policies, see [Managed policies and inline policies]in the IAM User Guide.
+//
+// You can paginate the results using the MaxItems and Marker parameters. If there
+// are no inline policies embedded with the specified group, the operation returns
+// an empty list.
+//
+// [Managed policies and inline policies]: https://docs.aws.amazon.com/IAM/latest/UserGuide/policies-managed-vs-inline.html
 func (c *Client) ListGroupPolicies(ctx context.Context, params *ListGroupPoliciesInput, optFns ...func(*Options)) (*ListGroupPoliciesOutput, error) {
 	if params == nil {
 		params = &ListGroupPoliciesInput{}
@@ -35,10 +39,13 @@ func (c *Client) ListGroupPolicies(ctx context.Context, params *ListGroupPolicie
 
 type ListGroupPoliciesInput struct {
 
-	// The name of the group to list policies for. This parameter allows (through its
-	// regex pattern (http://wikipedia.org/wiki/regex) ) a string of characters
-	// consisting of upper and lowercase alphanumeric characters with no spaces. You
-	// can also include any of the following characters: _+=,.@-
+	// The name of the group to list policies for.
+	//
+	// This parameter allows (through its [regex pattern]) a string of characters consisting of upper
+	// and lowercase alphanumeric characters with no spaces. You can also include any
+	// of the following characters: _+=,.@-
+	//
+	// [regex pattern]: http://wikipedia.org/wiki/regex
 	//
 	// This member is required.
 	GroupName *string
@@ -51,11 +58,13 @@ type ListGroupPoliciesInput struct {
 
 	// Use this only when paginating results to indicate the maximum number of items
 	// you want in the response. If additional items exist beyond the maximum you
-	// specify, the IsTruncated response element is true . If you do not include this
-	// parameter, the number of items defaults to 100. Note that IAM might return fewer
-	// results, even when there are more results available. In that case, the
-	// IsTruncated response element returns true , and Marker contains a value to
-	// include in the subsequent call that tells the service where to continue from.
+	// specify, the IsTruncated response element is true .
+	//
+	// If you do not include this parameter, the number of items defaults to 100. Note
+	// that IAM might return fewer results, even when there are more results available.
+	// In that case, the IsTruncated response element returns true , and Marker
+	// contains a value to include in the subsequent call that tells the service where
+	// to continue from.
 	MaxItems *int32
 
 	noSmithyDocumentSerde
@@ -64,10 +73,13 @@ type ListGroupPoliciesInput struct {
 // Contains the response to a successful ListGroupPolicies request.
 type ListGroupPoliciesOutput struct {
 
-	// A list of policy names. This parameter allows (through its regex pattern (http://wikipedia.org/wiki/regex)
-	// ) a string of characters consisting of upper and lowercase alphanumeric
-	// characters with no spaces. You can also include any of the following characters:
-	// _+=,.@-
+	// A list of policy names.
+	//
+	// This parameter allows (through its [regex pattern]) a string of characters consisting of upper
+	// and lowercase alphanumeric characters with no spaces. You can also include any
+	// of the following characters: _+=,.@-
+	//
+	// [regex pattern]: http://wikipedia.org/wiki/regex
 	//
 	// This member is required.
 	PolicyNames []string
@@ -112,25 +124,25 @@ func (c *Client) addOperationListGroupPoliciesMiddlewares(stack *middleware.Stac
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -145,13 +157,16 @@ func (c *Client) addOperationListGroupPoliciesMiddlewares(stack *middleware.Stac
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpListGroupPoliciesValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListGroupPolicies(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -181,11 +196,13 @@ var _ ListGroupPoliciesAPIClient = (*Client)(nil)
 type ListGroupPoliciesPaginatorOptions struct {
 	// Use this only when paginating results to indicate the maximum number of items
 	// you want in the response. If additional items exist beyond the maximum you
-	// specify, the IsTruncated response element is true . If you do not include this
-	// parameter, the number of items defaults to 100. Note that IAM might return fewer
-	// results, even when there are more results available. In that case, the
-	// IsTruncated response element returns true , and Marker contains a value to
-	// include in the subsequent call that tells the service where to continue from.
+	// specify, the IsTruncated response element is true .
+	//
+	// If you do not include this parameter, the number of items defaults to 100. Note
+	// that IAM might return fewer results, even when there are more results available.
+	// In that case, the IsTruncated response element returns true , and Marker
+	// contains a value to include in the subsequent call that tells the service where
+	// to continue from.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

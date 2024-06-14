@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/ssmcontacts/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -43,8 +42,10 @@ type UpdateRotationInput struct {
 	RotationId *string
 
 	// The Amazon Resource Names (ARNs) of the contacts to include in the updated
-	// rotation. The order in which you list the contacts is their shift order in the
-	// rotation schedule.
+	// rotation.
+	//
+	// The order in which you list the contacts is their shift order in the rotation
+	// schedule.
 	ContactIds []string
 
 	// The date and time the rotation goes into effect.
@@ -52,10 +53,13 @@ type UpdateRotationInput struct {
 
 	// The time zone to base the updated rotation’s activity on, in Internet Assigned
 	// Numbers Authority (IANA) format. For example: "America/Los_Angeles", "UTC", or
-	// "Asia/Seoul". For more information, see the Time Zone Database (https://www.iana.org/time-zones)
-	// on the IANA website. Designators for time zones that don’t support Daylight
-	// Savings Time Rules, such as Pacific Standard Time (PST) and Pacific Daylight
-	// Time (PDT), aren't supported.
+	// "Asia/Seoul". For more information, see the [Time Zone Database]on the IANA website.
+	//
+	// Designators for time zones that don’t support Daylight Savings Time Rules, such
+	// as Pacific Standard Time (PST) and Pacific Daylight Time (PDT), aren't
+	// supported.
+	//
+	// [Time Zone Database]: https://www.iana.org/time-zones
 	TimeZoneId *string
 
 	noSmithyDocumentSerde
@@ -90,25 +94,25 @@ func (c *Client) addOperationUpdateRotationMiddlewares(stack *middleware.Stack, 
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -123,13 +127,16 @@ func (c *Client) addOperationUpdateRotationMiddlewares(stack *middleware.Stack, 
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpUpdateRotationValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateRotation(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

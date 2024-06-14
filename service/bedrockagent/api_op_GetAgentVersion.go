@@ -6,13 +6,12 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockagent/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Gets an Agent version for existing Amazon Bedrock Agent
+// Gets details about a version of an agent.
 func (c *Client) GetAgentVersion(ctx context.Context, params *GetAgentVersionInput, optFns ...func(*Options)) (*GetAgentVersionOutput, error) {
 	if params == nil {
 		params = &GetAgentVersionInput{}
@@ -28,15 +27,14 @@ func (c *Client) GetAgentVersion(ctx context.Context, params *GetAgentVersionInp
 	return out, nil
 }
 
-// Get Agent Version Request
 type GetAgentVersionInput struct {
 
-	// Id generated at the server side when an Agent is created
+	// The unique identifier of the agent.
 	//
 	// This member is required.
 	AgentId *string
 
-	// Numerical Agent Version.
+	// The version of the agent.
 	//
 	// This member is required.
 	AgentVersion *string
@@ -44,10 +42,9 @@ type GetAgentVersionInput struct {
 	noSmithyDocumentSerde
 }
 
-// Get Agent Version Response
 type GetAgentVersionOutput struct {
 
-	// Contains the information of an agent version.
+	// Contains details about the version of the agent.
 	//
 	// This member is required.
 	AgentVersion *types.AgentVersion
@@ -80,25 +77,25 @@ func (c *Client) addOperationGetAgentVersionMiddlewares(stack *middleware.Stack,
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -113,13 +110,16 @@ func (c *Client) addOperationGetAgentVersionMiddlewares(stack *middleware.Stack,
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpGetAgentVersionValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetAgentVersion(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

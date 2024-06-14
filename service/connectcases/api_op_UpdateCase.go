@@ -6,18 +6,21 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/connectcases/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// If you provide a value for PerformedBy.UserArn you must also have
-// connect:DescribeUser (https://docs.aws.amazon.com/connect/latest/APIReference/API_DescribeUser.html)
-// permission on the User ARN resource that you provide Updates the values of
-// fields on a case. Fields to be updated are received as an array of id/value
-// pairs identical to the CreateCase input . If the action is successful, the
-// service sends back an HTTP 200 response with an empty HTTP body.
+// If you provide a value for PerformedBy.UserArn you must also have [connect:DescribeUser] permission
+// on the User ARN resource that you provide
+//
+// Updates the values of fields on a case. Fields to be updated are received as an
+// array of id/value pairs identical to the CreateCase input .
+//
+// If the action is successful, the service sends back an HTTP 200 response with
+// an empty HTTP body.
+//
+// [connect:DescribeUser]: https://docs.aws.amazon.com/connect/latest/APIReference/API_DescribeUser.html
 func (c *Client) UpdateCase(ctx context.Context, params *UpdateCaseInput, optFns ...func(*Options)) (*UpdateCaseOutput, error) {
 	if params == nil {
 		params = &UpdateCaseInput{}
@@ -86,25 +89,25 @@ func (c *Client) addOperationUpdateCaseMiddlewares(stack *middleware.Stack, opti
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -119,13 +122,16 @@ func (c *Client) addOperationUpdateCaseMiddlewares(stack *middleware.Stack, opti
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpUpdateCaseValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateCase(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

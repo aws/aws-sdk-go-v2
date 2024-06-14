@@ -1,0 +1,2884 @@
+{
+    "smithy": "2.0",
+    "shapes": {
+        "com.amazonaws.timestreaminfluxdb#AccessDeniedException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>You do not have sufficient access to perform this action.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 403
+            }
+        },
+        "com.amazonaws.timestreaminfluxdb#AllocatedStorage": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 20,
+                    "max": 16384
+                }
+            }
+        },
+        "com.amazonaws.timestreaminfluxdb#AmazonTimestreamInfluxDB": {
+            "type": "service",
+            "version": "2023-01-27",
+            "operations": [
+                {
+                    "target": "com.amazonaws.timestreaminfluxdb#ListTagsForResource"
+                },
+                {
+                    "target": "com.amazonaws.timestreaminfluxdb#TagResource"
+                },
+                {
+                    "target": "com.amazonaws.timestreaminfluxdb#UntagResource"
+                }
+            ],
+            "resources": [
+                {
+                    "target": "com.amazonaws.timestreaminfluxdb#DbInstanceResource"
+                },
+                {
+                    "target": "com.amazonaws.timestreaminfluxdb#DbParameterGroupResource"
+                }
+            ],
+            "traits": {
+                "aws.api#service": {
+                    "sdkId": "Timestream InfluxDB",
+                    "arnNamespace": "timestream-influxdb"
+                },
+                "aws.auth#sigv4": {
+                    "name": "timestream-influxdb"
+                },
+                "aws.iam#defineConditionKeys": {
+                    "aws:ResourceTag/${TagKey}": {
+                        "type": "String",
+                        "documentation": "Filters access by a tag key and value pair of a resource",
+                        "externalDocumentation": "${DocHomeURL}IAM/latest/UserGuide/reference_policies_condition-keys.html#condition-keys-resourcetag"
+                    },
+                    "aws:RequestTag/${TagKey}": {
+                        "type": "String",
+                        "documentation": "Filters access by a tag key and value pair that is allowed in the request",
+                        "externalDocumentation": "${DocHomeURL}IAM/latest/UserGuide/reference_policies_condition-keys.html#condition-keys-requesttag"
+                    },
+                    "aws:TagKeys": {
+                        "type": "ArrayOfString",
+                        "documentation": "Filters access by a list of tag keys that are allowed in the request",
+                        "externalDocumentation": "${DocHomeURL}IAM/latest/UserGuide/reference_policies_condition-keys.html#condition-keys-tagkeys"
+                    }
+                },
+                "aws.iam#disableConditionKeyInference": {},
+                "aws.protocols#awsJson1_0": {},
+                "smithy.api#cors": {
+                    "additionalAllowedHeaders": [
+                        "*,authorization,date,x-amz-date,x-amz-security-token,x-amz-target,content-type,x-amz-content-sha256,x-amz-user-agent,x-amzn-platform-id,x-amzn-trace-id,amz-sdk-invocation-id,amz-sdk-request"
+                    ]
+                },
+                "smithy.api#documentation": "<p>Amazon Timestream for InfluxDB is a managed time-series database engine that makes it easy for application developers and DevOps teams to run InfluxDB databases on AWS for near real-time time-series applications using open-source APIs. With Amazon Timestream for InfluxDB, it is easy to set up, operate, and scale time-series workloads that can answer queries with single-digit millisecond query response time.</p>",
+                "smithy.api#title": "Timestream InfluxDB",
+                "smithy.rules#endpointRuleSet": {
+                    "version": "1.0",
+                    "parameters": {
+                        "Region": {
+                            "builtIn": "AWS::Region",
+                            "required": false,
+                            "documentation": "The AWS region used to dispatch the request.",
+                            "type": "String"
+                        },
+                        "UseDualStack": {
+                            "builtIn": "AWS::UseDualStack",
+                            "required": true,
+                            "default": false,
+                            "documentation": "When true, use the dual-stack endpoint. If the configured endpoint does not support dual-stack, dispatching the request MAY return an error.",
+                            "type": "Boolean"
+                        },
+                        "UseFIPS": {
+                            "builtIn": "AWS::UseFIPS",
+                            "required": true,
+                            "default": false,
+                            "documentation": "When true, send this request to the FIPS-compliant regional endpoint. If the configured endpoint does not have a FIPS compliant endpoint, dispatching the request will return an error.",
+                            "type": "Boolean"
+                        },
+                        "Endpoint": {
+                            "builtIn": "SDK::Endpoint",
+                            "required": false,
+                            "documentation": "Override the endpoint used to send this request",
+                            "type": "String"
+                        }
+                    },
+                    "rules": [
+                        {
+                            "conditions": [
+                                {
+                                    "fn": "isSet",
+                                    "argv": [
+                                        {
+                                            "ref": "Endpoint"
+                                        }
+                                    ]
+                                }
+                            ],
+                            "rules": [
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "booleanEquals",
+                                            "argv": [
+                                                {
+                                                    "ref": "UseFIPS"
+                                                },
+                                                true
+                                            ]
+                                        }
+                                    ],
+                                    "error": "Invalid Configuration: FIPS and custom endpoint are not supported",
+                                    "type": "error"
+                                },
+                                {
+                                    "conditions": [],
+                                    "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "booleanEquals",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "UseDualStack"
+                                                        },
+                                                        true
+                                                    ]
+                                                }
+                                            ],
+                                            "error": "Invalid Configuration: Dualstack and custom endpoint are not supported",
+                                            "type": "error"
+                                        },
+                                        {
+                                            "conditions": [],
+                                            "endpoint": {
+                                                "url": {
+                                                    "ref": "Endpoint"
+                                                },
+                                                "properties": {},
+                                                "headers": {}
+                                            },
+                                            "type": "endpoint"
+                                        }
+                                    ],
+                                    "type": "tree"
+                                }
+                            ],
+                            "type": "tree"
+                        },
+                        {
+                            "conditions": [],
+                            "rules": [
+                                {
+                                    "conditions": [
+                                        {
+                                            "fn": "isSet",
+                                            "argv": [
+                                                {
+                                                    "ref": "Region"
+                                                }
+                                            ]
+                                        }
+                                    ],
+                                    "rules": [
+                                        {
+                                            "conditions": [
+                                                {
+                                                    "fn": "aws.partition",
+                                                    "argv": [
+                                                        {
+                                                            "ref": "Region"
+                                                        }
+                                                    ],
+                                                    "assign": "PartitionResult"
+                                                }
+                                            ],
+                                            "rules": [
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseFIPS"
+                                                                },
+                                                                true
+                                                            ]
+                                                        },
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseDualStack"
+                                                                },
+                                                                true
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [
+                                                                {
+                                                                    "fn": "booleanEquals",
+                                                                    "argv": [
+                                                                        true,
+                                                                        {
+                                                                            "fn": "getAttr",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "ref": "PartitionResult"
+                                                                                },
+                                                                                "supportsFIPS"
+                                                                            ]
+                                                                        }
+                                                                    ]
+                                                                },
+                                                                {
+                                                                    "fn": "booleanEquals",
+                                                                    "argv": [
+                                                                        true,
+                                                                        {
+                                                                            "fn": "getAttr",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "ref": "PartitionResult"
+                                                                                },
+                                                                                "supportsDualStack"
+                                                                            ]
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ],
+                                                            "rules": [
+                                                                {
+                                                                    "conditions": [],
+                                                                    "rules": [
+                                                                        {
+                                                                            "conditions": [],
+                                                                            "endpoint": {
+                                                                                "url": "https://timestream-influxdb-fips.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                                                "properties": {},
+                                                                                "headers": {}
+                                                                            },
+                                                                            "type": "endpoint"
+                                                                        }
+                                                                    ],
+                                                                    "type": "tree"
+                                                                }
+                                                            ],
+                                                            "type": "tree"
+                                                        },
+                                                        {
+                                                            "conditions": [],
+                                                            "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
+                                                            "type": "error"
+                                                        }
+                                                    ],
+                                                    "type": "tree"
+                                                },
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseFIPS"
+                                                                },
+                                                                true
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [
+                                                                {
+                                                                    "fn": "booleanEquals",
+                                                                    "argv": [
+                                                                        {
+                                                                            "fn": "getAttr",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "ref": "PartitionResult"
+                                                                                },
+                                                                                "supportsFIPS"
+                                                                            ]
+                                                                        },
+                                                                        true
+                                                                    ]
+                                                                }
+                                                            ],
+                                                            "rules": [
+                                                                {
+                                                                    "conditions": [],
+                                                                    "rules": [
+                                                                        {
+                                                                            "conditions": [],
+                                                                            "endpoint": {
+                                                                                "url": "https://timestream-influxdb-fips.{Region}.{PartitionResult#dnsSuffix}",
+                                                                                "properties": {},
+                                                                                "headers": {}
+                                                                            },
+                                                                            "type": "endpoint"
+                                                                        }
+                                                                    ],
+                                                                    "type": "tree"
+                                                                }
+                                                            ],
+                                                            "type": "tree"
+                                                        },
+                                                        {
+                                                            "conditions": [],
+                                                            "error": "FIPS is enabled but this partition does not support FIPS",
+                                                            "type": "error"
+                                                        }
+                                                    ],
+                                                    "type": "tree"
+                                                },
+                                                {
+                                                    "conditions": [
+                                                        {
+                                                            "fn": "booleanEquals",
+                                                            "argv": [
+                                                                {
+                                                                    "ref": "UseDualStack"
+                                                                },
+                                                                true
+                                                            ]
+                                                        }
+                                                    ],
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [
+                                                                {
+                                                                    "fn": "booleanEquals",
+                                                                    "argv": [
+                                                                        true,
+                                                                        {
+                                                                            "fn": "getAttr",
+                                                                            "argv": [
+                                                                                {
+                                                                                    "ref": "PartitionResult"
+                                                                                },
+                                                                                "supportsDualStack"
+                                                                            ]
+                                                                        }
+                                                                    ]
+                                                                }
+                                                            ],
+                                                            "rules": [
+                                                                {
+                                                                    "conditions": [],
+                                                                    "rules": [
+                                                                        {
+                                                                            "conditions": [],
+                                                                            "endpoint": {
+                                                                                "url": "https://timestream-influxdb.{Region}.{PartitionResult#dualStackDnsSuffix}",
+                                                                                "properties": {},
+                                                                                "headers": {}
+                                                                            },
+                                                                            "type": "endpoint"
+                                                                        }
+                                                                    ],
+                                                                    "type": "tree"
+                                                                }
+                                                            ],
+                                                            "type": "tree"
+                                                        },
+                                                        {
+                                                            "conditions": [],
+                                                            "error": "DualStack is enabled but this partition does not support DualStack",
+                                                            "type": "error"
+                                                        }
+                                                    ],
+                                                    "type": "tree"
+                                                },
+                                                {
+                                                    "conditions": [],
+                                                    "rules": [
+                                                        {
+                                                            "conditions": [],
+                                                            "endpoint": {
+                                                                "url": "https://timestream-influxdb.{Region}.{PartitionResult#dnsSuffix}",
+                                                                "properties": {},
+                                                                "headers": {}
+                                                            },
+                                                            "type": "endpoint"
+                                                        }
+                                                    ],
+                                                    "type": "tree"
+                                                }
+                                            ],
+                                            "type": "tree"
+                                        }
+                                    ],
+                                    "type": "tree"
+                                },
+                                {
+                                    "conditions": [],
+                                    "error": "Invalid Configuration: Missing Region",
+                                    "type": "error"
+                                }
+                            ],
+                            "type": "tree"
+                        }
+                    ]
+                },
+                "smithy.rules#endpointTests": {
+                    "testCases": [
+                        {
+                            "documentation": "For region us-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://timestream-influxdb-fips.us-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://timestream-influxdb-fips.us-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://timestream-influxdb.us-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://timestream-influxdb.us-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-north-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://timestream-influxdb-fips.cn-north-1.api.amazonwebservices.com.cn"
+                                }
+                            },
+                            "params": {
+                                "Region": "cn-north-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-north-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://timestream-influxdb-fips.cn-north-1.amazonaws.com.cn"
+                                }
+                            },
+                            "params": {
+                                "Region": "cn-north-1",
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-north-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://timestream-influxdb.cn-north-1.api.amazonwebservices.com.cn"
+                                }
+                            },
+                            "params": {
+                                "Region": "cn-north-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region cn-north-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://timestream-influxdb.cn-north-1.amazonaws.com.cn"
+                                }
+                            },
+                            "params": {
+                                "Region": "cn-north-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://timestream-influxdb-fips.us-gov-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://timestream-influxdb-fips.us-gov-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://timestream-influxdb.us-gov-east-1.api.aws"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-gov-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://timestream-influxdb.us-gov-east-1.amazonaws.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-gov-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://timestream-influxdb-fips.us-iso-east-1.c2s.ic.gov"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "error": "DualStack is enabled but this partition does not support DualStack"
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-iso-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://timestream-influxdb.us-iso-east-1.c2s.ic.gov"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-iso-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS enabled and DualStack enabled",
+                            "expect": {
+                                "error": "FIPS and DualStack are enabled, but this partition does not support one or both"
+                            },
+                            "params": {
+                                "Region": "us-isob-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS enabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://timestream-influxdb-fips.us-isob-east-1.sc2s.sgov.gov"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-isob-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS disabled and DualStack enabled",
+                            "expect": {
+                                "error": "DualStack is enabled but this partition does not support DualStack"
+                            },
+                            "params": {
+                                "Region": "us-isob-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true
+                            }
+                        },
+                        {
+                            "documentation": "For region us-isob-east-1 with FIPS disabled and DualStack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://timestream-influxdb.us-isob-east-1.sc2s.sgov.gov"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-isob-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with region set and fips disabled and dualstack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://example.com"
+                                }
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": false,
+                                "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with region not set and fips disabled and dualstack disabled",
+                            "expect": {
+                                "endpoint": {
+                                    "url": "https://example.com"
+                                }
+                            },
+                            "params": {
+                                "UseFIPS": false,
+                                "UseDualStack": false,
+                                "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with fips enabled and dualstack disabled",
+                            "expect": {
+                                "error": "Invalid Configuration: FIPS and custom endpoint are not supported"
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseFIPS": true,
+                                "UseDualStack": false,
+                                "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "For custom endpoint with fips disabled and dualstack enabled",
+                            "expect": {
+                                "error": "Invalid Configuration: Dualstack and custom endpoint are not supported"
+                            },
+                            "params": {
+                                "Region": "us-east-1",
+                                "UseFIPS": false,
+                                "UseDualStack": true,
+                                "Endpoint": "https://example.com"
+                            }
+                        },
+                        {
+                            "documentation": "Missing region",
+                            "expect": {
+                                "error": "Invalid Configuration: Missing Region"
+                            }
+                        }
+                    ],
+                    "version": "1.0"
+                }
+            }
+        },
+        "com.amazonaws.timestreaminfluxdb#Arn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1011
+                },
+                "smithy.api#pattern": "^arn:aws[a-z\\-]*:timestream\\-influxdb:[a-z0-9\\-]+:[0-9]{12}:(db\\-instance|db\\-parameter\\-group)/[a-zA-Z0-9]{3,64}$"
+            }
+        },
+        "com.amazonaws.timestreaminfluxdb#Bucket": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 2,
+                    "max": 64
+                },
+                "smithy.api#pattern": "^[^_][^\"]*$"
+            }
+        },
+        "com.amazonaws.timestreaminfluxdb#ConflictException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "resourceId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier for the Timestream for InfluxDB resource associated with the request.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "resourceType": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of Timestream for InfluxDB resource associated with the request.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The request conflicts with an existing resource in Timestream for InfluxDB.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 409
+            }
+        },
+        "com.amazonaws.timestreaminfluxdb#CreateDbInstance": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.timestreaminfluxdb#CreateDbInstanceInput"
+            },
+            "output": {
+                "target": "com.amazonaws.timestreaminfluxdb#CreateDbInstanceOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.timestreaminfluxdb#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.timestreaminfluxdb#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.timestreaminfluxdb#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.timestreaminfluxdb#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.timestreaminfluxdb#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.timestreaminfluxdb#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.timestreaminfluxdb#ValidationException"
+                }
+            ],
+            "traits": {
+                "aws.iam#conditionKeys": [
+                    "aws:RequestTag/${TagKey}",
+                    "aws:TagKeys"
+                ],
+                "smithy.api#documentation": "<p>Creates a new Timestream for InfluxDB DB instance.</p>",
+                "smithy.api#idempotent": {},
+                "smithy.api#tags": [
+                    "DbInstance"
+                ]
+            }
+        },
+        "com.amazonaws.timestreaminfluxdb#CreateDbInstanceInput": {
+            "type": "structure",
+            "members": {
+                "name": {
+                    "target": "com.amazonaws.timestreaminfluxdb#DbInstanceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name that uniquely identifies the DB instance when interacting with the Amazon Timestream for InfluxDB API and CLI commands. This name will also be a prefix included in the endpoint. DB instance names must be unique per customer and per region.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "username": {
+                    "target": "com.amazonaws.timestreaminfluxdb#Username",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The username of the initial admin user created in InfluxDB. Must start with a letter and can't end with a hyphen or contain two consecutive hyphens. For example, my-user1. This username will allow you to access the InfluxDB UI to perform various administrative tasks and also use the InfluxDB CLI to create an operator token. These attributes will be stored in a Secret created in Amazon Secrets Manager in your account.</p>"
+                    }
+                },
+                "password": {
+                    "target": "com.amazonaws.timestreaminfluxdb#Password",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The password of the initial admin user created in InfluxDB. This password will allow you to access the InfluxDB UI to perform various administrative tasks and also use the InfluxDB CLI to create an operator token. These attributes will be stored in a Secret created in AWS SecretManager in your account.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "organization": {
+                    "target": "com.amazonaws.timestreaminfluxdb#Organization",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the initial organization for the initial admin user in InfluxDB. An InfluxDB organization is a workspace for a group of users.</p>"
+                    }
+                },
+                "bucket": {
+                    "target": "com.amazonaws.timestreaminfluxdb#Bucket",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the initial InfluxDB bucket. All InfluxDB data is stored in a bucket. A bucket combines the concept of a database and a retention period (the duration of time that each data point persists). A bucket belongs to an organization.</p>"
+                    }
+                },
+                "dbInstanceType": {
+                    "target": "com.amazonaws.timestreaminfluxdb#DbInstanceType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Timestream for InfluxDB DB instance type to run InfluxDB on.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "vpcSubnetIds": {
+                    "target": "com.amazonaws.timestreaminfluxdb#VpcSubnetIdList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of VPC subnet IDs to associate with the DB instance. Provide at least two VPC subnet IDs in different availability zones when deploying with a Multi-AZ standby.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "vpcSecurityGroupIds": {
+                    "target": "com.amazonaws.timestreaminfluxdb#VpcSecurityGroupIdList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of VPC security group IDs to associate with the DB instance.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "publiclyAccessible": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Configures the DB instance with a public IP to facilitate access.</p>"
+                    }
+                },
+                "dbStorageType": {
+                    "target": "com.amazonaws.timestreaminfluxdb#DbStorageType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Timestream for InfluxDB DB storage type to read and write InfluxDB data.</p>\n         <p>You can choose between 3 different types of provisioned Influx IOPS included storage according to your workloads requirements:</p>\n         <ul>\n            <li>\n               <p>Influx IO Included 3000 IOPS</p>\n            </li>\n            <li>\n               <p>Influx IO Included 12000 IOPS</p>\n            </li>\n            <li>\n               <p>Influx IO Included 16000 IOPS</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "allocatedStorage": {
+                    "target": "com.amazonaws.timestreaminfluxdb#AllocatedStorage",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The amount of storage to allocate for your DB storage type in GiB (gibibytes).</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "dbParameterGroupIdentifier": {
+                    "target": "com.amazonaws.timestreaminfluxdb#DbParameterGroupIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The id of the DB parameter group to assign to your DB instance. DB parameter groups specify how the database is configured. For example, DB parameter groups can specify the limit for query concurrency.</p>"
+                    }
+                },
+                "deploymentType": {
+                    "target": "com.amazonaws.timestreaminfluxdb#DeploymentType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether the DB instance will be deployed as a standalone instance or with a Multi-AZ standby for high availability.</p>"
+                    }
+                },
+                "logDeliveryConfiguration": {
+                    "target": "com.amazonaws.timestreaminfluxdb#LogDeliveryConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Configuration for sending InfluxDB engine logs to a specified S3 bucket.</p>"
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.timestreaminfluxdb#RequestTagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of key-value pairs to associate with the DB instance.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {},
+                "smithy.api#references": [
+                    {
+                        "resource": "com.amazonaws.timestreaminfluxdb#DbParameterGroupResource"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.timestreaminfluxdb#CreateDbInstanceOutput": {
+            "type": "structure",
+            "members": {
+                "id": {
+                    "target": "com.amazonaws.timestreaminfluxdb#DbInstanceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A service-generated unique identifier.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "name": {
+                    "target": "com.amazonaws.timestreaminfluxdb#DbInstanceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The customer-supplied name that uniquely identifies the DB instance when interacting with the Amazon Timestream for InfluxDB API and CLI commands.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "arn": {
+                    "target": "com.amazonaws.timestreaminfluxdb#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the DB instance.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.timestreaminfluxdb#Status",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the DB instance.</p>"
+                    }
+                },
+                "endpoint": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The endpoint used to connect to InfluxDB. The default InfluxDB port is 8086.</p>"
+                    }
+                },
+                "dbInstanceType": {
+                    "target": "com.amazonaws.timestreaminfluxdb#DbInstanceType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Timestream for InfluxDB instance type that InfluxDB runs on.</p>"
+                    }
+                },
+                "dbStorageType": {
+                    "target": "com.amazonaws.timestreaminfluxdb#DbStorageType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Timestream for InfluxDB DB storage type that InfluxDB stores data on.</p>"
+                    }
+                },
+                "allocatedStorage": {
+                    "target": "com.amazonaws.timestreaminfluxdb#AllocatedStorage",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The amount of storage allocated for your DB storage type (in gibibytes).</p>"
+                    }
+                },
+                "deploymentType": {
+                    "target": "com.amazonaws.timestreaminfluxdb#DeploymentType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether the Timestream for InfluxDB is deployed as Single-AZ or with a MultiAZ Standby for High availability.</p>"
+                    }
+                },
+                "vpcSubnetIds": {
+                    "target": "com.amazonaws.timestreaminfluxdb#VpcSubnetIdList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of VPC subnet IDs associated with the DB instance.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "publiclyAccessible": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates if the DB instance has a public IP to facilitate access.</p>"
+                    }
+                },
+                "vpcSecurityGroupIds": {
+                    "target": "com.amazonaws.timestreaminfluxdb#VpcSecurityGroupIdList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of VPC security group IDs associated with the DB instance.</p>"
+                    }
+                },
+                "dbParameterGroupIdentifier": {
+                    "target": "com.amazonaws.timestreaminfluxdb#DbParameterGroupIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The id of the DB parameter group assigned to your DB instance.</p>"
+                    }
+                },
+                "availabilityZone": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Availability Zone in which the DB instance resides.</p>"
+                    }
+                },
+                "secondaryAvailabilityZone": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Availability Zone in which the standby instance is located when deploying with a MultiAZ standby instance.</p>"
+                    }
+                },
+                "logDeliveryConfiguration": {
+                    "target": "com.amazonaws.timestreaminfluxdb#LogDeliveryConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Configuration for sending InfluxDB engine logs to send to specified S3 bucket.</p>"
+                    }
+                },
+                "influxAuthParametersSecretArn": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the AWS Secrets Manager secret containing the initial InfluxDB authorization parameters. The secret value is a JSON formatted key-value pair holding InfluxDB authorization values: organization, bucket, username, and password.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.timestreaminfluxdb#CreateDbParameterGroup": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.timestreaminfluxdb#CreateDbParameterGroupInput"
+            },
+            "output": {
+                "target": "com.amazonaws.timestreaminfluxdb#CreateDbParameterGroupOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.timestreaminfluxdb#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.timestreaminfluxdb#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.timestreaminfluxdb#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.timestreaminfluxdb#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.timestreaminfluxdb#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.timestreaminfluxdb#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.timestreaminfluxdb#ValidationException"
+                }
+            ],
+            "traits": {
+                "aws.iam#conditionKeys": [
+                    "aws:RequestTag/${TagKey}",
+                    "aws:TagKeys"
+                ],
+                "smithy.api#documentation": "<p>Creates a new Timestream for InfluxDB DB parameter group to associate with DB instances.</p>",
+                "smithy.api#idempotent": {},
+                "smithy.api#tags": [
+                    "DbParameterGroup"
+                ]
+            }
+        },
+        "com.amazonaws.timestreaminfluxdb#CreateDbParameterGroupInput": {
+            "type": "structure",
+            "members": {
+                "name": {
+                    "target": "com.amazonaws.timestreaminfluxdb#DbParameterGroupName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the DB parameter group. The name must be unique per customer and per region.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "description": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A description of the DB parameter group.</p>",
+                        "smithy.api#length": {
+                            "min": 0,
+                            "max": 500
+                        }
+                    }
+                },
+                "parameters": {
+                    "target": "com.amazonaws.timestreaminfluxdb#Parameters",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of the parameters that comprise the DB parameter group.</p>"
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.timestreaminfluxdb#RequestTagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of key-value pairs to associate with the DB parameter group.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.timestreaminfluxdb#CreateDbParameterGroupOutput": {
+            "type": "structure",
+            "members": {
+                "id": {
+                    "target": "com.amazonaws.timestreaminfluxdb#DbParameterGroupId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A service-generated unique identifier.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "name": {
+                    "target": "com.amazonaws.timestreaminfluxdb#DbParameterGroupName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The customer-supplied name that uniquely identifies the DB parameter group when interacting with the Amazon Timestream for InfluxDB API and CLI commands.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "arn": {
+                    "target": "com.amazonaws.timestreaminfluxdb#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARM) of the DB parameter group.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "description": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description of the DB parameter group.</p>"
+                    }
+                },
+                "parameters": {
+                    "target": "com.amazonaws.timestreaminfluxdb#Parameters",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of the parameters that comprise the DB parameter group.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.timestreaminfluxdb#DbInstanceId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 3,
+                    "max": 64
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9]+$"
+            }
+        },
+        "com.amazonaws.timestreaminfluxdb#DbInstanceIdentifier": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 3,
+                    "max": 64
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9]+$"
+            }
+        },
+        "com.amazonaws.timestreaminfluxdb#DbInstanceName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 3,
+                    "max": 40
+                },
+                "smithy.api#pattern": "^[a-zA-z][a-zA-Z0-9]*(-[a-zA-Z0-9]+)*$"
+            }
+        },
+        "com.amazonaws.timestreaminfluxdb#DbInstanceResource": {
+            "type": "resource",
+            "identifiers": {
+                "dbInstanceIdentifier": {
+                    "target": "com.amazonaws.timestreaminfluxdb#DbInstanceIdentifier"
+                }
+            },
+            "create": {
+                "target": "com.amazonaws.timestreaminfluxdb#CreateDbInstance"
+            },
+            "read": {
+                "target": "com.amazonaws.timestreaminfluxdb#GetDbInstance"
+            },
+            "update": {
+                "target": "com.amazonaws.timestreaminfluxdb#UpdateDbInstance"
+            },
+            "delete": {
+                "target": "com.amazonaws.timestreaminfluxdb#DeleteDbInstance"
+            },
+            "list": {
+                "target": "com.amazonaws.timestreaminfluxdb#ListDbInstances"
+            },
+            "traits": {
+                "aws.iam#conditionKeys": [
+                    "aws:ResourceTag/${TagKey}"
+                ],
+                "aws.iam#iamResource": {
+                    "name": "db-instance"
+                }
+            }
+        },
+        "com.amazonaws.timestreaminfluxdb#DbInstanceSummary": {
+            "type": "structure",
+            "members": {
+                "id": {
+                    "target": "com.amazonaws.timestreaminfluxdb#DbInstanceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The service-generated unique identifier of the DB instance.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "name": {
+                    "target": "com.amazonaws.timestreaminfluxdb#DbInstanceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>This customer-supplied name uniquely identifies the DB instance when interacting with the Amazon Timestream for InfluxDB API and AWS CLI commands.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "arn": {
+                    "target": "com.amazonaws.timestreaminfluxdb#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the DB instance.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.timestreaminfluxdb#Status",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the DB instance.</p>"
+                    }
+                },
+                "endpoint": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The endpoint used to connect to InfluxDB. The default InfluxDB port is 8086.</p>"
+                    }
+                },
+                "dbInstanceType": {
+                    "target": "com.amazonaws.timestreaminfluxdb#DbInstanceType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Timestream for InfluxDB instance type to run InfluxDB on.</p>"
+                    }
+                },
+                "dbStorageType": {
+                    "target": "com.amazonaws.timestreaminfluxdb#DbStorageType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The storage type for your DB instance.</p>"
+                    }
+                },
+                "allocatedStorage": {
+                    "target": "com.amazonaws.timestreaminfluxdb#AllocatedStorage",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The amount of storage to allocate for your DbStorageType in GiB (gibibytes).</p>"
+                    }
+                },
+                "deploymentType": {
+                    "target": "com.amazonaws.timestreaminfluxdb#DeploymentType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Single-Instance or with a MultiAZ Standby for High availability.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains a summary of a DB instance.</p>"
+            }
+        },
+        "com.amazonaws.timestreaminfluxdb#DbInstanceSummaryList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.timestreaminfluxdb#DbInstanceSummary"
+            }
+        },
+        "com.amazonaws.timestreaminfluxdb#DbInstanceType": {
+            "type": "enum",
+            "members": {
+                "DB_INFLUX_MEDIUM": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "db.influx.medium"
+                    }
+                },
+                "DB_INFLUX_LARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "db.influx.large"
+                    }
+                },
+                "DB_INFLUX_XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "db.influx.xlarge"
+                    }
+                },
+                "DB_INFLUX_2XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "db.influx.2xlarge"
+                    }
+                },
+                "DB_INFLUX_4XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "db.influx.4xlarge"
+                    }
+                },
+                "DB_INFLUX_8XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "db.influx.8xlarge"
+                    }
+                },
+                "DB_INFLUX_12XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "db.influx.12xlarge"
+                    }
+                },
+                "DB_INFLUX_16XLARGE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "db.influx.16xlarge"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.timestreaminfluxdb#DbParameterGroupId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 3,
+                    "max": 64
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9]+$"
+            }
+        },
+        "com.amazonaws.timestreaminfluxdb#DbParameterGroupIdentifier": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 3,
+                    "max": 64
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9]+$"
+            }
+        },
+        "com.amazonaws.timestreaminfluxdb#DbParameterGroupName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 3,
+                    "max": 64
+                },
+                "smithy.api#pattern": "^[a-zA-z][a-zA-Z0-9]*(-[a-zA-Z0-9]+)*$"
+            }
+        },
+        "com.amazonaws.timestreaminfluxdb#DbParameterGroupResource": {
+            "type": "resource",
+            "identifiers": {
+                "dbParameterGroupIdentifier": {
+                    "target": "com.amazonaws.timestreaminfluxdb#DbParameterGroupIdentifier"
+                }
+            },
+            "create": {
+                "target": "com.amazonaws.timestreaminfluxdb#CreateDbParameterGroup"
+            },
+            "read": {
+                "target": "com.amazonaws.timestreaminfluxdb#GetDbParameterGroup"
+            },
+            "list": {
+                "target": "com.amazonaws.timestreaminfluxdb#ListDbParameterGroups"
+            },
+            "traits": {
+                "aws.iam#conditionKeys": [
+                    "aws:ResourceTag/${TagKey}"
+                ],
+                "aws.iam#iamResource": {
+                    "name": "db-parameter-group"
+                }
+            }
+        },
+        "com.amazonaws.timestreaminfluxdb#DbParameterGroupSummary": {
+            "type": "structure",
+            "members": {
+                "id": {
+                    "target": "com.amazonaws.timestreaminfluxdb#DbParameterGroupId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A service-generated unique identifier.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "name": {
+                    "target": "com.amazonaws.timestreaminfluxdb#DbParameterGroupName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>This customer-supplied name uniquely identifies the parameter group.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "arn": {
+                    "target": "com.amazonaws.timestreaminfluxdb#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the DB parameter group.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "description": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A description of the DB parameter group.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains a summary of a DB parameter group.</p>"
+            }
+        },
+        "com.amazonaws.timestreaminfluxdb#DbParameterGroupSummaryList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.timestreaminfluxdb#DbParameterGroupSummary"
+            }
+        },
+        "com.amazonaws.timestreaminfluxdb#DbStorageType": {
+            "type": "enum",
+            "members": {
+                "INFLUX_IO_INCLUDED_T1": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "InfluxIOIncludedT1"
+                    }
+                },
+                "INFLUX_IO_INCLUDED_T2": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "InfluxIOIncludedT2"
+                    }
+                },
+                "INFLUX_IO_INCLUDED_T3": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "InfluxIOIncludedT3"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.timestreaminfluxdb#DeleteDbInstance": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.timestreaminfluxdb#DeleteDbInstanceInput"
+            },
+            "output": {
+                "target": "com.amazonaws.timestreaminfluxdb#DeleteDbInstanceOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.timestreaminfluxdb#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.timestreaminfluxdb#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.timestreaminfluxdb#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.timestreaminfluxdb#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.timestreaminfluxdb#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.timestreaminfluxdb#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes a Timestream for InfluxDB DB instance.</p>",
+                "smithy.api#idempotent": {},
+                "smithy.api#tags": [
+                    "DbInstance"
+                ]
+            }
+        },
+        "com.amazonaws.timestreaminfluxdb#DeleteDbInstanceInput": {
+            "type": "structure",
+            "members": {
+                "identifier": {
+                    "target": "com.amazonaws.timestreaminfluxdb#DbInstanceIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The id of the DB instance.</p>",
+                        "smithy.api#required": {},
+                        "smithy.api#resourceIdentifier": "dbInstanceIdentifier"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.timestreaminfluxdb#DeleteDbInstanceOutput": {
+            "type": "structure",
+            "members": {
+                "id": {
+                    "target": "com.amazonaws.timestreaminfluxdb#DbInstanceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A service-generated unique identifier.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "name": {
+                    "target": "com.amazonaws.timestreaminfluxdb#DbInstanceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The customer-supplied name that uniquely identifies the DB instance when interacting with the Amazon Timestream for InfluxDB API and CLI commands.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "arn": {
+                    "target": "com.amazonaws.timestreaminfluxdb#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the DB instance.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.timestreaminfluxdb#Status",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the DB instance.</p>"
+                    }
+                },
+                "endpoint": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The endpoint used to connect to InfluxDB. The default InfluxDB port is 8086.</p>"
+                    }
+                },
+                "dbInstanceType": {
+                    "target": "com.amazonaws.timestreaminfluxdb#DbInstanceType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Timestream for InfluxDB instance type that InfluxDB runs on.</p>"
+                    }
+                },
+                "dbStorageType": {
+                    "target": "com.amazonaws.timestreaminfluxdb#DbStorageType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Timestream for InfluxDB DB storage type that InfluxDB stores data on.</p>"
+                    }
+                },
+                "allocatedStorage": {
+                    "target": "com.amazonaws.timestreaminfluxdb#AllocatedStorage",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The amount of storage allocated for your DB storage type (in gibibytes).</p>"
+                    }
+                },
+                "deploymentType": {
+                    "target": "com.amazonaws.timestreaminfluxdb#DeploymentType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether the Timestream for InfluxDB is deployed as Single-AZ or with a MultiAZ Standby for High availability.</p>"
+                    }
+                },
+                "vpcSubnetIds": {
+                    "target": "com.amazonaws.timestreaminfluxdb#VpcSubnetIdList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of VPC subnet IDs associated with the DB instance.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "publiclyAccessible": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates if the DB instance has a public IP to facilitate access.</p>"
+                    }
+                },
+                "vpcSecurityGroupIds": {
+                    "target": "com.amazonaws.timestreaminfluxdb#VpcSecurityGroupIdList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of VPC security group IDs associated with the DB instance.</p>"
+                    }
+                },
+                "dbParameterGroupIdentifier": {
+                    "target": "com.amazonaws.timestreaminfluxdb#DbParameterGroupIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The id of the DB parameter group assigned to your DB instance.</p>"
+                    }
+                },
+                "availabilityZone": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Availability Zone in which the DB instance resides.</p>"
+                    }
+                },
+                "secondaryAvailabilityZone": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Availability Zone in which the standby instance is located when deploying with a MultiAZ standby instance.</p>"
+                    }
+                },
+                "logDeliveryConfiguration": {
+                    "target": "com.amazonaws.timestreaminfluxdb#LogDeliveryConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Configuration for sending InfluxDB engine logs to send to specified S3 bucket.</p>"
+                    }
+                },
+                "influxAuthParametersSecretArn": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the AWS Secrets Manager secret containing the initial InfluxDB authorization parameters. The secret value is a JSON formatted key-value pair holding InfluxDB authorization values: organization, bucket, username, and password.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.timestreaminfluxdb#DeploymentType": {
+            "type": "enum",
+            "members": {
+                "SINGLE_AZ": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "SINGLE_AZ"
+                    }
+                },
+                "WITH_MULTIAZ_STANDBY": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "WITH_MULTIAZ_STANDBY"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.timestreaminfluxdb#GetDbInstance": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.timestreaminfluxdb#GetDbInstanceInput"
+            },
+            "output": {
+                "target": "com.amazonaws.timestreaminfluxdb#GetDbInstanceOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.timestreaminfluxdb#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.timestreaminfluxdb#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.timestreaminfluxdb#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.timestreaminfluxdb#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.timestreaminfluxdb#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns a Timestream for InfluxDB DB instance.</p>",
+                "smithy.api#readonly": {},
+                "smithy.api#tags": [
+                    "DbInstance"
+                ]
+            }
+        },
+        "com.amazonaws.timestreaminfluxdb#GetDbInstanceInput": {
+            "type": "structure",
+            "members": {
+                "identifier": {
+                    "target": "com.amazonaws.timestreaminfluxdb#DbInstanceIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The id of the DB instance.</p>",
+                        "smithy.api#required": {},
+                        "smithy.api#resourceIdentifier": "dbInstanceIdentifier"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.timestreaminfluxdb#GetDbInstanceOutput": {
+            "type": "structure",
+            "members": {
+                "id": {
+                    "target": "com.amazonaws.timestreaminfluxdb#DbInstanceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A service-generated unique identifier.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "name": {
+                    "target": "com.amazonaws.timestreaminfluxdb#DbInstanceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The customer-supplied name that uniquely identifies the DB instance when interacting with the Amazon Timestream for InfluxDB API and CLI commands.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "arn": {
+                    "target": "com.amazonaws.timestreaminfluxdb#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the DB instance.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.timestreaminfluxdb#Status",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the DB instance.</p>"
+                    }
+                },
+                "endpoint": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The endpoint used to connect to InfluxDB. The default InfluxDB port is 8086.</p>"
+                    }
+                },
+                "dbInstanceType": {
+                    "target": "com.amazonaws.timestreaminfluxdb#DbInstanceType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Timestream for InfluxDB instance type that InfluxDB runs on.</p>"
+                    }
+                },
+                "dbStorageType": {
+                    "target": "com.amazonaws.timestreaminfluxdb#DbStorageType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Timestream for InfluxDB DB storage type that InfluxDB stores data on.</p>"
+                    }
+                },
+                "allocatedStorage": {
+                    "target": "com.amazonaws.timestreaminfluxdb#AllocatedStorage",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The amount of storage allocated for your DB storage type (in gibibytes).</p>"
+                    }
+                },
+                "deploymentType": {
+                    "target": "com.amazonaws.timestreaminfluxdb#DeploymentType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether the Timestream for InfluxDB is deployed as Single-AZ or with a MultiAZ Standby for High availability.</p>"
+                    }
+                },
+                "vpcSubnetIds": {
+                    "target": "com.amazonaws.timestreaminfluxdb#VpcSubnetIdList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of VPC subnet IDs associated with the DB instance.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "publiclyAccessible": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates if the DB instance has a public IP to facilitate access.</p>"
+                    }
+                },
+                "vpcSecurityGroupIds": {
+                    "target": "com.amazonaws.timestreaminfluxdb#VpcSecurityGroupIdList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of VPC security group IDs associated with the DB instance.</p>"
+                    }
+                },
+                "dbParameterGroupIdentifier": {
+                    "target": "com.amazonaws.timestreaminfluxdb#DbParameterGroupIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The id of the DB parameter group assigned to your DB instance.</p>"
+                    }
+                },
+                "availabilityZone": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Availability Zone in which the DB instance resides.</p>"
+                    }
+                },
+                "secondaryAvailabilityZone": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Availability Zone in which the standby instance is located when deploying with a MultiAZ standby instance.</p>"
+                    }
+                },
+                "logDeliveryConfiguration": {
+                    "target": "com.amazonaws.timestreaminfluxdb#LogDeliveryConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Configuration for sending InfluxDB engine logs to send to specified S3 bucket.</p>"
+                    }
+                },
+                "influxAuthParametersSecretArn": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the AWS Secrets Manager secret containing the initial InfluxDB authorization parameters. The secret value is a JSON formatted key-value pair holding InfluxDB authorization values: organization, bucket, username, and password.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.timestreaminfluxdb#GetDbParameterGroup": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.timestreaminfluxdb#GetDbParameterGroupInput"
+            },
+            "output": {
+                "target": "com.amazonaws.timestreaminfluxdb#GetDbParameterGroupOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.timestreaminfluxdb#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.timestreaminfluxdb#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.timestreaminfluxdb#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.timestreaminfluxdb#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.timestreaminfluxdb#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns a Timestream for InfluxDB DB parameter group.</p>",
+                "smithy.api#readonly": {},
+                "smithy.api#tags": [
+                    "DbParameterGroup"
+                ]
+            }
+        },
+        "com.amazonaws.timestreaminfluxdb#GetDbParameterGroupInput": {
+            "type": "structure",
+            "members": {
+                "identifier": {
+                    "target": "com.amazonaws.timestreaminfluxdb#DbParameterGroupIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The id of the DB parameter group.</p>",
+                        "smithy.api#required": {},
+                        "smithy.api#resourceIdentifier": "dbParameterGroupIdentifier"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.timestreaminfluxdb#GetDbParameterGroupOutput": {
+            "type": "structure",
+            "members": {
+                "id": {
+                    "target": "com.amazonaws.timestreaminfluxdb#DbParameterGroupId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A service-generated unique identifier.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "name": {
+                    "target": "com.amazonaws.timestreaminfluxdb#DbParameterGroupName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The customer-supplied name that uniquely identifies the DB parameter group when interacting with the Amazon Timestream for InfluxDB API and CLI commands.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "arn": {
+                    "target": "com.amazonaws.timestreaminfluxdb#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the DB parameter group.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "description": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A description of the DB parameter group.</p>"
+                    }
+                },
+                "parameters": {
+                    "target": "com.amazonaws.timestreaminfluxdb#Parameters",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The parameters that comprise the DB parameter group.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.timestreaminfluxdb#InfluxDBv2Parameters": {
+            "type": "structure",
+            "members": {
+                "fluxLogEnabled": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Include option to show detailed logs for Flux queries.</p>\n         <p>Default: false</p>"
+                    }
+                },
+                "logLevel": {
+                    "target": "com.amazonaws.timestreaminfluxdb#LogLevel",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Log output level. InfluxDB outputs log entries with severity levels greater than or equal to the level specified.</p>\n         <p>Default: info</p>"
+                    }
+                },
+                "noTasks": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Disable the task scheduler. If problematic tasks prevent InfluxDB from starting, use this option to start InfluxDB without scheduling or executing tasks.</p>\n         <p>Default: false</p>"
+                    }
+                },
+                "queryConcurrency": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Number of queries allowed to execute concurrently. Setting to 0 allows an unlimited number of concurrent queries.</p>\n         <p>Default: 0</p>",
+                        "smithy.api#range": {
+                            "min": 0,
+                            "max": 256
+                        }
+                    }
+                },
+                "queryQueueSize": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Maximum number of queries allowed in execution queue. When queue limit is reached, new queries are rejected. Setting to 0 allows an unlimited number of queries in the queue.</p>\n         <p>Default: 0</p>",
+                        "smithy.api#range": {
+                            "min": 0,
+                            "max": 256
+                        }
+                    }
+                },
+                "tracingType": {
+                    "target": "com.amazonaws.timestreaminfluxdb#TracingType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Enable tracing in InfluxDB and specifies the tracing type. Tracing is disabled by default.</p>"
+                    }
+                },
+                "metricsDisabled": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Disable the HTTP /metrics endpoint which exposes <a href=\"https://docs.influxdata.com/influxdb/v2/reference/internals/metrics/\">internal InfluxDB metrics</a>.</p>\n         <p>Default: false</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>All the customer-modifiable InfluxDB v2 parameters in Timestream for InfluxDB.</p>"
+            }
+        },
+        "com.amazonaws.timestreaminfluxdb#InternalServerException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The request processing has failed because of an unknown error, exception or failure.</p>",
+                "smithy.api#error": "server",
+                "smithy.api#httpError": 500,
+                "smithy.api#retryable": {}
+            }
+        },
+        "com.amazonaws.timestreaminfluxdb#ListDbInstances": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.timestreaminfluxdb#ListDbInstancesInput"
+            },
+            "output": {
+                "target": "com.amazonaws.timestreaminfluxdb#ListDbInstancesOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.timestreaminfluxdb#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.timestreaminfluxdb#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.timestreaminfluxdb#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.timestreaminfluxdb#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.timestreaminfluxdb#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns a list of Timestream for InfluxDB DB instances.</p>",
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "pageSize": "maxResults",
+                    "items": "items"
+                },
+                "smithy.api#readonly": {},
+                "smithy.api#tags": [
+                    "DbInstance"
+                ]
+            }
+        },
+        "com.amazonaws.timestreaminfluxdb#ListDbInstancesInput": {
+            "type": "structure",
+            "members": {
+                "nextToken": {
+                    "target": "com.amazonaws.timestreaminfluxdb#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pagination token. To resume pagination, provide the NextToken value as argument of a subsequent API invocation.</p>"
+                    }
+                },
+                "maxResults": {
+                    "target": "com.amazonaws.timestreaminfluxdb#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of items to return in the output. If the total number of items available is more than the value specified, a NextToken is provided in the output. To resume pagination, provide the NextToken value as argument of a subsequent API invocation.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.timestreaminfluxdb#ListDbInstancesOutput": {
+            "type": "structure",
+            "members": {
+                "items": {
+                    "target": "com.amazonaws.timestreaminfluxdb#DbInstanceSummaryList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of Timestream for InfluxDB DB instance summaries.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.timestreaminfluxdb#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Token from a previous call of the operation. When this value is provided, the\n            service returns results from where the previous response left off.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.timestreaminfluxdb#ListDbParameterGroups": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.timestreaminfluxdb#ListDbParameterGroupsInput"
+            },
+            "output": {
+                "target": "com.amazonaws.timestreaminfluxdb#ListDbParameterGroupsOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.timestreaminfluxdb#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.timestreaminfluxdb#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.timestreaminfluxdb#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.timestreaminfluxdb#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.timestreaminfluxdb#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns a list of Timestream for InfluxDB DB parameter groups.</p>",
+                "smithy.api#paginated": {
+                    "inputToken": "nextToken",
+                    "outputToken": "nextToken",
+                    "pageSize": "maxResults",
+                    "items": "items"
+                },
+                "smithy.api#readonly": {},
+                "smithy.api#tags": [
+                    "DbParameterGroup"
+                ]
+            }
+        },
+        "com.amazonaws.timestreaminfluxdb#ListDbParameterGroupsInput": {
+            "type": "structure",
+            "members": {
+                "nextToken": {
+                    "target": "com.amazonaws.timestreaminfluxdb#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pagination token. To resume pagination, provide the NextToken value as argument of a subsequent API invocation.</p>"
+                    }
+                },
+                "maxResults": {
+                    "target": "com.amazonaws.timestreaminfluxdb#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of items to return in the output. If the total number of items available is more than the value specified, a NextToken is provided in the output. To resume pagination, provide the NextToken value as argument of a subsequent API invocation.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.timestreaminfluxdb#ListDbParameterGroupsOutput": {
+            "type": "structure",
+            "members": {
+                "items": {
+                    "target": "com.amazonaws.timestreaminfluxdb#DbParameterGroupSummaryList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of Timestream for InfluxDB DB parameter group summaries.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "nextToken": {
+                    "target": "com.amazonaws.timestreaminfluxdb#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Token from a previous call of the operation. When this value is provided, the\n            service returns results from where the previous response left off.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.timestreaminfluxdb#ListTagsForResource": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.timestreaminfluxdb#ListTagsForResourceRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.timestreaminfluxdb#ListTagsForResourceResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.timestreaminfluxdb#ResourceNotFoundException"
+                }
+            ],
+            "traits": {
+                "aws.iam#conditionKeys": [
+                    "aws:ResourceTag/${TagKey}"
+                ],
+                "smithy.api#documentation": "<p>A list of tags applied to the resource.</p>",
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.timestreaminfluxdb#ListTagsForResourceRequest": {
+            "type": "structure",
+            "members": {
+                "resourceArn": {
+                    "target": "com.amazonaws.timestreaminfluxdb#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the tagged resource.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.timestreaminfluxdb#ListTagsForResourceResponse": {
+            "type": "structure",
+            "members": {
+                "tags": {
+                    "target": "com.amazonaws.timestreaminfluxdb#ResponseTagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of tags used to categorize and track resources.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.timestreaminfluxdb#LogDeliveryConfiguration": {
+            "type": "structure",
+            "members": {
+                "s3Configuration": {
+                    "target": "com.amazonaws.timestreaminfluxdb#S3Configuration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Configuration for S3 bucket log delivery.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Configuration for sending InfluxDB engine logs to send to specified S3 bucket.</p>"
+            }
+        },
+        "com.amazonaws.timestreaminfluxdb#LogLevel": {
+            "type": "enum",
+            "members": {
+                "DEBUG": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "debug"
+                    }
+                },
+                "INFO": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "info"
+                    }
+                },
+                "ERROR": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "error"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.timestreaminfluxdb#MaxResults": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 100
+                }
+            }
+        },
+        "com.amazonaws.timestreaminfluxdb#NextToken": {
+            "type": "string"
+        },
+        "com.amazonaws.timestreaminfluxdb#Organization": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 64
+                }
+            }
+        },
+        "com.amazonaws.timestreaminfluxdb#Parameters": {
+            "type": "union",
+            "members": {
+                "InfluxDBv2": {
+                    "target": "com.amazonaws.timestreaminfluxdb#InfluxDBv2Parameters",
+                    "traits": {
+                        "smithy.api#documentation": "<p>All the customer-modifiable InfluxDB v2 parameters in Timestream for InfluxDB.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The parameters that comprise the parameter group.</p>"
+            }
+        },
+        "com.amazonaws.timestreaminfluxdb#Password": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 8,
+                    "max": 64
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9]+$",
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.timestreaminfluxdb#RequestTagMap": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.timestreaminfluxdb#TagKey"
+            },
+            "value": {
+                "target": "com.amazonaws.timestreaminfluxdb#TagValue"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 200
+                }
+            }
+        },
+        "com.amazonaws.timestreaminfluxdb#ResourceNotFoundException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "resourceId": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier for the Timestream for InfluxDB resource associated with the request.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "resourceType": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of Timestream for InfluxDB resource associated with the request.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The requested resource was not found or does not exist.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 404
+            }
+        },
+        "com.amazonaws.timestreaminfluxdb#ResponseTagMap": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.timestreaminfluxdb#TagKey"
+            },
+            "value": {
+                "target": "com.amazonaws.timestreaminfluxdb#TagValue"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "max": 200
+                }
+            }
+        },
+        "com.amazonaws.timestreaminfluxdb#S3Configuration": {
+            "type": "structure",
+            "members": {
+                "bucketName": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the S3 bucket to deliver logs to.</p>",
+                        "smithy.api#length": {
+                            "min": 3,
+                            "max": 63
+                        },
+                        "smithy.api#pattern": "^[0-9a-z]+[0-9a-z\\.\\-]*[0-9a-z]+$",
+                        "smithy.api#required": {}
+                    }
+                },
+                "enabled": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether log delivery to the S3 bucket is enabled.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Configuration for S3 bucket log delivery.</p>"
+            }
+        },
+        "com.amazonaws.timestreaminfluxdb#ServiceQuotaExceededException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The request exceeds the service quota.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 402
+            }
+        },
+        "com.amazonaws.timestreaminfluxdb#Status": {
+            "type": "enum",
+            "members": {
+                "CREATING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "CREATING"
+                    }
+                },
+                "AVAILABLE": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "AVAILABLE"
+                    }
+                },
+                "DELETING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DELETING"
+                    }
+                },
+                "MODIFYING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "MODIFYING"
+                    }
+                },
+                "UPDATING": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "UPDATING"
+                    }
+                },
+                "DELETED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "DELETED"
+                    }
+                },
+                "FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FAILED"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.timestreaminfluxdb#TagKey": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 128
+                }
+            }
+        },
+        "com.amazonaws.timestreaminfluxdb#TagKeys": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.timestreaminfluxdb#TagKey"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 200
+                }
+            }
+        },
+        "com.amazonaws.timestreaminfluxdb#TagResource": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.timestreaminfluxdb#TagResourceRequest"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.timestreaminfluxdb#ResourceNotFoundException"
+                }
+            ],
+            "traits": {
+                "aws.iam#conditionKeys": [
+                    "aws:ResourceTag/${TagKey}",
+                    "aws:RequestTag/${TagKey}",
+                    "aws:TagKeys"
+                ],
+                "smithy.api#documentation": "<p>Tags are composed of a Key/Value pairs. You can use tags to categorize and track your Timestream for InfluxDB resources.</p>",
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.timestreaminfluxdb#TagResourceRequest": {
+            "type": "structure",
+            "members": {
+                "resourceArn": {
+                    "target": "com.amazonaws.timestreaminfluxdb#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the tagged resource.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.timestreaminfluxdb#RequestTagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of tags used to categorize and track resources.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.timestreaminfluxdb#TagValue": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 256
+                }
+            }
+        },
+        "com.amazonaws.timestreaminfluxdb#ThrottlingException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "retryAfterSeconds": {
+                    "target": "smithy.api#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of seconds the caller should wait before retrying.</p>",
+                        "smithy.api#httpHeader": "Retry-After"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The request was denied due to request throttling.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 429,
+                "smithy.api#retryable": {}
+            }
+        },
+        "com.amazonaws.timestreaminfluxdb#TracingType": {
+            "type": "enum",
+            "members": {
+                "LOG": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "log"
+                    }
+                },
+                "JAEGER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "jaeger"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.timestreaminfluxdb#UntagResource": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.timestreaminfluxdb#UntagResourceRequest"
+            },
+            "output": {
+                "target": "smithy.api#Unit"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.timestreaminfluxdb#ResourceNotFoundException"
+                }
+            ],
+            "traits": {
+                "aws.iam#conditionKeys": [
+                    "aws:ResourceTag/${TagKey}",
+                    "aws:TagKeys"
+                ],
+                "smithy.api#documentation": "<p>Removes the tag from the specified resource.</p>",
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.timestreaminfluxdb#UntagResourceRequest": {
+            "type": "structure",
+            "members": {
+                "resourceArn": {
+                    "target": "com.amazonaws.timestreaminfluxdb#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the tagged resource.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "tagKeys": {
+                    "target": "com.amazonaws.timestreaminfluxdb#TagKeys",
+                    "traits": {
+                        "aws.iam#conditionKeyValue": "aws:TagKeys",
+                        "smithy.api#documentation": "<p>The keys used to identify the tags.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
+            }
+        },
+        "com.amazonaws.timestreaminfluxdb#UpdateDbInstance": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.timestreaminfluxdb#UpdateDbInstanceInput"
+            },
+            "output": {
+                "target": "com.amazonaws.timestreaminfluxdb#UpdateDbInstanceOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.timestreaminfluxdb#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.timestreaminfluxdb#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.timestreaminfluxdb#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.timestreaminfluxdb#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.timestreaminfluxdb#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.timestreaminfluxdb#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Updates a Timestream for InfluxDB DB instance.</p>",
+                "smithy.api#idempotent": {},
+                "smithy.api#tags": [
+                    "DbInstance"
+                ]
+            }
+        },
+        "com.amazonaws.timestreaminfluxdb#UpdateDbInstanceInput": {
+            "type": "structure",
+            "members": {
+                "identifier": {
+                    "target": "com.amazonaws.timestreaminfluxdb#DbInstanceIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The id of the DB instance.</p>",
+                        "smithy.api#required": {},
+                        "smithy.api#resourceIdentifier": "dbInstanceIdentifier"
+                    }
+                },
+                "logDeliveryConfiguration": {
+                    "target": "com.amazonaws.timestreaminfluxdb#LogDeliveryConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Configuration for sending InfluxDB engine logs to send to specified S3 bucket.</p>"
+                    }
+                },
+                "dbParameterGroupIdentifier": {
+                    "target": "com.amazonaws.timestreaminfluxdb#DbParameterGroupIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The id of the DB parameter group to assign to your DB instance. DB parameter groups specify how the database is configured. For example, DB parameter groups can specify the limit for query concurrency.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {},
+                "smithy.api#references": [
+                    {
+                        "resource": "com.amazonaws.timestreaminfluxdb#DbParameterGroupResource"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.timestreaminfluxdb#UpdateDbInstanceOutput": {
+            "type": "structure",
+            "members": {
+                "id": {
+                    "target": "com.amazonaws.timestreaminfluxdb#DbInstanceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A service-generated unique identifier.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "name": {
+                    "target": "com.amazonaws.timestreaminfluxdb#DbInstanceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>This customer-supplied name uniquely identifies the DB instance when interacting with the Amazon Timestream for InfluxDB API and AWS CLI commands.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "arn": {
+                    "target": "com.amazonaws.timestreaminfluxdb#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the DB instance.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "status": {
+                    "target": "com.amazonaws.timestreaminfluxdb#Status",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the DB instance.</p>"
+                    }
+                },
+                "endpoint": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The endpoint used to connect to InfluxDB. The default InfluxDB port is 8086.</p>"
+                    }
+                },
+                "dbInstanceType": {
+                    "target": "com.amazonaws.timestreaminfluxdb#DbInstanceType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Timestream for InfluxDB instance type that InfluxDB runs on.</p>"
+                    }
+                },
+                "dbStorageType": {
+                    "target": "com.amazonaws.timestreaminfluxdb#DbStorageType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Timestream for InfluxDB DB storage type that InfluxDB stores data on.</p>"
+                    }
+                },
+                "allocatedStorage": {
+                    "target": "com.amazonaws.timestreaminfluxdb#AllocatedStorage",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The amount of storage allocated for your DB storage type (in gibibytes).</p>"
+                    }
+                },
+                "deploymentType": {
+                    "target": "com.amazonaws.timestreaminfluxdb#DeploymentType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether the Timestream for InfluxDB is deployed as Single-AZ or with a MultiAZ Standby for High availability.</p>"
+                    }
+                },
+                "vpcSubnetIds": {
+                    "target": "com.amazonaws.timestreaminfluxdb#VpcSubnetIdList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of VPC subnet IDs associated with the DB instance.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "publiclyAccessible": {
+                    "target": "smithy.api#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates if the DB instance has a public IP to facilitate access.</p>"
+                    }
+                },
+                "vpcSecurityGroupIds": {
+                    "target": "com.amazonaws.timestreaminfluxdb#VpcSecurityGroupIdList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of VPC security group IDs associated with the DB instance.</p>"
+                    }
+                },
+                "dbParameterGroupIdentifier": {
+                    "target": "com.amazonaws.timestreaminfluxdb#DbParameterGroupIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The id of the DB parameter group assigned to your DB instance.</p>"
+                    }
+                },
+                "availabilityZone": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Availability Zone in which the DB instance resides.</p>"
+                    }
+                },
+                "secondaryAvailabilityZone": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Availability Zone in which the standby instance is located when deploying with a MultiAZ standby instance.</p>"
+                    }
+                },
+                "logDeliveryConfiguration": {
+                    "target": "com.amazonaws.timestreaminfluxdb#LogDeliveryConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Configuration for sending InfluxDB engine logs to send to specified S3 bucket.</p>"
+                    }
+                },
+                "influxAuthParametersSecretArn": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the AWS Secrets Manager secret containing the initial InfluxDB authorization parameters. The secret value is a JSON formatted key-value pair holding InfluxDB authorization values: organization, bucket, username, and password.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.timestreaminfluxdb#Username": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 64
+                },
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.timestreaminfluxdb#ValidationException": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "reason": {
+                    "target": "com.amazonaws.timestreaminfluxdb#ValidationExceptionReason",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The reason that validation failed.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The input fails to satisfy the constraints specified by Timestream for InfluxDB.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400
+            }
+        },
+        "com.amazonaws.timestreaminfluxdb#ValidationExceptionReason": {
+            "type": "enum",
+            "members": {
+                "FIELD_VALIDATION_FAILED": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "FIELD_VALIDATION_FAILED"
+                    }
+                },
+                "OTHER": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "OTHER"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.timestreaminfluxdb#VpcSecurityGroupId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "max": 64
+                },
+                "smithy.api#pattern": "^sg-[a-z0-9]+$"
+            }
+        },
+        "com.amazonaws.timestreaminfluxdb#VpcSecurityGroupIdList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.timestreaminfluxdb#VpcSecurityGroupId"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 5
+                }
+            }
+        },
+        "com.amazonaws.timestreaminfluxdb#VpcSubnetId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "max": 64
+                },
+                "smithy.api#pattern": "^subnet-[a-z0-9]+$"
+            }
+        },
+        "com.amazonaws.timestreaminfluxdb#VpcSubnetIdList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.timestreaminfluxdb#VpcSubnetId"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 3
+                }
+            }
+        }
+    }
+}

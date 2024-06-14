@@ -6,14 +6,14 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/billingconductor/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a pricing rule can be associated to a pricing plan, or a set of pricing
-// plans.
+//	Creates a pricing rule can be associated to a pricing plan, or a set of
+//
+// pricing plans.
 func (c *Client) CreatePricingRule(ctx context.Context, params *CreatePricingRuleInput, optFns ...func(*Options)) (*CreatePricingRuleOutput, error) {
 	if params == nil {
 		params = &CreatePricingRuleInput{}
@@ -31,58 +31,61 @@ func (c *Client) CreatePricingRule(ctx context.Context, params *CreatePricingRul
 
 type CreatePricingRuleInput struct {
 
-	// The pricing rule name. The names must be unique to each pricing rule.
+	//  The pricing rule name. The names must be unique to each pricing rule.
 	//
 	// This member is required.
 	Name *string
 
-	// The scope of pricing rule that indicates if it's globally applicable, or it's
+	//  The scope of pricing rule that indicates if it's globally applicable, or it's
 	// service-specific.
 	//
 	// This member is required.
 	Scope types.PricingRuleScope
 
-	// The type of pricing rule.
+	//  The type of pricing rule.
 	//
 	// This member is required.
 	Type types.PricingRuleType
 
-	// The seller of services provided by Amazon Web Services, their affiliates, or
+	//  The seller of services provided by Amazon Web Services, their affiliates, or
 	// third-party providers selling services via Amazon Web Services Marketplace.
 	BillingEntity *string
 
-	// The token that's needed to support idempotency. Idempotency isn't currently
+	//  The token that's needed to support idempotency. Idempotency isn't currently
 	// supported, but will be implemented in a future update.
 	ClientToken *string
 
-	// The pricing rule description.
+	//  The pricing rule description.
 	Description *string
 
-	// A percentage modifier that's applied on the public pricing rates.
+	//  A percentage modifier that's applied on the public pricing rates.
 	ModifierPercentage *float64
 
-	// Operation is the specific Amazon Web Services action covered by this line item.
-	// This describes the specific usage of the line item. If the Scope attribute is
-	// set to SKU , this attribute indicates which operation the PricingRule is
-	// modifying. For example, a value of RunInstances:0202 indicates the operation of
-	// running an Amazon EC2 instance.
+	//  Operation is the specific Amazon Web Services action covered by this line
+	// item. This describes the specific usage of the line item.
+	//
+	// If the Scope attribute is set to SKU , this attribute indicates which operation
+	// the PricingRule is modifying. For example, a value of RunInstances:0202
+	// indicates the operation of running an Amazon EC2 instance.
 	Operation *string
 
-	// If the Scope attribute is set to SERVICE or SKU , the attribute indicates which
+	//  If the Scope attribute is set to SERVICE or SKU , the attribute indicates which
 	// service the PricingRule is applicable for.
 	Service *string
 
-	// A map that contains tag keys and tag values that are attached to a pricing rule.
+	//  A map that contains tag keys and tag values that are attached to a pricing
+	// rule.
 	Tags map[string]string
 
-	// The set of tiering configurations for the pricing rule.
+	//  The set of tiering configurations for the pricing rule.
 	Tiering *types.CreateTieringInput
 
-	// Usage type is the unit that each service uses to measure the usage of a
-	// specific type of resource. If the Scope attribute is set to SKU , this attribute
-	// indicates which usage type the PricingRule is modifying. For example,
-	// USW2-BoxUsage:m2.2xlarge describes an M2 High Memory Double Extra Large
-	// instance in the US West (Oregon) Region.
+	//  Usage type is the unit that each service uses to measure the usage of a
+	// specific type of resource.
+	//
+	// If the Scope attribute is set to SKU , this attribute indicates which usage type
+	// the PricingRule is modifying. For example, USW2-BoxUsage:m2.2xlarge describes an
+	// M2 High Memory Double Extra Large instance in the US West (Oregon) Region.
 	UsageType *string
 
 	noSmithyDocumentSerde
@@ -90,7 +93,7 @@ type CreatePricingRuleInput struct {
 
 type CreatePricingRuleOutput struct {
 
-	// The Amazon Resource Name (ARN) of the created pricing rule.
+	//  The Amazon Resource Name (ARN) of the created pricing rule.
 	Arn *string
 
 	// Metadata pertaining to the operation's result.
@@ -121,25 +124,25 @@ func (c *Client) addOperationCreatePricingRuleMiddlewares(stack *middleware.Stac
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -154,6 +157,9 @@ func (c *Client) addOperationCreatePricingRuleMiddlewares(stack *middleware.Stac
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opCreatePricingRuleMiddleware(stack, options); err != nil {
 		return err
 	}
@@ -163,7 +169,7 @@ func (c *Client) addOperationCreatePricingRuleMiddlewares(stack *middleware.Stac
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreatePricingRule(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

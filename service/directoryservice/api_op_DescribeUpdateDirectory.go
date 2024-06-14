@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/directoryservice/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -30,21 +29,21 @@ func (c *Client) DescribeUpdateDirectory(ctx context.Context, params *DescribeUp
 
 type DescribeUpdateDirectoryInput struct {
 
-	// The unique identifier of the directory.
+	//  The unique identifier of the directory.
 	//
 	// This member is required.
 	DirectoryId *string
 
-	// The type of updates you want to describe for the directory.
+	//  The type of updates you want to describe for the directory.
 	//
 	// This member is required.
 	UpdateType types.UpdateType
 
-	// The DescribeUpdateDirectoryResult . NextToken value from a previous call to
-	// DescribeUpdateDirectory . Pass null if this is the first call.
+	//  The DescribeUpdateDirectoryResult . NextToken value from a previous call to DescribeUpdateDirectory.
+	// Pass null if this is the first call.
 	NextToken *string
 
-	// The name of the Region.
+	//  The name of the Region.
 	RegionName *string
 
 	noSmithyDocumentSerde
@@ -52,11 +51,11 @@ type DescribeUpdateDirectoryInput struct {
 
 type DescribeUpdateDirectoryOutput struct {
 
-	// If not null, more results are available. Pass this value for the NextToken
+	//  If not null, more results are available. Pass this value for the NextToken
 	// parameter.
 	NextToken *string
 
-	// The list of update activities on a directory for the requested update type.
+	//  The list of update activities on a directory for the requested update type.
 	UpdateActivities []types.UpdateInfoEntry
 
 	// Metadata pertaining to the operation's result.
@@ -87,25 +86,25 @@ func (c *Client) addOperationDescribeUpdateDirectoryMiddlewares(stack *middlewar
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -120,13 +119,16 @@ func (c *Client) addOperationDescribeUpdateDirectoryMiddlewares(stack *middlewar
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDescribeUpdateDirectoryValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeUpdateDirectory(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

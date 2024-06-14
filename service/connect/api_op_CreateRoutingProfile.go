@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/connect/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -40,8 +39,10 @@ type CreateRoutingProfileInput struct {
 	// This member is required.
 	Description *string
 
-	// The identifier of the Amazon Connect instance. You can find the instance ID (https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html)
-	// in the Amazon Resource Name (ARN) of the instance.
+	// The identifier of the Amazon Connect instance. You can [find the instance ID] in the Amazon Resource
+	// Name (ARN) of the instance.
+	//
+	// [find the instance ID]: https://docs.aws.amazon.com/connect/latest/adminguide/find-instance-arn.html
 	//
 	// This member is required.
 	InstanceId *string
@@ -62,12 +63,14 @@ type CreateRoutingProfileInput struct {
 	AgentAvailabilityTimer types.AgentAvailabilityTimer
 
 	// The inbound queues associated with the routing profile. If no queue is added,
-	// the agent can make only outbound calls. The limit of 10 array members applies to
-	// the maximum number of RoutingProfileQueueConfig objects that can be passed
-	// during a CreateRoutingProfile API request. It is different from the quota of 50
-	// queues per routing profile per instance that is listed in Amazon Connect
-	// service quotas (https://docs.aws.amazon.com/connect/latest/adminguide/amazon-connect-service-limits.html)
-	// .
+	// the agent can make only outbound calls.
+	//
+	// The limit of 10 array members applies to the maximum number of
+	// RoutingProfileQueueConfig objects that can be passed during a
+	// CreateRoutingProfile API request. It is different from the quota of 50 queues
+	// per routing profile per instance that is listed in [Amazon Connect service quotas].
+	//
+	// [Amazon Connect service quotas]: https://docs.aws.amazon.com/connect/latest/adminguide/amazon-connect-service-limits.html
 	QueueConfigs []types.RoutingProfileQueueConfig
 
 	// The tags used to organize, track, or control access for this resource. For
@@ -113,25 +116,25 @@ func (c *Client) addOperationCreateRoutingProfileMiddlewares(stack *middleware.S
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -146,13 +149,16 @@ func (c *Client) addOperationCreateRoutingProfileMiddlewares(stack *middleware.S
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpCreateRoutingProfileValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateRoutingProfile(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

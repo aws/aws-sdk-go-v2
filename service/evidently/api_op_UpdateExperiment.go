@@ -6,15 +6,16 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/evidently/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates an Evidently experiment. Don't use this operation to update an
-// experiment's tag. Instead, use TagResource (https://docs.aws.amazon.com/cloudwatchevidently/latest/APIReference/API_TagResource.html)
-// .
+// Updates an Evidently experiment.
+//
+// Don't use this operation to update an experiment's tag. Instead, use [TagResource].
+//
+// [TagResource]: https://docs.aws.amazon.com/cloudwatchevidently/latest/APIReference/API_TagResource.html
 func (c *Client) UpdateExperiment(ctx context.Context, params *UpdateExperimentInput, optFns ...func(*Options)) (*UpdateExperimentOutput, error) {
 	if params == nil {
 		params = &UpdateExperimentInput{}
@@ -70,8 +71,10 @@ type UpdateExperimentInput struct {
 	// The portion of the available audience that you want to allocate to this
 	// experiment, in thousandths of a percent. The available audience is the total
 	// audience minus the audience that you have allocated to overrides or current
-	// launches of this feature. This is represented in thousandths of a percent. For
-	// example, specify 20,000 to allocate 20% of the available audience.
+	// launches of this feature.
+	//
+	// This is represented in thousandths of a percent. For example, specify 20,000 to
+	// allocate 20% of the available audience.
 	SamplingRate *int64
 
 	// Adds an audience segment to an experiment. When a segment is used in an
@@ -122,25 +125,25 @@ func (c *Client) addOperationUpdateExperimentMiddlewares(stack *middleware.Stack
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -155,13 +158,16 @@ func (c *Client) addOperationUpdateExperimentMiddlewares(stack *middleware.Stack
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpUpdateExperimentValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateExperiment(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

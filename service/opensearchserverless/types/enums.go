@@ -11,8 +11,9 @@ const (
 )
 
 // Values returns all known values for AccessPolicyType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (AccessPolicyType) Values() []AccessPolicyType {
 	return []AccessPolicyType{
 		"data",
@@ -34,8 +35,9 @@ const (
 )
 
 // Values returns all known values for CollectionStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (CollectionStatus) Values() []CollectionStatus {
 	return []CollectionStatus{
 		"CREATING",
@@ -58,8 +60,9 @@ const (
 )
 
 // Values returns all known values for CollectionType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (CollectionType) Values() []CollectionType {
 	return []CollectionType{
 		"SEARCH",
@@ -77,8 +80,9 @@ const (
 )
 
 // Values returns all known values for LifecyclePolicyType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (LifecyclePolicyType) Values() []LifecyclePolicyType {
 	return []LifecyclePolicyType{
 		"retention",
@@ -94,8 +98,9 @@ const (
 )
 
 // Values returns all known values for ResourceType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ResourceType) Values() []ResourceType {
 	return []ResourceType{
 		"index",
@@ -111,8 +116,9 @@ const (
 )
 
 // Values returns all known values for SecurityConfigType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (SecurityConfigType) Values() []SecurityConfigType {
 	return []SecurityConfigType{
 		"saml",
@@ -130,8 +136,9 @@ const (
 )
 
 // Values returns all known values for SecurityPolicyType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (SecurityPolicyType) Values() []SecurityPolicyType {
 	return []SecurityPolicyType{
 		"encryption",
@@ -150,8 +157,9 @@ const (
 )
 
 // Values returns all known values for StandbyReplicas. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (StandbyReplicas) Values() []StandbyReplicas {
 	return []StandbyReplicas{
 		"ENABLED",
@@ -174,8 +182,9 @@ const (
 )
 
 // Values returns all known values for VpcEndpointStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (VpcEndpointStatus) Values() []VpcEndpointStatus {
 	return []VpcEndpointStatus{
 		"PENDING",

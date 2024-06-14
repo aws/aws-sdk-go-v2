@@ -6,17 +6,18 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/elastictranscoder/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // When you create a job, Elastic Transcoder returns JSON data that includes the
-// values that you specified plus information about the job that is created. If you
-// have specified more than one output for your jobs (for example, one output for
-// the Kindle Fire and another output for the Apple iPhone 4s), you currently must
-// use the Elastic Transcoder API to list the jobs (as opposed to the AWS Console).
+// values that you specified plus information about the job that is created.
+//
+// If you have specified more than one output for your jobs (for example, one
+// output for the Kindle Fire and another output for the Apple iPhone 4s), you
+// currently must use the Elastic Transcoder API to list the jobs (as opposed to
+// the AWS Console).
 func (c *Client) CreateJob(ctx context.Context, params *CreateJobInput, optFns ...func(*Options)) (*CreateJobOutput, error) {
 	if params == nil {
 		params = &CreateJobInput{}
@@ -51,7 +52,7 @@ type CreateJobInput struct {
 	// are being transcoded.
 	Inputs []types.JobInput
 
-	// A section of the request body that provides information about the transcoded
+	//  A section of the request body that provides information about the transcoded
 	// (target) file. We strongly recommend that you use the Outputs syntax instead of
 	// the Output syntax.
 	Output *types.CreateJobOutput
@@ -61,15 +62,16 @@ type CreateJobInput struct {
 	// playlists.
 	OutputKeyPrefix *string
 
-	// A section of the request body that provides information about the transcoded
+	//  A section of the request body that provides information about the transcoded
 	// (target) files. We recommend that you use the Outputs syntax instead of the
 	// Output syntax.
 	Outputs []types.CreateJobOutput
 
 	// If you specify a preset in PresetId for which the value of Container is fmp4
 	// (Fragmented MP4) or ts (MPEG-TS), Playlists contains information about the
-	// master playlists that you want Elastic Transcoder to create. The maximum number
-	// of master playlists in a job is 30.
+	// master playlists that you want Elastic Transcoder to create.
+	//
+	// The maximum number of master playlists in a job is 30.
 	Playlists []types.CreateJobPlaylist
 
 	// User-defined metadata that you want to associate with an Elastic Transcoder
@@ -116,25 +118,25 @@ func (c *Client) addOperationCreateJobMiddlewares(stack *middleware.Stack, optio
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -149,13 +151,16 @@ func (c *Client) addOperationCreateJobMiddlewares(stack *middleware.Stack, optio
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpCreateJobValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateJob(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

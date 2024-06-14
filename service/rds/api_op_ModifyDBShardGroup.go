@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -46,10 +45,13 @@ type ModifyDBShardGroupOutput struct {
 
 	// Specifies whether to create standby instances for the DB shard group. Valid
 	// values are the following:
+	//
 	//   - 0 - Creates a single, primary DB instance for each physical shard. This is
 	//   the default value, and the only one supported for the preview.
+	//
 	//   - 1 - Creates a primary DB instance and a standby instance in a different
 	//   Availability Zone (AZ) for each physical shard.
+	//
 	//   - 2 - Creates a primary DB instance and two standby instances in different
 	//   AZs for each physical shard.
 	ComputeRedundancy *int32
@@ -70,16 +72,21 @@ type ModifyDBShardGroupOutput struct {
 	// The maximum capacity of the DB shard group in Aurora capacity units (ACUs).
 	MaxACU *float64
 
-	// Indicates whether the DB shard group is publicly accessible. When the DB shard
-	// group is publicly accessible, its Domain Name System (DNS) endpoint resolves to
-	// the private IP address from within the DB shard group's virtual private cloud
-	// (VPC). It resolves to the public IP address from outside of the DB shard group's
-	// VPC. Access to the DB shard group is ultimately controlled by the security group
-	// it uses. That public access isn't permitted if the security group assigned to
-	// the DB shard group doesn't permit it. When the DB shard group isn't publicly
-	// accessible, it is an internal DB shard group with a DNS name that resolves to a
-	// private IP address. For more information, see CreateDBShardGroup . This setting
-	// is only for Aurora Limitless Database.
+	// Indicates whether the DB shard group is publicly accessible.
+	//
+	// When the DB shard group is publicly accessible, its Domain Name System (DNS)
+	// endpoint resolves to the private IP address from within the DB shard group's
+	// virtual private cloud (VPC). It resolves to the public IP address from outside
+	// of the DB shard group's VPC. Access to the DB shard group is ultimately
+	// controlled by the security group it uses. That public access isn't permitted if
+	// the security group assigned to the DB shard group doesn't permit it.
+	//
+	// When the DB shard group isn't publicly accessible, it is an internal DB shard
+	// group with a DNS name that resolves to a private IP address.
+	//
+	// For more information, see CreateDBShardGroup.
+	//
+	// This setting is only for Aurora Limitless Database.
 	PubliclyAccessible *bool
 
 	// The status of the DB shard group.
@@ -113,25 +120,25 @@ func (c *Client) addOperationModifyDBShardGroupMiddlewares(stack *middleware.Sta
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -146,13 +153,16 @@ func (c *Client) addOperationModifyDBShardGroupMiddlewares(stack *middleware.Sta
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpModifyDBShardGroupValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opModifyDBShardGroup(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

@@ -6,15 +6,15 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Replaces an entry (rule) in a network ACL. For more information, see Network
-// ACLs (https://docs.aws.amazon.com/vpc/latest/userguide/vpc-network-acls.html) in
-// the Amazon VPC User Guide.
+// Replaces an entry (rule) in a network ACL. For more information, see [Network ACLs] in the
+// Amazon VPC User Guide.
+//
+// [Network ACLs]: https://docs.aws.amazon.com/vpc/latest/userguide/vpc-network-acls.html
 func (c *Client) ReplaceNetworkAclEntry(ctx context.Context, params *ReplaceNetworkAclEntryInput, optFns ...func(*Options)) (*ReplaceNetworkAclEntryOutput, error) {
 	if params == nil {
 		params = &ReplaceNetworkAclEntryInput{}
@@ -32,8 +32,9 @@ func (c *Client) ReplaceNetworkAclEntry(ctx context.Context, params *ReplaceNetw
 
 type ReplaceNetworkAclEntryInput struct {
 
-	// Indicates whether to replace the egress rule. Default: If no value is
-	// specified, we replace the ingress rule.
+	// Indicates whether to replace the egress rule.
+	//
+	// Default: If no value is specified, we replace the ingress rule.
 	//
 	// This member is required.
 	Egress *bool
@@ -118,25 +119,25 @@ func (c *Client) addOperationReplaceNetworkAclEntryMiddlewares(stack *middleware
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -151,13 +152,16 @@ func (c *Client) addOperationReplaceNetworkAclEntryMiddlewares(stack *middleware
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpReplaceNetworkAclEntryValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opReplaceNetworkAclEntry(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

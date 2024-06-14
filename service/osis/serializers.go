@@ -331,6 +331,10 @@ func awsRestjson1_serializeOpHttpBindingsGetPipelineBlueprintInput(v *GetPipelin
 		}
 	}
 
+	if v.Format != nil {
+		encoder.SetQuery("format").String(*v.Format)
+	}
+
 	return nil
 }
 
@@ -1187,6 +1191,23 @@ func awsRestjson1_serializeDocumentTagList(v []types.Tag, value smithyjson.Value
 	return nil
 }
 
+func awsRestjson1_serializeDocumentVpcAttachmentOptions(v *types.VpcAttachmentOptions, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AttachToVpc != nil {
+		ok := object.Key("AttachToVpc")
+		ok.Boolean(*v.AttachToVpc)
+	}
+
+	if v.CidrBlock != nil {
+		ok := object.Key("CidrBlock")
+		ok.String(*v.CidrBlock)
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentVpcOptions(v *types.VpcOptions, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -1203,6 +1224,18 @@ func awsRestjson1_serializeDocumentVpcOptions(v *types.VpcOptions, value smithyj
 		if err := awsRestjson1_serializeDocumentSubnetIds(v.SubnetIds, ok); err != nil {
 			return err
 		}
+	}
+
+	if v.VpcAttachmentOptions != nil {
+		ok := object.Key("VpcAttachmentOptions")
+		if err := awsRestjson1_serializeDocumentVpcAttachmentOptions(v.VpcAttachmentOptions, ok); err != nil {
+			return err
+		}
+	}
+
+	if len(v.VpcEndpointManagement) > 0 {
+		ok := object.Key("VpcEndpointManagement")
+		ok.String(string(v.VpcEndpointManagement))
 	}
 
 	return nil

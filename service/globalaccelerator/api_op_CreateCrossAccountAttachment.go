@@ -6,23 +6,34 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/globalaccelerator/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Create a cross-account attachment in Global Accelerator. You create a
-// cross-account attachment to specify the principals who have permission to add to
-// accelerators in their own account the resources in your account that you also
-// list in the attachment. A principal can be an Amazon Web Services account number
-// or the Amazon Resource Name (ARN) for an accelerator. For account numbers that
-// are listed as principals, to add a resource listed in the attachment to an
-// accelerator, you must sign in to an account specified as a principal. Then you
-// can add the resources that are listed to any of your accelerators. If an
-// accelerator ARN is listed in the cross-account attachment as a principal, anyone
-// with permission to make updates to the accelerator can add as endpoints
-// resources that are listed in the attachment.
+// cross-account attachment to specify the principals who have permission to work
+// with resources in accelerators in their own account. You specify, in the same
+// attachment, the resources that are shared.
+//
+// A principal can be an Amazon Web Services account number or the Amazon Resource
+// Name (ARN) for an accelerator. For account numbers that are listed as
+// principals, to work with a resource listed in the attachment, you must sign in
+// to an account specified as a principal. Then, you can work with resources that
+// are listed, with any of your accelerators. If an accelerator ARN is listed in
+// the cross-account attachment as a principal, anyone with permission to make
+// updates to the accelerator can work with resources that are listed in the
+// attachment.
+//
+// Specify each principal and resource separately. To specify two CIDR address
+// pools, list them individually under Resources , and so on. For a command line
+// operation, for example, you might use a statement like the following:
+//
+//	"Resources": [{"Cidr": "169.254.60.0/24"},{"Cidr": "169.254.59.0/24"}]
+//
+// For more information, see [Working with cross-account attachments and resources in Global Accelerator] in the Global Accelerator Developer Guide.
+//
+// [Working with cross-account attachments and resources in Global Accelerator]: https://docs.aws.amazon.com/global-accelerator/latest/dg/cross-account-resources.html
 func (c *Client) CreateCrossAccountAttachment(ctx context.Context, params *CreateCrossAccountAttachmentInput, optFns ...func(*Options)) (*CreateCrossAccountAttachmentOutput, error) {
 	if params == nil {
 		params = &CreateCrossAccountAttachmentInput{}
@@ -51,19 +62,22 @@ type CreateCrossAccountAttachmentInput struct {
 	// This member is required.
 	Name *string
 
-	// The principals to list in the cross-account attachment. A principal can be an
-	// Amazon Web Services account number or the Amazon Resource Name (ARN) for an
+	// The principals to include in the cross-account attachment. A principal can be
+	// an Amazon Web Services account number or the Amazon Resource Name (ARN) for an
 	// accelerator.
 	Principals []string
 
-	// The Amazon Resource Names (ARNs) for the resources to list in the cross-account
-	// attachment. A resource can be any supported Amazon Web Services resource type
-	// for Global Accelerator.
+	// The Amazon Resource Names (ARNs) for the resources to include in the
+	// cross-account attachment. A resource can be any supported Amazon Web Services
+	// resource type for Global Accelerator or a CIDR range for a bring your own IP
+	// address (BYOIP) address pool.
 	Resources []types.Resource
 
-	// Create tags for cross-account attachment. For more information, see Tagging in
-	// Global Accelerator (https://docs.aws.amazon.com/global-accelerator/latest/dg/tagging-in-global-accelerator.html)
-	// in the Global Accelerator Developer Guide.
+	// Add tags for a cross-account attachment.
+	//
+	// For more information, see [Tagging in Global Accelerator] in the Global Accelerator Developer Guide.
+	//
+	// [Tagging in Global Accelerator]: https://docs.aws.amazon.com/global-accelerator/latest/dg/tagging-in-global-accelerator.html
 	Tags []types.Tag
 
 	noSmithyDocumentSerde
@@ -102,25 +116,25 @@ func (c *Client) addOperationCreateCrossAccountAttachmentMiddlewares(stack *midd
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -135,6 +149,9 @@ func (c *Client) addOperationCreateCrossAccountAttachmentMiddlewares(stack *midd
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opCreateCrossAccountAttachmentMiddleware(stack, options); err != nil {
 		return err
 	}
@@ -144,7 +161,7 @@ func (c *Client) addOperationCreateCrossAccountAttachmentMiddlewares(stack *midd
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateCrossAccountAttachment(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

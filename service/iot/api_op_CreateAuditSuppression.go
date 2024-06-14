@@ -6,16 +6,17 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/iot/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
-// Creates a Device Defender audit suppression. Requires permission to access the
-// CreateAuditSuppression (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
-// action.
+//	Creates a Device Defender audit suppression.
+//
+// Requires permission to access the [CreateAuditSuppression] action.
+//
+// [CreateAuditSuppression]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions
 func (c *Client) CreateAuditSuppression(ctx context.Context, params *CreateAuditSuppressionInput, optFns ...func(*Options)) (*CreateAuditSuppressionOutput, error) {
 	if params == nil {
 		params = &CreateAuditSuppressionInput{}
@@ -41,7 +42,7 @@ type CreateAuditSuppressionInput struct {
 	// This member is required.
 	CheckName *string
 
-	// Each audit supression must have a unique client request token. If you try to
+	//  Each audit supression must have a unique client request token. If you try to
 	// create a new audit suppression with the same token as one that already exists,
 	// an exception occurs. If you omit this value, Amazon Web Services SDKs will
 	// automatically generate a unique client request.
@@ -54,13 +55,13 @@ type CreateAuditSuppressionInput struct {
 	// This member is required.
 	ResourceIdentifier *types.ResourceIdentifier
 
-	// The description of the audit suppression.
+	//  The description of the audit suppression.
 	Description *string
 
-	// The epoch timestamp in seconds at which this suppression expires.
+	//  The epoch timestamp in seconds at which this suppression expires.
 	ExpirationDate *time.Time
 
-	// Indicates whether a suppression should exist indefinitely or not.
+	//  Indicates whether a suppression should exist indefinitely or not.
 	SuppressIndefinitely *bool
 
 	noSmithyDocumentSerde
@@ -95,25 +96,25 @@ func (c *Client) addOperationCreateAuditSuppressionMiddlewares(stack *middleware
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -128,6 +129,9 @@ func (c *Client) addOperationCreateAuditSuppressionMiddlewares(stack *middleware
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opCreateAuditSuppressionMiddleware(stack, options); err != nil {
 		return err
 	}
@@ -137,7 +141,7 @@ func (c *Client) addOperationCreateAuditSuppressionMiddlewares(stack *middleware
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateAuditSuppression(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

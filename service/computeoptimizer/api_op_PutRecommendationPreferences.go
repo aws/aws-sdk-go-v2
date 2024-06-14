@@ -6,16 +6,17 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/computeoptimizer/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates a new recommendation preference or updates an existing recommendation
-// preference, such as enhanced infrastructure metrics. For more information, see
-// Activating enhanced infrastructure metrics (https://docs.aws.amazon.com/compute-optimizer/latest/ug/enhanced-infrastructure-metrics.html)
-// in the Compute Optimizer User Guide.
+// preference, such as enhanced infrastructure metrics.
+//
+// For more information, see [Activating enhanced infrastructure metrics] in the Compute Optimizer User Guide.
+//
+// [Activating enhanced infrastructure metrics]: https://docs.aws.amazon.com/compute-optimizer/latest/ug/enhanced-infrastructure-metrics.html
 func (c *Client) PutRecommendationPreferences(ctx context.Context, params *PutRecommendationPreferencesInput, optFns ...func(*Options)) (*PutRecommendationPreferencesOutput, error) {
 	if params == nil {
 		params = &PutRecommendationPreferencesInput{}
@@ -33,81 +34,123 @@ func (c *Client) PutRecommendationPreferences(ctx context.Context, params *PutRe
 
 type PutRecommendationPreferencesInput struct {
 
-	// The target resource type of the recommendation preference to create. The
-	// Ec2Instance option encompasses standalone instances and instances that are part
-	// of Auto Scaling groups. The AutoScalingGroup option encompasses only instances
-	// that are part of an Auto Scaling group. The valid values for this parameter are
-	// Ec2Instance and AutoScalingGroup .
+	// The target resource type of the recommendation preference to create.
+	//
+	// The Ec2Instance option encompasses standalone instances and instances that are
+	// part of Auto Scaling groups. The AutoScalingGroup option encompasses only
+	// instances that are part of an Auto Scaling group.
+	//
+	// The valid values for this parameter are Ec2Instance and AutoScalingGroup .
 	//
 	// This member is required.
 	ResourceType types.ResourceType
 
 	// The status of the enhanced infrastructure metrics recommendation preference to
-	// create or update. Specify the Active status to activate the preference, or
-	// specify Inactive to deactivate the preference. For more information, see
-	// Enhanced infrastructure metrics (https://docs.aws.amazon.com/compute-optimizer/latest/ug/enhanced-infrastructure-metrics.html)
-	// in the Compute Optimizer User Guide.
+	// create or update.
+	//
+	// Specify the Active status to activate the preference, or specify Inactive to
+	// deactivate the preference.
+	//
+	// For more information, see [Enhanced infrastructure metrics] in the Compute Optimizer User Guide.
+	//
+	// [Enhanced infrastructure metrics]: https://docs.aws.amazon.com/compute-optimizer/latest/ug/enhanced-infrastructure-metrics.html
 	EnhancedInfrastructureMetrics types.EnhancedInfrastructureMetrics
 
 	// The provider of the external metrics recommendation preference to create or
-	// update. Specify a valid provider in the source field to activate the
-	// preference. To delete this preference, see the DeleteRecommendationPreferences
-	// action. This preference can only be set for the Ec2Instance resource type. For
-	// more information, see External metrics ingestion (https://docs.aws.amazon.com/compute-optimizer/latest/ug/external-metrics-ingestion.html)
-	// in the Compute Optimizer User Guide.
+	// update.
+	//
+	// Specify a valid provider in the source field to activate the preference. To
+	// delete this preference, see the DeleteRecommendationPreferencesaction.
+	//
+	// This preference can only be set for the Ec2Instance resource type.
+	//
+	// For more information, see [External metrics ingestion] in the Compute Optimizer User Guide.
+	//
+	// [External metrics ingestion]: https://docs.aws.amazon.com/compute-optimizer/latest/ug/external-metrics-ingestion.html
 	ExternalMetricsPreference *types.ExternalMetricsPreference
 
 	// The status of the inferred workload types recommendation preference to create
-	// or update. The inferred workload type feature is active by default. To
-	// deactivate it, create a recommendation preference. Specify the Inactive status
-	// to deactivate the feature, or specify Active to activate it. For more
-	// information, see Inferred workload types (https://docs.aws.amazon.com/compute-optimizer/latest/ug/inferred-workload-types.html)
-	// in the Compute Optimizer User Guide.
+	// or update.
+	//
+	// The inferred workload type feature is active by default. To deactivate it,
+	// create a recommendation preference.
+	//
+	// Specify the Inactive status to deactivate the feature, or specify Active to
+	// activate it.
+	//
+	// For more information, see [Inferred workload types] in the Compute Optimizer User Guide.
+	//
+	// [Inferred workload types]: https://docs.aws.amazon.com/compute-optimizer/latest/ug/inferred-workload-types.html
 	InferredWorkloadTypes types.InferredWorkloadTypesPreference
 
-	// The preference to control the number of days the utilization metrics of the
+	//  The preference to control the number of days the utilization metrics of the
 	// Amazon Web Services resource are analyzed. When this preference isn't specified,
-	// we use the default value DAYS_14 . You can only set this preference for the
-	// Amazon EC2 instance and Auto Scaling group resource types.
+	// we use the default value DAYS_14 .
+	//
+	// You can only set this preference for the Amazon EC2 instance and Auto Scaling
+	// group resource types.
 	LookBackPeriod types.LookBackPeriodPreference
 
-	// The preference to control which resource type values are considered when
+	//  The preference to control which resource type values are considered when
 	// generating rightsizing recommendations. You can specify this preference as a
 	// combination of include and exclude lists. You must specify either an includeList
 	// or excludeList . If the preference is an empty set of resource type values, an
-	// error occurs. You can only set this preference for the Amazon EC2 instance and
-	// Auto Scaling group resource types.
+	// error occurs.
+	//
+	// You can only set this preference for the Amazon EC2 instance and Auto Scaling
+	// group resource types.
 	PreferredResources []types.PreferredResource
 
-	// The status of the savings estimation mode preference to create or update.
+	//  The status of the savings estimation mode preference to create or update.
+	//
 	// Specify the AfterDiscounts status to activate the preference, or specify
-	// BeforeDiscounts to deactivate the preference. Only the account manager or
-	// delegated administrator of your organization can activate this preference. For
-	// more information, see Savings estimation mode (https://docs.aws.amazon.com/compute-optimizer/latest/ug/savings-estimation-mode.html)
-	// in the Compute Optimizer User Guide.
+	// BeforeDiscounts to deactivate the preference.
+	//
+	// Only the account manager or delegated administrator of your organization can
+	// activate this preference.
+	//
+	// For more information, see [Savings estimation mode] in the Compute Optimizer User Guide.
+	//
+	// [Savings estimation mode]: https://docs.aws.amazon.com/compute-optimizer/latest/ug/savings-estimation-mode.html
 	SavingsEstimationMode types.SavingsEstimationMode
 
 	// An object that describes the scope of the recommendation preference to create.
+	//
 	// You can create recommendation preferences at the organization level (for
 	// management accounts of an organization only), account level, and resource level.
-	// For more information, see Activating enhanced infrastructure metrics (https://docs.aws.amazon.com/compute-optimizer/latest/ug/enhanced-infrastructure-metrics.html)
-	// in the Compute Optimizer User Guide. You cannot create recommendation
-	// preferences for Auto Scaling groups at the organization and account levels. You
-	// can create recommendation preferences for Auto Scaling groups only at the
-	// resource level by specifying a scope name of ResourceArn and a scope value of
-	// the Auto Scaling group Amazon Resource Name (ARN). This will configure the
-	// preference for all instances that are part of the specified Auto Scaling group.
-	// You also cannot create recommendation preferences at the resource level for
-	// instances that are part of an Auto Scaling group. You can create recommendation
-	// preferences at the resource level only for standalone instances.
+	// For more information, see [Activating enhanced infrastructure metrics]in the Compute Optimizer User Guide.
+	//
+	// You cannot create recommendation preferences for Auto Scaling groups at the
+	// organization and account levels. You can create recommendation preferences for
+	// Auto Scaling groups only at the resource level by specifying a scope name of
+	// ResourceArn and a scope value of the Auto Scaling group Amazon Resource Name
+	// (ARN). This will configure the preference for all instances that are part of the
+	// specified Auto Scaling group. You also cannot create recommendation preferences
+	// at the resource level for instances that are part of an Auto Scaling group. You
+	// can create recommendation preferences at the resource level only for standalone
+	// instances.
+	//
+	// [Activating enhanced infrastructure metrics]: https://docs.aws.amazon.com/compute-optimizer/latest/ug/enhanced-infrastructure-metrics.html
 	Scope *types.Scope
 
-	// The preference to control the resource’s CPU utilization thresholds - threshold
-	// and headroom. When this preference isn't specified, we use the following default
-	// values:
+	//  The preference to control the resource’s CPU utilization threshold, CPU
+	// utilization headroom, and memory utilization headroom. When this preference
+	// isn't specified, we use the following default values.
+	//
+	// CPU utilization:
+	//
 	//   - P99_5 for threshold
-	//   - PERCENT_17 for headroom
-	// You can only set this preference for the Amazon EC2 instance resource type.
+	//
+	//   - PERCENT_20 for headroom
+	//
+	// Memory utilization:
+	//
+	//   - PERCENT_20 for headroom
+	//
+	//   - You can only set CPU and memory utilization preferences for the Amazon EC2
+	//   instance resource type.
+	//
+	//   - The threshold setting isn’t available for memory utilization.
 	UtilizationPreferences []types.UtilizationPreference
 
 	noSmithyDocumentSerde
@@ -142,25 +185,25 @@ func (c *Client) addOperationPutRecommendationPreferencesMiddlewares(stack *midd
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -175,13 +218,16 @@ func (c *Client) addOperationPutRecommendationPreferencesMiddlewares(stack *midd
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpPutRecommendationPreferencesValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opPutRecommendationPreferences(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

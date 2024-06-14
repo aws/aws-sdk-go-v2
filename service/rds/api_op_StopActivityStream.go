@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/rds/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -14,11 +13,13 @@ import (
 
 // Stops a database activity stream that was started using the Amazon Web Services
 // console, the start-activity-stream CLI command, or the StartActivityStream
-// operation. For more information, see Monitoring Amazon Aurora with Database
-// Activity Streams (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/DBActivityStreams.html)
-// in the Amazon Aurora User Guide or Monitoring Amazon RDS with Database Activity
-// Streams (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/DBActivityStreams.html)
-// in the Amazon RDS User Guide.
+// operation.
+//
+// For more information, see [Monitoring Amazon Aurora with Database Activity Streams] in the Amazon Aurora User Guide or [Monitoring Amazon RDS with Database Activity Streams] in the Amazon
+// RDS User Guide.
+//
+// [Monitoring Amazon Aurora with Database Activity Streams]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/DBActivityStreams.html
+// [Monitoring Amazon RDS with Database Activity Streams]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/DBActivityStreams.html
 func (c *Client) StopActivityStream(ctx context.Context, params *StopActivityStreamInput, optFns ...func(*Options)) (*StopActivityStreamOutput, error) {
 	if params == nil {
 		params = &StopActivityStreamInput{}
@@ -56,8 +57,10 @@ type StopActivityStreamOutput struct {
 	KinesisStreamName *string
 
 	// The Amazon Web Services KMS key identifier used for encrypting messages in the
-	// database activity stream. The Amazon Web Services KMS key identifier is the key
-	// ARN, key ID, alias ARN, or alias name for the KMS key.
+	// database activity stream.
+	//
+	// The Amazon Web Services KMS key identifier is the key ARN, key ID, alias ARN,
+	// or alias name for the KMS key.
 	KmsKeyId *string
 
 	// The status of the database activity stream.
@@ -91,25 +94,25 @@ func (c *Client) addOperationStopActivityStreamMiddlewares(stack *middleware.Sta
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -124,13 +127,16 @@ func (c *Client) addOperationStopActivityStreamMiddlewares(stack *middleware.Sta
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpStopActivityStreamValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opStopActivityStream(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

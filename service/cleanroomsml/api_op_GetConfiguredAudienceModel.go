@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/cleanroomsml/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -84,11 +83,10 @@ type GetConfiguredAudienceModelOutput struct {
 	UpdateTime *time.Time
 
 	// The list of output sizes of audiences that can be created using this configured
-	// audience model. A request to StartAudienceGenerationJob that uses this
-	// configured audience model must have an audienceSize selected from this list.
-	// You can use the ABSOLUTE AudienceSize to configure out audience sizes using the
-	// count of identifiers in the output. You can use the Percentage AudienceSize to
-	// configure sizes in the range 1-100 percent.
+	// audience model. A request to StartAudienceGenerationJobthat uses this configured audience model must have
+	// an audienceSize selected from this list. You can use the ABSOLUTEAudienceSize to configure
+	// out audience sizes using the count of identifiers in the output. You can use the
+	// PercentageAudienceSize to configure sizes in the range 1-100 percent.
 	AudienceSizeConfig *types.AudienceSizeConfig
 
 	// Provides the childResourceTagOnCreatePolicy that was used for this configured
@@ -133,25 +131,25 @@ func (c *Client) addOperationGetConfiguredAudienceModelMiddlewares(stack *middle
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -166,13 +164,16 @@ func (c *Client) addOperationGetConfiguredAudienceModelMiddlewares(stack *middle
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpGetConfiguredAudienceModelValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetConfiguredAudienceModel(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

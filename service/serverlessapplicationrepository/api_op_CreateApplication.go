@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/serverlessapplicationrepository/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -31,19 +30,27 @@ func (c *Client) CreateApplication(ctx context.Context, params *CreateApplicatio
 
 type CreateApplicationInput struct {
 
-	// The name of the author publishing the app.Minimum length=1. Maximum
-	// length=127.Pattern "^[a-z0-9](([a-z0-9]|-(?!-))*[a-z0-9])?$";
+	// The name of the author publishing the app.
+	//
+	// Minimum length=1. Maximum length=127.
+	//
+	// Pattern "^[a-z0-9](([a-z0-9]|-(?!-))*[a-z0-9])?$";
 	//
 	// This member is required.
 	Author *string
 
-	// The description of the application.Minimum length=1. Maximum length=256
+	// The description of the application.
+	//
+	// Minimum length=1. Maximum length=256
 	//
 	// This member is required.
 	Description *string
 
-	// The name of the application that you want to publish.Minimum length=1. Maximum
-	// length=140Pattern: "[a-zA-Z0-9\\-]+";
+	// The name of the application that you want to publish.
+	//
+	// Minimum length=1. Maximum length=140
+	//
+	// Pattern: "[a-zA-Z0-9\\-]+";
 	//
 	// This member is required.
 	Name *string
@@ -52,54 +59,85 @@ type CreateApplicationInput struct {
 	// your GitHub repository for the application.
 	HomePageUrl *string
 
-	// Labels to improve discovery of apps in search results.Minimum length=1. Maximum
-	// length=127. Maximum number of labels: 10Pattern: "^[a-zA-Z0-9+\\-_:\\/@]+$";
+	// Labels to improve discovery of apps in search results.
+	//
+	// Minimum length=1. Maximum length=127. Maximum number of labels: 10
+	//
+	// Pattern: "^[a-zA-Z0-9+\\-_:\\/@]+$";
 	Labels []string
 
 	// A local text file that contains the license of the app that matches the
 	// spdxLicenseID value of your application. The file has the format
-	// file://<path>/<filename>.Maximum size 5 MBYou can specify only one of
-	// licenseBody and licenseUrl; otherwise, an error results.
+	// file://<path>/<filename>.
+	//
+	// Maximum size 5 MB
+	//
+	// You can specify only one of licenseBody and licenseUrl; otherwise, an error
+	// results.
 	LicenseBody *string
 
 	// A link to the S3 object that contains the license of the app that matches the
-	// spdxLicenseID value of your application.Maximum size 5 MBYou can specify only
-	// one of licenseBody and licenseUrl; otherwise, an error results.
+	// spdxLicenseID value of your application.
+	//
+	// Maximum size 5 MB
+	//
+	// You can specify only one of licenseBody and licenseUrl; otherwise, an error
+	// results.
 	LicenseUrl *string
 
 	// A local text readme file in Markdown language that contains a more detailed
 	// description of the application and how it works. The file has the format
-	// file://<path>/<filename>.Maximum size 5 MBYou can specify only one of readmeBody
-	// and readmeUrl; otherwise, an error results.
+	// file://<path>/<filename>.
+	//
+	// Maximum size 5 MB
+	//
+	// You can specify only one of readmeBody and readmeUrl; otherwise, an error
+	// results.
 	ReadmeBody *string
 
 	// A link to the S3 object in Markdown language that contains a more detailed
-	// description of the application and how it works.Maximum size 5 MBYou can specify
-	// only one of readmeBody and readmeUrl; otherwise, an error results.
+	// description of the application and how it works.
+	//
+	// Maximum size 5 MB
+	//
+	// You can specify only one of readmeBody and readmeUrl; otherwise, an error
+	// results.
 	ReadmeUrl *string
 
-	// The semantic version of the application: https://semver.org/ (https://semver.org/)
+	// The semantic version of the application:
+	//
+	// [https://semver.org/]
+	//
+	// [https://semver.org/]: https://semver.org/
 	SemanticVersion *string
 
 	// A link to the S3 object that contains the ZIP archive of the source code for
-	// this version of your application.Maximum size 50 MB
+	// this version of your application.
+	//
+	// Maximum size 50 MB
 	SourceCodeArchiveUrl *string
 
 	// A link to a public repository for the source code of your application, for
 	// example the URL of a specific GitHub commit.
 	SourceCodeUrl *string
 
-	// A valid identifier from https://spdx.org/licenses/ (https://spdx.org/licenses/) .
+	// A valid identifier from [https://spdx.org/licenses/].
+	//
+	// [https://spdx.org/licenses/]: https://spdx.org/licenses/
 	SpdxLicenseId *string
 
 	// The local raw packaged AWS SAM template file of your application. The file has
-	// the format file://<path>/<filename>.You can specify only one of templateBody and
-	// templateUrl; otherwise an error results.
+	// the format file://<path>/<filename>.
+	//
+	// You can specify only one of templateBody and templateUrl; otherwise an error
+	// results.
 	TemplateBody *string
 
 	// A link to the S3 object containing the packaged AWS SAM template of your
-	// application.You can specify only one of templateBody and templateUrl; otherwise
-	// an error results.
+	// application.
+	//
+	// You can specify only one of templateBody and templateUrl; otherwise an error
+	// results.
 	TemplateUrl *string
 
 	noSmithyDocumentSerde
@@ -110,14 +148,19 @@ type CreateApplicationOutput struct {
 	// The application Amazon Resource Name (ARN).
 	ApplicationId *string
 
-	// The name of the author publishing the app.Minimum length=1. Maximum
-	// length=127.Pattern "^[a-z0-9](([a-z0-9]|-(?!-))*[a-z0-9])?$";
+	// The name of the author publishing the app.
+	//
+	// Minimum length=1. Maximum length=127.
+	//
+	// Pattern "^[a-z0-9](([a-z0-9]|-(?!-))*[a-z0-9])?$";
 	Author *string
 
 	// The date and time this resource was created.
 	CreationTime *string
 
-	// The description of the application.Minimum length=1. Maximum length=256
+	// The description of the application.
+	//
+	// Minimum length=1. Maximum length=256
 	Description *string
 
 	// A URL with more information about the application, for example the location of
@@ -130,20 +173,30 @@ type CreateApplicationOutput struct {
 	// requester's identity is as claimed.
 	IsVerifiedAuthor *bool
 
-	// Labels to improve discovery of apps in search results.Minimum length=1. Maximum
-	// length=127. Maximum number of labels: 10Pattern: "^[a-zA-Z0-9+\\-_:\\/@]+$";
+	// Labels to improve discovery of apps in search results.
+	//
+	// Minimum length=1. Maximum length=127. Maximum number of labels: 10
+	//
+	// Pattern: "^[a-zA-Z0-9+\\-_:\\/@]+$";
 	Labels []string
 
 	// A link to a license file of the app that matches the spdxLicenseID value of
-	// your application.Maximum size 5 MB
+	// your application.
+	//
+	// Maximum size 5 MB
 	LicenseUrl *string
 
-	// The name of the application.Minimum length=1. Maximum length=140Pattern:
-	// "[a-zA-Z0-9\\-]+";
+	// The name of the application.
+	//
+	// Minimum length=1. Maximum length=140
+	//
+	// Pattern: "[a-zA-Z0-9\\-]+";
 	Name *string
 
 	// A link to the readme file in Markdown language that contains a more detailed
-	// description of the application and how it works.Maximum size 5 MB
+	// description of the application and how it works.
+	//
+	// Maximum size 5 MB
 	ReadmeUrl *string
 
 	// A valid identifier from https://spdx.org/licenses/.
@@ -184,25 +237,25 @@ func (c *Client) addOperationCreateApplicationMiddlewares(stack *middleware.Stac
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -217,13 +270,16 @@ func (c *Client) addOperationCreateApplicationMiddlewares(stack *middleware.Stac
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpCreateApplicationValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateApplication(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/iot/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -14,9 +13,11 @@ import (
 
 // Configures or reconfigures the Device Defender audit settings for this account.
 // Settings include how audit notifications are sent and which audit checks are
-// enabled or disabled. Requires permission to access the
-// UpdateAccountAuditConfiguration (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
-// action.
+// enabled or disabled.
+//
+// Requires permission to access the [UpdateAccountAuditConfiguration] action.
+//
+// [UpdateAccountAuditConfiguration]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions
 func (c *Client) UpdateAccountAuditConfiguration(ctx context.Context, params *UpdateAccountAuditConfigurationInput, optFns ...func(*Options)) (*UpdateAccountAuditConfigurationOutput, error) {
 	if params == nil {
 		params = &UpdateAccountAuditConfigurationInput{}
@@ -36,13 +37,17 @@ type UpdateAccountAuditConfigurationInput struct {
 
 	// Specifies which audit checks are enabled and disabled for this account. Use
 	// DescribeAccountAuditConfiguration to see the list of all checks, including those
-	// that are currently enabled. Some data collection might start immediately when
-	// certain checks are enabled. When a check is disabled, any data collected so far
-	// in relation to the check is deleted. You cannot disable a check if it's used by
-	// any scheduled audit. You must first delete the check from the scheduled audit or
-	// delete the scheduled audit itself. On the first call to
-	// UpdateAccountAuditConfiguration , this parameter is required and must specify at
-	// least one enabled check.
+	// that are currently enabled.
+	//
+	// Some data collection might start immediately when certain checks are enabled.
+	// When a check is disabled, any data collected so far in relation to the check is
+	// deleted.
+	//
+	// You cannot disable a check if it's used by any scheduled audit. You must first
+	// delete the check from the scheduled audit or delete the scheduled audit itself.
+	//
+	// On the first call to UpdateAccountAuditConfiguration , this parameter is
+	// required and must specify at least one enabled check.
 	AuditCheckConfigurations map[string]types.AuditCheckConfiguration
 
 	// Information about the targets to which audit notifications are sent.
@@ -85,25 +90,25 @@ func (c *Client) addOperationUpdateAccountAuditConfigurationMiddlewares(stack *m
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -118,10 +123,13 @@ func (c *Client) addOperationUpdateAccountAuditConfigurationMiddlewares(stack *m
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateAccountAuditConfiguration(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

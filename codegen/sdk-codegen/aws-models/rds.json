@@ -419,7 +419,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Adds metadata tags to an Amazon RDS resource. These tags can also be used with cost allocation reporting to track cost associated with Amazon RDS resources, or used in a Condition statement in an IAM policy for Amazon RDS.</p>\n         <p>For an overview on tagging Amazon RDS resources, \n            see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Overview.Tagging.html\">Tagging Amazon RDS Resources</a>.</p>",
+                "smithy.api#documentation": "<p>Adds metadata tags to an Amazon RDS resource. These tags can also be used with cost allocation reporting to track cost associated with Amazon RDS resources, or used in a Condition statement in an IAM policy for Amazon RDS.</p>\n         <p>For an overview on tagging your relational database resources, \n            see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html\">Tagging Amazon RDS Resources</a>\n            or <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_Tagging.html\">Tagging Amazon Aurora and Amazon RDS Resources</a>.\n        </p>",
                 "smithy.api#examples": [
                     {
                         "title": "To add tags to a resource",
@@ -843,6 +843,9 @@
                 },
                 {
                     "target": "com.amazonaws.rds#ModifyGlobalCluster"
+                },
+                {
+                    "target": "com.amazonaws.rds#ModifyIntegration"
                 },
                 {
                     "target": "com.amazonaws.rds#ModifyOptionGroup"
@@ -2970,6 +2973,9 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The storage type for the DB cluster.</p>"
                     }
+                },
+                "CertificateDetails": {
+                    "target": "com.amazonaws.rds#CertificateDetails"
                 }
             },
             "traits": {
@@ -3791,7 +3797,7 @@
                     "target": "com.amazonaws.rds#CustomEngineName",
                     "traits": {
                         "smithy.api#clientOptional": {},
-                        "smithy.api#documentation": "<p>The database engine to use for your custom engine version (CEV). The only supported value is \n            <code>custom-oracle-ee</code>.</p>",
+                        "smithy.api#documentation": "<p>The database engine. RDS Custom for Oracle supports the following values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>custom-oracle-ee</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>custom-oracle-ee-cdb</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>custom-oracle-se2</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>custom-oracle-se2-cdb</code>\n               </p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 },
@@ -4171,7 +4177,7 @@
                 "AvailabilityZones": {
                     "target": "com.amazonaws.rds#AvailabilityZones",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of Availability Zones (AZs) where DB instances in the DB cluster can be created.</p>\n         <p>For information on Amazon Web Services Regions and Availability Zones, see \n          <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/Concepts.RegionsAndAvailabilityZones.html\">Choosing the Regions and \n              Availability Zones</a> in the <i>Amazon Aurora User Guide</i>.</p>\n         <p>Valid for Cluster Type: Aurora DB clusters only</p>"
+                        "smithy.api#documentation": "<p>A list of Availability Zones (AZs) where you specifically want to create DB instances in the DB cluster.</p>\n         <p>For information on AZs, see \n            <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/Concepts.RegionsAndAvailabilityZones.html#Concepts.RegionsAndAvailabilityZones.AvailabilityZones\">Availability Zones</a>\n            in the <i>Amazon Aurora User Guide</i>.</p>\n         <p>Valid for Cluster Type: Aurora DB clusters only</p>\n         <p>Constraints:</p>\n         <ul>\n            <li>\n               <p>Can't specify more than three AZs.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "BackupRetentionPeriod": {
@@ -4189,14 +4195,14 @@
                 "DatabaseName": {
                     "target": "com.amazonaws.rds#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name for your database of up to 64 alphanumeric characters. If you don't\n            provide a name, Amazon RDS doesn't create a database in the DB cluster you are\n            creating.</p>\n         <p>Valid for Cluster Type: Aurora DB clusters and Multi-AZ DB clusters</p>"
+                        "smithy.api#documentation": "<p>The name for your database of up to 64 alphanumeric characters. \n            A database named <code>postgres</code> is always created. If this parameter is specified, an additional database with this name is created.</p>\n         <p>Valid for Cluster Type: Aurora DB clusters and Multi-AZ DB clusters</p>"
                     }
                 },
                 "DBClusterIdentifier": {
                     "target": "com.amazonaws.rds#String",
                     "traits": {
                         "smithy.api#clientOptional": {},
-                        "smithy.api#documentation": "<p>The identifier for this DB cluster. This parameter is stored as a lowercase string.</p>\n         <p>Valid for Cluster Type: Aurora DB clusters and Multi-AZ DB clusters</p>\n         <p>Constraints:</p>\n         <ul>\n            <li>\n               <p>Must contain from 1 to 63 letters, numbers, or hyphens.</p>\n            </li>\n            <li>\n               <p>First character must be a letter.</p>\n            </li>\n            <li>\n               <p>Can't end with a hyphen or contain two consecutive hyphens.</p>\n            </li>\n         </ul>\n         <p>Example: <code>my-cluster1</code>\n         </p>",
+                        "smithy.api#documentation": "<p>The identifier for this DB cluster. This parameter is stored as a lowercase string.</p>\n         <p>Valid for Cluster Type: Aurora DB clusters and Multi-AZ DB clusters</p>\n         <p>Constraints:</p>\n         <ul>\n            <li>\n               <p>Must contain from 1 to 63 (for Aurora DB clusters) or 1 to 52 (for Multi-AZ DB\n                    clusters) letters, numbers, or hyphens.</p>\n            </li>\n            <li>\n               <p>First character must be a letter.</p>\n            </li>\n            <li>\n               <p>Can't end with a hyphen or contain two consecutive hyphens.</p>\n            </li>\n         </ul>\n         <p>Example: <code>my-cluster1</code>\n         </p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -4222,7 +4228,7 @@
                     "target": "com.amazonaws.rds#String",
                     "traits": {
                         "smithy.api#clientOptional": {},
-                        "smithy.api#documentation": "<p>The database engine to use for this DB cluster.</p>\n         <p>Valid for Cluster Type: Aurora DB clusters and Multi-AZ DB clusters</p>\n         <p>Valid Values: <code>aurora-mysql | aurora-postgresql | mysql | postgres</code>\n         </p>",
+                        "smithy.api#documentation": "<p>The database engine to use for this DB cluster.</p>\n         <p>Valid for Cluster Type: Aurora DB clusters and Multi-AZ DB clusters</p>\n         <p>Valid Values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>aurora-mysql</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>aurora-postgresql</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>mysql</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>postgres</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>neptune</code> - For information about using Amazon Neptune, see the\n                        <a href=\"https://docs.aws.amazon.com/neptune/latest/userguide/intro.html\">\n                     <i>Amazon Neptune User Guide</i>\n                  </a>.</p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 },
@@ -4319,7 +4325,7 @@
                 "EngineMode": {
                     "target": "com.amazonaws.rds#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The DB engine mode of the DB cluster, either <code>provisioned</code> or <code>serverless</code>.</p>\n         <p>The <code>serverless</code> engine mode only applies for Aurora Serverless v1 DB clusters.</p>\n         <p>For information about limitations and requirements for Serverless DB clusters, see the \n            following sections in the <i>Amazon Aurora User Guide</i>:</p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-serverless.html#aurora-serverless.limitations\">Limitations of Aurora\n                        Serverless v1</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-serverless-v2.requirements.html\">Requirements\n                        for Aurora Serverless v2</a>\n               </p>\n            </li>\n         </ul>\n         <p>Valid for Cluster Type: Aurora DB clusters only</p>"
+                        "smithy.api#documentation": "<p>The DB engine mode of the DB cluster, either <code>provisioned</code> or <code>serverless</code>.</p>\n         <p>The <code>serverless</code> engine mode only applies for Aurora Serverless v1 DB clusters. Aurora Serverless v2 DB clusters use the \n        <code>provisioned</code> engine mode.</p>\n         <p>For information about limitations and requirements for Serverless DB clusters, see the \n            following sections in the <i>Amazon Aurora User Guide</i>:</p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-serverless.html#aurora-serverless.limitations\">Limitations of Aurora\n                        Serverless v1</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/aurora-serverless-v2.requirements.html\">Requirements\n                        for Aurora Serverless v2</a>\n               </p>\n            </li>\n         </ul>\n         <p>Valid for Cluster Type: Aurora DB clusters only</p>"
                     }
                 },
                 "ScalingConfiguration": {
@@ -4391,7 +4397,7 @@
                 "StorageType": {
                     "target": "com.amazonaws.rds#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The storage type to associate with the DB cluster.</p>\n         <p>For information on storage types for Aurora DB clusters, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/Aurora.Overview.StorageReliability.html#aurora-storage-type\">Storage configurations for Amazon Aurora DB clusters</a>. For information on storage types for Multi-AZ DB\n            clusters, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/create-multi-az-db-cluster.html#create-multi-az-db-cluster-settings\">Settings for creating Multi-AZ DB clusters</a>.</p>\n         <p>This setting is required to create a Multi-AZ DB cluster.</p>\n         <p>When specified for a Multi-AZ DB cluster, a value for the <code>Iops</code> parameter is required.</p>\n         <p>Valid for Cluster Type: Aurora DB clusters and Multi-AZ DB clusters</p>\n         <p>Valid Values:</p>\n         <ul>\n            <li>\n               <p>Aurora DB clusters - <code>aurora | aurora-iopt1</code>\n               </p>\n            </li>\n            <li>\n               <p>Multi-AZ DB clusters - <code>io1</code>\n               </p>\n            </li>\n         </ul>\n         <p>Default:</p>\n         <ul>\n            <li>\n               <p>Aurora DB clusters - <code>aurora</code>\n               </p>\n            </li>\n            <li>\n               <p>Multi-AZ DB clusters - <code>io1</code>\n               </p>\n            </li>\n         </ul>\n         <note>\n            <p>When you create an Aurora DB cluster with the storage type set to <code>aurora-iopt1</code>, the storage type is returned\n                in the response. The storage type isn't returned when you set it to <code>aurora</code>.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>The storage type to associate with the DB cluster.</p>\n         <p>For information on storage types for Aurora DB clusters, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/Aurora.Overview.StorageReliability.html#aurora-storage-type\">Storage configurations for Amazon Aurora DB clusters</a>. For information on storage types for Multi-AZ DB\n            clusters, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/create-multi-az-db-cluster.html#create-multi-az-db-cluster-settings\">Settings for creating Multi-AZ DB clusters</a>.</p>\n         <p>This setting is required to create a Multi-AZ DB cluster.</p>\n         <p>When specified for a Multi-AZ DB cluster, a value for the <code>Iops</code> parameter is required.</p>\n         <p>Valid for Cluster Type: Aurora DB clusters and Multi-AZ DB clusters</p>\n         <p>Valid Values:</p>\n         <ul>\n            <li>\n               <p>Aurora DB clusters - <code>aurora | aurora-iopt1</code>\n               </p>\n            </li>\n            <li>\n               <p>Multi-AZ DB clusters - <code>io1 | io2 | gp3</code>\n               </p>\n            </li>\n         </ul>\n         <p>Default:</p>\n         <ul>\n            <li>\n               <p>Aurora DB clusters - <code>aurora</code>\n               </p>\n            </li>\n            <li>\n               <p>Multi-AZ DB clusters - <code>io1</code>\n               </p>\n            </li>\n         </ul>\n         <note>\n            <p>When you create an Aurora DB cluster with the storage type set to <code>aurora-iopt1</code>, the storage type is returned\n                in the response. The storage type isn't returned when you set it to <code>aurora</code>.</p>\n         </note>"
                     }
                 },
                 "Iops": {
@@ -4480,6 +4486,18 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Specifies whether read replicas can forward write operations to the writer DB instance in the DB cluster. By\n            default, write operations aren't allowed on reader DB instances.</p>\n         <p>Valid for: Aurora DB clusters only</p>"
                     }
+                },
+                "CACertificateIdentifier": {
+                    "target": "com.amazonaws.rds#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The CA certificate identifier to use for the DB cluster's server certificate.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/UsingWithRDS.SSL.html\">Using SSL/TLS to encrypt a connection to a DB \n            instance</a> in the <i>Amazon RDS User Guide</i>.</p>\n         <p>Valid for Cluster Type: Multi-AZ DB clusters</p>"
+                    }
+                },
+                "EngineLifecycleSupport": {
+                    "target": "com.amazonaws.rds#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The life cycle type for this DB cluster.</p>\n         <note>\n            <p>By default, this value is set to <code>open-source-rds-extended-support</code>, which enrolls your DB cluster into Amazon RDS Extended Support. \n              At the end of standard support, you can avoid charges for Extended Support by setting the value to <code>open-source-rds-extended-support-disabled</code>. In this case, \n             creating the DB cluster will fail if the DB major version is past its end of standard support date.</p>\n         </note>\n         <p>You can use this setting to enroll your DB cluster into Amazon RDS Extended Support. With RDS Extended Support, \n        you can run the selected major engine version on your DB cluster past the end of standard support for that engine version. For more information, see the following sections:</p>\n         <ul>\n            <li>\n               <p>Amazon Aurora (PostgreSQL only) - <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/extended-support.html\">Using Amazon RDS Extended Support</a> in the <i>Amazon Aurora User Guide</i>\n               </p>\n            </li>\n            <li>\n               <p>Amazon RDS - <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/extended-support.html\">Using Amazon RDS Extended Support</a> in the <i>Amazon RDS User Guide</i>\n               </p>\n            </li>\n         </ul>\n         <p>Valid for Cluster Type: Aurora DB clusters and Multi-AZ DB clusters</p>\n         <p>Valid Values: <code>open-source-rds-extended-support | open-source-rds-extended-support-disabled</code>\n         </p>\n         <p>Default: <code>open-source-rds-extended-support</code>\n         </p>"
+                    }
                 }
             },
             "traits": {
@@ -4541,7 +4559,7 @@
                     "target": "com.amazonaws.rds#String",
                     "traits": {
                         "smithy.api#clientOptional": {},
-                        "smithy.api#documentation": "<p>The DB cluster parameter group family name. A DB cluster parameter group can be associated with one and only one DB cluster \n          parameter group family, and can be applied only to a DB cluster running a database engine and engine version compatible with that DB cluster parameter group family.</p>\n         <p>\n            <b>Aurora MySQL</b>\n         </p>\n         <p>Example: <code>aurora-mysql5.7</code>, <code>aurora-mysql8.0</code>\n         </p>\n         <p>\n            <b>Aurora PostgreSQL</b>\n         </p>\n         <p>Example: <code>aurora-postgresql14</code>\n         </p>\n         <p>\n            <b>RDS for MySQL</b>\n         </p>\n         <p>Example: <code>mysql8.0</code>\n         </p>\n         <p>\n            <b>RDS for PostgreSQL</b>\n         </p>\n         <p>Example: <code>postgres12</code>\n         </p>\n         <p>To list all of the available parameter group families for a DB engine, use the following command:</p>\n         <p>\n            <code>aws rds describe-db-engine-versions --query \"DBEngineVersions[].DBParameterGroupFamily\" --engine <engine></code>\n         </p>\n         <p>For example, to list all of the available parameter group families for the Aurora PostgreSQL DB engine, use the following command:</p>\n         <p>\n            <code>aws rds describe-db-engine-versions --query \"DBEngineVersions[].DBParameterGroupFamily\" --engine aurora-postgresql</code>\n         </p>\n         <note>\n            <p>The output contains duplicates.</p>\n         </note>\n         <p>The following are the valid DB engine values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>aurora-mysql</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>aurora-postgresql</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>mysql</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>postgres</code>\n               </p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>The DB cluster parameter group family name. A DB cluster parameter group can be associated with one and only one DB cluster \n          parameter group family, and can be applied only to a DB cluster running a database engine and engine version compatible with that DB cluster parameter group family.</p>\n         <p>\n            <b>Aurora MySQL</b>\n         </p>\n         <p>Example: <code>aurora-mysql5.7</code>, <code>aurora-mysql8.0</code>\n         </p>\n         <p>\n            <b>Aurora PostgreSQL</b>\n         </p>\n         <p>Example: <code>aurora-postgresql14</code>\n         </p>\n         <p>\n            <b>RDS for MySQL</b>\n         </p>\n         <p>Example: <code>mysql8.0</code>\n         </p>\n         <p>\n            <b>RDS for PostgreSQL</b>\n         </p>\n         <p>Example: <code>postgres13</code>\n         </p>\n         <p>To list all of the available parameter group families for a DB engine, use the following command:</p>\n         <p>\n            <code>aws rds describe-db-engine-versions --query \"DBEngineVersions[].DBParameterGroupFamily\" --engine <engine></code>\n         </p>\n         <p>For example, to list all of the available parameter group families for the Aurora PostgreSQL DB engine, use the following command:</p>\n         <p>\n            <code>aws rds describe-db-engine-versions --query \"DBEngineVersions[].DBParameterGroupFamily\" --engine aurora-postgresql</code>\n         </p>\n         <note>\n            <p>The output contains duplicates.</p>\n         </note>\n         <p>The following are the valid DB engine values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>aurora-mysql</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>aurora-postgresql</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>mysql</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>postgres</code>\n               </p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 },
@@ -4885,7 +4903,7 @@
                 "DBName": {
                     "target": "com.amazonaws.rds#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The meaning of this parameter differs according to the database engine you use.</p>\n         <dl>\n            <dt>Amazon Aurora MySQL</dt>\n            <dd>\n               <p>The name of the database to create when the primary DB instance of the Aurora MySQL DB cluster is\n                  created. If this parameter isn't specified for an Aurora MySQL DB cluster, no database is created \n                  in the DB cluster.</p>\n               <p>Constraints:</p>\n               <ul>\n                  <li>\n                     <p>Must contain 1 to 64 alphanumeric characters.</p>\n                  </li>\n                  <li>\n                     <p>Can't be a word reserved by the database engine.</p>\n                  </li>\n               </ul>\n            </dd>\n            <dt>Amazon Aurora PostgreSQL</dt>\n            <dd>\n               <p>The name of the database to create when the primary DB instance of the Aurora PostgreSQL DB cluster is\n                  created. If this parameter isn't specified for an Aurora PostgreSQL DB cluster, \n                  a database named <code>postgres</code> is created in the DB cluster.</p>\n               <p>Constraints:</p>\n               <ul>\n                  <li>\n                     <p>It must contain 1 to 63 alphanumeric characters.</p>\n                  </li>\n                  <li>\n                     <p>Must begin with a letter. Subsequent characters can be letters, underscores, or digits\n                          (0 to 9).</p>\n                  </li>\n                  <li>\n                     <p>Can't be a word reserved by the database engine.</p>\n                  </li>\n               </ul>\n            </dd>\n            <dt>Amazon RDS Custom for Oracle</dt>\n            <dd>\n               <p>The Oracle System ID (SID) of the created RDS Custom DB instance. If you don't specify a value, the default value is <code>ORCL</code> for non-CDBs and\n                <code>RDSCDB</code> for CDBs.</p>\n               <p>Default: <code>ORCL</code>\n               </p>\n               <p>Constraints:</p>\n               <ul>\n                  <li>\n                     <p>Must contain 1 to 8 alphanumeric characters.</p>\n                  </li>\n                  <li>\n                     <p>Must contain a letter.</p>\n                  </li>\n                  <li>\n                     <p>Can't be a word reserved by the database engine.</p>\n                  </li>\n               </ul>\n            </dd>\n            <dt>Amazon RDS Custom for SQL Server</dt>\n            <dd>\n               <p>Not applicable. Must be null.</p>\n            </dd>\n            <dt>RDS for Db2</dt>\n            <dd>\n               <p>The name of the database to create when the DB instance is created. If this parameter isn't specified, no database is created in the DB instance.</p>\n               <p>Constraints:</p>\n               <ul>\n                  <li>\n                     <p>Must contain 1 to 64 letters or numbers.</p>\n                  </li>\n                  <li>\n                     <p>Must begin with a letter. Subsequent characters can be letters, underscores, or digits (0-9).</p>\n                  </li>\n                  <li>\n                     <p>Can't be a word reserved by the specified database engine.</p>\n                  </li>\n               </ul>\n            </dd>\n            <dt>RDS for MariaDB</dt>\n            <dd>\n               <p>The name of the database to create when the DB instance is created. If this parameter isn't specified, no database is created in the DB instance.</p>\n               <p>Constraints:</p>\n               <ul>\n                  <li>\n                     <p>Must contain 1 to 64 letters or numbers.</p>\n                  </li>\n                  <li>\n                     <p>Must begin with a letter. Subsequent characters can be letters, underscores, or digits (0-9).</p>\n                  </li>\n                  <li>\n                     <p>Can't be a word reserved by the specified database engine.</p>\n                  </li>\n               </ul>\n            </dd>\n            <dt>RDS for MySQL</dt>\n            <dd>\n               <p>The name of the database to create when the DB instance is created. If this parameter isn't specified, no database is created in the DB instance.</p>\n               <p>Constraints:</p>\n               <ul>\n                  <li>\n                     <p>Must contain 1 to 64 letters or numbers.</p>\n                  </li>\n                  <li>\n                     <p>Must begin with a letter. Subsequent characters can be letters, underscores, or digits (0-9).</p>\n                  </li>\n                  <li>\n                     <p>Can't be a word reserved by the specified database engine.</p>\n                  </li>\n               </ul>\n            </dd>\n            <dt>RDS for Oracle</dt>\n            <dd>\n               <p>The Oracle System ID (SID) of the created DB instance. If you don't specify a value, \n                    the default value is <code>ORCL</code>. You can't specify the \n                    string <code>null</code>, or any other reserved word, for <code>DBName</code>.</p>\n               <p>Default: <code>ORCL</code>\n               </p>\n               <p>Constraints:</p>\n               <ul>\n                  <li>\n                     <p>Can't be longer than 8 characters.</p>\n                  </li>\n               </ul>\n            </dd>\n            <dt>RDS for PostgreSQL</dt>\n            <dd>\n               <p>The name of the database to create when the DB instance is created. If this parameter isn't specified, a database named <code>postgres</code> \n                  is created in the DB instance.</p>\n               <p>Constraints:</p>\n               <ul>\n                  <li>\n                     <p>Must contain 1 to 63 letters, numbers, or underscores.</p>\n                  </li>\n                  <li>\n                     <p>Must begin with a letter. Subsequent characters can be letters, underscores, or digits (0-9).</p>\n                  </li>\n                  <li>\n                     <p>Can't be a word reserved by the specified database engine.</p>\n                  </li>\n               </ul>\n            </dd>\n            <dt>RDS for SQL Server</dt>\n            <dd>\n               <p>Not applicable. Must be null.</p>\n            </dd>\n         </dl>"
+                        "smithy.api#documentation": "<p>The meaning of this parameter differs according to the database engine you use.</p>\n         <dl>\n            <dt>Amazon Aurora MySQL</dt>\n            <dd>\n               <p>The name of the database to create when the primary DB instance of the Aurora MySQL DB cluster is\n                  created. If this parameter isn't specified for an Aurora MySQL DB cluster, no database is created \n                  in the DB cluster.</p>\n               <p>Constraints:</p>\n               <ul>\n                  <li>\n                     <p>Must contain 1 to 64 alphanumeric characters.</p>\n                  </li>\n                  <li>\n                     <p>Can't be a word reserved by the database engine.</p>\n                  </li>\n               </ul>\n            </dd>\n            <dt>Amazon Aurora PostgreSQL</dt>\n            <dd>\n               <p>The name of the database to create when the primary DB instance of the Aurora PostgreSQL DB cluster is\n                    created. A database named <code>postgres</code> is always created. If this parameter is specified, an additional database with this name is created.</p>\n               <p>Constraints:</p>\n               <ul>\n                  <li>\n                     <p>It must contain 1 to 63 alphanumeric characters.</p>\n                  </li>\n                  <li>\n                     <p>Must begin with a letter. Subsequent characters can be letters, underscores, or digits\n                          (0 to 9).</p>\n                  </li>\n                  <li>\n                     <p>Can't be a word reserved by the database engine.</p>\n                  </li>\n               </ul>\n            </dd>\n            <dt>Amazon RDS Custom for Oracle</dt>\n            <dd>\n               <p>The Oracle System ID (SID) of the created RDS Custom DB instance. If you don't specify a value, the default value is <code>ORCL</code> for non-CDBs and\n                <code>RDSCDB</code> for CDBs.</p>\n               <p>Default: <code>ORCL</code>\n               </p>\n               <p>Constraints:</p>\n               <ul>\n                  <li>\n                     <p>Must contain 1 to 8 alphanumeric characters.</p>\n                  </li>\n                  <li>\n                     <p>Must contain a letter.</p>\n                  </li>\n                  <li>\n                     <p>Can't be a word reserved by the database engine.</p>\n                  </li>\n               </ul>\n            </dd>\n            <dt>Amazon RDS Custom for SQL Server</dt>\n            <dd>\n               <p>Not applicable. Must be null.</p>\n            </dd>\n            <dt>RDS for Db2</dt>\n            <dd>\n               <p>The name of the database to create when the DB instance is created. If\n                        this parameter isn't specified, no database is created in the DB instance.\n                        In some cases, we recommend that you don't add a database name. For more\n                        information, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/db2-db-instance-prereqs.html#db2-prereqs-additional-considerations\">Additional considerations</a> in the <i>Amazon RDS User\n                            Guide</i>.</p>\n               <p>Constraints:</p>\n               <ul>\n                  <li>\n                     <p>Must contain 1 to 64 letters or numbers.</p>\n                  </li>\n                  <li>\n                     <p>Must begin with a letter. Subsequent characters can be letters,\n                                underscores, or digits (0-9).</p>\n                  </li>\n                  <li>\n                     <p>Can't be a word reserved by the specified database engine.</p>\n                  </li>\n               </ul>\n            </dd>\n            <dt>RDS for MariaDB</dt>\n            <dd>\n               <p>The name of the database to create when the DB instance is created. If this parameter isn't specified, no database is created in the DB instance.</p>\n               <p>Constraints:</p>\n               <ul>\n                  <li>\n                     <p>Must contain 1 to 64 letters or numbers.</p>\n                  </li>\n                  <li>\n                     <p>Must begin with a letter. Subsequent characters can be letters, underscores, or digits (0-9).</p>\n                  </li>\n                  <li>\n                     <p>Can't be a word reserved by the specified database engine.</p>\n                  </li>\n               </ul>\n            </dd>\n            <dt>RDS for MySQL</dt>\n            <dd>\n               <p>The name of the database to create when the DB instance is created. If this parameter isn't specified, no database is created in the DB instance.</p>\n               <p>Constraints:</p>\n               <ul>\n                  <li>\n                     <p>Must contain 1 to 64 letters or numbers.</p>\n                  </li>\n                  <li>\n                     <p>Must begin with a letter. Subsequent characters can be letters, underscores, or digits (0-9).</p>\n                  </li>\n                  <li>\n                     <p>Can't be a word reserved by the specified database engine.</p>\n                  </li>\n               </ul>\n            </dd>\n            <dt>RDS for Oracle</dt>\n            <dd>\n               <p>The Oracle System ID (SID) of the created DB instance. If you don't specify a value, \n                    the default value is <code>ORCL</code>. You can't specify the \n                    string <code>null</code>, or any other reserved word, for <code>DBName</code>.</p>\n               <p>Default: <code>ORCL</code>\n               </p>\n               <p>Constraints:</p>\n               <ul>\n                  <li>\n                     <p>Can't be longer than 8 characters.</p>\n                  </li>\n               </ul>\n            </dd>\n            <dt>RDS for PostgreSQL</dt>\n            <dd>\n               <p>The name of the database to create when the DB instance is created. A database named <code>postgres</code> is always created. If this parameter is specified, an additional database with this name is created.</p>\n               <p>Constraints:</p>\n               <ul>\n                  <li>\n                     <p>Must contain 1 to 63 letters, numbers, or underscores.</p>\n                  </li>\n                  <li>\n                     <p>Must begin with a letter. Subsequent characters can be letters, underscores, or digits (0-9).</p>\n                  </li>\n                  <li>\n                     <p>Can't be a word reserved by the specified database engine.</p>\n                  </li>\n               </ul>\n            </dd>\n            <dt>RDS for SQL Server</dt>\n            <dd>\n               <p>Not applicable. Must be null.</p>\n            </dd>\n         </dl>"
                     }
                 },
                 "DBInstanceIdentifier": {
@@ -4899,7 +4917,7 @@
                 "AllocatedStorage": {
                     "target": "com.amazonaws.rds#IntegerOptional",
                     "traits": {
-                        "smithy.api#documentation": "<p>The amount of storage in gibibytes (GiB) to allocate for the DB instance.</p>\n         <p>This setting doesn't apply to Amazon Aurora DB instances. Aurora cluster volumes automatically grow as the amount of data in your \n                    database increases, though you are only charged for the space that you use in an Aurora cluster volume.</p>\n         <dl>\n            <dt>Amazon RDS Custom</dt>\n            <dd>\n               <p>Constraints to the amount of storage for each storage type are the following:</p>\n               <ul>\n                  <li>\n                     <p>General Purpose (SSD) storage (gp2, gp3): Must be an integer from 40 to 65536 for RDS Custom for Oracle, \n                            16384 for RDS Custom for SQL Server.</p>\n                  </li>\n                  <li>\n                     <p>Provisioned IOPS storage (io1): Must be an integer from 40 to 65536 for RDS Custom for Oracle, \n                           16384 for RDS Custom for SQL Server.</p>\n                  </li>\n               </ul>\n            </dd>\n            <dt>RDS for Db2</dt>\n            <dd>\n               <p>Constraints to the amount of storage for each storage type are the following:</p>\n               <ul>\n                  <li>\n                     <p>General Purpose (SSD) storage (gp3): Must be an integer from 20 to 64000.</p>\n                  </li>\n                  <li>\n                     <p>Provisioned IOPS storage (io1): Must be an integer from 100 to 64000.</p>\n                  </li>\n               </ul>\n            </dd>\n            <dt>RDS for MariaDB</dt>\n            <dd>\n               <p>Constraints to the amount of storage for each storage type are the following:</p>\n               <ul>\n                  <li>\n                     <p>General Purpose (SSD) storage (gp2, gp3): Must be an integer from 20 to 65536.</p>\n                  </li>\n                  <li>\n                     <p>Provisioned IOPS storage (io1): Must be an integer from 100 to 65536.</p>\n                  </li>\n                  <li>\n                     <p>Magnetic storage (standard): Must be an integer from 5 to 3072.</p>\n                  </li>\n               </ul>\n            </dd>\n            <dt>RDS for MySQL</dt>\n            <dd>\n               <p>Constraints to the amount of storage for each storage type are the following:</p>\n               <ul>\n                  <li>\n                     <p>General Purpose (SSD) storage (gp2, gp3): Must be an integer from 20 to 65536.</p>\n                  </li>\n                  <li>\n                     <p>Provisioned IOPS storage (io1): Must be an integer from 100 to 65536.</p>\n                  </li>\n                  <li>\n                     <p>Magnetic storage (standard): Must be an integer from 5 to 3072.</p>\n                  </li>\n               </ul>\n            </dd>\n            <dt>RDS for Oracle</dt>\n            <dd>\n               <p>Constraints to the amount of storage for each storage type are the following:</p>\n               <ul>\n                  <li>\n                     <p>General Purpose (SSD) storage (gp2, gp3): Must be an integer from 20 to 65536.</p>\n                  </li>\n                  <li>\n                     <p>Provisioned IOPS storage (io1): Must be an integer from 100 to 65536.</p>\n                  </li>\n                  <li>\n                     <p>Magnetic storage (standard): Must be an integer from 10 to 3072.</p>\n                  </li>\n               </ul>\n            </dd>\n            <dt>RDS for PostgreSQL</dt>\n            <dd>\n               <p>Constraints to the amount of storage for each storage type are the following:</p>\n               <ul>\n                  <li>\n                     <p>General Purpose (SSD) storage (gp2, gp3): Must be an integer from 20 to 65536.</p>\n                  </li>\n                  <li>\n                     <p>Provisioned IOPS storage (io1): Must be an integer from 100 to 65536.</p>\n                  </li>\n                  <li>\n                     <p>Magnetic storage (standard): Must be an integer from 5 to 3072.</p>\n                  </li>\n               </ul>\n            </dd>\n            <dt>RDS for SQL Server</dt>\n            <dd>\n               <p>Constraints to the amount of storage for each storage type are the following:</p>\n               <ul>\n                  <li>\n                     <p>General Purpose (SSD) storage (gp2, gp3):</p>\n                     <ul>\n                        <li>\n                           <p>Enterprise and Standard editions: Must be an integer from 20 to 16384.</p>\n                        </li>\n                        <li>\n                           <p>Web and Express editions: Must be an integer from 20 to 16384.</p>\n                        </li>\n                     </ul>\n                  </li>\n                  <li>\n                     <p>Provisioned IOPS storage (io1):</p>\n                     <ul>\n                        <li>\n                           <p>Enterprise and Standard editions: Must be an integer from 100 to 16384.</p>\n                        </li>\n                        <li>\n                           <p>Web and Express editions: Must be an integer from 100 to 16384.</p>\n                        </li>\n                     </ul>\n                  </li>\n                  <li>\n                     <p>Magnetic storage (standard):</p>\n                     <ul>\n                        <li>\n                           <p>Enterprise and Standard editions: Must be an integer from 20 to 1024.</p>\n                        </li>\n                        <li>\n                           <p>Web and Express editions: Must be an integer from 20 to 1024.</p>\n                        </li>\n                     </ul>\n                  </li>\n               </ul>\n            </dd>\n         </dl>"
+                        "smithy.api#documentation": "<p>The amount of storage in gibibytes (GiB) to allocate for the DB instance.</p>\n         <p>This setting doesn't apply to Amazon Aurora DB instances. Aurora cluster volumes automatically grow as the amount of data in your \n                    database increases, though you are only charged for the space that you use in an Aurora cluster volume.</p>\n         <dl>\n            <dt>Amazon RDS Custom</dt>\n            <dd>\n               <p>Constraints to the amount of storage for each storage type are the following:</p>\n               <ul>\n                  <li>\n                     <p>General Purpose (SSD) storage (gp2, gp3): Must be an integer from 40 to 65536 for RDS Custom for Oracle, \n                            16384 for RDS Custom for SQL Server.</p>\n                  </li>\n                  <li>\n                     <p>Provisioned IOPS storage (io1, io2): Must be an integer from 40 to 65536 for RDS Custom for Oracle, \n                           16384 for RDS Custom for SQL Server.</p>\n                  </li>\n               </ul>\n            </dd>\n            <dt>RDS for Db2</dt>\n            <dd>\n               <p>Constraints to the amount of storage for each storage type are the following:</p>\n               <ul>\n                  <li>\n                     <p>General Purpose (SSD) storage (gp3): Must be an integer from 20 to 65536.</p>\n                  </li>\n                  <li>\n                     <p>Provisioned IOPS storage (io1, io2): Must be an integer from 100 to 65536.</p>\n                  </li>\n               </ul>\n            </dd>\n            <dt>RDS for MariaDB</dt>\n            <dd>\n               <p>Constraints to the amount of storage for each storage type are the following:</p>\n               <ul>\n                  <li>\n                     <p>General Purpose (SSD) storage (gp2, gp3): Must be an integer from 20 to 65536.</p>\n                  </li>\n                  <li>\n                     <p>Provisioned IOPS storage (io1, io2): Must be an integer from 100 to 65536.</p>\n                  </li>\n                  <li>\n                     <p>Magnetic storage (standard): Must be an integer from 5 to 3072.</p>\n                  </li>\n               </ul>\n            </dd>\n            <dt>RDS for MySQL</dt>\n            <dd>\n               <p>Constraints to the amount of storage for each storage type are the following:</p>\n               <ul>\n                  <li>\n                     <p>General Purpose (SSD) storage (gp2, gp3): Must be an integer from 20 to 65536.</p>\n                  </li>\n                  <li>\n                     <p>Provisioned IOPS storage (io1, io2): Must be an integer from 100 to 65536.</p>\n                  </li>\n                  <li>\n                     <p>Magnetic storage (standard): Must be an integer from 5 to 3072.</p>\n                  </li>\n               </ul>\n            </dd>\n            <dt>RDS for Oracle</dt>\n            <dd>\n               <p>Constraints to the amount of storage for each storage type are the following:</p>\n               <ul>\n                  <li>\n                     <p>General Purpose (SSD) storage (gp2, gp3): Must be an integer from 20 to 65536.</p>\n                  </li>\n                  <li>\n                     <p>Provisioned IOPS storage (io1, io2): Must be an integer from 100 to 65536.</p>\n                  </li>\n                  <li>\n                     <p>Magnetic storage (standard): Must be an integer from 10 to 3072.</p>\n                  </li>\n               </ul>\n            </dd>\n            <dt>RDS for PostgreSQL</dt>\n            <dd>\n               <p>Constraints to the amount of storage for each storage type are the following:</p>\n               <ul>\n                  <li>\n                     <p>General Purpose (SSD) storage (gp2, gp3): Must be an integer from 20 to 65536.</p>\n                  </li>\n                  <li>\n                     <p>Provisioned IOPS storage (io1, io2): Must be an integer from 100 to 65536.</p>\n                  </li>\n                  <li>\n                     <p>Magnetic storage (standard): Must be an integer from 5 to 3072.</p>\n                  </li>\n               </ul>\n            </dd>\n            <dt>RDS for SQL Server</dt>\n            <dd>\n               <p>Constraints to the amount of storage for each storage type are the following:</p>\n               <ul>\n                  <li>\n                     <p>General Purpose (SSD) storage (gp2, gp3):</p>\n                     <ul>\n                        <li>\n                           <p>Enterprise and Standard editions: Must be an integer from 20 to 16384.</p>\n                        </li>\n                        <li>\n                           <p>Web and Express editions: Must be an integer from 20 to 16384.</p>\n                        </li>\n                     </ul>\n                  </li>\n                  <li>\n                     <p>Provisioned IOPS storage (io1, io2):</p>\n                     <ul>\n                        <li>\n                           <p>Enterprise and Standard editions: Must be an integer from 100 to 16384.</p>\n                        </li>\n                        <li>\n                           <p>Web and Express editions: Must be an integer from 100 to 16384.</p>\n                        </li>\n                     </ul>\n                  </li>\n                  <li>\n                     <p>Magnetic storage (standard):</p>\n                     <ul>\n                        <li>\n                           <p>Enterprise and Standard editions: Must be an integer from 20 to 1024.</p>\n                        </li>\n                        <li>\n                           <p>Web and Express editions: Must be an integer from 20 to 1024.</p>\n                        </li>\n                     </ul>\n                  </li>\n               </ul>\n            </dd>\n         </dl>"
                     }
                 },
                 "DBInstanceClass": {
@@ -4914,7 +4932,7 @@
                     "target": "com.amazonaws.rds#String",
                     "traits": {
                         "smithy.api#clientOptional": {},
-                        "smithy.api#documentation": "<p>The database engine to use for this DB instance.</p>\n         <p>Not every database engine is available in every Amazon Web Services Region.</p>\n         <p>Valid Values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>aurora-mysql</code> (for Aurora MySQL DB instances)</p>\n            </li>\n            <li>\n               <p>\n                  <code>aurora-postgresql</code> (for Aurora PostgreSQL DB instances)</p>\n            </li>\n            <li>\n               <p>\n                  <code>custom-oracle-ee</code> (for RDS Custom for Oracle DB instances)</p>\n            </li>\n            <li>\n               <p>\n                  <code>custom-oracle-ee-cdb</code> (for RDS Custom for Oracle DB instances)</p>\n            </li>\n            <li>\n               <p>\n                  <code>custom-sqlserver-ee</code> (for RDS Custom for SQL Server DB instances)</p>\n            </li>\n            <li>\n               <p>\n                  <code>custom-sqlserver-se</code> (for RDS Custom for SQL Server DB instances)</p>\n            </li>\n            <li>\n               <p>\n                  <code>custom-sqlserver-web</code> (for RDS Custom for SQL Server DB instances)</p>\n            </li>\n            <li>\n               <p>\n                  <code>db2-ae</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>db2-se</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>mariadb</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>mysql</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>oracle-ee</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>oracle-ee-cdb</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>oracle-se2</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>oracle-se2-cdb</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>postgres</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>sqlserver-ee</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>sqlserver-se</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>sqlserver-ex</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>sqlserver-web</code>\n               </p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>The database engine to use for this DB instance.</p>\n         <p>Not every database engine is available in every Amazon Web Services Region.</p>\n         <p>Valid Values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>aurora-mysql</code> (for Aurora MySQL DB instances)</p>\n            </li>\n            <li>\n               <p>\n                  <code>aurora-postgresql</code> (for Aurora PostgreSQL DB instances)</p>\n            </li>\n            <li>\n               <p>\n                  <code>custom-oracle-ee</code> (for RDS Custom for Oracle DB instances)</p>\n            </li>\n            <li>\n               <p>\n                  <code>custom-oracle-ee-cdb</code> (for RDS Custom for Oracle DB instances)</p>\n            </li>\n            <li>\n               <p>\n                  <code>custom-oracle-se2</code> (for RDS Custom for Oracle DB instances)</p>\n            </li>\n            <li>\n               <p>\n                  <code>custom-oracle-se2-cdb</code> (for RDS Custom for Oracle DB\n                    instances)</p>\n            </li>\n            <li>\n               <p>\n                  <code>custom-sqlserver-ee</code> (for RDS Custom for SQL Server DB instances)</p>\n            </li>\n            <li>\n               <p>\n                  <code>custom-sqlserver-se</code> (for RDS Custom for SQL Server DB instances)</p>\n            </li>\n            <li>\n               <p>\n                  <code>custom-sqlserver-web</code> (for RDS Custom for SQL Server DB instances)</p>\n            </li>\n            <li>\n               <p>\n                  <code>db2-ae</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>db2-se</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>mariadb</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>mysql</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>oracle-ee</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>oracle-ee-cdb</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>oracle-se2</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>oracle-se2-cdb</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>postgres</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>sqlserver-ee</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>sqlserver-se</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>sqlserver-ex</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>sqlserver-web</code>\n               </p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 },
@@ -5005,7 +5023,7 @@
                 "LicenseModel": {
                     "target": "com.amazonaws.rds#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The license model information for this DB instance.</p>\n         <p>This setting doesn't apply to Amazon Aurora or RDS Custom DB instances.</p>\n         <p>Valid Values:</p>\n         <ul>\n            <li>\n               <p>RDS for Db2 - <code>bring-your-own-license</code>\n               </p>\n            </li>\n            <li>\n               <p>RDS for MariaDB - <code>general-public-license</code>\n               </p>\n            </li>\n            <li>\n               <p>RDS for Microsoft SQL Server - <code>license-included</code>\n               </p>\n            </li>\n            <li>\n               <p>RDS for MySQL - <code>general-public-license</code>\n               </p>\n            </li>\n            <li>\n               <p>RDS for Oracle - <code>bring-your-own-license | license-included</code>\n               </p>\n            </li>\n            <li>\n               <p>RDS for PostgreSQL - <code>postgresql-license</code>\n               </p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The license model information for this DB instance.</p>\n         <note>\n            <p>License models for RDS for Db2 require additional configuration. The Bring Your\n                Own License (BYOL) model requires a custom parameter group. The Db2 license through\n                Amazon Web Services Marketplace model requires an Amazon Web Services Marketplace subscription. For more\n                information, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/db2-licensing.html\">RDS for Db2 licensing\n                    options</a> in the <i>Amazon RDS User Guide</i>.</p>\n            <p>The default for RDS for Db2 is <code>bring-your-own-license</code>.</p>\n         </note>\n         <p>This setting doesn't apply to Amazon Aurora or RDS Custom DB instances.</p>\n         <p>Valid Values:</p>\n         <ul>\n            <li>\n               <p>RDS for Db2 - <code>bring-your-own-license | marketplace-license</code>\n               </p>\n            </li>\n            <li>\n               <p>RDS for MariaDB - <code>general-public-license</code>\n               </p>\n            </li>\n            <li>\n               <p>RDS for Microsoft SQL Server - <code>license-included</code>\n               </p>\n            </li>\n            <li>\n               <p>RDS for MySQL - <code>general-public-license</code>\n               </p>\n            </li>\n            <li>\n               <p>RDS for Oracle - <code>bring-your-own-license | license-included</code>\n               </p>\n            </li>\n            <li>\n               <p>RDS for PostgreSQL - <code>postgresql-license</code>\n               </p>\n            </li>\n         </ul>"
                     }
                 },
                 "Iops": {
@@ -5053,7 +5071,7 @@
                 "StorageType": {
                     "target": "com.amazonaws.rds#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The storage type to associate with the DB instance.</p>\n         <p>If you specify <code>io1</code> or <code>gp3</code>, you must also include a value for the\n            <code>Iops</code> parameter.</p>\n         <p>This setting doesn't apply to Amazon Aurora DB instances. Storage is managed by the DB cluster.</p>\n         <p>Valid Values: <code>gp2 | gp3 | io1 | standard</code>\n         </p>\n         <p>Default: <code>io1</code>, if the <code>Iops</code> parameter\n          is specified. Otherwise, <code>gp2</code>.</p>"
+                        "smithy.api#documentation": "<p>The storage type to associate with the DB instance.</p>\n         <p>If you specify <code>io1</code>, <code>io2</code>, or <code>gp3</code>, you must also include a value for the\n            <code>Iops</code> parameter.</p>\n         <p>This setting doesn't apply to Amazon Aurora DB instances. Storage is managed by the DB cluster.</p>\n         <p>Valid Values: <code>gp2 | gp3 | io1 | io2 | standard</code>\n         </p>\n         <p>Default: <code>io1</code>, if the <code>Iops</code> parameter\n          is specified. Otherwise, <code>gp2</code>.</p>"
                     }
                 },
                 "TdeCredentialArn": {
@@ -5143,7 +5161,7 @@
                 "Timezone": {
                     "target": "com.amazonaws.rds#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The time zone of the DB instance. \n            The time zone parameter is currently supported only by\n            <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_SQLServer.html#SQLServer.Concepts.General.TimeZone\">Microsoft SQL Server</a>.</p>"
+                        "smithy.api#documentation": "<p>The time zone of the DB instance. \n            The time zone parameter is currently supported only by <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/db2-time-zone\">RDS for Db2</a> and\n            <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_SQLServer.html#SQLServer.Concepts.General.TimeZone\">RDS for SQL Server</a>.</p>"
                     }
                 },
                 "EnableIAMDatabaseAuthentication": {
@@ -5259,6 +5277,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Specifies whether to use the multi-tenant configuration or the single-tenant\n            configuration (default). This parameter only applies to RDS for Oracle container\n            database (CDB) engines.</p>\n         <p>Note the following restrictions: </p>\n         <ul>\n            <li>\n               <p>The DB engine that you specify in the request must support the multi-tenant\n                    configuration. If you attempt to enable the multi-tenant configuration on a DB\n                    engine that doesn't support it, the request fails.</p>\n            </li>\n            <li>\n               <p>If you specify the multi-tenant configuration when you create your DB instance,\n                    you can't later modify this DB instance to use the single-tenant configuration.</p>\n            </li>\n         </ul>"
                     }
+                },
+                "EngineLifecycleSupport": {
+                    "target": "com.amazonaws.rds#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The life cycle type for this DB instance.</p>\n         <note>\n            <p>By default, this value is set to <code>open-source-rds-extended-support</code>, which enrolls your DB instance into Amazon RDS Extended Support. \n              At the end of standard support, you can avoid charges for Extended Support by setting the value to <code>open-source-rds-extended-support-disabled</code>. In this case, \n              creating the DB instance will fail if the DB major version is past its end of standard support date.</p>\n         </note>\n         <p>This setting applies only to RDS for MySQL and RDS for PostgreSQL. For Amazon Aurora DB instances, the life cycle type is managed by the DB cluster.</p>\n         <p>You can use this setting to enroll your DB instance into Amazon RDS Extended Support. With RDS Extended Support, \n        you can run the selected major engine version on your DB instance past the end of standard support for that engine version. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/extended-support.html\">Using Amazon RDS Extended Support</a> in the <i>Amazon RDS User Guide</i>.</p>\n         <p>Valid Values: <code>open-source-rds-extended-support | open-source-rds-extended-support-disabled</code>\n         </p>\n         <p>Default: <code>open-source-rds-extended-support</code>\n         </p>"
+                    }
                 }
             },
             "traits": {
@@ -5275,6 +5299,9 @@
                 "target": "com.amazonaws.rds#CreateDBInstanceReadReplicaResult"
             },
             "errors": [
+                {
+                    "target": "com.amazonaws.rds#CertificateNotFoundFault"
+                },
                 {
                     "target": "com.amazonaws.rds#DBClusterNotFoundFault"
                 },
@@ -5457,7 +5484,7 @@
                 "StorageType": {
                     "target": "com.amazonaws.rds#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The storage type to associate with the read replica.</p>\n         <p>If you specify <code>io1</code> or <code>gp3</code>, you must also include a value for the\n            <code>Iops</code> parameter.</p>\n         <p>Valid Values: <code>gp2 | gp3 | io1 | standard</code>\n         </p>\n         <p>Default: <code>io1</code> if the <code>Iops</code> parameter\n            is specified. Otherwise, <code>gp2</code>.</p>"
+                        "smithy.api#documentation": "<p>The storage type to associate with the read replica.</p>\n         <p>If you specify <code>io1</code>, <code>io2</code>, or <code>gp3</code>, you must also include a value for the\n            <code>Iops</code> parameter.</p>\n         <p>Valid Values: <code>gp2 | gp3 | io1 | io2 | standard</code>\n         </p>\n         <p>Default: <code>io1</code> if the <code>Iops</code> parameter\n            is specified. Otherwise, <code>gp2</code>.</p>"
                     }
                 },
                 "CopyTagsToSnapshot": {
@@ -5632,6 +5659,12 @@
                     "target": "com.amazonaws.rds#BooleanOptional",
                     "traits": {
                         "smithy.api#documentation": "<p>Whether to upgrade the storage file system configuration on the read replica. This option\n            migrates the read replica from the old storage file system layout to the preferred layout.</p>"
+                    }
+                },
+                "CACertificateIdentifier": {
+                    "target": "com.amazonaws.rds#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The CA certificate identifier to use for the read replica's server certificate.</p>\n         <p>This setting doesn't apply to RDS Custom DB instances.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/UsingWithRDS.SSL.html\">Using SSL/TLS to encrypt a connection to a DB \n                instance</a> in the <i>Amazon RDS User Guide</i> and \n                <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/UsingWithRDS.SSL.html\">\n                    Using SSL/TLS to encrypt a connection to a DB cluster</a> in the <i>Amazon Aurora \n                        User Guide</i>.</p>"
                     }
                 }
             },
@@ -6428,7 +6461,7 @@
                 "SourceType": {
                     "target": "com.amazonaws.rds#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of source that is generating the events. For example, if you want to be\n            notified of events generated by a DB instance, you set this parameter to\n                <code>db-instance</code>. For RDS Proxy events, specify <code>db-proxy</code>. If this value isn't specified, all events are\n            returned.</p>\n         <p>Valid Values: <code>db-instance</code> | <code>db-cluster</code> | <code>db-parameter-group</code> | <code>db-security-group</code> | <code>db-snapshot</code> | <code>db-cluster-snapshot</code> | <code>db-proxy</code>\n         </p>"
+                        "smithy.api#documentation": "<p>The type of source that is generating the events. For example, if you want to be\n            notified of events generated by a DB instance, you set this parameter to\n                <code>db-instance</code>. For RDS Proxy events, specify <code>db-proxy</code>. If this value isn't specified, all events are\n            returned.</p>\n         <p>Valid Values:<code> db-instance | db-cluster | db-parameter-group | db-security-group | db-snapshot | db-cluster-snapshot | db-proxy | zero-etl | custom-engine-version | blue-green-deployment </code>\n         </p>"
                     }
                 },
                 "EventCategories": {
@@ -6545,6 +6578,12 @@
                         "smithy.api#documentation": "<p>The engine version to use for this global database cluster.</p>\n         <p>Constraints:</p>\n         <ul>\n            <li>\n               <p>Can't be specified if <code>SourceDBClusterIdentifier</code> is specified. In this case, Amazon Aurora uses the engine version of the source DB cluster.</p>\n            </li>\n         </ul>"
                     }
                 },
+                "EngineLifecycleSupport": {
+                    "target": "com.amazonaws.rds#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The life cycle type for this global database cluster.</p>\n         <note>\n            <p>By default, this value is set to <code>open-source-rds-extended-support</code>, which enrolls your global cluster into Amazon RDS Extended Support. \n              At the end of standard support, you can avoid charges for Extended Support by setting the value to <code>open-source-rds-extended-support-disabled</code>. In this case, \n              creating the global cluster will fail if the DB major version is past its end of standard support date.</p>\n         </note>\n         <p>This setting only applies to Aurora PostgreSQL-based global databases.</p>\n         <p>You can use this setting to enroll your global cluster into Amazon RDS Extended Support. With RDS Extended Support, \n        you can run the selected major engine version on your global cluster past the end of standard support for that engine version. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/extended-support.html\">Using Amazon RDS Extended Support</a> in the <i>Amazon Aurora User Guide</i>.</p>\n         <p>Valid Values: <code>open-source-rds-extended-support | open-source-rds-extended-support-disabled</code>\n         </p>\n         <p>Default: <code>open-source-rds-extended-support</code>\n         </p>"
+                    }
+                },
                 "DeletionProtection": {
                     "target": "com.amazonaws.rds#BooleanOptional",
                     "traits": {
@@ -6619,8 +6658,9 @@
                             "TargetArn": "arn:aws:redshift-serverless:us-east-1:123456789012:namespace/62c70612-0302-4db7-8414-b5e3e049f0d8"
                         },
                         "output": {
-                            "SourceArn": "arn:aws:rds:us-east-1:123456789012:cluster:my-cluster",
                             "IntegrationName": "my-integration",
+                            "IntegrationArn": "arn:aws:rds:us-east-1:123456789012:integration:5b9f3d79-7392-4a3e-896c-58eaa1b53231",
+                            "SourceArn": "arn:aws:rds:us-east-1:123456789012:cluster:my-cluster",
                             "TargetArn": "arn:aws:redshift-serverless:us-east-1:123456789012:namespace/62c70612-0302-4db7-8414-b5e3e049f0d8",
                             "Tags": [],
                             "CreateTime": "2023-12-28T17:20:20.629Z",
@@ -6672,6 +6712,18 @@
                 },
                 "Tags": {
                     "target": "com.amazonaws.rds#TagList"
+                },
+                "DataFilter": {
+                    "target": "com.amazonaws.rds#DataFilter",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Data filtering options for the integration. For more information, see \n            <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/zero-etl.filtering.html\">Data filtering for Aurora zero-ETL integrations with Amazon Redshift</a>.\n        </p>\n         <p>Valid for: Integrations with Aurora MySQL source DB clusters only</p>"
+                    }
+                },
+                "Description": {
+                    "target": "com.amazonaws.rds#IntegrationDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A description of the integration.</p>"
+                    }
                 }
             },
             "traits": {
@@ -7467,6 +7519,21 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The details for Aurora Limitless Database.</p>"
                     }
+                },
+                "StorageThroughput": {
+                    "target": "com.amazonaws.rds#IntegerOptional",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The storage throughput for the DB cluster. The throughput is automatically set based on the IOPS that you provision, and is not configurable.</p>\n         <p>This setting is only for non-Aurora Multi-AZ DB clusters.</p>"
+                    }
+                },
+                "CertificateDetails": {
+                    "target": "com.amazonaws.rds#CertificateDetails"
+                },
+                "EngineLifecycleSupport": {
+                    "target": "com.amazonaws.rds#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The life cycle type for the DB cluster.</p>\n         <p>For more information, see CreateDBCluster.</p>"
+                    }
                 }
             },
             "traits": {
@@ -7632,6 +7699,12 @@
                     "target": "com.amazonaws.rds#String",
                     "traits": {
                         "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the recovery point in Amazon Web Services Backup.</p>"
+                    }
+                },
+                "StorageThroughput": {
+                    "target": "com.amazonaws.rds#IntegerOptional",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The storage throughput for the automated backup. The throughput is automatically set based on the IOPS that you provision, and is not configurable.</p>\n         <p>This setting is only for non-Aurora Multi-AZ DB clusters.</p>"
                     }
                 }
             },
@@ -8468,6 +8541,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The resource ID of the DB cluster that this DB cluster snapshot was created from.</p>"
                     }
+                },
+                "StorageThroughput": {
+                    "target": "com.amazonaws.rds#IntegerOptional",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The storage throughput for the DB cluster snapshot. The throughput is automatically set based on the IOPS that you provision, and is not configurable.</p>\n         <p>This setting is only for non-Aurora Multi-AZ DB clusters.</p>"
+                    }
                 }
             },
             "traits": {
@@ -8802,6 +8881,12 @@
                         "smithy.api#documentation": "<p>JSON string that lists the installation files and parameters that RDS Custom uses to create a custom engine version (CEV). \n          RDS Custom applies the patches in the order in which they're listed in the manifest. You can set the Oracle home, Oracle base, \n          and UNIX/Linux user and group using the installation parameters. For more information, \n          see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/custom-cev.preparing.html#custom-cev.preparing.manifest.fields\">JSON fields in the CEV manifest</a> in the <i>Amazon RDS User Guide</i>.\n      </p>"
                     }
                 },
+                "SupportsLimitlessDatabase": {
+                    "target": "com.amazonaws.rds#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether the DB engine version supports Aurora Limitless Database.</p>"
+                    }
+                },
                 "SupportsCertificateRotationWithoutRestart": {
                     "target": "com.amazonaws.rds#BooleanOptional",
                     "traits": {
@@ -9029,7 +9114,7 @@
                 "LicenseModel": {
                     "target": "com.amazonaws.rds#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The license model information for this DB instance. This setting doesn't apply to RDS Custom DB instances.</p>"
+                        "smithy.api#documentation": "<p>The license model information for this DB instance. This setting doesn't apply to\n            Amazon Aurora or RDS Custom DB instances.</p>"
                     }
                 },
                 "Iops": {
@@ -9167,7 +9252,7 @@
                 "Timezone": {
                     "target": "com.amazonaws.rds#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The time zone of the DB instance.\n            In most cases, the <code>Timezone</code> element is empty.\n            <code>Timezone</code> content appears only for\n            Microsoft SQL Server DB instances \n            that were created with a time zone specified.</p>"
+                        "smithy.api#documentation": "<p>The time zone of the DB instance.\n            In most cases, the <code>Timezone</code> element is empty.\n            <code>Timezone</code> content appears only for\n            RDS for Db2 and RDS for SQL Server DB instances \n            that were created with a time zone specified.</p>"
                     }
                 },
                 "IAMDatabaseAuthenticationEnabled": {
@@ -9369,6 +9454,12 @@
                     "target": "com.amazonaws.rds#BooleanOptional",
                     "traits": {
                         "smithy.api#documentation": "<p>Specifies whether the DB instance is in the multi-tenant configuration (TRUE) or the\n            single-tenant configuration (FALSE).</p>"
+                    }
+                },
+                "EngineLifecycleSupport": {
+                    "target": "com.amazonaws.rds#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The life cycle type for the DB instance.</p>\n         <p>For more information, see CreateDBInstance.</p>"
                     }
                 }
             },
@@ -10988,7 +11079,7 @@
                     }
                 },
                 "DBShardGroupIdentifier": {
-                    "target": "com.amazonaws.rds#String",
+                    "target": "com.amazonaws.rds#DBShardGroupIdentifier",
                     "traits": {
                         "smithy.api#documentation": "<p>The name of the DB shard group.</p>"
                     }
@@ -11046,6 +11137,16 @@
                 "smithy.api#documentation": "<p>The specified DB shard group name must be unique in your Amazon Web Services account in the specified Amazon Web Services Region.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
+            }
+        },
+        "com.amazonaws.rds#DBShardGroupIdentifier": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 63
+                },
+                "smithy.api#pattern": "^[a-zA-Z][a-zA-Z0-9]*(-[a-zA-Z0-9]+)*$"
             }
         },
         "com.amazonaws.rds#DBShardGroupNotFoundFault": {
@@ -11736,6 +11837,16 @@
                 "smithy.api#httpError": 400
             }
         },
+        "com.amazonaws.rds#DataFilter": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 25600
+                },
+                "smithy.api#pattern": "^[a-zA-Z0-9_ \"\\\\\\-$,*.:?+\\/]*$"
+            }
+        },
         "com.amazonaws.rds#DatabaseArn": {
             "type": "string",
             "traits": {
@@ -11826,7 +11937,7 @@
                     "target": "com.amazonaws.rds#CustomEngineName",
                     "traits": {
                         "smithy.api#clientOptional": {},
-                        "smithy.api#documentation": "<p>The database engine. The only supported engines are <code>custom-oracle-ee</code> and <code>custom-oracle-ee-cdb</code>.</p>",
+                        "smithy.api#documentation": "<p>The database engine. RDS Custom for Oracle supports the following values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>custom-oracle-ee</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>custom-oracle-ee-cdb</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>custom-oracle-se2</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>custom-oracle-se2-cdb</code>\n               </p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 },
@@ -12588,7 +12699,7 @@
             "type": "structure",
             "members": {
                 "DBShardGroupIdentifier": {
-                    "target": "com.amazonaws.rds#String",
+                    "target": "com.amazonaws.rds#DBShardGroupIdentifier",
                     "traits": {
                         "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>Teh name of the DB shard group to delete.</p>",
@@ -12910,6 +13021,7 @@
                         "output": {
                             "SourceArn": "arn:aws:rds:us-east-1:123456789012:cluster:my-cluster",
                             "IntegrationName": "my-integration",
+                            "IntegrationArn": "arn:aws:rds:us-east-1:123456789012:integration:5b9f3d79-7392-4a3e-896c-58eaa1b53231",
                             "TargetArn": "arn:aws:redshift-serverless:us-east-1:123456789012:namespace/62c70612-0302-4db7-8414-b5e3e049f0d8",
                             "Tags": [],
                             "CreateTime": "2023-12-28T17:20:20.629Z",
@@ -14512,7 +14624,7 @@
                 "Engine": {
                     "target": "com.amazonaws.rds#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The database engine to return version details for.</p>\n         <p>Valid Values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>aurora-mysql</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>aurora-postgresql</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>custom-oracle-ee</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>db2-ae</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>db2-se</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>mariadb</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>mysql</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>oracle-ee</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>oracle-ee-cdb</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>oracle-se2</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>oracle-se2-cdb</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>postgres</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>sqlserver-ee</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>sqlserver-se</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>sqlserver-ex</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>sqlserver-web</code>\n               </p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The database engine to return version details for.</p>\n         <p>Valid Values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>aurora-mysql</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>aurora-postgresql</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>custom-oracle-ee</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>custom-oracle-ee-cdb</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>custom-oracle-se2</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>custom-oracle-se2-cdb</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>db2-ae</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>db2-se</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>mariadb</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>mysql</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>oracle-ee</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>oracle-ee-cdb</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>oracle-se2</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>oracle-se2-cdb</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>postgres</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>sqlserver-ee</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>sqlserver-se</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>sqlserver-ex</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>sqlserver-web</code>\n               </p>\n            </li>\n         </ul>"
                     }
                 },
                 "EngineVersion": {
@@ -15744,7 +15856,7 @@
             "type": "structure",
             "members": {
                 "DBShardGroupIdentifier": {
-                    "target": "com.amazonaws.rds#String",
+                    "target": "com.amazonaws.rds#DBShardGroupIdentifier",
                     "traits": {
                         "smithy.api#documentation": "<p>The user-supplied DB shard group identifier or the Amazon Resource Name (ARN) of the DB shard group. If this parameter is specified, \n            information for only the specific DB shard group is returned. This parameter isn't case-sensitive.</p>\n         <p>Constraints:</p>\n         <ul>\n            <li>\n               <p>If supplied, must match an existing DB shard group identifier.</p>\n            </li>\n         </ul>"
                     }
@@ -16423,7 +16535,7 @@
                     "target": "com.amazonaws.rds#String",
                     "traits": {
                         "smithy.api#clientOptional": {},
-                        "smithy.api#documentation": "<p>The name of the DB parameter group family.</p>\n         <p>Valid Values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>aurora-mysql5.7</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>aurora-mysql8.0</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>aurora-postgresql10</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>aurora-postgresql11</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>aurora-postgresql12</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>aurora-postgresql13</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>aurora-postgresql14</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>custom-oracle-ee-19</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>db2-ae</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>db2-se</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>mariadb10.2</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>mariadb10.3</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>mariadb10.4</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>mariadb10.5</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>mariadb10.6</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>mysql5.7</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>mysql8.0</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>oracle-ee-19</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>oracle-ee-cdb-19</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>oracle-ee-cdb-21</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>oracle-se2-19</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>oracle-se2-cdb-19</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>oracle-se2-cdb-21</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>postgres10</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>postgres11</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>postgres12</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>postgres13</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>postgres14</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>sqlserver-ee-11.0</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>sqlserver-ee-12.0</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>sqlserver-ee-13.0</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>sqlserver-ee-14.0</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>sqlserver-ee-15.0</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>sqlserver-ex-11.0</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>sqlserver-ex-12.0</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>sqlserver-ex-13.0</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>sqlserver-ex-14.0</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>sqlserver-ex-15.0</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>sqlserver-se-11.0</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>sqlserver-se-12.0</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>sqlserver-se-13.0</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>sqlserver-se-14.0</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>sqlserver-se-15.0</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>sqlserver-web-11.0</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>sqlserver-web-12.0</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>sqlserver-web-13.0</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>sqlserver-web-14.0</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>sqlserver-web-15.0</code>\n               </p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>The name of the DB parameter group family.</p>\n         <p>Valid Values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>aurora-mysql5.7</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>aurora-mysql8.0</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>aurora-postgresql10</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>aurora-postgresql11</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>aurora-postgresql12</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>aurora-postgresql13</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>aurora-postgresql14</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>custom-oracle-ee-19</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>custom-oracle-ee-cdb-19</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>db2-ae</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>db2-se</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>mariadb10.2</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>mariadb10.3</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>mariadb10.4</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>mariadb10.5</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>mariadb10.6</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>mysql5.7</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>mysql8.0</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>oracle-ee-19</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>oracle-ee-cdb-19</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>oracle-ee-cdb-21</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>oracle-se2-19</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>oracle-se2-cdb-19</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>oracle-se2-cdb-21</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>postgres10</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>postgres11</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>postgres12</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>postgres13</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>postgres14</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>sqlserver-ee-11.0</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>sqlserver-ee-12.0</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>sqlserver-ee-13.0</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>sqlserver-ee-14.0</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>sqlserver-ee-15.0</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>sqlserver-ex-11.0</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>sqlserver-ex-12.0</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>sqlserver-ex-13.0</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>sqlserver-ex-14.0</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>sqlserver-ex-15.0</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>sqlserver-se-11.0</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>sqlserver-se-12.0</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>sqlserver-se-13.0</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>sqlserver-se-14.0</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>sqlserver-se-15.0</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>sqlserver-web-11.0</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>sqlserver-web-12.0</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>sqlserver-web-13.0</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>sqlserver-web-14.0</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>sqlserver-web-15.0</code>\n               </p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 },
@@ -16918,7 +17030,7 @@
                 "Filters": {
                     "target": "com.amazonaws.rds#FilterList",
                     "traits": {
-                        "smithy.api#documentation": "<p>This parameter isn't currently supported.</p>"
+                        "smithy.api#documentation": "<p>A filter that specifies one or more global database clusters to describe. This parameter is case-sensitive.</p>\n         <p>Currently, the only supported filter is <code>region</code>.</p>\n         <p>If used, the request returns information about any global cluster with at least one member (primary or secondary) in the specified Amazon Web Services Regions.</p>"
                     }
                 },
                 "MaxRecords": {
@@ -16964,6 +17076,7 @@
                             "Integrations": [
                                 {
                                     "IntegrationName": "my-integration",
+                                    "IntegrationArn": "arn:aws:rds:us-east-1:123456789012:integration:5b9f3d79-7392-4a3e-896c-58eaa1b53231",
                                     "SourceArn": "arn:aws:rds:us-east-1:123456789012:cluster:my-cluster",
                                     "TargetArn": "arn:aws:redshift-serverless:us-east-1:123456789012:namespace/62c70612-0302-4db7-8414-b5e3e049f0d8",
                                     "Tags": [],
@@ -17300,7 +17413,7 @@
                     "target": "com.amazonaws.rds#String",
                     "traits": {
                         "smithy.api#clientOptional": {},
-                        "smithy.api#documentation": "<p>The name of the engine to describe DB instance options for.</p>\n         <p>Valid Values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>aurora-mysql</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>aurora-postgresql</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>custom-oracle-ee</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>db2-ae</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>db2-se</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>mariadb</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>mysql</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>oracle-ee</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>oracle-ee-cdb</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>oracle-se2</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>oracle-se2-cdb</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>postgres</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>sqlserver-ee</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>sqlserver-se</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>sqlserver-ex</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>sqlserver-web</code>\n               </p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>The name of the database engine to describe DB instance options for.</p>\n         <p>Valid Values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>aurora-mysql</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>aurora-postgresql</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>custom-oracle-ee</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>custom-oracle-ee-cdb</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>custom-oracle-se2</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>custom-oracle-se2-cdb</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>db2-ae</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>db2-se</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>mariadb</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>mysql</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>oracle-ee</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>oracle-ee-cdb</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>oracle-se2</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>oracle-se2-cdb</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>postgres</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>sqlserver-ee</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>sqlserver-se</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>sqlserver-ex</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>sqlserver-web</code>\n               </p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 },
@@ -17343,7 +17456,7 @@
                 "MaxRecords": {
                     "target": "com.amazonaws.rds#IntegerOptional",
                     "traits": {
-                        "smithy.api#documentation": "<p>The maximum number of records to include in the response.\n            If more records exist than the specified <code>MaxRecords</code> value,\n            a pagination token called a marker is included in the response so that\n            you can retrieve the remaining results.</p>\n         <p>Default: 100</p>\n         <p>Constraints: Minimum 20, maximum 10000.</p>"
+                        "smithy.api#documentation": "<p>The maximum number of records to include in the response.\n            If more records exist than the specified <code>MaxRecords</code> value,\n            a pagination token called a marker is included in the response so that\n            you can retrieve the remaining results.</p>\n         <p>Default: 100</p>\n         <p>Constraints: Minimum 20, maximum 1000.</p>"
                     }
                 },
                 "Marker": {
@@ -19237,7 +19350,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A filter name and value pair that is used to return a more specific list of results \n            from a describe operation. Filters can be used to match a set of resources by specific \n            criteria, such as IDs. The filters supported by a describe operation are documented \n            with the describe operation.</p>\n         <note>\n            <p>Currently, wildcards are not supported in filters.</p>\n         </note>\n         <p>The following actions can be filtered:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>DescribeDBClusterBacktracks</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>DescribeDBClusterEndpoints</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>DescribeDBClusters</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>DescribeDBInstances</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>DescribeDBRecommendations</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>DescribePendingMaintenanceActions</code>\n               </p>\n            </li>\n         </ul>"
+                "smithy.api#documentation": "<p>A filter name and value pair that is used to return a more specific list of results \n            from a describe operation. Filters can be used to match a set of resources by specific \n            criteria, such as IDs. The filters supported by a describe operation are documented \n            with the describe operation.</p>\n         <note>\n            <p>Currently, wildcards are not supported in filters.</p>\n         </note>\n         <p>The following actions can be filtered:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>DescribeDBClusterBacktracks</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>DescribeDBClusterEndpoints</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>DescribeDBClusters</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>DescribeDBInstances</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>DescribeDBRecommendations</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>DescribeDBShardGroups</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>DescribePendingMaintenanceActions</code>\n               </p>\n            </li>\n         </ul>"
             }
         },
         "com.amazonaws.rds#FilterList": {
@@ -19295,6 +19408,12 @@
                     "target": "com.amazonaws.rds#String",
                     "traits": {
                         "smithy.api#documentation": "<p>Indicates the database engine version.</p>"
+                    }
+                },
+                "EngineLifecycleSupport": {
+                    "target": "com.amazonaws.rds#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The life cycle type for the global cluster.</p>\n         <p>For more information, see CreateGlobalCluster.</p>"
                     }
                 },
                 "DatabaseName": {
@@ -19722,6 +19841,18 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Any errors associated with the integration.</p>"
                     }
+                },
+                "DataFilter": {
+                    "target": "com.amazonaws.rds#DataFilter",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Data filters for the integration. These filters determine which tables\n            from the source database are sent to the target Amazon Redshift data warehouse. \n        </p>"
+                    }
+                },
+                "Description": {
+                    "target": "com.amazonaws.rds#IntegrationDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A description of the integration.</p>"
+                    }
                 }
             },
             "traits": {
@@ -19752,7 +19883,7 @@
                     "min": 1,
                     "max": 255
                 },
-                "smithy.api#pattern": "^arn:aws[a-z\\-]*:rds(-[a-z]*)?:[a-z0-9\\-]*:[0-9]*:integration:[a-z][a-z0-9]*(-[a-zA-Z0-9]+)*\\/[a-zA-Z0-9_:\\-\\/]+$"
+                "smithy.api#pattern": "^arn:aws[a-z\\-]*:rds(-[a-z]*)?:[a-z0-9\\-]*:[0-9]*:integration:[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
             }
         },
         "com.amazonaws.rds#IntegrationConflictOperationFault": {
@@ -19770,6 +19901,16 @@
                 "smithy.api#documentation": "<p>A conflicting conditional operation is currently in progress against this resource.\n            Typically occurs when there are multiple requests being made to the same resource at the same time,\n            and these requests conflict with each other.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
+            }
+        },
+        "com.amazonaws.rds#IntegrationDescription": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 1000
+                },
+                "smithy.api#pattern": ".*"
             }
         },
         "com.amazonaws.rds#IntegrationError": {
@@ -20889,7 +21030,7 @@
                 "ResourceArn": {
                     "target": "com.amazonaws.rds#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the RDS for Oracle or Microsoft SQL Server DB instance.\n            For example, <code>arn:aws:rds:us-east-1:12345667890:instance:my-orcl-db</code>.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the RDS for Oracle or Microsoft SQL Server DB instance.\n            For example, <code>arn:aws:rds:us-east-1:12345667890:db:my-orcl-db</code>.</p>"
                     }
                 },
                 "AuditPolicyState": {
@@ -21117,7 +21258,7 @@
                     "target": "com.amazonaws.rds#CustomEngineName",
                     "traits": {
                         "smithy.api#clientOptional": {},
-                        "smithy.api#documentation": "<p>The DB engine. The only supported values are <code>custom-oracle-ee</code> and <code>custom-oracle-ee-cdb</code>.</p>",
+                        "smithy.api#documentation": "<p>The database engine. RDS Custom for Oracle supports the following values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>custom-oracle-ee</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>custom-oracle-ee-cdb</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>custom-oracle-se2</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>custom-oracle-se2-cdb</code>\n               </p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 },
@@ -21530,7 +21671,7 @@
                 "StorageType": {
                     "target": "com.amazonaws.rds#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The storage type to associate with the DB cluster.</p>\n         <p>For information on storage types for Aurora DB clusters, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/Aurora.Overview.StorageReliability.html#aurora-storage-type\">Storage configurations for Amazon Aurora DB clusters</a>. For information on storage types for Multi-AZ DB\n            clusters, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/create-multi-az-db-cluster.html#create-multi-az-db-cluster-settings\">Settings for creating Multi-AZ DB clusters</a>.</p>\n         <p>When specified for a Multi-AZ DB cluster, a value for the <code>Iops</code> parameter is required.</p>\n         <p>Valid for Cluster Type: Aurora DB clusters and Multi-AZ DB clusters</p>\n         <p>Valid Values:</p>\n         <ul>\n            <li>\n               <p>Aurora DB clusters - <code>aurora | aurora-iopt1</code>\n               </p>\n            </li>\n            <li>\n               <p>Multi-AZ DB clusters - <code>io1</code>\n               </p>\n            </li>\n         </ul>\n         <p>Default:</p>\n         <ul>\n            <li>\n               <p>Aurora DB clusters - <code>aurora</code>\n               </p>\n            </li>\n            <li>\n               <p>Multi-AZ DB clusters - <code>io1</code>\n               </p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The storage type to associate with the DB cluster.</p>\n         <p>For information on storage types for Aurora DB clusters, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/Aurora.Overview.StorageReliability.html#aurora-storage-type\">Storage configurations for Amazon Aurora DB clusters</a>. For information on storage types for Multi-AZ DB\n            clusters, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/create-multi-az-db-cluster.html#create-multi-az-db-cluster-settings\">Settings for creating Multi-AZ DB clusters</a>.</p>\n         <p>When specified for a Multi-AZ DB cluster, a value for the <code>Iops</code> parameter is required.</p>\n         <p>Valid for Cluster Type: Aurora DB clusters and Multi-AZ DB clusters</p>\n         <p>Valid Values:</p>\n         <ul>\n            <li>\n               <p>Aurora DB clusters - <code>aurora | aurora-iopt1</code>\n               </p>\n            </li>\n            <li>\n               <p>Multi-AZ DB clusters - <code>io1 | io2 | gp3</code>\n               </p>\n            </li>\n         </ul>\n         <p>Default:</p>\n         <ul>\n            <li>\n               <p>Aurora DB clusters - <code>aurora</code>\n               </p>\n            </li>\n            <li>\n               <p>Multi-AZ DB clusters - <code>io1</code>\n               </p>\n            </li>\n         </ul>"
                     }
                 },
                 "Iops": {
@@ -21630,6 +21771,12 @@
                     "target": "com.amazonaws.rds#BooleanOptional",
                     "traits": {
                         "smithy.api#documentation": "<p>Specifies whether to enable Aurora Limitless Database. You must enable Aurora Limitless Database to create a DB shard group.</p>\n         <p>Valid for: Aurora DB clusters only</p>"
+                    }
+                },
+                "CACertificateIdentifier": {
+                    "target": "com.amazonaws.rds#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The CA certificate identifier to use for the DB cluster's server certificate.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/UsingWithRDS.SSL.html\">Using SSL/TLS to encrypt a connection to a DB \n            instance</a> in the <i>Amazon RDS User Guide</i>.</p>\n         <p>Valid for Cluster Type: Multi-AZ DB clusters</p>"
                     }
                 }
             },
@@ -21951,7 +22098,7 @@
                 "AllocatedStorage": {
                     "target": "com.amazonaws.rds#IntegerOptional",
                     "traits": {
-                        "smithy.api#documentation": "<p>The new amount of storage in gibibytes (GiB) to allocate for the DB instance.</p>\n         <p>For RDS for Db2, MariaDB, RDS for MySQL, RDS for Oracle, and RDS for PostgreSQL, \n          the value supplied must be at least 10% greater than the current value. \n          Values that are not at least 10% greater than the existing value are rounded up \n          so that they are 10% greater than the current value.</p>\n         <p>For the valid values for allocated storage for each engine,\n          see <code>CreateDBInstance</code>.</p>"
+                        "smithy.api#documentation": "<p>The new amount of storage in gibibytes (GiB) to allocate for the DB instance.</p>\n         <p>For RDS for Db2, MariaDB, RDS for MySQL, RDS for Oracle, and RDS for PostgreSQL, \n          the value supplied must be at least 10% greater than the current value. \n          Values that are not at least 10% greater than the existing value are rounded up \n          so that they are 10% greater than the current value.</p>\n         <p>For the valid values for allocated storage for each engine,\n          see <code>CreateDBInstance</code>.</p>\n         <p>Constraints:</p>\n         <ul>\n            <li>\n               <p>When you increase the allocated storage for a DB instance that uses\n                    Provisioned IOPS (<code>gp3</code>, <code>io1</code>, or <code>io2</code>\n                    storage type), you must also specify the <code>Iops</code> parameter. You can\n                    use the current value for <code>Iops</code>.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "DBInstanceClass": {
@@ -21963,7 +22110,7 @@
                 "DBSubnetGroupName": {
                     "target": "com.amazonaws.rds#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The new DB subnet group for the DB instance.\n          You can use this parameter to move your DB instance to a different VPC.\n      \n    \n          If your DB instance isn't in a VPC, you can also use this parameter to move your DB instance into a VPC.\n          For more information, see \n          <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_VPC.WorkingWithRDSInstanceinaVPC.html#USER_VPC.Non-VPC2VPC\">Working with a DB instance in a VPC</a> \n          in the <i>Amazon RDS User Guide</i>.</p>\n         <p>Changing the subnet group causes an outage during the change. \n        The change is applied during the next maintenance window,\n        unless you enable <code>ApplyImmediately</code>.</p>\n         <p>This parameter doesn't apply to RDS Custom DB instances.</p>\n         <p>Constraints:</p>\n         <ul>\n            <li>\n               <p>If supplied, must match existing DB subnet group.</p>\n            </li>\n         </ul>\n         <p>Example: <code>mydbsubnetgroup</code>\n         </p>"
+                        "smithy.api#documentation": "<p>The new DB subnet group for the DB instance.\n          You can use this parameter to move your DB instance to a different VPC.\n      \n    \n          If your DB instance isn't in a VPC, you can also use this parameter to move your DB instance into a VPC.\n          For more information, see \n          <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_VPC.WorkingWithRDSInstanceinaVPC.html#USER_VPC.Non-VPC2VPC\">Working with a DB instance in a VPC</a> \n          in the <i>Amazon RDS User Guide</i>.</p>\n         <p>Changing the subnet group causes an outage during the change. \n        The change is applied during the next maintenance window,\n        unless you enable <code>ApplyImmediately</code>.</p>\n         <p>This setting doesn't apply to RDS Custom DB instances.</p>\n         <p>Constraints:</p>\n         <ul>\n            <li>\n               <p>If supplied, must match existing DB subnet group.</p>\n            </li>\n         </ul>\n         <p>Example: <code>mydbsubnetgroup</code>\n         </p>"
                     }
                 },
                 "DBSecurityGroups": {
@@ -22047,7 +22194,7 @@
                 "Iops": {
                     "target": "com.amazonaws.rds#IntegerOptional",
                     "traits": {
-                        "smithy.api#documentation": "<p>The new Provisioned IOPS (I/O operations per second) value for the RDS instance.</p>\n         <p>Changing this setting doesn't result in an outage and\n            the change is applied during the next maintenance window\n            unless the <code>ApplyImmediately</code> parameter is enabled for this request.\n          If you are migrating from Provisioned IOPS to standard storage, set this value to 0. \n          The DB instance will require a reboot for the change in storage type to take effect.</p>\n         <p>If you choose to migrate your DB instance from using standard storage to using\n            Provisioned IOPS, or from using Provisioned IOPS to using standard storage, the process\n            can take time. The duration of the migration depends on several factors such as database\n            load, storage size, storage type (standard or Provisioned IOPS), amount of IOPS\n            provisioned (if any), and the number of prior scale storage operations. Typical\n            migration times are under 24 hours, but the process can take up to several days in some\n            cases. During the migration, the DB instance is available for use, but might experience\n            performance degradation. While the migration takes place, nightly backups for the\n            instance are suspended. No other Amazon RDS operations can take place for the instance,\n            including modifying the instance, rebooting the instance, deleting the instance,\n            creating a read replica for the instance, and creating a DB snapshot of the instance.</p>\n         <p>Constraints:</p>\n         <ul>\n            <li>\n               <p>For RDS for MariaDB, RDS for MySQL, RDS for Oracle, and RDS for PostgreSQL - The value supplied must be at least 10% greater than the current value. \n          Values that are not at least 10% greater than the existing value are rounded up so that they are 10% greater than the current value.</p>\n            </li>\n         </ul>\n         <p>Default: Uses existing setting</p>"
+                        "smithy.api#documentation": "<p>The new Provisioned IOPS (I/O operations per second) value for the RDS instance.</p>\n         <p>Changing this setting doesn't result in an outage and\n            the change is applied during the next maintenance window\n            unless the <code>ApplyImmediately</code> parameter is enabled for this request.\n          If you are migrating from Provisioned IOPS to standard storage, set this value to 0. \n          The DB instance will require a reboot for the change in storage type to take effect.</p>\n         <p>If you choose to migrate your DB instance from using standard storage to using\n            Provisioned IOPS, or from using Provisioned IOPS to using standard storage, the process\n            can take time. The duration of the migration depends on several factors such as database\n            load, storage size, storage type (standard or Provisioned IOPS), amount of IOPS\n            provisioned (if any), and the number of prior scale storage operations. Typical\n            migration times are under 24 hours, but the process can take up to several days in some\n            cases. During the migration, the DB instance is available for use, but might experience\n            performance degradation. While the migration takes place, nightly backups for the\n            instance are suspended. No other Amazon RDS operations can take place for the instance,\n            including modifying the instance, rebooting the instance, deleting the instance,\n            creating a read replica for the instance, and creating a DB snapshot of the instance.</p>\n         <p>Constraints:</p>\n         <ul>\n            <li>\n               <p>For RDS for MariaDB, RDS for MySQL, RDS for Oracle, and RDS for PostgreSQL - The value supplied must be at least 10% greater than the current value. \n          Values that are not at least 10% greater than the existing value are rounded up so that they are 10% greater than the current value.</p>\n            </li>\n            <li>\n               <p>When you increase the Provisioned IOPS, you must also specify the\n                        <code>AllocatedStorage</code> parameter. You can use the current value for\n                        <code>AllocatedStorage</code>.</p>\n            </li>\n         </ul>\n         <p>Default: Uses existing setting</p>"
                     }
                 },
                 "OptionGroupName": {
@@ -22065,7 +22212,7 @@
                 "StorageType": {
                     "target": "com.amazonaws.rds#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The storage type to associate with the DB instance.</p>\n         <p>If you specify Provisioned IOPS (<code>io1</code>), \n          you must also include a value for the <code>Iops</code> parameter.</p>\n         <p>If you choose to migrate your DB instance from using standard storage to using\n            Provisioned IOPS, or from using Provisioned IOPS to using standard storage, the process\n            can take time. The duration of the migration depends on several factors such as database\n            load, storage size, storage type (standard or Provisioned IOPS), amount of IOPS\n            provisioned (if any), and the number of prior scale storage operations. Typical\n            migration times are under 24 hours, but the process can take up to several days in some\n            cases. During the migration, the DB instance is available for use, but might experience\n            performance degradation. While the migration takes place, nightly backups for the\n            instance are suspended. No other Amazon RDS operations can take place for the instance,\n            including modifying the instance, rebooting the instance, deleting the instance,\n            creating a read replica for the instance, and creating a DB snapshot of the instance.</p>\n         <p>Valid Values: <code>gp2 | gp3 | io1 | standard</code>\n         </p>\n         <p>Default: <code>io1</code>, if the <code>Iops</code> parameter\n          is specified. Otherwise, <code>gp2</code>.</p>"
+                        "smithy.api#documentation": "<p>The storage type to associate with the DB instance.</p>\n         <p>If you specify <code>io1</code>, <code>io2</code>, or <code>gp3</code> \n          you must also include a value for the <code>Iops</code> parameter.</p>\n         <p>If you choose to migrate your DB instance from using standard storage to using\n            Provisioned IOPS, or from using Provisioned IOPS to using standard storage, the process\n            can take time. The duration of the migration depends on several factors such as database\n            load, storage size, storage type (standard or Provisioned IOPS), amount of IOPS\n            provisioned (if any), and the number of prior scale storage operations. Typical\n            migration times are under 24 hours, but the process can take up to several days in some\n            cases. During the migration, the DB instance is available for use, but might experience\n            performance degradation. While the migration takes place, nightly backups for the\n            instance are suspended. No other Amazon RDS operations can take place for the instance,\n            including modifying the instance, rebooting the instance, deleting the instance,\n            creating a read replica for the instance, and creating a DB snapshot of the instance.</p>\n         <p>Valid Values: <code>gp2 | gp3 | io1 | io2 | standard</code>\n         </p>\n         <p>Default: <code>io1</code>, if the <code>Iops</code> parameter\n          is specified. Otherwise, <code>gp2</code>.</p>"
                     }
                 },
                 "TdeCredentialArn": {
@@ -22209,7 +22356,7 @@
                 "DeletionProtection": {
                     "target": "com.amazonaws.rds#BooleanOptional",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies whether the DB instance has deletion protection enabled. \n            The database can't be deleted when deletion protection is enabled. By default, \n            deletion protection isn't enabled. For more information, see \n            <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_DeleteInstance.html\">\n                Deleting a DB Instance</a>.</p>"
+                        "smithy.api#documentation": "<p>Specifies whether the DB instance has deletion protection enabled. \n            The database can't be deleted when deletion protection is enabled. By default, \n            deletion protection isn't enabled. For more information, see \n            <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_DeleteInstance.html\">\n                Deleting a DB Instance</a>.</p>\n         <p>This setting doesn't apply to Amazon Aurora DB instances. You can enable or disable deletion protection for the DB cluster. \n        For more information, see <code>ModifyDBCluster</code>. DB instances in a DB cluster can be deleted even when deletion protection is enabled for the DB cluster.</p>"
                     }
                 },
                 "MaxAllocatedStorage": {
@@ -22695,7 +22842,7 @@
             "type": "structure",
             "members": {
                 "DBShardGroupIdentifier": {
-                    "target": "com.amazonaws.rds#String",
+                    "target": "com.amazonaws.rds#DBShardGroupIdentifier",
                     "traits": {
                         "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The name of the DB shard group to modify.</p>",
@@ -23132,7 +23279,7 @@
                 "SourceType": {
                     "target": "com.amazonaws.rds#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of source that is generating the events. For example, if you want to be notified of events generated by a DB instance, you would set this parameter to db-instance. For RDS Proxy events, specify <code>db-proxy</code>. If this value isn't specified, all events are returned.</p>\n         <p>Valid Values: <code>db-instance</code> | <code>db-cluster</code> | <code>db-parameter-group</code> | <code>db-security-group</code> | <code>db-snapshot</code> | <code>db-cluster-snapshot</code> | <code>db-proxy</code>\n         </p>"
+                        "smithy.api#documentation": "<p>The type of source that is generating the events. For example, if you want to be notified of events generated by a DB instance, you would set this parameter to db-instance. For RDS Proxy events, specify <code>db-proxy</code>. If this value isn't specified, all events are returned.</p>\n         <p>Valid Values:<code> db-instance | db-cluster | db-parameter-group | db-security-group | db-snapshot | db-cluster-snapshot | db-proxy | zero-etl | custom-engine-version | blue-green-deployment </code>\n         </p>"
                     }
                 },
                 "EventCategories": {
@@ -23260,6 +23407,84 @@
             },
             "traits": {
                 "smithy.api#output": {}
+            }
+        },
+        "com.amazonaws.rds#ModifyIntegration": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.rds#ModifyIntegrationMessage"
+            },
+            "output": {
+                "target": "com.amazonaws.rds#Integration"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.rds#IntegrationConflictOperationFault"
+                },
+                {
+                    "target": "com.amazonaws.rds#IntegrationNotFoundFault"
+                },
+                {
+                    "target": "com.amazonaws.rds#InvalidIntegrationStateFault"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Modifies a zero-ETL integration with Amazon Redshift.</p>\n         <note>\n            <p>Currently, you can only modify integrations that have Aurora MySQL source DB clusters. Integrations with Aurora PostgreSQL and RDS sources currently don't support modifying the integration.</p>\n         </note>",
+                "smithy.api#examples": [
+                    {
+                        "title": "To modify a zero-ETL integration",
+                        "documentation": "The following example modifies the name of an existing zero-ETL integration.",
+                        "input": {
+                            "IntegrationIdentifier": "a1b2c3d4-5678-90ab-cdef-EXAMPLE11111",
+                            "IntegrationName": "my-renamed-integration"
+                        },
+                        "output": {
+                            "SourceArn": "arn:aws:rds:us-east-1:123456789012:cluster:my-cluster",
+                            "IntegrationName": "my-renamed-integration",
+                            "IntegrationArn": "arn:aws:rds:us-east-1:123456789012:integration:5b9f3d79-7392-4a3e-896c-58eaa1b53231",
+                            "TargetArn": "arn:aws:redshift-serverless:us-east-1:123456789012:namespace/62c70612-0302-4db7-8414-b5e3e049f0d8",
+                            "Tags": [],
+                            "DataFilter": "include: *.*",
+                            "CreateTime": "2023-12-28T17:20:20.629Z",
+                            "KMSKeyId": "arn:aws:kms:us-east-1:123456789012:key/a1b2c3d4-5678-90ab-cdef-EXAMPLEaaaaa",
+                            "Status": "active"
+                        }
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.rds#ModifyIntegrationMessage": {
+            "type": "structure",
+            "members": {
+                "IntegrationIdentifier": {
+                    "target": "com.amazonaws.rds#IntegrationIdentifier",
+                    "traits": {
+                        "smithy.api#clientOptional": {},
+                        "smithy.api#documentation": "<p>The unique identifier of the integration to modify.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "IntegrationName": {
+                    "target": "com.amazonaws.rds#IntegrationName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A new name for the integration.</p>"
+                    }
+                },
+                "DataFilter": {
+                    "target": "com.amazonaws.rds#DataFilter",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A new data filter for the integration. For more information, see \n            <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_Zero_ETL_Filtering.html\">Data filtering for Aurora zero-ETL integrations with Amazon Redshift</a>.</p>"
+                    }
+                },
+                "Description": {
+                    "target": "com.amazonaws.rds#IntegrationDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A new description for the integration.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#input": {}
             }
         },
         "com.amazonaws.rds#ModifyOptionGroup": {
@@ -24463,7 +24688,7 @@
                 "Action": {
                     "target": "com.amazonaws.rds#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of pending maintenance action that is available for the resource. \n          Valid actions are <code>system-update</code>, <code>db-upgrade</code>, <code>hardware-maintenance</code>, \n          and <code>ca-certificate-rotation</code>.</p>"
+                        "smithy.api#documentation": "<p>The type of pending maintenance action that is available for the resource. </p>\n         <p>For more information about maintenance actions, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_UpgradeDBInstance.Maintenance.html\">Maintaining a DB instance</a>.</p>\n         <p>Valid Values:<code> system-update | db-upgrade | hardware-maintenance | ca-certificate-rotation</code>\n         </p>"
                     }
                 },
                 "AutoAppliedAfterDate": {
@@ -25288,7 +25513,7 @@
             "type": "structure",
             "members": {
                 "DBShardGroupIdentifier": {
-                    "target": "com.amazonaws.rds#String",
+                    "target": "com.amazonaws.rds#DBShardGroupIdentifier",
                     "traits": {
                         "smithy.api#clientOptional": {},
                         "smithy.api#documentation": "<p>The name of the DB shard group to reboot.</p>",
@@ -26754,6 +26979,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Specifies the storage type to be associated with the DB cluster.</p>\n         <p>Valid Values: <code>aurora</code>, <code>aurora-iopt1</code>\n         </p>\n         <p>Default: <code>aurora</code>\n         </p>\n         <p>Valid for: Aurora DB clusters only</p>"
                     }
+                },
+                "EngineLifecycleSupport": {
+                    "target": "com.amazonaws.rds#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The life cycle type for this DB cluster.</p>\n         <note>\n            <p>By default, this value is set to <code>open-source-rds-extended-support</code>, which enrolls your DB cluster into Amazon RDS Extended Support. \n              At the end of standard support, you can avoid charges for Extended Support by setting the value to <code>open-source-rds-extended-support-disabled</code>. In this case, \n              RDS automatically upgrades your restored DB cluster to a higher engine version, if the major engine version is past its end of standard support date.</p>\n         </note>\n         <p>You can use this setting to enroll your DB cluster into Amazon RDS Extended Support. With RDS Extended Support, \n        you can run the selected major engine version on your DB cluster past the end of standard support for that engine version. For more information, see the following sections:</p>\n         <ul>\n            <li>\n               <p>Amazon Aurora (PostgreSQL only) - <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/extended-support.html\">Using Amazon RDS Extended Support</a> in the <i>Amazon Aurora User Guide</i>\n               </p>\n            </li>\n            <li>\n               <p>Amazon RDS - <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/extended-support.html\">Using Amazon RDS Extended Support</a> in the <i>Amazon RDS User Guide</i>\n               </p>\n            </li>\n         </ul>\n         <p>Valid for Cluster Type: Aurora DB clusters and Multi-AZ DB clusters</p>\n         <p>Valid Values: <code>open-source-rds-extended-support | open-source-rds-extended-support-disabled</code>\n         </p>\n         <p>Default: <code>open-source-rds-extended-support</code>\n         </p>"
+                    }
                 }
             },
             "traits": {
@@ -27083,6 +27314,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Reserved for future use.</p>"
                     }
+                },
+                "EngineLifecycleSupport": {
+                    "target": "com.amazonaws.rds#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The life cycle type for this DB cluster.</p>\n         <note>\n            <p>By default, this value is set to <code>open-source-rds-extended-support</code>, which enrolls your DB cluster into Amazon RDS Extended Support. \n              At the end of standard support, you can avoid charges for Extended Support by setting the value to <code>open-source-rds-extended-support-disabled</code>. In this case, \n              RDS automatically upgrades your restored DB cluster to a higher engine version, if the major engine version is past its end of standard support date.</p>\n         </note>\n         <p>You can use this setting to enroll your DB cluster into Amazon RDS Extended Support. With RDS Extended Support, \n        you can run the selected major engine version on your DB cluster past the end of standard support for that engine version. For more information, see the following sections:</p>\n         <ul>\n            <li>\n               <p>Amazon Aurora (PostgreSQL only) - <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/extended-support.html\">Using Amazon RDS Extended Support</a> in the <i>Amazon Aurora User Guide</i>\n               </p>\n            </li>\n            <li>\n               <p>Amazon RDS - <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/extended-support.html\">Using Amazon RDS Extended Support</a> in the <i>Amazon RDS User Guide</i>\n               </p>\n            </li>\n         </ul>\n         <p>Valid for Cluster Type: Aurora DB clusters and Multi-AZ DB clusters</p>\n         <p>Valid Values: <code>open-source-rds-extended-support | open-source-rds-extended-support-disabled</code>\n         </p>\n         <p>Default: <code>open-source-rds-extended-support</code>\n         </p>"
+                    }
                 }
             },
             "traits": {
@@ -27406,6 +27643,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Reserved for future use.</p>"
                     }
+                },
+                "EngineLifecycleSupport": {
+                    "target": "com.amazonaws.rds#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The life cycle type for this DB cluster.</p>\n         <note>\n            <p>By default, this value is set to <code>open-source-rds-extended-support</code>, which enrolls your DB cluster into Amazon RDS Extended Support. \n              At the end of standard support, you can avoid charges for Extended Support by setting the value to <code>open-source-rds-extended-support-disabled</code>. In this case, \n              RDS automatically upgrades your restored DB cluster to a higher engine version, if the major engine version is past its end of standard support date.</p>\n         </note>\n         <p>You can use this setting to enroll your DB cluster into Amazon RDS Extended Support. With RDS Extended Support, \n        you can run the selected major engine version on your DB cluster past the end of standard support for that engine version. For more information, see the following sections:</p>\n         <ul>\n            <li>\n               <p>Amazon Aurora (PostgreSQL only) - <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/extended-support.html\">Using Amazon RDS Extended Support</a> in the <i>Amazon Aurora User Guide</i>\n               </p>\n            </li>\n            <li>\n               <p>Amazon RDS - <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/extended-support.html\">Using Amazon RDS Extended Support</a> in the <i>Amazon RDS User Guide</i>\n               </p>\n            </li>\n         </ul>\n         <p>Valid for Cluster Type: Aurora DB clusters and Multi-AZ DB clusters</p>\n         <p>Valid Values: <code>open-source-rds-extended-support | open-source-rds-extended-support-disabled</code>\n         </p>\n         <p>Default: <code>open-source-rds-extended-support</code>\n         </p>"
+                    }
                 }
             },
             "traits": {
@@ -27438,6 +27681,9 @@
                 },
                 {
                     "target": "com.amazonaws.rds#BackupPolicyNotFoundFault"
+                },
+                {
+                    "target": "com.amazonaws.rds#CertificateNotFoundFault"
                 },
                 {
                     "target": "com.amazonaws.rds#DBClusterSnapshotNotFoundFault"
@@ -27600,7 +27846,7 @@
                 "LicenseModel": {
                     "target": "com.amazonaws.rds#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>License model information for the restored DB instance.</p>\n         <p>This setting doesn't apply to RDS Custom.</p>\n         <p>Default: Same as source.</p>\n         <p>Valid Values:  <code>license-included</code> | <code>bring-your-own-license</code> | <code>general-public-license</code>\n         </p>"
+                        "smithy.api#documentation": "<p>License model information for the restored DB instance.</p>\n         <note>\n            <p>License models for RDS for Db2 require additional configuration. The Bring Your\n                Own License (BYOL) model requires a custom parameter group. The Db2 license through\n                Amazon Web Services Marketplace model requires an Amazon Web Services Marketplace subscription. For more\n                information, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/db2-licensing.html\">RDS for Db2 licensing\n                    options</a> in the <i>Amazon RDS User Guide</i>.</p>\n         </note>\n         <p>This setting doesn't apply to Amazon Aurora or RDS Custom DB instances.</p>\n         <p>Valid Values:</p>\n         <ul>\n            <li>\n               <p>RDS for Db2 - <code>bring-your-own-license | marketplace-license</code>\n               </p>\n            </li>\n            <li>\n               <p>RDS for MariaDB - <code>general-public-license</code>\n               </p>\n            </li>\n            <li>\n               <p>RDS for Microsoft SQL Server - <code>license-included</code>\n               </p>\n            </li>\n            <li>\n               <p>RDS for MySQL - <code>general-public-license</code>\n               </p>\n            </li>\n            <li>\n               <p>RDS for Oracle - <code>bring-your-own-license | license-included</code>\n               </p>\n            </li>\n            <li>\n               <p>RDS for PostgreSQL - <code>postgresql-license</code>\n               </p>\n            </li>\n         </ul>\n         <p>Default: Same as the source.</p>"
                     }
                 },
                 "DBName": {
@@ -27633,7 +27879,7 @@
                 "StorageType": {
                     "target": "com.amazonaws.rds#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the storage type to be associated with the DB instance.</p>\n         <p>Valid Values: <code>gp2 | gp3 | io1 | standard</code>\n         </p>\n         <p>If you specify <code>io1</code> or <code>gp3</code>, you must also include a value for the\n            <code>Iops</code> parameter.</p>\n         <p>Default: <code>io1</code> if the <code>Iops</code> parameter\n            is specified, otherwise <code>gp2</code>\n         </p>"
+                        "smithy.api#documentation": "<p>Specifies the storage type to be associated with the DB instance.</p>\n         <p>Valid Values: <code>gp2 | gp3 | io1 | io2 | standard</code>\n         </p>\n         <p>If you specify <code>io1</code>, <code>io2</code>, or <code>gp3</code>, you must also include a value for the\n            <code>Iops</code> parameter.</p>\n         <p>Default: <code>io1</code> if the <code>Iops</code> parameter\n            is specified, otherwise <code>gp2</code>\n         </p>"
                     }
                 },
                 "TdeCredentialArn": {
@@ -27765,7 +28011,7 @@
                 "DBClusterSnapshotIdentifier": {
                     "target": "com.amazonaws.rds#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier for the RDS for MySQL Multi-AZ DB cluster snapshot to restore from.</p>\n         <p>For more information on Multi-AZ DB clusters, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/multi-az-db-clusters-concepts.html\"> Multi-AZ DB\n                cluster deployments</a> in the <i>Amazon RDS User\n            Guide</i>.</p>\n         <p>Constraints:</p>\n         <ul>\n            <li>\n               <p>Must match the identifier of an existing Multi-AZ DB cluster snapshot.</p>\n            </li>\n            <li>\n               <p>Can't be specified when <code>DBSnapshotIdentifier</code> is specified.</p>\n            </li>\n            <li>\n               <p>Must be specified when <code>DBSnapshotIdentifier</code> isn't specified.</p>\n            </li>\n            <li>\n               <p>If you are restoring from a shared manual Multi-AZ DB cluster snapshot, the <code>DBClusterSnapshotIdentifier</code>\n                    must be the ARN of the shared snapshot.</p>\n            </li>\n            <li>\n               <p>Can't be the identifier of an Aurora DB cluster snapshot.</p>\n            </li>\n            <li>\n               <p>Can't be the identifier of an RDS for PostgreSQL Multi-AZ DB cluster snapshot.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The identifier for the Multi-AZ DB cluster snapshot to restore from.</p>\n         <p>For more information on Multi-AZ DB clusters, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/multi-az-db-clusters-concepts.html\"> Multi-AZ DB\n                cluster deployments</a> in the <i>Amazon RDS User\n            Guide</i>.</p>\n         <p>Constraints:</p>\n         <ul>\n            <li>\n               <p>Must match the identifier of an existing Multi-AZ DB cluster snapshot.</p>\n            </li>\n            <li>\n               <p>Can't be specified when <code>DBSnapshotIdentifier</code> is specified.</p>\n            </li>\n            <li>\n               <p>Must be specified when <code>DBSnapshotIdentifier</code> isn't specified.</p>\n            </li>\n            <li>\n               <p>If you are restoring from a shared manual Multi-AZ DB cluster snapshot, the <code>DBClusterSnapshotIdentifier</code>\n                    must be the ARN of the shared snapshot.</p>\n            </li>\n            <li>\n               <p>Can't be the identifier of an Aurora DB cluster snapshot.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "AllocatedStorage": {
@@ -27778,6 +28024,18 @@
                     "target": "com.amazonaws.rds#BooleanOptional",
                     "traits": {
                         "smithy.api#documentation": "<p>Specifies whether to enable a dedicated log volume (DLV) for the DB instance.</p>"
+                    }
+                },
+                "CACertificateIdentifier": {
+                    "target": "com.amazonaws.rds#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The CA certificate identifier to use for the DB instance's server certificate.</p>\n         <p>This setting doesn't apply to RDS Custom DB instances.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/UsingWithRDS.SSL.html\">Using SSL/TLS to encrypt a connection to a DB \n            instance</a> in the <i>Amazon RDS User Guide</i> and \n            <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/UsingWithRDS.SSL.html\">\n                Using SSL/TLS to encrypt a connection to a DB cluster</a> in the <i>Amazon Aurora \n                    User Guide</i>.</p>"
+                    }
+                },
+                "EngineLifecycleSupport": {
+                    "target": "com.amazonaws.rds#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The life cycle type for this DB instance.</p>\n         <note>\n            <p>By default, this value is set to <code>open-source-rds-extended-support</code>, which enrolls your DB instance into Amazon RDS Extended Support. \n              At the end of standard support, you can avoid charges for Extended Support by setting the value to <code>open-source-rds-extended-support-disabled</code>. In this case,  \n              RDS automatically upgrades your restored DB instance to a higher engine version, if the major engine version is past its end of standard support date.</p>\n         </note>\n         <p>You can use this setting to enroll your DB instance into Amazon RDS Extended Support. With RDS Extended Support, \n        you can run the selected major engine version on your DB instance past the end of standard support for that engine version. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/extended-support.html\">Using Amazon RDS Extended Support</a> in the <i>Amazon RDS User Guide</i>.</p>\n         <p>This setting applies only to RDS for MySQL and RDS for PostgreSQL. For Amazon Aurora DB instances, the life cycle type is managed by the DB cluster.</p>\n         <p>Valid Values: <code>open-source-rds-extended-support | open-source-rds-extended-support-disabled</code>\n         </p>\n         <p>Default: <code>open-source-rds-extended-support</code>\n         </p>"
                     }
                 }
             },
@@ -27811,6 +28069,9 @@
                 },
                 {
                     "target": "com.amazonaws.rds#BackupPolicyNotFoundFault"
+                },
+                {
+                    "target": "com.amazonaws.rds#CertificateNotFoundFault"
                 },
                 {
                     "target": "com.amazonaws.rds#DBInstanceAlreadyExistsFault"
@@ -28021,7 +28282,7 @@
                 "StorageType": {
                     "target": "com.amazonaws.rds#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the storage type to be associated with the DB instance.</p>\n         <p>Valid Values: <code>gp2 | gp3 | io1 | standard</code>\n         </p>\n         <p>If you specify <code>io1</code> or <code>gp3</code>, \n            you must also include a value for the <code>Iops</code> parameter.</p>\n         <p>Default: <code>io1</code> \n            if the <code>Iops</code> parameter is specified; \n            otherwise <code>gp2</code>\n         </p>"
+                        "smithy.api#documentation": "<p>Specifies the storage type to be associated with the DB instance.</p>\n         <p>Valid Values: <code>gp2 | gp3 | io1 | io2 | standard</code>\n         </p>\n         <p>If you specify <code>io1</code>, <code>io2</code>, or <code>gp3</code>, \n            you must also include a value for the <code>Iops</code> parameter.</p>\n         <p>Default: <code>io1</code> \n            if the <code>Iops</code> parameter is specified; \n            otherwise <code>gp2</code>\n         </p>"
                     }
                 },
                 "StorageEncrypted": {
@@ -28094,7 +28355,7 @@
                     "target": "com.amazonaws.rds#String",
                     "traits": {
                         "smithy.api#clientOptional": {},
-                        "smithy.api#documentation": "<p>An Amazon Web Services Identity and Access Management (IAM) role to allow Amazon RDS to access your Amazon S3 bucket.</p>",
+                        "smithy.api#documentation": "<p>An Amazon Web Services Identity and Access Management (IAM) role with a trust policy and a permissions policy that allows Amazon RDS to access your Amazon S3 bucket. \n        For information about this role,\n            see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/MySQL.Procedural.Importing.html#MySQL.Procedural.Importing.Enabling.IAM\">\n            Creating an IAM role manually</a> in the <i>Amazon RDS User Guide.</i>\n         </p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -28175,6 +28436,18 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Specifies whether to enable a dedicated log volume (DLV) for the DB instance.</p>"
                     }
+                },
+                "CACertificateIdentifier": {
+                    "target": "com.amazonaws.rds#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The CA certificate identifier to use for the DB instance's server certificate.</p>\n         <p>This setting doesn't apply to RDS Custom DB instances.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/UsingWithRDS.SSL.html\">Using SSL/TLS to encrypt a connection to a DB \n            instance</a> in the <i>Amazon RDS User Guide</i> and \n            <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/UsingWithRDS.SSL.html\">\n                Using SSL/TLS to encrypt a connection to a DB cluster</a> in the <i>Amazon Aurora \n                    User Guide</i>.</p>"
+                    }
+                },
+                "EngineLifecycleSupport": {
+                    "target": "com.amazonaws.rds#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The life cycle type for this DB instance.</p>\n         <note>\n            <p>By default, this value is set to <code>open-source-rds-extended-support</code>, which enrolls your DB instance into Amazon RDS Extended Support. \n              At the end of standard support, you can avoid charges for Extended Support by setting the value to <code>open-source-rds-extended-support-disabled</code>. In this case,  \n              RDS automatically upgrades your restored DB instance to a higher engine version, if the major engine version is past its end of standard support date.</p>\n         </note>\n         <p>You can use this setting to enroll your DB instance into Amazon RDS Extended Support. With RDS Extended Support, \n        you can run the selected major engine version on your DB instance past the end of standard support for that engine version. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/extended-support.html\">Using Amazon RDS Extended Support</a> in the <i>Amazon RDS User Guide</i>.</p>\n         <p>This setting applies only to RDS for MySQL and RDS for PostgreSQL. For Amazon Aurora DB instances, the life cycle type is managed by the DB cluster.</p>\n         <p>Valid Values: <code>open-source-rds-extended-support | open-source-rds-extended-support-disabled</code>\n         </p>\n         <p>Default: <code>open-source-rds-extended-support</code>\n         </p>"
+                    }
                 }
             },
             "traits": {
@@ -28206,6 +28479,9 @@
                 },
                 {
                     "target": "com.amazonaws.rds#BackupPolicyNotFoundFault"
+                },
+                {
+                    "target": "com.amazonaws.rds#CertificateNotFoundFault"
                 },
                 {
                     "target": "com.amazonaws.rds#DBInstanceAlreadyExistsFault"
@@ -28442,7 +28718,7 @@
                 "LicenseModel": {
                     "target": "com.amazonaws.rds#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The license model information for the restored DB instance.</p>\n         <p>This setting doesn't apply to RDS Custom.</p>\n         <p>Valid Values: <code>license-included</code> | <code>bring-your-own-license</code> | <code>general-public-license</code>\n         </p>\n         <p>Default: Same as the source.</p>"
+                        "smithy.api#documentation": "<p>The license model information for the restored DB instance.</p>\n         <note>\n            <p>License models for RDS for Db2 require additional configuration. The Bring Your\n                Own License (BYOL) model requires a custom parameter group. The Db2 license through\n                Amazon Web Services Marketplace model requires an Amazon Web Services Marketplace subscription. For more\n                information, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/db2-licensing.html\">RDS for Db2 licensing\n                    options</a> in the <i>Amazon RDS User Guide</i>.</p>\n         </note>\n         <p>This setting doesn't apply to Amazon Aurora or RDS Custom DB instances.</p>\n         <p>Valid Values:</p>\n         <ul>\n            <li>\n               <p>RDS for Db2 - <code>bring-your-own-license | marketplace-license</code>\n               </p>\n            </li>\n            <li>\n               <p>RDS for MariaDB - <code>general-public-license</code>\n               </p>\n            </li>\n            <li>\n               <p>RDS for Microsoft SQL Server - <code>license-included</code>\n               </p>\n            </li>\n            <li>\n               <p>RDS for MySQL - <code>general-public-license</code>\n               </p>\n            </li>\n            <li>\n               <p>RDS for Oracle - <code>bring-your-own-license | license-included</code>\n               </p>\n            </li>\n            <li>\n               <p>RDS for PostgreSQL - <code>postgresql-license</code>\n               </p>\n            </li>\n         </ul>\n         <p>Default: Same as the source.</p>"
                     }
                 },
                 "DBName": {
@@ -28481,7 +28757,7 @@
                 "StorageType": {
                     "target": "com.amazonaws.rds#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The storage type to associate with the DB instance.</p>\n         <p>Valid Values: <code>gp2 | gp3 | io1 | standard</code>\n         </p>\n         <p>Default: <code>io1</code>, if the <code>Iops</code> parameter\n            is specified. Otherwise, <code>gp2</code>.</p>\n         <p>Constraints:</p>\n         <ul>\n            <li>\n               <p>If you specify <code>io1</code> or <code>gp3</code>, you must also include a value for the\n            <code>Iops</code> parameter.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The storage type to associate with the DB instance.</p>\n         <p>Valid Values: <code>gp2 | gp3 | io1 | io2 | standard</code>\n         </p>\n         <p>Default: <code>io1</code>, if the <code>Iops</code> parameter\n            is specified. Otherwise, <code>gp2</code>.</p>\n         <p>Constraints:</p>\n         <ul>\n            <li>\n               <p>If you specify <code>io1</code>, <code>io2</code>, or <code>gp3</code>, you must also include a value for the\n            <code>Iops</code> parameter.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "TdeCredentialArn": {
@@ -28632,6 +28908,18 @@
                     "target": "com.amazonaws.rds#BooleanOptional",
                     "traits": {
                         "smithy.api#documentation": "<p>Specifies whether to enable a dedicated log volume (DLV) for the DB instance.</p>"
+                    }
+                },
+                "CACertificateIdentifier": {
+                    "target": "com.amazonaws.rds#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The CA certificate identifier to use for the DB instance's server certificate.</p>\n         <p>This setting doesn't apply to RDS Custom DB instances.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/UsingWithRDS.SSL.html\">Using SSL/TLS to encrypt a connection to a DB \n                instance</a> in the <i>Amazon RDS User Guide</i> and \n                <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/UsingWithRDS.SSL.html\">\n                    Using SSL/TLS to encrypt a connection to a DB cluster</a> in the <i>Amazon Aurora \n                        User Guide</i>.</p>"
+                    }
+                },
+                "EngineLifecycleSupport": {
+                    "target": "com.amazonaws.rds#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The life cycle type for this DB instance.</p>\n         <note>\n            <p>By default, this value is set to <code>open-source-rds-extended-support</code>, which enrolls your DB instance into Amazon RDS Extended Support. \n              At the end of standard support, you can avoid charges for Extended Support by setting the value to <code>open-source-rds-extended-support-disabled</code>. In this case, \n              RDS automatically upgrades your restored DB instance to a higher engine version, if the major engine version is past its end of standard support date.</p>\n         </note>\n         <p>You can use this setting to enroll your DB instance into Amazon RDS Extended Support. With RDS Extended Support, \n        you can run the selected major engine version on your DB instance past the end of standard support for that engine version. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/extended-support.html\">Using Amazon RDS Extended Support</a> in the <i>Amazon RDS User Guide</i>.</p>\n         <p>This setting applies only to RDS for MySQL and RDS for PostgreSQL. For Amazon Aurora DB instances, the life cycle type is managed by the DB cluster.</p>\n         <p>Valid Values: <code>open-source-rds-extended-support | open-source-rds-extended-support-disabled</code>\n         </p>\n         <p>Default: <code>open-source-rds-extended-support</code>\n         </p>"
                     }
                 }
             },
@@ -30466,7 +30754,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Metadata assigned to an Amazon RDS resource consisting of a key-value pair.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html\">Tagging \n            Amazon RDS Resources</a> in the <i>Amazon RDS User Guide.</i>\n         </p>"
+                "smithy.api#documentation": "<p>Metadata assigned to an Amazon RDS resource consisting of a key-value pair.</p>\n         <p>For more information, see\n            <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html\">Tagging Amazon RDS Resources</a> in the <i>Amazon RDS User Guide</i>\n            or <a href=\"https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_Tagging.html\">Tagging Amazon Aurora and Amazon RDS Resources</a> in the <i>Amazon Aurora User Guide</i>.\n            </p>"
             }
         },
         "com.amazonaws.rds#TagList": {
@@ -30916,7 +31204,7 @@
                 "AutoUpgrade": {
                     "target": "com.amazonaws.rds#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>Indicates whether the target version is applied to any source DB instances that have <code>AutoMinorVersionUpgrade</code> set to true.</p>"
+                        "smithy.api#documentation": "<p>Indicates whether the target version is applied to any source DB instances that have <code>AutoMinorVersionUpgrade</code> set to true.</p>\n         <p>This parameter is dynamic, and is set by RDS.</p>"
                     }
                 },
                 "IsMajorVersionUpgrade": {
@@ -30947,6 +31235,12 @@
                     "target": "com.amazonaws.rds#BooleanOptional",
                     "traits": {
                         "smithy.api#documentation": "<p>Indicates whether you can use Babelfish for Aurora PostgreSQL with the target engine version.</p>"
+                    }
+                },
+                "SupportsLimitlessDatabase": {
+                    "target": "com.amazonaws.rds#BooleanOptional",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether the DB engine version supports Aurora Limitless Database.</p>"
                     }
                 },
                 "SupportsLocalWriteForwarding": {
@@ -31098,7 +31392,7 @@
                 "StorageType": {
                     "target": "com.amazonaws.rds#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The valid storage types for your DB instance.\n            For example: gp2, gp3, io1.</p>"
+                        "smithy.api#documentation": "<p>The valid storage types for your DB instance.\n            For example: gp2, gp3, io1, io2.</p>"
                     }
                 },
                 "StorageSize": {

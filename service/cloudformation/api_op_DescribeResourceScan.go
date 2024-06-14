@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/cloudformation/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -59,8 +58,10 @@ type DescribeResourceScanOutput struct {
 	ResourceTypes []string
 
 	// The number of resources that were read. This is only available for scans with a
-	// Status set to COMPLETE , EXPIRED , or FAILED . This field may be 0 if the
-	// resource scan failed with a ResourceScanLimitExceededException .
+	// Status set to COMPLETE , EXPIRED , or FAILED .
+	//
+	// This field may be 0 if the resource scan failed with a
+	// ResourceScanLimitExceededException .
 	ResourcesRead *int32
 
 	// The number of resources that were listed. This is only available for scans with
@@ -70,8 +71,14 @@ type DescribeResourceScanOutput struct {
 	// The time that the resource scan was started.
 	StartTime *time.Time
 
-	// Status of the resource scan. INPROGRESS The resource scan is still in progress.
-	// COMPLETE The resource scan is complete. EXPIRED The resource scan has expired.
+	// Status of the resource scan.
+	//
+	// INPROGRESS The resource scan is still in progress.
+	//
+	// COMPLETE The resource scan is complete.
+	//
+	// EXPIRED The resource scan has expired.
+	//
 	// FAILED The resource scan has failed.
 	Status types.ResourceScanStatus
 
@@ -107,25 +114,25 @@ func (c *Client) addOperationDescribeResourceScanMiddlewares(stack *middleware.S
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -140,13 +147,16 @@ func (c *Client) addOperationDescribeResourceScanMiddlewares(stack *middleware.S
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDescribeResourceScanValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeResourceScan(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

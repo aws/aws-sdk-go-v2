@@ -6,13 +6,16 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
-// initiate an investigation on an entity in a graph
+// Detective investigations lets you investigate IAM users and IAM roles using
+// indicators of compromise. An indicator of compromise (IOC) is an artifact
+// observed in or on a network, system, or environment that can (with a high level
+// of confidence) identify malicious activity or a security incident.
+// StartInvestigation initiates an investigation on an entity in a behavior graph.
 func (c *Client) StartInvestigation(ctx context.Context, params *StartInvestigationInput, optFns ...func(*Options)) (*StartInvestigationOutput, error) {
 	if params == nil {
 		params = &StartInvestigationInput{}
@@ -35,12 +38,12 @@ type StartInvestigationInput struct {
 	// This member is required.
 	EntityArn *string
 
-	// The ARN of the behavior graph.
+	// The Amazon Resource Name (ARN) of the behavior graph.
 	//
 	// This member is required.
 	GraphArn *string
 
-	// The data and time when the investigation began. The value is an UTC ISO8601
+	// The data and time when the investigation ended. The value is an UTC ISO8601
 	// formatted string. For example, 2021-08-18T16:35:56.284Z .
 	//
 	// This member is required.
@@ -88,25 +91,25 @@ func (c *Client) addOperationStartInvestigationMiddlewares(stack *middleware.Sta
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -121,13 +124,16 @@ func (c *Client) addOperationStartInvestigationMiddlewares(stack *middleware.Sta
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpStartInvestigationValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opStartInvestigation(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/elasticloadbalancingv2/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -14,18 +13,26 @@ import (
 
 // Deregisters the specified targets from the specified target group. After the
 // targets are deregistered, they no longer receive traffic from the load balancer.
+//
 // The load balancer stops sending requests to targets that are deregistering, but
 // uses connection draining to ensure that in-flight traffic completes on the
 // existing connections. This deregistration delay is configured by default but can
-// be updated for each target group. For more information, see the following:
-//   - Deregistration delay (https://docs.aws.amazon.com/elasticloadbalancing/latest/application/load-balancer-target-groups.html#deregistration-delay)
-//     in the Application Load Balancers User Guide
-//   - Deregistration delay (https://docs.aws.amazon.com/elasticloadbalancing/latest/network/load-balancer-target-groups.html#deregistration-delay)
-//     in the Network Load Balancers User Guide
-//   - Deregistration delay (https://docs.aws.amazon.com/elasticloadbalancing/latest/gateway/target-groups.html#deregistration-delay)
-//     in the Gateway Load Balancers User Guide
+// be updated for each target group.
+//
+// For more information, see the following:
+//
+// [Deregistration delay]
+//   - in the Application Load Balancers User Guide
+//
+// [Deregistration delay]
+//   - in the Network Load Balancers User Guide
+//
+// [Deregistration delay]
+//   - in the Gateway Load Balancers User Guide
 //
 // Note: If the specified target does not exist, the action returns successfully.
+//
+// [Deregistration delay]: https://docs.aws.amazon.com/elasticloadbalancing/latest/gateway/target-groups.html#deregistration-delay
 func (c *Client) DeregisterTargets(ctx context.Context, params *DeregisterTargetsInput, optFns ...func(*Options)) (*DeregisterTargetsOutput, error) {
 	if params == nil {
 		params = &DeregisterTargetsInput{}
@@ -86,25 +93,25 @@ func (c *Client) addOperationDeregisterTargetsMiddlewares(stack *middleware.Stac
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -119,13 +126,16 @@ func (c *Client) addOperationDeregisterTargetsMiddlewares(stack *middleware.Stac
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDeregisterTargetsValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDeregisterTargets(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

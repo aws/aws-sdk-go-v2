@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -14,17 +13,24 @@ import (
 
 // Creates a lifecycle configuration that you can associate with a notebook
 // instance. A lifecycle configuration is a collection of shell scripts that run
-// when you create or start a notebook instance. Each lifecycle configuration
-// script has a limit of 16384 characters. The value of the $PATH environment
-// variable that is available to both scripts is /sbin:bin:/usr/sbin:/usr/bin .
+// when you create or start a notebook instance.
+//
+// Each lifecycle configuration script has a limit of 16384 characters.
+//
+// The value of the $PATH environment variable that is available to both scripts
+// is /sbin:bin:/usr/sbin:/usr/bin .
+//
 // View Amazon CloudWatch Logs for notebook instance lifecycle configurations in
 // log group /aws/sagemaker/NotebookInstances in log stream
-// [notebook-instance-name]/[LifecycleConfigHook] . Lifecycle configuration scripts
-// cannot run for longer than 5 minutes. If a script runs for longer than 5
-// minutes, it fails and the notebook instance is not created or started. For
-// information about notebook instance lifestyle configurations, see Step 2.1:
-// (Optional) Customize a Notebook Instance (https://docs.aws.amazon.com/sagemaker/latest/dg/notebook-lifecycle-config.html)
-// .
+// [notebook-instance-name]/[LifecycleConfigHook] .
+//
+// Lifecycle configuration scripts cannot run for longer than 5 minutes. If a
+// script runs for longer than 5 minutes, it fails and the notebook instance is not
+// created or started.
+//
+// For information about notebook instance lifestyle configurations, see [Step 2.1: (Optional) Customize a Notebook Instance].
+//
+// [Step 2.1: (Optional) Customize a Notebook Instance]: https://docs.aws.amazon.com/sagemaker/latest/dg/notebook-lifecycle-config.html
 func (c *Client) CreateNotebookInstanceLifecycleConfig(ctx context.Context, params *CreateNotebookInstanceLifecycleConfigInput, optFns ...func(*Options)) (*CreateNotebookInstanceLifecycleConfigOutput, error) {
 	if params == nil {
 		params = &CreateNotebookInstanceLifecycleConfigInput{}
@@ -92,25 +98,25 @@ func (c *Client) addOperationCreateNotebookInstanceLifecycleConfigMiddlewares(st
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -125,13 +131,16 @@ func (c *Client) addOperationCreateNotebookInstanceLifecycleConfigMiddlewares(st
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpCreateNotebookInstanceLifecycleConfigValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateNotebookInstanceLifecycleConfig(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

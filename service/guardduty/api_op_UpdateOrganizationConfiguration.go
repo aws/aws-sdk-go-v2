@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/guardduty/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -14,10 +13,19 @@ import (
 
 // Configures the delegated administrator account with the provided values. You
 // must provide a value for either autoEnableOrganizationMembers or autoEnable ,
-// but not both. There might be regional differences because some data sources
-// might not be available in all the Amazon Web Services Regions where GuardDuty is
-// presently supported. For more information, see Regions and endpoints (https://docs.aws.amazon.com/guardduty/latest/ug/guardduty_regions.html)
-// .
+// but not both.
+//
+// Specifying both EKS Runtime Monitoring ( EKS_RUNTIME_MONITORING ) and Runtime
+// Monitoring ( RUNTIME_MONITORING ) will cause an error. You can add only one of
+// these two features because Runtime Monitoring already includes the threat
+// detection for Amazon EKS resources. For more information, see [Runtime Monitoring].
+//
+// There might be regional differences because some data sources might not be
+// available in all the Amazon Web Services Regions where GuardDuty is presently
+// supported. For more information, see [Regions and endpoints].
+//
+// [Regions and endpoints]: https://docs.aws.amazon.com/guardduty/latest/ug/guardduty_regions.html
+// [Runtime Monitoring]: https://docs.aws.amazon.com/guardduty/latest/ug/runtime-monitoring.html
 func (c *Client) UpdateOrganizationConfiguration(ctx context.Context, params *UpdateOrganizationConfigurationInput, optFns ...func(*Options)) (*UpdateOrganizationConfigurationOutput, error) {
 	if params == nil {
 		params = &UpdateOrganizationConfigurationInput{}
@@ -41,7 +49,9 @@ type UpdateOrganizationConfigurationInput struct {
 	DetectorId *string
 
 	// Represents whether or not to automatically enable member accounts in the
-	// organization. Even though this is still supported, we recommend using
+	// organization.
+	//
+	// Even though this is still supported, we recommend using
 	// AutoEnableOrganizationMembers to achieve the similar results. You must provide a
 	// value for either autoEnableOrganizationMembers or autoEnable .
 	//
@@ -50,18 +60,30 @@ type UpdateOrganizationConfigurationInput struct {
 
 	// Indicates the auto-enablement configuration of GuardDuty for the member
 	// accounts in the organization. You must provide a value for either
-	// autoEnableOrganizationMembers or autoEnable . Use one of the following
-	// configuration values for autoEnableOrganizationMembers :
+	// autoEnableOrganizationMembers or autoEnable .
+	//
+	// Use one of the following configuration values for autoEnableOrganizationMembers :
+	//
 	//   - NEW : Indicates that when a new account joins the organization, they will
 	//   have GuardDuty enabled automatically.
+	//
 	//   - ALL : Indicates that all accounts in the organization have GuardDuty enabled
 	//   automatically. This includes NEW accounts that join the organization and
 	//   accounts that may have been suspended or removed from the organization in
-	//   GuardDuty. It may take up to 24 hours to update the configuration for all the
-	//   member accounts.
+	//   GuardDuty.
+	//
+	// It may take up to 24 hours to update the configuration for all the member
+	//   accounts.
+	//
 	//   - NONE : Indicates that GuardDuty will not be automatically enabled for any
 	//   account in the organization. The administrator must manage GuardDuty for each
 	//   account in the organization individually.
+	//
+	// When you update the auto-enable setting from ALL or NEW to NONE , this action
+	//   doesn't disable the corresponding option for your existing accounts. This
+	//   configuration will apply to the new accounts that join the organization. After
+	//   you update the auto-enable settings, no new account will have the corresponding
+	//   option as enabled.
 	AutoEnableOrganizationMembers types.AutoEnableMembers
 
 	// Describes which data sources will be updated.
@@ -104,25 +126,25 @@ func (c *Client) addOperationUpdateOrganizationConfigurationMiddlewares(stack *m
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -137,13 +159,16 @@ func (c *Client) addOperationUpdateOrganizationConfigurationMiddlewares(stack *m
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpUpdateOrganizationConfigurationValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateOrganizationConfiguration(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

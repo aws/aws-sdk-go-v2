@@ -6,14 +6,14 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/rds/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a new option group. You can create up to 20 option groups. This command
-// doesn't apply to RDS Custom.
+// Creates a new option group. You can create up to 20 option groups.
+//
+// This command doesn't apply to RDS Custom.
 func (c *Client) CreateOptionGroup(ctx context.Context, params *CreateOptionGroupInput, optFns ...func(*Options)) (*CreateOptionGroupOutput, error) {
 	if params == nil {
 		params = &CreateOptionGroupInput{}
@@ -31,19 +31,34 @@ func (c *Client) CreateOptionGroup(ctx context.Context, params *CreateOptionGrou
 
 type CreateOptionGroupInput struct {
 
-	// The name of the engine to associate this option group with. Valid Values:
+	// The name of the engine to associate this option group with.
+	//
+	// Valid Values:
+	//
 	//   - db2-ae
+	//
 	//   - db2-se
+	//
 	//   - mariadb
+	//
 	//   - mysql
+	//
 	//   - oracle-ee
+	//
 	//   - oracle-ee-cdb
+	//
 	//   - oracle-se2
+	//
 	//   - oracle-se2-cdb
+	//
 	//   - postgres
+	//
 	//   - sqlserver-ee
+	//
 	//   - sqlserver-se
+	//
 	//   - sqlserver-ex
+	//
 	//   - sqlserver-web
 	//
 	// This member is required.
@@ -60,10 +75,16 @@ type CreateOptionGroupInput struct {
 	// This member is required.
 	OptionGroupDescription *string
 
-	// Specifies the name of the option group to be created. Constraints:
+	// Specifies the name of the option group to be created.
+	//
+	// Constraints:
+	//
 	//   - Must be 1 to 255 letters, numbers, or hyphens
+	//
 	//   - First character must be a letter
+	//
 	//   - Can't end with a hyphen or contain two consecutive hyphens
+	//
 	// Example: myoptiongroup
 	//
 	// This member is required.
@@ -108,25 +129,25 @@ func (c *Client) addOperationCreateOptionGroupMiddlewares(stack *middleware.Stac
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -141,13 +162,16 @@ func (c *Client) addOperationCreateOptionGroupMiddlewares(stack *middleware.Stac
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpCreateOptionGroupValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateOptionGroup(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

@@ -18,7 +18,6 @@ import (
 	"github.com/aws/aws-sdk-go-v2/internal/awstesting"
 	"github.com/aws/aws-sdk-go-v2/internal/awstesting/unit"
 	"github.com/aws/smithy-go/logging"
-	"github.com/google/go-cmp/cmp"
 )
 
 func TestResolveCustomCABundle(t *testing.T) {
@@ -514,11 +513,11 @@ func TestResolveDefaultsMode(t *testing.T) {
 				t.Errorf("expect no error, got %v", err)
 			}
 
-			if diff := cmp.Diff(tt.ExpectedDefaultsMode, cfg.DefaultsMode); len(diff) > 0 {
+			if diff := cmpDiff(tt.ExpectedDefaultsMode, cfg.DefaultsMode); len(diff) > 0 {
 				t.Errorf(diff)
 			}
 
-			if diff := cmp.Diff(tt.ExpectedRuntimeEnvironment, cfg.RuntimeEnvironment); len(diff) > 0 {
+			if diff := cmpDiff(tt.ExpectedRuntimeEnvironment, cfg.RuntimeEnvironment); len(diff) > 0 {
 				t.Errorf(diff)
 			}
 		})

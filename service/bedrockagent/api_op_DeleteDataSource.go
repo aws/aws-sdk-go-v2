@@ -6,13 +6,12 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/bedrockagent/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Delete an existing data source
+// Deletes a data source from a knowledge base.
 func (c *Client) DeleteDataSource(ctx context.Context, params *DeleteDataSourceInput, optFns ...func(*Options)) (*DeleteDataSourceOutput, error) {
 	if params == nil {
 		params = &DeleteDataSourceInput{}
@@ -30,12 +29,13 @@ func (c *Client) DeleteDataSource(ctx context.Context, params *DeleteDataSourceI
 
 type DeleteDataSourceInput struct {
 
-	// Identifier for a resource.
+	// The unique identifier of the data source to delete.
 	//
 	// This member is required.
 	DataSourceId *string
 
-	// Identifier for a resource.
+	// The unique identifier of the knowledge base from which to delete the data
+	// source.
 	//
 	// This member is required.
 	KnowledgeBaseId *string
@@ -45,17 +45,18 @@ type DeleteDataSourceInput struct {
 
 type DeleteDataSourceOutput struct {
 
-	// Identifier for a resource.
+	// The unique identifier of the data source that was deleted.
 	//
 	// This member is required.
 	DataSourceId *string
 
-	// Identifier for a resource.
+	// The unique identifier of the knowledge base to which the data source that was
+	// deleted belonged.
 	//
 	// This member is required.
 	KnowledgeBaseId *string
 
-	// The status of a data source.
+	// The status of the data source.
 	//
 	// This member is required.
 	Status types.DataSourceStatus
@@ -88,25 +89,25 @@ func (c *Client) addOperationDeleteDataSourceMiddlewares(stack *middleware.Stack
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -121,13 +122,16 @@ func (c *Client) addOperationDeleteDataSourceMiddlewares(stack *middleware.Stack
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDeleteDataSourceValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteDataSource(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

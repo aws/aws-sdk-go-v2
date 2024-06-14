@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/auditmanager/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -30,25 +29,25 @@ func (c *Client) GetEvidenceByEvidenceFolder(ctx context.Context, params *GetEvi
 
 type GetEvidenceByEvidenceFolderInput struct {
 
-	// The identifier for the assessment.
+	//  The identifier for the assessment.
 	//
 	// This member is required.
 	AssessmentId *string
 
-	// The identifier for the control set.
+	//  The identifier for the control set.
 	//
 	// This member is required.
 	ControlSetId *string
 
-	// The unique identifier for the folder that the evidence is stored in.
+	//  The unique identifier for the folder that the evidence is stored in.
 	//
 	// This member is required.
 	EvidenceFolderId *string
 
-	// Represents the maximum number of results on a page or for an API request call.
+	//  Represents the maximum number of results on a page or for an API request call.
 	MaxResults *int32
 
-	// The pagination token that's used to fetch the next set of results.
+	//  The pagination token that's used to fetch the next set of results.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -56,10 +55,10 @@ type GetEvidenceByEvidenceFolderInput struct {
 
 type GetEvidenceByEvidenceFolderOutput struct {
 
-	// The list of evidence that the GetEvidenceByEvidenceFolder API returned.
+	//  The list of evidence that the GetEvidenceByEvidenceFolder API returned.
 	Evidence []types.Evidence
 
-	// The pagination token that's used to fetch the next set of results.
+	//  The pagination token that's used to fetch the next set of results.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -90,25 +89,25 @@ func (c *Client) addOperationGetEvidenceByEvidenceFolderMiddlewares(stack *middl
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -123,13 +122,16 @@ func (c *Client) addOperationGetEvidenceByEvidenceFolderMiddlewares(stack *middl
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpGetEvidenceByEvidenceFolderValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetEvidenceByEvidenceFolder(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -158,7 +160,7 @@ var _ GetEvidenceByEvidenceFolderAPIClient = (*Client)(nil)
 // GetEvidenceByEvidenceFolderPaginatorOptions is the paginator options for
 // GetEvidenceByEvidenceFolder
 type GetEvidenceByEvidenceFolderPaginatorOptions struct {
-	// Represents the maximum number of results on a page or for an API request call.
+	//  Represents the maximum number of results on a page or for an API request call.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -14,12 +13,16 @@ import (
 // Changes the state of a file transfer protocol-enabled server from ONLINE to
 // OFFLINE . An OFFLINE server cannot accept and process file transfer jobs.
 // Information tied to your server, such as server and user properties, are not
-// affected by stopping your server. Stopping the server does not reduce or impact
-// your file transfer protocol endpoint billing; you must delete the server to stop
-// being billed. The state of STOPPING indicates that the server is in an
-// intermediate state, either not fully able to respond, or not fully offline. The
-// values of STOP_FAILED can indicate an error condition. No response is returned
-// from this call.
+// affected by stopping your server.
+//
+// Stopping the server does not reduce or impact your file transfer protocol
+// endpoint billing; you must delete the server to stop being billed.
+//
+// The state of STOPPING indicates that the server is in an intermediate state,
+// either not fully able to respond, or not fully offline. The values of
+// STOP_FAILED can indicate an error condition.
+//
+// No response is returned from this call.
 func (c *Client) StopServer(ctx context.Context, params *StopServerInput, optFns ...func(*Options)) (*StopServerOutput, error) {
 	if params == nil {
 		params = &StopServerInput{}
@@ -74,25 +77,25 @@ func (c *Client) addOperationStopServerMiddlewares(stack *middleware.Stack, opti
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -107,13 +110,16 @@ func (c *Client) addOperationStopServerMiddlewares(stack *middleware.Stack, opti
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpStopServerValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opStopServer(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

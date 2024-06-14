@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -45,33 +44,52 @@ type UpdateChangesetInput struct {
 
 	// Options that define the structure of the source file(s) including the format
 	// type ( formatType ), header row ( withHeader ), data separation character (
-	// separator ) and the type of compression ( compression ). formatType is a
-	// required attribute and can have the following values:
+	// separator ) and the type of compression ( compression ).
+	//
+	// formatType is a required attribute and can have the following values:
+	//
 	//   - PARQUET – Parquet source file format.
+	//
 	//   - CSV – CSV source file format.
+	//
 	//   - JSON – JSON source file format.
+	//
 	//   - XML – XML source file format.
-	// Here is an example of how you could specify the formatParams :  "formatParams":
-	// { "formatType": "CSV", "withHeader": "true", "separator": ",",
-	// "compression":"None" } Note that if you only provide formatType as CSV , the
-	// rest of the attributes will automatically default to CSV values as following: {
-	// "withHeader": "true", "separator": "," } For more information about supported
-	// file formats, see Supported Data Types and File Formats (https://docs.aws.amazon.com/finspace/latest/userguide/supported-data-types.html)
-	// in the FinSpace User Guide.
+	//
+	// Here is an example of how you could specify the formatParams :
+	//
+	//     "formatParams": { "formatType": "CSV", "withHeader": "true", "separator": ",",
+	//     "compression":"None" }
+	//
+	// Note that if you only provide formatType as CSV , the rest of the attributes
+	// will automatically default to CSV values as following:
+	//
+	//     { "withHeader": "true", "separator": "," }
+	//
+	// For more information about supported file formats, see [Supported Data Types and File Formats] in the FinSpace User
+	// Guide.
+	//
+	// [Supported Data Types and File Formats]: https://docs.aws.amazon.com/finspace/latest/userguide/supported-data-types.html
 	//
 	// This member is required.
 	FormatParams map[string]string
 
 	// Options that define the location of the data being ingested ( s3SourcePath ) and
-	// the source of the changeset ( sourceType ). Both s3SourcePath and sourceType
-	// are required attributes. Here is an example of how you could specify the
-	// sourceParams :  "sourceParams": { "s3SourcePath":
-	// "s3://finspace-landing-us-east-2-bk7gcfvitndqa6ebnvys4d/scratch/wr5hh8pwkpqqkxa4sxrmcw/ingestion/equity.csv",
-	// "sourceType": "S3" } The S3 path that you specify must allow the FinSpace role
-	// access. To do that, you first need to configure the IAM policy on S3 bucket. For
-	// more information, see Loading data from an Amazon S3 Bucket using the FinSpace
-	// API (https://docs.aws.amazon.com/finspace/latest/data-api/fs-using-the-finspace-api.html#access-s3-buckets)
-	// section.
+	// the source of the changeset ( sourceType ).
+	//
+	// Both s3SourcePath and sourceType are required attributes.
+	//
+	// Here is an example of how you could specify the sourceParams :
+	//
+	//     "sourceParams": { "s3SourcePath":
+	//     "s3://finspace-landing-us-east-2-bk7gcfvitndqa6ebnvys4d/scratch/wr5hh8pwkpqqkxa4sxrmcw/ingestion/equity.csv",
+	//     "sourceType": "S3" }
+	//
+	// The S3 path that you specify must allow the FinSpace role access. To do that,
+	// you first need to configure the IAM policy on S3 bucket. For more information,
+	// see [Loading data from an Amazon S3 Bucket using the FinSpace API]section.
+	//
+	// [Loading data from an Amazon S3 Bucket using the FinSpace API]: https://docs.aws.amazon.com/finspace/latest/data-api/fs-using-the-finspace-api.html#access-s3-buckets
 	//
 	// This member is required.
 	SourceParams map[string]string
@@ -120,25 +138,25 @@ func (c *Client) addOperationUpdateChangesetMiddlewares(stack *middleware.Stack,
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -156,6 +174,9 @@ func (c *Client) addOperationUpdateChangesetMiddlewares(stack *middleware.Stack,
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opUpdateChangesetMiddleware(stack, options); err != nil {
 		return err
 	}
@@ -165,7 +186,7 @@ func (c *Client) addOperationUpdateChangesetMiddlewares(stack *middleware.Stack,
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateChangeset(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

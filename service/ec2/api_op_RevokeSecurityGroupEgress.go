@@ -6,27 +6,31 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Removes the specified outbound (egress) rules from the specified security
-// group. You can specify rules using either rule IDs or security group rule
-// properties. If you use rule properties, the values that you specify (for
-// example, ports) must match the existing rule's values exactly. Each rule has a
-// protocol, from and to ports, and destination (CIDR range, security group, or
-// prefix list). For the TCP and UDP protocols, you must also specify the
-// destination port or range of ports. For the ICMP protocol, you must also specify
-// the ICMP type and code. If the security group rule has a description, you do not
-// need to specify the description to revoke the rule. For a default VPC, if the
-// values you specify do not match the existing rule's values, no error is
-// returned, and the output describes the security group rules that were not
-// revoked. Amazon Web Services recommends that you describe the security group to
-// verify that the rules were removed. Rule changes are propagated to instances
-// within the security group as quickly as possible. However, a small delay might
-// occur.
+// Removes the specified outbound (egress) rules from the specified security group.
+//
+// You can specify rules using either rule IDs or security group rule properties.
+// If you use rule properties, the values that you specify (for example, ports)
+// must match the existing rule's values exactly. Each rule has a protocol, from
+// and to ports, and destination (CIDR range, security group, or prefix list). For
+// the TCP and UDP protocols, you must also specify the destination port or range
+// of ports. For the ICMP protocol, you must also specify the ICMP type and code.
+// If the security group rule has a description, you do not need to specify the
+// description to revoke the rule.
+//
+// For a default VPC, if the values you specify do not match the existing rule's
+// values, no error is returned, and the output describes the security group rules
+// that were not revoked.
+//
+// Amazon Web Services recommends that you describe the security group to verify
+// that the rules were removed.
+//
+// Rule changes are propagated to instances within the security group as quickly
+// as possible. However, a small delay might occur.
 func (c *Client) RevokeSecurityGroupEgress(ctx context.Context, params *RevokeSecurityGroupEgressInput, optFns ...func(*Options)) (*RevokeSecurityGroupEgressOutput, error) {
 	if params == nil {
 		params = &RevokeSecurityGroupEgressInput{}
@@ -92,7 +96,8 @@ type RevokeSecurityGroupEgressOutput struct {
 	Return *bool
 
 	// The outbound rules that were unknown to the service. In some cases,
-	// unknownIpPermissionSet might be in a different format from the request parameter.
+	// unknownIpPermissionSet might be in a different format from the request
+	// parameter.
 	UnknownIpPermissions []types.IpPermission
 
 	// Metadata pertaining to the operation's result.
@@ -123,25 +128,25 @@ func (c *Client) addOperationRevokeSecurityGroupEgressMiddlewares(stack *middlew
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -156,13 +161,16 @@ func (c *Client) addOperationRevokeSecurityGroupEgressMiddlewares(stack *middlew
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpRevokeSecurityGroupEgressValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opRevokeSecurityGroupEgress(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

@@ -17,14 +17,26 @@ import (
 )
 
 // Retrieves the configuration parameters and status for a Batch Operations job.
-// For more information, see S3 Batch Operations (https://docs.aws.amazon.com/AmazonS3/latest/userguide/batch-ops.html)
-// in the Amazon S3 User Guide. Permissions To use the DescribeJob operation, you
-// must have permission to perform the s3:DescribeJob action. Related actions
-// include:
-//   - CreateJob (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_CreateJob.html)
-//   - ListJobs (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_ListJobs.html)
-//   - UpdateJobPriority (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_UpdateJobPriority.html)
-//   - UpdateJobStatus (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_UpdateJobStatus.html)
+// For more information, see [S3 Batch Operations]in the Amazon S3 User Guide.
+//
+// Permissions To use the DescribeJob operation, you must have permission to
+// perform the s3:DescribeJob action.
+//
+// Related actions include:
+//
+// [CreateJob]
+//
+// [ListJobs]
+//
+// [UpdateJobPriority]
+//
+// [UpdateJobStatus]
+//
+// [S3 Batch Operations]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/batch-ops.html
+// [UpdateJobPriority]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_UpdateJobPriority.html
+// [CreateJob]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_CreateJob.html
+// [UpdateJobStatus]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_UpdateJobStatus.html
+// [ListJobs]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_ListJobs.html
 func (c *Client) DescribeJob(ctx context.Context, params *DescribeJobInput, optFns ...func(*Options)) (*DescribeJobOutput, error) {
 	if params == nil {
 		params = &DescribeJobInput{}
@@ -94,25 +106,25 @@ func (c *Client) addOperationDescribeJobMiddlewares(stack *middleware.Stack, opt
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -130,6 +142,9 @@ func (c *Client) addOperationDescribeJobMiddlewares(stack *middleware.Stack, opt
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addEndpointPrefix_opDescribeJobMiddleware(stack); err != nil {
 		return err
 	}
@@ -142,7 +157,7 @@ func (c *Client) addOperationDescribeJobMiddlewares(stack *middleware.Stack, opt
 	if err = addMetadataRetrieverMiddleware(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addDescribeJobUpdateEndpoint(stack, options); err != nil {

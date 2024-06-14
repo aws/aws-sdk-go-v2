@@ -10,6 +10,26 @@ import (
 	"github.com/aws/smithy-go/middleware"
 )
 
+type validateOpAcceptPrimaryEmailUpdate struct {
+}
+
+func (*validateOpAcceptPrimaryEmailUpdate) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpAcceptPrimaryEmailUpdate) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*AcceptPrimaryEmailUpdateInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpAcceptPrimaryEmailUpdateInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDeleteAlternateContact struct {
 }
 
@@ -90,6 +110,26 @@ func (m *validateOpGetAlternateContact) HandleInitialize(ctx context.Context, in
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetPrimaryEmail struct {
+}
+
+func (*validateOpGetPrimaryEmail) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetPrimaryEmail) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetPrimaryEmailInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetPrimaryEmailInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetRegionOptStatus struct {
 }
 
@@ -150,6 +190,30 @@ func (m *validateOpPutContactInformation) HandleInitialize(ctx context.Context, 
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpStartPrimaryEmailUpdate struct {
+}
+
+func (*validateOpStartPrimaryEmailUpdate) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpStartPrimaryEmailUpdate) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*StartPrimaryEmailUpdateInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpStartPrimaryEmailUpdateInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+func addOpAcceptPrimaryEmailUpdateValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpAcceptPrimaryEmailUpdate{}, middleware.After)
+}
+
 func addOpDeleteAlternateContactValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteAlternateContact{}, middleware.After)
 }
@@ -166,6 +230,10 @@ func addOpGetAlternateContactValidationMiddleware(stack *middleware.Stack) error
 	return stack.Initialize.Add(&validateOpGetAlternateContact{}, middleware.After)
 }
 
+func addOpGetPrimaryEmailValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetPrimaryEmail{}, middleware.After)
+}
+
 func addOpGetRegionOptStatusValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetRegionOptStatus{}, middleware.After)
 }
@@ -176,6 +244,10 @@ func addOpPutAlternateContactValidationMiddleware(stack *middleware.Stack) error
 
 func addOpPutContactInformationValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpPutContactInformation{}, middleware.After)
+}
+
+func addOpStartPrimaryEmailUpdateValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpStartPrimaryEmailUpdate{}, middleware.After)
 }
 
 func validateContactInformation(v *types.ContactInformation) error {
@@ -200,6 +272,27 @@ func validateContactInformation(v *types.ContactInformation) error {
 	}
 	if v.PhoneNumber == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("PhoneNumber"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpAcceptPrimaryEmailUpdateInput(v *AcceptPrimaryEmailUpdateInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AcceptPrimaryEmailUpdateInput"}
+	if v.AccountId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AccountId"))
+	}
+	if v.PrimaryEmail == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PrimaryEmail"))
+	}
+	if v.Otp == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Otp"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -268,6 +361,21 @@ func validateOpGetAlternateContactInput(v *GetAlternateContactInput) error {
 	}
 }
 
+func validateOpGetPrimaryEmailInput(v *GetPrimaryEmailInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetPrimaryEmailInput"}
+	if v.AccountId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AccountId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpGetRegionOptStatusInput(v *GetRegionOptStatusInput) error {
 	if v == nil {
 		return nil
@@ -321,6 +429,24 @@ func validateOpPutContactInformationInput(v *PutContactInformationInput) error {
 		if err := validateContactInformation(v.ContactInformation); err != nil {
 			invalidParams.AddNested("ContactInformation", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpStartPrimaryEmailUpdateInput(v *StartPrimaryEmailUpdateInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StartPrimaryEmailUpdateInput"}
+	if v.AccountId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AccountId"))
+	}
+	if v.PrimaryEmail == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("PrimaryEmail"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

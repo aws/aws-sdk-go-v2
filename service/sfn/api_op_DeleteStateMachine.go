@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -14,24 +13,35 @@ import (
 // Deletes a state machine. This is an asynchronous operation. It sets the state
 // machine's status to DELETING and begins the deletion process. A state machine
 // is deleted only when all its executions are completed. On the next state
-// transition, the state machine's executions are terminated. A qualified state
-// machine ARN can either refer to a Distributed Map state defined within a state
-// machine, a version ARN, or an alias ARN. The following are some examples of
-// qualified and unqualified state machine ARNs:
+// transition, the state machine's executions are terminated.
+//
+// A qualified state machine ARN can either refer to a Distributed Map state
+// defined within a state machine, a version ARN, or an alias ARN.
+//
+// The following are some examples of qualified and unqualified state machine ARNs:
+//
 //   - The following qualified state machine ARN refers to a Distributed Map state
 //     with a label mapStateLabel in a state machine named myStateMachine .
-//     arn:partition:states:region:account-id:stateMachine:myStateMachine/mapStateLabel
-//     If you provide a qualified state machine ARN that refers to a Distributed Map
-//     state, the request fails with ValidationException .
-//   - The following unqualified state machine ARN refers to a state machine named
-//     myStateMachine .
-//     arn:partition:states:region:account-id:stateMachine:myStateMachine
 //
-// This API action also deletes all versions (https://docs.aws.amazon.com/step-functions/latest/dg/concepts-state-machine-version.html)
-// and aliases (https://docs.aws.amazon.com/step-functions/latest/dg/concepts-state-machine-alias.html)
-// associated with a state machine. For EXPRESS state machines, the deletion
-// happens eventually (usually in less than a minute). Running executions may emit
-// logs after DeleteStateMachine API is called.
+// arn:partition:states:region:account-id:stateMachine:myStateMachine/mapStateLabel
+//
+// If you provide a qualified state machine ARN that refers to a Distributed Map
+//
+//	state, the request fails with ValidationException .
+//
+//	- The following unqualified state machine ARN refers to a state machine named
+//	myStateMachine .
+//
+// arn:partition:states:region:account-id:stateMachine:myStateMachine
+//
+// This API action also deletes all [versions] and [aliases] associated with a state machine.
+//
+// For EXPRESS state machines, the deletion happens eventually (usually in less
+// than a minute). Running executions may emit logs after DeleteStateMachine API
+// is called.
+//
+// [aliases]: https://docs.aws.amazon.com/step-functions/latest/dg/concepts-state-machine-alias.html
+// [versions]: https://docs.aws.amazon.com/step-functions/latest/dg/concepts-state-machine-version.html
 func (c *Client) DeleteStateMachine(ctx context.Context, params *DeleteStateMachineInput, optFns ...func(*Options)) (*DeleteStateMachineOutput, error) {
 	if params == nil {
 		params = &DeleteStateMachineInput{}
@@ -86,25 +96,25 @@ func (c *Client) addOperationDeleteStateMachineMiddlewares(stack *middleware.Sta
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -119,13 +129,16 @@ func (c *Client) addOperationDeleteStateMachineMiddlewares(stack *middleware.Sta
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDeleteStateMachineValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteStateMachine(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

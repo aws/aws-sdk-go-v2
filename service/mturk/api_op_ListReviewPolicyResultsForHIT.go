@@ -6,13 +6,13 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/mturk/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// The ListReviewPolicyResultsForHIT operation retrieves the computed results and
+//	The ListReviewPolicyResultsForHIT operation retrieves the computed results and
+//
 // the actions taken in the course of executing your Review Policies for a given
 // HIT. For information about how to specify Review Policies when you call
 // CreateHIT, see Review Policies. The ListReviewPolicyResultsForHIT operation can
@@ -45,16 +45,16 @@ type ListReviewPolicyResultsForHITInput struct {
 	// Pagination token
 	NextToken *string
 
-	// The Policy Level(s) to retrieve review results for - HIT or Assignment. If
+	//  The Policy Level(s) to retrieve review results for - HIT or Assignment. If
 	// omitted, the default behavior is to retrieve all data for both policy levels.
 	// For a list of all the described policies, see Review Policies.
 	PolicyLevels []types.ReviewPolicyLevel
 
-	// Specify if the operation should retrieve a list of the actions taken executing
+	//  Specify if the operation should retrieve a list of the actions taken executing
 	// the Review Policies and their outcomes.
 	RetrieveActions *bool
 
-	// Specify if the operation should retrieve a list of the results computed by the
+	//  Specify if the operation should retrieve a list of the results computed by the
 	// Review Policies.
 	RetrieveResults *bool
 
@@ -63,11 +63,11 @@ type ListReviewPolicyResultsForHITInput struct {
 
 type ListReviewPolicyResultsForHITOutput struct {
 
-	// The name of the Assignment-level Review Policy. This contains only the
+	//  The name of the Assignment-level Review Policy. This contains only the
 	// PolicyName element.
 	AssignmentReviewPolicy *types.ReviewPolicy
 
-	// Contains both ReviewResult and ReviewAction elements for an Assignment.
+	//  Contains both ReviewResult and ReviewAction elements for an Assignment.
 	AssignmentReviewReport *types.ReviewReport
 
 	// The HITId of the HIT for which results have been returned.
@@ -113,25 +113,25 @@ func (c *Client) addOperationListReviewPolicyResultsForHITMiddlewares(stack *mid
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -146,13 +146,16 @@ func (c *Client) addOperationListReviewPolicyResultsForHITMiddlewares(stack *mid
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpListReviewPolicyResultsForHITValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListReviewPolicyResultsForHIT(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

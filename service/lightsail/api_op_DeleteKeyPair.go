@@ -6,22 +6,26 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/lightsail/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes the specified key pair by removing the public key from Amazon
-// Lightsail. You can delete key pairs that were created using the ImportKeyPair (https://docs.aws.amazon.com/lightsail/2016-11-28/api-reference/API_ImportKeyPair.html)
-// and CreateKeyPair (https://docs.aws.amazon.com/lightsail/2016-11-28/api-reference/API_CreateKeyPair.html)
-// actions, as well as the Lightsail default key pair. A new default key pair will
-// not be created unless you launch an instance without specifying a custom key
-// pair, or you call the DownloadDefaultKeyPair (https://docs.aws.amazon.com/lightsail/2016-11-28/api-reference/API_DownloadDefaultKeyPair.html)
-// API. The delete key pair operation supports tag-based access control via
-// resource tags applied to the resource identified by key pair name . For more
-// information, see the Amazon Lightsail Developer Guide (https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-controlling-access-using-tags)
-// .
+// Deletes the specified key pair by removing the public key from Amazon Lightsail.
+//
+// You can delete key pairs that were created using the [ImportKeyPair] and [CreateKeyPair] actions, as well as
+// the Lightsail default key pair. A new default key pair will not be created
+// unless you launch an instance without specifying a custom key pair, or you call
+// the [DownloadDefaultKeyPair]API.
+//
+// The delete key pair operation supports tag-based access control via resource
+// tags applied to the resource identified by key pair name . For more information,
+// see the [Amazon Lightsail Developer Guide].
+//
+// [ImportKeyPair]: https://docs.aws.amazon.com/lightsail/2016-11-28/api-reference/API_ImportKeyPair.html
+// [CreateKeyPair]: https://docs.aws.amazon.com/lightsail/2016-11-28/api-reference/API_CreateKeyPair.html
+// [DownloadDefaultKeyPair]: https://docs.aws.amazon.com/lightsail/2016-11-28/api-reference/API_DownloadDefaultKeyPair.html
+// [Amazon Lightsail Developer Guide]: https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-controlling-access-using-tags
 func (c *Client) DeleteKeyPair(ctx context.Context, params *DeleteKeyPairInput, optFns ...func(*Options)) (*DeleteKeyPairOutput, error) {
 	if params == nil {
 		params = &DeleteKeyPairInput{}
@@ -44,8 +48,9 @@ type DeleteKeyPairInput struct {
 	// This member is required.
 	KeyPairName *string
 
-	// The RSA fingerprint of the Lightsail default key pair to delete. The
-	// expectedFingerprint parameter is required only when specifying to delete a
+	// The RSA fingerprint of the Lightsail default key pair to delete.
+	//
+	// The expectedFingerprint parameter is required only when specifying to delete a
 	// Lightsail default key pair.
 	ExpectedFingerprint *string
 
@@ -87,25 +92,25 @@ func (c *Client) addOperationDeleteKeyPairMiddlewares(stack *middleware.Stack, o
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -120,13 +125,16 @@ func (c *Client) addOperationDeleteKeyPairMiddlewares(stack *middleware.Stack, o
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDeleteKeyPairValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteKeyPair(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

@@ -6,22 +6,25 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/lightsail/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Attaches a Transport Layer Security (TLS) certificate to your load balancer.
-// TLS is just an updated, more secure version of Secure Socket Layer (SSL). Once
-// you create and validate your certificate, you can attach it to your load
+// TLS is just an updated, more secure version of Secure Socket Layer (SSL).
+//
+// Once you create and validate your certificate, you can attach it to your load
 // balancer. You can also use this API to rotate the certificates on your account.
 // Use the AttachLoadBalancerTlsCertificate action with the non-attached
 // certificate, and it will replace the existing one and become the attached
-// certificate. The AttachLoadBalancerTlsCertificate operation supports tag-based
-// access control via resource tags applied to the resource identified by load
-// balancer name . For more information, see the Amazon Lightsail Developer Guide (https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-controlling-access-using-tags)
-// .
+// certificate.
+//
+// The AttachLoadBalancerTlsCertificate operation supports tag-based access
+// control via resource tags applied to the resource identified by load balancer
+// name . For more information, see the [Amazon Lightsail Developer Guide].
+//
+// [Amazon Lightsail Developer Guide]: https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-controlling-access-using-tags
 func (c *Client) AttachLoadBalancerTlsCertificate(ctx context.Context, params *AttachLoadBalancerTlsCertificateInput, optFns ...func(*Options)) (*AttachLoadBalancerTlsCertificateOutput, error) {
 	if params == nil {
 		params = &AttachLoadBalancerTlsCertificateInput{}
@@ -57,8 +60,10 @@ type AttachLoadBalancerTlsCertificateOutput struct {
 
 	// An array of objects that describe the result of the action, such as the status
 	// of the request, the timestamp of the request, and the resources affected by the
-	// request. These SSL/TLS certificates are only usable by Lightsail load balancers.
-	// You can't get the certificate and use it for another purpose.
+	// request.
+	//
+	// These SSL/TLS certificates are only usable by Lightsail load balancers. You
+	// can't get the certificate and use it for another purpose.
 	Operations []types.Operation
 
 	// Metadata pertaining to the operation's result.
@@ -89,25 +94,25 @@ func (c *Client) addOperationAttachLoadBalancerTlsCertificateMiddlewares(stack *
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -122,13 +127,16 @@ func (c *Client) addOperationAttachLoadBalancerTlsCertificateMiddlewares(stack *
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpAttachLoadBalancerTlsCertificateValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opAttachLoadBalancerTlsCertificate(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

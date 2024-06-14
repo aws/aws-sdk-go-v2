@@ -6,16 +6,16 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/mediatailor/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
-// Creates a program within a channel. For information about programs, see Working
-// with programs (https://docs.aws.amazon.com/mediatailor/latest/ug/channel-assembly-programs.html)
-// in the MediaTailor User Guide.
+// Creates a program within a channel. For information about programs, see [Working with programs] in the
+// MediaTailor User Guide.
+//
+// [Working with programs]: https://docs.aws.amazon.com/mediatailor/latest/ug/channel-assembly-programs.html
 func (c *Client) CreateProgram(ctx context.Context, params *CreateProgramInput, optFns ...func(*Options)) (*CreateProgramOutput, error) {
 	if params == nil {
 		params = &CreateProgramInput{}
@@ -56,6 +56,9 @@ type CreateProgramInput struct {
 	// The ad break configuration settings.
 	AdBreaks []types.AdBreak
 
+	// The list of AudienceMedia defined in program.
+	AudienceMedia []types.AudienceMedia
+
 	// The name of the LiveSource for this Program.
 	LiveSourceName *string
 
@@ -72,6 +75,9 @@ type CreateProgramOutput struct {
 
 	// The ARN to assign to the program.
 	Arn *string
+
+	// The list of AudienceMedia defined in program.
+	AudienceMedia []types.AudienceMedia
 
 	// The name to assign to the channel for this program.
 	ChannelName *string
@@ -128,25 +134,25 @@ func (c *Client) addOperationCreateProgramMiddlewares(stack *middleware.Stack, o
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -161,13 +167,16 @@ func (c *Client) addOperationCreateProgramMiddlewares(stack *middleware.Stack, o
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpCreateProgramValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateProgram(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/elasticloadbalancing/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -14,10 +13,12 @@ import (
 
 // Deregisters the specified instances from the specified load balancer. After the
 // instance is deregistered, it no longer receives traffic from the load balancer.
-// You can use DescribeLoadBalancers to verify that the instance is deregistered
-// from the load balancer. For more information, see Register or De-Register EC2
-// Instances (https://docs.aws.amazon.com/elasticloadbalancing/latest/classic/elb-deregister-register-instances.html)
-// in the Classic Load Balancers Guide.
+//
+// You can use DescribeLoadBalancers to verify that the instance is deregistered from the load balancer.
+//
+// For more information, see [Register or De-Register EC2 Instances] in the Classic Load Balancers Guide.
+//
+// [Register or De-Register EC2 Instances]: https://docs.aws.amazon.com/elasticloadbalancing/latest/classic/elb-deregister-register-instances.html
 func (c *Client) DeregisterInstancesFromLoadBalancer(ctx context.Context, params *DeregisterInstancesFromLoadBalancerInput, optFns ...func(*Options)) (*DeregisterInstancesFromLoadBalancerOutput, error) {
 	if params == nil {
 		params = &DeregisterInstancesFromLoadBalancerInput{}
@@ -83,25 +84,25 @@ func (c *Client) addOperationDeregisterInstancesFromLoadBalancerMiddlewares(stac
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -116,13 +117,16 @@ func (c *Client) addOperationDeregisterInstancesFromLoadBalancerMiddlewares(stac
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDeregisterInstancesFromLoadBalancerValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDeregisterInstancesFromLoadBalancer(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

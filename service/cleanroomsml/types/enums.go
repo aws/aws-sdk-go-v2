@@ -13,8 +13,9 @@ const (
 )
 
 // Values returns all known values for AudienceExportJobStatus. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (AudienceExportJobStatus) Values() []AudienceExportJobStatus {
 	return []AudienceExportJobStatus{
 		"CREATE_PENDING",
@@ -39,6 +40,7 @@ const (
 
 // Values returns all known values for AudienceGenerationJobStatus. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (AudienceGenerationJobStatus) Values() []AudienceGenerationJobStatus {
 	return []AudienceGenerationJobStatus{
@@ -49,28 +51,6 @@ func (AudienceGenerationJobStatus) Values() []AudienceGenerationJobStatus {
 		"DELETE_PENDING",
 		"DELETE_IN_PROGRESS",
 		"DELETE_FAILED",
-	}
-}
-
-type AudienceModelMetricType string
-
-// Enum values for AudienceModelMetricType
-const (
-	AudienceModelMetricTypeNormalizedDiscountedCumulativeGain AudienceModelMetricType = "NORMALIZED_DISCOUNTED_CUMULATIVE_GAIN"
-	AudienceModelMetricTypeMeanReciprocalRank                 AudienceModelMetricType = "MEAN_RECIPROCAL_RANK"
-	AudienceModelMetricTypePrecision                          AudienceModelMetricType = "PRECISION"
-	AudienceModelMetricTypeRecall                             AudienceModelMetricType = "RECALL"
-)
-
-// Values returns all known values for AudienceModelMetricType. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
-func (AudienceModelMetricType) Values() []AudienceModelMetricType {
-	return []AudienceModelMetricType{
-		"NORMALIZED_DISCOUNTED_CUMULATIVE_GAIN",
-		"MEAN_RECIPROCAL_RANK",
-		"PRECISION",
-		"RECALL",
 	}
 }
 
@@ -88,8 +68,9 @@ const (
 )
 
 // Values returns all known values for AudienceModelStatus. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (AudienceModelStatus) Values() []AudienceModelStatus {
 	return []AudienceModelStatus{
 		"CREATE_PENDING",
@@ -111,8 +92,9 @@ const (
 )
 
 // Values returns all known values for AudienceSizeType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (AudienceSizeType) Values() []AudienceSizeType {
 	return []AudienceSizeType{
 		"ABSOLUTE",
@@ -132,8 +114,9 @@ const (
 )
 
 // Values returns all known values for ColumnType. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ColumnType) Values() []ColumnType {
 	return []ColumnType{
 		"USER_ID",
@@ -153,8 +136,9 @@ const (
 
 // Values returns all known values for ConfiguredAudienceModelStatus. Note that
 // this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ConfiguredAudienceModelStatus) Values() []ConfiguredAudienceModelStatus {
 	return []ConfiguredAudienceModelStatus{
 		"ACTIVE",
@@ -169,8 +153,9 @@ const (
 )
 
 // Values returns all known values for DatasetType. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (DatasetType) Values() []DatasetType {
 	return []DatasetType{
 		"INTERACTIONS",
@@ -187,6 +172,7 @@ const (
 
 // Values returns all known values for PolicyExistenceCondition. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (PolicyExistenceCondition) Values() []PolicyExistenceCondition {
 	return []PolicyExistenceCondition{
@@ -204,8 +190,9 @@ const (
 )
 
 // Values returns all known values for SharedAudienceMetrics. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (SharedAudienceMetrics) Values() []SharedAudienceMetrics {
 	return []SharedAudienceMetrics{
 		"ALL",
@@ -222,8 +209,9 @@ const (
 )
 
 // Values returns all known values for TagOnCreatePolicy. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (TagOnCreatePolicy) Values() []TagOnCreatePolicy {
 	return []TagOnCreatePolicy{
 		"FROM_PARENT_RESOURCE",
@@ -239,8 +227,9 @@ const (
 )
 
 // Values returns all known values for TrainingDatasetStatus. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (TrainingDatasetStatus) Values() []TrainingDatasetStatus {
 	return []TrainingDatasetStatus{
 		"ACTIVE",

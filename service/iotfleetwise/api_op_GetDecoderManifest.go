@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/iotfleetwise/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -31,7 +30,7 @@ func (c *Client) GetDecoderManifest(ctx context.Context, params *GetDecoderManif
 
 type GetDecoderManifestInput struct {
 
-	// The name of the decoder manifest to retrieve information about.
+	//  The name of the decoder manifest to retrieve information about.
 	//
 	// This member is required.
 	Name *string
@@ -41,40 +40,40 @@ type GetDecoderManifestInput struct {
 
 type GetDecoderManifestOutput struct {
 
-	// The Amazon Resource Name (ARN) of the decoder manifest.
+	//  The Amazon Resource Name (ARN) of the decoder manifest.
 	//
 	// This member is required.
 	Arn *string
 
-	// The time the decoder manifest was created in seconds since epoch (January 1,
+	//  The time the decoder manifest was created in seconds since epoch (January 1,
 	// 1970 at midnight UTC time).
 	//
 	// This member is required.
 	CreationTime *time.Time
 
-	// The time the decoder manifest was last updated in seconds since epoch (January
+	//  The time the decoder manifest was last updated in seconds since epoch (January
 	// 1, 1970 at midnight UTC time).
 	//
 	// This member is required.
 	LastModificationTime *time.Time
 
-	// The name of the decoder manifest.
+	//  The name of the decoder manifest.
 	//
 	// This member is required.
 	Name *string
 
-	// A brief description of the decoder manifest.
+	//  A brief description of the decoder manifest.
 	Description *string
 
 	// The detailed message for the decoder manifest. When a decoder manifest is in an
 	// INVALID status, the message contains detailed reason and help information.
 	Message *string
 
-	// The ARN of a vehicle model (model manifest) associated with the decoder
+	//  The ARN of a vehicle model (model manifest) associated with the decoder
 	// manifest.
 	ModelManifestArn *string
 
-	// The state of the decoder manifest. If the status is ACTIVE , the decoder
+	//  The state of the decoder manifest. If the status is ACTIVE , the decoder
 	// manifest can't be edited. If the status is marked DRAFT , you can edit the
 	// decoder manifest.
 	Status types.ManifestStatus
@@ -107,25 +106,25 @@ func (c *Client) addOperationGetDecoderManifestMiddlewares(stack *middleware.Sta
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -140,13 +139,16 @@ func (c *Client) addOperationGetDecoderManifestMiddlewares(stack *middleware.Sta
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpGetDecoderManifestValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetDecoderManifest(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

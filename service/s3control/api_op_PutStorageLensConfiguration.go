@@ -16,15 +16,19 @@ import (
 	"strings"
 )
 
-// This operation is not supported by directory buckets. Puts an Amazon S3 Storage
-// Lens configuration. For more information about S3 Storage Lens, see Working
-// with Amazon S3 Storage Lens (https://docs.aws.amazon.com/AmazonS3/latest/dev/storage_lens.html)
-// in the Amazon S3 User Guide. For a complete list of S3 Storage Lens metrics, see
-// S3 Storage Lens metrics glossary (https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage_lens_metrics_glossary.html)
-// in the Amazon S3 User Guide. To use this action, you must have permission to
-// perform the s3:PutStorageLensConfiguration action. For more information, see
-// Setting permissions to use Amazon S3 Storage Lens (https://docs.aws.amazon.com/AmazonS3/latest/dev/storage_lens_iam_permissions.html)
-// in the Amazon S3 User Guide.
+// This operation is not supported by directory buckets.
+//
+// Puts an Amazon S3 Storage Lens configuration. For more information about S3
+// Storage Lens, see [Working with Amazon S3 Storage Lens]in the Amazon S3 User Guide. For a complete list of S3
+// Storage Lens metrics, see [S3 Storage Lens metrics glossary]in the Amazon S3 User Guide.
+//
+// To use this action, you must have permission to perform the
+// s3:PutStorageLensConfiguration action. For more information, see [Setting permissions to use Amazon S3 Storage Lens] in the Amazon
+// S3 User Guide.
+//
+// [Working with Amazon S3 Storage Lens]: https://docs.aws.amazon.com/AmazonS3/latest/dev/storage_lens.html
+// [S3 Storage Lens metrics glossary]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage_lens_metrics_glossary.html
+// [Setting permissions to use Amazon S3 Storage Lens]: https://docs.aws.amazon.com/AmazonS3/latest/dev/storage_lens_iam_permissions.html
 func (c *Client) PutStorageLensConfiguration(ctx context.Context, params *PutStorageLensConfigurationInput, optFns ...func(*Options)) (*PutStorageLensConfigurationOutput, error) {
 	if params == nil {
 		params = &PutStorageLensConfigurationInput{}
@@ -57,8 +61,9 @@ type PutStorageLensConfigurationInput struct {
 	// This member is required.
 	StorageLensConfiguration *types.StorageLensConfiguration
 
-	// The tag set of the S3 Storage Lens configuration. You can set up to a maximum
-	// of 50 tags.
+	// The tag set of the S3 Storage Lens configuration.
+	//
+	// You can set up to a maximum of 50 tags.
 	Tags []types.StorageLensTag
 
 	noSmithyDocumentSerde
@@ -98,25 +103,25 @@ func (c *Client) addOperationPutStorageLensConfigurationMiddlewares(stack *middl
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -134,6 +139,9 @@ func (c *Client) addOperationPutStorageLensConfigurationMiddlewares(stack *middl
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addEndpointPrefix_opPutStorageLensConfigurationMiddleware(stack); err != nil {
 		return err
 	}
@@ -146,7 +154,7 @@ func (c *Client) addOperationPutStorageLensConfigurationMiddlewares(stack *middl
 	if err = addMetadataRetrieverMiddleware(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addPutStorageLensConfigurationUpdateEndpoint(stack, options); err != nil {

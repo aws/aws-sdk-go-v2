@@ -6,27 +6,32 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/quicksight/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Assigns one or more tags (key-value pairs) to the specified Amazon QuickSight
-// resource. Tags can help you organize and categorize your resources. You can also
-// use them to scope user permissions, by granting a user permission to access or
-// change only resources with certain tag values. You can use the TagResource
-// operation with a resource that already has tags. If you specify a new tag key
-// for the resource, this tag is appended to the list of tags associated with the
-// resource. If you specify a tag key that is already associated with the resource,
-// the new tag value that you specify replaces the previous value for that tag. You
-// can associate as many as 50 tags with a resource. Amazon QuickSight supports
-// tagging on data set, data source, dashboard, template, topic, and user. Tagging
-// for Amazon QuickSight works in a similar way to tagging for other Amazon Web
-// Services services, except for the following:
+// resource.
+//
+// Tags can help you organize and categorize your resources. You can also use them
+// to scope user permissions, by granting a user permission to access or change
+// only resources with certain tag values. You can use the TagResource operation
+// with a resource that already has tags. If you specify a new tag key for the
+// resource, this tag is appended to the list of tags associated with the resource.
+// If you specify a tag key that is already associated with the resource, the new
+// tag value that you specify replaces the previous value for that tag.
+//
+// You can associate as many as 50 tags with a resource. Amazon QuickSight
+// supports tagging on data set, data source, dashboard, template, topic, and user.
+//
+// Tagging for Amazon QuickSight works in a similar way to tagging for other
+// Amazon Web Services services, except for the following:
+//
 //   - Tags are used to track costs for users in Amazon QuickSight. You can't tag
 //     other resources that Amazon QuickSight costs are based on, such as storage
 //     capacoty (SPICE), session usage, alert consumption, or reporting units.
+//
 //   - Amazon QuickSight doesn't currently support the tag editor for Resource
 //     Groups.
 func (c *Client) TagResource(ctx context.Context, params *TagResourceInput, optFns ...func(*Options)) (*TagResourceOutput, error) {
@@ -96,25 +101,25 @@ func (c *Client) addOperationTagResourceMiddlewares(stack *middleware.Stack, opt
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -129,13 +134,16 @@ func (c *Client) addOperationTagResourceMiddlewares(stack *middleware.Stack, opt
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpTagResourceValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opTagResource(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

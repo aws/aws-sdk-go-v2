@@ -17,7 +17,16 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"io"
 	"strings"
+	"time"
 )
+
+func deserializeS3Expires(v string) (*time.Time, error) {
+	t, err := smithytime.ParseHTTPDate(v)
+	if err != nil {
+		return nil, nil
+	}
+	return &t, nil
+}
 
 type awsRestjson1_deserializeOpAssociateAccessPolicy struct {
 }
@@ -3334,6 +3343,11 @@ func awsRestjson1_deserializeOpDocumentDescribeAddonConfigurationOutput(v **Desc
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
 				sv.ConfigurationSchema = ptr.String(jtv)
+			}
+
+		case "podIdentityConfiguration":
+			if err := awsRestjson1_deserializeDocumentAddonPodIdentityConfigurationList(&sv.PodIdentityConfiguration, value); err != nil {
+				return err
 			}
 
 		default:
@@ -9735,6 +9749,11 @@ func awsRestjson1_deserializeDocumentAddon(v **types.Addon, value interface{}) e
 				sv.Owner = ptr.String(jtv)
 			}
 
+		case "podIdentityAssociations":
+			if err := awsRestjson1_deserializeDocumentStringList(&sv.PodIdentityAssociations, value); err != nil {
+				return err
+			}
+
 		case "publisher":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9977,6 +9996,85 @@ func awsRestjson1_deserializeDocumentAddonIssueList(v *[]types.AddonIssue, value
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentAddonPodIdentityConfiguration(v **types.AddonPodIdentityConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AddonPodIdentityConfiguration
+	if *v == nil {
+		sv = &types.AddonPodIdentityConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "recommendedManagedPolicies":
+			if err := awsRestjson1_deserializeDocumentStringList(&sv.RecommendedManagedPolicies, value); err != nil {
+				return err
+			}
+
+		case "serviceAccount":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.ServiceAccount = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentAddonPodIdentityConfigurationList(v *[]types.AddonPodIdentityConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.AddonPodIdentityConfiguration
+	if *v == nil {
+		cv = []types.AddonPodIdentityConfiguration{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.AddonPodIdentityConfiguration
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentAddonPodIdentityConfiguration(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentAddons(v *[]types.AddonInfo, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -10059,6 +10157,15 @@ func awsRestjson1_deserializeDocumentAddonVersionInfo(v **types.AddonVersionInfo
 					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
 				}
 				sv.RequiresConfiguration = jtv
+			}
+
+		case "requiresIamPermissions":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.RequiresIamPermissions = jtv
 			}
 
 		default:
@@ -13780,6 +13887,15 @@ func awsRestjson1_deserializeDocumentPodIdentityAssociation(v **types.PodIdentit
 				sv.Namespace = ptr.String(jtv)
 			}
 
+		case "ownerArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.OwnerArn = ptr.String(jtv)
+			}
+
 		case "roleArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -13902,6 +14018,15 @@ func awsRestjson1_deserializeDocumentPodIdentityAssociationSummary(v **types.Pod
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
 				sv.Namespace = ptr.String(jtv)
+			}
+
+		case "ownerArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.OwnerArn = ptr.String(jtv)
 			}
 
 		case "serviceAccount":

@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/amplify/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -32,29 +31,34 @@ func (c *Client) CreateDomainAssociation(ctx context.Context, params *CreateDoma
 // The request structure for the create domain association request.
 type CreateDomainAssociationInput struct {
 
-	// The unique ID for an Amplify app.
+	//  The unique ID for an Amplify app.
 	//
 	// This member is required.
 	AppId *string
 
-	// The domain name for the domain association.
+	//  The domain name for the domain association.
 	//
 	// This member is required.
 	DomainName *string
 
-	// The setting for the subdomain.
+	//  The setting for the subdomain.
 	//
 	// This member is required.
 	SubDomainSettings []types.SubDomainSetting
 
-	// Sets the branch patterns for automatic subdomain creation.
+	//  Sets the branch patterns for automatic subdomain creation.
 	AutoSubDomainCreationPatterns []string
 
-	// The required AWS Identity and Access Management (IAM) service role for the
+	//  The required AWS Identity and Access Management (IAM) service role for the
 	// Amazon Resource Name (ARN) for automatically creating subdomains.
 	AutoSubDomainIAMRole *string
 
-	// Enables the automated creation of subdomains for branches.
+	// The type of SSL/TLS certificate to use for your custom domain. If you don't
+	// specify a certificate type, Amplify uses the default certificate that it
+	// provisions and manages for you.
+	CertificateSettings *types.CertificateSettings
+
+	//  Enables the automated creation of subdomains for branches.
 	EnableAutoSubDomain *bool
 
 	noSmithyDocumentSerde
@@ -63,7 +67,7 @@ type CreateDomainAssociationInput struct {
 // The result structure for the create domain association request.
 type CreateDomainAssociationOutput struct {
 
-	// Describes the structure of a domain association, which associates a custom
+	//  Describes the structure of a domain association, which associates a custom
 	// domain with an Amplify app.
 	//
 	// This member is required.
@@ -97,25 +101,25 @@ func (c *Client) addOperationCreateDomainAssociationMiddlewares(stack *middlewar
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -130,13 +134,16 @@ func (c *Client) addOperationCreateDomainAssociationMiddlewares(stack *middlewar
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpCreateDomainAssociationValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateDomainAssociation(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/ssmincidents/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -14,8 +13,9 @@ import (
 
 // Update the details of an incident record. You can use this operation to update
 // an incident record from the defined chat channel. For more information about
-// using actions in chat channels, see Interacting through chat (https://docs.aws.amazon.com/incident-manager/latest/userguide/chat.html#chat-interact)
-// .
+// using actions in chat channels, see [Interacting through chat].
+//
+// [Interacting through chat]: https://docs.aws.amazon.com/incident-manager/latest/userguide/chat.html#chat-interact
 func (c *Client) UpdateIncidentRecord(ctx context.Context, params *UpdateIncidentRecordInput, optFns ...func(*Options)) (*UpdateIncidentRecordOutput, error) {
 	if params == nil {
 		params = &UpdateIncidentRecordInput{}
@@ -47,17 +47,26 @@ type UpdateIncidentRecordInput struct {
 
 	// Defines the impact of the incident to customers and applications. If you
 	// provide an impact for an incident, it overwrites the impact provided by the
-	// response plan. Supported impact codes
+	// response plan.
+	//
+	// Supported impact codes
+	//
 	//   - 1 - Critical
+	//
 	//   - 2 - High
+	//
 	//   - 3 - Medium
+	//
 	//   - 4 - Low
+	//
 	//   - 5 - No Impact
 	Impact *int32
 
 	// The Amazon SNS targets that Incident Manager notifies when a client updates an
-	// incident. Using multiple SNS topics creates redundancy in the event that a
-	// Region is down during the incident.
+	// incident.
+	//
+	// Using multiple SNS topics creates redundancy in the event that a Region is down
+	// during the incident.
 	NotificationTargets []types.NotificationTargetItem
 
 	// The status of the incident. Possible statuses are Open or Resolved .
@@ -101,25 +110,25 @@ func (c *Client) addOperationUpdateIncidentRecordMiddlewares(stack *middleware.S
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -134,6 +143,9 @@ func (c *Client) addOperationUpdateIncidentRecordMiddlewares(stack *middleware.S
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opUpdateIncidentRecordMiddleware(stack, options); err != nil {
 		return err
 	}
@@ -143,7 +155,7 @@ func (c *Client) addOperationUpdateIncidentRecordMiddlewares(stack *middleware.S
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateIncidentRecord(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

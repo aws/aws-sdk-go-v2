@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/efs/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -18,47 +17,67 @@ import (
 // operation with same creation token has no effect). If a file system does not
 // currently exist that is owned by the caller's Amazon Web Services account with
 // the specified creation token, this operation does the following:
+//
 //   - Creates a new, empty file system. The file system will have an Amazon EFS
 //     assigned ID, and an initial lifecycle state creating .
+//
 //   - Returns with the description of the created file system.
 //
 // Otherwise, this operation returns a FileSystemAlreadyExists error with the ID
-// of the existing file system. For basic use cases, you can use a randomly
-// generated UUID for the creation token. The idempotent operation allows you to
-// retry a CreateFileSystem call without risk of creating an extra file system.
-// This can happen when an initial call fails in a way that leaves it uncertain
-// whether or not a file system was actually created. An example might be that a
-// transport level timeout occurred or your connection was reset. As long as you
-// use the same creation token, if the initial call had succeeded in creating a
-// file system, the client can learn of its existence from the
-// FileSystemAlreadyExists error. For more information, see Creating a file system (https://docs.aws.amazon.com/efs/latest/ug/creating-using-create-fs.html#creating-using-create-fs-part1)
-// in the Amazon EFS User Guide. The CreateFileSystem call returns while the file
-// system's lifecycle state is still creating . You can check the file system
-// creation status by calling the DescribeFileSystems operation, which among other
-// things returns the file system state. This operation accepts an optional
-// PerformanceMode parameter that you choose for your file system. We recommend
-// generalPurpose performance mode for all file systems. File systems using the
-// maxIO mode is a previous generation performance type that is designed for highly
-// parallelized workloads that can tolerate higher latencies than the General
-// Purpose mode. Max I/O mode is not supported for One Zone file systems or file
-// systems that use Elastic throughput. Due to the higher per-operation latencies
-// with Max I/O, we recommend using General Purpose performance mode for all file
-// systems. The performance mode can't be changed after the file system has been
-// created. For more information, see Amazon EFS performance modes (https://docs.aws.amazon.com/efs/latest/ug/performance.html#performancemodes.html)
-// . You can set the throughput mode for the file system using the ThroughputMode
-// parameter. After the file system is fully created, Amazon EFS sets its lifecycle
-// state to available , at which point you can create one or more mount targets for
-// the file system in your VPC. For more information, see CreateMountTarget . You
-// mount your Amazon EFS file system on an EC2 instances in your VPC by using the
-// mount target. For more information, see Amazon EFS: How it Works (https://docs.aws.amazon.com/efs/latest/ug/how-it-works.html)
-// . This operation requires permissions for the elasticfilesystem:CreateFileSystem
-// action. File systems can be tagged on creation. If tags are specified in the
-// creation action, IAM performs additional authorization on the
+// of the existing file system.
+//
+// For basic use cases, you can use a randomly generated UUID for the creation
+// token.
+//
+// The idempotent operation allows you to retry a CreateFileSystem call without
+// risk of creating an extra file system. This can happen when an initial call
+// fails in a way that leaves it uncertain whether or not a file system was
+// actually created. An example might be that a transport level timeout occurred or
+// your connection was reset. As long as you use the same creation token, if the
+// initial call had succeeded in creating a file system, the client can learn of
+// its existence from the FileSystemAlreadyExists error.
+//
+// For more information, see [Creating a file system] in the Amazon EFS User Guide.
+//
+// The CreateFileSystem call returns while the file system's lifecycle state is
+// still creating . You can check the file system creation status by calling the DescribeFileSystems
+// operation, which among other things returns the file system state.
+//
+// This operation accepts an optional PerformanceMode parameter that you choose
+// for your file system. We recommend generalPurpose performance mode for all file
+// systems. File systems using the maxIO mode is a previous generation performance
+// type that is designed for highly parallelized workloads that can tolerate higher
+// latencies than the General Purpose mode. Max I/O mode is not supported for One
+// Zone file systems or file systems that use Elastic throughput.
+//
+// Due to the higher per-operation latencies with Max I/O, we recommend using
+// General Purpose performance mode for all file systems.
+//
+// The performance mode can't be changed after the file system has been created.
+// For more information, see [Amazon EFS performance modes].
+//
+// You can set the throughput mode for the file system using the ThroughputMode
+// parameter.
+//
+// After the file system is fully created, Amazon EFS sets its lifecycle state to
+// available , at which point you can create one or more mount targets for the file
+// system in your VPC. For more information, see CreateMountTarget. You mount your Amazon EFS file
+// system on an EC2 instances in your VPC by using the mount target. For more
+// information, see [Amazon EFS: How it Works].
+//
+// This operation requires permissions for the elasticfilesystem:CreateFileSystem
+// action.
+//
+// File systems can be tagged on creation. If tags are specified in the creation
+// action, IAM performs additional authorization on the
 // elasticfilesystem:TagResource action to verify if users have permissions to
 // create tags. Therefore, you must grant explicit permissions to use the
-// elasticfilesystem:TagResource action. For more information, see Granting
-// permissions to tag resources during creation (https://docs.aws.amazon.com/efs/latest/ug/using-tags-efs.html#supported-iam-actions-tagging.html)
-// .
+// elasticfilesystem:TagResource action. For more information, see [Granting permissions to tag resources during creation].
+//
+// [Creating a file system]: https://docs.aws.amazon.com/efs/latest/ug/creating-using-create-fs.html#creating-using-create-fs-part1
+// [Amazon EFS: How it Works]: https://docs.aws.amazon.com/efs/latest/ug/how-it-works.html
+// [Amazon EFS performance modes]: https://docs.aws.amazon.com/efs/latest/ug/performance.html#performancemodes.html
+// [Granting permissions to tag resources during creation]: https://docs.aws.amazon.com/efs/latest/ug/using-tags-efs.html#supported-iam-actions-tagging.html
 func (c *Client) CreateFileSystem(ctx context.Context, params *CreateFileSystemInput, optFns ...func(*Options)) (*CreateFileSystemOutput, error) {
 	if params == nil {
 		params = &CreateFileSystemInput{}
@@ -85,18 +104,26 @@ type CreateFileSystemInput struct {
 	// Used to create a One Zone file system. It specifies the Amazon Web Services
 	// Availability Zone in which to create the file system. Use the format us-east-1a
 	// to specify the Availability Zone. For more information about One Zone file
-	// systems, see Using EFS storage classes (https://docs.aws.amazon.com/efs/latest/ug/storage-classes.html)
-	// in the Amazon EFS User Guide. One Zone file systems are not available in all
-	// Availability Zones in Amazon Web Services Regions where Amazon EFS is available.
+	// systems, see [Using EFS storage classes]in the Amazon EFS User Guide.
+	//
+	// One Zone file systems are not available in all Availability Zones in Amazon Web
+	// Services Regions where Amazon EFS is available.
+	//
+	// [Using EFS storage classes]: https://docs.aws.amazon.com/efs/latest/ug/storage-classes.html
 	AvailabilityZoneName *string
 
 	// Specifies whether automatic backups are enabled on the file system that you are
 	// creating. Set the value to true to enable automatic backups. If you are
 	// creating a One Zone file system, automatic backups are enabled by default. For
-	// more information, see Automatic backups (https://docs.aws.amazon.com/efs/latest/ug/awsbackup.html#automatic-backups)
-	// in the Amazon EFS User Guide. Default is false . However, if you specify an
-	// AvailabilityZoneName , the default is true . Backup is not available in all
-	// Amazon Web Services Regions where Amazon EFS is available.
+	// more information, see [Automatic backups]in the Amazon EFS User Guide.
+	//
+	// Default is false . However, if you specify an AvailabilityZoneName , the default
+	// is true .
+	//
+	// Backup is not available in all Amazon Web Services Regions where Amazon EFS is
+	// available.
+	//
+	// [Automatic backups]: https://docs.aws.amazon.com/efs/latest/ug/awsbackup.html#automatic-backups
 	Backup *bool
 
 	// A Boolean value that, if true, creates an encrypted file system. When creating
@@ -110,17 +137,23 @@ type CreateFileSystemInput struct {
 	// system. This parameter is required only if you want to use a non-default KMS
 	// key. If this parameter is not specified, the default KMS key for Amazon EFS is
 	// used. You can specify a KMS key ID using the following formats:
+	//
 	//   - Key ID - A unique identifier of the key, for example
 	//   1234abcd-12ab-34cd-56ef-1234567890ab .
+	//
 	//   - ARN - An Amazon Resource Name (ARN) for the key, for example
 	//   arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab .
+	//
 	//   - Key alias - A previously created display name for a key, for example
 	//   alias/projectKey1 .
+	//
 	//   - Key alias ARN - An ARN for a key alias, for example
 	//   arn:aws:kms:us-west-2:444455556666:alias/projectKey1 .
-	// If you use KmsKeyId , you must set the CreateFileSystemRequest$Encrypted
-	// parameter to true. EFS accepts only symmetric KMS keys. You cannot use
-	// asymmetric KMS keys with Amazon EFS file systems.
+	//
+	// If you use KmsKeyId , you must set the CreateFileSystemRequest$Encrypted parameter to true.
+	//
+	// EFS accepts only symmetric KMS keys. You cannot use asymmetric KMS keys with
+	// Amazon EFS file systems.
 	KmsKeyId *string
 
 	// The Performance mode of the file system. We recommend generalPurpose
@@ -128,24 +161,29 @@ type CreateFileSystemInput struct {
 	// mode can scale to higher levels of aggregate throughput and operations per
 	// second with a tradeoff of slightly higher latencies for most file operations.
 	// The performance mode can't be changed after the file system has been created.
-	// The maxIO mode is not supported on One Zone file systems. Due to the higher
-	// per-operation latencies with Max I/O, we recommend using General Purpose
-	// performance mode for all file systems. Default is generalPurpose .
+	// The maxIO mode is not supported on One Zone file systems.
+	//
+	// Due to the higher per-operation latencies with Max I/O, we recommend using
+	// General Purpose performance mode for all file systems.
+	//
+	// Default is generalPurpose .
 	PerformanceMode types.PerformanceMode
 
 	// The throughput, measured in mebibytes per second (MiBps), that you want to
 	// provision for a file system that you're creating. Required if ThroughputMode is
 	// set to provisioned . Valid values are 1-3414 MiBps, with the upper limit
 	// depending on Region. To increase this limit, contact Amazon Web Services
-	// Support. For more information, see Amazon EFS quotas that you can increase (https://docs.aws.amazon.com/efs/latest/ug/limits.html#soft-limits)
-	// in the Amazon EFS User Guide.
+	// Support. For more information, see [Amazon EFS quotas that you can increase]in the Amazon EFS User Guide.
+	//
+	// [Amazon EFS quotas that you can increase]: https://docs.aws.amazon.com/efs/latest/ug/limits.html#soft-limits
 	ProvisionedThroughputInMibps *float64
 
 	// Use to create one or more tags associated with the file system. Each tag is a
 	// user-defined key-value pair. Name your file system on creation by including a
 	// "Key":"Name","Value":"{value}" key-value pair. Each key must be unique. For more
-	// information, see Tagging Amazon Web Services resources (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html)
-	// in the Amazon Web Services General Reference Guide.
+	// information, see [Tagging Amazon Web Services resources]in the Amazon Web Services General Reference Guide.
+	//
+	// [Tagging Amazon Web Services resources]: https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html
 	Tags []types.Tag
 
 	// Specifies the throughput mode for the file system. The mode can be bursting ,
@@ -153,8 +191,11 @@ type CreateFileSystemInput struct {
 	// also set a value for ProvisionedThroughputInMibps . After you create the file
 	// system, you can decrease your file system's Provisioned throughput or change
 	// between the throughput modes, with certain time restrictions. For more
-	// information, see Specifying throughput with provisioned mode (https://docs.aws.amazon.com/efs/latest/ug/performance.html#provisioned-throughput)
-	// in the Amazon EFS User Guide. Default is bursting .
+	// information, see [Specifying throughput with provisioned mode]in the Amazon EFS User Guide.
+	//
+	// Default is bursting .
+	//
+	// [Specifying throughput with provisioned mode]: https://docs.aws.amazon.com/efs/latest/ug/performance.html#provisioned-throughput
 	ThroughputMode types.ThroughputMode
 
 	noSmithyDocumentSerde
@@ -185,7 +226,7 @@ type CreateFileSystemOutput struct {
 	LifeCycleState types.LifeCycleState
 
 	// The current number of mount targets that the file system has. For more
-	// information, see CreateMountTarget .
+	// information, see CreateMountTarget.
 	//
 	// This member is required.
 	NumberOfMountTargets int32
@@ -225,9 +266,10 @@ type CreateFileSystemOutput struct {
 	AvailabilityZoneId *string
 
 	// Describes the Amazon Web Services Availability Zone in which the file system is
-	// located, and is valid only for One Zone file systems. For more information, see
-	// Using EFS storage classes (https://docs.aws.amazon.com/efs/latest/ug/storage-classes.html)
+	// located, and is valid only for One Zone file systems. For more information, see [Using EFS storage classes]
 	// in the Amazon EFS User Guide.
+	//
+	// [Using EFS storage classes]: https://docs.aws.amazon.com/efs/latest/ug/storage-classes.html
 	AvailabilityZoneName *string
 
 	// A Boolean value that, if true, indicates that the file system is encrypted.
@@ -246,17 +288,18 @@ type CreateFileSystemOutput struct {
 	KmsKeyId *string
 
 	// You can add tags to a file system, including a Name tag. For more information,
-	// see CreateFileSystem . If the file system has a Name tag, Amazon EFS returns
-	// the value in this field.
+	// see CreateFileSystem. If the file system has a Name tag, Amazon EFS returns the value in this
+	// field.
 	Name *string
 
 	// The amount of provisioned throughput, measured in MiBps, for the file system.
 	// Valid for file systems using ThroughputMode set to provisioned .
 	ProvisionedThroughputInMibps *float64
 
-	// Displays the file system's throughput mode. For more information, see
-	// Throughput modes (https://docs.aws.amazon.com/efs/latest/ug/performance.html#throughput-modes)
-	// in the Amazon EFS User Guide.
+	// Displays the file system's throughput mode. For more information, see [Throughput modes] in the
+	// Amazon EFS User Guide.
+	//
+	// [Throughput modes]: https://docs.aws.amazon.com/efs/latest/ug/performance.html#throughput-modes
 	ThroughputMode types.ThroughputMode
 
 	// Metadata pertaining to the operation's result.
@@ -287,25 +330,25 @@ func (c *Client) addOperationCreateFileSystemMiddlewares(stack *middleware.Stack
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -320,6 +363,9 @@ func (c *Client) addOperationCreateFileSystemMiddlewares(stack *middleware.Stack
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opCreateFileSystemMiddleware(stack, options); err != nil {
 		return err
 	}
@@ -329,7 +375,7 @@ func (c *Client) addOperationCreateFileSystemMiddlewares(stack *middleware.Stack
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateFileSystem(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

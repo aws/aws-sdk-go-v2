@@ -6,15 +6,17 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/datasync/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates the configuration of a running DataSync task execution. Currently, the
-// only Option that you can modify with UpdateTaskExecution is BytesPerSecond (https://docs.aws.amazon.com/datasync/latest/userguide/API_Options.html#DataSync-Type-Options-BytesPerSecond)
-// , which throttles bandwidth for a running or queued task execution.
+// Updates the configuration of a running DataSync task execution.
+//
+// Currently, the only Option that you can modify with UpdateTaskExecution is [BytesPerSecond],
+// which throttles bandwidth for a running or queued task execution.
+//
+// [BytesPerSecond]: https://docs.aws.amazon.com/datasync/latest/userguide/API_Options.html#DataSync-Type-Options-BytesPerSecond
 func (c *Client) UpdateTaskExecution(ctx context.Context, params *UpdateTaskExecutionInput, optFns ...func(*Options)) (*UpdateTaskExecutionOutput, error) {
 	if params == nil {
 		params = &UpdateTaskExecutionInput{}
@@ -35,9 +37,15 @@ type UpdateTaskExecutionInput struct {
 	// Indicates how your transfer task is configured. These options include how
 	// DataSync handles files, objects, and their associated metadata during your
 	// transfer. You also can specify how to verify data integrity, set bandwidth
-	// limits for your task, among other options. Each option has a default value.
-	// Unless you need to, you don't have to configure any of these options before
-	// starting your task.
+	// limits for your task, among other options.
+	//
+	// Each option has a default value. Unless you need to, you don't have to
+	// configure any option before calling [StartTaskExecution].
+	//
+	// You also can override your task options for each task execution. For example,
+	// you might want to adjust the LogLevel for an individual execution.
+	//
+	// [StartTaskExecution]: https://docs.aws.amazon.com/datasync/latest/userguide/API_StartTaskExecution.html
 	//
 	// This member is required.
 	Options *types.Options
@@ -80,25 +88,25 @@ func (c *Client) addOperationUpdateTaskExecutionMiddlewares(stack *middleware.St
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -113,13 +121,16 @@ func (c *Client) addOperationUpdateTaskExecutionMiddlewares(stack *middleware.St
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpUpdateTaskExecutionValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateTaskExecution(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

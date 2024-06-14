@@ -12,8 +12,9 @@ const (
 
 // Values returns all known values for ApplicationDeploymentLifecycle. Note that
 // this can be expanded in the future, and so it is only as up to date as the
-// client. The ordering of this slice is not guaranteed to be stable across
-// updates.
+// client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ApplicationDeploymentLifecycle) Values() []ApplicationDeploymentLifecycle {
 	return []ApplicationDeploymentLifecycle{
 		"Deploying",
@@ -39,8 +40,9 @@ const (
 )
 
 // Values returns all known values for ApplicationLifecycle. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ApplicationLifecycle) Values() []ApplicationLifecycle {
 	return []ApplicationLifecycle{
 		"Creating",
@@ -68,6 +70,7 @@ const (
 
 // Values returns all known values for ApplicationVersionLifecycle. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (ApplicationVersionLifecycle) Values() []ApplicationVersionLifecycle {
 	return []ApplicationVersionLifecycle{
@@ -89,12 +92,14 @@ const (
 	BatchJobExecutionStatusCancelled            BatchJobExecutionStatus = "Cancelled"
 	BatchJobExecutionStatusSucceeded            BatchJobExecutionStatus = "Succeeded"
 	BatchJobExecutionStatusFailed               BatchJobExecutionStatus = "Failed"
+	BatchJobExecutionStatusPurged               BatchJobExecutionStatus = "Purged"
 	BatchJobExecutionStatusSucceededWithWarning BatchJobExecutionStatus = "Succeeded With Warning"
 )
 
 // Values returns all known values for BatchJobExecutionStatus. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (BatchJobExecutionStatus) Values() []BatchJobExecutionStatus {
 	return []BatchJobExecutionStatus{
 		"Submitting",
@@ -105,6 +110,7 @@ func (BatchJobExecutionStatus) Values() []BatchJobExecutionStatus {
 		"Cancelled",
 		"Succeeded",
 		"Failed",
+		"Purged",
 		"Succeeded With Warning",
 	}
 }
@@ -119,8 +125,9 @@ const (
 )
 
 // Values returns all known values for BatchJobType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (BatchJobType) Values() []BatchJobType {
 	return []BatchJobType{
 		"VSE",
@@ -140,8 +147,9 @@ const (
 )
 
 // Values returns all known values for DataSetTaskLifecycle. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (DataSetTaskLifecycle) Values() []DataSetTaskLifecycle {
 	return []DataSetTaskLifecycle{
 		"Creating",
@@ -162,8 +170,9 @@ const (
 )
 
 // Values returns all known values for DeploymentLifecycle. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (DeploymentLifecycle) Values() []DeploymentLifecycle {
 	return []DeploymentLifecycle{
 		"Deploying",
@@ -182,8 +191,9 @@ const (
 )
 
 // Values returns all known values for EngineType. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (EngineType) Values() []EngineType {
 	return []EngineType{
 		"microfocus",
@@ -203,8 +213,9 @@ const (
 )
 
 // Values returns all known values for EnvironmentLifecycle. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (EnvironmentLifecycle) Values() []EnvironmentLifecycle {
 	return []EnvironmentLifecycle{
 		"Creating",
@@ -219,19 +230,24 @@ type ValidationExceptionReason string
 
 // Enum values for ValidationExceptionReason
 const (
-	ValidationExceptionReasonUnknownOperation      ValidationExceptionReason = "unknownOperation"
-	ValidationExceptionReasonCannotParse           ValidationExceptionReason = "cannotParse"
-	ValidationExceptionReasonFieldValidationFailed ValidationExceptionReason = "fieldValidationFailed"
-	ValidationExceptionReasonOther                 ValidationExceptionReason = "other"
+	ValidationExceptionReasonUnknownOperation         ValidationExceptionReason = "unknownOperation"
+	ValidationExceptionReasonCannotParse              ValidationExceptionReason = "cannotParse"
+	ValidationExceptionReasonFeatureNotAvailable      ValidationExceptionReason = "featureNotAvailable"
+	ValidationExceptionReasonUnsupportedEngineVersion ValidationExceptionReason = "unsupportedEngineVersion"
+	ValidationExceptionReasonFieldValidationFailed    ValidationExceptionReason = "fieldValidationFailed"
+	ValidationExceptionReasonOther                    ValidationExceptionReason = "other"
 )
 
 // Values returns all known values for ValidationExceptionReason. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (ValidationExceptionReason) Values() []ValidationExceptionReason {
 	return []ValidationExceptionReason{
 		"unknownOperation",
 		"cannotParse",
+		"featureNotAvailable",
+		"unsupportedEngineVersion",
 		"fieldValidationFailed",
 		"other",
 	}

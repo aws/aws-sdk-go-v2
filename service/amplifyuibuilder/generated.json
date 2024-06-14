@@ -3,8 +3,7 @@
         "github.com/aws/aws-sdk-go-v2": "v1.4.0",
         "github.com/aws/aws-sdk-go-v2/internal/configsources": "v0.0.0-00010101000000-000000000000",
         "github.com/aws/aws-sdk-go-v2/internal/endpoints/v2": "v2.0.0-00010101000000-000000000000",
-        "github.com/aws/smithy-go": "v1.4.0",
-        "github.com/google/go-cmp": "v0.5.4"
+        "github.com/aws/smithy-go": "v1.4.0"
     },
     "files": [
         "api_client.go",
@@ -27,10 +26,13 @@
         "api_op_ListCodegenJobs.go",
         "api_op_ListComponents.go",
         "api_op_ListForms.go",
+        "api_op_ListTagsForResource.go",
         "api_op_ListThemes.go",
         "api_op_PutMetadataFlag.go",
         "api_op_RefreshToken.go",
         "api_op_StartCodegenJob.go",
+        "api_op_TagResource.go",
+        "api_op_UntagResource.go",
         "api_op_UpdateComponent.go",
         "api_op_UpdateForm.go",
         "api_op_UpdateTheme.go",
@@ -46,6 +48,7 @@
         "options.go",
         "protocol_test.go",
         "serializers.go",
+        "snapshot_test.go",
         "types/enums.go",
         "types/errors.go",
         "types/types.go",

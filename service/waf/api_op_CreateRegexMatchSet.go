@@ -6,35 +6,44 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/waf/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// This is AWS WAF Classic documentation. For more information, see AWS WAF Classic (https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html)
-// in the developer guide. For the latest version of AWS WAF, use the AWS WAFV2 API
-// and see the AWS WAF Developer Guide (https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html)
-// . With the latest version, AWS WAF has a single set of endpoints for regional
-// and global use. Creates a RegexMatchSet . You then use UpdateRegexMatchSet to
-// identify the part of a web request that you want AWS WAF to inspect, such as the
-// values of the User-Agent header or the query string. For example, you can
-// create a RegexMatchSet that contains a RegexMatchTuple that looks for any
-// requests with User-Agent headers that match a RegexPatternSet with pattern
-// B[a@]dB[o0]t . You can then configure AWS WAF to reject those requests. To
-// create and configure a RegexMatchSet , perform the following steps:
-//   - Use GetChangeToken to get the change token that you provide in the
-//     ChangeToken parameter of a CreateRegexMatchSet request.
+// This is AWS WAF Classic documentation. For more information, see [AWS WAF Classic] in the
+// developer guide.
+//
+// For the latest version of AWS WAF, use the AWS WAFV2 API and see the [AWS WAF Developer Guide]. With the
+// latest version, AWS WAF has a single set of endpoints for regional and global
+// use.
+//
+// Creates a RegexMatchSet. You then use UpdateRegexMatchSet to identify the part of a web request that you want
+// AWS WAF to inspect, such as the values of the User-Agent header or the query
+// string. For example, you can create a RegexMatchSet that contains a
+// RegexMatchTuple that looks for any requests with User-Agent headers that match
+// a RegexPatternSet with pattern B[a@]dB[o0]t . You can then configure AWS WAF to
+// reject those requests.
+//
+// To create and configure a RegexMatchSet , perform the following steps:
+//
+//   - Use GetChangeTokento get the change token that you provide in the ChangeToken parameter of
+//     a CreateRegexMatchSet request.
+//
 //   - Submit a CreateRegexMatchSet request.
+//
 //   - Use GetChangeToken to get the change token that you provide in the
 //     ChangeToken parameter of an UpdateRegexMatchSet request.
-//   - Submit an UpdateRegexMatchSet request to specify the part of the request
-//     that you want AWS WAF to inspect (for example, the header or the URI) and the
-//     value, using a RegexPatternSet , that you want AWS WAF to watch for.
+//
+//   - Submit an UpdateRegexMatchSetrequest to specify the part of the request that you want AWS WAF
+//     to inspect (for example, the header or the URI) and the value, using a
+//     RegexPatternSet , that you want AWS WAF to watch for.
 //
 // For more information about how to use the AWS WAF API to allow or block HTTP
-// requests, see the AWS WAF Developer Guide (https://docs.aws.amazon.com/waf/latest/developerguide/)
-// .
+// requests, see the [AWS WAF Developer Guide].
+//
+// [AWS WAF Classic]: https://docs.aws.amazon.com/waf/latest/developerguide/classic-waf-chapter.html
+// [AWS WAF Developer Guide]: https://docs.aws.amazon.com/waf/latest/developerguide/
 func (c *Client) CreateRegexMatchSet(ctx context.Context, params *CreateRegexMatchSetInput, optFns ...func(*Options)) (*CreateRegexMatchSetOutput, error) {
 	if params == nil {
 		params = &CreateRegexMatchSetInput{}
@@ -52,13 +61,13 @@ func (c *Client) CreateRegexMatchSet(ctx context.Context, params *CreateRegexMat
 
 type CreateRegexMatchSetInput struct {
 
-	// The value returned by the most recent call to GetChangeToken .
+	// The value returned by the most recent call to GetChangeToken.
 	//
 	// This member is required.
 	ChangeToken *string
 
-	// A friendly name or description of the RegexMatchSet . You can't change Name
-	// after you create a RegexMatchSet .
+	// A friendly name or description of the RegexMatchSet. You can't change Name after you create
+	// a RegexMatchSet .
 	//
 	// This member is required.
 	Name *string
@@ -70,7 +79,7 @@ type CreateRegexMatchSetOutput struct {
 
 	// The ChangeToken that you used to submit the CreateRegexMatchSet request. You
 	// can also use this value to query the status of the request. For more
-	// information, see GetChangeTokenStatus .
+	// information, see GetChangeTokenStatus.
 	ChangeToken *string
 
 	// A RegexMatchSet that contains no RegexMatchTuple objects.
@@ -104,25 +113,25 @@ func (c *Client) addOperationCreateRegexMatchSetMiddlewares(stack *middleware.St
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -137,13 +146,16 @@ func (c *Client) addOperationCreateRegexMatchSetMiddlewares(stack *middleware.St
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpCreateRegexMatchSetValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateRegexMatchSet(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

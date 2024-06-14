@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/outposts/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -43,21 +42,22 @@ type CreateSiteInput struct {
 	// equipment materials that could affect your installation process.
 	Notes *string
 
-	// The location to install and power on the hardware. This address might be
+	//  The location to install and power on the hardware. This address might be
 	// different from the shipping address.
 	OperatingAddress *types.Address
 
-	// Information about the physical and logistical details for the rack at this
-	// site. For more information about hardware requirements for racks, see Network
-	// readiness checklist (https://docs.aws.amazon.com/outposts/latest/userguide/outposts-requirements.html#checklist)
-	// in the Amazon Web Services Outposts User Guide.
+	//  Information about the physical and logistical details for the rack at this
+	// site. For more information about hardware requirements for racks, see [Network readiness checklist]in the
+	// Amazon Web Services Outposts User Guide.
+	//
+	// [Network readiness checklist]: https://docs.aws.amazon.com/outposts/latest/userguide/outposts-requirements.html#checklist
 	RackPhysicalProperties *types.RackPhysicalProperties
 
-	// The location to ship the hardware. This address might be different from the
+	//  The location to ship the hardware. This address might be different from the
 	// operating address.
 	ShippingAddress *types.Address
 
-	// The tags to apply to a site.
+	//  The tags to apply to a site.
 	Tags map[string]string
 
 	noSmithyDocumentSerde
@@ -96,25 +96,25 @@ func (c *Client) addOperationCreateSiteMiddlewares(stack *middleware.Stack, opti
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -129,13 +129,16 @@ func (c *Client) addOperationCreateSiteMiddlewares(stack *middleware.Stack, opti
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpCreateSiteValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateSite(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

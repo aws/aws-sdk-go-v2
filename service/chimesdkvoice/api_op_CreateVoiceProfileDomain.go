@@ -6,20 +6,23 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/chimesdkvoice/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates a voice profile domain, a collection of voice profiles, their voice
-// prints, and encrypted enrollment audio. Before creating any voice profiles, you
-// must provide all notices and obtain all consents from the speaker as required
-// under applicable privacy and biometrics laws, and as required under the AWS
-// service terms (https://aws.amazon.com/service-terms/) for the Amazon Chime SDK.
-// For more information about voice profile domains, see Using Amazon Chime SDK
-// Voice Analytics (https://docs.aws.amazon.com/chime-sdk/latest/dg/pstn-voice-analytics.html)
-// in the Amazon Chime SDK Developer Guide.
+// prints, and encrypted enrollment audio.
+//
+// Before creating any voice profiles, you must provide all notices and obtain all
+// consents from the speaker as required under applicable privacy and biometrics
+// laws, and as required under the [AWS service terms]for the Amazon Chime SDK.
+//
+// For more information about voice profile domains, see [Using Amazon Chime SDK Voice Analytics] in the Amazon Chime SDK
+// Developer Guide.
+//
+// [AWS service terms]: https://aws.amazon.com/service-terms/
+// [Using Amazon Chime SDK Voice Analytics]: https://docs.aws.amazon.com/chime-sdk/latest/dg/pstn-voice-analytics.html
 func (c *Client) CreateVoiceProfileDomain(ctx context.Context, params *CreateVoiceProfileDomainInput, optFns ...func(*Options)) (*CreateVoiceProfileDomainOutput, error) {
 	if params == nil {
 		params = &CreateVoiceProfileDomainInput{}
@@ -93,25 +96,25 @@ func (c *Client) addOperationCreateVoiceProfileDomainMiddlewares(stack *middlewa
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -126,13 +129,16 @@ func (c *Client) addOperationCreateVoiceProfileDomainMiddlewares(stack *middlewa
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpCreateVoiceProfileDomainValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateVoiceProfileDomain(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

@@ -40,15 +40,16 @@ type ApiGatewayProxyConfig struct {
 type ApiGatewayProxyInput struct {
 
 	// The type of endpoint to use for the API Gateway proxy. If no value is specified
-	// in the request, the value is set to REGIONAL by default. If the value is set to
-	// PRIVATE in the request, this creates a private API endpoint that is isolated
-	// from the public internet. The private endpoint can only be accessed by using
-	// Amazon Virtual Private Cloud (Amazon VPC) interface endpoints for the Amazon API
-	// Gateway that has been granted access. For more information about creating a
-	// private connection with Refactor Spaces and interface endpoint (Amazon Web
-	// Services PrivateLink) availability, see Access Refactor Spaces using an
-	// interface endpoint (Amazon Web Services PrivateLink) (https://docs.aws.amazon.com/migrationhub-refactor-spaces/latest/userguide/vpc-interface-endpoints.html)
-	// .
+	// in the request, the value is set to REGIONAL by default.
+	//
+	// If the value is set to PRIVATE in the request, this creates a private API
+	// endpoint that is isolated from the public internet. The private endpoint can
+	// only be accessed by using Amazon Virtual Private Cloud (Amazon VPC) interface
+	// endpoints for the Amazon API Gateway that has been granted access. For more
+	// information about creating a private connection with Refactor Spaces and
+	// interface endpoint (Amazon Web Services PrivateLink) availability, see [Access Refactor Spaces using an interface endpoint (Amazon Web Services PrivateLink)].
+	//
+	// [Access Refactor Spaces using an interface endpoint (Amazon Web Services PrivateLink)]: https://docs.aws.amazon.com/migrationhub-refactor-spaces/latest/userguide/vpc-interface-endpoints.html
 	EndpointType ApiGatewayEndpointType
 
 	// The name of the API Gateway stage. The name defaults to prod .
@@ -440,10 +441,12 @@ type UrlEndpointConfig struct {
 // The configuration for the URL endpoint type.
 type UrlEndpointInput struct {
 
-	// The URL to route traffic to. The URL must be an rfc3986-formatted URL (https://datatracker.ietf.org/doc/html/rfc3986)
-	// . If the host is a domain name, the name must be resolvable over the public
-	// internet. If the scheme is https , the top level domain of the host must be
-	// listed in the IANA root zone database (https://www.iana.org/domains/root/db) .
+	// The URL to route traffic to. The URL must be an [rfc3986-formatted URL]. If the host is a domain name,
+	// the name must be resolvable over the public internet. If the scheme is https ,
+	// the top level domain of the host must be listed in the [IANA root zone database].
+	//
+	// [IANA root zone database]: https://www.iana.org/domains/root/db
+	// [rfc3986-formatted URL]: https://datatracker.ietf.org/doc/html/rfc3986
 	//
 	// This member is required.
 	Url *string
@@ -466,10 +469,12 @@ type UrlEndpointSummary struct {
 	// endpoint, and the host must be the same as the URL.
 	HealthUrl *string
 
-	// The URL to route traffic to. The URL must be an rfc3986-formatted URL (https://datatracker.ietf.org/doc/html/rfc3986)
-	// . If the host is a domain name, the name must be resolvable over the public
-	// internet. If the scheme is https , the top level domain of the host must be
-	// listed in the IANA root zone database (https://www.iana.org/domains/root/db) .
+	//  The URL to route traffic to. The URL must be an [rfc3986-formatted URL]. If the host is a domain
+	// name, the name must be resolvable over the public internet. If the scheme is
+	// https , the top level domain of the host must be listed in the [IANA root zone database].
+	//
+	// [IANA root zone database]: https://www.iana.org/domains/root/db
+	// [rfc3986-formatted URL]: https://datatracker.ietf.org/doc/html/rfc3986
 	Url *string
 
 	noSmithyDocumentSerde

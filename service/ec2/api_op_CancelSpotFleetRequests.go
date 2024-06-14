@@ -6,19 +6,25 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Cancels the specified Spot Fleet requests. After you cancel a Spot Fleet
-// request, the Spot Fleet launches no new instances. You must also specify whether
-// a canceled Spot Fleet request should terminate its instances. If you choose to
-// terminate the instances, the Spot Fleet request enters the cancelled_terminating
-// state. Otherwise, the Spot Fleet request enters the cancelled_running state and
-// the instances continue to run until they are interrupted or you terminate them
-// manually.
+// Cancels the specified Spot Fleet requests.
+//
+// After you cancel a Spot Fleet request, the Spot Fleet launches no new instances.
+//
+// You must also specify whether a canceled Spot Fleet request should terminate
+// its instances. If you choose to terminate the instances, the Spot Fleet request
+// enters the cancelled_terminating state. Otherwise, the Spot Fleet request
+// enters the cancelled_running state and the instances continue to run until they
+// are interrupted or you terminate them manually.
+//
+// Restrictions
+//
+//   - You can delete up to 100 fleets in a single request. If you exceed the
+//     specified number, no fleets are deleted.
 func (c *Client) CancelSpotFleetRequests(ctx context.Context, params *CancelSpotFleetRequestsInput, optFns ...func(*Options)) (*CancelSpotFleetRequestsOutput, error) {
 	if params == nil {
 		params = &CancelSpotFleetRequestsInput{}
@@ -39,13 +45,16 @@ type CancelSpotFleetRequestsInput struct {
 
 	// The IDs of the Spot Fleet requests.
 	//
+	// Constraint: You can specify up to 100 IDs in a single request.
+	//
 	// This member is required.
 	SpotFleetRequestIds []string
 
 	// Indicates whether to terminate the associated instances when the Spot Fleet
-	// request is canceled. The default is to terminate the instances. To let the
-	// instances continue to run after the Spot Fleet request is canceled, specify
-	// no-terminate-instances .
+	// request is canceled. The default is to terminate the instances.
+	//
+	// To let the instances continue to run after the Spot Fleet request is canceled,
+	// specify no-terminate-instances .
 	//
 	// This member is required.
 	TerminateInstances *bool
@@ -96,25 +105,25 @@ func (c *Client) addOperationCancelSpotFleetRequestsMiddlewares(stack *middlewar
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -129,13 +138,16 @@ func (c *Client) addOperationCancelSpotFleetRequestsMiddlewares(stack *middlewar
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpCancelSpotFleetRequestsValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCancelSpotFleetRequests(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

@@ -7,16 +7,12 @@ import (
 	"context"
 	"github.com/aws/aws-sdk-go-v2/aws"
 	protocoltesthttp "github.com/aws/aws-sdk-go-v2/internal/protocoltest"
-	smithydocument "github.com/aws/smithy-go/document"
 	"github.com/aws/smithy-go/middleware"
 	smithyprivateprotocol "github.com/aws/smithy-go/private/protocol"
 	smithytesting "github.com/aws/smithy-go/testing"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
-	"github.com/google/go-cmp/cmp"
-	"github.com/google/go-cmp/cmp/cmpopts"
 	"io"
 	"io/ioutil"
-	"math"
 	"net/http"
 	"net/url"
 	"testing"
@@ -52,52 +48,6 @@ func TestClient_NullOperation_awsAwsjson11Serialize(t *testing.T) {
 			BodyMediaType: "application/json",
 			BodyAssert: func(actual io.Reader) error {
 				return smithytesting.CompareJSONReaderBytes(actual, []byte(`{}`))
-			},
-		},
-		// Serializes null values in maps
-		"AwsJson11MapsSerializeNullValues": {
-			Params: &NullOperationInput{
-				SparseStringMap: map[string]*string{
-					"foo": nil,
-				},
-			},
-			ExpectMethod:  "POST",
-			ExpectURIPath: "/",
-			ExpectQuery:   []smithytesting.QueryItem{},
-			ExpectHeader: http.Header{
-				"Content-Type": []string{"application/x-amz-json-1.1"},
-				"X-Amz-Target": []string{"JsonProtocol.NullOperation"},
-			},
-			BodyMediaType: "application/json",
-			BodyAssert: func(actual io.Reader) error {
-				return smithytesting.CompareJSONReaderBytes(actual, []byte(`{
-			    "sparseStringMap": {
-			        "foo": null
-			    }
-			}`))
-			},
-		},
-		// Serializes null values in lists
-		"AwsJson11ListsSerializeNull": {
-			Params: &NullOperationInput{
-				SparseStringList: []*string{
-					nil,
-				},
-			},
-			ExpectMethod:  "POST",
-			ExpectURIPath: "/",
-			ExpectQuery:   []smithytesting.QueryItem{},
-			ExpectHeader: http.Header{
-				"Content-Type": []string{"application/x-amz-json-1.1"},
-				"X-Amz-Target": []string{"JsonProtocol.NullOperation"},
-			},
-			BodyMediaType: "application/json",
-			BodyAssert: func(actual io.Reader) error {
-				return smithytesting.CompareJSONReaderBytes(actual, []byte(`{
-			    "sparseStringList": [
-			        null
-			    ]
-			}`))
 			},
 		},
 	}
@@ -184,42 +134,6 @@ func TestClient_NullOperation_awsAwsjson11Deserialize(t *testing.T) {
 			}`),
 			ExpectResult: &NullOperationOutput{},
 		},
-		// Deserializes null values in maps
-		"AwsJson11MapsDeserializeNullValues": {
-			StatusCode: 200,
-			Header: http.Header{
-				"Content-Type": []string{"application/x-amz-json-1.1"},
-			},
-			BodyMediaType: "application/json",
-			Body: []byte(`{
-			    "sparseStringMap": {
-			        "foo": null
-			    }
-			}`),
-			ExpectResult: &NullOperationOutput{
-				SparseStringMap: map[string]*string{
-					"foo": nil,
-				},
-			},
-		},
-		// Deserializes null values in lists
-		"AwsJson11ListsDeserializeNull": {
-			StatusCode: 200,
-			Header: http.Header{
-				"Content-Type": []string{"application/x-amz-json-1.1"},
-			},
-			BodyMediaType: "application/json",
-			Body: []byte(`{
-			    "sparseStringList": [
-			        null
-			    ]
-			}`),
-			ExpectResult: &NullOperationOutput{
-				SparseStringList: []*string{
-					nil,
-				},
-			},
-		},
 	}
 	for name, c := range cases {
 		t.Run(name, func(t *testing.T) {
@@ -271,19 +185,7 @@ func TestClient_NullOperation_awsAwsjson11Deserialize(t *testing.T) {
 			if result == nil {
 				t.Fatalf("expect not nil result")
 			}
-			opts := cmp.Options{
-				cmpopts.IgnoreUnexported(
-					middleware.Metadata{},
-				),
-				cmp.FilterValues(func(x, y float64) bool {
-					return math.IsNaN(x) && math.IsNaN(y)
-				}, cmp.Comparer(func(_, _ interface{}) bool { return true })),
-				cmp.FilterValues(func(x, y float32) bool {
-					return math.IsNaN(float64(x)) && math.IsNaN(float64(y))
-				}, cmp.Comparer(func(_, _ interface{}) bool { return true })),
-				cmpopts.IgnoreTypes(smithydocument.NoSerde{}),
-			}
-			if err := smithytesting.CompareValues(c.ExpectResult, result, opts...); err != nil {
+			if err := smithytesting.CompareValues(c.ExpectResult, result); err != nil {
 				t.Errorf("expect c.ExpectResult value match:\n%v", err)
 			}
 		})

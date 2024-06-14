@@ -6,15 +6,15 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Pushes an SSH public key to the specified EC2 instance. The key remains for 60
 // seconds, which gives you 60 seconds to establish a serial console connection to
-// the instance using SSH. For more information, see EC2 Serial Console (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-serial-console.html)
-// in the Amazon EC2 User Guide.
+// the instance using SSH. For more information, see [EC2 Serial Console]in the Amazon EC2 User Guide.
+//
+// [EC2 Serial Console]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-serial-console.html
 func (c *Client) SendSerialConsoleSSHPublicKey(ctx context.Context, params *SendSerialConsoleSSHPublicKeyInput, optFns ...func(*Options)) (*SendSerialConsoleSSHPublicKeyOutput, error) {
 	if params == nil {
 		params = &SendSerialConsoleSSHPublicKeyInput{}
@@ -38,14 +38,16 @@ type SendSerialConsoleSSHPublicKeyInput struct {
 	InstanceId *string
 
 	// The public key material. To use the public key, you must have the matching
-	// private key. For information about the supported key formats and lengths, see
-	// Requirements for key pairs (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-key-pairs.html#how-to-generate-your-own-key-and-import-it-to-aws)
+	// private key. For information about the supported key formats and lengths, see [Requirements for key pairs]
 	// in the Amazon EC2 User Guide.
+	//
+	// [Requirements for key pairs]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-key-pairs.html#how-to-generate-your-own-key-and-import-it-to-aws
 	//
 	// This member is required.
 	SSHPublicKey *string
 
 	// The serial port of the EC2 instance. Currently only port 0 is supported.
+	//
 	// Default: 0
 	SerialPort int32
 
@@ -89,25 +91,25 @@ func (c *Client) addOperationSendSerialConsoleSSHPublicKeyMiddlewares(stack *mid
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -122,13 +124,16 @@ func (c *Client) addOperationSendSerialConsoleSSHPublicKeyMiddlewares(stack *mid
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpSendSerialConsoleSSHPublicKeyValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opSendSerialConsoleSSHPublicKey(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

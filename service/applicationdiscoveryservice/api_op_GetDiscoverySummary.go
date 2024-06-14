@@ -6,15 +6,15 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/applicationdiscoveryservice/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Retrieves a short summary of discovered assets. This API operation takes no
-// request parameters and is called as is at the command prompt as shown in the
-// example.
+// Retrieves a short summary of discovered assets.
+//
+// This API operation takes no request parameters and is called as is at the
+// command prompt as shown in the example.
 func (c *Client) GetDiscoverySummary(ctx context.Context, params *GetDiscoverySummaryInput, optFns ...func(*Options)) (*GetDiscoverySummaryOutput, error) {
 	if params == nil {
 		params = &GetDiscoverySummaryInput{}
@@ -39,7 +39,7 @@ type GetDiscoverySummaryOutput struct {
 	// Details about discovered agents, including agent status and health.
 	AgentSummary *types.CustomerAgentInfo
 
-	// Details about Agentless Collector collectors, including status.
+	//  Details about Agentless Collector collectors, including status.
 	AgentlessCollectorSummary *types.CustomerAgentlessCollectorInfo
 
 	// The number of applications discovered.
@@ -48,7 +48,7 @@ type GetDiscoverySummaryOutput struct {
 	// Details about discovered connectors, including connector status and health.
 	ConnectorSummary *types.CustomerConnectorInfo
 
-	// Details about Migration Evaluator collectors, including collector status and
+	//  Details about Migration Evaluator collectors, including collector status and
 	// health.
 	MeCollectorSummary *types.CustomerMeCollectorInfo
 
@@ -89,25 +89,25 @@ func (c *Client) addOperationGetDiscoverySummaryMiddlewares(stack *middleware.St
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -122,10 +122,13 @@ func (c *Client) addOperationGetDiscoverySummaryMiddlewares(stack *middleware.St
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetDiscoverySummary(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

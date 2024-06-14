@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/devicefarm/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -41,8 +40,7 @@ type ScheduleRunInput struct {
 	// This member is required.
 	Test *types.ScheduleRunTest
 
-	// The ARN of an application package to run tests against, created with
-	// CreateUpload . See ListUploads .
+	// The ARN of an application package to run tests against, created with CreateUpload. See ListUploads.
 	AppArn *string
 
 	// Information about the settings for the run to be scheduled.
@@ -52,8 +50,9 @@ type ScheduleRunInput struct {
 	DevicePoolArn *string
 
 	// The filter criteria used to dynamically select a set of devices for a test run
-	// and the maximum number of devices to be included in the run. Either
-	// devicePoolArn or deviceSelectionConfiguration is required in a request.
+	// and the maximum number of devices to be included in the run.
+	//
+	// Either devicePoolArn or deviceSelectionConfiguration is required in a request.
 	DeviceSelectionConfiguration *types.DeviceSelectionConfiguration
 
 	// Specifies configuration information about a test run, such as the execution
@@ -100,25 +99,25 @@ func (c *Client) addOperationScheduleRunMiddlewares(stack *middleware.Stack, opt
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -133,13 +132,16 @@ func (c *Client) addOperationScheduleRunMiddlewares(stack *middleware.Stack, opt
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpScheduleRunValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opScheduleRun(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

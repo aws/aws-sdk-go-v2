@@ -6,14 +6,16 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// The RejectQualificationRequest operation rejects a user's request for a
-// Qualification. You can provide a text message explaining why the request was
-// rejected. The Worker who made the request can see this message.
+//	The RejectQualificationRequest operation rejects a user's request for a
+//
+// Qualification.
+//
+// You can provide a text message explaining why the request was rejected. The
+// Worker who made the request can see this message.
 func (c *Client) RejectQualificationRequest(ctx context.Context, params *RejectQualificationRequestInput, optFns ...func(*Options)) (*RejectQualificationRequestOutput, error) {
 	if params == nil {
 		params = &RejectQualificationRequestInput{}
@@ -31,7 +33,7 @@ func (c *Client) RejectQualificationRequest(ctx context.Context, params *RejectQ
 
 type RejectQualificationRequestInput struct {
 
-	// The ID of the Qualification request, as returned by the
+	//  The ID of the Qualification request, as returned by the
 	// ListQualificationRequests operation.
 	//
 	// This member is required.
@@ -73,25 +75,25 @@ func (c *Client) addOperationRejectQualificationRequestMiddlewares(stack *middle
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -106,13 +108,16 @@ func (c *Client) addOperationRejectQualificationRequestMiddlewares(stack *middle
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpRejectQualificationRequestValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opRejectQualificationRequest(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

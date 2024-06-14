@@ -6,18 +6,20 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/transcribe/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
-// Provides information about the specified custom medical vocabulary. To view the
-// status of the specified custom medical vocabulary, check the VocabularyState
-// field. If the status is READY , your custom vocabulary is available to use. If
-// the status is FAILED , FailureReason provides details on why your vocabulary
-// failed. To get a list of your custom medical vocabularies, use the operation.
+// Provides information about the specified custom medical vocabulary.
+//
+// To view the status of the specified custom medical vocabulary, check the
+// VocabularyState field. If the status is READY , your custom vocabulary is
+// available to use. If the status is FAILED , FailureReason provides details on
+// why your vocabulary failed.
+//
+// To get a list of your custom medical vocabularies, use the operation.
 func (c *Client) GetMedicalVocabulary(ctx context.Context, params *GetMedicalVocabularyInput, optFns ...func(*Options)) (*GetMedicalVocabularyOutput, error) {
 	if params == nil {
 		params = &GetMedicalVocabularyInput{}
@@ -51,8 +53,9 @@ type GetMedicalVocabularyOutput struct {
 	DownloadUri *string
 
 	// If VocabularyState is FAILED , FailureReason contains information about why the
-	// custom medical vocabulary request failed. See also: Common Errors (https://docs.aws.amazon.com/transcribe/latest/APIReference/CommonErrors.html)
-	// .
+	// custom medical vocabulary request failed. See also: [Common Errors].
+	//
+	// [Common Errors]: https://docs.aws.amazon.com/transcribe/latest/APIReference/CommonErrors.html
 	FailureReason *string
 
 	// The language code you selected for your custom medical vocabulary. US English (
@@ -60,6 +63,7 @@ type GetMedicalVocabularyOutput struct {
 	LanguageCode types.LanguageCode
 
 	// The date and time the specified custom medical vocabulary was last modified.
+	//
 	// Timestamps are in the format YYYY-MM-DD'T'HH:MM:SS.SSSSSS-UTC . For example,
 	// 2022-05-04T12:32:58.761000-07:00 represents 12:32 PM UTC-7 on May 4, 2022.
 	LastModifiedTime *time.Time
@@ -99,25 +103,25 @@ func (c *Client) addOperationGetMedicalVocabularyMiddlewares(stack *middleware.S
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -132,13 +136,16 @@ func (c *Client) addOperationGetMedicalVocabularyMiddlewares(stack *middleware.S
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpGetMedicalVocabularyValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetMedicalVocabulary(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

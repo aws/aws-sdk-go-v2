@@ -1,3 +1,79 @@
+# v1.11.6 (2024-06-07)
+
+* **Bug Fix**: Add clock skew correction on all service clients
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.11.5 (2024-06-03)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.11.4 (2024-05-23)
+
+* No change notes available for this release.
+
+# v1.11.3 (2024-05-16)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.11.2 (2024-05-15)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.11.1 (2024-05-08)
+
+* **Bug Fix**: GoDoc improvement
+
+# v1.11.0 (2024-04-18)
+
+* **Feature**: This release introduces the PutAttributeMapping and DeleteAttributeMapping APIs. IAM Roles Anywhere now provides the capability to define a set of mapping rules, allowing customers to specify which data is extracted from their X.509 end-entity certificates.
+
+# v1.10.0 (2024-04-02)
+
+* **Feature**: This release increases the limit on the roleArns request parameter for the *Profile APIs that support it. This parameter can now take up to 250 role ARNs.
+
+# v1.9.1 (2024-03-29)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.9.0 (2024-03-22)
+
+* **Feature**: This release relaxes constraints on the durationSeconds request parameter for the *Profile APIs that support it. This parameter can now take on values that go up to 43200.
+
+# v1.8.4 (2024-03-18)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.8.3 (2024-03-08)
+
+* No change notes available for this release.
+
+# v1.8.2 (2024-03-07)
+
+* **Bug Fix**: Remove dependency on go-cmp.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.8.1 (2024-02-23)
+
+* **Bug Fix**: Move all common, SDK-side middleware stack ops into the service client module to prevent cross-module compatibility issues in the future.
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.8.0 (2024-02-22)
+
+* **Feature**: Add middleware stack snapshot tests.
+
+# v1.7.2 (2024-02-21)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
+# v1.7.1 (2024-02-20)
+
+* **Bug Fix**: When sourcing values for a service's `EndpointParameters`, the lack of a configured region (i.e. `options.Region == ""`) will now translate to a `nil` value for `EndpointParameters.Region` instead of a pointer to the empty string `""`. This will result in a much more explicit error when calling an operation instead of an obscure hostname lookup failure.
+
+# v1.7.0 (2024-02-13)
+
+* **Feature**: Bump minimum Go version to 1.20 per our language support policy.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.6.8 (2024-01-04)
 
 * **Dependency Update**: Updated to the latest SDK module versions

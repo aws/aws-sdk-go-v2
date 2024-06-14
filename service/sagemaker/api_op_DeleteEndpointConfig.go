@@ -6,19 +6,20 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Deletes an endpoint configuration. The DeleteEndpointConfig API deletes only
 // the specified configuration. It does not delete endpoints created using the
-// configuration. You must not delete an EndpointConfig in use by an endpoint that
-// is live or while the UpdateEndpoint or CreateEndpoint operations are being
-// performed on the endpoint. If you delete the EndpointConfig of an endpoint that
-// is active or being created or updated you may lose visibility into the instance
-// type the endpoint is using. The endpoint must be deleted in order to stop
-// incurring charges.
+// configuration.
+//
+// You must not delete an EndpointConfig in use by an endpoint that is live or
+// while the UpdateEndpoint or CreateEndpoint operations are being performed on
+// the endpoint. If you delete the EndpointConfig of an endpoint that is active or
+// being created or updated you may lose visibility into the instance type the
+// endpoint is using. The endpoint must be deleted in order to stop incurring
+// charges.
 func (c *Client) DeleteEndpointConfig(ctx context.Context, params *DeleteEndpointConfigInput, optFns ...func(*Options)) (*DeleteEndpointConfigOutput, error) {
 	if params == nil {
 		params = &DeleteEndpointConfigInput{}
@@ -73,25 +74,25 @@ func (c *Client) addOperationDeleteEndpointConfigMiddlewares(stack *middleware.S
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -106,13 +107,16 @@ func (c *Client) addOperationDeleteEndpointConfigMiddlewares(stack *middleware.S
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDeleteEndpointConfigValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteEndpointConfig(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

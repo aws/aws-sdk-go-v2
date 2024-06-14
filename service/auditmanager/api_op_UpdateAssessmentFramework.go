@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/auditmanager/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -30,26 +29,26 @@ func (c *Client) UpdateAssessmentFramework(ctx context.Context, params *UpdateAs
 
 type UpdateAssessmentFrameworkInput struct {
 
-	// The control sets that are associated with the framework.
+	//  The control sets that are associated with the framework.
 	//
 	// This member is required.
 	ControlSets []types.UpdateAssessmentFrameworkControlSet
 
-	// The unique identifier for the framework.
+	//  The unique identifier for the framework.
 	//
 	// This member is required.
 	FrameworkId *string
 
-	// The name of the framework to be updated.
+	//  The name of the framework to be updated.
 	//
 	// This member is required.
 	Name *string
 
-	// The compliance type that the new custom framework supports, such as CIS or
+	//  The compliance type that the new custom framework supports, such as CIS or
 	// HIPAA.
 	ComplianceType *string
 
-	// The description of the updated framework.
+	//  The description of the updated framework.
 	Description *string
 
 	noSmithyDocumentSerde
@@ -57,7 +56,7 @@ type UpdateAssessmentFrameworkInput struct {
 
 type UpdateAssessmentFrameworkOutput struct {
 
-	// The name of the framework.
+	//  The name of the framework.
 	Framework *types.Framework
 
 	// Metadata pertaining to the operation's result.
@@ -88,25 +87,25 @@ func (c *Client) addOperationUpdateAssessmentFrameworkMiddlewares(stack *middlew
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -121,13 +120,16 @@ func (c *Client) addOperationUpdateAssessmentFrameworkMiddlewares(stack *middlew
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpUpdateAssessmentFrameworkValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateAssessmentFramework(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

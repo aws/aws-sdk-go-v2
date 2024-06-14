@@ -6,17 +6,17 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Stops a running hyperparameter tuning job and all running training jobs that
-// the tuning job launched. All model artifacts output from the training jobs are
-// stored in Amazon Simple Storage Service (Amazon S3). All data that the training
-// jobs write to Amazon CloudWatch Logs are still available in CloudWatch. After
-// the tuning job moves to the Stopped state, it releases all reserved resources
-// for the tuning job.
+// the tuning job launched.
+//
+// All model artifacts output from the training jobs are stored in Amazon Simple
+// Storage Service (Amazon S3). All data that the training jobs write to Amazon
+// CloudWatch Logs are still available in CloudWatch. After the tuning job moves to
+// the Stopped state, it releases all reserved resources for the tuning job.
 func (c *Client) StopHyperParameterTuningJob(ctx context.Context, params *StopHyperParameterTuningJobInput, optFns ...func(*Options)) (*StopHyperParameterTuningJobOutput, error) {
 	if params == nil {
 		params = &StopHyperParameterTuningJobInput{}
@@ -71,25 +71,25 @@ func (c *Client) addOperationStopHyperParameterTuningJobMiddlewares(stack *middl
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -104,13 +104,16 @@ func (c *Client) addOperationStopHyperParameterTuningJobMiddlewares(stack *middl
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpStopHyperParameterTuningJobValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opStopHyperParameterTuningJob(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

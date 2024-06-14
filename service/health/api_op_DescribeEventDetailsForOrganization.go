@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/health/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -17,29 +16,36 @@ import (
 // standard event data (such as the Amazon Web Services Region and service), an
 // event description, and (depending on the event) possible metadata. This
 // operation doesn't return affected entities, such as the resources related to the
-// event. To return affected entities, use the
-// DescribeAffectedEntitiesForOrganization (https://docs.aws.amazon.com/health/latest/APIReference/API_DescribeAffectedEntitiesForOrganization.html)
-// operation. Before you can call this operation, you must first enable Health to
-// work with Organizations. To do this, call the
-// EnableHealthServiceAccessForOrganization (https://docs.aws.amazon.com/health/latest/APIReference/API_EnableHealthServiceAccessForOrganization.html)
-// operation from your organization's management account. When you call the
-// DescribeEventDetailsForOrganization operation, specify the
+// event. To return affected entities, use the [DescribeAffectedEntitiesForOrganization]operation.
+//
+// Before you can call this operation, you must first enable Health to work with
+// Organizations. To do this, call the [EnableHealthServiceAccessForOrganization]operation from your organization's
+// management account.
+//
+// When you call the DescribeEventDetailsForOrganization operation, specify the
 // organizationEventDetailFilters object in the request. Depending on the Health
 // event type, note the following differences:
+//
 //   - To return event details for a public event, you must specify a null value
 //     for the awsAccountId parameter. If you specify an account ID for a public
 //     event, Health returns an error message because public events aren't specific to
 //     an account.
+//
 //   - To return event details for an event that is specific to an account in your
 //     organization, you must specify the awsAccountId parameter in the request. If
 //     you don't specify an account ID, Health returns an error message because the
 //     event is specific to an account in your organization.
 //
-// For more information, see Event (https://docs.aws.amazon.com/health/latest/APIReference/API_Event.html)
-// . This operation doesn't support resource-level permissions. You can't use this
+// For more information, see [Event].
+//
+// This operation doesn't support resource-level permissions. You can't use this
 // operation to allow or deny access to specific Health events. For more
-// information, see Resource- and action-based conditions (https://docs.aws.amazon.com/health/latest/ug/security_iam_id-based-policy-examples.html#resource-action-based-conditions)
-// in the Health User Guide.
+// information, see [Resource- and action-based conditions]in the Health User Guide.
+//
+// [Resource- and action-based conditions]: https://docs.aws.amazon.com/health/latest/ug/security_iam_id-based-policy-examples.html#resource-action-based-conditions
+// [DescribeAffectedEntitiesForOrganization]: https://docs.aws.amazon.com/health/latest/APIReference/API_DescribeAffectedEntitiesForOrganization.html
+// [Event]: https://docs.aws.amazon.com/health/latest/APIReference/API_Event.html
+// [EnableHealthServiceAccessForOrganization]: https://docs.aws.amazon.com/health/latest/APIReference/API_EnableHealthServiceAccessForOrganization.html
 func (c *Client) DescribeEventDetailsForOrganization(ctx context.Context, params *DescribeEventDetailsForOrganizationInput, optFns ...func(*Options)) (*DescribeEventDetailsForOrganizationOutput, error) {
 	if params == nil {
 		params = &DescribeEventDetailsForOrganizationInput{}
@@ -105,25 +111,25 @@ func (c *Client) addOperationDescribeEventDetailsForOrganizationMiddlewares(stac
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -138,13 +144,16 @@ func (c *Client) addOperationDescribeEventDetailsForOrganizationMiddlewares(stac
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDescribeEventDetailsForOrganizationValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeEventDetailsForOrganization(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

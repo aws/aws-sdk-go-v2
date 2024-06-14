@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/redshift/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -14,15 +13,22 @@ import (
 
 // Returns information about Amazon Redshift security groups. If the name of a
 // security group is specified, the response will contain only information about
-// only that security group. For information about managing security groups, go to
-// Amazon Redshift Cluster Security Groups (https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-security-groups.html)
-// in the Amazon Redshift Cluster Management Guide. If you specify both tag keys
-// and tag values in the same request, Amazon Redshift returns all security groups
-// that match any combination of the specified keys and values. For example, if you
-// have owner and environment for tag keys, and admin and test for tag values, all
-// security groups that have any combination of those values are returned. If both
-// tag keys and values are omitted from the request, security groups are returned
-// regardless of whether they have tag keys or values associated with them.
+// only that security group.
+//
+// For information about managing security groups, go to [Amazon Redshift Cluster Security Groups] in the Amazon Redshift
+// Cluster Management Guide.
+//
+// If you specify both tag keys and tag values in the same request, Amazon
+// Redshift returns all security groups that match any combination of the specified
+// keys and values. For example, if you have owner and environment for tag keys,
+// and admin and test for tag values, all security groups that have any
+// combination of those values are returned.
+//
+// If both tag keys and values are omitted from the request, security groups are
+// returned regardless of whether they have tag keys or values associated with
+// them.
+//
+// [Amazon Redshift Cluster Security Groups]: https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-security-groups.html
 func (c *Client) DescribeClusterSecurityGroups(ctx context.Context, params *DescribeClusterSecurityGroupsInput, optFns ...func(*Options)) (*DescribeClusterSecurityGroupsOutput, error) {
 	if params == nil {
 		params = &DescribeClusterSecurityGroupsInput{}
@@ -42,22 +48,28 @@ type DescribeClusterSecurityGroupsInput struct {
 
 	// The name of a cluster security group for which you are requesting details. You
 	// must specify either the Marker parameter or a ClusterSecurityGroupName
-	// parameter, but not both. Example: securitygroup1
+	// parameter, but not both.
+	//
+	// Example: securitygroup1
 	ClusterSecurityGroupName *string
 
 	// An optional parameter that specifies the starting point to return a set of
-	// response records. When the results of a DescribeClusterSecurityGroups request
-	// exceed the value specified in MaxRecords , Amazon Web Services returns a value
-	// in the Marker field of the response. You can retrieve the next set of response
-	// records by providing the returned marker value in the Marker parameter and
-	// retrying the request. Constraints: You must specify either the
-	// ClusterSecurityGroupName parameter or the Marker parameter, but not both.
+	// response records. When the results of a DescribeClusterSecurityGroupsrequest exceed the value specified in
+	// MaxRecords , Amazon Web Services returns a value in the Marker field of the
+	// response. You can retrieve the next set of response records by providing the
+	// returned marker value in the Marker parameter and retrying the request.
+	//
+	// Constraints: You must specify either the ClusterSecurityGroupName parameter or
+	// the Marker parameter, but not both.
 	Marker *string
 
 	// The maximum number of response records to return in each call. If the number of
 	// remaining response records exceeds the specified MaxRecords value, a value is
 	// returned in a marker field of the response. You can retrieve the next set of
-	// records by retrying the command with the returned marker value. Default: 100
+	// records by retrying the command with the returned marker value.
+	//
+	// Default: 100
+	//
 	// Constraints: minimum 20, maximum 100.
 	MaxRecords *int32
 
@@ -120,25 +132,25 @@ func (c *Client) addOperationDescribeClusterSecurityGroupsMiddlewares(stack *mid
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -153,10 +165,13 @@ func (c *Client) addOperationDescribeClusterSecurityGroupsMiddlewares(stack *mid
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeClusterSecurityGroups(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -188,7 +203,10 @@ type DescribeClusterSecurityGroupsPaginatorOptions struct {
 	// The maximum number of response records to return in each call. If the number of
 	// remaining response records exceeds the specified MaxRecords value, a value is
 	// returned in a marker field of the response. You can retrieve the next set of
-	// records by retrying the command with the returned marker value. Default: 100
+	// records by retrying the command with the returned marker value.
+	//
+	// Default: 100
+	//
 	// Constraints: minimum 20, maximum 100.
 	Limit int32
 

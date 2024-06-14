@@ -6,15 +6,15 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/lightsail/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes a Amazon Lightsail bucket. When you delete your bucket, the bucket name
-// is released and can be reused for a new bucket in your account or another Amazon
-// Web Services account.
+// Deletes a Amazon Lightsail bucket.
+//
+// When you delete your bucket, the bucket name is released and can be reused for
+// a new bucket in your account or another Amazon Web Services account.
 func (c *Client) DeleteBucket(ctx context.Context, params *DeleteBucketInput, optFns ...func(*Options)) (*DeleteBucketOutput, error) {
 	if params == nil {
 		params = &DeleteBucketInput{}
@@ -32,22 +32,31 @@ func (c *Client) DeleteBucket(ctx context.Context, params *DeleteBucketInput, op
 
 type DeleteBucketInput struct {
 
-	// The name of the bucket to delete. Use the GetBuckets (https://docs.aws.amazon.com/lightsail/2016-11-28/api-reference/API_GetBuckets.html)
-	// action to get a list of bucket names that you can specify.
+	// The name of the bucket to delete.
+	//
+	// Use the [GetBuckets] action to get a list of bucket names that you can specify.
+	//
+	// [GetBuckets]: https://docs.aws.amazon.com/lightsail/2016-11-28/api-reference/API_GetBuckets.html
 	//
 	// This member is required.
 	BucketName *string
 
-	// A Boolean value that indicates whether to force delete the bucket. You must
-	// force delete the bucket if it has one of the following conditions:
+	// A Boolean value that indicates whether to force delete the bucket.
+	//
+	// You must force delete the bucket if it has one of the following conditions:
+	//
 	//   - The bucket is the origin of a distribution.
-	//   - The bucket has instances that were granted access to it using the
-	//   SetResourceAccessForBucket (https://docs.aws.amazon.com/lightsail/2016-11-28/api-reference/API_SetResourceAccessForBucket.html)
-	//   action.
+	//
+	//   - The bucket has instances that were granted access to it using the [SetResourceAccessForBucket]action.
+	//
 	//   - The bucket has objects.
+	//
 	//   - The bucket has access keys.
+	//
 	// Force deleting a bucket might impact other resources that rely on the bucket,
 	// such as instances, distributions, or software that use the issued access keys.
+	//
+	// [SetResourceAccessForBucket]: https://docs.aws.amazon.com/lightsail/2016-11-28/api-reference/API_SetResourceAccessForBucket.html
 	ForceDelete *bool
 
 	noSmithyDocumentSerde
@@ -88,25 +97,25 @@ func (c *Client) addOperationDeleteBucketMiddlewares(stack *middleware.Stack, op
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -121,13 +130,16 @@ func (c *Client) addOperationDeleteBucketMiddlewares(stack *middleware.Stack, op
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDeleteBucketValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteBucket(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

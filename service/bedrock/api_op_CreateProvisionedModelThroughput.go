@@ -6,15 +6,17 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/bedrock/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a provisioned throughput with dedicated capacity for a foundation model
-// or a fine-tuned model. For more information, see Provisioned throughput (https://docs.aws.amazon.com/bedrock/latest/userguide/what-is-service.html)
-// in the Bedrock User Guide.
+// Creates dedicated throughput for a base or custom model with the model units
+// and for the duration that you specify. For pricing details, see [Amazon Bedrock Pricing]. For more
+// information, see [Provisioned Throughput]in the Amazon Bedrock User Guide.
+//
+// [Amazon Bedrock Pricing]: http://aws.amazon.com/bedrock/pricing/
+// [Provisioned Throughput]: https://docs.aws.amazon.com/bedrock/latest/userguide/prov-throughput.html
 func (c *Client) CreateProvisionedModelThroughput(ctx context.Context, params *CreateProvisionedModelThroughputInput, optFns ...func(*Options)) (*CreateProvisionedModelThroughputOutput, error) {
 	if params == nil {
 		params = &CreateProvisionedModelThroughputInput{}
@@ -32,29 +34,57 @@ func (c *Client) CreateProvisionedModelThroughput(ctx context.Context, params *C
 
 type CreateProvisionedModelThroughputInput struct {
 
-	// Name or ARN of the model to associate with this provisioned throughput.
+	// The Amazon Resource Name (ARN) or name of the model to associate with this
+	// Provisioned Throughput. For a list of models for which you can purchase
+	// Provisioned Throughput, see [Amazon Bedrock model IDs for purchasing Provisioned Throughput]in the Amazon Bedrock User Guide.
+	//
+	// [Amazon Bedrock model IDs for purchasing Provisioned Throughput]: https://docs.aws.amazon.com/bedrock/latest/userguide/model-ids.html#prov-throughput-models
 	//
 	// This member is required.
 	ModelId *string
 
-	// Number of model units to allocate.
+	// Number of model units to allocate. A model unit delivers a specific throughput
+	// level for the specified model. The throughput level of a model unit specifies
+	// the total number of input and output tokens that it can process and generate
+	// within a span of one minute. By default, your account has no model units for
+	// purchasing Provisioned Throughputs with commitment. You must first visit the [Amazon Web Services support center]to
+	// request MUs.
+	//
+	// For model unit quotas, see [Provisioned Throughput quotas] in the Amazon Bedrock User Guide.
+	//
+	// For more information about what an MU specifies, contact your Amazon Web
+	// Services account manager.
+	//
+	// [Amazon Web Services support center]: https://console.aws.amazon.com/support/home#/case/create?issueType=service-limit-increase
+	// [Provisioned Throughput quotas]: https://docs.aws.amazon.com/bedrock/latest/userguide/quotas.html#prov-thru-quotas
 	//
 	// This member is required.
 	ModelUnits *int32
 
-	// Unique name for this provisioned throughput.
+	// The name for this Provisioned Throughput.
 	//
 	// This member is required.
 	ProvisionedModelName *string
 
-	// Unique token value that you can provide. If this token matches a previous
-	// request, Amazon Bedrock ignores the request, but does not return an error.
+	// A unique, case-sensitive identifier to ensure that the API request completes no
+	// more than one time. If this token matches a previous request, Amazon Bedrock
+	// ignores the request, but does not return an error. For more information, see [Ensuring idempotency]in
+	// the Amazon S3 User Guide.
+	//
+	// [Ensuring idempotency]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
 	ClientRequestToken *string
 
-	// Commitment duration requested for the provisioned throughput.
+	// The commitment duration requested for the Provisioned Throughput. Billing
+	// occurs hourly and is discounted for longer commitment terms. To request a
+	// no-commit Provisioned Throughput, omit this field.
+	//
+	// Custom models support all levels of commitment. To see which base models
+	// support no commitment, see [Supported regions and models for Provisioned Throughput]in the Amazon Bedrock User Guide
+	//
+	// [Supported regions and models for Provisioned Throughput]: https://docs.aws.amazon.com/bedrock/latest/userguide/pt-supported.html
 	CommitmentDuration types.CommitmentDuration
 
-	// Tags to associate with this provisioned throughput.
+	// Tags to associate with this Provisioned Throughput.
 	Tags []types.Tag
 
 	noSmithyDocumentSerde
@@ -62,7 +92,7 @@ type CreateProvisionedModelThroughputInput struct {
 
 type CreateProvisionedModelThroughputOutput struct {
 
-	// The ARN for this provisioned throughput.
+	// The Amazon Resource Name (ARN) for this Provisioned Throughput.
 	//
 	// This member is required.
 	ProvisionedModelArn *string
@@ -95,25 +125,25 @@ func (c *Client) addOperationCreateProvisionedModelThroughputMiddlewares(stack *
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -128,6 +158,9 @@ func (c *Client) addOperationCreateProvisionedModelThroughputMiddlewares(stack *
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opCreateProvisionedModelThroughputMiddleware(stack, options); err != nil {
 		return err
 	}
@@ -137,7 +170,7 @@ func (c *Client) addOperationCreateProvisionedModelThroughputMiddlewares(stack *
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateProvisionedModelThroughput(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

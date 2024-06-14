@@ -6,19 +6,20 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Configures one or more gateway local disks as working storage for a gateway.
 // This operation is only supported in the stored volume gateway type. This
-// operation is deprecated in cached volume API version 20120630. Use
-// AddUploadBuffer instead. Working storage is also referred to as upload buffer.
-// You can also use the AddUploadBuffer operation to add upload buffer to a stored
-// volume gateway. In the request, you specify the gateway Amazon Resource Name
-// (ARN) to which you want to add working storage, and one or more disk IDs that
-// you want to configure as working storage.
+// operation is deprecated in cached volume API version 20120630. Use AddUploadBufferinstead.
+//
+// Working storage is also referred to as upload buffer. You can also use the AddUploadBuffer
+// operation to add upload buffer to a stored volume gateway.
+//
+// In the request, you specify the gateway Amazon Resource Name (ARN) to which you
+// want to add working storage, and one or more disk IDs that you want to configure
+// as working storage.
 func (c *Client) AddWorkingStorage(ctx context.Context, params *AddWorkingStorageInput, optFns ...func(*Options)) (*AddWorkingStorageOutput, error) {
 	if params == nil {
 		params = &AddWorkingStorageInput{}
@@ -35,18 +36,19 @@ func (c *Client) AddWorkingStorage(ctx context.Context, params *AddWorkingStorag
 }
 
 // A JSON object containing one or more of the following fields:
-//   - AddWorkingStorageInput$DiskIds
+//
+// AddWorkingStorageInput$DiskIds
 type AddWorkingStorageInput struct {
 
 	// An array of strings that identify disks that are to be configured as working
 	// storage. Each string has a minimum length of 1 and maximum length of 300. You
-	// can get the disk IDs from the ListLocalDisks API.
+	// can get the disk IDs from the ListLocalDisksAPI.
 	//
 	// This member is required.
 	DiskIds []string
 
-	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation
-	// to return a list of gateways for your account and Amazon Web Services Region.
+	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation to return a
+	// list of gateways for your account and Amazon Web Services Region.
 	//
 	// This member is required.
 	GatewayARN *string
@@ -58,8 +60,8 @@ type AddWorkingStorageInput struct {
 // which working storage was configured.
 type AddWorkingStorageOutput struct {
 
-	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation
-	// to return a list of gateways for your account and Amazon Web Services Region.
+	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation to return a
+	// list of gateways for your account and Amazon Web Services Region.
 	GatewayARN *string
 
 	// Metadata pertaining to the operation's result.
@@ -90,25 +92,25 @@ func (c *Client) addOperationAddWorkingStorageMiddlewares(stack *middleware.Stac
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -123,13 +125,16 @@ func (c *Client) addOperationAddWorkingStorageMiddlewares(stack *middleware.Stac
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpAddWorkingStorageValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opAddWorkingStorage(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

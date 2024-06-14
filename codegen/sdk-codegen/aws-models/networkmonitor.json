@@ -94,7 +94,7 @@
                 "aws.iam#iamAction": {
                     "documentation": "Grants permission to create a monitor"
                 },
-                "smithy.api#documentation": "<p>Creates a monitor between a source subnet and destination IP address. Within a monitor you'll create one or more probes that monitor network traffic between your source Amazon Web Services VPC subnets and your destination IP addresses. Each probe then aggregates and sends metrics to Amazon CloudWatch.</p>",
+                "smithy.api#documentation": "<p>Creates a monitor between a source subnet and destination IP address. Within a monitor you'll create one or more probes that monitor network traffic between your source Amazon Web Services VPC subnets and your destination IP addresses. Each probe then aggregates and sends metrics to Amazon CloudWatch.</p>\n         <p>You can also create a monitor with probes using this command. For each probe, you\n            define the following:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>source</code>—The subnet IDs where the probes will be created.</p>\n            </li>\n            <li>\n               <p>\n                  <code>destination</code>— The target destination IP address for the\n                    probe.</p>\n            </li>\n            <li>\n               <p>\n                  <code>destinationPort</code>—Required only if the protocol is\n                    <code>TCP</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>protocol</code>—The communication protocol between the source and\n                    destination. This will be either <code>TCP</code> or <code>ICMP</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>packetSize</code>—The size of the packets. This must be a number between\n                        <code>56</code> and <code>8500</code>.</p>\n            </li>\n            <li>\n               <p>(Optional) <code>tags</code> —Key-value pairs created and assigned to the\n                    probe.</p>\n            </li>\n         </ul>",
                 "smithy.api#http": {
                     "uri": "/monitors",
                     "method": "POST"
@@ -108,7 +108,7 @@
                 "monitorName": {
                     "target": "com.amazonaws.networkmonitor#ResourceName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name identifying the monitor. It can contain only letters, underscores (_), or dashes (-), and can be up to 255 characters.</p>",
+                        "smithy.api#documentation": "<p>The name identifying the monitor. It can contain only letters, underscores (_), or dashes (-), and can be up to 200 characters.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -121,7 +121,7 @@
                 "aggregationPeriod": {
                     "target": "com.amazonaws.networkmonitor#AggregationPeriod",
                     "traits": {
-                        "smithy.api#documentation": "<p>The time, in seconds, that metrics are aggregated and sent to Amazon CloudWatch. Valid values are either <code>30</code> or <code>60</code>. </p>"
+                        "smithy.api#documentation": "<p>The time, in seconds, that metrics are aggregated and sent to Amazon CloudWatch. Valid\n            values are either <code>30</code> or <code>60</code>.  <code>60</code> is the default if\n            no period is chosen.</p>"
                     }
                 },
                 "clientToken": {
@@ -169,7 +169,7 @@
                 "aggregationPeriod": {
                     "target": "com.amazonaws.networkmonitor#AggregationPeriod",
                     "traits": {
-                        "smithy.api#documentation": "<p>The number of seconds that metrics are aggregated by and sent to Amazon CloudWatch. This will be either <code>30</code> or <code>60</code>. </p>"
+                        "smithy.api#documentation": "<p>The number of seconds that metrics are aggregated by and sent to Amazon CloudWatch.\n            This will be either <code>30</code> or <code>60</code>. </p>"
                     }
                 },
                 "tags": {
@@ -196,7 +196,7 @@
                 "destination": {
                     "target": "com.amazonaws.networkmonitor#Destination",
                     "traits": {
-                        "smithy.api#documentation": "<p>The destination IP address. This will be either <code>IPV4</code> or <code>IPV6</code>.</p>",
+                        "smithy.api#documentation": "<p>The destination IP address. This must be either <code>IPV4</code> or <code>IPV6</code>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -209,14 +209,14 @@
                 "protocol": {
                     "target": "com.amazonaws.networkmonitor#Protocol",
                     "traits": {
-                        "smithy.api#documentation": "<p>The protocol used for the network traffic between the <code>source</code> and <code>destination</code>. This will be either <code>TCP</code> or <code>ICMP</code>.</p>",
+                        "smithy.api#documentation": "<p>The protocol used for the network traffic between the <code>source</code> and <code>destination</code>. This must be either <code>TCP</code> or <code>ICMP</code>.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "packetSize": {
                     "target": "com.amazonaws.networkmonitor#PacketSize",
                     "traits": {
-                        "smithy.api#documentation": "<p>The size of the packets sent between the source and destination. This will be a number between <code>56</code> and <code>8500</code>.</p>"
+                        "smithy.api#documentation": "<p>The size of the packets sent between the source and destination. This must be a number between <code>56</code> and <code>8500</code>.</p>"
                     }
                 },
                 "probeTags": {
@@ -268,7 +268,7 @@
                 "aws.iam#iamAction": {
                     "documentation": "Grants permission to create a probe"
                 },
-                "smithy.api#documentation": "<p>Create a probe within a monitor. Once you create a probe, and it begins monitoring your network traffic, you'll incur billing charges for that probe. </p>",
+                "smithy.api#documentation": "<p>Create a probe within a monitor. Once you create a probe, and it begins monitoring your\n            network traffic, you'll incur billing charges for that probe. This action requires the\n                <code>monitorName</code> parameter. Run <code>ListMonitors</code> to get a list of\n            monitor names. Note the name of the <code>monitorName</code> you want to create the\n            probe for.</p>",
                 "smithy.api#http": {
                     "uri": "/monitors/{monitorName}/probes",
                     "method": "POST"
@@ -282,7 +282,7 @@
                 "monitorName": {
                     "target": "com.amazonaws.networkmonitor#ResourceName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the monitor to associated with the probe. To get a list of available monitors, use <code>ListMonitors</code>.</p>",
+                        "smithy.api#documentation": "<p>The name of the monitor to associated with the probe. </p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -337,7 +337,7 @@
                 "destination": {
                     "target": "com.amazonaws.networkmonitor#Destination",
                     "traits": {
-                        "smithy.api#documentation": "<p>The destination IP address for the monitor. This will be either an IPv4 or IPv6 address.</p>",
+                        "smithy.api#documentation": "<p>The destination IP address for the monitor. This must be either an IPv4 or IPv6 address.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -350,14 +350,14 @@
                 "protocol": {
                     "target": "com.amazonaws.networkmonitor#Protocol",
                     "traits": {
-                        "smithy.api#documentation": "<p>The protocol used for the network traffic between the <code>source</code> and <code>destination</code>. This will be either <code>TCP</code> or <code>ICMP</code>.</p>",
+                        "smithy.api#documentation": "<p>The protocol used for the network traffic between the <code>source</code> and <code>destination</code>. This must be either <code>TCP</code> or <code>ICMP</code>.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "packetSize": {
                     "target": "com.amazonaws.networkmonitor#PacketSize",
                     "traits": {
-                        "smithy.api#documentation": "<p>The size of the packets sent between the source and destination. This will be a number between <code>56</code> and <code>8500</code>.</p>"
+                        "smithy.api#documentation": "<p>The size of the packets sent between the source and destination. This must be a number between <code>56</code> and <code>8500</code>.</p>"
                     }
                 },
                 "addressFamily": {
@@ -430,7 +430,7 @@
                 "aws.iam#iamAction": {
                     "documentation": "Grants permission to delete a monitor"
                 },
-                "smithy.api#documentation": "<p>Deletes a specified monitor.</p>",
+                "smithy.api#documentation": "<p>Deletes a specified monitor.</p>\n         <p>This action requires the <code>monitorName</code> parameter. Run\n                <code>ListMonitors</code> to get a list of monitor names. </p>",
                 "smithy.api#http": {
                     "uri": "/monitors/{monitorName}",
                     "method": "DELETE"
@@ -444,7 +444,7 @@
                 "monitorName": {
                     "target": "com.amazonaws.networkmonitor#ResourceName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the monitor to delete. Use the <code>ListMonitors</code> action to get a list of your current monitors. </p>",
+                        "smithy.api#documentation": "<p>The name of the monitor to delete.  </p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -493,7 +493,7 @@
                 "aws.iam#iamAction": {
                     "documentation": "Grants permission to delete a probe"
                 },
-                "smithy.api#documentation": "<p>Deletes the specified monitor. Once a probe is deleted you'll no longer incur any billing fees for that probe.</p>",
+                "smithy.api#documentation": "<p>Deletes the specified probe. Once a probe is deleted you'll no longer incur any billing\n            fees for that probe.</p>\n         <p>This action requires both the <code>monitorName</code> and <code>probeId</code>\n            parameters. Run <code>ListMonitors</code> to get a list of monitor names. Run\n                <code>GetMonitor</code> to get a list of probes and probe IDs. You can only delete a\n            single probe at a time using this action. </p>",
                 "smithy.api#http": {
                     "uri": "/monitors/{monitorName}/probes/{probeId}",
                     "method": "DELETE"
@@ -507,7 +507,7 @@
                 "monitorName": {
                     "target": "com.amazonaws.networkmonitor#ResourceName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the monitor to delete. For a list of the available monitors, use the <code>ListMonitors</code> action.</p>",
+                        "smithy.api#documentation": "<p>The name of the monitor to delete. </p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -515,7 +515,7 @@
                 "probeId": {
                     "target": "com.amazonaws.networkmonitor#ProbeId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ID of the probe to delete. Run <code>GetMonitor</code> to get a lst of all probes and probe IDs associated with the monitor.</p>",
+                        "smithy.api#documentation": "<p>The ID of the probe to delete. </p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -570,7 +570,7 @@
                 "aws.iam#iamAction": {
                     "documentation": "Grants permission to get information about a monitor"
                 },
-                "smithy.api#documentation": "<p>Returns details about a specific monitor.</p>",
+                "smithy.api#documentation": "<p>Returns details about a specific monitor. </p>\n         <p>This action requires the <code>monitorName</code> parameter. Run\n                <code>ListMonitors</code> to get a list of monitor names. </p>",
                 "smithy.api#http": {
                     "uri": "/monitors/{monitorName}",
                     "method": "GET"
@@ -607,14 +607,14 @@
                 "monitorName": {
                     "target": "com.amazonaws.networkmonitor#ResourceName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the monitor. To get a list of the current monitors and their names, use the <code>ListMonitors</code> action.</p>",
+                        "smithy.api#documentation": "<p>The name of the monitor. </p>",
                         "smithy.api#required": {}
                     }
                 },
                 "state": {
                     "target": "com.amazonaws.networkmonitor#MonitorState",
                     "traits": {
-                        "smithy.api#documentation": "<p>Returns a list of the state of each monitor. </p>",
+                        "smithy.api#documentation": "<p>Lists the status of the <code>state</code> of each monitor. </p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -685,7 +685,7 @@
                 "aws.iam#iamAction": {
                     "documentation": "Grants permission to get information about a probe"
                 },
-                "smithy.api#documentation": "<p>Returns the details about a probe. You'll need both the <code>monitorName</code> and <code>probeId</code>. </p>",
+                "smithy.api#documentation": "<p>Returns the details about a probe. This action requires both the\n                <code>monitorName</code> and <code>probeId</code> parameters. Run\n                <code>ListMonitors</code> to get a list of monitor names. Run\n                <code>GetMonitor</code> to get a list of probes and probe IDs. </p>",
                 "smithy.api#http": {
                     "uri": "/monitors/{monitorName}/probes/{probeId}",
                     "method": "GET"
@@ -742,7 +742,7 @@
                 "destination": {
                     "target": "com.amazonaws.networkmonitor#Destination",
                     "traits": {
-                        "smithy.api#documentation": "<p>The destination IP address for the monitor. This will be either an IPv4 or IPv6 address.</p>",
+                        "smithy.api#documentation": "<p>The destination IP address for the monitor. This must be either an IPv4 or IPv6 address.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -755,14 +755,14 @@
                 "protocol": {
                     "target": "com.amazonaws.networkmonitor#Protocol",
                     "traits": {
-                        "smithy.api#documentation": "<p>The protocol used for the network traffic between the <code>source</code> and <code>destination</code>. This will be either <code>TCP</code> or <code>ICMP</code>.</p>",
+                        "smithy.api#documentation": "<p>The protocol used for the network traffic between the <code>source</code> and <code>destination</code>. This must be either <code>TCP</code> or <code>ICMP</code>.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "packetSize": {
                     "target": "com.amazonaws.networkmonitor#PacketSize",
                     "traits": {
-                        "smithy.api#documentation": "<p>The size of the packets sent between the source and destination. This will be a number between <code>56</code> and <code>8500</code>.</p>"
+                        "smithy.api#documentation": "<p>The size of the packets sent between the source and destination. This must be a number between <code>56</code> and <code>8500</code>.</p>"
                     }
                 },
                 "addressFamily": {
@@ -1197,7 +1197,7 @@
                         "X-Amz-Requested-Operation"
                     ]
                 },
-                "smithy.api#documentation": "<p>Amazon CloudWatch Network Monitor is an Amazon Web Services active network monitoring\n            service that identifies if a network issues exists within the Amazon Web Services network\n            or your own company network.  Within Network Monitor you'll choose the source VPCs and\n            subnets from the Amazon Web Services network in which you operate and then you'll choose\n            the destination IP addresses from your on-premises network. From these sources and\n            destinations, Network Monitor creates a monitor containing all the possible source and\n            destination combinations, each of which is called a probe, within a single monitor.\n            These probes then monitor network traffic to help you identify where network issues might be affecting your traffic.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/what-is-network-monitor.html\">Using Amazon CloudWatch Network Monitor</a> in the <i>Amazon CloudWatch User Guide</i>.</p>",
+                "smithy.api#documentation": "<p>Amazon CloudWatch Network Monitor is an Amazon Web Services active network monitoring\n            service that identifies if a network issues exists within the Amazon Web Services network\n            or your own company network.  Within Network Monitor you'll choose the source VPCs and\n            subnets from the Amazon Web Services network in which you operate and then you'll choose\n            the destination IP addresses from your on-premises network. From these sources and\n            destinations, Network Monitor creates a monitor containing all the possible source and\n            destination combinations, each of which is called a probe, within a single monitor.\n            These probes then monitor network traffic to help you identify where network issues might be affecting your traffic.</p>\n         <p>Before you begin, ensure the Amazon Web Services CLI is configured in the Amazon Web Services Account where you will create the Network Monitor resource. Network\n            Monitor doesn’t support creation on cross-account resources, but you can create a\n            Network Monitor in any subnet belonging to a VPC owned by your Account.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/what-is-network-monitor.html\">Using Amazon CloudWatch Network Monitor</a> in the <i>Amazon CloudWatch User Guide</i>.</p>",
                 "smithy.api#title": "Amazon CloudWatch Network Monitor",
                 "smithy.rules#endpointRuleSet": {
                     "version": "1.0",
@@ -1978,7 +1978,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Describes information about a monitor probe.</p>"
+                "smithy.api#documentation": "<p>Describes information about a network monitor probe.</p>"
             }
         },
         "com.amazonaws.networkmonitor#ProbeId": {
@@ -2000,7 +2000,7 @@
                 "destination": {
                     "target": "com.amazonaws.networkmonitor#Destination",
                     "traits": {
-                        "smithy.api#documentation": "<p>The destination IP address. This will be either <code>IPV4</code> or <code>IPV6</code>.</p>",
+                        "smithy.api#documentation": "<p>The destination IP address. This must be either <code>IPV4</code> or <code>IPV6</code>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -2013,14 +2013,14 @@
                 "protocol": {
                     "target": "com.amazonaws.networkmonitor#Protocol",
                     "traits": {
-                        "smithy.api#documentation": "<p>The protocol used for the network traffic between the <code>source</code> and <code>destination</code>. This will be either <code>TCP</code> or <code>ICMP</code>.</p>",
+                        "smithy.api#documentation": "<p>The protocol used for the network traffic between the <code>source</code> and <code>destination</code>. This must be either <code>TCP</code> or <code>ICMP</code>.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "packetSize": {
                     "target": "com.amazonaws.networkmonitor#PacketSize",
                     "traits": {
-                        "smithy.api#documentation": "<p>The size of the packets sent between the source and destination. This will be a number between <code>56</code> and <code>8500</code>.</p>"
+                        "smithy.api#documentation": "<p>The size of the packets sent between the source and destination. This must be a number between <code>56</code> and <code>8500</code>.</p>"
                     }
                 },
                 "tags": {
@@ -2135,7 +2135,7 @@
             "traits": {
                 "smithy.api#length": {
                     "min": 1,
-                    "max": 255
+                    "max": 200
                 },
                 "smithy.api#pattern": "^[a-zA-Z0-9_-]+$"
             }
@@ -2435,7 +2435,7 @@
                 "aws.iam#iamAction": {
                     "documentation": "Grants permission to update a monitor"
                 },
-                "smithy.api#documentation": "<p>Updates the <code>aggregationPeriod</code> for a monitor. Monitors support an <code>aggregationPeriod</code> of either <code>30</code> or <code>60</code> seconds.</p>",
+                "smithy.api#documentation": "<p>Updates the <code>aggregationPeriod</code> for a monitor. Monitors support an\n                <code>aggregationPeriod</code> of either <code>30</code> or <code>60</code> seconds.\n            This action requires  the <code>monitorName</code> and <code>probeId</code> parameter.\n            Run <code>ListMonitors</code> to get a list of monitor names.  </p>",
                 "smithy.api#http": {
                     "uri": "/monitors/{monitorName}",
                     "method": "PATCH"
@@ -2449,7 +2449,7 @@
                 "monitorName": {
                     "target": "com.amazonaws.networkmonitor#ResourceName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the monitor to update. Run <code>ListMonitors</code> to get a list of monitor names.</p>",
+                        "smithy.api#documentation": "<p>The name of the monitor to update. </p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -2539,7 +2539,7 @@
                 "aws.iam#iamAction": {
                     "documentation": "Grants permission to update a probe"
                 },
-                "smithy.api#documentation": "<p>Updates a monitor probe. This action requires both the <code>monitorName</code> and <code>probeId</code> parameters. Run <code>ListMonitors</code> to get a list of monitor names. Run <code>GetMonitor</code> to get a list of probes and probe IDs. </p>",
+                "smithy.api#documentation": "<p>Updates a monitor probe. This action requires both the <code>monitorName</code> and <code>probeId</code> parameters. Run <code>ListMonitors</code> to get a list of monitor names. Run <code>GetMonitor</code> to get a list of probes and probe IDs. </p>\n         <p>You can update the following para create a monitor with probes using this command. For\n            each probe, you define the following:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>state</code>—The state of the probe.</p>\n            </li>\n            <li>\n               <p>\n                  <code>destination</code>— The target destination IP address for the\n                    probe.</p>\n            </li>\n            <li>\n               <p>\n                  <code>destinationPort</code>—Required only if the protocol is\n                    <code>TCP</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>protocol</code>—The communication protocol between the source and\n                    destination. This will be either <code>TCP</code> or <code>ICMP</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>packetSize</code>—The size of the packets. This must be a number between\n                        <code>56</code> and <code>8500</code>.</p>\n            </li>\n            <li>\n               <p>(Optional) <code>tags</code> —Key-value pairs created and assigned to the\n                    probe.</p>\n            </li>\n         </ul>",
                 "smithy.api#http": {
                     "uri": "/monitors/{monitorName}/probes/{probeId}",
                     "method": "PATCH"
@@ -2561,7 +2561,7 @@
                 "probeId": {
                     "target": "com.amazonaws.networkmonitor#ProbeId",
                     "traits": {
-                        "smithy.api#documentation": "<p>Run <code>GetMonitor</code> to get a list of probes and probe IDs.</p>",
+                        "smithy.api#documentation": "<p>The ID of the probe to update.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -2633,7 +2633,7 @@
                 "destinationPort": {
                     "target": "com.amazonaws.networkmonitor#Port",
                     "traits": {
-                        "smithy.api#documentation": "<p>The updated destination port. This will be a number between <code>1</code> and <code>65536</code>.</p>"
+                        "smithy.api#documentation": "<p>The updated destination port. This must be a number between <code>1</code> and <code>65536</code>.</p>"
                     }
                 },
                 "protocol": {
@@ -2652,7 +2652,7 @@
                 "addressFamily": {
                     "target": "com.amazonaws.networkmonitor#AddressFamily",
                     "traits": {
-                        "smithy.api#documentation": "<p>The updated IP address family. This will be either <code>IPV4</code> or <code>IPV6</code>.</p>"
+                        "smithy.api#documentation": "<p>The updated IP address family. This must be either <code>IPV4</code> or <code>IPV6</code>.</p>"
                     }
                 },
                 "vpcId": {

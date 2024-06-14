@@ -6,15 +6,16 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates an alias for a directory and assigns the alias to the directory. The
 // alias is used to construct the access URL for the directory, such as
-// http://.awsapps.com . After an alias has been created, it cannot be deleted or
-// reused, so this operation should only be used when absolutely necessary.
+// http://.awsapps.com .
+//
+// After an alias has been created, it cannot be deleted or reused, so this
+// operation should only be used when absolutely necessary.
 func (c *Client) CreateAlias(ctx context.Context, params *CreateAliasInput, optFns ...func(*Options)) (*CreateAliasOutput, error) {
 	if params == nil {
 		params = &CreateAliasInput{}
@@ -33,9 +34,11 @@ func (c *Client) CreateAlias(ctx context.Context, params *CreateAliasInput, optF
 // Contains the inputs for the CreateAlias operation.
 type CreateAliasInput struct {
 
-	// The requested alias. The alias must be unique amongst all aliases in Amazon Web
-	// Services. This operation throws an EntityAlreadyExistsException error if the
-	// alias already exists.
+	// The requested alias.
+	//
+	// The alias must be unique amongst all aliases in Amazon Web Services. This
+	// operation throws an EntityAlreadyExistsException error if the alias already
+	// exists.
 	//
 	// This member is required.
 	Alias *string
@@ -85,25 +88,25 @@ func (c *Client) addOperationCreateAliasMiddlewares(stack *middleware.Stack, opt
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -118,13 +121,16 @@ func (c *Client) addOperationCreateAliasMiddlewares(stack *middleware.Stack, opt
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpCreateAliasValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateAlias(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

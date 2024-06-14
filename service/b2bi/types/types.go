@@ -242,8 +242,8 @@ type TransformerSummary struct {
 	// This member is required.
 	FileFormat FileFormat
 
-	// Returns the name of the mapping template for the transformer. This template is
-	// used to convert the input document into the correct set of objects.
+	// Returns the mapping template for the transformer. This template is used to map
+	// the parsed EDI file using JSONata or XSLT.
 	//
 	// This member is required.
 	MappingTemplate *string
@@ -278,17 +278,18 @@ type TransformerSummary struct {
 
 // A structure that contains the X12 transaction set and version. The X12
 // structure is used when the system transforms an EDI (electronic data
-// interchange) file. If an EDI input file contains more than one transaction, each
-// transaction must have the same transaction set and version, for example
-// 214/4010. If not, the transformer cannot parse the file.
+// interchange) file.
+//
+// If an EDI input file contains more than one transaction, each transaction must
+// have the same transaction set and version, for example 214/4010. If not, the
+// transformer cannot parse the file.
 type X12Details struct {
 
 	// Returns an enumerated type where each value identifies an X12 transaction set.
 	// Transaction sets are maintained by the X12 Accredited Standards Committee.
 	TransactionSet X12TransactionSet
 
-	// Returns the version to use for the specified X12 transaction set. Supported
-	// versions are 4010 , 4030 , and 5010 .
+	// Returns the version to use for the specified X12 transaction set.
 	Version X12Version
 
 	noSmithyDocumentSerde

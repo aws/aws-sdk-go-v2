@@ -22,8 +22,9 @@ const (
 )
 
 // Values returns all known values for BatchReadExceptionType. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (BatchReadExceptionType) Values() []BatchReadExceptionType {
 	return []BatchReadExceptionType{
 		"ValidationException",
@@ -67,8 +68,9 @@ const (
 )
 
 // Values returns all known values for BatchWriteExceptionType. Note that this can
-// be expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// be expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (BatchWriteExceptionType) Values() []BatchWriteExceptionType {
 	return []BatchWriteExceptionType{
 		"InternalServiceException",
@@ -101,8 +103,9 @@ const (
 )
 
 // Values returns all known values for ConsistencyLevel. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ConsistencyLevel) Values() []ConsistencyLevel {
 	return []ConsistencyLevel{
 		"SERIALIZABLE",
@@ -120,8 +123,9 @@ const (
 )
 
 // Values returns all known values for DirectoryState. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (DirectoryState) Values() []DirectoryState {
 	return []DirectoryState{
 		"ENABLED",
@@ -143,8 +147,9 @@ const (
 )
 
 // Values returns all known values for FacetAttributeType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (FacetAttributeType) Values() []FacetAttributeType {
 	return []FacetAttributeType{
 		"STRING",
@@ -165,8 +170,9 @@ const (
 )
 
 // Values returns all known values for FacetStyle. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (FacetStyle) Values() []FacetStyle {
 	return []FacetStyle{
 		"STATIC",
@@ -185,8 +191,9 @@ const (
 )
 
 // Values returns all known values for ObjectType. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (ObjectType) Values() []ObjectType {
 	return []ObjectType{
 		"NODE",
@@ -208,8 +215,9 @@ const (
 )
 
 // Values returns all known values for RangeMode. Note that this can be expanded
-// in the future, and so it is only as up to date as the client. The ordering of
-// this slice is not guaranteed to be stable across updates.
+// in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (RangeMode) Values() []RangeMode {
 	return []RangeMode{
 		"FIRST",
@@ -230,6 +238,7 @@ const (
 
 // Values returns all known values for RequiredAttributeBehavior. Note that this
 // can be expanded in the future, and so it is only as up to date as the client.
+//
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (RequiredAttributeBehavior) Values() []RequiredAttributeBehavior {
 	return []RequiredAttributeBehavior{
@@ -249,8 +258,9 @@ const (
 )
 
 // Values returns all known values for RuleType. Note that this can be expanded in
-// the future, and so it is only as up to date as the client. The ordering of this
-// slice is not guaranteed to be stable across updates.
+// the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (RuleType) Values() []RuleType {
 	return []RuleType{
 		"BINARY_LENGTH",
@@ -269,8 +279,9 @@ const (
 )
 
 // Values returns all known values for UpdateActionType. Note that this can be
-// expanded in the future, and so it is only as up to date as the client. The
-// ordering of this slice is not guaranteed to be stable across updates.
+// expanded in the future, and so it is only as up to date as the client.
+//
+// The ordering of this slice is not guaranteed to be stable across updates.
 func (UpdateActionType) Values() []UpdateActionType {
 	return []UpdateActionType{
 		"CREATE_OR_UPDATE",

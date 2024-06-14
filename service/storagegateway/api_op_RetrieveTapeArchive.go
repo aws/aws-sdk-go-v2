@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -15,10 +14,12 @@ import (
 // gateway. Virtual tapes archived in the VTS are not associated with any gateway.
 // However after a tape is retrieved, it is associated with a gateway, even though
 // it is also listed in the VTS, that is, archive. This operation is only supported
-// in the tape gateway type. Once a tape is successfully retrieved to a gateway, it
-// cannot be retrieved again to another gateway. You must archive the tape again
-// before you can retrieve it to another gateway. This operation is only supported
 // in the tape gateway type.
+//
+// Once a tape is successfully retrieved to a gateway, it cannot be retrieved
+// again to another gateway. You must archive the tape again before you can
+// retrieve it to another gateway. This operation is only supported in the tape
+// gateway type.
 func (c *Client) RetrieveTapeArchive(ctx context.Context, params *RetrieveTapeArchiveInput, optFns ...func(*Options)) (*RetrieveTapeArchiveOutput, error) {
 	if params == nil {
 		params = &RetrieveTapeArchiveInput{}
@@ -38,9 +39,11 @@ func (c *Client) RetrieveTapeArchive(ctx context.Context, params *RetrieveTapeAr
 type RetrieveTapeArchiveInput struct {
 
 	// The Amazon Resource Name (ARN) of the gateway you want to retrieve the virtual
-	// tape to. Use the ListGateways operation to return a list of gateways for your
-	// account and Amazon Web Services Region. You retrieve archived virtual tapes to
-	// only one gateway and the gateway must be a tape gateway.
+	// tape to. Use the ListGatewaysoperation to return a list of gateways for your account and
+	// Amazon Web Services Region.
+	//
+	// You retrieve archived virtual tapes to only one gateway and the gateway must be
+	// a tape gateway.
 	//
 	// This member is required.
 	GatewayARN *string
@@ -88,25 +91,25 @@ func (c *Client) addOperationRetrieveTapeArchiveMiddlewares(stack *middleware.St
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -121,13 +124,16 @@ func (c *Client) addOperationRetrieveTapeArchiveMiddlewares(stack *middleware.St
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpRetrieveTapeArchiveValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opRetrieveTapeArchive(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

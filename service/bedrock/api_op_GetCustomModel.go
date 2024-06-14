@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/bedrock/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -14,8 +13,9 @@ import (
 )
 
 // Get the properties associated with a Amazon Bedrock custom model that you have
-// created.For more information, see Custom models (https://docs.aws.amazon.com/bedrock/latest/userguide/custom-models.html)
-// in the Bedrock User Guide.
+// created.For more information, see [Custom models]in the Amazon Bedrock User Guide.
+//
+// [Custom models]: https://docs.aws.amazon.com/bedrock/latest/userguide/custom-models.html
 func (c *Client) GetCustomModel(ctx context.Context, params *GetCustomModelInput, optFns ...func(*Options)) (*GetCustomModelOutput, error) {
 	if params == nil {
 		params = &GetCustomModelInput{}
@@ -33,7 +33,7 @@ func (c *Client) GetCustomModel(ctx context.Context, params *GetCustomModelInput
 
 type GetCustomModelInput struct {
 
-	// Name or ARN of the custom model.
+	// Name or Amazon Resource Name (ARN) of the custom model.
 	//
 	// This member is required.
 	ModelIdentifier *string
@@ -43,7 +43,7 @@ type GetCustomModelInput struct {
 
 type GetCustomModelOutput struct {
 
-	// ARN of the base model.
+	// Amazon Resource Name (ARN) of the base model.
 	//
 	// This member is required.
 	BaseModelArn *string
@@ -53,12 +53,12 @@ type GetCustomModelOutput struct {
 	// This member is required.
 	CreationTime *time.Time
 
-	// Job ARN associated with this model.
+	// Job Amazon Resource Name (ARN) associated with this model.
 	//
 	// This member is required.
 	JobArn *string
 
-	// ARN associated with this model.
+	// Amazon Resource Name (ARN) associated with this model.
 	//
 	// This member is required.
 	ModelArn *string
@@ -73,7 +73,7 @@ type GetCustomModelOutput struct {
 	// This member is required.
 	OutputDataConfig *types.OutputDataConfig
 
-	// Information about the training dataset.
+	// Contains information about the training dataset.
 	//
 	// This member is required.
 	TrainingDataConfig *types.TrainingDataConfig
@@ -81,7 +81,10 @@ type GetCustomModelOutput struct {
 	// The type of model customization.
 	CustomizationType types.CustomizationType
 
-	// Hyperparameter values associated with this model.
+	// Hyperparameter values associated with this model. For details on the format for
+	// different models, see [Custom model hyperparameters].
+	//
+	// [Custom model hyperparameters]: https://docs.aws.amazon.com/bedrock/latest/userguide/custom-models-hp.html
 	HyperParameters map[string]string
 
 	// Job name associated with this model.
@@ -90,10 +93,10 @@ type GetCustomModelOutput struct {
 	// The custom model is encrypted at rest using this key.
 	ModelKmsKeyArn *string
 
-	// The training metrics from the job creation.
+	// Contains training metrics from the job creation.
 	TrainingMetrics *types.TrainingMetrics
 
-	// Array of up to 10 validators.
+	// Contains information about the validation dataset.
 	ValidationDataConfig *types.ValidationDataConfig
 
 	// The validation metrics from the job creation.
@@ -127,25 +130,25 @@ func (c *Client) addOperationGetCustomModelMiddlewares(stack *middleware.Stack, 
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -160,13 +163,16 @@ func (c *Client) addOperationGetCustomModelMiddlewares(stack *middleware.Stack, 
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpGetCustomModelValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetCustomModel(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

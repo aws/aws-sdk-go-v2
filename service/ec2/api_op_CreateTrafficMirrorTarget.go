@@ -6,20 +6,24 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a target for your Traffic Mirror session. A Traffic Mirror target is
-// the destination for mirrored traffic. The Traffic Mirror source and the Traffic
-// Mirror target (monitoring appliances) can be in the same VPC, or in different
-// VPCs connected via VPC peering or a transit gateway. A Traffic Mirror target can
-// be a network interface, a Network Load Balancer, or a Gateway Load Balancer
-// endpoint. To use the target in a Traffic Mirror session, use
-// CreateTrafficMirrorSession (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateTrafficMirrorSession.htm)
-// .
+// Creates a target for your Traffic Mirror session.
+//
+// A Traffic Mirror target is the destination for mirrored traffic. The Traffic
+// Mirror source and the Traffic Mirror target (monitoring appliances) can be in
+// the same VPC, or in different VPCs connected via VPC peering or a transit
+// gateway.
+//
+// A Traffic Mirror target can be a network interface, a Network Load Balancer, or
+// a Gateway Load Balancer endpoint.
+//
+// To use the target in a Traffic Mirror session, use [CreateTrafficMirrorSession].
+//
+// [CreateTrafficMirrorSession]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateTrafficMirrorSession.htm
 func (c *Client) CreateTrafficMirrorTarget(ctx context.Context, params *CreateTrafficMirrorTargetInput, optFns ...func(*Options)) (*CreateTrafficMirrorTargetOutput, error) {
 	if params == nil {
 		params = &CreateTrafficMirrorTargetInput{}
@@ -38,8 +42,9 @@ func (c *Client) CreateTrafficMirrorTarget(ctx context.Context, params *CreateTr
 type CreateTrafficMirrorTargetInput struct {
 
 	// Unique, case-sensitive identifier that you provide to ensure the idempotency of
-	// the request. For more information, see How to ensure idempotency (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html)
-	// .
+	// the request. For more information, see [How to ensure idempotency].
+	//
+	// [How to ensure idempotency]: https://docs.aws.amazon.com/ec2/latest/devguide/ec2-api-idempotency.html
 	ClientToken *string
 
 	// The description of the Traffic Mirror target.
@@ -70,8 +75,9 @@ type CreateTrafficMirrorTargetInput struct {
 type CreateTrafficMirrorTargetOutput struct {
 
 	// Unique, case-sensitive identifier that you provide to ensure the idempotency of
-	// the request. For more information, see How to ensure idempotency (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html)
-	// .
+	// the request. For more information, see [How to ensure idempotency].
+	//
+	// [How to ensure idempotency]: https://docs.aws.amazon.com/ec2/latest/devguide/ec2-api-idempotency.html
 	ClientToken *string
 
 	// Information about the Traffic Mirror target.
@@ -105,25 +111,25 @@ func (c *Client) addOperationCreateTrafficMirrorTargetMiddlewares(stack *middlew
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -138,13 +144,16 @@ func (c *Client) addOperationCreateTrafficMirrorTargetMiddlewares(stack *middlew
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opCreateTrafficMirrorTargetMiddleware(stack, options); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateTrafficMirrorTarget(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

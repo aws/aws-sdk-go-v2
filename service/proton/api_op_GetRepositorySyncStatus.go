@@ -6,19 +6,22 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/proton/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Get the sync status of a repository used for Proton template sync. For more
-// information about template sync, see . A repository sync status isn't tied to
-// the Proton Repository resource (or any other Proton resource). Therefore, tags
-// on an Proton Repository resource have no effect on this action. Specifically,
-// you can't use these tags to control access to this action using Attribute-based
-// access control (ABAC). For more information about ABAC, see ABAC (https://docs.aws.amazon.com/proton/latest/userguide/security_iam_service-with-iam.html#security_iam_service-with-iam-tags)
-// in the Proton User Guide.
+// information about template sync, see .
+//
+// A repository sync status isn't tied to the Proton Repository resource (or any
+// other Proton resource). Therefore, tags on an Proton Repository resource have no
+// effect on this action. Specifically, you can't use these tags to control access
+// to this action using Attribute-based access control (ABAC).
+//
+// For more information about ABAC, see [ABAC] in the Proton User Guide.
+//
+// [ABAC]: https://docs.aws.amazon.com/proton/latest/userguide/security_iam_service-with-iam.html#security_iam_service-with-iam-tags
 func (c *Client) GetRepositorySyncStatus(ctx context.Context, params *GetRepositorySyncStatusInput, optFns ...func(*Options)) (*GetRepositorySyncStatusOutput, error) {
 	if params == nil {
 		params = &GetRepositorySyncStatusInput{}
@@ -92,25 +95,25 @@ func (c *Client) addOperationGetRepositorySyncStatusMiddlewares(stack *middlewar
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -125,13 +128,16 @@ func (c *Client) addOperationGetRepositorySyncStatusMiddlewares(stack *middlewar
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpGetRepositorySyncStatusValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetRepositorySyncStatus(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

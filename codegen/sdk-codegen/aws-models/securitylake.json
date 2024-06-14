@@ -59,7 +59,7 @@
                     "min": 1,
                     "max": 1011
                 },
-                "smithy.api#pattern": "^arn:aws:securitylake:[A-za-z0-9_/.\\-]{0,63}:[A-za-z0-9_/.\\-]{0,63}:[A-Za-z0-9][A-za-z0-9_/.\\-]{0,127}$"
+                "smithy.api#pattern": "^arn:(aws|aws-us-gov|aws-cn):securitylake:[A-za-z0-9_/.\\-]{0,63}:[A-za-z0-9_/.\\-]{0,63}:[A-Za-z0-9][A-za-z0-9_/.\\-]{0,127}$"
             }
         },
         "com.amazonaws.securitylake#AwsAccountId": {
@@ -137,7 +137,7 @@
             },
             "traits": {
                 "smithy.api#length": {
-                    "min": 0,
+                    "min": 1,
                     "max": 50
                 }
             }
@@ -180,6 +180,18 @@
                     "traits": {
                         "smithy.api#enumValue": "S3_DATA"
                     }
+                },
+                "EKS_AUDIT": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "EKS_AUDIT"
+                    }
+                },
+                "WAF": {
+                    "target": "smithy.api#Unit",
+                    "traits": {
+                        "smithy.api#enumValue": "WAF"
+                    }
                 }
             }
         },
@@ -207,6 +219,11 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.securitylake#AwsLogSourceResource"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1
+                }
             }
         },
         "com.amazonaws.securitylake#AwsLogSourceVersion": {
@@ -416,7 +433,8 @@
                 "configuration": {
                     "target": "com.amazonaws.securitylake#CustomLogSourceConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>The configuration for the third-party custom source.</p>"
+                        "smithy.api#documentation": "<p>The configuration for the third-party custom source.</p>",
+                        "smithy.api#required": {}
                     }
                 }
             },
@@ -626,8 +644,7 @@
                 "autoEnableNewAccount": {
                     "target": "com.amazonaws.securitylake#DataLakeAutoEnableNewAccountConfigurationList",
                     "traits": {
-                        "smithy.api#documentation": "<p>Enable Security Lake with the specified configuration settings, to begin collecting security\n         data for new accounts in your organization.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>Enable Security Lake with the specified configuration settings, to begin collecting security\n         data for new accounts in your organization.</p>"
                     }
                 }
             },
@@ -840,7 +857,7 @@
                 "subscriberIdentity": {
                     "target": "com.amazonaws.securitylake#AwsIdentity",
                     "traits": {
-                        "smithy.api#documentation": "<p>The AWS identity used to access your data.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Web Services identity used to access your data.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -968,7 +985,7 @@
                     "min": 1,
                     "max": 64
                 },
-                "smithy.api#pattern": "^[\\\\\\w\\-_:/.]*$"
+                "smithy.api#pattern": "^[\\w\\-\\_\\:\\.]*$"
             }
         },
         "com.amazonaws.securitylake#CustomLogSourceProvider": {
@@ -1113,6 +1130,11 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.securitylake#DataLakeAutoEnableNewAccountConfiguration"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1
+                }
             }
         },
         "com.amazonaws.securitylake#DataLakeConfiguration": {
@@ -1152,6 +1174,11 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.securitylake#DataLakeConfiguration"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1
+                }
             }
         },
         "com.amazonaws.securitylake#DataLakeEncryptionConfiguration": {
@@ -1279,7 +1306,7 @@
                 "regions": {
                     "target": "com.amazonaws.securitylake#RegionList",
                     "traits": {
-                        "smithy.api#documentation": "<p>Replication enables automatic, asynchronous copying of objects across Amazon S3\n         buckets. Amazon S3 buckets that are configured for object replication can be owned\n         by the same Amazon Web Services account or by different accounts. You can replicate objects\n         to a single destination bucket or to multiple destination buckets. The destination buckets\n         can be in different Amazon Web Services Regions or within the same Region as the source\n         bucket.</p>\n         <p>Set up one or more rollup Regions by providing the Region or Regions that should\n         contribute to the central rollup Region.</p>"
+                        "smithy.api#documentation": "<p>Specifies one or more centralized rollup Regions. The Amazon Web Services Region specified in the <code>region</code> \n          parameter of the <a href=\"https://docs.aws.amazon.com/security-lake/latest/APIReference/API_CreateDataLake.html\">\n               <code>CreateDataLake</code>\n            </a> \n          or <a href=\"https://docs.aws.amazon.com/security-lake/latest/APIReference/API_UpdateDataLake.html\">\n               <code>UpdateDataLake</code>\n            </a> operations contributes data to the rollup Region or \n        Regions specified in this parameter.</p>\n         <p>Replication enables automatic, asynchronous copying of objects across Amazon S3\n           buckets. S3 buckets that are configured for object replication can be owned\n           by the same Amazon Web Services account or by different accounts. You can replicate objects\n           to a single destination bucket or to multiple destination buckets. The destination buckets\n           can be in different Regions or within the same Region as the source bucket.</p>"
                     }
                 },
                 "roleArn": {
@@ -1290,7 +1317,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Provides replication details of Amazon Security Lake object.</p>"
+                "smithy.api#documentation": "<p>Provides replication details for objects stored in the Amazon Security Lake data lake.</p>"
             }
         },
         "com.amazonaws.securitylake#DataLakeResource": {
@@ -1779,8 +1806,7 @@
                 "autoEnableNewAccount": {
                     "target": "com.amazonaws.securitylake#DataLakeAutoEnableNewAccountConfigurationList",
                     "traits": {
-                        "smithy.api#documentation": "<p>Turns off automatic enablement of Security Lake for member accounts that are added to an organization.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>Turns off automatic enablement of Security Lake for member accounts that are added to an organization.</p>"
                     }
                 }
             },
@@ -2472,7 +2498,7 @@
                 "regions": {
                     "target": "com.amazonaws.securitylake#RegionList",
                     "traits": {
-                        "smithy.api#documentation": "<p>List the Amazon Web Services Regions from which exceptions are retrieved.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Web Services Regions from which exceptions are retrieved.</p>"
                     }
                 },
                 "maxResults": {
@@ -2558,7 +2584,7 @@
                 "regions": {
                     "target": "com.amazonaws.securitylake#RegionList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The list of regions where Security Lake is enabled.</p>",
+                        "smithy.api#documentation": "<p>The list of Regions where Security Lake is enabled.</p>",
                         "smithy.api#httpQuery": "regions"
                     }
                 }
@@ -2638,7 +2664,7 @@
                 "regions": {
                     "target": "com.amazonaws.securitylake#RegionList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The list of regions for which log sources are displayed.</p>"
+                        "smithy.api#documentation": "<p>The list of Regions for which log sources are displayed.</p>"
                     }
                 },
                 "sources": {
@@ -2817,7 +2843,7 @@
                 "resourceArn": {
                     "target": "com.amazonaws.securitylake#AmazonResourceName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Amazon Security Lake resource to retrieve the tags for.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Amazon Security Lake resource for which you want to retrieve the tags.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -2951,7 +2977,7 @@
         "com.amazonaws.securitylake#Region": {
             "type": "string",
             "traits": {
-                "smithy.api#pattern": "^(af|ap|ca|eu|me|sa|us)-(central|north|(north(?:east|west))|south|south(?:east|west)|east|west)-\\d+$"
+                "smithy.api#pattern": "^(us(-gov)?|af|ap|ca|eu|me|sa)-(central|north|(north(?:east|west))|south|south(?:east|west)|east|west)-\\d+$"
             }
         },
         "com.amazonaws.securitylake#RegionList": {
@@ -3073,7 +3099,7 @@
         "com.amazonaws.securitylake#RoleArn": {
             "type": "string",
             "traits": {
-                "smithy.api#pattern": "^arn:.*$"
+                "smithy.api#pattern": "^arn:(aws[a-zA-Z-]*)?:iam::\\d{12}:role/?[a-zA-Z_0-9+=,.@\\-_/]+$"
             }
         },
         "com.amazonaws.securitylake#S3BucketArn": {
@@ -3237,7 +3263,6 @@
                                     ]
                                 }
                             ],
-                            "type": "tree",
                             "rules": [
                                 {
                                     "conditions": [
@@ -3256,7 +3281,6 @@
                                 },
                                 {
                                     "conditions": [],
-                                    "type": "tree",
                                     "rules": [
                                         {
                                             "conditions": [
@@ -3284,13 +3308,14 @@
                                             },
                                             "type": "endpoint"
                                         }
-                                    ]
+                                    ],
+                                    "type": "tree"
                                 }
-                            ]
+                            ],
+                            "type": "tree"
                         },
                         {
                             "conditions": [],
-                            "type": "tree",
                             "rules": [
                                 {
                                     "conditions": [
@@ -3303,7 +3328,6 @@
                                             ]
                                         }
                                     ],
-                                    "type": "tree",
                                     "rules": [
                                         {
                                             "conditions": [
@@ -3317,7 +3341,6 @@
                                                     "assign": "PartitionResult"
                                                 }
                                             ],
-                                            "type": "tree",
                                             "rules": [
                                                 {
                                                     "conditions": [
@@ -3340,7 +3363,6 @@
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [
@@ -3375,11 +3397,9 @@
                                                                     ]
                                                                 }
                                                             ],
-                                                            "type": "tree",
                                                             "rules": [
                                                                 {
                                                                     "conditions": [],
-                                                                    "type": "tree",
                                                                     "rules": [
                                                                         {
                                                                             "conditions": [],
@@ -3390,16 +3410,19 @@
                                                                             },
                                                                             "type": "endpoint"
                                                                         }
-                                                                    ]
+                                                                    ],
+                                                                    "type": "tree"
                                                                 }
-                                                            ]
+                                                            ],
+                                                            "type": "tree"
                                                         },
                                                         {
                                                             "conditions": [],
                                                             "error": "FIPS and DualStack are enabled, but this partition does not support one or both",
                                                             "type": "error"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [
@@ -3413,14 +3436,12 @@
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [
                                                                 {
                                                                     "fn": "booleanEquals",
                                                                     "argv": [
-                                                                        true,
                                                                         {
                                                                             "fn": "getAttr",
                                                                             "argv": [
@@ -3429,15 +3450,14 @@
                                                                                 },
                                                                                 "supportsFIPS"
                                                                             ]
-                                                                        }
+                                                                        },
+                                                                        true
                                                                     ]
                                                                 }
                                                             ],
-                                                            "type": "tree",
                                                             "rules": [
                                                                 {
                                                                     "conditions": [],
-                                                                    "type": "tree",
                                                                     "rules": [
                                                                         {
                                                                             "conditions": [],
@@ -3448,16 +3468,19 @@
                                                                             },
                                                                             "type": "endpoint"
                                                                         }
-                                                                    ]
+                                                                    ],
+                                                                    "type": "tree"
                                                                 }
-                                                            ]
+                                                            ],
+                                                            "type": "tree"
                                                         },
                                                         {
                                                             "conditions": [],
                                                             "error": "FIPS is enabled but this partition does not support FIPS",
                                                             "type": "error"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [
@@ -3471,7 +3494,6 @@
                                                             ]
                                                         }
                                                     ],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [
@@ -3491,11 +3513,9 @@
                                                                     ]
                                                                 }
                                                             ],
-                                                            "type": "tree",
                                                             "rules": [
                                                                 {
                                                                     "conditions": [],
-                                                                    "type": "tree",
                                                                     "rules": [
                                                                         {
                                                                             "conditions": [],
@@ -3506,20 +3526,22 @@
                                                                             },
                                                                             "type": "endpoint"
                                                                         }
-                                                                    ]
+                                                                    ],
+                                                                    "type": "tree"
                                                                 }
-                                                            ]
+                                                            ],
+                                                            "type": "tree"
                                                         },
                                                         {
                                                             "conditions": [],
                                                             "error": "DualStack is enabled but this partition does not support DualStack",
                                                             "type": "error"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 },
                                                 {
                                                     "conditions": [],
-                                                    "type": "tree",
                                                     "rules": [
                                                         {
                                                             "conditions": [],
@@ -3530,18 +3552,22 @@
                                                             },
                                                             "type": "endpoint"
                                                         }
-                                                    ]
+                                                    ],
+                                                    "type": "tree"
                                                 }
-                                            ]
+                                            ],
+                                            "type": "tree"
                                         }
-                                    ]
+                                    ],
+                                    "type": "tree"
                                 },
                                 {
                                     "conditions": [],
                                     "error": "Invalid Configuration: Missing Region",
                                     "type": "error"
                                 }
-                            ]
+                            ],
+                            "type": "tree"
                         }
                     ]
                 },
@@ -3955,7 +3981,7 @@
                 "subscriberIdentity": {
                     "target": "com.amazonaws.securitylake#AwsIdentity",
                     "traits": {
-                        "smithy.api#documentation": "<p>The AWS identity used to access your data.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Web Services identity used to access your data.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -4012,7 +4038,7 @@
                 "resourceShareArn": {
                     "target": "com.amazonaws.securitylake#ResourceShareArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) which uniquely defines the AWS RAM resource share. Before\n         accepting the RAM resource share invitation, you can view details related to the RAM\n         resource share.</p>\n         <p>This field is available only for Lake Formation subscribers created after March 8, 2023.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) which uniquely defines the Amazon Web Services RAM resource share. Before\n         accepting the RAM resource share invitation, you can view details related to the RAM\n         resource share.</p>\n         <p>This field is available only for Lake Formation subscribers created after March 8, 2023.</p>"
                     }
                 },
                 "resourceShareName": {
@@ -4489,6 +4515,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Specify the Region or Regions that will contribute data to the rollup region.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "metaStoreManagerRoleArn": {
+                    "target": "com.amazonaws.securitylake#RoleArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) used to create and update the Glue table.\n         This table contains partitions generated by the ingestion and normalization of\n         Amazon Web Services log sources and custom sources.</p>"
                     }
                 }
             },

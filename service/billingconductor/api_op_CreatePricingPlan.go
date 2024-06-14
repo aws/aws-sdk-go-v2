@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -35,17 +34,19 @@ type CreatePricingPlanInput struct {
 	// This member is required.
 	Name *string
 
-	// The token that is needed to support idempotency. Idempotency isn't currently
+	//  The token that is needed to support idempotency. Idempotency isn't currently
 	// supported, but will be implemented in a future update.
 	ClientToken *string
 
 	// The description of the pricing plan.
 	Description *string
 
-	// A list of Amazon Resource Names (ARNs) that define the pricing plan parameters.
+	//  A list of Amazon Resource Names (ARNs) that define the pricing plan
+	// parameters.
 	PricingRuleArns []string
 
-	// A map that contains tag keys and tag values that are attached to a pricing plan.
+	//  A map that contains tag keys and tag values that are attached to a pricing
+	// plan.
 	Tags map[string]string
 
 	noSmithyDocumentSerde
@@ -84,25 +85,25 @@ func (c *Client) addOperationCreatePricingPlanMiddlewares(stack *middleware.Stac
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -117,6 +118,9 @@ func (c *Client) addOperationCreatePricingPlanMiddlewares(stack *middleware.Stac
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opCreatePricingPlanMiddleware(stack, options); err != nil {
 		return err
 	}
@@ -126,7 +130,7 @@ func (c *Client) addOperationCreatePricingPlanMiddlewares(stack *middleware.Stac
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreatePricingPlan(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

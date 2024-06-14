@@ -6,13 +6,13 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/securityhub/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Disassociates a target account, organizational unit, or the root from a
+//	Disassociates a target account, organizational unit, or the root from a
+//
 // specified configuration. When you disassociate a configuration from its target,
 // the target inherits the configuration of the closest parent. If there’s no
 // configuration to inherit, the target retains its settings but becomes a
@@ -36,13 +36,14 @@ func (c *Client) StartConfigurationPolicyDisassociation(ctx context.Context, par
 
 type StartConfigurationPolicyDisassociationInput struct {
 
-	// The Amazon Resource Name (ARN) or universally unique identifier (UUID) of the
-	// configuration policy.
+	//  The Amazon Resource Name (ARN) of a configuration policy, the universally
+	// unique identifier (UUID) of a configuration policy, or a value of
+	// SELF_MANAGED_SECURITY_HUB for a self-managed configuration.
 	//
 	// This member is required.
 	ConfigurationPolicyIdentifier *string
 
-	// The identifier of the target account, organizational unit, or the root to
+	//  The identifier of the target account, organizational unit, or the root to
 	// disassociate from the specified configuration.
 	Target types.Target
 
@@ -78,25 +79,25 @@ func (c *Client) addOperationStartConfigurationPolicyDisassociationMiddlewares(s
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -111,13 +112,16 @@ func (c *Client) addOperationStartConfigurationPolicyDisassociationMiddlewares(s
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpStartConfigurationPolicyDisassociationValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opStartConfigurationPolicyDisassociation(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

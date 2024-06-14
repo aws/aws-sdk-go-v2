@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -30,26 +29,36 @@ func (c *Client) StartRestoreJob(ctx context.Context, params *StartRestoreJobInp
 type StartRestoreJobInput struct {
 
 	// A set of metadata key-value pairs. Contains information, such as a resource
-	// name, required to restore a recovery point. You can get configuration metadata
-	// about a resource at the time it was backed up by calling
-	// GetRecoveryPointRestoreMetadata . However, values in addition to those provided
-	// by GetRecoveryPointRestoreMetadata might be required to restore a resource. For
-	// example, you might need to provide a new resource name if the original already
-	// exists. You need to specify specific metadata to restore an Amazon Elastic File
-	// System (Amazon EFS) instance:
+	// name, required to restore a recovery point.
+	//
+	// You can get configuration metadata about a resource at the time it was backed
+	// up by calling GetRecoveryPointRestoreMetadata . However, values in addition to
+	// those provided by GetRecoveryPointRestoreMetadata might be required to restore
+	// a resource. For example, you might need to provide a new resource name if the
+	// original already exists.
+	//
+	// You need to specify specific metadata to restore an Amazon Elastic File System
+	// (Amazon EFS) instance:
+	//
 	//   - file-system-id : The ID of the Amazon EFS file system that is backed up by
 	//   Backup. Returned in GetRecoveryPointRestoreMetadata .
+	//
 	//   - Encrypted : A Boolean value that, if true, specifies that the file system is
 	//   encrypted. If KmsKeyId is specified, Encrypted must be set to true .
+	//
 	//   - KmsKeyId : Specifies the Amazon Web Services KMS key that is used to encrypt
 	//   the restored file system. You can specify a key from another Amazon Web Services
 	//   account provided that key it is properly shared with your account via Amazon Web
 	//   Services KMS.
+	//
 	//   - PerformanceMode : Specifies the throughput mode of the file system.
+	//
 	//   - CreationToken : A user-supplied value that ensures the uniqueness
 	//   (idempotency) of the request.
+	//
 	//   - newFileSystem : A Boolean value that, if true, specifies that the recovery
 	//   point is restored to a new Amazon EFS file system.
+	//
 	//   - ItemsToRestore : An array of one to five strings where each string is a file
 	//   path. Use ItemsToRestore to restore specific files or directories rather than
 	//   the entire file system. This parameter is optional. For example,
@@ -66,8 +75,9 @@ type StartRestoreJobInput struct {
 	RecoveryPointArn *string
 
 	// This is an optional parameter. If this equals True , tags included in the backup
-	// will be copied to the restored resource. This can only be applied to backups
-	// created through Backup.
+	// will be copied to the restored resource.
+	//
+	// This can only be applied to backups created through Backup.
 	CopySourceTagsToRestoredResource bool
 
 	// The Amazon Resource Name (ARN) of the IAM role that Backup uses to create the
@@ -80,20 +90,35 @@ type StartRestoreJobInput struct {
 	IdempotencyToken *string
 
 	// Starts a job to restore a recovery point for one of the following resources:
+	//
 	//   - Aurora for Amazon Aurora
+	//
 	//   - DocumentDB for Amazon DocumentDB (with MongoDB compatibility)
+	//
 	//   - CloudFormation for CloudFormation
+	//
 	//   - DynamoDB for Amazon DynamoDB
+	//
 	//   - EBS for Amazon Elastic Block Store
+	//
 	//   - EC2 for Amazon Elastic Compute Cloud
+	//
 	//   - EFS for Amazon Elastic File System
+	//
 	//   - FSx for Amazon FSx
+	//
 	//   - Neptune for Amazon Neptune
+	//
 	//   - RDS for Amazon Relational Database Service
+	//
 	//   - Redshift for Amazon Redshift
+	//
 	//   - Storage Gateway for Storage Gateway
+	//
 	//   - S3 for Amazon S3
+	//
 	//   - Timestream for Amazon Timestream
+	//
 	//   - VirtualMachine for virtual machines
 	ResourceType *string
 
@@ -133,25 +158,25 @@ func (c *Client) addOperationStartRestoreJobMiddlewares(stack *middleware.Stack,
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -166,13 +191,16 @@ func (c *Client) addOperationStartRestoreJobMiddlewares(stack *middleware.Stack,
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpStartRestoreJobValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opStartRestoreJob(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

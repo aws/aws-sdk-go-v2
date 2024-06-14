@@ -6,14 +6,15 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Assigns the DELETED status to an Evaluation , rendering it unusable. After
-// invoking the DeleteEvaluation operation, you can use the GetEvaluation
+// Assigns the DELETED status to an Evaluation , rendering it unusable.
+//
+// After invoking the DeleteEvaluation operation, you can use the GetEvaluation
 // operation to verify that the status of the Evaluation changed to DELETED .
+//
 // Caution: The results of the DeleteEvaluation operation are irreversible.
 func (c *Client) DeleteEvaluation(ctx context.Context, params *DeleteEvaluationInput, optFns ...func(*Options)) (*DeleteEvaluationOutput, error) {
 	if params == nil {
@@ -40,10 +41,12 @@ type DeleteEvaluationInput struct {
 	noSmithyDocumentSerde
 }
 
-// Represents the output of a DeleteEvaluation operation. The output indicates
-// that Amazon Machine Learning (Amazon ML) received the request. You can use the
-// GetEvaluation operation and check the value of the Status parameter to see
-// whether an Evaluation is marked as DELETED .
+//	Represents the output of a DeleteEvaluation operation. The output indicates
+//
+// that Amazon Machine Learning (Amazon ML) received the request.
+//
+// You can use the GetEvaluation operation and check the value of the Status
+// parameter to see whether an Evaluation is marked as DELETED .
 type DeleteEvaluationOutput struct {
 
 	// A user-supplied ID that uniquely identifies the Evaluation . This value should
@@ -78,25 +81,25 @@ func (c *Client) addOperationDeleteEvaluationMiddlewares(stack *middleware.Stack
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -111,13 +114,16 @@ func (c *Client) addOperationDeleteEvaluationMiddlewares(stack *middleware.Stack
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDeleteEvaluationValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteEvaluation(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

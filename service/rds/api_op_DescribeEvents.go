@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/rds/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -17,11 +16,15 @@ import (
 // security groups, DB snapshots, DB cluster snapshots, and RDS Proxies for the
 // past 14 days. Events specific to a particular DB instance, DB cluster, DB
 // parameter group, DB security group, DB snapshot, DB cluster snapshot group, or
-// RDS Proxy can be obtained by providing the name as a parameter. For more
-// information on working with events, see Monitoring Amazon RDS events (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/working-with-events.html)
-// in the Amazon RDS User Guide and Monitoring Amazon Aurora events (https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/working-with-events.html)
-// in the Amazon Aurora User Guide. By default, RDS returns events that were
-// generated in the past hour.
+// RDS Proxy can be obtained by providing the name as a parameter.
+//
+// For more information on working with events, see [Monitoring Amazon RDS events] in the Amazon RDS User Guide
+// and [Monitoring Amazon Aurora events]in the Amazon Aurora User Guide.
+//
+// By default, RDS returns events that were generated in the past hour.
+//
+// [Monitoring Amazon RDS events]: https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/working-with-events.html
+// [Monitoring Amazon Aurora events]: https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/working-with-events.html
 func (c *Client) DescribeEvents(ctx context.Context, params *DescribeEventsInput, optFns ...func(*Options)) (*DescribeEventsOutput, error) {
 	if params == nil {
 		params = &DescribeEventsInput{}
@@ -39,12 +42,17 @@ func (c *Client) DescribeEvents(ctx context.Context, params *DescribeEventsInput
 
 type DescribeEventsInput struct {
 
-	// The number of minutes to retrieve events for. Default: 60
+	// The number of minutes to retrieve events for.
+	//
+	// Default: 60
 	Duration *int32
 
 	// The end of the time interval for which to retrieve events, specified in ISO
-	// 8601 format. For more information about ISO 8601, go to the ISO8601 Wikipedia
-	// page. (http://en.wikipedia.org/wiki/ISO_8601) Example: 2009-07-08T18:00Z
+	// 8601 format. For more information about ISO 8601, go to the [ISO8601 Wikipedia page.]
+	//
+	// Example: 2009-07-08T18:00Z
+	//
+	// [ISO8601 Wikipedia page.]: http://en.wikipedia.org/wiki/ISO_8601
 	EndTime *time.Time
 
 	// A list of event categories that trigger notifications for a event notification
@@ -62,25 +70,39 @@ type DescribeEventsInput struct {
 	// The maximum number of records to include in the response. If more records exist
 	// than the specified MaxRecords value, a pagination token called a marker is
 	// included in the response so that you can retrieve the remaining results.
-	// Default: 100 Constraints: Minimum 20, maximum 100.
+	//
+	// Default: 100
+	//
+	// Constraints: Minimum 20, maximum 100.
 	MaxRecords *int32
 
 	// The identifier of the event source for which events are returned. If not
-	// specified, then all sources are included in the response. Constraints:
+	// specified, then all sources are included in the response.
+	//
+	// Constraints:
+	//
 	//   - If SourceIdentifier is supplied, SourceType must also be provided.
+	//
 	//   - If the source type is a DB instance, a DBInstanceIdentifier value must be
 	//   supplied.
+	//
 	//   - If the source type is a DB cluster, a DBClusterIdentifier value must be
 	//   supplied.
+	//
 	//   - If the source type is a DB parameter group, a DBParameterGroupName value
 	//   must be supplied.
+	//
 	//   - If the source type is a DB security group, a DBSecurityGroupName value must
 	//   be supplied.
+	//
 	//   - If the source type is a DB snapshot, a DBSnapshotIdentifier value must be
 	//   supplied.
+	//
 	//   - If the source type is a DB cluster snapshot, a DBClusterSnapshotIdentifier
 	//   value must be supplied.
+	//
 	//   - If the source type is an RDS Proxy, a DBProxyName value must be supplied.
+	//
 	//   - Can't end with a hyphen or contain two consecutive hyphens.
 	SourceIdentifier *string
 
@@ -89,8 +111,11 @@ type DescribeEventsInput struct {
 	SourceType types.SourceType
 
 	// The beginning of the time interval to retrieve events for, specified in ISO
-	// 8601 format. For more information about ISO 8601, go to the ISO8601 Wikipedia
-	// page. (http://en.wikipedia.org/wiki/ISO_8601) Example: 2009-07-08T18:00Z
+	// 8601 format. For more information about ISO 8601, go to the [ISO8601 Wikipedia page.]
+	//
+	// Example: 2009-07-08T18:00Z
+	//
+	// [ISO8601 Wikipedia page.]: http://en.wikipedia.org/wiki/ISO_8601
 	StartTime *time.Time
 
 	noSmithyDocumentSerde
@@ -135,25 +160,25 @@ func (c *Client) addOperationDescribeEventsMiddlewares(stack *middleware.Stack, 
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -168,13 +193,16 @@ func (c *Client) addOperationDescribeEventsMiddlewares(stack *middleware.Stack, 
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDescribeEventsValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeEvents(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -205,7 +233,10 @@ type DescribeEventsPaginatorOptions struct {
 	// The maximum number of records to include in the response. If more records exist
 	// than the specified MaxRecords value, a pagination token called a marker is
 	// included in the response so that you can retrieve the remaining results.
-	// Default: 100 Constraints: Minimum 20, maximum 100.
+	//
+	// Default: 100
+	//
+	// Constraints: Minimum 20, maximum 100.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

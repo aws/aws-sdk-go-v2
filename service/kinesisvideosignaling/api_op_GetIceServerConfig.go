@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/kinesisvideosignaling/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -16,15 +15,19 @@ import (
 // information, including URIs, username, and password which can be used to
 // configure the WebRTC connection. The ICE component uses this configuration
 // information to setup the WebRTC connection, including authenticating with the
-// Traversal Using Relays around NAT (TURN) relay server. TURN is a protocol that
-// is used to improve the connectivity of peer-to-peer applications. By providing a
-// cloud-based relay service, TURN ensures that a connection can be established
-// even when one or more peers are incapable of a direct peer-to-peer connection.
-// For more information, see A REST API For Access To TURN Services (https://tools.ietf.org/html/draft-uberti-rtcweb-turn-rest-00)
-// . You can invoke this API to establish a fallback mechanism in case either of
-// the peers is unable to establish a direct peer-to-peer connection over a
-// signaling channel. You must specify either a signaling channel ARN or the client
-// ID in order to invoke this API.
+// Traversal Using Relays around NAT (TURN) relay server.
+//
+// TURN is a protocol that is used to improve the connectivity of peer-to-peer
+// applications. By providing a cloud-based relay service, TURN ensures that a
+// connection can be established even when one or more peers are incapable of a
+// direct peer-to-peer connection. For more information, see [A REST API For Access To TURN Services].
+//
+// You can invoke this API to establish a fallback mechanism in case either of the
+// peers is unable to establish a direct peer-to-peer connection over a signaling
+// channel. You must specify either a signaling channel ARN or the client ID in
+// order to invoke this API.
+//
+// [A REST API For Access To TURN Services]: https://tools.ietf.org/html/draft-uberti-rtcweb-turn-rest-00
 func (c *Client) GetIceServerConfig(ctx context.Context, params *GetIceServerConfigInput, optFns ...func(*Options)) (*GetIceServerConfigOutput, error) {
 	if params == nil {
 		params = &GetIceServerConfigInput{}
@@ -93,25 +96,25 @@ func (c *Client) addOperationGetIceServerConfigMiddlewares(stack *middleware.Sta
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -126,13 +129,16 @@ func (c *Client) addOperationGetIceServerConfigMiddlewares(stack *middleware.Sta
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpGetIceServerConfigValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetIceServerConfig(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

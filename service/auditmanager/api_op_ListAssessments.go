@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/auditmanager/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -30,13 +29,13 @@ func (c *Client) ListAssessments(ctx context.Context, params *ListAssessmentsInp
 
 type ListAssessmentsInput struct {
 
-	// Represents the maximum number of results on a page or for an API request call.
+	//  Represents the maximum number of results on a page or for an API request call.
 	MaxResults *int32
 
-	// The pagination token that's used to fetch the next set of results.
+	//  The pagination token that's used to fetch the next set of results.
 	NextToken *string
 
-	// The current status of the assessment.
+	//  The current status of the assessment.
 	Status types.AssessmentStatus
 
 	noSmithyDocumentSerde
@@ -47,7 +46,7 @@ type ListAssessmentsOutput struct {
 	// The metadata that the ListAssessments API returns for each assessment.
 	AssessmentMetadata []types.AssessmentMetadataItem
 
-	// The pagination token that's used to fetch the next set of results.
+	//  The pagination token that's used to fetch the next set of results.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -78,25 +77,25 @@ func (c *Client) addOperationListAssessmentsMiddlewares(stack *middleware.Stack,
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -111,10 +110,13 @@ func (c *Client) addOperationListAssessmentsMiddlewares(stack *middleware.Stack,
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListAssessments(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -142,7 +144,7 @@ var _ ListAssessmentsAPIClient = (*Client)(nil)
 
 // ListAssessmentsPaginatorOptions is the paginator options for ListAssessments
 type ListAssessmentsPaginatorOptions struct {
-	// Represents the maximum number of results on a page or for an API request call.
+	//  Represents the maximum number of results on a page or for an API request call.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

@@ -6,37 +6,59 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/paymentcryptographydata/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Encrypts plaintext data to ciphertext using symmetric, asymmetric, or DUKPT
-// data encryption key. For more information, see Encrypt data (https://docs.aws.amazon.com/payment-cryptography/latest/userguide/encrypt-data.html)
-// in the Amazon Web Services Payment Cryptography User Guide. You can generate an
-// encryption key within Amazon Web Services Payment Cryptography by calling
-// CreateKey (https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_CreateKey.html)
-// . You can import your own encryption key by calling ImportKey (https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_ImportKey.html)
-// . For this operation, the key must have KeyModesOfUse set to Encrypt . In
+// Encrypts plaintext data to ciphertext using a symmetric (TDES, AES), asymmetric
+// (RSA), or derived (DUKPT or EMV) encryption key scheme. For more information,
+// see [Encrypt data]in the Amazon Web Services Payment Cryptography User Guide.
+//
+// You can generate an encryption key within Amazon Web Services Payment
+// Cryptography by calling [CreateKey]. You can import your own encryption key by calling [ImportKey].
+// For this operation, the key must have KeyModesOfUse set to Encrypt . In
 // asymmetric encryption, plaintext is encrypted using public component. You can
 // import the public component of an asymmetric key pair created outside Amazon Web
-// Services Payment Cryptography by calling ImportKey (https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_ImportKey.html)
-// ). for symmetric and DUKPT encryption, Amazon Web Services Payment Cryptography
-// supports TDES and AES algorithms. For asymmetric encryption, Amazon Web
-// Services Payment Cryptography supports RSA . To encrypt using DUKPT, you must
-// already have a DUKPT key in your account with KeyModesOfUse set to DeriveKey ,
-// or you can generate a new DUKPT key by calling CreateKey (https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_CreateKey.html)
-// . For information about valid keys for this operation, see Understanding key
-// attributes (https://docs.aws.amazon.com/payment-cryptography/latest/userguide/keys-validattributes.html)
-// and Key types for specific data operations (https://docs.aws.amazon.com/payment-cryptography/latest/userguide/crypto-ops-validkeys-ops.html)
-// in the Amazon Web Services Payment Cryptography User Guide. Cross-account use:
-// This operation can't be used across different Amazon Web Services accounts.
+// Services Payment Cryptography by calling [ImportKey].
+//
+// For symmetric and DUKPT encryption, Amazon Web Services Payment Cryptography
+// supports TDES and AES algorithms. For EMV encryption, Amazon Web Services
+// Payment Cryptography supports TDES algorithms.For asymmetric encryption, Amazon
+// Web Services Payment Cryptography supports RSA .
+//
+// When you use TDES or TDES DUKPT, the plaintext data length must be a multiple
+// of 8 bytes. For AES or AES DUKPT, the plaintext data length must be a multiple
+// of 16 bytes. For RSA, it sould be equal to the key size unless padding is
+// enabled.
+//
+// To encrypt using DUKPT, you must already have a BDK (Base Derivation Key) key
+// in your account with KeyModesOfUse set to DeriveKey , or you can generate a new
+// DUKPT key by calling [CreateKey]. To encrypt using EMV, you must already have an IMK
+// (Issuer Master Key) key in your account with KeyModesOfUse set to DeriveKey .
+//
+// For information about valid keys for this operation, see [Understanding key attributes] and [Key types for specific data operations] in the Amazon
+// Web Services Payment Cryptography User Guide.
+//
+// Cross-account use: This operation can't be used across different Amazon Web
+// Services accounts.
+//
 // Related operations:
-//   - DecryptData
-//   - GetPublicCertificate (https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_GetPublicKeyCertificate.html)
-//   - ImportKey (https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_ImportKey.html)
-//   - ReEncryptData
+//
+// # DecryptData
+//
+// [GetPublicCertificate]
+//
+// [ImportKey]
+//
+// # ReEncryptData
+//
+// [GetPublicCertificate]: https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_GetPublicKeyCertificate.html
+// [Encrypt data]: https://docs.aws.amazon.com/payment-cryptography/latest/userguide/encrypt-data.html
+// [ImportKey]: https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_ImportKey.html
+// [Key types for specific data operations]: https://docs.aws.amazon.com/payment-cryptography/latest/userguide/crypto-ops-validkeys-ops.html
+// [Understanding key attributes]: https://docs.aws.amazon.com/payment-cryptography/latest/userguide/keys-validattributes.html
+// [CreateKey]: https://docs.aws.amazon.com/payment-cryptography/latest/APIReference/API_CreateKey.html
 func (c *Client) EncryptData(ctx context.Context, params *EncryptDataInput, optFns ...func(*Options)) (*EncryptDataOutput, error) {
 	if params == nil {
 		params = &EncryptDataInput{}
@@ -67,6 +89,13 @@ type EncryptDataInput struct {
 
 	// The plaintext to be encrypted.
 	//
+	// For encryption using asymmetric keys, plaintext data length is constrained by
+	// encryption key strength that you define in KeyAlgorithm and padding type that
+	// you define in AsymmetricEncryptionAttributes . For more information, see [Encrypt data] in
+	// the Amazon Web Services Payment Cryptography User Guide.
+	//
+	// [Encrypt data]: https://docs.aws.amazon.com/payment-cryptography/latest/userguide/encrypt-data.html
+	//
 	// This member is required.
 	PlainText *string
 
@@ -88,10 +117,10 @@ type EncryptDataOutput struct {
 
 	// The key check value (KCV) of the encryption key. The KCV is used to check if
 	// all parties holding a given key have the same key or to detect that a key has
-	// changed. Amazon Web Services Payment Cryptography calculates the KCV by using
-	// standard algorithms, typically by encrypting 8 or 16 bytes or "00" or "01" and
-	// then truncating the result to the first 3 bytes, or 6 hex digits, of the
-	// resulting cryptogram.
+	// changed.
+	//
+	// Amazon Web Services Payment Cryptography computes the KCV according to the CMAC
+	// specification.
 	KeyCheckValue *string
 
 	// Metadata pertaining to the operation's result.
@@ -122,25 +151,25 @@ func (c *Client) addOperationEncryptDataMiddlewares(stack *middleware.Stack, opt
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -155,13 +184,16 @@ func (c *Client) addOperationEncryptDataMiddlewares(stack *middleware.Stack, opt
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpEncryptDataValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opEncryptData(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

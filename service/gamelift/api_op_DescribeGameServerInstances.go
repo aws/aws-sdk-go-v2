@@ -6,25 +6,35 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/gamelift/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// This operation is used with the Amazon GameLift FleetIQ solution and game
-// server groups. Retrieves status information about the Amazon EC2 instances
-// associated with a Amazon GameLift FleetIQ game server group. Use this operation
-// to detect when instances are active or not available to host new game servers.
+//	This operation is used with the Amazon GameLift FleetIQ solution and game
+//
+// server groups.
+//
+// Retrieves status information about the Amazon EC2 instances associated with a
+// Amazon GameLift FleetIQ game server group. Use this operation to detect when
+// instances are active or not available to host new game servers.
+//
 // To request status for all instances in the game server group, provide a game
 // server group ID only. To request status for specific instances, provide the game
 // server group ID and one or more instance IDs. Use the pagination parameters to
 // retrieve results in sequential segments. If successful, a collection of
-// GameServerInstance objects is returned. This operation is not designed to be
-// called with every game server claim request; this practice can cause you to
-// exceed your API limit, which results in errors. Instead, as a best practice,
-// cache the results and refresh your cache no more than once every 10 seconds.
-// Learn more Amazon GameLift FleetIQ Guide (https://docs.aws.amazon.com/gamelift/latest/fleetiqguide/gsg-intro.html)
+// GameServerInstance objects is returned.
+//
+// This operation is not designed to be called with every game server claim
+// request; this practice can cause you to exceed your API limit, which results in
+// errors. Instead, as a best practice, cache the results and refresh your cache no
+// more than once every 10 seconds.
+//
+// # Learn more
+//
+// [Amazon GameLift FleetIQ Guide]
+//
+// [Amazon GameLift FleetIQ Guide]: https://docs.aws.amazon.com/gamelift/latest/fleetiqguide/gsg-intro.html
 func (c *Client) DescribeGameServerInstances(ctx context.Context, params *DescribeGameServerInstancesInput, optFns ...func(*Options)) (*DescribeGameServerInstancesOutput, error) {
 	if params == nil {
 		params = &DescribeGameServerInstancesInput{}
@@ -102,25 +112,25 @@ func (c *Client) addOperationDescribeGameServerInstancesMiddlewares(stack *middl
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -135,13 +145,16 @@ func (c *Client) addOperationDescribeGameServerInstancesMiddlewares(stack *middl
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDescribeGameServerInstancesValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeGameServerInstances(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

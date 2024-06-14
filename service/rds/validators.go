@@ -2410,6 +2410,26 @@ func (m *validateOpModifyEventSubscription) HandleInitialize(ctx context.Context
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpModifyIntegration struct {
+}
+
+func (*validateOpModifyIntegration) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpModifyIntegration) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ModifyIntegrationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpModifyIntegrationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpModifyOptionGroup struct {
 }
 
@@ -3568,6 +3588,10 @@ func addOpModifyDBSubnetGroupValidationMiddleware(stack *middleware.Stack) error
 
 func addOpModifyEventSubscriptionValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpModifyEventSubscription{}, middleware.After)
+}
+
+func addOpModifyIntegrationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpModifyIntegration{}, middleware.After)
 }
 
 func addOpModifyOptionGroupValidationMiddleware(stack *middleware.Stack) error {
@@ -5902,6 +5926,21 @@ func validateOpModifyEventSubscriptionInput(v *ModifyEventSubscriptionInput) err
 	invalidParams := smithy.InvalidParamsError{Context: "ModifyEventSubscriptionInput"}
 	if v.SubscriptionName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("SubscriptionName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpModifyIntegrationInput(v *ModifyIntegrationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ModifyIntegrationInput"}
+	if v.IntegrationIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("IntegrationIdentifier"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

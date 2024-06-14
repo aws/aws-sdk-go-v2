@@ -17,8 +17,9 @@ type AbortIncompleteMultipartUpload struct {
 	noSmithyDocumentSerde
 }
 
-// A container for information about access control for replicas. This is not
-// supported by Amazon S3 on Outposts buckets.
+// A container for information about access control for replicas.
+//
+// This is not supported by Amazon S3 on Outposts buckets.
 type AccessControlTranslation struct {
 
 	// Specifies the replica ownership.
@@ -42,9 +43,11 @@ type AccessGrantsLocationConfiguration struct {
 	// narrow the scope. For example, if the location scope is the default location
 	// s3:// , the S3SubPrefx can be a /*, so the full grant scope path would be
 	// s3:///* . Or the S3SubPrefx can be /* , so the full grant scope path would be or
-	// s3:///* . If the S3SubPrefix includes a prefix, append the wildcard character *
-	// after the prefix to indicate that you want to include all object key names in
-	// the bucket that start with that prefix.
+	// s3:///* .
+	//
+	// If the S3SubPrefix includes a prefix, append the wildcard character * after the
+	// prefix to indicate that you want to include all object key names in the bucket
+	// that start with that prefix.
 	S3SubPrefix *string
 
 	noSmithyDocumentSerde
@@ -83,19 +86,22 @@ type AccessPoint struct {
 	BucketAccountId *string
 
 	// The virtual private cloud (VPC) configuration for this access point, if one
-	// exists. This element is empty if this access point is an Amazon S3 on Outposts
-	// access point that is used by other Amazon Web Services.
+	// exists.
+	//
+	// This element is empty if this access point is an Amazon S3 on Outposts access
+	// point that is used by other Amazon Web Services.
 	VpcConfiguration *VpcConfiguration
 
 	noSmithyDocumentSerde
 }
 
 // A container element for the account-level Amazon S3 Storage Lens configuration.
-// For more information about S3 Storage Lens, see Assessing your storage activity
-// and usage with S3 Storage Lens (https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage_lens.html)
-// in the Amazon S3 User Guide. For a complete list of S3 Storage Lens metrics, see
-// S3 Storage Lens metrics glossary (https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage_lens_metrics_glossary.html)
-// in the Amazon S3 User Guide.
+//
+// For more information about S3 Storage Lens, see [Assessing your storage activity and usage with S3 Storage Lens] in the Amazon S3 User Guide.
+// For a complete list of S3 Storage Lens metrics, see [S3 Storage Lens metrics glossary]in the Amazon S3 User Guide.
+//
+// [Assessing your storage activity and usage with S3 Storage Lens]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage_lens.html
+// [S3 Storage Lens metrics glossary]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage_lens_metrics_glossary.html
 type AccountLevel struct {
 
 	// A container element for the S3 Storage Lens bucket-level configuration.
@@ -115,7 +121,7 @@ type AccountLevel struct {
 	// A container element for detailed status code metrics.
 	DetailedStatusCodesMetrics *DetailedStatusCodesMetrics
 
-	// A container element for S3 Storage Lens groups metrics.
+	//  A container element for S3 Storage Lens groups metrics.
 	StorageLensGroupLevel *StorageLensGroupLevel
 
 	noSmithyDocumentSerde
@@ -124,11 +130,13 @@ type AccountLevel struct {
 // The container element for Amazon S3 Storage Lens activity metrics. Activity
 // metrics show details about how your storage is requested, such as requests (for
 // example, All requests, Get requests, Put requests), bytes uploaded or
-// downloaded, and errors. For more information about S3 Storage Lens, see
-// Assessing your storage activity and usage with S3 Storage Lens (https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage_lens.html)
-// in the Amazon S3 User Guide. For a complete list of S3 Storage Lens metrics, see
-// S3 Storage Lens metrics glossary (https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage_lens_metrics_glossary.html)
-// in the Amazon S3 User Guide.
+// downloaded, and errors.
+//
+// For more information about S3 Storage Lens, see [Assessing your storage activity and usage with S3 Storage Lens] in the Amazon S3 User Guide.
+// For a complete list of S3 Storage Lens metrics, see [S3 Storage Lens metrics glossary]in the Amazon S3 User Guide.
+//
+// [Assessing your storage activity and usage with S3 Storage Lens]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage_lens.html
+// [S3 Storage Lens metrics glossary]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage_lens_metrics_glossary.html
 type ActivityMetrics struct {
 
 	// A container that indicates whether activity metrics are enabled.
@@ -140,12 +148,13 @@ type ActivityMetrics struct {
 // The container element for Amazon S3 Storage Lens advanced cost-optimization
 // metrics. Advanced cost-optimization metrics provide insights that you can use to
 // manage and optimize your storage costs, for example, lifecycle rule counts for
-// transitions, expirations, and incomplete multipart uploads. For more information
-// about S3 Storage Lens, see Assessing your storage activity and usage with S3
-// Storage Lens (https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage_lens.html)
-// in the Amazon S3 User Guide. For a complete list of S3 Storage Lens metrics, see
-// S3 Storage Lens metrics glossary (https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage_lens_metrics_glossary.html)
-// in the Amazon S3 User Guide.
+// transitions, expirations, and incomplete multipart uploads.
+//
+// For more information about S3 Storage Lens, see [Assessing your storage activity and usage with S3 Storage Lens] in the Amazon S3 User Guide.
+// For a complete list of S3 Storage Lens metrics, see [S3 Storage Lens metrics glossary]in the Amazon S3 User Guide.
+//
+// [Assessing your storage activity and usage with S3 Storage Lens]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage_lens.html
+// [S3 Storage Lens metrics glossary]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage_lens_metrics_glossary.html
 type AdvancedCostOptimizationMetrics struct {
 
 	// A container that indicates whether advanced cost-optimization metrics are
@@ -158,11 +167,13 @@ type AdvancedCostOptimizationMetrics struct {
 // The container element for Amazon S3 Storage Lens advanced data-protection
 // metrics. Advanced data-protection metrics provide insights that you can use to
 // perform audits and protect your data, for example replication rule counts within
-// and across Regions. For more information about S3 Storage Lens, see Assessing
-// your storage activity and usage with S3 Storage Lens (https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage_lens.html)
-// in the Amazon S3 User Guide. For a complete list of S3 Storage Lens metrics, see
-// S3 Storage Lens metrics glossary (https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage_lens_metrics_glossary.html)
-// in the Amazon S3 User Guide.
+// and across Regions.
+//
+// For more information about S3 Storage Lens, see [Assessing your storage activity and usage with S3 Storage Lens] in the Amazon S3 User Guide.
+// For a complete list of S3 Storage Lens metrics, see [S3 Storage Lens metrics glossary]in the Amazon S3 User Guide.
+//
+// [Assessing your storage activity and usage with S3 Storage Lens]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage_lens.html
+// [S3 Storage Lens metrics glossary]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage_lens_metrics_glossary.html
 type AdvancedDataProtectionMetrics struct {
 
 	// A container that indicates whether advanced data-protection metrics are enabled.
@@ -216,16 +227,19 @@ type AsyncOperation struct {
 // A container for the request parameters associated with an asynchronous request.
 type AsyncRequestParameters struct {
 
-	// A container of the parameters for a CreateMultiRegionAccessPoint (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_CreateMultiRegionAccessPoint.html)
-	// request.
+	// A container of the parameters for a [CreateMultiRegionAccessPoint] request.
+	//
+	// [CreateMultiRegionAccessPoint]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_CreateMultiRegionAccessPoint.html
 	CreateMultiRegionAccessPointRequest *CreateMultiRegionAccessPointInput
 
-	// A container of the parameters for a DeleteMultiRegionAccessPoint (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteMultiRegionAccessPoint.html)
-	// request.
+	// A container of the parameters for a [DeleteMultiRegionAccessPoint] request.
+	//
+	// [DeleteMultiRegionAccessPoint]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteMultiRegionAccessPoint.html
 	DeleteMultiRegionAccessPointRequest *DeleteMultiRegionAccessPointInput
 
-	// A container of the parameters for a PutMultiRegionAccessPoint (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_PutMultiRegionAccessPoint.html)
-	// request.
+	// A container of the parameters for a [PutMultiRegionAccessPoint] request.
+	//
+	// [PutMultiRegionAccessPoint]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_PutMultiRegionAccessPoint.html
 	PutMultiRegionAccessPointPolicyRequest *PutMultiRegionAccessPointPolicyInput
 
 	noSmithyDocumentSerde
@@ -259,10 +273,11 @@ type AwsLambdaTransformation struct {
 	noSmithyDocumentSerde
 }
 
-// A container for the bucket-level configuration for Amazon S3 Storage Lens. For
-// more information about S3 Storage Lens, see Assessing your storage activity and
-// usage with S3 Storage Lens (https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage_lens.html)
-// in the Amazon S3 User Guide.
+// A container for the bucket-level configuration for Amazon S3 Storage Lens.
+//
+// For more information about S3 Storage Lens, see [Assessing your storage activity and usage with S3 Storage Lens] in the Amazon S3 User Guide.
+//
+// [Assessing your storage activity and usage with S3 Storage Lens]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage_lens.html
 type BucketLevel struct {
 
 	// A container for the bucket-level activity metrics for S3 Storage Lens.
@@ -286,9 +301,12 @@ type BucketLevel struct {
 }
 
 // A container for enabling Amazon CloudWatch publishing for S3 Storage Lens
-// metrics. For more information about publishing S3 Storage Lens metrics to
-// CloudWatch, see Monitor S3 Storage Lens metrics in CloudWatch (https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage_lens_view_metrics_cloudwatch.html)
-// in the Amazon S3 User Guide.
+// metrics.
+//
+// For more information about publishing S3 Storage Lens metrics to CloudWatch,
+// see [Monitor S3 Storage Lens metrics in CloudWatch]in the Amazon S3 User Guide.
+//
+// [Monitor S3 Storage Lens metrics in CloudWatch]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage_lens_view_metrics_cloudwatch.html
 type CloudWatchMetrics struct {
 
 	// A container that indicates whether CloudWatch publishing for S3 Storage Lens
@@ -301,20 +319,24 @@ type CloudWatchMetrics struct {
 	noSmithyDocumentSerde
 }
 
-// The container for the bucket configuration. This is not supported by Amazon S3
-// on Outposts buckets.
+// The container for the bucket configuration.
+//
+// This is not supported by Amazon S3 on Outposts buckets.
 type CreateBucketConfiguration struct {
 
 	// Specifies the Region where the bucket will be created. If you are creating a
 	// bucket on the US East (N. Virginia) Region (us-east-1), you do not need to
-	// specify the location. This is not supported by Amazon S3 on Outposts buckets.
+	// specify the location.
+	//
+	// This is not supported by Amazon S3 on Outposts buckets.
 	LocationConstraint BucketLocationConstraint
 
 	noSmithyDocumentSerde
 }
 
-// A container for the information associated with a CreateMultiRegionAccessPoint (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_CreateMultiRegionAccessPoint.html)
-// request.
+// A container for the information associated with a [CreateMultiRegionAccessPoint] request.
+//
+// [CreateMultiRegionAccessPoint]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_CreateMultiRegionAccessPoint.html
 type CreateMultiRegionAccessPointInput struct {
 
 	// The name of the Multi-Region Access Point associated with this request.
@@ -330,10 +352,12 @@ type CreateMultiRegionAccessPointInput struct {
 
 	// The PublicAccessBlock configuration that you want to apply to this Amazon S3
 	// account. You can enable the configuration options in any combination. For more
-	// information about when Amazon S3 considers a bucket or object public, see The
-	// Meaning of "Public" (https://docs.aws.amazon.com/AmazonS3/latest/dev/access-control-block-public-access.html#access-control-block-public-access-policy-status)
-	// in the Amazon S3 User Guide. This data type is not supported for Amazon S3 on
-	// Outposts.
+	// information about when Amazon S3 considers a bucket or object public, see [The Meaning of "Public"]in
+	// the Amazon S3 User Guide.
+	//
+	// This data type is not supported for Amazon S3 on Outposts.
+	//
+	// [The Meaning of "Public"]: https://docs.aws.amazon.com/AmazonS3/latest/dev/access-control-block-public-access.html#access-control-block-public-access-policy-status
 	PublicAccessBlock *PublicAccessBlockConfiguration
 
 	noSmithyDocumentSerde
@@ -367,9 +391,12 @@ type Credentials struct {
 // DeleteMarkerReplication element. If your Filter includes a Tag element, the
 // DeleteMarkerReplication element's Status child element must be set to Disabled ,
 // because S3 on Outposts does not support replicating delete markers for tag-based
-// rules. For more information about delete marker replication, see How delete
-// operations affect replication (https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3OutpostsReplication.html#outposts-replication-what-is-replicated)
-// in the Amazon S3 User Guide.
+// rules.
+//
+// For more information about delete marker replication, see [How delete operations affect replication] in the Amazon S3
+// User Guide.
+//
+// [How delete operations affect replication]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3OutpostsReplication.html#outposts-replication-what-is-replicated
 type DeleteMarkerReplication struct {
 
 	// Indicates whether to replicate delete markers.
@@ -380,8 +407,9 @@ type DeleteMarkerReplication struct {
 	noSmithyDocumentSerde
 }
 
-// A container for the information associated with a DeleteMultiRegionAccessPoint (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteMultiRegionAccessPoint.html)
-// request.
+// A container for the information associated with a [DeleteMultiRegionAccessPoint] request.
+//
+// [DeleteMultiRegionAccessPoint]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteMultiRegionAccessPoint.html
 type DeleteMultiRegionAccessPointInput struct {
 
 	// The name of the Multi-Region Access Point associated with this request.
@@ -406,31 +434,35 @@ type Destination struct {
 	// destination bucket owners are not the same), and you want to change replica
 	// ownership to the Amazon Web Services account that owns the destination bucket.
 	// If this property is not specified in the replication configuration, the replicas
-	// are owned by same Amazon Web Services account that owns the source object. This
-	// is not supported by Amazon S3 on Outposts buckets.
+	// are owned by same Amazon Web Services account that owns the source object.
+	//
+	// This is not supported by Amazon S3 on Outposts buckets.
 	AccessControlTranslation *AccessControlTranslation
 
 	// The destination bucket owner's account ID.
 	Account *string
 
 	// A container that provides information about encryption. If
-	// SourceSelectionCriteria is specified, you must specify this element. This is not
-	// supported by Amazon S3 on Outposts buckets.
+	// SourceSelectionCriteria is specified, you must specify this element.
+	//
+	// This is not supported by Amazon S3 on Outposts buckets.
 	EncryptionConfiguration *EncryptionConfiguration
 
-	// A container that specifies replication metrics-related settings.
+	//  A container that specifies replication metrics-related settings.
 	Metrics *Metrics
 
 	// A container that specifies S3 Replication Time Control (S3 RTC) settings,
 	// including whether S3 RTC is enabled and the time when all objects and operations
 	// on objects must be replicated. Must be specified together with a Metrics block.
+	//
 	// This is not supported by Amazon S3 on Outposts buckets.
 	ReplicationTime *ReplicationTime
 
-	// The storage class to use when replicating objects. All objects stored on S3 on
+	//  The storage class to use when replicating objects. All objects stored on S3 on
 	// Outposts are stored in the OUTPOSTS storage class. S3 on Outposts uses the
-	// OUTPOSTS storage class to create the object replicas. Values other than OUTPOSTS
-	// aren't supported by Amazon S3 on Outposts.
+	// OUTPOSTS storage class to create the object replicas.
+	//
+	// Values other than OUTPOSTS aren't supported by Amazon S3 on Outposts.
 	StorageClass ReplicationStorageClass
 
 	noSmithyDocumentSerde
@@ -438,12 +470,13 @@ type Destination struct {
 
 // The container element for Amazon S3 Storage Lens detailed status code metrics.
 // Detailed status code metrics generate metrics for HTTP status codes, such as
-// 200 OK , 403 Forbidden , 503 Service Unavailable and others. For more
-// information about S3 Storage Lens, see Assessing your storage activity and
-// usage with S3 Storage Lens (https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage_lens.html)
-// in the Amazon S3 User Guide. For a complete list of S3 Storage Lens metrics, see
-// S3 Storage Lens metrics glossary (https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage_lens_metrics_glossary.html)
-// in the Amazon S3 User Guide.
+// 200 OK , 403 Forbidden , 503 Service Unavailable and others.
+//
+// For more information about S3 Storage Lens, see [Assessing your storage activity and usage with S3 Storage Lens] in the Amazon S3 User Guide.
+// For a complete list of S3 Storage Lens metrics, see [S3 Storage Lens metrics glossary]in the Amazon S3 User Guide.
+//
+// [Assessing your storage activity and usage with S3 Storage Lens]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage_lens.html
+// [S3 Storage Lens metrics glossary]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage_lens_metrics_glossary.html
 type DetailedStatusCodesMetrics struct {
 
 	// A container that indicates whether detailed status code metrics are enabled.
@@ -453,23 +486,26 @@ type DetailedStatusCodesMetrics struct {
 }
 
 // Specifies encryption-related information for an Amazon S3 bucket that is a
-// destination for replicated objects. This is not supported by Amazon S3 on
-// Outposts buckets.
+// destination for replicated objects.
+//
+// This is not supported by Amazon S3 on Outposts buckets.
 type EncryptionConfiguration struct {
 
 	// Specifies the ID of the customer managed KMS key that's stored in Key
 	// Management Service (KMS) for the destination bucket. This ID is either the
 	// Amazon Resource Name (ARN) for the KMS key or the alias ARN for the KMS key.
 	// Amazon S3 uses this KMS key to encrypt replica objects. Amazon S3 supports only
-	// symmetric encryption KMS keys. For more information, see Symmetric encryption
-	// KMS keys (https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#symmetric-cmks)
-	// in the Amazon Web Services Key Management Service Developer Guide.
+	// symmetric encryption KMS keys. For more information, see [Symmetric encryption KMS keys]in the Amazon Web
+	// Services Key Management Service Developer Guide.
+	//
+	// [Symmetric encryption KMS keys]: https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#symmetric-cmks
 	ReplicaKmsKeyID *string
 
 	noSmithyDocumentSerde
 }
 
 // The last established access control policy for a Multi-Region Access Point.
+//
 // When you update the policy, the update is first listed as the proposed policy.
 // After the update is finished and all Regions have been updated, the proposed
 // policy is listed as the established policy. If both policies have the same
@@ -494,8 +530,9 @@ type Exclude struct {
 	noSmithyDocumentSerde
 }
 
-// An optional configuration to replicate existing source bucket objects. This is
-// not supported by Amazon S3 on Outposts buckets.
+// An optional configuration to replicate existing source bucket objects.
+//
+// This is not supported by Amazon S3 on Outposts buckets.
 type ExistingObjectReplication struct {
 
 	// Specifies whether Amazon S3 replicates existing source bucket objects.
@@ -536,7 +573,9 @@ type Grantee struct {
 
 	// The type of the grantee to which access has been granted. It can be one of the
 	// following values:
+	//
 	//   - IAM - An IAM user or role.
+	//
 	//   - DIRECTORY_USER - Your corporate directory user. You can use this option if
 	//   you have added your corporate identity directory to IAM Identity Center and
 	//   associated the IAM Identity Center instance with your S3 Access Grants instance.
@@ -689,9 +728,9 @@ type JobListDescriptor struct {
 type JobManifest struct {
 
 	// Contains the information required to locate the specified job's manifest.
-	// Manifests can't be imported from directory buckets. For more information, see
-	// Directory buckets (https://docs.aws.amazon.com/AmazonS3/latest/userguide/directory-buckets-overview.html)
-	// .
+	// Manifests can't be imported from directory buckets. For more information, see [Directory buckets].
+	//
+	// [Directory buckets]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/directory-buckets-overview.html
 	//
 	// This member is required.
 	Location *JobManifestLocation
@@ -763,8 +802,9 @@ type JobManifestGeneratorFilter struct {
 }
 
 // Contains the information required to locate a manifest object. Manifests can't
-// be imported from directory buckets. For more information, see Directory buckets (https://docs.aws.amazon.com/AmazonS3/latest/userguide/directory-buckets-overview.html)
-// .
+// be imported from directory buckets. For more information, see [Directory buckets].
+//
+// [Directory buckets]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/directory-buckets-overview.html
 type JobManifestLocation struct {
 
 	// The ETag for the specified manifest object.
@@ -772,11 +812,13 @@ type JobManifestLocation struct {
 	// This member is required.
 	ETag *string
 
-	// The Amazon Resource Name (ARN) for a manifest object. When you're using XML
-	// requests, you must replace special characters (such as carriage returns) in
-	// object keys with their equivalent XML entity codes. For more information, see
-	// XML-related object key constraints (https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-keys.html#object-key-xml-related-constraints)
-	// in the Amazon S3 User Guide.
+	// The Amazon Resource Name (ARN) for a manifest object.
+	//
+	// When you're using XML requests, you must replace special characters (such as
+	// carriage returns) in object keys with their equivalent XML entity codes. For
+	// more information, see [XML-related object key constraints]in the Amazon S3 User Guide.
+	//
+	// [XML-related object key constraints]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-keys.html#object-key-xml-related-constraints
 	//
 	// This member is required.
 	ObjectArn *string
@@ -804,8 +846,10 @@ type JobManifestSpec struct {
 }
 
 // The operation that you want this job to perform on every object listed in the
-// manifest. For more information about the available operations, see Operations (https://docs.aws.amazon.com/AmazonS3/latest/dev/batch-ops-operations.html)
-// in the Amazon S3 User Guide.
+// manifest. For more information about the available operations, see [Operations]in the
+// Amazon S3 User Guide.
+//
+// [Operations]: https://docs.aws.amazon.com/AmazonS3/latest/dev/batch-ops-operations.html
 type JobOperation struct {
 
 	// Directs the specified job to invoke an Lambda function on every object in the
@@ -813,17 +857,21 @@ type JobOperation struct {
 	LambdaInvoke *LambdaInvokeOperation
 
 	// Directs the specified job to execute a DELETE Object tagging call on every
-	// object in the manifest. This functionality is not supported by directory
-	// buckets.
+	// object in the manifest.
+	//
+	// This functionality is not supported by directory buckets.
 	S3DeleteObjectTagging *S3DeleteObjectTaggingOperation
 
 	// Directs the specified job to initiate restore requests for every archived
-	// object in the manifest. This functionality is not supported by directory
-	// buckets.
+	// object in the manifest.
+	//
+	// This functionality is not supported by directory buckets.
 	S3InitiateRestoreObject *S3InitiateRestoreObjectOperation
 
 	// Directs the specified job to run a PutObjectAcl call on every object in the
-	// manifest. This functionality is not supported by directory buckets.
+	// manifest.
+	//
+	// This functionality is not supported by directory buckets.
 	S3PutObjectAcl *S3SetObjectAclOperation
 
 	// Directs the specified job to run a PUT Copy object call on every object in the
@@ -832,26 +880,34 @@ type JobOperation struct {
 
 	// Contains the configuration for an S3 Object Lock legal hold operation that an
 	// S3 Batch Operations job passes to every object to the underlying
-	// PutObjectLegalHold API operation. For more information, see Using S3 Object
-	// Lock legal hold with S3 Batch Operations (https://docs.aws.amazon.com/AmazonS3/latest/dev/batch-ops-legal-hold.html)
-	// in the Amazon S3 User Guide. This functionality is not supported by directory
-	// buckets.
+	// PutObjectLegalHold API operation. For more information, see [Using S3 Object Lock legal hold with S3 Batch Operations] in the Amazon S3
+	// User Guide.
+	//
+	// This functionality is not supported by directory buckets.
+	//
+	// [Using S3 Object Lock legal hold with S3 Batch Operations]: https://docs.aws.amazon.com/AmazonS3/latest/dev/batch-ops-legal-hold.html
 	S3PutObjectLegalHold *S3SetObjectLegalHoldOperation
 
 	// Contains the configuration parameters for the Object Lock retention action for
 	// an S3 Batch Operations job. Batch Operations passes every object to the
-	// underlying PutObjectRetention API operation. For more information, see Using S3
-	// Object Lock retention with S3 Batch Operations (https://docs.aws.amazon.com/AmazonS3/latest/dev/batch-ops-retention-date.html)
-	// in the Amazon S3 User Guide. This functionality is not supported by directory
-	// buckets.
+	// underlying PutObjectRetention API operation. For more information, see [Using S3 Object Lock retention with S3 Batch Operations] in the
+	// Amazon S3 User Guide.
+	//
+	// This functionality is not supported by directory buckets.
+	//
+	// [Using S3 Object Lock retention with S3 Batch Operations]: https://docs.aws.amazon.com/AmazonS3/latest/dev/batch-ops-retention-date.html
 	S3PutObjectRetention *S3SetObjectRetentionOperation
 
 	// Directs the specified job to run a PUT Object tagging call on every object in
-	// the manifest. This functionality is not supported by directory buckets.
+	// the manifest.
+	//
+	// This functionality is not supported by directory buckets.
 	S3PutObjectTagging *S3SetObjectTaggingOperation
 
 	// Directs the specified job to invoke ReplicateObject on every object in the
-	// job's manifest. This functionality is not supported by directory buckets.
+	// job's manifest.
+	//
+	// This functionality is not supported by directory buckets.
 	S3ReplicateObject *S3ReplicateObjectOperation
 
 	noSmithyDocumentSerde
@@ -885,8 +941,10 @@ type JobReport struct {
 	Enabled bool
 
 	// The Amazon Resource Name (ARN) for the bucket where specified job-completion
-	// report will be stored. Directory buckets - Directory buckets aren't supported as
-	// a location for Batch Operations to store job completion reports.
+	// report will be stored.
+	//
+	// Directory buckets - Directory buckets aren't supported as a location for Batch
+	// Operations to store job completion reports.
 	Bucket *string
 
 	// The format of the specified job-completion report.
@@ -944,21 +1002,25 @@ type LambdaInvokeOperation struct {
 	// invoking an Lambda function. Version 1.0 is the default. Version 2.0 is
 	// required when you use Batch Operations to invoke Lambda functions that act on
 	// directory buckets, or if you need to specify UserArguments . For more
-	// information, see Using Lambda with Amazon S3 Batch Operations and Amazon S3
-	// Express One Zone (https://aws.amazon.com/blogs/storage/using-lambda-with-s3-batch-operations-and-s3-express-one-zone/)
-	// in the Amazon Web Services Storage Blog. Ensure that your Lambda function code
-	// expects InvocationSchemaVersion 2.0 and uses bucket name rather than bucket
-	// ARN. If the InvocationSchemaVersion does not match what your Lambda function
-	// expects, your function might not work as expected. Directory buckets - To
-	// initiate Amazon Web Services Lambda function to perform custom actions on
-	// objects in directory buckets, you must specify 2.0 .
+	// information, see [Automate object processing in Amazon S3 directory buckets with S3 Batch Operations and Lambda]in the Amazon Web Services Storage Blog.
+	//
+	// Ensure that your Lambda function code expects InvocationSchemaVersion 2.0 and
+	// uses bucket name rather than bucket ARN. If the InvocationSchemaVersion does
+	// not match what your Lambda function expects, your function might not work as
+	// expected.
+	//
+	// Directory buckets - To initiate Amazon Web Services Lambda function to perform
+	// custom actions on objects in directory buckets, you must specify 2.0 .
+	//
+	// [Automate object processing in Amazon S3 directory buckets with S3 Batch Operations and Lambda]: https://aws.amazon.com/blogs/storage/automate-object-processing-in-amazon-s3-directory-buckets-with-s3-batch-operations-and-aws-lambda/
 	InvocationSchemaVersion *string
 
 	// Key-value pairs that are passed in the payload that Batch Operations sends when
 	// invoking an Lambda function. You must specify InvocationSchemaVersion 2.0 for
-	// LambdaInvoke operations that include UserArguments . For more information, see
-	// Using Lambda with Amazon S3 Batch Operations and Amazon S3 Express One Zone (https://aws.amazon.com/blogs/storage/using-lambda-with-s3-batch-operations-and-s3-express-one-zone/)
+	// LambdaInvoke operations that include UserArguments . For more information, see [Automate object processing in Amazon S3 directory buckets with S3 Batch Operations and Lambda]
 	// in the Amazon Web Services Storage Blog.
+	//
+	// [Automate object processing in Amazon S3 directory buckets with S3 Batch Operations and Lambda]: https://aws.amazon.com/blogs/storage/automate-object-processing-in-amazon-s3-directory-buckets-with-s3-batch-operations-and-aws-lambda/
 	UserArguments map[string]string
 
 	noSmithyDocumentSerde
@@ -1004,9 +1066,9 @@ type LifecycleRule struct {
 
 	// Specifies the days since the initiation of an incomplete multipart upload that
 	// Amazon S3 waits before permanently removing all parts of the upload. For more
-	// information, see Aborting Incomplete Multipart Uploads Using a Bucket Lifecycle
-	// Configuration (https://docs.aws.amazon.com/AmazonS3/latest/dev/mpuoverview.html#mpu-abort-incomplete-mpu-lifecycle-config)
-	// in the Amazon S3 User Guide.
+	// information, see [Aborting Incomplete Multipart Uploads Using a Bucket Lifecycle Configuration]in the Amazon S3 User Guide.
+	//
+	// [Aborting Incomplete Multipart Uploads Using a Bucket Lifecycle Configuration]: https://docs.aws.amazon.com/AmazonS3/latest/dev/mpuoverview.html#mpu-abort-incomplete-mpu-lifecycle-config
 	AbortIncompleteMultipartUpload *AbortIncompleteMultipartUpload
 
 	// Specifies the expiration for the lifecycle of the object in the form of date,
@@ -1022,15 +1084,17 @@ type LifecycleRule struct {
 	// The noncurrent version expiration of the lifecycle rule.
 	NoncurrentVersionExpiration *NoncurrentVersionExpiration
 
-	// Specifies the transition rule for the lifecycle rule that describes when
+	//  Specifies the transition rule for the lifecycle rule that describes when
 	// noncurrent objects transition to a specific storage class. If your bucket is
 	// versioning-enabled (or versioning is suspended), you can set this action to
 	// request that Amazon S3 transition noncurrent object versions to a specific
-	// storage class at a set period in the object's lifetime. This is not supported by
-	// Amazon S3 on Outposts buckets.
+	// storage class at a set period in the object's lifetime.
+	//
+	// This is not supported by Amazon S3 on Outposts buckets.
 	NoncurrentVersionTransitions []NoncurrentVersionTransition
 
 	// Specifies when an Amazon S3 object transitions to a specified storage class.
+	//
 	// This is not supported by Amazon S3 on Outposts buckets.
 	Transitions []Transition
 
@@ -1040,10 +1104,14 @@ type LifecycleRule struct {
 // The container for the Outposts bucket lifecycle rule and operator.
 type LifecycleRuleAndOperator struct {
 
-	// Minimum object size to which the rule applies.
+	// The non-inclusive minimum object size for the lifecycle rule. Setting this
+	// property to 7 means the rule applies to objects with a size that is greater than
+	// 7.
 	ObjectSizeGreaterThan *int64
 
-	// Maximum object size to which the rule applies.
+	// The non-inclusive maximum object size for the lifecycle rule. Setting this
+	// property to 77 means the rule applies to objects with a size that is less than
+	// 77.
 	ObjectSizeLessThan *int64
 
 	// Prefix identifying one or more objects to which the rule applies.
@@ -1068,11 +1136,13 @@ type LifecycleRuleFilter struct {
 	// Maximum object size to which the rule applies.
 	ObjectSizeLessThan *int64
 
-	// Prefix identifying one or more objects to which the rule applies. When you're
-	// using XML requests, you must replace special characters (such as carriage
-	// returns) in object keys with their equivalent XML entity codes. For more
-	// information, see XML-related object key constraints (https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-keys.html#object-key-xml-related-constraints)
-	// in the Amazon S3 User Guide.
+	// Prefix identifying one or more objects to which the rule applies.
+	//
+	// When you're using XML requests, you must replace special characters (such as
+	// carriage returns) in object keys with their equivalent XML entity codes. For
+	// more information, see [XML-related object key constraints]in the Amazon S3 User Guide.
+	//
+	// [XML-related object key constraints]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-keys.html#object-key-xml-related-constraints
 	Prefix *string
 
 	// A container for a key-value name pair.
@@ -1123,8 +1193,11 @@ type ListAccessGrantEntry struct {
 
 	// The type of access granted to your S3 data, which can be set to one of the
 	// following values:
+	//
 	//   - READ – Grant read-only access to the S3 data.
+	//
 	//   - WRITE – Grant write-only access to the S3 data.
+	//
 	//   - READWRITE – Grant both read and write access to the S3 data.
 	Permission Permission
 
@@ -1212,23 +1285,24 @@ type ListStorageLensConfigurationEntry struct {
 	noSmithyDocumentSerde
 }
 
-// Each entry contains a Storage Lens group that exists in the specified home
+//	Each entry contains a Storage Lens group that exists in the specified home
+//
 // Region.
 type ListStorageLensGroupEntry struct {
 
-	// Contains the Amazon Web Services Region where the Storage Lens group was
+	//  Contains the Amazon Web Services Region where the Storage Lens group was
 	// created.
 	//
 	// This member is required.
 	HomeRegion *string
 
-	// Contains the name of the Storage Lens group that exists in the specified home
+	//  Contains the name of the Storage Lens group that exists in the specified home
 	// Region.
 	//
 	// This member is required.
 	Name *string
 
-	// Contains the Amazon Resource Name (ARN) of the Storage Lens group. This
+	//  Contains the Amazon Resource Name (ARN) of the Storage Lens group. This
 	// property is read-only.
 	//
 	// This member is required.
@@ -1237,30 +1311,32 @@ type ListStorageLensGroupEntry struct {
 	noSmithyDocumentSerde
 }
 
-// A filter condition that specifies the object age range of included objects in
+//	A filter condition that specifies the object age range of included objects in
+//
 // days. Only integers are supported.
 type MatchObjectAge struct {
 
-	// Specifies the maximum object age in days. Must be a positive whole number,
+	//  Specifies the maximum object age in days. Must be a positive whole number,
 	// greater than the minimum object age and less than or equal to 2,147,483,647.
 	DaysGreaterThan int32
 
-	// Specifies the minimum object age in days. The value must be a positive whole
+	//  Specifies the minimum object age in days. The value must be a positive whole
 	// number, greater than 0 and less than or equal to 2,147,483,647.
 	DaysLessThan int32
 
 	noSmithyDocumentSerde
 }
 
-// A filter condition that specifies the object size range of included objects in
+//	A filter condition that specifies the object size range of included objects in
+//
 // bytes. Only integers are supported.
 type MatchObjectSize struct {
 
-	// Specifies the minimum object size in Bytes. The value must be a positive
+	//  Specifies the minimum object size in Bytes. The value must be a positive
 	// number, greater than 0 and less than 5 TB.
 	BytesGreaterThan int64
 
-	// Specifies the maximum object size in Bytes. The value must be a positive
+	//  Specifies the maximum object size in Bytes. The value must be a positive
 	// number, greater than the minimum object size and less than 5 TB.
 	BytesLessThan int64
 
@@ -1276,18 +1352,20 @@ type Metrics struct {
 	Status MetricsStatus
 
 	// A container that specifies the time threshold for emitting the
-	// s3:Replication:OperationMissedThreshold event. This is not supported by Amazon
-	// S3 on Outposts buckets.
+	// s3:Replication:OperationMissedThreshold event.
+	//
+	// This is not supported by Amazon S3 on Outposts buckets.
 	EventThreshold *ReplicationTimeValue
 
 	noSmithyDocumentSerde
 }
 
-// The Multi-Region Access Point access control policy. When you update the
-// policy, the update is first listed as the proposed policy. After the update is
-// finished and all Regions have been updated, the proposed policy is listed as the
-// established policy. If both policies have the same version number, the proposed
-// policy is the established policy.
+// The Multi-Region Access Point access control policy.
+//
+// When you update the policy, the update is first listed as the proposed policy.
+// After the update is finished and all Regions have been updated, the proposed
+// policy is listed as the established policy. If both policies have the same
+// version number, the proposed policy is the established policy.
 type MultiRegionAccessPointPolicyDocument struct {
 
 	// The last established policy for the Multi-Region Access Point.
@@ -1316,9 +1394,10 @@ type MultiRegionAccessPointRegionalResponse struct {
 type MultiRegionAccessPointReport struct {
 
 	// The alias for the Multi-Region Access Point. For more information about the
-	// distinction between the name and the alias of an Multi-Region Access Point, see
-	// Managing Multi-Region Access Points (https://docs.aws.amazon.com/AmazonS3/latest/userguide/CreatingMultiRegionAccessPoints.html#multi-region-access-point-naming)
+	// distinction between the name and the alias of an Multi-Region Access Point, see [Rules for naming Amazon S3 Multi-Region Access Points]
 	// .
+	//
+	// [Rules for naming Amazon S3 Multi-Region Access Points]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/CreatingMultiRegionAccessPoints.html#multi-region-access-point-naming
 	Alias *string
 
 	// When the Multi-Region Access Point create request was received.
@@ -1329,23 +1408,26 @@ type MultiRegionAccessPointReport struct {
 
 	// The PublicAccessBlock configuration that you want to apply to this Amazon S3
 	// account. You can enable the configuration options in any combination. For more
-	// information about when Amazon S3 considers a bucket or object public, see The
-	// Meaning of "Public" (https://docs.aws.amazon.com/AmazonS3/latest/dev/access-control-block-public-access.html#access-control-block-public-access-policy-status)
-	// in the Amazon S3 User Guide. This data type is not supported for Amazon S3 on
-	// Outposts.
+	// information about when Amazon S3 considers a bucket or object public, see [The Meaning of "Public"]in
+	// the Amazon S3 User Guide.
+	//
+	// This data type is not supported for Amazon S3 on Outposts.
+	//
+	// [The Meaning of "Public"]: https://docs.aws.amazon.com/AmazonS3/latest/dev/access-control-block-public-access.html#access-control-block-public-access-policy-status
 	PublicAccessBlock *PublicAccessBlockConfiguration
 
 	// A collection of the Regions and buckets associated with the Multi-Region Access
 	// Point.
 	Regions []RegionReport
 
-	// The current status of the Multi-Region Access Point. CREATING and DELETING are
-	// temporary states that exist while the request is propagating and being
-	// completed. If a Multi-Region Access Point has a status of PARTIALLY_CREATED ,
-	// you can retry creation or send a request to delete the Multi-Region Access
-	// Point. If a Multi-Region Access Point has a status of PARTIALLY_DELETED , you
-	// can retry a delete request to finish the deletion of the Multi-Region Access
-	// Point.
+	// The current status of the Multi-Region Access Point.
+	//
+	// CREATING and DELETING are temporary states that exist while the request is
+	// propagating and being completed. If a Multi-Region Access Point has a status of
+	// PARTIALLY_CREATED , you can retry creation or send a request to delete the
+	// Multi-Region Access Point. If a Multi-Region Access Point has a status of
+	// PARTIALLY_DELETED , you can retry a delete request to finish the deletion of the
+	// Multi-Region Access Point.
 	Status MultiRegionAccessPointStatus
 
 	noSmithyDocumentSerde
@@ -1354,21 +1436,28 @@ type MultiRegionAccessPointReport struct {
 // A structure for a Multi-Region Access Point that indicates where Amazon S3
 // traffic can be routed. Routes can be either active or passive. Active routes can
 // process Amazon S3 requests through the Multi-Region Access Point, but passive
-// routes are not eligible to process Amazon S3 requests. Each route contains the
-// Amazon S3 bucket name and the Amazon Web Services Region that the bucket is
-// located in. The route also includes the TrafficDialPercentage value, which
-// shows whether the bucket and Region are active (indicated by a value of 100 ) or
-// passive (indicated by a value of 0 ).
+// routes are not eligible to process Amazon S3 requests.
+//
+// Each route contains the Amazon S3 bucket name and the Amazon Web Services
+// Region that the bucket is located in. The route also includes the
+// TrafficDialPercentage value, which shows whether the bucket and Region are
+// active (indicated by a value of 100 ) or passive (indicated by a value of 0 ).
 type MultiRegionAccessPointRoute struct {
 
-	// The traffic state for the specified bucket or Amazon Web Services Region. A
-	// value of 0 indicates a passive state, which means that no new traffic will be
-	// routed to the Region. A value of 100 indicates an active state, which means
-	// that traffic will be routed to the specified Region. When the routing
-	// configuration for a Region is changed from active to passive, any in-progress
-	// operations (uploads, copies, deletes, and so on) to the formerly active Region
-	// will continue to run to until a final success or failure status is reached. If
-	// all Regions in the routing configuration are designated as passive, you'll
+	// The traffic state for the specified bucket or Amazon Web Services Region.
+	//
+	// A value of 0 indicates a passive state, which means that no new traffic will be
+	// routed to the Region.
+	//
+	// A value of 100 indicates an active state, which means that traffic will be
+	// routed to the specified Region.
+	//
+	// When the routing configuration for a Region is changed from active to passive,
+	// any in-progress operations (uploads, copies, deletes, and so on) to the formerly
+	// active Region will continue to run to until a final success or failure status is
+	// reached.
+	//
+	// If all Regions in the routing configuration are designated as passive, you'll
 	// receive an InvalidRequest error.
 	//
 	// This member is required.
@@ -1403,15 +1492,17 @@ type NoncurrentVersionExpiration struct {
 
 	// Specifies how many noncurrent versions S3 on Outposts will retain. If there are
 	// this many more recent noncurrent versions, S3 on Outposts will take the
-	// associated action. For more information about noncurrent versions, see
-	// Lifecycle configuration elements (https://docs.aws.amazon.com/AmazonS3/latest/userguide/intro-lifecycle-rules.html)
-	// in the Amazon S3 User Guide.
+	// associated action. For more information about noncurrent versions, see [Lifecycle configuration elements]in the
+	// Amazon S3 User Guide.
+	//
+	// [Lifecycle configuration elements]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/intro-lifecycle-rules.html
 	NewerNoncurrentVersions *int32
 
 	// Specifies the number of days an object is noncurrent before Amazon S3 can
 	// perform the associated action. For information about the noncurrent days
-	// calculations, see How Amazon S3 Calculates When an Object Became Noncurrent (https://docs.aws.amazon.com/AmazonS3/latest/dev/intro-lifecycle-rules.html#non-current-days-calculations)
-	// in the Amazon S3 User Guide.
+	// calculations, see [How Amazon S3 Calculates When an Object Became Noncurrent]in the Amazon S3 User Guide.
+	//
+	// [How Amazon S3 Calculates When an Object Became Noncurrent]: https://docs.aws.amazon.com/AmazonS3/latest/dev/intro-lifecycle-rules.html#non-current-days-calculations
 	NoncurrentDays int32
 
 	noSmithyDocumentSerde
@@ -1422,9 +1513,9 @@ type NoncurrentVersionTransition struct {
 
 	// Specifies the number of days an object is noncurrent before Amazon S3 can
 	// perform the associated action. For information about the noncurrent days
-	// calculations, see How Amazon S3 Calculates How Long an Object Has Been
-	// Noncurrent (https://docs.aws.amazon.com/AmazonS3/latest/dev/intro-lifecycle-rules.html#non-current-days-calculations)
-	// in the Amazon S3 User Guide.
+	// calculations, see [How Amazon S3 Calculates How Long an Object Has Been Noncurrent]in the Amazon S3 User Guide.
+	//
+	// [How Amazon S3 Calculates How Long an Object Has Been Noncurrent]: https://docs.aws.amazon.com/AmazonS3/latest/dev/intro-lifecycle-rules.html#non-current-days-calculations
 	NoncurrentDays int32
 
 	// The class of storage used to store the object.
@@ -1451,9 +1542,9 @@ type ObjectLambdaAccessPoint struct {
 	noSmithyDocumentSerde
 }
 
-// The alias of an Object Lambda Access Point. For more information, see How to
-// use a bucket-style alias for your S3 bucket Object Lambda Access Point (https://docs.aws.amazon.com/AmazonS3/latest/userguide/olap-use.html#ol-access-points-alias)
-// .
+// The alias of an Object Lambda Access Point. For more information, see [How to use a bucket-style alias for your S3 bucket Object Lambda Access Point].
+//
+// [How to use a bucket-style alias for your S3 bucket Object Lambda Access Point]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/olap-use.html#ol-access-points-alias
 type ObjectLambdaAccessPointAlias struct {
 
 	// The status of the Object Lambda Access Point alias. If the status is
@@ -1529,8 +1620,9 @@ type ObjectLambdaTransformationConfiguration struct {
 
 // Indicates whether this access point policy is public. For more information
 // about how Amazon S3 evaluates policies to determine whether they are public, see
-// The Meaning of "Public" (https://docs.aws.amazon.com/AmazonS3/latest/dev/access-control-block-public-access.html#access-control-block-public-access-policy-status)
-// in the Amazon S3 User Guide.
+// [The Meaning of "Public"]in the Amazon S3 User Guide.
+//
+// [The Meaning of "Public"]: https://docs.aws.amazon.com/AmazonS3/latest/dev/access-control-block-public-access.html#access-control-block-public-access-policy-status
 type PolicyStatus struct {
 
 	//
@@ -1562,11 +1654,12 @@ type PrefixLevelStorageMetrics struct {
 	noSmithyDocumentSerde
 }
 
-// The proposed access control policy for the Multi-Region Access Point. When you
-// update the policy, the update is first listed as the proposed policy. After the
-// update is finished and all Regions have been updated, the proposed policy is
-// listed as the established policy. If both policies have the same version number,
-// the proposed policy is the established policy.
+// The proposed access control policy for the Multi-Region Access Point.
+//
+// When you update the policy, the update is first listed as the proposed policy.
+// After the update is finished and all Regions have been updated, the proposed
+// policy is listed as the established policy. If both policies have the same
+// version number, the proposed policy is the established policy.
 type ProposedMultiRegionAccessPointPolicy struct {
 
 	// The details of the proposed policy.
@@ -1577,51 +1670,66 @@ type ProposedMultiRegionAccessPointPolicy struct {
 
 // The PublicAccessBlock configuration that you want to apply to this Amazon S3
 // account. You can enable the configuration options in any combination. For more
-// information about when Amazon S3 considers a bucket or object public, see The
-// Meaning of "Public" (https://docs.aws.amazon.com/AmazonS3/latest/dev/access-control-block-public-access.html#access-control-block-public-access-policy-status)
-// in the Amazon S3 User Guide. This data type is not supported for Amazon S3 on
-// Outposts.
+// information about when Amazon S3 considers a bucket or object public, see [The Meaning of "Public"]in
+// the Amazon S3 User Guide.
+//
+// This data type is not supported for Amazon S3 on Outposts.
+//
+// [The Meaning of "Public"]: https://docs.aws.amazon.com/AmazonS3/latest/dev/access-control-block-public-access.html#access-control-block-public-access-policy-status
 type PublicAccessBlockConfiguration struct {
 
 	// Specifies whether Amazon S3 should block public access control lists (ACLs) for
 	// buckets in this account. Setting this element to TRUE causes the following
 	// behavior:
+	//
 	//   - PutBucketAcl and PutObjectAcl calls fail if the specified ACL is public.
+	//
 	//   - PUT Object calls fail if the request includes a public ACL.
+	//
 	//   - PUT Bucket calls fail if the request includes a public ACL.
-	// Enabling this setting doesn't affect existing policies or ACLs. This property
-	// is not supported for Amazon S3 on Outposts.
+	//
+	// Enabling this setting doesn't affect existing policies or ACLs.
+	//
+	// This property is not supported for Amazon S3 on Outposts.
 	BlockPublicAcls *bool
 
 	// Specifies whether Amazon S3 should block public bucket policies for buckets in
 	// this account. Setting this element to TRUE causes Amazon S3 to reject calls to
-	// PUT Bucket policy if the specified bucket policy allows public access. Enabling
-	// this setting doesn't affect existing bucket policies. This property is not
-	// supported for Amazon S3 on Outposts.
+	// PUT Bucket policy if the specified bucket policy allows public access.
+	//
+	// Enabling this setting doesn't affect existing bucket policies.
+	//
+	// This property is not supported for Amazon S3 on Outposts.
 	BlockPublicPolicy *bool
 
 	// Specifies whether Amazon S3 should ignore public ACLs for buckets in this
 	// account. Setting this element to TRUE causes Amazon S3 to ignore all public
-	// ACLs on buckets in this account and any objects that they contain. Enabling this
-	// setting doesn't affect the persistence of any existing ACLs and doesn't prevent
-	// new public ACLs from being set. This property is not supported for Amazon S3 on
-	// Outposts.
+	// ACLs on buckets in this account and any objects that they contain.
+	//
+	// Enabling this setting doesn't affect the persistence of any existing ACLs and
+	// doesn't prevent new public ACLs from being set.
+	//
+	// This property is not supported for Amazon S3 on Outposts.
 	IgnorePublicAcls *bool
 
 	// Specifies whether Amazon S3 should restrict public bucket policies for buckets
 	// in this account. Setting this element to TRUE restricts access to buckets with
 	// public policies to only Amazon Web Service principals and authorized users
-	// within this account. Enabling this setting doesn't affect previously stored
-	// bucket policies, except that public and cross-account access within any public
-	// bucket policy, including non-public delegation to specific accounts, is blocked.
+	// within this account.
+	//
+	// Enabling this setting doesn't affect previously stored bucket policies, except
+	// that public and cross-account access within any public bucket policy, including
+	// non-public delegation to specific accounts, is blocked.
+	//
 	// This property is not supported for Amazon S3 on Outposts.
 	RestrictPublicBuckets *bool
 
 	noSmithyDocumentSerde
 }
 
-// A container for the information associated with a PutMultiRegionAccessPoint (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_PutMultiRegionAccessPoint.html)
-// request.
+// A container for the information associated with a [PutMultiRegionAccessPoint] request.
+//
+// [PutMultiRegionAccessPoint]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_PutMultiRegionAccessPoint.html
 type PutMultiRegionAccessPointPolicyInput struct {
 
 	// The name of the Multi-Region Access Point associated with the request.
@@ -1702,10 +1810,13 @@ type RegionReport struct {
 // Outposts replicates metadata from the source objects to the replicas only. When
 // replica modification sync is enabled, S3 on Outposts replicates metadata changes
 // made to the replica copies back to the source object, making the replication
-// bidirectional. To replicate object metadata modifications on replicas, you can
-// specify this element and set the Status of this element to Enabled . You must
-// enable replica modification sync on the source and destination buckets to
-// replicate replica metadata changes between the source and the replicas.
+// bidirectional.
+//
+// To replicate object metadata modifications on replicas, you can specify this
+// element and set the Status of this element to Enabled .
+//
+// You must enable replica modification sync on the source and destination buckets
+// to replicate replica metadata changes between the source and the replicas.
 type ReplicaModifications struct {
 
 	// Specifies whether S3 on Outposts replicates modifications to object metadata on
@@ -1724,8 +1835,9 @@ type ReplicationConfiguration struct {
 
 	// The Amazon Resource Name (ARN) of the Identity and Access Management (IAM) role
 	// that S3 on Outposts assumes when replicating objects. For information about S3
-	// replication on Outposts configuration, see Setting up replication (https://docs.aws.amazon.com/AmazonS3/latest/userguide/outposts-replication-how-setup.html)
-	// in the Amazon S3 User Guide.
+	// replication on Outposts configuration, see [Setting up replication]in the Amazon S3 User Guide.
+	//
+	// [Setting up replication]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/outposts-replication-how-setup.html
 	//
 	// This member is required.
 	Role *string
@@ -1765,13 +1877,17 @@ type ReplicationRule struct {
 	// DeleteMarkerReplication element. If your Filter includes a Tag element, the
 	// DeleteMarkerReplication element's Status child element must be set to Disabled ,
 	// because S3 on Outposts doesn't support replicating delete markers for tag-based
-	// rules. For more information about delete marker replication, see How delete
-	// operations affect replication (https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3OutpostsReplication.html#outposts-replication-what-is-replicated)
-	// in the Amazon S3 User Guide.
+	// rules.
+	//
+	// For more information about delete marker replication, see [How delete operations affect replication] in the Amazon S3
+	// User Guide.
+	//
+	// [How delete operations affect replication]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3OutpostsReplication.html#outposts-replication-what-is-replicated
 	DeleteMarkerReplication *DeleteMarkerReplication
 
-	// An optional configuration to replicate existing source bucket objects. This is
-	// not supported by Amazon S3 on Outposts buckets.
+	// An optional configuration to replicate existing source bucket objects.
+	//
+	// This is not supported by Amazon S3 on Outposts buckets.
 	ExistingObjectReplication *ExistingObjectReplication
 
 	// A filter that identifies the subset of objects to which the replication rule
@@ -1784,11 +1900,13 @@ type ReplicationRule struct {
 
 	// An object key name prefix that identifies the object or objects to which the
 	// rule applies. The maximum prefix length is 1,024 characters. To include all
-	// objects in an Outposts bucket, specify an empty string. When you're using XML
-	// requests, you must replace special characters (such as carriage returns) in
-	// object keys with their equivalent XML entity codes. For more information, see
-	// XML-related object key constraints (https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-keys.html#object-key-xml-related-constraints)
-	// in the Amazon S3 User Guide.
+	// objects in an Outposts bucket, specify an empty string.
+	//
+	// When you're using XML requests, you must replace special characters (such as
+	// carriage returns) in object keys with their equivalent XML entity codes. For
+	// more information, see [XML-related object key constraints]in the Amazon S3 User Guide.
+	//
+	// [XML-related object key constraints]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-keys.html#object-key-xml-related-constraints
 	//
 	// Deprecated: Prefix has been deprecated
 	Prefix *string
@@ -1798,8 +1916,11 @@ type ReplicationRule struct {
 	// according to all replication rules. However, if there are two or more rules with
 	// the same destination Outposts bucket, then objects will be replicated according
 	// to the rule with the highest priority. The higher the number, the higher the
-	// priority. For more information, see Creating replication rules on Outposts (https://docs.aws.amazon.com/AmazonS3/latest/userguide/replication-between-outposts.html)
-	// in the Amazon S3 User Guide.
+	// priority.
+	//
+	// For more information, see [Creating replication rules on Outposts] in the Amazon S3 User Guide.
+	//
+	// [Creating replication rules on Outposts]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/replication-between-outposts.html
 	Priority *int32
 
 	// A container that describes additional filters for identifying the source
@@ -1812,9 +1933,13 @@ type ReplicationRule struct {
 
 // A container for specifying rule filters. The filters determine the subset of
 // objects to which the rule applies. This element is required only if you specify
-// more than one filter. For example:
+// more than one filter.
+//
+// For example:
+//
 //   - If you specify both a Prefix and a Tag filter, wrap these filters in an And
 //     element.
+//
 //   - If you specify a filter based on multiple tags, wrap the Tag elements in an
 //     And element.
 type ReplicationRuleAndOperator struct {
@@ -1837,17 +1962,22 @@ type ReplicationRuleFilter struct {
 	// A container for specifying rule filters. The filters determine the subset of
 	// objects that the rule applies to. This element is required only if you specify
 	// more than one filter. For example:
+	//
 	//   - If you specify both a Prefix and a Tag filter, wrap these filters in an And
 	//   element.
+	//
 	//   - If you specify a filter based on multiple tags, wrap the Tag elements in an
 	//   And element.
 	And *ReplicationRuleAndOperator
 
 	// An object key name prefix that identifies the subset of objects that the rule
-	// applies to. When you're using XML requests, you must replace special characters
-	// (such as carriage returns) in object keys with their equivalent XML entity
-	// codes. For more information, see XML-related object key constraints (https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-keys.html#object-key-xml-related-constraints)
-	// in the Amazon S3 User Guide.
+	// applies to.
+	//
+	// When you're using XML requests, you must replace special characters (such as
+	// carriage returns) in object keys with their equivalent XML entity codes. For
+	// more information, see [XML-related object key constraints]in the Amazon S3 User Guide.
+	//
+	// [XML-related object key constraints]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-keys.html#object-key-xml-related-constraints
 	Prefix *string
 
 	// A container for a key-value name pair.
@@ -1858,8 +1988,9 @@ type ReplicationRuleFilter struct {
 
 // A container that specifies S3 Replication Time Control (S3 RTC) related
 // information, including whether S3 RTC is enabled and the time when all objects
-// and operations on objects must be replicated. This is not supported by Amazon S3
-// on Outposts buckets.
+// and operations on objects must be replicated.
+//
+// This is not supported by Amazon S3 on Outposts buckets.
 type ReplicationTime struct {
 
 	// Specifies whether S3 Replication Time Control (S3 RTC) is enabled.
@@ -1878,10 +2009,14 @@ type ReplicationTime struct {
 
 // A container that specifies the time value for S3 Replication Time Control (S3
 // RTC). This value is also used for the replication metrics EventThreshold
-// element. This is not supported by Amazon S3 on Outposts buckets.
+// element.
+//
+// This is not supported by Amazon S3 on Outposts buckets.
 type ReplicationTimeValue struct {
 
-	// Contains an integer that specifies the time period in minutes. Valid value: 15
+	// Contains an integer that specifies the time period in minutes.
+	//
+	// Valid value: 15
 	Minutes *int32
 
 	noSmithyDocumentSerde
@@ -1948,8 +2083,9 @@ type S3BucketDestination struct {
 
 // Contains the configuration parameters for a PUT Copy object operation. S3 Batch
 // Operations passes every object to the underlying CopyObject API operation. For
-// more information about the parameters for this operation, see CopyObject (https://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectCOPY.html)
-// .
+// more information about the parameters for this operation, see [CopyObject].
+//
+// [CopyObject]: https://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectCOPY.html
 type S3CopyObjectOperation struct {
 
 	// This functionality is not supported by directory buckets.
@@ -1958,17 +2094,21 @@ type S3CopyObjectOperation struct {
 	// Specifies whether Amazon S3 should use an S3 Bucket Key for object encryption
 	// with server-side encryption using Amazon Web Services KMS (SSE-KMS). Setting
 	// this header to true causes Amazon S3 to use an S3 Bucket Key for object
-	// encryption with SSE-KMS. Specifying this header with an object action doesn’t
-	// affect bucket-level settings for S3 Bucket Key. This functionality is not
-	// supported by directory buckets.
+	// encryption with SSE-KMS.
+	//
+	// Specifying this header with an object action doesn’t affect bucket-level
+	// settings for S3 Bucket Key.
+	//
+	// This functionality is not supported by directory buckets.
 	BucketKeyEnabled bool
 
 	// This functionality is not supported by directory buckets.
 	CannedAccessControlList S3CannedAccessControlList
 
 	// Indicates the algorithm that you want Amazon S3 to use to create the checksum.
-	// For more information, see Checking object integrity (https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html)
-	// in the Amazon S3 User Guide.
+	// For more information, see [Checking object integrity]in the Amazon S3 User Guide.
+	//
+	// [Checking object integrity]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/checking-object-integrity.html
 	ChecksumAlgorithm S3ChecksumAlgorithm
 
 	//
@@ -1984,30 +2124,36 @@ type S3CopyObjectOperation struct {
 
 	// Specifies a list of tags to add to the destination objects after they are
 	// copied. If NewObjectTagging is not specified, the tags of the source objects
-	// are copied to destination objects by default. Directory buckets - Tags aren't
-	// supported by directory buckets. If your source objects have tags and your
-	// destination bucket is a directory bucket, specify an empty tag set in the
-	// NewObjectTagging field to prevent copying the source object tags to the
-	// directory bucket.
+	// are copied to destination objects by default.
+	//
+	// Directory buckets - Tags aren't supported by directory buckets. If your source
+	// objects have tags and your destination bucket is a directory bucket, specify an
+	// empty tag set in the NewObjectTagging field to prevent copying the source
+	// object tags to the directory bucket.
 	NewObjectTagging []S3Tag
 
 	// The legal hold status to be applied to all objects in the Batch Operations job.
+	//
 	// This functionality is not supported by directory buckets.
 	ObjectLockLegalHoldStatus S3ObjectLockLegalHoldStatus
 
 	// The retention mode to be applied to all objects in the Batch Operations job.
+	//
 	// This functionality is not supported by directory buckets.
 	ObjectLockMode S3ObjectLockMode
 
 	// The date when the applied object retention configuration expires on all objects
-	// in the Batch Operations job. This functionality is not supported by directory
-	// buckets.
+	// in the Batch Operations job.
+	//
+	// This functionality is not supported by directory buckets.
 	ObjectLockRetainUntilDate *time.Time
 
 	// If the destination bucket is configured as a website, specifies an optional
 	// metadata property for website redirects, x-amz-website-redirect-location .
 	// Allows webpage redirects if the object copy is accessed through a website
-	// endpoint. This functionality is not supported by directory buckets.
+	// endpoint.
+	//
+	// This functionality is not supported by directory buckets.
 	RedirectLocation *string
 
 	// This functionality is not supported by directory buckets.
@@ -2017,6 +2163,7 @@ type S3CopyObjectOperation struct {
 	SSEAwsKmsKeyId *string
 
 	// Specify the storage class for the destination objects in a Copy operation.
+	//
 	// Directory buckets - This functionality is not supported by directory buckets.
 	StorageClass S3StorageClass
 
@@ -2027,13 +2174,15 @@ type S3CopyObjectOperation struct {
 
 	// Specifies the destination bucket Amazon Resource Name (ARN) for the batch copy
 	// operation.
+	//
 	//   - General purpose buckets - For example, to copy objects to a general purpose
 	//   bucket named destinationBucket , set the TargetResource property to
 	//   arn:aws:s3:::destinationBucket .
+	//
 	//   - Directory buckets - For example, to copy objects to a directory bucket
 	//   named destinationBucket in the Availability Zone; identified by the AZ ID
-	//   usw2-az2 , set the TargetResource property to
-	//   arn:aws:s3express:region:account_id:/bucket/destination_bucket_base_name--usw2-az2--x-s3
+	//   usw2-az1 , set the TargetResource property to
+	//   arn:aws:s3express:region:account_id:/bucket/destination_bucket_base_name--usw2-az1--x-s3
 	//   .
 	TargetResource *string
 
@@ -2059,8 +2208,9 @@ type S3GeneratedManifestDescriptor struct {
 	Format GeneratedManifestFormat
 
 	// Contains the information required to locate a manifest object. Manifests can't
-	// be imported from directory buckets. For more information, see Directory buckets (https://docs.aws.amazon.com/AmazonS3/latest/userguide/directory-buckets-overview.html)
-	// .
+	// be imported from directory buckets. For more information, see [Directory buckets].
+	//
+	// [Directory buckets]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/directory-buckets-overview.html
 	Location *JobManifestLocation
 
 	noSmithyDocumentSerde
@@ -2093,22 +2243,27 @@ type S3Grantee struct {
 
 // Contains the configuration parameters for a POST Object restore job. S3 Batch
 // Operations passes every object to the underlying RestoreObject API operation.
-// For more information about the parameters for this operation, see RestoreObject (https://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectPOSTrestore.html#RESTObjectPOSTrestore-restore-request)
-// .
+// For more information about the parameters for this operation, see [RestoreObject].
+//
+// [RestoreObject]: https://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectPOSTrestore.html#RESTObjectPOSTrestore-restore-request
 type S3InitiateRestoreObjectOperation struct {
 
 	// This argument specifies how long the S3 Glacier or S3 Glacier Deep Archive
 	// object remains available in Amazon S3. S3 Initiate Restore Object jobs that
 	// target S3 Glacier and S3 Glacier Deep Archive objects require ExpirationInDays
-	// set to 1 or greater. Conversely, do not set ExpirationInDays when creating S3
-	// Initiate Restore Object jobs that target S3 Intelligent-Tiering Archive Access
-	// and Deep Archive Access tier objects. Objects in S3 Intelligent-Tiering archive
-	// access tiers are not subject to restore expiry, so specifying ExpirationInDays
-	// results in restore request failure. S3 Batch Operations jobs can operate either
-	// on S3 Glacier and S3 Glacier Deep Archive storage class objects or on S3
-	// Intelligent-Tiering Archive Access and Deep Archive Access storage tier objects,
-	// but not both types in the same job. If you need to restore objects of both types
-	// you must create separate Batch Operations jobs.
+	// set to 1 or greater.
+	//
+	// Conversely, do not set ExpirationInDays when creating S3 Initiate Restore
+	// Object jobs that target S3 Intelligent-Tiering Archive Access and Deep Archive
+	// Access tier objects. Objects in S3 Intelligent-Tiering archive access tiers are
+	// not subject to restore expiry, so specifying ExpirationInDays results in
+	// restore request failure.
+	//
+	// S3 Batch Operations jobs can operate either on S3 Glacier and S3 Glacier Deep
+	// Archive storage class objects or on S3 Intelligent-Tiering Archive Access and
+	// Deep Archive Access storage tier objects, but not both types in the same job. If
+	// you need to restore objects of both types you must create separate Batch
+	// Operations jobs.
 	ExpirationInDays *int32
 
 	// S3 Batch Operations supports STANDARD and BULK retrieval tiers, but not the
@@ -2126,9 +2281,10 @@ type S3JobManifestGenerator struct {
 	// This member is required.
 	EnableManifestOutput bool
 
-	// The source bucket used by the ManifestGenerator. Directory buckets - Directory
-	// buckets aren't supported as the source buckets used by S3JobManifestGenerator
-	// to generate the job manifest.
+	// The source bucket used by the ManifestGenerator.
+	//
+	// Directory buckets - Directory buckets aren't supported as the source buckets
+	// used by S3JobManifestGenerator to generate the job manifest.
 	//
 	// This member is required.
 	SourceBucket *string
@@ -2144,9 +2300,9 @@ type S3JobManifestGenerator struct {
 	Filter *JobManifestGeneratorFilter
 
 	// Specifies the location the generated manifest will be written to. Manifests
-	// can't be written to directory buckets. For more information, see Directory
-	// buckets (https://docs.aws.amazon.com/AmazonS3/latest/userguide/directory-buckets-overview.html)
-	// .
+	// can't be written to directory buckets. For more information, see [Directory buckets].
+	//
+	// [Directory buckets]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/directory-buckets-overview.html
 	ManifestOutputLocation *S3ManifestOutputLocation
 
 	noSmithyDocumentSerde
@@ -2155,9 +2311,10 @@ type S3JobManifestGenerator struct {
 // Location details for where the generated manifest should be written.
 type S3ManifestOutputLocation struct {
 
-	// The bucket ARN the generated manifest should be written to. Directory buckets -
-	// Directory buckets aren't supported as the buckets to store the generated
-	// manifest.
+	// The bucket ARN the generated manifest should be written to.
+	//
+	// Directory buckets - Directory buckets aren't supported as the buckets to store
+	// the generated manifest.
 	//
 	// This member is required.
 	Bucket *string
@@ -2207,10 +2364,10 @@ type S3ObjectMetadata struct {
 	//
 	ContentLanguage *string
 
-	// This member has been deprecated.
+	//  This member has been deprecated.
 	ContentLength *int64
 
-	// This member has been deprecated.
+	//  This member has been deprecated.
 	ContentMD5 *string
 
 	//
@@ -2219,7 +2376,7 @@ type S3ObjectMetadata struct {
 	//
 	HttpExpiresDate *time.Time
 
-	// This member has been deprecated.
+	//  This member has been deprecated.
 	RequesterCharged bool
 
 	// For directory buckets, only the server-side encryption with Amazon S3 managed
@@ -2252,8 +2409,9 @@ type S3ReplicateObjectOperation struct {
 // Contains the S3 Object Lock retention mode to be applied to all objects in the
 // S3 Batch Operations job. If you don't provide Mode and RetainUntilDate data
 // types in your operation, you will remove the retention from your objects. For
-// more information, see Using S3 Object Lock retention with S3 Batch Operations (https://docs.aws.amazon.com/AmazonS3/latest/dev/batch-ops-retention-date.html)
-// in the Amazon S3 User Guide.
+// more information, see [Using S3 Object Lock retention with S3 Batch Operations]in the Amazon S3 User Guide.
+//
+// [Using S3 Object Lock retention with S3 Batch Operations]: https://docs.aws.amazon.com/AmazonS3/latest/dev/batch-ops-retention-date.html
 type S3Retention struct {
 
 	// The Object Lock retention mode to be applied to all objects in the Batch
@@ -2269,8 +2427,9 @@ type S3Retention struct {
 
 // Contains the configuration parameters for a PUT Object ACL operation. S3 Batch
 // Operations passes every object to the underlying PutObjectAcl API operation.
-// For more information about the parameters for this operation, see PutObjectAcl (https://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectPUTacl.html)
-// .
+// For more information about the parameters for this operation, see [PutObjectAcl].
+//
+// [PutObjectAcl]: https://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectPUTacl.html
 type S3SetObjectAclOperation struct {
 
 	//
@@ -2281,10 +2440,12 @@ type S3SetObjectAclOperation struct {
 
 // Contains the configuration for an S3 Object Lock legal hold operation that an
 // S3 Batch Operations job passes to every object to the underlying
-// PutObjectLegalHold API operation. For more information, see Using S3 Object
-// Lock legal hold with S3 Batch Operations (https://docs.aws.amazon.com/AmazonS3/latest/dev/batch-ops-legal-hold.html)
-// in the Amazon S3 User Guide. This functionality is not supported by directory
-// buckets.
+// PutObjectLegalHold API operation. For more information, see [Using S3 Object Lock legal hold with S3 Batch Operations] in the Amazon S3
+// User Guide.
+//
+// This functionality is not supported by directory buckets.
+//
+// [Using S3 Object Lock legal hold with S3 Batch Operations]: https://docs.aws.amazon.com/AmazonS3/latest/dev/batch-ops-legal-hold.html
 type S3SetObjectLegalHoldOperation struct {
 
 	// Contains the Object Lock legal hold status to be applied to all objects in the
@@ -2298,16 +2459,18 @@ type S3SetObjectLegalHoldOperation struct {
 
 // Contains the configuration parameters for the Object Lock retention action for
 // an S3 Batch Operations job. Batch Operations passes every object to the
-// underlying PutObjectRetention API operation. For more information, see Using S3
-// Object Lock retention with S3 Batch Operations (https://docs.aws.amazon.com/AmazonS3/latest/dev/batch-ops-retention-date.html)
-// in the Amazon S3 User Guide. This functionality is not supported by directory
-// buckets.
+// underlying PutObjectRetention API operation. For more information, see [Using S3 Object Lock retention with S3 Batch Operations] in the
+// Amazon S3 User Guide.
+//
+// This functionality is not supported by directory buckets.
+//
+// [Using S3 Object Lock retention with S3 Batch Operations]: https://docs.aws.amazon.com/AmazonS3/latest/dev/batch-ops-retention-date.html
 type S3SetObjectRetentionOperation struct {
 
 	// Contains the Object Lock retention mode to be applied to all objects in the
-	// Batch Operations job. For more information, see Using S3 Object Lock retention
-	// with S3 Batch Operations (https://docs.aws.amazon.com/AmazonS3/latest/dev/batch-ops-retention-date.html)
-	// in the Amazon S3 User Guide.
+	// Batch Operations job. For more information, see [Using S3 Object Lock retention with S3 Batch Operations]in the Amazon S3 User Guide.
+	//
+	// [Using S3 Object Lock retention with S3 Batch Operations]: https://docs.aws.amazon.com/AmazonS3/latest/dev/batch-ops-retention-date.html
 	//
 	// This member is required.
 	Retention *S3Retention
@@ -2321,9 +2484,9 @@ type S3SetObjectRetentionOperation struct {
 
 // Contains the configuration parameters for a PUT Object Tagging operation. S3
 // Batch Operations passes every object to the underlying PutObjectTagging API
-// operation. For more information about the parameters for this operation, see
-// PutObjectTagging (https://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectPUTtagging.html)
-// .
+// operation. For more information about the parameters for this operation, see [PutObjectTagging].
+//
+// [PutObjectTagging]: https://docs.aws.amazon.com/AmazonS3/latest/API/RESTObjectPUTtagging.html
 type S3SetObjectTaggingOperation struct {
 
 	//
@@ -2357,6 +2520,7 @@ type SelectionCriteria struct {
 	MaxDepth *int32
 
 	// The minimum number of storage bytes percentage whose metrics will be selected.
+	//
 	// You must choose a value greater than or equal to 1.0 .
 	MinStorageBytesPercentage *float64
 
@@ -2374,16 +2538,21 @@ type SourceSelectionCriteria struct {
 	// Outposts replicates metadata from the source objects to the replicas only. When
 	// replica modification sync is enabled, S3 on Outposts replicates metadata changes
 	// made to the replica copies back to the source object, making the replication
-	// bidirectional. To replicate object metadata modifications on replicas, you can
-	// specify this element and set the Status of this element to Enabled . You must
-	// enable replica modification sync on the source and destination buckets to
-	// replicate replica metadata changes between the source and the replicas.
+	// bidirectional.
+	//
+	// To replicate object metadata modifications on replicas, you can specify this
+	// element and set the Status of this element to Enabled .
+	//
+	// You must enable replica modification sync on the source and destination buckets
+	// to replicate replica metadata changes between the source and the replicas.
 	ReplicaModifications *ReplicaModifications
 
 	// A filter that you can use to select Amazon S3 objects that are encrypted with
 	// server-side encryption by using Key Management Service (KMS) keys. If you
 	// include SourceSelectionCriteria in the replication configuration, this element
-	// is required. This is not supported by Amazon S3 on Outposts buckets.
+	// is required.
+	//
+	// This is not supported by Amazon S3 on Outposts buckets.
 	SseKmsEncryptedObjects *SseKmsEncryptedObjects
 
 	noSmithyDocumentSerde
@@ -2402,8 +2571,9 @@ type SSEKMS struct {
 }
 
 // A container for filter information that you can use to select S3 objects that
-// are encrypted with Key Management Service (KMS). This is not supported by Amazon
-// S3 on Outposts buckets.
+// are encrypted with Key Management Service (KMS).
+//
+// This is not supported by Amazon S3 on Outposts buckets.
 type SseKmsEncryptedObjects struct {
 
 	// Specifies whether Amazon S3 replicates objects that are created with
@@ -2502,7 +2672,9 @@ type StorageLensDataExport struct {
 	CloudWatchMetrics *CloudWatchMetrics
 
 	// A container for the bucket where the S3 Storage Lens metrics export will be
-	// located. This bucket must be located in the same Region as the storage lens
+	// located.
+	//
+	// This bucket must be located in the same Region as the storage lens
 	// configuration.
 	S3BucketDestination *S3BucketDestination
 
@@ -2533,39 +2705,40 @@ type StorageLensGroup struct {
 	// This member is required.
 	Filter *StorageLensGroupFilter
 
-	// Contains the name of the Storage Lens group.
+	//  Contains the name of the Storage Lens group.
 	//
 	// This member is required.
 	Name *string
 
-	// Contains the Amazon Resource Name (ARN) of the Storage Lens group. This
+	//  Contains the Amazon Resource Name (ARN) of the Storage Lens group. This
 	// property is read-only.
 	StorageLensGroupArn *string
 
 	noSmithyDocumentSerde
 }
 
-// A logical operator that allows multiple filter conditions to be joined for more
-// complex comparisons of Storage Lens group data.
+//	A logical operator that allows multiple filter conditions to be joined for
+//
+// more complex comparisons of Storage Lens group data.
 type StorageLensGroupAndOperator struct {
 
-	// Contains a list of prefixes. At least one prefix must be specified. Up to 10
+	//  Contains a list of prefixes. At least one prefix must be specified. Up to 10
 	// prefixes are allowed.
 	MatchAnyPrefix []string
 
-	// Contains a list of suffixes. At least one suffix must be specified. Up to 10
+	//  Contains a list of suffixes. At least one suffix must be specified. Up to 10
 	// suffixes are allowed.
 	MatchAnySuffix []string
 
-	// Contains the list of object tags. At least one object tag must be specified. Up
-	// to 10 object tags are allowed.
+	//  Contains the list of object tags. At least one object tag must be specified.
+	// Up to 10 object tags are allowed.
 	MatchAnyTag []S3Tag
 
-	// Contains DaysGreaterThan and DaysLessThan to define the object age range
+	//  Contains DaysGreaterThan and DaysLessThan to define the object age range
 	// (minimum and maximum number of days).
 	MatchObjectAge *MatchObjectAge
 
-	// Contains BytesGreaterThan and BytesLessThan to define the object size range
+	//  Contains BytesGreaterThan and BytesLessThan to define the object size range
 	// (minimum and maximum number of Bytes).
 	MatchObjectSize *MatchObjectSize
 
@@ -2583,23 +2756,23 @@ type StorageLensGroupFilter struct {
 	// of each filter condition is allowed.
 	And *StorageLensGroupAndOperator
 
-	// Contains a list of prefixes. At least one prefix must be specified. Up to 10
+	//  Contains a list of prefixes. At least one prefix must be specified. Up to 10
 	// prefixes are allowed.
 	MatchAnyPrefix []string
 
-	// Contains a list of suffixes. At least one suffix must be specified. Up to 10
+	//  Contains a list of suffixes. At least one suffix must be specified. Up to 10
 	// suffixes are allowed.
 	MatchAnySuffix []string
 
-	// Contains the list of S3 object tags. At least one object tag must be specified.
-	// Up to 10 object tags are allowed.
+	//  Contains the list of S3 object tags. At least one object tag must be
+	// specified. Up to 10 object tags are allowed.
 	MatchAnyTag []S3Tag
 
-	// Contains DaysGreaterThan and DaysLessThan to define the object age range
+	//  Contains DaysGreaterThan and DaysLessThan to define the object age range
 	// (minimum and maximum number of days).
 	MatchObjectAge *MatchObjectAge
 
-	// Contains BytesGreaterThan and BytesLessThan to define the object size range
+	//  Contains BytesGreaterThan and BytesLessThan to define the object size range
 	// (minimum and maximum number of Bytes).
 	MatchObjectSize *MatchObjectSize
 
@@ -2611,11 +2784,12 @@ type StorageLensGroupFilter struct {
 	noSmithyDocumentSerde
 }
 
-// Specifies the Storage Lens groups to include in the Storage Lens group
+//	Specifies the Storage Lens groups to include in the Storage Lens group
+//
 // aggregation.
 type StorageLensGroupLevel struct {
 
-	// Indicates which Storage Lens group ARNs to include or exclude in the Storage
+	//  Indicates which Storage Lens group ARNs to include or exclude in the Storage
 	// Lens group aggregation. If this value is left null, then all Storage Lens groups
 	// are selected.
 	SelectionCriteria *StorageLensGroupLevelSelectionCriteria
@@ -2623,17 +2797,18 @@ type StorageLensGroupLevel struct {
 	noSmithyDocumentSerde
 }
 
-// Indicates which Storage Lens group ARNs to include or exclude in the Storage
+//	Indicates which Storage Lens group ARNs to include or exclude in the Storage
+//
 // Lens group aggregation. You can only attach Storage Lens groups to your Storage
 // Lens dashboard if they're included in your Storage Lens group aggregation. If
 // this value is left null, then all Storage Lens groups are selected.
 type StorageLensGroupLevelSelectionCriteria struct {
 
-	// Indicates which Storage Lens group ARNs to exclude from the Storage Lens group
+	//  Indicates which Storage Lens group ARNs to exclude from the Storage Lens group
 	// aggregation.
 	Exclude []string
 
-	// Indicates which Storage Lens group ARNs to include in the Storage Lens group
+	//  Indicates which Storage Lens group ARNs to include in the Storage Lens group
 	// aggregation.
 	Include []string
 
@@ -2646,19 +2821,19 @@ type StorageLensGroupLevelSelectionCriteria struct {
 // operator. Only one of each filter condition is allowed.
 type StorageLensGroupOrOperator struct {
 
-	// Filters objects that match any of the specified prefixes.
+	//  Filters objects that match any of the specified prefixes.
 	MatchAnyPrefix []string
 
-	// Filters objects that match any of the specified suffixes.
+	//  Filters objects that match any of the specified suffixes.
 	MatchAnySuffix []string
 
-	// Filters objects that match any of the specified S3 object tags.
+	//  Filters objects that match any of the specified S3 object tags.
 	MatchAnyTag []S3Tag
 
-	// Filters objects that match the specified object age range.
+	//  Filters objects that match the specified object age range.
 	MatchObjectAge *MatchObjectAge
 
-	// Filters objects that match the specified object size range.
+	//  Filters objects that match the specified object size range.
 	MatchObjectSize *MatchObjectSize
 
 	noSmithyDocumentSerde
@@ -2679,12 +2854,17 @@ type StorageLensTag struct {
 	noSmithyDocumentSerde
 }
 
-// An Amazon Web Services resource tag that's associated with your S3 resource.
+//	An Amazon Web Services resource tag that's associated with your S3 resource.
+//
 // You can add tags to new objects when you upload them, or you can add object tags
-// to existing objects. This operation is only supported for S3 Storage Lens groups (https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage-lens-groups.html)
-// and for S3 Access Grants (https://docs.aws.amazon.com/AmazonS3/latest/userguide/access-grants-tagging.html)
-// . The tagged resource can be an S3 Storage Lens group or S3 Access Grants
-// instance, registered location, or grant.
+// to existing objects.
+//
+// This operation is only supported for [S3 Storage Lens groups] and for [S3 Access Grants]. The tagged resource can be an
+// S3 Storage Lens group or S3 Access Grants instance, registered location, or
+// grant.
+//
+// [S3 Access Grants]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/access-grants-tagging.html
+// [S3 Storage Lens groups]: https://docs.aws.amazon.com/AmazonS3/latest/userguide/storage-lens-groups.html
 type Tag struct {
 
 	// The key of the key-value pair of a tag added to your Amazon Web Services
@@ -2694,7 +2874,7 @@ type Tag struct {
 	// This member is required.
 	Key *string
 
-	// The value of the key-value pair of a tag added to your Amazon Web Services
+	//  The value of the key-value pair of a tag added to your Amazon Web Services
 	// resource. A tag value can be up to 256 Unicode characters in length and is
 	// case-sensitive.
 	//
@@ -2715,9 +2895,10 @@ type Tagging struct {
 }
 
 // Specifies when an object transitions to a specified storage class. For more
-// information about Amazon S3 Lifecycle configuration rules, see Transitioning
-// objects using Amazon S3 Lifecycle (https://docs.aws.amazon.com/AmazonS3/latest/dev/lifecycle-transition-general-considerations.html)
-// in the Amazon S3 User Guide.
+// information about Amazon S3 Lifecycle configuration rules, see [Transitioning objects using Amazon S3 Lifecycle]in the Amazon S3
+// User Guide.
+//
+// [Transitioning objects using Amazon S3 Lifecycle]: https://docs.aws.amazon.com/AmazonS3/latest/dev/lifecycle-transition-general-considerations.html
 type Transition struct {
 
 	// Indicates when objects are transitioned to the specified storage class. The
@@ -2735,8 +2916,9 @@ type Transition struct {
 }
 
 // Describes the versioning state of an Amazon S3 on Outposts bucket. For more
-// information, see PutBucketVersioning (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_PutBucketVersioning.html)
-// .
+// information, see [PutBucketVersioning].
+//
+// [PutBucketVersioning]: https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_PutBucketVersioning.html
 type VersioningConfiguration struct {
 
 	// Specifies whether MFA delete is enabled or disabled in the bucket versioning

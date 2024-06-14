@@ -6,15 +6,16 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/organizations/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Retrieves information about an organizational unit (OU). This operation can be
-// called only from the organization's management account or by a member account
-// that is a delegated administrator for an Amazon Web Services service.
+// Retrieves information about an organizational unit (OU).
+//
+// This operation can be called only from the organization's management account or
+// by a member account that is a delegated administrator for an Amazon Web Services
+// service.
 func (c *Client) DescribeOrganizationalUnit(ctx context.Context, params *DescribeOrganizationalUnitInput, optFns ...func(*Options)) (*DescribeOrganizationalUnitOutput, error) {
 	if params == nil {
 		params = &DescribeOrganizationalUnitInput{}
@@ -33,11 +34,14 @@ func (c *Client) DescribeOrganizationalUnit(ctx context.Context, params *Describ
 type DescribeOrganizationalUnitInput struct {
 
 	// The unique identifier (ID) of the organizational unit that you want details
-	// about. You can get the ID from the ListOrganizationalUnitsForParent operation.
-	// The regex pattern (http://wikipedia.org/wiki/regex) for an organizational unit
-	// ID string requires "ou-" followed by from 4 to 32 lowercase letters or digits
-	// (the ID of the root that contains the OU). This string is followed by a second
-	// "-" dash and from 8 to 32 additional lowercase letters or digits.
+	// about. You can get the ID from the ListOrganizationalUnitsForParentoperation.
+	//
+	// The [regex pattern] for an organizational unit ID string requires "ou-" followed by from 4 to
+	// 32 lowercase letters or digits (the ID of the root that contains the OU). This
+	// string is followed by a second "-" dash and from 8 to 32 additional lowercase
+	// letters or digits.
+	//
+	// [regex pattern]: http://wikipedia.org/wiki/regex
 	//
 	// This member is required.
 	OrganizationalUnitId *string
@@ -78,25 +82,25 @@ func (c *Client) addOperationDescribeOrganizationalUnitMiddlewares(stack *middle
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -111,13 +115,16 @@ func (c *Client) addOperationDescribeOrganizationalUnitMiddlewares(stack *middle
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDescribeOrganizationalUnitValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeOrganizationalUnit(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

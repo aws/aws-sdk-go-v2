@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/glue/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -16,15 +15,20 @@ import (
 // supplied. If the compatibility mode forbids deleting of a version that is
 // necessary, such as BACKWARDS_FULL, an error is returned. Calling the
 // GetSchemaVersions API after this call will list the status of the deleted
-// versions. When the range of version numbers contain check pointed version, the
-// API will return a 409 conflict and will not proceed with the deletion. You have
-// to remove the checkpoint first using the DeleteSchemaCheckpoint API before
-// using this API. You cannot use the DeleteSchemaVersions API to delete the first
-// schema version in the schema set. The first schema version can only be deleted
-// by the DeleteSchema API. This operation will also delete the attached
+// versions.
+//
+// When the range of version numbers contain check pointed version, the API will
+// return a 409 conflict and will not proceed with the deletion. You have to remove
+// the checkpoint first using the DeleteSchemaCheckpoint API before using this API.
+//
+// You cannot use the DeleteSchemaVersions API to delete the first schema version
+// in the schema set. The first schema version can only be deleted by the
+// DeleteSchema API. This operation will also delete the attached
 // SchemaVersionMetadata under the schema versions. Hard deletes will be enforced
-// on the database. If the compatibility mode forbids deleting of a version that is
-// necessary, such as BACKWARDS_FULL, an error is returned.
+// on the database.
+//
+// If the compatibility mode forbids deleting of a version that is necessary, such
+// as BACKWARDS_FULL, an error is returned.
 func (c *Client) DeleteSchemaVersions(ctx context.Context, params *DeleteSchemaVersionsInput, optFns ...func(*Options)) (*DeleteSchemaVersionsOutput, error) {
 	if params == nil {
 		params = &DeleteSchemaVersionsInput{}
@@ -49,7 +53,9 @@ type DeleteSchemaVersionsInput struct {
 	SchemaId *types.SchemaId
 
 	// A version range may be supplied which may be of the format:
+	//
 	//   - a single version number, 5
+	//
 	//   - a range, 5-8 : deletes versions 5, 6, 7, 8
 	//
 	// This member is required.
@@ -92,25 +98,25 @@ func (c *Client) addOperationDeleteSchemaVersionsMiddlewares(stack *middleware.S
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -125,13 +131,16 @@ func (c *Client) addOperationDeleteSchemaVersionsMiddlewares(stack *middleware.S
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDeleteSchemaVersionsValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDeleteSchemaVersions(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

@@ -8,11 +8,15 @@ import (
 )
 
 // Contains information about an action for a request for which an authorization
-// decision is made. This data type is used as a request parameter to the
-// IsAuthorized (https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_IsAuthorized.html)
-// , BatchIsAuthorized (https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_BatchIsAuthorized.html)
-// , and IsAuthorizedWithToken (https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_IsAuthorizedWithToken.html)
-// operations. Example: { "actionId": "<action name>", "actionType": "Action" }
+// decision is made.
+//
+// This data type is used as a request parameter to the [IsAuthorized], [BatchIsAuthorized], and [IsAuthorizedWithToken] operations.
+//
+// Example: { "actionId": "<action name>", "actionType": "Action" }
+//
+// [BatchIsAuthorized]: https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_BatchIsAuthorized.html
+// [IsAuthorizedWithToken]: https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_IsAuthorizedWithToken.html
+// [IsAuthorized]: https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_IsAuthorized.html
 type ActionIdentifier struct {
 
 	// The ID of an action.
@@ -28,13 +32,13 @@ type ActionIdentifier struct {
 	noSmithyDocumentSerde
 }
 
-// The value of an attribute. Contains information about the runtime context for a
-// request for which an authorization decision is made. This data type is used as a
-// member of the ContextDefinition (https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_ContextDefinition.html)
-// structure which is uses as a request parameter for the IsAuthorized (https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_IsAuthorized.html)
-// , BatchIsAuthorized (https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_BatchIsAuthorized.html)
-// , and IsAuthorizedWithToken (https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_IsAuthorizedWithToken.html)
-// operations.
+// The value of an attribute.
+//
+// Contains information about the runtime context for a request for which an
+// authorization decision is made.
+//
+// This data type is used as a member of the [ContextDefinition] structure which is uses as a request
+// parameter for the [IsAuthorized], [BatchIsAuthorized], and [IsAuthorizedWithToken] operations.
 //
 // The following types satisfy this interface:
 //
@@ -44,12 +48,20 @@ type ActionIdentifier struct {
 //	AttributeValueMemberRecord
 //	AttributeValueMemberSet
 //	AttributeValueMemberString
+//
+// [BatchIsAuthorized]: https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_BatchIsAuthorized.html
+// [IsAuthorizedWithToken]: https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_IsAuthorizedWithToken.html
+// [IsAuthorized]: https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_IsAuthorized.html
+// [ContextDefinition]: https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_ContextDefinition.html
 type AttributeValue interface {
 	isAttributeValue()
 }
 
-// An attribute value of Boolean (https://docs.cedarpolicy.com/policies/syntax-datatypes.html#boolean)
-// type. Example: {"boolean": true}
+// An attribute value of [Boolean] type.
+//
+// Example: {"boolean": true}
+//
+// [Boolean]: https://docs.cedarpolicy.com/policies/syntax-datatypes.html#boolean
 type AttributeValueMemberBoolean struct {
 	Value bool
 
@@ -58,9 +70,12 @@ type AttributeValueMemberBoolean struct {
 
 func (*AttributeValueMemberBoolean) isAttributeValue() {}
 
-// An attribute value of type EntityIdentifier (https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_EntityIdentifier.html)
-// . Example: "entityIdentifier": { "entityId": "<id>", "entityType": "<entity
+// An attribute value of type [EntityIdentifier].
+//
+// Example: "entityIdentifier": { "entityId": "<id>", "entityType": "<entity
 // type>"}
+//
+// [EntityIdentifier]: https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_EntityIdentifier.html
 type AttributeValueMemberEntityIdentifier struct {
 	Value EntityIdentifier
 
@@ -69,8 +84,11 @@ type AttributeValueMemberEntityIdentifier struct {
 
 func (*AttributeValueMemberEntityIdentifier) isAttributeValue() {}
 
-// An attribute value of Long (https://docs.cedarpolicy.com/policies/syntax-datatypes.html#long)
-// type. Example: {"long": 0}
+// An attribute value of [Long] type.
+//
+// Example: {"long": 0}
+//
+// [Long]: https://docs.cedarpolicy.com/policies/syntax-datatypes.html#long
 type AttributeValueMemberLong struct {
 	Value int64
 
@@ -79,8 +97,11 @@ type AttributeValueMemberLong struct {
 
 func (*AttributeValueMemberLong) isAttributeValue() {}
 
-// An attribute value of Record (https://docs.cedarpolicy.com/policies/syntax-datatypes.html#record)
-// type. Example: {"record": { "keyName": {} } }
+// An attribute value of [Record] type.
+//
+// Example: {"record": { "keyName": {} } }
+//
+// [Record]: https://docs.cedarpolicy.com/policies/syntax-datatypes.html#record
 type AttributeValueMemberRecord struct {
 	Value map[string]AttributeValue
 
@@ -89,8 +110,11 @@ type AttributeValueMemberRecord struct {
 
 func (*AttributeValueMemberRecord) isAttributeValue() {}
 
-// An attribute value of Set (https://docs.cedarpolicy.com/policies/syntax-datatypes.html#set)
-// type. Example: {"set": [ {} ] }
+// An attribute value of [Set] type.
+//
+// Example: {"set": [ {} ] }
+//
+// [Set]: https://docs.cedarpolicy.com/policies/syntax-datatypes.html#set
 type AttributeValueMemberSet struct {
 	Value []AttributeValue
 
@@ -99,8 +123,11 @@ type AttributeValueMemberSet struct {
 
 func (*AttributeValueMemberSet) isAttributeValue() {}
 
-// An attribute value of String (https://docs.cedarpolicy.com/policies/syntax-datatypes.html#string)
-// type. Example: {"string": "abc"}
+// An attribute value of [String] type.
+//
+// Example: {"string": "abc"}
+//
+// [String]: https://docs.cedarpolicy.com/policies/syntax-datatypes.html#string
 type AttributeValueMemberString struct {
 	Value string
 
@@ -112,8 +139,8 @@ func (*AttributeValueMemberString) isAttributeValue() {}
 // An authorization request that you include in a BatchIsAuthorized API request.
 type BatchIsAuthorizedInputItem struct {
 
-	// Specifies the requested action to be authorized. For example, is the principal
-	// authorized to perform this action on the resource?
+	// Specifies the requested action to be authorized. For example,
+	// PhotoFlash::ReadPhoto .
 	Action *ActionIdentifier
 
 	// Specifies additional context that can be used to make more granular
@@ -123,7 +150,8 @@ type BatchIsAuthorizedInputItem struct {
 	// Specifies the principal for which the authorization decision is to be made.
 	Principal *EntityIdentifier
 
-	// Specifies the resource for which the authorization decision is to be made.
+	// Specifies the resource that you want an authorization decision for. For
+	// example, PhotoFlash::Photo .
 	Resource *EntityIdentifier
 
 	noSmithyDocumentSerde
@@ -149,9 +177,8 @@ type BatchIsAuthorizedOutputItem struct {
 	// This member is required.
 	DeterminingPolicies []DeterminingPolicyItem
 
-	// Errors that occurred while making an authorization decision, for example, a
-	// policy references an Entity or entity Attribute that does not exist in the
-	// slice.
+	// Errors that occurred while making an authorization decision. For example, a
+	// policy might reference an entity or attribute that doesn't exist in the request.
 	//
 	// This member is required.
 	Errors []EvaluationErrorItem
@@ -164,49 +191,272 @@ type BatchIsAuthorizedOutputItem struct {
 	noSmithyDocumentSerde
 }
 
+// An authorization request that you include in a BatchIsAuthorizedWithToken API
+// request.
+type BatchIsAuthorizedWithTokenInputItem struct {
+
+	// Specifies the requested action to be authorized. For example,
+	// PhotoFlash::ReadPhoto .
+	Action *ActionIdentifier
+
+	// Specifies additional context that can be used to make more granular
+	// authorization decisions.
+	Context ContextDefinition
+
+	// Specifies the resource that you want an authorization decision for. For
+	// example, PhotoFlash::Photo .
+	Resource *EntityIdentifier
+
+	noSmithyDocumentSerde
+}
+
+// The decision, based on policy evaluation, from an individual authorization
+// request in a BatchIsAuthorizedWithToken API request.
+type BatchIsAuthorizedWithTokenOutputItem struct {
+
+	// An authorization decision that indicates if the authorization request should be
+	// allowed or denied.
+	//
+	// This member is required.
+	Decision Decision
+
+	// The list of determining policies used to make the authorization decision. For
+	// example, if there are two matching policies, where one is a forbid and the other
+	// is a permit, then the forbid policy will be the determining policy. In the case
+	// of multiple matching permit policies then there would be multiple determining
+	// policies. In the case that no policies match, and hence the response is DENY,
+	// there would be no determining policies.
+	//
+	// This member is required.
+	DeterminingPolicies []DeterminingPolicyItem
+
+	// Errors that occurred while making an authorization decision. For example, a
+	// policy might reference an entity or attribute that doesn't exist in the request.
+	//
+	// This member is required.
+	Errors []EvaluationErrorItem
+
+	// The authorization request that initiated the decision.
+	//
+	// This member is required.
+	Request *BatchIsAuthorizedWithTokenInputItem
+
+	noSmithyDocumentSerde
+}
+
+// The type of entity that a policy store maps to groups from an Amazon Cognito
+// user pool identity source.
+//
+// This data type is part of a [CognitoUserPoolConfiguration] structure and is a request parameter in [CreateIdentitySource].
+//
+// [CognitoUserPoolConfiguration]: https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_CognitoUserPoolConfiguration.html
+// [CreateIdentitySource]: https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_CreateIdentitySource.html
+type CognitoGroupConfiguration struct {
+
+	// The name of the schema entity type that's mapped to the user pool group.
+	// Defaults to AWS::CognitoGroup .
+	//
+	// This member is required.
+	GroupEntityType *string
+
+	noSmithyDocumentSerde
+}
+
+// The type of entity that a policy store maps to groups from an Amazon Cognito
+// user pool identity source.
+//
+// This data type is part of an [CognitoUserPoolConfigurationDetail] structure and is a response parameter to [GetIdentitySource].
+//
+// [CognitoUserPoolConfigurationDetail]: https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_CognitoUserPoolConfigurationItem.html
+// [GetIdentitySource]: https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_GetIdentitySource.html
+type CognitoGroupConfigurationDetail struct {
+
+	// The name of the schema entity type that's mapped to the user pool group.
+	// Defaults to AWS::CognitoGroup .
+	GroupEntityType *string
+
+	noSmithyDocumentSerde
+}
+
+// The type of entity that a policy store maps to groups from an Amazon Cognito
+// user pool identity source.
+//
+// This data type is part of an [CognitoUserPoolConfigurationItem] structure and is a response parameter to [ListIdentitySources].
+//
+// [CognitoUserPoolConfigurationItem]: https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_CognitoUserPoolConfigurationDetail.html
+// [ListIdentitySources]: http://forums.aws.amazon.com/verifiedpermissions/latest/apireference/API_ListIdentitySources.html
+type CognitoGroupConfigurationItem struct {
+
+	// The name of the schema entity type that's mapped to the user pool group.
+	// Defaults to AWS::CognitoGroup .
+	GroupEntityType *string
+
+	noSmithyDocumentSerde
+}
+
 // The configuration for an identity source that represents a connection to an
 // Amazon Cognito user pool used as an identity provider for Verified Permissions.
-// This data type is used as a field that is part of an Configuration (https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_Configuration.html)
-// structure that is used as a parameter to the Configuration (https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_Configuration.html)
-// . Example:
+//
+// This data type part of a [Configuration] structure that is used as a parameter to [CreateIdentitySource].
+//
+// Example:
 // "CognitoUserPoolConfiguration":{"UserPoolArn":"arn:aws:cognito-idp:us-east-1:123456789012:userpool/us-east-1_1a2b3c4d5","ClientIds":
-// ["a1b2c3d4e5f6g7h8i9j0kalbmc"]}
+// ["a1b2c3d4e5f6g7h8i9j0kalbmc"],"groupConfiguration": {"groupEntityType":
+// "MyCorp::Group"}}
+//
+// [Configuration]: https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_Configuration.html
+// [CreateIdentitySource]: https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_CreateIdentitySource.html
 type CognitoUserPoolConfiguration struct {
 
-	// The Amazon Resource Name (ARN) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
-	// of the Amazon Cognito user pool that contains the identities to be authorized.
+	// The [Amazon Resource Name (ARN)] of the Amazon Cognito user pool that contains the identities to be
+	// authorized.
+	//
 	// Example: "UserPoolArn":
 	// "arn:aws:cognito-idp:us-east-1:123456789012:userpool/us-east-1_1a2b3c4d5"
+	//
+	// [Amazon Resource Name (ARN)]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
 	//
 	// This member is required.
 	UserPoolArn *string
 
 	// The unique application client IDs that are associated with the specified Amazon
-	// Cognito user pool. Example: "ClientIds": ["&ExampleCogClientId;"]
+	// Cognito user pool.
+	//
+	// Example: "ClientIds": ["&ExampleCogClientId;"]
 	ClientIds []string
+
+	// The type of entity that a policy store maps to groups from an Amazon Cognito
+	// user pool identity source.
+	GroupConfiguration *CognitoGroupConfiguration
 
 	noSmithyDocumentSerde
 }
 
-// Contains configuration information used when creating a new identity source. At
-// this time, the only valid member of this structure is a Amazon Cognito user pool
-// configuration. You must specify a userPoolArn , and optionally, a ClientId .
-// This data type is used as a request parameter for the CreateIdentitySource (https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_CreateIdentitySource.html)
-// operation.
+// The configuration for an identity source that represents a connection to an
+// Amazon Cognito user pool used as an identity provider for Verified Permissions.
+//
+// This data type is used as a field that is part of an [ConfigurationDetail] structure that is part of
+// the response to [GetIdentitySource].
+//
+// Example:
+// "CognitoUserPoolConfiguration":{"UserPoolArn":"arn:aws:cognito-idp:us-east-1:123456789012:userpool/us-east-1_1a2b3c4d5","ClientIds":
+// ["a1b2c3d4e5f6g7h8i9j0kalbmc"],"groupConfiguration": {"groupEntityType":
+// "MyCorp::Group"}}
+//
+// [GetIdentitySource]: https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_GetIdentitySource.html
+// [ConfigurationDetail]: https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_ConfigurationDetail.html
+type CognitoUserPoolConfigurationDetail struct {
+
+	// The unique application client IDs that are associated with the specified Amazon
+	// Cognito user pool.
+	//
+	// Example: "clientIds": ["&ExampleCogClientId;"]
+	//
+	// This member is required.
+	ClientIds []string
+
+	// The OpenID Connect (OIDC) issuer ID of the Amazon Cognito user pool that
+	// contains the identities to be authorized.
+	//
+	// Example: "issuer":
+	// "https://cognito-idp.us-east-1.amazonaws.com/us-east-1_1a2b3c4d5"
+	//
+	// This member is required.
+	Issuer *string
+
+	// The [Amazon Resource Name (ARN)] of the Amazon Cognito user pool that contains the identities to be
+	// authorized.
+	//
+	// Example: "userPoolArn":
+	// "arn:aws:cognito-idp:us-east-1:123456789012:userpool/us-east-1_1a2b3c4d5"
+	//
+	// [Amazon Resource Name (ARN)]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+	//
+	// This member is required.
+	UserPoolArn *string
+
+	// The type of entity that a policy store maps to groups from an Amazon Cognito
+	// user pool identity source.
+	GroupConfiguration *CognitoGroupConfigurationDetail
+
+	noSmithyDocumentSerde
+}
+
+// The configuration for an identity source that represents a connection to an
+// Amazon Cognito user pool used as an identity provider for Verified Permissions.
+//
+// This data type is used as a field that is part of the [ConfigurationItem] structure that is part
+// of the response to [ListIdentitySources].
+//
+// Example:
+// "CognitoUserPoolConfiguration":{"UserPoolArn":"arn:aws:cognito-idp:us-east-1:123456789012:userpool/us-east-1_1a2b3c4d5","ClientIds":
+// ["a1b2c3d4e5f6g7h8i9j0kalbmc"],"groupConfiguration": {"groupEntityType":
+// "MyCorp::Group"}}
+//
+// [ConfigurationItem]: https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_ConfigurationItem.html
+// [ListIdentitySources]: https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_ListIdentitySources.html
+type CognitoUserPoolConfigurationItem struct {
+
+	// The unique application client IDs that are associated with the specified Amazon
+	// Cognito user pool.
+	//
+	// Example: "clientIds": ["&ExampleCogClientId;"]
+	//
+	// This member is required.
+	ClientIds []string
+
+	// The OpenID Connect (OIDC) issuer ID of the Amazon Cognito user pool that
+	// contains the identities to be authorized.
+	//
+	// Example: "issuer":
+	// "https://cognito-idp.us-east-1.amazonaws.com/us-east-1_1a2b3c4d5"
+	//
+	// This member is required.
+	Issuer *string
+
+	// The [Amazon Resource Name (ARN)] of the Amazon Cognito user pool that contains the identities to be
+	// authorized.
+	//
+	// Example: "userPoolArn":
+	// "arn:aws:cognito-idp:us-east-1:123456789012:userpool/us-east-1_1a2b3c4d5"
+	//
+	// [Amazon Resource Name (ARN)]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+	//
+	// This member is required.
+	UserPoolArn *string
+
+	// The type of entity that a policy store maps to groups from an Amazon Cognito
+	// user pool identity source.
+	GroupConfiguration *CognitoGroupConfigurationItem
+
+	noSmithyDocumentSerde
+}
+
+// Contains configuration information used when creating a new identity source.
+//
+// This data type is used as a request parameter for the [CreateIdentitySource] operation.
 //
 // The following types satisfy this interface:
 //
 //	ConfigurationMemberCognitoUserPoolConfiguration
+//	ConfigurationMemberOpenIdConnectConfiguration
+//
+// [CreateIdentitySource]: https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_CreateIdentitySource.html
 type Configuration interface {
 	isConfiguration()
 }
 
 // Contains configuration details of a Amazon Cognito user pool that Verified
 // Permissions can use as a source of authenticated identities as entities. It
-// specifies the Amazon Resource Name (ARN) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
-// of a Amazon Cognito user pool and one or more application client IDs. Example:
+// specifies the [Amazon Resource Name (ARN)]of a Amazon Cognito user pool and one or more application client
+// IDs.
+//
+// Example:
 // "configuration":{"cognitoUserPoolConfiguration":{"userPoolArn":"arn:aws:cognito-idp:us-east-1:123456789012:userpool/us-east-1_1a2b3c4d5","clientIds":
-// ["a1b2c3d4e5f6g7h8i9j0kalbmc"]}}
+// ["a1b2c3d4e5f6g7h8i9j0kalbmc"],"groupConfiguration": {"groupEntityType":
+// "MyCorp::Group"}}}
+//
+// [Amazon Resource Name (ARN)]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
 type ConfigurationMemberCognitoUserPoolConfiguration struct {
 	Value CognitoUserPoolConfiguration
 
@@ -215,26 +465,142 @@ type ConfigurationMemberCognitoUserPoolConfiguration struct {
 
 func (*ConfigurationMemberCognitoUserPoolConfiguration) isConfiguration() {}
 
+// Contains configuration details of an OpenID Connect (OIDC) identity provider,
+// or identity source, that Verified Permissions can use to generate entities from
+// authenticated identities. It specifies the issuer URL, token type that you want
+// to use, and policy store entity details.
+//
+// Example:
+// "configuration":{"openIdConnectConfiguration":{"issuer":"https://auth.example.com","tokenSelection":{"accessTokenOnly":{"audiences":["https://myapp.example.com","https://myapp2.example.com"],"principalIdClaim":"sub"}},"entityIdPrefix":"MyOIDCProvider","groupConfiguration":{"groupClaim":"groups","groupEntityType":"MyCorp::UserGroup"}}}
+type ConfigurationMemberOpenIdConnectConfiguration struct {
+	Value OpenIdConnectConfiguration
+
+	noSmithyDocumentSerde
+}
+
+func (*ConfigurationMemberOpenIdConnectConfiguration) isConfiguration() {}
+
+// Contains configuration information about an identity source.
+//
+// This data type is a response parameter to the [GetIdentitySource] operation.
+//
+// The following types satisfy this interface:
+//
+//	ConfigurationDetailMemberCognitoUserPoolConfiguration
+//	ConfigurationDetailMemberOpenIdConnectConfiguration
+//
+// [GetIdentitySource]: https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_GetIdentitySource.html
+type ConfigurationDetail interface {
+	isConfigurationDetail()
+}
+
+// Contains configuration details of a Amazon Cognito user pool that Verified
+// Permissions can use as a source of authenticated identities as entities. It
+// specifies the [Amazon Resource Name (ARN)]of a Amazon Cognito user pool, the policy store entity that you
+// want to assign to user groups, and one or more application client IDs.
+//
+// Example:
+// "configuration":{"cognitoUserPoolConfiguration":{"userPoolArn":"arn:aws:cognito-idp:us-east-1:123456789012:userpool/us-east-1_1a2b3c4d5","clientIds":
+// ["a1b2c3d4e5f6g7h8i9j0kalbmc"],"groupConfiguration": {"groupEntityType":
+// "MyCorp::Group"}}}
+//
+// [Amazon Resource Name (ARN)]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+type ConfigurationDetailMemberCognitoUserPoolConfiguration struct {
+	Value CognitoUserPoolConfigurationDetail
+
+	noSmithyDocumentSerde
+}
+
+func (*ConfigurationDetailMemberCognitoUserPoolConfiguration) isConfigurationDetail() {}
+
+// Contains configuration details of an OpenID Connect (OIDC) identity provider,
+// or identity source, that Verified Permissions can use to generate entities from
+// authenticated identities. It specifies the issuer URL, token type that you want
+// to use, and policy store entity details.
+//
+// Example:
+// "configuration":{"openIdConnectConfiguration":{"issuer":"https://auth.example.com","tokenSelection":{"accessTokenOnly":{"audiences":["https://myapp.example.com","https://myapp2.example.com"],"principalIdClaim":"sub"}},"entityIdPrefix":"MyOIDCProvider","groupConfiguration":{"groupClaim":"groups","groupEntityType":"MyCorp::UserGroup"}}}
+type ConfigurationDetailMemberOpenIdConnectConfiguration struct {
+	Value OpenIdConnectConfigurationDetail
+
+	noSmithyDocumentSerde
+}
+
+func (*ConfigurationDetailMemberOpenIdConnectConfiguration) isConfigurationDetail() {}
+
+// Contains configuration information about an identity source.
+//
+// This data type is a response parameter to the [ListIdentitySources] operation.
+//
+// The following types satisfy this interface:
+//
+//	ConfigurationItemMemberCognitoUserPoolConfiguration
+//	ConfigurationItemMemberOpenIdConnectConfiguration
+//
+// [ListIdentitySources]: https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_ListIdentitySources.html
+type ConfigurationItem interface {
+	isConfigurationItem()
+}
+
+// Contains configuration details of a Amazon Cognito user pool that Verified
+// Permissions can use as a source of authenticated identities as entities. It
+// specifies the [Amazon Resource Name (ARN)]of a Amazon Cognito user pool, the policy store entity that you
+// want to assign to user groups, and one or more application client IDs.
+//
+// Example:
+// "configuration":{"cognitoUserPoolConfiguration":{"userPoolArn":"arn:aws:cognito-idp:us-east-1:123456789012:userpool/us-east-1_1a2b3c4d5","clientIds":
+// ["a1b2c3d4e5f6g7h8i9j0kalbmc"],"groupConfiguration": {"groupEntityType":
+// "MyCorp::Group"}}}
+//
+// [Amazon Resource Name (ARN)]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+type ConfigurationItemMemberCognitoUserPoolConfiguration struct {
+	Value CognitoUserPoolConfigurationItem
+
+	noSmithyDocumentSerde
+}
+
+func (*ConfigurationItemMemberCognitoUserPoolConfiguration) isConfigurationItem() {}
+
+// Contains configuration details of an OpenID Connect (OIDC) identity provider,
+// or identity source, that Verified Permissions can use to generate entities from
+// authenticated identities. It specifies the issuer URL, token type that you want
+// to use, and policy store entity details.
+//
+// Example:
+// "configuration":{"openIdConnectConfiguration":{"issuer":"https://auth.example.com","tokenSelection":{"accessTokenOnly":{"audiences":["https://myapp.example.com","https://myapp2.example.com"],"principalIdClaim":"sub"}},"entityIdPrefix":"MyOIDCProvider","groupConfiguration":{"groupClaim":"groups","groupEntityType":"MyCorp::UserGroup"}}}
+type ConfigurationItemMemberOpenIdConnectConfiguration struct {
+	Value OpenIdConnectConfigurationItem
+
+	noSmithyDocumentSerde
+}
+
+func (*ConfigurationItemMemberOpenIdConnectConfiguration) isConfigurationItem() {}
+
 // Contains additional details about the context of the request. Verified
 // Permissions evaluates this information in an authorization request as part of
-// the when and unless clauses in a policy. This data type is used as a request
-// parameter for the IsAuthorized (https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_IsAuthorized.html)
-// , BatchIsAuthorized (https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_BatchIsAuthorized.html)
-// , and IsAuthorizedWithToken (https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_IsAuthorizedWithToken.html)
-// operations. Example:
+// the when and unless clauses in a policy.
+//
+// This data type is used as a request parameter for the [IsAuthorized], [BatchIsAuthorized], and [IsAuthorizedWithToken] operations.
+//
+// Example:
 // "context":{"contextMap":{"<KeyName1>":{"boolean":true},"<KeyName2>":{"long":1234}}}
 //
 // The following types satisfy this interface:
 //
 //	ContextDefinitionMemberContextMap
+//
+// [BatchIsAuthorized]: https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_BatchIsAuthorized.html
+// [IsAuthorizedWithToken]: https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_IsAuthorizedWithToken.html
+// [IsAuthorized]: https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_IsAuthorized.html
 type ContextDefinition interface {
 	isContextDefinition()
 }
 
 // An list of attributes that are needed to successfully evaluate an authorization
 // request. Each attribute in this array must include a map of a data type and its
-// value. Example:
-// "contextMap":{"<KeyName1>":{"boolean":true},"<KeyName2>":{"long":1234}}
+// value.
+//
+// Example: "contextMap":{"<KeyName1>":{"boolean":true},"<KeyName2>":{"long":1234}}
 type ContextDefinitionMemberContextMap struct {
 	Value map[string]AttributeValue
 
@@ -244,16 +610,21 @@ type ContextDefinitionMemberContextMap struct {
 func (*ContextDefinitionMemberContextMap) isContextDefinition() {}
 
 // Contains information about one of the policies that determined an authorization
-// decision. This data type is used as an element in a response parameter for the
-// IsAuthorized (https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_IsAuthorized.html)
-// , BatchIsAuthorized (https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_BatchIsAuthorized.html)
-// , and IsAuthorizedWithToken (https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_IsAuthorizedWithToken.html)
-// operations. Example:
-// "determiningPolicies":[{"policyId":"SPEXAMPLEabcdefg111111"}]
+// decision.
+//
+// This data type is used as an element in a response parameter for the [IsAuthorized], [BatchIsAuthorized], and [IsAuthorizedWithToken]
+// operations.
+//
+// Example: "determiningPolicies":[{"policyId":"SPEXAMPLEabcdefg111111"}]
+//
+// [BatchIsAuthorized]: https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_BatchIsAuthorized.html
+// [IsAuthorizedWithToken]: https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_IsAuthorizedWithToken.html
+// [IsAuthorized]: https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_IsAuthorized.html
 type DeterminingPolicyItem struct {
 
-	// The Id of a policy that determined to an authorization decision. Example:
-	// "policyId":"SPEXAMPLEabcdefg111111"
+	// The Id of a policy that determined to an authorization decision.
+	//
+	// Example: "policyId":"SPEXAMPLEabcdefg111111"
 	//
 	// This member is required.
 	PolicyId *string
@@ -263,14 +634,17 @@ type DeterminingPolicyItem struct {
 
 // Contains the list of entities to be considered during an authorization request.
 // This includes all principals, resources, and actions required to successfully
-// evaluate the request. This data type is used as a field in the response
-// parameter for the IsAuthorized (https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_IsAuthorized.html)
-// and IsAuthorizedWithToken (https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_IsAuthorizedWithToken.html)
+// evaluate the request.
+//
+// This data type is used as a field in the response parameter for the [IsAuthorized] and [IsAuthorizedWithToken]
 // operations.
 //
 // The following types satisfy this interface:
 //
 //	EntitiesDefinitionMemberEntityList
+//
+// [IsAuthorizedWithToken]: https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_IsAuthorizedWithToken.html
+// [IsAuthorized]: https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_IsAuthorized.html
 type EntitiesDefinition interface {
 	isEntitiesDefinition()
 }
@@ -286,20 +660,29 @@ type EntitiesDefinitionMemberEntityList struct {
 
 func (*EntitiesDefinitionMemberEntityList) isEntitiesDefinition() {}
 
-// Contains the identifier of an entity, including its ID and type. This data type
-// is used as a request parameter for IsAuthorized (https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_IsAuthorized.html)
-// operation, and as a response parameter for the CreatePolicy (https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_CreatePolicy.html)
-// , GetPolicy (https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_GetPolicy.html)
-// , and UpdatePolicy (https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_UpdatePolicy.html)
-// operations. Example: {"entityId":"string","entityType":"string"}
+// Contains the identifier of an entity, including its ID and type.
+//
+// This data type is used as a request parameter for [IsAuthorized] operation, and as a response
+// parameter for the [CreatePolicy], [GetPolicy], and [UpdatePolicy] operations.
+//
+// Example: {"entityId":"string","entityType":"string"}
+//
+// [CreatePolicy]: https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_CreatePolicy.html
+// [UpdatePolicy]: https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_UpdatePolicy.html
+// [IsAuthorized]: https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_IsAuthorized.html
+// [GetPolicy]: https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_GetPolicy.html
 type EntityIdentifier struct {
 
-	// The identifier of an entity. "entityId":"identifier"
+	// The identifier of an entity.
+	//
+	//     "entityId":"identifier"
 	//
 	// This member is required.
 	EntityId *string
 
-	// The type of an entity. Example: "entityType":"typeName"
+	// The type of an entity.
+	//
+	// Example: "entityType":"typeName"
 	//
 	// This member is required.
 	EntityType *string
@@ -308,10 +691,14 @@ type EntityIdentifier struct {
 }
 
 // Contains information about an entity that can be referenced in a Cedar policy.
-// This data type is used as one of the fields in the EntitiesDefinition (https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_EntitiesDefinition.html)
-// structure. { "identifier": { "entityType": "Photo", "entityId":
-// "VacationPhoto94.jpg" }, "attributes": {}, "parents": [ { "entityType": "Album",
-// "entityId": "alice_folder" } ] }
+//
+// This data type is used as one of the fields in the [EntitiesDefinition] structure.
+//
+//	{ "identifier": { "entityType": "Photo", "entityId": "VacationPhoto94.jpg" },
+//	"attributes": {}, "parents": [ { "entityType": "Album", "entityId":
+//	"alice_folder" } ] }
+//
+// [EntitiesDefinition]: https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_EntitiesDefinition.html
 type EntityItem struct {
 
 	// The identifier of the entity.
@@ -322,21 +709,32 @@ type EntityItem struct {
 	// A list of attributes for the entity.
 	Attributes map[string]AttributeValue
 
-	// The parents in the hierarchy that contains the entity.
+	// The parent entities in the hierarchy that contains the entity. A principal or
+	// resource entity can be defined with at most 99 transitive parents per
+	// authorization request.
+	//
+	// A transitive parent is an entity in the hierarchy of entities including all
+	// direct parents, and parents of parents. For example, a user can be a member of
+	// 91 groups if one of those groups is a member of eight groups, for a total of
+	// 100: one entity, 91 entity parents, and eight parents of parents.
 	Parents []EntityIdentifier
 
 	noSmithyDocumentSerde
 }
 
 // Contains information about a principal or resource that can be referenced in a
-// Cedar policy. This data type is used as part of the PolicyFilter (https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_PolicyFilter.html)
-// structure that is used as a request parameter for the ListPolicies (https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_ListPolicies.html)
-// operation..
+// Cedar policy.
+//
+// This data type is used as part of the [PolicyFilter] structure that is used as a request
+// parameter for the [ListPolicies]operation..
 //
 // The following types satisfy this interface:
 //
 //	EntityReferenceMemberIdentifier
 //	EntityReferenceMemberUnspecified
+//
+// [ListPolicies]: https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_ListPolicies.html
+// [PolicyFilter]: https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_PolicyFilter.html
 type EntityReference interface {
 	isEntityReference()
 }
@@ -362,11 +760,13 @@ type EntityReferenceMemberUnspecified struct {
 
 func (*EntityReferenceMemberUnspecified) isEntityReference() {}
 
-// Contains a description of an evaluation error. This data type is a response
-// parameter of the IsAuthorized (https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_IsAuthorized.html)
-// , BatchIsAuthorized (https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_BatchIsAuthorized.html)
-// , and IsAuthorizedWithToken (https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_IsAuthorizedWithToken.html)
-// operations.
+// Contains a description of an evaluation error.
+//
+// This data type is a response parameter of the [IsAuthorized], [BatchIsAuthorized], and [IsAuthorizedWithToken] operations.
+//
+// [BatchIsAuthorized]: https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_BatchIsAuthorized.html
+// [IsAuthorizedWithToken]: https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_IsAuthorizedWithToken.html
+// [IsAuthorized]: https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_IsAuthorized.html
 type EvaluationErrorItem struct {
 
 	// The error description.
@@ -377,38 +777,58 @@ type EvaluationErrorItem struct {
 	noSmithyDocumentSerde
 }
 
-// A structure that contains configuration of the identity source. This data type
-// is used as a response parameter for the CreateIdentitySource (https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_CreateIdentitySource.html)
-// operation.
+// A structure that contains configuration of the identity source.
+//
+// This data type was a response parameter for the [GetIdentitySource] operation. Replaced by [ConfigurationDetail].
+//
+// [GetIdentitySource]: https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_GetIdentitySource.html
+// [ConfigurationDetail]: https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_ConfigurationDetail.html
 type IdentitySourceDetails struct {
 
 	// The application client IDs associated with the specified Amazon Cognito user
 	// pool that are enabled for this identity source.
+	//
+	// Deprecated: This attribute has been replaced by
+	// configuration.cognitoUserPoolConfiguration.clientIds
 	ClientIds []string
 
 	// The well-known URL that points to this user pool's OIDC discovery endpoint.
 	// This is a URL string in the following format. This URL replaces the placeholders
 	// for both the Amazon Web Services Region and the user pool identifier with those
 	// appropriate for this user pool.
-	// https://cognito-idp.<region>.amazonaws.com/<user-pool-id>/.well-known/openid-configuration
+	//
+	//     https://cognito-idp.<region>.amazonaws.com/<user-pool-id>/.well-known/openid-configuration
+	//
+	// Deprecated: This attribute has been replaced by
+	// configuration.cognitoUserPoolConfiguration.issuer
 	DiscoveryUrl *string
 
 	// A string that identifies the type of OIDC service represented by this identity
-	// source. At this time, the only valid value is cognito .
+	// source.
+	//
+	// At this time, the only valid value is cognito .
+	//
+	// Deprecated: This attribute has been replaced by configuration
 	OpenIdIssuer OpenIdIssuer
 
-	// The Amazon Resource Name (ARN) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
-	// of the Amazon Cognito user pool whose identities are accessible to this Verified
-	// Permissions policy store.
+	// The [Amazon Resource Name (ARN)] of the Amazon Cognito user pool whose identities are accessible to this
+	// Verified Permissions policy store.
+	//
+	// [Amazon Resource Name (ARN)]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+	//
+	// Deprecated: This attribute has been replaced by
+	// configuration.cognitoUserPoolConfiguration.userPoolArn
 	UserPoolArn *string
 
 	noSmithyDocumentSerde
 }
 
 // A structure that defines characteristics of an identity source that you can use
-// to filter. This data type is used as a request parameter for the
-// ListIdentityStores (https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_ListIdentityStores.html)
-// operation.
+// to filter.
+//
+// This data type is a request parameter for the [ListIdentityStores] operation.
+//
+// [ListIdentityStores]: https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_ListIdentityStores.html
 type IdentitySourceFilter struct {
 
 	// The Cedar entity type of the principals returned by the identity provider (IdP)
@@ -418,20 +838,17 @@ type IdentitySourceFilter struct {
 	noSmithyDocumentSerde
 }
 
-// A structure that defines an identity source. This data type is used as a
-// request parameter for the ListIdentityStores (https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_ListIdentityStores.html)
-// operation.
+// A structure that defines an identity source.
+//
+// This data type is a response parameter to the [ListIdentitySources] operation.
+//
+// [ListIdentitySources]: https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_ListIdentitySources.html
 type IdentitySourceItem struct {
 
 	// The date and time the identity source was originally created.
 	//
 	// This member is required.
 	CreatedDate *time.Time
-
-	// A structure that contains the details of the associated identity provider (IdP).
-	//
-	// This member is required.
-	Details *IdentitySourceItemDetails
 
 	// The unique identifier of the identity source.
 	//
@@ -454,47 +871,515 @@ type IdentitySourceItem struct {
 	// This member is required.
 	PrincipalEntityType *string
 
+	// Contains configuration information about an identity source.
+	Configuration ConfigurationItem
+
+	// A structure that contains the details of the associated identity provider (IdP).
+	//
+	// Deprecated: This attribute has been replaced by
+	// configuration.cognitoUserPoolConfiguration
+	Details *IdentitySourceItemDetails
+
 	noSmithyDocumentSerde
 }
 
-// A structure that contains configuration of the identity source. This data type
-// is used as a response parameter for the CreateIdentitySource (https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_CreateIdentitySource.html)
-// operation.
+// A structure that contains configuration of the identity source.
+//
+// This data type was a response parameter for the [ListIdentitySources] operation. Replaced by [ConfigurationItem].
+//
+// [ConfigurationItem]: https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_ConfigurationItem.html
+// [ListIdentitySources]: https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_ListIdentitySources.html
 type IdentitySourceItemDetails struct {
 
 	// The application client IDs associated with the specified Amazon Cognito user
 	// pool that are enabled for this identity source.
+	//
+	// Deprecated: This attribute has been replaced by
+	// configuration.cognitoUserPoolConfiguration.clientIds
 	ClientIds []string
 
 	// The well-known URL that points to this user pool's OIDC discovery endpoint.
 	// This is a URL string in the following format. This URL replaces the placeholders
 	// for both the Amazon Web Services Region and the user pool identifier with those
 	// appropriate for this user pool.
-	// https://cognito-idp.<region>.amazonaws.com/<user-pool-id>/.well-known/openid-configuration
+	//
+	//     https://cognito-idp.<region>.amazonaws.com/<user-pool-id>/.well-known/openid-configuration
+	//
+	// Deprecated: This attribute has been replaced by
+	// configuration.cognitoUserPoolConfiguration.issuer
 	DiscoveryUrl *string
 
 	// A string that identifies the type of OIDC service represented by this identity
-	// source. At this time, the only valid value is cognito .
+	// source.
+	//
+	// At this time, the only valid value is cognito .
+	//
+	// Deprecated: This attribute has been replaced by configuration
 	OpenIdIssuer OpenIdIssuer
 
 	// The Amazon Cognito user pool whose identities are accessible to this Verified
 	// Permissions policy store.
+	//
+	// Deprecated: This attribute has been replaced by
+	// configuration.cognitoUserPoolConfiguration.userPoolArn
 	UserPoolArn *string
 
 	noSmithyDocumentSerde
 }
 
+// The configuration of an OpenID Connect (OIDC) identity source for handling
+// access token claims. Contains the claim that you want to identify as the
+// principal in an authorization request, and the values of the aud claim, or
+// audiences, that you want to accept.
+//
+// This data type is part of a [OpenIdConnectTokenSelection] structure, which is a parameter of [CreateIdentitySource].
+//
+// [OpenIdConnectTokenSelection]: https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_OpenIdConnectTokenSelection.html
+// [CreateIdentitySource]: https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_CreateIdentitySource.html
+type OpenIdConnectAccessTokenConfiguration struct {
+
+	// The access token aud claim values that you want to accept in your policy store.
+	// For example, https://myapp.example.com, https://myapp2.example.com .
+	Audiences []string
+
+	// The claim that determines the principal in OIDC access tokens. For example, sub .
+	PrincipalIdClaim *string
+
+	noSmithyDocumentSerde
+}
+
+// The configuration of an OpenID Connect (OIDC) identity source for handling
+// access token claims. Contains the claim that you want to identify as the
+// principal in an authorization request, and the values of the aud claim, or
+// audiences, that you want to accept.
+//
+// This data type is part of a [OpenIdConnectTokenSelectionDetail] structure, which is a parameter of [GetIdentitySource].
+//
+// [OpenIdConnectTokenSelectionDetail]: https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_OpenIdConnectTokenSelectionDetail.html
+// [GetIdentitySource]: https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_GetIdentitySource.html
+type OpenIdConnectAccessTokenConfigurationDetail struct {
+
+	// The access token aud claim values that you want to accept in your policy store.
+	// For example, https://myapp.example.com, https://myapp2.example.com .
+	Audiences []string
+
+	// The claim that determines the principal in OIDC access tokens. For example, sub .
+	PrincipalIdClaim *string
+
+	noSmithyDocumentSerde
+}
+
+// The configuration of an OpenID Connect (OIDC) identity source for handling
+// access token claims. Contains the claim that you want to identify as the
+// principal in an authorization request, and the values of the aud claim, or
+// audiences, that you want to accept.
+//
+// This data type is part of a [OpenIdConnectTokenSelectionItem] structure, which is a parameter of [ListIdentitySources].
+//
+// [OpenIdConnectTokenSelectionItem]: https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_OpenIdConnectTokenSelectionItem.html
+// [ListIdentitySources]: https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_ListIdentitySources.html
+type OpenIdConnectAccessTokenConfigurationItem struct {
+
+	// The access token aud claim values that you want to accept in your policy store.
+	// For example, https://myapp.example.com, https://myapp2.example.com .
+	Audiences []string
+
+	// The claim that determines the principal in OIDC access tokens. For example, sub .
+	PrincipalIdClaim *string
+
+	noSmithyDocumentSerde
+}
+
+// Contains configuration details of an OpenID Connect (OIDC) identity provider,
+// or identity source, that Verified Permissions can use to generate entities from
+// authenticated identities. It specifies the issuer URL, token type that you want
+// to use, and policy store entity details.
+//
+// This data type is part of a [Configuration] structure, which is a parameter to [CreateIdentitySource].
+//
+// [Configuration]: https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_Configuration.html
+// [CreateIdentitySource]: https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_CreateIdentitySource.html
+type OpenIdConnectConfiguration struct {
+
+	// The issuer URL of an OIDC identity provider. This URL must have an OIDC
+	// discovery endpoint at the path .well-known/openid-configuration .
+	//
+	// This member is required.
+	Issuer *string
+
+	// The token type that you want to process from your OIDC identity provider. Your
+	// policy store can process either identity (ID) or access tokens from a given OIDC
+	// identity source.
+	//
+	// This member is required.
+	TokenSelection OpenIdConnectTokenSelection
+
+	// A descriptive string that you want to prefix to user entities from your OIDC
+	// identity provider. For example, if you set an entityIdPrefix of MyOIDCProvider ,
+	// you can reference principals in your policies in the format
+	// MyCorp::User::MyOIDCProvider|Carlos .
+	EntityIdPrefix *string
+
+	// The claim in OIDC identity provider tokens that indicates a user's group
+	// membership, and the entity type that you want to map it to. For example, this
+	// object can map the contents of a groups claim to MyCorp::UserGroup .
+	GroupConfiguration *OpenIdConnectGroupConfiguration
+
+	noSmithyDocumentSerde
+}
+
+// Contains configuration details of an OpenID Connect (OIDC) identity provider,
+// or identity source, that Verified Permissions can use to generate entities from
+// authenticated identities. It specifies the issuer URL, token type that you want
+// to use, and policy store entity details.
+//
+// This data type is part of a [ConfigurationDetail] structure, which is a parameter to [GetIdentitySource].
+//
+// [GetIdentitySource]: https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_GetIdentitySource.html
+// [ConfigurationDetail]: https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_ConfigurationDetail.html
+type OpenIdConnectConfigurationDetail struct {
+
+	// The issuer URL of an OIDC identity provider. This URL must have an OIDC
+	// discovery endpoint at the path .well-known/openid-configuration .
+	//
+	// This member is required.
+	Issuer *string
+
+	// The token type that you want to process from your OIDC identity provider. Your
+	// policy store can process either identity (ID) or access tokens from a given OIDC
+	// identity source.
+	//
+	// This member is required.
+	TokenSelection OpenIdConnectTokenSelectionDetail
+
+	// A descriptive string that you want to prefix to user entities from your OIDC
+	// identity provider. For example, if you set an entityIdPrefix of MyOIDCProvider ,
+	// you can reference principals in your policies in the format
+	// MyCorp::User::MyOIDCProvider|Carlos .
+	EntityIdPrefix *string
+
+	// The claim in OIDC identity provider tokens that indicates a user's group
+	// membership, and the entity type that you want to map it to. For example, this
+	// object can map the contents of a groups claim to MyCorp::UserGroup .
+	GroupConfiguration *OpenIdConnectGroupConfigurationDetail
+
+	noSmithyDocumentSerde
+}
+
+// Contains configuration details of an OpenID Connect (OIDC) identity provider,
+// or identity source, that Verified Permissions can use to generate entities from
+// authenticated identities. It specifies the issuer URL, token type that you want
+// to use, and policy store entity details.
+//
+// This data type is part of a [ConfigurationItem] structure, which is a parameter to [ListIdentitySources].
+//
+// [ConfigurationItem]: https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_ConfigurationDetail.html
+// [ListIdentitySources]: https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_ListIdentitySources.html
+type OpenIdConnectConfigurationItem struct {
+
+	// The issuer URL of an OIDC identity provider. This URL must have an OIDC
+	// discovery endpoint at the path .well-known/openid-configuration .
+	//
+	// This member is required.
+	Issuer *string
+
+	// The token type that you want to process from your OIDC identity provider. Your
+	// policy store can process either identity (ID) or access tokens from a given OIDC
+	// identity source.
+	//
+	// This member is required.
+	TokenSelection OpenIdConnectTokenSelectionItem
+
+	// A descriptive string that you want to prefix to user entities from your OIDC
+	// identity provider. For example, if you set an entityIdPrefix of MyOIDCProvider ,
+	// you can reference principals in your policies in the format
+	// MyCorp::User::MyOIDCProvider|Carlos .
+	EntityIdPrefix *string
+
+	// The claim in OIDC identity provider tokens that indicates a user's group
+	// membership, and the entity type that you want to map it to. For example, this
+	// object can map the contents of a groups claim to MyCorp::UserGroup .
+	GroupConfiguration *OpenIdConnectGroupConfigurationItem
+
+	noSmithyDocumentSerde
+}
+
+// The claim in OIDC identity provider tokens that indicates a user's group
+// membership, and the entity type that you want to map it to. For example, this
+// object can map the contents of a groups claim to MyCorp::UserGroup .
+//
+// This data type is part of a [OpenIdConnectConfiguration] structure, which is a parameter of [CreateIdentitySource].
+//
+// [OpenIdConnectConfiguration]: https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_OpenIdConnectConfiguration.html
+// [CreateIdentitySource]: https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_CreateIdentitySource.html
+type OpenIdConnectGroupConfiguration struct {
+
+	// The token claim that you want Verified Permissions to interpret as group
+	// membership. For example, groups .
+	//
+	// This member is required.
+	GroupClaim *string
+
+	// The policy store entity type that you want to map your users' group claim to.
+	// For example, MyCorp::UserGroup . A group entity type is an entity that can have
+	// a user entity type as a member.
+	//
+	// This member is required.
+	GroupEntityType *string
+
+	noSmithyDocumentSerde
+}
+
+// The claim in OIDC identity provider tokens that indicates a user's group
+// membership, and the entity type that you want to map it to. For example, this
+// object can map the contents of a groups claim to MyCorp::UserGroup .
+//
+// This data type is part of a [OpenIdConnectConfigurationDetail] structure, which is a parameter of [GetIdentitySource].
+//
+// [GetIdentitySource]: https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_GetIdentitySource.html
+// [OpenIdConnectConfigurationDetail]: https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_OpenIdConnectConfigurationDetail.html
+type OpenIdConnectGroupConfigurationDetail struct {
+
+	// The token claim that you want Verified Permissions to interpret as group
+	// membership. For example, groups .
+	//
+	// This member is required.
+	GroupClaim *string
+
+	// The policy store entity type that you want to map your users' group claim to.
+	// For example, MyCorp::UserGroup . A group entity type is an entity that can have
+	// a user entity type as a member.
+	//
+	// This member is required.
+	GroupEntityType *string
+
+	noSmithyDocumentSerde
+}
+
+// The claim in OIDC identity provider tokens that indicates a user's group
+// membership, and the entity type that you want to map it to. For example, this
+// object can map the contents of a groups claim to MyCorp::UserGroup .
+//
+// This data type is part of a [OpenIdConnectConfigurationItem] structure, which is a parameter of [ListIdentitySourcea].
+//
+// [ListIdentitySourcea]: https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_ListIdentitySources.html
+// [OpenIdConnectConfigurationItem]: https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_OpenIdConnectConfigurationItem.html
+type OpenIdConnectGroupConfigurationItem struct {
+
+	// The token claim that you want Verified Permissions to interpret as group
+	// membership. For example, groups .
+	//
+	// This member is required.
+	GroupClaim *string
+
+	// The policy store entity type that you want to map your users' group claim to.
+	// For example, MyCorp::UserGroup . A group entity type is an entity that can have
+	// a user entity type as a member.
+	//
+	// This member is required.
+	GroupEntityType *string
+
+	noSmithyDocumentSerde
+}
+
+// The configuration of an OpenID Connect (OIDC) identity source for handling
+// identity (ID) token claims. Contains the claim that you want to identify as the
+// principal in an authorization request, and the values of the aud claim, or
+// audiences, that you want to accept.
+//
+// This data type is part of a [OpenIdConnectTokenSelection] structure, which is a parameter of [CreateIdentitySource].
+//
+// [OpenIdConnectTokenSelection]: https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_OpenIdConnectTokenSelection.html
+// [CreateIdentitySource]: https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_CreateIdentitySource.html
+type OpenIdConnectIdentityTokenConfiguration struct {
+
+	// The ID token audience, or client ID, claim values that you want to accept in
+	// your policy store from an OIDC identity provider. For example,
+	// 1example23456789, 2example10111213 .
+	ClientIds []string
+
+	// The claim that determines the principal in OIDC access tokens. For example, sub .
+	PrincipalIdClaim *string
+
+	noSmithyDocumentSerde
+}
+
+// The configuration of an OpenID Connect (OIDC) identity source for handling
+// identity (ID) token claims. Contains the claim that you want to identify as the
+// principal in an authorization request, and the values of the aud claim, or
+// audiences, that you want to accept.
+//
+// This data type is part of a [OpenIdConnectTokenSelectionDetail] structure, which is a parameter of [GetIdentitySource].
+//
+// [OpenIdConnectTokenSelectionDetail]: https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_OpenIdConnectTokenSelectionDetail.html
+// [GetIdentitySource]: https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_GetIdentitySource.html
+type OpenIdConnectIdentityTokenConfigurationDetail struct {
+
+	// The ID token audience, or client ID, claim values that you want to accept in
+	// your policy store from an OIDC identity provider. For example,
+	// 1example23456789, 2example10111213 .
+	ClientIds []string
+
+	// The claim that determines the principal in OIDC access tokens. For example, sub .
+	PrincipalIdClaim *string
+
+	noSmithyDocumentSerde
+}
+
+// The configuration of an OpenID Connect (OIDC) identity source for handling
+// identity (ID) token claims. Contains the claim that you want to identify as the
+// principal in an authorization request, and the values of the aud claim, or
+// audiences, that you want to accept.
+//
+// This data type is part of a [OpenIdConnectTokenSelectionItem] structure, which is a parameter of [ListIdentitySources].
+//
+// [OpenIdConnectTokenSelectionItem]: https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_OpenIdConnectTokenSelectionItem.html
+// [ListIdentitySources]: https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_ListIdentitySources.html
+type OpenIdConnectIdentityTokenConfigurationItem struct {
+
+	// The ID token audience, or client ID, claim values that you want to accept in
+	// your policy store from an OIDC identity provider. For example,
+	// 1example23456789, 2example10111213 .
+	ClientIds []string
+
+	// The claim that determines the principal in OIDC access tokens. For example, sub .
+	PrincipalIdClaim *string
+
+	noSmithyDocumentSerde
+}
+
+// The token type that you want to process from your OIDC identity provider. Your
+// policy store can process either identity (ID) or access tokens from a given OIDC
+// identity source.
+//
+// This data type is part of a [OpenIdConnectConfiguration] structure, which is a parameter of [CreateIdentitySource].
+//
+// The following types satisfy this interface:
+//
+//	OpenIdConnectTokenSelectionMemberAccessTokenOnly
+//	OpenIdConnectTokenSelectionMemberIdentityTokenOnly
+//
+// [OpenIdConnectConfiguration]: https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_OpenIdConnectConfiguration.html
+// [CreateIdentitySource]: https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_CreateIdentitySource.html
+type OpenIdConnectTokenSelection interface {
+	isOpenIdConnectTokenSelection()
+}
+
+// The OIDC configuration for processing access tokens. Contains allowed audience
+// claims, for example https://auth.example.com , and the claim that you want to
+// map to the principal, for example sub .
+type OpenIdConnectTokenSelectionMemberAccessTokenOnly struct {
+	Value OpenIdConnectAccessTokenConfiguration
+
+	noSmithyDocumentSerde
+}
+
+func (*OpenIdConnectTokenSelectionMemberAccessTokenOnly) isOpenIdConnectTokenSelection() {}
+
+// The OIDC configuration for processing identity (ID) tokens. Contains allowed
+// client ID claims, for example 1example23456789 , and the claim that you want to
+// map to the principal, for example sub .
+type OpenIdConnectTokenSelectionMemberIdentityTokenOnly struct {
+	Value OpenIdConnectIdentityTokenConfiguration
+
+	noSmithyDocumentSerde
+}
+
+func (*OpenIdConnectTokenSelectionMemberIdentityTokenOnly) isOpenIdConnectTokenSelection() {}
+
+// The token type that you want to process from your OIDC identity provider. Your
+// policy store can process either identity (ID) or access tokens from a given OIDC
+// identity source.
+//
+// This data type is part of a [OpenIdConnectConfigurationDetail] structure, which is a parameter of [GetIdentitySource].
+//
+// The following types satisfy this interface:
+//
+//	OpenIdConnectTokenSelectionDetailMemberAccessTokenOnly
+//	OpenIdConnectTokenSelectionDetailMemberIdentityTokenOnly
+//
+// [GetIdentitySource]: https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_GetIdentitySource.html
+// [OpenIdConnectConfigurationDetail]: https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_OpenIdConnectConfigurationDetail.html
+type OpenIdConnectTokenSelectionDetail interface {
+	isOpenIdConnectTokenSelectionDetail()
+}
+
+// The OIDC configuration for processing access tokens. Contains allowed audience
+// claims, for example https://auth.example.com , and the claim that you want to
+// map to the principal, for example sub .
+type OpenIdConnectTokenSelectionDetailMemberAccessTokenOnly struct {
+	Value OpenIdConnectAccessTokenConfigurationDetail
+
+	noSmithyDocumentSerde
+}
+
+func (*OpenIdConnectTokenSelectionDetailMemberAccessTokenOnly) isOpenIdConnectTokenSelectionDetail() {
+}
+
+// The OIDC configuration for processing identity (ID) tokens. Contains allowed
+// client ID claims, for example 1example23456789 , and the claim that you want to
+// map to the principal, for example sub .
+type OpenIdConnectTokenSelectionDetailMemberIdentityTokenOnly struct {
+	Value OpenIdConnectIdentityTokenConfigurationDetail
+
+	noSmithyDocumentSerde
+}
+
+func (*OpenIdConnectTokenSelectionDetailMemberIdentityTokenOnly) isOpenIdConnectTokenSelectionDetail() {
+}
+
+// The token type that you want to process from your OIDC identity provider. Your
+// policy store can process either identity (ID) or access tokens from a given OIDC
+// identity source.
+//
+// This data type is part of a [OpenIdConnectConfigurationItem] structure, which is a parameter of [ListIdentitySources].
+//
+// The following types satisfy this interface:
+//
+//	OpenIdConnectTokenSelectionItemMemberAccessTokenOnly
+//	OpenIdConnectTokenSelectionItemMemberIdentityTokenOnly
+//
+// [OpenIdConnectConfigurationItem]: https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_OpenIdConnectConfigurationItem.html
+// [ListIdentitySources]: http://amazonaws.com/verifiedpermissions/latest/apireference/API_ListIdentitySources.html
+type OpenIdConnectTokenSelectionItem interface {
+	isOpenIdConnectTokenSelectionItem()
+}
+
+// The OIDC configuration for processing access tokens. Contains allowed audience
+// claims, for example https://auth.example.com , and the claim that you want to
+// map to the principal, for example sub .
+type OpenIdConnectTokenSelectionItemMemberAccessTokenOnly struct {
+	Value OpenIdConnectAccessTokenConfigurationItem
+
+	noSmithyDocumentSerde
+}
+
+func (*OpenIdConnectTokenSelectionItemMemberAccessTokenOnly) isOpenIdConnectTokenSelectionItem() {}
+
+// The OIDC configuration for processing identity (ID) tokens. Contains allowed
+// client ID claims, for example 1example23456789 , and the claim that you want to
+// map to the principal, for example sub .
+type OpenIdConnectTokenSelectionItemMemberIdentityTokenOnly struct {
+	Value OpenIdConnectIdentityTokenConfigurationItem
+
+	noSmithyDocumentSerde
+}
+
+func (*OpenIdConnectTokenSelectionItemMemberIdentityTokenOnly) isOpenIdConnectTokenSelectionItem() {}
+
 // A structure that contains the details for a Cedar policy definition. It
 // includes the policy type, a description, and a policy body. This is a top level
-// data type used to create a policy. This data type is used as a request parameter
-// for the CreatePolicy (https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_CreatePolicy.html)
-// operation. This structure must always have either an static or a templateLinked
-// element.
+// data type used to create a policy.
+//
+// This data type is used as a request parameter for the [CreatePolicy] operation. This
+// structure must always have either an static or a templateLinked element.
 //
 // The following types satisfy this interface:
 //
 //	PolicyDefinitionMemberStatic
 //	PolicyDefinitionMemberTemplateLinked
+//
+// [CreatePolicy]: https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_CreatePolicy.html
 type PolicyDefinition interface {
 	isPolicyDefinition()
 }
@@ -510,10 +1395,11 @@ type PolicyDefinitionMemberStatic struct {
 func (*PolicyDefinitionMemberStatic) isPolicyDefinition() {}
 
 // A structure that describes a policy that was instantiated from a template. The
-// template can specify placeholders for principal and resource . When you use
-// CreatePolicy (https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_CreatePolicy.html)
-// to create a policy from a template, you specify the exact principal and resource
-// to use for the instantiated policy.
+// template can specify placeholders for principal and resource . When you use [CreatePolicy] to
+// create a policy from a template, you specify the exact principal and resource to
+// use for the instantiated policy.
+//
+// [CreatePolicy]: https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_CreatePolicy.html
 type PolicyDefinitionMemberTemplateLinked struct {
 	Value TemplateLinkedPolicyDefinition
 
@@ -523,14 +1409,16 @@ type PolicyDefinitionMemberTemplateLinked struct {
 func (*PolicyDefinitionMemberTemplateLinked) isPolicyDefinition() {}
 
 // A structure that describes a policy definition. It must always have either an
-// static or a templateLinked element. This data type is used as a response
-// parameter for the GetPolicy (https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_GetPolicy.html)
-// operation.
+// static or a templateLinked element.
+//
+// This data type is used as a response parameter for the [GetPolicy] operation.
 //
 // The following types satisfy this interface:
 //
 //	PolicyDefinitionDetailMemberStatic
 //	PolicyDefinitionDetailMemberTemplateLinked
+//
+// [GetPolicy]: https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_GetPolicy.html
 type PolicyDefinitionDetail interface {
 	isPolicyDefinitionDetail()
 }
@@ -554,16 +1442,19 @@ type PolicyDefinitionDetailMemberTemplateLinked struct {
 
 func (*PolicyDefinitionDetailMemberTemplateLinked) isPolicyDefinitionDetail() {}
 
-// A structure that describes a PolicyDefinintion (https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_PolicyDefinintion.html)
-// . It will always have either an StaticPolicy or a TemplateLinkedPolicy element.
-// This data type is used as a response parameter for the CreatePolicy (https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_CreatePolicy.html)
-// and ListPolicies (https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_ListPolicies.html)
-// operations.
+// A structure that describes a [PolicyDefinintion]. It will always have either an StaticPolicy or a
+// TemplateLinkedPolicy element.
+//
+// This data type is used as a response parameter for the [CreatePolicy] and [ListPolicies] operations.
 //
 // The following types satisfy this interface:
 //
 //	PolicyDefinitionItemMemberStatic
 //	PolicyDefinitionItemMemberTemplateLinked
+//
+// [CreatePolicy]: https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_CreatePolicy.html
+// [ListPolicies]: https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_ListPolicies.html
+// [PolicyDefinintion]: https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_PolicyDefinintion.html
 type PolicyDefinitionItem interface {
 	isPolicyDefinitionItem()
 }
@@ -588,8 +1479,10 @@ type PolicyDefinitionItemMemberTemplateLinked struct {
 func (*PolicyDefinitionItemMemberTemplateLinked) isPolicyDefinitionItem() {}
 
 // Contains information about a filter to refine policies returned in a query.
-// This data type is used as a response parameter for the ListPolicies (https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_ListPolicies.html)
-// operation.
+//
+// This data type is used as a response parameter for the [ListPolicies] operation.
+//
+// [ListPolicies]: https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_ListPolicies.html
 type PolicyFilter struct {
 
 	// Filters the output to only template-linked policies that were instantiated from
@@ -608,9 +1501,11 @@ type PolicyFilter struct {
 	noSmithyDocumentSerde
 }
 
-// Contains information about a policy. This data type is used as a response
-// parameter for the ListPolicies (https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_ListPolicies.html)
-// operation.
+// Contains information about a policy.
+//
+// This data type is used as a response parameter for the [ListPolicies] operation.
+//
+// [ListPolicies]: https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_ListPolicies.html
 type PolicyItem struct {
 
 	// The date and time the policy was created.
@@ -640,11 +1535,22 @@ type PolicyItem struct {
 	PolicyStoreId *string
 
 	// The type of the policy. This is one of the following values:
+	//
 	//   - static
+	//
 	//   - templateLinked
 	//
 	// This member is required.
 	PolicyType PolicyType
+
+	// The action that a policy permits or forbids. For example, {"actions":
+	// [{"actionId": "ViewPhoto", "actionType": "PhotoFlash::Action"}, {"entityID":
+	// "SharePhoto", "entityType": "PhotoFlash::Action"}]} .
+	Actions []ActionIdentifier
+
+	// The effect of the decision that a policy returns to an authorization request.
+	// For example, "effect": "Permit" .
+	Effect PolicyEffect
 
 	// The principal associated with the policy.
 	Principal *EntityIdentifier
@@ -655,9 +1561,11 @@ type PolicyItem struct {
 	noSmithyDocumentSerde
 }
 
-// Contains information about a policy store. This data type is used as a response
-// parameter for the ListPolicyStores (https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_ListPolicyStores.html)
-// operation.
+// Contains information about a policy store.
+//
+// This data type is used as a response parameter for the [ListPolicyStores] operation.
+//
+// [ListPolicyStores]: https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_ListPolicyStores.html
 type PolicyStoreItem struct {
 
 	// The Amazon Resource Name (ARN) of the policy store.
@@ -685,9 +1593,11 @@ type PolicyStoreItem struct {
 	noSmithyDocumentSerde
 }
 
-// Contains details about a policy template This data type is used as a response
-// parameter for the ListPolicyTemplates (https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_ListPolicyTemplates.html)
-// operation.
+// Contains details about a policy template
+//
+// This data type is used as a response parameter for the [ListPolicyTemplates] operation.
+//
+// [ListPolicyTemplates]: https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_ListPolicyTemplates.html
 type PolicyTemplateItem struct {
 
 	// The date and time that the policy template was created.
@@ -746,8 +1656,10 @@ type SchemaDefinition interface {
 }
 
 // A JSON string representation of the schema supported by applications that use
-// this policy store. For more information, see Policy store schema (https://docs.aws.amazon.com/verifiedpermissions/latest/userguide/schema.html)
-// in the Amazon Verified Permissions User Guide.
+// this policy store. For more information, see [Policy store schema]in the Amazon Verified Permissions
+// User Guide.
+//
+// [Policy store schema]: https://docs.aws.amazon.com/verifiedpermissions/latest/userguide/schema.html
 type SchemaDefinitionMemberCedarJson struct {
 	Value string
 
@@ -756,9 +1668,11 @@ type SchemaDefinitionMemberCedarJson struct {
 
 func (*SchemaDefinitionMemberCedarJson) isSchemaDefinition() {}
 
-// Contains information about a static policy. This data type is used as a field
-// that is part of the PolicyDefinitionDetail (https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_PolicyDefinitionDetail.html)
-// type.
+// Contains information about a static policy.
+//
+// This data type is used as a field that is part of the [PolicyDefinitionDetail] type.
+//
+// [PolicyDefinitionDetail]: https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_PolicyDefinitionDetail.html
 type StaticPolicyDefinition struct {
 
 	// The policy content of the static policy, written in the Cedar policy language.
@@ -773,9 +1687,13 @@ type StaticPolicyDefinition struct {
 }
 
 // A structure that contains details about a static policy. It includes the
-// description and policy body. This data type is used within a PolicyDefinition (https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_PolicyDefinition.html)
-// structure as part of a request parameter for the CreatePolicy (https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_CreatePolicy.html)
-// operation.
+// description and policy body.
+//
+// This data type is used within a [PolicyDefinition] structure as part of a request parameter for
+// the [CreatePolicy]operation.
+//
+// [CreatePolicy]: https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_CreatePolicy.html
+// [PolicyDefinition]: https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_PolicyDefinition.html
 type StaticPolicyDefinitionDetail struct {
 
 	// The content of the static policy written in the Cedar policy language.
@@ -790,10 +1708,13 @@ type StaticPolicyDefinitionDetail struct {
 }
 
 // A structure that contains details about a static policy. It includes the
-// description and policy statement. This data type is used within a
-// PolicyDefinition (https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_PolicyDefinition.html)
-// structure as part of a request parameter for the CreatePolicy (https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_CreatePolicy.html)
-// operation.
+// description and policy statement.
+//
+// This data type is used within a [PolicyDefinition] structure as part of a request parameter for
+// the [CreatePolicy]operation.
+//
+// [CreatePolicy]: https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_CreatePolicy.html
+// [PolicyDefinition]: https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_PolicyDefinition.html
 type StaticPolicyDefinitionItem struct {
 
 	// A description of the static policy.
@@ -824,7 +1745,7 @@ type TemplateLinkedPolicyDefinition struct {
 }
 
 // Contains information about a policy that was created by instantiating a policy
-// template. This
+// template.
 type TemplateLinkedPolicyDefinitionDetail struct {
 
 	// The unique identifier of the policy template used to create this policy.
@@ -846,6 +1767,7 @@ type TemplateLinkedPolicyDefinitionDetail struct {
 }
 
 // Contains information about a policy created by instantiating a policy template.
+//
 // This
 type TemplateLinkedPolicyDefinitionItem struct {
 
@@ -867,12 +1789,25 @@ type TemplateLinkedPolicyDefinitionItem struct {
 	noSmithyDocumentSerde
 }
 
+// The user group entities from an Amazon Cognito user pool identity source.
+type UpdateCognitoGroupConfiguration struct {
+
+	// The name of the schema entity type that's mapped to the user pool group.
+	// Defaults to AWS::CognitoGroup .
+	//
+	// This member is required.
+	GroupEntityType *string
+
+	noSmithyDocumentSerde
+}
+
 // Contains configuration details of a Amazon Cognito user pool for use with an
 // identity source.
 type UpdateCognitoUserPoolConfiguration struct {
 
-	// The Amazon Resource Name (ARN) (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
-	// of the Amazon Cognito user pool associated with this identity source.
+	// The [Amazon Resource Name (ARN)] of the Amazon Cognito user pool associated with this identity source.
+	//
+	// [Amazon Resource Name (ARN)]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
 	//
 	// This member is required.
 	UserPoolArn *string
@@ -881,17 +1816,19 @@ type UpdateCognitoUserPoolConfiguration struct {
 	// Cognito user pool.
 	ClientIds []string
 
+	// The configuration of the user groups from an Amazon Cognito user pool identity
+	// source.
+	GroupConfiguration *UpdateCognitoGroupConfiguration
+
 	noSmithyDocumentSerde
 }
 
-// Contains an updated configuration to replace the configuration in an existing
-// identity source. At this time, the only valid member of this structure is a
-// Amazon Cognito user pool configuration. You must specify a userPoolArn , and
-// optionally, a ClientId .
+// Contains an update to replace the configuration in an existing identity source.
 //
 // The following types satisfy this interface:
 //
 //	UpdateConfigurationMemberCognitoUserPoolConfiguration
+//	UpdateConfigurationMemberOpenIdConnectConfiguration
 type UpdateConfiguration interface {
 	isUpdateConfiguration()
 }
@@ -905,13 +1842,175 @@ type UpdateConfigurationMemberCognitoUserPoolConfiguration struct {
 
 func (*UpdateConfigurationMemberCognitoUserPoolConfiguration) isUpdateConfiguration() {}
 
-// Contains information about updates to be applied to a policy. This data type is
-// used as a request parameter in the UpdatePolicy (https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_UpdatePolicy.html)
-// operation.
+// Contains configuration details of an OpenID Connect (OIDC) identity provider,
+// or identity source, that Verified Permissions can use to generate entities from
+// authenticated identities. It specifies the issuer URL, token type that you want
+// to use, and policy store entity details.
+type UpdateConfigurationMemberOpenIdConnectConfiguration struct {
+	Value UpdateOpenIdConnectConfiguration
+
+	noSmithyDocumentSerde
+}
+
+func (*UpdateConfigurationMemberOpenIdConnectConfiguration) isUpdateConfiguration() {}
+
+// The configuration of an OpenID Connect (OIDC) identity source for handling
+// access token claims. Contains the claim that you want to identify as the
+// principal in an authorization request, and the values of the aud claim, or
+// audiences, that you want to accept.
+//
+// This data type is part of a [UpdateOpenIdConnectTokenSelection] structure, which is a parameter to [UpdateIdentitySource].
+//
+// [UpdateIdentitySource]: https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_UpdateIdentitySource.html
+// [UpdateOpenIdConnectTokenSelection]: https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_UpdateOpenIdConnectTokenSelection.html
+type UpdateOpenIdConnectAccessTokenConfiguration struct {
+
+	// The access token aud claim values that you want to accept in your policy store.
+	// For example, https://myapp.example.com, https://myapp2.example.com .
+	Audiences []string
+
+	// The claim that determines the principal in OIDC access tokens. For example, sub .
+	PrincipalIdClaim *string
+
+	noSmithyDocumentSerde
+}
+
+// Contains configuration details of an OpenID Connect (OIDC) identity provider,
+// or identity source, that Verified Permissions can use to generate entities from
+// authenticated identities. It specifies the issuer URL, token type that you want
+// to use, and policy store entity details.
+//
+// This data type is part of a [UpdateConfiguration] structure, which is a parameter to [UpdateIdentitySource].
+//
+// [UpdateIdentitySource]: https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_UpdateIdentitySource.html
+// [UpdateConfiguration]: https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_UpdateConfiguration.html
+type UpdateOpenIdConnectConfiguration struct {
+
+	// The issuer URL of an OIDC identity provider. This URL must have an OIDC
+	// discovery endpoint at the path .well-known/openid-configuration .
+	//
+	// This member is required.
+	Issuer *string
+
+	// The token type that you want to process from your OIDC identity provider. Your
+	// policy store can process either identity (ID) or access tokens from a given OIDC
+	// identity source.
+	//
+	// This member is required.
+	TokenSelection UpdateOpenIdConnectTokenSelection
+
+	// A descriptive string that you want to prefix to user entities from your OIDC
+	// identity provider. For example, if you set an entityIdPrefix of MyOIDCProvider ,
+	// you can reference principals in your policies in the format
+	// MyCorp::User::MyOIDCProvider|Carlos .
+	EntityIdPrefix *string
+
+	// The claim in OIDC identity provider tokens that indicates a user's group
+	// membership, and the entity type that you want to map it to. For example, this
+	// object can map the contents of a groups claim to MyCorp::UserGroup .
+	GroupConfiguration *UpdateOpenIdConnectGroupConfiguration
+
+	noSmithyDocumentSerde
+}
+
+// The claim in OIDC identity provider tokens that indicates a user's group
+// membership, and the entity type that you want to map it to. For example, this
+// object can map the contents of a groups claim to MyCorp::UserGroup .
+//
+// This data type is part of a [UpdateOpenIdConnectConfiguration] structure, which is a parameter to [UpdateIdentitySource].
+//
+// [UpdateOpenIdConnectConfiguration]: https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_UpdateOpenIdConnectConfiguration.html
+// [UpdateIdentitySource]: https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_UpdateIdentitySource.html
+type UpdateOpenIdConnectGroupConfiguration struct {
+
+	// The token claim that you want Verified Permissions to interpret as group
+	// membership. For example, groups .
+	//
+	// This member is required.
+	GroupClaim *string
+
+	// The policy store entity type that you want to map your users' group claim to.
+	// For example, MyCorp::UserGroup . A group entity type is an entity that can have
+	// a user entity type as a member.
+	//
+	// This member is required.
+	GroupEntityType *string
+
+	noSmithyDocumentSerde
+}
+
+// The configuration of an OpenID Connect (OIDC) identity source for handling
+// identity (ID) token claims. Contains the claim that you want to identify as the
+// principal in an authorization request, and the values of the aud claim, or
+// audiences, that you want to accept.
+//
+// This data type is part of a [UpdateOpenIdConnectTokenSelection] structure, which is a parameter to [UpdateIdentitySource].
+//
+// [UpdateIdentitySource]: https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_UpdateIdentitySource.html
+// [UpdateOpenIdConnectTokenSelection]: https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_UpdateOpenIdConnectTokenSelection.html
+type UpdateOpenIdConnectIdentityTokenConfiguration struct {
+
+	// The ID token audience, or client ID, claim values that you want to accept in
+	// your policy store from an OIDC identity provider. For example,
+	// 1example23456789, 2example10111213 .
+	ClientIds []string
+
+	// The claim that determines the principal in OIDC access tokens. For example, sub .
+	PrincipalIdClaim *string
+
+	noSmithyDocumentSerde
+}
+
+// The token type that you want to process from your OIDC identity provider. Your
+// policy store can process either identity (ID) or access tokens from a given OIDC
+// identity source.
+//
+// This data type is part of a [UpdateOpenIdConnectConfiguration] structure, which is a parameter to [UpdateIdentitySource].
+//
+// The following types satisfy this interface:
+//
+//	UpdateOpenIdConnectTokenSelectionMemberAccessTokenOnly
+//	UpdateOpenIdConnectTokenSelectionMemberIdentityTokenOnly
+//
+// [UpdateOpenIdConnectConfiguration]: https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_UpdateOpenIdConnectConfiguration.html
+// [UpdateIdentitySource]: https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_UpdateIdentitySource.html
+type UpdateOpenIdConnectTokenSelection interface {
+	isUpdateOpenIdConnectTokenSelection()
+}
+
+// The OIDC configuration for processing access tokens. Contains allowed audience
+// claims, for example https://auth.example.com , and the claim that you want to
+// map to the principal, for example sub .
+type UpdateOpenIdConnectTokenSelectionMemberAccessTokenOnly struct {
+	Value UpdateOpenIdConnectAccessTokenConfiguration
+
+	noSmithyDocumentSerde
+}
+
+func (*UpdateOpenIdConnectTokenSelectionMemberAccessTokenOnly) isUpdateOpenIdConnectTokenSelection() {
+}
+
+// The OIDC configuration for processing identity (ID) tokens. Contains allowed
+// client ID claims, for example 1example23456789 , and the claim that you want to
+// map to the principal, for example sub .
+type UpdateOpenIdConnectTokenSelectionMemberIdentityTokenOnly struct {
+	Value UpdateOpenIdConnectIdentityTokenConfiguration
+
+	noSmithyDocumentSerde
+}
+
+func (*UpdateOpenIdConnectTokenSelectionMemberIdentityTokenOnly) isUpdateOpenIdConnectTokenSelection() {
+}
+
+// Contains information about updates to be applied to a policy.
+//
+// This data type is used as a request parameter in the [UpdatePolicy] operation.
 //
 // The following types satisfy this interface:
 //
 //	UpdatePolicyDefinitionMemberStatic
+//
+// [UpdatePolicy]: https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_UpdatePolicy.html
 type UpdatePolicyDefinition interface {
 	isUpdatePolicyDefinition()
 }
@@ -929,14 +2028,22 @@ func (*UpdatePolicyDefinitionMemberStatic) isUpdatePolicyDefinition() {}
 type UpdateStaticPolicyDefinition struct {
 
 	// Specifies the Cedar policy language text to be added to or replaced on the
-	// static policy. You can change only the following elements from the original
-	// content:
+	// static policy.
+	//
+	// You can change only the following elements from the original content:
+	//
 	//   - The action referenced by the policy.
+	//
 	//   - Any conditional clauses, such as when or unless clauses.
+	//
 	// You can't change the following elements:
+	//
 	//   - Changing from StaticPolicy to TemplateLinkedPolicy .
+	//
 	//   - The effect ( permit or forbid ) of the policy.
+	//
 	//   - The principal referenced by the policy.
+	//
 	//   - The resource referenced by the policy.
 	//
 	// This member is required.
@@ -968,24 +2075,31 @@ type ValidationExceptionField struct {
 // A structure that contains Cedar policy validation settings for the policy
 // store. The validation mode determines which validation failures that Cedar
 // considers serious enough to block acceptance of a new or edited static policy or
-// policy template. This data type is used as a request parameter in the
-// CreatePolicyStore (https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_CreatePolicyStore.html)
-// and UpdatePolicyStore (https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_UpdatePolicyStore.html)
-// operations.
+// policy template.
+//
+// This data type is used as a request parameter in the [CreatePolicyStore] and [UpdatePolicyStore] operations.
+//
+// [UpdatePolicyStore]: https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_UpdatePolicyStore.html
+// [CreatePolicyStore]: https://docs.aws.amazon.com/verifiedpermissions/latest/apireference/API_CreatePolicyStore.html
 type ValidationSettings struct {
 
 	// The validation mode currently configured for this policy store. The valid
 	// values are:
+	//
 	//   - OFF – Neither Verified Permissions nor Cedar perform any validation on
 	//   policies. No validation errors are reported by either service.
+	//
 	//   - STRICT – Requires a schema to be present in the policy store. Cedar
 	//   performs validation on all submitted new or updated static policies and policy
 	//   templates. Any that fail validation are rejected and Cedar doesn't store them in
 	//   the policy store.
+	//
 	// If Mode=STRICT and the policy store doesn't contain a schema, Verified
 	// Permissions rejects all static policies and policy templates because there is no
-	// schema to validate against. To submit a static policy or policy template without
-	// a schema, you must turn off validation.
+	// schema to validate against.
+	//
+	// To submit a static policy or policy template without a schema, you must turn
+	// off validation.
 	//
 	// This member is required.
 	Mode ValidationMode
@@ -1004,14 +2118,20 @@ type UnknownUnionMember struct {
 	noSmithyDocumentSerde
 }
 
-func (*UnknownUnionMember) isAttributeValue()         {}
-func (*UnknownUnionMember) isConfiguration()          {}
-func (*UnknownUnionMember) isContextDefinition()      {}
-func (*UnknownUnionMember) isEntitiesDefinition()     {}
-func (*UnknownUnionMember) isEntityReference()        {}
-func (*UnknownUnionMember) isPolicyDefinition()       {}
-func (*UnknownUnionMember) isPolicyDefinitionDetail() {}
-func (*UnknownUnionMember) isPolicyDefinitionItem()   {}
-func (*UnknownUnionMember) isSchemaDefinition()       {}
-func (*UnknownUnionMember) isUpdateConfiguration()    {}
-func (*UnknownUnionMember) isUpdatePolicyDefinition() {}
+func (*UnknownUnionMember) isAttributeValue()                    {}
+func (*UnknownUnionMember) isConfiguration()                     {}
+func (*UnknownUnionMember) isConfigurationDetail()               {}
+func (*UnknownUnionMember) isConfigurationItem()                 {}
+func (*UnknownUnionMember) isContextDefinition()                 {}
+func (*UnknownUnionMember) isEntitiesDefinition()                {}
+func (*UnknownUnionMember) isEntityReference()                   {}
+func (*UnknownUnionMember) isOpenIdConnectTokenSelection()       {}
+func (*UnknownUnionMember) isOpenIdConnectTokenSelectionDetail() {}
+func (*UnknownUnionMember) isOpenIdConnectTokenSelectionItem()   {}
+func (*UnknownUnionMember) isPolicyDefinition()                  {}
+func (*UnknownUnionMember) isPolicyDefinitionDetail()            {}
+func (*UnknownUnionMember) isPolicyDefinitionItem()              {}
+func (*UnknownUnionMember) isSchemaDefinition()                  {}
+func (*UnknownUnionMember) isUpdateConfiguration()               {}
+func (*UnknownUnionMember) isUpdateOpenIdConnectTokenSelection() {}
+func (*UnknownUnionMember) isUpdatePolicyDefinition()            {}

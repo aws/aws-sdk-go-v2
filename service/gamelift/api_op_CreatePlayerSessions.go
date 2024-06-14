@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/gamelift/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -15,16 +14,25 @@ import (
 // Reserves open slots in a game session for a group of players. New player
 // sessions can be created in any game session with an open slot that is in ACTIVE
 // status and has a player creation policy of ACCEPT_ALL . To add a single player
-// to a game session, use CreatePlayerSession (https://docs.aws.amazon.com/gamelift/latest/apireference/API_CreatePlayerSession.html)
+// to a game session, use [CreatePlayerSession]
+//
 // To create player sessions, specify a game session ID and a list of player IDs.
-// Optionally, provide a set of player data for each player ID. If successful, a
-// slot is reserved in the game session for each player, and new PlayerSession
-// objects are returned with player session IDs. Each player references their
-// player session ID when sending a connection request to the game session, and the
-// game server can use it to validate the player reservation with the Amazon
-// GameLift service. Player sessions cannot be updated. The maximum number of
-// players per game session is 200. It is not adjustable. Related actions All APIs
-// by task (https://docs.aws.amazon.com/gamelift/latest/developerguide/reference-awssdk.html#reference-awssdk-resources-fleets)
+// Optionally, provide a set of player data for each player ID.
+//
+// If successful, a slot is reserved in the game session for each player, and new
+// PlayerSession objects are returned with player session IDs. Each player
+// references their player session ID when sending a connection request to the game
+// session, and the game server can use it to validate the player reservation with
+// the Amazon GameLift service. Player sessions cannot be updated.
+//
+// The maximum number of players per game session is 200. It is not adjustable.
+//
+// # Related actions
+//
+// [All APIs by task]
+//
+// [CreatePlayerSession]: https://docs.aws.amazon.com/gamelift/latest/apireference/API_CreatePlayerSession.html
+// [All APIs by task]: https://docs.aws.amazon.com/gamelift/latest/developerguide/reference-awssdk.html#reference-awssdk-resources-fleets
 func (c *Client) CreatePlayerSessions(ctx context.Context, params *CreatePlayerSessionsInput, optFns ...func(*Options)) (*CreatePlayerSessionsOutput, error) {
 	if params == nil {
 		params = &CreatePlayerSessionsInput{}
@@ -94,25 +102,25 @@ func (c *Client) addOperationCreatePlayerSessionsMiddlewares(stack *middleware.S
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -127,13 +135,16 @@ func (c *Client) addOperationCreatePlayerSessionsMiddlewares(stack *middleware.S
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpCreatePlayerSessionsValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreatePlayerSessions(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

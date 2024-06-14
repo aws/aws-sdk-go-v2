@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/lightsail/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -32,12 +31,21 @@ func (c *Client) GetCostEstimate(ctx context.Context, params *GetCostEstimateInp
 
 type GetCostEstimateInput struct {
 
-	// The cost estimate end time. Constraints:
+	// The cost estimate end time.
+	//
+	// Constraints:
+	//
 	//   - Specified in Coordinated Universal Time (UTC).
-	//   - Specified in the Unix time format. For example, if you want to use an end
-	//   time of October 1, 2018, at 9 PM UTC, specify 1538427600 as the end time.
+	//
+	//   - Specified in the Unix time format.
+	//
+	// For example, if you want to use an end time of October 1, 2018, at 9 PM UTC,
+	//   specify 1538427600 as the end time.
+	//
 	// You can convert a human-friendly time to Unix time format using a converter
-	// like Epoch converter (https://www.epochconverter.com/) .
+	// like [Epoch converter].
+	//
+	// [Epoch converter]: https://www.epochconverter.com/
 	//
 	// This member is required.
 	EndTime *time.Time
@@ -47,12 +55,21 @@ type GetCostEstimateInput struct {
 	// This member is required.
 	ResourceName *string
 
-	// The cost estimate start time. Constraints:
+	// The cost estimate start time.
+	//
+	// Constraints:
+	//
 	//   - Specified in Coordinated Universal Time (UTC).
-	//   - Specified in the Unix time format. For example, if you want to use a start
-	//   time of October 1, 2018, at 8 PM UTC, specify 1538424000 as the start time.
+	//
+	//   - Specified in the Unix time format.
+	//
+	// For example, if you want to use a start time of October 1, 2018, at 8 PM UTC,
+	//   specify 1538424000 as the start time.
+	//
 	// You can convert a human-friendly time to Unix time format using a converter
-	// like Epoch converter (https://www.epochconverter.com/) .
+	// like [Epoch converter].
+	//
+	// [Epoch converter]: https://www.epochconverter.com/
 	//
 	// This member is required.
 	StartTime *time.Time
@@ -93,25 +110,25 @@ func (c *Client) addOperationGetCostEstimateMiddlewares(stack *middleware.Stack,
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -126,13 +143,16 @@ func (c *Client) addOperationGetCostEstimateMiddlewares(stack *middleware.Stack,
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpGetCostEstimateValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetCostEstimate(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

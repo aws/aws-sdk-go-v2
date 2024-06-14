@@ -6,21 +6,23 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/connect/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates the traffic distribution for a given traffic distribution group. The
-// SignInConfig distribution is available only on a default
-// TrafficDistributionGroup (see the IsDefault parameter in the
-// TrafficDistributionGroup (https://docs.aws.amazon.com/connect/latest/APIReference/API_TrafficDistributionGroup.html)
-// data type). If you call UpdateTrafficDistribution with a modified SignInConfig
-// and a non-default TrafficDistributionGroup , an InvalidRequestException is
-// returned. For more information about updating a traffic distribution group, see
-// Update telephony traffic distribution across Amazon Web Services Regions  (https://docs.aws.amazon.com/connect/latest/adminguide/update-telephony-traffic-distribution.html)
-// in the Amazon Connect Administrator Guide.
+// Updates the traffic distribution for a given traffic distribution group.
+//
+// The SignInConfig distribution is available only on a default
+// TrafficDistributionGroup (see the IsDefault parameter in the [TrafficDistributionGroup] data type). If
+// you call UpdateTrafficDistribution with a modified SignInConfig and a
+// non-default TrafficDistributionGroup , an InvalidRequestException is returned.
+//
+// For more information about updating a traffic distribution group, see [Update telephony traffic distribution across Amazon Web Services Regions] in the
+// Amazon Connect Administrator Guide.
+//
+// [TrafficDistributionGroup]: https://docs.aws.amazon.com/connect/latest/APIReference/API_TrafficDistributionGroup.html
+// [Update telephony traffic distribution across Amazon Web Services Regions]: https://docs.aws.amazon.com/connect/latest/adminguide/update-telephony-traffic-distribution.html
 func (c *Client) UpdateTrafficDistribution(ctx context.Context, params *UpdateTrafficDistributionInput, optFns ...func(*Options)) (*UpdateTrafficDistributionOutput, error) {
 	if params == nil {
 		params = &UpdateTrafficDistributionInput{}
@@ -87,25 +89,25 @@ func (c *Client) addOperationUpdateTrafficDistributionMiddlewares(stack *middlew
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -120,13 +122,16 @@ func (c *Client) addOperationUpdateTrafficDistributionMiddlewares(stack *middlew
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpUpdateTrafficDistributionValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateTrafficDistribution(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

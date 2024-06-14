@@ -6,18 +6,20 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Create a review template. Disclaimer Do not include or gather personal
-// identifiable information (PII) of end users or other identifiable individuals in
-// or via your review templates. If your review template or those shared with you
-// and used in your account do include or collect PII you are responsible for:
-// ensuring that the included PII is processed in accordance with applicable law,
-// providing adequate privacy notices, and obtaining necessary consents for
-// processing such data.
+// Create a review template.
+//
+// # Disclaimer
+//
+// Do not include or gather personal identifiable information (PII) of end users
+// or other identifiable individuals in or via your review templates. If your
+// review template or those shared with you and used in your account do include or
+// collect PII you are responsible for: ensuring that the included PII is processed
+// in accordance with applicable law, providing adequate privacy notices, and
+// obtaining necessary consents for processing such data.
 func (c *Client) CreateReviewTemplate(ctx context.Context, params *CreateReviewTemplateInput, optFns ...func(*Options)) (*CreateReviewTemplateOutput, error) {
 	if params == nil {
 		params = &CreateReviewTemplateInput{}
@@ -36,13 +38,17 @@ func (c *Client) CreateReviewTemplate(ctx context.Context, params *CreateReviewT
 type CreateReviewTemplateInput struct {
 
 	// A unique case-sensitive string used to ensure that this request is idempotent
-	// (executes only once). You should not reuse the same token for other requests. If
-	// you retry a request with the same client request token and the same parameters
-	// after the original request has completed successfully, the result of the
-	// original request is returned. This token is listed as required, however, if you
-	// do not specify it, the Amazon Web Services SDKs automatically generate one for
-	// you. If you are not using the Amazon Web Services SDK or the CLI, you must
-	// provide this token or the request will fail.
+	// (executes only once).
+	//
+	// You should not reuse the same token for other requests. If you retry a request
+	// with the same client request token and the same parameters after the original
+	// request has completed successfully, the result of the original request is
+	// returned.
+	//
+	// This token is listed as required, however, if you do not specify it, the Amazon
+	// Web Services SDKs automatically generate one for you. If you are not using the
+	// Amazon Web Services SDK or the CLI, you must provide this token or the request
+	// will fail.
 	//
 	// This member is required.
 	ClientRequestToken *string
@@ -62,8 +68,10 @@ type CreateReviewTemplateInput struct {
 	// This member is required.
 	TemplateName *string
 
-	// The notes associated with the workload. For a review template, these are the
-	// notes that will be associated with the workload when the template is applied.
+	// The notes associated with the workload.
+	//
+	// For a review template, these are the notes that will be associated with the
+	// workload when the template is applied.
 	Notes *string
 
 	// The tags assigned to the review template.
@@ -105,25 +113,25 @@ func (c *Client) addOperationCreateReviewTemplateMiddlewares(stack *middleware.S
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -138,6 +146,9 @@ func (c *Client) addOperationCreateReviewTemplateMiddlewares(stack *middleware.S
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opCreateReviewTemplateMiddleware(stack, options); err != nil {
 		return err
 	}
@@ -147,7 +158,7 @@ func (c *Client) addOperationCreateReviewTemplateMiddlewares(stack *middleware.S
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateReviewTemplate(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

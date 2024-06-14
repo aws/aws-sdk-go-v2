@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/iottwinmaker/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -14,9 +13,11 @@ import (
 )
 
 // Retrieves information about the history of a time series property value for a
-// component, component type, entity, or workspace. You must specify a value for
-// workspaceId . For entity-specific queries, specify values for componentName and
-// entityId . For cross-entity quries, specify a value for componentTypeId .
+// component, component type, entity, or workspace.
+//
+// You must specify a value for workspaceId . For entity-specific queries, specify
+// values for componentName and entityId . For cross-entity quries, specify a value
+// for componentTypeId .
 func (c *Client) GetPropertyValueHistory(ctx context.Context, params *GetPropertyValueHistoryInput, optFns ...func(*Options)) (*GetPropertyValueHistoryOutput, error) {
 	if params == nil {
 		params = &GetPropertyValueHistoryInput{}
@@ -60,9 +61,11 @@ type GetPropertyValueHistoryInput struct {
 	// endTime instead.
 	EndDateTime *time.Time
 
-	// The ISO8601 DateTime of the latest property value to return. For more
-	// information about the ISO8601 DateTime format, see the data type PropertyValue (https://docs.aws.amazon.com/iot-twinmaker/latest/apireference/API_PropertyValue.html)
-	// .
+	// The ISO8601 DateTime of the latest property value to return.
+	//
+	// For more information about the ISO8601 DateTime format, see the data type [PropertyValue].
+	//
+	// [PropertyValue]: https://docs.aws.amazon.com/iot-twinmaker/latest/apireference/API_PropertyValue.html
 	EndTime *string
 
 	// The ID of the entity.
@@ -72,8 +75,9 @@ type GetPropertyValueHistoryInput struct {
 	// interpolate data.
 	Interpolation *types.InterpolationParameters
 
-	// The maximum number of results to return at one time. The default is 25. Valid
-	// Range: Minimum value of 1. Maximum value of 250.
+	// The maximum number of results to return at one time. The default is 25.
+	//
+	// Valid Range: Minimum value of 1. Maximum value of 250.
 	MaxResults *int32
 
 	// The string that specifies the next page of results.
@@ -91,9 +95,11 @@ type GetPropertyValueHistoryInput struct {
 	// startTime instead.
 	StartDateTime *time.Time
 
-	// The ISO8601 DateTime of the earliest property value to return. For more
-	// information about the ISO8601 DateTime format, see the data type PropertyValue (https://docs.aws.amazon.com/iot-twinmaker/latest/apireference/API_PropertyValue.html)
-	// .
+	// The ISO8601 DateTime of the earliest property value to return.
+	//
+	// For more information about the ISO8601 DateTime format, see the data type [PropertyValue].
+	//
+	// [PropertyValue]: https://docs.aws.amazon.com/iot-twinmaker/latest/apireference/API_PropertyValue.html
 	StartTime *string
 
 	noSmithyDocumentSerde
@@ -138,25 +144,25 @@ func (c *Client) addOperationGetPropertyValueHistoryMiddlewares(stack *middlewar
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -171,6 +177,9 @@ func (c *Client) addOperationGetPropertyValueHistoryMiddlewares(stack *middlewar
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addEndpointPrefix_opGetPropertyValueHistoryMiddleware(stack); err != nil {
 		return err
 	}
@@ -180,7 +189,7 @@ func (c *Client) addOperationGetPropertyValueHistoryMiddlewares(stack *middlewar
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetPropertyValueHistory(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
@@ -236,8 +245,9 @@ var _ GetPropertyValueHistoryAPIClient = (*Client)(nil)
 // GetPropertyValueHistoryPaginatorOptions is the paginator options for
 // GetPropertyValueHistory
 type GetPropertyValueHistoryPaginatorOptions struct {
-	// The maximum number of results to return at one time. The default is 25. Valid
-	// Range: Minimum value of 1. Maximum value of 250.
+	// The maximum number of results to return at one time. The default is 25.
+	//
+	// Valid Range: Minimum value of 1. Maximum value of 250.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

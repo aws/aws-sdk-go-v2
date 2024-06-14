@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/iot/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -14,11 +13,15 @@ import (
 
 // Creates a 2048-bit RSA key pair and issues an X.509 certificate using the
 // issued public key. You can also call CreateKeysAndCertificate over MQTT from a
-// device, for more information, see Provisioning MQTT API (https://docs.aws.amazon.com/iot/latest/developerguide/provision-wo-cert.html#provision-mqtt-api)
-// . Note This is the only time IoT issues the private key for this certificate, so
-// it is important to keep it in a secure location. Requires permission to access
-// the CreateKeysAndCertificate (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
-// action.
+// device, for more information, see [Provisioning MQTT API].
+//
+// Note This is the only time IoT issues the private key for this certificate, so
+// it is important to keep it in a secure location.
+//
+// Requires permission to access the [CreateKeysAndCertificate] action.
+//
+// [CreateKeysAndCertificate]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions
+// [Provisioning MQTT API]: https://docs.aws.amazon.com/iot/latest/developerguide/provision-wo-cert.html#provision-mqtt-api
 func (c *Client) CreateKeysAndCertificate(ctx context.Context, params *CreateKeysAndCertificateInput, optFns ...func(*Options)) (*CreateKeysAndCertificateOutput, error) {
 	if params == nil {
 		params = &CreateKeysAndCertificateInput{}
@@ -34,9 +37,11 @@ func (c *Client) CreateKeysAndCertificate(ctx context.Context, params *CreateKey
 	return out, nil
 }
 
-// The input for the CreateKeysAndCertificate operation. Requires permission to
-// access the CreateKeysAndCertificateRequest (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
-// action.
+// The input for the CreateKeysAndCertificate operation.
+//
+// Requires permission to access the [CreateKeysAndCertificateRequest] action.
+//
+// [CreateKeysAndCertificateRequest]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions
 type CreateKeysAndCertificateInput struct {
 
 	// Specifies whether the certificate is active.
@@ -89,25 +94,25 @@ func (c *Client) addOperationCreateKeysAndCertificateMiddlewares(stack *middlewa
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -122,10 +127,13 @@ func (c *Client) addOperationCreateKeysAndCertificateMiddlewares(stack *middlewa
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateKeysAndCertificate(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

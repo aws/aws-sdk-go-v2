@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -30,8 +29,9 @@ func (c *Client) CreateDashboard(ctx context.Context, params *CreateDashboardInp
 type CreateDashboardInput struct {
 
 	// The dashboard definition specified in a JSON literal. For detailed information,
-	// see Creating dashboards (CLI) (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/create-dashboards-using-aws-cli.html)
-	// in the IoT SiteWise User Guide.
+	// see [Creating dashboards (CLI)]in the IoT SiteWise User Guide.
+	//
+	// [Creating dashboards (CLI)]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/create-dashboards-using-aws-cli.html
 	//
 	// This member is required.
 	DashboardDefinition *string
@@ -55,8 +55,9 @@ type CreateDashboardInput struct {
 	DashboardDescription *string
 
 	// A list of key-value pairs that contain metadata for the dashboard. For more
-	// information, see Tagging your IoT SiteWise resources (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/tag-resources.html)
-	// in the IoT SiteWise User Guide.
+	// information, see [Tagging your IoT SiteWise resources]in the IoT SiteWise User Guide.
+	//
+	// [Tagging your IoT SiteWise resources]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/tag-resources.html
 	Tags map[string]string
 
 	noSmithyDocumentSerde
@@ -64,9 +65,11 @@ type CreateDashboardInput struct {
 
 type CreateDashboardOutput struct {
 
-	// The ARN (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html)
-	// of the dashboard, which has the following format.
-	// arn:${Partition}:iotsitewise:${Region}:${Account}:dashboard/${DashboardId}
+	// The [ARN] of the dashboard, which has the following format.
+	//
+	//     arn:${Partition}:iotsitewise:${Region}:${Account}:dashboard/${DashboardId}
+	//
+	// [ARN]: https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
 	//
 	// This member is required.
 	DashboardArn *string
@@ -104,25 +107,25 @@ func (c *Client) addOperationCreateDashboardMiddlewares(stack *middleware.Stack,
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -137,6 +140,9 @@ func (c *Client) addOperationCreateDashboardMiddlewares(stack *middleware.Stack,
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addEndpointPrefix_opCreateDashboardMiddleware(stack); err != nil {
 		return err
 	}
@@ -149,7 +155,7 @@ func (c *Client) addOperationCreateDashboardMiddlewares(stack *middleware.Stack,
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateDashboard(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

@@ -60,7 +60,8 @@ func (e *ResourceInUse) ErrorCode() string {
 }
 func (e *ResourceInUse) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// You have exceeded an SageMaker resource limit. For example, you might have too
+//	You have exceeded an SageMaker resource limit. For example, you might have too
+//
 // many training jobs created.
 type ResourceLimitExceeded struct {
 	Message *string

@@ -6,14 +6,16 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Disassociate a lens from a workload. Up to 10 lenses can be disassociated from
-// a workload in a single API operation. The Amazon Web Services Well-Architected
-// Framework lens ( wellarchitected ) cannot be removed from a workload.
+// Disassociate a lens from a workload.
+//
+// Up to 10 lenses can be disassociated from a workload in a single API operation.
+//
+// The Amazon Web Services Well-Architected Framework lens ( wellarchitected )
+// cannot be removed from a workload.
 func (c *Client) DisassociateLenses(ctx context.Context, params *DisassociateLensesInput, optFns ...func(*Options)) (*DisassociateLensesOutput, error) {
 	if params == nil {
 		params = &DisassociateLensesInput{}
@@ -33,7 +35,9 @@ func (c *Client) DisassociateLenses(ctx context.Context, params *DisassociateLen
 type DisassociateLensesInput struct {
 
 	// List of lens aliases to associate or disassociate with a workload. Up to 10
-	// lenses can be specified. Identify a lens using its LensSummary$LensAlias .
+	// lenses can be specified.
+	//
+	// Identify a lens using its LensSummary$LensAlias.
 	//
 	// This member is required.
 	LensAliases []string
@@ -76,25 +80,25 @@ func (c *Client) addOperationDisassociateLensesMiddlewares(stack *middleware.Sta
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -109,13 +113,16 @@ func (c *Client) addOperationDisassociateLensesMiddlewares(stack *middleware.Sta
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDisassociateLensesValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDisassociateLenses(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

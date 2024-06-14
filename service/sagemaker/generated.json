@@ -4,7 +4,6 @@
         "github.com/aws/aws-sdk-go-v2/internal/configsources": "v0.0.0-00010101000000-000000000000",
         "github.com/aws/aws-sdk-go-v2/internal/endpoints/v2": "v2.0.0-00010101000000-000000000000",
         "github.com/aws/smithy-go": "v1.4.0",
-        "github.com/google/go-cmp": "v0.5.4",
         "github.com/jmespath/go-jmespath": "v0.4.0"
     },
     "files": [
@@ -297,6 +296,7 @@
         "api_op_UpdateAppImageConfig.go",
         "api_op_UpdateArtifact.go",
         "api_op_UpdateCluster.go",
+        "api_op_UpdateClusterSoftware.go",
         "api_op_UpdateCodeRepository.go",
         "api_op_UpdateContext.go",
         "api_op_UpdateDeviceFleet.go",
@@ -341,6 +341,7 @@
         "options.go",
         "protocol_test.go",
         "serializers.go",
+        "snapshot_test.go",
         "types/enums.go",
         "types/errors.go",
         "types/types.go",

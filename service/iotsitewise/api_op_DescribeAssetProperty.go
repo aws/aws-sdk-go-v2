@@ -6,19 +6,22 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/iotsitewise/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Retrieves information about an asset property. When you call this operation for
-// an attribute property, this response includes the default attribute value that
-// you define in the asset model. If you update the default value in the model,
-// this operation's response includes the new default value. This operation doesn't
-// return the value of the asset property. To get the value of an asset property,
-// use GetAssetPropertyValue (https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_GetAssetPropertyValue.html)
-// .
+// Retrieves information about an asset property.
+//
+// When you call this operation for an attribute property, this response includes
+// the default attribute value that you define in the asset model. If you update
+// the default value in the model, this operation's response includes the new
+// default value.
+//
+// This operation doesn't return the value of the asset property. To get the value
+// of an asset property, use [GetAssetPropertyValue].
+//
+// [GetAssetPropertyValue]: https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_GetAssetPropertyValue.html
 func (c *Client) DescribeAssetProperty(ctx context.Context, params *DescribeAssetPropertyInput, optFns ...func(*Options)) (*DescribeAssetPropertyOutput, error) {
 	if params == nil {
 		params = &DescribeAssetPropertyInput{}
@@ -38,16 +41,18 @@ type DescribeAssetPropertyInput struct {
 
 	// The ID of the asset. This can be either the actual ID in UUID format, or else
 	// externalId: followed by the external ID, if it has one. For more information,
-	// see Referencing objects with external IDs (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/object-ids.html#external-id-references)
-	// in the IoT SiteWise User Guide.
+	// see [Referencing objects with external IDs]in the IoT SiteWise User Guide.
+	//
+	// [Referencing objects with external IDs]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/object-ids.html#external-id-references
 	//
 	// This member is required.
 	AssetId *string
 
 	// The ID of the asset property. This can be either the actual ID in UUID format,
 	// or else externalId: followed by the external ID, if it has one. For more
-	// information, see Referencing objects with external IDs (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/object-ids.html#external-id-references)
-	// in the IoT SiteWise User Guide.
+	// information, see [Referencing objects with external IDs]in the IoT SiteWise User Guide.
+	//
+	// [Referencing objects with external IDs]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/object-ids.html#external-id-references
 	//
 	// This member is required.
 	PropertyId *string
@@ -72,14 +77,17 @@ type DescribeAssetPropertyOutput struct {
 	// This member is required.
 	AssetName *string
 
-	// The external ID of the asset. For more information, see Using external IDs (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/object-ids.html#external-ids)
-	// in the IoT SiteWise User Guide.
+	// The external ID of the asset. For more information, see [Using external IDs] in the IoT SiteWise
+	// User Guide.
+	//
+	// [Using external IDs]: https://docs.aws.amazon.com/iot-sitewise/latest/userguide/object-ids.html#external-ids
 	AssetExternalId *string
 
-	// The asset property's definition, alias, and notification state. This response
-	// includes this object for normal asset properties. If you describe an asset
-	// property in a composite model, this response includes the asset property
-	// information in compositeModel .
+	// The asset property's definition, alias, and notification state.
+	//
+	// This response includes this object for normal asset properties. If you describe
+	// an asset property in a composite model, this response includes the asset
+	// property information in compositeModel .
 	AssetProperty *types.Property
 
 	// The composite model that declares this asset property, if this asset property
@@ -114,25 +122,25 @@ func (c *Client) addOperationDescribeAssetPropertyMiddlewares(stack *middleware.
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -147,6 +155,9 @@ func (c *Client) addOperationDescribeAssetPropertyMiddlewares(stack *middleware.
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addEndpointPrefix_opDescribeAssetPropertyMiddleware(stack); err != nil {
 		return err
 	}
@@ -156,7 +167,7 @@ func (c *Client) addOperationDescribeAssetPropertyMiddlewares(stack *middleware.
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeAssetProperty(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

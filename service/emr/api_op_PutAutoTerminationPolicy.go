@@ -6,19 +6,21 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/emr/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Auto-termination is supported in Amazon EMR releases 5.30.0 and 6.1.0 and
-// later. For more information, see Using an auto-termination policy (https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-auto-termination-policy.html)
-// . Creates or updates an auto-termination policy for an Amazon EMR cluster. An
+// later. For more information, see [Using an auto-termination policy].
+//
+// Creates or updates an auto-termination policy for an Amazon EMR cluster. An
 // auto-termination policy defines the amount of idle time in seconds after which a
 // cluster automatically terminates. For alternative cluster termination options,
-// see Control cluster termination (https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-plan-termination.html)
-// .
+// see [Control cluster termination].
+//
+// [Using an auto-termination policy]: https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-auto-termination-policy.html
+// [Control cluster termination]: https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-plan-termination.html
 func (c *Client) PutAutoTerminationPolicy(ctx context.Context, params *PutAutoTerminationPolicyInput, optFns ...func(*Options)) (*PutAutoTerminationPolicyOutput, error) {
 	if params == nil {
 		params = &PutAutoTerminationPolicyInput{}
@@ -77,25 +79,25 @@ func (c *Client) addOperationPutAutoTerminationPolicyMiddlewares(stack *middlewa
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -110,13 +112,16 @@ func (c *Client) addOperationPutAutoTerminationPolicyMiddlewares(stack *middlewa
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpPutAutoTerminationPolicyValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opPutAutoTerminationPolicy(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

@@ -6,19 +6,22 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Starts a task that restores an AMI from an Amazon S3 object that was previously
-// created by using CreateStoreImageTask (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateStoreImageTask.html)
-// . To use this API, you must have the required permissions. For more information,
-// see Permissions for storing and restoring AMIs using Amazon S3 (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ami-store-restore.html#ami-s3-permissions)
-// in the Amazon EC2 User Guide. For more information, see Store and restore an
-// AMI using Amazon S3 (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ami-store-restore.html)
-// in the Amazon EC2 User Guide.
+// created by using [CreateStoreImageTask].
+//
+// To use this API, you must have the required permissions. For more information,
+// see [Permissions for storing and restoring AMIs using Amazon S3]in the Amazon EC2 User Guide.
+//
+// For more information, see [Store and restore an AMI using Amazon S3] in the Amazon EC2 User Guide.
+//
+// [CreateStoreImageTask]: https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateStoreImageTask.html
+// [Store and restore an AMI using Amazon S3]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ami-store-restore.html
+// [Permissions for storing and restoring AMIs using Amazon S3]: https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ami-store-restore.html#ami-s3-permissions
 func (c *Client) CreateRestoreImageTask(ctx context.Context, params *CreateRestoreImageTaskInput, optFns ...func(*Options)) (*CreateRestoreImageTaskOutput, error) {
 	if params == nil {
 		params = &CreateRestoreImageTaskInput{}
@@ -59,7 +62,9 @@ type CreateRestoreImageTaskInput struct {
 
 	// The tags to apply to the AMI and snapshots on restoration. You can tag the AMI,
 	// the snapshots, or both.
+	//
 	//   - To tag the AMI, the value for ResourceType must be image .
+	//
 	//   - To tag the snapshots, the value for ResourceType must be snapshot . The same
 	//   tag is applied to all of the snapshots that are created.
 	TagSpecifications []types.TagSpecification
@@ -100,25 +105,25 @@ func (c *Client) addOperationCreateRestoreImageTaskMiddlewares(stack *middleware
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -133,13 +138,16 @@ func (c *Client) addOperationCreateRestoreImageTaskMiddlewares(stack *middleware
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpCreateRestoreImageTaskValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateRestoreImageTask(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/appsync/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -51,10 +50,11 @@ type CreateDataSourceInput struct {
 	// Amazon DynamoDB settings.
 	DynamodbConfig *types.DynamodbDataSourceConfig
 
-	// Amazon OpenSearch Service settings. As of September 2021, Amazon Elasticsearch
-	// service is Amazon OpenSearch Service. This configuration is deprecated. For new
-	// data sources, use CreateDataSourceRequest$openSearchServiceConfig to create an
-	// OpenSearch data source.
+	// Amazon OpenSearch Service settings.
+	//
+	// As of September 2021, Amazon Elasticsearch service is Amazon OpenSearch
+	// Service. This configuration is deprecated. For new data sources, use CreateDataSourceRequest$openSearchServiceConfigto create
+	// an OpenSearch data source.
 	ElasticsearchConfig *types.ElasticsearchDataSourceConfig
 
 	// Amazon EventBridge settings.
@@ -70,8 +70,9 @@ type CreateDataSourceInput struct {
 	// Note that metricsConfig won't be used unless the dataSourceLevelMetricsBehavior
 	// value is set to PER_DATA_SOURCE_METRICS . If the dataSourceLevelMetricsBehavior
 	// is set to FULL_REQUEST_DATA_SOURCE_METRICS instead, metricsConfig will be
-	// ignored. However, you can still set its value. metricsConfig can be ENABLED or
-	// DISABLED .
+	// ignored. However, you can still set its value.
+	//
+	// metricsConfig can be ENABLED or DISABLED .
 	MetricsConfig types.DataSourceLevelMetricsConfig
 
 	// Amazon OpenSearch Service settings.
@@ -121,25 +122,25 @@ func (c *Client) addOperationCreateDataSourceMiddlewares(stack *middleware.Stack
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -154,13 +155,16 @@ func (c *Client) addOperationCreateDataSourceMiddlewares(stack *middleware.Stack
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpCreateDataSourceValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateDataSource(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

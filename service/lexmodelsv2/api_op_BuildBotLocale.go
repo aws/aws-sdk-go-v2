@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/lexmodelsv2/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -34,8 +33,9 @@ func (c *Client) BuildBotLocale(ctx context.Context, params *BuildBotLocaleInput
 type BuildBotLocaleInput struct {
 
 	// The identifier of the bot to build. The identifier is returned in the response
-	// from the CreateBot (https://docs.aws.amazon.com/lexv2/latest/APIReference/API_CreateBot.html)
-	// operation.
+	// from the [CreateBot]operation.
+	//
+	// [CreateBot]: https://docs.aws.amazon.com/lexv2/latest/APIReference/API_CreateBot.html
 	//
 	// This member is required.
 	BotId *string
@@ -47,9 +47,9 @@ type BuildBotLocaleInput struct {
 
 	// The identifier of the language and locale that the bot will be used in. The
 	// string must match one of the supported locales. All of the intents, slot types,
-	// and slots used in the bot must have the same locale. For more information, see
-	// Supported languages (https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html)
-	// .
+	// and slots used in the bot must have the same locale. For more information, see [Supported languages].
+	//
+	// [Supported languages]: https://docs.aws.amazon.com/lexv2/latest/dg/how-languages.html
 	//
 	// This member is required.
 	LocaleId *string
@@ -106,25 +106,25 @@ func (c *Client) addOperationBuildBotLocaleMiddlewares(stack *middleware.Stack, 
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -139,13 +139,16 @@ func (c *Client) addOperationBuildBotLocaleMiddlewares(stack *middleware.Stack, 
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpBuildBotLocaleValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opBuildBotLocale(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

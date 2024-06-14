@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/glue/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -54,9 +53,9 @@ type CreateCrawlerInput struct {
 	Classifiers []string
 
 	// Crawler configuration information. This versioned JSON string allows users to
-	// specify aspects of a crawler's behavior. For more information, see Setting
-	// crawler configuration options (https://docs.aws.amazon.com/glue/latest/dg/crawler-configuration.html)
-	// .
+	// specify aspects of a crawler's behavior. For more information, see [Setting crawler configuration options].
+	//
+	// [Setting crawler configuration options]: https://docs.aws.amazon.com/glue/latest/dg/crawler-configuration.html
 	Configuration *string
 
 	// The name of the SecurityConfiguration structure to be used by this crawler.
@@ -79,10 +78,10 @@ type CreateCrawlerInput struct {
 	// only folders that were added since the last crawler run.
 	RecrawlPolicy *types.RecrawlPolicy
 
-	// A cron expression used to specify the schedule (see Time-Based Schedules for
-	// Jobs and Crawlers (https://docs.aws.amazon.com/glue/latest/dg/monitor-data-warehouse-schedule.html)
-	// . For example, to run something every day at 12:15 UTC, you would specify:
-	// cron(15 12 * * ? *) .
+	// A cron expression used to specify the schedule (see [Time-Based Schedules for Jobs and Crawlers]. For example, to run
+	// something every day at 12:15 UTC, you would specify: cron(15 12 * * ? *) .
+	//
+	// [Time-Based Schedules for Jobs and Crawlers]: https://docs.aws.amazon.com/glue/latest/dg/monitor-data-warehouse-schedule.html
 	Schedule *string
 
 	// The policy for the crawler's update and deletion behavior.
@@ -92,9 +91,10 @@ type CreateCrawlerInput struct {
 	TablePrefix *string
 
 	// The tags to use with this crawler request. You may use tags to limit access to
-	// the crawler. For more information about tags in Glue, see Amazon Web Services
-	// Tags in Glue (https://docs.aws.amazon.com/glue/latest/dg/monitor-tags.html) in
-	// the developer guide.
+	// the crawler. For more information about tags in Glue, see [Amazon Web Services Tags in Glue]in the developer
+	// guide.
+	//
+	// [Amazon Web Services Tags in Glue]: https://docs.aws.amazon.com/glue/latest/dg/monitor-tags.html
 	Tags map[string]string
 
 	noSmithyDocumentSerde
@@ -129,25 +129,25 @@ func (c *Client) addOperationCreateCrawlerMiddlewares(stack *middleware.Stack, o
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -162,13 +162,16 @@ func (c *Client) addOperationCreateCrawlerMiddlewares(stack *middleware.Stack, o
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpCreateCrawlerValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateCrawler(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

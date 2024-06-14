@@ -6,16 +6,17 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/iot/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a new version for an existing IoT software package. Requires permission
-// to access the CreatePackageVersion (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
-// and GetIndexingConfiguration (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
-// actions.
+// Creates a new version for an existing IoT software package.
+//
+// Requires permission to access the [CreatePackageVersion] and [GetIndexingConfiguration] actions.
+//
+// [CreatePackageVersion]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions
+// [GetIndexingConfiguration]: https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions
 func (c *Client) CreatePackageVersion(ctx context.Context, params *CreatePackageVersionInput, optFns ...func(*Options)) (*CreatePackageVersionOutput, error) {
 	if params == nil {
 		params = &CreatePackageVersionInput{}
@@ -45,8 +46,9 @@ type CreatePackageVersionInput struct {
 
 	// Metadata that can be used to define a package version’s configuration. For
 	// example, the S3 file location, configuration options that are being sent to the
-	// device or fleet. The combined size of all the attributes on a package version is
-	// limited to 3KB.
+	// device or fleet.
+	//
+	// The combined size of all the attributes on a package version is limited to 3KB.
 	Attributes map[string]string
 
 	// A unique case-sensitive identifier that you can provide to ensure the
@@ -82,9 +84,9 @@ type CreatePackageVersionOutput struct {
 	// The Amazon Resource Name (ARN) for the package.
 	PackageVersionArn *string
 
-	// The status of the package version. For more information, see Package version
-	// lifecycle (https://docs.aws.amazon.com/iot/latest/developerguide/preparing-to-use-software-package-catalog.html#package-version-lifecycle)
-	// .
+	// The status of the package version. For more information, see [Package version lifecycle].
+	//
+	// [Package version lifecycle]: https://docs.aws.amazon.com/iot/latest/developerguide/preparing-to-use-software-package-catalog.html#package-version-lifecycle
 	Status types.PackageVersionStatus
 
 	// The name of the new package version.
@@ -118,25 +120,25 @@ func (c *Client) addOperationCreatePackageVersionMiddlewares(stack *middleware.S
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -151,6 +153,9 @@ func (c *Client) addOperationCreatePackageVersionMiddlewares(stack *middleware.S
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addIdempotencyToken_opCreatePackageVersionMiddleware(stack, options); err != nil {
 		return err
 	}
@@ -160,7 +165,7 @@ func (c *Client) addOperationCreatePackageVersionMiddlewares(stack *middleware.S
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreatePackageVersion(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

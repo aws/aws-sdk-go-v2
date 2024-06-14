@@ -6,21 +6,21 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/braket/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Retrieves the devices available in Amazon Braket. For backwards compatibility
-// with older versions of BraketSchemas, OpenQASM information is omitted from
-// GetDevice API calls. To get this information the user-agent needs to present a
-// recent version of the BraketSchemas (1.8.0 or later). The Braket SDK
-// automatically reports this for you. If you do not see OpenQASM results in the
-// GetDevice response when using a Braket SDK, you may need to set
-// AWS_EXECUTION_ENV environment variable to configure user-agent. See the code
-// examples provided below for how to do this for the AWS CLI, Boto3, and the Go,
-// Java, and JavaScript/TypeScript SDKs.
+// Retrieves the devices available in Amazon Braket.
+//
+// For backwards compatibility with older versions of BraketSchemas, OpenQASM
+// information is omitted from GetDevice API calls. To get this information the
+// user-agent needs to present a recent version of the BraketSchemas (1.8.0 or
+// later). The Braket SDK automatically reports this for you. If you do not see
+// OpenQASM results in the GetDevice response when using a Braket SDK, you may need
+// to set AWS_EXECUTION_ENV environment variable to configure user-agent. See the
+// code examples provided below for how to do this for the AWS CLI, Boto3, and the
+// Go, Java, and JavaScript/TypeScript SDKs.
 func (c *Client) GetDevice(ctx context.Context, params *GetDeviceInput, optFns ...func(*Options)) (*GetDeviceOutput, error) {
 	if params == nil {
 		params = &GetDeviceInput{}
@@ -111,25 +111,25 @@ func (c *Client) addOperationGetDeviceMiddlewares(stack *middleware.Stack, optio
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -144,13 +144,16 @@ func (c *Client) addOperationGetDeviceMiddlewares(stack *middleware.Stack, optio
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpGetDeviceValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opGetDevice(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

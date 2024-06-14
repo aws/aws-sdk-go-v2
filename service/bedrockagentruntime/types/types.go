@@ -3,154 +3,823 @@
 package types
 
 import (
+	"github.com/aws/aws-sdk-go-v2/service/bedrockagentruntime/document"
 	smithydocument "github.com/aws/smithy-go/document"
 )
 
-// input to lambda used in action group
+// Contains information about the action group being invoked. For more information
+// about the possible structures, see the InvocationInput tab in [OrchestrationTrace]in the Amazon
+// Bedrock User Guide.
+//
+// [OrchestrationTrace]: https://docs.aws.amazon.com/bedrock/latest/userguide/trace-orchestration.html
 type ActionGroupInvocationInput struct {
 
-	// Agent Trace Action Group Name
+	// The name of the action group.
 	ActionGroupName *string
 
-	// Agent Trace Action Group API path
+	// The path to the API to call, based off the action group.
 	ApiPath *string
 
-	// list of parameters included in action group invocation
+	// The function in the action group to call.
+	Function *string
+
+	// The parameters in the Lambda input event.
 	Parameters []Parameter
 
-	// Request Body Content Map
+	// The parameters in the request body for the Lambda input event.
 	RequestBody *RequestBody
 
-	// Agent Trace Action Group Action verb
+	// The API method being used, based off the action group.
 	Verb *string
 
 	noSmithyDocumentSerde
 }
 
-// output from lambda used in action group
+// Contains the JSON-formatted string returned by the API invoked by the action
+// group.
 type ActionGroupInvocationOutput struct {
 
-	// Agent Trace Action Group Lambda Invocation Output String
+	// The JSON-formatted string returned by the API invoked by the action group.
 	Text *string
 
 	noSmithyDocumentSerde
 }
 
-// Citations associated with final agent response
+// Contains information about the API operation that the agent predicts should be
+// called.
+//
+// This data type is used in the following API operations:
+//
+//   - In the returnControl field of the [InvokeAgent response]
+//
+// [InvokeAgent response]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_InvokeAgent.html#API_agent-runtime_InvokeAgent_ResponseSyntax
+type ApiInvocationInput struct {
+
+	// The action group that the API operation belongs to.
+	//
+	// This member is required.
+	ActionGroup *string
+
+	// The path to the API operation.
+	ApiPath *string
+
+	// The HTTP method of the API operation.
+	HttpMethod *string
+
+	// The parameters to provide for the API request, as the agent elicited from the
+	// user.
+	Parameters []ApiParameter
+
+	// The request body to provide for the API request, as the agent elicited from the
+	// user.
+	RequestBody *ApiRequestBody
+
+	noSmithyDocumentSerde
+}
+
+// Information about a parameter to provide to the API request.
+//
+// This data type is used in the following API operations:
+//
+// [InvokeAgent response]
+//
+// [InvokeAgent response]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_InvokeAgent.html#API_agent-runtime_InvokeAgent_ResponseSyntax
+type ApiParameter struct {
+
+	// The name of the parameter.
+	Name *string
+
+	// The data type for the parameter.
+	Type *string
+
+	// The value of the parameter.
+	Value *string
+
+	noSmithyDocumentSerde
+}
+
+// The request body to provide for the API request, as the agent elicited from the
+// user.
+//
+// This data type is used in the following API operations:
+//
+// [InvokeAgent response]
+//
+// [InvokeAgent response]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_InvokeAgent.html#API_agent-runtime_InvokeAgent_ResponseSyntax
+type ApiRequestBody struct {
+
+	// The content of the request body. The key of the object in this field is a media
+	// type defining the format of the request body.
+	Content map[string]PropertyParameters
+
+	noSmithyDocumentSerde
+}
+
+// Contains information about the API operation that was called from the action
+// group and the response body that was returned.
+//
+// This data type is used in the following API operations:
+//
+//   - In the returnControlInvocationResults of the [InvokeAgent request]
+//
+// [InvokeAgent request]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_InvokeAgent.html#API_agent-runtime_InvokeAgent_RequestSyntax
+type ApiResult struct {
+
+	// The action group that the API operation belongs to.
+	//
+	// This member is required.
+	ActionGroup *string
+
+	// The path to the API operation.
+	ApiPath *string
+
+	// The HTTP method for the API operation.
+	HttpMethod *string
+
+	// http status code from API execution response (for example: 200, 400, 500).
+	HttpStatusCode *int32
+
+	// The response body from the API operation. The key of the object is the content
+	// type (currently, only TEXT is supported). The response may be returned directly
+	// or from the Lambda function.
+	ResponseBody map[string]ContentBody
+
+	// Controls the final response state returned to end user when API/Function
+	// execution failed. When this state is FAILURE, the request would fail with
+	// dependency failure exception. When this state is REPROMPT, the API/function
+	// response will be sent to model for re-prompt
+	ResponseState ResponseState
+
+	noSmithyDocumentSerde
+}
+
+// Contains citations for a part of an agent response.
 type Attribution struct {
 
-	// List of citations
+	// A list of citations and related information for a part of an agent response.
 	Citations []Citation
 
 	noSmithyDocumentSerde
 }
 
-// Citation associated with the agent response
+// This property contains the document to chat with, along with its attributes.
+type ByteContentDoc struct {
+
+	// The MIME type of the document contained in the wrapper object.
+	//
+	// This member is required.
+	ContentType *string
+
+	// The byte value of the file to upload, encoded as a Base-64 string.
+	//
+	// This member is required.
+	Data []byte
+
+	// The file name of the document contained in the wrapper object.
+	//
+	// This member is required.
+	Identifier *string
+
+	noSmithyDocumentSerde
+}
+
+// An object containing a segment of the generated response that is based on a
+// source in the knowledge base, alongside information about the source.
+//
+// This data type is used in the following API operations:
+//
+// [InvokeAgent response]
+//   - – in the citations field
+//
+// [RetrieveAndGenerate response]
+//   - – in the citations field
+//
+// [RetrieveAndGenerate response]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_RetrieveAndGenerate.html#API_agent-runtime_RetrieveAndGenerate_ResponseSyntax
+// [InvokeAgent response]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_InvokeAgent.html#API_agent-runtime_InvokeAgent_ResponseSyntax
 type Citation struct {
 
-	// Generate response part
+	// Contains the generated response and metadata
 	GeneratedResponsePart *GeneratedResponsePart
 
-	// list of retrieved references
+	// Contains metadata about the sources cited for the generated response.
 	RetrievedReferences []RetrievedReference
 
 	noSmithyDocumentSerde
 }
 
-// Trace Part which is emitted when agent trace could not be generated
+// Contains the body of the API response.
+//
+// This data type is used in the following API operations:
+//
+//   - In the returnControlInvocationResults field of the [InvokeAgent request]
+//
+// [InvokeAgent request]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_InvokeAgent.html#API_agent-runtime_InvokeAgent_RequestSyntax
+type ContentBody struct {
+
+	// The body of the API response.
+	Body *string
+
+	noSmithyDocumentSerde
+}
+
+// The unique external source of the content contained in the wrapper object.
+type ExternalSource struct {
+
+	// The source type of the external source wrapper object.
+	//
+	// This member is required.
+	SourceType ExternalSourceType
+
+	// The identifier, contentType, and data of the external source wrapper object.
+	ByteContent *ByteContentDoc
+
+	// The S3 location of the external source wrapper object.
+	S3Location *S3ObjectDoc
+
+	noSmithyDocumentSerde
+}
+
+// Contains the generation configuration of the external source wrapper object.
+type ExternalSourcesGenerationConfiguration struct {
+
+	//  Additional model parameters and their corresponding values not included in the
+	// textInferenceConfig structure for an external source. Takes in custom model
+	// parameters specific to the language model being used.
+	AdditionalModelRequestFields map[string]document.Interface
+
+	// The configuration details for the guardrail.
+	GuardrailConfiguration *GuardrailConfiguration
+
+	//  Configuration settings for inference when using RetrieveAndGenerate to
+	// generate responses while using an external source.
+	InferenceConfig *InferenceConfig
+
+	// Contain the textPromptTemplate string for the external source wrapper object.
+	PromptTemplate *PromptTemplate
+
+	noSmithyDocumentSerde
+}
+
+// The configurations of the external source wrapper object in the
+// retrieveAndGenerate function.
+type ExternalSourcesRetrieveAndGenerateConfiguration struct {
+
+	// The modelArn used with the external source wrapper object in the
+	// retrieveAndGenerate function.
+	//
+	// This member is required.
+	ModelArn *string
+
+	// The document used with the external source wrapper object in the
+	// retrieveAndGenerate function.
+	//
+	// This member is required.
+	Sources []ExternalSource
+
+	// The prompt used with the external source wrapper object with the
+	// retrieveAndGenerate function.
+	GenerationConfiguration *ExternalSourcesGenerationConfiguration
+
+	noSmithyDocumentSerde
+}
+
+// Contains information about the failure of the interaction.
 type FailureTrace struct {
 
-	// Agent Trace Failed Reason String
+	// The reason the interaction failed.
 	FailureReason *string
 
-	// Identifier for trace
+	// The unique identifier of the trace.
 	TraceId *string
 
 	noSmithyDocumentSerde
 }
 
-// Agent finish output
+// Specifies the name that the metadata attribute must match and the value to
+// which to compare the value of the metadata attribute. For more information, see [Query configurations]
+// .
+//
+// This data type is used in the following API operations:
+//
+// [RetrieveAndGenerate request]
+//
+// [RetrieveAndGenerate request]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_RetrieveAndGenerate.html#API_agent-runtime_RetrieveAndGenerate_RequestSyntax
+// [Query configurations]: https://docs.aws.amazon.com/bedrock/latest/userguide/kb-test-config.html
+type FilterAttribute struct {
+
+	// The name that the metadata attribute must match.
+	//
+	// This member is required.
+	Key *string
+
+	// The value to whcih to compare the value of the metadata attribute.
+	//
+	// This member is required.
+	Value document.Interface
+
+	noSmithyDocumentSerde
+}
+
+// Contains details about the response to the user.
 type FinalResponse struct {
 
-	// Agent Trace Action Group Lambda Invocation Output String
+	// The text in the response to the user.
 	Text *string
 
 	noSmithyDocumentSerde
 }
 
-// Generate response part
+// Contains information about the function that the agent predicts should be
+// called.
+//
+// This data type is used in the following API operations:
+//
+//   - In the returnControl field of the [InvokeAgent response]
+//
+// [InvokeAgent response]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_InvokeAgent.html#API_agent-runtime_InvokeAgent_ResponseSyntax
+type FunctionInvocationInput struct {
+
+	// The action group that the function belongs to.
+	//
+	// This member is required.
+	ActionGroup *string
+
+	// The name of the function.
+	Function *string
+
+	// A list of parameters of the function.
+	Parameters []FunctionParameter
+
+	noSmithyDocumentSerde
+}
+
+// Contains information about a parameter of the function.
+//
+// This data type is used in the following API operations:
+//
+//   - In the returnControl field of the [InvokeAgent response]
+//
+// [InvokeAgent response]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_InvokeAgent.html#API_agent-runtime_InvokeAgent_ResponseSyntax
+type FunctionParameter struct {
+
+	// The name of the parameter.
+	Name *string
+
+	// The data type of the parameter.
+	Type *string
+
+	// The value of the parameter.
+	Value *string
+
+	noSmithyDocumentSerde
+}
+
+// Contains information about the function that was called from the action group
+// and the response that was returned.
+//
+// This data type is used in the following API operations:
+//
+//   - In the returnControlInvocationResults of the [InvokeAgent request]
+//
+// [InvokeAgent request]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_InvokeAgent.html#API_agent-runtime_InvokeAgent_RequestSyntax
+type FunctionResult struct {
+
+	// The action group that the function belongs to.
+	//
+	// This member is required.
+	ActionGroup *string
+
+	// The name of the function that was called.
+	Function *string
+
+	// The response from the function call using the parameters. The key of the object
+	// is the content type (currently, only TEXT is supported). The response may be
+	// returned directly or from the Lambda function.
+	ResponseBody map[string]ContentBody
+
+	// Controls the final response state returned to end user when API/Function
+	// execution failed. When this state is FAILURE, the request would fail with
+	// dependency failure exception. When this state is REPROMPT, the API/function
+	// response will be sent to model for re-prompt
+	ResponseState ResponseState
+
+	noSmithyDocumentSerde
+}
+
+// Contains metadata about a part of the generated response that is accompanied by
+// a citation.
+//
+// This data type is used in the following API operations:
+//
+// [InvokeAgent response]
+//   - – in the generatedResponsePart field
+//
+// [RetrieveAndGenerate response]
+//   - – in the generatedResponsePart field
+//
+// [RetrieveAndGenerate response]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_RetrieveAndGenerate.html#API_agent-runtime_RetrieveAndGenerate_ResponseSyntax
+// [InvokeAgent response]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_InvokeAgent.html#API_agent-runtime_InvokeAgent_ResponseSyntax
 type GeneratedResponsePart struct {
 
-	// Text response part
+	// Contains metadata about a textual part of the generated response that is
+	// accompanied by a citation.
 	TextResponsePart *TextResponsePart
 
 	noSmithyDocumentSerde
 }
 
-// Configurations for controlling the inference response of an InvokeAgent API call
-type InferenceConfiguration struct {
+// Contains configurations for response generation based on the knowledge base
+// query results.
+//
+// This data type is used in the following API operations:
+//
+// [RetrieveAndGenerate request]
+//
+// [RetrieveAndGenerate request]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_RetrieveAndGenerate.html#API_agent-runtime_RetrieveAndGenerate_RequestSyntax
+type GenerationConfiguration struct {
 
-	// Maximum length of output
-	MaximumLength *int32
+	//  Additional model parameters and corresponding values not included in the
+	// textInferenceConfig structure for a knowledge base. This allows users to provide
+	// custom model parameters specific to the language model being used.
+	AdditionalModelRequestFields map[string]document.Interface
 
-	// List of stop sequences
-	StopSequences []string
+	// The configuration details for the guardrail.
+	GuardrailConfiguration *GuardrailConfiguration
 
-	// Controls randomness, higher values increase diversity
-	Temperature *float32
+	//  Configuration settings for inference when using RetrieveAndGenerate to
+	// generate responses while using a knowledge base as a source.
+	InferenceConfig *InferenceConfig
 
-	// Sample from the k most likely next tokens
-	TopK *int32
-
-	// Cumulative probability cutoff for token selection
-	TopP *float32
+	// Contains the template for the prompt that's sent to the model for response
+	// generation.
+	PromptTemplate *PromptTemplate
 
 	noSmithyDocumentSerde
 }
 
-// Trace Part which contains input details for action group or knowledge base
-type InvocationInput struct {
+// Assessment details of the content analyzed by Guardrails.
+type GuardrailAssessment struct {
 
-	// input to lambda used in action group
-	ActionGroupInvocationInput *ActionGroupInvocationInput
+	// Content policy details of the Guardrail.
+	ContentPolicy *GuardrailContentPolicyAssessment
 
-	// types of invocations
-	InvocationType InvocationType
+	// Sensitive Information policy details of Guardrail.
+	SensitiveInformationPolicy *GuardrailSensitiveInformationPolicyAssessment
 
-	// Input to lambda used in action group
-	KnowledgeBaseLookupInput *KnowledgeBaseLookupInput
+	// Topic policy details of the Guardrail.
+	TopicPolicy *GuardrailTopicPolicyAssessment
 
-	// Identifier for trace
+	// Word policy details of the Guardrail.
+	WordPolicy *GuardrailWordPolicyAssessment
+
+	noSmithyDocumentSerde
+}
+
+// The configuration details for the guardrail.
+type GuardrailConfiguration struct {
+
+	// The unique identifier for the guardrail.
+	//
+	// This member is required.
+	GuardrailId *string
+
+	// The version of the guardrail.
+	//
+	// This member is required.
+	GuardrailVersion *string
+
+	noSmithyDocumentSerde
+}
+
+// Details of the content filter used in the Guardrail.
+type GuardrailContentFilter struct {
+
+	// The action placed on the content by the Guardrail filter.
+	Action GuardrailContentPolicyAction
+
+	// The confidence level regarding the content detected in the filter by the
+	// Guardrail.
+	Confidence GuardrailContentFilterConfidence
+
+	// The type of content detected in the filter by the Guardrail.
+	Type GuardrailContentFilterType
+
+	noSmithyDocumentSerde
+}
+
+// The details of the policy assessment in the Guardrails filter.
+type GuardrailContentPolicyAssessment struct {
+
+	// The filter details of the policy assessment used in the Guardrails filter.
+	Filters []GuardrailContentFilter
+
+	noSmithyDocumentSerde
+}
+
+// The custom word details for the filter in the Guardrail.
+type GuardrailCustomWord struct {
+
+	// The action details for the custom word filter in the Guardrail.
+	Action GuardrailWordPolicyAction
+
+	// The match details for the custom word filter in the Guardrail.
+	Match *string
+
+	noSmithyDocumentSerde
+}
+
+// The managed word details for the filter in the Guardrail.
+type GuardrailManagedWord struct {
+
+	// The action details for the managed word filter in the Guardrail.
+	Action GuardrailWordPolicyAction
+
+	// The match details for the managed word filter in the Guardrail.
+	Match *string
+
+	// The type details for the managed word filter in the Guardrail.
+	Type GuardrailManagedWordType
+
+	noSmithyDocumentSerde
+}
+
+// The Guardrail filter to identify and remove personally identifiable information
+// (PII).
+type GuardrailPiiEntityFilter struct {
+
+	// The action of the Guardrail filter to identify and remove PII.
+	Action GuardrailSensitiveInformationPolicyAction
+
+	// The match to settings in the Guardrail filter to identify and remove PII.
+	Match *string
+
+	// The type of PII the Guardrail filter has identified and removed.
+	Type GuardrailPiiEntityType
+
+	noSmithyDocumentSerde
+}
+
+// The details for the regex filter used in the Guardrail.
+type GuardrailRegexFilter struct {
+
+	// The action details for the regex filter used in the Guardrail.
+	Action GuardrailSensitiveInformationPolicyAction
+
+	// The match details for the regex filter used in the Guardrail.
+	Match *string
+
+	// The name details for the regex filter used in the Guardrail.
+	Name *string
+
+	// The regex details for the regex filter used in the Guardrail.
+	Regex *string
+
+	noSmithyDocumentSerde
+}
+
+// The details of the sensitive policy assessment used in the Guardrail.
+type GuardrailSensitiveInformationPolicyAssessment struct {
+
+	// The details of the PII entities used in the sensitive policy assessment for the
+	// Guardrail.
+	PiiEntities []GuardrailPiiEntityFilter
+
+	// The details of the regexes used in the sensitive policy assessment for the
+	// Guardrail.
+	Regexes []GuardrailRegexFilter
+
+	noSmithyDocumentSerde
+}
+
+// The details for a specific topic defined in the Guardrail.
+type GuardrailTopic struct {
+
+	// The action details on a specific topic in the Guardrail.
+	Action GuardrailTopicPolicyAction
+
+	// The name details on a specific topic in the Guardrail.
+	Name *string
+
+	// The type details on a specific topic in the Guardrail.
+	Type GuardrailTopicType
+
+	noSmithyDocumentSerde
+}
+
+// The details of the policy assessment used in the Guardrail.
+type GuardrailTopicPolicyAssessment struct {
+
+	// The topic details of the policy assessment used in the Guardrail.
+	Topics []GuardrailTopic
+
+	noSmithyDocumentSerde
+}
+
+// The trace details used in the Guardrail.
+type GuardrailTrace struct {
+
+	// The trace action details used with the Guardrail.
+	Action GuardrailAction
+
+	// The details of the input assessments used in the Guardrail Trace.
+	InputAssessments []GuardrailAssessment
+
+	// The details of the output assessments used in the Guardrail Trace.
+	OutputAssessments []GuardrailAssessment
+
+	// The details of the trace Id used in the Guardrail Trace.
 	TraceId *string
 
 	noSmithyDocumentSerde
 }
 
-// Input to lambda used in action group
+// The assessment details for words defined in the Guardrail filter.
+type GuardrailWordPolicyAssessment struct {
+
+	// The custom word details for words defined in the Guardrail filter.
+	CustomWords []GuardrailCustomWord
+
+	// The managed word lists for words defined in the Guardrail filter.
+	ManagedWordLists []GuardrailManagedWord
+
+	noSmithyDocumentSerde
+}
+
+//	The configuration for inference settings when generating responses using
+//
+// RetrieveAndGenerate.
+type InferenceConfig struct {
+
+	//  Configuration settings specific to text generation while generating responses
+	// using RetrieveAndGenerate.
+	TextInferenceConfig *TextInferenceConfig
+
+	noSmithyDocumentSerde
+}
+
+// Specifications about the inference parameters that were provided alongside the
+// prompt. These are specified in the [PromptOverrideConfiguration]object that was set when the agent was
+// created or updated. For more information, see [Inference parameters for foundation models].
+//
+// [Inference parameters for foundation models]: https://docs.aws.amazon.com/bedrock/latest/userguide/model-parameters.html
+// [PromptOverrideConfiguration]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_PromptOverrideConfiguration.html
+type InferenceConfiguration struct {
+
+	// The maximum number of tokens allowed in the generated response.
+	MaximumLength *int32
+
+	// A list of stop sequences. A stop sequence is a sequence of characters that
+	// causes the model to stop generating the response.
+	StopSequences []string
+
+	// The likelihood of the model selecting higher-probability options while
+	// generating a response. A lower value makes the model more likely to choose
+	// higher-probability options, while a higher value makes the model more likely to
+	// choose lower-probability options.
+	Temperature *float32
+
+	// While generating a response, the model determines the probability of the
+	// following token at each point of generation. The value that you set for topK is
+	// the number of most-likely candidates from which the model chooses the next token
+	// in the sequence. For example, if you set topK to 50, the model selects the next
+	// token from among the top 50 most likely choices.
+	TopK *int32
+
+	// While generating a response, the model determines the probability of the
+	// following token at each point of generation. The value that you set for Top P
+	// determines the number of most-likely candidates from which the model chooses the
+	// next token in the sequence. For example, if you set topP to 80, the model only
+	// selects the next token from the top 80% of the probability distribution of next
+	// tokens.
+	TopP *float32
+
+	noSmithyDocumentSerde
+}
+
+// Contains information pertaining to the action group or knowledge base that is
+// being invoked.
+type InvocationInput struct {
+
+	// Contains information about the action group to be invoked.
+	ActionGroupInvocationInput *ActionGroupInvocationInput
+
+	// Specifies whether the agent is invoking an action group or a knowledge base.
+	InvocationType InvocationType
+
+	// Contains details about the knowledge base to look up and the query to be made.
+	KnowledgeBaseLookupInput *KnowledgeBaseLookupInput
+
+	// The unique identifier of the trace.
+	TraceId *string
+
+	noSmithyDocumentSerde
+}
+
+// Contains details about the API operation or function that the agent predicts
+// should be called.
+//
+// This data type is used in the following API operations:
+//
+//   - In the returnControl field of the [InvokeAgent response]
+//
+// The following types satisfy this interface:
+//
+//	InvocationInputMemberMemberApiInvocationInput
+//	InvocationInputMemberMemberFunctionInvocationInput
+//
+// [InvokeAgent response]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_InvokeAgent.html#API_agent-runtime_InvokeAgent_ResponseSyntax
+type InvocationInputMember interface {
+	isInvocationInputMember()
+}
+
+// Contains information about the API operation that the agent predicts should be
+// called.
+type InvocationInputMemberMemberApiInvocationInput struct {
+	Value ApiInvocationInput
+
+	noSmithyDocumentSerde
+}
+
+func (*InvocationInputMemberMemberApiInvocationInput) isInvocationInputMember() {}
+
+// Contains information about the function that the agent predicts should be
+// called.
+type InvocationInputMemberMemberFunctionInvocationInput struct {
+	Value FunctionInvocationInput
+
+	noSmithyDocumentSerde
+}
+
+func (*InvocationInputMemberMemberFunctionInvocationInput) isInvocationInputMember() {}
+
+// A result from the invocation of an action. For more information, see [Return control to the agent developer] and [Control session context].
+//
+// This data type is used in the following API operations:
+//
+// [InvokeAgent request]
+//
+// The following types satisfy this interface:
+//
+//	InvocationResultMemberMemberApiResult
+//	InvocationResultMemberMemberFunctionResult
+//
+// [InvokeAgent request]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_InvokeAgent.html#API_agent-runtime_InvokeAgent_RequestSyntax
+// [Return control to the agent developer]: https://docs.aws.amazon.com/bedrock/latest/userguide/agents-returncontrol.html
+// [Control session context]: https://docs.aws.amazon.com/bedrock/latest/userguide/agents-session-state.html
+type InvocationResultMember interface {
+	isInvocationResultMember()
+}
+
+// The result from the API response from the action group invocation.
+type InvocationResultMemberMemberApiResult struct {
+	Value ApiResult
+
+	noSmithyDocumentSerde
+}
+
+func (*InvocationResultMemberMemberApiResult) isInvocationResultMember() {}
+
+// The result from the function from the action group invocation.
+type InvocationResultMemberMemberFunctionResult struct {
+	Value FunctionResult
+
+	noSmithyDocumentSerde
+}
+
+func (*InvocationResultMemberMemberFunctionResult) isInvocationResultMember() {}
+
+// Contains details about the knowledge base to look up and the query to be made.
 type KnowledgeBaseLookupInput struct {
 
-	// Agent Trace Action Group Knowledge Base Id
+	// The unique identifier of the knowledge base to look up.
 	KnowledgeBaseId *string
 
-	// Agent Trace Action Group Lambda Invocation Output String
+	// The query made to the knowledge base.
 	Text *string
 
 	noSmithyDocumentSerde
 }
 
-// Input to lambda used in action group
+// Contains details about the results from looking up the knowledge base.
 type KnowledgeBaseLookupOutput struct {
 
-	// list of retrieved references
+	// Contains metadata about the sources cited for the generated response.
 	RetrievedReferences []RetrievedReference
 
 	noSmithyDocumentSerde
 }
 
-// Knowledge base input query.
+// Contains the query made to the knowledge base.
+//
+// This data type is used in the following API operations:
+//
+// [Retrieve request]
+//   - – in the retrievalQuery field
+//
+// [Retrieve request]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_Retrieve.html#API_agent-runtime_Retrieve_RequestSyntax
 type KnowledgeBaseQuery struct {
 
-	// Knowledge base input query in text
+	// The text of the query made to the knowledge base.
 	//
 	// This member is required.
 	Text *string
@@ -158,10 +827,26 @@ type KnowledgeBaseQuery struct {
 	noSmithyDocumentSerde
 }
 
-// Search parameters for retrieving from knowledge base.
+// Contains configurations for the knowledge base query and retrieval process. For
+// more information, see [Query configurations].
+//
+// This data type is used in the following API operations:
+//
+// [Retrieve request]
+//   - – in the retrievalConfiguration field
+//
+// [RetrieveAndGenerate request]
+//   - – in the retrievalConfiguration field
+//
+// [RetrieveAndGenerate request]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_RetrieveAndGenerate.html#API_agent-runtime_RetrieveAndGenerate_RequestSyntax
+// [Retrieve request]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_Retrieve.html#API_agent-runtime_Retrieve_RequestSyntax
+// [Query configurations]: https://docs.aws.amazon.com/bedrock/latest/userguide/kb-test-config.html
 type KnowledgeBaseRetrievalConfiguration struct {
 
-	// Knowledge base vector search configuration
+	// Contains details about how the results from the vector search should be
+	// returned. For more information, see [Query configurations].
+	//
+	// [Query configurations]: https://docs.aws.amazon.com/bedrock/latest/userguide/kb-test-config.html
 	//
 	// This member is required.
 	VectorSearchConfiguration *KnowledgeBaseVectorSearchConfiguration
@@ -169,103 +854,196 @@ type KnowledgeBaseRetrievalConfiguration struct {
 	noSmithyDocumentSerde
 }
 
-// Result item returned from a knowledge base retrieval.
+// Details about a result from querying the knowledge base.
+//
+// This data type is used in the following API operations:
+//
+// [Retrieve response]
+//   - – in the retrievalResults field
+//
+// [Retrieve response]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_Retrieve.html#API_agent-runtime_Retrieve_ResponseSyntax
 type KnowledgeBaseRetrievalResult struct {
 
-	// Content of a retrieval result.
+	// Contains a chunk of text from a data source in the knowledge base.
 	//
 	// This member is required.
 	Content *RetrievalResultContent
 
-	// The source location of a retrieval result.
+	// Contains information about the location of the data source.
 	Location *RetrievalResultLocation
 
-	// The relevance score of a result.
+	// Contains metadata attributes and their values for the file in the data source.
+	// For more information, see [Metadata and filtering].
+	//
+	// [Metadata and filtering]: https://docs.aws.amazon.com/bedrock/latest/userguide/knowledge-base-ds.html#kb-ds-metadata
+	Metadata map[string]document.Interface
+
+	// The level of relevance of the result to the query.
 	Score *float64
 
 	noSmithyDocumentSerde
 }
 
-// Configurations for retrieval and generation for knowledge base.
+// Contains details about the resource being queried.
+//
+// This data type is used in the following API operations:
+//
+// [Retrieve request]
+//   - – in the knowledgeBaseConfiguration field
+//
+// [RetrieveAndGenerate request]
+//   - – in the knowledgeBaseConfiguration field
+//
+// [RetrieveAndGenerate request]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_RetrieveAndGenerate.html#API_agent-runtime_RetrieveAndGenerate_RequestSyntax
+// [Retrieve request]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_Retrieve.html#API_agent-runtime_Retrieve_RequestSyntax
 type KnowledgeBaseRetrieveAndGenerateConfiguration struct {
 
-	// Identifier of the KnowledgeBase
+	// The unique identifier of the knowledge base that is queried and the foundation
+	// model used for generation.
 	//
 	// This member is required.
 	KnowledgeBaseId *string
 
-	// Arn of a Bedrock model.
+	// The ARN of the foundation model used to generate a response.
 	//
 	// This member is required.
 	ModelArn *string
 
+	// Contains configurations for response generation based on the knowwledge base
+	// query results.
+	GenerationConfiguration *GenerationConfiguration
+
+	// Contains configurations for how to retrieve and return the knowledge base query.
+	RetrievalConfiguration *KnowledgeBaseRetrievalConfiguration
+
 	noSmithyDocumentSerde
 }
 
-// Knowledge base vector search configuration
+// Configurations for how to perform the search query and return results. For more
+// information, see [Query configurations].
+//
+// This data type is used in the following API operations:
+//
+// [Retrieve request]
+//   - – in the vectorSearchConfiguration field
+//
+// [RetrieveAndGenerate request]
+//   - – in the vectorSearchConfiguration field
+//
+// [RetrieveAndGenerate request]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_RetrieveAndGenerate.html#API_agent-runtime_RetrieveAndGenerate_RequestSyntax
+// [Retrieve request]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_Retrieve.html#API_agent-runtime_Retrieve_RequestSyntax
+// [Query configurations]: https://docs.aws.amazon.com/bedrock/latest/userguide/kb-test-config.html
 type KnowledgeBaseVectorSearchConfiguration struct {
 
-	// Top-K results to retrieve from knowledge base.
+	// Specifies the filters to use on the metadata in the knowledge base data sources
+	// before returning results. For more information, see [Query configurations].
 	//
-	// This member is required.
+	// [Query configurations]: https://docs.aws.amazon.com/bedrock/latest/userguide/kb-test-config.html
+	Filter RetrievalFilter
+
+	// The number of source chunks to retrieve.
 	NumberOfResults *int32
+
+	// By default, Amazon Bedrock decides a search strategy for you. If you're using
+	// an Amazon OpenSearch Serverless vector store that contains a filterable text
+	// field, you can specify whether to query the knowledge base with a HYBRID search
+	// using both vector embeddings and raw text, or SEMANTIC search using only vector
+	// embeddings. For other vector store configurations, only SEMANTIC search is
+	// available. For more information, see [Test a knowledge base].
+	//
+	// [Test a knowledge base]: https://docs.aws.amazon.com/bedrock/latest/userguide/knowledge-base-test.html
+	OverrideSearchType SearchType
 
 	noSmithyDocumentSerde
 }
 
-// Trace Part which contains information used to call Invoke Model
+// The input for the pre-processing step.
+//
+//   - The type matches the agent step.
+//
+//   - The text contains the prompt.
+//
+//   - The inferenceConfiguration , parserMode , and overrideLambda values are set
+//     in the [PromptOverrideConfiguration]object that was set when the agent was created or updated.
+//
+// [PromptOverrideConfiguration]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_PromptOverrideConfiguration.html
 type ModelInvocationInput struct {
 
-	// Configurations for controlling the inference response of an InvokeAgent API call
+	// Specifications about the inference parameters that were provided alongside the
+	// prompt. These are specified in the [PromptOverrideConfiguration]object that was set when the agent was
+	// created or updated. For more information, see [Inference parameters for foundation models].
+	//
+	// [Inference parameters for foundation models]: https://docs.aws.amazon.com/bedrock/latest/userguide/model-parameters.html
+	// [PromptOverrideConfiguration]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_PromptOverrideConfiguration.html
 	InferenceConfiguration *InferenceConfiguration
 
-	// ARN of a Lambda.
+	// The ARN of the Lambda function to use when parsing the raw foundation model
+	// output in parts of the agent sequence.
 	OverrideLambda *string
 
-	// indicates if agent uses default prompt or overriden prompt
+	// Specifies whether to override the default parser Lambda function when parsing
+	// the raw foundation model output in the part of the agent sequence defined by the
+	// promptType .
 	ParserMode CreationMode
 
-	// indicates if agent uses default prompt or overriden prompt
+	// Specifies whether the default prompt template was OVERRIDDEN . If it was, the
+	// basePromptTemplate that was set in the [PromptOverrideConfiguration] object when the agent was created or
+	// updated is used instead.
+	//
+	// [PromptOverrideConfiguration]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_PromptOverrideConfiguration.html
 	PromptCreationMode CreationMode
 
-	// Prompt Message
+	// The text that prompted the agent at this step.
 	Text *string
 
-	// Identifier for trace
+	// The unique identifier of the trace.
 	TraceId *string
 
-	// types of prompts
+	// The step in the agent sequence.
 	Type PromptType
 
 	noSmithyDocumentSerde
 }
 
-// Trace Part which contains output details for action group or knowledge base or
-// final response
+// Contains the result or output of an action group or knowledge base, or the
+// response to the user.
 type Observation struct {
 
-	// output from lambda used in action group
+	// Contains the JSON-formatted string returned by the API invoked by the action
+	// group.
 	ActionGroupInvocationOutput *ActionGroupInvocationOutput
 
-	// Agent finish output
+	// Contains details about the response to the user.
 	FinalResponse *FinalResponse
 
-	// Input to lambda used in action group
+	// Contains details about the results from looking up the knowledge base.
 	KnowledgeBaseLookupOutput *KnowledgeBaseLookupOutput
 
-	// Observation information if there were reprompts
+	// Contains details about the response to reprompt the input.
 	RepromptResponse *RepromptResponse
 
-	// Identifier for trace
+	// The unique identifier of the trace.
 	TraceId *string
 
-	// types of observations
+	// Specifies what kind of information the agent returns in the observation. The
+	// following values are possible.
+	//
+	//   - ACTION_GROUP – The agent returns the result of an action group.
+	//
+	//   - KNOWLEDGE_BASE – The agent returns information from a knowledge base.
+	//
+	//   - FINISH – The agent returns a final response to the user with no follow-up.
+	//
+	//   - ASK_USER – The agent asks the user a question.
+	//
+	//   - REPROMPT – The agent prompts the user again for the same information.
 	Type Type
 
 	noSmithyDocumentSerde
 }
 
-// Trace contains intermidate response during orchestration
+// Details about the orchestration step, in which the agent determines the order
+// in which actions are executed and which knowledge bases are retrieved.
 //
 // The following types satisfy this interface:
 //
@@ -277,7 +1055,8 @@ type OrchestrationTrace interface {
 	isOrchestrationTrace()
 }
 
-// Trace Part which contains input details for action group or knowledge base
+// Contains information pertaining to the action group or knowledge base that is
+// being invoked.
 type OrchestrationTraceMemberInvocationInput struct {
 	Value InvocationInput
 
@@ -286,7 +1065,16 @@ type OrchestrationTraceMemberInvocationInput struct {
 
 func (*OrchestrationTraceMemberInvocationInput) isOrchestrationTrace() {}
 
-// Trace Part which contains information used to call Invoke Model
+// The input for the orchestration step.
+//
+//   - The type is ORCHESTRATION .
+//
+//   - The text contains the prompt.
+//
+//   - The inferenceConfiguration , parserMode , and overrideLambda values are set
+//     in the [PromptOverrideConfiguration]object that was set when the agent was created or updated.
+//
+// [PromptOverrideConfiguration]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_PromptOverrideConfiguration.html
 type OrchestrationTraceMemberModelInvocationInput struct {
 	Value ModelInvocationInput
 
@@ -295,8 +1083,8 @@ type OrchestrationTraceMemberModelInvocationInput struct {
 
 func (*OrchestrationTraceMemberModelInvocationInput) isOrchestrationTrace() {}
 
-// Trace Part which contains output details for action group or knowledge base or
-// final response
+// Details about the observation (the output of the action group Lambda or
+// knowledge base) made by the agent.
 type OrchestrationTraceMemberObservation struct {
 	Value Observation
 
@@ -305,7 +1093,8 @@ type OrchestrationTraceMemberObservation struct {
 
 func (*OrchestrationTraceMemberObservation) isOrchestrationTrace() {}
 
-// Trace Part which contains information related to reasoning
+// Details about the reasoning, based on the input, that the agent uses to justify
+// carrying out an action group or getting information from a knowledge base.
 type OrchestrationTraceMemberRationale struct {
 	Value Rationale
 
@@ -314,55 +1103,57 @@ type OrchestrationTraceMemberRationale struct {
 
 func (*OrchestrationTraceMemberRationale) isOrchestrationTrace() {}
 
-// parameters included in action group invocation
+// A parameter for the API request or function.
 type Parameter struct {
 
-	// Name of parameter
+	// The name of the parameter.
 	Name *string
 
-	// Type of parameter
+	// The type of the parameter.
 	Type *string
 
-	// Value of parameter
+	// The value of the parameter.
 	Value *string
 
 	noSmithyDocumentSerde
 }
 
-// Base 64 endoded byte response
+// Contains a part of an agent response and citations for it.
 type PayloadPart struct {
 
-	// Citations associated with final agent response
+	// Contains citations for a part of an agent response.
 	Attribution *Attribution
 
-	// PartBody of the payload in bytes
+	// A part of the agent response in bytes.
 	Bytes []byte
 
 	noSmithyDocumentSerde
 }
 
-// Trace Part which contains information related to postprocessing
+// The foundation model output from the post-processing step.
 type PostProcessingModelInvocationOutput struct {
 
-	// Trace Part which contains information if preprocessing was successful
+	// Details about the response from the Lambda parsing of the output of the
+	// post-processing step.
 	ParsedResponse *PostProcessingParsedResponse
 
-	// Identifier for trace
+	// The unique identifier of the trace.
 	TraceId *string
 
 	noSmithyDocumentSerde
 }
 
-// Trace Part which contains information if preprocessing was successful
+// Details about the response from the Lambda parsing of the output from the
+// post-processing step.
 type PostProcessingParsedResponse struct {
 
-	// Agent Trace Output String
+	// The text returned by the parser.
 	Text *string
 
 	noSmithyDocumentSerde
 }
 
-// Trace Part which contains information related to post processing step
+// Details about the post-processing step, in which the agent shapes the response.
 //
 // The following types satisfy this interface:
 //
@@ -372,7 +1163,16 @@ type PostProcessingTrace interface {
 	isPostProcessingTrace()
 }
 
-// Trace Part which contains information used to call Invoke Model
+// The input for the post-processing step.
+//
+//   - The type is POST_PROCESSING .
+//
+//   - The text contains the prompt.
+//
+//   - The inferenceConfiguration , parserMode , and overrideLambda values are set
+//     in the [PromptOverrideConfiguration]object that was set when the agent was created or updated.
+//
+// [PromptOverrideConfiguration]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_PromptOverrideConfiguration.html
 type PostProcessingTraceMemberModelInvocationInput struct {
 	Value ModelInvocationInput
 
@@ -381,7 +1181,7 @@ type PostProcessingTraceMemberModelInvocationInput struct {
 
 func (*PostProcessingTraceMemberModelInvocationInput) isPostProcessingTrace() {}
 
-// Trace Part which contains information related to postprocessing
+// The foundation model output from the post-processing step.
 type PostProcessingTraceMemberModelInvocationOutput struct {
 	Value PostProcessingModelInvocationOutput
 
@@ -390,31 +1190,36 @@ type PostProcessingTraceMemberModelInvocationOutput struct {
 
 func (*PostProcessingTraceMemberModelInvocationOutput) isPostProcessingTrace() {}
 
-// Trace Part which contains information related to preprocessing
+// The foundation model output from the pre-processing step.
 type PreProcessingModelInvocationOutput struct {
 
-	// Trace Part which contains information if preprocessing was successful
+	// Details about the response from the Lambda parsing of the output of the
+	// pre-processing step.
 	ParsedResponse *PreProcessingParsedResponse
 
-	// Identifier for trace
+	// The unique identifier of the trace.
 	TraceId *string
 
 	noSmithyDocumentSerde
 }
 
-// Trace Part which contains information if preprocessing was successful
+// Details about the response from the Lambda parsing of the output from the
+// pre-processing step.
 type PreProcessingParsedResponse struct {
 
-	// Boolean value
+	// Whether the user input is valid or not. If false , the agent doesn't proceed to
+	// orchestration.
 	IsValid *bool
 
-	// Agent Trace Rationale String
+	// The text returned by the parsing of the pre-processing step, explaining the
+	// steps that the agent plans to take in orchestration, if the user input is valid.
 	Rationale *string
 
 	noSmithyDocumentSerde
 }
 
-// Trace Part which contains information related to preprocessing step
+// Details about the pre-processing step, in which the agent contextualizes and
+// categorizes user inputs.
 //
 // The following types satisfy this interface:
 //
@@ -424,7 +1229,16 @@ type PreProcessingTrace interface {
 	isPreProcessingTrace()
 }
 
-// Trace Part which contains information used to call Invoke Model
+// The input for the pre-processing step.
+//
+//   - The type is PRE_PROCESSING .
+//
+//   - The text contains the prompt.
+//
+//   - The inferenceConfiguration , parserMode , and overrideLambda values are set
+//     in the [PromptOverrideConfiguration]object that was set when the agent was created or updated.
+//
+// [PromptOverrideConfiguration]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent_PromptOverrideConfiguration.html
 type PreProcessingTraceMemberModelInvocationInput struct {
 	Value ModelInvocationInput
 
@@ -433,7 +1247,7 @@ type PreProcessingTraceMemberModelInvocationInput struct {
 
 func (*PreProcessingTraceMemberModelInvocationInput) isPreProcessingTrace() {}
 
-// Trace Part which contains information related to preprocessing
+// The foundation model output from the pre-processing step.
 type PreProcessingTraceMemberModelInvocationOutput struct {
 	Value PreProcessingModelInvocationOutput
 
@@ -442,50 +1256,93 @@ type PreProcessingTraceMemberModelInvocationOutput struct {
 
 func (*PreProcessingTraceMemberModelInvocationOutput) isPreProcessingTrace() {}
 
-// Trace Part which contains information related to reasoning
+// Contains the template for the prompt that's sent to the model for response
+// generation. For more information, see [Knowledge base prompt templates].
+//
+// This data type is used in the following API operations:
+//
+// [RetrieveAndGenerate request]
+//   - – in the filter field
+//
+// [RetrieveAndGenerate request]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_RetrieveAndGenerate.html#API_agent-runtime_RetrieveAndGenerate_RequestSyntax
+// [Knowledge base prompt templates]: https://docs.aws.amazon.com/bedrock/latest/userguide/kb-test-config.html#kb-test-config-sysprompt
+type PromptTemplate struct {
+
+	// The template for the prompt that's sent to the model for response generation.
+	// You can include prompt placeholders, which become replaced before the prompt is
+	// sent to the model to provide instructions and context to the model. In addition,
+	// you can include XML tags to delineate meaningful sections of the prompt
+	// template.
+	//
+	// For more information, see the following resources:
+	//
+	// [Knowledge base prompt templates]
+	//
+	// [Use XML tags with Anthropic Claude models]
+	//
+	// [Use XML tags with Anthropic Claude models]: https://docs.anthropic.com/claude/docs/use-xml-tags
+	// [Knowledge base prompt templates]: https://docs.aws.amazon.com/bedrock/latest/userguide/kb-test-config.html#kb-test-config-sysprompt
+	TextPromptTemplate *string
+
+	noSmithyDocumentSerde
+}
+
+// Contains the parameters in the request body.
+type PropertyParameters struct {
+
+	// A list of parameters in the request body.
+	Properties []Parameter
+
+	noSmithyDocumentSerde
+}
+
+// Contains the reasoning, based on the input, that the agent uses to justify
+// carrying out an action group or getting information from a knowledge base.
 type Rationale struct {
 
-	// Agent Trace Rationale String
+	// The reasoning or thought process of the agent, based on the input.
 	Text *string
 
-	// Identifier for trace
+	// The unique identifier of the trace step.
 	TraceId *string
 
 	noSmithyDocumentSerde
 }
 
-// Observation information if there were reprompts
+// Contains details about the agent's response to reprompt the input.
 type RepromptResponse struct {
 
-	// Parsing error source
+	// Specifies what output is prompting the agent to reprompt the input.
 	Source Source
 
-	// Reprompt response text
+	// The text reprompting the input.
 	Text *string
 
 	noSmithyDocumentSerde
 }
 
-// Request Body Content Map
+// The parameters in the API request body.
 type RequestBody struct {
 
-	// Content type paramter map
+	// The content in the request body.
 	Content map[string][]Parameter
 
 	noSmithyDocumentSerde
 }
 
-// Response body of is a stream
+// The response from invoking the agent and associated citations and trace
+// information.
 //
 // The following types satisfy this interface:
 //
 //	ResponseStreamMemberChunk
+//	ResponseStreamMemberReturnControl
 //	ResponseStreamMemberTrace
 type ResponseStream interface {
 	isResponseStream()
 }
 
-// Base 64 endoded byte response
+// Contains a part of an agent response and citations for it.
 type ResponseStreamMemberChunk struct {
 	Value PayloadPart
 
@@ -494,7 +1351,23 @@ type ResponseStreamMemberChunk struct {
 
 func (*ResponseStreamMemberChunk) isResponseStream() {}
 
-// Trace Part which contains intermidate response for customer
+// Contains the parameters and information that the agent elicited from the
+// customer to carry out an action. This information is returned to the system and
+// can be used in your own setup for fulfilling the action.
+type ResponseStreamMemberReturnControl struct {
+	Value ReturnControlPayload
+
+	noSmithyDocumentSerde
+}
+
+func (*ResponseStreamMemberReturnControl) isResponseStream() {}
+
+// Contains information about the agent and session, alongside the agent's
+// reasoning process and results from calling actions and querying knowledge bases
+// and metadata about the trace. You can use the trace to understand how the agent
+// arrived at the response it provided the customer. For more information, see [Trace events].
+//
+// [Trace events]: https://docs.aws.amazon.com/bedrock/latest/userguide/trace-events.html
 type ResponseStreamMemberTrace struct {
 	Value TracePart
 
@@ -503,10 +1376,263 @@ type ResponseStreamMemberTrace struct {
 
 func (*ResponseStreamMemberTrace) isResponseStream() {}
 
-// Content of a retrieval result.
+// Specifies the filters to use on the metadata attributes in the knowledge base
+// data sources before returning results. For more information, see [Query configurations]. See the
+// examples below to see how to use these filters.
+//
+// This data type is used in the following API operations:
+//
+// [Retrieve request]
+//   - – in the filter field
+//
+// [RetrieveAndGenerate request]
+//   - – in the filter field
+//
+// The following types satisfy this interface:
+//
+//	RetrievalFilterMemberAndAll
+//	RetrievalFilterMemberEquals
+//	RetrievalFilterMemberGreaterThan
+//	RetrievalFilterMemberGreaterThanOrEquals
+//	RetrievalFilterMemberIn
+//	RetrievalFilterMemberLessThan
+//	RetrievalFilterMemberLessThanOrEquals
+//	RetrievalFilterMemberListContains
+//	RetrievalFilterMemberNotEquals
+//	RetrievalFilterMemberNotIn
+//	RetrievalFilterMemberOrAll
+//	RetrievalFilterMemberStartsWith
+//	RetrievalFilterMemberStringContains
+//
+// [RetrieveAndGenerate request]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_RetrieveAndGenerate.html#API_agent-runtime_RetrieveAndGenerate_RequestSyntax
+// [Retrieve request]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_Retrieve.html#API_agent-runtime_Retrieve_RequestSyntax
+// [Query configurations]: https://docs.aws.amazon.com/bedrock/latest/userguide/kb-test-config.html
+type RetrievalFilter interface {
+	isRetrievalFilter()
+}
+
+// Knowledge base data sources are returned if their metadata attributes fulfill
+// all the filter conditions inside this list.
+type RetrievalFilterMemberAndAll struct {
+	Value []RetrievalFilter
+
+	noSmithyDocumentSerde
+}
+
+func (*RetrievalFilterMemberAndAll) isRetrievalFilter() {}
+
+// Knowledge base data sources are returned if they contain a metadata attribute
+// whose name matches the key and whose value matches the value in this object.
+//
+// The following example would return data sources with an animal attribute whose
+// value is cat :
+//
+//	"equals": { "key": "animal", "value": "cat" }
+type RetrievalFilterMemberEquals struct {
+	Value FilterAttribute
+
+	noSmithyDocumentSerde
+}
+
+func (*RetrievalFilterMemberEquals) isRetrievalFilter() {}
+
+// Knowledge base data sources are returned if they contain a metadata attribute
+// whose name matches the key and whose value is greater than the value in this
+// object.
+//
+// The following example would return data sources with an year attribute whose
+// value is greater than 1989 :
+//
+//	"greaterThan": { "key": "year", "value": 1989 }
+type RetrievalFilterMemberGreaterThan struct {
+	Value FilterAttribute
+
+	noSmithyDocumentSerde
+}
+
+func (*RetrievalFilterMemberGreaterThan) isRetrievalFilter() {}
+
+// Knowledge base data sources are returned if they contain a metadata attribute
+// whose name matches the key and whose value is greater than or equal to the value
+// in this object.
+//
+// The following example would return data sources with an year attribute whose
+// value is greater than or equal to 1989 :
+//
+//	"greaterThanOrEquals": { "key": "year", "value": 1989 }
+type RetrievalFilterMemberGreaterThanOrEquals struct {
+	Value FilterAttribute
+
+	noSmithyDocumentSerde
+}
+
+func (*RetrievalFilterMemberGreaterThanOrEquals) isRetrievalFilter() {}
+
+// Knowledge base data sources are returned if they contain a metadata attribute
+// whose name matches the key and whose value is in the list specified in the value
+// in this object.
+//
+// The following example would return data sources with an animal attribute that
+// is either cat or dog :
+//
+//	"in": { "key": "animal", "value": ["cat", "dog"] }
+type RetrievalFilterMemberIn struct {
+	Value FilterAttribute
+
+	noSmithyDocumentSerde
+}
+
+func (*RetrievalFilterMemberIn) isRetrievalFilter() {}
+
+// Knowledge base data sources are returned if they contain a metadata attribute
+// whose name matches the key and whose value is less than the value in this
+// object.
+//
+// The following example would return data sources with an year attribute whose
+// value is less than to 1989 .
+//
+//	"lessThan": { "key": "year", "value": 1989 }
+type RetrievalFilterMemberLessThan struct {
+	Value FilterAttribute
+
+	noSmithyDocumentSerde
+}
+
+func (*RetrievalFilterMemberLessThan) isRetrievalFilter() {}
+
+// Knowledge base data sources are returned if they contain a metadata attribute
+// whose name matches the key and whose value is less than or equal to the value
+// in this object.
+//
+// The following example would return data sources with an year attribute whose
+// value is less than or equal to 1989 .
+//
+//	"lessThanOrEquals": { "key": "year", "value": 1989 }
+type RetrievalFilterMemberLessThanOrEquals struct {
+	Value FilterAttribute
+
+	noSmithyDocumentSerde
+}
+
+func (*RetrievalFilterMemberLessThanOrEquals) isRetrievalFilter() {}
+
+// Knowledge base data sources are returned if they contain a metadata attribute
+// whose name matches the key and whose value is a list that contains the value as
+// one of its members.
+//
+// The following example would return data sources with an animals attribute that
+// is a list containing a cat member (for example ["dog", "cat"] ).
+//
+//	"listContains": { "key": "animals", "value": "cat" }
+type RetrievalFilterMemberListContains struct {
+	Value FilterAttribute
+
+	noSmithyDocumentSerde
+}
+
+func (*RetrievalFilterMemberListContains) isRetrievalFilter() {}
+
+// Knowledge base data sources that contain a metadata attribute whose name
+// matches the key and whose value doesn't match the value in this object are
+// returned.
+//
+// The following example would return data sources that don't contain an animal
+// attribute whose value is cat .
+//
+//	"notEquals": { "key": "animal", "value": "cat" }
+type RetrievalFilterMemberNotEquals struct {
+	Value FilterAttribute
+
+	noSmithyDocumentSerde
+}
+
+func (*RetrievalFilterMemberNotEquals) isRetrievalFilter() {}
+
+// Knowledge base data sources are returned if they contain a metadata attribute
+// whose name matches the key and whose value isn't in the list specified in the
+// value in this object.
+//
+// The following example would return data sources whose animal attribute is
+// neither cat nor dog .
+//
+//	"notIn": { "key": "animal", "value": ["cat", "dog"] }
+type RetrievalFilterMemberNotIn struct {
+	Value FilterAttribute
+
+	noSmithyDocumentSerde
+}
+
+func (*RetrievalFilterMemberNotIn) isRetrievalFilter() {}
+
+// Knowledge base data sources are returned if their metadata attributes fulfill
+// at least one of the filter conditions inside this list.
+type RetrievalFilterMemberOrAll struct {
+	Value []RetrievalFilter
+
+	noSmithyDocumentSerde
+}
+
+func (*RetrievalFilterMemberOrAll) isRetrievalFilter() {}
+
+// Knowledge base data sources are returned if they contain a metadata attribute
+// whose name matches the key and whose value starts with the value in this
+// object. This filter is currently only supported for Amazon OpenSearch Serverless
+// vector stores.
+//
+// The following example would return data sources with an animal attribute starts
+// with ca (for example, cat or camel ).
+//
+//	"startsWith": { "key": "animal", "value": "ca" }
+type RetrievalFilterMemberStartsWith struct {
+	Value FilterAttribute
+
+	noSmithyDocumentSerde
+}
+
+func (*RetrievalFilterMemberStartsWith) isRetrievalFilter() {}
+
+// Knowledge base data sources are returned if they contain a metadata attribute
+// whose name matches the key and whose value is one of the following:
+//
+//   - A string that contains the value as a substring. The following example would
+//     return data sources with an animal attribute that contains the substring at
+//     (for example cat ).
+//
+// "stringContains": { "key": "animal", "value": "at" }
+//
+//   - A list with a member that contains the value as a substring. The following
+//     example would return data sources with an animals attribute that is a list
+//     containing a member that contains the substring at (for example ["dog", "cat"]
+//     ).
+//
+// "stringContains": { "key": "animals", "value": "at" }
+type RetrievalFilterMemberStringContains struct {
+	Value FilterAttribute
+
+	noSmithyDocumentSerde
+}
+
+func (*RetrievalFilterMemberStringContains) isRetrievalFilter() {}
+
+// Contains the cited text from the data source.
+//
+// This data type is used in the following API operations:
+//
+// [Retrieve response]
+//   - – in the content field
+//
+// [RetrieveAndGenerate response]
+//   - – in the content field
+//
+// [InvokeAgent response]
+//   - – in the content field
+//
+// [RetrieveAndGenerate response]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_RetrieveAndGenerate.html#API_agent-runtime_RetrieveAndGenerate_ResponseSyntax
+// [Retrieve response]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_Retrieve.html#API_agent-runtime_Retrieve_ResponseSyntax
+// [InvokeAgent response]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_InvokeAgent.html#API_agent-runtime_InvokeAgent_ResponseSyntax
 type RetrievalResultContent struct {
 
-	// Content of a retrieval result in text
+	// The cited text from the data source.
 	//
 	// This member is required.
 	Text *string
@@ -514,47 +1640,95 @@ type RetrievalResultContent struct {
 	noSmithyDocumentSerde
 }
 
-// The source location of a retrieval result.
+// Contains information about the location of the data source.
+//
+// This data type is used in the following API operations:
+//
+// [Retrieve response]
+//   - – in the location field
+//
+// [RetrieveAndGenerate response]
+//   - – in the location field
+//
+// [InvokeAgent response]
+//   - – in the locatino field
+//
+// [RetrieveAndGenerate response]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_RetrieveAndGenerate.html#API_agent-runtime_RetrieveAndGenerate_ResponseSyntax
+// [Retrieve response]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_Retrieve.html#API_agent-runtime_Retrieve_ResponseSyntax
+// [InvokeAgent response]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_InvokeAgent.html#API_agent-runtime_InvokeAgent_ResponseSyntax
 type RetrievalResultLocation struct {
 
-	// The location type of a retrieval result.
+	// The type of the location of the data source.
 	//
 	// This member is required.
 	Type RetrievalResultLocationType
 
-	// The S3 location of a retrieval result.
+	// Contains the S3 location of the data source.
 	S3Location *RetrievalResultS3Location
 
 	noSmithyDocumentSerde
 }
 
-// The S3 location of a retrieval result.
+// Contains the S3 location of the data source.
+//
+// This data type is used in the following API operations:
+//
+// [Retrieve response]
+//   - – in the s3Location field
+//
+// [RetrieveAndGenerate response]
+//   - – in the s3Location field
+//
+// [InvokeAgent response]
+//   - – in the s3Location field
+//
+// [RetrieveAndGenerate response]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_RetrieveAndGenerate.html#API_agent-runtime_RetrieveAndGenerate_ResponseSyntax
+// [Retrieve response]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_Retrieve.html#API_agent-runtime_Retrieve_ResponseSyntax
+// [InvokeAgent response]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_InvokeAgent.html#API_agent-runtime_InvokeAgent_ResponseSyntax
 type RetrievalResultS3Location struct {
 
-	// URI of S3 location
+	// The S3 URI of the data source.
 	Uri *string
 
 	noSmithyDocumentSerde
 }
 
-// Configures the retrieval and generation for the session.
+// Contains details about the resource being queried.
+//
+// This data type is used in the following API operations:
+//
+// [RetrieveAndGenerate request]
+//   - – in the retrieveAndGenerateConfiguration field
+//
+// [RetrieveAndGenerate request]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_RetrieveAndGenerate.html#API_agent-runtime_RetrieveAndGenerate_RequestSyntax
 type RetrieveAndGenerateConfiguration struct {
 
-	// The type of RetrieveAndGenerate.
+	// The type of resource that is queried by the request.
 	//
 	// This member is required.
 	Type RetrieveAndGenerateType
 
-	// Configurations for retrieval and generation for knowledge base.
+	// The configuration used with the external source wrapper object in the
+	// retrieveAndGenerate function.
+	ExternalSourcesConfiguration *ExternalSourcesRetrieveAndGenerateConfiguration
+
+	// Contains details about the resource being queried.
 	KnowledgeBaseConfiguration *KnowledgeBaseRetrieveAndGenerateConfiguration
 
 	noSmithyDocumentSerde
 }
 
-// Customer input of the turn
+// Contains the query made to the knowledge base.
+//
+// This data type is used in the following API operations:
+//
+// [RetrieveAndGenerate request]
+//   - – in the input field
+//
+// [RetrieveAndGenerate request]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_RetrieveAndGenerate.html#API_agent-runtime_RetrieveAndGenerate_RequestSyntax
 type RetrieveAndGenerateInput struct {
 
-	// Customer input of the turn in text
+	// The query made to the knowledge base.
 	//
 	// This member is required.
 	Text *string
@@ -562,10 +1736,17 @@ type RetrieveAndGenerateInput struct {
 	noSmithyDocumentSerde
 }
 
-// Service response of the turn
+// Contains the response generated from querying the knowledge base.
+//
+// This data type is used in the following API operations:
+//
+// [RetrieveAndGenerate response]
+//   - – in the output field
+//
+// [RetrieveAndGenerate response]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_RetrieveAndGenerate.html#API_agent-runtime_RetrieveAndGenerate_ResponseSyntax
 type RetrieveAndGenerateOutput struct {
 
-	// Service response of the turn in text
+	// The response generated from querying the knowledge base.
 	//
 	// This member is required.
 	Text *string
@@ -573,10 +1754,17 @@ type RetrieveAndGenerateOutput struct {
 	noSmithyDocumentSerde
 }
 
-// Configures common parameters of the session.
+// Contains configuration about the session with the knowledge base.
+//
+// This data type is used in the following API operations:
+//
+// [RetrieveAndGenerate request]
+//   - – in the sessionConfiguration field
+//
+// [RetrieveAndGenerate request]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_RetrieveAndGenerate.html#API_agent-runtime_RetrieveAndGenerate_RequestSyntax
 type RetrieveAndGenerateSessionConfiguration struct {
 
-	// The KMS key arn to encrypt the customer data of the session.
+	// The ARN of the KMS key encrypting the session.
 	//
 	// This member is required.
 	KmsKeyArn *string
@@ -584,67 +1772,217 @@ type RetrieveAndGenerateSessionConfiguration struct {
 	noSmithyDocumentSerde
 }
 
-// Retrieved reference
+// Contains metadata about a source cited for the generated response.
+//
+// This data type is used in the following API operations:
+//
+// [RetrieveAndGenerate response]
+//   - – in the retrievedReferences field
+//
+// [InvokeAgent response]
+//   - – in the retrievedReferences field
+//
+// [RetrieveAndGenerate response]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_RetrieveAndGenerate.html#API_agent-runtime_RetrieveAndGenerate_ResponseSyntax
+// [InvokeAgent response]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_InvokeAgent.html#API_agent-runtime_InvokeAgent_ResponseSyntax
 type RetrievedReference struct {
 
-	// Content of a retrieval result.
+	// Contains the cited text from the data source.
 	Content *RetrievalResultContent
 
-	// The source location of a retrieval result.
+	// Contains information about the location of the data source.
 	Location *RetrievalResultLocation
+
+	// Contains metadata attributes and their values for the file in the data source.
+	// For more information, see [Metadata and filtering].
+	//
+	// [Metadata and filtering]: https://docs.aws.amazon.com/bedrock/latest/userguide/knowledge-base-ds.html#kb-ds-metadata
+	Metadata map[string]document.Interface
 
 	noSmithyDocumentSerde
 }
 
-// Session state provided
+// Contains information to return from the action group that the agent has
+// predicted to invoke.
+//
+// This data type is used in the following API operations:
+//
+// [InvokeAgent response]
+//
+// [InvokeAgent response]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_InvokeAgent.html#API_agent-runtime_InvokeAgent_ResponseSyntax
+type ReturnControlPayload struct {
+
+	// The identifier of the action group invocation.
+	InvocationId *string
+
+	// A list of objects that contain information about the parameters and inputs that
+	// need to be sent into the API operation or function, based on what the agent
+	// determines from its session with the user.
+	InvocationInputs []InvocationInputMember
+
+	noSmithyDocumentSerde
+}
+
+// The unique wrapper object of the document from the S3 location.
+type S3ObjectDoc struct {
+
+	// The file location of the S3 wrapper object.
+	//
+	// This member is required.
+	Uri *string
+
+	noSmithyDocumentSerde
+}
+
+// Contains parameters that specify various attributes that persist across a
+// session or prompt. You can define session state attributes as key-value pairs
+// when writing a [Lambda function]for an action group or pass them when making an [InvokeAgent] request. Use
+// session state attributes to control and provide conversational context for your
+// agent and to help customize your agent's behavior. For more information, see [Control session context].
+//
+// [InvokeAgent]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_InvokeAgent.html
+// [Control session context]: https://docs.aws.amazon.com/bedrock/latest/userguide/agents-session-state.html
+// [Lambda function]: https://docs.aws.amazon.com/bedrock/latest/userguide/agents-lambda.html
 type SessionState struct {
 
-	// Prompt Session Attributes
+	// The identifier of the invocation of an action. This value must match the
+	// invocationId returned in the InvokeAgent response for the action whose results
+	// are provided in the returnControlInvocationResults field. For more information,
+	// see [Return control to the agent developer]and [Control session context].
+	//
+	// [Return control to the agent developer]: https://docs.aws.amazon.com/bedrock/latest/userguide/agents-returncontrol.html
+	// [Control session context]: https://docs.aws.amazon.com/bedrock/latest/userguide/agents-session-state.html
+	InvocationId *string
+
+	// Contains attributes that persist across a prompt and the values of those
+	// attributes. These attributes replace the $prompt_session_attributes$
+	// placeholder variable in the orchestration prompt template. For more information,
+	// see [Prompt template placeholder variables].
+	//
+	// [Prompt template placeholder variables]: https://docs.aws.amazon.com/bedrock/latest/userguide/prompt-placeholders.html
 	PromptSessionAttributes map[string]string
 
-	// Session Attributes
+	// Contains information about the results from the action group invocation. For
+	// more information, see [Return control to the agent developer]and [Control session context].
+	//
+	// If you include this field, the inputText field will be ignored.
+	//
+	// [Return control to the agent developer]: https://docs.aws.amazon.com/bedrock/latest/userguide/agents-returncontrol.html
+	// [Control session context]: https://docs.aws.amazon.com/bedrock/latest/userguide/agents-session-state.html
+	ReturnControlInvocationResults []InvocationResultMember
+
+	// Contains attributes that persist across a session and the values of those
+	// attributes.
 	SessionAttributes map[string]string
 
 	noSmithyDocumentSerde
 }
 
-// Span of text
+// Contains information about where the text with a citation begins and ends in
+// the generated output.
+//
+// This data type is used in the following API operations:
+//
+// [RetrieveAndGenerate response]
+//   - – in the span field
+//
+// [InvokeAgent response]
+//   - – in the span field
+//
+// [RetrieveAndGenerate response]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_RetrieveAndGenerate.html#API_agent-runtime_RetrieveAndGenerate_ResponseSyntax
+// [InvokeAgent response]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_InvokeAgent.html#API_agent-runtime_InvokeAgent_ResponseSyntax
 type Span struct {
 
-	// End of span
+	// Where the text with a citation ends in the generated output.
 	End *int32
 
-	// Start of span
+	// Where the text with a citation starts in the generated output.
 	Start *int32
 
 	noSmithyDocumentSerde
 }
 
-// Text response part
+// Configuration settings for text generation using a language model via the
+// RetrieveAndGenerate operation. Includes parameters like temperature, top-p,
+// maximum token count, and stop sequences.
+//
+// The valid range of maxTokens depends on the accepted values for your chosen
+// model's inference parameters. To see the inference parameters for your model,
+// see [Inference parameters for foundation models.]
+//
+// [Inference parameters for foundation models.]: https://docs.aws.amazon.com/bedrock/latest/userguide/model-parameters.html
+type TextInferenceConfig struct {
+
+	// The maximum number of tokens to generate in the output text. Do not use the
+	// minimum of 0 or the maximum of 65536. The limit values described here are
+	// arbitary values, for actual values consult the limits defined by your specific
+	// model.
+	MaxTokens *int32
+
+	// A list of sequences of characters that, if generated, will cause the model to
+	// stop generating further tokens. Do not use a minimum length of 1 or a maximum
+	// length of 1000. The limit values described here are arbitary values, for actual
+	// values consult the limits defined by your specific model.
+	StopSequences []string
+
+	//  Controls the random-ness of text generated by the language model, influencing
+	// how much the model sticks to the most predictable next words versus exploring
+	// more surprising options. A lower temperature value (e.g. 0.2 or 0.3) makes model
+	// outputs more deterministic or predictable, while a higher temperature (e.g. 0.8
+	// or 0.9) makes the outputs more creative or unpredictable.
+	Temperature *float32
+
+	//  A probability distribution threshold which controls what the model considers
+	// for the set of possible next tokens. The model will only consider the top p% of
+	// the probability distribution when generating the next token.
+	TopP *float32
+
+	noSmithyDocumentSerde
+}
+
+// Contains the part of the generated text that contains a citation, alongside
+// where it begins and ends.
+//
+// This data type is used in the following API operations:
+//
+// [RetrieveAndGenerate response]
+//   - – in the textResponsePart field
+//
+// [InvokeAgent response]
+//   - – in the textResponsePart field
+//
+// [RetrieveAndGenerate response]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_RetrieveAndGenerate.html#API_agent-runtime_RetrieveAndGenerate_ResponseSyntax
+// [InvokeAgent response]: https://docs.aws.amazon.com/bedrock/latest/APIReference/API_agent-runtime_InvokeAgent.html#API_agent-runtime_InvokeAgent_ResponseSyntax
 type TextResponsePart struct {
 
-	// Span of text
+	// Contains information about where the text with a citation begins and ends in
+	// the generated output.
 	Span *Span
 
-	// Response part in text
+	// The part of the generated text that contains a citation.
 	Text *string
 
 	noSmithyDocumentSerde
 }
 
-// Trace contains intermidate response for customer
+// Contains one part of the agent's reasoning process and results from calling API
+// actions and querying knowledge bases. You can use the trace to understand how
+// the agent arrived at the response it provided the customer. For more
+// information, see [Trace enablement].
 //
 // The following types satisfy this interface:
 //
 //	TraceMemberFailureTrace
+//	TraceMemberGuardrailTrace
 //	TraceMemberOrchestrationTrace
 //	TraceMemberPostProcessingTrace
 //	TraceMemberPreProcessingTrace
+//
+// [Trace enablement]: https://docs.aws.amazon.com/bedrock/latest/userguide/agents-test.html#trace-enablement
 type Trace interface {
 	isTrace()
 }
 
-// Trace Part which is emitted when agent trace could not be generated
+// Contains information about the failure of the interaction.
 type TraceMemberFailureTrace struct {
 	Value FailureTrace
 
@@ -653,7 +1991,17 @@ type TraceMemberFailureTrace struct {
 
 func (*TraceMemberFailureTrace) isTrace() {}
 
-// Trace contains intermidate response during orchestration
+// The trace details for a trace defined in the Guardrail filter.
+type TraceMemberGuardrailTrace struct {
+	Value GuardrailTrace
+
+	noSmithyDocumentSerde
+}
+
+func (*TraceMemberGuardrailTrace) isTrace() {}
+
+// Details about the orchestration step, in which the agent determines the order
+// in which actions are executed and which knowledge bases are retrieved.
 type TraceMemberOrchestrationTrace struct {
 	Value OrchestrationTrace
 
@@ -662,7 +2010,7 @@ type TraceMemberOrchestrationTrace struct {
 
 func (*TraceMemberOrchestrationTrace) isTrace() {}
 
-// Trace Part which contains information related to post processing step
+// Details about the post-processing step, in which the agent shapes the response..
 type TraceMemberPostProcessingTrace struct {
 	Value PostProcessingTrace
 
@@ -671,7 +2019,8 @@ type TraceMemberPostProcessingTrace struct {
 
 func (*TraceMemberPostProcessingTrace) isTrace() {}
 
-// Trace Part which contains information related to preprocessing step
+// Details about the pre-processing step, in which the agent contextualizes and
+// categorizes user inputs.
 type TraceMemberPreProcessingTrace struct {
 	Value PreProcessingTrace
 
@@ -680,19 +2029,33 @@ type TraceMemberPreProcessingTrace struct {
 
 func (*TraceMemberPreProcessingTrace) isTrace() {}
 
-// Trace Part which contains intermidate response for customer
+// Contains information about the agent and session, alongside the agent's
+// reasoning process and results from calling API actions and querying knowledge
+// bases and metadata about the trace. You can use the trace to understand how the
+// agent arrived at the response it provided the customer. For more information,
+// see [Trace enablement].
+//
+// [Trace enablement]: https://docs.aws.amazon.com/bedrock/latest/userguide/agents-test.html#trace-enablement
 type TracePart struct {
 
-	// Identifier of the agent alias.
+	// The unique identifier of the alias of the agent.
 	AgentAliasId *string
 
-	// Identifier of the agent.
+	// The unique identifier of the agent.
 	AgentId *string
 
-	// Identifier of the session.
+	// The version of the agent.
+	AgentVersion *string
+
+	// The unique identifier of the session with the agent.
 	SessionId *string
 
-	// Trace contains intermidate response for customer
+	// Contains one part of the agent's reasoning process and results from calling API
+	// actions and querying knowledge bases. You can use the trace to understand how
+	// the agent arrived at the response it provided the customer. For more
+	// information, see [Trace enablement].
+	//
+	// [Trace enablement]: https://docs.aws.amazon.com/bedrock/latest/userguide/agents-test.html#trace-enablement
 	Trace Trace
 
 	noSmithyDocumentSerde
@@ -709,8 +2072,11 @@ type UnknownUnionMember struct {
 	noSmithyDocumentSerde
 }
 
-func (*UnknownUnionMember) isOrchestrationTrace()  {}
-func (*UnknownUnionMember) isPostProcessingTrace() {}
-func (*UnknownUnionMember) isPreProcessingTrace()  {}
-func (*UnknownUnionMember) isResponseStream()      {}
-func (*UnknownUnionMember) isTrace()               {}
+func (*UnknownUnionMember) isInvocationInputMember()  {}
+func (*UnknownUnionMember) isInvocationResultMember() {}
+func (*UnknownUnionMember) isOrchestrationTrace()     {}
+func (*UnknownUnionMember) isPostProcessingTrace()    {}
+func (*UnknownUnionMember) isPreProcessingTrace()     {}
+func (*UnknownUnionMember) isResponseStream()         {}
+func (*UnknownUnionMember) isRetrievalFilter()        {}
+func (*UnknownUnionMember) isTrace()                  {}

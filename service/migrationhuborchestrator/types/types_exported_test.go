@@ -37,6 +37,24 @@ var _ []string
 var _ *string
 var _ *int32
 
+func ExampleTemplateSource_outputUsage() {
+	var union types.TemplateSource
+	// type switches can be used to check the union value
+	switch v := union.(type) {
+	case *types.TemplateSourceMemberWorkflowId:
+		_ = v.Value // Value is string
+
+	case *types.UnknownUnionMember:
+		fmt.Println("unknown tag:", v.Tag)
+
+	default:
+		fmt.Println("union is nil or unknown type")
+
+	}
+}
+
+var _ *string
+
 func ExampleWorkflowStepOutputUnion_outputUsage() {
 	var union types.WorkflowStepOutputUnion
 	// type switches can be used to check the union value

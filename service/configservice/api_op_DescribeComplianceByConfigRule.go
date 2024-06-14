@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/configservice/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -14,17 +13,23 @@ import (
 
 // Indicates whether the specified Config rules are compliant. If a rule is
 // noncompliant, this action returns the number of Amazon Web Services resources
-// that do not comply with the rule. A rule is compliant if all of the evaluated
-// resources comply with it. It is noncompliant if any of these resources do not
-// comply. If Config has no current evaluation results for the rule, it returns
+// that do not comply with the rule.
+//
+// A rule is compliant if all of the evaluated resources comply with it. It is
+// noncompliant if any of these resources do not comply.
+//
+// If Config has no current evaluation results for the rule, it returns
 // INSUFFICIENT_DATA . This result might indicate one of the following conditions:
+//
 //   - Config has never invoked an evaluation for the rule. To check whether it
 //     has, use the DescribeConfigRuleEvaluationStatus action to get the
 //     LastSuccessfulInvocationTime and LastFailedInvocationTime .
+//
 //   - The rule's Lambda function is failing to send evaluation results to Config.
 //     Verify that the role you assigned to your configuration recorder includes the
 //     config:PutEvaluations permission. If the rule is a custom rule, verify that
 //     the Lambda execution role includes the config:PutEvaluations permission.
+//
 //   - The rule's Lambda function has returned NOT_APPLICABLE for all evaluation
 //     results. This can occur if the resources were deleted or removed from the rule's
 //     scope.
@@ -95,25 +100,25 @@ func (c *Client) addOperationDescribeComplianceByConfigRuleMiddlewares(stack *mi
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -128,10 +133,13 @@ func (c *Client) addOperationDescribeComplianceByConfigRuleMiddlewares(stack *mi
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeComplianceByConfigRule(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

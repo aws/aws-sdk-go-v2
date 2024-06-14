@@ -1,0 +1,45 @@
+GetAccessPointPolicyStatus
+	Initialize stack step
+		S3Shared:ARNLookup
+		S3Control:BackfillInput
+		RegisterServiceMetadata
+		legacyEndpointContextSetter
+		SetLogger
+		OperationInputValidation
+	Serialize stack step
+		stashOperationInput
+		ResolveEndpoint
+		setArnFieldName
+		S3Control:ProcessOutpostIDMiddleware
+		S3Control:ProcessARNResourceMiddleware
+		OperationSerializer
+	Build stack step
+		stashOperationInput
+		ClientRequestID
+		ComputeContentLength
+		UserAgent
+		AddTimeOffsetMiddleware
+		RecursionDetection
+	Finalize stack step
+		ResolveAuthScheme
+		GetIdentity
+		ResolveEndpointV2
+		S3ControlDisableHostPrefix
+		disableHTTPS
+		EndpointHostPrefix
+		ComputePayloadHash
+		SigV4ContentSHA256Header
+		Retry
+		RetryMetricsHeader
+		setLegacyContextSigningOptions
+		Signing
+	Deserialize stack step
+		AddRawResponseToMetadata
+		ErrorCloseResponseBody
+		CloseResponseBody
+		ResponseErrorWrapper
+		S3MetadataRetriever
+		OperationDeserializer
+		AddTimeOffsetMiddleware
+		RecordResponseTiming
+		RequestResponseLogger

@@ -6,17 +6,20 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates a Connect peer for a specified transit gateway Connect attachment
-// between a transit gateway and an appliance. The peer address and transit gateway
-// address must be the same IP address family (IPv4 or IPv6). For more information,
-// see Connect peers (https://docs.aws.amazon.com/vpc/latest/tgw/tgw-connect.html#tgw-connect-peer)
-// in the Transit Gateways Guide.
+// between a transit gateway and an appliance.
+//
+// The peer address and transit gateway address must be the same IP address family
+// (IPv4 or IPv6).
+//
+// For more information, see [Connect peers] in the Amazon Web Services Transit Gateways Guide.
+//
+// [Connect peers]: https://docs.aws.amazon.com/vpc/latest/tgw/tgw-connect.html#tgw-connect-peer
 func (c *Client) CreateTransitGatewayConnectPeer(ctx context.Context, params *CreateTransitGatewayConnectPeerInput, optFns ...func(*Options)) (*CreateTransitGatewayConnectPeerOutput, error) {
 	if params == nil {
 		params = &CreateTransitGatewayConnectPeerInput{}
@@ -108,25 +111,25 @@ func (c *Client) addOperationCreateTransitGatewayConnectPeerMiddlewares(stack *m
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -141,13 +144,16 @@ func (c *Client) addOperationCreateTransitGatewayConnectPeerMiddlewares(stack *m
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpCreateTransitGatewayConnectPeerValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateTransitGatewayConnectPeer(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

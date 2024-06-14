@@ -6,14 +6,14 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/qbusiness/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
-// Get information about an Amazon Q data source connector synchronization.
+// Get information about an Amazon Q Business data source connector
+// synchronization.
 func (c *Client) ListDataSourceSyncJobs(ctx context.Context, params *ListDataSourceSyncJobsInput, optFns ...func(*Options)) (*ListDataSourceSyncJobsOutput, error) {
 	if params == nil {
 		params = &ListDataSourceSyncJobsInput{}
@@ -31,33 +31,35 @@ func (c *Client) ListDataSourceSyncJobs(ctx context.Context, params *ListDataSou
 
 type ListDataSourceSyncJobsInput struct {
 
-	// The identifier of the Amazon Q application connected to the data source.
+	// The identifier of the Amazon Q Business application connected to the data
+	// source.
 	//
 	// This member is required.
 	ApplicationId *string
 
-	// The identifier of the data source connector.
+	//  The identifier of the data source connector.
 	//
 	// This member is required.
 	DataSourceId *string
 
-	// The identifier of the index used with the Amazon Q data source connector.
+	// The identifier of the index used with the Amazon Q Business data source
+	// connector.
 	//
 	// This member is required.
 	IndexId *string
 
-	// The end time of the data source connector sync.
+	//  The end time of the data source connector sync.
 	EndTime *time.Time
 
 	// The maximum number of synchronization jobs to return in the response.
 	MaxResults *int32
 
 	// If the maxResults response was incpmplete because there is more data to
-	// retriever, Amazon Q returns a pagination token in the response. You can use this
-	// pagination token to retrieve the next set of responses.
+	// retriever, Amazon Q Business returns a pagination token in the response. You can
+	// use this pagination token to retrieve the next set of responses.
 	NextToken *string
 
-	// The start time of the data source connector sync.
+	//  The start time of the data source connector sync.
 	StartTime *time.Time
 
 	// Only returns synchronization jobs with the Status field equal to the specified
@@ -72,8 +74,8 @@ type ListDataSourceSyncJobsOutput struct {
 	// A history of synchronization jobs for the data source connector.
 	History []types.DataSourceSyncJob
 
-	// If the response is truncated, Amazon Q returns this token. You can use this
-	// token in any subsequent request to retrieve the next set of jobs.
+	// If the response is truncated, Amazon Q Business returns this token. You can use
+	// this token in any subsequent request to retrieve the next set of jobs.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.
@@ -104,25 +106,25 @@ func (c *Client) addOperationListDataSourceSyncJobsMiddlewares(stack *middleware
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -137,13 +139,16 @@ func (c *Client) addOperationListDataSourceSyncJobsMiddlewares(stack *middleware
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpListDataSourceSyncJobsValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opListDataSourceSyncJobs(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

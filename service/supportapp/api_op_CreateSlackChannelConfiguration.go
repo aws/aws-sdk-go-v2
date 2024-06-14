@@ -6,25 +6,27 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/supportapp/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates a Slack channel configuration for your Amazon Web Services account.
+//
 //   - You can add up to 5 Slack workspaces for your account.
+//
 //   - You can add up to 20 Slack channels for your account.
 //
 // A Slack channel can have up to 100 Amazon Web Services accounts. This means
 // that only 100 accounts can add the same Slack channel to the Amazon Web Services
 // Support App. We recommend that you only add the accounts that you need to manage
 // support cases for your organization. This can reduce the notifications about
-// case updates that you receive in the Slack channel. We recommend that you choose
-// a private Slack channel so that only members in that channel have read and write
-// access to your support cases. Anyone in your Slack channel can create, update,
-// or resolve support cases for your account. Users require an invitation to join
-// private channels.
+// case updates that you receive in the Slack channel.
+//
+// We recommend that you choose a private Slack channel so that only members in
+// that channel have read and write access to your support cases. Anyone in your
+// Slack channel can create, update, or resolve support cases for your account.
+// Users require an invitation to join private channels.
 func (c *Client) CreateSlackChannelConfiguration(ctx context.Context, params *CreateSlackChannelConfigurationInput, optFns ...func(*Options)) (*CreateSlackChannelConfigurationOutput, error) {
 	if params == nil {
 		params = &CreateSlackChannelConfigurationInput{}
@@ -48,23 +50,33 @@ type CreateSlackChannelConfigurationInput struct {
 	ChannelId *string
 
 	// The Amazon Resource Name (ARN) of an IAM role that you want to use to perform
-	// operations on Amazon Web Services. For more information, see Managing access to
-	// the Amazon Web Services Support App (https://docs.aws.amazon.com/awssupport/latest/user/support-app-permissions.html)
-	// in the Amazon Web Services Support User Guide.
+	// operations on Amazon Web Services. For more information, see [Managing access to the Amazon Web Services Support App]in the Amazon Web
+	// Services Support User Guide.
+	//
+	// [Managing access to the Amazon Web Services Support App]: https://docs.aws.amazon.com/awssupport/latest/user/support-app-permissions.html
 	//
 	// This member is required.
 	ChannelRoleArn *string
 
-	// The case severity for a support case that you want to receive notifications. If
-	// you specify high or all , you must specify true for at least one of the
+	// The case severity for a support case that you want to receive notifications.
+	//
+	// If you specify high or all , you must specify true for at least one of the
 	// following parameters:
+	//
 	//   - notifyOnAddCorrespondenceToCase
+	//
 	//   - notifyOnCreateOrReopenCase
+	//
 	//   - notifyOnResolveCase
+	//
 	// If you specify none , the following parameters must be null or false :
+	//
 	//   - notifyOnAddCorrespondenceToCase
+	//
 	//   - notifyOnCreateOrReopenCase
+	//
 	//   - notifyOnResolveCase
+	//
 	// If you don't specify these parameters in your request, they default to false .
 	//
 	// This member is required.
@@ -121,25 +133,25 @@ func (c *Client) addOperationCreateSlackChannelConfigurationMiddlewares(stack *m
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -154,13 +166,16 @@ func (c *Client) addOperationCreateSlackChannelConfigurationMiddlewares(stack *m
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpCreateSlackChannelConfigurationValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateSlackChannelConfiguration(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

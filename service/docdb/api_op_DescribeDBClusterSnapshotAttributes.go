@@ -6,19 +6,20 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/docdb/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Returns a list of cluster snapshot attribute names and values for a manual DB
-// cluster snapshot. When you share snapshots with other Amazon Web Services
-// accounts, DescribeDBClusterSnapshotAttributes returns the restore attribute and
-// a list of IDs for the Amazon Web Services accounts that are authorized to copy
-// or restore the manual cluster snapshot. If all is included in the list of
-// values for the restore attribute, then the manual cluster snapshot is public
-// and can be copied or restored by all Amazon Web Services accounts.
+// cluster snapshot.
+//
+// When you share snapshots with other Amazon Web Services accounts,
+// DescribeDBClusterSnapshotAttributes returns the restore attribute and a list of
+// IDs for the Amazon Web Services accounts that are authorized to copy or restore
+// the manual cluster snapshot. If all is included in the list of values for the
+// restore attribute, then the manual cluster snapshot is public and can be copied
+// or restored by all Amazon Web Services accounts.
 func (c *Client) DescribeDBClusterSnapshotAttributes(ctx context.Context, params *DescribeDBClusterSnapshotAttributesInput, optFns ...func(*Options)) (*DescribeDBClusterSnapshotAttributesOutput, error) {
 	if params == nil {
 		params = &DescribeDBClusterSnapshotAttributesInput{}
@@ -34,7 +35,7 @@ func (c *Client) DescribeDBClusterSnapshotAttributes(ctx context.Context, params
 	return out, nil
 }
 
-// Represents the input to DescribeDBClusterSnapshotAttributes .
+// Represents the input to DescribeDBClusterSnapshotAttributes.
 type DescribeDBClusterSnapshotAttributesInput struct {
 
 	// The identifier for the cluster snapshot to describe the attributes for.
@@ -79,25 +80,25 @@ func (c *Client) addOperationDescribeDBClusterSnapshotAttributesMiddlewares(stac
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -112,13 +113,16 @@ func (c *Client) addOperationDescribeDBClusterSnapshotAttributesMiddlewares(stac
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDescribeDBClusterSnapshotAttributesValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeDBClusterSnapshotAttributes(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

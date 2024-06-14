@@ -18,6 +18,12 @@ if [ -z "$RUNNER_TMPDIR" ]; then
     exit 1
 fi
 
+if [ -n "$GIT_PAT" ]; then
+    repository=https://$GIT_PAT@github.com/$SMITHY_GO_REPOSITORY
+else
+    repository=https://github.com/$SMITHY_GO_REPOSITORY
+fi
+
 branch=$(git branch --show-current)
 if [ "$branch" == main ]; then
     echo aws-sdk-go-v2 is on branch main
@@ -29,12 +35,6 @@ fi
 # is not recognized as a branch by git. Use the specific workflow env instead.
 if [ -z "$branch" ]; then
     branch=$GITHUB_HEAD_REF
-fi
-
-if [ -n "$GIT_PAT" ]; then
-    repository=https://$GIT_PAT@github.com/$SMITHY_GO_REPOSITORY
-else
-    repository=https://github.com/$SMITHY_GO_REPOSITORY
 fi
 
 echo on branch \"$branch\"

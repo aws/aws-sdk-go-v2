@@ -6,18 +6,19 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
 )
 
-// Returns information about a model compilation job. To create a model
-// compilation job, use CreateCompilationJob (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateCompilationJob.html)
-// . To get information about multiple model compilation jobs, use
-// ListCompilationJobs (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_ListCompilationJobs.html)
-// .
+// Returns information about a model compilation job.
+//
+// To create a model compilation job, use [CreateCompilationJob]. To get information about multiple
+// model compilation jobs, use [ListCompilationJobs].
+//
+// [CreateCompilationJob]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateCompilationJob.html
+// [ListCompilationJobs]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_ListCompilationJobs.html
 func (c *Client) DescribeCompilationJob(ctx context.Context, params *DescribeCompilationJobInput, optFns ...func(*Options)) (*DescribeCompilationJobOutput, error) {
 	if params == nil {
 		params = &DescribeCompilationJobInput{}
@@ -114,6 +115,7 @@ type DescribeCompilationJobOutput struct {
 	CompilationEndTime *time.Time
 
 	// The time when the model compilation job started the CompilationJob instances.
+	//
 	// You are billed for the time between this timestamp and the timestamp in the
 	// CompilationEndTime field. In Amazon CloudWatch Logs, the start time might be
 	// later than this time. That's because it takes time to download the compilation
@@ -135,11 +137,12 @@ type DescribeCompilationJobOutput struct {
 	// to SageMaker Neo when you initiated a compilation job.
 	ModelPackageVersionArn *string
 
-	// A VpcConfig (https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_VpcConfig.html)
-	// object that specifies the VPC that you want your compilation job to connect to.
-	// Control access to your models by configuring the VPC. For more information, see
-	// Protect Compilation Jobs by Using an Amazon Virtual Private Cloud (https://docs.aws.amazon.com/sagemaker/latest/dg/neo-vpc.html)
-	// .
+	// A [VpcConfig] object that specifies the VPC that you want your compilation job to connect
+	// to. Control access to your models by configuring the VPC. For more information,
+	// see [Protect Compilation Jobs by Using an Amazon Virtual Private Cloud].
+	//
+	// [VpcConfig]: https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_VpcConfig.html
+	// [Protect Compilation Jobs by Using an Amazon Virtual Private Cloud]: https://docs.aws.amazon.com/sagemaker/latest/dg/neo-vpc.html
 	VpcConfig *types.NeoVpcConfig
 
 	// Metadata pertaining to the operation's result.
@@ -170,25 +173,25 @@ func (c *Client) addOperationDescribeCompilationJobMiddlewares(stack *middleware
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -203,13 +206,16 @@ func (c *Client) addOperationDescribeCompilationJobMiddlewares(stack *middleware
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpDescribeCompilationJobValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeCompilationJob(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

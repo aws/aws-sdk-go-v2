@@ -7,28 +7,29 @@ import (
 	"time"
 )
 
-// An extracted segment of the text that is an attribute of an entity, or
+//	An extracted segment of the text that is an attribute of an entity, or
+//
 // otherwise related to an entity, such as the dosage of a medication taken. It
 // contains information about the attribute such as id, begin and end offset within
 // the input text, and the segment of the input text.
 type Attribute struct {
 
-	// The 0-based character offset in the input text that shows where the attribute
+	//  The 0-based character offset in the input text that shows where the attribute
 	// begins. The offset returns the UTF-8 code point in the string.
 	BeginOffset *int32
 
-	// The category of attribute.
+	//  The category of attribute.
 	Category EntityType
 
-	// The 0-based character offset in the input text that shows where the attribute
+	//  The 0-based character offset in the input text that shows where the attribute
 	// ends. The offset returns the UTF-8 code point in the string.
 	EndOffset *int32
 
-	// The numeric identifier for this attribute. This is a monotonically increasing
+	//  The numeric identifier for this attribute. This is a monotonically increasing
 	// id unique within this response rather than a global unique identifier.
 	Id *int32
 
-	// The level of confidence that Amazon Comprehend Medical has that this attribute
+	//  The level of confidence that Amazon Comprehend Medical has that this attribute
 	// is correctly related to this entity.
 	RelationshipScore *float32
 
@@ -37,17 +38,17 @@ type Attribute struct {
 	// as the Date_Expression .
 	RelationshipType RelationshipType
 
-	// The level of confidence that Amazon Comprehend Medical has that the segment of
+	//  The level of confidence that Amazon Comprehend Medical has that the segment of
 	// text is correctly recognized as an attribute.
 	Score *float32
 
-	// The segment of input text extracted as this attribute.
+	//  The segment of input text extracted as this attribute.
 	Text *string
 
-	// Contextual information for this attribute.
+	//  Contextual information for this attribute.
 	Traits []Trait
 
-	// The type of attribute.
+	//  The type of attribute.
 	Type EntitySubType
 
 	noSmithyDocumentSerde
@@ -56,7 +57,7 @@ type Attribute struct {
 // The number of characters in the input text to be analyzed.
 type Characters struct {
 
-	// The number of characters present in the input text document as processed by
+	//  The number of characters present in the input text document as processed by
 	// Amazon Comprehend Medical.
 	OriginalTextCharacters *int32
 
@@ -146,21 +147,21 @@ type ComprehendMedicalAsyncJobProperties struct {
 // Provides information about an extracted medical entity.
 type Entity struct {
 
-	// The extracted attributes that relate to this entity.
+	//  The extracted attributes that relate to this entity.
 	Attributes []Attribute
 
-	// The 0-based character offset in the input text that shows where the entity
+	//  The 0-based character offset in the input text that shows where the entity
 	// begins. The offset returns the UTF-8 code point in the string.
 	BeginOffset *int32
 
-	// The category of the entity.
+	//  The category of the entity.
 	Category EntityType
 
-	// The 0-based character offset in the input text that shows where the entity
+	//  The 0-based character offset in the input text that shows where the entity
 	// ends. The offset returns the UTF-8 code point in the string.
 	EndOffset *int32
 
-	// The numeric identifier for the entity. This is a monotonically increasing id
+	//  The numeric identifier for the entity. This is a monotonically increasing id
 	// unique within this response rather than a global unique identifier.
 	Id *int32
 
@@ -168,13 +169,13 @@ type Entity struct {
 	// the detection.
 	Score *float32
 
-	// The segment of input text extracted as this entity.
+	//  The segment of input text extracted as this entity.
 	Text *string
 
 	// Contextual information for the entity.
 	Traits []Trait
 
-	// Describes the specific type of entity with category of entities.
+	//  Describes the specific type of entity with category of entities.
 	Type EntitySubType
 
 	noSmithyDocumentSerde
@@ -226,7 +227,8 @@ type ICD10CMAttribute struct {
 	noSmithyDocumentSerde
 }
 
-// The ICD-10-CM concepts that the entity could refer to, along with a score
+//	The ICD-10-CM concepts that the entity could refer to, along with a score
+//
 // indicating the likelihood of the match.
 type ICD10CMConcept struct {
 
@@ -260,7 +262,7 @@ type ICD10CMEntity struct {
 	// begins. The offset returns the UTF-8 code point in the string.
 	BeginOffset *int32
 
-	// The category of the entity. InferICD10CM detects entities in the
+	//  The category of the entity. InferICD10CM detects entities in the
 	// MEDICAL_CONDITION category.
 	Category ICD10CMEntityCategory
 
@@ -440,7 +442,7 @@ type RxNormEntity struct {
 	// Contextual information for the entity.
 	Traits []RxNormTrait
 
-	// Describes the specific type of entity. For InferRxNorm, the recognized entity
+	//  Describes the specific type of entity. For InferRxNorm, the recognized entity
 	// type is MEDICATION .
 	Type RxNormEntityType
 
@@ -461,51 +463,52 @@ type RxNormTrait struct {
 	noSmithyDocumentSerde
 }
 
-// The extracted attributes that relate to an entity. An extracted segment of the
+//	The extracted attributes that relate to an entity. An extracted segment of the
+//
 // text that is an attribute of an entity, or otherwise related to an entity, such
 // as the dosage of a medication taken.
 type SNOMEDCTAttribute struct {
 
-	// The 0-based character offset in the input text that shows where the attribute
+	//  The 0-based character offset in the input text that shows where the attribute
 	// begins. The offset returns the UTF-8 code point in the string.
 	BeginOffset *int32
 
-	// The category of the detected attribute. Possible categories include
+	//  The category of the detected attribute. Possible categories include
 	// MEDICAL_CONDITION, ANATOMY, and TEST_TREATMENT_PROCEDURE.
 	Category SNOMEDCTEntityCategory
 
-	// The 0-based character offset in the input text that shows where the attribute
+	//  The 0-based character offset in the input text that shows where the attribute
 	// ends. The offset returns the UTF-8 code point in the string.
 	EndOffset *int32
 
-	// The numeric identifier for this attribute. This is a monotonically increasing
+	//  The numeric identifier for this attribute. This is a monotonically increasing
 	// id unique within this response rather than a global unique identifier.
 	Id *int32
 
-	// The level of confidence that Amazon Comprehend Medical has that this attribute
+	//  The level of confidence that Amazon Comprehend Medical has that this attribute
 	// is correctly related to this entity.
 	RelationshipScore *float32
 
-	// The type of relationship that exists between the entity and the related
+	//  The type of relationship that exists between the entity and the related
 	// attribute.
 	RelationshipType SNOMEDCTRelationshipType
 
-	// The SNOMED-CT concepts specific to an attribute, along with a score indicating
+	//  The SNOMED-CT concepts specific to an attribute, along with a score indicating
 	// the likelihood of the match.
 	SNOMEDCTConcepts []SNOMEDCTConcept
 
-	// The level of confidence that Amazon Comprehend Medical has that the segment of
+	//  The level of confidence that Amazon Comprehend Medical has that the segment of
 	// text is correctly recognized as an attribute.
 	Score *float32
 
-	// The segment of input text extracted as this attribute.
+	//  The segment of input text extracted as this attribute.
 	Text *string
 
-	// Contextual information for an attribute. Examples include signs, symptoms,
+	//  Contextual information for an attribute. Examples include signs, symptoms,
 	// diagnosis, and negation.
 	Traits []SNOMEDCTTrait
 
-	// The type of attribute. Possible types include DX_NAME, ACUITY, DIRECTION,
+	//  The type of attribute. Possible types include DX_NAME, ACUITY, DIRECTION,
 	// SYSTEM_ORGAN_SITE,TEST_NAME, TEST_VALUE, TEST_UNIT, PROCEDURE_NAME, and
 	// TREATMENT_NAME.
 	Type SNOMEDCTAttributeType
@@ -513,86 +516,89 @@ type SNOMEDCTAttribute struct {
 	noSmithyDocumentSerde
 }
 
-// The SNOMED-CT concepts that the entity could refer to, along with a score
+//	The SNOMED-CT concepts that the entity could refer to, along with a score
+//
 // indicating the likelihood of the match.
 type SNOMEDCTConcept struct {
 
-	// The numeric ID for the SNOMED-CT concept.
+	//  The numeric ID for the SNOMED-CT concept.
 	Code *string
 
-	// The description of the SNOMED-CT concept.
+	//  The description of the SNOMED-CT concept.
 	Description *string
 
-	// The level of confidence Amazon Comprehend Medical has that the entity should be
-	// linked to the identified SNOMED-CT concept.
+	//  The level of confidence Amazon Comprehend Medical has that the entity should
+	// be linked to the identified SNOMED-CT concept.
 	Score *float32
 
 	noSmithyDocumentSerde
 }
 
-// The information about the revision of the SNOMED-CT ontology in the response.
+//	The information about the revision of the SNOMED-CT ontology in the response.
+//
 // Specifically, the details include the SNOMED-CT edition, language, and version
 // date.
 type SNOMEDCTDetails struct {
 
-	// The edition of SNOMED-CT used. The edition used for the InferSNOMEDCT editions
+	//  The edition of SNOMED-CT used. The edition used for the InferSNOMEDCT editions
 	// is the US edition.
 	Edition *string
 
-	// The language used in the SNOMED-CT ontology. All Amazon Comprehend Medical
+	//  The language used in the SNOMED-CT ontology. All Amazon Comprehend Medical
 	// operations are US English (en).
 	Language *string
 
-	// The version date of the SNOMED-CT ontology used.
+	//  The version date of the SNOMED-CT ontology used.
 	VersionDate *string
 
 	noSmithyDocumentSerde
 }
 
-// The collection of medical entities extracted from the input text and their
+//	The collection of medical entities extracted from the input text and their
+//
 // associated information. For each entity, the response provides the entity text,
 // the entity category, where the entity text begins and ends, and the level of
 // confidence that Amazon Comprehend Medical has in the detection and analysis.
 // Attributes and traits of the entity are also returned.
 type SNOMEDCTEntity struct {
 
-	// An extracted segment of the text that is an attribute of an entity, or
+	//  An extracted segment of the text that is an attribute of an entity, or
 	// otherwise related to an entity, such as the dosage of a medication taken.
 	Attributes []SNOMEDCTAttribute
 
-	// The 0-based character offset in the input text that shows where the entity
+	//  The 0-based character offset in the input text that shows where the entity
 	// begins. The offset returns the UTF-8 code point in the string.
 	BeginOffset *int32
 
-	// The category of the detected entity. Possible categories are MEDICAL_CONDITION,
-	// ANATOMY, or TEST_TREATMENT_PROCEDURE.
+	//  The category of the detected entity. Possible categories are
+	// MEDICAL_CONDITION, ANATOMY, or TEST_TREATMENT_PROCEDURE.
 	Category SNOMEDCTEntityCategory
 
-	// The 0-based character offset in the input text that shows where the entity
+	//  The 0-based character offset in the input text that shows where the entity
 	// ends. The offset returns the UTF-8 code point in the string.
 	EndOffset *int32
 
-	// The numeric identifier for the entity. This is a monotonically increasing id
+	//  The numeric identifier for the entity. This is a monotonically increasing id
 	// unique within this response rather than a global unique identifier.
 	Id *int32
 
-	// The SNOMED concepts that the entity could refer to, along with a score
+	//  The SNOMED concepts that the entity could refer to, along with a score
 	// indicating the likelihood of the match.
 	SNOMEDCTConcepts []SNOMEDCTConcept
 
-	// The level of confidence that Amazon Comprehend Medical has in the accuracy of
+	//  The level of confidence that Amazon Comprehend Medical has in the accuracy of
 	// the detected entity.
 	Score *float32
 
-	// The segment of input text extracted as this entity.
+	//  The segment of input text extracted as this entity.
 	Text *string
 
-	// Contextual information for the entity.
+	//  Contextual information for the entity.
 	Traits []SNOMEDCTTrait
 
-	// Describes the specific type of entity with category of entities. Possible types
-	// include DX_NAME, ACUITY, DIRECTION, SYSTEM_ORGAN_SITE, TEST_NAME, TEST_VALUE,
-	// TEST_UNIT, PROCEDURE_NAME, or TREATMENT_NAME.
+	//  Describes the specific type of entity with category of entities. Possible
+	// types include DX_NAME, ACUITY, DIRECTION, SYSTEM_ORGAN_SITE, TEST_NAME,
+	// TEST_VALUE, TEST_UNIT, PROCEDURE_NAME, or TREATMENT_NAME.
 	Type SNOMEDCTEntityType
 
 	noSmithyDocumentSerde
@@ -601,11 +607,11 @@ type SNOMEDCTEntity struct {
 // Contextual information for an entity.
 type SNOMEDCTTrait struct {
 
-	// The name or contextual description of a detected trait.
+	//  The name or contextual description of a detected trait.
 	Name SNOMEDCTTraitName
 
-	// The level of confidence that Amazon Comprehend Medical has in the accuracy of a
-	// detected trait.
+	//  The level of confidence that Amazon Comprehend Medical has in the accuracy of
+	// a detected trait.
 	Score *float32
 
 	noSmithyDocumentSerde
@@ -614,10 +620,10 @@ type SNOMEDCTTrait struct {
 // Provides contextual information about the extracted entity.
 type Trait struct {
 
-	// Provides a name or contextual description about the trait.
+	//  Provides a name or contextual description about the trait.
 	Name AttributeName
 
-	// The level of confidence that Amazon Comprehend Medical has in the accuracy of
+	//  The level of confidence that Amazon Comprehend Medical has in the accuracy of
 	// this trait.
 	Score *float32
 
@@ -628,10 +634,10 @@ type Trait struct {
 // relate to an entity.
 type UnmappedAttribute struct {
 
-	// The specific attribute that has been extracted but not mapped to an entity.
+	//  The specific attribute that has been extracted but not mapped to an entity.
 	Attribute *Attribute
 
-	// The type of the unmapped attribute, could be one of the following values:
+	//  The type of the unmapped attribute, could be one of the following values:
 	// "MEDICATION", "MEDICAL_CONDITION", "ANATOMY", "TEST_AND_TREATMENT_PROCEDURE" or
 	// "PROTECTED_HEALTH_INFORMATION".
 	Type EntityType

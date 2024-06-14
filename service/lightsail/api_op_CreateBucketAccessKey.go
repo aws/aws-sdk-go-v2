@@ -6,24 +6,26 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/lightsail/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
 // Creates a new access key for the specified Amazon Lightsail bucket. Access keys
-// consist of an access key ID and corresponding secret access key. Access keys
-// grant full programmatic access to the specified bucket and its objects. You can
-// have a maximum of two access keys per bucket. Use the GetBucketAccessKeys (https://docs.aws.amazon.com/lightsail/2016-11-28/api-reference/API_GetBucketAccessKeys.html)
-// action to get a list of current access keys for a specific bucket. For more
-// information about access keys, see Creating access keys for a bucket in Amazon
-// Lightsail (https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-creating-bucket-access-keys)
-// in the Amazon Lightsail Developer Guide. The secretAccessKey value is returned
-// only in response to the CreateBucketAccessKey action. You can get a secret
-// access key only when you first create an access key; you cannot get the secret
-// access key later. If you lose the secret access key, you must create a new
-// access key.
+// consist of an access key ID and corresponding secret access key.
+//
+// Access keys grant full programmatic access to the specified bucket and its
+// objects. You can have a maximum of two access keys per bucket. Use the [GetBucketAccessKeys]action
+// to get a list of current access keys for a specific bucket. For more information
+// about access keys, see [Creating access keys for a bucket in Amazon Lightsail]in the Amazon Lightsail Developer Guide.
+//
+// The secretAccessKey value is returned only in response to the
+// CreateBucketAccessKey action. You can get a secret access key only when you
+// first create an access key; you cannot get the secret access key later. If you
+// lose the secret access key, you must create a new access key.
+//
+// [Creating access keys for a bucket in Amazon Lightsail]: https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-creating-bucket-access-keys
+// [GetBucketAccessKeys]: https://docs.aws.amazon.com/lightsail/2016-11-28/api-reference/API_GetBucketAccessKeys.html
 func (c *Client) CreateBucketAccessKey(ctx context.Context, params *CreateBucketAccessKeyInput, optFns ...func(*Options)) (*CreateBucketAccessKeyOutput, error) {
 	if params == nil {
 		params = &CreateBucketAccessKeyInput{}
@@ -88,25 +90,25 @@ func (c *Client) addOperationCreateBucketAccessKeyMiddlewares(stack *middleware.
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -121,13 +123,16 @@ func (c *Client) addOperationCreateBucketAccessKeyMiddlewares(stack *middleware.
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpCreateBucketAccessKeyValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opCreateBucketAccessKey(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

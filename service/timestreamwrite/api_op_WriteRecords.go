@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	internalEndpointDiscovery "github.com/aws/aws-sdk-go-v2/service/internal/endpoint-discovery"
 	"github.com/aws/aws-sdk-go-v2/service/timestreamwrite/types"
 	"github.com/aws/smithy-go/middleware"
@@ -18,28 +17,34 @@ import (
 // Timestream offers you a flexible schema that auto detects the column names and
 // data types for your Timestream tables based on the dimension names and data
 // types of the data points you specify when invoking writes into the database.
+//
 // Timestream supports eventual consistency read semantics. This means that when
 // you query data immediately after writing a batch of data into Timestream, the
 // query results might not reflect the results of a recently completed write
 // operation. The results may also include some stale data. If you repeat the query
-// request after a short time, the results should return the latest data. Service
-// quotas apply (https://docs.aws.amazon.com/timestream/latest/developerguide/ts-limits.html)
-// . See code sample (https://docs.aws.amazon.com/timestream/latest/developerguide/code-samples.write.html)
-// for details. Upserts You can use the Version parameter in a WriteRecords
-// request to update data points. Timestream tracks a version number with each
-// record. Version defaults to 1 when it's not specified for the record in the
-// request. Timestream updates an existing record’s measure value along with its
-// Version when it receives a write request with a higher Version number for that
-// record. When it receives an update request where the measure value is the same
-// as that of the existing record, Timestream still updates Version , if it is
-// greater than the existing value of Version . You can update a data point as many
-// times as desired, as long as the value of Version continuously increases. For
-// example, suppose you write a new record without indicating Version in the
+// request after a short time, the results should return the latest data. [Service quotas apply].
+//
+// See [code sample] for details.
+//
+// # Upserts
+//
+// You can use the Version parameter in a WriteRecords request to update data
+// points. Timestream tracks a version number with each record. Version defaults
+// to 1 when it's not specified for the record in the request. Timestream updates
+// an existing record’s measure value along with its Version when it receives a
+// write request with a higher Version number for that record. When it receives an
+// update request where the measure value is the same as that of the existing
+// record, Timestream still updates Version , if it is greater than the existing
+// value of Version . You can update a data point as many times as desired, as long
+// as the value of Version continuously increases.
+//
+// For example, suppose you write a new record without indicating Version in the
 // request. Timestream stores this record, and set Version to 1 . Now, suppose you
 // try to update this record with a WriteRecords request of the same record with a
 // different measure value but, like before, do not provide Version . In this case,
 // Timestream will reject this update with a RejectedRecordsException since the
 // updated record’s version is not greater than the existing value of Version.
+//
 // However, if you were to resend the update request with Version set to 2 ,
 // Timestream would then succeed in updating the record’s value, and the Version
 // would be set to 2 . Next, suppose you sent a WriteRecords request with this
@@ -47,6 +52,9 @@ import (
 // case, Timestream would only update Version to 3 . Any further updates would need
 // to send a version number greater than 3 , or the update requests would receive a
 // RejectedRecordsException .
+//
+// [Service quotas apply]: https://docs.aws.amazon.com/timestream/latest/developerguide/ts-limits.html
+// [code sample]: https://docs.aws.amazon.com/timestream/latest/developerguide/code-samples.write.html
 func (c *Client) WriteRecords(ctx context.Context, params *WriteRecordsInput, optFns ...func(*Options)) (*WriteRecordsOutput, error) {
 	if params == nil {
 		params = &WriteRecordsInput{}
@@ -124,25 +132,25 @@ func (c *Client) addOperationWriteRecordsMiddlewares(stack *middleware.Stack, op
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -160,13 +168,16 @@ func (c *Client) addOperationWriteRecordsMiddlewares(stack *middleware.Stack, op
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpWriteRecordsValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opWriteRecords(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

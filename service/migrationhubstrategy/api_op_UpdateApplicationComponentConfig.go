@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/migrationhubstrategy/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -30,7 +29,7 @@ func (c *Client) UpdateApplicationComponentConfig(ctx context.Context, params *U
 
 type UpdateApplicationComponentConfigInput struct {
 
-	// The ID of the application component. The ID is unique within an AWS account.
+	//  The ID of the application component. The ID is unique within an AWS account.
 	//
 	// This member is required.
 	ApplicationComponentId *string
@@ -44,18 +43,19 @@ type UpdateApplicationComponentConfigInput struct {
 	// is initiated.
 	ConfigureOnly *bool
 
-	// Indicates whether the application component has been included for server
+	//  Indicates whether the application component has been included for server
 	// recommendation or not.
 	InclusionStatus types.InclusionStatus
 
-	// Database credentials.
+	//  Database credentials.
 	SecretsManagerKey *string
 
-	// The list of source code configurations to update for the application component.
+	//  The list of source code configurations to update for the application
+	// component.
 	SourceCodeList []types.SourceCode
 
-	// The preferred strategy options for the application component. Use values from
-	// the GetApplicationComponentStrategies response.
+	//  The preferred strategy options for the application component. Use values from
+	// the GetApplicationComponentStrategiesresponse.
 	StrategyOption *types.StrategyOption
 
 	noSmithyDocumentSerde
@@ -90,25 +90,25 @@ func (c *Client) addOperationUpdateApplicationComponentConfigMiddlewares(stack *
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -123,13 +123,16 @@ func (c *Client) addOperationUpdateApplicationComponentConfigMiddlewares(stack *
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpUpdateApplicationComponentConfigValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateApplicationComponentConfig(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

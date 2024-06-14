@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -15,11 +14,15 @@ import (
 // process. When a buyer visits your website during the registration process, the
 // buyer submits a registration token through their browser. The registration token
 // is resolved through this API to obtain a CustomerIdentifier along with the
-// CustomerAWSAccountId and ProductCode . The API needs to called from the seller
-// account id used to publish the SaaS application to successfully resolve the
-// token. For an example of using ResolveCustomer , see  ResolveCustomer code
-// example (https://docs.aws.amazon.com/marketplace/latest/userguide/saas-code-examples.html#saas-resolvecustomer-example)
-// in the AWS Marketplace Seller Guide.
+// CustomerAWSAccountId and ProductCode .
+//
+// The API needs to called from the seller account id used to publish the SaaS
+// application to successfully resolve the token.
+//
+// For an example of using ResolveCustomer , see [ResolveCustomer code example] in the AWS Marketplace Seller
+// Guide.
+//
+// [ResolveCustomer code example]: https://docs.aws.amazon.com/marketplace/latest/userguide/saas-code-examples.html#saas-resolvecustomer-example
 func (c *Client) ResolveCustomer(ctx context.Context, params *ResolveCustomerInput, optFns ...func(*Options)) (*ResolveCustomerOutput, error) {
 	if params == nil {
 		params = &ResolveCustomerInput{}
@@ -50,6 +53,7 @@ type ResolveCustomerInput struct {
 }
 
 // The result of the ResolveCustomer operation. Contains the CustomerIdentifier
+//
 // along with the CustomerAWSAccountId and ProductCode .
 type ResolveCustomerOutput struct {
 
@@ -95,25 +99,25 @@ func (c *Client) addOperationResolveCustomerMiddlewares(stack *middleware.Stack,
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -128,13 +132,16 @@ func (c *Client) addOperationResolveCustomerMiddlewares(stack *middleware.Stack,
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpResolveCustomerValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opResolveCustomer(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {

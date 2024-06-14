@@ -6,7 +6,6 @@ import (
 	"context"
 	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/iotfleetwise/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -30,21 +29,21 @@ func (c *Client) UpdateSignalCatalog(ctx context.Context, params *UpdateSignalCa
 
 type UpdateSignalCatalogInput struct {
 
-	// The name of the signal catalog to update.
+	//  The name of the signal catalog to update.
 	//
 	// This member is required.
 	Name *string
 
-	// A brief description of the signal catalog to update.
+	//  A brief description of the signal catalog to update.
 	Description *string
 
-	// A list of information about nodes to add to the signal catalog.
+	//  A list of information about nodes to add to the signal catalog.
 	NodesToAdd []types.Node
 
-	// A list of fullyQualifiedName of nodes to remove from the signal catalog.
+	//  A list of fullyQualifiedName of nodes to remove from the signal catalog.
 	NodesToRemove []string
 
-	// A list of information about nodes to update in the signal catalog.
+	//  A list of information about nodes to update in the signal catalog.
 	NodesToUpdate []types.Node
 
 	noSmithyDocumentSerde
@@ -52,12 +51,12 @@ type UpdateSignalCatalogInput struct {
 
 type UpdateSignalCatalogOutput struct {
 
-	// The ARN of the updated signal catalog.
+	//  The ARN of the updated signal catalog.
 	//
 	// This member is required.
 	Arn *string
 
-	// The name of the updated signal catalog.
+	//  The name of the updated signal catalog.
 	//
 	// This member is required.
 	Name *string
@@ -90,25 +89,25 @@ func (c *Client) addOperationUpdateSignalCatalogMiddlewares(stack *middleware.St
 	if err = addSetLoggerMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddClientRequestIDMiddleware(stack); err != nil {
+	if err = addClientRequestID(stack); err != nil {
 		return err
 	}
-	if err = smithyhttp.AddComputeContentLengthMiddleware(stack); err != nil {
+	if err = addComputeContentLength(stack); err != nil {
 		return err
 	}
 	if err = addResolveEndpointMiddleware(stack, options); err != nil {
 		return err
 	}
-	if err = v4.AddComputePayloadSHA256Middleware(stack); err != nil {
+	if err = addComputePayloadSHA256(stack); err != nil {
 		return err
 	}
-	if err = addRetryMiddlewares(stack, options); err != nil {
+	if err = addRetry(stack, options); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRawResponseToMetadata(stack); err != nil {
+	if err = addRawResponseToMetadata(stack); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecordResponseTiming(stack); err != nil {
+	if err = addRecordResponseTiming(stack); err != nil {
 		return err
 	}
 	if err = addClientUserAgent(stack, options); err != nil {
@@ -123,13 +122,16 @@ func (c *Client) addOperationUpdateSignalCatalogMiddlewares(stack *middleware.St
 	if err = addSetLegacyContextSigningOptionsMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addTimeOffsetBuild(stack, c); err != nil {
+		return err
+	}
 	if err = addOpUpdateSignalCatalogValidationMiddleware(stack); err != nil {
 		return err
 	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opUpdateSignalCatalog(options.Region), middleware.Before); err != nil {
 		return err
 	}
-	if err = awsmiddleware.AddRecursionDetection(stack); err != nil {
+	if err = addRecursionDetection(stack); err != nil {
 		return err
 	}
 	if err = addRequestIDRetrieverMiddleware(stack); err != nil {
